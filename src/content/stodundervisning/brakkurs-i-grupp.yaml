@@ -17,7 +17,6 @@ taggar:
 format:
   - liten grupp
   - par
-  - helklass
 tid: 60 minuter per pass, två pass i veckan och ett tredje när det går
 period: Fem veckor
 grupp: Två till tio elever
@@ -201,7 +200,7 @@ steg:
         - Nu säger vi veckans mening tillsammans.
 arbetsform:
   rubrik: "Arbetsform: läraren visar, gemensamt, i par, enskilt, gemensamt igen"
-  text: Passet börjar hos läraren, går över till eleverna och slutar hos hela gruppen. Först visar läraren, och eleverna tittar och lyssnar. Därefter gör alla samma sak tillsammans, och sedan arbetar eleverna först i par och sedan var och en för sig. Sist arbetar alla gemensamt igen, när gruppen med egna ord säger det den har sett. Med ett udda antal elever blir det en trio, där en läser kortet och två gör det tillsammans. Med fler än sex elever arbetar paren vid två bord, och du går mellan dem. När du visar och i de gemensamma delarna samlas alla vid ett bord.
+  text: Passet börjar hos läraren, går över till eleverna och slutar hos hela gruppen. Först visar läraren, och eleverna tittar och lyssnar. Därefter gör alla samma sak tillsammans, och sedan arbetar eleverna först i par och sedan var och en för sig. Sist arbetar alla gemensamt igen, när gruppen med egna ord säger det den har sett. Med ett udda antal elever blir det en trio, där en läser kortet och två gör det tillsammans. Med fler än sex elever arbetar paren vid två bord, och du går mellan dem. När du visar och i Veckans mening samlas alla vid ditt bord. I Samma bråk gör var och en bråket på sin plats med sitt material, från vecka 2 vid sin tallinje. Du står där alla ser dig.
   delar:
     - rubrik: 1. Läraren visar
       text: eleverna tittar och lyssnar
@@ -267,9 +266,9 @@ roll:
 urval:
   rubrik: Var hittar du materialet och korten?
   text:
-    - Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Gör också en sats till dig. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. I vecka 2 går bråken förbi 1, och då behöver varje elev och du halvorna och fjärdedelarna ur en extra sats. De står på mallens första sida. Ett par med en köpt sats tar dem ur en till köpt sats av samma sort, så att det hela är lika långt. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i en bit på varje rad.
-    - Remsorna klipper du av A4-ark, fyra på längden ur varje ark. Klipp dem lika långa som den längsta staven, så att det hela är lika långt i allt material.
-    - Från vecka 2 tejpar du en tallinje per elev med maskeringstejp längs bordskanten, två på varje långsida. Det är en stavlängd från 0 till 1 och en från 1 till 2, så att eleverna kan lägga stavarna mot linjen och skriva på tejpen. I pass 2 använder eleverna mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1, där det hela är lika långt som i bråkplanket och bitarna går att lägga mot linjen. På A4 är det hela 26 cm.
+    - Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Gör också en sats till dig. Det tar ungefär en kvart per sats, och satserna räcker hela kursen. Eleverna kan färglägga raderna i sin egen sats efter kartläggningen, men bitarna klipper du själv, gärna med en pappersskärare, så att delarna blir lika stora. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. I vecka 2 går bråken förbi 1, och då behöver varje elev och du halvorna och fjärdedelarna ur en extra sats. De står på mallens första sida. Ett par med en köpt sats tar dem ur en till köpt sats av samma sort, så att det hela är lika långt. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i en bit på varje rad.
+    - Remsorna klipper du av A4-ark, fyra på längden ur varje ark, eller av A3-ark om du skriver ut mallarna på A3. Klipp dem lika långa som den längsta staven, så att det hela är lika långt i allt material.
+    - Från vecka 2 tejpar du en tallinje per elev med maskeringstejp längs bordskanten där eleven sitter. Tejpa också en till dig, där alla ser den när du visar. Det är en stavlängd från 0 till 1 och en från 1 till 2, så att eleverna kan lägga stavarna mot linjen och skriva på tejpen. I pass 2 använder eleverna mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1, där det hela är lika långt som i bråkplanket och bitarna går att lägga mot linjen. På A4 är det hela 26 cm.
     - Skriv ut bråkstavarna, bråkplanket och tallinjerna på samma sorts papper, A4 eller A3 liggande, så att det hela är lika långt i allt. En köpt sats har ofta en längsta stav på 20 cm. Då lägger eleverna stavarna mot tejpen och inte mot mallarna. På mallen Tomma tallinjer från 0 till 2 är det hela 13 cm, hälften så långt som staven. Där ritar och räknar eleverna, och stavarna läggs mot tejpen.
     - Bladet Bråket på fyra sätt finns i planeringsmallarna och på lathundens tredje sida, Mallen. Stavarna är längre än rutorna, så i pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. I rutan På tallinjen ritar eleven en egen liten tallinje med 0 och 1, och till 2 när bråket är större än 1.
     - Bladet Stapelrutan, med Jag vet, Jag söker och plats för stapeln, står under Kursens material och i planeringsmallarna och används i vecka 5 och till problemen i pass 3. Kopiera en per elev.
@@ -311,14 +310,20 @@ uppfoljning:
       vad: Vem kunde säga vad nämnaren och täljaren betyder, och vem gjorde veckans vanliga fel?
     - nar: Efter fem veckor
       tid: "efter"
-      vad: Gör samma kartläggning igen och anteckna i kolumnen Efter på samma kopia. Jämför uppgift för uppgift och berätta för klassläraren vad som behöver mer träning.
+      vad: Gör samma kartläggning igen och anteckna i kolumnen Efter på samma kopia. Jämför uppgift för uppgift och berätta för klassläraren vad som behöver mer träning. Ett mål är nått när båda uppgifterna för målet är rätt, med R+ där uppgiften frågar hur eleven vet. Har eleven nått alla målen, är eleven klar med bråkkursen. Saknar eleven ett eller flera mål men har nått fler än före kursen, gör ni veckorna med de målen en gång till, tillsammans med dem i gruppen som saknar samma mål. Sedan gör ni målens uppgifter i kartläggningen igen. Saknar bara en elev målet, är du elevens kamrat i Korten. Har eleven inte nått fler mål än före kursen, eller saknar eleven ett mål också andra gången, tar du upp det med elevhälsan.
 plan:
   utan:
     - "Översikten visar hur de 60 minuterna fördelas och vem som arbetar i varje del."
   fore:
-    - "Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Gör också en sats till dig. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. I vecka 2 går bråken förbi 1, och då behöver varje elev och du halvorna och fjärdedelarna ur en extra sats. De står på mallens första sida. Ett par med en köpt sats tar dem ur en till köpt sats av samma sort, så att det hela är lika långt."
+    - "Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Gör också en sats till dig. Det tar ungefär en kvart per sats, och satserna räcker hela kursen. Eleverna kan färglägga raderna i sin egen sats efter kartläggningen, men bitarna klipper du själv, gärna med en pappersskärare, så att delarna blir lika stora. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. I vecka 2 går bråken förbi 1, och då behöver varje elev och du halvorna och fjärdedelarna ur en extra sats. De står på mallens första sida. Ett par med en köpt sats tar dem ur en till köpt sats av samma sort, så att det hela är lika långt."
     - "Skriv ut bråkstavarna, bråkplanket och tallinjerna på samma sorts papper, A4 eller A3 liggande, så att det hela är lika långt i allt. En köpt sats har ofta en längsta stav på 20 cm. Då lägger eleverna stavarna mot tejpen och inte mot mallarna. På mallen Tomma tallinjer från 0 till 2 är det hela 13 cm, hälften så långt som staven. Där ritar och räknar eleverna, och stavarna läggs mot tejpen."
     - "Affischen är ett stort papper på väggen vid bordet, där du skriver veckans mening varje vecka. Sätt upp den före första passet."
+  # Beslutet efter kartläggningen efter kursen (passgenomgången 2026-10-26: ingen regel för när ett mål är nått).
+  utvardering:
+    - "Ett mål är nått när båda uppgifterna för målet är rätt, med R+ där uppgiften frågar hur eleven vet."
+    - "Har eleven nått alla målen, är eleven klar med bråkkursen."
+    - "Saknar eleven ett eller flera mål men har nått fler än före kursen, gör ni veckorna med de målen en gång till, tillsammans med dem i gruppen som saknar samma mål. Sedan gör ni målens uppgifter i kartläggningen igen."
+    - "Har eleven inte nått fler mål än före kursen, eller saknar eleven ett mål också andra gången, tar du upp det med elevhälsan."
   passen:
     - nar: veckans första
       kort: "Med material"
@@ -544,7 +549,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: Remsor, två A4 per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna.
+              text: Remsor, två ark per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna.
             - rubrik: Pass 1 · Visa först och säg
               text: "”Den här remsan är det hela. Jag viker den så att kanterna möts. De två delarna ligger precis på varandra, så de är lika stora. Varje del är en halv.” Vik igen och vik upp remsan: ”Nu är det fyra lika stora delar.” Peka på vikarna. ”Jag skriver bråkstrecket på remsan och fyran under: det hela är delat i fyra lika stora delar. Jag färglägger tre delar och skriver trean över: vi har tre sådana delar. Tre fjärdedelar.” Riv en remsa i tre olika långa bitar: ”Tre delar. Är det tredjedelar? Jag lägger bitarna under varandra, med kanterna mot samma linje. De är olika långa, så det är inga tredjedelar.”"
             - rubrik: Pass 2 · Visa först och säg
@@ -988,19 +993,27 @@ lathund:
         - fet: Bråkstavar.
           text: Mallen Bråkstavar att klippa, två sidor, en av varje per elev på tjockt papper, eller en köpt sats per par. I vecka 2 också halvorna och fjärdedelarna ur en extra sats till varje elev och till dig.
         - fet: Remsor.
-          text: A4-ark klippta på längden, lika långa som den längsta staven.
+          text: Ark klippta på längden, lika långa som den längsta staven.
         - fet: Tallinjer.
           text: Tejp längs bordskanten, och mallarna Tallinjer i delar och Tomma tallinjer till pass 2.
         - fet: Kort och kartläggning.
-          text: Under Kursens material på metodens sida, en ram per vecka med kartläggningen först. I planeringsmallarna skriver du ut veckans kort med veckans ruta Till läraren, där det du visar först, veckans mening och det sista bråket står.
-      efter: Bråket på fyra sätt är lathundens tredje sida och står också i planeringsmallarna, efter diplomet och före Bråkplanket. Skriv ut det liggande, ett per elev, och laminera det gärna. Stavarna ryms inte i rutorna, så eleven gör bråket på bordet och ritar det. Skriv ut stavarna, planket och tallinjerna på samma sorts papper, A4 eller A3 liggande.
+          text: Under Kursens material på metodens sida, en ram per vecka med kartläggningen först. I planeringsmallarna skriver du ut veckans kort med rutan Till läraren.
+      efter: Bråket på fyra sätt är lathundens tredje sida och står också i planeringsmallarna. Skriv ut det liggande, ett per elev. Stavarna ryms inte i rutorna, så eleven gör bråket på bordet och ritar det. Skriv ut stavarna, planket och tallinjerna på samma sorts papper.
     bordet:
       - Bråket på fyra sätt, ett per elev
-      - Stavar eller knappar, en sats per elev
+      - Stavar eller knappar per elev
       - Tallinjen på bordet, en per elev
       - Dagens kort, klippta
       - Färgpennor, penna och papper
       - Din egen sats och tallinje
+    # Lathundens kortare uppföljning: metodens rader med beslutet efter perioden ryms inte på sidan 4 (2026-10-26).
+    uppfoljning:
+      - nar: "Före insatsen"
+        vad: "Kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Anteckna R för rätt svar och R+ när eleven också förklarar, i kolumnen Före."
+      - nar: "Varje pass"
+        vad: "Vem kunde säga vad nämnaren och täljaren betyder, och vem gjorde veckans vanliga fel?"
+      - nar: "Efter fem veckor"
+        vad: "Samma kartläggning i kolumnen Efter. Har eleven nått alla målen, är kursen klar. Har eleven nått fler än före, gör ni veckorna med de mål som saknas en gång till. Annars tar du upp det med elevhälsan."
 film:
   sekunder: 27.79
   beskrivning: "Den längsta staven är det hela: från 0 till 1. Lägg en fjärdedel från 0 och sätt ett streck där den slutar. Lägg fjärdedelarna en i taget och räkna. Ta en fjärdedel ur den andra satsen och lägg den efter 1."

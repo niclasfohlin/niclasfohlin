@@ -17,7 +17,6 @@ taggar:
 format:
   - liten grupp
   - par
-  - helklass
 tid: 30 minuter per pass, tre pass i veckan
 period: Fem veckor
 grupp: Två till sex elever
@@ -168,7 +167,7 @@ tabeller:
         - Upp till 10 000, decimaltal och negativa tal
         - Tusental till hundradelar
         - Tio hundratal blir ett tusental, och tio tiondelar ett ental.
-    not: "Hela gruppen arbetar med samma paket. Har gruppen elever från två årskurser gör du kartläggningen för den lägre årskursen. Klarar eleverna kartläggningens uppgift 1–4 säkert redan före perioden tar ni paketet för nästa årskurs. Innehållet följer det centrala innehållet i Lgr22: naturliga tal och positionssystemet i åk 1–3, och i åk 4–6 också tal i decimalform och negativa tal."
+    not: "Hela gruppen arbetar med samma paket. Har gruppen elever från två årskurser gör du kartläggningen för den lägre årskursen. Klarar eleverna kartläggningens uppgift 1–4 säkert redan före perioden tar ni paketet för nästa årskurs. Gör då kartläggningen i det paketet före första passet och efter perioden. Innehållet följer det centrala innehållet i Lgr22: naturliga tal och positionssystemet i åk 1–3, och i åk 4–6 också tal i decimalform och negativa tal."
   - rubrik: "Veckan: ett fokus i tre material"
     plats: efter-tidsschema
     text: "Veckans fokus är detsamma i alla tre passen, och ni använder samma kort. Det som byts är materialet. I tiobasen syns tio: tio kuber är lika långa som en tiostav. På talbrickor och pengar syns det inte, där är tio något vi har kommit överens om. Lägg därför tiobasen bredvid när ni börjar med talbrickor och pengar."
@@ -225,7 +224,7 @@ tidsschema:
       vad: Bygg det första talet långsamt framför eleverna och tänk högt. Säg vad du tar, var du lägger det, vad du lyfter och vad du pekar på. Eleverna tittar.
     - tid: 6–12 min
       fas: Samma tal
-      vad: "Alla bygger talet du just visade, ett handgrepp i taget. Säg varje handgrepp, och eleverna gör och säger likadant. Fråga: ”Hur vet du att det är 36 och inte 63?” Gör sedan en kedja med sex till tio korta ändringar på samma tal. Efter varje ändring säger alla vilket tal det blev."
+      vad: "Alla bygger talet du just visade, ett handgrepp i taget. Säg varje handgrepp, och eleverna gör och säger likadant. Fråga: ”Hur vet du att det är 36 och inte 63?” Gör sedan en kedja med sex till tio korta ändringar på samma tal, eller tre till sex när passet börjar med läxan. Efter varje ändring säger alla vilket tal det blev."
     - tid: 12–21 min
       fas: Korten
       vad: Läs ett kort, i vecka 1 till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter roller efter varje kort. Från vecka 2 läser paren sedan korten för varandra, om de kan läsa dem. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren i gruppens paket.
@@ -331,7 +330,7 @@ exempel:
     rubrik: Gruppen
     text: "fyra elever i åk 2, vecka 3, pass 1: lägga till och växla upp, med tiobas."
   text:
-    - "Läraren bygger 38 framför gruppen och berättar vad hen gör: ”Jag lägger tre tiostavar på tiotalens plats och åtta ental här.” Läraren lyfter en tiostav: ”Den här är tio ental som sitter ihop.” Sedan lägger läraren till fem ental, ett i taget: ”Nio, tio. Jag lägger de tio entalen bredvid en tiostav. Lika långa. Jag byter och lägger tiostaven på tiotalens plats.” Läraren lägger de tre sista entalen och pekar: ”Fyra tiotal och tre ental. 43.” Eleverna tittar."
+    - "Läraren frågar hur läxa 2 gick och läser en uppgift ur den: ”Bygg 70. Vilken plats är tom?” Alla bygger samtidigt, och Oskar säger: ”Entalens. Nollan håller platsen.” Sedan bygger läraren 38 framför gruppen och berättar vad hen gör: ”Jag lägger tre tiostavar på tiotalens plats och åtta ental här.” Läraren lyfter en tiostav: ”Den här är tio ental som sitter ihop.” Sedan lägger läraren till fem ental, ett i taget: ”Nio, tio. Jag lägger de tio entalen bredvid en tiostav. Lika långa. Jag byter och lägger tiostaven på tiotalens plats.” Läraren lägger de tre sista entalen och pekar: ”Fyra tiotal och tre ental. 43.” Eleverna tittar."
     - "”Nu gör vi det tillsammans.” Alla bygger 38 och lyfter en tiostav: ”Tio ental”, säger Wilma. Gruppen lägger till fem ental, ett i taget, räknar högt och byter. ”Fyra tiotal och tre ental. 43.” Sedan gör läraren en kedja av ändringar på samma tal: ”Lägg till åtta ental. Ta bort tre ental. Lägg till ett tiotal.” Efter varje ändring säger alla talet: 51, 48, 58."
     - "Läraren läser ett kort: ”Bygg 47. Lägg till 6.” Ibrahim och Oskar lägger till sex ental och skriver 413. ”Får det ligga tretton ental på entalens plats?” frågar läraren. Ibrahim byter tio ental mot en tiostav: ”Fem tiotal och tre ental. 53.” Sedan läser Alva ”Bygg 29. Lägg till 1.” för Wilma, som byter och säger: ”Tre tiotal. Nollan visar att entalen är tomma.”"
     - "Var och en får två kort. Alla bygger sitt första kort medan läraren går runt, och sedan lyssnar läraren på en i taget. Ibrahim bygger 68, lägger till 14 och säger samtidigt: ”Jag hade tolv ental. Jag bytte tio mot en tiostav. Åtta tiotal och två ental. 82.”"
@@ -370,7 +369,7 @@ urval:
   rubrik: Var hittar du materialet och talen?
   text:
     - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och arken per talsort står under Mallar att skriva ut och sist i planeringsmallarna. Bladet med sifferkort står först under Material per årskurs.
-    - Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna.
+    - Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna. Gör kartläggningen två veckor före första passet, eftersom den avgör vilket paket gruppen får. Börja sedan göra materialet. Tiobaspaketen går hem efter första passet, och talbrickorna behövs till pass 2. Till sex elever i åk 2 är det 360 talbrickor.
   kravText: "Ett tal som du visar först eller skriver på ett eget kort ska uppfylla tre krav:"
   krav:
     - rubrik: Inom talområdet
@@ -407,14 +406,14 @@ uppfoljning:
     - nar: Före insatsen
       tid: "före"
       perElev: 10
-      vad: "Gör kartläggningen i gruppens paket under Material per årskurs utanför passen, med en elev i taget, cirka tio minuter per elev. Läs uppgiften högt och hjälp inte till. Eleven bygger, berättar och skriver. Anteckna för varje uppgift på en kopia av listan: B om eleven byggde rätt, V om eleven växlade själv i materialet och S om eleven använde talsortsord."
+      vad: "Gör kartläggningen i gruppens paket under Material per årskurs utanför passen, med en elev i taget, cirka tio minuter per elev. Läs uppgiften högt och hjälp inte till. Eleven bygger, berättar och skriver. Anteckna för varje uppgift på en kopia av listan: B om eleven byggde rätt, V om eleven växlade själv i materialet och S om eleven använde talsortsord. Eleven klarar en uppgift säkert när du har antecknat B och S, och på uppgift 3 och 4 också V."
     - nar: Varje pass
       tid: "varje pass"
       vad: Anteckna kort vem som växlade själv och kunde säga vad som hände.
     - nar: Efter fem veckor
       tid: "efter"
       perElev: 10
-      vad: Samma kartläggning med samma uppgifter. Jämför uppgift för uppgift, och berätta för klassläraren vilket talområde eleven bygger säkert i och vilka växlingar som behöver mer träning.
+      vad: Samma kartläggning med samma uppgifter. Jämför uppgift för uppgift. Berätta för klassläraren vilket talområde eleven bygger säkert i, vilka växlingar som behöver mer träning och hur eleven klarade uppgift 5, i åk 4–5 också uppgift 6. Klarar eleven uppgift 1–4 säkert, avslutar du insatsen. Klarar eleven fler av dem säkert än före perioden men inte alla fyra, får eleven en period till med samma paket. Den nya perioden börjar med den tidigaste vecka vars uppgift någon i gruppen inte klarade, och går till och med vecka 5. Klarar eleven inte fler av dem säkert än före, tar du upp det med elevhälsan.
 plan:
   utan:
     - "Remsan visar hur de 30 minuterna fördelas och när läraren visar, när alla arbetar gemensamt och när eleverna arbetar i par och enskilt."
@@ -442,11 +441,20 @@ plan:
     - nar: sista passet i vecka 5
       del: Första talet
       text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan. Läs en uppgift ur läxan, och alla bygger den samtidigt på sin matta. Då ser du allas mattor. Låt en eller två elever säga vad de gjorde. Så tar läxan två minuter, också med sex elever."
+  # Materialet tar mer än en vecka: talbrickor, mynt och tiobaspaket till varje elev, och kartläggningen (passgenomgången
+  # 2026-10-26, del A).
+  foreVeckor: 2
   fore:
-    - "Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
+    - "Gör kartläggningen två veckor före första passet, eftersom den avgör vilket paket gruppen får. Börja sedan göra materialet. Tiobaspaketen går hem efter första passet, och talbrickorna behövs till pass 2. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
     - "Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna."
     - "Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
     - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med en uppgift: läs den högt, låt barnet bygga och berätta vad det gör, jämför med bilden, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
+  # Beslutet efter kartläggningen efter perioden, ordagrant ur uppföljningens rad Efter fem veckor (del A).
+  utvardering:
+    - "Klarar eleven uppgift 1–4 säkert, avslutar du insatsen."
+    - "Klarar eleven fler av dem säkert än före perioden men inte alla fyra, får eleven en period till med samma paket."
+    - "Den nya perioden börjar med den tidigaste vecka vars uppgift någon i gruppen inte klarade, och går till och med vecka 5."
+    - "Klarar eleven inte fler av dem säkert än före, tar du upp det med elevhälsan."
 mal:
   overgripande: "kunna bygga ett tal, säga talsorterna och växla tio mot en."
   rubrik: "Mål: det eleven kan efter fem veckor"
@@ -512,7 +520,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: "Tiostavar och ental, talbrickor med 1 och 10, och enkronor och tiokronor. Klar tidigt: Närmast målet 30 på tre slag, där varje slag räknas som tiotal eller ental. Ett slag på 4, 5 eller 6 blir ental. Per elev: 20 brickor och 20 mynt av varje talsort. Om ingen i paret kan läsa än läser du korten under hela I par."
+              text: "Tiostavar och ental, talbrickor med 1 och 10, och enkronor och tiokronor. Klar tidigt: Närmast målet 30 på tre slag, där varje slag räknas som tiotal eller ental. Ett slag på 4, 5 eller 6 blir ental. Per elev: 20 brickor och 20 mynt av varje talsort. Om ingen i paret kan läsa än läser du korten under hela I par, och i Två kort läser du ett kort i taget för hela gruppen."
             - rubrik: Vecka 1 · Bygga och säga tal
               text: "Visa först och säg: ”Jag bygger 25. Jag tar två tiostavar och lägger dem på tiotalens plats. Jag lyfter en: tio ental som sitter ihop. Jag lägger fem ental här och pekar på dem: ett, två, tre, fyra, fem. Två tiotal och fem ental. 25.”\nLyssna efter eleven som räknar tiostaven som en, så att 14 blir fem."
             - rubrik: Vecka 2 · Siffrans plats och nollan
@@ -790,7 +798,7 @@ ramar:
           larare: true
           rader:
             - - 1. Skriv tretusenfyrtiosju. Bygg talet.
-            - - 2. Bygg 0,4 och 0,35. Vilket är störst?
+            - - 2. Bygg 0,7 och 1,1. Vilket är störst?
             - - 3. Bygg 2 985. Lägg till 30.
             - - 4. Bygg 5 002. Ta bort 7.
             - - 5. Räkna 1,75 + 0,48. Bygg och skriv hur du räknar.
@@ -919,7 +927,7 @@ lathund:
     textRubrik: Gruppen · fyra elever, åk 2, vecka 3, pass 1
     utskrift: Skriv ut passexemplet
     text:
-      - "Läraren bygger 38 och berättar vad hen gör: ”Tre tiostavar på tiotalens plats, åtta ental här.” Läraren lyfter en stav: ”Tio ental som sitter ihop.” Sedan fem ental, ett i taget: ”Nio, tio. Tio ental bredvid en tiostav. Lika långa. Jag byter. Fyra tiotal och tre ental. 43.”"
+      - "Först bygger alla en uppgift ur läxa 2: ”Bygg 70. Vilken plats är tom?” Sedan bygger läraren 38 och berättar vad hen gör: ”Tre tiostavar på tiotalens plats, åtta ental här.” Läraren lyfter en stav: ”Tio ental som sitter ihop.” Sedan fem ental, ett i taget: ”Nio, tio. Tio ental bredvid en tiostav. Lika långa. Jag byter. Fyra tiotal och tre ental. 43.”"
       - "Alla bygger 38 + 5 tillsammans, ett handgrepp i taget: ”Lyft en tiostav med mig. Hur många ental är den?”"
       - "Läraren läser kortet ”Bygg 47. Lägg till 6.” Ibrahim och Oskar skriver 413. ”Får det ligga tretton ental på en plats?” frågar läraren. Ibrahim byter och säger: ”Fem tiotal och tre ental. 53.”"
       - "Ibrahim bygger 68 + 14 själv och säger: ”Jag bytte tio ental mot en tiostav. 82.” Till sist bygger alla 56 + 7: ”Vad hände när entalen blev tio?” Läraren noterar att Ibrahim och Oskar växlade efter frågan."
@@ -983,12 +991,20 @@ lathund:
           text: "Ett paket per årskurs, under Material per årskurs på metodsidan och före mattorna i planeringsmallarna: kartläggningen, veckornas kort och Läxa 1–5."
       efter: "Talsortsmattan finns på lathundens sida 3. Skriv ut den i A3 för brickor och pengar. Åk 1 viker bort Tusental och Hundratal, åk 2 Tusental. Sist i planeringsmallarna finns talsortsmattan, decimalmattan för åk 4–5 och ett stående A4 per talsort för tiobas."
     bordet:
-      - Talsortsmatta eller arken, en per elev, i åk 4–5 också decimalmattan
+      - Talsortsmattan, en per elev
       - Dagens material, en låda per par
       - Veckans kort, klippta
-      - Papper och penna per par, sifferkort per elev
+      - Papper, penna och sifferkort
       - Tärning för Klar tidigt
       - Din egen matta och låda
+    # Lathundens kortare uppföljning: metodens rader med beslutet efter perioden ryms inte på sidan 4 (2026-10-26).
+    uppfoljning:
+      - nar: "Före insatsen"
+        vad: "Kartläggningen i gruppens paket, en elev i taget och cirka tio minuter per elev, utanför passen. Anteckna B, V och S för varje uppgift. Säkert är B och S, och på uppgift 3 och 4 också V."
+      - nar: "Varje pass"
+        vad: "Anteckna kort vem som växlade själv och kunde säga vad som hände."
+      - nar: "Efter fem veckor"
+        vad: "Samma kartläggning. Klarar eleven uppgift 1–4 säkert, avslutar du insatsen. Klarar eleven fler än före, får hen en period till, från den tidigaste vecka vars uppgift någon i gruppen inte klarade, till vecka 5. Annars tar du upp det med elevhälsan."
 lektionskort:
   - text: "Lektionskortet är passet på ett A4: målet, veckorna med det du visar först och lyssnar efter, passet med det du gör och säger, och stödet när eleven fastnar. Skriv ut det och ha det framför dig under passet."
 film:

@@ -26,7 +26,7 @@ format:
   - liten grupp
   - helklass
 tid: 40 minuter per pass, två till tre pass i veckan
-period: Fem till tio veckor, en bok
+period: Sex till tio veckor, en bok
 grupp: Fyra till tio elever
 material:
   - ett exemplar av boken per elev
@@ -49,7 +49,7 @@ inledning:
   - "Perioden är en bok. Metoden har tre nivåer med tio böcker på varje. Före bokvalet gör du läsintervjun, ett kort samtal med varje elev, och väljer två av böckerna. I bokvalet väljer gruppen en av dem. Perioden slutar med ett samtal om hela boken, och var och en skriver ett boktips till en läsare. Hur lång perioden blir beror på boken: Nattkorpen av Johan Rundberg tar omkring 12 läspass, och Momo eller kampen om tiden av Michael Ende omkring 27."
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Fyra till tio elever läser en hel bok tillsammans, 40 minuter per pass och två till tre pass i veckan. Perioden är fem till tio veckor, från bokvalet till slutsamtalet och boktipset. Före bokvalet behöver du en till tre veckor till läsintervjuerna och böckerna. Läspasset har fyra delar: Var är vi?, Läs, Samtala och Med mig. Du läser högt i drygt 20 minuter, eleverna följer med i sina böcker, och bokens tavla håller ihop berättelsen. Läsintervjun före och efter boken, och det eleven säger i passen, visar om hen håller ihop berättelsen och kan säga var i boken en tanke kommer ifrån."
+  text: "Fyra till tio elever läser en hel bok tillsammans, 40 minuter per pass och två till tre pass i veckan. Perioden är sex till tio veckor, från bokvalet till slutsamtalet och boktipset. Före bokvalet behöver du en till tre veckor till läsintervjuerna och böckerna. Läspasset har fyra delar: Var är vi?, Läs, Samtala och Med mig. Du läser högt i drygt 20 minuter, eleverna följer med i sina böcker, och bokens tavla håller ihop berättelsen. Läsintervjun före och efter boken, och det eleven säger i passen, visar om hen håller ihop berättelsen och kan säga var i boken en tanke kommer ifrån."
 gruppen:
   rubrik: Så sätter du ihop gruppen
   text: "Metoden är för elever som kan avkoda men läser långsamt och tappar sammanhanget, och för den som aldrig har läst ut en bok som andra pratar om. Eleven behöver kunna förstå en berättelse som hen hör och orka lyssna och följa med i boken i drygt 20 minuter. Den som avkodar mödosamt kan vara med, eftersom du läser högt: hen lyssnar och hittar tillbaka i texten när du säger sidnumret. Avkodning och läsflyt tränar hen vid sidan av boken. Gruppen har fyra till tio elever. Är ni fler än fem, samtalar ni i två grupper, och hur ni gör står under Fler än fem."
@@ -60,7 +60,7 @@ tabeller:
   - rubrik: "Perioden: en bok från bokvalet till boktipset"
     plats: efter-inledning
     meny: true
-    text: "Perioden har tre slags pass: bokvalet, läspassen och slutet. Tabellen visar perioden i tidsordning, med det som är nytt och var det står. Den säger när något tidigast kommer, och gruppen avgör takten. I en bok med högst tolv läspass hinner ni till raden Från läspass 6. Raden Från läspass 10 väntar till nästa bok. Då börjar ni där ni slutade."
+    text: "Perioden har tre slags pass: bokvalet, läspassen och slutet. Tabellen visar perioden i tidsordning, med det som är nytt och var det står. Den säger när något tidigast kommer, och gruppen avgör takten. Har läsplanen högst tolv läspass, hinner ni till raden Från läspass 6. Raden Från läspass 10 väntar till nästa bok. Då börjar ni där ni slutade."
     kolumner:
       - När
       - Det som är nytt
@@ -338,7 +338,7 @@ tabeller:
         - Laget runt och, om tiden räcker, ett varv till med en annan av frågekortets frågor. Gruppen följer en tråd först när den klarar tråden de pass du sitter med, gärna med talkort.
       - - Vad tar gruppen med sig?
         - En fråga till Med mig, när den har en.
-    not: Varje samtalsgrupp har ett eget frågekort och ett eget kort Du som leder, som står bland materialet. Blanda grupperna, så att varje grupp har någon som gärna börjar. Metoden fungerar också i helklass. Då läser du för alla, och klassen samtalar i grupper om tre till fem.
+    not: Varje samtalsgrupp har ett eget frågekort och ett eget kort Du som leder, som står bland materialet. Blanda grupperna, så att varje grupp har någon som gärna börjar. Metoden fungerar också i helklass. Då läser du för alla, och från läspass 1 samtalar klassen i grupper om tre till fem. I varje grupp läser en elev upp kortet Du som leder. Du går mellan grupperna, och efter laget runt följer hela klassen en tråd ur det som grupperna sa. Läsintervjun och protokollet gör du med de elever som behöver stödet mest, och boktipsen läser eleverna upp i sina grupper.
   - rubrik: "Sista passet: slutet"
     plats: efter-fastnar
     meny: true
@@ -489,7 +489,7 @@ arbetsform:
 exempel:
   valt:
     rubrik: Boken gruppen valde
-    text: Momo eller kampen om tiden av Michael Ende, på nivån Bas. Gruppen valde den framför Ishavspirater, och läsplanen har 27 läspass.
+    text: Momo eller kampen om tiden av Michael Ende, på nivån Bas. Gruppen valde den framför Ishavspirater. Läraren berättar ett mellanparti kort, och läsplanen har 27 läspass.
   text:
     - "Adam, Ella, Elias, Noor och Sara går i åk 5 och har sitt sjätte läspass. Läraren leder fortfarande hela passet och håller pennan. Kvällen före har hen läst om dagens sidor och skrivit en post-it om att spara tid på en bank."
     - "Passet börjar vid tavlan. Läraren frågar: ”Vad hände förra gången?” Var och en säger det till den bredvid, och sedan berättar Adam för gruppen: ”Folk går till Momo, för hon lyssnar. Sen kom de grå herrarna.” Gruppen läser frågorna som inte har en bock, och var och en säger till den bredvid vad hen tror händer nu. Noor säger: ”Nu tror jag att de tar någons tid.”"
@@ -535,7 +535,7 @@ urval:
   text:
     - "På varje nivå, Bas, Medel och Avancerat, har metoden tio böcker: fem från 2012 eller senare och fem klassiker. I nivåns lista ser du ungefär hur många läspass varje bok tar, var ljudboken och talboken finns, var du lånar och köper boken och om det finns en lärarhandledning."
     - Böckerna lånar du genom skolbiblioteket, kommunens skolbibliotekscentral eller folkbiblioteket, och i Libris ser du vilka bibliotek som har dem. Låna samma utgåva till alla, så att sidnumren stämmer. Fråga om klassuppsättningar och om ett skollån med längre lånetid. Många folkbibliotek har bokcirkelkassar med sju eller åtta exemplar av samma bok och en lånetid på fyra till åtta veckor. Kassarna har sällan böcker för åk 4–7. En vuxen ansvarar för hela kassen, så du lånar den själv och förnyar lånet. En elev med läsnedsättning kan få talboken i Legimus genom skolbiblioteket, och vårdnadshavaren skriver under användaravtalet. Kontot i Legimus är elevens eget. En elev som har boken i en lättläst version läser den i förväg eller efteråt, och i passet följer hen med i originalet.
-    - Läsplanen gör du på mallen Läsplanen, efter din utgåva. Listans läspass är för det mesta räknade på ljudbokens eller talbokens speltid, och du läser oftast något långsammare. Räkna därför med ett par läspass mer än listan säger. Pröva hur många sidor du hinner läsa högt på 20 minuter, och dela boken i läspass. Låt varje pass sluta där eleverna vill veta vad som händer sedan. Det stället är passets stopp. Skriv in sidorna och stoppet, och det som är nytt i ett läspass, som en samtalsregel eller protokollet. Välj takten efter boken, två pass i veckan för en kort bok och tre för en lång. Tar boken mer än omkring 20 läspass, kan du berätta ett mellanparti kort med egna ord. Skriv det i läsplanen och som en rad på tavlan. Läser du hela boken, tar perioden längre tid.
+    - Läsplanen gör du på mallen Läsplanen, efter din utgåva. Listans läspass är för det mesta räknade på ljudbokens eller talbokens speltid, med 22 minuter per läspass, och du läser oftast något långsammare. Räkna med omkring en fjärdedel fler läspass än listan säger, och två pass till för bokvalet och slutet. Pröva hur många sidor du hinner läsa högt på 20 minuter, och dela boken i läspass. Låt varje pass sluta där eleverna vill veta vad som händer sedan. Det stället är passets stopp. Lägg till ett läspass i läsplanen, eftersom du läser kortare i läspass 1 och när ni inför en ny samtalsregel. Skriv in sidorna och stoppet, och det som är nytt i ett läspass, som en samtalsregel eller protokollet. Ha två pass i veckan när listan säger högst tolv läspass, och annars tre. Boka passen efter den längre av bokvalets två böcker. Räcker inte veckorna, kan du berätta ett mellanparti kort med egna ord. Skriv det i läsplanen och som en rad på tavlan. Läser du hela boken, tar perioden längre tid.
     - Böckerna ligger kvar i rummet mellan passen. Den som har varit borta följer med ändå, för i Var är vi? och på tavlan får hen veta vad som har hänt. Hen kan också ta igen passet med ljudboken eller talboken. Den som vill läsa vidare hemma lånar ett eget exemplar eller lyssnar på ljudboken, men berättar inte för de andra vad som händer.
   kravText: "Väljer du en bok utanför listan, ska den uppfylla tre krav:"
   krav:
@@ -546,7 +546,7 @@ urval:
     - rubrik: Lagom lång
       text: 8 till 27 läspass. Över 20 kan du berätta ett mellanparti.
 uppfoljning:
-  text: Du behöver veta om passen ger effekt, och det räcker inte att boken blir utläst. Läsintervjun och protokollet står bland materialet, ett av varje per elev. På dem står frågorna och det du lyssnar efter. Läsplanen samlar det gruppen sa, och protokollet det varje elev sa. Jämför det eleven säger i bokens slut med det hen sa i början, och den andra läsintervjun med den första.
+  text: Du behöver veta om passen ger effekt, och det räcker inte att boken blir utläst. Läsintervjun och protokollet står bland materialet, ett av varje per elev. På dem står frågorna och det du lyssnar efter. Läsplanen samlar det gruppen sa, och protokollet det varje elev sa. Har det eleven säger i bokens mitt inte rört sig sedan början, ge hen en stund med dig varje vecka. Hen berättar då vid tavlan och visar i boken där hen har satt sin post-it. Jämför det eleven säger i bokens slut med det hen sa i början, och den andra läsintervjun med den första. Eleven läser nästa bok utanför gruppen om hen återberättar boken i rätt ordning, med personerna, och i bokens slut visar var en tanke kommer ifrån utan att du frågar. Har eleven kommit en bit på vägen, läser hen nästa bok i gruppen, och ni börjar där ni slutade i Eleverna tar över. Har inget rört sig sedan början, ta upp det med elevhälsan.
   rader:
     - nar: Före bokvalet
       tid: "före"
@@ -554,18 +554,29 @@ uppfoljning:
       vad: Gör läsintervjun, fem minuter per elev, om senaste boken, vad eleven gör när hen inte förstår och vad hen gillar. Eleven fyller i kortet Böcker jag har läst ut.
     - nar: Under boken
       tid: "i passet"
-      vad: Skriv i protokollet vad eleven säger i Var är vi? och Samtala, i bokens början, mitt och slut. I en kort bok räcker början och slutet.
+      vad: Skriv i protokollet vad eleven säger i Var är vi? och Samtala, i bokens början, mitt och slut.
     - nar: Efter slutet
       tid: "efter"
       perElev: 10
       vad: Gör läsintervjun igen, omkring tio minuter. Eleven återberättar hela boken. Ni väljer hens nästa bok, och du skriver vilket stöd hen behöver i den.
 plan:
   # Längden beror på boken (Rimligheten 2026-10-26: fem veckor och åtta läspass räckte inte till någon bok på Bas eller
-  # Medel). Åtta veckor med två pass i veckan ger fjorton läspass, och läraren väljer efter läsplanen.
+  # Medel). Åtta veckor med två pass i veckan ger fjorton läspass, och läraren väljer efter läsplanen. Passgenomgången
+  # 2026-10-26: räkningen, takten och mellanpartiet när veckorna inte räcker. Nattkorpen, 12 läspass i listan, blir
+  # omkring 15 och två pass till, alltså åtta eller nio veckor med två pass i veckan, så förvalet står kvar. Den andra
+  # genomgången: takten räknas på listan och på den längre av bokvalets två böcker, och perioden är sex till tio veckor.
   veckoval:
-    text: "Listans läspass är för det mesta räknade på ljudbokens eller talbokens speltid, och du läser oftast något långsammare. Räkna därför med ett par läspass mer än listan säger."
+    text: "Räkna med omkring en fjärdedel fler läspass än listan säger, och två pass till för bokvalet och slutet. Ha två pass i veckan när listan säger högst tolv läspass, och annars tre. Räcker inte veckorna, kan du berätta ett mellanparti kort med egna ord."
     mer: Var hittar du böckerna och läsplanen?
     forval: 8
+  # Avstämningen mitt i boken, när protokollet skrivs (passgenomgången 2026-10-26). Elevhälsan lägger planen till själv.
+  justera:
+    - "Har det eleven säger i bokens mitt inte rört sig sedan början, ge hen en stund med dig varje vecka. Hen berättar då vid tavlan och visar i boken där hen har satt sin post-it."
+  # Beslutet efter läsintervjun efter slutet, ur uppföljningens text (passgenomgången 2026-10-26).
+  utvardering:
+    - "Eleven läser nästa bok utanför gruppen om hen återberättar boken i rätt ordning, med personerna, och i bokens slut visar var en tanke kommer ifrån utan att du frågar."
+    - "Har eleven kommit en bit på vägen, läser hen nästa bok i gruppen, och ni börjar där ni slutade i Eleverna tar över."
+    - "Har inget rört sig sedan början, ta upp det med elevhälsan."
   nivaval:
     text: "Nivåerna bygger mer på temat och innehållet än på hur svår boken är att läsa, eftersom du läser högt och eleven följer med. Välj nivå efter gruppens ålder och efter vad gruppen är redo för."
     mer: Så skiljer sig nivåerna
@@ -589,7 +600,7 @@ plan:
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 1, kolumner: [Det som är nytt] }
     # Varje läspass heter med sitt nummer, pass 3 är läspass 2 (Rimligheten 2026-10-26). En rad per pass, så att passet
     # visar sitt eget steg ur Perioden en gång. Steget Från läspass 10 börjar i läspass 13, eftersom det väntar till nästa
-    # bok när boken har högst tolv läspass. Det första läspasset i varje steg som eleverna tar över säger att gruppen
+    # bok när läsplanen har högst tolv läspass. Det första läspasset i varje steg som eleverna tar över säger att gruppen
     # avgör takten. Det näst sista passet heter med sitt nummer, och rollen Det sista läspasset står efter i passet.
     - { nar: pass 3, kort: "Läspass 2", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 2 och 3, kolumner: [Det som är nytt] } }
     - { nar: pass 4, kort: "Läspass 3", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 2 och 3, kolumner: [Det som är nytt] } }
@@ -927,8 +938,8 @@ ramar:
               text: ""
     - rubrik: Protokollet
       text:
-        - Skriv passets nummer och sedan elevens egna ord. Sätt ett f efter det eleven sa som svar på en fråga från dig. Skriv direkt efter passet, medan du minns orden.
-        - Tre gånger under boken lyssnar du extra noga, två läspass i följd varje gång. Början är läspass 2 och 3, mitten två läspass mitt i boken, och slutet de två läspassen före det sista. I en bok med högst tolv läspass räcker början och slutet. I slutsamtalet skriver du elevens sak om hela boken.
+        - Skriv passets nummer och sedan elevens egna ord. Sätt ett f efter det eleven sa som svar på en fråga från dig. Skriv direkt efter passet, medan du minns orden, och räkna med omkring tio minuter.
+        - Tre gånger under boken lyssnar du extra noga, två läspass i följd varje gång. Början är läspass 2 och 3, mitten två läspass mitt i boken, och slutet de två läspassen före det sista. I slutsamtalet skriver du elevens sak om hela boken.
         - I Var är vi? lyssnar du på den som berättar vid tavlan och på ett par när de berättar för varandra, ett nytt par varje pass. I Samtala lyssnar du på var och en, i laget runt och i tråden. Är ni fler än fem, hör du en samtalsgrupp och två par per pass.
         - Lyssna efter om eleven berättar i rätt ordning och säger namnen och hur personerna hör ihop, och om hen säger sin sak i gruppen, säger när boken svarar på en fråga, pekar i boken, bygger vidare på en kamrats tanke och ser ett mönster eller en koppling.
       huvud:

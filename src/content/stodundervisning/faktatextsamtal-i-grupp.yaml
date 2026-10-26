@@ -85,11 +85,18 @@ tidsschema:
       vad: "Läs textens fråga med texten nedvänd: ”Vad tror ni?” Gissningen väcker det eleverna redan vet. Skriv gissningarna på bladet Kärnorna. Vänd upp texten: ”Vad ser ni på bilderna och rubrikerna?” Red ut orden som står på lärarens sida."
     - tid: 5–35 min
       fas: Läs och fånga
-      vad: "Läs ingressen och avsnitt 1 högt. Det tar omkring sex minuter. Paren läser de tre andra, omkring åtta minuter per avsnitt. Efter varje avsnitt samlar du gruppen: ”Var skavde det?” Blir tiden knapp läser du också det sista avsnittet högt, och gruppen säger kärnan direkt."
+      vad: "Läs ingressen och avsnitt 1 högt. Det tar omkring sex minuter. Paren läser de tre andra, omkring åtta minuter per avsnitt. Efter varje avsnitt samlar du gruppen: ”Var skavde det?” Blir tiden knapp läser du också det sista avsnittet högt, och gruppen säger kärnan direkt. I vecka 5 läser du avsnitt 3 i stället, eftersom de två eleverna med jobbkorten leder det sista avsnittet."
     - tid: 35–40 min
       fas: Avsluta
       vad: ”Vet vi mer nu?” En gissning som blev fel är lika mycket värd som en som blev rätt, för den gav gruppen något att läsa efter.
   efter: Tiderna är hållpunkter.
+  varianter:
+    - nar: första passet
+      text: Delen Förbered tar längre tid, eftersom du först säger vad strecket betyder och visar kortet När det skaver. På Medel och Avancerat läser du också det sista avsnittet högt.
+      delar:
+        - { fas: Förbered, tid: "0–8 min" }
+        - { fas: Läs och fånga, tid: "8–35 min" }
+        - { fas: Avsluta, tid: "35–40 min" }
 arbetsform:
   rubrik: "Arbetsform: gemensamt, i par, gemensamt igen"
   text: "Var och en säger sin sak till den bredvid innan någon säger den till gruppen. Det gäller gissningen, kärnan i de avsnitt paren läser och texten ur modellen. Är ni tre eller fem arbetar tre tillsammans: de turas om att läsa högt, och var och en säger sin sak till de två andra. Är ni sju eller åtta arbetar gruppen i två halvor i läspasset: varje halva skriver sin lapp, och gruppen väljer en av dem till bladet Kärnorna. Då sitter modellen på väggen i modellpasset."
@@ -178,7 +185,7 @@ tabeller:
   - rubrik: "Ett avsnitt i fyra steg: Läs, Red ut, Kärnan och Lappen"
     plats: efter-tidsschema
     meny: true
-    text: Avsnitt 1 läser du högt, och det tar omkring sex minuter. I vecka 1, 2 och 6 tänker du högt där. De andra veckorna samlar du gruppen direkt, och gruppen reder ut och säger kärnan utan att paren gör det först. Avsnitten som paren läser har alla samma fyra steg, och ett avsnitt tar omkring åtta minuter. Den som avkodar mödosamt följer med i texten, och kamraten eller du läser. På Avancerat är avsnitten längre. Räkna där med att läsa ett avsnitt till högt från vecka 3, och bestäm före passet vilket.
+    text: Avsnitt 1 läser du högt, och det tar omkring sex minuter. I vecka 1, 2 och 6 tänker du högt där. De andra veckorna samlar du gruppen direkt, och gruppen reder ut och säger kärnan utan att paren gör det först. Avsnitten som paren läser har alla samma fyra steg, och ett avsnitt tar omkring åtta minuter. Den som avkodar mödosamt följer med i texten, och kamraten eller du läser. På Avancerat är avsnitten längre. Räkna där med att läsa ett avsnitt till högt från vecka 3, och bestäm före passet vilket. I vecka 5 är det avsnitt 2.
     kolumner:
       - Steg
       - Eleverna gör
@@ -259,8 +266,8 @@ tabeller:
       - - |-
           Förberedelse
           Före passet
-        - Den tomma modellen, utskriven på A3, ligger mitt på bordet bredvid bladet Kärnorna med lapparna. Eleverna har sina texter framme.
-        - Läs modellens sida och raderna under Modellpasset på lärarens sida. Lägg också fram exemplet om skolan i vecka 1–5 och den sparade modell som lärarens sida säger i vecka 2–5. I vecka 6–8 ligger bladet Kärnorna med lapparna och gruppens fem modeller framme. Den tomma modellen har du då hos dig, så att den inte avslöjar valet.
+        - Bladet Kärnorna med lapparna ligger mitt på bordet. Eleverna har sina texter framme.
+        - Läs modellens sida och raderna under Modellpasset på lärarens sida. I vecka 1 lägger du också fram den tomma modellen på A3 och exemplet om skolan. I vecka 2–5 lägger du fram den sparade modell som lärarens sida säger. Exemplet och den tomma modellen tar du fram när gruppen har sagt varför den sparade modellen inte räcker. I vecka 6–8 ligger bladet Kärnorna med lapparna och gruppens fem modeller framme. Den tomma modellen har du då hos dig, så att den inte avslöjar valet.
       - - |-
           Fördjupningen
           0–⁠6 min
@@ -407,7 +414,7 @@ tabeller:
       - - Vilken text?
         - Den text klassen läser härnäst i SO eller NO, en till två sidor. Ni tar en ny text varje vecka. Fråga läraren i ämnet. Kommer eleverna ur flera klasser tar ni en text från en klass i taget.
       - - Hur förbereder du den?
-        - "Med bladet Egen text, som blir lärarens sida till texten: dela texten i fyra avsnitt, välj orden att reda ut, skriv textens fråga och välj modell. Det tar omkring tjugo minuter."
+        - "Med bladet Egen text, som blir lärarens sida till texten: dela texten i fyra avsnitt av nivåns längd, välj orden att reda ut, skriv textens fråga och välj modell. Det tar omkring tjugo minuter."
       - - Hur börjar modellpasset?
         - En elev läser lapparna. Sedan väljer var och en bland gruppens fem modeller från vecka 1–5 och återger på en minut den modellens text för den bredvid.
       - - Vilken modell?
@@ -467,7 +474,7 @@ exempel:
     - "Sist läser Amina de fyra lapparna i följd. Var och en säger till den bredvid vad hen tror nu, och läraren frågar: ”Vet vi mer nu?” Hugo ändrar sin gissning från femtio hinkar till en. Läraren sparar bladet Kärnorna med lapparna till modellpasset. Efter passet skriver läraren på sin sida till texten: Hugo tog först det som lät roligast och valde sedan själv den kärna som sa mest. Jag frågar Hugo först nästa gång."
 fastnar:
   rubrik: "När det skaver: stödtrappan"
-  text: "När eleverna kör fast är det lätt att ge svaret direkt. Gör tvärtom. Fråga, lyssna och ge minsta möjliga stöd som tar dem ett steg längre fram. Stödtrappans fyra första steg har eleverna på kortet När det skaver, som fyra sätt. Har en elev inget understruket, pekar du i elevens text på ett ställe som raden Red ut på lärarens sida nämner och säger: ”Säg det med egna ord.” Går det inte, har eleven hittat något som skaver, och hen stryker under det. Fråga först de elever som varken såg det konstiga i meningarna eller strök under något i kartläggningen. Stryker någon under nästan allt, frågar du vad avsnittet handlar om i stort innan ni går in i detaljen. Händer det i flera pass läser eleven i par med en kamrat som läser högt. Gäller det flera i gruppen prövar du nivån under."
+  text: "När eleverna kör fast är det lätt att ge svaret direkt. Gör tvärtom. Fråga, lyssna och ge minsta möjliga stöd som tar dem ett steg längre fram. Stödtrappans fyra första steg har eleverna på kortet När det skaver, som fyra sätt. Har en elev inget understruket, pekar du i elevens text på ett ställe som raden Red ut på lärarens sida nämner och säger: ”Säg det med egna ord.” Går det inte, har eleven hittat något som skaver, och hen stryker under det. Fråga först de elever som varken såg det konstiga i meningarna eller strök under något i kartläggningen. Stryker någon under nästan allt, frågar du vad avsnittet handlar om i stort innan ni går in i detaljen. Händer det i flera pass läser eleven i par med en kamrat som läser högt. Gäller det flera i gruppen, läser ni veckans text på nivån under från och med nästa vecka. På Bas läser de i stället i par med en kamrat som läser högt."
   fragaForst:
     - Var skavde det?
     - Vad har ni prövat?
@@ -535,7 +542,7 @@ progression:
       fokus: De två med jobbkorten leder gruppen genom avsnitten som paren läser. Gruppen väljer modell bland sina fem. I vecka 7 väljer den tillsammans med dig, och i vecka 8 väljer paren först. I det sista passet säger var och en vad hen tar med sig från perioden.
       roll: "Läspasset: du inleder och avslutar passet. Efter varje avsnitt säger du en sak som de två som ledde gjorde. Modellpasset: du lyssnar när gruppen väljer och går in först när något saknas."
 uppfoljning:
-  text: Du behöver veta om passen ger effekt. Kartläggningen står bland materialet. Eleven läser en kort faktatext och gör fyra uppgifter, om det som skaver, kärnan, bilden och hur texten hänger ihop. Kartläggningen har inga poäng. Du jämför det eleven sa och gjorde före perioden med det hen säger och gör efter, och raderna Så kan det låta visar hur skillnaden kan låta. Under perioden har du gruppens lappar och elevens skrivna svar från varje vecka. I passen hör du hur eleven reder ut det som skaver, och i vecka 6–8 hur paren väljer modell.
+  text: Du behöver veta om passen ger effekt. Kartläggningen står bland materialet. Eleven läser en kort faktatext och gör fyra uppgifter, om det som skaver, kärnan, bilden och hur texten hänger ihop. Kartläggningen har inga poäng. Du jämför det eleven sa och gjorde före perioden med det hen säger och gör efter, och raderna Så kan det låta visar hur skillnaden kan låta. Under perioden har du gruppens lappar och elevens skrivna svar från varje vecka. I passen hör du hur eleven reder ut det som skaver, och i vecka 6–8 hur paren väljer modell. Efter perioden beslutar du för varje elev. Reder eleven ut det som skaver och säger kärnan med egna ord, också i klassens texter, avslutar du insatsen. Har eleven gått framåt men behöver fortfarande stöd i klassens texter, får eleven en period till med ett nytt tema. Den nya perioden börjar i vecka 1, med ett tema från sidan Ta fram en faktatext. Kartläggningen du nyss har gjort blir då kartläggningen före den nya perioden. Efter perioden gör du kartläggningen med Bäverns damm. Står inget under Det som har ändrats i protokollet, tar du det med elevhälsan.
   rader:
     - nar: Före perioden
       tid: "före"
@@ -547,8 +554,13 @@ uppfoljning:
     - nar: Efter åtta veckor
       tid: "efter"
       perElev: 15
-      vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Klarar eleven klassens texter med mindre stöd, och vad fortsätter läraren i ämnet med?
+      vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Hur eleven klarar klassens texter ser du i vecka 6–8, och på Medel och Avancerat också i avsnittet ur klassens bok. Avslutar du insatsen, säger du till läraren i ämnet vilka modeller eleven kan använda i klassens texter.
 plan:
+  utvardering:
+    - "Reder eleven ut det som skaver och säger kärnan med egna ord, också i klassens texter, avslutar du insatsen."
+    - "Har eleven gått framåt men behöver fortfarande stöd i klassens texter, får eleven en period till med ett nytt tema."
+    - "Den nya perioden börjar i vecka 1, med ett tema från sidan Ta fram en faktatext."
+    - "Står inget under Det som har ändrats i protokollet, tar du det med elevhälsan."
   nivaval:
     text: "Nivåerna skiljer sig i området och i hur långa texterna och avsnitten är. Välj nivå efter elevernas läsning: kartläggningen före perioden visar vilken som passar."
     mer: Så skiljer sig nivåerna
@@ -2239,7 +2251,7 @@ ramar:
                 Lockar: 248 år för ett varv. ”Vilket krav klarade Pluto inte?”
                 Sambandet: ”En av dvärgplaneterna”: Pluto hör till småfolket i avsnitt 4
             - rubrik: Modellen
-              text: "Ta fram Tankekartan, blad 2. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till småfolket: Pluto är en dvärgplanet."
+              text: "Ta fram Tankekartan, blad 2. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen, efter ordet i fliken. Ge då Orden två minuter till, och korta Samtala lika mycket. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till småfolket: Pluto är en dvärgplanet."
             - rubrik: Orden
               text: mitt i familjen (solen) · närmast solen (stenplaneterna) · längre ut (jättarna) · flest i familjen (småfolket)
             - rubrik: Svaret
@@ -3133,7 +3145,7 @@ ramar:
                 Lockar: 18 smittade, 154 miljoner. ”Vad gör ett vaccin med försvarets minne?”
                 Sambandet: ”i förväg”: minnet från avsnitt 4, utan sjukdomen
             - rubrik: Modellen
-              text: Ta fram Tankekartan, blad 2. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till minnet. Vaccinet bygger samma minne som avsnitt 4 beskriver.
+              text: Ta fram Tankekartan, blad 2. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen, efter ordet i fliken. Ge då Orden två minuter till, och korta Samtala lika mycket. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till minnet. Vaccinet bygger samma minne som avsnitt 4 beskriver.
             - rubrik: Orden
               text: första del (muren) · andra del (larmet och ätarna) · också (specialisterna) · blir kvar (minnet)
             - rubrik: Svaret
@@ -4106,7 +4118,7 @@ ramar:
         - rubrik: Så gör du
           falt:
             - rubrik: 1 Dela texten
-              text: Läs texten. Är den längre än två sidor väljer du först den del som gruppen hinner i ett läspass. Dela den i fyra avsnitt, vid mellanrubrikerna eller där texten börjar handla om något nytt. Skriv avsnittens nummer i elevernas kopior, också vid bilden som hör till avsnittet.
+              text: "Läs texten. Ett avsnitt får vara ungefär lika långt som metodens avsnitt på gruppens nivå: 60–100 ord på Bas, 100–130 på Medel och 130–160 på Avancerat. Är texten längre än fyra sådana avsnitt, väljer du först den del som gruppen hinner i ett läspass. Dela den i fyra avsnitt, vid mellanrubrikerna eller där texten börjar handla om något nytt. Skriv avsnittens nummer i elevernas kopior, också vid bilden som hör till avsnittet."
             - rubrik: 2 Textens fråga
               text: Skriv en fråga som hela texten svarar på och som eleverna kan gissa svaret på innan de har läst.
             - rubrik: 3 Läspasset

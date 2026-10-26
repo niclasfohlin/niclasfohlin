@@ -103,6 +103,18 @@ tidsschema:
     - tid: 1 min
       fas: Tacka
       vad: "Var och en tackar grannen för något hen gjorde: ”Tack för att du …” Så får alla ett tack."
+  # Det första passet (passgenomgången 2026-10-26, sajtens K-572): Modellera ger stoppet, som checklistan säger, och
+  # passet är 20 minuter, längdvalets förval ur faktarutans 10–40 (standardens passetsLangder), med ett kort på 10–15
+  # minuter. Kortets längd står i texten, så att Genomför räcker (den andra passgenomgången samma dag).
+  varianter:
+    - nar: första passet
+      text: Ni gör ett kort på 10–15 minuter, och delen Modellera tar längre tid, eftersom du också visar stoppet och gruppen prövar det.
+      delar:
+        - { fas: Förklara, tid: 0–3 min }
+        - { fas: Modellera, tid: 3–6 min }
+        - { fas: Genomför, tid: 6–15 min }
+        - { fas: Återkoppla, tid: 15–19 min }
+        - { fas: Tacka, tid: 19–20 min }
 
 exempel:
   rubrik: "Exempel: Rockringen i en grupp i åk 4"
@@ -271,7 +283,7 @@ tabeller:
       - - Det blir för vilt
         - Stanna gruppen. Gör nästa försök jättelångsamt, eller byt till ett lugnare kort.
       - - ”Det här är larvigt”
-        - Låt äldre elever bestämma reglerna, välja kortet eller leda en aktivitet själva. Säg vad ni övar i aktiviteten.
+        - Låt äldre elever bestämma reglerna, välja kortet eller leda en aktivitet själva, som på kortet Vi leder en lek. Säg vad ni övar i aktiviteten.
       - - Någon säger något elakt
         - Stanna gruppen och säg lugnt att det inte är okej. Följ sedan skolans rutin.
   - rubrik: Fler frågor efter en aktivitet
@@ -297,7 +309,7 @@ tabeller:
 urval:
   rubrik: Var hittar du aktivitetskorten och brainbreakkorten?
   text:
-    - Aktivitetskorten ligger på sidan Ta fram en aktivitet, ordnade i kategorier. Välj om du vill se ett kort eller sex, och tryck på en kategori. Varje tryck ger nya kort. Tryck på bocken i hörnet på de kort du vill ha, så hamnar de i listan att skriva ut. Slumpa igen, lägg till fler och skriv ut listan. Kortet är ett A4 med rubrikerna Så gör ni, Material och Att tänka på. Tiden på kortet gäller alla fem delarna, och kortet säger om eleverna rör vid varandra. En aktivitet som tar mer än 30 minuter, till exempel hälften av dem i Skapa och bygga, delar ni upp på två pass, och båda passen slutar med återkopplingen och tacket. Gör gärna samma aktivitet flera gånger, eftersom gruppen samarbetar bättre i en aktivitet som den känner igen. Spara de kort som gruppen har gjort och vill göra igen.
+    - Aktivitetskorten ligger på sidan Ta fram en aktivitet, ordnade i kategorier. Välj om du vill se ett kort eller sex, och tryck på en kategori. Varje tryck ger nya kort. Tryck på bocken i hörnet på de kort du vill ha, så hamnar de i listan att skriva ut. Slumpa igen, lägg till fler och skriv ut listan. Kortet är ett A4 med rubrikerna Så gör ni, Material och Att tänka på. Tiden på kortet gäller alla fem delarna, och kortet säger om eleverna rör vid varandra. En aktivitet som tar mer än 30 minuter, till exempel hälften av dem i Skapa och bygga, delar ni upp på två pass, och båda passen slutar med återkopplingen och tacket. I det andra passet säger en elev målet och var ni slutade, och sedan fortsätter ni i Genomför. Aktivitetens andra pass gör ni nästa gång ni har ett pass utan gruppreflektion. Gör gärna samma aktivitet flera gånger, eftersom gruppen samarbetar bättre i en aktivitet som den känner igen. Spara de kort som gruppen har gjort och vill göra igen.
     - "Brainbreakkorten ligger på sidan Ta fram en brainbreak, ordnade i kategorierna Rörelse, Dans & rytm, Lek, Hjärngympa och Lugn. Sidan slumpar fram sex ur alla eller ur en kategori, och gruppen väljer ett. Kortet visas stort med en klocka som är ställd på kortets minuter, och du kan sätta på glad och peppig musik, dansmusik och modern musik eller lugn och avslappnad musik från sidans radio. Du startar klockan och är själv med, och du avslutar genom att räcka upp handen och säga stopp. Ska gruppen orka mer efteråt, gör ni två eller tre pigga brainbreaks i rad och sist en lugn, så att pausen blir omkring tio minuter."
   kravText: "En aktivitet som du väljer, eller gör själv, ska klara fyra krav:"
   krav:
@@ -312,7 +324,7 @@ urval:
 
 uppfoljning:
   rubrik: Gruppen över tid
-  text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. Då läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Gäller två rader samtidigt, gör du det som står först.
+  text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Efter tolv veckor är diagrammet i Lärarens skattning fullt, och du bestämmer hur ni går vidare. Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen. Om gruppen inte har kommit så långt, men linjen har stigit sedan ni började eller ligger på 7 eller mer, fortsätter ni en period till med ett nytt diagram. Veckorna räknar du då vidare, vecka 13 och framåt, och bara diagrammet börjar om på vecka 1. Har linjen inte stigit och ligger under 7, tar du upp gruppen med elevhälsan. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. I återkopplingen läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Har veckan en gruppreflektion, gör ni avslutningen i stället. Vecka 12 är en vanlig vecka. Avslutar ni insatsen, gör ni avslutningen i passet efter beslutet. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Pågår kränkningar, eller skattar du 1 eller 2, går skolans rutin före raderna. Vänta då med aktiviteterna tills det går enligt rutinen. Säger två av raderna om linjen och beröringen emot varandra, gör du det som står först.
   rader:
     - nar: Lärarens skattning varje vecka
       tid: "varje vecka"
@@ -325,7 +337,7 @@ uppfoljning:
       vad: Välj kort utan beröring ur Lära känna varandra och Trygghet och gemenskap på sidan Ta fram en aktivitet. Sedan väljer du fler kort ur Samarbetsutmaningar, Gemensamma mål och Skapa och bygga.
     - nar: Linjen i Lärarens skattning nedåt två veckor i rad
       tid: "villkor"
-      vad: Gör två aktiviteter i veckan ur Trygghet och gemenskap. Välj kort utan beröring, gärna sådana som gruppen redan kan, och ta upp det du har sett i nästa gruppreflektion.
+      vad: I de två veckorna efter gör ni två aktiviteter i veckan ur Trygghet och gemenskap. Välj kort utan beröring, gärna sådana som gruppen redan kan, och ta upp det du har sett i nästa gruppreflektion.
     - nar: Kort med beröring
       tid: "villkor"
       vad: Välj dem från vecka 5, när de flesta ringar in 4 eller 5 på ”Jag känner mig trygg i gruppen” i Vår grupp.
@@ -334,27 +346,37 @@ uppfoljning:
       vad: Välj kort ur en kategori som ni inte har använt på länge, och fråga i gruppreflektionen vad ni kan bli lite bättre på.
     - nar: Linjen i Lärarens skattning på 7 eller mer i fyra veckor
       tid: "villkor"
-      vad: Gör en aktivitet i veckan och en gruppreflektion i månaden, om de flesta också ringar in 4 eller 5 på varje påstående i Vår grupp.
+      vad: Ringar de flesta också in 4 eller 5 på varje påstående i Vår grupp, gör en aktivitet i veckan och en gruppreflektion i månaden i stället för varannan vecka. Går linjen under 7, gör ni som förut.
 plan:
   # Det som skiljer passen åt (Rimligheten 2026-10-26, sajtens K-567): i första passet hur de fem delarna går till i en
-  # klass, där läraren först leder dem och sätter ihop grupperna, och i sista passet den avslutande aktiviteten. Inga
-  # rader med metodens veckor (vecka 5) eller platsen i veckan: de slår på Upprepa veckan och veckans pass i hela planen.
+  # klass. Inga rader med metodens veckor (vecka 5) eller platsen i veckan: de slår på Upprepa veckan och veckans pass i
+  # hela planen. Det sista passet har ingen egen rad: vecka 12 är en vanlig vecka, och avslutningen kommer i passet efter
+  # beslutet, så den står i plan.utvardering (den andra passgenomgången 2026-10-26).
   passen:
     - nar: första passet
-      text: I en klass gör du fasta grupper om fyra till sex, byter dem efter några veckor och delar eller slår ihop dem när kortet kräver det.
       ur: { tabell: "I en klass, i en liten grupp och med de yngsta", rad: Fler än åtta eller en klass }
-    # Den avslutande aktiviteten görs när gruppen ska skiljas, och det sista passet heter därför inte så (den stängda frågan
-    # 2026-10-26: en grupp som fortsätter fick en avslutning före utvärderingen).
-    - nar: sista passet
-      text: "När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. Då läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på."
-  # Före första passet: de första korten är utan beröring (Rimligheten 2026-10-26).
+  # Före första passet: de första korten är utan beröring (Rimligheten 2026-10-26), och i en klass gör du grupperna innan
+  # (den andra passgenomgången 2026-10-26: varianten för första passet har ingen tid åt det).
   fore:
     - Välj kort utan beröring ur Lära känna varandra och Trygghet och gemenskap på sidan Ta fram en aktivitet.
+    - I en klass gör du fasta grupper om fyra till sex, byter dem efter några veckor och delar eller slår ihop dem när kortet kräver det.
   # Stödet för passets längd (K-564): faktarutans 10–40 minuter rymmer både en aktivitet och gruppreflektionen efter en kort
   # aktivitet.
   langdval:
     text: "En eller två gånger i veckan gör ni en aktivitet på 10–30 minuter i fem delar: Förklara, Modellera, Genomför, Återkoppla och Tacka. Varannan vecka leder du en gruppreflektion på 20–30 minuter efter en aktivitet på omkring tio minuter."
     mer: Gruppreflektion
+  # Antalet veckor och beslutet efter perioden (passgenomgången 2026-10-26, sajtens K-572): tolv veckor är diagrammets
+  # period, och linjen och Vår grupp avgör om ni avslutar, fortsätter en period till eller tar upp gruppen med elevhälsan.
+  # Avslutningen kommer efter beslutet, så den står sist i utvärderingen (den andra passgenomgången samma dag).
+  veckoval:
+    text: "Efter tolv veckor är diagrammet i Lärarens skattning fullt, och du bestämmer hur ni går vidare. Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen."
+    mer: Gruppen över tid
+    forval: 12
+  utvardering:
+    - "Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen."
+    - "Om gruppen inte har kommit så långt, men linjen har stigit sedan ni började eller ligger på 7 eller mer, fortsätter ni en period till med ett nytt diagram."
+    - "Har linjen inte stigit och ligger under 7, tar du upp gruppen med elevhälsan."
+    - "När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet."
   # Metodens egna skattningar (K-559): Lärarens skattning från 1 till 10 vid Skatta gruppen, med linjen och reglerna i
   # Gruppen över tid, och bladet Vår grupp som eleverna fyller i, med formuläret, i gruppreflektionens vecka.
   skattningar:
@@ -581,7 +603,7 @@ lathund:
       - nar: Vecka 1–4
         vad: Kort utan beröring ur Lära känna varandra och Trygghet och gemenskap.
       - nar: Linjen nedåt två veckor i rad
-        vad: Två aktiviteter i veckan ur Trygghet och gemenskap, utan beröring.
+        vad: Två veckor med två aktiviteter i veckan ur Trygghet och gemenskap, utan beröring.
 film:
   sekunder: 29.9
   beskrivning: "Leo tar tiden. De andra håller händer. Läraren säger: ”Ni är klara när rockringen är tillbaka hos mig.” Elias fastnar i rockringen, och Sara hjälper. Sara säger: ”Böj dig, så lyfter jag armen.” Läraren säger vad Sara gjorde. Läraren säger: ”Sara lyfte armen, och då kom rockringen vidare.” Rockringen är tillbaka. Leo säger: ”Fyrtio sekunder!” Läraren frågar efteråt. Läraren frågar: ”Vad gjorde någon som hjälpte gruppen?” Elias säger: ”Sara visade hur jag skulle böja mig.”"

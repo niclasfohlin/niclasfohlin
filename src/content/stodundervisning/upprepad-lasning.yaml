@@ -196,7 +196,7 @@ tabeller:
     not: "Bara ”Bra!” talar inte om för eleven vad hen ska göra nästa gång. Beröm det eleven gjorde och strategin hen använde."
   - rubrik: Lästräningstexterna vecka för vecka
     plats: efter-urval
-    text: Läskorten finns under Materialet. Peka på orden ur texten i en annan ordning, så hör du om eleverna läser orden eller minns texten.
+    text: "Läskorten finns under Materialet. Peka på orden ur texten i en annan ordning, så hör du om eleverna läser orden eller minns texten. Står någon i gruppen på steg 1 eller 2 i lästrappan när ni börjar, välj en period på åtta veckor. Står alla på steg 3, räcker sex veckor. Hinner ni inte till Draken och Vanten, läser ni dem i nästa period om eleven fortsätter."
     kolumner:
       - Text
       - Veckans fokus
@@ -248,7 +248,7 @@ tidsschema:
       vad: "Läs texten högt för dig själv och tänk ut vilka ord eleverna kan fastna på. Bestäm hur eleverna ska läsa igen. Kopiera texten till varje elev och till dig, och visa den gärna stor på tavlan. Lägg ett strategikort vid varje plats, och gärna ett läsrör."
     - tid: 0–3 min
       fas: Första läsningen
-      vad: "Är texten ny, säg i en mening vad den handlar om. Alla läser halvhögt samtidigt, gärna i läsröret, och du lyssnar på en i taget. Du läser inte med och rättar inte här. Lyssna efter mönster: ord som gissas, ljud som tappas, ändelser som läses fel, långa ord som faller isär. Notera i din kopia det som återkommer hos flera elever, inte varje enskilt fel."
+      vad: "Är texten ny, säg i en mening vad den handlar om. Alla läser texten utan stöd, halvhögt och samtidigt, gärna i läsröret, och du lyssnar på en i taget. Du läser inte med och rättar inte här. Lyssna efter mönster: ord som gissas, ljud som tappas, ändelser som läses fel, långa ord som faller isär. Notera i din kopia det som återkommer hos flera elever, inte varje enskilt fel."
     - tid: 3–6 min
       fas: Modellering
       vad: "Läs texten högt i lugnt tempo och peka så att alla följer med i raden. Stanna vid orden du noterade och visa hur de läses: ljuda utan paus, dela ordet i delar, läs det igen som helhet. Tänk högt om det som gör ordet svårt: konsonantmötet, den långa vokalen, ändelsen. Läs meningen om från början när ordet är löst. Håll modelleringen kort och välj två eller tre saker av det du hörde."
@@ -260,7 +260,7 @@ tidsschema:
       vad: "Börja själv och beskriv en eller två iakttagelser du gjort under passet, konkret och kort. Låt sedan eleverna fylla på med vad de märkte och vilken strategi som hjälpte, och be någon berätta vad texten handlar om."
   varianter:
     - nar: ett pass på tio minuter
-      text: "Då hinner du lyssna på varje elev om gruppen har högst fyra elever."
+      text: "Då hinner du lyssna på varje elev om gruppen har högst fyra elever. Med fem eller sex elever är passet 15 minuter."
       delar:
         - { fas: Första läsningen, tid: 0–2 min }
         - { fas: Modellering, tid: 2–4 min }
@@ -303,7 +303,7 @@ steg:
         - När orden gick lätt kunde ni berätta vad texten handlade om.
 arbetsform:
   rubrik: "Arbetsform: enskilt, läraren visar, växlande, gemensamt"
-  text: "Först läser eleverna var för sig medan du lyssnar. Sedan visar du, och eleverna läser igen i minst två omgångar, tillsammans, i par eller själva. Sist samlas hela gruppen. Har du bara en elev arbetar ni en till en, och du är elevens par. Eleven läser för dig, du visar, och sedan läser ni igen tillsammans. Blir det en elev över läser tre tillsammans och turas om att läsa och peka. Har varje elev eller par en egen text sitter du hos en elev eller ett par i taget, med texten mellan er. Eleven läser, du visar, och sedan läser eleven igen med större flyt. De andra läser om sin text under tiden. I första passet börjar du med att berätta för eleverna varför ni läser samma text flera gånger. I Läs igen visar du parläsningen tillsammans med en elev framför gruppen, innan paren läser. Den som pekar håller fingret under ordet, väntar tre sekunder och pekar på strategikortet innan hen säger ordet."
+  text: "Först läser eleverna var för sig medan du lyssnar. Sedan visar du, och eleverna läser igen i minst två omgångar, tillsammans, i par eller själva. Sist samlas hela gruppen. Har du bara en elev arbetar ni en till en, och du är elevens par. Eleven läser för dig, du visar, och sedan läser ni igen tillsammans. Blir det en elev över läser tre tillsammans och turas om att läsa och peka. Har varje elev eller par en egen text sitter du hos en elev eller ett par i taget, med texten mellan er. Eleven läser, du visar, och sedan läser eleven igen med större flyt. De andra läser om sin text under tiden. Ett pass rymmer då högst tre texter, och ett pass på tio minuter högst två, så att du hinner sitta en stund hos var och en. I första passet börjar du med att berätta för eleverna varför ni läser samma text flera gånger. I Läs igen visar du parläsningen tillsammans med en elev framför gruppen, innan paren läser. Modelleringen är kortare i första passet, med ett eller två ord, så att du hinner berätta varför och visa parläsningen. Den som pekar håller fingret under ordet, väntar tre sekunder och pekar på strategikortet innan hen säger ordet."
   delar:
     - rubrik: 1. Enskilt
       text: var och en läser, läraren lyssnar
@@ -377,26 +377,41 @@ hem:
     - "När texten flyter i skolan får eleven ta hem en kopia som frivillig läxa och läsa den högt två eller tre gånger för någon hemma. Läxan finns för att eleven ska läsa hemma också. Första gången skickar du med strategikortet och lappen till vårdnadshavaren. Båda finns under Materialet."
     - "Blir läxan ett bekymmer, till exempel för att ingen hemma kan lyssna, hoppar ni över den. Eleven får ändå läsa texten flera gånger med dig i skolan."
 uppfoljning:
-  text: "Före första passet och efter perioden läser eleven en ny text på samma nivå som i insatsen, en text ni inte har övat på. Välj två lika långa texter ur en lättläst bok eller en nivåindelad serie innan ni börjar, och spara den andra till efter perioden. Ta ingen av lästräningstexterna, eftersom ni övar på dem i passen. Använd protokollet Lästrappan före och efter, som finns under Materialet. Under perioden följer du eleven i första läsningen. Trappsteget stannar mellan dig och eleven. Visa det inte inför gruppen."
+  text: "Före första passet och efter perioden läser eleven en ny text, en text ni inte har övat på. Välj två texter ur en lättläst bok eller en nivåindelad serie innan ni börjar, och spara den andra till efter perioden. De ska vara lika långa och svåra som lästräningstexterna Fåglarna och Snögubben. Ta ingen av lästräningstexterna, eftersom ni övar på dem i passen. Använd protokollet Lästrappan före och efter, som finns under Materialet. Du lyssnar på en elev i taget utanför passen, omkring fem minuter per elev. Under perioden följer du eleven i första läsningen. Trappsteget stannar mellan dig och eleven. Visa det inte inför gruppen. Läser eleven den nya texten på steg 4 eller 5 efter perioden, avslutar ni insatsen. Har eleven gått upp minst ett steg men står fortfarande på steg 1–3, fortsätter ni en period till med nya texter. Står eleven kvar på samma steg som före insatsen, byter ni till träning i att läsa ord, till exempel i Läslistor i grupp, och du tar upp det med elevhälsan."
   rader:
     - nar: Före insatsen
       tid: "före"
+      perElev: 5
       vad: Eleven läser en kort, ny text för dig. Fyll i protokollet Lästrappan före och efter.
     - nar: Varje vecka
       tid: "varje vecka"
       vad: "Skriv trappsteget överst i snabbmallen när eleven läser en ny text första gången. Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
     - nar: Efter sex till åtta veckor
       tid: "efter"
+      perElev: 5
       vad: "Eleven läser en ny text som är lika lång och på samma nivå. Fyll i protokollet Lästrappan före och efter igen och jämför med starten. Berätta för eleven vad du har hört."
 plan:
   # Stödet för passets längd (K-564): varianten för ett pass på tio minuter, som metodens sida skriver den.
   langdval:
-    text: "Ett pass på tio minuter: första läsningen 0–2 minuter, modellering 2–4, läs igen 4–9 och avslutning 9–10. Då hinner du lyssna på varje elev om gruppen har högst fyra elever."
+    text: "Ett pass på tio minuter: första läsningen 0–2 minuter, modellering 2–4, läs igen 4–9 och avslutning 9–10. Då hinner du lyssna på varje elev om gruppen har högst fyra elever. Med fem eller sex elever är passet 15 minuter."
     mer: Ett pass på 15 minuter
+  # Stödet för antalet veckor (passgenomgången 2026-10-26): trappsteget när ni börjar avgör perioden.
+  veckoval:
+    text: "Står någon i gruppen på steg 1 eller 2 i lästrappan när ni börjar, välj en period på åtta veckor. Står alla på steg 3, räcker sex veckor. Hinner ni inte till Draken och Vanten, läser ni dem i nästa period om eleven fortsätter."
+    mer: Lästräningstexterna vecka för vecka
+    forval: 8
+  # Första passet i passets delar (passgenomgången 2026-10-26): modelleringen ger minuterna, i båda längderna.
   passen:
     - nar: första passet
       kort: "Ola är ute, varför samma text"
-      text: "I första passet börjar du med att berätta för eleverna varför ni läser samma text flera gånger. I Läs igen visar du parläsningen tillsammans med en elev framför gruppen, innan paren läser."
+      del: Första läsningen
+      text: "I första passet börjar du med att berätta för eleverna varför ni läser samma text flera gånger."
+    - nar: första passet
+      del: Modellering
+      text: "Modelleringen är kortare i första passet, med ett eller två ord, så att du hinner berätta varför och visa parläsningen."
+    - nar: första passet
+      del: Läs igen
+      text: "I Läs igen visar du parläsningen tillsammans med en elev framför gruppen, innan paren läser."
     # Veckans text är ett förslag: ni byter först när läsningen flyter, och veckans strategi väljer du efter det du hör.
     - nar: veckans första pass
       text: "Ni läser samma text hela passet, eller hela veckan, och byter text först när läsningen flyter. Varje vecka övar ni också en strategi, som du väljer på strategikortet efter det du hör."
@@ -428,7 +443,11 @@ plan:
     - "Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
   upprepa: "Byt text när den flyter för de flesta i gruppen och eleverna kan läsa orden också i en annan ordning."
   fore:
-    - "Välj två lika långa texter ur en lättläst bok eller en nivåindelad serie innan ni börjar, och spara den andra till efter perioden. Ta ingen av lästräningstexterna, eftersom ni övar på dem i passen."
+    - "Välj två texter ur en lättläst bok eller en nivåindelad serie innan ni börjar, och spara den andra till efter perioden. De ska vara lika långa och svåra som lästräningstexterna Fåglarna och Snögubben. Ta ingen av lästräningstexterna, eftersom ni övar på dem i passen."
+  utvardering:
+    - "Läser eleven den nya texten på steg 4 eller 5 efter perioden, avslutar ni insatsen."
+    - "Har eleven gått upp minst ett steg men står fortfarande på steg 1–3, fortsätter ni en period till med nya texter."
+    - "Står eleven kvar på samma steg som före insatsen, byter ni till träning i att läsa ord, till exempel i Läslistor i grupp, och du tar upp det med elevhälsan."
 mal:
   overgripande: "kunna läsa en text med flyt och lösa ett svårt ord med en strategi."
   text: "Efter perioden ska eleven ha gått upp några steg på lästrappan och oftare än förut:"
@@ -483,12 +502,12 @@ ramar:
               text: "Ett blad räcker till en elev. Skriv elevens namn på båda raderna, för hand eller i Word-filen innan du skriver ut, och klipp isär korten längs den streckade linjen. Laminera gärna kortet som ligger i skolan. Lathundens tredje sida har samma kort."
     - rubrik: Lästräningstexterna
       text:
-        - "Det finns en sida för varje vecka, med två läskort som du klipper isär längs den streckade linjen. Eleven läser först texten med stöd och sedan samma text utan stöd."
+        - "Det finns en sida för varje vecka, med två läskort som du klipper isär längs den streckade linjen. Eleven tränar först på texten med stöd och läser sedan samma text utan stöd."
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så använder ni korten
-              text: "Skriv ut veckans två kort till varje elev och laminera dem gärna. Eleven läser först texten med stöd och drar fingret längs bågarna. När det går lätt läser eleven samma text utan stöd. Veckans fokus och orden ur texten står i tabellen Lästräningstexterna vecka för vecka."
+              text: "Skriv ut veckans två kort till varje elev och laminera dem gärna. I första läsningen läser eleven texten utan stöd, så att du hör hur eleven läser. Sedan tränar eleven på texten med stöd och drar fingret längs bågarna. När det går lätt läser eleven samma text utan stöd. Veckans fokus och orden ur texten står i tabellen Lästräningstexterna vecka för vecka."
             - rubrik: Så gör du ett eget kort
               text: "Skriv fem till åtta korta meningar om något eleverna tycker om, med ord som de kan läsa. Skriv sedan samma text en gång till och lägg in bågar och bindestreck."
             - rubrik: Bågarna
@@ -668,7 +687,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: "Eleven läser en kort text på samma nivå som i insatsen, en text ni inte har övat på. Efter perioden tar du en ny text som är lika lång och på samma nivå. Kryssa det steg som stämmer bäst med hur eleven läser de flesta orden. Skriv hur många ord texten har, hur många fel eleven gör och hur ofta eleven rättar sig själv. Kryssa sedan strategierna eleven använder, och fråga vad texten handlade om."
+              text: "Eleven läser en text som ni inte har övat på, lika lång och svår som lästräningstexterna Fåglarna och Snögubben. Efter perioden tar du en ny text som är lika lång och på samma nivå. Kryssa det steg som stämmer bäst med hur eleven läser de flesta orden. Skriv hur många ord texten har, hur många fel eleven gör och hur ofta eleven rättar sig själv. Kryssa sedan strategierna eleven använder, och fråga vad texten handlade om."
       huvud:
         - rubrik: Elevens namn
         - rubrik: Texten och datum före
@@ -773,7 +792,7 @@ lathund:
             14–⁠15 min. Gemensamt.
           - |-
             ”Första gången ljudade ni strand. Sista gången läste ni ordet direkt.”
-    not: "Eleverna läser igen i minst två omgångar, till exempel med ekoläsning, i kör, med dig, i par, med stöd och sedan utan, i läsröret eller för en ny lyssnare. Lyssna på varje elev för sig minst en gång. Är eleverna fler än fyra tar du hälften i varje omgång. Har ni tio minuter får delarna 2, 2, 5 och 1 minut."
+    not: "Eleverna läser igen i minst två omgångar, till exempel med ekoläsning, i kör, med dig, i par, med stöd och sedan utan, i läsröret eller för en ny lyssnare. Lyssna på varje elev för sig minst en gång. Är eleverna fler än fyra tar du hälften i varje omgång. Har ni tio minuter och högst fyra elever får delarna 2, 2, 5 och 1 minut."
   pass:
     rubrik: "Vi kör ett pass: texten ”Sandslottet”"
     textRubrik: Gruppen · fyra elever i åk 2, andra passet
@@ -795,7 +814,7 @@ lathund:
           vad: "Läs texten högt själv, bestäm hur ni läser igen och lägg fram strategikorten."
         - tid: 0–3
           fas: 1 · Första läsningen
-          vad: "Alla läser halvhögt. Du lyssnar på en i taget och noterar. Är texten ny, skriv trappsteget: 1 gissar, 2 ljudar med pauser, 3 ljudar ihop, 4 läser i delar, 5 läser med flyt."
+          vad: "Alla läser halvhögt, utan stöd. Du lyssnar på en i taget och noterar. Är texten ny, skriv trappsteget: 1 gissar, 2 ljudar med pauser, 3 ljudar ihop, 4 läser i delar, 5 läser med flyt."
         - tid: 3–6
           fas: 2 · Modellering
           vad: Visa två eller tre svåra ord, med veckans strategi.

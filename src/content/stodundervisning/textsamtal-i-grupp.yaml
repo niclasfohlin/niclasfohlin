@@ -20,7 +20,6 @@ taggar:
   - intensivtraning
 format:
   - liten grupp
-  - helklass
 tid: 30 minuter per pass, tre pass i veckan
 period: Sex till åtta veckor
 grupp: Två till åtta elever
@@ -70,7 +69,7 @@ inledning:
   - Metoden har tre nivåer, Lättläst, Mellan och Avancerad, och på varje nivå texter med frågor och två texter för kartläggningen före och efter. Tjugo av texterna, sex eller sju på varje nivå, är skrivna i en känd författares stil, som Astrid Lindgrens, Tove Janssons eller J.R.R. Tolkiens. Välj nivå efter gruppen, och blanda gärna nivåerna. Texterna räcker till ungefär åtta veckors pass. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna, som det står i avsnittet om var du hittar texterna.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Insatsen pågår i sex till åtta veckor med tre pass på cirka 30 minuter i veckan, och gruppen har två till åtta elever. Varje pass har en ny text, som alla i gruppen läser och samtalar om. Veckans tre pass hänger ihop: i pass 1 stannar du och tänker högt, i pass 2 samtalar eleverna i par vid stoppet och sedan i gruppen, och i pass 3 tänker eleverna mer själva medan du lyssnar. Efter pass 3 läser du lyssningsbladet och ledtrådsbladen och väljer vad du visar i nästa veckas pass 1. Före första passet och efter det sista gör varje elev kartläggningen enskilt med dig, och du jämför poängen."
+  text: "Insatsen pågår i sex till åtta veckor med tre pass på cirka 30 minuter i veckan, och gruppen har två till åtta elever. Varje pass har en ny text, och i pass 3 i vecka 6–8 läser var och en sin bänkbok. Veckans tre pass hänger ihop: i pass 1 stannar du och tänker högt, i pass 2 samtalar eleverna i par vid stoppet och sedan i gruppen, och i pass 3 tänker eleverna mer själva medan du lyssnar. Efter pass 3 läser du lyssningsbladet och ledtrådsbladen och väljer vad du visar nästa vecka. Före första passet och efter det sista gör varje elev kartläggningen enskilt med dig, och du jämför poängen."
 gruppen:
   rubrik: Så sätter du ihop gruppen
   text: "Textsamtal i grupp är för elever som avkodar hyfsat men behöver stöd i att förstå det de läser, eller som läser vidare utan att tänka efter. Den som avkodar mödosamt kan vara med och läser i par i pass 3, men tränar också avkodningen, till exempel i TIL i grupp. Välj nivån, Lättläst, Mellan eller Avancerad, efter hur eleverna läser, oavsett årskurs. Bestäm paren före passet: sätt inte ihop de två som pratar mest, ge den tysta eleven en tålmodig kamrat och den som lär sig svenska gärna någon med samma modersmål. Byt par varje vecka. Lyssna på halva gruppen i pass 3 och på resten veckan efter."
@@ -412,6 +411,23 @@ tabeller:
       - - Samtala om texten
         - "Den som leder läser frågan högt och frågar ”Vad tror du?” och ”Hur vet du det?” Hen ser till att alla har pratat en gång innan någon pratar en tredje gång"
         - Lutar dig tillbaka och skriver det du hör på lyssningsbladet. Frågar den som leder vilken fråga på kortet som kan hjälpa när samtalet stannar. Ställer sist en av textens öppna frågor
+  - rubrik: "Bänkboken: pass 3 i vecka 6–8"
+    plats: efter-arbetsform
+    text: "I vecka 6–8 läser eleverna en sida i sin egen bänkbok i pass 3, i stället för metodens text. Passet har samma delar och tider som förut. Eleven läser där hen är i boken och sätter en post-it-lapp med ett frågetecken där något inte står, eftersom man inte stryker under i en bok. Du förbereder inget stopp, eftersom eleven ska hitta sitt ställe själv. Be eleverna ta med bänkboken, och lägg fram post-it-lappar och ett ledtrådsblad till varje elev. Eleven lämnar ledtrådsbladet till dig. Lappen sitter kvar i boken, och eleven får sätta fler när hen läser vidare. I det första passet med bänkboken lyssnar du på alla."
+    kolumner:
+      - Delen
+      - Eleverna
+      - Du
+    rader:
+      - - Möt texten
+        - Säger till sin kamrat vad boken handlar om och var hen är i den
+        - Säger att ni ska stanna där något inte står
+      - - Läs och tänk
+        - Läser en sida tyst, eller tillsammans med sin kamrat i en av deras böcker, och sätter lappen där något inte står. Fyller i ledtrådsbladet för det stället och skriver boken och sidan vid Fråga
+        - Frågar den som inte hittar ett ställe ”Vad står inte här?” och pekar på Stanna på tankekortet
+      - - Samtala om texten
+        - Läser sitt ställe högt, säger ”Jag tror att” och visar ledtråden. Kamraterna frågar ”Hur vet du det?” och ”Kan det vara något annat?” Är ni fler än fyra tar paren det först
+        - Skriver det du hör på lyssningsbladet, och skriver Stanna i sista kolumnen när eleven inte hittade ett ställe själv. Frågar sist ”Vad undrar du nu om din bok?”
   - rubrik: Samtalet i olika former
     plats: efter-arbetsform
     text: Parsamtalet och gruppens samtal är grunden. Ibland behöver samtalet en annan form, när samma elever alltid pratar, när gruppen är ny eller när ni behöver röra på er. En form ersätter rundan och en av frågorna i Samtala om texten.
@@ -501,7 +517,7 @@ tidsschema:
       vad: Knyt an till förra passet. Säg titeln och ställ frågan Före läsningen, som får eleverna att tänka på det de behöver veta. Förklara ett eller två ord som texten kräver, men aldrig ett ord som avslöjar svaret. Säg vilket tankesteg och vilket samtalsdrag ni ska öva.
     - tid: 5–13 min
       fas: Läs och tänk
-      vad: I pass 1 läser du högt, stannar vid stoppet, sätter ett frågetecken i marginalen och tänker högt med tankestegen. Eleverna stryker under med dig, och du fyller i ledtrådsbladet på tavlan. Sedan frågar du ”Så tänkte jag. Vem tänker annorlunda?”, och eleverna säger sin tanke till en kamrat. I pass 2 läser du högt, eleverna sätter frågetecknet vid stoppet och lägger ett papper över texten nedanför, och paren samtalar vid stoppet innan gruppen tar det. I pass 3 läser ni först ledtrådsbladets fråga. Sedan läser eleverna själva eller i par, sätter ett frågetecken där något inte står och stryker under ledtrådar.
+      vad: I pass 1 läser du högt, stannar vid stoppet, sätter ett frågetecken i marginalen och tänker högt med tankestegen. Eleverna stryker under med dig, och du fyller i ledtrådsbladet på tavlan. Sedan frågar du ”Så tänkte jag. Vem tänker annorlunda?” Du visar veckans samtalsdrag med en elev, och eleverna säger sin tanke till en kamrat. I pass 2 läser du högt, eleverna sätter frågetecknet vid stoppet och lägger ett papper över texten nedanför, och paren samtalar vid stoppet innan gruppen tar det. I pass 3 läser ni först ledtrådsbladets fråga. Sedan läser eleverna själva eller i par, sätter ett frågetecken där något inte står och stryker under ledtrådar.
     - tid: 13–26 min
       fas: Samtala om texten
       vad: Börja med en runda där var och en säger en tanke om texten, gärna något som frågorna inte frågar om. Den som inte är redo säger ”Pass” och får ordet sist. Ta sedan frågorna på raderna, mellan raderna med ”Hur vet du det?” och bortom raderna. I pass 1 säger du före frågorna om svaret står i texten eller om ni listar ut det, och frågan du tänkte högt om tar ni kort, med frågan ”Vem tänker annorlunda?” I pass 2 och 3 frågar du eleverna vid den första frågan om svaret står i texten eller om ni listar ut det. Är ni fler än fyra samtalar paren först om mellan raderna-frågorna. Välkomna olika svar som texten stöder, och ställ sist alltid minst en av textens öppna frågor. I pass 2 fyller paren i ledtrådsbladet medan de samtalar om en mellan raderna-fråga, och i pass 3 fyller varje elev i det medan du skriver det du hör på lyssningsbladet.
@@ -510,12 +526,20 @@ tidsschema:
       vad: Var och en säger vad hen kom fram till om personerna i texten och hur, med sin ledtråd, och vad en kamrat sa som fick hen att tänka nytt.
   varianter:
     - nar: första passet
-      text: Ni säger samtalsreglerna tillsammans innan du skriver startmeningen.
+      text: Ni säger samtalsreglerna tillsammans innan du skriver startmeningen, och du förklarar frågornas tre grupper vid den första frågan.
       delar:
         - { fas: Starten, tid: 0–6 min }
         - { fas: Möt texten, tid: 6–8 min }
         - { fas: Läs och tänk, tid: 8–16 min }
         - { fas: Samtala om texten, tid: 16–26 min }
+        - { fas: Avsluta, tid: 26–30 min }
+    - nar: veckans andra pass i vecka 1
+      text: Du visar parsamtalet med en elev vid stoppet innan paren samtalar.
+      delar:
+        - { fas: Starten, tid: 0–3 min }
+        - { fas: Möt texten, tid: 3–5 min }
+        - { fas: Läs och tänk, tid: 5–15 min }
+        - { fas: Samtala om texten, tid: 15–26 min }
         - { fas: Avsluta, tid: 26–30 min }
   efter: Ni hinner sällan allt, och det gör inget. I varje pass tar ni alltid rundan, mellan raderna-frågorna med veckans slag och en öppen fråga. Frågan på raderna tar ni snabbt i hela gruppen. De andra mellan raderna-frågorna tar ni när tiden räcker, och bortom raderna-frågan och den andra öppna frågan får vänta till Avsluta eller nästa pass. Är ni fler än fyra säger var och en sin tanke i rundan och i Avsluta till sin kamrat, och två säger sin till gruppen. Räcker inte tiden i pass 3, tar gruppen ledtrådsbladets fråga och en fråga till tillsammans. I vecka 1 tar samtalsreglerna och parsamtalet några minuter till, så välj korta texter med svårighet 1 den veckan. Blir gruppen klar tidigt kan eleverna leta efter en ledtråd som ingen har nämnt, pröva en ny riktning med ”Tänk om” eller skriva en egen mellan raderna-fråga till texten.
 steg:
@@ -647,7 +671,7 @@ urval:
     - rubrik: Rätt längd
       text: Texten hinns med i lugn takt på ett pass
 progression:
-  text: Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat. Varje vecka har också ett samtalsdrag, en rad på samtalskortet, som du visar i pass 1 och eleverna prövar i parsamtalet. Dragen kommer i samma ordning på alla nivåer, och en grupp som behöver mer tid tar samma drag en vecka till. Välj texter där frågorna har veckans slag, som översikten under Lärarens sidor visar.
+  text: Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat. Varje vecka har också ett samtalsdrag, en rad på samtalskortet, som du visar i pass 1 och eleverna prövar i parsamtalet. Dragen kommer i samma ordning på alla nivåer, och en grupp som behöver mer tid tar samma drag en vecka till. Välj texter där frågorna har veckans slag, som översikten under Lärarens sidor visar. Planera åtta veckor, och sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna hittar ett ställe själva i bänkboken och visar ledtråden utan h. Tar ni ett drag en vecka till, hinner ni färre av veckorna 6–8, men ta minst en av dem. I de veckorna leder eleverna samtalet och läser i sin egen bänkbok.
   rader:
     - vecka: "1"
       fokus: Eleverna lär sig vad det är att läsa mellan raderna och övar Det står, Jag vet och Alltså tror jag med slagen Känsla och Vem. Samtalsdraget är samtalskortets två första rader, att säga ”Jag tror att” och en ledtråd och att fråga ”Vad tror du?” och ”Hur vet du det?”
@@ -675,7 +699,7 @@ progression:
       taggar: [det-som-menas]
       rubrik: "Stämmer det? och Tänk om"
     - vecka: 6–8
-      fokus: Ni övar slaget Ordet i metodens texter med det slaget och på en sida ur elevens egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag ur kortet och ställer egna frågor om texten
+      fokus: Ni övar slaget Ordet i metodens texter med det slaget i pass 1 och 2, och i pass 3 läser eleverna en sida i sin egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag ur kortet och ställer egna frågor om texten
       roll: En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren. Du följer upp om eleverna stannar själva
       taggar: [ordet]
       rubrik: Slaget Ordet, eleverna leder samtalet
@@ -684,13 +708,14 @@ uppfoljning:
   rader:
     - nar: Före insatsen
       perElev: [5, 8]
-      vad: Varje elev gör kartläggningens text före, enskilt med dig, på fem till åtta minuter. Läs texten högt först på Lättläst och för den som avkodar mödosamt.
+      vad: Varje elev gör kartläggningens text före, enskilt med dig, på fem till åtta minuter. Läs texten högt först på Lättläst och för den som avkodar mödosamt. Klarar eleven inte fråga 1, är nivån för svår, och eleven gör kartläggningen på nivån under. Välj gruppens nivå så att alla klarar fråga 1, som kravet Lagom nivå säger.
       tid: före
     - nar: Varje vecka
       vad: Du läser lyssningsbladet och frågetecknen i pass 3, också vem som byggde vidare. Nästa vecka visar du ett tankesteg efter det du hörde. Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna.
       tid: varje vecka
     - nar: Efter sex till åtta veckor
-      vad: Varje elev gör kartläggningens text efter, som är lika svår. Jämför poängen i Kartläggningens protokoll, och lyssningsbladen med vecka 1 och 2. Se också om eleven sätter frågetecken i sin bänkbok.
+      perElev: [5, 8]
+      vad: Varje elev gör kartläggningens text efter, som är lika svår, enskilt med dig på fem till åtta minuter. Jämför poängen i Kartläggningens protokoll, och lyssningsbladen med vecka 1 och 2. Titta också i elevens bänkbok. Har hen satt lappar där något inte står också utanför passen, och kan hen säga ledtråden vid en av dem? Får eleven två poäng utan h på både fråga 2 och fråga 3, och står ledtråden utan h på det sista lyssningsbladet, är eleven klar med insatsen. Har eleven fler poäng än före men är inte klar, går eleven en period till, och du börjar med det tankesteg som oftast saknades på lyssningsbladet. Har eleven lika många poäng som före eller färre, tar du upp det med elevhälsan och ser efter om eleven först behöver träna avkodningen eller ordförrådet, till exempel i TIL i grupp eller Ordverkstad i grupp.
       tid: efter
 plan:
   nivaval:
@@ -732,9 +757,42 @@ plan:
     - nar: veckans andra
       kort: "Paren samtalar"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Eleverna] }
+    # Pass 3: i vecka 6–8 läser eleverna i sin egen bänkbok (passgenomgången 2026-10-26, P1), så kolumnerna Så läser ni och
+    # Eleverna gäller vecka 1–5. Raden utan veckor har namnet och Du, som gäller alla veckor. I vecka 6–8 står tabellen
+    # Bänkboken i förberedelsen och i stället för Möt texten, Läs och tänk och Samtala om texten.
+    - nar: veckans tredje pass i vecka 6–8
+      kort: "Eleverna läser i bänkboken"
+      text: "I vecka 6–8 läser eleverna en sida i sin egen bänkbok i pass 3, i stället för metodens text. Du förbereder inget stopp, eftersom eleven ska hitta sitt ställe själv. I det första passet med bänkboken lyssnar du på alla."
+    - nar: veckans tredje pass i vecka 6–8
+      del: Före passet
+      istallet: true
+      text: "Be eleverna ta med bänkboken, och lägg fram post-it-lappar och ett ledtrådsblad till varje elev. Bestäm paren och vem som är A och B, och skriv startmeningen."
+    - nar: veckans tredje pass i vecka 6–8
+      del: Möt texten
+      istallet: true
+      text: "Knyt an till förra passet."
+      ur: { tabell: "Bänkboken: pass 3 i vecka 6–8", rad: Möt texten }
+    - nar: veckans tredje pass i vecka 6–8
+      del: Läs och tänk
+      istallet: true
+      ur: { tabell: "Bänkboken: pass 3 i vecka 6–8", rad: Läs och tänk }
+    - nar: veckans tredje pass i vecka 6–8
+      del: Samtala om texten
+      istallet: true
+      ur: { tabell: "Bänkboken: pass 3 i vecka 6–8", rad: Samtala om texten }
+    - nar: veckans tredje pass i vecka 1–5
+      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Så läser ni, Eleverna] }
     - nar: veckans tredje
       kort: "Eleverna läser själva"
-      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Så läser ni, Du, Eleverna] }
+      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Du] }
+  veckoval:
+    text: "Planera åtta veckor, och sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna hittar ett ställe själva i bänkboken och visar ledtråden utan h. Tar ni ett drag en vecka till, hinner ni färre av veckorna 6–8, men ta minst en av dem."
+    mer: Progression över insatsperioden
+    forval: 8
+  utvardering:
+    - "Får eleven två poäng utan h på både fråga 2 och fråga 3, och står ledtråden utan h på det sista lyssningsbladet, är eleven klar med insatsen."
+    - "Har eleven fler poäng än före men är inte klar, går eleven en period till, och du börjar med det tankesteg som oftast saknades på lyssningsbladet."
+    - "Har eleven lika många poäng som före eller färre, tar du upp det med elevhälsan och ser efter om eleven först behöver träna avkodningen eller ordförrådet, till exempel i TIL i grupp eller Ordverkstad i grupp."
 mal:
   overgripande: "kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten."
   punkter:
@@ -815,7 +873,7 @@ ramar:
     # >>> texterna: node build/texter.mjs textsamtal-i-grupp --yaml skriver allt härifrån
     - rubrik: Startmeningarna
       text:
-        - "Det finns 24 meningar för varje nivå, en för varje pass. Välj en mening med veckans slag. Meningarna är till dig, och eleverna ser dem bara på tavlan."
+        - "Det finns 24 meningar för varje nivå, en för varje pass. Välj en mening med veckans slag. Är de slut, tar du en med ett slag som gruppen behöver öva mer. Meningarna är till dig, och eleverna ser dem bara på tavlan."
       delar:
         - rubrik: Till läraren
           falt:
@@ -1051,7 +1109,7 @@ ramar:
       delar:
         - rubrik: Så väljer du text
           falt:
-            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet, så i vecka 6–8 tar ni också en sida ur elevens egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
+            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet till pass 1 och 2 i vecka 6–8. Är de slut, tar du en text med ett slag som gruppen behöver öva mer. I pass 3 läser eleverna i sin egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
             - { rubrik: "Svårigheten", text: "Börja med svårighet 1, och ta 2 eller 3 när gruppen klarar slutsatsen med mindre stöd. En text med vändning får eleverna att tänka om mot slutet. En känslig text har en rad om det på sin sida. Läs raden före passet, och ta inte två texter om samma slags svåra sak samma vecka." }
             - { rubrik: "Nivåerna", text: "Välj nivå efter gruppen, och blanda gärna, till exempel en text på Lättläst när ni övar ett nytt tankesteg och en på Mellan när det sitter. Läser äldre elever på Lättläst, börja med Handskarna i vecka 1, fast den har svårighet 2, och ta Den nya luggen och Högst upp när veckans slag passar. Av texterna 16–25 passar fyra också äldre elever: Skeden, Längst in i frysen, Över häcken och Ingen såg. Ta gärna en text från Mellan i pass 1 och 2, när du läser högt." }
     - rubrik: "Lärarens sida: Lättläst, text 1, Staketet"
@@ -1965,7 +2023,7 @@ ramar:
       delar:
         - rubrik: Så väljer du text
           falt:
-            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet, så i vecka 6–8 tar ni också en sida ur elevens egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
+            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet till pass 1 och 2 i vecka 6–8. Är de slut, tar du en text med ett slag som gruppen behöver öva mer. I pass 3 läser eleverna i sin egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
             - { rubrik: "Svårigheten", text: "Börja med svårighet 1, och ta 2 eller 3 när gruppen klarar slutsatsen med mindre stöd. En text med vändning får eleverna att tänka om mot slutet. En känslig text har en rad om det på sin sida. Läs raden före passet, och ta inte två texter om samma slags svåra sak samma vecka." }
             - { rubrik: "Nivåerna", text: "Välj nivå efter gruppen, och blanda gärna, till exempel en text på Lättläst när ni övar ett nytt tankesteg och en på Mellan när det sitter." }
     - rubrik: "Lärarens sida: Mellan, text 1, Längst bak"
@@ -2956,7 +3014,7 @@ ramar:
       delar:
         - rubrik: Så väljer du text
           falt:
-            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet, så i vecka 6–8 tar ni också en sida ur elevens egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
+            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet till pass 1 och 2 i vecka 6–8. Är de slut, tar du en text med ett slag som gruppen behöver öva mer. I pass 3 läser eleverna i sin egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
             - { rubrik: "Svårigheten", text: "Börja med svårighet 1, och ta 2 eller 3 när gruppen klarar slutsatsen med mindre stöd. En text med vändning får eleverna att tänka om mot slutet. En känslig text har en rad om det på sin sida. Läs raden före passet, och ta inte två texter om samma slags svåra sak samma vecka." }
             - { rubrik: "Nivåerna", text: "Välj nivå efter gruppen, och blanda gärna, till exempel en text på Mellan när ni övar ett nytt tankesteg och en på Avancerad när det sitter." }
     - rubrik: "Lärarens sida: Avancerad, text 1, Kassan"
@@ -4127,6 +4185,14 @@ lathund:
       - Lyssningsbladet i pass 3
       - Tavla för startmeningen
     varjePass: Du skriver på passets rad i Veckans cykel före och efter varje pass.
+    # Lathundens kortare uppföljning: metodens rader med beslutet efter perioden ryms inte på sidan 4 (2026-10-26).
+    uppfoljning:
+      - nar: "Före insatsen"
+        vad: "Kartläggningens text, enskilt med dig, fem till åtta minuter per elev. Klarar eleven inte fråga 1, tar ni nivån under."
+      - nar: "Varje vecka"
+        vad: "Läs lyssningsbladet och frågetecknen i pass 3. Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna."
+      - nar: "Efter sex till åtta veckor"
+        vad: "Kartläggningens text efter. Får eleven två poäng utan h på fråga 2 och 3, och står ledtråden utan h på lyssningsbladet, är hen klar. Har hen fler poäng än före, går hen en period till. Annars tar du upp det med elevhälsan."
 film:
   sekunder: 29.94
   beskrivning: "I pass 1 stannar läraren vid stoppet. Läraren säger: ”Vänta, här står inte vem som tog bullarna.” Läraren stryker under två ledtrådar. Läraren säger: ”Det står mormors stol, och hans händer är rena. Jag vet att den som äter bullar får kladdiga fingrar, och att man sätter sig där man äter. Alltså tror jag att det inte var lillebror.” Läraren läser vidare. Eleven säger: ”Jag tror att det var mormor! Hon torkar munnen.”"

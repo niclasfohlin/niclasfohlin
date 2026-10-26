@@ -22,7 +22,6 @@ taggar:
 format:
   - liten grupp
   - par
-  - helklass
 tid: 30 minuter per pass, två till tre pass i veckan
 period: Sex till åtta veckor
 grupp: Två till åtta elever
@@ -48,7 +47,7 @@ centrala:
 inledning:
   - Problemlösning i grupp är en lärarledd insats för två till åtta elever i åk 4–9 som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Varje pass har ett problem. På bordet ligger problemets sida med en svartvit bild och kortet Våra sätt, som har sätt att lösa problem och frågor som paren ställer sig. Innan någon räknar visar paren problemet med en bild, en tabell eller en tallinje på bladet Vår lösning eller en miniwhiteboard, eller så bygger de det med material.
   - "Passet är ett samtal i fem delar: Förstå, Planera, Lösa, Jämföra och Avsluta. I Förstå läser läraren problemet högt, paren berättar det för varandra, och gruppen ringar in frågan och säger vad den vet och vad den ska ta reda på. I Planera föreslår gruppen sätt att visa problemet, och i Lösa prövar paren olika sätt medan läraren går runt och frågar i stället för att visa. I Jämföra lägger läraren fram bladet Två lösningar, med två färdiga lösningar på samma problem. Gruppen ser vad som är lika i dem, och sedan lägger ett eller två par sina lösningar bredvid. I Avsluta sätter gruppen en bock på kortet Våra sätt vid det sätt som fungerade. Skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Att modellera är att tänka högt om hur man tar sig an problemet, som ”Jag vill rita det här för att se det framför mig”."
-  - Metoden har problem på tre nivåer, Bas nära åk 4–5, Medel nära åk 6–7 och Avancerat nära åk 8–9. Till varje problem finns lärarens sida och bladet Två lösningar. Lärarens sida säger vad gruppen ringar in och lyfter ut, vad du säger när paret kör fast och vad svaret är. Metodens problem på nivån räcker till de första tre till fem veckorna. Fler problem finns på sidan Ta fram ett matteproblem, och du kan också välja problem ur källorna och förbereda dem på samma sätt. Över veckorna tar eleverna över allt mer av arbetet, från att du tänker högt till att de leder delar av passet själva och använder sätten i klassens matematik.
+  - Metoden har problem på tre nivåer, Bas nära åk 4–5, Medel nära åk 6–7 och Avancerat nära åk 8–9. Till varje problem finns lärarens sida och bladet Två lösningar. Lärarens sida säger vad gruppen ringar in och lyfter ut, vad du säger när paret kör fast och vad svaret är. Metodens problem på nivån räcker till de första tre till fem veckorna. Fler problem finns på sidan Ta fram ett matteproblem, och du kan också välja problem ur källorna och förbereda dem på samma sätt. Över veckorna tar eleverna över allt mer av arbetet, från att du tänker högt till att var och en börjar själv och använder sätten i klassens matematik.
 upplagg:
   rubrik: Så fungerar insatsen
   text: "Två till åtta elever träffas två till tre gånger i veckan i sex till åtta veckor, 30 minuter per pass. Varje pass har ett problem och fem delar: Förstå, Planera, Lösa, Jämföra och Avsluta. Gruppen förstår problemet och föreslår sätt att visa det innan någon räknar, paren prövar, och i Jämföra lägger gruppen sina lösningar bredvid bladet Två lösningar. Metoden har problem på nivåerna Bas, Medel och Avancerat, med en sida för läraren till varje. Kartläggningen före och efter visar om eleven kan återberätta problemet, visa det, lösa det och pröva ett svar."
@@ -119,7 +118,7 @@ tabeller:
         - ”Ni har bra skäl för er lösning. Ni har övertygat mig.”
   - rubrik: Så skiljer sig nivåerna
     plats: efter-urval
-    text: Nivåerna följer kursplanens centrala innehåll och ligger nära Kängurutävlingens klasser, som Ecolier och Benjamin. Välj nivå efter vad gruppen kan läsa och räkna.
+    text: Nivåerna följer kursplanens centrala innehåll och ligger nära Kängurutävlingens klasser, som Ecolier och Benjamin. Välj nivå efter vad gruppen kan läsa och räkna. Vet eleven hur uppgift 3 i kartläggningen ska lösas men kan inte räkna talen, gör du kartläggningen på nivån under. Landar eleverna på olika nivåer, tar gruppen den lägre, så att alla kan räkna talen.
     kolumner:
       - Det som skiljer
       - Bas
@@ -160,7 +159,7 @@ tabeller:
       - - |-
           Gradvis överlämnande av ansvar
           (Fisher och Frey, 2008)
-        - "Läraren modellerar först, och eleverna leder efter hand fler delar och använder rutinen i ordinarie uppgifter."
+        - "Läraren modellerar först, och eleverna tar efter hand över frågorna och använder rutinen i ordinarie uppgifter."
       - - |-
           Reciprok undervisning
           (Palincsar och Brown, 1984)
@@ -212,12 +211,13 @@ tidsschema:
       vad: "I par, på bladet Vår lösning. I ledet Du gör själv börjar var och en själv i två minuter innan paret arbetar vidare. Fråga först och lämna paren i gång. Halvvägs säger du två sätt du har sett, utan namn och svar, och väljer lösningar till Jämföra. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
     - tid: 21–28 min
       fas: Jämföra
-      vad: "Gemensamt igen, med bladet Två lösningar. Dela ut bladet med B täckt och fråga vad A gör. Visa B och ställ fråga 3. De valda paren visar sina lösningar, och sist säger ni felet och idén i en mening. Lärarens sida: Jämför · Fel eller osäker."
+      vad: "Gemensamt igen, med bladet Två lösningar. Dela ut bladet med B täckt, läs A högt och fråga vad A gör. Visa B, läs det högt och ställ fråga 3. De valda paren visar sina lösningar. Räcker inte tiden, visar bara ett par sin lösning. Sist säger ni felet och idén i en mening. Lärarens sida: Jämför · Fel eller osäker."
     - tid: 28–30 min
       fas: Avsluta
       vad: Gemensamt igen, med kortet Våra sätt. Sätt ord på sättet som fungerade, och gruppen bockar för det på kortet.
-  # Första passet: Planera tar längre tid, när du visar kortet Våra sätt och bladen (riggen 2026-10-26, på sajtens fråga i
-  # återkopplingen på omgång 3). Fem minuter till Planera, och Lösa är fortfarande längst.
+  # Första passet: Planera tar längre tid, när du visar kortet Våra sätt och bladet Vår lösning (riggen 2026-10-26, på
+  # sajtens fråga i återkopplingen på omgång 3). Fem minuter till Planera, och Lösa är fortfarande längst. Bladet Två
+  # lösningar visas första gången i Jämföra, så att paren inte ser A och B innan de har prövat (passgenomgången samma kväll).
   varianter:
     - nar: första passet
       delar:
@@ -339,7 +339,7 @@ urval:
     - rubrik: Två sätt
       text: Går att lösa på två sätt, med bild, tabell, tallinje eller material
 progression:
-  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden Jag gör, Vi gör, Ni gör tillsammans och Du gör själv. Byt led när noteringarna visar att gruppen klarar ledet med lite stöd. I första passet visar du kortet Våra sätt och bladen Vår lösning och Två lösningar, och Planera tar längre tid. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med.
+  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden Jag gör, Vi gör, Ni gör tillsammans och Du gör själv. Byt led när noteringarna visar att gruppen klarar ledet med lite stöd. Med tre pass i veckan räcker sex veckor, och med två pass i veckan tar du åtta, så att gruppen får ungefär lika många pass. Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan. I första passet tar Planera längre tid, eftersom du visar kortet Våra sätt och bladet Vår lösning. Bladet Två lösningar visar du första gången i Jämföra, när du delar ut det med B täckt. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med.
   rader:
     - vecka: 1–2
       led: Jag gör
@@ -359,7 +359,7 @@ progression:
       fokus: Var och en börjar själv i två minuter innan paret arbetar vidare, gärna med problem ur klassens läromedel.
       roll: Läraren ger klassläraren en kopia av kortet Våra sätt, med gruppens bockar, och följer upp sätten i klassens matematik.
 uppfoljning:
-  text: Du behöver veta om passen ger effekt, och det räcker inte att de har blivit av. Kartläggningen har två blad per nivå, ett A4 före och ett efter. Båda bladen har samma fem uppgifter, och problemen är byggda på samma sätt. Kartläggningen före gör du innan det första passet, omkring tio minuter per elev eller par. Spara parens blad Vår lösning, eftersom bladen visar hur paren tänker.
+  text: Du behöver veta om passen ger effekt, och det räcker inte att de har blivit av. Kartläggningen har två blad per nivå, ett A4 före och ett efter. Båda bladen har samma fem uppgifter, och problemen är byggda på samma sätt. Kartläggningen före gör du innan det första passet, omkring tio minuter per elev eller par. Spara parens blad Vår lösning, eftersom bladen visar hur paren tänker. Klarar eleven uppgift 1 till 4 utan hjälp i kartläggningen efter, avslutar du insatsen för hen. Behöver hen mindre hjälp än före, men fortfarande hjälp i någon av uppgifterna, fortsätter hen en period till med nya problem på samma nivå, och ni börjar i ledet Vi gör. Är det talen som hindrar, tar hen först en insats i räkningen, som De fyra räknesätten i grupp eller Bråkkurs i grupp. Har inget ändrats, tar du upp det med elevhälsan.
   rader:
     - nar: Före insatsen
       tid: "före"
@@ -371,7 +371,7 @@ uppfoljning:
     - nar: Efter sex till åtta veckor
       tid: "efter"
       perElev: 10
-      vad: Eleven löser bladet Kartläggning efter, och du jämför de två protokollen.
+      vad: Eleven löser bladet Kartläggning efter på den nivå där hen landade i kartläggningen före, och du jämför de två protokollen.
 plan:
   utan:
     - "Remsan visar hur de 30 minuterna fördelas mellan passets delar och när gruppen arbetar gemensamt och i par."
@@ -379,10 +379,22 @@ plan:
   nivaval:
     text: "Metoden har problem på tre nivåer, Bas nära åk 4–5, Medel nära åk 6–7 och Avancerat nära åk 8–9. Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
     mer: Så skiljer sig nivåerna
+  # Periodens längd efter antalet pass i veckan, och Du gör själv i den sista veckan när perioden är kortare än åtta
+  # veckor. Förvalet är åtta veckor, eftersom planens förval är två pass i veckan (passgenomgången 2026-10-26).
+  veckoval:
+    text: "Med tre pass i veckan räcker sex veckor, och med två pass i veckan tar du åtta, så att gruppen får ungefär lika många pass. Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan."
+    mer: Progression över insatsperioden
+    forval: 8
   passen:
+    # Första passet: det som tar Planeras extra minuter, och bladet Två lösningar först i Jämföra (passgenomgången
+    # 2026-10-26: i Planera hade paren sett A och B innan de prövade).
     - nar: första passet
       kort: "Första passet"
-      text: "I första passet visar du kortet Våra sätt och bladen Vår lösning och Två lösningar, och Planera tar längre tid."
+      del: Planera
+      text: "I första passet tar Planera längre tid, eftersom du visar kortet Våra sätt och bladet Vår lösning."
+    - nar: första passet
+      del: Jämföra
+      text: "Bladet Två lösningar visar du första gången i Jämföra, när du delar ut det med B täckt."
     # Nivåns tio problem räcker till pass 10. Sedan säger passet varifrån nästa problem kommer och hur det förbereds
     # (sajtens rimlighet 2026-10-26, svar-problemlosning-i-grupp.md).
     - nar: pass 11 till det sista
@@ -392,6 +404,13 @@ plan:
     - "Kartläggningen har två blad per nivå, ett A4 före och ett efter."
     - "Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
   upprepa: "Byt led när noteringarna visar att gruppen klarar ledet med lite stöd."
+  # Beslutet efter kartläggningen efter, ordagrant ur uppföljningens text (passgenomgången 2026-10-26). Den andra
+  # genomgången samma kväll: var den nya perioden börjar, och att talen går först.
+  utvardering:
+    - "Klarar eleven uppgift 1 till 4 utan hjälp i kartläggningen efter, avslutar du insatsen för hen."
+    - "Behöver hen mindre hjälp än före, men fortfarande hjälp i någon av uppgifterna, fortsätter hen en period till med nya problem på samma nivå, och ni börjar i ledet Vi gör."
+    - "Är det talen som hindrar, tar hen först en insats i räkningen, som De fyra räknesätten i grupp eller Bråkkurs i grupp."
+    - "Har inget ändrats, tar du upp det med elevhälsan."
 mal:
   overgripande: "kunna förstå ett problem i text, visa det och kontrollera att svaret är rimligt."
   punkter:
@@ -4069,7 +4088,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: Läs problemet högt för en elev i taget, eller två och två. Eleven får svara på uppgift 1 och 5 muntligt. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3.
+              text: Läs problemet högt för en elev i taget, eller två och två. Eleven får svara på uppgift 1 och 5 muntligt. Läser du för två, tar du uppgift 1 och 5 med en elev i taget, medan den andra skriver. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3.
             - rubrik: Hjälpen
               text: Skriv var eleven körde fast, om det var när hen skulle tolka, börja, se sambandet, räkna eller kontrollera, och vilket steg i stödtrappan som hjälpte.
             - rubrik: Bilden och talen

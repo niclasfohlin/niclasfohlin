@@ -81,7 +81,7 @@ tidsschema:
       vad: Välj en bok på rätt nivå till varje elev. Bläddra igenom den och se vilka ord som kan bli svåra. Skriv bokens titel i lässchemat.
     - tid: 0–4 min
       fas: Återkoppla
-      vad: Varje elev läser upp sina tre favoritmeningar från gårdagens bok. Du berömmer något konkret och signerar lässchemat.
+      vad: Varje elev läser upp sina tre favoritmeningar från gårdagens bok. Du berömmer något konkret och signerar lässchemat. Har en elev inte läst hemma, läser hen en sida ur gårdagens bok för dig i stället.
     - tid: 4–8 min
       fas: Förbered
       vad: "Bild- och rubrikvandring i varje elevs bok, en i taget och kort. Prata om bilderna, gissa vad som händer och red ut två eller tre ord som kommer i texten. Med kapitelbok: återberätta gårdagens kapitel kort och titta på dagens."
@@ -181,7 +181,7 @@ roll:
 urval:
   rubrik: Var hittar du böckerna?
   text:
-    - Böckerna behöver du inte leta länge efter. Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. För elever i årskurs 4–6 behöver innehållet passa åldern även när texten är lätt, och där fungerar lättlästa böcker från förlag som Nypon och Hegas samt material med flera nivåer som Mellan raderna. Boken ska vara lätt nog att eleven läser de allra flesta orden rätt. Det är omläsningen som ger flyt, och en elev som fastnar på vart femte ord läser inte om, den kämpar.
+    - Böckerna behöver du inte leta länge efter. Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. För elever i årskurs 4–6 behöver innehållet passa åldern även när texten är lätt, och där fungerar lättlästa böcker från förlag som Nypon och Hegas samt material med flera nivåer som Mellan raderna. Boken ska vara lätt nog att eleven läser de allra flesta orden rätt. Det är omläsningen som ger flyt, och en elev som fastnar på vart femte ord läser inte om, den kämpar. Före första passet låter du eleven läsa en sida högt ur böcker på olika nivåer. Elevens nivå är den högsta där hen klarar minst nio ord av tio. Den första boken och texten i förekollen tar du på den nivån.
   kravText: "Välj en text per pass som uppfyller tre krav:"
   krav:
     - rubrik: Rätt nivå
@@ -192,7 +192,7 @@ urval:
       text: Meningar som eleven kan vilja skriva av och läsa upp
 hem:
   text:
-    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda står i Materialet, på varsitt A4 att skriva ut till varje elev. Om läsningen hemma uteblir flera dagar i rad: ring hem tidigt, innan rutinen hunnit brytas. Eleven läser för andra varje dag, favoritmeningarna för gruppen och boken för en vuxen hemma. Utveckla högläsning är ett A4 på metodens sida med fem strategier för att läsa högt så att den som lyssnar förstår, och du kan visa en av dem på mötet med vårdnadshavarna."
+    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda står i Materialet, på varsitt A4 att skriva ut till varje elev. Om läsningen hemma uteblir flera dagar i rad: ring hem tidigt, innan rutinen hunnit brytas. Kommer läsningen hemma inte i gång efter samtalet, låt eleven läsa boken för en annan vuxen i skolan samma dag. Eleven skriver favoritmeningarna där, och den vuxne skriver sina initialer i lässchemat. Eleven läser för andra varje dag, favoritmeningarna för gruppen och boken för en vuxen hemma. Utveckla högläsning är ett A4 på metodens sida med fem strategier för att läsa högt så att den som lyssnar förstår, och du kan visa en av dem på mötet med vårdnadshavarna."
   kontrakt:
     rubrik: Kontrakt för TIL (Tidig Intensiv Läsning)
     inledning: "TIL är en insats som stärker elevens läsning genom att samma bok läses två gånger samma dag: i skolan med läraren och hemma med en vuxen. Insatsen pågår vanligtvis fyra dagar i veckan i sex till tio veckor. I elevens plastmapp finns skrivbok, lässchema och dagens text, och mappen följer med hem varje dag."
@@ -214,7 +214,7 @@ hem:
       - Vårdnadshavare
     rader: 16
 progression:
-  text: Ansvaret flyttas gradvis till eleven. Då blir passen en sammanhängande insats och rutinen hemma blir en vana.
+  text: Ansvaret flyttas gradvis till eleven. Då blir passen en sammanhängande insats och rutinen hemma blir en vana. Planera åtta veckor, så att eleven hinner ta över ansvaret i vecka 6–8. Efterkollen avgör om ni fortsätter med vecka 9–10.
   rader:
     - vecka: 1–2
       rubrik: "Rutinen i skolan och hemma"
@@ -230,13 +230,14 @@ progression:
       roll: Läraren lyssnar, ger återkoppling på flyt och läsmelodi och följer upp nivån.
     - vecka: 9–10 vid behov
       rubrik: "Längre texter ur klassens läsning"
-      fokus: Eleven läser längre texter och böcker ur klassens ordinarie läsning.
-      roll: Läraren följer upp om läsningen överförs till klassrummet och planerar avslutet med hemmet.
+      fokus: Eleven läser längre texter och böcker på sin nivå ur klassens ordinarie läsning.
+      roll: Läraren följer upp om läsningen överförs till klassrummet.
 uppfoljning:
-  text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll.
+  text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll. Läser eleven texten i efterkollen med flyt och läser om meningen själv när det blir fel, avslutar du insatsen och berättar för hemmet vad efterkollen visade. Har eleven kommit framåt men inte hela vägen efter åtta veckor, fortsätter ni med vecka 9–10 och gör efterkollen igen. Om de flesta böckerna har lästs två gånger men eleven inte har kommit framåt, eller inte hela vägen efter vecka 10, tar du upp det med elevhälsan. Har de flesta böckerna bara lästs en gång, ordnar du den andra läsningen först och börjar en ny period på åtta veckor.
   rader:
     - nar: Före insatsen
       tid: "före"
+      perElev: [5, 10]
       vad: Eleven läser en kort text på sin nivå högt i en minut. Notera antal rätt lästa ord, vilka ord som fastnar och om eleven läser om när det blir fel. Spara texten.
     - nar: Efter 6–10 veckor
       tid: "efter"
@@ -257,9 +258,20 @@ plan:
       text: "Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."
   fore:
     - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen."
+    - "Före första passet låter du eleven läsa en sida högt ur böcker på olika nivåer. Elevens nivå är den högsta där hen klarar minst nio ord av tio. Den första boken och texten i förekollen tar du på den nivån."
   justera:
     - "Byt till en lättare bok när det blir många fel."
     - "Uteblir läsningen hemma flera dagar i rad, ring hem tidigt."
+    - "Kommer läsningen hemma inte i gång efter samtalet, låt eleven läsa boken för en annan vuxen i skolan samma dag. Eleven skriver favoritmeningarna där, och den vuxne skriver sina initialer i lässchemat."
+  veckoval:
+    text: "Planera åtta veckor, så att eleven hinner ta över ansvaret i vecka 6–8. Efterkollen avgör om ni fortsätter med vecka 9–10."
+    mer: Progression över insatsperioden
+    forval: 8
+  utvardering:
+    - "Läser eleven texten i efterkollen med flyt och läser om meningen själv när det blir fel, avslutar du insatsen och berättar för hemmet vad efterkollen visade."
+    - "Har eleven kommit framåt men inte hela vägen efter åtta veckor, fortsätter ni med vecka 9–10 och gör efterkollen igen."
+    - "Om de flesta böckerna har lästs två gånger men eleven inte har kommit framåt, eller inte hela vägen efter vecka 10, tar du upp det med elevhälsan."
+    - "Har de flesta böckerna bara lästs en gång, ordnar du den andra läsningen först och börjar en ny period på åtta veckor."
 
 mal:
   overgripande: "kunna läsa en bok på sin nivå med flyt och läsa om meningen vid fel."

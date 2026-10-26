@@ -19,7 +19,6 @@ taggar:
 format:
   - liten grupp
   - par
-  - helklass
 tid: 60 minuter per pass, två till tre pass i veckan
 period: Åtta veckor
 grupp: Två till tio elever
@@ -80,13 +79,13 @@ tidsschema:
       vad: Låt en elev läsa förra lärdomen och gör en uppgift som visar den. I det första passet bygger ni i stället ett tal ur kartläggningen. Säg ett tal som alla lägger med sifferkorten, drar isär och bygger, och låt dem växla. I vecka 5–8 bygger de med multilink, och korten är med i vecka 6–7. Ge sedan fyra till sex talfakta muntligt, låt eleverna tänka tyst och skriv en elevs tanke som en uträkning. Den dag ni tar upp läxan gör ni det i stället för talfakta.
     - tid: 8–18 min
       fas: Genomgången
-      vad: Berätta passets första uppgift som en kort händelse, gör ett överslag och räkna sedan uppgiften framför eleverna med materialet och skriften bredvid. Säg allt du gör och fråga gruppen under tiden. Visa sist veckans vanliga fel.
+      vad: Berätta passets första uppgift som en kort händelse, gör ett överslag och räkna sedan uppgiften framför eleverna med materialet och skriften bredvid. Säg allt du gör och fråga gruppen under tiden. Visa sist veckans vanliga fel. I ett tredje pass ligger materialet kvar i asken, och du säger vad som händer i materialet medan du skriver.
     - tid: 18–30 min
       fas: Åt andra hållet
-      vad: Räkna samma tal åt andra hållet och led ett handgrepp i taget. Paren byter roller till nästa uppgift med samma tal, som 85 − 57, så att båda har byggt. Gör en uppgift till om någon behöver mer än en påminnelse.
+      vad: Räkna samma tal åt andra hållet och led ett handgrepp i taget. Paren byter roller till nästa uppgift med samma tal, som 85 − 57, så att båda har byggt. Gör en uppgift till om någon behöver mer än en påminnelse. I ett tredje pass säger den ena i paret vad som händer i materialet, och den andra skriver.
     - tid: 30–52 min
       fas: Bladet
-      vad: Låt eleven räkna vidare på veckans blad. Gå runt, stanna högst en halv minut hos varje elev och be eleven berätta vad hen gör. Med fler än sex elever börjar du hos de par som tvekade.
+      vad: Låt eleven räkna vidare på veckans blad. Gå runt, stanna högst en halv minut hos varje elev och be eleven berätta vad hen gör. Med fler än sex elever börjar du hos de par som tvekade. I ett tredje pass börjar du med det som du antecknade att du skulle visa igen.
     - tid: 52–60 min
       fas: Lärdomen
       vad: Visa båda uträkningarna och fråga vilket tal som är helheten. I addition och subtraktion är de andra två talen delarna, och i multiplikation och division antalet rader och antalet i varje rad. Paren säger en mening, en elev säger den till gruppen, och du skriver den på väggplanschen. Alla skriver lärdomen i Mina lärdomar.
@@ -301,7 +300,7 @@ tabeller:
         - "22/4, 26/3, 23/5\nDivision 2 och repetition"
         - "83/4, 74/6, 95/4\nDivision 4 och Multiplikation 3"
         - "618/6, 832/8, 1 254/6\nDivision 4 och Multiplikation 5, sedan Division 5"
-    not: I vecka 4 är uppgiften en subtraktion, och åt andra hållet blir den en addition. I vecka 7 är uppgiften i pass 2 en division. På Medel och Avancerad visar du kort division en gång till innan eleverna leder uträkningen, och Bas räknar med rektangeln. I vecka 8 är uppgiften en division, och åt andra hållet multiplicerar ni och lägger till resten, som 83/4 = 20 rest 3 och 4 · 20 + 3 = 83. Repetition är uppgifter ur bladen från tidigare veckor, och i vecka 8 räknar ni en addition och en subtraktion i uppvärmningen. Ett bygge med multilink har högst omkring 100 kuber, så att kuberna räcker, och större tal ritar ni. I addition och subtraktion ritar ni tiobasen med rutor, streck och prickar i veckans andra pass och när talen är för stora för materialet. I vecka 5 är en ruta på talrutan en kub. Från vecka 6 ritar eleven också en tom rektangel utan rutor, med talen vid sidorna.
+    not: I vecka 4 är uppgiften en subtraktion, och åt andra hållet blir den en addition. I vecka 7 är uppgiften i pass 2 en division. På Medel och Avancerad visar du kort division en gång till innan eleverna leder uträkningen, och Bas räknar med rektangeln. I vecka 8 är uppgiften en division, och åt andra hållet multiplicerar ni och lägger till resten, som 83/4 = 20 rest 3 och 4 · 20 + 3 = 83. Repetition är uppgifter ur bladen från tidigare veckor. I vecka 8 räknar ni en addition och en subtraktion i uppvärmningen i varje pass, i stället för att bygga ett tal. Ett bygge med multilink har högst omkring 100 kuber, så att kuberna räcker, och större tal ritar ni. I addition och subtraktion ritar ni tiobasen med rutor, streck och prickar i veckans andra pass och när talen är för stora för materialet. I vecka 5 är en ruta på talrutan en kub. Från vecka 6 ritar eleven också en tom rektangel utan rutor, med talen vid sidorna.
 
 exempel:
   rubrik: "Exempel: så går ett pass till"
@@ -394,10 +393,11 @@ progression:
       roll: Eleverna leder uträkningen åt andra hållet och väljer sätt
 
 uppfoljning:
-  text: Kartläggningen visar vad eleven kan räkna och förklara, före och efter. Mina lärdomar visar elevens ord pass för pass.
+  text: Kartläggningen visar vad eleven kan räkna och förklara, före och efter. Mina lärdomar visar elevens ord pass för pass. Räknar eleven sju eller åtta rätt på bladet efter kursen och har R+ på minst fyra av de sex uppgifterna i protokollet, är eleven klar med kursen. Räknar eleven färre än fyra rätt, eller visar protokollet ingen skillnad mot före kursen, tar du upp det med elevhälsan. På Bas kan eleven börja i Antalsuppfattning i grupp. Annars fortsätter eleven en period till i en grupp på samma nivå, med nya tal i de veckor där det inte sitter. Addition och subtraktion är vecka 1–4, och multiplikation och division vecka 5–8. Välj de nya talen efter de tre kraven för passets tal, ta fler uppgifter ur gruppens matematikbok och gör samma kartläggning efter perioden.
   rader:
     - nar: Före kursen
       tid: "före"
+      perElev: 30
       vad: Kartläggningen. Eleven räknar åtta uppgifter på sin nivå och visar och förklarar sex uppgifter. Du skriver vad eleven gör och säger i lärarens protokoll.
     - nar: Efter varje pass
       tid: "varje pass"
@@ -407,7 +407,8 @@ uppfoljning:
       vad: Den blandade repetitionen visar om addition och subtraktion sitter.
     - nar: Efter kursen
       tid: "efter"
-      vad: Samma kartläggning veckan efter. Visa skillnaden och skriv nästa steg.
+      perElev: 30
+      vad: Samma kartläggning veckan efter. Visa eleven skillnaden. I åk 7 stämmer du också av elevens eget mål. Skriv sedan nästa steg.
 
 plan:
   utan:
@@ -432,12 +433,15 @@ plan:
       kort: "Befästa"
       text: "I ett tredje pass skriver eleverna med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
     # Veckans uppgift står i Uppvärmningen, som på veckans sida (den stängda frågan 2026-10-26).
-    - nar: vecka 3
+    - nar: veckans första pass i vecka 3
       del: Uppvärmningen
-      text: "Dela upp 543 på flera sätt med tiobasen, 500 + 40 + 3, 400 + 140 + 3 och 400 + 130 + 13."
+      text: "I pass 1 är 543 talet ni bygger. Dela upp det på flera sätt med tiobasen, 500 + 40 + 3, 400 + 140 + 3 och 400 + 130 + 13."
     - nar: veckans första pass i vecka 5
       del: Uppvärmningen
-      text: "I pass 1 får varje par tolv kuber och frågan ”Hur många olika rektanglar kan ni bygga av alla tolv?” Paren hittar 1 · 12, 2 · 6 och 3 · 4, och en vriden rektangel räknas som samma. Elva kuber ger bara en rektangel."
+      text: "I pass 1 får varje par tolv kuber och frågan ”Hur många olika rektanglar kan ni bygga av alla tolv?” Paren hittar 1 · 12, 2 · 6 och 3 · 4, och en vriden rektangel räknas som samma. Elva kuber ger bara en rektangel. Det gör ni i stället för att bygga ett tal."
+    - nar: vecka 8
+      del: Uppvärmningen
+      text: "I vecka 8 räknar ni en addition och en subtraktion i uppvärmningen i varje pass, i stället för att bygga ett tal."
     - nar: vecka 5–8
       text: "I multiplikation och division frågar du efter raderna och antalet i varje rad, som i tabellen Så visar du de fyra räknesätten."
       ur: { tabell: "Så visar du de fyra räknesätten", rad: "Multiplikation, 3 · 24", kolumner: ["Säg varje gång"] }
@@ -446,6 +450,11 @@ plan:
   fore:
     - "Före kursen tar du bladet för den nivå du tror passar, och eleven räknar det på egen hand, i rutnätet och utan material. Räknar eleven färre än fyra rätt, tar hen också bladet för nivån under, och med sju eller åtta rätt bladet för nivån över. Räknar eleven färre än fyra rätt på Bas, eller ett och ett också inom tjugo, börjar hen i Antalsuppfattning i grupp."
     - "Berätta för vårdnadshavarna om kursen innan den första läxan går hem."
+  utvardering:
+    - "Räknar eleven sju eller åtta rätt på bladet efter kursen och har R+ på minst fyra av de sex uppgifterna i protokollet, är eleven klar med kursen."
+    - "Räknar eleven färre än fyra rätt, eller visar protokollet ingen skillnad mot före kursen, tar du upp det med elevhälsan. På Bas kan eleven börja i Antalsuppfattning i grupp."
+    - "Annars fortsätter eleven en period till i en grupp på samma nivå, med nya tal i de veckor där det inte sitter. Addition och subtraktion är vecka 1–4, och multiplikation och division vecka 5–8."
+    - "Välj de nya talen efter de tre kraven för passets tal, ta fler uppgifter ur gruppens matematikbok och gör samma kartläggning efter perioden."
   upprepa: "Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Är det en elev, övar hen greppet i uppvärmningen och i ett tredje pass, om gruppen har ett, och gruppen går vidare."
 mal:
   overgripande: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
@@ -514,7 +523,7 @@ ramar:
             - rubrik: "Fokus"
               text: "Eleven räknar med hundratal och två växlingar, ritar tiobasen med rutor, streck och prickar och skriver uppställningen."
             - rubrik: "Uppvärmningen"
-              text: "Dela upp 543 på flera sätt med tiobasen, 500 + 40 + 3, 400 + 140 + 3 och 400 + 130 + 13."
+              text: "I pass 1 är 543 talet ni bygger. Dela upp det på flera sätt med tiobasen, 500 + 40 + 3, 400 + 140 + 3 och 400 + 130 + 13."
             - rubrik: "Genomgången"
               text: "Visa och säg ”Jag ritar 386 med tre rutor, åtta streck och sex prickar, och 457 under. Tretton prickar. Jag ringar in tio prickar och ritar ett streck till bland tiotalen. Fjorton streck. Fler än nio tiotal? Växla. Jag ringar in tio streck och ritar en ruta till. Det blir 843.”\nLägg 843 med sifferkorten, 800, 40 och 3 på varandra, och skriv uppställningen med båda minnessiffrorna."
             - rubrik: "Åt andra hållet"
@@ -542,7 +551,7 @@ ramar:
             - rubrik: "Fokus"
               text: "Eleven bygger multiplikation som en rektangel och läser samma rektangel som två slags division."
             - rubrik: "Uppvärmningen"
-              text: "I pass 1 får varje par tolv kuber och frågan ”Hur många olika rektanglar kan ni bygga av alla tolv?” Paren hittar 1 · 12, 2 · 6 och 3 · 4, och en vriden rektangel räknas som samma. Elva kuber ger bara en rektangel."
+              text: "I pass 1 får varje par tolv kuber och frågan ”Hur många olika rektanglar kan ni bygga av alla tolv?” Paren hittar 1 · 12, 2 · 6 och 3 · 4, och en vriden rektangel räknas som samma. Elva kuber ger bara en rektangel. Det gör ni i stället för att bygga ett tal."
             - rubrik: "Genomgången"
               text: "Visa och säg ”Fyra rader med sex stolar i varje. Hur många stolar är det? Jag bygger fyra rader med multilink, sex kuber i varje rad. Fyra gånger sex. Jag bryter isär rektangeln i två delar med två rader i varje. Två rader med sex är tolv, och tolv till är 24.”\nVrid rektangeln och säg ”Nu är det sex rader med fyra i varje. Samma kuber, 6 · 4.”"
             - rubrik: "Åt andra hållet"
@@ -596,12 +605,12 @@ ramar:
     # ---------------------------------------------------------------- Kartläggningen
     - rubrik: "Kartläggning: före och efter kursen"
       text:
-        - Gör kartläggningen veckan före och veckan efter kursen, med en elev i taget eller två och två. Eleven räknar bladet för sin nivå och visar och förklarar sedan sex uppgifter i listan Visa och förklara.
+        - Gör kartläggningen veckan före och veckan efter kursen, med en elev i taget eller två och två. Eleven räknar bladet för sin nivå och visar och förklarar sedan sex uppgifter i listan Visa och förklara. Räkna med omkring 30 minuter per elev, hälften för bladet och hälften för Visa och förklara.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: Före kursen tar du bladet för den nivå du tror passar, och eleven räknar det på egen hand, i rutnätet och utan material. Räknar eleven färre än fyra rätt, tar hen också bladet för nivån under, och med sju eller åtta rätt bladet för nivån över. Räknar eleven färre än fyra rätt på Bas, eller ett och ett också inom tjugo, börjar hen i Antalsuppfattning i grupp. Sedan visar och förklarar eleven de sex uppgifterna i listan Visa och förklara och skriver uppgiften på sin tavla, och du skriver vad eleven gör och säger i protokollet. Gruppens nivå är den där eleverna räknar en del rätt men inte kan förklara växlingen. Kan eleven växla men inte förklara gånger och delat, väljer du nivån efter de fyra sista uppgifterna på bladet, multiplikationen och divisionen. Efter kursen räknar eleven samma blad och visar samma uppgifter som före.
+              text: Före kursen tar du bladet för den nivå du tror passar, och eleven räknar det på egen hand, i rutnätet och utan material. Räknar eleven färre än fyra rätt, tar hen också bladet för nivån under, och med sju eller åtta rätt bladet för nivån över. Räknar eleven färre än fyra rätt på Bas, eller ett och ett också inom tjugo, börjar hen i Antalsuppfattning i grupp. Sedan visar och förklarar eleven de sex uppgifterna i listan Visa och förklara och skriver uppgiften på sin tavla, och du skriver vad eleven gör och säger i protokollet. Gruppens nivå är den där eleverna räknar en del rätt men inte kan förklara växlingen. Hamnar eleverna på två nivåer, tar gruppen den lägre. Den elev som hamnade på den högre nivån räknar bladen för sin nivå i Bladet. Kan eleven växla men inte förklara gånger och delat, väljer du nivån efter de fyra sista uppgifterna på bladet, multiplikationen och divisionen. Efter kursen räknar eleven samma blad och visar samma uppgifter som före.
             - rubrik: Lyssna efter
               text: "Säger eleven ental och tiotal?\nSer eleven att talen ligger två från 300, så att 302 − 298 = 2 + 2, eller räknar hen ett och ett?\nVet eleven vad den lilla ettan är, och hur många tiotal som är kvar efter växlingen?\nMärker eleven ett orimligt svar?\nKänner eleven igen multiplikation och division i en händelse, och ser hen två divisioner i samma rektangel?"
             - rubrik: Uppgifterna och målen

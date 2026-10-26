@@ -58,7 +58,7 @@ upplagg:
   text: "Gruppen på tre till sex elever har tre samtal på cirka 20 minuter, ungefär ett i veckan och aldrig två dagar i rad. Varje samtal har samma fem delar: Starta, Rundan, Reda ut, Komma överens och Avsluta. Talpinnen visar vem som talar, och samtalet slutar med en överenskommelse som eleverna prövar till nästa gång. Efter samtal 3 bestämmer du om gruppen behöver ett eller två samtal till. Före samtal 1 och efter samtal 3 tittar du på gruppen under en rast och frågar varje elev för sig hur bra det fungerar i gruppen, från 0 till 10. Blir serien längre, gör du det också efter det sista."
 gruppen:
   rubrik: Så sätter du ihop gruppen
-  text: "Gruppen är tre till sex jämbördiga elever ur samma klass eller fritidsgrupp som ofta hamnar i konflikt med varandra. Säger en elev att hen har blivit kränkt, följer du skolans rutin, och den går före kompissamtalet. Alla som är inblandade i konflikten är med, och ingen är med som hjälpare. Fråga varje elev för sig före samtal 1 om hen vill vara med. Högst var tredje elev får behöva mycket stöd i sitt beteende. Behöver fler det, säger någon nej eller är någon rädd för någon i gruppen, börja med enskilda samtal."
+  text: "Gruppen är tre till sex jämbördiga elever ur samma klass eller fritidsgrupp som ofta hamnar i konflikt med varandra. Säger en elev att hen har blivit kränkt, följer du skolans rutin, och den går före kompissamtalet. Alla som är inblandade i konflikten är med, och ingen är med som hjälpare. Fråga varje elev för sig före samtal 1 om hen vill vara med. Högst var tredje elev får behöva mycket stöd i sitt beteende. Behöver fler det, säger någon nej eller är någon rädd för någon i gruppen, börja med enskilda samtal om det som har hänt. Vänta med samtal 1 tills läget har ändrats."
 tabeller:
   - rubrik: "Tre samtal: ramarna, det vi har sett och det som håller"
     plats: efter-tidsschema
@@ -84,13 +84,13 @@ tabeller:
           3
           Det som håller
         - |-
-          Gruppen väljer det som ska fortsätta och bestämmer hur eleverna påminner varandra. Tiden för nästa samtal skriver du på bladet bara om ett samtal till är bokat. Du ger klassläraren och fritids den överenskommelse som ska fortsätta. Efteråt frågar du var och en för sig hur bra det fungerar i gruppen, från 0 till 10.
+          Gruppen väljer det som ska fortsätta och bestämmer hur eleverna påminner varandra. Vet du inte än om ni ses igen, säger du i Avsluta att du berättar det om några dagar, och att var och en fortsätter att lägga märke till sin kamrat. Du ger klassläraren och fritids den överenskommelse som ska fortsätta. Efteråt frågar du var och en för sig hur bra det fungerar i gruppen, från 0 till 10.
           Rundans mening är ”Jag tänker att det har blivit bättre när ___.”
       - - |-
           4–5
           Vid behov
-        - Blir det fyra samtal, avslutar du serien i samtal 4 på samma sätt som i samtal 3. Blir det fem, följer du upp i samtal 4 som i samtal 2 och avslutar serien i samtal 5. Rundans mening är densamma som i samtal 2 när du följer upp, och som i samtal 3 när du avslutar.
-    not: Avsluta serien efter samtal 3 när elevernas siffror har stigit och de vuxna ser att överenskommelsen håller. Går det åt rätt håll men överenskommelsen håller inte än, boka ett eller två samtal till. Har inget ändrats efter samtal 3, eller efter det sista samtalet, ta upp gruppen med elevhälsan.
+        - Bokar du fler samtal, säger du tiden till eleverna och vårdnadshavarna. Blir det fyra samtal, avslutar du serien i samtal 4 på samma sätt som i samtal 3. Blir det fem, följer du upp i samtal 4 som i samtal 2 och avslutar serien i samtal 5. Rundans mening är densamma som i samtal 2 när du följer upp, och som i samtal 3 när du avslutar.
+    not: Avsluta serien efter samtal 3 när varje elevs siffra har stigit, det du räknar på rasten har minskat och de vuxna ser att överenskommelsen håller. Går det åt rätt håll men inte för alla, eller håller överenskommelsen inte än, boka ett samtal till. Boka två när gruppen behöver ändra överenskommelsen och pröva den igen. Har en elevs siffra sjunkit, prata med eleven för sig innan du bestämmer. Är siffrorna och det du räknar på rasten som före samtal 1 eller sämre, efter samtal 3 eller efter det sista samtalet, avsluta serien och ta upp gruppen med elevhälsan.
   - rubrik: "Lärarens samtalstekniker: så gör du och så låter det"
     plats: efter-steg
     meny: true
@@ -265,7 +265,7 @@ tidsschema:
       vad: Ställ stolarna runt bordet och bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten Våra samtalsregler, Så kan du säga och Peka på känslan, bladet Vår överenskommelse, en penna och papper för förslagen till hands. Hämta gruppen, eller se till att en vuxen följer den till rummet.
     - tid: 0–4 min
       fas: Starta
-      vad: Hälsa välkommen, och gruppen säger de fyra samtalsreglerna. I samtal 1 visar du först talpinnen, läser reglerna på kortet Våra samtalsregler och säger ett du-⁠budskap och ett jag-⁠budskap, så att eleverna hör skillnaden. Säg varje gång att det ni berättar stannar i rummet, men att du inte kan lova att hålla tyst om någon far illa.
+      vad: Hälsa välkommen, och gruppen säger de fyra samtalsreglerna. I samtal 1 visar du först talpinnen, läser reglerna på kortet Våra samtalsregler och frågar för varje regel hur det ser ut och låter. Sedan säger du ett du-⁠budskap och ett jag-⁠budskap, så att eleverna hör skillnaden. Säg varje gång att det ni berättar stannar i rummet, men att du inte kan lova att hålla tyst om någon far illa. Från samtal 2 läser ni sedan upp förra överenskommelsen på bladet, och du säger kort vad de vuxna har sett.
     - tid: 4–7 min
       fas: Rundan
       vad: Säg rundans mening, som står i tabellen Tre samtal, och gör den färdig själv först. I samtal 1 läser du också startorden på kortet Så kan du säga högt. Håll ditt svar kort. Den som står över får frågan igen när varvet är klart.
@@ -282,7 +282,7 @@ tidsschema:
   # Samtal 1 är första passet: delen Starta tar längre tid (riggens omgång 5 2026-10-26; tiderna stod förut i raden efter).
   varianter:
     - nar: första passet
-      text: Delen Starta tar längre tid, eftersom talpinnen, reglerna och jag-⁠budskapet är nya för eleverna.
+      text: Delen Starta tar längre tid och Reda ut blir kortare, eftersom talpinnen, reglerna och jag-⁠budskapet är nya för eleverna.
       delar:
         - { fas: Starta, tid: 0–6 min }
         - { fas: Rundan, tid: 6–9 min }
@@ -364,8 +364,8 @@ exempel:
     text: Elsa, Omar, Liam och Noor i åk 4 spelar fotboll på rasterna, och det slutar ofta i bråk om reglerna. Liam hamnar ibland utanför. Exemplet är samtal 1.
   text:
     - Läraren har bokat tre tisdagar och pratat kort med var och en. Alla ville vara med. Liam sa att han ibland inte får bollen, men att ingen är elak mot honom. Han ville att de skulle prata om det tillsammans. Läraren frågade också hur bra det fungerar i gruppen, från 0 till 10, och eleverna svarade 2, 3, 4 och 5. Talpinnen ligger mitt på det runda bordet, korten och bladet Vår överenskommelse finns till hands, och läraren har bestämt att Omar och Elsa inte sitter bredvid varandra.
-    - "Läraren håller upp talpinnen: ”Den som håller i talpinnen pratar, och vi andra lyssnar.” Läraren läser de fyra samtalsreglerna och frågar hur det ser ut och låter när man följer varje regel. Om regeln Vi lyssnar på varandra säger Noor: ”Man tittar mot den som pratar.” Läraren tar fram kortet Så kan du säga och läser startorden. Hen säger ”Du är dum” och sedan ”När du säger så, känner jag mig ledsen”, och frågar vilket som är lättast att lyssna på. Läraren fortsätter: ”Det ni berättar här stannar här, men om jag får veta att någon far illa, måste jag berätta det för någon som kan hjälpa. Det vi kommer överens om får de vuxna i skolan och era familjer veta. Ni spelar fotboll ihop, och ibland blir det bråk. Vi letar inte efter vem som har gjort fel. I dag pratar vi om hur ni vill ha det.”"
-    - "Rundans mening är ”Jag känner mig glad när vi ___.” Läraren gör den färdig först: ”Jag känner mig glad när vi leker.” Sedan säger Elsa ”Jag känner mig glad när vi vinner.” Liam står över. När varvet är klart frågar läraren igen, och Liam säger ”Jag känner mig glad när alla får passa.”"
+    - "Läraren håller upp talpinnen: ”Den som håller i talpinnen pratar, och vi andra lyssnar.” Läraren läser de fyra samtalsreglerna och frågar hur det ser ut och låter när man följer varje regel. Om regeln Vi lyssnar på varandra säger Noor: ”Man tittar mot den som pratar.” Läraren säger ”Du är dum” och sedan ”När du säger så, känner jag mig ledsen”, och frågar vilket som är lättast att lyssna på. Läraren fortsätter: ”Det ni berättar här stannar här, men om jag får veta att någon far illa, måste jag berätta det för någon som kan hjälpa. Det vi kommer överens om får de vuxna i skolan och era familjer veta. Ni spelar fotboll ihop, och ibland blir det bråk. Vi letar inte efter vem som har gjort fel. I dag pratar vi om hur ni vill ha det.”"
+    - "Läraren tar fram kortet Så kan du säga och läser startorden. Rundans mening är ”Jag känner mig glad när vi ___.” Läraren gör den färdig först: ”Jag känner mig glad när vi leker.” Sedan säger Elsa ”Jag känner mig glad när vi vinner.” Liam står över. När varvet är klart frågar läraren igen, och Liam säger ”Jag känner mig glad när alla får passa.”"
     - "Läraren lägger talpinnen mitt på bordet. Omar räcker upp handen, får en nick och tar talpinnen: ”Elsa skriker alltid fusk!” Läraren säger: ”Du blev arg när Elsa ropade fusk. Stämmer det?” Omar nickar. Läraren tar fram kortet igen, och Omar säger till Elsa: ”När du ropar fusk, känner jag mig arg.” Elsa tar talpinnen: ”Jag tänker att vi inte hade bestämt var linjen gick.” Noor tar talpinnen: ”Jag undrar hur det är för dig, Liam.” Liam tar talpinnen och svarar: ”Jag känner mig ensam när ingen passar.”"
     - "Läraren frågar: ”Vad kan ni göra annorlunda till nästa gång?” Gruppen kommer med tre förslag, och läraren skriver upp dem. De väljer: ”Innan matchen bestämmer vi var linjerna går.” Läraren frågar hur det ser ut när de gör det, och Noor säger: ”Vi går runt planen och pekar.” Läraren frågar: ”Kan alla göra det här?” Alla visar tummen upp, och Elsa skriver överenskommelsen på bladet."
     - "I sista varvet säger var och en vad hen själv ska göra till nästa gång och tackar någon, och läraren skriver det på bladet. Omar säger: ”Jag frågar Liam om han vill vara med.” Noor säger: ”Jag passar till den som är fri. Tack, Liam, för att du berättade.” Läraren säger vilken kamrat var och en ska lägga märke till, och Noor ska se vad Omar gör. Efteråt skriver läraren i snabbmallen att alla talade, att Omar sa sitt första jag-⁠budskap med kortet som stöd och att Liam stod över i rundan men sa mer längre fram i samtalet. Läraren ger alla fyra lappen hem och berättar för de vuxna på rasten vad gruppen har kommit överens om."
@@ -421,7 +421,7 @@ uppfoljning:
       vad: Blir serien längre än tre samtal, räknar du samma saker under en rast efter det sista samtalet och frågar varje elev igen. Jämför med det du fick före samtal 1 och efter samtal 3.
     - nar: Fyra veckor efter sista samtalet
       tid: "efter 4 veckor"
-      vad: Fråga gruppen om överenskommelsen håller och om de använder startorden. Har det blivit sämre, påminn gruppen om den.
+      vad: Fråga gruppen om överenskommelsen håller och om de använder startorden. Fråga också varje elev för sig hur bra det fungerar i gruppen, från 0 till 10. Har det blivit sämre sedan det sista samtalet, påminn gruppen om överenskommelsen. Är det som före samtal 1, ta upp gruppen med elevhälsan.
 plan:
   utan:
     - "Schemat har tiderna från och med samtal 2, och tiderna för samtal 1 står direkt under det."
@@ -447,13 +447,20 @@ plan:
       kort: "Vid behov"
       ur: { tabell: "Tre samtal: ramarna, det vi har sett och det som håller", rad: "4–5" }
   justera:
-    - "Går det åt rätt håll men överenskommelsen håller inte än, boka ett eller två samtal till."
-    - "Har inget ändrats efter samtal 3, eller efter det sista samtalet, ta upp gruppen med elevhälsan."
-  # Beslutet efter samtal 3 vid utvärderingen (Rimligheten 2026-10-26: metodens regel stod inte där läraren beslutar).
+    - "Går det åt rätt håll men inte för alla, eller håller överenskommelsen inte än, boka ett samtal till. Boka två när gruppen behöver ändra överenskommelsen och pröva den igen."
+    - "Är siffrorna och det du räknar på rasten som före samtal 1 eller sämre, efter samtal 3 eller efter det sista samtalet, avsluta serien och ta upp gruppen med elevhälsan."
+  # Beslutet efter samtal 3 vid utvärderingen (Rimligheten 2026-10-26: metodens regel stod inte där läraren beslutar;
+  # passgenomgången samma kväll: rasten, varje elevs siffra, ett eller två samtal till och det som har blivit sämre).
   utvardering:
-    - Avsluta serien efter samtal 3 när elevernas siffror har stigit och de vuxna ser att överenskommelsen håller.
-    - "Går det åt rätt håll men överenskommelsen håller inte än, boka ett eller två samtal till."
-    - "Har inget ändrats efter samtal 3, eller efter det sista samtalet, ta upp gruppen med elevhälsan."
+    - "Avsluta serien efter samtal 3 när varje elevs siffra har stigit, det du räknar på rasten har minskat och de vuxna ser att överenskommelsen håller."
+    - "Går det åt rätt håll men inte för alla, eller håller överenskommelsen inte än, boka ett samtal till. Boka två när gruppen behöver ändra överenskommelsen och pröva den igen."
+    - "Har en elevs siffra sjunkit, prata med eleven för sig innan du bestämmer."
+    - "Är siffrorna och det du räknar på rasten som före samtal 1 eller sämre, efter samtal 3 eller efter det sista samtalet, avsluta serien och ta upp gruppen med elevhälsan."
+  # Serien är tre samtal, och beslutet efter samtal 3 avgör om den blir fyra eller fem (passgenomgången 2026-10-26).
+  veckoval:
+    text: "Gruppen på tre till sex elever har tre samtal på cirka 20 minuter, ungefär ett i veckan och aldrig två dagar i rad. Efter samtal 3 bestämmer du om gruppen behöver ett eller två samtal till."
+    mer: "Tre samtal: ramarna, det vi har sett och det som håller"
+    forval: 3
 mal:
   overgripande: "kunna säga hur man känner utan att anklaga, och komma överens."
   punkter:
@@ -480,7 +487,7 @@ snabbmall:
   sist:
     - Det här säger och gör eleverna nu som de inte gjorde förut
     - Avsluta serien, eller ett eller två samtal till?
-  not: I samtal 1 finns ingen överenskommelse att följa upp än. Avsluta när siffrorna har stigit och överenskommelsen håller, och ta upp gruppen med elevhälsan om inget har ändrats. Samtal 4 och 5 får ett nytt blad.
+  not: I samtal 1 finns ingen överenskommelse att följa upp än. Efter samtal 3 bestämmer du som det står under tabellen Tre samtal. Samtal 4 och 5 får ett nytt blad.
 checklista:
   rubrik: Checklista inför samtal 1
   punkter:
@@ -691,14 +698,14 @@ lathund:
         - "Planerat tiderna för samtal 1, som har en längre Starta: Starta 0–⁠6, Rundan 6–⁠9, Reda ut 9–⁠13, Komma överens 13–⁠17 och Avsluta 17–⁠20. Med fem eller sex elever hade Komma överens fått 13–⁠16 och Avsluta 16–⁠20."
     klarTidigt: Låt talpinnen gå ett varv till med frågan ”Vad var bra i dag?”
     schema:
-      rubrik: 20 minuter, del för del
+      rubrik: 20 minuter, del för del, med tiderna från samtal 2
       rader:
         - tid: Före
           fas: Förberedelse
           vad: Bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten och bladet till hands.
         - tid: 0–4
           fas: 1 · Starta
-          vad: "I samtal 1 visar du talpinnen, läser reglerna och säger ”Du är dum” och sedan ”När du säger så, känner jag mig ledsen”. Säg varje gång att det ni berättar stannar i rummet."
+          vad: "I samtal 1 visar du talpinnen, läser reglerna och frågar hur de ser ut och låter. Sedan säger du ”Du är dum” och därefter ”När du säger så, känner jag mig ledsen”. Säg varje gång att det ni berättar stannar i rummet."
         - tid: 4–7
           fas: 2 · Rundan
           vad: Du säger rundans mening och gör den färdig först. I samtal 2 är den ”Jag såg att du ___”, och i samtal 3 ”Jag tänker att det har blivit bättre när ___”.
@@ -776,11 +783,11 @@ lathund:
       - nar: "Före samtal 1"
         vad: "Titta på gruppen under en rast, och räkna bråken, sänkningarna och hur ofta någon hamnar utanför. Fråga varje elev för sig: ”Hur bra fungerar det i gruppen, från 0 till 10?”"
       - nar: I varje samtal
-        vad: "Skriv vilka jag-⁠budskap och du-⁠budskap du hörde, vem som avbröt och vem som stod över. Fråga de vuxna runt gruppen vad de har sett."
+        vad: "Skriv vilka jag-⁠budskap och du-⁠budskap du hörde, vem som avbröt och vem som stod över. Fråga de vuxna vad de har sett."
       - nar: "Efter samtal 3"
-        vad: "Räkna och fråga igen, och bestäm om gruppen behöver ett eller två samtal till. Blir serien längre, gör du det också efter det sista."
+        vad: "Räkna och fråga igen, och bestäm om gruppen behöver ett eller två samtal till."
       - nar: Fyra veckor efter sista samtalet
-        vad: "Fråga gruppen om överenskommelsen håller och om de använder startorden. Har det blivit sämre, påminn gruppen om den."
+        vad: "Fråga gruppen om överenskommelsen håller, och fråga varje elev hur bra det fungerar, från 0 till 10. Är det sämre, påminn gruppen om den. Är det som före samtal 1, ta upp det med elevhälsan."
 lektionskort:
   - text: "Lektionskortet är samtalet på ett A4: målet, de tre samtalen, delarna med det du gör och säger, och det du gör om något händer. Skriv ut det och ha det framför dig under samtalet."
 film:

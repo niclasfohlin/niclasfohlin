@@ -100,7 +100,7 @@ tabeller:
   - rubrik: "Paren: samma kamrat och samma bok"
     plats: efter-tidsschema
     meny: true
-    text: "Ordna klassen efter hur säkert eleverna läser, och sätt ihop två som ligger nära varandra och trivs ihop, men inte de två som läser minst säkert. Paret håller ihop alla åtta veckor, och fungerar ett par inte, ger du dem nya kamrater. Hos dagens par lyssnar du också på samspelet: följer lyssnaren med i boken, väntar hen, och säger svaret något om just den sidan?"
+    text: "Ordna klassen efter det du vet om hur säkert eleverna läser, och sätt ihop två som ligger nära varandra och trivs ihop, men inte de två som läser minst säkert. Paret håller ihop alla åtta veckor. Fungerar ett par inte, eller läser de två mycket olika säkert i provtexten i vecka 1, ger du dem nya kamrater. Varje nytt par väljer en bok bland två eller tre som du lägger fram. Hos dagens par lyssnar du också på samspelet: följer lyssnaren med i boken, väntar hen, och säger svaret något om just den sidan?"
     kolumner: [Delen, Så gör paret]
     rader:
       - ["Starten", "Paret ger varandra en high five och berättar vad som hände förra gången."]
@@ -124,7 +124,7 @@ tabeller:
       - ["Paret har kommit in i rutinen", "Läsaren svarar lyssnaren: ”Det var det jag ville.” eller ”På nästa sida ska jag …”"]
       - ["Någon vill läsa för klassen", "I Återkoppling läser den som vill ett ställe ur parets bok för klassen."]
       - ["Klassen behöver träna en strategi extra", "Gör Berätta mera! eller Speed-dating med en kort text i stället för Läs för en lyssnare."]
-      - ["Paret har läst ut sin bok", "Paret berättar om boken för ett annat par i delen Texten, innan de väljer en ny."]
+      - ["Paret har läst ut sin bok", "Paret berättar om boken för ett annat par i delen Texten i nästa pass."]
   - rubrik: Åk 2–3 och åk 4–5
     plats: efter-urval
     meny: true
@@ -136,10 +136,10 @@ tabeller:
   - rubrik: "Läsningen för de yngre: vecka 6–8"
     plats: efter-urval
     meny: true
-    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev läser en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok. Från veckans andra pass i vecka 7 prövar de också sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. Före passet väljer du ett uppslag ur en egen bilderbok. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
+    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev läser en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok. Från veckans andra pass i vecka 7 prövar de också sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. Före passet väljer du ett uppslag ur en egen bilderbok. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
     kolumner: [När, Det eleverna gör]
     rader:
-      - ["Vecka 6", "Träffar sin lyssnare, frågar vad hen tycker om, väljer en bilderbok till hen och börjar läsa den för sin kamrat. Går mötet inte att ordna, skriver de yngres lärare vad varje barn tycker om."]
+      - ["Vecka 6", "Träffar sin lyssnare och frågar vad hen tycker om. Väljer efter mötet en bilderbok till hen och börjar läsa den för sin kamrat. Går mötet inte att ordna, skriver de yngres lärare vad varje barn tycker om."]
       - ["Vecka 7", "Sätter lappar i boken och tänker ut en fråga till sin lyssnare i veckans första pass, med bladet Läsarens förberedelse. Läser sedan boken för sin kamrat, som bara tittar på bilderna."]
       - ["Vecka 8", "Visar framsidan, läser boken för sin lyssnare och ställer sin fråga. Berättar sedan för sin kamrat vad lyssnaren svarade."]
       - ["Hemma", "Kan läsa boken för någon hemma, eller i telefon för någon i släkten. Lyssnaren säger sina två meningar eller skriver dem på lappen hem."]
@@ -241,7 +241,7 @@ roll:
 urval:
   rubrik: Var hittar du texterna?
   text:
-    - "Paret läser en bok som de två väljer tillsammans ur en back som du ställer fram eller i skolbiblioteket. Välj böckerna i backen efter parens nivå, och gärna så att de hör till något som klassen arbetar med, som ett tema, en författare eller ett ämne. När paret har läst ut boken, väljer de en ny. Har skolan en bok i klassuppsättning, kan de par som klarar kravet Rätt nivå läsa den, varje par i sin takt, och då kan du visa strategin i samma bok."
+    - "Paret läser en bok som de två väljer tillsammans ur en back som du ställer fram eller i skolbiblioteket. Välj böckerna i backen efter parens nivå, och gärna så att de hör till något som klassen arbetar med, som ett tema, en författare eller ett ämne. När paret har läst ut boken, läser de baksidan eller första sidan för varandra i två eller tre böcker som du har lagt fram. Sedan väljer de en och läser vidare i den. Har skolan en bok i klassuppsättning, kan de par som klarar kravet Rätt nivå läsa den, varje par i sin takt, och då kan du visa strategin i samma bok."
     - "Till strukturerna väljer du en text med flera ställen där strategin behövs, som en dikt, en artikel ur 8 Sidor eller ett stycke ur boken du läser högt. Kopiera den med stor stil, luft mellan raderna och bred marginal, en till varje elev. En dikt ur Tid för poesi eller En bro av poesi får du kopiera enligt skolans kopieringsavtal, och Litteraturbankens Skola har dikter som är fria att kopiera."
   kravText: "Välj böcker som uppfyller tre krav:"
   krav:
@@ -264,7 +264,7 @@ progression:
     - { vecka: "7", led: Du gör, fokus: Alla fem strategierna, roll: "Klassen säger var lappen ska sitta i din bok, och eleverna förbereder sin och läser den för kamraten" }
     - { vecka: "8", led: Du gör, fokus: Läsningen för de yngre, roll: "Eleverna läser för de yngre eller hemma" }
 uppfoljning:
-  text: "Lyssna på några elever om dagen med provtexten i vecka 1 och 8, till exempel när klassen läser tyst. Varje elev tar omkring fyra minuter. Efter vecka 8 jämför du protokollen och bestämmer med eleven vad hen tränar vidare."
+  text: "Lyssna på några elever om dagen med provtexten i vecka 1 och 8, till exempel när klassen läser tyst. Varje elev tar omkring fyra minuter. Efter vecka 8 jämför du protokollen och bestämmer med eleven vad hen tränar vidare. Har eleven ja eller delvis under Förstod och ingen strategi på 1, är insatsen klar för hen. Står en strategi kvar på 1, eller känns det fortfarande svårt för eleven att läsa högt, läser hen för de yngre varje vecka. Du lyssnar när hen övar, och efter fyra veckor läser hen provtexten igen. Har eleven nej under Förstod fast hen läser orden säkert, tränar hen läsförståelsen i en liten grupp, till exempel i Textsamtal i grupp. Läser eleven fel på fler än 5 ord av 100 också i vecka 8, fortsätter hen att träna avkodningen vid sidan av. Har felen inte blivit färre sedan vecka 1, tar du upp det med elevhälsan."
   rader:
     - { nar: Vecka 1, tid: "vecka 1", perElev: 4, vad: "Eleven läser provtexten tyst och säger vad den handlar om. Säg sedan: ”Läs den högt så att jag förstår och känner det texten säger.” Spela in hela läsningen, och fyll i lyssnarprotokollet." }
     - { nar: Varje pass, tid: "varje pass", vad: "Lyssna på dagens par, och skriv på klasslistan vad du hörde och vad varje elev ska pröva. Nästa gång du hör paret börjar du där, och det som många behöver tar du upp i nästa pass." }
@@ -273,6 +273,8 @@ plan:
   fore:
     - "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre."
     - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna Var är mössan? och Källaren och lyssnarprotokollet, och ordnat något att spela in med."
+    # Vad paren bygger på före vecka 1, och att provtexten i vecka 1 kan ändra paret (passgenomgången 2026-10-26).
+    - "Ordna klassen efter det du vet om hur säkert eleverna läser, och sätt ihop två som ligger nära varandra och trivs ihop, men inte de två som läser minst säkert. Paret håller ihop alla åtta veckor. Fungerar ett par inte, eller läser de två mycket olika säkert i provtexten i vecka 1, ger du dem nya kamrater. Varje nytt par väljer en bok bland två eller tre som du lägger fram."
   passen:
     # Det första passet med tabellens not, så att läraren vet att Tankepausen kommer i nästa pass och vad som händer när ett
     # par inte hinner välja bok (Rimligheten 2026-10-26).
@@ -329,7 +331,7 @@ plan:
     - nar: veckans övriga pass i vecka 6
       del: Läs för en lyssnare
       istallet: true
-      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen."
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
     - nar: veckans sista pass i vecka 6
       kort: "Bilderboken"
@@ -349,7 +351,7 @@ plan:
     - nar: veckans sista pass i vecka 6
       del: Läs för en lyssnare
       istallet: true
-      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen."
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
     - nar: vecka 7
       kort: "Bilderboken"
@@ -379,7 +381,7 @@ plan:
     - nar: vecka 7
       del: Läs för en lyssnare
       istallet: true
-      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen."
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 7" }
     - nar: veckans övriga pass i vecka 8
       kort: "Parets bok igen"
@@ -387,6 +389,12 @@ plan:
     - nar: veckans sista pass i vecka 8
       kort: "Parets bok igen"
       text: "Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
+  # Beslutet efter mätningen i vecka 8, ordagrant ur uppföljningen (passgenomgången 2026-10-26).
+  utvardering:
+    - "Har eleven ja eller delvis under Förstod och ingen strategi på 1, är insatsen klar för hen."
+    - "Står en strategi kvar på 1, eller känns det fortfarande svårt för eleven att läsa högt, läser hen för de yngre varje vecka. Du lyssnar när hen övar, och efter fyra veckor läser hen provtexten igen."
+    - "Har eleven nej under Förstod fast hen läser orden säkert, tränar hen läsförståelsen i en liten grupp, till exempel i Textsamtal i grupp."
+    - "Läser eleven fel på fler än 5 ord av 100 också i vecka 8, fortsätter hen att träna avkodningen vid sidan av. Har felen inte blivit färre sedan vecka 1, tar du upp det med elevhälsan."
 mal:
   overgripande: "kunna läsa högt så att lyssnaren förstår det texten säger."
   text: "Efter de åtta veckorna ska eleven oftare än förut:"
@@ -399,8 +407,8 @@ checklista:
   rubrik: Checklista
   punkter:
     - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna Var är mössan? och Källaren och lyssnarprotokollet, och ordnat något att spela in med."
-    - Valt ett ställe till varje pass i veckan.
-    - "Före vecka 6: lånat omkring två korta bilderböcker per elev och kopierat Läsarens förberedelse."
+    - Valt ett ställe till varje pass i veckan, och lagt fram två eller tre böcker till par som snart har läst ut sin bok.
+    - "Före vecka 6: lånat omkring två korta bilderböcker per elev, kopierat Läsarens förberedelse och bestämt med de yngres lärare vem varje elev läser för."
 grund:
   text: "Att läsa olika texter ger liknande resultat som att läsa samma text flera gånger, om eleverna läser lika mycket (Kuhn och Stahl, 2003; Hudson m.fl., 2020). Rösten och läsförståelsen hänger ihop, och förståelsen kan hjälpa eleven att välja hur det ska låta (Wolters m.fl., 2022; Godde m.fl., 2020). Bland 30 elever i åk 3 som läste på eller över årskursnivå mindes de som ombads läsa för innehållets skull mer än de som ombads läsa fort (O’Shea och Sindelar, 1984). Kamratlärande i par ger mest när paren har fått träning och följer en fast form (Topping, 2000; Evidence for Learning, 2021). I jämförande studier gav turläsning inför klassen sämre resultat än gemensam läsning efter lärarens förebild (Kuhn och Stahl, 2003)."
   kallor: "Bygger på Kuhn och Stahl (2003), Hudson m.fl. (2020), Wolters m.fl. (2022), Godde m.fl. (2020), O’Shea och Sindelar (1984), Topping (2000, 2014), Evidence for Learning (2021), Duran m.fl. (2019), Meisinger m.fl. (2004), Hautala m.fl. (2023), Young och Nageldinger (2014), Huhtamäki (2015), Horne och Roll (2021) och Fohlin och Wilson (2025)."

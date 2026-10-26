@@ -230,6 +230,7 @@ tabeller:
           Med mig
           26–⁠30 min
         - "Var och en säger vad hen tar med sig, läser målet på sin pärm och säger hur det går med det. Berätta att ni från pass 8 ritar en elevs egen händelse i varje pass, och i vilken ordning ni tar dem. Dela ut spanarbladen med uppdraget ”Lägg märke till en gång när det nästan blev bråk, men det blev inget. Vad gjorde någon precis innan, så att det inte blev bråk?”"
+    not: Påfyllningspasset fyra veckor efter det sista passet har samma delar och tider. I delen Spaningen läser var och en sin plan och säger hur den har gått. Sedan ritar var och en ett tillfälle när planen fungerade. Har elevens plan inte fungerat, ritar eleven en gång när det blev svårt. I delen Ovanifrån säger eleven i vilken ruta någon hade behövt tänka och göra annorlunda, och i delen Nästa gång säger hen hur det kan bli i stället. Direkt efter passet gör ni en ny plan på bladet Min plan, och det tar cirka tio minuter.
   - rubrik: Ett pass med en egen serie
     plats: efter-steg
     meny: true
@@ -266,7 +267,7 @@ tabeller:
           Med mig
           27–⁠30 min
         - Var och en säger vad hen tar med sig. Säg till ägaren något hen gjorde bra i samtalet, till exempel ”Du berättade fast det var svårt.” Ägaren får planen som sitt spanaruppdrag, och du skriver uppdraget på spanarbladet när ni fyller i bladet Min plan. De andras uppdrag är ”Lägg märke till en gång när det nästan blev bråk, men det blev inget. Vad gjorde någon precis innan, så att det inte blev bråk?”
-    not: Handlar serien om något som ska hända, ritar ni i ruta 1 hur det brukar börja och går fram till rutan där det brukar bli bråk. Sedan får personerna tankebubblor som vanligt, och i delen Nästa gång ritar ni hur det kan bli i stället och vad eleven, den andra personen och de vuxna kan göra.
+    not: Handlar serien om något som ska hända, ritar ni i ruta 1 hur det brukar börja och går fram till rutan där det brukar bli bråk. Sedan får personerna tankebubblor som vanligt, och i delen Nästa gång ritar ni hur det kan bli i stället och vad eleven, den andra personen och de vuxna kan göra. I ett pass som blir över äger gruppen serien, och gruppen väljer händelsen i slutet av passet före. Eleverna berättar i tur och ordning där ägaren annars berättar, och gruppen väljer tillsammans där ägaren annars väljer. I delen Nästa gång ritar var och en på bladet Nästa gång vad hen kan göra, och det blir hens spanaruppdrag. Ingen fyller i bladet Min plan efter passet.
   - rubrik: Det sista passet
     plats: efter-steg
     meny: true
@@ -298,7 +299,7 @@ tabeller:
       - - |-
           Avslutet
           27–⁠30 min
-        - Säg en sak du har sett hos var och en. Säg också att det kommer att bli bråk igen, och att de nu vet hur de kan lära sig av det. Berätta att du visar provbilden för var och en efter passet, och att ni ses igen om fyra veckor i ett påfyllningspass, där ni läser planerna och ritar en ruta om en gång när planen fungerade.
+        - Säg en sak du har sett hos var och en. Säg också att det kommer att bli bråk igen, och att de nu vet hur de kan lära sig av det. Berätta att du visar provbilden för var och en efter passet, och att ni ses igen om fyra veckor i ett påfyllningspass, där ni läser planerna och ritar en serie om en gång när planen fungerade.
   - rubrik: Så anpassar du för eleven
     plats: efter-steg
     kolumner:
@@ -587,7 +588,8 @@ roll:
 urval:
   rubrik: Var hittar du bildserierna och händelserna?
   text:
-    - Bildserierna med lärarens sidor, bubblorna, mallarna, korten och bladen står under Material att skriva ut. I pass 7 ritar alla en egen serie om en gång när det nästan blev bråk, men det blev inget. Från pass 8 äger en elev serien i varje pass, i den ordning som du berättade för gruppen i pass 7. Med fyra elever och tolv pass får varje elev en egen serie, och med sexton pass får varje elev två. Med tre elever och tolv pass blir ett pass över, och med sexton pass blir två över. Blir det pass över, ritar ni något som ska hända och som gruppen väljer, och då får flera i gruppen vara med i det.
+    - Bildserierna med lärarens sidor, bubblorna, mallarna, korten och bladen står under Material att skriva ut. I pass 7 ritar alla en egen serie om en gång när det nästan blev bråk, men det blev inget. Från pass 8 äger en elev serien i varje pass, i den ordning som du berättade för gruppen i pass 7, och alla får sin första egna serie innan någon får sin andra.
+    - Antalet veckor avgör hur många egna serier varje elev får. Två egna serier ger eleven tid att pröva sin första plan och göra en ny. Välj därför sex veckor med en eller två elever, sju med tre och åtta med fyra. Med tre eller fyra elever ger sex veckor en egen serie var. Räcker passen inte till ännu en egen serie för alla, blir resten av passen över. Då ritar ni något som ska hända och som gruppen väljer, och flera i gruppen får vara med i det. Slutar perioden tidigare än du planerade, gör du det sista passet som det står i tabellen Det sista passet.
     - En egen serie kan också handla om något som ska hända och som brukar bli svårt, till exempel rasten efter lunch eller en utflykt. Ingen behöver ha gjort fel.
     - När ni ritar i gruppen skriver ni ”en kompis” eller en bokstav vid andra personer, och ni säger inte deras namn. Blir det bråk mellan passen, tar den vuxna som var där hand om det. Du frågar eleven om hen vill rita det, när det är hens tur eller i ett pass som blir över.
   kravText: "Ni ritar en egen händelse i gruppen när den uppfyller tre krav:"
@@ -618,7 +620,7 @@ progression:
       fokus: Pass 7 om en gång när det nästan blev bråk, egna händelser och det sista passet.
       roll: Du ritar åt den som vill. Från pass 8 spolar du tillbaka till när det var lugnt och ritar elevens version, eller låter eleven rita. Efter det sista passet visar du provbilden för var och en.
 uppfoljning:
-  text: Du behöver veta om eleven ser mer i en social situation än förut, och om det märks utanför rummet. Provbilden och protokollet står under Material att skriva ut.
+  text: Du behöver veta om eleven ser mer i en social situation än förut, och om det märks utanför rummet. Provbilden och protokollet står under Material att skriva ut. Har provbildens poäng och klasslärarens siffra stigit, avslutar du insatsen med påfyllningspasset, och de vuxna runt eleven fortsätter med frågorna och planen. Har poängen stigit men inte klasslärarens siffra, ritar du en eller två egna serier till med eleven ensam före påfyllningspasset, som i tabellen Ett pass med en egen serie. Sedan gör du en ny plan. Säger de vuxna före påfyllningspasset att planen inte går, gör ni en ny plan direkt efter påfyllningspasset. Har poängen inte stigit, tar du upp det med elevhälsan.
   rader:
     - nar: Före pass 1
       tid: "före"
@@ -629,10 +631,11 @@ uppfoljning:
       vad: Skriv i snabbmallen vem som sa vad som kunde hända och vem som hittade rutan där någon hade behövt göra annorlunda.
     - nar: Efter sista passet
       tid: "efter"
-      vad: Visa provbilden och be om siffrorna igen. Visa eleven svaren före och efter.
+      perElev: 10
+      vad: Visa provbilden och be om siffrorna igen, cirka tio minuter per elev. Visa eleven svaren före och efter.
     - nar: Fyra veckor efter sista passet
       tid: "efter 4 veckor"
-      vad: Håll ett påfyllningspass på 30 minuter där ni läser planerna, och fråga de vuxna runt eleven hur planen går.
+      vad: Fråga de vuxna runt eleven hur planen går. Håll sedan ett påfyllningspass på 30 minuter där ni läser planerna, med samma delar som i pass 7.
 plan:
   utan:
     - "Tabellen gäller ett pass med en bildserie, pass 2–⁠6."
@@ -708,6 +711,17 @@ plan:
     - nar: vecka 4
       text: "Fråga varandra"
       ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Fråga varandra, kolumner: ["Så gör du"] }
+  # Passgenomgången 2026-10-26 (sajtens K-572): antalet veckor efter gruppens storlek, och beslutet efter provbilden och
+  # påfyllningspasset, ur Var hittar du bildserierna och händelserna? och uppföljningens text.
+  veckoval:
+    text: "Antalet veckor avgör hur många egna serier varje elev får. Två egna serier ger eleven tid att pröva sin första plan och göra en ny. Välj därför sex veckor med en eller två elever, sju med tre och åtta med fyra."
+    mer: Var hittar du bildserierna och händelserna?
+    forval: 8
+  utvardering:
+    - Har provbildens poäng och klasslärarens siffra stigit, avslutar du insatsen med påfyllningspasset, och de vuxna runt eleven fortsätter med frågorna och planen.
+    - Har poängen stigit men inte klasslärarens siffra, ritar du en eller två egna serier till med eleven ensam före påfyllningspasset, som i tabellen Ett pass med en egen serie. Sedan gör du en ny plan.
+    - Säger de vuxna före påfyllningspasset att planen inte går, gör ni en ny plan direkt efter påfyllningspasset.
+    - Har poängen inte stigit, tar du upp det med elevhälsan.
 
 mal:
   overgripande: "kunna se en händelse ovanifrån och göra en plan för nästa gång."
@@ -1303,6 +1317,16 @@ lathund:
       - Talpinnen, spanarbladen och bladet Nästa gång
       - Korten, och mallen när ni ritar en egen serie
       - Elevernas pärmar, lärarens sida och snabbmallen
+    # Lathundens kortare uppföljning: metodens rader med beslutet efter perioden ryms inte på sidan 4 (2026-10-26).
+    uppfoljning:
+      - nar: "Före pass 1"
+        vad: "Visa provbilden för en elev i taget, och skriv poängen och båda siffrorna i protokollet."
+      - nar: "I varje pass"
+        vad: "Skriv i snabbmallen vem som sa vad som kunde hända och vem som hittade rutan där någon hade behövt göra annorlunda."
+      - nar: "Efter sista passet"
+        vad: "Visa provbilden och be om siffrorna igen, cirka tio minuter per elev. Visa eleven svaren före och efter."
+      - nar: "Fyra veckor efter sista passet"
+        vad: "Fråga de vuxna runt eleven hur planen går. Ett påfyllningspass på 30 minuter som pass 7, där ni läser planerna."
 lektionskort:
   - efter: "tabell: Ett pass med en egen serie"
     text: "Lektionskortet är passet med en egen serie på ett A4: målet, delarna med det du gör och säger, stödet när eleven inte hittar tanken och det du gör om något händer. Skriv ut det och ha det framför dig under passet."
