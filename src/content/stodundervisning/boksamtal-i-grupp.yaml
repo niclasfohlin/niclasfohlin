@@ -545,6 +545,12 @@ uppfoljning:
       perElev: 10
       vad: Gör läsintervjun igen, omkring tio minuter. Eleven återberättar hela boken. Ni väljer hens nästa bok, och du skriver vilket stöd hen behöver i den.
 plan:
+  # Längden beror på boken (Rimligheten 2026-10-26: fem veckor och åtta läspass räckte inte till någon bok på Bas eller
+  # Medel). Åtta veckor med två pass i veckan ger fjorton läspass, och läraren väljer efter läsplanen.
+  veckoval:
+    text: "Listans läspass är för det mesta räknade på ljudbokens eller talbokens speltid, och du läser oftast något långsammare. Räkna därför med ett par läspass mer än listan säger."
+    mer: Var hittar du böckerna och läsplanen?
+    forval: 8
   nivaval:
     text: "Nivåerna bygger mer på temat och innehållet än på hur svår boken är att läsa, eftersom du läser högt och eleven följer med. Välj nivå efter gruppens ålder och efter vad gruppen är redo för."
     mer: Så skiljer sig nivåerna

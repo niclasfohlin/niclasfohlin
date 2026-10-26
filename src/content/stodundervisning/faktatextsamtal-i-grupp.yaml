@@ -556,7 +556,17 @@ plan:
       tabell: "Modellpasset på 40 minuter"
       ur: { tabell: "Två pass per text: läspasset och modellpasset", rad: Tränar, kolumner: [Modellpasset] }
     - nar: veckans första pass i vecka 6–8
+      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Vilken text?" }
+    - nar: veckans första pass i vecka 6–8
       ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur förbereder du den?" }
+    # Modellpasset med klassens text (Rimligheten 2026-10-26: vecka 6–8 visade fördjupningen och Visste du att, som klassens
+    # text inte har, och inte hur gruppen väljer modell).
+    - nar: veckans andra pass i vecka 6–8
+      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur börjar modellpasset?" }
+    - nar: veckans andra pass i vecka 6–8
+      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur väljer gruppen?" }
+    - nar: veckans andra pass i vecka 6–8
+      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Vad blir annorlunda?" }
     - nar: sista passet
       text: "I det sista passet säger var och en vad hen tar med sig från perioden."
 mal:

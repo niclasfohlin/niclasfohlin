@@ -449,6 +449,11 @@ plan:
   justera:
     - "Går det åt rätt håll men överenskommelsen håller inte än, boka ett eller två samtal till."
     - "Har inget ändrats efter samtal 3, eller efter det sista samtalet, ta upp gruppen med elevhälsan."
+  # Beslutet efter samtal 3 vid utvärderingen (Rimligheten 2026-10-26: metodens regel stod inte där läraren beslutar).
+  utvardering:
+    - Avsluta serien efter samtal 3 när elevernas siffror har stigit och de vuxna ser att överenskommelsen håller.
+    - "Går det åt rätt håll men överenskommelsen håller inte än, boka ett eller två samtal till."
+    - "Har inget ändrats efter samtal 3, eller efter det sista samtalet, ta upp gruppen med elevhälsan."
 mal:
   overgripande: "kunna säga hur man känner utan att anklaga, och komma överens."
   punkter:
