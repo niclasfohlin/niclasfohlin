@@ -12,7 +12,7 @@ Gör som en lärare som planerar på riktigt:
 
 | Vad | Hur |
 |---|---|
-| Planera | Välj när gruppen börjar och vilka dagar ni träffas, tider om du vill, nivå eller var gruppen börjar om metoden har det, och gruppens namn. Spara planen |
+| Planera | Läs först varje val i formuläret: vad betyder alternativen, och är det förvalda det du skulle välja för den här metoden? Välj sedan när gruppen börjar och vilka dagar ni träffas, tider om du vill, nivå eller var gruppen börjar om metoden har det, och gruppens namn. Spara planen |
 | Före start | Läs vad du ska göra innan första passet, och när |
 | Följ insatsen | Slå på Följ insatsen och skriv in dina elever (påhittade förnamn) |
 | Passen | Läs vad du gör i första passet, del för del, och i ett annat pass samma vecka |
@@ -56,7 +56,7 @@ Skriv svaret med Write till `{{svar}}`, på svenska och högst omkring 1 600 ord
 2. Steg 1, bara planen: kan du undervisa genom att följa planen, ja, delvis eller nej, och varför. Vad du skulle göra i pass 1 efter planen. Vad som saknas i planen.
 3. Steg 2, efter metoden: vad planen saknade som du förstod först när du läste metoden, och vad i planen som inte stämde eller ledde fel.
 4. Formen: vad som var lätt och vad som var svårt att hitta, trycka på eller förstå.
-5. Fynden som en tabell med kolumnerna Allvar, Fynd, Var, Förslag. Allvar: P1 när du inte kan undervisa rätt genom att följa planen (något centralt saknas eller är fel), P2 när du måste leta på annat håll, något leder fel eller är svårt att använda, P3 när något kan bli bättre.
+5. Fynden som en tabell med kolumnerna Allvar, Fynd, Var, Förslag. Allvar: P1 när du inte kan undervisa rätt genom att följa planen (något centralt saknas eller är fel), P2 när du måste leta på annat håll, något leder fel, är svårt att använda, ser ologiskt ut eller säger emot metoden, P3 när något bara kan bli tydligare. Något som ser ologiskt ut för en lärare är P2, inte P3.
 6. Dina tre viktigaste förslag, det viktigaste först.
 
 Skriv bara det du har sett själv, och skriv när du är osäker. Avsluta med två meningar till den som gav dig uppdraget: om planen bär undervisningen, och det viktigaste den saknar.

@@ -81,7 +81,7 @@ const DUMPA = `(rot, mal) => {
       rad += '⟦' + n.textContent.replace(/\\s+/g, ' ').trim() + ' → ' + vart + '⟧';
       return;
     }
-    if (n.tagName === 'BUTTON') { rad += ' [knapp: ' + n.textContent.replace(/\\s+/g, ' ').trim() + '] '; return; }
+    if (n.tagName === 'BUTTON') { rad += ' [knapp: ' + n.textContent.replace(/\\s+/g, ' ').trim() + (n.getAttribute('aria-pressed') === 'true' ? ', vald' : '') + '] '; return; }
     const block = BLOCK.has(n.tagName);
     if (block) bryt();
     for (const c of n.childNodes) ga(c);

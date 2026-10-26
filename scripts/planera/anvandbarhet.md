@@ -35,7 +35,7 @@ Skriv svaret med Write till `{{svar}}`, på svenska och högst omkring 1 500 ord
 
 1. Vad du prövade, kort.
 2. Den röda tråden: hänger det ihop, och var tappar läraren den?
-3. Fynden som en tabell med kolumnerna Allvar, Fynd, Var, Förslag. Allvar: P1 när läraren lätt gör fel eller inte hittar något viktigt, P2 när något är svårt att förstå, trycka på eller står i fel ordning, P3 när något kan bli enklare.
+3. Fynden som en tabell med kolumnerna Allvar, Fynd, Var, Förslag. Allvar: P1 när läraren lätt gör fel eller inte hittar något viktigt, P2 när något är svårt att förstå, trycka på, står i fel ordning eller ser ologiskt ut, P3 när något bara kan bli enklare. Något som ser ologiskt ut för en lärare är P2, inte P3.
 4. Det du skulle ta bort, i en tabell med kolumnerna Vad och Varför.
 5. Dina tre viktigaste förslag, det viktigaste först.
 
