@@ -343,8 +343,9 @@ plan:
     - nar: första passet
       text: I en klass gör du fasta grupper om fyra till sex, byter dem efter några veckor och delar eller slår ihop dem när kortet kräver det.
       ur: { tabell: "I en klass, i en liten grupp och med de yngsta", rad: Fler än åtta eller en klass }
+    # Den avslutande aktiviteten görs när gruppen ska skiljas, och det sista passet heter därför inte så (den stängda frågan
+    # 2026-10-26: en grupp som fortsätter fick en avslutning före utvärderingen).
     - nar: sista passet
-      kort: Avslutande aktivitet
       text: "När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. Då läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på."
   # Före första passet: de första korten är utan beröring (Rimligheten 2026-10-26).
   fore:

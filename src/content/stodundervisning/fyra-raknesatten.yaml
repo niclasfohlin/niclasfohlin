@@ -431,9 +431,12 @@ plan:
     - nar: veckans tredje
       kort: "Befästa"
       text: "I ett tredje pass skriver eleverna med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
+    # Veckans uppgift står i Uppvärmningen, som på veckans sida (den stängda frågan 2026-10-26).
     - nar: vecka 3
+      del: Uppvärmningen
       text: "Dela upp 543 på flera sätt med tiobasen, 500 + 40 + 3, 400 + 140 + 3 och 400 + 130 + 13."
     - nar: veckans första pass i vecka 5
+      del: Uppvärmningen
       text: "I pass 1 får varje par tolv kuber och frågan ”Hur många olika rektanglar kan ni bygga av alla tolv?” Paren hittar 1 · 12, 2 · 6 och 3 · 4, och en vriden rektangel räknas som samma. Elva kuber ger bara en rektangel."
     - nar: vecka 5–8
       text: "I multiplikation och division frågar du efter raderna och antalet i varje rad, som i tabellen Så visar du de fyra räknesätten."
@@ -441,7 +444,7 @@ plan:
     - nar: vecka 5–8
       ur: { tabell: "Så visar du de fyra räknesätten", rad: "Division, 72/3", kolumner: ["Säg varje gång"] }
   fore:
-    - "Före kursen tar du bladet för den nivå du tror passar, och eleven räknar det på egen hand, i rutnätet och utan material. Räknar eleven färre än fyra rätt, tar hen också bladet för nivån under, och med sju eller åtta rätt bladet för nivån över."
+    - "Före kursen tar du bladet för den nivå du tror passar, och eleven räknar det på egen hand, i rutnätet och utan material. Räknar eleven färre än fyra rätt, tar hen också bladet för nivån under, och med sju eller åtta rätt bladet för nivån över. Räknar eleven färre än fyra rätt på Bas, eller ett och ett också inom tjugo, börjar hen i Antalsuppfattning i grupp."
     - "Berätta för vårdnadshavarna om kursen innan den första läxan går hem."
   upprepa: "Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Är det en elev, övar hen greppet i uppvärmningen och i ett tredje pass, om gruppen har ett, och gruppen går vidare."
 mal:

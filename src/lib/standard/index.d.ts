@@ -114,7 +114,7 @@ export type VariantensNar = PassensNar | { typ: 'minuter'; minuter: number } | {
 /** Var ett pass står i planen, som en rad i planens passen och en variant läser det. */
 export type PassetsLage = { nr?: number; sista?: boolean; nastSista?: boolean; vecka?: number; plats?: number; sistIVeckan?: boolean; minuter?: number };
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
-export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[]; passen: { rad: number; nar: PassensNar | VariantensNar }[]; skattningar: Skattning[]; forvaldaVeckor?: number }
+export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[]; passen: { rad: number; nar: PassensNar | VariantensNar }[]; skattningar: Skattning[]; forvaldaVeckor?: number; foreVeckor?: number }
 /** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
 export interface Val { start: string; dagar: number[]; langd: number; niva?: string; borja?: number; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string; mitt?: number; slut?: number; fore?: { till: string; dagar: number[]; fasta?: Record<string, number> }[] }
 export interface Pass { nr: number; datum: string; vecka: number; steg?: number | null; flyttatFran?: string }
@@ -151,6 +151,8 @@ export declare function planensRamFel(d: MetodensTexter & { tid?: string }): str
 export declare function rollensRad(d: MetodensTexter, ur: { tabell: string; rad: string; kolumner?: string[] }): { kolumn: string; text: string }[] | null;
 /** Ordet i ur.rad som säger att rollen hämtar veckans rad. */
 export declare const VECKANS_RAD: string;
+/** Delen i en rad med del som är passets förberedelse. */
+export declare const FORE_PASSET: string;
 /** Veckans rad i en tabell med en rad per vecka och en kolumn per pass: cellerna för varje vecka, eller null. */
 export declare function rollensVeckor(d: MetodensTexter, ur: { tabell: string; rad: string; kolumner?: string[] }): Record<string, { kolumn: string; text: string }[]> | null;
 /** Planens egna texter citerar metoden ordagrant. */
@@ -235,6 +237,8 @@ export declare const veckansNamn: (v: { innehall: number; gang?: number; vecka: 
 export declare const planveckansNamn: (plan: Plan, v: PlanVecka) => Veckonamn;
 /** Raderna i planens passen som gäller passet, den mest bestämda först. */
 export declare function passetsRoller(plan: Plan, p: Pass, passen: Metodplan['passen']): number[];
+/** Raderna som passet visar: den mest bestämda raden om passets plats i insatsen, med raderna som har samma när, och raderna om veckorna. */
+export declare function passetsVisadeRoller(plan: Plan, p: Pass, passen: Metodplan['passen']): number[];
 /** Var ett pass står i planen: numret, sista och näst sista, metodens vecka, platsen i veckan och minuterna. */
 export declare function passetsLage(plan: Plan, p: Pass, minuter?: number): PassetsLage;
 /** Gäller en rad i planens passen eller en variant för passet? */
@@ -243,8 +247,10 @@ export declare function passetTraffas(nar: PassensNar | VariantensNar, lage: Pas
 export declare const narensVikt: (t: PassensNar | VariantensNar) => number;
 /** Hur många elever elevlistan rymmer: en hel klass. */
 export declare const ELEVLISTANS_LANGD: number;
-/** Ett pass som sidan och kalendern visar det: namnet, rollernas texter, delarna och förberedelsen, med tidsschemats variant för passet. */
-export declare function passetsBeskrivning<D extends { tid: string; fas: string; vad: string }>(roller: { text?: string; rad?: { kolumn: string; text: string }[]; veckor?: Record<string, { kolumn: string; text: string }[]>; kort?: string; utanTidsschema?: boolean; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] } }[], passet: { delar: D[]; fore?: string; varianter?: (Variant & { delar: D[] })[] } | undefined, lage?: PassetsLage): { namn: string; texter: { etikett: string; text: string }[]; delar: D[]; egenOrdning: boolean; fore?: string; foreRader: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[]; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] }; rubrik?: string; variantText?: string };
+/** En rolls text i en del av passet (passetsBeskrivning): rollens citat och tabellens celler med kolumnens namn. */
+export type DelensForsta = { etikett: string; text: string }[];
+/** Ett pass som sidan och kalendern visar det: namnet, rollernas texter, delarna och förberedelsen, med tidsschemats variant för passet. En roll med del står i delen, först eller i stället för delens text. */
+export declare function passetsBeskrivning<D extends { tid: string; fas: string; vad: string }>(roller: { text?: string; rad?: { kolumn: string; text: string }[]; veckor?: Record<string, { kolumn: string; text: string }[]>; kort?: string; utanTidsschema?: boolean; del?: string; istallet?: boolean; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] } }[], passet: { delar: D[]; fore?: string; varianter?: (Variant & { delar: D[] })[] } | undefined, lage?: PassetsLage): { namn: string; texter: { etikett: string; text: string }[]; delar: (D & { forst?: DelensForsta; istallet?: true })[]; egenOrdning: boolean; fore?: string; foreForst?: DelensForsta; utanDel: string[]; foreRader: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[]; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] }; rubrik?: string; variantText?: string };
 /** En del i ett pass med egen tabell: tiden, namnet när tabellen har ett, vad som händer och de andra kolumnerna med sina namn. */
 export type TabellDel = { tid: string; fas: string; vad: string; mer: { etikett: string; text: string }[] };
 /** Delarna i ett pass med egen tabell, och förberedelsen, eller null när tabellen inte är ett pass i delar. */

@@ -306,13 +306,18 @@ plan:
       ur: { tabell: En lista i veckan, rad: Fredag }
     - nar: vecka 1
       text: "Modellera fyra till sex bokstäver först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
+    # Körläsningen i vecka 6 och 7 läser rader och meningar i stället för kolumnen (den stängda frågan 2026-10-26).
     - nar: vecka 6
-      text: "Läs radvis, från vänster till höger."
+      del: Körläsning
+      istallet: true
+      text: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Läs radvis, från vänster till höger. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
     - nar: veckans övriga pass i vecka 6
       kort: "Dagens rader"
       text: "I vecka 6 körläser ni några rader i stället för en kolumn, och i vecka 7 några meningar."
     - nar: vecka 7
-      text: "Gruppen läser varje mening två gånger och pratar om vad den betyder."
+      del: Körläsning
+      istallet: true
+      text: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Gruppen läser varje mening två gånger och pratar om vad den betyder. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
     - nar: veckans övriga pass i vecka 7
       kort: "Dagens meningar"
       text: "I vecka 6 körläser ni några rader i stället för en kolumn, och i vecka 7 några meningar."

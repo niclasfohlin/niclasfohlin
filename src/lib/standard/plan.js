@@ -273,6 +273,8 @@ export function metodplan(d) {
       skattningar: egna.skattningar,
       // Planens förval i veckor när längden beror på något metoden säger (plan.veckoval).
       ...(typeof d.plan?.veckoval?.forval === 'number' ? { forvaldaVeckor: d.plan.veckoval.forval } : {}),
+      // Skolveckorna före första passet som det metoden gör före start behöver, när det är fler än en (plan.foreVeckor).
+      ...(typeof d.plan?.foreVeckor === 'number' ? { foreVeckor: d.plan.foreVeckor } : {}),
     },
   };
 }
@@ -357,6 +359,15 @@ export function planensRamFel(d) {
     if (saknas.length) fel.push(`Planens pass "${p.nar}" hämtar veckans rad ur tabellen "${p.ur.tabell}", som saknar en rad för vecka ${[...new Set(saknas)].join(', ')}. Ge varje vecka i progressionen sin rad.`);
   }
   for (const p of d.plan?.passen ?? []) if (p.text && tiderILoptext(p.text)) fel.push(`Planens pass "${p.nar}" säger passets tider. Tiderna står i metodens tidsschema, och tider som gäller vissa veckor som en variant (tidsschema.varianter), så att metodens sida, Word och planen läser samma rot (METODER.md under Tidsschemats varianter).`);
+  // En rad med del står i en del som passet har: tidsschemats, en variants eller passets tabells, eller Före passet
+  // (passetsBeskrivning; Rimligheten 2026-10-26: veckans rad stod överst i passet, och delen under sa emot den).
+  const tabellensFaser = (namn) => { const t = d.tabeller?.find((x) => x.rubrik === namn); return (t && tabellensDelar(t)?.delar.map((x) => x.fas)) || []; };
+  const delnamn = new Set([FORE_PASSET, ...(d.tidsschema?.rader ?? []).filter((r) => minuterISpann(r.tid)).map((r) => r.fas), ...(d.tidsschema?.varianter ?? []).flatMap((v) => v.delar.map((x) => x.fas)), ...(d.plan?.passen ?? []).flatMap((p) => (p.tabell ? tabellensFaser(p.tabell) : []))].map(delnyckel));
+  for (const p of d.plan?.passen ?? []) {
+    if (p.istallet && !p.del) fel.push(`Planens pass "${p.nar}" har istallet utan del. istallet säger att raden står i stället för delens vanliga text, så raden behöver delens namn i del.`);
+    if (p.del && p.utanTidsschema) fel.push(`Planens pass "${p.nar}" har både del och utanTidsschema. Ett pass utan tidsschemats delar har ingen del att stå i.`);
+    else if (p.del && !delnamn.has(delnyckel(p.del))) fel.push(`Planens pass "${p.nar}" hör till delen "${p.del}", som passet inte har. Skriv delens namn som i tidsschemat eller passets tabell, eller Före passet.`);
+  }
   const meningar = meningarna(d.tidsschema?.text);
   for (const u of d.plan?.utan ?? []) if (!meningar.includes(u.trim())) fel.push(`plan.utan nämner "${u}", som inte är en mening i tidsschemats text. Skriv meningen som den står där, eller ta bort den ur plan.utan.`);
   for (const m of meningarna(planensInledning(d.tidsschema?.text, d.plan?.utan))) if (omSidan(m)) fel.push(`Tidsschemats text säger "${m}", som gäller metodens sida och inte går att läsa i planen. Lägg meningen i plan.utan.`);
@@ -391,6 +402,10 @@ const tabellOchKolumner = (d, ur) => {
 const radensCeller = (t, r, valda) => valda.map((k) => ({ kolumn: t.kolumner.length === 2 ? '' : k, text: String(r[t.kolumner.indexOf(k)] ?? '').trim() })).filter((x) => x.text);
 /** Ordet i `ur.rad` som säger att rollen hämtar veckans rad i en tabell med en rad per vecka (rollensVeckor). */
 export const VECKANS_RAD = 'veckans';
+/** Delen i en rad med del som är passets förberedelse (passetsBeskrivning). */
+export const FORE_PASSET = 'Före passet';
+// En dels namn som nyckel: Visa och visa är samma del.
+const delnyckel = (s) => String(s).trim().toLocaleLowerCase('sv');
 /**
  * Veckans rad i en tabell med en rad per vecka och en kolumn per pass, som Antalsuppfattningens Veckan: ett fokus i tre
  * material, där en roll hämtar sin text ur veckans rad (`ur.rad` är "veckans") och sitt pass kolumn (riggens omgång 3
@@ -970,10 +985,16 @@ export function planera(mp, val) {
     if (e < efter) efter = e;
   }
   // Före första passet: skolveckan före planens första vecka, förbi lovveckor (de kalla testarna 2026-10-24: kartläggningen
-  // och mötet med hemmen stod på första passets dag). overLov säger att veckan före var lov.
-  let foreMandag = plusDagar(veckor[0]?.mandag ?? forstaMandagen(val), -7);
+  // och mötet med hemmen stod på första passets dag), eller så många skolveckor före som metoden säger (mp.foreVeckor,
+  // Rimligheten 2026-10-26: Boksamtalets läsintervjuer och böcker behöver en till tre veckor). overLov säger att en vecka
+  // före var lov.
+  let foreMandag = veckor[0]?.mandag ?? forstaMandagen(val);
   let overLov = false;
-  for (let i = 0; i < 53 && lov.has(veckonyckel(foreMandag)); i++) { foreMandag = plusDagar(foreMandag, -7); overLov = true; }
+  for (let kvar = mp.foreVeckor ?? 1, i = 0; kvar > 0 && i < 53; i++) {
+    foreMandag = plusDagar(foreMandag, -7);
+    if (lov.has(veckonyckel(foreMandag))) overLov = true;
+    else kvar--;
+  }
   // Varje pass hör till ett steg i progressionen: efter veckans plats i metoden, eller passets nummer. Det som kommer efter
   // insatsen tar ingen vecka.
   const stegFor = (nr) => mp.steg.find((s) => !s.efter && nr >= s.fran && (s.till === undefined || nr <= s.till));
@@ -1268,6 +1289,23 @@ export function passetsRoller(plan, p, passen) {
   const lage = passetsLage(plan, p);
   return (passen ?? []).filter((x) => passetTraffas(x.nar, lage)).sort((a, b) => narensVikt(a.nar) - narensVikt(b.nar) || a.rad - b.rad).map((x) => x.rad);
 }
+/**
+ * Raderna som passet visar på sidan och i kalendern (passetsBeskrivning): av raderna om passets plats i insatsen, sista,
+ * näst sista, ett nummer eller ett spann, bara den mest bestämda och raderna med samma när, och sedan raderna om metodens
+ * veckor och platsen i veckan. Flera rader med samma när är ett pass med rader i olika delar, som Boksamtalets sista
+ * läspass (den stängda frågan 2026-10-26).
+ * @param {Plan} plan
+ * @param {Pass} p
+ * @param {Metodplan['passen']} passen
+ * @returns {number[]}
+ */
+export function passetsVisadeRoller(plan, p, passen) {
+  const rader = passetsRoller(plan, p, passen);
+  const nar = (r) => (passen ?? []).find((x) => x.rad === r)?.nar;
+  const plats = rader.filter((r) => narensVikt(nar(r)) < 2);
+  const forsta = plats.length ? JSON.stringify(nar(plats[0])) : undefined;
+  return [...plats.filter((r) => JSON.stringify(nar(r)) === forsta), ...rader.filter((r) => narensVikt(nar(r)) >= 2)];
+}
 
 // ---------- Passet ----------
 // Passet är metodens tidsschema, och de veckor då passet har andra delar eller tider står de som en variant i tidsschemat
@@ -1444,9 +1482,11 @@ export function tabellensDelar(t) {
  * Upprepad läsnings pass på tio minuter), och annars tidsschemats. En tabell är passets egen ordning, så då gäller inte
  * tidsschemats förberedelse och fraser (egenOrdning); en variant är samma pass med andra tider, så där gäller de, och
  * variantens text står först bland texterna. En roll har sin egen text, ett citat ur metoden, och raden ur metodens tabell
- * som den hämtar sin text ur, med kolumnens namn som etikett (K-520). Ett kortare pass har variantens rubrik.
+ * som den hämtar sin text ur, med kolumnens namn som etikett (K-520). Ett kortare pass har variantens rubrik. En roll med
+ * del står i den delen (forst), eller i förberedelsen när delen är Före passet (foreForst), och med istallet i stället för
+ * delens vanliga text, tabellens andra kolumner och fraserna; utanDel är delarna som passet inte har.
  * @template {{ tid: string, fas: string, vad: string }} D
- * @param {{ text?: string, rad?: { kolumn: string, text: string }[], veckor?: Record<string, { kolumn: string, text: string }[]>, kort?: string, utanTidsschema?: boolean, tabell?: { namn: string, adress: string, delar?: D[], fore?: { namn: string, nar: string, vad: string }[] } }[]} roller
+ * @param {{ text?: string, rad?: { kolumn: string, text: string }[], veckor?: Record<string, { kolumn: string, text: string }[]>, kort?: string, utanTidsschema?: boolean, del?: string, istallet?: boolean, tabell?: { namn: string, adress: string, delar?: D[], fore?: { namn: string, nar: string, vad: string }[] } }[]} roller
  * @param {{ delar: D[], fore?: string, varianter?: (Variant & { delar: D[] })[] } | undefined} passet passet ur tidsschemat
  * @param {PassetsLage} [lage] passets läge i planen (passetsLage), med passets minuter
  */
@@ -1462,14 +1502,35 @@ export function passetsBeskrivning(roller, passet, lage) {
   // En roll med veckans rad (rollensVeckor) visar passets veckas celler.
   const kortare = !!variant && variantensNar(variant.nar)?.typ === 'minuter';
   const raden = (r) => (r.veckor ? r.veckor[String(lage?.vecka)] ?? [] : r.rad ?? []);
-  const texter = [...(variant?.text && !kortare ? [{ etikett: '', text: variant.text }] : []), ...roller.flatMap((r) => [...(r.text ? [{ etikett: '', text: utanNamnet(r) }] : []), ...raden(r).map((c) => ({ etikett: c.kolumn, text: c.text }))])];
+  const innehall = (r) => [...(r.text ? [{ etikett: '', text: utanNamnet(r) }] : []), ...raden(r).map((c) => ({ etikett: c.kolumn, text: c.text }))];
+  // En rad med del står i passets del och inte överst: först i delen, och med istallet i stället för delens vanliga text och
+  // fraser (Rimligheten 2026-10-26: veckans rad stod överst i passet, och delen under sa emot den, som Bråkkursens sista
+  // bråk och Läslistors rader i vecka 6). Före passet är förberedelsen. En rad vars del passet inte har står överst.
+  const grund = utan ? [] : tabell?.delar ?? variant?.delar ?? passet?.delar ?? [];
+  const placerade = new Set();
+  const iDelen = (fas) => roller.filter((r) => !!r.del && delnyckel(r.del) === delnyckel(fas));
+  const medRader = grund.map((d) => {
+    const rr = iDelen(d.fas);
+    if (!rr.length) return d;
+    rr.forEach((r) => placerade.add(r));
+    const forst = rr.flatMap(innehall);
+    return rr.some((r) => r.istallet) ? { ...d, vad: '', mer: [], forst, istallet: true } : { ...d, forst };
+  });
+  // Utan rader i delarna är delarna tidsschemats, variantens eller tabellens egna.
+  const delar = medRader.every((d, i) => d === grund[i]) ? grund : medRader;
+  const foreRoller = utan ? [] : iDelen(FORE_PASSET);
+  foreRoller.forEach((r) => placerade.add(r));
+  const foreIstallet = foreRoller.some((r) => r.istallet);
+  const texter = [...(variant?.text && !kortare ? [{ etikett: '', text: variant.text }] : []), ...roller.filter((r) => !placerade.has(r)).flatMap(innehall)];
   return {
     namn: roller.map(namnet).find(Boolean) ?? '',
     texter,
-    delar: utan ? [] : tabell?.delar ?? variant?.delar ?? passet?.delar ?? [],
+    delar,
     egenOrdning: !!tabell || utan,
-    fore: tabell || utan ? undefined : passet?.fore,
-    foreRader: tabell?.fore ?? [],
+    fore: tabell || utan || foreIstallet ? undefined : passet?.fore,
+    foreRader: foreIstallet ? [] : tabell?.fore ?? [],
+    ...(foreRoller.length ? { foreForst: foreRoller.flatMap(innehall) } : {}),
+    utanDel: roller.filter((r) => r.del && !placerade.has(r)).map((r) => r.del),
     tabell: roller.find((r) => r.tabell)?.tabell,
     // Ett kortare pass har variantens rubrik, "Ett pass på tio minuter", i stället för tidsschemats (Codex 2026-10-26).
     ...(kortare ? { rubrik: stor(variant.nar), ...(variant.text ? { variantText: variant.text } : {}) } : {}),
@@ -2357,7 +2418,7 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass', pass: number[], till?: number } | { typ: 'sista-passet', efter?: number } | { typ: 'villkor' }} Tid
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
- * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number }} Metodplan
+ * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number }} Metodplan
  * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel

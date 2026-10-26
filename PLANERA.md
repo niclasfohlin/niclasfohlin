@@ -237,7 +237,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Texten | `stor`, `liten`, `mening`, `utanPunkt`, `decimal`, `tvasiffrigt`, `esc`, `skyddaRegex`, `rentText`, `forstaLedet`, `kortnamn`, `meningarna`, `slutarMedPunkt`, `allaTexter` och `forstaOrdet` |
 | Eleverna i elevlistan | `sammaElev` |
 | Passet på sidan och i kalendern, med tidsschemats varianter för vissa veckor, vissa pass och ett kortare pass | `passetsBeskrivning`, `delensTid`, `variantensMening`, `variantensNar`, `variantenFor`, `tidsschematsFel` och `varianternasFel` |
-| Var ett pass står i planen, som planens rader och varianterna läser det | `passetsLage`, `passetTraffas` och `narensVikt` |
+| Var ett pass står i planen, som planens rader och varianterna läser det, och raderna som passet visar | `passetsLage`, `passetTraffas`, `narensVikt` och `passetsVisadeRoller` |
 | Ett pass med egen tabell, i tabellernas former | `tabellensDelar` |
 | Metodens saker i en text, och lärarens och elevernas egna saker som inte länkas | `sakdelar`, `olankadeSaker` och `EGNA_SAKER` |
 | Metodens texter i planen | `planensInledning`, `planensTexter`, `visadeTexter`, `planensRamFel`, `rollensRad`, `rollensVeckor`, `VECKANS_RAD` och `planensCitatFel` |

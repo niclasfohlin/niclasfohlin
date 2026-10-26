@@ -290,6 +290,17 @@ if (tsMp) {
   ska('resultat i veckor som planen inte har visas inte', s.elevensResultat({ uppfoljning: [{ rad: 0, typ: 'vecka' }, { rad: 1, typ: 'efter' }], sistaPass: '2026-11-20' }, { '0-2026-11-27': '7 av 10', '0-2026-11-13': '5 av 10', '1-2026-12-04': '8 av 10' }).map((x) => x.nyckel).join() === '0-2026-11-13,1-2026-12-04');
   const kortP = s.planera(tsMp, { ...val, slut: 6 });
   ska('sista passet går före ett eget nummer', s.passetsRoller(kortP, kortP.pass[5], [{ nar: { typ: 'pass', fran: 6, till: 6 }, rad: 0 }, { nar: { typ: 'sista' }, rad: 1 }]).join() === '1,0');
+  // Passets visade rader: den mest bestämda platsen och raderna med samma när, som Boksamtalets sista läspass med rader i
+  // olika delar, och sedan veckornas rader (den stängda frågan 2026-10-26).
+  ska('passets visade rader: den mest bestämda platsen med raderna som har samma när, och veckornas rader', s.passetsVisadeRoller(kortP, kortP.pass[5], [{ nar: { typ: 'pass', fran: 6, till: 6 }, rad: 0 }, { nar: { typ: 'sista' }, rad: 1 }, { nar: { typ: 'sista' }, rad: 2 }, { nar: { typ: 'veckor', fran: 1, till: 9 }, rad: 3 }]).join() === '1,2,3', s.passetsVisadeRoller(kortP, kortP.pass[5], [{ nar: { typ: 'pass', fran: 6, till: 6 }, rad: 0 }, { nar: { typ: 'sista' }, rad: 1 }, { nar: { typ: 'sista' }, rad: 2 }, { nar: { typ: 'veckor', fran: 1, till: 9 }, rad: 3 }]));
+  // Förberedelser som tar flera veckor börjar så många skolveckor före första passet, förbi lov (plan.foreVeckor;
+  // Rimligheten 2026-10-26: Boksamtalets läsintervjuer och böcker hann inte på en vecka).
+  {
+    const bmp = s.metodplan(metod('boksamtal-i-grupp')).plan;
+    const bokVal = { ...s.forval(bmp, '2026-11-02'), start: '2026-11-02' };
+    const utanLov = s.planera(bmp, bokVal), medLov = s.planera(bmp, { ...bokVal, lov: ['2026-44'] }), enVecka = s.planera({ ...bmp, foreVeckor: undefined }, bokVal);
+    ska('förberedelserna börjar tre skolveckor före första passet, förbi lovet', bmp.foreVeckor === 3 && utanLov.fore.mandag === '2026-10-12' && !utanLov.fore.overLov && medLov.fore.mandag === '2026-10-05' && medLov.fore.overLov && enVecka.fore.mandag === '2026-10-26', [utanLov.fore, medLov.fore, enVecka.fore]);
+  }
   ska('en förlängd insats har kvar avstämningens vecka', s.mittVeckan(s.planera(tsMp, { ...val, langd: 8, mitt: 3 })) === 3 && s.lasVal(`#${s.kodaVal({ ...val, langd: 8, mitt: 3 })}`).val.mitt === 3);
   const f = { gjorda: ['2026-11-02', '2026-11-04', '2026-11-06'], elever: [{ id: 'a1', namn: 'Ali' }, { id: 'b2', namn: 'Bea' }], franvaro: { '2026-11-04': ['b2'] }, vecka: { '2026-11-02': { varde: 3, not: 'Gruppen kom igång' } }, skattning: { '2026-11-02': { a1: 2, b2: 3 }, '2026-11-09': { a1: 3, b2: 3 } }, resultat: { '0-2026-11-02': { a1: '4 av 8' } }, avstamning: { beslut: 'fortsatt' } };
   const sm = s.sammanstallning(p, f, '2026-11-18');
@@ -891,6 +902,17 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     const texterna = (b) => b.texter.map((t) => (t.etikett ? `${t.etikett}: ${t.text}` : t.text)).join('|');
     const raden = { kort: 'Bygga', rad: [{ kolumn: 'Du', text: 'Läser högt.' }, { kolumn: 'Eleverna', text: 'Följer med.' }] };
     ska('passet: variantens delar de veckorna, tabellens ordning och tidsschemat', b1.namn === 'Hela listan' && texterna(b1) === 'Passet är bara listan.|Du modellerar.' && b1.delar === schemat.varianter[0].delar && !b1.egenOrdning && b1.fore === 'Ta fram boken.' && b2.egenOrdning && b2.delar === tabell.tabell.delar && b2.fore === undefined && b2.foreRader.length === 1 && b2.tabell === tabell.tabell && !texterna(b2).includes('Passet är bara listan.') && b3.delar === schemat.delar && texterna(b3) === 'Du modellerar.' && texterna(s.passetsBeskrivning([raden], schemat, { vecka: 4 })) === 'Du: Läser högt.|Eleverna: Följer med.' && s.passetsBeskrivning([raden], schemat, { vecka: 4 }).namn === 'Bygga', [texterna(b1), texterna(b2), texterna(b3)]);
+    // En rad med del står i passets del (den stängda frågan 2026-10-26: veckans rad stod överst, och delen under sa emot den):
+    // först i delen, med istallet i stället för delens text, Före passet i förberedelsen, och en del som passet inte har står
+    // överst och i utanDel.
+    const delSchema = { delar: [{ tid: '0–3 min', fas: 'Texten', vad: 'Vanlig text.' }, { tid: '3–6 min', fas: 'Visa', vad: 'Visa som vanligt.' }], fore: 'Välj ett ställe.' };
+    const bd = s.passetsBeskrivning([{ text: 'Överst.', kort: 'Bilderboken' }, { text: 'Veckans text.', del: 'texten' }, { text: 'Veckans visning.', del: 'Visa', istallet: true }, { text: 'Ta en bilderbok.', del: 'Före passet', istallet: true }, { text: 'Ingen sådan del.', del: 'Samtala' }], delSchema);
+    ska('en rad med del står i delen, först eller i stället för delens text, och i förberedelsen', bd.namn === 'Bilderboken' && texterna(bd) === 'Överst.|Ingen sådan del.' && bd.delar[0].vad === 'Vanlig text.' && bd.delar[0].forst?.[0].text === 'Veckans text.' && !bd.delar[0].istallet && bd.delar[1].vad === '' && bd.delar[1].istallet === true && bd.delar[1].forst?.[0].text === 'Veckans visning.' && bd.fore === undefined && bd.foreForst?.[0].text === 'Ta en bilderbok.' && bd.utanDel.join() === 'Samtala', JSON.stringify(bd));
+    const bd2 = s.passetsBeskrivning([{ text: 'Ta också korten.', del: 'Före passet' }], delSchema);
+    ska('en rad med del Före passet står först i förberedelsen, och förberedelsen står kvar', bd2.fore === 'Välj ett ställe.' && bd2.foreForst?.[0].text === 'Ta också korten.' && bd2.delar === delSchema.delar && !bd2.utanDel.length, JSON.stringify(bd2));
+    // Spärren åt andra hållet: en del som passet inte har, istallet utan del och del i ett pass utan tidsschemats delar.
+    const delFel = (rad) => s.planensRamFel({ tidsschema: { rader: [{ tid: '0–3 min', fas: 'Texten', vad: 'x' }] }, tabeller: [], plan: { passen: [{ nar: 'vecka 1', text: 'x', ...rad }] } });
+    ska('spärren för en rad med del', !delFel({ del: 'Texten' }).length && !delFel({ del: 'Före passet', istallet: true }).length && delFel({ del: 'Visa' }).some((f) => f.includes('som passet inte har')) && delFel({ istallet: true }).some((f) => f.includes('istallet utan del')) && delFel({ del: 'Texten', utanTidsschema: true }).some((f) => f.includes('utanTidsschema')), [delFel({ del: 'Visa' }), delFel({ istallet: true }), delFel({ del: 'Texten', utanTidsschema: true })]);
     ska('tidsschemats inledning i planen, utan meningarna om metodens sida', s.planensInledning(ll.tidsschema.text, ll.plan.utan) === 'Förbered dig genom att välja orden du ska modellera. Passet och listorna står också på Lektionskortet, ett A4 att ha framför dig.' && s.planensInledning('En. Två.', ['Två.']) === 'En.', s.planensInledning(ll.tidsschema.text, ll.plan.utan));
     const texter = s.planensTexter(ll), visade = s.visadeTexter(ll);
     ska('planens texter: planens egna fält, och metodens texter som planen visar med varianten och tabellraderna', texter.some(([plats]) => plats === 'Planens upprepa') && visade.includes('Passet är bara listan.') && visade.includes('Läraren modellerar fyra till sex ord, och gruppen körläser hela listan i stället för dagens kolumn. Förklara nya ord. Parläsningen blir kortare.') && visade.includes(s.planensInledning(ll.tidsschema.text, ll.plan.utan)) && !visade.some((t) => t.includes('Remsan')), texter.map(([p]) => p));
@@ -1165,6 +1187,18 @@ for (const m of planbara) {
   if (felen.length) adressfel.push(`${m.id}: planens adresser leder inte till sidor och ankare som finns: ${felen.join(', ')}`);
   const utanDelar = (d?.passen ?? []).filter((x) => x.tabell && !x.tabell.delar?.length).map((x) => x.tabell.namn);
   if (utanDelar.length) adressfel.push(`${m.id}: passens tabeller utan delar: ${utanDelar.join(', ')}`);
+  // Varje rad med del står i en del i varje pass den gäller, med förvalet och den längsta planen (passetsBeskrivning; den
+  // stängda frågan 2026-10-26).
+  if ((d?.passen ?? []).some((x) => x.del)) {
+    const mp = s.metodplan(m.d).plan;
+    for (const langd of [undefined, mp.period?.max]) {
+      const pl = s.planera(mp, { ...s.forval(mp, '2026-11-02'), ...(langd ? { langd } : {}) });
+      for (const p of pl.pass) {
+        const bp = s.passetsBeskrivning(s.passetsVisadeRoller(pl, p, mp.passen).map((r) => d.passen[r]), d.passet, s.passetsLage(pl, p));
+        if (bp.utanDel.length) adressfel.push(`${m.id}: pass ${p.nr} har raden med del ${bp.utanDel.join(', ')}, som passet inte har`);
+      }
+    }
+  }
 }
 if (adressfel.length) { console.error(`planprov: ${adressfel.length} fel i planens adresser:\n  ${adressfel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: planens adresser i ${planbara.length} metoder leder till sidor och ankare som finns.`);

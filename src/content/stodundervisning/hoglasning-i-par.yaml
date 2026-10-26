@@ -136,7 +136,7 @@ tabeller:
   - rubrik: "Läsningen för de yngre: vecka 6–8"
     plats: efter-urval
     meny: true
-    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev läser en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
+    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev läser en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. Före passet väljer du ett uppslag ur en egen bilderbok. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
     kolumner: [När, Det eleverna gör]
     rader:
       - ["Vecka 6", "Träffar sin lyssnare, frågar vad hen tycker om, väljer en bilderbok till hen och börjar läsa den för sin kamrat. Går mötet inte att ordna, skriver de yngres lärare vad varje barn tycker om."]
@@ -309,20 +309,67 @@ plan:
       utanTidsschema: true
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 8" }
     # Veckorna då parets bok vilar och eleverna förbereder bilderboken (Rimligheten 2026-10-26: vecka 6 och 7 visade det
-    # vanliga passet, där paren läser vidare i sin bok).
+    # vanliga passet, där paren läser vidare i sin bok). Varje del har veckans text i stället för den vanliga, med tiderna
+    # kvar (andra rundan samma dag: utan delarna visste läraren inte vad paren gör efter Visa).
     - nar: veckans övriga pass i vecka 6
       kort: "Bilderboken"
-      utanTidsschema: true
-      text: "Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
+      text: "Resten av vecka 6 och 7 vilar parets bok."
+    - nar: veckans övriga pass i vecka 6
+      del: Före passet
+      istallet: true
+      text: "Före passet väljer du ett uppslag ur en egen bilderbok."
+    - nar: veckans övriga pass i vecka 6
+      del: Texten
+      istallet: true
+      text: "I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten."
+    - nar: veckans övriga pass i vecka 6
+      del: Visa
+      istallet: true
+      text: "I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
+    - nar: veckans övriga pass i vecka 6
+      del: Läs för en lyssnare
+      istallet: true
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen."
+      ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
     - nar: veckans sista pass i vecka 6
       kort: "Bilderboken"
-      utanTidsschema: true
-      text: "Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
+      text: "Resten av vecka 6 och 7 vilar parets bok."
+    - nar: veckans sista pass i vecka 6
+      del: Före passet
+      istallet: true
+      text: "Före passet väljer du ett uppslag ur en egen bilderbok."
+    - nar: veckans sista pass i vecka 6
+      del: Texten
+      istallet: true
+      text: "I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten."
+    - nar: veckans sista pass i vecka 6
+      del: Visa
+      istallet: true
+      text: "I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
+    - nar: veckans sista pass i vecka 6
+      del: Läs för en lyssnare
+      istallet: true
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen."
+      ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
     - nar: vecka 7
       kort: "Bilderboken"
-      utanTidsschema: true
-      text: "Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
+      text: "Resten av vecka 6 och 7 vilar parets bok."
     - nar: vecka 7
+      del: Före passet
+      istallet: true
+      text: "Före passet väljer du ett uppslag ur en egen bilderbok."
+    - nar: vecka 7
+      del: Texten
+      istallet: true
+      text: "I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten."
+    - nar: vecka 7
+      del: Visa
+      istallet: true
+      text: "I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
+    - nar: vecka 7
+      del: Läs för en lyssnare
+      istallet: true
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 7" }
     - nar: veckans övriga pass i vecka 8
       kort: "Parets bok igen"

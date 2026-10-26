@@ -569,6 +569,9 @@ plan:
   nivaval:
     text: "Nivåerna bygger mer på temat och innehållet än på hur svår boken är att läsa, eftersom du läser högt och eleven följer med. Välj nivå efter gruppens ålder och efter vad gruppen är redo för."
     mer: Så skiljer sig nivåerna
+  # Förberedelserna tar en till tre veckor, och planen börjar tre skolveckor före bokvalet (Rimligheten 2026-10-26: Före
+  # stod veckan före, och vid höstlov dagen före bokvalet).
+  foreVeckor: 3
   fore:
     - "Före bokvalet behöver du en till tre veckor till läsintervjuerna och böckerna."
     - "På varje nivå, Bas, Medel och Avancerat, har metoden tio böcker: fem från 2012 eller senare och fem klassiker. I nivåns lista ser du ungefär hur många läspass varje bok tar, var ljudboken och talboken finns, var du lånar och köper boken och om det finns en lärarhandledning."
@@ -617,14 +620,25 @@ plan:
     - { nar: pass 29, kort: "Läspass 28", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
     - { nar: pass 30, kort: "Läspass 29", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
     - { nar: pass 31, kort: "Läspass 30", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    # Det sista läspasset: ordet om boken i Med mig, korten i förberedelsen, och bokningen i elevernas klasser, där den som
+    # vill tipsar sin klass (Rimligheten 2026-10-26: bokningen stod inte i planen, och Med mig hade bara sin vanliga text).
     - nar: näst sista passet
       kort: "Det sista läspasset"
-      text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut. Ta med korten, som du har sparat sedan läsintervjun. Slutet är nästa pass, helst efter en helg, så att eleverna hinner tänka på boken."
+      text: "I det sista läspasset läser du ut boken. Slutet är nästa pass, helst efter en helg, så att eleverna hinner tänka på boken. Boka i förväg en stund i elevernas klasser veckan efter, då den som vill tipsar sin klass i en minut, med boken i handen."
+    - nar: näst sista passet
+      del: Före passet
+      text: "Ta med korten, som du har sparat sedan läsintervjun."
+    - nar: näst sista passet
+      del: Med mig
+      text: "Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut."
     - nar: sista passet
       kort: "Slutet"
       text: "Slutsamtalet för ni tillsammans, också när ni är fler än fem. Är ni fler än fem, säger var och en sin sak till den bredvid i stället för laget runt, och du skriver några i varje spalt."
       tabell: "Sista passet: slutet"
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Slutet, kolumner: [Det som är nytt] }
+    - nar: sista passet
+      del: Boktipset
+      text: "Den som skriver långsamt fyller i tre rader och säger resten."
 mal:
   overgripande: "kunna hålla ihop berättelsen och visa var i boken tanken kommer ifrån."
   punkter:

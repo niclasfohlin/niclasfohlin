@@ -422,7 +422,9 @@ plan:
     - nar: veckans första
       kort: "Tiobas"
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 1: tiobas"] }
+    # Läxan görs i början av Första talet, som har två minuter till de passen (den stängda frågan 2026-10-26).
     - nar: veckans första pass i vecka 2–5
+      del: Första talet
       text: "Fråga i början av veckans första pass hur förra veckans läxa gick, och låt eleven visa en uppgift."
     - nar: veckans första
       text: "Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan."
@@ -437,6 +439,7 @@ plan:
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 3: pengar och skrift"] }
       text: "Använd bara enkronor, tiokronor, hundralappar och tusenlappar. Femkronan är större än tiokronan och säger inget om talsorterna."
     - nar: sista passet i vecka 5
+      del: Första talet
       text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan."
   fore:
     - "Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."

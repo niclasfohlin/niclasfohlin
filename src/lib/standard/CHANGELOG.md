@@ -1,5 +1,10 @@
 # Ändringar i standarden
 
+## 0.23.0, 2026-10-26
+
+- `plan.js`, efter den stängda frågan om det som ändrats i planerna samma kväll (sajtens K-565 och K-567: veckans rad stod överst i passet, och delen under sa emot den, som Bråkkursens sista bråk och Läslistors rader i vecka 6): en rad i `plan.passen` med `del` står i passets del, eller i förberedelsen när delen är `FORE_PASSET`, Före passet, först i delen (`forst`, `foreForst`) eller med `istallet` i stället för delens text, tabellens andra kolumner och fraserna (`passetsBeskrivning`), och `utanDel` är raderna vars del passet inte har. `planensRamFel` stoppar en del som passet inte har, `istallet` utan `del` och `del` i ett pass med `utanTidsschema`. `passetsVisadeRoller` är raderna som passet visar: av raderna om passets plats i insatsen den mest bestämda och raderna med samma när, som Boksamtalets sista läspass med rader i olika delar, och sedan raderna om veckorna.
+- `plan.js`, `plan.foreVeckor`: `metodplan` bär skolveckorna före första passet som det metoden gör före start behöver, och `planera` sätter Före så många skolveckor före första passet, förbi lov (Rimligheten samma dag: Boksamtalets Före stod veckan före bokvalet, och vid höstlov dagen före).
+
 ## 0.22.0, 2026-10-26
 
 - `plan.js`, passets längd (sajtens K-564; Niclas samma dag om Gruppstärkande aktiviteters knappar för 10 och 40 minuter: "Förstår inte riktigt det"): `passetsLangder` ger längderna att välja och förvalet ur faktarutans spann, ändarna med den längre som förval när spannet är högst tio minuter och annars steg om tio minuter med steget i mitten, och `langdvaletsFel` kräver `plan.langdval`, ett stöd för valet som `plan.nivaval`, i en metod med ett spann. `nivavaletsFel` och `langdvaletsFel` prövar stödet med samma funktion, och `NIVAVALETS_LANGD` gäller båda. `planensCitatFel` räknar också tidsschemats varianter som metodens sida skriver dem (`variantensMening`) som metodens text, så att ett stöd kan citera Upprepad läsnings pass på tio minuter. Riggen kan köra `langdvaletsFel` där den kör `nivavaletsFel`, så att en metod med ett spann i faktarutan, som Kortskrivning, har stödet i leveransen.

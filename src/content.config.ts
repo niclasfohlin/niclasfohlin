@@ -440,9 +440,17 @@ const metodensFalt = z.strictObject({
         // Ett pass som metoden beskriver med ord och inte med tidsschemats delar, som mötet hos de yngre i Högläsning i par.
         utanTidsschema: z.literal(true).optional(),
         ur: z.strictObject({ tabell: text, rad: text, kolumner: z.array(text).min(1).optional() }).optional(),
+        // del: delen i passet som raden hör till, med delens namn ur tidsschemat eller passets tabell, eller Före passet.
+        //   Raden står först i delen, och med istallet i stället för delens vanliga text och fraser (passetsBeskrivning;
+        //   Rimligheten 2026-10-26: veckans rad stod överst i passet, och delen under sa emot den).
+        del: text.optional(),
+        istallet: z.literal(true).optional(),
       }).refine((p) => !!(p.text || p.ur), { message: 'En rad i plan.passen har en text, ett citat ur metoden, eller en rad ur metodens tabell (ur), eller båda.' })).min(1).optional(),
       utan: z.array(text).min(1).optional(),
       fore: z.array(text).min(1).max(4).optional(),
+      // foreVeckor: skolveckorna före första passet som det metoden gör före start behöver, när en vecka inte räcker, och
+      // en mening i fore som säger det (Rimligheten 2026-10-26: Boksamtalets läsintervjuer och böcker tar en till tre veckor).
+      foreVeckor: z.number().int().min(2).max(4).optional(),
       justera: z.array(text).min(1).max(4).optional(),
       // Metodens regel för beslutet efter insatsen, ordagrant, som står vid utvärderingen (Rimligheten 2026-10-26:
       // Kompissamtals beslut efter samtal 3 stod inte där läraren beslutar).
