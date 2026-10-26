@@ -1442,6 +1442,10 @@ try {
   sant('förslaget har inte texten till åtgärdsprogrammet', await f.kor(`document.getElementById('pl-ap').hidden`));
   sant('Följ insatsen är inte förvalt', !(await f.kor(`document.getElementById('pl-folj').checked`)) && (await f.kor(`document.getElementById('pl-elevruta').hidden`)));
   await f.kor(`(() => { const i = document.getElementById('pl-start'); i.value = '2026-11-02'; i.dispatchEvent(new Event('change')); return true; })()`);
+  // Metodens förval är åtta veckor (plan.veckoval.forval, passgenomgångens del A): juldagen tar ett pass i v. 52. Provet
+  // väljer sedan sex veckor, som läraren gör med knappen, och resten av provet räknar med sex.
+  sant('förslaget: metodens förval, 23 pass om 30 minuter', (await f.text('#pl-summa-text'))?.includes('23 pass om 30 minuter') && (await f.kor(`document.querySelector('#pl-langd [aria-pressed="true"]')?.dataset.langd`)) === '8', await f.text('#pl-summa-text'));
+  await f.tryck('#pl-langd [data-langd="6"]');
   sant('förslaget: 18 pass om 30 minuter', (await f.text('#pl-summa-text'))?.includes('18 pass om 30 minuter'), await f.text('#pl-summa-text'));
   sant('valen säger första passet under datumet', (await f.text('#pl-forsta-pass')) === 'Första passet: måndag 2 november.', await f.text('#pl-forsta-pass'));
   sant('förslaget: Före, sex veckor och Efter insatsen med uppföljningen', (await f.kor(`document.querySelectorAll('#pl-veckor > li:not(.efter):not(.fore):not(.pl-lovvecka) .pl-veckoknapp').length`)) === 6 && (await f.text('#pl-veckor li.fore'))?.includes('Före första passet') && (await f.text('#pl-veckor li.efter'))?.includes('Efter insatsen') && (await f.text('#pl-veckor li.efter'))?.includes('Uppföljningen efter'), [await f.text('#pl-veckor li.fore'), await f.text('#pl-veckor li.efter')]);
@@ -2444,7 +2448,7 @@ try {
   const roll1 = await rutan('.pl-roll'), fore1 = await rutan('[data-ruta="del-fore"] .pl-deltext'), avsl1 = await rutan('[data-ruta="del-3"] .pl-deltext'), inl1 = await rutan('.pl-delinledning');
   sant('stegen: variantens mening och metodens texter med planens vecka', roll1.startsWith('Passet är bara listan.') && !roll1.includes('vecka 4') && fore1.includes('Kopiera listan till varje par, och från vecka 2 tar du fram dagens bok.') && fore1.includes('från vecka 2.') && avsl1.includes('Från vecka 2 läser ni sedan i boken tillsammans') && !inl1.includes('Remsan') && inl1.includes('Lektionskortet'), [roll1, fore1, avsl1, inl1]);
   sant('stegen: rutan med veckans fokus säger inte metodens vecka', !(await st.kor(`[...document.querySelectorAll('#pl-veckan .pl-fokusruta')].map((x) => x.textContent).join(' ')`)).includes('i metoden'), await st.kor(`document.querySelector('#pl-veckan .pl-fokusruta')?.textContent ?? ''`));
-  sant('stegen: principerna säger planens vecka', (await st.kor(`document.querySelector('#pl-veckan [data-ruta="principer"]')?.textContent ?? ''`)).includes('från vecka 2 sist i passet'), await st.kor(`document.querySelector('#pl-veckan [data-ruta="principer"]')?.textContent ?? ''`));
+  sant('stegen: principerna säger planens vecka', (await st.kor(`document.querySelector('#pl-veckan [data-ruta="principer"]')?.textContent ?? ''`)).includes('från vecka 2 också sist i passet'), await st.kor(`document.querySelector('#pl-veckan [data-ruta="principer"]')?.textContent ?? ''`));
   await st.tryck('#pl-veckor [data-vy="2"]');
   await vanta(150);
   const d2 = await stegDelar(), avsl2 = await rutan('[data-ruta="del-3"] .pl-deltext');
