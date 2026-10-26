@@ -1248,13 +1248,14 @@ export function passetTraffas(nar, lage) {
   return lage.plats === nar.plats;
 }
 /**
- * Hur bestämt ett när är, det mest bestämda först: sista passet, ett pass med eget nummer, det näst sista passet, ett spann
+ * Hur bestämt ett när är, det mest bestämda först: sista passet, det näst sista passet, ett pass med eget nummer, ett spann
  * av pass, metodens veckor, en plats i vissa veckor, platsen i veckan och sist passets längd. Sista passet går före ett eget
  * nummer, så att en insats som avslutas tidigare slutar med metodens sista pass (Codex 2026-10-25: Seriesamtal slutade med
- * Lunchen i stället för passet som avslutar perioden), och första passet före det näst sista i en plan med två pass.
+ * Lunchen i stället för passet som avslutar perioden), och det näst sista passet likaså, eftersom passen vid slutet har
+ * eget innehåll (riggens K-567 2026-10-26: Boksamtalets läspass har var sin rad, och det sista läspasset hette Läspass 14).
  * @param {PassensNar | VariantensNar} t
  */
-export const narensVikt = (t) => (t.typ === 'sista' ? -1 : t.typ === 'pass' && t.till === t.fran ? 0 : t.typ === 'nastSista' ? 0.5 : t.typ === 'pass' ? 1 : t.typ === 'veckor' ? 2 : t.typ === 'minuter' ? 4 : 'veckor' in t && t.veckor ? 2.5 : 3);
+export const narensVikt = (t) => (t.typ === 'sista' ? -1 : t.typ === 'nastSista' ? -0.5 : t.typ === 'pass' && t.till === t.fran ? 0 : t.typ === 'pass' ? 1 : t.typ === 'veckor' ? 2 : t.typ === 'minuter' ? 4 : 'veckor' in t && t.veckor ? 2.5 : 3);
 /**
  * Raderna i planens `passen` som gäller ett pass, den mest bestämda först (narensVikt). Platsen i veckan räknas efter
  * datum, och veckans sista är det sista av minst två (passetsLage).

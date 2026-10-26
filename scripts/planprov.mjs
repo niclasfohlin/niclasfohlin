@@ -84,7 +84,7 @@ if (tsMp) {
   ska('sex veckor ger 18 pass', p.pass.length === 18, p.pass.length);
   ska('första och sista passet', p.forstaPass === '2026-11-02' && p.sistaPass === '2026-12-11', [p.forstaPass, p.sistaPass]);
   ska('veckorna är 45 till 50', p.veckor.map((v) => v.vecka.vecka).join() === '45,46,47,48,49,50');
-  ska('progressionens rader: 1, 2, 3, 4–5, 6–8', p.veckor.map((v) => v.steg).join() === '0,1,2,3,3,4');
+  ska('progressionens rader: 1, 2, 3, 4, 5, 6–8', p.veckor.map((v) => v.steg).join() === '0,1,2,3,4,5');
   // Före insatsen står i veckan före planens första vecka, som vecka 0 (Planera 0.2, de kalla testarna 2026-10-24).
   ska('uppföljningen före är veckan före och efter veckan efter', p.uppfoljning[0].tillfallen[0].datum === '2026-10-26' && p.uppfoljning[0].tillfallen[0].vecka === 0 && p.fore.mandag === '2026-10-26' && !p.fore.overLov && p.uppfoljning[2].tillfallen[0].datum === '2026-12-14');
   ska('varje vecka har inget datum', p.uppfoljning[1].typ === 'lopande' && p.uppfoljning[1].tillfallen.length === 0);
@@ -144,10 +144,11 @@ if (tsMp) {
   const dok = s.dokumentationstext(info, plan, val, { minuter: 30, genomforda: 7 });
   ska('åtgärdsprogrammet: åtgärden utan årskurserna och målet', dok.startsWith('Åtgärd: Textsamtal i grupp, lärarledd insats i liten grupp där eleverna samtalar om korta texter och lär sig läsa mellan raderna.\nMål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.'), dok);
   ska('åtgärdsprogrammet: omfattningen', dok.includes('Omfattning: 18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 11 december 2026 (v. 45 till v. 50), på nivån Mellan.'), dok);
-  ska('åtgärdsprogrammet: vad eleven arbetar med vecka för vecka', dok.includes('Eleven arbetar med: Det står, Jag vet och Alltså tror jag (v. 45); Stanna och Se det framför dig (v. 46); Slå ihop flera ledtrådar (v. 47); Stämmer det? och Det som menas (v. 48–49); Slaget Ordet, eleverna leder samtalet (v. 50).'), dok);
+  ska('åtgärdsprogrammet: vad eleven arbetar med vecka för vecka', dok.includes('Eleven arbetar med: Det står, Jag vet och Alltså tror jag (v. 45); Stanna och Se det framför dig (v. 46); Slå ihop flera ledtrådar (v. 47); Stämmer det? och Det som menas (v. 48); Stämmer det? och Tänk om (v. 49); Slaget Ordet, eleverna leder samtalet (v. 50).'), dok);
   // Ett lov mitt i ett steg står inte med i stegets veckor (buggjakten 2026-10-25: "v. 45–47" om v. 45 och v. 47).
-  const medLov = s.dokumentationstext(info, s.planera(tsMp, { ...val, lov: ['2026-49'] }), { ...val, lov: ['2026-49'] }, { minuter: 30 });
-  ska('åtgärdsprogrammet: ett lov mitt i ett steg står inte med i stegets veckor', medLov.includes('Stämmer det? och Det som menas (v. 48 och v. 50)'), medLov);
+  const val8 = { ...val, langd: 8, lov: ['2026-51'] };
+  const medLov = s.dokumentationstext(info, s.planera(tsMp, val8), val8, { minuter: 30 });
+  ska('åtgärdsprogrammet: ett lov mitt i ett steg står inte med i stegets veckor', medLov.includes('Slaget Ordet, eleverna leder samtalet (v. 50 och v. 52–53)'), medLov);
   ska('åtgärdsprogrammet: uppföljningen och de bockade passen', dok.includes('Före insatsen, v. 44') && dok.includes('Efter insatsen, v. 51') && dok.includes('Bockade som genomförda: 7 av 18 pass.') && !dok.includes('Skattning'), dok);
   ska('åtgärdsprogrammet har inga tankstreck som skiljetecken', !/ [–-] /.test(dok), dok);
   const dokFolj = s.dokumentationstext(info, plan, { ...val, mal: 'läsa faktatexter och visa ledtråden', tider: { 1: ['09:20', '10:00'], 3: ['09:20', '10:00'], 5: ['09:20', '10:00'] } }, { minuter: 30, folj: true });
@@ -506,7 +507,7 @@ if (tsMp) {
   const mpTs = s.metodplan(ts).plan;
   const pTs = s.planera(mpTs, { ...tom, start: '2026-11-02', dagar: [1, 3, 5], langd: 6 });
   const roll = (pl, mp, nr) => s.passetsRoller(pl, pl.pass[nr - 1], mp.passen).map((r) => mp.passen[r].nar);
-  ska('veckans tre pass har var sin roll', JSON.stringify([1, 2, 3, 4].map((n) => roll(pTs, mpTs, n).map((x) => x.plats))) === '[[1],[2],[3],[1]]', [1, 2, 3, 4].map((n) => roll(pTs, mpTs, n)));
+  ska('veckans tre pass har var sin roll', [1, 2, 3, 4].every((n, i) => roll(pTs, mpTs, n).length > 0 && roll(pTs, mpTs, n).every((x) => x.plats === [1, 2, 3, 1][i])), [1, 2, 3, 4].map((n) => roll(pTs, mpTs, n)));
   const ss = metod('seriesamtal');
   const mpSs = s.metodplan(ss).plan;
   const pSs = s.planera(mpSs, { ...tom, start: '2026-10-27', dagar: [2, 4], langd: 6 });
@@ -892,7 +893,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     ska('passet: variantens delar de veckorna, tabellens ordning och tidsschemat', b1.namn === 'Hela listan' && texterna(b1) === 'Passet är bara listan.|Du modellerar.' && b1.delar === schemat.varianter[0].delar && !b1.egenOrdning && b1.fore === 'Ta fram boken.' && b2.egenOrdning && b2.delar === tabell.tabell.delar && b2.fore === undefined && b2.foreRader.length === 1 && b2.tabell === tabell.tabell && !texterna(b2).includes('Passet är bara listan.') && b3.delar === schemat.delar && texterna(b3) === 'Du modellerar.' && texterna(s.passetsBeskrivning([raden], schemat, { vecka: 4 })) === 'Du: Läser högt.|Eleverna: Följer med.' && s.passetsBeskrivning([raden], schemat, { vecka: 4 }).namn === 'Bygga', [texterna(b1), texterna(b2), texterna(b3)]);
     ska('tidsschemats inledning i planen, utan meningarna om metodens sida', s.planensInledning(ll.tidsschema.text, ll.plan.utan) === 'Förbered dig genom att välja orden du ska modellera. Passet och listorna står också på Lektionskortet, ett A4 att ha framför dig.' && s.planensInledning('En. Två.', ['Två.']) === 'En.', s.planensInledning(ll.tidsschema.text, ll.plan.utan));
     const texter = s.planensTexter(ll), visade = s.visadeTexter(ll);
-    ska('planens texter: planens egna fält, och metodens texter som planen visar med varianten och tabellraderna', !texter.some(([plats]) => plats.startsWith('Planens pass')) && texter.some(([plats]) => plats === 'Planens upprepa') && visade.includes('Passet är bara listan.') && visade.includes('Läraren modellerar och gruppen körläser hela listan. Förklara nya ord.') && visade.includes(s.planensInledning(ll.tidsschema.text, ll.plan.utan)) && !visade.some((t) => t.includes('Remsan')), texter.map(([p]) => p));
+    ska('planens texter: planens egna fält, och metodens texter som planen visar med varianten och tabellraderna', texter.some(([plats]) => plats === 'Planens upprepa') && visade.includes('Passet är bara listan.') && visade.includes('Läraren modellerar fyra till sex ord, och gruppen körläser hela listan i stället för dagens kolumn. Förklara nya ord. Parläsningen blir kortare.') && visade.includes(s.planensInledning(ll.tidsschema.text, ll.plan.utan)) && !visade.some((t) => t.includes('Remsan')), texter.map(([p]) => p));
     // Rollerna ur metodens tabellrader och planens texter som citat (K-520 och K-521): raden med kolumnerna, en enda kolumn
     // utan namn, en rad eller kolumn som inte finns, och en omskrivning som stoppas.
     const ts2 = metod('textsamtal-i-grupp');
@@ -931,7 +932,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   {
     const up = metod('upprepad-lasning'), hl = metod('hoglasning-i-par'), bs = metod('boksamtal-i-grupp');
     ska('variantens när: veckor, längd, ett pass och en plats i vissa veckor', JSON.stringify(s.variantensNar('ett pass på tio minuter')) === '{"typ":"minuter","minuter":10}' && s.variantensNar('pass på 20 minuter')?.minuter === 20 && JSON.stringify(s.variantensNar('veckans första pass i vecka 2–5')) === '{"typ":"vecka","plats":1,"veckor":{"fran":2,"till":5}}' && s.variantensNar('pass 2')?.typ === 'pass' && s.variantensNar('vecka 1–3')?.typ === 'veckor' && s.variantensNar('en gång') === null && s.variantensNar('pass 2 i vecka 3') === null && s.tolkaPassen('näst sista passet')?.typ === 'nastSista', [s.variantensNar('veckans första pass i vecka 2–5'), s.variantensNar('pass på 20 minuter')]);
-    ska('variantens mening för en längd och för vissa pass', s.variantensMening(up.tidsschema.varianter[0]) === 'Ett pass på tio minuter: första läsningen 0–2 minuter, modellering 2–4, läs igen 4–9 och avslutning 9–10. Då hinner du lyssna på varje elev om gruppen har högst fyra elever.' && s.variantensMening(hl.tidsschema.varianter[1]) === 'Veckans första pass i vecka 2–5: du hinner höra tre av dagens par, med texten 0–3 minuter, visa 3–8, läs för en lyssnare 8–18 och återkoppling 18–20.', [s.variantensMening(up.tidsschema.varianter[0]), s.variantensMening(hl.tidsschema.varianter[1])]);
+    ska('variantens mening för en längd och för vissa pass', s.variantensMening(up.tidsschema.varianter[0]) === 'Ett pass på tio minuter: första läsningen 0–2 minuter, modellering 2–4, läs igen 4–9 och avslutning 9–10. Då hinner du lyssna på varje elev om gruppen har högst fyra elever.' && s.variantensMening(hl.tidsschema.varianter[1]) === 'Veckans första pass i vecka 2–5: du visar den nya strategin, så du hinner bara höra tre av dagens par, med texten 0–3 minuter, visa 3–8, läs för en lyssnare 8–18 och återkoppling 18–20.', [s.variantensMening(up.tidsschema.varianter[0]), s.variantensMening(hl.tidsschema.varianter[1])]);
     const ump = s.metodplan(up).plan, upl = s.planera(ump, s.forval(ump, '2026-10-26'));
     const hmp = s.metodplan(hl).plan, hpl = s.planera(hmp, s.forval(hmp, '2026-10-26'));
     const hVarianten = (nr, min = 20) => s.variantenFor(hl.tidsschema.varianter, s.passetsLage(hpl, s.passetMedNr(hpl, nr), min))?.nar ?? '-';
@@ -951,7 +952,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     const bmp = s.metodplan(bs).plan, bpl = s.planera(bmp, s.forval(bmp, '2026-10-26'));
     const korten = (nr) => s.passetsRoller(bpl, s.passetMedNr(bpl, nr), bmp.passen).map((r) => bs.plan.passen[r].kort);
     const sista = bpl.sistaNr, nast = Math.max(...bpl.pass.map((x) => x.nr).filter((n) => n < sista));
-    ska('näst sista passet är det sista läspasset, och ett eget nummer går före i en kort plan', korten(nast)[0] === 'Det sista läspasset' && korten(sista)[0] === 'Slutet' && !korten(nast - 1).includes('Det sista läspasset') && s.narensVikt({ typ: 'pass', fran: 1, till: 1 }) < s.narensVikt({ typ: 'nastSista' }) && s.narensVikt({ typ: 'nastSista' }) < s.narensVikt({ typ: 'pass', fran: 7, till: 10 }), [korten(nast), korten(sista)]);
+    ska('näst sista passet är det sista läspasset, också när passet har ett eget nummer', korten(nast)[0] === 'Det sista läspasset' && korten(sista)[0] === 'Slutet' && !korten(nast - 1).includes('Det sista läspasset') && s.narensVikt({ typ: 'nastSista' }) < s.narensVikt({ typ: 'pass', fran: 1, till: 1 }) && s.narensVikt({ typ: 'nastSista' }) < s.narensVikt({ typ: 'pass', fran: 7, till: 10 }), [korten(nast), korten(sista)]);
     // Spärrarna åt andra hållet: en längd som inte går ihop, samma längd två gånger, tidsschemats egen längd och ett när som
     // inte går att läsa stoppas, och lathunden behöver bara säga varianterna för vissa veckor.
     const trasig = structuredClone(up);
@@ -1528,7 +1529,7 @@ try {
   await f.tryck('[data-gor="upprepa"]');
   sant('upprepad vecka ger 21 pass', (await f.text('#pl-summa-text'))?.includes('21 pass') && (await f.text('#pl-veckan-rubrik')) === 'Vecka 3 igen i planen', [await f.text('#pl-summa-text'), await f.text('#pl-veckan-rubrik')]);
   sant('upprepningen kan ångras från beskedet', (await f.text('#pl-toast'))?.includes('Ångra'));
-  sant('texten till åtgärdsprogrammet följer den upprepade veckan', (await apText())?.includes('Omfattning: 21 pass om 30 minuter') && (await apText())?.includes('Slå ihop flera ledtrådar (v. 47–48); Stämmer det? och Det som menas (v. 49–50)') && (await apText())?.includes('till 18 december 2026'), await apText());
+  sant('texten till åtgärdsprogrammet följer den upprepade veckan', (await apText())?.includes('Omfattning: 21 pass om 30 minuter') && (await apText())?.includes('Slå ihop flera ledtrådar (v. 47–48); Stämmer det? och Det som menas (v. 49); Stämmer det? och Tänk om (v. 50)') && (await apText())?.includes('till 18 december 2026'), await apText());
   await f.tryck('[data-gor="ta-bort-upprepning"]');
   sant('upprepningen tas bort', (await f.text('#pl-summa-text'))?.includes('18 pass'));
   // Lov i vecka 4, som inte har börjat; dit med veckorna överst.
@@ -1537,7 +1538,7 @@ try {
   await f.kor(`(() => { document.getElementById('pl-andra').open = true; document.querySelector('#pl-lovveckor [data-lovvecka="2026-48"]').click(); return true; })()`);
   await vanta(300);
   sant('lov flyttar slutet en vecka', (await f.text('#pl-summa-text'))?.includes('till 18 december'), await f.text('#pl-summa-text'));
-  sant('texten till åtgärdsprogrammet följer lovet', (await apText())?.includes('18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 18 december 2026 (v. 45 till v. 51)') && (await apText())?.includes('Stämmer det? och Det som menas (v. 49–50)'), await apText());
+  sant('texten till åtgärdsprogrammet följer lovet', (await apText())?.includes('18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 18 december 2026 (v. 45 till v. 51)') && (await apText())?.includes('Slå ihop flera ledtrådar (v. 47); Stämmer det? och Det som menas (v. 49); Stämmer det? och Tänk om (v. 50)'), await apText());
   sant('lovets rad står i planen', (await f.text('#pl-veckor .pl-lovvecka'))?.includes('v. 48'), await f.text('#pl-veckor .pl-lovvecka'));
   await f.tryck('#pl-veckor [data-lov-bort]');
   sant('lovet tas bort', (await f.text('#pl-summa-text'))?.includes('till 11 december'));
@@ -2063,7 +2064,7 @@ try {
     // Boksamtalets tabell Perioden och Upprepad läsnings text i veckan (omgång 1 2026-10-26).
     // En metod utan progression och utan roller, som Gruppstärkande aktiviteter där aktiviteterna väljs efter gruppen, visar
     // passets delar i veckan (riggens omgång 5 2026-10-26).
-    sant(`${m.id}: den sparade planen visar veckan med fokus eller passets roll`, await b.kor(`(() => { const d = JSON.parse(document.getElementById('pl-data').textContent); const sel = d.progression || d.passen ? '#pl-veckan .pl-fokusruta, #pl-veckan .pl-roll' : '#pl-veckan .pl-delar'; return !document.getElementById('pl-veckan').hidden && !!document.querySelector(sel); })()`), await b.text('#pl-veckan'));
+    sant(`${m.id}: den sparade planen visar veckan med fokus eller passets roll`, await b.kor(`(() => { const d = JSON.parse(document.getElementById('pl-data').textContent); const sel = d.progression ? '#pl-veckan .pl-fokusruta, #pl-veckan .pl-roll' : '#pl-veckan .pl-roll, #pl-veckan .pl-delar'; return !document.getElementById('pl-veckan').hidden && !!document.querySelector(sel); })()`), await b.text('#pl-veckan'));
     sant(`${m.id}: planens länkar leder till sidor och ankare som finns`, !lankFel(await sakLankar(b)).length, [await sakLankar(b), lankFel(await sakLankar(b))]);
     // Stödet för nivåvalet vid varje nivåval (K-557): nerpilen under formulärets nivåer och under varje nivåval i veckan,
     // med metodens text och en länk som finns.

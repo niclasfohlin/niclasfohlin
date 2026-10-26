@@ -201,13 +201,13 @@ tidsschema:
       vad: Ta nästa problem på gruppens nivå, läs lärarens sida och lös problemet på båda sätten. Kopiera problemets sida, Vår lösning och Två lösningar till varje par. Till ett eget problem ritar du A och B på ett papper, som du visar i Jämföra med B täckt.
     - tid: 0–5 min
       fas: Förstå
-      vad: "Gemensamt. Läs problemet högt. Paren berättar det för varandra och en elev för gruppen. Red ut orden, ringa in frågan och skriv på tavlan vad ni vet och vad ni ska ta reda på. Lärarens sida: Ringa in · Lyft ut · Ord och tal."
+      vad: "Gemensamt. Läs problemet högt. Paren berättar det för varandra och en elev för gruppen. Red ut orden, ringa in frågan och skriv på tavlan vad ni vet och vad ni ska ta reda på. Från vecka 3 läser en elev problemet högt och leder Förstå, och från vecka 5 skriver paren Vi vet själva. Lärarens sida: Ringa in · Lyft ut · Ord och tal."
     - tid: 5–7 min
       fas: Planera
       vad: "Gemensamt, med kortet Våra sätt. Gruppen föreslår sätt från kortet, och paren väljer olika sätt. Skriv parens gissningar under Vi tror. Ingen räknar än. Lärarens sida: Förutse."
     - tid: 7–21 min
       fas: Lösa
-      vad: "I par, på bladet Vår lösning. Fråga först och lämna paren i gång. Halvvägs säger du två sätt du har sett, utan namn och svar, och väljer lösningar till Jämföra. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
+      vad: "I par, på bladet Vår lösning. Från vecka 7 börjar var och en själv i två minuter innan paret arbetar vidare. Fråga först och lämna paren i gång. Halvvägs säger du två sätt du har sett, utan namn och svar, och väljer lösningar till Jämföra. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
     - tid: 21–28 min
       fas: Jämföra
       vad: "Gemensamt igen, med bladet Två lösningar. Dela ut bladet med B täckt och fråga vad A gör. Visa B och ställ fråga 3. De valda paren visar sina lösningar, och sist säger ni felet och idén i en mening. Lärarens sida: Jämför · Fel eller osäker."
@@ -381,6 +381,15 @@ plan:
     - nar: första passet
       kort: "Första passet"
       text: "I första passet visar du kortet Våra sätt och bladen Vår lösning och Två lösningar, och Planera tar längre tid."
+    # Nivåns tio problem räcker till pass 10. Sedan säger passet varifrån nästa problem kommer och hur det förbereds
+    # (sajtens rimlighet 2026-10-26, svar-problemlosning-i-grupp.md).
+    - nar: pass 11 till det sista
+      kort: "Fler problem"
+      text: "Problemen finns också på sidan Ta fram ett matteproblem, och där finns fler. Ta först problem som liknar något av de tio. Varje problem du väljer förbereder du på bladet Lärarens sida för ett eget problem."
+  fore:
+    - "Kartläggningen har två blad per nivå, ett A4 före och ett efter."
+    - "Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
+  upprepa: "Byt led när noteringarna visar att gruppen klarar ledet med lite stöd."
 mal:
   overgripande: "kunna förstå ett problem i text, visa det och kontrollera att svaret är rimligt."
   punkter:

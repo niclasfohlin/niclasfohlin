@@ -22,7 +22,7 @@ material:
   - bokstavskort
   - en lättläst bok
   - snabbmallen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - til-i-grupp
   - upprepad-lasning
@@ -106,12 +106,12 @@ tabeller:
       - Så arbetar ni med listan
     rader:
       - - Måndag
-        - Läraren modellerar och gruppen körläser hela listan. Förklara nya ord.
+        - Läraren modellerar fyra till sex ord, och gruppen körläser hela listan i stället för dagens kolumn. Förklara nya ord. Parläsningen blir kortare.
       - - Tisdag till torsdag
         - Kort modellering, körläsning av dagens kolumn och parläsning med omläsning.
       - - Fredag
-        - Eleven läser listan för läraren eller för sin kompis, och ni sätter ord på vad som blivit lättare.
-    not: Med fyra pass i veckan stryker du en av dagarna tisdag till torsdag. Från vecka 4 avslutas varje pass, också måndag och fredag, med några minuter i boken.
+        - Under parläsningen läser varje elev listan för sin kompis eller för läraren. I avslutningen sätter ni ord på vad som blivit lättare.
+    not: Med fyra pass i veckan stryker du en av dagarna tisdag till torsdag. Från vecka 4 avslutas varje pass, också måndag och fredag, med några minuter i boken. I vecka 6 körläser ni några rader i stället för en kolumn, och i vecka 7 några meningar.
   - rubrik: Bekräfta, korrigera, ge stöd
     plats: efter-steg
     text: Läraren cirkulerar mellan paren under hela parläsningen. Din uppgift är att bekräfta, korrigera och ge stöd, direkt när det händer. Det är den snabba återkopplingen som utvecklar avkodningen, inte listan. Lässtrategier är ett A4 på metodens sida att ha i handen när du cirkulerar. Där står strategierna eleven kan lära sig, och från vecka 4, när ni läser i boken, strategierna för förståelsen. I listan rättar du direkt, och i boken väntar du tills meningen är slut.
@@ -152,10 +152,10 @@ tidsschema:
       vad: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Läs kolumnen uppifrån och ned och läs om den en gång till. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
     - tid: 4–10 min
       fas: Parläsning
-      vad: "Paren sitter med listan mellan sig. Den som pekar följer ordet med fingret i läsriktningen, håller tempot och hjälper vid svårighet: ljuda tillsammans, dela ordet i delar och läs det sedan från början igen. Läs listan flera gånger. Det är omläsningen av samma ord som ger flytet."
+      vad: "Paren sitter med listan mellan sig. Den som pekar följer ordet med fingret i läsriktningen, håller tempot och hjälper vid svårighet: ljuda tillsammans, dela ordet i delar och läs det sedan från början igen. Läs listan flera gånger. Det är omläsningen av samma ord som ger flytet. Cirkulera mellan paren hela tiden och bekräfta, korrigera och ge stöd direkt."
     - tid: 10–15 min
       fas: Avslutning
-      vad: "Välj det som flera behövde stöd i: ett ljud, en lång vokal som blev kort, en ändelse. Visa det en gång, låt gruppen körläsa ordet efter dig och säg vad de ska tänka på nästa gång. Från vecka 4 läser ni sedan i boken tillsammans: eleverna läser det de kan, du läser resten, och ni pratar om vad som händer."
+      vad: "Välj det som flera behövde stöd i: ett ljud, en lång vokal som blev kort, en ändelse. Visa det en gång, låt gruppen körläsa ordet efter dig och säg vad de ska tänka på nästa gång. Från vecka 4 läser ni sedan i boken tillsammans: eleverna läser det de kan, du läser resten, och ni pratar om vad som händer. I vecka 5–7 tar boken det mesta av avslutningen, så håll visningen kort."
   varianter:
     - nar: vecka 1–3
       text: Passet är bara listan.
@@ -251,7 +251,7 @@ progression:
     - vecka: "1"
       rubrik: "Läslista start: bokstäver och ljud"
       fokus: "Läslista start: bokstäver och ljud, först i inlärningsordning och sedan blandade."
-      roll: Lyssna efter att eleven säger ljudet och inte bokstavsnamnet. Ge artikulationsstöd.
+      roll: Lyssna efter att eleven säger ljudet och inte bokstavsnamnet. Ge artikulationsstöd. Byt lista först när eleverna säger ljudet så fort de ser bokstaven.
     - vecka: "2"
       rubrik: "Läslista 1: två ljud"
       fokus: "Läslista 1: två ljud, KV och VK, som se, os och ål."
@@ -302,8 +302,20 @@ plan:
       kort: "Dagens kolumn"
       ur: { tabell: En lista i veckan, rad: Tisdag till torsdag }
     - nar: veckans sista
-      kort: "Eleven läser för dig"
+      kort: "Varje elev läser listan"
       ur: { tabell: En lista i veckan, rad: Fredag }
+    - nar: vecka 1
+      text: "Modellera fyra till sex bokstäver först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
+    - nar: vecka 6
+      text: "Läs radvis, från vänster till höger."
+    - nar: veckans övriga pass i vecka 6
+      kort: "Dagens rader"
+      text: "I vecka 6 körläser ni några rader i stället för en kolumn, och i vecka 7 några meningar."
+    - nar: vecka 7
+      text: "Gruppen läser varje mening två gånger och pratar om vad den betyder."
+    - nar: veckans övriga pass i vecka 7
+      kort: "Dagens meningar"
+      text: "I vecka 6 körläser ni några rader i stället för en kolumn, och i vecka 7 några meningar."
   upprepa: "Byt lista först när paren läser orden direkt, utan att ljuda."
 
 mal:
@@ -358,7 +370,7 @@ ramar:
             - rubrik: Fokus
               text: "Säker grafem-fonemkoppling. Eleven ser bokstaven och säger ljudet direkt, inte bokstavsnamnet. Bokstäverna kommer i inlärningsordning: först hållkonsonanter och tydliga vokaler, sedan klusiler och övriga vokaler."
             - rubrik: Så gör ni
-              text: "Peka och läs uppifrån och ned, kolumn för kolumn. Modellera först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
+              text: "Peka och läs uppifrån och ned, kolumn för kolumn. Modellera fyra till sex bokstäver först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
             - rubrik: Lyssna efter
               text: "Att eleven säger ljudet /m/ och inte namnet äm. Ge artikulationsstöd: känn läpparna vid /m/, tungan bakom tänderna vid /l/."
     - rubrik: "Läslista 1: KV och VK"

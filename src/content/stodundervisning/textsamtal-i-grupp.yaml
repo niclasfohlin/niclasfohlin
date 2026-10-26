@@ -478,7 +478,7 @@ tidsschema:
       vad: Välj veckans tankesteg och samtalsdrag ur Veckans cykel och en text vars slag passar. Läs texten och sidan om den under Lärarens sidor, bestäm var du stannar och öva på att tänka högt. Bestäm paren och vem som är A och B, och skriv startmeningen. Kopiera texten till varje elev och till dig. Kopiera också ledtrådsbladet, i pass 2 ett till varje par och i pass 3 ett till varje elev, och skriv numret på en mellan raderna-fråga på bladet.
     - tid: 0–3 min
       fas: Starten
-      vad: Skriv meningen på tavlan och läs den högt. Låt gruppen säga vad som står och vad de vet, och sedan säger var och en ”Jag tror att” till sin kamrat. Starten är likadan i varje pass.
+      vad: Skriv meningen på tavlan och läs den högt. Låt gruppen säga vad som står och vad de vet, och sedan säger var och en ”Jag tror att” till sin kamrat. Efter första passet är starten likadan i varje pass.
     - tid: 3–5 min
       fas: Möt texten
       vad: Knyt an till förra passet. Säg titeln och ställ frågan Före läsningen, som får eleverna att tänka på det de behöver veta. Förklara ett eller två ord som texten kräver, men aldrig ett ord som avslöjar svaret. Säg vilket tankesteg och vilket samtalsdrag ni ska öva.
@@ -491,6 +491,15 @@ tidsschema:
     - tid: 26–30 min
       fas: Avsluta
       vad: Var och en säger vad hen kom fram till om personerna i texten och hur, med sin ledtråd, och vad en kamrat sa som fick hen att tänka nytt.
+  varianter:
+    - nar: första passet
+      text: Ni säger samtalsreglerna tillsammans innan du skriver startmeningen.
+      delar:
+        - { fas: Starten, tid: 0–6 min }
+        - { fas: Möt texten, tid: 6–8 min }
+        - { fas: Läs och tänk, tid: 8–16 min }
+        - { fas: Samtala om texten, tid: 16–26 min }
+        - { fas: Avsluta, tid: 26–30 min }
   efter: Ni hinner sällan allt, och det gör inget. I varje pass tar ni alltid rundan, mellan raderna-frågorna med veckans slag och en öppen fråga. Frågan på raderna tar ni snabbt i hela gruppen. De andra mellan raderna-frågorna tar ni när tiden räcker, och bortom raderna-frågan och den andra öppna frågan får vänta till Avsluta eller nästa pass. Är ni fler än fyra säger var och en sin tanke i rundan och i Avsluta till sin kamrat, och två säger sin till gruppen. Räcker inte tiden i pass 3, tar gruppen ledtrådsbladets fråga och en fråga till tillsammans. I vecka 1 tar samtalsreglerna och parsamtalet några minuter till, så välj korta texter med svårighet 1 den veckan. Blir gruppen klar tidigt kan eleverna leta efter en ledtråd som ingen har nämnt, pröva en ny riktning med ”Tänk om” eller skriva en egen mellan raderna-fråga till texten.
 steg:
   rubrik: Vad du gör och säger i varje del
@@ -621,7 +630,7 @@ urval:
     - rubrik: Rätt längd
       text: Texten hinns med i lugn takt på ett pass
 progression:
-  text: Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Tabellen är ett förslag på ordning när du inte har hört något annat. Varje vecka har också ett samtalsdrag, en rad på samtalskortet, som du visar i pass 1 och eleverna prövar i parsamtalet. Dragen kommer i samma ordning på alla nivåer, och en grupp som behöver mer tid tar samma drag en vecka till. Välj texter där frågorna har veckans slag, som översikten under Lärarens sidor visar.
+  text: Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat. Varje vecka har också ett samtalsdrag, en rad på samtalskortet, som du visar i pass 1 och eleverna prövar i parsamtalet. Dragen kommer i samma ordning på alla nivåer, och en grupp som behöver mer tid tar samma drag en vecka till. Välj texter där frågorna har veckans slag, som översikten under Lärarens sidor visar.
   rader:
     - vecka: "1"
       fokus: Eleverna lär sig vad det är att läsa mellan raderna och övar Det står, Jag vet och Alltså tror jag med slagen Känsla och Vem. Samtalsdraget är samtalskortets två första rader, att säga ”Jag tror att” och en ledtråd och att fråga ”Vad tror du?” och ”Hur vet du det?”
@@ -638,11 +647,16 @@ progression:
       roll: Du visar två ledtrådar som bara tillsammans ger svaret
       taggar: [fore-och-efter]
       rubrik: Slå ihop flera ledtrådar
-    - vecka: 4–5
-      fokus: Ni övar Stämmer det? och slaget Det som menas i metodens texter med det slaget. Samtalsdragen är att tänka annorlunda och att pröva en ny riktning med ”Tänk om”
+    - vecka: "4"
+      fokus: Ni övar Stämmer det? och slaget Det som menas. Samtalsdraget är att säga ”Jag tänker annorlunda” och att fråga ”Kan det vara något annat?”
       roll: Du tänker högt kortare. I pass 2 säger en elev varför ni stannar, innan paren samtalar
       taggar: [det-som-menas]
       rubrik: "Stämmer det? och Det som menas"
+    - vecka: "5"
+      fokus: Ni övar Stämmer det? och slaget Det som menas. Samtalsdraget är att pröva en ny riktning med ”Tänk om” och att fråga ”Stämmer det med texten?”
+      roll: Du tänker högt kortare. I pass 2 säger en elev varför ni stannar, innan paren samtalar
+      taggar: [det-som-menas]
+      rubrik: "Stämmer det? och Tänk om"
     - vecka: 6–8
       fokus: Ni övar slaget Ordet i metodens texter med det slaget och på en sida ur elevens egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag ur kortet och ställer egna frågor om texten
       roll: En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren. Du följer upp om eleverna stannar själva
@@ -669,9 +683,19 @@ plan:
     - nar: veckans första
       kort: "Läraren tänker högt"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 1, kolumner: [Så läser ni, Du, Eleverna] }
+    - nar: veckans första
+      text: "Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat."
+    # Pass 2: från vecka 6 leder eleverna gruppens samtal, så kolumnen Du gäller vecka 1–5. Raden utan veckor har namnet och
+    # Eleverna, så att pass 2 har en roll också i en förlängd plan.
+    - nar: veckans andra pass i vecka 1–5
+      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Så läser ni, Du] }
+    - nar: veckans andra pass i vecka 6–8
+      kort: "Eleverna leder samtalet"
+      text: "En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren."
+      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Så läser ni] }
     - nar: veckans andra
       kort: "Paren samtalar"
-      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Så läser ni, Du, Eleverna] }
+      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Eleverna] }
     - nar: veckans tredje
       kort: "Eleverna läser själva"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Så läser ni, Du, Eleverna] }

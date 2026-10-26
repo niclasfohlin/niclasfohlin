@@ -48,7 +48,7 @@ inledning:
   - "Metoden är en intensiv insats för elever som har knäckt läskoden men inte alltid hör vad de läser, eller tappar förståelsen när de läser. Passen är korta, tre till fem gånger i veckan, och tränar flytet i läsningen. Upprepad läsning kompletterar undervisningen i ljud och bokstäver."
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Insatsen pågår i sex till åtta veckor med tre till fem pass i veckan, och gruppen har en till sex elever. Ett pass är tio till femton minuter och följer alltid samma fyra delar: eleverna läser, du visar det som var svårt, eleverna läser igen i minst två omgångar, och sedan avslutar ni. Ni läser samma text hela passet, eller hela veckan, och byter text först när läsningen flyter. Varje vecka övar ni också en strategi, som du väljer efter det du hör. Före första passet och efter perioden läser eleven en ny text för dig, och du ser på lästrappan hur långt eleven har kommit."
+  text: "Insatsen pågår i sex till åtta veckor med tre till fem pass i veckan, och gruppen har en till sex elever. Ett pass är tio till femton minuter och följer alltid samma fyra delar: eleverna läser, du visar det som var svårt, eleverna läser igen i minst två omgångar, och sedan avslutar ni. Ni läser samma text hela passet, eller hela veckan, och byter text först när läsningen flyter. Varje vecka övar ni också en strategi, som du väljer på strategikortet efter det du hör. Före första passet och efter perioden läser eleven en ny text för dig, och du ser på lästrappan hur långt eleven har kommit."
 gruppen:
   rubrik: Så väljer du eleverna
   text: "Upprepad läsning är för elever i F–3 som har knäckt läskoden men behöver träna avkodningen. De gissar efter första bokstaven, gör pauser mellan ljuden eller läser ord för ord, och de står på steg 1–3 i lästrappan. Den som ännu inte säkert kopplar ljud till bokstav tränar det först, till exempel i Läslistor i grupp. Sätt ihop elever på samma steg eller två steg bredvid varandra, så att samma text passar alla. Annars får varje elev eller par en egen text. Ordna eleverna från den säkraste och dela listan på mitten: med sex elever läser 1 med 4, 2 med 5 och 3 med 6. Den säkrare läser först."
@@ -303,7 +303,7 @@ steg:
         - När orden gick lätt kunde ni berätta vad texten handlade om.
 arbetsform:
   rubrik: "Arbetsform: enskilt, läraren visar, växlande, gemensamt"
-  text: "Först läser eleverna var för sig medan du lyssnar. Sedan visar du, och eleverna läser igen i minst två omgångar, tillsammans, i par eller själva. Sist samlas hela gruppen. Har du bara en elev arbetar ni en till en, och du är elevens par. Eleven läser för dig, du visar, och sedan läser ni igen tillsammans. Blir det en elev över läser tre tillsammans och turas om att läsa och peka. Har varje elev eller par en egen text sitter du hos en elev eller ett par i taget, med texten mellan er. Eleven läser, du visar, och sedan läser eleven igen med större flyt. De andra läser om sin text under tiden. Första passet berättar du för eleverna varför ni läser samma text flera gånger. Visa också parläsningen tillsammans med en elev framför gruppen. Den som pekar håller fingret under ordet, väntar tre sekunder och pekar på strategikortet innan hen säger ordet."
+  text: "Först läser eleverna var för sig medan du lyssnar. Sedan visar du, och eleverna läser igen i minst två omgångar, tillsammans, i par eller själva. Sist samlas hela gruppen. Har du bara en elev arbetar ni en till en, och du är elevens par. Eleven läser för dig, du visar, och sedan läser ni igen tillsammans. Blir det en elev över läser tre tillsammans och turas om att läsa och peka. Har varje elev eller par en egen text sitter du hos en elev eller ett par i taget, med texten mellan er. Eleven läser, du visar, och sedan läser eleven igen med större flyt. De andra läser om sin text under tiden. I första passet börjar du med att berätta för eleverna varför ni läser samma text flera gånger. I Läs igen visar du parläsningen tillsammans med en elev framför gruppen, innan paren läser. Den som pekar håller fingret under ordet, väntar tre sekunder och pekar på strategikortet innan hen säger ordet."
   delar:
     - rubrik: 1. Enskilt
       text: var och en läser, läraren lyssnar
@@ -374,10 +374,10 @@ urval:
 hem:
   rubrik: Hem och skola
   text:
-    - "Läxan är frivillig. Den finns för att eleven ska läsa hemma också. När texten flyter i skolan får eleven ta hem en kopia och läsa den högt två eller tre gånger för någon hemma, med strategikortet. Första gången skickar du med lappen till vårdnadshavaren. Den finns under Materialet."
+    - "När texten flyter i skolan får eleven ta hem en kopia som frivillig läxa och läsa den högt två eller tre gånger för någon hemma. Läxan finns för att eleven ska läsa hemma också. Första gången skickar du med strategikortet och lappen till vårdnadshavaren. Båda finns under Materialet."
     - "Blir läxan ett bekymmer, till exempel för att ingen hemma kan lyssna, hoppar ni över den. Eleven får ändå läsa texten flera gånger med dig i skolan."
 uppfoljning:
-  text: "Före första passet och efter perioden läser eleven en ny text på samma nivå som i insatsen, en text ni inte har övat på. Använd protokollet Lästrappan före och efter, som finns under Materialet. Under perioden följer du eleven i första läsningen. Trappsteget stannar mellan dig och eleven. Visa det inte inför gruppen."
+  text: "Före första passet och efter perioden läser eleven en ny text på samma nivå som i insatsen, en text ni inte har övat på. Välj två lika långa texter ur en lättläst bok eller en nivåindelad serie innan ni börjar, och spara den andra till efter perioden. Ta ingen av lästräningstexterna, eftersom ni övar på dem i passen. Använd protokollet Lästrappan före och efter, som finns under Materialet. Under perioden följer du eleven i första läsningen. Trappsteget stannar mellan dig och eleven. Visa det inte inför gruppen."
   rader:
     - nar: Före insatsen
       tid: "före"
@@ -395,8 +395,11 @@ plan:
     mer: Ett pass på 15 minuter
   passen:
     - nar: första passet
-      kort: "Varför samma text"
-      text: "Första passet berättar du för eleverna varför ni läser samma text flera gånger. Visa också parläsningen tillsammans med en elev framför gruppen."
+      kort: "Ola är ute, varför samma text"
+      text: "I första passet börjar du med att berätta för eleverna varför ni läser samma text flera gånger. I Läs igen visar du parläsningen tillsammans med en elev framför gruppen, innan paren läser."
+    # Veckans text är ett förslag: ni byter först när läsningen flyter, och veckans strategi väljer du efter det du hör.
+    - nar: veckans första pass
+      text: "Ni läser samma text hela passet, eller hela veckan, och byter text först när läsningen flyter. Varje vecka övar ni också en strategi, som du väljer på strategikortet efter det du hör."
     - nar: vecka 1
       kort: "Ola är ute"
       ur: { tabell: Lästräningstexterna vecka för vecka, rad: "1 · Ola är ute", kolumner: [Veckans fokus] }
@@ -423,6 +426,9 @@ plan:
       ur: { tabell: Lästräningstexterna vecka för vecka, rad: "8 · Vanten", kolumner: [Veckans fokus] }
   justera:
     - "Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
+  upprepa: "Byt text när den flyter för de flesta i gruppen och eleverna kan läsa orden också i en annan ordning."
+  fore:
+    - "Välj två lika långa texter ur en lättläst bok eller en nivåindelad serie innan ni börjar, och spara den andra till efter perioden. Ta ingen av lästräningstexterna, eftersom ni övar på dem i passen."
 mal:
   overgripande: "kunna läsa en text med flyt och lösa ett svårt ord med en strategi."
   text: "Efter perioden ska eleven ha gått upp några steg på lästrappan och oftare än förut:"
@@ -456,7 +462,7 @@ checklista:
     - Lagt ett strategikort vid varje plats, och gärna ett läsrör.
     - "Bestämt hur eleverna ska läsa igen, och vilka som blir par."
     - Fyllt i Före i snabbmallen.
-    - "Kopierat lappen hem, om eleven ska ta med sig texten."
+    - "Kopierat lappen hem, om eleven ska ta hem en text för första gången."
 grund:
   text: "Att läsa samma text flera gånger med en vuxen som lyssnar och ger återkoppling stärker ordläsningen och flytet (National Reading Panel, 2000; Therrien och Kubina, 2006). Två till fyra läsningar per pass räcker, gärna från eko och kör till par, och effekten blir störst när eleven får lyssna på texten innan hen läser den igen (Therrien, Gormley och Kubina, 2006; Kuhn, 2020; Lee och Yoon, 2017). Den amerikanska lärarguiden från IES rekommenderar att läraren väntar, ber eleven läsa om meningen och ger en strategi, och säger ordet först när det inte går att ljuda (Foorman m.fl., 2016). Att säga ljuden utan paus hjälper nybörjare att läsa nya ord (Gonzalez-Frey och Ehri, 2021), och undervisning om orddelar stärker avkodningen (Goodwin och Ahn, 2013). Upprepad läsning kompletterar strukturerad undervisning om ljud och bokstäver, och den undervisningen har starkast stöd vid dyslexi (SBU, 2014)."
   kallor: Bygger på National Reading Panel (2000), Therrien och Kubina (2006), Therrien, Gormley och Kubina (2006), Kuhn (2020), Lee och Yoon (2017), Foorman m.fl. (2016), Gonzalez-Frey och Ehri (2021), Goodwin och Ahn (2013) och SBU (2014).
@@ -844,6 +850,14 @@ lathund:
       - Läsrör, om ni har
       - Snabbmallen för veckans pass, ur planeringsmallarna
     varjePass: Vilka ord fastnade, vilken strategi hjälpte, och kan texten gå hem?
+    # Lathundens egen kortare uppföljning: sidan 4 rymdes inte efter riggens K-567 (2026-10-26).
+    uppfoljning:
+      - nar: "Före insatsen"
+        vad: "Eleven läser en ny text för dig. Fyll i Lästrappan."
+      - nar: "Varje vecka"
+        vad: "Trappsteget i snabbmallen när texten är ny. Står eleven kvar två veckor, byt strategi eller text."
+      - nar: "Efter sex till åtta veckor"
+        vad: "En ny, lika lång text. Fyll i Lästrappan igen och jämför."
 lektionskort:
   - text: "Lektionskortet är passet på ett A4: målet, passet med det du gör och säger, sätten att läsa igen och läsfelen med strategierna. Skriv ut det och ha det framför dig under passet."
 film:

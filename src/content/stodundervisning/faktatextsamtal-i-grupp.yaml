@@ -73,7 +73,7 @@ passrutin:
       text: "Gruppen läser de fyra avsnitten, ett i taget. Du läser det första högt, och paren läser de tre andra. Varje avsnitt som paren läser har fyra steg: Läs, Red ut, Kärnan och Lappen."
     - fas: Avsluta
       text: En elev läser lapparna i följd. Var och en säger till den bredvid vad hen tror nu, och gruppen prövar gissningarna mot lapparna.
-  efterPasset: Efter läspasset sparar du bladet Kärnorna med lapparna till modellpasset. Se i elevernas texter vad de har strukit under, och skriv på lärarens sida det du såg och vem du frågar först nästa gång.
+  efterPasset: Efter läspasset sparar du bladet Kärnorna med lapparna till modellpasset, och efter modellpasset sparar du modellen med lapparna kvar. Se i elevernas texter vad de har strukit under, och skriv på lärarens sida det du såg och vem du frågar först nästa gång.
 tidsschema:
   rubrik: Läspasset på 40 minuter
   rader:
@@ -250,12 +250,17 @@ tabeller:
   - rubrik: Modellpasset på 40 minuter
     plats: efter-fastnar
     meny: true
-    text: I textens andra pass blir post-it-lapparna en bild av hela texten. Här lär sig eleven att se hur texten är byggd och att återge hela texten. Den tomma modellen, utskriven på A3, ligger mitt på bordet, och eleverna har sina texter framme. Den som skriver mödosamt säger svaret, och kamraten eller du skriver det med elevens ord.
+    text: I textens andra pass blir post-it-lapparna en bild av hela texten. Här lär sig eleven att se hur texten är byggd och att återge hela texten. Den som skriver mödosamt säger svaret, och kamraten eller du skriver det med elevens ord.
     kolumner:
       - Del och tid
       - Det gruppen gör
       - Så leder du det
     rader:
+      - - |-
+          Förberedelse
+          Före passet
+        - Den tomma modellen, utskriven på A3, ligger mitt på bordet bredvid bladet Kärnorna med lapparna. Eleverna har sina texter framme.
+        - Läs modellens sida och raderna under Modellpasset på lärarens sida. Lägg också fram exemplet om skolan i vecka 1–5, den sparade modell som lärarens sida säger i vecka 2–5 och gruppens fem modeller i vecka 6–8.
       - - |-
           Fördjupningen
           0–⁠6 min
@@ -520,7 +525,7 @@ progression:
     - vecka: "5"
       rubrik: "Jobbkorten i alla fyra stegen, Problem och lösning"
       fokus: De två som har jobbkorten i det sista avsnittet leder gruppen genom alla fyra stegen.
-      roll: "Läspasset: i det sista avsnittet går du in först när något saknas. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger."
+      roll: "Läspasset: i det sista avsnittet går du in först när något saknas. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger. Fråga läraren i SO eller NO vilka texter klassen läser i vecka 6–8, och förbered texten till vecka 6 med bladet Egen text."
     - vecka: "6"
       rubrik: "Klassens text, och läraren väljer modell"
       fokus: Gruppen läser klassens text i SO eller NO, som ofta är byggd på flera sätt.
@@ -538,7 +543,7 @@ uppfoljning:
       vad: Gör kartläggningen före första passet. Den tar omkring en kvart per elev och visar också vilken nivå som passar.
     - nar: Varje vecka
       tid: "varje vecka"
-      vad: Spara gruppens modell och elevernas svar på textens fråga. Är svaret ordnat som modellen, eller är det en lista?
+      vad: Vad strök eleverna under, hur redde de ut det, och hade kärnan på varje lapp med det viktiga? Spara gruppens modell och elevernas svar på textens fråga. Är svaret ordnat som modellen, eller är det en lista?
     - nar: Efter åtta veckor
       tid: "efter"
       perElev: 15
@@ -568,6 +573,13 @@ plan:
       ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur väljer gruppen?" }
     - nar: veckans andra pass i vecka 6–8
       ur: { tabell: "Vecka 6–8: klassens texter", rad: "Vad blir annorlunda?" }
+    - nar: veckans andra pass i vecka 6–8
+      text: "Läraren i ämnet får ett foto av gruppens modell efter veckan och är välkommen till ett modellpass."
+    # Veckans modell i vecka 3 och 4 vid namn, ur tabellen De fem modellerna (Rimligheten 2026-10-26).
+    - nar: veckans andra pass i vecka 3
+      ur: { tabell: "De fem modellerna: en för varje sätt att bygga en text", rad: jämför två saker, kolumner: [Modellen, Modellens fråga] }
+    - nar: veckans andra pass i vecka 4
+      ur: { tabell: "De fem modellerna: en för varje sätt att bygga en text", rad: förklarar orsak och verkan, kolumner: [Modellen, Modellens fråga] }
     - nar: sista passet
       text: "I det sista passet säger var och en vad hen tar med sig från perioden."
 mal:
@@ -743,6 +755,14 @@ lathund:
       - "I modellpasset: veckans modell på A3 och exemplet om skolan"
       - "Gruppens sparade modeller: en i vecka 2–5, alla fem i vecka 6–8"
     varjePass: Vad strök eleverna under, och hade kärnan med det viktiga?
+    # Lathundens egen kortare uppföljning: sidan 4 rymdes inte efter riggens K-567 (2026-10-26).
+    uppfoljning:
+      - nar: "Före perioden"
+        vad: "Kartläggningen, en kvart per elev. Den visar också nivån."
+      - nar: "Varje vecka"
+        vad: "Vad strök eleverna under, och hade kärnan det viktiga? Spara gruppens modell och svaren."
+      - nar: "Efter åtta veckor"
+        vad: "Kartläggningen igen med Björnens vinter. Jämför i protokollet."
 pabordet:
   - nr: 10
     rubrik: Jorden och allt dess vatten

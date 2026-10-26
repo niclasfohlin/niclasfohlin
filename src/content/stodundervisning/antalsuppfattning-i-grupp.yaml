@@ -228,13 +228,40 @@ tidsschema:
       vad: "Alla bygger talet du just visade, ett handgrepp i taget. Säg varje handgrepp, och eleverna gör och säger likadant. Fråga: ”Hur vet du att det är 36 och inte 63?” Gör sedan en kedja med sex till tio korta ändringar på samma tal. Efter varje ändring säger alla vilket tal det blev."
     - tid: 12–21 min
       fas: Korten
-      vad: Läs ett kort, till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter roller efter varje kort. Sedan läser paren korten för varandra. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren i gruppens paket.
+      vad: Läs ett kort, i vecka 1 till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter roller efter varje kort. Från vecka 2 läser paren sedan korten för varandra, om de kan läsa dem. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren i gruppens paket.
     - tid: 21–26 min
       fas: Två kort
       vad: Varje elev får två kort. Eleverna bygger det första medan du går runt. När de bygger det andra lyssnar du på en elev i taget. Saknar någon orden gör ni handgreppet tillsammans igen.
     - tid: 26–30 min
       fas: Andra talet
-      vad: "Bygg det andra talet med hela gruppen. Eleverna visar och säger vad som hände: ”Jag hade tretton ental. Jag bytte tio ental mot ett tiotal.”"
+      vad: "Bygg det andra talet med hela gruppen. Eleverna visar och säger vad som hände, i vecka 3 till exempel ”Jag hade tretton ental. Jag bytte tio ental mot ett tiotal.” Sätt till sist ord på veckans fokus i en mening."
+  varianter:
+    - nar: veckans första pass i vecka 2–5
+      text: Passet börjar med förra veckans läxa.
+      delar:
+        - fas: Första talet
+          tid: 0–8 min
+        - fas: Samma tal
+          tid: 8–12 min
+        - fas: Korten
+          tid: 12–21 min
+        - fas: Två kort
+          tid: 21–26 min
+        - fas: Andra talet
+          tid: 26–30 min
+    - nar: sista passet i vecka 5
+      text: Passet börjar med läxa 5.
+      delar:
+        - fas: Första talet
+          tid: 0–8 min
+        - fas: Samma tal
+          tid: 8–12 min
+        - fas: Korten
+          tid: 12–21 min
+        - fas: Två kort
+          tid: 21–26 min
+        - fas: Andra talet
+          tid: 26–30 min
   efter: "Blir ett par klart tidigt kan de spela Närmast målet. De slår en tärning och bestämmer varje gång vilken talsort slaget ska räknas som. De bygger summan efter varje slag, och alla slag ska användas. Den som kommer närmast målet utan att gå över vinner. Målet och antalet slag står i gruppens paket, i åk 2 till exempel 100 på sju slag."
 steg:
   rubrik: Vad du gör och säger i varje fas
@@ -399,6 +426,8 @@ plan:
       text: "Fråga i början av veckans första pass hur förra veckans läxa gick, och låt eleven visa en uppgift."
     - nar: veckans första
       text: "Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan."
+    - nar: veckans första
+      text: "Exemplen i beskrivningen av passet kommer från en grupp i åk 2. Paketet börjar med en ruta Till läraren som för varje vecka säger vad du visar först och lyssnar efter."
     - nar: veckans andra
       kort: "Talbrickor"
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 2: talbrickor"] }
@@ -409,6 +438,11 @@ plan:
       text: "Använd bara enkronor, tiokronor, hundralappar och tusenlappar. Femkronan är större än tiokronan och säger inget om talsorterna."
     - nar: sista passet i vecka 5
       text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan."
+  fore:
+    - "Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
+    - "Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna."
+    - "Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
+    - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med en uppgift: läs den högt, låt barnet bygga och berätta vad det gör, jämför med bilden, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
 mal:
   overgripande: "kunna bygga ett tal, säga talsorterna och växla tio mot en."
   rubrik: "Mål: det eleven kan efter fem veckor"

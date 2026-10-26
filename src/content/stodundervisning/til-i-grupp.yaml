@@ -22,7 +22,7 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
@@ -84,7 +84,7 @@ tidsschema:
       vad: Varje elev läser upp sina tre favoritmeningar från gårdagens bok. Du berömmer något konkret och signerar lässchemat.
     - tid: 4–8 min
       fas: Förbered
-      vad: "Bild- och rubrikvandring i dagens bok. Prata om bilderna, gissa vad som händer och red ut två eller tre ord som kommer i texten. Med kapitelbok: återberätta gårdagens kapitel kort och titta på dagens."
+      vad: "Bild- och rubrikvandring i varje elevs bok, en i taget och kort. Prata om bilderna, gissa vad som händer och red ut två eller tre ord som kommer i texten. Med kapitelbok: återberätta gårdagens kapitel kort och titta på dagens."
     - tid: 8–18 min
       fas: Läs
       vad: Eleverna läser sin bok. Du sätter dig hos en elev i taget, två till tre minuter var, lyssnar och ger stöd vid orden som fastnar. Övriga läser tyst eller viskande.
@@ -94,6 +94,13 @@ tidsschema:
     - tid: Hemma, cirka 20 min
       fas: Läs och skriv
       vad: Eleven läser boken en gång till för en vuxen, cirka tio minuter. Sedan väljer eleven tre favoritmeningar och skriver av dem i skrivboken. Den vuxne signerar lässchemat.
+  varianter:
+    - nar: första passet
+      text: Passet börjar utan favoritmeningar och har en längre avslutning.
+      delar:
+        - { fas: Förbered, tid: 0–4 min }
+        - { fas: Läs, tid: 4–14 min }
+        - { fas: Avsluta, tid: 14–20 min }
   efter: "En text per pass: en bok, eller ett kapitel ur kapitelboken. Blir en elev klar tidigt: läs boken en gång till, läs den för en kamrat eller välj redan nu de tre favoritmeningarna."
 steg:
   text: De fyra stegen är den didaktiska modellen bakom rutinen. Använd exempelfraserna för att ge specifik återkoppling och för att fråga i stället för att rätta.
@@ -122,7 +129,7 @@ steg:
         - Läs meningen från början nu.
     - namn: Avsluta
       fraga: Vad händer hemma?
-      gor: Upprepa hemuppdraget med samma ord varje gång. Kontrollera att bok, skrivbok och lässchema ligger i mappen.
+      gor: Upprepa hemuppdraget med samma ord varje gång. Kontrollera att bok, skrivbok och lässchema ligger i mappen. I första passet visar du vad som ligger i mappen och hur eleven väljer tre favoritmeningar och skriver dem i skrivboken.
       fraser:
         - Ikväll läser du boken en gång till för någon hemma.
         - Välj tre meningar du gillar och skriv dem i skrivboken.
@@ -238,7 +245,16 @@ plan:
   passen:
     - nar: första passet
       kort: "Utan favoritmeningar"
-      text: "Vecka 1 börjar utan favoritmeningar."
+      text: "I första passet visar du vad som ligger i mappen och hur eleven väljer tre favoritmeningar och skriver dem i skrivboken."
+    - nar: pass 17
+      kort: "Nytt lässchema"
+      text: "Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."
+    - nar: pass 33
+      kort: "Nytt lässchema"
+      text: "Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."
+    - nar: pass 49
+      kort: "Nytt lässchema"
+      text: "Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."
   fore:
     - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen."
   justera:

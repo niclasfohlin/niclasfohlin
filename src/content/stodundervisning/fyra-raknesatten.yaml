@@ -28,7 +28,7 @@ material:
   - multilink
   - räknemattan och talrutan
   - övningsblad
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 publicerad: 2026-10-04
 relaterade:
   - antalsuppfattning-i-grupp
@@ -421,10 +421,28 @@ plan:
       text: "I veckans första pass bygger eleverna med materialet, och i det andra ritar och skriver de. Allt nytt kommer i de två passen."
     - nar: veckans andra
       kort: "Rita och skriva"
-      text: "I veckans första pass bygger eleverna med materialet, och i det andra ritar och skriver de. I pass 2 visar du först det som står under Pass 2 på veckans sida, oftast förra passets uppgift ritad, och sedan passets uppgift ur tabellen."
+      text: "I veckans första pass bygger eleverna med materialet, och i det andra ritar och skriver de."
+    - nar: veckans andra pass i vecka 1–2
+      text: "I pass 2 visar du först det som står under Pass 2 på veckans sida, oftast förra passets uppgift ritad, och sedan passets uppgift ur tabellen."
+    - nar: veckans andra pass i vecka 4–8
+      text: "I pass 2 visar du först det som står under Pass 2 på veckans sida, oftast förra passets uppgift ritad, och sedan passets uppgift ur tabellen."
+    - nar: veckans andra
+      text: "Läxan tar omkring tio minuter och går hem efter veckans andra pass, och ni tar upp den i Uppvärmningen i nästa pass, i stället för talfakta."
     - nar: veckans tredje
       kort: "Befästa"
       text: "I ett tredje pass skriver eleverna med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
+    - nar: vecka 3
+      text: "Dela upp 543 på flera sätt med tiobasen, 500 + 40 + 3, 400 + 140 + 3 och 400 + 130 + 13."
+    - nar: veckans första pass i vecka 5
+      text: "I pass 1 får varje par tolv kuber och frågan ”Hur många olika rektanglar kan ni bygga av alla tolv?” Paren hittar 1 · 12, 2 · 6 och 3 · 4, och en vriden rektangel räknas som samma. Elva kuber ger bara en rektangel."
+    - nar: vecka 5–8
+      text: "I multiplikation och division frågar du efter raderna och antalet i varje rad, som i tabellen Så visar du de fyra räknesätten."
+      ur: { tabell: "Så visar du de fyra räknesätten", rad: "Multiplikation, 3 · 24", kolumner: ["Säg varje gång"] }
+    - nar: vecka 5–8
+      ur: { tabell: "Så visar du de fyra räknesätten", rad: "Division, 72/3", kolumner: ["Säg varje gång"] }
+  fore:
+    - "Före kursen tar du bladet för den nivå du tror passar, och eleven räknar det på egen hand, i rutnätet och utan material. Räknar eleven färre än fyra rätt, tar hen också bladet för nivån under, och med sju eller åtta rätt bladet för nivån över."
+    - "Berätta för vårdnadshavarna om kursen innan den första läxan går hem."
   upprepa: "Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Är det en elev, övar hen greppet i uppvärmningen och i ett tredje pass, om gruppen har ett, och gruppen går vidare."
 mal:
   overgripande: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
@@ -437,8 +455,9 @@ mal:
 checklista:
   rubrik: Före första passet
   punkter:
+    - Skriv ut kartläggningens blad och lärarens protokoll.
     - Gör kartläggningen veckan före kursen och bestäm gruppens nivå.
-    - "Skriv ut per elev: räknemattans ark, Tomma talrader, Addition 1, Subtraktion 1, Mina lärdomar och kortet Säg varje gång."
+    - "Skriv ut per elev: räknemattans ark, Tomma talrader, Addition 1, Subtraktion 1, Mina lärdomar, läxan Åt båda hållen och kortet Säg varje gång."
     - Läs vecka 1 under Kursens material i metoden, och räkna första talet åt båda hållen.
     - Sätt upp en väggplansch för lärdomarna.
     - Prata med varje elev i åk 7 om ett eget mål.
@@ -1217,6 +1236,16 @@ lathund:
       - En liten tavla, en penna och kortet per elev
       - Veckans blad
       - Mina lärdomar i elevens mapp
+    # Lathundens egen kortare uppföljning: sidan 4 rymdes inte efter riggens K-567 (2026-10-26).
+    uppfoljning:
+      - nar: "Före kursen"
+        vad: "Kartläggningen, med lärarens protokoll."
+      - nar: "Efter varje pass"
+        vad: "Din notering och elevens lärdom i Mina lärdomar."
+      - nar: "Vecka 4"
+        vad: "Den blandade repetitionen."
+      - nar: "Efter kursen"
+        vad: "Samma kartläggning veckan efter, och nästa steg."
 film:
   sekunder: 28.47
   beskrivning: "57 + 28. Skjut upp entalen. En elev säger: ”Fler än nio ental? Växla!” Tio ental blir ett tiotal. Skriv 5 och minnessiffran 1 ovanför tiotalen. Skjut upp tiotalen: 1 + 5 + 2 = 8. Åt andra hållet: 85 − 28. En elev säger: ”Räcker inte entalen? Växla!” Ett tiotal blir tio ental. Stryk åttan i 85, skriv 7 och en liten tia. Ta bort 8 ental: 15 − 8 = 7. Ta bort 2 tiotal: 7 − 2 = 5. Kvar är 57."

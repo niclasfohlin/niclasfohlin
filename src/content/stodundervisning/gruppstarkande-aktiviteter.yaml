@@ -93,7 +93,7 @@ tidsschema:
       vad: "Säg kortets mål: ”Ni är klara när alla …” Från vecka 3 säger du också vad gruppen ska bli bättre på. Säg vem var och en ska tacka efteråt, och låt en elev säga målet med egna ord."
     - tid: 1–2 min
       fas: Modellera
-      vad: Visa med en elev kortets beteende, till exempel ”Får jag ta din hand?”, och från vecka 3 också det gruppen ska bli bättre på.
+      vad: "Visa med en elev kortets beteende, till exempel ”Är alla med?”, och från vecka 3 också det gruppen ska bli bättre på. Rör ni vid varandra, visar du också hur ni frågar: ”Får jag ta din hand?”"
     - tid: 5–20 min
       fas: Genomför
       vad: "Var med. Det viktigaste är att säga högt vad någon gör för gruppen, helst när någon gör det du visade: ”Sara lyfte armen, och då kom rockringen vidare.” Behöver du stanna gruppen, räck upp handen och säg stopp."
@@ -336,6 +336,19 @@ uppfoljning:
       tid: "villkor"
       vad: Gör en aktivitet i veckan och en gruppreflektion i månaden, om de flesta också ringar in 4 eller 5 på varje påstående i Vår grupp.
 plan:
+  # Det som skiljer passen åt (Rimligheten 2026-10-26, sajtens K-567): i första passet hur de fem delarna går till i en
+  # klass, där läraren först leder dem och sätter ihop grupperna, och i sista passet den avslutande aktiviteten. Inga
+  # rader med metodens veckor (vecka 5) eller platsen i veckan: de slår på Upprepa veckan och veckans pass i hela planen.
+  passen:
+    - nar: första passet
+      text: I en klass gör du fasta grupper om fyra till sex, byter dem efter några veckor och delar eller slår ihop dem när kortet kräver det.
+      ur: { tabell: "I en klass, i en liten grupp och med de yngsta", rad: Fler än åtta eller en klass }
+    - nar: sista passet
+      kort: Avslutande aktivitet
+      text: "När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. Då läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på."
+  # Före första passet: de första korten är utan beröring (Rimligheten 2026-10-26).
+  fore:
+    - Välj kort utan beröring ur Lära känna varandra och Trygghet och gemenskap på sidan Ta fram en aktivitet.
   # Stödet för passets längd (K-564): faktarutans 10–40 minuter rymmer både en aktivitet och gruppreflektionen efter en kort
   # aktivitet.
   langdval:
@@ -476,7 +489,7 @@ lathund:
         - - "1 · Förklara\n1–⁠3 min"
           - "Säg målet, och från vecka 3 också det gruppen ska bli bättre på. En elev säger målet med egna ord. Säg vem var och en ska tacka.\n”Ni är klara när alla …”"
         - - "2 · Modellera\n1–⁠2 min"
-          - "Visa med en elev kortets beteende, och från vecka 3 också det gruppen ska bli bättre på.\n”Får jag ta din hand?”"
+          - "Visa med en elev kortets beteende, och från vecka 3 också det gruppen ska bli bättre på.\n”Är alla med?”"
         - - "3 · Genomför\n5–⁠20 min"
           - "Var med, och säg högt vad någon gör för gruppen, helst när någon gör det du visade.\n”Sara lyfte armen, och då kom rockringen vidare.”"
         - - "4 · Återkoppla\n2–⁠4 min"

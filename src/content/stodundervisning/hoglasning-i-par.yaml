@@ -156,7 +156,7 @@ passrutin:
   kallas: delar
 tidsschema:
   rubrik: Ett pass på 20 minuter
-  text: "Före vecka 1 delar du in paren i grupper om högst fyra par, och i varje pass lyssnar du på en grupp: dagens par. Är ni fyra till åtta elever, är alla par en grupp, och du lyssnar på dem i varje pass. Passet, strategierna och vad du lyssnar efter står också på Lektionskortet, ett A4 att ha framför dig."
+  text: "Du delar in paren i grupper om högst fyra par, och i varje pass lyssnar du på en grupp: dagens par. Är ni fyra till åtta elever, är alla par en grupp, och du lyssnar på dem i varje pass. Hinner du inte höra ett par, börjar du med det nästa gång gruppen är dagens par. Passet, strategierna och vad du lyssnar efter står också på Lektionskortet, ett A4 att ha framför dig."
   rader:
     - { tid: Före passet, fas: Förberedelse, vad: "Välj ett ställe på två till fyra meningar där veckans strategi behövs, ur boken du läser högt för klassen eller ur en kort text, och visa det stort på tavlan." }
     - { tid: 0–⁠3 min, fas: Texten, vad: "Paren ger varandra en high five och berättar vad som hände förra gången. Ställ dagens fråga, som ”Hur tror ni att huvudpersonen känner sig nu?”, och paren svarar varandra." }
@@ -165,14 +165,14 @@ tidsschema:
     - { tid: 18–⁠20 min, fas: Återkoppling, vad: "Säg en sak du hörde om texten och en om rösten." }
   varianter:
     - nar: pass 2
-      text: "Du hinner höra tre av dagens par"
+      text: "Du visar Tankepausen, och klassen är din lyssnare, så du hinner bara höra tre av dagens par"
       delar:
         - { fas: Texten, tid: 0–3 min }
         - { fas: Visa, tid: 3–8 min }
         - { fas: Läs för en lyssnare, tid: 8–18 min }
         - { fas: Återkoppling, tid: 18–20 min }
     - nar: veckans första pass i vecka 2–5
-      text: "Du hinner höra tre av dagens par"
+      text: "Du visar den nya strategin, så du hinner bara höra tre av dagens par"
       delar:
         - { fas: Texten, tid: 0–3 min }
         - { fas: Visa, tid: 3–8 min }
@@ -195,7 +195,7 @@ steg:
       gor: "Fråga vad som händer, skriv ordet och sätt tecknet. Läs utan och med strategin, och tänk högt med strategins fråga."
       fraser:
         - Hur känns det för Lisa här?
-        - Lyssna när jag läser det utan paus. Och nu med.
+        - Lyssna när jag läser det på två sätt.
         - Vad förstod ni bättre nu?
     - namn: Läs för en lyssnare
       fraga: Vad förstod lyssnaren?
@@ -274,10 +274,32 @@ plan:
     - "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre."
     - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna Var är mössan? och Källaren och lyssnarprotokollet, och ordnat något att spela in med."
   passen:
+    # Det första passet med tabellens not, så att läraren vet att Tankepausen kommer i nästa pass och vad som händer när ett
+    # par inte hinner välja bok (Rimligheten 2026-10-26).
     - nar: första passet
       kort: "Det första passet"
-      text: "I det första passet sätter du i gång paren."
+      text: "I det första passet sätter du i gång paren. Tankepausen börjar i passet efter. Hinner paren inte välja, väljer de klart i början av nästa pass."
       tabell: "Det första passet"
+    # Veckans strategi ur tabellen De fem strategierna, med elevens fråga, visningen och det du lyssnar efter, i varje pass i
+    # vecka 1–5 utom det allra första, där Tankepausen inte har börjat (Rimligheten 2026-10-26).
+    - nar: veckans övriga pass i vecka 1
+      text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
+      ur: { tabell: "De fem strategierna", rad: "1 · Tankepausen" }
+    - nar: veckans sista pass i vecka 1
+      text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
+      ur: { tabell: "De fem strategierna", rad: "1 · Tankepausen" }
+    - nar: vecka 2
+      text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
+      ur: { tabell: "De fem strategierna", rad: "2 · Frågan och utropet" }
+    - nar: vecka 3
+      text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
+      ur: { tabell: "De fem strategierna", rad: "3 · Repliken" }
+    - nar: vecka 4
+      text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
+      ur: { tabell: "De fem strategierna", rad: "4 · Det viktiga ordet" }
+    - nar: vecka 5
+      text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
+      ur: { tabell: "De fem strategierna", rad: "5 · Lyssnarens takt" }
     - nar: veckans första pass i vecka 6
       kort: "Mötet med de yngre"
       utanTidsschema: true
@@ -495,7 +517,7 @@ lathund:
       kolumner: [Del, Exempelfraser]
       rader:
         - ["1 · Texten\nVad säger texten?", "”Berätta vad som hände förra gången.”\n”Hur tror ni att huvudpersonen känner sig nu?”"]
-        - ["2 · Visa\nHur ska det låta, så att lyssnaren förstår?", "”Lyssna när jag läser det utan paus. Och nu med.”\n”Vad förstod ni bättre nu?”"]
+        - ["2 · Visa\nHur ska det låta, så att lyssnaren förstår?", "”Lyssna när jag läser det på två sätt.”\n”Vad förstod ni bättre nu?”"]
         - ["3 · Läs för en lyssnare\nVad förstod lyssnaren?", "”Säg först vad du förstod.”\n”Jag förstod att han var rädd, för att du viskade.”"]
         - ["4 · Återkoppling\nVad tar vi med oss?", "”Många pausade före det spännande, och då blev det spännande.”"]
     not: "Eleverna läser utan klocka och i lyssnarens takt."

@@ -31,7 +31,7 @@ material:
   - pärmar
   - whiteboardpennor
   - pinnar och tejp
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 publicerad: 2026-10-04
 relaterade: [kompissamtal]
 utkast: false
@@ -483,7 +483,7 @@ steg:
       fraga: Vad tänkte, kände och ville personerna?
       gor: Fråga vad i bilden som får eleven att säga det, när hen berättar vad en person tänker. Be om en tanke till innan ni skriver i bubblan.
       fraser:
-        - Om du var Sam, vad skulle du vilja?
+        - Om du var hen, vad skulle du vilja?
         - Vad ser du som får dig att säga det?
         - Vad tänkte hon i ruta 1? Vad tänker hon nu?
         - Ville hen såra, eller ville hen något annat?
@@ -502,7 +502,7 @@ steg:
       gor: Det eleverna ritar ska vara bra för båda personerna. Fråga också vad den andra personen och de vuxna kan göra.
       fraser:
         - Vad kunde hen ha gjort i stället?
-        - Vad tänker Sam då? Hur slutar det?
+        - Vad tänker den andra då? Hur slutar det?
         - Vad kan den andra göra? Vad kan vi vuxna göra?
         - Har du varit med om något liknande? Berätta för mig efter passet.
         - När det händer igen, vad kan du göra innan det blir bråk?
@@ -638,30 +638,35 @@ plan:
     - "Tabellen gäller ett pass med en bildserie, pass 2–⁠6."
     - "Det du kan säga står under Passets sex delar."
     - "De andra passen har egna tabeller, som står efter Samtalsteknikerna."
+  # Rimligheten 2026-10-26 (sajtens K-567): samtalet före pass 1 med målet på pärmen och klasslärarens siffra, och
+  # utskriften av lärarens sidor, står under Före.
+  fore:
+    - "Träffa en elev i taget i cirka 15 minuter. Berätta att ni i gruppen ritar bråk som serier och spolar tillbaka till när det var lugnt. Fråga om hen vill vara med. Visa sedan provbilden och fyll i protokollet. Låt eleven säga ett mål, till exempel ”Jag vill få vara med”, och skriv det på framsidan av elevens pärm. Be klassläraren sätta sin siffra från 0 till 10 för eleven."
+    - "Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven."
   passen:
     - nar: första passet
       kort: "Fönsterplatsen"
-      text: "Pass 1 börjar med att du säger varför ni ses och vad som gäller i gruppen, och sedan gör ni en övning som visar att tankar inte syns. Till sist tar ni bildserien Fönsterplatsen, med kortare tid för de flesta delarna än i ett vanligt pass."
+      text: "Pass 1 börjar med att du säger varför ni ses och vad som gäller i gruppen, och sedan gör ni en övning som visar att tankar inte syns. Till sist tar ni bildserien Fönsterplatsen, med kortare tid för de flesta delarna än i ett vanligt pass. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       tabell: "Pass 1: syftet, reglerna och tankebubblan"
     - nar: pass 2
       kort: "Spelet"
-      text: "Bildserie 2: Spelet"
+      text: "Bildserie 2: Spelet. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       ur: { tabell: Perioden pass för pass, rad: Pass 2 }
     - nar: pass 3
       kort: "Teckningen"
-      text: "Bildserie 3: Teckningen"
+      text: "Bildserie 3: Teckningen. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       ur: { tabell: Perioden pass för pass, rad: Pass 3 }
     - nar: pass 4
       kort: "Vinsten"
-      text: "Bildserie 4: Vinsten. Från pass 4 berättar en elev serien utan att du ställer frågor, och på bordet ligger kortet Frågor vi ställer till varandra."
+      text: "Bildserie 4: Vinsten. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill. Från pass 4 berättar en elev serien utan att du ställer frågor, och på bordet ligger kortet Frågor vi ställer till varandra."
       ur: { tabell: Perioden pass för pass, rad: Pass 4 }
     - nar: pass 5
       kort: "Chatten"
-      text: "Bildserie 5: Chatten"
+      text: "Bildserie 5: Chatten. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       ur: { tabell: Perioden pass för pass, rad: Pass 5 }
     - nar: pass 6
       kort: "Lunchen"
-      text: "Bildserie 6: Lunchen"
+      text: "Bildserie 6: Lunchen. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       ur: { tabell: Perioden pass för pass, rad: Pass 6 }
     - nar: pass 7
       kort: "Nästan bråk"
@@ -676,6 +681,33 @@ plan:
       kort: "Tillbaka på perioden"
       ur: { tabell: Perioden pass för pass, rad: Det sista passet }
       tabell: "Det sista passet"
+    # Veckans två samtalstekniker i vecka 1–4, i tabellens ordning (Rimligheten 2026-10-26, sajtens K-567).
+    - nar: vecka 1–4
+      text: "Du övar på två tekniker i veckan, i den ordning de står på lathundens sida 3."
+    - nar: vecka 1
+      text: "Spegla"
+      ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Spegla, kolumner: ["Så gör du"] }
+    - nar: vecka 1
+      text: "Fråga vad hen ser"
+      ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Fråga vad hen ser, kolumner: ["Så gör du"] }
+    - nar: vecka 2
+      text: "Pröva en tanke till"
+      ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Pröva en tanke till, kolumner: ["Så gör du"] }
+    - nar: vecka 2
+      text: "Undra högt"
+      ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Undra högt, kolumner: ["Så gör du"] }
+    - nar: vecka 3
+      text: "Tänk själv först"
+      ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Tänk själv först, kolumner: ["Så gör du"] }
+    - nar: vecka 3
+      text: "Skicka frågan vidare"
+      ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Skicka frågan vidare, kolumner: ["Så gör du"] }
+    - nar: vecka 4
+      text: "Knyt ihop"
+      ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Knyt ihop, kolumner: ["Så gör du"] }
+    - nar: vecka 4
+      text: "Fråga varandra"
+      ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Fråga varandra, kolumner: ["Så gör du"] }
 
 mal:
   overgripande: "kunna se en händelse ovanifrån och göra en plan för nästa gång."

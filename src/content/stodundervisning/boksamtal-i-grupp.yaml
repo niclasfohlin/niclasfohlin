@@ -49,7 +49,7 @@ inledning:
   - "Perioden är en bok. Metoden har tre nivåer med tio böcker på varje. Före bokvalet gör du läsintervjun, ett kort samtal med varje elev, och väljer två av böckerna. I bokvalet väljer gruppen en av dem. Perioden slutar med ett samtal om hela boken, och var och en skriver ett boktips till en läsare. Hur lång perioden blir beror på boken: Nattkorpen av Johan Rundberg tar omkring 12 läspass, och Momo eller kampen om tiden av Michael Ende omkring 27."
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Fyra till tio elever läser en hel bok tillsammans, 40 minuter per pass och två till tre pass i veckan. Perioden är fem till tio veckor, från bokvalet till slutsamtalet och boktipset. Före den behöver du en till tre veckor till läsintervjuerna och böckerna. Läspasset har fyra delar: Var är vi?, Läs, Samtala och Med mig. Du läser högt i drygt 20 minuter, eleverna följer med i sina böcker, och bokens tavla håller ihop berättelsen. Läsintervjun före och efter boken, och det eleven säger i passen, visar om hen håller ihop berättelsen och kan säga var i boken en tanke kommer ifrån."
+  text: "Fyra till tio elever läser en hel bok tillsammans, 40 minuter per pass och två till tre pass i veckan. Perioden är fem till tio veckor, från bokvalet till slutsamtalet och boktipset. Före bokvalet behöver du en till tre veckor till läsintervjuerna och böckerna. Läspasset har fyra delar: Var är vi?, Läs, Samtala och Med mig. Du läser högt i drygt 20 minuter, eleverna följer med i sina böcker, och bokens tavla håller ihop berättelsen. Läsintervjun före och efter boken, och det eleven säger i passen, visar om hen håller ihop berättelsen och kan säga var i boken en tanke kommer ifrån."
 gruppen:
   rubrik: Så sätter du ihop gruppen
   text: "Metoden är för elever som kan avkoda men läser långsamt och tappar sammanhanget, och för den som aldrig har läst ut en bok som andra pratar om. Eleven behöver kunna förstå en berättelse som hen hör och orka lyssna och följa med i boken i drygt 20 minuter. Den som avkodar mödosamt kan vara med, eftersom du läser högt: hen lyssnar och hittar tillbaka i texten när du säger sidnumret. Avkodning och läsflyt tränar hen vid sidan av boken. Gruppen har fyra till tio elever. Är ni fler än fem, samtalar ni i två grupper, och hur ni gör står under Fler än fem."
@@ -245,6 +245,9 @@ tabeller:
       - Vad händer
       - Du säger
     rader:
+      - - Före passet
+        - Gör läsplanen. Läs om dagens sidor, och skriv din post-it där texten blir svår. Ta med ett exemplar av boken per elev, en post-it per elev och frågekortet.
+        - ""
       - - 0–5 · Var är vi?
         - Tavlans rutor är tomma, så ni berättar början tillsammans. Var och en säger till den bredvid vad hen tror händer nu.
         - ”Vad hände i början?” ”Vad tror du händer nu?”
@@ -339,12 +342,15 @@ tabeller:
   - rubrik: "Sista passet: slutet"
     plats: efter-fastnar
     meny: true
-    text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut. Slutet är nästa pass, helst efter en helg, så att eleverna hinner tänka på boken. Slutsamtalet för ni tillsammans, också när ni är fler än fem. Rita före slutet fyra spalter på ett blädderblocksark, en per fråga på frågekortet: Gillade, Gillade inte, Undrade och Mönster. Boka i förväg en stund i elevernas klasser veckan efter, då den som vill tipsar sin klass i en minut, med boken i handen."
+    text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut. Ta med korten, som du har sparat sedan läsintervjun. Slutet är nästa pass, helst efter en helg, så att eleverna hinner tänka på boken. Slutsamtalet för ni tillsammans, också när ni är fler än fem. Boka i förväg en stund i elevernas klasser veckan efter, då den som vill tipsar sin klass i en minut, med boken i handen."
     kolumner:
       - Tid och del
       - Vad händer
       - Du säger
     rader:
+      - - Före passet
+        - "Rita fyra spalter på ett blädderblocksark, en per fråga på frågekortet: Gillade, Gillade inte, Undrade och Mönster."
+        - ""
       - - "0–5 · Berätta boken"
         - Ni berättar boken vid tavlan, en bit var.
         - ”Berätta boken från början.”
@@ -358,9 +364,9 @@ tabeller:
         - Ni går igenom frågorna på tavlan.
         - ”Vilka frågor fick svar, och var i boken? Vilka är fortfarande öppna?”
       - - "25–40 · Boktipset"
-        - Var och en fyller i bladet Boktipset och läser upp sitt tips.
+        - Var och en fyller i bladet Boktipset och läser upp sitt tips. Eleverna tar ur sina post-it efter boktipset. Spara tipsen i ett kuvert till nästa grupps bokval.
         - ”Vem vill du ska läsa boken?”
-    not: "Är ni fler än fem, säger var och en sin sak till den bredvid i stället för laget runt, och du skriver några i varje spalt. Eleverna tar ur sina post-it efter boktipset. Bladet Boktipset har sex rader. Vid ”Till” skriver eleven läsaren, helst sin egen klass, vid ”Bra att veta” en varning, som att boken börjar långsamt, och vid ”Min fråga till dig” en fråga som läsaren bär med sig. Den som skriver långsamt fyller i tre rader och säger resten. Spara tipsen i ett kuvert till nästa grupps bokval."
+    not: "Är ni fler än fem, säger var och en sin sak till den bredvid i stället för laget runt, och du skriver några i varje spalt. Bladet Boktipset har sex rader. Vid ”Till” skriver eleven läsaren, helst sin egen klass, vid ”Bra att veta” en varning, som att boken börjar långsamt, och vid ”Min fråga till dig” en fråga som läsaren bär med sig. Den som skriver långsamt fyller i tre rader och säger resten."
   - rubrik: Så skiljer sig nivåerna
     plats: efter-urval
     text: Nivåerna bygger mer på temat och innehållet än på hur svår boken är att läsa, eftersom du läser högt och eleven följer med. Välj nivå efter gruppens ålder och efter vad gruppen är redo för. Frågorna för åldern blir vuxnare från nivå till nivå, eftersom äldre elever vet mer om världen och om hur berättelser är byggda. Före varje lista står en sida om nivån.
@@ -453,6 +459,15 @@ tidsschema:
     - tid: 36–40 min
       fas: Med mig
       vad: Fråga ”Vad hände i dag, i en mening?”, ”Kom det någon ny?”, ”Har boken svarat på någon fråga?” och ”Vad undrar vi nu?” Säg vem som berättar nästa gång.
+  # Det sista läspasset, det näst sista passet i planen, har inget samtal (Sista passet: slutet). Läs och Var är vi? som
+  # vanligt, och Med mig tar samtalets minuter, där var och en säger ett ord om boken och skriver upp den på sitt kort
+  # (Rimligheten 2026-10-26: planen visade Samtala med frågekortet fast rollens text säger att samtalet inte blir av).
+  varianter:
+    - nar: näst sista passet
+      delar:
+        - { fas: "Var är vi?", tid: "0–5 min" }
+        - { fas: Läs, tid: "5–27 min" }
+        - { fas: Med mig, tid: "27–40 min" }
   efter: I Läs förklarar du ett namn eller ett ord med en mening, utan att stanna. Tappar någon sidan, säger du sidnumret igen, och den som tappar raden lyssnar vidare och hittar tillbaka nästa gång du säger sidnumret. Har någon tappat bort sig i berättelsen, fråga ”Var slutade du förstå?” och läs om därifrån. Minuterna är hållpunkter. De första passen tar tavlan och samtalet längre tid, och då läser du kortare. Blir samtalet klart tidigt, läser du några sidor till eller tar upp en fråga från tavlan. Blir det ont om tid, tar ni bara laget runt och ett ”Hur vet du det?” i Samtala, och dagens rad och bocken i Med mig.
 arbetsform:
   rubrik: "Arbetsform: gemensamt, läraren läser, gemensamt igen"
@@ -555,8 +570,10 @@ plan:
     text: "Nivåerna bygger mer på temat och innehållet än på hur svår boken är att läsa, eftersom du läser högt och eleven följer med. Välj nivå efter gruppens ålder och efter vad gruppen är redo för."
     mer: Så skiljer sig nivåerna
   fore:
-    - "Du gör läsintervjun, fem minuter per elev, läser de två böckerna och reserverar exemplar. Räkna med en till tre veckor."
+    - "Före bokvalet behöver du en till tre veckor till läsintervjuerna och böckerna."
     - "På varje nivå, Bas, Medel och Avancerat, har metoden tio böcker: fem från 2012 eller senare och fem klassiker. I nivåns lista ser du ungefär hur många läspass varje bok tar, var ljudboken och talboken finns, var du lånar och köper boken och om det finns en lärarhandledning."
+    - "Välj två böcker ur nivåns lista efter det eleverna sa i läsintervjun om vad de gillar. De två ska vara ungefär lika långa men olika i genre, miljö eller ton. Båda ska passa gruppen, och du ska ha läst dem."
+    - "På bordet räcker ett exemplar av varje bok per elevpar, men till läspass 1 behöver varje elev den bok gruppen väljer. Reservera därför ett exemplar per elev av båda."
   passen:
     - nar: första passet
       kort: "Bokvalet"
@@ -567,23 +584,45 @@ plan:
       kort: "Läspass 1"
       tabell: "Läspass 1: allt visas första gången"
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 1, kolumner: [Det som är nytt] }
-    - nar: pass 3–4
-      kort: "Läspass 2 och 3"
-      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 2 och 3, kolumner: [Det som är nytt] }
-    - nar: pass 5–6
-      kort: "En elev vid tavlan"
-      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 4, kolumner: [Det som är nytt] }
-    - nar: pass 7–10
-      kort: "En elev leder Var är vi?"
-      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] }
-    - nar: pass 14 till det sista
-      kort: "En elev leder laget runt"
-      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] }
+    # Varje läspass heter med sitt nummer, pass 3 är läspass 2 (Rimligheten 2026-10-26). En rad per pass, så att passet
+    # visar sitt eget steg ur Perioden en gång. Steget Från läspass 10 börjar i läspass 13, eftersom det väntar till nästa
+    # bok när boken har högst tolv läspass. Det första läspasset i varje steg som eleverna tar över säger att gruppen
+    # avgör takten. Det näst sista passet heter med sitt nummer, och rollen Det sista läspasset står efter i passet.
+    - { nar: pass 3, kort: "Läspass 2", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 2 och 3, kolumner: [Det som är nytt] } }
+    - { nar: pass 4, kort: "Läspass 3", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 2 och 3, kolumner: [Det som är nytt] } }
+    - { nar: pass 5, kort: "Läspass 4", text: "Gå vidare när gruppen klarar steget utan din hjälp, och gå tillbaka ett steg när den inte gör det längre.", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 4, kolumner: [Det som är nytt] } }
+    - { nar: pass 6, kort: "Läspass 5", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 4, kolumner: [Det som är nytt] } }
+    - { nar: pass 7, kort: "Läspass 6", text: "Gå vidare när gruppen klarar steget utan din hjälp, och gå tillbaka ett steg när den inte gör det längre.", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 8, kort: "Läspass 7", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 9, kort: "Läspass 8", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 10, kort: "Läspass 9", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 11, kort: "Läspass 10", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 12, kort: "Läspass 11", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 13, kort: "Läspass 12", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 14, kort: "Läspass 13", text: "Gå vidare när gruppen klarar steget utan din hjälp, och gå tillbaka ett steg när den inte gör det längre.", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 15, kort: "Läspass 14", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 16, kort: "Läspass 15", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 17, kort: "Läspass 16", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 18, kort: "Läspass 17", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 19, kort: "Läspass 18", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 20, kort: "Läspass 19", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 21, kort: "Läspass 20", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 22, kort: "Läspass 21", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 23, kort: "Läspass 22", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 24, kort: "Läspass 23", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 25, kort: "Läspass 24", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 26, kort: "Läspass 25", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 27, kort: "Läspass 26", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 28, kort: "Läspass 27", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 29, kort: "Läspass 28", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 30, kort: "Läspass 29", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
+    - { nar: pass 31, kort: "Läspass 30", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] } }
     - nar: näst sista passet
       kort: "Det sista läspasset"
-      text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut."
+      text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut. Ta med korten, som du har sparat sedan läsintervjun. Slutet är nästa pass, helst efter en helg, så att eleverna hinner tänka på boken."
     - nar: sista passet
       kort: "Slutet"
+      text: "Slutsamtalet för ni tillsammans, också när ni är fler än fem. Är ni fler än fem, säger var och en sin sak till den bredvid i stället för laget runt, och du skriver några i varje spalt."
       tabell: "Sista passet: slutet"
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Slutet, kolumner: [Det som är nytt] }
 mal:
