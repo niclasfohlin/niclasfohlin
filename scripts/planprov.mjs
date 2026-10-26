@@ -2154,12 +2154,15 @@ try {
     // lektion, frågan efter veckan sätter nästa veckas lektion, och skattningen mot lektionens mål föreslår nästa över 4.
     if (m.id === 'ljudlek-i-grupp') {
       const lj = async (js) => b.kor(js);
+      // Valen står under Ändra planen, som är hopfälld när planen är sparad, och listan med alla lektioner fälls ut först.
+      await lj("(() => { document.getElementById('pl-andra').open = true; return true; })()");
       await b.tryck('#pl-ingangar [data-ingang="3"]');
       await vanta(200);
       sant('Ljudlek: ingången är vecka 1:s lektion, och länken bär den', (await lj(`document.querySelector('#pl-ingangar [data-ingang="3"]').getAttribute('aria-pressed')`)) === 'true' && (await lj('location.hash')).includes('k=3'), await lj('location.hash'));
       // Vecka 3 är i dag (18 november): utan vald lektion frågar rutan efter den.
       const fraga = await lj(`document.querySelector('#pl-veckan .pl-lektionsfraga')?.textContent ?? ''`);
       sant('Ljudlek: en vecka utan vald lektion frågar efter den', fraga.includes('Vilken lektion tar ni vecka 3?'), fraga);
+      await lj("(() => { document.querySelector('#pl-veckan .pl-lektionsfraga details').open = true; return true; })()");
       await b.tryck('#pl-veckan .pl-lektionsfraga [data-valj-lektion="3|4"]');
       await vanta(250);
       const v3 = await lj(`(() => ({ rubrik: document.getElementById('pl-veckan-rubrik')?.textContent ?? '', delar: [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-delnamn')].map((x) => x.textContent), riktning: document.querySelector('#pl-veckan .pl-elevmal p')?.textContent ?? '', fraga: document.querySelector('#pl-veckan .pl-lektionen-efter .pl-fraga')?.textContent ?? '', knappar: [...document.querySelectorAll('#pl-veckan .pl-lektionen-efter .pl-andra-knappar button')].map((x) => x.textContent), hash: location.hash }))()`);
