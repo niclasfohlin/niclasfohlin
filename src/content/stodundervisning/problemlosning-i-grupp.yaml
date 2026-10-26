@@ -214,6 +214,16 @@ tidsschema:
     - tid: 28–30 min
       fas: Avsluta
       vad: Gemensamt igen, med kortet Våra sätt. Sätt ord på sättet som fungerade, och gruppen bockar för det på kortet.
+  # Första passet: Planera tar längre tid, när du visar kortet Våra sätt och bladen (riggen 2026-10-26, på sajtens fråga i
+  # återkopplingen på omgång 3). Fem minuter till Planera, och Lösa är fortfarande längst.
+  varianter:
+    - nar: första passet
+      delar:
+        - { fas: Förstå, tid: 0–5 min }
+        - { fas: Planera, tid: 5–10 min }
+        - { fas: Lösa, tid: 10–21 min }
+        - { fas: Jämföra, tid: 21–28 min }
+        - { fas: Avsluta, tid: 28–30 min }
   efter: "Gruppen tar ett problem per pass. Blir ett par klart tidigt, ställer du frågan under Större på lärarens sida eller ber paret lösa problemet på ett annat sätt."
 steg:
   rubrik: Vad du gör och säger i varje del

@@ -347,6 +347,14 @@ if (tsMp) {
     const sista5 = s.variantensNar('sista passet i vecka 5');
     ska('läxan från vecka 2, och Läxa 5 när sista passet är i vecka 5', !texterFor(forsta(1)).some((x) => x.includes('förra veckans läxa')) && texterFor(forsta(2)).some((x) => x.includes('förra veckans läxa')) && texterFor(forsta(1)).some((x) => x.startsWith('Läxan delas ut')) && texterFor(apl.pass.at(-1)).some((x) => x.startsWith('Läxa 5')) && JSON.stringify(sista5) === '{"typ":"sista","veckor":{"fran":5,"till":5}}' && s.passetTraffas(sista5, { sista: true, vecka: 5 }) && !s.passetTraffas(sista5, { sista: true, vecka: 4 }) && !s.passetTraffas(sista5, { sista: false, vecka: 5 }), [texterFor(forsta(1)), texterFor(forsta(2)), sista5]);
   }
+  // Riggens omgång 5 (2026-10-26): passets tider i raden efter tidsschemat stannar som i tidsschemats text, och Kompissamtals
+  // samtal 1 har variantens tider i första passet men inte i det andra.
+  {
+    const ks = metod('kompissamtal');
+    const kmp = s.metodplan(ks).plan, kpl = s.planera(kmp, s.forval(kmp, '2026-10-26'));
+    const forstaDel = (p) => s.passetsBeskrivning([], ks.tidsschema, s.passetsLage(kpl, p)).delar[0]?.tid;
+    ska('raden efter tidsschemat: passets tider stannar, och samtal 1 är en variant', s.tidsschematsFel({ ...ks, tidsschema: { ...ks.tidsschema, efter: 'Då har Starta 0–6 min och Rundan 6–9 min.' } }).some((x) => x.startsWith('Raden efter tidsschemat säger passets tider')) && !s.tidsschematsFel(ks).length && forstaDel(kpl.pass[0]) === '0–6 min' && forstaDel(kpl.pass[1]) !== '0–6 min', [forstaDel(kpl.pass[0]), forstaDel(kpl.pass[1]), s.tidsschematsFel(ks)]);
+  }
   // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): en metod med
   // nivåer har det, högst tre meningar och NIVAVALETS_LANGD tecken, och texten står ordagrant i metoden.
   {
@@ -447,6 +455,12 @@ if (tsMp) {
 const mapp = join(rot, 'src/content/stodundervisning');
 const alla = readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), d: parseYaml(readFileSync(join(mapp, f), 'utf8')) }));
 const planbara = alla.filter((m) => m.d.uppfoljning?.rader?.length && m.d.uppfoljning.rader.every((r) => r.tid !== undefined));
+// Codex i omgång 5: klockslag bara när delarna följer på varandra från minut 0. Gruppstärkande aktiviteter säger delarnas
+// längd, och är den enda metoden med planen som gör det.
+{
+  const langder = planbara.filter((m) => !s.delarIFoljd((m.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim())))).map((m) => m.id);
+  ska('passets delar som platser eller som längder', s.delarIFoljd([{ tid: '0–8 min' }, { tid: '8–18 min' }]) && !s.delarIFoljd([{ tid: '1–3 min' }, { tid: '1–2 min' }]) && !s.delarIFoljd([{ tid: '0–5 min' }, { tid: '6–9 min' }]) && !s.delarIFoljd([]) && langder.join() === 'gruppstarkande-aktiviteter', langder);
+}
 for (const m of planbara) {
   const { fel: f, plan: mp } = s.metodplan(m.d);
   ska(`${m.id} går att planera`, !f.length, f);
@@ -1351,7 +1365,7 @@ try {
   sant('rollens text ur metodens tabell', rollerna?.startsWith('Så läser ni Du läser högt och stannar vid stoppet.|Du Ger tanketid, låter paren samtala vid stoppet') && rollerna.includes('|Eleverna Säger ”Jag tror att”'), rollerna);
   await f.kor(`document.querySelector('#pl-veckan .pl-del[data-ruta="del-0"]').open = true`);
   sant('en del fälls ut till det läraren gör och säger', (await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'))?.includes('Skriv meningen på tavlan') && !!(await f.kor(`document.querySelector('#pl-veckan .pl-del[data-ruta="del-0"] .pl-fraser li')`)), await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'));
-  sant('veckans pass med rollerna', (await f.kor(`[...document.querySelectorAll('#pl-passen .pl-passroll')].map((x) => x.textContent).join('|')`)) === 'Du tänker högt|Paren samtalar|Eleverna läser själva');
+  sant('veckans pass med rollerna', (await f.kor(`[...document.querySelectorAll('#pl-passen .pl-passroll')].map((x) => x.textContent).join('|')`)) === 'Läraren tänker högt|Paren samtalar|Eleverna läser själva');
   await f.tryck('#pl-passen [data-visa-pass="9"]');
   sant('ett tryck på rollen visar passet i rutan', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 9 av 18 · Eleverna läser själva' && (await f.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Valt pass' && !!(await f.kor(`document.querySelector('#pl-veckan .pl-nasta [data-visa-pass=""]')`)), await f.text('#pl-veckan .pl-nasta'));
   await f.tryck('#pl-veckan .pl-nasta [data-visa-pass=""]');
@@ -1901,7 +1915,9 @@ try {
     await vanta(200);
     // Veckan har veckans fokus ur progressionen, eller passets roll när metoden säger vad som är nytt pass för pass, som
     // Boksamtalets tabell Perioden och Upprepad läsnings text i veckan (omgång 1 2026-10-26).
-    sant(`${m.id}: den sparade planen visar veckan med fokus eller passets roll`, await b.kor(`!document.getElementById('pl-veckan').hidden && !!document.querySelector('#pl-veckan .pl-fokusruta, #pl-veckan .pl-roll')`), await b.text('#pl-veckan'));
+    // En metod utan progression och utan roller, som Gruppstärkande aktiviteter där aktiviteterna väljs efter gruppen, visar
+    // passets delar i veckan (riggens omgång 5 2026-10-26).
+    sant(`${m.id}: den sparade planen visar veckan med fokus eller passets roll`, await b.kor(`(() => { const d = JSON.parse(document.getElementById('pl-data').textContent); const sel = d.progression || d.passen ? '#pl-veckan .pl-fokusruta, #pl-veckan .pl-roll' : '#pl-veckan .pl-delar'; return !document.getElementById('pl-veckan').hidden && !!document.querySelector(sel); })()`), await b.text('#pl-veckan'));
     sant(`${m.id}: planens länkar leder till sidor och ankare som finns`, !lankFel(await sakLankar(b)).length, [await sakLankar(b), lankFel(await sakLankar(b))]);
     // Stödet för nivåvalet vid varje nivåval (K-557): nerpilen under formulärets nivåer och under varje nivåval i veckan,
     // med metodens text och en länk som finns.

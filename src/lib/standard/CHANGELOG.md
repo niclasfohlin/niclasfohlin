@@ -1,5 +1,10 @@
 # Ändringar i standarden
 
+## 0.20.0, 2026-10-26
+
+- `plan.js`, `delarIFoljd`: följer passets delar på varandra från minut 0, så att tiderna är platser i passet? Planen skriver klockslag bara då, och en metod som säger delarnas längd, som Gruppstärkande aktiviteter, behåller dem (Codex samma dag: klockslagen gick bakåt).
+- `plan.js`, `tidsschematsFel` prövar också raden efter tidsschemat, `tidsschema.efter`, så att passets tider i en mening där också stannar och blir en variant (riggens omgång 5 samma dag: Kompissamtals tider för samtal 1 stod i raden efter).
+
 ## 0.19.0, 2026-10-26
 
 - `plan.js`, stödet för nivåvalet (sajtens K-557; Niclas samma dag: "Bör alltid finnas vid ett sådant val i Planeras modul", och "Någon slags maxlängd för den texten och vad den ska innehålla samt länka till"): `plan.nivaval`, ett citat ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, och `mer`, metodens tabell eller avsnitt med resten. `nivavaletsFel` stoppar en metod med nivåer utan stöd och en text med fler än tre meningar eller fler än `NIVAVALETS_LANGD` tecken, `planFel` kör den, och `planensTexter` har texten, så att `planensCitatFel` prövar citatet. Sajten ger `harNivaer` när nivåerna bara finns i banken.

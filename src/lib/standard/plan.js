@@ -451,7 +451,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.11', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.12', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -1053,8 +1053,9 @@ const tiderILoptext = (t) => (/\bminut/i.test(t) || /\d\s*min\b/i.test(t)) && SP
  * Felen i metodens tidsschema, för alla metoder: en variant vars när inte går att läsa, vars veckor går in i en annan
  * variants eller vars längd en annan variant eller tidsschemat själv redan har, en del som inte är en rad i tidsschemat,
  * delar som inte följer på varandra från minut 0 eller räcker längre än passet, en variant för passets längd vars delar inte
- * slutar på den längden, och passets tider i tidsschemats text, som ska stå som en variant.
- * @param {{ tid?: string, tidsschema?: { text?: string, rader: { tid: string, fas: string }[], varianter?: Variant[] } }} d
+ * slutar på den längden, och passets tider i tidsschemats text och i raden efter tidsschemat, som ska stå som en variant
+ * (riggens omgång 5 2026-10-26: Kompissamtals tider för samtal 1 stod i raden efter).
+ * @param {{ tid?: string, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string }[], varianter?: Variant[] } }} d
  * @returns {string[]}
  */
 export function tidsschematsFel(d) {
@@ -1087,7 +1088,7 @@ export function tidsschematsFel(d) {
     if (nar?.typ === 'minuter') { if (forra !== nar.minuter) fel.push(`${plats} har delar till minut ${forra}, men varianten gäller ett pass på ${nar.minuter} minuter.`); }
     else if (minuter !== undefined && forra > minuter) fel.push(`${plats} har delar till minut ${forra}, men faktarutans pass är ${minuter} minuter.`);
   }
-  for (const m of meningarna(t.text)) if (tiderILoptext(m)) fel.push(`Tidsschemats text säger passets tider i en mening, "${m}". Skriv dem som en variant i tidsschema.varianter, så skriver metodens sida, Word och planen dem ur samma rot (METODER.md under Tidsschemats varianter).`);
+  for (const [var_, text] of [['Tidsschemats text', t.text], ['Raden efter tidsschemat', t.efter]]) for (const m of meningarna(text)) if (tiderILoptext(m)) fel.push(`${var_} säger passets tider i en mening, "${m}". Skriv dem som en variant i tidsschema.varianter, så skriver metodens sida, Word och planen dem ur samma rot (METODER.md under Tidsschemats varianter).`);
   return fel;
 }
 /**
@@ -1346,6 +1347,21 @@ export const klockslag = (t) => `${tvasiffrigt(Math.floor(t / 60))}:${tvasiffrig
 export const plusMinuter = (s, m) => { const t = minuterAv(s) + m; return t >= 24 * 60 ? '23:59' : klockslag(t); };
 /** Minuterna i ett spann i tidsschemat: "0–4 min" ger 0 och 4. @param {string} tid */
 export const minuterISpann = (tid) => { const m = tid.match(/(\d+)\s*[–-]\u2060?\s*(\d+)/); return m ? { fran: Number(m[1]), till: Number(m[2]) } : null; };
+/**
+ * Följer passets delar på varandra från minut 0, som "0–8 min" och "8–18 min"? Bara då är tiderna platser i passet, som
+ * planen kan skriva som klockslag. En metod som säger hur lång varje del är, som Gruppstärkande aktiviteters "1–3 min" och
+ * "5–20 min", har delarnas längd, och planen skriver dem som de står (Codex 2026-10-26: klockslagen gick bakåt).
+ * @param {{ tid: string }[]} delar
+ */
+export function delarIFoljd(delar) {
+  let forra = 0;
+  for (const d of delar) {
+    const m = minuterISpann(d.tid);
+    if (!m || m.fran !== forra || m.till <= m.fran) return false;
+    forra = m.till;
+  }
+  return delar.length > 0;
+}
 /**
  * Dagarna med sina tider: "måndag, onsdag och fredag kl. 9.20–10.00" när dagarna har samma tid, och annars tiden vid
  * varje dag, "måndag kl. 9.20–10.00 och onsdag kl. 13.00–13.40".

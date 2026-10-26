@@ -214,6 +214,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Dagens datum | `idagLokalt` i `src/scripts/insatser-lagring.ts` |
 | Veckodagarna | `VECKODAGAR` och `veckodagKort` |
 | Ett klockslag | `minuterAv`, `klockslag`, `plusMinuter`, `minuterISpann`, `tidText` och `tidsspann` |
+| Passets delar som platser i passet, när de följer på varandra från minut 0 | `delarIFoljd` |
 | Talen | `talAv`, `talText`, `talIRegex`, `allaAntal` och `ORDNINGSTAL` |
 | Texten | `stor`, `liten`, `mening`, `utanPunkt`, `decimal`, `tvasiffrigt`, `esc`, `skyddaRegex`, `rentText`, `forstaLedet`, `kortnamn`, `meningarna`, `slutarMedPunkt`, `allaTexter` och `forstaOrdet` |
 | Eleverna i elevlistan | `sammaElev` |

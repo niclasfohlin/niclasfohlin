@@ -667,7 +667,7 @@ plan:
     mer: Så skiljer sig nivåerna
   passen:
     - nar: veckans första
-      kort: "Du tänker högt"
+      kort: "Läraren tänker högt"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 1, kolumner: [Så läser ni, Du, Eleverna] }
     - nar: veckans andra
       kort: "Paren samtalar"

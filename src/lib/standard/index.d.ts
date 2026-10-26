@@ -235,7 +235,9 @@ export declare const variantensMening: (v: Variant) => string;
 /** Varianten som gäller passet, den mest bestämda, eller ingen. */
 export declare const variantenFor: <V extends { nar: string }>(varianter: V[] | undefined, lage: PassetsLage | undefined) => V | undefined;
 /** Felen i metodens tidsschema: varianterna och passets tider i tidsschemats text. */
-export declare function tidsschematsFel(d: { tid?: string; tidsschema?: { text?: string; rader: { tid: string; fas: string }[]; varianter?: Variant[] } }): string[];
+/** Följer passets delar på varandra från minut 0, så att tiderna är platser i passet och kan skrivas som klockslag? */
+export declare function delarIFoljd(delar: { tid: string }[]): boolean;
+export declare function tidsschematsFel(d: { tid?: string; tidsschema?: { text?: string; efter?: string; rader: { tid: string; fas: string }[]; varianter?: Variant[] } }): string[];
 /** Felen i lathundens och lektionskortens texter för en metod med varianter. */
 export declare function varianternasFel(d: { tidsschema?: { varianter?: Variant[] } }, texter: string[], o: { lathund?: boolean; var: string }): string[];
 /** Progressionens steg som planen inte når. */

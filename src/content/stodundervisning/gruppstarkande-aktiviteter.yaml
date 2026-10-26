@@ -315,18 +315,25 @@ uppfoljning:
   text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. Då läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Gäller två rader samtidigt, gör du det som står först.
   rader:
     - nar: Varje vecka
+      tid: "varje vecka"
       vad: Skatta gruppen i Lärarens skattning.
     - nar: Varannan vecka
+      tid: "varannan vecka"
       vad: Från vecka 2 fyller eleverna i Vår grupp, och du leder en gruppreflektion efter en kort aktivitet i ett av veckans pass. I de två veckorna efter modellerar du det gruppen ska bli bättre på.
     - nar: Vecka 1–4
+      tid: "vecka 1–4"
       vad: Välj kort utan beröring ur Lära känna varandra och Trygghet och gemenskap. Sedan väljer du fler kort ur Samarbetsutmaningar, Gemensamma mål och Skapa och bygga.
     - nar: Kort med beröring
+      tid: "villkor"
       vad: Välj dem från vecka 5, när de flesta ringar in 4 eller 5 på ”Jag känner mig trygg i gruppen”.
     - nar: Linjen nedåt två veckor i rad
+      tid: "villkor"
       vad: Gör två aktiviteter i veckan ur Trygghet och gemenskap. Välj kort utan beröring, gärna sådana som gruppen redan kan, och ta upp det du har sett i nästa gruppreflektion.
     - nar: Linjen under 7 i fyra veckor, utan att stiga
+      tid: "villkor"
       vad: Välj kort ur en kategori som ni inte har använt på länge, och fråga i gruppreflektionen vad ni kan bli lite bättre på.
     - nar: Linjen på 7 eller mer i fyra veckor
+      tid: "villkor"
       vad: Gör en aktivitet i veckan och en gruppreflektion i månaden, om de flesta också ringar in 4 eller 5 på varje påstående i Vår grupp.
 mal:
   overgripande: "kunna samarbeta mot ett mål som gruppen bara når tillsammans, och pröva igen när något går fel."

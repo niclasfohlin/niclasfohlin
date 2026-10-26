@@ -17,7 +17,7 @@
 import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
-  bytDagar, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, narensVikt, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
+  bytDagar, delarIFoljd, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, narensVikt, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, type Veckonamn,
   type Foljd, type Pass, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
@@ -1065,7 +1065,8 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
   if (!delar.length && !roller.length && !postRad) return '';
   const tid = p ? passetsTid(aktiv.val, p) : undefined;
   const slut = Math.max(0, ...delar.map((d) => fasTill(d.tid) ?? 0));
-  const klockslag = !!tid && slut > 0 && minuterAv(tid[1]) - minuterAv(tid[0]) === slut;
+  // Klockslag bara när delarna följer på varandra från minut 0; en metod som säger delarnas längd behåller dem (delarIFoljd).
+  const klockslag = !!tid && slut > 0 && delarIFoljd(delar) && minuterAv(tid[1]) - minuterAv(tid[0]) === slut;
   const tidFor = (t: string) => { const f = fasFran(t); return klockslag && f !== null ? tidText(plusMinuter(tid![0], f)) : delensTid(t); };
   const stegFor = (fas: string) => (egna ? undefined : data.passet?.steg?.rader.find((s) => s.namn.toLowerCase() === fas.toLowerCase()));
   const rad = (nyckel: string, tidtext: string, namn: string, inne: string) => `<details class="pl-del" data-ruta="del-${nyckel}"${oppna.has(`del-${nyckel}`) ? ' open' : ''}><summary><span class="pl-deltid">${esc(tidtext)}</span><span class="pl-delnamn">${esc(namn)}</span></summary><div class="pl-deltext">${inne}</div></details>`;

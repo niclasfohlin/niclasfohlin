@@ -4943,18 +4943,18 @@
     "datum": "2026-10-25"
   },
   "kompissamtal": {
-    "word": "e43ad144c67000bbeb36bde90a2e24df736ea7c4c3c444f3ba2ecd03a23ea168",
-    "pdf": "51458f588b6e7517136280503a68b20ba2ad25fcd05afc637674311d7af6145a",
-    "sidor": 31,
-    "kB": 775,
-    "datum": "2026-10-25"
+    "word": "d081a4a2af1e5266dd0f1831a3004ec3b4c565bd31ce7565b3426c5e2070607c",
+    "pdf": "8fcaa2557d5ea74ff3012bc07f37a93a8e033ad23f2b20f4f8bbf8768e0a7953",
+    "sidor": 32,
+    "kB": 778,
+    "datum": "2026-10-26"
   },
   "kompissamtal-metoden": {
-    "word": "894c2d562e1ff370d7a9dc0a1ae3eca8b7004a649ba921c7624e02ff49f49c7d",
-    "pdf": "714d1f87edd62c4c57c2dcca7585df74d3cf49c6cd7ee8df5f65c8d6560a4362",
-    "sidor": 13,
-    "kB": 497,
-    "datum": "2026-10-25"
+    "word": "d4c2ab3f44c98c4c2869645d196783514fc79ef6cef7df9da13a34f7c2f7347f",
+    "pdf": "39f3bfa79455450b332713908fb0c538f32571e9fbab5dcfc77e0ac640d0d674",
+    "sidor": 14,
+    "kB": 498,
+    "datum": "2026-10-26"
   },
   "laslistor-i-grupp": {
     "word": "149229713bca29c0a0c0bc1b7726c5c0b94a24e993d38194162d84f8fb5f7073",
@@ -5097,17 +5097,17 @@
     "datum": "2026-10-25"
   },
   "problemlosning-i-grupp": {
-    "word": "b141d6f18d354b91daee0914893c4cb8ac19e92d25f19114898dfbcae61c6001",
-    "pdf": "c3243ef389168797bc49b6fa61f8442431c7451d64d5782940408dc137e91125",
+    "word": "e659a6921ea31eb52e75e6d60659757fee802a039f246b91260854e9a06f7371",
+    "pdf": "f3616c38442b3389871ac08ed6ac729bc644e93e10ec109fc264a7f4d1dc5ea8",
     "sidor": 163,
-    "kB": 4034,
+    "kB": 4041,
     "datum": "2026-10-26"
   },
   "problemlosning-i-grupp-metoden": {
-    "word": "5a3286c321a906d1531447a9f3355ba6d57543bf98e2ea8d89341697da0ab909",
-    "pdf": "a67ba5ff99e36fe4e992b1d23e1096dc5aaebc319952e7da6efccd4c142cfad4",
+    "word": "d956badb91f627d9b5b04e338d46d97962b113d7b08a4cf4068853d0fc6e4fe3",
+    "pdf": "64db8633f02f6e01222befce660b169c0a8baec488c9cfe10bea903bb3da9f12",
     "sidor": 13,
-    "kB": 567,
+    "kB": 568,
     "datum": "2026-10-26"
   },
   "seriesamtal": {
@@ -9736,6 +9736,34 @@
     "pdf": "23edee178ffea4a3bed768135766c79a5c02117fd8c836eec3645d0f32760094",
     "sidor": 1,
     "kB": 161,
+    "datum": "2026-10-26"
+  },
+  "kompissamtal-blad-samtalsteknikerna": {
+    "word": "58ac5476569b1d64f4f7ef3863a3d7b661826bcc73e18ebb1d57ff5db5d88850",
+    "pdf": "f77dac93b845e0fffc094e8f47d52f47f035f712ec48cdf149070f5e67b10369",
+    "sidor": 1,
+    "kB": 229,
+    "datum": "2026-10-26"
+  },
+  "kompissamtal-blad-var-overenskommelse": {
+    "word": "e6b66756384f85676249241ba181d80db371201cafb3d365222cee0d86f0d059",
+    "pdf": "473b01e112c1027aa38f49bd922edbcb69371987bc3010723450d4c7fedb4ae7",
+    "sidor": 1,
+    "kB": 209,
+    "datum": "2026-10-26"
+  },
+  "kompissamtal-blad-lappen-hem-fore-samtal-1": {
+    "word": "b39c39c60a61379d08fc887447a0f8c2340398253b2b57ff47de4d266ac56dc0",
+    "pdf": "2f6717ebf878c8bf27d02fce675bf5070918fef751fbd115dfb4c56570b022be",
+    "sidor": 1,
+    "kB": 220,
+    "datum": "2026-10-26"
+  },
+  "kompissamtal-blad-lappen-hem-efter-samtalet": {
+    "word": "5c628e836f3c6ab1834cecdfabefce4ce643cda31336190d316a0a4431759e04",
+    "pdf": "a3345127078a7782547319c4996a24cfa0673180f5669542758396e23cdcfd36",
+    "sidor": 1,
+    "kB": 211,
     "datum": "2026-10-26"
   }
 }
