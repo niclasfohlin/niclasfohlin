@@ -17,7 +17,7 @@
 import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
-  bytDagar, delarIFoljd, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, narensVikt, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
+  bytDagar, delarIFoljd, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, narensVikt, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
@@ -1387,7 +1387,7 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   const lopande = plan.uppfoljning.filter((u) => u.typ === 'lopande');
   if (lopande.length && !aktiv.folj) delar.push(`<details class="pl-fallut" data-ruta="lopande"${oppna.has('lopande') ? ' open' : ''}><summary>Metodens uppföljning ${esc(uppraknat(lopande.map((u) => uppfNamn(u.rad).toLocaleLowerCase('sv'))))}</summary><ul class="pl-uppf">${lopande.map((u) => `<li><p>${lankad(data.uppfoljning.rader[u.rad].vad)}</p></li>`).join('')}</ul></details>`);
   const villkor = plan.uppfoljning.filter((u) => u.typ === 'villkor' && !skattningensRader().has(u.rad));
-  if (villkor.length) delar.push(`<section class="pl-block"><h3>Håll koll på</h3><ul class="pl-uppf">${villkor.map((u) => `<li><span class="pl-etikett">${esc(uppfNamn(u.rad))}</span><p>${lankad(data.uppfoljning.rader[u.rad].vad)}</p></li>`).join('')}</ul></section>`);
+  if (villkor.length) delar.push(`<section class="pl-block"><h3>Håll koll på</h3><ul class="pl-uppf">${villkor.map((u) => `<li><span class="pl-etikett">${esc(uppfNamn(u.rad))}</span><p>${lankad(data.uppfoljning.rader[u.rad].vad)}${dinSammanstallning(data.uppfoljning.rader[u.rad].vad)}</p></li>`).join('')}</ul></section>`);
 
   // Skattningen mot målet, en gång i veckan, efter veckans innehåll (de kalla testarna 2026-10-24: skattningen stod före
   // passet och fokus), och om läraren vill hur veckan gick för gruppen. Inget måste fyllas i.
@@ -1405,22 +1405,25 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
     // Metodens skattning av gruppen (K-559): gruppens skala är metodens, och elevernas 1–5 mot målet står hopfällda under den,
     // så att gruppen inte skattas två gånger. En vecka utan metodens tillfälle har bara elevernas 1–5.
     // Planens skala med namnen och raderna med en skala för varje elev, eller för gruppen, en rot för båda formerna.
+    // En mening om veckan, som står i sammanställningen och i texten som kopieras, i båda formerna av skattningen.
+    const veckonot = `<label class="pl-etikett" for="pl-veckonot">En mening om veckan</label><input class="pl-falt pl-brett" type="text" id="pl-veckonot" maxlength="200" data-veckonot="${esc(v.mandag)}" value="${esc(gang?.not ?? '')}" /><p class="pl-hjalp">Meningen står i sammanställningen och i texten som kopieras, utan elevernas namn.</p>`;
     const skalnamnen = `<ul class="pl-skalnamn" aria-hidden="true">${SKALAN.map((x, i) => `<li><b>${i + 1}</b> ${esc(x)}</li>`).join('')}</ul>`;
     const raderna = (lista: { id: string; namn: string }[]) => `<ul class="pl-skattning">${lista.map((e) => `<li>${namnknapp('skatta', e)}${skala(`data-skatta="${esc(v.mandag)}|${esc(e.id)}" data-steg`, veckans[e.id], `${e.namn}: ${fragan}`)}${utvecklingsruta('skatta', s.elever.find((x) => x.id === e.id), s)}</li>`).join('')}</ul>`;
     if (gs) {
       const iVeckan = skattasVeckan(gs, v);
       const elevernas = harElever() ? `<details class="pl-fallut pl-elevskattning" data-ruta="elevskattning"${oppna.has('elevskattning') || Object.keys(veckans).length || !iVeckan ? ' open' : ''}><summary>${iVeckan ? 'Skatta också varje elev mot målet, om du vill' : 'Skatta varje elev mot målet, om du vill'}</summary>${malRad('veckan', false)}<p class="pl-fraga">${esc(fragan)}</p>${startad ? `${skalnamnen}${raderna(aktiv.foljd.elever)}<p class="pl-not pl-utv-tips">Tryck på ett namn, så ser du elevens utveckling.</p>` : ''}</details>` : '';
-      if (iVeckan) delar.push(skattaGruppen(gs, v, s, oppna, startad, elevernas + underlag));
+      const mening = startad ? `<details class="pl-gang" data-ruta="gang"${gang?.not || oppna.has('gang') ? ' open' : ''}><summary>En mening om veckan, om du vill</summary>${veckonot}</details>` : '';
+      if (iVeckan) delar.push(skattaGruppen(gs, v, s, oppna, startad, elevernas + underlag + mening));
       else if (elevernas) delar.push(`<section class="pl-block pl-folj" id="pl-skatta"><h3>Skatta eleverna</h3>${elevernas}${underlag}</section>`);
     } else delar.push(`<section class="pl-block pl-folj" id="pl-skatta"><h3>${harElever() ? 'Skatta eleverna' : 'Skatta gruppen'}</h3>${malRad('veckan', false)}<p class="pl-fraga">${esc(fragan)}</p>${startad ? `${lopandeHar.length ? `<p class="pl-not">Skatta i slutet av veckan, efter det du har sett och hört i passen.</p>` : ''}${skalnamnen}
       ${raderna(vem())}
       <p class="pl-not pl-utv-tips">${harElever() ? 'Tryck på ett namn, så ser du elevens utveckling.' : 'Tryck på Gruppen, så ser du gruppens utveckling. Vill du skatta var och en? <button type="button" class="pl-textknapp" data-elevlistan>Skriv in eleverna</button>'}${harSamman(s) ? ' <button type="button" class="pl-textknapp" data-till="pl-samman">Hela gruppens sammanställning</button>' : ''}</p>${underlag}
-      <details class="pl-gang" data-ruta="gang"${gang?.varde || gang?.not || oppna.has('gang') ? ' open' : ''}><summary>Hur gick veckan för gruppen, om du vill</summary><div class="pl-gangval" role="group" aria-label="Hur gick veckan för gruppen">${GANG.map((x, i) => `<button type="button" class="pl-chip" data-gang="${esc(v.mandag)}" data-varde="${i + 1}" aria-pressed="${gang?.varde === i + 1}">${x}</button>`).join('')}</div><label class="pl-etikett" for="pl-veckonot">En mening om veckan</label><input class="pl-falt pl-brett" type="text" id="pl-veckonot" maxlength="200" data-veckonot="${esc(v.mandag)}" value="${esc(gang?.not ?? '')}" /><p class="pl-hjalp">Meningen står i sammanställningen och i texten som kopieras, utan elevernas namn.</p></details>` : `<p class="pl-not">Du skattar veckan när den har börjat, från ${esc(dagText(v.mandag))}.</p>`}</section>`);
+      <details class="pl-gang" data-ruta="gang"${gang?.varde || gang?.not || oppna.has('gang') ? ' open' : ''}><summary>Hur gick veckan för gruppen, om du vill</summary><div class="pl-gangval" role="group" aria-label="Hur gick veckan för gruppen">${GANG.map((x, i) => `<button type="button" class="pl-chip" data-gang="${esc(v.mandag)}" data-varde="${i + 1}" aria-pressed="${gang?.varde === i + 1}">${x}</button>`).join('')}</div>${veckonot}</details>` : `<p class="pl-not">Du skattar veckan när den har börjat, från ${esc(dagText(v.mandag))}.</p>`}</section>`);
   }
   // Avstämningen mitt i insatsen: varje elevs riktning från första till senaste skattningen, och ett beslut.
   if (aktiv.folj && v.nr === s.mitt && v.nr !== plan.veckor.length) {
     const beslut = aktiv.foljd.avstamning?.beslut;
-    delar.push(`<section class="pl-stam"><h3>Avstämning mitt i insatsen</h3><p>Rör sig ${harElever() ? 'eleverna' : 'gruppen'} mot målet? Jämför skattningarna hittills.</p>${linjeruta(s)}${gruppensSkattning() && !harElever() ? '' : riktningar(s, 'stam')}<span class="pl-etikett">Beslut</span>${beslutsknappar('avstamning')}${beslut === 'justera' ? justeraText() : ''}${meningsfalt('pl-stam-not', 'En mening om avstämningen, om du vill', 'data-beslutsnot="avstamning"', aktiv.foljd.avstamning?.not ?? '')}</section>`);
+    delar.push(`<section class="pl-stam"><h3>Avstämning mitt i insatsen</h3><p>Rör sig ${harElever() ? 'eleverna' : 'gruppen'} mot målet? Jämför skattningarna hittills.</p>${linjeruta(s, false)}${sammanstallningarna()}${gruppensSkattning() && !elevernaHarNagot(s) ? '' : riktningar(s, 'stam')}<span class="pl-etikett">Beslut</span>${beslutsknappar('avstamning')}${beslut === 'justera' ? justeraText() : ''}${meningsfalt('pl-stam-not', 'En mening om avstämningen, om du vill', 'data-beslutsnot="avstamning"', aktiv.foljd.avstamning?.not ?? '')}</section>`);
   }
 
   // Efter veckan: att ta veckan en gång till, med metodens grund när den har en, och snabbmallen för den som bara planerar
@@ -1504,7 +1507,7 @@ function efterDelar(): string[] {
     // Förlängningen prövas och sägs med det den faktiskt ger, också när strukna veckor kommer tillbaka först (Codex 2026-10-25).
     const kan = [1, 2, 3, 4].filter((n) => forlangdaVal(mp, aktiv.val, n).langd <= LANGSTA);
     const forlang = valt !== 'forlang' ? '' : kan.length ? `<div class="pl-forlang"><span class="pl-etikett">Förläng planen med</span><div class="sk-segment">${kan.map((n) => `<button type="button" class="sk-antal" data-forlang="${n}">${esc(forlangText(n))}</button>`).join('')}</div></div>` : '<p class="pl-not">Planen kan inte bli längre. Gör en ny plan för fortsättningen.</p>';
-    delar.push(`<section class="pl-stam"><h3>Utvärdering efter insatsen</h3>${malRad('efter')}<p>Når ${harElever() ? 'eleverna' : 'gruppen'} målet? Jämför skattningarna och metodens uppföljning före och efter.</p>${linjeruta(s)}${gruppensSkattning() && !harElever() ? '' : riktningar(s, 'efter', true)}<span class="pl-etikett">Beslut</span>${beslutsknappar('utvardering')}${AVSLUTANDE.includes(valt ?? '') && avslutad ? avslutsruta() : ''}${forlang}${meningsfalt('pl-utv-not', 'En mening om utvärderingen, om du vill', 'data-beslutsnot="utvardering"', aktiv.foljd.utvardering?.not ?? '')}</section>`);
+    delar.push(`<section class="pl-stam"><h3>Utvärdering efter insatsen</h3>${malRad('efter')}<p>Når ${harElever() ? 'eleverna' : 'gruppen'} målet? Jämför skattningarna och metodens uppföljning före och efter.</p>${linjeruta(s, false)}${sammanstallningarna()}${gruppensSkattning() && !elevernaHarNagot(s) ? '' : riktningar(s, 'efter', true)}<span class="pl-etikett">Beslut</span>${beslutsknappar('utvardering')}${AVSLUTANDE.includes(valt ?? '') && avslutad ? avslutsruta() : ''}${forlang}${meningsfalt('pl-utv-not', 'En mening om utvärderingen, om du vill', 'data-beslutsnot="utvardering"', aktiv.foljd.utvardering?.not ?? '')}</section>`);
   }
   const sistaV = plan.veckor[plan.veckor.length - 1];
   delar.push(`<nav class="pl-bladdra" aria-label="Bläddra mellan veckorna"><button type="button" class="knapp sekundar liten" data-vy="${sistaV.nr}">‹ ${esc(rubrikVecka(sistaV))}</button><button type="button" class="knapp sekundar liten" data-till="pl-planen">Hela planen</button><span></span></nav>`);
@@ -1768,7 +1771,7 @@ function regelnEfter(v: PlanVecka): string {
   const r = i >= 0 ? linjen(plan, aktiv.foljd, g).galler[i]?.[0] : undefined;
   if (r === undefined) return '';
   const rad = g.regler[r].rad;
-  return `<p class="pl-paminn pl-regel"><b>${esc(mening(uppfNamn(rad)))}</b> ${lankad(mening(data.uppfoljning.rader[rad].vad))}</p>`;
+  return `<p class="pl-paminn pl-regel"><b>${esc(mening(uppfNamn(rad)))}</b> ${lankad(mening(data.uppfoljning.rader[rad].vad))}${dinSammanstallning(data.uppfoljning.rader[rad].vad)}</p>`;
 }
 // Linjen i metodens skattning av gruppen: kryss vecka för vecka på metodens skala, reglernas gränser streckade, och i veckan
 // platsen för veckan som kommer som en streckad ring (Niclas godkände formen 2026-10-26). Under krysset står veckan i
@@ -1798,10 +1801,12 @@ function skattaGruppen(g: PlanSkattning & { skala: Skala }, v: PlanVecka, s: Sam
   const stegen = Array.from({ length: g.skala.till - g.skala.fran + 1 }, (_, k) => g.skala.fran + k);
   const knappar = `<div class="pl-skala${stegen.length > 6 ? ' pl-skala-lang' : ''}" role="group" aria-label="${esc(`${g.namn}, ${g.skala.fran} till ${g.skala.till}`)}">${stegen.map((n) => `<button type="button" class="pl-skalsteg" data-matt="${esc(v.mandag)}" data-instrument="${esc(g.namn)}" aria-pressed="${varde === n}" aria-label="${n}, ${esc(stegetsNamn(g.skala, n).toLocaleLowerCase('sv'))}">${n}</button>`).join('')}</div>`;
   const namnen = `<ul class="pl-skalnamn" aria-hidden="true">${g.skala.steg.map((x) => `<li><b>${stegetsSpann(x)}</b> ${esc(x.namn)}</li>`).join('')}</ul>`;
+  // Hur gruppen ser ut vid varje steg, ur metodens tabell, som fälls ut (den kalla testaren av K-559 2026-10-26).
+  const beskrivning = g.skala.steg.some((x) => x.text) ? `<details class="pl-fallut" data-ruta="skalan"${oppna.has('skalan') ? ' open' : ''}><summary>Så ser gruppen ut vid varje steg</summary><ul class="pl-uppf">${[...g.skala.steg].reverse().map((x) => `<li><span class="pl-etikett">${esc(`${stegetsSpann(x)} · ${x.namn}`)}</span>${x.text ? `<p>${lankad(x.text)}</p>` : ''}</li>`).join('')}</ul></details>` : '';
   const grafen = sk?.varden.some((x) => x !== undefined) ? `<div class="pl-grafruta">${linjegraf(g, sk.varden, s.veckor.map(veckansNamn), { ring: varde === undefined && i >= 0 ? i : undefined, mitt: s.mitt })}</div>` : '<p class="pl-not">Linjen kommer med det första krysset.</p>';
-  const reglerna = g.regler.length ? `<details class="pl-fallut" data-ruta="linjen"${oppna.has('linjen') ? ' open' : ''}><summary>Vad linjen säger</summary><ul class="pl-uppf">${g.regler.map((r) => `<li><span class="pl-etikett">${esc(uppfNamn(r.rad))}</span><p>${lankad(mening(data.uppfoljning.rader[r.rad].vad))}</p></li>`).join('')}</ul></details>` : '';
+  const reglerna = g.regler.length ? `<details class="pl-fallut" data-ruta="linjen"${oppna.has('linjen') ? ' open' : ''}><summary>Vad linjen säger</summary><ul class="pl-uppf">${g.regler.map((r) => `<li><span class="pl-etikett">${esc(uppfNamn(r.rad))}</span><p>${lankad(mening(data.uppfoljning.rader[r.rad].vad))}${dinSammanstallning(data.uppfoljning.rader[r.rad].vad)}</p></li>`).join('')}</ul></details>` : '';
   const samman = harSamman(s) ? '<p class="pl-not"><button type="button" class="pl-textknapp" data-till="pl-samman">Hela gruppens sammanställning</button></p>' : '';
-  return `<section class="pl-block pl-folj" id="pl-skatta"><h3>Skatta gruppen</h3><p class="pl-etikett">${lankad(uppfNamn(g.rad))}</p>${g.text ? `<p class="pl-fraga">${lankad(g.text)}</p>` : ''}${startad ? `${knappar}${namnen}${varde !== undefined ? regelnEfter(v) : ''}${grafen}${reglerna}` : `<p class="pl-not">Du skattar veckan när den har börjat, från ${esc(dagText(v.mandag))}.</p>`}${samman}${under}</section>`;
+  return `<section class="pl-block pl-folj" id="pl-skatta"><h3>Skatta gruppen</h3><p class="pl-etikett">${lankad(uppfNamn(g.rad))}</p>${g.text ? `<p class="pl-fraga">${lankad(g.text)}</p>` : ''}${startad ? `${knappar}${namnen}${beskrivning}${varde !== undefined ? regelnEfter(v) : ''}${grafen}${reglerna}` : `<p class="pl-not">Du skattar veckan när den har börjat, från ${esc(dagText(v.mandag))}.</p>`}${samman}${under}</section>`;
 }
 // Linjen med texten om den, som sammanställningen, avstämningen och utvärderingen visar: värdena och reglerna som gällde,
 // med standardens ord (skattningensText).
@@ -1826,9 +1831,23 @@ function elevernasKnappar(rad: number, oppna: Set<string>) {
     l.sammanstallning ? `<a class="knapp sekundar liten" href="${esc(l.sammanstallning)}" target="_blank" rel="noopener">Din sammanställning</a>` : '',
   ].filter(Boolean).join('');
   const har = !!(l.formular || l.sammanstallning);
+  // Metodens text om när och hur länge, och stegen ur metodens ram, i passet där det görs (den kalla testaren av K-559
+  // 2026-10-26: gruppreflektionen hade ingen tid och inga steg i planen).
+  const text = x.text ? `<p>${lankad(x.text)}</p>` : '';
+  const steg = x.delar?.length ? `<details class="pl-fallut" data-ruta="instrument-${i}"${oppna.has(`instrument-${i}`) ? ' open' : ''}><summary>${esc(x.delar[0].rubrik)}</summary>${x.delar.map((g, j) => `${j ? `<p class="pl-etikett">${esc(g.rubrik)}</p>` : ''}<ul class="pl-uppf">${g.falt.map((f) => `<li><span class="pl-etikett">${esc(f.rubrik)}</span><p>${lankad(f.text)}</p></li>`).join('')}</ul>`).join('')}</details>` : '';
+  const forklaring = !l.formular && x.formular ? `<p class="pl-hjalp">${esc(formularetText(x.namn))}</p>` : '';
   const falt = aktiv.sparad ? `<details class="pl-fallut pl-lankar" data-ruta="lankar-${i}"${oppna.has(`lankar-${i}`) ? ' open' : ''}><summary>${har ? 'Dina länkar' : 'Har du kopierat formuläret? Spara dina länkar här'}</summary><label class="pl-etikett" for="pl-lank-${i}-formular">Länken till ditt formulär</label><input class="pl-falt pl-brett" type="url" inputmode="url" id="pl-lank-${i}-formular" data-lank="formular" data-instrument="${esc(x.namn)}" value="${esc(l.formular ?? '')}" placeholder="https://docs.google.com/forms/…" /><label class="pl-etikett" for="pl-lank-${i}-samman">Länken till din sammanställning</label><input class="pl-falt pl-brett" type="url" inputmode="url" id="pl-lank-${i}-samman" data-lank="sammanstallning" data-instrument="${esc(x.namn)}" value="${esc(l.sammanstallning ?? '')}" placeholder="https://docs.google.com/spreadsheets/…" /><p class="pl-hjalp">Länkarna sparas bara i den här webbläsaren och i planens fil. De står inte i länken till planen, i utskrifterna eller i texten som kopieras.</p></details>` : '';
-  return `${knappar ? `<p class="pl-andra-knappar">${knappar}</p>` : ''}${falt}`;
+  return `${text}${steg}${knappar ? `<p class="pl-andra-knappar">${knappar}</p>` : ''}${forklaring}${falt}`;
 }
+// Lärarens sammanställning av det eleverna har fyllt i, där en text bygger på det, som Kort med beröring och regeln om 7
+// eller mer, som också säger Vår grupp (Niclas godkände formen 2026-10-26: Din sammanställning där linjen inte räcker).
+const sparadSammanstallning = (x: PlanSkattning) => aktiv.foljd.lankar?.[x.namn]?.sammanstallning;
+const dinSammanstallning = (text: string) => (data.skattningar ?? []).filter((x) => x.vem === 'eleverna' && sparadSammanstallning(x) && text.toLocaleLowerCase('sv').includes(x.namn.toLocaleLowerCase('sv'))).map((x) => ` <a class="pl-textknapp" href="${esc(sparadSammanstallning(x)!)}" target="_blank" rel="noopener">Din sammanställning för ${esc(x.namn)}</a>`).join('');
+// I avstämningen och utvärderingen står lärarens sammanställningar av det eleverna har fyllt i.
+const sammanstallningarna = () => (data.skattningar ?? []).filter((x) => x.vem === 'eleverna' && sparadSammanstallning(x)).map((x) => `<p class="pl-not">${esc(x.namn)}: <a class="pl-textknapp" href="${esc(sparadSammanstallning(x)!)}" target="_blank" rel="noopener">Din sammanställning</a></p>`).join('');
+// I en metod med en skattning av gruppen står eleverna i avstämningen, utvärderingen och sammanställningen när någon elev
+// är skattad eller har ett resultat (den kalla testaren av K-559 2026-10-26: 22 rader "Inte skattad än").
+const elevernaHarNagot = (s: Sammanstallning) => s.elever.some((e) => e.id !== GRUPPEN && (e.skattningar.length > 0 || Object.values(e.resultat).some(Boolean)));
 
 // Sammanställningen står så snart något är ifyllt, och går att nå från veckan (Niclas 2026-10-24: "både sammanställning av
 // alla elever i gruppen och en elev när som").
@@ -1869,7 +1888,7 @@ function renderaSamman() {
   // har något, eftersom metodens skala är gruppens.
   const gsk = gruppensSkattning(), linje = linjeruta(s);
   if (gsk && linje) delar.push(`<section class="pl-block"><h3>${esc(gsk.namn)}</h3><p class="pl-not">${esc(`${stor(uppfNamn(gsk.rad))}, ${gsk.skala.fran} till ${gsk.skala.till}.`)}</p>${linje}</section>`);
-  if (!(gsk && s.grupp && !s.elever.some((e) => e.skattningar.length))) delar.push(`<section class="pl-block"><h3>${s.grupp ? 'Gruppen' : 'Eleverna'}</h3><p class="pl-not">${esc(stor(skattningenText(vad)))}.${s.grupp ? '' : ' Tryck på en elev för grafen och elevens utskrift.'}</p><div class="pl-elevlista">${s.elever.map((e) => {
+  if (!(gsk && !elevernaHarNagot(s) && !(s.grupp && s.elever.some((e) => e.skattningar.length)))) delar.push(`<section class="pl-block"><h3>${s.grupp ? 'Gruppen' : 'Eleverna'}</h3><p class="pl-not">${esc(stor(skattningenText(vad)))}.${s.grupp ? '' : ' Tryck på en elev för grafen och elevens utskrift.'}</p><div class="pl-elevlista">${s.elever.map((e) => {
     const elev = !s.grupp && e.id !== GRUPPEN;
     const varden = elevensVarden(s, e);
     const r = riktning(e);

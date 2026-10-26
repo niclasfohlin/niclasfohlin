@@ -455,12 +455,13 @@ const metodensFalt = z.strictObject({
       enPerPass: z.literal(true).optional(),
       // Metodens egna skattningar (K-559; Niclas 2026-10-26: "Ett verktyg som har en skattningskala och som ska göras på
       // vissa tillfällen bör matchas i modulen och kunna göras där"): namnet på instrumentet i metoden, vem som skattar
-      // (gruppen: läraren med metodens skala; eleverna: metodens blad eller formulär, som planen inte tar emot), raden i
+      // (gruppen: läraren med metodens skala; eleverna: metodens blad eller formulär, som planen inte tar emot, med ramen som
+      // säger hur det görs), raden i
       // uppföljningen som säger när och vad, ett citat ur metoden till planen, skalan med tabellen som säger stegens namn
       // och reglerna på linjen med raden som säger vad läraren gör. Delen är borta utan fältet (REGLER.md i standarden under
       // Metodens egna skattningar, och METODER.md under Fälten i metodens fil).
       skattningar: z.array(z.strictObject({
-        namn: text, vem: z.enum(['gruppen', 'eleverna']), rad: text, text: text.optional(),
+        namn: text, vem: z.enum(['gruppen', 'eleverna']), rad: text, text: text.optional(), ram: text.optional(),
         skala: z.strictObject({ fran: z.number().int().min(0).max(100), till: z.number().int().min(1).max(100), tabell: text }).optional(),
         regler: z.array(z.strictObject({ om: text, rad: text })).min(1).max(6).optional(),
       })).min(1).max(3).optional(),

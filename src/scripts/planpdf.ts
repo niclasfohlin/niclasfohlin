@@ -176,11 +176,15 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
     p.linje(sk.varden, veckoetiketter(s), { fran: sk.skala.fran, till: sk.skala.till, granser: skattningensGranser(sk), mitt: s.mitt });
     if (t.regler.length) p.text(`Det linjen sa: ${t.regler.join('; ')}.`, { luft: 8 });
   }
-  // Planens egen skattning av gruppen står bara när den har något, när metoden har en egen skala för gruppen.
-  const planens = !(s.skattningar.length && s.grupp && !s.elever.some((e) => e.skattningar.length));
+  // Eleverna med något infört står med diagram och de andra i en mening, så att en klass inte ger sidor med tomma diagram, och
+  // med metodens egen skala för gruppen står eleverna bara när någon har något (den kalla testaren av K-559 2026-10-26).
+  const medData = (e: (typeof s.elever)[number]) => e.skattningar.length > 0 || Object.values(e.resultat).some(Boolean) || (e.id !== GRUPPEN && e.narvaro !== null && s.gjorda > 0);
+  const visas = s.elever.filter(medData), utan = s.elever.filter((e) => !medData(e));
+  const planens = !s.skattningar.length || visas.length > 0;
   if (planens) p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
-  if (planens) skalan(p, info, 4);
-  for (const e of planens ? s.elever : []) {
+  if (visas.length) skalan(p, info, 4);
+  if (planens && utan.length) p.text(s.grupp ? 'Gruppen är inte skattad än.' : `Inte skattade än: ${utan.map((e) => e.namn).join(', ')}.`, { luft: 8 });
+  for (const e of planens ? visas : []) {
     p.namnMedStaplar(e.namn, elevensVarden(s, e), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
     p.text([`${riktningText(e)}.`, e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronText(e, s) : '', ...elevensResultat(plan, e.resultat).map((t) => mening(resultatText(plan, info, t)))].filter(Boolean).join(' '), { luft: 8 });
   }

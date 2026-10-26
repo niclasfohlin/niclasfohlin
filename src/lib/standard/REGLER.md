@@ -46,7 +46,7 @@ En metod med ett eget instrument, som Gruppstärkande aktiviteters Lärarens ska
 | 1. Uppföljningens rad | Instrumentet har en rad i metodens uppföljning med en tid i insatsens veckor, som `varje vecka`, `varannan vecka` eller `vecka 4`. Raden säger när och vad, och planen visar den |
 | 2. Skalan, för gruppen | Metodens tabell, eller en rams översikt, där första kolumnen säger stegen och deras namn, som "9–10 · Mycket bra". Varje steg från första till sista har ett namn |
 | 3. Reglerna, när metoden har sådana | En rad i uppföljningen med `tid: "villkor"` för varje regel, med det läraren gör, och regelns ord i fältet: `nedåt 2 veckor i rad`, `under 7 i 4 veckor utan att stiga` eller `minst 7 i 4 veckor`. Veckorna räknas i följd: en vecka i planen utan kryss bryter följden, och ett lov är ingen vecka i planen |
-| 4. Fältet | En rad i `plan.skattningar` med `namn` (bladets namn efter "Blad: "), `vem`, `rad` (uppföljningens rad), en valfri `text` (ett ordagrant citat ur metoden), och för gruppen `skala` och `regler` |
+| 4. Fältet | En rad i `plan.skattningar` med `namn` (bladets namn efter "Blad: "), `vem`, `rad` (uppföljningens rad), en valfri `text` (ett ordagrant citat ur metoden), för gruppen `skala` och `regler`, och för det eleverna fyller i en valfri `ram`, metodens ram som säger hur det görs, med stegen |
 | 5. Proven | `npm run validera` |
 
 ```yaml
@@ -62,12 +62,14 @@ plan:
     - namn: Vår grupp
       vem: eleverna
       rad: Gruppreflektion varannan vecka
+      text: "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter."
+      ram: Gruppreflektion
 ```
 
 | Vem | Vad planen gör |
 |---|---|
-| `gruppen` | Läraren skattar gruppen med metodens skala vid Skatta gruppen i veckorna då metoden gör det. Det ersätter planens skattning av gruppen, så att gruppen har en skala, och elevernas 1–5 mot målet står hopfällda under. Linjen ritas med reglernas gränser streckade, en regel som gäller står under skalan och överst i rutan med passet veckan efter, och reglerna står under Vad linjen säger. Sammanställningen, avstämningen, utvärderingen, pdf:en och texterna läser linjen. Högst en per metod |
-| `eleverna` | Eleverna fyller i metodens blad eller formulär själva, och planen tar inte emot svaren. Uppföljningens rad har en tid med datum, som `varannan vecka` eller `vecka 4`. I passet där metoden gör det står knapparna till bladets pdf och till formuläret (fältet `google` på bladet), och lärarens länkar till sin kopia och sin sammanställning, som bara sparas i webbläsaren och i planens fil |
+| `gruppen` | Läraren skattar gruppen med metodens skala vid Skatta gruppen i veckorna då metoden gör det, med stegens namn och, att fälla ut, tabellens beskrivning av varje steg. Det ersätter planens skattning av gruppen, så att gruppen har en skala, och elevernas 1–5 mot målet står hopfällda under. Linjen ritas med reglernas gränser streckade, en regel som gäller står under skalan och överst i rutan med passet veckan efter, och reglerna står under Vad linjen säger. Sammanställningen, avstämningen, utvärderingen, pdf:en och texterna läser linjen. Högst en per metod |
+| `eleverna` | Eleverna fyller i metodens blad eller formulär själva, och planen tar inte emot svaren. Uppföljningens rad har en tid med datum, som `varannan vecka` eller `vecka 4`. I passet där metoden gör det står metodens text och ramens steg, som fälls ut, knapparna till bladets pdf och till formuläret (fältet `google` på bladet) med en mening om vad formuläret är (`formularetText`), och lärarens länkar till sin kopia och sin sammanställning, som bara sparas i webbläsaren och i planens fil |
 
 Bort med delen: ta bort fältet. Uppföljningens rader står kvar och visas som förut, med reglerna under Håll koll på. Bygget stannar på en rad som metoden inte har, en tid utan veckor, en skala vars tabell inte säger varje steg, en regel som inte går att läsa eller vars rad inte är ett villkor, fler än en skattning av gruppen, ett namn som inget blad har och ett blad som eleverna fyller i utan formulär (`metodensSkattningar` här och `insatsplanFel` på sajten).
 

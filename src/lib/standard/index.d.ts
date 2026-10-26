@@ -138,7 +138,7 @@ export declare function radensVeckor(text: unknown): { fran: number; till: numbe
 /** Veckorna i "vecka 3" och "vecka 1–2" som ett spann. */
 export declare function veckorI(text: unknown): { fran: number; till: number } | null;
 export declare function metodplan(d: { tid?: string; period?: string; progression?: { enhet?: string; rader: { vecka: string; taggar?: string[] }[] }; uppfoljning?: { rader: { nar: string; tid?: string }[] }; plan?: { passen?: { nar: string }[] } }): { fel: string[]; plan?: Metodplan };
-export type MetodensTexter = { uppfoljning?: { rader: { nar: string; vad: string }[] }; progression?: { rader: { vecka: string; fokus?: string; roll?: string; led?: string }[] }; checklista?: { punkter: string[] }; plan?: { passen?: { nar: string; text?: string; ur?: { tabell: string; rad: string; kolumner?: string[] }; kort?: string; tabell?: string }[]; fore?: string[]; justera?: string[]; upprepa?: string; utan?: string[]; stege?: boolean; nivaval?: { text: string; mer: string }; skattningar?: { namn: string; vem: string; rad: string; text?: string; skala?: { fran: number; till: number; tabell: string }; regler?: { om: string; rad: string }[] }[] }; ramar?: { ramar?: { rubrik: string; oversikt?: { rader?: unknown[][] } }[] }; tidsschema?: { text?: string; efter?: string; rader: { tid: string; fas: string; vad: string }[]; varianter?: Variant[] }; gruppen?: { text: string }; passrutin?: { efterPasset?: string }; principer?: { text: string }; hem?: { text: string[] }; tabeller?: { rubrik: string; kolumner: string[]; rader?: unknown[][] }[]; nivaer?: { namn: string }[] };
+export type MetodensTexter = { uppfoljning?: { rader: { nar: string; vad: string }[] }; progression?: { rader: { vecka: string; fokus?: string; roll?: string; led?: string }[] }; checklista?: { punkter: string[] }; plan?: { passen?: { nar: string; text?: string; ur?: { tabell: string; rad: string; kolumner?: string[] }; kort?: string; tabell?: string }[]; fore?: string[]; justera?: string[]; upprepa?: string; utan?: string[]; stege?: boolean; nivaval?: { text: string; mer: string }; skattningar?: { namn: string; vem: string; rad: string; text?: string; ram?: string; skala?: { fran: number; till: number; tabell: string }; regler?: { om: string; rad: string }[] }[] }; ramar?: { ramar?: { rubrik: string; oversikt?: { rader?: unknown[][] }; text?: string[]; delar?: { rubrik: string; falt?: { rubrik: string; text: string }[] }[] }[] }; tidsschema?: { text?: string; efter?: string; rader: { tid: string; fas: string; vad: string }[]; varianter?: Variant[] }; gruppen?: { text: string }; passrutin?: { efterPasset?: string }; principer?: { text: string }; hem?: { text: string[] }; tabeller?: { rubrik: string; kolumner: string[]; rader?: unknown[][] }[]; nivaer?: { namn: string }[] };
 /** Tidsschemats text som planen visar den, utan meningarna i plan.utan. */
 export declare const planensInledning: (text: string | undefined, utan?: string[]) => string;
 /** Planens egna fält och texterna som bara planen läser, med var de står. */
@@ -182,15 +182,16 @@ export declare const PLANKNAPPAR: Readonly<{ spara: string; laddaNer: string; op
 /** En regel på linjen i metodens skattning av gruppen (tolkaRegel). */
 export type Regel = { typ: 'nedat'; veckor: number } | { typ: 'under'; grans: number; veckor: number } | { typ: 'minst'; grans: number; veckor: number };
 /** Skalans steg med namn ur metodens tabell (skalansSteg). */
-export type Skala = { fran: number; till: number; tabell: string; steg: { fran: number; till: number; namn: string }[] };
+export type Skala = { fran: number; till: number; tabell: string; steg: { fran: number; till: number; namn: string; text?: string }[] };
 /** En av metodens egna skattningar (metodensSkattningar, K-559). */
-export type Skattning = { namn: string; vem: 'gruppen' | 'eleverna'; rad: number; skala?: Skala; regler: (Regel & { rad: number })[]; text?: string };
+export type Skattning = { namn: string; vem: 'gruppen' | 'eleverna'; rad: number; skala?: Skala; regler: (Regel & { rad: number })[]; text?: string; ram?: string };
 export declare const SKATTNINGARNAS_VEM: readonly ['gruppen', 'eleverna'];
 export declare function tolkaRegel(text: unknown): Regel | null;
 export declare function regelnGaller(r: Regel, varden: number[]): boolean;
 export declare function skalansSteg(d: MetodensTexter, skala: { fran: number; till: number; tabell: string }): Skala | null;
 export declare const stegetsNamn: (skala: Skala, x: number) => string;
 export declare const skattningensGranser: (s: { regler: Regel[] }) => number[];
+export declare const formularetText: (blad: string) => string;
 export declare const rensadLank: (x: unknown) => string | undefined;
 export declare const stegetsSpann: (x: { fran: number; till: number }) => string;
 export declare function metodensSkattningar(d: MetodensTexter): { skattningar: Skattning[]; fel: string[] };

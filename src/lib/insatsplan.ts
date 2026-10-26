@@ -122,6 +122,8 @@ export interface PlanSkattning extends Skattning {
   adress?: string;
   pdf?: string;
   formular?: string;
+  /** Ramens delar med stegen, som Så leder du gruppreflektionen, när metoden säger hur det eleverna fyller i görs (ram). */
+  delar?: { rubrik: string; falt: { rubrik: string; text: string }[] }[];
 }
 
 export interface PlanPasset {
@@ -310,11 +312,13 @@ function planensSkattningar(d: Metod['data'], id: string): PlanSkattning[] {
   return metodensSkattningar(d).skattningar.map((x) => {
     const b = blad.find((y) => bladNamn(y).toLowerCase() === x.namn.toLowerCase());
     const fil = filer.find((f) => f.titel.toLowerCase() === x.namn.toLowerCase());
+    const ram = x.ram ? (d.ramar?.ramar ?? []).find((r) => r.rubrik === x.ram) : undefined;
     return {
       ...x,
       ...(b ? { adress: `/stodundervisning/${id}#blad-${b.bild.nr}` } : {}),
       ...(fil ? { pdf: `/stodundervisning/${fil.namn}.pdf` } : {}),
       ...(x.vem === 'eleverna' && b?.bild.google ? { formular: b.bild.google } : {}),
+      ...(ram?.delar?.length ? { delar: ram.delar.map((g) => ({ rubrik: g.rubrik, falt: (g.falt ?? []).map((f) => ({ rubrik: f.rubrik, text: f.text })) })) } : {}),
     };
   });
 }

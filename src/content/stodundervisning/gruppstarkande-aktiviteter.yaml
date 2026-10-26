@@ -342,7 +342,7 @@ plan:
     - namn: Lärarens skattning
       vem: gruppen
       rad: Lärarens skattning varje vecka
-      text: "Skatta i slutet av veckan, gärna direkt efter veckans sista pass. Tänk då på hur gruppen har haft det i aktiviteterna, på lektionerna och på rasterna."
+      text: "Skatta i slutet av veckan, gärna direkt efter veckans sista pass. Tänk då på hur gruppen har haft det i aktiviteterna, på lektionerna och på rasterna. Skattar du 1 eller 2, följer du skolans rutin."
       skala: { fran: 1, till: 10, tabell: Lärarens skattning }
       regler:
         - { om: nedåt 2 veckor i rad, rad: Linjen i Lärarens skattning nedåt två veckor i rad }
@@ -351,6 +351,8 @@ plan:
     - namn: Vår grupp
       vem: eleverna
       rad: Gruppreflektion varannan vecka
+      text: "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter. Gruppreflektionen tar 20–30 minuter och slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Är eleverna fler än sex, pratar de i grupper om två till fyra medan du går runt och lyssnar, och när du lyfter det gruppen gör bra, berättar två eller tre grupper först vad de har pratat om. I en klass säger du till eleverna, innan de fyller i bladet, att gruppen på bladet är hela klassen."
+      ram: Gruppreflektion
 mal:
   overgripande: "kunna samarbeta mot ett mål som gruppen bara når tillsammans, och pröva igen när något går fel."
   punkter:
