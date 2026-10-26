@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.19.0, 2026-10-26
+
+- `plan.js`, veckans rad i en tabell med en rad per vecka och en kolumn per pass (riggens omgång 3, Matematik): en roll med `ur.rad` som är `VECKANS_RAD`, "veckans", hämtar sin text ur raden för passets vecka och sin kolumn (`rollensVeckor`), och `passetsBeskrivning` visar passets veckas celler. Raden säger sina veckor med `radensVeckor`. `planensRamFel` stoppar en sådan roll när tabellen, en kolumn eller en rads vecka inte finns, och ordet översikten är en mening om metodens sida, som remsan.
+
 ## 0.18.0, 2026-10-26
 
 - `plan.js`, tidsschemats varianter för vissa pass och för ett kortare pass (riggens omgång 1 samma dag: Upprepad läsnings pass på tio minuter och Högläsning i pars visning i veckans första pass hade sina tider i en mening): `variantensNar` läser variantens `nar`, metodens veckor (`vecka 1–3`), passets längd (`ett pass på tio minuter`), planens ord för passen (`pass 2`, `veckans första pass`) och en plats i vissa veckor (`veckans första pass i vecka 2–5`). `passetsLage` säger var ett pass står i planen och `passetTraffas` om en rad i `plan.passen` eller en variant gäller det, en rot för båda, och `narensVikt` ordnar dem, det mest bestämda först. `variantenFor` och `passetsBeskrivning` tar passets läge med minuterna i stället för bara metodens vecka. En variant har `text` när den behövs, och en variant för passets längd skrivs med tiderna först och texten efter (`variantensMening`). `tidsschematsFel` stoppar ett `nar` som inte går att läsa, två varianter för samma längd, en variant för tidsschemats egen längd och en variant för passets längd vars delar inte slutar på längden, och `varianternasFel` kräver bara varianterna för vissa veckor i lathunden.

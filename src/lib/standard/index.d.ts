@@ -149,6 +149,10 @@ export declare const visadeTexter: (d: MetodensTexter) => string[];
 export declare function planensRamFel(d: MetodensTexter & { tid?: string }): string[];
 /** En rad i metodens tabell som en roll i planen hämtar sin text ur, eller null när den inte finns. */
 export declare function rollensRad(d: MetodensTexter, ur: { tabell: string; rad: string; kolumner?: string[] }): { kolumn: string; text: string }[] | null;
+/** Ordet i ur.rad som säger att rollen hämtar veckans rad. */
+export declare const VECKANS_RAD: string;
+/** Veckans rad i en tabell med en rad per vecka och en kolumn per pass: cellerna för varje vecka, eller null. */
+export declare function rollensVeckor(d: MetodensTexter, ur: { tabell: string; rad: string; kolumner?: string[] }): Record<string, { kolumn: string; text: string }[]> | null;
 /** Planens egna texter citerar metoden ordagrant. */
 export declare function planensCitatFel(d: MetodensTexter & Record<string, unknown>): string[];
 export declare function planFel(d: Parameters<typeof metodplan>[0] & MetodensTexter): string[];
@@ -211,7 +215,7 @@ export declare const narensVikt: (t: PassensNar | VariantensNar) => number;
 /** Hur många elever elevlistan rymmer: en hel klass. */
 export declare const ELEVLISTANS_LANGD: number;
 /** Ett pass som sidan och kalendern visar det: namnet, rollernas texter, delarna och förberedelsen, med tidsschemats variant för passet. */
-export declare function passetsBeskrivning<D extends { tid: string; fas: string; vad: string }>(roller: { text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; utanTidsschema?: boolean; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] } }[], passet: { delar: D[]; fore?: string; varianter?: (Variant & { delar: D[] })[] } | undefined, lage?: PassetsLage): { namn: string; texter: { etikett: string; text: string }[]; delar: D[]; egenOrdning: boolean; fore?: string; foreRader: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[]; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] }; rubrik?: string; variantText?: string };
+export declare function passetsBeskrivning<D extends { tid: string; fas: string; vad: string }>(roller: { text?: string; rad?: { kolumn: string; text: string }[]; veckor?: Record<string, { kolumn: string; text: string }[]>; kort?: string; utanTidsschema?: boolean; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] } }[], passet: { delar: D[]; fore?: string; varianter?: (Variant & { delar: D[] })[] } | undefined, lage?: PassetsLage): { namn: string; texter: { etikett: string; text: string }[]; delar: D[]; egenOrdning: boolean; fore?: string; foreRader: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[]; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] }; rubrik?: string; variantText?: string };
 /** En del i ett pass med egen tabell: tiden, namnet när tabellen har ett, vad som händer och de andra kolumnerna med sina namn. */
 export type TabellDel = { tid: string; fas: string; vad: string; mer: { etikett: string; text: string }[] };
 /** Delarna i ett pass med egen tabell, och förberedelsen, eller null när tabellen inte är ett pass i delar. */

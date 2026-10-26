@@ -315,7 +315,7 @@ export const visadeTexter = (d) => [
 
 // En mening om metodens sida: remsan och tabellerna där, och det som står under eller efter något. En tabell med namn,
 // som "tabellen Talen och bladen i veckorna", är en sak i metoden och blir en länk.
-const OM_SIDAN = [/\b(?:[Rr]emsan|[Tt]abeller(?:na)?)(?![\p{L}\p{N}])/u, /\b[Tt]abellen(?![\p{L}\p{N}])(?!\s+\p{Lu})/u, /\b[Ss]tår (?:under|efter|ovan|nedan)(?![\p{L}\p{N}])/u];
+const OM_SIDAN = [/(?<![\p{L}\p{N}])(?:[Rr]emsan|[Öö]versikten|[Tt]abeller(?:na)?)(?![\p{L}\p{N}])/u, /\b[Tt]abellen(?![\p{L}\p{N}])(?!\s+\p{Lu})/u, /\b[Ss]tår (?:under|efter|ovan|nedan)(?![\p{L}\p{N}])/u];
 const omSidan = (m) => OM_SIDAN.some((r) => r.test(m));
 // Metodens veckor i ord, som "vecka tre" och "andra veckan", som planen inte kan skriva som sina veckor. "En" och "ett"
 // räknas inte, eftersom "varje vecka en stund" inte är en vecka.
@@ -330,7 +330,7 @@ const VECKOR_I_ORD = new RegExp(String.raw`(?<![\p{L}\p{N}])(?:(?:vecka|veckorna
  */
 export function planensRamFel(d) {
   const fel = [];
-  for (const p of d.plan?.passen ?? []) if (p.ur && !rollensRad(d, p.ur)) fel.push(`Planens pass "${p.nar}" hämtar sin text ur tabellen "${p.ur.tabell}", raden "${p.ur.rad}"${p.ur.kolumner ? ` och kolumnerna ${p.ur.kolumner.join(', ')}` : ''}, som metoden inte har. Skriv tabellens rubrik, radens första ord och kolumnerna som de står i metoden.`);
+  for (const p of d.plan?.passen ?? []) if (p.ur && !(p.ur.rad === VECKANS_RAD ? rollensVeckor(d, p.ur) : rollensRad(d, p.ur))) fel.push(`Planens pass "${p.nar}" hämtar sin text ur tabellen "${p.ur.tabell}", raden "${p.ur.rad}"${p.ur.kolumner ? ` och kolumnerna ${p.ur.kolumner.join(', ')}` : ''}, som metoden inte har. Skriv tabellens rubrik, radens första ord och kolumnerna som de står i metoden.`);
   for (const p of d.plan?.passen ?? []) if (p.text && tiderILoptext(p.text)) fel.push(`Planens pass "${p.nar}" säger passets tider. Tiderna står i metodens tidsschema, och tider som gäller vissa veckor som en variant (tidsschema.varianter), så att metodens sida, Word och planen läser samma rot (METODER.md under Tidsschemats varianter).`);
   const meningar = meningarna(d.tidsschema?.text);
   for (const u of d.plan?.utan ?? []) if (!meningar.includes(u.trim())) fel.push(`plan.utan nämner "${u}", som inte är en mening i tidsschemats text. Skriv meningen som den står där, eller ta bort den ur plan.utan.`);
@@ -352,12 +352,40 @@ export function planensRamFel(d) {
  * @returns {{ kolumn: string, text: string }[] | null} null när tabellen, raden eller en kolumn inte finns
  */
 export function rollensRad(d, ur) {
+  const tk = tabellOchKolumner(d, ur);
+  const r = tk?.t.rader?.find((x) => String(x[0]).split('\n')[0].trim() === ur.rad);
+  return tk && r ? radensCeller(tk.t, r, tk.valda) : null;
+}
+// Tabellen och kolumnerna som en roll visar, eller null när tabellen eller en kolumn inte finns.
+const tabellOchKolumner = (d, ur) => {
   const t = (d.tabeller ?? []).find((x) => x.rubrik === ur.tabell);
-  const r = t?.rader?.find((x) => String(x[0]).split('\n')[0].trim() === ur.rad);
-  if (!t || !r) return null;
-  const valda = ur.kolumner ?? t.kolumner.slice(1);
-  if (valda.some((k) => t.kolumner.indexOf(k) < 1)) return null;
-  return valda.map((k) => ({ kolumn: t.kolumner.length === 2 ? '' : k, text: String(r[t.kolumner.indexOf(k)] ?? '').trim() })).filter((x) => x.text);
+  const valda = t ? ur.kolumner ?? t.kolumner.slice(1) : [];
+  return t && !valda.some((k) => t.kolumner.indexOf(k) < 1) ? { t, valda } : null;
+};
+// Cellerna i en rad i kolumnerna, med kolumnens namn, och utan namn i en tabell med en enda kolumn efter den första.
+const radensCeller = (t, r, valda) => valda.map((k) => ({ kolumn: t.kolumner.length === 2 ? '' : k, text: String(r[t.kolumner.indexOf(k)] ?? '').trim() })).filter((x) => x.text);
+/** Ordet i `ur.rad` som säger att rollen hämtar veckans rad i en tabell med en rad per vecka (rollensVeckor). */
+export const VECKANS_RAD = 'veckans';
+/**
+ * Veckans rad i en tabell med en rad per vecka och en kolumn per pass, som Antalsuppfattningens Veckan: ett fokus i tre
+ * material, där en roll hämtar sin text ur veckans rad (`ur.rad` är "veckans") och sitt pass kolumn (riggens omgång 3
+ * 2026-10-26: planen kunde bara ta en hel rad, och en rad är en vecka). Raden säger sina veckor med radensVeckor, "1 · Bygga
+ * och säga tal", och en rad kan gälla flera veckor. Cellerna står som i rollensRad.
+ * @param {MetodensTexter} d
+ * @param {{ tabell: string, rad: string, kolumner?: string[] }} ur
+ * @returns {Record<string, { kolumn: string, text: string }[]> | null} null när tabellen, en kolumn eller en rads vecka inte finns
+ */
+export function rollensVeckor(d, ur) {
+  const tk = tabellOchKolumner(d, ur);
+  if (!tk || !(tk.t.rader ?? []).length) return null;
+  /** @type {Record<string, { kolumn: string, text: string }[]>} */
+  const ut = {};
+  for (const r of tk.t.rader ?? []) {
+    const s = radensVeckor(String(r[0]).split('\n')[0]);
+    if (!s) return null;
+    for (let v = s.fran; v <= s.till; v++) ut[String(v)] = radensCeller(tk.t, r, tk.valda);
+  }
+  return ut;
 }
 // Text som jämförs ordagrant: utan ordfogar och med ett blanksteg mellan orden.
 const ordagrant = (s) => String(s).replace(/\u2060/g, '').replace(/\s+/g, ' ').trim();
@@ -1104,7 +1132,7 @@ export function tabellensDelar(t) {
  * variantens text står först bland texterna. En roll har sin egen text, ett citat ur metoden, och raden ur metodens tabell
  * som den hämtar sin text ur, med kolumnens namn som etikett (K-520). Ett kortare pass har variantens rubrik.
  * @template {{ tid: string, fas: string, vad: string }} D
- * @param {{ text?: string, rad?: { kolumn: string, text: string }[], kort?: string, utanTidsschema?: boolean, tabell?: { namn: string, adress: string, delar?: D[], fore?: { namn: string, nar: string, vad: string }[] } }[]} roller
+ * @param {{ text?: string, rad?: { kolumn: string, text: string }[], veckor?: Record<string, { kolumn: string, text: string }[]>, kort?: string, utanTidsschema?: boolean, tabell?: { namn: string, adress: string, delar?: D[], fore?: { namn: string, nar: string, vad: string }[] } }[]} roller
  * @param {{ delar: D[], fore?: string, varianter?: (Variant & { delar: D[] })[] } | undefined} passet passet ur tidsschemat
  * @param {PassetsLage} [lage] passets läge i planen (passetsLage), med passets minuter
  */
@@ -1117,8 +1145,10 @@ export function passetsBeskrivning(roller, passet, lage) {
   const variant = tabell || utan ? undefined : variantenFor(passet?.varianter, lage);
   /** @type {{ etikett: string, text: string }[]} */
   // Variantens text står först bland passets texter, utom för ett kortare pass, där den står under passets rubrik.
+  // En roll med veckans rad (rollensVeckor) visar passets veckas celler.
   const kortare = !!variant && variantensNar(variant.nar)?.typ === 'minuter';
-  const texter = [...(variant?.text && !kortare ? [{ etikett: '', text: variant.text }] : []), ...roller.flatMap((r) => [...(r.text ? [{ etikett: '', text: utanNamnet(r) }] : []), ...(r.rad ?? []).map((c) => ({ etikett: c.kolumn, text: c.text }))])];
+  const raden = (r) => (r.veckor ? r.veckor[String(lage?.vecka)] ?? [] : r.rad ?? []);
+  const texter = [...(variant?.text && !kortare ? [{ etikett: '', text: variant.text }] : []), ...roller.flatMap((r) => [...(r.text ? [{ etikett: '', text: utanNamnet(r) }] : []), ...raden(r).map((c) => ({ etikett: c.kolumn, text: c.text }))])];
   return {
     namn: roller.map(namnet).find(Boolean) ?? '',
     texter,

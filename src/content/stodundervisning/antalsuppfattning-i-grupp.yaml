@@ -378,11 +378,34 @@ progression:
 uppfoljning:
   rader:
     - nar: Före insatsen
+      tid: "före"
+      perElev: 10
       vad: "Gör kartläggningen i gruppens paket utanför passen, med en elev i taget, cirka tio minuter per elev. Läs uppgiften högt och hjälp inte till. Eleven bygger, berättar och skriver. Anteckna för varje uppgift på en kopia av listan: B om eleven byggde rätt, V om eleven växlade själv i materialet och S om eleven använde talsortsord."
     - nar: Varje pass
+      tid: "varje pass"
       vad: Anteckna kort vem som växlade själv och kunde säga vad som hände.
     - nar: Efter fem veckor
+      tid: "efter"
+      perElev: 10
       vad: Samma kartläggning med samma uppgifter. Jämför uppgift för uppgift, och berätta för klassläraren vilket talområde eleven bygger säkert i och vilka växlingar som behöver mer träning.
+plan:
+  utan:
+    - "Remsan visar hur de 30 minuterna fördelas och när läraren visar, när alla arbetar gemensamt och när eleverna arbetar i par och enskilt."
+  passen:
+    - nar: veckans första
+      kort: "Tiobas"
+      ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 1: tiobas"] }
+      text: "Fråga i början av veckans första pass hur förra veckans läxa gick, och låt eleven visa en uppgift. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan."
+    - nar: veckans andra
+      kort: "Talbrickor"
+      ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 2: talbrickor"] }
+      text: "I tiobasen syns tio: tio kuber är lika långa som en tiostav. På talbrickor och pengar syns det inte, där är tio något vi har kommit överens om. Lägg därför tiobasen bredvid när ni börjar med talbrickor och pengar."
+    - nar: veckans tredje
+      kort: "Pengar och skrift"
+      ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 3: pengar och skrift"] }
+      text: "Använd bara enkronor, tiokronor, hundralappar och tusenlappar. Femkronan är större än tiokronan och säger inget om talsorterna."
+    - nar: sista passet
+      text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan."
 mal:
   overgripande: "kunna bygga ett tal, säga talsorterna och växla tio mot en."
   rubrik: "Mål: det eleven kan efter fem veckor"

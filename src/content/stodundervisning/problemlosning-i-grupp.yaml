@@ -342,6 +342,7 @@ progression:
       fokus: De sista av de tio, och problem ur källorna som liknar dem. Paren skriver Vi vet själva.
       roll: Läraren läser parens Vi vet först och följer upp sätt, lösning och rimlighet.
     - vecka: 7–8
+      rubrik: "Var och en börjar själv"
       led: Du gör själv
       fokus: Var och en börjar själv i två minuter innan paret arbetar vidare, gärna med problem ur klassens läromedel.
       roll: Läraren ger klassläraren en kopia av kortet med gruppens sätt och följer upp dem i klassens matematik.
@@ -349,11 +350,23 @@ uppfoljning:
   text: Du behöver veta om passen ger effekt, och det räcker inte att de har blivit av. Kartläggningen har två blad per nivå, ett A4 före och ett efter. Båda bladen har samma fem uppgifter, och problemen är byggda på samma sätt. Kartläggningen före gör du innan det första passet, omkring tio minuter per elev eller par. Spara parens blad Vår lösning, eftersom bladen visar hur paren tänker.
   rader:
     - nar: Före insatsen
+      tid: "före"
+      perElev: 10
       vad: Eleven löser bladet Kartläggning före, och du skriver i protokollet vad hen säger och gör i varje uppgift och vilken hjälp hen behöver.
     - nar: Varje pass
+      tid: "varje pass"
       vad: Vad kunde varje elev återberätta, visa, jämföra och kontrollera, och med vilket stöd? Vad tas upp nästa gång?
     - nar: Efter sex till åtta veckor
+      tid: "efter"
+      perElev: 10
       vad: Eleven löser bladet Kartläggning efter, och du jämför de två protokollen.
+plan:
+  utan:
+    - "Remsan visar hur de 30 minuterna fördelas mellan passets delar och när gruppen arbetar gemensamt och i par."
+  passen:
+    - nar: första passet
+      kort: "Första passet"
+      text: "I första passet visar du kortet och bladen, och Planera tar längre tid."
 mal:
   overgripande: "kunna förstå ett problem i text, visa det och kontrollera att svaret är rimligt."
   punkter:

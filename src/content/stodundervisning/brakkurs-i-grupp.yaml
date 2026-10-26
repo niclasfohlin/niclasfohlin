@@ -303,11 +303,31 @@ progression:
 uppfoljning:
   rader:
     - nar: Före insatsen
+      tid: "före"
       vad: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Anteckna R för rätt svar och R+ när eleven också förklarar med rätt ord, med en bild eller på tallinjen, i kolumnen Före.
     - nar: Varje pass
+      tid: "varje pass"
       vad: Vem kunde säga vad nämnaren och täljaren betyder, och vem gjorde veckans vanliga fel?
     - nar: Efter fem veckor
+      tid: "efter"
       vad: Gör samma kartläggning igen och anteckna i kolumnen Efter på samma kopia. Jämför uppgift för uppgift och berätta för klassläraren vad som behöver mer träning.
+plan:
+  utan:
+    - "Översikten visar hur de 60 minuterna fördelas och vem som arbetar i varje del."
+  passen:
+    - nar: veckans första
+      kort: "Med material"
+      ur: { tabell: "Veckan: från material till siffror", rad: veckans, kolumner: ["Pass 1: med material"] }
+      text: "Första passet i veckan skriver du meningen på affischen."
+    - nar: veckans andra
+      kort: "Bild, tallinje och räkning"
+      ur: { tabell: "Veckan: från material till siffror", rad: veckans, kolumner: ["Pass 2: bild, tallinje och räkning"] }
+      text: "Materialet ligger kvar på bordet i pass 2, så att eleven kan gå tillbaka till det."
+    - nar: veckans tredje
+      kort: "Spel och problem"
+      ur: { tabell: "Veckan: från material till siffror", rad: veckans, kolumner: ["Pass 3, när det går: spel och problem"] }
+      text: "I pass 3 repeterar gruppen veckan. Paren spelar först veckans spel, och sedan löser gruppen ett problem med samma fokus."
+      tabell: "Pass 3, när det går: spel och problem"
 mal:
   overgripande: "kunna förstå bråk som tal, jämföra dem och räkna med dem."
   rubrik: "Mål: det eleven kan efter fem veckor"

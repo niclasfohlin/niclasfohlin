@@ -325,6 +325,19 @@ if (tsMp) {
   ska('planens rader läser en plats i vissa veckor, men inte passets längd', !s.metodplan({ ...metod('faktatextsamtal-i-grupp') }).fel.length && s.metodplan({ ...metod('upprepad-lasning'), plan: { passen: [{ nar: 'ett pass på tio minuter', text: 'x' }] } }).fel.some((x) => x.includes('går inte att läsa')));
   // De kalla testarna av omgång 1 (2026-10-26): elevlistan rymmer en hel klass, och en tabellrad som börjar med veckans
   // nummer säger sina veckor.
+  // Riggens omgång 3 (2026-10-26): veckans rad och passets kolumn i en tabell med en rad per vecka och en kolumn per pass,
+  // och översikten är en mening om metodens sida.
+  {
+    const au = metod('antalsuppfattning-i-grupp');
+    const roll = au.plan.passen.find((p) => p.ur?.rad === s.VECKANS_RAD && p.ur.kolumner?.[0]?.startsWith('Pass 2'));
+    const veckor = roll ? s.rollensVeckor(au, roll.ur) : null;
+    const amp = s.metodplan(au).plan, apl = s.planera(amp, s.forval(amp, '2026-10-26'));
+    const v2andra = s.iDatumordning(s.veckansPass(apl, apl.veckor[1]))[1];
+    const rad = { kort: roll?.kort, veckor: veckor ?? {} };
+    const b = s.passetsBeskrivning([rad], { delar: [] }, s.passetsLage(apl, v2andra));
+    ska('veckans rad och passets kolumn', !!veckor && Object.keys(veckor).join() === '1,2,3,4,5' && b.texter[0]?.etikett === 'Pass 2: talbrickor' && b.texter[0]?.text.startsWith('Bygg med brickor') && s.rollensVeckor(au, { ...roll.ur, kolumner: ['Pass 9'] }) === null && s.planensRamFel({ ...au, plan: { ...au.plan, passen: [{ nar: 'veckans första', ur: { tabell: 'Finns inte', rad: s.VECKANS_RAD } }] } }).some((x) => x.includes('som metoden inte har')), [b.texter, veckor && Object.keys(veckor)]);
+    ska('översikten är en mening om metodens sida', s.planensRamFel({ ...metod('brakkurs-i-grupp'), plan: { ...metod('brakkurs-i-grupp').plan, utan: undefined } }).some((x) => x.includes('Översikten visar')));
+  }
   ska('elevlistan rymmer en hel klass', s.ELEVLISTANS_LANGD >= 30 && s.rensaFoljd({ elever: Array.from({ length: 40 }, (_, i) => ({ id: `e${i}`, namn: `Elev ${i}` })) }).elever.length === s.ELEVLISTANS_LANGD);
   ska('en tabellrad säger sina veckor', JSON.stringify(s.radensVeckor('3 Venndiagrammet')) === '{"fran":3,"till":3}' && JSON.stringify(s.radensVeckor('7–8 Gruppen väljer modell')) === '{"fran":7,"till":8}' && s.radensVeckor('Vecka 2 · Lästräning')?.fran === 2 && s.radensVeckor('Hemma') === null && s.radensVeckor('12a') === null);
   ska('lärarens egna saker är inga namn på saker', s.EGNA_SAKER.includes('klasslista') && !s.olankadeSaker('Skriv på klasslistan vad du hörde, och på klasslistans baksida.', saker).length && s.olankadeSaker('Skriv på elevlistan.', saker).join() === 'elevlistan', s.olankadeSaker('Skriv på klasslistan. Skriv på elevlistan.', saker));

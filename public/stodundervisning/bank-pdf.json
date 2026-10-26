@@ -9555,5 +9555,187 @@
     "sidor": 1,
     "kB": 157,
     "datum": "2026-10-26"
+  },
+  "antalsuppfattning-i-grupp-blad-ak-1-talen-0-30": {
+    "word": "0fb7df021627da824aa7340fdaf36fa160090fba73ca04d8289138a4c10993e3",
+    "pdf": "1973f6803a215bce6263f6270c000f2d05aad292de1f50e96f4996f61b768779",
+    "sidor": 7,
+    "kB": 305,
+    "datum": "2026-10-26"
+  },
+  "antalsuppfattning-i-grupp-blad-ak-2-talen-0-100": {
+    "word": "553c1ebc9387b534c915c38e7a65f5dbba506142eafa8c10e078401091fb51e2",
+    "pdf": "6134f37f7e486723d1d3f6d3170a66f3ac8d0604424adff91f7fa7c019115d25",
+    "sidor": 7,
+    "kB": 308,
+    "datum": "2026-10-26"
+  },
+  "antalsuppfattning-i-grupp-blad-ak-3-talen-0-1-000": {
+    "word": "123ce9f240a4f1ec6cd498afe839c633e3afd6548ef12aec578b53b4a02ee66c",
+    "pdf": "0d1d3592b945a13d8d863a4a7c84e2fba2c1385bc973b321d599ca3980a88f6f",
+    "sidor": 7,
+    "kB": 312,
+    "datum": "2026-10-26"
+  },
+  "antalsuppfattning-i-grupp-blad-ak-4-5-tal-till-10-000-decimaltal-och-negativa-tal": {
+    "word": "f6c80f3e33edfc2913c04c6ad255227486ea93ea04f6589060f7c57725da49f7",
+    "pdf": "b665f1722d8adc33f1e2cf9bf5d02f707a1b6bfc4c1540a63a5f85e4417f689f",
+    "sidor": 8,
+    "kB": 319,
+    "datum": "2026-10-26"
+  },
+  "antalsuppfattning-i-grupp-mall-decimalmattan": {
+    "word": "6d463e58abc18baf1b6aa9bcff73ed3dd35da955223b6636f5e3c39e3fec8d80",
+    "pdf": "36b785952e17e78c769c0cf92f1c9ef3015715e3c588c0081d76b0f765d6419e",
+    "sidor": 1,
+    "kB": 159,
+    "datum": "2026-10-26"
+  },
+  "antalsuppfattning-i-grupp-mall-ett-ark-per-talsort-for-tiobas": {
+    "word": "08f7304946bba976e4232406e3baf73a223403fecdd374d99152d5bdcfb7a39e",
+    "pdf": "6d91ea47e33328e61cb60f8cbab0f6b540b9c2b2acd8706174a3b0624078c904",
+    "sidor": 4,
+    "kB": 166,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-blad-kartlaggning-fore-och-efter-kursen": {
+    "word": "d48deccc70e070ecb2a8adbb40a0eeb9231ed2c8dbf432140433d2081ceab018",
+    "pdf": "0682098ca6014777fbb746a5475862036777dad33bac4d2c1c1d5c3493d25503",
+    "sidor": 2,
+    "kB": 260,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-blad-vecka-1-lika-delar": {
+    "word": "3040ef42a5686ef061a205f602cb3f64695dbd49385ca50c35a0ace2c99afe0a",
+    "pdf": "33348620b802d41f802297d5254a5ee6269d9e5b03e51c313172803ea9ccc517",
+    "sidor": 4,
+    "kB": 292,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-blad-vecka-2-brak-pa-tallinjen": {
+    "word": "814d542b73ac70f020d316ea918771c9809edaf2730766b5e665c7da9452a361",
+    "pdf": "11b225f5e017f0be923782e2cd172a803c5ebcad66eb21d005a613e9db0062ac",
+    "sidor": 5,
+    "kB": 305,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-blad-vecka-3-likvardiga-brak": {
+    "word": "086a70094e00f4dea2fdd52b7ddf9cb7202b81e52686f02ff683262ba34774c5",
+    "pdf": "de026ab0f4378c5d6a1b6498a2c92d530ddef40b74370b8e2d4fb5fb5437984d",
+    "sidor": 5,
+    "kB": 313,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-blad-vecka-4-addera-och-subtrahera": {
+    "word": "85ba2e26b0800facc3bee733fb7c4614907435d5677957d6a97270c405d17354",
+    "pdf": "82d8e120c8428e402eb0dbd95ba379b9d811f497e6bb6008b46b522bf512dfc9",
+    "sidor": 5,
+    "kB": 320,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-blad-vecka-5-brak-av-antal": {
+    "word": "027773d5af4ded66c8ab7998594b4213c4c6b18cd77fa76d3552090b6e4d23cf",
+    "pdf": "a81f1cf9fa017acb24d220a03efcd2a02b2595ef1cdc10ca392a4f5c91c7b93c",
+    "sidor": 5,
+    "kB": 307,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-blad-stapelrutan": {
+    "word": "a2a82a6aa3d7dad53dbf45e65ae010b7395cedca6a7e163b99d154f5a475441a",
+    "pdf": "f14a7c74df6aed304532b9b55fec4e447cc61703188174e7ef1580bde801a1f5",
+    "sidor": 1,
+    "kB": 220,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-blad-diplom": {
+    "word": "da91325634e2a7dc9a02fd1a9162bfe98bdfc9385a0714fc688a802b584d91a3",
+    "pdf": "74e71c7bcc4b32a8e849d4d8e19bd6140d299bfdc60f56b09d6b41f00588ee83",
+    "sidor": 1,
+    "kB": 110,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-mall-brakplanket": {
+    "word": "c2d32a268518bf34c41ebe471e0db7c373293d7193e0af62ba75624ff4d9fcf4",
+    "pdf": "f3ae71c5bfb1dd1b1b072602ee6f5d87e2c8452898e98d8c5305acf1896d0d17",
+    "sidor": 1,
+    "kB": 166,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-mall-brakplanket-att-fylla-i": {
+    "word": "929e7dfa89d73ecef1890d918ba4fae4a5df03313421d1ccb26c3f5fea53a60f",
+    "pdf": "abb244c039a6b72069821aa10f0e4326273922bdf60e3906460cc07e1d90b4f0",
+    "sidor": 1,
+    "kB": 167,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-mall-brakstavar-att-klippa-en-hel-till-sjattedelar": {
+    "word": "d19110d24e369745f3642a7c06947c0c2bbfc22c32ff9f7e2663b571c9437d3d",
+    "pdf": "9372c51a885080b2679609cd032485d236cd134f115e53571215da67503dca34",
+    "sidor": 1,
+    "kB": 166,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-mall-brakstavar-att-klippa-sjundedelar-attondelar-niondelar-tiondelar-och-tolftedelar": {
+    "word": "934624d5c6a9671a023415f84a41b1df0fd6fcb46a4cb5a51a1fb29957aecff9",
+    "pdf": "61c6f420426fd654c8683cab0158896fe1addf0c187d1915196e7879d3f82087",
+    "sidor": 1,
+    "kB": 173,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-mall-tallinjer-i-delar": {
+    "word": "3b0ce878aa7d24d967704e5a3949138dab538b08a06caa67688094d8d00c08e4",
+    "pdf": "21f25e23f8853f6f275e7a00e0468908a772ecee1e2e01115f113493634e671c",
+    "sidor": 1,
+    "kB": 169,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-mall-tomma-tallinjer-fran-0-till-1": {
+    "word": "8a306df4bcf74be7f4cbef15ad5f5082ed0667b1338140a1acad1d8e8d7edd6e",
+    "pdf": "8735c436e7522dd8108f9d8963ea226633ee22468d715391640c32d00eb7ffaf",
+    "sidor": 1,
+    "kB": 166,
+    "datum": "2026-10-26"
+  },
+  "brakkurs-i-grupp-mall-tomma-tallinjer-fran-0-till-2": {
+    "word": "c4bea279436fbc74f504a98420cd74fa0817088dacf52a36d5d10e8cd1edfd14",
+    "pdf": "eb5af0e109126c36a2920f194d6b0a44055216b0c16e1e6857ad35847ac4415d",
+    "sidor": 1,
+    "kB": 170,
+    "datum": "2026-10-26"
+  },
+  "problemlosning-i-grupp-blad-lararens-sida-for-ett-eget-problem": {
+    "word": "671bc21772bea14b3219386f506faf80bac51653a6e43593667636064c8c3394",
+    "pdf": "f3c69e9b33ebb1667cde0658ee2a6d074c9ea744e1ec41aedb9d5801b9af5f58",
+    "sidor": 1,
+    "kB": 216,
+    "datum": "2026-10-26"
+  },
+  "problemlosning-i-grupp-blad-vara-satt": {
+    "word": "57bbf7a093a0d4d1b97b84b1d57d7995a15e63a9d1f772207d0047a2776b6c8f",
+    "pdf": "2d864eafded514944810518a5b83ae88102647489d3b086147ca364330f1c985",
+    "sidor": 2,
+    "kB": 294,
+    "datum": "2026-10-26"
+  },
+  "problemlosning-i-grupp-blad-kartlaggning-lararens-protokoll": {
+    "word": "f77ef6634554da6964c14a998416c6f85742229553ab24feb3e8c085aa511fe9",
+    "pdf": "9454a6c5815ab2ca74b00f827109ee676dac0b8d9bb1971c4c66a004a4f29cdb",
+    "sidor": 1,
+    "kB": 234,
+    "datum": "2026-10-26"
+  },
+  "problemlosning-i-grupp-mall-tabellmall-att-fylla-i": {
+    "word": "bd684319ef339d5d1b0ee92c43043e5f815c288f7e9fb315b2b5e522ac30de57",
+    "pdf": "d1a90fa7775a15b0fbdcf81441c8c01be5a0d357d3e3ab83f85249dfa967e1a9",
+    "sidor": 1,
+    "kB": 161,
+    "datum": "2026-10-26"
+  },
+  "problemlosning-i-grupp-mall-tomma-tallinjer": {
+    "word": "31bfd169e7e50963438b5965b6a24ac9dbd98c2a40142383574179d32cf81fe4",
+    "pdf": "23edee178ffea4a3bed768135766c79a5c02117fd8c836eec3645d0f32760094",
+    "sidor": 1,
+    "kB": 161,
+    "datum": "2026-10-26"
   }
 }

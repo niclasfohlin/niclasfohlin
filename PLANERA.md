@@ -216,7 +216,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Var ett pass står i planen, som planens rader och varianterna läser det | `passetsLage`, `passetTraffas` och `narensVikt` |
 | Ett pass med egen tabell, i tabellernas former | `tabellensDelar` |
 | Metodens saker i en text, och lärarens och elevernas egna saker som inte länkas | `sakdelar`, `olankadeSaker` och `EGNA_SAKER` |
-| Metodens texter i planen | `planensInledning`, `planensTexter`, `visadeTexter`, `planensRamFel`, `rollensRad` och `planensCitatFel` |
+| Metodens texter i planen | `planensInledning`, `planensTexter`, `visadeTexter`, `planensRamFel`, `rollensRad`, `rollensVeckor`, `VECKANS_RAD` och `planensCitatFel` |
 | Filnamnen på det som laddas ner | `filnamnet` |
 | Knapparnas namn för planen som fil | `PLANKNAPPAR` |
 | Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
