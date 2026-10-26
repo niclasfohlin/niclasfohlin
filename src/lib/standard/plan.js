@@ -172,10 +172,11 @@ export function veckorI(text) {
  * Vilka pass en rad i planens `passen` gäller, ur dess `nar` (betan 2026-10-24: de kalla testarna saknade vad som skiljer
  * passen åt). Ett pass räknas på tre sätt: efter platsen i veckan, "veckans första", "veckans andra", "veckans tredje",
  * "veckans sista" och "veckans övriga" (de mellan första och sista), efter numret i insatsen, "första passet", "pass
- * 7", "pass 2–6", "pass 8 till det sista" och "sista passet", eller efter metodens veckor, "vecka 1–3" (Läslistor: vecka
- * 1–3 är passet bara listan, Codex 2026-10-25).
+ * 7", "pass 2–6", "pass 8 till det sista", "näst sista passet" och "sista passet", eller efter metodens veckor, "vecka
+ * 1–3" (Läslistor: vecka 1–3 är passet bara listan, Codex 2026-10-25). Det näst sista passet är Boksamtalets sista
+ * läspass, där boken läses ut (riggens omgång 1 2026-10-26).
  * @param {unknown} text
- * @returns {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista' } | { typ: 'veckor', fran: number, till: number } | null}
+ * @returns {PassensNar | null}
  */
 export function tolkaPassen(text) {
   if (typeof text !== 'string') return null;
@@ -184,6 +185,7 @@ export function tolkaPassen(text) {
   if (m) return { typ: 'vecka', plats: m[1] === 'sista' ? 'sista' : m[1] === 'övriga' ? 'ovriga' : ORDNINGSTAL.indexOf(m[1]) };
   if (t === 'första passet') return { typ: 'pass', fran: 1, till: 1 };
   if (t === 'sista passet' || t === 'det sista passet') return { typ: 'sista' };
+  if (t === 'näst sista passet' || t === 'det näst sista passet') return { typ: 'nastSista' };
   m = t.match(/^pass (\d+)$/);
   if (m) return { typ: 'pass', fran: Number(m[1]), till: Number(m[1]) };
   m = t.match(new RegExp(String.raw`^pass (\d+)${STRECK}(\d+)$`, 'u'));
@@ -231,7 +233,7 @@ export function metodplan(d) {
   });
   const passen = (d.plan?.passen ?? []).map((p, rad) => {
     const nar = tolkaPassen(p.nar);
-    if (!nar) fel.push(`Planens pass "${p.nar}" går inte att läsa. Skriv det som veckans första, veckans sista, veckans övriga, första passet, pass 7, pass 2–6, pass 8 till det sista, sista passet eller vecka 1–3.`);
+    if (!nar) fel.push(`Planens pass "${p.nar}" går inte att läsa. Skriv det som veckans första, veckans sista, veckans övriga, första passet, pass 7, pass 2–6, pass 8 till det sista, näst sista passet, sista passet eller vecka 1–3.`);
     return { rad, nar };
   });
   if (fel.length) return { fel };
@@ -374,7 +376,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.9', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.10', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -853,31 +855,60 @@ export const veckansNamn = (v) => {
 export const planveckansNamn = (plan, v) => veckansNamn({ innehall: planvecka(plan, v), gang: gangen(plan, v), vecka: v.vecka.vecka });
 
 /**
- * Raderna i planens `passen` som gäller ett pass, den mest bestämda först: ett pass med eget nummer (pass 7, sista passet),
- * sedan ett spann av pass (pass 8 till det sista), metodens veckor (vecka 1–3) och sist platsen i veckan (veckans första). Platsen i veckan räknas efter
- * datum, så att ett flyttat pass har sin nya plats, och veckans sista är det sista av minst två.
+ * Var ett pass står i planen, som en rad i planens `passen` och en variant av passet läser det, en rot för båda (riggens
+ * omgång 1 2026-10-26: Högläsning i pars visning i veckans första pass har andra tider): passets nummer, om det är planens
+ * sista eller näst sista pass, metodens vecka, platsen i veckan efter datum, så att ett flyttat pass har sin nya plats, om
+ * det är veckans sista av minst två, och passets längd i minuter när den är känd.
+ * @param {Plan} plan
+ * @param {Pass} p
+ * @param {number} [minuter]
+ * @returns {PassetsLage}
+ */
+export function passetsLage(plan, p, minuter) {
+  const v = plan.veckor[p.vecka - 1];
+  const iVeckan = v ? iDatumordning(veckansPass(plan, v)) : [p];
+  const plats = iVeckan.findIndex((x) => x.nr === p.nr) + 1;
+  const nastSista = Math.max(0, ...plan.pass.map((x) => x.nr).filter((n) => n < (plan.sistaNr ?? 0)));
+  return { nr: p.nr, sista: p.nr === plan.sistaNr, nastSista: nastSista > 0 && p.nr === nastSista, vecka: v?.innehall, plats, sistIVeckan: iVeckan.length > 1 && plats === iVeckan.length, ...(minuter !== undefined ? { minuter } : {}) };
+}
+/**
+ * Gäller en rad i planens `passen` eller en variant av passet för ett pass? Raden och varianten läses med samma ord
+ * (tolkaPassen och variantensNar), och en variant kan också gälla passets längd ("ett pass på tio minuter") eller en plats
+ * i vissa veckor ("veckans första pass i vecka 2–5").
+ * @param {PassensNar | VariantensNar} nar
+ * @param {PassetsLage} lage
+ */
+export function passetTraffas(nar, lage) {
+  if (nar.typ === 'minuter') return lage.minuter === nar.minuter;
+  const iVeckorna = (s) => lage.vecka !== undefined && lage.vecka >= s.fran && lage.vecka <= s.till;
+  if ('veckor' in nar && nar.veckor && !iVeckorna(nar.veckor)) return false;
+  if (nar.typ === 'sista') return !!lage.sista;
+  if (nar.typ === 'nastSista') return !!lage.nastSista;
+  if (nar.typ === 'pass') return lage.nr !== undefined && lage.nr >= nar.fran && (nar.till === undefined || lage.nr <= nar.till);
+  if (nar.typ === 'veckor') return iVeckorna(nar);
+  if (nar.plats === 'sista') return !!lage.sistIVeckan;
+  if (nar.plats === 'ovriga') return (lage.plats ?? 0) > 1 && !lage.sistIVeckan;
+  return lage.plats === nar.plats;
+}
+/**
+ * Hur bestämt ett när är, det mest bestämda först: sista passet, ett pass med eget nummer, det näst sista passet, ett spann
+ * av pass, metodens veckor, en plats i vissa veckor, platsen i veckan och sist passets längd. Sista passet går före ett eget
+ * nummer, så att en insats som avslutas tidigare slutar med metodens sista pass (Codex 2026-10-25: Seriesamtal slutade med
+ * Lunchen i stället för passet som avslutar perioden), och första passet före det näst sista i en plan med två pass.
+ * @param {PassensNar | VariantensNar} t
+ */
+export const narensVikt = (t) => (t.typ === 'sista' ? -1 : t.typ === 'pass' && t.till === t.fran ? 0 : t.typ === 'nastSista' ? 0.5 : t.typ === 'pass' ? 1 : t.typ === 'veckor' ? 2 : t.typ === 'minuter' ? 4 : 'veckor' in t && t.veckor ? 2.5 : 3);
+/**
+ * Raderna i planens `passen` som gäller ett pass, den mest bestämda först (narensVikt). Platsen i veckan räknas efter
+ * datum, och veckans sista är det sista av minst två (passetsLage).
  * @param {Plan} plan
  * @param {Pass} p
  * @param {Metodplan['passen']} passen
  * @returns {number[]} radernas nummer i metodens passen
  */
 export function passetsRoller(plan, p, passen) {
-  const v = plan.veckor[p.vecka - 1];
-  const iVeckan = v ? iDatumordning(veckansPass(plan, v)) : [p];
-  const plats = iVeckan.findIndex((x) => x.nr === p.nr) + 1;
-  const sistIVeckan = iVeckan.length > 1 && plats === iVeckan.length;
-  const traffar = (t) => {
-    if (t.typ === 'sista') return p.nr === plan.sistaNr;
-    if (t.typ === 'pass') return p.nr >= t.fran && (t.till === undefined || p.nr <= t.till);
-    if (t.typ === 'veckor') return !!v && v.innehall >= t.fran && v.innehall <= t.till;
-    if (t.plats === 'sista') return sistIVeckan;
-    if (t.plats === 'ovriga') return plats > 1 && !sistIVeckan;
-    return plats === t.plats;
-  };
-  // Sista passet går först, före ett eget nummer, så att en insats som avslutas tidigare slutar med metodens sista pass
-  // (Codex 2026-10-25: Seriesamtal slutade med Lunchen i stället för passet som avslutar perioden).
-  const vikt = (t) => (t.typ === 'sista' ? -1 : t.typ === 'pass' && t.till === t.fran ? 0 : t.typ === 'pass' ? 1 : t.typ === 'veckor' ? 2 : 3);
-  return (passen ?? []).filter((x) => traffar(x.nar)).sort((a, b) => vikt(a.nar) - vikt(b.nar) || a.rad - b.rad).map((x) => x.rad);
+  const lage = passetsLage(plan, p);
+  return (passen ?? []).filter((x) => passetTraffas(x.nar, lage)).sort((a, b) => narensVikt(a.nar) - narensVikt(b.nar) || a.rad - b.rad).map((x) => x.rad);
 }
 
 // ---------- Passet ----------
@@ -891,26 +922,59 @@ export function passetsRoller(plan, p, passen) {
 export const delensTid = (tid) => tid.replace(/\u2060/g, '').replace(/\s*min$/, '');
 /**
  * En variant som metodens sida, Word, lathunden och lektionskortet skriver den: "Vecka 1–3: passet är bara listan, med
- * modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning 14–15."
+ * modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning 14–15." En variant för passets längd ändrar bara
+ * tiderna, så de står först och variantens text efter: "Ett pass på tio minuter: första läsningen 0–2 minuter, modellering
+ * 2–4, läs igen 4–9 och avslutning 9–10. Då hinner du lyssna på varje elev om gruppen har högst fyra elever." En variant
+ * utan text har bara tiderna.
  * @param {Variant} v
  */
-export const variantensMening = (v) => `${stor(v.nar)}: ${liten(utanPunkt(v.text))}, med ${uppraknat(v.delar.map((x, i) => `${liten(x.fas)} ${delensTid(x.tid)}${i === 0 ? ' minuter' : ''}`))}.`;
+export const variantensMening = (v) => {
+  const delar = uppraknat(v.delar.map((x, i) => `${liten(x.fas)} ${delensTid(x.tid)}${i === 0 ? ' minuter' : ''}`));
+  if (!v.text || variantensNar(v.nar)?.typ === 'minuter') return `${stor(v.nar)}: ${delar}.${v.text ? ` ${mening(stor(v.text))}` : ''}`;
+  return `${stor(v.nar)}: ${liten(utanPunkt(v.text))}, med ${delar}.`;
+};
 /**
- * Varianten som gäller metodens vecka, eller ingen.
+ * När en variant av passet gäller, ur variantens `nar` (riggens omgång 1 2026-10-26: Upprepad läsnings pass på tio
+ * minuter och Högläsning i pars visning i veckans första pass hade sina tider i en mening): metodens veckor, "vecka 1–3",
+ * passets längd, "ett pass på tio minuter", och planens ord för passen (tolkaPassen), som "pass 2" och "veckans första
+ * pass", också i vissa veckor, "veckans första pass i vecka 2–5".
+ * @param {unknown} text
+ * @returns {VariantensNar | null}
+ */
+export function variantensNar(text) {
+  if (typeof text !== 'string') return null;
+  const t = text.replace(/⁠/g, '').trim().toLowerCase().replace(/\s+/g, ' ');
+  let m = t.match(new RegExp(String.raw`^(?:ett )?pass på (${talIRegex(1, 120)}) minuter$`, 'u'));
+  if (m) { const n = talAv(m[1]); return n >= 1 ? { typ: 'minuter', minuter: n } : null; }
+  m = t.match(/^(.+?) i (vecka .+)$/);
+  if (m) {
+    const p = tolkaPassen(m[1]), veckor = veckorI(m[2]);
+    return p && veckor && p.typ === 'vecka' ? { ...p, veckor } : null;
+  }
+  return tolkaPassen(t);
+}
+/**
+ * Varianten som gäller ett pass, den mest bestämda först (narensVikt), eller ingen: passets veckor, plats och nummer, och
+ * sist passets längd.
  * @template {{ nar: string }} V
  * @param {V[] | undefined} varianter
- * @param {number | undefined} vecka metodens vecka (PlanVecka.innehall)
+ * @param {PassetsLage | undefined} lage passets läge (passetsLage), eller bara metodens vecka och passets minuter
  * @returns {V | undefined}
  */
-export const variantenFor = (varianter, vecka) => (vecka === undefined ? undefined : (varianter ?? []).find((v) => { const s = veckorI(v.nar); return !!s && vecka >= s.fran && vecka <= s.till; }));
+export const variantenFor = (varianter, lage) => {
+  if (!lage) return undefined;
+  const traffar = (varianter ?? []).flatMap((v, i) => { const nar = variantensNar(v.nar); return nar && passetTraffas(nar, lage) ? [{ v, i, vikt: narensVikt(nar) }] : []; });
+  return traffar.sort((a, b) => a.vikt - b.vikt || a.i - b.i)[0]?.v;
+};
 // Passets tider i löptext, som "modelleringen tar 0–3 minuter, körläsningen 3–6": minuter och ett spann som inte är veckor,
 // pass, sidor eller nivåer.
 const SPANN_AV_MINUTER = new RegExp(String.raw`(?<!\b(?:vecka|veckorna|pass|passen|sidan|sidorna|s\.|kapitel|nivå|nivåerna|lista|listorna)\s+)\b\d{1,2}${STRECK}\u2060?\d{1,2}\b`, 'iu');
 const tiderILoptext = (t) => (/\bminut/i.test(t) || /\d\s*min\b/i.test(t)) && SPANN_AV_MINUTER.test(t);
 /**
- * Felen i metodens tidsschema, för alla metoder: en variant vars veckor inte går att läsa eller går in i en annan variant,
- * en del som inte är en rad i tidsschemat, delar som inte följer på varandra från minut 0 eller räcker längre än passet,
- * och passets tider i tidsschemats text, som ska stå som en variant.
+ * Felen i metodens tidsschema, för alla metoder: en variant vars när inte går att läsa, vars veckor går in i en annan
+ * variants eller vars längd en annan variant eller tidsschemat själv redan har, en del som inte är en rad i tidsschemat,
+ * delar som inte följer på varandra från minut 0 eller räcker längre än passet, en variant för passets längd vars delar inte
+ * slutar på den längden, och passets tider i tidsschemats text, som ska stå som en variant.
  * @param {{ tid?: string, tidsschema?: { text?: string, rader: { tid: string, fas: string }[], varianter?: Variant[] } }} d
  * @returns {string[]}
  */
@@ -919,13 +983,20 @@ export function tidsschematsFel(d) {
   const t = d.tidsschema;
   if (!t) return fel;
   const minuter = tidensMatt(d.tid ?? '').minuter;
-  const spann = [];
+  const schematsLangd = Math.max(0, ...t.rader.map((r) => minuterISpann(r.tid)?.till ?? 0));
+  const spann = [], langder = new Set();
   for (const v of t.varianter ?? []) {
     const plats = `Tidsschemats variant "${v.nar}"`;
-    const s = veckorI(v.nar);
-    if (!s) fel.push(`${plats} går inte att läsa som veckor. Skriv den som vecka 1–3 eller vecka 2.`);
-    else if (spann.some((x) => s.fran <= x.till && x.fran <= s.till)) fel.push(`${plats} gäller veckor som en annan variant redan gäller.`);
-    else spann.push(s);
+    const nar = variantensNar(v.nar);
+    if (!nar) fel.push(`${plats} går inte att läsa. Skriv den som vecka 1–3, ett pass på tio minuter, pass 2, veckans första pass eller veckans första pass i vecka 2–5.`);
+    else if (nar.typ === 'veckor') {
+      if (spann.some((x) => nar.fran <= x.till && x.fran <= nar.till)) fel.push(`${plats} gäller veckor som en annan variant redan gäller.`);
+      else spann.push(nar);
+    } else if (nar.typ === 'minuter') {
+      if (langder.has(nar.minuter)) fel.push(`${plats} gäller en längd som en annan variant redan gäller.`);
+      else if (nar.minuter === schematsLangd) fel.push(`${plats} gäller samma längd som tidsschemats rader.`);
+      langder.add(nar.minuter);
+    }
     let forra = 0;
     for (const x of v.delar) {
       const m = minuterISpann(x.tid);
@@ -934,26 +1005,74 @@ export function tidsschematsFel(d) {
       if (m.fran !== forra) fel.push(`${plats}: delen ${x.fas} börjar på minut ${m.fran}, och delen före slutar på minut ${forra}. Delarna följer på varandra från minut 0.`);
       forra = m.till;
     }
-    if (minuter !== undefined && forra > minuter) fel.push(`${plats} har delar till minut ${forra}, men faktarutans pass är ${minuter} minuter.`);
+    if (nar?.typ === 'minuter') { if (forra !== nar.minuter) fel.push(`${plats} har delar till minut ${forra}, men varianten gäller ett pass på ${nar.minuter} minuter.`); }
+    else if (minuter !== undefined && forra > minuter) fel.push(`${plats} har delar till minut ${forra}, men faktarutans pass är ${minuter} minuter.`);
   }
   for (const m of meningarna(t.text)) if (tiderILoptext(m)) fel.push(`Tidsschemats text säger passets tider i en mening, "${m}". Skriv dem som en variant i tidsschema.varianter, så skriver metodens sida, Word och planen dem ur samma rot (METODER.md under Tidsschemats varianter).`);
   return fel;
 }
 /**
- * Felen i lathundens och lektionskortens texter för en metod med varianter: lathunden säger varje variant med
- * variantensMening, och ingen text säger passets tider för vissa veckor på eget sätt. Texterna är riggens, och sajten
- * ritar dem som de är, så bygget stannar på en egen mening i stället för att skriva om den.
+ * Felen i lathundens och lektionskortens texter för en metod med varianter: lathunden säger varje variant för vissa veckor
+ * med variantensMening, eftersom passet ser ut så för alla de veckorna, och ingen text säger passets tider för vissa veckor
+ * på eget sätt. En variant för passets längd eller för ett visst pass behöver inte stå i lathunden. Texterna är riggens, och
+ * sajten ritar dem som de är, så bygget stannar på en egen mening i stället för att skriva om den.
  * @param {{ tidsschema?: { varianter?: Variant[] } }} d
  * @param {string[]} texter lathundens eller ett lektionskorts texter
  * @param {{ lathund?: boolean, var: string }} o
  * @returns {string[]}
  */
 export function varianternasFel(d, texter, o) {
-  const meningar = (d.tidsschema?.varianter ?? []).map(variantensMening);
+  const varianter = d.tidsschema?.varianter ?? [];
+  const meningar = varianter.map(variantensMening);
   const fel = [];
-  if (o.lathund) for (const m of meningar) if (!texter.some((t) => t.includes(m))) fel.push(`${o.var} säger inte tidsschemats variant med standardens mening. Skriv "${m}" där lathunden säger hur passet ser ut de veckorna.`);
+  if (o.lathund) for (const v of varianter.filter((x) => variantensNar(x.nar)?.typ === 'veckor')) { const m = variantensMening(v); if (!texter.some((t) => t.includes(m))) fel.push(`${o.var} säger inte tidsschemats variant med standardens mening. Skriv "${m}" där lathunden säger hur passet ser ut de veckorna.`); }
   for (const t of texter) for (const s of meningarna(t)) if (/\bvecka\s+\d/i.test(s) && tiderILoptext(s) && !meningar.includes(s)) fel.push(`${o.var} säger passets tider för vissa veckor på eget sätt: "${s}". Skriv dem som en variant i metodens tidsschema, och säg varianten med standardens mening${meningar.length ? `: "${meningar.join('" och "')}"` : ''}.`);
   return fel;
+}
+
+/**
+ * Delarna i ett pass med egen tabell, som Seriesamtals pass 1 och Boksamtalets bokval (riggens omgång 1 2026-10-26: tre
+ * former av tabeller i Läsningens metoder, där planen bara läste Seriesamtals). En rad är en del med delens tid, delens namn
+ * och vad som händer. Tiden och namnet står i var sin kolumn ("Delen" och "Tid") eller i samma cell ("Del", "Del och tid"
+ * eller "Tid och del"), på två rader ("Varför vi ses" och "0–4 min") eller med en punkt emellan ("0–5 · Var är vi?").
+ * Kolumnerna efter är delens text: den första är vad som händer, och de andra står med kolumnens namn, som "Du säger". En
+ * rad utan minuter ("Före passet", "Dagen före") är förberedelsen. Null när tabellen inte är ett pass i delar, också när en
+ * del saknar namn: då får metodens tabell namnen, som Boksamtalets bokval fick (Niclas samma dag: metoderna får förtydligas,
+ * "tydligare passdelar"), så att planen visar tunna rader med delarnas namn.
+ * @param {{ kolumner: string[], rader?: unknown[][] }} t
+ * @returns {{ delar: TabellDel[], fore: { namn: string, nar: string, vad: string }[] } | null}
+ */
+export function tabellensDelar(t) {
+  const k = t.kolumner.map((x) => x.trim().toLowerCase());
+  const tidKol = k.indexOf('tid');
+  const namnKol = k.findIndex((x) => x === 'del' || x === 'delen');
+  const blandad = k.findIndex((x) => x === 'del och tid' || x === 'tid och del');
+  // Tiden och namnet i samma cell: en kolumn som säger båda, eller en kolumn Del när tabellen inte har någon kolumn Tid.
+  const samma = blandad >= 0 ? blandad : tidKol < 0 ? namnKol : -1;
+  if (samma < 0 && tidKol < 0) return null;
+  const textKol = k.map((_, i) => i).filter((i) => i !== samma && i !== tidKol && i !== namnKol);
+  if (!textKol.length) return null;
+  const arTid = (s) => minuterISpann(s) !== null;
+  /** @type {TabellDel[]} */
+  const delar = [];
+  const fore = [];
+  for (const r of t.rader ?? []) {
+    const cell = (i) => String(r[i] ?? '').trim();
+    let tid, namn;
+    if (samma >= 0) {
+      const leden = cell(samma).split(/\n|\s+·\s+/).map((x) => x.trim()).filter(Boolean);
+      tid = leden.find(arTid) ?? leden[1] ?? '';
+      namn = leden.find((x) => x !== tid) ?? '';
+    } else {
+      tid = cell(tidKol);
+      namn = namnKol >= 0 ? cell(namnKol) : '';
+    }
+    const [forsta, ...andra] = textKol;
+    const vad = cell(forsta);
+    if (arTid(tid)) delar.push({ tid, fas: namn, vad, mer: andra.map((i) => ({ etikett: t.kolumner[i].trim(), text: cell(i) })).filter((x) => x.text) });
+    else fore.push({ namn, nar: tid, vad });
+  }
+  return delar.length && delar.every((x) => x.fas) ? { delar, fore } : null;
 }
 
 /**
@@ -961,22 +1080,23 @@ export function varianternasFel(d, texter, o) {
  * tidsschemats delar för samma pass, eftersom sidan och kalendern valde delarna var för sig). Rollerna står den mest
  * bestämda först. Passets namn är den första rollens korta namn, eller en rolls ord före kolon, och rollernas texter står
  * utan namnet när det är deras början. Delarna är den första rollens tabell (Seriesamtals pass 1), annars tidsschemats
- * variant för metodens vecka (Läslistors vecka 1–3, där passet bara är listan), och annars tidsschemats. En tabell är
- * passets egen ordning, så då gäller inte tidsschemats förberedelse och fraser (egenOrdning); en variant är samma pass med
- * andra tider, så där gäller de, och variantens mening står först bland texterna. En roll har sin egen text, ett citat ur
- * metoden, och raden ur metodens tabell som den hämtar sin text ur, med kolumnens namn som etikett (K-520).
+ * variant för passet (variantenFor: Läslistors vecka 1–3, där passet bara är listan, Högläsning i pars visning och
+ * Upprepad läsnings pass på tio minuter), och annars tidsschemats. En tabell är passets egen ordning, så då gäller inte
+ * tidsschemats förberedelse och fraser (egenOrdning); en variant är samma pass med andra tider, så där gäller de, och
+ * variantens text står först bland texterna. En roll har sin egen text, ett citat ur metoden, och raden ur metodens tabell
+ * som den hämtar sin text ur, med kolumnens namn som etikett (K-520).
  * @template {{ tid: string, fas: string, vad: string }} D
  * @param {{ text?: string, rad?: { kolumn: string, text: string }[], kort?: string, tabell?: { namn: string, adress: string, delar?: D[], fore?: { namn: string, nar: string, vad: string }[] } }[]} roller
  * @param {{ delar: D[], fore?: string, varianter?: (Variant & { delar: D[] })[] } | undefined} passet passet ur tidsschemat
- * @param {number} [vecka] metodens vecka (PlanVecka.innehall)
+ * @param {PassetsLage} [lage] passets läge i planen (passetsLage), med passets minuter
  */
-export function passetsBeskrivning(roller, passet, vecka) {
+export function passetsBeskrivning(roller, passet, lage) {
   const namnet = (r) => r.kort ?? (r.text && /^[^:]{3,30}:/.test(r.text) ? forstaLedet(r.text) : '');
   const utanNamnet = (r) => (r.kort && r.text.toLowerCase().startsWith(`${r.kort.toLowerCase()}:`) ? stor(r.text.slice(r.kort.length + 1).trim()) : r.text);
   const tabell = roller.find((r) => r.tabell?.delar?.length)?.tabell;
-  const variant = tabell ? undefined : variantenFor(passet?.varianter, vecka);
+  const variant = tabell ? undefined : variantenFor(passet?.varianter, lage);
   /** @type {{ etikett: string, text: string }[]} */
-  const texter = [...(variant ? [{ etikett: '', text: variant.text }] : []), ...roller.flatMap((r) => [...(r.text ? [{ etikett: '', text: utanNamnet(r) }] : []), ...(r.rad ?? []).map((c) => ({ etikett: c.kolumn, text: c.text }))])];
+  const texter = [...(variant?.text ? [{ etikett: '', text: variant.text }] : []), ...roller.flatMap((r) => [...(r.text ? [{ etikett: '', text: utanNamnet(r) }] : []), ...(r.rad ?? []).map((c) => ({ etikett: c.kolumn, text: c.text }))])];
   return {
     namn: roller.map(namnet).find(Boolean) ?? '',
     texter,
@@ -1756,7 +1876,11 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista' } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[] }} Metodplan
  * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], upprepa?: string, utan?: string[], stege?: boolean }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[] }} MetodensTexter
- * @typedef {{ nar: string, text: string, delar: { fas: string, tid: string }[] }} Variant
+ * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
+ * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel
+ * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista' } | { typ: 'nastSista' } | { typ: 'veckor', fran: number, till: number }} PassensNar
+ * @typedef {PassensNar | { typ: 'minuter', minuter: number } | { typ: 'vecka', plats: number | 'sista' | 'ovriga', veckor: { fran: number, till: number } }} VariantensNar
+ * @typedef {{ nr?: number, sista?: boolean, nastSista?: boolean, vecka?: number, plats?: number, sistIVeckan?: boolean, minuter?: number }} PassetsLage
  * @typedef {{ start: string, dagar: number[], langd: number, niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
  * @typedef {{ nr: number, datum: string, vecka: number, steg?: number | null, flyttatFran?: string }} Pass
  * @typedef {{ nr: number, innehall: number, igen: boolean, mandag: string, vecka: { ar: number, vecka: number }, pass: number[], bortfall: { datum: string, varfor: 'helgdag' | 'installt', namn?: string }[], steg?: number | null }} PlanVecka

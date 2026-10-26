@@ -32,7 +32,7 @@ material:
   - ett exemplar av boken per elev
   - bokens tavla
   - post-it och ett frågekort
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - textsamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -219,20 +219,20 @@ tabeller:
     meny: true
     text: I bokvalet väljer gruppen själv vilken bok ni ska läsa, och då blir boken gruppens egen. Välj två böcker ur nivåns lista efter det eleverna sa i läsintervjun om vad de gillar. Sidan om nivån föreslår böcker som går bra ihop. De två ska vara ungefär lika långa men olika i genre, miljö eller ton. Båda ska passa gruppen, och du ska ha läst dem. På bordet räcker ett exemplar av varje bok per elevpar, men till läspass 1 behöver varje elev den bok gruppen väljer. Reservera därför ett exemplar per elev av båda. Av den bok som inte vann behåller du några exemplar och lämnar tillbaka resten. Tavlan gör du i ordning sist i bokvalet, i den form du har valt.
     kolumner:
-      - Tid
+      - Tid och del
       - Vad händer
       - Du säger
     rader:
-      - - 0–10
+      - - "0–10 · Två böcker"
         - Du visar omslagen, berättar kort om böckerna och läser första sidan ur båda. Paren följer med i böckerna.
         - ”Vi ska läsa en hel bok, en riktig bok som andra i er ålder läser.”
-      - - 10–20
+      - - "10–20 · Baksidorna"
         - Paren läser baksidorna och tips från en tidigare grupp, om sådana finns.
         - ”Vad lockar dig? Vad undrar du?”
-      - - 20–25
+      - - "20–25 · Rösta"
         - Gruppen röstar med röstsedlar i en låda, en röst var. Blir det lika läser du en sida till ur båda, och gruppen röstar igen.
         - ”Skriv bokens namn på röstsedeln.”
-      - - 25–40
+      - - "25–40 · Början"
         - Visa gärna en bild av platsen där boken utspelar sig. Du läser början, och paren följer med. Du ritar tavlans tre rutor och skriver bokens namn överst.
         - ”Den andra boken står kvar här, och den kan bli nästa bok.”
     not: Blir det lika två gånger, avgör du och säger varför. Den bok som inte vann står kvar i rummet och går att låna hem. Efter bokvalet gör du läsplanen.
@@ -341,23 +341,23 @@ tabeller:
     meny: true
     text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut. Slutet är nästa pass, helst efter en helg, så att eleverna hinner tänka på boken. Slutsamtalet för ni tillsammans, också när ni är fler än fem. Rita före slutet fyra spalter på ett blädderblocksark, en per fråga på frågekortet: Gillade, Gillade inte, Undrade och Mönster. Boka i förväg en stund i elevernas klasser veckan efter, då den som vill tipsar sin klass i en minut, med boken i handen."
     kolumner:
-      - Tid
+      - Tid och del
       - Vad händer
       - Du säger
     rader:
-      - - 0–5
+      - - "0–5 · Berätta boken"
         - Ni berättar boken vid tavlan, en bit var.
         - ”Berätta boken från början.”
-      - - 5–12
+      - - "5–12 · En sak var"
         - Med den bredvid bläddrar eleverna bland sina post-it och väljer en sak var om hela boken. I laget runt säger de sin sak, och du skriver den i rätt spalt.
         - ”Vad vill du säga om hela boken?”
-      - - 12–20
+      - - "12–20 · Tråden"
         - Ni drar streck mellan det som hänger ihop och följer tråden med flest streck.
         - ”Sa två av er något som hänger ihop?” ”Hur vet du det?”
-      - - 20–25
+      - - "20–25 · Frågorna"
         - Ni går igenom frågorna på tavlan.
         - ”Vilka frågor fick svar, och var i boken? Vilka är fortfarande öppna?”
-      - - 25–40
+      - - "25–40 · Boktipset"
         - Var och en fyller i bladet Boktipset och läser upp sitt tips.
         - ”Vem vill du ska läsa boken?”
     not: "Är ni fler än fem, säger var och en sin sak till den bredvid i stället för laget runt, och du skriver några i varje spalt. Eleverna tar ur sina post-it efter boktipset. Bladet Boktipset har sex rader. Vid ”Till” skriver eleven läsaren, helst sin egen klass, vid ”Bra att veta” en varning, som att boken börjar långsamt, och vid ”Min fråga till dig” en fråga som läsaren bär med sig. Den som skriver långsamt fyller i tre rader och säger resten. Spara tipsen i ett kuvert till nästa grupps bokval."
@@ -534,11 +534,47 @@ uppfoljning:
   text: Du behöver veta om passen ger effekt, och det räcker inte att boken blir utläst. Läsintervjun och protokollet står bland materialet, ett av varje per elev. På dem står frågorna och det du lyssnar efter. Läsplanen samlar det gruppen sa, och protokollet det varje elev sa. Jämför det eleven säger i bokens slut med det hen sa i början, och den andra läsintervjun med den första.
   rader:
     - nar: Före bokvalet
+      tid: "före"
+      perElev: 5
       vad: Gör läsintervjun, fem minuter per elev, om senaste boken, vad eleven gör när hen inte förstår och vad hen gillar. Eleven fyller i kortet Böcker jag har läst ut.
     - nar: Under boken
+      tid: "i passet"
       vad: Skriv i protokollet vad eleven säger i Var är vi? och Samtala, i bokens början, mitt och slut. I en kort bok räcker början och slutet.
     - nar: Efter slutet
+      tid: "efter"
+      perElev: 10
       vad: Gör läsintervjun igen, omkring tio minuter. Eleven återberättar hela boken. Ni väljer hens nästa bok, och du skriver vilket stöd hen behöver i den.
+plan:
+  fore:
+    - "Du gör läsintervjun, fem minuter per elev, läser de två böckerna och reserverar exemplar. Räkna med en till tre veckor."
+  passen:
+    - nar: första passet
+      kort: "Bokvalet"
+      tabell: "Första passet: bokvalet"
+      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Bokvalet, kolumner: [Det som är nytt] }
+    - nar: pass 2
+      kort: "Läspass 1"
+      tabell: "Läspass 1: allt visas första gången"
+      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 1, kolumner: [Det som är nytt] }
+    - nar: pass 3–4
+      kort: "Läspass 2 och 3"
+      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 2 och 3, kolumner: [Det som är nytt] }
+    - nar: pass 5–6
+      kort: "En elev vid tavlan"
+      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 4, kolumner: [Det som är nytt] }
+    - nar: pass 7–10
+      kort: "En elev leder Var är vi?"
+      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] }
+    - nar: pass 11 till det sista
+      kort: "En elev leder laget runt"
+      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] }
+    - nar: näst sista passet
+      kort: "Det sista läspasset"
+      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Det sista läspasset, kolumner: [Det som är nytt] }
+    - nar: sista passet
+      kort: "Slutet"
+      tabell: "Sista passet: slutet"
+      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Slutet, kolumner: [Det som är nytt] }
 mal:
   overgripande: "kunna hålla ihop berättelsen och visa var i boken tanken kommer ifrån."
   punkter:

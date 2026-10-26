@@ -127,11 +127,17 @@ export function sakdelar(text, saker) {
   return ut;
 }
 
+// Lärarens och elevernas egna saker, som ser ut som namn på saker men inte är metodens och inte länkas (STIL.md under
+// Hänvisningar: "elevens egna saker (bänkboken)"): klasslistan är lärarens lista över klassen (riggens omgång 1
+// 2026-10-26, Högläsning i par).
+export const EGNA_SAKER = Object.freeze(['klasslista']);
+const EGNA_FORMER = new Set(EGNA_SAKER.flatMap((n) => sakensFormer(n)).map((f) => f.toLocaleLowerCase('sv')));
+
 /**
  * Namn i texten som ser ut som en sak i metoden men inte är någon av sakerna: ett sammansatt ord på blad, kort, mall,
  * protokoll, schema, kontrakt, lista, test eller diplom i bestämd form, som "lyssningsbladet". Bygget stannar på dem, så att
  * en text aldrig nämner ett blad som metoden inte har, också efter en ändring i metoden. Ett ord för sig, som "korten",
- * säger inte vilken sak det är och prövas inte.
+ * säger inte vilken sak det är och prövas inte, och inte heller lärarens och elevernas egna saker (`EGNA_SAKER`).
  * @param {string} text
  * @param {{ namn: string, former?: string[], versal?: boolean }[]} saker
  * @returns {string[]}
@@ -140,7 +146,7 @@ export function olankadeSaker(text, saker) {
   const fritt = sakdelar(text ?? '', saker ?? []).filter((d) => d.sak === undefined).map((d) => d.text).join('\n');
   // Utan lookbehind, som Safari före 16.4 inte kan: tecknet före ordet fångas.
   const ord = [...fritt.matchAll(new RegExp(`(^|[^\\p{L}])(\\p{L}{3,}(?:${BESTAMDA.join('|')}))(?![\\p{L}])`, 'giu'))].map((m) => m[2]);
-  return [...new Set(ord)];
+  return [...new Set(ord)].filter((o) => !EGNA_FORMER.has(o.toLocaleLowerCase('sv')));
 }
 
 /**

@@ -316,6 +316,8 @@ if (tsMp) {
   const sakDelar = s.sakdelar('Du läser lyssningsbladen och samtalskortets rader, och skriver startmeningen. Kvart i åtta står först. Ta Kvart i åtta.', saker);
   ska('namnen i en text', sakDelar.filter((x) => x.sak !== undefined).map((x) => x.text).join('|') === 'lyssningsbladen|samtalskortets|startmeningen|Kvart i åtta', sakDelar);
   ska('ett namn som ingen sak har', s.olankadeSaker('Lägg fram elevbladet, lyssningsbladet och korten.', saker).join() === 'elevbladet', s.olankadeSaker('Lägg fram elevbladet, lyssningsbladet och korten.', saker));
+  // Riggens omgång 1 (2026-10-26): klasslistan är lärarens egen lista och ingen sak i metoden, men elevlistan är fortfarande ett namn som ingen sak har.
+  ska('lärarens egna saker är inga namn på saker', s.EGNA_SAKER.includes('klasslista') && !s.olankadeSaker('Skriv på klasslistan vad du hörde, och på klasslistans baksida.', saker).length && s.olankadeSaker('Skriv på elevlistan.', saker).join() === 'elevlistan', s.olankadeSaker('Skriv på klasslistan. Skriv på elevlistan.', saker));
   // Codex granskning 2 (2026-10-24): ett namn i grundform, ett namn som också är en vanlig fras, och datumets gränser.
   ska('ett namn i grundform hittas i bestämd form', s.sakdelar('Ta fram sifferkorten.', [{ namn: 'Sifferkort' }]).some((x) => x.sak === 0 && x.text === 'sifferkorten') && !s.olankadeSaker('Ta fram sifferkorten.', [{ namn: 'Sifferkort' }]).length);
   const fras = s.sakdelar('Hittat på min huvudperson. Fyll i Min huvudperson i pass 2.', [{ namn: 'Min huvudperson', versal: !s.arSaksord('Min huvudperson') }]);
@@ -468,7 +470,10 @@ for (const f of former) {
 // Det standarden inte läser än säger den tydligt (Kortskrivning: progressionen är moment, inte veckor).
 const ks = s.metodplan(medTider('kortskrivning-skriv-varje-dag', ['sista veckan', 'i passet', 'i passet', 'varje pass', 'vecka 6']));
 ska('Kortskrivnings moment stoppas med besked', ks.fel.some((x) => x.includes('Progressionens första kolumn heter "När"')), ks.fel);
-ska('en metod utan tid stoppas med besked', s.metodplan(metod('upprepad-lasning')).fel.some((x) => x.includes('har ingen tid')));
+// En metod vars uppföljning saknar tid, gjord ur en metod som har tiderna (riggens omgång 1 gav Upprepad läsning dem).
+const utanTid = structuredClone(metod('upprepad-lasning'));
+for (const r of utanTid.uppfoljning.rader) delete r.tid;
+ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) => x.includes('har ingen tid')) && !s.metodplan(metod('upprepad-lasning')).fel.length, s.metodplan(utanTid).fel);
 // Modulens version har sin rad i tabellen under Versionerna, så att en ny förmåga aldrig går ut utan att stå där (METODER.md
 // under Planera insatsen och PLANERA.md under Vad metoden behöver).
 ska(`versionen ${s.PLANERA.version} står i METODER.md under Versionerna`, readFileSync(join(rot, 'METODER.md'), 'utf8').includes(`\n| ${s.PLANERA.version} | `), s.PLANERA.version);
@@ -703,14 +708,14 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     ska('texten till åtgärdsprogrammet skriver metodens veckor som planens', dok.includes('Lista från vecka 2') && !dok.includes('vecka 4'), dok);
     // Passets varianter: metodens rot, med standardens mening på sidan och i Word, och delarna i planen de veckorna.
     const variant = ll.tidsschema.varianter[0];
-    ska('variantens mening', s.variantensMening(variant) === 'Vecka 1–3: passet är bara listan, med modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning 14–15.' && s.variantenFor(ll.tidsschema.varianter, 3) === variant && s.variantenFor(ll.tidsschema.varianter, 4) === undefined && s.variantenFor(ll.tidsschema.varianter, undefined) === undefined && s.delensTid('0–⁠3 min') === '0–3', s.variantensMening(variant));
+    ska('variantens mening', s.variantensMening(variant) === 'Vecka 1–3: passet är bara listan, med modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning 14–15.' && s.variantenFor(ll.tidsschema.varianter, { vecka: 3 }) === variant && s.variantenFor(ll.tidsschema.varianter, { vecka: 4 }) === undefined && s.variantenFor(ll.tidsschema.varianter, undefined) === undefined && s.delensTid('0–⁠3 min') === '0–3', s.variantensMening(variant));
     const veckans = { text: 'Hela listan: du modellerar.', kort: 'Hela listan' };
     const tabell = { text: 'Pass 1 har en egen ordning.', tabell: { namn: 'Pass 1', adress: '/a', delar: [{ tid: '0–4 min', fas: 'Varför vi ses', vad: 'y' }], fore: [{ namn: 'Före', nar: 'Dagen före', vad: 'z' }] } };
     const schemat = { delar: [{ tid: '0–2 min', fas: 'Modellering', vad: 'm' }], fore: 'Ta fram boken.', varianter: [{ nar: 'vecka 1–3', text: 'Passet är bara listan.', delar: [{ tid: '0–3 min', fas: 'Modellering', vad: 'm' }] }] };
-    const b1 = s.passetsBeskrivning([veckans], schemat, 2), b2 = s.passetsBeskrivning([tabell, veckans], schemat, 2), b3 = s.passetsBeskrivning([veckans], schemat, 4);
+    const b1 = s.passetsBeskrivning([veckans], schemat, { vecka: 2 }), b2 = s.passetsBeskrivning([tabell, veckans], schemat, { vecka: 2 }), b3 = s.passetsBeskrivning([veckans], schemat, { vecka: 4 });
     const texterna = (b) => b.texter.map((t) => (t.etikett ? `${t.etikett}: ${t.text}` : t.text)).join('|');
     const raden = { kort: 'Bygga', rad: [{ kolumn: 'Du', text: 'Läser högt.' }, { kolumn: 'Eleverna', text: 'Följer med.' }] };
-    ska('passet: variantens delar de veckorna, tabellens ordning och tidsschemat', b1.namn === 'Hela listan' && texterna(b1) === 'Passet är bara listan.|Du modellerar.' && b1.delar === schemat.varianter[0].delar && !b1.egenOrdning && b1.fore === 'Ta fram boken.' && b2.egenOrdning && b2.delar === tabell.tabell.delar && b2.fore === undefined && b2.foreRader.length === 1 && b2.tabell === tabell.tabell && !texterna(b2).includes('Passet är bara listan.') && b3.delar === schemat.delar && texterna(b3) === 'Du modellerar.' && texterna(s.passetsBeskrivning([raden], schemat, 4)) === 'Du: Läser högt.|Eleverna: Följer med.' && s.passetsBeskrivning([raden], schemat, 4).namn === 'Bygga', [texterna(b1), texterna(b2), texterna(b3)]);
+    ska('passet: variantens delar de veckorna, tabellens ordning och tidsschemat', b1.namn === 'Hela listan' && texterna(b1) === 'Passet är bara listan.|Du modellerar.' && b1.delar === schemat.varianter[0].delar && !b1.egenOrdning && b1.fore === 'Ta fram boken.' && b2.egenOrdning && b2.delar === tabell.tabell.delar && b2.fore === undefined && b2.foreRader.length === 1 && b2.tabell === tabell.tabell && !texterna(b2).includes('Passet är bara listan.') && b3.delar === schemat.delar && texterna(b3) === 'Du modellerar.' && texterna(s.passetsBeskrivning([raden], schemat, { vecka: 4 })) === 'Du: Läser högt.|Eleverna: Följer med.' && s.passetsBeskrivning([raden], schemat, { vecka: 4 }).namn === 'Bygga', [texterna(b1), texterna(b2), texterna(b3)]);
     ska('tidsschemats inledning i planen, utan meningarna om metodens sida', s.planensInledning(ll.tidsschema.text, ll.plan.utan) === 'Förbered dig genom att välja orden du ska modellera. Passet och listorna står också på Lektionskortet, ett A4 att ha framför dig.' && s.planensInledning('En. Två.', ['Två.']) === 'En.', s.planensInledning(ll.tidsschema.text, ll.plan.utan));
     const texter = s.planensTexter(ll), visade = s.visadeTexter(ll);
     ska('planens texter: planens egna fält, och metodens texter som planen visar med varianten och tabellraderna', !texter.some(([plats]) => plats.startsWith('Planens pass')) && texter.some(([plats]) => plats === 'Planens upprepa') && visade.includes('Passet är bara listan.') && visade.includes('Läraren modellerar och gruppen körläser hela listan. Förklara nya ord.') && visade.includes(s.planensInledning(ll.tidsschema.text, ll.plan.utan)) && !visade.some((t) => t.includes('Remsan')), texter.map(([p]) => p));
@@ -745,6 +750,40 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     ska('spärren: tidsschemats tider i en mening och varianter som inte håller', s.tidsschematsFel(ll).length === 0 && tfel.some((x) => x.includes('passets tider i en mening')) && gfel.some((x) => x.includes('delen Körläsning börjar på minut 4')) && gfel.some((x) => x.includes('delen Läsa, som inte är en rad i tidsschemat')) && gfel.some((x) => x.includes('"vecka 3" gäller veckor som en annan variant redan gäller')) && gfel.some((x) => x.includes('har delar till minut 16')), [tfel, gfel]);
     const lfel = s.varianternasFel(ll, ['En lista i veckan.'], { lathund: true, var: 'Lathunden' }), kfel = s.varianternasFel(ll, kortet, { var: 'Lektionskortet' }), ufel = s.varianternasFel(gammal, kortet, { var: 'Lektionskortet' });
     ska('spärren: lathunden och lektionskortet säger varianten med standardens mening', s.varianternasFel(ll, s.allaTexter(ll.lathund), { lathund: true, var: 'Lathunden' }).length === 0 && lfel.some((x) => x.includes('Lathunden säger inte tidsschemats variant')) && kfel.some((x) => x.includes('säger passets tider för vissa veckor på eget sätt')) && ufel.length === 1 && s.allaTexter({ a: ['x', { b: 'y' }], c: 3 }).join() === 'x,y', [lfel, kfel, ufel]);
+  }
+  // Varianter för passets längd och för vissa pass (riggens omgång 1 2026-10-26): Upprepad läsnings pass på tio minuter,
+  // Högläsning i pars visning i pass 2 och i veckans första pass i vecka 2–5, med samma ord som planens passen, och
+  // Boksamtalets näst sista pass, där boken läses ut.
+  {
+    const up = metod('upprepad-lasning'), hl = metod('hoglasning-i-par'), bs = metod('boksamtal-i-grupp');
+    ska('variantens när: veckor, längd, ett pass och en plats i vissa veckor', JSON.stringify(s.variantensNar('ett pass på tio minuter')) === '{"typ":"minuter","minuter":10}' && s.variantensNar('pass på 20 minuter')?.minuter === 20 && JSON.stringify(s.variantensNar('veckans första pass i vecka 2–5')) === '{"typ":"vecka","plats":1,"veckor":{"fran":2,"till":5}}' && s.variantensNar('pass 2')?.typ === 'pass' && s.variantensNar('vecka 1–3')?.typ === 'veckor' && s.variantensNar('en gång') === null && s.variantensNar('pass 2 i vecka 3') === null && s.tolkaPassen('näst sista passet')?.typ === 'nastSista', [s.variantensNar('veckans första pass i vecka 2–5'), s.variantensNar('pass på 20 minuter')]);
+    ska('variantens mening för en längd och för vissa pass', s.variantensMening(up.tidsschema.varianter[0]) === 'Ett pass på tio minuter: första läsningen 0–2 minuter, modellering 2–4, läs igen 4–9 och avslutning 9–10. Då hinner du lyssna på varje elev om gruppen har högst fyra elever.' && s.variantensMening(hl.tidsschema.varianter[1]) === 'Veckans första pass i vecka 2–5: texten 0–3 minuter, visa 3–8, läs för en lyssnare 8–18 och återkoppling 18–20.', [s.variantensMening(up.tidsschema.varianter[0]), s.variantensMening(hl.tidsschema.varianter[1])]);
+    const ump = s.metodplan(up).plan, upl = s.planera(ump, s.forval(ump, '2026-10-26'));
+    const hmp = s.metodplan(hl).plan, hpl = s.planera(hmp, s.forval(hmp, '2026-10-26'));
+    const hVarianten = (nr, min = 20) => s.variantenFor(hl.tidsschema.varianter, s.passetsLage(hpl, s.passetMedNr(hpl, nr), min))?.nar ?? '-';
+    const v2forsta = s.iDatumordning(s.veckansPass(hpl, hpl.veckor[1]))[0].nr, v6forsta = s.iDatumordning(s.veckansPass(hpl, hpl.veckor.find((v) => v.innehall === 6)))[0].nr;
+    ska('varianten gäller passets längd, ett visst pass och en plats i vissa veckor', s.variantenFor(up.tidsschema.varianter, s.passetsLage(upl, upl.pass[0], 10)) === up.tidsschema.varianter[0] && s.variantenFor(up.tidsschema.varianter, s.passetsLage(upl, upl.pass[0], 15)) === undefined && hVarianten(1) === '-' && hVarianten(2) === 'pass 2' && hVarianten(3) === '-' && hVarianten(v2forsta) === 'veckans första pass i vecka 2–5' && hVarianten(v6forsta) === '-', [hVarianten(2), hVarianten(v2forsta), hVarianten(v6forsta)]);
+    const b10 = s.passetsBeskrivning([], { delar: up.tidsschema.rader.filter((r) => /\d/.test(r.tid)).map((r) => ({ ...r })), varianter: up.tidsschema.varianter.map((v) => ({ ...v, delar: v.delar.map((x) => ({ ...x, vad: 'v' })) })) }, s.passetsLage(upl, upl.pass[0], 10));
+    ska('passet på tio minuter har variantens delar och text', b10.delar.map((x) => x.tid).join() === '0–2 min,2–4 min,4–9 min,9–10 min' && b10.texter[0]?.text === up.tidsschema.varianter[0].text, b10);
+    // Boksamtalets näst sista pass får raden Det sista läspasset före spannet, och sista passet sitt slut.
+    const bmp = s.metodplan(bs).plan, bpl = s.planera(bmp, s.forval(bmp, '2026-10-26'));
+    const korten = (nr) => s.passetsRoller(bpl, s.passetMedNr(bpl, nr), bmp.passen).map((r) => bs.plan.passen[r].kort);
+    const sista = bpl.sistaNr, nast = Math.max(...bpl.pass.map((x) => x.nr).filter((n) => n < sista));
+    ska('näst sista passet är det sista läspasset, och ett eget nummer går före i en kort plan', korten(nast)[0] === 'Det sista läspasset' && korten(sista)[0] === 'Slutet' && !korten(nast - 1).includes('Det sista läspasset') && s.narensVikt({ typ: 'pass', fran: 1, till: 1 }) < s.narensVikt({ typ: 'nastSista' }) && s.narensVikt({ typ: 'nastSista' }) < s.narensVikt({ typ: 'pass', fran: 7, till: 10 }), [korten(nast), korten(sista)]);
+    // Spärrarna åt andra hållet: en längd som inte går ihop, samma längd två gånger, tidsschemats egen längd och ett när som
+    // inte går att läsa stoppas, och lathunden behöver bara säga varianterna för vissa veckor.
+    const trasig = structuredClone(up);
+    trasig.tidsschema.varianter.push({ nar: 'ett pass på tio minuter', delar: [{ fas: 'Första läsningen', tid: '0–5 min' }, { fas: 'Läs igen', tid: '5–12 min' }] }, { nar: 'ett pass på 15 minuter', delar: [{ fas: 'Första läsningen', tid: '0–5 min' }, { fas: 'Läs igen', tid: '5–15 min' }] }, { nar: 'ibland', delar: [{ fas: 'Första läsningen', tid: '0–5 min' }, { fas: 'Läs igen', tid: '5–10 min' }] });
+    const tf = s.tidsschematsFel(trasig);
+    ska('spärren: varianter för passets längd som inte håller', s.tidsschematsFel(up).length === 0 && s.tidsschematsFel(hl).length === 0 && tf.some((x) => x.includes('gäller en längd som en annan variant redan gäller')) && tf.some((x) => x.includes('har delar till minut 12, men varianten gäller ett pass på 10 minuter')) && tf.some((x) => x.includes('gäller samma längd som tidsschemats rader')) && tf.some((x) => x.includes('"ibland" går inte att läsa')), tf);
+    ska('lathunden behöver inte säga en variant för passets längd eller ett visst pass', s.varianternasFel(up, ['En lathund utan varianten.'], { lathund: true, var: 'Lathunden' }).length === 0 && s.varianternasFel(hl, ['En lathund utan varianten.'], { lathund: true, var: 'Lathunden' }).length === 0);
+    ska('raden och varianten läses lika för ett pass', s.passetTraffas({ typ: 'minuter', minuter: 10 }, { minuter: 10 }) && !s.passetTraffas({ typ: 'minuter', minuter: 10 }, { minuter: 15 }) && s.passetTraffas({ typ: 'vecka', plats: 1, veckor: { fran: 2, till: 5 } }, { vecka: 3, plats: 1 }) && !s.passetTraffas({ typ: 'vecka', plats: 1, veckor: { fran: 2, till: 5 } }, { vecka: 6, plats: 1 }) && s.passetTraffas({ typ: 'nastSista' }, { nastSista: true }) && !s.passetTraffas({ typ: 'pass', fran: 2, till: 2 }, { vecka: 1 }));
+    // Passets egen tabell i sina former (riggens omgång 1): Seriesamtals Del med tiden under namnet, Faktatextsamtalets Del
+    // och tid, Högläsning i pars Delen och Tid, och Boksamtalets Tid och del med en punkt. En tabell med tider men utan namn på
+    // delarna är inget pass i delar, så att metoden får namnen.
+    const tabellen = (id, namn) => s.tabellensDelar(metod(id).tabeller.find((x) => x.rubrik === namn));
+    const sp1 = tabellen('seriesamtal', 'Pass 1: syftet, reglerna och tankebubblan'), fm = tabellen('faktatextsamtal-i-grupp', 'Modellpasset på 40 minuter'), hf = tabellen('hoglasning-i-par', 'Det första passet'), bl = tabellen('boksamtal-i-grupp', 'Läspass 1: allt visas första gången'), bv = tabellen('boksamtal-i-grupp', 'Första passet: bokvalet');
+    ska('passets egen tabell i sina former', sp1?.delar[0].fas === 'Varför vi ses' && sp1.fore[0].nar === 'Före pass 1' && fm?.delar[1].fas === 'Modellen' && fm.delar[1].mer[0].etikett === 'Så leder du det' && hf?.delar[0].fas === 'Ramarna och paren' && /^0/.test(hf.delar[0].tid) && bl?.delar[0].fas === 'Var är vi?' && bl.delar[0].tid === '0–5' && bl.delar[0].mer[0].etikett === 'Du säger' && bv?.delar[0].fas === 'Två böcker' && bv.delar.length === 4 && s.tabellensDelar({ kolumner: ['Vecka', 'Text'], rader: [['1', 'x']] }) === null && s.tabellensDelar({ kolumner: ['Tid', 'Vad händer'], rader: [['0–10', 'Du visar.'], ['10–20', 'Paren läser.']] }) === null, [sp1?.delar[0], fm?.delar[1], hf?.delar[0], bl?.delar[0], bv?.delar[0]]);
   }
   // Målet (K-522): metodens övergripande mål i en mening, och lektionskortets mål som metodens, åt båda hållen.
   const llMal = metod('laslistor-i-grupp');
@@ -1493,8 +1532,13 @@ try {
   await f.bredd(320); await vanta(150);
   sant('metodens sida rullar inte i sidled i 320 punkter med Din insats', !(await rullar(f)));
   await f.dator();
-  await f.oppna(`${bas}/stodundervisning/upprepad-lasning`);
-  sant('en metod utan plan har ingen knapp och ingen rad', !(await f.kor(`[...document.querySelectorAll('a')].some((a) => a.textContent.startsWith('Planera insatsen'))`)) && !(await f.kor(`!!document.getElementById('pl-din')`)));
+  // En metod utan planens fält, så länge någon finns: omgångarna 2026-10-26 ger metoderna planen en omgång i taget, och en
+  // lektion i en serie planeras i seriens plan.
+  const utanPlan = alla.find((m) => !planbara.includes(m) && !m.d.serie);
+  if (utanPlan) {
+    await f.oppna(`${bas}/stodundervisning/${utanPlan.id}`);
+    sant(`en metod utan plan har ingen knapp och ingen rad (${utanPlan.id})`, !(await f.kor(`[...document.querySelectorAll('a')].some((a) => a.textContent.startsWith('Planera insatsen'))`)) && !(await f.kor(`!!document.getElementById('pl-din')`)));
+  }
   await f.oppna(`${bas}/stodundervisning`);
   await f.bredd(390); await vanta(150); await f.bild('6-metodbanken-telefon'); await f.dator();
   sant('Dina insatser i metodbanken', (await f.kor(`!document.getElementById('pl-insatser').hidden`)) && (await f.text('#pl-insatser'))?.includes('Textsamtal i grupp') && (await f.text('#pl-insatser'))?.includes('Prov 2B') && (await f.text('#pl-insatser'))?.includes('1 pass bockade'), await f.text('#pl-insatser'));
@@ -1779,7 +1823,9 @@ try {
     await b.kor(`(() => { const i = document.getElementById('pl-start'); i.value = '2026-11-02'; i.dispatchEvent(new Event('change')); return true; })()`);
     await b.tryck('#pl-spara');
     await vanta(200);
-    sant(`${m.id}: den sparade planen visar veckan med fokus`, await b.kor(`!document.getElementById('pl-veckan').hidden && !!document.querySelector('#pl-veckan .pl-fokusruta')`), await b.text('#pl-veckan'));
+    // Veckan har veckans fokus ur progressionen, eller passets roll när metoden säger vad som är nytt pass för pass, som
+    // Boksamtalets tabell Perioden och Upprepad läsnings text i veckan (omgång 1 2026-10-26).
+    sant(`${m.id}: den sparade planen visar veckan med fokus eller passets roll`, await b.kor(`!document.getElementById('pl-veckan').hidden && !!document.querySelector('#pl-veckan .pl-fokusruta, #pl-veckan .pl-roll')`), await b.text('#pl-veckan'));
     sant(`${m.id}: planens länkar leder till sidor och ankare som finns`, !lankFel(await sakLankar(b)).length, [await sakLankar(b), lankFel(await sakLankar(b))]);
     if (m.id === 'fyra-raknesatten') {
       const lektion = await b.kor(`document.querySelector('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')?.getAttribute('href')`);

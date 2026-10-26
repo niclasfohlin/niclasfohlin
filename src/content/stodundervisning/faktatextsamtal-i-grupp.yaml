@@ -505,32 +505,54 @@ progression:
   text: Eleverna tar över en bit i taget, i läspasset och i modellpasset.
   rader:
     - vecka: "1"
+      rubrik: "Gången och Tankekartan"
       fokus: "Gruppen lär sig gången: stryka under, reda ut, säga kärnan och lägga lapparna i modellen."
       roll: "Läspasset: du tänker högt i hela avsnitt 1. Modellpasset: du visar modellen och lägger den första lappen."
     - vecka: "2"
+      rubrik: "En modell ni kan, och Tidslinjen"
       fokus: Gruppen prövar en modell som den redan kan mot veckans text och säger varför modellen inte räcker.
       roll: "Läspasset: du tänker högt i avsnitt 1 igen. Modellpasset: du lägger fram gruppens tankekarta före veckans modell."
     - vecka: 3–4
+      rubrik: "Jobbkorten, Venndiagrammet och Kedjan"
       fokus: "Från avsnitt 2 har två elever i taget var sitt jobb: en håller kortet När det skaver, och en leder gruppen till kärnan. Eleverna byter jobb efter varje avsnitt."
       roll: "Läspasset: du läser avsnitt 1, och sedan lyssnar du, frågar och håller tiden. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger."
     - vecka: "5"
+      rubrik: "Jobbkorten i alla fyra stegen, Problem och lösning"
       fokus: De två som har jobbkorten i det sista avsnittet leder gruppen genom alla fyra stegen.
       roll: "Läspasset: i det sista avsnittet går du in först när något saknas. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger."
     - vecka: "6"
+      rubrik: "Klassens text, och du väljer modell"
       fokus: Gruppen läser klassens text i SO eller NO, som ofta är byggd på flera sätt.
       roll: "Läspasset: du tänker högt i avsnitt 1 igen. Modellpasset: du prövar två av modellernas frågor högt, och paren de tre andra."
     - vecka: 7–8
+      rubrik: "Klassens text, och gruppen väljer modell"
       fokus: De två med jobbkorten leder gruppen genom avsnitten som paren läser. Gruppen väljer modell bland sina fem. I vecka 7 väljer den tillsammans med dig, och i vecka 8 väljer paren först. I det sista passet säger var och en vad hen tar med sig från perioden.
       roll: "Läspasset: du inleder och avslutar passet. Efter varje avsnitt säger du en sak som de två som ledde gjorde. Modellpasset: du lyssnar när gruppen väljer och går in först när något saknas."
 uppfoljning:
   text: Du behöver veta om passen ger effekt. Kartläggningen står bland materialet. Eleven läser en kort faktatext och gör fyra uppgifter, om det som skaver, kärnan, bilden och hur texten hänger ihop. Kartläggningen har inga poäng. Du jämför det eleven sa och gjorde före perioden med det hen säger och gör efter, och raderna Så kan det låta visar hur skillnaden kan låta. Under perioden har du gruppens lappar och elevens skrivna svar från varje vecka. I passen hör du hur eleven reder ut det som skaver, och i vecka 6–8 hur paren väljer modell.
   rader:
     - nar: Före perioden
+      tid: "före"
+      perElev: 15
       vad: Gör kartläggningen före första passet. Den tar omkring en kvart per elev och visar också vilken nivå som passar.
     - nar: Varje vecka
+      tid: "varje vecka"
       vad: Spara gruppens modell och elevernas svar på textens fråga. Är svaret ordnat som modellen, eller är det en lista?
     - nar: Efter åtta veckor
+      tid: "efter"
+      perElev: 15
       vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Klarar eleven klassens texter med mindre stöd, och vad fortsätter läraren i ämnet med?
+plan:
+  passen:
+    - nar: veckans första
+      kort: "Läspasset"
+      ur: { tabell: "Två pass per text: läspasset och modellpasset", rad: Tränar, kolumner: [Läspasset] }
+    - nar: veckans andra
+      kort: "Modellpasset"
+      tabell: "Modellpasset på 40 minuter"
+      ur: { tabell: "Två pass per text: läspasset och modellpasset", rad: Tränar, kolumner: [Modellpasset] }
+    - nar: sista passet
+      text: "I det sista passet säger var och en vad hen tar med sig från perioden."
 mal:
   overgripande: "kunna reda ut det som skaver i en faktatext och säga kärnan med egna ord."
   punkter:

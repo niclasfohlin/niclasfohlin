@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { gruppensElever, kortnamn, metodplan, minuterISpann, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, rollensRad, sakdelar, sakspann, slugAv, visadeTexter } from './standard/index.js';
+import { gruppensElever, kortnamn, metodplan, minuterISpann, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, rollensRad, sakdelar, sakspann, slugAv, tabellensDelar, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
@@ -78,7 +78,7 @@ export interface PlanData {
   /** Vad som skiljer passen åt (plan.passen): rollens citat ur metoden och raden ur metodens tabell som den hämtar sin text
    * ur (K-520), och adressen till metodens tabell för ett pass som går till på ett eget sätt med tabellens delar, när den
    * har en rad per del med tiden under delens namn (Seriesamtals pass 1). */
-  passen?: { nar: string; text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; tabell?: { namn: string; adress: string; delar?: { tid: string; fas: string; vad: string }[]; fore?: { namn: string; nar: string; vad: string }[] } }[];
+  passen?: { nar: string; text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; tabell?: { namn: string; adress: string; delar?: { tid: string; fas: string; vad: string; mer?: { etikett: string; text: string }[] }[]; fore?: { namn: string; nar: string; vad: string }[] } }[];
   /** Metodens rutor överst, som planen visar eller leder till: principerna, gruppen och Hem och skola. */
   principer?: { rubrik: string; text: string; adress: string };
   gruppen?: { rubrik: string; text: string; adress: string };
@@ -109,8 +109,8 @@ export interface PlanPasset {
   /** Tidsschemats inledning som planen visar den, utan meningarna i plan.utan (planensInledning i standarden). */
   text?: string;
   delar: { tid: string; fas: string; vad: string; minuter?: number }[];
-  /** Tidsschemats varianter: passet de veckor då delarna har andra tider, som Läslistors vecka 1–3 (K-515). */
-  varianter?: { nar: string; text: string; delar: { tid: string; fas: string; vad: string; minuter?: number }[] }[];
+  /** Tidsschemats varianter: passet när delarna har andra tider, vissa veckor som Läslistors vecka 1–3 (K-515), i vissa pass eller i ett kortare pass. */
+  varianter?: { nar: string; text?: string; delar: { tid: string; fas: string; vad: string; minuter?: number }[] }[];
   /** Rader utan minuter i passet, som Hemma, cirka 20 min. */
   andra: { tid: string; fas: string; vad: string }[];
   fore?: string;
@@ -176,21 +176,14 @@ function planensPass(d: Metod['data'], id: string): PlanPasset | undefined {
   };
 }
 
-// Ett pass med egen tabell, som Pass 1 i Seriesamtal: en rad per del med delens namn och tiden på två rader i första
-// cellen ("Varför vi ses" och "0–4 min") och vad läraren gör i den andra. En rad utan minuter ("Före passet", "Dagen
-// före") är förberedelsen.
+// Ett pass med egen tabell, som Pass 1 i Seriesamtal och Boksamtalets bokval: delarna med tid, namn och text, och raderna
+// utan minuter som förberedelse, ur standardens tabellensDelar, som läser tabellernas former.
 function passetsTabell(d: Metod['data'], id: string, namn: string): NonNullable<NonNullable<PlanData['passen']>[number]['tabell']> {
   const adress = tabellensAdress(d, id, namn) ?? `/stodundervisning/${id}`;
   const t = d.tabeller.find((x) => x.rubrik === namn);
-  if (!t || t.kolumner.length !== 2) return { namn, adress };
-  const rader = (t.rader ?? []).map((r) => { const [del, tid = ''] = String(r[0]).split('\n').map((x) => x.trim()); return { del, tid, vad: String(r[1]).trim() }; });
-  if (!rader.length || !rader.every((r) => r.del && r.tid)) return { namn, adress };
-  const medTid = (tid: string) => /^\d/.test(tid);
-  return {
-    namn, adress,
-    delar: rader.filter((r) => medTid(r.tid)).map((r) => ({ tid: r.tid, fas: r.del, vad: r.vad })),
-    fore: rader.filter((r) => !medTid(r.tid)).map((r) => ({ namn: r.del, nar: r.tid, vad: r.vad })),
-  };
+  const delar = t ? tabellensDelar(t) : null;
+  if (!delar) return { namn, adress };
+  return { namn, adress, delar: delar.delar.map((x) => ({ tid: x.tid, fas: x.fas, vad: x.vad, ...(x.mer.length ? { mer: x.mer } : {}) })), fore: delar.fore };
 }
 
 // En tabell med en rad för varje vecka och en kolumn för varje nivå (Talen och bladen i veckorna i De fyra räknesätten):

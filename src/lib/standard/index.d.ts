@@ -108,7 +108,11 @@ export type Tid = { typ: 'fore' } | { typ: 'efter'; veckor: number; till?: numbe
 /** En rad i progressionen: veckorna eller passen den gäller; till saknas när den gäller till slutet. */
 export interface Steg { rad: number; fran: number; till?: number; vidBehov: boolean; efter?: true }
 /** Vilka pass en rad i planens passen gäller: platsen i veckan, eller numret i insatsen. */
-export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | { typ: 'pass'; fran: number; till?: number } | { typ: 'sista' } | { typ: 'veckor'; fran: number; till: number };
+export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | { typ: 'pass'; fran: number; till?: number } | { typ: 'sista' } | { typ: 'nastSista' } | { typ: 'veckor'; fran: number; till: number };
+/** När en variant av passet gäller: planens ord för passen, passets längd, eller en plats i vissa veckor. */
+export type VariantensNar = PassensNar | { typ: 'minuter'; minuter: number } | { typ: 'vecka'; plats: number | 'sista' | 'ovriga'; veckor: { fran: number; till: number } };
+/** Var ett pass står i planen, som en rad i planens passen och en variant läser det. */
+export type PassetsLage = { nr?: number; sista?: boolean; nastSista?: boolean; vecka?: number; plats?: number; sistIVeckan?: boolean; minuter?: number };
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
 export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[]; passen: { rad: number; nar: PassensNar }[] }
 /** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
@@ -196,16 +200,28 @@ export declare const veckansNamn: (v: { innehall: number; gang?: number; vecka: 
 export declare const planveckansNamn: (plan: Plan, v: PlanVecka) => Veckonamn;
 /** Raderna i planens passen som gäller passet, den mest bestämda först. */
 export declare function passetsRoller(plan: Plan, p: Pass, passen: Metodplan['passen']): number[];
-/** Ett pass som sidan och kalendern visar det: namnet, rollernas texter, delarna och förberedelsen, med tidsschemats variant för metodens vecka. */
-export declare function passetsBeskrivning<D extends { tid: string; fas: string; vad: string }>(roller: { text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string }[] } }[], passet: { delar: D[]; fore?: string; varianter?: (Variant & { delar: D[] })[] } | undefined, vecka?: number): { namn: string; texter: { etikett: string; text: string }[]; delar: D[]; egenOrdning: boolean; fore?: string; foreRader: { namn: string; nar: string; vad: string }[]; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string }[] } };
+/** Var ett pass står i planen: numret, sista och näst sista, metodens vecka, platsen i veckan och minuterna. */
+export declare function passetsLage(plan: Plan, p: Pass, minuter?: number): PassetsLage;
+/** Gäller en rad i planens passen eller en variant för passet? */
+export declare function passetTraffas(nar: PassensNar | VariantensNar, lage: PassetsLage): boolean;
+/** Hur bestämt ett när är, det mest bestämda med lägst tal. */
+export declare const narensVikt: (t: PassensNar | VariantensNar) => number;
+/** Ett pass som sidan och kalendern visar det: namnet, rollernas texter, delarna och förberedelsen, med tidsschemats variant för passet. */
+export declare function passetsBeskrivning<D extends { tid: string; fas: string; vad: string }>(roller: { text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string }[] } }[], passet: { delar: D[]; fore?: string; varianter?: (Variant & { delar: D[] })[] } | undefined, lage?: PassetsLage): { namn: string; texter: { etikett: string; text: string }[]; delar: D[]; egenOrdning: boolean; fore?: string; foreRader: { namn: string; nar: string; vad: string }[]; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string }[] } };
+/** En del i ett pass med egen tabell: tiden, namnet när tabellen har ett, vad som händer och de andra kolumnerna med sina namn. */
+export type TabellDel = { tid: string; fas: string; vad: string; mer: { etikett: string; text: string }[] };
+/** Delarna i ett pass med egen tabell, och förberedelsen, eller null när tabellen inte är ett pass i delar. */
+export declare function tabellensDelar(t: { kolumner: string[]; rader?: unknown[][] }): { delar: TabellDel[]; fore: { namn: string; nar: string; vad: string }[] } | null;
 /** En dels tid utan "min": "0–3". */
 export declare const delensTid: (tid: string) => string;
-/** Passets form vissa veckor, en variant i metodens tidsschema. */
-export type Variant = { nar: string; text: string; delar: { fas: string; tid: string }[] };
+/** Passets form vissa veckor, i vissa pass eller i ett kortare pass, en variant i metodens tidsschema. */
+export type Variant = { nar: string; text?: string; delar: { fas: string; tid: string }[] };
+/** När en variant gäller, ur variantens nar. */
+export declare function variantensNar(text: unknown): VariantensNar | null;
 /** En variant som metodens sida, Word, lathunden och lektionskortet skriver den. */
 export declare const variantensMening: (v: Variant) => string;
-/** Varianten som gäller metodens vecka, eller ingen. */
-export declare const variantenFor: <V extends { nar: string }>(varianter: V[] | undefined, vecka: number | undefined) => V | undefined;
+/** Varianten som gäller passet, den mest bestämda, eller ingen. */
+export declare const variantenFor: <V extends { nar: string }>(varianter: V[] | undefined, lage: PassetsLage | undefined) => V | undefined;
 /** Felen i metodens tidsschema: varianterna och passets tider i tidsschemats text. */
 export declare function tidsschematsFel(d: { tid?: string; tidsschema?: { text?: string; rader: { tid: string; fas: string }[]; varianter?: Variant[] } }): string[];
 /** Felen i lathundens och lektionskortens texter för en metod med varianter. */
@@ -350,6 +366,7 @@ export declare function sakensFormer(namn: string): string[];
 export declare function sakdelar(text: string, saker: Sak[]): { text: string; sak?: number }[];
 /** Namn som ser ut som en sak (ett sammansatt ord på blad, kort, mall …) men inte är någon av sakerna. */
 export declare function olankadeSaker(text: string, saker: Sak[]): string[];
+export declare const EGNA_SAKER: readonly string[];
 /** Spannen av saker med nummer i en text, som "Bildserie 2–6". */
 export declare function sakspann(text: string): { index: number; langd: number; text: string; namn: string[]; fran: number; till: number; nummer: number[] }[];
 

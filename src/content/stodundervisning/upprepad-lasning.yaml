@@ -23,7 +23,7 @@ material:
   - läsrör
   - lappen hem
   - snabbmallen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - til-i-grupp
   - laslistor-i-grupp
@@ -241,7 +241,7 @@ passrutin:
   kallas: delar
 tidsschema:
   rubrik: Ett pass på 15 minuter
-  text: "Har ni bara tio minuter blir det två minuter var för första läsningen och modelleringen, fem för Läs igen och en för avslutningen. Då hinner du lyssna på varje elev om gruppen har högst fyra elever. Passet, sätten att läsa igen och läsfelen står också på Lektionskortet, ett A4 att ha framför dig."
+  text: "Passet, sätten att läsa igen och läsfelen står också på Lektionskortet, ett A4 att ha framför dig."
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -258,6 +258,14 @@ tidsschema:
     - tid: 14–15 min
       fas: Avslutning
       vad: "Börja själv och beskriv en eller två iakttagelser du gjort under passet, konkret och kort. Låt sedan eleverna fylla på med vad de märkte och vilken strategi som hjälpte, och be någon berätta vad texten handlar om."
+  varianter:
+    - nar: ett pass på tio minuter
+      text: "Då hinner du lyssna på varje elev om gruppen har högst fyra elever."
+      delar:
+        - { fas: Första läsningen, tid: 0–2 min }
+        - { fas: Modellering, tid: 2–4 min }
+        - { fas: Läs igen, tid: 4–9 min }
+        - { fas: Avslutning, tid: 9–10 min }
   efter: Den som är klar före de andra läser texten en gång till, i läsröret eller för en kamrat.
 steg:
   rubrik: Vad du gör och säger i varje del
@@ -372,11 +380,45 @@ uppfoljning:
   text: "Före första passet och efter perioden läser eleven en ny text på samma nivå som i insatsen, en text ni inte har övat på. Använd protokollet Lästrappan före och efter, som finns under Materialet. Under perioden följer du eleven i första läsningen. Trappsteget stannar mellan dig och eleven. Visa det inte inför gruppen."
   rader:
     - nar: Före insatsen
+      tid: "före"
       vad: Eleven läser en kort, ny text för dig. Fyll i protokollet Lästrappan före och efter.
     - nar: Varje vecka
+      tid: "varje vecka"
       vad: "Skriv trappsteget överst i snabbmallen när eleven läser en ny text första gången. Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
     - nar: Efter sex till åtta veckor
+      tid: "efter"
       vad: "Eleven läser en ny text som är lika lång och på samma nivå. Fyll i protokollet igen och jämför med starten. Berätta för eleven vad du har hört."
+plan:
+  passen:
+    - nar: första passet
+      kort: "Varför samma text"
+      text: "Första passet berättar du för eleverna varför ni läser samma text flera gånger. Visa också parläsningen tillsammans med en elev framför gruppen."
+    - nar: vecka 1
+      kort: "Ola är ute"
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "1 · Ola är ute", kolumner: [Veckans fokus] }
+    - nar: vecka 2
+      kort: "Katten Sam"
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "2 · Katten Sam", kolumner: [Veckans fokus] }
+    - nar: vecka 3
+      kort: "Bollen"
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "3 · Bollen", kolumner: [Veckans fokus] }
+    - nar: vecka 4
+      kort: "Fåglarna"
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "4 · Fåglarna", kolumner: [Veckans fokus] }
+    - nar: vecka 5
+      kort: "Snögubben"
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "5 · Snögubben", kolumner: [Veckans fokus] }
+    - nar: vecka 6
+      kort: "Sandslottet"
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "6 · Sandslottet", kolumner: [Veckans fokus] }
+    - nar: vecka 7
+      kort: "Draken"
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "7 · Draken", kolumner: [Veckans fokus] }
+    - nar: vecka 8
+      kort: "Vanten"
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "8 · Vanten", kolumner: [Veckans fokus] }
+  justera:
+    - "Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
 mal:
   overgripande: "kunna läsa en text med flyt och lösa ett svårt ord med en strategi."
   text: "Efter perioden ska eleven ha gått upp några steg på lästrappan och oftare än förut:"

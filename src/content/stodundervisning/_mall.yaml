@@ -143,7 +143,8 @@ tidsschema:
   rader:
     - { tid: Före passet, fas: Förberedelse, vad: Vad du gör innan. }
     - { tid: 0–5 min, fas: Fasens namn, vad: Vad som händer. }
-  # varianter: passets form vissa veckor, med veckorna, en mening om passet och delarna med faserna som raderna ovan
+  # varianter: passets form vissa veckor (vecka 1–3), i vissa pass (pass 2, veckans första pass i vecka 2–5) eller i ett
+  # kortare pass (ett pass på tio minuter), med en mening om passet när den behövs och delarna med faserna som raderna ovan
   # (METODER.md under Tidsschemats varianter). Metodens sida, Word, lathunden och planen skriver varianten ur fältet.
   # varianter:
   #   - nar: vecka 1–3

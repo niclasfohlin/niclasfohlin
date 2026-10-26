@@ -15,7 +15,7 @@ material:
   - post-it-lappar
   - affischen med strategierna
   - bilderböcker till de yngre
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 publicerad: 2026-10-20
 relaterade: [upprepad-lasning, til-i-grupp, textsamtal-i-grupp]
 utkast: false
@@ -163,6 +163,19 @@ tidsschema:
     - { tid: 3–⁠6 min, fas: Visa, vad: "Fråga vad som händer på stället, skriv ett ord om det i marginalen och sätt veckans tecken. Läs stället utan strategin och sedan med den, och tänk högt om varför du läser så. Klassen läser efter dig." }
     - { tid: 6–⁠18 min, fas: Läs för en lyssnare, vad: "Paren läser vidare i sin bok med veckans strategi, en sida var eller ett stycke var i åk 2–3, och lyssnaren säger sina två meningar efter varje tur. Lyssna omkring tre minuter på vart och ett av dagens par." }
     - { tid: 18–⁠20 min, fas: Återkoppling, vad: "Säg en sak du hörde om texten och en om rösten." }
+  varianter:
+    - nar: pass 2
+      delar:
+        - { fas: Texten, tid: 0–3 min }
+        - { fas: Visa, tid: 3–8 min }
+        - { fas: Läs för en lyssnare, tid: 8–18 min }
+        - { fas: Återkoppling, tid: 18–20 min }
+    - nar: veckans första pass i vecka 2–5
+      delar:
+        - { fas: Texten, tid: 0–3 min }
+        - { fas: Visa, tid: 3–8 min }
+        - { fas: Läs för en lyssnare, tid: 8–18 min }
+        - { fas: Återkoppling, tid: 18–20 min }
   efter: "Det allra första passet står i tabellen Det första passet."
 steg:
   rubrik: Vad du gör och säger i varje del
@@ -251,9 +264,17 @@ progression:
 uppfoljning:
   text: "Lyssna på några elever om dagen med provtexten i vecka 1 och 8, till exempel när klassen läser tyst. Varje elev tar omkring fyra minuter. Efter vecka 8 jämför du protokollen och bestämmer med eleven vad hen tränar vidare."
   rader:
-    - { nar: Vecka 1, vad: "Eleven läser provtexten tyst och säger vad den handlar om. Säg sedan: ”Läs den högt så att jag förstår och känner det texten säger.” Spela in hela läsningen, och fyll i protokollet." }
-    - { nar: Varje pass, vad: "Lyssna på dagens par, och skriv på klasslistan vad du hörde och vad varje elev ska pröva. Nästa gång du hör paret börjar du där, och det som många behöver tar du upp i nästa pass." }
-    - { nar: Vecka 8, vad: "Eleven läser samma provtext, och du spelar in och fyller i protokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu." }
+    - { nar: Vecka 1, tid: "vecka 1", perElev: 4, vad: "Eleven läser provtexten tyst och säger vad den handlar om. Säg sedan: ”Läs den högt så att jag förstår och känner det texten säger.” Spela in hela läsningen, och fyll i protokollet." }
+    - { nar: Varje pass, tid: "varje pass", vad: "Lyssna på dagens par, och skriv på klasslistan vad du hörde och vad varje elev ska pröva. Nästa gång du hör paret börjar du där, och det som många behöver tar du upp i nästa pass." }
+    - { nar: Vecka 8, tid: "vecka 8", perElev: 4, vad: "Eleven läser samma provtext, och du spelar in och fyller i protokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu." }
+plan:
+  fore:
+    - "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre."
+  passen:
+    - nar: första passet
+      kort: "Det första passet"
+      text: "I det första passet sätter du i gång paren."
+      tabell: "Det första passet"
 mal:
   overgripande: "kunna läsa högt så att lyssnaren förstår det texten säger."
   text: "Efter de åtta veckorna ska eleven oftare än förut:"

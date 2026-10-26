@@ -305,10 +305,11 @@ const metodensFalt = z.strictObject({
       rubrik: z.string(),
       text: z.string().optional(),
       rader: z.array(z.strictObject({ tid: z.string(), fas: z.string(), vad: z.string() })).min(1),
-      // Passets form vissa veckor (K-515, METODER.md under Tidsschemats varianter): veckorna, en mening om passet och
-      // delarna med sina tider, med faserna som tidsschemats rader. Metodens sida och Word skriver varianten som en mening
-      // (variantensMening i standarden), och planen och kalendern visar passet de veckorna med variantens delar.
-      varianter: z.array(z.strictObject({ nar: z.string(), text: z.string(), delar: z.array(z.strictObject({ fas: z.string(), tid: z.string() })).min(2) })).min(1).optional(),
+      // Passets form vissa veckor, i vissa pass eller i ett kortare pass (K-515, METODER.md under Tidsschemats varianter):
+      // när varianten gäller, en mening om passet när den behövs och delarna med sina tider, med faserna som tidsschemats
+      // rader. Metodens sida och Word skriver varianten som en mening (variantensMening i standarden), och planen och
+      // kalendern visar passet med variantens delar när varianten gäller (variantenFor).
+      varianter: z.array(z.strictObject({ nar: z.string(), text: z.string().optional(), delar: z.array(z.strictObject({ fas: z.string(), tid: z.string() })).min(2) })).min(1).optional(),
       efter: z.string().optional(),
     }).optional(),
     steg: z.strictObject({

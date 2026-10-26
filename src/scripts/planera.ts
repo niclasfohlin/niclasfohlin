@@ -17,7 +17,7 @@
 import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
-  bytDagar, elevernasNamn, kapaVidOrd, mandagen, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
+  bytDagar, elevernasNamn, kapaVidOrd, mandagen, narensVikt, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, type Veckonamn,
   type Foljd, type Pass, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
@@ -1011,13 +1011,16 @@ function justeraText() {
 // eget sätt och visade två tidsscheman för samma pass). Har passet en tid lika lång som delarna står klockslagen.
 const rollerFor = (p: Pass) => {
   const rader = passetsRoller(plan, p, mp.passen);
-  // Den mest bestämda raden om passets plats i insatsen, och raderna om platsen i veckan.
-  const typ = (r: number) => mp.passen[r].nar.typ;
-  const iInsatsen = rader.filter((r) => typ(r) === 'pass' || typ(r) === 'sista').slice(0, 1);
-  return [...iInsatsen, ...rader.filter((r) => typ(r) === 'veckor'), ...rader.filter((r) => typ(r) === 'vecka')].map((r) => data.passen![r]);
+  // Den mest bestämda raden om passets plats i insatsen (sista, ett nummer, näst sista eller ett spann), och sedan raderna
+  // om metodens veckor och platsen i veckan, i standardens ordning (narensVikt).
+  const vikt = (r: number) => narensVikt(mp.passen[r].nar);
+  return [...rader.filter((r) => vikt(r) < 2).slice(0, 1), ...rader.filter((r) => vikt(r) >= 2)].map((r) => data.passen![r]);
 };
-// Passet med tidsschemats variant för passets vecka i metoden, som Läslistors vecka 1–3 (K-515).
-const passetFor = (p: Pass) => passetsBeskrivning(rollerFor(p), data.passet, plan.veckor[p.vecka - 1]?.innehall);
+// Passets längd: dagens klockslag när läraren har satt dem, och annars passets längd i planen.
+const passetsMinuter = (p: Pass) => { const t = passetsTid(aktiv.val, p); return t ? minuterAv(t[1]) - minuterAv(t[0]) : minuter(); };
+// Passet med tidsschemats variant för passet: Läslistors vecka 1–3, Högläsning i pars visning och Upprepad läsnings pass
+// på tio minuter (K-515, och riggens omgång 1 2026-10-26).
+const passetFor = (p: Pass) => passetsBeskrivning(rollerFor(p), data.passet, passetsLage(plan, p, passetsMinuter(p)));
 const fasFran = (tid: string) => { const m = tid.match(/^(\d+)/); return m ? Number(m[1]) : null; };
 const fasTill = (tid: string) => minuterISpann(tid)?.till ?? null;
 const goat = (vad: string, titel: string) => `data-goatcounter-click="planera:${esc(data.id)}:${vad}" data-goatcounter-title="${esc(data.titel)}: ${esc(titel)}"`;
@@ -1045,7 +1048,9 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
     ...delar.map((d, i) => {
       const s = stegFor(d.fas);
       const fraser = s?.fraser.length ? `<ul class="pl-fraser">${s.fraser.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
-      return rad(`${egna ? 'egen-' : ''}${i}`, tidFor(d.tid), d.fas, `<p>${lankad(mening(d.vad))}</p>${fraser}`);
+      // Tabellens andra kolumner, som Du säger, står med sina namn (tabellensDelar).
+      const mer = ((d as { mer?: { etikett: string; text: string }[] }).mer ?? []).map((m) => `<p><span class="pl-etikett">${esc(m.etikett)}</span> ${lankad(mening(m.text))}</p>`).join('');
+      return rad(`${egna ? 'egen-' : ''}${i}`, tidFor(d.tid), d.fas, `<p>${lankad(mening(d.vad))}</p>${mer}${fraser}`);
     }),
     // En rad utan minuter, som "Hemma, cirka 20 min": ordet före kommat i tidens spalt och resten efter delens namn.
     ...(!egna ? (data.passet?.andra ?? []).map((r, i) => { const [forst, ...rest] = r.tid.split(','); return rad(`andra-${i}`, forst.trim(), [r.fas, ...rest.map((x) => x.trim())].join(', '), `<p>${lankad(mening(r.vad))}</p>`); }) : []),
