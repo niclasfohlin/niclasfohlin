@@ -436,6 +436,10 @@ if (tsMp) {
     const prickar = s.passensNarvaro(nsam, filip, {}).flat().filter((x) => x !== 'inte').length;
     const ntext = s.sammanstallningstext({ titel: ga.titel, uppfoljning: ga.uppfoljning.rader }, npl, nsam);
     ska('eleverna som lämnar listan sparas med id, och närvaron räknas från dagen eleven kom till', lagrad.elever[1]?.fran === '2026-11-18' && !('fran' in (lagrad.elever[2] ?? {})) && JSON.stringify(lagrad.lamnade) === '[{"id":"e1","namn":"Ebba"}]' && ali.narvaro === 5 && ali.passen === undefined && filip.narvaro === 2 && filip.passen === 2 && s.narvaronText(filip, nsam) === 'Var med i 2 av 2 bockade pass.' && s.narvaronKort(ali, nsam) === 'med i 5 av 6 pass' && prickar === 2 && ntext.includes('en elev missade 1 pass'), [ali, filip, prickar, ntext]);
+    // Codex 2026-10-26: gruppens närvarorad räknar eleverna som har kunnat vara med, och prickarnas förklaring säger strecket.
+    const efterAlla = s.sammanstallning(npl, s.rensaFoljd({ gjorda: bockade, narvaro: true, elever: [{ id: 'a1', namn: 'Ali' }, { id: 'f1', namn: 'Filip', fran: npl.pass[7].datum }], franvaro: { [bockade[1]]: ['a1'] }, listan: '2026-10-28' }), '2026-12-01');
+    const efterText = s.sammanstallningstext({ titel: ga.titel, uppfoljning: ga.uppfoljning.rader }, npl, efterAlla);
+    ska('gruppens närvarorad och prickarnas förklaring med en elev som kom till senare', efterText.includes('0 av 1 elever var med i alla') && s.prickarnasText({ fran: '2026-11-16' }).endsWith('streck inte bockat eller före eleven kom till.') && s.prickarnasText({}).endsWith('streck inte bockat.') && s.rensaFoljd({ listan: '2026-10-28' }).listan === '2026-10-28' && s.rensaFoljd({ listan: 'x' }).listan === undefined, efterText);
   }
   // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): en metod med
   // nivåer har det, högst tre meningar och NIVAVALETS_LANGD tecken, och texten står ordagrant i metoden.
@@ -2434,6 +2438,35 @@ try {
   await lamna();
   const tillbaka = { lista: await elever(), besked: await el.text('#pl-toast') };
   sant('en elev som skrivs in igen efter en omladdning får tillbaka det som förts in', tillbaka.lista[1]?.id === 'e2' && (await skattningarna('e2')) === 6 && (tillbaka.besked ?? '').startsWith('Bea är tillbaka i listan, med det som förts in.'), tillbaka);
+  // Codex 2026-10-26: Ångra efter att en elev kom tillbaka tar tillbaka det sidan minns om eleven, och beskedet säger både den
+  // som togs bort och den som kom tillbaka.
+  await skriv('Ali\nSebastian Ek');
+  await lamna();
+  await skriv('Ali\nBea\nSebastian Ek');
+  await lamna();
+  await el.tryck('#pl-toast [data-toast-gor]');
+  await vanta(200);
+  await skriv('Ali\nBea\nSebastian Ek');
+  await lamna();
+  const efterAngra = await elever();
+  await skriv('Ali\nSebastian Ek');
+  await lamna();
+  await skriv('Bea\nSebastian Ek');
+  await lamna();
+  const bada = await el.text('#pl-toast');
+  await skriv('Ali\nBea\nSebastian Ek');
+  await lamna();
+  sant('Ångra efter en återkomst, och beskedet om den som togs bort och den som kom tillbaka', efterAngra[1]?.id === 'e2' && (bada ?? '').startsWith('Ali är borttagen ur elevlistan. Bea är tillbaka i listan, med det som förts in.'), [efterAngra, bada]);
+  // Verifieringen av K-559: också när läraren inte lämnar fältet innan sidan laddas om, eftersom listan sparas medan hen skriver.
+  await skriv('Ali
+Sebastian Ek', 900);
+  await el.oppna(`${PLAN}#${s.kodaVal(slutVal, { id: 'slut01' })}`);
+  await skriv('Ali
+Bea
+Sebastian Ek');
+  await lamna();
+  const utanLamna = await elever();
+  sant('en elev som tas bort utan att fältet lämnas och skrivs in igen efter en omladdning får tillbaka det som förts in', utanLamna[1]?.id === 'e2' && (await skattningarna('e2')) === 6, utanLamna);
   // Svaret gäller: frågan kommer inte igen när läraren skriver vidare i samma redigering (verifieringen 2026-10-25: frågan
   // om Dan kom tillbaka efter varje ändring i listan).
   await skriv('Ali\nVera\nSebastian Ek');

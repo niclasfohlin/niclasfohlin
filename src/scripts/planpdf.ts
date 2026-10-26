@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -214,7 +214,7 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   const narvaro = s.narvaro && e.narvaro !== null && s.gjorda > 0;
   const pass = narvaro ? passensNarvaro(s, e, franvaro) : undefined;
   p.staplar(elevensVarden(s, e), veckoetiketter(s), { hojd: 110, mitt: s.mitt, pass });
-  if (narvaro) p.text('Prickarna under veckan är passen: fylld var med, ring var inte med, streck inte bockat.', { farg: p.farg.svag, storlek: 8.5, luft: 6 });
+  if (narvaro) p.text(prickarnasText(e), { farg: p.farg.svag, storlek: 8.5, luft: 6 });
   p.rubrik('Utvecklingen');
   p.text(`${riktningText(e)}.`);
   if (narvaro) p.text(narvaronText(e, s));
