@@ -17,7 +17,7 @@
 import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
-  bytDagar, delarIFoljd, linjen, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, narensVikt, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
+  bytDagar, delarIFoljd, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, narensVikt, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
@@ -118,11 +118,14 @@ function friskaUpp() {
 function uppdateraAdressen() {
   if (aktiv.sparad || aktiv.franLank) history.replaceState(null, '', `#${kodaVal(aktiv.val, { id: aktiv.id })}`);
 }
-const harInfort = () => aktiv.foljd.gjorda.length > 0 || Object.keys(aktiv.foljd.skattning).length > 0 || mattVeckor().length > 0 || aktiv.foljd.elever.length > 0 || Object.keys(aktiv.foljd.resultat).length > 0 || !!aktiv.foljd.avstamning?.beslut || !!aktiv.foljd.utvardering?.beslut;
+// Lärarens länkar till formuläret och sammanställningen står inte i länken till planen, så de räknas som infört (Codex
+// 2026-10-26).
+const harLankar = () => Object.values(aktiv.foljd.lankar ?? {}).some((l) => !!(l?.formular || l?.sammanstallning));
+const harInfort = () => aktiv.foljd.gjorda.length > 0 || Object.keys(aktiv.foljd.skattning).length > 0 || mattVeckor().length > 0 || harLankar() || aktiv.foljd.elever.length > 0 || Object.keys(aktiv.foljd.resultat).length > 0 || !!aktiv.foljd.avstamning?.beslut || !!aktiv.foljd.utvardering?.beslut;
 // Gick det inte att spara, säger beskedet vad som håller: kopian när läraren har fört in något, annars länken.
 function sparfel() {
   if (lagringenArNyare()) visaBesked(NYARE_VERSION, { text: 'Ladda om sidan', gor: () => location.reload(), kvar: true });
-  else if (aktiv.folj && harInfort()) visaBesked('Det gick inte att spara i den här webbläsaren. Ladda ner planen som fil, så finns det du har fört in kvar.', { text: PLANKNAPPAR.laddaNer, gor: sparaKopia, kvar: true });
+  else if ((aktiv.folj && harInfort()) || harLankar()) visaBesked('Det gick inte att spara i den här webbläsaren. Ladda ner planen som fil, så finns det du har fört in kvar.', { text: PLANKNAPPAR.laddaNer, gor: sparaKopia, kvar: true });
   else visaBesked('Planen gick inte att spara i den här webbläsaren. Kopiera länken, så finns planen kvar.', { text: 'Kopiera länken', gor: () => void kopieraLanken(), kvar: true });
 }
 
@@ -945,7 +948,10 @@ const resultatfalt = (nyckel: string) => (harElever() ? `<div class="pl-resultat
 // Resultat per elev hör till uppföljningens mätningar, före, efter och vid ett visst pass eller en viss vecka, och inte till
 // det som görs varje pass, varje vecka eller varannan vecka (den kalla testaren av Gruppstärkande aktiviteter 2026-10-26: läraren
 // skattade på tre ställen).
-const medResultat = (rad: number, nyckel: string) => (['lopande', 'intervall', 'villkor'].includes(plan.uppfoljning.find((u) => u.rad === rad)?.typ ?? '') ? '' : resultatfalt(nyckel));
+// En rad som gäller en följd av veckor, som Kort utan beröring vecka 1–4, säger vad läraren gör under perioden och är ingen
+// mätning, så den har inga fält för resultat (K-559 2026-10-26).
+const periodensRad = (rad: number) => { const t = mp.uppfoljning.find((u) => u.rad === rad)?.tid; return t?.typ === 'vecka' && t.veckor.length > 1 && t.veckor.every((x, i) => i === 0 || x === t.veckor[i - 1] + 1); };
+const medResultat = (rad: number, nyckel: string) => (['lopande', 'intervall', 'villkor'].includes(plan.uppfoljning.find((u) => u.rad === rad)?.typ ?? '') || periodensRad(rad) ? '' : resultatfalt(nyckel));
 const uppfRad = (x: { nyckel: string; rad: number; datum: string; vecka: number | null }) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))} · ${x.vecka === null ? kalendervecka(isoVecka(x.datum).vecka) : esc(dagText(x.datum))}</span><p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>${medResultat(x.rad, x.nyckel)}</li>`;
 const meningsfalt = (id: string, etikett: string, attr: string, varde: string) => `<label class="pl-etikett" for="${id}">${esc(etikett)}</label><input class="pl-falt pl-brett" type="text" id="${id}" maxlength="200" ${attr} value="${esc(varde)}" /><p class="pl-hjalp">Meningen står i sammanställningen och i texten som kopieras, utan elevernas namn.</p>`;
 // Det ett avslut stryker, ur planens struket: passen efter sista passet i veckan och veckorna efter, en eller två veckor med
@@ -1119,7 +1125,7 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
 // Det metodens uppföljning gör i just det här passet, som Gruppstärkande aktiviteters gruppreflektion varannan vecka och
 // Kompissamtals uppföljning efter samtal 3, står också i rutan med passet (den kalla testaren 2026-10-26: gruppreflektionen
 // syntes bara under veckans uppföljning). Det som görs i varje pass står redan i passets delar.
-const uppfoljningIPasset = (p: Pass, oppna: Set<string>) => plan.uppfoljning.filter((u) => ['intervall', 'pass', 'sista-passet'].includes(u.typ) && u.tillfallen.some((t) => t.datum === p.datum)).map((u) => `<p class="pl-roll"><span class="pl-etikett">${esc(uppfNamn(u.rad))}</span> ${lankad(mening(data.uppfoljning.rader[u.rad].vad))}</p>${elevernasKnappar(u.rad, oppna)}`).join('');
+const uppfoljningIPasset = (p: Pass, oppna: Set<string>) => plan.uppfoljning.filter((u) => (['intervall', 'pass', 'sista-passet'].includes(u.typ) || (data.skattningar ?? []).some((x) => x.vem === 'eleverna' && x.rad === u.rad)) && u.tillfallen.some((t) => t.datum === p.datum)).map((u) => `<p class="pl-roll"><span class="pl-etikett">${esc(uppfNamn(u.rad))}</span> ${lankad(mening(data.uppfoljning.rader[u.rad].vad))}</p>${elevernasKnappar(u.rad, oppna)}`).join('');
 type PassetsPost = { namn: string; adress: string } | { slut: string; namn: string; adress: string };
 function passetsPost(p: Pass): PassetsPost | undefined {
   const b = data.bank, niva = b?.nivaer.find((n) => n.slug === aktiv.val.niva);
@@ -1294,7 +1300,9 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
     if (delarna.length) paminn = `<p class="pl-paminn pl-forra">${esc(intill ? 'Förra veckan' : planveckansNamn(plan, forraVeckan).Text)} har ${esc(uppraknat(delarna))}. <button type="button" class="pl-textknapp" data-vy="${forraVeckan.nr}">Till ${esc(intill ? 'förra veckan' : rubrikVecka(forraVeckan).toLocaleLowerCase('sv'))}</button></p>`;
   }
   // Regeln som gällde efter förra veckans kryss står överst i rutan veckan efter (K-559; Niclas godkände formen 2026-10-26).
-  const regel = aktiv.folj && nu === v.nr && forraVeckan ? regelnEfter(forraVeckan) : '';
+  // Veckan före passet som rutan visar, också när det är nästa veckas pass (Codex 2026-10-26).
+  const foreRutan = plan.veckor[rutansVecka.nr - 2];
+  const regel = aktiv.folj && nu === v.nr && foreRutan ? regelnEfter(foreRutan) : '';
   const kursvecka = data.kursveckor?.[String(rutansVecka.innehall)];
   const material = [
     ...(data.bank ? [`<a class="knapp" href="${esc(data.bank.adress)}${aktiv.val.niva ? `#${esc(aktiv.val.niva)}` : ''}" ${goat('material', 'Ta fram från planen')}>${esc(data.bank.namn)}</a>`] : []),
@@ -1558,10 +1566,10 @@ $('pl-veckan').addEventListener('click', (e) => {
   }
   if (d.matt) {
     // Metodens skattning av gruppen (K-559): ett tryck på det valda steget tar bort krysset.
-    const [m, namn] = d.matt.split('|');
+    const m = d.matt, namn = d.instrument ?? '';
     const varde = Number(knapp.textContent);
     andra(() => { const alla = aktiv.foljd.matt ?? {}; const vecka = { ...(alla[namn] ?? {}) }; if (vecka[m] === varde) delete vecka[m]; else vecka[m] = varde; aktiv.foljd.matt = { ...alla, [namn]: vecka }; });
-    fokus(`[data-matt="${m}|${namn}"][aria-label^="${varde},"]`);
+    fokus(`[data-matt="${m}"][data-instrument="${CSS.escape(namn)}"][aria-label^="${varde},"]`);
     return;
   }
   if (d.gang) {
@@ -1672,10 +1680,11 @@ $('pl-veckan').addEventListener('input', (e) => {
     aktiv.foljd.vecka = { ...aktiv.foljd.vecka, [m]: { ...(aktiv.foljd.vecka[m] ?? {}), not: text.slice(0, 200) } };
   } else if (falt.dataset.lank) {
     // Lärarens länkar till sitt formulär och sin sammanställning (K-559): bara en länk som börjar med https sparas.
-    const [namn, slag] = falt.dataset.lank.split('|') as [string, 'formular' | 'sammanstallning'];
+    const namn = falt.dataset.instrument ?? '', slag = falt.dataset.lank as 'formular' | 'sammanstallning';
     const alla = aktiv.foljd.lankar ?? {};
     const l = { ...(alla[namn] ?? {}) };
-    if (/^https:\/\/\S{4,400}$/.test(text)) l[slag] = text; else delete l[slag];
+    const lank = rensadLank(text);
+    if (lank) l[slag] = lank; else delete l[slag];
     aktiv.foljd.lankar = { ...alla, [namn]: l };
   } else if (falt.dataset.beslutsnot) {
     const slag = falt.dataset.beslutsnot as 'avstamning' | 'utvardering';
@@ -1787,7 +1796,7 @@ function skattaGruppen(g: PlanSkattning & { skala: Skala }, v: PlanVecka, s: Sam
   const sk = s.skattningar.find((x) => x.namn === g.namn);
   const varde = mattVarde(g.namn, v.mandag);
   const stegen = Array.from({ length: g.skala.till - g.skala.fran + 1 }, (_, k) => g.skala.fran + k);
-  const knappar = `<div class="pl-skala${stegen.length > 6 ? ' pl-skala-lang' : ''}" role="group" aria-label="${esc(`${g.namn}, ${g.skala.fran} till ${g.skala.till}`)}">${stegen.map((n) => `<button type="button" class="pl-skalsteg" data-matt="${esc(v.mandag)}|${esc(g.namn)}" aria-pressed="${varde === n}" aria-label="${n}, ${esc(stegetsNamn(g.skala, n).toLocaleLowerCase('sv'))}">${n}</button>`).join('')}</div>`;
+  const knappar = `<div class="pl-skala${stegen.length > 6 ? ' pl-skala-lang' : ''}" role="group" aria-label="${esc(`${g.namn}, ${g.skala.fran} till ${g.skala.till}`)}">${stegen.map((n) => `<button type="button" class="pl-skalsteg" data-matt="${esc(v.mandag)}" data-instrument="${esc(g.namn)}" aria-pressed="${varde === n}" aria-label="${n}, ${esc(stegetsNamn(g.skala, n).toLocaleLowerCase('sv'))}">${n}</button>`).join('')}</div>`;
   const namnen = `<ul class="pl-skalnamn" aria-hidden="true">${g.skala.steg.map((x) => `<li><b>${stegetsSpann(x)}</b> ${esc(x.namn)}</li>`).join('')}</ul>`;
   const grafen = sk?.varden.some((x) => x !== undefined) ? `<div class="pl-grafruta">${linjegraf(g, sk.varden, s.veckor.map(veckansNamn), { ring: varde === undefined && i >= 0 ? i : undefined, mitt: s.mitt })}</div>` : '<p class="pl-not">Linjen kommer med det första krysset.</p>';
   const reglerna = g.regler.length ? `<details class="pl-fallut" data-ruta="linjen"${oppna.has('linjen') ? ' open' : ''}><summary>Vad linjen säger</summary><ul class="pl-uppf">${g.regler.map((r) => `<li><span class="pl-etikett">${esc(uppfNamn(r.rad))}</span><p>${lankad(mening(data.uppfoljning.rader[r.rad].vad))}</p></li>`).join('')}</ul></details>` : '';
@@ -1817,7 +1826,7 @@ function elevernasKnappar(rad: number, oppna: Set<string>) {
     l.sammanstallning ? `<a class="knapp sekundar liten" href="${esc(l.sammanstallning)}" target="_blank" rel="noopener">Din sammanställning</a>` : '',
   ].filter(Boolean).join('');
   const har = !!(l.formular || l.sammanstallning);
-  const falt = aktiv.sparad ? `<details class="pl-fallut pl-lankar" data-ruta="lankar-${i}"${oppna.has(`lankar-${i}`) ? ' open' : ''}><summary>${har ? 'Dina länkar' : 'Har du kopierat formuläret? Spara dina länkar här'}</summary><label class="pl-etikett" for="pl-lank-${i}-formular">Länken till ditt formulär</label><input class="pl-falt pl-brett" type="url" inputmode="url" id="pl-lank-${i}-formular" data-lank="${esc(x.namn)}|formular" value="${esc(l.formular ?? '')}" placeholder="https://docs.google.com/forms/…" /><label class="pl-etikett" for="pl-lank-${i}-samman">Länken till din sammanställning</label><input class="pl-falt pl-brett" type="url" inputmode="url" id="pl-lank-${i}-samman" data-lank="${esc(x.namn)}|sammanstallning" value="${esc(l.sammanstallning ?? '')}" placeholder="https://docs.google.com/spreadsheets/…" /><p class="pl-hjalp">Länkarna sparas bara i den här webbläsaren och i planens fil. De står inte i länken till planen, i utskrifterna eller i texten som kopieras.</p></details>` : '';
+  const falt = aktiv.sparad ? `<details class="pl-fallut pl-lankar" data-ruta="lankar-${i}"${oppna.has(`lankar-${i}`) ? ' open' : ''}><summary>${har ? 'Dina länkar' : 'Har du kopierat formuläret? Spara dina länkar här'}</summary><label class="pl-etikett" for="pl-lank-${i}-formular">Länken till ditt formulär</label><input class="pl-falt pl-brett" type="url" inputmode="url" id="pl-lank-${i}-formular" data-lank="formular" data-instrument="${esc(x.namn)}" value="${esc(l.formular ?? '')}" placeholder="https://docs.google.com/forms/…" /><label class="pl-etikett" for="pl-lank-${i}-samman">Länken till din sammanställning</label><input class="pl-falt pl-brett" type="url" inputmode="url" id="pl-lank-${i}-samman" data-lank="sammanstallning" data-instrument="${esc(x.namn)}" value="${esc(l.sammanstallning ?? '')}" placeholder="https://docs.google.com/spreadsheets/…" /><p class="pl-hjalp">Länkarna sparas bara i den här webbläsaren och i planens fil. De står inte i länken till planen, i utskrifterna eller i texten som kopieras.</p></details>` : '';
   return `${knappar ? `<p class="pl-andra-knappar">${knappar}</p>` : ''}${falt}`;
 }
 

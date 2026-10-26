@@ -191,6 +191,7 @@ export declare function regelnGaller(r: Regel, varden: number[]): boolean;
 export declare function skalansSteg(d: MetodensTexter, skala: { fran: number; till: number; tabell: string }): Skala | null;
 export declare const stegetsNamn: (skala: Skala, x: number) => string;
 export declare const skattningensGranser: (s: { regler: Regel[] }) => number[];
+export declare const rensadLank: (x: unknown) => string | undefined;
 export declare const stegetsSpann: (x: { fran: number; till: number }) => string;
 export declare function metodensSkattningar(d: MetodensTexter): { skattningar: Skattning[]; fel: string[] };
 export declare function linjen(plan: Plan, f: Foljd, s: Skattning): { varden: (number | undefined)[]; galler: number[][] };

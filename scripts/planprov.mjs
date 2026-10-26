@@ -409,6 +409,9 @@ if (tsMp) {
     const text = s.sammanstallningstext(ginfo, gpl, sam);
     const ap = s.dokumentationstext(ginfo, gpl, gval, { minuter: 30, folj: true });
     const ord = s.skattningensText(sam, sam.skattningar[0], ginfo);
+    const lucka = s.rensaFoljd({ matt: { 'Lärarens skattning': { [mandag(0)]: 7, [mandag(1)]: 7, [mandag(3)]: 7, [mandag(4)]: 7 } } });
+    const minstRegel = g.regler.findIndex((r) => r.typ === 'minst');
+    ska('metodens skattningar: en vecka utan kryss bryter följden, länken prövas lika och det eleverna fyller i har en tid med datum', !s.linjen(gpl, lucka, g).galler[4].includes(minstRegel) && s.rensadLank("https://example.org/O'Brien") === "https://example.org/O'Brien" && s.rensadLank('javascript:alert(1)') === undefined && s.rensadLank('https://a b') === undefined && felen([{ ...vargrupp, rad: lararens.rad }]).some((x) => x.includes('behöver en tid med datum')), s.linjen(gpl, lucka, g).galler);
     ska('metodens skattningar: linjen, reglerna och texterna, utan lärarens länkar', lin.varden.slice(0, 3).join() === '7,6,5' && !lin.galler[1].length && lin.galler[2][0] === 0 && !('x' in (gfoljd.matt?.['Lärarens skattning'] ?? {})) && gfoljd.lankar?.['Vår grupp']?.formular?.startsWith('https://') && !gfoljd.lankar?.['Vår grupp']?.sammanstallning && ord.varden.startsWith('Lärarens skattning, 1 till 10: vecka 1 (v. 45): 7') && ord.regler.length === 1 && text.includes(`${ord.varden}.`) && text.includes('Det linjen sa: Linjen i Lärarens skattning nedåt två veckor i rad efter vecka 3') && !text.includes('docs.google') && ap.includes('Lärarens skattning varje vecka, 1 till 10, av gruppen') && !ap.includes('docs.google'), [lin, text, ap]);
   }
   // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): en metod med
@@ -1010,6 +1013,14 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   };
   const grupp = text(await pdf.gruppPdf(p, sm, pinfo, idag)), elev = text(await pdf.elevPdf(p, sm, 'a1', pinfo, idag, f.franvaro));
   ska('pdf:erna går att läsa (pdftotext behövs)', grupp !== null && elev !== null);
+  // Metodens skattning av gruppen i gruppens pdf (K-559): skalan med namnen, linjen och regeln i ord.
+  {
+    const ga = metod('gruppstarkande-aktiviteter');
+    const gmp = s.metodplan(ga).plan, gp = s.planera(gmp, { ...s.forval(gmp, '2026-10-26'), start: '2026-11-02' });
+    const gf = s.rensaFoljd({ matt: { 'Lärarens skattning': { [gp.veckor[0].mandag]: 7, [gp.veckor[1].mandag]: 6, [gp.veckor[2].mandag]: 5 } } });
+    const gtext = text(await pdf.gruppPdf(gp, s.sammanstallning(gp, gf, '2026-12-09'), { metod: ga.titel, grupp: '4B', mal: s.malText(ga.mal.overgripande), fragan: s.skattningsfragan(true), uppfoljning: ga.uppfoljning.rader }, '2026-12-09'));
+    ska('gruppens pdf har metodens skattning av gruppen med skalan, linjen och regeln', !!gtext && gtext.includes('Lärarens skattning') && gtext.includes('1–2 fungerar inte') && gtext.includes('Det linjen sa: Linjen i Lärarens skattning nedåt två veckor i rad efter vecka 3'), gtext?.slice(0, 500));
+  }
   if (grupp !== null && elev !== null) {
     ska('gruppens pdf: perioden, passens rad, riktningen och närvaron som på sidan', grupp.includes(s.datumspann(p.forstaPass, p.sistaPass)) && grupp.includes(s.passensRad(sm)) && grupp.includes(`${s.riktningText(sm.elever[0])}.`) && grupp.includes(s.narvaronText(sm.elever[0], sm)), grupp.slice(0, 600));
     ska('gruppens pdf: uppföljningens rader, Efter insatsen, besluten och anteckningen som i texten', s.uppfoljningensRader(p, pinfo).every((r) => grupp.includes(r)) && (!efter || grupp.includes('Efter insatsen, v.')) && grupp.includes('Fortsätt som planerat. Ska Bea få mer tid?') && grupp.includes('Går det bättre nästa vecka?') && !grupp.includes('?.'), grupp.slice(0, 600));
@@ -2004,7 +2015,7 @@ try {
       await b4.oppna(adress);
       const v4 = await b4.kor(`(() => ({ regel: document.querySelector('#pl-veckan .pl-nasta .pl-regel')?.textContent ?? '', knappar: [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-andra-knappar a')].map((a) => a.textContent + ' ' + a.getAttribute('href')) }))()`);
       sant('metodens skattningar veckan efter: regeln överst i rutan med passet, och Vår grupp med bladet och formuläret', v4.regel.includes('nedåt två veckor i rad') && v4.knappar.some((x) => x.startsWith('Bladet Vår grupp /stodundervisning/gruppstarkande-aktiviteter-blad-var-grupp.pdf')) && v4.knappar.some((x) => x.startsWith('Kopiera formuläret /vargrupp')), v4);
-      await b4.kor(`(() => { const d = document.querySelector('#pl-veckan details.pl-lankar'); d.open = true; const f = d.querySelector('[data-lank$="|formular"]'); f.value = 'https://docs.google.com/forms/d/e/prov/viewform'; f.dispatchEvent(new Event('input', { bubbles: true })); f.dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
+      await b4.kor(`(() => { const d = document.querySelector('#pl-veckan details.pl-lankar'); d.open = true; const f = d.querySelector('[data-lank="formular"]'); f.value = 'https://docs.google.com/forms/d/e/prov/viewform'; f.dispatchEvent(new Event('input', { bubbles: true })); f.dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
       await vanta(300);
       const l4 = await b4.kor(`(() => ({ knappar: [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-andra-knappar a')].map((a) => a.textContent), adress: location.hash, oppen: !!document.querySelector('#pl-veckan details.pl-lankar[open]') }))()`);
       sant('metodens skattningar: lärarens länk ger knappen Ditt formulär och står inte i länken till planen', l4.knappar.includes('Ditt formulär') && !l4.knappar.includes('Kopiera formuläret') && !l4.adress.includes('docs.google') && l4.oppen, l4);

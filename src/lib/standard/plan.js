@@ -518,6 +518,14 @@ export function skalansSteg(d, skala) {
   for (let x = skala.fran; x <= skala.till; x++) if (steg.filter((s) => x >= s.fran && x <= s.till).length !== 1) return null;
   return { fran: skala.fran, till: skala.till, tabell: skala.tabell, steg };
 }
+/**
+ * Lärarens länk till sitt formulär eller sin sammanställning, som sidan och lagringen prövar lika: en https-adress utan
+ * blanksteg, citattecken och vinkelparenteser, och annars ingen (Codex 2026-10-26: en länk med en apostrof syntes på sidan men
+ * försvann när planen öppnades igen).
+ * @param {unknown} x
+ * @returns {string | undefined}
+ */
+export const rensadLank = (x) => { const t = typeof x === 'string' ? x.trim() : ''; return /^https:\/\/[^\s<>"]{4,400}$/.test(t) ? t : undefined; };
 /** Stegets spann i siffror, "9–10", eller ett tal när steget är ett. @param {{ fran: number, till: number }} x */
 export const stegetsSpann = (x) => (x.fran === x.till ? String(x.fran) : `${x.fran}–${x.till}`);
 /** Stegets namn på skalan: "Mycket bra" för 9. @param {Skala} skala @param {number} x */
@@ -552,6 +560,7 @@ export function metodensSkattningar(d) {
       if (!s.skala) fel.push(`${vad} skattar gruppen och behöver en skala, med stegen och tabellen som säger deras namn.`);
       else if (!skala) fel.push(`${vad}: skalan ${s.skala.fran}–${s.skala.till} har inte ett namn för varje steg i "${s.skala.tabell}". Tabellens första kolumn säger stegen, som "9–10 · Mycket bra".`);
     } else if (s.skala || s.regler?.length) fel.push(`${vad} fylls i av eleverna, och planen tar inte emot svaren, så den har ingen skala och inga regler.`);
+    else if (tid?.typ === 'lopande') fel.push(`${vad} fylls i av eleverna och står i passet där det görs, så uppföljningens rad "${s.rad}" behöver en tid med datum, som varannan vecka eller vecka 4.`);
     const regler = (s.regler ?? []).flatMap((r) => {
       const regel = tolkaRegel(r.om), rr = rader.findIndex((x) => x.nar === r.rad);
       if (!regel) { fel.push(`${vad}: regeln "${r.om}" går inte att läsa. Skriv den som nedåt 2 veckor i rad, under 7 i 4 veckor utan att stiga eller minst 7 i 4 veckor.`); return []; }
@@ -568,7 +577,7 @@ export function metodensSkattningar(d) {
 
 /**
  * Linjen i metodens skattning av gruppen: värdet i varje vecka i planen, och efter varje skattad vecka reglerna som gäller,
- * på de skattade veckorna till och med den, i metodens ordning (galler, reglernas nummer). Planen visar den första, och
+ * på de skattade veckorna i följd till och med den, i metodens ordning (galler, reglernas nummer). Planen visar den första, och
  * alla regler i Vad linjen säger.
  * @param {Plan} plan
  * @param {Foljd} f
@@ -580,8 +589,12 @@ export function linjen(plan, f, s) {
   const varden = plan.veckor.map((v) => { const x = f.matt?.[s.namn]?.[v.mandag]; return skala && Number.isInteger(x) && x >= skala.fran && x <= skala.till ? x : undefined; });
   const galler = varden.map((x, i) => {
     if (x === undefined) return [];
-    const hittills = /** @type {number[]} */ (varden.slice(0, i + 1).filter((y) => y !== undefined));
-    return s.regler.flatMap((r, j) => (regelnGaller(r, hittills) ? [j] : []));
+    // Veckorna i följd till och med den, så att en vecka i planen utan kryss bryter följden, och "i rad" betyder i rad
+    // (Codex 2026-10-26). Ett lov är ingen vecka i planen och bryter den inte.
+    let fran = i;
+    while (fran > 0 && varden[fran - 1] !== undefined) fran--;
+    const iFoljd = /** @type {number[]} */ (varden.slice(fran, i + 1));
+    return s.regler.flatMap((r, j) => (regelnGaller(r, iFoljd) ? [j] : []));
   });
   return { varden, galler };
 }
@@ -1834,10 +1847,10 @@ export function rensaFoljd(f) {
   // Metodens egna skattningar per instrument och vecka, och lärarens länkar till sitt formulär och sin sammanställning, som
   // bara står i webbläsaren och i planens fil (K-559). Skalan prövas där värdet läses (linjen).
   const matt = per(g.matt, (k, v) => (text(k, 60) ? per(v, (d, x) => (arDatum(d) && Number.isInteger(x) && x >= 0 && x <= 100 ? x : undefined)) : undefined));
-  const lank = (x) => (typeof x === 'string' && /^https:\/\/[^\s<>"']{4,400}$/.test(x) ? x : undefined);
   const lankar = per(g.lankar, (k, v) => {
     if (!text(k, 60)) return undefined;
-    const l = obj(v), ut = { ...(lank(l.formular) ? { formular: l.formular } : {}), ...(lank(l.sammanstallning) ? { sammanstallning: l.sammanstallning } : {}) };
+    const l = obj(v), formular = rensadLank(l.formular), sammanstallning = rensadLank(l.sammanstallning);
+    const ut = { ...(formular ? { formular } : {}), ...(sammanstallning ? { sammanstallning } : {}) };
     return Object.keys(ut).length ? ut : undefined;
   });
   return {

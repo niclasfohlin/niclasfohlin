@@ -225,7 +225,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Metodens saker i en text, och lärarens och elevernas egna saker som inte länkas | `sakdelar`, `olankadeSaker` och `EGNA_SAKER` |
 | Metodens texter i planen | `planensInledning`, `planensTexter`, `visadeTexter`, `planensRamFel`, `rollensRad`, `rollensVeckor`, `VECKANS_RAD` och `planensCitatFel` |
 | Stödet för nivåvalet | `nivavaletsFel` och `NIVAVALETS_LANGD` |
-| Metodens egna skattningar: fältet, reglerna, skalan, linjen och texten | `metodensSkattningar`, `SKATTNINGARNAS_VEM`, `tolkaRegel`, `regelnGaller`, `skalansSteg`, `stegetsNamn`, `stegetsSpann`, `skattningensGranser`, `linjen` och `skattningensText` |
+| Metodens egna skattningar: fältet, reglerna, skalan, linjen, texten och lärarens länkar | `metodensSkattningar`, `SKATTNINGARNAS_VEM`, `tolkaRegel`, `regelnGaller`, `skalansSteg`, `stegetsNamn`, `stegetsSpann`, `skattningensGranser`, `linjen`, `skattningensText` och `rensadLank` |
 | Filnamnen på det som laddas ner | `filnamnet` |
 | Knapparnas namn för planen som fil | `PLANKNAPPAR` |
 | Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |

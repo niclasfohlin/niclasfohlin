@@ -3,6 +3,7 @@
 ## 0.21.0, 2026-10-26
 
 - `plan.js`, metodens egna skattningar (sajtens K-559; Niclas samma dag: "Ett verktyg som har en skattningskala och som ska göras på vissa tillfällen bör matchas i modulen och kunna göras där", och "Viktigt att det funkar som en egen modul du kan lägga in andra skattningar i på kommande metoder"): fältet `plan.skattningar` läses av `metodensSkattningar`, som `metodplan` kör och vars fel stoppar bygget. `tolkaRegel` och `regelnGaller` är reglerna på linjen, `skalansSteg`, `stegetsNamn` och `stegetsSpann` skalan ur metodens tabell, `skattningensGranser` gränserna som linjen ritar streckade, `linjen` värdena och reglerna vecka för vecka och `skattningensText` linjen i ord. `planera` bär skattningarna i planen, `sammanstallning` och `sammanstallningstext` har linjen, `dokumentationstext` säger metodens skattning av gruppen, `planensTexter` har skattningens text, och `rensaFoljd` håller `matt`, värdena per instrument och vecka, och `lankar`, lärarens länkar till sitt formulär och sin sammanställning. Hur delen läggs till står i REGLER.md under Metodens egna skattningar.
+- `plan.js`, efter Codex granskning samma dag: `rensadLank` prövar lärarens länk på samma sätt på sidan och i lagringen, en vecka i planen utan kryss bryter följden i `linjen`, så att "i rad" betyder i rad, och det eleverna fyller i behöver en tid med datum, så att knapparna står i ett pass.
 
 ## 0.20.0, 2026-10-26
 
