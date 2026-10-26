@@ -17,9 +17,10 @@ Gör som en lärare som planerar på riktigt:
 | Följ insatsen | Slå på Följ insatsen och skriv in dina elever (påhittade förnamn) |
 | Passen | Läs vad du gör i första passet, del för del, och i ett annat pass samma vecka |
 | Gå igenom veckorna | Använd `datum` för att vara före start, i första veckan, mitt i insatsen och efter den. Läs nästa pass, veckans fokus, materialet, uppföljningen och det som står om målet |
+| Uppföljningen | Gå med `datum` till en vecka där metoden mäter, skattar eller låter gruppen fylla i något, och gör det som planen säger där |
 | Texten till åtgärdsprogrammet | Läs den och kopiera den |
 
-Svara sedan, innan du går vidare: kan du hålla första passet i morgon genom att följa planen? Skriv vad du skulle göra i pass 1, steg för steg, bara efter planen. Var skulle du fastna? Vad saknas i planen för just den här metoden?
+Svara sedan, innan du går vidare: kan du hålla första passet i morgon genom att följa planen? Skriv vad du skulle göra i pass 1, steg för steg, bara efter planen, och i passet där metoden mäter eller gruppen fyller i något. Var skulle du fastna? Vad saknas i planen för just den här metoden?
 
 ## Steg 2: hela metoden
 

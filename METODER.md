@@ -358,8 +358,9 @@ Fälten står inte på metodens sida, i Word eller i lathunden. De ger därför 
 | `före` | veckan före planens första vecka, förbi ett lov; står under Före |
 | `efter`, `efter 4 veckor`, `efter 4–6 veckor` | veckan efter sista passet, eller så många veckor efter den; en lovvecka flyttar den till veckan efter lovet |
 | `varje pass`, `i passet`, `varje vecka` | inget datum; står i varje vecka |
-| `varannan vecka`, `var 3:e vecka` | sista passet i var andra eller tredje vecka |
-| `vecka 4`, `vecka 2 och 6`, `vecka 1–4`, `första veckan`, `sista veckan` | sista passet i de veckorna; en upprepad vecka räknas där den slutar |
+| `varannan vecka`, `var 3:e vecka` | sista passet i var andra eller tredje vecka, räknat bland veckorna med pass, så att en vecka där passet faller bort inte ger tillfällen två veckor i rad |
+| `vecka 4`, `vecka 2 och 6`, `första veckan`, `sista veckan` | sista passet i de veckorna, eller i nästa vecka med pass när veckans pass faller bort; en upprepad vecka räknas där den slutar |
+| `vecka 1–4` | en period, det läraren gör under veckorna, och ingen mätning: den står i veckorna men inte i kalendern eller bland uppföljningen i texten till åtgärdsprogrammet, och har inga fält för resultat |
 | `pass 6, 8 och 10`, `pass 13–23`, `sista passet` | de passen |
 | `sista passet efter pass 3` | sista passet, när det har ett nummer efter 3, som Kompissamtals mätning efter det sista samtalet i en längre serie |
 | `villkor` | inget datum; står under Håll koll på, för det läraren bedömer när det händer |
