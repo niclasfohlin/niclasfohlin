@@ -11,6 +11,7 @@ import {
 import { centralaVid, lasbarAdress, metodensCentrala, type Textplats } from './centrala';
 import { centraltPapper } from './centraladata';
 import { malensMening, variantensMening } from './standard/index.js';
+import { vidareTillLektion } from './standard/index.js';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
 import { delensAdress, hanvisningsdelar, type Del } from './boklankar';
@@ -3174,7 +3175,8 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   };
   const karta = kartaFor(post);
   d.inledning.forEach((s, i) => { ut.push(stycke(s)); centraltVid({ stycke: i + 1 }); filmVid({ stycke: i + 1 }); });
-  if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, d.upplagg.text));
+  // En lektions regel för att gå till nästa lektion står sist i rutan, som på sidan (K-551).
+  if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, [d.upplagg.text, d.vidare ? vidareTillLektion(d.vidare) : ""].filter(Boolean).join(" ")));
   if (d.gruppen) ut.push(...ruta(d.gruppen.rubrik, d.gruppen.text));
   if (d.principer) ut.push(...ruta(d.principer.rubrik, d.principer.text));
   const friTabell = (t: MetodData['tabeller'][number]) => {

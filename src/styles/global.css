@@ -2873,6 +2873,23 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-nivaer { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.4rem, 1fr)); max-width: 24rem; }
 .pl-nivaer .sk-niva { min-width: 0; font-size: 1rem; padding-right: 0.5rem; }
 .pl-nivaer .sk-niva[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
+/* Ljudleks enda planerare (K-551): ingångarna i nivåknapparnas form med lektionen under, och lektionerna som tunna rader
+   att välja ur, med numret, namnet och vad lektionen tränar. */
+.pl-ingangar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.pl-ingang { --niva: var(--farg-lasning); flex-direction: column; align-items: flex-start; gap: 0.1rem; min-width: 0; flex: 1 1 9rem; }
+.pl-ingang-lektion { font-weight: 400; font-size: 0.88rem; }
+.pl-ingang[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
+.pl-lektionsnamn { margin: 0.6rem 0 0.4rem; }
+.pl-lektionsfraga { margin: 0.6rem 0 0.8rem; }
+.pl-lektioner { list-style: none; margin: 0.4rem 0 0; padding: 0; border-top: 1px solid var(--farg-kant); }
+.pl-lektioner li { border-bottom: 1px solid var(--farg-kant); }
+.pl-lektionsrad { display: flex; gap: 0.7rem; align-items: flex-start; width: 100%; padding: 0.55rem 0.2rem; border: 0; background: none; color: var(--farg-text); font: inherit; text-align: left; cursor: pointer; min-height: 2.75rem; }
+.pl-lektionsrad[aria-pressed="true"] { background: var(--farg-lasning-ljus); }
+.pl-lektion-nr { flex: 0 0 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--farg-ton); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
+.pl-lektionsrad[aria-pressed="true"] .pl-lektion-nr { background: var(--farg-lasning); color: #fff; }
+.pl-lektion-text { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+.pl-lektion-namn { font-weight: 700; }
+.pl-lektion-tranar { font-size: 0.9rem; color: var(--farg-text-svag); }
 .pl-lovveckor { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .pl-lovchip { flex-direction: column; justify-content: center; gap: 0; min-height: 2.9rem; padding: 0.2rem 0.65rem; font-size: 0.88rem; line-height: 1.15; border-radius: 8px; }
 .pl-lovchip small { font-size: 0.72rem; font-weight: 400; color: var(--farg-text-svag); }

@@ -46,6 +46,10 @@ const huvud = huvudfilm(filmer);
 const centrala = metodensCentrala(d);
 // Planera insatsen (K-489): knappen och raden Din insats, för en metod som kan planeras (src/lib/insatsplan.ts).
 const kanPlaneras = planbar(d);
+// En lektion i en serie planeras i seriens enda planerare (K-551; Niclas 2026-10-26: "Ljudlek får därmed bara EN planerare
+// som är samma för alla"), så knappen och raden Din insats gäller serien.
+const serienSomPlaneras = !kanPlaneras && d.serie ? alla.find((x) => x.id === d.serie && planbar(x.data)) : undefined;
+const planeras = kanPlaneras ? { id: m.id, titel: d.titel } : serienSomPlaneras ? { id: serienSomPlaneras.id, titel: serienSomPlaneras.data.titel } : undefined;
 // En lektion har sin serie i menyn och sist på sidan, så att Hör ihop med bara visar metoder utanför serien.
 const iSerien = (x: (typeof alla)[number]) => Boolean(koppling) && (x.id === koppling!.serie.id || x.data.serie === koppling!.serie.id);
 const relaterade = alla.filter((x) => d.relaterade.includes(x.id) && !iSerien(x));
@@ -75,11 +79,11 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
         <h1>{d.titel}</h1>
         {d.undertitel && <p class="undertitel">{ejBryt(d.undertitel)}</p>}
         {/* Din insats: lärarens plan för metoden, om den finns i webbläsaren (src/scripts/insatser.ts). */}
-        {kanPlaneras && <div class="pl-din" id="pl-din" data-metod={m.id} data-titel={d.titel} hidden></div>}
+        {planeras && <div class="pl-din" id="pl-din" data-metod={planeras.id} data-titel={planeras.titel} hidden></div>}
         <p class="ingress">{ejBryt(d.ingress)}</p>
         {/* De centrala sakerna (src/lib/centrala.ts), överst så att de syns när metoden öppnas (Niclas 2026-10-14), och
             Planera insatsen, på samma plats i varje metod som kan planeras. */}
-        {(centrala.length > 0 || kanPlaneras) && <p class="metod-centrala">{centrala.map((c) => <Centralknapp c={c} metod={m.id} titel={d.titel} />)}{kanPlaneras && <a class="knapp sekundar" href={planensAdress(m.id)} data-goatcounter-click={`planera:${m.id}:metoden`} data-goatcounter-title={`${d.titel}: Planera insatsen från metodens sida`}>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</a>}</p>}
+        {(centrala.length > 0 || planeras) && <p class="metod-centrala">{centrala.map((c) => <Centralknapp c={c} metod={m.id} titel={d.titel} />)}{planeras && <a class="knapp sekundar" href={planensAdress(planeras.id)} data-goatcounter-click={`planera:${m.id}:metoden`} data-goatcounter-title={`${d.titel}: Planera insatsen från metodens sida`}>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</a>}</p>}
       </header>
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>

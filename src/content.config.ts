@@ -203,6 +203,11 @@ const metodensFalt = z.strictObject({
     serie: z.string().optional(),
     formaga: z.number().int().positive().optional(),
     tranar: z.string().optional(),
+    // vidare: när gruppen går till nästa lektion, som fortsättningen på "Gå vidare till nästa lektion när", med liten bokstav
+    // och utan punkt. Lektionens sida och Word skriver den under Så används lektionen, och seriens planerare visar den när
+    // läraren inte skattar per elev (K-551; Niclas 2026-10-26: "en mening om vad eleverna förväntas klara av och gå vidare
+    // till nästa lektion när de gör det").
+    vidare: z.string().optional(),
     // Filmerna ur metodriggen (Niclas 2026-09-30, src/lib/film.ts), i riggens format. film är huvudfilmen: den står
     // direkt efter faktarutan, och dess fyra stillbilder på sidan 1 i Word och i utskriften. filmer är högst två
     // extrafilmer, nr 2 och 3, var och en vid momentet den förklarar (efter): sist i ett avsnitt, efter en fri tabell
@@ -467,6 +472,10 @@ const metodensFalt = z.strictObject({
       // Stödet för antalet veckor när längden beror på något metoden säger, som boken i Chambers boksamtal, med planens
       // förval i veckor inom metodens period (Rimligheten 2026-10-26: fem veckor räckte inte till någon bok).
       veckoval: z.strictObject({ text, mer: text, forval: z.number().int().min(1).max(52).optional() }).optional(),
+      // En serie med en lektionsbank planeras i en enda planerare, där läraren väljer lektion vecka för vecka (K-551; Niclas
+      // 2026-10-26: "Ljudlek får därmed bara EN planerare som är samma för alla och som kan väljas lektioner i. Smidigast"):
+      // stödet för valet av ingång, som nivaval, och ingångarna, där lektion är förmågans nummer och namn ingångens namn.
+      lektionsval: z.strictObject({ text, mer: text, ingangar: z.array(z.strictObject({ lektion: z.number().int().min(1), namn: text })).min(1).max(4) }).optional(),
       // Bankens poster på planens nivå i tur och ordning, en per pass, som Problemlösnings problem ("Börja med metodens
       // problem på nivån, i ordning, ett per pass"): planen visar passets problem (de kalla testarna 2026-10-26).
       enPerPass: z.literal(true).optional(),

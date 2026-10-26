@@ -3,8 +3,9 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { forstaLedet, gruppensElever, kortnamn, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { forstaLedet, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
+import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
@@ -124,10 +125,44 @@ export interface PlanData {
   /** Metodens egna skattningar (plan.skattningar, K-559): skalan med stegens namn och reglerna ur standarden, adressen till
    * instrumentet på metodens sida, och för det eleverna fyller i bladets pdf och adressen som kopierar formuläret. */
   skattningar?: PlanSkattning[];
+  /** En serie med lektionsbank (K-551): lektionerna i bankens ordning, som veckan växlar till, och stödet för valet av
+   * ingång med ingångarna (plan.lektionsval). */
+  lektioner?: PlanLektion[];
+  lektionsval?: PlanStod & { ingangar: { lektion: number; namn: string }[] };
 }
 
 /** Ett stöd för ett val i planen (STIL.md under Stöd för ett val): metodens text och metodens rubrik med mer, med adressen. */
 export interface PlanStod { text: string; mer: { namn: string; adress: string } }
+
+/**
+ * En lektion i en serie med lektionsbank, som seriens enda planerare visar de veckor läraren har valt den (K-551; Niclas
+ * 2026-10-26: "Ljudlek får därmed bara EN planerare som är samma för alla och som kan väljas lektioner i"): passet, målet
+ * som veckan skattas mot, vad eleverna blir bättre på och regeln för att gå vidare, ur lektionens egen fil.
+ */
+export interface PlanLektion {
+  /** Förmågans nummer i banken, som lektionen har i länken och i ingångarna. */
+  nr: number;
+  id: string;
+  /** Lektionens namn utan seriens, som Rim, och förmågans namn, som Bokstävernas ljud. */
+  namn: string;
+  formaga: string;
+  sida: string;
+  /** Vad eleven tränar, som banken säger det: planen skriver det som veckans Eleverna blir bättre på. */
+  tranar?: string;
+  /** Lektionens mål, som veckan skattas mot, och målets plats på lektionens sida. */
+  mal: string;
+  malAdress?: string;
+  /** Regeln för att gå till nästa lektion (lektionens vidare), som fortsätter "Gå vidare till nästa lektion när". */
+  vidare?: string;
+  /** Lektionens period, som "Högst en vecka, tre till fem pass", och om den säger högst en vecka. */
+  period?: string;
+  hogstEnVecka: boolean;
+  passet?: PlanPasset;
+  checklista: string[];
+  checklistaRubrik?: string;
+  principer?: { rubrik: string; text: string; adress: string };
+  saker: MetodSak[];
+}
 
 export interface PlanSkattning extends Skattning {
   adress?: string;
@@ -238,6 +273,40 @@ function nivaTabellen(d: Metod['data'], id: string): PlanData['nivaTabell'] {
 }
 
 
+/**
+ * Lektionerna i en serie med lektionsbank, i bankens ordning, med det som seriens planerare visar en vecka med lektionen
+ * (K-551): passet ur lektionens tidsschema, målet, vad eleverna blir bättre på och regeln för att gå vidare. Bara den
+ * generella metoden har lektioner; en lektion planeras i seriens planerare.
+ */
+async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
+  const bank = m.data.lektionsbank;
+  if (!bank) return [];
+  const lektioner = (await publicerade('stodundervisning')).filter((x) => x.data.serie === m.id && x.data.formaga !== undefined).sort((a, b) => a.data.formaga! - b.data.formaga!);
+  return Promise.all(lektioner.map(async (l) => {
+    const ld = l.data;
+    const sida = `/stodundervisning/${l.id}`;
+    const passet = planensPass(ld, l.id);
+    return {
+      nr: ld.formaga!,
+      id: l.id,
+      namn: lektionsnamn(ld.titel),
+      formaga: bank.formagor.find((f) => f.nr === ld.formaga)?.namn ?? lektionsnamn(ld.titel),
+      sida,
+      ...(ld.tranar ? { tranar: ld.tranar } : {}),
+      mal: planensMal(l),
+      ...(ld.mal ? { malAdress: `${sida}#mal` } : {}),
+      ...(ld.vidare ? { vidare: ld.vidare } : {}),
+      ...(ld.period ? { period: ld.period } : {}),
+      hogstEnVecka: /^högst en vecka/i.test(ld.period ?? ''),
+      ...(passet ? { passet } : {}),
+      checklista: ld.checklista?.punkter ?? [],
+      ...(ld.checklista ? { checklistaRubrik: ld.checklista.rubrik } : {}),
+      ...(ld.principer ? { principer: { rubrik: ld.principer.rubrik, text: ld.principer.text, adress: `${sida}#principer` } } : {}),
+      saker: await planensSaker(l),
+    };
+  }));
+}
+
 /** Planens data ur metodens fil. */
 export async function planensData(m: Metod): Promise<PlanData> {
   const d = m.data;
@@ -270,6 +339,8 @@ export async function planensData(m: Metod): Promise<PlanData> {
   const veckostod = stodet(d.plan?.veckoval, d, m.id);
   const veckoval = veckostod && d.plan?.veckoval?.forval ? { ...veckostod, forval: d.plan.veckoval.forval } : veckostod;
   const skattningar = planensSkattningar(d, m.id);
+  const lektioner = d.plan?.lektionsval ? await planensLektioner(m) : [];
+  const ingangsstod = stodet(d.plan?.lektionsval, d, m.id);
   return {
     id: m.id,
     titel: d.titel,
@@ -312,6 +383,8 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(veckoval ? { veckoval } : {}),
     ...(d.plan?.foreVeckor ? { foreVeckor: d.plan.foreVeckor } : {}),
     ...(skattningar.length ? { skattningar } : {}),
+    ...(lektioner.length ? { lektioner } : {}),
+    ...(ingangsstod && d.plan?.lektionsval ? { lektionsval: { ...ingangsstod, ingangar: d.plan.lektionsval.ingangar } } : {}),
   };
 }
 
@@ -364,6 +437,8 @@ function stodet(n: { text: string; mer: string } | undefined, d: Metod['data'], 
     // läsnings Ett pass på 15 minuter).
     [d.tidsschema?.rubrik, passetsAnkare(d)],
     [d.gruppen?.rubrik, 'gruppen'], [d.principer?.rubrik, 'principer'],
+    // Lektionsbanken i en serie, där ingångarna står (K-551), med avsnittets ankare i Lektionsbank.astro.
+    [d.lektionsbank?.rubrik, 'lektionsbank'],
     ...(d.ramar?.ramar ?? []).map((r, i): [string, string] => [r.rubrik, ramAnkare[i]]),
   ];
   const traff = rubriker.find(([r, a]) => !!a && r?.trim() === n.mer.trim());
@@ -414,9 +489,18 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     if (!x.adress) fel.push(`plan.skattningar: "${x.namn}" är inget blad i metoden. Skriv bladets namn som det står efter "Blad: ", som Lärarens skattning.`);
     if (x.vem === 'eleverna' && !x.formular) fel.push(`plan.skattningar: bladet "${x.namn}" fylls i av eleverna och har inget formulär (fältet google på bladet), så planen kan inte leda till det.`);
   }
-  for (const falt of ['nivaval', 'langdval', 'veckoval'] as const) {
+  for (const falt of ['nivaval', 'langdval', 'veckoval', 'lektionsval'] as const) {
     const n = m.data.plan?.[falt];
     if (n && !stodet(n, m.data, m.id)) fel.push(`plan.${falt}.mer säger "${n.mer}", som inte är en tabell, ett avsnitt eller en ram i metoden. Skriv rubriken som den står i metoden, som Så skiljer sig nivåerna.`);
+  }
+  // En serie med lektionsbank (K-551): stödet för valet av ingång, ingångar till lektioner som finns och varje lektions
+  // regel för att gå vidare, som standarden prövar (lektionsvaletsFel).
+  if (m.data.plan?.lektionsval) {
+    fel.push(...lektionsvaletsFel(m.data));
+    const lektioner = await planensLektioner(m);
+    if (!lektioner.length) fel.push('plan.lektionsval gäller en serie med lektionsbank och lektioner, och metoden har inga.');
+    for (const i of m.data.plan.lektionsval.ingangar) if (!lektioner.some((l) => l.nr === i.lektion)) fel.push(`plan.lektionsval har ingången "${i.namn}" till lektion ${i.lektion}, som serien inte har.`);
+    for (const l of (await publicerade('stodundervisning')).filter((x) => x.data.serie === m.id)) for (const f of lektionsvaletsFel(l.data)) fel.push(`${l.id}: ${f}`);
   }
   if (m.data.plan?.enPerPass && !(harTaFram(m, 'texter') || harTaFram(m, 'problem'))) fel.push('plan.enPerPass gäller en metod med en bank, där planen visar passets post.');
   // Ett namn som ser ut som en sak i metoden men inte är någon av dem blir ingen länk i planen (K-493).

@@ -38,6 +38,7 @@ import type { MetodData } from '../lib/metod';
 import { ejBryt, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { site } from '../data/site';
 import { malensMening, variantensMening } from '../lib/standard/index.js';
+import { vidareTillLektion } from '../lib/standard/index.js';
 import { materialAttribut } from '../lib/material';
 import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
@@ -335,7 +336,8 @@ const meny = [
   {d.inledning.map((s, i) => <><p>{s}</p><Centralrad saker={centralaVid(d, { stycke: i + 1 })} metod={id} titel={d.titel} /><Filmruta filmer={vid({ stycke: i + 1 })} titel={d.titel} /></>)}
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
-  {d.upplagg && <div class="m-ruta" id="upplagg"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{d.upplagg.text}</p></div>}
+  {/* En lektions regel för att gå till nästa lektion står sist i rutan, som i Word och i seriens planerare (K-551). */}
+  {d.upplagg && <div class="m-ruta" id="upplagg"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{[d.upplagg.text, d.vidare ? vidareTillLektion(d.vidare) : ""].filter(Boolean).join(" ")}</p></div>}
   {d.gruppen && <div class="m-ruta" id="gruppen"><h2 class="kicker">{d.gruppen.rubrik}</h2><p>{d.gruppen.text}</p></div>}
   {d.principer && <div class="m-ruta" id="principer"><h2 class="kicker">{d.principer.rubrik}</h2><p>{d.principer.text}</p></div>}
 

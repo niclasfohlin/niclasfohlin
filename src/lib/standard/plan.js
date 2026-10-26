@@ -314,6 +314,7 @@ export const planensTexter = (d) => [
   ...(d.plan?.nivaval ? [/** @type {[string, string]} */ (['Planens nivåval', d.plan.nivaval.text])] : []),
   ...(d.plan?.langdval ? [/** @type {[string, string]} */ (['Planens längdval', d.plan.langdval.text])] : []),
   ...(d.plan?.veckoval ? [/** @type {[string, string]} */ (['Planens veckoval', d.plan.veckoval.text])] : []),
+  ...(d.plan?.lektionsval ? [/** @type {[string, string]} */ (['Planens lektionsval', d.plan.lektionsval.text])] : []),
   ...(d.plan?.skattningar ?? []).flatMap((x) => (x.text ? [/** @type {[string, string]} */ ([`Planens skattning "${x.namn}"`, x.text])] : [])),
 ];
 
@@ -481,6 +482,55 @@ function stodetsFel(falt, n, saknas) {
  */
 export function nivavaletsFel(d, harNivaer = (d.nivaer ?? []).length >= 2) {
   return stodetsFel('nivaval', d.plan?.nivaval, harNivaer ? 'Metoden har nivåer, och planen har då ett stöd för nivåvalet i plan.nivaval: ett citat ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, och i mer metodens tabell eller avsnitt med resten (STIL.md under Stöd för ett val).' : '');
+}
+
+// ---------- Lektionerna i en serie ----------
+// En serie med en lektionsbank, som Ljudlek i grupp, har en enda planerare, där läraren väljer lektion vecka för vecka
+// (sajtens K-551; Niclas 2026-10-26: "Ljudlek får därmed bara EN planerare som är samma för alla och som kan väljas
+// lektioner i. Smidigast"). Veckan visar den valda lektionens pass, mål och regel för att gå vidare, och efter veckan
+// frågar planen om gruppen tar samma lektion igen eller nästa.
+
+/** Snittet i veckans skattning mot lektionens mål som planen föreslår nästa lektion över (Niclas samma kväll: "När snittet
+ * når över 4 kan man rekommendera att gå till nästa lektion"). */
+export const LEKTIONENS_GRANS = 4;
+
+/**
+ * Lektionens regel för att gå till nästa lektion som en mening, på lektionens sida, i Word och i planen.
+ * @param {string} vidare
+ * @returns {string}
+ */
+export const vidareTillLektion = (vidare) => `Gå vidare till nästa lektion när ${vidare.trim()}.`;
+
+/**
+ * Stödet för valet av ingång och lektionens regel: plan.lektionsval har ett stöd som nivåvalet och ingångar till olika
+ * lektioner, och en lektions vidare fortsätter "Gå vidare till nästa lektion när", med liten bokstav och utan punkt.
+ * Sajten prövar att ingångarnas lektioner finns, eftersom standarden inte läser seriens andra filer.
+ * @param {{ plan?: { lektionsval?: { text?: string, ingangar?: { lektion: number, namn: string }[] } }, vidare?: string }} d
+ * @returns {string[]}
+ */
+export function lektionsvaletsFel(d) {
+  const fel = [...stodetsFel('lektionsval', d.plan?.lektionsval, '')];
+  const ing = d.plan?.lektionsval?.ingangar ?? [];
+  if (new Set(ing.map((x) => x.lektion)).size !== ing.length) fel.push('plan.lektionsval har två ingångar till samma lektion.');
+  if (d.vidare && !/^\p{Ll}/u.test(d.vidare.trim())) fel.push('Lektionens vidare är fortsättningen på "Gå vidare till nästa lektion när", med liten bokstav först.');
+  if (d.vidare && /[.!?]\s*$/.test(d.vidare)) fel.push('Lektionens vidare slutar utan punkt, eftersom sidan skriver "Gå vidare till nästa lektion när …".');
+  return fel;
+}
+
+/**
+ * Planens förslag efter en vecka med en lektion: nästa lektion när snittet av veckans skattningar mot lektionens mål är över
+ * LEKTIONENS_GRANS, och samma lektion igen annars. En lektion som tar högst en vecka, som Rim, föreslår nästa, eftersom
+ * metoden säger så. Utan skattning finns inget förslag, och planen visar lektionens regel i stället.
+ * @param {number[]} varden veckans skattningar från 1 till 5, per elev eller för gruppen
+ * @param {boolean} [hogstEnVecka]
+ * @returns {{ forslag: 'nasta' | 'upprepa' | null, snitt: number | null }}
+ */
+export function lektionensForslag(varden, hogstEnVecka = false) {
+  const v = varden.filter((x) => Number.isFinite(x) && x >= 1 && x <= 5);
+  const snitt = v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+  if (hogstEnVecka) return { forslag: 'nasta', snitt };
+  if (snitt === null) return { forslag: null, snitt };
+  return { forslag: snitt > LEKTIONENS_GRANS ? 'nasta' : 'upprepa', snitt };
 }
 /**
  * Passets längder att välja i planen och förvalet, ur faktarutans spann (sajtens K-564; Niclas 2026-10-26: "Lite konstigt
@@ -1594,6 +1644,20 @@ export function nastaObockade(plan, datum, gjort) {
 export const LANGSTA = 200;
 
 /**
+ * Veckornas lektioner i en serie (K-551): förmågans nummer för varje vecka i planen, i ordning, och 0 för en vecka utan
+ * vald lektion. Ett värde som inte är ett heltal från 0 till 99 blir 0, och nollorna sist tas bort, så att samma val ger
+ * samma länk.
+ * @param {unknown} lektioner
+ * @returns {number[]}
+ */
+export function rentaLektioner(lektioner) {
+  if (!Array.isArray(lektioner)) return [];
+  const ut = lektioner.slice(0, 2 * LANGSTA).map((x) => (Number.isInteger(x) && x >= 0 && x <= 99 ? x : 0));
+  while (ut.length && !ut[ut.length - 1]) ut.pop();
+  return ut;
+}
+
+/**
  * Valen som länk: allt som avgör planen, lärarens eget mål när det finns och planens id, men aldrig gruppens eller
  * elevernas namn. Länken står efter # och skickas därför aldrig till servern eller till besöksstatistiken.
  * @param {Val} val
@@ -1602,6 +1666,8 @@ export const LANGSTA = 200;
 export function kodaVal(val, extra = {}) {
   const delar = [`s=${val.start}`, `d=${[...val.dagar].sort().join('')}`, `l=${val.langd}`];
   if (val.niva) delar.push(`n=${val.niva}`);
+  const lektioner = rentaLektioner(val.lektioner);
+  if (lektioner.length) delar.push(`k=${lektioner.join('.')}`);
   if (val.borja && val.borja > 1) delar.push(`b=${val.borja}`);
   if (val.minuter) delar.push(`m=${val.minuter}`);
   if (val.lov?.length) delar.push(`lov=${[...val.lov].sort().join('.')}`);
@@ -1655,6 +1721,7 @@ export function lasVal(hash) {
     flytta: Object.fromEntries(punkter('f').map((x) => x.split('~')).filter(([a, b]) => arDatum(a) && arDatum(b))),
     stryk: punkter('x').filter(arDatum),
     ...(/^[a-z0-9-]{1,30}$/.test(niva) ? { niva } : {}),
+    ...(rentaLektioner(punkter('k').map(Number)).length ? { lektioner: rentaLektioner(punkter('k').map(Number)) } : {}),
     ...(Number.isInteger(borja) && borja > 1 && borja <= LANGSTA ? { borja } : {}),
     ...(Number.isInteger(minuter) && minuter >= 5 && minuter <= 240 ? { minuter } : {}),
     ...(Object.keys(tider).length ? { tider } : {}),
@@ -1923,7 +1990,7 @@ export const skattningenText = (vem, varjeVecka = true) => `skattning${varjeVeck
  * @param {{ titel: string, undertitel?: string, adress: string, mal?: string, steg?: string[], uppfoljning: { nar: string }[], nivaNamn?: string }} info
  * @param {Plan} plan
  * @param {Val} val
- * @param {{ minuter: number, genomforda?: number, folj?: boolean, utvardering?: { beslut?: string, not?: string }, elever?: { namn: string }[], pagar?: boolean }} o utvärderingen och eleverna: anledningen när insatsen avslutades tidigare, utan elevernas namn
+ * @param {{ minuter: number, genomforda?: number, folj?: boolean, utvardering?: { beslut?: string, not?: string }, elever?: { namn: string }[], pagar?: boolean, lektioner?: { namn: string, datum: string[] }[], lektionerSedan?: boolean }} o utvärderingen och eleverna: anledningen när insatsen avslutades tidigare, utan elevernas namn; i en serie de valda lektionerna med passens datum, och om fler väljs sedan
  */
 export function dokumentationstext(info, plan, val, o) {
   const rader = [];
@@ -1951,7 +2018,12 @@ export function dokumentationstext(info, plan, val, o) {
     else grupper.push({ steg, datum: [p.datum] });
   }
   const innehall = grupper.filter((g) => g.steg !== null && info.steg?.[g.steg]).map((g) => `${veckornaIPlanen(String(info.steg?.[/** @type {number} */ (g.steg)]), plan.borja).replace(/[.;]\s*$/, '')} (${kalenderveckornaFor(g.datum)})`);
-  if (innehall.length) rader.push(`Eleven arbetar med: ${innehall.join('; ')}.`);
+  // I en serie med lektioner vecka för vecka (K-551) är det lektionerna som är valda, och de efter väljs efter vad gruppen
+  // klarar, så texten säger inte lektioner som inte är valda.
+  if (o.lektioner) {
+    const valda = o.lektioner.map((g) => `${g.namn} (${kalenderveckornaFor(g.datum)})`);
+    rader.push(`Eleven arbetar med: ${valda.length ? `${valda.join('; ')}. ` : ''}${o.lektionerSedan ? `${valda.length ? 'Lektionerna efter' : 'Lektionerna'} väljs vecka för vecka efter vad gruppen klarar.` : ''}`.trim());
+  } else if (innehall.length) rader.push(`Eleven arbetar med: ${innehall.join('; ')}.`);
   // Uppföljningens rader, utom villkoren utan datum, som läraren bedömer när det händer.
   const tider = plan.uppfoljning.filter((u) => (u.tillfallen.length || u.typ !== 'villkor') && u.rad !== gruppens?.rad && !u.period).map((u) => uppfoljningensRad(plan, info, u));
   if (tider.length) rader.push(`Uppföljning: ${tider.join('. ')}.`);
@@ -2430,13 +2502,13 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number }} Metodplan
- * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
+ * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, lektionsval?: { text: string, mer: string, ingangar?: { lektion: number, namn: string }[] }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'nastSista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {PassensNar | { typ: 'minuter', minuter: number } | { typ: 'vecka', plats: number | 'sista' | 'ovriga', veckor: { fran: number, till: number } } | { typ: 'sista', veckor: { fran: number, till: number } }} VariantensNar
  * @typedef {{ nr?: number, sista?: boolean, nastSista?: boolean, vecka?: number, plats?: number, sistIVeckan?: boolean, minuter?: number }} PassetsLage
- * @typedef {{ start: string, dagar: number[], langd: number, niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
+ * @typedef {{ start: string, dagar: number[], langd: number, lektioner?: number[], niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
  * @typedef {{ nr: number, datum: string, vecka: number, steg?: number | null, flyttatFran?: string }} Pass
  * @typedef {{ nr: number, innehall: number, igen: boolean, mandag: string, vecka: { ar: number, vecka: number }, pass: number[], bortfall: { datum: string, varfor: 'helgdag' | 'installt', namn?: string }[], steg?: number | null }} PlanVecka
  * @typedef {{ typ: 'nedat', veckor: number } | { typ: 'under', grans: number, veckor: number } | { typ: 'minst', grans: number, veckor: number }} Regel

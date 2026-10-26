@@ -17,8 +17,8 @@ import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
 
-interface Props { data: PlanData; lektionskort: Lektionskort[]; antal: number; snabbmall?: { rubrik: string; period: string } }
-const { data, lektionskort, antal, snabbmall } = Astro.props;
+interface Props { data: PlanData; lektionskort: Lektionskort[]; lektionernasKort?: Record<number, Lektionskort[]>; antal: number; snabbmall?: { rubrik: string; period: string } }
+const { data, lektionskort, lektionernasKort = {}, antal, snabbmall } = Astro.props;
 // Raden om modulen längst ned: namnet och versionen, att den är en beta, och mejlet till Niclas med metoden och versionen i
 // ämnet (Niclas 2026-10-24: "skicka mail till mig om något inte funkar").
 const mejl = `mailto:${site.epost}?subject=${encodeURIComponent(`${PLANERA.namn} ${PLANERA.version}: ${data.titel}`)}`;
@@ -155,6 +155,18 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
                 {data.nivaval && <StodForValet id="pl-nivastod" stod={data.nivaval} metod={data} slag="nivastod" vad="nivåvalet" />}
               </fieldset>
             )}
+            {/* En serie med lektionsbank (K-551): ingången är vecka 1:s lektion, och sedan väljs lektionen vecka för vecka.
+                Knapparna har nivåknapparnas form, med ingångens namn och lektionen under (Opus och Sonnet 2026-10-26). */}
+            {data.lektionsval && data.lektioner && (
+              <fieldset class="pl-rad">
+                <legend class="pl-etikett">Var börjar gruppen?</legend>
+                <div class="pl-ingangar" id="pl-ingangar">
+                  {data.lektionsval.ingangar.map((i) => <button type="button" class="sk-niva pl-ingang" data-ingang={i.lektion} aria-pressed="false" data-goatcounter-click={`planera:${data.id}:ingang-${i.lektion}`} data-goatcounter-title={`${data.titel}: ingången ${i.namn}`}><span>{i.namn}</span><span class="pl-ingang-lektion">Lektion {i.lektion} · {data.lektioner!.find((l) => l.nr === i.lektion)?.namn}</span></button>)}
+                </div>
+                <p class="pl-hjalp">Ingången är lektionen i vecka 1. Efter varje vecka väljer du om gruppen tar samma lektion igen eller nästa.</p>
+                <StodForValet id="pl-ingangsstod" stod={data.lektionsval} metod={data} slag="ingangsstod" vad="ingången" />
+              </fieldset>
+            )}
             <div class="pl-rad">
               <label class="pl-etikett" for="pl-namn">Gruppens namn, om du vill</label>
               <input class="pl-falt" type="text" id="pl-namn" maxlength="40" autocomplete="off" />
@@ -210,6 +222,7 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
     <div class="pl-filer" id="pl-filer" hidden>
       {snabbmall && <a class="knapp sekundar" data-fil="snabbmall" href={`/stodundervisning/${data.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${data.id}-snabbmall`} data-goatcounter-title={`${data.titel}: ${snabbmall.rubrik}, bladet`} data-namn={snabbmallensNamn}><span data-direkt={`Skriv ut ${snabbmallensNamn}`}>{stor(snabbmallensNamn)} som pdf</span></a>}
       {lektionskort.map((k, i) => <span class="pl-fil" data-fil={`lektionskort-${i + 1}`}><Lektionskortknapp k={k} titel={data.titel} klass="knapp sekundar" /></span>)}
+      {Object.entries(lektionernasKort).flatMap(([nr, kort]) => kort.map((k, i) => <span class="pl-fil" data-fil={`lektion-${nr}-kort-${i + 1}`}><Lektionskortknapp k={k} titel={data.lektioner?.find((l) => String(l.nr) === nr)?.namn ?? data.titel} klass="knapp sekundar" /></span>))}
       {data.harLathund && <a class="knapp sekundar" data-fil="lathund" href={`${data.sida}/lathund`}>Öppna lathunden</a>}
     </div>
     <div class="pl-toast" id="pl-toast" role="status" aria-live="polite" hidden></div>

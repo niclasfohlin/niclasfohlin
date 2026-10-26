@@ -274,6 +274,17 @@ if (tsMp) {
   // (buggjakten 2026-10-25).
   ska('en avstämning i en vecka som planen inte längre har står inte i sammanställningen', s.sammanstallning(kort, { avstamning: { beslut: 'justera', not: 'Fler ledtrådar' } }, '2026-11-25').avstamning === null && s.sammanstallning(s.planera(tsMp, { ...val, slut: 12, mitt: 3 }), { avstamning: { beslut: 'justera' } }, '2026-11-25').avstamning?.beslut === 'justera');
   ska('länken bär slutet', s.lasVal(`#${s.kodaVal({ ...val, slut: 9 })}`).val.slut === 9 && s.lasVal('#s=2026-11-02&d=135&l=6&e=2026-10-01').val.slut === undefined && s.lasVal('#s=2026-11-02&d=135&l=6&e=0').val.slut === undefined);
+  // En serie med lektionsbank (K-551): veckornas lektioner i länken, förslaget efter veckan, spärren och texten till
+  // åtgärdsprogrammet. Prövat åt båda hållen.
+  ska('veckornas lektioner i länken', s.lasVal(`#${s.kodaVal({ ...val, lektioner: [3, 3, 0, 4, 0, 0] })}`).val.lektioner.join() === '3,3,0,4' && s.kodaVal({ ...val, lektioner: [0, 0] }) === s.kodaVal(val) && s.rentaLektioner([1, 'x', 2.5, -1, 100, 4]).join() === '1,0,0,0,0,4' && s.lasVal('#s=2026-11-02&d=135&l=6&k=a.3').val.lektioner.join() === '0,3', s.lasVal(`#${s.kodaVal({ ...val, lektioner: [3, 3, 0, 4] })}`).val);
+  ska('förslaget efter en vecka med en lektion: nästa över 4, annars samma, och nästa när lektionen tar högst en vecka', s.lektionensForslag([5, 4, 5]).forslag === 'nasta' && s.lektionensForslag([4, 4, 5, 3]).forslag === 'upprepa' && s.lektionensForslag([4]).forslag === 'upprepa' && s.lektionensForslag([]).forslag === null && s.lektionensForslag([], true).forslag === 'nasta' && s.lektionensForslag([2], true).forslag === 'nasta' && Math.abs(s.lektionensForslag([5, 4]).snitt - 4.5) < 1e-9, s.lektionensForslag([5, 4, 5]));
+  ska('spärren för ingången och lektionens regel åt båda hållen', !s.lektionsvaletsFel({ plan: { lektionsval: { text: 'Börja i den första förmågan där fler än hälften inte klarar uppgiften.', mer: 'x', ingangar: [{ lektion: 1, namn: 'A' }, { lektion: 3, namn: 'B' }] } }, vidare: 'dagens elever klarar steg 4 två pass i följd' }).length && s.lektionsvaletsFel({ plan: { lektionsval: { text: 'x', mer: 'x', ingangar: [{ lektion: 1, namn: 'A' }, { lektion: 1, namn: 'B' }] } } }).length === 1 && s.lektionsvaletsFel({ vidare: 'Dagens elever klarar det' }).length === 1 && s.lektionsvaletsFel({ vidare: 'dagens elever klarar det.' }).length === 1 && s.lektionsvaletsFel({ plan: { lektionsval: { text: 'En. Två. Tre. Fyra.', mer: 'x', ingangar: [] } } }).length === 1 && s.vidareTillLektion(' alla klarar det ') === 'Gå vidare till nästa lektion när alla klarar det.', s.lektionsvaletsFel({ vidare: 'Dagens elever klarar det' }));
+  {
+    const lp = s.planera(tsMp, val);
+    const datum = lp.pass.slice(0, 6).map((x) => x.datum);
+    const text = s.dokumentationstext({ titel: 'Ljudlek i grupp', adress: 'niclasfohlin.se/stodundervisning/ljudlek-i-grupp', uppfoljning: [] }, lp, val, { minuter: 30, lektioner: [{ namn: 'Första ljudet', datum: datum.slice(0, 3) }, { namn: 'Bokstavsgympa', datum: datum.slice(3) }], lektionerSedan: true });
+    ska('texten till åtgärdsprogrammet säger de valda lektionerna och att resten väljs vecka för vecka', text.includes('Eleven arbetar med: Första ljudet (v. 45); Bokstavsgympa (v. 46). Lektionerna efter väljs vecka för vecka efter vad gruppen klarar.'), text);
+  }
   // Insatsen är slut när sista passet har varit, och avslutad av läraren från sista passets dag eller av sig själv två veckor
   // efter sista passet, också efter en förlängning, tills läraren öppnar den igen (Niclas 2026-10-25).
   ska('insatsen är slut efter sista passets dag, också när läraren har avslutat den samma dag', !s.insatsenSlut('2026-11-20', '2026-11-20') && s.insatsenSlut('2026-11-20', '2026-11-21') && !s.insatsenSlut(undefined, '2026-11-21'));
@@ -2139,6 +2150,35 @@ try {
     // Metodens egna skattningar (K-559): Lärarens skattning från 1 till 10 vid Skatta gruppen, med linjen och regeln efter
     // krysset, regeln överst i rutan med passet veckan efter, och Vår grupp i passet med bladet, formuläret och lärarens
     // länk, som inte står i länken till planen.
+    // Ljudleks enda planerare (K-551; Niclas 2026-10-26): ingången är vecka 1:s lektion, veckan byter innehåll efter vald
+    // lektion, frågan efter veckan sätter nästa veckas lektion, och skattningen mot lektionens mål föreslår nästa över 4.
+    if (m.id === 'ljudlek-i-grupp') {
+      const lj = async (js) => b.kor(js);
+      await b.tryck('#pl-ingangar [data-ingang="3"]');
+      await vanta(200);
+      sant('Ljudlek: ingången är vecka 1:s lektion, och länken bär den', (await lj(`document.querySelector('#pl-ingangar [data-ingang="3"]').getAttribute('aria-pressed')`)) === 'true' && (await lj('location.hash')).includes('k=3'), await lj('location.hash'));
+      // Vecka 3 är i dag (18 november): utan vald lektion frågar rutan efter den.
+      const fraga = await lj(`document.querySelector('#pl-veckan .pl-lektionsfraga')?.textContent ?? ''`);
+      sant('Ljudlek: en vecka utan vald lektion frågar efter den', fraga.includes('Vilken lektion tar ni vecka 3?'), fraga);
+      await b.tryck('#pl-veckan .pl-lektionsfraga [data-valj-lektion="3|4"]');
+      await vanta(250);
+      const v3 = await lj(`(() => ({ rubrik: document.getElementById('pl-veckan-rubrik')?.textContent ?? '', delar: [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-delnamn')].map((x) => x.textContent), riktning: document.querySelector('#pl-veckan .pl-elevmal p')?.textContent ?? '', fraga: document.querySelector('#pl-veckan .pl-lektionen-efter .pl-fraga')?.textContent ?? '', knappar: [...document.querySelectorAll('#pl-veckan .pl-lektionen-efter .pl-andra-knappar button')].map((x) => x.textContent), hash: location.hash }))()`);
+      const lektion4 = metod('ljudlek-bokstavsgympa');
+      sant('Ljudlek: veckan visar lektionens namn, pass, riktning och frågan efter veckan', v3.rubrik === 'Vecka 3 · Bokstavsgympa' && lektion4.tidsschema.rader.filter((r) => /^\d/.test(r.tid)).every((r) => v3.delar.includes(r.fas)) && v3.riktning.startsWith('Att ') && v3.fraga === 'Upprepa lektionen eller välj ny för vecka 4?' && v3.knappar.join('|') === 'Upprepa Bokstavsgympa|Nästa: Smaka på ljud' && v3.hash.includes('k=3.0.4'), v3);
+      await b.tryck('#pl-veckan .pl-lektionen-efter .pl-andra-knappar [data-valj-lektion="4|5"]');
+      await vanta(250);
+      sant('Ljudlek: Nästa sätter nästa veckas lektion', (await lj('location.hash')).includes('k=3.0.4.5') && (await lj(`document.getElementById('pl-toast')?.textContent ?? ''`)).includes('Vecka 4 tar Smaka på ljud.'), await lj('location.hash'));
+      // Skattningen mot lektionens mål: gruppen 5 ger förslaget nästa lektion som den fyllda knappen.
+      await lj(`document.getElementById('pl-folj').click()`);
+      await vanta(250);
+      const malet = await lj(`document.querySelector('#pl-skatta .pl-maltext')?.textContent ?? ''`);
+      await b.tryck('#pl-skatta [data-steg="5"]');
+      await vanta(250);
+      const forslag = await lj(`(() => ({ text: document.querySelector('#pl-veckan .pl-lektionen-efter')?.textContent ?? '', fylld: [...document.querySelectorAll('#pl-veckan .pl-lektionen-efter .pl-andra-knappar button')].filter((x) => !x.classList.contains('sekundar')).map((x) => x.textContent) }))()`);
+      sant('Ljudlek: skattningen mot lektionens mål, och nästa lektion föreslås över 4', malet.includes(s.malText(lektion4.mal.overgripande).replace(/\.$/, '')) && forslag.text.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && forslag.fylld.join() === 'Nästa: Smaka på ljud', { malet, forslag });
+      await lj(`document.getElementById('pl-folj').click()`);
+      await vanta(150);
+    }
     if (m.id === 'gruppstarkande-aktiviteter') {
       await b.kor(`document.getElementById('pl-folj').click()`);
       await vanta(200);
