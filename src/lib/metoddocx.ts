@@ -10,7 +10,7 @@ import {
 } from 'docx';
 import { centralaVid, lasbarAdress, metodensCentrala, type Textplats } from './centrala';
 import { centraltPapper } from './centraladata';
-import { malensMening, variantensMening } from './standard/index.js';
+import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening } from './standard/index.js';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
 import { delensAdress, hanvisningsdelar, type Del } from './boklankar';
@@ -3288,8 +3288,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   if (d.progression) {
     ut.push(h2(d.progression.rubrik));
     if (d.progression.text) ut.push(stycke(d.progression.text, { hallIhop: true }));
-    // En kort kursplan hålls på en sida; en lång får bryta, rubrikraden upprepas.
-    ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll'], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll]), [1700, 4000, BREDD - 5700], { hallIhop: d.progression.rader.length <= 6 }));
+    // En kort kursplan hålls på en sida; en lång får bryta, rubrikraden upprepas. Den fjärde kolumnen säger vad eleverna
+    // blir bättre på och när gruppen går vidare, som på sidan (K-572, standarden).
+    const elevernas = harElevernasKolumn(d);
+    ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll', ...(elevernas ? [ELEVERNAS_KOLUMN] : [])], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll, ...(elevernas ? [elevernasCell(r)] : [])]), elevernas ? [1350, 2800, 2700, BREDD - 6850] : [1700, 4000, BREDD - 5700], { hallIhop: d.progression.rader.length <= 6 }));
     filmVid({ avsnitt: 'progression' });
   }
   if (d.uppfoljning) {

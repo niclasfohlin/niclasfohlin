@@ -304,7 +304,7 @@ export const planensInledning = (text, utan = []) => meningarna(text).filter((m)
  */
 export const planensTexter = (d) => [
   ...(d.uppfoljning?.rader ?? []).map((r) => /** @type {[string, string]} */ ([`Uppföljningens rad "${r.nar}"`, r.vad])),
-  ...(d.progression?.rader ?? []).flatMap((r) => [r.fokus, r.roll, r.led].filter(Boolean).map((t) => /** @type {[string, string]} */ ([`Progressionens rad "${r.vecka}"`, t]))),
+  ...(d.progression?.rader ?? []).flatMap((r) => [r.fokus, r.roll, r.led, r.eleverna, r.vidare ? vidareMening(r.vidare) : undefined].filter(Boolean).map((t) => /** @type {[string, string]} */ ([`Progressionens rad "${r.vecka}"`, t]))),
   ...(d.checklista?.punkter ?? []).map((p) => /** @type {[string, string]} */ (['Checklistan', p])),
   ...(d.plan?.passen ?? []).flatMap((p) => (p.text ? [/** @type {[string, string]} */ ([`Planens pass "${p.nar}"`, p.text])] : [])),
   ...(d.plan?.fore ?? []).map((t) => /** @type {[string, string]} */ (['Planens fore', t])),
@@ -536,6 +536,63 @@ export function veckovaletsFel(d) {
  */
 export const utvarderingensFel = (d) => (d.plan && !d.plan.utvardering?.length ? ['En metod som kan planeras har metodens regel för beslutet efter insatsen i plan.utvardering: vad läraren beslutar efter vilket resultat, ordagrant ur metoden.'] : []);
 
+// ---------- Elevernas riktning i progressionen ----------
+// Den smala formen (sajtens K-572; Niclas 2026-10-26: "Gillar egentligen fokus och lärarens roll. Men behöver samtidigt en
+// tydlig riktning för eleverna lärande och utveckling"): varje rad i progressionen säger vad eleverna ska bli bättre på,
+// `eleverna`, och när gruppen går vidare, `vidare`. Metodens sida och Word visar dem i en fjärde kolumn, Eleverna blir
+// bättre på, och planen överst i veckan och under Efter veckan, ur funktionerna här.
+
+/** Kolumnens rubrik på metodens sida och i Word, och etiketten i planen. */
+export const ELEVERNAS_KOLUMN = 'Eleverna blir bättre på';
+
+/**
+ * Regeln för att gå vidare som en mening, "Gå vidare när …", på metodens sida, i Word och i planen.
+ * @param {string} vidare
+ * @returns {string}
+ */
+export const vidareMening = (vidare) => `Gå vidare när ${vidare.trim()}.`;
+
+/**
+ * Den fjärde kolumnens cell: vad eleverna blir bättre på, och regeln för att gå vidare på en egen rad.
+ * @param {{ eleverna?: string, vidare?: string }} r
+ * @returns {string}
+ */
+export const elevernasCell = (r) => [r.eleverna ?? '', r.vidare ? vidareMening(r.vidare) : ''].filter(Boolean).join('\n');
+
+/**
+ * Har progressionen den fjärde kolumnen? Den står när någon rad säger vad eleverna blir bättre på.
+ * @param {{ progression?: { rader: { eleverna?: string }[] } }} d
+ * @returns {boolean}
+ */
+export const harElevernasKolumn = (d) => !!d.progression?.rader.some((r) => r.eleverna);
+
+/** Högsta längd för `eleverna`, som schemat också håller. */
+export const ELEVERNAS_LANGD = 200;
+
+/**
+ * Spärren för elevernas riktning: `eleverna` är en mening som börjar med "Att", om något eleverna gör eller säger, högst två
+ * meningar och 200 tecken, och `vidare` är fortsättningen på "Gå vidare när", med liten bokstav först och utan punkt sist.
+ * En metod som kan planeras har `eleverna` i varje rad, och den sista raden har inget `vidare`, eftersom beslutet efter
+ * perioden gäller där (`plan.utvardering`). Riggen kör samma spärr före leveransen.
+ * @param {{ plan?: unknown, progression?: { rader: { vecka: string, eleverna?: string, vidare?: string }[] } }} d
+ * @returns {string[]}
+ */
+export function elevernasFel(d) {
+  const rader = d.progression?.rader ?? [];
+  /** @type {string[]} */
+  const fel = [];
+  rader.forEach((r, i) => {
+    const namn = `Progressionens rad "${r.vecka}"`;
+    if (d.plan && !r.eleverna) fel.push(`${namn} har inget eleverna: vad eleverna ska bli bättre på, en mening som börjar med "Att" (METODER.md under Fälten i metodens fil).`);
+    if (r.eleverna && !/^Att /.test(r.eleverna)) fel.push(`${namn}: eleverna börjar med "Att", om något eleverna gör eller säger.`);
+    if (r.eleverna && (r.eleverna.length > ELEVERNAS_LANGD || meningarna(r.eleverna).length > 2)) fel.push(`${namn}: eleverna har högst två meningar och ${ELEVERNAS_LANGD} tecken.`);
+    if (r.vidare && !/^\p{Ll}/u.test(r.vidare.trim())) fel.push(`${namn}: vidare är fortsättningen på "Gå vidare när", med liten bokstav först.`);
+    if (r.vidare && /[.!?]\s*$/.test(r.vidare)) fel.push(`${namn}: vidare slutar utan punkt, eftersom sidan skriver "Gå vidare när …".`);
+    if (r.vidare && i === rader.length - 1) fel.push(`${namn} är progressionens sista och har inget vidare: där gäller beslutet efter perioden (plan.utvardering).`);
+  });
+  return fel;
+}
+
 // ---------- Metodens egna skattningar ----------
 // En metod med ett eget instrument, som Gruppstärkande aktiviteters Lärarens skattning från 1 till 10 och bladet Vår grupp,
 // gör det i planen med metodens skala och vid metodens tillfällen (sajtens K-559; Niclas 2026-10-26: "Ett verktyg som har en
@@ -709,7 +766,7 @@ export function skattningensText(s, sk, info) {
 }
 
 /** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen, citatens och nivåvalets. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */
-export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...utvarderingensFel(d)];
+export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...utvarderingensFel(d), ...elevernasFel(d)];
 
 // ---------- Modulen ----------
 
@@ -719,7 +776,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.15', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.3.0', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -2430,7 +2487,7 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number }} Metodplan
- * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
+ * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string, eleverna?: string, vidare?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'nastSista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar

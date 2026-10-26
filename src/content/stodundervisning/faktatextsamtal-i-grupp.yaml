@@ -85,7 +85,7 @@ tidsschema:
       vad: "Läs textens fråga med texten nedvänd: ”Vad tror ni?” Gissningen väcker det eleverna redan vet. Skriv gissningarna på bladet Kärnorna. Vänd upp texten: ”Vad ser ni på bilderna och rubrikerna?” Red ut orden som står på lärarens sida."
     - tid: 5–35 min
       fas: Läs och fånga
-      vad: "Läs ingressen och avsnitt 1 högt. Det tar omkring sex minuter. Paren läser de tre andra, omkring åtta minuter per avsnitt. Efter varje avsnitt samlar du gruppen: ”Var skavde det?” Blir tiden knapp läser du också det sista avsnittet högt, och gruppen säger kärnan direkt. I vecka 5 läser du avsnitt 3 i stället, eftersom de två eleverna med jobbkorten leder det sista avsnittet."
+      vad: "Läs ingressen och avsnitt 1 högt. Det tar omkring sex minuter. Paren läser de tre andra, omkring åtta minuter per avsnitt. Efter varje avsnitt samlar du gruppen: ”Var skavde det?” Blir tiden knapp läser du också det sista avsnittet högt, och gruppen säger kärnan direkt. I vecka 5 och 6 läser du avsnitt 3 i stället, eftersom de två eleverna med jobbkorten leder det sista avsnittet."
     - tid: 35–40 min
       fas: Avsluta
       vad: ”Vet vi mer nu?” En gissning som blev fel är lika mycket värd som en som blev rätt, för den gav gruppen något att läsa efter.
@@ -185,7 +185,7 @@ tabeller:
   - rubrik: "Ett avsnitt i fyra steg: Läs, Red ut, Kärnan och Lappen"
     plats: efter-tidsschema
     meny: true
-    text: Avsnitt 1 läser du högt, och det tar omkring sex minuter. I vecka 1, 2 och 6 tänker du högt där. De andra veckorna samlar du gruppen direkt, och gruppen reder ut och säger kärnan utan att paren gör det först. Avsnitten som paren läser har alla samma fyra steg, och ett avsnitt tar omkring åtta minuter. Den som avkodar mödosamt följer med i texten, och kamraten eller du läser. På Avancerat är avsnitten längre. Räkna där med att läsa ett avsnitt till högt från vecka 3, och bestäm före passet vilket. I vecka 5 är det avsnitt 2.
+    text: Avsnitt 1 läser du högt, och det tar omkring sex minuter. I vecka 1, 2 och 6 tänker du högt där. De andra veckorna samlar du gruppen direkt, och gruppen reder ut och säger kärnan utan att paren gör det först. Avsnitten som paren läser har alla samma fyra steg, och ett avsnitt tar omkring åtta minuter. Den som avkodar mödosamt följer med i texten, och kamraten eller du läser. På Avancerat är avsnitten längre. Räkna där med att läsa ett avsnitt till högt från vecka 3, och bestäm före passet vilket. I vecka 5 och 6 är det avsnitt 2.
     kolumner:
       - Steg
       - Eleverna gör
@@ -521,26 +521,32 @@ progression:
       rubrik: "Gången och Tankekartan"
       fokus: "Gruppen lär sig gången: stryka under, reda ut, säga kärnan och lägga lapparna i modellen."
       roll: "Läspasset: du tänker högt i hela avsnitt 1. Modellpasset: du visar modellen och lägger den första lappen."
+      eleverna: "Att stryka under det som skaver och säga var det skavde, och att säga kärnan i ett avsnitt med egna ord till kamraten bredvid."
     - vecka: "2"
       rubrik: "En modell ni kan, och Tidslinjen"
       fokus: Gruppen prövar en modell som den redan kan mot veckans text och säger varför modellen inte räcker.
       roll: "Läspasset: du tänker högt i avsnitt 1 igen. Modellpasset: du lägger fram gruppens tankekarta före veckans modell."
+      eleverna: "Att skilja det viktiga från det intressanta när gruppen väljer kärnan, och att säga varför den sparade modellen inte räcker för veckans text."
     - vecka: 3–4
       rubrik: "Jobbkorten, Venndiagrammet och Kedjan"
       fokus: "Från avsnitt 2 har två elever i taget var sitt jobb: en håller kortet När det skaver, och en leder gruppen till kärnan. Eleverna byter jobb efter varje avsnitt."
       roll: "Läspasset: du läser avsnitt 1, och sedan lyssnar du, frågar och håller tiden. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger."
+      eleverna: "Att reda ut ett ord eller en mening med sätten på kortet När det skaver, och att säga hur två avsnitt hänger ihop, med ord ur texten som därför eller medan."
     - vecka: "5"
       rubrik: "Jobbkorten i alla fyra stegen, Problem och lösning"
       fokus: De två som har jobbkorten i det sista avsnittet leder gruppen genom alla fyra stegen.
       roll: "Läspasset: i det sista avsnittet går du in först när något saknas. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger. Fråga läraren i SO eller NO vilka texter klassen läser i vecka 6–8, och förbered texten till vecka 6 med bladet Egen text."
+      eleverna: "Att reda ut det som skaver och säga kärnan med egna ord utan din hjälp, när två elever leder gruppen genom alla fyra stegen i det sista avsnittet."
     - vecka: "6"
       rubrik: "Klassens text, och läraren väljer modell"
       fokus: Gruppen läser klassens text i SO eller NO, som ofta är byggd på flera sätt.
-      roll: "Läspasset: du tänker högt i avsnitt 1 igen. Modellpasset: du prövar två av modellernas frågor högt, och paren de tre andra."
+      roll: "Läspasset: du tänker högt i avsnitt 1 igen, och i det sista avsnittet går du in först när något saknas. Modellpasset: du prövar två av modellernas frågor högt, och paren de tre andra."
+      eleverna: "Att läsa bilden ihop med texten och reda ut det som skaver i klassens text, som saknar ordförklaringar. Ledtråden kan vara bilden, ett ord i fet stil eller meningen efter."
     - vecka: 7–8
       rubrik: "Klassens text, och gruppen väljer modell"
       fokus: De två med jobbkorten leder gruppen genom avsnitten som paren läser. Gruppen väljer modell bland sina fem. I vecka 7 väljer den tillsammans med dig, och i vecka 8 väljer paren först. I det sista passet säger var och en vad hen tar med sig från perioden.
       roll: "Läspasset: du inleder och avslutar passet. Efter varje avsnitt säger du en sak som de två som ledde gjorde. Modellpasset: du lyssnar när gruppen väljer och går in först när något saknas."
+      eleverna: "Att välja modell efter hur klassens text är byggd och visa ett ställe i texten som talar för den, och att återge texten med modellen som stöd."
 uppfoljning:
   text: Du behöver veta om passen ger effekt. Kartläggningen står bland materialet. Eleven läser en kort faktatext och gör fyra uppgifter, om det som skaver, kärnan, bilden och hur texten hänger ihop. Kartläggningen har inga poäng. Du jämför det eleven sa och gjorde före perioden med det hen säger och gör efter, och raderna Så kan det låta visar hur skillnaden kan låta. Under perioden har du gruppens lappar och elevens skrivna svar från varje vecka. I passen hör du hur eleven reder ut det som skaver, och i vecka 6–8 hur paren väljer modell. Efter perioden beslutar du för varje elev. Reder eleven ut det som skaver och säger kärnan med egna ord, också i klassens texter, avslutar du insatsen. Har eleven gått framåt men behöver fortfarande stöd i klassens texter, får eleven en period till med ett nytt tema. Den nya perioden börjar i vecka 1, med ett tema från sidan Ta fram en faktatext. Kartläggningen du nyss har gjort blir då kartläggningen före den nya perioden. Efter perioden gör du kartläggningen med Bäverns damm. Står inget under Det som har ändrats i protokollet, tar du det med elevhälsan.
   rader:
@@ -4106,9 +4112,9 @@ ramar:
             - rubrik: Så byts jobben
               text: Du bestämmer före passet vilka som börjar. De två har jobbkorten från avsnitt 2, och efter varje avsnitt går korten vidare till två andra, så att alla får pröva båda jobben. Så gör ni också med klassens texter i vecka 6–8.
             - rubrik: Hela avsnittet
-              text: I vecka 5 leder de två med jobbkorten gruppen genom alla fyra stegen i det sista avsnittet, och i vecka 7–8 i alla avsnitt som paren läser. Den som håller kortet När det skaver börjar avsnittet, och den som leder gruppen till kärnan avslutar det.
+              text: I vecka 5 och 6 leder de två med jobbkorten gruppen genom alla fyra stegen i det sista avsnittet, och i vecka 7–8 i alla avsnitt som paren läser. Den som håller kortet När det skaver börjar avsnittet, och den som leder gruppen till kärnan avslutar det.
             - rubrik: Det du gör
-              text: "I vecka 3–4 lyssnar du, frågar och håller tiden. Stannar samtalet pekar du på nästa rad på jobbkortet. Saknar kärnan det viktiga frågar du: ”Var står det?” När de två leder hela avsnittet går du in först när något saknas. Håller kärnan säger du vad den som ledde gjorde."
+              text: "I vecka 3–6 lyssnar du, frågar och håller tiden. Stannar samtalet pekar du på nästa rad på jobbkortet. Saknar kärnan det viktiga frågar du: ”Var står det?” När de två leder hela avsnittet går du in först när något saknas. Håller kärnan säger du vad den som ledde gjorde."
             - rubrik: Utskrift
               text: Bladet har båda jobbkorten. Skriv ut ett blad, eller två om ni är sju eller åtta. Klipp isär korten längs den streckade linjen och plasta gärna in dem.
     - rubrik: Egen text

@@ -207,11 +207,11 @@ passrutin:
       fas: Samma tal
     - text: Läraren läser ett kort och paren avgör vad som hände. Sedan läser paren korten för varandra, och läraren går runt.
       fas: Korten
-    - text: Varje elev bygger talet på sitt eget kort och säger vad hen gör.
+    - text: Varje elev bygger talen på sina två kort och säger vad hen gör.
       fas: Två kort
     - text: Alla bygger det andra talet tillsammans och säger vad som hände och varför.
       fas: Andra talet
-  efterPasset: Läraren antecknar kort vem som växlade själv och kunde säga vad som hände, och vad läraren behöver visa igen nästa pass.
+  efterPasset: Läraren antecknar i några ord vem som klarade sina två kort själv och kunde säga vad som hände, och vad läraren behöver visa igen nästa pass.
 tidsschema:
   rubrik: Ett pass på 30 minuter
   text: Förbered dig genom att bygga veckans tal med dagens material och säga orden högt. Remsan visar hur de 30 minuterna fördelas och när läraren visar, när alla arbetar gemensamt och när eleverna arbetar i par och enskilt. Paren får längst tid. Passet och veckorna står också på Lektionskortet, ett A4 att ha framför dig.
@@ -289,7 +289,7 @@ steg:
         - Säg vad du gör medan du gör det.
     - namn: Två kort
       fraga: Kan du göra det själv?
-      gor: Ge varje elev ett eget kort. Eleven bygger och säger vad hen gör, och vecka 5 skriver eleven samtidigt. Saknar eleven orden gör ni handgreppet tillsammans igen.
+      gor: Ge varje elev två egna kort. Eleven bygger och säger vad hen gör, och vecka 5 skriver eleven samtidigt. Saknar eleven orden gör ni handgreppet tillsammans igen.
       fraser:
         - Bygg ditt kort och berätta vad du gör.
         - Varför fick du växla?
@@ -389,18 +389,27 @@ progression:
     - vecka: "1"
       fokus: "Bygga och säga tal: tio av en talsort är en av nästa större. Kartläggningen görs före första passet."
       roll: Läraren gör först och säger varje talsort.
+      eleverna: "Att bygga ett tal inom sitt talområde och säga hur många det är av varje talsort, som ”tre tiotal och sex ental”."
+      vidare: "de flesta i gruppen bygger talen på sina två kort själva och säger hur många det är av varje talsort, i veckans två sista pass"
     - vecka: "2"
       fokus: "Siffrans plats och nollan: samma siffror på olika platser, och en tom plats där nollan håller platsen."
       roll: Läraren gör först, och paren börjar läsa korten för varandra.
+      eleverna: "Att läsa, skriva och jämföra tal med nollor och tal med samma siffror på olika platser. I åk 4–5 bygger och jämför de också decimaltal med tiondelar."
+      vidare: "de flesta i gruppen klarar sina två kort själva och säger vad varje siffra visar, i veckans två sista pass"
     - vecka: "3"
       fokus: "Lägga till och växla upp: tio i en talsort blir en i nästa större."
       roll: Läraren gör växlingen långsamt först, och eleverna gör den själva.
+      eleverna: "Att själva lägga till och växla upp i materialet och säga vad som händer. I åk 4–5 gör de det också med tiondelar och hundradelar."
+      vidare: "de flesta i gruppen växlar upp själva på sina två kort och säger vad som hände, i veckans två sista pass"
     - vecka: "4"
       fokus: "Ta bort och växla ned: en från nästa större talsort blir tio."
       roll: Läraren gör först och frågar mer.
+      eleverna: "Att själva ta bort och växla ned i materialet när det inte räcker, och säga vad som händer. I åk 4–5 gör de det också med decimaltal."
+      vidare: "de flesta i gruppen växlar ned själva på sina två kort och säger vad som hände, i veckans två sista pass"
     - vecka: "5"
       fokus: "Från material till skrift: bygg, anteckna och tänk dig till sist materialet. I åk 4–5 handlar pass 3 om negativa tal. Kartläggningen görs efter sista passet."
       roll: Eleven skriver det hen bygger, och läraren kontrollerar mot materialet.
+      eleverna: "Att räkna talsort för talsort, skriva varje steg som skriftlig huvudräkning och visa i materialet det de har skrivit. I åk 4–5 visar de också negativa tal på tallinjen."
 uppfoljning:
   rader:
     - nar: Före insatsen
@@ -409,7 +418,7 @@ uppfoljning:
       vad: "Gör kartläggningen i gruppens paket under Material per årskurs utanför passen, med en elev i taget, cirka tio minuter per elev. Läs uppgiften högt och hjälp inte till. Eleven bygger, berättar och skriver. Anteckna för varje uppgift på en kopia av listan: B om eleven byggde rätt, V om eleven växlade själv i materialet och S om eleven använde talsortsord. Eleven klarar en uppgift säkert när du har antecknat B och S, och på uppgift 3 och 4 också V."
     - nar: Varje pass
       tid: "varje pass"
-      vad: Anteckna kort vem som växlade själv och kunde säga vad som hände.
+      vad: Anteckna i några ord vem som klarade sina två kort själv och kunde säga vad som hände.
     - nar: Efter fem veckor
       tid: "efter"
       perElev: 10
@@ -467,14 +476,14 @@ mal:
     - Räkna talsort för talsort och skriva det som skriftlig huvudräkning
     - "Åk 4–5: bygga decimaltal och visa negativa tal på tallinjen"
 snabbmall:
-  text: Bladet gäller veckans tre pass. Före passet skriver du det eleverna ska se i dag. Efter passet skriver du vem som växlade själv och sa vad som hände, och vad du visar igen. De första veckorna kryssar du det som ska med, och sist i veckan läser du bladet.
+  text: Bladet gäller veckans tre pass. Före passet skriver du det eleverna ska se i dag. Efter passet skriver du vem som klarade sina två kort själv och sa vad som hände, och vad du visar igen. De första veckorna kryssar du det som ska med, och sist i veckan läser du bladet.
   pass: 3
   period: veckan
   overst:
     - Felet att lyssna efter
   fore: det eleverna ska se i dag
   foreHjalp: "De två talen, och meningen som börjar ”I dag såg vi att”."
-  efter: vem som växlade själv och sa vad som hände
+  efter: vem som klarade sina två kort själv och sa vad som hände
   ska:
     - Jag byggde först och sa vad jag gjorde innan eleverna byggde.
     - Eleverna växlade själva och sa det, också när jag hade visat igen.
@@ -953,7 +962,7 @@ lathund:
           vad: Läs ett kort. Paren bygger och avgör, sedan läser de för varandra.
         - tid: 21–26
           fas: 4 · Två kort
-          vad: Var och en bygger talet på sitt kort och säger vad hen gör.
+          vad: Var och en bygger talen på sina två kort och säger vad hen gör.
         - tid: 26–30
           fas: 5 · Andra talet
           vad: Bygg det andra talet tillsammans. Vad hände, och varför?
@@ -1002,7 +1011,7 @@ lathund:
       - nar: "Före insatsen"
         vad: "Kartläggningen i gruppens paket, en elev i taget och cirka tio minuter per elev, utanför passen. Anteckna B, V och S för varje uppgift. Säkert är B och S, och på uppgift 3 och 4 också V."
       - nar: "Varje pass"
-        vad: "Anteckna kort vem som växlade själv och kunde säga vad som hände."
+        vad: "Anteckna i några ord vem som klarade sina två kort själv och kunde säga vad som hände."
       - nar: "Efter fem veckor"
         vad: "Samma kartläggning. Klarar eleven uppgift 1–4 säkert, avslutar du insatsen. Klarar eleven fler än före, får hen en period till, från den tidigaste vecka vars uppgift någon i gruppen inte klarade, till vecka 5. Annars tar du upp det med elevhälsan."
 lektionskort:

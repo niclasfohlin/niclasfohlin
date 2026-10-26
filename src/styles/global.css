@@ -2950,6 +2950,10 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-nasta p { margin: 0 0 0.5rem; }
 .pl-nasta .metod-centrala { margin: 0; }
 .pl-nasta .pl-fallut { margin: 0.8rem 0 0; background: var(--farg-yta); }
+/* Vad eleverna blir bättre på i veckan, överst under veckans rubrik, med veckans fokus färg (K-572). */
+.pl-elevmal { border-left: 4px solid var(--farg-lasning); padding: 0.1rem 0 0.1rem 0.85rem; margin: 0.75rem 0 1rem; }
+.pl-elevmal p { margin: 0.2rem 0 0; font-size: 1.05rem; }
+.pl-avslutad-plan .pl-elevmal { border-left-color: #8a949e; }
 .pl-fokusruta { background: var(--farg-lasning-ljus); border-left: 4px solid var(--farg-lasning); border-radius: 6px; padding: 0.85rem 1rem; margin: 1.25rem 0; }
 .pl-fokusruta p { margin: 0 0 0.7rem; }
 .pl-fokusruta p:last-child { margin-bottom: 0; }

@@ -29,7 +29,7 @@ material:
   - skrivplanen
   - tidningens sida
 
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 publicerad: 2026-10-06
 relaterade:
   - laslistor-i-grupp
@@ -485,30 +485,38 @@ progression:
     - vecka: "1"
       fokus: Två ord blir ett
       roll: "Ordstarten: du visar stegen och tänker högt. Skrivandet: du visar Kloka pennan i din text, och paret skriver en text tillsammans"
+      eleverna: "Att läsa ett ord som är byggt av två ord, en del i taget ända till ändelsen, och säga bakifrån vad det är, som att en sängrobot är en robot."
     - vecka: "2"
       fokus: Fogen
       roll: "Ordstarten: du visar, och eleverna säger fraserna med dig. Skrivandet: paret skriver med Kloka pennan"
+      eleverna: "Att stava sammansatta ord en del i taget och få med fogen, som s:et i fotbollsplan. Eleven skriver också skolgård, där a:et faller bort, och glasstrut med två s."
     - vecka: "3"
       fokus: Ihop eller isär
       roll: "Ordstarten: en elev visar, och du hjälper till med fraserna. Skrivandet: paret skriver med Kloka pennan"
+      eleverna: "Att skriva sammansatta ord ihop, också med jätte- och super-, och säga vad som skiljer en grön sak från en grönsak."
     - vecka: "4"
       fokus: Ord som slutar på -⁠are
       roll: "Ordstarten: eleverna visar och säger fraserna själva. Skrivandet: paret tar de långa orden med kortet Ett långt ord, och du frågar innan du hjälper"
+      eleverna: "Att läsa och stava ord på -⁠are och säga om ordet är en person eller en sak som gör något, som en bagare och en dammsugare."
     - vecka: "5"
       fokus: Förstavelser
       roll: "Ordstarten: eleverna visar, och du frågar vad förstavelsen gör. Skrivandet: var och en skriver sin text, och kamraten är kontrollant"
+      eleverna: "Att ringa in förstavelsen och säga vad den gör i just det ordet, som att en ovän inte är en vän. I sin egen text skriver eleven minst två ord med förstavelse."
     - vecka: "6"
       fokus: Ändelser som beskriver
       roll: "Ordstarten: en elev leder, och du hjälper till när det behövs. Skrivandet: eleverna föreslår de flesta meningarna i din text"
+      eleverna: "Att ringa in ändelsen och säga vad den betyder, som att tandlös är utan tänder och att det som är ätbart går att äta."
     - vecka: "7"
       fokus: Ord på -⁠ning, -⁠het, -⁠else och -⁠skap
       roll: "Ordstarten: en elev leder, och du lyssnar. Skrivandet: var och en skriver sin text och tar de långa orden med stegen"
+      eleverna: "Att läsa och stava ord på -⁠ning, -⁠ing, -⁠het, -⁠else och -⁠skap, och att få med fogen s efter -⁠ning, -⁠ing, -⁠het och -⁠skap, som i tävlingsregel."
     - vecka: "8"
       fokus: Nyord
       roll: "Ordstarten: eleverna leder. Skrivandet: var och en förklarar sitt nya ord för läsaren i tidningen"
+      eleverna: "Att läsa och förklara ett nytt ord ur delarna, bakifrån, och säga när delarna inte räcker, som i hjärnröta. I artikeln skriver eleven vad det egna ordet betyder och vad det är byggt av."
 
 uppfoljning:
-  text: "Kartläggningen visar hur eleven läser, delar, stavar och förklarar långa ord och skriver dem i en text, före och efter kursen. Protokollet samlar det eleven läste, skrev och förklarade, vecka för vecka."
+  text: "Kartläggningen visar hur eleven läser, delar, stavar och förklarar långa ord och skriver dem i en text, före och efter kursen. Protokollet samlar det eleven läste, skrev och förklarade, vecka för vecka. Läser och stavar eleven de flesta av kartläggningens ord rätt efter kursen, avslutar du insatsen. Har eleven fler poäng än före men gör fortfarande fel på vissa delar, som fogen eller en förstavelse, går eleven en period till med de veckor som tar upp de delarna. Har eleven inte fler poäng än före, tar du upp det med elevhälsan och ser efter om eleven först behöver läsa korta ord säkrare, till exempel i TIL i grupp."
   rader:
     - nar: Före kursen
       vad: Gör kartläggningen veckan före kursen.

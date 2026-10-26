@@ -408,7 +408,10 @@ const metodensFalt = z.strictObject({
       // taggar: bankens taggar som veckans poster har, som lästexternas slag, så att planens vecka öppnar Ta fram med dem
       // (Planera insatsen, K-489, METODER.md under Planera insatsen). Planen läser veckorna ur vecka.
       // rubrik: veckans fokus i några ord, till planens översikt (Planera insatsen); utan den står fokus första mening.
-      rader: z.array(z.strictObject({ vecka: z.string(), led: z.string().optional(), fokus: z.string(), roll: z.string(), taggar: z.array(z.string()).min(1).optional(), rubrik: z.string().max(60).optional() })).min(1),
+      // eleverna: vad eleverna ska bli bättre på i raden, "Att …", och vidare: när gruppen går vidare, som fortsättningen
+      // på "Gå vidare när", utan punkt (K-572, den smala formen). Metodens sida och Word visar dem i en fjärde kolumn, och
+      // planen överst i veckan och under Efter veckan; formen prövas i standarden (elevernasFel).
+      rader: z.array(z.strictObject({ vecka: z.string(), led: z.string().optional(), fokus: z.string(), roll: z.string(), eleverna: z.string().max(200).optional(), vidare: z.string().optional(), taggar: z.array(z.string()).min(1).optional(), rubrik: z.string().max(60).optional() })).min(1),
     }).optional(),
     uppfoljning: z.strictObject({
       rubrik: z.string().default('Följ upp effekten'),

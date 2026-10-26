@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.25.0, 2026-10-26
+
+- `plan.js`, den smala formen (sajtens K-572; Niclas samma kväll: "Gillar egentligen fokus och lärarens roll. Men behöver samtidigt en tydlig riktning för eleverna lärande och utveckling", och "Kör på det"): progressionens rader har `eleverna`, vad eleverna ska bli bättre på, och `vidare`, när gruppen går vidare. `elevernasFel` prövar formen och kräver `eleverna` i varje rad i en metod som kan planeras, och `planFel` kör den. `elevernasCell`, `vidareMening`, `harElevernasKolumn` och `ELEVERNAS_KOLUMN` ger den fjärde kolumnen och meningen "Gå vidare när …" till metodens sida, Word och planen ur en rot, och `planensTexter` har fälten med.
+
 ## 0.24.0, 2026-10-26
 
 - `plan.js`, efter passgenomgången i de fjorton metoderna samma kväll (sajtens K-572; ingen metod sa vad läraren beslutar efter mätningen, och åtta sa inte vad som avgör periodens längd): `utvarderingensFel` kräver `plan.utvardering` i en metod som kan planeras, och `veckovaletsFel` kräver `plan.veckoval` när perioden är ett spann eller öppen. `planFel` kör båda, så riggen prövar samma sak före leveransen.

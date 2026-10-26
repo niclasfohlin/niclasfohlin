@@ -390,7 +390,7 @@ tabeller:
       - - Visa hur det syns och hörs
         - Visa draget med en elev vid stoppet. Skriv på tavlan hur det syns, som att vända sig mot den som pratar, och hur det låter, som ”Jag håller med, och”.
       - - Prova på
-        - Eleverna prövar draget i parsamtalet. Du går runt, lyssnar efter det och skriver ner det du hör, med elevernas ord.
+        - Eleverna prövar draget i parsamtalet. Du går runt, lyssnar efter det och skriver det du hör på lyssningsbladet, med elevernas ord.
       - - Reflektera och ge återkoppling
         - "I Avsluta frågar du: ”Vad sa din kamrat som fick dig att tänka nytt?” och ”Hur gick det att följa samtalsreglerna i dag?” Säg sedan vad du hörde, till exempel ”Mustafa byggde vidare på Livs tanke om garaget, och då förstod ni varför Pricken kom hem i dag.”"
     not: Beröm det eleverna gör i samtalet, med deras egna ord, och säg vad det gav, till paret eller till hela gruppen.
@@ -671,36 +671,47 @@ urval:
     - rubrik: Rätt längd
       text: Texten hinns med i lugn takt på ett pass
 progression:
-  text: Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat. Varje vecka har också ett samtalsdrag, en rad på samtalskortet, som du visar i pass 1 och eleverna prövar i parsamtalet. Dragen kommer i samma ordning på alla nivåer, och en grupp som behöver mer tid tar samma drag en vecka till. Välj texter där frågorna har veckans slag, som översikten under Lärarens sidor visar. Planera åtta veckor, och sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna hittar ett ställe själva i bänkboken och visar ledtråden utan h. Tar ni ett drag en vecka till, hinner ni färre av veckorna 6–8, men ta minst en av dem. I de veckorna leder eleverna samtalet och läser i sin egen bänkbok.
+  text: Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat. Varje vecka har också ett samtalsdrag, en rad på samtalskortet, som du visar i pass 1 och eleverna prövar i parsamtalet. Dragen kommer i samma ordning på alla nivåer. Gruppen tar nästa drag när lyssningsbladet visar det som står i kolumnen Eleverna blir bättre på. Annars tar ni samma drag en vecka till. Välj texter där frågorna har veckans slag, som översikten under Lärarens sidor visar. Planera åtta veckor, och sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna hittar ett ställe själva i bänkboken och visar ledtråden utan h. Tar ni ett drag en vecka till, hinner ni färre av veckorna 6–8, men ta minst en av dem. I de veckorna leder eleverna samtalet och läser i sin egen bänkbok.
   rader:
     - vecka: "1"
       fokus: Eleverna lär sig vad det är att läsa mellan raderna och övar Det står, Jag vet och Alltså tror jag med slagen Känsla och Vem. Samtalsdraget är samtalskortets två första rader, att säga ”Jag tror att” och en ledtråd och att fråga ”Vad tror du?” och ”Hur vet du det?”
       roll: Ni säger samtalsreglerna i Starten i pass 1, och du förklarar frågornas tre grupper vid den första frågan. I pass 2 visar du parsamtalet med en elev vid stoppet. Du tänker högt länge i pass 1
+      eleverna: Att säga ”Jag tror att” och visa ledtråden när kamraten frågar ”Hur vet du det?” De säger också om svaret står i texten eller om de listar ut det.
+      vidare: lyssningsbladet från pass 2 och 3 visar att de flesta i gruppen säger ”Jag tror att” och en ledtråd
       taggar: [kansla, vem]
       rubrik: Det står, Jag vet och Alltså tror jag
     - vecka: "2"
       fokus: Ni övar Stanna och Se det framför dig med slagen Var och när och Varför. Samtalsdraget är att ta med det man har varit med om och att fråga ”Kan du säga mer?”
       roll: Du visar var och varför du stannar. I pass 2 säger du vad paren ska samtala om vid stoppet
+      eleverna: Att stanna där något inte står och att knyta det de har varit med om till en ledtråd när de drar en slutsats.
+      vidare: lyssningsbladet från pass 2 och 3 visar att de flesta i gruppen knyter något de har varit med om till en ledtråd
       taggar: [var-och-nar, varfor]
       rubrik: Stanna och Se det framför dig
     - vecka: "3"
       fokus: Ni övar att slå ihop flera ledtrådar med slaget Före och efter. Samtalsdraget är att bygga vidare med ”Jag håller med, och”. På nivån Avancerad tar du Samma sak en annan vecka än Kvart i åtta
       roll: Du visar två ledtrådar som bara tillsammans ger svaret
+      eleverna: Att slå ihop två ledtrådar till en slutsats och att bygga vidare på en kamrats tanke med ”Jag håller med, och”.
+      vidare: lyssningsbladet från pass 2 och 3 har ordet vidare och en kamrats namn hos de flesta i gruppen
       taggar: [fore-och-efter]
       rubrik: Slå ihop flera ledtrådar
     - vecka: "4"
       fokus: Ni övar Stämmer det? och slaget Det som menas. Samtalsdraget är att säga ”Jag tänker annorlunda” och att fråga ”Kan det vara något annat?”
       roll: Du tänker högt kortare. I pass 2 säger en elev varför ni stannar, innan paren samtalar
+      eleverna: Att säga ”Jag tänker annorlunda” och visa sin ledtråd, och att pröva om en tanke stämmer med resten av texten.
+      vidare: lyssningsbladet från pass 2 och 3 har ordet annorlunda och en kamrats namn hos de flesta i gruppen
       taggar: [det-som-menas]
       rubrik: "Stämmer det? och Det som menas"
     - vecka: "5"
       fokus: Ni övar Stämmer det? och slaget Det som menas. Samtalsdraget är att pröva en ny riktning med ”Tänk om” och att fråga ”Stämmer det med texten?”
       roll: Du tänker högt kortare. I pass 2 säger en elev varför ni stannar, innan paren samtalar
+      eleverna: Att pröva en ny riktning med ”Tänk om” och visa en ledtråd som talar för eller emot den.
+      vidare: lyssningsbladet från pass 2 och 3 visar att de flesta i gruppen säger ”Tänk om” och prövar tanken mot en ledtråd
       taggar: [det-som-menas]
       rubrik: "Stämmer det? och Tänk om"
     - vecka: 6–8
-      fokus: Ni övar slaget Ordet i metodens texter med det slaget i pass 1 och 2, och i pass 3 läser eleverna en sida i sin egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag ur kortet och ställer egna frågor om texten
+      fokus: Ni övar slaget Ordet i metodens texter med det slaget i pass 1 och 2, och i pass 3 läser eleverna en sida i sin egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag på samtalskortet och ställer egna frågor om sin bänkbok
       roll: En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren. Du följer upp om eleverna stannar själva
+      eleverna: Att själva leda gruppens samtal i pass 2 och att hitta ett ställe i sin egen bänkbok där något inte står och visa ledtråden utan din hjälp.
       taggar: [ordet]
       rubrik: Slaget Ordet, eleverna leder samtalet
 uppfoljning:
@@ -711,7 +722,7 @@ uppfoljning:
       vad: Varje elev gör kartläggningens text före, enskilt med dig, på fem till åtta minuter. Läs texten högt först på Lättläst och för den som avkodar mödosamt. Klarar eleven inte fråga 1, är nivån för svår, och eleven gör kartläggningen på nivån under. Välj gruppens nivå så att alla klarar fråga 1, som kravet Lagom nivå säger.
       tid: före
     - nar: Varje vecka
-      vad: Du läser lyssningsbladet och frågetecknen i pass 3, också vem som byggde vidare. Nästa vecka visar du ett tankesteg efter det du hörde. Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna.
+      vad: Du läser frågetecknen i pass 3 och lyssningsbladet från pass 2 och 3, och ser också vem som använde veckans samtalsdrag. Nästa vecka visar du ett tankesteg efter det du hörde. Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna.
       tid: varje vecka
     - nar: Efter sex till åtta veckor
       perElev: [5, 8]
@@ -838,7 +849,7 @@ ramar:
   rubrik: Materialet
   text:
     - Här finns tankekortet, samtalskortet, samtalsreglerna, startmeningarna och metodens texter på varje nivå, med kartläggningens text före och efter. Varje text står på ett eget blad som en sida i en bok, med frågorna under texten och nivån längst ned, och svaren och de öppna frågorna står under Lärarens sidor för nivån, så att de inte kommer med på elevens kopia. Kopiera bladet till varje elev och till dig. Eleven skriver sitt namn på baksidan, så att du vet vems frågetecken och understrykningar du läser. Ledtrådsbladet, lyssningsbladet och kartläggningens protokoll står i planeringsmallarna.
-    - I ledtrådsbladet skriver eleven ledtrådarna ur texten i rutan Det står, gärna två, det hen vet i rutan Jag vet och sin slutsats i rutan Alltså tror jag. På nivån Lättläst räcker ett ord eller en bild i varje ruta. I lyssningsbladet skriver du det eleven sa med elevens ord, ledtråden med ett h efter om den kom med din hjälp, och det tankesteg som saknades. Bygger eleven vidare på en kamrat, skriv ordet vidare och kamratens namn i kolumnen Det eleven sa, och tänker hen annorlunda, skriv ordet annorlunda och namnet. Lyssningsbladet kan också ligga framme i pass 2, när paren samtalar vid stoppet.
+    - I ledtrådsbladet skriver eleven ledtrådarna ur texten i rutan Det står, gärna två, det hen vet i rutan Jag vet och sin slutsats i rutan Alltså tror jag. På nivån Lättläst räcker ett ord eller en bild i varje ruta. I lyssningsbladet skriver du det eleven sa med elevens ord, ledtråden med ett h efter om den kom med din hjälp, och det tankesteg som saknades. Bygger eleven vidare på en kamrat, skriv ordet vidare och kamratens namn i kolumnen Det eleven sa, och tänker hen annorlunda, skriv ordet annorlunda och namnet. Lyssningsbladet ligger också framme i pass 2, när paren samtalar vid stoppet.
   ramar:
     - rubrik: Tankekortet
       text:
@@ -4026,7 +4037,7 @@ mallar:
       - Steget som saknades
     rader: 8
     underrad: "Vecka: ____ · Text och fråga: ______________________"
-    text: Fyll i bladet i pass 3. Skriv det eleven sa med elevens egna ord och vilken ledtråd hen pekade på, med ett h efter om den kom med din hjälp. Skriv också när en elev bygger vidare på en kamrat eller tänker annorlunda. I sista kolumnen skriver du det tankesteg som saknades. Efter pass 3 läser du bladet och skriver i Veckans cykel vad du visar nästa vecka.
+    text: Fyll i bladet i pass 2 och 3. Skriv det eleven sa med elevens egna ord och vilken ledtråd hen pekade på, med ett h efter om den kom med din hjälp. Skriv också när en elev bygger vidare på en kamrat eller tänker annorlunda. I sista kolumnen skriver du det tankesteg som saknades. Efter pass 3 läser du bladet och skriver i Veckans cykel vad du visar nästa vecka.
   - rubrik: Kartläggningens protokoll
     typ: rutnat
     kolumner:
@@ -4182,7 +4193,7 @@ lathund:
       - Korten och samtalsreglerna vid varje plats
       - En penna att stryka under med
       - Ledtrådsbladet i pass 2 och 3
-      - Lyssningsbladet i pass 3
+      - Lyssningsbladet i pass 2 och 3
       - Tavla för startmeningen
     varjePass: Du skriver på passets rad i Veckans cykel före och efter varje pass.
     # Lathundens kortare uppföljning: metodens rader med beslutet efter perioden ryms inte på sidan 4 (2026-10-26).

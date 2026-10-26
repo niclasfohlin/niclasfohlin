@@ -18,7 +18,7 @@ import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsLangder, passetsVisadeRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
   bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
-  uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
+  ELEVERNAS_KOLUMN, vidareMening, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
@@ -1345,7 +1345,10 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   const nu = nuVy();
   const passen = veckansPass(plan, v);
   const harVarit = plusDagar(v.mandag, 6) < idag;
-  const delar: string[] = [`<header class="pl-veckohuvud"><h2 id="pl-veckan-rubrik" tabindex="-1">${esc(rubrikVecka(v))} i planen</h2><p class="meta">${meta.map(esc).join(' · ')}</p></header>`, remsa(v.nr)];
+  // Vad eleverna blir bättre på den här veckan står överst, ur progressionens rad, som metodens fjärde kolumn (K-572, den
+  // smala formen som Niclas valde 2026-10-26).
+  const elevmal = radernaI(v).filter((r) => r.eleverna).map((r) => `<div class="pl-elevmal"><span class="pl-etikett">${esc(ELEVERNAS_KOLUMN)}</span><p>${lankad(mening(r.eleverna!))}</p></div>`).join('');
+  const delar: string[] = [`<header class="pl-veckohuvud"><h2 id="pl-veckan-rubrik" tabindex="-1">${esc(rubrikVecka(v))} i planen</h2><p class="meta">${meta.map(esc).join(' · ')}</p></header>`, elevmal, remsa(v.nr)];
   // Före första passet står under Före, och vecka 1 säger det tills första passet har varit (Opus 2026-10-24).
   if (harFore() && plan.forstaPass && idag <= plan.forstaPass) delar.push(`<p class="pl-paminn">Det som görs före första passet står under Före. <button type="button" class="pl-textknapp" data-vy="fore">Till Före</button></p>`);
   // Planens sista vecka säger hur insatsen slutar, med vägen till utvärderingen, och i en avslutad insats står rutan
@@ -1555,8 +1558,15 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   const upprepaKnapp = `<button type="button" class="knapp sekundar liten" data-gor="upprepa" ${goat('upprepa', 'veckan upprepad')}>Upprepa veckan</button>`;
   // Att ta bort en upprepning flyttar också den upprepade veckan, så det går inte när något är infört i den (Codex 2026-10-26).
   const taBort = v.igen && kanUpprepa && !lovetLast(v.mandag) ? '<button type="button" class="knapp sekundar liten" data-gor="ta-bort-upprepning">Ta bort upprepningen</button>' : '';
+  // Regeln för att gå vidare står först, ur veckans rad i progressionen som metodens fjärde kolumn säger den, och sedan
+  // metodens regel för att ta veckan igen (K-572). En rad utan regel i en metod som har reglerna, som den sista, där
+  // beslutet efter perioden gäller, har planens mening om knappen, eftersom metodens regel hänvisar till kolumnen.
+  const vidare = radernaI(v).filter((r) => r.vidare).map((r) => vidareMening(r.vidare!));
+  const medRegler = !!data.progression?.rader.some((r) => r.vidare);
+  const igen = data.upprepa && (vidare.length || !medRegler) ? lankad(mening(data.upprepa)) : 'Behöver gruppen mer tid tar ni samma vecka en gång till, och resten av planen flyttas fram.';
   const efterVeckan = [
-    kanUpprepa ? `<p>${data.upprepa ? lankad(mening(data.upprepa)) : 'Behöver gruppen mer tid tar ni samma vecka en gång till, och resten av planen flyttas fram.'}</p><p class="pl-andra-knappar">${upprepaKnapp}${taBort}</p>` : '',
+    vidare.length ? `<p class="pl-vidare">${lankad(vidare.join(' '))}</p>` : '',
+    kanUpprepa ? `<p>${igen}</p><p class="pl-andra-knappar">${upprepaKnapp}${taBort}</p>` : '',
     // Varför knappen saknas, när något är infört senare (verifieringen 2026-10-26: knappen försvann utan förklaring).
     veckorAttTaOm && !kanUpprepa && !harVarit ? '<p class="pl-hjalp">Veckan går inte att ta en gång till när du har bockat, skattat eller skrivit något i en vecka efter den, så att det står kvar under sin vecka.</p>' : '',
     plats('snabbmall') && !aktiv.folj ? `<p>Skriv i ${esc(filer.querySelector<HTMLElement>('[data-fil="snabbmall"]')?.dataset.namn ?? 'snabbmallen')} vad du såg och vad ni gör nästa vecka.</p><p class="metod-centrala">${plats('snabbmall')}</p>` : '',

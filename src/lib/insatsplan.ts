@@ -64,7 +64,8 @@ export interface PlanData {
   mal: string;
   tid?: string;
   period?: string;
-  progression?: { enhet: string; rader: { vecka: string; led?: string; fokus: string; roll: string; taggar?: string[]; rubrik?: string; kort: string }[] };
+  /** Progressionens rader, med vad eleverna blir bättre på och regeln för att gå vidare (K-572), som veckan visar. */
+  progression?: { enhet: string; rader: { vecka: string; led?: string; fokus: string; roll: string; eleverna?: string; vidare?: string; taggar?: string[]; rubrik?: string; kort: string }[] };
   uppfoljning: { rader: { nar: string; vad: string; tid?: string; perElev?: number | [number, number] }[] };
   checklista: string[];
   /** Checklistans rubrik, och om den gäller första passet ("Före första passet", "Checklista inför pass 1"), så att den bara

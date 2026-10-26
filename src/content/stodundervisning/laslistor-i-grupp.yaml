@@ -80,7 +80,7 @@ inledning:
   - Arbetet med listorna ska gå över i läsning av riktiga böcker. Från vecka 4, när eleverna läser hela ord med flyt, avslutas passen med några minuter i en bok som ni läser och pratar om, och den stunden växer fram till vecka 7. Börja med rörelsen och tidsschemat nedan.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Insatsen pågår i sex till åtta veckor med fyra till fem pass i veckan. Varje pass är 15 minuter, och gruppen har en till tio elever i F–3, främst F–2. Rörelsen är alltid densamma: du modellerar, ni körläser och eleverna läser i par. Eleven läser aldrig listan ensam. Ni arbetar med en lista i veckan, sju listor från bokstäver och ljud till meningar, och byter lista först när flytet sitter. Från vecka 4 läser ni några minuter i en riktig bok sist i passet. Före och efter perioden läser eleven Läslista start till Läslista 4 för dig, en minut per lista, och du jämför antalet rätt lästa ord."
+  text: "Insatsen pågår i sex till åtta veckor med fyra till fem pass i veckan. Varje pass är 15 minuter, och gruppen har en till tio elever i F–3, främst F–2. Rörelsen är alltid densamma: du modellerar, ni körläser och eleverna läser i par. Eleven läser aldrig listan ensam. Ni arbetar med sju listor, från bokstäver och ljud till meningar, och varje lista tar en vecka eller längre. Från vecka 4 läser ni några minuter i en riktig bok sist i passet. Före och efter perioden läser eleven Läslista start till Läslista 4 för dig, en minut per lista, och du jämför antalet rätt lästa ord."
 gruppen:
   rubrik: Så väljer du eleverna
   text: "Läslistor är för elever i F–3, främst F–2, som behöver stöd i avkodningen: de gissar sig fram när de läser eller ljudar utan att binda ihop ljuden till orddelar och ord. Den som ännu inte hör ljuden i orden tränar det först, till exempel i Ljudlek i grupp. Före perioden läser varje elev Läslista start till Läslista 4 för dig, en minut per lista, så att du hör vem som gissar, vem som ljudar utan att binda ihop och var flytet tar slut. Sätt ihop en till tio elever som tappar flytet på ungefär samma lista, och börja på den listan. Eleverna läser i par, och med ett udda antal blir ett par en trio."
@@ -256,41 +256,56 @@ urval:
       text: Varje lista bygger vidare på den förra
 progression:
   rubrik: Sju listor på sju veckor
-  text: "Listorna följer avkodningens naturliga utveckling, från säker koppling mellan bokstav och ljud, via allt längre ordstrukturer, till ord som växer med morfem och till sist hela meningar. Vägen går från alfabetisk-fonemisk läsning mot ortografisk-morfemisk läsning, där eleven börjar känna igen orddelar och stavningsmönster i stället för att ljuda varje bokstav (Høien och Lundberg, 2013). En lista kan ta mer än en vecka, eftersom ni byter lista först när flytet sitter. Planera en vecka för varje lista, från den lista som gruppen börjar på, och en vecka till när gruppen stannar kvar på en lista. Läsningen efter perioden gör du när gruppen har läst Läslista 6, och senast efter åtta veckor. Veckorna i metoden följer listorna: vecka 4 är veckan med Läslista 3, hur länge gruppen än har hållit på. Från lista 5 behövs ett litet antal ordbilder för meningarna: och, är, i, på, en, ett, har, jag, vi, det, de. Öva dem som helheter, till exempel med ordkort."
+  text: "Listorna följer avkodningens naturliga utveckling, från säker koppling mellan bokstav och ljud, via allt längre ordstrukturer, till ord som växer med morfem och till sist hela meningar. Vägen går från alfabetisk-fonemisk läsning mot ortografisk-morfemisk läsning, där eleven börjar känna igen orddelar och stavningsmönster i stället för att ljuda varje bokstav (Høien och Lundberg, 2013). En lista kan ta mer än en vecka, och tabellen säger för varje lista när ni byter till nästa. Planera en vecka för varje lista, från den lista som gruppen börjar på, och en vecka till när gruppen stannar kvar på en lista. Läsningen efter perioden gör du när gruppen har läst Läslista 6, och senast efter åtta veckor. Veckorna i metoden följer listorna: vecka 4 är veckan med Läslista 3, hur länge gruppen än har hållit på. Från lista 5 behövs ett litet antal ordbilder för meningarna: och, är, i, på, en, ett, har, jag, vi, det, de. Öva dem som helheter, till exempel med ordkort."
   enhet: Vecka
   rader:
     - vecka: "1"
       rubrik: "Läslista start: bokstäver och ljud"
       fokus: "Läslista start: bokstäver och ljud, först i inlärningsordning och sedan blandade."
-      roll: Lyssna efter att eleven säger ljudet och inte bokstavsnamnet. Ge artikulationsstöd. Byt lista först när eleverna säger ljudet så fort de ser bokstaven.
+      roll: Lyssna efter att eleven säger ljudet och inte bokstavsnamnet. Ge artikulationsstöd.
+      eleverna: "Att säga ljudet direkt när de ser bokstaven, som /m/ och inte em."
+      vidare: "de flesta i gruppen säger ljudet så fort de ser bokstaven i den blandade kolumnen, i veckans två sista pass"
     - vecka: "2"
       rubrik: "Läslista 1: två ljud"
       fokus: "Läslista 1: två ljud, KV och VK, som se, os och ål."
       roll: "Lyssna efter att ljuden binds ihop till ett ord. Vid fel: backa och ljuda långsamt tillsammans."
+      eleverna: "Att ljuda ihop två ljud till ett ord, som /s/ och /e/ till se, och läsa spegelparen rätt, som så och ås."
+      vidare: "de flesta i gruppen läser orden direkt, utan att stanna mellan ljuden, i veckans två sista pass"
     - vecka: "3"
       rubrik: "Läslista 2: KVK i ordfamiljer"
       fokus: "Läslista 2: KVK i ordfamiljer, som sol, sal och sil."
       roll: Lyssna efter att vokalen blir lång och att eleven läser hela vägen till slutet.
+      eleverna: "Att ljuda ihop tre ljud med lång vokal, som sol, och läsa nästa ord i familjen genom att byta första ljudet."
+      vidare: "de flesta i gruppen läser orden direkt och hela vägen till slutet, i veckans två sista pass"
     - vecka: "4"
       rubrik: "Läslista 3: två stavelser"
       fokus: "Läslista 3: KVKV, två stavelser, som sola, laga och resa. Boken växer in i avslutningen."
       roll: Lyssna efter att eleven tar en stavelse i taget. Läs cirka tre minuter i boken.
+      eleverna: "Att läsa ord med två stavelser, en stavelse i taget, som so-⁠la, och sedan läsa ihop hela ordet."
+      vidare: "de flesta i gruppen läser orden utan att ljuda bokstav för bokstav, i veckans två sista pass"
     - vecka: "5"
       rubrik: "Läslista 4: konsonantmöten"
       fokus: "Läslista 4: konsonantmöten, som sten, gris och häst."
       roll: Lyssna efter att inget ljud tappas eller läggs till i mötet. Cirka fyra minuter i boken.
+      eleverna: "Att läsa konsonantmötet som ett par, som st i sten, utan att tappa eller lägga till ett ljud."
+      vidare: "de flesta i gruppen läser orden direkt, utan att tappa ett ljud i mötet, i veckans två sista pass"
     - vecka: "6"
       rubrik: "Läslista 5: ändelser och sammansatta ord"
       fokus: "Läslista 5: ordet växer, med ändelser och sammansatta ord, som sol, solen och solar."
       roll: Lyssna efter att eleven läser ändelsen som en helhet. Cirka fem minuter i boken.
+      eleverna: "Att läsa ändelsen som en helhet och säga ordet inuti, som sol i solen. Att läsa ord som är, det och jag som ordbilder, utan att ljuda dem."
+      vidare: "de flesta i gruppen läser orden med ändelser direkt, utan att ljuda om hela ordet, i veckans två sista pass"
     - vecka: "7"
       rubrik: "Läslista 6: meningar och en kort text"
       fokus: "Läslista 6: meningar och en kort text."
       roll: Lyssna efter läsmelodin och prata om vad meningarna betyder. Cirka fem minuter i boken.
+      eleverna: "Att läsa om en mening med flyt, så att rösten går ner vid punkt, och berätta vad den handlar om."
+      vidare: "de flesta i gruppen läser om meningarna med flyt och berättar vad de handlar om, i veckans två sista pass"
     - vecka: Efter vecka 7
       rubrik: "Nästa period"
       fokus: "Nästa period: dubbelteckning med kort vokal, ng-ljudet, mjuka k och g samt sj- och tj-ljuden."
       roll: Fortsätt med upprepad läsning i riktiga böcker, till exempel med TIL i grupp, så att flytet förs över till texter som betyder något.
+      eleverna: "Att läsa ord med de ljudstridiga mönstren, och att läsa riktiga böcker med flyt och berätta vad de handlar om."
 uppfoljning:
   text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör samma läsning av listorna före och efter perioden. Läser eleven orden direkt i alla listorna efter perioden och kan berätta vad den korta texten handlar om, avslutar du insatsen. Läser eleven orden direkt men kan inte berätta vad texten handlar om, fortsätter eleven med upprepad läsning i riktiga böcker, till exempel med TIL i grupp. Har eleven fler rätt lästa ord än före perioden men tappar flytet på en lista, fortsätter eleven med läslistorna en period till och börjar på den listan. Har eleven inte fler rätt lästa ord än före perioden, tar du upp det med elevhälsan.
   rader:
@@ -338,7 +353,7 @@ plan:
     - nar: vecka 6–7
       del: Parläsning
       text: "I vecka 6 och 7 läser paren samma rader eller meningar som ni har körläst. På måndag läser de tisdagens rader eller meningar, och på fredag hela listan."
-  upprepa: "Byt lista först när paren läser orden direkt, utan att ljuda."
+  upprepa: "Byt lista när de flesta läser orden direkt i veckans två sista pass."
   # Periodens längd och beslutet efter läsningen efter perioden (passgenomgången 2026-10-26, out/planera-r/laslistor-i-grupp-3.md).
   veckoval:
     text: "Planera en vecka för varje lista, från den lista som gruppen börjar på, och en vecka till när gruppen stannar kvar på en lista. Läsningen efter perioden gör du när gruppen har läst Läslista 6, och senast efter åtta veckor."
@@ -375,7 +390,7 @@ snabbmall:
   sist:
     - Det här läser eleverna nu som de inte läste förut
     - "Nästa vecka: samma lista eller nästa, och det jag tar med mig"
-  not: På fredag läser varje elev listan för dig eller en kompis. Byt lista först när paren läser orden direkt, utan att ljuda. Från vecka 4 läser ni i boken sist i passet, och det du hör där skriver du under Efter.
+  not: På fredag läser varje elev listan för dig eller en kompis. Byt lista när de flesta läser orden direkt i veckans två sista pass. Från vecka 4 läser ni i boken sist i passet, och det du hör där skriver du under Efter.
 checklista:
   punkter:
     - Valt veckans lista och läst den högt själv.
@@ -404,7 +419,7 @@ ramar:
             - rubrik: Så gör ni
               text: "Peka och läs uppifrån och ned, kolumn för kolumn. Modellera fyra till sex bokstäver först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
             - rubrik: Lyssna efter
-              text: "Att eleven säger ljudet /m/ och inte namnet äm. Ge artikulationsstöd: känn läpparna vid /m/, tungan bakom tänderna vid /l/."
+              text: "Att eleven säger ljudet /m/ och inte namnet em. Ge artikulationsstöd: känn läpparna vid /m/, tungan bakom tänderna vid /l/."
     - rubrik: "Läslista 1: KV och VK"
       text:
         - Vecka 2 · två ljud.
@@ -643,7 +658,7 @@ lathund:
           text: Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog, till avslutningen från vecka 4.
         - fet: Egna listor.
           text: Riktiga, vanliga och ljudenligt stavade ord, en ny svårighet per lista.
-      efter: Byt lista först när flytet sitter.
+      efter: Byt lista när de flesta läser orden direkt i veckans två sista pass.
     bordet:
       - Veckans läslista, en kopia per par
       - Listan stor, så att alla ser den

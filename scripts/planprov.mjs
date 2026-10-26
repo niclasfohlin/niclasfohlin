@@ -916,6 +916,20 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     // Passgenomgången 2026-10-26: en metod som kan planeras har metodens regel för beslutet efter insatsen, och en period som
     // är ett spann eller öppen har stödet för antalet veckor. Prövat åt båda hållen.
     ska('spärren för beslutet efter insatsen och stödet för antalet veckor', s.utvarderingensFel({ plan: { passen: [] } }).length === 1 && !s.utvarderingensFel({ plan: { utvardering: ['Avsluta när eleven klarar det.'] } }).length && !s.utvarderingensFel({}).length && s.veckovaletsFel({ period: 'Sex till åtta veckor', plan: {} }).some((f) => f.includes('plan.veckoval')) && s.veckovaletsFel({ period: 'Tolv veckor eller mer', plan: {} }).some((f) => f.includes('plan.veckoval')) && !s.veckovaletsFel({ period: 'Åtta veckor', plan: {} }).length && !s.veckovaletsFel({ period: 'Sex till åtta veckor' }).length, [s.utvarderingensFel({ plan: {} }), s.veckovaletsFel({ period: 'Sex till åtta veckor', plan: {} })]);
+    // Den smala formen (K-572): eleverna i varje rad i en metod som kan planeras, "Att …" i högst två meningar, vidare med
+    // liten bokstav och utan punkt, och inget vidare i den sista raden. Cellen och meningen ur samma rot som sidan och Word.
+    const elevrad = (r) => ({ plan: {}, progression: { rader: [{ vecka: '1–2', eleverna: 'Att säga frågan med egna ord.', vidare: 'de flesta gör det i två pass i rad' }, { vecka: '3–4', eleverna: 'Att välja ett sätt.', ...r }] } });
+    ska('spärren för elevernas riktning åt båda hållen', !s.elevernasFel(elevrad({})).length
+      && s.elevernasFel({ plan: {}, progression: { rader: [{ vecka: '1' }] } }).some((f) => f.includes('har inget eleverna'))
+      && !s.elevernasFel({ progression: { rader: [{ vecka: '1' }] } }).length
+      && s.elevernasFel(elevrad({ eleverna: 'Eleverna väljer ett sätt.' })).some((f) => f.includes('börjar med "Att"'))
+      && s.elevernasFel(elevrad({ eleverna: 'Att a. Att b. Att c.' })).some((f) => f.includes('högst två meningar'))
+      && s.elevernasFel(elevrad({ vidare: 'De flesta gör det' })).some((f) => f.includes('liten bokstav'))
+      && s.elevernasFel({ plan: {}, progression: { rader: [{ vecka: '1', eleverna: 'Att a.', vidare: 'de flesta gör det.' }, { vecka: '2', eleverna: 'Att b.' }] } }).some((f) => f.includes('utan punkt'))
+      && s.elevernasFel(elevrad({ vidare: 'alla gör det' })).some((f) => f.includes('sista och har inget vidare'))
+      && s.elevernasCell({ eleverna: 'Att a.', vidare: 'b' }) === 'Att a.\nGå vidare när b.' && s.elevernasCell({ eleverna: 'Att a.' }) === 'Att a.'
+      && s.harElevernasKolumn(elevrad({})) && !s.harElevernasKolumn({ progression: { rader: [{ vecka: '1' }] } })
+      && s.planensTexter(elevrad({})).some(([, t]) => t === 'Gå vidare när de flesta gör det i två pass i rad.'), s.elevernasFel(elevrad({ vidare: 'alla gör det' })));
     ska('tidsschemats inledning i planen, utan meningarna om metodens sida', s.planensInledning(ll.tidsschema.text, ll.plan.utan) === 'Förbered dig genom att välja orden du ska modellera. Passet och listorna står också på Lektionskortet, ett A4 att ha framför dig.' && s.planensInledning('En. Två.', ['Två.']) === 'En.', s.planensInledning(ll.tidsschema.text, ll.plan.utan));
     const texter = s.planensTexter(ll), visade = s.visadeTexter(ll);
     ska('planens texter: planens egna fält, och metodens texter som planen visar med varianten och tabellraderna', texter.some(([plats]) => plats === 'Planens upprepa') && visade.includes('Passet är bara listan.') && visade.includes('Läraren modellerar fyra till sex ord, och gruppen körläser hela listan i stället för dagens kolumn. Förklara nya ord.') && visade.includes(s.planensInledning(ll.tidsschema.text, ll.plan.utan)) && !visade.some((t) => t.includes('Remsan')), texter.map(([p]) => p));
@@ -2125,6 +2139,10 @@ try {
     // En metod utan progression och utan roller, som Gruppstärkande aktiviteter där aktiviteterna väljs efter gruppen, visar
     // passets delar i veckan (riggens omgång 5 2026-10-26).
     sant(`${m.id}: den sparade planen visar veckan med fokus eller passets roll`, await b.kor(`(() => { const d = JSON.parse(document.getElementById('pl-data').textContent); const sel = d.progression ? '#pl-veckan .pl-fokusruta, #pl-veckan .pl-roll' : '#pl-veckan .pl-roll, #pl-veckan .pl-delar'; return !document.getElementById('pl-veckan').hidden && !!document.querySelector(sel); })()`), await b.text('#pl-veckan'));
+    // Den smala formen (K-572): veckan säger överst vad eleverna blir bättre på, ur veckans rad i progressionen, och Efter
+    // veckan regeln för att gå vidare som metodens fjärde kolumn, när raden har den.
+    const elev = await b.kor(`(() => { const d = JSON.parse(document.getElementById('pl-data').textContent); const rader = d.progression?.rader ?? []; return { har: rader.length > 0 && rader.every((r) => r.eleverna), elevmal: [...document.querySelectorAll('#pl-veckan .pl-elevmal p')].map((p) => p.textContent), mojliga: rader.map((r) => r.eleverna).filter(Boolean), vidare: document.querySelector('#pl-veckan .pl-vidare')?.textContent ?? null, regler: rader.map((r) => r.vidare).filter(Boolean) }; })()`);
+    if (elev.har) sant(`${m.id}: veckan säger vad eleverna blir bättre på och när gruppen går vidare, ur progressionens rad`, elev.elevmal.length > 0 && elev.elevmal.every((t) => elev.mojliga.some((e) => e.replace(/\.$/, '') === t.replace(/\.$/, ''))) && (elev.vidare === null || elev.regler.some((r) => elev.vidare.startsWith(`Gå vidare när ${r}`))), elev);
     sant(`${m.id}: planens länkar leder till sidor och ankare som finns`, !lankFel(await sakLankar(b)).length, [await sakLankar(b), lankFel(await sakLankar(b))]);
     // Stödet för nivåvalet vid varje nivåval (K-557): nerpilen under formulärets nivåer och under varje nivåval i veckan,
     // med metodens text och en länk som finns.

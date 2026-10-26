@@ -37,7 +37,7 @@ import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { site } from '../data/site';
-import { malensMening, variantensMening } from '../lib/standard/index.js';
+import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening } from '../lib/standard/index.js';
 import { materialAttribut } from '../lib/material';
 import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
@@ -164,6 +164,8 @@ const helaCm = d.mallar.find((m) => m.typ === 'brakplank')?.langdCm ?? 26;
 const lathundBlad = d.lathund && d.lathund.mall.block.filter((b) => b.typ !== 'not').length === 1 && d.lathund.mall.block.some((b) => b.typ === 'tabell' && b.rader.every((r) => r.every((c) => !c.trim()))) ? d.lathund.mall.rubrik : undefined;
 // Bråk i elevmaterialet staplas i matematik (src/lib/brak.ts); i andra ämnen står ett snedstreck kvar, som i ett datum.
 const brak = d.omrade === 'Matematik';
+// Progressionens fjärde kolumn, Eleverna blir bättre på, när någon rad har eleverna (K-572, standarden).
+const elevernasKolumn = harElevernasKolumn(d);
 // Sidnavigationen och ankarna (src/lib/metodankare.ts), som planen också läser, så att planens länkar leder till samma
 // ankare som sidan har (K-493).
 const avsnitt = metodensAvsnitt(d, { pass: !!pass, stegen: ord.stegen, lektionsbank: bank?.ord.meny });
@@ -595,7 +597,8 @@ const meny = [
     <section id="progression">
       <h2>{d.progression.rubrik}</h2>
       {d.progression.text && <p>{d.progression.text}</p>}
-      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} klass="stapla m-progression" />
+      {/* Den fjärde kolumnen säger vad eleverna blir bättre på och när gruppen går vidare (K-572, den smala formen). */}
+      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll', ...(elevernasKolumn ? [ELEVERNAS_KOLUMN] : [])]} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll, ...(elevernasKolumn ? [elevernasCell(r)] : [])])} bredder={elevernasKolumn ? ['14%', '29%', '28%', '29%'] : ['18%', '42%', '40%']} klass="stapla m-progression" />
       <Filmruta filmer={vid({ avsnitt: 'progression' })} titel={d.titel} />
     </section>
   )}
