@@ -203,7 +203,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Kalenderveckan | `kalendervecka`, `kalenderveckor` och, för skärmläsare, `kalenderveckaUtskriven` |
 | Veckan i planen | `planveckan`, `planveckanKort`, `gangen`, `veckansNamn` och `planveckansNamn` |
 | Metodens vecka, när en stege börjar högre upp | `metodveckan`, och i metodens texter `veckornaIPlanen` |
-| Veckorna i en rubrik, "vecka 1–2" | `veckorI` |
+| Veckorna i en rubrik, "vecka 1–2", och i början av en tabellrad, "7–8 Gruppen väljer modell" | `veckorI` och `radensVeckor` |
 | Veckans pass och datumordningen | `veckansPass`, `veckansDagar`, `efterDatum` och `iDatumordning` |
 | Ett datum | `datumText`, `dagOchManad`, `dagText`, `dagKort`, `spannKort`, `datumspann` och `arDatum` |
 | Dagens datum | `idagLokalt` i `src/scripts/insatser-lagring.ts` |
@@ -227,6 +227,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Ett pass ur sitt nummer, och passens nummer i en text, när numren har en lucka efter ett avslut | `passetMedNr`, `hogstaPassnr` och `passnummerText` |
 | Dagarna, och ett byte av dagar mitt i insatsen | `bytDagar`, `passdagar`, `rentaFore`, `dagarText` och `passensMinuter` |
 | Elevernas namn i texterna som lämnar webbläsaren | `elevernasNamn` och `utanNamn` |
+| Hur många elever elevlistan rymmer | `ELEVLISTANS_LANGD` |
 | En text som läraren skriver eller klistrar in, med en gräns | `rentText` och `kapaVidOrd` |
 | Insatsens läge och ordning i Dina insatser | `statusAv`, `STATUSNAMN` och `iTurOrdning` i `src/scripts/insatser-lagring.ts` |
 | Planens format, lagringen och filen | `PLANFORMAT`, `KONVERTERINGAR`, `konverteraPlan`, `lasPlanfil` och `planfilen` i `src/scripts/insatser-lagring.ts` |

@@ -33,7 +33,7 @@
     "datum": "2026-10-19"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "664621fab1a40ad1",
+    "kalla": "1267248914e280c4",
     "innehall": "23f512db6a119701",
     "skalor": [
       1.35,
@@ -66,15 +66,15 @@
     "datum": "2026-10-19"
   },
   "hoglasning-i-par": {
-    "kalla": "8fe2c834e4ff1718",
-    "innehall": "23337cd93b7bb490",
+    "kalla": "d56eef7ecfc9f42f",
+    "innehall": "ca86c93b53251fa9",
     "skalor": [
       1.3,
       1.35,
       1.35,
       1.3
     ],
-    "datum": "2026-10-19"
+    "datum": "2026-10-26"
   },
   "kompissamtal": {
     "kalla": "50476141a4f485f8",
@@ -275,14 +275,14 @@
     "datum": "2026-10-20"
   },
   "upprepad-lasning": {
-    "kalla": "a4839cd03e8e27fd",
-    "innehall": "558bde47adfde1e1",
+    "kalla": "dd4efb18b6fb4cc1",
+    "innehall": "49a5e44f18079cda",
     "skalor": [
       1.3,
       1.35,
       1.05,
-      1.35
+      1.3
     ],
-    "datum": "2026-10-20"
+    "datum": "2026-10-26"
   }
 }

@@ -165,12 +165,14 @@ tidsschema:
     - { tid: 18–⁠20 min, fas: Återkoppling, vad: "Säg en sak du hörde om texten och en om rösten." }
   varianter:
     - nar: pass 2
+      text: "Du hinner höra tre av dagens par"
       delar:
         - { fas: Texten, tid: 0–3 min }
         - { fas: Visa, tid: 3–8 min }
         - { fas: Läs för en lyssnare, tid: 8–18 min }
         - { fas: Återkoppling, tid: 18–20 min }
     - nar: veckans första pass i vecka 2–5
+      text: "Du hinner höra tre av dagens par"
       delar:
         - { fas: Texten, tid: 0–3 min }
         - { fas: Visa, tid: 3–8 min }
@@ -251,7 +253,7 @@ hem:
   text:
     - "Lappen hem skickar du med i vecka 1 och en ny i vecka 8. Läsningen hemma är frivillig. Eleven läser en egen bok för någon som säger lyssnarens två meningar."
 progression:
-  text: "Vecka 1–5 har var sin strategi, och de tidigare är med i allt eleverna läser. I veckans första pass visar du den nya strategin med visningen i tabellen De fem strategierna. Då får Visa fem minuter och Läs för en lyssnare tio, och du hinner höra tre av dagens par. I vecka 1 visar du Tankepausen i passet efter det allra första, och där är klassen din lyssnare: några säger lyssnarens två meningar om din läsning, och du frågar ”Var hörde du det?” tills någon visar var i texten. Från vecka 4 säger klassen var tecknet ska stå på tavlan. I paret tittar läsaren då tyst igenom det hen ska läsa, väljer ett ställe där en strategi behövs och pekar på det innan hen läser, och lyssnarens ”Jag hörde att du …” gäller det stället. I åk 2–3 visar du strategin kort i vecka 4 och 5."
+  text: "Vecka 1–5 har var sin strategi, och de tidigare är med i allt eleverna läser. I veckans första pass visar du den nya strategin med visningen i tabellen De fem strategierna. I vecka 1 visar du Tankepausen i passet efter det allra första, och där är klassen din lyssnare: några säger lyssnarens två meningar om din läsning, och du frågar ”Var hörde du det?” tills någon visar var i texten. Från vecka 4 säger klassen var tecknet ska stå på tavlan. I paret tittar läsaren då tyst igenom det hen ska läsa, väljer ett ställe där en strategi behövs och pekar på det innan hen läser, och lyssnarens ”Jag hörde att du …” gäller det stället. I åk 2–3 visar du strategin kort i vecka 4 och 5."
   rader:
     - { vecka: "1", led: Jag gör, fokus: Tankepausen, roll: "I det första passet sätter du i gång paren. Sedan visar du Tankepausen, och klassen är din lyssnare" }
     - { vecka: "2", led: Jag gör, fokus: Frågan och utropet, roll: "Du visar, och paren läser frågorna och utropen i sin bok" }
@@ -264,17 +266,26 @@ progression:
 uppfoljning:
   text: "Lyssna på några elever om dagen med provtexten i vecka 1 och 8, till exempel när klassen läser tyst. Varje elev tar omkring fyra minuter. Efter vecka 8 jämför du protokollen och bestämmer med eleven vad hen tränar vidare."
   rader:
-    - { nar: Vecka 1, tid: "vecka 1", perElev: 4, vad: "Eleven läser provtexten tyst och säger vad den handlar om. Säg sedan: ”Läs den högt så att jag förstår och känner det texten säger.” Spela in hela läsningen, och fyll i protokollet." }
+    - { nar: Vecka 1, tid: "vecka 1", perElev: 4, vad: "Eleven läser provtexten tyst och säger vad den handlar om. Säg sedan: ”Läs den högt så att jag förstår och känner det texten säger.” Spela in hela läsningen, och fyll i lyssnarprotokollet." }
     - { nar: Varje pass, tid: "varje pass", vad: "Lyssna på dagens par, och skriv på klasslistan vad du hörde och vad varje elev ska pröva. Nästa gång du hör paret börjar du där, och det som många behöver tar du upp i nästa pass." }
-    - { nar: Vecka 8, tid: "vecka 8", perElev: 4, vad: "Eleven läser samma provtext, och du spelar in och fyller i protokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu." }
+    - { nar: Vecka 8, tid: "vecka 8", perElev: 4, vad: "Eleven läser samma provtext, och du spelar in och fyller i lyssnarprotokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu." }
 plan:
   fore:
     - "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre."
+    - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna Var är mössan? och Källaren och lyssnarprotokollet, och ordnat något att spela in med."
   passen:
     - nar: första passet
       kort: "Det första passet"
       text: "I det första passet sätter du i gång paren."
       tabell: "Det första passet"
+    - nar: veckans första pass i vecka 6
+      kort: "Mötet med de yngre"
+      utanTidsschema: true
+      ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
+    - nar: veckans första pass i vecka 8
+      kort: "Läsningen för de yngre"
+      utanTidsschema: true
+      ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 8" }
 mal:
   overgripande: "kunna läsa högt så att lyssnaren förstår det texten säger."
   text: "Efter de åtta veckorna ska eleven oftare än förut:"
@@ -286,7 +297,7 @@ mal:
 checklista:
   rubrik: Checklista
   punkter:
-    - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna och protokollen, och ordnat något att spela in med."
+    - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna Var är mössan? och Källaren och lyssnarprotokollet, och ordnat något att spela in med."
     - Valt ett ställe till varje pass i veckan.
     - "Före vecka 6: lånat omkring två korta bilderböcker per elev och kopierat Läsarens förberedelse."
 grund:

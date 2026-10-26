@@ -69,4 +69,6 @@ const fraga = (f: string) => f.match(/^(\d+)\.\s*([\s\S]*)$/);
     </ol>
   </div>
   <p class="boksida-fot"><span>{l.not}</span> <span class="boksida-knapp">{l.niva.toUpperCase()}{!/^kartläggning/i.test(l.vad) && <>{' · '}{l.vad}</>}</span></p>
+  {/* Knappen under en lästext med egen fil, bara på skärmen (Sakknapp.astro, src/lib/sakfiler.ts). */}
+  <slot />
 </section>

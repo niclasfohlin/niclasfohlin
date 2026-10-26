@@ -6,6 +6,7 @@
 // src/lib/bladmaterial.ts, K-476; Sakknapp.astro). Sakerna:
 //   en ram i materialet, med sina sidor som i planeringsmallarna, när den inte har en fil redan: bankens ramar, nivåernas,
 //   ramarna med blad och lärarhandledningarna har sina filer, och en ram vars blad har egna filer skrivs ut med bladen;
+//   en lästext utanför banken, som Högläsning i pars provtexter, är en sådan ram;
 //   en vecka i en ram med lektioner (veckorna i De fyra räknesätten), veckans sida för sig;
 //   ett räkneblad med namn (Addition 1) på sitt A4, och en ram med flera sådana alla bladen i en fil, under det sista;
 //   en mall under Mallar att skriva ut, och diplomet eller kursintyget.
@@ -18,7 +19,7 @@ import { metodensNivamaterial } from './nivamaterial';
 import { bladgrupper, egnaBlad, metodensBladmaterial } from './bladmaterial';
 import { bokhandledningen, lararhandledningar } from './handledning';
 import { bladNamn, forstaLed } from './karta';
-import { faktatexter, lastexter, strukturAv, textparAv } from './ramform';
+import { faktatexter, strukturAv, textparAv } from './ramform';
 import { allaAntal, kortnamn, slugAv, stor } from './standard/index.js';
 
 export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall' | 'diplom';
@@ -52,7 +53,6 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
   const bokhl = bokhandledningen(ramar);
   const egna = egnaBlad(d, id);
   const medBlad = new Set(egna.map((b) => b.ri));
-  const texter = lastexter(ramar);
   const fakta = faktatexter(ramar);
   // Ramens namn på knappen: rubrikens första led när ingen annan ram har det ("Bildserie 1"), annars hela rubriken ("Mina
   // lärdomar: vecka 1–2"), med standardens kortnamn.
@@ -60,7 +60,7 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
   ramar.forEach((ram, ri) => {
     if (iBanken(bank, ri)) return;
     if (nm?.ramar.has(ri) || bm?.ramar.has(ri) || handledningar.has(ri) || bokhl?.ri === ri || medBlad.has(ri)) return;
-    if (texter.has(ram) || fakta.has(ram) || textparAv(ram) || strukturAv(ram)) return;
+    if (fakta.has(ram) || textparAv(ram) || strukturAv(ram)) return;
     // Veckorna i en ram med lektioner, var och en för sig: en del vars första led är en vecka ("Vecka 1 · Hopp på talraden").
     if (ram.lektioner) {
       ram.delar.forEach((del, di) => {

@@ -437,6 +437,8 @@ const metodensFalt = z.strictObject({
     plan: z.strictObject({
       passen: z.array(z.strictObject({
         nar: text, text: text.optional(), kort: z.string().trim().min(1).max(30).optional(), tabell: text.optional(),
+        // Ett pass som metoden beskriver med ord och inte med tidsschemats delar, som mötet hos de yngre i Högläsning i par.
+        utanTidsschema: z.literal(true).optional(),
         ur: z.strictObject({ tabell: text, rad: text, kolumner: z.array(text).min(1).optional() }).optional(),
       }).refine((p) => !!(p.text || p.ur), { message: 'En rad i plan.passen har en text, ett citat ur metoden, eller en rad ur metodens tabell (ur), eller båda.' })).min(1).optional(),
       utan: z.array(text).min(1).optional(),

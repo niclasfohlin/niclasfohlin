@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { gruppensElever, kortnamn, metodplan, minuterISpann, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, rollensRad, sakdelar, sakspann, slugAv, tabellensDelar, visadeTexter } from './standard/index.js';
+import { forstaLedet, gruppensElever, kortnamn, metodplan, minuterISpann, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, sakdelar, sakspann, slugAv, tabellensDelar, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
@@ -78,7 +78,7 @@ export interface PlanData {
   /** Vad som skiljer passen åt (plan.passen): rollens citat ur metoden och raden ur metodens tabell som den hämtar sin text
    * ur (K-520), och adressen till metodens tabell för ett pass som går till på ett eget sätt med tabellens delar, när den
    * har en rad per del med tiden under delens namn (Seriesamtals pass 1). */
-  passen?: { nar: string; text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; tabell?: { namn: string; adress: string; delar?: { tid: string; fas: string; vad: string; mer?: { etikett: string; text: string }[] }[]; fore?: { namn: string; nar: string; vad: string }[] } }[];
+  passen?: { nar: string; text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; utanTidsschema?: boolean; tabell?: { namn: string; adress: string; delar?: { tid: string; fas: string; vad: string; mer?: { etikett: string; text: string }[] }[]; fore?: { namn: string; nar: string; vad: string; mer?: { etikett: string; text: string }[] }[] } }[];
   /** Metodens rutor överst, som planen visar eller leder till: principerna, gruppen och Hem och skola. */
   principer?: { rubrik: string; text: string; adress: string };
   gruppen?: { rubrik: string; text: string; adress: string };
@@ -87,6 +87,8 @@ export interface PlanData {
   hem?: { rubrik: string; text: string; adress: string };
   /** Metodens avsnitt om när eleven fastnar, och de andra stöden i stunden, som Om något händer i Seriesamtal. */
   fastnar?: { rubrik: string; adress: string }[];
+  /** Metodens material, med rubriken som i metoden, som Böckerna och materialet. */
+  material?: { rubrik: string; adress: string };
   /** Metodens verktyg och stödmaterial (fältet centrala), utom banken som planen redan har. */
   centrala?: { namn: string; adress: string; pdf: boolean }[];
   /** Metodens mål på sidan, som planen leder till vid insatsens mål. */
@@ -118,7 +120,7 @@ export interface PlanPasset {
   not?: string;
   adress: string;
   /** Stegen med vad läraren säger, på metodens sida. */
-  steg?: { rubrik: string; adress: string; rader: { namn: string; fraser: string[] }[] };
+  steg?: { rubrik: string; fraserRubrik: string; adress: string; rader: { namn: string; fraser: string[] }[] };
 }
 
 // Planens texter ur metoden står i standarden (planensTexter och visadeTexter i src/lib/standard/plan.js), så att riggen
@@ -172,7 +174,7 @@ function planensPass(d: Metod['data'], id: string): PlanPasset | undefined {
     ...(d.passrutin?.efterPasset ? { efter: d.passrutin.efterPasset } : {}),
     ...(d.tidsschema.efter ? { not: d.tidsschema.efter } : {}),
     adress: `${sida}#${passOversikt(d) ? 'passrutin' : 'tidsschema'}`,
-    ...(d.steg ? { steg: { rubrik: d.steg.rubrik, adress: `${sida}#steg`, rader: d.steg.rader.map((r) => ({ namn: r.namn, fraser: r.fraser.slice(0, 3) })) } } : {}),
+    ...(d.steg ? { steg: { rubrik: d.steg.rubrik, fraserRubrik: forstaLedet(d.steg.fraserRubrik), adress: `${sida}#steg`, rader: d.steg.rader.map((r) => ({ namn: r.namn, fraser: r.fraser.slice(0, 3) })) } } : {}),
   };
 }
 
@@ -183,21 +185,23 @@ function passetsTabell(d: Metod['data'], id: string, namn: string): NonNullable<
   const t = d.tabeller.find((x) => x.rubrik === namn);
   const delar = t ? tabellensDelar(t) : null;
   if (!delar) return { namn, adress };
-  return { namn, adress, delar: delar.delar.map((x) => ({ tid: x.tid, fas: x.fas, vad: x.vad, ...(x.mer.length ? { mer: x.mer } : {}) })), fore: delar.fore };
+  const medMer = <T extends { mer: { etikett: string; text: string }[] }>({ mer, ...x }: T) => ({ ...x, ...(mer.length ? { mer } : {}) });
+  return { namn, adress, delar: delar.delar.map(medMer), fore: delar.fore.map(medMer) };
 }
 
-// En tabell med en rad för varje vecka och en kolumn för varje nivå (Talen och bladen i veckorna i De fyra räknesätten):
-// kolumnerna efter den första heter som metodens nivåer, och varje rad börjar med "Vecka N".
+// En tabell med en rad för varje vecka och en kolumn för varje nivå (Talen och bladen i veckorna i De fyra räknesätten,
+// Texterna, vecka för vecka i Faktatextsamtal i grupp): kolumnerna efter den första heter som metodens nivåer, och varje
+// rad börjar med veckan, "Vecka 3", "3 Venndiagrammet" eller "7–8 Gruppen väljer modell".
 function nivaTabellen(d: Metod['data'], id: string): PlanData['nivaTabell'] {
   const nivaer = d.nivaer.map((n) => n.namn.toLowerCase());
   if (nivaer.length < 2) return undefined;
-  const t = d.tabeller.find((x) => x.kolumner.length === nivaer.length + 1 && x.kolumner.slice(1).every((k, i) => k.toLowerCase() === nivaer[i]) && (x.rader ?? []).length > 0 && (x.rader ?? []).every((r) => /^vecka \d+/i.test(String(r[0]).trim())));
+  const t = d.tabeller.find((x) => x.kolumner.length === nivaer.length + 1 && x.kolumner.slice(1).every((k, i) => k.toLowerCase() === nivaer[i]) && (x.rader ?? []).length > 0 && (x.rader ?? []).every((r) => !!radensVeckor(r[0])));
   if (!t) return undefined;
   const veckor: Record<string, Record<string, string>> = {};
   for (const r of t.rader ?? []) {
-    const v = String(r[0]).trim().match(/^vecka (\d+)/i)?.[1];
-    if (!v) continue;
-    veckor[v] = Object.fromEntries(d.nivaer.map((n, i) => [slugAv(n.namn), String(r[i + 1] ?? '').trim()]));
+    const celler = Object.fromEntries(d.nivaer.map((n, i) => [slugAv(n.namn), String(r[i + 1] ?? '').trim()]));
+    const s = radensVeckor(r[0]);
+    if (s) for (let v = s.fran; v <= s.till; v++) veckor[String(v)] = celler;
   }
   return { rubrik: t.rubrik, adress: tabellensAdress(d, id, t.rubrik) ?? `/stodundervisning/${id}`, veckor, ...(t.not ? { not: t.not } : {}) };
 }
@@ -247,12 +251,13 @@ export async function planensData(m: Metod): Promise<PlanData> {
     saker: await planensSaker(m),
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
-    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, ...(p.text ? { text: p.text } : {}), ...(p.ur ? { rad: rollensRad(d, p.ur) ?? [] } : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell) } : {}) })) } : {}),
+    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, ...(p.text ? { text: p.text } : {}), ...(p.ur ? { rad: rollensRad(d, p.ur) ?? [] } : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell) } : {}) })) } : {}),
     ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: d.gruppen.text, adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),
     ...(d.hem ? { hem: { rubrik: d.hem.rubrik, text: postensRad(d.hem.text[0], 240), adress: `${sida}#hem` } } : {}),
     ...(fastnar.length ? { fastnar } : {}),
+    ...(d.ramar?.ramar?.length ? { material: { rubrik: d.ramar.rubrik || 'Materialet', adress: `${sida}#ramar` } } : {}),
     ...(centrala.length ? { centrala } : {}),
     ...(d.mal ? { malAdress: `${sida}#mal` } : {}),
     ...(d.plan?.fore ? { fore: d.plan.fore } : {}),

@@ -755,7 +755,9 @@ const meny = [
         <Faktatext f={faktasidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={nivaFarg(faktasidor.get(ram)!.niva, faktasidor.get(ram)!.nivaNr)} rubrik={ram.rubrik} bilder={faktabilder(ram)} las={sidlasFor(id, ram.rubrik)} />
         <Filmruta filmer={[...utanPlats(ram), ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : boksidor.has(ram) ? (<>
-        <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
+        {/* En lästext utanför banken har sin egen fil, som Högläsning i pars provtexter, och knappen står sist i sidan
+            (src/lib/sakfiler.ts). */}
+        <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'}>{(!lage || lage === 'material') && !undersida && saker.ram.get(ri) && <Sakknapp fil={saker.ram.get(ri)!} metod={d.titel} />}</Boksida>
         <Filmruta filmer={[...vid({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : strukturer.has(ram) ? (() => {
         const [bild, ...fler] = paBordetVid(bilderPaBordet, { ram: ram.rubrik });

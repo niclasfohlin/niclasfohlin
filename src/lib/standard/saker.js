@@ -25,9 +25,17 @@ const HUVUDORD = {
   // Räknemattan och kursintyget (länkgranskningen 2026-10-25: "räknemattans ark" och "kursintyget" blev ingen länk).
   matta: ['matta', 'mattan', 'mattor', 'mattorna', 'mattans', 'mattornas'],
   intyg: ['intyg', 'intyget', 'intygen', 'intygets'],
+  // Affischen, lappen hem, röstsedlarna och läsplanen (länkgranskningen av omgång 1 2026-10-26: namnen stod med liten
+  // bokstav och blev ingen länk).
+  affisch: ['affisch', 'affischen', 'affischer', 'affischerna', 'affischens', 'affischernas'],
+  lapp: ['lapp', 'lappen', 'lappar', 'lapparna', 'lappens', 'lapparnas'],
+  sedel: ['sedel', 'sedeln', 'sedlar', 'sedlarna', 'sedelns', 'sedlarnas'],
+  plan: ['plan', 'planen', 'planer', 'planerna', 'planens'],
 };
 // De bestämda formerna, som spärren letar efter; en grundform som "kort" är också ett vanligt ord.
-const BESTAMDA = Object.values(HUVUDORD).flatMap((f) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar', 'bilder'].includes(f)).sort((a, b) => b.length - a.length);
+const BESTAMDA = Object.values(HUVUDORD).flatMap((f) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar', 'bilder', 'affischer', 'lappar', 'sedlar', 'planer'].includes(f)).sort((a, b) => b.length - a.length);
+// Ett pronomen i genitiv är inget namn på en sak ("Hennes bok"), men ett substantiv i genitiv är det ("Lärarens sida").
+const PRONOMEN = new Set(['hans', 'hennes', 'deras', 'dess', 'ens']);
 // Huvudordet som ett ord slutar på, med den längsta formen först, så att "kortet" inte läses som "kort" och "et".
 const huvudordet = (ord) => {
   const sma = ord.toLowerCase();
@@ -37,17 +45,19 @@ const huvudordet = (ord) => {
 };
 
 /**
- * Är namnet ett ord för en sak: ett ord som slutar på ett av huvudorden (Lyssningsbladet, Sifferkort, Lathunden) eller ett
- * långt sammansatt ord (Samtalsreglerna)? Ett sådant namn hittas också med liten bokstav; ett annat namn, som "Min
- * huvudperson", bara som en titel, med stor bokstav mitt i en mening (Codex 2026-10-24: "min huvudperson" i en mening om
- * lärarens figur blev en länk till bladet).
+ * Är namnet ett ord för en sak: ett ord som slutar på ett av huvudorden (Lyssningsbladet, Sifferkort, Lathunden), ett
+ * långt sammansatt ord (Samtalsreglerna) eller ett substantiv i genitiv och sakens namn (Lärarens sida, Bokens tavla)? Ett
+ * sådant namn hittas också med liten bokstav; ett annat namn, som "Min huvudperson", bara som en titel, med stor bokstav
+ * mitt i en mening (Codex 2026-10-24: "min huvudperson" i en mening om lärarens figur blev en länk till bladet).
  * @param {string} namn
  */
 export function arSaksord(namn) {
   const n = String(namn ?? '').trim();
   const ord = n.split(/\s+/);
-  // Ett av orden är ett ord för en sak (Läslista 1, Kartläggningens protokoll), eller namnet är ett långt sammansatt ord.
-  return ord.some((o) => !!huvudordet(o)) || (ord.length === 1 && n.length >= 12);
+  // Ett av orden är ett ord för en sak (Läslista 1, Kartläggningens protokoll), namnet är ett långt sammansatt ord, eller
+  // två ord där det första är ett substantiv i genitiv (länkgranskningen av omgång 1 2026-10-26: "lärarens sida").
+  const genitiv = ord.length === 2 && /^\p{Lu}\p{L}{3,}s$/u.test(ord[0]) && !PRONOMEN.has(ord[0].toLocaleLowerCase('sv'));
+  return ord.some((o) => !!huvudordet(o)) || (ord.length === 1 && n.length >= 12) || genitiv;
 }
 
 /**

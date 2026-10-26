@@ -4915,18 +4915,18 @@
     "datum": "2026-10-25"
   },
   "faktatextsamtal-i-grupp": {
-    "word": "cd657f0d6ccf2ba776b4838e09020a39eb74b6632af8ee41fb8422efdf300fea",
-    "pdf": "23eeca3eb56587fdea49ea57bec34ce740e284fa44d646627162facbe7aa2096",
+    "word": "8a10f65e66514dfd635ca0f9b4882fbcd50faa3940d3e1a5e7736ec56a577da3",
+    "pdf": "fecd74c8bbc4e3a5b17fdf2ea6d1ec1f719d5989a237ca6fce6625e7958e7141",
     "sidor": 175,
     "kB": 3448,
-    "datum": "2026-10-25"
+    "datum": "2026-10-26"
   },
   "faktatextsamtal-i-grupp-metoden": {
-    "word": "61dca285f0a32f7a4a64c59aaf1422eef167ddf6216e45e97bcd0a157c3914f0",
-    "pdf": "67a680cfc605a37c747a7714a8c298d8df39518ec38a8ae5a3f89267fc8c19a8",
+    "word": "3cc9712dd18661420fca24d92060699482b8e6212ea1c1fedae39c654313a788",
+    "pdf": "2013ee613e3e744753cfae6b43d3a3b03a67807da57b48fb5aa4ee53782502d4",
     "sidor": 16,
     "kB": 582,
-    "datum": "2026-10-25"
+    "datum": "2026-10-26"
   },
   "fyra-raknesatten": {
     "word": "fc5106dd4f119a7d3794aaf3c83f19b580b306ed5bd03fb8fe9e60034ced8030",
@@ -5251,15 +5251,15 @@
     "datum": "2026-10-25"
   },
   "upprepad-lasning": {
-    "word": "05a54f38c3e591417230a6adcc0f02d08073695e8107de42615753482c38020c",
-    "pdf": "1ddbd6d920f39b2ae55e1b6617f910dd606b6593511c644186394a0caca4d008",
+    "word": "ac0b3233623c99407dabd07bf6b2d452b615c1758a1a8d76e621d2ad1c1a83ac",
+    "pdf": "4371112e22c5e704d0d73ca331238d248e00d27bb5deacb38b5e5ad471d34215",
     "sidor": 35,
     "kB": 974,
     "datum": "2026-10-26"
   },
   "upprepad-lasning-metoden": {
-    "word": "22c75a041ec81e70da602ed577652f065cc2069ed750a48ff32d5139b16e151e",
-    "pdf": "fb02143cde3c60cc3d366cf98c2f9373032492a0d926df61c1a99a2f014659f2",
+    "word": "ecc63bee78329deaeb2fa0a06e52e700d95eb8270d9ec9469411021d5b8c1401",
+    "pdf": "c9c9941ced6b82f7dd5f6160cc144c40f61e598b10a389cea6177dfabd3d0aea",
     "sidor": 13,
     "kB": 528,
     "datum": "2026-10-26"
@@ -7672,15 +7672,15 @@
     ]
   },
   "hoglasning-i-par": {
-    "word": "c779fd322b51073395d3f212f7bc3886c33011145d16ce20822ece05160383dc",
-    "pdf": "0f8a02277b77ae0c4313669f081e2f38a79a997d4bcf825acd9faa8e4e8a5bfd",
+    "word": "2a1be9745e85f4d9656592ed01e3178645d36aa9f671cca8e0fce29d04a17119",
+    "pdf": "0bb82d7685f4c9f4eb0d342b65e1c9b4a2d02116003b4512afc464015e7f1f50",
     "sidor": 29,
     "kB": 845,
     "datum": "2026-10-26"
   },
   "hoglasning-i-par-metoden": {
-    "word": "ad7dd4209f09d79ede038c281c80e80642ed39096610f32583c45d310badb674",
-    "pdf": "2c76de91dab4d6fba24a0b79c4f9bd995e9f7eaa0cdc5dc770bad9932559dc3e",
+    "word": "b1f551c4dcfe307413c2c806f01cf2be1fb96ae9c606f6a79a63a2c1bc45fb40",
+    "pdf": "710d3fa8a13b0765371c0e3740533832103ae18a47b083480cdc323bc1ec50a3",
     "sidor": 11,
     "kB": 421,
     "datum": "2026-10-26"
@@ -9541,5 +9541,19 @@
     "sidor": 1,
     "kB": 230,
     "datum": "2026-10-25"
+  },
+  "hoglasning-i-par-blad-ak-2-3-provtext-var-ar-mossan": {
+    "word": "c70f5516adbfba9647564f232642522545205d5e95bccaa7342368a79aebdf0e",
+    "pdf": "09bac24a354277cb94bb0ae208f4a0ea0f0252030b2e06566e452d508fca62a9",
+    "sidor": 1,
+    "kB": 157,
+    "datum": "2026-10-26"
+  },
+  "hoglasning-i-par-blad-ak-4-5-provtext-kallaren": {
+    "word": "3af67dfddcac3c6a29b3b31d766a56edd3f0c09158c630cdc78d9ff445e03520",
+    "pdf": "ea63009e46f47e0691ee7524fcc76aed7ef3c0c8af59d8d08be0488504a26213",
+    "sidor": 1,
+    "kB": 157,
+    "datum": "2026-10-26"
   }
 }

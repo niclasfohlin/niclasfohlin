@@ -24,7 +24,7 @@ material:
   - fem modeller med blad
   - post-it-lappar
   - pennor
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - boksamtal-i-grupp
   - problemlosning-i-grupp
@@ -73,7 +73,7 @@ passrutin:
       text: "Gruppen läser de fyra avsnitten, ett i taget. Du läser det första högt, och paren läser de tre andra. Varje avsnitt som paren läser har fyra steg: Läs, Red ut, Kärnan och Lappen."
     - fas: Avsluta
       text: En elev läser lapparna i följd. Var och en säger till den bredvid vad hen tror nu, och gruppen prövar gissningarna mot lapparna.
-  efterPasset: Spara bladet Kärnorna med lapparna till modellpasset. Se i elevernas texter vad de har strukit under, och skriv på lärarens sida det du såg och vem du frågar först nästa gång.
+  efterPasset: Efter läspasset sparar du bladet Kärnorna med lapparna till modellpasset. Se i elevernas texter vad de har strukit under, och skriv på lärarens sida det du såg och vem du frågar först nästa gång.
 tidsschema:
   rubrik: Läspasset på 40 minuter
   rader:
@@ -521,7 +521,7 @@ progression:
       fokus: De två som har jobbkorten i det sista avsnittet leder gruppen genom alla fyra stegen.
       roll: "Läspasset: i det sista avsnittet går du in först när något saknas. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger."
     - vecka: "6"
-      rubrik: "Klassens text, och du väljer modell"
+      rubrik: "Klassens text, och läraren väljer modell"
       fokus: Gruppen läser klassens text i SO eller NO, som ofta är byggd på flera sätt.
       roll: "Läspasset: du tänker högt i avsnitt 1 igen. Modellpasset: du prövar två av modellernas frågor högt, och paren de tre andra."
     - vecka: 7–8
@@ -551,6 +551,8 @@ plan:
       kort: "Modellpasset"
       tabell: "Modellpasset på 40 minuter"
       ur: { tabell: "Två pass per text: läspasset och modellpasset", rad: Tränar, kolumner: [Modellpasset] }
+    - nar: veckans första pass i vecka 6–8
+      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur förbereder du den?" }
     - nar: sista passet
       text: "I det sista passet säger var och en vad hen tar med sig från perioden."
 mal:

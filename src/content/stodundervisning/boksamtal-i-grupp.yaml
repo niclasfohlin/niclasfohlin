@@ -547,9 +547,11 @@ uppfoljning:
 plan:
   fore:
     - "Du gör läsintervjun, fem minuter per elev, läser de två böckerna och reserverar exemplar. Räkna med en till tre veckor."
+    - "På varje nivå, Bas, Medel och Avancerat, har metoden tio böcker: fem från 2012 eller senare och fem klassiker. I nivåns lista ser du ungefär hur många läspass varje bok tar, var ljudboken och talboken finns, var du lånar och köper boken och om det finns en lärarhandledning."
   passen:
     - nar: första passet
       kort: "Bokvalet"
+      text: "När boken är vald gör du läsplanen och skriver in det som är nytt i ett läspass."
       tabell: "Första passet: bokvalet"
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Bokvalet, kolumner: [Det som är nytt] }
     - nar: pass 2
@@ -565,12 +567,12 @@ plan:
     - nar: pass 7–10
       kort: "En elev leder Var är vi?"
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] }
-    - nar: pass 11 till det sista
+    - nar: pass 14 till det sista
       kort: "En elev leder laget runt"
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 10, kolumner: [Det som är nytt] }
     - nar: näst sista passet
       kort: "Det sista läspasset"
-      ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Det sista läspasset, kolumner: [Det som är nytt] }
+      text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut."
     - nar: sista passet
       kort: "Slutet"
       tabell: "Sista passet: slutet"

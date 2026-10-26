@@ -6,6 +6,9 @@
 - `plan.js`, `näst sista passet` i planens ord (`tolkaPassen`), för Boksamtalets sista läspass, där boken läses ut.
 - `plan.js`, `tabellensDelar`: delarna i ett pass med egen tabell i tabellernas former, med tiden under delens namn, i en egen kolumn Tid, med tid och del i samma cell med en punkt, och de andra kolumnerna med sina namn, som Du säger. En tabell där en del saknar namn är inget pass i delar, så att metoden får namnen.
 - `saker.js`, `EGNA_SAKER`: lärarens och elevernas egna saker som ser ut som namn på saker men inte är metodens, som klasslistan, och som `olankadeSaker` inte stoppar.
+- `saker.js`, efter sajtens länkgranskning samma natt: huvudorden affisch, lapp, sedel och plan, och ett namn i två ord där det första är ett substantiv i genitiv (Lärarens sida, Bokens tavla, men inte Hennes bok), är ord för saker i `arSaksord` och hittas också med liten bokstav.
+- `plan.js`, efter sajtens kalla testare samma natt: `ELEVLISTANS_LANGD`, hur många elever elevlistan rymmer, en hel klass (32), som `rensaFoljd` håller sig till, och en rad i planens `passen` med `utanTidsschema` ger ett pass utan tidsschemats delar i `passetsBeskrivning`.
+- `plan.js`, efter Codex granskning samma natt: det näst sista passet är passet före det sista efter datum (`passetsLage`), `passetsBeskrivning` ger variantens `rubrik` för ett kortare pass, `tabellensDelar` behåller tabellens andra kolumner också på en förberedelserad, och `metodplan` läser planens `passen` med `variantensNar`, så att en rad kan gälla en plats i vissa veckor men inte passets längd.
 
 ## 0.17.0, 2026-10-25
 

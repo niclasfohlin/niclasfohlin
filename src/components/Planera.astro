@@ -11,7 +11,7 @@ import Base from '../layouts/Base.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import AppRad from './AppRad.astro';
-import { liten, periodensLangd, PLANERA, PLANKNAPPAR, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
+import { ELEVLISTANS_LANGD, liten, periodensLangd, PLANERA, PLANKNAPPAR, stor, talText, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -158,7 +158,7 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
               <div class="pl-elevruta" id="pl-elevruta" hidden>
                 <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
                 <textarea class="pl-falt pl-textfalt" id="pl-elever" rows="4" maxlength="400" autocomplete="off" spellcheck="false"></textarea>
-                <p class="pl-hjalp">Förnamn eller initialer. Listan rymmer tolv elever. Namnen finns bara i den här webbläsaren och i planen du laddar ner. Utan elevlista skattar du gruppen.</p>
+                <p class="pl-hjalp">Förnamn eller initialer. Listan rymmer {talText(ELEVLISTANS_LANGD)} elever. Namnen finns bara i den här webbläsaren och i planen du laddar ner. Utan elevlista skattar du gruppen.</p>
                 {data.gruppen && <p class="pl-hjalp">Metoden: {liten(data.grupp?.text ?? '')}{data.grupp ? '. ' : ''}<a href={data.gruppen.adress} data-goatcounter-click={`planera:${data.id}:gruppen`} data-goatcounter-title={`${data.titel}: gruppen från planen`}>{data.gruppen.rubrik}</a></p>}
                 <p class="pl-hjalp pl-varning" id="pl-elever-not" role="status" hidden></p>
                 <div class="pl-elevfraga" id="pl-elever-fraga" role="group" aria-label="Samma elev eller en ny elev" hidden></div>

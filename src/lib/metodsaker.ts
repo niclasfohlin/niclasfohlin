@@ -106,6 +106,11 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   if (d.ramar?.rubrik) saker.push(sak(d.ramar.rubrik, `${sida}#ramar`));
   for (const [v, { adress }] of Object.entries(kursensVeckor(d, id))) saker.push({ namn: `Vecka ${v}`, former: [`Vecka ${v}`, `vecka ${v}`], adress });
   for (const [namn, plats] of blad) { const a = bladAnkare.get(`${plats.ri}-${plats.li}`); if (a) saker.push({ namn, former: [namn], versal: true, adress: `${sida}#${a}` }); }
+  // Ett blad med en titel efter kolon, som "Du som leder: läs en rad i taget", heter också det första ledet, när inget annat
+  // blad och ingen annan sak har det (länkgranskningen av omgång 1 2026-10-26: "kortet Du som leder" blev ingen länk).
+  const bladensLed = new Map<string, string[]>();
+  for (const [namn, plats] of blad) { const a = bladAnkare.get(`${plats.ri}-${plats.li}`); if (a && namn.includes(':')) bladensLed.set(forstaLedet(namn), [...(bladensLed.get(forstaLedet(namn)) ?? []), `${sida}#${a}`]); }
+  for (const [led, adresser] of bladensLed) if (led && adresser.length === 1 && !saker.some((s) => s.namn.toLowerCase() === led.toLowerCase())) saker.push(sak(led, adresser[0]));
   // Kontraktet och schemat under Hem och skola (TIL i grupp) står i materialet med egna ankare; namnet är rubrikens första
   // ord, som Lässchema i "Lässchema TIL" (Codex 2026-10-24).
   if (d.hem?.kontrakt) saker.push(sak(forstaOrdet(d.hem.kontrakt.rubrik), `${sida}#kontraktet`));
