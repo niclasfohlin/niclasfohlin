@@ -68,7 +68,7 @@ Där läraren väljer i planen, som gruppens nivå eller passets längd, står e
 | Texten | Vad alternativen skiljer sig i och vad som avgör valet, ordagrant ur metoden: "Nivåerna skiljer sig i talen och i om eleven går vidare till kort multiplikation och kort division. Välj nivå efter kartläggningen och inte efter årskurs." | Högst tre meningar och 250 tecken |
 | Länken | Metodens tabell eller avsnitt där alternativen står i sin helhet, med sin rubrik, som Så skiljer sig nivåerna | En rubrik |
 
-Fälten är `plan.nivaval` för gruppens nivå och `plan.langdval` för passets längd när faktarutans tid är ett spann (METODER.md under Fälten i metodens fil). Bygget stannar på en metod med nivåer eller ett spann utan stöd, på en text som är för lång eller inte står så i metoden och på en länk till en rubrik som metoden inte har (`nivavaletsFel` och `langdvaletsFel` i standarden och `insatsplanFel`).
+Fälten är `plan.nivaval` för gruppens nivå, `plan.langdval` för passets längd när faktarutans tid är ett spann och `plan.veckoval` för antalet veckor (METODER.md under Fälten i metodens fil). Bygget stannar på en metod med nivåer eller ett spann utan stöd, på en text som är för lång eller inte står så i metoden och på en länk till en rubrik som metoden inte har (`nivavaletsFel`, `langdvaletsFel` och `veckovaletsFel` i standarden och `insatsplanFel`).
 
 ## Metodtexter
 

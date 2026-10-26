@@ -102,6 +102,8 @@ export interface PlanData {
   /** Det som görs före första passet utöver uppföljningen och checklistan (plan.fore). */
   fore?: string[];
   justera?: string[];
+  /** Metodens regel för beslutet efter insatsen (plan.utvardering), vid utvärderingen. */
+  utvardering?: string[];
   upprepa?: string;
   /** Progressionen är en stege som gruppen kan börja högre upp på (plan.stege). */
   stege?: boolean;
@@ -115,6 +117,8 @@ export interface PlanData {
   nivaval?: PlanStod;
   /** Stödet för passets längd (plan.langdval, K-564), när faktarutans tid är ett spann: under Passets längd. */
   langdval?: PlanStod;
+  /** Stödet för antalet veckor (plan.veckoval), när längden beror på något metoden säger, som boken. */
+  veckoval?: PlanStod;
   /** Metodens egna skattningar (plan.skattningar, K-559): skalan med stegens namn och reglerna ur standarden, adressen till
    * instrumentet på metodens sida, och för det eleverna fyller i bladets pdf och adressen som kopierar formuläret. */
   skattningar?: PlanSkattning[];
@@ -261,6 +265,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
   const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b/iu.test(d.checklista.rubrik);
   const nivaval = stodet(d.plan?.nivaval, d, m.id);
   const langdval = stodet(d.plan?.langdval, d, m.id);
+  const veckoval = stodet(d.plan?.veckoval, d, m.id);
   const skattningar = planensSkattningar(d, m.id);
   return {
     id: m.id,
@@ -283,7 +288,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     saker: await planensSaker(m),
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
-    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, ...(p.text ? { text: p.text } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensRad(d, p.ur) ?? [] }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell) } : {}) })) } : {}),
+    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, ...(p.text ? { text: p.text } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(rollensRad(d, p.ur) ?? [], p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell) } : {}) })) } : {}),
     ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: d.gruppen.text, adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),
@@ -294,12 +299,14 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(d.mal ? { malAdress: `${sida}#mal` } : {}),
     ...(d.plan?.fore ? { fore: d.plan.fore } : {}),
     ...(d.plan?.justera ? { justera: d.plan.justera } : {}),
+    ...(d.plan?.utvardering ? { utvardering: d.plan.utvardering } : {}),
     ...(d.plan?.upprepa ? { upprepa: d.plan.upprepa } : {}),
     ...(d.plan?.stege ? { stege: true } : {}),
     ...(!bank && d.nivaer.length >= 2 ? { nivaer: d.nivaer.map((n) => ({ namn: n.namn, slug: slugAv(n.namn), farg: `#${n.farg.toLowerCase()}` })) } : {}),
     ...(nivaTabell ? { nivaTabell } : {}),
     ...(nivaval ? { nivaval } : {}),
     ...(langdval ? { langdval } : {}),
+    ...(veckoval ? { veckoval } : {}),
     ...(skattningar.length ? { skattningar } : {}),
   };
 }
@@ -329,6 +336,12 @@ function planensSkattningar(d: Metod['data'], id: string): PlanSkattning[] {
     };
   });
 }
+
+/** En cell vars kolumn heter som passet självt, som Faktatextsamtals kolumn Läspasset i läspasset, får radens namn som
+ * etikett, så att "Tränar att stanna när det skaver" inte blir "Läspasset att stanna när det skaver" (Rimligheten
+ * 2026-10-26: raden såg ut som en halv mening). */
+const rollensEtiketter = (celler: { kolumn: string; text: string }[], kort: string | undefined, rad: string) =>
+  celler.map((c) => (kort && c.kolumn.trim().toLocaleLowerCase('sv') === kort.trim().toLocaleLowerCase('sv') ? { ...c, kolumn: rad } : c));
 
 /** Avsnittet på metodens sida där passet står: passrutinen när metoden har en passöversikt, och annars tidsschemat. */
 const passetsAnkare = (d: Metod['data']) => (passOversikt(d) ? 'passrutin' : 'tidsschema');
@@ -397,7 +410,7 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     if (!x.adress) fel.push(`plan.skattningar: "${x.namn}" är inget blad i metoden. Skriv bladets namn som det står efter "Blad: ", som Lärarens skattning.`);
     if (x.vem === 'eleverna' && !x.formular) fel.push(`plan.skattningar: bladet "${x.namn}" fylls i av eleverna och har inget formulär (fältet google på bladet), så planen kan inte leda till det.`);
   }
-  for (const falt of ['nivaval', 'langdval'] as const) {
+  for (const falt of ['nivaval', 'langdval', 'veckoval'] as const) {
     const n = m.data.plan?.[falt];
     if (n && !stodet(n, m.data, m.id)) fel.push(`plan.${falt}.mer säger "${n.mer}", som inte är en tabell, ett avsnitt eller en ram i metoden. Skriv rubriken som den står i metoden, som Så skiljer sig nivåerna.`);
   }

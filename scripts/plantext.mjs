@@ -69,7 +69,9 @@ const DUMPA = `(rot, mal) => {
   const rader = [];
   let rad = '';
   const bryt = () => { const t = rad.replace(/\\s+/g, ' ').trim(); if (t) rader.push(t); rad = ''; };
-  const gom = (el) => el.hidden || getComputedStyle(el).display === 'none' || el.getAttribute('aria-hidden') === 'true';
+  // Det läraren ser, också det som är dolt bara för skärmläsare, som skalans namn bredvid knapparna (Rimligheten 2026-10-26:
+  // tolv granskare såg skalan 1–5 utan ord, eftersom namnen har aria-hidden).
+  const gom = (el) => el.hidden || getComputedStyle(el).display === 'none';
   const ga = (n) => {
     if (n.nodeType === 3) { rad += n.textContent; return; }
     if (n.nodeType !== 1 || gom(n) || n.classList.contains('visually-hidden')) return;

@@ -271,6 +271,8 @@ export function metodplan(d) {
       uppfoljning: /** @type {{ rad: number, tid: Tid }[]} */ (uppfoljning),
       passen: /** @type {{ rad: number, nar: PassensNar | VariantensNar }[]} */ (passen),
       skattningar: egna.skattningar,
+      // Planens förval i veckor när längden beror på något metoden säger (plan.veckoval).
+      ...(typeof d.plan?.veckoval?.forval === 'number' ? { forvaldaVeckor: d.plan.veckoval.forval } : {}),
     },
   };
 }
@@ -305,9 +307,11 @@ export const planensTexter = (d) => [
   ...(d.plan?.passen ?? []).flatMap((p) => (p.text ? [/** @type {[string, string]} */ ([`Planens pass "${p.nar}"`, p.text])] : [])),
   ...(d.plan?.fore ?? []).map((t) => /** @type {[string, string]} */ (['Planens fore', t])),
   ...(d.plan?.justera ?? []).map((t) => /** @type {[string, string]} */ (['Planens justera', t])),
+  ...(d.plan?.utvardering ?? []).map((t) => /** @type {[string, string]} */ (['Planens utvärdering', t])),
   ...(d.plan?.upprepa ? [/** @type {[string, string]} */ (['Planens upprepa', d.plan.upprepa])] : []),
   ...(d.plan?.nivaval ? [/** @type {[string, string]} */ (['Planens nivåval', d.plan.nivaval.text])] : []),
   ...(d.plan?.langdval ? [/** @type {[string, string]} */ (['Planens längdval', d.plan.langdval.text])] : []),
+  ...(d.plan?.veckoval ? [/** @type {[string, string]} */ (['Planens veckoval', d.plan.veckoval.text])] : []),
   ...(d.plan?.skattningar ?? []).flatMap((x) => (x.text ? [/** @type {[string, string]} */ ([`Planens skattning "${x.namn}"`, x.text])] : [])),
 ];
 
@@ -492,6 +496,19 @@ export function langdvaletsFel(d) {
   const spann = m.minst !== undefined && m.minuter !== undefined && m.minst < m.minuter;
   return stodetsFel('langdval', d.plan?.langdval, spann ? `Faktarutans tid, "${d.tid}", är ett spann, och planen har då ett stöd för valet av passets längd i plan.langdval: ett citat ur metoden om vad längderna skiljer sig i och vad som avgör valet, och i mer metodens rubrik med resten (STIL.md under Stöd för ett val).` : '');
 }
+/**
+ * Stödet för antalet veckor (Rimligheten 2026-10-26): när längden beror på något metoden säger, som boken i Chambers
+ * boksamtal, har plan.veckoval metodens text och rubriken med mer, som planen visar under Antal veckor, och ett förval i
+ * veckor (forval) inom metodens period.
+ * @param {MetodensTexter & { period?: string }} d
+ * @returns {string[]}
+ */
+export function veckovaletsFel(d) {
+  const v = d.plan?.veckoval;
+  const p = periodensLangd(d.period ?? '');
+  const utanfor = v?.forval !== undefined && p && p.enhet === 'veckor' && (v.forval < p.min || (p.max !== undefined && v.forval > p.max));
+  return [...stodetsFel('veckoval', v, ''), ...(utanfor ? [`plan.veckoval.forval är ${v.forval} veckor, utanför metodens period, "${d.period}".`] : [])];
+}
 
 // ---------- Metodens egna skattningar ----------
 // En metod med ett eget instrument, som Gruppstärkande aktiviteters Lärarens skattning från 1 till 10 och bladet Vår grupp,
@@ -663,7 +680,7 @@ export function skattningensText(s, sk, info) {
 }
 
 /** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen, citatens och nivåvalets. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */
-export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d)];
+export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d)];
 
 // ---------- Modulen ----------
 
@@ -673,7 +690,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.14', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.15', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -711,6 +728,8 @@ const FORVALDA_DAGAR = { 1: [3], 2: [2, 4], 3: [1, 3, 5], 4: [1, 2, 4, 5], 5: [1
  * @param {number} [borja]
  */
 export function forvaldLangd(mp, borja = 1) {
+  // Metodens förval när längden beror på något metoden säger, som boken i Chambers boksamtal (plan.veckoval).
+  if (mp.forvaldaVeckor && borja === 1 && mp.period.enhet === 'veckor' && mp.forvaldaVeckor >= mp.period.min && (mp.period.max === undefined || mp.forvaldaVeckor <= mp.period.max)) return mp.forvaldaVeckor;
   if (mp.stegEnhet !== 'veckor' || mp.period.enhet !== 'veckor' || !mp.steg.length) return mp.period.min;
   const sista = Math.max(0, ...mp.steg.filter((s) => !s.vidBehov && !s.efter).map((s) => s.fran));
   if (borja > 1) return Math.max(1, sista - borja + 1);
@@ -1971,6 +1990,9 @@ export const elevernasNamn = (f) => [...(f?.elever ?? []).map((e) => ({ namn: e.
  */
 export function mittVeckan(plan) {
   if (!plan.veckor.length) return null;
+  // En plan på färre än fyra veckor har ingen avstämning: efter en vecka finns inget att stämma av (Rimligheten 2026-10-26:
+  // Kompissamtals avstämning kom efter det första samtalet). En avstämning som redan har en vecka står kvar.
+  if (!plan.mitt && plan.veckor.length < 4) return null;
   // En förlängd insats har kvar sin avstämning i veckan den hade (verifieringen 2026-10-25: förlängningen flyttade
   // avstämningen till en vecka som redan hade varit). Veckan står i valen sedan förlängningen.
   // En insats som avslutades före sin avstämning, eller i avstämningens vecka, har ingen: sista veckan har utvärderingen
@@ -2331,8 +2353,8 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass', pass: number[], till?: number } | { typ: 'sista-passet', efter?: number } | { typ: 'villkor' }} Tid
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
- * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[] }} Metodplan
- * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[] }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
+ * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number }} Metodplan
+ * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[] }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'nastSista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar

@@ -12,7 +12,7 @@ import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import AppRad from './AppRad.astro';
 import StodForValet from './StodForValet.astro';
-import { ELEVLISTANS_LANGD, liten, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stor, talText, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
+import { liten, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -31,6 +31,8 @@ const langder = period.max
 // Passets längder att välja: faktarutans spann, ändarna eller steg om tio minuter (passetsLangder, K-564).
 const minuter = matt.minst !== undefined && matt.minuter !== undefined ? passetsLangder({ min: matt.minst, max: matt.minuter }).langder : [];
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
+// Metodens egen skattning av gruppen, när metoden har en (K-559), som Följ insatsen säger i stället för elevernas mål.
+const gruppensSkattning = data.skattningar?.find((x) => x.vem === 'gruppen');
 // Nivåerna: bankens, eller metodens egna i en kurs i nivåer (De fyra räknesätten).
 const nivaer = data.bank?.nivaer ?? data.nivaer ?? [];
 // En stege, som läslistorna, kan börja högre upp: progressionens steg utom det som kommer efter insatsen.
@@ -127,10 +129,11 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
             )}
             <fieldset class="pl-rad">
               <legend class="pl-etikett">Antal {period.enhet === 'pass' ? 'pass' : 'veckor'}</legend>
-              <div class="sk-segment pl-langd" id="pl-langd">
+              <div class="sk-segment pl-langd" id="pl-langd" hidden={langder.length < 2}>
                 {langder.map((n) => <button type="button" class="sk-antal" data-langd={n} aria-pressed="false">{n}</button>)}
               </div>
               {data.period && <p class="pl-hjalp">Metoden: {liten(data.period)}.{period.enhet === 'veckor' && ' Lovveckor hoppas över, och pass på röda dagar faller bort.'}</p>}
+              {data.veckoval && <StodForValet id="pl-veckostod" stod={data.veckoval} metod={data} slag="veckostod" vad="antalet veckor" />}
             </fieldset>
             {minuter.length > 0 && (
               <fieldset class="pl-rad">
@@ -160,12 +163,14 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
             <fieldset class="pl-rad pl-foljval">
               <legend class="pl-etikett">Följ insatsen</legend>
               <label class="pl-kryss"><input type="checkbox" id="pl-folj" data-goatcounter-click={`planera:${data.id}:folj`} data-goatcounter-title={`${data.titel}: Följ insatsen valt`} /> <span>Följ insatsen vecka för vecka</span></label>
-              <p class="pl-hjalp">Bocka passen och skatta eleverna mot målet en gång i veckan. Inget måste fyllas i. Det du för in sparas bara i den här webbläsaren. Ladda ner planen som fil, så går det att öppna på en annan dator.</p>
+              <p class="pl-hjalp">Bocka passen och skatta {gruppensSkattning ? `gruppen i ${gruppensSkattning.namn}` : 'eleverna mot målet'} en gång i veckan. Inget måste fyllas i. Det du för in sparas bara i den här webbläsaren. Ladda ner planen som fil, så går det att öppna på en annan dator.</p>
               <div class="pl-elevruta" id="pl-elevruta" hidden>
                 <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
                 <textarea class="pl-falt pl-textfalt" id="pl-elever" rows="4" maxlength="400" autocomplete="off" spellcheck="false"></textarea>
-                <p class="pl-hjalp">Förnamn eller initialer. Listan rymmer {talText(ELEVLISTANS_LANGD)} elever. Namnen finns bara i den här webbläsaren och i planen du laddar ner. {data.skattningar?.some((x) => x.vem === 'gruppen') ? 'Gruppen skattar du med metodens skala, och med en elevlista kan du också skatta varje elev mot målet.' : 'Utan elevlista skattar du gruppen.'}</p>
-                {data.gruppen && <p class="pl-hjalp">Metoden: {liten(data.grupp?.text ?? '')}{data.grupp ? '. ' : ''}<a href={data.gruppen.adress} data-goatcounter-click={`planera:${data.id}:gruppen`} data-goatcounter-title={`${data.titel}: gruppen från planen`}>{data.gruppen.rubrik}</a></p>}
+                <p class="pl-hjalp">Förnamn eller initialer. Namnen finns bara i den här webbläsaren och i planen du laddar ner. {data.skattningar?.some((x) => x.vem === 'gruppen') ? 'Gruppen skattar du med metodens skala, och med en elevlista kan du också skatta varje elev mot målet.' : 'Utan elevlista skattar du gruppen.'}</p>
+                {/* Metodens grupp vid listan i varje metod, och inte listans största antal (Rimligheten 2026-10-26: "Listan rymmer
+                    32 elever" stod direkt före "Metoden: två till tio elever", och TIL i grupp sa aldrig gruppens storlek). */}
+                {data.grupp && <p class="pl-hjalp">Metoden: {liten(data.grupp.text)}.{data.gruppen && <>{" "}<a href={data.gruppen.adress} data-goatcounter-click={`planera:${data.id}:gruppen`} data-goatcounter-title={`${data.titel}: gruppen från planen`}>{data.gruppen.rubrik}</a></>}</p>}
                 <p class="pl-hjalp pl-varning" id="pl-elever-not" role="status" hidden></p>
                 <div class="pl-elevfraga" id="pl-elever-fraga" role="group" aria-label="Samma elev eller en ny elev" hidden></div>
                 <label class="pl-kryss pl-narvaroval"><input type="checkbox" id="pl-narvaro" /> <span>Notera närvaro i passen</span></label>

@@ -461,6 +461,18 @@ if (tsMp) {
     const utan = (d) => ({ ...d, plan: { ...d.plan, langdval: undefined } });
     ska('stödet för passets längd', !s.langdvaletsFel(ga).length && !s.langdvaletsFel(ul).length && !s.planensCitatFel(ga).length && !s.planensCitatFel(ul).length && s.langdvaletsFel(utan(ga)).length === 1 && s.langdvaletsFel(utan(ul)).length === 1 && !s.langdvaletsFel(utan(ts)).length && s.planensCitatFel({ ...ga, plan: { ...ga.plan, langdval: { text: 'Ett pass tar så lång tid som gruppen behöver.', mer: 'Gruppreflektion' } } }).some((x) => x.startsWith('Planens längdval')), [s.langdvaletsFel(ga), s.langdvaletsFel(ul), s.planensCitatFel(ga), s.planensCitatFel(ul)]);
   }
+  // Rimligheten 2026-10-26: Chambers boksamtals längd efter boken (plan.veckoval med förval inom perioden), Kompissamtals
+  // beslut efter samtal 3 vid utvärderingen (plan.utvardering, ordagrant) och ingen avstämning i en plan på tre veckor.
+  {
+    const bok = metod('boksamtal-i-grupp'), kmp = metod('kompissamtal');
+    const bokMp = s.metodplan(bok).plan;
+    ska('stödet för antalet veckor: förvalet ur metodens fält inom perioden, och spärren', s.forvaldLangd(bokMp) === 8 && !s.veckovaletsFel(bok).length && s.veckovaletsFel({ ...bok, plan: { ...bok.plan, veckoval: { ...bok.plan.veckoval, forval: 12 } } }).length === 1 && s.forvaldLangd(s.metodplan({ ...bok, plan: { ...bok.plan, veckoval: undefined } }).plan) === 5, [s.forvaldLangd(bokMp), s.veckovaletsFel(bok)]);
+    ska('utvärderingens regel ur metoden, ordagrant', kmp.plan.utvardering?.length === 3 && !s.planensCitatFel(kmp).length && s.planensCitatFel({ ...kmp, plan: { ...kmp.plan, utvardering: ['Avsluta när det känns bra.'] } }).some((x) => x.startsWith('Planens utvärdering')), s.planensCitatFel(kmp));
+    const kmpMp = s.metodplan(kmp).plan;
+    const tre = s.planera(kmpMp, { start: '2026-11-02', dagar: [3], langd: 3, lov: [], upprepa: [], flytta: {}, stryk: [] });
+    const fyra = s.planera(kmpMp, { start: '2026-11-02', dagar: [3], langd: 4, lov: [], upprepa: [], flytta: {}, stryk: [] });
+    ska('ingen avstämning i en plan på färre än fyra veckor', s.mittVeckan(tre) === null && s.mittVeckan(fyra) !== null, [s.mittVeckan(tre), s.mittVeckan(fyra)]);
+  }
   // Det eleverna fyller i under ett pass, som gruppreflektionen, görs i veckans längsta pass efter lärarens tider, och i
   // veckans sista när passen är lika långa (K-562; verifieringen av K-559 2026-10-26).
   {
@@ -1478,7 +1490,7 @@ try {
   sant('Ta fram öppnas på nivån', (await f.kor(`document.querySelector('.pl-nasta a.knapp')?.getAttribute('href')`)) === '/stodundervisning/textsamtal-i-grupp/texter#mellan');
   // Planera 0.2 (de kalla testarna 2026-10-24): passet i rutan med rollen och delarna, ett annat pass med ett tryck på
   // rollen, fliken Före och tryckytorna.
-  sant('rutan har passets namn med rollen', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 8 av 18 · Paren samtalar', await f.text('#pl-veckan .pl-passnamn'));
+  sant('rutan har passets namn med rollen', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 8 av 18 · veckans pass 2 · Paren samtalar', await f.text('#pl-veckan .pl-passnamn'));
   const delarna = () => f.kor(`[...document.querySelectorAll('#pl-veckan .pl-delar .pl-del > summary')].map((s) => s.textContent.trim()).join('|')`);
   sant('passets delar med minuter, med Före passet först och Efter passet sist', (await delarna()) === 'Före passet|0–3Starten|3–5Möt texten|5–13Läs och tänk|13–26Samtala om texten|26–30Avsluta|Efter passet|Mer om passet', await delarna());
   // Rollens text är raden ur metodens tabell Veckans tre pass, med kolumnernas namn (K-520).
@@ -1488,9 +1500,9 @@ try {
   sant('en del fälls ut till det läraren gör och säger', (await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'))?.includes('Skriv meningen på tavlan') && !!(await f.kor(`document.querySelector('#pl-veckan .pl-del[data-ruta="del-0"] .pl-fraser li')`)), await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'));
   sant('veckans pass med rollerna', (await f.kor(`[...document.querySelectorAll('#pl-passen .pl-passroll')].map((x) => x.textContent).join('|')`)) === 'Läraren tänker högt|Paren samtalar|Eleverna läser själva');
   await f.tryck('#pl-passen [data-visa-pass="9"]');
-  sant('ett tryck på rollen visar passet i rutan', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 9 av 18 · Eleverna läser själva' && (await f.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Valt pass' && !!(await f.kor(`document.querySelector('#pl-veckan .pl-nasta [data-visa-pass=""]')`)), await f.text('#pl-veckan .pl-nasta'));
+  sant('ett tryck på rollen visar passet i rutan', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 9 av 18 · veckans pass 3 · Eleverna läser själva' && (await f.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Valt pass' && !!(await f.kor(`document.querySelector('#pl-veckan .pl-nasta [data-visa-pass=""]')`)), await f.text('#pl-veckan .pl-nasta'));
   await f.tryck('#pl-veckan .pl-nasta [data-visa-pass=""]');
-  sant('och tillbaka till nästa pass', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 8 av 18 · Paren samtalar');
+  sant('och tillbaka till nästa pass', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 8 av 18 · veckans pass 2 · Paren samtalar');
   // Och metodens material, med materialets rubrik (länkgranskningen av omgång 1 2026-10-26).
   sant('länkarna till passet i metoden, materialet och stödet när eleven fastnar', (await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-lankar a')].map((a) => a.getAttribute('href')).join()`)) === '/stodundervisning/textsamtal-i-grupp#passrutin,/stodundervisning/textsamtal-i-grupp#ramar,/stodundervisning/textsamtal-i-grupp#fastnar' && (await f.kor(`document.querySelector('#pl-veckan .pl-lankar a[href$="#ramar"]')?.textContent`)) === 'Materialet', await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-lankar a')].map((a) => a.getAttribute('href')).join()`));
   await f.tryck('#pl-veckan .pl-remsa [data-vy="fore"]');
@@ -1604,7 +1616,7 @@ try {
   await f.tryck('button[data-vy="4"]');
   sant('en vecka som inte har börjat har streckade ringar och inga bockar', (await f.kor(`!!document.querySelector('#pl-veckan .pl-bock.senare') && !document.querySelector('#pl-veckan [data-bock]')`)) && (await f.text('#pl-passen .pl-not'))?.includes('går att bocka när veckan har börjat'), await f.text('#pl-passen .pl-not'));
   // Skattningen följer samma regel som bocken: från veckans måndag (buggjakten 2026-10-25: en vecka längre fram gick att skatta).
-  sant('en vecka som inte har börjat säger när den går att skatta, utan skalan', !(await f.kor(`!!document.querySelector('#pl-skatta .pl-skalsteg')`)) && (await f.text('#pl-skatta'))?.includes('Du skattar veckan när den har börjat, från måndag 23 november.'), await f.text('#pl-skatta'));
+  sant('en vecka som inte har börjat säger när den går att skatta, utan skalan', !(await f.kor(`!!document.querySelector('#pl-skatta .pl-skalsteg')`)) && (await f.text('#pl-skatta'))?.includes('Du skattar i slutet av veckan, efter veckans sista pass, fredag 27 november.'), await f.text('#pl-skatta'));
   await f.tryck('button[data-vy="3"]');
   sant('skattningen sparas per vecka och elev', (await f.kor(`(() => { const s = JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.skattning; return Object.keys(s).length === 2 && Object.values(s['2026-11-16']).sort().join() === '2,3'; })()`)));
   // Ett pass som är bockat är gjort: rutan visar nästa pass som inte är bockat och säger det (användbarhetsprovet 2026-10-25).
