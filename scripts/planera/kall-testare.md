@@ -56,7 +56,7 @@ Skriv svaret med Write till `{{svar}}`, på svenska och högst omkring 1 600 ord
 2. Steg 1, bara planen: kan du undervisa genom att följa planen, ja, delvis eller nej, och varför. Vad du skulle göra i pass 1 efter planen. Vad som saknas i planen.
 3. Steg 2, efter metoden: vad planen saknade som du förstod först när du läste metoden, och vad i planen som inte stämde eller ledde fel.
 4. Formen: vad som var lätt och vad som var svårt att hitta, trycka på eller förstå.
-5. Fynden som en tabell med kolumnerna Allvar, Fynd, Var, Förslag. Allvar: P1 när du inte kan undervisa rätt genom att följa planen (något centralt saknas eller är fel), P2 när du måste leta på annat håll, något leder fel, är svårt att använda, ser ologiskt ut eller säger emot metoden, P3 när något bara kan bli tydligare. Något som ser ologiskt ut för en lärare är P2, inte P3.
+5. Fynden som en tabell med kolumnerna Allvar, Fynd, Var, Förslag. Allvar: P1 när du inte kan undervisa rätt genom att följa planen (något centralt saknas eller är fel), P2 när du måste leta på annat håll, något leder fel, är svårt att använda eller säger emot metoden, eller när ett val eller ett tal inte går ihop med metoden, P3 när något bara kan bli tydligare och inte ändrar vad du gör med eleverna.
 6. Dina tre viktigaste förslag, det viktigaste först.
 
 Skriv bara det du har sett själv, och skriv när du är osäker. Avsluta med två meningar till den som gav dig uppdraget: om planen bär undervisningen, och det viktigaste den saknar.

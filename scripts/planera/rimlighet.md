@@ -32,7 +32,7 @@ Gå igenom planen från formuläret till efter insatsen, och fråga vid varje ra
 Skriv svaret med Write till `{{svar}}`, på svenska:
 
 1. En mening om vad du gick igenom.
-2. En tabell med kolumnerna Allvar, Var (läget och ett kort citat), Vad som ser fel ut, Varför en lärare reagerar, Förslag. Allvar: P1 när en lärare skulle göra fel eller inte komma vidare; P2 när en lärare skulle se det som ett fel, något ologiskt eller något som säger emot metoden; P3 när det bara kunde vara tydligare. Något som ser ologiskt ut för en lärare är P2, inte P3. Högst tjugofem rader, det allvarligaste först.
+2. En tabell med kolumnerna Allvar, Var (läget och ett kort citat), Vad som ser fel ut, Vad läraren gör eller eleven får då, Förslag. Ett fel är det som ändrar vad läraren gör eller vad eleven får på vägen mot målet: fel material, ett innehåll som säger emot veckan eller metoden, ett steg som inte går att göra, för lite tid till kärnan, en mätning vid fel tid, eller ett val vars alternativ inte går ihop med metoden. Allvar: P1 när läraren gör fel med eleverna eller inte kommer vidare; P2 när läraren måste stanna och räkna ut vad som gäller; P3 när det inte ändrar något av det, som en formulering eller samma sak på två rader. Högst femton rader, det allvarligaste först, och av dem högst fem P3.
 3. En mening om det som är rimligt.
 
-Skriv bara det du har sett i underlaget, och säg när du är osäker.
+Skriv bara det du har sett i underlaget, och säg när du är osäker. Hittar du inget fel är en tom tabell ett giltigt svar.
