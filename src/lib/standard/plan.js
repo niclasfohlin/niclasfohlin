@@ -1865,7 +1865,7 @@ export function rensaFoljd(f) {
   const elever = lista(g.elever).flatMap(elev).filter((e, i, alla) => alla.findIndex((x) => x.id === e.id) === i).slice(0, ELEVLISTANS_LANGD);
   // Eleverna som har lämnat listan, med id, så att en elev som skrivs in igen får tillbaka det som förts in, också efter en
   // omladdning (samma verifiering: Ebbas skattning var borta när hon kom tillbaka).
-  const lamnade = lista(g.lamnade).flatMap(elev).map(({ utkast: _u, ...e }) => e).filter((e, i, alla) => alla.findIndex((x) => x.id === e.id) === i && !elever.some((x) => x.id === e.id)).slice(-64);
+  const lamnade = lista(g.lamnade).flatMap(elev).filter((e, i, alla) => alla.findIndex((x) => x.id === e.id) === i && !elever.some((x) => x.id === e.id)).slice(-64);
   const beslut = (x, tillatna) => {
     const b = obj(x), not = text(b.not, 200);
     return tillatna.includes(b.beslut) || not ? { ...(tillatna.includes(b.beslut) ? { beslut: b.beslut } : {}), ...(not ? { not } : {}) } : undefined;
@@ -1958,6 +1958,9 @@ export function sammanstallning(plan, f, idag) {
       nr: v.nr, mandag: v.mandag, vecka: v.vecka.vecka, innehall: planvecka(plan, v), igen: v.igen, gang: gangen(plan, v), pass: pass.map((p) => ({ nr: p.nr, dag: passetsDag(p), datum: p.datum, gjort: gjort(p) })),
       gjorda: pass.filter(gjort).length, planerade: pass.length, varit: pass.filter((p) => p.datum <= idag).length,
       installda: v.bortfall.filter((b) => b.varfor === 'installt').length, helgdagar: v.bortfall.filter((b) => b.varfor === 'helgdag').length,
+      // De som faller på en helgdag som inte har varit än, så att raden säger faller och inte föll (verifieringen av K-559
+      // 2026-10-26: "Ett föll på en helgdag" i december om trettondagen).
+      helgdagarKvar: v.bortfall.filter((b) => b.varfor === 'helgdag' && b.datum > idag).length,
       ...(f.vecka?.[v.mandag]?.varde >= 1 && f.vecka[v.mandag].varde <= 5 ? { skattning: f.vecka[v.mandag].varde } : {}),
       ...(f.vecka?.[v.mandag]?.not ? { not: f.vecka[v.mandag].not } : {}),
     };
@@ -1983,7 +1986,7 @@ export function sammanstallning(plan, f, idag) {
     // De bockade bland passen som har varit, så att ett pass som är bockat i förväg inte ger ett minustal (buggjakten).
     gjordaVarit: passGjorda.filter((p) => p.datum <= idag).length,
     veckomedel: medel(veckor.filter((v) => v.skattning).map((v) => v.skattning)),
-    installda: veckor.reduce((a, v) => a + v.installda, 0), helgdagar: veckor.reduce((a, v) => a + v.helgdagar, 0),
+    installda: veckor.reduce((a, v) => a + v.installda, 0), helgdagar: veckor.reduce((a, v) => a + v.helgdagar, 0), helgdagarKvar: veckor.reduce((a, v) => a + v.helgdagarKvar, 0),
     slut: insatsenSlut(plan.sistaPass, idag), mitt: mittVeckan(plan),
     // Avstämningen hör till veckan mitt i: en insats som avslutades i den veckan eller före har ingen, så den står inte i
     // texterna och pdf:erna, men lärarens beslut ligger kvar och kommer tillbaka med Ångra avslutet (buggjakten
@@ -2055,10 +2058,12 @@ export const beslutText = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', 
  * Passens rad, lika på sidan, i pdf:en och i texten som kopieras (steget Samma sak överallt 2026-10-25: sidan och texten
  * hade var sitt tillägg): passens läge och de som ställdes in eller föll på en helgdag. Läget säger redan hur många av de
  * pass som har varit som är bockade, så de utan bock sägs inte en gång till (användbarhetsprovet samma dag).
- * @param {{ planerade: number, gjorda: number, varit: number, gjordaVarit: number, slut: boolean, installda: number, helgdagar: number }} s
+ * @param {{ planerade: number, gjorda: number, varit: number, gjordaVarit: number, slut: boolean, installda: number, helgdagar: number, helgdagarKvar?: number }} s
  */
 export function passensRad(s) {
-  const bort = [s.installda ? `${talText(s.installda)} pass ställdes in` : '', s.helgdagar ? `${talText(s.helgdagar)} föll på ${s.helgdagar === 1 ? 'en helgdag' : 'helgdagar'}` : ''].filter(Boolean);
+  const kvar = s.helgdagarKvar ?? 0, varit = s.helgdagar - kvar;
+  const helg = (n, verb) => (n ? `${talText(n)} ${verb} på ${n === 1 ? 'en helgdag' : 'helgdagar'}` : '');
+  const bort = [s.installda ? `${talText(s.installda)} pass ställdes in` : '', helg(varit, 'föll'), helg(kvar, 'faller')].filter(Boolean);
   return [passensLage(s), bort.length ? `${stor(uppraknat(bort))}.` : ''].filter(Boolean).join(' ');
 }
 export function passensLage(s) {
@@ -2167,7 +2172,7 @@ export function sammanstallningstext(info, plan, s) {
     if (t.varden) rader.push(`${t.varden}.`);
     if (t.regler.length) rader.push(`Det linjen sa: ${t.regler.join('; ')}.`);
   }
-  if (s.narvaro && s.gjorda) {
+  if (s.narvaro && s.gjorda && elever.some((e) => (e.passen ?? s.gjorda) > 0)) {
     // Eleverna som har kunnat vara med i något pass, så att en elev som kom till efter de bockade passen inte räknas som en som
     // var med i alla (Codex 2026-10-26).
     const medPass = elever.filter((e) => (e.passen ?? s.gjorda) > 0);
@@ -2289,5 +2294,5 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ fran: number, till: number, tabell: string, steg: { fran: number, till: number, namn: string }[] }} Skala
  * @typedef {{ namn: string, vem: 'gruppen' | 'eleverna', rad: number, skala?: Skala, regler: (Regel & { rad: number })[], text?: string }} Skattning
  * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[], period?: true }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number, mitt?: number, slut?: number, planerade?: number, struket?: { pass: Pass[], veckor: PlanVecka[] }, skattningar?: Skattning[] }} Plan
- * @typedef {{ gjorda?: string[], elever?: { id: string, namn: string, utkast?: true }[], narvaro?: boolean, franvaro?: Record<string, string[]>, vecka?: Record<string, { varde?: number, not?: string }>, skattning?: Record<string, Record<string, number>>, resultat?: Record<string, Record<string, string>>, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string }, oppen?: string, borttagna?: string[], listan?: string, lamnade?: { id: string, namn: string, fran?: string }[], matt?: Record<string, Record<string, number>>, lankar?: Record<string, { formular?: string, sammanstallning?: string }> }} Foljd
+ * @typedef {{ gjorda?: string[], elever?: { id: string, namn: string, utkast?: true }[], narvaro?: boolean, franvaro?: Record<string, string[]>, vecka?: Record<string, { varde?: number, not?: string }>, skattning?: Record<string, Record<string, number>>, resultat?: Record<string, Record<string, string>>, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string }, oppen?: string, borttagna?: string[], listan?: string, lamnade?: { id: string, namn: string, utkast?: true, fran?: string }[], matt?: Record<string, Record<string, number>>, lankar?: Record<string, { formular?: string, sammanstallning?: string }> }} Foljd
  */

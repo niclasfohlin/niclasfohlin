@@ -424,6 +424,9 @@ if (tsMp) {
     const perioden = onsdagar.uppfoljning.find((u) => u.period);
     const okal = s.kalenderfil({ titel: ga.titel, uppfoljning: ga.uppfoljning.rader, fokus: [] }, onsdagar, { id: 'gs1', lank: () => 'https://niclasfohlin.se/x', nu: new Date(Date.UTC(2026, 9, 24, 12)) });
     ska('varannan vecka bland veckorna med pass, och perioden står inte i kalendern eller i åtgärdsprogrammet', reflektion.every((t, j) => j === 0 || t.vecka - reflektion[j - 1].vecka >= 2) && ga.uppfoljning.rader[perioden?.rad ?? -1]?.nar === 'Kort utan beröring vecka 1–4' && !okal.includes('Kort utan beröring') && !ap.includes('Kort utan beröring'), [reflektion.map((t) => t.vecka), perioden]);
+    // Verifieringen av K-559: en helgdag som inte har varit än faller, och en som har varit föll.
+    const helgDec = s.sammanstallning(onsdagar, s.rensaFoljd({}), '2026-12-03'), helgFeb = s.sammanstallning(onsdagar, s.rensaFoljd({}), '2027-02-01');
+    ska('en helgdag som kommer faller, och en som har varit föll', helgDec.helgdagarKvar >= 1 && s.passensRad(helgDec).includes('faller på en helgdag') && !s.passensRad(helgFeb).includes('faller') && s.passensRad(helgFeb).includes('föll på en helgdag'), [s.passensRad(helgDec), s.passensRad(helgFeb)]);
     // Codex 2026-10-26: närvaron är något eleven har, så att eleven står med i sammanställningen och pdf:en.
     ska('en elev har något: en skattning, ett resultat eller närvaron', s.elevenHarNagot({ gjorda: 2 }, { id: 'a1', skattningar: [], resultat: {}, narvaro: 1 }) && s.elevenHarNagot({ gjorda: 0 }, { id: 'a1', skattningar: [], resultat: { x: '0' }, narvaro: null }) && !s.elevenHarNagot({ gjorda: 0 }, { id: 'a1', skattningar: [], resultat: { x: '' }, narvaro: null }) && !s.elevenHarNagot({ gjorda: 2 }, { id: s.GRUPPEN, skattningar: [], resultat: {}, narvaro: 2 }));
     // Verifieringen av K-559: eleverna som lämnar listan sparas med id, och en elev som kom till senare har närvaro från den
@@ -820,7 +823,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   ska('passen och besluten i en mening', s.passensLage(sm) === `${sm.gjordaVarit} av de ${sm.varit} pass som har varit är bockade. Planen har ${sm.planerade} pass.` && s.passensLage({ ...sm, varit: 0 }).startsWith('Inget pass har varit än') && s.passensLage({ ...sm, gjorda: 0 }).startsWith('Inga pass är bockade än') && s.passensLage({ ...sm, slut: true }) === `${sm.gjorda} av ${sm.planerade} pass är bockade som genomförda.` && s.narvaronText({ narvaro: 2 }, { gjorda: 3 }) === 'Var med i 2 av 3 bockade pass.' && s.beslutText(f.avstamning) === 'Fortsätt som planerat. Mer tid.' && s.beslutText({ not: 'Bara en mening' }) === 'Bara en mening.' && s.BESLUTEN.utvardering.join() === 'avsluta,forlang,byt', s.passensLage(sm));
   const efter = p.uppfoljning.find((u) => u.typ === 'efter');
   ska('resultatet i en text, med radens namn som i uppföljningens rad', s.resultatText(p, info, { rad: 0, datum: '2026-11-23', varde: '4 av 8.' }) === `${s.uppfoljningensNamn(p, info, 0)}, v. 48: 4 av 8` && (!efter || s.resultatText(p, info, { rad: efter.rad, datum: '2027-01-18', varde: '6 av 8' }) === 'Efter insatsen, v. 3: 6 av 8'), efter && s.resultatText(p, info, { rad: efter.rad, datum: '2027-01-18', varde: '6 av 8' }));
-  ska('passens rad lika överallt: läget och de som inte blev av, och de utan bock sägs inte två gånger', s.passensRad({ ...sm, installda: 1, helgdagar: 2 }).startsWith(s.passensLage(sm)) && s.passensRad({ ...sm, installda: 1, helgdagar: 2 }).endsWith(' Ett pass ställdes in och två föll på helgdagar.') && s.passensRad({ planerade: 18, gjorda: 3, varit: 5, gjordaVarit: 3, slut: false, installda: 0, helgdagar: 0 }) === '3 av de 5 pass som har varit är bockade. Planen har 18 pass.', s.passensRad({ ...sm, installda: 1, helgdagar: 2 }));
+  ska('passens rad lika överallt: läget och de som inte blev av, och de utan bock sägs inte två gånger', s.passensRad({ ...sm, installda: 1, helgdagar: 2, helgdagarKvar: 0 }).startsWith(s.passensLage(sm)) && s.passensRad({ ...sm, installda: 1, helgdagar: 2, helgdagarKvar: 0 }).endsWith(' Ett pass ställdes in och två föll på helgdagar.') && s.passensRad({ planerade: 18, gjorda: 3, varit: 5, gjordaVarit: 3, slut: false, installda: 0, helgdagar: 0 }) === '3 av de 5 pass som har varit är bockade. Planen har 18 pass.', s.passensRad({ ...sm, installda: 1, helgdagar: 2, helgdagarKvar: 0 }));
   ska('kalenderveckorna: veckor i följd ihop, och ett lov bryter följden', s.kalenderveckornaFor(['2026-11-02', '2026-11-04', '2026-11-16']) === 'v. 45 och v. 47' && s.kalenderveckornaFor(['2026-11-02', '2026-11-09', '2026-11-16']) === 'v. 45–47' && s.kalenderveckornaFor(['2026-12-21', '2026-12-28', '2027-01-04']) === 'v. 52 till v. 1' && s.kalenderveckornaFor(['2026-11-04']) === 'v. 45', s.kalenderveckornaFor(['2026-11-02', '2026-11-16']));
   ska('kalenderfilen kallar uppföljningen efter insatsen som sidan', !efter || s.kalenderfil({ titel: 'T', uppfoljning: ts.uppfoljning.rader, fokus: [] }, p, { id: 'x', lank: () => 'l', nu: new Date(Date.UTC(2026, 10, 1)) }).includes('SUMMARY:T: uppföljning\\, efter insatsen'));
   ska('besluten och meningarna behåller sitt frågetecken', s.beslutText({ beslut: 'fortsatt', not: 'Ska stödet fortsätta?' }) === 'Fortsätt som planerat. Ska stödet fortsätta?' && s.mening('Hur gick det?') === 'Hur gick det?');
@@ -2464,6 +2467,15 @@ try {
   await lamna();
   const utanLamna = await elever();
   sant('en elev som tas bort utan att fältet lämnas och skrivs in igen efter en omladdning får tillbaka det som förts in', utanLamna[1]?.id === 'e2' && (await skattningarna('e2')) === 6, utanLamna);
+  // Codex 2026-10-26: en elev som lämnade listan med ett halvskrivet namn från en annan flik känns igen på förnamnet.
+  await el.kor(`(() => { const d = JSON.parse(localStorage.getItem('insatser')); const p = d.planer.find((x) => x.id === 'slut01'); p.foljd.elever = p.foljd.elever.filter((e) => e.id !== 'e2'); p.foljd.lamnade = [...(p.foljd.lamnade ?? []).filter((e) => e.id !== 'e2'), { id: 'e2', namn: 'Bea A', utkast: true }]; localStorage.setItem('insatser', JSON.stringify(d)); return true; })()`);
+  await el.oppna(`${PLAN}#${s.kodaVal(slutVal, { id: 'slut01' })}`);
+  await skriv('Ali\nBea Andersson\nSebastian Ek');
+  await lamna();
+  const halv = await elever();
+  sant('en elev som lämnade listan med ett halvskrivet namn känns igen på förnamnet', halv[1]?.id === 'e2' && (await skattningarna('e2')) === 6, halv);
+  await skriv('Ali\nBea\nSebastian Ek');
+  await lamna();
   // Svaret gäller: frågan kommer inte igen när läraren skriver vidare i samma redigering (verifieringen 2026-10-25: frågan
   // om Dan kom tillbaka efter varje ändring i listan).
   await skriv('Ali\nVera\nSebastian Ek');

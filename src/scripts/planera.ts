@@ -484,7 +484,10 @@ function lasElevlistan(text: string, r: NonNullable<typeof redigering>) {
   const franFor = (id: string) => kanda.find((x) => x.id === id)?.fran;
   const medFran = (id: string, namn: string): Elev => { const f = franFor(id); return { id, namn, ...(f ? { fran: f } : {}) }; };
   const anvanda = new Set<string>();
-  const lika = rader.map((n) => { if (!n) return null; const e = kanda.find((x) => x.namn === n && !anvanda.has(x.id)); if (e) anvanda.add(e.id); return e ? medFran(e.id, n) : null; });
+  // En elev som lämnade listan med ett halvskrivet namn från en annan flik (ett utkast) känns igen på förnamnet, när inget
+  // namn i listan är detsamma (Codex 2026-10-26: Bea A från en annan flik gav Bea Andersson ett nytt id).
+  const somUtkast = (n: string) => r.lamnade.find((x) => x.utkast && sammaElev(x.namn, n) && !anvanda.has(x.id) && !rader.includes(x.namn));
+  const lika = rader.map((n) => { if (!n) return null; const e = kanda.find((x) => x.namn === n && !anvanda.has(x.id)) ?? somUtkast(n); if (e) anvanda.add(e.id); return e ? medFran(e.id, n) : null; });
   const foreNamn = (id: string) => r.fore.find((x) => x.id === id)?.namn;
   const namnFor = (id: string) => aktiv.foljd.elever.find((x) => x.id === id)?.namn ?? foreNamn(id);
   const radId: (string | undefined)[] = [];
@@ -552,8 +555,11 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
   // Eleverna som lämnar listan sparas med planen varje gång listan sparas, också medan läraren skriver, så att en annan flik
   // och en omladdning känner igen dem. Listan räknas från den när ändringen började, så att inget halvt namn stannar där
   // (Codex 2026-10-26). En elev som kommer tillbaka säger det, med Ångra.
-  const lamnade = [...r.lamnade.filter((x) => !borta.some((b) => b.id === x.id) && !elever.some((e) => e.id === x.id)), ...borta.map(({ utkast: _u, ...e }) => e)].slice(-64);
-  aktiv.foljd = { ...aktiv.foljd, lamnade: lamnade.length ? lamnade : undefined, ...(!r.fore.length && elever.length && !aktiv.foljd.listan ? { listan: idag } : {}) };
+  const lamnade = [...r.lamnade.filter((x) => !borta.some((b) => b.id === x.id) && !elever.some((e) => e.id === x.id)), ...borta].slice(-64);
+  // Dagen listan fick sin första elev, men inte när eleverna kommer tillbaka från en tidigare lista, som en plan sparad före
+  // ändringen som töms och skrivs in igen (Codex 2026-10-26).
+  const nyLista = !r.fore.length && elever.length > 0 && !aktiv.foljd.listan && !elever.some((e) => r.lamnade.some((x) => x.id === e.id));
+  aktiv.foljd = { ...aktiv.foljd, lamnade: lamnade.length ? lamnade : undefined, ...(nyLista ? { listan: idag } : {}) };
   const tillbaka = elever.filter((e) => !r.fore.some((x) => x.id === e.id) && r.lamnade.some((x) => x.id === e.id));
   const gamla = r.fore.filter((e) => { const ny = elever.find((x) => x.id === e.id); return !ny || !sammaElev(e.namn, ny.namn); });
   // Ett namn som lämnar listan sparas med planen när listan sparas, också medan läraren skriver, så att texterna som lämnar
