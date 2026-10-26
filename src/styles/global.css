@@ -3089,6 +3089,20 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-graf .pl-prick.borta { fill: none; stroke: var(--farg-lasning); stroke-width: 1.2; }
 .pl-graf .pl-mittfalt { fill: var(--farg-skrivning-ljus); }
 .pl-graf .pl-mitttext { text-anchor: middle; fill: var(--farg-skrivning); font-weight: 600; }
+/* Metodens egna skattningar (K-559): linjen på metodens skala, med reglernas gränser streckade och veckan som kommer som en
+   streckad ring, och skalan med fler steg, som Lärarens skattning från 1 till 10, i en rad där den ryms och annars i två
+   rader om fem. */
+.pl-graf .pl-grans { stroke: var(--farg-accent); stroke-dasharray: 4 3; opacity: 0.8; }
+.pl-graf .pl-linjen { fill: none; stroke: var(--farg-accent); stroke-width: 2.5; stroke-linejoin: round; }
+.pl-graf .pl-punkt { fill: var(--farg-accent); }
+.pl-graf .pl-ring { fill: none; stroke: var(--farg-accent); stroke-width: 1.5; stroke-dasharray: 3 2; }
+.pl-skala-lang { grid-template-columns: repeat(10, 2.4rem); margin: 0.2rem 0 0.5rem; }
+@media (max-width: 34rem) {
+  .pl-skala-lang { grid-template-columns: repeat(5, minmax(0, 1fr)); max-width: 22rem; }
+  .pl-skala-lang .pl-skalsteg:nth-child(5n + 1) { border-left: 0; }
+  .pl-skala-lang .pl-skalsteg:nth-child(n + 6) { border-top: 1px solid var(--farg-kant); }
+}
+.pl-lankar .pl-falt { margin-bottom: 0.5rem; }
 .pl-noter { list-style: none; padding: 0; margin: 0.4rem 0 0; }
 .pl-noter li { margin: 0 0 0.6rem; }
 .pl-res { margin: 0.3rem 0 0.6rem; padding-left: 1.1rem; }

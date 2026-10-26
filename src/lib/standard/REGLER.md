@@ -34,7 +34,42 @@ Den här mappen är början på modulen som sajten och metodriggen ska dela, som
 | `BILDTEXT`, `meningarI`, `bildtextFel` | Bildtexten under en bild: en till tre meningar och högst 250 tecken, inte "Bilden visar", och ett blad har sitt textalternativ i `alt`. Det som bildtexten säger, det bilden inte kan berätta själv, prövas i granskningen. Reglerna står i sajtens STIL.md under Bildtexter |
 | `fastaAntal` | Spärren: de fasta antalen av en databas poster (från fem) och grupper (från två) i en text, som "tjugofem texter" eller "tre teman". De slutar stämma när databasen växer, och eftersom texten också står i Word-filerna, pdf:erna och lathunden skulle de göra om dem varje gång. Texten säger var posterna finns, och sidorna visar talen. Reglerna står i sajtens METODER.md under Antalen och databaserna |
 | `plan.js`: `metodplan`, `planFel`, `utanPlanensFalt`, `planera`, `forstaMandagen`, `forval`, `tolkaTid`, `tolkaSteg`, `rodaDagar`, `isoVecka`, `kodaVal`, `lasVal`, `rentaTider`, `passetsTid`, `tidText`, `tidsspann`, `dagarText`, `rentMal`, `malText`, `utanNamn`, `passensMinuter`, `minuterText`, `LANGSTA`, `dokumentationstext`, `kalenderfil`, `sammanstallning`, `sammanstallningstext`, `elevtext`, `elevensResultat`, `rensaFoljd`, `SKALAN`, `mittVeckan`, `tolkaPassen`, `passetsRoller`, `forvaldLangd`, `planvecka`, `stegUtanfor` | Planera insatsen: metodens plan ur faktarutans tid och period, progressionens veckor och uppföljningens `tid`, passen med datum och röda dagar, veckor som upprepas, lov, flyttade och inställda pass, passens tider, insatsens mål, länken, texten till åtgärdsprogrammet, kalenderfilen och sammanställningen när läraren följer insatsen, med elevernas namn bortbytta i texterna som kopieras. Passens roller (`plan.passen`), före första passet, en stege som börjar högre upp och de steg planen inte når. `utanPlanensFalt` säger på ett ställe vilka fälten är, som bara planens sida läser. Reglerna står i sajtens METODER.md under Planera insatsen |
+| `plan.js`: `metodensSkattningar`, `tolkaRegel`, `regelnGaller`, `skalansSteg`, `stegetsNamn`, `stegetsSpann`, `skattningensGranser`, `linjen`, `skattningensText` och `SKATTNINGARNAS_VEM` | Metodens egna skattningar: fältet, reglerna, skalan, linjen och texten, som avsnittet Metodens egna skattningar nedan beskriver |
 | `saker.js`: `sakensFormer`, `sakdelar`, `olankadeSaker` | Metodens saker i en text: namnen på bladen, korten, mallarna, testen och texterna i sina former, och spärren mot ett namn som ingen sak har. Sajten bygger listan över sakerna och deras adresser ur metodens fil; reglerna står i sajtens STIL.md under Hänvisningar |
+
+## Metodens egna skattningar
+
+En metod med ett eget instrument, som Gruppstärkande aktiviteters Lärarens skattning från 1 till 10 och bladet Vår grupp, gör det i Planera med metodens skala och vid metodens tillfällen (sajtens K-559; Niclas 2026-10-26: "Viktigt att det funkar som en egen modul du kan lägga in andra skattningar i på kommande metoder"). Delen slås på med fältet `plan.skattningar` i metodens fil och är borta utan det: en metod utan fältet ser ut som förut.
+
+| Steg | Så gör du |
+|---|---|
+| 1. Uppföljningens rad | Instrumentet har en rad i metodens uppföljning med en tid i insatsens veckor, som `varje vecka`, `varannan vecka` eller `vecka 4`. Raden säger när och vad, och planen visar den |
+| 2. Skalan, för gruppen | Metodens tabell, eller en rams översikt, där första kolumnen säger stegen och deras namn, som "9–10 · Mycket bra". Varje steg från första till sista har ett namn |
+| 3. Reglerna, när metoden har sådana | En rad i uppföljningen med `tid: "villkor"` för varje regel, med det läraren gör, och regelns ord i fältet: `nedåt 2 veckor i rad`, `under 7 i 4 veckor utan att stiga` eller `minst 7 i 4 veckor` |
+| 4. Fältet | En rad i `plan.skattningar` med `namn` (bladets namn efter "Blad: "), `vem`, `rad` (uppföljningens rad), en valfri `text` (ett ordagrant citat ur metoden), och för gruppen `skala` och `regler` |
+| 5. Proven | `npm run validera` |
+
+```yaml
+plan:
+  skattningar:
+    - namn: Lärarens skattning
+      vem: gruppen
+      rad: Lärarens skattning varje vecka
+      text: "Skatta i slutet av veckan, gärna direkt efter veckans sista pass."
+      skala: { fran: 1, till: 10, tabell: Lärarens skattning }
+      regler:
+        - { om: nedåt 2 veckor i rad, rad: Linjen i Lärarens skattning nedåt två veckor i rad }
+    - namn: Vår grupp
+      vem: eleverna
+      rad: Gruppreflektion varannan vecka
+```
+
+| Vem | Vad planen gör |
+|---|---|
+| `gruppen` | Läraren skattar gruppen med metodens skala vid Skatta gruppen i veckorna då metoden gör det. Det ersätter planens skattning av gruppen, så att gruppen har en skala, och elevernas 1–5 mot målet står hopfällda under. Linjen ritas med reglernas gränser streckade, en regel som gäller står under skalan och överst i rutan med passet veckan efter, och reglerna står under Vad linjen säger. Sammanställningen, avstämningen, utvärderingen, pdf:en och texterna läser linjen. Högst en per metod |
+| `eleverna` | Eleverna fyller i metodens blad eller formulär själva, och planen tar inte emot svaren. I passet där metoden gör det står knapparna till bladets pdf och till formuläret (fältet `google` på bladet), och lärarens länkar till sin kopia och sin sammanställning, som bara sparas i webbläsaren och i planens fil |
+
+Bort med delen: ta bort fältet. Uppföljningens rader står kvar och visas som förut, med reglerna under Håll koll på. Bygget stannar på en rad som metoden inte har, en tid utan veckor, en skala vars tabell inte säger varje steg, en regel som inte går att läsa eller vars rad inte är ett villkor, fler än en skattning av gruppen, ett namn som inget blad har och ett blad som eleverna fyller i utan formulär (`metodensSkattningar` här och `insatsplanFel` på sajten).
 
 ## Det som kommer
 

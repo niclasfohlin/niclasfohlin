@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { forstaLedet, gruppensElever, kortnamn, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { forstaLedet, gruppensElever, kortnamn, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
@@ -13,6 +13,9 @@ import { passOversikt } from './metod';
 import { CENTRALA, lasbarAdress } from './centrala';
 import { publicerade } from './innehall';
 import { site } from '../data/site';
+import type { Skattning } from './standard/index.js';
+import { arBlad, bladNamn, metodensPaBordet } from './pabordet';
+import { egnaBlad } from './bladmaterial';
 
 type Metod = CollectionEntry<'stodundervisning'>;
 
@@ -110,6 +113,15 @@ export interface PlanData {
   /** Stödet för nivåvalet (plan.nivaval, K-557): metodens text om nivåerna och tabellen eller avsnittet med mer, som planen
    * visar under en nerpil vid varje nivåval. */
   nivaval?: { text: string; mer: { namn: string; adress: string } };
+  /** Metodens egna skattningar (plan.skattningar, K-559): skalan med stegens namn och reglerna ur standarden, adressen till
+   * instrumentet på metodens sida, och för det eleverna fyller i bladets pdf och adressen som kopierar formuläret. */
+  skattningar?: PlanSkattning[];
+}
+
+export interface PlanSkattning extends Skattning {
+  adress?: string;
+  pdf?: string;
+  formular?: string;
 }
 
 export interface PlanPasset {
@@ -241,6 +253,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
   // omgång 5 2026-10-26: den stod i varje vecka).
   const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b/iu.test(d.checklista.rubrik);
   const nivaval = nivavalet(d, m.id);
+  const skattningar = planensSkattningar(d, m.id);
   return {
     id: m.id,
     titel: d.titel,
@@ -278,6 +291,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(!bank && d.nivaer.length >= 2 ? { nivaer: d.nivaer.map((n) => ({ namn: n.namn, slug: slugAv(n.namn), farg: `#${n.farg.toLowerCase()}` })) } : {}),
     ...(nivaTabell ? { nivaTabell } : {}),
     ...(nivaval ? { nivaval } : {}),
+    ...(skattningar.length ? { skattningar } : {}),
   };
 }
 
@@ -285,6 +299,25 @@ export async function planensData(m: Metod): Promise<PlanData> {
 // veckan, titeln före kolon i fokus ("Lika delar: eleverna delar …") eller hela första meningen, utan tre punkter (de kalla
 // testarna 2026-10-26: veckans fokus var kapat i texten som klistras in i åtgärdsprogrammet).
 const veckansKort = (r: { rubrik?: string; fokus: string }, titel?: string) => r.rubrik ?? (titel || r.fokus.match(/^([^:.!?]{3,40}):\s/u)?.[1] || postensRad(r.fokus, Infinity));
+
+/**
+ * Metodens egna skattningar med adresserna (K-559): instrumentet på metodens sida, som bladet Lärarens skattning, och för
+ * det eleverna fyller i bladets egen pdf och fältet google på bladet, som kopierar formuläret och sammanställningen.
+ */
+function planensSkattningar(d: Metod['data'], id: string): PlanSkattning[] {
+  const blad = metodensPaBordet(d, id).filter(arBlad);
+  const filer = egnaBlad(d, id);
+  return metodensSkattningar(d).skattningar.map((x) => {
+    const b = blad.find((y) => bladNamn(y).toLowerCase() === x.namn.toLowerCase());
+    const fil = filer.find((f) => f.titel.toLowerCase() === x.namn.toLowerCase());
+    return {
+      ...x,
+      ...(b ? { adress: `/stodundervisning/${id}#blad-${b.bild.nr}` } : {}),
+      ...(fil ? { pdf: `/stodundervisning/${fil.namn}.pdf` } : {}),
+      ...(x.vem === 'eleverna' && b?.bild.google ? { formular: b.bild.google } : {}),
+    };
+  });
+}
 
 /** Stödet för nivåvalet med adressen till metodens tabell, avsnitt eller ram med mer, med hela rubriken som den står i
  * metoden (Codex 2026-10-26: sakernas register har verktygen och rubrikernas första led), eller inget när den inte finns. */
@@ -343,6 +376,10 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   // är en tabell, ett avsnitt eller en ram i metoden, så att länken leder dit. Standarden prövar text och längd (planFel).
   const bankensNivaer = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? (await planensBank(m))?.nivaer.length ?? 0 : 0;
   if (bankensNivaer >= 2 && m.data.nivaer.length < 2) fel.push(...nivavaletsFel(m.data, true));
+  for (const x of planensSkattningar(m.data, m.id)) {
+    if (!x.adress) fel.push(`plan.skattningar: "${x.namn}" är inget blad i metoden. Skriv bladets namn som det står efter "Blad: ", som Lärarens skattning.`);
+    if (x.vem === 'eleverna' && !x.formular) fel.push(`plan.skattningar: bladet "${x.namn}" fylls i av eleverna och har inget formulär (fältet google på bladet), så planen kan inte leda till det.`);
+  }
   if (m.data.plan?.nivaval && !nivavalet(m.data, m.id)) fel.push(`plan.nivaval.mer säger "${m.data.plan.nivaval.mer}", som inte är en tabell, ett avsnitt eller en ram i metoden. Skriv rubriken som den står i metoden, som Så skiljer sig nivåerna.`);
   if (m.data.plan?.enPerPass && !(harTaFram(m, 'texter') || harTaFram(m, 'problem'))) fel.push('plan.enPerPass gäller en metod med en bank, där planen visar passets post.');
   // Ett namn som ser ut som en sak i metoden men inte är någon av dem blir ingen länk i planen (K-493).

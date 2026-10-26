@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, riktningText, skattadeVeckor, SKALAN, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -63,6 +63,14 @@ async function dokument(titel: string) {
   // var inte med, streck inte bockat.
   type Stapelval = { hojd?: number; mitt?: number | null; pass?: ('med' | 'borta' | 'inte')[][] };
   // Fältet för Mitt i står ovanför stapelns värde, så att värdet 5 inte täcker det (buggjakten 2026-10-25).
+  // Veckan mitt i insatsen i ett ljust fält med ordet Mitt i, som på sidan, ritat först, så att staplarna och linjen står
+  // ovanpå.
+  const mittfalt = (mitt: number | null | undefined, x0: number, steg: number, botten: number, h: number) => {
+    if (!mitt) return;
+    const mx = x0 + (mitt - 1) * steg;
+    sida.drawRectangle({ x: mx + 1, y: botten - 2, width: steg - 2, height: h + 24, color: farg.mitt });
+    sida.drawText('Mitt i', { x: mx + steg / 2 - font.widthOfTextAtSize('Mitt i', 7) / 2, y: botten + h + 15, size: 7, font, color: farg.svag });
+  };
   const staplarnasHojd = (o: Stapelval) => (o.hojd ?? 70) + 43 + (o.pass ? 14 : 0) + (o.mitt ? 22 : 0);
   const staplar = (varden: (number | undefined)[], etiketter: Veckonamn[], o: Stapelval = {}) => {
     const h = o.hojd ?? 70, n = varden.length, bredd = A4[0] - 2 * KANT - 24;
@@ -71,7 +79,7 @@ async function dokument(titel: string) {
     plats(total);
     if (o.mitt) y -= 22;
     const botten = y - h - 6, x0 = KANT + 24;
-    if (o.mitt) sida.drawRectangle({ x: x0 + (o.mitt - 1) * steg + 1, y: botten - 2, width: steg - 2, height: h + 24, color: farg.mitt });
+    mittfalt(o.mitt, x0, steg, botten, h);
     for (let v = 1; v <= 5; v++) {
       const ly = botten + (v / 5) * h;
       sida.drawLine({ start: { x: x0 - 4, y: ly }, end: { x: x0 + n * steg, y: ly }, thickness: 0.5, color: farg.kant });
@@ -93,11 +101,6 @@ async function dokument(titel: string) {
         else sida.drawLine({ start: { x: px - 2, y: py }, end: { x: px + 2, y: py }, thickness: 0.8, color: farg.kant });
       });
     });
-    // Veckan mitt i insatsen i ett ljust fält, som på sidan; fältet ritas först, så att staplarna står ovanpå.
-    if (o.mitt) {
-      const mx = x0 + (o.mitt - 1) * steg;
-      sida.drawText('Mitt i', { x: mx + steg / 2 - font.widthOfTextAtSize('Mitt i', 7) / 2, y: botten + h + 15, size: 7, font, color: farg.svag });
-    }
     y -= total - (o.mitt ? 22 : 0);
   };
   // Ett namn står aldrig ensamt sist på en sida: det får plats med staplarna under (buggjakten och användbarhetsprovet
@@ -111,7 +114,37 @@ async function dokument(titel: string) {
     sidor.forEach((s, i) => s.drawText(ren(`${fot} · sida ${i + 1} av ${sidor.length}`), { x: KANT, y: 28, size: 8, font, color: farg.svag }));
     return doc.save();
   };
-  return { text, rubrik, staplar, namnMedStaplar, avsluta, farg };
+  // Linjen i metodens skattning av gruppen (K-559): kryss vecka för vecka på metodens skala, reglernas gränser streckade,
+  // med veckan i planen och kalenderveckan under, som på sidan.
+  const linje = (varden: (number | undefined)[], etiketter: Veckonamn[], o: { fran: number; till: number; granser: number[]; hojd?: number; mitt?: number | null }) => {
+    const h = o.hojd ?? 90, n = varden.length, bredd = A4[0] - 2 * KANT - 24;
+    const steg = Math.min(46, bredd / Math.max(n, 1));
+    const total = h + 43 + (o.mitt ? 22 : 0);
+    plats(total);
+    if (o.mitt) y -= 22;
+    const botten = y - h - 6, x0 = KANT + 24;
+    const yv = (v: number) => botten + ((v - o.fran) / (o.till - o.fran)) * h;
+    mittfalt(o.mitt, x0, steg, botten, h);
+    for (const v of [...new Set([o.fran, ...o.granser, o.till])]) {
+      const ly = yv(v), streck = o.granser.includes(v);
+      sida.drawLine({ start: { x: x0 - 4, y: ly }, end: { x: x0 + n * steg, y: ly }, thickness: streck ? 0.8 : 0.5, color: streck ? farg.accent : farg.kant, ...(streck ? { dashArray: [3, 2] } : {}) });
+      sida.drawText(String(v), { x: KANT + 6, y: ly - 3, size: 7.5, font, color: farg.svag });
+    }
+    const punkter = varden.flatMap((v, i) => (v === undefined ? [] : [{ x: x0 + i * steg + steg / 2, y: yv(v), v }]));
+    punkter.forEach((q, i) => { if (i) sida.drawLine({ start: { x: punkter[i - 1].x, y: punkter[i - 1].y }, end: { x: q.x, y: q.y }, thickness: 1.6, color: farg.accent }); });
+    for (const q of punkter) {
+      sida.drawCircle({ x: q.x, y: q.y, size: 3, color: farg.accent });
+      sida.drawText(String(q.v), { x: q.x - fet.widthOfTextAtSize(String(q.v), 8) / 2, y: q.y + 5, size: 8, font: fet, color: farg.text });
+    }
+    varden.forEach((_, i) => {
+      const cx = x0 + i * steg + steg / 2;
+      const iPlanen = ren(etiketter[i].kort), kalender = ren(etiketter[i].kalender);
+      sida.drawText(iPlanen, { x: cx - fet.widthOfTextAtSize(iPlanen, 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
+      sida.drawText(kalender, { x: cx - font.widthOfTextAtSize(kalender, 7) / 2, y: botten - 21, size: 7, font, color: farg.svag });
+    });
+    y -= total - (o.mitt ? 22 : 0);
+  };
+  return { text, rubrik, staplar, namnMedStaplar, linje, avsluta, farg };
 }
 
 const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
@@ -134,9 +167,20 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   p.rubrik('Passen');
   p.text(passensRad(s), { luft: 2 });
   if (s.gjorda) p.text(s.veckor.map((v) => `${veckansNamn(v).Text}: ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
-  p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
-  skalan(p, info, 4);
-  for (const e of s.elever) {
+  // Metodens skattning av gruppen, med linjen och reglerna som gällde, före eleverna (K-559).
+  for (const sk of s.skattningar) {
+    const t = skattningensText(s, sk, info);
+    if (!t.varden) continue;
+    p.rubrik(sk.namn, 150);
+    p.text(`${sk.skala.fran} till ${sk.skala.till}: ${sk.skala.steg.map((x) => `${stegetsSpann(x)} ${x.namn.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+    p.linje(sk.varden, veckoetiketter(s), { fran: sk.skala.fran, till: sk.skala.till, granser: skattningensGranser(sk), mitt: s.mitt });
+    if (t.regler.length) p.text(`Det linjen sa: ${t.regler.join('; ')}.`, { luft: 8 });
+  }
+  // Planens egen skattning av gruppen står bara när den har något, när metoden har en egen skala för gruppen.
+  const planens = !(s.skattningar.length && s.grupp && !s.elever.some((e) => e.skattningar.length));
+  if (planens) p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
+  if (planens) skalan(p, info, 4);
+  for (const e of planens ? s.elever : []) {
     p.namnMedStaplar(e.namn, elevensVarden(s, e), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
     p.text([`${riktningText(e)}.`, e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronText(e, s) : '', ...elevensResultat(plan, e.resultat).map((t) => mening(resultatText(plan, info, t)))].filter(Boolean).join(' '), { luft: 8 });
   }

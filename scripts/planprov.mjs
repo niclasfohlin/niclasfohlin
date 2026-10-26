@@ -385,6 +385,32 @@ if (tsMp) {
     const julEfter = (lov) => s.planera(kmp, { ...jul, lov }).uppfoljning.find((u) => u.typ === 'efter')?.tillfallen[0]?.datum;
     ska('en lovvecka flyttar uppföljningen efter insatsen till veckan efter lovet', julEfter([]) === '2026-12-21' && julEfter(['2026-52']) === '2026-12-28' && julEfter(['2026-52', '2026-53']) === '2027-01-04', [julEfter([]), julEfter(['2026-52']), julEfter(['2026-52', '2026-53'])]);
   }
+  // Metodens egna skattningar (K-559; Niclas 2026-10-26: "Viktigt att det funkar som en egen modul du kan lägga in andra
+  // skattningar i på kommande metoder"): reglerna, skalan ur metodens tabell, felen som stoppar bygget, linjen och texterna,
+  // med lärarens länkar som aldrig följer med en text.
+  {
+    const ga = metod('gruppstarkande-aktiviteter');
+    const gmp = s.metodplan(ga).plan;
+    const g = gmp.skattningar.find((x) => x.vem === 'gruppen');
+    const ned = s.tolkaRegel('nedåt 2 veckor i rad'), under = s.tolkaRegel('under 7 i 4 veckor utan att stiga'), minst = s.tolkaRegel('minst 7 i 4 veckor');
+    ska('metodens skattningar: reglerna på linjen', ned?.typ === 'nedat' && under?.grans === 7 && minst?.veckor === 4 && s.tolkaRegel('ibland') === null && s.regelnGaller(ned, [7, 6, 5]) && !s.regelnGaller(ned, [7, 6]) && !s.regelnGaller(ned, [7, 6, 6]) && s.regelnGaller(under, [6, 6, 5, 5]) && !s.regelnGaller(under, [6, 5, 6, 5]) && !s.regelnGaller(under, [6, 6, 7, 5]) && s.regelnGaller(minst, [7, 8, 7, 9]) && !s.regelnGaller(minst, [7, 8, 6, 9]), [ned, under, minst]);
+    ska('metodens skattningar: skalan ur metodens tabell', s.SKATTNINGARNAS_VEM.join() === 'gruppen,eleverna' && g?.skala?.steg.length === 5 && s.stegetsNamn(g.skala, 10) === 'Mycket bra' && s.stegetsNamn(g.skala, 1) === 'Fungerar inte' && s.stegetsSpann(g.skala.steg[0]) === '1–2' && s.stegetsSpann({ fran: 4, till: 4 }) === '4' && s.skattningensGranser(g).join() === '7' && !!s.skalansSteg(ga, { fran: 1, till: 10, tabell: 'Lärarens skattning' }) && s.skalansSteg(ga, { fran: 0, till: 10, tabell: 'Lärarens skattning' }) === null && gmp.skattningar.find((x) => x.vem === 'eleverna')?.namn === 'Vår grupp', g);
+    const med = (skattningar) => ({ ...ga, plan: { ...ga.plan, skattningar } });
+    const felen = (x) => s.metodensSkattningar(med(x)).fel;
+    const [lararens, vargrupp] = ga.plan.skattningar;
+    ska('metodens skattningar: spärren', !s.metodensSkattningar(ga).fel.length && felen([{ ...lararens, rad: 'Finns inte' }]).some((x) => x.includes('som metoden inte har')) && felen([{ ...lararens, skala: { fran: 0, till: 10, tabell: 'Lärarens skattning' } }]).some((x) => x.includes('har inte ett namn för varje steg')) && felen([{ ...lararens, regler: [{ om: 'ibland', rad: lararens.regler[0].rad }] }]).some((x) => x.includes('går inte att läsa')) && felen([{ ...lararens, regler: [{ om: 'nedåt 2 veckor i rad', rad: lararens.rad }] }]).some((x) => x.includes('tid: villkor')) && felen([lararens, lararens]).some((x) => x.includes('mer än en skattning av gruppen')) && felen([{ ...vargrupp, skala: { fran: 1, till: 5, tabell: 'Lärarens skattning' } }]).some((x) => x.includes('fylls i av eleverna')) && felen([{ ...lararens, rad: 'Kort med beröring' }]).some((x) => x.includes('behöver en tid i insatsens veckor')), [felen([lararens, lararens])]);
+    const gval = { ...s.forval(gmp, '2026-10-26'), start: '2026-11-02' };
+    const gpl = s.planera(gmp, gval);
+    const mandag = (i) => gpl.veckor[i].mandag;
+    const gfoljd = s.rensaFoljd({ matt: { 'Lärarens skattning': { [mandag(0)]: 7, [mandag(1)]: 6, [mandag(2)]: 5, x: 3 } }, lankar: { 'Vår grupp': { formular: 'https://docs.google.com/forms/d/e/prov/viewform', sammanstallning: 'javascript:alert(1)' } } });
+    const lin = s.linjen(gpl, gfoljd, g);
+    const sam = s.sammanstallning(gpl, gfoljd, '2026-11-20');
+    const ginfo = { titel: ga.titel, adress: 'niclasfohlin.se/stodundervisning/gruppstarkande-aktiviteter', mal: ga.mal.overgripande, uppfoljning: ga.uppfoljning.rader };
+    const text = s.sammanstallningstext(ginfo, gpl, sam);
+    const ap = s.dokumentationstext(ginfo, gpl, gval, { minuter: 30, folj: true });
+    const ord = s.skattningensText(sam, sam.skattningar[0], ginfo);
+    ska('metodens skattningar: linjen, reglerna och texterna, utan lärarens länkar', lin.varden.slice(0, 3).join() === '7,6,5' && !lin.galler[1].length && lin.galler[2][0] === 0 && !('x' in (gfoljd.matt?.['Lärarens skattning'] ?? {})) && gfoljd.lankar?.['Vår grupp']?.formular?.startsWith('https://') && !gfoljd.lankar?.['Vår grupp']?.sammanstallning && ord.varden.startsWith('Lärarens skattning, 1 till 10: vecka 1 (v. 45): 7') && ord.regler.length === 1 && text.includes(`${ord.varden}.`) && text.includes('Det linjen sa: Linjen i Lärarens skattning nedåt två veckor i rad efter vecka 3') && !text.includes('docs.google') && ap.includes('Lärarens skattning varje vecka, 1 till 10, av gruppen') && !ap.includes('docs.google'), [lin, text, ap]);
+  }
   // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): en metod med
   // nivåer har det, högst tre meningar och NIVAVALETS_LANGD tecken, och texten står ordagrant i metoden.
   {
@@ -490,7 +516,7 @@ const planbara = alla.filter((m) => m.d.uppfoljning?.rader?.length && m.d.uppfol
 {
   const langder = planbara.filter((m) => !s.delarIFoljd((m.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim())))).map((m) => m.id);
   const gruppstarkande = (alla.find((m) => m.id === 'gruppstarkande-aktiviteter')?.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim()));
-  ska('passets delar som platser eller som längder', s.delarIFoljd([{ tid: '0–8 min' }, { tid: '8–18 min' }]) && !s.delarIFoljd([{ tid: '1–3 min' }, { tid: '1–2 min' }]) && !s.delarIFoljd([{ tid: '0–5 min' }, { tid: '6–9 min' }]) && !s.delarIFoljd([]) && gruppstarkande.length > 0 && !s.delarIFoljd(gruppstarkande) && !langder.length, langder);
+  ska('passets delar som platser eller som längder', s.delarIFoljd([{ tid: '0–8 min' }, { tid: '8–18 min' }]) && !s.delarIFoljd([{ tid: '1–3 min' }, { tid: '1–2 min' }]) && !s.delarIFoljd([{ tid: '0–5 min' }, { tid: '6–9 min' }]) && !s.delarIFoljd([]) && gruppstarkande.length > 0 && !s.delarIFoljd(gruppstarkande) && langder.join() === 'gruppstarkande-aktiviteter', langder);
 }
 for (const m of planbara) {
   const { fel: f, plan: mp } = s.metodplan(m.d);
@@ -1961,6 +1987,28 @@ try {
     if (m.id === 'kompissamtal') {
       const pass3 = await b.kor(`(() => { const r = [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-roll .pl-etikett')].map((x) => x.textContent); return { rubrik: document.querySelector('#pl-veckan .pl-nasta .pl-passnamn')?.textContent ?? '', etiketter: r }; })()`);
       sant('uppföljningen i ett visst pass står i rutan med passet', !/^Pass 3 /.test(pass3.rubrik) || pass3.etiketter.some((x) => /samtal.3/.test(x)), pass3);
+    }
+    // Metodens egna skattningar (K-559): Lärarens skattning från 1 till 10 vid Skatta gruppen, med linjen och regeln efter
+    // krysset, regeln överst i rutan med passet veckan efter, och Vår grupp i passet med bladet, formuläret och lärarens
+    // länk, som inte står i länken till planen.
+    if (m.id === 'gruppstarkande-aktiviteter') {
+      await b.kor(`document.getElementById('pl-folj').click()`);
+      await vanta(200);
+      const kryss = async (vecka, varde) => { await b.tryck(`#pl-veckan .pl-remsa [data-vy="${vecka}"]`); await vanta(150); await b.tryck(`#pl-skatta [data-matt][aria-label^="${varde},"]`); await vanta(150); };
+      await kryss(1, 7);
+      await kryss(2, 6);
+      await kryss(3, 5);
+      const v3 = await b.kor(`(() => ({ steg: document.querySelectorAll('#pl-skatta .pl-skala-lang .pl-skalsteg').length, namn: [...document.querySelectorAll('#pl-skatta .pl-skalnamn li')].map((x) => x.textContent), regel: document.querySelector('#pl-skatta .pl-regel')?.textContent ?? '', punkter: document.querySelectorAll('#pl-skatta .pl-linjegraf .pl-punkt').length, hallKoll: [...([...document.querySelectorAll('#pl-veckan section.pl-block')].find((x) => x.querySelector('h3')?.textContent === 'Håll koll på')?.querySelectorAll('.pl-etikett') ?? [])].map((x) => x.textContent) }))()`);
+      sant('metodens skattning av gruppen: skalan med namnen, linjen och regeln efter krysset', v3.steg === 10 && v3.namn[0] === '1–2 Fungerar inte' && v3.punkter === 3 && v3.regel.includes('nedåt två veckor i rad') && !v3.hallKoll.some((x) => /nedåt/i.test(x)), v3);
+      const b4 = await flik(false, Date.UTC(2026, 10, 25, 9, 0, 0));
+      await b4.oppna(adress);
+      const v4 = await b4.kor(`(() => ({ regel: document.querySelector('#pl-veckan .pl-nasta .pl-regel')?.textContent ?? '', knappar: [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-andra-knappar a')].map((a) => a.textContent + ' ' + a.getAttribute('href')) }))()`);
+      sant('metodens skattningar veckan efter: regeln överst i rutan med passet, och Vår grupp med bladet och formuläret', v4.regel.includes('nedåt två veckor i rad') && v4.knappar.some((x) => x.startsWith('Bladet Vår grupp /stodundervisning/gruppstarkande-aktiviteter-blad-var-grupp.pdf')) && v4.knappar.some((x) => x.startsWith('Kopiera formuläret /vargrupp')), v4);
+      await b4.kor(`(() => { const d = document.querySelector('#pl-veckan details.pl-lankar'); d.open = true; const f = d.querySelector('[data-lank$="|formular"]'); f.value = 'https://docs.google.com/forms/d/e/prov/viewform'; f.dispatchEvent(new Event('input', { bubbles: true })); f.dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
+      await vanta(300);
+      const l4 = await b4.kor(`(() => ({ knappar: [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-andra-knappar a')].map((a) => a.textContent), adress: location.hash, oppen: !!document.querySelector('#pl-veckan details.pl-lankar[open]') }))()`);
+      sant('metodens skattningar: lärarens länk ger knappen Ditt formulär och står inte i länken till planen', l4.knappar.includes('Ditt formulär') && !l4.knappar.includes('Kopiera formuläret') && !l4.adress.includes('docs.google') && l4.oppen, l4);
+      b4.stang();
     }
     if (m.id === 'brakkurs-i-grupp') {
       const veckansRam = async (v) => { await b.tryck(`#pl-veckan .pl-remsa [data-vy="${v}"]`); await vanta(150); return b.kor(`[...document.querySelectorAll('#pl-veckan a')].find((a) => a.textContent === 'veckans ram')?.getAttribute('href') ?? ''`); };

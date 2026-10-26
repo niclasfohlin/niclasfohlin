@@ -315,19 +315,42 @@ uppfoljning:
   text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. Då läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Gäller två rader samtidigt, gör du det som står först.
   rader:
     - nar: Lärarens skattning varje vecka
+      tid: "varje vecka"
       vad: Skatta gruppen i Lärarens skattning.
     - nar: Gruppreflektion varannan vecka
+      tid: "varannan vecka"
       vad: Från vecka 2 fyller eleverna i Vår grupp, och du leder en gruppreflektion efter en kort aktivitet i ett av veckans pass. I de två veckorna efter modellerar du det gruppen ska bli bättre på.
     - nar: Kort utan beröring vecka 1–4
+      tid: "vecka 1–4"
       vad: Välj kort utan beröring ur Lära känna varandra och Trygghet och gemenskap på sidan Ta fram en aktivitet. Sedan väljer du fler kort ur Samarbetsutmaningar, Gemensamma mål och Skapa och bygga.
     - nar: Kort med beröring
+      tid: "villkor"
       vad: Välj dem från vecka 5, när de flesta ringar in 4 eller 5 på ”Jag känner mig trygg i gruppen” i Vår grupp.
     - nar: Linjen i Lärarens skattning nedåt två veckor i rad
+      tid: "villkor"
       vad: Gör två aktiviteter i veckan ur Trygghet och gemenskap. Välj kort utan beröring, gärna sådana som gruppen redan kan, och ta upp det du har sett i nästa gruppreflektion.
     - nar: Linjen i Lärarens skattning under 7 i fyra veckor, utan att stiga
+      tid: "villkor"
       vad: Välj kort ur en kategori som ni inte har använt på länge, och fråga i gruppreflektionen vad ni kan bli lite bättre på.
     - nar: Linjen i Lärarens skattning på 7 eller mer i fyra veckor
+      tid: "villkor"
       vad: Gör en aktivitet i veckan och en gruppreflektion i månaden, om de flesta också ringar in 4 eller 5 på varje påstående i Vår grupp.
+plan:
+  # Metodens egna skattningar (K-559): Lärarens skattning från 1 till 10 vid Skatta gruppen, med linjen och reglerna i
+  # Gruppen över tid, och bladet Vår grupp som eleverna fyller i, med formuläret, i gruppreflektionens vecka.
+  skattningar:
+    - namn: Lärarens skattning
+      vem: gruppen
+      rad: Lärarens skattning varje vecka
+      text: "Skatta i slutet av veckan, gärna direkt efter veckans sista pass. Tänk då på hur gruppen har haft det i aktiviteterna, på lektionerna och på rasterna."
+      skala: { fran: 1, till: 10, tabell: Lärarens skattning }
+      regler:
+        - { om: nedåt 2 veckor i rad, rad: Linjen i Lärarens skattning nedåt två veckor i rad }
+        - { om: under 7 i 4 veckor utan att stiga, rad: "Linjen i Lärarens skattning under 7 i fyra veckor, utan att stiga" }
+        - { om: minst 7 i 4 veckor, rad: Linjen i Lärarens skattning på 7 eller mer i fyra veckor }
+    - namn: Vår grupp
+      vem: eleverna
+      rad: Gruppreflektion varannan vecka
 mal:
   overgripande: "kunna samarbeta mot ett mål som gruppen bara når tillsammans, och pröva igen när något går fel."
   punkter:
