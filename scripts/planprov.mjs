@@ -1826,6 +1826,12 @@ try {
   await helg.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(helgLagrat))})`);
   await helg.oppna(PLAN);
   sant('på söndagen gäller rutan nästa pass och dess vecka', (await helg.text('.pl-nar')) === 'I morgon, måndag 9 november, vecka 2 i planen' && (await helg.text('#pl-veckan .pl-nasta [data-vy="2"]')) === 'Till vecka 2' && (await helg.text('#pl-veckan .pl-veckans summary'))?.startsWith('Texter till vecka 2'), [await helg.text('.pl-nar'), await helg.text('#pl-veckan .pl-veckans summary')]);
+  // Ett lov i efterhand flyttar inte det som har förts in (Codex 2026-10-26): med bockar bara i vecka 45 är den veckan och
+  // veckorna före låsta, vecka 46 går att välja, och raden under knapparna säger varför.
+  const lovLagrat = { ...helgLagrat, planer: helgLagrat.planer.map((p) => ({ ...p, foljd: { ...p.foljd, skattning: {}, vecka: {}, resultat: {}, franvaro: {} } })) };
+  await helg.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(lovLagrat))})`);
+  await helg.oppna(PLAN);
+  sant('ett lov går bara att lägga efter det som har förts in', await helg.kor(`document.querySelector('[data-lovvecka="2026-45"]')?.disabled === true && document.querySelector('[data-lovvecka="2026-46"]')?.disabled === false && !document.getElementById('pl-lov-not').hidden`), await helg.kor(`[...document.querySelectorAll('[data-lovvecka]')].map((b) => b.dataset.lovvecka + (b.disabled ? '!' : '')).join(' ')`));
   sant('inga fel på söndagen', !helg.undantag.length, helg.undantag);
   helg.stang();
 

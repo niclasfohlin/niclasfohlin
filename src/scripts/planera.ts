@@ -199,7 +199,8 @@ function renderaVal() {
   for (let i = 0; i < 10 && lov.has(veckonyckel(sistaLov)); i++) sistaLov = plusDagar(sistaLov, 7);
   const veckor: string[] = [];
   for (let m = forstaLov; m <= sistaLov && veckor.length < 42; m = plusDagar(m, 7)) veckor.push(m);
-  $('pl-lovveckor').innerHTML = veckor.map((m) => { const k = veckonyckel(m); const pa = lov.has(k); return `<button type="button" class="pl-chip pl-lovchip" data-lovvecka="${k}" aria-pressed="${pa}" aria-label="${stor(kalenderveckaUtskriven(isoVecka(m).vecka))}, ${esc(spannKort(m, plusDagar(m, 4)))}${pa ? ', lov' : ''}"><span>${kalendervecka(isoVecka(m).vecka)}</span><small>${esc(spannKort(m, plusDagar(m, 4)))}</small></button>`; }).join('');
+  $('pl-lovveckor').innerHTML = veckor.map((m) => { const k = veckonyckel(m); const pa = lov.has(k); return `<button type="button" class="pl-chip pl-lovchip" data-lovvecka="${k}" aria-pressed="${pa}"${lovetLast(m) ? ' disabled' : ''} aria-label="${stor(kalenderveckaUtskriven(isoVecka(m).vecka))}, ${esc(spannKort(m, plusDagar(m, 4)))}${pa ? ', lov' : ''}"><span>${kalendervecka(isoVecka(m).vecka)}</span><small>${esc(spannKort(m, plusDagar(m, 4)))}</small></button>`; }).join('');
+  $('pl-lov-not').hidden = !veckor.some(lovetLast);
   foljruta.checked = aktiv.folj;
   $('pl-elevruta').hidden = !aktiv.folj;
   narvaroruta.checked = !!aktiv.foljd.narvaro;
@@ -730,6 +731,16 @@ const gjort = (dag: string) => aktiv.foljd.gjorda.includes(dag);
 // En vecka går att bocka och skatta från sin måndag (Niclas 2026-10-25: "Alltså från måndag 00.01 kan man bocka den veckas
 // pass"; buggjakten samma dag: en vecka längre fram gick att skatta, medan sammanställningen sa att inget pass hade varit).
 const harBorjatVecka = (mandag: string) => mandag <= idag;
+// Det läraren har fört in står kvar under sin vecka i metoden: ett lov ändras inte i den sista veckan med något infört,
+// bockar, frånvaro, skattningar, veckans anteckningar och resultat, och inte före den, eftersom lovet flyttar metodens veckor
+// och det införda står på sina datum (Codex 2026-10-26: ett lov i efterhand flyttade skattningarna till en annan vecka). Ett
+// förslag och en plan utan något infört har ingen sådan vecka.
+const sistaInforda = (): string | undefined => {
+  const f = aktiv.foljd;
+  const datum = [...f.gjorda, ...Object.keys(f.franvaro ?? {}), ...Object.keys(f.skattning ?? {}), ...Object.keys(f.vecka ?? {}), ...Object.keys(f.resultat ?? {}).map((k) => k.split('-').slice(1).join('-'))].filter(arDatum);
+  return datum.length ? datum.sort().at(-1) : undefined;
+};
+const lovetLast = (mandag: string) => { const s = sistaInforda(); return !!s && mandag <= mandagen(s); };
 const passetsTidText = (p: Pass) => { const t = passetsTid(aktiv.val, p); return t ? tidsspann(t) : ''; };
 // Veckans pass som små rutor: bockat, varit men inte bockat, och kommande.
 const rutor = (v: PlanVecka) => {
@@ -789,7 +800,7 @@ function renderaVeckor() {
   const rad = (attr: string, inner: string) => (klick ? `<button type="button" class="pl-veckoknapp" ${attr}>${inner}</button>` : `<div class="pl-veckoknapp">${inner}</div>`);
   const rader: string[] = [];
   const lovFore = (v: PlanVecka) => plan.lovveckor.filter((m) => m < v.mandag && (v.nr === 1 || m > plan.veckor[v.nr - 2].mandag));
-  const lovrad = (m: string) => `<li class="pl-lovvecka"><span class="pl-v">Lov</span><span class="pl-d">${esc(spannKort(m, plusDagar(m, 4)))}</span><span class="pl-innehall"><span class="pl-pass">${kalendervecka(isoVecka(m).vecka)}</span><span class="pl-fokus">Inga pass</span><button type="button" class="pl-textknapp" data-lov-bort="${esc(veckonyckel(m))}" aria-label="Ta bort lovet i ${kalenderveckaUtskriven(isoVecka(m).vecka)}">Ta bort lovet</button></span></li>`;
+  const lovrad = (m: string) => `<li class="pl-lovvecka"><span class="pl-v">Lov</span><span class="pl-d">${esc(spannKort(m, plusDagar(m, 4)))}</span><span class="pl-innehall"><span class="pl-pass">${kalendervecka(isoVecka(m).vecka)}</span><span class="pl-fokus">Inga pass</span>${lovetLast(m) ? '' : `<button type="button" class="pl-textknapp" data-lov-bort="${esc(veckonyckel(m))}" aria-label="Ta bort lovet i ${kalenderveckaUtskriven(isoVecka(m).vecka)}">Ta bort lovet</button>`}</span></li>`;
   const foljer = klick && aktiv.folj;
   const mitt = mittVeckan(plan);
   for (const v of plan.veckor) {
@@ -1376,11 +1387,11 @@ function efterDelar(): string[] {
   if ((aktiv.sparad || aktiv.franLank) && plan.pass.length > 0) {
     // Läget, när passen slutar och när planen avslutas står i raden överst, så rutan säger det läraren gör nu: uppföljningen
     // efter insatsen som gäller den här veckan eller nästa (verifieringen 2026-10-25: samma mening stod två gånger).
-    if (aktuell) delar.push(`<div class="pl-nasta"><span class="pl-etikett">${aktuell === nuUppf ? 'Den här veckan' : 'Nästa uppföljning'}</span><p class="pl-nar">${esc(`${uppfNamn(aktuell.rad)}, ${kalendervecka(isoVecka(aktuell.datum).vecka)}, ${spannKort(aktuell.datum, plusDagar(aktuell.datum, 4))}`)}</p>${knappar}</div>`);
+    if (aktuell) delar.push(`<div class="pl-nasta"><span class="pl-etikett">${aktuell === nuUppf ? 'Den här veckan' : 'Nästa uppföljning'}</span><p class="pl-nar">${esc(`${uppfNamn(aktuell.rad)}, ${kalendervecka(isoVecka(aktuell.datum).vecka)}, ${spannKort(aktuell.datum, plusDagar(aktuell.datum, 4))}`)}</p>${knappar}${metodensLankar()}</div>`);
     else if (knappar) delar.push(knappar);
   } else {
     const sista = plan.sistaPass ? (avslutad ? hurAvslutad() : `${sistaPassetText()}${plan.slut ? ` ${avslutetText(plan, !slut)}` : ''}`) : '';
-    delar.push(`<div class="pl-nasta"><span class="pl-etikett">${avslutad ? 'Insatsen är avslutad' : 'Efter sista passet'}</span><p class="pl-nar">${esc(sista)}</p>${knappar}</div>`);
+    delar.push(`<div class="pl-nasta"><span class="pl-etikett">${avslutad ? 'Insatsen är avslutad' : 'Efter sista passet'}</span><p class="pl-nar">${esc(sista)}</p>${knappar}${metodensLankar()}</div>`);
   }
   // Det som kommer efter insatsen i metodens progression, som nästa period i Läslistor i grupp (de kalla testarna
   // 2026-10-24: nästa period stod som veckans fokus i vecka 8).
