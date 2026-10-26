@@ -1116,7 +1116,9 @@ export function passetsBeskrivning(roller, passet, lage) {
   const utan = roller.some((r) => r.utanTidsschema);
   const variant = tabell || utan ? undefined : variantenFor(passet?.varianter, lage);
   /** @type {{ etikett: string, text: string }[]} */
-  const texter = [...(variant?.text ? [{ etikett: '', text: variant.text }] : []), ...roller.flatMap((r) => [...(r.text ? [{ etikett: '', text: utanNamnet(r) }] : []), ...(r.rad ?? []).map((c) => ({ etikett: c.kolumn, text: c.text }))])];
+  // Variantens text står först bland passets texter, utom för ett kortare pass, där den står under passets rubrik.
+  const kortare = !!variant && variantensNar(variant.nar)?.typ === 'minuter';
+  const texter = [...(variant?.text && !kortare ? [{ etikett: '', text: variant.text }] : []), ...roller.flatMap((r) => [...(r.text ? [{ etikett: '', text: utanNamnet(r) }] : []), ...(r.rad ?? []).map((c) => ({ etikett: c.kolumn, text: c.text }))])];
   return {
     namn: roller.map(namnet).find(Boolean) ?? '',
     texter,
@@ -1126,7 +1128,7 @@ export function passetsBeskrivning(roller, passet, lage) {
     foreRader: tabell?.fore ?? [],
     tabell: roller.find((r) => r.tabell)?.tabell,
     // Ett kortare pass har variantens rubrik, "Ett pass på tio minuter", i stället för tidsschemats (Codex 2026-10-26).
-    ...(variant && variantensNar(variant.nar)?.typ === 'minuter' ? { rubrik: stor(variant.nar) } : {}),
+    ...(kortare ? { rubrik: stor(variant.nar), ...(variant.text ? { variantText: variant.text } : {}) } : {}),
   };
 }
 

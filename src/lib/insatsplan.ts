@@ -228,7 +228,9 @@ export async function planensData(m: Metod): Promise<PlanData> {
   // Gruppens storlek läses av standardens gruppensElever, som metodkortets ruta (K-509).
   const g = gruppensElever(d.grupp);
   const grupp = d.grupp ? { text: d.grupp, ...(g ? { min: g.min, ...(g.max !== undefined ? { max: g.max } : {}) } : {}) } : undefined;
-  const nivaTabell = bank ? undefined : nivaTabellen(d, m.id);
+  // Veckans texter ur banken genom progressionens taggar, som i Textsamtal i grupp, eller annars nivåns rad i tabellen med
+  // veckor och nivåer, som i Faktatextsamtal i grupp (verifieringen av omgång 1 2026-10-26).
+  const nivaTabell = bank && (d.progression?.rader ?? []).some((r) => r.taggar?.length) ? undefined : nivaTabellen(d, m.id);
   const forstaChecklista = !!d.checklista && /första|pass 1\b/i.test(d.checklista.rubrik);
   return {
     id: m.id,
