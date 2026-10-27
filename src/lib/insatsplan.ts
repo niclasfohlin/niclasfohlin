@@ -229,7 +229,10 @@ async function andraMetoder(id: string): Promise<MetodSak[]> {
 // Med andra texter som planen visar ur metoden, som lektionens rader och material i en serie (Codex 2026-10-27: "Kedjorna" i
 // tabellens not blev ingen länk).
 export async function planensSaker(m: Metod, andra: string[] = [], version?: string): Promise<MetodSak[]> {
-  const alla = [...metodensSaker(m.data, m.id, version), ...(await andraMetoder(m.id))];
+  // En lektion i en serie har också seriens saker, som Bokstavskartan och Bokstavskort till ljudstarten i Ljudlek i grupp,
+  // före metodernas namn, så att "Bokstavskartan står i Ljudlek i grupp" leder till kartan (länkgranskningen 2026-10-27).
+  const serien = m.data.serie ? (await publicerade('stodundervisning')).find((x) => x.id === m.data.serie) : undefined;
+  const alla = [...metodensSaker(m.data, m.id, version), ...(serien ? metodensSaker(serien.data, serien.id) : []), ...(await andraMetoder(m.id))];
   const texterna = [...visadeTexter(m.data), ...andra];
   const anvanda = new Set(texterna.flatMap((t) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
   // Ett spann, som "Bildserie 2–6", bär varje sak i spannet, så att planen kan länka dem var för sig. Namnet är ett eller
