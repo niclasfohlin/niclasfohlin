@@ -4971,116 +4971,116 @@
     "datum": "2026-10-27"
   },
   "ljudlek-bokstavsgympa": {
-    "word": "42f5beab65ef665a95ccba9554822883ef0e6a7fe83e742999f97a8663f57922",
-    "pdf": "f7fd9f29965ac4dea15b399238fac7b11b8af499e2c7c37e7388af1632661bf0",
+    "word": "43bebc0c151a6a33d2c989ed8d89a7f74a094af89ebd80080e23333ce500ab72",
+    "pdf": "3ac4d0b0ad9edfc32bec0a828abef6ba052aaf66d780c07ca4f2f1d2a564cb70",
     "sidor": 39,
-    "kB": 495,
-    "datum": "2026-10-25"
+    "kB": 496,
+    "datum": "2026-10-27"
   },
   "ljudlek-bokstavsgympa-metoden": {
-    "word": "65581557575ce0725774aaf085e8d4e5de67e990f89e9e6ccdaa07f149ddca53",
-    "pdf": "1b9472b07bf953a544a15bb7bbb63faa5c55787bd2cfcba7701604df33b6ab1a",
+    "word": "651358ef0da485a02224ac49da210d6c8a368dcccff61bec6601e098b9ccc1a5",
+    "pdf": "1774d8eefb4833d18a91b4050e88bcdf0392b6760a08723f47ed4f84db4bc8c4",
     "sidor": 10,
     "kB": 391,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
   },
   "ljudlek-forsta-ljudet": {
-    "word": "993c4c7f29630114aa9fcb87f2f44cd8e5da944f77a8f289b9baf8636a8f076b",
-    "pdf": "f8c03263430a9762cf406eb223cc826637c69b07e100b6f3018804a36966747d",
+    "word": "54e5b3ca72c2625cfa28154d1cd029af58b3da0035fe6fad1723c373557edb29",
+    "pdf": "cbf366abc085acd34d48a10f596a8498fb4cd254c58f687b5c6882e4813160a5",
     "sidor": 20,
-    "kB": 576,
-    "datum": "2026-10-25"
+    "kB": 577,
+    "datum": "2026-10-27"
   },
   "ljudlek-forsta-ljudet-metoden": {
-    "word": "732379e654145129083872ad33e3c84466903c161c3710295d819846fed2b6d2",
-    "pdf": "f132440b257a562770dd4dccb5535162492283770b91ea27ba4e3693bea5a70a",
+    "word": "f5631f47afd44e0ac85e70ca970904960f207b893fa3dadae372bf4beb83e117",
+    "pdf": "2b7eff9b29ada0e2287b23ca2efbca8e03b48e4aab12f63a1098262d04a98a1f",
     "sidor": 10,
     "kB": 384,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
   },
   "ljudlek-i-grupp": {
-    "word": "814751f57c7a6d5790ac62e8ba510bb78a69047bc36ebf96f01fd6420426ed6d",
-    "pdf": "fff4fdc56a2dac48a0b751b9791bd668c639ff24d8d96063f40c6a8deb9646ec",
-    "sidor": 37,
-    "kB": 910,
-    "datum": "2026-10-25"
+    "word": "ca5c9a840031572a5d89219b402dd77a614bf3207a869bf2351c00f0796b9883",
+    "pdf": "bbc091fa66de0b3bf950c49f451f88579f8dd5d70c91c0bfd0136283bb54ece7",
+    "sidor": 38,
+    "kB": 912,
+    "datum": "2026-10-27"
   },
   "ljudlek-i-grupp-metoden": {
-    "word": "31a6ebe9f83f6f858e03019df82771f0995063cb0f0a94c08365f9c3e054ab8e",
-    "pdf": "c4ce86e2b4588d6b963e76362f12dcce09a11d8b6420aef0570fef76c0fc3cd4",
-    "sidor": 14,
-    "kB": 446,
-    "datum": "2026-10-25"
+    "word": "d8030c5dd37aa9a52e2f3cb9537b4a220567078956b26ded680122f93e5a97d4",
+    "pdf": "045f2fff0951eb50bacb520e9ec85599ad70282ca569827eddc04eeb072c94c0",
+    "sidor": 15,
+    "kB": 449,
+    "datum": "2026-10-27"
   },
   "ljudlek-ord-och-stavelser": {
-    "word": "8c9cd49282dffccee273b4b27356764e74ccd285425623e873c372affb112ead",
-    "pdf": "59ddfc9ec063ff3ba3abb9abf43fb6965f32130a739127a7c8600c58ce2bb235",
+    "word": "f35b7729d41c56ecd7246eb5b7b5c14e459f3894e166c69f57a3e15940e85167",
+    "pdf": "0847c836505cc959369a60c68b9e0ef908d1d2dc183072ec7f342063ba448968",
     "sidor": 19,
     "kB": 540,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
   },
   "ljudlek-ord-och-stavelser-metoden": {
-    "word": "4f17f1d4e615fe15e00118bf863fd46a8b888ce1dc9d2d89258f673ea12e2396",
-    "pdf": "02abe5e7bd573dd55d75d300fc34f2aeefa2f0f1419d3dde8be2794184cd9578",
-    "sidor": 10,
-    "kB": 389,
-    "datum": "2026-10-25"
-  },
-  "ljudlek-rakna-ljud": {
-    "word": "71fdd1c902872351d3a86d4bd1775e499f049ad64b3c0db942168a05c8af722c",
-    "pdf": "080ee61e07857cf70f2ef6d5b2aae771cbc526ae7a62d49219bdb16d31e49e61",
-    "sidor": 20,
-    "kB": 561,
-    "datum": "2026-10-25"
-  },
-  "ljudlek-rakna-ljud-metoden": {
-    "word": "33c6d15fb09dae1379ede1dc7d3ac1aa42416727a5d557abc0a5da688a806aab",
-    "pdf": "55bef45bc1cd9cf792278f96ed28679508a480dece8996ecde6998808ba94dbc",
-    "sidor": 9,
-    "kB": 388,
-    "datum": "2026-10-25"
-  },
-  "ljudlek-rim": {
-    "word": "4e5ba02b2d76759025dfd96148767b990acff6610ceebad601215fced4ff8e10",
-    "pdf": "2a911237d8df3adf6cca8f62a26a7227ba87f86d5ecbee0ec656fc6a8575bd94",
-    "sidor": 18,
-    "kB": 500,
-    "datum": "2026-10-25"
-  },
-  "ljudlek-rim-metoden": {
-    "word": "0c4ef486c74de7a9f93cc28ac9fa69a236fe410cc7cbc2bfb646e6741cb414bd",
-    "pdf": "e9ec597d31bd1b36ca7411c5f9db3a633d953768cb6dc9ef532661e1dd662443",
+    "word": "3f42292d0b40af149c88d49dd0f54ef182bfa328e1f6f80ebe2d4fce2f292c8b",
+    "pdf": "4377674f3d9f3efcf7b67b6acb0411ca06997144db35cc9587cf5d52a715d797",
     "sidor": 10,
     "kB": 390,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
+  },
+  "ljudlek-rakna-ljud": {
+    "word": "498857f0f627416fd2b1f2eb1d1a0936df1d5af4f9612f4acebd66d37c4ba00c",
+    "pdf": "8133110176be228e0774888bbfcf6a5c3bbc66a079da89ff1e5700f7041711da",
+    "sidor": 21,
+    "kB": 562,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-rakna-ljud-metoden": {
+    "word": "e31c8ba51ec15ea9cf020879bfdce63104f60b5d0c32e56fdeb4af0fe01b3f31",
+    "pdf": "419483851782c1ce351c0721f993363ed37fe66ab72b7cc2e16df7356e5da742",
+    "sidor": 10,
+    "kB": 390,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-rim": {
+    "word": "237e013d8c1bd08e7c28e23b5649a5c898bfb9e7a9941f43a14c32ac486c7be7",
+    "pdf": "0482a9c1a5b74d82b7a2ed79ac105819ee93c8009d510e584f5c3771deacc951",
+    "sidor": 18,
+    "kB": 502,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-rim-metoden": {
+    "word": "9e0849ebdd0986c96fe9629f00f5456ed583c67e4705915b534863e1321035f2",
+    "pdf": "feae97f0645d1fe8e184a3f4934cf3432b8576747d6c68e75f19cb6fd5523156",
+    "sidor": 10,
+    "kB": 390,
+    "datum": "2026-10-27"
   },
   "ljudlek-skriv-ord-tillsammans": {
-    "word": "6550f80d6f0500eff72808e77ad1feb4232f7dc606dabb2385c3a55f61d86210",
-    "pdf": "436867524b3b0b40fef367f2f5c19735e577202f109a4f9b4c3e92261a0627ec",
+    "word": "ba8b323df3f5d27a6af533d911d279d04fd146b587d301233e53748724d74445",
+    "pdf": "7bd2b69d13eaa19cf752944eeaab7745b5f02028a2fceaa24735488dbeb10333",
     "sidor": 15,
     "kB": 487,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
   },
   "ljudlek-skriv-ord-tillsammans-metoden": {
-    "word": "ec3398275ee47582cdbeea8787274982fe21108963463d84760e73f106108ccb",
-    "pdf": "7618eda6d9023764a909cbddbdc40d37609207b0e95e0ab3e4ef7714e5d7499f",
+    "word": "ea55a47a3ae779984b81f080263274acfa360c6e4b7f34ec66292f114f24c58a",
+    "pdf": "7fb4f4f4f995c10614592608bf3d572127bf5e94419b4a7ab9fe171036f69ce4",
     "sidor": 10,
     "kB": 398,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
   },
   "ljudlek-smaka-pa-ljud": {
-    "word": "1c15dd3ecb5ef94bb9bce464e5fc5076d0af0ea53a10389659b2f1205a104b83",
-    "pdf": "5a7602c1888b16abb738e4ebc00bdfec7763033b67add1ba53d69d0ae52211f3",
+    "word": "65ae2cf9ac31608eef49b63d97122323c7edcc00bc92bb5706cd5bd33158a1b8",
+    "pdf": "1b0fd497d767f926bfb4f04d338ee0cae961cde6f85766b3a4c577939a152409",
     "sidor": 19,
-    "kB": 542,
-    "datum": "2026-10-25"
+    "kB": 543,
+    "datum": "2026-10-27"
   },
   "ljudlek-smaka-pa-ljud-metoden": {
-    "word": "8984f5e7843674bfccac37d57c64be251ff1977a696ddbbb98d386dfb4f57875",
-    "pdf": "3c925fdb9db176dd24e1cac95add3a05b4f1ca9abf790386944359bc29cd388a",
+    "word": "6c67da07ef175c32a34e08b1d7071aab5eb152b11c8c55ad831946ceffa7de5d",
+    "pdf": "0cbe07227c9e9bf2944d2219715b67b59bf75674a7e1e052beea414fcdec68d3",
     "sidor": 10,
     "kB": 395,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
   },
   "ordverkstad-i-grupp": {
     "word": "24d0b86c52c80f1e607d716d5903f790c3e2b6d8c43e245145119473dd7b5628",
@@ -5314,18 +5314,18 @@
     "datum": "2026-10-20"
   },
   "ljudlek-fran-ljud-till-ord": {
-    "word": "bbba375e36d317d90efb51477338d527e960c2fc054ed8c65ccafe2864f6d962",
-    "pdf": "c70e2fa3456f2533862638bc28dcc007750bc916e55d27dbfa3dfc88b9bf17c1",
+    "word": "e5f66bdda7ece14ab4653c991559c319bd8c6dc6f233be06ffd2ee7031304af3",
+    "pdf": "b3d45475f443289d8e096d941e9fe7658185278764a5a17f68d4fb31757f3f55",
     "sidor": 15,
-    "kB": 490,
-    "datum": "2026-10-25"
+    "kB": 492,
+    "datum": "2026-10-27"
   },
   "ljudlek-fran-ljud-till-ord-metoden": {
-    "word": "2dfe60da58dade0970747845adeab07a0a407f73e65a3fbc04e3287b58750338",
-    "pdf": "793ed730755a88ce03c01c252e4af1bc0e61437caeeba5c17e908cd9b2a01651",
+    "word": "0fa7946bd15fac798bb2012426f8546f4a027d8809324902154f88e1c151bfeb",
+    "pdf": "bf103bb396cd1a20164ffb1e35e87645036eace575124a57130314ed83247458",
     "sidor": 10,
     "kB": 400,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
   },
   "ljudlek-i-grupp-lathund-text": {
     "word": "558db0b1becff5ce9ed24f46ef09419949822acf4e294c9cb19a57a187ae6dd9",
@@ -5531,18 +5531,18 @@
     "datum": "2026-10-16"
   },
   "ljudlek-fran-ord-till-mening": {
-    "word": "0d0b8a93e8a565ad280ec6ad7dd57e6614b46ec75084fa06e2c3fc403d7b46fd",
-    "pdf": "dba1172d6eee0db3ba79dd0ba12955e57be9025702f7e979e0ad0e6ba311fea0",
+    "word": "2949726bbf555ee6419dab30f66ed3f1904c3ed348b6027756090e0d94971d42",
+    "pdf": "e2bf343ab665bd2722fff6ce2afce825de0689559838f42e0580857cdb7c3d7d",
     "sidor": 18,
-    "kB": 526,
-    "datum": "2026-10-25"
+    "kB": 528,
+    "datum": "2026-10-27"
   },
   "ljudlek-fran-ord-till-mening-metoden": {
-    "word": "66445cb8ac2dff10bcbf4da77e4c6997db2f1566ad7e58d41f51103464bd0bad",
-    "pdf": "5b21963ad2f9e6139f4f3724e492232e675b6f546b22c7af5e25022416d354ce",
+    "word": "6ef905eca1b3466100d43cb582b7d9029f2855457128150e308b8c05e02a9110",
+    "pdf": "4c9686698dadf31c3e224391c9b0de911583c14158dca315bf92f3038e36a95a",
     "sidor": 10,
     "kB": 411,
-    "datum": "2026-10-25"
+    "datum": "2026-10-27"
   },
   "sag-skriv-och-las": {
     "word": "205d0197644723aba7761d4e2d4cc75e60c5c27c313943216314f655ed8587bb",
@@ -5566,25 +5566,25 @@
     "datum": "2026-10-17"
   },
   "ljudlek-bokstavsgympa-lektionskort": {
-    "word": "0bfdae64118cdea8ed10977feb01fd3c63c3a72ffaaaaba6b60e0333c384995a",
-    "pdf": "5e2c09b32ad268f6e1277c88388503e43c9d2a3dd621f73ff6387ebaf00f1488",
+    "word": "cab66d54617e63b5d24d75fd211883ce4fdf53b43eaa9f2f761a9c40ea5de6ab",
+    "pdf": "a13898c08109a42af1208ab8665d6161036b2ec10d4494fa0c364fad6efcd89e",
     "sidor": 1,
     "kB": 86,
-    "datum": "2026-10-17"
+    "datum": "2026-10-27"
   },
   "ljudlek-forsta-ljudet-lektionskort": {
-    "word": "e1b7ccaa69cffdfc71256d93b34ae6db9e3772895270f1b1c5b54c3a70f15f81",
-    "pdf": "b96196549de541eff1b1bf26082f1518516908630b0158be24f2821a67df25fc",
+    "word": "33407c46922b635dd5b66f527bc0ecd53d6c4d1dc4ef334c4a8b59571f9e643e",
+    "pdf": "d35c3224a988aba1a32b22931dfbcf70aae39ef62b0274e1e9eb2247f82a11be",
     "sidor": 1,
     "kB": 96,
-    "datum": "2026-10-17"
+    "datum": "2026-10-27"
   },
   "ljudlek-fran-ljud-till-ord-lektionskort": {
-    "word": "1e58fe1f984bbeb6a865a28c80bf7d54320e29201dde022f41c9dcbcbc6c2bdd",
-    "pdf": "b95409357c16e3b816fec5eb14b9b72be7af8bd33d9fcffd20e72c9556750542",
+    "word": "b0f11e201136a28ea0cc8ac872eb4572c9a2a4bb145dcbccd65a39f84816ad6a",
+    "pdf": "73060f9ef4efd1420e8aa46517d53d682386cd07e3530e18a9187b7b50b05b97",
     "sidor": 1,
     "kB": 89,
-    "datum": "2026-10-17"
+    "datum": "2026-10-27"
   },
   "ljudlek-fran-ord-till-mening-lektionskort": {
     "word": "053326a2de54d5d13e5909b2c68960a55f11c590f4bb1073452c9f92dd2f0120",
@@ -5594,18 +5594,18 @@
     "datum": "2026-10-17"
   },
   "ljudlek-i-grupp-alla-lektionskort": {
-    "word": "f5ae7e81d753cbffa2c7fac7c10552bb03ee997f89ac611247890593c18eae0f",
-    "pdf": "1b7a6373df0943fdf966f56e6adc5d5aced71d22a56728ab5fcbf1e69376e4e3",
+    "word": "af847e6834e778914f6c7549f6b8a2fcdd543f6720bfbea91a64588327ee65c4",
+    "pdf": "b09fbdccfd94da72839787ba94a6496b914071151a00fc0841ee3c861fdba2eb",
     "sidor": 9,
-    "kB": 200,
-    "datum": "2026-10-17"
+    "kB": 202,
+    "datum": "2026-10-27"
   },
   "ljudlek-ord-och-stavelser-lektionskort": {
-    "word": "1565a99a679d3232928f4fe21033a67b1bb15ce1f137f087a8bc9278182527ba",
-    "pdf": "e4dffa7fb6d8adfce31be846dd36de7a81a8b58f768406c8aa4e9bb6d03abcfe",
+    "word": "fdfbdc3d3c047d89749cff50e03fa5b7e55b42a166b19a22f7ab7ff1b52051e5",
+    "pdf": "17482aed9821a474779efccaf3d73bb63511e6e187bdb69658b1549c7ef1e274",
     "sidor": 1,
     "kB": 87,
-    "datum": "2026-10-17"
+    "datum": "2026-10-27"
   },
   "ljudlek-rakna-ljud-lektionskort": {
     "word": "8dd1819cea6170153e7df268876ce9e7d2300332ef1c9988aa49408ba882ee99",
@@ -5615,25 +5615,25 @@
     "datum": "2026-10-17"
   },
   "ljudlek-rim-lektionskort": {
-    "word": "3bc6fac5612a3b9bf5527803c50302f64ba1e3f9abce945274fadae74732eadc",
-    "pdf": "360e0fda7f98a325b0ea7986e236b13e6f925034e416572f30fca815a4eb43a2",
+    "word": "3195146964ce46635b2ac934389f7fb27f428feac144260c4d40b2c2f4fef398",
+    "pdf": "597a43bc1546d6605f3af61c87de562f55fb9a4fd095040029fe5ec53445a274",
     "sidor": 1,
     "kB": 86,
-    "datum": "2026-10-17"
+    "datum": "2026-10-27"
   },
   "ljudlek-skriv-ord-tillsammans-lektionskort": {
-    "word": "ceb426cbbad8c5946386a45bf3ba10cd3d2967a45c651c9dab6db3b75a484730",
-    "pdf": "c89be5bc28759c8135482b2e036d7049f72ef36dd14988ef504a38bf9c60890f",
+    "word": "be792037c4f210577b6a19b9e7a374b605101a69af4958c2a61a61e8e81043f4",
+    "pdf": "eb1929cdaf69576b0d9afc71bac395c56a880b080616b550675f85c090b542c0",
     "sidor": 1,
     "kB": 88,
-    "datum": "2026-10-17"
+    "datum": "2026-10-27"
   },
   "ljudlek-smaka-pa-ljud-lektionskort": {
-    "word": "9185d5ecb808add83b52f60b3b9feee8dbd94d3adfd0a647ad04e6392f174496",
-    "pdf": "6bc2684b4da50b0e614afc275ef4ee0aa1d383d01061b1dcc15cc840bde7a265",
+    "word": "f87f59ef2c06fd0e47073461b9d09bacc551ea899f06fc66844f0256a1e14a00",
+    "pdf": "12aaeb066905be3bf7e8ea6b5531b53080919cdec32ae1ffac671bbe536f3ddd",
     "sidor": 1,
     "kB": 87,
-    "datum": "2026-10-17"
+    "datum": "2026-10-27"
   },
   "sag-skriv-och-las-lektionskort": {
     "word": "06b8543e60229ba1f4860a035d3ca6f2bbf5eb16048c168898a831edcda4b486",
@@ -8836,32 +8836,32 @@
     "datum": "2026-10-27"
   },
   "ljudlek-bokstavsgympa-snabbmall": {
-    "word": "8712c1c757010977b7516cc49caf1f8a220c5783d5a801eec1ee7d3745fba6a2",
-    "pdf": "ce157c7c1fb1f75e15d5693e8f16347669da1131641e34f99fb48e7f4d33aa8e",
-    "sidor": 1,
-    "kB": 250,
-    "datum": "2026-10-20"
-  },
-  "ljudlek-forsta-ljudet-snabbmall": {
-    "word": "351bbfdf00d22aee34ba877b03e438f154f6b7955f85cc70508086c92ee8b9a9",
-    "pdf": "d9a977951ac201344660d48683bceace5084cd2686375488ca0e4c32d2123734",
-    "sidor": 1,
-    "kB": 247,
-    "datum": "2026-10-20"
-  },
-  "ljudlek-fran-ljud-till-ord-snabbmall": {
-    "word": "52bac76716f3affa4ff2fa5b900a85a930c993f17bc56fc01abfdf50e6851bcd",
-    "pdf": "d112257a9240879c5bffadfbb832426f53666cf5d0a1c379fcce81a2a855f0ac",
-    "sidor": 1,
-    "kB": 247,
-    "datum": "2026-10-20"
-  },
-  "ljudlek-fran-ord-till-mening-snabbmall": {
-    "word": "f147b7493fb4a6e432c89aa830a21f7f6e5e0bfd786707296be4c167c1550f4a",
-    "pdf": "4eed420e02157c749a5805ce17f2211eab2b347b1a2c8a16541dccfcdd1454d6",
+    "word": "70d3459d900d776215de149387db273e33d9411ed0b42002bc2e60358557c57a",
+    "pdf": "3f39a171d8b13984941ad98fc238c09ae1f82b6a566f44c55859815dccbb4f42",
     "sidor": 1,
     "kB": 249,
-    "datum": "2026-10-20"
+    "datum": "2026-10-27"
+  },
+  "ljudlek-forsta-ljudet-snabbmall": {
+    "word": "f7bf9bced6984d5d78dee8214f0072963a4613fe3c6abdb409df97c6ac863ebe",
+    "pdf": "0cb37ffd2ecd0e057cea2e11356508e2aee9e115c7e806b52957dfdcb026304f",
+    "sidor": 1,
+    "kB": 246,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-fran-ljud-till-ord-snabbmall": {
+    "word": "5bd3d132ba1ac05406a01f5bd50153d6befab791692bac01806a9397cf696a91",
+    "pdf": "9b67d41c5735d73ed66ad2820bd96a35a52515933f7aedd2edd47bb65ec094e7",
+    "sidor": 1,
+    "kB": 247,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-fran-ord-till-mening-snabbmall": {
+    "word": "37ccab2c5fa8698c1cb9d989769974f6664df234fefb12e420c1d52cd602f854",
+    "pdf": "aac5752baf58dee47d924c89df2fa7f2858d1bbd1de7ef46c0960b821259aa2e",
+    "sidor": 1,
+    "kB": 250,
+    "datum": "2026-10-27"
   },
   "ljudlek-i-grupp-snabbmall": {
     "word": "65f16416d41de0a8ad0179d366fc5faffec8b24f7c8f491888c30f9d54d551ca",
@@ -8871,39 +8871,39 @@
     "datum": "2026-10-20"
   },
   "ljudlek-ord-och-stavelser-snabbmall": {
-    "word": "a4ff81cfb14ac3295d60637941cc50d204175ad845d579bbcfacb62abe818301",
-    "pdf": "115502b8b970170ff7ee781f755aeda9e0ec12d9a8dc92225507716e61f27441",
+    "word": "acdcfafb07313cc3e139ab471c7e0e6043297e7fc56f8f354b07a02e05682a3b",
+    "pdf": "ef126409ee5b6098048e0749c2f547f31130d9cc7862438349dcde3a3f1d7593",
     "sidor": 1,
-    "kB": 250,
-    "datum": "2026-10-20"
+    "kB": 251,
+    "datum": "2026-10-27"
   },
   "ljudlek-rakna-ljud-snabbmall": {
-    "word": "22427b5f6e046a71052e65b2b51021dc6acc1567dd50d457275c0ed5c2b54b8a",
-    "pdf": "33d0d4105624739e9f0616c73c01b949ef119e569aa09805ed1ed0ff35a32fc2",
+    "word": "25a430c0e39cbc865c8285330efa1f04df762cf88e66f01a4d13e0b8a9723d9f",
+    "pdf": "3bb1eb1d43b7546d84c94b96b0f77cbd7e822fdd9563d1e0b582ecb8066e20d1",
     "sidor": 1,
     "kB": 246,
-    "datum": "2026-10-20"
+    "datum": "2026-10-27"
   },
   "ljudlek-rim-snabbmall": {
-    "word": "080445c2bb08579b287bab73effd8c25845e85e885801f31335733ad7c09a5d4",
-    "pdf": "5a83ebeb8b777267cb7e11f7bfb71ff8483488f64753a3c18c210ab82ef17882",
+    "word": "4d19f7e29c18b0bf7aab607d1942ed0dd864c1b8cfad68bf2d70a702b0c9a3e4",
+    "pdf": "9b9219c2a01a5d868570ae51b998245b20108f7c4ab66bbf369a2113c9bbdfaf",
     "sidor": 1,
     "kB": 245,
-    "datum": "2026-10-20"
+    "datum": "2026-10-27"
   },
   "ljudlek-skriv-ord-tillsammans-snabbmall": {
-    "word": "f6b6d9997b9f1d4d13716dfba7dc295dd73b1ab3d9056cc160a55395f88a609c",
-    "pdf": "23a50b45886537f4b57ceb55a6c1168f7a8bc329801d4783ecfbd7d6bcdb4c5f",
+    "word": "9a730e6d87b43e2c6f3d7bdc479d4e522d2880b319c88e274a5f37a5fc5a3201",
+    "pdf": "81f5f325e631a9afaacd2800c90e964415a33a8db32d7cde801d2a00648671d1",
     "sidor": 1,
     "kB": 249,
-    "datum": "2026-10-20"
+    "datum": "2026-10-27"
   },
   "ljudlek-smaka-pa-ljud-snabbmall": {
-    "word": "8c996289b6816c59513a260ec01fe19ca12ac0292600537e44ad84a4e5604d65",
-    "pdf": "60e1c3a68c645c1adffdbf4ea4cc704d88891e837e9e795e3b4ce6a308bb1948",
+    "word": "8b5211376b34dba1ca722ac109d8dea5a86f9306d3aa5a18e7e9737b48fa3048",
+    "pdf": "0c431543b979e1d61fd1b4d1c1c0f64d3b096a9496ca715efa94ac8b0842707e",
     "sidor": 1,
     "kB": 246,
-    "datum": "2026-10-20"
+    "datum": "2026-10-27"
   },
   "problemlosning-i-grupp-snabbmall": {
     "word": "009aac4c984b058ad2139aa659e0eecc7d4eff46124fca9767ee137a9bfc2b18",
@@ -9765,5 +9765,47 @@
     "sidor": 1,
     "kB": 211,
     "datum": "2026-10-26"
+  },
+  "ljudlek-i-grupp-blad-bokstavskort-till-ljudstarten": {
+    "word": "5aca9bc12d2e98d8c6f30d8ca07e08d39355f3f3038f24e06d631197bd994e7c",
+    "pdf": "40fe9d033976497da028b004deafb3adb9f75c9780df9df13804f6fb46af72bd",
+    "sidor": 2,
+    "kB": 215,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-i-grupp-blad-screeningen-version-a": {
+    "word": "b91e6a578bfa61909febd0c9ef9dc2547aa0b98999cd7a7ceb9260a5d9b8cce6",
+    "pdf": "f888a26e456562dca49d6b4488b24e49ffb8266427b91c60d051af5209159c50",
+    "sidor": 3,
+    "kB": 391,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-i-grupp-blad-screeningen-version-b": {
+    "word": "6cbbc072e42e30f0b142b0c40cf38590c070b6a61b035c4ce0e61d3c7fbbf476",
+    "pdf": "a266560f7c89227af7561d17531c416ee2a09fa29361bd62a8872cdc83f8767c",
+    "sidor": 3,
+    "kB": 404,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-i-grupp-blad-protokollet-for-screeningen-och-ljudkollen": {
+    "word": "152288cc79c16da3747f03db83fae91ea0a7fadd3a23db7e3133f22eb264f15e",
+    "pdf": "5d6aaab258f629f136830e09bb06a2f7d32f50b5f203c54fb4fed4d315cb929f",
+    "sidor": 2,
+    "kB": 248,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-i-grupp-blad-gruppens-oversikt": {
+    "word": "d593869771a2a8fa3c6299ecabdbd696c28d3f9aaeaaa8c1600e849aeadb214c",
+    "pdf": "af8c3ceaa4af420bdbb25f47114de2102064f8d6bf3e7ddeb67e291d91fa28d4",
+    "sidor": 1,
+    "kB": 250,
+    "datum": "2026-10-27"
+  },
+  "ljudlek-i-grupp-blad-observation-av-ett-pass": {
+    "word": "fec3445799f155cac6c6468c5ff0b4d9d084693f9a29f42c0b51195d3949b86b",
+    "pdf": "6b3ede1d8200cab23671b54a7edb3544cd80a05d70f4e93cf093a692df3f31d8",
+    "sidor": 2,
+    "kB": 225,
+    "datum": "2026-10-27"
   }
 }

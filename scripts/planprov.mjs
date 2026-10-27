@@ -2261,7 +2261,8 @@ try {
     // krysset, regeln överst i rutan med passet veckan efter, och Vår grupp i passet med bladet, formuläret och lärarens
     // länk, som inte står i länken till planen.
     // Ljudleks enda planerare (K-551; Niclas 2026-10-26): ingången är vecka 1:s lektion, veckan byter innehåll efter vald
-    // lektion, frågan efter veckan sätter nästa veckas lektion, och skattningen mot lektionens mål föreslår nästa över 4.
+    // lektion, frågan efter veckan sätter nästa veckas lektion, och skattningen mot lektionens mål föreslår nästa över 4 när
+    // gruppen har haft lektionen så många veckor som lektionen tar (K-578).
     if (m.id === 'ljudlek-i-grupp') {
       const lj = async (js) => b.kor(js);
       // Valen står under Ändra planen, som är hopfälld när planen är sparad, och listan med alla lektioner fälls ut först.
@@ -2288,7 +2289,9 @@ try {
       await b.tryck('#pl-skatta [data-steg="5"]');
       await vanta(250);
       const forslag = await lj(`(() => ({ text: document.querySelector('#pl-veckan .pl-lektionen-efter')?.textContent ?? '', fylld: [...document.querySelectorAll('#pl-veckan .pl-lektionen-efter .pl-andra-knappar button')].filter((x) => !x.classList.contains('sekundar')).map((x) => x.textContent) }))()`);
-      sant('Ljudlek: skattningen mot lektionens mål, och nästa lektion föreslås över 4', malet.includes(s.malText(lektion4.mal.overgripande).replace(/\.$/, '')) && forslag.text.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && forslag.fylld.join() === 'Nästa: Smaka på ljud', { malet, forslag });
+      // K-578 (Niclas 2026-10-27: omkring två veckor i lektion 1–5, och elevernas progression styr): efter lektionens första
+      // vecka föreslår planen samma lektion, också med snittet 5, och säger varför.
+      sant('Ljudlek: skattningen mot lektionens mål, och samma lektion efter lektionens första vecka', malet.includes(s.malText(lektion4.mal.overgripande).replace(/\.$/, '')) && forslag.text.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && forslag.text.includes('Ni har haft lektionen en vecka, så planen föreslår samma lektion vecka 4.') && forslag.fylld.join() === 'Upprepa Bokstavsgympa', { malet, forslag });
       await lj(`document.getElementById('pl-folj').click()`);
       await vanta(150);
     }
