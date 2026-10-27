@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -152,11 +152,13 @@ const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
 // Sidans huvud, lika för gruppen och eleven: rubriken, metoden med gruppen och nivån, perioden och dagen för utskriften, och
 // målet. Perioden, passens läge, riktningen och besluten står med standardens ord, som på sidan och i texterna (K-509).
 type Pdf = Awaited<ReturnType<typeof dokument>>;
-const huvud = (p: Pdf, rubrik: string, plan: Plan, info: PdfInfo, idag: string) => {
+// I en serie står lektionernas mål under målet, med elevens lektioner i elevens utskrift (K-551).
+const huvud = (p: Pdf, rubrik: string, plan: Plan, info: PdfInfo, idag: string, s: Sammanstallning, e?: Sammanstallning['elever'][number]) => {
   p.text(rubrik, { storlek: 20, fet: true, luft: 2 });
   p.text([info.metod, info.grupp, info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
   p.text(`${plan.forstaPass && plan.sistaPass ? datumspann(plan.forstaPass, plan.sistaPass) : ''}. Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
   if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
+  if (lektionernasMal(s, e)) p.text(lektionernasMal(s, e), { luft: 2 });
 };
 // Skalan med frågan, före staplarna.
 const skalan = (p: Pdf, info: PdfInfo, luft: number) => p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft });
@@ -164,7 +166,7 @@ const skalan = (p: Pdf, info: PdfInfo, luft: number) => p.text(`${info.fragan} 1
 /** Gruppens sammanställning som pdf. */
 export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, idag: string): Promise<Uint8Array> {
   const p = await dokument(`Sammanställning: ${info.metod}`);
-  huvud(p, 'Sammanställning', plan, info, idag);
+  huvud(p, 'Sammanställning', plan, info, idag, s);
   p.rubrik('Passen');
   p.text(passensRad(s), { luft: 2 });
   if (s.gjorda) p.text(s.veckor.map((v) => `${veckansNamn(v).Text}: ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
@@ -208,7 +210,7 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
 export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: PdfInfo, idag: string, franvaro: Record<string, string[]>): Promise<Uint8Array> {
   const e = s.elever.find((x) => x.id === id)!;
   const p = await dokument(`${e.namn}: ${info.metod}`);
-  huvud(p, e.namn, plan, info, idag);
+  huvud(p, e.namn, plan, info, idag, s, e);
   p.rubrik('Vecka för vecka', 180);
   skalan(p, info, 6);
   const narvaro = s.narvaro && e.narvaro !== null && s.gjorda > 0;

@@ -7,6 +7,8 @@
 // metodens platser med ankare, som en granskare jämför med (METODER.md under Planera insatsen, Proven).
 //
 //   node scripts/plantext.mjs [<id> …] [--ut <mapp>]    förval: alla metoder med planen, till underlag/prov/plantext/
+//   --hash "s=2026-11-02&d=135&l=12&k=3.3.4.4"           planen ur en länk i stället för förvalet, som en serie med
+//                                                       veckornas lektioner (Ljudlek i grupp, K-551)
 //
 // Läser dist, som npm run validera bygger. Kräver Chrome, som scripts/planprov.mjs.
 import { spawn } from 'node:child_process';
@@ -20,7 +22,8 @@ const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(rot, 'dist');
 const args = process.argv.slice(2);
 const ut = args.includes('--ut') ? resolve(args[args.indexOf('--ut') + 1]) : join(rot, 'underlag', 'prov', 'plantext');
-const valda = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--ut');
+const hash = args.includes('--hash') ? args[args.indexOf('--hash') + 1] : '';
+const valda = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--ut' && args[i - 1] !== '--hash');
 const alla = readdirSync(join(dist, 'stodundervisning')).filter((x) => existsSync(join(dist, 'stodundervisning', x, 'planera', 'index.html')));
 const metoder = valda.length ? valda : alla;
 const chrome = process.env.CHROME ?? ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
@@ -103,8 +106,8 @@ try {
     f0.stang();
     // Planen: start måndag 2 november 2026, Följ insatsen, sparad.
     const f1 = await flik('2026-10-28');
-    await f1.oppna(`${bas}/stodundervisning/${id}/planera`);
-    await f1.kor(`(() => { const i = document.getElementById('pl-start'); i.value = '2026-11-02'; i.dispatchEvent(new Event('change')); const f = document.getElementById('pl-folj'); if (f && !f.checked) f.click(); return true; })()`);
+    await f1.oppna(`${bas}/stodundervisning/${id}/planera${hash ? `#${hash}` : ''}`);
+    await f1.kor(`(() => { ${hash ? '' : "const i = document.getElementById('pl-start'); i.value = '2026-11-02'; i.dispatchEvent(new Event('change'));"} const f = document.getElementById('pl-folj'); if (f && !f.checked) f.click(); return true; })()`);
     await vanta(200);
     await f1.kor(`document.getElementById('pl-spara').click()`);
     await vanta(400);

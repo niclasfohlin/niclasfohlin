@@ -2203,7 +2203,7 @@ export const uppfoljningensNamn = (plan, info, rad) => (rad === plan.uppfoljning
 /** Uppföljningens rader med datum, som sammanställningen, sidan och pdf:en visar dem. @param {Plan} plan @param {{ uppfoljning: { nar: string }[] }} info */
 export const uppfoljningensRader = (plan, info) => plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => uppfoljningensRad(plan, info, u));
 /** Vad skattningen är, i en text: "skattning varje vecka, 1 till 5, av hur väl eleven klarar målet på egen hand". @param {string} vem eleven, eleverna eller gruppen @param {boolean} [varjeVecka] */
-export const skattningenText = (vem, varjeVecka = true) => `skattning${varjeVecka ? ' varje vecka' : ''}, 1 till 5, av hur väl ${vem} klarar målet på egen hand`;
+export const skattningenText = (vem, varjeVecka = true, mal = 'målet') => `skattning${varjeVecka ? ' varje vecka' : ''}, 1 till 5, av hur väl ${vem} klarar ${mal} på egen hand`;
 
 /**
  * Texten till åtgärdsprogrammet (Niclas 2026-10-24: "kopiera text till ÅP ... mål, varaktighet, tider och dagar och vad
@@ -2390,7 +2390,7 @@ export function mittVeckan(plan) {
  * @param {Foljd} f
  * @param {string} idag
  */
-export function sammanstallning(plan, f, idag) {
+export function sammanstallning(plan, f, idag, lektioner) {
   const gjorda = new Set(f.gjorda ?? []);
   const gjort = (p) => gjorda.has(passetsDag(p));
   const lista = f.elever ?? [];
@@ -2402,6 +2402,7 @@ export function sammanstallning(plan, f, idag) {
     const pass = veckansPass(plan, v);
     return {
       // innehall är veckans nummer i planen, som veckans rubrik (planvecka), också när planen börjar på ett senare steg.
+      ...(lektioner?.[v.nr - 1] ? { lektion: lektioner[v.nr - 1].namn } : {}),
       nr: v.nr, mandag: v.mandag, vecka: v.vecka.vecka, innehall: planvecka(plan, v), igen: v.igen, gang: gangen(plan, v), pass: pass.map((p) => ({ nr: p.nr, dag: passetsDag(p), datum: p.datum, gjort: gjort(p) })),
       gjorda: pass.filter(gjort).length, planerade: pass.length, varit: pass.filter((p) => p.datum <= idag).length,
       installda: v.bortfall.filter((b) => b.varfor === 'installt').length, helgdagar: v.bortfall.filter((b) => b.varfor === 'helgdag').length,
@@ -2416,10 +2417,13 @@ export function sammanstallning(plan, f, idag) {
   /** De bockade passen från dagen eleven kom till. @param {{ fran?: string }} e */
   const sedan = (e) => (e.fran ? passGjorda.filter((p) => p.datum >= /** @type {string} */ (e.fran)) : passGjorda);
   const elever = vem.map((e) => {
-    const skattningar = plan.veckor.map((v) => ({ nr: v.nr, vecka: v.vecka.vecka, varde: f.skattning?.[v.mandag]?.[e.id] })).filter((x) => x.varde >= 1 && x.varde <= 5);
+    const skattningar = plan.veckor.map((v) => ({ nr: v.nr, vecka: v.vecka.vecka, varde: f.skattning?.[v.mandag]?.[e.id], ...(lektioner?.[v.nr - 1] ? { lektion: lektioner[v.nr - 1].namn } : {}) })).filter((x) => x.varde >= 1 && x.varde <= 5);
+    const senaste = skattningar[skattningar.length - 1] ?? null;
     return {
       id: e.id, namn: e.namn, skattningar,
-      forsta: skattningar[0] ?? null, senaste: skattningar[skattningar.length - 1] ?? null,
+      // I en serie jämförs bara skattningar mot samma lektions mål: den första är den första i den senaste skattningens
+      // lektion (Codex 2026-10-27: Rim 5 och Räkna ljud 1 blev "5 till 1, bakåt").
+      forsta: senaste ? skattningar.find((x) => x.lektion === senaste.lektion) ?? null : null, senaste,
       // Närvaron räknas på de bockade passen: alla är med tills läraren har tryckt på den som inte var där.
       narvaro: narvaro && e.id !== GRUPPEN ? sedan(e).filter((p) => !(f.franvaro?.[passetsDag(p)] ?? []).includes(e.id)).length : null,
       // Passen eleven har kunnat vara med i, när eleven kom till senare.
@@ -2427,8 +2431,16 @@ export function sammanstallning(plan, f, idag) {
       resultat: Object.fromEntries(Object.entries(f.resultat ?? {}).map(([k, r]) => [k, (r ?? {})[e.id] ?? ''])),
     };
   });
+  // Lektionerna i en serie i den ordning de kom, med sina mål och veckor, som veckorna skattades mot (K-551).
+  const lektionerna = [];
+  for (const v of plan.veckor) {
+    const l = lektioner?.[v.nr - 1];
+    if (!l) continue;
+    const g = lektionerna.find((x) => x.namn === l.namn);
+    if (g) g.veckor.push(v.nr); else lektionerna.push({ namn: l.namn, mal: l.mal, veckor: [v.nr] });
+  }
   return {
-    veckor, elever, grupp: !lista.length, narvaro,
+    veckor, elever, grupp: !lista.length, narvaro, ...(lektionerna.length ? { lektioner: lektionerna } : {}),
     planerade: plan.pass.length, gjorda: passGjorda.length, varit: plan.pass.filter((p) => p.datum <= idag).length,
     // De bockade bland passen som har varit, så att ett pass som är bockat i förväg inte ger ett minustal (buggjakten).
     gjordaVarit: passGjorda.filter((p) => p.datum <= idag).length,
@@ -2454,10 +2466,20 @@ export function sammanstallning(plan, f, idag) {
  */
 export const elevenHarNagot = (s, e) => e.skattningar.length > 0 || Object.values(e.resultat ?? {}).some(Boolean) || (e.id !== GRUPPEN && e.narvaro !== null && (e.passen ?? s.gjorda) > 0);
 /** Riktningen från första till senaste skattningen: upp, samma eller ned, och null med färre än två. @param {{ forsta: { varde: number } | null, senaste: { varde: number } | null, skattningar: unknown[] }} e */
-export const riktning = (e) => (e.skattningar.length < 2 ? null : e.senaste.varde > e.forsta.varde ? 'upp' : e.senaste.varde < e.forsta.varde ? 'ned' : 'samma');
+export const riktning = (e) => (e.skattningar.length < 2 || !e.forsta || e.forsta === e.senaste ? null : e.senaste.varde > e.forsta.varde ? 'upp' : e.senaste.varde < e.forsta.varde ? 'ned' : 'samma');
 const RIKTNING = { upp: 'framåt', samma: 'som förut', ned: 'bakåt' };
 /** Riktningen i ord, lika på sidan och i pdf:en: "2 till 3, framåt", "3, en skattning" eller "Inte skattad än". @param {Parameters<typeof riktning>[0]} e */
-export const riktningText = (e) => { const r = riktning(e); return r ? `${e.forsta?.varde} till ${e.senaste?.varde}, ${RIKTNING[r]}` : e.senaste ? `${e.senaste.varde}, en skattning` : 'Inte skattad än'; };
+export const riktningText = (e) => { const r = riktning(e); const i = e.senaste?.lektion ? ` i ${e.senaste.lektion}` : ''; return r ? `${e.forsta?.varde} till ${e.senaste?.varde}${i}, ${RIKTNING[r]}` : e.senaste ? `${e.senaste.varde}${i}, en skattning` : 'Inte skattad än'; };
+/**
+ * Lektionernas mål i en serie, som veckorna skattades mot, till sidan, texterna och pdf:erna (K-551; Codex 2026-10-27). Med
+ * eleven bara lektionerna där eleven har en skattning.
+ * @param {{ lektioner?: { namn: string, mal: string, veckor: number[] }[], veckor: { innehall: number, gang?: number, vecka: number }[] }} s
+ * @param {{ skattningar: { lektion?: string }[] }} [e]
+ */
+export const lektionernasMal = (s, e) => {
+  const l = (s.lektioner ?? []).filter((x) => !e || e.skattningar.some((y) => y.lektion === x.namn));
+  return l.length ? `Varje vecka skattas mot veckans lektion. ${l.map((x) => `${x.namn}, ${uppraknat(x.veckor.map((nr) => veckansNamn(s.veckor[nr - 1]).text))}: ${malText(x.mal)}`).join(' ')}` : '';
+};
 export const BESLUT = Object.freeze({ fortsatt: 'Fortsätt som planerat', justera: 'Justera insatsen', avsluta: 'Avsluta insatsen', forlang: 'Förläng insatsen', byt: 'Byt insats' });
 /** Besluten att välja mellan, mitt i insatsen och efter den. */
 export const BESLUTEN = Object.freeze({ avstamning: Object.freeze(['fortsatt', 'justera']), utvardering: Object.freeze(['avsluta', 'forlang', 'byt']) });
@@ -2573,7 +2595,7 @@ export function elevensResultat(plan, resultat) {
 }
 const medel = (x) => (x.length ? Math.round((x.reduce((a, b) => a + b, 0) / x.length) * 10) / 10 : null);
 // Skattningarna vecka för vecka i en text, "vecka 1 (v. 45): 2, vecka 2 (v. 46): 3", med veckornas namn ur roten.
-const skattningarna = (s, e) => e.skattningar.map((x) => `${veckansNamn(s.veckor[x.nr - 1]).text}: ${x.varde}`).join(', ');
+const skattningarna = (s, e) => e.skattningar.map((x) => `${veckansNamn(s.veckor[x.nr - 1]).text}${x.lektion ? `, ${x.lektion}` : ''}: ${x.varde}`).join(', ');
 
 // ---------- Diagrammet ----------
 // Staplarna vecka för vecka ritas lika på sidan och i pdf:en: stapeln mitt i veckans fack, och passens prickar under den
@@ -2595,6 +2617,7 @@ export function sammanstallningstext(info, plan, s) {
   const rader = [];
   if (plan.forstaPass && plan.sistaPass) rader.push(`Sammanställning: ${info.titel}, ${datumspann(plan.forstaPass, plan.sistaPass)}.`);
   if (info.mal) rader.push(`Mål: ${malText(info.mal)}`);
+  if (s.lektioner) rader.push(lektionernasMal(s));
   rader.push(`Pass: ${passensRad(s)}`);
   const elever = s.elever.filter((e) => e.id !== GRUPPEN);
   const skattade = (s.grupp ? s.elever : elever).filter((e) => e.skattningar.length);
@@ -2602,6 +2625,16 @@ export function sammanstallningstext(info, plan, s) {
     if (s.grupp) {
       const e = skattade[0];
       rader.push(`${stor(skattningenText('gruppen'))}: ${skattningarna(s, e)}.`);
+    } else if (s.lektioner) {
+      // I en serie står medlet för varje lektion, eftersom lektionerna har olika mål (Codex 2026-10-27).
+      rader.push(`${stor(skattningenText('eleverna', true, 'lektionens mål'))}:`);
+      for (const l of s.lektioner) {
+        const iL = skattade.map((e) => e.skattningar.filter((x) => x.lektion === l.namn)).filter((x) => x.length);
+        if (!iL.length) continue;
+        const jamforda = iL.filter((x) => x.length > 1);
+        const upp = jamforda.filter((x) => x[x.length - 1].varde > x[0].varde).length;
+        rader.push(jamforda.length ? `${l.namn}: medel ${decimal(medel(iL.map((x) => x[0].varde)))} vid första skattningen och ${decimal(medel(iL.map((x) => x[x.length - 1].varde)))} vid den senaste. ${upp} av ${jamforda.length} ${jamforda.length === 1 ? 'elev' : 'elever'} med två skattningar eller fler har gått framåt.` : `${l.namn}: medel ${decimal(medel(iL.map((x) => x[0].varde)))}, en skattning.`);
+      }
     } else {
       const fore = medel(skattade.map((e) => e.forsta.varde)), sedan = medel(skattade.map((e) => e.senaste.varde));
       // Framåt räknas bland eleverna med två skattningar eller fler, så att en elev som har skattats en gång inte räknas som
@@ -2651,6 +2684,7 @@ export function elevtext(info, plan, s, id) {
   if (!e) return '';
   const delar = [];
   if (info.mal) delar.push(`Mål: ${malText(info.mal)}`);
+  if (lektionernasMal(s, e)) delar.push(lektionernasMal(s, e));
   if (e.narvaro !== null && s.gjorda) delar.push(narvaronText(e, s));
   if (e.skattningar.length) delar.push(`${stor(skattningenText('eleven', false))}: ${skattningarna(s, e)}.`);
   for (const t of elevensResultat(plan, e.resultat)) delar.push(mening(resultatText(plan, info, t)));

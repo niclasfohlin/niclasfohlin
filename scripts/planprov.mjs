@@ -340,6 +340,13 @@ if (tsMp) {
   const sen = s.sammanstallning(p, { elever: [{ id: 'a1', namn: 'Ali' }], skattning: { '2026-11-02': { grupp: 2 }, '2026-11-09': { a1: 3 } } }, '2026-11-18');
   ska('gruppens skattningar står kvar när eleverna kommer efteråt', !sen.grupp && sen.elever.some((e) => e.id === 'grupp') && s.sammanstallningstext(info, p, sen).includes('Gruppen skattades också: vecka 1 (v. 45): 2.'));
   ska('skattningsfrågan', s.skattningsfragan() === 'Hur väl klarar eleven målet på egen hand?' && s.skattningsfragan(true) === 'Hur väl klarar gruppen målet på egen hand?');
+  // En serie jämför bara skattningar mot samma lektions mål, och texterna säger lektionen (K-551; Codex 2026-10-27: Rim 5
+  // och Räkna ljud 1 blev "5 till 1, bakåt").
+  const lekt = [{ namn: 'Rim', mal: 'rimma' }, { namn: 'Rim', mal: 'rimma' }, { namn: 'Räkna ljud', mal: 'räkna ljuden i ett ord' }];
+  const smL = s.sammanstallning(p, { elever: [{ id: 'a1', namn: 'Ali' }], skattning: { '2026-11-02': { a1: 3 }, '2026-11-09': { a1: 5 }, '2026-11-16': { a1: 1 } } }, '2026-11-25', lekt);
+  const aL = smL.elever[0], textL = s.sammanstallningstext(info, p, smL), radL = s.elevtext(info, p, smL, 'a1');
+  ska('en serie: skattningarna jämförs inom lektionen och texterna säger lektionen', s.riktning(aL) === null && s.riktningText(aL) === '1 i Räkna ljud, en skattning' && smL.lektioner.length === 2 && smL.lektioner[0].veckor.join() === '1,2' && textL.includes('Varje vecka skattas mot veckans lektion. Rim, vecka 1 (v. 45) och vecka 2 (v. 46): Rimma. Räkna ljud, vecka 3 (v. 47): Räkna ljuden i ett ord.') && textL.includes('Rim: medel 3 vid första skattningen och 5 vid den senaste. 1 av 1 elev med två skattningar eller fler har gått framåt.') && textL.includes('Räkna ljud: medel 1, en skattning.') && radL.includes('vecka 3 (v. 47), Räkna ljud: 1') && !/bakåt|framåt, /.test(s.riktningText(aL)), { r: s.riktningText(aL), textL, radL });
+  ska('utan serie jämförs första och senaste som förut', !sm.lektioner && sm.elever[0].forsta === sm.elever[0].skattningar[0] && s.riktningText(sm.elever[0]) === '2 till 3, framåt');
   const tomt = s.sammanstallning(p, {}, '2026-11-18');
   ska('en tom uppföljning går att sammanställa', tomt.gjorda === 0 && tomt.elever.length === 1 && tomt.elever[0].skattningar.length === 0 && s.sammanstallningstext(info, p, tomt).includes('Pass: Inga pass är bockade än. Planen har 18 pass.'));
   // Codex-granskningen av koden 2026-10-24: en kopia som har ändrats för hand, resultat som står kvar på sin dag och en
@@ -2292,6 +2299,22 @@ try {
       // K-578 (Niclas 2026-10-27: omkring två veckor i lektion 1–5, och elevernas progression styr): efter lektionens första
       // vecka föreslår planen samma lektion, också med snittet 5, och säger varför.
       sant('Ljudlek: skattningen mot lektionens mål, och samma lektion efter lektionens första vecka', malet.includes(s.malText(lektion4.mal.overgripande).replace(/\.$/, '')) && forslag.text.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && forslag.text.includes('Ni har haft lektionen en vecka, så planen föreslår samma lektion vecka 4.') && forslag.fylld.join() === 'Upprepa Bokstavsgympa', { malet, forslag });
+      // Kalendern skriver veckans lektion i passen (Codex 2026-10-27: kalendern hade seriens allmänna pass).
+      await lj('window.__fil = null');
+      await b.tryck('#pl-kalender');
+      await vanta(300);
+      const ics = String(await lj('window.__fil') ?? '').replace(/\r\n /g, '').replace(/\\,/g, ',');
+      const faser = lektion4.tidsschema.rader.filter((r) => /^\d/.test(r.tid)).map((r) => r.fas);
+      sant('Ljudlek: kalendern har veckans lektion i passen', faser.length > 0 && faser.every((f) => ics.includes(f)), { faser, ics: ics.slice(0, 600) });
+      // Byts veckans lektion tas veckans skattning bort, och Ångra tar tillbaka den (Codex 2026-10-27).
+      await lj("(() => { document.querySelectorAll('#pl-veckan details.pl-lektionsval').forEach((d) => { d.open = true; }); return true; })()");
+      await b.tryck('#pl-veckan [data-valj-lektion="3|6"]');
+      await vanta(250);
+      const bytt = await lj(`(() => ({ toast: document.getElementById('pl-toast')?.textContent ?? '', efter: document.querySelector('#pl-veckan .pl-lektionen-efter')?.textContent ?? '', hash: location.hash }))()`);
+      await b.tryck('#pl-toast [data-toast-gor]');
+      await vanta(250);
+      const tillbaka = await lj(`(() => ({ efter: document.querySelector('#pl-veckan .pl-lektionen-efter')?.textContent ?? '', hash: location.hash }))()`);
+      sant('Ljudlek: ett lektionsbyte tar bort veckans skattning, och Ångra tar tillbaka den', bytt.toast.includes('Vecka 3 tar Räkna ljud. Veckans skattning gällde den förra lektionens mål och är borttagen.') && !bytt.efter.includes('Snittet') && bytt.hash.includes('k=3.0.6.5') && tillbaka.efter.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && tillbaka.hash.includes('k=3.0.4.5'), { bytt, tillbaka });
       await lj(`document.getElementById('pl-folj').click()`);
       await vanta(150);
     }

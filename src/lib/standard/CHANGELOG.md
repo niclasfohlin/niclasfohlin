@@ -1,5 +1,10 @@
 # Ändringar i standarden
 
+## 0.27.0, 2026-10-27
+
+- `plan.js`, lektionerna i en serie (sajtens K-551 och K-578; Niclas samma dag: "Lektionerna bör köras ca 2 veckor i rad", och "Elevernas progression styr"): `lektionensForslag` tar lektionens `veckor` och hur många veckor i följd gruppen har haft lektionen, och föreslår samma lektion tills `min` är nådd, sedan nästa när snittet är över `LEKTIONENS_GRANS`, aldrig nästa bara för att `max` är nådd. `vidareTillLektion` säger "Lektionen är klar när …" i den sista lektionen, och `planensTexter` har `lektionsval.klar` med.
+- `plan.js`, efter Codex granskning samma morgon: `sammanstallning` tar veckornas lektioner i en serie, varje skattning bär sin lektion, och den första skattningen som riktningen räknar från är den första i den senaste skattningens lektion, så att skattningar mot olika lektioners mål aldrig jämförs (Rim 5 och Räkna ljud 1 blev "5 till 1, bakåt"). `riktningText` och skattningarna i texterna säger lektionen, `lektionernasMal` ger lektionernas mål med veckorna till sidan, texterna och pdf:erna ur en rot, `sammanstallningstext` ger medlet för varje lektion, och `skattningenText` tar målets ord.
+
 ## 0.26.0, 2026-10-27
 
 - `plan.js`, `metodplan`: en progression vars första kolumn heter När är råd utan veckor (sajtens K-553; Niclas 2026-10-26 sa ja till förslaget för Kortskrivning): `stegEnhet` är `nar`, raderna läses inte som veckor eller pass, och planen kopplar dem inte till någon vecka. Riggens kontroll godtar då Kortskrivnings rader Pass 1–10, När ni är varma i kläderna och Veckans sista pass.

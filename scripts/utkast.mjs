@@ -18,6 +18,8 @@ const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const varde = (flagga, forval) => (args.includes(flagga) ? args[args.indexOf(flagga) + 1] : forval);
 const namn = varde('--namn', 'verktyg');
+// Sajten anges alltid: i en arbetskopia utan länk (git worktree) skapade netlify deploy annars en ny sajt (2026-10-27).
+const SITE = '8af49398-3862-4b58-84a6-88f68d0064c1';
 if (!/^[a-z0-9-]+$/.test(namn)) { console.error('utkast: --namn skrivs med a-z, 0-9 och bindestreck.'); process.exit(1); }
 const commit = spawnSync('git', ['-C', rot, 'log', '-1', '--format=%h %s'], { encoding: 'utf8' }).stdout.trim();
 const meddelande = varde('--meddelande', `Utkast ${namn}: ${commit}`);
@@ -34,7 +36,7 @@ let adress;
 try {
   writeFileSync(robots, 'User-agent: *\nDisallow: /\n');
   writeFileSync(headers, '/*\n  X-Robots-Tag: noindex, nofollow\n');
-  const r = spawnSync('netlify', ['deploy', '--no-build', '--dir', dist, '--functions', tom, '--alias', namn, '--message', `"${meddelande.replace(/"/g, "'")}"`, '--json'], { cwd: rot, encoding: 'utf8', shell: true, maxBuffer: 64 * 1024 * 1024 });
+  const r = spawnSync('netlify', ['deploy', '--site', SITE, '--no-build', '--dir', dist, '--functions', tom, '--alias', namn, '--message', `"${meddelande.replace(/"/g, "'")}"`, '--json'], { cwd: rot, encoding: 'utf8', shell: true, maxBuffer: 64 * 1024 * 1024 });
   if (r.status !== 0) throw new Error(`netlify deploy gick inte:\n${(r.stderr || r.stdout).split('\n').slice(-20).join('\n')}`);
   const svar = JSON.parse(r.stdout.slice(r.stdout.indexOf('{')));
   adress = svar.deploy_url;
