@@ -352,6 +352,7 @@ if (tsMp) {
   ska('Ljudlek: ljudkollen var tredje vecka står inte i planens sista vecka', ljudkollen(12) === '3,6,9' && ljudkollen(9) === '3,6' && ljudkollen(10) === '3,6,9', [ljudkollen(12), ljudkollen(9), ljudkollen(10)]);
   const smU = s.sammanstallning(p, { elever: [{ id: 'a1', namn: 'Ali' }], skattning: { '2026-11-02': { a1: 4 }, '2026-11-09': { a1: 2 } } }, '2026-11-25', [null, { namn: 'Rim', mal: 'rimma' }]);
   ska('en serie: en skattning i en vecka utan lektion står kvar i texten', s.sammanstallningstext(info, p, smU).includes('Veckor utan vald lektion, mot målet ovan: medel 4, en skattning.') && s.sammanstallningstext(info, p, smU).includes('Rim: medel 2, en skattning.'), s.sammanstallningstext(info, p, smU));
+  ska('ljudkollen är ett ord för en sak, och kollen står inte i spärren', s.arSaksord('Ljudkollen') && s.sakdelar('Gör ljudkollens uppgift 4.', [{ namn: 'Ljudkollen' }]).some((x) => x.sak === 0) && !s.olankadeSaker('Kollen på kartan, och kontrollen.', []).length);
   ska('utan serie jämförs första och senaste som förut', !sm.lektioner && sm.elever[0].forsta === sm.elever[0].skattningar[0] && s.riktningText(sm.elever[0]) === '2 till 3, framåt');
   const tomt = s.sammanstallning(p, {}, '2026-11-18');
   ska('en tom uppföljning går att sammanställa', tomt.gjorda === 0 && tomt.elever.length === 1 && tomt.elever[0].skattningar.length === 0 && s.sammanstallningstext(info, p, tomt).includes('Pass: Inga pass är bockade än. Planen har 18 pass.'));
@@ -2292,6 +2293,11 @@ try {
       const v3 = await lj(`(() => ({ rubrik: document.getElementById('pl-veckan-rubrik')?.textContent ?? '', delar: [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-delnamn')].map((x) => x.textContent), riktning: document.querySelector('#pl-veckan .pl-elevmal p')?.textContent ?? '', fraga: document.querySelector('#pl-veckan .pl-lektionen-efter .pl-fraga')?.textContent ?? '', knappar: [...document.querySelectorAll('#pl-veckan .pl-lektionen-efter .pl-andra-knappar button')].map((x) => x.textContent), hash: location.hash }))()`);
       const lektion4 = metod('ljudlek-bokstavsgympa');
       sant('Ljudlek: veckan visar lektionens namn, pass, riktning och frågan efter veckan', v3.rubrik === 'Vecka 3 · Bokstavsgympa' && lektion4.tidsschema.rader.filter((r) => /^\d/.test(r.tid)).every((r) => v3.delar.includes(r.fas)) && v3.riktning.startsWith('Att ') && v3.fraga === 'Upprepa lektionen eller välj ny för vecka 4?' && v3.knappar.join('|') === 'Upprepa Bokstavsgympa|Nästa: Smaka på ljud' && v3.hash.includes('k=3.0.4'), v3);
+      // Lektionens rader står öppna i lektionens första vecka, delarna börjar med stegens mening om vad eleverna gör, och
+      // ljudkollen är en länk (de kalla testarna 2026-10-27).
+      const tabellen4 = lektion4.tabeller.find((t) => lektion4.upplagg.text.includes(t.rubrik));
+      const v3b = await lj(`(() => ({ rader: document.querySelector('#pl-veckan details.pl-rader')?.open ?? false, raderText: document.querySelector('#pl-veckan details.pl-rader')?.textContent ?? '', ruta: document.querySelector('#pl-veckan .pl-nasta')?.textContent ?? '', ljudkollen: [...document.querySelectorAll('#pl-veckan a')].some((a) => /^ljudkoll/i.test(a.textContent ?? '')) }))()`);
+      sant('Ljudlek: lektionens rader, stegen och länken till ljudkollen i veckan', v3b.rader && tabellen4.rader.every((r) => v3b.raderText.includes(r[0])) && v3b.raderText.includes(tabellen4.not.slice(0, 40)) && lektion4.passrutin.steg.every((x) => v3b.ruta.includes(x.text)) && v3b.ljudkollen, v3b);
       await b.tryck('#pl-veckan .pl-lektionen-efter .pl-andra-knappar [data-valj-lektion="4|5"]');
       await vanta(250);
       sant('Ljudlek: Nästa sätter nästa veckas lektion', (await lj('location.hash')).includes('k=3.0.4.5') && (await lj(`document.getElementById('pl-toast')?.textContent ?? ''`)).includes('Vecka 4 tar Smaka på ljud.'), await lj('location.hash'));

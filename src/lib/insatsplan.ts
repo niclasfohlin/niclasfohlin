@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { faltetsDelar, forstaLedet, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { faltetsDelar, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
@@ -175,6 +175,10 @@ export interface PlanLektion {
    * (Rimligheten 2026-10-27), och lektionens material med det första stycket, som säger vad som skrivs ut och lamineras. */
   uppfoljning: { nar: string; vad: string }[];
   material?: { rubrik: string; adress: string; text?: string };
+  /** Lektionens rader, tabellen som lektionens upplägg nämner (Så blir lektionen svårare): uppläggets meningar från den som
+   * nämner tabellen, tabellens not med raden gruppen börjar i, och raderna med sina kolumner (de kalla testarna 2026-10-27:
+   * "Planen säger inte vilken rad gruppen börjar i, vilka ljud och vilket ark raden har"). */
+  rader?: { rubrik: string; adress: string; text: string[]; rader: { namn: string; mer: { etikett: string; text: string }[] }[] };
 }
 
 export interface PlanSkattning extends Skattning {
@@ -321,7 +325,14 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
   return Promise.all(lektioner.map(async (l) => {
     const ld = l.data;
     const sida = `/stodundervisning/${l.id}`;
-    const passet = planensPass(ld, l.id);
+    // Lektionens tidsschema säger hur delen går till och passrutinens steg vad eleverna gör, så delen börjar med steget (de
+    // kalla testarna 2026-10-27: "Stegen visar bara hur korten fördelas, inte vad eleverna gör").
+    const stegen = new Map((ld.passrutin?.steg ?? []).flatMap((s) => (typeof s === 'string' ? [] : [[s.fas.toLowerCase(), s.text] as [string, string]])));
+    const pass0 = planensPass(ld, l.id);
+    const passet = pass0 && { ...pass0, delar: pass0.delar.map((x) => (stegen.has(x.fas.toLowerCase()) ? { ...x, vad: `${mening(stegen.get(x.fas.toLowerCase())!)} ${x.vad}` } : x)) };
+    const tabellen = ld.upplagg ? ld.tabeller.find((t) => ld.upplagg!.text.includes(t.rubrik)) : undefined;
+    const upplagget = tabellen ? meningarna(ld.upplagg!.text) : [];
+    const fran = upplagget.findIndex((m) => m.includes(tabellen!.rubrik));
     return {
       nr: ld.formaga!,
       id: l.id,
@@ -340,6 +351,7 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
       ...(ld.principer ? { principer: { rubrik: ld.principer.rubrik, text: ld.principer.text, adress: `${sida}#principer` } } : {}),
       saker: await planensSaker(l),
       uppfoljning: (ld.uppfoljning?.rader ?? []).filter((r) => serienasNar.has(r.nar)).map((r) => ({ nar: r.nar, vad: r.vad })),
+      ...(tabellen ? { rader: { rubrik: tabellen.rubrik, adress: tabellensAdress(ld, l.id, tabellen.rubrik) ?? sida, text: [...upplagget.slice(Math.max(0, fran)), ...(tabellen.not ? [tabellen.not] : [])], rader: (tabellen.rader ?? []).map((r) => ({ namn: r[0], mer: r.slice(1).flatMap((c, i) => (c ? [{ etikett: tabellen.kolumner[i + 1], text: c }] : [])) })) } } : {}),
       ...(ld.ramar?.ramar?.length ? { material: { rubrik: ld.ramar.rubrik || 'Materialet', adress: `${sida}#ramar`, ...(ld.ramar.text?.[0] ? { text: ld.ramar.text[0] } : {}) } } : {}),
     };
   }));
