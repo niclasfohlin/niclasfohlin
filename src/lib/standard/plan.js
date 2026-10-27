@@ -351,11 +351,30 @@ export const planensTexter = (d) => [
  * @param {MetodensTexter} d
  * @returns {string[]}
  */
+/**
+ * Ramen med veckornas sidor, som planens pass läser (plan.veckansPass), eller undefined.
+ * @template {{ rubrik: string }} R
+ * @param {{ ramar?: { ramar?: R[] }, plan?: { veckansPass?: string } }} d
+ * @returns {R | undefined}
+ */
+export const veckansPassRam = (d) => (d.ramar?.ramar ?? []).find((r) => r.rubrik === d.plan?.veckansPass);
+
+/**
+ * Fälten på veckans sida som är veckans pass (plan.veckansPass): "Pass N", "Dag N" och "Pass N i <version>", med delen de
+ * står i. En rot för planens texter och spärren i insatsplanFel (K-585, K-576).
+ * @param {MetodensTexter} d
+ * @returns {{ del: string, f: { rubrik: string, text: string } }[]}
+ */
+export const veckansPassFalt = (d) => (veckansPassRam(d)?.delar ?? []).flatMap((del) => (del.falt ?? []).filter((f) => /^(?:pass|dag) \d+(?: i .+)?$/i.test(f.rubrik)).map((f) => ({ del: del.rubrik, f })));
+
 export const visadeTexter = (d) => [
   ...planensTexter(d).map(([, t]) => t),
   ...(d.tidsschema?.rader ?? []).map((r) => r.vad),
   ...(d.tidsschema?.varianter ?? []).map((v) => v.text),
   planensInledning(d.tidsschema?.text, d.plan?.utan), d.gruppen?.text ?? '',
+  // Fälten på veckans sida som planen visar i passen (plan.veckansPass), så att ett namn som bara står där, som en mentortext
+  // eller diplomet, blir en länk (länkgranskningen 2026-10-27: Kalaset, Lekplatsen och Två texter blev inga länkar).
+  ...veckansPassFalt(d).map(({ f }) => f.text),
   d.tidsschema?.efter ?? '', d.passrutin?.efterPasset ?? '', d.principer?.text ?? '', d.hem?.text[0] ?? '',
   ...(d.tabeller ?? []).filter((t) => (d.plan?.passen ?? []).some((p) => p.tabell === t.rubrik || p.ur?.tabell === t.rubrik) || ((d.nivaer ?? []).length >= 2 && t.kolumner.slice(1).every((k, i) => k.toLowerCase() === d.nivaer?.[i]?.namn.toLowerCase()))).flatMap((t) => (t.rader ?? []).flatMap((r) => r.slice(1).map(String))),
 ].filter(Boolean);
@@ -2926,7 +2945,7 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass' | 'nar', steg: Steg[], uppfoljning: { rad: number, tid: Tid, perElev?: true }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number, sistaRaden?: true }} Metodplan
- * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string, eleverna?: string, vidare?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, lektionsval?: { text: string, mer: string, ingangar?: { lektion: number, namn: string }[] }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
+ * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string, eleverna?: string, vidare?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, veckansPass?: string, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, lektionsval?: { text: string, mer: string, ingangar?: { lektion: number, namn: string }[] }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'nastSista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar

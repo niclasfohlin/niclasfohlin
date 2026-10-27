@@ -878,7 +878,8 @@ function renderaSumma() {
   const antal = aktiv.val.dagar.length;
   // Med färre dagar än metodens pass säger planen vilket av veckans pass som faller bort, i en metod där veckans pass har var
   // sitt innehåll (K-580; de kalla testarna 2026-10-27: Textsamtals tredje pass föll bort, och texterna hänvisade till det).
-  const borta = antal < mp.takt.min && veckansPassRaknas ? Array.from({ length: mp.takt.min - antal }, (_, i) => veckansPassMedNamn(antal + i + 1)) : [];
+  // Har metoden en rad för veckans sista pass, tar den det sista av planens pass, och det som faller bort ligger före det.
+  const borta = antal < mp.takt.min && veckansPassRaknas ? Array.from({ length: mp.takt.min - antal }, (_, i) => veckansPassMedNamn(antal + i + (harVeckansSista ? 0 : 1))) : [];
   const farre = antal < mp.takt.min || antal > mp.takt.max ? `Metoden har ${mp.takt.min === mp.takt.max ? mp.takt.min : `${mp.takt.min} till ${mp.takt.max}`} pass i veckan, och planen har ${antal}.${borta.length ? ` ${stor(borta.join(' och '))} faller då bort varje vecka.` : ''}` : '';
   // Pass mellan jul och trettondagen: loven skiljer sig mellan skolor, så planen föreslår inget, men säger till.
   const iJulen = (datum: string) => { const [, m, d] = datum.split('-').map(Number); return (m === 12 && d >= 21) || (m === 1 && d <= 6); };
@@ -1191,6 +1192,9 @@ function renderaVeckan() {
 // (Rimligheten 2026-10-26).
 // Metoden räknar passen i veckan när planens pass står efter sin plats i veckan, som veckans första och andra pass.
 const veckansPassRaknas = (data.passen ?? []).some((x) => /^veckans (första|andra|tredje|fjärde|femte|sista|övriga)( pass)?$/i.test(x.nar.trim()));
+// En rad för veckans sista pass ger det sista av veckans pass sitt innehåll, också när veckan har färre pass än metoden, så
+// det som faller bort är inte det sista (Rimligheten 2026-10-27: Ordverkstads tidning låg på onsdagen när fredagen föll).
+const harVeckansSista = (data.passen ?? []).some((x) => /^veckans sista|^sista passet/i.test(x.nar.trim()));
 // Veckans pass N med planens namn för det, när en rad gäller veckans N:e pass i alla veckor, som "veckans andra pass, Dag 2"
 // (K-580: planen sa inte vilket pass som föll bort).
 function veckansPassMedNamn(n: number): string {
@@ -1242,7 +1246,9 @@ const medVeckansPass = (p: Pass, roller: ReturnType<typeof rollerFor>) => {
   const tabell = (lage.vecka && lage.plats ? data.veckansPass[`${lage.vecka}.${lage.plats}`] : undefined) ?? (nr !== null ? data.veckansPass[String(nr)] : undefined);
   if (!tabell || (iVarianten && !tabell.skillnad)) return roller;
   // Passets slag ur fältets första mening, som "Planeringspass", är passets namn när planens rader inte ger något (K-585).
-  const slag = tabell.slag ? [{ nar: '', kort: tabell.slag }] : [];
+  // Utan slag och utan namn ur planens rader heter passet som fältet, "Dag 2", så att det går att öppna i veckans lista
+  // (Rimligheten 2026-10-27: Värdeskapandes jakt och besöksdag i sista veckan gick inte att öppna).
+  const slag = tabell.slag ? [{ nar: '', kort: tabell.slag }] : roller.some((r) => r.kort) ? [] : [{ nar: '', kort: tabell.namn.split(', ').pop() ?? '' }];
   // Ett fält som bara säger det som skiljer står överst och i passets delar, också i ett pass som planens rad leder till en
   // tabell, som Sagobokens bokpass, och leder till veckans sida (K-585).
   if (tabell.skillnad) {
@@ -1581,7 +1587,7 @@ function lektionenEfterVeckan(v: PlanVecka, oppna: Set<string>, ovrigt: string[]
   // hinner göras (den stängda Rimligheten 2026-10-27: uppgift 8 före Från ljud till ord syntes först i lektionens vecka).
   const forsta = ny ? veckansPass(plan, nasta)[0] : undefined;
   const foreForsta = forsta ? (ny?.rader?.text ?? []).flatMap((t) => meningarna(t)).filter((m) => /före första passet/i.test(m)) : [];
-  const valt = valdNasta ? `<p class="pl-not">${esc(rubrikVecka(nasta))} tar ${esc(lektionen(valdNasta)?.namn ?? '')}.${ny?.material?.text ? ` <a href="${esc(ny.material.adress)}" ${goat('materialet', 'nästa lektions material från planen')}>${esc(ny.material.rubrik)} i ${esc(ny.namn)}</a>: ${esc(mening(ny.material.text))}` : ''}</p>${foreForsta.length && forsta ? `<p class="pl-not"><span class="pl-etikett">Före ${esc(dagText(forsta.datum))}</span> ${foreForsta.map((m) => lankad(mening(m))).join(' ')}</p>` : ''}` : '';
+  const valt = valdNasta ? `<p class="pl-not">${esc(rubrikVecka(nasta))} tar ${esc(lektionen(valdNasta)?.namn ?? '')}.${ny?.material?.text ? ` <a href="${esc(ny.material.adress)}" ${goat('materialet', 'nästa lektions material från planen')}>${esc(ny.material.rubrik)} i ${esc(ny.namn)}</a>: ${medLektion(ny.nr, () => lankad(mening(ny.material?.text ?? '')))}` : ''}</p>${foreForsta.length && forsta ? `<p class="pl-not"><span class="pl-etikett">Före ${esc(dagText(forsta.datum))}</span> ${foreForsta.map((m) => lankad(mening(m))).join(' ')}</p>` : ''}` : '';
   return `<section class="pl-block pl-lektionen-efter"><h3>Efter veckan</h3>${regel}${snittet}${langd}${klar}<p class="pl-fraga">Upprepa lektionen eller välj ny för ${esc(rubrikVecka(nasta).toLocaleLowerCase('sv'))}?</p><p class="pl-andra-knappar">${knappar.join('')}</p>${valt}${lektionslista(nasta.nr, valdNasta, forslag === 'nasta' && n ? n.nr : 0, oppna, 'Välj en annan lektion')}${ovrigt.join('')}</section>`;
 }
 // Lektionerna i texten till åtgärdsprogrammet: de valda, med passens datum, och om fler väljs sedan.
@@ -1688,7 +1694,11 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   // Veckan före passet som rutan visar, också när det är nästa veckas pass (Codex 2026-10-26).
   const foreRutan = plan.veckor[rutansVecka.nr - 2];
   const regel = aktiv.folj && nu === v.nr && foreRutan ? regelnEfter(foreRutan) : '';
-  const kursvecka = data.kursveckor?.[String(rutansVecka.innehall)];
+  // Metodens vecka för passet i rutan, när ett lov eller en röd dag har flyttat kursens pass till en annan av planens veckor
+  // (Rimligheten 2026-10-27: Sagobokens pass 26–27 hör till metodens vecka 9, i planens vecka 10).
+  const passetsKursnr = rutansPass && data.passensVeckor ? kursensPassnummer(plan, mp.takt.min, rutansPass, mp.period.enhet === 'veckor' ? mp.period.max ?? mp.period.min : undefined) : null;
+  const metodensVecka = (passetsKursnr !== null ? data.passensVeckor?.[String(passetsKursnr)] : undefined) ?? rutansVecka.innehall;
+  const kursvecka = data.kursveckor?.[String(metodensVecka)];
   // Rutans material och länkar gäller rutans vecka och dess lektion, också när rutan visar nästa veckas pass (Codex
   // 2026-10-27: snabbmallen och Materialet följde den visade veckans lektion).
   const material = medLektion(veckansLektion(rutansVecka), () => [
@@ -1706,7 +1716,7 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   // En vecka utan pass visar inte passets delar, bara varför (Rimligheten 2026-10-26: vecka 10 visade hela aktiviteten).
   const ruta = rutansPass || passen.length ? medLektion(veckansLektion(rutansVecka), () => passetsRuta(rutansPass, oppna, nivansRad(rutansVecka, oppna) + lektionenIRutan(rutansVecka, oppna))) : '';
   if (!ruta && rutansPass && !harVarit) text += `, pass ${rutansPass.nr} av ${hogstaPassnr(plan)}`;
-  const veckansSida = kursvecka ? `<p class="metod-centrala"><a class="knapp" href="${esc(kursvecka)}" ${goat('kursvecka', 'veckans lektion från planen')}>${esc(stor(metodveckan(rutansVecka.innehall)))}, med veckans manus</a></p>` : '';
+  const veckansSida = kursvecka ? `<p class="metod-centrala"><a class="knapp" href="${esc(kursvecka)}" ${goat('kursvecka', 'veckans lektion från planen')}>${esc(stor(metodveckan(metodensVecka)))}, med veckans manus</a></p>` : '';
   delar.push(`<div class="pl-nasta${rutansPass && rutansPass.datum >= idag ? ' pl-kommer' : ''}"><span class="pl-etikett">${etikett}</span><p class="pl-nar">${esc(text)}</p>${bockatNot ? `<p class="pl-not">${esc(bockatNot)}</p>` : ''}${tillbaka}${regel}${paminn}${veckansSida}${ruta || nivansRad(rutansVecka, oppna)}${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${veckansTexter(rutansRad, oppna, rutansVecka.nr !== v.nr ? rutansVecka : undefined)}${hemma}${rutansLankar}</div>`);
 
   lankVecka = v.innehall;
@@ -1768,8 +1778,8 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   const rodPlats = rod ? passen.length + 1 : 0;
   const rodVecka = rod && passen[0] ? passetsLage(plan, passen[0]).vecka : undefined;
   const rodFalt = rodVecka ? data.veckansPass?.[`${rodVecka}.${rodPlats}`] : undefined;
-  const rodNamn = rodFalt ? `<a href="${esc(rodFalt.adress)}" ${goat('veckans-pass', 'passet som faller bort från planen')}>${esc(rodFalt.namn)}</a>` : rod ? esc(veckansPassMedNamn(rodPlats).replace(/,$/, '')) : '';
-  const bortNot = rod ? `<p class="pl-not">Passet ${esc(dagText(rod.datum))} faller bort, ${esc(rod.namn ?? 'en röd dag')}, och med det ${rodNamn}. Veckans pass har var sitt innehåll, och planen lägger inget pass i stället, så håll det en annan dag i veckan om ni kan${plan.pass.some((x) => x.datum > rod.datum) ? ', eller ta det som föll bort i nästa pass' : ''}.</p>` : '';
+  const rodNamn = rodFalt && !harVeckansSista ? `<a href="${esc(rodFalt.adress)}" ${goat('veckans-pass', 'passet som faller bort från planen')}>${esc(rodFalt.namn)}</a>` : '';
+  const bortNot = rod ? `<p class="pl-not">Passet ${esc(dagText(rod.datum))} faller bort, ${esc(rod.namn ?? 'en röd dag')}${rodNamn ? `, och med det ${rodNamn}` : ''}. Veckans pass har var sitt innehåll, och planen lägger inget pass i stället, så håll det en annan dag i veckan om ni kan${plan.pass.some((x) => x.datum > rod.datum) ? ', eller ta det som föll bort i nästa pass' : ''}.</p>` : '';
   delar.push(`<section class="pl-block" id="pl-passen"><h3>Veckans pass</h3><ol class="pl-passlista">${passrader.map((x) => x.html).join('')}</ol>${bortNot}${alla}${flyttaForm}${hjalp}${foljtips}</section>`);
 
   // Veckans fokus ur progressionen. En rad som gäller flera veckor säger att fokus är detsamma som förra veckan (de kalla

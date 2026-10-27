@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { arDelensTid, faltetIVersionen, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { arDelensTid, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
@@ -86,6 +86,8 @@ export interface PlanData {
   kursveckor?: Record<string, string>;
   /** Passens delar ur veckornas sidor (plan.veckansPass, K-553), efter kursens passnummer, som fältet "Pass N". */
   veckansPass?: Record<string, PassTabell>;
+  /** Metodens vecka för kursens pass N, ur fälten Pass N på veckornas sidor (K-585). */
+  passensVeckor?: Record<string, number>;
   /** Passet ur metodens tidsschema (betan 2026-10-24: ingen av de kalla testarna kunde hålla första passet bara efter planen):
    * delarna med tid och vad läraren gör, förberedelsen (raden Före passet), andra rader som Hemma, och det läraren gör efter
    * passet (passrutinens efterPasset), med adresserna till passet och stegen på metodens sida. */
@@ -293,6 +295,19 @@ function passetsTabell(d: Metod['data'], id: string, namn: string, kolumn?: stri
 // Passens delar ur veckornas sidor (plan.veckansPass, K-553; riggens förslag 2026-10-27): ramen med lektioner har en del
 // per vecka, och varje pass ett fält "Pass N" med en rad per del, som standardens faltetsDelar läser. Nyckeln är kursens
 // passnummer.
+// Metodens vecka för kursens pass, ur fälten Pass N på veckornas sidor, så att länken till veckans manus följer passet när
+// ett lov eller en röd dag har flyttat det (Rimligheten 2026-10-27: Sagobokens pass 26–27 hör till metodens vecka 9).
+function passensVeckor(d: Metod['data'], version?: string): Record<string, number> | undefined {
+  const ram = veckansPassRam(d);
+  if (!ram) return undefined;
+  const ut: Record<string, number> = {};
+  for (const { del, led } of versionensDelar(d, ram, version)) {
+    const vecka = led.match(/^vecka (\d+)$/i)?.[1];
+    if (!vecka) continue;
+    for (const fa of del.falt ?? []) { const nr = faltetIVersionen(fa.rubrik, version)?.rubrik.match(/^pass (\d+)$/i)?.[1]; if (nr && !ut[nr]) ut[nr] = Number(vecka); }
+  }
+  return Object.keys(ut).length ? ut : undefined;
+}
 function veckornasPass(d: Metod['data'], id: string, version?: string): Record<string, PassTabell> | undefined {
   const rubrik = d.plan?.veckansPass;
   if (!rubrik) return undefined;
@@ -499,6 +514,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     // Skattjakten).
     saker: await planensSaker(m, [], version),
     ...(d.plan?.veckansPass ? { veckansPass: veckornasPass(d, m.id, version) ?? {} } : {}),
+    ...(passensVeckor(d, version) ? { passensVeckor: passensVeckor(d, version) } : {}),
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
     // En rad vars text bara gäller en annan version står inte med (K-576).
@@ -641,7 +657,7 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     const takt = metodplan(m.data).plan?.takt;
     if (!ram?.lektioner) fel.push(`plan.veckansPass säger ramen "${m.data.plan.veckansPass}", som metoden inte har som en ram med en del per vecka (lektioner).`);
     else {
-      const falten = ram.delar.flatMap((del) => (del.falt ?? []).filter((f) => /^(?:pass|dag) \d+(?: i .+)?$/i.test(f.rubrik)).map((f) => ({ del: del.rubrik, f })));
+      const falten = veckansPassFalt(m.data);
       if (!falten.length) fel.push(`plan.veckansPass: ramen "${ram.rubrik}" har inga fält som heter Pass N eller Dag N.`);
       // Ett fält utan minuter säger bara det som skiljer från passets tabell, som Sagobokens "Där vi slutade: …", och planen
       // visar då passet (K-585). Ett fält med minuter ska gå att läsa som delar.

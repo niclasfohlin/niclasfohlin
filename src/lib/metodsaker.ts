@@ -128,6 +128,26 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   // Titeln länkas bara som titel, med stor bokstav mitt i en mening, så att "multiplikation" inte leder till Övningsblad:
   // Multiplikation.
   for (const [titel, adresser] of titlar) if (adresser.length === 1 && !perNamn.has(titel)) saker.push(/^\p{Lu}/u.test(titel) ? { ...sak(titel, adresser[0]), versal: true } : sak(titel, adresser[0]));
+  // En ram för en version i planens val, som "Hjältens kort i sex steg", heter i den versionen också utan versionens namn,
+  // "Hjältens kort", som texten säger (länkgranskningen av Sagoboken 2026-10-27, K-576). Den första ramen med namnet vinner.
+  const versioner = versionernasNamn(d);
+  const egen = (version ?? versioner[0] ?? '').toLocaleLowerCase('sv');
+  if (versioner.length) ramar.forEach((r, ri) => {
+    if (iBanken(bank, ri)) return;
+    const bas = forstaLedet(r.rubrik).split(',')[0].trim();
+    const m = bas.match(/^(.+?) i (.+)$/u);
+    if (!m || m[2].toLocaleLowerCase('sv') !== egen || saker.some((s) => s.namn.toLowerCase() === m[1].toLowerCase())) return;
+    saker.push(sak(m[1], `${sida}#${ramAnkare[ri]}`));
+  });
+  // Rammens hela namn, som "Min bok: sidan" och "Till läraren: den korta berättelsen", leder till just den ramen, när flera
+  // ramar har samma första led; det längre namnet vinner i texten (länkgranskningen 2026-10-27: båda ledde till den första
+  // ramen med samma första led, K-588).
+  ramar.forEach((r, ri) => {
+    if (iBanken(bank, ri) || !r.rubrik.includes(':')) return;
+    const [namn, efter] = r.rubrik.split(':').map((x) => x.trim());
+    if (!efter || nivaNamn.has(efter) || veckornaI(efter) || (perNamn.get(namn)?.length ?? 0) < 2 || saker.some((s) => s.namn.toLowerCase() === r.rubrik.toLowerCase())) return;
+    saker.push(sak(r.rubrik, `${sida}#${ramAnkare[ri]}`));
+  });
   // Veckans ram, i en kurs med en ram per vecka som Bråkkursens "Vecka 1: Lika delar": "veckans ram" leder i planen till
   // ramen för veckan som visas, med veckans ruta Till läraren, korten och materialet (länkgranskningen av omgång 3
   // 2026-10-26: "veckans ruta Till läraren under Kursens material" ledde till början av materialet).

@@ -769,6 +769,11 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   const ramar = ['Den magiska skogen', 'Hunden som försvann', 'Egen ram'];
   const celler = [{ kolumn: 'Det som händer i Den magiska skogen', text: 'A' }, { kolumn: 'Det som händer i Hunden som försvann', text: 'B' }, { kolumn: 'Skrivfokus', text: 'C' }];
   ska('en kolumn i en version', JSON.stringify(s.iVersionensKolumner(celler, 'Hunden som försvann', ramar)) === JSON.stringify([{ kolumn: 'Det som händer', text: 'B' }, { kolumn: 'Skrivfokus', text: 'C' }]) && s.iVersionensKolumner(celler, 'Egen ram', ramar).map((c) => c.text).join() === 'C' && s.iVersionensKolumner(celler, undefined, []).length === 3, s.iVersionensKolumner(celler, 'Hunden som försvann', ramar));
+  // Veckans fält som är veckans pass, också Dag N och Pass N i en version, står bland planens texter, så att ett namn som
+  // bara står där blir en länk (länkgranskningen 2026-10-27: Värdeskapandes Kalaset).
+  const vardFalt = s.veckansPassFalt(metod('skrivkurs-vardeskapande'));
+  const sagoFalt = s.veckansPassFalt(metod('skrivkurs-sagoboken'));
+  ska('veckans fält: Dag N och Pass N i en version, och deras text bland planens texter', vardFalt.some(({ f }) => f.rubrik === 'Dag 2') && sagoFalt.some(({ f }) => /^Pass \d+ i sex steg$/.test(f.rubrik)) && s.visadeTexter(metod('skrivkurs-vardeskapande')).some((t) => t.includes('Kalaset')), [vardFalt.length, sagoFalt.length]);
   // Förvalet i veckor gäller inte en period i pass: Berättelseramens 15 pass blev 8 (Rimligheten 2026-10-27).
   const br = metod('skrivkurs-berattelseram');
   ska('ett förval i veckor stoppas i en period i pass, och planen räknar metodens pass', s.veckovaletsFel({ ...br, plan: { ...br.plan, veckoval: { ...br.plan.veckoval, forval: 8 } } }).some((x) => x.includes('räknas i pass')) && s.metodplan({ ...br, plan: { ...br.plan, veckoval: { ...br.plan.veckoval, forval: 8 } } }).plan?.forvaldaVeckor === undefined);
@@ -2643,15 +2648,16 @@ try {
   sant('byte av dagar: inga fel', !db.undantag.length && !(await db.kor('window.__fel.length')), db.undantag);
   db.stang();
 
-  // Ett pass som faller på en röd dag säger vilket av veckans pass som faller bort med det (Codex 2026-10-27: skattjakten
-  // föll på juldagen utan att planen sa vad som föll bort).
+  // Ett pass som faller på en röd dag sägs med att planen inte lägger något pass i stället. Vad som faller bort nämns bara när
+  // veckans fält säger det säkert, som Värdeskapandes Dag 2; Textsamtal har inga sådana fält (Codex och Rimligheten
+  // 2026-10-27: Ordverkstads tidning låg på onsdagen, och "veckans tredje pass" var fel).
   const rd = await flik(false, Date.UTC(2026, 11, 14, 9, 0, 0));
   await rd.oppna(PLAN);
   await rd.kor('localStorage.clear()');
   await rd.oppna(`${PLAN}#s=2026-12-21&d=135&l=6&v=1`);
   await vanta(150);
   const rodText = (await rd.text('#pl-veckan')) ?? '';
-  sant('en röd dag säger vilket av veckans pass som faller bort', /Passet fredag 25 december faller bort, [^.]*, och med det veckans tredje pass[^.]*\. Veckans pass har var sitt innehåll, och planen lägger inget pass i stället/.test(rodText), rodText.slice(0, 1500));
+  sant('en röd dag säger att passet faller bort och att planen inte lägger något i stället', /Passet fredag 25 december faller bort, [^.,]*\. Veckans pass har var sitt innehåll, och planen lägger inget pass i stället/.test(rodText), rodText.slice(0, 1500));
   sant('en röd dag: inga fel', !rd.undantag.length && !(await rd.kor('window.__fel.length')), rd.undantag);
   rd.stang();
 
