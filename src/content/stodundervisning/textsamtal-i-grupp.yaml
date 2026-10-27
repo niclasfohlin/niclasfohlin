@@ -744,6 +744,11 @@ plan:
     # tidsschemat (sajtens fråga 2026-10-26: delarna visade läraren som leder).
     - nar: veckans andra pass i vecka 1–5
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Så läser ni, Du] }
+    # Lyssningsbladet i pass 2, ordagrant ur stegen Prova på, eftersom Gå vidare när bygger på bladet från pass 2 och 3 (den
+    # stängda granskningen av K-572 2026-10-27: pass 2 sa inte att läraren skriver på bladet).
+    - nar: veckans andra pass i vecka 1–5
+      del: Läs och tänk
+      text: "Eleverna prövar draget i parsamtalet. Du går runt, lyssnar efter det och skriver det du hör på lyssningsbladet, med elevernas ord."
     - nar: veckans andra pass i vecka 6–8
       kort: "Eleverna leder samtalet"
       text: "En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren. Eleverna turas om att leda samtalet, så att en ny elev leder varje fråga. Den som leder har frågorna på samtalskortet som stöd, och du lyssnar."

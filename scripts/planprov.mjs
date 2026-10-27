@@ -955,7 +955,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
       // utan regeln. Läslistor: planens mening, eftersom radernas regel gäller. En metod utan regler: metodens hela regel.
       const hp = metod('hoglasning-i-par').plan.upprepa;
       const utan = s.upprepaIVeckan(hp, true, false), med = s.upprepaIVeckan(hp, true, true);
-      ska('metodens regel för att ta veckan igen, med och utan radens regel', med?.hela && med.text === hp && utan && !utan.hela && utan.text === 'Tar ni om en vecka, skjuter du upp mötet och läsningen hos de yngre en vecka.'
+      ska('metodens regel för att ta veckan igen, med och utan radens regel', med?.hela && med.text === hp && utan && !utan.hela && utan.text === 'Tar ni om en vecka, skjuter du upp mötet och läsningen hos de yngre en vecka, om de inte redan har varit.'
         && s.upprepaIVeckan(pl.plan.upprepa, true, false) === null && s.upprepaIVeckan(pl.plan.upprepa, true, true)?.hela
         && s.upprepaIVeckan(ll.plan.upprepa, true, true) === null && s.upprepaIVeckan(ll.plan.upprepa, false, false)?.hela && s.upprepaIVeckan(undefined, true, true) === null, [utan, med]);
     }
