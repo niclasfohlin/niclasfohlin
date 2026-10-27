@@ -17,8 +17,8 @@ import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
 
-interface Props { data: PlanData; lektionskort: Lektionskort[]; lektionernasKort?: Record<number, Lektionskort[]>; antal: number; snabbmall?: { rubrik: string; period: string } }
-const { data, lektionskort, lektionernasKort = {}, antal, snabbmall } = Astro.props;
+interface Props { data: PlanData; lektionskort: Lektionskort[]; lektionernasKort?: Record<number, Lektionskort[]>; lektionernasMallar?: Record<number, { id: string; rubrik: string; titel: string }>; antal: number; snabbmall?: { rubrik: string; period: string } }
+const { data, lektionskort, lektionernasKort = {}, lektionernasMallar = {}, antal, snabbmall } = Astro.props;
 // Raden om modulen längst ned: namnet och versionen, att den är en beta, och mejlet till Niclas med metoden och versionen i
 // ämnet (Niclas 2026-10-24: "skicka mail till mig om något inte funkar").
 const mejl = `mailto:${site.epost}?subject=${encodeURIComponent(`${PLANERA.namn} ${PLANERA.version}: ${data.titel}`)}`;
@@ -39,7 +39,8 @@ const nivaer = data.bank?.nivaer ?? data.nivaer ?? [];
 const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { const s = tolkaSteg(r.vecka); return s && !s.efter ? [{ fran: s.fran, namn: r.kort }] : []; }) : [];
 // Snabbmallens namn i metoden, som Veckans cykel, eller snabbmallen: på knappen och i planens text, som läser det ur knappen
 // (användbarhetsprovet 2026-10-25: "Skriv i snabbmallen" stod ovanför knappen Veckans cykel som pdf).
-const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik) ? 'snabbmallen' : snabbmall.rubrik) : '';
+const mallnamn = (rubrik: string) => (/^snabbmall(en)?$/i.test(rubrik) ? 'snabbmallen' : rubrik);
+const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
 ---
 
 <Base title={`Planera insatsen: ${data.titel}`} description={`Planera ${data.titel}: välj när ni träffas, så räknar planen fram passen, veckornas fokus och uppföljningen ur metoden.`}>
@@ -222,6 +223,7 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
     <div class="pl-filer" id="pl-filer" hidden>
       {snabbmall && <a class="knapp sekundar" data-fil="snabbmall" href={`/stodundervisning/${data.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${data.id}-snabbmall`} data-goatcounter-title={`${data.titel}: ${snabbmall.rubrik}, bladet`} data-namn={snabbmallensNamn}><span data-direkt={`Skriv ut ${snabbmallensNamn}`}>{stor(snabbmallensNamn)} som pdf</span></a>}
       {lektionskort.map((k, i) => <span class="pl-fil" data-fil={`lektionskort-${i + 1}`}><Lektionskortknapp k={k} titel={data.titel} klass="knapp sekundar" /></span>)}
+      {Object.entries(lektionernasMallar).map(([nr, x]) => <a class="knapp sekundar" data-fil={`lektion-${nr}-snabbmall`} href={`/stodundervisning/${x.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${x.id}-snabbmall`} data-goatcounter-title={`${x.titel}: ${x.rubrik}, bladet`} data-namn={mallnamn(x.rubrik)}><span data-direkt={`Skriv ut ${mallnamn(x.rubrik)}`}>{stor(mallnamn(x.rubrik))} som pdf</span></a>)}
       {Object.entries(lektionernasKort).flatMap(([nr, kort]) => kort.map((k, i) => <span class="pl-fil" data-fil={`lektion-${nr}-kort-${i + 1}`}><Lektionskortknapp k={k} titel={data.lektioner?.find((l) => String(l.nr) === nr)?.namn ?? data.titel} klass="knapp sekundar" /></span>))}
       {data.harLathund && <a class="knapp sekundar" data-fil="lathund" href={`${data.sida}/lathund`}>Öppna lathunden</a>}
     </div>

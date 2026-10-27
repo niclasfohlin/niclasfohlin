@@ -17,7 +17,11 @@ const { m, antal } = Astro.props;
 const data = await planensData(m);
 const lektionskort = metodensLektionskort(m.data, m.id);
 // En serie med lektionsbank (K-551): varje lektions lektionskort, som veckan visar när lektionen är vald.
-const lektionernasKort = data.lektioner ? Object.fromEntries((await publicerade('stodundervisning')).filter((x) => x.data.serie === m.id && x.data.formaga !== undefined).map((x) => [x.data.formaga!, metodensLektionskort(x.data, x.id)])) : {};
+const lektionerna = data.lektioner ? (await publicerade('stodundervisning')).filter((x) => x.data.serie === m.id && x.data.formaga !== undefined) : [];
+const lektionernasKort = Object.fromEntries(lektionerna.map((x) => [x.data.formaga!, metodensLektionskort(x.data, x.id)]));
+// Och varje lektions snabbmall, som veckan skriver ut när lektionen är vald (Rimligheten 2026-10-27: texten ledde till
+// lektionens snabbmall och knappen skrev ut seriens).
+const lektionernasMallar = Object.fromEntries(lektionerna.filter((x) => x.data.snabbmall).map((x) => [x.data.formaga!, { id: x.id, rubrik: x.data.snabbmall!.rubrik, titel: x.data.titel }]));
 ---
 
-<Planera data={data} lektionskort={lektionskort} lektionernasKort={lektionernasKort} antal={antal} snabbmall={m.data.snabbmall ? { rubrik: m.data.snabbmall.rubrik, period: m.data.snabbmall.period } : undefined} />
+<Planera data={data} lektionskort={lektionskort} lektionernasKort={lektionernasKort} lektionernasMallar={lektionernasMallar} antal={antal} snabbmall={m.data.snabbmall ? { rubrik: m.data.snabbmall.rubrik, period: m.data.snabbmall.period } : undefined} />

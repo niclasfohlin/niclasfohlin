@@ -101,8 +101,8 @@ export interface PlanData {
   hem?: { rubrik: string; text: string; adress: string };
   /** Metodens avsnitt om när eleven fastnar, och de andra stöden i stunden, som Om något händer i Seriesamtal. */
   fastnar?: { rubrik: string; adress: string }[];
-  /** Metodens material, med rubriken som i metoden, som Böckerna och materialet. */
-  material?: { rubrik: string; adress: string };
+  /** Metodens material, med rubriken som i metoden, som Böckerna och materialet, och i en lektion materialets första stycke. */
+  material?: { rubrik: string; adress: string; text?: string };
   /** Metodens verktyg och stödmaterial (fältet centrala), utom banken som planen redan har. */
   centrala?: { namn: string; adress: string; pdf: boolean }[];
   /** Metodens mål på sidan, som planen leder till vid insatsens mål. */
@@ -171,6 +171,10 @@ export interface PlanLektion {
   checklistaRubrik?: string;
   principer?: { rubrik: string; text: string; adress: string };
   saker: MetodSak[];
+  /** Lektionens rader i uppföljningen med samma När som seriens, som Var tredje vecka med ljudkollens uppgifter för lektionen
+   * (Rimligheten 2026-10-27), och lektionens material med det första stycket, som säger vad som skrivs ut och lamineras. */
+  uppfoljning: { nar: string; vad: string }[];
+  material?: { rubrik: string; adress: string; text?: string };
 }
 
 export interface PlanSkattning extends Skattning {
@@ -313,6 +317,7 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
   const bank = m.data.lektionsbank;
   if (!bank) return [];
   const lektioner = (await publicerade('stodundervisning')).filter((x) => x.data.serie === m.id && x.data.formaga !== undefined).sort((a, b) => a.data.formaga! - b.data.formaga!);
+  const serienasNar = new Set((m.data.uppfoljning?.rader ?? []).map((r) => r.nar));
   return Promise.all(lektioner.map(async (l) => {
     const ld = l.data;
     const sida = `/stodundervisning/${l.id}`;
@@ -334,6 +339,8 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
       ...(ld.checklista ? { checklistaRubrik: ld.checklista.rubrik } : {}),
       ...(ld.principer ? { principer: { rubrik: ld.principer.rubrik, text: ld.principer.text, adress: `${sida}#principer` } } : {}),
       saker: await planensSaker(l),
+      uppfoljning: (ld.uppfoljning?.rader ?? []).filter((r) => serienasNar.has(r.nar)).map((r) => ({ nar: r.nar, vad: r.vad })),
+      ...(ld.ramar?.ramar?.length ? { material: { rubrik: ld.ramar.rubrik || 'Materialet', adress: `${sida}#ramar`, ...(ld.ramar.text?.[0] ? { text: ld.ramar.text[0] } : {}) } } : {}),
     };
   }));
 }

@@ -2874,9 +2874,10 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-nivaer .sk-niva { min-width: 0; font-size: 1rem; padding-right: 0.5rem; }
 .pl-nivaer .sk-niva[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
 /* Ljudleks enda planerare (K-551): ingångarna i nivåknapparnas form med lektionen under, och lektionerna som tunna rader
-   att välja ur, med numret, namnet och vad lektionen tränar. */
+   att välja ur, med numret, namnet och vad lektionen tränar. Ingångens regel har två klasser, eftersom .sk-niva står
+   senare i filen och annars centrerar texten. */
 .pl-ingangar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.pl-ingang { --niva: var(--farg-lasning); flex-direction: column; align-items: flex-start; gap: 0.1rem; min-width: 0; flex: 1 1 9rem; }
+.sk-niva.pl-ingang { --niva: var(--farg-lasning); flex-direction: column; align-items: flex-start; gap: 0.1rem; min-width: 0; flex: 1 1 9rem; }
 .pl-ingang-lektion { font-weight: 400; font-size: 0.88rem; }
 .pl-ingang[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
 .pl-lektionsnamn { margin: 0.6rem 0 0.4rem; }
@@ -2939,6 +2940,7 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-markering { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 999px; background: #fff3d6; color: #6b4800; }
 .pl-markering.bort { background: var(--farg-ton); color: var(--farg-text-svag); }
 .pl-markering.nu { background: var(--farg-accent); color: #fff; }
+.pl-markering.lektion { background: var(--farg-lasning-ljus); color: var(--farg-lasning); }
 .pl-markering.stam { background: var(--farg-skrivning-ljus); color: var(--farg-skrivning); }
 .pl-veckor > li.nu { border-left-color: var(--farg-accent); background: var(--farg-accent-ljus); }
 .pl-veckor > li.pl-lovvecka, .pl-veckor > li.efter:not(.nu) { background: var(--farg-ton-svag); }

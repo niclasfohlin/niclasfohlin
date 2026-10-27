@@ -114,7 +114,7 @@ export type VariantensNar = PassensNar | { typ: 'minuter'; minuter: number } | {
 /** Var ett pass står i planen, som en rad i planens passen och en variant läser det. */
 export type PassetsLage = { nr?: number; sista?: boolean; nastSista?: boolean; vecka?: number; plats?: number; sistIVeckan?: boolean; minuter?: number };
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
-export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass' | 'nar'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[]; passen: { rad: number; nar: PassensNar | VariantensNar }[]; skattningar: Skattning[]; forvaldaVeckor?: number; foreVeckor?: number; sistaRaden?: true }
+export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass' | 'nar'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid; perElev?: true }[]; passen: { rad: number; nar: PassensNar | VariantensNar }[]; skattningar: Skattning[]; forvaldaVeckor?: number; foreVeckor?: number; sistaRaden?: true }
 /** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
 export interface Val { start: string; dagar: number[]; langd: number; lektioner?: number[]; niva?: string; borja?: number; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string; mitt?: number; slut?: number; fore?: { till: string; dagar: number[]; fasta?: Record<string, number> }[] }
 export interface Pass { nr: number; datum: string; vecka: number; steg?: number | null; flyttatFran?: string }
@@ -373,7 +373,7 @@ export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: Samma
 /** Namnen som texterna som lämnar webbläsaren tvättar bort: eleverna i listan och de som har stått i den. */
 export declare const elevernasNamn: (f: Foljd | undefined) => { namn: string }[];
 export declare function sammanstallning(plan: Plan, f: Foljd, idag: string, lektioner?: ({ namn: string; mal: string } | null | undefined)[]): Sammanstallning;
-export declare const lektionernasMal: (s: Pick<Sammanstallning, 'lektioner' | 'veckor'>, e?: Pick<SammanstallningElev, 'skattningar'>) => string;
+export declare const lektionernasMal: (s: Pick<Sammanstallning, 'lektioner' | 'veckor' | 'elever'>, e?: Pick<SammanstallningElev, 'skattningar'>) => string;
 export declare const narvaronKort: (e: SammanstallningElev, s: { gjorda: number }) => string;
 export declare const prickarnasText: (e: { fran?: string }) => string;
 export declare const passensNarvaro: (s: Sammanstallning, e: { id: string; fran?: string }, franvaro: Record<string, string[]>) => ('med' | 'borta' | 'inte')[][];
