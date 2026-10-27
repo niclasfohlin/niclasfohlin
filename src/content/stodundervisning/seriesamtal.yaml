@@ -112,7 +112,7 @@ tabeller:
       - - Det sista passet
         - Med pärmarna och gruppens blad framför er ser ni tillbaka på perioden.
         - Var och en väljer en tumregel och en sak att ta med sig.
-    not: Personerna i Chatten och Lunchen är runt tolv år, och de fyra första serierna fungerar i hela F–⁠5. I F–⁠2 kan gruppen upprepa en eller två av de fyra första serierna i stället för Chatten och Lunchen. Då börjar var och en med den person hen inte började med första gången. Bildserierna sitter på väggen under perioden, i den ordning ni har gjort dem.
+    not: Personerna i Chatten och Lunchen är runt tolv år, och de fyra första serierna fungerar i hela F–⁠5. I F–⁠2 kan gruppen ta om en eller två av de fyra första serierna i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången. Bildserierna sitter på väggen under perioden, i den ordning ni har gjort dem.
   - rubrik: "Samtalsteknikerna: vad du gör och hur det låter"
     plats: efter-steg
     meny: true
@@ -670,10 +670,14 @@ plan:
       kort: "Chatten"
       text: "Bildserie 5: Chatten. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       ur: { tabell: Perioden pass för pass, rad: Pass 5 }
+    - nar: pass 5
+      text: "I F–⁠2 kan gruppen ta om en eller två av de fyra första serierna i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången."
     - nar: pass 6
       kort: "Lunchen"
       text: "Bildserie 6: Lunchen. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       ur: { tabell: Perioden pass för pass, rad: Pass 6 }
+    - nar: pass 6
+      text: "I F–⁠2 kan gruppen ta om en eller två av de fyra första serierna i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången."
     - nar: pass 7
       kort: "Nästan bråk"
       ur: { tabell: Perioden pass för pass, rad: Pass 7 }

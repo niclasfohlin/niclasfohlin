@@ -175,7 +175,7 @@ tabeller:
       - - "4–6 och 4–9"
         - "Femåringarna på närmaste förskola, eller en klass på elevernas förra skola"
         - "Familjer på ett boksläpp efter skoldagen, eller åk 4 när gruppen går i åk 5–6"
-    not: "Med fritids eller familjer är boken till samma barn som annars. Med fritids håller ni pass 8 och pass 15 på eftermiddagen. Familjerna kommer bara till boksläppet, så ni håller pass 15 efter skoldagen."
+    not: "När fritids eller familjerna är med, skrivs boken till samma barn som annars. Med fritids håller ni pass 8 och pass 15 på eftermiddagen. Familjerna kommer bara till boksläppet, så ni håller pass 15 efter skoldagen."
 passrutin:
   text: "Introduktionspasset är grundpasset, och kursen har sex sådana, ett för varje del. Fortsättningspasset har en egen tabell efter introduktionspassets."
   steg:
@@ -215,7 +215,7 @@ tidsschema:
   efter: "Den som är klar läser delen för en kamrat, lägger till en mening med dagens skrivfokus eller ritar delens bild."
 arbetsform:
   rubrik: "Arbetsform: gemensamt, läraren visar, i par, enskilt, gemensamt igen"
-  text: "Passet rör sig från dig till eleven och tillbaka till gruppen. Med fyra till tio elever hinner alla läsa upp något i varje pass, och de som skriver med flyt blir gruppens levande mentortexter. Blir en elev över i Berätta, är du kamrat. I en klass sitter eleverna vid bord om fyra till sex och gör Dela, Galleriet och Starterna vid varje bord. Ditt svar efter pass 4 och 10 skriver du då till dem som behöver det mest. De andra läser sin del för en kamrat i början av pass 5 och 11, och kamraten svarar med kortets baksida."
+  text: "Passet rör sig från dig till eleven och tillbaka till gruppen. Med fyra till tio elever hinner alla läsa upp något i varje pass, och de som skriver med flyt blir gruppens levande mentortexter. Blir en elev över i Berätta, är du kamrat. I en klass sitter eleverna fyra till sex vid varje bord och gör Dela, Galleriet och Starterna där. Ditt svar efter pass 4 och 10 skriver du då till dem som behöver det mest. De andra läser sin del för en kamrat i början av pass 5 och 11, och kamraten svarar med kortets baksida."
   delar:
     - rubrik: 1. Gemensamt
       text: Hela gruppen, med dig vid tavlan
@@ -290,7 +290,7 @@ urval:
     - rubrik: Korta delar som blir klara
       text: Hellre en halv sida färdig än två ofärdiga sidor
 uppfoljning:
-  text: Du behöver veta om kursen ger effekt, och inte bara att ni har genomfört den. I pass 1 och pass 14 skriver eleven en kort berättelse till en bild. Räkna orden, och jämför de två texterna. Har den korta berättelsen i pass 14 början, problem och slut, avslutar du insatsen för eleven. Saknar berättelsen början, problem eller slut men svarar du ja på fler av frågorna än i pass 1, går eleven kursen en gång till och skriver en ny bok till ett nytt barn. Då börjar eleven om i pass 1 med nästa grupp och går alla 15 pass. Svarar du inte ja på fler av frågorna än i pass 1, tar du upp det med elevhälsan. Prata med klassläraren och hemmet, så att skrivandet fortsätter efter kursen.
+  text: Du behöver veta om kursen ger effekt, och inte bara att ni har genomfört den. I pass 1 och pass 14 skriver eleven en kort berättelse till en bild. Räkna orden, och jämför de två texterna. Har den korta berättelsen i pass 14 början, problem och slut, avslutar du insatsen för eleven. Saknar berättelsen början, problem eller slut, men svarar du ja på fler av frågorna än i pass 1, går eleven kursen en gång till och skriver en ny bok till ett nytt barn. Då börjar eleven om i pass 1 med nästa grupp och går alla 15 pass. Svarar du inte ja på fler av frågorna än i pass 1, tar du upp det med elevhälsan. Prata med klassläraren och hemmet, så att skrivandet fortsätter efter kursen.
   rader:
     - nar: Pass 1
       tid: "pass 1"
@@ -361,7 +361,7 @@ plan:
   # Beslutet efter den korta berättelsen i pass 14, ordagrant ur uppföljningen (UPPDRAG-6, 2026-10-26).
   utvardering:
     - "Har den korta berättelsen i pass 14 början, problem och slut, avslutar du insatsen för eleven."
-    - "Saknar berättelsen början, problem eller slut men svarar du ja på fler av frågorna än i pass 1, går eleven kursen en gång till och skriver en ny bok till ett nytt barn."
+    - "Saknar berättelsen början, problem eller slut, men svarar du ja på fler av frågorna än i pass 1, går eleven kursen en gång till och skriver en ny bok till ett nytt barn."
     - "Då börjar eleven om i pass 1 med nästa grupp och går alla 15 pass."
     - "Svarar du inte ja på fler av frågorna än i pass 1, tar du upp det med elevhälsan."
 mal:
@@ -430,7 +430,7 @@ ramar:
             - rubrik: Pass 2
               text: "Ramen, 0–⁠5 min: det finns ingen förra del än. Eleven läser på Min ram vem boken är till, och du pekar på del 1.\nI Skriv lär du ut Galleriet, och ni går det första varvet. Sidan Strukturen, del 1: Galleriet säger hur ni gör."
             - rubrik: Pass 3
-              text: "Först i Skriv, 17–⁠20 min, går du igenom Stödet att komma igång. Eleven väljer något, som att upprepa det hen sa till kamraten eller rita först, och skriver det vid ”När jag kör fast” på Mitt mål.\nVid minut 45 visar du ramens del 1 och 6, där kastanjen eller smulorna kommer tillbaka, och ringar in något sådant i din del 1. Sedan ringar eleverna in."
+              text: "Först i Skriv, 17–⁠20 min, går du igenom Stödet att komma igång. Eleven väljer något, som att upprepa det hen sa till kamraten eller rita först, och skriver det vid ”När jag kör fast” på Mitt mål.\nVid minut 45 visar du ramens del 1 och 6, där kastanjen eller smulorna kommer tillbaka, och ringar in något sådant i din del 1. Sedan ringar eleverna in något sådant i sin del 1."
             - rubrik: Lägg märke till
               text: "Eleven som räknar upp utseende och ålder. Ställ dagens fråga igen.\nEleven som skriver vad huvudpersonen är rädd för. Det kommer tillbaka i del 5."
         - rubrik: "Del 2 · Spänningen"
@@ -620,7 +620,7 @@ ramar:
             - rubrik: Teckningen
               text: "Sedan berättar eleven att huvudpersonen möter någon ny i nästa del, och säger: ”Rita hur du tror att den ser ut.” Har eleven redan bestämt vem huvudpersonen möter, säger hen tre saker om den först. Teckningen blir bilden till del 4 i boken, och barnets namn står vid Bilder av på omslaget."
             - rubrik: Om något saknas
-              text: "Är barnet borta, läser eleven för ett annat barn, men boken är fortfarande till samma barn. Är eleven borta, läser hen för barnet en annan dag. Går det inte att träffas, spelar eleverna in läsningen i pass 7 vid 50–60, och barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25."
+              text: "Är barnet borta, läser eleven för ett annat barn, men boken är fortfarande till samma barn. Är eleven borta, läser hen för barnet en annan dag. Går det inte att träffas, spelar eleverna in läsningen i pass 7, 50–60 min. Barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25."
     - rubrik: "Provläsningen, del 4: Läsaren svarar"
       sagoform: { form: vag, titel: Provläsningen, undertitel: läsaren svarar, bilder: [ stjärna, förvånad, glödlampa, ryggsack ], radMm: 11 }
       text:

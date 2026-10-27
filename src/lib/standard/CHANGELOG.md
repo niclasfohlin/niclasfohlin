@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.26.0, 2026-10-27
+
+- `plan.js`, `metodplan`: en progression vars första kolumn heter När är råd utan veckor (sajtens K-553; Niclas 2026-10-26 sa ja till förslaget för Kortskrivning): `stegEnhet` är `nar`, raderna läses inte som veckor eller pass, och planen kopplar dem inte till någon vecka. Riggens kontroll godtar då Kortskrivnings rader Pass 1–10, När ni är varma i kläderna och Veckans sista pass.
+
 ## 0.25.0, 2026-10-26
 
 - `plan.js`, den smala formen (sajtens K-572; Niclas samma kväll: "Gillar egentligen fokus och lärarens roll. Men behöver samtidigt en tydlig riktning för eleverna lärande och utveckling", och "Kör på det"): progressionens rader har `eleverna`, vad eleverna ska bli bättre på, och `vidare`, när gruppen går vidare. `elevernasFel` prövar formen och kräver `eleverna` i varje rad i en metod som kan planeras, och `planFel` kör den. `elevernasCell`, `vidareMening`, `harElevernasKolumn` och `ELEVERNAS_KOLUMN` ger den fjärde kolumnen och meningen "Gå vidare när …" till metodens sida, Word och planen ur en rot, och `planensTexter` har fälten med.

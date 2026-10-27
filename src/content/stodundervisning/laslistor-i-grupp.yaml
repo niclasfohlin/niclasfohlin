@@ -256,7 +256,7 @@ urval:
       text: Varje lista bygger vidare på den förra
 progression:
   rubrik: Sju listor på sju veckor
-  text: "Listorna följer avkodningens naturliga utveckling, från säker koppling mellan bokstav och ljud, via allt längre ordstrukturer, till ord som växer med morfem och till sist hela meningar. Vägen går från alfabetisk-fonemisk läsning mot ortografisk-morfemisk läsning, där eleven börjar känna igen orddelar och stavningsmönster i stället för att ljuda varje bokstav (Høien och Lundberg, 2013). En lista kan ta mer än en vecka, och tabellen säger för varje lista när ni byter till nästa. Planera en vecka för varje lista, från den lista som gruppen börjar på, och en vecka till när gruppen stannar kvar på en lista. Läsningen efter perioden gör du när gruppen har läst Läslista 6, och senast efter åtta veckor. Veckorna i metoden följer listorna: vecka 4 är veckan med Läslista 3, hur länge gruppen än har hållit på. Från lista 5 behövs ett litet antal ordbilder för meningarna: och, är, i, på, en, ett, har, jag, vi, det, de. Öva dem som helheter, till exempel med ordkort."
+  text: "Listorna följer avkodningens naturliga utveckling, från säker koppling mellan bokstav och ljud, via allt längre ordstrukturer, till ord som växer med morfem och till sist hela meningar. Vägen går från alfabetisk-fonemisk läsning mot ortografisk-morfemisk läsning, där eleven börjar känna igen orddelar och stavningsmönster i stället för att ljuda varje bokstav (Høien och Lundberg, 2013). Byt lista när gruppen klarar det som står under Gå vidare när, och annars läser ni samma lista en vecka till. Planera en vecka för varje lista, från den lista som gruppen börjar på, och en vecka till när gruppen stannar kvar på en lista. Läsningen efter perioden gör du när gruppen har läst Läslista 6, och senast efter åtta veckor. Veckorna i metoden följer listorna: vecka 4 är veckan med Läslista 3, hur länge gruppen än har hållit på. Från lista 5 behövs ett litet antal ordbilder för meningarna: och, är, i, på, en, ett, har, jag, vi, det, de. Öva dem som helheter, till exempel med ordkort."
   enhet: Vecka
   rader:
     - vecka: "1"
@@ -353,7 +353,7 @@ plan:
     - nar: vecka 6–7
       del: Parläsning
       text: "I vecka 6 och 7 läser paren samma rader eller meningar som ni har körläst. På måndag läser de tisdagens rader eller meningar, och på fredag hela listan."
-  upprepa: "Byt lista när de flesta läser orden direkt i veckans två sista pass."
+  upprepa: "Byt lista när gruppen klarar det som står under Gå vidare när, och annars läser ni samma lista en vecka till."
   # Periodens längd och beslutet efter läsningen efter perioden (passgenomgången 2026-10-26, out/planera-r/laslistor-i-grupp-3.md).
   veckoval:
     text: "Planera en vecka för varje lista, från den lista som gruppen börjar på, och en vecka till när gruppen stannar kvar på en lista. Läsningen efter perioden gör du när gruppen har läst Läslista 6, och senast efter åtta veckor."
@@ -390,7 +390,7 @@ snabbmall:
   sist:
     - Det här läser eleverna nu som de inte läste förut
     - "Nästa vecka: samma lista eller nästa, och det jag tar med mig"
-  not: På fredag läser varje elev listan för dig eller en kompis. Byt lista när de flesta läser orden direkt i veckans två sista pass. Från vecka 4 läser ni i boken sist i passet, och det du hör där skriver du under Efter.
+  not: På fredag läser varje elev listan för dig eller en kompis. Byt lista när gruppen klarar det som står under Gå vidare när i metoden. Från vecka 4 läser ni i boken sist i passet, och det du hör där skriver du under Efter.
 checklista:
   punkter:
     - Valt veckans lista och läst den högt själv.
@@ -658,7 +658,7 @@ lathund:
           text: Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog, till avslutningen från vecka 4.
         - fet: Egna listor.
           text: Riktiga, vanliga och ljudenligt stavade ord, en ny svårighet per lista.
-      efter: Byt lista när de flesta läser orden direkt i veckans två sista pass.
+      efter: Byt lista när gruppen klarar det som står under Gå vidare när.
     bordet:
       - Veckans läslista, en kopia per par
       - Listan stor, så att alla ser den

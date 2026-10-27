@@ -232,7 +232,7 @@ tabeller:
       - - "Pass 3\nSkrivpasset"
         - "Paret skriver klart, läser texten högt och tar de långa orden med stegen. Varje par läser sin text för gruppen, och du lägger sidan i tidningens mapp."
         - "Samma som i pass 2, med parets skrivplan och sida från pass 2"
-    not: "Alla tre passen börjar med Ordstarten, och från vecka 5 skriver var och en sin egen text. I vecka 8 är pass 3 tidningens pass. Har gruppen bara två pass en vecka, tar ni ordpasset och ett skrivpass. Då skriver både du och eleverna en eller två meningar i början, mitten och slutet. I skrivpasset tar Förlagan fem minuter och Din text tio, så att Skriva får 30 minuter. I Skriva gör paret planen, berättar texten för ett annat par, skriver och kontrollerar texten och ritar bilden om det hinner. I Läsa upp läser varje par, från vecka 5 varje elev, sin text för gruppen. Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar."
+    not: "Alla tre passen börjar med Ordstarten, och från vecka 5 skriver var och en sin egen text. I vecka 8 är pass 3 tidningens pass. Har gruppen bara två pass en vecka, tar ni ordpasset och ett skrivpass. Då skriver både du och eleverna en eller två meningar i början, mitten och slutet. I skrivpasset tar Förlagan fem minuter och Din text tio, så att Skriva får 30 minuter. I Skriva gör paret planen, berättar texten för ett annat par, skriver och kontrollerar texten och ritar bilden om de hinner. I Läsa upp läser varje par, från vecka 5 varje elev, sin text för gruppen. Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar."
   - rubrik: De fyra stegen för ett långt ord
     plats: efter-steg
     meny: true
@@ -327,7 +327,7 @@ tabeller:
       - - Eleven väljer bort de långa orden
         - "Fråga vilket långt ord eleven sa när hen berättade. Låt eleven säga delarna och skriva ordet på miniwhiteboarden först, en del i taget, ihop."
       - - Eleven skriver mycket långsamt eller kan inte läsa sin text
-        - "Låt eleven vara meningsbyggare oftare. Från vecka 5 kan kamraten vara sekreterare för varannan mening och skriva i sin egen text medan eleven skriver nästa. Du kan också vara sekreterare när du sitter med eleven: eleven säger meningen, du skriver, och eleven läser meningen."
+        - "Låt eleven vara meningsbyggare oftare. Från vecka 5 kan kamraten vara sekreterare för varannan mening i elevens text. Medan eleven skriver nästa mening, skriver kamraten i sin egen text. Du kan också vara sekreterare när du sitter med eleven: eleven säger meningen, du skriver, och eleven läser meningen."
       - - Den ena i paret bestämmer alla meningar
         - "Påminn om att paret byter efter varje mening, och låt den som tog över vara sekreterare för nästa mening. Fortsätter det, skriver eleverna var sin text efter samma plan."
       - - Paret hinner inte klart i pass 3
@@ -515,7 +515,7 @@ progression:
       eleverna: "Att läsa och förklara ett nytt ord ur delarna, bakifrån, och säga när delarna inte räcker, som i hjärnröta. I artikeln skriver eleven vad det egna ordet betyder och vad det är byggt av."
 
 uppfoljning:
-  text: "Kartläggningen visar hur eleven läser, delar, stavar och förklarar långa ord och skriver dem i en text, före och efter kursen. Protokollet samlar det eleven läste, skrev och förklarade, vecka för vecka. Läser eleven efter kursen minst 14 av 16 ord rätt i uppgift 1, stavar minst 6 av 8 ord rätt i uppgift 3 och har minst 6 av 8 poäng i uppgift 4, avslutar du insatsen. Når eleven den gränsen redan före kursen, behöver hen inte gå kursen. Har eleven sammanlagt lika många poäng som före eller färre i uppgift 1–4 och för delarna i uppgift 3, tar du upp det med elevhälsan och ser efter om eleven först behöver läsa korta ord säkrare, till exempel i TIL i grupp. Annars går eleven en period till med de veckor som har de delar hen fortfarande gör fel på, som fogen i vecka 2 och 7 eller förstavelserna i vecka 5. Varje vecka har samma tre pass, förlaga och ordkort som i kursen, men du väljer andra ord till Ordstarten, Nya ord och Diktamen efter de tre kraven för egna ord. Eleven skriver en ny text efter veckans uppgift. Eleverna som behöver samma veckor går perioden tillsammans. Går en elev den ensam, är du kamraten i paret. Efter perioden gör du kartläggningen igen och beslutar på samma sätt, men jämför poängen med den förra."
+  text: "Kartläggningen visar hur eleven läser, delar, stavar och förklarar långa ord och skriver dem i en text, före och efter kursen. Protokollet samlar det eleven läste, skrev och förklarade, vecka för vecka. Läser eleven efter kursen minst 14 av 16 ord rätt i uppgift 1, stavar minst 6 av 8 ord rätt i uppgift 3 och har minst 6 av 8 poäng i uppgift 4, avslutar du insatsen. Når eleven den gränsen redan före kursen, behöver hen inte gå kursen. Har eleven inte fler poäng än före kursen, sammanlagt i uppgift 1–4 och för delarna i uppgift 3, tar du upp det med elevhälsan och ser efter om eleven först behöver läsa korta ord säkrare, till exempel i TIL i grupp. Annars går eleven en period till med de veckor som tar upp de delar hen fortfarande gör fel på, som fogen i vecka 2 och 7 eller förstavelserna i vecka 5. Varje vecka har samma tre pass, förlaga och ordkort som i kursen, men du väljer andra ord till Ordstarten, Nya ord och Diktamen efter de tre kraven för egna ord. Eleven skriver en ny text efter veckans uppgift. Eleverna som behöver samma veckor går perioden tillsammans. Går en elev den ensam, är du kamraten i paret. Efter perioden gör du kartläggningen igen och beslutar på samma sätt, men jämför poängen med den förra kartläggningen."
   rader:
     - nar: Före kursen
       tid: "före"
@@ -550,8 +550,8 @@ plan:
   # och annars en period till, efter passgenomgången i Skrivning (2026-10-26).
   utvardering:
     - "Läser eleven efter kursen minst 14 av 16 ord rätt i uppgift 1, stavar minst 6 av 8 ord rätt i uppgift 3 och har minst 6 av 8 poäng i uppgift 4, avslutar du insatsen."
-    - "Har eleven sammanlagt lika många poäng som före eller färre i uppgift 1–4 och för delarna i uppgift 3, tar du upp det med elevhälsan och ser efter om eleven först behöver läsa korta ord säkrare, till exempel i TIL i grupp."
-    - "Annars går eleven en period till med de veckor som har de delar hen fortfarande gör fel på, som fogen i vecka 2 och 7 eller förstavelserna i vecka 5."
+    - "Har eleven inte fler poäng än före kursen, sammanlagt i uppgift 1–4 och för delarna i uppgift 3, tar du upp det med elevhälsan och ser efter om eleven först behöver läsa korta ord säkrare, till exempel i TIL i grupp."
+    - "Annars går eleven en period till med de veckor som tar upp de delar hen fortfarande gör fel på, som fogen i vecka 2 och 7 eller förstavelserna i vecka 5."
     - "Varje vecka har samma tre pass, förlaga och ordkort som i kursen, men du väljer andra ord till Ordstarten, Nya ord och Diktamen efter de tre kraven för egna ord."
 mal:
   overgripande: "kunna läsa och stava långa ord genom att dela dem i sina delar."
@@ -1096,7 +1096,7 @@ ramar:
             - rubrik: "Uppgift 3 · Diktamen"
               text: "Du säger ordet, meningen och ordet igen, och eleven skriver ordet på bladet Diktamen. Orden och meningarna står i listan Uppgift 3 · Diktamen. Ett poäng för varje ord som är rätt stavat och ett för varje del som är rätt stavad, högst 8 för orden och 19 för delarna."
             - rubrik: "Uppgift 4 · Förklara orden"
-              text: "Du läser en fråga i taget, och eleven svarar muntligt. Skriv svaret ordagrant i lärarens protokoll. Eleven får två poäng för både delarna och betydelsen och ett för det ena, högst 8.\n”Vad kan en molnstövel vara? Hur vet du det?”\n”Vad kan ett bokregn vara? Hur vet du det?”\n”Vad kan osnöig betyda? Hur vet du det?”\n”Vad kan en läxrobot vara? Hur vet du det?”"
+              text: "Du läser en fråga i taget, och eleven svarar muntligt. Skriv svaret ordagrant i lärarens protokoll. Eleven får två poäng om hen förklarar både delarna och betydelsen, och en poäng om hen förklarar det ena. Högst 8 poäng.\n”Vad kan en molnstövel vara? Hur vet du det?”\n”Vad kan ett bokregn vara? Hur vet du det?”\n”Vad kan osnöig betyda? Hur vet du det?”\n”Vad kan en läxrobot vara? Hur vet du det?”"
             - rubrik: "Uppgift 5 · Skriva en text"
               text: "Eleven skriver i tio minuter på tidningens sida om en sak som hen önskar fanns: vad den heter, vad som är jobbigt utan den och vad den gör. Räkna de långa orden, alltså ord med två eller fler delar, och skriv vilka som står isär eller saknar fogen. Skriv också vilka av början, mitten och slutet texten har. Eftersom gruppen skriver en sådan text i vecka 1, jämför du efter kursen främst de långa orden."
       listor:

@@ -205,7 +205,7 @@ tidsschema:
       vad: "Gemensamt. Läs problemet högt. Paren berättar det för varandra och en elev för gruppen. Red ut orden, ringa in frågan och skriv på tavlan vad ni vet och vad ni ska ta reda på. Från ledet Vi gör läser en elev problemet högt och leder Förstå, och från ledet Ni gör tillsammans skriver paren Vi vet själva. Lärarens sida: Ringa in · Lyft ut · Ord och tal."
     - tid: 5–7 min
       fas: Planera
-      vad: "Gemensamt, med kortet Våra sätt. Gruppen föreslår sätt från kortet, och paren väljer olika sätt. Skriv parens gissningar under Vi tror. Ingen räknar än. Lärarens sida: Förutse."
+      vad: "Gemensamt, med kortet Våra sätt. Gruppen föreslår sätt från kortet, och paren väljer olika sätt. Skriv parens gissningar på tavlan, under Vi tror. Ingen räknar än. Lärarens sida: Förutse."
     - tid: 7–21 min
       fas: Lösa
       vad: "I par, på bladet Vår lösning. I ledet Du gör själv börjar var och en själv i två minuter innan paret arbetar vidare. Fråga först och lämna paren i gång. Halvvägs säger du två sätt du har sett, utan namn och svar, och väljer lösningar till Jämföra. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
@@ -240,7 +240,7 @@ steg:
         - Vad betyder talen i texten?
     - namn: Planera
       fraga: Hur kan vi tänka?
-      gor: Gruppen föreslår sätt från kortet, och paren får välja olika sätt. Skriv parens gissningar under Vi tror. Ingen räknar än.
+      gor: Gruppen föreslår sätt från kortet, och paren får välja olika sätt. Skriv parens gissningar på tavlan, under Vi tror. Ingen räknar än.
       fraser:
         - Hur kan vi visa problemet så att vi ser det framför oss?
         - Tänk om vi provar med mindre tal först.
@@ -355,13 +355,13 @@ progression:
       fokus: "Fler av metodens problem. Paren ställer frågorna på kortet Våra sätt till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
       roll: Läraren ger kortare stöd och frågar mer.
       eleverna: Att förklara vad talen betyder och visa problemet med bild, tabell eller material, så att det syns hur talen hänger ihop.
-      vidare: paren väljer ett sätt på kortet Våra sätt och kommer i gång i Lösa utan din hjälp, i två pass i rad
+      vidare: paren visar problemet utan din hjälp i Lösa och kan säga vad varje tal betyder, i två pass i rad
     - vecka: 5–6
       led: Ni gör tillsammans
       fokus: De sista av metodens problem på nivån, och liknande problem ur källorna. Paren skriver Vi vet själva.
       roll: Läraren läser parens Vi vet först och följer upp sätt, lösning och rimlighet.
       eleverna: Att jämföra två sätt och säga vad som är lika, och att kontrollera om svaret är rimligt innan paret säger att det är klart.
-      vidare: paren skriver rätt under Vi vet och kontrollerar svaret mot problemet utan påminnelse, i två pass i rad
+      vidare: paren kontrollerar svaret mot problemet utan påminnelse och säger själva i Jämföra vad som är lika i lösningarna, i två pass i rad
     - vecka: 7–8
       rubrik: "Var och en börjar själv"
       led: Du gör själv
@@ -4274,7 +4274,7 @@ lathund:
           vad: Läs högt. Paren återberättar. Ringa in frågan och skriv på tavlan vad ni vet och ska ta reda på.
         - tid: 5–7
           fas: 2 · Planera
-          vad: Paren väljer sätt och gissar svaret, och du skriver det under Vi tror. Ingen räknar än.
+          vad: Paren väljer sätt och gissar svaret, och du skriver det på tavlan, under Vi tror. Ingen räknar än.
         - tid: 7–21
           fas: 3 · Lösa
           vad: Paren prövar och byter penna halvvägs. Du går runt, frågar först och väljer lösningar till Jämföra.

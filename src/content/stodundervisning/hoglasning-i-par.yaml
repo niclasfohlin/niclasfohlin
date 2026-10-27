@@ -136,10 +136,10 @@ tabeller:
   - rubrik: "Läsningen för de yngre: vecka 6–8"
     plats: efter-urval
     meny: true
-    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev läser en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok. Från veckans andra pass i vecka 7 prövar de också sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. Före passet väljer du ett uppslag ur en egen bilderbok. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
+    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev ska läsa en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok. Från veckans andra pass i vecka 7 prövar de också sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. Före passet väljer du ett uppslag ur en egen bilderbok. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
     kolumner: [När, Det eleverna gör]
     rader:
-      - ["Vecka 6", "Träffar sin lyssnare och frågar vad hen tycker om. Väljer efter mötet en bilderbok till hen och börjar läsa den för sin kamrat. Går mötet inte att ordna, skriver de yngres lärare vad varje barn tycker om."]
+      - ["Vecka 6", "Träffar sin lyssnare och skriver på bladet Läsarens förberedelse vad lyssnaren tycker om. Väljer efter mötet en bilderbok till hen och börjar läsa den för sin kamrat. Blir mötet inte av, skriver de yngres lärare vad varje barn tycker om."]
       - ["Vecka 7", "Sätter lappar i boken och tänker ut en fråga till sin lyssnare i veckans första pass, med bladet Läsarens förberedelse. Läser sedan boken för sin kamrat, som bara tittar på bilderna."]
       - ["Vecka 8", "Visar framsidan, läser boken för sin lyssnare och ställer sin fråga. Berättar sedan för sin kamrat vad lyssnaren svarade."]
       - ["Hemma", "Kan läsa boken för någon hemma, eller i telefon för någon i släkten. Lyssnaren säger sina två meningar eller skriver dem på lappen hem."]
@@ -271,10 +271,12 @@ uppfoljning:
     - { nar: Vecka 8, tid: "vecka 8", perElev: 4, vad: "Eleven läser samma provtext, och du spelar in och fyller i lyssnarprotokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu." }
 plan:
   fore:
-    - "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre."
-    - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna Var är mössan? och Källaren och lyssnarprotokollet, och ordnat något att spela in med."
+    # Reserven när skolan inte har yngre elever, där läraren bokar (sajtens kalla testare 2026-10-27).
+    - "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan."
+    - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra par och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, lyssnarprotokollet och provtexterna Var är mössan? och Källaren, och ordnat något att spela in med."
     # Vad paren bygger på före vecka 1, och att provtexten i vecka 1 kan ändra paret (passgenomgången 2026-10-26).
-    - "Ordna klassen efter det du vet om hur säkert eleverna läser, och sätt ihop två som ligger nära varandra och trivs ihop, men inte de två som läser minst säkert. Paret håller ihop alla åtta veckor. Fungerar ett par inte, eller läser de två mycket olika säkert i provtexten i vecka 1, ger du dem nya kamrater. Varje nytt par väljer en bok bland två eller tre som du lägger fram."
+    # Udda antal ur tabellens not, där paren sätts ihop (sajtens kalla testare 2026-10-27).
+    - "Ordna klassen efter det du vet om hur säkert eleverna läser, och sätt ihop två som ligger nära varandra och trivs ihop, men inte de två som läser minst säkert. Vid udda antal blir ett par tre, helst bland dem som läser säkrast, och de tre turas om. Paret håller ihop alla åtta veckor. Fungerar ett par inte, eller läser de två mycket olika säkert i provtexten i vecka 1, ger du dem nya kamrater. Varje nytt par väljer en bok bland två eller tre som du lägger fram."
   passen:
     # Det första passet med tabellens not, så att läraren vet att Tankepausen kommer i nästa pass och vad som händer när ett
     # par inte hinner välja bok (Rimligheten 2026-10-26).
@@ -302,9 +304,12 @@ plan:
     - nar: vecka 5
       text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
       ur: { tabell: "De fem strategierna", rad: "5 · Lyssnarens takt" }
+    # Mötet säger hur klassen delas på de yngre, och att två elever kan dela en bok, innan böckerna väljs (sajtens kalla
+    # testare 2026-10-27).
     - nar: veckans första pass i vecka 6
       kort: "Mötet med de yngre"
       utanTidsschema: true
+      text: "Varje elev ska läsa en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
     - nar: veckans första pass i vecka 8
       kort: "Läsningen för de yngre"
@@ -408,7 +413,7 @@ mal:
 checklista:
   rubrik: Checklista
   punkter:
-    - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna Var är mössan? och Källaren och lyssnarprotokollet, och ordnat något att spela in med."
+    - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra par och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, lyssnarprotokollet och provtexterna Var är mössan? och Källaren, och ordnat något att spela in med."
     - Valt ett ställe till varje pass i veckan, och lagt fram två eller tre böcker till par som snart har läst ut sin bok.
     - "Före vecka 6: lånat omkring två korta bilderböcker per elev, kopierat Läsarens förberedelse och bestämt med de yngres lärare vem varje elev läser för."
 grund:
