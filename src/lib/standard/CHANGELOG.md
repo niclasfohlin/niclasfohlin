@@ -1,5 +1,10 @@
 # Ändringar i standarden
 
+## 0.29.0, 2026-10-27 natt
+
+- `plan.js`, efter sajtens Codex-granskning före uppladdningen: `planera` räknar en versions extra pass (`plan.extraDag`, när metodplanen har `extraPass`), `tolkaTid` läser "i det extra passet", och `sammanstallning` räknar passet. `antalBockade` ger antalet bockade pass, med det extra passet, ur en rot. `lektionernaPaVeckorna` låter veckornas lektioner följa sina måndagar när veckorna flyttas. `passetsSlag`, `veckorI`, `radensVeckor`, `ordagrant` och `delensTid` tar bort ordfogar med `utanFogar`, och `versionsvaletsFel` jämför namnen med `versionsform`. `faltetsDelar` ger inte "Före passet" två gånger. `PLANERA` är 0.7.0.
+- `saker.js`: ett namn som börjar ett längre citat, som ”En gång när jag …”, är inte saken.
+
 ## 0.28.0, 2026-10-27 kväll
 
 - `plan.js`, versionerna i planens val (sajtens K-576): `versionsvaletsFel` prövar `plan.versionsval`; `iVersionen` tar bort meningar som börjar med en annan version ("I fyra steg …"), `versionensVecka` och `faltetIVersionen` läser "vecka 3 i sex steg" och fältet "Pass 9 i sex steg", och `iVersionensKolumner` visar en kolumn som heter "… i <version>" bara i den versionen.
