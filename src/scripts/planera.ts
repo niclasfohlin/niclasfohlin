@@ -368,9 +368,10 @@ function borjaLast(): boolean {
 }
 // Versionen ändrar vad varje vecka är, så den låses som Börja på av det som har förts in, och en ny plan byter den (Codex
 // 2026-10-27: bockar och skattningar i Guideboken hamnade under Skattjaktens pass, och en veckoanteckning låste inte).
+// Allt som har förts in låser, var det än ligger, så att en flyttad start inte släpper ett resultat före den (Codex samma dag).
 function lasVersion() {
   if (!versionsknappar.length) return;
-  const last = borjaLast();
+  const last = harFortIn();
   for (const b of versionsknappar) b.disabled = last;
   $('pl-version-not').hidden = !last;
 }
@@ -461,7 +462,7 @@ for (const b of nivaknappar) b.addEventListener('click', () => andra(() => { akt
 for (const b of versionsknappar) b.addEventListener('click', () => {
   const vv = bas.versionsval;
   const v = vv?.versioner.find((x) => x.slug === b.dataset.version);
-  if (!vv || !v || borjaLast()) return;
+  if (!vv || !v || harFortIn()) return;
   andra(() => { aktiv.val.version = v.slug === vv.versioner[0].slug ? undefined : v.slug; if (v.veckor) aktiv.val.langd = v.veckor; }, `${vv.rubrik}: ${v.namn}.`, true);
 });
 // Ingången byter vecka 1:s lektion som veckans val gör: en skattning som gällde den förra lektionen tas bort med besked och

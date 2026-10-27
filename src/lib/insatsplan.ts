@@ -659,6 +659,9 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   const versioner = m.data.plan?.versionsval?.versioner ?? [];
   const allaVersioner = versionernasNamn(m.data);
   const rader = m.data.uppfoljning?.rader ?? [];
+  // Metodens egna skattningar pekar på uppföljningens rader med nummer, så en sådan metod har inga rader som bara gäller en
+  // version (Codex 2026-10-27).
+  if (m.data.plan?.skattningar && versioner.length && rader.some((r) => versioner.some((v) => !iVersionen(r.nar, v.namn, allaVersioner)))) fel.push('En metod med plan.skattningar har inga rader i uppföljningen som bara gäller en version i plan.versionsval.');
   for (const v of versioner) {
     for (const r of rader) if (iVersionen(r.nar, v.namn, allaVersioner) && !iVersionen(r.vad, v.namn, allaVersioner)) fel.push(`Uppföljningens rad "${r.nar}" har ingen text i ${v.namn}. Skriv en mening för varje version, eller ge versionen en egen tid i plan.versionsval.`);
     for (const n of Object.keys(v.tider ?? {})) if (!rader.some((r) => r.nar === n)) fel.push(`plan.versionsval: ${v.namn} har en tid för "${n}", som uppföljningen inte har.`);
