@@ -515,6 +515,8 @@ uppfoljning:
       tid: "pass 25–27"
       vad: "Samma uppgift med en ny bild."
 plan:
+  # Planen visas när den har klarat Rimligheten (K-553).
+  vantar: "Läspassets, planeringspassets och bokpassets delar, och valet av väg (Codex 2026-10-27, K-553, K-576)."
   utan:
     - "Tabellen gäller alla skrivpass, men pass 11 i fyra steg, pass 12 och pass 22 har egna minuter på veckans sida."
     - "Det som är annorlunda i de andra passen står också där, med delens namn först."

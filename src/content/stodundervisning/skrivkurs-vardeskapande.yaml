@@ -333,6 +333,8 @@ uppfoljning:
       perElev: [2, 3]
       vad: "Eleven läser själv en mentortext ur det andra projektet, Torget efter Skattjakten och Gåtan efter Guideboken, och berättar för dig vad den gör och med vilket drag. Visa elevens klasslärare Mina drag."
 plan:
+  # Planen visas när den har klarat Rimligheten (K-553).
+  vantar: "Valet av projekt och veckornas pass ur projektets sidor (Rimligheten 2026-10-27, K-553, K-576)."
   passen:
     - nar: veckans första
       kort: "Dag 1"

@@ -1206,7 +1206,8 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
     }),
     // En rad utan minuter, som "Hemma, cirka 20 min": ordet före kommat i tidens spalt och resten efter delens namn.
     ...(!egna ? (data.passet?.andra ?? []).map((r, i) => { const [forst, ...rest] = r.tid.split(','); return rad(`andra-${i}`, forst.trim(), [r.fas, ...rest.map((x) => x.trim())].join(', '), `<p>${lankad(mening(r.vad))}</p>`); }) : []),
-    ...(data.passet?.efter && (!egna || delar.length) ? [rad('efter', '', 'Efter passet', `<p>${lankad(mening(data.passet.efter))}</p>`)] : []),
+    // Passets eget efter ur veckans fält först, och metodens allmänna rad sedan (riggen 2026-10-27, K-553).
+    ...(b.tabell?.efter || (data.passet?.efter && (!egna || delar.length)) ? [rad('efter', '', 'Efter passet', [b.tabell?.efter, data.passet?.efter && (!egna || delar.length) ? data.passet.efter : ''].filter(Boolean).map((t) => `<p>${lankad(mening(t!))}</p>`).join(''))] : []),
   ];
   // I en metod som räknar passen i veckan, där planens pass står efter sin plats i veckan, säger rutan också veckans pass,
   // så att "dagens pass i veckans ram" leder till rätt kort (Rimligheten 2026-10-26: Bråkkursens pass 3 av 10 är metodens

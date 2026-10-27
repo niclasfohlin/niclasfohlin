@@ -1661,23 +1661,29 @@ export function tabellensDelar(t, kolumn) {
 /**
  * Passets delar ur ett fält på veckans sida (plan.veckansPass, sajtens K-553; riggens förslag 2026-10-27: veckosidan säger
  * redan varje pass minut för minut, och tabeller hade upprepat den). En rad per del: "N–M min. Delens namn: det som händer."
- * Rader utan minuter före delarna är förberedelsen, och en rad utan minuter efter en del hör till den delen. Null när
+ * Rader utan minuter före delarna är förberedelsen, en rad som börjar med "Efter passet." efter delarna är det läraren gör
+ * efter passet, och en annan rad utan minuter efter en del hör till den delen. Null när
  * fältet inte har någon del med minuter och namn.
  * @param {unknown} text
- * @returns {{ delar: TabellDel[], fore: { namn: string, nar: string, vad: string, mer: { etikett: string, text: string }[] }[] } | null}
+ * @returns {{ delar: TabellDel[], fore: { namn: string, nar: string, vad: string, mer: { etikett: string, text: string }[] }[], efter?: string } | null}
  */
 export function faltetsDelar(text) {
   const rader = String(text ?? '').replace(/⁠/g, '').split('\n').map((x) => x.trim()).filter(Boolean);
   /** @type {TabellDel[]} */
   const delar = [];
   const fore = [];
+  let efter = '';
   for (const r of rader) {
     const m = r.match(/^(\d+)\s*[–—-]\s*(\d+)\s*min\.?\s+([^:]+?):\s*(.*)$/u);
+    // En rad som börjar med "Efter passet." efter delarna är det läraren gör efter passet (riggen samma dag).
+    const e = delar.length ? r.match(/^Efter passet\.\s*(.*)$/u) : null;
     if (m) delar.push({ tid: `${m[1]}–${m[2]} min`, fas: m[3].trim(), vad: m[4].trim(), mer: [] });
+    else if (e) efter = [efter, e[1].trim()].filter(Boolean).join(' ');
     else if (!delar.length) fore.push({ namn: FORE_PASSET, nar: '', vad: r, mer: [] });
+    else if (efter) efter += ` ${r}`;
     else delar[delar.length - 1].vad += ` ${r}`;
   }
-  return delar.length ? { delar, fore } : null;
+  return delar.length ? { delar, fore, ...(efter ? { efter } : {}) } : null;
 }
 
 /**
@@ -1745,7 +1751,8 @@ export function passetsBeskrivning(roller, passet, lage) {
     texter,
     delar,
     egenOrdning: !!tabell || utan,
-    fore: tabell || utan || foreIstallet ? undefined : passet?.fore,
+    // Ett pass ur veckans fält utan egen förberedelse får tidsschemats (riggen 2026-10-27, K-553).
+    fore: (tabell && !(tabell.sida && !tabell.fore?.length)) || utan || foreIstallet ? undefined : passet?.fore,
     foreRader: foreIstallet ? [] : tabell?.fore ?? [],
     ...(foreRoller.length ? { foreForst: foreRoller.flatMap(innehall) } : {}),
     utanDel: roller.filter((r) => r.del && !placerade.has(r)).map((r) => r.del),

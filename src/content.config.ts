@@ -464,6 +464,8 @@ const metodensFalt = z.strictObject({
       utvardering: z.array(text).min(1).max(4).optional(),
       upprepa: text.optional(),
       stege: z.boolean().optional(),
+      // vantar: skälet till att planen inte visas än, fast metoden har fälten, tills planen har klarat Rimligheten (K-553).
+      vantar: text.optional(),
       // veckansPass: ramen med veckornas sidor, där varje pass har ett fält "Pass N" med en rad per del, "N–M min. Delens namn:
       // …", som planen läser passets delar ur (K-553; riggens förslag 2026-10-27: veckosidan är den enda källan).
       veckansPass: text.optional(),
