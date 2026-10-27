@@ -2879,7 +2879,10 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-ingangar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .sk-niva.pl-ingang { --niva: var(--farg-lasning); flex-direction: column; align-items: flex-start; gap: 0.1rem; min-width: 0; flex: 1 1 9rem; }
 /* Planens val av version (K-576) har ingångarnas form, i skrivningens färg, eftersom metoderna med valet är skrivkurser. */
-.sk-niva.pl-version { --niva: var(--farg-skrivning); }
+.sk-niva.pl-versionsknapp { --niva: var(--farg-skrivning); }
+/* En kurs i en serie är en länk till kursens plan: namnet är understruket, det kursen tränar inte (PlaneraKurser.astro). */
+a.pl-versionsknapp { text-decoration: none; }
+a.pl-versionsknapp > span:first-child { text-decoration: underline; }
 .pl-ingang-lektion { font-weight: 400; font-size: 0.88rem; }
 .pl-ingang[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
 .pl-lektionsnamn { margin: 0.6rem 0 0.4rem; }

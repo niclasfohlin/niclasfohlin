@@ -31,14 +31,17 @@ serie: "ljudlek-i-grupp"
 formaga: 8
 tranar: "sätta ihop ljud till ord, och ta bort, lägga till och byta ljud"
 vidare: "du har hört fler än hälften av eleverna själva läsa minst två av de tre nya orden utan att stanna, och säga vilket ljud som ändrades, i steg 4 i raden Byt ett ljud"
-veckor: { min: 2, max: 4 }
+# Planen föreslår nästa lektion först efter min gånger tre pass. Med två pass i följd i varje rad tar raderna från den
+# första omkring tio pass. Min 3 ger nio pass, två veckor med fem pass i veckan, och min 4 hade hållit kvar en grupp med
+# fem pass i veckan en tredje vecka (sajtens återkoppling och logikläsaren 2026-10-27).
+veckor: { min: 3, max: 4 }
 inledning:
   - "I Från ljud till ord sätter eleverna ihop ljud till ord med bokstavskorten och ändrar ordet ett ljud i taget. Lektionen hjälper eleven med det som gör ljuden svåra: eleven säger ljuden men får inte ihop ordet, glömmer de första ljuden när det blir en paus, och tar bort eller byter fel ljud."
   - "Syftet är att eleverna läser ord genom att sätta ihop ljuden och kan ändra ett ord ett ljud i taget. Du drar ut ljuden utan paus och skjuter ihop korten när ni läser, säger vilket ljud som går och vilket som kommer och gör varje ändring med bokstäverna."
   - "Gruppen tar Från ljud till ord efter Skriv ord tillsammans. Lektionen tränar det som ljudkollens uppgift 8 prövar, sätta ihop och byta. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Från ljud till ord hör till förmåga 8, Sätta ihop och byta, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Från ljud till ord går igenom raderna i Så blir lektionen svårare och tar två till fyra veckor. I raderna Sätt ihop tar ni nästa rad när dagens elever läser minst två av de tre orden i steg 4 utan att stanna, två pass i följd. I raderna där ni ändrar ett ljud gäller samma sak för de tre nya orden, och dagens elever säger också vilket ljud som ändrades."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. I Från ljud till ord går ni igenom raderna i Så blir lektionen svårare på två veckor med fem pass i veckan eller tre till fyra veckor med tre pass. I raderna Sätt ihop tar ni nästa rad när dagens elever läser minst två av de tre orden i steg 4 utan att stanna, två pass i följd. I raderna där ni ändrar ett ljud gäller samma sak för de tre nya orden, och dagens elever säger också vilket ljud som ändrades."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -62,7 +65,7 @@ tabeller:
       - - "Byt ett ljud"
         - "mat blir fat. mål blir mås."
         - "Byt det första ljudet, sedan det sista och till sist vokalen, och säg vilket ljud som går och vilket som kommer."
-    not: "Vilken rad gruppen börjar i beror på felen i ljudkollen: vår och röra hör till raden Sätt ihop, utdraget, lek till raden Ta bort ett ljud och sal till raden Byt ett ljud. I raderna Sätt ihop ändrar ni inget, och i steg 3 läser båda i paret ordet."
+    not: "Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen: vår och röra hör till raden Sätt ihop, utdraget, lek till raden Ta bort ett ljud och sal till raden Byt ett ljud. Har eleverna inte gjort uppgift 8 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev. I raderna Sätt ihop ändrar ni inget, och i steg 3 läser båda i paret ordet."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."

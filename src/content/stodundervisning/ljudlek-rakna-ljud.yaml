@@ -29,14 +29,17 @@ serie: "ljudlek-i-grupp"
 formaga: 6
 tranar: "dela upp ord i ljud, med en markör för varje ljud"
 vidare: "du har hört fler än hälften av eleverna själva säga ljuden och lägga rätt antal markörer i minst två av sina ord i steg 4 i raden Konsonantmöte sist"
-veckor: { min: 2, max: 4 }
+# Planen föreslår nästa lektion först efter min gånger tre pass. Med två pass i följd i varje rad tar raderna från den
+# första omkring tio pass. Min 3 ger nio pass, två veckor med fem pass i veckan, och min 4 hade hållit kvar en grupp med
+# fem pass i veckan en tredje vecka (sajtens återkoppling och logikläsaren 2026-10-27).
+veckor: { min: 3, max: 4 }
 inledning:
   - "I Räkna ljud delar eleverna upp ord i sina ljud och flyttar en markör in i en ruta för varje ljud. Lektionen hjälper eleven med det som gör ljuden svåra att räkna: barn hör stavelser före ljuden, och ljudet i mitten och en konsonant i ett konsonantmöte faller lätt bort."
   - "Syftet är att eleverna hör varje ljud i ordet, i ordning, och vet hur många de är, så att de kan skriva ordet och läsa det. Du visar hur du flyttar en markör för varje ljud medan du säger ljudet, låter eleverna ta över steg för steg och lyssnar på var och en."
   - "Räkna ljud är ingången för elever som kan ljuda. En grupp som har börjat i Rim eller Första ljudet tar lektionen efter Smaka på ljud. Lektionen tränar det som ljudkollens uppgift 6 prövar, dela upp. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, som också säger vilken ingång gruppen börjar i. Räkna ljud hör till förmåga 6, Dela upp, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Räkna ljud går igenom raderna i Så blir lektionen svårare och tar två till fyra veckor. Ta nästa rad när dagens elever lägger rätt antal markörer och säger ljuden i minst två av sina ord i steg 4, två pass i följd."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. I Räkna ljud går ni igenom raderna i Så blir lektionen svårare på två veckor med fem pass i veckan eller tre till fyra veckor med tre pass. Ta nästa rad när dagens elever lägger rätt antal markörer och säger ljuden i minst två av sina ord i steg 4, två pass i följd."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -60,7 +63,7 @@ tabeller:
       - - "Konsonantmöte sist"
         - "hund: /h/ /u/ /n/ /d/, fyra ljud"
         - "Vokalen är kort. Dra ut n:et: hu-⁠nnn-⁠d."
-    not: "Varje rad har ett ark vikkort under Materialet, med bilden på framsidan och ordet med en prick för varje ljud på baksidan. Vilken rad gruppen börjar i beror på vad eleverna missar i ljudkollen. Missar de få eller hål börjar ni i Tre ljud att dra ut, missar de näsa i Två stavelser och missar de häst i Konsonantmöte först, den första raden med konsonantmöten."
+    not: "Varje rad har ett ark vikkort under Materialet, med bilden på framsidan och ordet med en prick för varje ljud på baksidan. Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen. Missar de få eller hål börjar ni i Tre ljud att dra ut, missar de näsa i Två stavelser och missar de häst i Konsonantmöte först, den första raden med konsonantmöten. Har eleverna inte gjort uppgift 6 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -144,7 +147,7 @@ principer:
 passrutin:
   text: "Lektionen går i fyra steg, från att du visar till att var och en gör själv."
   steg:
-    - text: "Du visar tre ord, med två, tre och fyra ljud, och flyttar en magnet för varje ljud."
+    - text: "Du visar tre ord, med två, tre och fyra ljud, och flyttar en markör för varje ljud."
       fas: "Ordet på tavlan"
     - text: "Gruppen säger ljuden efter dig och sedan själv, med ett finger för varje."
       fas: "Fingrarna"
@@ -159,7 +162,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram arken för gruppens rad, bokstavskorten, ljudrutorna, markörerna, pennorna och speglarna. Rita fem rutor på tavlan, som ljudrutorna: en bildruta och fyra rutor för ljuden. Välj orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Ta fram arken för gruppens rad, bokstavskorten, ljudrutorna, markörerna, pennorna och speglarna. Rita fem rutor på tavlan, som ljudrutorna: en bildruta och fyra rutor för ljuden. Sätt fyra magneter som markörer under rutorna och en femte till kortet. Välj orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -168,7 +171,7 @@ tidsschema:
       vad: "Ta tre av arkets sex första kort, ett med två ljud, ett med tre och ett med fyra. Stå bredvid tavlan, vänd mot eleverna."
     - tid: "9–15 min"
       fas: "Fingrarna"
-      vad: "Ta de tre andra av arkets sex första kort. En elev i taget flyttar magneterna."
+      vad: "Ta de tre andra av arkets sex första kort. En elev i taget flyttar markörerna på tavlan."
     - tid: "15–20 min"
       fas: "Säg och lägg"
       vad: "Paret tar arkets sex första kort och turas om. Du går mellan paren."
@@ -186,14 +189,14 @@ steg:
   rader:
     - namn: "Ordet på tavlan"
       fraga: "Hur många ljud hör jag?"
-      gor: "Första passet med ett nytt ark säger ni bildernas namn i kör, och du säger vad nya ord betyder. Sätt kortet i bildrutan och säg ordet. Flytta en magnet in i en ruta för varje ljud medan du säger det. Räkna magneterna och vänd kortet. Kan gruppen bokstäverna, sätter du bokstavskorten i rutorna, under magneterna, och läser ordet."
+      gor: "Första passet med ett nytt ark säger ni bildernas namn i kör, och du säger vad nya ord betyder. Sätt kortet i bildrutan och säg ordet. Flytta en markör in i en ruta för varje ljud medan du säger det. Räkna markörerna och vänd kortet. Kan gruppen bokstäverna, sätter du upp bokstavskorten i rutorna med markörerna och läser ordet."
       fraser:
         - "Båt. Säg efter mig: båt."
-        - "Jag flyttar en magnet för varje ljud: /b/, ååå, /t/."
-        - "Tre magneter. Jag vänder kortet: tre prickar."
+        - "Jag flyttar en markör för varje ljud: /b/, ååå, /t/."
+        - "Tre markörer. Jag vänder kortet: tre prickar."
     - namn: "Fingrarna"
       fraga: "Hur många ljud hör vi?"
-      gor: "Säg ljuden, ett i taget, och låt gruppen säga efter. Sedan säger gruppen ljuden själv, med ett finger för varje, och en elev flyttar magneterna. Sist säger alla ljuden i passets ord en gång till."
+      gor: "Säg ljuden, ett i taget, och låt gruppen säga efter. Sedan säger gruppen ljuden själv, med ett finger för varje, och en elev flyttar markörerna på tavlan. Sist säger alla ljuden i passets ord en gång till."
       fraser:
         - "Säg ljuden efter mig: /t/, ååå, /g/."
         - "Nu själva. Myra. Ett finger för varje ljud."
@@ -237,8 +240,8 @@ exempel:
     text: "sex elever i förskoleklass och åk 1, vecka 3, tre pass i veckan. Gruppen gör Räkna ljud för tredje passet i följd, det första i raden Med klusil. Dagens ljud är /m/, och dagens elever är Mira och Omar."
   text:
     - "Ljudstarten. När gruppen delar upp mat säger Mira ”m-⁠t”. Läraren drar ut a:et, ”maaat”, och Mira hör /a/ i mitten."
-    - "Ordet på tavlan. Gruppen säger bildernas namn i kör. Läraren sätter kon i bildrutan och flyttar en magnet för varje ljud: ”/k/, ooo. Två ljud. Ko.” Sedan kommer lök och kaka, med tre och fyra ljud."
-    - "Fingrarna. Gruppen säger ljuden i tåg efter läraren, och sedan i öga och stol själv, med ett finger för varje. Noah flyttar magneterna."
+    - "Ordet på tavlan. Gruppen säger bildernas namn i kör. Läraren sätter kon i bildrutan och flyttar en markör för varje ljud: ”/k/, ooo. Två ljud. Ko.” Sedan kommer lök och kaka, med tre och fyra ljud."
+    - "Fingrarna. Gruppen säger ljuden i tåg efter läraren och sedan själv i öga och stol, med ett finger för varje. Noah flyttar markörerna på tavlan."
     - "Säg och lägg. Paren är Alva och Elin, Omar och Noah, Leo och Mira. Elin lägger stolen i Alvas bildruta och säger ”stol”. Alva säger sss-⁠t-⁠ooo-⁠lll och flyttar en markör för varje ljud."
     - "Mina ord. Paren delar arkets sex sista kort. Omar säger ”aba” om apan och känner med handen framför munnen att det blåser vid /p/. Mira säger ”bö-⁠å-⁠tö” om båten, och läraren säger b:et kort: ”b-⁠ååå-⁠t.”"
     - "Avslutet. Omar säger: ”Apa. Tre ljud.” Läraren säger: ”Ni drog ut orden och hörde ljudet i mitten.”"

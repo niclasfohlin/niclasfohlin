@@ -753,6 +753,19 @@ for (const f of former) {
 const utanTid = structuredClone(metod('upprepad-lasning'));
 for (const r of utanTid.uppfoljning.rader) delete r.tid;
 ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) => x.includes('har ingen tid')) && !s.metodplan(metod('upprepad-lasning')).fel.length, s.metodplan(utanTid).fel);
+// Planens val av version (K-576): en mening eller rad som börjar med "I <en annan version>" står inte med, versionens egen
+// står kvar och utan version står allt kvar; en veckosida som "Guideboken vecka 3" hör till sin version; länken bär
+// versionen; och spärren stoppar två versioner med samma namn.
+{
+  const alla = ['Skattjakten', 'Guideboken'];
+  const text = 'Alla läser. I Skattjakten bokar du lagen. I Guideboken bokar du den nya eleven.\nI Skattjakten: platserna.\nMed Guideboken kommer kartan.';
+  ska('en mening i en annan version står inte med', s.iVersionen(text, 'Guideboken', alla) === 'Alla läser. I Guideboken bokar du den nya eleven.\nMed Guideboken kommer kartan.' && s.iVersionen(text, undefined, alla) === text, s.iVersionen(text, 'Guideboken', alla));
+  ska('en veckosida hör till sin version', s.versionensVecka('Guideboken vecka 3', 'Guideboken', alla) === 'vecka 3' && s.versionensVecka('Skattjakten vecka 3', 'Guideboken', alla) === null && s.versionensVecka('Vecka 3', 'Guideboken', alla) === 'Vecka 3' && s.versionensVecka('Skattjakten vecka 2', undefined, alla) === 'vecka 2');
+  const v = { ...tom, start: '2026-11-02', dagar: [2, 4], langd: 6, version: 'guideboken' };
+  ska('länken bär versionen', s.kodaVal(v).includes('ver=guideboken') && s.lasVal(`#${s.kodaVal(v)}`)?.val.version === 'guideboken', s.kodaVal(v));
+  const vd = metod('skrivkurs-vardeskapande');
+  ska('Värdeskapandes val av projekt klarar spärren, och två versioner med samma namn stoppas', s.versionsvaletsFel(vd).length === 0 && s.versionsvaletsFel({ ...vd, plan: { ...vd.plan, versionsval: { ...vd.plan.versionsval, versioner: [vd.plan.versionsval.versioner[0], vd.plan.versionsval.versioner[0]] } } }).some((x) => x.includes('samma namn')), s.versionsvaletsFel(vd));
+}
 // Modulens version har sin rad i tabellen under Versionerna, så att en ny förmåga aldrig går ut utan att stå där (METODER.md
 // under Planera insatsen och PLANERA.md under Vad metoden behöver).
 ska(`versionen ${s.PLANERA.version} står i METODER.md under Versionerna`, readFileSync(join(rot, 'METODER.md'), 'utf8').includes(`\n| ${s.PLANERA.version} | `), s.PLANERA.version);
@@ -2330,6 +2343,8 @@ try {
       await b.tryck('#pl-veckan .pl-lektionen-efter .pl-andra-knappar [data-valj-lektion="4|5"]');
       await vanta(250);
       sant('Ljudlek: Nästa sätter nästa veckas lektion', (await lj('location.hash')).includes('k=3.0.4.5') && (await lj(`document.getElementById('pl-toast')?.textContent ?? ''`)).includes('Vecka 4 tar Smaka på ljud.'), await lj('location.hash'));
+      const fore5 = await lj(`[...document.querySelectorAll('#pl-veckan .pl-lektionen-efter .pl-not')].map((x) => x.textContent).join(' | ')`);
+      sant('Ljudlek: det lektionens text säger före första passet står där lektionen väljs, med dagen', /Före \S+dag \d+ \S+ Har eleverna inte gjort uppgift 5/.test(fore5), fore5);
       // Skattningen mot lektionens mål: gruppen 5 ger förslaget nästa lektion som den fyllda knappen.
       await lj(`document.getElementById('pl-folj').click()`);
       await vanta(250);
@@ -2339,7 +2354,7 @@ try {
       const forslag = await lj(`(() => ({ text: document.querySelector('#pl-veckan .pl-lektionen-efter')?.textContent ?? '', fylld: [...document.querySelectorAll('#pl-veckan .pl-lektionen-efter .pl-andra-knappar button')].filter((x) => !x.classList.contains('sekundar')).map((x) => x.textContent) }))()`);
       // K-578 (Niclas 2026-10-27: omkring två veckor i lektion 1–5, och elevernas progression styr): efter lektionens första
       // vecka föreslår planen samma lektion, också med snittet 5, och säger varför.
-      sant('Ljudlek: skattningen mot lektionens mål, och samma lektion efter lektionens första vecka', malet.includes(s.malText(lektion4.mal.overgripande).replace(/\.$/, '')) && forslag.text.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && /Ni har haft lektionen i (tre|fyra|fem) pass, och den tar minst sex, så planen föreslår samma lektion vecka 4\./.test(forslag.text) && forslag.fylld.join() === 'Upprepa Bokstavsgympa', { malet, forslag });
+      sant('Ljudlek: skattningen mot lektionens mål, och samma lektion efter lektionens första vecka', malet.includes(s.malText(lektion4.mal.overgripande).replace(/\.$/, '')) && forslag.text.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && /Ni har haft lektionen i (tre|fyra|fem) pass, och den tar minst sex( pass från lektionens första rad)?, så planen föreslår samma lektion vecka 4\./.test(forslag.text) && forslag.fylld.join() === 'Upprepa Bokstavsgympa', { malet, forslag });
       // En lång plans graf rullar i sin ruta och gör inte sidan bredare än telefonen (den kalla testaren 2026-10-27).
       await b.bredd(320);
       await vanta(150);

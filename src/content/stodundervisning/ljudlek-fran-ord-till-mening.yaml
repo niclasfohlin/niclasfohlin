@@ -38,7 +38,10 @@ serie: "ljudlek-i-grupp"
 formaga: 9
 tranar: "säga korta meningar, bygga och skriva dem med mellanrum, stor bokstav och punkt, och läsa dem"
 vidare: "du har sett fler än hälften av eleverna själva skriva en mening med alla ord, mellanrum, stor bokstav och punkt i steg 4 i raden Egen mening, och fler än hälften sedan har läst alla fyra orden i ljudkollens uppgift 9"
-veckor: { min: 2, max: 4 }
+# Planen föreslår nästa lektion först efter min gånger tre pass. Med två pass i följd i varje rad tar raderna från den
+# första omkring tio pass. Min 3 ger nio pass, två veckor med fem pass i veckan, och min 4 hade hållit kvar en grupp med
+# fem pass i veckan en tredje vecka (sajtens återkoppling och logikläsaren 2026-10-27).
+veckor: { min: 3, max: 4 }
 centrala:
   - id: skrivstrategier
     efterText: "tabell: Lyssna efter"
@@ -48,7 +51,7 @@ inledning:
   - "Gruppen tar Från ord till mening efter Från ljud till ord. Lektionen tränar det som ljudkollens uppgift 9 prövar, där eleven läser fyra påhittade ord. Ljudkollen står i Ljudlek i grupp, och Från ord till mening hör till förmåga 9, Läsa och skriva meningar, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Från ord till mening går igenom raderna i Så blir lektionen svårare och tar två till fyra veckor. Ta nästa rad när dagens elever själva skriver en mening med alla ord, mellanrum, stor bokstav och punkt, två pass i följd. När gruppen är klar med Från ord till mening gör du mätningen efter perioden, och uppföljningen i Ljudlek i grupp säger hur varje elev går vidare."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. I Från ord till mening går ni igenom raderna i Så blir lektionen svårare på två veckor med fem pass i veckan eller tre till fyra veckor med tre pass. Ta nästa rad när dagens elever själva skriver en mening med alla ord, mellanrum, stor bokstav och punkt, två pass i följd. När gruppen är klar med lektionen gör du mätningen efter perioden, och uppföljningen i Ljudlek i grupp säger hur varje elev går vidare."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"

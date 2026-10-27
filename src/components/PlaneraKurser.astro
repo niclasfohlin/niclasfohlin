@@ -4,12 +4,14 @@
 // leder till kursens plan, med stödet för valet ur metoden.
 import Base from '../layouts/Base.astro';
 import StodForValet from './StodForValet.astro';
-import { PLANERA } from '../lib/standard/index.js';
+import { PLANERA, stor } from '../lib/standard/index.js';
 import type { PlanData } from '../lib/insatsplan';
 
 interface Props { data: PlanData }
 const { data } = Astro.props;
 const val = data.versionsval!;
+// Kortet säger det kursen tränar, metodens egna ord fram till "genom att". Hela meningen står i kursen.
+const tranar = (t?: string) => (t ? stor(t.split(/,? genom att /)[0]) : '');
 ---
 
 <Base title={`Planera insatsen: ${data.titel}`} description={`Planera ${data.titel}: välj kursen, så öppnas kursens plan med passen, veckornas fokus och uppföljningen.`}>
@@ -22,7 +24,7 @@ const val = data.versionsval!;
     <fieldset class="pl-rad pl-kursval">
       <legend class="pl-etikett">{val.rubrik}</legend>
       <div class="sk-nivaknappar pl-nivaer">
-        {(val.kurser ?? []).map((k) => <a class="sk-niva pl-ingang pl-version" href={k.adress} data-goatcounter-click={`planera:${data.id}:kurs-${k.id}`} data-goatcounter-title={`${data.titel}: planen för ${k.namn}`}><span>{k.namn}</span>{k.tranar && <span class="pl-ingang-lektion">{k.tranar}</span>}</a>)}
+        {(val.kurser ?? []).map((k) => <a class="sk-niva pl-ingang pl-versionsknapp" href={k.adress} data-goatcounter-click={`planera:${data.id}:kurs-${k.id}`} data-goatcounter-title={`${data.titel}: planen för ${k.namn}`}><span>{k.namn}</span>{k.tranar && <span class="pl-ingang-lektion">{tranar(k.tranar)}</span>}</a>)}
       </div>
       <StodForValet id="pl-versionsstod" stod={val} metod={data} slag="versionsstod" vad={val.rubrik.toLocaleLowerCase('sv')} />
     </fieldset>

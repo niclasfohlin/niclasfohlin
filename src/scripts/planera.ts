@@ -23,7 +23,7 @@ import {
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
-import { LEKTIONENS_GRANS, lektionensForslag, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
+import { LEKTIONENS_GRANS, lektionensForslag, meningarna, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
 import { idagLokalt, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
@@ -1536,15 +1536,21 @@ function lektionenEfterVeckan(v: PlanVecka, oppna: Set<string>, ovrigt: string[]
   const skalet = !n || forKort ? '' : forslag === 'nasta' ? ` Det är över ${LEKTIONENS_GRANS}, så planen föreslår nästa lektion${l.vidare ? ' när regeln ovan är uppfylld' : ''}.` : ` Det är inte över ${LEKTIONENS_GRANS}, så planen föreslår samma lektion.`;
   const snittet = snitt !== null ? `<p>Snittet i veckans skattning mot lektionens mål är ${esc(decimal(snitt))} av 5.${skalet}</p>`
     : n && !forKort && aktiv.folj ? '<p class="pl-not">Skatta veckan mot lektionens mål, så föreslår planen samma lektion eller nästa.</p>' : '';
-  // Lektionens längd, och att planen föreslår samma lektion när gruppen har haft den färre veckor än lektionen tar.
-  const langd = l.period ? `<p class="pl-not">${esc(l.namn)}: ${esc(liten(l.period))}.${forKort && nasta ? ` ${passen ? `Ni har haft lektionen i ${talText(passen)} pass, och den tar minst ${talText(minPass)}` : 'Veckan hade inga pass'}, så planen föreslår samma lektion ${esc(rubrikVecka(nasta).toLocaleLowerCase('sv'))}.` : ''}</p>` : '';
+  // Lektionens längd, och att planen föreslår samma lektion när gruppen har haft den färre veckor än lektionen tar. Passen
+  // räknas från första raden, men ljudkollen sätter ofta gruppen i en senare rad, och då gäller regeln (den stängda
+  // Rimligheten 2026-10-27).
+  const langd = l.period ? `<p class="pl-not">${esc(l.namn)}: ${esc(liten(l.period))}.${forKort && nasta ? ` ${passen ? `Ni har haft lektionen i ${talText(passen)} pass, och den tar minst ${talText(minPass)}${l.rader ? ' pass från lektionens första rad' : ''}` : 'Veckan hade inga pass'}, så planen föreslår samma lektion ${esc(rubrikVecka(nasta).toLocaleLowerCase('sv'))}.${l.rader && l.vidare && passen ? ' Började gruppen i en senare rad, gäller regeln ovan.' : ''}` : ''}</p>` : '';
   if (!nasta) return `<section class="pl-block pl-lektionen-efter"><h3>Efter veckan</h3>${regel}${snittet}${ovrigt.join('')}</section>`;
   // Den sista lektionen före planens sista vecka: metodens mening om att perioden slutar där (riggens leverans 2026-10-27).
   const klar = !n && serien?.lektionsval?.klar ? `<p class="pl-not">${lankad(mening(serien.lektionsval.klar))}</p>` : '';
   const knappar = [lektionsknapp(nasta.nr, l, `Upprepa ${l.namn}`, forslag === 'upprepa'), ...(n ? [lektionsknapp(nasta.nr, n, `Nästa: ${n.namn}`, forslag === 'nasta')] : [])];
   // Byts lektionen nästa vecka, står den lektionens material här, så att det hinner skrivas ut (Rimligheten 2026-10-27).
   const ny = valdNasta && valdNasta !== l.nr ? lektionen(valdNasta) : undefined;
-  const valt = valdNasta ? `<p class="pl-not">${esc(rubrikVecka(nasta))} tar ${esc(lektionen(valdNasta)?.namn ?? '')}.${ny?.material?.text ? ` <a href="${esc(ny.material.adress)}" ${goat('materialet', 'nästa lektions material från planen')}>${esc(ny.material.rubrik)} i ${esc(ny.namn)}</a>: ${esc(mening(ny.material.text))}` : ''}</p>` : '';
+  // Det lektionens text säger ska göras före första passet, som ljudkollens uppgift, står också här med dagen, så att det
+  // hinner göras (den stängda Rimligheten 2026-10-27: uppgift 8 före Från ljud till ord syntes först i lektionens vecka).
+  const forsta = ny ? veckansPass(plan, nasta)[0] : undefined;
+  const foreForsta = forsta ? (ny?.rader?.text ?? []).flatMap((t) => meningarna(t)).filter((m) => /före första passet/i.test(m)) : [];
+  const valt = valdNasta ? `<p class="pl-not">${esc(rubrikVecka(nasta))} tar ${esc(lektionen(valdNasta)?.namn ?? '')}.${ny?.material?.text ? ` <a href="${esc(ny.material.adress)}" ${goat('materialet', 'nästa lektions material från planen')}>${esc(ny.material.rubrik)} i ${esc(ny.namn)}</a>: ${esc(mening(ny.material.text))}` : ''}</p>${foreForsta.length && forsta ? `<p class="pl-not"><span class="pl-etikett">Före ${esc(dagText(forsta.datum))}</span> ${foreForsta.map((m) => lankad(mening(m))).join(' ')}</p>` : ''}` : '';
   return `<section class="pl-block pl-lektionen-efter"><h3>Efter veckan</h3>${regel}${snittet}${langd}${klar}<p class="pl-fraga">Upprepa lektionen eller välj ny för ${esc(rubrikVecka(nasta).toLocaleLowerCase('sv'))}?</p><p class="pl-andra-knappar">${knappar.join('')}</p>${valt}${lektionslista(nasta.nr, valdNasta, forslag === 'nasta' && n ? n.nr : 0, oppna, 'Välj en annan lektion')}${ovrigt.join('')}</section>`;
 }
 // Lektionerna i texten till åtgärdsprogrammet: de valda, med passens datum, och om fler väljs sedan.

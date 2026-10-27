@@ -128,10 +128,10 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
                 <p class="pl-hjalp pl-varning" id="pl-borja-not" hidden>Du har bockat pass eller skattat, så planen börjar där den började. Gör en ny plan för att börja på ett annat steg.</p>
               </div>
             )}
-            <fieldset class="pl-rad">
+            {/* Har varje version i planens val sina veckor, väljs längden med versionen, och knappen säger veckorna (K-576). */}
+            <fieldset class="pl-rad" hidden={!!data.versionsval?.versioner.every((v) => v.veckor)}>
               <legend class="pl-etikett">Antal {period.enhet === 'pass' ? 'pass' : 'veckor'}</legend>
-              {/* Har varje version i planens val sina veckor, väljs längden med versionen (K-576). */}
-              <div class="sk-segment pl-langd" id="pl-langd" hidden={langder.length < 2 || !!data.versionsval?.versioner.every((v) => v.veckor)}>
+              <div class="sk-segment pl-langd" id="pl-langd" hidden={langder.length < 2}>
                 {langder.map((n) => <button type="button" class="sk-antal" data-langd={n} aria-pressed="false">{n}</button>)}
               </div>
               {data.period && <p class="pl-hjalp">Metoden: {liten(data.period)}.{period.enhet === 'veckor' && ' Lovveckor hoppas över, och pass på röda dagar faller bort.'}</p>}
@@ -163,7 +163,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
               <fieldset class="pl-rad">
                 <legend class="pl-etikett">{data.versionsval.rubrik}</legend>
                 <div class="sk-nivaknappar pl-nivaer" id="pl-versioner">
-                  {data.versionsval.versioner.map((v) => <button type="button" class="sk-niva pl-ingang pl-version" data-version={v.slug} aria-pressed="false" data-goatcounter-click={`planera:${data.id}:version-${v.slug}`} data-goatcounter-title={`${data.titel}: ${v.namn}`}><span>{v.namn}</span>{v.veckor && <span class="pl-ingang-lektion">{v.veckor} veckor</span>}</button>)}
+                  {data.versionsval.versioner.map((v) => <button type="button" class="sk-niva pl-ingang pl-versionsknapp" data-version={v.slug} aria-pressed="false" data-goatcounter-click={`planera:${data.id}:version-${v.slug}`} data-goatcounter-title={`${data.titel}: ${v.namn}`}><span>{v.namn}</span>{v.veckor && <span class="pl-ingang-lektion">{v.veckor} veckor</span>}</button>)}
                 </div>
                 <StodForValet id="pl-versionsstod" stod={data.versionsval} metod={data} slag="versionsstod" vad={data.versionsval.rubrik.toLocaleLowerCase('sv')} />
               </fieldset>
@@ -176,7 +176,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
                 <div class="pl-ingangar" id="pl-ingangar">
                   {data.lektionsval.ingangar.map((i) => <button type="button" class="sk-niva pl-ingang" data-ingang={i.lektion} aria-pressed="false" data-goatcounter-click={`planera:${data.id}:ingang-${i.lektion}`} data-goatcounter-title={`${data.titel}: ingången ${i.namn}`}><span>{i.namn}</span><span class="pl-ingang-lektion">Lektion {i.lektion} · {data.lektioner!.find((l) => l.nr === i.lektion)?.namn}</span></button>)}
                 </div>
-                <p class="pl-hjalp">Ingången är lektionen i vecka 1. Efter varje vecka väljer du om gruppen tar samma lektion igen eller nästa.</p>
+                <p class="pl-hjalp">Ingången är lektionen i vecka 1, och har gruppen redan kommit längre byter du lektion där. Efter varje vecka väljer du om gruppen tar samma lektion igen eller nästa.</p>
                 <StodForValet id="pl-ingangsstod" stod={data.lektionsval} metod={data} slag="ingangsstod" vad="ingången" />
               </fieldset>
             )}

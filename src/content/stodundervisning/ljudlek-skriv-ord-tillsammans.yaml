@@ -34,14 +34,17 @@ serie: "ljudlek-i-grupp"
 formaga: 7
 tranar: "bygga, läsa och skriva ord med bokstavskort, och byta en bokstav i taget"
 vidare: "du har sett fler än hälften av eleverna själva skriva ordet efter bytet och minst ett av de två andra orden rätt i steg 4 i raden Ord med två stavelser"
-veckor: { min: 2, max: 4 }
+# Planen föreslår nästa lektion först efter min gånger tre pass. Med två pass i följd i varje rad tar raderna från den
+# första omkring tio pass. Min 3 ger nio pass, två veckor med fem pass i veckan, och min 4 hade hållit kvar en grupp med
+# fem pass i veckan en tredje vecka (sajtens återkoppling och logikläsaren 2026-10-27).
+veckor: { min: 3, max: 4 }
 inledning:
   - "I Skriv ord tillsammans bygger eleverna ord med bokstavskort, läser och skriver dem, och byter en bokstav i taget. Lektionen hjälper eleven med det som gör ett ord svårt att skriva: vokalen faller bort, så att mer blir mr, och eleven läser det ord hen tänkte på i stället för det som står."
   - "Syftet är att eleverna ger varje ljud en bokstav, i rätt ordning, och läser tillbaka det de har skrivit, så att de kan skriva och läsa korta ord själva. Du visar en bokstav för varje ljud och läser tillbaka, säger var i ordet ni byter och tar bara bokstäver som gruppen har haft."
   - "Gruppen tar Skriv ord tillsammans efter Räkna ljud. Lektionen tränar det som ljudkollens uppgift 7 prövar, skriva ord. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Skriv ord tillsammans hör till förmåga 7, Skriva ord, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Skriv ord tillsammans går igenom raderna i Så blir lektionen svårare och tar två till fyra veckor. Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. I Skriv ord tillsammans går ni igenom raderna i Så blir lektionen svårare på två veckor med fem pass i veckan eller tre till fyra veckor med tre pass. Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
