@@ -1401,37 +1401,44 @@ const sakensKnappar = (el) => {
 const knappfel = [];
 const bankfilerna = JSON.parse(readFileSync(join(dist, 'stodundervisning', 'bankfiler.json'), 'utf8'));
 let provade = 0;
-for (const m of synliga) {
-  const sida = join(dist, 'stodundervisning', m.id, 'index.html');
-  const plan = readFileSync(join(dist, 'stodundervisning', m.id, 'planera', 'index.html'), 'utf8').match(/<script type="application\/json" id="pl-data">([\s\S]*?)<\/script>/)?.[1];
-  if (!existsSync(sida) || !plan) continue;
+// En sida och sakerna som planen leder till på den: metodens egna, och i en serie varje lektions (Niclas 2026-10-27: "Men
+// tror inte alla saker har en knapp att ladda ner i metoden än?"; förut prövades bara seriens egna saker).
+function provaSidan(metodId, saker, kursveckor = {}) {
+  const sida = join(dist, 'stodundervisning', metodId, 'index.html');
+  if (!existsSync(sida)) return;
   const html = readFileSync(sida, 'utf8');
   const { id } = trad(html);
-  const d = JSON.parse(plan);
   // Metodens avsnitt och tabeller (slag avsnitt och tabell) är text som skrivs ut med metoden, och prövas inte här.
-  const mal = [...(d.saker ?? []).filter((x) => !x.slag).flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]), ...Object.values(d.kursveckor ?? {})];
+  const mal = [...(saker ?? []).filter((x) => !x.slag).flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]), ...Object.values(kursveckor)];
   const namnFor = new Map();
   const nyttNamn = (adress, namn) => { const a = adress.split('#')[1]; if (a) namnFor.set(a, [...(namnFor.get(a) ?? []), namn]); };
-  for (const x of d.saker ?? []) for (const a of [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]) nyttNamn(a, x.namn);
+  for (const x of saker ?? []) for (const a of [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]) nyttNamn(a, x.namn);
   // En sak med en adress per vecka, som veckans ram, leder till veckans egen sak, och knappen där heter efter veckan.
-  for (const x of d.saker ?? []) for (const [v, a] of Object.entries(x.veckor ?? {})) nyttNamn(a, `Vecka ${v}`);
-  for (const [v, a] of Object.entries(d.kursveckor ?? {})) nyttNamn(a, `Vecka ${v}`);
-  const sakfilerna = new Set(bankfilerna.filter((x) => x.metod === m.id && x.slag === 'sak').map((x) => `/stodundervisning/${x.namn}.pdf`));
-  for (const ankare of new Set(mal.filter((a) => a.startsWith(`/stodundervisning/${m.id}#`)).map((a) => a.split('#')[1]))) {
+  for (const x of saker ?? []) for (const [v, a] of Object.entries(x.veckor ?? {})) nyttNamn(a, `Vecka ${v}`);
+  for (const [v, a] of Object.entries(kursveckor)) nyttNamn(a, `Vecka ${v}`);
+  const sakfilerna = new Set(bankfilerna.filter((x) => x.metod === metodId && x.slag === 'sak').map((x) => `/stodundervisning/${x.namn}.pdf`));
+  for (const ankare of new Set(mal.filter((a) => a.startsWith(`/stodundervisning/${metodId}#`)).map((a) => a.split('#')[1]))) {
     if (ankare === 'ramar' || ankare === 'mallar') continue;
     const el = id.get(ankare);
     provade += 1;
     const knappar = el ? sakensKnappar(el) : [];
-    if (el && !knappar.length) knappfel.push(`${m.id}#${ankare}: planen leder hit, men saken har ingen knapp under sig som skriver ut den (src/lib/sakfiler.ts, Sakknapp.astro)`);
+    if (el && !knappar.length) knappfel.push(`${metodId}#${ankare}: planen leder hit, men saken har ingen knapp under sig som skriver ut den (src/lib/sakfiler.ts, Sakknapp.astro)`);
     const egna = knappar.filter((k) => sakfilerna.has(k.knapp));
     // Namnen jämförs med vanliga mellanslag och utan ordfogar och mjuka bindestreck, som knappens text kan ha.
     const platt = (s) => s.replace(/[\u00ad\u2060]/g, '').replace(/[\s\u00a0]+/g, ' ').trim().toLowerCase();
     const namnen = (namnFor.get(ankare) ?? []).map(platt);
-    if (egna.length && namnen.length && !egna.some((k) => namnen.some((n) => platt(textI(k)).includes(n)))) knappfel.push(`${m.id}#${ankare}: knappen under ${namnFor.get(ankare)[0]} skriver ut ${egna.map((k) => `"${textI(k).replace(/\s+/g, ' ').trim()}"`).join(' och ')}, inte saken`);
+    if (egna.length && namnen.length && !egna.some((k) => namnen.some((n) => platt(textI(k)).includes(n)))) knappfel.push(`${metodId}#${ankare}: knappen under ${namnFor.get(ankare)[0]} skriver ut ${egna.map((k) => `"${textI(k).replace(/\s+/g, ' ').trim()}"`).join(' och ')}, inte saken`);
   }
-  for (const f of bankfilerna.filter((x) => x.metod === m.id && x.slag === 'sak')) {
-    if (!html.includes(`href="/stodundervisning/${f.namn}.pdf`)) knappfel.push(`${m.id}: filen ${f.namn} (${f.rubrik}) har ingen knapp på metodens sida (Sakknapp.astro i Metod.astro)`);
+  for (const f of bankfilerna.filter((x) => x.metod === metodId && x.slag === 'sak')) {
+    if (!html.includes(`href="/stodundervisning/${f.namn}.pdf`)) knappfel.push(`${metodId}: filen ${f.namn} (${f.rubrik}) har ingen knapp på metodens sida (Sakknapp.astro i Metod.astro)`);
   }
+}
+for (const m of synliga) {
+  const plan = readFileSync(join(dist, 'stodundervisning', m.id, 'planera', 'index.html'), 'utf8').match(/<script type="application\/json" id="pl-data">([\s\S]*?)<\/script>/)?.[1];
+  if (!plan) continue;
+  const d = JSON.parse(plan);
+  provaSidan(m.id, d.saker, d.kursveckor);
+  for (const l of d.lektioner ?? []) provaSidan(l.id, l.saker);
 }
 if (knappfel.length) { console.error(`planprov: ${knappfel.length} fel i knapparna under det planen leder till:\n  ${knappfel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: de ${provade} saker som planen leder till på metodernas sidor har en knapp under sig som skriver ut just den, och varje saks fil har sin knapp.`);
