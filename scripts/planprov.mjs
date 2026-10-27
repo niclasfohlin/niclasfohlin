@@ -763,6 +763,15 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   ska('en veckosida hör till sin version', s.versionensVecka('Guideboken vecka 3', 'Guideboken', alla) === 'vecka 3' && s.versionensVecka('Skattjakten vecka 3', 'Guideboken', alla) === null && s.versionensVecka('Vecka 3', 'Guideboken', alla) === 'Vecka 3' && s.versionensVecka('Skattjakten vecka 2', undefined, alla) === 'vecka 2');
   const v = { ...tom, start: '2026-11-02', dagar: [2, 4], langd: 6, version: 'guideboken' };
   ska('länken bär versionen', s.kodaVal(v).includes('ver=guideboken') && s.lasVal(`#${s.kodaVal(v)}`)?.val.version === 'guideboken', s.kodaVal(v));
+  // Sagobokens fält "Pass 9 i sex steg" står i stället för Pass 9 i sex steg och gäller inte fyra steg, och Berättelseramens
+  // kolumn "Det som händer i Hunden som försvann" står bara i den ramen, utan ramens namn.
+  ska('ett fält i en version', JSON.stringify(s.faltetIVersionen('Pass 9 i sex steg', 'Sex steg')) === '{"rubrik":"Pass 9","egen":true}' && s.faltetIVersionen('Pass 9 i sex steg', 'Fyra steg') === null && JSON.stringify(s.faltetIVersionen('Pass 9', 'Fyra steg')) === '{"rubrik":"Pass 9","egen":false}');
+  const ramar = ['Den magiska skogen', 'Hunden som försvann', 'Egen ram'];
+  const celler = [{ kolumn: 'Det som händer i Den magiska skogen', text: 'A' }, { kolumn: 'Det som händer i Hunden som försvann', text: 'B' }, { kolumn: 'Skrivfokus', text: 'C' }];
+  ska('en kolumn i en version', JSON.stringify(s.iVersionensKolumner(celler, 'Hunden som försvann', ramar)) === JSON.stringify([{ kolumn: 'Det som händer', text: 'B' }, { kolumn: 'Skrivfokus', text: 'C' }]) && s.iVersionensKolumner(celler, 'Egen ram', ramar).map((c) => c.text).join() === 'C' && s.iVersionensKolumner(celler, undefined, []).length === 3, s.iVersionensKolumner(celler, 'Hunden som försvann', ramar));
+  // Förvalet i veckor gäller inte en period i pass: Berättelseramens 15 pass blev 8 (Rimligheten 2026-10-27).
+  const br = metod('skrivkurs-berattelseram');
+  ska('ett förval i veckor stoppas i en period i pass, och planen räknar metodens pass', s.veckovaletsFel({ ...br, plan: { ...br.plan, veckoval: { ...br.plan.veckoval, forval: 8 } } }).some((x) => x.includes('räknas i pass')) && s.metodplan({ ...br, plan: { ...br.plan, veckoval: { ...br.plan.veckoval, forval: 8 } } }).plan?.forvaldaVeckor === undefined);
   const vd = metod('skrivkurs-vardeskapande');
   ska('Värdeskapandes val av projekt klarar spärren, och två versioner med samma namn stoppas', s.versionsvaletsFel(vd).length === 0 && s.versionsvaletsFel({ ...vd, plan: { ...vd.plan, versionsval: { ...vd.plan.versionsval, versioner: [vd.plan.versionsval.versioner[0], vd.plan.versionsval.versioner[0]] } } }).some((x) => x.includes('samma namn')), s.versionsvaletsFel(vd));
 }
@@ -2642,7 +2651,7 @@ try {
   await rd.oppna(`${PLAN}#s=2026-12-21&d=135&l=6&v=1`);
   await vanta(150);
   const rodText = (await rd.text('#pl-veckan')) ?? '';
-  sant('en röd dag säger vilket av veckans pass som faller bort', /Passet fredag 25 december faller bort, [^.]*, och med det veckans tredje pass[^.]*\. Veckans pass har var sitt innehåll/.test(rodText), rodText.slice(0, 1500));
+  sant('en röd dag säger vilket av veckans pass som faller bort', /Passet fredag 25 december faller bort, [^.]*, och med det veckans tredje pass[^.]*\. Veckans pass har var sitt innehåll, och planen lägger inget pass i stället/.test(rodText), rodText.slice(0, 1500));
   sant('en röd dag: inga fel', !rd.undantag.length && !(await rd.kor('window.__fel.length')), rd.undantag);
   rd.stang();
 

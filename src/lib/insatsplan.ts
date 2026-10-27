@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { arDelensTid, faltetsDelar, faltetsSkillnader, iVersionen, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { arDelensTid, faltetIVersionen, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
@@ -313,12 +313,17 @@ function veckornasPass(d: Metod['data'], id: string, version?: string): Record<s
     const rad = t?.delar.find((y) => y.fas.toLocaleLowerCase('sv') === x.fas.toLocaleLowerCase('sv'));
     return rad ? { ...x, vad: rad.vad } : x;
   };
+  const versionensEgna = new Set<string>();
   for (const { del, di, led } of versionensDelar(d, ramar[ri], version)) {
     const vecka = led.match(/^vecka (\d+)$/i)?.[1];
     for (const f of del.falt ?? []) {
-      const dag = vecka ? f.rubrik.match(/^dag (\d+)$/i)?.[1] : undefined;
-      const nr = dag ? `${vecka}.${dag}` : f.rubrik.match(/^pass (\d+)$/i)?.[1];
-      if (!nr) continue;
+      // Ett fält som "Pass 9 i sex steg" är passet i den versionen och står i stället för "Pass 9" (K-576, Sagoboken).
+      const iv = faltetIVersionen(f.rubrik, version);
+      if (!iv) continue;
+      const dag = vecka ? iv.rubrik.match(/^dag (\d+)$/i)?.[1] : undefined;
+      const nr = dag ? `${vecka}.${dag}` : iv.rubrik.match(/^pass (\d+)$/i)?.[1];
+      if (!nr || (!iv.egen && versionensEgna.has(nr))) continue;
+      if (iv.egen) versionensEgna.add(nr);
       const text = iVersionen(f.text, version, alla);
       const delar = faltetsDelar(text);
       const bas = { namn: `${forstaLed(del.rubrik)}, ${f.rubrik}`, adress: `/stodundervisning/${id}#${delAnkare[ri][di]}`, sida: true };
@@ -429,6 +434,10 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
   // metoden (Rimligheten 2026-10-27: Guidebokens plan hade Skattjaktens replik, mentortext och period).
   const iV = (t: string | undefined) => iVersionen(t, version, alla);
   const iVLista = (l?: string[]) => { const ut = (l ?? []).map(iV).filter(Boolean); return ut.length ? ut : undefined; };
+  // En rad i uppföljningen vars När börjar med en annan version, som "I sex steg: pass 26", står inte med (K-576, Sagokollen).
+  const uppfRader = (d.uppfoljning?.rader ?? []).filter((r) => iV(r.nar));
+  // I sin egen version heter raden utan märket: "I fyra steg: pass 25 och 27" blir "Pass 25 och 27".
+  const utanMarket = (t: string) => (version ? stor(t.replace(new RegExp(`^(?:i|med)\\s+${skyddaRegex(version)}\\s*:\\s*`, 'iu'), '')) : t);
   // En kurs med veckor har veckans titel i metoden, och den är veckans rubrik i planen när progressionen inte har en egen.
   const kurs = kursensVeckor(d, m.id, version);
   const bank = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? await planensBank(m) : undefined;
@@ -474,7 +483,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     period: d.period,
     ...(d.progression ? { progression: { enhet: d.progression.enhet, rubrik: d.progression.rubrik, rader: d.progression.rader.map((r) => ({ ...r, kort: veckansKort(r, kurs[r.vecka]?.titel) })) } } : {}),
     // Versionens tid på en rad i uppföljningen, efter radens När (K-576).
-    uppfoljning: { rader: (d.uppfoljning?.rader ?? []).map((r) => ({ ...r, vad: iV(r.vad) })).map((r) => (versionen?.tider?.[r.nar] ? { ...r, tid: versionen.tider[r.nar] } : r)).map((r) => (r.tabell ? { ...r, passet: passetsTabell(d, m.id, r.tabell) } : r)) },
+    uppfoljning: { rader: uppfRader.map((r) => ({ ...r, vad: iV(r.vad) })).map((r) => (versionen?.tider?.[r.nar] ? { ...r, tid: versionen.tider[r.nar] } : r)).map((r) => (r.tabell ? { ...r, passet: passetsTabell(d, m.id, r.tabell) } : r)).map((r) => ({ ...r, nar: utanMarket(r.nar) })) },
     checklista: d.checklista?.punkter ?? [],
     ...(d.checklista ? { checklistaRubrik: d.checklista.rubrik } : {}),
     forstaChecklista,
@@ -487,7 +496,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
     // En rad vars text bara gäller en annan version står inte med (K-576).
-    ...(d.plan?.passen ? { passen: d.plan.passen.filter((p) => !p.text || iV(p.text) || p.ur || p.tabell || (p.del && p.istallet)).map((p) => ({ nar: p.nar, ...(p.text && iV(p.text) ? { text: iV(p.text) } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(rollensRad(d, p.ur) ?? [], p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn) } : {}) })) } : {}),
+    ...(d.plan?.passen ? { passen: d.plan.passen.filter((p) => !p.text || iV(p.text) || p.ur || p.tabell || (p.del && p.istallet)).map((p) => ({ nar: p.nar, ...(p.text && iV(p.text) ? { text: iV(p.text) } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(iVersionensKolumner(rollensRad(d, p.ur) ?? [], version, alla).map((c) => ({ ...c, text: iV(c.text) })).filter((c) => c.text), p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn) } : {}) })) } : {}),
     ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: iV(d.gruppen.text), adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),
@@ -499,7 +508,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(d.plan?.fore || versionen?.fore ? { fore: [...(d.plan?.fore ?? []).map(iV).filter(Boolean), ...(versionen?.fore ?? [])] } : {}),
     ...(iVLista(d.plan?.justera) ? { justera: iVLista(d.plan?.justera) } : {}),
     ...(iVLista(d.plan?.utvardering) ? { utvardering: iVLista(d.plan?.utvardering) } : {}),
-    ...(d.plan?.utvarderasEfter && (d.uppfoljning?.rader ?? []).some((r) => r.nar === d.plan!.utvarderasEfter) ? { utvarderasEfter: d.uppfoljning!.rader.findIndex((r) => r.nar === d.plan!.utvarderasEfter) } : {}),
+    ...(d.plan?.utvarderasEfter && uppfRader.some((r) => r.nar === d.plan!.utvarderasEfter) ? { utvarderasEfter: uppfRader.findIndex((r) => r.nar === d.plan!.utvarderasEfter) } : {}),
     ...(d.plan?.upprepa ? { upprepa: d.plan.upprepa } : {}),
     ...(d.plan?.utanUpprepa ? { utanUpprepa: true as const } : {}),
     ...(d.plan?.stege ? { stege: true } : {}),
@@ -626,12 +635,14 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     const takt = metodplan(m.data).plan?.takt;
     if (!ram?.lektioner) fel.push(`plan.veckansPass säger ramen "${m.data.plan.veckansPass}", som metoden inte har som en ram med en del per vecka (lektioner).`);
     else {
-      const falten = ram.delar.flatMap((del) => (del.falt ?? []).filter((f) => /^(?:pass|dag) \d+$/i.test(f.rubrik)).map((f) => ({ del: del.rubrik, f })));
+      const falten = ram.delar.flatMap((del) => (del.falt ?? []).filter((f) => /^(?:pass|dag) \d+(?: i .+)?$/i.test(f.rubrik)).map((f) => ({ del: del.rubrik, f })));
       if (!falten.length) fel.push(`plan.veckansPass: ramen "${ram.rubrik}" har inga fält som heter Pass N eller Dag N.`);
       // Ett fält utan minuter säger bara det som skiljer från passets tabell, som Sagobokens "Där vi slutade: …", och planen
       // visar då passet (K-585). Ett fält med minuter ska gå att läsa som delar.
       for (const { del, f } of falten) if (/\d\s*[–-]\u2060?\s*\d+\s*min/.test(f.text) && !faltetsDelar(f.text)) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen rad som "N–M min. Delens namn: …".`);
       for (const { del, f } of falten) if (!faltetsDelar(f.text) && !faltetsSkillnader(f.text, [])) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen text.`);
+      // Ett fält som "Pass 9 i sex steg" gäller en version i planens val (K-576).
+      for (const { del, f } of falten) { const x = f.rubrik.match(/ i (.+)$/i)?.[1]; if (x && !versionernasNamn(m.data).some((n) => n.toLocaleLowerCase('sv') === x.toLocaleLowerCase('sv'))) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, gäller "${x}", som inte är en version i plan.versionsval.`); }
     }
     // Kursens pass räknas i veckor med ett fast antal pass i veckan, eller som planens i en period i pass (K-585). Fält som
     // "Dag 1" är veckans pass efter platsen i veckan och räknar inga kursens pass (Värdeskapande, K-576).
@@ -649,7 +660,7 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   const allaVersioner = versionernasNamn(m.data);
   const rader = m.data.uppfoljning?.rader ?? [];
   for (const v of versioner) {
-    for (const r of rader) if (!iVersionen(r.vad, v.namn, allaVersioner)) fel.push(`Uppföljningens rad "${r.nar}" har ingen text i ${v.namn}. Skriv en mening för varje version, eller ge versionen en egen tid i plan.versionsval.`);
+    for (const r of rader) if (iVersionen(r.nar, v.namn, allaVersioner) && !iVersionen(r.vad, v.namn, allaVersioner)) fel.push(`Uppföljningens rad "${r.nar}" har ingen text i ${v.namn}. Skriv en mening för varje version, eller ge versionen en egen tid i plan.versionsval.`);
     for (const n of Object.keys(v.tider ?? {})) if (!rader.some((r) => r.nar === n)) fel.push(`plan.versionsval: ${v.namn} har en tid för "${n}", som uppföljningen inte har.`);
     if (v.tider) for (const f of metodplan({ ...m.data, uppfoljning: { ...m.data.uppfoljning!, rader: rader.map((r) => (v.tider![r.nar] ? { ...r, tid: v.tider![r.nar] } : r)) } }).fel) fel.push(`plan.versionsval, ${v.namn}: ${f}`);
     const sista = Math.max(0, ...Object.keys(kursensVeckor(m.data, m.id, v.namn)).map(Number));

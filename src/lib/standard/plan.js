@@ -293,7 +293,7 @@ export function metodplan(d) {
       passen: /** @type {{ rad: number, nar: PassensNar | VariantensNar }[]} */ (passen),
       skattningar: egna.skattningar,
       // Planens förval i veckor när längden beror på något metoden säger (plan.veckoval).
-      ...(typeof d.plan?.veckoval?.forval === 'number' ? { forvaldaVeckor: d.plan.veckoval.forval } : typeof d.plan?.versionsval?.versioner?.[0]?.veckor === 'number' ? { forvaldaVeckor: d.plan.versionsval.versioner[0].veckor } : {}),
+      ...(typeof d.plan?.veckoval?.forval === 'number' && periodensLangd(d.period ?? '')?.enhet !== 'pass' ? { forvaldaVeckor: d.plan.veckoval.forval } : typeof d.plan?.versionsval?.versioner?.[0]?.veckor === 'number' ? { forvaldaVeckor: d.plan.versionsval.versioner[0].veckor } : {}),
       // Skolveckorna före första passet som det metoden gör före start behöver, när det är fler än en (plan.foreVeckor).
       ...(typeof d.plan?.foreVeckor === 'number' ? { foreVeckor: d.plan.foreVeckor } : {}),
       // Progressionens sista rad tar planens sista vecka när perioden slutar före den (plan.sistaRaden).
@@ -570,6 +570,38 @@ export function versionensVecka(led, namn, alla) {
   return egen.toLocaleLowerCase('sv') === (namn ?? alla[0] ?? '').toLocaleLowerCase('sv') ? t.slice(egen.length).trim() : null;
 }
 
+/**
+ * Ett fält på veckans sida i en version i planens val (sajtens K-576): "Pass 9 i sex steg" är passet Pass 9 i versionen Sex
+ * steg, står i stället för fältet Pass 9 där och gäller inte de andra versionerna (Sagoboken). Ett fält utan version är sig
+ * självt.
+ * @param {string} rubrik
+ * @param {string | undefined} namn versionens namn
+ * @returns {{ rubrik: string, egen: boolean } | null} null när fältet gäller en annan version
+ */
+export function faltetIVersionen(rubrik, namn) {
+  const m = String(rubrik).match(/^(pass|dag) (\d+) i (.+)$/i);
+  if (!m) return { rubrik, egen: false };
+  return m[3].toLocaleLowerCase('sv') === (namn ?? '').toLocaleLowerCase('sv') ? { rubrik: `${m[1]} ${m[2]}`, egen: true } : null;
+}
+
+/**
+ * Cellerna i en tabellrad i en version i planens val (sajtens K-576): en kolumn som heter "… i <version>", som
+ * Berättelseramens "Det som händer i Hunden som försvann", står bara i den versionen och heter där utan versionens namn,
+ * "Det som händer". Utan versioner står allt kvar.
+ * @template {{ kolumn: string, text: string }} T
+ * @param {T[]} celler
+ * @param {string | undefined} namn versionens namn
+ * @param {string[]} alla alla versionernas namn
+ * @returns {T[]}
+ */
+export function iVersionensKolumner(celler, namn, alla) {
+  return celler.flatMap((c) => {
+    const v = alla.find((n) => c.kolumn.toLocaleLowerCase('sv').endsWith(` i ${n.toLocaleLowerCase('sv')}`));
+    if (!v) return [c];
+    return v.toLocaleLowerCase('sv') === (namn ?? alla[0] ?? '').toLocaleLowerCase('sv') ? [{ ...c, kolumn: c.kolumn.slice(0, -(v.length + 3)) }] : [];
+  });
+}
+
 export function nivavaletsFel(d, harNivaer = (d.nivaer ?? []).length >= 2) {
   return stodetsFel('nivaval', d.plan?.nivaval, harNivaer ? 'Metoden har nivåer, och planen har då ett stöd för nivåvalet i plan.nivaval: ett citat ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, och i mer metodens tabell eller avsnitt med resten (STIL.md under Stöd för ett val).' : '');
 }
@@ -675,7 +707,10 @@ export function veckovaletsFel(d) {
   // Har varje version i planens val sina veckor, är det valet som avgör längden (K-576).
   const versionernasVeckor = (d.plan?.versionsval?.versioner ?? []).length > 0 && d.plan.versionsval.versioner.every((x) => typeof x.veckor === 'number');
   const spann = !!d.plan && !!p && p.enhet === 'veckor' && ((p.max !== undefined && p.min < p.max) || p.mer) && !versionernasVeckor;
-  return [...stodetsFel('veckoval', v, spann ? `Metodens period, "${d.period}", är ett spann, och planen har då ett stöd för valet av antalet veckor i plan.veckoval: ett citat ur metoden om vad som avgör längden, och förvalet i forval.` : ''), ...(utanfor ? [`plan.veckoval.forval är ${v.forval} veckor, utanför metodens period, "${d.period}".`] : [])];
+  // Förvalet är veckor, så en metod vars period räknas i pass har inget förval i veckor: planen läste annars 8 som 8 pass
+  // (Rimligheten 2026-10-27, Berättelseramen med 15 pass).
+  const iPass = v?.forval !== undefined && p?.enhet === 'pass' ? [`plan.veckoval.forval är veckor, men metodens period, "${d.period}", räknas i pass. Ta bort forval, så är planens förval metodens pass.`] : [];
+  return [...iPass, ...stodetsFel('veckoval', v, spann ? `Metodens period, "${d.period}", är ett spann, och planen har då ett stöd för valet av antalet veckor i plan.veckoval: ett citat ur metoden om vad som avgör längden, och förvalet i forval.` : ''), ...(utanfor ? [`plan.veckoval.forval är ${v.forval} veckor, utanför metodens period, "${d.period}".`] : [])];
 }
 /**
  * Metodens regel för beslutet efter insatsen (passgenomgången 2026-10-26: ingen av de fjorton metoderna sa vad läraren

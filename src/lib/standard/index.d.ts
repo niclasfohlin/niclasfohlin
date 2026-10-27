@@ -158,6 +158,8 @@ export declare const EFTER_PASSET: string;
 export declare function versionsvaletsFel(d: unknown): string[];
 export declare function iVersionen(text: string | undefined, namn: string | undefined, alla: string[]): string;
 export declare function versionensVecka(led: string, namn: string | undefined, alla: string[]): string | null;
+export declare function faltetIVersionen(rubrik: string, namn: string | undefined): { rubrik: string; egen: boolean } | null;
+export declare function iVersionensKolumner<T extends { kolumn: string; text: string }>(celler: T[], namn: string | undefined, alla: string[]): T[];
 export declare const passetsDelnamn: (d: { tidsschema?: unknown; tabeller?: unknown; plan?: unknown }) => string[];
 /** Veckans rad i en tabell med en rad per vecka och en kolumn per pass: cellerna för varje vecka, eller null. */
 export declare function rollensVeckor(d: MetodensTexter, ur: { tabell: string; rad: string; kolumner?: string[] }): Record<string, { kolumn: string; text: string }[]> | null;
