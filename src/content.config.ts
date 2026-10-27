@@ -461,7 +461,9 @@ const metodensFalt = z.strictObject({
         istallet: z.literal(true).optional(),
         // kolumn: passets kolumn i tabellen, när tabellen har en kolumn per pass, som Ordverkstads Pass 2 och 3 (K-575).
         kolumn: text.optional(),
-      }).refine((p) => !!(p.text || p.ur || p.tabell), { message: 'En rad i plan.passen har en text, ett citat ur metoden, en rad ur metodens tabell (ur) eller passets tabell i delar (tabell).' })).min(1).optional(),
+      // En rad med del Efter passet och istallet kan stå utan text: den tar bort passrutinens rad Efter passet i passet, som
+      // Ordverkstads tidning, där veckans fält har sin egen (K-585).
+      }).refine((p) => !!(p.text || p.ur || p.tabell) || (p.del === 'Efter passet' && p.istallet), { message: 'En rad i plan.passen har en text, ett citat ur metoden, en rad ur metodens tabell (ur) eller passets tabell i delar (tabell), eller är en rad med del Efter passet och istallet utan text.' })).min(1).optional(),
       utan: z.array(text).min(1).optional(),
       fore: z.array(text).min(1).max(4).optional(),
       // foreVeckor: skolveckorna före första passet som det metoden gör före start behöver, när en vecka inte räcker, och
@@ -471,6 +473,10 @@ const metodensFalt = z.strictObject({
       // Metodens regel för beslutet efter insatsen, ordagrant, som står vid utvärderingen (Rimligheten 2026-10-26:
       // Kompissamtals beslut efter samtal 3 stod inte där läraren beslutar).
       utvardering: z.array(text).min(1).max(4).optional(),
+      // utvarderasEfter: uppföljningens rad (När) som beslutet efter insatsen väntar på, när metoden beslutar efter en mätning
+      // några veckor efter kursen, som texttypskursernas nya text efter 4–6 veckor (K-585, K-586). Utvärderingen öppnar då
+      // den veckan, och till dess säger planen när den görs.
+      utvarderasEfter: text.optional(),
       upprepa: text.optional(),
       stege: z.boolean().optional(),
       // vantar: skälet till att planen inte visas än, fast metoden har fälten, tills planen har klarat Rimligheten (K-553).

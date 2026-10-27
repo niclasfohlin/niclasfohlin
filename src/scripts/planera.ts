@@ -778,8 +778,9 @@ const efterUppfoljning = () => plan.uppfoljning.filter((u) => u.typ === 'efter')
 // Metodens mätning direkt efter insatsen, veckan efter sista passet, som utvärderingen jämför med. En uppföljning några
 // veckor senare, som Kompissamtals fyra veckor efter, väntar utvärderingen inte på (Rimligheten 2026-10-26: utvärderingen
 // stod före kartläggningen efter i tio metoder).
+// Med plan.utvarderasEfter väntar utvärderingen på den raden, som texttypskursernas nya text efter 4–6 veckor (K-586).
 const matningenEfter = () => {
-  const rad = mp.uppfoljning.find((u) => u.tid.typ === 'efter' && !u.tid.veckor)?.rad;
+  const rad = data.utvarderasEfter ?? mp.uppfoljning.find((u) => u.tid.typ === 'efter' && !u.tid.veckor)?.rad;
   return rad === undefined ? undefined : plan.uppfoljning.find((u) => u.rad === rad)?.tillfallen[0];
 };
 const efterVeckan = (datum: string) => `metodens uppföljning efter insatsen, ${kalendervecka(isoVecka(datum).vecka)}`;
@@ -1189,10 +1190,20 @@ const passetsMinuter = (p: Pass) => { const t = passetsTid(aktiv.val, p); return
 // Passets delar ur veckans sida (plan.veckansPass, K-553), när varken en rad med tabell eller en variant gäller passet:
 // kursens pass N i veckans fält "Pass N". Sidan och kalendern får samma delar, eftersom båda läser passetFor.
 const medVeckansPass = (p: Pass, roller: ReturnType<typeof rollerFor>) => {
-  if (!data.veckansPass || roller.some((r) => r.tabell?.delar?.length) || variantenFor(data.passet?.varianter, passetsLage(plan, p, passetsMinuter(p)))) return roller;
+  if (!data.veckansPass || variantenFor(data.passet?.varianter, passetsLage(plan, p, passetsMinuter(p)))) return roller;
   const nr = kursensPassnummer(plan, mp.takt.min, p, mp.period.enhet === 'veckor' ? mp.period.max ?? mp.period.min : undefined);
   const tabell = nr !== null ? data.veckansPass[String(nr)] : undefined;
-  return tabell ? [...roller, { nar: '', tabell }] : roller;
+  if (!tabell) return roller;
+  // Passets slag ur fältets första mening, som "Planeringspass", är passets namn när planens rader inte ger något (K-585).
+  const slag = tabell.slag ? [{ nar: '', kort: tabell.slag }] : [];
+  // Ett fält som bara säger det som skiljer står överst och i passets delar, också i ett pass som planens rad leder till en
+  // tabell, som Sagobokens bokpass, och leder till veckans sida (K-585).
+  if (tabell.skillnad) {
+    const sidan = roller.some((r) => r.tabell) ? [] : [{ nar: '', tabell: { namn: tabell.namn, adress: tabell.adress, sida: true } }];
+    return [...roller, ...slag, ...sidan, ...tabell.skillnad.texter.map((t) => ({ nar: '', text: t })), ...tabell.skillnad.iDelar.map((r) => ({ nar: '', del: r.del, text: r.text })), ...tabell.skillnad.ovrigt.map((o) => ({ nar: '', text: `${o.etikett}: ${o.text}` }))];
+  }
+  if (roller.some((r) => r.tabell?.delar?.length)) return roller;
+  return [...roller, ...slag, { nar: '', tabell }];
 };
 const passetFor = (p: Pass) => passetsBeskrivning(medVeckansPass(p, rollerFor(p)), data.passet, passetsLage(plan, p, passetsMinuter(p)));
 const fasFran = (tid: string) => { const m = tid.match(/^(\d+)/); return m ? Number(m[1]) : null; };
@@ -1241,8 +1252,14 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
     }),
     // En rad utan minuter, som "Hemma, cirka 20 min": ordet före kommat i tidens spalt och resten efter delens namn.
     ...(!egna ? (data.passet?.andra ?? []).map((r, i) => { const [forst, ...rest] = r.tid.split(','); return rad(`andra-${i}`, forst.trim(), [r.fas, ...rest.map((x) => x.trim())].join(', '), `<p>${lankad(mening(r.vad))}</p>`); }) : []),
-    // Passets eget efter ur veckans fält först, och metodens allmänna rad sedan (riggen 2026-10-27, K-553).
-    ...(b.tabell?.efter || (data.passet?.efter && (!egna || delar.length)) ? [rad('efter', '', 'Efter passet', [b.tabell?.efter, data.passet?.efter && (!egna || delar.length) ? data.passet.efter : ''].filter(Boolean).map((t) => `<p>${lankad(mening(t!))}</p>`).join(''))] : []),
+    // Efter passet: planens rad för delen först, sedan passets eget efter ur tabellen eller veckans fält, och sist metodens
+    // allmänna rad (riggen 2026-10-27, K-553). En tabells egen rad och en rad med istallet står i stället för metodens, men
+    // veckans fält har den med, som texttypskursernas lappar (K-585).
+    ...((() => {
+      const allman = data.passet?.efter && (!egna || delar.length) && !b.efterIstallet && !(b.tabell?.efter && !b.tabell.sida) ? data.passet.efter : '';
+      const texter = [...(b.efterForst ?? []).map((r) => (r.etikett ? `${r.etikett}: ${r.text}` : r.text)), b.tabell?.efter ?? '', allman].filter(Boolean);
+      return texter.length ? [rad('efter', '', 'Efter passet', texter.map((t) => `<p>${lankad(mening(t))}</p>`).join(''))] : [];
+    })()),
   ];
   // I en metod som räknar passen i veckan, där planens pass står efter sin plats i veckan, säger rutan också veckans pass,
   // så att "dagens pass i veckans ram" leder till rätt kort (Rimligheten 2026-10-26: Bråkkursens pass 3 av 10 är metodens
@@ -1262,9 +1279,13 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
   const rubrik = egna ? 'Passets delar' : b.rubrik ?? data.passet?.rubrik ?? 'Passets delar';
   if (!egna && data.passet?.not) rader.push(rad('mer', '', 'Mer om passet', `<p>${lankad(mening(data.passet.not))}</p>`));
   const inledning = [...(b.rubrik && b.variantText ? [b.variantText] : []), ...(!egna && data.passet?.text ? [data.passet.text] : [])].map((t) => `<p class="pl-not pl-delinledning">${lankad(mening(t))}</p>`).join('');
+  // Ett pass med egen tabell som är längre än planens pass, som Kortskrivnings första pass på 25 minuter med pass på 10–15,
+  // säger till, som uppföljningen i ett pass (K-585; modulens lista efter riggens leverans 2026-10-27).
+  const tabellensMinuter = egna ? Math.max(0, ...delar.map((d) => minuterISpann(d.tid)?.till ?? 0)) : 0;
+  const langre = p && tabellensMinuter > passetsMinuter(p) ? `<p class="pl-varning">Det här passet behöver minst ${tabellensMinuter} minuter, och passet är ${passetsMinuter(p)}. Boka längre tid den dagen.</p>` : '';
   // Det uppföljningen gör i passet står efter passets delar, eftersom det görs efter aktiviteten, som gruppreflektionen
   // (andra rundan av Rimligheten 2026-10-26: reflektionen och Efteråt stod före aktiviteten).
-  return `${namn}${roll}${postRad}${tabellRad}${mitt}${rader.length ? `<div class="pl-delar"><p class="pl-delrubrik">${esc(stor(rubrik))}${klockslag ? ', med passets klockslag' : ''}</p>${inledning}${rader.join('')}</div>` : ''}${p ? uppfoljningIPasset(p, oppna) : ''}`;
+  return `${namn}${roll}${postRad}${tabellRad}${mitt}${rader.length ? `<div class="pl-delar"><p class="pl-delrubrik">${esc(stor(rubrik))}${klockslag ? ', med passets klockslag' : ''}</p>${inledning}${rader.join('')}</div>` : ''}${langre}${p ? uppfoljningIPasset(p, oppna) : ''}`;
 }
 
 // Passets post i banken, när metoden tar bankens poster i tur och ordning, en per pass (plan.enPerPass; Problemlösning:
@@ -1832,7 +1853,10 @@ function efterDelar(): string[] {
   // och meningen här säger var den står (K-542; Niclas samma kväll: avsluta hittades "lite avigt vid utvärderingen"). Från
   // sista passets dag står utvärderingen här.
   // En utvärdering som redan är ifylld står kvar att ändra (Codex 2026-10-25: den syntes inte men följde med utskrifterna).
-  if (aktiv.folj && plan.sistaPass && idag < plan.sistaPass && !plan.slut && !aktiv.foljd.utvardering?.beslut && !aktiv.foljd.utvardering?.not) {
+  // En metod som beslutar efter en mätning några veckor senare (plan.utvarderasEfter) väntar till den veckan (K-586; modulens
+  // lista efter riggens leverans 2026-10-27: läraren kunde avsluta texttypskursen innan underlaget fanns).
+  const vantarPa = data.utvarderasEfter !== undefined ? matningenEfter() : undefined;
+  if (aktiv.folj && plan.sistaPass && (idag < plan.sistaPass || (!!vantarPa && idag < mandagen(vantarPa.datum))) && !plan.slut && !aktiv.foljd.utvardering?.beslut && !aktiv.foljd.utvardering?.not) {
     const kan = harBorjat() && plan.veckor.some((w) => slutpassI(w).length > 0);
     const m = matningenEfter();
     delar.push(`<section class="pl-stam"><h3>Utvärdering efter insatsen</h3><p>${esc(`${m ? `Utvärderingen görs när metodens uppföljning efter insatsen är gjord, ${kalendervecka(isoVecka(m.datum).vecka)}.` : `Utvärderingen görs efter sista passet, ${dagText(plan.sistaPass)}.`}${kan ? ' Ska insatsen sluta tidigare finns Avsluta insatsen överst i planen.' : ''}`)}</p></section>`);

@@ -386,8 +386,7 @@ export function planensRamFel(d) {
   for (const p of d.plan?.passen ?? []) if (p.text && tiderILoptext(p.text)) fel.push(`Planens pass "${p.nar}" säger passets tider. Tiderna står i metodens tidsschema, och tider som gäller vissa veckor som en variant (tidsschema.varianter), så att metodens sida, Word och planen läser samma rot (METODER.md under Tidsschemats varianter).`);
   // En rad med del står i en del som passet har: tidsschemats, en variants eller passets tabells, eller Före passet
   // (passetsBeskrivning; Rimligheten 2026-10-26: veckans rad stod överst i passet, och delen under sa emot den).
-  const tabellensFaser = (namn) => { const t = d.tabeller?.find((x) => x.rubrik === namn); return (t && tabellensDelar(t)?.delar.map((x) => x.fas)) || []; };
-  const delnamn = new Set([FORE_PASSET, ...(d.tidsschema?.rader ?? []).filter((r) => minuterISpann(r.tid)).map((r) => r.fas), ...(d.tidsschema?.varianter ?? []).flatMap((v) => v.delar.map((x) => x.fas)), ...(d.plan?.passen ?? []).flatMap((p) => (p.tabell ? tabellensFaser(p.tabell) : []))].map(delnyckel));
+  const delnamn = new Set(passetsDelnamn(d).map(delnyckel));
   for (const p of d.plan?.passen ?? []) {
     if (p.istallet && !p.del) fel.push(`Planens pass "${p.nar}" har istallet utan del. istallet säger att raden står i stället för delens vanliga text, så raden behöver delens namn i del.`);
     if (p.del && p.utanTidsschema) fel.push(`Planens pass "${p.nar}" har både del och utanTidsschema. Ett pass utan tidsschemats delar har ingen del att stå i.`);
@@ -428,7 +427,24 @@ const radensCeller = (t, r, valda) => valda.map((k) => ({ kolumn: t.kolumner.len
 /** Ordet i `ur.rad` som säger att rollen hämtar veckans rad i en tabell med en rad per vecka (rollensVeckor). */
 export const VECKANS_RAD = 'veckans';
 /** Delen i en rad med del som är passets förberedelse (passetsBeskrivning). */
+/** Är tidsschemats rad en del i passet: dess tid börjar med en siffra, som "0–5 min" och "2 min", en rot för planen och
+ * spärrarna (K-585: Kortskrivnings Dagens kort på 2 minuter visades som en del men stoppades som en del som saknas). */
+export const arDelensTid = (tid) => /^\d/.test(String(tid ?? '').trim());
 export const FORE_PASSET = 'Före passet';
+/** Delen Efter passet i planens rader (`plan.passen` med `del`): raden står först efter passet, och med `istallet` i stället
+ * för passrutinens rad Efter passet (K-585: Ordverkstads tidning och Berättelseramens hela pass har en egen). */
+export const EFTER_PASSET = 'Efter passet';
+/**
+ * Passets delar som en rad i planen kan stå i: Före och Efter passet, tidsschemats delar, varianternas och delarna i de
+ * tabeller som planens rader leder till. En rot för spärren (planensRamFel) och veckans fält som bara säger det som skiljer
+ * (sajtens insatsplan.ts, K-585).
+ * @param {MetodensTexter} d
+ * @returns {string[]}
+ */
+export const passetsDelnamn = (d) => {
+  const tabellensFaser = (namn) => { const t = d.tabeller?.find((x) => x.rubrik === namn); return (t && tabellensDelar(t)?.delar.map((x) => x.fas)) || []; };
+  return [FORE_PASSET, EFTER_PASSET, ...(d.tidsschema?.rader ?? []).filter((r) => arDelensTid(r.tid)).map((r) => r.fas), ...(d.tidsschema?.varianter ?? []).flatMap((v) => v.delar.map((x) => x.fas)), ...(d.plan?.passen ?? []).flatMap((p) => (p.tabell ? tabellensFaser(p.tabell) : []))];
+};
 // En dels namn som nyckel: Visa och visa är samma del.
 const delnyckel = (s) => String(s).trim().toLocaleLowerCase('sv');
 /**
@@ -1705,6 +1721,7 @@ export function tabellensDelar(t, kolumn) {
   /** @type {TabellDel[]} */
   const delar = [];
   const fore = [];
+  let efter = '';
   for (const r of t.rader ?? []) {
     const cell = (i) => String(r[i] ?? '').trim();
     let tid, namn;
@@ -1720,9 +1737,13 @@ export function tabellensDelar(t, kolumn) {
     const vad = cell(forsta);
     const mer = andra.map((i) => ({ etikett: t.kolumner[i].trim(), text: cell(i) })).filter((x) => x.text);
     if (arTid(tid)) delar.push({ tid, fas: namn, vad, mer });
+    // Efter delarna är raden Efter passet passets efter, och en annan rad hör inte till passet, som Värdeskapandes Ett
+    // tredje pass, som en rad i planen hämtar för sig (K-585; modulens lista efter riggens leverans 2026-10-27: raderna stod
+    // under Före passet).
+    else if (delar.length) { if (/^efter passet\b/i.test(namn || tid)) efter = [vad, ...mer.map((x) => x.text)].filter(Boolean).join(' '); }
     else fore.push({ namn, nar: tid, vad, mer });
   }
-  return delar.length && delar.every((x) => x.fas) ? { delar, fore } : null;
+  return delar.length && delar.every((x) => x.fas) ? { delar, fore, ...(efter ? { efter } : {}) } : null;
 }
 
 /**
@@ -1735,7 +1756,7 @@ export function tabellensDelar(t, kolumn) {
  * @returns {{ delar: TabellDel[], fore: { namn: string, nar: string, vad: string, mer: { etikett: string, text: string }[] }[], efter?: string } | null}
  */
 export function faltetsDelar(text) {
-  const rader = String(text ?? '').replace(/⁠/g, '').split('\n').map((x) => x.trim()).filter(Boolean);
+  const { slag, rader } = passetsSlag(text);
   /** @type {TabellDel[]} */
   const delar = [];
   const fore = [];
@@ -1750,7 +1771,40 @@ export function faltetsDelar(text) {
     else if (efter) efter += ` ${r}`;
     else delar[delar.length - 1].vad += ` ${r}`;
   }
-  return delar.length ? { delar, fore, ...(efter ? { efter } : {}) } : null;
+  return delar.length ? { delar, fore, ...(efter ? { efter } : {}), ...(slag ? { slag } : {}) } : null;
+}
+
+// Fältets rader, och passets slag när den första meningen är ett ord på -pass, som "Planeringspass." och "Läspass med
+// barnen.": slaget är passets namn och inte en förberedelse (K-585; modulens lista efter riggens leverans 2026-10-27: pass 4
+// visade "Före passet: Planeringspass.").
+function passetsSlag(text) {
+  const rader = String(text ?? '').replace(/⁠/g, '').split('\n').map((x) => x.trim()).filter(Boolean);
+  const m = rader[0]?.match(/^(\p{Lu}\p{L}*pass(?:\s[^.]*)?)\.\s*(.*)$/u);
+  if (!m) return { slag: '', rader };
+  return { slag: m[1].trim(), rader: [...(m[2].trim() ? [m[2].trim()] : []), ...rader.slice(1)] };
+}
+
+/**
+ * Ett fält "Pass N" som bara säger det som skiljer från passets tabell, utan minuter (Sagobokens skrivpass, K-585): den
+ * första meningen är passets slag, resten av första raden och rader utan etikett står överst i passet, en rad "Delens namn:
+ * …" står i passets del med det namnet (delnamn), och en annan rad med etikett, som "I sex steg: …", står med sin etikett.
+ * Null när fältet har delar med minuter (faltetsDelar) eller ingen text.
+ * @param {unknown} text
+ * @param {string[]} delnamn passets delar, ur tidsschemat och passens tabeller
+ */
+export function faltetsSkillnader(text, delnamn) {
+  if (faltetsDelar(text)) return null;
+  const { slag, rader } = passetsSlag(text);
+  if (!rader.length && !slag) return null;
+  const namn = new Set(delnamn.map(delnyckel));
+  const texter = [], iDelar = [], ovrigt = [];
+  for (const r of rader) {
+    const m = r.match(/^([^:]{2,40}):\s*(.+)$/u);
+    if (m && namn.has(delnyckel(m[1]))) iDelar.push({ del: m[1].trim(), text: m[2].trim() });
+    else if (m) ovrigt.push({ etikett: m[1].trim(), text: m[2].trim() });
+    else texter.push(r);
+  }
+  return { slag, texter, iDelar, ovrigt };
 }
 
 /**
@@ -1818,6 +1872,8 @@ export function passetsBeskrivning(roller, passet, lage) {
   const delar = medRader.every((d, i) => d === grund[i]) ? grund : medRader;
   const foreRoller = utan ? [] : iDelen(FORE_PASSET);
   foreRoller.forEach((r) => placerade.add(r));
+  const efterRoller = iDelen(EFTER_PASSET);
+  efterRoller.forEach((r) => placerade.add(r));
   const foreIstallet = foreRoller.some((r) => r.istallet);
   const texter = [...(variant?.text && !kortare ? [{ etikett: '', text: variant.text }] : []), ...roller.filter((r) => !placerade.has(r)).flatMap(innehall)];
   return {
@@ -1829,6 +1885,7 @@ export function passetsBeskrivning(roller, passet, lage) {
     fore: (tabell && !(tabell.sida && !tabell.fore?.length)) || utan || foreIstallet ? undefined : passet?.fore,
     foreRader: foreIstallet ? [] : tabell?.fore ?? [],
     ...(foreRoller.length ? { foreForst: foreRoller.flatMap(innehall) } : {}),
+    ...(efterRoller.length ? { efterForst: efterRoller.flatMap(innehall), ...(efterRoller.some((r) => r.istallet) ? { efterIstallet: true } : {}) } : {}),
     utanDel: roller.filter((r) => r.del && !placerade.has(r)).map((r) => r.del),
     tabell: roller.find((r) => r.tabell)?.tabell,
     // Ett kortare pass har variantens rubrik, "Ett pass på tio minuter", i stället för tidsschemats (Codex 2026-10-26).

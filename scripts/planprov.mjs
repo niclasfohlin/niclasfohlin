@@ -733,6 +733,18 @@ for (const f of former) {
   const brMp = s.metodplan(metod('skrivkurs-berattelseram')).plan;
   const br = s.planera(brMp, { ...s.forval(brMp, '2026-11-02'), start: '2026-11-02', dagar: [1, 3, 5] });
   ska('en period i pass räknar kursens pass som planens', br.enhet === 'pass' && br.pass.every((p) => s.kursensPassnummer(br, brMp.takt.min, p) === p.nr), br.pass.map((p) => s.kursensPassnummer(br, brMp.takt.min, p)));
+  // K-585: tabellens rad Efter passet är passets efter, en annan rad efter delarna hör inte till passet, och en rad i planen
+  // med del Efter passet och istallet står i stället för passrutinens.
+  const ovTab = metod('ordverkstad-i-grupp').tabeller.find((t) => t.rubrik.startsWith('Pass 3 från vecka 5'));
+  const ovDelar = ovTab && s.tabellensDelar(ovTab);
+  const vdTab = metod('skrivkurs-vardeskapande').tabeller.find((t) => t.rubrik.startsWith('Dag 2'));
+  const vdDelar = vdTab && s.tabellensDelar(vdTab);
+  const efterRoll = s.passetsBeskrivning([{ del: s.EFTER_PASSET, text: 'Kopiera tidningen.', istallet: true }], { delar: [{ tid: '0–10 min', fas: 'Start', vad: 'x' }] });
+  ska('tabellens Efter passet och en rad med del Efter passet', !!ovDelar?.efter && !ovDelar.fore.some((f) => /efter passet/i.test(f.namn || f.nar)) && !!vdDelar && !vdDelar.fore.some((f) => /tredje pass/i.test(`${f.namn} ${f.nar}`)) && efterRoll.efterIstallet === true && efterRoll.efterForst?.[0]?.text === 'Kopiera tidningen.' && !efterRoll.texter.length, { ov: ovDelar?.efter, vdFore: vdDelar?.fore.map((f) => f.namn || f.nar), efterRoll });
+  // K-585: fältets första mening på -pass är passets slag, och ett fält utan minuter står i passets delar och överst.
+  const slagFalt = s.faltetsDelar('Planeringspass.\n0–10 min. Starten: x');
+  const skil = s.faltetsSkillnader('Skrivpass. Station Hjälten.\nDär vi slutade: gruppen berättar.\nI sex steg: Hans och Greta.', ['Där vi slutade']);
+  ska('passets slag och ett fält som bara säger det som skiljer', slagFalt?.slag === 'Planeringspass' && !slagFalt.fore.length && skil?.slag === 'Skrivpass' && skil.texter.join() === 'Station Hjälten.' && skil.iDelar[0]?.del === 'Där vi slutade' && skil.ovrigt[0]?.etikett === 'I sex steg' && s.faltetsSkillnader('0–5 min. A: x', []) === null, { slagFalt, skil });
   const tab = { kolumner: ['Del', 'Pass 2', 'Pass 3'], rader: [['Start\n0–5', 'A', 'B'], ['Skriva\n5–60', 'C', 'D']] };
   ska('tabellens delar med kolumnen Steg och passets kolumn', s.tabellensDelar({ kolumner: ['Tid', 'Steg', 'Det som händer'], rader: [['0–8 min', 'Ramen', 'x']] })?.delar[0].fas === 'Ramen'
     && s.tabellensDelar(tab, 'Pass 3')?.delar.map((d) => d.vad).join() === 'B,D' && s.tabellensDelar(tab)?.delar[0].mer[0]?.etikett === 'Pass 3' && s.tabellensDelar(tab, 'Pass 4') === null);
