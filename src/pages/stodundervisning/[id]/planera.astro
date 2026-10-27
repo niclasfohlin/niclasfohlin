@@ -2,6 +2,7 @@
 // /stodundervisning/<id>/planera: Planera insatsen (K-489), för varje metod som kan planeras (src/lib/insatsplan.ts).
 // Bygget stannar på en metod vars plan inte går att läsa, så att en metod aldrig får en plan som räknar fel.
 import Planera from '../../../components/Planera.astro';
+import PlaneraKurser from '../../../components/PlaneraKurser.astro';
 import { publicerade } from '../../../lib/innehall';
 import { insatsplanFel, planbar, planensData } from '../../../lib/insatsplan';
 import { metodensLektionskort } from '../../../lib/lektionskort';
@@ -24,4 +25,4 @@ const lektionernasKort = Object.fromEntries(lektionerna.map((x) => [x.data.forma
 const lektionernasMallar = Object.fromEntries(lektionerna.filter((x) => x.data.snabbmall).map((x) => [x.data.formaga!, { id: x.id, rubrik: x.data.snabbmall!.rubrik, titel: x.data.titel }]));
 ---
 
-<Planera data={data} lektionskort={lektionskort} lektionernasKort={lektionernasKort} lektionernasMallar={lektionernasMallar} antal={antal} snabbmall={m.data.snabbmall ? { rubrik: m.data.snabbmall.rubrik, period: m.data.snabbmall.period } : undefined} />
+{data.versionsval?.kurser ? <PlaneraKurser data={data} /> : <Planera data={data} lektionskort={lektionskort} lektionernasKort={lektionernasKort} lektionernasMallar={lektionernasMallar} antal={antal} snabbmall={m.data.snabbmall ? { rubrik: m.data.snabbmall.rubrik, period: m.data.snabbmall.period } : undefined} />}

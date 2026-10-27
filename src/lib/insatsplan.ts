@@ -3,13 +3,13 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { arDelensTid, faltetsDelar, faltetsSkillnader, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { arDelensTid, faltetsDelar, faltetsSkillnader, iVersionen, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
-import { kursensVeckor, metodensSaker, sidansAnkare, sidansAvsnitt, type MetodSak } from './metodsaker';
+import { kursensVeckor, metodensSaker, sidansAnkare, sidansAvsnitt, versionensDelar, versionernasNamn, type MetodSak } from './metodsaker';
 import { passOversikt } from './metod';
 import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
@@ -22,7 +22,8 @@ import { egnaBlad } from './bladmaterial';
 type Metod = CollectionEntry<'stodundervisning'>;
 
 // Kan metoden planeras? Regeln står i src/lib/planbar.ts.
-export { planbar } from './planbar';
+import { planbar } from './planbar';
+export { planbar };
 
 /** Planens adress under metoden. */
 export const planensAdress = (id: string) => `/stodundervisning/${id}/planera`;
@@ -112,6 +113,8 @@ export interface PlanData {
   justera?: string[];
   /** Metodens regel för beslutet efter insatsen (plan.utvardering), vid utvärderingen. */
   utvardering?: string[];
+  /** Planen har ingen knapp Upprepa veckan (plan.utanUpprepa, K-586). */
+  utanUpprepa?: true;
   /** Uppföljningens rad som beslutet efter insatsen väntar på (plan.utvarderasEfter), som radens nummer. */
   utvarderasEfter?: number;
   upprepa?: string;
@@ -140,6 +143,9 @@ export interface PlanData {
    * ingång med ingångarna (plan.lektionsval). */
   lektioner?: PlanLektion[];
   lektionsval?: PlanStod & { ingangar: { lektion: number; namn: string }[]; klar?: string };
+  /** Planens val av version (plan.versionsval, K-576): stödet, och varje version med namn, slug, veckor och planens data i
+   * den versionen, de fält som skiljer från den första, som sidan lägger över planens data när versionen väljs. */
+  versionsval?: PlanStod & { rubrik: string; versioner: { namn: string; slug: string; veckor?: number; data: Partial<PlanData> }[]; kurser?: { id: string; namn: string; tranar?: string; adress: string }[] };
 }
 
 /** Ett stöd för ett val i planen (STIL.md under Stöd för ett val): metodens text och metodens rubrik med mer, med adressen. */
@@ -281,7 +287,7 @@ function passetsTabell(d: Metod['data'], id: string, namn: string, kolumn?: stri
 // Passens delar ur veckornas sidor (plan.veckansPass, K-553; riggens förslag 2026-10-27): ramen med lektioner har en del
 // per vecka, och varje pass ett fält "Pass N" med en rad per del, som standardens faltetsDelar läser. Nyckeln är kursens
 // passnummer.
-function veckornasPass(d: Metod['data'], id: string): Record<string, PassTabell> | undefined {
+function veckornasPass(d: Metod['data'], id: string, version?: string): Record<string, PassTabell> | undefined {
   const rubrik = d.plan?.veckansPass;
   if (!rubrik) return undefined;
   const ramar = d.ramar?.ramar ?? [];
@@ -292,17 +298,23 @@ function veckornasPass(d: Metod['data'], id: string): Record<string, PassTabell>
   // Passets delar, som ett fält som bara säger det som skiljer står i: tidsschemats och tabellernas som planens rader leder
   // till (K-585: Sagobokens skrivpass och bokpass).
   const delnamn = passetsDelnamn(d);
-  ramar[ri].delar.forEach((del, di) => {
+  // I en metod med versioner i planens val (K-576) gäller en veckosida som "Skattjakten vecka 3" sin version, och ett fält
+  // utan rader som hör till en annan version. Fältet "Dag N" är veckans pass N, med nyckeln vecka.N (Värdeskapande).
+  const alla = versionernasNamn(d);
+  for (const { del, di, led } of versionensDelar(d, ramar[ri], version)) {
+    const vecka = led.match(/^vecka (\d+)$/i)?.[1];
     for (const f of del.falt ?? []) {
-      const nr = f.rubrik.match(/^pass (\d+)$/i)?.[1];
+      const dag = vecka ? f.rubrik.match(/^dag (\d+)$/i)?.[1] : undefined;
+      const nr = dag ? `${vecka}.${dag}` : f.rubrik.match(/^pass (\d+)$/i)?.[1];
       if (!nr) continue;
-      const delar = faltetsDelar(f.text);
+      const text = iVersionen(f.text, version, alla);
+      const delar = faltetsDelar(text);
       const bas = { namn: `${forstaLed(del.rubrik)}, ${f.rubrik}`, adress: `/stodundervisning/${id}#${delAnkare[ri][di]}`, sida: true };
       if (delar) { ut[nr] = { ...bas, ...(delar.slag ? { slag: delar.slag } : {}), ...(delar.efter ? { efter: delar.efter } : {}), delar: delar.delar.map(medMer), fore: delar.fore.map(medMer) }; continue; }
-      const sk = faltetsSkillnader(f.text, delnamn);
+      const sk = faltetsSkillnader(text, delnamn);
       if (sk) ut[nr] = { ...bas, ...(sk.slag ? { slag: sk.slag } : {}), skillnad: { texter: sk.texter, iDelar: sk.iDelar, ovrigt: sk.ovrigt } };
     }
-  });
+  }
   return ut;
 }
 
@@ -329,10 +341,15 @@ function nivaTabellen(d: Metod['data'], id: string): PlanData['nivaTabell'] {
  * (K-551): passet ur lektionens tidsschema, målet, vad eleverna blir bättre på och regeln för att gå vidare. Bara den
  * generella metoden har lektioner; en lektion planeras i seriens planerare.
  */
+/** Seriens metoder, lektionerna eller kurserna, i förmågornas ordning (K-551, K-576). */
+async function seriensMetoder(m: Metod) {
+  return (await publicerade('stodundervisning')).filter((x) => x.data.serie === m.id && x.data.formaga !== undefined).sort((a, b) => a.data.formaga! - b.data.formaga!);
+}
+
 async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
   const bank = m.data.lektionsbank;
   if (!bank) return [];
-  const lektioner = (await publicerade('stodundervisning')).filter((x) => x.data.serie === m.id && x.data.formaga !== undefined).sort((a, b) => a.data.formaga! - b.data.formaga!);
+  const lektioner = await seriensMetoder(m);
   const serienasNar = new Set((m.data.uppfoljning?.rader ?? []).map((r) => r.nar));
   return Promise.all(lektioner.map(async (l) => {
     const ld = l.data;
@@ -374,11 +391,31 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
 }
 
 /** Planens data ur metodens fil. */
-export async function planensData(m: Metod): Promise<PlanData> {
+export async function planensData(m: Metod, version?: string): Promise<PlanData> {
   const d = m.data;
   const sida = `/stodundervisning/${m.id}`;
+  // Planens val av version (K-576): utan vald version räknas planen för varje version, och sidan får den första och för de
+  // andra de fält som skiljer, så att valet byter innehållet utan att sidan hämtar något.
+  const vv = d.plan?.versionsval;
+  const alla = versionernasNamn(d);
+  if (vv?.versioner && version === undefined) {
+    const datan = await Promise.all(vv.versioner.map((x) => planensData(m, x.namn)));
+    const bas = datan[0];
+    const skiljer = (b: PlanData) => Object.fromEntries([...new Set([...Object.keys(bas), ...Object.keys(b)])].filter((k) => JSON.stringify((bas as unknown as Record<string, unknown>)[k]) !== JSON.stringify((b as unknown as Record<string, unknown>)[k])).map((k) => [k, (b as unknown as Record<string, unknown>)[k] ?? null])) as Partial<PlanData>;
+    const stod = stodet(vv, d, m.id);
+    return { ...bas, versionsval: { ...(stod ?? { text: vv.text, mer: { namn: vv.mer, adress: sida } }), rubrik: vv.rubrik, versioner: vv.versioner.map((x, i) => ({ namn: x.namn, slug: slugAv(x.namn), ...(x.veckor ? { veckor: x.veckor } : {}), data: i === 0 ? {} : skiljer(datan[i]) })) } };
+  }
+  // En serie vars kurser har egna planer, som Texttyper i grupp: valet leder till kursernas planer (K-576; Niclas
+  // 2026-10-27), och sidan visar bara valet (PlaneraKurser.astro).
+  if (vv && !vv.versioner && d.lektionsbank) {
+    const kurser = await seriensMetoder(m);
+    const stod = stodet(vv, d, m.id);
+    return { ...(await planensData({ ...m, data: { ...d, plan: { ...d.plan!, versionsval: undefined } } } as Metod)), versionsval: { ...(stod ?? { text: vv.text, mer: { namn: vv.mer, adress: sida } }), rubrik: vv.rubrik, versioner: [], kurser: kurser.map((x) => ({ id: x.id, namn: lektionsnamn(x.data.titel), ...(x.data.tranar ? { tranar: x.data.tranar } : {}), adress: `/stodundervisning/${x.id}/planera` })) } };
+  }
+  const versionen = vv?.versioner?.find((x) => x.namn === version);
+  const iV = (t: string | undefined) => iVersionen(t, version, alla);
   // En kurs med veckor har veckans titel i metoden, och den är veckans rubrik i planen när progressionen inte har en egen.
-  const kurs = kursensVeckor(d, m.id);
+  const kurs = kursensVeckor(d, m.id, version);
   const bank = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? await planensBank(m) : undefined;
   const uppdaterad = d.uppdaterad ? (d.uppdaterad instanceof Date ? d.uppdaterad.toISOString().slice(0, 10) : String(d.uppdaterad).slice(0, 10)) : undefined;
   const passet = planensPass(d, m.id);
@@ -421,17 +458,19 @@ export async function planensData(m: Metod): Promise<PlanData> {
     tid: d.tid,
     period: d.period,
     ...(d.progression ? { progression: { enhet: d.progression.enhet, rubrik: d.progression.rubrik, rader: d.progression.rader.map((r) => ({ ...r, kort: veckansKort(r, kurs[r.vecka]?.titel) })) } } : {}),
-    uppfoljning: { rader: (d.uppfoljning?.rader ?? []).map((r) => (r.tabell ? { ...r, passet: passetsTabell(d, m.id, r.tabell) } : r)) },
+    // Versionens tid på en rad i uppföljningen, efter radens När (K-576).
+    uppfoljning: { rader: (d.uppfoljning?.rader ?? []).map((r) => (versionen?.tider?.[r.nar] ? { ...r, tid: versionen.tider[r.nar] } : r)).map((r) => (r.tabell ? { ...r, passet: passetsTabell(d, m.id, r.tabell) } : r)) },
     checklista: d.checklista?.punkter ?? [],
     ...(d.checklista ? { checklistaRubrik: d.checklista.rubrik } : {}),
     forstaChecklista,
     ...(bank ? { bank } : {}),
     harLathund: harLathund(d),
     saker: await planensSaker(m),
-    ...(d.plan?.veckansPass ? { veckansPass: veckornasPass(d, m.id) ?? {} } : {}),
+    ...(d.plan?.veckansPass ? { veckansPass: veckornasPass(d, m.id, version) ?? {} } : {}),
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
-    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, ...(p.text ? { text: p.text } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(rollensRad(d, p.ur) ?? [], p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn) } : {}) })) } : {}),
+    // En rad vars text bara gäller en annan version står inte med (K-576).
+    ...(d.plan?.passen ? { passen: d.plan.passen.filter((p) => !p.text || iV(p.text) || p.ur || p.tabell || (p.del && p.istallet)).map((p) => ({ nar: p.nar, ...(p.text && iV(p.text) ? { text: iV(p.text) } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(rollensRad(d, p.ur) ?? [], p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn) } : {}) })) } : {}),
     ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: d.gruppen.text, adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),
@@ -440,11 +479,12 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(d.ramar?.ramar?.length ? { material: { rubrik: d.ramar.rubrik || 'Materialet', adress: `${sida}#ramar` } } : {}),
     ...(centrala.length ? { centrala } : {}),
     ...(d.mal ? { malAdress: `${sida}#mal` } : {}),
-    ...(d.plan?.fore ? { fore: d.plan.fore } : {}),
+    ...(d.plan?.fore || versionen?.fore ? { fore: [...(d.plan?.fore ?? []).map(iV).filter(Boolean), ...(versionen?.fore ?? [])] } : {}),
     ...(d.plan?.justera ? { justera: d.plan.justera } : {}),
     ...(d.plan?.utvardering ? { utvardering: d.plan.utvardering } : {}),
     ...(d.plan?.utvarderasEfter && (d.uppfoljning?.rader ?? []).some((r) => r.nar === d.plan!.utvarderasEfter) ? { utvarderasEfter: d.uppfoljning!.rader.findIndex((r) => r.nar === d.plan!.utvarderasEfter) } : {}),
     ...(d.plan?.upprepa ? { upprepa: d.plan.upprepa } : {}),
+    ...(d.plan?.utanUpprepa ? { utanUpprepa: true as const } : {}),
     ...(d.plan?.stege ? { stege: true } : {}),
     ...(!bank && d.nivaer.length >= 2 ? { nivaer: d.nivaer.map((n) => ({ namn: n.namn, slug: slugAv(n.namn), farg: `#${n.farg.toLowerCase()}` })) } : {}),
     ...(nivaTabell ? { nivaTabell } : {}),
@@ -576,8 +616,15 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
       for (const { del, f } of falten) if (/\d\s*[–-]\u2060?\s*\d+\s*min/.test(f.text) && !faltetsDelar(f.text)) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen rad som "N–M min. Delens namn: …".`);
       for (const { del, f } of falten) if (!faltetsDelar(f.text) && !faltetsSkillnader(f.text, [])) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen text.`);
     }
-    // Kursens pass räknas i veckor med ett fast antal pass i veckan, eller som planens i en period i pass (K-585).
-    if (takt && takt.min !== takt.max && metodplan(m.data).plan?.period.enhet !== 'pass') fel.push('plan.veckansPass räknar kursens pass och kräver ett fast antal pass i veckan i faktarutans tid, eller en period i pass.');
+    // Kursens pass räknas i veckor med ett fast antal pass i veckan, eller som planens i en period i pass (K-585). Fält som
+    // "Dag 1" är veckans pass efter platsen i veckan och räknar inga kursens pass (Värdeskapande, K-576).
+    const passfalt = (ram?.delar ?? []).some((del) => (del.falt ?? []).some((f) => /^pass \d+$/i.test(f.rubrik)));
+    if (passfalt && takt && takt.min !== takt.max && metodplan(m.data).plan?.period.enhet !== 'pass') fel.push('plan.veckansPass räknar kursens pass och kräver ett fast antal pass i veckan i faktarutans tid, eller en period i pass.');
+  }
+  // En serie vars kurser har egna planer leder bara till kurser som kan planeras (K-576).
+  if (m.data.plan?.versionsval && !m.data.plan.versionsval.versioner) {
+    if (!m.data.lektionsbank) fel.push('plan.versionsval utan versioner gäller en serie med lektionsbank, vars kurser har egna planer.');
+    else for (const x of await seriensMetoder(m)) if (!planbar(x.data)) fel.push(`plan.versionsval leder till kursen ${x.data.titel}, som inte kan planeras än (plan.vantar eller uppföljningen utan tid).`);
   }
   // Utvärderingen väntar på en rad i uppföljningen efter insatsen (K-586).
   if (m.data.plan?.utvarderasEfter) {

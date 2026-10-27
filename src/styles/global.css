@@ -2878,6 +2878,8 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
    senare i filen och annars centrerar texten. */
 .pl-ingangar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .sk-niva.pl-ingang { --niva: var(--farg-lasning); flex-direction: column; align-items: flex-start; gap: 0.1rem; min-width: 0; flex: 1 1 9rem; }
+/* Planens val av version (K-576) har ingångarnas form, i skrivningens färg, eftersom metoderna med valet är skrivkurser. */
+.sk-niva.pl-version { --niva: var(--farg-skrivning); }
 .pl-ingang-lektion { font-weight: 400; font-size: 0.88rem; }
 .pl-ingang[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
 .pl-lektionsnamn { margin: 0.6rem 0 0.4rem; }

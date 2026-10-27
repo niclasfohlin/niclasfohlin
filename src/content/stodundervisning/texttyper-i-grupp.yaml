@@ -434,8 +434,13 @@ uppfoljning:
 # (2026-10-27): upprepa säger progressionens regel, att gruppen går vidare varje vecka, så att planen kan visa den under
 # Efter veckan utan knappen Upprepa veckan, och fore säger att kursen ordnar läsarna, eftersom checklistan redan leder dit.
 plan:
-  # Planen visas när den har klarat Rimligheten (K-553).
-  vantar: "Valet av kurs, utvärderingen när gruppen samlas efter kursen och veckor utan Upprepa veckan (Rimligheten 2026-10-27, K-553)."
+  # Planera insatsen visar valet av kurs, och varje knapp leder till kursens egen plan (sajtens K-576; Niclas 2026-10-27:
+  # den övergripande metoden får ingen egen plan, och varje texttyp får sin). Sidan visas när kursernas planer gör det.
+  vantar: "Kursernas planer klarar Rimligheten (K-585)."
+  versionsval:
+    rubrik: "Kursen"
+    text: "Gruppen går en kurs i taget, och du väljer kurs efter vad eleverna behöver skriva i klassen. Behöver eleverna skriva olika texttyper, väljer du den som flest av dem snart ska skriva."
+    mer: "Kurserna: en för varje texttyp"
   passen:
     - nar: vecka 1–6
       utanTidsschema: true

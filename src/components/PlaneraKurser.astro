@@ -1,0 +1,30 @@
+---
+// Planera insatsen i en serie vars kurser har egna planer, som Texttyper i grupp (K-576; Niclas 2026-10-27: den
+// övergripande metoden får ingen egen plan, och varje kurs får sin): valet av kurs i nivåvalets form, där varje knapp
+// leder till kursens plan, med stödet för valet ur metoden.
+import Base from '../layouts/Base.astro';
+import StodForValet from './StodForValet.astro';
+import { PLANERA } from '../lib/standard/index.js';
+import type { PlanData } from '../lib/insatsplan';
+
+interface Props { data: PlanData }
+const { data } = Astro.props;
+const val = data.versionsval!;
+---
+
+<Base title={`Planera insatsen: ${data.titel}`} description={`Planera ${data.titel}: välj kursen, så öppnas kursens plan med passen, veckornas fokus och uppföljningen.`}>
+  <article class="plan" id="plan" data-metod={data.id}>
+    <header class="pl-huvud">
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={data.sida}>{data.titel}</a> · Planera</p>
+      <h1>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</h1>
+      <p class="ingress">Gruppen går en kurs i taget, och varje kurs har sin egen plan. Välj kursen, så öppnas kursens plan.</p>
+    </header>
+    <fieldset class="pl-rad pl-kursval">
+      <legend class="pl-etikett">{val.rubrik}</legend>
+      <div class="sk-nivaknappar pl-nivaer">
+        {(val.kurser ?? []).map((k) => <a class="sk-niva pl-ingang pl-version" href={k.adress} data-goatcounter-click={`planera:${data.id}:kurs-${k.id}`} data-goatcounter-title={`${data.titel}: planen för ${k.namn}`}><span>{k.namn}</span>{k.tranar && <span class="pl-ingang-lektion">{k.tranar}</span>}</a>)}
+      </div>
+      <StodForValet id="pl-versionsstod" stod={val} metod={data} slag="versionsstod" vad={val.rubrik.toLocaleLowerCase('sv')} />
+    </fieldset>
+  </article>
+</Base>

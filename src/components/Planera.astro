@@ -130,7 +130,8 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
             )}
             <fieldset class="pl-rad">
               <legend class="pl-etikett">Antal {period.enhet === 'pass' ? 'pass' : 'veckor'}</legend>
-              <div class="sk-segment pl-langd" id="pl-langd" hidden={langder.length < 2}>
+              {/* Har varje version i planens val sina veckor, väljs längden med versionen (K-576). */}
+              <div class="sk-segment pl-langd" id="pl-langd" hidden={langder.length < 2 || !!data.versionsval?.versioner.every((v) => v.veckor)}>
                 {langder.map((n) => <button type="button" class="sk-antal" data-langd={n} aria-pressed="false">{n}</button>)}
               </div>
               {data.period && <p class="pl-hjalp">Metoden: {liten(data.period)}.{period.enhet === 'veckor' && ' Lovveckor hoppas över, och pass på röda dagar faller bort.'}</p>}
@@ -154,6 +155,17 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
                 </div>
                 <p class="pl-hjalp">{data.bank?.enPerPass ? `Nivån styr vilket ${data.bank.en} varje pass har.` : data.bank ? `Nivån styr vilka ${data.bank.flera} veckan visar.` : data.nivaTabell ? 'Nivån styr veckans tal och blad.' : 'Nivån står i planen.'} Tryck en gång till för att ta bort den.</p>
                 {data.nivaval && <StodForValet id="pl-nivastod" stod={data.nivaval} metod={data} slag="nivastod" vad="nivåvalet" />}
+              </fieldset>
+            )}
+            {/* Planens val av version (K-576; Niclas 2026-10-27: knappar i nivåvalets form, och bilder före uppladdningen): projektet,
+                sagans väg eller ramen, med versionens veckor under namnet och stödet för valet. */}
+            {data.versionsval && (
+              <fieldset class="pl-rad">
+                <legend class="pl-etikett">{data.versionsval.rubrik}</legend>
+                <div class="sk-nivaknappar pl-nivaer" id="pl-versioner">
+                  {data.versionsval.versioner.map((v) => <button type="button" class="sk-niva pl-ingang pl-version" data-version={v.slug} aria-pressed="false" data-goatcounter-click={`planera:${data.id}:version-${v.slug}`} data-goatcounter-title={`${data.titel}: ${v.namn}`}><span>{v.namn}</span>{v.veckor && <span class="pl-ingang-lektion">{v.veckor} veckor</span>}</button>)}
+                </div>
+                <StodForValet id="pl-versionsstod" stod={data.versionsval} metod={data} slag="versionsstod" vad={data.versionsval.rubrik.toLocaleLowerCase('sv')} />
               </fieldset>
             )}
             {/* En serie med lektionsbank (K-551): ingången är vecka 1:s lektion, och sedan väljs lektionen vecka för vecka.

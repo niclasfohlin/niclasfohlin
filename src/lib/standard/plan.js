@@ -293,7 +293,7 @@ export function metodplan(d) {
       passen: /** @type {{ rad: number, nar: PassensNar | VariantensNar }[]} */ (passen),
       skattningar: egna.skattningar,
       // Planens förval i veckor när längden beror på något metoden säger (plan.veckoval).
-      ...(typeof d.plan?.veckoval?.forval === 'number' ? { forvaldaVeckor: d.plan.veckoval.forval } : {}),
+      ...(typeof d.plan?.veckoval?.forval === 'number' ? { forvaldaVeckor: d.plan.veckoval.forval } : typeof d.plan?.versionsval?.versioner?.[0]?.veckor === 'number' ? { forvaldaVeckor: d.plan.versionsval.versioner[0].veckor } : {}),
       // Skolveckorna före första passet som det metoden gör före start behöver, när det är fler än en (plan.foreVeckor).
       ...(typeof d.plan?.foreVeckor === 'number' ? { foreVeckor: d.plan.foreVeckor } : {}),
       // Progressionens sista rad tar planens sista vecka när perioden slutar före den (plan.sistaRaden).
@@ -337,6 +337,8 @@ export const planensTexter = (d) => [
   ...(d.plan?.nivaval ? [/** @type {[string, string]} */ (['Planens nivåval', d.plan.nivaval.text])] : []),
   ...(d.plan?.langdval ? [/** @type {[string, string]} */ (['Planens längdval', d.plan.langdval.text])] : []),
   ...(d.plan?.veckoval ? [/** @type {[string, string]} */ (['Planens veckoval', d.plan.veckoval.text])] : []),
+  ...(d.plan?.versionsval ? [/** @type {[string, string]} */ (['Planens versionsval', d.plan.versionsval.text])] : []),
+  ...(d.plan?.versionsval?.versioner ?? []).flatMap((v) => (v.fore ?? []).map((t) => /** @type {[string, string]} */ ([`Planens version "${v.namn}", fore`, t]))),
   ...(d.plan?.lektionsval ? [/** @type {[string, string]} */ (['Planens lektionsval', d.plan.lektionsval.text])] : []),
   ...(d.plan?.lektionsval?.klar ? [/** @type {[string, string]} */ (['Planens lektionsval, klar', d.plan.lektionsval.klar])] : []),
   ...(d.plan?.skattningar ?? []).flatMap((x) => (x.text ? [/** @type {[string, string]} */ ([`Planens skattning "${x.namn}"`, x.text])] : [])),
@@ -520,6 +522,54 @@ function stodetsFel(falt, n, saknas) {
  * @param {boolean} [harNivaer] metoden har minst två nivåer att välja mellan
  * @returns {string[]}
  */
+/**
+ * Planens val av version (plan.versionsval, sajtens K-576; Niclas 2026-10-27 sa ja till valen som knappar i nivåvalets
+ * form): projektet i Värdeskapande, sagans väg i Sagoboken, ramen i Berättelseramen och kursen i Texttyper i grupp. Stödet
+ * följer reglerna för ett stöd, versionernas namn är olika, och en versions veckor ryms i metodens period.
+ * @param {MetodensTexter & { period?: string }} d
+ */
+export function versionsvaletsFel(d) {
+  const v = d.plan?.versionsval;
+  if (!v) return [];
+  const fel = stodetsFel('versionsval', v);
+  const namn = (v.versioner ?? []).map((x) => x.namn.toLocaleLowerCase('sv'));
+  if (new Set(namn).size !== namn.length) fel.push('plan.versionsval har två versioner med samma namn.');
+  const p = periodensLangd(d.period ?? '');
+  for (const x of v.versioner ?? []) if (typeof x.veckor === 'number' && p?.enhet === 'veckor' && (x.veckor < p.min || (p.max !== undefined && x.veckor > p.max))) fel.push(`plan.versionsval: ${x.namn} har ${x.veckor} veckor, utanför metodens period, "${d.period}".`);
+  return fel;
+}
+
+/**
+ * Texten som den gäller en version i planens val (sajtens K-576): en rad eller mening som börjar med "I <en annan version>"
+ * eller "Med <en annan version>", som Sagobokens "I sex steg: …" och Berättelseramens "Med Hunden som försvann …", tas
+ * bort, och allt annat står kvar, också versionens egen rad med märket. Utan version står allt kvar.
+ * @param {string | undefined} text
+ * @param {string | undefined} namn versionens namn
+ * @param {string[]} alla alla versionernas namn
+ */
+export function iVersionen(text, namn, alla) {
+  if (!namn || !text) return text ?? '';
+  const andra = alla.filter((x) => x.toLocaleLowerCase('sv') !== namn.toLocaleLowerCase('sv'));
+  if (!andra.length) return text;
+  const markt = (s) => andra.some((a) => new RegExp(`^(?:i|med)\\s+${skyddaRegex(a)}(?![\\p{L}\\p{N}])`, 'iu').test(s.trim()));
+  return String(text).split('\n').filter((r) => !markt(r)).map((r) => meningarna(r).filter((m) => !markt(m)).join(' ')).filter((r) => r.trim()).join('\n');
+}
+
+/**
+ * Veckan som en veckosida gäller i en version (sajtens K-576): en sida vars första led börjar med en versions namn, som
+ * "Skattjakten vecka 3", hör till den versionen och ger ledet utan namnet, "vecka 3", och null i en annan version. Ett led
+ * utan någon versions namn gäller alla.
+ * @param {string} led
+ * @param {string | undefined} namn versionens namn, eller den första när ingen är vald
+ * @param {string[]} alla
+ */
+export function versionensVecka(led, namn, alla) {
+  const t = String(led ?? '').trim();
+  const egen = alla.find((x) => t.toLocaleLowerCase('sv').startsWith(`${x.toLocaleLowerCase('sv')} `));
+  if (!egen) return t;
+  return egen.toLocaleLowerCase('sv') === (namn ?? alla[0] ?? '').toLocaleLowerCase('sv') ? t.slice(egen.length).trim() : null;
+}
+
 export function nivavaletsFel(d, harNivaer = (d.nivaer ?? []).length >= 2) {
   return stodetsFel('nivaval', d.plan?.nivaval, harNivaer ? 'Metoden har nivåer, och planen har då ett stöd för nivåvalet i plan.nivaval: ett citat ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, och i mer metodens tabell eller avsnitt med resten (STIL.md under Stöd för ett val).' : '');
 }
@@ -622,7 +672,9 @@ export function veckovaletsFel(d) {
   const utanfor = v?.forval !== undefined && p && p.enhet === 'veckor' && (v.forval < p.min || (p.max !== undefined && v.forval > p.max));
   // En metod som kan planeras och vars period är ett spann eller öppen säger vad som avgör längden (passgenomgången
   // 2026-10-26: åtta av fjorton metoder sa inte vad som avgör sex, sju eller åtta veckor).
-  const spann = !!d.plan && !!p && p.enhet === 'veckor' && ((p.max !== undefined && p.min < p.max) || p.mer);
+  // Har varje version i planens val sina veckor, är det valet som avgör längden (K-576).
+  const versionernasVeckor = (d.plan?.versionsval?.versioner ?? []).length > 0 && d.plan.versionsval.versioner.every((x) => typeof x.veckor === 'number');
+  const spann = !!d.plan && !!p && p.enhet === 'veckor' && ((p.max !== undefined && p.min < p.max) || p.mer) && !versionernasVeckor;
   return [...stodetsFel('veckoval', v, spann ? `Metodens period, "${d.period}", är ett spann, och planen har då ett stöd för valet av antalet veckor i plan.veckoval: ett citat ur metoden om vad som avgör längden, och förvalet i forval.` : ''), ...(utanfor ? [`plan.veckoval.forval är ${v.forval} veckor, utanför metodens period, "${d.period}".`] : [])];
 }
 /**
@@ -921,7 +973,7 @@ export function skattningensText(s, sk, info) {
 }
 
 /** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen, citatens och nivåvalets. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */
-export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...utvarderingensFel(d), ...elevernasFel(d)];
+export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...versionsvaletsFel(d), ...utvarderingensFel(d), ...elevernasFel(d)];
 
 // ---------- Modulen ----------
 
@@ -1964,6 +2016,7 @@ export function rentaLektioner(lektioner) {
 export function kodaVal(val, extra = {}) {
   const delar = [`s=${val.start}`, `d=${[...val.dagar].sort().join('')}`, `l=${val.langd}`];
   if (val.niva) delar.push(`n=${val.niva}`);
+  if (val.version) delar.push(`ver=${val.version}`);
   const lektioner = rentaLektioner(val.lektioner);
   if (lektioner.length) delar.push(`k=${lektioner.join('.')}`);
   if (val.borja && val.borja > 1) delar.push(`b=${val.borja}`);
@@ -2000,6 +2053,7 @@ export function lasVal(hash) {
   if (!arDatum(start) || start < '2000-01-01' || start > '2099-12-31' || !dagar.length || !Number.isInteger(langd) || langd < 1 || langd > LANGSTA) return null;
   const punkter = (k) => (p.get(k) ?? '').split('.').filter(Boolean);
   const niva = p.get('n') ?? '';
+  const version = p.get('ver') ?? '';
   const borja = Number(p.get('b'));
   const minuter = Number(p.get('m'));
   const id = p.get('p') ?? '';
@@ -2019,6 +2073,7 @@ export function lasVal(hash) {
     flytta: Object.fromEntries(punkter('f').map((x) => x.split('~')).filter(([a, b]) => arDatum(a) && arDatum(b))),
     stryk: punkter('x').filter(arDatum),
     ...(/^[a-z0-9-]{1,30}$/.test(niva) ? { niva } : {}),
+    ...(/^[a-z0-9-]{1,40}$/.test(version) ? { version } : {}),
     ...(rentaLektioner(punkter('k').map(Number)).length ? { lektioner: rentaLektioner(punkter('k').map(Number)) } : {}),
     ...(Number.isInteger(borja) && borja > 1 && borja <= LANGSTA ? { borja } : {}),
     ...(Number.isInteger(minuter) && minuter >= 5 && minuter <= 240 ? { minuter } : {}),

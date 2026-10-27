@@ -116,7 +116,7 @@ export type PassetsLage = { nr?: number; sista?: boolean; nastSista?: boolean; v
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
 export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass' | 'nar'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid; perElev?: true }[]; passen: { rad: number; nar: PassensNar | VariantensNar }[]; skattningar: Skattning[]; forvaldaVeckor?: number; foreVeckor?: number; sistaRaden?: true }
 /** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
-export interface Val { start: string; dagar: number[]; langd: number; lektioner?: number[]; niva?: string; borja?: number; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string; mitt?: number; slut?: number; fore?: { till: string; dagar: number[]; fasta?: Record<string, number> }[] }
+export interface Val { start: string; dagar: number[]; langd: number; lektioner?: number[]; niva?: string; version?: string; borja?: number; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string; mitt?: number; slut?: number; fore?: { till: string; dagar: number[]; fasta?: Record<string, number> }[] }
 export interface Pass { nr: number; datum: string; vecka: number; steg?: number | null; flyttatFran?: string }
 export interface PlanVecka { nr: number; innehall: number; igen: boolean; mandag: string; vecka: { ar: number; vecka: number }; pass: number[]; bortfall: { datum: string; varfor: 'helgdag' | 'installt'; namn?: string }[]; steg?: number | null }
 export interface Plan { start: string; enhet: 'veckor' | 'pass'; borja: number; forstaPass?: string; sistaPass?: string; sistaNr?: number; efter: string; pass: Pass[]; veckor: PlanVecka[]; lovveckor: string[]; uppfoljning: { rad: number; typ: Tid['typ']; tillfallen: { datum: string; vecka: number | null }[]; period?: true; plats?: 'forsta' | 'sista' }[]; fore: { mandag: string; overLov: boolean }; efterSteg?: number; mitt?: number; slut?: number; planerade?: number; struket?: { pass: Pass[]; veckor: PlanVecka[] }; skattningar?: Skattning[] }
@@ -155,6 +155,9 @@ export declare const VECKANS_RAD: string;
 export declare const arDelensTid: (tid: unknown) => boolean;
 export declare const FORE_PASSET: string;
 export declare const EFTER_PASSET: string;
+export declare function versionsvaletsFel(d: unknown): string[];
+export declare function iVersionen(text: string | undefined, namn: string | undefined, alla: string[]): string;
+export declare function versionensVecka(led: string, namn: string | undefined, alla: string[]): string | null;
 export declare const passetsDelnamn: (d: { tidsschema?: unknown; tabeller?: unknown; plan?: unknown }) => string[];
 /** Veckans rad i en tabell med en rad per vecka och en kolumn per pass: cellerna för varje vecka, eller null. */
 export declare function rollensVeckor(d: MetodensTexter, ur: { tabell: string; rad: string; kolumner?: string[] }): Record<string, { kolumn: string; text: string }[]> | null;

@@ -342,17 +342,22 @@ plan:
     - nar: veckans andra
       kort: "Dag 2"
       text: "Dag 2 läser ni mentortexten igen, och eleven får svar och skriver klart."
-      tabell: "Dag 2, 60 minuter"
     - nar: veckans tredje
       kort: "Ett tredje pass"
       utanTidsschema: true
       ur: { tabell: "Dag 2, 60 minuter", rad: "Ett tredje pass", kolumner: ["Det som händer"] }
   fore:
     - "Du bokar läsarna och en reserv före kursen."
-  veckoval:
+  # Projektets veckosidor, "Skattjakten vecka 3" och "Guideboken vecka 3", med fälten Dag 1 och Dag 2, är veckans pass, och
+  # valet av projekt väljer sidorna och veckorna (sajtens K-576; Niclas 2026-10-27 sa ja till valet som knappar).
+  veckansPass: "Till läraren: veckorna"
+  versionsval:
+    rubrik: "Projektet"
     text: "Skattjakten tar fem veckor och Guideboken sex. Har ni bara fem veckor, välj Skattjakten. Skattjaktsdagen eller besöksdagen styr när kursen går, så räkna bakåt från den."
     mer: Projekten vecka för vecka
-    forval: 5
+    versioner:
+      - { namn: Skattjakten, veckor: 5 }
+      - { namn: Guideboken, veckor: 6 }
   utvardering:
     - "Hittar en kamrat rätt direkt i den korta texten efter, och säger eleven vad en ny mentortext gör och med vilket drag, är eleven klar med kursen."
     - "Hittar kamraten inte rätt i någon av de två korta texterna, tar du upp eleven med elevhälsan."

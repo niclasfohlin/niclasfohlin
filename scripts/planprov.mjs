@@ -1280,7 +1280,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
 {
   const kropp = readFileSync(join(rot, 'src/lib/standard/plan.js'), 'utf8').split('export function metodplan(d)')[1]?.split(/\r?\n\}\r?\n/)[0] ?? '';
   const falt = [...new Set([...kropp.matchAll(/d\.plan\??\.(\w+)/g)].map((x) => x[1]))];
-  const sidansMp = readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8').match(/^const mp = .*$/m)?.[0] ?? '';
+  const sidansMp = readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8').match(/^const mpAv = .*$/m)?.[0] ?? '';
   const saknas = falt.filter((f) => !new RegExp(`\\b${f}\\b`).test(sidansMp));
   ska('metodens plan på sidan läser samma fält i plan som motorn', falt.length >= 3 && !saknas.length, { falt, saknas });
 }

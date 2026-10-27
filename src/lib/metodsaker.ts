@@ -13,7 +13,7 @@ import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare'
 import { metodensLektionskort } from './lektionskort';
 import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
-import { arSaksord, forstaLedet, forstaOrdet, slugAv, veckorI } from './standard/index.js';
+import { arSaksord, forstaLedet, forstaOrdet, slugAv, veckorI, versionensVecka } from './standard/index.js';
 
 /**
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
@@ -32,12 +32,24 @@ export const sidansAnkare = (d: MetodData) => metodensAnkare(d, sidansAvsnitt(d)
  * Kursens veckor i metoden (en ram med lektioner, som De fyra räknesätten): ankaret för varje veckas lektion, och veckans
  * titel ("Vecka 3 · Hundratal och två växlingar" har titeln Hundratal och två växlingar).
  */
-export function kursensVeckor(d: MetodData, id: string): Record<string, { adress: string; titel: string }> {
+/**
+ * Delarna i en ram med lektioner som gäller en version i planens val (K-576), med sin plats i ramen och sitt första led utan
+ * versionens namn: en sida som "Skattjakten vecka 3" hör till sin version och ger ledet "vecka 3". En rot för kursens
+ * veckor och veckans fält (src/lib/insatsplan.ts).
+ */
+/** Versionernas namn i planens val (plan.versionsval, K-576), i metodens ordning. */
+export const versionernasNamn = (d: MetodData) => (d.plan?.versionsval?.versioner ?? []).map((x) => x.namn);
+export function versionensDelar(d: MetodData, ram: NonNullable<MetodData['ramar']>['ramar'][number], version?: string) {
+  const alla = versionernasNamn(d);
+  return ram.delar.flatMap((del, di) => { const led = versionensVecka(forstaLed(del.rubrik), version, alla); return led === null ? [] : [{ del, di, led }]; });
+}
+
+export function kursensVeckor(d: MetodData, id: string, version?: string): Record<string, { adress: string; titel: string }> {
   const { delAnkare } = sidansAnkare(d);
   const ut: Record<string, { adress: string; titel: string }> = {};
   (d.ramar?.ramar ?? []).forEach((r, ri) => {
     if (!r.lektioner) return;
-    r.delar.forEach((del, di) => { const v = veckornaI(forstaLed(del.rubrik)); if (v?.length === 1 && !ut[v[0]]) ut[v[0]] = { adress: `/stodundervisning/${id}#${delAnkare[ri][di]}`, titel: del.rubrik.split(' · ').slice(1).join(' · ').trim() }; });
+    for (const { del, di, led } of versionensDelar(d, r, version)) { const v = veckornaI(led); if (v?.length === 1 && !ut[v[0]]) ut[v[0]] = { adress: `/stodundervisning/${id}#${delAnkare[ri][di]}`, titel: del.rubrik.split(' · ').slice(1).join(' · ').trim() }; }
   });
   return ut;
 }

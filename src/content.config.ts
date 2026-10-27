@@ -477,6 +477,9 @@ const metodensFalt = z.strictObject({
       // några veckor efter kursen, som texttypskursernas nya text efter 4–6 veckor (K-585, K-586). Utvärderingen öppnar då
       // den veckan, och till dess säger planen när den görs.
       utvarderasEfter: text.optional(),
+      // utanUpprepa: planen har ingen knapp Upprepa veckan, i en kurs där veckorna har bokade besök och mätningar, som
+      // texttypskurserna (K-586; Rimligheten 2026-10-27: knappen krockade med läsarna och de korta texterna).
+      utanUpprepa: z.literal(true).optional(),
       upprepa: text.optional(),
       stege: z.boolean().optional(),
       // vantar: skälet till att planen inte visas än, fast metoden har fälten, tills planen har klarat Rimligheten (K-553).
@@ -497,6 +500,22 @@ const metodensFalt = z.strictObject({
       // Stödet för antalet veckor när längden beror på något metoden säger, som boken i Chambers boksamtal, med planens
       // förval i veckor inom metodens period (Rimligheten 2026-10-26: fem veckor räckte inte till någon bok).
       veckoval: z.strictObject({ text, mer: text, forval: z.number().int().min(1).max(52).optional() }).optional(),
+      // versionsval: ett val i planens formulär i nivåvalets form, som projektet i Värdeskapande, sagans väg i Sagoboken och
+      // ramen i Berättelseramen (K-576; Niclas 2026-10-27 sa ja till valen som knappar och ser bilder först). rubrik är
+      // valets namn i formuläret, text och mer stödet för valet. Varje version har ett namn, och kan ha sina veckor, rader
+      // under Före och en annan tid på en rad i uppföljningen (tider, efter radens När). Den första är förvald. Planen
+      // visar en veckosida vars första led börjar med versionens namn och en rad eller mening som börjar med "I <namn>" eller
+      // "Med <namn>" bara i den versionen (iVersionen och versionensVecka i standarden). Utan versioner, i en metod med
+      // lektionsbank, är valet seriens kurser, och formuläret leder till kursernas egna planer (Texttyper i grupp).
+      versionsval: z.strictObject({
+        rubrik: text, text, mer: text,
+        versioner: z.array(z.strictObject({
+          namn: text,
+          veckor: z.number().int().min(1).max(52).optional(),
+          fore: z.array(text).min(1).max(4).optional(),
+          tider: z.record(z.string(), text).optional(),
+        })).min(2).max(4).optional(),
+      }).optional(),
       // En serie med en lektionsbank planeras i en enda planerare, där läraren väljer lektion vecka för vecka (K-551; Niclas
       // 2026-10-26: "Ljudlek får därmed bara EN planerare som är samma för alla och som kan väljas lektioner i. Smidigast"):
       // stödet för valet av ingång, som nivaval, och ingångarna, där lektion är förmågans nummer och namn ingångens namn.
