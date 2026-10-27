@@ -332,6 +332,8 @@ uppfoljning:
       vad: "Eleven skriver Uppgift 1 efter fyra till sex veckor, och du svarar. Fråga klassläraren om eleven säger vem som läser."
 
 plan:
+  # Planen visas när den har klarat Rimligheten (K-553).
+  vantar: "Passen ur veckornas sidor och passet när gruppen samlas efter kursen (Codex 2026-10-27, K-553)."
   passen:
     - nar: vecka 1
       kort: "Läsaren"

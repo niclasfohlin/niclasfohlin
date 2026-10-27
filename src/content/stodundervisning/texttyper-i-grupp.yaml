@@ -432,6 +432,8 @@ uppfoljning:
 # pass säger var det står. Gruppen tar ingen vecka igen, så att justera är progressionens stöd åt den som behöver mer.
 # Beslutet efter kursen står ordagrant ur uppföljningens text, i samma form som kursernas.
 plan:
+  # Planen visas när den har klarat Rimligheten (K-553).
+  vantar: "Valet av kurs, utvärderingen när gruppen samlas efter kursen och veckor utan Upprepa veckan (Rimligheten 2026-10-27, K-553)."
   passen:
     - nar: vecka 1–6
       utanTidsschema: true

@@ -302,6 +302,8 @@ uppfoljning:
       tid: "efter"
       vad: Berätta för klassläraren vilka grepp eleven lärt sig, så att hen frågar efter dem i klassen. Skicka hem boken med diplomet.
 plan:
+  # Planen visas när den har klarat Rimligheten (K-553).
+  vantar: "Passen ur delens sida, och pass 1, 8, 14 och 15 med sina egna delar (Rimligheten 2026-10-27, K-553)."
   utan:
     - "Introduktionspassets tabell visar ett pass med två texter, som pass 2, 6 och 10."
   passen:

@@ -704,6 +704,11 @@ for (const f of former) {
     && datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev) === '2026-08-17,2026-09-28',
     [datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.nar === 'Vecka 6')), datum('skrivkurs-vardeskapande', tva, vd.findIndex((r) => r.tid === 'första passet i sista veckan')), datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev)]);
   ska('kursens veckor kräver ett fast antal pass i veckan', s.metodplan({ ...metod('skrivkurs-vardeskapande'), uppfoljning: { rader: [{ nar: 'x', vad: 'x', tid: 'pass 2 i kursens veckor' }] } }).fel.some((x) => x.includes('kursens veckor')));
+  // Veckans fält (plan.veckansPass): en rad per del med minuter och namn, förberedelsen först, och kursens passnummer.
+  const falt = s.faltetsDelar('Lägg fram breven.\n0–⁠5 min. Läs som läsaren: Läs högt.\n5–20 min. Brevet: Eleven skriver.\nUtan stöd.');
+  const kp = s.planera(s.metodplan(metod('texttyp-argumenterande-text')).plan, { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] });
+  ska('veckans fält och kursens passnummer', falt?.delar.map((d) => `${d.tid}|${d.fas}|${d.vad}`).join(';') === '0–5 min|Läs som läsaren|Läs högt.;5–20 min|Brevet|Eleven skriver. Utan stöd.' && falt.fore[0]?.vad === 'Lägg fram breven.' && s.faltetsDelar('Bara text.') === null
+    && kp.pass.map((p) => s.kursensPassnummer(kp, 2, p)).join() === '1,2,3,4,3,4,5,6,7,8,9,10,11,12', kp.pass.map((p) => s.kursensPassnummer(kp, 2, p)));
   const tab = { kolumner: ['Del', 'Pass 2', 'Pass 3'], rader: [['Start\n0–5', 'A', 'B'], ['Skriva\n5–60', 'C', 'D']] };
   ska('tabellens delar med kolumnen Steg och passets kolumn', s.tabellensDelar({ kolumner: ['Tid', 'Steg', 'Det som händer'], rader: [['0–8 min', 'Ramen', 'x']] })?.delar[0].fas === 'Ramen'
     && s.tabellensDelar(tab, 'Pass 3')?.delar.map((d) => d.vad).join() === 'B,D' && s.tabellensDelar(tab)?.delar[0].mer[0]?.etikett === 'Pass 3' && s.tabellensDelar(tab, 'Pass 4') === null);
@@ -1270,13 +1275,16 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
 
 if (fel.length) { console.error(`planprov: ${fel.length} fel:\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: motorn, ${planbara.length} av ${alla.length} metoder med planens fält och ${former.length} former av metoder räknar rätt.`);
+// Planerna som syns: en metod vars plan väntar (plan.vantar, K-553) har fälten och prövas i motorn ovan, men har ingen
+// plansida, som src/lib/planbar.ts säger.
+const synliga = planbara.filter((m) => !m.d.plan?.vantar);
 
 // ---------- 4. Sidan i Chrome ----------
 if (args.includes('--utan-sida')) process.exit(0);
 const dist = join(rot, 'dist');
 // Sidorna som proven nedan öppnar, också varje metods plan, så att en ändring i en annan metods plan gör om proven (K-564:
 // nyckeln läste bara Textsamtals plan, och Gruppstärkande aktiviteters nya knappar prövades inte i Chrome).
-const sidor = [...new Set(['/stodundervisning/textsamtal-i-grupp/planera', '/stodundervisning/textsamtal-i-grupp', '/stodundervisning', '/stodundervisning/upprepad-lasning', ...planbara.map((m) => `/stodundervisning/${m.id}/planera`)])];
+const sidor = [...new Set(['/stodundervisning/textsamtal-i-grupp/planera', '/stodundervisning/textsamtal-i-grupp', '/stodundervisning', '/stodundervisning/upprepad-lasning', ...synliga.map((m) => `/stodundervisning/${m.id}/planera`)])];
 const chrome = process.env.CHROME ?? ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
 if (!chrome) { console.log('planprov: obs, Chrome saknas, sidan är inte prövad'); process.exit(0); }
 if (!sidor.every((x) => existsSync(join(dist, x, 'index.html')))) { console.error('planprov: dist saknar planens sidor. Kör npm run validera, som bygger först.'); process.exit(1); }
@@ -1299,7 +1307,7 @@ const planensAdresser = (d) => [
   ...(d.passen ?? []).map((x) => x.tabell?.adress), d.principer?.adress, d.gruppen?.adress, d.hem?.adress, d.malAdress,
   ...(d.fastnar ?? []).map((x) => x.adress), ...(d.centrala ?? []).map((x) => x.adress), d.nivaTabell?.adress,
 ].filter(Boolean);
-for (const m of planbara) {
+for (const m of synliga) {
   const sidan = join(dist, 'stodundervisning', m.id, 'planera', 'index.html');
   if (!existsSync(sidan)) { adressfel.push(`${m.id}: planens sida finns inte`); continue; }
   const json = readFileSync(sidan, 'utf8').match(/<script type="application\/json" id="pl-data">([\s\S]*?)<\/script>/)?.[1];
@@ -1322,7 +1330,7 @@ for (const m of planbara) {
   }
 }
 if (adressfel.length) { console.error(`planprov: ${adressfel.length} fel i planens adresser:\n  ${adressfel.join('\n  ')}`); process.exit(1); }
-console.log(`planprov: planens adresser i ${planbara.length} metoder leder till sidor och ankare som finns.`);
+console.log(`planprov: planens adresser i ${synliga.length} metoder leder till sidor och ankare som finns.`);
 
 // Det som planen leder till på metodens sida har en knapp under sig som skriver ut det (K-499; Niclas 2026-10-25: "Det som
 // något i planen länkar till bör ha sådan knapp under sig"), och varje saks egen fil (src/lib/sakfiler.ts, slag sak i
@@ -1369,7 +1377,7 @@ const sakensKnappar = (el) => {
 const knappfel = [];
 const bankfilerna = JSON.parse(readFileSync(join(dist, 'stodundervisning', 'bankfiler.json'), 'utf8'));
 let provade = 0;
-for (const m of planbara) {
+for (const m of synliga) {
   const sida = join(dist, 'stodundervisning', m.id, 'index.html');
   const plan = readFileSync(join(dist, 'stodundervisning', m.id, 'planera', 'index.html'), 'utf8').match(/<script type="application\/json" id="pl-data">([\s\S]*?)<\/script>/)?.[1];
   if (!existsSync(sida) || !plan) continue;
@@ -1895,7 +1903,7 @@ try {
   await f.dator();
   // En metod utan planens fält, så länge någon finns: omgångarna 2026-10-26 ger metoderna planen en omgång i taget, och en
   // lektion i en serie planeras i seriens plan.
-  const utanPlan = alla.find((m) => !planbara.includes(m) && !m.d.serie);
+  const utanPlan = alla.find((m) => !synliga.includes(m) && !m.d.serie);
   if (utanPlan) {
     await f.oppna(`${bas}/stodundervisning/${utanPlan.id}`);
     sant(`en metod utan plan har ingen knapp och ingen rad (${utanPlan.id})`, !(await f.kor(`[...document.querySelectorAll('a')].some((a) => a.textContent.startsWith('Planera insatsen'))`)) && !(await f.kor(`!!document.getElementById('pl-din')`)));
@@ -2197,7 +2205,7 @@ try {
   // en progression i pass (Seriesamtal), Hem och skola (TIL i grupp) och veckor efter den sista raden (Läslistor i grupp).
   const b = await flik(false, Date.UTC(2026, 10, 18, 9, 0, 0));
   const stodMetoder = [], stodFel = [], langdMetoder = [], langdFel = [], veckoFel = [], foreFel = [], foreProvade = [];
-  for (const m of planbara.filter((x) => x.id !== 'textsamtal-i-grupp')) {
+  for (const m of synliga.filter((x) => x.id !== 'textsamtal-i-grupp')) {
     const adress = `${bas}/stodundervisning/${m.id}/planera`;
     await b.oppna(adress);
     await b.kor(`localStorage.clear()`);
