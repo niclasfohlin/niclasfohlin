@@ -666,9 +666,10 @@ plan:
           - "Väljer du en egen ram, fyller ni i Berättelseram 3 i ett extra pass på 60 minuter veckan före pass 1, och kursen får då 16 pass."
           - "Före pass 2 skriver du själv frågorna under ”Samla på tavlan” och ramens text under ”Så här kan det låta” i varje del. Ramens text för varje del ska visa delens skrivfokus, och i del 6 ska något från del 1 komma tillbaka."
         # Med egen ram skriver eleven den korta berättelsen först i det extra passet, innan gruppen har arbetat med ramen
-        # (sajtens steg 4b, K-585), så att mätningen i början görs före pass 1.
+        # (sajtens steg 4b, K-585), så att mätningen i början görs före pass 1, på det extra passets dag (sajtens tid ”i det
+        # extra passet”, 2026-10-27 natt).
         tider:
-          "Den korta berättelsen i början": "före"
+          "Den korta berättelsen i början": "i det extra passet"
   # Beslutet efter den korta berättelsen i pass 14, ordagrant ur uppföljningen (UPPDRAG-6, 2026-10-26).
   utvardering:
     - "Har den korta berättelsen i pass 14 början, problem och slut, avslutar du insatsen för eleven."

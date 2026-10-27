@@ -720,8 +720,8 @@ for (const f of former) {
   const datumAv = (m, val, rad) => s.planera(s.metodplan(m).plan, val).uppfoljning.find((u) => u.rad === rad)?.tillfallen.map((t) => t.datum).join();
   const brev = arBas.uppfoljning.rader.length;
   ska('platsen i veckan ger veckans första pass, och kursens pass följer veckan som tas om',
-    datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans första pass i vecka 6')) === '2026-09-21'
-    && datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans sista pass i vecka 6')) === '2026-09-25'
+    datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans första pass i vecka 6 och 12')) === '2026-09-21'
+    && datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans sista pass i vecka 6 och 12')) === '2026-09-25'
     && datum('skrivkurs-vardeskapande', tva, vd.findIndex((r) => r.tid === 'första passet i sista veckan')) === '2026-09-15'
     && datumAv(arVeckor, { start: '2026-08-17', dagar: [1, 3], langd: 6 }, brev) === '2026-08-17,2026-09-21'
     && datumAv(arVeckor, { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev) === '2026-08-17,2026-09-28'
@@ -795,6 +795,20 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   // En version med ett spann i namnet, som åk 4–5, känns igen också med riggens ordfog i märket (K-569).
   const ak = ['Åk 4–5', 'Åk 6–7'];
   ska('versionen åk 4–5 och åk 6–7 med ordfog i märket', s.iVersionen('Läs. I åk 6–⁠7 är läsaren rektorn. I åk 4–5 är det Jonas.', 'Åk 4–5', ak) === 'Läs. I åk 4–5 är det Jonas.' && s.faltetIVersionen('Pass 9 i åk 6–⁠7', 'Åk 6–7')?.egen === true && s.versionensVecka('Åk 6–⁠7 vecka 2', 'Åk 6–7', ak) === 'vecka 2' && s.iVersionensKolumner([{ kolumn: 'Läsaren i åk 6–⁠7', text: 'R' }], 'Åk 4–5', ak).length === 0);
+  // En mätning i det extra passet har passets dag, och sammanställningen och antalet bockade räknar passet (Codex 2026-10-27:
+  // Egen rams korta berättelse fick Före-veckans datum, och det bockade extra passet räknades inte).
+  const brExtra = { ...br, plan: { ...br.plan, extraPass: true }, uppfoljning: { ...br.uppfoljning, rader: [...br.uppfoljning.rader, { nar: 'Den korta berättelsen i början', vad: 'x', tid: 'i det extra passet' }] } };
+  const brXPlan = s.planera(s.metodplan(brExtra).plan, brVal);
+  const brXRad = brXPlan.uppfoljning.find((u) => u.rad === brExtra.uppfoljning.rader.length - 1);
+  const brXSam = s.sammanstallning(brXPlan, { gjorda: ['2026-10-27', brXPlan.pass[0].datum], skattning: {}, vecka: {}, franvaro: {}, elever: [] }, '2026-12-31');
+  ska('det extra passet: mätningen har passets dag, och bocken räknas', s.tolkaTid('i det extra passet')?.typ === 'extra' && brXPlan.extraDag === '2026-10-27' && brXRad?.tillfallen[0]?.datum === '2026-10-27' && brXRad?.tillfallen[0]?.vecka === 0 && s.antalBockade(brXPlan, ['2026-10-27', brXPlan.pass[0].datum]) === 2 && brXSam.gjorda === 2 && brXSam.planerade === brXPlan.pass.length + 1, [brXPlan.extraDag, brXRad?.tillfallen, brXSam.gjorda, brXSam.planerade]);
+  // Lektionerna följer sina måndagar när veckorna flyttas (Codex 2026-10-27).
+  const ljPlanFore = s.planera(s.metodplan(br).plan, { ...tom, start: '2026-10-05', dagar: [1, 3], langd: 6 });
+  const ljPlanEfter = s.planera(s.metodplan(br).plan, { ...tom, start: '2026-10-12', dagar: [1, 3], langd: 6 });
+  // Före: 5, 12 och 19 oktober med lektion 1, 3 och 2; efter: 12, 19 och 26 oktober, där 26 oktober inte fanns och får
+  // lektionen på sin plats.
+  ska('lektionerna följer sina veckors måndagar när starten flyttas', JSON.stringify(s.lektionernaPaVeckorna(ljPlanFore, ljPlanEfter, [1, 3, 2])) === JSON.stringify([3, 2, 2]), s.lektionernaPaVeckorna(ljPlanFore, ljPlanEfter, [1, 3, 2]));
+  ska('två versioner som bara skiljer i en ordfog har samma namn', s.versionsvaletsFel({ plan: { versionsval: { rubrik: 'Årskurs', text: 'Välj årskurs efter eleverna i gruppen, så som metoden säger.', mer: 'X', versioner: [{ namn: 'Åk 4–5' }, { namn: 'Åk 4–⁠5' }] } } }).length > 0);
   // Eleverna först i varje händelse, när läraren har skrivit in dem, och en elev som kom senare från sin dag (Niclas
   // 2026-10-27).
   const elevKal = (elever) => s.kalenderfil({ titel: 'B', uppfoljning: [], fokus: [] }, brPlan, { id: 'ab', lank: () => 'https://x', nu: new Date(Date.UTC(2026, 9, 1)), elever });
@@ -1505,8 +1519,9 @@ function provaSidan(metodId, saker, kursveckor = {}) {
     const knappar = el ? sakensKnappar(el) : [];
     if (el && !knappar.length) knappfel.push(`${metodId}#${ankare}: planen leder hit, men saken har ingen knapp under sig som skriver ut den (src/lib/sakfiler.ts, Sakknapp.astro)`);
     const egna = knappar.filter((k) => sakfilerna.has(k.knapp));
-    // Namnen jämförs med vanliga mellanslag och utan ordfogar och mjuka bindestreck, som knappens text kan ha.
-    const platt = (s) => s.replace(/[\u00ad\u2060]/g, '').replace(/[\s\u00a0]+/g, ' ').trim().toLowerCase();
+    // Namnen jämförs med vanliga mellanslag och utan ordfogar och mjuka bindestreck, som knappens text kan ha, med
+    // standardens jämförelse (versionsform, Codex 2026-10-27).
+    const platt = (x) => s.versionsform(x);
     const namnen = (namnFor.get(ankare) ?? []).map(platt);
     if (egna.length && namnen.length && !egna.some((k) => namnen.some((n) => platt(textI(k)).includes(n)))) knappfel.push(`${metodId}#${ankare}: knappen under ${namnFor.get(ankare)[0]} skriver ut ${egna.map((k) => `"${textI(k).replace(/\s+/g, ' ').trim()}"`).join(' och ')}, inte saken`);
   }

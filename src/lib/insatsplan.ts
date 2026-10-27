@@ -317,11 +317,10 @@ function passensVeckor(d: Metod['data'], version?: string): Record<string, numbe
   return Object.keys(ut).length ? ut : undefined;
 }
 function veckornasPass(d: Metod['data'], id: string, version?: string): Record<string, PassTabell> | undefined {
-  const rubrik = d.plan?.veckansPass;
-  if (!rubrik) return undefined;
+  const ramen = veckansPassRam(d);
+  if (!ramen) return undefined;
   const ramar = d.ramar?.ramar ?? [];
-  const ri = ramar.findIndex((r) => r.rubrik === rubrik);
-  if (ri < 0) return undefined;
+  const ri = ramar.indexOf(ramen);
   const { delAnkare } = sidansAnkare(d);
   const ut: Record<string, PassTabell> = {};
   // Passets delar, som ett fält som bara säger det som skiljer står i: tidsschemats och tabellernas som planens rader leder
@@ -530,7 +529,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(passet ? { passet } : {}),
     // En rad vars text bara gäller en annan version står inte med (K-576).
     ...(d.plan?.passen ? { passen: d.plan.passen.filter((p) => !p.text || iV(p.text) || p.ur || p.tabell || (p.del && p.istallet)).map((p) => ({ nar: p.nar, ...(p.text && iV(p.text) ? { text: iV(p.text) } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(iVersionensKolumner(rollensRad(d, p.ur) ?? [], version, alla).map((c) => ({ ...c, text: iV(c.text) })).filter((c) => c.text), p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.utanTidsschema && p.ur && p.ur.rad !== VECKANS_RAD ? { tabell: { namn: p.ur.tabell, adress: tabellensAdress(d, m.id, p.ur.tabell) ?? `/stodundervisning/${m.id}` } } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn, iV) } : {}) })) } : {}),
-    ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
+    ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: iV(d.principer.text), adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: iV(d.gruppen.text), adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),
     ...(d.hem ? { hem: { rubrik: d.hem.rubrik, text: postensRad(d.hem.text[0], 240), adress: `${sida}#hem` } } : {}),
@@ -659,6 +658,8 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   }
   // Uppföljningens tabell är ett pass i delar (K-553), och veckornas pass läses ur en ram med lektioner där varje fält
   // "Pass N" har en rad per del, och metoden har ett fast antal pass i veckan.
+  // Det extra passet hör till en version, så uppföljningens egen tid kan inte vara det (versionens tider kan).
+  for (const r of m.data.uppfoljning?.rader ?? []) if (/^i det extra passet$/i.test(String(r.tid ?? '').trim())) fel.push(`Uppföljningens rad "${r.nar}" har tiden "i det extra passet", som bara en version med extraPass kan ha, i plan.versionsval.versioner[].tider.`);
   for (const r of m.data.uppfoljning?.rader ?? []) {
     const t = r.tabell ? m.data.tabeller.find((x) => x.rubrik === r.tabell) : undefined;
     if (r.tabell && !(t && tabellensDelar(t))) fel.push(`Uppföljningens rad "${r.nar}" har tabellen "${r.tabell}", som metoden inte har eller som inte går att läsa som ett pass i delar.`);
@@ -701,6 +702,8 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     if (v.extraPass?.text && !faltetsDelar(v.extraPass.text)) fel.push(`plan.versionsval: ${v.namn}, extraPass.text, har ingen rad som "N–M min. Delens namn: …".`);
     for (const n of Object.keys(v.tider ?? {})) if (!rader.some((r) => r.nar === n)) fel.push(`plan.versionsval: ${v.namn} har en tid för "${n}", som uppföljningen inte har.`);
     if (v.tider) for (const f of metodplan({ ...m.data, uppfoljning: { ...m.data.uppfoljning!, rader: rader.map((r) => (v.tider![r.nar] ? { ...r, tid: v.tider![r.nar] } : r)) } }).fel) fel.push(`plan.versionsval, ${v.namn}: ${f}`);
+    // En mätning i det extra passet kräver att versionen har ett (Codex 2026-10-27).
+    for (const [n, t] of Object.entries(v.tider ?? {})) if (/^i det extra passet$/i.test(t.trim()) && !v.extraPass) fel.push(`plan.versionsval: ${v.namn} har tiden "i det extra passet" för "${n}" men inget extraPass.`);
     const sista = Math.max(0, ...Object.keys(kursensVeckor(m.data, m.id, v.namn)).map(Number));
     if (typeof v.veckor === 'number' && sista && sista !== v.veckor) fel.push(`plan.versionsval: ${v.namn} har ${v.veckor} veckor, men veckosidorna i ramen går till vecka ${sista}.`);
   }

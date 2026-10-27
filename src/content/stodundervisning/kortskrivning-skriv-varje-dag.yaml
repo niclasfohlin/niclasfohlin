@@ -245,21 +245,22 @@ uppfoljning:
       resultat: "antalet ord fram till strecket"
     - nar: Två elever visar listan
       tid: "varje vecka"
-      vad: "När alla har fyllt i ber du två elever visa dig Min skrivlista: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
+      vad: "När alla har fyllt i ber du två elever, och i vecka 6 och vecka 12 alla, visa dig Min skrivlista: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
     - nar: Lärarens rader
       tid: "varje pass"
       vad: "Efter varje pass skriver du en rad i din egen skrivbok: vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, vilka som slutade före klockan, hur många som stod över i Dela, och nästa skrivtid."
     - nar: Skriv igen
-      # Skriv igen görs i veckans första pass i vecka 6, som raden säger, före Min skrivlista i det sista (Codex 2026-10-27).
-      tid: "veckans första pass i vecka 6"
-      vad: "Veckans första pass i vecka 6 är Skriv igen. Eleven läser en stjärnmärkt text i stället för dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
+      # Skriv igen görs i veckans första pass i vecka 6 och vecka 12, som raden säger, före Min skrivlista i det sista (Codex
+      # 2026-10-27, och sajtens Codex samma natt: med tolv veckor stämmer du av igen efter vecka 12).
+      tid: "veckans första pass i vecka 6 och 12"
+      vad: "Veckans första pass i vecka 6 och vecka 12 är Skriv igen. Eleven läser en stjärnmärkt text i stället för dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
       # Raden har ett fält per elev i planen, så den säger vad som skrivs där (K-585).
       resultat: "vad eleven säger är nytt i texten"
     - nar: Alla visar Min skrivlista
-      tid: "veckans sista pass i vecka 6"
-      vad: I veckans sista pass i vecka 6 ber du alla visa dig Min skrivlista, inte bara två. Efter passet läser du dina rader från vecka 6.
+      tid: "veckans sista pass i vecka 6 och 12"
+      vad: I veckans sista pass i vecka 6 och vecka 12 ber du alla visa dig Min skrivlista, inte bara två. Efter passet läser du dina rader från veckan.
       # Talen vecka 1 och 6 står i fälten för Ord på tre minuter, ett fält per mätning (K-585).
-      resultat: "om eleven står i dina rader efter passen i vecka 6"
+      resultat: "om eleven står i dina rader efter veckans pass"
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
   utan:
@@ -350,11 +351,13 @@ plan:
       kort: Ord på tre minuter
       del: Skriv
       istallet: true
-      text: "Starta klockan. Alla skriver utan att stanna. I de tio första passen skriver du också den första minuten. I veckans sista pass säger du ”streck” när tre minuter har gått. Alla drar ett streck efter sitt sista ord och skriver vidare. När klockan ringer räknar eleven alla ord fram till strecket, också dem du skrev åt hen, fyller i Min skrivlista och sätter en stjärna vid veckans favorittext. När alla har fyllt i ber du två elever visa dig Min skrivlista: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
+      text: "Starta klockan. Alla skriver utan att stanna. I de tio första passen skriver du också den första minuten. I veckans sista pass säger du ”streck” när tre minuter har gått. Alla drar ett streck efter sitt sista ord och skriver vidare. När klockan ringer räknar eleven alla ord fram till strecket, också dem du skrev åt hen, fyller i Min skrivlista och sätter en stjärna vid veckans favorittext. När alla har fyllt i ber du två elever, och i vecka 6 och vecka 12 alla, visa dig Min skrivlista: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
     - nar: veckans sista pass
       del: Dela
       text: "Du frågar sist: ”Kom någon på något nytt medan ni skrev?”"
     # Skriv igen: eleven läser en stjärnmärkt text i stället för Dagens kort (Rimligheten 2026-10-27, K-585).
+    # Raderna står för vecka 6 och vecka 12, eftersom du med tolv veckor stämmer av igen efter vecka 12 (sajtens Codex
+    # 2026-10-27 natt). Med sex veckor finns bara vecka 6.
     - nar: veckans första pass i vecka 6
       kort: Skriv igen
       del: Dagens kort
@@ -364,6 +367,18 @@ plan:
       del: Dela
       text: I Dela säger eleven vad som är nytt.
     - nar: veckans första pass i vecka 6
+      del: Före passet
+      istallet: true
+      text: Veckans första pass är Skriv igen, utan kort.
+    - nar: veckans första pass i vecka 12
+      kort: Skriv igen
+      del: Dagens kort
+      istallet: true
+      text: "Eleven läser en stjärnmärkt text i stället för dagens kort. Säg: ”Skriv nytt om samma sak.”"
+    - nar: veckans första pass i vecka 12
+      del: Dela
+      text: I Dela säger eleven vad som är nytt.
+    - nar: veckans första pass i vecka 12
       del: Före passet
       istallet: true
       text: Veckans första pass är Skriv igen, utan kort.

@@ -23,7 +23,7 @@ import {
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
-import { extraPassetsDag, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
+import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
 import { idagLokalt, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
@@ -44,7 +44,7 @@ let aktuell: PlanLektion | undefined;
 // (plan.foreVeckor) och den sista radens vecka (plan.sistaRaden), så att sidan har samma plan som motorn (Rimligheten
 // 2026-10-26: Chambers boksamtal visade fem veckor fast metoden säger åtta, och Före en vecka fast metoden säger tre).
 // Planprovet stoppar ett fält som inte följer med.
-const mpAv = (d: PlanData) => ({ ...metodplan({ tid: d.tid, period: d.period, progression: d.progression, uppfoljning: d.uppfoljning, plan: { passen: d.passen, ...(d.veckoval?.forval ? { veckoval: { text: d.veckoval.text, mer: d.veckoval.mer.namn, forval: d.veckoval.forval } } : {}), ...(d.foreVeckor ? { foreVeckor: d.foreVeckor } : {}), ...(d.sistaRaden ? { sistaRaden: true } : {}), ...(d.versionsval ? { versionsval: { versioner: d.versionsval.versioner.map((v) => ({ namn: v.namn, ...(v.veckor ? { veckor: v.veckor } : {}) })) } } : {}) } }).plan!, skattningar: d.skattningar ?? [] });
+const mpAv = (d: PlanData) => ({ ...metodplan({ tid: d.tid, period: d.period, progression: d.progression, uppfoljning: d.uppfoljning, plan: { passen: d.passen, ...(d.extraPass ? { extraPass: true } : {}), ...(d.veckoval?.forval ? { veckoval: { text: d.veckoval.text, mer: d.veckoval.mer.namn, forval: d.veckoval.forval } } : {}), ...(d.foreVeckor ? { foreVeckor: d.foreVeckor } : {}), ...(d.sistaRaden ? { sistaRaden: true } : {}), ...(d.versionsval ? { versionsval: { versioner: d.versionsval.versioner.map((v) => ({ namn: v.namn, ...(v.veckor ? { veckor: v.veckor } : {}) })) } } : {}) } }).plan!, skattningar: d.skattningar ?? [] });
 // Planens val av version (plan.versionsval, K-576; Niclas 2026-10-27): sidans data och metodens plan i den version som
 // planen har. Den första versionen är sidans data, och de andra lägger sina fält över den. rakna() räknar planen i
 // planens version, så att valet följer med efter Ångra, en annan plan och en plan ur en fil.
@@ -52,7 +52,15 @@ const bas: PlanData = data;
 const versionensData = (slug?: string): PlanData => { const v = bas.versionsval?.versioner.find((x) => x.slug === slug); return v ? ({ ...bas, ...v.data } as PlanData) : bas; };
 let mp = mpAv(data);
 const mpFor = (val: Val) => (bas.versionsval ? mpAv(versionensData(val.version)) : mp);
-function tillVersionen() { if (!bas.versionsval) return; data = versionensData(aktiv.val.version); mp = mpAv(data); }
+// En version som bestämmer veckorna, som Guideboken, har alltid sina veckor, också i en plan ur en länk med ett annat
+// antal (steg 4b 2026-10-27: Guideboken fick förvalets fem veckor). En sådan version förlängs inte.
+function tillVersionen() {
+  if (!bas.versionsval) return;
+  data = versionensData(aktiv.val.version);
+  mp = mpAv(data);
+  const v = bas.versionsval.versioner.find((x) => x.slug === aktiv.val.version) ?? bas.versionsval.versioner[0];
+  if (v?.veckor && aktiv.val.langd !== v.veckor) aktiv.val.langd = v.veckor;
+}
 function rakna() { tillVersionen(); plan = planera(mp, aktiv.val); }
 const idag = idagLokalt();
 // Uppföljningens rad med sitt namn ur standarden, som i raden, texterna och pdf:en: Efter insatsen, och en vecka som i planen.
@@ -108,7 +116,7 @@ let plan: Plan = planera(mp, aktiv.val);
 
 // ---------- Lagringen och länken ----------
 const lank = (vecka?: number | 'fore') => `${location.origin}${location.pathname}#${kodaVal(aktiv.val, { id: aktiv.id, ...(vecka ? { visa: vecka } : {}) })}`;
-const bockade = () => plan.pass.filter((p) => aktiv.foljd.gjorda.includes(passetsDag(p))).length;
+const bockade = () => antalBockade(plan, aktiv.foljd.gjorda);
 const sparadAv = (): SparadPlan => ({ id: aktiv.id, metod: data.id, titel: data.titel, omrade: data.omrade, namn: aktiv.namn, val: kodaVal(aktiv.val), folj: aktiv.folj, foljd: aktiv.foljd, andrad: nuTid(), uppdaterad: aktiv.uppdaterad ?? data.uppdaterad, ...(aktiv.kopia ? { kopia: aktiv.kopia } : {}), schema: schemaAv(plan, aktiv.val), bockade: bockade() });
 function spara(): boolean {
   if (!aktiv.sparad) return true;
@@ -130,7 +138,7 @@ function friskaUpp() {
     const val = egen ? aktiv.val : lasVal(p.val)?.val;
     if (!val) return p;
     const pl = egen ? plan : planera(mpFor(val), val);
-    const ny = { ...p, schema: schemaAv(pl, val), bockade: egen ? bockade() : pl.pass.filter((x) => (p.foljd?.gjorda ?? []).includes(passetsDag(x))).length };
+    const ny = { ...p, schema: schemaAv(pl, val), bockade: egen ? bockade() : antalBockade(pl, p.foljd?.gjorda) };
     if (JSON.stringify([p.schema, p.bockade]) === JSON.stringify([ny.schema, ny.bockade])) return p;
     andrad = true;
     return ny;
@@ -335,8 +343,16 @@ function aterstall(o: ReturnType<typeof ogonblick>, meddelande: string) {
 }
 function andra(fn: () => void, meddelande?: string | (() => string | undefined), kanAngra = false) {
   const fore = kanAngra ? ogonblick() : null;
+  const planenFore = plan, idFore = aktiv.id, lektionerFore = JSON.stringify(aktiv.val.lektioner ?? []);
   fn();
   rakna();
+  // I en serie följer veckornas lektioner sina måndagar när något är infört, så att en skattning står kvar mot samma
+  // lektions mål när veckorna flyttas (lektionernaPaVeckorna, Codex 2026-10-27). Inte när ändringen själv gällde
+  // lektionerna eller en annan plan, som ett byte av lektion, Ångra eller en annan plan.
+  if (serien && aktiv.id === idFore && JSON.stringify(aktiv.val.lektioner ?? []) === lektionerFore && harFortIn() && (aktiv.val.lektioner ?? []).length) {
+    const flyttade = lektionernaPaVeckorna(planenFore, plan, aktiv.val.lektioner ?? []);
+    if (JSON.stringify(flyttade) !== JSON.stringify(aktiv.val.lektioner)) { aktiv.val.lektioner = flyttade; rakna(); }
+  }
   const ok = spara();
   uppdateraAdressen();
   rendera();
@@ -1456,7 +1472,7 @@ const tidForGruppen = (rad: number) => {
   return n ? `En elev i taget utanför passen, cirka ${spann(a * n, b * n)} minuter för ${n === 1 ? 'en elev' : `${n} elever`}.` : `En elev i taget utanför passen, ${spann(a, b)} minuter per elev.`;
 };
 // Dagen och tiden för versionens extra pass före pass 1, som "tisdag 27 oktober kl. 9.00", eller tomt (K-576).
-const extraPassetsDatum = () => (data.extraPass ? extraPassetsDag(plan, aktiv.val) : undefined);
+const extraPassetsDatum = () => plan.extraDag;
 function extraPassetsText(): string {
   const d = extraPassetsDatum();
   if (!d) return '';
@@ -2509,7 +2525,7 @@ $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
   if (p.metod === data.id) {
     const pl = planera(mpFor(valen.val), valen.val);
     p.schema = schemaAv(pl, valen.val);
-    p.bockade = pl.pass.filter((x) => p.foljd!.gjorda!.includes(passetsDag(x))).length;
+    p.bockade = antalBockade(pl, p.foljd!.gjorda);
   }
   skrivVantande(true);
   const finns = lasPlaner().planer.find((x) => x.id === p.id);
@@ -2709,7 +2725,7 @@ $('pl-spara').addEventListener('click', sparaPlanen);
 $('pl-spara-nere').addEventListener('click', sparaPlanen);
 // Texten till åtgärdsprogrammet: åtgärden, målet, omfattningen, vad eleven arbetar med och uppföljningen.
 function atgardstext() {
-  const genomforda = aktiv.folj && aktiv.foljd.gjorda.length ? { genomforda: plan.pass.filter((p) => gjort(passetsDag(p))).length } : {};
+  const genomforda = aktiv.folj && aktiv.foljd.gjorda.length ? { genomforda: antalBockade(plan, aktiv.foljd.gjorda) } : {};
   return dokumentationstext({ titel: metodensNamn(), undertitel: data.undertitel, adress: data.adress, mal: data.mal, steg: (data.progression?.rader ?? []).map((r) => r.kort), uppfoljning: data.uppfoljning.rader, nivaNamn: nivaNamn() }, plan, aktiv.val, { minuter: minuter(), folj: aktiv.folj, utvardering: aktiv.foljd.utvardering, elever: elevernasNamn(aktiv.foljd), pagar: !!plan.sistaPass && !slutNu(), ...genomforda, ...lektionernasText(), ...(extraPassetsDatum() ? { extraPass: { datum: extraPassetsDatum()! } } : {}) });
 }
 // En knapp som har gjort det den ska säger det själv en stund, intill där läraren tryckte (de kalla läsarna 2026-10-24:
