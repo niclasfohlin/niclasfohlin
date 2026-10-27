@@ -14,7 +14,7 @@ format:
   - "liten grupp"
   - "par"
 tid: "30 minuter per pass, tre till fem pass i veckan"
-period: "Högst en vecka, tre till fem pass"
+period: "Omkring två veckor, sex till tio pass"
 grupp: "2–12 elever"
 material:
   - rimkorten
@@ -22,18 +22,20 @@ material:
   - bokstavskorten
   - speglar
   - snabbmallen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 1
 tranar: "höra och hitta rim, och byta början av ordet"
+vidare: "du har hört fler än hälften av eleverna själva byta bara början och säga det nya ordet i steg 4 i raden Byt början"
+veckor: { min: 2, max: 2 }
 inledning:
   - "I Rim delar eleverna ordet i början och resten: hus är /h/ och us, och stol är /st/ och ol. Ord med samma rest rimmar, och med en ny början blir det ett nytt ord: mus, lus. Lektionen hjälper eleven med det som gör rim svårt: betydelsen tar över, så att råtta blir ett rim på mus, eller första ljudet tar över, så att sko blir ett rim på sol."
   - "Syftet är att eleverna lyssnar på hur orden låter och hör att ett ord har en början som går att byta. Du visar hur du delar ordet, blandar par som rimmar med par som inte gör det och låter påhittade ord räknas."
-  - "Välj Rim när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 1, rim. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och lektionen hör till förmåga 1 i lektionsbanken där."
+  - "Rim är ingången för helt nybörjare. Lektionen tränar det som ljudkollens uppgift 1 prövar, rim. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, som också säger vilken ingång gruppen börjar i. Lektionen hör till förmåga 1 i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Rim tar högst en vecka och går igenom de tre raderna i Så blir lektionen svårare. Med tre pass i veckan byter gruppen rad varje pass. Med fler pass byter den rad när dagens elever klarar steg 4 själva. Sedan går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. På omkring två veckor går ni igenom de tre raderna i Så blir lektionen svårare. Ta nästa rad när dagens elever klarar steg 4 själva, två pass i följd. Når ni sista raden inom två veckor, stannar ni där med nya ord."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -51,7 +53,7 @@ tabeller:
       - - "Byt början"
         - "hus: byt /h/ mot /m/, mus."
         - "Behåll resten och sätt en ny början, i kör och sedan själv. Har gruppen haft bokstäverna, läser ni sist ord med restkorten."
-    not: "Gruppen börjar i raden Rim eller inte. Om nästan alla bara missade att säga ett eget rim i ljudkollen, börjar gruppen i raden Början och resten och tar sedan raden Byt början i två pass. I alla rader tar ni rimkorten, sex i steg 3 och de sex andra i steg 4. Den som ännu inte hör rim efter veckan får ett rimpar sist i ljudstarten. Orden i ljudkollen och i screeningens version B är inte övningsord. Föreslå dem inte, men säger eleven ett av dem, räknas det."
+    not: "Gruppen börjar i raden Rim eller inte. Om nästan alla bara missade att säga ett eget rim i ljudkollen, börjar gruppen i raden Början och resten. I alla rader tar ni rimkorten, sex i steg 3 och de sex andra i steg 4. Den som ännu inte hör rim när ni går vidare får ett rimpar sist i ljudstarten. Orden i ljudkollen och i screeningens version B är inte övningsord. Föreslå dem inte, men säger eleven ett av dem, räknas det."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -65,7 +67,7 @@ tabeller:
         - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
       - - "Dela upp"
         - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
-    not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion. I Rim-⁠veckan säger ingen ett ord på dagens ljud."
+    not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion. I Rim-⁠veckorna säger ingen ett ord på dagens ljud."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"
     text: "Bekräfta först det som eleven gjorde rätt, och försök sedan igen tillsammans."
@@ -111,9 +113,9 @@ tabeller:
         - "Steg 3, när gruppen behöver något nytt"
   - rubrik: "Ordparen"
     plats: "efter-urval"
-    text: "I steg 2 säger du åtta ordpar, och hälften rimmar. Med fler än tre pass tar ni ordparen igen."
+    text: "I steg 2 säger du radens åtta ordpar i blandad ordning, och hälften rimmar. Ni tar samma par varje pass i raden."
     kolumner:
-      - "Pass"
+      - "Rad"
       - "Rimmar"
       - "Rimmar inte"
     rader:
@@ -168,7 +170,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram rimkorten, restkorten, bokstavskorten och speglarna. Välj passets ordpar och orden till ljudstarten. Bestäm paren och skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Ta fram rimkorten, restkorten, bokstavskorten och speglarna. Välj radens ordpar och orden till ljudstarten. Bestäm paren och skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -202,7 +204,7 @@ steg:
         - "Hus och hand börjar likadant, men resten är olika: us och and."
     - namn: "Tummen upp"
       fraga: "Hör vi om det rimmar?"
-      gor: "Säg passets åtta ordpar, och alla visar tummen upp eller ned på ditt tecken, så att du ser varje elev. I raden Början och resten säger gruppen sedan resten i båda orden. I raden Byt början tar ni hus, mus och hand, och alla byter början i kör. Har gruppen haft bokstäverna, läser ni sist ord med restkorten."
+      gor: "Säg radens åtta ordpar, och alla visar tummen upp eller ned på ditt tecken, så att du ser varje elev. I raden Början och resten säger gruppen sedan resten i båda orden. I raden Byt början tar ni hus, mus och hand, och alla byter början i kör. Har gruppen haft bokstäverna, läser ni sist ord med restkorten."
       fraser:
         - "Sol, sko. Tummen upp eller ned? Visa nu."
         - "Säg resten i båda: ol, o."
@@ -243,7 +245,7 @@ arbetsform:
 exempel:
   valt:
     rubrik: "Gruppen"
-    text: "sex elever i förskoleklass och åk 1, med tre pass i veckan. I vecka 1 gör gruppen Rim för tredje passet i följd och står i raden Byt början. Dagens ljud är /o/, och dagens elever är Alva och Leo."
+    text: "sex elever i förskoleklass och åk 1, med tre pass i veckan. I vecka 1 gör gruppen Rim för tredje passet i följd. Den började i raden Början och resten och står nu i raden Byt början. Dagens ljud är /o/, och dagens elever är Alva och Leo."
   text:
     - "Ljudstarten. Läraren visar o, och gruppen sätter ihop och delar upp ord med två och tre ljud att dra ut."
     - "Dela ordet. Läraren visar huset och musen: ”Hus. /h/ och us. Mus. /m/ och us. Samma rest: de rimmar.” Sedan visar hen huset och handen, som börjar likadant men inte rimmar, och stolen: ”Stol. /st/ och ol.” Sist byter läraren /h/ mot /l/ i hus: ”Lus.”"
@@ -251,7 +253,7 @@ exempel:
     - "Rimpar. Paren är Alva och Elin, Omar och Noah, Leo och Mira. Elin säger ”sko”, och Alva tar kon: ”Ko, sko. Samma rest: o.” De vänder korten: resten ser likadan ut."
     - "Ordfamiljer. Läraren lyssnar på Alva och Leo. Alva tar kortet hand: ”Hand. /h/ och and. Sand, land, rand.” Leo tar huset och säger ”mos”. Läraren visar /h/ och us i var sin hand: ”Behåll us.” Leo säger ”mus”."
     - "Avslutet. Mira säger: ”Hus, mus, lus.” Läraren säger: ”Ni bytte början, och resten blev kvar.”"
-    - "Efteråt noterar läraren: Alva byter början säkert, och Leo byter mer än början och får ett rimpar i ljudstarten. Veckan är slut, och gruppen går till nästa förmåga."
+    - "Efteråt noterar läraren: Alva byter början säkert, och Leo byter mer än början. Nästa pass tar gruppen samma rad, och dagens elever blir Elin och Omar."
 fastnar:
   rubrik: "När eleven fastnar"
   text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
@@ -311,9 +313,9 @@ snabbmall:
   sist:
     - Det här gör eleverna själva nu som de inte gjorde förut
     - Jag tar med mig in i nästa vecka
-  not: Rim tar högst en vecka. Med tre pass i veckan byter gruppen rad varje pass. Med fler pass byter den rad när dagens elever klarar steg 4 själva. Efter sista raden går gruppen till nästa förmåga.
+  not: Ta nästa rad när dagens elever klarar steg 4 själva, två pass i följd. Når ni sista raden inom två veckor, stannar ni där med nya ord. I sista raden går gruppen vidare när fler än hälften av eleverna har klarat steg 4.
 grund:
-  text: "Barn hör rim före enskilda ljud (Carroll m.fl., 2003), men att höra och hantera ljuden förutsäger läsningen bäst (Muter m.fl., 1997; Hulme m.fl., 2002; Melby-⁠Lervåg m.fl., 2012). Därför kommer rim först och tar kort tid. Den amerikanska lärarguiden från IES rekommenderar att eleverna delar enstaviga ord i början och resten och byter början (Foorman m.fl., 2016). Att avgöra om ord rimmar är lättare än att hitta rim (Phillips m.fl., 2008), och träningen ger mest när bokstäverna finns med (Bradley och Bryant, 1983, i Wolff, 2017)."
+  text: "Barn hör rim före enskilda ljud (Carroll m.fl., 2003), men att höra och hantera ljuden förutsäger läsningen bäst (Muter m.fl., 1997; Hulme m.fl., 2002; Melby-⁠Lervåg m.fl., 2012). Därför kommer rim först, och lektionen slutar med att eleverna byter början. Den amerikanska lärarguiden från IES rekommenderar att eleverna delar enstaviga ord i början och resten och byter början (Foorman m.fl., 2016). Att avgöra om ord rimmar är lättare än att hitta rim (Phillips m.fl., 2008), och träningen ger mest när bokstäverna finns med (Bradley och Bryant, 1983, i Wolff, 2017)."
   kallor: "Bygger på Bradley och Bryant (1983), Carroll m.fl. (2003), Foorman m.fl. (2016), Hulme m.fl. (2002), Melby-⁠Lervåg m.fl. (2012), Muter m.fl. (1997), Phillips m.fl. (2008) och Wolff (2017)."
 ramar:
   rubrik: "Materialet"

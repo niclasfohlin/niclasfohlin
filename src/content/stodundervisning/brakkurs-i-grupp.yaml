@@ -26,7 +26,7 @@ material:
   - mallar och blad
   - veckans kort
   - knappar och tärning
-uppdaterad: 2026-10-26
+uppdaterad: 2026-10-27
 relaterade:
   - antalsuppfattning-i-grupp
   - problemlosning-i-grupp
@@ -134,7 +134,7 @@ passrutin:
       fas: Fyra sätt
     - text: Alla gör ett sista bråk tillsammans och säger veckans mening.
       fas: Veckans mening
-  efterPasset: Läraren antecknar i några ord vem som kunde säga vad nämnaren och täljaren betyder, vem som gjorde veckans vanliga fel och vad läraren behöver visa igen nästa pass.
+  efterPasset: Läraren antecknar i några ord vem som kunde det gruppen tränar i veckan, vem som gjorde veckans vanliga fel och vad läraren behöver visa igen nästa pass.
 tidsschema:
   rubrik: "Pass 1 och 2: 60 minuter"
   text: Förbered dig genom att göra veckans bråk själv med dagens material och säga orden högt. Översikten visar hur de 60 minuterna fördelas och vem som arbetar i varje del. Paren får längst tid, och Veckans mening får tio minuter, så att gruppen hinner säga meningen med egna exempel.
@@ -284,22 +284,34 @@ urval:
       text: Det eleverna ska se den här veckan
 progression:
   rubrik: "Kursplan: fem veckor och fem fokus"
+  # eleverna och vidare (sajtens K-572, del B, den smala formen): vad eleverna ska bli bättre på i veckan, knutet till
+  # målets punkter, och när gruppen går vidare. Vecka 2 bär också målet att jämföra bråk, som inte hade någon vecka, och
+  # beslutet efter kursen säger det (out/planera-r/brakkurs-i-grupp-4.md).
   rader:
     - vecka: "1"
       fokus: "Lika delar: eleverna delar det hela i lika stora delar och lär sig orden nämnare och täljare. Du gör kartläggningen före första passet."
       roll: Läraren viker först och säger varje del.
+      eleverna: "Att dela det hela i lika stora delar och säga vad nämnaren och täljaren betyder."
+      vidare: "de flesta i gruppen visar att delarna är lika stora och säger vad nämnaren och täljaren betyder, i pass 1 och pass 2"
     - vecka: "2"
       fokus: "Bråk på tallinjen: staven blir ett mått, och bråket får en plats mellan 0 och 2, också bråk större än 1."
       roll: Läraren lägger stavarna mot tallinjen och räknar delarna högt.
+      eleverna: "Att sätta ut bråket vid strecket där delen slutar, också när bråket är större än 1. Att jämföra bråk med hjälp av 0, en halv och en hel, och av det som fattas till en hel."
+      vidare: "de flesta i gruppen sätter ut bråket vid strecket där delen slutar och säger om det är mer eller mindre än en halv, i pass 1 och pass 2"
     - vecka: "3"
       fokus: "Likvärdiga bråk: bråk som hamnar på samma punkt är samma tal. Eleverna skriver tiondelar som decimaltal, och en halv, en fjärdedel och tre fjärdedelar i procent."
       roll: Läraren visar samma punkt och frågar hur eleverna vet.
+      eleverna: "Att visa att två bråk hamnar på samma punkt och säga hur de vet. Att skriva tiondelar som decimaltal och skriva en halv, en fjärdedel och tre fjärdedelar i procent."
+      vidare: "de flesta i gruppen visar med stavarna eller på tallinjen att två bråk är samma tal och säger hur de vet, i pass 1 och pass 2"
     - vecka: "4"
       fokus: "Addera och subtrahera: eleverna räknar delar som är lika stora, byter till mindre delar och uppskattar först."
       roll: Läraren uppskattar högt innan hen räknar.
+      eleverna: "Att först uppskatta om svaret blir mer eller mindre än 1 och sedan räkna delar som är lika stora, också när de byter en del mot mindre delar."
+      vidare: "de flesta i gruppen uppskattar först och räknar sedan delarna utan att lägga ihop nämnarna, i pass 1 och pass 2"
     - vecka: "5"
       fokus: "Bråk av antal: eleverna delar i lika stora grupper och hittar det hela när en del är känd. Du gör kartläggningen efter sista passet."
       roll: Läraren visar kort, och eleverna berättar mer själva.
+      eleverna: "Att dela ett antal i lika stora delar och ta så många delar som täljaren säger, och att hitta det hela när en del är känd."
 uppfoljning:
   rader:
     - nar: Före insatsen
@@ -307,10 +319,10 @@ uppfoljning:
       vad: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Uppgifterna står under Kartläggning före och efter kursen. Anteckna R för rätt svar och R+ när eleven också förklarar med rätt ord, med en bild eller på tallinjen, i kolumnen Före.
     - nar: Varje pass
       tid: "varje pass"
-      vad: Vem kunde säga vad nämnaren och täljaren betyder, och vem gjorde veckans vanliga fel?
+      vad: Vem kunde det gruppen tränar i veckan, och vem gjorde veckans vanliga fel?
     - nar: Efter fem veckor
       tid: "efter"
-      vad: Gör samma kartläggning igen och anteckna i kolumnen Efter på samma kopia. Jämför uppgift för uppgift och berätta för klassläraren vad som behöver mer träning. Ett mål är nått när båda uppgifterna för målet är rätt, med R+ där uppgiften frågar hur eleven vet. Har eleven nått alla målen, är eleven klar med bråkkursen. Saknar eleven ett eller flera mål men har nått fler än före kursen, gör ni veckorna med de målen en gång till, tillsammans med dem i gruppen som saknar samma mål. Sedan gör ni målens uppgifter i kartläggningen igen. Saknar bara en elev målet, är du elevens kamrat i Korten. Har eleven inte nått fler mål än före kursen, eller saknar eleven ett mål också andra gången, tar du upp det med elevhälsan.
+      vad: Gör samma kartläggning igen och anteckna i kolumnen Efter på samma kopia. Jämför uppgift för uppgift och berätta för klassläraren vad som behöver mer träning. Ett mål är nått när båda uppgifterna för målet är rätt, med R+ där uppgiften frågar hur eleven vet. Har eleven nått alla målen, är eleven klar med bråkkursen. Saknar eleven ett eller flera mål men har nått fler än före kursen, gör ni veckorna med de målen en gång till, tillsammans med dem i gruppen som saknar samma mål. Målet att jämföra bråk hör till vecka 2. Sedan gör ni målens uppgifter i kartläggningen igen. Saknar bara en elev målet, är du elevens kamrat i Korten. Har eleven inte nått fler mål än före kursen, eller saknar eleven ett mål också andra gången, tar du upp det med elevhälsan.
 plan:
   utan:
     - "Översikten visar hur de 60 minuterna fördelas och vem som arbetar i varje del."
@@ -322,7 +334,7 @@ plan:
   utvardering:
     - "Ett mål är nått när båda uppgifterna för målet är rätt, med R+ där uppgiften frågar hur eleven vet."
     - "Har eleven nått alla målen, är eleven klar med bråkkursen."
-    - "Saknar eleven ett eller flera mål men har nått fler än före kursen, gör ni veckorna med de målen en gång till, tillsammans med dem i gruppen som saknar samma mål. Sedan gör ni målens uppgifter i kartläggningen igen."
+    - "Saknar eleven ett eller flera mål men har nått fler än före kursen, gör ni veckorna med de målen en gång till, tillsammans med dem i gruppen som saknar samma mål. Målet att jämföra bråk hör till vecka 2. Sedan gör ni målens uppgifter i kartläggningen igen."
     - "Har eleven inte nått fler mål än före kursen, eller saknar eleven ett mål också andra gången, tar du upp det med elevhälsan."
   passen:
     - nar: veckans första
@@ -619,11 +631,11 @@ ramar:
         - rubrik: Vecka 2 · Pass 2 · Läs kortet, kamraten ritar och skriver
           rader:
             - - Rita en tallinje från 0 till 1 och dela den i fjärdedelar. Sätt ut 3/4.
-            - - Sätt ut 1/5 och 4/5 på en tallinje från 0 till 1. Vilket ligger närmast 1?
+            - - Sätt ut 1/5 och 4/5 på en tallinje från 0 till 1. Vilket ligger närmast 1? Hur mycket fattas till 1?
             - - Är 3/8 mer eller mindre än en halv? Visa på tallinjen.
             - - Räkna i fjärdedelar från 0 till 2 och skriv talen vid strecken.
-            - - Sätt ut 7/5 på tallinjen. Skriv det med ett helt tal och ett bråk.
-            - - Vilket är störst, 5/6 eller 1? Visa på tallinjen.
+            - - Sätt ut 4/5 och 5/6 på två tallinjer från 0 till 1. Hur mycket fattas till 1 för varje bråk? Vilket är störst?
+            - - Sätt ut 7/5 på en tallinje från 0 till 2. Skriv det med ett helt tal och ett bråk.
         - rubrik: Vecka 2 · Pass 3 · Spelkort till Högst vinner, klipp isär
           rader:
             - ["1/4", "3/4", "5/4", "7/4"]
@@ -772,7 +784,7 @@ ramar:
             - - Hur många är 3/4 av 32?
             - - Rita stapeln. Hur många är 2/5 av 30?
             - - En tröja kostar 200 kr. Priset sänks med 1/4. Hur mycket sänks priset? Vad kostar tröjan nu?
-            - - 1/3 av eleverna går hem. Det är 9 elever. Hur många elever är det i allt?
+            - - 2/3 av eleverna går hem. Det är 18 elever. Hur många elever är det i allt?
             - - Hur mycket är 25 % av 40 kr? Tänk en fjärdedel.
         - rubrik: Vecka 5 · Pass 3 · Spelkort till Ta din del av 24, klipp isär
           rader:
@@ -1011,7 +1023,7 @@ lathund:
       - nar: "Före insatsen"
         vad: "Kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Anteckna R för rätt svar och R+ när eleven också förklarar, i kolumnen Före."
       - nar: "Varje pass"
-        vad: "Vem kunde säga vad nämnaren och täljaren betyder, och vem gjorde veckans vanliga fel?"
+        vad: "Vem kunde det gruppen tränar i veckan, och vem gjorde veckans vanliga fel?"
       - nar: "Efter fem veckor"
         vad: "Samma kartläggning i kolumnen Efter. Har eleven nått alla målen, är kursen klar. Har eleven nått fler än före, gör ni veckorna med de mål som saknas en gång till. Annars tar du upp det med elevhälsan."
 film:

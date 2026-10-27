@@ -94,7 +94,11 @@ const lista = (s) => s.split(/\s*(?:,|\boch\b)\s*/).filter(Boolean).map((x) => t
  * så att planen kan sätta ett datum och bygget kan stanna på ett ord den inte känner:
  * före, efter, efter N veckor (och N–M veckor), varje pass, i passet, varje vecka, varannan vecka, var N:e vecka,
  * vecka N (och N, M och O eller N–M), första veckan, sista veckan, pass N (och N, M och O eller N–M), sista passet, sista
- * passet efter pass N, när serien är längre än N pass, och villkor, det som läraren bedömer när det händer.
+ * passet efter pass N, när serien är längre än N pass, och villkor, det som läraren bedömer när det händer. Platsen i
+ * veckan står före veckan: veckans första pass i vecka N, veckans sista pass i vecka N (också N, M och O) och första
+ * passet i sista veckan. De följer metodens veckor också när en vecka tas om, som passets nummer inte gör (Codex
+ * 2026-10-27, K-553: Värdeskapandes Sista veckan, dag 1 fick veckans sista pass, och texttypskursernas pass 11 hamnade i
+ * fel vecka när vecka 2 togs om).
  * @param {unknown} text
  * @returns {Tid | null}
  */
@@ -117,6 +121,18 @@ export function tolkaTid(text) {
   // 2026-10-26: en plan med fyra samtal saknade den).
   m = t.match(new RegExp(String.raw`^sista passet efter pass ${TAL}$`, 'u'));
   if (m) return { typ: 'sista-passet', efter: talAv(m[1]) };
+  // Pass i kursens veckor, som texttypskursernas "pass 6, 8 och 11 i kursens veckor": metodens pass räknat i metodens
+  // veckor med metodens fasta antal pass i veckan, så att mätningen följer innehållet när en vecka tas om (Codex
+  // 2026-10-27, K-553).
+  m = t.match(/^(pass .+) i kursens veckor$/u);
+  if (m) { const p = tolkaTid(m[1]); return p?.typ === 'pass' ? { ...p, kurs: true } : null; }
+  m = t.match(/^(?:veckans (första|sista) pass i|(första|sista) passet i) (.+)$/u);
+  if (m) {
+    const plats = (m[1] ?? m[2]) === 'första' ? 'forsta' : 'sista';
+    if (m[3] === 'sista veckan') return { typ: 'sista-veckan', plats };
+    const v = tolkaTid(m[3]);
+    return v?.typ === 'vecka' ? { ...v, plats } : null;
+  }
   if (t === 'villkor') return { typ: 'villkor' };
   m = t.match(new RegExp(String.raw`^(vecka|pass) ${TAL}${STRECK}${TAL}$`, 'u'));
   if (m) {
@@ -236,12 +252,16 @@ export function metodplan(d) {
     const tid = tolkaTid(r.tid);
     if (r.tid === undefined) fel.push(`Uppföljningens rad "${r.nar}" har ingen tid. Skriv den med standardens ord, som före, varje vecka, vecka 4 eller efter.`);
     else if (!tid) fel.push(`Uppföljningens rad "${r.nar}" har tiden "${r.tid}", som planen inte känner. Orden står i METODER.md under Planera insatsen.`);
+    else if (tid.typ === 'pass' && tid.kurs && (!takt || takt.min !== takt.max || period?.enhet === 'pass')) fel.push(`Uppföljningens rad "${r.nar}" räknar pass i kursens veckor, och det kräver en period i veckor och ett fast antal pass i veckan i faktarutans tid.`);
     return { rad, tid };
   });
   const enhetText = (d.progression?.enhet ?? 'Vecka').toLowerCase();
-  const stegEnhet = enhetText === 'pass' ? 'pass' : enhetText === 'vecka' ? 'veckor' : null;
-  if (d.progression && !stegEnhet) fel.push(`Progressionens första kolumn heter "${d.progression.enhet}". Planen läser veckor och pass, så skriv kolumnen som Vecka eller Pass.`);
-  const steg = (d.progression?.rader ?? []).map((r, rad) => {
+  // En progression vars första kolumn heter När, som Kortskrivnings Pass 1–10, När ni är varma i kläderna och Veckans sista
+  // pass, är råd utan veckor: planen kopplar inte raderna till veckor och visar dem i varje vecka (sajtens K-553; Niclas
+  // 2026-10-26 sa ja till förslaget).
+  const stegEnhet = enhetText === 'pass' ? 'pass' : enhetText === 'vecka' ? 'veckor' : enhetText === 'när' ? 'nar' : null;
+  if (d.progression && !stegEnhet) fel.push(`Progressionens första kolumn heter "${d.progression.enhet}". Planen läser veckor och pass, och När som råd utan veckor, så skriv kolumnen som Vecka, Pass eller När.`);
+  const steg = (stegEnhet === 'nar' ? [] : d.progression?.rader ?? []).map((r, rad) => {
     const s = tolkaSteg(r.vecka);
     if (!s) fel.push(`Progressionens rad "${r.vecka}" går inte att läsa som ${stegEnhet === 'pass' ? 'pass' : 'veckor'}. Skriv den som 1, 4–5, 6 till det sista eller Från pass 11.`);
     return s ? { rad, ...s } : null;
@@ -250,6 +270,7 @@ export function metodplan(d) {
     const forra = steg[i - 1];
     if (s && forra && (forra.till === undefined || s.fran <= forra.till)) fel.push(`Progressionens rad "${d.progression.rader[i].vecka}" börjar innan raden före slutar.`);
   });
+  if (d.plan?.sistaRaden && (stegEnhet !== 'veckor' || steg.length < 2)) fel.push('plan.sistaRaden gäller en progression i veckor med minst två rader: den sista raden tar planens sista vecka när perioden slutar före den.');
   // Planens rader läser samma ord som tidsschemats varianter, utom passets längd (variantensNar), så att en roll kan gälla en
   // plats i vissa veckor, som Faktatextsamtalets förberedelse med bladet Egen text i vecka 6–8.
   const passen = (d.plan?.passen ?? []).map((p, rad) => {
@@ -275,6 +296,8 @@ export function metodplan(d) {
       ...(typeof d.plan?.veckoval?.forval === 'number' ? { forvaldaVeckor: d.plan.veckoval.forval } : {}),
       // Skolveckorna före första passet som det metoden gör före start behöver, när det är fler än en (plan.foreVeckor).
       ...(typeof d.plan?.foreVeckor === 'number' ? { foreVeckor: d.plan.foreVeckor } : {}),
+      // Progressionens sista rad tar planens sista vecka när perioden slutar före den (plan.sistaRaden).
+      ...(d.plan?.sistaRaden ? { sistaRaden: true } : {}),
     },
   };
 }
@@ -304,7 +327,7 @@ export const planensInledning = (text, utan = []) => meningarna(text).filter((m)
  */
 export const planensTexter = (d) => [
   ...(d.uppfoljning?.rader ?? []).map((r) => /** @type {[string, string]} */ ([`Uppföljningens rad "${r.nar}"`, r.vad])),
-  ...(d.progression?.rader ?? []).flatMap((r) => [r.fokus, r.roll, r.led].filter(Boolean).map((t) => /** @type {[string, string]} */ ([`Progressionens rad "${r.vecka}"`, t]))),
+  ...(d.progression?.rader ?? []).flatMap((r) => [r.fokus, r.roll, r.led, r.eleverna, r.vidare ? vidareMening(r.vidare) : undefined].filter(Boolean).map((t) => /** @type {[string, string]} */ ([`Progressionens rad "${r.vecka}"`, t]))),
   ...(d.checklista?.punkter ?? []).map((p) => /** @type {[string, string]} */ (['Checklistan', p])),
   ...(d.plan?.passen ?? []).flatMap((p) => (p.text ? [/** @type {[string, string]} */ ([`Planens pass "${p.nar}"`, p.text])] : [])),
   ...(d.plan?.fore ?? []).map((t) => /** @type {[string, string]} */ (['Planens fore', t])),
@@ -518,19 +541,24 @@ export function lektionsvaletsFel(d) {
 }
 
 /**
- * Planens förslag efter en vecka med en lektion: nästa lektion när snittet av veckans skattningar mot lektionens mål är över
- * LEKTIONENS_GRANS, och samma lektion igen annars. En lektion som tar högst en vecka, som Rim, föreslår nästa, eftersom
- * metoden säger så. Utan skattning finns inget förslag, och planen visar lektionens regel i stället.
+ * Planens förslag efter en vecka med en lektion (K-578; Niclas 2026-10-27: "Lektionerna bör köras ca 2 veckor i rad ...
+ * från lektion 6 och fram rekommenderas däremot 2-4 veckor för en lektion och att merparten av eleverna klarar av
+ * innehållet sjäkvmant ... Elevernas progression styr"): samma lektion så länge gruppen har haft den färre veckor i följd än
+ * lektionens min, och sedan nästa när snittet av veckans skattningar mot lektionens mål är över LEKTIONENS_GRANS, annars
+ * samma. Planen föreslår aldrig nästa bara för att lektionens max är nådd. Utan skattning efter min finns inget förslag, och
+ * planen visar lektionens regel.
  * @param {number[]} varden veckans skattningar från 1 till 5, per elev eller för gruppen
- * @param {boolean} [hogstEnVecka]
- * @returns {{ forslag: 'nasta' | 'upprepa' | null, snitt: number | null }}
+ * @param {{ min: number, max: number }} [veckor] lektionens veckor
+ * @param {number} [gangen] veckorna i följd som gruppen har haft lektionen, den här veckan medräknad
+ * @returns {{ forslag: 'nasta' | 'upprepa' | null, snitt: number | null, forKort: boolean }}
  */
-export function lektionensForslag(varden, hogstEnVecka = false) {
+export function lektionensForslag(varden, veckor, gangen = 1) {
   const v = varden.filter((x) => Number.isFinite(x) && x >= 1 && x <= 5);
   const snitt = v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
-  if (hogstEnVecka) return { forslag: 'nasta', snitt };
-  if (snitt === null) return { forslag: null, snitt };
-  return { forslag: snitt > LEKTIONENS_GRANS ? 'nasta' : 'upprepa', snitt };
+  const forKort = !!veckor && gangen < veckor.min;
+  if (forKort) return { forslag: 'upprepa', snitt, forKort };
+  if (snitt === null) return { forslag: null, snitt, forKort };
+  return { forslag: snitt > LEKTIONENS_GRANS ? 'nasta' : 'upprepa', snitt, forKort };
 }
 /**
  * Passets längder att välja i planen och förvalet, ur faktarutans spann (sajtens K-564; Niclas 2026-10-26: "Lite konstigt
@@ -585,6 +613,120 @@ export function veckovaletsFel(d) {
  * @returns {string[]}
  */
 export const utvarderingensFel = (d) => (d.plan && !d.plan.utvardering?.length ? ['En metod som kan planeras har metodens regel för beslutet efter insatsen i plan.utvardering: vad läraren beslutar efter vilket resultat, ordagrant ur metoden.'] : []);
+
+// ---------- Elevernas riktning i progressionen ----------
+// Den smala formen (sajtens K-572; Niclas 2026-10-26: "Gillar egentligen fokus och lärarens roll. Men behöver samtidigt en
+// tydlig riktning för eleverna lärande och utveckling"): varje rad i progressionen säger vad eleverna ska bli bättre på,
+// `eleverna`, och när gruppen går vidare, `vidare`. Metodens sida och Word visar dem i en fjärde kolumn, Eleverna blir
+// bättre på, och planen överst i veckan och under Efter veckan, ur funktionerna här.
+
+/** Kolumnens rubrik på metodens sida och i Word, och etiketten i planen. */
+export const ELEVERNAS_KOLUMN = 'Eleverna blir bättre på';
+
+/** Början på regeln för att gå vidare, som metodens egen regel för att ta veckan igen kan hänvisa till. */
+export const VIDARE_BORJAN = 'Gå vidare när';
+
+/**
+ * Regeln för att gå vidare som en mening, "Gå vidare när …", på metodens sida, i Word och i planen.
+ * @param {string} vidare
+ * @returns {string}
+ */
+export const vidareMening = (vidare) => `${VIDARE_BORJAN} ${vidare.trim()}.`;
+
+/**
+ * Om metodens regel för att ta veckan igen (`plan.upprepa`) hänvisar till radernas regel för att gå vidare, som "Klarar
+ * gruppen inte det som står under Gå vidare när, …". En sådan regel står i planen bara där en rad prövas, och en regel
+ * utan hänvisning bara i en metod utan regler i raderna, så att veckan inte har två villkor för samma beslut (den stängda
+ * granskningen av K-572 2026-10-27: Läslistors "Byt lista när …" stod under varje veckas Gå vidare när).
+ * @param {string} upprepa
+ */
+export const hanvisarTillVidare = (upprepa) => upprepa.includes(VIDARE_BORJAN);
+
+/**
+ * Metodens regel för att ta veckan igen som planen visar i en vecka, eller null när planens egen mening står där. En mening
+ * som hänvisar till Gå vidare när är villkoret och står där radens regel prövas, och de andra meningarna säger hur veckan
+ * tas igen och står i varje vecka, som Högläsning i pars "Tar ni om en vecka, skjuter du upp mötet och läsningen
+ * hos de yngre en vecka." (Codex och den kalla testaren 2026-10-27, K-572: meningen föll bort i vecka 6–8). En regel utan
+ * hänvisning gäller bara i en metod utan regler i raderna, så att veckan inte har två villkor för samma beslut.
+ * @param {string | undefined} upprepa metodens plan.upprepa
+ * @param {boolean} medRegler någon rad i progressionen har vidare
+ * @param {boolean} provas veckan prövar en rads regel (vidareProvasI)
+ * @returns {{ text: string, hela: boolean } | null} hela: regeln står hel, annars efter planens mening
+ */
+export function upprepaIVeckan(upprepa, medRegler, provas) {
+  if (!upprepa) return null;
+  const m = meningarna(upprepa);
+  if (!m.some(hanvisarTillVidare)) return medRegler ? null : { text: upprepa, hela: true };
+  if (provas) return { text: upprepa, hela: true };
+  const hur = m.filter((x) => !hanvisarTillVidare(x));
+  return hur.length ? { text: hur.join(' '), hela: false } : null;
+}
+
+/**
+ * Om regeln för att gå vidare i progressionens rad prövas i veckan: i radens sista vecka i planen, också när veckan tas
+ * igen, och i en progression i pass veckan med radens sista pass. En rad utan slut, som Från pass 11, prövas varje vecka
+ * (den stängda granskningen av K-572 2026-10-27: Problemlösnings regel för ledet Jag gör, vecka 1–2, stod redan i vecka 1,
+ * och TIL:s "i fyra pass i rad" gick inte att nå där).
+ * @param {Metodplan} mp
+ * @param {Plan} plan
+ * @param {{ innehall: number, pass: number[], steg?: number | null }} v
+ * @param {number} rad progressionens rad
+ * @returns {boolean}
+ */
+export function vidareProvasI(mp, plan, v, rad) {
+  const s = mp.steg.find((x) => x.rad === rad);
+  if (!s || s.till === undefined) return true;
+  // Radens sista vecka eller pass i just den här planen, så att en rad som plan.sistaRaden har kortat prövas i sin sista
+  // vecka (Codex 2026-10-27: Ni gör tillsammans fick aldrig sin regel i en plan på sex veckor).
+  if (mp.stegEnhet === 'veckor') {
+    const sista = Math.max(...plan.veckor.filter((x) => x.steg === rad).map((x) => x.innehall));
+    return v.steg === rad && v.innehall === sista;
+  }
+  const sistaPass = Math.max(...plan.pass.filter((p) => p.steg === rad).map((p) => p.nr));
+  return v.pass.includes(sistaPass);
+}
+
+/**
+ * Den fjärde kolumnens cell: vad eleverna blir bättre på, och regeln för att gå vidare på en egen rad.
+ * @param {{ eleverna?: string, vidare?: string }} r
+ * @returns {string}
+ */
+export const elevernasCell = (r) => [r.eleverna ?? '', r.vidare ? vidareMening(r.vidare) : ''].filter(Boolean).join('\n');
+
+/**
+ * Har progressionen den fjärde kolumnen? Den står när någon rad säger vad eleverna blir bättre på eller när gruppen går
+ * vidare, så att en regel aldrig faller bort ur sidan och Word.
+ * @param {{ progression?: { rader: { eleverna?: string, vidare?: string }[] } }} d
+ * @returns {boolean}
+ */
+export const harElevernasKolumn = (d) => !!d.progression?.rader.some((r) => r.eleverna || r.vidare);
+
+/** Högsta längd för `eleverna`, som schemat också håller. */
+export const ELEVERNAS_LANGD = 200;
+
+/**
+ * Spärren för elevernas riktning: `eleverna` är en mening som börjar med "Att", om något eleverna gör eller säger, högst två
+ * meningar och 200 tecken, och `vidare` är fortsättningen på "Gå vidare när", med liten bokstav först och utan punkt sist.
+ * En metod som kan planeras har `eleverna` i varje rad, och den sista raden har inget `vidare`, eftersom beslutet efter
+ * perioden gäller där (`plan.utvardering`). Riggen kör samma spärr före leveransen.
+ * @param {{ plan?: unknown, progression?: { rader: { vecka: string, eleverna?: string, vidare?: string }[] } }} d
+ * @returns {string[]}
+ */
+export function elevernasFel(d) {
+  const rader = d.progression?.rader ?? [];
+  /** @type {string[]} */
+  const fel = [];
+  rader.forEach((r, i) => {
+    const namn = `Progressionens rad "${r.vecka}"`;
+    if (d.plan && !r.eleverna) fel.push(`${namn} har inget eleverna: vad eleverna ska bli bättre på, en mening som börjar med "Att" (METODER.md under Fälten i metodens fil).`);
+    if (r.eleverna && !/^Att \S/.test(r.eleverna.trim())) fel.push(`${namn}: eleverna börjar med "Att", om något eleverna gör eller säger.`);
+    if (r.eleverna && (r.eleverna.length > ELEVERNAS_LANGD || meningarna(r.eleverna).length > 2)) fel.push(`${namn}: eleverna har högst två meningar och ${ELEVERNAS_LANGD} tecken.`);
+    if (r.vidare && !/^\p{Ll}/u.test(r.vidare.trim())) fel.push(`${namn}: vidare är fortsättningen på "Gå vidare när", med liten bokstav först.`);
+    if (r.vidare && /[.!?]\s*$/.test(r.vidare)) fel.push(`${namn}: vidare slutar utan punkt, eftersom sidan skriver "Gå vidare när …".`);
+    if (r.vidare && i === rader.length - 1) fel.push(`${namn} är progressionens sista och har inget vidare: där gäller beslutet efter perioden (plan.utvardering).`);
+  });
+  return fel;
+}
 
 // ---------- Metodens egna skattningar ----------
 // En metod med ett eget instrument, som Gruppstärkande aktiviteters Lärarens skattning från 1 till 10 och bladet Vår grupp,
@@ -759,7 +901,7 @@ export function skattningensText(s, sk, info) {
 }
 
 /** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen, citatens och nivåvalets. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */
-export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...utvarderingensFel(d)];
+export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...utvarderingensFel(d), ...elevernasFel(d)];
 
 // ---------- Modulen ----------
 
@@ -769,7 +911,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.15', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.4.0', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -1059,9 +1201,18 @@ export function planera(mp, val) {
   // Varje pass hör till ett steg i progressionen: efter veckans plats i metoden, eller passets nummer. Det som kommer efter
   // insatsen tar ingen vecka.
   const stegFor = (nr) => mp.steg.find((s) => !s.efter && nr >= s.fran && (s.till === undefined || nr <= s.till));
-  for (const v of veckor) v.steg = mp.stegEnhet === 'veckor' ? stegFor(v.innehall)?.rad ?? null : null;
+  // En metod som säger att det sista steget tas i den sista veckan när perioden är kortare (plan.sistaRaden), som
+  // Problemlösnings "Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan": planens sista
+  // vecka, och dess upprepningar, får progressionens sista rad när perioden slutar före den (Codex 2026-10-27, K-572: vecka 6
+  // av sex visade ledet Ni gör tillsammans). Gränsen är den planerade perioden, så att ett avslut inte flyttar en vecka som
+  // har varit.
+  const sistaSteg = mp.sistaRaden ? mp.steg.filter((s) => !s.efter).at(-1) : undefined;
+  const sistaInnehall = borja + langd - 1;
+  const stegForVeckan = (nr) => (sistaSteg && !iPass && nr === sistaInnehall && nr < sistaSteg.fran ? sistaSteg : stegFor(nr));
+  for (const v of veckor) v.steg = mp.stegEnhet === 'veckor' ? stegForVeckan(v.innehall)?.rad ?? null : null;
   for (const p of pass) p.steg = mp.stegEnhet === 'pass' ? stegFor(p.nr)?.rad ?? null : veckor[p.vecka - 1].steg;
   const sistaIVeckan = (v) => veckansDagar({ pass }, v).till;
+  const forstaIVeckan = (v) => veckansDagar({ pass }, v).fran;
   // Det eleverna fyller i under ett pass, som gruppreflektionen, tar tid i passet och görs i veckans längsta pass efter
   // lärarens tider, och i veckans sista när passen är lika långa (sajtens K-562; verifieringen av K-559 2026-10-26:
   // reflektionen hamnade i onsdagens pass på 30 minuter och inte i måndagens på 40).
@@ -1079,6 +1230,8 @@ export function planera(mp, val) {
     const dagen = iPasset.has(rad) ? langstaIVeckan : sistaIVeckan;
     /** @type {{ datum: string, vecka: number | null }[]} */
     let tillfallen = [];
+    // Platsen i veckan, när tiden säger den (veckans första pass i vecka N), annars passet som raden görs i.
+    const iVeckan = 'plats' in tid && tid.plats ? (tid.plats === 'forsta' ? forstaIVeckan : sistaIVeckan) : dagen;
     // Före insatsen står i veckan före, med vecka 0: före planens första vecka.
     if (tid.typ === 'fore' && forsta) tillfallen = [{ datum: foreMandag, vecka: 0 }];
     // Efter: veckan efter sista passet; efter N veckor: veckan med dagen N veckor efter sista passet (buggjägarna
@@ -1095,8 +1248,20 @@ export function planera(mp, val) {
     // Varannan vecka räknas bland veckorna med pass, så att en vecka där passet faller bort inte ger tillfällen två veckor i
     // rad (verifieringen av K-559 samma dag: v. 2 och v. 3).
     else if (tid.typ === 'intervall') tillfallen = veckor.filter((v) => v.pass.length).filter((_, i) => (i + 1) % tid.var === 0).map((v) => ({ datum: dagen(v), vecka: v.nr }));
-    else if (tid.typ === 'vecka') tillfallen = unikaVeckor(tid.veckor.flatMap((n) => { const v = [...veckor].reverse().find((x) => x.innehall === n); return v ? iVeckaMedPass(v, dagen) : []; }));
-    else if (tid.typ === 'sista-veckan' && veckor.length) { const v = [...veckor].reverse().find((x) => x.pass.length); tillfallen = v ? [{ datum: dagen(v), vecka: v.nr }] : []; }
+    else if (tid.typ === 'vecka') tillfallen = unikaVeckor(tid.veckor.flatMap((n) => { const v = [...veckor].reverse().find((x) => x.innehall === n); return v ? iVeckaMedPass(v, iVeckan) : []; }));
+    else if (tid.typ === 'sista-veckan' && veckor.length) { const v = [...veckor].reverse().find((x) => x.pass.length); tillfallen = v ? [{ datum: iVeckan(v), vecka: v.nr }] : []; }
+    else if (tid.typ === 'pass' && tid.kurs) {
+      // Metodens pass N är passet på sin plats i metodens vecka, den sista gången veckan står i planen, eller veckans sista
+      // pass när veckan har färre.
+      const takt = mp.takt.min;
+      tillfallen = tid.pass.flatMap((n) => {
+        const w = Math.ceil(n / takt), k = n - (w - 1) * takt;
+        const v = [...veckor].reverse().find((x) => x.innehall === w && x.pass.length);
+        const ip = v ? iDatumordning(v.pass.map((nr) => pass.find((x) => x.nr === nr)).filter(Boolean)) : [];
+        const p = ip[Math.min(k, ip.length) - 1];
+        return p && v ? [{ datum: p.datum, vecka: v.nr }] : [];
+      });
+    }
     else if (tid.typ === 'pass') tillfallen = tid.pass.flatMap((n) => { const p = pass.find((x) => x.nr === n); return p ? [{ datum: p.datum, vecka: p.vecka }] : []; });
     // Med "efter pass N" bara när det sista passet har ett nummer efter N, så att samma mätning inte står två gånger på
     // pass N och så att en serie som slutar tidigare inte får den (Codex 2026-10-26).
@@ -1104,8 +1269,9 @@ export function planera(mp, val) {
     // En följd av veckor, som Kort utan beröring vecka 1–4, säger vad läraren gör under perioden och är ingen mätning: den har
     // inga fält för resultat och står inte i kalendern eller bland uppföljningen i texten till åtgärdsprogrammet
     // (verifieringen av K-559 samma dag).
-    const period = tid.typ === 'vecka' && tid.veckor.length > 1 && tid.veckor.every((x, i) => i === 0 || x === tid.veckor[i - 1] + 1);
-    return { rad, typ: tid.typ, tillfallen, ...(period ? { period: /** @type {const} */ (true) } : {}) };
+    // Med en plats i veckan är veckorna mätningar, som texttypskursernas pass 6, 8 och 10.
+    const period = tid.typ === 'vecka' && !tid.plats && tid.veckor.length > 1 && tid.veckor.every((x, i) => i === 0 || x === tid.veckor[i - 1] + 1);
+    return { rad, typ: tid.typ, tillfallen, ...(period ? { period: /** @type {const} */ (true) } : {}), ...('plats' in tid && tid.plats ? { plats: tid.plats } : {}) };
   });
   const efterSteg = mp.steg.find((s) => s.efter)?.rad;
   return {
@@ -1133,6 +1299,13 @@ export function forlangdaVal(mp, val, n) {
   const plan = planera(mp, val);
   const mitt = val.mitt ?? mittVeckan(plan) ?? undefined;
   const ut = { ...val, ...(mitt ? { mitt } : {}) };
+  // Har planens sista vecka fått progressionens sista rad (plan.sistaRaden), förlängs den med samma vecka igen, så att
+  // veckan som har varit behåller sitt innehåll och de nya veckorna fortsätter i den sista raden (Codex 2026-10-27, K-572:
+  // en förlängning med en vecka gjorde vecka 6 av sex till Ni gör tillsammans).
+  const sistaVeckan = plan.veckor.at(-1), sistaSteget = mp.steg.filter((x) => !x.efter).at(-1);
+  if (!val.slut && mp.sistaRaden && mp.stegEnhet === 'veckor' && mp.period.enhet !== 'pass' && sistaVeckan && sistaSteget && sistaVeckan.steg === sistaSteget.rad && sistaVeckan.innehall < sistaSteget.fran) {
+    return { ...ut, upprepa: [...(val.upprepa ?? []), ...Array.from({ length: n }, () => sistaVeckan.innehall)] };
+  }
   if (!val.slut) return { ...ut, langd: val.langd + steg(n) };
   const hel = planera(mp, { ...val, slut: undefined });
   const mal = plan.veckor.length + n;
@@ -1496,19 +1669,25 @@ export function varianternasFel(d, texter, o) {
  * Kolumnerna efter är delens text: den första är vad som händer, och de andra står med kolumnens namn, som "Du säger". En
  * rad utan minuter ("Före passet", "Dagen före") är förberedelsen. Null när tabellen inte är ett pass i delar, också när en
  * del saknar namn: då får metodens tabell namnen, som Boksamtalets bokval fick (Niclas samma dag: metoderna får förtydligas,
- * "tydligare passdelar"), så att planen visar tunna rader med delarnas namn.
+ * "tydligare passdelar"), så att planen visar tunna rader med delarnas namn. Delens namn kan också stå i en kolumn Steg,
+ * som Berättelseramens Fortsättningspasset (K-553). Har tabellen en kolumn per pass, som Ordverkstads Pass 2 och 3, väljer
+ * kolumn passets text, och de andra kolumnerna står inte med (K-575; Codex 2026-10-27: pass 3 fick pass 2:s text).
  * @param {{ kolumner: string[], rader?: unknown[][] }} t
+ * @param {string} [kolumn] passets kolumn, när tabellen har en kolumn per pass
  * @returns {{ delar: TabellDel[], fore: { namn: string, nar: string, vad: string, mer: { etikett: string, text: string }[] }[] } | null}
  */
-export function tabellensDelar(t) {
+export function tabellensDelar(t, kolumn) {
   const k = t.kolumner.map((x) => x.trim().toLowerCase());
   const tidKol = k.indexOf('tid');
-  const namnKol = k.findIndex((x) => x === 'del' || x === 'delen');
+  const namnKol = k.findIndex((x) => x === 'del' || x === 'delen' || x === 'steg');
   const blandad = k.findIndex((x) => x === 'del och tid' || x === 'tid och del');
   // Tiden och namnet i samma cell: en kolumn som säger båda, eller en kolumn Del när tabellen inte har någon kolumn Tid.
   const samma = blandad >= 0 ? blandad : tidKol < 0 ? namnKol : -1;
   if (samma < 0 && tidKol < 0) return null;
-  const textKol = k.map((_, i) => i).filter((i) => i !== samma && i !== tidKol && i !== namnKol);
+  const alla = k.map((_, i) => i).filter((i) => i !== samma && i !== tidKol && i !== namnKol);
+  const vald = kolumn === undefined ? -1 : k.indexOf(kolumn.trim().toLowerCase());
+  if (kolumn !== undefined && !alla.includes(vald)) return null;
+  const textKol = kolumn === undefined ? alla : [vald];
   if (!textKol.length) return null;
   const arTid = (s) => minuterISpann(s) !== null;
   /** @type {TabellDel[]} */
@@ -1608,7 +1787,10 @@ export function passetsBeskrivning(roller, passet, lage) {
  */
 export function stegUtanfor(mp, plan) {
   const sista = mp.stegEnhet === 'pass' ? hogstaPassnr(plan) : Math.max(0, ...plan.veckor.map((v) => v.innehall));
-  return mp.steg.filter((s) => !s.efter && s.fran > sista).map((s) => ({ rad: s.rad, fran: s.fran, vidBehov: s.vidBehov }));
+  // Ett steg som en vecka eller ett pass har fått räknas som nått, också den sista raden som plan.sistaRaden ger planens
+  // sista vecka (den kalla testaren 2026-10-27, K-572: översikten sa att sex veckor inte når Du gör själv).
+  const tagna = new Set(mp.stegEnhet === 'pass' ? plan.pass.map((p) => p.steg) : plan.veckor.map((v) => v.steg));
+  return mp.steg.filter((s) => !s.efter && s.fran > sista && !tagna.has(s.rad)).map((s) => ({ rad: s.rad, fran: s.fran, vidBehov: s.vidBehov }));
 }
 
 /** Planens vecka för ett datum: veckan datumet ligger i, nästa vecka före start, och sista veckan efter slutet. @param {Plan} plan @param {string} datum */
@@ -2498,11 +2680,11 @@ export function kalenderfil(info, plan, o) {
 }
 
 /**
- * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass', pass: number[], till?: number } | { typ: 'sista-passet', efter?: number } | { typ: 'villkor' }} Tid
+ * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[], plats?: 'forsta' | 'sista' } | { typ: 'sista-veckan', plats?: 'forsta' | 'sista' } | { typ: 'pass', pass: number[], till?: number, kurs?: true } | { typ: 'sista-passet', efter?: number } | { typ: 'villkor' }} Tid
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
- * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number }} Metodplan
- * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, lektionsval?: { text: string, mer: string, ingangar?: { lektion: number, namn: string }[] }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
+ * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass' | 'nar', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number, sistaRaden?: true }} Metodplan
+ * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string, eleverna?: string, vidare?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, lektionsval?: { text: string, mer: string, ingangar?: { lektion: number, namn: string }[] }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'nastSista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar

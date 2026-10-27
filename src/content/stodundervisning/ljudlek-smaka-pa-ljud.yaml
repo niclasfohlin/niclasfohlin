@@ -15,7 +15,7 @@ format:
   - "liten grupp"
   - "par"
 tid: "30 minuter per pass, tre till fem pass i veckan"
-period: "Fyra till tolv pass i följd"
+period: "Omkring två veckor, sex till tio pass"
 grupp: "2–12 elever"
 material:
   - bildkorten
@@ -24,18 +24,20 @@ material:
   - magneter
   - bokstavskorten
   - bokstavskartan
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 5
 tranar: "höra det sista ljudet och ljudet i mitten, och var ett ljud hörs"
+vidare: "du har hört fler än hälften av eleverna själva säga rätt ljud och skriva eller visa rätt bokstav i rätt ruta för minst två av sina kort i steg 4 i raden Var ljudet hörs"
+veckor: { min: 2, max: 2 }
 inledning:
   - "I Smaka på ljud säger eleverna ord långsamt, lyssnar efter det sista ljudet och ljudet i mitten och säger var ljudet hörs. Lektionen hjälper eleven med det som gör ljuden svåra: det sista ljudet sitter ihop med vokalen, så att eleven säger ol för sol, och vokalen i mitten flyter ihop med ljuden runt den och faller bort."
   - "Syftet är att eleverna hör det sista ljudet och ljudet i mitten i ett kort ord, så att de kan skriva ordet och läsa det. Du säger ordet långsamt och stannar på ljudet, säger bara ljudet och aldrig bokstavens namn, och ser till att eleverna skriver bokstaven i rätt ruta."
-  - "Välj Smaka på ljud när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 5, sist och i mitten. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Smaka på ljud hör till förmåga 5, Sist och i mitten, i lektionsbanken där."
+  - "Gruppen tar Smaka på ljud efter Bokstavsgympa. Lektionen tränar det som ljudkollens uppgift 5 prövar, sist och i mitten. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Smaka på ljud hör till förmåga 5, Sist och i mitten, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Smaka på ljud går igenom raderna i Så blir lektionen svårare, oftast i fyra till tolv pass. Ta nästa rad när dagens elever säger rätt ljud och skriver eller visar rätt bokstav i rätt ruta på minst två av sina kort i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. På omkring två veckor går ni igenom raderna i Så blir lektionen svårare. Med tre pass i veckan tar ni en ny rad varje pass. Med fler pass tar ni nästa rad när dagens elever säger rätt ljud och skriver eller visar rätt bokstav i rätt ruta för minst två av sina kort i steg 4, två pass i följd."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -244,7 +246,7 @@ arbetsform:
 exempel:
   valt:
     rubrik: "Gruppen"
-    text: "sex elever i förskoleklass och åk 1, vecka 5, tre pass i veckan. Gruppen gör Smaka på ljud för andra passet i följd och står i raden Sist: l, r och n, där den började efter ljudkollen. Dagens ljud är /i/, och dagens elever är Noah och Mira."
+    text: "sex elever i förskoleklass och åk 1, vecka 5, tre pass i veckan. Gruppen gör Smaka på ljud för första gången och står i raden Sist: l, r och n, där den börjar efter ljudkollen. Dagens ljud är /i/, och dagens elever är Noah och Mira."
   text:
     - "Ljudstarten. Läraren visar i-⁠kortet, och alla säger iii och tittar i spegeln. Mira säger ett ord på ljudet: ”is”."
     - "I steget Stanna på ljudet sätter läraren kortet med en sol i rutan Bild på tavlan: ”Sooolll. Det sista ljudet jag hör är lll.” Hen lägger markören i rutan Sist, skriver l och vänder kortet: ordet slutar på l. Sedan tar hen tigern och benet."
@@ -252,7 +254,7 @@ exempel:
     - "I steget Fråga och svara är paren Alva och Elin, Omar och Noah, Leo och Mira. Elin visar fågeln och frågar: ”Vilket ljud hör du sist i fågel?” Alva säger ”fååågelll, lll”, lägger markören och skriver l. De vänder kortet: ordet slutar på l."
     - "I steget Mina ord lyssnar läraren på Noah och Mira. Mira säger ”sss-⁠t-⁠eeennn, nnn” och skriver n. Noah säger ”bäver” när han ska säga det sista ljudet. Läraren säger: ”Säg ordet långsamt och stanna på det sista: bääävvverrr.” Noah säger rrr och skriver r."
     - "Avslutet. Omar säger: ”Säl. Lll sist.” Läraren säger: ”Ni stannade på det sista ljudet och hittade bokstaven.”"
-    - "Efteråt noterar läraren: Mira säger det sista ljudet rätt och skriver bokstaven. Noah säger hela ordet, eller vokalen ihop med det sista ljudet. Nästa pass tar gruppen samma rad, och dagens elever blir Leo och Elin."
+    - "Efteråt noterar läraren: Mira säger det sista ljudet rätt och skriver bokstaven. Noah säger hela ordet, eller vokalen ihop med det sista ljudet. Nästa pass tar gruppen raden I mitten, och dagens elever blir Leo och Elin."
 fastnar:
   rubrik: "När eleven fastnar"
   text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
@@ -311,7 +313,7 @@ snabbmall:
   sist:
     - Det här gör eleverna själva nu som de inte gjorde förut
     - Jag tar med mig in i nästa vecka
-  not: Ta nästa rad när dagens elever säger rätt ljud och skriver eller visar rätt bokstav i rätt ruta på minst två av sina kort i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga.
+  not: Med tre pass i veckan tar ni en ny rad varje pass. Med fler tar ni nästa rad när dagens elever har två rätt i steg 4, två pass i följd. I sista raden går gruppen vidare när fler än hälften av eleverna har klarat steg 4.
 grund:
   text: "Det första ljudet är lättast att höra, det sista svårare och ljudet i mitten svårast. Holländska sexåringar hade 69, 60 och 45 procent rätt, i den ordningen (de Graaff m.fl., 2008). Nybörjare kopplar först bokstäver till det första och det sista ljudet och missar vokalen (Ehri, 2014). Undervisningen ger mest när eleverna arbetar med bokstäverna, i små grupper och med en eller två färdigheter i taget (National Reading Panel, 2000; Foorman m.fl., 2016)."
   kallor: "Bygger på de Graaff m.fl. (2008), Ehri (2014), Foorman m.fl. (2016) och National Reading Panel (2000)."

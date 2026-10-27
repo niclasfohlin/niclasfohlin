@@ -27,7 +27,7 @@ material:
   - multilink
   - räknemattan och talrutan
   - övningsblad
-uppdaterad: 2026-10-26
+uppdaterad: 2026-10-27
 publicerad: 2026-10-04
 relaterade:
   - antalsuppfattning-i-grupp
@@ -65,7 +65,7 @@ passrutin:
       fas: Bladet
     - text: Ni lägger de två uträkningarna bredvid varandra. Eleverna säger dagens lärdom, och alla skriver den i Mina lärdomar.
       fas: Lärdomen
-  efterPasset: Läraren antecknar vem som kunde förklara växlingen och räkna åt andra hållet, och vad läraren ska visa igen nästa pass.
+  efterPasset: Läraren antecknar vem som nådde veckans mål i kursplanen och kunde räkna åt andra hållet, och vad läraren ska visa igen nästa pass.
 
 tidsschema:
   rubrik: Ett pass på 60 minuter
@@ -283,7 +283,7 @@ tabeller:
       - - "Vecka 4\nÖver nollan och välj sätt"
         - "400 − 156, 302 − 297, 503 − 68\nSubtraktion 4 och repetition"
         - "600 − 247, 701 − 698, 1 004 − 368\nSubtraktion 4 och repetition"
-        - "5 000 − 1 863, 4 − 3,6, 3 006 − 1 478\nSubtraktion 4 och 5"
+        - "5 000 − 1 863, 4 − 3,6, 3 006 − 1 478\nSubtraktion 4 och 5 och repetition"
       - - "Vecka 5\nRektangeln"
         - "3 · 4, 4 · 6, 7 · 5\nMultiplikation 1 och Division 1"
         - "4 · 6, 6 · 7, 8 · 7\nMultiplikation 1 och Division 1"
@@ -365,32 +365,47 @@ hem:
 
 progression:
   rubrik: Kursplanen
-  text: Varje vecka har ett nytt fokus, och det nya kommer i pass 1 och 2. Vecka 1–4 är addition och subtraktion och vecka 5–8 multiplikation och division. Du tonar ut stödet, så att du först tänker högt hela vägen, sedan visar bara det nya och till sist låter eleverna leda uträkningen åt andra hållet. I vecka 4 och 8 repeterar ni också det kursen har haft. Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Är det en elev, övar hen greppet i uppvärmningen och i ett tredje pass, om gruppen har ett, och gruppen går vidare.
+  text: Varje vecka har ett nytt fokus, och det nya kommer i pass 1 och 2. Vecka 1–4 är addition och subtraktion och vecka 5–8 multiplikation och division. Du tonar ut stödet, så att du först tänker högt hela vägen, sedan visar bara det nya och till sist låter eleverna leda uträkningen åt andra hållet. I vecka 4 och 8 repeterar ni också det kursen har haft. Kolumnen Eleverna blir bättre på säger veckans mål och när gruppen går vidare. Klarar gruppen inte det som står under Gå vidare när, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Har en elev inte nått veckans mål när gruppen går vidare, övar hen på det i uppvärmningen och i ett tredje pass, om gruppen har ett.
   rader:
     - vecka: "1"
       fokus: Hopp på talraden, addition och subtraktion i huvudet. Tiotalen först, och i subtraktion räkna upp när talen ligger nära
       roll: Du tänker högt hela vägen och skriver hoppen som en uträkning
+      eleverna: Att hoppa tiotalen först på den tomma talraden och skriva hoppen som en uträkning, och att räkna upp när talen ligger nära.
+      vidare: veckans sista pass visar att de flesta i gruppen hoppar tiotalen först med högst en påminnelse
     - vecka: "2"
       fokus: Tio ental blir ett tiotal. Växling på räknemattan och med streck och prickar, med uppställningen bredvid
       roll: Du tänker högt hela vägen
+      eleverna: Att växla på räknemattan och förklara med materialet vad minnessiffran och den strukna siffran betyder.
+      vidare: veckans sista pass visar att de flesta i gruppen växlar rätt med högst en påminnelse och kan säga varför
     - vecka: "3"
       fokus: Hundratal och två växlingar, med ritad tiobas och sifferkort
       roll: Du visar det nya, och en elev tänker högt i resten av uträkningen
+      eleverna: Att räkna med två växlingar i uppställningen och säga talsorten varje gång när de tänker högt i resten av uträkningen.
+      vidare: veckans sista pass visar att de flesta i gruppen räknar två växlingar rätt med högst en påminnelse
     - vecka: "4"
       fokus: Över nollan och välj sätt, talraden eller uppställningen. Blandad repetition
       roll: Eleverna väljer sätt och förklarar valet
+      eleverna: Att avgöra med ett överslag om svaret är rimligt och kontrollera det åt andra hållet, och att välja talraden eller uppställningen efter talen.
+      vidare: de flesta i gruppen räknar omkring åtta av tio rätt i Bladet under veckan, också i den blandade repetitionen
     - vecka: "5"
       fokus: Rektangeln med multilink. Alla rektanglar av ett antal kuber, multiplikation, och division på två sätt med samma rektangel
       roll: Du tänker högt när du visar det nya, rektangeln
+      eleverna: Att visa en multiplikation och två divisioner i samma rektangel med en händelse till varje, och att säga om de söker antalet rader eller antalet i varje rad.
+      vidare: veckans sista pass visar att de flesta i gruppen läser rektangeln som en multiplikation och två divisioner med högst en påminnelse
     - vecka: "6"
       fokus: Rektangeln med tiotal, den tomma rektangeln och rest med små tal
       roll: Du visar delningen vid tiotalet, och en elev tänker högt i resten av uträkningen
+      eleverna: Att dela rektangeln vid tiotalet och rita den tomma rektangeln med alla delar, och att säga varför resten är mindre än det de delar med.
+      vidare: veckans sista pass visar att de flesta i gruppen ritar alla delar i den tomma rektangeln med högst en påminnelse
     - vecka: "7"
       fokus: Kort multiplikation och kort division. På nivån Bas fortsätter ni med rektangeln
       roll: Du visar kort multiplikation i veckans första pass och kort division i det andra, och en elev tänker högt med rektangeln
+      eleverna: Att skriva kort multiplikation och kort division, och att förklara minnessiffran och den lilla ettan med kuberna. På nivån Bas förklarar eleverna varje del av rektangeln.
+      vidare: veckans sista pass visar att de flesta i gruppen förklarar varje siffra i uträkningen med kuberna
     - vecka: "8"
       fokus: Nollan i kvoten och resten i textuppgifter. I uppvärmningen räknar ni en addition och en subtraktion, och du delar ut kursintyget i sista passet. Kartläggningen efter görs veckan efter kursen
       roll: Eleverna leder uträkningen åt andra hållet och väljer sätt
+      eleverna: Att avgöra vad resten betyder i en textuppgift, och att leda uträkningen åt andra hållet och lägga till resten.
 
 uppfoljning:
   text: Kartläggningen visar vad eleven kan räkna och förklara, före och efter. Mina lärdomar visar elevens ord pass för pass. Räknar eleven sju eller åtta rätt på bladet efter kursen och har R+ på minst fyra av de sex uppgifterna i protokollet, är eleven klar med kursen. Räknar eleven färre än fyra rätt, eller visar protokollet ingen skillnad mot före kursen, tar du upp det med elevhälsan. På Bas kan eleven börja i Antalsuppfattning i grupp. Annars fortsätter eleven en period till i en grupp på samma nivå, med nya tal i de veckor där det inte sitter. Addition och subtraktion är vecka 1–4, och multiplikation och division vecka 5–8. Välj de nya talen efter de tre kraven för passets tal, ta fler uppgifter ur gruppens matematikbok och gör samma kartläggning efter perioden.
@@ -455,7 +470,7 @@ plan:
     - "Räknar eleven färre än fyra rätt, eller visar protokollet ingen skillnad mot före kursen, tar du upp det med elevhälsan. På Bas kan eleven börja i Antalsuppfattning i grupp."
     - "Annars fortsätter eleven en period till i en grupp på samma nivå, med nya tal i de veckor där det inte sitter. Addition och subtraktion är vecka 1–4, och multiplikation och division vecka 5–8."
     - "Välj de nya talen efter de tre kraven för passets tal, ta fler uppgifter ur gruppens matematikbok och gör samma kartläggning efter perioden."
-  upprepa: "Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Är det en elev, övar hen greppet i uppvärmningen och i ett tredje pass, om gruppen har ett, och gruppen går vidare."
+  upprepa: "Klarar gruppen inte det som står under Gå vidare när, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Har en elev inte nått veckans mål när gruppen går vidare, övar hen på det i uppvärmningen och i ett tredje pass, om gruppen har ett."
 mal:
   overgripande: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
   punkter:
@@ -756,7 +771,7 @@ ramar:
             - rubrik: Bladen
               text: Blad 1 har hopp bakåt och uppräkning på en tom talrad, blad 2 tvåsiffriga tal, blad 3 tresiffriga tal med en och två växlingar, blad 4 växling över nollan och tal som ligger nära varandra, och blad 5 fyrsiffriga tal och decimaltal. Blad 1–3 har var sin jämförelse, som eleven svarar på med en hel mening, och blad 2–5 har uppgifter med och utan växling.
             - rubrik: Så gör eleven
-              text: När eleven tar bort något bygger hen bara det första talet, och i en jämförelse båda talen. Eleven räknar på talraden på blad 1 och i rutnätet på blad 2–5, och räknar sist en uppgift åt andra hållet, med addition.
+              text: När eleven tar bort något bygger hen bara det första talet, och i en jämförelse båda talen. Eleven gör ett överslag, räknar på talraden på blad 1 och i rutnätet på blad 2–5 och räknar sist en uppgift åt andra hållet, med addition.
       listor:
         - rubrik: Blad 1 · Subtraktion · Hoppa och räkna upp
           rakneblad: { talrad: true }

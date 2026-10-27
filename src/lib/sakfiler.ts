@@ -81,7 +81,12 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
       return;
     }
     // Ramen med sina sidor: minst en, och en text till läraren, listorna, elevens blad med bildserien och arket var för sig.
-    const hogst = 3 + listor.length + (ram.serie ? 2 : 0) + (ram.ark ? 1 : 0);
+    // Sagoformens blad har en sida per steg eller skylt (sidor, eller bilderna), och en ram att fylla i med huvud kan ta en
+    // sida per del, som i planeringsmallarna (K-553: Sagobokens Sagans väg i fyra steg är fyra sidor, och Berättelseramens
+    // egen ram med sex delar fyra).
+    const sago = ram.sagoform ? (ram.sagoform.sidor ?? ram.sagoform.bilder?.length ?? 1) : 0;
+    const fylla = ram.huvud ? (ram.delar ?? []).length : 0;
+    const hogst = 3 + listor.length + (ram.serie ? 2 : 0) + (ram.ark ? 1 : 0) + sago + fylla;
     const namn = kortnamn(ram.rubrik, rubriker);
     ut.push({ namn: `${id}-blad-${slugAv(ram.rubrik)}`, titel: ram.rubrik, slag: 'ram', ri, minst: 1, hogst, text: `Skriv ut ${namn}`, pdftext: `${namn} som pdf`, liggande: false });
   });

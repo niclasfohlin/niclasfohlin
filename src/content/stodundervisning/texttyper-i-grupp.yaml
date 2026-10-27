@@ -20,7 +20,6 @@ taggar:
 format:
   - liten grupp
   - par
-  - helklass
 tid: 60 minuter per pass, två pass i veckan
 period: Sex veckor för varje kurs
 grupp: Två till tio elever
@@ -30,7 +29,7 @@ material:
   - lappar
   - en mapp per elev
 
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 publicerad: 2026-10-09
 relaterade:
   - skrivkurs-vardeskapande
@@ -43,7 +42,7 @@ lektionsbank:
   grupp: Texttyp
   skalRubrik: Det texten gör för läsaren
   numrerad: false
-  text: "Varje kurs gäller en texttyp och har texttypen i namnet, som Texttyp: Argumenterande text. Kurserna står under Kurserna på metodens sida, och var och en är en egen metod. Kurserna har samma fyra steg, samma pass i sex delar och en läsare som svarar. Det som byts är vad texten ska göra för läsaren, och därmed det läsaren undrar. Gruppen går en kurs i taget, och du väljer kurs efter vad eleverna behöver skriva i klassen."
+  text: "Varje kurs gäller en texttyp och har texttypen i namnet, som Texttyp: Argumenterande text. Kurserna står under Kurserna på metodens sida, och var och en är en egen metod. Kurserna har samma fyra steg, samma pass i sex delar och en läsare som svarar. Det som byts är vad texten ska göra för läsaren, och därmed det läsaren undrar. Gruppen går en kurs i taget, och du väljer kurs efter vad eleverna behöver skriva i klassen. Behöver eleverna skriva olika texttyper, väljer du den som flest av dem snart ska skriva."
   formagor:
     - nr: 1
       namn: Argumenterande text
@@ -57,7 +56,7 @@ lektionsbank:
     - nr: 4
       namn: Instruerande text
       skal: "Texten lär läsaren att göra något själv. Läsaren undrar vad det går ut på, vad hen behöver, hur hen gör och hur hen vet att det blev rätt."
-  not: "En text gör oftast flera saker. I en argumenterande text behöver eleven också förklara och ge exempel, och det kan hen bygga vidare på i nästa kurs. Börja därför en ny kurs med att eleven läser sitt sista mål och säger vad hen känner igen i den nya texten, som avsnittet om återkopplingen säger. Att förklara tränas inne i kurserna och har ingen egen kurs."
+  not: "En text gör oftast flera saker. I en argumenterande text behöver eleven också förklara och ge exempel, och det kan hen bygga vidare på i nästa kurs. I en ny kurs läser eleven därför sitt sista mål från förra kursen och säger vad hen känner igen i det första textparet, som avsnittet om återkopplingen beskriver. Att förklara tränas inne i kurserna och har ingen egen kurs."
 
 centrala:
   - id: skrivstrategier
@@ -68,11 +67,11 @@ inledning:
   - "Eleven lär sig genom att höra dig tänka högt och sedan göra likadant. Du frågar som läsaren, säger dina val högt och lämnar över. Du visar hur en skribent väljer, till exempel: ”Det här bryr sig rektorn inte om, så det lägger jag åt sidan.” Sedan väljer gruppen tillsammans, därefter paren, och till sist väljer eleven själv. Mitt i varje text möter eleven något, som en kamrats början, din fråga eller en läsares svar, och tar ställning till det medan texten ännu går att ändra. När texten är klar skriver eleven vad hen tar med sig till nästa text. Dina frågor och de samtal eleverna för med varandra kan så småningom bli en del av elevens inre röst som skribent."
   - "Tanken bakom kurserna är att en text ska göra något för någon. En text skrivs av någon, till någon och för ett syfte. När eleven vet vem som ska läsa, och vad läsaren behöver förstå, känna eller kunna göra efteråt, blir textens delar redskap för att lyckas. Därför börjar varje text med frågan Vem läser? Därför har också varje kurs verkliga läsare som svarar. Det kan vara en vuxen på skolan, yngre elever, inbjudna lyssnare, någon som eleven känner och skriver brev till, eller elever i en annan klass som gör det texten säger. Varje kurs säger vilka läsarna är och vad du ordnar inför den. I de första passen är du själv läsaren."
   - "Eleven gör varje text med samma fyra steg i alla kurser: Tänk, Planera, Säg och Skriv. I steget Säg berättar eleven texten för en läsare innan hen skriver den. De pass där eleverna skriver en text med de fyra stegen har samma sex delar: gruppen läser en mening som läsaren, du visar något som gruppen prövar, och sedan gör eleverna stegen. De andra passen har egna minuter i kursen."
-  - "Texttypen är namnet på det en text mest gör och på hur sådana texter brukar se ut. Den är bra att känna igen, till exempel när en uppgift ber om en argumenterande text. Den får däremot aldrig bli en mall som bestämmer över det eleven vill säga. Därför läser gruppen två texter bredvid varandra och frågar vad de gör, och därför säger du varje gång varför en text brukar se ut som den gör. Passen minut för minut, texterna och bladen står i varje kurs. När du har valt kurs börjar du med kursens checklista och veckans sida för vecka 1. Den första kursen heter Texttyp: Argumenterande text."
+  - "Texttypen är namnet på det en text mest gör och på hur sådana texter brukar se ut. Den är bra att känna igen, till exempel när en uppgift ber om en argumenterande text. Den får däremot aldrig bli en mall som bestämmer över det eleven vill säga. Därför läser gruppen två texter bredvid varandra och frågar vad de gör, och därför säger du varje gång varför en text brukar se ut som den gör. Passen minut för minut, texterna och bladen står i varje kurs. Kurserna har ingen bestämd ordning. När du har valt kurs börjar du med kursens checklista och veckans sida för vecka 1."
 
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "En kurs har två till tio elever och två pass om 60 minuter i veckan under sex veckor. Eleven skriver varje text i fyra steg: Tänk, Planera, Säg och Skriv. Första veckan skriver eleven en kort text utan stöd, och du är läsaren. I vecka 2 skriver du och tänker högt, i vecka 3 skriver gruppen, i vecka 4 paren och i vecka 5 var och en. Gruppens text och elevens egen text går till kursens läsare, som svarar. I vecka 6 kommer svaren, och eleven skriver en ny kort text, som du lägger bredvid den första. På kursens blad Det jag hör skriver du ned vad eleverna säger."
+  text: "En kurs har två till tio elever och två pass om 60 minuter i veckan under sex veckor. Eleven skriver varje text i fyra steg: Tänk, Planera, Säg och Skriv. Första veckan skriver eleven en kort text utan stöd, och du är läsaren. I vecka 2 visar du, i vecka 3 skriver gruppen, i vecka 4 planerar paren och i vecka 5 var och en. Eleven skriver sin egen text efter planen. Gruppens text och elevens egen text går till kursens läsare, som svarar. I vecka 6 kommer svaren, och eleven skriver en ny kort text, som du lägger bredvid den första. På kursens blad Det jag hör skriver du ned vad eleverna säger."
 
 gruppen:
   rubrik: Så sätter du ihop gruppen
@@ -199,7 +198,7 @@ tabeller:
         - "Eleven läser det hen har skrivit för en kamrat, som svarar så som läsaren gör i kursen. Eleven väljer vad hen skriver härnäst, och kamraten letar efter samma sak i sin egen text."
       - - "Före och efter\nNär texten är klar"
         - "Eleven lägger sin gamla och sin nya text bredvid varandra, och du frågar: ”Vad gör den nya som den gamla inte gjorde?”"
-    not: "Återkopplingen lämnas över som pennan. Först jämför gruppen dina textpar, och du stoppar och säger vad du ser. Sedan jämför paret sina texter halvvägs, och sist läser eleven sin egen text för en läsare halvvägs. Det som byts mellan kurserna är hur läsaren svarar. I Texttyp: Argumenterande text säger läsaren vad som övertygade och vad hen undrar, och i Texttyp: Berättande text säger hen var hen var med. I Texttyp: Beskrivande text ritar läsaren det hen ser, och i Texttyp: Instruerande text gör läsaren det som står medan skribenten ser på. Har du läst texterna efter passet, visar du i början av nästa pass två korta versioner som du har skrivit själv: en som liknar det många skrev och en med det som fattades. Har gruppen gått en kurs förut, läser eleven i pass 1 sitt sista mål och säger vad hen känner igen i den nya texten. När ni jämför frågar ni vad varje text gör för läsaren. Ingen frågar vilken som är sämst, och du visar en elevs hela text för gruppen bara om eleven säger ja. Ett grepp inne i Skriv tar högst fem minuter, och med fler än sex elever gör ni Starterna vid två bord. Stavningen hör inte till greppen."
+    not: "Återkopplingen lämnas över på samma sätt som pennan. Först jämför gruppen dina textpar, och du stoppar och säger vad du ser. Sedan jämför paret sina texter halvvägs, och sist läser eleven sin egen text för en läsare halvvägs. Det som byts mellan kurserna är hur läsaren svarar. I Texttyp: Argumenterande text säger läsaren vad som övertygade och vad hen undrar, och i Texttyp: Berättande text säger hen var hen var med. I Texttyp: Beskrivande text ritar läsaren det hen ser, och i Texttyp: Instruerande text gör läsaren det som står medan skribenten ser på. Har du läst texterna efter passet, visar du i nästa pass två korta versioner som du har skrivit själv: en som liknar det många skrev och en med det som fattades. De ersätter meningen på tavlan i delen Läs som läsaren. Har gruppen gått en kurs förut, läser eleven sitt sista mål efter den korta texten i pass 1 och säger vad hen känner igen i det första textparet. När ni jämför frågar ni vad varje text gör för läsaren. Ingen frågar vilken som är sämst, och du visar en elevs hela text för gruppen bara om eleven säger ja. Ett grepp inne i Skriv tar högst fem minuter, och med fler än sex elever gör ni Starterna vid två bord. Stavningen hör inte till greppen."
   - rubrik: "När det inte fungerar: tre frågor"
     plats: efter-fastnar
     text: "Stödtrappan gäller en elev i stunden. När du ser samma sak hos flera, eller om och om igen, hjälper tre frågor dig att välja stöd: Vad ser jag? Vad innebär det? Vad gör jag? Svaret på den sista säger också om stödet gäller en elev, ett par eller hela gruppen."
@@ -227,7 +226,7 @@ tabeller:
   - rubrik: "Skrivstödet: det eleven kan behöva för att få ned texten"
     plats: efter-fastnar
     meny: true
-    text: "Att skriva är att göra två saker på en gång: bestämma vad läsaren ska få veta, och få ned det på papper eller skärm. För eleverna i kurserna tar handen och stavningen så mycket kraft att för lite blir över till innehållet. De planerar kort, skriver några meningar och säger att de är klara. Det går också långsamt: en elev som behöver stöd får ofta ned bara några ord i minuten, och då tar hundra ord en halvtimme eller mer. Därför får skrivandet minst en tredjedel av kursens tid. Planen och steget Säg gör att eleven vet vad hen ska skriva, och skrivstödet avlastar handen och stavningen. Bestäm före kursen, med klassläraren, hur varje elev skriver. Eleven använder det skrivstöd hen har och kan, för ett nytt program hinner hen inte lära sig i kursen."
+    text: "Att skriva är att göra två saker på en gång: bestämma vad läsaren ska få veta, och få ned det på papper eller skärm. För eleverna i kurserna tar handen och stavningen så mycket kraft att för lite blir över till innehållet. De planerar kort, skriver några meningar och säger att de är klara. Det går också långsamt: en elev som behöver stöd får ofta ned bara några ord i minuten, och då tar hundra ord en halvtimme eller mer. Därför får skrivandet minst en tredjedel av kursens tid. Planen och steget Säg gör att eleven vet vad hen ska skriva, och skrivstödet avlastar handen och stavningen. Bestäm före kursen, med klassläraren, hur varje elev skriver. Eleven använder det skrivstöd hen redan har och kan. Ett nytt program hinner hen inte lära sig under kursen. Eleven skriver den korta texten i första och sista veckan utan annat stöd än sitt skrivstöd, så att texterna går att jämföra."
     kolumner:
       - "Skrivstöd"
       - "Vad det gör"
@@ -370,7 +369,7 @@ urval:
   kravText: "En läsare som fungerar uppfyller tre krav:"
   krav:
     - rubrik: Går att nå
-      text: "Hen hinner svara, under kursen eller när gruppen samlas efter den"
+      text: "Hen hinner svara under kursen, och på elevens egen text senast när ni samlas efter kursen"
     - rubrik: Behöver texten
       text: "Hen ska bestämma, göra, få veta eller vara med om något, och då behövs texten"
     - rubrik: Svarar på saken
@@ -378,42 +377,74 @@ urval:
 
 progression:
   rubrik: Så tas stödet bort
-  text: "En kurs går från att du visar till att eleven skriver själv. Du tar bort stödet på två sätt, vecka för vecka: du lämnar över pennan, och du lämnar över rollen som läsare. Gruppen går vidare varje vecka, eftersom kursens läsare väntar på texterna. Den som behöver mer stöd får dig som läsare en gång till, eller säger sin text medan du skriver. Till sist ska eleven göra stegen utan dig, i klassen. Har en elev varit borta, visar kamraten planen och säger vad de valde och varför, och eleven skriver vidare där paret är. I vecka 4 frågar du, i det pass som veckans sida i kursen säger: ”Vilken text skriver du i klassen nu? Vem läser den?”"
+  text: "En kurs går från att du visar till att eleven skriver själv. Du tar bort stödet på två sätt, vecka för vecka: du lämnar över pennan, och du lämnar över rollen som läsare. Gruppen går vidare varje vecka, eftersom kursens läsare väntar på texterna. Den som behöver mer stöd får dig som läsare en gång till, eller säger sin text medan du skriver. Till sist ska eleven göra stegen utan dig, i klassen. Har en elev varit borta, visar kamraten planen och säger vad de valde och varför, och eleven skriver vidare där paret är. I vecka 4 frågar du, i det pass som veckans sida i kursen säger: ”Vilken text skriver du i klassen nu? Vem läser den?” I vecka 5 frågar du hur det gick med texten i klassen."
+  # Eleverna i varje vecka, knutna till målets punkter (passgenomgången i Skrivning, 2026-10-26). Raderna har inget vidare:
+  # gruppen går vidare varje vecka, eftersom kursens läsare väntar på texterna.
   rader:
     - vecka: "1"
       fokus: "Läsaren, och du är läsare"
       roll: Du svarar på en första text, som eleven skriver utan stöd.
+      eleverna: "Att läsa en mening som läsaren och säga vad de nu vet och vad de undrar."
     - vecka: "2"
       fokus: "Du visar, och en elev ur ett annat par är läsare"
       roll: Du planerar och skriver och säger dina val högt. Paren gör efter dig.
+      eleverna: "Att säga vad de hörde dig säga när du valde och när du körde fast, och att lägga en lapp åt sidan i paret och säga varför."
     - vecka: "3"
       fokus: "Gruppens text, till kursens läsare"
       roll: Du håller pennan, och en elev frågar som läsaren. Eleverna väljer.
+      eleverna: "Att välja tillsammans vad som ska med i gruppens text, och att fråga som läsaren med kortet."
     - vecka: "4"
       fokus: "Parens text, som en elev ur ett annat par läser"
       roll: Du väntar med frågan Vem läser? och lyssnar först.
+      eleverna: "Att säga vem som läser innan du frågar, också om texten de skriver i klassen, och att skriva det de svarade läsaren."
     - vecka: "5"
       fokus: "Egen text, till kursens läsare när kamraten har läst"
       roll: Du är läsare åt den som behöver det. Eleven gör stegen själv.
+      eleverna: "Att göra de fyra stegen själva i var sin text och skriva in det som kamraten saknade som läsare, och att säga meningen för när det tar emot och skriva vidare."
     - vecka: "6"
       fokus: "Svaren från kursens läsare"
-      roll: Du lägger elevens nya text bredvid den första.
+      roll: Du lägger elevens nya text bredvid den första. Gruppen läser en eller två uppgifter som liknar de nationella provens.
+      eleverna: "Att säga vad den nya texten gör som den första inte gjorde och vad som nådde fram till läsaren, och att känna igen när en uppgift ber om texttypen."
 
 uppfoljning:
-  text: "Du ser om kursen hjälper i det du hör, i det eleven skriver och i det läsaren svarar. Eleven följer sina egna texter i sitt diagram. Kursen säger vad eleven räknar i just den texttypen."
+  text: "Du ser om kursen hjälper i det du hör, i det eleven skriver och i det läsaren svarar. Eleven följer sina egna texter i sitt diagram. Kursen säger vad eleven räknar i just den texttypen. När gruppen samlas efter kursen skriver eleven en ny text med de fyra stegen, och du svarar. Ni lägger den nya texten bredvid den korta texten från första veckan, och sedan beslutar du hur eleven går vidare. Svarar den nya texten på varje fråga på kursens kort, avslutar du insatsen. Är stapeln för den nya texten högst en ruta högre än stapeln för den första korta texten, tar du upp det med elevhälsan. Annars går eleven vecka 4 till 6 en gång till med nästa grupp i samma kurs. Eleven blir den tredje i ett av den nya gruppens par och är med när den gruppen samlas efter kursen. Då beslutar du på samma sätt. Går ingen grupp i samma kurs, eller är den redan förbi vecka 4, går du vecka 4 till 6 med eleven och är själv kamraten i paret. Eleven skriver till en ny läsare, som du ordnar på samma sätt som inför vecka 1. Klasslärarens svar på frågan efter kursen ingår inte i beslutet. Svaret visar om eleven tar med sig stegen till klassen, och du berättar det för eleven. När insatsen är avslutad, går eleven en ny kurs bara om hen ska skriva en annan texttyp i klassen. Den nya kursen börjar när gruppen har samlats efter kursen, så att eleven först gör stegen i klassen utan dig."
   rader:
     - nar: Varje pass
+      tid: "varje pass"
       vad: Skriv vad två eller tre elever säger, på bladet Det jag hör.
     - nar: När en text är klar
+      tid: "villkor"
       vad: Eleven ser om målet syns i texten och fyller i en stapel i sitt diagram.
     - nar: Efter vecka 3
-      vad: Ge klassläraren de fyra stegen och tavlans tre rader.
+      tid: "vecka 3"
+      vad: Ge klassläraren de fyra stegen och tavlans tre rader, och be hen lägga märke till om eleven säger vem som läser.
     - nar: Första och sista veckan
-      vad: Eleven skriver en kort text utan stöd. Skriv upp om hen planerar den sista.
+      tid: "vecka 1 och 6"
+      vad: Eleven skriver en kort text i tio minuter utan stöd. I sista veckan ger hen båda texterna var sin stapel. Skriv upp om hen planerar den sista texten.
     - nar: Sista passet
+      tid: "sista passet"
       vad: Skriv upp vad som nådde fram till läsaren.
     - nar: Fyra till sex veckor efter kursen
+      tid: "efter 4–6 veckor"
       vad: Samla gruppen ett pass med en ny text. Fråga klassläraren om eleven säger vem som läser.
+
+# Planen (passgenomgången i Skrivning, 2026-10-26). Metoden har inget tidsschema, eftersom passen står i kurserna, så varje
+# pass säger var det står. Gruppen tar ingen vecka igen, så att justera är progressionens stöd åt den som behöver mer.
+# Beslutet efter kursen står ordagrant ur uppföljningens text, i samma form som kursernas.
+plan:
+  passen:
+    - nar: vecka 1–6
+      utanTidsschema: true
+      text: "Passen minut för minut, texterna och bladen står i varje kurs."
+  fore:
+    - "När du har valt kurs börjar du med kursens checklista och veckans sida för vecka 1."
+  justera:
+    - "Den som behöver mer stöd får dig som läsare en gång till, eller säger sin text medan du skriver."
+  utvardering:
+    - "Svarar den nya texten på varje fråga på kursens kort, avslutar du insatsen."
+    - "Är stapeln för den nya texten högst en ruta högre än stapeln för den första korta texten, tar du upp det med elevhälsan."
+    - "Annars går eleven vecka 4 till 6 en gång till med nästa grupp i samma kurs."
+    - "När insatsen är avslutad, går eleven en ny kurs bara om hen ska skriva en annan texttyp i klassen."
 
 mal:
   overgripande: "kunna planera en text för en läsare och skriva den efter planen."
@@ -432,6 +463,7 @@ checklista:
   punkter:
     - Välj kurs efter vad eleverna behöver skriva i klassen.
     - Lägg inte passen på elevens läs- eller stavningsstöd.
+    - Bestäm med klassläraren varje elevs skrivstöd.
     - Läs kursens checklista och veckans sida för vecka 1.
     - Öva högt på det du visar i vecka 2, med kursens exempel eller en egen text.
 
@@ -547,9 +579,9 @@ lathund:
           - - "3 · Gruppens text"
             - "Du håller pennan, och eleverna väljer. Kursens läsare läser."
           - - "4 · Parens text"
-            - "Paren skriver, och en elev ur ett annat par läser. Du lyssnar innan du frågar vem som läser."
+            - "Paren planerar, och en elev ur ett annat par läser. Du lyssnar innan du frågar vem som läser."
           - - "5 · Egen text"
-            - "Eleven skriver själv. Kamraten läser, och sedan kursens läsare."
+            - "Eleven planerar själv. Kamraten läser, och sedan kursens läsare."
           - - "6 · Svaren"
             - "Kursens läsare svarar, och eleven skriver utan stöd igen."
   material:
@@ -569,6 +601,21 @@ lathund:
       - Elevernas mappar
       - "Elevens dator eller platta, till den som skriver bäst så"
       - "På tavlan: Vem läser? Vad vill vi? När får vi svar?"
+    # Lathundens kortare uppföljning: metodens rader och beslutet efter kursen ryms inte i rutan på bild 4, bredvid
+    # checklistan (passgenomgången i Skrivning, 2026-10-26). Beslutet står i en mening.
+    uppfoljning:
+      - nar: "Varje pass"
+        vad: "Skriv vad två eller tre säger, på bladet Det jag hör."
+      - nar: "När en text är klar"
+        vad: "Syns målet? Eleven fyller i en stapel."
+      - nar: "Efter vecka 3"
+        vad: "Ge klassläraren stegen och tavlans rader, och be hen se om eleven säger vem som läser."
+      - nar: "Vecka 1 och 6"
+        vad: "En kort text i tio minuter utan stöd. I vecka 6 två staplar."
+      - nar: "Sista passet"
+        vad: "Skriv upp vad som nådde fram till läsaren."
+      - nar: "Efter kursen"
+        vad: "En ny text efter 4–6 veckor. Svarar den på kortets frågor, avsluta. Har stapeln högst en ruta fler än den första, ta upp det med elevhälsan. Annars går eleven vecka 4–6 igen."
 film:
   sekunder: 28.76
   beskrivning: "Läraren tänker högt. Läraren säger: ”Lärarna på skolan läser det här.” Läraren lägger till ett exempel för läsaren. Läraren säger: ”Nu kör jag fast. Då frågar jag som läsaren.” Läraren frågar: ”Hur ser en sådan paus ut?” Läraren skriver: ”Det kan räcka med två minuter där klassen sträcker på sig.” Vad hörde eleverna? Läraren frågar: ”Vad sa jag när jag körde fast?” Nadia säger: ”Du frågade som läsaren.” Senare skriver Hamza till Maria i biblioteket. Hamza säger: ”Maria undrar vad jag gör där.” Hamza skriver: ”Jag läser serier där, för det hinner jag inte annars.” Läraren säger: ”Nu vet jag vad du gör där.”"

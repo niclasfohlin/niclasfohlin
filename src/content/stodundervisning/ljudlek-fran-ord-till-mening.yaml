@@ -18,7 +18,7 @@ format:
   - "liten grupp"
   - "par"
 tid: "30 minuter per pass, tre till fem pass i veckan"
-period: "Åtta till tolv pass i följd"
+period: "Två till fyra veckor"
 grupp: "2–12 elever"
 material:
   - "bokstavskorten"
@@ -27,7 +27,7 @@ material:
   - "klossar"
   - "whiteboardtavlor och lappar"
   - "snabbmallen"
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -37,16 +37,18 @@ utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 9
 tranar: "säga korta meningar, bygga och skriva dem med mellanrum, stor bokstav och punkt, och läsa dem"
+vidare: "du har sett fler än hälften av eleverna själva skriva en mening med alla ord, mellanrum, stor bokstav och punkt i steg 4 i raden Egen mening, och fler än hälften sedan har läst alla fyra orden i ljudkollens uppgift 9"
+veckor: { min: 2, max: 4 }
 centrala:
   - id: skrivstrategier
     efterText: "tabell: Lyssna efter"
 inledning:
   - "I Från ord till mening säger eleverna en mening efter dig, lägger en kloss för varje ord och bygger meningen ord för ord med lösa bokstäver ur en hög mitt på bänken. Lektionen hjälper eleven med det som gör en mening svår att skriva och läsa: eleven glömmer meningen medan hen bygger, orden flyter ihop utan mellanrum, stor bokstav och punkt faller bort, och eleven läser det hen tänkte i stället för det som står."
   - "Syftet är att eleverna ska kunna säga en kort mening, bygga den med mellanrum, stor bokstav och punkt, och läsa den, så att de kan skriva och läsa sina första meningar själva. Ditt uppdrag är att visa hur du säger, bygger och läser meningen, att låta eleverna säga den igen innan de bygger, och att låta dem läsa det som ligger, också kamratens nya ord."
-  - "Välj Från ord till mening när fler än hälften av eleverna har färre än tre rätt på ljudkollens uppgift 9, där eleven läser fyra påhittade ord. Ljudkollen står i Ljudlek i grupp, och Från ord till mening hör till förmåga 9, Läsa och skriva meningar, i lektionsbanken där."
+  - "Gruppen tar Från ord till mening efter Från ljud till ord. Lektionen tränar det som ljudkollens uppgift 9 prövar, där eleven läser fyra påhittade ord. Ljudkollen står i Ljudlek i grupp, och Från ord till mening hör till förmåga 9, Läsa och skriva meningar, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Från ord till mening går igenom raderna i Så blir lektionen svårare, oftast i åtta till tolv pass. Ta nästa rad när dagens elever skriver en mening själva med alla ord, mellanrum, stor bokstav och punkt, två pass i följd. Efter den sista raden gör du ljudkollens uppgift 9. Läser fler än hälften alla fyra orden, går gruppen till Säg, skriv och läs eller Läslistor i grupp. Annars tar ni de två sista raderna igen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Från ord till mening går igenom raderna i Så blir lektionen svårare och tar två till fyra veckor. Ta nästa rad när dagens elever själva skriver en mening med alla ord, mellanrum, stor bokstav och punkt, två pass i följd. När gruppen är klar med Från ord till mening gör du mätningen efter perioden, och uppföljningen i Ljudlek i grupp säger hur varje elev går vidare."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -67,7 +69,7 @@ tabeller:
       - - "Egen mening"
         - "Ola ser mos."
         - "Eleven säger en egen mening på två till fyra ord eller byter två ord i en mening ur tabellen Meningarna."
-    not: "Meningarna till varje rad står under Meningarna. I raden Egen mening säger alla en egen mening: du säger din och skriver den på tavlan, paret säger sin för dig när du går mellan paren, och sist skriver var och en sin egen. Har den egna meningen ett ord som inte stavas som det låter, till exempel jag eller och, skriver du det på tavlan, och paret bygger det efter tavlan. Säger eleven bara ett ord, som Mira, svarar du: ”Mira. Vad gör Mira?”"
+    not: "Meningarna till varje rad står under Meningarna. I raden Egen mening säger alla en egen mening: du säger din och skriver den på tavlan, paret säger sin för dig när du går mellan paren, och sist skriver var och en sin egen. Har den egna meningen ett ord som inte stavas som det låter, till exempel jag eller och, skriver du det på tavlan, och paret bygger det efter tavlan. Säger eleven bara ett ord, som Mira, svarar du: ”Mira. Vad gör Mira?” Om högst hälften av eleverna läser alla fyra orden i ljudkollens uppgift 9 efter raden Egen mening, tar ni raderna Fyra ord och Egen mening igen."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -295,6 +297,8 @@ uppfoljning:
       vad: "I steg 4 lyssnar du på dagens elever. Säger de meningen igen själva, och får de med alla ord, mellanrum, stor bokstav och punkt? Läser de det som står?"
     - nar: "Efter varje pass"
       vad: "I snabbmallen noterar du det dagens elever skrev och var de fastnade."
+    - nar: "Efter raden Egen mening"
+      vad: "Gör ljudkollens uppgift 9 med en elev i taget, omkring en minut per elev."
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 9 om påhittade ord, uppgift 7 om att skriva ord och uppgift 4 om bokstävernas ljud."
 mal:
@@ -319,7 +323,7 @@ snabbmall:
   sist:
     - Det här gör eleverna själva nu som de inte gjorde förut
     - Jag tar med mig in i nästa vecka
-  not: Ta nästa rad när dagens elever skriver en mening själva med alla ord, mellanrum, stor bokstav och punkt, två pass i följd. Efter sista raden visar ljudkollens uppgift 9 vad gruppen gör sedan.
+  not: Ta nästa rad när dagens elever själva skriver en mening med alla ord, mellanrum, stor bokstav och punkt, två pass i följd. Klarar fler än hälften av eleverna steg 4 i sista raden, visar ljudkollens uppgift 9 vad ni gör sedan.
 grund:
   text: "I åk 1 betydde det muntliga språket, arbetsminnet och stavningen mest för hur eleverna skrev (Kim och Schatschneider, 2017). Därför säger eleven meningen igen och lägger en kloss för varje ord innan hen bygger. Elever i riskzonen för läs- och skrivsvårigheter stavade och läste bättre när de fick lära sig att skriva ord ljud för ljud (Weiser och Mathes, 2011). Barn i åk 1 gjorde större framsteg i sitt eget skrivande när de skrev en text tillsammans tio minuter om dagen och turades om att hålla pennan (Roth och Guinee, 2011)."
   kallor: "Bygger på Fohlin och Wilson, Skriv! (utkommer 2027), Kim och Schatschneider (2017), Weiser och Mathes (2011) och Roth och Guinee (2011)."

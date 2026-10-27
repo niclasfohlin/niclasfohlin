@@ -15,7 +15,7 @@ format:
   - "liten grupp"
   - "par"
 tid: "30 minuter per pass, tre till fem pass i veckan"
-period: "Sex till femton pass i följd"
+period: "Två till fyra veckor"
 grupp: "2–12 elever"
 material:
   - bildkorten
@@ -23,18 +23,20 @@ material:
   - magneter
   - bokstavskorten
   - speglar
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 6
 tranar: "dela upp ord i ljud, med en markör för varje ljud"
+vidare: "du har hört fler än hälften av eleverna själva säga ljuden och lägga rätt antal markörer i minst två av sina ord i steg 4 i raden Konsonantmöte sist"
+veckor: { min: 2, max: 4 }
 inledning:
   - "I Räkna ljud delar eleverna upp ord i sina ljud och flyttar en markör in i en ruta för varje ljud. Lektionen hjälper eleven med det som gör ljuden svåra att räkna: barn hör stavelser före ljuden, och ljudet i mitten och en konsonant i ett konsonantmöte faller lätt bort."
   - "Syftet är att eleverna hör varje ljud i ordet, i ordning, och vet hur många de är, så att de kan skriva ordet och läsa det. Du visar hur du flyttar en markör för varje ljud medan du säger ljudet, låter eleverna ta över steg för steg och lyssnar på var och en."
-  - "Välj Räkna ljud när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 6, dela upp. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Räkna ljud hör till förmåga 6, Dela upp, i lektionsbanken där."
+  - "Räkna ljud är ingången för elever som kan ljuda. En grupp som har börjat i Rim eller Första ljudet tar lektionen efter Smaka på ljud. Lektionen tränar det som ljudkollens uppgift 6 prövar, dela upp. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, som också säger vilken ingång gruppen börjar i. Räkna ljud hör till förmåga 6, Dela upp, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Räkna ljud går igenom raderna i Så blir lektionen svårare, oftast i sex till femton pass. Ta nästa rad när dagens elever lägger rätt antal markörer och säger ljuden i minst två av sina ord i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Räkna ljud går igenom raderna i Så blir lektionen svårare och tar två till fyra veckor. Ta nästa rad när dagens elever lägger rätt antal markörer och säger ljuden i minst två av sina ord i steg 4, två pass i följd."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -299,7 +301,7 @@ snabbmall:
   sist:
     - Det här gör eleverna själva nu som de inte gjorde förut
     - Jag tar med mig in i nästa vecka
-  not: Ta nästa rad när dagens elever lägger rätt antal markörer och säger ljuden i minst två av sina ord i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen.
+  not: Ta nästa rad när dagens elever lägger rätt antal markörer och säger ljuden i minst två av sina ord i steg 4, två pass i följd. I sista raden går gruppen vidare när fler än hälften av eleverna har klarat steg 4.
 grund:
   text: "Att dela upp ord i ljud och sätta ihop ljud till ord är kärnan i fonemmedvetenheten, och undervisningen ger mest i små grupper och med bokstäver (Ehri m.fl., 2001; National Reading Panel, 2000). Barn som flyttade en markör för varje ljud medan de sa det, och samtidigt lärde sig bokstävernas ljud, läste och stavade bättre (Ball och Blachman, 1991). Barn hör stavelser långt före ljuden (Liberman m.fl., 1974), och med bokstäver i rutorna kopplar eleven ljuden till bokstäverna (Foorman m.fl., 2016)."
   kallor: "Bygger på Ball och Blachman (1991), Ehri m.fl. (2001), Foorman m.fl. (2016), Liberman m.fl. (1974) och National Reading Panel (2000)."

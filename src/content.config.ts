@@ -208,6 +208,10 @@ const metodensFalt = z.strictObject({
     // läraren inte skattar per elev (K-551; Niclas 2026-10-26: "en mening om vad eleverna förväntas klara av och gå vidare
     // till nästa lektion när de gör det").
     vidare: z.string().optional(),
+    // veckor: lektionens längd i veckor, som seriens planerare läser (K-578; Niclas 2026-10-27: "Lektionerna bör köras ca 2
+    // veckor i rad ... från lektion 6 och fram rekommenderas däremot 2-4 veckor för en lektion ... Elevernas progression
+    // styr"). Planen föreslår samma lektion tills min är nådd, och sedan nästa efter skattningen.
+    veckor: z.strictObject({ min: z.number().int().min(1).max(12), max: z.number().int().min(1).max(12) }).refine((v) => v.min <= v.max, { message: 'Lektionens veckor: min är högst max.' }).optional(),
     // Filmerna ur metodriggen (Niclas 2026-09-30, src/lib/film.ts), i riggens format. film är huvudfilmen: den står
     // direkt efter faktarutan, och dess fyra stillbilder på sidan 1 i Word och i utskriften. filmer är högst två
     // extrafilmer, nr 2 och 3, var och en vid momentet den förklarar (efter): sist i ett avsnitt, efter en fri tabell
@@ -413,7 +417,10 @@ const metodensFalt = z.strictObject({
       // taggar: bankens taggar som veckans poster har, som lästexternas slag, så att planens vecka öppnar Ta fram med dem
       // (Planera insatsen, K-489, METODER.md under Planera insatsen). Planen läser veckorna ur vecka.
       // rubrik: veckans fokus i några ord, till planens översikt (Planera insatsen); utan den står fokus första mening.
-      rader: z.array(z.strictObject({ vecka: z.string(), led: z.string().optional(), fokus: z.string(), roll: z.string(), taggar: z.array(z.string()).min(1).optional(), rubrik: z.string().max(60).optional() })).min(1),
+      // eleverna: vad eleverna ska bli bättre på i raden, "Att …", och vidare: när gruppen går vidare, som fortsättningen
+      // på "Gå vidare när", utan punkt (K-572, den smala formen). Metodens sida och Word visar dem i en fjärde kolumn, och
+      // planen överst i veckan och under Efter veckan; formen prövas i standarden (elevernasFel).
+      rader: z.array(z.strictObject({ vecka: z.string(), led: z.string().optional(), fokus: z.string(), roll: z.string(), eleverna: z.string().max(200).optional(), vidare: z.string().optional(), taggar: z.array(z.string()).min(1).optional(), rubrik: z.string().max(60).optional() })).min(1),
     }).optional(),
     uppfoljning: z.strictObject({
       rubrik: z.string().default('Följ upp effekten'),
@@ -450,6 +457,8 @@ const metodensFalt = z.strictObject({
         //   Rimligheten 2026-10-26: veckans rad stod överst i passet, och delen under sa emot den).
         del: text.optional(),
         istallet: z.literal(true).optional(),
+        // kolumn: passets kolumn i tabellen, när tabellen har en kolumn per pass, som Ordverkstads Pass 2 och 3 (K-575).
+        kolumn: text.optional(),
       }).refine((p) => !!(p.text || p.ur), { message: 'En rad i plan.passen har en text, ett citat ur metoden, eller en rad ur metodens tabell (ur), eller båda.' })).min(1).optional(),
       utan: z.array(text).min(1).optional(),
       fore: z.array(text).min(1).max(4).optional(),
@@ -462,6 +471,9 @@ const metodensFalt = z.strictObject({
       utvardering: z.array(text).min(1).max(4).optional(),
       upprepa: text.optional(),
       stege: z.boolean().optional(),
+      // sistaRaden: progressionens sista rad tar planens sista vecka när perioden slutar före den, när metoden säger det, som
+      // Problemlösnings "Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan" (K-572).
+      sistaRaden: z.literal(true).optional(),
       // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): ett citat
       // ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, högst tre meningar och 250 tecken, och mer, namnet
       // på metodens tabell eller avsnitt med resten, som Så skiljer sig nivåerna (STIL.md under Stöd för ett val).

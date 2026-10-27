@@ -46,15 +46,15 @@
    "rader": [
     [
      "Rad 1 · Sätt ihop, utdraget\nsssooolll: sol",
-     "sol, sola, mos, se, lera, is, vas, vila\nOckså t, f, å, p, k och d: fira, ål, nål, mål, lår, måla"
+     "sol, sola, ro, mos, mosa, se, le, lera, mera, is, vas, vila\nOckså t, f, å, p, k och d: fira, ål, så, nål, mål, mås, lår, måla"
     ],
     [
      "Rad 2 · Sätt ihop, med paus\n/m/ /o/ /s/: mos. /t/ /a/ /k/: tak",
-     "sol, sola, mos, ler, lera, is\nOckså t, f, å, p, k och d: mat, vit, tal, pil, sak, kål, tak, tid"
+     "sol, sola, mos, mosa, ler, lera, is, vila\nOckså t, f, å, p, k och d: mat, vit, tal, leta, vet, pil, sak, kål, tak, tid"
     ],
     [
      "Rad 3 · Ta bort ett ljud\nmål utan /m/ blir ål. sola utan /a/ blir sol.",
-     "sola→sol, mosa→mos, lera→ler, mera→mer, ler→le\nOckså t, f, å, p, k och d: vit→vi, mål→ål, nål→ål, sår→år, lår→år, kål→ål, tak→ta, kor→ko"
+     "sola→sol, mosa→mos, lera→ler, mera→mer, ler→le, ser→se\nOckså t, f, å, p, k och d: vit→vi, tal→ta, mål→ål, nål→ål, sår→år, lår→år, mår→år, kål→ål, tak→ta, kor→ko"
     ],
     [
      "Rad 4 · Lägg till ett ljud\nål med /n/ först: nål. sol med /a/ sist: sola.",
@@ -62,7 +62,7 @@
     ],
     [
      "Rad 5 · Byt ett ljud\nmat blir fat. mål blir mås.",
-     "mos→mor, se→le, ler→mer, lera→mera, mer→mor, vi→ni\nOckså t, f, å, p, k och d: vit→vet, mat→fat→lat, mål→nål, mål→mås, lat→låt, tak→sak, tak→tal"
+     "mos→mor, se→le, le→la, ler→mer, lera→mera, mer→mor, vi→ni\nOckså t, f, å, p, k och d: vit→vet, tal→tar, mat→fat→lat, mål→nål, mål→mås, mos→mås, lat→låt, tak→sak, tak→tal"
     ]
    ],
    "not": "Med bara de tio första bokstäverna tar ni bort det sista ljudet med korten och det första muntligt.",
@@ -119,7 +119,7 @@
     ],
     [
      "Efter passet",
-     "Skriv upp vilka av dagens elever som klarade steg 4. Nästa rad när dagens elever läser två av tre nya ord utan att stanna, två pass i följd."
+     "Skriv upp vilka av dagens elever som klarade steg 4. Nästa rad när dagens elever läser två av tre ord utan att stanna, två pass i följd. När ni ändrar ett ljud, säger de också vilket."
     ]
    ],
    "tat": true,

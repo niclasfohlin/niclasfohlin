@@ -30,7 +30,7 @@ material:
   - bladen Vår lösning och Två lösningar
   - konkret material
   - kortet Våra sätt
-uppdaterad: 2026-10-26
+uppdaterad: 2026-10-27
 relaterade:
   - fyra-raknesatten
   - antalsuppfattning-i-grupp
@@ -198,14 +198,14 @@ tidsschema:
     - tid: Före passet
       fas: Förberedelse
       vad: Ta nästa problem på gruppens nivå, läs lärarens sida och lös problemet på båda sätten. Kopiera problemets sida, Vår lösning och Två lösningar till varje par. Till ett eget problem ritar du A och B på ett papper, som du visar i Jämföra med B täckt.
-    # Förstå och Lösa säger ledet och inte veckan, som progressionen, eftersom gruppen byter led när den klarar ledet med
-    # lite stöd (sajtens fråga i PLANERA-R-ATERKOPPLING.md 2026-10-26).
+    # Förstå och Lösa säger ledet och inte veckan, som progressionen, eftersom gruppen byter led när den klarar det som
+    # står under Gå vidare när i progressionen (sajtens fråga i PLANERA-R-ATERKOPPLING.md 2026-10-26, och K-572, del B).
     - tid: 0–5 min
       fas: Förstå
       vad: "Gemensamt. Läs problemet högt. Paren berättar det för varandra och en elev för gruppen. Red ut orden, ringa in frågan och skriv på tavlan vad ni vet och vad ni ska ta reda på. Från ledet Vi gör läser en elev problemet högt och leder Förstå, och från ledet Ni gör tillsammans skriver paren Vi vet själva. Lärarens sida: Ringa in · Lyft ut · Ord och tal."
     - tid: 5–7 min
       fas: Planera
-      vad: "Gemensamt, med kortet Våra sätt. Gruppen föreslår sätt från kortet, och paren väljer olika sätt. Skriv parens gissningar under Vi tror. Ingen räknar än. Lärarens sida: Förutse."
+      vad: "Gemensamt, med kortet Våra sätt. Gruppen föreslår sätt från kortet, och paren väljer olika sätt. Skriv parens gissningar på tavlan, under Vi tror. Ingen räknar än. Lärarens sida: Förutse."
     - tid: 7–21 min
       fas: Lösa
       vad: "I par, på bladet Vår lösning. I ledet Du gör själv börjar var och en själv i två minuter innan paret arbetar vidare. Fråga först och lämna paren i gång. Halvvägs säger du två sätt du har sett, utan namn och svar, och väljer lösningar till Jämföra. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
@@ -240,7 +240,7 @@ steg:
         - Vad betyder talen i texten?
     - namn: Planera
       fraga: Hur kan vi tänka?
-      gor: Gruppen föreslår sätt från kortet, och paren får välja olika sätt. Skriv parens gissningar under Vi tror. Ingen räknar än.
+      gor: Gruppen föreslår sätt från kortet, och paren får välja olika sätt. Skriv parens gissningar på tavlan, under Vi tror. Ingen räknar än.
       fraser:
         - Hur kan vi visa problemet så att vi ser det framför oss?
         - Tänk om vi provar med mindre tal först.
@@ -339,25 +339,35 @@ urval:
     - rubrik: Två sätt
       text: Går att lösa på två sätt, med bild, tabell, tallinje eller material
 progression:
-  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden Jag gör, Vi gör, Ni gör tillsammans och Du gör själv. Byt led när noteringarna visar att gruppen klarar ledet med lite stöd. Med tre pass i veckan räcker sex veckor, och med två pass i veckan tar du åtta, så att gruppen får ungefär lika många pass. Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan. I första passet tar Planera längre tid, eftersom du visar kortet Våra sätt och bladet Vår lösning. Bladet Två lösningar visar du första gången i Jämföra, när du delar ut det med B täckt. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med.
+  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden Jag gör, Vi gör, Ni gör tillsammans och Du gör själv. Gruppen byter led när den klarar det som står under Gå vidare när, och annars tar ni samma led en vecka till. Med tre pass i veckan räcker sex veckor, och med två pass i veckan tar du åtta, så att gruppen får ungefär lika många pass. Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan. I första passet tar Planera längre tid, eftersom du visar kortet Våra sätt och bladet Vår lösning. Bladet Två lösningar visar du första gången i Jämföra, när du delar ut det med B täckt. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med.
+  # eleverna och vidare (sajtens K-572, del B, den smala formen, efter provet out/planera-r/problemlosning-i-grupp-veckorna.md):
+  # vad eleverna ska bli bättre på i ledet, knutet till målets punkter, och när gruppen går vidare. Regeln för att byta led
+  # står i vidare, och progressionens text och plan.upprepa hänvisar dit (out/planera-r/problemlosning-i-grupp-4.md).
   rader:
     - vecka: 1–2
       led: Jag gör
       fokus: "De första problemen."
       roll: Läraren tänker högt med frågorna på kortet Våra sätt, som ”Jag frågar mig vad vi ska ta reda på.”
+      eleverna: Att återberätta problemet med egna ord och peka ut vad det frågar efter.
+      vidare: de flesta i gruppen återberättar problemet och säger frågan med egna ord efter högst en fråga från dig, i två pass i rad
     - vecka: 3–4
       led: Vi gör
       fokus: "Fler av metodens problem. Paren ställer frågorna på kortet Våra sätt till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
       roll: Läraren ger kortare stöd och frågar mer.
+      eleverna: Att förklara vad talen betyder och visa problemet med bild, tabell eller material, så att det syns hur talen hänger ihop.
+      vidare: paren visar problemet utan din hjälp i Lösa och kan säga vad varje tal betyder, i två pass i rad
     - vecka: 5–6
       led: Ni gör tillsammans
       fokus: De sista av metodens problem på nivån, och liknande problem ur källorna. Paren skriver Vi vet själva.
       roll: Läraren läser parens Vi vet först och följer upp sätt, lösning och rimlighet.
+      eleverna: Att jämföra två sätt och säga vad som är lika, och att kontrollera om svaret är rimligt innan paret säger att det är klart.
+      vidare: paren kontrollerar svaret mot problemet utan påminnelse och säger själva i Jämföra vad som är lika i lösningarna, i två pass i rad
     - vecka: 7–8
       rubrik: "Var och en börjar själv"
       led: Du gör själv
       fokus: Var och en börjar själv i två minuter innan paret arbetar vidare, gärna med problem ur klassens läromedel.
       roll: Läraren ger klassläraren en kopia av kortet Våra sätt, med gruppens bockar, och följer upp sätten i klassens matematik.
+      eleverna: Att börja själv på problemet, genom att peka ut vad det frågar efter och välja ett sätt att visa det.
 uppfoljning:
   text: Du behöver veta om passen ger effekt, och det räcker inte att de har blivit av. Kartläggningen har två blad per nivå, ett A4 före och ett efter. Båda bladen har samma fem uppgifter, och problemen är byggda på samma sätt. Kartläggningen före gör du innan det första passet, omkring tio minuter per elev eller par. Spara parens blad Vår lösning, eftersom bladen visar hur paren tänker. Klarar eleven uppgift 1 till 4 utan hjälp i kartläggningen efter, avslutar du insatsen för hen. Behöver hen mindre hjälp än före, men fortfarande hjälp i någon av uppgifterna, fortsätter hen en period till med nya problem på samma nivå, och ni börjar i ledet Vi gör. Är det talen som hindrar, tar hen först en insats i räkningen, som De fyra räknesätten i grupp eller Bråkkurs i grupp. Har inget ändrats, tar du upp det med elevhälsan.
   rader:
@@ -367,7 +377,7 @@ uppfoljning:
       vad: Eleven löser bladet Kartläggning före, och du skriver i lärarens protokoll vad hen säger och gör i varje uppgift och vilken hjälp hen behöver.
     - nar: Varje pass
       tid: "varje pass"
-      vad: Vad kunde varje elev återberätta, visa, jämföra och kontrollera, och med vilket stöd? Vad tas upp nästa gång?
+      vad: Vad kunde varje elev av det gruppen tränar i ledet, och med vilket stöd? Vad tas upp nästa gång?
     - nar: Efter sex till åtta veckor
       tid: "efter"
       perElev: 10
@@ -385,6 +395,9 @@ plan:
     text: "Med tre pass i veckan räcker sex veckor, och med två pass i veckan tar du åtta, så att gruppen får ungefär lika många pass. Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan."
     mer: Progression över insatsperioden
     forval: 8
+  # Den sista veckan tar ledet Du gör själv när perioden är kortare än åtta veckor, som veckovalets andra mening säger
+  # (Codex 2026-10-27, K-572: planens vecka 6 av sex visade Ni gör tillsammans).
+  sistaRaden: true
   passen:
     # Första passet: det som tar Planeras extra minuter, och bladet Två lösningar först i Jämföra (passgenomgången
     # 2026-10-26: i Planera hade paren sett A och B innan de prövade).
@@ -403,7 +416,9 @@ plan:
   fore:
     - "Kartläggningen har två blad per nivå, ett A4 före och ett efter."
     - "Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
-  upprepa: "Byt led när noteringarna visar att gruppen klarar ledet med lite stöd."
+  # Regeln för att byta led står i progressionens vidare, och upprepa citerar progressionens text som hänvisar dit
+  # (K-572, del B).
+  upprepa: "Gruppen byter led när den klarar det som står under Gå vidare när, och annars tar ni samma led en vecka till."
   # Beslutet efter kartläggningen efter, ordagrant ur uppföljningens text (passgenomgången 2026-10-26). Den andra
   # genomgången samma kväll: var den nya perioden börjar, och att talen går först.
   utvardering:
@@ -436,7 +451,7 @@ snabbmall:
   sist:
     - Det här klarar eleverna nu med mindre stöd än förut
     - "Jag tar med mig in i nästa vecka: samma led eller nästa?"
-  not: Nästa gång tar ni nästa problem, eller ett som liknar det förra om gruppen har kört fast på samma sak två pass i rad. Byt led när raderna visar att gruppen klarar ledet med lite stöd.
+  not: Nästa gång tar ni nästa problem, eller ett som liknar det förra om gruppen har kört fast på samma sak två pass i rad. Byt led när gruppen klarar det som står i progressionen under Gå vidare när.
 checklista:
   punkter:
     - Läst lärarens sida och löst problemet själv på båda sätten.
@@ -4259,7 +4274,7 @@ lathund:
           vad: Läs högt. Paren återberättar. Ringa in frågan och skriv på tavlan vad ni vet och ska ta reda på.
         - tid: 5–7
           fas: 2 · Planera
-          vad: Paren väljer sätt och gissar svaret, och du skriver det under Vi tror. Ingen räknar än.
+          vad: Paren väljer sätt och gissar svaret, och du skriver det på tavlan, under Vi tror. Ingen räknar än.
         - tid: 7–21
           fas: 3 · Lösa
           vad: Paren prövar och byter penna halvvägs. Du går runt, frågar först och väljer lösningar till Jämföra.

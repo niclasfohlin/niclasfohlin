@@ -69,7 +69,7 @@
      "sten, bröd, tand, sol, träd, buss\nbrandbil, stol, tiger, trumma, bäver, säl"
     ]
    ],
-   "not": "Nästa pass byter ni halvor. Ä i eld och elefant räknas som rätt.",
+   "not": "Samma rad igen: byt halvor. Ä i eld och elefant räknas som rätt. Klarar fler än hälften ljudkollens uppgift 3, börja i rad 3.",
    "tat": true,
    "namnrad": 17
   },
@@ -123,7 +123,7 @@
     ],
     [
      "Efter passet",
-     "Skriv upp vilka av dagens elever som klarade steg 4. Nästa rad när de har fyra av fem rätt, två pass i följd."
+     "Skriv upp vilka av dagens elever som klarade steg 4. Med tre pass i veckan tar ni nästa rad varje pass, och med fler när de har fyra av fem rätt, två pass i följd."
     ]
    ],
    "tat": true,

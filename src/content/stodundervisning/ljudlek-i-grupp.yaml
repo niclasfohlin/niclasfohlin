@@ -14,7 +14,7 @@ format:
   - liten grupp
   - par
 tid: 30 minuter per pass, tre till fem pass i veckan
-period: 10–12 veckor
+period: 4–12 veckor
 grupp: 2–12 elever
 material:
   - bokstavskorten
@@ -23,7 +23,7 @@ material:
   - lektionens material
   - snabbmallen
   - kartläggningen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 relaterade:
   - laslistor-i-grupp
   - til-i-grupp
@@ -31,15 +31,15 @@ relaterade:
 utkast: false
 lektionsbank:
   rubrik: "Lektionsbanken: förmågorna och lektionerna"
-  text: "Varje lektion tränar en förmåga, och förmågorna har samma nummer som uppgifterna i ljudkollen. Ordningen mellan förmågorna är ett förslag. Eleven klarar en uppgift i ljudkollen med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna. Gruppen börjar i den första förmågan där fler än hälften av eleverna inte klarar uppgiften och hoppar över det som den redan kan, och du väljer en lektion för förmågan. Innan ljudkollen är gjord tar gruppen lektionen Första ljudet, med s som dagens ljud. Nya lektioner läggs in under den förmåga de tränar."
+  text: "Varje lektion tränar en förmåga, och lektionen, förmågan och uppgiften i ljudkollen har samma nummer. Ordningen mellan förmågorna är ett förslag. Eleven klarar en uppgift i ljudkollen med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna. Ljudkollen visar vilken av tre ingångar gruppen börjar i: Rim (lektion 1) för helt nybörjare, Första ljudet (lektion 3) för nybörjare och Räkna ljud (lektion 6) för elever som kan ljuda. Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare. Gruppen börjar i en ingång och går sedan vidare lektion för lektion: vid förmåga 4 börjar den i Första ljudet och tar sedan Bokstavsgympa. Innan ljudkollen är gjord tar gruppen lektionen Första ljudet, med s som dagens ljud. Visar ljudkollen sedan en annan ingång, går gruppen dit. Nya lektioner läggs in under den förmåga de tränar."
   lektionskort: "Varje lektion har ett lektionskort, ett A4 med målet, rörelsen, orden och passet. Öppna kortet vid lektionen, eller skriv ut alla på en gång och sätt dem i en pärm."
   formagor:
     - nr: 1
       namn: "Rim"
-      skal: "Den lättaste vägen in i ljuden, men inte nödvändig för läsningen. Högst en vecka."
+      skal: "Den lättaste vägen in i ljuden, men inte nödvändig för läsningen."
     - nr: 2
       namn: "Ord och stavelser"
-      skal: "Större delar före de enskilda ljuden. Högst en vecka."
+      skal: "Större delar före de enskilda ljuden."
     - nr: 3
       namn: "Första ljudet"
       skal: "Första ljudet är lättast att höra, och där börjar ni med bokstäverna."
@@ -61,7 +61,7 @@ lektionsbank:
     - nr: 9
       namn: "Läsa och skriva meningar"
       skal: "Sist i banken. Eleven läser och skriver ord i korta meningar, också ord som ingen har sagt högt först, och med meningarna tar hen steget till att läsa och skriva själv."
-  not: "Att sätta ihop och dela upp tränar ni redan i varje ljudstart. I åk 1–⁠2 börjar gruppen oftast i förmåga 3 eller senare och lägger mer tid på förmåga 7 och 8. Varje lektion säger när gruppen går vidare, och då tar gruppen nästa förmåga där fler än hälften inte klarar uppgiften. Har förmågan flera lektioner kan gruppen ta dem efter varandra. Ljudkollen var tredje vecka visar samma sak, uppgift för uppgift. Säger den något annat än lektionens regel, går du efter ljudkollen. Den som redan är säker blir den säkrare i paret och får ord ur nästa ordgrupp. Den som inte klarar uppgifter före gruppens förmåga får ord ur en lättare ordgrupp, blir dagens elev oftare och sitter med en säker kamrat."
+  not: "Att sätta ihop och dela upp tränar ni redan i varje ljudstart. I åk 1–⁠2 börjar gruppen oftast i Första ljudet eller Räkna ljud och lägger mer tid på förmåga 7 och 8. Varje lektion säger när gruppen går vidare till nästa lektion, oftast när fler än hälften av eleverna klarar steg 4 själva i lektionens sista rad. Har förmågan flera lektioner, kan gruppen ta dem efter varandra. I ljudkollen var tredje vecka visar uppgiften för gruppens förmåga samma sak som lektionens regel. Uppgiften för nästa förmåga visar vem som redan är säker på den. I Smaka på ljud, Räkna ljud och Från ljud till ord visar uppgiften också vilken rad gruppen börjar i när den kommer dit. Den som redan är säker blir den säkrare i paret och får ord ur nästa ordgrupp. Den som inte klarar uppgifter före gruppens förmåga får ord ur en lättare ordgrupp, blir dagens elev oftare och sitter med en säker kamrat. I en lektion där första raden beror på ljudkollen, väljer du raden efter den senaste ljudkollen. Beror den på felen, börjar gruppen i raden för det fel som flest gör. Lektion 1 till 5 tar omkring två veckor var (sex till tio pass). Lektion 6 till 9 tar två till fyra veckor var, eftersom innehållet där är skarpare och det är viktigare att eleverna klarar det. Elevernas progression styr: gruppen går vidare när lektionens regel säger det, och inte förr. På 4–12 veckor kommer gruppen så långt den hinner från sin ingång. Från Rim når gruppen oftast Räkna ljud på tolv veckor. Från Första ljudet når den oftast Skriv ord tillsammans, och från Räkna ljud når den Från ord till mening. Från Räkna ljud når gruppen alltså oftast målet för insatsen på en period, och från Rim och Första ljudet behöver den oftast två perioder. Välj tolv veckor, eller åtta till tolv när gruppen börjar i Räkna ljud. En kortare period, fyra till sju veckor, passar en grupp som bara har de sista lektionerna kvar. Är gruppen klar med Från ord till mening före periodens slut, slutar perioden där, och du gör mätningen efter perioden. Tar perioden slut innan gruppen är klar, gör du ändå ljudkollen och screeningen efter perioden och beslutar hur varje elev går vidare."
 pabordet:
   - nr: 1
     rubrik: "Blad: Screeningen, version A, sida 1"
@@ -98,14 +98,14 @@ inledning:
   - "Ljudlek i grupp är för elever i förskoleklass till årskurs 2 som behöver stöd i att höra ljuden i orden och koppla dem till bokstäverna. Det märks när eleven säger ess om första ljudet i sol, gissar ett ord efter första bokstaven eller tvekar om sol och sko börjar med samma ljud."
   - "Så här lär sig eleven läsa och skriva. Att läsa är att se bokstäverna i ordning, säga ljudet för varje bokstav och sätta ihop ljuden till ett ord: sss-⁠ooo-⁠lll, sol. Att skriva är samma sak åt andra hållet: eleven säger ordet långsamt, hör ljuden ett i taget och skriver en bokstav för varje ljud. Eleven behöver alltså tre saker: höra ljuden i orden, kunna bokstävernas ljud, och kunna sätta ihop ljud och dela upp ord. Har eleven ljudat ett ord några gånger känner hen igen det direkt, och då går läsningen fort."
   - "Syftet är att eleverna knäcker läskoden: att de hör ljuden i orden, kan bokstävernas ljud och kan sätta ihop och dela upp korta ord, så att de kan läsa och skriva dem själva. Undervisning i ljuden hjälper mest de elever som har kommit kortast, och den ger mest när bokstäverna finns med från första passet."
-  - "Din roll är att visa, lyssna och välja. Du visar varje lek först och tänker högt. Sedan gör ni den tillsammans, och eleverna tar över, först i par och sedan var för sig, medan du lyssnar på några av dem i varje pass. Du säger ljuden tydligt och drar ut dem som går att dra ut, väntar innan du hjälper och ger minsta möjliga stöd. Du tar reda på vad varje elev kan med två kartläggningar. Screeningen visar var eleven står i läsningen, på åtta nivåer från första ljudet till att läsa en text och svara på frågor om den. Ljudkollen visar vilken lektion gruppen ska ta och vilka bokstäver som blir dagens ljud. Den har nio korta uppgifter, en för varje förmåga i lektionsbanken, och i den sista läser eleven fyra påhittade ord. Du gör ljudkollen igen var tredje vecka och ser om eleverna går framåt."
+  - "Din roll är att visa, lyssna och välja. Du visar varje lek först och tänker högt. Sedan gör ni den tillsammans, och eleverna tar över, först i par och sedan var för sig, medan du lyssnar på några av dem i varje pass. Du säger ljuden tydligt och drar ut dem som går att dra ut, väntar innan du hjälper och ger minsta möjliga stöd. Du tar reda på vad varje elev kan med två kartläggningar. Screeningen visar var eleven står i läsningen, på åtta nivåer från första ljudet till att läsa en text och svara på frågor om den. Ljudkollen visar vilken lektion gruppen börjar i och vilka bokstäver som blir dagens ljud. Den har nio korta uppgifter, en för varje förmåga i lektionsbanken, och i den sista läser eleven fyra påhittade ord. Var tredje vecka gör du två eller tre av ljudkollens uppgifter igen och ser om eleverna går framåt."
   - "Varje pass börjar med ljudstarten, fem minuter där alla sätter ihop och delar upp ord, och fortsätter med en lektion ur lektionsbanken. Lektionerna tränar var sin del av det eleven behöver, från rim till korta meningar, och gruppen tar den lektion som ljudkollen visar. Det som gäller alla lektioner står här: eleverna, din roll, ljudstarten, dagens ljud, stödet när eleven fastnar, felsökningen och uppföljningen. Varje lektion har sina egna fyra steg, sina ord och sitt material."
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Insatsen pågår i 10–12 veckor med tre till fem pass i veckan, helst fler än tre för en grupp som har kommit kortast. Gruppen har två till tolv elever, och varje pass är cirka 30 minuter med tre delar: ljudstarten, lektionen och avslutet. I ljudstarten sätter alla ihop och delar upp ord, likadant varje pass. Lektionen väljer du ur lektionsbanken efter ljudkollen, och gruppen gör samma lektion flera pass i följd. Ljudkollen och screeningen gör du med varje elev före eller under den första veckan, ljudkollen igen var tredje vecka och båda efter perioden, så att du kan jämföra med starten."
+  text: "Insatsen pågår i 4–12 veckor med tre till fem pass i veckan, helst fler än tre för en grupp som har kommit kortast. Gruppen har två till tolv elever, och varje pass är cirka 30 minuter med tre delar: ljudstarten, lektionen och avslutet. I ljudstarten sätter alla ihop och delar upp ord, likadant varje pass. Lektionen väljer du ur lektionsbanken efter ljudkollen, och gruppen gör samma lektion två veckor eller längre. Ljudkollen och screeningen gör du med varje elev före eller under den första veckan, ljudkollen igen var tredje vecka och båda efter perioden, så att du kan jämföra med starten."
 gruppen:
   rubrik: Så väljer du eleverna och sätter ihop paren
-  text: "Ljudlek är för elever i F–2 som klarar högst nivå 4 i screeningen, också under nivå 1, och för osäkra nybörjarläsare. Du kan starta utifrån det du vet om dem. Den som klarar nivå 5 och läser de påhittade orden i ljudkollen behöver i stället Läslistor i grupp eller TIL i grupp. Har en elev ett litet ordförråd eller otydligt tal, kopplar du in logopeden samtidigt, men är svenskan ny prövar du först samma sak på förstaspråket. Gruppen har två till tolv elever och arbetar i par i steg 3, en säkrare och en mindre säker. Vid udda antal blir det en trio, där oftast en säger ordet och två turas om."
+  text: "Ljudlek är för elever i F–2 som klarar högst nivå 4 i screeningen, också under nivå 1, och för osäkra nybörjarläsare. Du kan starta utifrån det du vet om dem. Den som klarar nivå 5 och läser alla fyra påhittade orden i ljudkollen behöver i stället Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Har en elev ett litet ordförråd eller otydligt tal, kopplar du in logopeden samtidigt, men är svenskan ny prövar du först samma sak på förstaspråket. I steg 3 arbetar eleverna i par, en säkrare och en mindre säker. Vid udda antal blir det en trio, där oftast en säger ordet och två turas om."
 tabeller:
   - rubrik: "Från rim till ljud: det eleverna lär sig"
     plats: efter-inledning
@@ -248,7 +248,7 @@ tabeller:
   - rubrik: Ordbanken
     plats: efter-urval
     meny: true
-    text: "Här är orden till ljudstarten, i sex ordgrupper från lätt till svårt. Alla ord är ljudenliga, med ett ljud för varje bokstav, och lektionerna sorterar sina ord i samma ordgrupper. Gruppen börjar i Tre ljud att dra ut, eller i Två ljud att dra ut om fler än hälften håller upp fel antal fingrar. Ta nästa ordgrupp när nästan alla visar rätt antal fingrar i alla fyra orden, två pass i följd. Gruppen behåller sin ordgrupp från lektion till lektion. I en lektion där raderna är ordgrupperna, som Räkna ljud, är ordgruppen densamma som raden."
+    text: "Här är orden till ljudstarten, i sex ordgrupper från lätt till svårt. Alla ord är ljudenliga, med ett ljud för varje bokstav, och lektionerna sorterar sina ord i samma ordgrupper. Gruppen börjar i Tre ljud att dra ut, eller i Två ljud att dra ut om fler än hälften håller upp fel antal fingrar. Ta nästa ordgrupp när nästan alla visar rätt antal fingrar i alla fyra orden, två pass i följd. I lektionerna före Räkna ljud säger eleverna ljuden efter dig. Där tar gruppen nästa ordgrupp när nästan alla sätter ihop orden själva i Sätt ihop, två pass i följd, och stannar vid ordgruppen Med klusil. Gruppen behåller sin ordgrupp från lektion till lektion. I en lektion där raderna är ordgrupperna, som Räkna ljud, är ordgruppen densamma som raden."
     kolumner:
       - Ordgrupp
       - Orden
@@ -384,20 +384,50 @@ urval:
   kravText: "Tre regler hjälper dig att välja lektion:"
   krav:
     - rubrik: Ljudkollen först
-      text: "Börja i den första förmågan där fler än hälften inte klarar uppgiften"
+      text: "Börja i den ingång som ljudkollen visar"
     - rubrik: En lektion i taget
-      text: Samma lektion flera pass i följd
+      text: Samma lektion omkring två veckor eller längre
     - rubrik: Gå vidare
       text: När lektionens regel säger det
 uppfoljning:
-  text: "Screeningen visar var eleven står i läsningen, och ljudkollen visar vilka av lektionernas förmågor eleven klarar. Protokollet, gruppens översikt och frågorna finns under Materialet. Berätta konkret för eleven vad hen har lärt sig. Med bladet Observation av ett pass under Materialet kan en kollega följa ett pass och ge dig återkoppling, gärna samma vecka som ljudkollen. Säg före passet vad du vill ha återkoppling på. Efteråt berättar du först vad du själv lade märke till, och sedan läser kollegan upp det som fungerade, ur sina anteckningar. Du bestämmer nästa steg, ni prövar det en gång direkt, och det blir fokus nästa gång kollegan följer ett pass."
+  text: "Screeningen visar var eleven står i läsningen, och ljudkollen visar vilka av lektionernas förmågor eleven klarar. Protokollet, gruppens översikt och frågorna finns under Materialet. Berätta konkret för eleven vad hen har lärt sig. Med bladet Observation av ett pass under Materialet kan en kollega följa ett pass och ge dig återkoppling, gärna samma vecka som ljudkollen. Säg före passet vad du vill ha återkoppling på. Efteråt berättar du först vad du själv lade märke till, och sedan läser kollegan upp det som fungerade, ur sina anteckningar. Du bestämmer nästa steg, ni prövar det en gång direkt, och det blir fokus nästa gång kollegan följer ett pass. Efter perioden beslutar du hur varje elev går vidare. Klarar eleven nivå 5 eller högre i screeningen och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva. Klarar eleven inte fler uppgifter i ljudkollen än före insatsen, får hen mer intensivt stöd, gärna enskilt, och en bedömning. Annars fortsätter eleven en period till, från den lektion som gruppen har nått. Har gruppen gått den sista lektionen, börjar eleven den nya perioden i den lektion som hör till den första uppgift i ljudkollen som hen inte klarar, eller i Från ord till mening när hen klarar alla uppgifter."
   rader:
     - nar: Före insatsen
-      vad: "Gör ljudkollen och screeningen, version A, med en elev i taget utanför passen, cirka tolv minuter per elev. Gruppen börjar i den första förmågan där fler än hälften inte klarar uppgiften, och du väljer en lektion för den."
+      tid: "före"
+      perElev: 12
+      vad: "Gör ljudkollen och screeningen, version A, med en elev i taget utanför passen, cirka tolv minuter per elev. I gruppens översikt ser du sedan ingången."
     - nar: Var tredje vecka
-      vad: "Gör ljudkollens uppgift för gruppens förmåga, uppgiften för nästa förmåga och uppgift 4. Har en elev inte gått framåt vecka 6, tar du det med elevhälsan och ser till att hörseln kontrolleras."
-    - nar: Efter 10–12 veckor
-      vad: "Gör hela ljudkollen och screeningen, version B. Den som klarar nivå 5 eller högre och läser de påhittade orden går vidare till Läslistor i grupp eller TIL i grupp. Den som inte har gått framåt får mer intensivt stöd och en bedömning."
+      tid: "var 3:e vecka"
+      perElev: [2, 3]
+      vad: "Gör ljudkollens uppgift för gruppens förmåga, uppgiften för nästa förmåga och uppgift 4 på två till tre minuter per elev. Har en elev inte gått framåt vecka 6, tar du det med elevhälsan och ser till att hörseln kontrolleras."
+    - nar: Efter 4–12 veckor
+      tid: "efter"
+      perElev: 12
+      vad: "Gör hela ljudkollen och screeningen, version B, med en elev i taget, och jämför med resultaten före insatsen."
+# Planera insatsen (sajtens K-551, 2026-10-26): seriens planerare med tre ingångar och lektionen vecka för vecka. Texterna
+# är ordagranna citat ur metoden: ingångarna och längden ur lektionsbanken, beslutet efter perioden ur uppföljningen.
+plan:
+  lektionsval:
+    text: "Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare."
+    mer: "Lektionsbanken: förmågorna och lektionerna"
+    ingangar:
+      - { lektion: 1, namn: Helt nybörjare }
+      - { lektion: 3, namn: Nybörjare }
+      - { lektion: 6, namn: Kan ljuda }
+  veckoval:
+    text: "Elevernas progression styr: gruppen går vidare när lektionens regel säger det, och inte förr. På 4–12 veckor kommer gruppen så långt den hinner från sin ingång. Välj tolv veckor, eller åtta till tolv när gruppen börjar i Räkna ljud."
+    mer: "Lektionsbanken: förmågorna och lektionerna"
+    forval: 12
+  fore:
+    - "Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare."
+    - "Gruppen börjar i en ingång och går sedan vidare lektion för lektion: vid förmåga 4 börjar den i Första ljudet och tar sedan Bokstavsgympa."
+    - "Innan ljudkollen är gjord tar gruppen lektionen Första ljudet, med s som dagens ljud."
+    - "Visar ljudkollen sedan en annan ingång, går gruppen dit."
+  utvardering:
+    - "Klarar eleven nivå 5 eller högre i screeningen och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva."
+    - "Klarar eleven inte fler uppgifter i ljudkollen än före insatsen, får hen mer intensivt stöd, gärna enskilt, och en bedömning."
+    - "Annars fortsätter eleven en period till, från den lektion som gruppen har nått."
+    - "Har gruppen gått den sista lektionen, börjar eleven den nya perioden i den lektion som hör till den första uppgift i ljudkollen som hen inte klarar, eller i Från ord till mening när hen klarar alla uppgifter."
 mal:
   overgripande: "kunna höra, dela upp och sätta ihop ljuden i ord och koppla dem till bokstäver."
   text: "Efter insatsen ska eleven kunna:"
@@ -639,7 +669,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: "Skriv elevernas namn och hur många rätt varje elev har på varje uppgift. Eleven klarar en uppgift med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna. Ringa in siffran när eleven inte klarar uppgiften, så ser du direkt var gruppen behöver träna. Kolumnerna har samma nummer som förmågorna i lektionsbanken. Gruppen börjar i den första förmågan från vänster där fler än hälften av eleverna inte klarar uppgiften, och du väljer en lektion för den i lektionsbanken. Den som läser alla fyra orden i uppgift 9 kan snart gå vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs."
+              text: "Skriv elevernas namn och hur många rätt varje elev har på varje uppgift. Eleven klarar en uppgift med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna. Ringa in siffran när eleven inte klarar uppgiften, så ser du direkt var gruppen behöver träna. Kolumnerna har samma nummer som förmågorna i lektionsbanken. Den första förmågan från vänster där fler än hälften av eleverna inte klarar uppgiften visar ingången i lektionsbanken: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare. Den som läser alla fyra orden i uppgift 9 kan snart gå vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs."
       huvud:
         - rubrik: Gruppen
         - rubrik: Vecka
@@ -710,7 +740,7 @@ lathund:
   metoden:
     text:
       - "Eleverna hör, delar upp och sätter ihop ljuden i ord och kopplar dem till bokstäver, så att de kan läsa och skriva korta ord. Du gör screeningen och ljudkollen, leder ljudstarten, tar en lektion i taget och noterar efter passet."
-      - "Insatsen är för elever i F–2 som klarar högst nivå 4 i screeningen och för osäkra nybörjarläsare. Ljudkollen har en kort uppgift för varje förmåga i lektionsbanken. Eleven klarar uppgiften med minst tre rätt av fyra, i uppgift 4 minst åtta av de tio första bokstäverna, och gruppen börjar i den första förmågan där fler än hälften inte klarar den. Innan ljudkollen är gjord tar gruppen lektionen Första ljudet."
+      - "Insatsen är för elever i F–2 som klarar högst nivå 4 i screeningen och för osäkra nybörjarläsare. Ljudkollen har en uppgift för varje förmåga i lektionsbanken. Eleven klarar uppgiften med minst tre rätt av fyra, i uppgift 4 minst åtta av de tio första bokstäverna. Den första förmågan som fler än hälften inte klarar visar ingången: Rim vid 1–⁠2, Första ljudet vid 3–⁠5, Räkna ljud vid 6–⁠9."
     ruta:
       rubrik: Fyra saker att hålla fast vid
       punkter:
@@ -808,7 +838,7 @@ lathund:
           - - Konsonantmöte sist
             - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
       - typ: not
-        text: "I Dela upp säger du ljuden först och gruppen efter, i lektionerna före Räkna ljud. Börja i Tre ljud att dra ut, eller i Två ljud att dra ut om fler än hälften visar fel antal fingrar. Ta nästa ordgrupp när nästan alla visar rätt två pass i följd. Dagens ljud är den första bokstaven som fler än hälften inte kan, i ordningen s o l a r m e n i v, sedan t f å p k d u b g h y ä ö j."
+        text: "I lektionerna före Räkna ljud säger du ljuden först i Dela upp och gruppen efter. Börja i Tre ljud att dra ut, eller i Två ljud att dra ut om fler än hälften visar fel antal fingrar. Ta nästa ordgrupp när nästan alla visar rätt två pass i följd, men före Räkna ljud när nästan alla sätter ihop orden själva, högst till Med klusil. Dagens ljud är den första bokstaven som fler än hälften inte kan, i ordningen s o l a r m e n i v, sedan t f å p k d u b g h y ä ö j."
       - typ: snabbmall
   material:
     rubrik: Vad du behöver för ett pass
@@ -822,8 +852,8 @@ lathund:
           text: "Under Materialet på metodsidan och i planeringsmallarna (Word): bokstavskorten, elevens blad, protokollet och gruppens översikt."
       efter: "Förmågorna i lektionsbanken: 1 Rim, 2 Ord och stavelser, 3 Första ljudet, 4 Bokstävernas ljud, 5 Sist och i mitten, 6 Dela upp, 7 Skriva ord, 8 Sätta ihop och byta, 9 Läsa och skriva meningar. Lektionerna för varje förmåga står i banken på metodsidan."
     bordet:
-      - Bokstavskortet för dagens ljud och några som ni har haft
-      - Bokstavskartan, till den som behöver den
+      - Dagens och tidigare bokstavskort
+      - Bokstavskartan vid behov
       - En spegel per par
       - Lektionens material
       - Snabbmallen, med dagens elever
@@ -842,13 +872,13 @@ film:
 filmer:
   - nr: 2
     titel: "Från ljudkollen till lektionen"
-    sekunder: 28.95
-    beskrivning: "Ljudkollen, en elev i taget: skriv antal rätt. Färre än tre rätt av fyra: ringa in siffran. Uppgift 4: färre än åtta av de tio första bokstäverna. Första förmågan från vänster där fler än hälften har en ring, alltså inte klarar uppgiften. Bokstavsgympa, och ljudkollen igen var tredje vecka."
+    sekunder: 28.92
+    beskrivning: "Ljudkollen, en elev i taget: skriv antal rätt. Färre än tre rätt av fyra: ringa in siffran. Uppgift 4: färre än åtta av de tio första bokstäverna. Första förmågan från vänster där fler än hälften inte klarar den. Ingången Nybörjare: Första ljudet, sedan Bokstavsgympa."
     rubrik: "Från ljudkollen till lektionen"
-    ingress: "Fyra bilder ur filmen om hur ljudkollen blir en lektion: siffran ringas in när eleven inte klarar uppgiften, och gruppen börjar i den första förmågan där fler än hälften inte klarar den. Filmen på metodens sida visar samma sak i rörelse."
+    ingress: "Fyra bilder ur filmen om hur ljudkollen blir en lektion: siffran ringas in när eleven inte klarar uppgiften, och den första förmågan där fler än hälften inte klarar den visar vilken ingång gruppen börjar i. Filmen på metodens sida visar samma sak i rörelse."
     efter: "uppfoljning"
     stillbilder:
       - text: "Färre än tre rätt av fyra: ringa in siffran."
       - text: "Uppgift 4: färre än åtta av de tio första, ringa in."
       - text: "Förmåga 4: första där fler än hälften inte klarar den."
-      - text: "Bokstavsgympa, och ljudkollen igen var tredje vecka."
+      - text: "Gruppen tar Första ljudet och sedan Bokstavsgympa."

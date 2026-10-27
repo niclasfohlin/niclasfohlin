@@ -15,7 +15,7 @@ format:
   - "liten grupp"
   - "par"
 tid: "30 minuter per pass, tre till fem pass i veckan"
-period: "Åtta till tolv pass i följd"
+period: "Omkring två veckor, sex till tio pass"
 grupp: "2–12 elever"
 material:
   - bildkorten
@@ -24,18 +24,20 @@ material:
   - whiteboardtavlor
   - bokstavskartan
   - snabbmallen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 3
 tranar: "höra, säga och känna första ljudet, och koppla det till bokstaven"
+vidare: "du har hört fler än hälften av eleverna själva säga första ljudet och visa rätt bokstav i minst fyra av sina fem ord i steg 4 i raden Konsonantmöte först"
+veckor: { min: 2, max: 2 }
 inledning:
   - "I lektionen säger eleverna det första ljudet i ord, känner det i munnen och sorterar bilder efter det. Sist skriver de bokstaven för ljudet. Lektionen hjälper eleven med det som gör första ljudet svårt: ljuden i ett ord flyter ihop, så att eleven säger so för sol. Ibland kommer betydelsen, ett rim eller bokstavens namn i vägen."
   - "Syftet är att eleverna hör vilket ljud ett ord börjar med och vet vilken bokstav som står för ljudet, så att de kan börja skriva ord. Du säger det första ljudet så att det hörs, blandar korten så att eleverna lyssnar och kopplar ljudet till bokstaven varje gång."
-  - "Välj lektionen Första ljudet när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 3, första ljudet. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och lektionen hör till förmåga 3, Första ljudet, i lektionsbanken där."
+  - "Första ljudet är ingången för nybörjare. En grupp som har börjat i Rim tar lektionen efter Ord och stavelser. Lektionen tränar det som ljudkollens uppgift 3 prövar, första ljudet. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, som också säger vilken ingång gruppen börjar i. Lektionen hör till förmåga 3, Första ljudet, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Lektionen går igenom raderna i Så blir lektionen svårare, oftast i åtta till tolv pass. Ta nästa rad när dagens elever säger första ljudet och visar rätt bokstav i minst fyra av sina fem ord i steg 4, två pass i följd. I trion räcker tre av fyra. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. På omkring två veckor går ni igenom raderna i Så blir lektionen svårare. Med tre pass i veckan tar ni en ny rad varje pass. Med fler pass tar ni nästa rad när dagens elever säger första ljudet och visar rätt bokstav i minst fyra av sina fem ord i steg 4, två pass i följd. I trion räcker tre av fyra."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -59,7 +61,7 @@ tabeller:
       - - "Konsonantmöte först: s, t och b"
         - "sten: /s/. träd: /t/. bröd: /b/."
         - "Dra ut s:et, eller säg /t/ och /b/ korta, och sluta innan nästa ljud: sss, sten."
-    not: "Varje rad har ett ark vikkort under Materialet. Nästa pass byter ni, så att korten från steg 1–⁠3 kommer i steg 4 och tvärtom. Är en av arkets bokstäver ny för gruppen, visar du den i steg 1, och i steg 4 pekar eleven ut den på bokstavskartan. Gruppen börjar i raden Ljud att dra ut. Hoppa över raden Ljud som liknar varandra när ljudkollens fel och steg 4 visar att ingen blandar ihop f och v eller p och b."
+    not: "Varje rad har ett ark vikkort under Materialet. Tar ni samma rad nästa pass, byter ni arkets halvor, så att korten från steg 1–⁠3 kommer i steg 4 och tvärtom. Är en av arkets bokstäver ny för gruppen, visar du den i steg 1, och i steg 4 pekar eleven ut den på bokstavskartan. Gruppen börjar i raden Ljud att dra ut. Klarar fler än hälften redan ljudkollens uppgift 3, börjar gruppen i raden Klusil först. Hoppa över raden Ljud som liknar varandra när ljudkollens fel och steg 4 visar att ingen blandar ihop f och v eller p och b."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -233,15 +235,15 @@ arbetsform:
 exempel:
   valt:
     rubrik: "Gruppen"
-    text: "sex elever i förskoleklass och åk 1, vecka 3, tre pass i veckan. Gruppen gör lektionen för första gången och står i raden Ljud att dra ut. Dagens ljud är /m/, och dagens elever är Leo och Elin."
+    text: "sex elever i förskoleklass och åk 1, vecka 5, tre pass i veckan. Gruppen gör lektionen för första gången och står i raden Ljud att dra ut. Dagens ljud är /i/, och dagens elever är Leo och Elin."
   text:
-    - "Ljudstarten. Läraren visar m, och alla säger mmm och känner läpparna. Elin säger ett ord på ljudet: ”mus”."
+    - "Ljudstarten. Läraren visar i, och alla säger iii och tittar i spegeln. Elin säger ett ord på ljudet: ”is”."
     - "Ljudet i munnen. Läraren lägger s, r och m på bordet, och gruppen säger vad arkets tolv bilder heter. Läraren tar solen: ”Sssol börjar med ssss.” Alla säger sss och tittar i spegeln. Sedan räv och myra."
     - "Peka på bokstaven. Läraren visar masken. Alla säger ”mmmask” och pekar på m. Vid raketen säger Leo ”ra”. Läraren säger: ”Rrraket. Bara det första: rrr.” Leo pekar på r."
     - "Sortera. Paren är Alva och Elin, Omar och Noah, Leo och Mira. Noah tar saltet och säger ”salt, sss”, och Omar säger efter. Sist vänder de korten i s-⁠högen: båda börjar med s."
     - "Skriv första ljudet. Läraren lyssnar på Leo och Elin. Elin säger ”mmmorot” och skriver m. Leo säger ”ess” om salladen. Läraren säger: ”Ess är namnet. Hur låter den?” Leo säger sss och pekar ut s på kartan. Sist säger läraren mås och ro, och alla skriver."
     - "Avslutet. Mira säger: ”Räka. Rrr.” Läraren säger: ”Ni hittade det första ljudet och bokstaven.”"
-    - "Efteråt noterar läraren: Elin säger första ljudet och skriver bokstaven. Leo säger ibland bokstavens namn. Nästa pass tar gruppen samma rad, och dagens elever blir Alva och Omar."
+    - "Efteråt noterar läraren: Elin säger första ljudet och skriver bokstaven. Leo säger ibland bokstavens namn. Nästa pass tar gruppen raden Vokal först, och dagens elever blir Alva och Omar."
 fastnar:
   rubrik: "När eleven fastnar"
   text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
@@ -300,7 +302,7 @@ snabbmall:
   sist:
     - Det här gör eleverna själva nu som de inte gjorde förut
     - Jag tar med mig in i nästa vecka
-  not: Ta nästa rad när dagens elever säger första ljudet och visar rätt bokstav i minst fyra av sina fem ord i steg 4, två pass i följd. I trion räcker tre av fyra. Efter sista raden går gruppen till nästa förmåga.
+  not: Med tre pass i veckan tar ni en ny rad varje pass. Med fler tar ni nästa rad när dagens elever har fyra av fem rätt i steg 4, två pass i följd. I sista raden går gruppen vidare när fler än hälften av eleverna har klarat steg 4.
 grund:
   text: "Övningar i att höra när ord börjar likadant var lättare att genomföra än övningar i att dela upp ord, och flera barn förde över insikten till ljud som de inte hade övat (Byrne och Fielding-⁠Barnsley, 1990, i Murray, 1994). Undervisningen ger mer när bokstäverna är med och grupperna är små (National Reading Panel, 2000). Att se och känna hur munnen formar ljudet hjälpte eleverna att föra över ljudträningen till läsningen (Castiglioni-⁠Spalten och Ehri, 2003; Fälth m.fl., 2017)."
   kallor: "Bygger på Byrne och Fielding-⁠Barnsley (1990), Castiglioni-⁠Spalten och Ehri (2003), Fälth m.fl. (2017), Murray (1994) och National Reading Panel (2000)."

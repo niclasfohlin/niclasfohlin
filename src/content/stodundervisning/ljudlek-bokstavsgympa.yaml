@@ -16,7 +16,7 @@ format:
   - "liten grupp"
   - "par"
 tid: "30 minuter per pass, tre till fem pass i veckan"
-period: "Oftast fyra till sex veckor, tills gruppen har haft bokstaven t"
+period: "Omkring två veckor, med ungefär fyra nya bokstäver"
 grupp: "2–12 elever"
 material:
   - golvbokstäverna
@@ -24,18 +24,20 @@ material:
   - speglar
   - bokstavskartan
   - snabbmallen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 4
 tranar: "koppla ljud till bokstav med kroppen, och gå ordet från vänster till höger"
+vidare: "du har hört fler än hälften av eleverna själva läsa orden utan paus i steg 4 i den sista rad som gruppens bokstäver räcker till, men tidigast i raden Två stavelser"
+veckor: { min: 2, max: 2 }
 inledning:
   - "I Bokstavsgympa kliver eleverna på bokstäver på golvet, säger ljudet för varje bokstav från vänster till höger och säger ordet på slutet. Lektionen hjälper eleven med det som gör bokstävernas ljud svåra: eleven säger bokstavens namn, ess för s, och gör en paus mellan ljuden, så att början faller bort och ordet inte kommer."
   - "Syftet är att eleverna ska kunna ljuden för de bokstäver de har haft och hålla ihop ljuden till ett ord, så att de kan läsa. Du säger ljudet och inte namnet, håller ljudet tills foten landar på nästa bokstav och lägger bara ord med gruppens bokstäver."
-  - "Välj Bokstavsgympa när fler än hälften av eleverna kan färre än åtta av de tio första bokstäverna på ljudkollens uppgift 4, bokstävernas ljud. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Bokstavsgympa hör till förmåga 4, Bokstävernas ljud, i lektionsbanken där."
+  - "Gruppen tar Bokstavsgympa efter Första ljudet. Lektionen tränar det som ljudkollens uppgift 4 prövar, bokstävernas ljud. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Bokstavsgympa hör till förmåga 4, Bokstävernas ljud, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Bokstavsgympa går igenom raderna i Så blir lektionen svårare, oftast i fyra till sex veckor. Ta nästa rad när dagens elever läser orden utan paus två pass i följd och nästa rad har fyra ord med gruppens bokstäver. Efter raden Med klusil, eller när minst hälften kan ljudet för minst åtta av de tio första bokstäverna, går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. På omkring två veckor går ni igenom raderna i Så blir lektionen svårare, så långt gruppens bokstäver räcker. Med tre pass i veckan tar ni en ny rad varje pass. Med fler pass tar ni nästa rad när dagens elever läser orden utan paus, två pass i följd. Nästa rad tar ni bara när den har fyra ord med gruppens bokstäver. I er sista rad stannar ni tills regeln för att gå vidare är uppfylld."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -59,7 +61,7 @@ tabeller:
       - - "Med klusil"
         - "mat: mmmaaat, mat"
         - "Klusilen går inte att dra ut. Säg den kort och utan ö. Står den först, gå direkt till nästa bokstav."
-    not: "I lektionen börjar gruppen i raden Två ljud att dra ut. Orden att gå följer bokstäverna: med s och o finns bara so och os, och med l och a också lo, sa och la. De första veckorna går ni också bokstäverna en och en i ormen och säger ljuden. Räcker orden inte, ta ord ur raden före. Raden Med klusil tar ni när gruppen har haft t."
+    not: "I lektionen börjar gruppen i raden Två ljud att dra ut. Klarar fler än hälften redan ljudkollens uppgift 4, börjar gruppen i raden Två stavelser. Orden att gå följer bokstäverna: med s och o finns bara so och os, och med l och a också lo, sa och la. De första passen går ni också bokstäverna en och en i ormen och säger ljuden. Räcker orden inte, ta ord ur raden före. Raden Konsonantmöte först tar ni när gruppen har haft v. Raden Med klusil tar ni när den har haft t. Under lektionen får gruppen ungefär fyra nya bokstäver, och resten kommer som dagens ljud i lektionerna efter."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -251,7 +253,7 @@ arbetsform:
 exempel:
   valt:
     rubrik: "Gruppen"
-    text: "sex elever i förskoleklass och åk 1, vecka 3, tre pass i veckan. Gruppen gör Bokstavsgympa för femte passet i följd, det första i raden Tre ljud att dra ut. Dagens ljud är /m/, och dagens elever är Omar och Alva."
+    text: "sex elever i förskoleklass och åk 1, vecka 3, tre pass i veckan. Gruppen gör Bokstavsgympa för tredje passet i följd, det första i raden Tre ljud att dra ut. Dagens ljud är /m/, och dagens elever är Omar och Alva."
   text:
     - "Ljudstarten. Läraren visar m: ”Det här är /m/. Mmm. Känn läpparna.” Alva säger ”emm”, och läraren svarar: ”Emm är namnet. Ljudet är mmm.”"
     - "Gå ordet. Läraren lägger sol och kliver: ”Sssooolll. Sol!” Sedan lägger hen mos, med dagens ljud först."
@@ -259,7 +261,7 @@ exempel:
     - "Peka och säg. Paren är Alva och Elin, Omar och Noah, Leo och Mira. Elin pekar på s på kartan, och Alva säger: ”Sss, som i sol.”"
     - "Läs på golvet. Läraren lägger mal för Omar. Omar kliver och säger: ”/m/ /a/ /l/, al?” Läraren säger: ”Håll ljudet tills foten landar.” Omar går igen: ”Mmmaaalll. Mal!” Läraren berättar att en mal är en liten fjäril. Alva går mor och säger ”emm, o, ärr”. Läraren frågar: ”Hur låter den?” Alva säger mmm och går igen: ”Mmmooorrr. Mor!” Läraren säger att mor är mamma."
     - "Avslutet. Noah säger: ”Sssooolll. Sol.” Läraren säger: ”Ni höll ljuden tills foten landade, och orden kom.”"
-    - "Efteråt noterar läraren: Omar gör en paus mellan ljuden men läser ordet när han håller dem. Alva säger namnet för m och r. Nästa pass tar gruppen samma rad, och dagens elever blir Leo och Elin."
+    - "Efteråt noterar läraren: Omar gör en paus mellan ljuden men läser ordet när han håller dem. Alva säger namnet för m och r, så dagens ljud blir /m/ igen. Raden Två stavelser har då bara sola och mosa med gruppens bokstäver, så gruppen tar samma rad nästa pass. Dagens elever blir Leo och Elin."
 fastnar:
   rubrik: "När eleven fastnar"
   text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
@@ -300,10 +302,10 @@ mal:
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"
   punkter:
-    - "säga ljudet för de tio första bokstäverna, s, o, l, a, r, m, e, n, i och v"
+    - "säga ljudet för minst åtta av de tio första bokstäverna, s, o, l, a, r, m, e, n, i och v"
     - "säga ljudet och inte bokstavens namn"
     - "hålla ljuden ihop och läsa ett ord med två till fyra bokstäver som gruppen har haft"
-    - "läsa från vänster till höger, också när ordet har ett konsonantmöte först"
+    - "läsa från vänster till höger, också ord med konsonantmöte först när gruppen har haft bokstäverna"
 snabbmall:
   text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i tabellen Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
   pass: 5
@@ -318,7 +320,7 @@ snabbmall:
   sist:
     - Det här gör eleverna själva nu som de inte gjorde förut
     - Jag tar med mig in i nästa vecka
-  not: Ta nästa rad när dagens elever läser orden utan paus två pass i följd och nästa rad har fyra ord med gruppens bokstäver. Gruppen går till nästa förmåga efter raden Med klusil, eller tidigare om ljudkollen visar det.
+  not: Med tre pass i veckan tar ni en ny rad varje pass, och med fler när dagens elever läser utan paus två pass i följd. Nästa lektion tar ni när fler än hälften klarar den sista rad era bokstäver räcker till, tidigast Två stavelser.
 grund:
   text: "Tydlig undervisning i bokstävernas ljud ihop med ljuden i ord har starkt forskningsstöd, särskilt i små grupper (Foorman m.fl., 2016; Piasta och Wagner, 2010). När eleverna övade bokstäverna för sig blev läsningen bara lite bättre (Piasta och Wagner, 2010). En rörelse med hela kroppen till varje ljud lärde barnen fler ljud än vanlig undervisning, men de läste inte ord bättre (Damsgaard m.fl., 2022). Att hålla ljuden ihop utan paus gav bättre avkodning (Gonzalez-⁠Frey och Ehri, 2021)."
   kallor: "Bygger på Damsgaard m.fl. (2022), Foorman m.fl. (2016), Gonzalez-⁠Frey och Ehri (2021) och Piasta och Wagner (2010)."

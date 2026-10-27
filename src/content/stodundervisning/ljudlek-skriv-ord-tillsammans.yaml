@@ -17,7 +17,7 @@ format:
   - "liten grupp"
   - "par"
 tid: "30 minuter per pass, tre till fem pass i veckan"
-period: "Tio till femton pass i följd"
+period: "Två till fyra veckor"
 grupp: "2–12 elever"
 material:
   - bokstavskorten
@@ -26,20 +26,22 @@ material:
   - whiteboardtavlor
   - magneter
   - snabbmallen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 relaterade:
   - sag-skriv-och-las
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 7
 tranar: "bygga, läsa och skriva ord med bokstavskort, och byta en bokstav i taget"
+vidare: "du har sett fler än hälften av eleverna själva skriva ordet efter bytet och minst ett av de två andra orden rätt i steg 4 i raden Ord med två stavelser"
+veckor: { min: 2, max: 4 }
 inledning:
   - "I Skriv ord tillsammans bygger eleverna ord med bokstavskort, läser och skriver dem, och byter en bokstav i taget. Lektionen hjälper eleven med det som gör ett ord svårt att skriva: vokalen faller bort, så att mer blir mr, och eleven läser det ord hen tänkte på i stället för det som står."
   - "Syftet är att eleverna ger varje ljud en bokstav, i rätt ordning, och läser tillbaka det de har skrivit, så att de kan skriva och läsa korta ord själva. Du visar en bokstav för varje ljud och läser tillbaka, säger var i ordet ni byter och tar bara bokstäver som gruppen har haft."
-  - "Välj Skriv ord tillsammans när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 7, skriva ord. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Skriv ord tillsammans hör till förmåga 7, Skriva ord, i lektionsbanken där."
+  - "Gruppen tar Skriv ord tillsammans efter Räkna ljud. Lektionen tränar det som ljudkollens uppgift 7 prövar, skriva ord. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Skriv ord tillsammans hör till förmåga 7, Skriva ord, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Skriv ord tillsammans går igenom raderna i Så blir lektionen svårare, oftast i tio till femton pass. Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Skriv ord tillsammans går igenom raderna i Så blir lektionen svårare och tar två till fyra veckor. Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -134,7 +136,7 @@ tabeller:
       - - "Blandat"
         - "mos, mor, mer, ser, ler\nse, le, la, sa\nlat, mat, mot, rot"
       - - "Ord med två stavelser"
-        - "lera, mera\nlina, mina, mena\nvila, visa\nläsa, lösa"
+        - "lina, mina, mena\nvila, visa\nmera, lera, leta\nläsa, lösa"
     not: "Varje bokstav finns en gång i ordet, så att en sats kort räcker. Ler, mor, sil, lina, mena, mot och rot känner inte alla. Säg vad orden betyder första gången, och sätt dem i en mening. Säg tar så att r:et hörs: ”Hon tar en kaka.”"
   - rubrik: "Bokstäverna till Ordjakt"
     plats: "efter-urval"
@@ -332,7 +334,7 @@ snabbmall:
   sist:
     - Det här gör eleverna själva nu som de inte gjorde förut
     - Jag tar med mig in i nästa vecka
-  not: Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen.
+  not: Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd. I sista raden går gruppen vidare när fler än hälften av eleverna har klarat steg 4.
 grund:
   text: "Att bygga ord med bokstavskort och byta en bokstav i taget gav bättre avkodning hos elever som behövde stöd (McCandliss m.fl., 2003). Barn som skrev de ljud de hörde och fick återkoppling lärde sig läsa fler nya ord än barn som bara övade ljuden (Ouellette och Sénéchal, 2008; Sénéchal m.fl., 2012). Att öva ljuden och bokstäverna tillsammans har starkt stöd (Foorman m.fl., 2016)."
   kallor: "Bygger på Foorman m.fl. (2016), McCandliss m.fl. (2003), Ouellette och Sénéchal (2008) och Sénéchal m.fl. (2012)."

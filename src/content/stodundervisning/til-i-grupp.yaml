@@ -22,7 +22,7 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-26
+uppdaterad: 2026-10-27
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
@@ -108,7 +108,7 @@ steg:
   rader:
     - namn: Återkoppla
       fraga: Vad läste du hemma?
-      gor: Lyssna på favoritmeningarna. Beröm något eleven faktiskt gjorde. Signera lässchemat. Fråga varför eleven valde just de meningarna.
+      gor: "När eleven har en ny bok varje pass, fråga först vad boken handlade om. Lyssna på favoritmeningarna. Beröm något eleven faktiskt gjorde. Signera lässchemat. Fråga varför eleven valde just de meningarna."
       fraser:
         - Läs din första mening för oss.
         - Varför valde du den?
@@ -200,7 +200,7 @@ hem:
       - rubrik: Skolans ansvar
         text: Välja bok på rätt nivå och skriva in den i lässchemat. Göra bild- och rubrikvandring och lyssna på eleven när den läser. Ta emot favoritmeningarna varje dag och ge återkoppling.
       - rubrik: Vårdnadshavarnas ansvar
-        text: Lyssna när eleven läser boken en gång till hemma, cirka tio minuter. Hjälpa eleven att välja och skriva tre favoritmeningar. Bekräfta läsningen med initialer i lässchemat.
+        text: Lyssna när eleven läser boken en gång till hemma, cirka tio minuter. Hjälpa eleven att välja och skriva tre favoritmeningar tills hen klarar det själv. Bekräfta läsningen med initialer i lässchemat.
       - rubrik: Elevens ansvar
         text: Läsa boken i skolan och hemma. Skriva tre favoritmeningar i skrivboken. Ta med mappen till skolan varje dag.
     efter: Genom att skolan, hemmet och eleven gör sin del varje dag får eleven två lästillfällen om dagen under hela perioden. Det är regelbundenheten som ger resultat.
@@ -220,18 +220,24 @@ progression:
       rubrik: "Rutinen i skolan och hemma"
       fokus: Rutinen sätter sig i skolan och hemma, med kontraktet som ni skrev på mötet före start.
       roll: Läraren leder bildvandringen, modellerar ljudning och omläsning och kontrollerar lässchemat varje dag.
+      eleverna: Att ha med sig mappen, läsa boken en gång till hemma, skriva tre favoritmeningar ur den och läsa upp dem i Återkoppla.
+      vidare: de flesta i gruppen har läst hemma och läser upp sina tre favoritmeningar, i fyra pass i rad
     - vecka: 3–5
       rubrik: "Läsa om själv och böcker uppåt"
       fokus: Eleven börjar läsa om meningar själv. Böckerna byts uppåt när flytet kommer.
       roll: Läraren väntar längre, frågar i stället för att säga och ger kortare stöd.
+      eleverna: Att ljuda ett okänt ord själv och läsa det som helhet, och att läsa om meningen när något blev fel, utan att du ber om det.
+      vidare: de flesta i gruppen läser om meningen själva när något blev fel, i två pass i rad
     - vecka: 6–8
       rubrik: "Bildvandringen med kortare stöd"
       fokus: Eleven gör bildvandringen med kortare stöd och väljer favoritmeningar utan hjälp hemma.
-      roll: Läraren lyssnar, ger återkoppling på flyt och läsmelodi och följer upp nivån.
+      roll: Läraren visar bara de svåra orden i Förbered, lyssnar, ger återkoppling på flyt och läsmelodi och följer upp nivån.
+      eleverna: Att läsa sin bok med flyt, så att orden kommer direkt och det låter som när man pratar, och att berätta vad gårdagens bok eller kapitel handlade om.
     - vecka: 9–10 vid behov
-      rubrik: "Längre texter ur klassens läsning"
-      fokus: Eleven läser längre texter och böcker på sin nivå ur klassens ordinarie läsning.
+      rubrik: "Längre böcker ur klassens läsning"
+      fokus: Eleven läser längre böcker på sin nivå ur klassens ordinarie läsning, ett avsnitt per pass som med kapitelboken.
       roll: Läraren följer upp om läsningen överförs till klassrummet.
+      eleverna: Att läsa en bok på sin nivå med flyt och läsa om meningen när något blev fel, också i klassens läsning.
 uppfoljning:
   text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll. Läser eleven texten i efterkollen med flyt och läser om meningen själv när det blir fel, avslutar du insatsen och berättar för hemmet vad efterkollen visade. Har eleven kommit framåt men inte hela vägen efter åtta veckor, fortsätter ni med vecka 9–10 och gör efterkollen igen. Om de flesta böckerna har lästs två gånger men eleven inte har kommit framåt, eller inte hela vägen efter vecka 10, tar du upp det med elevhälsan. Har de flesta böckerna bara lästs en gång, ordnar du den andra läsningen först och börjar en ny period på åtta veckor.
   rader:
@@ -247,6 +253,11 @@ plan:
     - nar: första passet
       kort: "Utan favoritmeningar"
       text: "I första passet visar du vad som ligger i mappen och hur eleven väljer tre favoritmeningar och skriver dem i skrivboken."
+    # Vecka 6–8: eleverna blir bättre på att berätta vad gårdagens bok handlade om, och stegens fråga står i Återkoppla
+    # (den stängda granskningen av K-572 2026-10-27: frågan stod bara i stegen, som planen inte visar).
+    - nar: vecka 6–8
+      del: Återkoppla
+      text: "När eleven har en ny bok varje pass, fråga först vad boken handlade om."
     - nar: pass 17
       kort: "Nytt lässchema"
       text: "Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."
@@ -468,7 +479,7 @@ lathund:
       - Lässchema med dagens text inskriven
       - Snabbmallen för veckans pass
       - Kontraktet, påskrivet av hem och skola
-    varjePass: Hade alla läst hemma, vem byter nivå, vad övas nästa gång?
+    varjePass: Hade alla läst hemma, vem byter nivå, vad blev eleverna bättre på och vad övas nästa gång?
 lektionskort:
   - text: "Lektionskortet är passet på ett A4: målet, rutinen från skolan till hemmet och tillbaka, passet med det du gör och säger, det du gör när eleven fastnar och hur veckorna går. Skriv ut det och ha det framför dig under passet."
 film:

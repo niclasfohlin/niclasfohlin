@@ -14,7 +14,7 @@ format:
   - "liten grupp"
   - "par"
 tid: "30 minuter per pass, tre till fem pass i veckan"
-period: "Högst en vecka, tre till fem pass"
+period: "Omkring två veckor, sex till tio pass"
 grupp: "2–12 elever"
 material:
   - bildkorten
@@ -23,18 +23,20 @@ material:
   - bokstavskorten
   - speglar
   - snabbmallen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 2
 tranar: "dela meningar i ord och ord i stavelser"
+vidare: "du har hört fler än hälften av eleverna själva räkna delarna i sina ord, också den svaga delen, i steg 4 i raden Stavelser"
+veckor: { min: 2, max: 2 }
 inledning:
   - "I Ord och stavelser upptäcker eleverna att en mening består av ord och att ett ord består av delar som går att klappa: ”Jag ser en ko” är fyra ord, och ananas är tre delar. Lektionen hjälper eleven med det som gör delarna svåra att höra: i talet flyter orden ihop, eleven tycker att tåg är ett längre ord än nyckelpiga eftersom tåget är långt, och småord och svaga delar, som to i tomat, faller bort."
   - "Syftet är att eleverna ska höra orden och delarna, så att de kan skriva med mellanrum mellan orden och läsa längre ord i delar. Du visar hur man lägger en kloss för varje ord och klappar delarna, säger orden i vanlig takt och slutar med skrivna delar som gruppen läser."
-  - "Välj Ord och stavelser när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 2, ord och stavelser. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och lektionen hör till förmåga 2 i lektionsbanken där."
+  - "Gruppen tar Ord och stavelser efter Rim. Lektionen tränar det som ljudkollens uppgift 2 prövar, ord och stavelser. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och lektionen hör till förmåga 2 i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Ord och stavelser går igenom de tre raderna i Så blir lektionen svårare och tar högst en vecka, eftersom lekar med bara stavelser ger liten effekt på läsningen. Har ni tre pass i veckan, ta en rad per pass. Har ni fler, ta nästa rad när nästan alla gör rätt i andra halvan av steg 2. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. På omkring två veckor går ni igenom de tre raderna i Så blir lektionen svårare. Ta nästa rad när nästan alla gör rätt i andra halvan av steg 2, två pass i följd. Når ni sista raden inom två veckor, stannar ni där med nya ord."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -103,13 +105,13 @@ tabeller:
     rader:
       - - "Namnrytm"
         - "Var och en säger sitt namn och klappar delarna. Sedan blundar gruppen medan du säger ett namn en del i taget och stampar. Sist pekar alla på den som har namnet."
-        - "Steg 2 i Stavelser, när ni har fler än tre pass i veckan"
+        - "Steg 2 i Stavelser, från andra passet"
       - - "Stampa delarna"
         - "Alla stampar på stället för varje del och säger delen samtidigt."
         - "Steg 2, när gruppen klappar säkert"
   - rubrik: "Meningarna"
     plats: "efter-urval"
-    text: "”En kanin” är två ord, och kaninen är ett."
+    text: "”En kanin” är två ord, och kaninen är ett. Från andra passet i raden Orden i meningen säger du också egna meningar om bilderna på arket Stavelser, som ”Jag ser en tomat”."
     kolumner:
       - "Antal ord"
       - "Meningarna"
@@ -240,15 +242,15 @@ arbetsform:
 exempel:
   valt:
     rubrik: "Gruppen"
-    text: "sex elever i förskoleklass och åk 1, vecka 3, tre pass i veckan. Gruppen gör Ord och stavelser för tredje passet i följd och står i raden Stavelser. Dagens ljud är /m/, och dagens elever är Omar och Mira."
+    text: "sex elever i förskoleklass och åk 1, vecka 4, tre pass i veckan. Gruppen gör Ord och stavelser för femte passet i följd och står i raden Stavelser. Dagens ljud är /e/, och dagens elever är Omar och Mira."
   text:
-    - "Ljudstarten. Läraren visar m, och gruppen sätter ihop och delar upp ord ur Två och Tre ljud att dra ut."
+    - "Ljudstarten. Läraren visar e, och gruppen sätter ihop och delar upp ord ur Två och Tre ljud att dra ut."
     - "Klossarna. Läraren lägger två klossar för ka-⁠ka och tre för a-⁠na-⁠nas. ”Vilket ord är längre, tåg eller nyckelpiga?” Noah säger tåg, och gruppen klappar båda orden: ett klapp och fyra."
     - "Säg och räkna. Gruppen klappar ka-⁠ka med läraren och sedan melon själv. Omar lägger en kloss för melon. Läraren frågar ”Vad hör du?” och säger ordet i vanlig takt: ”Me-⁠lon.” Omar lägger två. Sist ljudar och läser gruppen so och la: sola."
     - "Dela och sätt ihop. Paren är Alva och Elin, Omar och Noah, Leo och Mira. Noah lägger kortet med igelkotten framför Omar och säger ”i-⁠gel-⁠kott”. Omar lägger tre klossar, och de vänder kortet: tre bågar."
     - "Mina ord. Läraren lyssnar på Omar och Mira. Mira knackar sju gånger för potatis, en för varje ljud. Läraren frågar ”Vad hör du?”, säger ordet igen och knackar med. Sedan säger hen: ”Säg det med mig och känn hakan: po-⁠ta-⁠tis.” Mira knackar tre. Omar läser mo, sa: mosa."
     - "Avslutet. Leo säger: ”Ananas. Tre delar.” Läraren säger: ”Ni klappade samtidigt som ni sa delarna.”"
-    - "Efteråt noterar läraren: Omar klappar nu den svaga delen, och Mira räknar ljud i stället för delar. Veckan är slut, och gruppen går till nästa förmåga. Mira blir dagens elev oftare och sitter med en säker kamrat."
+    - "Efteråt noterar läraren: Omar klappar nu den svaga delen, och Mira räknar ljud i stället för delar. Nästa pass tar gruppen samma rad. Mira blir dagens elev oftare och sitter med en säker kamrat."
 fastnar:
   rubrik: "När eleven fastnar"
   text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
@@ -307,9 +309,9 @@ snabbmall:
   sist:
     - Det här gör eleverna själva nu som de inte gjorde förut
     - Jag tar med mig in i nästa vecka
-  not: Har ni tre pass i veckan, ta en rad per pass. Har ni fler, ta nästa rad när nästan alla gör rätt i andra halvan av steg 2. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen.
+  not: Ta nästa rad när nästan alla gör rätt i andra halvan av steg 2, två pass i följd. Når ni sista raden inom två veckor, stannar ni där med nya ord. I sista raden går gruppen vidare när fler än hälften av eleverna har klarat steg 4.
 grund:
-  text: "Stavelser hörs lättare än ljud (Liberman m.fl., 1974), och International Literacy Association (2019) och Wolff (2017) rekommenderar en kort period med ord och stavelser för barn som behöver stöd i att höra delarna i orden. Lekar med stavelser gav ändå liten effekt på den senare läsningen, och 2007 tog Bornholmsmodellen bort de flesta av dem (Lundberg och Strid, 2009). Därför är lektionen kort och slutar med skrivna delar som eleven ljudar och läser."
+  text: "Stavelser hörs lättare än ljud (Liberman m.fl., 1974), och International Literacy Association (2019) och Wolff (2017) rekommenderar en kort period med ord och stavelser för barn som behöver stöd i att höra delarna i orden. Lekar med stavelser gav ändå liten effekt på den senare läsningen, och 2007 tog Bornholmsmodellen bort de flesta av dem (Lundberg och Strid, 2009). Därför slutar lektionen med skrivna delar som eleven ljudar och läser."
   kallor: "Bygger på International Literacy Association (2019), Liberman m.fl. (1974), Lundberg och Strid (2009) och Wolff (2017)."
 ramar:
   rubrik: "Materialet"
