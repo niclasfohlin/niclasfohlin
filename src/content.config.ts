@@ -421,6 +421,8 @@ const metodensFalt = z.strictObject({
       // per elev när raden görs med en elev i taget, som 5 eller [5, 8], så att planen kan säga tiden för gruppen.
       rader: z.array(z.strictObject({
         nar: z.string(), vad: z.string(), tid: z.string().optional(),
+        // tabell: ett pass i delar som raden gör, som passet när gruppen samlas efter kursen, som planen visar vid raden (K-553).
+        tabell: z.string().optional(),
         perElev: z.union([z.number().int().min(1).max(60), z.tuple([z.number().int().min(1).max(60), z.number().int().min(1).max(60)])]).optional(),
       })).min(1),
     }).optional(),
@@ -450,7 +452,7 @@ const metodensFalt = z.strictObject({
         istallet: z.literal(true).optional(),
         // kolumn: passets kolumn i tabellen, när tabellen har en kolumn per pass, som Ordverkstads Pass 2 och 3 (K-575).
         kolumn: text.optional(),
-      }).refine((p) => !!(p.text || p.ur), { message: 'En rad i plan.passen har en text, ett citat ur metoden, eller en rad ur metodens tabell (ur), eller båda.' })).min(1).optional(),
+      }).refine((p) => !!(p.text || p.ur || p.tabell), { message: 'En rad i plan.passen har en text, ett citat ur metoden, en rad ur metodens tabell (ur) eller passets tabell i delar (tabell).' })).min(1).optional(),
       utan: z.array(text).min(1).optional(),
       fore: z.array(text).min(1).max(4).optional(),
       // foreVeckor: skolveckorna före första passet som det metoden gör före start behöver, när en vecka inte räcker, och
@@ -462,6 +464,9 @@ const metodensFalt = z.strictObject({
       utvardering: z.array(text).min(1).max(4).optional(),
       upprepa: text.optional(),
       stege: z.boolean().optional(),
+      // veckansPass: ramen med veckornas sidor, där varje pass har ett fält "Pass N" med en rad per del, "N–M min. Delens namn:
+      // …", som planen läser passets delar ur (K-553; riggens förslag 2026-10-27: veckosidan är den enda källan).
+      veckansPass: text.optional(),
       // sistaRaden: progressionens sista rad tar planens sista vecka när perioden slutar före den, när metoden säger det, som
       // Problemlösnings "Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan" (K-572).
       sistaRaden: z.literal(true).optional(),

@@ -68,7 +68,7 @@ export function helgdag(s) {
 
 // Planens fält i metodens fil: `plan` överst, `tid` och `perElev` på uppföljningens rader och `taggar` och `rubrik` på
 // progressionens.
-const PLANENS_RADER = { uppfoljning: ['tid', 'perElev'], progression: ['taggar', 'rubrik'] };
+const PLANENS_RADER = { uppfoljning: ['tid', 'perElev', 'tabell'], progression: ['taggar', 'rubrik'] };
 
 /**
  * Metodens fil utan planens fält. Bara planens sida läser dem: de står inte på metodens sida, i Word eller i lathunden,
@@ -1656,6 +1656,39 @@ export function tabellensDelar(t, kolumn) {
     else fore.push({ namn, nar: tid, vad, mer });
   }
   return delar.length && delar.every((x) => x.fas) ? { delar, fore } : null;
+}
+
+/**
+ * Passets delar ur ett fält på veckans sida (plan.veckansPass, sajtens K-553; riggens förslag 2026-10-27: veckosidan säger
+ * redan varje pass minut för minut, och tabeller hade upprepat den). En rad per del: "N–M min. Delens namn: det som händer."
+ * Rader utan minuter före delarna är förberedelsen, och en rad utan minuter efter en del hör till den delen. Null när
+ * fältet inte har någon del med minuter och namn.
+ * @param {unknown} text
+ * @returns {{ delar: TabellDel[], fore: { namn: string, nar: string, vad: string, mer: { etikett: string, text: string }[] }[] } | null}
+ */
+export function faltetsDelar(text) {
+  const rader = String(text ?? '').replace(/⁠/g, '').split('\n').map((x) => x.trim()).filter(Boolean);
+  /** @type {TabellDel[]} */
+  const delar = [];
+  const fore = [];
+  for (const r of rader) {
+    const m = r.match(/^(\d+)\s*[–—-]\s*(\d+)\s*min\.?\s+([^:]+?):\s*(.*)$/u);
+    if (m) delar.push({ tid: `${m[1]}–${m[2]} min`, fas: m[3].trim(), vad: m[4].trim(), mer: [] });
+    else if (!delar.length) fore.push({ namn: FORE_PASSET, nar: '', vad: r, mer: [] });
+    else delar[delar.length - 1].vad += ` ${r}`;
+  }
+  return delar.length ? { delar, fore } : null;
+}
+
+/**
+ * Metodens passnummer i en kurs i veckor: (veckan − 1) × antalet pass i veckan + passets plats i veckan, som veckosidans
+ * fält "Pass N" (K-553). Null när passets vecka saknas.
+ * @param {Plan} plan @param {number} takt metodens fasta antal pass i veckan @param {Pass} p
+ */
+export function kursensPassnummer(plan, takt, p) {
+  const v = plan.veckor[p.vecka - 1];
+  const { plats } = passetsLage(plan, p);
+  return v && plats ? (v.innehall - 1) * takt + plats : null;
 }
 
 /**

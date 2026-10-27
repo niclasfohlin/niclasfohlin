@@ -686,6 +686,11 @@ for (const f of former) {
     && datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev) === '2026-08-17,2026-09-28',
     [datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.nar === 'Vecka 6')), datum('skrivkurs-vardeskapande', tva, vd.findIndex((r) => r.tid === 'första passet i sista veckan')), datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev)]);
   ska('kursens veckor kräver ett fast antal pass i veckan', s.metodplan({ ...metod('skrivkurs-vardeskapande'), uppfoljning: { rader: [{ nar: 'x', vad: 'x', tid: 'pass 2 i kursens veckor' }] } }).fel.some((x) => x.includes('kursens veckor')));
+  // Veckans fält (plan.veckansPass): en rad per del med minuter och namn, förberedelsen först, och kursens passnummer.
+  const falt = s.faltetsDelar('Lägg fram breven.\n0–⁠5 min. Läs som läsaren: Läs högt.\n5–20 min. Brevet: Eleven skriver.\nUtan stöd.');
+  const kp = s.planera(s.metodplan(metod('texttyp-argumenterande-text')).plan, { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] });
+  ska('veckans fält och kursens passnummer', falt?.delar.map((d) => `${d.tid}|${d.fas}|${d.vad}`).join(';') === '0–5 min|Läs som läsaren|Läs högt.;5–20 min|Brevet|Eleven skriver. Utan stöd.' && falt.fore[0]?.vad === 'Lägg fram breven.' && s.faltetsDelar('Bara text.') === null
+    && kp.pass.map((p) => s.kursensPassnummer(kp, 2, p)).join() === '1,2,3,4,3,4,5,6,7,8,9,10,11,12', kp.pass.map((p) => s.kursensPassnummer(kp, 2, p)));
   const tab = { kolumner: ['Del', 'Pass 2', 'Pass 3'], rader: [['Start\n0–5', 'A', 'B'], ['Skriva\n5–60', 'C', 'D']] };
   ska('tabellens delar med kolumnen Steg och passets kolumn', s.tabellensDelar({ kolumner: ['Tid', 'Steg', 'Det som händer'], rader: [['0–8 min', 'Ramen', 'x']] })?.delar[0].fas === 'Ramen'
     && s.tabellensDelar(tab, 'Pass 3')?.delar.map((d) => d.vad).join() === 'B,D' && s.tabellensDelar(tab)?.delar[0].mer[0]?.etikett === 'Pass 3' && s.tabellensDelar(tab, 'Pass 4') === null);

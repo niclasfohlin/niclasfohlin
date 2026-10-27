@@ -18,7 +18,7 @@ import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsLangder, passetsVisadeRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
   bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
-  ELEVERNAS_KOLUMN, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
+  ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
@@ -1016,7 +1016,14 @@ const iPassetsRuta = (rad: number) => ['intervall', 'pass', 'sista-passet'].incl
 const uppfDagen = (x: { rad: number; datum: string; vecka: number | null }) => x.vecka === null ? kalendervecka(isoVecka(x.datum).vecka)
   : data.uppfoljning.rader[x.rad]?.perElev !== undefined && x.vecka > 0 ? esc(`${kalendervecka(isoVecka(x.datum).vecka)}, ${spannKort(mandagen(x.datum), plusDagar(mandagen(x.datum), 4))}`)
   : esc(dagText(x.datum));
-const uppfRad = (x: { nyckel: string; rad: number; datum: string; vecka: number | null }, utanText = false) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))} · ${uppfDagen(x)}</span>${utanText ? '' : `<p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>`}${medResultat(x.rad, x.nyckel)}</li>`;
+// En rad i uppföljningen som är ett pass, som passet när gruppen samlas efter kursen, har passets delar att fälla ut, ur
+// metodens tabell (K-553).
+const uppfPasset = (rad: number) => {
+  const t = data.uppfoljning.rader[rad].passet;
+  if (!t?.delar?.length) return '';
+  return `<details class="pl-fallut"><summary>Passets delar</summary><ul class="pl-uppf">${t.delar.map((d) => `<li><span class="pl-etikett">${esc(delensTid(d.tid))} · ${esc(d.fas)}</span><p>${lankad(mening(d.vad))}</p>${merText(d.mer)}</li>`).join('')}</ul><p class="pl-not">Delarna står i metodens tabell <a href="${esc(t.adress)}" ${goat('passets-tabell', 'passets tabell från uppföljningen')}>${esc(t.namn)}</a>.</p></details>`;
+};
+const uppfRad = (x: { nyckel: string; rad: number; datum: string; vecka: number | null }, utanText = false) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))} · ${uppfDagen(x)}</span>${utanText ? '' : `<p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>${uppfPasset(x.rad)}`}${medResultat(x.rad, x.nyckel)}</li>`;
 const meningsfalt = (id: string, etikett: string, attr: string, varde: string) => `<label class="pl-etikett" for="${id}">${esc(etikett)}</label><input class="pl-falt pl-brett" type="text" id="${id}" maxlength="200" ${attr} value="${esc(varde)}" /><p class="pl-hjalp">Meningen står i sammanställningen och i texten som kopieras, utan elevernas namn.</p>`;
 // Det ett avslut stryker, ur planens struket: passen efter sista passet i veckan och veckorna efter, en eller två veckor med
 // namn och fler som ett spann (K-542): "pass 14 och 15 i veckan och vecka 6 till 8 (v. 45–47)". Veckorna heter som i
@@ -1144,7 +1151,15 @@ const rollerFor = (p: Pass) => passetsVisadeRoller(plan, p, mp.passen).map((r) =
 const passetsMinuter = (p: Pass) => { const t = passetsTid(aktiv.val, p); return t ? minuterAv(t[1]) - minuterAv(t[0]) : minuter(); };
 // Passet med tidsschemats variant för passet: Läslistors vecka 1–3, Högläsning i pars visning och Upprepad läsnings pass
 // på tio minuter (K-515, och riggens omgång 1 2026-10-26).
-const passetFor = (p: Pass) => passetsBeskrivning(rollerFor(p), data.passet, passetsLage(plan, p, passetsMinuter(p)));
+// Passets delar ur veckans sida (plan.veckansPass, K-553), när varken en rad med tabell eller en variant gäller passet:
+// kursens pass N i veckans fält "Pass N". Sidan och kalendern får samma delar, eftersom båda läser passetFor.
+const medVeckansPass = (p: Pass, roller: ReturnType<typeof rollerFor>) => {
+  if (!data.veckansPass || roller.some((r) => r.tabell?.delar?.length) || variantenFor(data.passet?.varianter, passetsLage(plan, p, passetsMinuter(p)))) return roller;
+  const nr = kursensPassnummer(plan, mp.takt.min, p);
+  const tabell = nr !== null ? data.veckansPass[String(nr)] : undefined;
+  return tabell ? [...roller, { nar: '', tabell }] : roller;
+};
+const passetFor = (p: Pass) => passetsBeskrivning(medVeckansPass(p, rollerFor(p)), data.passet, passetsLage(plan, p, passetsMinuter(p)));
 const fasFran = (tid: string) => { const m = tid.match(/^(\d+)/); return m ? Number(m[1]) : null; };
 // En del i passets tabell har tabellens andra kolumner, som Du säger, med sina namn (tabellensDelar).
 type Mer = { etikett: string; text: string }[];
@@ -1207,7 +1222,7 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
     : `<p class="pl-passnamn">Pass ${p.nr} av ${hogstaPassnr(plan)}${b.namn ? ` · ${esc(b.namn)}` : ''}</p>`;
   // Rollens text, och en rad ur metodens tabell med kolumnens namn som etikett (K-520).
   const roll = rollRader(b.texter);
-  const tabellRad = b.tabell ? `<p class="pl-not">${egna ? 'Delarna står i metodens tabell' : 'Passet står i metodens tabell'} <a href="${esc(b.tabell.adress)}" ${goat('passets-tabell', 'passets tabell från planen')}>${esc(b.tabell.namn)}</a>.</p>` : '';
+  const tabellRad = b.tabell ? `<p class="pl-not">${b.tabell.sida ? 'Delarna står på veckans sida' : egna ? 'Delarna står i metodens tabell' : 'Passet står i metodens tabell'} <a href="${esc(b.tabell.adress)}" ${goat('passets-tabell', 'passets tabell från planen')}>${esc(b.tabell.namn)}</a>.</p>` : '';
   const rubrik = egna ? 'Passets delar' : b.rubrik ?? data.passet?.rubrik ?? 'Passets delar';
   if (!egna && data.passet?.not) rader.push(rad('mer', '', 'Mer om passet', `<p>${lankad(mening(data.passet.not))}</p>`));
   const inledning = [...(b.rubrik && b.variantText ? [b.variantText] : []), ...(!egna && data.passet?.text ? [data.passet.text] : [])].map((t) => `<p class="pl-not pl-delinledning">${lankad(mening(t))}</p>`).join('');
