@@ -2311,6 +2311,14 @@ try {
       // K-578 (Niclas 2026-10-27: omkring två veckor i lektion 1–5, och elevernas progression styr): efter lektionens första
       // vecka föreslår planen samma lektion, också med snittet 5, och säger varför.
       sant('Ljudlek: skattningen mot lektionens mål, och samma lektion efter lektionens första vecka', malet.includes(s.malText(lektion4.mal.overgripande).replace(/\.$/, '')) && forslag.text.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && /Ni har haft lektionen i (tre|fyra|fem) pass, och den tar minst sex, så planen föreslår samma lektion vecka 4\./.test(forslag.text) && forslag.fylld.join() === 'Upprepa Bokstavsgympa', { malet, forslag });
+      // En lång plans graf rullar i sin ruta och gör inte sidan bredare än telefonen (den kalla testaren 2026-10-27).
+      await b.bredd(320);
+      await vanta(150);
+      const bredare = await lj(`(() => { const d = document.querySelector('#pl-samman details.pl-elevdetalj'); if (!d) return 'ingen elev i sammanställningen'; d.open = true; return document.documentElement.scrollWidth - document.documentElement.clientWidth; })()`);
+      sant('Ljudlek: gruppens graf i en plan på tolv veckor gör inte sidan bredare än 320 punkter', bredare === 0, bredare);
+      await lj(`(() => { const d = document.querySelector('#pl-samman details.pl-elevdetalj'); if (d) d.open = false; return true; })()`);
+      await b.dator();
+      await vanta(150);
       // Kalendern skriver veckans lektion i passen (Codex 2026-10-27: kalendern hade seriens allmänna pass).
       await lj('window.__fil = null');
       await b.tryck('#pl-kalender');
