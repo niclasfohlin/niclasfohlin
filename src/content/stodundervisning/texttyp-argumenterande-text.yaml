@@ -363,6 +363,8 @@ plan:
     - nar: vecka 6
       kort: "Svaren"
       ur: { tabell: "De sex veckorna", rad: "Vecka 6", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
+  # Beslutet efter kursen väntar på den nya texten 4–6 veckor efter kursen (sajtens K-586).
+  utvarderasEfter: "Efter kursen"
   utvardering:
     - "Ger texten i Uppgift 1 en ruta för det eleven vill, minst en för ett skäl med förklaring och en för det läsaren ska göra, avslutar du insatsen."
     - "Har stapeln Efter kursen högst en ruta fler än stapeln Första brevet, tar du upp det med elevhälsan."

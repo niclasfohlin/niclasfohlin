@@ -332,6 +332,21 @@ plan:
   # sida står i sina delar nedan (sajtens Rimlighet 2026-10-27, K-553).
   veckansPass: "Till läraren: delarna"
   passen:
+    # Passrutinens rad Efter passet, att läsa början på allas delar och skriva versioner till fortsättningspasset, gäller
+    # skrivpassen. Pass 8 och 14 har sin egen rad i veckans fält, och pass 1 och 15 har ingen (riggens punkt 6 och Till
+    # sajten punkt 2, sajtens K-585).
+    - nar: pass 1
+      del: Efter passet
+      istallet: true
+    - nar: pass 8
+      del: Efter passet
+      istallet: true
+    - nar: pass 14
+      del: Efter passet
+      istallet: true
+    - nar: pass 15
+      del: Efter passet
+      istallet: true
     - nar: första passet
       kort: "Start"
       ur: { tabell: "Kursen pass för pass", rad: "Start", kolumner: ["Det som händer", "Läsaren och svaren"] }

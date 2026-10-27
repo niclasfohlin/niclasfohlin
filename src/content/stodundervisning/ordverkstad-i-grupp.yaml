@@ -578,6 +578,11 @@ plan:
   # övriga, så att raden inte gäller när vecka 8 bara har två pass och det andra är tidningens pass.
   veckansPass: "Till läraren: veckorna"
   passen:
+    # Tidningens pass har sin egen rad Efter passet i fältet Pass 24, och passrutinens rad, ordpassets med diktamen, gäller
+    # inte där (sajtens K-585).
+    - nar: sista passet
+      del: Efter passet
+      istallet: true
     - nar: första passet
       del: Ordstarten
       text: "Börja med fem minuter om kursen: presentera den som Ordverkstaden, en verkstad där gruppen gör en tidning, och ge varje elev kortet Ett långt ord."
