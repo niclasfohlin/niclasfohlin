@@ -663,6 +663,33 @@ for (const f of former) {
   ska('Kortskrivnings rader är råd utan veckor', !ks.fel.length && ks.plan?.stegEnhet === 'nar' && !ks.plan.steg.length && kp.veckor.every((v) => v.steg === null) && kp.pass.every((x) => x.steg === null) && !s.stegUtanfor(ks.plan, kp).length, ks.fel);
   ska('en annan första kolumn stoppas med besked', s.metodplan({ ...kd, progression: { ...kd.progression, enhet: 'Steg' } }).fel.some((x) => x.includes('Progressionens första kolumn heter "Steg"')));
 }
+// Codex 2026-10-27 (K-553): platsen i veckan och passen i kursens veckor följer metodens veckor, också när en vecka tas om,
+// och en tabell läser kolumnen Steg och passets egen kolumn.
+{
+  const lika = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  ska('tidens ord för platsen i veckan och kursens veckor', lika(s.tolkaTid('veckans första pass i vecka 6'), { typ: 'vecka', veckor: [6], plats: 'forsta' })
+    && lika(s.tolkaTid('första passet i sista veckan'), { typ: 'sista-veckan', plats: 'forsta' })
+    && lika(s.tolkaTid('veckans sista pass i vecka 3, 4 och 5'), { typ: 'vecka', veckor: [3, 4, 5], plats: 'sista' })
+    && lika(s.tolkaTid('pass 6, 8 och 11 i kursens veckor'), { typ: 'pass', pass: [6, 8, 11], kurs: true })
+    && s.tolkaTid('veckans första pass i pass 3') === null && s.tolkaTid('pass x i kursens veckor') === null);
+  const datum = (id, val, rad) => { const mp = s.metodplan(metod(id)).plan; return s.planera(mp, val).uppfoljning.find((u) => u.rad === rad)?.tillfallen.map((t) => t.datum).join(); };
+  const ks = metod('kortskrivning-skriv-varje-dag').uppfoljning.rader;
+  const vd = metod('skrivkurs-vardeskapande').uppfoljning.rader;
+  const ar = metod('texttyp-argumenterande-text').uppfoljning.rader;
+  const tre = { start: '2026-08-17', dagar: [1, 3, 5], langd: 6 }, tva = { start: '2026-08-17', dagar: [2, 4], langd: 5 };
+  const brev = ar.findIndex((r) => r.tid === 'pass 1 och 11 i kursens veckor');
+  ska('platsen i veckan ger veckans första pass, och kursens pass följer veckan som tas om',
+    datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.nar === 'Vecka 6')) === '2026-09-21'
+    && datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans sista pass i vecka 6')) === '2026-09-25'
+    && datum('skrivkurs-vardeskapande', tva, vd.findIndex((r) => r.tid === 'första passet i sista veckan')) === '2026-09-15'
+    && datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6 }, brev) === '2026-08-17,2026-09-21'
+    && datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev) === '2026-08-17,2026-09-28',
+    [datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.nar === 'Vecka 6')), datum('skrivkurs-vardeskapande', tva, vd.findIndex((r) => r.tid === 'första passet i sista veckan')), datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev)]);
+  ska('kursens veckor kräver ett fast antal pass i veckan', s.metodplan({ ...metod('skrivkurs-vardeskapande'), uppfoljning: { rader: [{ nar: 'x', vad: 'x', tid: 'pass 2 i kursens veckor' }] } }).fel.some((x) => x.includes('kursens veckor')));
+  const tab = { kolumner: ['Del', 'Pass 2', 'Pass 3'], rader: [['Start\n0–5', 'A', 'B'], ['Skriva\n5–60', 'C', 'D']] };
+  ska('tabellens delar med kolumnen Steg och passets kolumn', s.tabellensDelar({ kolumner: ['Tid', 'Steg', 'Det som händer'], rader: [['0–8 min', 'Ramen', 'x']] })?.delar[0].fas === 'Ramen'
+    && s.tabellensDelar(tab, 'Pass 3')?.delar.map((d) => d.vad).join() === 'B,D' && s.tabellensDelar(tab)?.delar[0].mer[0]?.etikett === 'Pass 3' && s.tabellensDelar(tab, 'Pass 4') === null);
+}
 // En metod vars uppföljning saknar tid, gjord ur en metod som har tiderna (riggens omgång 1 gav Upprepad läsning dem).
 const utanTid = structuredClone(metod('upprepad-lasning'));
 for (const r of utanTid.uppfoljning.rader) delete r.tid;
@@ -943,6 +970,8 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     // sista pass, och metodens regel för att ta veckan igen står bara där den inte säger emot radens regel.
     {
       const pl = metod('problemlosning-i-grupp'), ll = metod('laslistor-i-grupp');
+      // En regel utan hänvisning till Gå vidare när, som Läslistors före K-583.
+      const utanHanvisning = 'Byt lista när de flesta läser orden direkt i veckans två sista pass.';
       const mpl = s.metodplan(pl).plan;
       const provasI = (langd) => { const p = s.planera(mpl, { start: '2026-11-02', dagar: [1, 3], langd }); return p.veckor.filter((v) => v.steg !== null && s.vidareProvasI(mpl, p, v, v.steg)).map((v) => v.innehall).join(); };
       const iPass = { stegEnhet: 'pass', steg: [{ rad: 0, fran: 1, till: 3, vidBehov: false }, { rad: 1, fran: 4, vidBehov: false }] };
@@ -950,14 +979,15 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
       // Med sex veckor har Ni gör tillsammans bara vecka 5, och regeln prövas där (Codex 2026-10-27).
       ska('regeln för att gå vidare prövas i radens sista vecka i planen, och vid radens sista pass', provasI(8) === '2,4,6,8' && provasI(6) === '2,4,5,6'
         && s.vidareProvasI(iPass, passen, { innehall: 2, pass: [3, 4] }, 0) && !s.vidareProvasI(iPass, passen, { innehall: 1, pass: [1, 2] }, 0) && s.vidareProvasI(iPass, passen, { innehall: 3, pass: [5, 6] }, 1)
-        && s.hanvisarTillVidare(pl.plan.upprepa) && !s.hanvisarTillVidare(ll.plan.upprepa) && s.vidareMening('x').startsWith(s.VIDARE_BORJAN), [provasI(8), provasI(6)]);
+        && s.hanvisarTillVidare(pl.plan.upprepa) && s.hanvisarTillVidare(ll.plan.upprepa) && !s.hanvisarTillVidare(utanHanvisning) && s.vidareMening('x').startsWith(s.VIDARE_BORJAN), [provasI(8), provasI(6)]);
       // Högläsning i par: villkoret där regeln prövas, och följden för de yngre också i vecka 6–8. Problemlösning: inget
-      // utan regeln. Läslistor: planens mening, eftersom radernas regel gäller. En metod utan regler: metodens hela regel.
+      // utan regeln. En regel utan hänvisning: planens mening, eftersom radernas regel gäller. En metod utan regler: metodens
+      // hela regel.
       const hp = metod('hoglasning-i-par').plan.upprepa;
       const utan = s.upprepaIVeckan(hp, true, false), med = s.upprepaIVeckan(hp, true, true);
       ska('metodens regel för att ta veckan igen, med och utan radens regel', med?.hela && med.text === hp && utan && !utan.hela && utan.text === 'Tar ni om en vecka, skjuter du upp mötet och läsningen hos de yngre en vecka, om de inte redan har varit.'
         && s.upprepaIVeckan(pl.plan.upprepa, true, false) === null && s.upprepaIVeckan(pl.plan.upprepa, true, true)?.hela
-        && s.upprepaIVeckan(ll.plan.upprepa, true, true) === null && s.upprepaIVeckan(ll.plan.upprepa, false, false)?.hela && s.upprepaIVeckan(undefined, true, true) === null, [utan, med]);
+        && s.upprepaIVeckan(utanHanvisning, true, true) === null && s.upprepaIVeckan(utanHanvisning, false, false)?.hela && s.upprepaIVeckan(undefined, true, true) === null, [utan, med]);
     }
     // plan.sistaRaden (Codex 2026-10-27, K-572): Problemlösnings sista vecka tar ledet Du gör själv när perioden är kortare
     // än åtta veckor, också en upprepning av den, och i åtta veckor följer veckorna raderna som förut. Spärren åt andra hållet.

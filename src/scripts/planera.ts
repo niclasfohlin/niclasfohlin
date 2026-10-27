@@ -1007,7 +1007,8 @@ const periodensRad = (rad: number) => !!plan.uppfoljning.find((u) => u.rad === r
 const medResultat = (rad: number, nyckel: string) => (['lopande', 'intervall', 'villkor'].includes(plan.uppfoljning.find((u) => u.rad === rad)?.typ ?? '') || periodensRad(rad) ? '' : resultatfalt(nyckel));
 // Uppföljningen som görs i ett visst pass står i rutan med passet: det uppföljningen gör i ett pass med datum, och det
 // eleverna fyller i under ett pass (K-559).
-const iPassetsRuta = (rad: number) => ['intervall', 'pass', 'sista-passet'].includes(plan.uppfoljning.find((u) => u.rad === rad)?.typ ?? '') || (data.skattningar ?? []).some((x) => x.vem === 'eleverna' && x.rad === rad);
+// En tid med plats i veckan (veckans första pass i vecka 6) gäller ett bestämt pass, som pass N, och står i passets ruta.
+const iPassetsRuta = (rad: number) => ['intervall', 'pass', 'sista-passet'].includes(plan.uppfoljning.find((u) => u.rad === rad)?.typ ?? '') || !!plan.uppfoljning.find((u) => u.rad === rad)?.plats || (data.skattningar ?? []).some((x) => x.vem === 'eleverna' && x.rad === rad);
 // En rad i veckans uppföljning. Står texten redan i rutan med passet, har raden bara namnet, dagen och resultaten
 // (Rimligheten 2026-10-26: gruppreflektionen stod tre gånger på veckans sida).
 // En mätning med en elev i taget görs under veckan och står med veckans dagar, inte med ett datum (Rimligheten 2026-10-26:
@@ -1505,7 +1506,7 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   if (data.principer) delar.push(`<details class="pl-fallut" data-ruta="principer"${oppna.has('principer') ? ' open' : ''}><summary>${esc(data.principer.rubrik)}</summary><p>${lankad(mening(data.principer.text))}</p></details>`);
   // En progression med kolumnen När är råd utan veckor (K-553; Niclas 2026-10-26 sa ja): raderna står i en ruta att fälla ut
   // i varje vecka, med det eleverna blir bättre på och när gruppen går vidare, som metodens tabell.
-  if (mp.stegEnhet === 'nar' && data.progression) delar.push(`<details class="pl-fallut" data-ruta="progressionen"${oppna.has('progressionen') ? ' open' : ''}><summary>${esc(data.progression.rubrik)}</summary><ul class="pl-uppf">${data.progression.rader.map((r) => `<li><span class="pl-etikett">${esc(r.vecka)}</span><p>${lankad(mening(r.fokus))} ${lankad(mening(r.roll))}</p>${r.eleverna ? `<span class="pl-etikett">${esc(ELEVERNAS_KOLUMN)}</span><p>${lankad(mening(r.eleverna))}${r.vidare ? ` ${lankad(vidareMening(r.vidare))}` : ''}</p>` : ''}</li>`).join('')}</ul></details>`);
+  if (mp.stegEnhet === 'nar' && data.progression) delar.push(`<details class="pl-fallut" data-ruta="progressionen"${oppna.has('progressionen') ? ' open' : ''}><summary>${esc(data.progression.rubrik)}</summary><ul class="pl-uppf">${data.progression.rader.map((r) => `<li><span class="pl-etikett">${esc(r.vecka)}</span><p>${lankad(mening(r.fokus))} ${lankad(mening(r.roll))}</p>${r.eleverna || r.vidare ? `<span class="pl-etikett">${esc(ELEVERNAS_KOLUMN)}</span><p>${[r.eleverna ? lankad(mening(r.eleverna)) : '', r.vidare ? lankad(vidareMening(r.vidare)) : ''].filter(Boolean).join(' ')}</p>` : ''}</li>`).join('')}</ul></details>`);
   // Metodens uppföljning den här veckan, och det som görs varje vecka eller i varje pass. När läraren följer insatsen med
   // en elevlista får varje tillfälle med datum ett fält per elev för resultatet.
   const tillfallen = uppfoljningensTillfallen(plan).filter((x) => x.vecka === v.nr);

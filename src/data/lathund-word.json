@@ -22,7 +22,7 @@
     "datum": "2026-10-26"
   },
   "brakkurs-i-grupp": {
-    "kalla": "a75d47f7e810bae9",
+    "kalla": "ba715f59154e6760",
     "innehall": "3a240c5cebfe5597",
     "skalor": [
       1.15,
@@ -44,7 +44,7 @@
     "datum": "2026-10-26"
   },
   "fyra-raknesatten": {
-    "kalla": "e731b1c358899186",
+    "kalla": "1ab5f9594ad071ac",
     "innehall": "c15f786e03d1a7a7",
     "skalor": [
       1.2,
@@ -66,15 +66,15 @@
     "datum": "2026-10-26"
   },
   "hoglasning-i-par": {
-    "kalla": "8c2f1013a156c1d0",
-    "innehall": "675ecf87dc37dfe9",
+    "kalla": "f29ff7b68a0973ad",
+    "innehall": "e8a9586d10bb0e1b",
     "skalor": [
       1.3,
       1.35,
       1.35,
       1.3
     ],
-    "datum": "2026-10-26"
+    "datum": "2026-10-27"
   },
   "kompissamtal": {
     "kalla": "193416d594d94f5d",
@@ -99,15 +99,15 @@
     "datum": "2026-10-27"
   },
   "laslistor-i-grupp": {
-    "kalla": "dcd34977308d8a74",
-    "innehall": "0a38baad695ee8ae",
+    "kalla": "07449864b4946517",
+    "innehall": "e97fb6818915c4cb",
     "skalor": [
       1.2,
       1.35,
       1.35,
       1.3
     ],
-    "datum": "2026-10-26"
+    "datum": "2026-10-27"
   },
   "ljudlek-i-grupp": {
     "kalla": "8026a858a68fc021",
@@ -132,15 +132,15 @@
     "datum": "2026-10-20"
   },
   "problemlosning-i-grupp": {
-    "kalla": "86a8b9b61c278ffa",
-    "innehall": "4f5b440fe27222ff",
+    "kalla": "17ba5cacb40850ad",
+    "innehall": "76766be54a7154a4",
     "skalor": [
       1.25,
       1.35,
       1.35,
       1.3
     ],
-    "datum": "2026-10-26"
+    "datum": "2026-10-27"
   },
   "sag-skriv-och-las": {
     "kalla": "01219c5a5595cabb",
@@ -154,7 +154,7 @@
     "datum": "2026-10-19"
   },
   "seriesamtal": {
-    "kalla": "06f3085475597284",
+    "kalla": "1dc0d1ec7d810079",
     "innehall": "f881cb7a25d0263f",
     "skalor": [
       1.25,
@@ -198,7 +198,7 @@
     "datum": "2026-10-27"
   },
   "textsamtal-i-grupp": {
-    "kalla": "6d70a8986b16256e",
+    "kalla": "03dc767f6ceea120",
     "innehall": "e44b5a9bb237b41f",
     "skalor": [
       1.25,

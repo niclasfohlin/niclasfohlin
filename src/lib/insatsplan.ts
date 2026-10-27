@@ -214,10 +214,10 @@ function planensPass(d: Metod['data'], id: string): PlanPasset | undefined {
 
 // Ett pass med egen tabell, som Pass 1 i Seriesamtal och Boksamtalets bokval: delarna med tid, namn och text, och raderna
 // utan minuter som förberedelse, ur standardens tabellensDelar, som läser tabellernas former.
-function passetsTabell(d: Metod['data'], id: string, namn: string): NonNullable<NonNullable<PlanData['passen']>[number]['tabell']> {
+function passetsTabell(d: Metod['data'], id: string, namn: string, kolumn?: string): NonNullable<NonNullable<PlanData['passen']>[number]['tabell']> {
   const adress = tabellensAdress(d, id, namn) ?? `/stodundervisning/${id}`;
   const t = d.tabeller.find((x) => x.rubrik === namn);
-  const delar = t ? tabellensDelar(t) : null;
+  const delar = t ? tabellensDelar(t, kolumn) : null;
   if (!delar) return { namn, adress };
   const medMer = <T extends { mer: { etikett: string; text: string }[] }>({ mer, ...x }: T) => ({ ...x, ...(mer.length ? { mer } : {}) });
   return { namn, adress, delar: delar.delar.map(medMer), fore: delar.fore.map(medMer) };
@@ -267,8 +267,9 @@ export async function planensData(m: Metod): Promise<PlanData> {
   const nivaTabell = bank && (d.progression?.rader ?? []).some((r) => r.taggar?.length) ? undefined : nivaTabellen(d, m.id);
   // En checklista inför första passet, som "Checklista inför samtal 1" i Kompissamtal, står under Före (länkgranskningen av
   // omgång 5 2026-10-26: den stod i varje vecka), och så gör en checklista inför kursen, som i texttypskurserna (riggens
-  // passgenomgång av skrivmetoderna 2026-10-26: "Checklista inför en kurs" stod i varje pass).
-  const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b|inför (?:en )?kurs(?:en)?\b/iu.test(d.checklista.rubrik);
+  // passgenomgång av skrivmetoderna 2026-10-26: "Checklista inför en kurs" stod i varje pass), också "Före kursen" och
+  // "Checklista före insatsen" (Codex 2026-10-27).
+  const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b|(?:inför|före) (?:en )?(?:kurs|insats|start)(?:en)?\b/iu.test(d.checklista.rubrik);
   const nivaval = stodet(d.plan?.nivaval, d, m.id);
   const langdval = stodet(d.plan?.langdval, d, m.id);
   const veckostod = stodet(d.plan?.veckoval, d, m.id);
@@ -295,7 +296,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     saker: await planensSaker(m),
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
-    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, ...(p.text ? { text: p.text } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(rollensRad(d, p.ur) ?? [], p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell) } : {}) })) } : {}),
+    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, ...(p.text ? { text: p.text } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(rollensRad(d, p.ur) ?? [], p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn) } : {}) })) } : {}),
     ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: d.gruppen.text, adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),
@@ -410,6 +411,13 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   }
   // En tabell som planens pass hänvisar till finns i metoden, så att länken leder dit (betan 2026-10-24).
   for (const p of m.data.plan?.passen ?? []) if (p.tabell && !tabellensAdress(m.data, m.id, p.tabell)) fel.push(`Planens pass "${p.nar}" hänvisar till tabellen "${p.tabell}", som metoden inte har. Skriv tabellens rubrik som den står i metoden.`);
+  // Passets tabell är ett pass i delar, så att planen inte faller tillbaka tyst på tidsschemats delar och säger emot passet
+  // (Codex 2026-10-27, K-553: Sagobokens läspass fick skrivpassets delar), och en vald kolumn finns i tabellen.
+  for (const p of m.data.plan?.passen ?? []) {
+    const t = p.tabell ? m.data.tabeller.find((x) => x.rubrik === p.tabell) : undefined;
+    if (t && !tabellensDelar(t, p.kolumn)) fel.push(`Planens pass "${p.nar}" har tabellen "${p.tabell}"${p.kolumn ? ` och kolumnen "${p.kolumn}"` : ''}, som inte går att läsa som ett pass i delar. Tabellen behöver en kolumn Tid och en kolumn Del eller Steg, eller Del och tid i samma cell${p.kolumn ? ', och kolumnen ska finnas bland textens kolumner' : ''}. Är tabellen en översikt, citera den med ur i stället för tabell.`);
+    if (p.kolumn && !p.tabell) fel.push(`Planens pass "${p.nar}" har kolumnen "${p.kolumn}" men ingen tabell.`);
+  }
   if (m.data.plan?.stege && metodplan(m.data).plan?.stegEnhet !== 'veckor') fel.push('plan.stege gäller en progression i veckor, där gruppen kan börja på en senare vecka.');
   // Stödet för nivåvalet (K-557): också en metod vars nivåer bara finns i banken, som Textsamtal i grupp, har det, och mer
   // är en tabell, ett avsnitt eller en ram i metoden, så att länken leder dit. Standarden prövar text och längd (planFel).

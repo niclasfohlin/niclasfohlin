@@ -448,6 +448,8 @@ const metodensFalt = z.strictObject({
         //   Rimligheten 2026-10-26: veckans rad stod överst i passet, och delen under sa emot den).
         del: text.optional(),
         istallet: z.literal(true).optional(),
+        // kolumn: passets kolumn i tabellen, när tabellen har en kolumn per pass, som Ordverkstads Pass 2 och 3 (K-575).
+        kolumn: text.optional(),
       }).refine((p) => !!(p.text || p.ur), { message: 'En rad i plan.passen har en text, ett citat ur metoden, eller en rad ur metodens tabell (ur), eller båda.' })).min(1).optional(),
       utan: z.array(text).min(1).optional(),
       fore: z.array(text).min(1).max(4).optional(),

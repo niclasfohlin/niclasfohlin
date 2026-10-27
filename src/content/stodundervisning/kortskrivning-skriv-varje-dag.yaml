@@ -231,10 +231,10 @@ uppfoljning:
       tid: "varje pass"
       vad: "Skriv en rad i din egen skrivbok: vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, vilka som slutade före klockan, hur många som stod över i Dela, och nästa skrivtid."
     - nar: Vecka 6
-      tid: "vecka 6"
+      tid: "veckans första pass i vecka 6"
       vad: "Ett av passen före veckans sista är Skriv igen. Eleven läser en stjärnmärkt text i stället för Dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
     - nar: Efter vecka 6
-      tid: "efter"
+      tid: "veckans sista pass i vecka 6"
       vad: I veckans sista pass i vecka 6 ber du alla visa dig Min skrivlista, inte bara två. Efter passet läser du dina rader från vecka 6.
 plan:
   nivaval:

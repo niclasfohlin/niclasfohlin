@@ -87,7 +87,8 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   ramar.forEach((r, ri) => {
     if (!r.lektioner) return;
     const veckor: Record<string, string> = {};
-    r.delar.forEach((del, di) => { const v = veckornaI(forstaLed(del.rubrik)); if (v?.length === 1 && !veckor[v[0]]) veckor[v[0]] = `${sida}#${delAnkare[ri][di]}`; });
+    // Ett spann, som "Vecka 1–2 · Gemensam start", leder från var och en av sina veckor (Codex 2026-10-27).
+    r.delar.forEach((del, di) => { for (const v of veckornaI(forstaLed(del.rubrik)) ?? []) if (!veckor[v]) veckor[v] = `${sida}#${delAnkare[ri][di]}`; });
     if (Object.keys(veckor).length) lektionsveckor.set(`${sida}#${ramAnkare[ri]}`, veckor);
   });
   for (const [namn, platser] of perNamn) {

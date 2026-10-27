@@ -94,7 +94,11 @@ const lista = (s) => s.split(/\s*(?:,|\boch\b)\s*/).filter(Boolean).map((x) => t
  * så att planen kan sätta ett datum och bygget kan stanna på ett ord den inte känner:
  * före, efter, efter N veckor (och N–M veckor), varje pass, i passet, varje vecka, varannan vecka, var N:e vecka,
  * vecka N (och N, M och O eller N–M), första veckan, sista veckan, pass N (och N, M och O eller N–M), sista passet, sista
- * passet efter pass N, när serien är längre än N pass, och villkor, det som läraren bedömer när det händer.
+ * passet efter pass N, när serien är längre än N pass, och villkor, det som läraren bedömer när det händer. Platsen i
+ * veckan står före veckan: veckans första pass i vecka N, veckans sista pass i vecka N (också N, M och O) och första
+ * passet i sista veckan. De följer metodens veckor också när en vecka tas om, som passets nummer inte gör (Codex
+ * 2026-10-27, K-553: Värdeskapandes Sista veckan, dag 1 fick veckans sista pass, och texttypskursernas pass 11 hamnade i
+ * fel vecka när vecka 2 togs om).
  * @param {unknown} text
  * @returns {Tid | null}
  */
@@ -117,6 +121,18 @@ export function tolkaTid(text) {
   // 2026-10-26: en plan med fyra samtal saknade den).
   m = t.match(new RegExp(String.raw`^sista passet efter pass ${TAL}$`, 'u'));
   if (m) return { typ: 'sista-passet', efter: talAv(m[1]) };
+  // Pass i kursens veckor, som texttypskursernas "pass 6, 8 och 11 i kursens veckor": metodens pass räknat i metodens
+  // veckor med metodens fasta antal pass i veckan, så att mätningen följer innehållet när en vecka tas om (Codex
+  // 2026-10-27, K-553).
+  m = t.match(/^(pass .+) i kursens veckor$/u);
+  if (m) { const p = tolkaTid(m[1]); return p?.typ === 'pass' ? { ...p, kurs: true } : null; }
+  m = t.match(/^(?:veckans (första|sista) pass i|(första|sista) passet i) (.+)$/u);
+  if (m) {
+    const plats = (m[1] ?? m[2]) === 'första' ? 'forsta' : 'sista';
+    if (m[3] === 'sista veckan') return { typ: 'sista-veckan', plats };
+    const v = tolkaTid(m[3]);
+    return v?.typ === 'vecka' ? { ...v, plats } : null;
+  }
   if (t === 'villkor') return { typ: 'villkor' };
   m = t.match(new RegExp(String.raw`^(vecka|pass) ${TAL}${STRECK}${TAL}$`, 'u'));
   if (m) {
@@ -236,6 +252,7 @@ export function metodplan(d) {
     const tid = tolkaTid(r.tid);
     if (r.tid === undefined) fel.push(`Uppföljningens rad "${r.nar}" har ingen tid. Skriv den med standardens ord, som före, varje vecka, vecka 4 eller efter.`);
     else if (!tid) fel.push(`Uppföljningens rad "${r.nar}" har tiden "${r.tid}", som planen inte känner. Orden står i METODER.md under Planera insatsen.`);
+    else if (tid.typ === 'pass' && tid.kurs && (!takt || takt.min !== takt.max || period?.enhet === 'pass')) fel.push(`Uppföljningens rad "${r.nar}" räknar pass i kursens veckor, och det kräver en period i veckor och ett fast antal pass i veckan i faktarutans tid.`);
     return { rad, tid };
   });
   const enhetText = (d.progression?.enhet ?? 'Vecka').toLowerCase();
@@ -1140,6 +1157,7 @@ export function planera(mp, val) {
   for (const v of veckor) v.steg = mp.stegEnhet === 'veckor' ? stegForVeckan(v.innehall)?.rad ?? null : null;
   for (const p of pass) p.steg = mp.stegEnhet === 'pass' ? stegFor(p.nr)?.rad ?? null : veckor[p.vecka - 1].steg;
   const sistaIVeckan = (v) => veckansDagar({ pass }, v).till;
+  const forstaIVeckan = (v) => veckansDagar({ pass }, v).fran;
   // Det eleverna fyller i under ett pass, som gruppreflektionen, tar tid i passet och görs i veckans längsta pass efter
   // lärarens tider, och i veckans sista när passen är lika långa (sajtens K-562; verifieringen av K-559 2026-10-26:
   // reflektionen hamnade i onsdagens pass på 30 minuter och inte i måndagens på 40).
@@ -1157,6 +1175,8 @@ export function planera(mp, val) {
     const dagen = iPasset.has(rad) ? langstaIVeckan : sistaIVeckan;
     /** @type {{ datum: string, vecka: number | null }[]} */
     let tillfallen = [];
+    // Platsen i veckan, när tiden säger den (veckans första pass i vecka N), annars passet som raden görs i.
+    const iVeckan = 'plats' in tid && tid.plats ? (tid.plats === 'forsta' ? forstaIVeckan : sistaIVeckan) : dagen;
     // Före insatsen står i veckan före, med vecka 0: före planens första vecka.
     if (tid.typ === 'fore' && forsta) tillfallen = [{ datum: foreMandag, vecka: 0 }];
     // Efter: veckan efter sista passet; efter N veckor: veckan med dagen N veckor efter sista passet (buggjägarna
@@ -1173,8 +1193,20 @@ export function planera(mp, val) {
     // Varannan vecka räknas bland veckorna med pass, så att en vecka där passet faller bort inte ger tillfällen två veckor i
     // rad (verifieringen av K-559 samma dag: v. 2 och v. 3).
     else if (tid.typ === 'intervall') tillfallen = veckor.filter((v) => v.pass.length).filter((_, i) => (i + 1) % tid.var === 0).map((v) => ({ datum: dagen(v), vecka: v.nr }));
-    else if (tid.typ === 'vecka') tillfallen = unikaVeckor(tid.veckor.flatMap((n) => { const v = [...veckor].reverse().find((x) => x.innehall === n); return v ? iVeckaMedPass(v, dagen) : []; }));
-    else if (tid.typ === 'sista-veckan' && veckor.length) { const v = [...veckor].reverse().find((x) => x.pass.length); tillfallen = v ? [{ datum: dagen(v), vecka: v.nr }] : []; }
+    else if (tid.typ === 'vecka') tillfallen = unikaVeckor(tid.veckor.flatMap((n) => { const v = [...veckor].reverse().find((x) => x.innehall === n); return v ? iVeckaMedPass(v, iVeckan) : []; }));
+    else if (tid.typ === 'sista-veckan' && veckor.length) { const v = [...veckor].reverse().find((x) => x.pass.length); tillfallen = v ? [{ datum: iVeckan(v), vecka: v.nr }] : []; }
+    else if (tid.typ === 'pass' && tid.kurs) {
+      // Metodens pass N är passet på sin plats i metodens vecka, den sista gången veckan står i planen, eller veckans sista
+      // pass när veckan har färre.
+      const takt = mp.takt.min;
+      tillfallen = tid.pass.flatMap((n) => {
+        const w = Math.ceil(n / takt), k = n - (w - 1) * takt;
+        const v = [...veckor].reverse().find((x) => x.innehall === w && x.pass.length);
+        const ip = v ? iDatumordning(v.pass.map((nr) => pass.find((x) => x.nr === nr)).filter(Boolean)) : [];
+        const p = ip[Math.min(k, ip.length) - 1];
+        return p && v ? [{ datum: p.datum, vecka: v.nr }] : [];
+      });
+    }
     else if (tid.typ === 'pass') tillfallen = tid.pass.flatMap((n) => { const p = pass.find((x) => x.nr === n); return p ? [{ datum: p.datum, vecka: p.vecka }] : []; });
     // Med "efter pass N" bara när det sista passet har ett nummer efter N, så att samma mätning inte står två gånger på
     // pass N och så att en serie som slutar tidigare inte får den (Codex 2026-10-26).
@@ -1182,8 +1214,9 @@ export function planera(mp, val) {
     // En följd av veckor, som Kort utan beröring vecka 1–4, säger vad läraren gör under perioden och är ingen mätning: den har
     // inga fält för resultat och står inte i kalendern eller bland uppföljningen i texten till åtgärdsprogrammet
     // (verifieringen av K-559 samma dag).
-    const period = tid.typ === 'vecka' && tid.veckor.length > 1 && tid.veckor.every((x, i) => i === 0 || x === tid.veckor[i - 1] + 1);
-    return { rad, typ: tid.typ, tillfallen, ...(period ? { period: /** @type {const} */ (true) } : {}) };
+    // Med en plats i veckan är veckorna mätningar, som texttypskursernas pass 6, 8 och 10.
+    const period = tid.typ === 'vecka' && !tid.plats && tid.veckor.length > 1 && tid.veckor.every((x, i) => i === 0 || x === tid.veckor[i - 1] + 1);
+    return { rad, typ: tid.typ, tillfallen, ...(period ? { period: /** @type {const} */ (true) } : {}), ...('plats' in tid && tid.plats ? { plats: tid.plats } : {}) };
   });
   const efterSteg = mp.steg.find((s) => s.efter)?.rad;
   return {
@@ -1581,19 +1614,25 @@ export function varianternasFel(d, texter, o) {
  * Kolumnerna efter är delens text: den första är vad som händer, och de andra står med kolumnens namn, som "Du säger". En
  * rad utan minuter ("Före passet", "Dagen före") är förberedelsen. Null när tabellen inte är ett pass i delar, också när en
  * del saknar namn: då får metodens tabell namnen, som Boksamtalets bokval fick (Niclas samma dag: metoderna får förtydligas,
- * "tydligare passdelar"), så att planen visar tunna rader med delarnas namn.
+ * "tydligare passdelar"), så att planen visar tunna rader med delarnas namn. Delens namn kan också stå i en kolumn Steg,
+ * som Berättelseramens Fortsättningspasset (K-553). Har tabellen en kolumn per pass, som Ordverkstads Pass 2 och 3, väljer
+ * kolumn passets text, och de andra kolumnerna står inte med (K-575; Codex 2026-10-27: pass 3 fick pass 2:s text).
  * @param {{ kolumner: string[], rader?: unknown[][] }} t
+ * @param {string} [kolumn] passets kolumn, när tabellen har en kolumn per pass
  * @returns {{ delar: TabellDel[], fore: { namn: string, nar: string, vad: string, mer: { etikett: string, text: string }[] }[] } | null}
  */
-export function tabellensDelar(t) {
+export function tabellensDelar(t, kolumn) {
   const k = t.kolumner.map((x) => x.trim().toLowerCase());
   const tidKol = k.indexOf('tid');
-  const namnKol = k.findIndex((x) => x === 'del' || x === 'delen');
+  const namnKol = k.findIndex((x) => x === 'del' || x === 'delen' || x === 'steg');
   const blandad = k.findIndex((x) => x === 'del och tid' || x === 'tid och del');
   // Tiden och namnet i samma cell: en kolumn som säger båda, eller en kolumn Del när tabellen inte har någon kolumn Tid.
   const samma = blandad >= 0 ? blandad : tidKol < 0 ? namnKol : -1;
   if (samma < 0 && tidKol < 0) return null;
-  const textKol = k.map((_, i) => i).filter((i) => i !== samma && i !== tidKol && i !== namnKol);
+  const alla = k.map((_, i) => i).filter((i) => i !== samma && i !== tidKol && i !== namnKol);
+  const vald = kolumn === undefined ? -1 : k.indexOf(kolumn.trim().toLowerCase());
+  if (kolumn !== undefined && !alla.includes(vald)) return null;
+  const textKol = kolumn === undefined ? alla : [vald];
   if (!textKol.length) return null;
   const arTid = (s) => minuterISpann(s) !== null;
   /** @type {TabellDel[]} */
@@ -2564,7 +2603,7 @@ export function kalenderfil(info, plan, o) {
 }
 
 /**
- * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass', pass: number[], till?: number } | { typ: 'sista-passet', efter?: number } | { typ: 'villkor' }} Tid
+ * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[], plats?: 'forsta' | 'sista' } | { typ: 'sista-veckan', plats?: 'forsta' | 'sista' } | { typ: 'pass', pass: number[], till?: number, kurs?: true } | { typ: 'sista-passet', efter?: number } | { typ: 'villkor' }} Tid
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass' | 'nar', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number, sistaRaden?: true }} Metodplan

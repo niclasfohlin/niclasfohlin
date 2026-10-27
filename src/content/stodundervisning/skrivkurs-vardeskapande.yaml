@@ -326,7 +326,7 @@ uppfoljning:
       tid: "pass 2"
       vad: "Eleven skriver om en plats i tio minuter, utan stöd. Spara texten."
     - nar: Sista veckan, dag 1
-      tid: "sista veckan"
+      tid: "första passet i sista veckan"
       vad: "Samma uppgift om en ny plats. Hittar en kamrat rätt direkt i båda? Vad gör den andra som den första inte gjorde?"
     - nar: Efter mötet
       tid: "efter"

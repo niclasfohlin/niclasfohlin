@@ -538,10 +538,12 @@ plan:
     - nar: veckans andra
       kort: "Skrivpasset, texten börjar"
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
+      kolumn: "Pass 2, texten börjar"
       ur: { tabell: "Veckans tre pass: ett ordpass och två skrivpass", rad: "Pass 2", kolumner: ["Vad gruppen gör", "På bordet"] }
     - nar: veckans tredje
       kort: "Skrivpasset, texten blir klar"
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
+      kolumn: "Pass 3, texten blir klar"
       ur: { tabell: "Veckans tre pass: ett ordpass och två skrivpass", rad: "Pass 3", kolumner: ["Vad gruppen gör", "På bordet"] }
     - nar: sista passet
       kort: "Tidningens pass"
