@@ -23,7 +23,7 @@ import {
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
-import { extraPassetsDag, LEKTIONENS_GRANS, RESULTATETS_LANGD, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
+import { extraPassetsDag, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
 import { idagLokalt, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
@@ -1845,7 +1845,8 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   const uppfRaderna = tillfallen.flatMap((x) => { const iRutanNu = iRutan.has(x.datum) && iPassetsRuta(x.rad); return iRutanNu && !medResultat(x.rad, x.nyckel) ? [] : [uppfRad(x, iRutanNu).replace(/<\/li>$/, `${iRutanNu ? '' : elevernasKnappar(x.rad, oppna)}</li>`)]; });
   if (uppfRaderna.length) delar.push(`<section class="pl-block"><h3>Metodens uppföljning den här veckan</h3><ul class="pl-uppf">${uppfRaderna.join('')}</ul></section>`);
   const lopande = plan.uppfoljning.filter((u) => u.typ === 'lopande');
-  if (lopande.length && !aktiv.folj) delar.push(`<details class="pl-fallut" data-ruta="lopande"${oppna.has('lopande') ? ' open' : ''}><summary>Metodens uppföljning ${esc(uppraknat(lopande.map((u) => uppfNamn(u.rad).toLocaleLowerCase('sv'))))}</summary><ul class="pl-uppf">${lopande.map((u) => `<li><p>${lankad(data.uppfoljning.rader[u.rad].vad)}</p></li>`).join('')}</ul></details>`);
+  // Namnen som de står i metoden, efter kolon (riggens leverans 2026-10-27: "Metodens uppföljning det jag hör").
+  if (lopande.length && !aktiv.folj) delar.push(`<details class="pl-fallut" data-ruta="lopande"${oppna.has('lopande') ? ' open' : ''}><summary>Metodens uppföljning: ${esc(uppraknat(lopande.map((u) => uppfNamn(u.rad))))}</summary><ul class="pl-uppf">${lopande.map((u) => `<li><p>${lankad(data.uppfoljning.rader[u.rad].vad)}</p></li>`).join('')}</ul></details>`);
   const villkor = plan.uppfoljning.filter((u) => u.typ === 'villkor' && !skattningensRader().has(u.rad));
   if (villkor.length) delar.push(`<section class="pl-block"><h3>Håll koll på</h3><ul class="pl-uppf">${villkor.map((u) => `<li><span class="pl-etikett">${esc(uppfNamn(u.rad))}</span><p>${lankad(data.uppfoljning.rader[u.rad].vad)}${dinSammanstallning(data.uppfoljning.rader[u.rad].vad)}</p></li>`).join('')}</ul></section>`);
 
@@ -2578,7 +2579,7 @@ $('pl-grupper').addEventListener('click', (e) => {
 // ---------- Knapparna ----------
 // Text som kopieras eller laddas ned är vanlig text: utan ordfogarna som håller ihop F–5 och 2–6 på sidan (verifieringen
 // 2026-10-25: ett osynligt tecken mellan tankstrecket och siffran i texten till åtgärdsprogrammet och i kalenderfilen).
-function vanligText(s: string): string { return s.replace(/\u2060/g, ''); }
+function vanligText(s: string): string { return utanFogar(s); }
 async function kopiera(text: string): Promise<boolean> {
   text = vanligText(text);
   try { await navigator.clipboard.writeText(text); return true; } catch {

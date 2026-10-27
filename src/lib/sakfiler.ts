@@ -24,8 +24,8 @@ import { bladgrupper, egnaBlad, metodensBladmaterial } from './bladmaterial';
 import { bokhandledningen, lararhandledningar } from './handledning';
 import { bladNamn, forstaLed } from './karta';
 import { faktatexter } from './ramform';
-import { allaAntal, kortnamn, sakdelar, slugAv, stor, visadeTexter } from './standard/index.js';
-import { metodensSaker, sidansAnkare } from './metodsaker';
+import { allaAntal, kortnamn, slugAv, stor, visadeTexter } from './standard/index.js';
+import { metodensSaker, sakernaI, sidansAnkare } from './metodsaker';
 import { ljudform } from './ljudkort';
 
 export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall' | 'diplom' | 'tabell';
@@ -149,7 +149,7 @@ export function planensTabeller(d: MetodData, id: string): number[] {
   if (!d.plan) return [];
   const saker = metodensSaker(d, id);
   const { tabellAnkare } = sidansAnkare(d);
-  const namnda = new Set(visadeTexter(d).flatMap((t) => sakdelar(t, saker).flatMap((x) => (x.sak !== undefined && saker[x.sak].slag === 'tabell' ? [saker[x.sak].adress] : []))));
+  const namnda = new Set(sakernaI(visadeTexter(d), saker).filter((x) => x.slag === 'tabell').map((x) => x.adress));
   const iPlanen = new Set([
     ...(d.plan.passen ?? []).flatMap((p) => [p.tabell, p.utanTidsschema ? p.ur?.tabell : undefined]),
     ...(d.uppfoljning?.rader ?? []).map((r) => r.tabell),

@@ -532,7 +532,12 @@ for (const fil of filer) {
   // Strukturens ruta Till läraren står i sidfoten i Word och under ramen på sidan, så den räknas inte som texten före en bild.
   const strukturDelar = (d.ramar?.ramar ?? []).map((r, i) => (arStruktur(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.delar\\.`) : null)).filter(Boolean);
   const langa = texter(d, '', []).filter(({ vag }) => !UNDANTAG.some((x) => x.vag.test(vag)) && !strukturDelar.some((r) => r.test(vag))).map(({ text }) => norm(text));
-  const textFore = (doc, pos) => {
+  // Rutans text döljs med lika många mellanslag, så att ett namn inne i den, som ramens rubrik i "står direkt efter
+  // Strukturen, vecka 1: Lika och olika", inte heller räknas (riggens leverans 2026-10-27, Beskrivande text).
+  const dolda = texter(d, '', []).filter(({ vag }) => strukturDelar.some((r) => r.test(vag))).map(({ text }) => norm(text)).filter((t) => t.length > 20);
+  const utanRutan = (doc) => dolda.reduce((ut, t) => ut.split(t).join(' '.repeat(t.length)), doc);
+  const textFore = (dokument, pos) => {
+    const doc = utanRutan(dokument);
     let bast = { text: 'början', slut: -1 };
     for (const n of langa) { const i = doc.lastIndexOf(n, pos - n.length); if (i >= 0 && (i + n.length > bast.slut || (i + n.length === bast.slut && n.length > bast.text.length))) bast = { text: n, slut: i + n.length }; }
     return bast.text;

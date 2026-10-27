@@ -1,0 +1,34 @@
+---
+// En fri tabell i metodens text (tabeller[] i metodens fil), på sin plats bland avsnitten i Metod.astro: rubriken, texten,
+// verktygens knappar, tabellen, knappen som skriver ut tabellen när planen leder dit (src/lib/sakfiler.ts), noten och
+// filmerna. En komponent för alla platser, så att de sju platserna inte står var för sig (Niclas 2026-10-27: "att det inte
+// smugit in ny kod som delar rötter eller dubblerad kod").
+import type { ComponentProps } from 'astro/types';
+import Centralrad from './Centralrad.astro';
+import MetodTabell from './MetodTabell.astro';
+import Sakknapp from './Sakknapp.astro';
+import Filmruta from './Filmruta.astro';
+import type { Sakfil } from '../lib/sakfiler';
+interface Props {
+  t: { rubrik: string; text?: string; kolumner: string[]; rader: string[][]; not?: string };
+  ankare: string | undefined;
+  metod: string;
+  titel: string;
+  centrala: ComponentProps<typeof Centralrad>['saker'];
+  klass: string;
+  karta: ComponentProps<typeof MetodTabell>['karta'];
+  cellank: ComponentProps<typeof MetodTabell>['cellank'];
+  filmer: ComponentProps<typeof Filmruta>['filmer'];
+  fil: Sakfil | undefined;
+}
+const { t, ankare, metod, titel, centrala, klass, karta, cellank, filmer, fil } = Astro.props;
+---
+<section id={ankare}>
+  <h2>{t.rubrik}</h2>
+  {t.text && <p>{t.text}</p>}
+  <Centralrad saker={centrala} metod={metod} titel={titel} />
+  <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={klass} radrubrik={false} karta={karta} cellank={cellank} />
+  {fil && <Sakknapp fil={fil} metod={titel} />}
+  {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+  <Filmruta filmer={filmer} titel={titel} />
+</section>

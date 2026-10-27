@@ -250,7 +250,7 @@ tabeller:
       - - "Pass 3\nSkrivpasset"
         - "Paret skriver klart, läser texten högt och tar de långa orden med stegen. Varje par läser sin text för gruppen, och du lägger sidan i tidningens mapp."
         - "Samma som i pass 2, med parets skrivplan och sida från pass 2"
-    not: "Alla tre passen börjar med Ordstarten, och från vecka 5 skriver var och en sin egen text. I vecka 8 är pass 3 tidningens pass. Har gruppen bara två pass en vecka, tar ni ordpasset och ett skrivpass. Då skriver både du och eleverna en eller två meningar i början, mitten och slutet. I skrivpasset tar Förlagan fem minuter och Din text tio, så att Skriva får 30 minuter. I Skriva gör paret planen, berättar texten för ett annat par, skriver och kontrollerar texten och ritar bilden om de hinner. I Läsa upp läser varje par, från vecka 5 varje elev, sin text för gruppen. Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar. Då skriver eleverna ingen ny text, och i ordpassets Läsa upp väljer varje elev i stället vilken av sina texter hen ska läsa för den inbjudna läsaren."
+    not: "Alla tre passen börjar med Ordstarten, och från vecka 5 skriver var och en sin egen text. Har gruppen bara två pass en vecka, tar ni ordpasset och ett skrivpass. Då skriver både du och eleverna en eller två meningar i början, mitten och slutet. I skrivpasset tar Förlagan fem minuter och Din text tio, så att Skriva får 30 minuter. I Skriva gör paret planen, berättar texten för ett annat par, skriver och kontrollerar texten och ritar bilden om de hinner. I Läsa upp läser varje par, från vecka 5 varje elev, sin text för gruppen. I vecka 8 är pass 3 tidningens pass. Med tre pass i vecka 8 säger du sist i ordpasset vem som ska läsa texten och vad eleverna ska skriva, och var och en tänker ut vad texten ska handla om. Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar. Då skriver eleverna ingen ny text, och varje elev väljer i stället vilken av sina texter hen ska läsa för den inbjudna läsaren."
   - rubrik: De fyra stegen för ett långt ord
     plats: efter-steg
     meny: true
@@ -551,7 +551,7 @@ progression:
     - vecka: "8"
       fokus: Nyord
       roll: "Ordstarten: eleverna leder. Skrivandet: var och en förklarar sitt nya ord för läsaren i tidningen"
-      eleverna: "Att läsa och förklara ett nytt ord ur delarna, bakifrån, och säga när delarna inte räcker, som i hjärnröta. I artikeln skriver eleven vad det egna ordet betyder och vad det är byggt av."
+      eleverna: "Att läsa och förklara ett nytt ord ur delarna, bakifrån, och säga när delarna inte räcker, som i hjärnröta. Har veckan tre pass, skriver eleven en artikel om vad hens nya ord betyder och är byggt av."
 
 uppfoljning:
   text: "Kartläggningen visar hur eleven läser, delar, stavar och förklarar långa ord och skriver dem i en text, före och efter kursen. Protokollet samlar det eleven läste, skrev och förklarade, vecka för vecka. Läser eleven efter kursen minst 14 av 16 ord rätt i uppgift 1, stavar minst 6 av 8 ord rätt i uppgift 3 och har minst 6 av 8 poäng i uppgift 4, avslutar du insatsen. Når eleven den gränsen redan före kursen, behöver hen inte gå kursen. Har eleven inte fler poäng än före kursen, sammanlagt i uppgift 1–4 och för delarna i uppgift 3, tar du upp det med elevhälsan och ser efter om eleven först behöver läsa korta ord säkrare, till exempel i TIL i grupp. Annars går eleven en period till med de veckor som tar upp de delar hen fortfarande gör fel på, som fogen i vecka 2 och 7 eller förstavelserna i vecka 5. Varje vecka har samma tre pass, förlaga och ordkort som i kursen, men du väljer andra ord till Ordstarten, Nya ord och Diktamen efter de tre kraven för egna ord. Eleven skriver en ny text efter veckans uppgift. Eleverna som behöver samma veckor går perioden tillsammans. Går en elev den ensam, är du kamraten i paret. Efter perioden gör du kartläggningen igen och beslutar på samma sätt, men jämför poängen med den förra kartläggningen."
@@ -567,6 +567,7 @@ uppfoljning:
     - nar: Efter vecka 4
       tid: "vecka 4"
       vad: Läs texterna från vecka 1 och 4, och ta felstavade ord till Ordstarten. Fick kamraten ofta vänta när eleven var sekreterare i vecka 3 och 4, eller kunde eleven inte läsa sin mening, får hen en sekreterare från vecka 5, som i tabellen När eleven fastnar i skrivandet.
+      resultat: "sekreterare från vecka 5: ja/nej"
     - nar: Efter kursen
       tid: "efter"
       perElev: 5
@@ -592,16 +593,21 @@ plan:
     - nar: första passet
       del: Ordstarten
       istallet: true
-      text: "Börja med fem minuter om kursen: presentera den som Ordverkstaden, en verkstad där gruppen gör en tidning, och ge varje elev kortet Ett långt ord. Ordstarten: på planschen Delarna läser gruppen de fyra första raderna i listan Ändelser som böjer ordet. Du visar brandbilen med stegen och tänker högt, och sedan tar alla bilbranden med stegen."
-    - nar: veckans första
+      text: "Börja med fem minuter om kursen: presentera den som Ordverkstaden, en verkstad där gruppen gör en tidning, och ge varje elev kortet Ett långt ord. Eleven tar varje långt ord med samma fyra steg, Dela ordet, En del i taget, Hela ordet och Vad betyder det? Ordstarten: på planschen Delarna läser gruppen de fyra första raderna i listan Ändelser som böjer ordet. Du visar brandbilen med stegen och tänker högt, och sedan tar alla bilbranden med stegen."
+    # Vecka 8 har sin egen rad överst, utan meningen om att paren tänker ut nästa text, som inte gäller med två pass
+    # (sajtens steg 4b, K-585).
+    - nar: veckans första pass i vecka 1–7
       kort: "Ordpasset"
       ur: { tabell: "Veckans tre pass: ett ordpass och två skrivpass", rad: "Pass 1", kolumner: ["Vad gruppen gör"] }
-    # Med två pass i vecka 8 skriver eleverna ingen ny text, och raden säger det i ordpassets Läsa upp med notens två
-    # meningar. Planen kan inte ge raden bara det läget: näst sista passet är skrivpasset när vecka 8 har tre pass, så
-    # raden säger villkoret själv och gäller veckans första pass i vecka 8 (sajtens steg 4, 2026-10-27, K-585).
+    - nar: veckans första pass i vecka 8
+      kort: "Ordpasset"
+      text: "Gruppen läser veckans förlaga, och paren bygger ord av veckans delar med ordkorten. I diktamen skriver eleverna långa ord en del i taget, ihop."
+    # Läsa upp i vecka 8 i stället för delens vanliga text, med båda lägena ur noten: planen kan inte ge raden bara ett
+    # läge, eftersom näst sista passet är skrivpasset när vecka 8 har tre pass (sajtens steg 4b, 2026-10-27, K-585).
     - nar: veckans första pass i vecka 8
       del: Läsa upp
-      text: "Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar. Då skriver eleverna ingen ny text, och i ordpassets Läsa upp väljer varje elev i stället vilken av sina texter hen ska läsa för den inbjudna läsaren."
+      istallet: true
+      text: "Låt varje elev läsa ett ord från sin miniwhiteboard och förklara det bakifrån. Med tre pass i vecka 8 säger du sist i ordpasset vem som ska läsa texten och vad eleverna ska skriva, och var och en tänker ut vad texten ska handla om. Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar. Då skriver eleverna ingen ny text, och varje elev väljer i stället vilken av sina texter hen ska läsa för den inbjudna läsaren."
     - nar: veckans andra pass i vecka 1–4
       kort: "Skrivpasset, texten börjar"
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
@@ -612,6 +618,21 @@ plan:
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
       kolumn: "Pass 3, texten blir klar"
       ur: { tabell: "Veckans tre pass: ett ordpass och två skrivpass", rad: "Pass 3", kolumner: ["Vad gruppen gör"] }
+    # Kloka pennan och rollerna där de visas första gången, ur veckans sida i vecka 1, och i Skriva hur paret byter och
+    # trion när eleverna är fem (den kalla läsaren 2026-10-27, K-585).
+    - nar: veckans andra pass i vecka 1
+      del: Din text
+      text: "Din text: visa Kloka pennan. Du är meningsbyggare och säger en mening, och en elev är sekreterare, säger den igen och skriver den på blädderblocket."
+    - nar: veckans andra pass i vecka 1–4
+      del: Skriva
+      text: "Lyssna efter om sekreteraren säger meningen igen innan hen skriver och om paret byter efter varje mening. I en trio är den tredje kontrollant och kollar de långa orden i varje mening, och rollerna går runt efter varje mening."
+    - nar: veckans tredje pass i vecka 1–4
+      del: Skriva
+      text: "I en trio är den tredje kontrollant och kollar de långa orden i varje mening, och rollerna går runt efter varje mening."
+    # Läsarna i vecka 2 och leken i vecka 7, ur veckornas sidor (den kalla läsaren 2026-10-27, K-585).
+    - nar: veckans sista pass i vecka 2
+      del: Efter passet
+      text: "Efter pass 3 läser paren guiden för den yngre klassen och lämnar en kopia av kartan."
     - nar: veckans andra pass i vecka 5–7
       kort: "Skrivpasset, texten börjar"
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
@@ -623,6 +644,11 @@ plan:
     - nar: veckans tredje pass i vecka 5–7
       kort: "Skrivpasset, texten blir klar"
       tabell: "Pass 3 från vecka 5: skrivpasset med kontrollanten"
+    - nar: veckans tredje pass i vecka 5–7
+      del: Skriva
+      text: "I en trio läser eleverna varandras texter i tur och ordning."
+    - nar: veckans sista pass i vecka 7
+      text: "Gruppen väljer en av lekarna, som en annan grupp prövar på en rast i vecka 8."
     - nar: veckans övriga pass i vecka 8
       kort: "Skrivpasset, texten blir klar"
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
@@ -642,6 +668,9 @@ plan:
     - nar: veckans övriga pass i vecka 8
       del: Skriva
       text: "Sist i Skriva är kamraten kontrollant."
+    - nar: veckans övriga pass i vecka 8
+      del: Skriva
+      text: "I en trio läser eleverna varandras texter i tur och ordning."
     - nar: veckans övriga pass i vecka 8
       del: Läsa upp
       istallet: true
@@ -673,7 +702,7 @@ checklista:
     - Skriv ut förlagorna, ordkorten, kortet Ett långt ord, kortet Vi skriver i par och planschen Delarna, och lägg ordkorten i kuvert.
     - Skriv ut skrivplanen och tidningens sida, och protokollets tre sidor och diplomet till varje elev.
     - Skaffa miniwhiteboards, whiteboardpennor, sudd, blädderblock och mapp.
-    - Bestäm de fasta paren, läsarna i vecka 2 och 8 och gruppen som prövar leken.
+    - Bestäm de fasta paren, den yngre klassen i vecka 2, den inbjudna läsaren i vecka 8 och gruppen som prövar vecka 7:s lek.
     - Läs vecka 1 och skriv din text i förväg.
 
 grund:
@@ -848,7 +877,7 @@ ramar:
             - rubrik: Pass 2, skrivpasset
               text: "Ordstarten: vänskapsbänken och balkongkraftverket i pass 2.\nFörlagan: dra ramarna i ett av styckena, som det om vänskapsbänk. I din text skriver du slutet, en mening med ditt nya ord.\nTexten är kort, och eleven skriver den klart i pass 2. Sist i Skriva är kamraten kontrollant. I Läsa upp läser varje elev hela sin text."
             - rubrik: Pass 24
-              text: "Det här är kursens sista pass, tidningens pass, och alla texter kommer med. Lägg fram tidningens mapp, några tomma ark och ett diplom till varje elev.\n0–⁠5 min. Ordstarten: fotbollsplanen och molnräknare.\n5–⁠40 min. Tidningen: ni skriver en innehållsförteckning med en rad för varje avdelning, och två elever gör omslaget medan de andra skriver varje avdelnings namn på ett eget ark.\n40–⁠60 min. Läsa upp: varje elev läser en av sina texter för den inbjudna läsaren, och du delar ut diplomen sist.\nEfter passet. Innan du kopierar tidningen skriver du rätt stavning med blyerts ovanför de övade ord som fortfarande är fel. Kopiera två sidor på varje ark, och dela ut tidningen när du har gjort kartläggningen efter kursen."
+              text: "Det här är kursens sista pass, tidningens pass, och alla texter kommer med. Lägg fram tidningens mapp, några tomma ark och ett diplom till varje elev.\n0–⁠5 min. Ordstarten: alla tar fotbollsplanen och molnräknare med stegen.\n5–⁠40 min. Tidningen: ni skriver en innehållsförteckning med en rad för varje avdelning, och två elever gör omslaget medan de andra skriver varje avdelnings namn på ett eget ark.\n40–⁠60 min. Läsa upp: varje elev läser en av sina texter för den inbjudna läsaren, och du delar ut diplomen sist.\nEfter passet. Innan du kopierar tidningen skriver du rätt stavning med blyerts ovanför de övade ord som fortfarande är fel. Kopiera två sidor på varje ark, och dela ut tidningen när du har gjort kartläggningen efter kursen."
             - rubrik: Lyssna efter
               text: "Eleven som inte börjar bakifrån och säger att en vänskapsbänk är en vän.\nEleven som läser säkerhetsregler som säkerhetsregel.\nEleven som inte märker att delarna inte räcker i hjärnröta."
     - rubrik: "Förlaga, vecka 1: Tre uppfinningar som världen behöver"

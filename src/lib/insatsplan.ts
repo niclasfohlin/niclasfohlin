@@ -3,13 +3,13 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { arDelensTid, utanFogar, versionsform, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { arDelensTid, utanFogar, versionsform, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
-import { kursensVeckor, metodensSaker, sidansAnkare, sidansAvsnitt, versionensDelar, versionernasNamn, type MetodSak } from './metodsaker';
+import { kursensVeckor, metodensSaker, sakernaI, sidansAnkare, sidansAvsnitt, versionensDelar, versionernasNamn, type MetodSak } from './metodsaker';
 import { passOversikt } from './metod';
 import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
@@ -141,7 +141,7 @@ export interface PlanData {
   /** Stödet för passets längd (plan.langdval, K-564), när faktarutans tid är ett spann: under Passets längd. */
   langdval?: PlanStod;
   /** Stödet för antalet veckor (plan.veckoval), när längden beror på något metoden säger, som boken, med förvalet. */
-  veckoval?: PlanStod & { forval?: number };
+  veckoval?: PlanStod & { forval?: number; langder?: number[] };
   /** Skolveckorna före första passet när det metoden gör före start tar mer än en vecka (plan.foreVeckor). */
   foreVeckor?: number;
   /** Progressionens sista rad tar planens sista vecka när perioden slutar före den (plan.sistaRaden, K-572). */
@@ -247,13 +247,7 @@ export async function planensSaker(m: Metod, andra: string[] = [], version?: str
   // lektionens sida (riggens leverans 2026-10-27).
   const lektionerna = m.data.lektionsbank ? (await seriensMetoder(m)).map((x) => ({ namn: lektionsnamn(x.data.titel), former: [lektionsnamn(x.data.titel)], versal: true, adress: `/stodundervisning/${x.id}` })) : [];
   const alla = [...metodensSaker(m.data, m.id, version), ...(serien ? metodensSaker(serien.data, serien.id) : []), ...lektionerna, ...(await andraMetoder(m.id))];
-  const texterna = [...visadeTexter(m.data), ...andra];
-  const anvanda = new Set(texterna.flatMap((t) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
-  // Ett spann, som "Bildserie 2–6", bär varje sak i spannet, så att planen kan länka dem var för sig. Namnet är ett eller
-  // två ord, eller det sista ordet när ett ord med stor bokstav står före, som i "Laminerat Bildserie 1–6".
-  const spann = new Set(texterna.flatMap((t) => sakspann(t).flatMap((x) => x.namn.flatMap((n) => x.nummer.map((nr) => `${n} ${nr}`)))));
-  alla.forEach((s, i) => { if (spann.has(s.namn)) anvanda.add(i); });
-  return alla.filter((_, i) => anvanda.has(i));
+  return sakernaI([...visadeTexter(m.data), ...andra], alla);
 }
 
 const tabellensAdress = (d: Metod['data'], id: string, namn: string) => {
@@ -265,25 +259,29 @@ const tabellensAdress = (d: Metod['data'], id: string, namn: string) => {
 // Passet ur tidsschemat: raderna med minuter är passets delar, raden Före passet är förberedelsen, och en rad som Hemma,
 // cirka 20 min står efter delarna. Tidsschemats varianter är passet de veckor då delarna har andra tider, med vad läraren
 // gör ur raden med samma fas, så att texten står på ett ställe i metoden (K-515).
-function planensPass(d: Metod['data'], id: string): PlanPasset | undefined {
+// I en version står inte meningarna som bara gäller en annan version (iV, riggens leverans 2026-10-27: Sagobokens pass 14
+// visade båda vägarnas meningar om Vår saga ur tidsschemat).
+function planensPass(d: Metod['data'], id: string, iV: (t: string) => string = (t) => t): PlanPasset | undefined {
   if (!d.tidsschema) return undefined;
   const sida = `/stodundervisning/${id}`;
   const medTid = (r: { tid: string }) => arDelensTid(r.tid);
   const fore = (r: { tid: string }) => /^före/i.test(r.tid.trim());
   const del = (r: { tid: string; fas: string; vad: string }) => {
     const t = minuterISpann(r.tid);
-    return { tid: r.tid, fas: r.fas, vad: r.vad, ...(t ? { minuter: Math.max(1, t.till - t.fran) } : {}) };
+    return { tid: r.tid, fas: r.fas, vad: iV(r.vad), ...(t ? { minuter: Math.max(1, t.till - t.fran) } : {}) };
   };
   const vadFor = (fas: string) => d.tidsschema!.rader.find((r) => r.fas.toLowerCase() === fas.toLowerCase())?.vad ?? '';
+  const inledning = planensInledning(d.tidsschema.text, d.plan?.utan);
+  const forerad = d.tidsschema.rader.find(fore);
   return {
     rubrik: d.tidsschema.rubrik,
-    ...(planensInledning(d.tidsschema.text, d.plan?.utan) ? { text: planensInledning(d.tidsschema.text, d.plan?.utan) } : {}),
+    ...(inledning && iV(inledning) ? { text: iV(inledning) } : {}),
     delar: d.tidsschema.rader.filter(medTid).map(del),
     ...(d.tidsschema.varianter ? { varianter: d.tidsschema.varianter.map((v) => ({ nar: v.nar, text: v.text, delar: v.delar.map((x) => del({ ...x, vad: vadFor(x.fas) })) })) } : {}),
-    andra: d.tidsschema.rader.filter((r) => !medTid(r) && !fore(r)).map((r) => ({ tid: r.tid, fas: r.fas, vad: r.vad })),
-    ...(d.tidsschema.rader.find(fore) ? { fore: d.tidsschema.rader.find(fore)!.vad } : {}),
-    ...(d.passrutin?.efterPasset ? { efter: d.passrutin.efterPasset } : {}),
-    ...(d.tidsschema.efter ? { not: d.tidsschema.efter } : {}),
+    andra: d.tidsschema.rader.filter((r) => !medTid(r) && !fore(r)).map((r) => ({ tid: r.tid, fas: r.fas, vad: iV(r.vad) })),
+    ...(forerad && iV(forerad.vad) ? { fore: iV(forerad.vad) } : {}),
+    ...(d.passrutin?.efterPasset && iV(d.passrutin.efterPasset) ? { efter: iV(d.passrutin.efterPasset) } : {}),
+    ...(d.tidsschema.efter && iV(d.tidsschema.efter) ? { not: iV(d.tidsschema.efter) } : {}),
     adress: `${sida}#${passetsAnkare(d)}`,
     ...(d.steg ? { steg: { rubrik: d.steg.rubrik, fraserRubrik: forstaLedet(d.steg.fraserRubrik), adress: `${sida}#steg`, rader: d.steg.rader.map((r) => ({ namn: r.namn, fraser: r.fraser.slice(0, 3) })) } } : {}),
   };
@@ -293,12 +291,13 @@ function planensPass(d: Metod['data'], id: string): PlanPasset | undefined {
 // utan minuter som förberedelse, ur standardens tabellensDelar, som läser tabellernas former.
 // En dels andra kolumner står bara med när de har text.
 const medMer = <T extends { mer: { etikett: string; text: string }[] }>({ mer, ...x }: T) => ({ ...x, ...(mer.length ? { mer } : {}) });
-function passetsTabell(d: Metod['data'], id: string, namn: string, kolumn?: string): PassTabell {
+function passetsTabell(d: Metod['data'], id: string, namn: string, kolumn?: string, iV: (t: string) => string = (t) => t): PassTabell {
   const adress = tabellensAdress(d, id, namn) ?? `/stodundervisning/${id}`;
   const t = d.tabeller.find((x) => x.rubrik === namn);
   const delar = t ? tabellensDelar(t, kolumn) : null;
   if (!delar) return { namn, adress };
-  return { namn, adress, delar: delar.delar.map(medMer), fore: delar.fore.map(medMer), ...(delar.efter ? { efter: delar.efter } : {}) };
+  const iVersionen = <T extends { vad: string; mer: { etikett: string; text: string }[] }>(x: T) => medMer({ ...x, vad: iV(x.vad), mer: x.mer.map((y) => ({ ...y, text: iV(y.text) })).filter((y) => y.text) });
+  return { namn, adress, delar: delar.delar.map(iVersionen), fore: delar.fore.map(iVersionen).filter((x) => x.vad), ...(delar.efter ? { efter: delar.efter } : {}) };
 }
 
 // Passens delar ur veckornas sidor (plan.veckansPass, K-553; riggens förslag 2026-10-27): ramen med lektioner har en del
@@ -473,7 +472,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
   const kurs = kursensVeckor(d, m.id, version);
   const bank = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? await planensBank(m) : undefined;
   const uppdaterad = d.uppdaterad ? (d.uppdaterad instanceof Date ? d.uppdaterad.toISOString().slice(0, 10) : String(d.uppdaterad).slice(0, 10)) : undefined;
-  const passet = planensPass(d, m.id);
+  const passet = planensPass(d, m.id, iV);
   const fastnar = [
     ...(d.fastnar ? [{ rubrik: d.fastnar.rubrik, adress: `${sida}#fastnar` }] : []),
     ...d.tabeller.filter((t) => t.plats === 'efter-fastnar').flatMap((t) => { const a = tabellensAdress(d, m.id, t.rubrik); return a ? [{ rubrik: t.rubrik, adress: a }] : []; }),
@@ -497,7 +496,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
   const nivaval = stodet(d.plan?.nivaval, d, m.id);
   const langdval = stodet(d.plan?.langdval, d, m.id);
   const veckostod = stodet(d.plan?.veckoval, d, m.id);
-  const veckoval = veckostod && d.plan?.veckoval?.forval ? { ...veckostod, forval: d.plan.veckoval.forval } : veckostod;
+  const veckoval = veckostod ? { ...veckostod, ...(d.plan?.veckoval?.forval ? { forval: d.plan.veckoval.forval } : {}), ...(d.plan?.veckoval?.langder ? { langder: d.plan.veckoval.langder } : {}) } : veckostod;
   const skattningar = planensSkattningar(d, m.id);
   const lektioner = d.plan?.lektionsval ? await planensLektioner(m) : [];
   const ingangsstod = stodet(d.plan?.lektionsval, d, m.id);
@@ -515,7 +514,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     period: d.period,
     ...(d.progression ? { progression: { enhet: d.progression.enhet, rubrik: d.progression.rubrik, rader: d.progression.rader.map((r) => ({ ...r, kort: veckansKort(r, kurs[r.vecka]?.titel) })) } } : {}),
     // Versionens tid på en rad i uppföljningen, efter radens När (K-576).
-    uppfoljning: { rader: uppfRader.map((r) => ({ ...r, vad: iV(r.vad) })).map((r) => (versionen?.tider?.[r.nar] ? { ...r, tid: versionen.tider[r.nar] } : r)).map((r) => (r.tabell ? { ...r, passet: passetsTabell(d, m.id, r.tabell) } : r)).map((r) => ({ ...r, nar: utanMarket(r.nar) })) },
+    uppfoljning: { rader: uppfRader.map((r) => ({ ...r, vad: iV(r.vad) })).map((r) => (versionen?.tider?.[r.nar] ? { ...r, tid: versionen.tider[r.nar] } : r)).map((r) => (r.tabell ? { ...r, passet: passetsTabell(d, m.id, r.tabell, undefined, iV) } : r)).map((r) => ({ ...r, nar: utanMarket(r.nar) })) },
     checklista: d.checklista?.punkter ?? [],
     ...(d.checklista ? { checklistaRubrik: d.checklista.rubrik } : {}),
     forstaChecklista,
@@ -530,7 +529,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
     // En rad vars text bara gäller en annan version står inte med (K-576).
-    ...(d.plan?.passen ? { passen: d.plan.passen.filter((p) => !p.text || iV(p.text) || p.ur || p.tabell || (p.del && p.istallet)).map((p) => ({ nar: p.nar, ...(p.text && iV(p.text) ? { text: iV(p.text) } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(iVersionensKolumner(rollensRad(d, p.ur) ?? [], version, alla).map((c) => ({ ...c, text: iV(c.text) })).filter((c) => c.text), p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.utanTidsschema && p.ur && p.ur.rad !== VECKANS_RAD ? { tabell: { namn: p.ur.tabell, adress: tabellensAdress(d, m.id, p.ur.tabell) ?? `/stodundervisning/${m.id}` } } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn) } : {}) })) } : {}),
+    ...(d.plan?.passen ? { passen: d.plan.passen.filter((p) => !p.text || iV(p.text) || p.ur || p.tabell || (p.del && p.istallet)).map((p) => ({ nar: p.nar, ...(p.text && iV(p.text) ? { text: iV(p.text) } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(iVersionensKolumner(rollensRad(d, p.ur) ?? [], version, alla).map((c) => ({ ...c, text: iV(c.text) })).filter((c) => c.text), p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.utanTidsschema && p.ur && p.ur.rad !== VECKANS_RAD ? { tabell: { namn: p.ur.tabell, adress: tabellensAdress(d, m.id, p.ur.tabell) ?? `/stodundervisning/${m.id}` } } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn, iV) } : {}) })) } : {}),
     ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: iV(d.gruppen.text), adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),
@@ -665,7 +664,7 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     if (r.tabell && !(t && tabellensDelar(t))) fel.push(`Uppföljningens rad "${r.nar}" har tabellen "${r.tabell}", som metoden inte har eller som inte går att läsa som ett pass i delar.`);
   }
   if (m.data.plan?.veckansPass) {
-    const ram = (m.data.ramar?.ramar ?? []).find((r) => r.rubrik === m.data.plan!.veckansPass);
+    const ram = veckansPassRam(m.data);
     const takt = metodplan(m.data).plan?.takt;
     if (!ram?.lektioner) fel.push(`plan.veckansPass säger ramen "${m.data.plan.veckansPass}", som metoden inte har som en ram med en del per vecka (lektioner).`);
     else {

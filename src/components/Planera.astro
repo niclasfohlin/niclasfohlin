@@ -25,9 +25,10 @@ const mejl = `mailto:${site.epost}?subject=${encodeURIComponent(`${PLANERA.namn}
 const period = periodensLangd(data.period)!;
 const matt = tidensMatt(data.tid ?? '');
 // Längderna att välja: metodens spann (högst tio knappar), eller för en period utan slut den kortaste och två längre.
-const langder = period.max
+// Metodens egna antal veckor när den har dem (plan.veckoval.langder), annars periodens spann eller tre förslag.
+const langder = data.veckoval?.langder ?? (period.max
   ? Array.from({ length: Math.min(period.max, period.min + 9) - period.min + 1 }, (_, i) => period.min + i)
-  : period.mer ? [period.min, period.min + 4, period.min + 8] : [period.min];
+  : period.mer ? [period.min, period.min + 4, period.min + 8] : [period.min]);
 // Passets längder att välja: faktarutans spann, ändarna eller steg om tio minuter (passetsLangder, K-564).
 const minuter = matt.minst !== undefined && matt.minuter !== undefined ? passetsLangder({ min: matt.minst, max: matt.minuter }).langder : [];
 const json = JSON.stringify(data).replace(/</g, '\\u003c');

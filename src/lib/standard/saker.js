@@ -142,6 +142,9 @@ export function sakdelar(text, saker) {
         // ram, är delen och inte saken med samma namn (länkgranskningen av texttypskurserna 2026-10-27). Skriv "greppet" före
         // ett grepp vars namn börjar som en sak.
         if (DELENS_ORD.test(text.slice(0, start))) continue;
+        // Ett namn som börjar ett längre citat, som ”En gång när jag var liten …”, är början på en mening och inte bladet En
+        // gång när; ett citat som bara är namnet, ”Kvart i åtta”, är saken (riggens leverans 2026-10-27).
+        if (/[”“"«]$/u.test(text.slice(0, start)) && !/^[”“"»]/u.test(text.slice(start + m[2].length))) continue;
         traffar.push({ start, slut: start + m[2].length, sak: i });
       }
     }

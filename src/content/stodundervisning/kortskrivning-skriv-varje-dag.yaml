@@ -70,7 +70,7 @@ tidsschema:
       vad: Visa kortet. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. I de tio första passen säger eleverna sin första tanke till en kamrat.
     - tid: 3–8 min
       fas: Skriv
-      vad: Starta klockan. Alla skriver utan att stanna, du också den första minuten. När klockan ringer skriver eleverna klart sin mening.
+      vad: Starta klockan. Alla skriver utan att stanna. I de tio första passen skriver du också den första minuten. När klockan ringer skriver eleverna klart sin mening.
     - tid: 5 min
       fas: Dela
       vad: "Eleverna läser sin text och stryker under en rad som någon ska få höra. De läser raden för en kamrat, som säger: ”Berätta mer om …” Den som läste berättar eller skriver en rad till."
@@ -214,11 +214,11 @@ progression:
       eleverna: Att börja skriva inom en minut utan att säga sin första tanke. Att skriva hela skrivtiden, och att skriva ett ord som det låter och gå vidare.
       vidare: få i gruppen står över i Dela, i tre pass i rad
     - vecka: När ni är varma i kläderna
-      fokus: Delandet kan växa (se Från delande till en klass med skribenter).
+      fokus: Delandet kan växa med stegen i tabellen Från delande till en klass med skribenter.
       roll: Du väljer steg tillsammans med eleverna och säger vad de gör som skribenter.
       eleverna: Att själv välja en rad eller en text som fler än kamraten får höra eller läsa.
     - vecka: Veckans sista pass
-      fokus: "Eleverna räknar orden (se Så ser du att det hjälper)."
+      fokus: Eleverna räknar orden och fyller i Min skrivlista.
       roll: "Du frågar sist: ”Kom någon på något nytt medan ni skrev?”"
       eleverna: Att räkna sina ord fram till strecket och skriva fler ord på tre minuter än i början.
     - vecka: Vecka 6
@@ -227,32 +227,39 @@ progression:
       eleverna: Att börja direkt utifrån en egen stjärnmärkt text, skriva nytt om samma sak och säga vad som är nytt.
     - vecka: Efter vecka 6
       fokus: Gruppen fortsätter så länge den vill. Eleven kan ta med en stjärnmärkt text till skrivundervisningen.
-      roll: Du stämmer av målen, elev för elev.
+      roll: Du stämmer av målen, elev för elev. Den som inte har nått dem fortsätter sex veckor till, och efter vecka 12 stämmer du av igen.
       eleverna: Att börja skriva direkt och skriva utan att stanna, också med en stjärnmärkt text i skrivundervisningen.
 uppfoljning:
   rubrik: Så ser du att det hjälper
   text: "En gång i veckan räknar eleven orden från de tre första minuterna och jämför med sitt tal förra veckan. Ingen jämför sitt tal med någon annans. Passet blir då två till tre minuter längre. Hoppa inte över räkningen. Det är den som är prövad i försök. Talet beror också på kortet. Säg det till eleverna, och ta gärna ett bildkort den dagen. Är skrivtiden tre minuter, räknar eleven alla ord. Har du inte skrivit upp eleven i dina rader efter passen i vecka 6, och är talet i Min skrivlista högre i vecka 6 än i vecka 1, har hen nått målen. Hen kan då sluta eller fortsätta så länge gruppen vill. Börjar eleven fortfarande inte inom en minut och är talet inte högre i vecka 6 än i vecka 1, tar du upp det med elevhälsan. Annars fortsätter eleven sex veckor till, och efter vecka 12 stämmer du av igen, med vecka 12 i stället för vecka 6. Har eleven inte nått målen då, tar du upp det med elevhälsan. Lägger eleven fortfarande all kraft på bokstäverna eller stavningen, får hen också undervisning i det, eller ett verktyg som dator eller diktering."
   rader:
-    - nar: Veckans sista pass
+    # Raderna heter efter vad de är, och tiden står i tid (sajtens K-585, steg 4b och de kalla läsarna 2026-10-27). Ordräkningen
+    # är mätningen, med ett fält per elev, i veckans sista pass. Strecket och de två eleverna är steg i samma pass och inga
+    # mätningar, så de har varje vecka och inga fält; planens rad för veckans sista pass sätter dem i Skriv-delen.
+    - nar: Strecket
       tid: "varje vecka"
-      vad: Säg ”streck” när tre minuter har gått. Alla drar ett streck efter sitt sista ord och skriver vidare.
-    - nar: När klockan ringer
+      vad: I veckans sista pass säger du ”streck” när tre minuter har gått. Alla drar ett streck efter sitt sista ord och skriver vidare.
+    - nar: Ord på tre minuter
+      tid: "veckans sista pass i vecka 1–12"
+      vad: När klockan ringer räknar eleven alla ord fram till strecket, också dem du skrev åt hen, fyller i Min skrivlista och sätter en stjärna vid veckans favorittext.
+      resultat: "antalet ord fram till strecket"
+    - nar: Två elever visar listan
       tid: "varje vecka"
-      vad: Eleven räknar alla ord fram till strecket, också dem du skrev, fyller i Min skrivlista och sätter en stjärna vid veckans favorittext.
-    - nar: När de har fyllt i
-      tid: "varje vecka"
-      vad: "Be två elever visa dig Min skrivlista: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
-    - nar: Efter varje pass
+      vad: "När alla har fyllt i ber du två elever visa dig Min skrivlista: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
+    - nar: Lärarens rader
       tid: "varje pass"
-      vad: "Skriv en rad i din egen skrivbok: vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, vilka som slutade före klockan, hur många som stod över i Dela, och nästa skrivtid."
+      vad: "Efter varje pass skriver du en rad i din egen skrivbok: vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, vilka som slutade före klockan, hur många som stod över i Dela, och nästa skrivtid."
     - nar: Skriv igen
       # Skriv igen görs i veckans första pass i vecka 6, som raden säger, före Min skrivlista i det sista (Codex 2026-10-27).
       tid: "veckans första pass i vecka 6"
       vad: "Veckans första pass i vecka 6 är Skriv igen. Eleven läser en stjärnmärkt text i stället för dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
+      # Raden har ett fält per elev i planen, så den säger vad som skrivs där (K-585).
+      resultat: "vad eleven säger är nytt i texten"
     - nar: Alla visar Min skrivlista
       tid: "veckans sista pass i vecka 6"
       vad: I veckans sista pass i vecka 6 ber du alla visa dig Min skrivlista, inte bara två. Efter passet läser du dina rader från vecka 6.
-      resultat: "talet i Min skrivlista vecka 1 och vecka 6, och om eleven står i dina rader"
+      # Talen vecka 1 och 6 står i fälten för Ord på tre minuter, ett fält per mätning (K-585).
+      resultat: "om eleven står i dina rader efter passen i vecka 6"
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
   vantar: "Pass 1–10 ur Börja här och det första passet på omkring 25 minuter i planen (Rimligheten 2026-10-27, K-553)."
@@ -261,6 +268,12 @@ plan:
   passen:
     - nar: första passet
       tabell: "Första passet, omkring 25 minuter"
+    # Själva passet i pass 1 säger schemats delar i ordning, i stället för bara hänvisningen till schemat (den kalla läsaren
+    # K-585: det vanliga passet syns inte på dagen för pass 1).
+    - nar: första passet
+      del: Själva passet
+      istallet: true
+      text: "Följ sedan schemat Passet, del för del, med tre minuters skrivtid och gruppens kort 1 i Börja här. Visa kortet. Säg uppgiften och din egen första mening."
     - nar: första passet
       del: Själva passet
       text: Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.
@@ -271,57 +284,77 @@ plan:
       text: "Sätt ett tomt blad på väggen. Före varje pass skriver du dagens början under de förra. ”Jag ser …” Börja din egen första mening med den."
     - nar: första passet
       del: Själva passet
-      text: Den som behöver lånar en början eller en rad ur kortet.
+      text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.” Den som behöver lånar en början eller en rad ur kortet. Starta klockan. Alla skriver utan att stanna. I de tio första passen skriver du också den första minuten. När klockan ringer skriver eleverna klart sin mening. Säg före Dela att den som vill står över. Eleverna läser sin text och stryker under en rad som någon ska få höra. Läs din rad först, och låt gruppen svara: ”Berätta mer om …”"
     # Pass 2–10 (Rimligheten 2026-10-27, K-585): det som kommer till i pass 1–10. Före passet tar du kortet med passets
     # nummer i Börja här, i stället för tidsschemats förberedelse, och skriver passets början ur Börja här på bladet. Dagens
-    # kort visas från sidan Ta fram ett skrivkort, med passets rad ur Kort om kortskrivning i pass 2–6 och Första tanken, i
+    # kort visas ur Börja här och inte från sidan som slumpar, och kortets nummer står i passets namn (kort; steg 4b
+    # 2026-10-27), med passets rad ur Kort om kortskrivning i pass 2–6 och Första tanken, i
     # exemplets ordning, och Dela har Börja härs fält (steg 4 2026-10-27). En rad per pass: början skiljer, och ett spann
     # syns inte i ett pass som har en rad med eget nummer.
-    - { nar: pass 2, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Jag tänker på …” Börja din egen första mening med den." }
-    - { nar: pass 2, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 2, kort: "Kort 2 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Jag tänker på …” Börja din egen första mening med den." }
+    - { nar: pass 2, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 2, del: Dagens kort, text: "Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.", ur: { tabell: Kort om kortskrivning, rad: Texten ska inte bedömas eller rättas } }
     - { nar: pass 2, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 2, del: Dela, text: "Visa din egen sida och läs din rad först." }
-    - { nar: pass 3, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Det började med att …” Börja din egen första mening med den." }
-    - { nar: pass 3, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 3, kort: "Kort 3 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Det började med att …” Börja din egen första mening med den." }
+    - { nar: pass 3, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 3, del: Dagens kort, text: "Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.", ur: { tabell: Kort om kortskrivning, rad: Det behöver inte bli en färdig produkt } }
     - { nar: pass 3, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 3, del: Dela, text: "Visa din egen sida och läs din rad först." }
-    - { nar: pass 4, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Jag undrar …” Börja din egen första mening med den." }
-    - { nar: pass 4, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 4, kort: "Kort 4 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Jag undrar …” Börja din egen första mening med den." }
+    - { nar: pass 4, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 4, del: Dagens kort, text: "Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.", ur: { tabell: Kort om kortskrivning, rad: Texten är främst för dig själv } }
     - { nar: pass 4, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 4, del: Dela, text: "Visa din egen sida och läs din rad först." }
-    - { nar: pass 5, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Strax innan …” Börja din egen första mening med den." }
-    - { nar: pass 5, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 5, kort: "Kort 5 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Strax innan …” Börja din egen första mening med den." }
+    - { nar: pass 5, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 5, del: Dagens kort, text: "Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.", ur: { tabell: Kort om kortskrivning, rad: Du får veta i förväg om något ska delas } }
     - { nar: pass 5, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 5, del: Dela, text: "Visa din egen sida och läs din rad först." }
-    - { nar: pass 6, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Tänk om …” Börja din egen första mening med den." }
-    - { nar: pass 6, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 6, kort: "Kort 6 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Tänk om …” Börja din egen första mening med den." }
+    - { nar: pass 6, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 6, del: Dagens kort, text: "Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.", ur: { tabell: Kort om kortskrivning, rad: Det viktiga är att du skriver } }
     - { nar: pass 6, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 6, del: Dela, text: "Visa din egen sida och läs din rad först." }
-    - { nar: pass 7, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Om jag var där …” Börja din egen första mening med den." }
-    - { nar: pass 7, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 7, kort: "Kort 7 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Om jag var där …” Börja din egen första mening med den." }
+    - { nar: pass 7, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 7, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 7, del: Dela, text: "Visa din egen sida och läs din rad först." }
-    - { nar: pass 8, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Det påminner mig om …” Börja din egen första mening med den." }
-    - { nar: pass 8, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 8, kort: "Kort 8 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Det påminner mig om …” Börja din egen första mening med den." }
+    - { nar: pass 8, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 8, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 8, del: Dela, text: "Visa din egen sida och läs din rad först." }
-    - { nar: pass 9, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Nästa dag …” Börja din egen första mening med den." }
-    - { nar: pass 9, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 9, kort: "Kort 9 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Nästa dag …” Börja din egen första mening med den." }
+    - { nar: pass 9, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 9, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 9, del: Dela, text: "Visa din egen sida och läs din rad först." }
-    - { nar: pass 10, del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Jag tror att …” Börja din egen första mening med den." }
-    - { nar: pass 10, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
+    - { nar: pass 10, kort: "Kort 10 i Börja här", del: Före passet, istallet: true, text: "Ta gärna kortet med passets nummer i Börja här. Före varje pass skriver du dagens början under de förra. ”Jag tror att …” Börja din egen första mening med den." }
+    - { nar: pass 10, del: Dagens kort, istallet: true, text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. Den som behöver lånar en början eller en rad ur kortet." }
     - { nar: pass 10, del: Dagens kort, text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”" }
     - { nar: pass 10, del: Dela, text: "Visa din egen sida och läs din rad först." }
+    # Från pass 11: progressionens ändringar i Dagens kort och Skriv, först i delen (de kalla läsarna K-585). Raderna står
+    # inte i stället för delen, så att Skriv igen och veckans sista pass behåller sina rader.
+    - nar: pass 11 till det sista
+      del: Dagens kort
+      text: Den som behöver det säger sin första tanke till dig. Börjar inte de flesta inom en minut, säger eleverna sin första tanke till en kamrat igen i några pass.
+    - nar: pass 11 till det sista
+      del: Skriv
+      text: Ibland skriver du den första minuten, annars sitter du hos den som inte har börjat.
     # Veckans sista pass: Börja härs regel för ett citat, som också gäller ett slumpat kort (Rimligheten steg 4 2026-10-27, K-585).
     - nar: veckans sista pass
       del: Före passet
       text: Är kortet i veckans sista pass ett citat, tar du ett bildkort och sparar citatet till passet efter.
+    # Veckans sista pass: Skriv-delen den dagen med strecket, ordräkningen och de två eleverna, i passets ordning, och frågan
+    # sist i Dela (de kalla läsarna K-585: passet såg ut som ett vanligt pass). Skriv står i stället för delens text, eftersom
+    # eleverna räknar när klockan ringer, och Dela har pass 2–10:s rad först.
+    - nar: veckans sista pass
+      kort: Ord på tre minuter
+      del: Skriv
+      istallet: true
+      text: "Starta klockan. Alla skriver utan att stanna. I de tio första passen skriver du också den första minuten. I veckans sista pass säger du ”streck” när tre minuter har gått. Alla drar ett streck efter sitt sista ord och skriver vidare. När klockan ringer räknar eleven alla ord fram till strecket, också dem du skrev åt hen, fyller i Min skrivlista och sätter en stjärna vid veckans favorittext. När alla har fyllt i ber du två elever visa dig Min skrivlista: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
+    - nar: veckans sista pass
+      del: Dela
+      text: "Du frågar sist: ”Kom någon på något nytt medan ni skrev?”"
     # Skriv igen: eleven läser en stjärnmärkt text i stället för Dagens kort (Rimligheten 2026-10-27, K-585).
     - nar: veckans första pass i vecka 6
       kort: Skriv igen
@@ -342,9 +375,10 @@ plan:
     text: Skrivtiden börjar på tre minuter, och passet är då omkring tio minuter. Skriver de flesta fortfarande när klockan ringer, lägger du till en minut nästa pass, upp till åtta. Slutar de flesta före klockan, tar du bort en minut, som lägst till tre.
     mer: Passet, del för del
   veckoval:
-    text: Gruppen fortsätter så länge den vill. Du stämmer av målen, elev för elev.
+    text: Du stämmer av målen, elev för elev. Den som inte har nått dem fortsätter sex veckor till, och efter vecka 12 stämmer du av igen. Gruppen fortsätter så länge den vill.
     mer: Så växer det över sex veckor
     forval: 6
+    langder: [6, 12]
   utvardering:
     - Har du inte skrivit upp eleven i dina rader efter passen i vecka 6, och är talet i Min skrivlista högre i vecka 6 än i vecka 1, har hen nått målen. Hen kan då sluta eller fortsätta så länge gruppen vill.
     - Börjar eleven fortfarande inte inom en minut och är talet inte högre i vecka 6 än i vecka 1, tar du upp det med elevhälsan.
@@ -398,7 +432,7 @@ ramar:
         - rubrik: "Pass 1–10: det som kommer till"
           falt:
             - rubrik: Dagens kort
-              text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det därifrån på ett A4. Lägg det utskrivna kortet i högen efter passet: högen är de kort gruppen har haft."
+              text: "Visa kortet på skärmen, eller skriv ut det på ett A4. Lägg det utskrivna kortet i högen efter passet: högen är de kort gruppen har haft."
             - rubrik: En början att låna
               text: Sätt ett tomt blad på väggen. Före varje pass skriver du dagens början under de förra. Börja din egen första mening med den. Den som behöver lånar en början eller en rad ur kortet. Bladet sitter kvar hela perioden.
             - rubrik: Pass 1–6
@@ -442,7 +476,7 @@ lathund:
         - - "1 · Dagens kort\n2 min"
           - "Visa kortet. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. I pass 1–10 säger eleverna sin första tanke till en kamrat.\n”Skriv vad du tänker när du ser, läser eller tänker på det här.”"
         - - "2 · Skriv\n3–⁠8 min"
-          - "Starta klockan och skriv själv den första minuten.\n”Låt inte pennan stanna, även när det är trögt.”"
+          - "Starta klockan. Skriv själv den första minuten i pass 1–⁠10.\n”Låt inte pennan stanna, även när det är trögt.”"
         - - "3 · Dela\n5 min"
           - "Eleverna stryker under en rad och läser den för en kamrat. Den som läste berättar eller skriver en rad till.\nKamraten: ”Berätta mer om …”"
     not: "När pennan stannar. Den som inte har börjat efter en minut: ”Vad var din första tanke?” Skriv svaret som elevens första rad. Den som frågar om stavningen: ”Skriv det som du hör det, och sätt prickar under.” Den som suddar: ”Stryk över och skriv vidare.” Den som är utan idé: ”Ta ett kort ur högen, eller skriv om något annat.”"

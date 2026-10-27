@@ -182,7 +182,7 @@ export function tolkaSteg(text) {
  */
 export function veckorI(text) {
   if (typeof text !== 'string') return null;
-  const m = text.replace(/\u2060/g, '').trim().toLowerCase().match(new RegExp(String.raw`^vecka (\d+)(?:${STRECK}(\d+))?$`, 'u'));
+  const m = utanFogar(text).trim().toLowerCase().match(new RegExp(String.raw`^vecka (\d+)(?:${STRECK}(\d+))?$`, 'u'));
   if (!m) return null;
   const fran = Number(m[1]), till = Number(m[2] ?? m[1]);
   return till >= fran ? { fran, till } : null;
@@ -195,7 +195,7 @@ export function veckorI(text) {
  * @param {unknown} text
  */
 export function radensVeckor(text) {
-  const m = String(text ?? '').replace(/\u2060/g, '').trim().match(new RegExp(String.raw`^(?:vecka\s+)?(\d+(?:${STRECK}\d+)?)(?=\s|$)`, 'iu'));
+  const m = utanFogar(text).trim().match(new RegExp(String.raw`^(?:vecka\s+)?(\d+(?:${STRECK}\d+)?)(?=\s|$)`, 'iu'));
   return m ? veckorI(`vecka ${m[1]}`) : null;
 }
 
@@ -494,7 +494,7 @@ export function rollensVeckor(d, ur) {
   return ut;
 }
 // Text som jämförs ordagrant: utan ordfogar och med ett blanksteg mellan orden.
-const ordagrant = (s) => String(s).replace(/\u2060/g, '').replace(/\s+/g, ' ').trim();
+const ordagrant = (s) => utanFogar(s).replace(/\s+/g, ' ').trim();
 /**
  * Planens egna texter citerar metoden (sajtens K-521; Niclas 2026-10-25: "att saker tas alltid från en rot och att den är
  * 1-1 med metodens kort"): varje mening i plan.passen, plan.fore, plan.justera, plan.upprepa och stöden för valen står
@@ -562,7 +562,7 @@ export function versionsvaletsFel(d) {
 export const utanFogar = (s) => String(s ?? '').replace(/[\u2060\u00ad]/g, '');
 /** En versions namn eller ett märke i en jämförelse: utan ordfogar, med ett mellanslag mellan orden och med små bokstäver,
  * så att "I åk 6–7" med en ordfog är versionen Åk 6–7 (sajtens K-569). */
-export const versionsform = (s) => utanFogar(s).replace(/\s+/g, ' ').trim().toLocaleLowerCase('sv');
+export const versionsform = (s) => ordagrant(s ?? '').toLocaleLowerCase('sv');
 
 /**
  * Texten som den gäller en version i planens val (sajtens K-576): en rad eller mening som börjar med "I <en annan version>"
@@ -1692,7 +1692,7 @@ export function passetsVisadeRoller(plan, p, passen) {
 // (varianternasFel), och planen och kalendern visar passet de veckorna med variantens delar (passetsBeskrivning).
 
 /** En dels tid utan "min", som i passets rader och kalendern: "0–3". @param {string} tid */
-export const delensTid = (tid) => tid.replace(/\u2060/g, '').replace(/\s*min$/, '');
+export const delensTid = (tid) => utanFogar(tid).replace(/\s*min$/, '');
 /**
  * En variant som metodens sida, Word, lathunden och lektionskortet skriver den: "Vecka 1–3: passet är bara listan, med
  * modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning 14–15." En variant för passets längd ändrar bara
@@ -1882,7 +1882,8 @@ export function faltetsDelar(text) {
     const e = delar.length ? r.match(/^Efter passet\.\s*(.*)$/u) : null;
     if (m) delar.push({ tid: `${m[1]}–${m[2]} min`, fas: m[3].trim(), vad: m[4].trim(), mer: [] });
     else if (e) efter = [efter, e[1].trim()].filter(Boolean).join(' ');
-    else if (!delar.length) fore.push({ namn: FORE_PASSET, nar: '', vad: r, mer: [] });
+    // En rad före delarna som själv börjar med "Före passet." får inte etiketten två gånger (riggens leverans 2026-10-27).
+    else if (!delar.length) fore.push({ namn: FORE_PASSET, nar: '', vad: stor(r.replace(/^Före passet\.\s*/u, '')), mer: [] });
     else if (efter) efter += ` ${r}`;
     else delar[delar.length - 1].vad += ` ${r}`;
   }

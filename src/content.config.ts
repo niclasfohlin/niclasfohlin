@@ -502,7 +502,9 @@ const metodensFalt = z.strictObject({
       langdval: z.strictObject({ text, mer: text }).optional(),
       // Stödet för antalet veckor när längden beror på något metoden säger, som boken i Chambers boksamtal, med planens
       // förval i veckor inom metodens period (Rimligheten 2026-10-26: fem veckor räckte inte till någon bok).
-      veckoval: z.strictObject({ text, mer: text, forval: z.number().int().min(1).max(52).optional() }).optional(),
+      // langder: antalen veckor att välja, när metoden har bestämda, som Kortskrivnings omgångar om sex veckor (riggens
+      // leverans 2026-10-27: knapparna sa 6, 10 och 14).
+      veckoval: z.strictObject({ text, mer: text, forval: z.number().int().min(1).max(52).optional(), langder: z.array(z.number().int().min(1).max(52)).min(2).optional() }).optional(),
       // versionsval: ett val i planens formulär i nivåvalets form, som projektet i Värdeskapande, sagans väg i Sagoboken och
       // ramen i Berättelseramen (K-576; Niclas 2026-10-27 sa ja till valen som knappar och ser bilder först). rubrik är
       // valets namn i formuläret, text och mer stödet för valet. Varje version har ett namn, och kan ha sina veckor, rader

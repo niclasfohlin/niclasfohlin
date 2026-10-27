@@ -13,7 +13,7 @@ import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare'
 import { metodensLektionskort } from './lektionskort';
 import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
-import { arSaksord, forstaLedet, forstaOrdet, slugAv, veckorI, versionensVecka, versionsform } from './standard/index.js';
+import { arSaksord, forstaLedet, forstaOrdet, sakdelar, sakspann, slugAv, veckorI, versionensVecka, versionsform } from './standard/index.js';
 
 /**
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
@@ -65,6 +65,19 @@ const ledensFormer = (vad: string) => {
 // Ett namn som är ett ord för en sak (Lyssningsbladet, Samtalsreglerna) hittas också med liten bokstav; ett annat namn,
 // som "Min huvudperson", bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden).
 const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) ? {} : { versal: true }), ...extra });
+
+/**
+ * Sakerna som texterna nämner, i sakernas ordning: planens länkar (planensSaker i src/lib/insatsplan.ts) och tabellerna som
+ * får egna filer (planensTabeller i src/lib/sakfiler.ts) väljs här, på ett ställe. Ett spann, som "Bildserie 2–6", bär
+ * varje sak i spannet, så att planen kan länka dem var för sig; namnet är ett eller två ord, eller det sista ordet när ett
+ * ord med stor bokstav står före, som i "Laminerat Bildserie 1–6".
+ */
+export function sakernaI(texter: string[], saker: MetodSak[]): MetodSak[] {
+  const anvanda = new Set(texter.flatMap((t) => sakdelar(t, saker).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
+  const spann = new Set(texter.flatMap((t) => sakspann(t).flatMap((x) => x.namn.flatMap((n) => x.nummer.map((nr) => `${n} ${nr}`)))));
+  saker.forEach((s, i) => { if (spann.has(s.namn)) anvanda.add(i); });
+  return saker.filter((_, i) => anvanda.has(i));
+}
 
 /** Metodens saker: materialets ramar, mallarna, snabbmallen, lektionskorten, lathunden, bankens texter och verktygen. */
 export function metodensSaker(d: MetodData, id: string, version?: string): MetodSak[] {
