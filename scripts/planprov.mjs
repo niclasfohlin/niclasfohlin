@@ -789,6 +789,9 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   const brPlan = s.planera(s.metodplan(br).plan, brVal);
   const brKal = s.kalenderfil({ titel: 'Berättelseram', uppfoljning: [], fokus: [], extraPass: { datum: '2026-10-27', text: 'Ramen fylls i.' } }, brPlan, { id: 'ab', lank: () => 'https://x', nu: new Date(Date.UTC(2026, 9, 1)) });
   ska('det extra passet: dagen veckan före pass 1, förbi ett lov, och i kalendern', s.extraPassetsDag(brPlan, brVal) === '2026-10-27' && s.extraPassetsDag(brPlan, { ...brVal, lov: [s.veckonyckel('2026-10-26')] }) === '2026-10-20' && brKal.includes('det extra passet före pass 1') && brKal.includes('DTSTART;VALUE=DATE:20261027'), [s.extraPassetsDag(brPlan, brVal), s.extraPassetsDag(brPlan, { ...brVal, lov: [s.veckonyckel('2026-10-26')] })]);
+  // En version med ett spann i namnet, som åk 4–5, känns igen också med riggens ordfog i märket (K-569).
+  const ak = ['Åk 4–5', 'Åk 6–7'];
+  ska('versionen åk 4–5 och åk 6–7 med ordfog i märket', s.iVersionen('Läs. I åk 6–⁠7 är läsaren rektorn. I åk 4–5 är det Jonas.', 'Åk 4–5', ak) === 'Läs. I åk 4–5 är det Jonas.' && s.faltetIVersionen('Pass 9 i åk 6–⁠7', 'Åk 6–7')?.egen === true && s.versionensVecka('Åk 6–⁠7 vecka 2', 'Åk 6–7', ak) === 'vecka 2' && s.iVersionensKolumner([{ kolumn: 'Läsaren i åk 6–⁠7', text: 'R' }], 'Åk 4–5', ak).length === 0);
   // Eleverna först i varje händelse, när läraren har skrivit in dem, och en elev som kom senare från sin dag (Niclas
   // 2026-10-27).
   const elevKal = (elever) => s.kalenderfil({ titel: 'B', uppfoljning: [], fokus: [] }, brPlan, { id: 'ab', lank: () => 'https://x', nu: new Date(Date.UTC(2026, 9, 1)), elever });
@@ -1473,8 +1476,9 @@ function provaSidan(metodId, saker, kursveckor = {}) {
   if (!existsSync(sida)) return;
   const html = readFileSync(sida, 'utf8');
   const { id } = trad(html);
-  // Metodens avsnitt och tabeller (slag avsnitt och tabell) är text som skrivs ut med metoden, och prövas inte här.
-  const mal = [...(saker ?? []).filter((x) => !x.slag).flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]), ...Object.values(kursveckor)];
+  // Metodens avsnitt (slag avsnitt) är text som skrivs ut med metoden, och prövas inte här. En tabell som planen leder till
+  // har sin egen fil (Niclas 2026-10-27: "Skrivdragen i tabell kunde inte laddas ner med en knapp").
+  const mal = [...(saker ?? []).filter((x) => x.slag !== 'avsnitt').flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]), ...Object.values(kursveckor)];
   const namnFor = new Map();
   const nyttNamn = (adress, namn) => { const a = adress.split('#')[1]; if (a) namnFor.set(a, [...(namnFor.get(a) ?? []), namn]); };
   for (const x of saker ?? []) for (const a of [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]) nyttNamn(a, x.namn);

@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { arDelensTid, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { arDelensTid, utanFogar, versionsform, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
@@ -468,7 +468,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
   // En rad i uppföljningen vars När börjar med en annan version, som "I sex steg: pass 26", står inte med (K-576, Sagokollen).
   const uppfRader = (d.uppfoljning?.rader ?? []).filter((r) => iV(r.nar));
   // I sin egen version heter raden utan märket: "I fyra steg: pass 25 och 27" blir "Pass 25 och 27".
-  const utanMarket = (t: string) => (version ? stor(t.replace(new RegExp(`^(?:i|med)\\s+${skyddaRegex(version)}\\s*:\\s*`, 'iu'), '')) : t);
+  const utanMarket = (t: string) => (version ? stor(utanFogar(t).replace(new RegExp(`^(?:i|med)\\s+${skyddaRegex(utanFogar(version))}\\s*:\\s*`, 'iu'), '')) : t);
   // En kurs med veckor har veckans titel i metoden, och den är veckans rubrik i planen när progressionen inte har en egen.
   const kurs = kursensVeckor(d, m.id, version);
   const bank = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? await planensBank(m) : undefined;
@@ -676,7 +676,7 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
       for (const { del, f } of falten) if (/\d\s*[–-]\u2060?\s*\d+\s*min/.test(f.text) && !faltetsDelar(f.text)) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen rad som "N–M min. Delens namn: …".`);
       for (const { del, f } of falten) if (!faltetsDelar(f.text) && !faltetsSkillnader(f.text, [])) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen text.`);
       // Ett fält som "Pass 9 i sex steg" gäller en version i planens val (K-576).
-      for (const { del, f } of falten) { const x = f.rubrik.match(/ i (.+)$/i)?.[1]; if (x && !versionernasNamn(m.data).some((n) => n.toLocaleLowerCase('sv') === x.toLocaleLowerCase('sv'))) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, gäller "${x}", som inte är en version i plan.versionsval.`); }
+      for (const { del, f } of falten) { const x = f.rubrik.match(/ i (.+)$/i)?.[1]; if (x && !versionernasNamn(m.data).some((n) => versionsform(n) === versionsform(x))) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, gäller "${x}", som inte är en version i plan.versionsval.`); }
     }
     // Kursens pass räknas i veckor med ett fast antal pass i veckan, eller som planens i en period i pass (K-585). Fält som
     // "Dag 1" är veckans pass efter platsen i veckan och räknar inga kursens pass (Värdeskapande, K-576).

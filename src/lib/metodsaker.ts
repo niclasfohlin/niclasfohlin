@@ -13,7 +13,7 @@ import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare'
 import { metodensLektionskort } from './lektionskort';
 import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
-import { arSaksord, forstaLedet, forstaOrdet, slugAv, veckorI, versionensVecka } from './standard/index.js';
+import { arSaksord, forstaLedet, forstaOrdet, slugAv, veckorI, versionensVecka, versionsform } from './standard/index.js';
 
 /**
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
@@ -80,7 +80,7 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   const nivaNamn = new Map((bank?.nivaer ?? []).map((n) => [n.namn, n.slug]));
   const perNamn = new Map<string, { adress: string; niva?: string; veckor?: number[]; oversikt?: boolean; version?: string }[]>();
   const versioner = versionernasNamn(d);
-  const egen = (version ?? versioner[0] ?? '').toLocaleLowerCase('sv');
+  const egen = versionsform(version ?? versioner[0]);
   ramar.forEach((r, ri) => {
     // Nivåernas översikter heter som nivåerna, och en nivå är ett urval, ingen sak. En översikt med ett namn och nivån efter
     // kolon, som "Lärarens sidor: Mellan", är en sak på varje nivå (länkgranskningen 2026-10-25: "sidan om den under
@@ -91,7 +91,7 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     if (!namn) return;
     const adress = bank?.handledning === ri ? `${sida}/texter/lararhandledning` : `${sida}#${ramAnkare[ri]}`;
     const veckor = veckornaI(efter);
-    const iVersion = efter ? versioner.find((v) => v.toLocaleLowerCase('sv') === efter.toLocaleLowerCase('sv'))?.toLocaleLowerCase('sv') : undefined;
+    const iVersion = efter ? versionsform(versioner.find((v) => versionsform(v) === versionsform(efter))) || undefined : undefined;
     perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}), ...(oversikt ? { oversikt } : {}), ...(iVersion ? { version: iVersion } : {}) }]);
     // En ram som heter "<sak>, vecka N: <titel>", som Ordverkstads "Förlaga, vecka 3: …", eller "<sak>, <version> vecka N",
     // som Värdeskapandes "Inbjudan, Skattjakten vecka 1: …", är saken för den veckan, i sin version, och "förlagan" leder till
@@ -99,7 +99,7 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     // länkar).
     const mv = namn.match(/^(.+?),\s*(?:(.+?)\s+)?vecka\s+(\d+(?:\s*[–-]\s*\d+)?)$/iu);
     const vv = mv ? veckornaI(`vecka ${mv[3]}`) : undefined;
-    if (mv && vv && (!mv[2] || mv[2].toLocaleLowerCase('sv') === (version ?? versionernasNamn(d)[0] ?? '').toLocaleLowerCase('sv'))) perNamn.set(mv[1], [...(perNamn.get(mv[1]) ?? []), { adress, veckor: vv }]);
+    if (mv && vv && (!mv[2] || versionsform(mv[2]) === egen)) perNamn.set(mv[1], [...(perNamn.get(mv[1]) ?? []), { adress, veckor: vv }]);
   });
   // En ram med lektioner, som Ordverkstads Till läraren: veckorna, har en sida per vecka med knappen Skriv ut veckan, och
   // ramens namn leder i planen till veckans sida, och utan vecka till den första (K-553: planens text om förberedelsen
@@ -161,7 +161,7 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     if (iBanken(bank, ri)) return;
     const bas = forstaLedet(r.rubrik).split(',')[0].trim();
     const m = bas.match(/^(.+?) i (.+)$/u);
-    if (!m || m[2].toLocaleLowerCase('sv') !== egen || saker.some((s) => s.namn.toLowerCase() === m[1].toLowerCase())) return;
+    if (!m || versionsform(m[2]) !== egen || saker.some((s) => s.namn.toLowerCase() === m[1].toLowerCase())) return;
     saker.push(sak(m[1], `${sida}#${ramAnkare[ri]}`));
   });
   // Rammens hela namn, som "Min bok: sidan" och "Till läraren: den korta berättelsen", leder till just den ramen, när flera
@@ -244,8 +244,9 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   // händelserna?": en text som säger rubriken leder dit (länkgranskningen 2026-10-25; STIL.md under Hänvisningar: en
   // hänvisning till en sida som sajten har är en länk dit). Namnet är rubrikens första led, eller hela rubriken när det
   // första ledet är ett pass eller en vecka i ordningen ("Pass 1: syftet …"), som inte länkas för sig. Ett namn som en sak
-  // redan har blir inget nytt. Avsnitten och tabellerna är metodens text, som skrivs ut med metoden, så planprovet kräver
-  // ingen knapp under dem (slag); kursintyget är ett blad, med sin egen fil (src/lib/sakfiler.ts). En rubrik som börjar med
+  // redan har blir inget nytt. Avsnitten är metodens text, som skrivs ut med metoden, så planprovet kräver ingen knapp
+  // under dem (slag); en tabell som planen leder till har sin egen fil och knapp, och kursintyget är ett blad, med sin egen
+  // fil (src/lib/sakfiler.ts). En rubrik som börjar med
   // passet, veckan eller nivån, som "Veckan: från material till siffror", heter hela rubriken, så att "Veckans mening" inte
   // blir en länk dit (länkgranskningen av omgång 3 2026-10-26).
   const tagna = new Set(saker.map((s) => s.namn.toLowerCase()));

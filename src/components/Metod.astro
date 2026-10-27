@@ -146,6 +146,8 @@ for (const g of bladgrupper(d, id)) { const b = bilderPaBordet.find((x) => x.bil
 // I en metod med plan har varje sak som planen kan leda till en egen fil, och knappen står under saken: sist i ramen, under
 // veckan, under räknebladet och under mallen (src/lib/sakfiler.ts, Sakknapp.astro, K-499).
 const saker = sakernasPlatser(sakfiler(d, id));
+// En tabell som planen leder till har sin egen fil och knapp direkt under sig (src/lib/sakfiler.ts), utom på en enhets sida.
+const tabellensFil = (t: (typeof d.tabeller)[number]) => (undersida ? undefined : saker.tabell.get(d.tabeller.indexOf(t)));
 // Lektionskorten (src/lib/lektionskort.ts): bredvid Öppna lathunden i menyn och vid lektionen i texten, först på platsen,
 // så att knappen står direkt efter det som beskriver lektionen och före en film på samma plats.
 const lektionskort = metodensLektionskort(d, id);
@@ -348,6 +350,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
+      {tabellensFil(t) && <Sakknapp fil={tabellensFil(t)!} metod={d.titel} />}
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -417,6 +420,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
+      {tabellensFil(t) && <Sakknapp fil={tabellensFil(t)!} metod={d.titel} />}
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -455,6 +459,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
+      {tabellensFil(t) && <Sakknapp fil={tabellensFil(t)!} metod={d.titel} />}
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -479,6 +484,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
+      {tabellensFil(t) && <Sakknapp fil={tabellensFil(t)!} metod={d.titel} />}
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -523,6 +529,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
+      {tabellensFil(t) && <Sakknapp fil={tabellensFil(t)!} metod={d.titel} />}
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -574,6 +581,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
+      {tabellensFil(t) && <Sakknapp fil={tabellensFil(t)!} metod={d.titel} />}
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -663,6 +671,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
+      {tabellensFil(t) && <Sakknapp fil={tabellensFil(t)!} metod={d.titel} />}
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>

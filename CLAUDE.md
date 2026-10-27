@@ -69,7 +69,7 @@ Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil e
 | Word-filen med allt: beskrivning, planeringsmallar och lathund | `/stodundervisning/<id>.docx` |
 | Word-filen med bara metoden, utan materialet | `/stodundervisning/<id>-metoden.docx` |
 | Delarna var för sig | `<id>-mallar.docx` och `<id>-lathund.docx` |
-| I en metod som kan planeras: varje sak som planen leder till för sig, en ram, en vecka, ett räkneblad eller en mall, med en knapp under saken på metodens sida (METODER.md under Utskriften, och PLANERA.md under Vad metoden behöver) | `/stodundervisning/<id>-blad-<namn>.pdf` och `.docx`, `<id>-vecka-<n>` och `<id>-mall-<namn>` |
+| I en metod som kan planeras: varje sak som planen leder till för sig, en ram, en vecka, ett räkneblad, en mall eller en tabell, med en knapp under saken på metodens sida (METODER.md under Utskriften, och PLANERA.md under Vad metoden behöver) | `/stodundervisning/<id>-blad-<namn>.pdf` och `.docx`, `<id>-vecka-<n>`, `<id>-mall-<namn>` och `<id>-tabell-<namn>` |
 | Flera valda metoder i en Word-fil | sätts ihop av det läraren väljer i metodbanken, `/stodundervisning/` |
 | Lathundens PowerPoint, med filmerna på en bild först och sedan lathundens fyra bilder kant till kant | `/stodundervisning/<id>-lathund.pptx` |
 | Filmerna som mp4 i en zip-fil | `/stodundervisning/<id>-filmer.zip` |

@@ -9,7 +9,9 @@
 //   en lästext utanför banken, som Högläsning i pars provtexter, är en sådan ram;
 //   en vecka i en ram med lektioner (veckorna i De fyra räknesätten), veckans sida för sig;
 //   ett räkneblad med namn (Addition 1) på sitt A4, och en ram med flera sådana alla bladen i en fil, under det sista;
-//   en mall under Mallar att skriva ut, och diplomet eller kursintyget.
+//   en mall under Mallar att skriva ut, och diplomet eller kursintyget;
+//   en tabell i metodens text som planen leder till: en tabell som planens text nämner, passets tabell och uppföljningens
+//   (Niclas 2026-10-27: "Skrivdragen i tabell kunde inte laddas ner med en knapp").
 // Regeln har inga egna fält: en metod som får sin plan får filerna av sig själv, och planprovet stannar på en sak som
 // planen leder till utan knapp och på en fil utan knapp (scripts/planprov.mjs). En lektion i en serie, som Ljudleks, planeras
 // i seriens planerare, som leder till lektionens saker, så lektionen har filerna också (verifieringen 2026-10-27: under
@@ -22,10 +24,11 @@ import { bladgrupper, egnaBlad, metodensBladmaterial } from './bladmaterial';
 import { bokhandledningen, lararhandledningar } from './handledning';
 import { bladNamn, forstaLed } from './karta';
 import { faktatexter, strukturAv, textparAv } from './ramform';
-import { allaAntal, kortnamn, slugAv, stor } from './standard/index.js';
+import { allaAntal, kortnamn, sakdelar, slugAv, stor, visadeTexter } from './standard/index.js';
+import { metodensSaker, sidansAnkare } from './metodsaker';
 import { ljudform } from './ljudkort';
 
-export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall' | 'diplom';
+export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall' | 'diplom' | 'tabell';
 /** En saks fil: namnet utan ändelse, sakens namn (dokumentets titel och skärmläsarens), var saken står i metodens fil, hur
  * många sidor filen ska ha (scripts/bankpdf.mjs prövar det), knappens ord när utskriften görs direkt och annars, och om
  * alla sidorna ligger. */
@@ -37,6 +40,7 @@ export interface Sakfil {
   di?: number;
   listor?: number[];
   mi?: number;
+  ti?: number;
   minst: number;
   hogst: number;
   text: string;
@@ -103,6 +107,14 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
     const ark = m.typ === 'matta' && m.enPerSida ? (m.kolumner ?? []).length : 0;
     ut.push({ namn: `${id}-mall-${slugAv(m.rubrik)}`, titel: m.rubrik, slag: 'mall', mi, minst: ark || 1, hogst: ark || 1, text: ark ? 'Skriv ut arken' : 'Skriv ut bladet', pdftext: ark ? 'Arken som pdf' : 'Bladet som pdf', liggande: !ark });
   });
+  // Tabellerna som planen leder till, var och en med sin rubrik, texten, tabellen och noten, och så många sidor som raderna
+  // kan ta.
+  const tabellrubriker = d.tabeller.map((t) => t.rubrik);
+  for (const ti of planensTabeller(d, id)) {
+    const t = d.tabeller[ti];
+    const namn = kortnamn(t.rubrik, tabellrubriker);
+    ut.push({ namn: `${id}-tabell-${slugAv(t.rubrik)}`, titel: t.rubrik, slag: 'tabell', ti, minst: 1, hogst: 2 + Math.ceil(t.rader.length / 6), text: `Skriv ut ${namn}`, pdftext: `${namn} som pdf`, liggande: false });
+  }
   // Varje fil har ett eget namn, också bland bladens filer (egnaBlad och bladgrupper), så att ingen fil skriver över en annan.
   const upptagna = new Set([...egna.map((b) => b.namn), ...bladgrupper(d, id).map((g) => g.namn)]);
   for (const f of ut) {
@@ -121,5 +133,23 @@ export function sakernasPlatser(filer: Sakfil[]) {
     alla: new Map(filer.filter((f) => f.slag === 'rakneblad' && f.listor!.length > 1).map((f) => [`${f.ri}-${f.listor!.at(-1)}`, f])),
     mall: new Map(filer.filter((f) => f.slag === 'mall').map((f) => [f.mi!, f])),
     diplom: filer.find((f) => f.slag === 'diplom'),
+    tabell: new Map(filer.filter((f) => f.slag === 'tabell').map((f) => [f.ti!, f])),
   };
+}
+
+/** Tabellerna i metodens text som planen leder till: de som planens text nämner (metodensSaker, som planen länkar med), och
+ * passens och uppföljningens tabeller, som planen visar delarna ur. Ett pass utan tidsschemats delar leder till tabellen i
+ * sin ur. En lektion i en serie, som Ljudleks, planeras i seriens planerare, som leder till lektionens tabeller, som
+ * Ordbanken och Ljudstarten, så lektionen har filer för alla sina (planprovet 2026-10-27). Andra metoder utan plan har inga. */
+export function planensTabeller(d: MetodData, id: string): number[] {
+  if (!!d.serie && d.formaga !== undefined && !d.plan) return d.tabeller.map((_, ti) => ti);
+  if (!d.plan) return [];
+  const saker = metodensSaker(d, id);
+  const { tabellAnkare } = sidansAnkare(d);
+  const namnda = new Set(visadeTexter(d).flatMap((t) => sakdelar(t, saker).flatMap((x) => (x.sak !== undefined && saker[x.sak].slag === 'tabell' ? [saker[x.sak].adress] : []))));
+  const iPlanen = new Set([
+    ...(d.plan.passen ?? []).flatMap((p) => [p.tabell, p.utanTidsschema ? p.ur?.tabell : undefined]),
+    ...(d.uppfoljning?.rader ?? []).map((r) => r.tabell),
+  ].filter(Boolean));
+  return d.tabeller.flatMap((t, ti) => (namnda.has(`/stodundervisning/${id}#${tabellAnkare.get(t)}`) || iPlanen.has(t.rubrik) ? [ti] : []));
 }

@@ -558,6 +558,12 @@ export function versionsvaletsFel(d) {
   return fel;
 }
 
+/** Ett namn utan ordfogar och mjuka bindestreck, som riggen sätter i ett spann som "åk 4–5". */
+export const utanFogar = (s) => String(s ?? '').replace(/[\u2060\u00ad]/g, '');
+/** En versions namn eller ett märke i en jämförelse: utan ordfogar, med ett mellanslag mellan orden och med små bokstäver,
+ * så att "I åk 6–7" med en ordfog är versionen Åk 6–7 (sajtens K-569). */
+export const versionsform = (s) => utanFogar(s).replace(/\s+/g, ' ').trim().toLocaleLowerCase('sv');
+
 /**
  * Texten som den gäller en version i planens val (sajtens K-576): en rad eller mening som börjar med "I <en annan version>"
  * eller "Med <en annan version>", som Sagobokens "I sex steg: …" och Berättelseramens "Med Hunden som försvann …", tas
@@ -568,9 +574,9 @@ export function versionsvaletsFel(d) {
  */
 export function iVersionen(text, namn, alla) {
   if (!namn || !text) return text ?? '';
-  const andra = alla.filter((x) => x.toLocaleLowerCase('sv') !== namn.toLocaleLowerCase('sv'));
+  const andra = alla.filter((x) => versionsform(x) !== versionsform(namn));
   if (!andra.length) return text;
-  const markt = (s) => andra.some((a) => new RegExp(`^(?:i|med)\\s+${skyddaRegex(a)}(?![\\p{L}\\p{N}])`, 'iu').test(s.trim()));
+  const markt = (s) => andra.some((a) => new RegExp(`^(?:i|med)\\s+${skyddaRegex(versionsform(a))}(?![\\p{L}\\p{N}])`, 'iu').test(versionsform(s)));
   return String(text).split('\n').filter((r) => !markt(r)).map((r) => meningarna(r).filter((m) => !markt(m)).join(' ')).filter((r) => r.trim()).join('\n');
 }
 
@@ -584,9 +590,9 @@ export function iVersionen(text, namn, alla) {
  */
 export function versionensVecka(led, namn, alla) {
   const t = String(led ?? '').trim();
-  const egen = alla.find((x) => t.toLocaleLowerCase('sv').startsWith(`${x.toLocaleLowerCase('sv')} `));
+  const egen = alla.find((x) => versionsform(t).startsWith(`${versionsform(x)} `));
   if (!egen) return t;
-  return egen.toLocaleLowerCase('sv') === (namn ?? alla[0] ?? '').toLocaleLowerCase('sv') ? t.slice(egen.length).trim() : null;
+  return versionsform(egen) === versionsform(namn ?? alla[0]) ? utanFogar(t).slice(utanFogar(egen).length).trim() : null;
 }
 
 /**
@@ -600,7 +606,7 @@ export function versionensVecka(led, namn, alla) {
 export function faltetIVersionen(rubrik, namn) {
   const m = String(rubrik).match(/^(pass|dag) (\d+) i (.+)$/i);
   if (!m) return { rubrik, egen: false };
-  return m[3].toLocaleLowerCase('sv') === (namn ?? '').toLocaleLowerCase('sv') ? { rubrik: `${m[1]} ${m[2]}`, egen: true } : null;
+  return versionsform(m[3]) === versionsform(namn) ? { rubrik: `${m[1]} ${m[2]}`, egen: true } : null;
 }
 
 /**
@@ -615,9 +621,9 @@ export function faltetIVersionen(rubrik, namn) {
  */
 export function iVersionensKolumner(celler, namn, alla) {
   return celler.flatMap((c) => {
-    const v = alla.find((n) => c.kolumn.toLocaleLowerCase('sv').endsWith(` i ${n.toLocaleLowerCase('sv')}`));
+    const v = alla.find((n) => versionsform(c.kolumn).endsWith(` i ${versionsform(n)}`));
     if (!v) return [c];
-    return v.toLocaleLowerCase('sv') === (namn ?? alla[0] ?? '').toLocaleLowerCase('sv') ? [{ ...c, kolumn: c.kolumn.slice(0, -(v.length + 3)) }] : [];
+    return versionsform(v) === versionsform(namn ?? alla[0]) ? [{ ...c, kolumn: utanFogar(c.kolumn).slice(0, -(utanFogar(v).length + 3)) }] : [];
   });
 }
 

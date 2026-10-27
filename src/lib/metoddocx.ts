@@ -3185,13 +3185,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     ut.push(h2(t.rubrik));
     if (t.text) ut.push(stycke(t.text, { hallIhop: true }));
     centraltVid({ tabell: t.rubrik }, true);
-    const forsta = 2300;
-    const rest = Math.floor((BREDD - forsta) / (t.kolumner.length - 1));
-    const bredder = t.kolumner.map((_, i) => (i === 0 ? forsta : i === t.kolumner.length - 1 ? BREDD - forsta - rest * (t.kolumner.length - 2) : rest));
-    // En kort fri tabell (högst fem rader) hålls på en sida; en längre får bryta med rubrikraden upprepad. Kartan länkar
-    // till veckorna och bladen (src/lib/karta.ts).
-    ut.push(...rubrikTabell(t.kolumner, t.rader, bredder, { radrubrik: false, hallIhop: t.rader.length <= 5, karta: t.karta && karta ? karta.lankar : undefined }));
-    if (t.not) ut.push(...ruta('', t.not));
+    ut.push(...friTabellensBarn(t, t.karta && karta ? karta.lankar : undefined));
     filmVid({ tabell: t.rubrik });
   };
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-inledning')) friTabell(t);
@@ -5152,6 +5146,16 @@ export function ramarDokument(post: MetodPost, fil: { ramar: number[]; rubrik: s
 // räkneblad ur en ram eller en mall, i en egen fil som knappen under saken på metodens sida skriver ut som pdf. Sidorna ritas
 // av samma kod som i planeringsmallarna, så att bladet är detsamma där, och sidfoten bär upphovet och adressen utan
 // sidnummer, som ett fristående blad. Titeln, som står i fliken när pdf:en öppnas, börjar med sakens namn.
+// En fri tabell i metodens text, med noten, i metodens fil och i tabellens egen fil (sakDokument). En kort fri tabell (högst
+// fem rader) hålls på en sida; en längre får bryta med rubrikraden upprepad. Kartan länkar till veckorna och bladen
+// (src/lib/karta.ts).
+function friTabellensBarn(t: MetodData['tabeller'][number], kartlankar?: KartaWord): Barn[] {
+  const forsta = 2300;
+  const rest = Math.floor((BREDD - forsta) / (t.kolumner.length - 1));
+  const bredder = t.kolumner.map((_, i) => (i === 0 ? forsta : i === t.kolumner.length - 1 ? BREDD - forsta - rest * (t.kolumner.length - 2) : rest));
+  return [...rubrikTabell(t.kolumner, t.rader, bredder, { radrubrik: false, hallIhop: t.rader.length <= 5, karta: kartlankar }), ...(t.not ? ruta('', t.not) : [])];
+}
+
 export function sakDokument(post: MetodPost, fil: Sakfil, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;
   FRISTAENDE_BLAD = true;
@@ -5160,6 +5164,8 @@ export function sakDokument(post: MetodPost, fil: Sakfil, o: { bas: string; resu
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
   const sektioner = fil.slag === 'diplom' && d.diplom
     ? delaSektioner([...medElevtypsnitt(harElevtypsnitt(d), () => diplomBarn(d.diplom!))], `${d.titel} · ${SAJT}`, adress)
+    : fil.slag === 'tabell'
+    ? delaSektioner([h2(d.tabeller[fil.ti!].rubrik), ...(d.tabeller[fil.ti!].text ? [stycke(d.tabeller[fil.ti!].text!, { hallIhop: true })] : []), ...friTabellensBarn(d.tabeller[fil.ti!])], `${d.titel} · ${SAJT}`, adress)
     : fil.slag === 'mall'
     ? mallensSidor(d.mallar[fil.mi!], post.id, harElevtypsnitt(d)).flatMap((sida) => delaSektioner(sida.barn, `Mall · ${d.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }))
     : mallBarn(post, o.bas, { bank: fil.slag === 'ram' ? [fil.ri!] : [], figurradVidFigur: true, ...(fil.slag === 'vecka' ? { vecka: { ri: fil.ri!, di: fil.di! } } : fil.slag === 'rakneblad' ? { listor: { ri: fil.ri!, li: fil.listor! } } : {}) })
