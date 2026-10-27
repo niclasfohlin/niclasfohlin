@@ -26,7 +26,7 @@ material:
   - klocka som alla ser
   - lösa papper
   - blad på väggen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 publicerad: 2026-10-14
 relaterade:
   - texttyper-i-grupp
@@ -146,7 +146,7 @@ tabeller:
       - - De yngsta, åk 1–2
         - Skrivboken har ritruta och breda linjer. Eleverna ritar i en minut innan klockan startar. Ord vid bilden är också text. I Dela visar de sidan och läser för en kamrat.
       - - Dator eller diktering
-        - Dokumentet är skrivboken. Eleven raderar inte, gör ny rad vid ”streck” och har skrivlistan på ett löst blad (se Så ser du att det hjälper). Den som dikterar sitter en bit ifrån.
+        - Dokumentet är skrivboken. Eleven raderar inte, byter rad vid ”streck” och har Min skrivlista på ett löst blad (se Så ser du att det hjälper). Den som dikterar sitter en bit ifrån.
   - rubrik: Från delande till en klass med skribenter
     plats: efter-urval
     meny: true
@@ -192,35 +192,66 @@ progression:
     - vecka: Pass 1–10
       fokus: "Ta gärna korten Börja här i ordning. Passen står i Börja här: de tio första passen."
       roll: Du skriver den första minuten, visar din sida först i Dela och lyssnar hos ett par.
+      eleverna: Att säga sin första tanke till en kamrat och börja skriva inom en minut, och att stryka över i stället för att sudda.
     - vecka: Från pass 11
-      fokus: Du slumpar dagens kort. När de flesta börjar inom en minut hoppar ni över första tanken. Den som behöver det säger sin till dig.
+      fokus: Du slumpar dagens kort, och ni hoppar över första tanken. Den som behöver det säger sin till dig. Börjar inte de flesta inom en minut, säger eleverna sin första tanke till en kamrat igen i några pass.
       roll: Ibland skriver du den första minuten, annars sitter du hos den som inte har börjat. I Dela lyssnar du hos ett par.
+      eleverna: Att börja skriva inom en minut utan att säga sin första tanke. Att skriva hela skrivtiden, och att skriva ett ord som det låter och gå vidare.
+      vidare: få i gruppen står över i Dela, i tre pass i rad
     - vecka: När ni är varma i kläderna
-      fokus: När få står över i Dela kan delandet växa (se Från delande till en klass med skribenter).
+      fokus: Delandet kan växa (se Från delande till en klass med skribenter).
       roll: Du väljer steg tillsammans med eleverna och säger vad de gör som skribenter.
+      eleverna: Att själv välja en rad eller en text som fler än kamraten får höra eller läsa.
     - vecka: Veckans sista pass
       fokus: "Eleverna räknar orden (se Så ser du att det hjälper)."
       roll: "Du frågar sist: ”Kom någon på något nytt medan ni skrev?”"
+      eleverna: Att räkna sina ord fram till strecket och skriva fler ord på tre minuter än i början.
     - vecka: Vecka 6
       fokus: Ett pass är Skriv igen, utan kort.
-      roll: "Du frågar: ”Vad går lättare nu än när vi började?”"
+      roll: "I Dela frågar du sist: ”Vad går lättare nu än när vi började?”"
+      eleverna: Att börja direkt utifrån en egen stjärnmärkt text, skriva nytt om samma sak och säga vad som är nytt.
     - vecka: Efter vecka 6
       fokus: Gruppen fortsätter så länge den vill. Eleven kan ta med en stjärnmärkt text till skrivundervisningen.
       roll: Du stämmer av målen, elev för elev.
+      eleverna: Att börja skriva direkt och skriva utan att stanna, också med en stjärnmärkt text i skrivundervisningen.
 uppfoljning:
   rubrik: Så ser du att det hjälper
-  text: "En gång i veckan räknar eleven orden från de tre första minuterna och jämför talet med sitt förra. Ingen jämför sitt tal med någon annans. Passet blir då två till tre minuter längre. Hoppa inte över räkningen, för det är den som är prövad i försök. Talet beror också på kortet. Säg det till eleverna, och ta gärna ett bildkort den dagen. Är skrivtiden tre minuter räknar eleven alla ord."
+  text: "En gång i veckan räknar eleven orden från de tre första minuterna och jämför talet med sitt förra. Ingen jämför sitt tal med någon annans. Passet blir då två till tre minuter längre. Hoppa inte över räkningen, för det är den som är prövad i försök. Talet beror också på kortet. Säg det till eleverna, och ta gärna ett bildkort den dagen. Är skrivtiden tre minuter räknar eleven alla ord. Finns eleven inte med i dina rader efter passen i vecka 6 och är talet i Min skrivlista högre i vecka 6 än i vecka 1, har hen nått målen och kan sluta eller fortsätta så länge gruppen vill. Börjar eleven fortfarande inte inom en minut och är talet inte högre i vecka 6 än i vecka 1, tar du upp det med elevhälsan. Annars fortsätter eleven sex veckor till, och efter vecka 12 stämmer du av igen, med vecka 12 i stället för vecka 6. Har eleven inte nått målen då, tar du upp det med elevhälsan. Lägger eleven fortfarande all kraft på bokstäverna eller stavningen, får hen också undervisning i det, eller ett verktyg som dator eller diktering."
   rader:
     - nar: Veckans sista pass
+      tid: "varje vecka"
       vad: Säg ”streck” när tre minuter har gått. Alla drar ett streck efter sitt sista ord och skriver vidare.
     - nar: När klockan ringer
-      vad: Eleven räknar alla ord fram till strecket, också dem du skrev, fyller i skrivlistan och sätter en stjärna vid veckans favorittext.
+      tid: "varje vecka"
+      vad: Eleven räknar alla ord fram till strecket, också dem du skrev, fyller i Min skrivlista och sätter en stjärna vid veckans favorittext.
     - nar: När de har fyllt i
-      vad: "Be två elever visa dig skrivlistan: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
+      tid: "varje vecka"
+      vad: "Be två elever visa dig Min skrivlista: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
     - nar: Efter varje pass
-      vad: "Skriv en rad i din egen skrivbok: vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, hur många som ännu skrev när klockan ringde, och nästa skrivtid."
+      tid: "varje pass"
+      vad: "Skriv en rad i din egen skrivbok: vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, vilka som slutade före klockan, hur många som stod över i Dela, och nästa skrivtid."
     - nar: Vecka 6
-      vad: "Ett pass är Skriv igen, utan kort: eleven läser en stjärnmärkt text och skriver nytt om samma sak. I Dela säger eleven vad som är nytt."
+      tid: "vecka 6"
+      vad: "Ett pass före veckans sista är Skriv igen. Eleven läser en stjärnmärkt text i stället för Dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
+    - nar: Efter vecka 6
+      tid: "efter"
+      vad: I veckans sista pass i vecka 6 ber du alla visa dig Min skrivlista, inte bara två. Efter passet läser du dina rader från vecka 6.
+plan:
+  nivaval:
+    text: "På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. Välj nivå efter eleverna och hur vuxet kortet ska vara, inte efter årskursen, och se på kortet före passet."
+    mer: Var hittar du skrivkorten?
+  langdval:
+    text: Skrivtiden börjar på tre minuter, och passet är då omkring tio minuter. Skriver de flesta fortfarande när klockan ringer, lägger du till en minut nästa pass, upp till åtta. Slutar de flesta före klockan, tar du bort en minut, som lägst till tre.
+    mer: Passet, del för del
+  veckoval:
+    text: Gruppen fortsätter så länge den vill. Du stämmer av målen, elev för elev.
+    mer: Så växer det över sex veckor
+    forval: 6
+  utvardering:
+    - Finns eleven inte med i dina rader efter passen i vecka 6 och är talet i Min skrivlista högre i vecka 6 än i vecka 1, har hen nått målen och kan sluta eller fortsätta så länge gruppen vill.
+    - Börjar eleven fortfarande inte inom en minut och är talet inte högre i vecka 6 än i vecka 1, tar du upp det med elevhälsan.
+    - Annars fortsätter eleven sex veckor till, och efter vecka 12 stämmer du av igen, med vecka 12 i stället för vecka 6. Har eleven inte nått målen då, tar du upp det med elevhälsan.
+    - Lägger eleven fortfarande all kraft på bokstäverna eller stavningen, får hen också undervisning i det, eller ett verktyg som dator eller diktering.
 mal:
   overgripande: "kunna börja skriva direkt och skriva utan att stanna."
   punkter:
@@ -231,7 +262,7 @@ mal:
 checklista:
   rubrik: Checklista inför första passet
   punkter:
-    - Varje elev har en skrivbok med skrivlistan vikt och inklistrad längst bak, och jag har en egen.
+    - Varje elev har en skrivbok med Min skrivlista vikt och inklistrad längst bak, och jag har en egen.
     - Gruppens kort 1 och kort 1 från en annan nivå går att visa för alla, och klockan syns.
     - Lösa papper och en papperskorg står framme, och ett blad med ”Jag ser …” sitter på väggen.
     - Jag har tänkt ut min första mening till gruppens kort 1.
@@ -242,11 +273,11 @@ grund:
 ramar:
   rubrik: Materialet
   text:
-    - "Här står lektionskortet, de tio första passen och vilka kort som hör till dem. Korten finns på sidan Ta fram ett skrivkort. Skrivlistan finns i planeringsmallarna."
+    - "Här står lektionskortet, de tio första passen och vilka kort som hör till dem. Korten finns på sidan Ta fram ett skrivkort. Min skrivlista finns i planeringsmallarna."
   ramar:
     - rubrik: "Börja här: de tio första passen"
       text:
-        - Varje nivå har tio kort. Kort 1 hör till första passet och kort 10 till det tionde. Tabellen visar vilka korten är och ger en början att låna till varje pass. Efter tabellen står det första passet och det som kommer till i pass 1–10. De tio korten är ett förslag. Du kan när som helst slumpa fram ett eller tio nya kort på sidan Ta fram ett skrivkort och själv ge eleverna en början att låna.
+        - Varje nivå har tio kort. Kort 1 hör till första passet och kort 10 till det tionde. Är kortet i veckans sista pass ett citat, tar du ett bildkort och citatet passet efter. Tabellen visar vilka korten är och ger en början att låna till varje pass. Efter tabellen står det första passet och det som kommer till i pass 1–10. De tio korten är ett förslag. Du kan när som helst slumpa fram ett eller tio nya kort på sidan Ta fram ett skrivkort och själv ge eleverna en början att låna.
       oversikt:
         kolumner:
           - Pass
@@ -407,11 +438,11 @@ lathund:
       - En bunt lösa papper
     uppfoljning:
       - nar: Veckans sista pass
-        vad: Säg ”streck” efter tre minuter. Alla drar ett streck och skriver vidare. När klockan ringer räknar eleven orden före strecket, fyller i skrivlistan, jämför med förra talet och sätter en stjärna vid en text. Sedan Dela. Passet blir två till tre minuter längre.
+        vad: Säg ”streck” efter tre minuter. Alla drar ett streck och skriver vidare. När klockan ringer räknar eleven orden före strecket, fyller i Min skrivlista, jämför med förra talet och sätter en stjärna vid en text. Sedan Dela. Passet blir två till tre minuter längre.
       - nar: Du noterar efter varje pass
-        vad: Vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, hur många som ännu skrev när klockan ringde, och nästa skrivtid.
+        vad: Vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, vilka som slutade före klockan, hur många som stod över i Dela, och nästa skrivtid.
       - nar: Vecka 6
-        vad: Ett pass är Skriv igen, utan kort. Eleven läser en stjärnmärkt text och skriver nytt om samma sak. I Dela säger eleven vad som är nytt.
+        vad: "Ett pass före veckans sista är Skriv igen. Eleven läser en stjärnmärkt text i stället för Dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
 lektionskort:
   - text: "Lektionskortet är passet på ett A4: målet, passet med det du gör och säger, När pennan stannar och de tio första passen. Skriv ut det och ha det framför dig under passet."
 film:

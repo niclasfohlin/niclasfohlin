@@ -79,8 +79,21 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
     const veckor = veckornaI(efter);
     perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}), ...(oversikt ? { oversikt } : {}) }]);
   });
+  // En ram med lektioner, som Ordverkstads Till läraren: veckorna, har en sida per vecka med knappen Skriv ut veckan, och
+  // ramens namn leder i planen till veckans sida, och utan vecka till den första (K-553: planens text om förberedelsen
+  // ledde till ramens rubrik, där ingen knapp står).
+  const { delAnkare } = sidansAnkare(d);
+  const lektionsveckor = new Map<string, Record<string, string>>();
+  ramar.forEach((r, ri) => {
+    if (!r.lektioner) return;
+    const veckor: Record<string, string> = {};
+    r.delar.forEach((del, di) => { const v = veckornaI(forstaLed(del.rubrik)); if (v?.length === 1 && !veckor[v[0]]) veckor[v[0]] = `${sida}#${delAnkare[ri][di]}`; });
+    if (Object.keys(veckor).length) lektionsveckor.set(`${sida}#${ramAnkare[ri]}`, veckor);
+  });
   for (const [namn, platser] of perNamn) {
-    if (platser.length === 1) saker.push(sak(namn, platser[0].adress));
+    const lv = platser.length === 1 ? lektionsveckor.get(platser[0].adress) : undefined;
+    if (lv) saker.push(sak(namn, lv[Object.keys(lv).map(Number).sort((a, b) => a - b)[0]], { veckor: lv }));
+    else if (platser.length === 1) saker.push(sak(namn, platser[0].adress));
     // Samma namn på varje nivå ("Lärarens sidor: Lättläst") leder till nivåns, och samma namn för olika veckor ("Mina
     // lärdomar: vecka 1–2") till veckans; utan nivå eller vecka till den första. Annars leder namnet till den första ramen,
     // som i en serie av blad ("Övningsblad: Addition" och de andra) där den första är början.

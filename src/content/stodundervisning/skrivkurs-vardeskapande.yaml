@@ -29,7 +29,7 @@ material:
   - Mina drag och Kortet till skribenten
   - fotona eller kartan
   - diplom
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 relaterade:
   - skrivkurs-berattelseram
   - texttyper-i-grupp
@@ -74,7 +74,7 @@ tabeller:
     plats: efter-inledning
     meny: true
     karta: true
-    text: "Varje vecka har en egen sida under Till läraren: veckorna, och veckans material står direkt efter sidan."
+    text: "Varje vecka har en egen sida under Till läraren: veckorna, och veckans material står direkt efter sidan. Har ni bara fem veckor, välj Skattjakten."
     kolumner:
       - Veckan
       - Texten och draget
@@ -151,7 +151,7 @@ tabeller:
         - "Eleven ändrar med mentortexten bredvid. Syns det gamla draget, om hen valde ett?"
       - - Ett tredje pass
         - Skriva klart
-        - "Skriv klart, renskriv eller gå klart promenaden. Efter jakten eller besöket läser ni läsarens svar och tar frågorna på sidan Dagen."
+        - "Skriv klart, renskriv eller gå klart promenaden. Behöver ingen det, som ofta i vecka 2, räcker två pass. Efter jakten eller besöket läser ni läsarens svar, tar frågorna på sidan Dagen och gör uppföljningen efter mötet."
   - rubrik: Det du ser och det du gör
     plats: efter-fastnar
     text: "Så här kan det se ut medan eleverna skriver, och så gör du. Skrivstrategier är ett A4 på kursens sida att ha i handen under skrivtiden."
@@ -188,7 +188,7 @@ tabeller:
         - Längre texter, till exempel en berättelse på en sida eller ett uppslag med fler fakta.
       - - Ansvaret
         - Gruppen hittar draget med dig.
-        - Paren hittar och namnger draget själva, och mot slutet tar eleverna med egna mentortexter.
+        - Paren hittar och namnger draget själva.
   - rubrik: Läsarna och tillfället
     plats: efter-urval
     kolumner:
@@ -247,7 +247,7 @@ tidsschema:
   efter: "Den som är klar läser texten för en kamrat som gissar eller gör det som står, och skriver in det som fattades."
 arbetsform:
   rubrik: "Arbetsform: gemensamt, läraren visar, i par och enskilt, i par och gemensamt"
-  text: "Inför Jämför byter ni par, så att läsaren är en kamrat som inte har hört texten. Den som vill läser upp. Med fyra till tio elever hinner du läsa över axeln hos alla."
+  text: "Inför Jämför byter ni par, så att läsaren är en kamrat som inte har hört texten. Den som vill läser upp. Med fyra till tio elever hinner du läsa över axeln hos alla. I helklass skriver två eller tre elever en text tillsammans, så att ni har högst tio texter och lika många lag och platser, eller ställen. Då går läsarens prov, Ditt svar och jakten som med tio elever."
   delar:
     - rubrik: 1. Gemensamt
       text: läraren leder
@@ -320,14 +320,39 @@ urval:
     - rubrik: Ett synligt drag
       text: Draget går att peka på i en mening eller två
 uppfoljning:
-  text: Du behöver veta om kursen ger effekt, inte bara att ni har hållit den. Läsarens svar säger om texten nådde fram.
+  text: Du behöver veta om kursen ger effekt, inte bara att ni har hållit den. Läsarens svar säger om texten nådde fram. Hittar en kamrat rätt direkt i den korta texten efter, och säger eleven vad en ny mentortext gör och med vilket drag, är eleven klar med kursen. Hittar kamraten inte rätt i någon av de två korta texterna, tar du upp eleven med elevhälsan. Annars går eleven en period till med det andra projektet och tar med Mina drag. Perioden börjar i vecka 1 och tar fem veckor i Skattjakten och sex i Guideboken.
   rader:
     - nar: Vecka 1, dag 2
+      tid: "pass 2"
       vad: "Eleven skriver om en plats i tio minuter, utan stöd. Spara texten."
     - nar: Sista veckan, dag 1
+      tid: "sista veckan"
       vad: "Samma uppgift om en ny plats. Hittar en kamrat rätt direkt i båda? Vad gör den andra som den första inte gjorde?"
     - nar: Efter mötet
-      vad: "Eleven läser en ny mentortext. Vad gör den, och med vilket drag? Visa elevens klasslärare Mina drag."
+      tid: "efter"
+      perElev: [2, 3]
+      vad: "Eleven läser själv en mentortext ur det andra projektet, Torget efter Skattjakten och Gåtan efter Guideboken, och berättar för dig vad den gör och med vilket drag. Visa elevens klasslärare Mina drag."
+plan:
+  passen:
+    - nar: veckans första
+      kort: "Dag 1"
+      text: "Dag 1 läser gruppen en mentortext, du skriver din text och eleven börjar sin."
+    - nar: veckans andra
+      kort: "Dag 2"
+      text: "Dag 2 läser ni mentortexten igen, och eleven får svar och skriver klart."
+      tabell: "Dag 2, 60 minuter"
+    - nar: veckans tredje
+      kort: "Ett tredje pass"
+      ur: { tabell: "Dag 2, 60 minuter", rad: "Ett tredje pass", kolumner: ["Det som händer"] }
+  veckoval:
+    text: "Skattjakten tar fem veckor och Guideboken sex. Har ni bara fem veckor, välj Skattjakten. Skattjaktsdagen eller besöksdagen styr när kursen går, så räkna bakåt från den."
+    mer: Projekten vecka för vecka
+    forval: 5
+  utvardering:
+    - "Hittar en kamrat rätt direkt i den korta texten efter, och säger eleven vad en ny mentortext gör och med vilket drag, är eleven klar med kursen."
+    - "Hittar kamraten inte rätt i någon av de två korta texterna, tar du upp eleven med elevhälsan."
+    - "Annars går eleven en period till med det andra projektet och tar med Mina drag."
+    - "Perioden börjar i vecka 1 och tar fem veckor i Skattjakten och sex i Guideboken."
 mal:
   overgripande: "kunna skriva så att mottagaren förstår och vill läsa."
   rubrik: "Mål: det eleven kan efter kursen"
@@ -424,7 +449,7 @@ ramar:
             - rubrik: Dag 1
               text: "0–⁠12 min. Berätta om projektet, läsarna och skattjaktsdagen, och ge var och en sitt lag.\n12–⁠20 min. Läs Kalaset.\n20–⁠28 min. Hitta draget: Kalaset börjar med en fråga till läsaren.\n28–⁠36 min. Läraren skriver, och eleven får Mina drag.\n36–⁠52 min. Eleverna skriver.\n52–⁠60 min. Jämför: eleven får Kortet till skribenten, och du visar ringen och strecket i din inbjudan. Vet kamraten vad, när och var?"
             - rubrik: Dag 2
-              text: "0–⁠8 min. Starterna.\n8–⁠17 min. Eleven skriver klart.\n17–⁠22 min. Eleven jämför sin inbjudan med Kalaset och skriver en rad på Mina drag.\n22–⁠33 min. Eleven renskriver på bladet Inbjudan.\n33–⁠43 min. Den korta texten före: en ledtråd till en åttaåring om en plats på skolan.\n43–⁠60 min. Promenaden till platserna: var och en väljer sin plats och viskar den till dig.\nEfter passet lämnar du inbjudningarna till lagens klasslärare."
+              text: "0–⁠8 min. Starterna.\n8–⁠17 min. Eleven skriver klart.\n17–⁠22 min. Eleven jämför sin inbjudan med Kalaset och skriver en rad på Mina drag. Samtidigt stryker du under felstavade ord.\n22–⁠33 min. Eleven renskriver på bladet Inbjudan.\n33–⁠43 min. Den korta texten före: en ledtråd till en åttaåring om en plats på skolan.\n43–⁠60 min. Promenaden till platserna: var och en väljer sin plats och viskar den till dig.\nEfter passet lämnar du inbjudningarna till lagens klasslärare."
             - rubrik: Lägg märke till
               text: "Eleven som skriver när och var utan att du frågar.\nEleven som skriver platsens namn i den korta texten."
         - rubrik: "Skattjakten vecka 2 · Ledtråden"
@@ -450,11 +475,11 @@ ramar:
         - rubrik: "Skattjakten vecka 4 · Berättelsen"
           falt:
             - rubrik: Fokus
-              text: "Eleven börjar mitt i en händelse, och laget är med i berättelsen, med sitt namn och skatten det gissade. Skrivhandlingen är att berätta. Uppgiften är berättelsen på fyra till sex meningar."
+              text: "Eleven börjar mitt i en händelse, och laget är med i berättelsen, med sitt namn och skatten det gissade. Är läsarna blivande sjuor, skriver eleven i stället en sann berättelse om sin första dag här. Skrivhandlingen är att berätta. Uppgiften är berättelsen på fyra till sex meningar."
             - rubrik: Dag 1
-              text: "0–⁠8 min. Läs Dörren.\n8–⁠17 min. Hitta draget: ”Vilket gammalt drag gör som Dörren?”\n17–⁠27 min. Läraren skriver, med lagets remsa: ”Vad behöver laget för att vilja läsa till slutet?”\n50–⁠60 min. Jämför: kamraten läser som laget och säger var hen ville läsa vidare.\nEfter passet skriver du ditt svar på en lapp."
+              text: "0–⁠8 min. Läs Dörren.\n8–⁠17 min. Hitta draget: ”Vilket gammalt drag gör som Dörren?”\n17–⁠27 min. Läraren skriver, med lagets remsa: ”Vad behöver laget för att vilja läsa till slutet?” Är läsarna blivande sjuor, skriver du om din första dag här.\n50–⁠60 min. Jämför: kamraten läser som laget och säger var hen ville läsa vidare.\nEfter passet skriver du ditt svar på en lapp."
             - rubrik: Dag 2
-              text: "0–⁠8 min. Ditt svar i stället för Starterna.\n17–⁠32 min. Eleven skriver klart.\n32–⁠40 min. Jämför med Dörren.\n40–⁠60 min. Eleven renskriver och ritar."
+              text: "0–⁠8 min. Ditt svar i stället för Starterna.\n17–⁠32 min. Eleven skriver klart.\n32–⁠40 min. Eleven jämför sin berättelse med Dörren. Samtidigt stryker du under felstavade ord.\n40–⁠60 min. Eleven renskriver och ritar."
             - rubrik: Lägg märke till
               text: "Eleven som börjar med att någon vaknar.\nEleven som låter laget göra något redan i första meningen."
         - rubrik: "Skattjakten vecka 5 · Skattjakten"
@@ -464,7 +489,7 @@ ramar:
             - rubrik: Dag 1
               text: "0–⁠10 min. Den korta texten efter: en ledtråd till en annan plats.\n10–⁠25 min. Eleven ringar in raden där en åttaåring kan stanna. Som en åttaåring läser en kamrat de korta texterna, sedan ledtråden och uppdraget.\n25–⁠40 min. Gruppen skriver ledtråden till skattkistan.\n40–⁠55 min. Eleven renskriver uppdraget och lägger berättelsen i kistan.\n55–⁠60 min. Eleven skriver Före och efter på Mina drag."
             - rubrik: Dag 2
-              text: "Lagen går skattjakten, som sidan Dagen säger.\nSamma dag eller i det tredje passet ställer du frågorna på sidan Dagen, och eleverna får diplomen."
+              text: "Lagen går skattjakten, som sidan Dagen säger.\nSamma dag eller i det tredje passet ställer du frågorna på sidan Dagen, och eleverna får diplomen.\nHar ni två pass i veckan, läser ni lagens svar nästa vecka och gör uppföljningen efter mötet i samma pass."
             - rubrik: Lägg märke till
               text: "Eleven som ser var laget stannar och säger varför.\nEleven som säger vad hen gör nu som hen inte gjorde i vecka 1."
         # -------------------------------------------- Guideboken
@@ -473,7 +498,7 @@ ramar:
             - rubrik: Fokus
               text: "Eleven beskriver sitt ställe med detaljer som bara finns där. Skrivhandlingen är att beskriva. Uppgiften är texten om stället, på fyra till sex meningar."
             - rubrik: Dag 1
-              text: "0–⁠12 min. Projektet och läsarna. En elev som började här i år är med i sex minuter. Gruppen frågar: ”Vad visste du inte när du kom hit? Vilket ställe hade du velat att någon visade dig?” Var och en väljer sitt ställe.\n12–⁠22 min. Två texter om parken.\n22–⁠28 min. Mentortexten Torget.\n28–⁠36 min. Läraren skriver, och eleven får Mina drag.\n36–⁠52 min. Eleverna skriver.\n52–⁠60 min. Jämför: eleven får Kortet till skribenten, och du visar ringen och strecket i din text. Ser kamraten stället?"
+              text: "0–⁠12 min. Projektet och läsarna. En elev som började här i år är med i sex minuter. Gruppen frågar: ”Vad visste du inte när du kom hit? Vilket ställe hade du velat att någon visade dig?” Var och en väljer sitt ställe. Har ni två pass i veckan, väljer eleverna ställen så att ni hinner gå förbi alla på 30 minuter.\n12–⁠22 min. Två texter om parken.\n22–⁠28 min. Mentortexten Torget.\n28–⁠36 min. Läraren skriver, och eleven får Mina drag.\n36–⁠52 min. Eleverna skriver.\n52–⁠60 min. Jämför: eleven får Kortet till skribenten, och du visar ringen och strecket i din text. Ser kamraten stället?"
             - rubrik: Dag 2
               text: "0–⁠8 min. Starterna.\n8–⁠18 min. Den korta texten före: vägen från entrén till biblioteket.\n18–⁠48 min. Promenaden förbi alla ställen: gruppen fotograferar dem, skyltarna och svängarna, och eleven frågar någon som jobbar där. Det tredje passet är reserv.\n48–⁠60 min. Eleven skriver klart med det hen såg, jämför med Torget och skriver en rad på Mina drag."
             - rubrik: Lägg märke till
@@ -523,9 +548,9 @@ ramar:
             - rubrik: Fokus
               text: "Guiden möter de nya, och eleven ser vad hen gör nu som hen inte gjorde i vecka 1."
             - rubrik: Dag 1
-              text: "0–⁠10 min. Den korta texten efter: vägen från entrén till ett annat ställe.\n10–⁠25 min. Eleven ringar in raden där den nya kan stanna. En kamrat läser båda texterna och uppslaget som den nya.\n25–⁠55 min. Gruppen sätter ihop guiden, och den som behöver renskriver.\n55–⁠60 min. Eleven skriver Före och efter på Mina drag."
+              text: "0–⁠10 min. Den korta texten efter: vägen från entrén till ett annat ställe.\n10–⁠25 min. Eleven ringar in raden där den nya kan stanna. En kamrat följer de två korta texterna på kartan, en mening i taget, och läser uppslaget som den nya.\n25–⁠55 min. Gruppen sätter ihop guiden, och den som behöver renskriver.\n55–⁠60 min. Eleven skriver Före och efter på Mina drag."
             - rubrik: Dag 2
-              text: "Besöksdagen går som sidan Dagen säger.\nSist läser ni gästboken. Eleverna får diplomen."
+              text: "Besöksdagen går som sidan Dagen säger.\nSist läser ni gästboken och tar frågorna på sidan Dagen. Eleverna får diplomen.\nHar ni två pass i veckan, gör ni uppföljningen efter mötet i ett pass nästa vecka."
             - rubrik: Lägg märke till
               text: "Eleven som ser var den nya stannar och säger varför.\nEleven som säger vad hen gör nu som hen inte gjorde i vecka 1."
     # ---------------------------------------------------------------- Skattjakten, veckornas material
@@ -1008,7 +1033,7 @@ ramar:
             - rubrik: Läsarens svar
               text: "De nya skriver i gästboken vilket ställe de vill gå till först. Läs den med gruppen."
             - rubrik: Om dagen ligger utanför kursen
-              text: "Biblioteket ställer ut guiden med gästboken, och skolan ger guiden till de nya vid nästa inskolning."
+              text: "Biblioteket ställer ut guiden med gästboken, och skolan ger guiden till de nya vid nästa inskolning. Dag 2 lämnar gruppen guiden på biblioteket och ger den till den nya eleven från vecka 4, som skriver först i gästboken. Läs gästboken med gruppen, och ta frågorna under Efteråt samma dag."
             - rubrik: Efteråt
               text: "Fråga gruppen: ”Hur kändes det att se de nya läsa? Vad gjorde att vi lyckades i vårt samarbete? Vad var svårt?”"
     # ---------------------------------------------------------------- Hela kursen
@@ -1352,6 +1377,15 @@ lathund:
       - Fotona eller kartan, och pärmar, vecka 2
       - Mentortexten stor på tavlan
     varjePass: Notera vem som använde draget och vem som behöver stöd.
+    # Lathundens kortare uppföljning: metodens rader och checklistan ryms inte i högerspalten på bild 4, och beslutet
+    # står här i en mening, när eleven är klar (passgenomgången i Skrivning, den andra genomgången, 2026-10-27).
+    uppfoljning:
+      - nar: "Vecka 1, dag 2"
+        vad: "En text på tio minuter om en plats, utan stöd."
+      - nar: "Sista veckan, dag 1"
+        vad: "Samma uppgift. Hittar en kamrat rätt i båda?"
+      - nar: "Efter mötet"
+        vad: "Hittade kamraten rätt direkt i texten efter, och säger eleven själv vad en ny mentortext gör och med vilket drag, är hen klar."
 film:
   sekunder: 27.98
   beskrivning: "Gruppen läser gåtan som läsare. Omar säger: ”Simhallen!” Läraren frågar: ”Står ordet simhall någonstans?” Paren stryker under orden som avslöjar platsen. Mira säger: ”Den säger hur det är där!” Draget får ett namn. Läraren skriver: ”Säg allt utom namnet.” Mira skriver sin ledtråd, och Selma läser den som en åttaåring. Mira skriver: ”Här har vi gympa.” Selma säger: ”Gympasalen! Det står ju där.” Mira stryker gympa och skriver att bollarna studsar. Mira skriver: ”Här studsar bollarna mot väggen.”"

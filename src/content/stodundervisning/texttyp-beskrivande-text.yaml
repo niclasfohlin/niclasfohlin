@@ -22,7 +22,6 @@ taggar:
 format:
   - liten grupp
   - par
-  - helklass
 tid: 60 minuter per pass, två pass i veckan
 period: Sex veckor
 grupp: Två till tio elever
@@ -34,7 +33,7 @@ material:
   - veckans texter
   - brevpapper och kuvert
 
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -111,7 +110,7 @@ tidsschema:
 
 arbetsform:
   rubrik: "Arbetsform: gemensamt, läraren visar, i par, gemensamt igen"
-  text: "I delen Säg sätter sig två par ihop, och läsaren kommer ur det andra paret. De två som beskriver gör det samtidigt, var och en för sin läsare. Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. Så blir det i varje pass när gruppen har två, tre, sex, sju eller tio elever. Då skriver du på bladet Det jag hör vad det paret säger. Är en i paret borta, blir kamraten den tredje i ett annat par. I pass 9 har var och en sin egen plan, och då är kamraten läsaren, som aldrig har sett elevens sak. I ett par med tre elever beskriver en elev i pass 3 och 7, och de två andra i pass 4 och 8. Paren är desamma hela kursen, och paret får planera på sitt starkaste språk."
+  text: "I delen Säg sätter sig två par ihop, och läsaren kommer ur det andra paret. De två som beskriver gör det samtidigt, var och en för sin läsare. Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. Så blir det i varje pass när gruppen har två, tre, sex, sju eller tio elever. Då skriver du på bladet Det jag hör vad det paret säger. Är en i paret borta, blir kamraten den tredje i ett annat par. I pass 9 har var och en sin egen plan, och då är kamraten läsaren, som aldrig har sett elevens sak. I ett par med tre elever beskriver en elev i pass 3 och 7, och de två andra i pass 4 och 8. De två beskriver efter varandra för samma läsare, och trion tar då sex minuter från Skriv. I pass 6 och 9 beskriver alla tre, och trion tar fyra minuter från Skriv. Paren är desamma hela kursen, och paret får planera på sitt starkaste språk."
   delar:
     - rubrik: 1. Gemensamt
       text: Hela gruppen, med dig vid tavlan
@@ -308,7 +307,7 @@ urval:
   rubrik: Var hittar du texterna och läsarna?
   text:
     - "Texterna står under Kursens material, direkt efter sidan för den vecka de hör till. Mentortexterna är två texter ni har som förebild: Slöjdsalen i vecka 1, som är skriven till Noor, åtta år, och Brevet om Kaos i vecka 4, som är skrivet till en farmor. Du kan byta texterna mot egna. Då behöver du två korta texter om samma sak, som skiljer sig åt på en punkt, och en beskrivning där du kan säga vem den är skriven till."
-    - "Tabellen Åk 4–5 och åk 6–7 säger vilken yngre klass som passar. Paret beskriver ett rum och vad man gör där, som NO-salen eller musiksalen, och ni väljer rummet ur listan Det vi inte visste i barnens ålder. Slöjdsalen och hemkunskapssalen har kursens egna texter, så dem väljer ni inte. Be barnens lärare om tre saker före kursen, och ge hen bladet Till läraren i den yngre klassen. I pass 2 kommer ett barn till varje par, frågar och ritar. Mellan pass 4 och pass 6 läser barnens lärare texterna högt, och barnen ritar igen. I pass 6 kommer samma barn på besök."
+    - "Tabellen Åk 4–5 och åk 6–7 säger vilken yngre klass som passar. Paret beskriver ett rum och vad man gör där, som NO-salen eller musiksalen, och väljer i slutet av pass 1 rummet ur listan Det vi inte visste i barnens ålder. Slöjdsalen och hemkunskapssalen har kursens egna texter, så dem väljer paren inte. Be barnens lärare om tre saker före kursen, och ge hen bladet Till läraren i den yngre klassen. I pass 2 kommer ett barn till varje par, ställer sina frågor och ritar hur hen tror att parets rum ser ut. Mellan pass 4 och pass 6 läser barnens lärare texterna högt, och barnen ritar igen. I pass 6 kommer samma barn på besök."
     - "Har skolan inga yngre elever, som en skola med åk 4–9, är läsarna i första hand de elever som ska börja hos er nästa läsår. De går i sin klass på den andra skolan, och ni gör frågestunden och besöket på distans (Besöket, vecka 3). Går inte det, är läsaren en förälder hemma. Eleven tar hem bladet Barnets frågor, och föräldern frågar och ritar. Sedan läser föräldern texten och ritar igen, och i pass 6 visar eleven foton av platsen. Kan ingen hemma vara läsare, får eleven en vuxen på skolan som läsare, någon som inte har varit i rummet. Eleverna väljer själva läsarna av breven i pass 7, och hur breven går iväg och svaren kommer står på sidan Breven, vecka 4."
   kravText: "Breven har tre regler, som du skriver på blädderblocket till pass 7:"
   krav:
@@ -320,19 +319,48 @@ urval:
       text: "Läsaren finns på riktigt, har inte sett det och kan svara på brevet om skolan före pass 11"
 
 uppfoljning:
-  text: "Du ser om kursen hjälper i det du hör och i det eleven skriver. Barnens teckningar och läsarnas svar ligger bredvid texterna, och eleven följer sina texter i diagrammet."
+  text: "Du ser om kursen hjälper i det du hör och i det eleven skriver. Barnens teckningar och läsarnas svar ligger bredvid texterna, och eleven följer sina texter i diagrammet. Efter Uppgift 1 beslutar du hur eleven går vidare. Ger varje fråga på kortet en ruta i stapeln Efter kursen, avslutar du insatsen. Har stapeln Efter kursen högst en ruta fler än stapeln Första korta, tar du upp det med elevhälsan. Annars går eleven en period till på tre veckor, vecka 4 till 6 med nästa grupp, och skriver två nya brev till nya läsare."
   rader:
     - nar: Varje pass
+      tid: "varje pass"
       vad: "Skriv vad två eller tre elever säger, på bladet Det jag hör."
     - nar: "Pass 6, 8 och 11"
+      tid: "pass 6, 8 och 11"
       vad: "Eleven fyller i diagrammet och ser om målet syns i texten."
     - nar: Pass 11
+      tid: "pass 11"
       vad: "Ni lägger de två korta texterna bredvid varandra."
     - nar: Efter vecka 3
+      tid: "vecka 3"
       vad: "Ge klassläraren kortet och tavlans tre rader."
     - nar: Efter kursen
+      tid: "efter 4–6 veckor"
       vad: "Eleven skriver Uppgift 1 efter fyra till sex veckor. Fråga klassläraren om eleven säger vem som läser."
 
+plan:
+  passen:
+    - nar: vecka 1
+      kort: "Läsaren"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 1", kolumner: ["Det som händer", "Eleven skriver", "Texten går till"] }
+    - nar: vecka 2
+      kort: "Läraren visar"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 2", kolumner: ["Det som händer", "Eleven skriver", "Texten går till"] }
+    - nar: vecka 3
+      kort: "Gruppens text"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 3", kolumner: ["Det som händer", "Eleven skriver", "Texten går till"] }
+    - nar: vecka 4
+      kort: "Parens text"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 4", kolumner: ["Det som händer", "Eleven skriver", "Texten går till"] }
+    - nar: vecka 5
+      kort: "Egen text"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 5", kolumner: ["Det som händer", "Eleven skriver", "Texten går till"] }
+    - nar: vecka 6
+      kort: "Svaren"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 6", kolumner: ["Det som händer", "Eleven skriver", "Texten går till"] }
+  utvardering:
+    - "Ger varje fråga på kortet en ruta i stapeln Efter kursen, avslutar du insatsen."
+    - "Har stapeln Efter kursen högst en ruta fler än stapeln Första korta, tar du upp det med elevhälsan."
+    - "Annars går eleven en period till på tre veckor, vecka 4 till 6 med nästa grupp, och skriver två nya brev till nya läsare."
 mal:
   overgripande: "kunna beskriva så att läsaren ser det framför sig."
   rubrik: "Mål: det eleven gör efter kursen"
@@ -364,7 +392,7 @@ exempel:
     rubrik: Gruppen
     text: "Fyra elever i åk 5 går kursen. Det är vecka 4 och pass 7. Paren är Linnea och Adam, och Sami och Wilma. I pass 6 kom Ebba och Hugo i 2A på besök med sina teckningar. I dag börjar eleverna på brevet. Läraren lyssnar särskilt på Adam och Wilma."
   text:
-    - "Läs som läsaren. På tavlan står en mening ur gruppens text: ”Längst in i korridoren står skåpen.” Ebba hade ritat skåpen små, som lådor, på frågestunden. Sami läser meningen som Ebba: ”Nu vet jag var skåpen står. Nu undrar jag hur stora de är.” Alla skriver en ny mening, och gruppen lägger meningarna bredvid varandra. Gruppen pekar på Linneas: ”De är nästan lika höga som en vuxen, och varje skåp har ett eget lås.” Wilma säger: ”Nu ser man att de är stora.” Var och en gör sin mening bättre."
+    - "Läs som läsaren. På tavlan står en mening ur gruppens text: ”Längst in i korridoren står skåpen.” På frågestunden frågade Ebba hur skåpen ser ut. Sami läser meningen som Ebba: ”Nu vet jag var skåpen står. Nu undrar jag hur stora de är.” Alla skriver en ny mening, och gruppen lägger meningarna bredvid varandra. Gruppen pekar på Linneas: ”De är nästan lika höga som en vuxen, och varje skåp har ett eget lås.” Wilma säger: ”Nu ser man att de är stora.” Var och en gör sin mening bättre."
     - "Visa och pröva. Läraren säger att nästa text är ett brev till någon som inte har varit på skolan, och läser Brevet om Kaos. Hen visar de tre reglerna på blädderblocket och nämner sin egen läsare: ”Min moster i Kiruna har aldrig sett vår skola.” Hen håller upp tre lappar, ”Två våningar”, ”Klockan över ingången” och ”Skolgården”. Den sista lägger hen åt sidan: ”Min moster har sett skolgården på ett foto.” Läraren frågar: ”Om brevet gick till Ebba i stället, vilka lappar låg kvar då?” Wilma säger: ”Ingen av dem. Ebba ser allt det varje dag.”"
     - "Tänk och planera. Först läser var och en teckningen från besöket. Hugo hade ritat vaskarna mitt i rummet, fast de står längs väggen. Adam säger: ”Jag glömmer ofta att säga var saker står.” Det blir hans nya mål. Var och en skriver sin läsare på den första lappen. Adam skriver ”Morfar ska se vår skola framför sig”, och Linnea skriver ”Moster Jenny ska se vår skola framför sig”. De skriver fem lappar om skolan, och var och en märker det som den egna läsaren redan vet. Linnea märker ”Gul tegelvägg”: ”Det har jag berättat för moster Jenny.” Adam låter den ligga: ”Morfar har aldrig varit i Sverige.”"
     - "Säg. Adam beskriver skolan för Sami ur det andra paret. Sami spelar morfar och ritar det han hör. Han ritar skolan som ett höghus och frågar: ”Hur hög är den? Det sa du inte.” Adam svarar: ”Två våningar, lägre än ditt hus.” Läraren säger: ”Det du svarade nu ska med i texten.” Adam skriver ”två våningar, lägre än morfars hus” på en ny lapp."
@@ -381,16 +409,16 @@ ramar:
     - rubrik: "Till läraren: veckorna"
       lektioner: true
       text:
-        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus, och i vecka 2 till 5 dagens mening till Läs som läsaren. Sedan kommer de två passen och sist det du ska lägga märke till. De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen. När en text är klar skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa text börjar läser hen det först. Mellan passen skriver du två korta versioner till Två sätt i era texter före pass 5 och 9, skriver ut fotona av teckningarna kvällen före pass 6, och postar breven om skolan efter pass 9. Har gruppen gått en annan kurs i serien, frågar du i pass 1 vad eleverna känner igen och kortar visningen i pass 3."
+        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus, och i vecka 2 till 5 dagens mening till Läs som läsaren. Sedan kommer de två passen och sist det du ska lägga märke till. De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen. När en text är klar skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa text börjar läser hen det först. Mellan passen skriver du två korta versioner till Två sätt i era texter före pass 5 och 9, skriver ut fotona av teckningarna kvällen före pass 6, och postar breven om skolan efter pass 9. Har gruppen gått en annan kurs i serien, ändrar du pass 1 och pass 3. I pass 1 gör ni den korta texten från minut 5 till 18. Sedan läser var och en sitt sista mål till minut 20 och säger efter frågorna i Två texter vad hen känner igen. I pass 3 hoppar du över raden i visningen med frågan ”Vad sa jag allra först?”, och paren planerar från minut 18."
       delar:
         - rubrik: "Vecka 1 · Läsaren"
           falt:
             - rubrik: Fokus
               text: "Eleven läser som läsaren och säger vad hen ser och vad hen undrar, och paret möter barnet som de ska skriva till."
             - rubrik: Pass 1
-              text: "0–⁠5 min. Ni ska beskriva för läsare som inte har sett det. Fråga ”Vad gör en beskrivning bra?”, och spara svaren till pass 12.\n5–⁠20 min. Säg uppgiften med orden under Till läraren: de korta texterna. Eleven väljer ett förslag och skriver i tio minuter, utan stöd.\n20–⁠32 min. Två texter, vecka 1: Skåpet. Visa elevens sida, och ställ frågorna. Båda är beskrivande texter, men bara i den andra ser läsaren skåpet.\n32–⁠44 min. Strukturen, vecka 1: Lika och olika. Paren följer stegen.\n44–⁠55 min. Paren övar på frågestunden: ett par spelar barnet, och sedan byter paren. Var och en säger något hen inte visste i barnets ålder, till listan Det vi inte visste i barnens ålder.\n55–⁠60 min. Läs upp: vad vill var och en veta om barnet?"
+              text: "0–⁠5 min. Ni ska beskriva för läsare som inte har sett det. Fråga ”Vad gör en beskrivning bra?”, och spara svaren till pass 12.\n5–⁠20 min. Säg uppgiften med orden under Till läraren: de korta texterna. Eleven väljer ett förslag och skriver i tio minuter, utan stöd.\n20–⁠32 min. Två texter, vecka 1: Skåpet. Visa elevens sida, och ställ frågorna. Båda är beskrivande texter, men bara i den andra ser läsaren skåpet.\n32–⁠44 min. Strukturen, vecka 1: Lika och olika. Paren följer stegen.\n44–⁠55 min. Paren övar på frågestunden: ett par spelar barnet, och sedan byter paren. Var och en säger något hen inte visste i barnets ålder, till listan Det vi inte visste i barnens ålder.\n55–⁠60 min. Läs upp: varje par väljer ur listan ett rum nära ert rum. Fråga vad var och en vill veta om barnet."
             - rubrik: Pass 2
-              text: "0–⁠5 min. Läs som läsaren: du läser ”I slöjdsalen finns en maskin.” och svarar: ”Nu undrar jag hur den ser ut.”\n5–⁠20 min. Frågestunden: ett barn till varje par. Barnet frågar och ritar hur hen tror att det ser ut. Paret frågar vad barnet redan vet och läser sist upp svaren.\n20–⁠30 min. Gruppen sorterar barnens frågor: vilka svarar vi på med en beskrivning, och vilka frågar varför? Varje par väljer ett rum ur listan, och vad man gör där.\n30–⁠40 min. Dela ut kortet, och läs Slöjdsalen högt. Gruppen läser den som Noor och svarar på frågorna.\n40–⁠52 min. Ge tillbaka de korta texterna. Eleven svarar under ett streck på det du undrade.\n52–⁠60 min. Eleven skriver ett mål ur det du undrade på Mitt mål."
+              text: "0–⁠5 min. Läs som läsaren: du läser ”I slöjdsalen finns en maskin.” och svarar: ”Nu undrar jag hur den ser ut.”\n5–⁠20 min. Frågestunden med bladet Barnets frågor: ett barn till varje par. Barnet frågar om det hen undrar över. Sedan frågar paret om sitt rum, och barnet ritar det. Har inget barn frågat om lärarrummet, frågar du ett av dem om det.\n20–⁠30 min. Gruppen sorterar barnens frågor: vilka svarar vi på med en beskrivning, och vilka frågar varför?\n30–⁠40 min. Dela ut kortet, och läs Slöjdsalen högt. Gruppen läser den som Noor och svarar på frågorna.\n40–⁠52 min. Eleven får sin korta text och svarar under ett streck på det du undrade.\n52–⁠60 min. Eleven skriver ett mål ur det du undrade på Mitt mål."
             - rubrik: Lägg märke till
               text: "Eleven som säger att en bra beskrivning har många ord som fin och stor.\nEleven som frågar barnet vad hen redan vet utan att du säger till."
         - rubrik: "Vecka 2 · Du visar"
@@ -414,7 +442,7 @@ ramar:
             - rubrik: Pass 5
               text: "0–⁠8 min. Två sätt i era texter: visa dina två versioner, och fråga ”Vad gör den andra för läsaren?” Skriv om ett ställe i den första och tänk högt. Alla gör samma sak i sin egen text.\n8–⁠15 min. Säg ”Jag skriver, ni tänker.” Gruppen väljer en fråga som många barn ställde. Varje par skriver två lappar, och gruppen lägger minst en åt sidan.\n15–⁠23 min. En elev har kortet och är barnet. Eleverna säger varje mening innan du skriver den, fram till det som barnet ser först.\n23–⁠47 min. Skriv: var och en skriver fortsättningen, vad barnet ser sedan och det som bara finns där.\n47–⁠52 min. Gruppen hör två fortsättningar och väljer en.\n52–⁠60 min. Läs gruppens text högt, och rita en stapel för den på tavlan."
             - rubrik: Pass 6
-              text: "0–⁠5 min. Läs som läsaren.\n5–⁠15 min. Visa och pröva: Två texter, vecka 3. Ställ frågorna under texterna, och gruppen letar efter samma sak i Slöjdsalen.\n15–⁠18 min. Tänk och planera. Eleven läser din fråga på texten, lägger fotot av barnets teckning bredvid, ringar in det som barnet ritade fel och säger var det finns i rummet.\n18–⁠23 min. Säg. Eleven beskriver början för en läsare ur ett annat par.\n23–⁠40 min. Skriv. Eleven bygger ut början med helheten och en jämförelse, och skriver in var det finns. Sist lägger eleven kopian från pass 4 bredvid och fyller i stapeln Till barnet.\n40–⁠60 min. Läs upp blir besöket: följ sidan Besöket, vecka 3."
+              text: "0–⁠5 min. Läs som läsaren.\n5–⁠15 min. Visa och pröva: Två texter, vecka 3. Ställ frågorna under texterna, och gruppen letar efter samma sak i Slöjdsalen.\n15–⁠18 min. Tänk och planera. Eleven läser din fråga på texten, lägger fotot av barnets teckning bredvid, ringar in det som barnet ritade fel och säger var det finns i rummet.\n18–⁠26 min. Säg. Var och en beskriver början för en läsare ur ett annat par, och sedan byter ni roll.\n26–⁠40 min. Skriv. Eleven bygger ut början med helheten och en jämförelse, och skriver in var det finns. Sist lägger eleven kopian från pass 4 bredvid och fyller i stapeln Till barnet.\n40–⁠60 min. Läs upp blir besöket: följ sidan Besöket, vecka 3."
             - rubrik: Lägg märke till
               text: "Eleven som börjar med vad det är och var, utan att du frågar.\nEleven som säger vad barnet ritade fel och varför."
         - rubrik: "Vecka 4 · Parens text"
@@ -422,7 +450,7 @@ ramar:
             - rubrik: Fokus
               text: "Paret skriver ur samma plan, till var sin läsare."
             - rubrik: Dagens mening
-              text: "Pass 7: en mening ur gruppens text om något som barnen ritade fel. Pass 8: ”Min skola är stor.” Fråga från och med nu vad den nya meningen gör för läsaren."
+              text: "Pass 7: en mening ur gruppens text om något som barnen frågade om. Pass 8: ”Min skola är stor.” Fråga från och med nu vad den nya meningen gör för läsaren."
             - rubrik: Pass 7
               text: "0–⁠5 min. Läs som läsaren.\n5–⁠15 min. Visa och pröva: Brevet om Kaos. ”Hur får farmor helheten?” Visa reglerna. Lägg en av tre lappar åt sidan för din läsare. ”Om barnet läste, vilka låg kvar?”\n15–⁠27 min. Tänk och planera. Var och en skriver ett nytt mål ur teckningen, sin läsare på första lappen och sin bokstav på det läsaren redan vet.\n27–⁠33 min. Säg. Läsaren ur andra paret ritar och säger sist första meningen i sin text.\n33–⁠57 min. Skriv. Var och en skriver början.\n57–⁠60 min. Läs upp. Paret väljer något att ta reda på."
             - rubrik: Pass 8
@@ -436,9 +464,9 @@ ramar:
             - rubrik: Dagens mening
               text: "Pass 9: i stället för en mening visar du dina två versioner ur breven. Pass 10: ”Kaos är en valp, ungefär lika stor som en skokartong.”"
             - rubrik: Pass 9
-              text: "0–⁠8 min. Två sätt i era texter: dina två versioner ur breven. Sedan för var och en in dina rättelser i sitt brev.\n8–⁠14 min. Visa och pröva. Visa din plan som en lista, med en egen sak och läsare.\n14–⁠26 min. Tänk och planera. Eleven väljer läsare och något kamraten aldrig har sett, tar målet ur dina svarsrader och planerar med lappar eller som en lista. Den som inte sa ett eget val i vecka 4 väljer med dig och säger varför.\n26–⁠34 min. Säg. Kamraten ritar och frågar, och sedan byter ni.\n34–⁠57 min. Skriv. Vid minut 44 läser alla sin början (Starterna runt bordet).\n57–⁠60 min. Läs upp. Eleven tar med saken, ett foto eller en teckning till pass 10."
+              text: "0–⁠8 min. Två sätt i era texter. Sedan svarar var och en på din fråga i brevet och för in dina rättelser.\n8–⁠14 min. Visa och pröva. Visa din plan som en lista, med en egen sak och läsare.\n14–⁠26 min. Tänk och planera. Eleven väljer läsare och något kamraten aldrig har sett, tar målet ur dina svarsrader och planerar med lappar eller som en lista. Den som inte sa ett eget val i vecka 4 väljer med dig och säger varför.\n26–⁠34 min. Säg. Kamraten ritar och frågar, och sedan byter ni.\n34–⁠57 min. Skriv. Vid minut 44 läser alla sin början (Starterna runt bordet).\n57–⁠60 min. Läs upp. Eleven tar med saken, ett foto eller en teckning till pass 10."
             - rubrik: Pass 10
-              text: "0–⁠5 min. Läs som läsaren. Var och en skriver en mening som dagens om sin sak.\n5–⁠9 min. Paret lägger saken bredvid kamratens teckning. Det som blev fel eller fattas blir en lapp, och eleven lägger undan saken.\n9–⁠45 min. Skriv: eleven skriver klart och tar med den nya lappen och frågan till läsaren. Vid minut 25 läser eleven för en läsare ur andra paret, som ritar och pekar på orden hen ritade efter.\n45–⁠53 min. Läsaren läser hela brevet, ringar in där hen ser mest framför sig och säger svarsraderna. Eleven skriver in svaret på det läsaren undrar.\n53–⁠60 min. Eleven skriver i brevet när läsaren ska svara, före dagen då ni samlas, och adressen på kuvertet.\nEfter passet. Svara på breven på ett eget papper (Breven, vecka 4)."
+              text: "0–⁠5 min. Läs som läsaren. Var och en skriver en mening som dagens om sin sak.\n5–⁠9 min. Paret lägger saken bredvid kamratens teckning. Det som blev fel eller fattas blir en lapp, och eleven lägger undan saken.\n9–⁠45 min. Skriv: eleven skriver klart och tar med den nya lappen och frågan till läsaren. Vid minut 25 läser eleven för en läsare ur andra paret, som ritar och pekar på orden hen ritade efter.\n45–⁠53 min. Läsaren läser hela brevet, ringar in där hen ser mest framför sig och säger svarsraderna. Eleven skriver in svaret på det läsaren undrar.\n53–⁠60 min. Eleven skriver i brevet en svarsdag före dagen då ni samlas, och adressen på kuvertet. Fråga sist hur det gick med texten i klassen.\nEfter passet. Svara på breven på ett eget papper (Breven, vecka 4)."
             - rubrik: Lägg märke till
               text: "Eleven som börjar skriva utan plan.\nEleven som säger vad hen tar med sig utan att du frågar."
         - rubrik: "Vecka 6 · Svaren"
@@ -567,7 +595,7 @@ ramar:
             - rubrik: Din text
               text: "Lärarrummet ligger bakom den gröna dörren vid trappan. Det är lika stort som ert klassrum och ser ut som ett vardagsrum. Längs väggen på vänster sida när du kommer in står en lång röd soffa. Längst in finns ett kök med en kaffemaskin som brummar. Något som bara finns i lärarrummet är en hylla med ett fack för varje lärare."
             - rubrik: Pass 3 och pass 4
-              text: "Elis och det han sa är ett exempel: ta ett barn från frågestunden och det hen sa och ritade. Beskriv ditt eget lärarrum, och byt lapparna mot det som finns där. Fråga kollegerna innan du tar fotot, och ta det utan människor och utan papper som går att läsa. Har skolan inget sådant rum, välj ett annat som eleverna aldrig går in i. Har gruppen fler än sex elever, ritar du Planens två rutor på tavlan och skriver lapparna stort."
+              text: "Elis och det han sa är ett exempel: ta barnet som sa något om lärarrummet på frågestunden, och det hen sa. Beskriv ditt eget lärarrum, och byt lapparna mot det som finns där. Fråga kollegerna innan du tar fotot, och ta det utan människor och utan papper som går att läsa. Har skolan inget sådant rum, välj ett annat som eleverna aldrig går in i. Har gruppen fler än sex elever, ritar du Planens två rutor på tavlan och skriver lapparna stort."
     - rubrik: "Två texter, vecka 3: Hemkunskapssalen"
       text:
         - "Läs båda texterna och prata om frågorna under."
@@ -617,7 +645,7 @@ ramar:
             - rubrik: Om något saknas
               text: "Är ett barn borta, visar paret ett annat pars barn sin plats. Är en plats upptagen, visar paret den från dörren. Den som inte vill tala låter kamraten fråga."
             - rubrik: Om barnen går på en annan skola
-              text: "Frågestunden i pass 2 blir ett videosamtal med hela klassen, som ni ser på tavlan. Barnen ritar före samtalet, och deras lärare låter dem ställa sina frågor till ett par i taget. Skicka texterna och be om foton av teckningarna. I stället för besöket filmar varje par sin plats från dörren och in, utan människor i bild. Barnens lärare visar filmerna, frågar vad som var annorlunda än barnen trodde och skickar svaren till dig. Har barnen ett besök hos er inför skolstarten under kursen, blir det kursens besök."
+              text: "Frågestunden i pass 2 blir ett videosamtal med hela klassen, som ni ser på tavlan. Skicka namnen på parens rum till barnens lärare efter pass 1. Barnen ritar sitt pars rum före samtalet, och deras lärare låter dem ställa sina frågor till ett par i taget. Skicka texterna och be om foton av teckningarna. I stället för besöket filmar varje par sin plats från dörren och in, utan människor i bild. Barnens lärare visar filmerna, frågar vad som var annorlunda än barnen trodde och skickar svaren till dig. Har barnen ett besök hos er inför skolstarten under kursen, blir det kursens besök."
     - rubrik: "Mentortext, vecka 4: Brevet om Kaos"
       text:
         - "Läs brevet och svara på frågorna."
@@ -688,7 +716,7 @@ ramar:
             - rubrik: Till hemmet
               text: "Skicka meddelandet i vecka 3, i skolans lärplattform: ”I skrivkursen skriver ditt barn ett brev till någon hen känner som aldrig har sett vår skola, som en släkting eller en vän som har flyttat. Brevet beskriver skolan och inget privat hemifrån. Skolan postar brevet med skolans adress som avsändare och skickar ett foto av det med e-post samma dag, så att svaret hinner komma. Hjälp gärna ditt barn att välja en läsare, och skicka namn, adress och e-post till mig före den ___.”"
             - rubrik: Innan breven går
-              text: "Läs breven efter pass 8 och pass 10. Rätta med blyerts det som gör breven svåra att läsa, och skriv också din fråga med blyerts, vid det ställe i brevet där den gäller. Svarsraderna skriver du på ett eget papper, som du lägger i mappen. I pass 9 och pass 11 för eleven in det du har rättat, och du fotograferar breven innan de går. Skriv skolans adress som avsändare. Eleven tar med läsarens adress och e-post, eller så får du dem från hemmet."
+              text: "Läs breven efter pass 8 och pass 10. Rätta med blyerts det som gör breven svåra att läsa, och skriv också din fråga med blyerts, vid det ställe i brevet där den gäller. Svarsraderna skriver du på ett eget papper, som du lägger i mappen. I pass 9 och pass 11 svarar eleven på din fråga och för in det du har rättat, och du fotograferar breven innan de går. Skriv skolans adress som avsändare. Eleven tar med läsarens adress och e-post, eller så får du dem från hemmet."
             - rubrik: Svaren
               text: "Brevet om skolan postar du efter pass 9. Skicka fotot av brevet till läsarens e-post samma dag, så hinner svaret komma. Läsaren får svara med brev, med e-post till dig eller med ett foto av ett handskrivet svar. I pass 11 tar du reda på vem som ännu inte har fått svar på brevet om skolan. Då skickar du fotot av elevens brev till reservläsaren, som svarar före pass 12."
             - rubrik: Läsaren som inte läser svenska
@@ -704,7 +732,7 @@ ramar:
             - rubrik: Pass 11
               text: "Uppgifterna liknar dem i de nationella proven. Den första ber om en beskrivning. Den andra ber om två saker, att beskriva och att förklara. Det gjorde också det nationella provet i åk 6 år 2016. Ingen skriver uppgifterna i dag."
             - rubrik: Efter kursen
-              text: "Uppgift 1 skriver eleven när gruppen samlas igen, fyra till sex veckor efter kursen. Då läser hen först sitt mål från pass 12 och svaret på sitt eget brev. Sedan gör hen de fyra stegen, med kamraten som läsare. Du svarar med tre svarsrader, och eleven fyller i stapeln Efter kursen."
+              text: "Uppgift 1 skriver eleven i ett pass om 60 minuter när gruppen samlas igen, fyra till sex veckor efter kursen.\n0–⁠15 min. Svaren på de egna breven: var och en läser sitt svar högt eller berättar.\n15–⁠20 min. Eleven läser ditt svar på den korta texten från pass 11 och sitt mål från pass 12.\n20–⁠52 min. Eleven gör Uppgift 1 med de fyra stegen: Tänk och planera till minut 30, Säg med kamraten som läsare till minut 36 och Skriv till minut 52.\n52–⁠60 min. Eleven fyller i stapeln Efter kursen.\nEfter passet. Rätta staplarna om de inte stämmer, och skriv tre svarsrader under varje text. Eleven får svarsraderna när du säger hur hen går vidare."
         - rubrik: Det du lyssnar efter
           falt:
             - rubrik: "1. Vem ska läsa?"
@@ -753,7 +781,7 @@ ramar:
             - rubrik: Före och efter
               text: "Det här gör ni när texten är klar, i pass 6 och 11. Eleven lägger sin gamla och sin nya text bredvid varandra, och du frågar: ”Vad gör den nya som den gamla inte gjorde? Vad gör du redan från början nästa gång?”"
             - rubrik: Reglerna
-              text: "Fråga vad varje text gör för läsaren. Ingen frågar vilken som är sämst. Du visar en elevs hela text för gruppen bara om eleven säger ja. Ett grepp mitt i texten tar högst fem minuter. Har gruppen fler än sex elever, delar ni er på två bord under Alla svar på bordet, Starterna runt bordet och när ni läser svaren på breven i pass 12. Vid det andra bordet har en elev kortet och leder."
+              text: "Fråga vad varje text gör för läsaren. Ingen frågar vilken som är sämst. Du visar en elevs hela text för gruppen bara om eleven säger ja. Ett grepp mitt i texten tar högst fem minuter. Har gruppen fler än sex elever, gör ni Alla svar på bordet och Starterna vid två bord. Det gör ni också när ni läser svaren på breven, i pass 12 och när gruppen samlas. Vid det andra bordet har en elev kortet och ställer samma frågor som du."
     - rubrik: "Till läraren: lapparna"
       text:
         - "Eleverna planerar varje text med lappar. På varje lapp står en sak i planen, med några ord eller en kort mening. Lapparna går att flytta, lägga åt sidan och lägga i ordning, och därför syns elevens val på bordet."
@@ -799,7 +827,7 @@ ramar:
             - ["till vänster om, till höger om"]
     - rubrik: Barnets frågor
       text:
-        - "Fråga barnet, och skriv några ord vid varje fråga. Låt barnet rita i rutan. Läs sedan upp svaren och fråga ”Stämmer det?”"
+        - "Fråga först vad barnet undrar över. Säg sedan vilket rum ni ska beskriva, och fråga om det. Skriv några ord vid varje fråga och låt barnet rita rummet i rutan. Läs sist upp svaren och fråga ”Stämmer det?”"
       huvud:
         - rubrik: Vi som frågar
         - rubrik: Barnet
@@ -807,9 +835,9 @@ ramar:
         - rubrik: Frågorna
           falt:
             - rubrik: Vad undrar du över där de äldre går?
-            - rubrik: Har du varit där?
+            - rubrik: Har du varit i rummet?
             - rubrik: Vad vet du redan om det?
-            - rubrik: Rita hur du tror att det ser ut
+            - rubrik: Rita hur du tror att rummet ser ut
     - rubrik: Något du aldrig har sett
       sagoform: { form: sida, titel: Något du aldrig har sett, radMm: 11 }
       text:
@@ -866,7 +894,7 @@ ramar:
             - rubrik: Så räknar ni
               text: "Från pass 6 sätter eleven ett streck med blyerts i kanten vid det hen räknar, och fyller i sin stapel som det står under diagrammet. Varje fråga på kortet ger högst en ruta. För en sak eller ett djur räcker det för den första rutan att texten säger vad det är och var det hör hemma. Ett allmänt ord som stor eller fin ger ingen ruta. En jämförelse ger en ruta när läsaren känner till det den jämförs med. Meningen om varför räknas inte."
             - rubrik: Efter pass 11
-              text: "I pass 11 räknar eleven den första korta texten utan tillägget från pass 2. Efter passet läser du texterna och rättar staplarna om de inte stämmer. En ruta mer eller mindre säger inte mycket. Visa texterna och diagrammet för klassläraren."
+              text: "I pass 11 räknar eleven den första korta texten utan tillägget från pass 2. Efter passet läser du texterna och rättar staplarna om de inte stämmer. Skiljer två staplar med en ruta, säger det inte mycket. Visa texterna och diagrammet för klassläraren."
     - rubrik: Det jag hör
       text:
         - "Skriv ut ett blad per vecka. Ha det i handen medan paren planerar, beskriver och skriver. Skriv elevens namn och det hen säger medan du lyssnar. Ringa in det eleven sa utan att du frågade. Efter passet fyller du i Till nästa pass."
@@ -889,7 +917,7 @@ ramar:
             - rubrik: Det vi ber dig om
               text: "Eleverna i vår skrivkurs övar på att beskriva något för den som inte har sett det. I par tar de emot ett av dina barn, som får fråga hur det ser ut där de äldre går. Sedan skriver var och en i paret sin beskrivning till barnet. Vi behöver ________ barn tre gånger, i rum ________. Du behöver välja barnen, läsa texterna högt en gång och skicka ett foto av teckningarna. Säg till om vi ska hämta och lämna barnen."
             - rubrik: "1. Frågestunden, den ________ klockan ________"
-              text: "Barnet frågar om något hen undrar över där de äldre går, som hemkunskapen eller skåpen, och ritar hur hen tror att det ser ut. Det tar omkring en kvart. Välj gärna barn som tycker om att fråga."
+              text: "Barnet frågar om något hen undrar över där de äldre går, som hemkunskapen eller skåpen. Sedan får hen veta vilket rum paret ska beskriva, och ritar hur hen tror att det ser ut. Det tar omkring en kvart. Välj gärna barn som tycker om att fråga. Är ett av barnen borta den dagen, skickar du ett annat, som sedan blir parets barn."
             - rubrik: "2. Texterna, före den ________"
               text: "Varje barn får två eller tre texter, en från var och en i paret. Läs dem högt en i taget, och låt barnet rita det hen ser framför sig efter varje text, på ett papper med skribentens namn. Skicka ett foto av teckningarna till mig dagen före besöket."
             - rubrik: "3. Besöket, den ________ klockan ________"
@@ -916,9 +944,9 @@ elevblad:
     Det här tar jag med mig: 6
   Barnets frågor:
     Vad undrar du över där de äldre går?: 3
-    Har du varit där?: 2
+    Har du varit i rummet?: 2
     Vad vet du redan om det?: 3
-    Rita hur du tror att det ser ut: 9
+    Rita hur du tror att rummet ser ut: 9
 
 mallar:
   - rubrik: Lapparna
@@ -1029,7 +1057,7 @@ lathund:
     rubrik: "Vi kör ett pass: pass 7 i vecka 4"
     textRubrik: "Gruppen · fyra elever i åk 5 börjar brevet om skolan"
     text:
-      - "På tavlan står en mening ur gruppens text: ”Längst in i korridoren står skåpen.” Ebba i 2A ritade dem som lådor på frågestunden. Alla skriver en ny mening, och gruppen pekar på Linneas: ”De är nästan lika höga som en vuxen, och varje skåp har ett eget lås.”"
+      - "På tavlan står en mening ur gruppens text: ”Längst in i korridoren står skåpen.” På frågestunden frågade Ebba i 2A hur de ser ut. Alla skriver en ny mening, och gruppen pekar på Linneas: ”De är nästan lika höga som en vuxen, och varje skåp har ett eget lås.”"
       - "Läraren läser Brevet om Kaos, håller upp tre lappar om skolan och lägger en åt sidan: ”Min moster har sett skolgården på ett foto.” Var och en skriver sin läsare på första lappen och märker ut det den läsaren redan vet."
       - "Sami spelar Adams morfar och ritar det han hör. Han ritar ett höghus och frågar: ”Hur hög är den?” Adam svarar: ”Två våningar, lägre än ditt hus.” Det blir en ny lapp."
       - "Läraren läser Linneas första mening över axeln och frågar: ”Vad ser din moster först?” Wilma kör fast och säger: ”Jag tittar på kortet.” Sedan skriver hon."
@@ -1077,9 +1105,9 @@ lathund:
           - - "20–⁠32 min"
             - "Två texter om samma skåp. ”I vilken ser du skåpet?”"
           - - "32–⁠60 min"
-            - "Lika och olika med två bilder. Paren övar på frågestunden."
+            - "Lika och olika med två bilder. Paren övar på frågestunden och väljer rum."
           - - "PASS 2\n0–⁠20 min"
-            - "Läs som läsaren. Frågestunden: barnet frågar och ritar."
+            - "Läs som läsaren. Frågestunden: barnet frågar och ritar parets rum."
           - - "20–⁠40 min"
             - "Sortera frågorna. Läs Slöjdsalen som Noor."
           - - "40–⁠60 min"
@@ -1101,7 +1129,7 @@ lathund:
           - Det ni gör
         rader:
           - - "PASS 6\n0–⁠60 min"
-            - "Två texter, vecka 3. Säg 18–⁠23, Skriv 23–⁠40. Besöket 40–⁠60."
+            - "Två texter, vecka 3. Säg 18–⁠26, Skriv 26–⁠40. Besöket 40–⁠60."
           - - "PASS 8\n0–⁠60 min"
             - "Två texter, vecka 4. Säg 19–⁠25, Skriv 25–⁠57, halvvägs vid 41."
           - - "PASS 9\n0–⁠60 min"

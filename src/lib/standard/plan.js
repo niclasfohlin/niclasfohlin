@@ -239,9 +239,12 @@ export function metodplan(d) {
     return { rad, tid };
   });
   const enhetText = (d.progression?.enhet ?? 'Vecka').toLowerCase();
-  const stegEnhet = enhetText === 'pass' ? 'pass' : enhetText === 'vecka' ? 'veckor' : null;
-  if (d.progression && !stegEnhet) fel.push(`Progressionens första kolumn heter "${d.progression.enhet}". Planen läser veckor och pass, så skriv kolumnen som Vecka eller Pass.`);
-  const steg = (d.progression?.rader ?? []).map((r, rad) => {
+  // En progression vars första kolumn heter När, som Kortskrivnings Pass 1–10, När ni är varma i kläderna och Veckans sista
+  // pass, är råd utan veckor: planen kopplar inte raderna till veckor och visar dem i varje vecka (sajtens K-553; Niclas
+  // 2026-10-26 sa ja till förslaget).
+  const stegEnhet = enhetText === 'pass' ? 'pass' : enhetText === 'vecka' ? 'veckor' : enhetText === 'när' ? 'nar' : null;
+  if (d.progression && !stegEnhet) fel.push(`Progressionens första kolumn heter "${d.progression.enhet}". Planen läser veckor och pass, och När som råd utan veckor, så skriv kolumnen som Vecka, Pass eller När.`);
+  const steg = (stegEnhet === 'nar' ? [] : d.progression?.rader ?? []).map((r, rad) => {
     const s = tolkaSteg(r.vecka);
     if (!s) fel.push(`Progressionens rad "${r.vecka}" går inte att läsa som ${stegEnhet === 'pass' ? 'pass' : 'veckor'}. Skriv den som 1, 4–5, 6 till det sista eller Från pass 11.`);
     return s ? { rad, ...s } : null;
@@ -2564,7 +2567,7 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass', pass: number[], till?: number } | { typ: 'sista-passet', efter?: number } | { typ: 'villkor' }} Tid
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
- * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number, sistaRaden?: true }} Metodplan
+ * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass' | 'nar', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[], forvaldaVeckor?: number, foreVeckor?: number, sistaRaden?: true }} Metodplan
  * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string, eleverna?: string, vidare?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], utvardering?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string }, langdval?: { text: string, mer: string }, veckoval?: { text: string, mer: string, forval?: number }, skattningar?: { namn: string, vem: string, rad: string, text?: string, skala?: { fran: number, till: number, tabell: string }, regler?: { om: string, rad: string }[], minuter?: number }[] }, ramar?: { ramar?: { rubrik: string, oversikt?: { rader?: unknown[][] } }[] }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[], tid?: string }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel

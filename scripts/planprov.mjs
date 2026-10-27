@@ -587,12 +587,13 @@ if (tsMp) {
 const mapp = join(rot, 'src/content/stodundervisning');
 const alla = readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), d: parseYaml(readFileSync(join(mapp, f), 'utf8')) }));
 const planbara = alla.filter((m) => m.d.uppfoljning?.rader?.length && m.d.uppfoljning.rader.every((r) => r.tid !== undefined));
-// Codex i omgång 5: klockslag bara när delarna följer på varandra från minut 0. Gruppstärkande aktiviteter säger delarnas
-// längd, och är den enda metoden med planen som gör det.
+// Codex i omgång 5: klockslag bara när delarna följer på varandra från minut 0. Gruppstärkande aktiviteter och
+// Kortskrivning säger delarnas längd, och är de metoder med planen som gör det. En metod utan tidsschema, som Texttyper i
+// grupp, har inga delar att räkna.
 {
-  const langder = planbara.filter((m) => !s.delarIFoljd((m.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim())))).map((m) => m.id);
+  const langder = planbara.filter((m) => { const r = (m.d.tidsschema?.rader ?? []).filter((x) => /^\d/.test(x.tid.trim())); return r.length > 0 && !s.delarIFoljd(r); }).map((m) => m.id);
   const gruppstarkande = (alla.find((m) => m.id === 'gruppstarkande-aktiviteter')?.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim()));
-  ska('passets delar som platser eller som längder', s.delarIFoljd([{ tid: '0–8 min' }, { tid: '8–18 min' }]) && !s.delarIFoljd([{ tid: '1–3 min' }, { tid: '1–2 min' }]) && !s.delarIFoljd([{ tid: '0–5 min' }, { tid: '6–9 min' }]) && !s.delarIFoljd([]) && gruppstarkande.length > 0 && !s.delarIFoljd(gruppstarkande) && langder.join() === 'gruppstarkande-aktiviteter', langder);
+  ska('passets delar som platser eller som längder', s.delarIFoljd([{ tid: '0–8 min' }, { tid: '8–18 min' }]) && !s.delarIFoljd([{ tid: '1–3 min' }, { tid: '1–2 min' }]) && !s.delarIFoljd([{ tid: '0–5 min' }, { tid: '6–9 min' }]) && !s.delarIFoljd([]) && gruppstarkande.length > 0 && !s.delarIFoljd(gruppstarkande) && langder.join() === 'gruppstarkande-aktiviteter,kortskrivning-skriv-varje-dag', langder);
 }
 for (const m of planbara) {
   const { fel: f, plan: mp } = s.metodplan(m.d);
@@ -653,9 +654,15 @@ for (const f of former) {
   }
   if (f.id === 'til-i-grupp') ska('vid behov: åtta veckor ger raderna 1–2, 3–5 och 6–8, utan vecka 9–10', p.veckor.map((v) => v.steg).join() === '0,0,1,1,1,2,2,2', p.veckor.map((v) => v.steg));
 }
-// Det standarden inte läser än säger den tydligt (Kortskrivning: progressionen är moment, inte veckor).
-const ks = s.metodplan(medTider('kortskrivning-skriv-varje-dag', ['sista veckan', 'i passet', 'i passet', 'varje pass', 'vecka 6']));
-ska('Kortskrivnings moment stoppas med besked', ks.fel.some((x) => x.includes('Progressionens första kolumn heter "När"')), ks.fel);
+// Kortskrivnings progression har kolumnen När: råd utan veckor, som planen inte kopplar till veckor (K-553; Niclas
+// 2026-10-26 sa ja). En annan kolumn stoppas med besked.
+{
+  const kd = metod('kortskrivning-skriv-varje-dag');
+  const ks = s.metodplan(kd);
+  const kp = ks.plan && s.planera(ks.plan, { start: '2026-11-02', dagar: [1, 3, 5], langd: 6 });
+  ska('Kortskrivnings rader är råd utan veckor', !ks.fel.length && ks.plan?.stegEnhet === 'nar' && !ks.plan.steg.length && kp.veckor.every((v) => v.steg === null) && kp.pass.every((x) => x.steg === null) && !s.stegUtanfor(ks.plan, kp).length, ks.fel);
+  ska('en annan första kolumn stoppas med besked', s.metodplan({ ...kd, progression: { ...kd.progression, enhet: 'Steg' } }).fel.some((x) => x.includes('Progressionens första kolumn heter "Steg"')));
+}
 // En metod vars uppföljning saknar tid, gjord ur en metod som har tiderna (riggens omgång 1 gav Upprepad läsning dem).
 const utanTid = structuredClone(metod('upprepad-lasning'));
 for (const r of utanTid.uppfoljning.rader) delete r.tid;

@@ -65,7 +65,7 @@ export interface PlanData {
   tid?: string;
   period?: string;
   /** Progressionens rader, med vad eleverna blir bättre på och regeln för att gå vidare (K-572), som veckan visar. */
-  progression?: { enhet: string; rader: { vecka: string; led?: string; fokus: string; roll: string; eleverna?: string; vidare?: string; taggar?: string[]; rubrik?: string; kort: string }[] };
+  progression?: { enhet: string; rubrik: string; rader: { vecka: string; led?: string; fokus: string; roll: string; eleverna?: string; vidare?: string; taggar?: string[]; rubrik?: string; kort: string }[] };
   uppfoljning: { rader: { nar: string; vad: string; tid?: string; perElev?: number | [number, number] }[] };
   checklista: string[];
   /** Checklistans rubrik, och om den gäller första passet ("Före första passet", "Checklista inför pass 1"), så att den bara
@@ -266,8 +266,9 @@ export async function planensData(m: Metod): Promise<PlanData> {
   // veckor och nivåer, som i Faktatextsamtal i grupp (verifieringen av omgång 1 2026-10-26).
   const nivaTabell = bank && (d.progression?.rader ?? []).some((r) => r.taggar?.length) ? undefined : nivaTabellen(d, m.id);
   // En checklista inför första passet, som "Checklista inför samtal 1" i Kompissamtal, står under Före (länkgranskningen av
-  // omgång 5 2026-10-26: den stod i varje vecka).
-  const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b/iu.test(d.checklista.rubrik);
+  // omgång 5 2026-10-26: den stod i varje vecka), och så gör en checklista inför kursen, som i texttypskurserna (riggens
+  // passgenomgång av skrivmetoderna 2026-10-26: "Checklista inför en kurs" stod i varje pass).
+  const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b|inför (?:en )?kurs(?:en)?\b/iu.test(d.checklista.rubrik);
   const nivaval = stodet(d.plan?.nivaval, d, m.id);
   const langdval = stodet(d.plan?.langdval, d, m.id);
   const veckostod = stodet(d.plan?.veckoval, d, m.id);
@@ -284,7 +285,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     mal: planensMal(m),
     tid: d.tid,
     period: d.period,
-    ...(d.progression ? { progression: { enhet: d.progression.enhet, rader: d.progression.rader.map((r) => ({ ...r, kort: veckansKort(r, kurs[r.vecka]?.titel) })) } } : {}),
+    ...(d.progression ? { progression: { enhet: d.progression.enhet, rubrik: d.progression.rubrik, rader: d.progression.rader.map((r) => ({ ...r, kort: veckansKort(r, kurs[r.vecka]?.titel) })) } } : {}),
     uppfoljning: { rader: d.uppfoljning?.rader ?? [] },
     checklista: d.checklista?.punkter ?? [],
     ...(d.checklista ? { checklistaRubrik: d.checklista.rubrik } : {}),

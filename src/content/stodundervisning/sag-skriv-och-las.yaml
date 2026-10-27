@@ -24,7 +24,7 @@ material:
   - elevens skrivbok
   - miniwhiteboard
   - skrivkort Bas
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-27
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -183,7 +183,7 @@ tabeller:
   - rubrik: "Perioden: från ord till egna meningar"
     plats: "efter-arbetsform"
     meny: true
-    text: "Gruppen tar nästa steg när ingen elev tappar ett ord eller ett mellanrum, och var och en läser tillbaka det hen har byggt. I första steget, med bara ord, går gruppen vidare när de flesta orden ligger rätt på första försöket två pass i rad. Stegen och veckorna är förslag, och en säker grupp kan ta två steg på en vecka."
+    text: "Gruppen tar nästa steg när ingen elev tappar ett ord eller ett mellanrum, och var och en läser tillbaka det hen har byggt. Har ni väntat en vecka på samma elev, går ni vidare ändå. Den eleven bygger då en kortare variant av gruppens mening, till exempel ”Vi äter mat.” när de andra bygger ”Vi äter mat ute.” Tappar hen inte längre ett ord eller ett mellanrum, bygger hen hela meningen som de andra. I första steget, med bara ord, går gruppen vidare när de flesta orden ligger rätt på första försöket två pass i rad. Stegen och veckorna är förslag, och en säker grupp kan ta två steg på en vecka. Den tar ändå varje lista med en ordbild. Rörelsen sitter när eleven bygger ord för ord och läser från början efter varje ord utan att du påminner."
     kolumner:
       - "Steget"
       - "Listan"
@@ -203,14 +203,14 @@ tabeller:
         - "Du säger bara meningen, och eleven säger den igen och räknar orden själv. I Min mening byter hen två ord, eller säger en egen mening som börjar som den dikterade"
       - - "Fem ord, vecka 6"
         - "Fem ord med ”en”, två meningar i Dagens meningar"
-        - "Eleven kan visa i Jag visar, och den som skriver med penna prövar med raden täckt"
+        - "En elev kan visa i Jag visar: du säger dagens första mening, och eleven skriver den på miniwhiteboarden och tänker högt. Den som skriver med penna prövar med raden täckt"
       - - "Ett ljudstridigt ord, vecka 7"
         - "Ett ljudstridigt ord, på en lapp, två meningar i Dagens meningar"
         - "Eleven gör en egen mening i Min mening, som du i Jag visar. Den som har börjat med pennan skriver den direkt"
       - - "Egna meningar, vecka 8"
         - "Egna meningar i stället för listan"
         - "Eleven skriver egna meningar, och skrivboken går till klassen"
-    not: "Från vecka 7 visar du en egen mening i Jag visar, om något du har gjort eller efter ett skrivkort, och tänker högt medan du väljer den: ”Jag ska skriva: Jag åt is med mamma.” Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord, och korten ligger kvar om hen fastnar på ett ord. Vecka 8 gör var och en egna meningar på samma sätt också i Dagens meningar, med pennan eller med korten. En grupp som inte är redo för egna meningar stannar i sitt steg, och på sidan Till klassläraren skriver du hur långt eleven har kommit."
+    not: "Från vecka 7 visar du en egen mening i Jag visar, om något du har gjort eller efter ett skrivkort, och tänker högt medan du väljer den: ”Jag ska skriva: Jag åt is med mamma.” Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord, och korten ligger kvar om hen fastnar på ett ord. Vecka 8 gör var och en två egna meningar på samma sätt i Dagens meningar, med pennan eller med korten, och läser dem för dig i stället för att jämföra med miniwhiteboarden. I Min mening läser grannen den sista, och står den inte redan i skrivboken, skriver ni den där. En grupp som inte är redo för egna meningar stannar i sitt steg, och Skrivkollen efter vecka 8 avgör om eleven får en period till."
   - rubrik: "Orden"
     plats: "efter-urval"
     meny: true
@@ -288,18 +288,51 @@ tabeller:
         - "Ett ljudstridigt ord"
     not: "Vecka 8 väljer varje elev också ett eget ord som inte stavas som det låter. Du skriver det på en lapp, och eleven lär sig det på samma sätt som de andra, som veckans ordbild."
 uppfoljning:
-  text: "Du ser i varje pass vad eleven bygger och skriver. Visa eleven i hens egna meningar vad hen kan nu."
+  text: "Du ser i varje pass vad eleven bygger och skriver. Visa eleven i hens egna meningar vad hen kan nu. Efter vecka 8 avslutar du insatsen om eleven får 10 av 10 för mellanrum och tecken och minst 19 av 21 ljud i Skrivkollens meningar och läser båda som de står. Då följer skrivboken med till klassen. Får eleven inte fler ljud rätt i Skrivkollen efter vecka 8 än före insatsen, tar du upp det med elevhälsan. Annars får eleven en period till på fem veckor, från steget Fyra ord till egna meningar, och sedan gör du Skrivkollen igen. Når eleven inte samma gräns då heller, tar du upp det med elevhälsan."
   rader:
     - nar: "Före insatsen"
-      vad: "Gör Skrivkollen: tio ord, två meningar, ordbilderna och en egen mening."
+      tid: "före"
+      vad: "Gör Skrivkollen: tio ord, två meningar, sex ordbilder och en egen mening. Får eleven under hälften av ljuden i orden, gör du ljudkollens uppgift 4 och 6 i Ljudlek i grupp. Klarar hen inte båda, börjar hen där."
     - nar: "I passet"
+      tid: "i passet"
       vad: "Säger eleven meningen igen själv, får hen med ljuden, orden och mellanrummen, och läser hen det som ligger?"
     - nar: "Efter vecka 4"
-      vad: "Gör Skrivkollen utan ordbilderna. Får eleven inte fler ljud rätt än före, gör du ljudkollen i Ljudlek i grupp, och eleven fortsätter."
+      tid: "vecka 4"
+      vad: "Gör Skrivkollen utan ordbilder. Får eleven inte fler ljud rätt än före, gör du ljudkollens uppgift 4 och 6. Klarar hen inte båda, byter hen till Ljudlek i grupp. Klarar hen båda, får Startorden ord med de ljud hen tappade."
     - nar: "Efter vecka 8"
-      vad: "Gör Skrivkollen med ordbilderna, och eleven läser första och sista sidan i skrivboken för dig."
+      tid: "efter"
+      vad: "Gör hela Skrivkollen, och eleven läser första och sista sidan i skrivboken för dig."
     - nar: "Två veckor efter"
-      vad: "Du och klassläraren läser skrivboken: skriver eleven en mening om dagen?"
+      tid: "efter 2 veckor"
+      vad: "Du och klassläraren läser skrivboken: skriver eleven en mening om dagen? Gör hen inte det, bestämmer ni en fast stund på dagen då hen skriver."
+plan:
+  passen:
+    - nar: vecka 1
+      kort: "Ord"
+      ur: { tabell: "Perioden: från ord till egna meningar", rad: "Ord, vecka 1" }
+    - nar: vecka 2
+      kort: "Två ord"
+      ur: { tabell: "Perioden: från ord till egna meningar", rad: "Två ord, vecka 2" }
+    - nar: vecka 3
+      kort: "Tre ord"
+      ur: { tabell: "Perioden: från ord till egna meningar", rad: "Tre ord, vecka 3" }
+    - nar: vecka 4–5
+      kort: "Fyra ord"
+      ur: { tabell: "Perioden: från ord till egna meningar", rad: "Fyra ord, vecka 4–5" }
+    - nar: vecka 6
+      kort: "Fem ord"
+      ur: { tabell: "Perioden: från ord till egna meningar", rad: "Fem ord, vecka 6" }
+    - nar: vecka 7
+      kort: "Ett ljudstridigt ord"
+      ur: { tabell: "Perioden: från ord till egna meningar", rad: "Ett ljudstridigt ord, vecka 7" }
+    - nar: vecka 8
+      kort: "Egna meningar"
+      ur: { tabell: "Perioden: från ord till egna meningar", rad: "Egna meningar, vecka 8" }
+  utvardering:
+    - "Efter vecka 8 avslutar du insatsen om eleven får 10 av 10 för mellanrum och tecken och minst 19 av 21 ljud i Skrivkollens meningar och läser båda som de står. Då följer skrivboken med till klassen."
+    - "Får eleven inte fler ljud rätt i Skrivkollen efter vecka 8 än före insatsen, tar du upp det med elevhälsan."
+    - "Annars får eleven en period till på fem veckor, från steget Fyra ord till egna meningar, och sedan gör du Skrivkollen igen."
+    - "Når eleven inte samma gräns då heller, tar du upp det med elevhälsan."
 mal:
   overgripande: "kunna skriva det man säger, ord för ord, och läsa det."
   rubrik: "Mål: vad eleven ska kunna efter insatsen"
