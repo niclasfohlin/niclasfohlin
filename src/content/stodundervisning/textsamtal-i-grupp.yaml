@@ -671,7 +671,7 @@ urval:
     - rubrik: Rätt längd
       text: Texten hinns med i lugn takt på ett pass
 progression:
-  text: Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat. Varje vecka har också ett samtalsdrag, en rad på samtalskortet, som du visar i pass 1 och eleverna prövar i parsamtalet. Dragen kommer i samma ordning på alla nivåer. Gruppen tar nästa drag när den klarar det som står under Gå vidare när, och annars tar ni samma drag en vecka till med nya texter. Välj texter där frågorna har veckans slag, som översikten under Lärarens sidor visar. Planera åtta veckor, och sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna hittar ett ställe själva i bänkboken och visar ledtråden utan h. Tar ni ett drag en vecka till, hinner ni färre av veckorna 6–8, men ta minst en av dem. I de veckorna leder eleverna samtalet och läser i sin egen bänkbok.
+  text: Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat. Varje vecka har också ett samtalsdrag, en rad på samtalskortet, som du visar i pass 1 och eleverna prövar i parsamtalet. Dragen kommer i samma ordning på alla nivåer. Gruppen tar nästa drag när den klarar det som står under Gå vidare när, och annars tar ni samma drag en vecka till med nya texter. Välj texter där frågorna har veckans slag, som översikten under Lärarens sidor visar. Planera åtta veckor. Sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna själva hittar ett ställe i bänkboken och att ledtråden står utan h. Tar ni ett drag en vecka till, hinner ni inte alla veckorna 6–8, men ni tar minst en av dem. I de veckorna leder eleverna samtalet och läser i sin egen bänkbok.
   rader:
     - vecka: "1"
       fokus: Eleverna lär sig vad det är att läsa mellan raderna och övar Det står, Jag vet och Alltså tror jag med slagen Känsla och Vem. Samtalsdraget är samtalskortets två första rader, att säga ”Jag tror att” och en ledtråd och att fråga ”Vad tror du?” och ”Hur vet du det?”
@@ -796,18 +796,24 @@ plan:
       del: Samtala om texten
       istallet: true
       ur: { tabell: "Bänkboken: pass 3 i vecka 6–8", rad: Samtala om texten }
+    # Regeln att sluta, ordagrant ur progressionens text, i delen där du skriver på lyssningsbladet i pass 3 i vecka 6 och 7
+    # (den stängda granskningen av K-583 2026-10-27: regeln stod bara i plan.veckoval och syntes inte i veckan där den prövas).
+    - nar: veckans tredje pass i vecka 6–7
+      del: Samtala om texten
+      text: "Sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna själva hittar ett ställe i bänkboken och att ledtråden står utan h."
     - nar: veckans tredje pass i vecka 1–5
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Så läser ni, Eleverna] }
     - nar: veckans tredje
       kort: "Eleverna läser själva"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Du] }
   veckoval:
-    text: "Planera åtta veckor, och sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna hittar ett ställe själva i bänkboken och visar ledtråden utan h. Tar ni ett drag en vecka till, hinner ni färre av veckorna 6–8, men ta minst en av dem."
+    text: "Planera åtta veckor. Sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna själva hittar ett ställe i bänkboken och att ledtråden står utan h. Tar ni ett drag en vecka till, hinner ni inte alla veckorna 6–8, men ni tar minst en av dem."
     mer: Progression över insatsperioden
     forval: 8
   # När veckan tas en gång till, ur progressionens text och noten under Veckans tre pass (den kalla testaren efter del B,
   # 2026-10-27: veckan som tas om sa inte vad läraren ändrar). Noten leder till tabellen Från det du hör till det du visar.
-  upprepa: "Gruppen tar nästa drag när den klarar det som står under Gå vidare när, och annars tar ni samma drag en vecka till med nya texter. Efter pass 3 bestämmer du vad du visar i nästa veckas pass 1, med tabellen Från det du hör till det du visar."
+  # Den andra meningen säger att en vecka till tar en av veckorna 6–8 (den stängda granskningen av K-583 samma dag).
+  upprepa: "Gruppen tar nästa drag när den klarar det som står under Gå vidare när, och annars tar ni samma drag en vecka till med nya texter. Tar ni ett drag en vecka till, hinner ni inte alla veckorna 6–8, men ni tar minst en av dem. Efter pass 3 bestämmer du vad du visar i nästa veckas pass 1, med tabellen Från det du hör till det du visar."
   utvardering:
     - "Får eleven två poäng utan h på både fråga 2 och fråga 3, och står ledtråden utan h på det sista lyssningsbladet, är eleven klar med insatsen."
     - "Har eleven fler poäng än före men är inte klar, går eleven en period till, och du börjar med det tankesteg som oftast saknades på lyssningsbladet."

@@ -42,7 +42,7 @@ lektionsbank:
   grupp: Texttyp
   skalRubrik: Det texten gör för läsaren
   numrerad: false
-  text: "Varje kurs gäller en texttyp och har texttypen i namnet, som Texttyp: Argumenterande text. Kurserna står under Kurserna på metodens sida, och var och en är en egen metod. Kurserna har samma fyra steg, samma pass i sex delar och en läsare som svarar. Det som byts är vad texten ska göra för läsaren, och därmed det läsaren undrar. Gruppen går en kurs i taget, och du väljer kurs efter vad eleverna behöver skriva i klassen. Behöver eleverna skriva olika texttyper, väljer du den som flest av dem snart ska skriva."
+  text: "Varje kurs gäller en texttyp och har texttypen i namnet, som Texttyp: Argumenterande text. Var och en är en egen metod och står under Kurserna på metodens sida. Kurserna har samma fyra steg, samma pass i sex delar och en läsare som svarar. Det som byts är vad texten ska göra för läsaren, och därmed det läsaren undrar. Gruppen går en kurs i taget, och du väljer kurs efter vad eleverna behöver skriva i klassen. Behöver eleverna skriva olika texttyper, väljer du den som flest av dem snart ska skriva."
   formagor:
     - nr: 1
       namn: Argumenterande text
@@ -377,13 +377,13 @@ urval:
 
 progression:
   rubrik: Så tas stödet bort
-  text: "En kurs går från att du visar till att eleven skriver själv. Du tar bort stödet på två sätt, vecka för vecka: du lämnar över pennan, och du lämnar över rollen som läsare. Gruppen går vidare varje vecka, eftersom kursens läsare väntar på texterna. Den som behöver mer stöd får dig som läsare en gång till, eller säger sin text medan du skriver. Till sist ska eleven göra stegen utan dig, i klassen. Har en elev varit borta, visar kamraten planen och säger vad de valde och varför, och eleven skriver vidare där paret är. I vecka 4 frågar du, i det pass som veckans sida i kursen säger: ”Vilken text skriver du i klassen nu? Vem läser den?” I vecka 5 frågar du hur det gick med texten i klassen."
+  text: "En kurs går från att du visar till att eleven skriver själv. Du tar bort stödet på två sätt, vecka för vecka: du lämnar över pennan, och du lämnar över rollen som läsare. Gruppen går vidare varje vecka, eftersom kursens läsare väntar på texterna. Den som behöver mer stöd får dig som läsare en gång till, eller dikterar sin text för dig. Till sist ska eleven göra stegen utan dig, i klassen. Har en elev varit borta, visar kamraten planen och säger vad de valde och varför, och eleven skriver vidare där paret är. I vecka 4 frågar du, i det pass som veckans sida i kursen säger: ”Vilken text skriver du i klassen nu? Vem läser den?” I vecka 5 frågar du hur det gick med texten i klassen."
   # Eleverna i varje vecka, knutna till målets punkter (passgenomgången i Skrivning, 2026-10-26). Raderna har inget vidare:
   # gruppen går vidare varje vecka, eftersom kursens läsare väntar på texterna.
   rader:
     - vecka: "1"
       fokus: "Läsaren, och du är läsare"
-      roll: Du svarar på en första text, som eleven skriver utan stöd.
+      roll: Du svarar på den korta texten.
       eleverna: "Att läsa en mening som läsaren och säga vad de nu vet och vad de undrar."
     - vecka: "2"
       fokus: "Du visar, och en elev ur ett annat par är läsare"
@@ -392,7 +392,7 @@ progression:
     - vecka: "3"
       fokus: "Gruppens text, till kursens läsare"
       roll: Du håller pennan, och en elev frågar som läsaren. Eleverna väljer.
-      eleverna: "Att välja tillsammans vad som ska med i gruppens text, och att fråga som läsaren med kortet."
+      eleverna: "Att välja tillsammans vad som ska med i gruppens text, och att fråga som läsaren med kursens kort."
     - vecka: "4"
       fokus: "Parens text, som en elev ur ett annat par läser"
       roll: Du väntar med frågan Vem läser? och lyssnar först.
@@ -414,13 +414,13 @@ uppfoljning:
       vad: Skriv vad två eller tre elever säger, på bladet Det jag hör.
     - nar: När en text är klar
       tid: "villkor"
-      vad: Eleven ser om målet syns i texten och fyller i en stapel i sitt diagram.
+      vad: Eleven ser om sitt mål syns i texten och fyller i en stapel i sitt diagram.
     - nar: Efter vecka 3
       tid: "vecka 3"
       vad: Ge klassläraren de fyra stegen och tavlans tre rader, och be hen lägga märke till om eleven säger vem som läser.
     - nar: Första och sista veckan
-      tid: "vecka 1 och 6"
-      vad: Eleven skriver en kort text i tio minuter utan stöd. I sista veckan ger hen båda texterna var sin stapel. Skriv upp om hen planerar den sista texten.
+      tid: "veckans första pass i vecka 1 och 6"
+      vad: Eleven skriver en kort text i tio minuter utan annat stöd än sitt skrivstöd. I sista veckan ger hen båda texterna var sin stapel. Skriv upp om hen planerar den sista texten.
     - nar: Sista passet
       tid: "sista passet"
       vad: Skriv upp vad som nådde fram till läsaren.
@@ -430,18 +430,21 @@ uppfoljning:
 
 # Planen (passgenomgången i Skrivning, 2026-10-26). Metoden har inget tidsschema, eftersom passen står i kurserna, så varje
 # pass säger var det står. Gruppen tar ingen vecka igen, så att justera är progressionens stöd åt den som behöver mer.
-# Beslutet efter kursen står ordagrant ur uppföljningens text, i samma form som kursernas.
+# Beslutet efter kursen står ordagrant ur uppföljningens text, i samma form som kursernas. Efter sajtens Rimlighet
+# (2026-10-27): upprepa säger progressionens regel, att gruppen går vidare varje vecka, så att planen kan visa den under
+# Efter veckan utan knappen Upprepa veckan, och fore säger att kursen ordnar läsarna, eftersom checklistan redan leder dit.
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
   vantar: "Valet av kurs, utvärderingen när gruppen samlas efter kursen och veckor utan Upprepa veckan (Rimligheten 2026-10-27, K-553)."
   passen:
     - nar: vecka 1–6
       utanTidsschema: true
-      text: "Passen minut för minut, texterna och bladen står i varje kurs."
+      text: "Passen minut för minut, texterna och bladen står i varje kurs. Var och en är en egen metod och står under Kurserna på metodens sida."
   fore:
-    - "När du har valt kurs börjar du med kursens checklista och veckans sida för vecka 1."
+    - "Varje kurs säger vilka läsarna är och vad du ordnar inför den."
   justera:
-    - "Den som behöver mer stöd får dig som läsare en gång till, eller säger sin text medan du skriver."
+    - "Den som behöver mer stöd får dig som läsare en gång till, eller dikterar sin text för dig."
+  upprepa: "Gruppen går vidare varje vecka, eftersom kursens läsare väntar på texterna. Den som behöver mer stöd får dig som läsare en gång till, eller dikterar sin text för dig."
   utvardering:
     - "Svarar den nya texten på varje fråga på kursens kort, avslutar du insatsen."
     - "Är stapeln för den nya texten högst en ruta högre än stapeln för den första korta texten, tar du upp det med elevhälsan."

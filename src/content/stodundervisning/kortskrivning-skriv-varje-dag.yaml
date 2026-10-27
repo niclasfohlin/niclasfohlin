@@ -60,7 +60,7 @@ principer:
 
 tidsschema:
   rubrik: Passet, del för del
-  text: "Skrivtiden börjar på tre minuter, och passet är då omkring tio minuter. Skriver de flesta fortfarande när klockan ringer, lägger du till en minut nästa pass, upp till åtta. Slutar de flesta före klockan, tar du bort en minut, som lägst till tre. Den som vill står över första tanken eller raden. Det allra första passet tar omkring 25 minuter och står i Börja här: de tio första passen. Passet och När pennan stannar står också på Lektionskortet, ett A4 att ha framför dig."
+  text: "Skrivtiden börjar på tre minuter, och passet är då omkring tio minuter. Skriver de flesta fortfarande när klockan ringer, lägger du till en minut nästa pass, upp till åtta. Slutar de flesta före klockan, tar du bort en minut, som lägst till tre. Den som vill står över första tanken eller raden. Det allra första passet tar omkring 25 minuter och står efter tabellen. Passet och När pennan stannar står också på Lektionskortet, ett A4 att ha framför dig."
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -87,6 +87,21 @@ exempel:
     - "Lärarens notering: Elias började inte inom en minut, men kom igång när hans egna ord stod först. Fyra av fem skrev ännu när klockan ringde. Sex minuter i morgon, och då skriver Elias sin första rad själv."
 
 tabeller:
+  - rubrik: "Första passet, omkring 25 minuter"
+    plats: efter-tidsschema
+    meny: true
+    kolumner:
+      - Del
+      - Så gör du
+    rader:
+      - - "Boken\n0–⁠4 min"
+        - "Dela ut skrivböckerna: ”Boken är din och står kvar här. Jag läser bara det du visar mig, och du får hitta på. Blir jag orolig för någon berättar jag det vidare.”"
+      - - "Du skriver\n4–⁠8 min"
+        - "Visa kort 1 från en annan nivå, så att gruppens eget kort 1 är nytt i passet. Skriv i två minuter så att alla ser, i din skrivbok mitt på bordet eller på tavlan, och tänk högt. Stryk över ett ord, sätt prickar under ett svårt ord, och skriv ditt sista ord igen när det tar stopp."
+      - - "Papperskorgen\n8–⁠12 min"
+        - Gruppen skriver utifrån samma kort i två minuter på lösa papper som ingen läser. Den som vill sparar sitt, och de andra skrynklar ihop och slänger.
+      - - "Själva passet\n12–⁠25 min"
+        - "Håll sedan passet med gruppens kort 1 och tre minuters skrivtid. Säg före Dela att den som vill står över. Läs din rad först, och låt gruppen svara: ”Berätta mer om …”"
   - rubrik: När pennan stannar
     plats: efter-tidsschema
     meny: true
@@ -175,7 +190,7 @@ urval:
   rubrik: Var hittar du skrivkorten?
   text:
     - "Skrivkorten ligger på sidan Ta fram ett skrivkort, med kort på var och en av nivåerna Bas, Medel och Avancerat, ungefär åk 1–3, 4–6 och 7–9. På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. På Medel är två av tre kort bilder eller händelser med foto, och resten är citat ur sagor och dikter. På Avancerat är hälften bilder och händelser, hälften dikter och citat. Välj ett kort eller tio och tryck på en nivå. Varje tryck ger nya kort. Kortet visas stort med en klocka bredvid, som du ställer på skrivtiden och som ringer när tiden är slut, och korten går att skriva ut."
-    - Korten är inte märkta som lättsamma eller allvarliga, och inget tungt är bortvalt. Välj nivå efter eleverna och hur vuxet kortet ska vara, inte efter årskursen, och se på kortet före passet.
+    - Ju högre nivå, desto fler dikter och citat. Korten är inte märkta som lättsamma eller allvarliga, och inget tungt är bortvalt. Välj nivå efter eleverna och hur vuxet kortet ska vara, inte efter årskursen, och se på kortet före passet.
   kravText: "Gör du ett eget kort, till exempel ur dagens lektion, eller låter eleverna göra ett, ska det klara tre krav:"
   krav:
     - rubrik: Något att säga
@@ -190,7 +205,7 @@ progression:
   enhet: När
   rader:
     - vecka: Pass 1–10
-      fokus: "Ta gärna korten Börja här i ordning. Passen står i Börja här: de tio första passen."
+      fokus: "Korten står i Börja här: de tio första passen. Ta dem gärna i ordning."
       roll: Du skriver den första minuten, visar din sida först i Dela och lyssnar hos ett par.
       eleverna: Att säga sin första tanke till en kamrat och börja skriva inom en minut, och att stryka över i stället för att sudda.
     - vecka: Från pass 11
@@ -207,7 +222,7 @@ progression:
       roll: "Du frågar sist: ”Kom någon på något nytt medan ni skrev?”"
       eleverna: Att räkna sina ord fram till strecket och skriva fler ord på tre minuter än i början.
     - vecka: Vecka 6
-      fokus: Ett pass är Skriv igen, utan kort.
+      fokus: Veckans första pass är Skriv igen, utan kort.
       roll: "I Dela frågar du sist: ”Vad går lättare nu än när vi började?”"
       eleverna: Att börja direkt utifrån en egen stjärnmärkt text, skriva nytt om samma sak och säga vad som är nytt.
     - vecka: Efter vecka 6
@@ -230,17 +245,53 @@ uppfoljning:
     - nar: Efter varje pass
       tid: "varje pass"
       vad: "Skriv en rad i din egen skrivbok: vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, vilka som slutade före klockan, hur många som stod över i Dela, och nästa skrivtid."
-    - nar: Vecka 6
+    - nar: Skriv igen
       tid: "veckans första pass i vecka 6"
-      vad: "Ett av passen före veckans sista är Skriv igen. Eleven läser en stjärnmärkt text i stället för Dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
-    - nar: Efter vecka 6
+      vad: "Veckans första pass i vecka 6 är Skriv igen. Eleven läser en stjärnmärkt text i stället för Dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
+    - nar: Alla visar Min skrivlista
       tid: "veckans sista pass i vecka 6"
       vad: I veckans sista pass i vecka 6 ber du alla visa dig Min skrivlista, inte bara två. Efter passet läser du dina rader från vecka 6.
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
   vantar: "Pass 1–10 ur Börja här och det första passet på omkring 25 minuter i planen (Rimligheten 2026-10-27, K-553)."
+  utan:
+    - "Det allra första passet tar omkring 25 minuter och står efter tabellen."
+  passen:
+    - nar: första passet
+      tabell: "Första passet, omkring 25 minuter"
+    - nar: första passet
+      del: Själva passet
+      text: Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.
+      ur: { tabell: Kort om kortskrivning, rad: Det finns inget rätt eller fel }
+    - nar: pass 2
+      del: Skriv
+      text: Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.
+      ur: { tabell: Kort om kortskrivning, rad: Texten ska inte bedömas eller rättas }
+    - nar: pass 3
+      del: Skriv
+      text: Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.
+      ur: { tabell: Kort om kortskrivning, rad: Det behöver inte bli en färdig produkt }
+    - nar: pass 4
+      del: Skriv
+      text: Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.
+      ur: { tabell: Kort om kortskrivning, rad: Texten är främst för dig själv }
+    - nar: pass 5
+      del: Skriv
+      text: Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.
+      ur: { tabell: Kort om kortskrivning, rad: Du får veta i förväg om något ska delas }
+    - nar: pass 6
+      del: Skriv
+      text: Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.
+      ur: { tabell: Kort om kortskrivning, rad: Det viktiga är att du skriver }
+    - nar: veckans första pass i vecka 6
+      kort: Skriv igen
+      text: "Eleven läser en stjärnmärkt text i stället för Dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
+    - nar: veckans första pass i vecka 6
+      del: Före passet
+      istallet: true
+      text: Veckans första pass är Skriv igen, utan kort.
   nivaval:
-    text: "På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. Välj nivå efter eleverna och hur vuxet kortet ska vara, inte efter årskursen, och se på kortet före passet."
+    text: "På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. Ju högre nivå, desto fler dikter och citat. Välj nivå efter eleverna och hur vuxet kortet ska vara, inte efter årskursen, och se på kortet före passet."
     mer: Var hittar du skrivkorten?
   langdval:
     text: Skrivtiden börjar på tre minuter, och passet är då omkring tio minuter. Skriver de flesta fortfarande när klockan ringer, lägger du till en minut nästa pass, upp till åtta. Slutar de flesta före klockan, tar du bort en minut, som lägst till tre.
@@ -265,7 +316,7 @@ checklista:
   rubrik: Checklista inför första passet
   punkter:
     - Varje elev har en skrivbok med Min skrivlista vikt och inklistrad längst bak, och jag har en egen.
-    - Gruppens kort 1 och kort 1 från en annan nivå går att visa för alla, och klockan syns.
+    - Gruppens kort 1 i Börja här och kort 1 från en annan nivå går att visa för alla, och klockan syns.
     - Lösa papper och en papperskorg står framme, och ett blad med ”Jag ser …” sitter på väggen.
     - Jag har tänkt ut min första mening till gruppens kort 1.
 grund:
@@ -279,7 +330,7 @@ ramar:
   ramar:
     - rubrik: "Börja här: de tio första passen"
       text:
-        - Varje nivå har tio kort. Kort 1 hör till första passet och kort 10 till det tionde. Är kortet i veckans sista pass ett citat, tar du ett bildkort i stället och citatet i passet efter. Tabellen visar vilka korten är och ger en början att låna till varje pass. Efter tabellen står det första passet och det som kommer till i pass 1–10. De tio korten är ett förslag. Du kan när som helst slumpa fram ett eller tio nya kort på sidan Ta fram ett skrivkort och själv ge eleverna en början att låna.
+        - Varje nivå har tio kort. Kort 1 hör till första passet och kort 10 till det tionde. Är kortet i veckans sista pass ett citat, tar du ett bildkort i stället och citatet i passet efter. Tabellen visar vilka korten är och ger en början att låna till varje pass. Efter tabellen står det som kommer till i pass 1–10. Det första passet står efter schemat Passet, del för del. De tio korten är ett förslag. Du kan när som helst slumpa fram ett eller tio nya kort på sidan Ta fram ett skrivkort och själv ge eleverna en början att låna.
       oversikt:
         kolumner:
           - Pass
@@ -299,16 +350,6 @@ ramar:
           - ["9", "Ett barn och en ren", "En flicka på en gunga", "Ett gäng på en brygga", "”Nästa dag …”"]
           - ["10", "En ö på en sköldpaddas rygg", "Citat: Emily Dickinson", "Citat: Edith Södergran", "”Jag tror att …”"]
       delar:
-        - rubrik: Första passet, omkring 25 minuter
-          falt:
-            - rubrik: Boken
-              text: "Dela ut skrivböckerna: ”Boken är din och står kvar här. Jag läser bara det du visar mig, och du får hitta på. Blir jag orolig för någon berättar jag det vidare.”"
-            - rubrik: Du skriver
-              text: "Visa kort 1 från en annan nivå, så att gruppens eget kort 1 är nytt i passet. Skriv i två minuter så att alla ser, i din skrivbok mitt på bordet eller på tavlan, och tänk högt. Stryk över ett ord, sätt prickar under ett svårt ord, och skriv ditt sista ord igen när det tar stopp."
-            - rubrik: Papperskorgen
-              text: Gruppen skriver utifrån samma kort i två minuter på lösa papper som ingen läser. Den som vill sparar sitt, och de andra skrynklar ihop och slänger.
-            - rubrik: Passet
-              text: "Håll sedan passet med gruppens kort 1 och tre minuters skrivtid. Säg före Dela att den som vill står över. Läs din rad först, och låt gruppen svara: ”Berätta mer om …”"
         - rubrik: "Pass 1–10: det som kommer till"
           falt:
             - rubrik: Dagens kort
@@ -316,7 +357,7 @@ ramar:
             - rubrik: En början att låna
               text: Sätt ett tomt blad på väggen. Före varje pass skriver du dagens början under de förra. Börja din egen första mening med den. Den som behöver lånar en början eller en rad ur kortet. Bladet sitter kvar hela perioden.
             - rubrik: Pass 1–6
-              text: Säg nästa rad ur tabellen i Kort om kortskrivning innan klockan startar.
+              text: Säg passets rad ur tabellen i Kort om kortskrivning innan klockan startar.
             - rubrik: Första tanken
               text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”"
             - rubrik: Dela
@@ -444,7 +485,7 @@ lathund:
       - nar: Du noterar efter varje pass
         vad: Vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, vilka som slutade före klockan, hur många som stod över i Dela, och nästa skrivtid.
       - nar: Vecka 6
-        vad: "Ett av passen före veckans sista är Skriv igen. Eleven läser en stjärnmärkt text i stället för Dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
+        vad: "Veckans första pass är Skriv igen. Eleven läser en stjärnmärkt text i stället för Dagens kort. Säg: ”Skriv nytt om samma sak.” I Dela säger eleven vad som är nytt."
 lektionskort:
   - text: "Lektionskortet är passet på ett A4: målet, passet med det du gör och säger, När pennan stannar och de tio första passen. Skriv ut det och ha det framför dig under passet."
 film:
