@@ -72,7 +72,7 @@ export interface PlanData {
   /** Progressionens rader, med vad eleverna blir bättre på och regeln för att gå vidare (K-572), som veckan visar. */
   progression?: { enhet: string; rubrik: string; rader: { vecka: string; led?: string; fokus: string; roll: string; eleverna?: string; vidare?: string; taggar?: string[]; rubrik?: string; kort: string }[] };
   /** Uppföljningens rader; en rad med tabell har passets delar, som passet när gruppen samlas efter kursen (K-553). */
-  uppfoljning: { rader: { nar: string; vad: string; tid?: string; perElev?: number | [number, number]; tabell?: string; passet?: PassTabell }[] };
+  uppfoljning: { rader: { nar: string; vad: string; tid?: string; perElev?: number | [number, number]; tabell?: string; passet?: PassTabell; resultat?: string }[] };
   checklista: string[];
   /** Checklistans rubrik, och om den gäller första passet ("Före första passet", "Checklista inför pass 1"), så att den bara
    * står före första passet och inte i varje vecka (de kalla testarna 2026-10-24). */

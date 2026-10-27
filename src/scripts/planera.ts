@@ -1060,7 +1060,8 @@ const riktningar = (s: Sammanstallning, plats: string, medResultat = false) => `
   const res = medResultat ? foreOchEfter(e, plats) : '';
   return `<li>${namnknapp(plats, e)}<span class="pl-riktning${r ? ` ${r}` : ''}">${r ? `<span aria-hidden="true">${PIL[r]} </span>` : ''}${esc(riktningText(e))}${res ? `<span class="pl-res-kort">${esc(stor(res))}</span>` : ''}</span>${utvecklingsruta(plats, e, s)}</li>`;
 }).join('')}</ul>`;
-const resultatfalt = (nyckel: string) => (harElever() ? `<div class="pl-resultat"><span class="pl-hjalp">Resultat för varje elev, om du vill</span>${aktiv.foljd.elever.map((e) => `<label><span>${esc(e.namn)}</span><input class="pl-falt" type="text" maxlength="40" data-resultat="${esc(nyckel)}|${esc(e.id)}" value="${esc(aktiv.foljd.resultat[nyckel]?.[e.id] ?? '')}" /></label>`).join('')}</div>` : '');
+// Det läraren för in står vid fältet, med metodens skala (K-579), som "Resultat för varje elev, om du vill: ljud av 21".
+const resultatfalt = (nyckel: string) => { const skala = data.uppfoljning.rader[Number(nyckel.split('-')[0])]?.resultat; return harElever() ? `<div class="pl-resultat"><span class="pl-hjalp">Resultat för varje elev, om du vill${skala ? `: ${esc(skala)}` : ''}</span>${aktiv.foljd.elever.map((e) => `<label><span>${esc(e.namn)}</span><input class="pl-falt" type="text" maxlength="40"${skala ? ` placeholder="${esc(skala)}"` : ''} data-resultat="${esc(nyckel)}|${esc(e.id)}" value="${esc(aktiv.foljd.resultat[nyckel]?.[e.id] ?? '')}" /></label>`).join('')}</div>` : ''; };
 // Uppföljningens namn ur standarden, som i raden och texterna: Efter insatsen för den första efter insatsen (buggjakten
 // 2026-10-25: Efter-sidan sa "Efter sex till åtta veckor" om en plan på fyra veckor).
 // Resultat per elev hör till uppföljningens mätningar, före, efter och vid ett visst pass eller en viss vecka, och inte till

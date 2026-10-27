@@ -333,6 +333,7 @@ Planen är en modul (Niclas 2026-10-24: "När du sedan skalar detta till fler m�
 |---|---|
 | `uppfoljning.rader[].tid` | När raden görs, med standardens ord nedan. En metod kan planeras när varje rad i uppföljningen har sin tid; radens `nar` står kvar som dess text |
 | `uppfoljning.rader[].perElev` | Minuterna per elev när raden görs med en elev i taget, som `5` eller `[5, 8]`. Planen säger då att den görs utanför passen och tiden för gruppen |
+| `uppfoljning.rader[].resultat` | Det läraren för in för varje elev vid mätningen, med metodens skala och de ord beslutet använder, som "poäng 0–8" eller "ljud av 21, mellanrum och tecken av 10", högst 80 tecken. Planen visar det vid resultatfältet. Hur mätningen görs står i radens `vad`, ordagrant ur metoden (K-579) |
 | `progression.rader[].vecka` | Veckorna eller passen raden gäller: `1`, `4–5`, `6–8`, `9–10 vid behov`, `6 till det sista`, `Pass 2–6` och `Från pass 11`. `Efter vecka 7` är det som kommer efter insatsen, som nästa period: raden tar ingen vecka och står under Efter insatsen. Kolumnen heter Vecka eller Pass, och med Pass visar veckan stegen för veckans pass |
 | `progression.rader[].rubrik` | Veckans fokus i några ord, till planens översikt. Utan den står kursveckans titel i en kurs med veckor ("Vecka 3 · Hundratal och två växlingar"), och annars fokus första mening. I en kurs med veckor leder veckan i planen också till veckans lektion i metoden |
 | `progression.rader[].taggar` | Bankens taggar som veckans poster har, som lästexternas slag, så att veckan visar nivåns texter med dem |

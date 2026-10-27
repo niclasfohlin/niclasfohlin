@@ -433,6 +433,9 @@ const metodensFalt = z.strictObject({
         // tabell: ett pass i delar som raden gör, som passet när gruppen samlas efter kursen, som planen visar vid raden (K-553).
         tabell: z.string().optional(),
         perElev: z.union([z.number().int().min(1).max(60), z.tuple([z.number().int().min(1).max(60), z.number().int().min(1).max(60)])]).optional(),
+        // resultat: det läraren för in för varje elev vid mätningen, med metodens skala, som "poäng 0–8" eller "ljud av 21".
+        // Planen visar det vid resultatfältet (K-579; de kalla testarna 2026-10-27: fälten sa inte vad som skulle in).
+        resultat: text.max(80).optional(),
       })).min(1),
     }).optional(),
     // Planera insatsen (K-489, METODER.md under Planera insatsen). Står inte på sidan eller i Word.
