@@ -67,7 +67,7 @@ const ledensFormer = (vad: string) => {
 const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) ? {} : { versal: true }), ...extra });
 
 /** Metodens saker: materialets ramar, mallarna, snabbmallen, lektionskorten, lathunden, bankens texter och verktygen. */
-export function metodensSaker(d: MetodData, id: string): MetodSak[] {
+export function metodensSaker(d: MetodData, id: string, version?: string): MetodSak[] {
   const sida = `/stodundervisning/${id}`;
   const saker: MetodSak[] = [];
   const bank = bankAv(d);
@@ -151,7 +151,7 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // Materialets avsnitt, som "Kursens material", och kursens veckor och blad: "vecka 3" leder till veckans lektion i en kurs
   // med veckor, och "Addition 1" till bladet (src/lib/karta.ts).
   if (d.ramar?.rubrik) saker.push(sak(d.ramar.rubrik, `${sida}#ramar`));
-  for (const [v, { adress }] of Object.entries(kursensVeckor(d, id))) saker.push({ namn: `Vecka ${v}`, former: [`Vecka ${v}`, `vecka ${v}`], adress });
+  for (const [v, { adress }] of Object.entries(kursensVeckor(d, id, version))) saker.push({ namn: `Vecka ${v}`, former: [`Vecka ${v}`, `vecka ${v}`], adress });
   for (const [namn, plats] of blad) { const a = bladAnkare.get(`${plats.ri}-${plats.li}`); if (a) saker.push({ namn, former: [namn], versal: true, adress: `${sida}#${a}` }); }
   // Ett blad med en titel efter kolon, som "Du som leder: läs en rad i taget", heter också det första ledet, när inget annat
   // blad och ingen annan sak har det (länkgranskningen av omgång 1 2026-10-26: "kortet Du som leder" blev ingen länk).

@@ -228,8 +228,8 @@ async function andraMetoder(id: string): Promise<MetodSak[]> {
 /** Sakerna som planens texter nämner (K-493), så att sidan bara bär dem. */
 // Med andra texter som planen visar ur metoden, som lektionens rader och material i en serie (Codex 2026-10-27: "Kedjorna" i
 // tabellens not blev ingen länk).
-export async function planensSaker(m: Metod, andra: string[] = []): Promise<MetodSak[]> {
-  const alla = [...metodensSaker(m.data, m.id), ...(await andraMetoder(m.id))];
+export async function planensSaker(m: Metod, andra: string[] = [], version?: string): Promise<MetodSak[]> {
+  const alla = [...metodensSaker(m.data, m.id, version), ...(await andraMetoder(m.id))];
   const texterna = [...visadeTexter(m.data), ...andra];
   const anvanda = new Set(texterna.flatMap((t) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
   // Ett spann, som "Bildserie 2–6", bär varje sak i spannet, så att planen kan länka dem var för sig. Namnet är ett eller
@@ -474,13 +474,15 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     period: d.period,
     ...(d.progression ? { progression: { enhet: d.progression.enhet, rubrik: d.progression.rubrik, rader: d.progression.rader.map((r) => ({ ...r, kort: veckansKort(r, kurs[r.vecka]?.titel) })) } } : {}),
     // Versionens tid på en rad i uppföljningen, efter radens När (K-576).
-    uppfoljning: { rader: (d.uppfoljning?.rader ?? []).map((r) => ({ ...r, vad: iV(r.vad) || r.vad })).map((r) => (versionen?.tider?.[r.nar] ? { ...r, tid: versionen.tider[r.nar] } : r)).map((r) => (r.tabell ? { ...r, passet: passetsTabell(d, m.id, r.tabell) } : r)) },
+    uppfoljning: { rader: (d.uppfoljning?.rader ?? []).map((r) => ({ ...r, vad: iV(r.vad) })).map((r) => (versionen?.tider?.[r.nar] ? { ...r, tid: versionen.tider[r.nar] } : r)).map((r) => (r.tabell ? { ...r, passet: passetsTabell(d, m.id, r.tabell) } : r)) },
     checklista: d.checklista?.punkter ?? [],
     ...(d.checklista ? { checklistaRubrik: d.checklista.rubrik } : {}),
     forstaChecklista,
     ...(bank ? { bank } : {}),
     harLathund: harLathund(d),
-    saker: await planensSaker(m),
+    // Sakerna i versionen, så att "vecka 1" leder till versionens vecka 1 (Codex 2026-10-27: Guidebokens vecka 1 ledde till
+    // Skattjakten).
+    saker: await planensSaker(m, [], version),
     ...(d.plan?.veckansPass ? { veckansPass: veckornasPass(d, m.id, version) ?? {} } : {}),
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
@@ -640,6 +642,18 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   if (m.data.plan?.versionsval && !m.data.plan.versionsval.versioner) {
     if (!m.data.lektionsbank) fel.push('plan.versionsval utan versioner gäller en serie med lektionsbank, vars kurser har egna planer.');
     else for (const x of await seriensMetoder(m)) if (!planbar(x.data)) fel.push(`plan.versionsval leder till kursen ${x.data.titel}, som inte kan planeras än (plan.vantar eller uppföljningen utan tid).`);
+  }
+  // Varje version räknas som planen gör det (Codex 2026-10-27): uppföljningen med versionens tider, en rad i uppföljningen
+  // som har kvar en text i versionen, och versionens veckor som veckosidorna i veckans ram, så att metoden är roten.
+  const versioner = m.data.plan?.versionsval?.versioner ?? [];
+  const allaVersioner = versionernasNamn(m.data);
+  const rader = m.data.uppfoljning?.rader ?? [];
+  for (const v of versioner) {
+    for (const r of rader) if (!iVersionen(r.vad, v.namn, allaVersioner)) fel.push(`Uppföljningens rad "${r.nar}" har ingen text i ${v.namn}. Skriv en mening för varje version, eller ge versionen en egen tid i plan.versionsval.`);
+    for (const n of Object.keys(v.tider ?? {})) if (!rader.some((r) => r.nar === n)) fel.push(`plan.versionsval: ${v.namn} har en tid för "${n}", som uppföljningen inte har.`);
+    if (v.tider) for (const f of metodplan({ ...m.data, uppfoljning: { ...m.data.uppfoljning!, rader: rader.map((r) => (v.tider![r.nar] ? { ...r, tid: v.tider![r.nar] } : r)) } }).fel) fel.push(`plan.versionsval, ${v.namn}: ${f}`);
+    const sista = Math.max(0, ...Object.keys(kursensVeckor(m.data, m.id, v.namn)).map(Number));
+    if (typeof v.veckor === 'number' && sista && sista !== v.veckor) fel.push(`plan.versionsval: ${v.namn} har ${v.veckor} veckor, men veckosidorna i ramen går till vecka ${sista}.`);
   }
   // Utvärderingen väntar på en rad i uppföljningen efter insatsen (K-586).
   if (m.data.plan?.utvarderasEfter) {

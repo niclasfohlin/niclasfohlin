@@ -2593,6 +2593,9 @@ try {
   await db.oppna(PLAN);
   await db.kor('localStorage.clear()');
   await db.oppna(`${PLAN}#s=2026-11-23&d=24&l=6`);
+  // Med två dagar i en metod med tre pass säger planen vilket av veckans pass som faller bort (K-580).
+  const farre = (await db.text('#pl-summa-text')) ?? '';
+  sant('färre dagar än metodens pass säger vilket av veckans pass som faller bort', /Metoden har 3 pass i veckan, och planen har 2\. Veckans tredje pass(, [^,]+,)? faller då bort varje vecka\./.test(farre), farre);
   await db.tryck('#pl-spara');
   await vanta(200);
   await db.kor(`document.getElementById('pl-andra').open = true`);
@@ -2630,6 +2633,18 @@ try {
   sant('en egen längd från en annan plan står inte kvar efter Ny plan', dbEgen?.split(',').includes('5') && !dbNy?.split(',').includes('5'), [dbEgen, dbNy]);
   sant('byte av dagar: inga fel', !db.undantag.length && !(await db.kor('window.__fel.length')), db.undantag);
   db.stang();
+
+  // Ett pass som faller på en röd dag säger vilket av veckans pass som faller bort med det (Codex 2026-10-27: skattjakten
+  // föll på juldagen utan att planen sa vad som föll bort).
+  const rd = await flik(false, Date.UTC(2026, 11, 14, 9, 0, 0));
+  await rd.oppna(PLAN);
+  await rd.kor('localStorage.clear()');
+  await rd.oppna(`${PLAN}#s=2026-12-21&d=135&l=6&v=1`);
+  await vanta(150);
+  const rodText = (await rd.text('#pl-veckan')) ?? '';
+  sant('en röd dag säger vilket av veckans pass som faller bort', /Passet fredag 25 december faller bort, [^.]*, och med det veckans tredje pass[^.]*\. Veckans pass har var sitt innehåll/.test(rodText), rodText.slice(0, 1500));
+  sant('en röd dag: inga fel', !rd.undantag.length && !(await rd.kor('window.__fel.length')), rd.undantag);
+  rd.stang();
 
   // ---- Planens format: lagringen och filen från 0.2.7 ----
   // Planerna som lärarna har sparat med 0.2.7 öppnas i den här versionen utan att något försvinner, och laddas ner i den här

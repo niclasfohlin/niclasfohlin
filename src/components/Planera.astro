@@ -165,6 +165,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
                 <div class="sk-nivaknappar pl-nivaer" id="pl-versioner">
                   {data.versionsval.versioner.map((v) => <button type="button" class="sk-niva pl-ingang pl-versionsknapp" data-version={v.slug} aria-pressed="false" data-goatcounter-click={`planera:${data.id}:version-${v.slug}`} data-goatcounter-title={`${data.titel}: ${v.namn}`}><span>{v.namn}</span>{v.veckor && <span class="pl-ingang-lektion">{v.veckor} veckor</span>}</button>)}
                 </div>
+                <p class="pl-hjalp pl-varning" id="pl-version-not" hidden>Du har bockat pass eller skattat, så {data.versionsval.rubrik.toLocaleLowerCase('sv')} står kvar. Gör en ny plan för att byta.</p>
                 <StodForValet id="pl-versionsstod" stod={data.versionsval} metod={data} slag="versionsstod" vad={data.versionsval.rubrik.toLocaleLowerCase('sv')} />
               </fieldset>
             )}
