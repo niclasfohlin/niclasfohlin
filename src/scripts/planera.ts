@@ -1587,7 +1587,10 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   // K-572). Annars planens mening om knappen, som i den sista raden, där beslutet efter perioden gäller.
   const vidare = radernaI(v).filter((r) => r.vidare && vidareProvasI(mp, plan, v, data.progression!.rader.indexOf(r))).map((r) => vidareMening(r.vidare!));
   const medRegler = !!data.progression?.rader.some((r) => r.vidare);
-  const igenRegel = upprepaIVeckan(data.upprepa, medRegler, vidare.length > 0);
+  // I planens sista vecka står inte meningarna om hur nästa vecka börjar, eftersom ingen vecka kommer efter (den stängda
+  // granskningen av K-583 2026-10-27: Textsamtals vecka 8 sa "nästa veckas pass 1").
+  const regeln = upprepaIVeckan(data.upprepa, medRegler, vidare.length > 0);
+  const igenRegel = regeln && !regeln.hela && !plan.veckor[v.nr] ? null : regeln;
   const planens = 'Behöver gruppen mer tid tar ni samma vecka en gång till, och resten av planen flyttas fram.';
   const igen = igenRegel?.hela ? lankad(mening(igenRegel.text)) : [planens, ...(igenRegel ? [lankad(mening(igenRegel.text))] : [])].join(' ');
   const efterVeckan = [
