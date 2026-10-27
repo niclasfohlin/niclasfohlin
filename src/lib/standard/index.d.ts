@@ -343,7 +343,8 @@ export declare const rentMal: (s: unknown) => string;
 export declare const malText: (mal?: string) => string;
 /** En text där elevlistans namn och förnamn har blivit "en elev". */
 export declare function utanNamn(text: string, elever: { namn: string }[], kvar?: { namn: string }[]): string;
-export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[]; passet?: (p: Pass) => string }, plan: Plan, o: { id: string; lank: (vecka?: number | 'fore') => string; namn?: string; nu: Date; tider?: Val['tider'] }): string;
+export declare function extraPassetsDag(plan: Plan, val: Val): string | undefined;
+export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[]; passet?: (p: Pass) => string; extraPass?: { datum: string; text: string } }, plan: Plan, o: { id: string; lank: (vecka?: number | 'fore') => string; namn?: string; nu: Date; tider?: Val['tider'] }): string;
 /** Passens tider, rensade: veckodag till början och slut, som "09:20" och "10:00". */
 export declare function rentaTider(tider: unknown): Record<string, [string, string]>;
 /** Passets tid efter veckodagen det låg på innan det flyttades. */

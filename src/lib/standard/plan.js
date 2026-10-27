@@ -2905,10 +2905,29 @@ const kalDatum = (s) => s.replace(/-/g, '');
  * igen kan känna igen händelserna; SEQUENCE växer med tiden, så att den senaste filen gäller. Beskrivningen har veckans hela
  * fokus och, när sidan ger det, passets delar (info.passet), så att ett möte i andra meningen syns (de kalla testarna
  * 2026-10-24). Det som görs före första passet är en händelse över hela veckan före.
- * @param {{ titel: string, uppfoljning: { nar: string }[], fokus: (string | null)[], passet?: (p: Pass) => string }} info
+ * @param {{ titel: string, uppfoljning: { nar: string }[], fokus: (string | null)[], passet?: (p: Pass) => string, extraPass?: { datum: string, text: string } }} info
  * @param {Plan} plan
  * @param {{ id: string, lank: (vecka?: number | 'fore') => string, namn?: string, nu: Date, tider?: Val['tider'] }} o
  */
+/**
+ * Dagen för en versions extra pass före pass 1, som Berättelseramens egna ram, där gruppen fyller i ramen veckan före pass 1
+ * (Rimligheten 2026-10-27, K-576): den första av planens dagar i skolveckan före första passet som inte är en röd dag,
+ * förbi lovveckor. En rot för sidan och kalenderfilen.
+ * @param {Plan} plan
+ * @param {Val} val
+ * @returns {string | undefined}
+ */
+export function extraPassetsDag(plan, val) {
+  if (!plan.forstaPass) return undefined;
+  const lov = new Set(val.lov ?? []);
+  for (let mandag = plusDagar(mandagen(plan.forstaPass), -7), i = 0; i < 4; i++, mandag = plusDagar(mandag, -7)) {
+    if (lov.has(veckonyckel(mandag))) continue;
+    const dag = [...val.dagar].sort((a, b) => a - b).map((d) => plusDagar(mandag, d - 1)).find((d) => !helgdag(d));
+    if (dag) return dag;
+  }
+  return undefined;
+}
+
 export function kalenderfil(info, plan, o) {
   const stamp = o.nu.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const sekvens = Math.max(0, Math.floor((o.nu.getTime() - Date.UTC(2026, 0, 1)) / 60000));
@@ -2929,6 +2948,8 @@ export function kalenderfil(info, plan, o) {
     const passet = info.passet ? veckornaIPlanen(info.passet(p), plan.borja) : '';
     handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${hogstaPassnr(plan)}${vem}`, `Vecka ${planveckansNamn(plan, v).plan} i planen.${fokus}${passet ? `\n${passet}` : ''}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), tider[String(veckodag(passetsDag(p)))]);
   }
+  // En versions extra pass före pass 1, med passets klockslag den dagen (extraPassetsDag).
+  if (info.extraPass) handelse(`${o.id}-extra`, info.extraPass.datum, `${info.titel}: det extra passet före pass 1${vem}`, `${hel(info.extraPass.text)}\nFöre första passet i planen: ${o.lank('fore')}`, o.lank('fore'), tider[String(veckodag(info.extraPass.datum))]);
   for (const u of plan.uppfoljning.filter((x) => !x.period)) u.tillfallen.forEach((t, i) => {
     const fore = t.vecka === 0;
     // Raden heter som på sidan, Efter insatsen för den första efter insatsen (buggjakten 2026-10-25: kalendern sa "efter sista

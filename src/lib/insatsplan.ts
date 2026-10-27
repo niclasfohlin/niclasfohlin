@@ -88,6 +88,8 @@ export interface PlanData {
   veckansPass?: Record<string, PassTabell>;
   /** Metodens vecka för kursens pass N, ur fälten Pass N på veckornas sidor (K-585). */
   passensVeckor?: Record<string, number>;
+  /** Versionens extra pass före pass 1 (plan.versionsval, extraPass; K-576): namnet, delarna ur passets text, och raden i fore som säger vad som görs. */
+  extraPass?: { rubrik?: string; delar?: { tid: string; fas: string; vad: string }[]; fore?: string };
   /** Passet ur metodens tidsschema (betan 2026-10-24: ingen av de kalla testarna kunde hålla första passet bara efter planen):
    * delarna med tid och vad läraren gör, förberedelsen (raden Före passet), andra rader som Hemma, och det läraren gör efter
    * passet (passrutinens efterPasset), med adresserna till passet och stegen på metodens sida. */
@@ -515,6 +517,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     saker: await planensSaker(m, [], version),
     ...(d.plan?.veckansPass ? { veckansPass: veckornasPass(d, m.id, version) ?? {} } : {}),
     ...(passensVeckor(d, version) ? { passensVeckor: passensVeckor(d, version) } : {}),
+    ...(versionen?.extraPass ? { extraPass: { ...(versionen.extraPass.rubrik ? { rubrik: versionen.extraPass.rubrik } : {}), ...(faltetsDelar(versionen.extraPass.text ?? '') ? { delar: faltetsDelar(versionen.extraPass.text ?? '')!.delar.map(({ tid, fas, vad }) => ({ tid, fas, vad })) } : {}), ...(versionen.fore?.[0] ? { fore: versionen.fore[0] } : {}) } } : {}),
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
     // En rad vars text bara gäller en annan version står inte med (K-576).
@@ -686,6 +689,8 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   if (m.data.plan?.skattningar && versioner.length && rader.some((r) => versioner.some((v) => !iVersionen(r.nar, v.namn, allaVersioner)))) fel.push('En metod med plan.skattningar har inga rader i uppföljningen som bara gäller en version i plan.versionsval.');
   for (const v of versioner) {
     for (const r of rader) if (iVersionen(r.nar, v.namn, allaVersioner) && !iVersionen(r.vad, v.namn, allaVersioner)) fel.push(`Uppföljningens rad "${r.nar}" har ingen text i ${v.namn}. Skriv en mening för varje version, eller ge versionen en egen tid i plan.versionsval.`);
+    if (v.extraPass && !v.extraPass.text && !v.fore?.length) fel.push(`plan.versionsval: ${v.namn} har ett extra pass men varken passets text eller en rad i fore som säger vad som görs i det.`);
+    if (v.extraPass?.text && !faltetsDelar(v.extraPass.text)) fel.push(`plan.versionsval: ${v.namn}, extraPass.text, har ingen rad som "N–M min. Delens namn: …".`);
     for (const n of Object.keys(v.tider ?? {})) if (!rader.some((r) => r.nar === n)) fel.push(`plan.versionsval: ${v.namn} har en tid för "${n}", som uppföljningen inte har.`);
     if (v.tider) for (const f of metodplan({ ...m.data, uppfoljning: { ...m.data.uppfoljning!, rader: rader.map((r) => (v.tider![r.nar] ? { ...r, tid: v.tider![r.nar] } : r)) } }).fel) fel.push(`plan.versionsval, ${v.namn}: ${f}`);
     const sista = Math.max(0, ...Object.keys(kursensVeckor(m.data, m.id, v.namn)).map(Number));

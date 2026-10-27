@@ -638,6 +638,8 @@ plan:
       - { namn: Den magiska skogen }
       - { namn: Hunden som försvann }
       - namn: Egen ram
+        # Det extra passet före pass 1 (K-576); riggen skriver passets delar i text.
+        extraPass: {}
         fore:
           - "Väljer du en egen ram, fyller ni i Berättelseram 3 i ett extra pass på 60 minuter veckan före pass 1, och kursen får då 16 pass."
           - "Ge eleverna något att utgå från (en högläst text, en bild eller ett föremål), bestäm tema och genre med gruppen och fyll sedan i delarna tillsammans."

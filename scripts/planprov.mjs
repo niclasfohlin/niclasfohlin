@@ -777,6 +777,11 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   // Förvalet i veckor gäller inte en period i pass: Berättelseramens 15 pass blev 8 (Rimligheten 2026-10-27).
   const br = metod('skrivkurs-berattelseram');
   ska('ett förval i veckor stoppas i en period i pass, och planen räknar metodens pass', s.veckovaletsFel({ ...br, plan: { ...br.plan, veckoval: { ...br.plan.veckoval, forval: 8 } } }).some((x) => x.includes('räknas i pass')) && s.metodplan({ ...br, plan: { ...br.plan, veckoval: { ...br.plan.veckoval, forval: 8 } } }).plan?.forvaldaVeckor === undefined);
+  // Egen rams extra pass (K-576): dagen i veckan före första passet, förbi ett lov, och händelsen i kalendern.
+  const brVal = { ...tom, start: '2026-11-02', dagar: [2, 4], langd: 15 };
+  const brPlan = s.planera(s.metodplan(br).plan, brVal);
+  const brKal = s.kalenderfil({ titel: 'Berättelseram', uppfoljning: [], fokus: [], extraPass: { datum: '2026-10-27', text: 'Ramen fylls i.' } }, brPlan, { id: 'ab', lank: () => 'https://x', nu: new Date(Date.UTC(2026, 9, 1)) });
+  ska('det extra passet: dagen veckan före pass 1, förbi ett lov, och i kalendern', s.extraPassetsDag(brPlan, brVal) === '2026-10-27' && s.extraPassetsDag(brPlan, { ...brVal, lov: [s.veckonyckel('2026-10-26')] }) === '2026-10-20' && brKal.includes('det extra passet före pass 1') && brKal.includes('DTSTART;VALUE=DATE:20261027'), [s.extraPassetsDag(brPlan, brVal), s.extraPassetsDag(brPlan, { ...brVal, lov: [s.veckonyckel('2026-10-26')] })]);
   const vd = metod('skrivkurs-vardeskapande');
   ska('Värdeskapandes val av projekt klarar spärren, och två versioner med samma namn stoppas', s.versionsvaletsFel(vd).length === 0 && s.versionsvaletsFel({ ...vd, plan: { ...vd.plan, versionsval: { ...vd.plan.versionsval, versioner: [vd.plan.versionsval.versioner[0], vd.plan.versionsval.versioner[0]] } } }).some((x) => x.includes('samma namn')), s.versionsvaletsFel(vd));
 }

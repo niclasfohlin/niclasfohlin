@@ -517,6 +517,11 @@ const metodensFalt = z.strictObject({
           veckor: z.number().int().min(1).max(52).optional(),
           fore: z.array(text).min(1).max(4).optional(),
           tider: z.record(z.string(), text).optional(),
+          // extraPass: versionen har ett eget pass veckan före pass 1, som Berättelseramens egna ram (K-576; riggens förslag
+          // samma kväll). rubrik är passets namn, och text passets delar i samma form som ett fält på veckans sida, en rad per
+          // del ("0–10 min. Delen: …"). Utan text säger den första raden i fore vad som görs. Planen ger passet en dag, en
+          // händelse i kalendern och en rad i överblicken.
+          extraPass: z.strictObject({ rubrik: text.optional(), text: z.string().optional() }).optional(),
         })).min(2).max(4).optional(),
       }).optional(),
       // En serie med en lektionsbank planeras i en enda planerare, där läraren väljer lektion vecka för vecka (K-551; Niclas
