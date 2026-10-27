@@ -2737,7 +2737,7 @@ async function kopieraLanken() {
 $('pl-lank').addEventListener('click', () => void kopieraLanken());
 $('pl-kalender').addEventListener('click', () => {
   const extra = extraPassetsDatum();
-  const text = kalenderfil({ ...(extra && data.extraPass ? { extraPass: { datum: extra, text: [data.extraPass.rubrik, ...(data.extraPass.delar ?? []).map((d) => `${d.fas} ${delensTid(d.tid)}: ${d.vad}`), data.extraPass.delar?.length ? '' : data.extraPass.fore ?? ''].filter(Boolean).join('\n') } } : {}), titel: metodensNamn(), uppfoljning: data.uppfoljning.rader, fokus: (data.progression?.rader ?? []).map((r) => r.fokus), passet: passetIKalendern }, plan, { id: aktiv.id, lank, namn: aktiv.namn || undefined, nu: new Date(), tider: aktiv.val.tider });
+  const text = kalenderfil({ ...(extra && data.extraPass ? { extraPass: { datum: extra, text: [data.extraPass.rubrik, ...(data.extraPass.delar ?? []).map((d) => `${d.fas} ${delensTid(d.tid)}: ${d.vad}`), data.extraPass.delar?.length ? '' : data.extraPass.fore ?? ''].filter(Boolean).join('\n') } } : {}), titel: metodensNamn(), uppfoljning: data.uppfoljning.rader, fokus: (data.progression?.rader ?? []).map((r) => r.fokus), passet: passetIKalendern }, plan, { id: aktiv.id, lank, namn: aktiv.namn || undefined, nu: new Date(), tider: aktiv.val.tider, elever: aktiv.foljd.elever });
   laddaNer(new Blob([vanligText(text)], { type: 'text/calendar;charset=utf-8' }), filnamnet('kalender', { vem: aktiv.namn, metod: data.id, datum: idag }));
   kvittera($('pl-kalender'), 'Hämtad');
   visaBesked('Kalenderfilen är hämtad. Öppna den, så läggs passen och uppföljningen i kalendern. I Google Kalender läggs filen in på datorn.');

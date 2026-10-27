@@ -2932,17 +2932,21 @@ export function extraPassetsDag(plan, val) {
  * 2026-10-24). Det som görs före första passet är en händelse över hela veckan före.
  * @param {{ titel: string, uppfoljning: { nar: string }[], fokus: (string | null)[], passet?: (p: Pass) => string, extraPass?: { datum: string, text: string } }} info
  * @param {Plan} plan
- * @param {{ id: string, lank: (vecka?: number | 'fore') => string, namn?: string, nu: Date, tider?: Val['tider'] }} o
+ * @param {{ id: string, lank: (vecka?: number | 'fore') => string, namn?: string, nu: Date, tider?: Val['tider'], elever?: { namn: string, fran?: string }[] }} o
  */
 export function kalenderfil(info, plan, o) {
   const stamp = o.nu.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const sekvens = Math.max(0, Math.floor((o.nu.getTime() - Date.UTC(2026, 0, 1)) / 60000));
   const vem = o.namn ? ` (${o.namn})` : '';
   const rader = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//niclasfohlin.se//Planera insatsen//SV', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+  // Elevernas namn först i händelsen, när läraren har skrivit in dem, så att de inte försvinner under passet (Niclas
+  // 2026-10-27: "Om läraren valt elever så finns detta: Elever: Namn 1, Namn 2, Namn 3", och "Högt upp så det inte
+  // försvinner i infon som finns efter om passet"). En elev som kom senare står med från sin dag.
+  const elever = (datum) => { const n = (o.elever ?? []).filter((e) => !e.fran || datum >= e.fran).map((e) => e.namn.trim()).filter(Boolean); return n.length ? `Elever: ${n.join(', ')}\n` : ''; };
   const handelse = (uid, datum, titel, text, lank, tid, dagar = 1) => {
     const nar = tid ? [`DTSTART:${kalDatum(datum)}T${tid[0].replace(':', '')}00`, `DTEND:${kalDatum(datum)}T${tid[1].replace(':', '')}00`] : [`DTSTART;VALUE=DATE:${kalDatum(datum)}`, `DTEND;VALUE=DATE:${kalDatum(plusDagar(datum, dagar))}`];
     rader.push('BEGIN:VEVENT', `UID:${uid}@niclasfohlin.se`, `DTSTAMP:${stamp}`, `SEQUENCE:${sekvens}`, ...nar,
-      `SUMMARY:${kalText(titel)}`, `DESCRIPTION:${kalText(text)}`, `URL:${lank}`, `TRANSP:${tid ? 'OPAQUE' : 'TRANSPARENT'}`, 'END:VEVENT');
+      `SUMMARY:${kalText(titel)}`, `DESCRIPTION:${kalText(elever(datum) + text)}`, `URL:${lank}`, `TRANSP:${tid ? 'OPAQUE' : 'TRANSPARENT'}`, 'END:VEVENT');
   };
   const tider = rentaTider(o.tider);
   const hel = (s) => { const t = s.replace(/\s+/g, ' ').trim(); return t.length <= 600 ? t : `${t.slice(0, 600).replace(/\s+\S*$/, '')} …`; };

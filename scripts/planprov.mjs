@@ -789,6 +789,11 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   const brPlan = s.planera(s.metodplan(br).plan, brVal);
   const brKal = s.kalenderfil({ titel: 'Berättelseram', uppfoljning: [], fokus: [], extraPass: { datum: '2026-10-27', text: 'Ramen fylls i.' } }, brPlan, { id: 'ab', lank: () => 'https://x', nu: new Date(Date.UTC(2026, 9, 1)) });
   ska('det extra passet: dagen veckan före pass 1, förbi ett lov, och i kalendern', s.extraPassetsDag(brPlan, brVal) === '2026-10-27' && s.extraPassetsDag(brPlan, { ...brVal, lov: [s.veckonyckel('2026-10-26')] }) === '2026-10-20' && brKal.includes('det extra passet före pass 1') && brKal.includes('DTSTART;VALUE=DATE:20261027'), [s.extraPassetsDag(brPlan, brVal), s.extraPassetsDag(brPlan, { ...brVal, lov: [s.veckonyckel('2026-10-26')] })]);
+  // Eleverna först i varje händelse, när läraren har skrivit in dem, och en elev som kom senare från sin dag (Niclas
+  // 2026-10-27).
+  const elevKal = (elever) => s.kalenderfil({ titel: 'B', uppfoljning: [], fokus: [] }, brPlan, { id: 'ab', lank: () => 'https://x', nu: new Date(Date.UTC(2026, 9, 1)), elever });
+  const medElever = elevKal([{ namn: 'Ada' }, { namn: 'Bo', fran: '2026-11-10' }]);
+  ska('kalenderfilen: Elever först i händelsen, bara när läraren har elever', medElever.includes('DESCRIPTION:Elever: Ada\\, Bo\\nVecka') && medElever.includes('DESCRIPTION:Elever: Ada\\nVecka') && !elevKal([]).includes('Elever:'));
   // Dagarna som gällde då, och förbi ett sommarlov (Codex 2026-10-27: ett byte till tisdag och torsdag flyttade passet, och
   // fyra lovveckor tog bort det).
   const brByte = { ...brVal, dagar: [3, 5], fore: [{ till: '2026-11-10', dagar: [2, 4] }] };
