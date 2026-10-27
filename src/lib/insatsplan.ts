@@ -218,12 +218,15 @@ async function andraMetoder(id: string): Promise<MetodSak[]> {
 }
 
 /** Sakerna som planens texter nämner (K-493), så att sidan bara bär dem. */
-export async function planensSaker(m: Metod): Promise<MetodSak[]> {
+// Med andra texter som planen visar ur metoden, som lektionens rader och material i en serie (Codex 2026-10-27: "Kedjorna" i
+// tabellens not blev ingen länk).
+export async function planensSaker(m: Metod, andra: string[] = []): Promise<MetodSak[]> {
   const alla = [...metodensSaker(m.data, m.id), ...(await andraMetoder(m.id))];
-  const anvanda = new Set(visadeTexter(m.data).flatMap((t) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
+  const texterna = [...visadeTexter(m.data), ...andra];
+  const anvanda = new Set(texterna.flatMap((t) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
   // Ett spann, som "Bildserie 2–6", bär varje sak i spannet, så att planen kan länka dem var för sig. Namnet är ett eller
   // två ord, eller det sista ordet när ett ord med stor bokstav står före, som i "Laminerat Bildserie 1–6".
-  const spann = new Set(visadeTexter(m.data).flatMap((t) => sakspann(t).flatMap((x) => x.namn.flatMap((n) => x.nummer.map((nr) => `${n} ${nr}`)))));
+  const spann = new Set(texterna.flatMap((t) => sakspann(t).flatMap((x) => x.namn.flatMap((n) => x.nummer.map((nr) => `${n} ${nr}`)))));
   alla.forEach((s, i) => { if (spann.has(s.namn)) anvanda.add(i); });
   return alla.filter((_, i) => anvanda.has(i));
 }
@@ -349,7 +352,8 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
       checklista: ld.checklista?.punkter ?? [],
       ...(ld.checklista ? { checklistaRubrik: ld.checklista.rubrik } : {}),
       ...(ld.principer ? { principer: { rubrik: ld.principer.rubrik, text: ld.principer.text, adress: `${sida}#principer` } } : {}),
-      saker: await planensSaker(l),
+      // Lektionens saker ur allt planen visar ur lektionen: också raderna, uppläggets meningar, materialets stycke och stegen.
+      saker: await planensSaker(l, [...upplagget.slice(Math.max(0, fran)), tabellen?.not ?? '', ...(tabellen?.rader ?? []).flatMap((r) => r.slice(1)), ld.ramar?.text?.[0] ?? '', ...stegen.values()]),
       uppfoljning: (ld.uppfoljning?.rader ?? []).filter((r) => serienasNar.has(r.nar)).map((r) => ({ nar: r.nar, vad: r.vad })),
       ...(tabellen ? { rader: { rubrik: tabellen.rubrik, adress: tabellensAdress(ld, l.id, tabellen.rubrik) ?? sida, text: [...upplagget.slice(Math.max(0, fran)), ...(tabellen.not ? [tabellen.not] : [])], rader: (tabellen.rader ?? []).map((r) => ({ namn: r[0], mer: r.slice(1).flatMap((c, i) => (c ? [{ etikett: tabellen.kolumner[i + 1], text: c }] : [])) })) } } : {}),
       ...(ld.ramar?.ramar?.length ? { material: { rubrik: ld.ramar.rubrik || 'Materialet', adress: `${sida}#ramar`, ...(ld.ramar.text?.[0] ? { text: ld.ramar.text[0] } : {}) } } : {}),

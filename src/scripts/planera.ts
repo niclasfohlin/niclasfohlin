@@ -1483,8 +1483,11 @@ function lektionenEfterVeckan(v: PlanVecka, oppna: Set<string>, ovrigt: string[]
   // Utan regel i lektionen står lektionens mål, som veckan skattas mot.
   const regel = l.vidare ? `<p class="pl-vidare">${lankad(vidareTillLektion(l.vidare, !n))}</p>` : `<p class="pl-vidare"><span class="pl-etikett">Lektionens mål</span> ${esc(malText(l.mal))}</p>`;
   // Skälet till förslaget efter varje vecka (Rimligheten 2026-10-27: efter lektionens andra vecka stod inget skäl).
-  const skalet = !n || forKort ? '' : forslag === 'nasta' ? ` Det är över ${LEKTIONENS_GRANS}, så planen föreslår nästa lektion.` : ` Det är inte över ${LEKTIONENS_GRANS}, så planen föreslår samma lektion.`;
-  const snittet = snitt !== null ? `<p>Snittet i veckans skattning mot lektionens mål är ${esc(decimal(snitt))} av 5.${skalet}</p>` : '';
+  // Nästa lektion gäller när lektionens regel ovan är uppfylld, eftersom snittet inte säger vilken rad gruppen har nått
+  // (Rimligheten 2026-10-27: Skriv ord tillsammans har regeln i den femte raden, och sex pass räcker inte dit).
+  const skalet = !n || forKort ? '' : forslag === 'nasta' ? ` Det är över ${LEKTIONENS_GRANS}, så planen föreslår nästa lektion${l.vidare ? ' när regeln ovan är uppfylld' : ''}.` : ` Det är inte över ${LEKTIONENS_GRANS}, så planen föreslår samma lektion.`;
+  const snittet = snitt !== null ? `<p>Snittet i veckans skattning mot lektionens mål är ${esc(decimal(snitt))} av 5.${skalet}</p>`
+    : n && !forKort && aktiv.folj ? '<p class="pl-not">Skatta veckan mot lektionens mål, så föreslår planen samma lektion eller nästa.</p>' : '';
   // Lektionens längd, och att planen föreslår samma lektion när gruppen har haft den färre veckor än lektionen tar.
   const langd = l.period ? `<p class="pl-not">${esc(l.namn)}: ${esc(liten(l.period))}.${forKort && nasta ? ` ${passen ? `Ni har haft lektionen i ${talText(passen)} pass, och den tar minst ${talText(minPass)}` : 'Veckan hade inga pass'}, så planen föreslår samma lektion ${esc(rubrikVecka(nasta).toLocaleLowerCase('sv'))}.` : ''}</p>` : '';
   if (!nasta) return `<section class="pl-block pl-lektionen-efter"><h3>Efter veckan</h3>${regel}${snittet}${ovrigt.join('')}</section>`;
@@ -1601,14 +1604,17 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   const foreRutan = plan.veckor[rutansVecka.nr - 2];
   const regel = aktiv.folj && nu === v.nr && foreRutan ? regelnEfter(foreRutan) : '';
   const kursvecka = data.kursveckor?.[String(rutansVecka.innehall)];
-  const material = [
+  // Rutans material och länkar gäller rutans vecka och dess lektion, också när rutan visar nästa veckas pass (Codex
+  // 2026-10-27: snabbmallen och Materialet följde den visade veckans lektion).
+  const material = medLektion(veckansLektion(rutansVecka), () => [
     ...(data.bank ? [`<a class="knapp" href="${esc(data.bank.adress)}${aktiv.val.niva ? `#${esc(aktiv.val.niva)}` : ''}" ${goat('material', 'Ta fram från planen')}>${esc(data.bank.namn)}</a>`] : []),
     ...filnamn().filter((n) => n.startsWith(serien ? `lektion-${veckansLektion(rutansVecka)}-kort` : 'lektionskort')).map(plats),
     plats('lathund'),
     // Den som följer insatsen skriver veckan på sidan, så snabbmallen är material bland det andra (de kalla läsarna:
     // två ställen för veckans mening).
     ...(aktiv.folj ? [snabbmallen()] : []),
-  ].filter(Boolean);
+  ].filter(Boolean));
+  const rutansLankar = medLektion(veckansLektion(rutansVecka), metodensLankar);
   // Hemmets del varje vecka, som läxan i De fyra räknesätten, när passets tidsschema inte redan har den (TIL:s Hemma).
   const hemma = data.hem && !data.passet?.andra.length ? `<p class="pl-hemma"><span class="pl-etikett">Hemma</span> <a href="${esc(data.hem.adress)}" ${goat('hemma', 'hemmet från planen')}>${esc(data.hem.rubrik)}</a></p><p>${lankad(mening(data.hem.text))}</p>` : '';
   lankVecka = rutansVecka.innehall;
@@ -1616,7 +1622,7 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   const ruta = rutansPass || passen.length ? medLektion(veckansLektion(rutansVecka), () => passetsRuta(rutansPass, oppna, nivansRad(rutansVecka, oppna) + lektionenIRutan(rutansVecka, oppna))) : '';
   if (!ruta && rutansPass && !harVarit) text += `, pass ${rutansPass.nr} av ${hogstaPassnr(plan)}`;
   const veckansSida = kursvecka ? `<p class="metod-centrala"><a class="knapp" href="${esc(kursvecka)}" ${goat('kursvecka', 'veckans lektion från planen')}>${esc(stor(metodveckan(rutansVecka.innehall)))}, med veckans manus</a></p>` : '';
-  delar.push(`<div class="pl-nasta${rutansPass && rutansPass.datum >= idag ? ' pl-kommer' : ''}"><span class="pl-etikett">${etikett}</span><p class="pl-nar">${esc(text)}</p>${bockatNot ? `<p class="pl-not">${esc(bockatNot)}</p>` : ''}${tillbaka}${regel}${paminn}${veckansSida}${ruta || nivansRad(rutansVecka, oppna)}${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${veckansTexter(rutansRad, oppna, rutansVecka.nr !== v.nr ? rutansVecka : undefined)}${hemma}${metodensLankar()}</div>`);
+  delar.push(`<div class="pl-nasta${rutansPass && rutansPass.datum >= idag ? ' pl-kommer' : ''}"><span class="pl-etikett">${etikett}</span><p class="pl-nar">${esc(text)}</p>${bockatNot ? `<p class="pl-not">${esc(bockatNot)}</p>` : ''}${tillbaka}${regel}${paminn}${veckansSida}${ruta || nivansRad(rutansVecka, oppna)}${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${veckansTexter(rutansRad, oppna, rutansVecka.nr !== v.nr ? rutansVecka : undefined)}${hemma}${rutansLankar}</div>`);
 
   lankVecka = v.innehall;
   // Veckans pass, med passets roll, bockarna när läraren följer insatsen och, med närvaron, eleverna under ett bockat pass.
