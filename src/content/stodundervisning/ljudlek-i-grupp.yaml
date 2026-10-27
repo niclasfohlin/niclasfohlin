@@ -31,7 +31,7 @@ relaterade:
 utkast: false
 lektionsbank:
   rubrik: "Lektionsbanken: förmågorna och lektionerna"
-  text: "Varje lektion tränar en förmåga, och lektionen, förmågan och uppgiften i ljudkollen har samma nummer. Ordningen mellan förmågorna är ett förslag. Eleven klarar en uppgift i ljudkollen med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna. Ljudkollen visar vilken av tre ingångar gruppen börjar i: Rim (lektion 1) för helt nybörjare, Första ljudet (lektion 3) för nybörjare och Räkna ljud (lektion 6) för elever som kan ljuda. Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare. Gruppen börjar i en ingång och går sedan vidare lektion för lektion: vid förmåga 4 börjar den i Första ljudet och tar sedan Bokstavsgympa. Har du inte gjort ljudkollen före första passet, väljer du Första ljudet, med s som dagens ljud. Visar ljudkollen sedan en annan ingång, går gruppen dit. Nya lektioner läggs in under den förmåga de tränar."
+  text: "Varje lektion tränar en förmåga, och lektionen, förmågan och uppgiften i ljudkollen har samma nummer. Ordningen mellan förmågorna är ett förslag. Eleven klarar en uppgift i ljudkollen med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna. Ljudkollen visar vilken av tre ingångar gruppen börjar i: Rim (lektion 1) för helt nybörjare, Första ljudet (lektion 3) för nybörjare och Räkna ljud (lektion 6) för elever som kan ljuda. Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare. Gruppen börjar i en ingång och går vidare lektion för lektion: vid förmåga 4 börjar den i lektionen Första ljudet och tar sedan Bokstavsgympa. Har du inte gjort ljudkollen före första passet, väljer du lektionen Första ljudet, med s som dagens ljud. Visar ljudkollen sedan en annan ingång, går gruppen dit. Nya lektioner läggs in under den förmåga de tränar."
   lektionskort: "Varje lektion har ett lektionskort, ett A4 med målet, rörelsen, orden och passet. Öppna kortet vid lektionen, eller skriv ut alla på en gång och sätt dem i en pärm."
   formagor:
     - nr: 1
@@ -425,8 +425,8 @@ plan:
     forval: 12
   fore:
     - "Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare."
-    - "Gruppen börjar i en ingång och går sedan vidare lektion för lektion: vid förmåga 4 börjar den i Första ljudet och tar sedan Bokstavsgympa."
-    - "Har du inte gjort ljudkollen före första passet, väljer du Första ljudet, med s som dagens ljud."
+    - "Gruppen börjar i en ingång och går vidare lektion för lektion: vid förmåga 4 börjar den i lektionen Första ljudet och tar sedan Bokstavsgympa."
+    - "Har du inte gjort ljudkollen före första passet, väljer du lektionen Första ljudet, med s som dagens ljud."
     - "Visar ljudkollen sedan en annan ingång, går gruppen dit."
   utvardering:
     - "Klarar eleven nivå 5 eller högre i screeningen och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva."

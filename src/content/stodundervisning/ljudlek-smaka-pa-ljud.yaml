@@ -58,7 +58,7 @@ tabeller:
       - - "Var ljudet hörs"
         - "/s/ i hus: sist. /s/ i sol: först."
         - "Säg ett ljud och ett ord. Eleven lägger markören där ljudet hörs och skriver bokstaven."
-    not: "Raderna har var sitt ark bildkort under Materialet, utom raden Var ljudet hörs, som tar arket I mitten. Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen: fel på lås leder till första raden, på får till andra raden och på mur och löv till tredje raden. Har eleverna inte gjort uppgift 5 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev. Den som frågar i raden Var ljudet hörs tittar på baksidan och säger ljudet för en bokstav som gruppen har haft. Har kortet ingen sådan bokstav, tar ni nästa kort. I steg 4 säger du ljudet för dagens elever, och de andra frågar varandra två och två, i nya par när det behövs."
+    not: "Raderna har var sitt ark bildkort under Materialet, utom raden Var ljudet hörs, som tar arket I mitten. Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen: fel på lås leder till första raden, på får till andra raden och på mur och löv till tredje raden. Finns det inget ord som fler än hälften missar, börjar ni i tredje raden. Har eleverna inte gjort uppgift 5 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev. Den som frågar i raden Var ljudet hörs tittar på baksidan och säger ljudet för en bokstav som gruppen har haft. Har kortet ingen sådan bokstav, tar ni nästa kort. I steg 4 säger du ljudet för dagens elever, och de andra frågar varandra två och två, i nya par när det behövs."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -171,7 +171,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram platsrutorna, markörerna, pennorna, trasorna, bokstavskartorna, bokstavskorten, speglarna och arket för gruppens rad, ett per par och ett till dig. Rita platsrutorna på tavlan. Välj orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Ta fram platsrutorna, markörerna, pennorna, trasorna, bokstavskartorna, bokstavskorten, speglarna och bildkorten för gruppens rad, ett ark per par och ett till dig. Rita platsrutorna på tavlan. Välj orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."

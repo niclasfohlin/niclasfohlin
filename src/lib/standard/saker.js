@@ -37,9 +37,13 @@ const HUVUDORD = {
   // Screeningen i Ljudlek i grupp, version A och B (länkgranskningen 2026-10-27: "screeningen, version A" stod utan länk i
   // Före). Spärren letar inte efter formerna, som för kollen.
   screening: ['screening', 'screeningen', 'screeningar', 'screeningarna', 'screeningens'],
+  // Ljudrutorna och Bokstavskartan i Ljudlek (riggens leverans 2026-10-27): rutor och kartor är också vanliga ord i
+  // lektionerna, som bildrutan och rutorna på tavlan, så spärren letar inte efter formerna.
+  ruta: ['ruta', 'rutan', 'rutor', 'rutorna', 'rutans', 'rutornas'],
+  karta: ['karta', 'kartan', 'kartor', 'kartorna', 'kartans', 'kartornas'],
 };
 // De bestämda formerna, som spärren letar efter; en grundform som "kort" är också ett vanligt ord.
-const BESTAMDA = Object.entries(HUVUDORD).filter(([k]) => k !== 'koll' && k !== 'screening').flatMap(([, f]) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar', 'bilder', 'affischer', 'lappar', 'sedlar', 'planer'].includes(f)).sort((a, b) => b.length - a.length);
+const BESTAMDA = Object.entries(HUVUDORD).filter(([k]) => !['koll', 'screening', 'ruta', 'karta'].includes(k)).flatMap(([, f]) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar', 'bilder', 'affischer', 'lappar', 'sedlar', 'planer'].includes(f)).sort((a, b) => b.length - a.length);
 // Ett pronomen i genitiv är inget namn på en sak ("Hennes bok"), men ett substantiv i genitiv är det ("Lärarens sida").
 const PRONOMEN = new Set(['hans', 'hennes', 'deras', 'dess', 'ens']);
 // Huvudordet som ett ord slutar på, med den längsta formen först, så att "kortet" inte läses som "kort" och "et".
@@ -59,7 +63,8 @@ const huvudordet = (ord) => {
  */
 export function arSaksord(namn) {
   const n = String(namn ?? '').trim();
-  const ord = n.split(/\s+/);
+  // Skiljetecknen hör inte till orden: "Screeningen," i "Screeningen, version A" är screeningen (riggens leverans 2026-10-27).
+  const ord = n.split(/\s+/).map((o) => o.replace(/[,:;.]+$/u, ''));
   // Ett av orden är ett ord för en sak (Läslista 1, Kartläggningens protokoll), namnet är ett långt sammansatt ord, eller
   // två ord där det första är ett substantiv i genitiv (länkgranskningen av omgång 1 2026-10-26: "lärarens sida").
   const genitiv = ord.length === 2 && /^\p{Lu}\p{L}{3,}s$/u.test(ord[0]) && !PRONOMEN.has(ord[0].toLocaleLowerCase('sv'));

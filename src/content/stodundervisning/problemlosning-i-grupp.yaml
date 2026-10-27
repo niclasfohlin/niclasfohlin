@@ -374,14 +374,16 @@ uppfoljning:
     - nar: Före insatsen
       tid: "före"
       perElev: 10
-      vad: Eleven löser bladet Kartläggning före, och du skriver i lärarens protokoll vad hen säger och gör i varje uppgift och vilken hjälp hen behöver.
+      vad: Läs problemet högt för en elev i taget, eller två och två, och låt eleven lösa bladet Kartläggning före. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5. Läser du för två, tar du uppgift 1 och 5 med en elev i taget, medan den andra skriver. Skriv i lärarens protokoll vad hen säger och gör i varje uppgift och vilken hjälp hen behöver.
+      resultat: "vilka av uppgift 1–⁠4 eleven klarar utan hjälp, och om talen hindrar"
     - nar: Varje pass
       tid: "varje pass"
       vad: Vad kunde varje elev av det gruppen tränar i ledet, och med vilket stöd? Vad tas upp nästa gång?
     - nar: Efter sex till åtta veckor
       tid: "efter"
       perElev: 10
-      vad: Eleven löser bladet Kartläggning efter på den nivå där hen landade i kartläggningen före, och du jämför de två protokollen.
+      vad: Läs problemet högt som före, och låt eleven lösa bladet Kartläggning efter på den nivå där hen landade i kartläggningen före. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5. Läser du för två, tar du uppgift 1 och 5 med en elev i taget, medan den andra skriver. Skriv i lärarens protokoll, och jämför de två protokollen.
+      resultat: "vilka av uppgift 1–⁠4 eleven klarar utan hjälp, och om talen hindrar"
 plan:
   utan:
     - "Remsan visar hur de 30 minuterna fördelas mellan passets delar och när gruppen arbetar gemensamt och i par."
@@ -4361,6 +4363,15 @@ lathund:
       - Plockmaterial, kuber och stickor
       - Rutat papper, tabellmall och tallinjer
       - Lärarens sida och Två lösningar med B täckt, hos dig
+    # Lathundens uppföljning som den stod före K-579, så att sidan 4 inte blir längre när metodens rader säger hur
+    # kartläggningen görs (2026-10-27).
+    uppfoljning:
+      - nar: Före insatsen
+        vad: Eleven löser bladet Kartläggning före, och du skriver i lärarens protokoll vad hen säger och gör i varje uppgift och vilken hjälp hen behöver.
+      - nar: Varje pass
+        vad: Vad kunde varje elev av det gruppen tränar i ledet, och med vilket stöd? Vad tas upp nästa gång?
+      - nar: Efter sex till åtta veckor
+        vad: Eleven löser bladet Kartläggning efter på den nivå där hen landade i kartläggningen före, och du jämför de två protokollen.
 film:
   sekunder: 29.8
   beskrivning: "Ebba berättar problemet med egna ord. Läraren frågar: ”Kan du berätta problemet med egna ord?” Ebba säger: ”Två sorters stakar, 187 ljus. Hur många av varje?” Läraren skriver det som gruppen säger. Ingen räknar än. Eleverna väljer sätt. Läraren frågar: ”Hur kan vi visa problemet?” Ali säger: ”Vi provar i en tabell!” Paret prövar i tabellen. Paret prövar sig fram: 187 ljus."

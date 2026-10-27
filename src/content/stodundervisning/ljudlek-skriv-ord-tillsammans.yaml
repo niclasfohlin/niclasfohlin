@@ -196,7 +196,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Lägg gruppens bokstäver i ett kuvert per par, och ta fram dina kort, magneterna, ljudrutorna, markörerna, whiteboardtavlorna, bokstavskartan och speglarna. Rita fyra rutor på tavlan. Välj kedjorna, bokstäverna till Ordjakt och orden till ljudstarten. Skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Lägg bokstavskorten med gruppens bokstäver i ett kuvert per par, och ta fram dina bokstavskort till ljudstarten, magneterna, ljudrutorna, markörerna, whiteboardtavlorna, bokstavskartan och speglarna. Rita fyra rutor på tavlan. Välj kedjor ur Kedjorna, bokstäver ur Bokstäverna till Ordjakt och orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -344,7 +344,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns lektionskortet och bokstavskorten. I den här lektionen har varje par en egen sida, utöver de två du skriver ut för hela insatsen. Med tolv elever blir det sex sidor till. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera bokstavskorten, ljudrutorna och bokstavskartan."
+    - "Här finns lektionskortet och bokstavskorten. Du skriver ut bokstavskorten till ljudstarten två gånger för hela insatsen, och i den här lektionen har varje par dessutom en egen sida. Med tolv elever blir det sex sidor till. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera bokstavskorten, ljudrutorna och bokstavskartan."
   ramar:
     - rubrik: "Bokstavskorten"
       text:

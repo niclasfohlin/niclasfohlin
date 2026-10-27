@@ -232,7 +232,10 @@ export async function planensSaker(m: Metod, andra: string[] = [], version?: str
   // En lektion i en serie har också seriens saker, som Bokstavskartan och Bokstavskort till ljudstarten i Ljudlek i grupp,
   // före metodernas namn, så att "Bokstavskartan står i Ljudlek i grupp" leder till kartan (länkgranskningen 2026-10-27).
   const serien = m.data.serie ? (await publicerade('stodundervisning')).find((x) => x.id === m.data.serie) : undefined;
-  const alla = [...metodensSaker(m.data, m.id, version), ...(serien ? metodensSaker(serien.data, serien.id) : []), ...(await andraMetoder(m.id))];
+  // En serie har sina lektioner som saker, med lektionens namn som titel, så att "väljer du Första ljudet" leder till
+  // lektionens sida (riggens leverans 2026-10-27).
+  const lektionerna = m.data.lektionsbank ? (await seriensMetoder(m)).map((x) => ({ namn: lektionsnamn(x.data.titel), former: [lektionsnamn(x.data.titel)], versal: true, adress: `/stodundervisning/${x.id}` })) : [];
+  const alla = [...metodensSaker(m.data, m.id, version), ...(serien ? metodensSaker(serien.data, serien.id) : []), ...lektionerna, ...(await andraMetoder(m.id))];
   const texterna = [...visadeTexter(m.data), ...andra];
   const anvanda = new Set(texterna.flatMap((t) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
   // Ett spann, som "Bildserie 2–6", bär varje sak i spannet, så att planen kan länka dem var för sig. Namnet är ett eller

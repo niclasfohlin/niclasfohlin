@@ -421,12 +421,14 @@ uppfoljning:
     - nar: Första och sista veckan
       tid: "veckans första pass i vecka 1 och 6"
       vad: Eleven skriver en kort text i tio minuter utan annat stöd än sitt skrivstöd. I sista veckan ger hen båda texterna var sin stapel. Skriv upp om hen planerar den sista texten.
+      resultat: "i sista veckan: rutor i staplarna för den första och den sista korta texten"
     - nar: Sista passet
       tid: "sista passet"
       vad: Skriv upp vad som nådde fram till läsaren.
     - nar: Fyra till sex veckor efter kursen
       tid: "efter 4–6 veckor"
       vad: Samla gruppen ett pass med en ny text. Fråga klassläraren om eleven säger vem som läser.
+      resultat: "rutor i stapeln för den nya texten, och om den svarar på varje fråga på kortet"
 
 # Planen (passgenomgången i Skrivning, 2026-10-26). Metoden har inget tidsschema, eftersom passen står i kurserna, så varje
 # pass säger var det står. Gruppen tar ingen vecka igen, så att justera är progressionens stöd åt den som behöver mer.

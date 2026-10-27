@@ -1232,12 +1232,15 @@ const passetsMinuter = (p: Pass) => { const t = passetsTid(aktiv.val, p); return
 // Passets delar ur veckans sida (plan.veckansPass, K-553), när varken en rad med tabell eller en variant gäller passet:
 // kursens pass N i veckans fält "Pass N". Sidan och kalendern får samma delar, eftersom båda läser passetFor.
 const medVeckansPass = (p: Pass, roller: ReturnType<typeof rollerFor>) => {
-  if (!data.veckansPass || variantenFor(data.passet?.varianter, passetsLage(plan, p, passetsMinuter(p)))) return roller;
+  if (!data.veckansPass) return roller;
+  // En variant av tidsschemat gäller passets delar, men ett fält som bara säger det som skiljer, som Sagobokens station och
+  // drag i pass 7–10, gäller också under varianten (riggens leverans 2026-10-27: stationen och draget stod inte i planen).
+  const iVarianten = !!variantenFor(data.passet?.varianter, passetsLage(plan, p, passetsMinuter(p)));
   const nr = kursensPassnummer(plan, mp.takt.min, p, mp.period.enhet === 'veckor' ? mp.period.max ?? mp.period.min : undefined);
   // Fältet "Dag N" på veckans sida är veckans pass N, med nyckeln vecka.N (Värdeskapande, K-576), före kursens nummer.
   const lage = passetsLage(plan, p);
   const tabell = (lage.vecka && lage.plats ? data.veckansPass[`${lage.vecka}.${lage.plats}`] : undefined) ?? (nr !== null ? data.veckansPass[String(nr)] : undefined);
-  if (!tabell) return roller;
+  if (!tabell || (iVarianten && !tabell.skillnad)) return roller;
   // Passets slag ur fältets första mening, som "Planeringspass", är passets namn när planens rader inte ger något (K-585).
   const slag = tabell.slag ? [{ nar: '', kort: tabell.slag }] : [];
   // Ett fält som bara säger det som skiljer står överst och i passets delar, också i ett pass som planens rad leder till en

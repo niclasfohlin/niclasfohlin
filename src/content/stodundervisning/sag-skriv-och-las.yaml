@@ -50,7 +50,7 @@ passrutin:
   kallas: delar
   text: "Passet har samma fyra delar varje gång, och korten går tillbaka i högen efter varje ord och mening, utom den sista meningen. Här står ett pass med meningar. Vecka 1 är det ord i passets alla delar. I Jag visar skriver du ett ord ur dagens ordgrupper i tabellen Orden. I Dagens meningar bygger var och en omkring sex ord ur samma ordgrupper. I Min mening bygger eleven ett eget ord som hen vill skriva, grannen läser det, och du skriver det i skrivboken. Ordbilderna börjar vecka 2. Den som är klar före de andra får fyra kort i blandad ordning, bokstäverna i ett ord ur tabellen Orden. Hen flyttar dem och läser tills hen hittar ett ord. Är gruppen klar före tiden, gör alla det eller läser ur skrivböckerna för varandra."
   steg:
-    - text: "Var och en bygger två ord, och sist veckans ordbild och en av de förra, som i tabellen Ordbilderna."
+    - text: "Var och en bygger två ord, och sist två ordbilder eller en ny, som i tabellen Ordbilderna."
       fas: "Startorden"
     - text: "Du skriver dagens första mening på miniwhiteboarden och tänker högt. En gång i veckan gör du ett fel med flit."
       fas: "Jag visar"
@@ -183,14 +183,14 @@ tabeller:
   - rubrik: "Perioden: från ord till egna meningar"
     plats: "efter-arbetsform"
     meny: true
-    text: "Gruppen tar nästa steg när ingen elev tappar ett ord eller ett mellanrum, och var och en läser tillbaka det hen har byggt. Har ni väntat en vecka på samma elev, går ni vidare ändå. Den eleven bygger då en kortare variant av gruppens mening, till exempel ”Vi äter mat.” när de andra bygger ”Vi äter mat ute.” Tappar hen inte längre ett ord eller ett mellanrum, bygger hen hela meningen som de andra. I första steget, med bara ord, går gruppen vidare när de flesta orden ligger rätt på första försöket två pass i rad. Stegen och veckorna är förslag, och en säker grupp kan ta två steg på en vecka. Den tar ändå varje lista med en ordbild. Rörelsen sitter när eleven bygger ord för ord och läser från början efter varje ord utan att du påminner."
+    text: "Gruppen tar nästa steg när ingen elev tappar ett ord eller ett mellanrum, och var och en läser tillbaka det hen har byggt. Har ni väntat en vecka på samma elev, går ni vidare ändå. Den eleven bygger då en kortare variant av gruppens mening, till exempel ”Vi äter mat.” när de andra bygger ”Vi äter mat ute.” Tappar hen inte längre ett ord eller ett mellanrum, bygger hen hela meningen som de andra. I första steget, med bara ord, går gruppen vidare när de flesta orden ligger rätt på första försöket två pass i rad. Stegen och veckorna är förslag, och en säker grupp kan ta två steg på en vecka. Den tar ändå varje lista med en ordbild. Med två pass i veckan tar ni tre ordgrupper per pass i vecka 1 och sedan färre meningar ur varje lista, så att ni hinner veckans listor. Rörelsen sitter när eleven bygger ord för ord och läser från början efter varje ord utan att du påminner."
     kolumner:
       - "Steget"
       - "Listan"
       - "Det eleven tar över"
     rader:
       - - "Ord, vecka 1"
-        - "Orden, från Två ljud till Konsonantmöte sist, omkring två ordgrupper per pass"
+        - "Tabellen Orden, från Två ljud till Konsonantmöte sist, omkring två ordgrupper per pass"
         - "Eleven bygger ett eget ord i Min mening, och du skriver det i skrivboken"
       - - "Två ord, vecka 2"
         - "Två ord med ”jag”, Två ord"
@@ -210,7 +210,7 @@ tabeller:
       - - "Egna meningar, vecka 8"
         - "Två egna meningar per elev, i stället för listan"
         - "Eleven skriver egna meningar, och skrivboken går till klassen"
-    not: "Från vecka 6 bygger var och en två meningar i Dagens meningar, och den sista ligger kvar. Från vecka 7 visar du en egen mening i Jag visar, om något du har gjort eller efter ett skrivkort, och tänker högt medan du väljer den: ”Jag ska skriva: Jag åt is med mamma.” Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord, och korten finns kvar om hen fastnar på ett ord. I vecka 8 gör var och en två egna meningar på samma sätt i Dagens meningar, med pennan eller med korten, och läser dem för dig i stället för att jämföra med miniwhiteboarden. I Min mening läser grannen den sista meningen. Står den inte redan i skrivboken, skriver ni in den där. En grupp som inte är redo för egna meningar stannar i sitt steg, och Skrivkollen efter vecka 8 avgör om eleven får en period till."
+    not: "Från vecka 6 bygger var och en två meningar i Dagens meningar, och den sista ligger kvar. Från vecka 7 visar du en egen mening i Jag visar, om något du har gjort eller efter ett skrivkort, och tänker högt medan du väljer den: ”Jag ska skriva: Jag åt is med mamma.” Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord. Fastnar hen på ett ord, finns bokstavskorten kvar. I vecka 8 gör var och en två egna meningar på samma sätt i Dagens meningar, med pennan eller med korten, och läser dem för dig i stället för att jämföra med miniwhiteboarden. I Min mening läser grannen den sista meningen. Står den inte redan i skrivboken, skriver ni in den där. En grupp som inte är redo för egna meningar stannar i sitt steg, och Skrivkollen efter vecka 8 avgör om eleven får en period till."
   - rubrik: "Orden"
     plats: "efter-urval"
     meny: true
@@ -231,7 +231,7 @@ tabeller:
         - "svan, tre, klo, krok, blå, blad, bro, brev, grå, snö, sten, stol, stor, stå, sko, spik, skal"
       - - "Konsonantmöte sist"
         - "salt, film, fisk, mask, kalv, sand, vild, vind, land, hand, hals, tält"
-    not: "Säg vad ett ord betyder första gången, och sätt det i en mening. Säg b, d, g, k, p och t korta, utan ett ö efter. I Startorden tar du ord ur den ordgrupp där eleverna fortfarande fastnar, och första passet ord med två ljud."
+    not: "Säg vad ett ord betyder första gången, och sätt det i en mening. Säg b, d, g, k, p och t korta, utan ett ö efter. I Startorden tar du ord ur den ordgrupp där eleverna fortfarande fastnar. I Startorden i insatsens första pass tar du ord med två ljud."
   - rubrik: "Meningarna"
     plats: "efter-urval"
     meny: true
@@ -262,7 +262,7 @@ tabeller:
   - rubrik: "Ordbilderna"
     plats: "efter-urval"
     meny: true
-    text: "Ordbilderna är sex vanliga ord som inte stavas som de låter. Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du kortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan. I de andra passen ligger korten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer. I vecka 2 finns ingen av de förra, och då bygger eleven tre ord före veckans ordbild."
+    text: "Ordbilderna är sex vanliga ord som inte stavas som de låter. Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan. I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer. I vecka 2 finns ingen av de förra, och då bygger eleven tre ord före veckans ordbild."
     kolumner:
       - "Ordbilden"
       - "Det som inte låter som det står"
@@ -288,26 +288,29 @@ tabeller:
         - "Ett ljudstridigt ord"
     not: "Vecka 8 väljer varje elev också ett eget ord som inte stavas som det låter. Du skriver det på en lapp, och eleven lär sig det på samma sätt som de andra, som veckans ordbild."
 uppfoljning:
-  text: "Du ser i varje pass vad eleven bygger och skriver. Visa eleven i hens egna meningar vad hen kan nu. Efter vecka 8 avslutar du insatsen om eleven får 10 av 10 för mellanrum och tecken och minst 19 av 21 ljud i Skrivkollens meningar och läser båda som de står. Då följer skrivboken och sidan Till klassläraren med till klassen. Får eleven inte fler ljud rätt i Skrivkollen efter vecka 8 än före insatsen, tar du upp det med elevhälsan. Annars får eleven en period till på fem veckor, från steget Fyra ord till egna meningar, och sedan gör du Skrivkollen igen. Når eleven inte samma gräns då heller, tar du upp det med elevhälsan."
+  text: "Visa eleven i hens egna meningar vad hen kan nu. Efter vecka 8 avslutar du insatsen om eleven får 10 av 10 för mellanrum och tecken och minst 19 av 21 ljud i Skrivkollens meningar och läser båda som de står. Då följer skrivboken och sidan Till klassläraren med till klassen. Får eleven inte fler ljud rätt i Skrivkollen efter vecka 8 än före insatsen, tar du upp det med elevhälsan. Annars får eleven en period till på fem veckor, från steget Fyra ord till egna meningar, och sedan gör du Skrivkollen igen. Når eleven inte samma gräns då heller, tar du upp det med elevhälsan."
   rader:
     - nar: "Före insatsen"
       tid: "före"
       perElev: 15
-      vad: "Gör Skrivkollen: tio ord, två meningar, sex ordbilder och en egen mening. Får eleven under hälften av ljuden i orden, gör du ljudkollens uppgift 4 och 6 i Ljudlek i grupp. Klarar hen inte båda, börjar hen med Ljudlek i grupp."
+      vad: "Gör Skrivkollen: tio ord, två meningar, sex ordbilder och en egen mening. Eleven får en poäng för varje ljud i rätt ordning, så att sl för sol ger två av tre. Eleven får en poäng för varje mellanrum, stor bokstav och punkt i meningarna. Hen får också en poäng för varje mening som hen läser som den står. Får eleven under hälften av ljuden i orden, gör du ljudkollens uppgift 4 och 6 i Ljudlek i grupp. Klarar hen inte båda, börjar hen där."
+      resultat: "ljud i orden av 35, ljud i meningarna av 21, mellanrum och tecken av 10"
     - nar: "I passet"
       tid: "i passet"
       vad: "Säger eleven ordet eller meningen igen själv, får hen med ljuden, orden och mellanrummen, och läser hen det som ligger?"
     - nar: "Efter vecka 4"
       tid: "vecka 4"
       perElev: 15
-      vad: "Gör Skrivkollen utan ordbilder. Får eleven inte fler ljud rätt än före, gör du ljudkollens uppgift 4 och 6. Klarar hen inte båda, byter hen till Ljudlek i grupp. Klarar hen båda, får Startorden ord med de ljud hen tappade."
+      vad: "Gör Skrivkollen utan ordbilder och skriv poängen som före. Får eleven inte fler ljud rätt än före, gör du ljudkollens uppgift 4 och 6. Klarar hen inte båda, byter hen till Ljudlek i grupp. Klarar hen båda, får Startorden ord med de ljud hen tappade."
+      resultat: "ljud i orden av 35, ljud i meningarna av 21, mellanrum och tecken av 10"
     - nar: "Efter vecka 8"
       tid: "efter"
       perElev: 15
-      vad: "Gör hela Skrivkollen, och eleven läser första och sista sidan i skrivboken för dig."
+      vad: "Gör hela Skrivkollen och skriv poängen som före, också för de lästa meningarna. Eleven läser skrivbokens första och sista sida för dig."
+      resultat: "ljud i orden av 35, i meningarna av 21, mellanrum och tecken av 10, lästa av 2"
     - nar: "Två veckor efter"
       tid: "efter 2 veckor"
-      vad: "Du och klassläraren läser skrivboken: skriver eleven en mening om dagen? Gör hen inte det, bestämmer ni en fast stund på dagen då hen skriver."
+      vad: "Du och klassläraren läser skrivboken: skriver eleven en mening om dagen? Gör hen inte det, bestämmer ni en fast stund för det."
 plan:
   passen:
     - nar: vecka 1
@@ -334,22 +337,48 @@ plan:
     # Passets delar vecka för vecka, ordagrant ur metoden: en rad står först i sin del, och med istallet i stället för
     # tidsschemats text (Rimligheten 2026-10-27, K-553). Metoden har inga veckosidor (analysen), så delarna är tidsschemats.
     # Det eleven tar över står i sin del varje vecka det gäller, inte bara överst (Rimligheten K-585): Dagens meningar
-    # vecka 4–7, Min mening vecka 3–7 och Jag visar vecka 6. Raderna står i den ordning de läses i delen.
+    # vecka 4–7, Min mening vecka 3–7 och Jag visar vecka 6. Raderna står i den ordning de läses i delen. Före passet säger
+    # var orden och meningarna står, och Startorden vilken ordgrupp, i insatsens första pass och i de andra. Ordbildens första pass är veckans första, utom i vecka 5,
+    # där ”det” kommer med veckans andra lista (länkgranskningen och de kalla läsarna, K-585).
+    - nar: vecka 1–8
+      del: "Före passet"
+      text: "Orden och meningarna står i tabellerna Orden och Meningarna, i den ordning gruppen tar dem. Alla står också på Lektionskortet, ett A4 med passet och orden på framsidan och meningarna på baksidan."
     - nar: vecka 7
       del: "Före passet"
       text: "Det ljudstridiga ordet är ett av de här nio: pappa, mamma, sju, hjul, ljust, docka, ägg, köket och lejon. Före passet skriver du ordet i varje mening på en lapp till varje elev, med stor bokstav när det står först i meningen."
+    - nar: första passet
+      del: "Startorden"
+      text: "I Startorden i insatsens första pass tar du ord med två ljud."
+    - nar: pass 2 till det sista
+      del: "Startorden"
+      text: "I Startorden tar du ord ur den ordgrupp där eleverna fortfarande fastnar."
     - nar: vecka 2–8
       del: "Startorden"
-      text: "Var och en bygger två ord, och sist veckans ordbild och en av de förra, som i tabellen Ordbilderna."
+      text: "Var och en bygger två ord, och sist två ordbilder eller en ny, som i tabellen Ordbilderna."
     - nar: vecka 8
       del: "Startorden"
       text: "Vecka 8 väljer varje elev också ett eget ord som inte stavas som det låter. Du skriver det på en lapp, och eleven lär sig det på samma sätt som de andra, som veckans ordbild."
-    - nar: vecka 2–8
+    - nar: veckans första pass i vecka 2–4
       del: "Startorden"
-      text: "Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du kortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
-    - nar: vecka 2–8
+      text: "Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
+    - nar: veckans första pass i vecka 6–8
       del: "Startorden"
-      text: "I de andra passen ligger korten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
+      text: "Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
+    - nar: veckans övriga i vecka 5
+      del: "Startorden"
+      text: "Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
+    - nar: veckans sista pass i vecka 5
+      del: "Startorden"
+      text: "Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
+    - nar: veckans övriga i vecka 2–8
+      del: "Startorden"
+      text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
+    - nar: veckans sista pass i vecka 2–8
+      del: "Startorden"
+      text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
+    - nar: veckans första pass i vecka 5
+      del: "Startorden"
+      text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
     - nar: veckans övriga i vecka 2
       del: "Startorden"
       text: "I vecka 2 finns ingen av de förra, och då bygger eleven tre ord före veckans ordbild."
@@ -395,7 +424,7 @@ plan:
     - nar: vecka 8
       del: "Dagens meningar"
       istallet: true
-      text: "Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord, och korten finns kvar om hen fastnar på ett ord. I vecka 8 gör var och en två egna meningar på samma sätt i Dagens meningar, med pennan eller med korten, och läser dem för dig i stället för att jämföra med miniwhiteboarden."
+      text: "Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord. Fastnar hen på ett ord, finns bokstavskorten kvar. I vecka 8 gör var och en två egna meningar på samma sätt i Dagens meningar, med pennan eller med korten, och läser dem för dig i stället för att jämföra med miniwhiteboarden."
     - nar: vecka 1
       del: "Min mening"
       istallet: true
@@ -420,7 +449,7 @@ plan:
       text: "Den som skriver med penna prövar med raden täckt."
     - nar: vecka 7
       del: "Min mening"
-      text: "Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord, och korten finns kvar om hen fastnar på ett ord."
+      text: "Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord. Fastnar hen på ett ord, finns bokstavskorten kvar."
     - nar: vecka 8
       del: "Min mening"
       text: "I Min mening läser grannen den sista meningen. Står den inte redan i skrivboken, skriver ni in den där."
@@ -429,7 +458,10 @@ plan:
     - "Före första passet får varje elev ett namnkort och en skrivbok."
     - "Namnkortet är en remsa med elevens namn, lika hög som bokstavskorten, och kamraterna kan lägga in den i sina meningar."
     - "Skrivboken är ett skrivhäfte med stödlinjer och elevens namn på, och varje sida får en mening och ett datum."
-  upprepa: "Gruppen tar nästa steg när ingen elev tappar ett ord eller ett mellanrum, och var och en läser tillbaka det hen har byggt. Har ni väntat en vecka på samma elev, går ni vidare ändå. I första steget, med bara ord, går gruppen vidare när de flesta orden ligger rätt på första försöket två pass i rad."
+  # Två pass i veckan, ur Periodens text (de kalla läsarna, K-585).
+  fore:
+    - "Med två pass i veckan tar ni tre ordgrupper per pass i vecka 1 och sedan färre meningar ur varje lista, så att ni hinner veckans listor."
+  upprepa: "Gruppen tar nästa steg när ingen elev tappar ett ord eller ett mellanrum, och var och en läser tillbaka det hen har byggt. Har ni väntat en vecka på samma elev, går ni vidare ändå. Den eleven bygger då en kortare variant av gruppens mening, till exempel ”Vi äter mat.” när de andra bygger ”Vi äter mat ute.” Tappar hen inte längre ett ord eller ett mellanrum, bygger hen hela meningen som de andra. I första steget, med bara ord, går gruppen vidare när de flesta orden ligger rätt på första försöket två pass i rad."
   justera:
     - "Får eleven inte fler ljud rätt än före, gör du ljudkollens uppgift 4 och 6. Klarar hen inte båda, byter hen till Ljudlek i grupp. Klarar hen båda, får Startorden ord med de ljud hen tappade."
   utvardering:
@@ -539,11 +571,11 @@ ramar:
             - rubrik: "Den egna meningen"
               text: "Sist skriver eleven en mening om något hen har gjort. Skriv i protokollet hur många ord meningen har och hur många mellanrum som stämmer."
             - rubrik: "Ljuden"
-              text: "Eleven får ett poäng för varje ljud i rätt ordning, så att sl för sol ger två av tre. I hon och en räknas ljuden, så att hån och än ger full poäng."
+              text: "Eleven får en poäng för varje ljud i rätt ordning, så att sl för sol ger två av tre. I hon och en räknas ljuden, så att honn och än ger full poäng."
             - rubrik: "Mellanrum och tecken"
-              text: "Eleven får ett poäng för varje mellanrum, stor bokstav och punkt i meningarna, och ett för varje mening som hen läser som den står."
+              text: "Eleven får en poäng för varje mellanrum, stor bokstav och punkt i meningarna. Hen får också en poäng för varje mening som hen läser som den står."
             - rubrik: "Ordbilderna"
-              text: "Före insatsen och efter vecka 8 får eleven ett poäng för varje ordbild som hen stavar rätt."
+              text: "Före insatsen och efter vecka 8 får eleven en poäng för varje ordbild som hen stavar rätt."
       listor:
         - rubrik: "Protokollet"
           larare: true

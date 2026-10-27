@@ -63,7 +63,7 @@ tabeller:
       - - "Konsonantmöte sist"
         - "hund: /h/ /u/ /n/ /d/, fyra ljud"
         - "Vokalen är kort. Dra ut n:et: hu-⁠nnn-⁠d."
-    not: "Varje rad har ett ark vikkort under Materialet, med bilden på framsidan och ordet med en prick för varje ljud på baksidan. Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen. Missar de få eller hål börjar ni i Tre ljud att dra ut, missar de näsa i Två stavelser och missar de häst i Konsonantmöte först, den första raden med konsonantmöten. Har eleverna inte gjort uppgift 6 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev."
+    not: "Varje rad har ett ark bildkort under Materialet, med bilden på framsidan och ordet med en prick för varje ljud på baksidan. Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen. Missar de få eller hål, börjar ni i Tre ljud att dra ut, missar de näsa i Två stavelser och missar de häst i Konsonantmöte först, den första raden med konsonantmöten. Finns det inget ord som fler än hälften missar, börjar ni i Konsonantmöte först. Har eleverna inte gjort uppgift 6 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -162,7 +162,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram arken för gruppens rad, bokstavskorten, ljudrutorna, markörerna, pennorna och speglarna. Rita fem rutor på tavlan, som ljudrutorna: en bildruta och fyra rutor för ljuden. Sätt fyra magneter som markörer under rutorna och en femte till kortet. Välj orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Ta fram bildkorten för gruppens rad, bokstavskorten, ljudrutorna, markörerna, pennorna och speglarna. Rita fem rutor på tavlan, som ljudrutorna: en bildruta och fyra rutor för ljuden. Sätt fyra magneter som markörer under rutorna och en femte till kortet. Välj orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."

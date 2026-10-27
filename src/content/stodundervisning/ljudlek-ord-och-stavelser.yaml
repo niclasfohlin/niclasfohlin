@@ -167,7 +167,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram klossarna, stavelsekorten, bokstavskorten, speglarna och arket för gruppens rad, ett per par och ett till dig. Välj meningarna eller orden till steg 1 och 2 och orden till ljudstarten. Skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Ta fram klossarna, stavelsekorten, bokstavskorten, speglarna och bildkorten för gruppens rad, ett ark per par och ett till dig. Välj meningarna eller orden till steg 1 och 2, och orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."

@@ -50,6 +50,7 @@ const UNDANTAG = [
   { vag: /^lektionskort\.\d+\.efter$/, word: false, utskrift: false, skal: 'lektionskortets plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/lektionskort.ts)' },
   { vag: /^lektionskort\.\d+\.text$/, word: false, skal: 'meningen vid lektionskortets knapp i Materialet; Word-filen har kortet självt på sina egna sidor, och meningen före kortets sidbrytning blev ensam på en sida (kortets texter prövas nedan)' },
   { vag: /^lathund\./, utskrift: false, skal: 'lathunden är en egen sida med egen utskrift' },
+  { vag: /^uppfoljning\.rader\.\d+\.resultat$/, word: false, utskrift: false, skal: 'det resultatfältet i Planera insatsen tar emot, med metodens skala (K-579); hur mätningen görs står i radens vad, som sidan och Word-filen visar' },
   { vag: /^mallar\.\d+\.text$/, word: false, skal: 'mallens text är till läraren och står bara på sidan' },
   { vag: /^mallar\.\d+\.underrad$/, utskrift: false, skal: 'raden ritas som fält med skrivlinjer på sidan' },
   { vag: /^ramar\.ramar\.\d+\.(serie|ark)$/, word: false, utskrift: false, skal: 'bildseriens och arkets id i metodens scenfil; rutorna står som bilder (src/lib/bildserier.ts)' },

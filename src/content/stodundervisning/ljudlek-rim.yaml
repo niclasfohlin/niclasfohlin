@@ -170,7 +170,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram rimkorten, restkorten, bokstavskorten och speglarna. Välj radens ordpar och orden till ljudstarten. Bestäm paren och skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Ta fram rimkorten, restkorten, bokstavskorten och speglarna. Välj radens ordpar ur Ordparen och orden till ljudstarten ur Ordbanken. Bestäm paren och skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."

@@ -715,18 +715,20 @@ progression:
       taggar: [ordet]
       rubrik: Slaget Ordet, eleverna leder samtalet
 uppfoljning:
-  text: Följ effekten varje vecka med lyssningsbladet, och gör kartläggningen före och efter med två lika svåra texter. Kartläggningen är inget samtal. Den mäter om eleven på egen hand drar en slutsats som texten stöder och visar ledtråden, och i passen ger du inga poäng.
+  text: Följ effekten varje vecka med lyssningsbladet, och gör kartläggningen före och efter med två lika svåra texter. Kartläggningen är inget samtal. Den mäter om eleven på egen hand drar en slutsats som texten stöder och visar ledtråden, och i passen ger du inga poäng. Får eleven två poäng utan h på både fråga 2 och fråga 3, och står ledtråden utan h på det sista lyssningsbladet, är eleven klar med insatsen. Har eleven fler poäng än före men är inte klar, går eleven en period till, och du börjar med det tankesteg som oftast saknades på lyssningsbladet. Har eleven lika många poäng som före eller färre, tar du upp det med elevhälsan och ser efter om eleven först behöver träna avkodningen eller ordförrådet, till exempel i TIL i grupp eller Ordverkstad i grupp.
   rader:
     - nar: Före insatsen
       perElev: [5, 8]
-      vad: Varje elev gör kartläggningens text före, enskilt med dig, på fem till åtta minuter. Läs texten högt först på Lättläst och för den som avkodar mödosamt. Klarar eleven inte fråga 1, är nivån för svår, och eleven gör kartläggningen på nivån under. Välj gruppens nivå så att alla klarar fråga 1, som kravet Lagom nivå säger.
+      vad: Varje elev gör kartläggningens text före enskilt med dig. Ställ ingen fråga före läsningen, och stanna inte. På nivån Lättläst och för den som avkodar mödosamt läser du texten högt först, och sedan läser eleven själv. Eleven svarar muntligt, och du skriver poängen i Kartläggningens protokoll. Fråga tillbaka bara om eleven inte svarar, och skriv då ett h efter poängen. Klarar eleven inte fråga 1, är nivån för svår, och eleven gör kartläggningen på nivån under. Välj gruppens nivå så att alla klarar fråga 1, som kravet Lagom nivå säger.
+      resultat: "poäng 0–⁠1 på fråga 1 och 0–⁠2 på fråga 2 och 3, och h om du frågade tillbaka"
       tid: före
     - nar: Varje vecka
       vad: Du läser frågetecknen i pass 3 och lyssningsbladet från pass 2 och 3, och ser också vem som använde veckans samtalsdrag. Nästa vecka visar du ett tankesteg efter det du hörde. Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna.
       tid: varje vecka
     - nar: Efter sex till åtta veckor
       perElev: [5, 8]
-      vad: Varje elev gör kartläggningens text efter, som är lika svår, enskilt med dig på fem till åtta minuter. Jämför poängen i Kartläggningens protokoll, och lyssningsbladen med vecka 1 och 2. Titta också i elevens bänkbok. Har hen satt lappar där något inte står också utanför passen, och kan hen säga ledtråden vid en av dem? Får eleven två poäng utan h på både fråga 2 och fråga 3, och står ledtråden utan h på det sista lyssningsbladet, är eleven klar med insatsen. Har eleven fler poäng än före men är inte klar, går eleven en period till, och du börjar med det tankesteg som oftast saknades på lyssningsbladet. Har eleven lika många poäng som före eller färre, tar du upp det med elevhälsan och ser efter om eleven först behöver träna avkodningen eller ordförrådet, till exempel i TIL i grupp eller Ordverkstad i grupp.
+      vad: Varje elev gör kartläggningens text efter, som är lika svår, enskilt med dig. Du gör den som kartläggningen före och sätter poängen och h på samma sätt. Jämför poängen i Kartläggningens protokoll. Se om ledtråden står utan h på det sista lyssningsbladet, och jämför det med lyssningsbladen från vecka 1 och 2. Titta sedan i elevens bänkbok. Har hen satt lappar där något inte står också utanför passen, och kan hen säga ledtråden vid en av dem?
+      resultat: "poäng och h som före, och ledtråden utan h på det sista lyssningsbladet ja/nej"
       tid: efter
 plan:
   nivaval:

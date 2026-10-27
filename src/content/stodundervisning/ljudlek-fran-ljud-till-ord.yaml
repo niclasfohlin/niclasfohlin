@@ -65,7 +65,7 @@ tabeller:
       - - "Byt ett ljud"
         - "mat blir fat. mål blir mås."
         - "Byt det första ljudet, sedan det sista och till sist vokalen, och säg vilket ljud som går och vilket som kommer."
-    not: "Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen: vår och röra hör till raden Sätt ihop, utdraget, lek till raden Ta bort ett ljud och sal till raden Byt ett ljud. Har eleverna inte gjort uppgift 8 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev. I raderna Sätt ihop ändrar ni inget, och i steg 3 läser båda i paret ordet."
+    not: "Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen. Orden vår och röra hör till raden Sätt ihop, utdraget. Ordet lek hör till raden Ta bort ett ljud och ordet sal till raden Byt ett ljud. Finns det inget ord som fler än hälften missar, börjar ni i raden Byt ett ljud. Har eleverna inte gjort uppgift 8 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev. I raderna Sätt ihop ändrar ni inget, och i steg 3 läser båda i paret ordet."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -338,7 +338,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns lektionskortet och bokstavskorten. I den här lektionen har varje par en egen sida, utöver de två du skriver ut för hela insatsen. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera bokstavskorten och ljudrutorna."
+    - "Här finns lektionskortet och bokstavskorten. Du skriver ut bokstavskorten till ljudstarten två gånger för hela insatsen, och i den här lektionen har varje par dessutom en egen sida. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera bokstavskorten och ljudrutorna."
   ramar:
     - rubrik: "Bokstavskorten"
       text:

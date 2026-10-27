@@ -178,7 +178,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Lägg gruppens golvbokstäver i en följd vid sidan om, och dra ett streck under dagens ljud på kartorna när det är nytt. Ta fram bokstavskorten och speglarna. Välj ord ur Orden att gå och ord till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Lägg golvbokstäverna för gruppens bokstäver i en följd vid sidan om, och dra ett streck under dagens ljud på bokstavskartorna när det är nytt. Ta fram bokstavskorten och speglarna. Välj ord ur Orden att gå och ord till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
