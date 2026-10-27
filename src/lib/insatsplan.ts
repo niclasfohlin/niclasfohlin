@@ -332,7 +332,10 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
     // kalla testarna 2026-10-27: "Stegen visar bara hur korten fördelas, inte vad eleverna gör").
     const stegen = new Map((ld.passrutin?.steg ?? []).flatMap((s) => (typeof s === 'string' ? [] : [[s.fas.toLowerCase(), s.text] as [string, string]])));
     const pass0 = planensPass(ld, l.id);
-    const passet = pass0 && { ...pass0, delar: pass0.delar.map((x) => (stegen.has(x.fas.toLowerCase()) ? { ...x, vad: `${mening(stegen.get(x.fas.toLowerCase())!)} ${x.vad}` } : x)) };
+    // Stegets sista led står inte två gånger när delens text redan säger det, som "och du lyssnar på dagens elever"
+    // (verifieringen samma dag).
+    const utanUpprepning = (steg: string, vad: string) => { const m = steg.match(/^(.*), och (.+?)\.$/u); return m && vad.toLowerCase().includes(m[2].toLowerCase()) ? `${m[1]}.` : mening(steg); };
+    const passet = pass0 && { ...pass0, delar: pass0.delar.map((x) => (stegen.has(x.fas.toLowerCase()) ? { ...x, vad: `${utanUpprepning(stegen.get(x.fas.toLowerCase())!, x.vad)} ${x.vad}` } : x)) };
     const tabellen = ld.upplagg ? ld.tabeller.find((t) => ld.upplagg!.text.includes(t.rubrik)) : undefined;
     const upplagget = tabellen ? meningarna(ld.upplagg!.text) : [];
     const fran = upplagget.findIndex((m) => m.includes(tabellen!.rubrik));

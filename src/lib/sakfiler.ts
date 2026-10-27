@@ -11,7 +11,9 @@
 //   ett räkneblad med namn (Addition 1) på sitt A4, och en ram med flera sådana alla bladen i en fil, under det sista;
 //   en mall under Mallar att skriva ut, och diplomet eller kursintyget.
 // Regeln har inga egna fält: en metod som får sin plan får filerna av sig själv, och planprovet stannar på en sak som
-// planen leder till utan knapp och på en fil utan knapp (scripts/planprov.mjs). Inga Node-beroenden.
+// planen leder till utan knapp och på en fil utan knapp (scripts/planprov.mjs). En lektion i en serie, som Ljudleks, planeras
+// i seriens planerare, som leder till lektionens saker, så lektionen har filerna också (verifieringen 2026-10-27: under
+// Bokstavskorten i Första ljudet stod ingen knapp). Inga Node-beroenden.
 import type { MetodData } from './metod';
 import { planbar } from './planbar';
 import { bankAv, iBanken } from './bank';
@@ -21,6 +23,7 @@ import { bokhandledningen, lararhandledningar } from './handledning';
 import { bladNamn, forstaLed } from './karta';
 import { faktatexter, strukturAv, textparAv } from './ramform';
 import { allaAntal, kortnamn, slugAv, stor } from './standard/index.js';
+import { ljudform } from './ljudkort';
 
 export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall' | 'diplom';
 /** En saks fil: namnet utan ändelse, sakens namn (dokumentets titel och skärmläsarens), var saken står i metodens fil, hur
@@ -43,7 +46,8 @@ export interface Sakfil {
 
 
 export function sakfiler(d: MetodData, id: string): Sakfil[] {
-  if (!planbar(d)) return [];
+  const lektion = !!d.serie && d.formaga !== undefined && !d.plan;
+  if (!planbar(d) && !lektion) return [];
   const ut: Sakfil[] = [];
   const ramar = d.ramar?.ramar ?? [];
   const bank = bankAv(d);
@@ -86,7 +90,9 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
     // egen ram med sex delar fyra).
     const sago = ram.sagoform ? (ram.sagoform.sidor ?? ram.sagoform.bilder?.length ?? 1) : 0;
     const fylla = ram.huvud ? (ram.delar ?? []).length : 0;
-    const hogst = 3 + listor.length + (ram.serie ? 2 : 0) + (ram.ark ? 1 : 0) + sago + fylla;
+    // Golvbokstäverna står en per A4 (ljudform i src/lib/ljudkort.ts), så varje bokstav är en sida (Ljudleks Bokstavsgympa).
+    const golv = listor.filter((l) => ljudform(d, l) === 'golvbokstaver').reduce((n, l) => n + (l.rader ?? []).flat().filter(Boolean).length, 0);
+    const hogst = 3 + listor.length + (ram.serie ? 2 : 0) + (ram.ark ? 1 : 0) + sago + fylla + golv;
     const namn = kortnamn(ram.rubrik, rubriker);
     ut.push({ namn: `${id}-blad-${slugAv(ram.rubrik)}`, titel: ram.rubrik, slag: 'ram', ri, minst: 1, hogst, text: `Skriv ut ${namn}`, pdftext: `${namn} som pdf`, liggande: false });
   });

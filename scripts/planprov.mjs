@@ -2307,7 +2307,7 @@ try {
       // ljudkollen är en länk (de kalla testarna 2026-10-27).
       const tabellen4 = lektion4.tabeller.find((t) => lektion4.upplagg.text.includes(t.rubrik));
       const v3b = await lj(`(() => ({ rader: document.querySelector('#pl-veckan details.pl-rader')?.open ?? false, raderText: document.querySelector('#pl-veckan details.pl-rader')?.textContent ?? '', ruta: document.querySelector('#pl-veckan .pl-nasta')?.textContent ?? '', ljudkollen: [...document.querySelectorAll('#pl-veckan a')].some((a) => /^ljudkoll/i.test(a.textContent ?? '')) }))()`);
-      sant('Ljudlek: lektionens rader, stegen och länken till ljudkollen i veckan', v3b.rader && tabellen4.rader.every((r) => v3b.raderText.includes(r[0])) && v3b.raderText.includes(tabellen4.not.slice(0, 40)) && lektion4.passrutin.steg.every((x) => v3b.ruta.includes(x.text)) && v3b.ljudkollen, v3b);
+      sant('Ljudlek: lektionens rader, stegen och länken till ljudkollen i veckan', v3b.rader && tabellen4.rader.every((r) => v3b.raderText.includes(r[0])) && v3b.raderText.includes(tabellen4.not.slice(0, 40)) && lektion4.passrutin.steg.every((x) => v3b.ruta.includes(x.text.split(', och ')[0])) && v3b.ljudkollen, v3b);
       await b.tryck('#pl-veckan .pl-lektionen-efter .pl-andra-knappar [data-valj-lektion="4|5"]');
       await vanta(250);
       sant('Ljudlek: Nästa sätter nästa veckas lektion', (await lj('location.hash')).includes('k=3.0.4.5') && (await lj(`document.getElementById('pl-toast')?.textContent ?? ''`)).includes('Vecka 4 tar Smaka på ljud.'), await lj('location.hash'));
