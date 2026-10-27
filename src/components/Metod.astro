@@ -775,7 +775,7 @@ const meny = [
       </>) : strukturer.has(ram) ? (() => {
         const [bild, ...fler] = paBordetVid(bilderPaBordet, { ram: ram.rubrik });
         return (<>
-          <Struktur s={strukturer.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} bild={bild} />
+          <Struktur s={strukturer.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} bild={bild}>{(!lage || lage === 'material') && !undersida && saker.ram.get(ri) && <Sakknapp fil={saker.ram.get(ri)!} metod={d.titel} />}</Struktur>
           <Filmruta filmer={[...fler, ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
         </>);
       })() : (<>

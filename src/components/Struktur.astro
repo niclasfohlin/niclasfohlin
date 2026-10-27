@@ -44,4 +44,6 @@ const rader = (t: string) => t.split('\n').map(delar);
     </div>
   </div>
   {s.not && <p class="boksida-fot"><span>{s.not}</span></p>}
+  {/* Knappen under strukturens sida, bara på skärmen, som under en lästext (Sakknapp.astro, src/lib/sakfiler.ts). */}
+  <slot />
 </section>

@@ -171,7 +171,10 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     if (iBanken(bank, ri) || !r.rubrik.includes(':')) return;
     const [namn, efter] = r.rubrik.split(':').map((x) => x.trim());
     if (!efter || nivaNamn.has(efter) || veckornaI(efter) || (perNamn.get(namn)?.length ?? 0) < 2 || saker.some((s) => s.namn.toLowerCase() === r.rubrik.toLowerCase())) return;
-    saker.push(sak(r.rubrik, `${sida}#${ramAnkare[ri]}`));
+    // En ram med lektioner, som Till läraren: veckorna, leder till veckans sida, där knappen Skriv ut veckan står
+    // (planprovet 2026-10-27).
+    const lv = lektionsveckor.get(`${sida}#${ramAnkare[ri]}`);
+    saker.push(lv ? sak(r.rubrik, lv[Object.keys(lv).map(Number).sort((a, b) => a - b)[0]], { veckor: lv }) : sak(r.rubrik, `${sida}#${ramAnkare[ri]}`));
   });
   // Veckans ram, i en kurs med en ram per vecka som Bråkkursens "Vecka 1: Lika delar": "veckans ram" leder i planen till
   // ramen för veckan som visas, med veckans ruta Till läraren, korten och materialet (länkgranskningen av omgång 3

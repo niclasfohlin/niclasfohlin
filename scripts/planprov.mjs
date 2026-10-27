@@ -1399,7 +1399,15 @@ const planensAdresser = (d) => [
 for (const m of synliga) {
   const sidan = join(dist, 'stodundervisning', m.id, 'planera', 'index.html');
   if (!existsSync(sidan)) { adressfel.push(`${m.id}: planens sida finns inte`); continue; }
-  const json = readFileSync(sidan, 'utf8').match(/<script type="application\/json" id="pl-data">([\s\S]*?)<\/script>/)?.[1];
+  const html = readFileSync(sidan, 'utf8');
+  // En serie vars kurser har egna planer, som Texttyper i grupp, har valet av kurs och leder till kursernas planer (K-576).
+  if (m.d.plan?.versionsval && !m.d.plan.versionsval.versioner?.length) {
+    const kurser = [...html.matchAll(/href="(\/stodundervisning\/[^"#?]+\/planera)\/?"/g)].map((x) => x[1]);
+    const saknas = kurser.filter((a) => !existsSync(join(dist, a, 'index.html')));
+    if (!kurser.length || saknas.length) adressfel.push(`${m.id}: valet av kurs leder ${kurser.length ? `till planer som inte finns: ${saknas.join(', ')}` : 'inte till någon kurs'}`);
+    continue;
+  }
+  const json = html.match(/<script type="application\/json" id="pl-data">([\s\S]*?)<\/script>/)?.[1];
   const d = json ? JSON.parse(json) : null;
   const felen = d ? [...new Set(planensAdresser(d))].map(adressFel).filter(Boolean) : ['ingen data'];
   if (felen.length) adressfel.push(`${m.id}: planens adresser leder inte till sidor och ankare som finns: ${felen.join(', ')}`);
@@ -1411,7 +1419,8 @@ for (const m of synliga) {
   // Varje rad med del står i en del i varje pass den gäller, med förvalet och den längsta planen (passetsBeskrivning; den
   // stängda frågan 2026-10-26).
   if ((d?.passen ?? []).some((x) => x.del)) {
-    const mp = s.metodplan(m.d).plan;
+    // Planens rader, som sidan räknar med: en rad för en annan version är redan borta (K-576).
+    const mp = s.metodplan({ ...m.d, plan: { ...m.d.plan, passen: d.passen } }).plan;
     for (const langd of [undefined, mp.period?.max]) {
       const pl = s.planera(mp, { ...s.forval(mp, '2026-11-02'), ...(langd ? { langd } : {}) });
       for (const p of pl.pass) {
@@ -1508,8 +1517,9 @@ for (const m of synliga) {
   const d = JSON.parse(plan);
   provaSidan(m.id, d.saker, d.kursveckor);
   for (const l of d.lektioner ?? []) provaSidan(l.id, l.saker);
-  // Rubriken i flera ramar och i rutorna i dem är ingen sak (länkgranskningen av texttypskurserna 2026-10-27).
-  if ((d.saker ?? []).some((x) => x.namn === 'Till läraren')) knappfel.push(`${m.id}: "Till läraren" leder till en av flera ramar med det namnet (metodensSaker i src/lib/metodsaker.ts)`);
+  // Rubriken i flera ramar är ingen sak (länkgranskningen av texttypskurserna 2026-10-27); med en enda ram leder den dit.
+  const tillLararen = (m.d.ramar?.ramar ?? []).filter((r) => /^Till läraren:/.test(r.rubrik)).length;
+  if (tillLararen >= 2 && (d.saker ?? []).some((x) => x.namn === 'Till läraren')) knappfel.push(`${m.id}: "Till läraren" leder till en av flera ramar med det namnet (metodensSaker i src/lib/metodsaker.ts)`);
 }
 if (knappfel.length) { console.error(`planprov: ${knappfel.length} fel i knapparna under det planen leder till:\n  ${knappfel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: de ${provade} saker som planen leder till på metodernas sidor har en knapp under sig som skriver ut just den, och varje saks fil har sin knapp.`);
@@ -2307,7 +2317,8 @@ try {
   // en progression i pass (Seriesamtal), Hem och skola (TIL i grupp) och veckor efter den sista raden (Läslistor i grupp).
   const b = await flik(false, Date.UTC(2026, 10, 18, 9, 0, 0));
   const stodMetoder = [], stodFel = [], langdMetoder = [], langdFel = [], veckoFel = [], foreFel = [], foreProvade = [];
-  for (const m of synliga.filter((x) => x.id !== 'textsamtal-i-grupp')) {
+  // En serie vars kurser har egna planer, som Texttyper i grupp, har bara valet av kurs, som prövas med planens adresser.
+  for (const m of synliga.filter((x) => x.id !== 'textsamtal-i-grupp' && !(x.d.plan?.versionsval && !x.d.plan.versionsval.versioner?.length))) {
     const adress = `${bas}/stodundervisning/${m.id}/planera`;
     await b.oppna(adress);
     await b.kor(`localStorage.clear()`);
@@ -2347,11 +2358,15 @@ try {
     // Den smala formen (K-572): veckan säger överst vad eleverna blir bättre på, ur veckans rad i progressionen, och Efter
     // veckan regeln för att gå vidare som metodens fjärde kolumn, när raden har den.
     const elev = await b.kor(`(() => { const d = JSON.parse(document.getElementById('pl-data').textContent); const rader = d.progression?.rader ?? []; return { har: rader.length > 0 && rader.every((r) => r.eleverna), elevmal: [...document.querySelectorAll('#pl-veckan .pl-elevmal p')].map((p) => p.textContent), mojliga: rader.map((r) => r.eleverna).filter(Boolean), vidare: document.querySelector('#pl-veckan .pl-vidare')?.textContent ?? null, regler: rader.map((r) => r.vidare).filter(Boolean) }; })()`);
-    if (elev.har) sant(`${m.id}: veckan säger vad eleverna blir bättre på och när gruppen går vidare, ur progressionens rad`, elev.elevmal.length > 0 && elev.elevmal.every((t) => elev.mojliga.some((e) => e.replace(/\.$/, '') === t.replace(/\.$/, ''))) && (elev.vidare === null || elev.regler.some((r) => elev.vidare.startsWith(`Gå vidare när ${r}`))), elev);
+    // En progression i När, som Kortskrivnings, är råd utan veckor (standarden 0.26.0), och veckan säger inget ur den.
+    if (elev.har && s.metodplan(m.d).plan?.stegEnhet !== 'nar') sant(`${m.id}: veckan säger vad eleverna blir bättre på och när gruppen går vidare, ur progressionens rad`, elev.elevmal.length > 0 && elev.elevmal.every((t) => elev.mojliga.some((e) => e.replace(/\.$/, '') === t.replace(/\.$/, ''))) && (elev.vidare === null || elev.regler.some((r) => elev.vidare.startsWith(`Gå vidare när ${r}`))), elev);
     sant(`${m.id}: planens länkar leder till sidor och ankare som finns`, !lankFel(await sakLankar(b)).length, [await sakLankar(b), lankFel(await sakLankar(b))]);
     // Stödet för nivåvalet vid varje nivåval (K-557): nerpilen under formulärets nivåer och under varje nivåval i veckan,
     // med metodens text och en länk som finns.
-    const stod = await b.kor(`(() => { const nivaer = [...document.querySelectorAll('.pl-nivaer')]; return { antal: nivaer.length, utan: nivaer.filter((n) => !n.parentElement.querySelector(':scope > .pl-stod')).length, text: document.querySelector('#pl-nivastod > p')?.textContent ?? '', lank: document.querySelector('#pl-nivastod a')?.getAttribute('href') ?? '' }; })()`);
+    // Valet av version har nivåknapparnas form och sitt eget stöd (#pl-versionsstod, K-576), och prövas för sig nedan.
+    const stod = await b.kor(`(() => { const nivaer = [...document.querySelectorAll('.pl-nivaer:not(#pl-versioner)')]; return { antal: nivaer.length, utan: nivaer.filter((n) => !n.parentElement.querySelector(':scope > .pl-stod')).length, text: document.querySelector('#pl-nivastod > p')?.textContent ?? '', lank: document.querySelector('#pl-nivastod a')?.getAttribute('href') ?? '' }; })()`);
+    const vstod = await b.kor(`(() => { const v = document.getElementById('pl-versioner'); return v ? { text: document.querySelector('#pl-versionsstod > p')?.textContent ?? '', lank: document.querySelector('#pl-versionsstod a')?.getAttribute('href') ?? '' } : null; })()`);
+    if (vstod) sant(`${m.id}: valet av version har Stöd för valet med metodens text och en länk`, vstod.text.length > 20 && !!vstod.lank && !lankFel([vstod.lank]).length, vstod);
     if (stod.antal) { stodMetoder.push(m.id); if (!(!stod.utan && stod.text.length > 20 && stod.text.length <= s.NIVAVALETS_LANGD && !!stod.lank && !lankFel([stod.lank]).length)) stodFel.push({ metod: m.id, ...stod }); }
     // Uppföljningen i ett visst pass står i rutan med passet: Kompissamtals uppföljning efter samtal 3 (den kalla testaren av
     // omgång 5 2026-10-26).

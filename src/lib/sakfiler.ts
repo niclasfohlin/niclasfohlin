@@ -23,7 +23,7 @@ import { metodensNivamaterial } from './nivamaterial';
 import { bladgrupper, egnaBlad, metodensBladmaterial } from './bladmaterial';
 import { bokhandledningen, lararhandledningar } from './handledning';
 import { bladNamn, forstaLed } from './karta';
-import { faktatexter, strukturAv, textparAv } from './ramform';
+import { faktatexter } from './ramform';
 import { allaAntal, kortnamn, sakdelar, slugAv, stor, visadeTexter } from './standard/index.js';
 import { metodensSaker, sidansAnkare } from './metodsaker';
 import { ljudform } from './ljudkort';
@@ -68,12 +68,15 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
   ramar.forEach((ram, ri) => {
     if (iBanken(bank, ri)) return;
     if (nm?.ramar.has(ri) || bm?.ramar.has(ri) || handledningar.has(ri) || bokhl?.ri === ri || medBlad.has(ri)) return;
-    if (fakta.has(ram) || textparAv(ram) || strukturAv(ram)) return;
+    // Faktatexterna har sina filer i banken. Två texter och en struktur skrivs ut med sina sidor, som i planeringsmallarna
+    // (planprovet 2026-10-27: Två texter och Strukturen i skrivmetoderna saknade knapp).
+    if (fakta.has(ram)) return;
     // Veckorna i en ram med lektioner, var och en för sig: en del vars första led är en vecka ("Vecka 1 · Hopp på talraden").
     if (ram.lektioner) {
       ram.delar.forEach((del, di) => {
-        const v = forstaLed(del.rubrik).match(/^vecka (\d+)$/i)?.[1];
-        if (v) ut.push({ namn: `${id}-vecka-${v}`, titel: del.rubrik, slag: 'vecka', ri, di, minst: 1, hogst: 2, text: 'Skriv ut veckan', pdftext: 'Veckan som pdf', liggande: false });
+        // En vecka i en version heter med versionen först, "Skattjakten vecka 1 · Inbjudan" (Värdeskapande, K-576).
+        const m = forstaLed(del.rubrik).match(/^(?:(.+?)\s+)?vecka (\d+)$/i);
+        if (m) ut.push({ namn: `${id}-vecka-${m[1] ? `${slugAv(m[1])}-` : ''}${m[2]}`, titel: del.rubrik, slag: 'vecka', ri, di, minst: 1, hogst: 2, text: 'Skriv ut veckan', pdftext: 'Veckan som pdf', liggande: false });
       });
       return;
     }
