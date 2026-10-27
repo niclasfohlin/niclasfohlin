@@ -932,6 +932,26 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
       && s.harElevernasKolumn({ progression: { rader: [{ vecka: '1', vidare: 'de flesta gör det' }, { vecka: '2' }] } })
       && s.elevernasFel(elevrad({ eleverna: 'Att ' })).some((f) => f.includes('börjar med "Att"'))
       && s.planensTexter(elevrad({})).some(([, t]) => t === 'Gå vidare när de flesta gör det i två pass i rad.'), s.elevernasFel(elevrad({ vidare: 'alla gör det' })));
+    // Den stängda granskningen av K-572 2026-10-27: regeln för att gå vidare prövas i radens sista vecka eller vid radens
+    // sista pass, och metodens regel för att ta veckan igen står bara där den inte säger emot radens regel.
+    {
+      const pl = metod('problemlosning-i-grupp'), ll = metod('laslistor-i-grupp');
+      const mpl = s.metodplan(pl).plan;
+      const provasI = (langd) => { const p = s.planera(mpl, { start: '2026-11-02', dagar: [1, 3], langd }); return p.veckor.filter((v) => v.steg !== null && s.vidareProvasI(mpl, p, v, v.steg)).map((v) => v.innehall).join(); };
+      const iPass = { stegEnhet: 'pass', steg: [{ rad: 0, fran: 1, till: 3, vidBehov: false }, { rad: 1, fran: 4, vidBehov: false }] };
+      const passen = { pass: [1, 2, 3, 4, 5, 6].map((nr) => ({ nr, steg: nr <= 3 ? 0 : 1 })) };
+      // Med sex veckor har Ni gör tillsammans bara vecka 5, och regeln prövas där (Codex 2026-10-27).
+      ska('regeln för att gå vidare prövas i radens sista vecka i planen, och vid radens sista pass', provasI(8) === '2,4,6,8' && provasI(6) === '2,4,5,6'
+        && s.vidareProvasI(iPass, passen, { innehall: 2, pass: [3, 4] }, 0) && !s.vidareProvasI(iPass, passen, { innehall: 1, pass: [1, 2] }, 0) && s.vidareProvasI(iPass, passen, { innehall: 3, pass: [5, 6] }, 1)
+        && s.hanvisarTillVidare(pl.plan.upprepa) && !s.hanvisarTillVidare(ll.plan.upprepa) && s.vidareMening('x').startsWith(s.VIDARE_BORJAN), [provasI(8), provasI(6)]);
+      // Högläsning i par: villkoret där regeln prövas, och följden för de yngre också i vecka 6–8. Problemlösning: inget
+      // utan regeln. Läslistor: planens mening, eftersom radernas regel gäller. En metod utan regler: metodens hela regel.
+      const hp = metod('hoglasning-i-par').plan.upprepa;
+      const utan = s.upprepaIVeckan(hp, true, false), med = s.upprepaIVeckan(hp, true, true);
+      ska('metodens regel för att ta veckan igen, med och utan radens regel', med?.hela && med.text === hp && utan && !utan.hela && utan.text === 'Tar ni om en vecka, skjuter du upp mötet och läsningen hos de yngre en vecka.'
+        && s.upprepaIVeckan(pl.plan.upprepa, true, false) === null && s.upprepaIVeckan(pl.plan.upprepa, true, true)?.hela
+        && s.upprepaIVeckan(ll.plan.upprepa, true, true) === null && s.upprepaIVeckan(ll.plan.upprepa, false, false)?.hela && s.upprepaIVeckan(undefined, true, true) === null, [utan, med]);
+    }
     // plan.sistaRaden (Codex 2026-10-27, K-572): Problemlösnings sista vecka tar ledet Du gör själv när perioden är kortare
     // än åtta veckor, också en upprepning av den, och i åtta veckor följer veckorna raderna som förut. Spärren åt andra hållet.
     {
@@ -943,6 +963,10 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
         && led(6, [6]) === 'Jag gör|Jag gör|Vi gör|Vi gör|Ni gör tillsammans|Du gör själv|Du gör själv'
         && led(7).endsWith('Ni gör tillsammans|Ni gör tillsammans|Du gör själv')
         && led(8) === 'Jag gör|Jag gör|Vi gör|Vi gör|Ni gör tillsammans|Ni gör tillsammans|Du gör själv|Du gör själv'
+        // En förlängning tar den sista veckan igen, så att vecka 6 behåller ledet Du gör själv (Codex 2026-10-27).
+        && s.planera(mpl, s.forlangdaVal(mpl, { start: '2026-11-02', dagar: [1, 3], langd: 6 }, 2)).veckor.map((v) => pl.progression.rader[v.steg]?.led).join('|') === 'Jag gör|Jag gör|Vi gör|Vi gör|Ni gör tillsammans|Du gör själv|Du gör själv|Du gör själv'
+        && !s.stegUtanfor(mpl, s.planera(mpl, { start: '2026-11-02', dagar: [1, 3], langd: 6 })).length
+        && s.stegUtanfor(s.metodplan({ ...pl, plan: { ...pl.plan, sistaRaden: undefined } }).plan, s.planera(s.metodplan({ ...pl, plan: { ...pl.plan, sistaRaden: undefined } }).plan, { start: '2026-11-02', dagar: [1, 3], langd: 6 })).length === 1
         && s.metodplan({ ...pl, plan: { ...pl.plan, sistaRaden: undefined } }).plan.sistaRaden === undefined
         && s.metodplan({ ...pl, progression: { ...pl.progression, enhet: 'Pass' } }).fel.some((f) => f.includes('plan.sistaRaden')), [led(6), led(6, [6]), led(7), led(8)]);
     }
@@ -2681,6 +2705,58 @@ try {
   await el.tryck('#pl-kopia-spara');
   await vanta(200);
   sant('planens fil heter plan, gruppen, metoden och datumet', (await el.kor('window.__filnamn')) === 'plan-Läsgrupp-2B-textsamtal-i-grupp-2026-11-25.json', await el.kor('window.__filnamn'));
+  // K-556 (verifieringen av omgång 1 2026-10-26): ett rättat namn, en utbytt elev, en inklistrad lista med fler än 32 namn
+  // och de fyra namnen tillbaka. Annika är samma elev som Anna med skattningarna, och ingen fråga nämner Anna eller Carl.
+  {
+    const p0 = slutlagrat.planer[0];
+    const lagrat = { v: 1, planer: [{ ...p0, id: 'k556x1', foljd: { ...p0.foljd, elever: [{ id: 'e1', namn: 'Anna' }, { id: 'e2', namn: 'Bo' }, { id: 'e3', namn: 'Carl' }, { id: 'e4', namn: 'Dora' }], franvaro: {}, resultat: {}, avstamning: undefined } }] };
+    await el.oppna(PLAN);
+    await el.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(lagrat))})`);
+    await el.oppna(`${PLAN}#${s.kodaVal(slutVal, { id: 'k556x1' })}`);
+    const k556 = () => el.kor(`JSON.parse(localStorage.getItem('insatser')).planer.find((p) => p.id === 'k556x1').foljd`);
+    const fraga = () => el.kor(`document.getElementById('pl-elever-fraga').hidden ? '' : document.getElementById('pl-elever-fraga').innerText`);
+    const steg = [];
+    await skriv('Annika\nBo\nCarl\nDora');
+    steg.push(await fraga());
+    await el.tryck('#pl-elever-fraga [data-samma-elev]');
+    await lamna();
+    await skriv('Annika\nBo\nErik\nDora');
+    steg.push(await fraga());
+    await el.tryck('#pl-elever-fraga [data-ny-elev]');
+    await lamna();
+    steg.push((await k556()).elever.map((e) => `${e.id}:${e.namn}`).join());
+    await skriv(Array.from({ length: 34 }, (_, i) => `Elev${i + 1}`).join('\n'));
+    await lamna();
+    await skriv('Annika\nBo\nErik\nDora');
+    await lamna();
+    const f = await k556();
+    const annika = f.elever.find((e) => e.namn === 'Annika');
+    const annikas = Object.values(f.skattning).filter((v) => v[annika?.id] !== undefined).length;
+    sant('K-556: ett rättat namn står kvar som samma elev efter en lång lista, och ingen fråga nämner de gamla namnen', annika?.id === 'e1' && annikas === slutVeckor.length && !(await fraga()), { steg, elever: f.elever, annikas, fraga: await fraga() });
+    // Samma sak när båda namnen byts i en ändring, så att frågan har två att välja bland ("Anna och Carl är borttagna och
+    // Annika är ny i listan"), som i verifieringen.
+    // En egen plan och en adress med en fråga, så att sidan laddas om och inget står kvar i minnet från fallet före.
+    const lagrat2 = { v: 1, planer: [{ ...lagrat.planer[0], id: 'k556x2' }] };
+    await el.oppna(`${PLAN}?k556=1`);
+    await el.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(lagrat2))})`);
+    await el.oppna(`${PLAN}?k556=2#${s.kodaVal(slutVal, { id: 'k556x2' })}`);
+    const k556b = () => el.kor(`JSON.parse(localStorage.getItem('insatser')).planer.find((p) => p.id === 'k556x2').foljd`);
+    await skriv('Annika\nBo\nErik\nDora');
+    const tva = await fraga();
+    await el.kor(`(() => { const b = document.querySelector('#pl-elever-fraga [data-samma-elev$="|e1"]'); if (!b) return false; b.click(); return true; })()`);
+    await vanta(150);
+    await el.tryck('#pl-elever-fraga [data-ny-elev]');
+    await lamna();
+    const mitt = (await k556b()).elever.map((e) => `${e.id}:${e.namn}`).join();
+    await skriv(Array.from({ length: 34 }, (_, i) => `Elev${i + 1}`).join('\n'));
+    await lamna();
+    await skriv('Annika\nBo\nErik\nDora');
+    await lamna();
+    const g = await k556b();
+    const annika2 = g.elever.find((e) => e.namn === 'Annika');
+    const annikas2 = Object.values(g.skattning).filter((v) => v[annika2?.id] !== undefined).length;
+    sant('K-556: också när båda namnen byts i en ändring', tva.includes('Anna och Carl är borttagna') && mitt.startsWith('e1:Annika') && annika2?.id === 'e1' && annikas2 === slutVeckor.length && !(await fraga()), { tva, mitt, elever: g.elever, annikas2, fraga: await fraga() });
+  }
   sant('elevlistan: inga fel', !el.undantag.length && !(await el.kor('window.__fel.length')), el.undantag);
   el.stang();
 } catch (e) {

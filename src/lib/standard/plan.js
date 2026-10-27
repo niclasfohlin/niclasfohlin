@@ -548,12 +548,68 @@ export const utvarderingensFel = (d) => (d.plan && !d.plan.utvardering?.length ?
 /** Kolumnens rubrik på metodens sida och i Word, och etiketten i planen. */
 export const ELEVERNAS_KOLUMN = 'Eleverna blir bättre på';
 
+/** Början på regeln för att gå vidare, som metodens egen regel för att ta veckan igen kan hänvisa till. */
+export const VIDARE_BORJAN = 'Gå vidare när';
+
 /**
  * Regeln för att gå vidare som en mening, "Gå vidare när …", på metodens sida, i Word och i planen.
  * @param {string} vidare
  * @returns {string}
  */
-export const vidareMening = (vidare) => `Gå vidare när ${vidare.trim()}.`;
+export const vidareMening = (vidare) => `${VIDARE_BORJAN} ${vidare.trim()}.`;
+
+/**
+ * Om metodens regel för att ta veckan igen (`plan.upprepa`) hänvisar till radernas regel för att gå vidare, som "Klarar
+ * gruppen inte det som står under Gå vidare när, …". En sådan regel står i planen bara där en rad prövas, och en regel
+ * utan hänvisning bara i en metod utan regler i raderna, så att veckan inte har två villkor för samma beslut (den stängda
+ * granskningen av K-572 2026-10-27: Läslistors "Byt lista när …" stod under varje veckas Gå vidare när).
+ * @param {string} upprepa
+ */
+export const hanvisarTillVidare = (upprepa) => upprepa.includes(VIDARE_BORJAN);
+
+/**
+ * Metodens regel för att ta veckan igen som planen visar i en vecka, eller null när planens egen mening står där. En mening
+ * som hänvisar till Gå vidare när är villkoret och står där radens regel prövas, och de andra meningarna säger hur veckan
+ * tas igen och står i varje vecka, som Högläsning i pars "Tar ni om en vecka, skjuter du upp mötet och läsningen
+ * hos de yngre en vecka." (Codex och den kalla testaren 2026-10-27, K-572: meningen föll bort i vecka 6–8). En regel utan
+ * hänvisning gäller bara i en metod utan regler i raderna, så att veckan inte har två villkor för samma beslut.
+ * @param {string | undefined} upprepa metodens plan.upprepa
+ * @param {boolean} medRegler någon rad i progressionen har vidare
+ * @param {boolean} provas veckan prövar en rads regel (vidareProvasI)
+ * @returns {{ text: string, hela: boolean } | null} hela: regeln står hel, annars efter planens mening
+ */
+export function upprepaIVeckan(upprepa, medRegler, provas) {
+  if (!upprepa) return null;
+  const m = meningarna(upprepa);
+  if (!m.some(hanvisarTillVidare)) return medRegler ? null : { text: upprepa, hela: true };
+  if (provas) return { text: upprepa, hela: true };
+  const hur = m.filter((x) => !hanvisarTillVidare(x));
+  return hur.length ? { text: hur.join(' '), hela: false } : null;
+}
+
+/**
+ * Om regeln för att gå vidare i progressionens rad prövas i veckan: i radens sista vecka i planen, också när veckan tas
+ * igen, och i en progression i pass veckan med radens sista pass. En rad utan slut, som Från pass 11, prövas varje vecka
+ * (den stängda granskningen av K-572 2026-10-27: Problemlösnings regel för ledet Jag gör, vecka 1–2, stod redan i vecka 1,
+ * och TIL:s "i fyra pass i rad" gick inte att nå där).
+ * @param {Metodplan} mp
+ * @param {Plan} plan
+ * @param {{ innehall: number, pass: number[], steg?: number | null }} v
+ * @param {number} rad progressionens rad
+ * @returns {boolean}
+ */
+export function vidareProvasI(mp, plan, v, rad) {
+  const s = mp.steg.find((x) => x.rad === rad);
+  if (!s || s.till === undefined) return true;
+  // Radens sista vecka eller pass i just den här planen, så att en rad som plan.sistaRaden har kortat prövas i sin sista
+  // vecka (Codex 2026-10-27: Ni gör tillsammans fick aldrig sin regel i en plan på sex veckor).
+  if (mp.stegEnhet === 'veckor') {
+    const sista = Math.max(...plan.veckor.filter((x) => x.steg === rad).map((x) => x.innehall));
+    return v.steg === rad && v.innehall === sista;
+  }
+  const sistaPass = Math.max(...plan.pass.filter((p) => p.steg === rad).map((p) => p.nr));
+  return v.pass.includes(sistaPass);
+}
 
 /**
  * Den fjärde kolumnens cell: vad eleverna blir bättre på, och regeln för att gå vidare på en egen rad.
@@ -1152,6 +1208,13 @@ export function forlangdaVal(mp, val, n) {
   const plan = planera(mp, val);
   const mitt = val.mitt ?? mittVeckan(plan) ?? undefined;
   const ut = { ...val, ...(mitt ? { mitt } : {}) };
+  // Har planens sista vecka fått progressionens sista rad (plan.sistaRaden), förlängs den med samma vecka igen, så att
+  // veckan som har varit behåller sitt innehåll och de nya veckorna fortsätter i den sista raden (Codex 2026-10-27, K-572:
+  // en förlängning med en vecka gjorde vecka 6 av sex till Ni gör tillsammans).
+  const sistaVeckan = plan.veckor.at(-1), sistaSteget = mp.steg.filter((x) => !x.efter).at(-1);
+  if (!val.slut && mp.sistaRaden && mp.stegEnhet === 'veckor' && mp.period.enhet !== 'pass' && sistaVeckan && sistaSteget && sistaVeckan.steg === sistaSteget.rad && sistaVeckan.innehall < sistaSteget.fran) {
+    return { ...ut, upprepa: [...(val.upprepa ?? []), ...Array.from({ length: n }, () => sistaVeckan.innehall)] };
+  }
   if (!val.slut) return { ...ut, langd: val.langd + steg(n) };
   const hel = planera(mp, { ...val, slut: undefined });
   const mal = plan.veckor.length + n;
@@ -1627,7 +1690,10 @@ export function passetsBeskrivning(roller, passet, lage) {
  */
 export function stegUtanfor(mp, plan) {
   const sista = mp.stegEnhet === 'pass' ? hogstaPassnr(plan) : Math.max(0, ...plan.veckor.map((v) => v.innehall));
-  return mp.steg.filter((s) => !s.efter && s.fran > sista).map((s) => ({ rad: s.rad, fran: s.fran, vidBehov: s.vidBehov }));
+  // Ett steg som en vecka eller ett pass har fått räknas som nått, också den sista raden som plan.sistaRaden ger planens
+  // sista vecka (den kalla testaren 2026-10-27, K-572: översikten sa att sex veckor inte når Du gör själv).
+  const tagna = new Set(mp.stegEnhet === 'pass' ? plan.pass.map((p) => p.steg) : plan.veckor.map((v) => v.steg));
+  return mp.steg.filter((s) => !s.efter && s.fran > sista && !tagna.has(s.rad)).map((s) => ({ rad: s.rad, fran: s.fran, vidBehov: s.vidBehov }));
 }
 
 /** Planens vecka för ett datum: veckan datumet ligger i, nästa vecka före start, och sista veckan efter slutet. @param {Plan} plan @param {string} datum */

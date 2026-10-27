@@ -253,6 +253,11 @@ plan:
     - nar: första passet
       kort: "Utan favoritmeningar"
       text: "I första passet visar du vad som ligger i mappen och hur eleven väljer tre favoritmeningar och skriver dem i skrivboken."
+    # Vecka 6–8: eleverna blir bättre på att berätta vad gårdagens bok handlade om, och stegens fråga står i Återkoppla
+    # (den stängda granskningen av K-572 2026-10-27: frågan stod bara i stegen, som planen inte visar).
+    - nar: vecka 6–8
+      del: Återkoppla
+      text: "När eleven har en ny bok varje pass, fråga först vad boken handlade om."
     - nar: pass 17
       kort: "Nytt lässchema"
       text: "Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."

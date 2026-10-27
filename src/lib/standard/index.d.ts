@@ -173,6 +173,14 @@ export declare const ELEVERNAS_KOLUMN: string;
 export declare const ELEVERNAS_LANGD: number;
 export declare const vidareMening: (vidare: string) => string;
 export declare const elevernasCell: (r: { eleverna?: string; vidare?: string }) => string;
+/** Början på regeln för att gå vidare, "Gå vidare när". */
+export declare const VIDARE_BORJAN: string;
+/** Om metodens regel för att ta veckan igen hänvisar till radernas regel för att gå vidare. */
+export declare const hanvisarTillVidare: (upprepa: string) => boolean;
+/** Om regeln för att gå vidare i progressionens rad prövas i veckan: radens sista vecka i planen, eller veckan med radens sista pass. */
+export declare function vidareProvasI(mp: Metodplan, plan: Plan, v: { innehall: number; pass: number[]; steg?: number | null }, rad: number): boolean;
+/** Metodens regel för att ta veckan igen som planen visar i en vecka, hel eller bara meningarna om hur, eller null. */
+export declare function upprepaIVeckan(upprepa: string | undefined, medRegler: boolean, provas: boolean): { text: string; hela: boolean } | null;
 export declare const harElevernasKolumn: (d: { progression?: { rader: { eleverna?: string; vidare?: string }[] } }) => boolean;
 export declare function elevernasFel(d: { plan?: unknown; progression?: { rader: { vecka: string; eleverna?: string; vidare?: string }[] } }): string[];
 export declare function planFel(d: Parameters<typeof metodplan>[0] & MetodensTexter): string[];

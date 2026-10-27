@@ -365,7 +365,7 @@ hem:
 
 progression:
   rubrik: Kursplanen
-  text: Varje vecka har ett nytt fokus, och det nya kommer i pass 1 och 2. Vecka 1–4 är addition och subtraktion och vecka 5–8 multiplikation och division. Du tonar ut stödet, så att du först tänker högt hela vägen, sedan visar bara det nya och till sist låter eleverna leda uträkningen åt andra hållet. I vecka 4 och 8 repeterar ni också det kursen har haft. Kolumnen Eleverna blir bättre på säger veckans mål och när gruppen går vidare. Klarar gruppen inte det som står under Gå vidare när, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Har en elev inte nått veckans mål när gruppen går vidare, övar hen på det i uppvärmningen och i ett tredje pass.
+  text: Varje vecka har ett nytt fokus, och det nya kommer i pass 1 och 2. Vecka 1–4 är addition och subtraktion och vecka 5–8 multiplikation och division. Du tonar ut stödet, så att du först tänker högt hela vägen, sedan visar bara det nya och till sist låter eleverna leda uträkningen åt andra hållet. I vecka 4 och 8 repeterar ni också det kursen har haft. Kolumnen Eleverna blir bättre på säger veckans mål och när gruppen går vidare. Klarar gruppen inte det som står under Gå vidare när, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Har en elev inte nått veckans mål när gruppen går vidare, övar hen på det i uppvärmningen och i ett tredje pass, om gruppen har ett.
   rader:
     - vecka: "1"
       fokus: Hopp på talraden, addition och subtraktion i huvudet. Tiotalen först, och i subtraktion räkna upp när talen ligger nära
@@ -470,7 +470,7 @@ plan:
     - "Räknar eleven färre än fyra rätt, eller visar protokollet ingen skillnad mot före kursen, tar du upp det med elevhälsan. På Bas kan eleven börja i Antalsuppfattning i grupp."
     - "Annars fortsätter eleven en period till i en grupp på samma nivå, med nya tal i de veckor där det inte sitter. Addition och subtraktion är vecka 1–4, och multiplikation och division vecka 5–8."
     - "Välj de nya talen efter de tre kraven för passets tal, ta fler uppgifter ur gruppens matematikbok och gör samma kartläggning efter perioden."
-  upprepa: "Klarar gruppen inte det som står under Gå vidare när, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Har en elev inte nått veckans mål när gruppen går vidare, övar hen på det i uppvärmningen och i ett tredje pass."
+  upprepa: "Klarar gruppen inte det som står under Gå vidare när, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Har en elev inte nått veckans mål när gruppen går vidare, övar hen på det i uppvärmningen och i ett tredje pass, om gruppen har ett."
 mal:
   overgripande: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
   punkter:

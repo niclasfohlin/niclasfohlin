@@ -339,7 +339,7 @@ urval:
     - rubrik: Två sätt
       text: Går att lösa på två sätt, med bild, tabell, tallinje eller material
 progression:
-  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden Jag gör, Vi gör, Ni gör tillsammans och Du gör själv. Gruppen byter led när den klarar det som står under Gå vidare när. Annars tar ni samma led en vecka till. Med tre pass i veckan räcker sex veckor, och med två pass i veckan tar du åtta, så att gruppen får ungefär lika många pass. Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan. I första passet tar Planera längre tid, eftersom du visar kortet Våra sätt och bladet Vår lösning. Bladet Två lösningar visar du första gången i Jämföra, när du delar ut det med B täckt. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med.
+  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden Jag gör, Vi gör, Ni gör tillsammans och Du gör själv. Gruppen byter led när den klarar det som står under Gå vidare när, och annars tar ni samma led en vecka till. Med tre pass i veckan räcker sex veckor, och med två pass i veckan tar du åtta, så att gruppen får ungefär lika många pass. Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan. I första passet tar Planera längre tid, eftersom du visar kortet Våra sätt och bladet Vår lösning. Bladet Två lösningar visar du första gången i Jämföra, när du delar ut det med B täckt. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med.
   # eleverna och vidare (sajtens K-572, del B, den smala formen, efter provet out/planera-r/problemlosning-i-grupp-veckorna.md):
   # vad eleverna ska bli bättre på i ledet, knutet till målets punkter, och när gruppen går vidare. Regeln för att byta led
   # står i vidare, och progressionens text och plan.upprepa hänvisar dit (out/planera-r/problemlosning-i-grupp-4.md).
@@ -355,7 +355,7 @@ progression:
       fokus: "Fler av metodens problem. Paren ställer frågorna på kortet Våra sätt till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
       roll: Läraren ger kortare stöd och frågar mer.
       eleverna: Att förklara vad talen betyder och visa problemet med bild, tabell eller material, så att det syns hur talen hänger ihop.
-      vidare: paren väljer ett sätt på kortet och kommer i gång i Lösa utan din hjälp, i två pass i rad
+      vidare: paren väljer ett sätt på kortet Våra sätt och kommer i gång i Lösa utan din hjälp, i två pass i rad
     - vecka: 5–6
       led: Ni gör tillsammans
       fokus: De sista av metodens problem på nivån, och liknande problem ur källorna. Paren skriver Vi vet själva.
@@ -418,7 +418,7 @@ plan:
     - "Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
   # Regeln för att byta led står i progressionens vidare, och upprepa citerar progressionens text som hänvisar dit
   # (K-572, del B).
-  upprepa: "Gruppen byter led när den klarar det som står under Gå vidare när. Annars tar ni samma led en vecka till."
+  upprepa: "Gruppen byter led när den klarar det som står under Gå vidare när, och annars tar ni samma led en vecka till."
   # Beslutet efter kartläggningen efter, ordagrant ur uppföljningens text (passgenomgången 2026-10-26). Den andra
   # genomgången samma kväll: var den nya perioden börjar, och att talen går först.
   utvardering:
