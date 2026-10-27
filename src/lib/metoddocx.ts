@@ -3466,7 +3466,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       // höll ihop Lappen hem efter samtalet i Kompissamtal och flyttade den, medan Google Dokument delade den och fick en
       // sida mer (K-402). En tom ram är en mall i planeringsmallarna och står här bara som en rad.
       const elevsida = (r: Ram | undefined) => !!r && !ramArTom(r) && !!d.elevblad[r.rubrik];
-      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder || efterLista || elevsida(ram) || elevsida(ramarna[i - 1])) && !(ut.at(-1) instanceof Sektionsbyte);
+      // En ram med veckor (lektioner) börjar också på en ny sida, så att metodens fria text före den slutar med luft: Google
+      // Dokument ritade texten före ramen i Argumenterande text sex rader längre efter tio sidor, och ramens text spillde
+      // över på en egen sida före vecka 1 (K-585, 2026-10-27).
+      const nySida = (!!(ram.serie || ram.ark || ram.lektioner) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder || efterLista || elevsida(ram) || elevsida(ramarna[i - 1])) && !(ut.at(-1) instanceof Sektionsbyte);
       ut.push(ramensRubrik(ram, nySida));
       const serie = ramensSerie(ram, post.id);
       if (ramArTom(ram)) {
@@ -3502,7 +3505,8 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
         enRam(i, lagda ? { ...ram, listor: ram.listor!.filter((_, li) => !lagda.has(li)) } : ram);
         continue;
       }
-      ut.push(ramensRubrik(ram), ...ramBarn(ram, { ...ramVal(ram), veckor: 'inga' }));
+      // Ramen med veckorna börjar på en ny sida, som i enRam.
+      ut.push(ramensRubrik(ram, !paNySida()), ...ramBarn(ram, { ...ramVal(ram), veckor: 'inga' }));
       for (const v of vm.veckor) {
         ut.push(...ramBarn(ram, { ...ramVal(ram), veckor: v.di, paNySida: paNySida() }));
         for (const x of v.saker) {
