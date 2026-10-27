@@ -369,7 +369,10 @@ plan:
     # före de korta berättelserna, det du gör efter passet, versionerna före pass 5 och 9, rutan vid Sara i pass 6, och
     # passets tabell där fältet säger "som i passets tabell". Efter Rimligheten med perioden i pass (2026-10-27 kväll):
     # utskrifterna före pass 1, diagrammet i mappen före pass 2, reglerna före pass 7, lyssnarna och klockslaget före
-    # pass 10, och meningen om Nu undrar jag i svarsraderna efter pass 1, 10 och 11.
+    # pass 10, och meningen om Nu undrar jag i svarsraderna efter pass 1, 10 och 11. Efter uppdrag 29 (samma kväll) det som
+    # bara lathunden och tabellen sa, ur ramen Till läraren: veckorna: papperet med Mina texter och Mitt mål före pass 2, den
+    # egna platsen, lapparna och Krok nummer tretton före pass 7, och inbjudan och tavlan före pass 10. Veckosidorna för
+    # vecka 1, 4 och 5 har för lite luft i Google för en rad till.
     - nar: pass 1
       kort: "Läsaren"
       # Utan kolumnen Läsaren: den heter som veckans korta namn, och då blir etiketten "Vecka 1" (sajtens K-585, P3).
@@ -384,6 +387,9 @@ plan:
       del: Före passet
       text: "Förslagen är ”En gång när jag blev rädd”, ”En gång när jag hade otur” och ”En gång när jag blev överraskad”, i den ordningen."
     - nar: pass 1
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    - nar: pass 1
       del: Efter passet
       istallet: true
       text: "Skriv tre svarsrader på varje berättelse: Nu vet jag, Här var jag med och Nu undrar jag. Under Nu undrar jag skriver du en av kortets frågor, den som berättelsen inte svarar på. Den korta berättelsen svarar du på till pass 2."
@@ -396,12 +402,20 @@ plan:
       ur: { tabell: "De sex veckorna", rad: "Vecka 1", kolumner: ["Det som händer", "Eleven skriver"] }
     - nar: pass 2
       del: Före passet
-      text: "Diagrammet ligger i elevens mapp."
+      text: "Till pass 2 skriver du ut ett papper per elev med diagrammet Mina texter på ena sidan och bladet Mitt mål på den andra. Diagrammet ligger i elevens mapp."
     - nar: pass 2
       del: Efter passet
       istallet: true
       text: "Fyll i fältet Till nästa pass på bladet Det jag hör."
-    - nar: pass 3–4
+    # Bladet Det jag hör skrivs ut före veckans första pass, som bladet säger (språkrundan 2026-10-27), och raden står sist
+    # i passets förberedelse. Därför har pass 3 en egen rad, och pass 4 har samma rad som förut.
+    - nar: pass 3
+      kort: "Läraren visar"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 2", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
+    - nar: pass 3
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    - nar: pass 4
       kort: "Läraren visar"
       ur: { tabell: "De sex veckorna", rad: "Vecka 2", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
     - nar: pass 5
@@ -410,6 +424,9 @@ plan:
     - nar: pass 5
       del: Före passet
       text: "Före pass 5 och 9 skriver du själv två korta versioner på tavlan, en som liknar det många skrev och en med det som fattades, som ”Sedan gick vi hem.” och ”Jag hoppade så högt att mössan trillade av.” Ingen av dem är en elevs berättelse."
+    - nar: pass 5
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
     - nar: pass 6
       kort: "Gruppens text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 3", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
@@ -428,6 +445,12 @@ plan:
     - nar: pass 7
       del: Före passet
       text: "Spökberättelsen har tre regler. Skriv dem på blädderblocket till pass 7."
+    - nar: pass 7
+      del: Före passet
+      text: "Före pass 7 väljer du en plats som alla känner, skriver tre lappar för den och tar fram Krok nummer tretton."
+    - nar: pass 7
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
     - nar: pass 7
       del: Säg
       istallet: true
@@ -450,12 +473,15 @@ plan:
     - nar: pass 9
       del: Före passet
       text: "Före pass 5 och 9 skriver du själv två korta versioner på tavlan, en som liknar det många skrev och en med det som fattades, som ”Sedan gick vi hem.” och ”Jag hoppade så högt att mössan trillade av.” Ingen av dem är en elevs berättelse."
+    - nar: pass 9
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
     - nar: pass 10
       kort: "Egen text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 5", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
     - nar: pass 10
       del: Före passet
-      text: "Eleverna bjuder själva in lyssnarna till spökläsningen i pass 12. Varje elev bjuder in en lyssnare, eller två om gruppen har fem elever eller färre. Klockslaget på inbjudan är tio minuter in i pass 12."
+      text: "Eleverna bjuder själva in lyssnarna till spökläsningen i pass 12. Varje elev bjuder in en lyssnare, eller två om gruppen har fem elever eller färre. Klockslaget på inbjudan är tio minuter in i pass 12. Till pass 10 skriver du ut en inbjudan per lyssnare och skriver spökläsningens dag, klockslag och rum på tavlan."
     - nar: pass 10
       del: Efter passet
       text: "Skriv tre svarsrader på varje berättelse: Nu vet jag, Här var jag med och Nu undrar jag. Under Nu undrar jag skriver du en av kortets frågor, den som berättelsen inte svarar på."
@@ -468,6 +494,9 @@ plan:
     - nar: pass 11
       del: Före passet
       text: "Förslagen är ”En gång när jag blev arg”, ”En gång när jag kom för sent” och ”En gång när jag blev stolt”, i den ordningen. Säg efter uppgiften vilket förslag som är elevens: det som står på samma plats som det hen valde i pass 1. Då är de två berättelserna av samma slag. Hen skriver med samma verktyg som då, för hand, på dator eller genom att diktera."
+    - nar: pass 11
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
     - nar: pass 11
       del: Efter passet
       istallet: true
@@ -548,6 +577,7 @@ ramar:
       lektioner: true
       text:
         - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus, sedan de två passen och sist det du ska lägga märke till. De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen. När en berättelse är klar skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa berättelse börjar läser hen det först. Mellan passen svarar du på de korta berättelserna efter pass 1 och 11 och på berättelserna efter pass 4, 8 och 10. Före pass 5 och 9 skriver du två korta versioner till Två sätt i era texter. Har gruppen gått en annan kurs i serien, läser eleven i pass 1, efter Två texter, sitt sista mål för kamraten och säger vad hen känner igen i den andra texten om bollen. Det tar tre minuter, och Berätta mera! går då 35–⁠48 min och intervjun 48–⁠56 min. I pass 3 hoppar du då över raden i manuset där du vänder dig till gruppen, och paren börjar planera vid minut 17."
+        - "Till pass 2 skriver du ut ett papper per elev med diagrammet Mina texter på ena sidan och bladet Mitt mål på den andra. Före pass 7 väljer du en plats som alla känner, skriver tre lappar för den och tar fram Krok nummer tretton. Till pass 10 skriver du ut en inbjudan per lyssnare och skriver spökläsningens dag, klockslag och rum på tavlan."
       delar:
         - rubrik: "Vecka 1 · Läsaren"
           falt:
@@ -1056,7 +1086,7 @@ ramar:
               text: "I pass 11 räknar eleven den första korta berättelsen utan tillägget från pass 2, som står under strecket. Efter passet läser du berättelserna och rättar staplarna om de inte stämmer. En rutas skillnad mellan två staplar säger inte mycket. Se efter vad eleven gör nu som hen inte gjorde då, också i spökberättelsen. Visa berättelserna och diagrammet för klassläraren."
     - rubrik: Det jag hör
       text:
-        - "Skriv ut ett blad per vecka. Ha det i handen medan paren planerar, berättar och skriver. Skriv elevens namn och det hen säger medan du lyssnar. Ringa in det eleven sa utan att du frågade. Efter passet fyller du i Till nästa pass."
+        - "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11. Ha det i handen medan paren planerar, berättar och skriver. Skriv elevens namn och det hen säger medan du lyssnar. Ringa in det eleven sa utan att du frågade. Efter passet fyller du i Till nästa pass."
       huvud:
         - rubrik: Vecka, och eleverna jag lyssnar särskilt på
       delar:

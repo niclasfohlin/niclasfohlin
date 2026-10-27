@@ -3006,6 +3006,7 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 /* Ett pass som inte har varit: en streckad ring på bockens plats, utan tryck. */
 .pl-bock.senare { border-style: dashed; background: none; cursor: default; opacity: 0.7; }
 .pl-bock.ja svg { stroke: var(--farg-lasning); }
+.pl-extrabock { display: flex; align-items: center; gap: 0.6rem; margin: 0.5rem 0 0; }
 .pl-andra-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
 .pl-flytta { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.8rem 1rem; margin: 0.5rem 0; }
 .pl-flytta[hidden] { display: none; }

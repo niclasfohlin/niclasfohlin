@@ -332,7 +332,7 @@ export declare const uppraknat: (ord: string[]) => string;
 /** Passens nummer i en text, "Pass 4–6" eller "Pass 4 och 6" när ett pass är struket däremellan. */
 export declare const passnummerText: (nr: number[]) => string;
 export declare function veckansDagar(plan: { pass: Pass[] }, v: PlanVecka): { fran: string; till: string };
-export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: string; steg?: string[]; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number; folj?: boolean; utvardering?: { beslut?: string; not?: string }; elever?: { namn: string }[]; pagar?: boolean; lektioner?: { namn: string; datum: string[] }[]; lektionerSedan?: boolean }): string;
+export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: string; steg?: string[]; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number; folj?: boolean; utvardering?: { beslut?: string; not?: string }; elever?: { namn: string }[]; pagar?: boolean; lektioner?: { namn: string; datum: string[] }[]; lektionerSedan?: boolean; extraPass?: { datum: string } }): string;
 /** Passens längd i minuter efter dagarnas klockslag, och passets längd för en dag utan klockslag; olika längder var för sig, i storleksordning. */
 export declare function passensMinuter(val: Val, standard: number, plan?: { pass: Pass[] }): number[];
 /** "30", eller "30 eller 40". */
@@ -343,6 +343,7 @@ export declare const rentMal: (s: unknown) => string;
 export declare const malText: (mal?: string) => string;
 /** En text där elevlistans namn och förnamn har blivit "en elev". */
 export declare function utanNamn(text: string, elever: { namn: string }[], kvar?: { namn: string }[]): string;
+export declare const RESULTATETS_LANGD: number;
 export declare function extraPassetsDag(plan: Plan, val: Val): string | undefined;
 export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[]; passet?: (p: Pass) => string; extraPass?: { datum: string; text: string } }, plan: Plan, o: { id: string; lank: (vecka?: number | 'fore') => string; namn?: string; nu: Date; tider?: Val['tider'] }): string;
 /** Passens tider, rensade: veckodag till början och slut, som "09:20" och "10:00". */

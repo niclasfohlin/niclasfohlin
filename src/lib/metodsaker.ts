@@ -19,7 +19,7 @@ import { arSaksord, forstaLedet, forstaOrdet, slugAv, veckorI, versionensVecka }
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
  * veckor: adressen för metodens veckor, när saken finns en gång för några veckor (Mina lärdomar: vecka 1–2).
  */
-export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string>; slag?: 'avsnitt' | 'tabell' }
+export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string>; baraVeckorna?: boolean; slag?: 'avsnitt' | 'tabell' }
 
 // Veckorna som ett led i en rubrik säger: "vecka 3" och "vecka 1–2".
 const veckornaI = (led?: string): number[] | undefined => { const v = veckorI(led); return v ? Array.from({ length: v.till - v.fran + 1 }, (_, i) => v.fran + i) : undefined; };
@@ -78,7 +78,9 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   const avsnitt = sidansAvsnitt(d);
   const { ramAnkare, tabellAnkare, blad, bladAnkare } = metodensAnkare(d, avsnitt);
   const nivaNamn = new Map((bank?.nivaer ?? []).map((n) => [n.namn, n.slug]));
-  const perNamn = new Map<string, { adress: string; niva?: string; veckor?: number[]; oversikt?: boolean }[]>();
+  const perNamn = new Map<string, { adress: string; niva?: string; veckor?: number[]; oversikt?: boolean; version?: string }[]>();
+  const versioner = versionernasNamn(d);
+  const egen = (version ?? versioner[0] ?? '').toLocaleLowerCase('sv');
   ramar.forEach((r, ri) => {
     // Nivåernas översikter heter som nivåerna, och en nivå är ett urval, ingen sak. En översikt med ett namn och nivån efter
     // kolon, som "Lärarens sidor: Mellan", är en sak på varje nivå (länkgranskningen 2026-10-25: "sidan om den under
@@ -89,7 +91,8 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     if (!namn) return;
     const adress = bank?.handledning === ri ? `${sida}/texter/lararhandledning` : `${sida}#${ramAnkare[ri]}`;
     const veckor = veckornaI(efter);
-    perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}), ...(oversikt ? { oversikt } : {}) }]);
+    const iVersion = efter ? versioner.find((v) => v.toLocaleLowerCase('sv') === efter.toLocaleLowerCase('sv'))?.toLocaleLowerCase('sv') : undefined;
+    perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}), ...(oversikt ? { oversikt } : {}), ...(iVersion ? { version: iVersion } : {}) }]);
     // En ram som heter "<sak>, vecka N: <titel>", som Ordverkstads "Förlaga, vecka 3: …", eller "<sak>, <version> vecka N",
     // som Värdeskapandes "Inbjudan, Skattjakten vecka 1: …", är saken för den veckan, i sin version, och "förlagan" leder till
     // planens vecka (riggens leverans 2026-10-27, efter länkgranskningen: förlagan, Inbjudan och Ledtrådskortet blev inga
@@ -119,8 +122,22 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     // som i en serie av blad ("Övningsblad: Addition" och de andra) där den första är början.
     // Nivåernas översikter leder utan nivå till materialet, som kartläggningens texter.
     else if (platser.every((p) => p.niva)) saker.push(sak(namn, platser.every((p) => p.oversikt) ? `${sida}#ramar` : platser[0].adress, { nivaer: Object.fromEntries(platser.map((p) => [p.niva!, p.adress])) }));
-    else if (platser.every((p) => p.veckor)) saker.push(sak(namn, platser[0].adress, { veckor: Object.fromEntries(platser.flatMap((p) => p.veckor!.map((v) => [String(v), p.adress]))) }));
-    else saker.push(sak(namn, platser[0].adress));
+    // En sak för några veckor finns bara i de veckorna (baraVeckorna): i en annan vecka är namnet något annat, som greppet
+    // "Två texter halvvägs" i en vecka utan Två texter (länkgranskningen av texttypskurserna 2026-10-27).
+    // En vecka med två ramar, som Sagobokens Två texter, vecka 1: Ekorren och Räven för var sin väg, har inget kort namn
+    // den veckan; ramarnas hela namn leder till var och en (Codex 2026-10-27: den sista ramen vann).
+    else if (platser.every((p) => p.veckor)) {
+      const veckor = new Map<string, Set<string>>();
+      for (const p of platser) for (const v of p.veckor!) veckor.set(String(v), (veckor.get(String(v)) ?? new Set()).add(p.adress));
+      const entydiga = [...veckor].filter(([, a]) => a.size === 1).map(([v, a]) => [v, [...a][0]]);
+      if (entydiga.length) saker.push(sak(namn, entydiga[0][1], { veckor: Object.fromEntries(entydiga), baraVeckorna: true }));
+    }
+    // Samma namn med versionen efter kolon, som "Ramens texter, del 1–6: Hunden som försvann", leder till versionens ram.
+    else if (platser.some((p) => p.version)) { const min = platser.find((p) => p.version === egen); if (min) saker.push(sak(namn, min.adress)); }
+    // Ett ord för en sak, som Övningsblad, leder till den första ramen, där serien av blad börjar. Ett annat namn, som Till
+    // läraren, är rubriken i flera ramar och i rutorna i dem, och leder ingenstans; ramarnas hela namn leder till var och en
+    // (länkgranskningen av texttypskurserna 2026-10-27: "rutan Till läraren" ledde till Till läraren: veckorna).
+    else if (arSaksord(namn)) saker.push(sak(namn, platser[0].adress));
   }
   // En rams titel efter kolon, som "Åt båda hållen" i "Läxa: Åt båda hållen" och "Fönsterplatsen" i "Bildserie 1:
   // Fönsterplatsen", är också ett namn på ramen, när titeln börjar med stor bokstav och ingen annan ram har den
@@ -134,11 +151,12 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   });
   // Titeln länkas bara som titel, med stor bokstav mitt i en mening, så att "multiplikation" inte leder till Övningsblad:
   // Multiplikation.
-  for (const [titel, adresser] of titlar) if (adresser.length === 1 && !perNamn.has(titel)) saker.push(/^\p{Lu}/u.test(titel) ? { ...sak(titel, adresser[0]), versal: true } : sak(titel, adresser[0]));
+  // En mall med samma namn är saken som skrivs ut, och titeln leder dit (länkgranskningen av texttypskurserna 2026-10-27:
+  // "arket Lapparna" ledde till Till läraren: lapparna och inte till mallen).
+  const mallnamn = new Set(d.mallar.flatMap((m) => [m.rubrik, forstaLedet(m.rubrik)]).map((x) => x.trim().toLocaleLowerCase('sv')));
+  for (const [titel, adresser] of titlar) if (adresser.length === 1 && !perNamn.has(titel) && !mallnamn.has(titel.toLocaleLowerCase('sv'))) saker.push(/^\p{Lu}/u.test(titel) ? { ...sak(titel, adresser[0]), versal: true } : sak(titel, adresser[0]));
   // En ram för en version i planens val, som "Hjältens kort i sex steg", heter i den versionen också utan versionens namn,
   // "Hjältens kort", som texten säger (länkgranskningen av Sagoboken 2026-10-27, K-576). Den första ramen med namnet vinner.
-  const versioner = versionernasNamn(d);
-  const egen = (version ?? versioner[0] ?? '').toLocaleLowerCase('sv');
   if (versioner.length) ramar.forEach((r, ri) => {
     if (iBanken(bank, ri)) return;
     const bas = forstaLedet(r.rubrik).split(',')[0].trim();

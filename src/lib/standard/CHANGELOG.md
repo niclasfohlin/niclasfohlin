@@ -1,5 +1,13 @@
 # Ändringar i standarden
 
+## 0.28.0, 2026-10-27 kväll
+
+- `plan.js`, versionerna i planens val (sajtens K-576): `versionsvaletsFel` prövar `plan.versionsval`; `iVersionen` tar bort meningar som börjar med en annan version ("I fyra steg …"), `versionensVecka` och `faltetIVersionen` läser "vecka 3 i sex steg" och fältet "Pass 9 i sex steg", och `iVersionensKolumner` visar en kolumn som heter "… i <version>" bara i den versionen.
+- `plan.js`, kursens pass ur veckornas sidor (sajtens K-553 och K-585): `veckansPassRam` och `veckansPassFalt` läser fälten "Pass N" och "Dag N" på ett ställe, `faltetsSkillnader` läser ett fält som bara säger det som skiljer från tidsschemat, `kursensPassnummer` ger kursens nummer för planens pass, `passetsDelnamn`, `arDelensTid` och `EFTER_PASSET` ger delarna Före passet och Efter passet, och `visadeTexter` har fälten med.
+- `plan.js`, en versions extra pass före pass 1 (`versioner[].extraPass`, Berättelseramens Egen ram): `extraPassetsDag` ger dagen i skolveckan före första passet med de dagar som gällde då (`passdagar`), förbi lovveckor och ett sommarlov; `kalenderfil` tar `info.extraPass`, och `dokumentationstext` tar `o.extraPass` och säger det i omfattningen (Codex samma kväll).
+- `plan.js`: `passetsBeskrivning` ger tabellen med passets delar före en tabell som bara säger var passet står, `RESULTATETS_LANGD` (80) är resultatets längd i fältet, när det sparas och när en plan läses in, och `PLANERA` är 0.6.0.
+- `saker.js`, efter länkgranskningen av texttypskurserna: ett namn efter stapeln, kolumnen, raden, rubriken, rutan, delen eller greppet är delen och inte saken med samma namn (skriv "greppet Två texter halvvägs"); `HUVUDORD` har screening, ruta, karta, förlaga och inbjudan, och `arSaksord` tar bort skiljetecken i orden.
+
 ## 0.27.0, 2026-10-27
 
 - `plan.js`, lektionerna i en serie (sajtens K-551 och K-578; Niclas samma dag: "Lektionerna bör köras ca 2 veckor i rad", och "Elevernas progression styr"): `lektionensForslag` tar lektionens `veckor` och hur många veckor i följd gruppen har haft lektionen, och föreslår samma lektion tills `min` är nådd, sedan nästa när snittet är över `LEKTIONENS_GRANS`, aldrig nästa bara för att `max` är nådd. `vidareTillLektion` säger "Lektionen är klar när …" i den sista lektionen, och `planensTexter` har `lektionsval.klar` med.

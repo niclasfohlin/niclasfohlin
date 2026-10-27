@@ -209,7 +209,7 @@
     "datum": "2026-10-26"
   },
   "texttyp-argumenterande-text": {
-    "kalla": "dc43c75031f8d67d",
+    "kalla": "ee4c2638ce6aacce",
     "innehall": "fdee9346b7751fbc",
     "skalor": [
       1.3,
@@ -220,7 +220,7 @@
     "datum": "2026-10-27"
   },
   "texttyp-berattande-text": {
-    "kalla": "551b82fed36ec15d",
+    "kalla": "d17089553d4179da",
     "innehall": "6233e7ea711dce53",
     "skalor": [
       1.3,
@@ -231,7 +231,7 @@
     "datum": "2026-10-27"
   },
   "texttyp-beskrivande-text": {
-    "kalla": "ee25ae5bb2aa9909",
+    "kalla": "c418011dff227895",
     "innehall": "87e55e22322fadc5",
     "skalor": [
       1.35,
@@ -242,7 +242,7 @@
     "datum": "2026-10-27"
   },
   "texttyp-instruerande-text": {
-    "kalla": "e53b3660308283e1",
+    "kalla": "26e17de11b40538d",
     "innehall": "b2931abef72169d0",
     "skalor": [
       1.3,
@@ -253,8 +253,8 @@
     "datum": "2026-10-27"
   },
   "texttyper-i-grupp": {
-    "kalla": "6792215b966f78d5",
-    "innehall": "91de2fac3d518bdc",
+    "kalla": "4945cb6f518d402a",
+    "innehall": "93ca9864d65b9da2",
     "skalor": [
       1.35,
       1.35,

@@ -21,7 +21,7 @@ format:
   - liten grupp
   - par
 tid: 60 minuter per pass, två pass i veckan
-period: Sex veckor för varje kurs
+period: "12 pass, omkring sex veckor för varje kurs"
 grupp: Två till tio elever
 material:
   - kursens texter
@@ -71,7 +71,7 @@ inledning:
 
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "En kurs har två till tio elever och två pass om 60 minuter i veckan under sex veckor. Eleven skriver varje text i fyra steg: Tänk, Planera, Säg och Skriv. Första veckan skriver eleven en kort text utan stöd, och du är läsaren. I vecka 2 visar du, i vecka 3 skriver gruppen, i vecka 4 planerar paren och i vecka 5 var och en. Eleven skriver sin egen text efter planen. Gruppens text och elevens egen text går till kursens läsare, som svarar. I vecka 6 kommer svaren, och eleven skriver en ny kort text, som du lägger bredvid den första. På kursens blad Det jag hör skriver du ned vad eleverna säger."
+  text: "En kurs har två till tio elever och tolv pass om 60 minuter under omkring sex veckor. Eleven skriver varje text i fyra steg: Tänk, Planera, Säg och Skriv. Första veckan skriver eleven en kort text utan stöd, och du är läsaren. I vecka 2 visar du, i vecka 3 skriver gruppen, i vecka 4 planerar paren och i vecka 5 var och en. Eleven skriver sin egen text efter planen. Gruppens text och elevens egen text går till kursens läsare, som svarar. I vecka 6 kommer svaren, och eleven skriver en ny kort text, som du lägger bredvid den första. På kursens blad Det jag hör skriver du ned vad eleverna säger."
 
 gruppen:
   rubrik: Så sätter du ihop gruppen
@@ -415,13 +415,13 @@ uppfoljning:
     - nar: När en text är klar
       tid: "villkor"
       vad: Eleven ser om sitt mål syns i texten och fyller i en stapel i sitt diagram.
-    - nar: Efter vecka 3
-      tid: "vecka 3"
-      vad: Ge klassläraren de fyra stegen och tavlans tre rader, och be hen lägga märke till om eleven säger vem som läser.
-    - nar: Första och sista veckan
-      tid: "veckans första pass i vecka 1 och 6"
-      vad: Eleven skriver en kort text i tio minuter utan annat stöd än sitt skrivstöd. I sista veckan ger hen båda texterna var sin stapel. Skriv upp om hen planerar den sista texten.
+    - nar: Pass 1 och 11
+      tid: "pass 1 och 11"
+      vad: Eleven skriver en kort text i tio minuter utan annat stöd än sitt skrivstöd. I pass 11 ger hen båda texterna var sin stapel. Skriv upp om hen planerar den sista texten.
       resultat: "i sista veckan: rutor i staplarna för den första och den sista korta texten"
+    - nar: Efter pass 6
+      tid: "pass 6"
+      vad: Ge klassläraren de fyra stegen och tavlans tre rader, och be hen lägga märke till om eleven säger vem som läser.
     - nar: Sista passet
       tid: "sista passet"
       vad: Skriv upp vad som nådde fram till läsaren.
@@ -444,7 +444,7 @@ plan:
     text: "Gruppen går en kurs i taget, och du väljer kurs efter vad eleverna behöver skriva i klassen. Behöver eleverna skriva olika texttyper, väljer du den som flest av dem snart ska skriva."
     mer: "Kurserna: en för varje texttyp"
   passen:
-    - nar: vecka 1–6
+    - nar: pass 1–12
       utanTidsschema: true
       text: "Passen minut för minut, texterna och bladen står i varje kurs. Var och en är en egen metod och står under Kurserna på metodens sida."
   fore:

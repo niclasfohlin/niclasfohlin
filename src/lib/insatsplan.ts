@@ -34,6 +34,10 @@ export const planensAdress = (id: string) => `/stodundervisning/${id}/planera`;
  * mål, mal.overgripande, som lektionskortet också säger (K-522).
  */
 export const planensMal = (m: Metod): string => m.data.mal.overgripande;
+// Delmålen under målet, ur metodens fält mal, som planen visar vid skattningen (tre kalla läsare 2026-10-27: skattningen 1–5
+// hade ingen grund, fast metoden har sina delmål).
+export interface Delmal { text: string; punkter: string[] }
+const delmalen = (m: Metod): Delmal | undefined => (m.data.mal.punkter.length ? { text: m.data.mal.text, punkter: m.data.mal.punkter } : undefined);
 
 export interface PlanBank {
   /** Ta fram-sidans led och adress. */
@@ -67,6 +71,8 @@ export interface PlanData {
   uppdateradText?: string;
   /** Insatsens mål (planensMal), som läraren kan skriva om. */
   mal: string;
+  /** Metodens delmål under målet (mal.text och mal.punkter), som skattningen bygger på. */
+  delmal?: Delmal;
   tid?: string;
   period?: string;
   /** Progressionens rader, med vad eleverna blir bättre på och regeln för att gå vidare (K-572), som veckan visar. */
@@ -172,6 +178,7 @@ export interface PlanLektion {
   tranar?: string;
   /** Lektionens mål, som veckan skattas mot, och målets plats på lektionens sida. */
   mal: string;
+  delmal?: Delmal;
   malAdress?: string;
   /** Regeln för att gå till nästa lektion (lektionens vidare), som fortsätter "Gå vidare till nästa lektion när". */
   vidare?: string;
@@ -413,6 +420,7 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
       sida,
       ...(ld.tranar ? { tranar: ld.tranar } : {}),
       mal: planensMal(l),
+      ...(delmalen(l) ? { delmal: delmalen(l) } : {}),
       ...(ld.mal ? { malAdress: `${sida}#mal` } : {}),
       ...(ld.vidare ? { vidare: ld.vidare } : {}),
       ...(ld.period ? { period: ld.period } : {}),
@@ -502,6 +510,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     sida: `/stodundervisning/${m.id}`,
     ...(uppdaterad ? { uppdaterad, uppdateradText: formateraDatum(d.uppdaterad!) } : {}),
     mal: planensMal(m),
+    ...(delmalen(m) ? { delmal: delmalen(m) } : {}),
     tid: d.tid,
     period: d.period,
     ...(d.progression ? { progression: { enhet: d.progression.enhet, rubrik: d.progression.rubrik, rader: d.progression.rader.map((r) => ({ ...r, kort: veckansKort(r, kurs[r.vecka]?.titel) })) } } : {}),
@@ -521,7 +530,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
     // En rad vars text bara gäller en annan version står inte med (K-576).
-    ...(d.plan?.passen ? { passen: d.plan.passen.filter((p) => !p.text || iV(p.text) || p.ur || p.tabell || (p.del && p.istallet)).map((p) => ({ nar: p.nar, ...(p.text && iV(p.text) ? { text: iV(p.text) } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(iVersionensKolumner(rollensRad(d, p.ur) ?? [], version, alla).map((c) => ({ ...c, text: iV(c.text) })).filter((c) => c.text), p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn) } : {}) })) } : {}),
+    ...(d.plan?.passen ? { passen: d.plan.passen.filter((p) => !p.text || iV(p.text) || p.ur || p.tabell || (p.del && p.istallet)).map((p) => ({ nar: p.nar, ...(p.text && iV(p.text) ? { text: iV(p.text) } : {}), ...(p.ur ? (p.ur.rad === VECKANS_RAD ? { veckor: rollensVeckor(d, p.ur) ?? {} } : { rad: rollensEtiketter(iVersionensKolumner(rollensRad(d, p.ur) ?? [], version, alla).map((c) => ({ ...c, text: iV(c.text) })).filter((c) => c.text), p.kort, p.ur.rad) }) : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.utanTidsschema ? { utanTidsschema: true } : {}), ...(p.del ? { del: p.del } : {}), ...(p.istallet ? { istallet: true } : {}), ...(p.utanTidsschema && p.ur && p.ur.rad !== VECKANS_RAD ? { tabell: { namn: p.ur.tabell, adress: tabellensAdress(d, m.id, p.ur.tabell) ?? `/stodundervisning/${m.id}` } } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell, p.kolumn) } : {}) })) } : {}),
     ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: iV(d.gruppen.text), adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),

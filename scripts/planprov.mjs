@@ -531,6 +531,7 @@ if (tsMp) {
   ska('ett namn i grundform hittas i bestämd form', s.sakdelar('Ta fram sifferkorten.', [{ namn: 'Sifferkort' }]).some((x) => x.sak === 0 && x.text === 'sifferkorten') && !s.olankadeSaker('Ta fram sifferkorten.', [{ namn: 'Sifferkort' }]).length);
   const fras = s.sakdelar('Hittat på min huvudperson. Fyll i Min huvudperson i pass 2.', [{ namn: 'Min huvudperson', versal: !s.arSaksord('Min huvudperson') }]);
   ska('ett namn som också är en vanlig fras länkas bara som titel', fras.filter((x) => x.sak !== undefined).length === 1 && fras.find((x) => x.sak !== undefined)?.text === 'Min huvudperson' && s.arSaksord('Samtalsreglerna') && s.arSaksord('Lathunden'), fras);
+  ska('ett namn efter ett ord för en del, som stapeln och rutan, är delen och inte saken', s.sakdelar('Fyll i stapeln Efter kursen och läs rutan Till läraren, och gör greppet Efter kursen igen. Sedan Efter kursen.', [{ namn: 'Efter kursen', versal: true }, { namn: 'Till läraren', versal: true }]).filter((x) => x.sak !== undefined).map((x) => x.text).join() === 'Efter kursen');
   ska('ett spann som Bildserie 2–6 länkas inte, men Bildserie 1 gör', s.sakdelar('Bildserie 2–⁠6. Sedan Bildserie 1.', [{ namn: 'Bildserie 2', former: ['Bildserie 2'], versal: true }, { namn: 'Bildserie 1', former: ['Bildserie 1'], versal: true }]).filter((x) => x.sak !== undefined).map((x) => x.text).join() === 'Bildserie 1');
   ska('ett datum utanför åren går inte att läsa ur en länk', s.lasVal('#s=9999-12-31&d=135&l=6') === null && s.lasVal('#s=1999-12-31&d=135&l=6') === null && s.lasVal('#s=2099-12-28&d=135&l=6') !== null);
   ska('en mening utan beslut kommer med i texten', s.sammanstallningstext(info, p, s.sammanstallning(p, { utvardering: { not: 'Gruppen läser mer på egen hand' } }, '2026-12-14')).includes('Utvärdering efter insatsen: Gruppen läser mer på egen hand.'));
@@ -788,6 +789,12 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   const brPlan = s.planera(s.metodplan(br).plan, brVal);
   const brKal = s.kalenderfil({ titel: 'Berättelseram', uppfoljning: [], fokus: [], extraPass: { datum: '2026-10-27', text: 'Ramen fylls i.' } }, brPlan, { id: 'ab', lank: () => 'https://x', nu: new Date(Date.UTC(2026, 9, 1)) });
   ska('det extra passet: dagen veckan före pass 1, förbi ett lov, och i kalendern', s.extraPassetsDag(brPlan, brVal) === '2026-10-27' && s.extraPassetsDag(brPlan, { ...brVal, lov: [s.veckonyckel('2026-10-26')] }) === '2026-10-20' && brKal.includes('det extra passet före pass 1') && brKal.includes('DTSTART;VALUE=DATE:20261027'), [s.extraPassetsDag(brPlan, brVal), s.extraPassetsDag(brPlan, { ...brVal, lov: [s.veckonyckel('2026-10-26')] })]);
+  // Dagarna som gällde då, och förbi ett sommarlov (Codex 2026-10-27: ett byte till tisdag och torsdag flyttade passet, och
+  // fyra lovveckor tog bort det).
+  const brByte = { ...brVal, dagar: [3, 5], fore: [{ till: '2026-11-10', dagar: [2, 4] }] };
+  const brSommar = { ...tom, start: '2026-08-17', dagar: [1, 3], langd: 15, lov: ['2026-07-20', '2026-07-27', '2026-08-03', '2026-08-10'].map(s.veckonyckel) };
+  ska('det extra passet: dagarna som gällde då, och förbi ett långt lov', s.extraPassetsDag(s.planera(s.metodplan(br).plan, brByte), brByte) === '2026-10-27' && s.extraPassetsDag(s.planera(s.metodplan(br).plan, brSommar), brSommar) === '2026-07-13', [s.extraPassetsDag(s.planera(s.metodplan(br).plan, brByte), brByte), s.extraPassetsDag(s.planera(s.metodplan(br).plan, brSommar), brSommar)]);
+  ska('det extra passet står i omfattningen i texten till åtgärdsprogrammet', s.dokumentationstext({ titel: 'Berättelseram', adress: '/x', uppfoljning: [] }, brPlan, brVal, { minuter: 60, extraPass: { datum: '2026-10-27' } }).includes('och det extra passet före pass 1, tisdag 27 oktober'));
   const vd = metod('skrivkurs-vardeskapande');
   ska('Värdeskapandes val av projekt klarar spärren, och två versioner med samma namn stoppas', s.versionsvaletsFel(vd).length === 0 && s.versionsvaletsFel({ ...vd, plan: { ...vd.plan, versionsval: { ...vd.plan.versionsval, versioner: [vd.plan.versionsval.versioner[0], vd.plan.versionsval.versioner[0]] } } }).some((x) => x.includes('samma namn')), s.versionsvaletsFel(vd));
 }
@@ -1388,8 +1395,11 @@ for (const m of synliga) {
   const d = json ? JSON.parse(json) : null;
   const felen = d ? [...new Set(planensAdresser(d))].map(adressFel).filter(Boolean) : ['ingen data'];
   if (felen.length) adressfel.push(`${m.id}: planens adresser leder inte till sidor och ankare som finns: ${felen.join(', ')}`);
-  const utanDelar = (d?.passen ?? []).filter((x) => x.tabell && !x.tabell.delar?.length).map((x) => x.tabell.namn);
+  // Ett pass utan tidsschemats delar, som mötet hos de yngre, har tabellen i sin ur bara som plats för Passet i metoden.
+  const utanDelar = (d?.passen ?? []).filter((x) => x.tabell && !x.utanTidsschema && !x.tabell.delar?.length).map((x) => x.tabell.namn);
   if (utanDelar.length) adressfel.push(`${m.id}: passens tabeller utan delar: ${utanDelar.join(', ')}`);
+  // Delmålen vid skattningen är metodens egna (tre kalla läsare 2026-10-27).
+  if (d && JSON.stringify(d.delmal?.punkter ?? []) !== JSON.stringify(m.d.mal?.punkter ?? [])) adressfel.push(`${m.id}: planens delmål är inte metodens mal.punkter`);
   // Varje rad med del står i en del i varje pass den gäller, med förvalet och den längsta planen (passetsBeskrivning; den
   // stängda frågan 2026-10-26).
   if ((d?.passen ?? []).some((x) => x.del)) {
@@ -1489,6 +1499,8 @@ for (const m of synliga) {
   const d = JSON.parse(plan);
   provaSidan(m.id, d.saker, d.kursveckor);
   for (const l of d.lektioner ?? []) provaSidan(l.id, l.saker);
+  // Rubriken i flera ramar och i rutorna i dem är ingen sak (länkgranskningen av texttypskurserna 2026-10-27).
+  if ((d.saker ?? []).some((x) => x.namn === 'Till läraren')) knappfel.push(`${m.id}: "Till läraren" leder till en av flera ramar med det namnet (metodensSaker i src/lib/metodsaker.ts)`);
 }
 if (knappfel.length) { console.error(`planprov: ${knappfel.length} fel i knapparna under det planen leder till:\n  ${knappfel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: de ${provade} saker som planen leder till på metodernas sidor har en knapp under sig som skriver ut just den, och varje saks fil har sin knapp.`);

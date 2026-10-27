@@ -349,33 +349,63 @@ plan:
   passen:
     # Perioden är 12 pass, så raderna säger kursens pass, som planen räknar i ordning när ett lov eller en röd dag flyttar dem
     # (sajtens svar 2026-10-27, Kursens pass). Av raderna för ett pass visar planen bara de med samma nar som den mest
-    # bestämda, så ett pass med en egen rad har veckans rad i samma nar: i vecka 3, 5 och 6 har varje pass sin rad.
+    # bestämda, så ett pass med en egen rad har veckans rad i samma nar: i vecka 3 till 6 har varje pass sin rad.
     # Bladet Planen används inte i vecka 1 och 6, så passrutinens rad Efter passet står inte där, och efter pass 12 finns
     # inget nästa pass. Svaren efter pass 1 och 11 står i passets fält (sajtens andra Rimlighet, K-585, och logikläsaren).
-    - nar: pass 1–2
+    # Bladet Det jag hör skrivs ut före veckans första pass, som bladet säger (språkrundan 2026-10-27), och raden står sist
+    # i passets förberedelse. Därför har pass 1 och pass 3 egna rader, och pass 2 och pass 4 har samma rader som förut.
+    - nar: pass 1
       kort: "Läsaren"
       ur: { tabell: "De sex veckorna", rad: "Vecka 1", kolumner: ["Det som händer", "Eleven skriver"] }
-    - nar: pass 1–2
+    - nar: pass 1
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    - nar: pass 1
       del: Efter passet
       istallet: true
       text: "Fyll i fältet Till nästa pass på bladet Det jag hör."
-    - nar: pass 3–4
+    - nar: pass 2
+      kort: "Läsaren"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 1", kolumner: ["Det som händer", "Eleven skriver"] }
+    - nar: pass 2
+      del: Efter passet
+      istallet: true
+      text: "Fyll i fältet Till nästa pass på bladet Det jag hör."
+    - nar: pass 3
       kort: "Läraren visar"
       ur: { tabell: "De sex veckorna", rad: "Vecka 2", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
-    # Det du gör före pass 5, 6 och 9 står först i passets förberedelse, före tidsschemats rad, som gäller också då.
+    - nar: pass 3
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    - nar: pass 4
+      kort: "Läraren visar"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 2", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
+    # Det du gör före pass 5, 6, 7 och 9 står först i passets förberedelse, före tidsschemats rad, som gäller också då.
     - nar: pass 5
       kort: "Gruppens text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 3", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
     - nar: pass 5
       del: Före passet
       text: "Före pass 5 och 9 skriver du själv två korta versioner, en som liknar det många skrev och en med det som fattades. Ingen av dem är en elevs text."
+    - nar: pass 5
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
     - nar: pass 6
       kort: "Gruppens text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 3", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
     - nar: pass 6
       del: Före passet
       text: "Skriv den första texten, skälet utan förklaring, på tavlan före passet."
-    - nar: pass 7–8
+    - nar: pass 7
+      kort: "Parens text"
+      ur: { tabell: "De sex veckorna", rad: "Vecka 4", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
+    - nar: pass 7
+      del: Före passet
+      text: "Till pass 7 tar du fram läsarens svar och listan från pass 1. Har läsaren inte svarat, går du till hen med två elever före passet och hämtar svaret muntligt."
+    - nar: pass 7
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    - nar: pass 8
       kort: "Parens text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 4", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
     - nar: pass 9
@@ -384,12 +414,18 @@ plan:
     - nar: pass 9
       del: Före passet
       text: "Före pass 5 och 9 skriver du själv två korta versioner, en som liknar det många skrev och en med det som fattades. Ingen av dem är en elevs text."
+    - nar: pass 9
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
     - nar: pass 10
       kort: "Egen text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 5", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
     - nar: pass 11
       kort: "Svaren"
       ur: { tabell: "De sex veckorna", rad: "Vecka 6", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
+    - nar: pass 11
+      del: Före passet
+      text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
     - nar: pass 11
       del: Efter passet
       istallet: true
@@ -469,7 +505,7 @@ ramar:
     - rubrik: "Till läraren: veckorna"
       lektioner: true
       text:
-        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus, sedan de två passen och sist det du ska lägga märke till. De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen. När en text är klar skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa text börjar läser hen det först. Mellan passen svarar du på breven efter pass 1 och 11 och på texterna efter pass 4 och 8. Före pass 5 och 9 skriver du två korta versioner till Två sätt i era texter. Till pass 12 tar du fram breven från pass 11 med dina svar, mapparna och svaren från pass 1. Har gruppen gått en annan kurs i serien, ändras pass 1 och pass 3. Efter Två texter i pass 1 läser eleven sitt sista mål och säger vad hen känner igen i den andra texten. Två texter är då 20–⁠35 min och Strukturen 35–⁠50 min. I pass 3 stryker du raden i manuset där du vänder dig till gruppen. Då är Visa och pröva 5–⁠15 min, Kursens läsare 15–⁠25 min och Tänk och planera 25–⁠40 min."
+        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus, sedan de två passen och sist det du ska lägga märke till. De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen. När en text är klar skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa text börjar läser hen det först. Mellan passen svarar du på breven efter pass 1 och 11 och på texterna efter pass 4 och 8. Före pass 5 och 9 skriver du två korta versioner till Två sätt i era texter. Till pass 7 tar du fram läsarens svar och listan från pass 1. Har läsaren inte svarat, går du till hen med två elever före passet och hämtar svaret muntligt. Till pass 12 tar du fram breven från pass 11 med dina svar, mapparna och svaren från pass 1. Har gruppen gått en annan kurs i serien, ändras pass 1 och pass 3. Efter Två texter i pass 1 läser eleven sitt sista mål och säger vad hen känner igen i den andra texten. Två texter är då 20–⁠35 min och Strukturen 35–⁠50 min. I pass 3 stryker du raden i manuset där du vänder dig till gruppen. Då är Visa och pröva 5–⁠15 min, Kursens läsare 15–⁠25 min och Tänk och planera 25–⁠40 min."
       delar:
         - rubrik: "Vecka 1 · Läsaren"
           falt:
@@ -526,7 +562,7 @@ ramar:
             - rubrik: Fokus
               text: "Eleven ser vad hen gör nu och känner igen texttypen i en uppgift."
             - rubrik: Pass 11
-              text: "Före passet. Skriv två nya frågor på små papper och bara uppgiften på tavlan. Lägg fram brevet, papper och lappar. Ge varje elev penna eller dator, som i pass 1.\n0–⁠13 min. Brevet: som i pass 1 drar eleven en av två nya frågor och skriver ett brev som ska övertyga dig, i tio minuter utan stöd. Se vem som planerar innan hen skriver.\n13–⁠25 min. Före och efter: eleven lägger breven bredvid varandra och fyller i en stapel för vartdera, det första utan tillägget. ”Vad gör du nu som du inte gjorde då?”\n25–⁠35 min. Blöt sadel igen?: läs den högt, och ställ frågorna under texten.\n35–⁠47 min. Uppgifterna: visa elevens sida, och ställ frågorna under uppgifterna.\n47–⁠57 min. Skriv: utan att titta i sin text skriver eleven det hen ska säga på mötet i pass 12, alltså vad hen vill, sitt tyngsta skäl med förklaring och vad läsaren ska göra.\n57–⁠60 min. Läs upp: två elever läser det de ska säga.\nEfter passet. Skriv tre svarsrader på varje brev till pass 12."
+              text: "Före passet. Skriv två nya frågor på små papper och bara uppgiften på tavlan. Lägg fram brevet, papper och lappar. Ge varje elev penna eller dator, som i pass 1. Ta fram mapparna med första brevet och diagrammet till delen Före och efter.\n0–⁠13 min. Brevet: som i pass 1 drar eleven en av två nya frågor och skriver ett brev som ska övertyga dig, i tio minuter utan stöd. Se vem som planerar innan hen skriver.\n13–⁠25 min. Före och efter: eleven lägger breven bredvid varandra och fyller i en stapel för vartdera, det första utan tillägget. ”Vad gör du nu som du inte gjorde då?”\n25–⁠35 min. Blöt sadel igen?: läs den högt, och ställ frågorna under texten.\n35–⁠47 min. Uppgifterna: visa elevens sida, och ställ frågorna under uppgifterna.\n47–⁠57 min. Skriv: utan att titta i sin text skriver eleven det hen ska säga på mötet i pass 12, alltså vad hen vill, sitt tyngsta skäl med förklaring och vad läsaren ska göra.\n57–⁠60 min. Läs upp: två elever läser det de ska säga.\nEfter passet. Skriv tre svarsrader på varje brev till pass 12."
             - rubrik: Pass 12
               text: "0–⁠5 min. Läs som läsaren: använd en mening ur en mentortext.\n5–⁠30 min. Mötet: en elev i taget säger vad hen vill, med det hen skrev i pass 11 framför sig, och kursens läsare svarar med sitt beslut och svarsraderna. Den som hellre vill får svaret på papper. Skriv på elevens diagram vilket skäl som övertygade.\n30–⁠48 min. Svar på svaret: med kamraten som stöd skriver eleven minst fyra meningar till läsaren, alltså tack, ett svar på det läsaren sa och vad eleven gör nu. Sist skriver eleven på Mitt mål det läsaren undrade, som nästa mål.\n48–⁠60 min. Avslut: fråga igen ”Vad gör en text bra?”, och jämför med svaren från pass 1. Fråga ”När behöver du övertyga någon nästa gång?” Säg vilken dag gruppen samlas igen. Eleven får ditt svar på brevet från pass 11 och tar hem sin mapp. Kopiera breven först och behåll diagrammet och Mitt mål tills gruppen samlas igen."
             - rubrik: Lägg märke till
@@ -876,7 +912,7 @@ ramar:
               text: "I pass 11 fyller eleven själv i en stapel för varje brev, som det står under diagrammet Mina texter. Det första brevet räknas utan tillägget från pass 2, som står under strecket. Läs breven efteråt, och rätta staplarna om de inte stämmer. En rutas skillnad mellan två staplar säger inte mycket. Kopiera breven innan mappen går hem, och visa dem och diagrammet för klassläraren. Diagrammet behåller du tills gruppen samlas igen."
     - rubrik: Det jag hör
       text:
-        - "Skriv ut ett blad per vecka. Ha det i handen medan paren planerar, berättar och skriver. Skriv elevens namn och det hen säger medan du lyssnar. Ringa in det eleven sa utan att du frågade. Efter passet fyller du i Till nästa pass."
+        - "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11. Ha det i handen medan paren planerar, berättar och skriver. Skriv elevens namn och det hen säger medan du lyssnar. Ringa in det eleven sa utan att du frågade. Efter passet fyller du i Till nästa pass."
       huvud:
         - rubrik: Vecka, och eleverna jag lyssnar särskilt på
       delar:

@@ -111,6 +111,9 @@ export function sakensFormer(namn) {
   return [...former];
 }
 
+// Ord för en del av en sak eller ett grepp, som står före delens eller greppets namn: "greppet Två texter halvvägs" och
+// "i delen Läsarna lyssnar" är inte Två texter och Läsarna (Rimligheten och länkgranskningen 2026-10-27).
+const DELENS_ORD = /(?:^|[^\p{L}])(?:stapeln|staplarna|kolumnen|kolumnerna|spalten|raden|raderna|rubriken|rutan|rutorna|delen|delarna|greppet|greppen)\s+$/iu;
 // En form som söks: hela ord, och första bokstaven stor eller liten om inte saken är en titel, som bara står som den är.
 const formMonster = (f, versal) => (versal ? skydda(f) : `[${skydda(f.charAt(0).toLocaleLowerCase('sv'))}${skydda(f.charAt(0).toLocaleUpperCase('sv'))}]${skydda(f.slice(1))}`);
 // Först i en mening, där varje ord har stor bokstav, är en titel inte säkert en titel ("Inte än har eleverna …").
@@ -135,6 +138,10 @@ export function sakdelar(text, saker) {
         if (s.versal && !/\d/.test(f) && forstIMening(text.slice(0, start))) continue;
         // Ett namn med en siffra som börjar ett spann, som "Bildserie 2–6", är spannet och inte saken (betan 2026-10-24).
         if (/\d$/.test(f) && /^\s*[–-]⁠?\s*\d/.test(text.slice(start + m[2].length))) continue;
+        // Ett namn efter ett ord för en del av något, som "stapeln Efter kursen" i ett diagram och "rutan Till läraren" i en
+        // ram, är delen och inte saken med samma namn (länkgranskningen av texttypskurserna 2026-10-27). Skriv "greppet" före
+        // ett grepp vars namn börjar som en sak.
+        if (DELENS_ORD.test(text.slice(0, start))) continue;
         traffar.push({ start, slut: start + m[2].length, sak: i });
       }
     }

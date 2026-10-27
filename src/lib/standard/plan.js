@@ -738,6 +738,9 @@ export function veckovaletsFel(d) {
  * @param {{ plan?: { utvardering?: string[] } }} d
  * @returns {string[]}
  */
+/** Ett resultat per elev får vara så här långt, i fältet, när det sparas och i en plan som läses in (den kalla läsaren av
+ * Sagoboken 2026-10-27: 40 tecken klippte av Parets väg utan besked). */
+export const RESULTATETS_LANGD = 80;
 export const utvarderingensFel = (d) => (d.plan && !d.plan.utvardering?.length ? ['En metod som kan planeras har metodens regel för beslutet efter insatsen i plan.utvardering: vad läraren beslutar efter vilket resultat, ordagrant ur metoden.'] : []);
 
 // ---------- Elevernas riktning i progressionen ----------
@@ -1993,7 +1996,8 @@ export function passetsBeskrivning(roller, passet, lage) {
     ...(foreRoller.length ? { foreForst: foreRoller.flatMap(innehall) } : {}),
     ...(efterRoller.length ? { efterForst: efterRoller.flatMap(innehall), ...(efterRoller.some((r) => r.istallet) ? { efterIstallet: true } : {}) } : {}),
     utanDel: roller.filter((r) => r.del && !placerade.has(r)).map((r) => r.del),
-    tabell: roller.find((r) => r.tabell)?.tabell,
+    // Tabellen med passets delar går före en tabell som bara säger var passet står (Rimligheten 2026-10-27).
+    tabell: tabell ?? roller.find((r) => r.tabell)?.tabell,
     // Ett kortare pass har variantens rubrik, "Ett pass på tio minuter", i stället för tidsschemats (Codex 2026-10-26).
     ...(kortare ? { rubrik: stor(variant.nar), ...(variant.text ? { variantText: variant.text } : {}) } : {}),
   };
@@ -2397,7 +2401,7 @@ export const skattningenText = (vem, varjeVecka = true, mal = 'målet') => `skat
  * @param {{ titel: string, undertitel?: string, adress: string, mal?: string, steg?: string[], uppfoljning: { nar: string }[], nivaNamn?: string }} info
  * @param {Plan} plan
  * @param {Val} val
- * @param {{ minuter: number, genomforda?: number, folj?: boolean, utvardering?: { beslut?: string, not?: string }, elever?: { namn: string }[], pagar?: boolean, lektioner?: { namn: string, datum: string[] }[], lektionerSedan?: boolean }} o utvärderingen och eleverna: anledningen när insatsen avslutades tidigare, utan elevernas namn; i en serie de valda lektionerna med passens datum, och om fler väljs sedan
+ * @param {{ minuter: number, genomforda?: number, folj?: boolean, utvardering?: { beslut?: string, not?: string }, elever?: { namn: string }[], pagar?: boolean, lektioner?: { namn: string, datum: string[] }[], lektionerSedan?: boolean, extraPass?: { datum: string } }} o utvärderingen och eleverna: anledningen när insatsen avslutades tidigare, utan elevernas namn; i en serie de valda lektionerna med passens datum, och om fler väljs sedan; en versions extra pass före pass 1 (extraPassetsDag), som omfattningen räknar med (Codex 2026-10-27)
  */
 export function dokumentationstext(info, plan, val, o) {
   const rader = [];
@@ -2411,7 +2415,7 @@ export function dokumentationstext(info, plan, val, o) {
   // kalla testaren av K-559 2026-10-26).
   const gruppens = o.folj ? (plan.skattningar ?? []).find((x) => x.vem === 'gruppen' && x.skala) : undefined;
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
-  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter, plan))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
+  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter, plan))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${o.extraPass ? `, och det extra passet före pass 1, ${dagText(o.extraPass.datum)}` : ''}${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
   // En insats som avslutades tidigare säger det, med lärarens anledning utan elevernas namn (K-542).
   if (avslutetText(plan)) rader.push(utanNamn(utvarderingenText(plan, o.utvardering?.beslut === 'avsluta' ? o.utvardering : undefined, o.pagar), o.elever ?? []));
   // Det eleven arbetar med: metodens steg i planens ordning, med kalenderveckorna. Pass i följd med samma steg står ihop, och
@@ -2517,7 +2521,7 @@ export function rensaFoljd(f) {
       return { ...(steg(obj(v).varde) ? { varde: obj(v).varde } : {}), ...(not ? { not } : {}) };
     }),
     skattning: per(g.skattning, (d, v) => (arDatum(d) ? per(v, (k, x) => (id(k) && steg(x) ? x : undefined)) : undefined)),
-    resultat: per(g.resultat, (k, v) => (/^\d+-\d{4}-\d{2}-\d{2}$/.test(k) ? per(v, (e, x) => (id(e) && text(x, 40) ? text(x, 40) : undefined)) : undefined)),
+    resultat: per(g.resultat, (k, v) => (/^\d+-\d{4}-\d{2}-\d{2}$/.test(k) ? per(v, (e, x) => (id(e) && text(x, RESULTATETS_LANGD) ? text(x, RESULTATETS_LANGD) : undefined)) : undefined)),
     ...(avstamning ? { avstamning } : {}),
     ...(utvardering ? { utvardering } : {}),
     ...(arDatum(g.oppen) ? { oppen: g.oppen } : {}),
@@ -2898,6 +2902,27 @@ function vik(rad) {
 const kalDatum = (s) => s.replace(/-/g, '');
 
 /**
+ * Dagen för en versions extra pass före pass 1, som Berättelseramens egna ram, där gruppen fyller i ramen veckan före pass 1
+ * (Rimligheten 2026-10-27, K-576): den första av planens dagar i skolveckan före första passet som inte är en röd dag,
+ * förbi lovveckor, också ett sommarlov. Dagarna är de som gällde då (passdagar), så att ett byte av dagar senare i planen
+ * inte flyttar passet bakåt (Codex 2026-10-27). En rot för sidan, kalenderfilen och texterna som kopieras.
+ * @param {Plan} plan
+ * @param {Val} val
+ * @returns {string | undefined}
+ */
+export function extraPassetsDag(plan, val) {
+  if (!plan.forstaPass) return undefined;
+  const lov = new Set(val.lov ?? []);
+  const pa = passdagar(val);
+  for (let mandag = plusDagar(mandagen(plan.forstaPass), -7), i = 0; i < 26; i++, mandag = plusDagar(mandag, -7)) {
+    if (lov.has(veckonyckel(mandag))) continue;
+    const dag = [1, 2, 3, 4, 5, 6, 7].map((d) => [plusDagar(mandag, d - 1), d]).find(([datum, d]) => pa(datum, d) && !helgdag(datum));
+    if (dag) return dag[0];
+  }
+  return undefined;
+}
+
+/**
  * Kalenderfilen: en händelse för varje pass, med klockslaget när läraren har satt tider, i lärarens egen tid (en tid utan
  * tidszon, RFC 5545 3.3.5), och annars som heldagshändelse på passets dag (buggjakten 2026-10-24: en händelse per vecka
  * visade bara veckans första pass i kalendern). Dessutom en heldagshändelse för varje tillfälle i uppföljningen som har ett
@@ -2909,25 +2934,6 @@ const kalDatum = (s) => s.replace(/-/g, '');
  * @param {Plan} plan
  * @param {{ id: string, lank: (vecka?: number | 'fore') => string, namn?: string, nu: Date, tider?: Val['tider'] }} o
  */
-/**
- * Dagen för en versions extra pass före pass 1, som Berättelseramens egna ram, där gruppen fyller i ramen veckan före pass 1
- * (Rimligheten 2026-10-27, K-576): den första av planens dagar i skolveckan före första passet som inte är en röd dag,
- * förbi lovveckor. En rot för sidan och kalenderfilen.
- * @param {Plan} plan
- * @param {Val} val
- * @returns {string | undefined}
- */
-export function extraPassetsDag(plan, val) {
-  if (!plan.forstaPass) return undefined;
-  const lov = new Set(val.lov ?? []);
-  for (let mandag = plusDagar(mandagen(plan.forstaPass), -7), i = 0; i < 4; i++, mandag = plusDagar(mandag, -7)) {
-    if (lov.has(veckonyckel(mandag))) continue;
-    const dag = [...val.dagar].sort((a, b) => a - b).map((d) => plusDagar(mandag, d - 1)).find((d) => !helgdag(d));
-    if (dag) return dag;
-  }
-  return undefined;
-}
-
 export function kalenderfil(info, plan, o) {
   const stamp = o.nu.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
   const sekvens = Math.max(0, Math.floor((o.nu.getTime() - Date.UTC(2026, 0, 1)) / 60000));
