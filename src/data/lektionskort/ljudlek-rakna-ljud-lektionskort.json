@@ -65,7 +65,7 @@
      "fisk, ko, sko, mask, apa, hand\nbi, hund, båt, tand, lök, sten"
     ]
    ],
-   "not": "Nästa pass byter ni halvor. Säger eleven kossa för ko: ”Kortet heter ko. Säg ko och räkna igen.”",
+   "not": "Missar fler än hälften orden få eller hål i ljudkollen, börja i rad 1. Missar de ordet näsa, börja i rad 3, och annars i rad 4. Nästa pass byter ni halvor. Säger eleven kossa för ko: ”Kortet heter ko. Säg ko och räkna igen.”",
    "tat": true,
    "namnrad": 17
   },
@@ -85,7 +85,7 @@
    "rader": [
     [
      "Före passet",
-     "Bildkorten för raden, ett ark per par. Ljudrutorna per elev och på tavlan. Magneter till tavlan, fyra markörer per elev och en spegel per par. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+     "Bildkorten för raden, ett ark per par. Ljudrutorna per elev och på tavlan. Magneter till tavlan, fyra markörer per elev och en spegel per par. Välj dagens ljud, en bokstav som gruppen övar. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
     ],
     [
      "Ljudstart\n0–5 min · alla i kör",
@@ -149,10 +149,6 @@
     [
      "”s-⁠e-⁠n” för sten, ”sutol” för stol",
      "Dra ut det ljud som går att dra ut, utan något ljud emellan: sss-⁠t-⁠eee-⁠nnn."
-    ],
-    [
-     "”/s/ /o/ /l/” och två markörer, eller en i varje ruta",
-     "Ett ljud i taget: säg ljudet och flytta markören samtidigt."
     ]
    ],
    "tat": true,

@@ -262,7 +262,7 @@ tabeller:
   - rubrik: "Ordbilderna"
     plats: "efter-urval"
     meny: true
-    text: "Ordbilderna är sex vanliga ord som inte stavas som de låter. Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan. I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer. I vecka 2 finns ingen av de förra, och då bygger eleven tre ord före veckans ordbild."
+    text: "Ordbilderna är sex vanliga ord som inte stavas som de låter. Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan. I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer. I vecka 2 finns ingen av de förra, och då bygger eleven tre ord före veckans ordbild. Listan Fyra ord med ”det” börjar i veckans andra pass i vecka 5. Till dess är veckans ordbild fortfarande ”och”."
     kolumner:
       - "Ordbilden"
       - "Det som inte låter som det står"
@@ -339,7 +339,8 @@ plan:
     # Det eleven tar över står i sin del varje vecka det gäller, inte bara överst (Rimligheten K-585): Dagens meningar
     # vecka 4–7, Min mening vecka 3–7 och Jag visar vecka 6. Raderna står i den ordning de läses i delen. Före passet säger
     # var orden och meningarna står, och Startorden vilken ordgrupp, i insatsens första pass och i de andra. Ordbildens första pass är veckans första, utom i vecka 5,
-    # där ”det” kommer med veckans andra lista (länkgranskningen och de kalla läsarna, K-585).
+    # där ”det” kommer med veckans andra lista, i veckans andra pass, och de andra passen har texten för pass utan ny
+    # ordbild (länkgranskningen och de kalla läsarna, K-585; steg 4 2026-10-27: pass 14 och 15 hade båda texterna).
     - nar: vecka 1–8
       del: "Före passet"
       text: "Orden och meningarna står i tabellerna Orden och Meningarna, i den ordning gruppen tar dem. Alla står också på Lektionskortet, ett A4 med passet och orden på framsidan och meningarna på baksidan."
@@ -364,19 +365,28 @@ plan:
     - nar: veckans första pass i vecka 6–8
       del: "Startorden"
       text: "Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
-    - nar: veckans övriga i vecka 5
+    - nar: veckans andra pass i vecka 5
       del: "Startorden"
-      text: "Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
-    - nar: veckans sista pass i vecka 5
-      del: "Startorden"
-      text: "Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
-    - nar: veckans övriga i vecka 2–8
+      text: "Listan Fyra ord med ”det” börjar i veckans andra pass i vecka 5. Första passet med en ny ordbild och dess lista bygger eleven två ord i Startorden och sist den nya: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du ordbildskortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan."
+    - nar: veckans övriga i vecka 2–4
       del: "Startorden"
       text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
-    - nar: veckans sista pass i vecka 2–8
+    - nar: veckans sista pass i vecka 2–4
+      del: "Startorden"
+      text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
+    - nar: veckans övriga i vecka 6–8
+      del: "Startorden"
+      text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
+    - nar: veckans sista pass i vecka 6–8
       del: "Startorden"
       text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
     - nar: veckans första pass i vecka 5
+      del: "Startorden"
+      text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer. Listan Fyra ord med ”det” börjar i veckans andra pass i vecka 5. Till dess är veckans ordbild fortfarande ”och”."
+    - nar: veckans tredje pass i vecka 5
+      del: "Startorden"
+      text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
+    - nar: veckans fjärde pass i vecka 5
       del: "Startorden"
       text: "I passen utan ny ordbild ligger ordbildskorten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer."
     - nar: veckans övriga i vecka 2

@@ -65,7 +65,7 @@
      "mos→mor, se→le, le→la, ler→mer, lera→mera, mer→mor, vi→ni\nOckså t, f, å, p, k och d: vit→vet, tal→tar, mat→fat→lat, mål→nål, mål→mås, mos→mås, lat→låt, tak→sak, tak→tal"
     ]
    ],
-   "not": "Med bara de tio första bokstäverna tar ni bort det sista ljudet med korten och det första muntligt.",
+   "not": "Missar fler än hälften orden vår eller röra i ljudkollen, börja i rad 1. Missar de ordet lek, börja i rad 3, och annars i rad 5. Med bara de tio första bokstäverna tar ni bort det sista ljudet med korten och det första muntligt.",
    "tat": true,
    "namnrad": 17
   },
@@ -85,7 +85,7 @@
    "rader": [
     [
      "Före passet",
-     "Ljudrutorna, fyra rutor, och en sida bokstavskort med gruppens bokstäver per par. Fyra rutor på tavlan, magneter och en whiteboardtavla per elev. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+     "Ljudrutorna, fyra rutor, och en sida bokstavskort med gruppens bokstäver per par. Fyra rutor på tavlan, magneter och en whiteboardtavla per elev. Välj dagens ljud, en bokstav som gruppen övar. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
     ],
     [
      "Ljudstart\n0–5 min · alla i kör",
@@ -138,10 +138,6 @@
    ],
    "storlek": 19,
    "rader": [
-    [
-     "”/s/ /o/ /l/” utan ordet",
-     "Dra ut ljuden, sssooolll, och skjut ihop korten eller dra fingret under ordet."
-    ],
     [
      "”tåg” för tak",
      "”Dra fingret under och läs varje bokstav: t-⁠aaa-⁠k.”"

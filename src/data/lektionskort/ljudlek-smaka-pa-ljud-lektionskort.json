@@ -65,7 +65,7 @@
      "Arket I mitten. Fråga: var hör du /s/ i hus?"
     ]
    ],
-   "not": "Ta ord med bokstäver som gruppen har haft. Den som inte kan bokstaven pekar på kartan.",
+   "not": "Missar fler än hälften ordet lås i ljudkollen, börja i rad 1. Missar de ordet får, börja i rad 2, och annars i rad 3. Ta ord med bokstäver som gruppen har haft. Den som inte kan bokstaven pekar på kartan.",
    "tat": true,
    "namnrad": 17
   },
@@ -85,7 +85,7 @@
    "rader": [
     [
      "Före passet",
-     "Bildkorten för raden, ett ark per par, med ordet på baksidan. Platsrutorna Först, Mitten och Sist per elev och på tavlan. En markör och en penna per elev och en bokstavskarta per par. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+     "Bildkorten för raden, ett ark per par, med ordet på baksidan. Platsrutorna Först, Mitten och Sist per elev och på tavlan. En markör och en penna per elev och en bokstavskarta per par. Välj dagens ljud, en bokstav som gruppen övar. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
     ],
     [
      "Ljudstart\n0–5 min · alla i kör",

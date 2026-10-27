@@ -1394,9 +1394,13 @@ function nivansRad(v: PlanVecka, oppna?: Set<string>): string {
 }
 
 // Det som finns i metoden i stunden: passet på metodens sida, stödet när eleven fastnar och metodens verktyg.
-function metodensLankar(): string {
+// Passet i metoden leder till passets egen tabell när passet har en, som Ordverkstads skrivpass och tidningens pass
+// (länkgranskningen 2026-10-27: länken ledde alltid till ordpasset).
+function metodensLankar(p?: Pass): string {
+  const egen = p ? passetFor(p).tabell : undefined;
+  const passetsAdress = egen && !egen.sida && egen.adress ? egen.adress : data.passet?.adress;
   const lankar: [string, string, string, boolean][] = [
-    ...(data.passet ? [[data.passet.adress, 'Passet i metoden', 'passet', false] as [string, string, string, boolean]] : []),
+    ...(passetsAdress ? [[passetsAdress, 'Passet i metoden', 'passet', false] as [string, string, string, boolean]] : []),
     ...(data.material ? [[data.material.adress, data.material.rubrik, 'materialet', false] as [string, string, string, boolean]] : []),
     ...(data.fastnar ?? []).map((f): [string, string, string, boolean] => [f.adress, f.rubrik, 'fastnar', false]),
     ...(data.centrala ?? []).map((c): [string, string, string, boolean] => [c.adress, c.namn, 'central', c.pdf]),
@@ -1720,7 +1724,7 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
     // två ställen för veckans mening).
     ...(aktiv.folj ? [snabbmallen()] : []),
   ].filter(Boolean));
-  const rutansLankar = medLektion(veckansLektion(rutansVecka), metodensLankar);
+  const rutansLankar = medLektion(veckansLektion(rutansVecka), () => metodensLankar(rutansPass));
   // Hemmets del varje vecka, som läxan i De fyra räknesätten, när passets tidsschema inte redan har den (TIL:s Hemma).
   const hemma = data.hem && !data.passet?.andra.length ? `<p class="pl-hemma"><span class="pl-etikett">Hemma</span> <a href="${esc(data.hem.adress)}" ${goat('hemma', 'hemmet från planen')}>${esc(data.hem.rubrik)}</a></p><p>${lankad(mening(data.hem.text))}</p>` : '';
   lankVecka = rutansVecka.innehall;
@@ -1960,8 +1964,11 @@ function efterDelar(): string[] {
     const kan = [1, 2, 3, 4].filter((n) => forlangdaVal(mp, aktiv.val, n).langd <= LANGSTA);
     // Bestämmer versionen veckorna, som Värdeskapandes projekt, förlängs planen inte: nästa period är en ny plan
     // (användbarheten 2026-10-27: veckorna efter projektet hade inget innehåll, och sista veckans mätning flyttade med).
+    // Likadant en kurs med bestämda pass på veckornas sidor och perioden i pass, som texttypskurserna, där nästa period är en
+    // kurs med nästa grupp (riggens leverans samma kväll: förlängningen gav pass 13–18 utan innehåll).
     const versionensVeckor = !!bas.versionsval?.versioner.every((x) => x.veckor);
-    const forlang = valt !== 'forlang' ? '' : versionensVeckor ? `<p class="pl-not">${esc(stor(bas.versionsval!.rubrik.toLocaleLowerCase('sv')))} bestämmer veckorna, så planen förlängs inte. Gör en ny plan för nästa period.</p>` : kan.length ?`<div class="pl-forlang"><span class="pl-etikett">Förläng planen med</span><div class="sk-segment">${kan.map((n) => `<button type="button" class="sk-antal" data-forlang="${n}">${esc(forlangText(n))}</button>`).join('')}</div></div>` : '<p class="pl-not">Planen kan inte bli längre. Gör en ny plan för fortsättningen.</p>';
+    const kursensPass = !!data.passensVeckor && mp.period.enhet === 'pass';
+    const forlang = valt !== 'forlang' ? '' : versionensVeckor ? `<p class="pl-not">${esc(stor(bas.versionsval!.rubrik.toLocaleLowerCase('sv')))} bestämmer veckorna, så planen förlängs inte. Gör en ny plan för nästa period.</p>` : kursensPass ? '<p class="pl-not">Kursen har sina bestämda pass, så planen förlängs inte. Gör en ny plan för nästa period.</p>' : kan.length ?`<div class="pl-forlang"><span class="pl-etikett">Förläng planen med</span><div class="sk-segment">${kan.map((n) => `<button type="button" class="sk-antal" data-forlang="${n}">${esc(forlangText(n))}</button>`).join('')}</div></div>` : '<p class="pl-not">Planen kan inte bli längre. Gör en ny plan för fortsättningen.</p>';
     delar.push(`<section class="pl-stam"><h3>Utvärdering efter insatsen</h3>${malRad('efter')}<p>Når ${harElever() ? 'eleverna' : 'gruppen'} målet? ${jamforelsen()}</p>${linjeruta(s, false)}${sammanstallningarna()}${gruppensSkattning() && !elevernaHarNagot(s) ? '' : riktningar(s, 'efter', true)}<span class="pl-etikett">Beslut</span>${data.utvardering?.length ? `<ul class="pl-justera">${data.utvardering.map((x) => `<li>${lankad(mening(x))}</li>`).join('')}</ul>` : ''}${harElever() ? '<p class="pl-not">Beslutet gäller gruppen. Går en elev en annan väg, skriv det i meningen nedan.</p>' : ''}${beslutsknappar('utvardering')}${AVSLUTANDE.includes(valt ?? '') && avslutad ? avslutsruta() : ''}${forlang}${meningsfalt('pl-utv-not', 'En mening om utvärderingen, om du vill', 'data-beslutsnot="utvardering"', aktiv.foljd.utvardering?.not ?? '')}</section>`);
   }
   const sistaV = plan.veckor[plan.veckor.length - 1];

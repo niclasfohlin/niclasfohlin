@@ -130,13 +130,13 @@ tidsschema:
       vad: "Visa först bilder på datorn av två eller tre saker som förlagan tar upp, till exempel från en bildsökning. Fråga om någon känner igen dem, och säg vad de heter och vad orden betyder. Läs sedan förlagan högt, och därefter läser alla i kör. Prata om vem texten är skriven för (förlagans fråga 4) innan eleverna gör fråga 1."
     - tid: 15–35 min
       fas: Bygga
-      vad: "Visa ett ord med stegen på stora tavlan och tänk högt, och lägg sedan ordet med korten mitt på bordet. Paren gör fråga 2, som gäller ett annat ord. Sedan bygger varje par minst fem egna ord och ett som inte finns: de lägger delarna i rad, läser en del i taget, skjuter ihop korten och säger vad ordet betyder, bakifrån, och byter plats på delarna. Sist förklarar varje par sitt påhittade ord för gruppen."
+      vad: "Visa ett ord med stegen på stora tavlan och tänk högt, och lägg sedan ordet med ordkorten mitt på bordet. Paren gör fråga 2, som gäller ett annat ord. Sedan bygger varje par minst fem egna ord och ett som inte finns: de lägger delarna i rad, läser en del i taget, skjuter ihop ordkorten och säger vad ordet betyder, bakifrån, och byter plats på delarna. Sist förklarar varje par sitt påhittade ord för gruppen."
     - tid: 35–40 min
       fas: Nya ord
       vad: "Låt paren läsa orden från stora tavlan, och lyssna på ett par i taget."
     - tid: 40–52 min
       fas: Diktamen
-      vad: "Före diktamen lägger paren korten i kuvertet och vänder förlagan, och du suddar de nya orden på stora tavlan. Säg ordet, säg det sedan i en mening som du hittar på och säg ordet igen, och låt eleven säga delarna innan hen skriver. Titta på elevernas miniwhiteboards tillsammans, och låt eleven själv hitta en del som blev fel. Visa sedan veckans vanliga fel, och låt eleverna svara muntligt på fråga 3."
+      vad: "Före diktamen lägger paren ordkorten i kuvertet och vänder förlagan, och du suddar de nya orden på stora tavlan. Säg ordet, säg det sedan i en mening som du hittar på och säg ordet igen, och låt eleven säga delarna innan hen skriver. Titta på elevernas miniwhiteboards tillsammans, och låt eleven själv hitta en del som blev fel. Visa sedan veckans vanliga fel, och låt eleverna svara muntligt på fråga 3."
     - tid: 52–60 min
       fas: Läsa upp
       vad: "Låt varje elev läsa ett ord från sin miniwhiteboard och förklara det bakifrån. Sedan säger du vem som ska läsa texten och vad eleverna ska skriva den här veckan. Paren, från vecka 5 var och en, tänker ut vad texten ska handla om, och du skriver idéerna på blädderblocket."
@@ -250,7 +250,7 @@ tabeller:
       - - "Pass 3\nSkrivpasset"
         - "Paret skriver klart, läser texten högt och tar de långa orden med stegen. Varje par läser sin text för gruppen, och du lägger sidan i tidningens mapp."
         - "Samma som i pass 2, med parets skrivplan och sida från pass 2"
-    not: "Alla tre passen börjar med Ordstarten, och från vecka 5 skriver var och en sin egen text. I vecka 8 är pass 3 tidningens pass. Har gruppen bara två pass en vecka, tar ni ordpasset och ett skrivpass. Då skriver både du och eleverna en eller två meningar i början, mitten och slutet. I skrivpasset tar Förlagan fem minuter och Din text tio, så att Skriva får 30 minuter. I Skriva gör paret planen, berättar texten för ett annat par, skriver och kontrollerar texten och ritar bilden om de hinner. I Läsa upp läser varje par, från vecka 5 varje elev, sin text för gruppen. Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar. I ordpassets Läsa upp väljer då varje elev vilken av sina texter hen ska läsa för den inbjudna läsaren."
+    not: "Alla tre passen börjar med Ordstarten, och från vecka 5 skriver var och en sin egen text. I vecka 8 är pass 3 tidningens pass. Har gruppen bara två pass en vecka, tar ni ordpasset och ett skrivpass. Då skriver både du och eleverna en eller två meningar i början, mitten och slutet. I skrivpasset tar Förlagan fem minuter och Din text tio, så att Skriva får 30 minuter. I Skriva gör paret planen, berättar texten för ett annat par, skriver och kontrollerar texten och ritar bilden om de hinner. I Läsa upp läser varje par, från vecka 5 varje elev, sin text för gruppen. Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar. Då skriver eleverna ingen ny text, och i ordpassets Läsa upp väljer varje elev i stället vilken av sina texter hen ska läsa för den inbjudna läsaren."
   - rubrik: De fyra stegen för ett långt ord
     plats: efter-steg
     meny: true
@@ -291,7 +291,7 @@ tabeller:
         - "Skriv passets två ord till Ordstarten på stora tavlan, och ställ fram blädderblocket. Lägg fram förlagan, kortet Ett långt ord och en miniwhiteboard med whiteboardpenna och sudd till varje elev, och kortet Vi skriver i par, skrivplanen och tidningens sida till varje par. Från vecka 5 får varje elev en egen skrivplan och en egen sida. Ordkorten behövs inte i skrivpassen."
         - "Som i pass 2, men lägg fram parens planer och sidor från pass 2."
       - - "Ordstarten\n0–⁠5 min"
-        - "Gruppen läser delarna på planschen i kör och tar stegen på två ord, som i ordpasset."
+        - "Gruppen läser delarna på planschen Delarna i kör och tar stegen på två ord, som i ordpasset."
         - "Gruppen gör som i pass 2, med två nya ord."
       - - "Förlagan\n5–⁠15 min"
         - "Gruppen läser förlagan i kör, och alla drar en ram runt början, en runt mitten och en runt slutet på sin förlaga. Du visar på din, gärna förstorad till A3. Du påminner om vem som ska läsa texten och vad eleverna ska skriva. Paren, från vecka 5 var och en, skriver på skrivplanen vad texten ska handla om, vem som läser den och ramarnas namn vid Början, Mitten och Slutet."
@@ -319,7 +319,7 @@ tabeller:
       - - Före passet
         - "Som i pass 2, men lägg fram elevernas planer och sidor från pass 2."
       - - "Ordstarten\n0–⁠5 min"
-        - "Gruppen läser delarna i kör och tar stegen på två nya ord."
+        - "Gruppen läser delarna på planschen Delarna i kör och tar stegen på två nya ord."
       - - "Förlagan\n5–⁠10 min"
         - "Eleven läser sin text högt för kamraten, jämför den med planen och förlagan och säger vad som är kvar."
       - - "Din text\n10–⁠15 min"
@@ -559,7 +559,7 @@ uppfoljning:
     - nar: Före kursen
       tid: "före"
       perElev: 5
-      vad: "Gör kartläggningen veckan före kursen. Uppgift 2, 3 och 5 gör ni i hela gruppen på omkring 25 minuter. En annan dag efter diktamen i uppgift 3 gör du uppgift 1 och 4 med en elev i taget, så att eleven inte har läst orden i uppgift 1 före diktamen. Läser eleven redan minst 14 av 16 ord rätt i uppgift 1, stavar minst 6 av 8 ord rätt i uppgift 3 och har minst 6 av 8 poäng i uppgift 4, behöver hen inte gå kursen."
+      vad: "Gör kartläggningen veckan före kursen. Uppgift 2, 3 och 5 gör ni i hela gruppen på omkring 25 minuter. En annan dag efter diktamen i uppgift 3 gör du uppgift 1 och 4 med en elev i taget, så att eleven inte har läst orden i uppgift 1 före diktamen. Det tar omkring fem minuter per elev. Läser eleven redan minst 14 av 16 ord rätt i uppgift 1, stavar minst 6 av 8 ord rätt i uppgift 3 och har minst 6 av 8 poäng i uppgift 4, behöver hen inte gå kursen."
       resultat: "uppgift 1 av 16, uppgift 2 och 4 av 8 var, uppgift 3 ord av 8 och delar av 19"
     - nar: Efter varje pass
       tid: "varje pass"
@@ -570,7 +570,7 @@ uppfoljning:
     - nar: Efter kursen
       tid: "efter"
       perElev: 5
-      vad: "Gör kartläggningen igen veckan efter kursen, med samma ord. Jämför poängen och svaren med dem före kursen, och skriv vad eleven behöver nu. Ge klassläraren resultatet."
+      vad: "Gör kartläggningen igen veckan efter kursen, med samma ord och i samma ordning som före kursen. Först gör ni uppgift 2, 3 och 5 i hela gruppen, och en annan dag gör du uppgift 1 och 4 med en elev i taget, omkring fem minuter per elev. Jämför poängen och svaren med dem före kursen, och skriv vad eleven behöver nu. Ge klassläraren resultatet."
       resultat: "uppgift 1 av 16, uppgift 2 och 4 av 8 var, uppgift 3 ord av 8 och delar av 19"
 
 plan:
@@ -592,10 +592,16 @@ plan:
     - nar: första passet
       del: Ordstarten
       istallet: true
-      text: "Börja med fem minuter om kursen: presentera den som Ordverkstaden, en verkstad där gruppen gör en tidning, och ge varje elev kortet Ett långt ord. Ordstarten: på planschen läser gruppen de fyra första raderna i listan Ändelser som böjer ordet. Du visar brandbilen med stegen och tänker högt, och sedan tar alla bilbranden med stegen."
+      text: "Börja med fem minuter om kursen: presentera den som Ordverkstaden, en verkstad där gruppen gör en tidning, och ge varje elev kortet Ett långt ord. Ordstarten: på planschen Delarna läser gruppen de fyra första raderna i listan Ändelser som böjer ordet. Du visar brandbilen med stegen och tänker högt, och sedan tar alla bilbranden med stegen."
     - nar: veckans första
       kort: "Ordpasset"
       ur: { tabell: "Veckans tre pass: ett ordpass och två skrivpass", rad: "Pass 1", kolumner: ["Vad gruppen gör"] }
+    # Med två pass i vecka 8 skriver eleverna ingen ny text, och raden säger det i ordpassets Läsa upp med notens två
+    # meningar. Planen kan inte ge raden bara det läget: näst sista passet är skrivpasset när vecka 8 har tre pass, så
+    # raden säger villkoret själv och gäller veckans första pass i vecka 8 (sajtens steg 4, 2026-10-27, K-585).
+    - nar: veckans första pass i vecka 8
+      del: Läsa upp
+      text: "Med två pass i vecka 8 tar ni ordpasset och tidningens pass, och tidningen får sju avdelningar. Då skriver eleverna ingen ny text, och i ordpassets Läsa upp väljer varje elev i stället vilken av sina texter hen ska läsa för den inbjudna läsaren."
     - nar: veckans andra pass i vecka 1–4
       kort: "Skrivpasset, texten börjar"
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
@@ -706,7 +712,7 @@ ramar:
             - rubrik: Förlagan
               text: "Tre uppfinningar som världen behöver, en tidningsartikel. Veckans ord i texten: sängrobot, regnhatt, cykelhiss, cykelhjälm, ryggsäck, matlåda, glasögon, tandrobot och matrobot. Före läsningen visar du bilder av en cykelhiss och en regnhatt."
             - rubrik: Pass 1, ordpasset
-              text: "Börja med fem minuter om kursen: presentera den som Ordverkstaden, en verkstad där gruppen gör en tidning, och ge varje elev kortet Ett långt ord. Bygga tar därför 15 minuter.\nOrdstarten: på planschen läser gruppen de fyra första raderna i listan Ändelser som böjer ordet. Du visar brandbilen med stegen och tänker högt, och sedan tar alla bilbranden med stegen.\nBygga: visa och säg ”Sängrobot. Var är delarna? Säng och robot. Jag drar ett streck mellan dem och en båge under varje del. Säng, robot, sängrobot. Jag börjar bakifrån: en robot som bäddar sängen.” Byt plats på korten och fråga ”Vad är en robotsäng?”\nNya ord: sandlåda, lastbil, polisbil, tandkräm, snöskyffel och tvättmaskin.\nDiktamen: cykelhjälm, ryggsäck, tandborste, snöbollarna och snögubbe. Skriv sedan ”cykel hjälm” isär och fråga ”Är det ett ord eller två? Säg det högt.” Säg att det inte blir någon paus mellan delarna i ett sammansatt ord."
+              text: "Börja med fem minuter om kursen: presentera den som Ordverkstaden, en verkstad där gruppen gör en tidning, och ge varje elev kortet Ett långt ord. Bygga tar därför 15 minuter.\nOrdstarten: på planschen Delarna läser gruppen de fyra första raderna i listan Ändelser som böjer ordet. Du visar brandbilen med stegen och tänker högt, och sedan tar alla bilbranden med stegen.\nBygga: visa och säg ”Sängrobot. Var är delarna? Säng och robot. Jag drar ett streck mellan dem och en båge under varje del. Säng, robot, sängrobot. Jag börjar bakifrån: en robot som bäddar sängen.” Byt plats på korten och fråga ”Vad är en robotsäng?”\nNya ord: sandlåda, lastbil, polisbil, tandkräm, snöskyffel och tvättmaskin.\nDiktamen: cykelhjälm, ryggsäck, tandborste, snöbollarna och snögubbe. Skriv sedan ”cykel hjälm” isär och fråga ”Är det ett ord eller två? Säg det högt.” Säg att det inte blir någon paus mellan delarna i ett sammansatt ord."
             - rubrik: Uppgiften
               text: "Paret hittar på en egen uppfinning och skriver om den till tidningen. Början: uppfinningens namn som rubrik, ett ord byggt av två ord. Mitten: det som är jobbigt. Slutet: vad uppfinningen gör och hur man använder den. Texten har minst tre ord som är byggda av två ord. Paret ritar uppfinningen i rutan."
             - rubrik: Din plan
@@ -1178,7 +1184,7 @@ ramar:
     # ---------------------------------------------------------------- Kartläggningen
     - rubrik: "Kartläggning: före och efter kursen"
       text:
-        - "Gör kartläggningen veckan före och veckan efter kursen, med samma ord båda gångerna. Ni övar inte de här orden i passen. Uppgift 2, 3 och 5 gör ni i hela gruppen på omkring 25 minuter. En annan dag efter diktamen i uppgift 3 gör du uppgift 1 och 4 med en elev i taget, omkring fem minuter per elev, så att eleven inte har läst orden i uppgift 1 före diktamen. Här står det du gör och säger i varje uppgift och poängen, som du skriver i Kartläggning: lärarens protokoll."
+        - "Gör kartläggningen veckan före och veckan efter kursen, med samma ord båda gångerna. Ni övar inte de här orden i passen. Uppgift 2, 3 och 5 gör ni i hela gruppen på omkring 25 minuter. En annan dag efter diktamen i uppgift 3 gör du uppgift 1 och 4 med en elev i taget, så att eleven inte har läst orden i uppgift 1 före diktamen. Det tar omkring fem minuter per elev. Här står det du gör och säger i varje uppgift och poängen, som du skriver i Kartläggning: lärarens protokoll."
       delar:
         - rubrik: Till läraren
           falt:

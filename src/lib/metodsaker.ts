@@ -90,6 +90,13 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     const adress = bank?.handledning === ri ? `${sida}/texter/lararhandledning` : `${sida}#${ramAnkare[ri]}`;
     const veckor = veckornaI(efter);
     perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}), ...(oversikt ? { oversikt } : {}) }]);
+    // En ram som heter "<sak>, vecka N: <titel>", som Ordverkstads "Förlaga, vecka 3: …", eller "<sak>, <version> vecka N",
+    // som Värdeskapandes "Inbjudan, Skattjakten vecka 1: …", är saken för den veckan, i sin version, och "förlagan" leder till
+    // planens vecka (riggens leverans 2026-10-27, efter länkgranskningen: förlagan, Inbjudan och Ledtrådskortet blev inga
+    // länkar).
+    const mv = namn.match(/^(.+?),\s*(?:(.+?)\s+)?vecka\s+(\d+(?:\s*[–-]\s*\d+)?)$/iu);
+    const vv = mv ? veckornaI(`vecka ${mv[3]}`) : undefined;
+    if (mv && vv && (!mv[2] || mv[2].toLocaleLowerCase('sv') === (version ?? versionernasNamn(d)[0] ?? '').toLocaleLowerCase('sv'))) perNamn.set(mv[1], [...(perNamn.get(mv[1]) ?? []), { adress, veckor: vv }]);
   });
   // En ram med lektioner, som Ordverkstads Till läraren: veckorna, har en sida per vecka med knappen Skriv ut veckan, och
   // ramens namn leder i planen till veckans sida, och utan vecka till den första (K-553: planens text om förberedelsen

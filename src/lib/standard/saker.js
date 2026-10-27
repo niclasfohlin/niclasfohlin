@@ -41,9 +41,12 @@ const HUVUDORD = {
   // lektionerna, som bildrutan och rutorna på tavlan, så spärren letar inte efter formerna.
   ruta: ['ruta', 'rutan', 'rutor', 'rutorna', 'rutans', 'rutornas'],
   karta: ['karta', 'kartan', 'kartor', 'kartorna', 'kartans', 'kartornas'],
+  // Ordverkstads förlaga och Värdeskapandes inbjudan, en för varje vecka (riggens leverans 2026-10-27).
+  forlaga: ['förlaga', 'förlagan', 'förlagor', 'förlagorna', 'förlagans', 'förlagornas'],
+  inbjudan: ['inbjudan', 'inbjudningar', 'inbjudningarna', 'inbjudans'],
 };
 // De bestämda formerna, som spärren letar efter; en grundform som "kort" är också ett vanligt ord.
-const BESTAMDA = Object.entries(HUVUDORD).filter(([k]) => !['koll', 'screening', 'ruta', 'karta'].includes(k)).flatMap(([, f]) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar', 'bilder', 'affischer', 'lappar', 'sedlar', 'planer'].includes(f)).sort((a, b) => b.length - a.length);
+const BESTAMDA = Object.entries(HUVUDORD).filter(([k]) => !['koll', 'screening', 'ruta', 'karta', 'forlaga', 'inbjudan'].includes(k)).flatMap(([, f]) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar', 'bilder', 'affischer', 'lappar', 'sedlar', 'planer'].includes(f)).sort((a, b) => b.length - a.length);
 // Ett pronomen i genitiv är inget namn på en sak ("Hennes bok"), men ett substantiv i genitiv är det ("Lärarens sida").
 const PRONOMEN = new Set(['hans', 'hennes', 'deras', 'dess', 'ens']);
 // Huvudordet som ett ord slutar på, med den längsta formen först, så att "kortet" inte läses som "kort" och "et".

@@ -628,7 +628,7 @@ uppfoljning:
     - nar: Före pass 1
       tid: "före"
       perElev: 15
-      vad: Visa provbilden för en elev i taget. Be först eleven berätta vad som har hänt, och ställ sedan de andra frågorna. Varje fråga ger 0–⁠2 poäng. Skriv poängen i provbildens protokoll och elevens ord på protokollets baksida. Be sedan eleven visa med en siffra från 0 till 10 hur bra hen är på att förstå vad andra tänker och vill. Be klassläraren sätta en siffra från 0 till 10 för hur väl eleven förstår vad kamraterna menar och vill.
+      vad: I samtalet före pass 1 visar du provbilden när eleven har sagt att hen vill vara med. Be först eleven berätta vad som har hänt, och ställ sedan de andra frågorna. Varje fråga ger 0–⁠2 poäng. Skriv poängen i provbildens protokoll och elevens ord på protokollets baksida. Be sedan eleven visa med en siffra från 0 till 10 hur bra hen är på att förstå vad andra tänker och vill. Be klassläraren sätta en siffra från 0 till 10 för hur väl eleven förstår vad kamraterna menar och vill.
       resultat: "provbildens poäng 0–⁠8, klasslärarens siffra 0–⁠10, elevens siffra 0–⁠10"
     - nar: I varje pass
       tid: "i passet"

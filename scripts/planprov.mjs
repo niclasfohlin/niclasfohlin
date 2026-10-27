@@ -709,18 +709,24 @@ for (const f of former) {
   const vd = metod('skrivkurs-vardeskapande').uppfoljning.rader;
   const ar = metod('texttyp-argumenterande-text').uppfoljning.rader;
   const tre = { start: '2026-08-17', dagar: [1, 3, 5], langd: 6 }, tva = { start: '2026-08-17', dagar: [2, 4], langd: 5 };
-  const brev = ar.findIndex((r) => r.tid === 'pass 1 och 11 i kursens veckor');
+  // Texttypskurserna räknas i pass sedan riggens leverans 2026-10-27 ("12 pass, omkring sex veckor"); kursens veckor prövas
+  // med samma kurs och perioden i veckor.
+  const arVeckor = { ...metod('texttyp-argumenterande-text'), period: 'Sex veckor' };
+  arVeckor.uppfoljning = { ...arVeckor.uppfoljning, rader: ar.map((r) => (r.tid === 'pass 1 och 11' ? { ...r, tid: 'pass 1 och 11 i kursens veckor' } : r)) };
+  const datumAv = (m, val, rad) => s.planera(s.metodplan(m).plan, val).uppfoljning.find((u) => u.rad === rad)?.tillfallen.map((t) => t.datum).join();
+  const brev = ar.findIndex((r) => r.tid === 'pass 1 och 11');
   ska('platsen i veckan ger veckans första pass, och kursens pass följer veckan som tas om',
     datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans första pass i vecka 6')) === '2026-09-21'
     && datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans sista pass i vecka 6')) === '2026-09-25'
     && datum('skrivkurs-vardeskapande', tva, vd.findIndex((r) => r.tid === 'första passet i sista veckan')) === '2026-09-15'
-    && datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6 }, brev) === '2026-08-17,2026-09-21'
-    && datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev) === '2026-08-17,2026-09-28',
+    && datumAv(arVeckor, { start: '2026-08-17', dagar: [1, 3], langd: 6 }, brev) === '2026-08-17,2026-09-21'
+    && datumAv(arVeckor, { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev) === '2026-08-17,2026-09-28'
+    && datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 12 }, brev) === '2026-08-17,2026-09-21',
     [datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.nar === 'Vecka 6')), datum('skrivkurs-vardeskapande', tva, vd.findIndex((r) => r.tid === 'första passet i sista veckan')), datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] }, brev)]);
   ska('kursens veckor kräver ett fast antal pass i veckan', s.metodplan({ ...metod('skrivkurs-vardeskapande'), uppfoljning: { rader: [{ nar: 'x', vad: 'x', tid: 'pass 2 i kursens veckor' }] } }).fel.some((x) => x.includes('kursens veckor')));
   // Veckans fält (plan.veckansPass): en rad per del med minuter och namn, förberedelsen först, och kursens passnummer.
   const falt = s.faltetsDelar('Lägg fram breven.\n0–⁠5 min. Läs som läsaren: Läs högt.\n5–20 min. Brevet: Eleven skriver.\nUtan stöd.');
-  const kp = s.planera(s.metodplan(metod('texttyp-argumenterande-text')).plan, { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] });
+  const kp = s.planera(s.metodplan(arVeckor).plan, { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] });
   ska('veckans fält och kursens passnummer', falt?.delar.map((d) => `${d.tid}|${d.fas}|${d.vad}`).join(';') === '0–5 min|Läs som läsaren|Läs högt.;5–20 min|Brevet|Eleven skriver. Utan stöd.' && falt.fore[0]?.vad === 'Lägg fram breven.' && s.faltetsDelar('Bara text.') === null
     && kp.pass.map((p) => s.kursensPassnummer(kp, 2, p)).join() === '1,2,3,4,3,4,5,6,7,8,9,10,11,12', kp.pass.map((p) => s.kursensPassnummer(kp, 2, p)));
   // K-585: i metodens sista vecka är veckans sista pass kursens sista, också när en röd dag tar ett pass, och en period i
