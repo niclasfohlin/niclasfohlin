@@ -21,6 +21,11 @@ const andrat = kor('git', ['status', '--short']).split('\n').filter(Boolean).len
 const opushat = Number(kor('git', ['rev-list', '--count', 'origin/main..main'])) || 0;
 delar.push(`\n===== Git =====\nGren: ${gren || 'okänd'}. ${andrat ? `${andrat} filer är ändrade och inte committade.` : 'Arbetsträdet är rent.'}${opushat ? ` main ligger ${opushat} commits före origin/main: de är inte pushade.` : ''}`);
 
+// Stegen i PLANERA.md som saknas för det som ska upp, så att inget steg glöms bort efter en kompaktering (Niclas
+// 2026-10-27; scripts/planera/steg.mjs). Planen till pushen står överst i NATTEN.md.
+const steg = kor(process.execPath, ['scripts/planera/steg.mjs', 'visa', '--kort'], 25000);
+if (steg) delar.push(`\n===== Planera =====\n${steg}${existsSync('NATTEN.md') ? '\nPlanen till pushen står överst i NATTEN.md.' : ''}`);
+
 // Kreditspärrens läge, så att det är känt innan arbetet fortsätter (scripts/krediter.mjs, DRIFT.md under Krediter).
 const krediter = kor(process.execPath, ['scripts/krediter.mjs', '--rad'], 25000);
 delar.push(`\n===== Krediterna =====\n${krediter || 'Netlify-krediterna gick inte att läsa. Kör npm run krediter före uppladdning.'}`);

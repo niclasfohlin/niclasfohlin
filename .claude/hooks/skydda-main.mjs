@@ -1,4 +1,4 @@
-// PreToolUse-hook för Bash. Två spärrar.
+// PreToolUse-hook för Bash. Tre spärrar, den tredje längre ned: stegen i PLANERA.md före en push av main.
 //
 // 1. Stoppar "git commit" på grenen main så att allt arbete sker på grenar och main bara ändras genom
 //    en medveten sammanslagning. Den allra första committen i ett tomt repo släpps igenom.
@@ -79,6 +79,22 @@ process.stdin.on('end', () => {
   }
 
   const bygger = byggerSajten(cmd, gren);
+  // 3. Stegen i PLANERA.md (Niclas 2026-10-27: "fixa så du inte glömmer planera.md och olika stegen"): en push av main med en
+  //    metod vars plan syns, eller med modulens kod, kräver varje steg i liggaren (scripts/planera/steg.mjs). PLANERA=av
+  //    först i kommandot släpper igenom, och används bara när Niclas sagt det.
+  //    En kedja som ändrar grenen och pushar main i samma kommando prövas inte mot det som hamnar på main, så den stoppas
+  //    med beskedet att pushen körs för sig (ARBETSSATT.md under Uppladdning).
+  if (bygger?.startsWith('en push till main i samma kommando') && !/(^|&&|;|\|\|)\s*PLANERA=av\s/.test(cmd)) {
+    process.stderr.write('Kör git push origin main som ett eget kommando efter sammanslagningen, så att kroken kan pröva stegen i PLANERA.md mot det som laddas upp.\n');
+    process.exit(2);
+  }
+  if (bygger === 'en push till main' && !/(^|&&|;|\|\|)\s*PLANERA=av\s/.test(cmd)) {
+    const s = spawnSync(process.execPath, [join(rot, 'scripts', 'planera', 'steg.mjs'), 'prov', '--till', 'main'], { cwd: rot, encoding: 'utf8', timeout: 25000 });
+    if (s.status === 1) {
+      process.stderr.write(`${(s.stdout || '').trim()}\nSkriv PLANERA=av först i kommandot bara om Niclas sagt att det ska upp ändå.\n`);
+      process.exit(2);
+    }
+  }
   if (!bygger || /(^|&&|;|\|\|)\s*KREDITSPARR=av\s/.test(cmd)) process.exit(0);
   const r = spawnSync(process.execPath, [join(rot, 'scripts', 'krediter.mjs'), '--grind'], { cwd: rot, encoding: 'utf8', timeout: 25000 });
   if (r.status === 0) process.exit(0);
