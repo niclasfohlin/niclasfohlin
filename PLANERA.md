@@ -84,6 +84,25 @@ Planen tar varje premiss ur metodens egna fält, och metodens sida, Word-filerna
 | Spärra | Fältets spärr i standarden stoppar en metod som säger premissen på eget sätt, så att riggen och sajten prövar samma | `npm run validera` |
 | Berätta | Det som ändrades i metodens text står i svaret till Niclas, och regeln går till metodriggen | Meddelandet till Metodrigg-sessionen |
 
+## Metod, möte och modul
+
+Varje fynd och varje ändring hör till ett av tre ställen, och det avgör vem som gör den och var (Niclas 2026-10-26: "i vissa fall bristande möte mellan modul och metoden, eller metoden saknar tydlighet och utveckling", och 2026-10-28: "hur de tre arbetas med och att det är de gränserna du utgår ifrån ... Och när man väljer ena eller andra?").
+
+| | Vad det är | Vem gör det | Exempel |
+|---|---|---|---|
+| Metoden | Metodens innehåll: vad läraren gör vecka för vecka, vad innehållet lär ut, vad eleverna ska bli bättre på, sakernas namn och texterna | Riggen skriver, och sajten tar in. En småsak gör sajten själv och säger till riggen efteråt (Niclas 2026-10-27: "Varför ... skickas saker fram och tillbaka till riggen om det är småsaker?"): en mening, en tid i ett fält eller ett namn, inte en vecka eller ett pass som skrivs om | "kortet" som ska heta kortet Läsarens frågor; reglerna före pass 7 som bara stod i metodens text; avstämningen efter vecka 12 i Kortskrivning |
+| Mötet | Metoden säger det i löptext eller en tabell, men inte i ett fält som planen läser | Metoden får fältet och modulen en liten rot som läser det, i samma omgång; fältet står i METODER.md under Fälten i metodens fil | Texttypskursernas årskurs blev `plan.versionsval`; mätningen i det extra passet fick tiden "i det extra passet"; Kortskrivnings 6 och 12 veckor blev `plan.veckoval.langder` |
+| Modulen | Planera insatsen och standarden, koden som gäller alla metoder | Sajten, i den gemensamma koden, aldrig för en enda metod | Knappen under tabellerna; "Till läraren" som ledde till fel ram; det extra passet som inte räknades i sammanställningen |
+
+Så väljs stället, i den här ordningen:
+
+| Fråga | Svaret |
+|---|---|
+| Står det rätt i metodens fält men visas fel i planen? | Modulen |
+| Står det i metoden men bara i löptext eller en tabell som planen inte läser? | Mötet: fältet och roten, så att planen aldrig gissar ur löptext |
+| Säger metoden det inte, eller otydligt? | Metoden: planen hittar inte på innehåll, och ett nytt innehåll går till riggen eller till Niclas |
+| Går det att göra på flera ställen? | Det enklaste som gör planen rätt, med en spärr i provet i stället för en gissning ("Enkelhet före än mer plotter") |
+
 ## Från fynd till rot
 
 Ett fynd lagas där det kommer ifrån, inte där det syns (Niclas 2026-10-25: "Men se till att du inte bara gör handgrepp på dem. Lös roten och hur dessa löses även på kommande metoder"). Varje fynd får svar på frågorna här innan något lagas, och svaren står i commit-meddelandet eller i svaret till Niclas.
@@ -143,7 +162,7 @@ Mallarna står i `scripts/planera/`, med verktygets kommandon i `verktyget.md`, 
 
 | Mall | Vem | Modell och tak | Det som fylls i |
 |---|---|---|---|
-| `lankgranskning.md` | En granskare per metod, utan webbläsare: läser planens text ur `scripts/plantext.mjs` mot metodens platser | Opus | titel, id, svar |
+| `lankgranskning.md` | En granskare per metod, utan webbläsare: läser planens text ur `scripts/plantext.mjs` mot metodens platser | Opus | titel, id, text (mappen med planens text), svar |
 | `passgenomgang.md` | En lärare per metod, utan webbläsare och utan planen: läser metodens fil vecka för vecka mot målet, innan planen byggs | Opus | titel, id, svar |
 | `rimlighet.md` | En lärare per metod, utan webbläsare: läser planens text ur `scripts/plantext.mjs` och metodens fil, och letar efter det som ser ologiskt ut | Opus | titel, id, text (mappen med planens text), svar |
 | `rimlighet-andrat.md` | En lärare för några metoder efter lagningen, utan webbläsare: läser det som ändrades i metodens fil och planens text där det syns, med en stängd fråga | Opus | metoder (en rad per metod med titel och id), andrat (filen med ändringarna), text, svar |
@@ -179,13 +198,30 @@ Rollerna som gav mest, ur kvällarna 2026-10-24 och 2026-10-25 och omgångarna 2
 | P3 | Det som inte ändrar vad läraren gör eller vad eleven får: en formulering, en etikett, samma sak på två rader. Det lagas när det räcker att ändra en rad, och står annars kvar, utan post i kön. En P3 som är ett fel enligt raden Ett fel är P1 eller P2, vad granskaren än skrev (Niclas 2026-10-26, när 10 och 40 minuter hade stått som P3 hos den kalla testaren: "Varför tog INGEN granskning den?") |
 | Efter lagningen | Läs bara det som ändrades, med en stängd fråga om fel efter raden Ett fel, där "Inget" är ett giltigt svar: uppdraget `rimlighet-andrat` för planens text och steg 11 för sidan. En lagning ger ingen ny öppen runda. En öppen fråga ger en full lista varje gång (Niclas 2026-10-26 kväll: "som man frågar får man svar"): i Rimlighetens två rundor samma dag hittade granskarna omkring åtta P2 och tio P3 per metod i båda, fast planen hade blivit bättre |
 | Samma del ger nya fynd i varje granskning | Laga inte fall för fall. Leta efter principen som gör hörnfallen möjliga och byt den, och be sedan om en smal granskning av just bytet: högst två eller tre fynd, bara P1 som går att återskapa (Lärdomar nedan) |
-| Metoden eller modulen | Avgör var felet sitter (Niclas 2026-10-26: "Du får förtydliga saker i metoderna om det behövs ... Så du måste ibland adjudicera när modul eller metod är det som behöver något"). Säger metoden något otydligt, förtydligas metoden: sakens namn, var saken står, vilken vecka något gäller, en mening på rätt plats, eller tider som metoden redan säger i en mening som en variant. Saknar modulen en rot som flera metoder behöver, får standarden en liten rot. Välj det enklaste som gör planen rätt, med en spärr i stället för en gissning ("Enkelhet före än mer plotter"). Sortera varje fynd i ett av tre slag. Metoden saknar tydlighet eller utveckling när den inte säger vad läraren gör, vad innehållet lär ut eller vad eleverna ska bli bättre på en viss vecka, och då skriver riggen det i metoden. Mötet brister när metoden säger det i löptext men inte i ett fält som planen läser, och då får metoden fältet och modulen roten. Modulen brister när metoden säger det i sitt fält men planen visar det fel, och då lagar sajten modulen (Niclas samma kväll: "Nu upplever jag modulen som rätt stark, men i vissa fall bristande möte mellan modul och metoden, eller metoden saknar tydlighet och utveckling") |
+| Metoden, mötet eller modulen | Avgör var felet sitter efter Metod, möte och modul ovan, och skriv stället i svaret eller commit-meddelandet. Metoden beskriver veckorna i tre led: vad läraren gör, vad innehållet lär ut och vad eleverna ska bli bättre på |
 | Nytt innehåll | Det metoden inte säger, som tider den saknar, en ny övning eller ett annat val, skriver sajten inte. Frågan går till riggen i återkopplingen eller till Niclas i NATTEN.md, med testarens ord och ett förslag, och stoppar inte uppladdningen. Omgång 3: Problemlösnings första pass säger att Planera tar längre tid, men metoden har inga tider för det |
 | Lagningen görs i modulen | En lagning görs i modulen och gäller alla metoder, aldrig `if (metod === …)`. En metods eget innehåll ändras i dess fält |
 | En spärr | Ett fel som kan komma tillbaka får en spärr i planprovet, som knappen under varje sak och versionen i tabellen. Spärren prövas åt andra hållet: lägg in felet och se att provet stannar |
 | Granskare som säger emot varandra | Välj det som gör det enklare för läraren och säg varför, som när användbarhetsprovet ville ha checklistan ensam och Codex visade att den tappade förberedelser |
 | Niclas egna val | Ett val han har gjort byts inte bort utan att han får veta det först |
 | Sedan | Steg 2 igen, och steg 11 när omgången hade en P1 |
+
+## Omtag av en metod
+
+Ett omtag är när en metod som redan har planen ändras: riggen levererar en ny version, sajten lagar en småsak i metodens fil, eller modulen eller standarden ändras så att metodens plan blir en annan (Niclas 2026-10-28: "få in hur omtag görs på metoder ... Att den checkar av planeringen så den stämmer och är länkad korrekt"). Liggaren säger vilka steg omtaget behöver mot main: varje metod vars fil eller plan har ändrats står där med sina steg, och kroken stoppar pushen tills de är gjorda.
+
+| Steg | Vad du gör | Så här |
+|---|---|---|
+| Ta in | Riggens filer jämförs med grenens innan de kopieras in, och en ändring som sajten har gjort sedan riggens bas tas med. Vem som gör vad står under Metod, möte och modul | `diff` mellan riggens `out/<id>/metod.yaml` och grenens fil, sedan `cp` |
+| Validera med planen synlig | Hela valideringen, med metodens plan synlig. Har metoden `plan.vantar` görs det i en provversion (Lärdomar, rad 5). Valideringen prövar att varje sak som planen leder till har en knapp, att adresserna finns, att sidan går i Chrome och att Word-filerna klarar reglerna | `npm run validera` |
+| Planens text och uppdragen | Planens text i varje version (en årskurs, en väg, ett projekt), det som har ändrats i metodens fil sedan förra granskningen, och ett uppdrag per metod till steg 4b och steg 4 | `node scripts/planera/omtag.mjs <id> … --bas <commit som förra granskningen läste>` |
+| Steg 4b, det ändrade | En granskare per metod läser bara det ändrade, med den stängda frågan: gör läraren fel med eleverna om hen följer planen? "Inget" är ett giltigt svar | Uppdraget `uppdrag-rimlighet-<id>.md` ur omtaget |
+| Steg 4, länkarna | En granskare per metod läser varje rad mot metodens platser: det som namnges men inte länkas, länkar som leder fel och allmänna ord för en bestämd sak | Uppdraget `uppdrag-lankar-<id>.md` ur omtaget |
+| Testbänken och steg 11 | Ett utkast med det som ska upp, och en ny lärare som prövar det ändrade med uppdraget `verifiering`, där raden Det som lagades säger vad omtaget ändrade | `node scripts/utkast.mjs --namn testbank`, sedan `node scripts/lasare.mjs serve <port>` och uppdraget |
+| Steg 6, när det behövs | Kalla läsare bara när omtaget ändrar passens innehåll i grunden, eller när förra rundans kalla läsare fann en P1 i metoden | Uppdraget `kall-testare` |
+| Laga och skriv in | P1 och de P2 som rör det som laddas upp lagas före pushen, efter Så lagas fynden, och prövas igen med en stängd fråga; resten går i ett brev till riggen eller i kön. Varje gjort steg skrivs i liggaren | `node scripts/planera/steg.mjs gjort <id> <steg> <svar>` |
+
+Det automatiska följer med av sig självt i varje validering, och ett omtag kan inte hoppa över det: planprovet (planens adresser, knappen under varje sak, sidan i Chrome med lov, flytt och avslut), paritetsprovet mellan Word-filen och utskriften, reglerna för Word och Google Dokument, och Google-provet före pushen.
 
 ## Klart för publicering
 
@@ -329,6 +365,8 @@ Lärdomarna står efter steget de gäller (Stegen ovan), och inom steget i den o
 
 | Datum | Vad |
 |---|---|
+| 2026-10-28 | Efter uppladdningen av 0.7.0 (Niclas samma natt: "Kolla så att ny session har tillgång enkelt till planen.md. kanske också få in hur omtag görs på metoder i den"): avsnittet Omtag av en metod med `scripts/planera/omtag.mjs`, mallen `lankgranskning` med mappen för planens text, så att varje version granskas, och kroken vid start, så att en ny session ser liggaren och PLANERA.md |
+| 2026-10-28 | Avsnittet Metod, möte och modul, med vad de tre är, vem som gör vad och i vilken ordning stället väljs (Niclas samma natt: "Och när man väljer ena eller andra?"); raden under Så lagas fynden och omtagets Ta in hänvisar dit |
 | 2026-10-27 | Efter omgången med skrivmetodernas planer och valen (K-585, K-576, K-579; Niclas samma eftermiddag: "fixa så du inte glömmer planera.md och olika stegen i framtiden? Vävs in den i riggens arbete på något sätt?"): liggaren för stegen (`scripts/planera/steg.mjs`), som kroken prövar före en push av main och som raden efter en kompaktering visar; riggens steg och leveransbrevets tabell; raderna Kursens pass och Valet av version under Vad metoden behöver och mätningens `resultat` under Uppföljningen; lärdomarna om kursens period, versionens meningar, planens text med förvalet, provversionen, testarnas adress och läsarnas webbläsare |
 | 2026-10-25 | Första versionen, ur provningen av Planera 0.1 och 0.2 på fem metoder: länkgranskningen, testarna i två steg, användbarheten, buggjakten, Codex och verifieringen, med mallarna i `scripts/planera/` |
 | 2026-10-26 | Efter Planera 0.2.15 (Niclas samma kväll: "fundera på vart tidigt i arbetet med moduler på en metod du kan lösa sånt här i förväg innan det gått så långt", och "metoder också måste granskas om deras pass är logiska och vettiga mot mål och för sina veckor"): steg 1 Metodens pass mot målet med uppdraget `passgenomgang`, före metodens rötter och fält, som blev steg 1b. Läs själv läser de veckor och pass som är annorlunda, och Codex-granskningen av en ny metod har punkten Passen vecka för vecka mot målet (METODER.md under Codex-granskningen) |

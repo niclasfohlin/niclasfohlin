@@ -56,16 +56,44 @@
   "hooks": {
     "SessionStart": [
       {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/kontext.mjs",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/kontext.mjs",
+            "timeout": 30
+          }
+        ]
+      },
+      {
         "matcher": "compact",
         "hooks": [
-          { "type": "command", "command": "node .claude/hooks/kontext.mjs", "timeout": 30 }
+          {
+            "type": "command",
+            "command": "node .claude/hooks/kontext.mjs",
+            "timeout": 30
+          }
         ]
       }
     ],
     "UserPromptSubmit": [
       {
         "hooks": [
-          { "type": "command", "command": "node scripts/krediter.mjs --rad", "timeout": 30 }
+          {
+            "type": "command",
+            "command": "node scripts/krediter.mjs --rad",
+            "timeout": 30
+          }
         ]
       }
     ],
@@ -73,7 +101,11 @@
       {
         "matcher": "Bash|PowerShell",
         "hooks": [
-          { "type": "command", "command": "node .claude/hooks/skydda-main.mjs", "timeout": 30 }
+          {
+            "type": "command",
+            "command": "node .claude/hooks/skydda-main.mjs",
+            "timeout": 30
+          }
         ]
       }
     ],
@@ -81,7 +113,11 @@
       {
         "matcher": "Write|Edit|MultiEdit",
         "hooks": [
-          { "type": "command", "command": "node .claude/hooks/innehall.mjs", "timeout": 30 }
+          {
+            "type": "command",
+            "command": "node .claude/hooks/innehall.mjs",
+            "timeout": 30
+          }
         ]
       }
     ]

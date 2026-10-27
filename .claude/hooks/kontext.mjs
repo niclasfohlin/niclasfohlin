@@ -1,5 +1,6 @@
-// Körs av Claude Code vid SessionStart med matcher "compact", alltså direkt efter en autokompaktering. Det som skrivs
-// till stdout läggs in i kontexten igen.
+// Körs av Claude Code vid SessionStart, både när en ny session startar (matcher "startup" och "clear") och direkt efter
+// en autokompaktering ("compact"), så att en ny session också ser läget och var arbetsgången står (Niclas 2026-10-28:
+// "Kolla så att ny session har tillgång enkelt till planen.md"). Det som skrivs till stdout läggs in i kontexten.
 //
 // Högst 10 000 tecken (code.claude.com/docs/en/hooks): skriver en krok mer sparas utdatan i en fil, och sessionen ser
 // bara de första 2 000 tecknen. Kroken skrev förut ARBETSSATT.md, STIL.md och hela KO.md, 180 000 tecken 2026-10-07,
@@ -13,7 +14,12 @@ const TAK = 9000;
 const kor = (cmd, args, timeout = 15000) => { try { return (spawnSync(cmd, args, { encoding: 'utf8', timeout }).stdout || '').trim(); } catch { return ''; } };
 const kort = (text, n) => (text.length > n ? `${text.slice(0, n - 1).trimEnd()}…` : text);
 
-const delar = ['Kontexten har kompakterats. CLAUDE.md, ARBETSSATT.md och STIL.md har Claude Code läst in igen av sig självt, och de gäller som förut. Fortsätt där du var, men kör git status och git branch --show-current innan du gör något.'];
+// Claude Code skickar händelsen som JSON på stdin, med source: startup, clear, resume eller compact.
+let kalla = 'compact';
+try { kalla = JSON.parse(readFileSync(0, 'utf8') || '{}').source ?? 'compact'; } catch { /* utan stdin är det en kompaktering */ }
+const delar = [kalla === 'compact'
+  ? 'Kontexten har kompakterats. CLAUDE.md, ARBETSSATT.md och STIL.md har Claude Code läst in igen av sig självt, och de gäller som förut. Fortsätt där du var, men kör git status och git branch --show-current innan du gör något.'
+  : 'Ny session. CLAUDE.md, ARBETSSATT.md och STIL.md är inlästa och gäller. Börja med registret överst i ARBETSSATT.md, och kör git status och git branch --show-current innan du gör något.'];
 
 // Grenen, det som inte ligger i git och det som inte är pushat.
 const gren = kor('git', ['branch', '--show-current']);
@@ -24,7 +30,8 @@ delar.push(`\n===== Git =====\nGren: ${gren || 'okänd'}. ${andrat ? `${andrat} 
 // Stegen i PLANERA.md som saknas för det som ska upp, så att inget steg glöms bort efter en kompaktering (Niclas
 // 2026-10-27; scripts/planera/steg.mjs). Planen till pushen står överst i NATTEN.md.
 const steg = kor(process.execPath, ['scripts/planera/steg.mjs', 'visa', '--kort'], 25000);
-if (steg) delar.push(`\n===== Planera =====\n${steg}${existsSync('NATTEN.md') ? '\nPlanen till pushen står överst i NATTEN.md.' : ''}`);
+// Var arbetsgången för Planera insatsen står, också när liggaren inte har något att göra (Niclas 2026-10-28).
+if (steg) delar.push(`\n===== Planera =====\n${steg}\nArbetsgången står i PLANERA.md: Stegen för en ny plan, Omtag av en metod för en metod som redan har planen (node scripts/planera/omtag.mjs), och liggaren med node scripts/planera/steg.mjs visa.${existsSync('NATTEN.md') ? '\nPlanen till pushen står överst i NATTEN.md.' : ''}`);
 
 // Kreditspärrens läge, så att det är känt innan arbetet fortsätter (scripts/krediter.mjs, DRIFT.md under Krediter).
 const krediter = kor(process.execPath, ['scripts/krediter.mjs', '--rad'], 25000);

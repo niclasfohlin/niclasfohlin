@@ -6,9 +6,9 @@ Planera insatsen på niclasfohlin.se gör en plan för en insats i stödundervis
 
 | Fil | Vad den är |
 |---|---|
-| `underlag/prov/plantext/{{id}}.md` | Varje rad i planen en gång, i alla lägen: före första passet, varje vecka med varje pass, efter insatsen, vid fyra datum, med Följ insatsen. En länk står som ⟦texten → vart den leder (målets rubrik på metodens sida)⟧, en knapp som [knapp: …] |
-| `underlag/prov/plantext/{{id}}-platser.md` | Metodens platser: varje ankare på metodens sida med sin rubrik, det en länk kan leda till |
-| `underlag/prov/plantext/{{id}}-fullt.md` | Samma text läge för läge, om du behöver se en rad i sitt sammanhang |
+| `{{text}}/{{id}}.md` | Varje rad i planen en gång, i alla lägen: före första passet, varje vecka med varje pass, efter insatsen, vid fyra datum, med Följ insatsen. En länk står som ⟦texten → vart den leder (målets rubrik på metodens sida)⟧, en knapp som [knapp: …] |
+| `{{text}}/{{id}}-platser.md` | Metodens platser: varje ankare på metodens sida med sin rubrik, det en länk kan leda till |
+| `{{text}}/{{id}}-fullt.md` | Samma text läge för läge, om du behöver se en rad i sitt sammanhang |
 | `src/content/stodundervisning/{{id}}.yaml` | Metodens fil, där namnen på bladen, korten, mallarna, texterna och lektionerna står |
 
 Läs inget annat: ingen kod och inga andra underlag. Du ska döma efter vad läraren ser, inte efter hur det är byggt.

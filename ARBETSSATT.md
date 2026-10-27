@@ -19,6 +19,8 @@ Läs raden för det du ska göra. Avsnitten står i den här filen, ett per steg
 | skriva en ingress, en beskrivning eller en rapport till Niclas | STIL.md |
 | ändra kod eller design | Design och kod, och KONCEPT.md |
 | ge en metod Planera insatsen, eller ändra planens modul | PLANERA.md, och METODER.md under Planera insatsen |
+| ändra en metod som redan har planen (omtag), som en ny leverans från riggen | PLANERA.md under Omtag av en metod |
+| avgöra om ett fel eller en ändring hör till metoden, mötet eller modulen | PLANERA.md under Metod, möte och modul |
 | sköta en tjänst, logga in eller röra en hemlighet | Drift, och DRIFT.md |
 | arbeta igenom kön på natten | flödet `/natt` (`.claude/commands/natt.md`) och Nattkörning |
 | skriva ett längre nyhetsbrev | flödet `/utskick` (`.claude/commands/utskick.md`) och CLAUDE.md under Prenumeration och utskick |
