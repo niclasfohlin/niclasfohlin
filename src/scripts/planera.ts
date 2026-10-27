@@ -66,7 +66,7 @@ const idag = idagLokalt();
 // Uppföljningens rad med sitt namn ur standarden, som i raden, texterna och pdf:en: Efter insatsen, och en vecka som i planen.
 const uppfNamn = (rad: number) => uppfoljningensNamn(plan, info(), rad);
 
-type HelFoljd = Required<Omit<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar'>> & Pick<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar'>;
+type HelFoljd = Required<Omit<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa'>> & Pick<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa'>;
 const tomFoljd = (): HelFoljd => ({ gjorda: [], elever: [], franvaro: {}, vecka: {}, skattning: {}, resultat: {} });
 interface Aktiv { id: string; namn: string; val: Val; folj: boolean; foljd: HelFoljd; sparad: boolean; franLank: boolean; uppdaterad?: string; kopia?: string }
 // Veckorna med ett värde i metodens egna skattningar (K-559), som räknas som infört, som skattningarna mot målet.
@@ -349,9 +349,10 @@ function andra(fn: () => void, meddelande?: string | (() => string | undefined),
   // I en serie följer veckornas lektioner sina måndagar när något är infört, så att en skattning står kvar mot samma
   // lektions mål när veckorna flyttas (lektionernaPaVeckorna, Codex 2026-10-27). Inte när ändringen själv gällde
   // lektionerna eller en annan plan, som ett byte av lektion, Ångra eller en annan plan.
-  if (serien && aktiv.id === idFore && JSON.stringify(aktiv.val.lektioner ?? []) === lektionerFore && harFortIn() && (aktiv.val.lektioner ?? []).length) {
-    const flyttade = lektionernaPaVeckorna(planenFore, plan, aktiv.val.lektioner ?? []);
-    if (JSON.stringify(flyttade) !== JSON.stringify(aktiv.val.lektioner)) { aktiv.val.lektioner = flyttade; rakna(); }
+  if (serien && aktiv.id === idFore && JSON.stringify(aktiv.val.lektioner ?? []) === lektionerFore && harFortIn() && ((aktiv.val.lektioner ?? []).length || Object.keys(aktiv.foljd.lektionPa ?? {}).length)) {
+    const { lektioner, minne } = lektionernaPaVeckorna(planenFore, plan, aktiv.val.lektioner ?? [], aktiv.foljd.lektionPa);
+    aktiv.foljd.lektionPa = minne;
+    if (JSON.stringify(lektioner) !== JSON.stringify(aktiv.val.lektioner)) { aktiv.val.lektioner = lektioner; rakna(); }
   }
   const ok = spara();
   uppdateraAdressen();
@@ -1498,7 +1499,10 @@ function foreDelar(oppna: Set<string>): string[] {
     : plan.fore.overLov ? `Veckan före första passet är lov, så gör det senast veckan före lovet, ${spannKort(plan.fore.mandag, fredag)}. Första passet är ${forsta}.`
     : `Gör det senast veckan före första passet, ${spannKort(plan.fore.mandag, fredag)}. Första passet är ${forsta}.`;
   const material = [...filnamn().filter((n) => n.startsWith(aktuell ? `lektion-${aktuell.nr}-kort` : 'lektionskort')).map(plats), plats('lathund')].filter(Boolean);
-  delar.push(`<div class="pl-nasta pl-forerutan"><p class="pl-nar">${esc(nartid)}</p>${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${metodensLankar()}</div>`);
+  // Det extra passet före pass 1 kommer först, och på sin dag säger rutan det (verifieringen 2026-10-27: på morgonen sa
+  // rutan bara att första passet var den 10 november).
+  const forstaRad = extraDatum && extraDatum >= idag ? `${extraDatum === idag ? 'I dag är det' : 'Först kommer det'} extra passet, ${extraDag}. ${nartid}` : nartid;
+  delar.push(`<div class="pl-nasta pl-forerutan"><p class="pl-nar">${esc(forstaRad)}</p>${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${metodensLankar()}</div>`);
   const saker = [
     ...uppfoljningensTillfallen(plan).filter((x) => x.vecka === 0).map((x) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))}</span>${uppfText(x.rad)}${medResultat(x.rad, x.nyckel)}</li>`),
     // Versionens extra pass före pass 1 står med sin dag och tid (extraPassetsDag; Rimligheten 2026-10-27: Egen ram).

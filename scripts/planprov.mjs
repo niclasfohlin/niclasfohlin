@@ -480,7 +480,7 @@ if (tsMp) {
     const [ali, filip] = nsam.elever;
     const prickar = s.passensNarvaro(nsam, filip, {}).flat().filter((x) => x !== 'inte').length;
     const ntext = s.sammanstallningstext({ titel: ga.titel, uppfoljning: ga.uppfoljning.rader }, npl, nsam);
-    ska('eleverna som lämnar listan sparas med id, och närvaron räknas från dagen eleven kom till', lagrad.elever[1]?.fran === '2026-11-18' && !('fran' in (lagrad.elever[2] ?? {})) && JSON.stringify(lagrad.lamnade) === '[{"id":"e1","namn":"Ebba"}]' && ali.narvaro === 5 && ali.passen === undefined && filip.narvaro === 2 && filip.passen === 2 && s.narvaronText(filip, nsam) === 'Var med i 2 av 2 bockade pass.' && s.narvaronKort(ali, nsam) === 'med i 5 av 6 pass' && prickar === 2 && ntext.includes('en elev missade 1 pass'), [ali, filip, prickar, ntext]);
+    ska('eleverna som lämnar listan sparas med id, och närvaron räknas från dagen eleven kom till', lagrad.elever[1]?.fran === '2026-11-18' && !('fran' in (lagrad.elever[2] ?? {})) && JSON.stringify(lagrad.lamnade) === '[{"id":"e1","namn":"Ebba"}]' && ali.narvaro === 5 && ali.passen === 6 && filip.narvaro === 2 && filip.passen === 2 && s.narvaronText(filip, nsam) === 'Var med i 2 av 2 bockade pass.' && s.narvaronKort(ali, nsam) === 'med i 5 av 6 pass' && prickar === 2 && ntext.includes('en elev missade 1 pass'), [ali, filip, prickar, ntext]);
     // Codex 2026-10-26: gruppens närvarorad räknar eleverna som har kunnat vara med, och prickarnas förklaring säger strecket.
     const efterAlla = s.sammanstallning(npl, s.rensaFoljd({ gjorda: bockade, narvaro: true, elever: [{ id: 'a1', namn: 'Ali' }, { id: 'f1', namn: 'Filip', fran: npl.pass[7].datum }], franvaro: { [bockade[1]]: ['a1'] }, listan: '2026-10-28' }), '2026-12-01');
     const efterText = s.sammanstallningstext({ titel: ga.titel, uppfoljning: ga.uppfoljning.rader }, npl, efterAlla);
@@ -805,9 +805,12 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   // Lektionerna följer sina måndagar när veckorna flyttas (Codex 2026-10-27).
   const ljPlanFore = s.planera(s.metodplan(br).plan, { ...tom, start: '2026-10-05', dagar: [1, 3], langd: 6 });
   const ljPlanEfter = s.planera(s.metodplan(br).plan, { ...tom, start: '2026-10-12', dagar: [1, 3], langd: 6 });
-  // Före: 5, 12 och 19 oktober med lektion 1, 3 och 2; efter: 12, 19 och 26 oktober, där 26 oktober inte fanns och får
-  // lektionen på sin plats.
-  ska('lektionerna följer sina veckors måndagar när starten flyttas', JSON.stringify(s.lektionernaPaVeckorna(ljPlanFore, ljPlanEfter, [1, 3, 2])) === JSON.stringify([3, 2, 2]), s.lektionernaPaVeckorna(ljPlanFore, ljPlanEfter, [1, 3, 2]));
+  // Före: 5, 12 och 19 oktober med lektion 1, 3 och 2; efter: 12, 19 och 26 oktober.
+  // En flytt fram och en tillbaka ger samma lektioner som förut: veckan som föll ur planen minns sin lektion (verifieringen
+  // samma natt), och en vecka som planen aldrig har haft har ingen.
+  const ljFram = s.lektionernaPaVeckorna(ljPlanFore, ljPlanEfter, [1, 3, 2]);
+  const ljTillbaka = s.lektionernaPaVeckorna(ljPlanEfter, ljPlanFore, ljFram.lektioner, ljFram.minne);
+  ska('lektionerna följer sina veckors måndagar när starten flyttas fram och tillbaka', JSON.stringify(ljFram.lektioner) === JSON.stringify([3, 2]) && JSON.stringify(ljTillbaka.lektioner) === JSON.stringify([1, 3, 2]) && s.rensaFoljd({ lektionPa: { '2026-10-05': 1, x: 2, '2026-10-12': 0 } }).lektionPa?.['2026-10-05'] === 1 && Object.keys(s.rensaFoljd({ lektionPa: { '2026-10-05': 1, x: 2, '2026-10-12': 0 } }).lektionPa).length === 1, [ljFram, ljTillbaka.lektioner]);
   ska('två versioner som bara skiljer i en ordfog har samma namn', s.versionsvaletsFel({ plan: { versionsval: { rubrik: 'Årskurs', text: 'Välj årskurs efter eleverna i gruppen, så som metoden säger.', mer: 'X', versioner: [{ namn: 'Åk 4–5' }, { namn: 'Åk 4–⁠5' }] } } }).length > 0);
   // Eleverna först i varje händelse, när läraren har skrivit in dem, och en elev som kom senare från sin dag (Niclas
   // 2026-10-27).

@@ -2077,15 +2077,21 @@ export const LANGSTA = 200;
 /**
  * Veckornas lektioner efter en ändring som flyttar veckorna, som en ny start eller ett lov, när något redan är infört:
  * varje vald lektion följer sin veckas måndag, där skattningen och resultaten är sparade, så att en skattning står kvar mot
- * samma lektions mål (Codex 2026-10-27: Räkna ljuds femma blev Rims när starten flyttades en vecka). En vecka som inte
- * fanns förut får lektionen på sin plats, som förut.
+ * samma lektions mål (Codex 2026-10-27: Räkna ljuds femma blev Rims när starten flyttades en vecka). En vecka som faller ur
+ * planen minns sin lektion (minne, efter måndag), så att lektionen kommer tillbaka med veckan, som bockarna och
+ * skattningarna gör (verifieringen samma natt: två flyttar i rad tappade Första ljudet). En vecka som planen aldrig har haft
+ * har ingen lektion, så att läraren väljer den.
  * @param {Plan} fore planen före ändringen
  * @param {Plan} efter planen efter ändringen
  * @param {number[]} lektioner veckornas lektioner i planen före ändringen
+ * @param {Record<string, number>} [minne] lektionerna efter måndag för veckor som har fallit ur planen
+ * @returns {{ lektioner: number[], minne: Record<string, number> }}
  */
-export function lektionernaPaVeckorna(fore, efter, lektioner) {
-  const perMandag = new Map(fore.veckor.map((v) => [v.mandag, lektioner[v.nr - 1] ?? 0]));
-  return rentaLektioner(efter.veckor.map((v) => (perMandag.has(v.mandag) ? perMandag.get(v.mandag) : lektioner[v.nr - 1] ?? 0)));
+export function lektionernaPaVeckorna(fore, efter, lektioner, minne = {}) {
+  /** @type {Record<string, number>} */
+  const ny = { ...minne };
+  for (const v of fore.veckor) { const l = lektioner[v.nr - 1] ?? 0; if (l) ny[v.mandag] = l; else delete ny[v.mandag]; }
+  return { lektioner: rentaLektioner(efter.veckor.map((v) => ny[v.mandag] ?? 0)), minne: ny };
 }
 
 export function rentaLektioner(lektioner) {
@@ -2475,7 +2481,7 @@ export function dokumentationstext(info, plan, val, o) {
     const vad = g?.skala ? `${stor(uppfoljningensNamn(plan, info, g.rad))}, ${g.skala.fran} till ${g.skala.till}, av gruppen` : stor(skattningenText('eleven'));
     rader.push(`${vad}${m ? `, med avstämning mitt i insatsen ${planveckansNamn(plan, plan.veckor[m - 1]).text}` : ''} och utvärdering efter insatsen.`);
   }
-  if (o.genomforda !== undefined) rader.push(`Bockade som genomförda: ${o.genomforda} av ${plan.pass.length} pass.`);
+  if (o.genomforda !== undefined) rader.push(`Bockade som genomförda: ${o.genomforda} av ${plan.pass.length + (plan.extraDag ? 1 : 0)} pass.`);
   rader.push(`Metoden: ${info.adress}`);
   return rader.join('\n');
 }
@@ -2540,6 +2546,7 @@ export function rensaFoljd(f) {
     const ut = { ...(formular ? { formular } : {}), ...(sammanstallning ? { sammanstallning } : {}) };
     return Object.keys(ut).length ? ut : undefined;
   });
+  const lektionPa = per(g.lektionPa, (d, v) => (arDatum(d) && Number.isInteger(v) && v >= 1 && v <= 99 ? v : undefined));
   return {
     gjorda: [...new Set(lista(g.gjorda).filter(arDatum))].sort(),
     elever,
@@ -2554,6 +2561,8 @@ export function rensaFoljd(f) {
     resultat: per(g.resultat, (k, v) => (/^\d+-\d{4}-\d{2}-\d{2}$/.test(k) ? per(v, (e, x) => (id(e) && text(x, RESULTATETS_LANGD) ? text(x, RESULTATETS_LANGD) : undefined)) : undefined)),
     ...(avstamning ? { avstamning } : {}),
     ...(utvardering ? { utvardering } : {}),
+    // Lektionerna efter måndag i en serie, som följer veckorna när de flyttas (lektionernaPaVeckorna).
+    ...(Object.keys(lektionPa).length ? { lektionPa } : {}),
     ...(arDatum(g.oppen) ? { oppen: g.oppen } : {}),
     ...(borttagna.length ? { borttagna } : {}),
     ...(lamnade.length ? { lamnade } : {}),
@@ -2644,7 +2653,9 @@ export function sammanstallning(plan, f, idag, lektioner) {
       // Närvaron räknas på de bockade passen: alla är med tills läraren har tryckt på den som inte var där.
       narvaro: narvaro && e.id !== GRUPPEN ? sedan(e).filter((p) => !(f.franvaro?.[passetsDag(p)] ?? []).includes(e.id)).length : null,
       // Passen eleven har kunnat vara med i, när eleven kom till senare.
-      ...(narvaro && e.id !== GRUPPEN && e.fran ? { passen: sedan(e).length, fran: e.fran } : {}),
+      // Närvaron räknas på planens pass, där den går att föra, och inte på det extra passet före pass 1 (verifieringen
+      // 2026-10-27: "med i 2 av 3 pass" med ett bockat extra pass).
+      ...(narvaro && e.id !== GRUPPEN ? { passen: sedan(e).length, ...(e.fran ? { fran: e.fran } : {}) } : {}),
       resultat: Object.fromEntries(Object.entries(f.resultat ?? {}).map(([k, r]) => [k, (r ?? {})[e.id] ?? ''])),
     };
   });
