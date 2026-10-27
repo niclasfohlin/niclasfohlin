@@ -131,7 +131,7 @@ export interface PlanData {
   /** En serie med lektionsbank (K-551): lektionerna i bankens ordning, som veckan växlar till, och stödet för valet av
    * ingång med ingångarna (plan.lektionsval). */
   lektioner?: PlanLektion[];
-  lektionsval?: PlanStod & { ingangar: { lektion: number; namn: string }[] };
+  lektionsval?: PlanStod & { ingangar: { lektion: number; namn: string }[]; klar?: string };
 }
 
 /** Ett stöd för ett val i planen (STIL.md under Stöd för ett val): metodens text och metodens rubrik med mer, med adressen. */
@@ -390,7 +390,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(d.plan?.sistaRaden && { sistaRaden: d.plan.sistaRaden }),
     ...(skattningar.length ? { skattningar } : {}),
     ...(lektioner.length ? { lektioner } : {}),
-    ...(ingangsstod && d.plan?.lektionsval ? { lektionsval: { ...ingangsstod, ingangar: d.plan.lektionsval.ingangar } } : {}),
+    ...(ingangsstod && d.plan?.lektionsval ? { lektionsval: { ...ingangsstod, ingangar: d.plan.lektionsval.ingangar, ...(d.plan.lektionsval.klar ? { klar: d.plan.lektionsval.klar } : {}) } } : {}),
   };
 }
 

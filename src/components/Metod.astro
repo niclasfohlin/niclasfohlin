@@ -338,7 +338,7 @@ const meny = [
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
   {/* En lektions regel för att gå till nästa lektion står sist i rutan, som i Word och i seriens planerare (K-551). */}
-  {d.upplagg && <div class="m-ruta" id="upplagg"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{[d.upplagg.text, d.vidare ? vidareTillLektion(d.vidare) : ""].filter(Boolean).join(" ")}</p></div>}
+  {d.upplagg && <div class="m-ruta" id="upplagg"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{[d.upplagg.text, d.vidare ? vidareTillLektion(d.vidare, !!koppling?.lektion && !koppling.nasta) : ""].filter(Boolean).join(" ")}</p></div>}
   {d.gruppen && <div class="m-ruta" id="gruppen"><h2 class="kicker">{d.gruppen.rubrik}</h2><p>{d.gruppen.text}</p></div>}
   {d.principer && <div class="m-ruta" id="principer"><h2 class="kicker">{d.principer.rubrik}</h2><p>{d.principer.text}</p></div>}
 

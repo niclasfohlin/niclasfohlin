@@ -3175,7 +3175,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   const karta = kartaFor(post);
   d.inledning.forEach((s, i) => { ut.push(stycke(s)); centraltVid({ stycke: i + 1 }); filmVid({ stycke: i + 1 }); });
   // En lektions regel för att gå till nästa lektion står sist i rutan, som på sidan (K-551).
-  if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, [d.upplagg.text, d.vidare ? vidareTillLektion(d.vidare) : ""].filter(Boolean).join(" ")));
+  // Lektionens regel står som ett eget stycke under rutan, så att rutan ryms på första sidan också i Google Dokument (riggens
+  // leverans av Ljudlek 2026-10-27, punkt 4: rutan med regeln blev 670–789 tecken).
+  if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, d.upplagg.text));
+  if (d.upplagg && d.vidare) ut.push(stycke(vidareTillLektion(d.vidare, !!post.serie?.lektion && !post.serie.nasta)));
   if (d.gruppen) ut.push(...ruta(d.gruppen.rubrik, d.gruppen.text));
   if (d.principer) ut.push(...ruta(d.principer.rubrik, d.principer.text));
   const friTabell = (t: MetodData['tabeller'][number]) => {

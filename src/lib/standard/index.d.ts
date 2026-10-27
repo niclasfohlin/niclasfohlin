@@ -162,7 +162,7 @@ export declare const NIVAVALETS_LANGD: number;
 /** Stödet för nivåvalet: en metod med nivåer har plan.nivaval, ett citat på högst tre meningar och NIVAVALETS_LANGD tecken. */
 export declare function nivavaletsFel(d: MetodensTexter & { nivaer?: unknown[] }, harNivaer?: boolean): string[];
 export declare const LEKTIONENS_GRANS: number;
-export declare const vidareTillLektion: (vidare: string) => string;
+export declare const vidareTillLektion: (vidare: string, sista?: boolean) => string;
 export declare function lektionsvaletsFel(d: { plan?: { lektionsval?: { text?: string; ingangar?: { lektion: number; namn: string }[] } }; vidare?: string }): string[];
 export declare function lektionensForslag(varden: number[], veckor?: { min: number; max: number }, gangen?: number): { forslag: 'nasta' | 'upprepa' | null; snitt: number | null; forKort: boolean };
 export declare function rentaLektioner(lektioner: unknown): number[];

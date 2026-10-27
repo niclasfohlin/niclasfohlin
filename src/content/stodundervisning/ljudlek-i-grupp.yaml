@@ -414,6 +414,8 @@ plan:
       - { lektion: 1, namn: Helt nybörjare }
       - { lektion: 3, namn: Nybörjare }
       - { lektion: 6, namn: Kan ljuda }
+    # En grupp som är klar med den sista lektionen före periodens slut, ur Perioden (riggens leverans 2026-10-27, punkt 3).
+    klar: "Är gruppen klar med Från ord till mening före periodens slut, slutar perioden där, och du gör mätningen efter perioden."
   veckoval:
     text: "Elevernas progression styr: gruppen går vidare när lektionens regel säger det, och inte förr. På 4–12 veckor kommer gruppen så långt den hinner från sin ingång. Välj tolv veckor, eller åtta till tolv när gruppen börjar i Räkna ljud."
     mer: "Lektionsbanken: förmågorna och lektionerna"

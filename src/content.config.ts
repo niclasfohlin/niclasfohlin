@@ -487,7 +487,9 @@ const metodensFalt = z.strictObject({
       // En serie med en lektionsbank planeras i en enda planerare, där läraren väljer lektion vecka för vecka (K-551; Niclas
       // 2026-10-26: "Ljudlek får därmed bara EN planerare som är samma för alla och som kan väljas lektioner i. Smidigast"):
       // stödet för valet av ingång, som nivaval, och ingångarna, där lektion är förmågans nummer och namn ingångens namn.
-      lektionsval: z.strictObject({ text, mer: text, ingangar: z.array(z.strictObject({ lektion: z.number().int().min(1), namn: text })).min(1).max(4) }).optional(),
+      // klar: metodens mening om en grupp som är klar med seriens sista lektion före periodens slut, ordagrant, som planen
+      // visar efter den sista lektionen (riggens leverans av Ljudlek 2026-10-27, punkt 3).
+      lektionsval: z.strictObject({ text, mer: text, ingangar: z.array(z.strictObject({ lektion: z.number().int().min(1), namn: text })).min(1).max(4), klar: text.optional() }).optional(),
       // Bankens poster på planens nivå i tur och ordning, en per pass, som Problemlösnings problem ("Börja med metodens
       // problem på nivån, i ordning, ett per pass"): planen visar passets problem (de kalla testarna 2026-10-26).
       enPerPass: z.literal(true).optional(),

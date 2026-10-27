@@ -1416,14 +1416,16 @@ function lektionenEfterVeckan(v: PlanVecka, oppna: Set<string>, ovrigt: string[]
   for (let i = v.nr - 2; i >= 0 && veckansLektion(plan.veckor[i]) === l.nr; i--) gangen += 1;
   const { forslag, snitt, forKort } = lektionensForslag(veckansVarden(v), l.veckor, gangen);
   // Utan regel i lektionen står lektionens mål, som veckan skattas mot.
-  const regel = l.vidare ? `<p class="pl-vidare">${lankad(vidareTillLektion(l.vidare))}</p>` : `<p class="pl-vidare"><span class="pl-etikett">Lektionens mål</span> ${esc(malText(l.mal))}</p>`;
+  const regel = l.vidare ? `<p class="pl-vidare">${lankad(vidareTillLektion(l.vidare, !n))}</p>` : `<p class="pl-vidare"><span class="pl-etikett">Lektionens mål</span> ${esc(malText(l.mal))}</p>`;
   const snittet = snitt !== null ? `<p>Snittet i veckans skattning mot lektionens mål är ${esc(decimal(snitt))} av 5.${forslag === 'nasta' && n ? ` Det är över ${LEKTIONENS_GRANS}, så planen föreslår nästa lektion.` : ''}</p>` : '';
   // Lektionens längd, och att planen föreslår samma lektion när gruppen har haft den färre veckor än lektionen tar.
   const langd = l.period ? `<p class="pl-not">${esc(l.namn)}: ${esc(liten(l.period))}.${forKort && nasta ? ` Ni har haft lektionen ${gangen === 1 ? 'en vecka' : `${talText(gangen)} veckor`}, så planen föreslår samma lektion ${esc(rubrikVecka(nasta).toLocaleLowerCase('sv'))}.` : ''}</p>` : '';
   if (!nasta) return `<section class="pl-block pl-lektionen-efter"><h3>Efter veckan</h3>${regel}${snittet}${ovrigt.join('')}</section>`;
+  // Den sista lektionen före planens sista vecka: metodens mening om att perioden slutar där (riggens leverans 2026-10-27).
+  const klar = !n && serien?.lektionsval?.klar ? `<p class="pl-not">${lankad(mening(serien.lektionsval.klar))}</p>` : '';
   const knappar = [lektionsknapp(nasta.nr, l, `Upprepa ${l.namn}`, forslag === 'upprepa'), ...(n ? [lektionsknapp(nasta.nr, n, `Nästa: ${n.namn}`, forslag === 'nasta')] : [])];
   const valt = valdNasta ? `<p class="pl-not">${esc(rubrikVecka(nasta))} tar ${esc(lektionen(valdNasta)?.namn ?? '')}.</p>` : '';
-  return `<section class="pl-block pl-lektionen-efter"><h3>Efter veckan</h3>${regel}${snittet}${langd}<p class="pl-fraga">Upprepa lektionen eller välj ny för ${esc(rubrikVecka(nasta).toLocaleLowerCase('sv'))}?</p><p class="pl-andra-knappar">${knappar.join('')}</p>${valt}${lektionslista(nasta.nr, valdNasta, forslag === 'nasta' && n ? n.nr : 0, oppna, 'Välj en annan lektion')}${ovrigt.join('')}</section>`;
+  return `<section class="pl-block pl-lektionen-efter"><h3>Efter veckan</h3>${regel}${snittet}${langd}${klar}<p class="pl-fraga">Upprepa lektionen eller välj ny för ${esc(rubrikVecka(nasta).toLocaleLowerCase('sv'))}?</p><p class="pl-andra-knappar">${knappar.join('')}</p>${valt}${lektionslista(nasta.nr, valdNasta, forslag === 'nasta' && n ? n.nr : 0, oppna, 'Välj en annan lektion')}${ovrigt.join('')}</section>`;
 }
 // Lektionerna i texten till åtgärdsprogrammet: de valda, med passens datum, och om fler väljs sedan.
 function lektionernasText(): { lektioner?: { namn: string; datum: string[] }[]; lektionerSedan?: boolean } {

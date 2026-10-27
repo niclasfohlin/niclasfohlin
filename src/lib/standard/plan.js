@@ -338,6 +338,7 @@ export const planensTexter = (d) => [
   ...(d.plan?.langdval ? [/** @type {[string, string]} */ (['Planens längdval', d.plan.langdval.text])] : []),
   ...(d.plan?.veckoval ? [/** @type {[string, string]} */ (['Planens veckoval', d.plan.veckoval.text])] : []),
   ...(d.plan?.lektionsval ? [/** @type {[string, string]} */ (['Planens lektionsval', d.plan.lektionsval.text])] : []),
+  ...(d.plan?.lektionsval?.klar ? [/** @type {[string, string]} */ (['Planens lektionsval, klar', d.plan.lektionsval.klar])] : []),
   ...(d.plan?.skattningar ?? []).flatMap((x) => (x.text ? [/** @type {[string, string]} */ ([`Planens skattning "${x.namn}"`, x.text])] : [])),
 ];
 
@@ -518,11 +519,14 @@ export function nivavaletsFel(d, harNivaer = (d.nivaer ?? []).length >= 2) {
 export const LEKTIONENS_GRANS = 4;
 
 /**
- * Lektionens regel för att gå till nästa lektion som en mening, på lektionens sida, i Word och i planen.
+ * Lektionens regel för att gå till nästa lektion som en mening, på lektionens sida, i Word och i planen. Den sista lektionen
+ * i serien har ingen nästa, och där säger meningen när lektionen är klar (riggens leverans av Ljudlek 2026-10-27: Från ord
+ * till mening).
  * @param {string} vidare
+ * @param {boolean} [sista] lektionen är den sista i serien
  * @returns {string}
  */
-export const vidareTillLektion = (vidare) => `Gå vidare till nästa lektion när ${vidare.trim()}.`;
+export const vidareTillLektion = (vidare, sista = false) => `${sista ? 'Lektionen är klar' : 'Gå vidare till nästa lektion'} när ${vidare.trim()}.`;
 
 /**
  * Stödet för valet av ingång och lektionens regel: plan.lektionsval har ett stöd som nivåvalet och ingångar till olika
