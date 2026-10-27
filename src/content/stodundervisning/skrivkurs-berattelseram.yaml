@@ -334,7 +334,6 @@ uppfoljning:
       resultat: "antal ja av 4, början, problem och slut ja/nej, antalet ord"
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
-  vantar: "Passen ur delens sida, och pass 1, 8, 14 och 15 med sina egna delar (Rimligheten 2026-10-27, K-553)."
   # Pass 1, 8, 14 och 15 har egna delar på delens sida, i fälten Pass N, och planen läser dem där. De andra passen följer
   # introduktionspassets tidsschema, en variant (pass 4, 10 och 12) eller Fortsättningspasset, och fälten I pass N på delens
   # sida står i sina delar nedan (sajtens Rimlighet 2026-10-27, K-553).

@@ -438,7 +438,6 @@ uppfoljning:
 plan:
   # Planera insatsen visar valet av kurs, och varje knapp leder till kursens egen plan (sajtens K-576; Niclas 2026-10-27:
   # den övergripande metoden får ingen egen plan, och varje texttyp får sin). Sidan visas när kursernas planer gör det.
-  vantar: "Kursernas planer klarar Rimligheten (K-585)."
   versionsval:
     rubrik: "Kursen"
     text: "Gruppen går en kurs i taget, och du väljer kurs efter vad eleverna behöver skriva i klassen. Behöver eleverna skriva olika texttyper, väljer du den som flest av dem snart ska skriva."

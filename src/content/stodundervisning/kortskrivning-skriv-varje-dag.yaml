@@ -262,7 +262,6 @@ uppfoljning:
       resultat: "om eleven står i dina rader efter passen i vecka 6"
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
-  vantar: "Pass 1–10 ur Börja här och det första passet på omkring 25 minuter i planen (Rimligheten 2026-10-27, K-553)."
   utan:
     - "Det allra första passet tar omkring 25 minuter och står efter tabellen."
   passen:

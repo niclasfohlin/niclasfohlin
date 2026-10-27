@@ -368,7 +368,6 @@ uppfoljning:
 
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
-  vantar: "Före passet i pass 1 och 11, lärarens uppgifter mellan passen och dagens mening (Rimligheten 2026-10-27, underlag/prov/skrivmetoder/rimlighet2/, K-585)."
   # Passets delar står i veckans fält Pass N, en rad per del med namnet före kolon (sajtens K-553, 2026-10-27).
   veckansPass: "Till läraren: veckorna"
   # Valet av årskurs (sajtens K-569, 2026-10-27): det som bara gäller en årskurs börjar med ”I åk 4–5” eller ”I åk 6–7”,

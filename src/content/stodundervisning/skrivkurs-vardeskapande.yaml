@@ -337,7 +337,6 @@ uppfoljning:
       resultat: "säger vad mentortexten gör och med vilket drag: ja/nej"
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
-  vantar: "Projektens Före kursen, Guidebokens karta, dagen efter jakten och besöksdagen och meningarna per projekt (Rimligheten 2026-10-27, underlag/prov/skrivmetoder/rimlighet3/, K-576)."
   passen:
     # Veckans fokus och skrivdrag överst i veckans första pass, ordagrant ur veckans fält Fokus (de kalla läsarna 2026-10-27,
     # K-585: planen sa aldrig vad veckan handlar om eller vilket skrivdrag gruppen lånar). Fältet börjar med projektets märke,
