@@ -711,7 +711,7 @@ for (const f of former) {
   const tre = { start: '2026-08-17', dagar: [1, 3, 5], langd: 6 }, tva = { start: '2026-08-17', dagar: [2, 4], langd: 5 };
   const brev = ar.findIndex((r) => r.tid === 'pass 1 och 11 i kursens veckor');
   ska('platsen i veckan ger veckans första pass, och kursens pass följer veckan som tas om',
-    datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.nar === 'Vecka 6')) === '2026-09-21'
+    datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans första pass i vecka 6')) === '2026-09-21'
     && datum('kortskrivning-skriv-varje-dag', tre, ks.findIndex((r) => r.tid === 'veckans sista pass i vecka 6')) === '2026-09-25'
     && datum('skrivkurs-vardeskapande', tva, vd.findIndex((r) => r.tid === 'första passet i sista veckan')) === '2026-09-15'
     && datum('texttyp-argumenterande-text', { start: '2026-08-17', dagar: [1, 3], langd: 6 }, brev) === '2026-08-17,2026-09-21'
@@ -723,6 +723,16 @@ for (const f of former) {
   const kp = s.planera(s.metodplan(metod('texttyp-argumenterande-text')).plan, { start: '2026-08-17', dagar: [1, 3], langd: 6, upprepa: [2] });
   ska('veckans fält och kursens passnummer', falt?.delar.map((d) => `${d.tid}|${d.fas}|${d.vad}`).join(';') === '0–5 min|Läs som läsaren|Läs högt.;5–20 min|Brevet|Eleven skriver. Utan stöd.' && falt.fore[0]?.vad === 'Lägg fram breven.' && s.faltetsDelar('Bara text.') === null
     && kp.pass.map((p) => s.kursensPassnummer(kp, 2, p)).join() === '1,2,3,4,3,4,5,6,7,8,9,10,11,12', kp.pass.map((p) => s.kursensPassnummer(kp, 2, p)));
+  // K-585: i metodens sista vecka är veckans sista pass kursens sista, också när en röd dag tar ett pass, och en period i
+  // pass räknar kursens pass som planens.
+  const ovMp = s.metodplan(metod('ordverkstad-i-grupp')).plan;
+  const ov = s.planera(ovMp, { ...s.forval(ovMp, '2026-11-02'), start: '2026-11-02', dagar: [1, 3, 5] });
+  const ovSista = ov.veckor.at(-1);
+  const ovNr = s.veckansPass(ov, ovSista).map((p) => s.kursensPassnummer(ov, ovMp.takt.min, p, ovMp.period.max ?? ovMp.period.min));
+  ska('kursens sista pass i metodens sista vecka, också när veckan har färre pass', ovNr.at(-1) === (ovMp.period.max ?? ovMp.period.min) * ovMp.takt.min, { pass: s.veckansPass(ov, ovSista).map((p) => p.datum), ovNr });
+  const brMp = s.metodplan(metod('skrivkurs-berattelseram')).plan;
+  const br = s.planera(brMp, { ...s.forval(brMp, '2026-11-02'), start: '2026-11-02', dagar: [1, 3, 5] });
+  ska('en period i pass räknar kursens pass som planens', br.enhet === 'pass' && br.pass.every((p) => s.kursensPassnummer(br, brMp.takt.min, p) === p.nr), br.pass.map((p) => s.kursensPassnummer(br, brMp.takt.min, p)));
   const tab = { kolumner: ['Del', 'Pass 2', 'Pass 3'], rader: [['Start\n0–5', 'A', 'B'], ['Skriva\n5–60', 'C', 'D']] };
   ska('tabellens delar med kolumnen Steg och passets kolumn', s.tabellensDelar({ kolumner: ['Tid', 'Steg', 'Det som händer'], rader: [['0–8 min', 'Ramen', 'x']] })?.delar[0].fas === 'Ramen'
     && s.tabellensDelar(tab, 'Pass 3')?.delar.map((d) => d.vad).join() === 'B,D' && s.tabellensDelar(tab)?.delar[0].mer[0]?.etikett === 'Pass 3' && s.tabellensDelar(tab, 'Pass 4') === null);

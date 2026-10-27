@@ -554,9 +554,12 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     else {
       const falten = ram.delar.flatMap((del) => (del.falt ?? []).filter((f) => /^pass \d+$/i.test(f.rubrik)).map((f) => ({ del: del.rubrik, f })));
       if (!falten.length) fel.push(`plan.veckansPass: ramen "${ram.rubrik}" har inga fält som heter Pass N.`);
-      for (const { del, f } of falten) if (!faltetsDelar(f.text)) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen rad som "N–M min. Delens namn: …".`);
+      // Ett fält utan minuter säger bara det som skiljer från passets tabell, som Sagobokens "Där vi slutade: …", och planen
+      // visar då passet (K-585). Ett fält med minuter ska gå att läsa som delar.
+      for (const { del, f } of falten) if (/\d\s*[–-]\u2060?\s*\d+\s*min/.test(f.text) && !faltetsDelar(f.text)) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen rad som "N–M min. Delens namn: …".`);
     }
-    if (takt && takt.min !== takt.max) fel.push('plan.veckansPass räknar kursens pass och kräver ett fast antal pass i veckan i faktarutans tid.');
+    // Kursens pass räknas i veckor med ett fast antal pass i veckan, eller som planens i en period i pass (K-585).
+    if (takt && takt.min !== takt.max && metodplan(m.data).plan?.period.enhet !== 'pass') fel.push('plan.veckansPass räknar kursens pass och kräver ett fast antal pass i veckan i faktarutans tid, eller en period i pass.');
   }
   if (m.data.plan?.stege && metodplan(m.data).plan?.stegEnhet !== 'veckor') fel.push('plan.stege gäller en progression i veckor, där gruppen kan börja på en senare vecka.');
   // Stödet för nivåvalet (K-557): också en metod vars nivåer bara finns i banken, som Textsamtal i grupp, har det, och mer

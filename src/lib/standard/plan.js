@@ -1754,14 +1754,21 @@ export function faltetsDelar(text) {
 }
 
 /**
- * Metodens passnummer i en kurs i veckor: (veckan − 1) × antalet pass i veckan + passets plats i veckan, som veckosidans
- * fält "Pass N" (K-553). Null när passets vecka saknas.
- * @param {Plan} plan @param {number} takt metodens fasta antal pass i veckan @param {Pass} p
+ * Metodens passnummer i en kurs, som veckosidans fält "Pass N" (K-553): (veckan − 1) × antalet pass i veckan + passets
+ * plats i veckan. I metodens sista vecka är veckans sista pass kursens sista, också när veckan har färre pass, och en
+ * period i pass räknar kursens pass som planens (K-585; modulens lista efter riggens leverans 2026-10-27: Ordverkstads
+ * tidning föll bort när juldagen tog ett pass i vecka 8, och Berättelseramen med tre pass i veckan visade pass 8 som
+ * planens pass 11). Null när passets vecka saknas.
+ * @param {Plan} plan @param {number} takt metodens antal pass i veckan @param {Pass} p
+ * @param {number} [veckor] metodens veckor, så att den sista veckan slutar med kursens sista pass
  */
-export function kursensPassnummer(plan, takt, p) {
+export function kursensPassnummer(plan, takt, p, veckor) {
+  if (plan.enhet === 'pass') return p.nr;
   const v = plan.veckor[p.vecka - 1];
   const { plats } = passetsLage(plan, p);
-  return v && plats ? (v.innehall - 1) * takt + plats : null;
+  if (!v || !plats) return null;
+  if (veckor && v.innehall === veckor && plats === veckansPass(plan, v).length) return veckor * takt;
+  return (v.innehall - 1) * takt + plats;
 }
 
 /**

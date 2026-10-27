@@ -278,7 +278,7 @@ export type TabellDel = { tid: string; fas: string; vad: string; mer: { etikett:
 /** Passets delar ur ett fält på veckans sida, en rad per del: "N–M min. Delens namn: det som händer." */
 export declare function faltetsDelar(text: unknown): { delar: TabellDel[]; fore: { namn: string; nar: string; vad: string; mer: { etikett: string; text: string }[] }[]; efter?: string } | null;
 /** Metodens passnummer i en kurs i veckor, som veckosidans fält "Pass N". */
-export declare function kursensPassnummer(plan: Plan, takt: number, p: Pass): number | null;
+export declare function kursensPassnummer(plan: Plan, takt: number, p: Pass, veckor?: number): number | null;
 export declare function tabellensDelar(t: { kolumner: string[]; rader?: unknown[][] }, kolumn?: string): { delar: TabellDel[]; fore: { namn: string; nar: string; vad: string; mer: { etikett: string; text: string }[] }[] } | null;
 /** En dels tid utan "min": "0–3". */
 export declare const delensTid: (tid: string) => string;

@@ -1186,7 +1186,7 @@ const passetsMinuter = (p: Pass) => { const t = passetsTid(aktiv.val, p); return
 // kursens pass N i veckans fält "Pass N". Sidan och kalendern får samma delar, eftersom båda läser passetFor.
 const medVeckansPass = (p: Pass, roller: ReturnType<typeof rollerFor>) => {
   if (!data.veckansPass || roller.some((r) => r.tabell?.delar?.length) || variantenFor(data.passet?.varianter, passetsLage(plan, p, passetsMinuter(p)))) return roller;
-  const nr = kursensPassnummer(plan, mp.takt.min, p);
+  const nr = kursensPassnummer(plan, mp.takt.min, p, mp.period.enhet === 'veckor' ? mp.period.max ?? mp.period.min : undefined);
   const tabell = nr !== null ? data.veckansPass[String(nr)] : undefined;
   return tabell ? [...roller, { nar: '', tabell }] : roller;
 };
