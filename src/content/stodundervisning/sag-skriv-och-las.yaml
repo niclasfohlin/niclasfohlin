@@ -309,8 +309,8 @@ uppfoljning:
       tid: "efter 2 veckor"
       vad: "Du och klassläraren läser skrivboken: skriver eleven en mening om dagen? Gör hen inte det, bestämmer ni en fast stund på dagen då hen skriver."
 plan:
-  # Planen visas när den har klarat Rimligheten (K-553).
-  vantar: "Veckans ord, meningar och ordbild ur veckans sida, och vecka 1 med bara ord (Rimligheten 2026-10-27, K-553)."
+  # Planen visas när den har klarat Rimligheten (K-553, K-585).
+  vantar: "Det eleven tar över i vecka 4–7, Startordens regel i veckans andra och tredje pass, Min mening i vecka 4–6, Jag visar i vecka 7–8 och Dagens meningar i vecka 6–7 (Rimligheten 2026-10-27, underlag/prov/skrivmetoder/rimlighet-k585-svar.md)."
   passen:
     - nar: vecka 1
       kort: "Ord"
