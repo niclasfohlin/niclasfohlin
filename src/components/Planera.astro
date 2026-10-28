@@ -12,6 +12,7 @@ import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import AppRad from './AppRad.astro';
 import StodForValet from './StodForValet.astro';
+import { tidrad } from '../scripts/tidrad';
 import { liten, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
@@ -111,10 +112,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
             </fieldset>
             <fieldset class="pl-rad pl-tider" id="pl-tider">
               <legend class="pl-etikett">Tid, om du vill</legend>
-              <div class="pl-tidrad" id="pl-tid-alla">
-                <label class="pl-tidval"><span>Börjar</span><select class="pl-falt pl-tid" id="pl-tid-fran"></select></label>
-                <label class="pl-tidval"><span>Slutar</span><select class="pl-falt pl-tid" id="pl-tid-till"></select></label>
-              </div>
+              <div class="pl-tidrad" id="pl-tid-alla" set:html={tidrad('pl-tid-fran', 'pl-tid-till')} />
               <div class="pl-tiddagar" id="pl-tid-dagar" hidden></div>
               <p><button type="button" class="pl-textknapp" id="pl-tid-olika" aria-expanded="false" aria-controls="pl-tid-dagar">Olika tider olika dagar</button></p>
               <p class="pl-hjalp">Klockslagen går var femte minut. Med tid blir varje pass en egen händelse i kalendern.</p>

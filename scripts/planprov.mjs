@@ -173,6 +173,22 @@ if (tsMp) {
   ska('kalenderfilen med tider har ett pass per händelse', tidIcs.filter((r) => r === 'BEGIN:VEVENT').length === 20 && new Set(tidIcs.filter((r) => r.startsWith('UID:'))).size === 20, tidIcs.filter((r) => r === 'BEGIN:VEVENT').length);
   ska('passen med tid har klockslaget i lärarens egen tid', tidIcs.includes('DTSTART:20261102T092000') && tidIcs.includes('DTEND:20261102T100000') && tidIcs.includes('DTSTART:20261104T130000') && tidIcs.includes('TRANSP:OPAQUE'));
   ska('ett pass på en dag utan tid är en heldag', tidIcs.includes('DTSTART;VALUE=DATE:20261106') && tidIcs.some((r) => r === 'SUMMARY:Textsamtal i grupp\\, pass 1 av 18'));
+  // Ett enskilt pass tid (passtider; Niclas 2026-10-28: "Viktigt att det bara blir det pass man ändrar", och "att denna
+  // ändring syns överallt så alla läser från en rot"): bara det passet får tiden, i roten, länken, kalenderfilen och längden.
+  const ptVal = { ...val, tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] }, passtider: { '2026-11-09': ['08:00', '08:45'] } };
+  const ptPlan = s.planera(tsMp, ptVal);
+  const ptMandagar = ptPlan.pass.filter((p) => s.veckodag(p.datum) === 1);
+  ska('en egen tid gäller bara det passet', s.passetsTid(ptVal, ptMandagar.find((p) => p.datum === '2026-11-09'))?.join() === '08:00,08:45' && ptMandagar.length > 2 && ptMandagar.filter((p) => p.datum !== '2026-11-09').every((p) => s.passetsTid(ptVal, p)?.join() === '09:20,10:00'), ptMandagar.map((p) => [p.datum, s.passetsTid(ptVal, p)]));
+  ska('länken bär passets egen tid', s.kodaVal(ptVal).includes('pt=2026-11-09-0800-0845') && JSON.stringify(s.lasVal(`#${s.kodaVal(ptVal)}`)?.val.passtider) === JSON.stringify(ptVal.passtider), s.kodaVal(ptVal));
+  ska('en egen tid som inte går att läsa tas bort', JSON.stringify(s.rentaPasstider({ '2026-11-09': ['09:00', '08:00'], x: ['08:00', '09:00'], '2026-11-10': ['8:00', '09:00'] })) === '{}' && !s.kodaVal({ ...val, passtider: { x: ['08:00', '09:00'] } }).includes('pt='));
+  const ptIcs = s.kalenderfil({ titel: ts.titel, uppfoljning: ts.uppfoljning.rader, fokus: [] }, ptPlan, { id: 'ab12cd', lank: () => 'https://niclasfohlin.se/x', nu: new Date(Date.UTC(2026, 9, 24, 12)), tider: ptVal.tider, passtider: ptVal.passtider }).replace(/\r\n /g, '').split('\r\n');
+  ska('kalenderfilen har passets egen tid och de andra passen veckodagens', ptIcs.includes('DTSTART:20261109T080000') && ptIcs.includes('DTEND:20261109T084500') && ptIcs.includes('DTSTART:20261102T092000') && ptIcs.includes('DTSTART:20261116T092000') && !ptIcs.includes('DTSTART:20261109T092000'), ptIcs.filter((r) => r.startsWith('DTSTART:2026110')));
+  ska('passens längd räknar passets egen tid', JSON.stringify(s.passensMinuter(ptVal, 30, ptPlan)) === '[30,40,45]' && JSON.stringify(s.passensMinuter({ ...ptVal, passtider: {} }, 30, s.planera(tsMp, { ...ptVal, passtider: {} }))) === '[30,40]', s.passensMinuter(ptVal, 30, ptPlan));
+  // Ett flyttat pass med egen tid har tiden på den nya dagen, och passet som kommer på den gamla dagen veckan efter har
+  // veckodagens.
+  const ptFlytt = { ...ptVal, flytta: { '2026-11-09': '2026-11-10' } };
+  const ptFlyttat = s.planera(tsMp, ptFlytt).pass.find((p) => p.flyttatFran === '2026-11-09');
+  ska('ett flyttat pass har sin egen tid på den nya dagen', ptFlyttat?.datum === '2026-11-10' && s.passetsTid(ptFlytt, ptFlyttat)?.join() === '08:00,08:45' && s.planera(tsMp, ptFlytt).pass.filter((p) => p.datum === '2026-11-16').every((p) => s.passetsTid(ptFlytt, p)?.join() === '09:20,10:00'), ptFlyttat);
   // K-595: ett pass som behöver längre tid än planens pass, som Kortskrivnings första pass, säger det i händelsen.
   const langtIcs = s.kalenderfil({ titel: ts.titel, uppfoljning: ts.uppfoljning.rader, fokus: [], minuter: (p) => (p.nr === 1 ? 55 : 0) }, plan, { id: 'ab12cd', lank: () => 'https://niclasfohlin.se/x', nu: new Date(Date.UTC(2026, 9, 24, 12)), tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] } }).replace(/\r\n /g, '').split('\r\n');
   ska('kalenderfilen säger när ett pass behöver längre tid, med passets tid som planen', langtIcs.includes('DTEND:20261102T100000') && langtIcs.join('').includes('Passet behöver minst 55 minuter. Boka längre tid den dagen.') && langtIcs.filter((r) => r.includes('Passet behöver minst')).length === 1, langtIcs.filter((r) => r.startsWith('DTEND')).slice(0, 3));
@@ -1891,6 +1907,21 @@ try {
   sant('texten till åtgärdsprogrammet följer det inställda passet', (await apText())?.includes('Omfattning: 17 pass om 30 minuter'), await apText());
   await f.tryck('[data-angra]');
   sant('ångrat inställt pass', (await f.text('#pl-summa-text'))?.includes('18 pass'));
+  // Ett enskilt pass tid (passtider; Niclas 2026-10-28: "Viktigt att det bara blir det pass man ändrar", och "att denna
+  // ändring syns överallt så alla läser från en rot"): fredagens pass får 9.00, och de andra fredagarna är som förut.
+  await f.tryck('[data-gor="flytta"]');
+  await f.kor(`(() => { const p = document.getElementById('pl-flytta-pass'); p.value = '2026-11-20'; p.dispatchEvent(new Event('change', { bubbles: true })); const fr = document.getElementById('pl-flytta-fran'); fr.value = '09:00'; fr.dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
+  const tidFalten = await f.kor(`[document.getElementById('pl-flytta-dag').value, document.getElementById('pl-flytta-till').value].join()`);
+  sant('dagen följer passet, och slutet följer början med passets längd', tidFalten === '2026-11-20,09:30', tidFalten);
+  await f.tryck('[data-gor="flytta-klar"]');
+  sant('ett pass får en egen tid, bara den dagen', (await f.text('#pl-veckan .pl-passlista'))?.includes('9.00–9.30 · Ny tid') && (await f.text('#pl-toast'))?.includes('Passet är nu kl. 9.00–9.30, bara den dagen.'), [await f.text('#pl-veckan .pl-passlista'), await f.text('#pl-toast')]);
+  await f.tryck('#pl-kalender');
+  await vanta(300);
+  const ptKal = String(await f.kor('window.__fil')).replace(/\r\n /g, '');
+  sant('kalenderfilen har passets egen tid och de andra fredagarna som förut', ptKal.includes('DTSTART:20261120T090000') && ptKal.includes('DTEND:20261120T093000') && ptKal.includes('DTSTART;VALUE=DATE:20261127') && !ptKal.includes('DTSTART;VALUE=DATE:20261120'), ptKal.split('\r\n').filter((r) => r.startsWith('DTSTART')).slice(10, 14));
+  sant('länken bär passets egen tid', (await f.kor('location.hash'))?.includes('pt=2026-11-20-0900-0930'), await f.kor('location.hash'));
+  await f.tryck('[data-vanlig-tid="2026-11-20"]');
+  sant('Vanlig tid igen tar bort passets egen tid', !(await f.text('#pl-veckan .pl-passlista'))?.includes('Ny tid') && !(await f.kor('location.hash'))?.includes('pt='), await f.text('#pl-veckan .pl-passlista'));
   // Kopiera till dokumentationen och länken; kalenderfilen.
   await f.tryck('#pl-dokumentation');
   await vanta(100);

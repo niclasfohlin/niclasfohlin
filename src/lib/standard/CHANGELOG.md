@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.31.0, 2026-10-28
+
+- `plan.js`, ett enskilt pass tid (Niclas samma dag: "Vid flytta pass. Ska man inte kunna byta tid också på passet om önskas?", "Viktigt att det bara blir det pass man ändrar" och "att denna ändring syns överallt så alla läser från en rot"): valen har `passtider`, passets dag före en flytt och en början och ett slut, som `rentaPasstider` rensar och länken bär som `pt=2026-11-10-0915-0945`. `passetsTid` läser passets egen tid först och är roten för planens passlängd, `passensMinuter` och kalenderfilen (`o.passtider`). Tidernas rensning, kodning och läsning i länken står på ett ställe (`rentaTidpar`, `tiderILanken`, `tiderUrLanken`).
+
 ## 0.30.0, 2026-10-28
 
 - `plan.js`, genomgången av alla metoder med planen (sajtens K-596 och K-595): `delensTidI` skriver en dels tid som en plats i passet ("0–4") när delarna följer på varandra och annars som en längd med minuterna ("3–8 min"); `kalenderfil` tar `info.minuter` och säger i händelsen när ett pass behöver längre tid än planens pass; `passdagar` ger inte bytets vecka fler pass än dagarna före eller efter bytet; `rollensRad` tar också tabellens första kolumn i `kolumner`, så att radens namn eller villkor syns; `passetsBeskrivning` lägger en rad med `sist` efter delens text (`sist` på delen); `utanPlanensFalt` räknar uppföljningens `resultat` som planens fält; och `PLANERA` är 0.8.0.

@@ -1053,7 +1053,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.8.0', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.8.1', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -1379,7 +1379,7 @@ export function planera(mp, val) {
   // reflektionen hamnade i onsdagens pass på 30 minuter och inte i måndagens på 40).
   const tider = rentaTider(val.tider);
   /** @param {Pass} p */
-  const passetsLangd = (p) => { const t = tider[String(veckodag(passetsDag(p)))]; return t ? minuterAv(t[1]) - minuterAv(t[0]) : 0; };
+  const passetsLangd = (p) => { const t = passetsTid(val, p); return t ? minuterAv(t[1]) - minuterAv(t[0]) : 0; };
   /** @param {PlanVecka} v */
   const langstaIVeckan = (v) => [...veckansPass({ pass }, v)].sort((a, b) => passetsLangd(a) - passetsLangd(b) || (a.datum < b.datum ? -1 : 1)).at(-1)?.datum ?? sistaIVeckan(v);
   const iPasset = new Set((mp.skattningar ?? []).filter((s) => s.vem === 'eleverna').map((s) => s.rad));
@@ -2153,8 +2153,10 @@ export function kodaVal(val, extra = {}) {
   const f = Object.entries(val.flytta ?? {}).filter(([a, b]) => arDatum(a) && arDatum(b)).sort();
   if (f.length) delar.push(`f=${f.map(([a, b]) => `${a}~${b}`).join('.')}`);
   if (val.stryk?.length) delar.push(`x=${[...val.stryk].sort().join('.')}`);
-  const tider = Object.entries(rentaTider(val.tider)).sort();
-  if (tider.length) delar.push(`t=${tider.map(([d, [a, b]]) => `${d}-${a.replace(':', '')}-${b.replace(':', '')}`).join('.')}`);
+  // Veckodagarnas tider och passens egna, "1-0920-1000" och "2026-11-10-0915-0945" (tiderILanken).
+  const tider = tiderILanken(rentaTider(val.tider)), passtider = tiderILanken(rentaPasstider(val.passtider));
+  if (tider) delar.push(`t=${tider}`);
+  if (passtider) delar.push(`pt=${passtider}`);
   if (val.mal) delar.push(`mal=${encodeURIComponent(val.mal)}`);
   if (val.mitt) delar.push(`a=${val.mitt}`);
   if (val.slut) delar.push(`e=${val.slut}`);
@@ -2188,7 +2190,9 @@ export function lasVal(hash) {
   const mal = rentMal(p.get('mal'));
   const mitt = Number(p.get('a'));
   const slut = Number(p.get('e'));
-  const tider = rentaTider(Object.fromEntries(punkter('t').map((x) => x.match(/^([1-5])-(\d{2})(\d{2})-(\d{2})(\d{2})$/)).filter(Boolean).map((m) => [m[1], [`${m[2]}:${m[3]}`, `${m[4]}:${m[5]}`]])));
+  // Veckodagarnas tider och ett enskilt pass tid: dagen eller passets dag, början och slut (tiderUrLanken).
+  const tider = rentaTider(tiderUrLanken(punkter('t')));
+  const passtider = rentaPasstider(tiderUrLanken(punkter('pt')));
   // Dagarna före ett byte av dagar mitt i insatsen: bytets dag och dagarna före, "2026-11-26~24".
   const fore = rentaFore(punkter('db').map((x) => x.split('~')).map(([till, d, f]) => ({ till, dagar: String(d ?? '').split('').map(Number), ...(String(d ?? '').endsWith('t') ? { tak: true } : {}), fasta: Object.fromEntries(String(f ?? '').split(',').filter(Boolean).map((x) => x.split('!')).map(([dag, nr]) => [dag, Number(nr)])) })));
   /** @type {Val} */
@@ -2205,6 +2209,7 @@ export function lasVal(hash) {
     ...(Number.isInteger(borja) && borja > 1 && borja <= LANGSTA ? { borja } : {}),
     ...(Number.isInteger(minuter) && minuter >= 5 && minuter <= 240 ? { minuter } : {}),
     ...(Object.keys(tider).length ? { tider } : {}),
+    ...(Object.keys(passtider).length ? { passtider } : {}),
     ...(mal ? { mal } : {}),
     ...(Number.isInteger(mitt) && mitt >= 1 && mitt <= LANGSTA ? { mitt } : {}),
     // Slutet är numret på insatsens sista pass.
@@ -2221,18 +2226,47 @@ export function lasVal(hash) {
  * @param {unknown} tider
  * @returns {Record<string, [string, string]>}
  */
-export function rentaTider(tider) {
+export const rentaTider = (tider) => rentaTidpar(tider, (d) => /^[1-5]$/.test(d));
+/**
+ * Tiderna för enskilda pass, som läraren sätter när ett pass flyttas eller får en annan tid (Niclas 2026-10-28: "Vid flytta
+ * pass. Ska man inte kunna byta tid också på passet om önskas?", och "Viktigt att det bara blir det pass man ändrar"):
+ * passets dag innan det flyttades, som flyttens och den inställdas nyckel, och en början och ett slut. En tid som inte går
+ * att läsa tas bort.
+ * @param {unknown} passtider
+ * @returns {Record<string, [string, string]>}
+ */
+export const rentaPasstider = (passtider) => rentaTidpar(passtider, arDatum);
+/**
+ * Tider med en nyckel, veckodagen eller passets dag, och en början och ett slut: det som inte går att läsa, och en tid som
+ * slutar innan den börjar, tas bort.
+ * @param {unknown} tider @param {(d: string) => boolean} nyckel
+ * @returns {Record<string, [string, string]>}
+ */
+function rentaTidpar(tider, nyckel) {
   const klocka = (s) => (typeof s === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(s) ? s : null);
   /** @type {Record<string, [string, string]>} */
   const ut = {};
   for (const [d, par] of Object.entries(tider && typeof tider === 'object' ? tider : {})) {
     const a = klocka(Array.isArray(par) ? par[0] : null), b = klocka(Array.isArray(par) ? par[1] : null);
-    if (/^[1-5]$/.test(d) && a && b && a < b) ut[d] = [a, b];
+    if (nyckel(d) && a && b && a < b) ut[d] = [a, b];
   }
   return ut;
 }
-/** Passets tid: tiden för veckodagen det låg på innan det flyttades, eller ingen. @param {Val} val @param {Pass} p */
-export const passetsTid = (val, p) => rentaTider(val.tider)[String(veckodag(passetsDag(p)))];
+/**
+ * Tiderna i länken, "1-0920-1000.3-1300-1340" och "2026-11-10-0915-0945", och tillbaka: nyckeln är allt före de två
+ * klockslagen.
+ * @param {Record<string, [string, string]>} tider
+ */
+const tiderILanken = (tider) => Object.entries(tider).sort().map(([d, [a, b]]) => `${d}-${a.replace(':', '')}-${b.replace(':', '')}`).join('.');
+/** @param {string[]} punkterna @returns {Record<string, [string, string]>} */
+const tiderUrLanken = (punkterna) => Object.fromEntries(punkterna.map((x) => x.match(/^(.+)-(\d{2})(\d{2})-(\d{2})(\d{2})$/)).filter((m) => m !== null).map((m) => [m[1], [`${m[2]}:${m[3]}`, `${m[4]}:${m[5]}`]]));
+/**
+ * Passets tid, roten för allt som visar den (sidan, kalenderfilen, pdf:en, sammanfattningens längd och varianten efter
+ * passets längd): passets egen tid när läraren har satt en, annars tiden för veckodagen det låg på innan det flyttades,
+ * eller ingen (Niclas 2026-10-28: "att denna ändring syns överallt så alla läser från en rot").
+ * @param {Val} val @param {Pass} p
+ */
+export const passetsTid = (val, p) => rentaPasstider(val.passtider)[passetsDag(p)] ?? rentaTider(val.tider)[String(veckodag(passetsDag(p)))];
 /** "9.20" ur "09:20". @param {string} s */
 export const tidText = (s) => `${Number(s.slice(0, 2))}.${s.slice(3, 5)}`;
 /** "9.20–10.00". @param {[string, string]} par */
@@ -2312,17 +2346,19 @@ export function dagarText(val, plan) {
 }
 
 /**
- * Passens längd i minuter: varje dags klockslag när läraren har satt dem, och annars passets längd (Codex 2026-10-24:
+ * Passens längd i minuter: varje pass klockslag ur roten när läraren har satt dem, och annars passets längd (Codex 2026-10-24:
  * 9.20–10.00 gav "pass om 30 minuter"). Olika längder står var för sig, i storleksordning.
  * @param {Val} val
  * @param {number} standard passets längd utan klockslag
  * @returns {number[]}
  */
 export function passensMinuter(val, standard, plan) {
+  const langd = (t) => (t ? minuterAv(t[1]) - minuterAv(t[0]) : standard);
+  // Med planen räknas planens pass, också före ett byte av dagar (Codex 2026-10-25), med sin tid ur roten, så att ett pass
+  // med egen tid står med sin längd (passetsTid).
+  if (plan?.pass.length) return [...new Set(plan.pass.map((p) => langd(passetsTid(val, p))))].sort((a, b) => a - b);
   const tider = rentaTider(val.tider);
-  // Med planen räknas dagarna som planens pass har, också före ett byte av dagar (Codex 2026-10-25).
-  const dagar = plan?.pass.length ? plan.pass.map((p) => veckodag(passetsDag(p))) : val.dagar;
-  return [...new Set([...new Set(dagar)].map((d) => { const t = tider[String(d)]; return t ? minuterAv(t[1]) - minuterAv(t[0]) : standard; }))].sort((a, b) => a - b);
+  return [...new Set([...new Set(val.dagar)].map((d) => langd(tider[String(d)])))].sort((a, b) => a - b);
 }
 /** "30", eller "30 eller 40" när dagarna har olika långa pass. @param {number[]} minuter */
 export const minuterText = (minuter) => (minuter.length <= 1 ? minuter.join('') : `${minuter.slice(0, -1).join(', ')} eller ${minuter[minuter.length - 1]}`);
@@ -3022,7 +3058,7 @@ export function extraPassetsDag(plan, val) {
  * Kortskrivnings första pass på 25 minuter bokades på 15).
  * @param {{ titel: string, uppfoljning: { nar: string }[], fokus: (string | null)[], passet?: (p: Pass) => string, minuter?: (p: Pass) => number, extraPass?: { datum: string, text: string } }} info
  * @param {Plan} plan
- * @param {{ id: string, lank: (vecka?: number | 'fore') => string, namn?: string, nu: Date, tider?: Val['tider'], elever?: { namn: string, fran?: string }[] }} o
+ * @param {{ id: string, lank: (vecka?: number | 'fore') => string, namn?: string, nu: Date, tider?: Val['tider'], passtider?: Val['passtider'], elever?: { namn: string, fran?: string }[] }} o
  */
 export function kalenderfil(info, plan, o) {
   const stamp = o.nu.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
@@ -3038,7 +3074,9 @@ export function kalenderfil(info, plan, o) {
     rader.push('BEGIN:VEVENT', `UID:${uid}@niclasfohlin.se`, `DTSTAMP:${stamp}`, `SEQUENCE:${sekvens}`, ...nar,
       `SUMMARY:${kalText(titel)}`, `DESCRIPTION:${kalText(elever(datum) + text)}`, `URL:${lank}`, `TRANSP:${tid ? 'OPAQUE' : 'TRANSPARENT'}`, 'END:VEVENT');
   };
-  const tider = rentaTider(o.tider);
+  // Passets tid ur roten, med passens egna tider (passetsTid).
+  /** @type {Val} */
+  const tiderna = { start: '', dagar: [], langd: 0, tider: o.tider, passtider: o.passtider };
   const hel = (s) => { const t = s.replace(/\s+/g, ' ').trim(); return t.length <= 600 ? t : `${t.slice(0, 600).replace(/\s+\S*$/, '')} …`; };
   for (const p of plan.pass) {
     const v = plan.veckor[p.vecka - 1];
@@ -3046,7 +3084,7 @@ export function kalenderfil(info, plan, o) {
     // Metodens texter med planens veckor, som på sidan (veckornaIPlanen).
     const fokus = steg !== null && steg !== undefined && info.fokus[steg] ? `\n${hel(veckornaIPlanen(/** @type {string} */ (info.fokus[steg]), plan.borja))}` : '';
     const passet = info.passet ? veckornaIPlanen(info.passet(p), plan.borja) : '';
-    const tid = tider[String(veckodag(passetsDag(p)))];
+    const tid = passetsTid(tiderna, p);
     // Händelsen har passets tid som veckan, sammanfattningen och texten till åtgärdsprogrammet, och säger som rutan när
     // passet behöver längre tid (samma sak överallt 2026-10-28: kalendern bokade längre än planen sa).
     const behover = info.minuter?.(p) ?? 0;
@@ -3054,7 +3092,7 @@ export function kalenderfil(info, plan, o) {
     handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${hogstaPassnr(plan)}${vem}`, `Vecka ${planveckansNamn(plan, v).plan} i planen.${langre}${fokus}${passet ? `\n${passet}` : ''}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), tid);
   }
   // En versions extra pass före pass 1, med passets klockslag den dagen (extraPassetsDag).
-  if (info.extraPass) handelse(`${o.id}-extra`, info.extraPass.datum, `${info.titel}: det extra passet före pass 1${vem}`, `${hel(info.extraPass.text)}\nFöre första passet i planen: ${o.lank('fore')}`, o.lank('fore'), tider[String(veckodag(info.extraPass.datum))]);
+  if (info.extraPass) handelse(`${o.id}-extra`, info.extraPass.datum, `${info.titel}: det extra passet före pass 1${vem}`, `${hel(info.extraPass.text)}\nFöre första passet i planen: ${o.lank('fore')}`, o.lank('fore'), rentaTider(o.tider)[String(veckodag(info.extraPass.datum))]);
   for (const u of plan.uppfoljning.filter((x) => !x.period)) u.tillfallen.forEach((t, i) => {
     const fore = t.vecka === 0;
     // Raden heter som på sidan, Efter insatsen för den första efter insatsen (buggjakten 2026-10-25: kalendern sa "efter sista
@@ -3077,7 +3115,7 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'nastSista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {PassensNar | { typ: 'minuter', minuter: number } | { typ: 'vecka', plats: number | 'sista' | 'ovriga', veckor: { fran: number, till: number } } | { typ: 'sista', veckor: { fran: number, till: number } }} VariantensNar
  * @typedef {{ nr?: number, sista?: boolean, nastSista?: boolean, vecka?: number, plats?: number, sistIVeckan?: boolean, minuter?: number }} PassetsLage
- * @typedef {{ start: string, dagar: number[], langd: number, lektioner?: number[], niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
+ * @typedef {{ start: string, dagar: number[], langd: number, lektioner?: number[], niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, passtider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
  * @typedef {{ nr: number, datum: string, vecka: number, steg?: number | null, flyttatFran?: string }} Pass
  * @typedef {{ nr: number, innehall: number, igen: boolean, mandag: string, vecka: { ar: number, vecka: number }, pass: number[], bortfall: { datum: string, varfor: 'helgdag' | 'installt', namn?: string }[], steg?: number | null }} PlanVecka
  * @typedef {{ typ: 'nedat', veckor: number } | { typ: 'under', grans: number, veckor: number } | { typ: 'minst', grans: number, veckor: number }} Regel

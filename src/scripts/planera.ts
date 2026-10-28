@@ -17,7 +17,7 @@
 import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTidI, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsLangder, passetsVisadeRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
-  bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
+  bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
@@ -27,6 +27,7 @@ import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANG
 import type { PlanLektion } from '../lib/insatsplan';
 import { idagLokalt, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
+import { tidrad } from './tidrad';
 import { elevPdf, gruppPdf } from './planpdf';
 import { iAppen, vagenUt, vagenUtText, webblasaren } from './webblasaren';
 
@@ -267,9 +268,9 @@ function renderaVal() {
 // och de ser likadana ut i alla telefoner (Niclas 2026-10-24: "en väljare som bara klarar korrekta tider"). Slutet går
 // bara att välja efter början. En tid ur en länk som inte står i listan får stå med, så att den syns.
 const KLOCKSLAG = Array.from({ length: 11 * 12 + 1 }, (_, i) => klockslag(7 * 60 + i * 5));
-const tidval = (valt: string | undefined, efter?: string) => {
+const tidval = (valt: string | undefined, efter?: string, tom: string | null = 'Ingen tid') => {
   const lista = [...new Set([...KLOCKSLAG, ...(valt ? [valt] : [])])].sort().filter((k) => (efter ? k > efter : k < KLOCKSLAG[KLOCKSLAG.length - 1]));
-  return `${efter ? '' : '<option value="">Ingen tid</option>'}${lista.map((k) => `<option value="${k}"${k === valt ? ' selected' : ''}>${tidText(k)}</option>`).join('')}`;
+  return `${efter || tom === null ? '' : `<option value="">${tom}</option>`}${lista.map((k) => `<option value="${k}"${k === valt ? ' selected' : ''}>${tidText(k)}</option>`).join('')}`;
 };
 const slutval = (fran: string | undefined, till: string | undefined) => (fran ? tidval(till, fran) : '<option value="">–</option>');
 
@@ -1696,6 +1697,8 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
  * bockade. Passets innehåll följer platsen i veckan, så en sådan flytt skulle skriva om vad ett hållet pass innehöll
  * (verifieringen 2026-10-28: pass 6 flyttat till måndagen, som hade varit, blev Dag 1, och tisdagens pass 5 blev Dag 2).
  */
+/** Valen utan passets egen tid, för Flytta tillbaka, Vanlig tid igen och Ställ in (passtider). */
+const utanEgenTid = (dag: string) => { const pt = { ...rentaPasstider(aktiv.val.passtider) }; delete pt[dag]; aktiv.val.passtider = pt; };
 function rubbatPass(passen: Pass[], ursprung: string, ny: string): Pass | undefined {
   const ordning = (lista: Pass[]) => iDatumordning(lista).map((p) => p.nr);
   const fore = ordning(passen);
@@ -1832,13 +1835,16 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
       const veckanHarBorjat = harBorjatVecka(mandagen(p.datum));
       const senare = aktiv.folj && !ar && !veckanHarBorjat ? `<span class="pl-bock senare" title="Går att bocka från ${esc(dagText(mandagen(p.datum)))}"></span>` : '<span></span>';
       const bock = aktiv.folj && (veckanHarBorjat || ar) ? bockKnapp(dag, `Pass ${p.nr} blev av`) : senare;
-      const info = [passetsTidText(p), p.flyttatFran ? `Flyttat från ${dagText(p.flyttatFran)}` : ''].filter(Boolean).join(' · ');
+      // Ett pass med egen tid säger det, så att läraren ser att bara det passet har den (passtider, Niclas 2026-10-28).
+      const egenTid = !!rentaPasstider(aktiv.val.passtider)[dag];
+      const info = [passetsTidText(p), p.flyttatFran ? `Flyttat från ${dagText(p.flyttatFran)}` : egenTid ? 'Ny tid' : ''].filter(Boolean).join(' · ');
       const roll = passetFor(p).namn;
       const iRutan = rutansPass?.nr === p.nr;
       const visa = roll ? (iRutan ? `<span class="pl-passroll">${esc(roll)}</span>` : `<button type="button" class="pl-textknapp pl-passroll" data-visa-pass="${p.nr}" aria-label="Visa pass ${p.nr}, ${esc(roll)}, i rutan">${esc(roll)}</button>`) : '';
       // Ett flyttat pass som inte har blivit av går att flytta tillbaka vid passet, som ett inställt pass ångras vid sin dag
       // (verifieringen 2026-10-28: Ångra stod bara en stund i beskedet).
-      const tillbaka = p.flyttatFran && !ar ? `<button type="button" class="pl-textknapp" data-tillbaka="${esc(p.flyttatFran)}">Flytta tillbaka</button>` : '';
+      // Ett pass med bara en ny tid får tillbaka veckodagens tid på samma sätt.
+      const tillbaka = p.flyttatFran && !ar ? `<button type="button" class="pl-textknapp" data-tillbaka="${esc(p.flyttatFran)}">Flytta tillbaka</button>` : egenTid && !ar ? `<button type="button" class="pl-textknapp" data-vanlig-tid="${esc(dag)}">Vanlig tid igen</button>` : '';
       return { datum: p.datum, html: `<li class="${p.datum === idag ? 'idag' : ''}${ar ? ' gjort' : ''}${iRutan && roll ? ' i-rutan' : ''}"><span class="pl-dag">${esc(dagKort(p.datum))}<small>Pass ${p.nr}${p.datum === idag ? ' · i dag' : ''}</small></span><span class="pl-passinfo">${visa}${info ? `<span>${esc(info)}</span>` : ''}${tillbaka}</span>${bock}${narvaro}</li>` };
     }),
     ...v.bortfall.map((b) => ({ datum: b.datum, html: `<li class="bort"><span class="pl-dag">${esc(dagKort(b.datum))}<small>Inget pass</small></span><span class="pl-passinfo">${b.varfor === 'helgdag' ? esc(stor(b.namn ?? 'helgdag')) : 'Inställt'}</span>${b.varfor === 'installt' ? `<button type="button" class="pl-textknapp" data-angra="${esc(b.datum)}">Ångra</button>` : '<span></span>'}</li>` })),
@@ -1855,13 +1861,16 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   // är en dag som inte ändrar platsen för ett pass som har varit (verifieringen 2026-10-28: förslaget var måndagen, som
   // hade varit, när inget pass fanns senare i veckan).
   const nyaDagar = [0, 1, 2, 3, 4].map((i) => plusDagar(v.mandag, i)).filter((d) => d >= idag && !helgdag(d));
-  const forslagDag = forslagFlytta ? (nyaDagar.find((d) => d > forslagFlytta.datum) ?? nyaDagar.find((d) => d !== forslagFlytta.datum && !rubbatPass(passen, passetsDag(forslagFlytta), d))) : undefined;
+  // Dagen är passets egen när den inte har varit, så att det räcker att byta tiden (Niclas 2026-10-28: "Ska man inte kunna
+  // byta tid också på passet om önskas?"), och annars en dag som inte ändrar platsen för ett pass som har varit.
+  const forslagDag = forslagFlytta ? (nyaDagar.includes(forslagFlytta.datum) ? forslagFlytta.datum : nyaDagar.find((d) => !rubbatPass(passen, passetsDag(forslagFlytta), d))) : undefined;
+  const forslagTid = forslagFlytta ? passetsTid(aktiv.val, forslagFlytta) : undefined;
   const passknappar = [
     obockade.length >= 2 ? '<button type="button" class="knapp sekundar liten" data-gor="alla">Bocka veckans pass till och med i dag</button>' : '',
     passen.length ? '<button type="button" class="knapp sekundar liten" data-gor="flytta" aria-expanded="false" aria-controls="pl-flytta">Flytta eller ställ in ett pass</button>' : '',
   ].filter(Boolean);
   const alla = passknappar.length ? `<p class="pl-andra-knappar">${passknappar.join('')}</p>` : '';
-  const flyttaForm = !passen.length ? '' : `<div class="pl-flytta" id="pl-flytta" hidden><label class="pl-etikett" for="pl-flytta-pass">Passet</label><select class="pl-falt" id="pl-flytta-pass">${passen.map((p) => `<option value="${esc(passetsDag(p))}"${p.nr === forslagFlytta?.nr ? ' selected' : ''}>Pass ${p.nr}, ${esc(dagText(p.datum))}</option>`).join('')}</select>${nyaDagar.length ? `<label class="pl-etikett" for="pl-flytta-dag">Ny dag</label><select class="pl-falt" id="pl-flytta-dag">${nyaDagar.map((d) => `<option value="${d}"${d === forslagDag ? ' selected' : ''}>${esc(stor(dagText(d)))}</option>`).join('')}</select>` : ''}<p class="pl-andra-knappar">${nyaDagar.length ? `<button type="button" class="knapp liten" data-gor="flytta-klar" ${goat('flytta', 'ett pass flyttat')}>Flytta passet</button>` : ''}<button type="button" class="knapp sekundar liten" data-gor="stall-in">Ställ in passet</button></p></div>`;
+  const flyttaForm = !passen.length ? '' : `<div class="pl-flytta" id="pl-flytta" hidden><label class="pl-etikett" for="pl-flytta-pass">Passet</label><select class="pl-falt" id="pl-flytta-pass">${passen.map((p) => `<option value="${esc(passetsDag(p))}"${p.nr === forslagFlytta?.nr ? ' selected' : ''}>Pass ${p.nr}, ${esc(dagText(p.datum))}</option>`).join('')}</select>${nyaDagar.length ? `<label class="pl-etikett" for="pl-flytta-dag">Dag</label><select class="pl-falt" id="pl-flytta-dag">${nyaDagar.map((d) => `<option value="${d}"${d === forslagDag ? ' selected' : ''}>${esc(stor(dagText(d)))}</option>`).join('')}</select><fieldset class="pl-rad pl-tider pl-flytta-tid"><legend class="pl-etikett">Tid, bara för det här passet</legend><div class="pl-tidrad">${tidrad('pl-flytta-fran', 'pl-flytta-till', tidval(forslagTid?.[0], undefined, forslagTid ? null : 'Ingen tid'), slutval(forslagTid?.[0], forslagTid?.[1]), !forslagTid)}</div></fieldset>` : ''}<p class="pl-andra-knappar">${nyaDagar.length ? `<button type="button" class="knapp liten" data-gor="flytta-klar" ${goat('flytta', 'ett pass flyttat')}>Ändra passet</button>` : ''}<button type="button" class="knapp sekundar liten" data-gor="stall-in">Ställ in passet</button></p></div>`;
   // Hjälpraden står tills läraren har bockat ett första pass. I en vecka som inte har börjat säger den när passen går att
   // bocka, och den står där varje gång.
   const veckanBorjat = passen.some((p) => mandagen(p.datum) <= idag);
@@ -2204,9 +2213,10 @@ $('pl-veckan').addEventListener('click', (e) => {
     const veckan = plan.veckor.find((x) => veckansPass(plan, x).some((p) => passetsDag(p) === fran));
     const rubbat = veckan && rubbatPass(veckansPass(plan, veckan), fran, fran);
     if (rubbat) { visaBesked(rubbatText(rubbat)); return; }
-    andra(() => { const f = { ...(aktiv.val.flytta ?? {}) }; delete f[fran]; aktiv.val.flytta = f; }, `Passet är tillbaka på ${dagText(fran)}.`, true);
+    andra(() => { const f = { ...(aktiv.val.flytta ?? {}) }; delete f[fran]; aktiv.val.flytta = f; utanEgenTid(fran); }, `Passet är tillbaka på ${dagText(fran)}.`, true);
     return;
   }
+  if (d.vanligTid) { const dag = d.vanligTid; andra(() => utanEgenTid(dag), 'Passet har veckodagens tid igen.', true); return; }
   if (d.vy) { tillVy(d.vy === 'nu' ? undefined : d.vy === 'efter' || d.vy === 'fore' ? d.vy : Number(d.vy)); return; }
   // Ett annat pass i veckan i rutan, och tillbaka till nästa pass.
   if (d.visaPass !== undefined) {
@@ -2238,7 +2248,7 @@ $('pl-veckan').addEventListener('click', (e) => {
   else if (gor === 'flytta') { const ruta = $('pl-flytta'); ruta.hidden = !ruta.hidden; knapp.setAttribute('aria-expanded', String(!ruta.hidden)); if (!ruta.hidden) $('pl-flytta-pass').focus(); }
   else if (gor === 'flytta-klar' || gor === 'stall-in') {
     const ursprung = $<HTMLSelectElement>('pl-flytta-pass').value;
-    if (gor === 'stall-in') { andra(() => { const f = { ...(aktiv.val.flytta ?? {}) }; delete f[ursprung]; aktiv.val.flytta = f; aktiv.val.stryk = [...new Set([...(aktiv.val.stryk ?? []), ursprung])]; }, 'Passet är inställt.', true); return; }
+    if (gor === 'stall-in') { andra(() => { const f = { ...(aktiv.val.flytta ?? {}) }; delete f[ursprung]; aktiv.val.flytta = f; utanEgenTid(ursprung); aktiv.val.stryk = [...new Set([...(aktiv.val.stryk ?? []), ursprung])]; }, 'Passet är inställt.', true); return; }
     const ny = $<HTMLInputElement>('pl-flytta-dag').value;
     if (!arDatum(ny)) { visaBesked('Välj den nya dagen.'); return; }
     // Passet flyttas inom sin vecka, så att veckans innehåll och numren står kvar (fältets gränser går att skriva förbi).
@@ -2247,7 +2257,22 @@ $('pl-veckan').addEventListener('click', (e) => {
     if (ny < idag && ny !== ursprung) { visaBesked('Den dagen har varit. Bocka passet om det blev av, eller välj en senare dag.'); return; }
     const rubbat = rubbatPass(veckansPass(plan, v), ursprung, ny);
     if (rubbat) { visaBesked(rubbatText(rubbat)); return; }
-    andra(() => { aktiv.val.flytta = { ...(aktiv.val.flytta ?? {}), [ursprung]: ny }; if (ny === ursprung) delete aktiv.val.flytta![ursprung]; }, `Passet flyttas till ${dagText(ny)}.`, true);
+    // Tiden gäller bara det här passet (passtider, Niclas 2026-10-28: "Viktigt att det bara blir det pass man ändrar"). En tid
+    // som är veckodagens sparas inte, så att passet följer veckodagen när den ändras.
+    const pass = veckansPass(plan, v).find((p) => passetsDag(p) === ursprung);
+    const fran = $<HTMLSelectElement>('pl-flytta-fran').value, till = $<HTMLSelectElement>('pl-flytta-till').value;
+    const veckodagens = rentaTider(aktiv.val.tider)[String(veckodag(ursprung))];
+    const vald: [string, string] | undefined = fran && till && till > fran ? [fran, till] : undefined;
+    const egen = vald && vald.join() !== veckodagens?.join() ? vald : undefined;
+    const tidNu = rentaPasstider(aktiv.val.passtider)[ursprung];
+    const nyDag = ny !== (pass?.datum ?? ursprung), nyTid = egen?.join() !== tidNu?.join();
+    if (!nyDag && !nyTid) { visaBesked('Välj en annan dag eller en annan tid för passet.'); return; }
+    const klockan = vald ? ` kl. ${tidsspann(vald)}` : '';
+    andra(() => {
+      aktiv.val.flytta = { ...(aktiv.val.flytta ?? {}), [ursprung]: ny };
+      if (ny === ursprung) delete aktiv.val.flytta![ursprung];
+      if (egen) aktiv.val.passtider = { ...rentaPasstider(aktiv.val.passtider), [ursprung]: egen }; else utanEgenTid(ursprung);
+    }, nyDag ? `Passet flyttas till ${dagText(ny)}${klockan}.` : egen ? `Passet är nu${klockan}, bara den dagen.` : 'Passet har veckodagens tid igen.', true);
   }
 });
 // Fälten i veckan: det läraren skriver står i planen direkt och sparas en stund efter sista tangenten, utan att veckan
@@ -2256,6 +2281,23 @@ let faltTimer = 0;
 $('pl-veckan').addEventListener('change', (e) => {
   const falt = e.target;
   if (falt instanceof HTMLSelectElement && falt.hasAttribute('data-borja')) { valjBorja(falt); document.getElementById('pl-borja-fore')?.focus({ preventScroll: true }); }
+  // Flytta ett pass: dagen och tiden följer passet som väljs, och slutet följer början med passets längd.
+  if (falt instanceof HTMLSelectElement && (falt.id === 'pl-flytta-pass' || falt.id === 'pl-flytta-fran')) {
+    const pass = plan.pass.find((p) => passetsDag(p) === $<HTMLSelectElement>('pl-flytta-pass').value);
+    const franFalt = $<HTMLSelectElement>('pl-flytta-fran'), tillFalt = $<HTMLSelectElement>('pl-flytta-till');
+    if (falt.id === 'pl-flytta-pass') {
+      const t = pass ? passetsTid(aktiv.val, pass) : undefined;
+      franFalt.innerHTML = tidval(t?.[0], undefined, t ? null : 'Ingen tid');
+      tillFalt.innerHTML = slutval(t?.[0], t?.[1]);
+      tillFalt.disabled = !t;
+      const dagFalt = document.getElementById('pl-flytta-dag') as HTMLSelectElement | null;
+      if (dagFalt && pass && [...dagFalt.options].some((o) => o.value === pass.datum)) dagFalt.value = pass.datum;
+    } else {
+      const fran = franFalt.value;
+      tillFalt.innerHTML = slutval(fran || undefined, fran ? plusMinuter(fran, pass ? passetsMinuter(pass) : minuter()) : undefined);
+      tillFalt.disabled = !fran;
+    }
+  }
   // En sparad länk ger knappen i passet när läraren lämnar fältet (K-559).
   if (falt instanceof HTMLInputElement && falt.dataset.lank) { window.clearTimeout(faltTimer); faltTimer = 0; sparaTyst(); renderaVeckan(); }
 });
@@ -2829,7 +2871,7 @@ async function kopieraLanken() {
 $('pl-lank').addEventListener('click', () => void kopieraLanken());
 $('pl-kalender').addEventListener('click', () => {
   const extra = extraPassetsDatum();
-  const text = kalenderfil({ ...(extra && data.extraPass ? { extraPass: { datum: extra, text: [data.extraPass.rubrik, ...(data.extraPass.delar ?? []).map((d, _i, alla) => `${d.fas} ${delensTidI(d.tid, alla)}: ${d.vad}`), data.extraPass.delar?.length ? '' : data.extraPass.fore ?? ''].filter(Boolean).join('\n') } } : {}), titel: metodensNamn(), uppfoljning: data.uppfoljning.rader, fokus: (data.progression?.rader ?? []).map((r) => r.fokus), passet: passetIKalendern, minuter: (p) => iPassetsLektion(p, () => passetBehover(p)) }, plan, { id: aktiv.id, lank, namn: aktiv.namn || undefined, nu: new Date(), tider: aktiv.val.tider, elever: aktiv.foljd.elever });
+  const text = kalenderfil({ ...(extra && data.extraPass ? { extraPass: { datum: extra, text: [data.extraPass.rubrik, ...(data.extraPass.delar ?? []).map((d, _i, alla) => `${d.fas} ${delensTidI(d.tid, alla)}: ${d.vad}`), data.extraPass.delar?.length ? '' : data.extraPass.fore ?? ''].filter(Boolean).join('\n') } } : {}), titel: metodensNamn(), uppfoljning: data.uppfoljning.rader, fokus: (data.progression?.rader ?? []).map((r) => r.fokus), passet: passetIKalendern, minuter: (p) => iPassetsLektion(p, () => passetBehover(p)) }, plan, { id: aktiv.id, lank, namn: aktiv.namn || undefined, nu: new Date(), tider: aktiv.val.tider, passtider: aktiv.val.passtider, elever: aktiv.foljd.elever });
   laddaNer(new Blob([vanligText(text)], { type: 'text/calendar;charset=utf-8' }), filnamnet('kalender', { vem: aktiv.namn, metod: data.id, datum: idag }));
   kvittera($('pl-kalender'), 'Hämtad');
   visaBesked('Kalenderfilen är hämtad. Öppna den, så läggs passen och uppföljningen i kalendern. I Google Kalender läggs filen in på datorn.');
