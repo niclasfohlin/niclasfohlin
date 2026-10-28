@@ -11,6 +11,7 @@
 //   ladda | tillbaka | adress laddar om sidan, går tillbaka i historiken, eller skriver adressen
 //   telefon | dator           skärmen som en iPhone (390 × 844), som sidan också ser som en mobil, så att en pdf hämtas och
 //                             inte skrivs ut, eller en dator (1280 × 900)
+//   facebook                  skärmen som en iPhone med sidan i Facebooks egen webbläsare; telefon går tillbaka till Safari
 //   datum <ÅÅÅÅ-MM-DD> | datum av   låtsas att det är den dagen (sidan laddas om), eller tillbaka till i dag
 //   text [del]                sidans synliga text, eller bara den del vars rubrik eller etikett innehåller orden
 //   knappar                   det som går att trycka på, skriva i eller välja, synligt på sidan, numrerat, länkarna med adress
@@ -82,8 +83,10 @@ async function serve(port, bildmapp) {
   };
   await sattSkript();
   const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
+  // Facebooks egen webbläsare i iPhone, som saknar Safari i namnet (src/scripts/webblasaren.ts).
+  const FACEBOOK = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 [FBAN/FBIOS;FBAV/485.0.0.43.70;FBLC/sv_SE]';
   let skarm = 'telefon';
-  const telefon = async () => { skarm = 'telefon'; await skicka('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await skicka('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 }); await skicka('Network.setUserAgentOverride', { userAgent: IPHONE, userAgentMetadata: { brands: [], platform: 'iOS', platformVersion: '18.0', architecture: '', model: 'iPhone', mobile: true } }); };
+  const telefon = async (ua = IPHONE) => { skarm = 'telefon'; await skicka('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await skicka('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 }); await skicka('Network.setUserAgentOverride', { userAgent: ua, userAgentMetadata: { brands: [], platform: 'iOS', platformVersion: '18.0', architecture: '', model: 'iPhone', mobile: true } }); };
   const dator = async () => { skarm = 'dator'; await skicka('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false }); await skicka('Emulation.setTouchEmulationEnabled', { enabled: false }); await skicka('Network.setUserAgentOverride', { userAgent: '' }); };
   await telefon();
   const oppna = async (url) => { const klar = new Promise((r) => { laddad = r; }); await skicka('Page.navigate', { url }); await Promise.race([klar, vanta(20000)]); await vanta(500); };
@@ -146,6 +149,7 @@ ${await efter()}`; }
 ${await efter()}`; }
       case 'adress': return kor('location.href');
       case 'telefon': await telefon(); await kor('location.reload()'); await vanta(1500); return 'Skärmen är en iPhone, 390 × 844.';
+      case 'facebook': await telefon(FACEBOOK); await kor('location.reload()'); await vanta(1500); return 'Skärmen är en iPhone med sidan i Facebooks egen webbläsare, 390 × 844. telefon går tillbaka till Safari.';
       case 'dator': await dator(); await kor('location.reload()'); await vanta(1500); return 'Skärmen är en dator, 1280 × 900.';
       case 'datum': datum = a[0] === 'av' ? null : a[0]; await sattSkript(); await kor('location.reload()'); await vanta(1500); return datum ? `Det är nu ${datum}, kl. 9 (sidan är omladdad).` : 'Datumet är dagens igen.';
       case 'text': {

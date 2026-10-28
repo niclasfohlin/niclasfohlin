@@ -11,6 +11,7 @@ node "{{skript}}" {{port}} <kommando> [argument]
 | `oppna <adress>` | öppnar en sida |
 | `ladda`, `tillbaka`, `adress` | laddar om, går tillbaka i historiken, eller visar adressen |
 | `telefon`, `dator` | skärmen som en iPhone eller en dator (telefon från början) |
+| `facebook` | skärmen som en iPhone med sidan i Facebooks egen webbläsare, som en lärare som har kommit från ett inlägg; `telefon` går tillbaka till Safari |
 | `datum <ÅÅÅÅ-MM-DD>`, `datum av` | låtsas att det är en annan dag (sidan laddas om) |
 | `text`, `text <rubrik>` | sidans text, eller en del av den |
 | `knappar` | det som går att trycka på, skriva i eller välja, numrerat, med adressen när det är en länk |
