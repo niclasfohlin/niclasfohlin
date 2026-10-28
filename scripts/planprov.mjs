@@ -2204,7 +2204,10 @@ try {
   sant('inga fel i konsolen utan lagring', !g.undantag.length, g.undantag);
   g.stang();
   // En apps egen webbläsare (K-510): beskedet har vägen ut först, på Android till telefonens webbläsare eller appen Stöd och på
-  // iPhone till Safari, och Kopiera länken efter. Kopiera länken kopierar sidans adress, och beskedet ryms i 320 punkter.
+  // iPhone till Safari, och Kopiera länken efter. Vägen ut och Kopiera länken fortsätter där läraren är: utan val till sidan
+  // från början, och med val till en ny plan med valen (Niclas 2026-10-28: "blir nästa vy inte där jag planerar, utan
+  // datumet blir som valt"). Beskedet ryms i 320 punkter.
+  const vagen = {};
   for (const [namn, ua] of [['Android', 'Mozilla/5.0 (Linux; Android 14; SM-S911B Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/130.0.6723.58 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/485.0.0.43.70;]'], ['iPhone', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 [FBAN/FBIOS;FBAV/485.0.0.43.70;FBLC/sv_SE]']]) {
     const fb = await flik();
     await fb.ua(ua);
@@ -2219,12 +2222,63 @@ try {
     // Det sidan ser av webbläsaren står längst ned, för felsökning (Niclas 2026-10-25, om LinkedIns webbläsare på Android).
     sant('i en apps webbläsare: felsökningen säger namnet och vad sidan känner igen', (await fb.kor(`document.getElementById('pl-teknik').textContent`))?.startsWith(`Webbläsarens namn: ${ua}.`) && (await fb.kor(`document.getElementById('pl-teknik').textContent`))?.includes('Sidan känner igen: Facebooks egen webbläsare.'), await fb.kor(`document.getElementById('pl-teknik').textContent`));
     await fb.bild(`facebook-${namn.toLowerCase()}`, true);
+    // Vägen ut görs om vid trycket. Provet trycker och hindrar att sidan lämnas.
+    const vagenUtNu = async () => {
+      await fb.kor(`document.addEventListener('click', (e) => e.preventDefault(), { once: true })`);
+      await fb.kor(`document.getElementById('pl-ut').click()`);
+      return (await fb.kor(`document.getElementById('pl-ut').getAttribute('href')`)) ?? '';
+    };
+    // En ny plan, också när fliken har sparade planer för metoden.
+    await fb.kor(`document.querySelector('[data-plan="ny"]')?.click(); true`);
+    await vanta(200);
+    const forvalet = (await fb.kor(`document.getElementById('pl-start').value`)) ?? '';
+    const utanVal = await vagenUtNu();
     await fb.tryck('#pl-ut-kopiera');
     await vanta(200);
-    sant(`i Facebooks webbläsare på ${namn}: Kopiera länken kopierar planens länk med valen`, (await fb.kor('window.__kopierat'))?.startsWith(`${PLAN}#s=`), await fb.kor('window.__kopierat'));
+    const utanValKopia = (await fb.kor('window.__kopierat')) ?? '';
+    await fb.kor(`(() => { document.getElementById('pl-andra').open = true; const i = document.getElementById('pl-start'); i.value = '2026-11-30'; i.dispatchEvent(new Event('change')); return true; })()`);
+    await vanta(200);
+    const medVal = await vagenUtNu();
+    await fb.tryck('#pl-ut-kopiera');
+    await vanta(200);
+    const kopierat = (await fb.kor('window.__kopierat')) ?? '';
+    vagen[namn] = { forvalet, utanVal, utanValKopia, medVal, kopierat };
     sant(`i Facebooks webbläsare på ${namn}: inga fel i konsolen`, !fb.undantag.length, fb.undantag);
     fb.stang();
+    if (namn !== 'Android') continue;
+    // I telefonens webbläsare är planen en ny plan med valen, som i appens webbläsare, och inte en plan ur en länk, också när
+    // webbläsaren har en sparad plan för metoden. Valen står kvar när telefonen laddar om sidan, tills planen sparas (Codex
+    // 2026-10-28).
+    const vanlig = await flik();
+    await vanlig.oppna(PLAN);
+    if (await vanlig.kor(`!document.getElementById('pl-spara').hidden`)) { await vanlig.tryck('#pl-spara'); await vanta(300); }
+    const harSparad = await vanlig.kor(`JSON.parse(localStorage.getItem('insatser') ?? '{"planer":[]}').planer.some((p) => p.metod === 'textsamtal-i-grupp')`);
+    const lageNu = () => vanlig.kor(`({ start: document.getElementById('pl-start').value, adress: location.hash, besked: document.getElementById('pl-besked').hidden ? '' : document.getElementById('pl-besked').textContent, veckan: document.getElementById('pl-veckan').hidden, andra: document.getElementById('pl-andra').open })`);
+    const medId = (adress) => /[#&]p=/.test(adress);
+    await vanlig.oppna('about:blank');
+    await vanlig.oppna(utanValKopia);
+    const utan = await lageNu();
+    sant('utan val öppnar vägen ut en ny plan med förvalet, också när webbläsaren har en sparad plan för metoden', harSparad && utan?.start === forvalet && !utan.besked.includes('kommer från en länk') && utan.veckan === true && utan.andra === true, { harSparad, utan, forvalet });
+    await vanlig.oppna('about:blank');
+    await vanlig.oppna(kopierat);
+    const med = await lageNu();
+    sant('planen som togs med ur en apps webbläsare öppnas som en ny plan med valen, utan beskedet om en länk', med?.start === '2026-11-30' && med.adress.includes('s=2026-11-30') && med.adress.includes('ny=1') && !medId(med.adress) && !med.besked.includes('kommer från en länk') && med.veckan === true && med.andra === true, med);
+    await vanlig.bild('vagen-ut-ny-plan-med-valen', true);
+    await vanlig.kor('location.reload()');
+    await vanta(1500);
+    sant('valen som togs med står kvar när sidan laddas om före Spara planen', (await vanlig.kor(`document.getElementById('pl-start').value`)) === '2026-11-30', await vanlig.kor('location.href'));
+    await vanlig.tryck('#pl-spara');
+    await vanta(300);
+    const sparadAdress = (await vanlig.kor('location.hash')) ?? '';
+    sant('en plan som togs med och sparas får planens vanliga länk', sparadAdress.includes('s=2026-11-30') && medId(sparadAdress) && !sparadAdress.includes('ny=1'), sparadAdress);
+    sant('och utan fel i konsolen', !vanlig.undantag.length, vanlig.undantag);
+    vanlig.stang();
   }
+  // Vägen ut och Kopiera länken i Android och iPhone: en ny plan med valen och märket ny, utan id, också med förvalet.
+  const sidan = new URL(PLAN);
+  const nyPlan = (adress, start) => adress.includes(`#s=${start}&`) && adress.includes('&ny=1') && !adress.includes('&p=');
+  sant('utan val leder vägen ut till en ny plan med förvalet, som sidan från början', ['Android', 'iPhone'].every((n) => vagen[n] && /^\d{4}-\d{2}-\d{2}$/.test(vagen[n].forvalet) && nyPlan(vagen[n].utanVal, vagen[n].forvalet) && vagen[n].utanVal.startsWith(n === 'Android' ? `intent://${sidan.host}${sidan.pathname}#s=` : `x-safari-https://${sidan.host}${sidan.pathname}#s=`) && vagen[n].utanValKopia.startsWith(`${PLAN}#s=${vagen[n].forvalet}&`) && vagen[n].utanValKopia.endsWith('&ny=1')), vagen);
+  sant('med ett val tar vägen ut med valen som en ny plan', ['Android', 'iPhone'].every((n) => vagen[n] && nyPlan(vagen[n].medVal, '2026-11-30') && vagen[n].kopierat.startsWith(`${PLAN}#s=2026-11-30&`) && vagen[n].kopierat.endsWith('&ny=1')), vagen);
 
   // ---- Efter insatsen ----
   // Måndag 14 december, efter planens sista pass. Sista veckan har metodens uppföljning efter och utvärderingen, och

@@ -69,7 +69,8 @@ const uppfNamn = (rad: number) => uppfoljningensNamn(plan, info(), rad);
 
 type HelFoljd = Required<Omit<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa'>> & Pick<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa'>;
 const tomFoljd = (): HelFoljd => ({ gjorda: [], elever: [], franvaro: {}, vecka: {}, skattning: {}, resultat: {} });
-interface Aktiv { id: string; namn: string; val: Val; folj: boolean; foljd: HelFoljd; sparad: boolean; franLank: boolean; uppdaterad?: string; kopia?: string }
+// tagenMed: en ny plan som läraren tog med ur en apps webbläsare (vagensAdress), vars adress bär valen tills den sparas.
+interface Aktiv { id: string; namn: string; val: Val; folj: boolean; foljd: HelFoljd; sparad: boolean; franLank: boolean; uppdaterad?: string; kopia?: string; tagenMed?: boolean }
 // Veckorna med ett värde i metodens egna skattningar (K-559), som räknas som infört, som skattningarna mot målet.
 const mattVeckor = () => Object.values(aktiv.foljd.matt ?? {}).flatMap((v) => Object.keys(v ?? {}));
 // En metod med en egen skattning av gruppen, som Gruppstärkande aktiviteters Lärarens skattning, följer insatsen från början,
@@ -78,6 +79,8 @@ const mattVeckor = () => Object.values(aktiv.foljd.matt ?? {}).flatMap((v) => Ob
 const foljerFranBorjan = () => (data.skattningar ?? []).some((x) => x.vem === 'gruppen' && !!x.skala);
 const nyAktiv = (val: Val = forval(mp, idag), franLank = false, id = nyttId()): Aktiv => ({ id, namn: '', val, folj: foljerFranBorjan(), foljd: tomFoljd(), sparad: false, franLank });
 const fran = lasVal(location.hash);
+// Märket ny i adressen: en ny plan som läraren tog med ur en apps webbläsare (medValen).
+const harMarketNy = () => new URLSearchParams(location.hash.slice(1)).get('ny') === '1';
 const { planer, ok: lagringOk, varningar: lagringensVarningar } = lasPlaner();
 // Planerna för metoden, med nästa pass först och en plan som är slut sist (granskningen 2026-10-24: "Öppna den plan som har
 // nästa pass").
@@ -106,11 +109,15 @@ let lamnatBesked = '';
 try { lamnatBesked = sessionStorage.getItem('pl-besked') ?? ''; sessionStorage.removeItem('pl-besked'); } catch { /* utan lagring */ }
 {
   const egna = planer.filter((p) => p.metod === data.id).sort(iTurOrdning(idag));
-  const sparad = fran?.id ? egna.find((p) => p.id === fran.id) : undefined;
+  // En ny plan som läraren tog med ur en apps webbläsare har märket ny (vagensAdress) och är en ny plan med valen, som där,
+  // med ett eget id, också när webbläsaren har sparade planer för metoden.
+  const tagenMed = !!fran && harMarketNy();
+  const sparad = fran?.id && !tagenMed ? egna.find((p) => p.id === fran.id) : undefined;
   if (fran && sparad) {
     aktiv = oppnaSparad(sparad);
     if (sparad.val !== kodaVal(fran.val)) notis = 'Planen i den här webbläsaren visas. Den har ändrats efter att länken skapades.';
-  } else if (fran) {
+  } else if (fran && tagenMed) aktiv = { ...nyAktiv(fran.val), tagenMed: true };
+  else if (fran) {
     aktiv = nyAktiv(fran.val, true, fran.id ?? nyttId());
     notis = 'Planen kommer från en länk. Spara den, så finns den i den här webbläsaren. Det som förts in när insatsen följs finns bara i den webbläsare där det skrevs.';
   } else if (egna.length) aktiv = oppnaSparad(egna[0]);
@@ -121,6 +128,9 @@ let plan: Plan = planera(mp, aktiv.val);
 
 // ---------- Lagringen och länken ----------
 const lank = (vecka?: number | 'fore') => `${location.origin}${location.pathname}#${kodaVal(aktiv.val, { id: aktiv.id, ...(vecka ? { visa: vecka } : {}) })}`;
+// En ny plan med valen och märket ny, utan id, så att sidan som öppnar den gör en ny plan och aldrig tar en sparad i stället
+// (vagensAdress, harMarketNy).
+const medValen = () => `${kodaVal(aktiv.val)}&ny=1`;
 const bockade = () => antalBockade(plan, aktiv.foljd.gjorda);
 const sparadAv = (): SparadPlan => ({ id: aktiv.id, metod: data.id, titel: data.titel, omrade: data.omrade, namn: aktiv.namn, val: kodaVal(aktiv.val), folj: aktiv.folj, foljd: aktiv.foljd, andrad: nuTid(), uppdaterad: aktiv.uppdaterad ?? data.uppdaterad, ...(aktiv.kopia ? { kopia: aktiv.kopia } : {}), schema: schemaAv(plan, aktiv.val), bockade: bockade() });
 function spara(): boolean {
@@ -150,9 +160,12 @@ function friskaUpp() {
   });
   if (andrad) skrivPlaner(nya);
 }
-// Adressen bär valen, men inte veckan läraren har bläddrat till, så att sidan öppnar veckan gruppen är i nästa gång.
+// Adressen bär valen, men inte veckan läraren har bläddrat till, så att sidan öppnar veckan gruppen är i nästa gång. En plan
+// som läraren tog med ur en apps webbläsare bär valen med märket ny tills den sparas, så att de står kvar när telefonen
+// laddar om sidan (Codex 2026-10-28).
 function uppdateraAdressen() {
   if (aktiv.sparad || aktiv.franLank) history.replaceState(null, '', `#${kodaVal(aktiv.val, { id: aktiv.id })}`);
+  else if (aktiv.tagenMed) history.replaceState(null, '', `#${medValen()}`);
 }
 // Lärarens länkar till formuläret och sammanställningen står inte i länken till planen, så de räknas som infört (Codex
 // 2026-10-26).
@@ -2817,23 +2830,28 @@ function visaNotis(text: string, knappar = '') {
 // eller Chrome på samma telefon (granskningen 2026-10-24; många kommer till sajten från Facebook). Beskedet står också efter
 // att planen har sparats, med vägen ut och en knapp som kopierar länken, som håller där vägen ut inte öppnas (K-510,
 // src/scripts/webblasaren.ts).
+// Vägen ut fortsätter där läraren är (Niclas 2026-10-28: "blir nästa vy inte där jag planerar, utan datumet blir som valt
+// istället för från början som jag var ifrån"): en ny plan blir en ny plan med samma val, också förvalet, och inte en plan
+// ur en länk (medValen). En sparad plan och en plan ur en länk följer med som planens länk, och sidan säger då vad som inte
+// följer med. Valen följer med också när de inte är sparade (Codex 2026-10-25).
+const vagensAdress = () => (aktiv.sparad || aktiv.franLank ? lank() : `${location.origin}${location.pathname}#${medValen()}`);
 function appensBesked(): [string, string] {
   const w = webblasaren();
   if (!w.app || !lagringOk) return ['', ''];
-  // Adressen är planens länk med valen, också de som inte är sparade (Codex 2026-10-25), och den görs om vid trycket.
-  const ut = vagenUt(lank(), w);
+  // Adressen görs om vid trycket.
+  const ut = vagenUt(vagensAdress(), w);
   const utKnapp = ut ? `<a class="knapp liten" id="pl-ut" href="${esc(ut.href)}" ${goat('ut-ur-appen', `${ut.text} från ${w.app} webbläsare`)}>${esc(ut.text)}</a>` : '';
   return [vagenUtText(w), `${utKnapp}<button type="button" class="knapp liten${ut ? ' sekundar' : ''}" id="pl-ut-kopiera" ${goat('lank-ur-appen', `länken kopierad i ${w.app} webbläsare`)}>Kopiera länken</button>`];
 }
-// Vägen ut och Kopiera länken i beskedet om en apps egen webbläsare bär planens länk med valen som de är vid trycket, också
+// Vägen ut och Kopiera länken i beskedet om en apps egen webbläsare bär adressen som den är vid trycket (vagensAdress), också
 // efter ett byte av plan (K-510; Codex 2026-10-25).
 $('pl-besked').addEventListener('click', async (e) => {
   const ut = (e.target as Element).closest<HTMLAnchorElement>('#pl-ut');
-  const dit = ut && vagenUt(lank(), webblasaren());
+  const dit = ut && vagenUt(vagensAdress(), webblasaren());
   if (ut && dit) { ut.href = dit.href; return; }
   const knapp = (e.target as Element).closest<HTMLButtonElement>('#pl-ut-kopiera');
   if (!knapp) return;
-  const ok = await kopiera(lank());
+  const ok = await kopiera(vagensAdress());
   if (ok) kvittera(knapp, 'Kopierad');
   visaBesked(ok ? `Länken är kopierad. Klistra in den i ${webblasaren().ios ? 'Safari' : 'webbläsaren'}.` : 'Länken gick inte att kopiera i den här webbläsaren.');
 });
@@ -3141,11 +3159,12 @@ addEventListener('storage', (e) => {
   renderaGrupper();
 });
 // En länk till en annan plan i samma flik byter bara det som står efter #, och sidan läses då om, så att planen i länken
-// visas (buggjakten 2026-10-24). En länk till en vecka i samma plan visar veckan.
+// visas (buggjakten 2026-10-24). En länk till en vecka i samma plan visar veckan. En länk med märket ny (medValen) läses
+// alltid om, så att den blir en ny plan med valen (Codex 2026-10-28).
 addEventListener('hashchange', () => {
   const ny = lasVal(location.hash);
   if (!ny) return;
-  if (kodaVal(ny.val, { id: ny.id }) !== kodaVal(aktiv.val, { id: aktiv.id })) { location.reload(); return; }
+  if (harMarketNy() || kodaVal(ny.val, { id: ny.id }) !== kodaVal(aktiv.val, { id: aktiv.id })) { location.reload(); return; }
   if (ny.visa) tillVy(ny.visa);
   uppdateraAdressen();
 });
