@@ -10,7 +10,7 @@ Testversionen: {{adress}}/stodundervisning/<metod>/planera, för metoderna {{met
 
 {{bilder}}
 
-Läs bilderna med Read. Du får läsa `src/styles/global.css` i repot `C:\niclasfohlin.se\niclasfohlin-site-starter` för att se designsystemets variabler och klasser, men inga andra filer.
+Läs bilderna med Read. Du får läsa `src/styles/global.css` i repot `C:\niclasfohlin.se\niclasfohlin-site-starter` för att se designsystemets variabler och klasser, och Anthropics skill för formgivning, `.claude/skills/frontend-design/SKILL.md`, för att pröva formerna mot det som ser mallgjort ut, men inga andra filer. Det Niclas har sagt nedan är briefen och går före skillen.
 
 ## Varför frågan ställs
 

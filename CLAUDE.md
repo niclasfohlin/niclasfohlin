@@ -26,6 +26,7 @@ Den här filen säger vad sajten är, vad du får göra och var allt annat står
 | src/data/taggar.json | Alla tillåtna taggar med alias |
 | src/data/publikationer.json | Alla kända publikationer |
 | .claude/commands/ | Flödena, ett per uppgift. Registret i ARBETSSATT.md säger vilket som gäller när |
+| .claude/skills/ | Skills som Claude Code läser in: Anthropics frontend-design, som ARBETSSATT.md under Design och kod säger när den används |
 | README.md | Ingången för en människa som öppnar repot: hur man kommer igång |
 | AGENTS.md | Ingången för Codex, som hänvisar hit |
 
