@@ -1932,10 +1932,19 @@ try {
   await f.kor(`(() => { const b = [...document.querySelectorAll('#pl-veckan .pl-narvaro [data-narvaro]')].find((x) => x.textContent === 'Bea'); b.click(); return true; })()`);
   sant('frånvaron sparas', Object.values(await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.franvaro`) ?? {}).flat().length === 1);
   sant('lathunden och snabbmallen står kvar efter flera tryck', await f.kor(`!!document.querySelector('#pl-veckan [data-fil="lathund"]') && !!document.querySelector('#pl-veckan [data-fil="snabbmall"]')`));
+  // Ett tryck på ett namn eller en skattning flyttar inte sidan, också när knappen står delvis ovanför skärmen (Niclas
+  // 2026-10-28: "Då hoppar scrollingen lite som ett hack"). Knappen ställs 8 punkter ovanför skärmens kant, och efter
+  // trycket står den omritade knappen på samma punkt.
+  const pastaPlats = (hitta) => f.kor(`(() => { const hitta = () => ${hitta}; window.scrollBy(0, hitta().getBoundingClientRect().top + 8); const fore = hitta().getBoundingClientRect().top; hitta().click(); const efter = hitta().getBoundingClientRect().top; return Math.abs(efter - fore) < 1 ? 'samma' : fore + ' blev ' + efter; })()`);
+  const aliNarvaro = `[...document.querySelectorAll('#pl-veckan .pl-narvaro [data-narvaro]')].find((x) => x.textContent === 'Ali Test')`;
+  const iNarvaron = await pastaPlats(aliNarvaro);
+  await f.kor(`(() => { ${aliNarvaro}.click(); return true; })()`);
+  sant('ett tryck på ett namn flyttar inte sidan', iNarvaron === 'samma', iNarvaron);
   // Skatta: vecka 3 (i dag) Ali 3 och Bea 2, och förra veckan Ali 2 och Bea 2.
   const skatta = (namn, varde) => f.kor(`(() => { const li = [...document.querySelectorAll('#pl-veckan .pl-skattning li')].find((x) => x.querySelector('.pl-elevnamn').textContent === ${JSON.stringify(namn)}); li.querySelectorAll('.pl-skalsteg')[${varde - 1}].click(); return true; })()`);
   await skatta('Ali Test', 3);
-  await skatta('Bea', 2);
+  const iSkattningen = await pastaPlats(`[...document.querySelectorAll('#pl-veckan .pl-skattning li')].find((x) => x.querySelector('.pl-elevnamn').textContent === 'Bea').querySelectorAll('.pl-skalsteg')[1]`);
+  sant('ett tryck på en skattning flyttar inte sidan', iSkattningen === 'samma', iSkattningen);
   await f.tryck('button[data-vy="2"]');
   // Alla pass som har varit blev av: ett tryck, och Ångra.
   sant('knappen för veckans pass till och med i dag', (await f.text('#pl-passen [data-gor="alla"]')) === 'Bocka veckans pass till och med i dag');

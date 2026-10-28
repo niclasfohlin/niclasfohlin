@@ -315,8 +315,9 @@ $('pl-tid-dagar').addEventListener('change', (e) => {
   const d = Number(f.dataset.tiddag);
   if (!d) return;
   const [fran, till] = [...$('pl-tid-dagar').querySelectorAll<HTMLSelectElement>(`[data-tiddag="${d}"]`)].map((x) => x.value);
+  const plats = f.getBoundingClientRect().top;
   andra(() => { aktiv.val.tider = sattTid([d], fran, f.dataset.del === '1' ? till : undefined); });
-  $('pl-tid-dagar').querySelector<HTMLSelectElement>(`[data-tiddag="${d}"][data-del="${f.dataset.del}"]`)?.focus();
+  fokusPaPlats($('pl-tid-dagar').querySelector<HTMLSelectElement>(`[data-tiddag="${d}"][data-del="${f.dataset.del}"]`), plats);
 });
 $('pl-tid-olika').addEventListener('click', () => {
   if (olikaTider) {
@@ -513,9 +514,10 @@ $('pl-lovveckor').addEventListener('click', (e) => {
   const b = (e.target as Element).closest<HTMLButtonElement>('[data-lovvecka]');
   if (!b) return;
   const k = b.dataset.lovvecka!;
+  const plats = b.getBoundingClientRect().top;
   const har = (aktiv.val.lov ?? []).includes(k);
   andra(() => { aktiv.val.lov = har ? aktiv.val.lov!.filter((x) => x !== k) : [...(aktiv.val.lov ?? []), k].sort(); }, () => `${har ? `Inget lov i ${kalendervecka(Number(k.slice(5)))} längre.` : `Lov i ${kalendervecka(Number(k.slice(5)))}.`} Planen: ${sammanfattning()}.`, true);
-  $('pl-lovveckor').querySelector<HTMLButtonElement>(`[data-lovvecka="${k}"]`)?.focus();
+  fokusPaPlats($('pl-lovveckor').querySelector<HTMLButtonElement>(`[data-lovvecka="${k}"]`), plats);
 });
 foljruta.addEventListener('change', () => andra(() => { aktiv.folj = foljruta.checked; if (aktiv.folj) bedOmVaraktig(); }, foljruta.checked ? 'Du följer insatsen. Veckan visar passen att bocka och skattningen mot målet.' : 'Planen visar bara planen. Det du har fört in finns kvar om du slår på uppföljningen igen.'));
 narvaroruta.addEventListener('change', () => andra(() => { aktiv.foljd = { ...aktiv.foljd, narvaro: narvaroruta.checked }; }, narvaroruta.checked ? 'Under varje bockat pass står eleverna. Tryck på den som inte var med.' : 'Närvaron noteras inte. Det du har fört in finns kvar.'));
@@ -2078,13 +2080,27 @@ function tillVy(vy: Vy | undefined) {
   $('pl-veckan-rubrik')?.focus({ preventScroll: true });
 }
 
+/**
+ * Fokus på en knapp som har ritats om, utan att sidan hoppar: knappen står kvar där den stod på skärmen när läraren
+ * tryckte, också när något ovanför den har ändrats (Niclas 2026-10-28, om namnen och skattningen: "Då hoppar scrollingen
+ * lite som ett hack, särskilt om man trycker på dem när de är på övre delen av skärmen"). Webbläsarens egen rullning vid
+ * fokus flyttade en knapp som stod delvis ovanför skärmen.
+ */
+function fokusPaPlats(ny: HTMLElement | null | undefined, fore: number) {
+  if (!ny) return;
+  ny.focus({ preventScroll: true });
+  const skillnad = ny.getBoundingClientRect().top - fore;
+  if (Math.abs(skillnad) >= 1) window.scrollBy(0, skillnad);
+}
+
 // Veckans knappar: bocka, alla pass, närvaro, skattning, beslut, förlänga, upprepa, lov, flytta och ställa in, och bläddra.
 $('pl-veckan').addEventListener('click', (e) => {
   const knapp = (e.target as Element).closest<HTMLButtonElement>('button');
   if (!knapp) return;
   const vy = visadVy();
   const v = typeof vy === 'number' ? plan.veckor[vy - 1] : undefined;
-  const fokus = (valjare: string) => $('pl-veckan').querySelector<HTMLElement>(valjare)?.focus();
+  const plats = knapp.getBoundingClientRect().top;
+  const fokus = (valjare: string) => fokusPaPlats($('pl-veckan').querySelector<HTMLElement>(valjare), plats);
   const d = knapp.dataset;
   // Skriv in eleverna öppnar elevlistan under Ändra planen, som annars är hopfälld (K-548; verifieringen 2026-10-25).
   if (d.elevlistan !== undefined) {
