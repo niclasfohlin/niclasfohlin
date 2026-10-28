@@ -2502,27 +2502,41 @@ export const skattningenText = (vem, varjeVecka = true, mal = 'målet') => `skat
  * adress. Den säger det planerade, och hur många pass som är bockade när läraren har bockat dem. Målet är lärarens eget
  * (val.mal) eller metodens (info.mal), och innehållet är metodens steg i korta rubriker (info.steg, en per rad i
  * progressionen). Texten har inga namn. o.minuter är passets längd utan klockslag; har läraren satt tider räknas längden
- * ur dem (passensMinuter).
+ * ur dem (passensMinuter). Raderna står i dokumentationsrader.
+ * @param {Parameters<typeof dokumentationsrader>[0]} info
+ * @param {Plan} plan
+ * @param {Val} val
+ * @param {Parameters<typeof dokumentationsrader>[3]} o
+ */
+export const dokumentationstext = (info, plan, val, o) => dokumentationsrader(info, plan, val, o).map(radText).join('\n');
+/** En rad med etikett som text, "Omfattning: 18 pass …", eller bara texten. @param {{ etikett?: string, text: string }} r */
+export const radText = (r) => (r.etikett ? `${r.etikett}: ${r.text}` : r.text);
+/**
+ * Texten till åtgärdsprogrammet som rader, en rot för texten som kopieras och tabellen Innehållet i insatsen i
+ * sammanställningens pdf (Niclas 2026-10-28: "Ha en rubrik om Innehållet i insatsen"), så att de aldrig säger olika saker:
+ * etiketten, som Omfattning, och texten, och en mening utan etikett.
  * @param {{ titel: string, undertitel?: string, adress: string, mal?: string, steg?: string[], uppfoljning: { nar: string }[], nivaNamn?: string }} info
  * @param {Plan} plan
  * @param {Val} val
  * @param {{ minuter: number, genomforda?: number, folj?: boolean, utvardering?: { beslut?: string, not?: string }, elever?: { namn: string }[], pagar?: boolean, lektioner?: { namn: string, datum: string[] }[], lektionerSedan?: boolean, extraPass?: { datum: string } }} o utvärderingen och eleverna: anledningen när insatsen avslutades tidigare, utan elevernas namn; i en serie de valda lektionerna med passens datum, och om fler väljs sedan; en versions extra pass före pass 1 (extraPassetsDag), som omfattningen räknar med (Codex 2026-10-27)
+ * @returns {{ etikett?: string, text: string }[]}
  */
-export function dokumentationstext(info, plan, val, o) {
+export function dokumentationsrader(info, plan, val, o) {
+  /** @type {{ etikett?: string, text: string }[]} */
   const rader = [];
   // Undertitelns årskurser gäller metoden, inte eleven: "för åk 3–7" och "för F–6" (de kalla testarna 2026-10-24).
   const under = info.undertitel ? liten(info.undertitel.replace(/\.$/, '').replace(/,?\s*för (?:åk\s*)?[F\d][\d–-]*(?:\s*(?:och|till)\s*\d+)?$/i, '')) : '';
-  rader.push(`Åtgärd: ${info.titel}${under ? `, ${under}` : ''}.`);
+  rader.push({ etikett: 'Åtgärd', text: `${info.titel}${under ? `, ${under}` : ''}.` });
   const mal = val.mal || info.mal;
-  if (mal) rader.push(`Mål: ${malText(mal)}`);
+  if (mal) rader.push({ etikett: 'Mål', text: malText(mal) });
   const dagar = dagarText(val, plan);
   // Metodens skattning av gruppen står i meningen om att följa insatsen, och inte en gång till bland uppföljningens rader (den
   // kalla testaren av K-559 2026-10-26).
   const gruppens = o.folj ? (plan.skattningar ?? []).find((x) => x.vem === 'gruppen' && x.skala) : undefined;
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
-  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter, plan))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${o.extraPass ? `, och det extra passet före pass 1, ${dagText(o.extraPass.datum)}` : ''}${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
+  if (plan.forstaPass && plan.sistaPass) rader.push({ etikett: 'Omfattning', text: `${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter, plan))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${o.extraPass ? `, och det extra passet före pass 1, ${dagText(o.extraPass.datum)}` : ''}${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.` });
   // En insats som avslutades tidigare säger det, med lärarens anledning utan elevernas namn (K-542).
-  if (avslutetText(plan)) rader.push(utanNamn(utvarderingenText(plan, o.utvardering?.beslut === 'avsluta' ? o.utvardering : undefined, o.pagar), o.elever ?? []));
+  if (avslutetText(plan)) rader.push({ text: utanNamn(utvarderingenText(plan, o.utvardering?.beslut === 'avsluta' ? o.utvardering : undefined, o.pagar), o.elever ?? []) });
   // Det eleven arbetar med: metodens steg i planens ordning, med kalenderveckorna. Pass i följd med samma steg står ihop, och
   // ett lov mitt i står inte med i veckorna (kalenderveckornaFor).
   /** @type {{ steg: number | null, datum: string[] }[]} */
@@ -2538,21 +2552,21 @@ export function dokumentationstext(info, plan, val, o) {
   // klarar, så texten säger inte lektioner som inte är valda.
   if (o.lektioner) {
     const valda = o.lektioner.map((g) => `${g.namn} (${kalenderveckornaFor(g.datum)})`);
-    rader.push(`Eleven arbetar med: ${valda.length ? `${valda.join('; ')}. ` : ''}${o.lektionerSedan ? `${valda.length ? 'Lektionerna efter' : 'Lektionerna'} väljs vecka för vecka efter vad gruppen klarar.` : ''}`.trim());
-  } else if (innehall.length) rader.push(`Eleven arbetar med: ${innehall.join('; ')}.`);
+    rader.push({ etikett: 'Eleven arbetar med', text: `${valda.length ? `${valda.join('; ')}. ` : ''}${o.lektionerSedan ? `${valda.length ? 'Lektionerna efter' : 'Lektionerna'} väljs vecka för vecka efter vad gruppen klarar.` : ''}`.trim() });
+  } else if (innehall.length) rader.push({ etikett: 'Eleven arbetar med', text: `${innehall.join('; ')}.` });
   // Uppföljningens rader, utom villkoren utan datum, som läraren bedömer när det händer.
   const tider = plan.uppfoljning.filter((u) => (u.tillfallen.length || u.typ !== 'villkor') && u.rad !== gruppens?.rad && !u.period).map((u) => uppfoljningensRad(plan, info, u));
-  if (tider.length) rader.push(`Uppföljning: ${tider.join('. ')}.`);
+  if (tider.length) rader.push({ etikett: 'Uppföljning', text: `${tider.join('. ')}.` });
   if (o.folj) {
     const m = mittVeckan(plan);
     // Med metodens skattning av gruppen följs insatsen med den (K-559).
     const g = gruppens;
     const vad = g?.skala ? `${stor(uppfoljningensNamn(plan, info, g.rad))}, ${g.skala.fran} till ${g.skala.till}, av gruppen` : stor(skattningenText('eleven'));
-    rader.push(`${vad}${m ? `, med avstämning mitt i insatsen ${planveckansNamn(plan, plan.veckor[m - 1]).text}` : ''} och utvärdering efter insatsen.`);
+    rader.push({ text: `${vad}${m ? `, med avstämning mitt i insatsen ${planveckansNamn(plan, plan.veckor[m - 1]).text}` : ''} och utvärdering efter insatsen.` });
   }
-  if (o.genomforda !== undefined) rader.push(`Bockade som genomförda: ${o.genomforda} av ${plan.pass.length + (plan.extraDag ? 1 : 0)} pass.`);
-  rader.push(`Metoden: ${info.adress}`);
-  return rader.join('\n');
+  if (o.genomforda !== undefined) rader.push({ etikett: 'Bockade som genomförda', text: `${o.genomforda} av ${plan.pass.length + (plan.extraDag ? 1 : 0)} pass.` });
+  rader.push({ etikett: 'Metoden', text: info.adress });
+  return rader;
 }
 
 // ---------- Följ insatsen ----------

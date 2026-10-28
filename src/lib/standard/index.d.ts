@@ -355,6 +355,8 @@ export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: s
 /** Passens tider, rensade: veckodag till början och slut, som "09:20" och "10:00". */
 export declare function rentaTider(tider: unknown): Record<string, [string, string]>;
 export declare function rentaPasstider(passtider: unknown): Record<string, [string, string]>;
+export declare const dokumentationsrader: (...a: Parameters<typeof dokumentationstext>) => { etikett?: string; text: string }[];
+export declare const radText: (r: { etikett?: string; text: string }) => string;
 /** Passets tid efter veckodagen det låg på innan det flyttades. */
 export declare const passetsTid: (val: Val, p: Pass) => [string, string] | undefined;
 /** "9.20" ur "09:20". */

@@ -1356,7 +1356,9 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   });
   const idag = '2026-12-21';
   const sm = s.sammanstallning(p, f, idag);
-  const pinfo = { metod: ts.titel, grupp: 'Grupp 4B', niva: 'Mellan', mal: s.malText(ts.mal.overgripande), fragan: s.skattningsfragan(), uppfoljning: ts.uppfoljning.rader };
+  // Innehållet i insatsen med raderna ur texten till åtgärdsprogrammet, som sidan ger pdf:en (dokumentationsrader).
+  const prader = s.dokumentationsrader({ titel: ts.titel, undertitel: ts.undertitel, adress: 'niclasfohlin.se/stodundervisning/textsamtal-i-grupp', mal: ts.mal.overgripande, steg: ts.progression.rader.map((r) => r.kort ?? r.fokus), uppfoljning: ts.uppfoljning.rader }, p, { ...s.forval(tsMp, '2026-10-26'), start: '2026-11-02', langd: 6, dagar: [1, 3, 5] }, { minuter: 30, folj: true });
+  const pinfo = { metod: ts.titel, grupp: 'Grupp 4B', niva: 'Mellan', mal: s.malText(ts.mal.overgripande), fragan: s.skattningsfragan(), uppfoljning: ts.uppfoljning.rader, ingress: ts.ingress, undertitel: ts.undertitel, insatsen: prader };
   const text = (bytes) => {
     const fil = join(tmpdir(), `planprov-${process.pid}-${Math.random().toString(36).slice(2)}.pdf`);
     writeFileSync(fil, bytes);
@@ -1373,10 +1375,13 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     ska('gruppens pdf har metodens skattning av gruppen med skalan, linjen och regeln', !!gtext && gtext.includes('Lärarens skattning') && gtext.includes('1–2 fungerar inte') && gtext.includes('Det linjen sa: Linjen i Lärarens skattning nedåt två veckor i rad efter vecka 3'), gtext?.slice(0, 500));
   }
   if (grupp !== null && elev !== null) {
-    ska('gruppens pdf: perioden, passens rad, riktningen och närvaron som på sidan', grupp.includes(s.datumspann(p.forstaPass, p.sistaPass)) && grupp.includes(s.passensRad(sm)) && grupp.includes(`${s.riktningText(sm.elever[0])}.`) && grupp.includes(s.narvaronText(sm.elever[0], sm)), grupp.slice(0, 600));
-    ska('gruppens pdf: uppföljningens rader, Efter insatsen, besluten och anteckningen som i texten', s.uppfoljningensRader(p, pinfo).every((r) => grupp.includes(r)) && (!efter || grupp.includes('Efter insatsen, v.')) && grupp.includes('Fortsätt som planerat. Ska Bea få mer tid?') && grupp.includes('Går det bättre nästa vecka?') && !grupp.includes('?.'), grupp.slice(0, 600));
+    ska('gruppens pdf: perioden, passens rad, riktningen och närvaron som på sidan', grupp.includes(s.datumspann(p.forstaPass, p.sistaPass)) && grupp.includes(s.passensRad(sm)) && grupp.includes(`${s.riktningText(sm.elever[0])}.`) && grupp.includes(s.narvaronKort(sm.elever[0], sm).replace(/^med i /, '')), grupp.slice(0, 600));
+    // Innehållet i insatsen (Niclas 2026-10-28): ingressen och raderna ur texten till åtgärdsprogrammet, en rot för båda.
+    ska('gruppens pdf: Innehållet i insatsen med ingressen och samma rader som texten till åtgärdsprogrammet', grupp.includes('Innehållet i insatsen') && grupp.includes(ts.ingress.replace(/\s+/g, ' ').slice(0, 40)) && prader.filter((r) => ['Omfattning', 'Uppföljning', 'Metoden'].includes(r.etikett)).every((r) => grupp.includes(r.etikett) && grupp.includes(r.text.replace(/\s+/g, ' '))), grupp.slice(0, 900));
+    ska('elevens pdf: undertiteln och inte gruppens namn, som kan bära andra elevers namn', elev.includes(ts.undertitel.slice(0, 40)) && !elev.includes('Grupp 4B') && elev.includes('Omfattning'), elev.slice(0, 600));
+    ska('gruppens pdf: uppföljningens rader, Efter insatsen, besluten och anteckningen som i texten', grupp.includes(String(prader.find((r) => r.etikett === 'Uppföljning')?.text)) && (!efter || grupp.includes('Efter insatsen, v.')) && grupp.includes('Fortsätt som planerat. Ska Bea få mer tid?') && grupp.includes('Går det bättre nästa vecka?') && !grupp.includes('?.'), grupp.slice(0, 600));
     ska('gruppens pdf: veckornas namn i diagrammet och i texten', grupp.includes(s.kalendervecka(p.veckor[0].vecka.vecka)) && grupp.includes(s.planveckansNamn(p, p.veckor[0]).Text), grupp.slice(0, 600));
-    ska('elevens pdf: perioden, närvaron, resultatet och gruppens beslut', elev.includes(s.datumspann(p.forstaPass, p.sistaPass)) && elev.includes(s.narvaronText(sm.elever[0], sm)) && (!efter || elev.includes('Efter insatsen, v.')) && elev.includes('Gruppens avstämning mitt i insatsen: Fortsätt som planerat.') && elev.includes('Utvärdering efter insatsen: Avsluta insatsen.'), elev.slice(0, 600));
+    ska('elevens pdf: perioden, närvaron, resultatet och gruppens beslut', elev.includes(s.datumspann(p.forstaPass, p.sistaPass)) && elev.includes(s.narvaronText(sm.elever[0], sm)) && (!efter || elev.includes('Efter insatsen, v.')) && elev.includes('Mitt i insatsen') && elev.includes('Fortsätt som planerat.') && !elev.includes('Ska Bea') && elev.includes('Efter insatsen') && elev.includes('Avsluta insatsen.'), elev.slice(0, 600));
   }
   // Ett avslut tidigare, i avstämningens vecka, står i båda pdf:erna och i texten som kopieras med anledningen, perioden slutar
   // med sista passet, och avstämningen står inte där (K-542; Niclas 2026-10-25: "Se till att json filen och ical mm och alla
@@ -1387,7 +1392,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   const kortG = text(await pdf.gruppPdf(kortP, kortS, pinfo, '2026-11-25')), kortE = text(await pdf.elevPdf(kortP, kortS, 'a1', pinfo, '2026-11-25', kortF.franvaro));
   const avslutetPdf = 'Insatsen avslutades i vecka 3 (v. 47), efter 8 av 18 planerade pass. Anledning: Gruppen har nått målet.';
   const kortText = s.sammanstallningstext({ titel: ts.titel, mal: ts.mal.overgripande, uppfoljning: ts.uppfoljning.rader }, kortP, kortS);
-  ska('pdf:erna och texten efter ett avslut: avslutet med anledningen, perioden till sista passet och ingen avstämning', !!kortG?.includes(avslutetPdf) && !!kortE?.includes(`Utvärdering efter insatsen: ${avslutetPdf}`) && kortG.includes(s.datumspann('2026-11-02', '2026-11-18')) && !kortG.includes('Ska Bea få mer tid?') && !kortE.includes('Gruppens avstämning mitt i insatsen') && kortText.includes(avslutetPdf) && !kortText.includes('Avstämning mitt i insatsen'), [kortG?.slice(0, 500), kortE?.slice(0, 500)]);
+  ska('pdf:erna och texten efter ett avslut: avslutet med anledningen, perioden till sista passet och ingen avstämning', !!kortG?.includes(avslutetPdf) && !!kortE?.includes(avslutetPdf) && kortG.includes(s.datumspann('2026-11-02', '2026-11-18')) && !kortG.includes('Ska Bea få mer tid?') && !kortE.includes('Mitt i insatsen') && kortText.includes(avslutetPdf) && !kortText.includes('Avstämning mitt i insatsen'), [kortG?.slice(0, 500), kortE?.slice(0, 500)]);
 }
 // Metodens plan på sidan byggs ur planens data med samma fält i plan som motorn läser (metodplan), så att ett nytt fält
 // inte stannar i motorn (den stängda frågan 2026-10-26: plan.foreVeckor, och förut plan.veckoval.forval).
@@ -1976,6 +1981,9 @@ try {
   await skatta('Ali Test', 3);
   const iSkattningen = await pastaPlats(`[...document.querySelectorAll('#pl-veckan .pl-skattning li')].find((x) => x.querySelector('.pl-elevnamn').textContent === 'Bea').querySelectorAll('.pl-skalsteg')[1]`);
   sant('ett tryck på en skattning flyttar inte sidan', iSkattningen === 'samma', iSkattningen);
+  // Påminnelsen om filen står också överst i lägesraden, där läraren är, när hen följer insatsen och inte har laddat ner
+  // (K-604; Niclas 2026-10-28: "mindre troligt att de raderas eller försvinner"), och försvinner när planen är nedladdad.
+  sant('påminnelsen om filen står överst', (await f.text('#pl-lage .pl-kopia-overst'))?.includes('Det du för in finns bara i den här webbläsaren. Ladda ner planen, så finns det kvar.'), await f.text('#pl-lage'));
   await f.tryck('button[data-vy="2"]');
   // Alla pass som har varit blev av: ett tryck, och Ångra.
   sant('knappen för veckans pass till och med i dag', (await f.text('#pl-passen [data-gor="alla"]')) === 'Bocka veckans pass till och med i dag');
@@ -2077,6 +2085,11 @@ try {
   sant('elevens pdf görs', (await f.kor(`(window.__fil ?? '').startsWith('%PDF-')`)));
   // Kopian som fil.
   sant('påminnelsen om kopian', (await f.kor(`document.getElementById('pl-kopia-text').classList.contains('pl-paminn')`)));
+  // Knappen överst laddar ner samma fil och tar bort påminnelsen överst (K-604), och sedan knappen längst ned.
+  await f.kor('window.__fil = null');
+  await f.tryck('#pl-lage [data-gor="kopia"]');
+  await vanta(300);
+  sant('Ladda ner planen överst laddar ner filen och tar bort påminnelsen', String((await f.kor('window.__fil')) ?? '').includes('"typ": "planera-insatsen"') && !(await f.kor(`!!document.querySelector('#pl-lage .pl-kopia-overst')`)), [String(await f.kor('window.__fil')).slice(0, 60), await f.text('#pl-lage')]);
   await f.kor('window.__fil = null');
   await f.tryck('#pl-kopia-spara');
   await vanta(300);

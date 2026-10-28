@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -21,6 +21,12 @@ export interface PdfInfo {
   mal: string;
   fragan: string;
   uppfoljning: { nar: string }[];
+  /** Metodens ingress, under Innehållet i insatsen i gruppens pdf. */
+  ingress?: string;
+  /** Metodens undertitel, under Innehållet i insatsen i elevens pdf, som kan gå till hemmet och nästa lärare. */
+  undertitel?: string;
+  /** Raderna ur texten till åtgärdsprogrammet (dokumentationsrader i standarden). */
+  insatsen?: { etikett?: string; text: string }[];
 }
 
 async function dokument(titel: string) {
@@ -31,15 +37,14 @@ async function dokument(titel: string) {
   doc.setLanguage('sv-SE');
   const font = await doc.embedFont(StandardFonts.Helvetica);
   const fet = await doc.embedFont(StandardFonts.HelveticaBold);
-  const farg = { text: rgb(0.08, 0.13, 0.17), svag: rgb(0.29, 0.35, 0.4), accent: rgb(0.11, 0.31, 0.57), kant: rgb(0.88, 0.9, 0.92), gron: rgb(0.12, 0.42, 0.27), ljus: rgb(0.95, 0.96, 0.98), mitt: rgb(0.95, 0.9, 0.95) };
+  const farg = { accentRgb: [0.11, 0.31, 0.57], ljusRgb: [0.95, 0.96, 0.98], text: rgb(0.08, 0.13, 0.17), svag: rgb(0.29, 0.35, 0.4), accent: rgb(0.11, 0.31, 0.57), kant: rgb(0.88, 0.9, 0.92), gron: rgb(0.12, 0.42, 0.27), ljus: rgb(0.95, 0.96, 0.98), mitt: rgb(0.95, 0.9, 0.95) };
   let sida: PDFPage = doc.addPage(A4);
   let y = A4[1] - KANT;
   const sidor: PDFPage[] = [sida];
   const ny = () => { sida = doc.addPage(A4); sidor.push(sida); y = A4[1] - KANT; };
   const plats = (h: number) => { if (y - h < KANT + 30) ny(); };
-  // Text med radbrytning inom bredden.
-  const text = (s: string, o: { storlek?: number; fet?: boolean; farg?: ReturnType<typeof rgb>; x?: number; bredd?: number; luft?: number } = {}) => {
-    const storlek = o.storlek ?? 10.5, f: PDFFont = o.fet ? fet : font, x = o.x ?? KANT, bredd = o.bredd ?? A4[0] - KANT - x;
+  // Raderna i en text som ryms inom bredden, en rot för texten, tabellernas celler och sidfoten.
+  const brytt = (s: string, f: PDFFont, storlek: number, bredd: number) => {
     const rader: string[] = [];
     for (const stycke of ren(s).split('\n')) {
       let rad = '';
@@ -49,7 +54,12 @@ async function dokument(titel: string) {
       }
       rader.push(rad);
     }
-    for (const r of rader) {
+    return rader;
+  };
+  // Text med radbrytning inom bredden.
+  const text = (s: string, o: { storlek?: number; fet?: boolean; farg?: ReturnType<typeof rgb>; x?: number; bredd?: number; luft?: number } = {}) => {
+    const storlek = o.storlek ?? 10.5, f: PDFFont = o.fet ? fet : font, x = o.x ?? KANT, bredd = o.bredd ?? A4[0] - KANT - x;
+    for (const r of brytt(s, f, storlek, bredd)) {
       plats(storlek * 1.4);
       sida.drawText(r, { x, y: y - storlek, size: storlek, font: f, color: o.farg ?? farg.text });
       y -= storlek * 1.4;
@@ -110,9 +120,66 @@ async function dokument(titel: string) {
     text(namn, { fet: true, storlek: 11.5 });
     staplar(varden, etiketter, o);
   };
+  // Sidfoten står på en rad, eller på två när den är bredare än sidan (gruppens sammanställning 2026-10-28 i telefonen).
   const avsluta = async (fot: string) => {
-    sidor.forEach((s, i) => s.drawText(ren(`${fot} · sida ${i + 1} av ${sidor.length}`), { x: KANT, y: 28, size: 8, font, color: farg.svag }));
+    sidor.forEach((s, i) => brytt(`${fot} · sida ${i + 1} av ${sidor.length}`, font, 8, A4[0] - 2 * KANT).forEach((r, j, alla) => s.drawText(r, { x: KANT, y: 28 + (alla.length - 1 - j) * 10, size: 8, font, color: farg.svag })));
     return doc.save();
+  };
+  // En tabell med etiketten till vänster och texten bredvid, med en tunn linje mellan raderna, som Innehållet i insatsen
+  // med raderna ur texten till åtgärdsprogrammet (Niclas 2026-10-28). En rad utan etikett går över hela bredden.
+  const tabell = (rader: { etikett?: string; text: string }[], o: { etikett?: number; luft?: number } = {}) => {
+    const storlek = 9.5, rad = storlek * 1.35, xt = KANT + (o.etikett ?? 112);
+    for (const r of rader) {
+      const x = r.etikett ? xt : KANT;
+      const delar = brytt(r.text, font, storlek, A4[0] - KANT - x - 4), etikett = r.etikett ? brytt(r.etikett, fet, storlek, xt - KANT - 10) : [];
+      const h = Math.max(delar.length, etikett.length) * rad + 8;
+      plats(h);
+      sida.drawLine({ start: { x: KANT, y }, end: { x: A4[0] - KANT, y }, thickness: 0.5, color: farg.kant });
+      etikett.forEach((t, i) => sida.drawText(t, { x: KANT, y: y - 4 - storlek - i * rad, size: storlek, font: fet, color: farg.text }));
+      delar.forEach((t, i) => sida.drawText(t, { x, y: y - 4 - storlek - i * rad, size: storlek, font, color: farg.text }));
+      y -= h;
+    }
+    sida.drawLine({ start: { x: KANT, y }, end: { x: A4[0] - KANT, y }, thickness: 0.5, color: farg.kant });
+    y -= o.luft ?? 6;
+  };
+  // Eleverna vecka för vecka i en tabell (Niclas 2026-10-28: "snygga till sammanställningen"): veckorna i planen med
+  // kalenderveckan överst, en rad per elev med skattningen i en ruta vars ton följer värdet, och en sista kolumn, som
+  // närvaron. En rad med text i rutorna, som passen, står utan ton. Veckan mitt i insatsen har ett ljust fält i huvudet.
+  const matris = (etiketter: Veckonamn[], rader: { namn: string; varden: (number | string | undefined)[]; sist?: string }[], o: { sist?: string; mitt?: number | null } = {}) => {
+    const n = etiketter.length, namnB = 104, sistB = o.sist ? 74 : 0, bredd = A4[0] - 2 * KANT - namnB - sistB, steg = Math.min(34, bredd / Math.max(n, 1));
+    const huvudH = 26, radH = 17, x0 = KANT + namnB;
+    const huvud = () => {
+      if (o.mitt) sida.drawRectangle({ x: x0 + (o.mitt - 1) * steg, y: y - huvudH, width: steg, height: huvudH, color: farg.mitt });
+      etiketter.forEach((e, i) => {
+        const cx = x0 + i * steg + steg / 2, kort = ren(e.kort), kal = ren(e.kalender);
+        sida.drawText(kort, { x: cx - fet.widthOfTextAtSize(kort, 7.5) / 2, y: y - 11, size: 7.5, font: fet, color: farg.text });
+        sida.drawText(kal, { x: cx - font.widthOfTextAtSize(kal, 6.5) / 2, y: y - 21, size: 6.5, font, color: farg.svag });
+      });
+      if (o.sist) sida.drawText(ren(o.sist), { x: x0 + n * steg + 6, y: y - 16, size: 7.5, font: fet, color: farg.text });
+      y -= huvudH;
+    };
+    plats(huvudH + radH * Math.min(rader.length, 3));
+    huvud();
+    for (const r of rader) {
+      if (y - radH < KANT + 30) { ny(); huvud(); }
+      const namn = brytt(r.namn, fet, 9, namnB - 8)[0] ?? '';
+      sida.drawText(namn, { x: KANT, y: y - 12, size: 9, font: fet, color: farg.text });
+      r.varden.forEach((v, i) => {
+        const x = x0 + i * steg;
+        if (typeof v === 'number') {
+          const t = (v - 1) / 4;
+          sida.drawRectangle({ x: x + 2, y: y - radH + 2, width: steg - 4, height: radH - 4, color: rgb(farg.ljusRgb[0] + (farg.accentRgb[0] - farg.ljusRgb[0]) * (0.2 + 0.8 * t), farg.ljusRgb[1] + (farg.accentRgb[1] - farg.ljusRgb[1]) * (0.2 + 0.8 * t), farg.ljusRgb[2] + (farg.accentRgb[2] - farg.ljusRgb[2]) * (0.2 + 0.8 * t)) });
+          sida.drawText(String(v), { x: x + steg / 2 - fet.widthOfTextAtSize(String(v), 8.5) / 2, y: y - 12, size: 8.5, font: fet, color: t >= 0.5 ? rgb(1, 1, 1) : farg.text });
+        } else if (v) {
+          const t = ren(v);
+          sida.drawText(t, { x: x + steg / 2 - font.widthOfTextAtSize(t, 7.5) / 2, y: y - 12, size: 7.5, font, color: farg.svag });
+        } else sida.drawLine({ start: { x: x + steg / 2 - 3, y: y - 9 }, end: { x: x + steg / 2 + 3, y: y - 9 }, thickness: 0.6, color: farg.kant });
+      });
+      if (r.sist) sida.drawText(ren(r.sist), { x: x0 + n * steg + 6, y: y - 12, size: 8.5, font, color: farg.text });
+      y -= radH;
+      sida.drawLine({ start: { x: KANT, y }, end: { x: x0 + n * steg + sistB, y }, thickness: 0.4, color: farg.kant });
+    }
+    y -= 6;
   };
   // Linjen i metodens skattning av gruppen (K-559): kryss vecka för vecka på metodens skala, reglernas gränser streckade,
   // med veckan i planen och kalenderveckan under, som på sidan.
@@ -145,31 +212,58 @@ async function dokument(titel: string) {
     });
     y -= total - (o.mitt ? 22 : 0);
   };
-  return { text, rubrik, staplar, namnMedStaplar, linje, avsluta, farg };
+  return { text, rubrik, staplar, namnMedStaplar, linje, avsluta, tabell, matris, farg };
 }
 
 const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
-// Sidans huvud, lika för gruppen och eleven: rubriken, metoden med gruppen och nivån, perioden och dagen för utskriften, och
-// målet. Perioden, passens läge, riktningen och besluten står med standardens ord, som på sidan och i texterna (K-509).
+// Sidans huvud: rubriken, metoden med nivån, perioden och dagen för utskriften, i gruppens pdf också gruppens namn. Elevens
+// pdf har inte gruppens namn, som läraren har skrivit och som kan bära andra elevers namn, eftersom den kan gå till hemmet
+// och nästa lärare (Opus idérunda 2026-10-28). Perioden, passens läge, riktningen och besluten står med standardens ord, som
+// på sidan och i texterna (K-509).
 type Pdf = Awaited<ReturnType<typeof dokument>>;
-// I en serie står lektionernas mål under målet, med elevens lektioner i elevens utskrift (K-551).
-const huvud = (p: Pdf, rubrik: string, plan: Plan, info: PdfInfo, idag: string, s: Sammanstallning, e?: Sammanstallning['elever'][number]) => {
+const huvud = (p: Pdf, rubrik: string, plan: Plan, info: PdfInfo, idag: string, gruppens: boolean) => {
   p.text(rubrik, { storlek: 20, fet: true, luft: 2 });
-  p.text([info.metod, info.grupp, info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
+  p.text([info.metod, gruppens ? info.grupp : '', info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
   p.text(`${plan.forstaPass && plan.sistaPass ? datumspann(plan.forstaPass, plan.sistaPass) : ''}. Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
+};
+// Innehållet i insatsen (Niclas 2026-10-28: "Ha en rubrik om Innehållet i insatsen med en text från ingress eller metoden"):
+// metodens egen text, ingressen för gruppen och undertiteln för eleven, och raderna ur texten till åtgärdsprogrammet, så
+// att pdf:en och texten som kopieras aldrig säger olika saker (dokumentationsrader).
+const innehallet = (p: Pdf, text: string | undefined, info: PdfInfo, etiketter: string[]) => {
+  const rader = (info.insatsen ?? []).filter((r) => r.etikett && etiketter.includes(r.etikett));
+  if (!text && !rader.length) return;
+  p.rubrik('Innehållet i insatsen', 70);
+  if (text) p.text(mening(text), { luft: 6 });
+  if (rader.length) p.tabell(rader);
+};
+// Målet, och i en serie lektionernas mål under det, med elevens lektioner i elevens pdf (K-551).
+const malet = (p: Pdf, info: PdfInfo, s: Sammanstallning, e?: Sammanstallning['elever'][number]) => {
   if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
   if (lektionernasMal(s, e)) p.text(lektionernasMal(s, e), { luft: 2 });
+};
+// Avstämningen mitt i och utvärderingen efter, med besluten och lärarens mening, i en tabell.
+const besluten = (p: Pdf, rader: { etikett: string; text: string }[]) => {
+  const med = rader.filter((r) => r.text);
+  if (!med.length) return;
+  p.rubrik('Avstämning och utvärdering', 40);
+  p.tabell(med);
 };
 // Skalan med frågan, före staplarna.
 const skalan = (p: Pdf, info: PdfInfo, luft: number) => p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft });
 
-/** Gruppens sammanställning som pdf. */
+/**
+ * Gruppens sammanställning som pdf, för läraren, rektor och elevhälsan: Innehållet i insatsen med samma rader som texten till
+ * åtgärdsprogrammet, målet, Så gick det med en tabell där varje elev har en rad och varje vecka en kolumn, utvecklingen
+ * elev för elev, veckornas anteckningar, och avstämningen och utvärderingen (Niclas 2026-10-28: "snygga till
+ * sammanställningen"; formen ur en Sonnets och en Opus idéer samma dag).
+ */
 export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, idag: string): Promise<Uint8Array> {
   const p = await dokument(`Sammanställning: ${info.metod}`);
-  huvud(p, 'Sammanställning', plan, info, idag, s);
-  p.rubrik('Passen');
-  p.text(passensRad(s), { luft: 2 });
-  if (s.gjorda) p.text(s.veckor.map((v) => `${veckansNamn(v).Text}: ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
+  huvud(p, 'Sammanställning', plan, info, idag, true);
+  innehallet(p, info.ingress, info, ['Omfattning', 'Eleven arbetar med', 'Uppföljning', 'Metoden']);
+  malet(p, info, s);
+  p.rubrik('Så gick det', 110);
+  p.text(passensRad(s), { luft: 4 });
   // Metodens skattning av gruppen, med linjen och reglerna som gällde, före eleverna (K-559).
   for (const sk of s.skattningar) {
     const t = skattningensText(s, sk, info);
@@ -179,38 +273,48 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
     p.linje(sk.varden, veckoetiketter(s), { fran: sk.skala.fran, till: sk.skala.till, granser: skattningensGranser(sk), mitt: s.mitt });
     if (t.regler.length) p.text(`Det linjen sa: ${t.regler.join('; ')}.`, { luft: 8 });
   }
-  // Eleverna med något infört står med diagram och de andra i en mening, så att en klass inte ger sidor med tomma diagram, och
-  // med metodens egen skala för gruppen står eleverna bara när någon har något (den kalla testaren av K-559 2026-10-26).
-  const medData = (e: (typeof s.elever)[number]) => elevenHarNagot(s, e);
-  const visas = s.elever.filter(medData), utan = s.elever.filter((e) => !medData(e));
+  // Eleverna med något infört står i tabellen och de andra i en mening, och med metodens egen skala för gruppen står
+  // eleverna bara när någon har något (den kalla testaren av K-559 2026-10-26). Överst passen vecka för vecka och sist
+  // veckans skattning av gruppen, när läraren har gjort den.
+  const visas = s.elever.filter((e) => elevenHarNagot(s, e)), utan = s.elever.filter((e) => !elevenHarNagot(s, e));
   const planens = !s.skattningar.length || visas.length > 0;
-  if (planens) p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
-  if (visas.length) skalan(p, info, 4);
-  if (planens && utan.length) p.text(s.grupp ? 'Gruppen är inte skattad än.' : `Inte skattade än: ${utan.map((e) => e.namn).join(', ')}.`, { luft: 8 });
-  for (const e of planens ? visas : []) {
-    p.namnMedStaplar(e.namn, elevensVarden(s, e), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
-    p.text([`${riktningText(e)}.`, e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronText(e, s) : '', ...elevensResultat(plan, e.resultat).map((t) => mening(resultatText(plan, info, t)))].filter(Boolean).join(' '), { luft: 8 });
-  }
+  const narvaro = (e: (typeof s.elever)[number]) => (e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronKort(e, s).replace(/^med i /, '') : '');
   const veckorna = skattadeVeckor(s);
-  if (veckorna.length || s.veckor.some((v) => v.not)) {
-    p.rubrik('Hur veckorna gick', veckorna.length ? 120 : 30);
-    if (veckorna.length) { p.staplar(s.veckor.map((v) => v.skattning), veckoetiketter(s), { hojd: 60, mitt: s.mitt }); p.text(`Medel ${decimal(s.veckomedel)} av 5.`, { luft: 4 }); }
-    for (const v of s.veckor.filter((x) => x.not)) p.text(`${veckansNamn(v).Text}: ${mening(v.not!)}`, { storlek: 10 });
+  const rader = [
+    ...(s.gjorda ? [{ namn: 'Bockade pass', varden: s.veckor.map((v) => (v.varit ? `${v.gjorda}/${v.planerade}` : '')) }] : []),
+    ...(planens ? visas.map((e) => ({ namn: e.namn, varden: elevensVarden(s, e), sist: narvaro(e) })) : []),
+    ...(veckorna.length ? [{ namn: 'Veckan', varden: s.veckor.map((v) => v.skattning) }] : []),
+  ];
+  if (rader.length) {
+    p.matris(veckoetiketter(s), rader, { sist: visas.some((e) => narvaro(e)) ? 'Närvaro' : undefined, mitt: s.mitt });
+    if (planens && visas.length) skalan(p, info, 4);
+    if (veckorna.length) p.text(`Veckans skattning av gruppen, medel ${decimal(s.veckomedel)} av 5.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
   }
-  if (s.avstamning?.beslut || s.avstamning?.not) { p.rubrik('Avstämning mitt i insatsen'); p.text(beslutText(s.avstamning)); }
+  if (planens && utan.length) p.text(s.grupp ? 'Gruppen är inte skattad än.' : `Inte skattade än: ${utan.map((e) => e.namn).join(', ')}.`, { luft: 8 });
+  // Utvecklingen elev för elev: riktningen och metodens resultat före och efter.
+  const utvecklingen = (planens ? visas : []).map((e) => ({ etikett: e.namn, text: [`${riktningText(e)}.`, ...elevensResultat(plan, e.resultat).map((t) => mening(resultatText(plan, info, t)))].join(' ') }));
+  if (utvecklingen.length) { p.rubrik('Utvecklingen', 40); p.tabell(utvecklingen); }
+  const anteckningar = s.veckor.filter((v) => v.not).map((v) => ({ etikett: veckansNamn(v).Text, text: mening(v.not!) }));
+  if (anteckningar.length) { p.rubrik('Veckornas anteckningar', 40); p.tabell(anteckningar); }
   // Utvärderingen, med avslutet och anledningen när insatsen avslutades tidigare (utvarderingenText i standarden, K-542).
-  const utvarderingen = utvarderingenText(plan, s.utvardering, !s.slut);
-  if (utvarderingen) { p.rubrik('Utvärdering efter insatsen'); p.text(utvarderingen); }
-  const tider = uppfoljningensRader(plan, info);
-  if (tider.length) { p.rubrik('Metodens uppföljning'); p.text(`${tider.join('. ')}.`); }
+  besluten(p, [
+    { etikett: 'Mitt i insatsen', text: s.avstamning?.beslut || s.avstamning?.not ? beslutText(s.avstamning) : '' },
+    { etikett: 'Efter insatsen', text: utvarderingenText(plan, s.utvardering, !s.slut) },
+  ]);
   return p.avsluta(`${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan, sparas inte på sajten`);
 }
 
-/** En elevs sammanställning som pdf: skattningen och närvaron vecka för vecka, riktningen och resultaten. */
+/**
+ * En elevs sammanställning som pdf, som kan gå till hemmet och nästa lärare: Innehållet i insatsen med metodens undertitel,
+ * målet, skattningen och närvaron vecka för vecka, utvecklingen med resultaten, och avstämningen och utvärderingen utan andra
+ * elevers namn.
+ */
 export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: PdfInfo, idag: string, franvaro: Record<string, string[]>): Promise<Uint8Array> {
   const e = s.elever.find((x) => x.id === id)!;
   const p = await dokument(`${e.namn}: ${info.metod}`);
-  huvud(p, e.namn, plan, info, idag, s, e);
+  huvud(p, e.namn, plan, info, idag, false);
+  innehallet(p, info.undertitel, info, ['Omfattning', 'Metoden']);
+  malet(p, info, s, e);
   p.rubrik('Vecka för vecka', 180);
   skalan(p, info, 6);
   const narvaro = s.narvaro && e.narvaro !== null && s.gjorda > 0;
@@ -221,11 +325,13 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   p.text(`${riktningText(e)}.`);
   if (narvaro) p.text(narvaronText(e, s));
   for (const t of elevensResultat(plan, e.resultat)) p.text(mening(resultatText(plan, info, t)));
-  if (s.avstamning?.beslut) p.text(`Gruppens avstämning mitt i insatsen: ${BESLUT[s.avstamning.beslut as keyof typeof BESLUT] ?? s.avstamning.beslut}.`);
   // Utvärderingen med lärarens mening, och avslutet med anledningen när insatsen avslutades tidigare (K-542; Niclas
   // 2026-10-25: "kommer med på totala sammaställningen och för varje elev"). Meningen gäller gruppen, så de andra elevernas
   // namn står inte i den här elevens utskrift.
-  const utvarderingen = utanNamn(utvarderingenText(plan, s.utvardering, !s.slut), s.namnen.filter((x) => x.namn !== e.namn), [e]);
-  if (utvarderingen) p.text(`Utvärdering efter insatsen: ${utvarderingen}`);
+  besluten(p, [
+    // Avstämningen med beslutet utan lärarens mening, som kan handla om de andra eleverna.
+    { etikett: 'Mitt i insatsen', text: s.avstamning?.beslut ? `${BESLUT[s.avstamning.beslut as keyof typeof BESLUT] ?? s.avstamning.beslut}.` : '' },
+    { etikett: 'Efter insatsen', text: utanNamn(utvarderingenText(plan, s.utvardering, !s.slut), s.namnen.filter((x) => x.namn !== e.namn), [e]) },
+  ]);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);
 }

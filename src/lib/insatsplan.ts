@@ -64,6 +64,8 @@ export interface PlanData {
   titel: string;
   omrade: string;
   undertitel?: string;
+  /** Metodens ingress, som står under Innehållet i insatsen i gruppens sammanställning (Niclas 2026-10-28). */
+  ingress?: string;
   /** Metodens adress i texten till dokumentationen, utan https. */
   adress: string;
   sida: string;
@@ -504,6 +506,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     titel: d.titel,
     omrade: d.omrade,
     ...(d.undertitel ? { undertitel: d.undertitel } : {}),
+    ...(d.ingress ? { ingress: d.ingress } : {}),
     adress: `${site.url.replace(/^https?:\/\//, '')}/stodundervisning/${m.id}`,
     sida: `/stodundervisning/${m.id}`,
     ...(uppdaterad ? { uppdaterad, uppdateradText: formateraDatum(d.uppdaterad!) } : {}),

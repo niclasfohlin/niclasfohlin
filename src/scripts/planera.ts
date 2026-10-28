@@ -15,9 +15,9 @@
 // fyller i den"). Elevernas namn och allt läraren för in stannar i webbläsaren och följer aldrig med länken,
 // kalenderfilen, statistiken eller texterna som kopieras.
 import {
-  arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTidI, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
+  arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTidI, dokumentationstext, dokumentationsrader, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsLangder, passetsVisadeRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
-  bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
+  bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, radText, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
@@ -1320,7 +1320,7 @@ const goat = (vad: string, titel: string) => `data-goatcounter-click="planera:${
 // kalendern saknade Berättelseramens rad om de två versionerna till pass 9).
 function efterPasset(b: ReturnType<typeof passetFor>): string[] {
   const allman = data.passet?.efter && (!b.egenOrdning || b.delar.length) && !b.efterIstallet && !(b.tabell?.efter && !b.tabell.sida) ? data.passet.efter : '';
-  return [...(b.efterForst ?? []).map((r) => (r.etikett ? `${r.etikett}: ${r.text}` : r.text)), b.tabell?.efter ?? '', allman].filter(Boolean);
+  return [...(b.efterForst ?? []).map(radText), b.tabell?.efter ?? '', allman].filter(Boolean);
 }
 function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string {
   const roller = p ? rollerFor(p) : [];
@@ -1476,7 +1476,7 @@ const passetIKalendern = (p: Pass) => iPassetsLektion(p, () => {
   // Passets problem med adressen på en egen rad, så att ingen punkt hamnar i länken.
   const x = passetsPost(p);
   const post = x ? ['slut' in x ? x.slut : `${stor(data.bank!.en)}: ${x.namn}.`, `${location.origin}${x.adress}`] : [];
-  const rader = (t: { etikett: string; text: string }[]) => t.map((r) => mening(r.etikett ? `${r.etikett}: ${r.text}` : r.text)).join(' ');
+  const rader = (t: { etikett: string; text: string }[]) => t.map((r) => mening(radText(r))).join(' ');
   // Passets egna rader i en del står efter delarna med delens namn, som i rutan (passetsBeskrivning).
   const iDelarna = [...(b.foreForst ? [`${FORE_PASSET}: ${rader(b.foreForst)}`] : []), ...b.delar.filter((d) => d.forst?.length || d.sist?.length).map((d) => `${d.fas}: ${rader([...(d.forst ?? []), ...(d.sist ?? [])])}`)];
   return [[b.namn, ...b.texter.map((t) => (t.etikett ? `${t.etikett}: ${t.text}` : t.text))].filter(Boolean).map((t) => mening(t)).join(' '), ...post, b.delar.length ? `Passet: ${b.delar.map((d) => `${d.fas} ${delensTidI(d.tid, b.delar)}`).join(', ')}.` : '', ...iDelarna, efterPasset(b).length ? `Efter passet: ${efterPasset(b).map((t) => mening(t)).join(' ')}` : ''].filter(Boolean).join('\n');
@@ -2362,7 +2362,10 @@ $('pl-veckor').addEventListener('click', (e) => {
 const metodensNamn = () => (bas.versionsval ? `${data.titel}, ${(bas.versionsval.versioner.find((x) => x.slug === aktiv.val.version) ?? bas.versionsval.versioner[0]).namn}` : data.titel);
 const info = () => ({ titel: metodensNamn(), mal: aktivtMal(), uppfoljning: data.uppfoljning.rader });
 let senaste: Sammanstallning = sammanstallning(plan, aktiv.foljd, idag, veckornasLektioner());
-const pdfInfo = () => ({ metod: metodensNamn(), grupp: aktiv.namn || undefined, niva: nivaNamn(), mal: malText(aktivtMal()), fragan: skattningsfragan(!harElever()), uppfoljning: data.uppfoljning.rader });
+// Pdf:ens underlag: Innehållet i insatsen har metodens ingress i gruppens pdf och undertiteln i elevens, och raderna ur
+// texten till åtgärdsprogrammet (Niclas 2026-10-28: "Ha en rubrik om Innehållet i insatsen med en text från ingress eller
+// metoden").
+const pdfInfo = () => ({ metod: metodensNamn(), grupp: aktiv.namn || undefined, niva: nivaNamn(), mal: malText(aktivtMal()), fragan: skattningsfragan(!harElever()), uppfoljning: data.uppfoljning.rader, ingress: data.ingress, undertitel: data.undertitel, insatsen: dokumentationsrader(...atgardsunderlag()) });
 // En knapp som ger en pdf heter Skriv ut där webbläsaren kan skriva ut den direkt, och annars "som pdf", som
 // utskriftsknapparna på resten av sajten (SkrivUtPdf.astro).
 const pdfOrd = (vad: string) => (kanSkrivaUtPdf() ? `Skriv ut ${vad}` : `${stor(vad)} som pdf`);
@@ -2596,6 +2599,22 @@ $('pl-samman').addEventListener('click', (e) => { const knapp = (e.target as Ele
 // 2020). Filen har elevernas namn; den skickas ingenstans. Kopian görs av det sidan har nu, inte av det som är sparat,
 // så att den håller också när webbläsaren inte sparar (granskningen 2026-10-24).
 const kopiansAlder = () => (aktiv.kopia ? Math.round((Date.parse(idag) - Date.parse(aktiv.kopia.slice(0, 10))) / 86400000) : null);
+const senastNer = () => `Planen laddades senast ner ${datumText(aktiv.kopia!.slice(0, 10))}.`;
+const igen = 'Ladda ner den igen, så kommer det senaste med.';
+// Påminnelsen om filen, en rot för raden längst ned och lägesraden överst, där läraren är (Niclas 2026-10-28: "mindre troligt
+// att de raderas eller försvinner"; utredningen samma dag, underlag/prov/k598/lagring/svar.md: filen är det enda som klarar
+// Safaris sju dagar, en rensad skoldator, privat läge och en förlorad telefon). Den står när läraren följer insatsen, har fört
+// in något och inte har laddat ner på en vecka, och efter sista passet när filen är äldre än det. I Safari i iPhone, utanför
+// appen Stöd, säger den varför.
+function kopiansPaminnelse(): string {
+  if (!aktiv.sparad || !aktiv.folj || !harInfort()) return '';
+  const alder = kopiansAlder();
+  const efterSista = !!plan.sistaPass && plan.sistaPass <= idag && (aktiv.kopia ?? '') < plan.sistaPass;
+  if (alder !== null && alder <= 7 && !efterSista) return '';
+  const w = webblasaren();
+  const safari = w.ios && !w.app && !iAppen() ? ' Safari tar bort det en sida har sparat efter sju dagar utan besök. I appen Stöd gör det inte.' : '';
+  return `${efterSista ? 'Ladda ner planen, så finns hela insatsen med utvärderingen i filen.' : alder === null ? 'Det du för in finns bara i den här webbläsaren. Ladda ner planen, så finns det kvar.' : `${senastNer()} ${igen}`}${safari}`;
+}
 function renderaKopia() {
   const text = $('pl-kopia-text');
   const harFoljd = aktiv.folj && harInfort();
@@ -2609,7 +2628,7 @@ function renderaKopia() {
     ? 'Spara planen, så finns den i den här webbläsaren och går att ladda ner som fil. Har du laddat ner en plan på en annan dator? Öppna den här.'
     : harFoljd
       ? alder === null ? 'Det du för in finns bara i den här webbläsaren. Ladda ner planen och lägg filen där du har skolans filer, så finns den kvar och går att öppna på en annan dator. Länken visar bara planen.'
-        : alder > 7 ? `Planen laddades senast ner ${datumText(aktiv.kopia!.slice(0, 10))}. Ladda ner den igen, så kommer det senaste med.` : `Planen laddades senast ner ${datumText(aktiv.kopia!.slice(0, 10))}. Länken visar bara planen; filen har allt.`
+        : alder > 7 ? `${senastNer()} ${igen}` : `${senastNer()} Länken visar bara planen; filen har allt.`
       : 'Länken visar planen på en annan dator eller telefon. Planen som fil har allt, också gruppens namn.';
 }
 function sparaKopia() {
@@ -2620,6 +2639,7 @@ function sparaKopia() {
   const fil = planfilen(egen, PLANERA.version);
   laddaNer(new Blob([fil], { type: 'application/json' }), filnamnet('plan', { vem: aktiv.namn, metod: data.id, datum: idag }));
   renderaKopia();
+  renderaLage();
   visaBesked('Planen är nedladdad. Lägg filen bland skolans filer. Den har elevernas namn, så dela den inte.');
 }
 $('pl-kopia-spara').addEventListener('click', sparaKopia);
@@ -2841,10 +2861,13 @@ function sparaPlanen() {
 $('pl-spara').addEventListener('click', sparaPlanen);
 $('pl-spara-nere').addEventListener('click', sparaPlanen);
 // Texten till åtgärdsprogrammet: åtgärden, målet, omfattningen, vad eleven arbetar med och uppföljningen.
-function atgardstext() {
+// Underlaget en gång, så att texten som kopieras och tabellen Innehållet i insatsen i sammanställningens pdf har samma
+// rader (dokumentationsrader i standarden).
+function atgardsunderlag(): Parameters<typeof dokumentationstext> {
   const genomforda = aktiv.folj && aktiv.foljd.gjorda.length ? { genomforda: antalBockade(plan, aktiv.foljd.gjorda) } : {};
-  return dokumentationstext({ titel: metodensNamn(), undertitel: data.undertitel, adress: data.adress, mal: data.mal, steg: (data.progression?.rader ?? []).map((r) => r.kort), uppfoljning: data.uppfoljning.rader, nivaNamn: nivaNamn() }, plan, aktiv.val, { minuter: minuter(), folj: aktiv.folj, utvardering: aktiv.foljd.utvardering, elever: elevernasNamn(aktiv.foljd), pagar: !!plan.sistaPass && !slutNu(), ...genomforda, ...lektionernasText(), ...(extraPassetsDatum() ? { extraPass: { datum: extraPassetsDatum()! } } : {}) });
+  return [{ titel: metodensNamn(), undertitel: data.undertitel, adress: data.adress, mal: data.mal, steg: (data.progression?.rader ?? []).map((r) => r.kort), uppfoljning: data.uppfoljning.rader, nivaNamn: nivaNamn() }, plan, aktiv.val, { minuter: minuter(), folj: aktiv.folj, utvardering: aktiv.foljd.utvardering, elever: elevernasNamn(aktiv.foljd), pagar: !!plan.sistaPass && !slutNu(), ...genomforda, ...lektionernasText(), ...(extraPassetsDatum() ? { extraPass: { datum: extraPassetsDatum()! } } : {}) }];
 }
+function atgardstext() { return dokumentationstext(...atgardsunderlag()); }
 // En knapp som har gjort det den ska säger det själv en stund, intill där läraren tryckte (de kalla läsarna 2026-10-24:
 // "Kopiera texten ger ingen bekräftelse").
 function kvittera(knapp: HTMLElement, text: string) {
@@ -2967,7 +2990,8 @@ function renderaLage() {
     : [`Sista passet ${dagText(plan.sistaPass!)}.`, [kanAvsluta ? `<button type="button" class="knapp sekundar liten" data-gor="avsluta" aria-expanded="${avslutaOppen}" aria-controls="pl-avsluta">Avsluta insatsen</button>` : '']];
   const bock = avslutad ? '<svg class="pl-avslutad-bock" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><path d="M14 24.5l7 7 13-14"/></svg>' : '';
   const synliga = knappar.filter(Boolean);
-  ruta.innerHTML = `<p${avslutad && nyssAvslutad ? ' role="status"' : ''}>${bock}<span class="pl-status ${lage}">${STATUSNAMN[lage]}</span> ${esc(text)}</p>${synliga.length ? `<p class="pl-andra-knappar">${synliga.join('')}</p>` : ''}${kanAvsluta ? avslutaFormular() : ''}`;
+  const paminn = kopiansPaminnelse();
+  ruta.innerHTML = `<p${avslutad && nyssAvslutad ? ' role="status"' : ''}>${bock}<span class="pl-status ${lage}">${STATUSNAMN[lage]}</span> ${esc(text)}</p>${synliga.length ? `<p class="pl-andra-knappar">${synliga.join('')}</p>` : ''}${kanAvsluta ? avslutaFormular() : ''}${paminn ? `<p class="pl-paminn pl-kopia-overst">${esc(paminn)} <button type="button" class="pl-textknapp" data-gor="kopia" ${goat('kopia-overst', 'planen nedladdad från lägesraden')}>Ladda ner planen</button></p>` : ''}`;
 }
 // Formuläret Avsluta insatsen, under raden överst: planens pass som kan bli det sista, i grupper per vecka, förvalt i veckan
 // som visas, dagens pass eller det senaste som har varit i den vecka gruppen är i, vad som stryks, anledningen med två
@@ -3007,6 +3031,7 @@ $('pl-lage').addEventListener('click', (e) => {
   const gor = knapp.dataset.gor;
   if (gor === 'angra-avslut') { angraAvslutet(); return; }
   if (gor === 'avsluta-klar') { avslutaKlar(); return; }
+  if (gor === 'kopia') { sparaKopia(); return; }
   // Utan Följ insatsen avslutas insatsen efter sista passet här, med utvärderingens beslut Avsluta insatsen, och Ångra
   // avslutet öppnar den igen (verifieringen 2026-10-25).
   if (gor === 'avsluta-nu') {
@@ -3127,6 +3152,10 @@ if (appText) notis = appText;
     `Sidan känner igen: ${w.app ? `${w.app} egen webbläsare` : iAppen() ? 'appen Stöd' : 'en vanlig webbläsare'}`,
     `Sparar: ${lagringOk ? 'ja' : 'nej'}`,
   ].join('. ') + '.';
+  // Om webbläsaren har beviljat varaktig lagring, som skyddar planerna när enheten får ont om plats (utredningen 2026-10-28),
+  // så att det syns när en lärare hör av sig. Sidan ber om den när planen sparas (bedOmVaraktig).
+  const teknik = $('pl-teknik');
+  void (navigator.storage?.persisted?.() ?? Promise.resolve(undefined)).then((v) => { if (v !== undefined) teknik.textContent = `${teknik.textContent?.replace(/\.$/, '')}. Sparar varaktigt: ${v ? 'ja' : 'nej'}.`; }).catch(() => {});
 }
 if (!lagringOk) notis = 'Webbläsaren sparar inget här, till exempel i privat läge. Kopiera länken till planen, så finns den kvar.';
 visaNotis(notis, notis === appText ? appKnappar : '');
