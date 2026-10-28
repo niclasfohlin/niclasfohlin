@@ -76,16 +76,16 @@ tidsschema:
       vad: Välj passets tal för gruppens nivå i tabellen Talen och bladen i veckorna, och räkna dem själv medan du säger handgreppen högt. Lägg fram veckans material ur tabellen Materialet du behöver, veckans blad och elevernas Mina lärdomar.
     - tid: 0–8 min
       fas: Uppvärmningen
-      vad: Låt en elev läsa förra lärdomen och gör en uppgift som visar den. I kursens första pass bygger ni i stället ett tal ur kartläggningen. Säg ett tal som alla lägger med sifferkorten, drar isär och bygger, och låt dem växla. I vecka 5–8 bygger de med multilink, och korten är med i vecka 6–7. Ge sedan fyra till sex talfakta muntligt, låt eleverna tänka tyst och skriv en elevs tanke som en uträkning. Den dag ni tar upp läxan Åt båda hållen gör ni det i stället för talfakta.
+      vad: Låt en elev läsa förra lärdomen och gör en uppgift som visar den. Säg ett tal som alla lägger med sifferkorten, drar isär och bygger, och låt dem växla. Ge sedan fyra till sex talfakta muntligt, låt eleverna tänka tyst och skriv en elevs tanke som en uträkning. Den dag ni tar upp läxan Åt båda hållen gör ni det i stället för talfakta.
     - tid: 8–18 min
       fas: Genomgången
-      vad: Berätta passets första uppgift som en kort händelse, gör ett överslag och räkna sedan uppgiften framför eleverna med materialet och skriften bredvid. Säg allt du gör och fråga gruppen under tiden. Visa sist veckans vanliga fel. I ett tredje pass ligger materialet kvar i asken, och du säger vad som händer i materialet medan du skriver.
+      vad: Berätta passets första uppgift som en kort händelse, gör ett överslag och räkna sedan uppgiften framför eleverna med materialet och skriften bredvid. Säg allt du gör och fråga gruppen under tiden. Visa sist veckans vanliga fel.
     - tid: 18–30 min
       fas: Åt andra hållet
-      vad: Räkna samma tal åt andra hållet och led ett handgrepp i taget. Paren byter roller till nästa uppgift med samma tal, som 85 − 57, så att båda har byggt. Gör en uppgift till om någon behöver mer än en påminnelse. I ett tredje pass säger den ena i paret vad som händer i materialet, och den andra skriver.
+      vad: Räkna samma tal åt andra hållet och led ett handgrepp i taget. Paren byter roller till nästa uppgift med samma tal, som 85 − 57, så att båda har byggt. Gör en uppgift till om någon behöver mer än en påminnelse.
     - tid: 30–52 min
       fas: Bladet
-      vad: Låt eleven räkna vidare på veckans blad. Gå runt, stanna högst en halv minut hos varje elev och be eleven berätta vad hen gör. Med fler än sex elever börjar du hos de par som tvekade. I ett tredje pass börjar du med det som du antecknade att du skulle visa igen.
+      vad: Låt eleven räkna vidare på veckans blad. Gå runt, stanna högst en halv minut hos varje elev och be eleven berätta vad hen gör. Med fler än sex elever börjar du hos de par som tvekade.
     - tid: 52–60 min
       fas: Lärdomen
       vad: Visa båda uträkningarna och fråga vilket tal som är helheten. I addition och subtraktion är de andra två talen delarna, och i multiplikation och division antalet rader och antalet i varje rad. Paren säger en mening, en elev säger den till gruppen, och du skriver den på väggplanschen. Alla skriver lärdomen i Mina lärdomar.
@@ -107,7 +107,7 @@ steg:
         - Sex gånger fyra är 24. Vilka två divisioner vet vi då?
     - namn: Genomgången
       fraga: Vad gör jag, och vad ser ni?
-      gor: Börja med en kort händelse och ett överslag. Gör sedan passets första uppgift framför eleverna och säg allt du gör, vad du lägger, var du lägger det, vad du växlar och vad du skriver. Fråga gruppen under tiden, men gör handgreppen själv. Visa sist veckans vanliga fel och fråga hur eleven kan ha tänkt.
+      gor: Börja med en kort händelse och ett överslag. Gör sedan passets första uppgift framför eleverna och säg allt du gör, vad du lägger, var du lägger det, vad du växlar och vad du skriver. Fråga gruppen under tiden, men gör handgreppen själv. Visa sist veckans vanliga fel och fråga hur eleven kan ha tänkt. I ett tredje pass ligger materialet kvar i asken, och du säger vad som händer i materialet medan du skriver.
       fraser:
         - Vad kan talen handla om?
         - Ungefär hur mycket blir det?
@@ -116,7 +116,7 @@ steg:
         - En elev skrev 57 + 28 = 715. Hur kan hen ha tänkt?
     - namn: Åt andra hållet
       fraga: Kan vi räkna det åt andra hållet tillsammans?
-      gor: Säg först hela händelsen med alla tre talen, som ”Ines hade 57 kronor, fick 28 och har nu 85”. Dölj sedan ett tal, som ”Ines har 85 kronor och fick nyss 28. Hur mycket hade hon från början?”, och fråga om ni söker helheten eller en del. Räkna sedan samma tal åt andra hållet med hela gruppen, ett handgrepp i taget. I paret bygger eller ritar den ena och den andra skriver, och till nästa uppgift med samma tal byter de, så att båda har byggt. Med ett udda antal arbetar tre tillsammans och turas om. Vänta tills alla är klara innan nästa handgrepp, och låt alla svara på tavlan eller i kör. Gå vidare till Bladet när varje elev gör nästa handgrepp rätt med högst en påminnelse och kan säga varför, som varför ni växlar eller vad raderna i rektangeln betyder.
+      gor: Säg först hela händelsen med alla tre talen, som ”Ines hade 57 kronor, fick 28 och har nu 85”. Dölj sedan ett tal, som ”Ines har 85 kronor och fick nyss 28. Hur mycket hade hon från början?”, och fråga om ni söker helheten eller en del. Räkna sedan samma tal åt andra hållet med hela gruppen, ett handgrepp i taget. I paret bygger eller ritar den ena och den andra skriver, och till nästa uppgift med samma tal byter de, så att båda har byggt. I ett tredje pass säger den ena i paret vad som händer i materialet, och den andra skriver. Med ett udda antal arbetar tre tillsammans och turas om. Vänta tills alla är klara innan nästa handgrepp, och låt alla svara på tavlan eller i kör. Gå vidare till Bladet när varje elev gör nästa handgrepp rätt med högst en påminnelse och kan säga varför, som varför ni växlar eller vad raderna i rektangeln betyder.
       fraser:
         - Samma händelse åt andra hållet. Söker vi helheten eller en del?
         - Vi räknar åt andra hållet. Vad bygger vi?
@@ -125,7 +125,7 @@ steg:
         - Lägg det ni tar bort på den nedre raden. Vilket tal blir raderna tillsammans?
     - namn: Bladet
       fraga: Kan du göra det själv?
-      gor: Eleven räknar vidare på bladet, med materialet på bordet, och en uppgift på varje blad räknar eleven också åt andra hållet. Gå runt, stanna högst en halv minut hos varje elev, lyssna och ställ klargörande frågor. Fråga vad eleven gör och ser, och har eleven räknat fel, låt hen hitta felet själv. Den som fastnar medan du är hos någon annan markerar var hen fastnade och visar sitt senaste säkra steg med materialet. Gör flera samma fel, stoppar du arbetet och gör en uppgift till med gruppen.
+      gor: Eleven räknar vidare på bladet, med materialet på bordet, och en uppgift på varje blad räknar eleven också åt andra hållet. Gå runt, stanna högst en halv minut hos varje elev, lyssna och ställ klargörande frågor. Fråga vad eleven gör och ser, och har eleven räknat fel, låt hen hitta felet själv. Den som fastnar medan du är hos någon annan markerar var hen fastnade och visar sitt senaste säkra steg med materialet. Gör flera samma fel, stoppar du arbetet och gör en uppgift till med gruppen. I ett tredje pass börjar du med det som du antecknade att du skulle visa igen.
       fraser:
         - Stämmer det? Räkna åt andra hållet.
         - Var behöver du växla? Hur ser du det innan du räknar?
@@ -451,6 +451,17 @@ plan:
     - nar: veckans tredje
       kort: "Befästa"
       text: "I ett tredje pass skriver eleverna med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
+    # Ett tredje pass i Genomgången, Åt andra hållet och Bladet, ordagrant ur stegen, där meningarna står sedan riggens K-596,
+    # så att de bara står i det tredje passet (K-605).
+    - nar: veckans tredje
+      del: Genomgången
+      text: "I ett tredje pass ligger materialet kvar i asken, och du säger vad som händer i materialet medan du skriver."
+    - nar: veckans tredje
+      del: Åt andra hållet
+      text: "I ett tredje pass säger den ena i paret vad som händer i materialet, och den andra skriver."
+    - nar: veckans tredje
+      del: Bladet
+      text: "I ett tredje pass börjar du med det som du antecknade att du skulle visa igen."
     # Vilken av veckans tre uppgifter som är passets, före Välj passets tal i varje pass (K-596).
     - nar: vecka 1–8
       del: Före passet
@@ -500,6 +511,11 @@ plan:
     - nar: veckans första pass i vecka 4–5
       del: Före passet
       ur: { tabell: "Materialet du behöver", rad: "Talrutan och Tomma talrader", kolumner: ["Material", "Per elev", "Var du hittar det", "När ni använder det"] }
+    # Uppvärmningen i kursens första pass, utan lärdom, ordagrant ur stegen, där meningen står sedan riggens K-596 (K-605).
+    # Meningen om multilink i vecka 5–8 nämner sifferkorten, som inte är en sak i metoden, så den väntar på riggen.
+    - nar: första passet
+      del: Uppvärmningen
+      text: "I kursens första pass finns ingen lärdom än, och då bygger ni ett tal ur kartläggningen."
     # Kursintyget i sista passet, också när passet flyttas (K-596).
     - nar: sista passet
       del: Uppvärmningen
@@ -548,7 +564,7 @@ checklista:
   punkter:
     - Skriv ut kartläggningens blad och lärarens protokoll.
     - Gör kartläggningen veckan före kursen och bestäm gruppens nivå.
-    - "Skriv ut per elev: räknemattans ark, Tomma talrader, Addition 1, Subtraktion 1, Mina lärdomar, läxan Åt båda hållen och kortet Säg varje gång."
+    - "Samla och skriv ut per elev: tiobas, sifferkort, multilink, räknemattans ark, Tomma talrader, Addition 1, Subtraktion 1, Mina lärdomar, läxan Åt båda hållen och kortet Säg varje gång."
     - Läs vecka 1 under Kursens material i metoden, och räkna första talet åt båda hållen.
     - Sätt upp en väggplansch för lärdomarna.
     - Prata med varje elev i åk 7 om ett eget mål.

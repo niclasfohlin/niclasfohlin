@@ -1053,7 +1053,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.8.1', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.8.2', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -1702,18 +1702,25 @@ export function passetsRoller(plan, p, passen) {
  * Raderna som passet visar på sidan och i kalendern (passetsBeskrivning): av raderna om passets plats i insatsen, sista,
  * näst sista, ett nummer eller ett spann, bara den mest bestämda och raderna med samma när, och sedan raderna om metodens
  * veckor och platsen i veckan. Flera rader med samma när är ett pass med rader i olika delar, som Boksamtalets sista
- * läspass (den stängda frågan 2026-10-26).
+ * läspass (den stängda frågan 2026-10-26). En rad om veckorna eller platsen i veckan med samma när som en av tidsschemats
+ * varianter hör till varianten och står bara när varianten är passets: Antalsuppfattnings läxa i veckans första pass i
+ * vecka 2–5 står inte i första passet i en ny period som börjar på vecka 3, där varianten Första passet säger att passet
+ * börjar utan läxa (riggens K-596, sajtens K-605).
  * @param {Plan} plan
  * @param {Pass} p
  * @param {Metodplan['passen']} passen
+ * @param {{ nar: string }[]} [varianter] tidsschemats varianter
  * @returns {number[]}
  */
-export function passetsVisadeRoller(plan, p, passen) {
+export function passetsVisadeRoller(plan, p, passen, varianter) {
   const rader = passetsRoller(plan, p, passen);
   const nar = (r) => (passen ?? []).find((x) => x.rad === r)?.nar;
   const plats = rader.filter((r) => narensVikt(nar(r)) < 2);
   const forsta = plats.length ? JSON.stringify(nar(plats[0])) : undefined;
-  return [...plats.filter((r) => JSON.stringify(nar(r)) === forsta), ...rader.filter((r) => narensVikt(nar(r)) >= 2)];
+  const varianternas = (varianter ?? []).map((v) => JSON.stringify(variantensNar(v.nar)));
+  const passets = varianternas.length ? variantenFor(varianter, passetsLage(plan, p)) : undefined;
+  const horHit = (r) => !varianternas.includes(JSON.stringify(nar(r))) || (!!passets && JSON.stringify(variantensNar(passets.nar)) === JSON.stringify(nar(r)));
+  return [...plats.filter((r) => JSON.stringify(nar(r)) === forsta), ...rader.filter((r) => narensVikt(nar(r)) >= 2 && horHit(r))];
 }
 
 // ---------- Passet ----------

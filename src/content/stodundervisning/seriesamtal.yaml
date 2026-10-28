@@ -63,7 +63,7 @@ tabeller:
   - rubrik: Perioden pass för pass
     plats: efter-tidsschema
     meny: true
-    text: Pass 1–⁠6 har var sin bildserie, där två personer vill olika saker. Varje serie har fyra rutor och slutar där konflikten är som störst. I den sista rutan har personerna ansikten utan ögon och mun, och när det finns tid över ritar eleverna färdigt ansiktena. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill. Det eleven tar med sig från en bildserie är tumregeln. Från pass 4 berättar en elev serien utan att du ställer frågor, och på bordet ligger kortet Frågor vi ställer till varandra. Pass 1, pass 7, ett pass med en egen serie och det sista passet har egna tabeller efter Samtalsteknikerna.
+    text: Pass 1–⁠6 har var sin bildserie, där två personer vill olika saker. Varje serie har fyra rutor och slutar där konflikten är som störst. I den sista rutan har personerna ansikten utan ögon och mun, och när det finns tid över ritar eleverna färdigt ansiktena. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill. Det eleven tar med sig från en bildserie är tumregeln. Från pass 4 berättar en elev serien utan att du ställer frågor, och på bordet ligger kortet Frågor vi ställer till varandra. Pass 1, pass 7, ett pass med en egen serie, det sista passet och påfyllningspasset har egna tabeller efter Samtalsteknikerna.
     kolumner:
       - Pass
       - Det som händer
@@ -194,6 +194,7 @@ tabeller:
           Med mig
           27–⁠30 min
         - Var och en säger en sak hen tar med sig. Gruppen säger dagens tumregel, och du skriver den på gruppens blad. Dela ut spanarbladen.
+    not: I förskoleklass, där pass 1 blir två pass, har det första passet delarna Varför vi ses 0–⁠4 min, Gruppens regler 4–⁠7 min, Tankebubblan 7–⁠17 min och Med mig 17–⁠20 min. Det andra är Fönsterplatsen i ett pass på 20 minuter.
   - rubrik: "Pass 7: en gång när det nästan blev bråk"
     plats: efter-steg
     meny: true
@@ -230,7 +231,6 @@ tabeller:
           Med mig
           26–⁠30 min
         - "Var och en säger vad hen tar med sig, läser målet på sin pärm och säger hur det går med det. Berätta att ni från pass 8 ritar en elevs egen händelse i varje pass, och i vilken ordning ni tar dem. Dela ut spanarbladen med uppdraget ”Lägg märke till en gång när det nästan blev bråk, men det blev inget. Vad gjorde någon precis innan, så att det inte blev bråk?”"
-    not: Påfyllningspasset fyra veckor efter det sista passet har samma delar och tider. I delen Spaningen läser var och en sin plan och säger hur den har gått. Sedan ritar var och en ett tillfälle när planen fungerade. Har elevens plan inte fungerat, ritar eleven en gång när det blev svårt. I delen Ovanifrån säger eleven i vilken ruta någon hade behövt tänka och göra annorlunda, och i delen Nästa gång säger hen hur det kan bli i stället. Direkt efter passet gör ni en ny plan på bladet Min plan, och det tar cirka tio minuter.
   - rubrik: Ett pass med en egen serie
     plats: efter-steg
     meny: true
@@ -300,6 +300,43 @@ tabeller:
           Avslutet
           27–⁠30 min
         - Säg en sak du har sett hos var och en. Säg också att det kommer att bli bråk igen, och att de nu vet hur de kan lära sig av det. Berätta att du visar provbilden för var och en efter passet, och att ni ses igen om fyra veckor i ett påfyllningspass, där ni läser planerna och ritar en serie om en gång när planen fungerade.
+  - rubrik: Påfyllningspasset
+    plats: efter-steg
+    meny: true
+    text: Fyra veckor efter det sista passet ses ni igen. Var och en läser sin plan och ritar ett tillfälle när den fungerade.
+    kolumner:
+      - Del
+      - Så gör du
+    rader:
+      - - |-
+          Förberedelse
+          Före passet
+        - Lägg fram elevernas pärmar med bladet Min plan, pennor, en mall med fyra rutor till var och en och ett nytt blad Min plan.
+      - - |-
+          Spaningen
+          0–⁠4 min
+        - Var och en läser sin plan på bladet Min plan och säger hur den har gått.
+      - - |-
+          Spola tillbaka
+          4–⁠13 min
+        - Var och en spolar tillbaka till när det var lugnt och ritar en ruta i taget fram till när planen fungerade. Har elevens plan inte fungerat, ritar eleven en gång när det blev svårt. Du ritar åt den som vill.
+      - - |-
+          Tankarna
+          13–⁠17 min
+        - Var och en ritar sin egen tankebubbla och den andra personens, i rutan där planen fungerade eller där det blev svårt.
+      - - |-
+          Ovanifrån
+          17–⁠23 min
+        - Var och en visar sin serie och säger i vilken ruta planen hjälpte. Den som ritade en gång när det blev svårt säger i stället i vilken ruta någon hade behövt tänka och göra annorlunda.
+      - - |-
+          Nästa gång
+          23–⁠26 min
+        - Den som ritade en gång när det blev svårt säger hur det kan bli i stället. De andra säger när de kan göra likadant igen.
+      - - |-
+          Med mig
+          26–⁠30 min
+        - Var och en läser målet på sin pärm och säger vad hen tar med sig. Säg till var och en något som de vuxna har berättat att hen gör bra.
+    not: Säger de vuxna före passet att en elevs plan inte går, gör du en ny plan med eleven på bladet Min plan direkt efter passet, och det tar cirka tio minuter.
   - rubrik: Så anpassar du för eleven
     plats: efter-steg
     kolumner:
@@ -307,7 +344,7 @@ tabeller:
       - Så gör du
     rader:
       - - Förskoleklass
-        - Passet kan bli 20 minuter, med delarna Spaningen 0–⁠3 min, Spola tillbaka 3–⁠8 min, Tankarna 8–⁠12 min, Ovanifrån 12–⁠14 min, Nästa gång 14–⁠17 min och Med mig 17–⁠20 min. I delen Ovanifrån pekar eleven på rutan där någon hade behövt göra annorlunda. Dela pass 1 i två pass, ett med syftet, reglerna och tankebubblan, och ett med Fönsterplatsen. Räkna båda som pass 1. I övningen Tankebubblan ritar eleven det hen tittar på, i stället för att skriva det. Fråga mest om det ni ser och det personerna gör. Du ritar och skriver, och eleven pekar. Gör också det som står i raden F–⁠2.
+        - Passet kan bli 20 minuter. Tiderna står under rubriken Ett pass på 30 minuter. I delen Ovanifrån pekar eleven på rutan där någon hade behövt göra annorlunda. Dela pass 1 i två pass, ett med syftet, reglerna och tankebubblan, och ett med Fönsterplatsen. Räkna båda som pass 1. I övningen Tankebubblan ritar eleven det hen tittar på, i stället för att skriva det. Fråga mest om det ni ser och det personerna gör. Du ritar och skriver, och eleven pekar. Gör också det som står i raden F–⁠2.
       - - F–⁠2
         - Läs berättelsen och peka på personerna. Där ni stannar läser du de två vägarna framåt på lärarens sida och frågar vilken eleven tror på, till exempel ”Tror du att Alva säger nej, eller frågar hon om Sam mår illa?” Låt eleven välja mellan två tankar, och fråga ”Ville hen vara dum, eller ville hen något annat?” Du skriver i bubblan det eleven säger. Eleven gör spanaruppdraget med en vuxen i klassen, och när ni fyller i Min plan visar eleven med fingrarna hur stark känslan var. Har eleven varit med om något, ritpratar du med hen samma dag, och ni tar upp serien i gruppen om den uppfyller de tre kraven.
       - - Åk 3–⁠5
@@ -435,7 +472,7 @@ passrutin:
   efterPasset: Du fyller i snabbmallen och lägger elevernas blad i pärmarna. Efter ett pass med en egen serie frågar du ägaren vilken vuxen hen vill visa Min plan för. Visar en egen serie att något runt eleven behöver ändras, tar du det vidare till klassläraren eller elevhälsan, om eleven säger ja.
 tidsschema:
   rubrik: Ett pass på 30 minuter
-  text: Tabellen gäller ett pass med en bildserie, pass 2–⁠6. Läs förra passets rad i snabbmallen och lärarens sida för dagens serie, och skriv vad eleverna ska få syn på i dag under Före i snabbmallen. Lärarens sida har berättelsen och säger var ni stannar. Det du kan säga står under Passets sex delar. De andra passen har egna tabeller, som står efter Samtalsteknikerna.
+  text: Tabellen gäller ett pass med en bildserie, pass 2–⁠6. Läs förra passets rad i snabbmallen och lärarens sida för dagens serie, och skriv vad eleverna ska få syn på i dag under Före i snabbmallen. Lärarens sida har berättelsen och säger var ni stannar. Med en elev står det du gör annorlunda i varje del i tabellen En elev eller två till fyra. Det du kan säga står under Passets sex delar. De andra passen har egna tabeller, som står efter Samtalsteknikerna.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -459,6 +496,17 @@ tidsschema:
       fas: Med mig
       vad: Talpinnen går en runda, och var och en säger vad hen tar med sig. Säg en sak du såg hos gruppen, skriv tumregeln på gruppens blad och dela ut spanarbladen.
   efter: Delen Med mig hoppar ni aldrig över, eftersom det är där eleven säger vad hen har fått syn på.
+  # Förskoleklassens pass på 20 minuter (K-596), med tiderna som stod i tabellen Så anpassar du för eleven.
+  varianter:
+    - nar: ett pass på 20 minuter
+      text: I förskoleklass kan passet bli 20 minuter.
+      delar:
+        - { fas: Spaningen, tid: 0–3 min }
+        - { fas: Spola tillbaka, tid: 3–8 min }
+        - { fas: Tankarna, tid: 8–12 min }
+        - { fas: Ovanifrån, tid: 12–14 min }
+        - { fas: Nästa gång, tid: 14–17 min }
+        - { fas: Med mig, tid: 17–20 min }
 steg:
   rubrik: "Passets sex delar: vad du gör och säger"
   text: Det som skiljer i en egen serie står i tabellen Ett pass med en egen serie. Under Du kan säga står frågor och meningar att välja bland. Välj en eller två i taget, och vänta minst tre sekunder på svaret.
@@ -623,7 +671,7 @@ progression:
       roll: Du ritar åt den som vill. Från pass 8 spolar du tillbaka till när det var lugnt och ritar elevens version, eller låter eleven rita. Efter det sista passet visar du provbilden för var och en.
       eleverna: Att berätta i sin egen serie vad man själv gjorde och hur det påverkade den andra. Att säga vad man själv tänkte och ville, och vad den andra kan ha tänkt och velat.
 uppfoljning:
-  text: Du behöver veta om eleven ser mer i en social situation än förut, och om det märks utanför rummet. Provbilden och protokollet står under Material att skriva ut. Har provbildens poäng och klasslärarens siffra stigit, avslutar du insatsen med påfyllningspasset, och de vuxna runt eleven fortsätter med frågorna på kortet Till de vuxna runt eleven och planen på bladet Min plan. Har poängen stigit men inte klasslärarens siffra, ritar du en eller två egna serier till med eleven ensam före påfyllningspasset, som i tabellen Ett pass med en egen serie. Sedan gör du en ny plan. Säger de vuxna före påfyllningspasset att planen inte går, gör ni en ny plan direkt efter påfyllningspasset. Har poängen inte stigit, tar du upp det med elevhälsan.
+  text: Du behöver veta om eleven ser mer i en social situation än förut, och om det märks utanför rummet. Provbilden och protokollet står under Material att skriva ut. Rör sig gruppen inte mot målet när du stämmer av mitt i perioden, tar ni en av Bildserie 1–⁠4 en gång till före nästa egna serie, och var och en tar den person hen inte tog förra gången. Rör sig en elev inte, ritar du hens nästa egna serie med hen ensam, som i tabellen En elev eller två till fyra. Har provbildens poäng och klasslärarens siffra stigit, avslutar du insatsen med påfyllningspasset, och de vuxna runt eleven fortsätter med frågorna på kortet Till de vuxna runt eleven och planen på bladet Min plan. Har poängen stigit men inte klasslärarens siffra, ritar du en eller två egna serier till med eleven ensam före påfyllningspasset, som i tabellen Ett pass med en egen serie. Sedan gör du en ny plan. Säger de vuxna före påfyllningspasset att planen inte går, gör ni en ny plan direkt efter påfyllningspasset. Har poängen inte stigit, tar du upp det med elevhälsan.
   rader:
     - nar: Före pass 1
       tid: "före"
@@ -640,7 +688,9 @@ uppfoljning:
       resultat: "provbildens poäng 0–⁠8, klasslärarens siffra 0–⁠10, elevens siffra 0–⁠10"
     - nar: Fyra veckor efter sista passet
       tid: "efter 4 veckor"
-      vad: "Fråga de vuxna runt eleven hur planen går. Håll sedan ett påfyllningspass på 30 minuter där ni läser planerna på bladet Min plan, med samma delar som i tabellen Pass 7: en gång när det nästan blev bråk."
+      # Planen visar påfyllningspassets delar vid raden (riggens K-596, K-605).
+      tabell: Påfyllningspasset
+      vad: "Fråga de vuxna runt eleven hur planen går. Håll sedan ett påfyllningspass på 30 minuter som i tabellen Påfyllningspasset, där ni läser planerna på bladet Min plan."
 plan:
   utan:
     - "Tabellen gäller ett pass med en bildserie, pass 2–⁠6."
@@ -733,6 +783,10 @@ plan:
     - nar: vecka 4
       text: "Fråga varandra"
       ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Fråga varandra, kolumner: ["Så gör du"] }
+  # Metodens sätt att justera vid avstämningen mitt i perioden, ur uppföljningens text (riggens K-596, K-605).
+  justera:
+    - "Rör sig gruppen inte mot målet när du stämmer av mitt i perioden, tar ni en av Bildserie 1–⁠4 en gång till före nästa egna serie, och var och en tar den person hen inte tog förra gången."
+    - "Rör sig en elev inte, ritar du hens nästa egna serie med hen ensam, som i tabellen En elev eller två till fyra."
   # Passgenomgången 2026-10-26 (sajtens K-572): antalet veckor efter gruppens storlek, och beslutet efter provbilden och
   # påfyllningspasset, ur Var hittar du bildserierna och händelserna? och uppföljningens text.
   veckoval:

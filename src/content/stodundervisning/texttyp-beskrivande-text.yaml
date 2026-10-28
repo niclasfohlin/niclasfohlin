@@ -110,7 +110,7 @@ tidsschema:
 
 arbetsform:
   rubrik: "Arbetsform: gemensamt, läraren visar, i par, gemensamt igen"
-  text: "I delen Säg sätter sig två par ihop, och läsaren kommer ur det andra paret. De två som beskriver gör det samtidigt, var och en för sin läsare. Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. Så blir det i varje pass när gruppen har två, tre, sex, sju eller tio elever. Då skriver du på bladet Det jag hör vad det paret säger. Är en i paret borta, blir kamraten den tredje i ett annat par. I pass 9 har var och en sin egen plan, och då är kamraten läsaren, som aldrig har sett elevens sak. I ett par med tre elever beskriver en elev i pass 3 och 7. I pass 4 och 8 beskriver de två andra i trion efter varandra för samma läsare, och trion tar då sex minuter från Skriv. I pass 6 och 9 beskriver alla tre i trion, som då tar fyra minuter från Skriv. Paren är desamma hela kursen, och paret får planera på sitt starkaste språk."
+  text: "I delen Säg sätter sig två par ihop, och läsaren kommer ur det andra paret. De två som beskriver gör det samtidigt, var och en för sin läsare. Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. Så blir det i varje pass när gruppen har två, tre, sex, sju eller tio elever. Då skriver du på bladet Det jag hör vad det paret säger. Är en i paret borta, blir kamraten den tredje i ett annat par. I pass 9 har var och en sin egen plan, och då är kamraten läsaren, som aldrig har sett elevens sak. I ett par med tre elever beskriver en elev i pass 3 och 7. I pass 4 och 8 beskriver de två andra i trion efter varandra för samma läsare, och trion och läsaren tar då sex minuter från Skriv. I pass 6 och 9 beskriver alla tre i trion, och trion och läsaren tar då fyra minuter från Skriv. Paren är desamma hela kursen, och paret får planera på sitt starkaste språk."
   delar:
     - rubrik: 1. Gemensamt
       text: Hela gruppen, med dig vid tavlan
@@ -340,8 +340,49 @@ urval:
     - rubrik: "Någon som kan svara"
       text: "Läsaren finns på riktigt, har inte sett det och kan svara på brevet om skolan före pass 11"
 
+progression:
+  rubrik: "Det eleverna blir bättre på, vecka för vecka"
+  # Raderna följer kursens pass, två per rad, så att planen visar dem rätt också när kursen börjar mitt i en vecka
+  # (Codex 2026-10-28, K-605).
+  enhet: Pass
+  text: "Gruppen går vidare varje vecka, eftersom läsarna väntar på texterna."
+  # Vad eleverna blir bättre på vecka för vecka, knutet till målets punkter: vecka 3 punkt 2, vecka 4 punkt 3, vecka 5
+  # punkt 1 och vecka 6 punkt 5 (K-596). Raderna har inget vidare, som i Texttyper i grupp: besöket och breven är bokade,
+  # och planen har ingen knapp Upprepa veckan.
+  rader:
+    - vecka: "1–2"
+      rubrik: "Läsaren"
+      fokus: "Läsaren: en kort text till dig, och frågestunden med barnen"
+      roll: "Du är läsaren och svarar på den korta texten."
+      eleverna: "Att läsa som läsaren och säga vad de ser framför sig och vad de undrar."
+    - vecka: "3–4"
+      rubrik: "Du visar"
+      fokus: "Du visar: din beskrivning av lärarrummet"
+      roll: "Du tänker högt och beskriver lärarrummet. Paren gör efter dig."
+      eleverna: "Att välja för läsarens skull och säga valet högt."
+    - vecka: "5–6"
+      rubrik: "Gruppens text"
+      fokus: "Gruppens text till barnen, och besöket"
+      roll: "Du håller pennan, och eleverna väljer."
+      eleverna: "Att ge läsaren helheten först, med vad det är, var det finns och vad det liknar."
+    - vecka: "7–8"
+      rubrik: "Parens text"
+      fokus: "Parens text: brevet om skolan"
+      roll: "Du lyssnar innan du frågar vem som läser."
+      eleverna: "Att säga det som bara den här har, med exakta ord, och lägga åt sidan det läsaren redan vet."
+    - vecka: "9–10"
+      rubrik: "Egen text"
+      fokus: "Egen text: brevet om en sak, en plats eller ett djur"
+      roll: "Eleven gör stegen själv, och du är läsare åt den som behöver det."
+      eleverna: "Att säga vem som ska läsa och vad läsaren ska se, innan de skriver."
+    - vecka: "11–12"
+      rubrik: "Svaren"
+      fokus: "Svaren: en ny kort text, och svaren på brevet om skolan"
+      roll: "Du lägger den nya korta texten bredvid den första."
+      eleverna: "Att känna igen en uppgift som ber om en beskrivande text, och se när den också ber om en förklaring."
+
 uppfoljning:
-  text: "Du ser om kursen hjälper i det du hör och i det eleven skriver. Barnens teckningar och läsarnas svar ligger bredvid texterna, och eleven följer sina texter i diagrammet Mina texter. Efter Uppgift 1 beslutar du hur eleven går vidare. Ger varje fråga på kortet Läsarens frågor en ruta i stapeln Efter kursen, avslutar du insatsen. Annars, om stapeln Efter kursen har högst en ruta fler än stapeln Första korta, tar du upp det med elevhälsan. Annars går eleven en period till på tre veckor, vecka 4 till 6 med nästa grupp, och skriver två nya brev till nya läsare."
+  text: "Du ser om kursen hjälper i det du hör och i det eleven skriver. Barnens teckningar och läsarnas svar ligger bredvid texterna, och eleven följer sina texter i diagrammet Mina texter. Saknar elevens stapel Till barnet en ruta för vad det är och var eller för vad det liknar, beskriver eleven i Säg i pass 7, och du är läsaren och frågar ”Vad är det, och var? Vad liknar det?” Efter Uppgift 1 beslutar du hur eleven går vidare. Ger varje fråga på kortet Läsarens frågor en ruta i stapeln Efter kursen, avslutar du insatsen. Annars, om stapeln Efter kursen har högst en ruta fler än stapeln Första korta, tar du upp det med elevhälsan. Annars går eleven en period till på tre veckor, vecka 4 till 6 med nästa grupp, och skriver två nya brev till nya läsare."
   rader:
     # Raderna heter som mätningen och har tiden i tid, och en rad med fält för resultat mäter en sak (sajtens steg 4b och
     # de kalla läsarna 2026-10-27, K-585). Det läraren ger klassläraren efter pass 6 är ingen mätning och står i planen.
@@ -412,7 +453,7 @@ plan:
     # eftersom provet inte känner veckosidans del Den korta texten.
     - nar: pass 1
       del: "Före passet"
-      text: "Har gruppen gått en annan kurs i serien, ändrar du pass 1 och pass 3. I pass 1 gör ni den korta texten från minut 5 till 18. Sedan läser var och en sitt sista mål, till minut 20. Efter frågorna i Två texter säger var och en vad hen känner igen."
+      text: "Har gruppen gått en annan kurs i serien, läser eleven sitt sista mål i pass 1, efter den korta texten, och säger efter frågorna i Två texter vad hen känner igen."
     # Bladet Det jag hör skrivs ut före veckans första pass, som bladet säger (språkrundan 2026-10-27), och raden står sist
     # i passets förberedelse.
     - nar: pass 1
@@ -468,7 +509,7 @@ plan:
     # En grupp som har gått en annan kurs i serien, ur Till läraren: veckorna (K-596).
     - nar: pass 3
       del: "Visa och pröva"
-      text: "Har gruppen gått en annan kurs i serien, ändrar du pass 1 och pass 3. I pass 3 hoppar du över raden i Visningen, vecka 2, med frågan ”Vad sa jag allra först?”, och paren planerar från minut 18."
+      text: "Har gruppen gått en annan kurs i serien, hoppar du i pass 3 över raden i Visningen, vecka 2, där du vänder dig till gruppen."
     # Kortet Ord för var ur Så gör du under Kortet Läsarens frågor, i det första passet där eleverna beskriver (K-596).
     - nar: pass 3
       del: "Säg"
@@ -484,7 +525,7 @@ plan:
       text: "Ta fram blädderblocket till din text."
     - nar: pass 4
       del: "Säg"
-      text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. I pass 4 och 8 beskriver de två andra i trion efter varandra för samma läsare, och trion tar då sex minuter från Skriv."
+      text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. I pass 4 och 8 beskriver de två andra i trion efter varandra för samma läsare, och trion och läsaren tar då sex minuter från Skriv."
     - nar: pass 4
       del: "Efter passet"
       text: "Fråga lärarna som har rummen om ni får komma, och be om en vuxen till när fler än två par går till olika platser. Be barnens lärare skicka ett foto av teckningarna dagen före pass 6, så att eleverna kan lägga dem bredvid sina texter."
@@ -518,7 +559,7 @@ plan:
       text: "Skriv ut elevens sida av Två texter, vecka 3, ett blad per par."
     - nar: pass 6
       del: "Säg"
-      text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. I pass 6 och 9 beskriver alla tre i trion, som då tar fyra minuter från Skriv."
+      text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. I pass 6 och 9 beskriver alla tre i trion, och trion och läsaren tar då fyra minuter från Skriv."
     - nar: pass 6
       del: "Efter passet"
       text: "Efter pass 6 ger du elevernas klasslärare kortet Läsarens frågor och tavlans tre rader."
@@ -561,7 +602,7 @@ plan:
       text: "Skriv ut elevens sida av Två texter, vecka 4, ett blad per par."
     - nar: pass 8
       del: "Säg"
-      text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. I pass 4 och 8 beskriver de två andra i trion efter varandra för samma läsare, och trion tar då sex minuter från Skriv."
+      text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. I pass 4 och 8 beskriver de två andra i trion efter varandra för samma läsare, och trion och läsaren tar då sex minuter från Skriv."
     - nar: pass 8
       del: "Efter passet"
       text: "Läs breven efter pass 8 och pass 10. Rätta med blyerts det som gör breven svåra att läsa, och skriv också med blyerts frågan ”Hur vet jag att det är just den?” vid ett ställe som kunde passa in på något annat. Svarsraderna skriver du på ett eget papper, som du lägger i mappen."
@@ -579,7 +620,7 @@ plan:
       text: "I åk 6–⁠7 visar du i pass 9, under Visa och pröva, hur du skriver det som är nytt för läsaren, och var och en skriver en rad till på sitt kort Läsarens frågor: ”Första gången en hyvelbänk, sedan hyvelbänken.”"
     - nar: pass 9
       del: "Säg"
-      text: "I pass 6 och 9 beskriver alla tre i trion, som då tar fyra minuter från Skriv."
+      text: "I pass 6 och 9 beskriver alla tre i trion, och trion och läsaren tar då fyra minuter från Skriv."
     - nar: pass 9
       del: "Efter passet"
       text: "Brevet om skolan postar du efter pass 9. Skicka fotot av brevet till läsarens e-post samma dag, så hinner svaret komma."
@@ -635,6 +676,9 @@ plan:
     - "Ger varje fråga på kortet Läsarens frågor en ruta i stapeln Efter kursen, avslutar du insatsen."
     - "Annars, om stapeln Efter kursen har högst en ruta fler än stapeln Första korta, tar du upp det med elevhälsan."
     - "Annars går eleven en period till på tre veckor, vecka 4 till 6 med nästa grupp, och skriver två nya brev till nya läsare."
+  # Vad läraren ändrar efter pass 6, ordagrant ur uppföljningens text (riggens K-596, K-605).
+  justera:
+    - "Saknar elevens stapel Till barnet en ruta för vad det är och var eller för vad det liknar, beskriver eleven i Säg i pass 7, och du är läsaren och frågar ”Vad är det, och var? Vad liknar det?”"
 mal:
   overgripande: "kunna beskriva så att läsaren ser det framför sig."
   rubrik: "Mål: det eleven gör efter kursen"
@@ -650,7 +694,7 @@ checklista:
   rubrik: Checklista inför kursen
   punkter:
     - "Boka en yngre klass före pass 2, helst en vecka före kursen."
-    - "Bestäm vilka som ska vara med, och sätt ihop paren."
+    - "Välj eleverna, bestäm deras skrivstöd och sätt ihop paren."
     - "Skriv ut till pass 1 bladet Något du aldrig har sett, bladet Mitt mål, diagrammet Mina texter och elevens sida i Två texter, vecka 1: Skåpet, ett blad per par."
     - "Läs Texttyper i grupp, och öva högt på din beskrivning av lärarrummet med manuset Visningen, vecka 2."
     - "Fotografera lärarrummet, och be en kollega på en annan skola vara reservläsare."
@@ -683,7 +727,8 @@ ramar:
     - rubrik: "Till läraren: veckorna"
       lektioner: true
       text:
-        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus. Sedan kommer de två passen och sist det du ska lägga märke till. De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen. När en text är klar skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa text börjar läser hen det först. Före pass 1 tar du fram blädderblocket till listan Det vi inte visste i barnens ålder, bladet Barnets frågor och en pärm per par. Mellan passen skriver du två korta versioner till Två sätt i era texter före pass 5 och 9. Kvällen före pass 6 skriver du ut fotona av teckningarna. Efter pass 6 ger du elevernas klasslärare kortet Läsarens frågor och tavlans tre rader. Efter pass 9 postar du breven om skolan. Har gruppen gått en annan kurs i serien, ändrar du pass 1 och pass 3. I pass 1 gör ni den korta texten från minut 5 till 18. Sedan läser var och en sitt sista mål, till minut 20. Efter frågorna i Två texter säger var och en vad hen känner igen. I pass 3 hoppar du över raden i Visningen, vecka 2, med frågan ”Vad sa jag allra först?”, och paren planerar från minut 18."
+        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus. Sedan kommer de två passen och sist det du ska lägga märke till. Lägg inte passen på tiden för elevens läs- eller stavningsstöd. De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen. När en text är klar skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa text börjar läser hen det först. Före pass 1 tar du fram blädderblocket till listan Det vi inte visste i barnens ålder, bladet Barnets frågor och en pärm per par. Mellan passen skriver du två korta versioner till Två sätt i era texter före pass 5 och 9. Kvällen före pass 6 skriver du ut fotona av teckningarna. Efter pass 6 ger du elevernas klasslärare kortet Läsarens frågor och tavlans tre rader. Efter pass 9 postar du breven om skolan."
+        - "Har gruppen gått en annan kurs i serien, läser eleven sitt sista mål i pass 1, efter den korta texten, och säger efter frågorna i Två texter vad hen känner igen. Den korta texten går då 5–⁠18 min och målet 18–⁠20 min. Har gruppen gått en annan kurs i serien, hoppar du i pass 3 över raden i Visningen, vecka 2, där du vänder dig till gruppen. Visa och pröva går då 5–⁠18 min och Tänk och planera 18–⁠36 min."
       delar:
         - rubrik: "Vecka 1 · Läsaren"
           falt:

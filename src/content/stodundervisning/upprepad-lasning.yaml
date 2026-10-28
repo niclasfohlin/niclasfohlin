@@ -194,38 +194,6 @@ tabeller:
       - - är klar med en omgång
         - ”Vilken strategi hjälpte dig? Vad gör du nästa gång?”
     not: "Bara ”Bra!” talar inte om för eleven vad hen ska göra nästa gång. Beröm det eleven gjorde och strategin hen använde."
-  - rubrik: Lästräningstexterna vecka för vecka
-    plats: efter-urval
-    text: "Läskorten finns under Materialet. Peka på orden ur texten i en annan ordning, så hör du om eleverna läser orden eller minns texten. Står någon i gruppen på steg 1 eller 2 i lästrappan när ni börjar, välj en period på åtta veckor. Står alla på steg 3, räcker sex veckor. Hinner ni inte till Draken och Vanten, läser ni dem i nästa period om eleven fortsätter."
-    kolumner:
-      - Text
-      - Veckans fokus
-      - Ord ur texten
-    rader:
-      - - "1 · Ola är ute"
-        - "Korta ord med ljud som går att dra ut, som ros, röd och ler. Ordet ”är” läser eleven som en ordbild. Varje mening har en enda båge."
-        - "solen, ros, röd, rund, ute, ler"
-      - - "2 · Katten Sam"
-        - "Kort vokal före dubbelteckning, som i katt, och ändelserna i katt-⁠en och rop-⁠ar."
-        - "katt, katten, grå, mjuk, stol, äta"
-      - - "3 · Bollen"
-        - "Ändelserna -en och -ar, som i boll-⁠en och spark-⁠ar, och konsonantmötena bl, sp och spr."
-        - "boll, bollen, blå, sparkar, buske, hunden"
-      - - "4 · Fåglarna"
-        - "Ord i plural, som fåg-⁠lar och fåg-⁠lar-⁠na, och konsonantmötena br och sm."
-        - "fåglar, fåglarna, trädet, smyger, molnen, stund"
-      - - "5 · Snögubben"
-        - "Två ord i ett, som snö-⁠gubbe och snö-⁠boll-⁠ar. Läs delarna och sedan hela ordet."
-        - "snögubbe, snöbollar, natten, morot, mössa, varandra"
-      - - "6 · Sandslottet"
-        - "Två ord i ett, som sand-⁠slott, och konsonantmötena str och spr, som i strand-⁠en och spring-⁠er."
-        - "sandslott, stranden, vågorna, närmare, vallgrav, sandhög"
-      - - "7 · Draken"
-        - "Repliker, frågetecken och utropstecken. Läs som personen i texten skulle säga det. Texten passar också som lästeater."
-        - "drake, molnet, himlen, papper, pojke, snöret"
-      - - "8 · Vanten"
-        - "Längre meningar och repliker. Läs hela bågen innan du stannar."
-        - "vante, hallen, skolväskan, skolgården, bänkarna, svansen"
 passrutin:
   text: "Varje pass går till på samma sätt. Eleverna läser, du visar, eleverna läser igen i minst två omgångar, och sedan avslutar ni. Hur eleverna läser igen väljer du efter vad de behöver. Varför den ordningen? När eleverna läser först hör du vilka ord, ljud och ändelser som fastnar, och i modelleringen visar du just det. Läser ni igen i kör får alla läsa orden rätt flera gånger utan att stå ensamma, och i par får eleverna läsa om många gånger med en kamrat som stöd. Samma text genom hela passet är själva poängen."
   steg:
@@ -376,6 +344,51 @@ hem:
   text:
     - "När texten flyter i skolan får eleven ta hem en kopia som frivillig läxa och läsa den högt två eller tre gånger för någon hemma. Läxan finns för att eleven ska läsa hemma också. Första gången skickar du med strategikortet och lappen till vårdnadshavaren. Båda finns under Materialet."
     - "Blir läxan ett bekymmer, till exempel för att ingen hemma kan lyssna, hoppar ni över den. Eleven får ändå läsa texten flera gånger med dig i skolan."
+progression:
+  rubrik: Lästräningstexterna vecka för vecka
+  text: "Läskorten finns under Materialet. Peka på orden ur texten i en annan ordning, så hör du om eleverna läser orden eller minns texten. Står någon i gruppen på steg 1 eller 2 i lästrappan när ni börjar, välj en period på åtta veckor. Står alla på steg 3, räcker sex veckor. Hinner ni inte till Draken och Vanten, läser ni dem i nästa period om eleven fortsätter. I alla veckorna övar eleverna också på att märka när det inte stämmer och rätta sig själva."
+  enhet: Vecka
+  rader:
+    - vecka: "1"
+      rubrik: "Ola är ute"
+      fokus: "Ola är ute: korta ord med ljud som går att dra ut, som ros, röd och ler. Ordet ”är” läser eleven som en ordbild. Varje mening har en enda båge."
+      roll: "Peka på orden i en annan ordning: solen, ros, röd, rund, ute, ler."
+      eleverna: "Att säga ljuden utan paus och höra ordet, i korta ord som ros, röd och ler."
+    - vecka: "2"
+      rubrik: "Katten Sam"
+      fokus: "Katten Sam: kort vokal före dubbelteckning, som i katt, och ändelserna i katt-⁠en och rop-⁠ar."
+      roll: "Peka på orden i en annan ordning: katt, katten, grå, mjuk, stol, äta."
+      eleverna: "Att läsa den korta vokalen före dubbelteckningen, som i katt, och dela ordet vid ändelsen, som katt-⁠en."
+    - vecka: "3"
+      rubrik: "Bollen"
+      fokus: "Bollen: ändelserna -en och -ar, som i boll-⁠en och spark-⁠ar, och konsonantmötena bl, sp och spr."
+      roll: "Peka på orden i en annan ordning: boll, bollen, blå, sparkar, buske, hunden."
+      eleverna: "Att dela ordet vid ändelsen, som boll-⁠en och spark-⁠ar, och läsa bl, sp och spr utan paus."
+    - vecka: "4"
+      rubrik: "Fåglarna"
+      fokus: "Fåglarna: ord i plural, som fåg-⁠lar och fåg-⁠lar-⁠na, och konsonantmötena br och sm."
+      roll: "Peka på orden i en annan ordning: fåglar, fåglarna, trädet, smyger, molnen, stund."
+      eleverna: "Att läsa ord i plural i delar, som fåg-⁠lar-⁠na, och sedan hela ordet."
+    - vecka: "5"
+      rubrik: "Snögubben"
+      fokus: "Snögubben: två ord i ett, som snö-⁠gubbe och snö-⁠boll-⁠ar. Läs delarna och sedan hela ordet."
+      roll: "Peka på orden i en annan ordning: snögubbe, snöbollar, natten, morot, mössa, varandra."
+      eleverna: "Att dela ett ord som är två ord i ett, som snö-⁠gubbe, och läsa delarna innan hela ordet."
+    - vecka: "6"
+      rubrik: "Sandslottet"
+      fokus: "Sandslottet: två ord i ett, som sand-⁠slott, och konsonantmötena str och spr, som i strand-⁠en och spring-⁠er."
+      roll: "Peka på orden i en annan ordning: sandslott, stranden, vågorna, närmare, vallgrav, sandhög."
+      eleverna: "Att dela långa ord i orddelar, som sand-⁠slott och strand-⁠en, och läsa ihop hela ordet."
+    - vecka: "7"
+      rubrik: "Draken"
+      fokus: "Draken: repliker, frågetecken och utropstecken. Läs som personen i texten skulle säga det. Texten passar också som lästeater."
+      roll: "Peka på orden i en annan ordning: drake, molnet, himlen, papper, pojke, snöret."
+      eleverna: "Att läsa en replik så som personen i texten säger den, och berätta vad texten handlar om."
+    - vecka: "8"
+      rubrik: "Vanten"
+      fokus: "Vanten: längre meningar och repliker. Läs hela bågen innan du stannar."
+      roll: "Peka på orden i en annan ordning: vante, hallen, skolväskan, skolgården, bänkarna, svansen."
+      eleverna: "Att läsa en lång mening i ett svep, som när man pratar, och berätta vad texten handlar om."
 uppfoljning:
   text: "Före första passet och efter perioden läser eleven en ny text, en text ni inte har övat på. Välj två texter ur en lättläst bok eller en nivåindelad serie innan ni börjar, och spara den andra till efter perioden. De ska vara lika långa och svåra som lästräningstexterna Fåglarna och Snögubben. Ta ingen av lästräningstexterna, eftersom ni övar på dem i passen. Använd protokollet Lästrappan före och efter, som finns under Materialet. Du lyssnar på en elev i taget utanför passen, omkring fem minuter per elev. Under perioden följer du eleven i första läsningen. Trappsteget stannar mellan dig och eleven. Visa det inte inför gruppen. Läser eleven den nya texten på steg 4 eller 5 efter perioden, avslutar ni insatsen. Har eleven gått upp minst ett steg men står fortfarande på steg 1–3, fortsätter ni en period till med nya texter. Står eleven kvar på samma steg som före insatsen, byter ni till träning i att läsa ord, till exempel i Läslistor i grupp, och du tar upp det med elevhälsan."
   rader:
@@ -393,6 +406,9 @@ uppfoljning:
       resultat: "steget på lästrappan, från 1 gissar till 5 läser med flyt"
       vad: "Eleven läser en ny text som är lika lång och på samma nivå. Fyll i protokollet Lästrappan före och efter igen och jämför med starten. Berätta för eleven vad du har hört."
 plan:
+  # Texterna är metodens progression (riggens K-596), så en grupp som fortsätter en period till kan börja på Draken och
+  # Vanten, som veckovalet säger (K-605).
+  stege: true
   # Stödet för passets längd (K-564): varianten för ett pass på tio minuter, som metodens sida skriver den.
   langdval:
     text: "Ett pass på tio minuter: första läsningen 0–2 minuter, modellering 2–4, läs igen 4–9 och avslutning 9–10. Då hinner du lyssna på varje elev om gruppen har högst fyra elever. Med fem eller sex elever är passet 15 minuter."
@@ -405,7 +421,7 @@ plan:
   # Första passet i passets delar (passgenomgången 2026-10-26): modelleringen ger minuterna, i båda längderna.
   passen:
     - nar: första passet
-      kort: "Ola är ute, varför samma text"
+      kort: "Varför samma text"
       del: Första läsningen
       text: "I första passet börjar du med att berätta för eleverna varför ni läser samma text flera gånger."
     - nar: första passet
@@ -457,31 +473,6 @@ plan:
       del: Läs igen
       sist: true
       text: "Peka på orden ur texten i en annan ordning, så hör du om eleverna läser orden eller minns texten."
-    # Veckans fokus och orden ur texten, så att läraren vet vilka ord som prövas i en annan ordning (K-596).
-    - nar: vecka 1
-      kort: "Ola är ute"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "1 · Ola är ute", kolumner: [Veckans fokus, Ord ur texten] }
-    - nar: vecka 2
-      kort: "Katten Sam"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "2 · Katten Sam", kolumner: [Veckans fokus, Ord ur texten] }
-    - nar: vecka 3
-      kort: "Bollen"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "3 · Bollen", kolumner: [Veckans fokus, Ord ur texten] }
-    - nar: vecka 4
-      kort: "Fåglarna"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "4 · Fåglarna", kolumner: [Veckans fokus, Ord ur texten] }
-    - nar: vecka 5
-      kort: "Snögubben"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "5 · Snögubben", kolumner: [Veckans fokus, Ord ur texten] }
-    - nar: vecka 6
-      kort: "Sandslottet"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "6 · Sandslottet", kolumner: [Veckans fokus, Ord ur texten] }
-    - nar: vecka 7
-      kort: "Draken"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "7 · Draken", kolumner: [Veckans fokus, Ord ur texten] }
-    - nar: vecka 8
-      kort: "Vanten"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "8 · Vanten", kolumner: [Veckans fokus, Ord ur texten] }
   justera:
     - "Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
   upprepa: "Byt text när den flyter för de flesta i gruppen och eleverna kan läsa orden också i en annan ordning."

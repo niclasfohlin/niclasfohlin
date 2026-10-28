@@ -72,7 +72,11 @@ const tomFoljd = (): HelFoljd => ({ gjorda: [], elever: [], franvaro: {}, vecka:
 interface Aktiv { id: string; namn: string; val: Val; folj: boolean; foljd: HelFoljd; sparad: boolean; franLank: boolean; uppdaterad?: string; kopia?: string }
 // Veckorna med ett värde i metodens egna skattningar (K-559), som räknas som infört, som skattningarna mot målet.
 const mattVeckor = () => Object.values(aktiv.foljd.matt ?? {}).flatMap((v) => Object.keys(v ?? {}));
-const nyAktiv = (val: Val = forval(mp, idag), franLank = false, id = nyttId()): Aktiv => ({ id, namn: '', val, folj: false, foljd: tomFoljd(), sparad: false, franLank });
+// En metod med en egen skattning av gruppen, som Gruppstärkande aktiviteters Lärarens skattning, följer insatsen från början,
+// eftersom skattningen är en del av metoden, och läraren kan välja bort det (Niclas 2026-10-28: "Tycker den ska med om den
+// är en del av metoden. Men kan ju väljas bort också"). En sparad plan behåller lärarens val.
+const foljerFranBorjan = () => (data.skattningar ?? []).some((x) => x.vem === 'gruppen' && !!x.skala);
+const nyAktiv = (val: Val = forval(mp, idag), franLank = false, id = nyttId()): Aktiv => ({ id, namn: '', val, folj: foljerFranBorjan(), foljd: tomFoljd(), sparad: false, franLank });
 const fran = lasVal(location.hash);
 const { planer, ok: lagringOk, varningar: lagringensVarningar } = lasPlaner();
 // Planerna för metoden, med nästa pass först och en plan som är slut sist (granskningen 2026-10-24: "Öppna den plan som har
@@ -1274,8 +1278,8 @@ function justeraText() {
 // förberedelsen, kommer ur standardens passetsBeskrivning, som kalendern också läser (K-515: kalendern valde delarna på
 // eget sätt och visade två tidsscheman för samma pass). Har passet en tid lika lång som delarna står klockslagen.
 // Den mest bestämda raden om passets plats i insatsen, med raderna som har samma när, och sedan raderna om metodens veckor
-// och platsen i veckan, i standardens ordning (passetsVisadeRoller).
-const rollerFor = (p: Pass) => passetsVisadeRoller(plan, p, mp.passen).map((r) => data.passen![r]);
+// och platsen i veckan, i standardens ordning (passetsVisadeRoller). En rad med samma när som en variant följer varianten.
+const rollerFor = (p: Pass) => passetsVisadeRoller(plan, p, mp.passen, data.passet?.varianter).map((r) => data.passen![r]);
 // Passets längd: dagens klockslag när läraren har satt dem, och annars passets längd i planen.
 const passetsMinuter = (p: Pass) => { const t = passetsTid(aktiv.val, p); return t ? minuterAv(t[1]) - minuterAv(t[0]) : minuter(); };
 // Passet med tidsschemats variant för passet: Läslistors vecka 1–3, Högläsning i pars visning och Upprepad läsnings pass

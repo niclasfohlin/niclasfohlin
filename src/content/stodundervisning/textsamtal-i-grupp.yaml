@@ -413,7 +413,7 @@ tabeller:
         - Lutar dig tillbaka och skriver det du hör på lyssningsbladet. Frågar den som leder vilken fråga på samtalskortet som kan hjälpa när samtalet stannar. Ställer sist en av textens öppna frågor
   - rubrik: "Bänkboken: pass 3 i vecka 6–8"
     plats: efter-arbetsform
-    text: "I vecka 6–8 läser eleverna en sida i sin egen bänkbok i pass 3, i stället för metodens text. Passet har samma delar och tider som förut. Eleven läser där hen är i boken och sätter en post-it-lapp med ett frågetecken där något inte står, eftersom man inte stryker under i en bok. Du förbereder inget stopp, eftersom eleven ska hitta sitt ställe själv. Be eleverna ta med bänkboken, och lägg fram post-it-lappar och ett ledtrådsblad till varje elev. Eleven lämnar ledtrådsbladet till dig. Lappen sitter kvar i boken, och eleven får sätta fler när hen läser vidare. I det första passet med bänkboken lyssnar du på alla."
+    text: "I vecka 6–8 läser eleverna en sida i sin egen bänkbok i pass 3, i stället för metodens text. Passet har samma delar och tider som förut. Eleven läser där hen är i boken och sätter en post-it-lapp med ett frågetecken där något inte står, eftersom man inte stryker under i en bok. Du förbereder inget stopp, eftersom eleven ska hitta sitt ställe själv. Be eleverna ta med bänkboken, och lägg fram post-it-lappar och ett ledtrådsblad till varje elev. Eleven lämnar ledtrådsbladet till dig. Lappen sitter kvar i boken, och eleven får sätta fler när hen läser vidare. I passen med bänkboken lyssnar du på alla, så att lyssningsbladet visar varje elev när du bestämmer om insatsen ska sluta."
     kolumner:
       - Delen
       - Eleverna
@@ -534,7 +534,7 @@ tidsschema:
         - { fas: Samtala om texten, tid: 16–26 min }
         - { fas: Avsluta, tid: 26–30 min }
     - nar: veckans andra pass i vecka 1
-      text: Du visar parsamtalet med en elev vid stoppet innan paren samtalar.
+      text: Du visar parsamtalet med en elev vid stoppet innan paren samtalar, som tabellen Parsamtalet vid stoppet visar.
       delar:
         - { fas: Starten, tid: 0–3 min }
         - { fas: Möt texten, tid: 3–5 min }
@@ -799,7 +799,7 @@ plan:
     # Bänkboken i förberedelsen och i stället för Möt texten, Läs och tänk och Samtala om texten.
     - nar: veckans tredje pass i vecka 6–8
       kort: "Eleverna läser i bänkboken"
-      text: "I vecka 6–8 läser eleverna en sida i sin egen bänkbok i pass 3, i stället för metodens text. Du förbereder inget stopp, eftersom eleven ska hitta sitt ställe själv. I det första passet med bänkboken lyssnar du på alla."
+      text: "I vecka 6–8 läser eleverna en sida i sin egen bänkbok i pass 3, i stället för metodens text. Du förbereder inget stopp, eftersom eleven ska hitta sitt ställe själv. I passen med bänkboken lyssnar du på alla, så att lyssningsbladet visar varje elev när du bestämmer om insatsen ska sluta."
     - nar: veckans tredje pass i vecka 6–8
       del: Före passet
       istallet: true
@@ -870,6 +870,7 @@ mal:
     - Visa en ledtråd i texten
     - Slå ihop flera ledtrådar
     - Använda det man vet för att dra en slutsats
+    - Pröva slutsatsen mot resten av texten och tänka om
     - Säga sin tanke med ”Jag tror att” och en ledtråd
     - Bygga vidare på en kamrats tanke, och säga när man tänker annorlunda
     - Göra en inferens med mindre stöd

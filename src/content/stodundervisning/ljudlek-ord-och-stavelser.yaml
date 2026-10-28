@@ -23,7 +23,7 @@ material:
   - bokstavskorten
   - speglar
   - snabbmallen
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 2
@@ -163,7 +163,7 @@ passrutin:
   efterPasset: "Du noterar i snabbmallen vilka av dagens elever som räknade orden och delarna själva, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
-  text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
+  text: "Passet tar 30 minuter när ni ses tre eller fyra gånger i veckan. Ses ni varje dag, eller orkar eleverna inte så länge, som ofta i förskoleklass, räcker 20 minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
@@ -187,6 +187,23 @@ tidsschema:
       fas: "Avslut"
       vad: "Var och en säger ett ord från dagens lek och vad hen gjorde med det. Du säger kort vad du hörde."
   efter: "Den som är klar före de andra byter kort med sin kamrat, eller sätter ihop två kort till ett nytt ord. Det får vara påhittat, som solkaka."
+  # Passet på 20 minuter med minuterna som texten sa förut, ljudstarten tre, stegen två, fyra, fem och fyra och avslutet
+  # två, så att planen kan ta tiderna när läraren väljer 20 minuter (riggens K-596 punkt 12, sajtens K-605).
+  varianter:
+    - nar: ett pass på 20 minuter
+      delar:
+        - fas: "Ljudstart"
+          tid: 0–3 min
+        - fas: "Klossarna"
+          tid: 3–5 min
+        - fas: "Säg och räkna"
+          tid: 5–9 min
+        - fas: "Dela och sätt ihop"
+          tid: 9–14 min
+        - fas: "Mina ord"
+          tid: 14–18 min
+        - fas: "Avslut"
+          tid: 18–20 min
 steg:
   rubrik: "Vad du gör och säger i varje steg"
   text: "Här är lärarens ord, så att du kan säga dem som de står."

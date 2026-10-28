@@ -308,7 +308,7 @@ tabeller:
       - - Efter passet
         - "Skriv i protokollet vad varje elev läste, skrev och förklarade. I vecka 3 och 4 skriver du också om kamraten fick vänta när eleven var sekreterare."
         - "Skriv också om texten har en början, en mitt och ett slut, och vad paret lade till efter lyssnarnas fråga."
-    not: "Från vecka 5 gör var och en sin plan i pass 2, berättar texten för kamraten och säger varje mening högt innan hen skriver den. Pass 3 står då i tabellen Pass 3 från vecka 5: skrivpasset med kontrollanten. Hinner ett par före de andra, läser paret texten för dig. Sedan skriver paret vidare i pass 2 och ritar mer till bilden i pass 3. I vecka 8 skriver eleverna klart i pass 2, och pass 3 är tidningens pass, som står under Pass 24 på veckans sida."
+    not: "Från vecka 5 skriver var och en i pass 2 några ord om början, mitten och slutet på sin skrivplan och minst tre långa ord i delar. Sedan berättar eleven texten för kamraten, som säger vad hen vill veta mer om, och eleven skriver det på planen. Till sist skriver eleven på tidningens sida och säger varje mening högt innan hen skriver den. Pass 3 står då i tabellen Pass 3 från vecka 5: skrivpasset med kontrollanten. Hinner ett par före de andra, läser paret texten för dig. Sedan skriver paret vidare i pass 2 och ritar mer till bilden i pass 3. I vecka 8 skriver eleverna klart i pass 2, och pass 3 är tidningens pass, som står under Pass 24 på veckans sida."
   - rubrik: "Pass 3 från vecka 5: skrivpasset med kontrollanten"
     plats: efter-arbetsform
     text: "Från vecka 5 skriver var och en sin egen text, och i pass 3 är kamraten kontrollant. Förlagan och Din text tar fem minuter var, så att Skriva får 35 minuter. Passets två ord till Ordstarten och det som bara gäller veckan står på veckans sida under Till läraren: veckorna."
@@ -680,7 +680,7 @@ plan:
     - nar: veckans andra pass i vecka 5–7
       del: Skriva
       istallet: true
-      text: "Från vecka 5 gör var och en sin plan i pass 2, berättar texten för kamraten och säger varje mening högt innan hen skriver den."
+      text: "Från vecka 5 skriver var och en i pass 2 några ord om början, mitten och slutet på sin skrivplan och minst tre långa ord i delar. Sedan berättar eleven texten för kamraten, som säger vad hen vill veta mer om, och eleven skriver det på planen. Till sist skriver eleven på tidningens sida och säger varje mening högt innan hen skriver den."
     - nar: veckans tredje pass i vecka 5–7
       kort: "Skrivpasset, texten blir klar"
       tabell: "Pass 3 från vecka 5: skrivpasset med kontrollanten"
@@ -702,7 +702,7 @@ plan:
     - nar: veckans övriga pass i vecka 8
       del: Skriva
       istallet: true
-      text: "Från vecka 5 gör var och en sin plan i pass 2, berättar texten för kamraten och säger varje mening högt innan hen skriver den."
+      text: "Från vecka 5 skriver var och en i pass 2 några ord om början, mitten och slutet på sin skrivplan och minst tre långa ord i delar. Sedan berättar eleven texten för kamraten, som säger vad hen vill veta mer om, och eleven skriver det på planen. Till sist skriver eleven på tidningens sida och säger varje mening högt innan hen skriver den."
     # Att texten blir klar, kontrollanten och trion står efter delens text, i den ordning eleven gör det (K-596).
     - nar: veckans övriga pass i vecka 8
       del: Skriva

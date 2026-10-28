@@ -27,7 +27,7 @@ material:
   - "klossar"
   - "whiteboardtavlor och lappar"
   - "snabbmallen"
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -179,7 +179,7 @@ passrutin:
   efterPasset: "Du noterar i snabbmallen vilka av dagens elever som i steg 4 fick med alla ord, mellanrum, stor bokstav och punkt, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
-  text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
+  text: "Passet tar 30 minuter när ni ses tre eller fyra gånger i veckan. Ses ni varje dag, eller orkar eleverna inte så länge, som ofta i förskoleklass, räcker 20 minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
@@ -203,6 +203,23 @@ tidsschema:
       fas: "Avslut"
       vad: "Var och en säger ett ord från dagens lek och vad hen gjorde med det. Du säger kort vad du hörde."
   efter: "Den som är klar före de andra får fyra bokstäver ur högen som blir ett ord ur Ordbanken, men i blandad ordning. Hen flyttar dem och läser tills hen hittar ett ord."
+  # Passet på 20 minuter med minuterna som texten sa förut, ljudstarten tre, stegen två, fyra, fem och fyra och avslutet
+  # två, så att planen kan ta tiderna när läraren väljer 20 minuter (riggens K-596 punkt 12, sajtens K-605).
+  varianter:
+    - nar: ett pass på 20 minuter
+      delar:
+        - fas: "Ljudstart"
+          tid: 0–3 min
+        - fas: "Meningen på tavlan"
+          tid: 3–5 min
+        - fas: "Meningen ur högen"
+          tid: 5–9 min
+        - fas: "Byt ett ord"
+          tid: 9–14 min
+        - fas: "Skriv meningen"
+          tid: 14–18 min
+        - fas: "Avslut"
+          tid: 18–20 min
 steg:
   rubrik: "Vad du gör och säger i varje steg"
   text: "Här är lärarens ord, så att du kan säga dem som de står."

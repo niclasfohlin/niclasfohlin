@@ -90,7 +90,7 @@ tidsschema:
       vad: Eleverna läser sin bok. Du sätter dig hos en elev i taget, två till tre minuter var, lyssnar och ger stöd vid orden som fastnar. Övriga läser tyst eller viskande.
     - tid: 18–20 min
       fas: Avsluta
-      vad: "Upprepa hemuppdraget: läs boken en gång till med en vuxen och skriv tre favoritmeningar. Mappen i ryggsäcken. Gör den korta noteringen i snabbmallen."
+      vad: "Upprepa hemuppdraget: läs boken en gång till med en vuxen och skriv tre favoritmeningar. Mappen i ryggsäcken. Gör den korta noteringen i snabbmallen: hade alla läst hemma, vem byter nivå, vad blev eleverna bättre på och vad övas nästa gång?"
     - tid: Hemma, cirka 20 min
       fas: Läs och skriv
       vad: Eleven läser boken en gång till för en vuxen, cirka tio minuter. Sedan väljer eleven tre favoritmeningar och skriver av dem i skrivboken. Den vuxne signerar lässchemat.
@@ -115,7 +115,7 @@ steg:
         - Jag hörde att du läste ordet direkt, utan att ljuda.
     - namn: Förbered
       fraga: Vad handlar boken om?
-      gor: Gå igenom bilder och rubriker. Låt eleverna gissa. Säg och visa de ord du tror blir svåra, innan de kommer i texten.
+      gor: Gå igenom bilder och rubriker. Låt eleverna gissa. Säg och visa de ord du tror blir svåra, innan de kommer i texten. I vecka 6–8 bläddrar eleven själv i boken och berättar vad hen tror händer, och du visar bara de svåra orden.
       fraser:
         - Vad ser du på bilden?
         - Vad tror du händer sen?
@@ -127,6 +127,7 @@ steg:
         - Prova. Vad står det?
         - Ljuda, och läs sedan ordet igen som ett helt ord.
         - Läs meningen från början nu.
+        - Det lät som när du pratar, och rösten gick ner vid punkten.
     - namn: Avsluta
       fraga: Vad händer hemma?
       gor: Upprepa hemuppdraget med samma ord varje gång. Kontrollera att bok, skrivbok och lässchema ligger i mappen. I första passet visar du vad som ligger i mappen och hur eleven väljer tre favoritmeningar och skriver dem i skrivboken.
@@ -181,7 +182,7 @@ roll:
 urval:
   rubrik: Var hittar du böckerna?
   text:
-    - Böckerna behöver du inte leta länge efter. Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. För elever i årskurs 4–6 behöver innehållet passa åldern även när texten är lätt, och där fungerar lättlästa böcker från förlag som Nypon och Hegas samt material med flera nivåer som Mellan raderna. Boken ska vara lätt nog att eleven läser de allra flesta orden rätt. Det är omläsningen som ger flyt, och en elev som fastnar på vart femte ord läser inte om, den kämpar. Före första passet låter du eleven läsa en sida högt ur böcker på olika nivåer. Elevens nivå är den högsta där hen klarar minst nio ord av tio. Den första boken och texten i förekollen tar du på den nivån.
+    - Böckerna behöver du inte leta länge efter. Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. För elever i årskurs 4–6 behöver innehållet passa åldern även när texten är lätt, och där fungerar lättlästa böcker från förlag som Nypon och Hegas samt material med flera nivåer som Mellan raderna. Boken ska vara lätt nog att eleven läser de allra flesta orden rätt. Det är omläsningen som ger flyt, och en elev som fastnar på vart femte ord läser inte om, den kämpar. Före första passet låter du eleven läsa en sida högt ur böcker på olika nivåer. Elevens nivå är den högsta där hen klarar minst nio ord av tio. Den första boken och texten i förekollen tar du på den nivån. Har eleven två pass i rad läst de flesta orden i dagens bok direkt och läst om meningen själv vid fel, prövar du nästa nivå. Klarar eleven minst nio ord av tio där, byter ni uppåt.
   kravText: "Välj en text per pass som uppfyller tre krav:"
   krav:
     - rubrik: Rätt nivå
@@ -261,6 +262,11 @@ uppfoljning:
     - nar: Eleven fastnar på fler än ett ord av tio
       tid: "villkor"
       vad: Boken är för svår. Byt nivå till nästa pass.
+    # Regeln för att byta uppåt, ur Var hittar du böckerna?, bredvid regeln för att byta nedåt, så att planen visar båda
+    # under Håll koll på (riggens K-596 punkt 6, sajtens K-605). Lathunden har sin egen uppföljning utan villkoren.
+    - nar: Eleven läser de flesta orden direkt två pass i rad
+      tid: "villkor"
+      vad: Läser eleven också om meningen själv vid fel, prövar du nästa nivå. Klarar eleven minst nio ord av tio där, byter ni uppåt.
 plan:
   passen:
     - nar: första passet

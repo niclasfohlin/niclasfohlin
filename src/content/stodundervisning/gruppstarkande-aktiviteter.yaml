@@ -322,6 +322,24 @@ urval:
     - rubrik: Det är roligt
       text: Gruppen skrattar och firar tillsammans.
 
+progression:
+  rader:
+    - vecka: 1–4
+      rubrik: "Lära känna varandra och trygghet"
+      fokus: Kort utan beröring ur Lära känna varandra och Trygghet och gemenskap.
+      roll: Du modellerar kortets beteende och säger högt vad någon gör för gruppen.
+      eleverna: Att lyssna, turas om och heja på varandra. Att säga vad någon annan gjorde för gruppen och tacka för det.
+      vidare: de flesta ringar in 4 eller 5 på ”Jag känner mig trygg i gruppen” i Vår grupp
+    - vecka: 5–7
+      rubrik: "Samarbete i alla kategorierna"
+      fokus: Kort ur Samarbetsutmaningar, Gemensamma mål och Skapa och bygga, och kort med beröring när gruppen är trygg.
+      roll: Du säger i Förklara vad gruppen ska bli bättre på och modellerar det.
+      eleverna: Att samarbeta mot ett mål som gruppen bara når tillsammans. Att pröva igen när något går fel.
+    - vecka: 8 till det sista
+      rubrik: "Eleverna föreslår meningarna"
+      fokus: Eleverna föreslår gruppreflektionens två meningar.
+      roll: Du frågar om alla kan stå bakom meningarna och skriver dem på tavlan.
+      eleverna: Att säga vad gruppen gör bra och vad den ska bli bättre på.
 uppfoljning:
   rubrik: Gruppen över tid
   text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Efter tolv veckor är diagrammet i Lärarens skattning fullt, och du bestämmer hur ni går vidare. Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen. Om gruppen inte har kommit så långt, men linjen har stigit sedan ni började eller ligger på 7 eller mer, fortsätter ni en period till med ett nytt diagram i Lärarens skattning. Veckorna räknar du då vidare, vecka 13 och framåt, och bara diagrammet börjar om på vecka 1. Har linjen inte stigit och ligger under 7, tar du upp gruppen med elevhälsan. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. I återkopplingen läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Har veckan en gruppreflektion, gör ni avslutningen i stället. Vecka 12 är en vanlig vecka. Avslutar ni insatsen, gör ni avslutningen i passet efter beslutet. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Pågår kränkningar, eller skattar du 1 eller 2, går skolans rutin före raderna. Vänta då med aktiviteterna tills det går enligt rutinen. Säger två av raderna om linjen och beröringen emot varandra, gör du det som står först.
@@ -378,6 +396,9 @@ plan:
     forval: 12
     # En period med ett diagram, så att utvärderingen och metodens beslut kommer när diagrammet är fullt efter vecka 12.
     # En period till läggs till med Förläng insatsen efter beslutet (K-596, Rimligheten efter omtaget).
+  # Ingen knapp Upprepa veckan: veckorna är lika, och progressionen i veckor från riggens K-596 slår annars på den
+  # (K-605).
+  utanUpprepa: true
   # Att veckorna räknas vidare när ni fortsätter, och vad läraren säger i avslutningen och när den görs (K-596).
   utvardering:
     - "Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen."
@@ -462,6 +483,8 @@ ramar:
       delar:
         - rubrik: Så leder du gruppreflektionen
           falt:
+            - rubrik: Tiden
+              text: I ett pass på 30 minuter går aktiviteten 0–⁠10 min, Vår grupp 10–⁠15, Frågorna 15–⁠23, Lyft 23–⁠26 och Två meningar 26–⁠30. I ett pass på 40 minuter får Frågorna och Lyft fem minuter till var, så att ni hinner en tredje fråga och grupperna i en klass hinner berätta.
             - rubrik: Ingen pekas ut
               text: Ingen behöver berätta vad hen skrev. Ni nämner bara någon vid namn när hen har gjort något bra, och den som inte vill svara får hålla med någon annan.
             - rubrik: 1 · Vår grupp

@@ -269,7 +269,7 @@ export declare const planveckansNamn: (plan: Plan, v: PlanVecka) => Veckonamn;
 /** Raderna i planens passen som gäller passet, den mest bestämda först. */
 export declare function passetsRoller(plan: Plan, p: Pass, passen: Metodplan['passen']): number[];
 /** Raderna som passet visar: den mest bestämda raden om passets plats i insatsen, med raderna som har samma när, och raderna om veckorna. */
-export declare function passetsVisadeRoller(plan: Plan, p: Pass, passen: Metodplan['passen']): number[];
+export declare function passetsVisadeRoller(plan: Plan, p: Pass, passen: Metodplan['passen'], varianter?: { nar: string }[]): number[];
 /** Var ett pass står i planen: numret, sista och näst sista, metodens vecka, platsen i veckan och minuterna. */
 export declare function passetsLage(plan: Plan, p: Pass, minuter?: number): PassetsLage;
 /** Gäller en rad i planens passen eller en variant för passet? */

@@ -403,6 +403,7 @@ tabeller:
         - Klassens text
         - Klassens text
         - Klassens text
+    not: I en period till läser gruppen ett nytt tema på nivån från sidan Ta fram en faktatext. Temats texter har samma modeller i samma veckor, och i vecka 6–8 läser gruppen klassens texter.
   - rubrik: "Vecka 6–8: klassens texter"
     plats: efter-urval
     meny: true
@@ -515,33 +516,38 @@ urval:
     - rubrik: Något att reda ut
       text: Ämnesord och samband som gruppen klarar med stöd
 progression:
-  text: Eleverna tar över en bit i taget, i läspasset och i modellpasset.
+  text: Eleverna tar över en bit i taget, i läspasset och i modellpasset. Klarar gruppen inte det som står vid Gå vidare när, tar ni veckans steg en gång till med en text som är byggd på samma sätt. I vecka 1–5 är det texten med samma nummer i ett annat tema på nivån från sidan Ta fram en faktatext. I vecka 6 är det nästa text som klassen läser.
   rader:
     - vecka: "1"
       rubrik: "Gången och Tankekartan"
       fokus: "Gruppen lär sig gången: stryka under, reda ut, säga kärnan och lägga lapparna i modellen."
       roll: "Läspasset: du tänker högt i hela avsnitt 1. Modellpasset: du visar modellen och lägger den första lappen."
       eleverna: "Att stryka under det som skaver och säga var det skavde, och att säga kärnan i ett avsnitt med egna ord till kamraten bredvid."
+      vidare: "de flesta i gruppen stryker under det som skaver och säger kärnan till den bredvid"
     - vecka: "2"
       rubrik: "En modell ni kan, och Tidslinjen"
       fokus: Gruppen prövar en modell som den redan kan mot veckans text och säger varför modellen inte räcker.
       roll: "Läspasset: du tänker högt i avsnitt 1 igen. Modellpasset: du lägger fram gruppens tankekarta före veckans modell."
       eleverna: "Att skilja det viktiga från det intressanta när gruppen väljer kärnan, och att säga varför den sparade modellen inte räcker för veckans text."
+      vidare: "de flesta lapparna har det viktiga i avsnittet, och gruppen säger varför tankekartan inte räcker"
     - vecka: 3–4
       rubrik: "Jobbkorten, Venndiagrammet och Kedjan"
       fokus: "Från avsnitt 2 har två elever i taget var sitt jobb: en håller kortet När det skaver, och en leder gruppen till kärnan. Eleverna byter jobb efter varje avsnitt."
       roll: "Läspasset: du läser avsnitt 1, och sedan lyssnar du, frågar och håller tiden. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger."
       eleverna: "Att reda ut ett ord eller en mening med sätten på kortet När det skaver, och att säga hur två avsnitt hänger ihop, med ord ur texten som därför eller medan."
+      vidare: "de flesta i gruppen prövar kortets sätt innan de frågar dig, och gruppen skriver textens ord för sambanden"
     - vecka: "5"
       rubrik: "Jobbkorten i alla fyra stegen, Problem och lösning"
       fokus: De två som har jobbkorten i det sista avsnittet leder gruppen genom alla fyra stegen.
       roll: "Läspasset: i det sista avsnittet går du in först när något saknas. Modellpasset: du lägger först fram den sparade modell som lärarens sida säger. Fråga läraren i SO eller NO vilka texter klassen läser i vecka 6–8, och förbered texten till vecka 6 med bladet Egen text."
       eleverna: "Att reda ut det som skaver och säga kärnan med egna ord utan din hjälp, när två elever leder gruppen genom alla fyra stegen i det sista avsnittet."
+      vidare: "de två med jobbkorten leder gruppen till en kärna i det sista avsnittet, utan att du tar över"
     - vecka: "6"
       rubrik: "Klassens text, och läraren väljer modell"
       fokus: Gruppen läser klassens text i SO eller NO, som ofta är byggd på flera sätt.
       roll: "Läspasset: du tänker högt i avsnitt 1 igen, och i det sista avsnittet går du in först när något saknas. Modellpasset: du prövar två av modellernas frågor högt, och paren de tre andra."
       eleverna: "Att läsa bilden ihop med texten och reda ut det som skaver i klassens text, som saknar ordförklaringar. Ledtråden kan vara bilden, ett ord i fet stil eller meningen efter."
+      vidare: "de flesta i gruppen hittar själva en ledtråd där något skaver i klassens text"
     - vecka: 7–8
       rubrik: "Klassens text, och gruppen väljer modell"
       fokus: De två med jobbkorten leder gruppen genom avsnitten som paren läser. Gruppen väljer modell bland sina fem. I vecka 7 väljer den tillsammans med dig, och i vecka 8 väljer paren först. I det sista passet säger var och en vad hen tar med sig från perioden.
@@ -554,7 +560,7 @@ uppfoljning:
       tid: "före"
       perElev: 15
       resultat: "Det eleven sa och gjorde i uppgift 1–4, ur protokollet"
-      vad: Gör kartläggningen med Bäverns damm före första passet och skriv det eleven säger och gör i protokollet. Den tar omkring en kvart per elev och visar också vilken nivå som passar.
+      vad: Gör kartläggningen med Bäverns damm före första passet och skriv det eleven säger och gör i protokollet. Den tar omkring en kvart per elev och visar också vilken nivå som passar. I en period till är kartläggningen efter förra perioden kartläggningen före, och du gör ingen ny.
     - nar: Varje vecka
       tid: "varje vecka"
       vad: Vad strök eleverna under, hur redde de ut det, och hade kärnan på varje lapp med det viktiga? Spara gruppens modell och elevernas svar på textens fråga. Är svaret ordnat som modellen, eller är det en lista?
@@ -562,7 +568,7 @@ uppfoljning:
       tid: "efter"
       perElev: 15
       resultat: "Det som har ändrats, uppgift för uppgift, ur protokollet"
-      vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Hur eleven klarar klassens texter ser du i vecka 6–8, och på Medel och Avancerat också i avsnittet ur klassens bok. Avslutar du insatsen, säger du till läraren i ämnet vilka modeller eleven kan använda i klassens texter.
+      vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Hur eleven klarar klassens texter ser du i vecka 6–8, och på Medel och Avancerat också i avsnittet ur klassens bok. Avslutar du insatsen, säger du till läraren i ämnet vilka modeller eleven kan använda i klassens texter. I en period till gör du kartläggningen med Bäverns damm i stället för Björnens vinter.
 plan:
   # Beslutet efter perioden, och i en period till vilken kartläggning som är före och vilken text som är efter (K-596).
   utvardering:
@@ -650,6 +656,8 @@ plan:
       ur: { tabell: "De fem modellerna: en för varje sätt att bygga en text", rad: visar ett problem och en lösning, kolumner: [Modellen, Modellens fråga] }
     - nar: sista passet
       text: "I det sista passet säger var och en vad hen tar med sig från perioden."
+  # När veckans steg tas en gång till och med vilken text, ordagrant ur progressionens text (riggens K-596, K-605).
+  upprepa: "Klarar gruppen inte det som står vid Gå vidare när, tar ni veckans steg en gång till med en text som är byggd på samma sätt. I vecka 1–5 är det texten med samma nummer i ett annat tema på nivån från sidan Ta fram en faktatext. I vecka 6 är det nästa text som klassen läser."
 mal:
   overgripande: "kunna reda ut det som skaver i en faktatext och säga kärnan med egna ord."
   punkter:

@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.32.0, 2026-10-28
+
+- `plan.js`, riggens metoder efter genomgången (sajtens K-605): `passetsVisadeRoller` tar tidsschemats varianter, och en rad om metodens veckor eller platsen i veckan med samma när som en variant står bara när varianten är passets (`variantenFor`). Antalsuppfattnings läxa i veckans första pass i vecka 2–5 står då inte i första passet i en ny period som börjar på vecka 3, där varianten Första passet säger att passet börjar utan läxa. Utan varianter är raderna som förut.
+
 ## 0.31.0, 2026-10-28
 
 - `plan.js`, ett enskilt pass tid (Niclas samma dag: "Vid flytta pass. Ska man inte kunna byta tid också på passet om önskas?", "Viktigt att det bara blir det pass man ändrar" och "att denna ändring syns överallt så alla läser från en rot"): valen har `passtider`, passets dag före en flytt och en början och ett slut, som `rentaPasstider` rensar och länken bär som `pt=2026-11-10-0915-0945`. `passetsTid` läser passets egen tid först och är roten för planens passlängd, `passensMinuter` och kalenderfilen (`o.passtider`). Tidernas rensning, kodning och läsning i länken står på ett ställe (`rentaTidpar`, `tiderILanken`, `tiderUrLanken`).

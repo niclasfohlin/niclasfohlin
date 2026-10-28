@@ -3221,9 +3221,13 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-insatser[hidden] { display: none; }
 .pl-insatser h2 { font-size: 1.05rem; margin: 0; padding: 0.8rem 1rem 0.5rem; }
 .pl-insatser ul { list-style: none; margin: 0; padding: 0; }
-/* Alla planer: knapparna och beskedet under listan, med listans luft och en linje över (K-608, K-609). */
-.pl-insatser .pl-alla-planer { margin: 0; padding: 0.75rem 1rem; border-top: 1px solid var(--farg-kant); }
-.pl-insatser #pl-alla-besked, .pl-insatser #pl-alla-appen { margin: 0; padding: 0 1rem 0.75rem; }
+/* Alla planer: knapparna och beskedet under listan, med en linje över (K-608, K-609). Knapparna och raden om appen är
+   mindre och tätare än listan, så att de inte tar mer plats än insatserna (Niclas 2026-10-28: "Blev lite för stort använt
+   utrymme för knapparna + texten"). */
+.pl-insatser .pl-alla-planer { margin: 0; padding: 0.55rem 1rem 0.45rem; gap: 0.4rem; border-top: 1px solid var(--farg-kant); }
+.pl-insatser .pl-alla-planer .knapp { min-height: 2.25rem; padding: 0.15rem 0.75rem; font-size: 0.85rem; }
+.pl-insatser #pl-alla-besked, .pl-insatser #pl-alla-appen { margin: 0; padding: 0 1rem 0.55rem; }
+.pl-insatser #pl-alla-appen { font-size: 0.8rem; line-height: 1.35; }
 .pl-insatser li { border-top: 1px solid var(--farg-kant); border-left: 5px solid var(--omr, var(--farg-accent)); }
 .pl-insatser a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.1rem 0.75rem; padding: 0.7rem 1rem; text-decoration: none; color: var(--farg-text); }
 .pl-insatser a:hover { background: var(--farg-ton-svag); }

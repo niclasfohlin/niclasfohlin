@@ -284,6 +284,8 @@ urval:
       text: Det eleverna ska se den här veckan
 progression:
   rubrik: "Kursplan: fem veckor och fem fokus"
+  # Upprepa veckan och avstämningen mitt i (sajtens K-596, nr 9), så att plan.upprepa och plan.justera kan citera dem.
+  text: "Når de flesta i gruppen inte det som står under Gå vidare när, tar ni veckan en gång till med samma kort, och var och en gör de kort hen läste för kamraten förra gången. Når bara någon enstaka elev inte dit, går gruppen vidare, och du är elevens kamrat i Korten nästa vecka. Rör sig gruppen inte mot målet vid avstämningen i vecka 3, lägger du in pass 3 i veckorna som är kvar."
   # eleverna och vidare (sajtens K-572, del B, den smala formen): vad eleverna ska bli bättre på i veckan, knutet till
   # målets punkter, och när gruppen går vidare. Vecka 2 bär också målet att jämföra bråk, som inte hade någon vecka, och
   # beslutet efter kursen säger det (out/planera-r/brakkurs-i-grupp-4.md).
@@ -488,7 +490,7 @@ plan:
       del: Före passet
       text: "Knappar eller centikuber, 24 per elev. Papper, linjal och bladet Stapelrutan till pass 2."
     # Veckans vanliga fel i Korten, i passet där de hörs, ordagrant ur fältet Lyssna efter i veckans ruta Till
-    # läraren. Det är dem läraren antecknar efter passet. Vecka 4 har inget fel i pass 1 (K-596).
+    # läraren. Det är dem läraren antecknar efter passet. Felet i pass 1 i vecka 4 är nytt i K-596, nr 3, och sajten citerar det.
     - nar: veckans första pass i vecka 1
       del: Korten
       text: "Eleven som kallar tre olika stora bitar för tredjedelar (pass 1, kort 3).\nEleven som säger att 1/5 är större än 1/3 eftersom 5 är större än 3 (pass 1, kort 4)."
@@ -516,6 +518,11 @@ plan:
     - nar: veckans andra pass i vecka 5
       del: Korten
       text: "Eleven som svarar 50 kr när frågan gäller vad tröjan kostar nu (pass 2, kort 4)."
+  # När veckan tas en gång till och vad läraren ändrar vid avstämningen i vecka 3, ordagrant ur progressionens text
+  # (riggens K-596, K-605).
+  upprepa: "Når de flesta i gruppen inte det som står under Gå vidare när, tar ni veckan en gång till med samma kort, och var och en gör de kort hen läste för kamraten förra gången. Når bara någon enstaka elev inte dit, går gruppen vidare, och du är elevens kamrat i Korten nästa vecka."
+  justera:
+    - "Rör sig gruppen inte mot målet vid avstämningen i vecka 3, lägger du in pass 3 i veckorna som är kvar."
 mal:
   overgripande: "kunna förstå bråk som tal, jämföra dem och räkna med dem."
   rubrik: "Mål: det eleven kan efter fem veckor"
@@ -780,7 +787,7 @@ ramar:
             - rubrik: Veckans mening
               text: "”Vi räknar delar som är lika stora: tre åttondelar och två åttondelar är fem åttondelar.”\nDet sista bråket: 1/2 + 3/4 med stavarna i pass 1, med den längsta staven under. I pass 2 räknar ni 2 − 3/4 på en tom tallinje från 0 till 2. Båda blir 5/4."
             - rubrik: Lyssna efter
-              text: "Eleven som lägger ihop både täljarna och nämnarna, så att 3/8 + 4/8 blir 7/16 (pass 2, kort 1).\nSamma fel gör att 3/4 + 3/4 blir 6/8 (pass 2, kort 6). Fråga: ”Blev summan större än talen du lade ihop?”"
+              text: "Eleven som säger att 1/4 och 1/8 blir två åttondelar (pass 1, kort 4).\nEleven som lägger ihop både täljarna och nämnarna, så att 3/8 + 4/8 blir 7/16 (pass 2, kort 1).\nSamma fel gör att 3/4 + 3/4 blir 6/8 (pass 2, kort 6). Fråga: ”Blev summan större än talen du lade ihop?”"
         - rubrik: Till läraren om pass 3
           falt:
             - rubrik: Spelet · Närmast en hel
@@ -816,7 +823,7 @@ ramar:
     # ---------------------------------------------------------------- Vecka 5
     - rubrik: "Vecka 5: Bråk av antal"
       text:
-        - Det hela är ett antal. Eleverna delar antalet i lika stora grupper och tar så många grupper som täljaren säger. I pass 1 arbetar de med knappar, och i pass 2 ritar de stapeln och räknar. Sist hittar de det hela när en del är känd.
+        - Det hela är ett antal. Eleverna delar antalet i lika stora grupper och tar så många grupper som täljaren säger. I pass 1 arbetar de med knappar, och i pass 2 ritar de stapeln och räknar. Sist hittar de det hela när en del är känd. I rutan På tallinjen på bladet Bråket på fyra sätt sätter eleven ut bråket mellan 0 och 1, som förut, och skriver antalet för det hela under ettan och för delen under bråket. I kursens sista pass delar du ut diplomet till varje elev efter Veckans mening.
       delar:
         - rubrik: Till läraren
           falt:

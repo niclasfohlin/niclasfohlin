@@ -13,7 +13,7 @@ taggar:
 format:
   - liten grupp
   - par
-tid: 30 minuter per pass, tre till fem pass i veckan
+tid: 20–30 minuter per pass, tre till fem pass i veckan
 period: 4–12 veckor
 grupp: 2–12 elever
 material:
@@ -282,7 +282,7 @@ passrutin:
   kallas: delar
 tidsschema:
   rubrik: Ett pass på 30 minuter
-  text: "Välj lektionen och orden före passet. Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
+  text: "Välj lektionen och orden före passet. Passet tar 30 minuter när ni ses tre eller fyra gånger i veckan. Ses ni varje dag, eller orkar eleverna inte så länge, som ofta i förskoleklass, räcker 20 minuter."
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -297,6 +297,17 @@ tidsschema:
       fas: Avslut
       vad: "Var och en säger ett ord från dagens lek och vad hen gjorde med det. Du säger kort vad du hörde."
   efter: "Den som är klar före de andra tar ett ord ur nästa ordgrupp i lektionens material, eller gör leken en gång till."
+  # Passet på 20 minuter ur meningen som stod i tidsschemats text, så att planen kan ta tiderna (sajtens K-596).
+  varianter:
+    - nar: ett pass på 20 minuter
+      text: Stegen får då två, fyra, fem och fyra minuter.
+      delar:
+        - fas: Ljudstart
+          tid: 0–3 min
+        - fas: Lektionen
+          tid: 3–18 min
+        - fas: Avslut
+          tid: 18–20 min
 steg:
   rubrik: Vad du gör och säger i varje del
   text: "Lektionens egna fraser står i varje lektion."
@@ -390,7 +401,7 @@ urval:
     - rubrik: Gå vidare
       text: När lektionens regel säger det
 uppfoljning:
-  text: "Screeningen visar var eleven står i läsningen, och ljudkollen visar vilka av lektionernas förmågor eleven klarar. Protokollet, gruppens översikt och frågorna finns under Materialet. Berätta konkret för eleven vad hen har lärt sig. Med bladet Observation av ett pass under Materialet kan en kollega följa ett pass och ge dig återkoppling, gärna samma vecka som ljudkollen. Säg före passet vad du vill ha återkoppling på. Efteråt berättar du först vad du själv lade märke till, och sedan läser kollegan upp det som fungerade, ur sina anteckningar. Du bestämmer nästa steg, ni prövar det en gång direkt, och det blir fokus nästa gång kollegan följer ett pass. Efter perioden beslutar du hur varje elev går vidare. Klarar eleven nivå 5 eller högre i screeningen, version B, och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva. Klarar eleven inte fler uppgifter i ljudkollen än före insatsen, får hen mer intensivt stöd, gärna enskilt, och en bedömning. Annars fortsätter eleven en period till, från den lektion som gruppen har nått. Har gruppen gått den sista lektionen, börjar eleven den nya perioden i den lektion som hör till den första uppgift i ljudkollen som hen inte klarar, eller i Från ord till mening när hen klarar alla uppgifter."
+  text: "Screeningen visar var eleven står i läsningen, och ljudkollen visar vilka av lektionernas förmågor eleven klarar. Protokollet, gruppens översikt och frågorna finns under Materialet. Berätta konkret för eleven vad hen har lärt sig. Med bladet Observation av ett pass under Materialet kan en kollega följa ett pass och ge dig återkoppling. Säg före passet vad du vill ha återkoppling på. Efteråt berättar du först vad du själv lade märke till, och sedan läser kollegan upp det som fungerade, ur sina anteckningar. Du bestämmer nästa steg, ni prövar det en gång direkt, och det blir fokus nästa gång kollegan följer ett pass. Efter perioden beslutar du hur varje elev går vidare. Klarar eleven nivå 5 eller högre i screeningen, version B, och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva. Klarar eleven inte fler uppgifter i ljudkollen än före insatsen, får hen mer intensivt stöd, gärna enskilt, och en bedömning. Annars fortsätter eleven en period till, från den lektion som gruppen har nått. Har gruppen gått den sista lektionen, börjar eleven den nya perioden i den lektion som hör till den första uppgift i ljudkollen som hen inte klarar, eller i Från ord till mening när hen klarar alla uppgifter."
   rader:
     - nar: Före insatsen
       tid: "före"
@@ -410,6 +421,10 @@ uppfoljning:
       perElev: 12
       resultat: "högsta nivå i screeningen, klarade uppgifter i ljudkollen av 9, uppgift 9 av 4"
       vad: "Gör hela ljudkollen och screeningen, version B, med en elev i taget, och jämför med resultaten före insatsen."
+    # Kollegans observation, samma vecka som ljudkollen, sist eftersom sparade resultat hör till radens plats (K-596).
+    - nar: Observation av ett pass
+      tid: "var 3:e vecka"
+      vad: "En kollega följer ett pass med bladet, gärna samma vecka som ljudkollen."
 # Planera insatsen (sajtens K-551, 2026-10-26): seriens planerare med tre ingångar och lektionen vecka för vecka. Texterna
 # är ordagranna citat ur metoden: ingångarna och längden ur lektionsbanken, beslutet efter perioden ur uppföljningen.
 plan:
@@ -422,6 +437,11 @@ plan:
       - { lektion: 6, namn: Kan ljuda }
     # En grupp som är klar med den sista lektionen före periodens slut, ur Perioden (riggens leverans 2026-10-27, punkt 3).
     klar: "Är gruppen klar med Från ord till mening före periodens slut, slutar perioden där, och du gör mätningen efter perioden."
+  # Stödet för passets längd: 30 minuter med tre eller fyra pass i veckan och 20 när gruppen ses varje dag eller eleverna
+  # inte orkar så länge, ur tidsschemats text (riggens K-596 punkt 12, K-605).
+  langdval:
+    text: "Passet tar 30 minuter när ni ses tre eller fyra gånger i veckan. Ses ni varje dag, eller orkar eleverna inte så länge, som ofta i förskoleklass, räcker 20 minuter."
+    mer: Ett pass på 30 minuter
   veckoval:
     text: "På 4–12 veckor kommer gruppen så långt den hinner från sin ingång. Välj tolv veckor, eller åtta till tolv från Räkna ljud med fem pass i veckan. En kortare period, fyra till sju veckor, passar en grupp som bara har de sista lektionerna kvar."
     mer: "Lektionsbanken: förmågorna och lektionerna"

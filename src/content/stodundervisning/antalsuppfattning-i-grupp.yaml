@@ -227,14 +227,29 @@ tidsschema:
       vad: "Alla bygger talet du just visade, ett handgrepp i taget. Säg varje handgrepp, och eleverna gör och säger likadant. Fråga: ”Hur vet du att det är 36 och inte 63?” Gör sedan en kedja med sex till tio korta ändringar på samma tal, eller tre till sex när passet börjar med läxan. Efter varje ändring säger alla vilket tal det blev."
     - tid: 12–21 min
       fas: Korten
-      vad: Läs ett kort, i vecka 1 till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter roller efter varje kort. Från vecka 2 läser paren sedan korten för varandra, om de kan läsa dem. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren i gruppens paket.
+      vad: Läs ett kort, i vecka 1 till exempel ”Bygg 14. Hur många tiotal och ental?” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om svaret och byter roller efter varje kort. Från vecka 2 läser paren sedan korten för varandra, om de kan läsa dem. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren i gruppens paket.
     - tid: 21–26 min
       fas: Två kort
       vad: Varje elev får två kort. Eleverna bygger det första medan du går runt. När de bygger det andra lyssnar du på en elev i taget. Saknar någon orden gör ni handgreppet tillsammans igen.
     - tid: 26–30 min
       fas: Andra talet
       vad: "Bygg det andra talet med hela gruppen. Eleverna visar och säger vad som hände, i vecka 3 till exempel ”Jag hade tretton ental. Jag bytte tio ental mot ett tiotal.” Sätt till sist ord på veckans fokus i en mening."
+  # Periodens första pass har ingen läxa att visa, också när en ny period börjar på en senare vecka (sajtens K-596,
+  # tillägget efter verifieringen). Ett pass går före veckans första pass i vecka 2–5 i planen.
   varianter:
+    - nar: första passet
+      text: Passet börjar utan läxa, också när perioden börjar på en senare vecka.
+      delar:
+        - fas: Första talet
+          tid: 0–6 min
+        - fas: Samma tal
+          tid: 6–12 min
+        - fas: Korten
+          tid: 12–21 min
+        - fas: Två kort
+          tid: 21–26 min
+        - fas: Andra talet
+          tid: 26–30 min
     - nar: veckans första pass i vecka 2–5
       text: Passet börjar med förra veckans läxa.
       delar:
@@ -385,6 +400,9 @@ hem:
     - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med en uppgift: läs den högt, låt barnet bygga och berätta vad det gör, jämför med bilden, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
 progression:
   rubrik: "Kursplan: fem veckor, ett fokus i veckan"
+  # Upprepa veckan, kartläggningen när veckorna flyttas och avstämningen mitt i (sajtens K-596, nr 7), så att
+  # plan.upprepa och plan.justera kan citera dem.
+  text: "Når de flesta i gruppen inte det som står under Gå vidare när, tar ni veckan en gång till med samma kort. Kartläggningen efter perioden kommer då en vecka senare, när ni har gjort vecka 5. Når bara någon enstaka elev inte dit, går gruppen vidare, och du gör veckans handgrepp tillsammans med eleven igen i Två kort. Rör sig gruppen inte mot målet vid avstämningen i vecka 3, skriver du egna kort med mindre tal och samma fokus, och tiobasen ligger framme i alla tre passen."
   rader:
     - vecka: "1"
       fokus: "Bygga och säga tal: tio av en talsort är en av nästa större. Kartläggningen görs före första passet."
@@ -481,6 +499,11 @@ plan:
     - "Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och mallen Ett ark per talsort för tiobas står under Mallar att skriva ut och sist i planeringsmallarna."
     # Läxan och vårdnadshavarna i en rad, eftersom schemat tar högst fyra rader i fore (K-596).
     - "Skicka hem veckans läxa efter veckans första pass, och i vecka 1 också rutan Till vårdnadshavaren. Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med en uppgift: läs den högt, låt barnet bygga och berätta vad det gör, jämför med bilden, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
+  # När veckan tas en gång till och vad läraren ändrar vid avstämningen i vecka 3, ordagrant ur progressionens text
+  # (riggens K-596, K-605).
+  upprepa: "Når de flesta i gruppen inte det som står under Gå vidare när, tar ni veckan en gång till med samma kort. Kartläggningen efter perioden kommer då en vecka senare, när ni har gjort vecka 5. Når bara någon enstaka elev inte dit, går gruppen vidare, och du gör veckans handgrepp tillsammans med eleven igen i Två kort."
+  justera:
+    - "Rör sig gruppen inte mot målet vid avstämningen i vecka 3, skriver du egna kort med mindre tal och samma fokus, och tiobasen ligger framme i alla tre passen."
   # Beslutet efter kartläggningen efter perioden, ordagrant ur uppföljningens rad Efter fem veckor (del A).
   utvardering:
     - "Klarar eleven uppgift 1–4 säkert, avslutar du insatsen."

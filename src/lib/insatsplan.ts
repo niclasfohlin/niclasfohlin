@@ -408,7 +408,9 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
     // Stegets sista led står inte två gånger när delens text redan säger det, som "och du lyssnar på dagens elever"
     // (verifieringen samma dag).
     const utanUpprepning = (steg: string, vad: string) => { const m = steg.match(/^(.*), och (.+?)\.$/u); return m && vad.toLowerCase().includes(m[2].toLowerCase()) ? `${m[1]}.` : mening(steg); };
-    const passet = pass0 && { ...pass0, delar: pass0.delar.map((x) => (stegen.has(x.fas.toLowerCase()) ? { ...x, vad: `${utanUpprepning(stegen.get(x.fas.toLowerCase())!, x.vad)} ${x.vad}` } : x)) };
+    // Varianterna får samma text, så att ett pass på 20 minuter säger vad eleverna gör i varje steg (Codex 2026-10-28, K-605).
+    const medSteget = <T extends { fas: string; vad: string }>(x: T): T => (stegen.has(x.fas.toLowerCase()) ? { ...x, vad: `${utanUpprepning(stegen.get(x.fas.toLowerCase())!, x.vad)} ${x.vad}` } : x);
+    const passet = pass0 && { ...pass0, delar: pass0.delar.map(medSteget), ...(pass0.varianter ? { varianter: pass0.varianter.map((v) => ({ ...v, delar: v.delar.map(medSteget) })) } : {}) };
     const tabellen = ld.upplagg ? ld.tabeller.find((t) => ld.upplagg!.text.includes(t.rubrik)) : undefined;
     const upplagget = tabellen ? meningarna(ld.upplagg!.text) : [];
     const fran = upplagget.findIndex((m) => m.includes(tabellen!.rubrik));

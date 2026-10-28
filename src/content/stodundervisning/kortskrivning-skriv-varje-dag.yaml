@@ -157,9 +157,9 @@ tabeller:
       - Det som ändras
     rader:
       - - En hel klass
-        - Passet är detsamma. Är ni två vuxna sitter den ena hos den som inte har börjat. Eleverna läser i par, och två eller tre som vill läser sedan sin rad för alla.
+        - Passet är detsamma. Är ni två vuxna sitter den ena hos den som inte har börjat. I en hel klass läser eleverna i par, och två eller tre som vill läser sedan sin rad för alla.
       - - De yngsta, åk 1–2
-        - Skrivboken har ritruta och breda linjer. Eleverna ritar i en minut innan klockan startar. Ord vid bilden är också text. I Dela visar de sidan och läser för en kamrat.
+        - Med de yngsta har eleverna en skrivbok med ritruta och breda linjer, och de ritar i en minut innan klockan startar. Ord vid bilden är också text. I Dela visar de sidan och läser för en kamrat.
       - - Dator eller diktering
         - Dokumentet är skrivboken. Eleven raderar inte, byter rad vid ”streck” och har Min skrivlista på ett löst blad (se Så ser du att det hjälper). Den som dikterar sitter en bit ifrån.
   - rubrik: Från delande till en klass med skribenter
@@ -223,7 +223,7 @@ progression:
       eleverna: Att räkna sina ord fram till strecket och skriva fler ord på tre minuter än i början.
     - vecka: Vecka 6
       fokus: Veckans första pass är Skriv igen, utan kort.
-      roll: "I Dela frågar du sist: ”Vad går lättare nu än när vi började?”"
+      roll: "I Skriv igen frågar du sist i Dela: ”Vad går lättare nu än när vi började?” Det gör du också i vecka 12."
       eleverna: Att börja direkt utifrån en egen stjärnmärkt text, skriva nytt om samma sak och säga vad som är nytt.
     - vecka: Efter vecka 6
       fokus: Gruppen fortsätter så länge den vill. Eleven kan ta med en stjärnmärkt text till skrivundervisningen.
@@ -397,7 +397,7 @@ plan:
     - nar: veckans första pass i vecka 6
       del: Dela
       sist: true
-      text: "I Dela frågar du sist: ”Vad går lättare nu än när vi började?”"
+      text: "I Skriv igen frågar du sist i Dela: ”Vad går lättare nu än när vi började?”"
     - nar: veckans första pass i vecka 6
       del: Före passet
       istallet: true

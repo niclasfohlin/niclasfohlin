@@ -197,7 +197,7 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Ta nästa problem på gruppens nivå, läs lärarens sida och lös problemet på båda sätten. Kopiera problemets sida, Vår lösning och Två lösningar till varje par. Till ett eget problem ritar du A och B på ett papper, som du visar i Jämföra med B täckt.
+      vad: Ta nästa problem på gruppens nivå, läs lärarens sida och lös problemet på båda sätten. Kopiera problemets sida, Vår lösning och Två lösningar till varje par. Kopiera också mallarna Tabellmall att fylla i och Tomma tallinjer, som du ger de par som väljer en tabell eller en tallinje i Planera. Till ett eget problem ritar du A och B på ett papper, som du visar i Jämföra med B täckt.
     # Förstå och Lösa säger ledet och inte veckan, som progressionen, eftersom gruppen byter led när den klarar det som
     # står under Gå vidare när i progressionen (sajtens fråga i PLANERA-R-ATERKOPPLING.md 2026-10-26, och K-572, del B).
     - tid: 0–5 min
@@ -343,22 +343,24 @@ progression:
   # eleverna och vidare (sajtens K-572, del B, den smala formen, efter provet out/planera-r/problemlosning-i-grupp-veckorna.md):
   # vad eleverna ska bli bättre på i ledet, knutet till målets punkter, och när gruppen går vidare. Regeln för att byta led
   # står i vidare, och progressionens text och plan.upprepa hänvisar dit (out/planera-r/problemlosning-i-grupp-4.md).
+  # fokus säger vad gruppen gör i ledet och inte hur långt nivåns problem räcker, som med tre pass i veckan tar slut i
+  # vecka 4; passen säger vilket problem som gäller (sajtens K-596, nr 6).
   rader:
     - vecka: 1–2
       led: Jag gör
-      fokus: "De första problemen."
+      fokus: "Paren berättar problemet för varandra och en elev för gruppen, och gruppen ringar in frågan medan du tänker högt."
       roll: Läraren tänker högt med frågorna på kortet Våra sätt, som ”Jag frågar mig vad vi ska ta reda på.”
       eleverna: Att återberätta problemet med egna ord och peka ut vad det frågar efter.
       vidare: de flesta i gruppen återberättar problemet och säger frågan med egna ord efter högst en fråga från dig, i två pass i rad
     - vecka: 3–4
       led: Vi gör
-      fokus: "Fler av metodens problem. Paren ställer frågorna på kortet Våra sätt till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
+      fokus: "Paren ställer frågorna på kortet Våra sätt till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
       roll: Läraren ger kortare stöd och frågar mer.
       eleverna: Att förklara vad talen betyder och visa problemet med bild, tabell eller material, så att det syns hur talen hänger ihop.
       vidare: paren visar problemet utan din hjälp i Lösa och kan säga vad varje tal betyder, i två pass i rad
     - vecka: 5–6
       led: Ni gör tillsammans
-      fokus: De sista av metodens problem på nivån, och liknande problem ur källorna. Paren skriver Vi vet själva.
+      fokus: Paren skriver Vi vet själva.
       roll: Läraren läser parens Vi vet först och följer upp sätt, lösning och rimlighet.
       eleverna: Att jämföra två sätt och säga vad som är lika, och att kontrollera om svaret är rimligt innan paret säger att det är klart.
       vidare: paren kontrollerar svaret mot problemet utan påminnelse och säger själva i Jämföra vad som är lika i lösningarna, i två pass i rad

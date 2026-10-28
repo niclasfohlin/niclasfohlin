@@ -188,7 +188,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
             <fieldset class="pl-rad pl-foljval">
               <legend class="pl-etikett">Följ insatsen</legend>
               <label class="pl-kryss"><input type="checkbox" id="pl-folj" data-goatcounter-click={`planera:${data.id}:folj`} data-goatcounter-title={`${data.titel}: Följ insatsen valt`} /> <span>Följ insatsen vecka för vecka</span></label>
-              <p class="pl-hjalp">Bocka passen och skatta {gruppensSkattning ? `gruppen i ${gruppensSkattning.namn}` : 'eleverna mot målet'} en gång i veckan. Inget måste fyllas i. Det du för in sparas bara i den här webbläsaren. Ladda ner planen som fil, så går det att öppna på en annan dator.</p>
+              <p class="pl-hjalp">Bocka passen och skatta {gruppensSkattning ? `gruppen i ${gruppensSkattning.namn}` : 'eleverna mot målet'} en gång i veckan.{gruppensSkattning ? ` Det är förvalt, eftersom ${gruppensSkattning.namn} är en del av metoden, och du kan välja bort det.` : ''} Inget måste fyllas i. Det du för in sparas bara i den här webbläsaren. Ladda ner planen som fil, så går det att öppna på en annan dator.</p>
               <div class="pl-elevruta" id="pl-elevruta" hidden>
                 <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
                 <textarea class="pl-falt pl-textfalt" id="pl-elever" rows="4" maxlength="400" autocomplete="off" spellcheck="false"></textarea>

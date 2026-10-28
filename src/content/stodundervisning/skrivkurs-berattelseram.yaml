@@ -696,9 +696,11 @@ plan:
             25–⁠32 min. Tema och genre: bestäm tema och genre med gruppen, och fyll i ”Tema och genre”, ”Huvudpersonen” och ”Berättelsens rörelse”.
             32–⁠55 min. Delarna: ni fyller i rubriken, ”Vad händer”, ”Skrivfokus” och ”Eleven bestämmer” del för del. Delarna har samma skrivfokus i samma ordning som i de färdiga ramarna, så att Min ram och delarnas sidor passar: personen när vi möter huvudpersonen, spänningen när något inte stämmer, platsen när hen kommer till en ny plats, dialogen när personer möts, faran och valet när problemet växer, och slutet när trådarna ska knytas ihop.
             55–⁠60 min. Ramen: läs ramen högt.
+        # Att du skriver frågorna och ramens text till pass 2 står som Efter passet i fältet Pass 1 i egen ram (riggens
+        # K-596), och här står bara vad ramens text ska visa, ur Berättelseram 3 (K-605).
         fore:
           - "Väljer du en egen ram, fyller ni i Berättelseram 3 i ett extra pass på 60 minuter veckan före pass 1, och kursen får då 16 pass."
-          - "Före pass 2 skriver du själv frågorna under ”Samla på tavlan” och ramens text under ”Så här kan det låta” i varje del. Ramens text för varje del ska visa delens skrivfokus, och i del 6 ska något från del 1 komma tillbaka."
+          - "Ramens text för varje del ska visa delens skrivfokus, och i del 6 ska något från del 1 komma tillbaka."
         # Med egen ram skriver eleven den korta berättelsen först i det extra passet, innan gruppen har arbetat med ramen
         # (sajtens steg 4b, K-585), så att mätningen i början görs före pass 1, på det extra passets dag (sajtens tid ”i det
         # extra passet”, 2026-10-27 natt).
@@ -711,10 +713,10 @@ plan:
     - "Då börjar eleven om i pass 1 med nästa grupp och går alla 15 pass."
     - "Svarar du inte ja på fler av frågorna än i början, tar du upp det med elevhälsan."
 mal:
-  overgripande: "kunna bygga en berättelse del för del inom en ram."
+  overgripande: "kunna skriva en berättelse med början, problem och slut på egen hand, och bygga den del för del."
   rubrik: "Mål: vad eleven ska kunna göra efter kursen"
   punkter:
-    - Bygga en berättelse del för del inom en ram
+    - Skriva en berättelse med början, problem och slut på egen hand
     - Berätta sin idé muntligt innan hen skriver
     - Beskriva en plats med mer än ett sinne
     - Skriva en dialog som för handlingen framåt
@@ -766,7 +768,7 @@ ramar:
             - rubrik: Pass 1
               text: "0–⁠8 min. Skylten: visa diplomet, en kapitelbok för yngre barn och skylten Skriv en egen bok. Varje elev får namn och ålder på barnet som boken är till. Skriv läsarens två regler på tavlan: ”Ingen dör, och ingen du känner är den farliga.”\n8–⁠25 min. Den korta berättelsen: eleven skriver den till en bild i 15 minuter. Säg samma ord nu och i pass 14, och skriv dem på tavlan: ”Titta på bilden. Skriv en berättelse om det som händer. Du har en kvart.” Säg inget om vad berättelsen ska innehålla.\n25–⁠40 min. Ramen: läs ramen del för del. Visa din huvudperson och tänk högt om vad hen är bra på och rädd för.\n40–⁠55 min. Min huvudperson: eleven ritar och fyller i Min huvudperson och berättar om hen för en kamrat.\n55–⁠60 min. Barnets namn: eleven skriver barnets namn överst på Min ram."
             - rubrik: Pass 1 i egen ram
-              text: "0–⁠8 min. Skylten: visa diplomet, en kapitelbok för yngre barn och skylten Skriv en egen bok. Varje elev får namn och ålder på barnet som boken är till. Skriv läsarens två regler på tavlan: ”Ingen dör, och ingen du känner är den farliga.”\n8–⁠40 min. Ramen: läs ramen del för del, och fyll i det ni inte hann i det extra passet. Visa din huvudperson och tänk högt om vad hen är bra på och rädd för.\n40–⁠55 min. Min huvudperson: eleven ritar och fyller i Min huvudperson och berättar om hen för en kamrat.\n55–⁠60 min. Barnets namn: eleven skriver barnets namn överst på Min ram."
+              text: "0–⁠8 min. Skylten: visa diplomet, en kapitelbok för yngre barn och skylten Skriv en egen bok. Varje elev får namn och ålder på barnet som boken är till. Skriv läsarens två regler på tavlan: ”Ingen dör, och ingen du känner är den farliga.”\n8–⁠40 min. Ramen: läs ramen del för del, och fyll i det ni inte hann i det extra passet. Visa din huvudperson och tänk högt om vad hen är bra på och rädd för.\n40–⁠55 min. Min huvudperson: eleven ritar och fyller i Min huvudperson och berättar om hen för en kamrat.\n55–⁠60 min. Barnets namn: eleven skriver barnets namn överst på Min ram.\nEfter passet. Skriv frågorna under ”Samla på tavlan” och ramens text under ”Så här kan det låta” i varje del till pass 2."
             - rubrik: Lägg märke till
               text: "Eleven som vet vad huvudpersonen vill innan du frågar.\nEleven vars korta berättelse bara räknar upp händelser."
         - rubrik: "Del 1 · Personen"
@@ -1511,7 +1513,7 @@ ramar:
     - rubrik: "Berättelseram 3: egen ram"
       text:
         - "Ramar som fungerar för många slags berättelser har samma rörelse: något oväntat händer, huvudpersonen försöker förstå, det blir svårare, huvudpersonen måste välja, och valet får en konsekvens. Ge eleverna något att utgå från (en högläst text, en bild eller ett föremål), bestäm tema och genre med gruppen och fyll sedan i delarna tillsammans. Delarna har samma skrivfokus i samma ordning som i de färdiga ramarna, så att Min ram och delarnas sidor passar: personen när vi möter huvudpersonen, spänningen när något inte stämmer, platsen när hen kommer till en ny plats, dialogen när personer möts, faran och valet när problemet växer, och slutet när trådarna ska knytas ihop."
-        - "I passet veckan före pass 1 skriver eleven den korta berättelsen till minut 17, innan ni börjar på ramen. Sedan arbetar ni med texten, bilden eller föremålet till minut 25, och till minut 32 fyller ni i ”Tema och genre”, ”Huvudpersonen” och ”Berättelsens rörelse”. Till minut 55 fyller ni i rubriken, ”Vad händer”, ”Skrivfokus” och ”Eleven bestämmer” del för del. Sist läser du ramen högt, och det ni inte hinner gör ni klart i pass 1. Före pass 2 skriver du själv frågorna under ”Samla på tavlan” och ramens text under ”Så här kan det låta”. Ramens text för varje del ska visa delens skrivfokus, och i del 6 ska något från del 1 komma tillbaka."
+        - "I passet veckan före pass 1 skriver eleven den korta berättelsen till minut 17, innan ni börjar på ramen. Sedan arbetar ni med texten, bilden eller föremålet till minut 25. Innan ni bestämmer tema och genre, säger du att boken är till ett yngre barn och skriver läsarens två regler på tavlan: ”Ingen dör, och ingen du känner är den farliga.” Till minut 32 fyller ni i ”Tema och genre”, ”Huvudpersonen” och ”Berättelsens rörelse”. Till minut 55 fyller ni i rubriken, ”Vad händer”, ”Skrivfokus” och ”Eleven bestämmer” del för del. Sist läser du ramen högt, och det ni inte hinner gör ni klart i pass 1. Före pass 2 skriver du själv frågorna under ”Samla på tavlan” och ramens text under ”Så här kan det låta”. Ramens text för varje del ska visa delens skrivfokus, och i del 6 ska något från del 1 komma tillbaka."
       huvud:
         - rubrik: Tema och genre
         - rubrik: Huvudpersonen

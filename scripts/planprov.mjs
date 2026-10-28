@@ -426,6 +426,12 @@ if (tsMp) {
     const medTabell = (rader) => ({ ...au, tabeller: au.tabeller.map((t) => (t.rubrik === roll.ur.tabell ? { ...t, rader } : t)) });
     const tab = au.tabeller.find((t) => t.rubrik === roll.ur.tabell);
     ska('veckans tabell: en vecka på två rader och en vecka som saknas stoppar', s.rollensVeckor(medTabell([[`1–2${tab.rader[0][0].slice(1)}`, ...tab.rader[0].slice(1)], ...tab.rader.slice(1)]), roll.ur) === null && s.planensRamFel(medTabell(tab.rader.filter((_, i) => i !== 2))).some((x) => x.includes('saknar en rad för vecka 3')) && !s.planensRamFel(au).length, s.planensRamFel(medTabell(tab.rader.filter((_, i) => i !== 2))));
+    // K-605: en rad med samma när som en variant följer varianten. En ny period som börjar på vecka 3 (plan.stege) har ingen
+    // läxa i första passet, där varianten Första passet gäller, och raden om läxan står i veckans första pass veckan efter.
+    const amp3 = s.planera(amp, { ...tom, start: '2026-11-02', dagar: [1, 3, 5], langd: 3, borja: 3 });
+    const laxan = (p, varianter) => s.passetsVisadeRoller(amp3, p, amp.passen, varianter).some((r) => au.plan.passen[r].text?.startsWith('Fråga i början av veckans första pass'));
+    const forstaVeckaTva = s.iDatumordning(s.veckansPass(amp3, amp3.veckor[1]))[0];
+    ska('en rad med samma när som en variant följer varianten: ingen läxa i första passet när perioden börjar på vecka 3', !laxan(amp3.pass[0], au.tidsschema.varianter) && laxan(forstaVeckaTva, au.tidsschema.varianter) && laxan(amp3.pass[0]), [amp3.pass[0], forstaVeckaTva]);
     // K-596: en rad ur en tabell kan visa också den första kolumnen, som villkoret i Gruppstärkande aktiviteter.
     const ga = metod('gruppstarkande-aktiviteter');
     const medVillkor = s.rollensRad(ga, { tabell: 'I en klass, i en liten grupp och med de yngsta', rad: 'Fler än åtta eller en klass', kolumner: ['Gruppen', 'Så gör du'] });
@@ -696,7 +702,7 @@ const former = [
   { id: 'ljudlek-forsta-ljudet', namn: 'period i pass', period: 'Åtta till tolv pass i följd', tider: ['i passet', 'varje pass', 'var 3:e vecka'] },
   { id: 'gruppstarkande-aktiviteter', namn: 'period utan slut med villkor', tider: ['varje vecka', 'varannan vecka', 'vecka 1–4', 'villkor', 'villkor', 'villkor', 'villkor'] },
   { id: 'seriesamtal', namn: 'progression i pass', tider: ['före', 'i passet', 'efter', 'efter 4 veckor'] },
-  { id: 'til-i-grupp', namn: 'progression med vid behov', tider: ['före', 'efter', 'villkor', 'villkor'] },
+  { id: 'til-i-grupp', namn: 'progression med vid behov', tider: ['före', 'efter', 'villkor', 'villkor', 'villkor'] },
 ];
 for (const f of former) {
   const { fel: fe, plan: mp } = s.metodplan(medTider(f.id, f.tider, f.period));
@@ -1510,7 +1516,7 @@ for (const m of synliga) {
     for (const langd of [undefined, mp.period?.max]) {
       const pl = s.planera(mp, { ...s.forval(mp, '2026-11-02'), ...(langd ? { langd } : {}) });
       for (const p of pl.pass) {
-        const bp = s.passetsBeskrivning(s.passetsVisadeRoller(pl, p, mp.passen).map((r) => d.passen[r]), d.passet, s.passetsLage(pl, p));
+        const bp = s.passetsBeskrivning(s.passetsVisadeRoller(pl, p, mp.passen, d.passet?.varianter).map((r) => d.passen[r]), d.passet, s.passetsLage(pl, p));
         if (bp.utanDel.length) adressfel.push(`${m.id}: pass ${p.nr} har raden med del ${bp.utanDel.join(', ')}, som passet inte har`);
       }
     }
@@ -2575,7 +2581,9 @@ try {
       await vanta(150);
     }
     if (m.id === 'gruppstarkande-aktiviteter') {
-      await b.kor(`document.getElementById('pl-folj').click()`);
+      // Följ insatsen är förvalt i en metod med en egen skattning av gruppen, och går att välja bort (K-605; Niclas 2026-10-28).
+      sant('Följ insatsen är förvalt när metoden har en egen skattning av gruppen', await b.kor(`document.getElementById('pl-folj').checked && !document.getElementById('pl-elevruta').hidden`));
+      await b.kor(`(() => { const c = document.getElementById('pl-folj'); if (!c.checked) c.click(); return true; })()`);
       await vanta(200);
       const kryss = async (vecka, varde) => { await b.tryck(`#pl-veckan .pl-remsa [data-vy="${vecka}"]`); await vanta(150); await b.tryck(`#pl-skatta [data-matt][aria-label^="${varde},"]`); await vanta(150); };
       await kryss(1, 7);
