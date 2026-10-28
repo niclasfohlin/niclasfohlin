@@ -28,7 +28,7 @@ material:
   - skrivplanen
   - tidningens sida
 
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 publicerad: 2026-10-06
 relaterade:
   - laslistor-i-grupp
@@ -550,7 +550,7 @@ progression:
       eleverna: "Att läsa och stava ord på -⁠ning, -⁠ing, -⁠het, -⁠else och -⁠skap, och att få med fogen s efter -⁠ning, -⁠ing, -⁠het och -⁠skap, som i tävlingsregel."
     - vecka: "8"
       fokus: Nyord
-      roll: "Ordstarten: eleverna leder. Skrivandet: var och en förklarar sitt nya ord för läsaren i tidningen"
+      roll: "Ordstarten: eleverna leder. Skrivandet: har veckan tre pass, förklarar var och en sitt nya ord för läsaren i tidningen"
       eleverna: "Att läsa och förklara ett nytt ord ur delarna, bakifrån, och säga när delarna inte räcker, som i hjärnröta. Har veckan tre pass, skriver eleven en artikel om vad hens nya ord betyder och är byggt av."
 
 uppfoljning:
@@ -617,16 +617,55 @@ plan:
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
       kolumn: "Pass 3, texten blir klar"
       ur: { tabell: "Veckans tre pass: ett ordpass och två skrivpass", rad: "Pass 3", kolumner: ["Vad gruppen gör"] }
+    # Var veckans ord och din text står, ur tabellerna Pass 2 och 3 och Pass 3 från vecka 5, tills veckornas sidor har
+    # skrivpassen i den form som veckansPass läser (K-596).
+    - nar: veckans andra pass i vecka 1–7
+      del: Före passet
+      text: "Förbered dig genom att läsa veckans sida och skriva din text en gång själv."
+    - nar: veckans övriga pass i vecka 8
+      del: Före passet
+      text: "Förbered dig genom att läsa veckans sida och skriva din text en gång själv."
+    - nar: veckans tredje pass i vecka 1–7
+      del: Före passet
+      text: "Passets två ord till Ordstarten och det som bara gäller veckan står på veckans sida."
+    # Det som ska fram på bordet i pass 3, med namnen, ur Före passet i pass 2, före metodens "Som i pass 2" (K-596).
+    - nar: veckans tredje pass i vecka 1–7
+      del: Före passet
+      ur: { tabell: "Pass 2 och 3: skrivpasset på 60 minuter", rad: "Före passet", kolumner: ["Pass 2, texten börjar"] }
+    # Tidningens namn i vecka 1, kartan i vecka 2 och din text i vecka 5, ur inledningen, tidningens sida och veckornas
+    # sidor (K-596).
+    - nar: veckans sista pass i vecka 1
+      del: Läsa upp
+      text: "Gruppen ger tidningen ett namn i vecka 1, och varje veckas texter blir en avdelning i den, som Uppfinningar, Lediga jobb och Djurlexikon."
+    - nar: veckans sista pass i vecka 2
+      del: Före passet
+      text: "Paret ritar kartan i vecka 2 på ett tomt papper."
+    # Kartan och kontrollanten för din text står efter delens text: paret ritar kartan sist i Skriva, och kontrollanten
+    # läser din text när den är klar (K-596).
+    - nar: veckans sista pass i vecka 2
+      del: Skriva
+      sist: true
+      text: "Skriva i pass 3: paret ritar kartan i stället för bilden i rutan, med skyltarna på kartan."
+    - nar: veckans andra pass i vecka 5
+      del: Din text
+      text: "Din text: i pass 2 säger du varje mening högt innan du skriver den, som eleverna ska göra nu när var och en skriver sin egen text."
+    - nar: veckans tredje pass i vecka 5
+      del: Din text
+      sist: true
+      text: "I pass 3 är en elev kontrollant för din text, läser den högt och pekar på de långa orden, och du tar ett ord med stegen."
     # Kloka pennan och rollerna där de visas första gången, ur veckans sida i vecka 1, och i Skriva hur paret byter och
     # trion när eleverna är fem (den kalla läsaren 2026-10-27, K-585).
     - nar: veckans andra pass i vecka 1
       del: Din text
       text: "Din text: visa Kloka pennan. Du är meningsbyggare och säger en mening, och en elev är sekreterare, säger den igen och skriver den på blädderblocket."
+    # Vad du lyssnar efter och trion står efter det paret gör i Skriva (K-596).
     - nar: veckans andra pass i vecka 1–4
       del: Skriva
+      sist: true
       text: "Lyssna efter om sekreteraren säger meningen igen innan hen skriver och om paret byter efter varje mening. I en trio är den tredje kontrollant och kollar de långa orden i varje mening, och rollerna går runt efter varje mening."
     - nar: veckans tredje pass i vecka 1–4
       del: Skriva
+      sist: true
       text: "I en trio är den tredje kontrollant och kollar de långa orden i varje mening, och rollerna går runt efter varje mening."
     # Läsarna i vecka 2 och leken i vecka 7, ur veckornas sidor (den kalla läsaren 2026-10-27, K-585).
     - nar: veckans sista pass i vecka 2
@@ -645,6 +684,7 @@ plan:
       tabell: "Pass 3 från vecka 5: skrivpasset med kontrollanten"
     - nar: veckans tredje pass i vecka 5–7
       del: Skriva
+      sist: true
       text: "I en trio läser eleverna varandras texter i tur och ordning."
     - nar: veckans sista pass i vecka 7
       text: "Gruppen väljer en av lekarna, som en annan grupp prövar på en rast i vecka 8."
@@ -661,14 +701,18 @@ plan:
       del: Skriva
       istallet: true
       text: "Från vecka 5 gör var och en sin plan i pass 2, berättar texten för kamraten och säger varje mening högt innan hen skriver den."
+    # Att texten blir klar, kontrollanten och trion står efter delens text, i den ordning eleven gör det (K-596).
     - nar: veckans övriga pass i vecka 8
       del: Skriva
+      sist: true
       text: "Texten är kort, och eleven skriver den klart i pass 2."
     - nar: veckans övriga pass i vecka 8
       del: Skriva
+      sist: true
       text: "Sist i Skriva är kamraten kontrollant."
     - nar: veckans övriga pass i vecka 8
       del: Skriva
+      sist: true
       text: "I en trio läser eleverna varandras texter i tur och ordning."
     - nar: veckans övriga pass i vecka 8
       del: Läsa upp
@@ -679,6 +723,22 @@ plan:
     - nar: sista passet
       kort: "Tidningens pass"
       text: "Gruppen sätter ihop tidningen och läser den för en inbjuden läsare."
+  # Lathundens ordpass i vecka 2 gäller metodens sida: planen har lathunden i varje pass, och länken till vecka 2 ledde
+  # till fel vecka (K-596).
+  utan:
+    - "Lathunden visar ett ordpass i vecka 2, minut för minut."
+  # Det du kopierar till kartläggningen veckan före kursen, ur Materialet du behöver, och tidningens sida att fortsätta
+  # på, ur tidningens sida (K-596).
+  fore:
+    - "Före och efter kursen kopierar du elevens ordlista två gånger per elev, en till eleven och en till dig. Varje elev får också bladet Dela orden, bladet Diktamen och tidningens sida, och du har lärarens sidor."
+    - "Skriv ut en första sida och en sida att fortsätta på varje vecka, till varje par i vecka 1–4 och till varje elev i vecka 5–8."
+  # Metodens sätt att justera vid avstämningen, ur uppföljningens rad Efter vecka 4 (K-596).
+  justera:
+    - "Läs texterna från vecka 1 och 4, och ta felstavade ord till Ordstarten."
+    - "Fick kamraten ofta vänta när eleven var sekreterare i vecka 3 och 4, eller kunde eleven inte läsa sin mening, får hen en sekreterare från vecka 5, som i tabellen När eleven fastnar i skrivandet."
+  # Kursen har bokade läsare i vecka 2 och 8, leken som en annan grupp prövar och avstämningen efter vecka 4, och
+  # metodens svar på mer tid är en period till efter kursen (K-596).
+  utanUpprepa: true
   # Beslutet efter kursen, ordagrant ur uppföljningens text. Gränsen i poäng och raderna i ordning, avsluta, elevhälsan
   # och annars en period till, efter passgenomgången i Skrivning (2026-10-26).
   utvardering:

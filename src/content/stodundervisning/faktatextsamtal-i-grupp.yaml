@@ -24,7 +24,7 @@ material:
   - fem modeller med blad
   - post-it-lappar
   - pennor
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 relaterade:
   - boksamtal-i-grupp
   - problemlosning-i-grupp
@@ -553,20 +553,28 @@ uppfoljning:
     - nar: Före perioden
       tid: "före"
       perElev: 15
-      vad: Gör kartläggningen före första passet. Den tar omkring en kvart per elev och visar också vilken nivå som passar.
+      resultat: "Det eleven sa och gjorde i uppgift 1–4, ur protokollet"
+      vad: Gör kartläggningen med Bäverns damm före första passet och skriv det eleven säger och gör i protokollet. Den tar omkring en kvart per elev och visar också vilken nivå som passar.
     - nar: Varje vecka
       tid: "varje vecka"
       vad: Vad strök eleverna under, hur redde de ut det, och hade kärnan på varje lapp med det viktiga? Spara gruppens modell och elevernas svar på textens fråga. Är svaret ordnat som modellen, eller är det en lista?
     - nar: Efter åtta veckor
       tid: "efter"
       perElev: 15
+      resultat: "Det som har ändrats, uppgift för uppgift, ur protokollet"
       vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Hur eleven klarar klassens texter ser du i vecka 6–8, och på Medel och Avancerat också i avsnittet ur klassens bok. Avslutar du insatsen, säger du till läraren i ämnet vilka modeller eleven kan använda i klassens texter.
 plan:
+  # Beslutet efter perioden, och i en period till vilken kartläggning som är före och vilken text som är efter (K-596).
   utvardering:
     - "Reder eleven ut det som skaver och säger kärnan med egna ord, också i klassens texter, avslutar du insatsen."
-    - "Har eleven gått framåt men behöver fortfarande stöd i klassens texter, får eleven en period till med ett nytt tema."
-    - "Den nya perioden börjar i vecka 1, med ett tema från sidan Ta fram en faktatext."
+    - "Har eleven gått framåt men behöver fortfarande stöd i klassens texter, får eleven en period till med ett nytt tema. Den nya perioden börjar i vecka 1, med ett tema från sidan Ta fram en faktatext. Kartläggningen du nyss har gjort blir då kartläggningen före den nya perioden. Efter perioden gör du kartläggningen med Bäverns damm."
     - "Står inget under Det som har ändrats i protokollet, tar du det med elevhälsan."
+  # Det som skrivs ut till vecka 1, ur noten under Materialet: det du behöver, och när (K-596).
+  fore:
+    - "Till vecka 1 skriver du ut temats första text med lärarens sida, bladet Kärnorna, kortet När det skaver, tankekartans sida med exemplet och bladet, och kartläggningen med Bäverns damm och protokollet. Bladen är liggande A4: välj A3 när du skriver ut, eller förstora till 141 procent i kopiatorn. Saknar du A3 ritar du av bladet på ett blädderblocksark."
+  # Metodens sätt att justera vid avstämningen, ur stödtrappan (K-596).
+  justera:
+    - "Stryker någon under nästan allt, frågar du vad avsnittet handlar om i stort innan ni går in i detaljen. Händer det i flera pass läser eleven i par med en kamrat som läser högt. Gäller det flera i gruppen, läser ni veckans text på nivån under från och med nästa vecka. På Bas läser de i stället i par med en kamrat som läser högt."
   nivaval:
     text: "Nivåerna skiljer sig i området och i hur långa texterna och avsnitten är. Välj nivå efter elevernas läsning: kartläggningen före perioden visar vilken som passar."
     mer: Så skiljer sig nivåerna
@@ -578,10 +586,19 @@ plan:
       kort: "Modellpasset"
       tabell: "Modellpasset på 40 minuter"
       ur: { tabell: "Två pass per text: läspasset och modellpasset", rad: Tränar, kolumner: [Modellpasset] }
+    # Klassens text: frågan står före svaret, så att svaret inte står ensamt (K-596).
     - nar: veckans första pass i vecka 6–8
-      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Vilken text?" }
+      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Vilken text?", kolumner: [Frågan, Svaret] }
     - nar: veckans första pass i vecka 6–8
-      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur förbereder du den?" }
+      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur förbereder du den?", kolumner: [Frågan, Svaret] }
+    # Avancerat från vecka 3, ur tabellen Ett avsnitt i fyra steg (K-596).
+    - nar: veckans första pass i vecka 3–8
+      text: "På Avancerat är avsnitten längre. Räkna där med att läsa ett avsnitt till högt från vecka 3, och bestäm före passet vilket. I vecka 5 och 6 är det avsnitt 2."
+    # Jobbkorten skrivs ut veckan före och sägs första gången i vecka 3, ur ramen Jobbkorten (K-596).
+    - nar: veckans andra pass i vecka 2
+      text: "Bladet har båda jobbkorten. Skriv ut ett blad, eller två om ni är sju eller åtta. Klipp isär korten längs den streckade linjen och plasta gärna in dem."
+    - nar: veckans första pass i vecka 3
+      text: "Säg första gången att frågorna på jobbkorten är de som du har ställt i två veckor."
     # Modellpasset med klassens text: raderna ur tabellen Vecka 6–8 står i delarna de gäller, och Orden och Svaret är som
     # vanligt (Rimligheten 2026-10-26: vecka 6–8 visade fördjupningen och Visste du att, som klassens text inte har, och
     # utan delarna i andra rundan stod inte att gruppen återger texten och skriver svaret).
@@ -594,12 +611,19 @@ plan:
       del: Fördjupningen
       istallet: true
       ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur börjar modellpasset?" }
+    # Delen Modellen i vecka 6–8: valet, modellen och lapparna i stället för raderna om vecka 1–5 (K-596).
+    # Vilken modell? står med frågan, och lapparna flyttas sist, när modellen är vald.
     - nar: veckans andra pass i vecka 6–8
       del: Modellen
-      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Vilken modell?" }
-    - nar: veckans andra pass i vecka 6–8
-      del: Modellen
+      istallet: true
       ur: { tabell: "Vecka 6–8: klassens texter", rad: "Hur väljer gruppen?" }
+    - nar: veckans andra pass i vecka 6–8
+      del: Modellen
+      ur: { tabell: "Vecka 6–8: klassens texter", rad: "Vilken modell?", kolumner: [Frågan, Svaret] }
+    - nar: veckans andra pass i vecka 6–8
+      del: Modellen
+      sist: true
+      text: "Sedan flyttar gruppen lapparna till veckans modell, en i taget, och säger varför lappen hör hemma där. Gruppen ger varje plats ett namn."
     - nar: veckans andra pass i vecka 6–8
       del: Samtala
       istallet: true
@@ -608,11 +632,17 @@ plan:
       text: "I läspasset tänker du högt i avsnitt 1 i vecka 6, och två elever har jobbkorten från avsnitt 2."
     - nar: veckans andra pass i vecka 6–8
       text: "Läraren i ämnet får ett foto av gruppens modell efter veckan och är välkommen till ett modellpass."
-    # Veckans modell i vecka 3 och 4 vid namn, ur tabellen De fem modellerna (Rimligheten 2026-10-26).
+    # Veckans modell i vecka 1–5 vid namn, ur tabellen De fem modellerna (Rimligheten 2026-10-26; vecka 1, 2 och 5 i K-596).
+    - nar: veckans andra pass i vecka 1
+      ur: { tabell: "De fem modellerna: en för varje sätt att bygga en text", rad: beskriver en sak och dess delar, kolumner: [Modellen, Modellens fråga] }
+    - nar: veckans andra pass i vecka 2
+      ur: { tabell: "De fem modellerna: en för varje sätt att bygga en text", rad: berättar i tidsordning, kolumner: [Modellen, Modellens fråga] }
     - nar: veckans andra pass i vecka 3
       ur: { tabell: "De fem modellerna: en för varje sätt att bygga en text", rad: jämför två saker, kolumner: [Modellen, Modellens fråga] }
     - nar: veckans andra pass i vecka 4
       ur: { tabell: "De fem modellerna: en för varje sätt att bygga en text", rad: förklarar orsak och verkan, kolumner: [Modellen, Modellens fråga] }
+    - nar: veckans andra pass i vecka 5
+      ur: { tabell: "De fem modellerna: en för varje sätt att bygga en text", rad: visar ett problem och en lösning, kolumner: [Modellen, Modellens fråga] }
     - nar: sista passet
       text: "I det sista passet säger var och en vad hen tar med sig från perioden."
 mal:

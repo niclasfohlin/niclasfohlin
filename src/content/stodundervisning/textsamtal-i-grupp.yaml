@@ -29,7 +29,7 @@ material:
   - ledtrådsbladet
   - lyssningsbladet
   - kartläggningen
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 relaterade:
   - boksamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -410,7 +410,7 @@ tabeller:
         - Pekar på nästa steg på tankekortet om eleven fastnar
       - - Samtala om texten
         - "Den som leder läser frågan högt och frågar ”Vad tror du?” och ”Hur vet du det?” Hen ser till att alla har pratat en gång innan någon pratar en tredje gång"
-        - Lutar dig tillbaka och skriver det du hör på lyssningsbladet. Frågar den som leder vilken fråga på kortet som kan hjälpa när samtalet stannar. Ställer sist en av textens öppna frågor
+        - Lutar dig tillbaka och skriver det du hör på lyssningsbladet. Frågar den som leder vilken fråga på samtalskortet som kan hjälpa när samtalet stannar. Ställer sist en av textens öppna frågor
   - rubrik: "Bänkboken: pass 3 i vecka 6–8"
     plats: efter-arbetsform
     text: "I vecka 6–8 läser eleverna en sida i sin egen bänkbok i pass 3, i stället för metodens text. Passet har samma delar och tider som förut. Eleven läser där hen är i boken och sätter en post-it-lapp med ett frågetecken där något inte står, eftersom man inte stryker under i en bok. Du förbereder inget stopp, eftersom eleven ska hitta sitt ställe själv. Be eleverna ta med bänkboken, och lägg fram post-it-lappar och ett ledtrådsblad till varje elev. Eleven lämnar ledtrådsbladet till dig. Lappen sitter kvar i boken, och eleven får sätta fler när hen läser vidare. I det första passet med bänkboken lyssnar du på alla."
@@ -430,7 +430,7 @@ tabeller:
         - Skriver det du hör på lyssningsbladet, och skriver Stanna i sista kolumnen när eleven inte hittade ett ställe själv. Frågar sist ”Vad undrar du nu om din bok?”
   - rubrik: Samtalet i olika former
     plats: efter-arbetsform
-    text: Parsamtalet och gruppens samtal är grunden. Ibland behöver samtalet en annan form, när samma elever alltid pratar, när gruppen är ny eller när ni behöver röra på er. En form ersätter rundan och en av frågorna i Samtala om texten.
+    text: Parsamtalet och gruppens samtal är grunden. Ibland behöver samtalet en annan form, när samma elever alltid pratar, när gruppen är ny eller när ni behöver röra på er. En form i tabellen Samtalet i olika former ersätter rundan och en av frågorna i Samtala om texten.
     kolumner:
       - Formen
       - Så gör ni
@@ -511,7 +511,7 @@ tidsschema:
       vad: Välj veckans tankesteg och samtalsdrag ur Veckans cykel och en text vars slag passar. Läs texten och sidan om den under Lärarens sidor, bestäm var du stannar och öva på att tänka högt. Bestäm paren och vem som är A och B, och skriv startmeningen. Kopiera texten till varje elev och till dig. Kopiera också ledtrådsbladet, i pass 2 ett till varje par och i pass 3 ett till varje elev, och skriv numret på en mellan raderna-fråga på bladet.
     - tid: 0–3 min
       fas: Starten
-      vad: Skriv meningen på tavlan och läs den högt. Låt gruppen säga vad som står och vad de vet, och sedan säger var och en ”Jag tror att” till sin kamrat. Efter första passet är starten likadan i varje pass.
+      vad: Skriv startmeningen på tavlan och läs den högt. Låt gruppen säga vad som står och vad de vet, och sedan säger var och en ”Jag tror att” till sin kamrat. Efter första passet är starten likadan i varje pass.
     - tid: 3–5 min
       fas: Möt texten
       vad: Knyt an till förra passet. Säg titeln och ställ frågan Före läsningen, som får eleverna att tänka på det de behöver veta. Förklara ett eller två ord som texten kräver, men aldrig ett ord som avslöjar svaret. Säg vilket tankesteg och vilket samtalsdrag ni ska öva.
@@ -549,7 +549,7 @@ steg:
   rader:
     - namn: Starten
       fraga: Vad står det, och vad tror vi?
-      gor: Skriv meningen, läs den och låt gruppen säga vad som står och vad de vet. Sedan säger alla sitt ”Jag tror att” till en kamrat. Håll det kort.
+      gor: Skriv startmeningen, läs den och låt gruppen säga vad som står och vad de vet. Sedan säger alla sitt ”Jag tror att” till en kamrat. Håll det kort.
       fraser:
         - Vad står det?
         - Vad vet ni om det?
@@ -734,12 +734,30 @@ plan:
   nivaval:
     text: "Nivåerna skiljer sig i hur långa texterna är, hur många frågor som går mellan raderna och hur mycket eleverna läser själva. Välj nivån, Lättläst, Mellan eller Avancerad, efter hur eleverna läser, oavsett årskurs."
     mer: Så skiljer sig nivåerna
+  # Korten och samtalsreglerna med sina namn, så att Före leder till bladen som skrivs ut före första passet, ordagrant ur
+  # bildtexten till samtalskortet och tabellen Så lär du gruppen att samtala (K-596).
+  fore:
+    - "Eleven har sitt eget samtalskort bredvid tankekortet i varje pass. I vecka 1 använder ni de två första raderna, och sedan kommer en rad till i veckan. Blir bordet fullt, skriv ut samtalskortet med tankekortet på baksidan."
+    - "Gruppen har fem samtalsregler på ett kort, Samtalsreglerna under Materialet: Vi säger vad vi tror. Vi visar var det står. Vi bygger vidare på varandra. Vi får tänka olika. Vi får ändra oss. Ni säger dem tillsammans i Starten i vecka 1 och tittar tillbaka på dem i Avsluta."
   passen:
     - nar: veckans första
       kort: "Läraren tänker högt"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 1, kolumner: [Så läser ni, Du, Eleverna] }
     - nar: veckans första
       text: "Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat."
+    # Svårigheten och texterna med slaget Ordet där du väljer veckans text, ordagrant ur Lärarens sidor, delen Så väljer du
+    # text (K-596): i vecka 8 är nivåns fyra texter med slaget Ordet slut.
+    - nar: veckans första
+      del: Före passet
+      text: "Börja med svårighet 1, och ta 2 eller 3 när gruppen klarar slutsatsen med mindre stöd."
+    - nar: veckans första pass i vecka 6–8
+      del: Före passet
+      text: "Varje nivå har fyra texter med slaget Ordet till pass 1 och 2 i vecka 6–8. Är de slut, tar du en text med ett slag som gruppen behöver öva mer."
+    # Stegen för veckans samtalsdrag i delen där du visar draget med en elev, ordagrant ur tabellen Samtalet: tänkandet
+    # mellan er (K-596). I vecka 6–8 väljer eleverna själva sina drag.
+    - nar: veckans första pass i vecka 1–5
+      del: Läs och tänk
+      text: "Du visar ett drag i veckan. Ordningen står i tabellen Progression över insatsperioden, och stegen står i tabellen Så lär du gruppen att samtala."
     # Pass 2: från vecka 6 leder eleverna gruppens samtal, så kolumnen Du gäller vecka 1–5. Raden utan veckor har namnet och
     # Eleverna, så att pass 2 har en roll också i en förlängd plan. I vecka 6–8 står tabellen Eleverna leder samtalet i
     # förberedelsen och i stället för Möt texten, Läs och tänk och Samtala om texten, med delens övriga meningar ur
@@ -800,11 +818,17 @@ plan:
       ur: { tabell: "Bänkboken: pass 3 i vecka 6–8", rad: Samtala om texten }
     # Regeln att sluta, ordagrant ur progressionens text, i delen där du skriver på lyssningsbladet i pass 3 i vecka 6 och 7
     # (den stängda granskningen av K-583 2026-10-27: regeln stod bara i plan.veckoval och syntes inte i veckan där den prövas).
+    # Regeln står sist i delen, efter att du har skrivit på lyssningsbladet (K-596).
     - nar: veckans tredje pass i vecka 6–7
       del: Samtala om texten
+      sist: true
       text: "Sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna själva hittar ett ställe i bänkboken och att ledtråden står utan h."
     - nar: veckans tredje pass i vecka 1–5
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Så läser ni, Eleverna] }
+    # Vem du lyssnar på i delen där du skriver på lyssningsbladet, ordagrant ur Så sätter du ihop gruppen (K-596).
+    - nar: veckans tredje pass i vecka 1–5
+      del: Samtala om texten
+      text: "Lyssna på halva gruppen i pass 3 och på resten veckan efter."
     - nar: veckans tredje
       kort: "Eleverna läser själva"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Du] }
@@ -812,6 +836,12 @@ plan:
     text: "Planera åtta veckor. Sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna själva hittar ett ställe i bänkboken och att ledtråden står utan h. Tar ni ett drag en vecka till, hinner ni inte alla veckorna 6–8, men ni tar minst en av dem."
     mer: Progression över insatsperioden
     forval: 8
+  # Metodens sätt att justera vid avstämningen, ordagrant ur noten under Från det du hör till det du visar, tabellen
+  # Samtalet i olika former och Så sätter du ihop gruppen (K-596).
+  justera:
+    - "Visa ett tankesteg eller ett samtalsdrag i taget, och visa samma i flera veckor om det behövs."
+    - "Ibland behöver samtalet en annan form, när samma elever alltid pratar, när gruppen är ny eller när ni behöver röra på er. En form i tabellen Samtalet i olika former ersätter rundan och en av frågorna i Samtala om texten."
+    - "Den som avkodar mödosamt kan vara med och läser i par i pass 3, men tränar också avkodningen, till exempel i TIL i grupp."
   # När veckan tas en gång till, ur progressionens text och noten under Veckans tre pass (den kalla testaren efter del B,
   # 2026-10-27: veckan som tas om sa inte vad läraren ändrar). Noten leder till tabellen Från det du hör till det du visar.
   # Den andra meningen säger att en vecka till tar en av veckorna 6–8 (den stängda granskningen av K-583 samma dag).
@@ -876,7 +906,7 @@ ramar:
             - rubrik: Så använder ni kortet
               text: Kortet hjälper eleven med det inre samtalet. Peka på steget när du tänker högt i pass 1. I pass 2 och 3 pekar eleverna själva på steget de använder, och frågan bredvid är den de ställer sig själva. På nivån Lättläst börjar ni med Det står, Jag vet och Alltså tror jag.
             - rubrik: Kortet
-              text: Bladet har två likadana kort, så ett blad räcker till två elever. Skriv ut det, klipp isär korten och laminera dem gärna. Samma rader står på lathundens tredje sida.
+              text: Bladet har två likadana kort, så ett blad räcker till två elever. Skriv ut tankekortet, klipp isär korten och laminera dem gärna. Samma rader står på lathundens tredje sida.
     - rubrik: Samtalskortet
       text:
         - Varje elev har kortet vid bordet i varje pass, bredvid tankekortet.
@@ -896,7 +926,7 @@ ramar:
             - rubrik: Så använder ni reglerna
               text: Säg reglerna tillsammans i Starten i vecka 1, och fråga vad de betyder. Välj gärna en regel före samtalet, och titta tillbaka på den i Avsluta med frågan ”Hur gick det att följa samtalsreglerna i dag?”
             - rubrik: Affischen
-              text: Skriv ut bladet på A3, eller förstora det till 141 procent i kopiatorn, och sätt upp det där gruppen ser det. Till ett kort för varje elev förminskar du bladet till 71 procent och klipper ut det i A5. Reglerna står också på lathundens tredje sida.
+              text: Skriv ut samtalsreglerna på A3, eller förstora bladet till 141 procent i kopiatorn, och sätt upp det där gruppen ser det. Till ett kort för varje elev förminskar du bladet till 71 procent och klipper ut det i A5. Reglerna står också på lathundens tredje sida.
     # >>> texterna: node build/texter.mjs textsamtal-i-grupp --yaml skriver allt härifrån
     - rubrik: Startmeningarna
       text:

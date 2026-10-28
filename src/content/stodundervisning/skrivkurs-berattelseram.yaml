@@ -28,7 +28,7 @@ material:
   - blädderblock
   - skylt och diplom
   - häftapparat
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 relaterade:
   - skrivkurs-vardeskapande
   - skrivkurs-sagoboken
@@ -147,7 +147,7 @@ tabeller:
         - "Alla ritar bilden. I Min ram ringar de in det som kan återkomma."
       - - 50–⁠60 min
         - Dela
-        - "Eleven säger sitt mål och läser delen. Kamraten säger var hen var med, vad hen undrar och om målet hördes. Eleven ändrar där kamraten undrade och skriver ett nytt mål."
+        - "Eleven säger sitt mål och läser delen. Kamraten säger var hen var med, vad hen undrar och om målet hördes. Eleven ändrar där kamraten undrade och skriver ett nytt mål på Mitt mål."
   - rubrik: Det du ser, och det du gör
     plats: efter-fastnar
     text: "Det här brukar hända i kursen, och så gör du. Skrivstrategier är ett A4 på kursens sida att ha i handen under skrivtiden. Där står fler strategier för texten och läsaren."
@@ -351,6 +351,13 @@ plan:
       del: Efter passet
       istallet: true
       text: "Före pass 2 kopierar du Min bok: sidan, sex till varje elev, och några av Min bok: fler rader."
+    # Eleven som missade den korta berättelsen skriver den före nästa pass, ur Det du ser, och det du gör (K-596).
+    - nar: pass 1
+      del: Efter passet
+      ur: { tabell: "Det du ser, och det du gör", rad: "Eleven missade en kort berättelse", kolumner: ["Det du ser", "Det du gör"] }
+    - nar: pass 14
+      del: Efter passet
+      ur: { tabell: "Det du ser, och det du gör", rad: "Eleven missade en kort berättelse", kolumner: ["Det du ser", "Det du gör"] }
     - nar: pass 3
       del: Efter passet
       istallet: true
@@ -407,23 +414,32 @@ plan:
     - nar: pass 2
       del: "Skrivfokus"
       istallet: true
-      text: "Skrivfokus: läs sidan Två texter, del 1: Amir på rasten, och sedan ramens text för del 1. Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen. Med Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann. Med egen ram står ramen och ramens text i Berättelseram 3. Du skriver din del på blädderblocket och tänker högt. Visa att du tvekar och ändrar, och säg varför. Gruppen samlar ord. Vänd bort blocket."
+      # Hur gruppen jämför texterna och hittar greppet i ramens text, ur sidans Till läraren, och lärarens roll i början (K-596).
+      text: "Skrivfokus: läs sidan Två texter, del 1: Amir på rasten, och sedan ramens text för del 1. Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen. Med Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann. Med egen ram står ramen och ramens text i Berättelseram 3. Läs båda texterna högt, och ställ frågorna i tur och ordning. Låt paren prata om fråga 2 och 3, och ta de andra frågorna i hela gruppen. Säg sedan: ”Den andra visar hur Amir är genom det han gör.” Läs ramens text för del 1, och fråga: ”Var gör den här texten samma sak?” Du skriver din del på blädderblocket och tänker högt. Visa mycket i början. Visa att du tvekar och ändrar, och säg varför. Gruppen samlar ord. Vänd bort blocket."
     - nar: pass 2
       del: "Berätta"
       istallet: true
       text: "I par berättar var och en sin del, och kamraten frågar med kortet Berätta. ”Ställ dagens fråga först.” Lyssna på den som brukar fastna: ”Bra. Skriv det du just sa.” Sist skriver eleven sina val i Min ram."
+    # Den som inte vill visa sin text lägger boken stängd, ur Strukturen, del 1: Galleriet (K-596).
     - nar: pass 2
       del: "Skriv"
-      text: "I Skriv lär du ut Galleriet vid minut 38, och ni går det första varvet. Böckerna ligger öppna, och alla går ett varv och pekar där de såg dagens skrivfokus. Var och en kan låna ett sätt att skriva och behåller sitt eget innehåll. En stjärna i kanten visar var någon har lånat ett sätt. Ett grepp mitt i skrivtiden, som Galleriet, tar högst fem minuter, och eleven skriver vidare direkt efter."
+      text: "I Skriv lär du ut Galleriet vid minut 38, och ni går det första varvet. Böckerna ligger öppna, och alla går ett varv och pekar där de såg dagens skrivfokus. Den som inte vill visa sin text lägger boken stängd. Var och en kan låna ett sätt att skriva och behåller sitt eget innehåll. En stjärna i kanten visar var någon har lånat ett sätt. Ett grepp mitt i skrivtiden, som Galleriet, tar högst fem minuter, och eleven skriver vidare direkt efter."
+    # Återkopplingens regler första gången gruppen delar, och samtycket till dina två versioner (K-596).
     - nar: pass 2
       del: "Dela"
-      text: "Alla läser en mening med skrivfokuset, och alla ändrar en sak."
+      text: "Alla läser en mening med skrivfokuset, och alla ändrar en sak. Fråga vad varje text gör för läsaren. Ingen frågar vilken som är sämst. Du visar en elevs text för gruppen bara om eleven säger ja. Ingen tar upp stavningen i greppen."
+    - nar: pass 2
+      del: "Efter passet"
+      istallet: true
+      text: "Läs början på allas delar, omkring en minut per text. Skriv själv två korta versioner till fortsättningspasset: en som liknar det många skrev och en med det som fattades. Ingen elevs mening blir den första versionen, och den andra bygger du på en elevs text bara när eleven har sagt ja."
     - nar: pass 3
       kort: "Del 1, Personen"
       ur: { tabell: "Kursen pass för pass", rad: "Del 1", kolumner: ["Det som händer i Den magiska skogen", "Det som händer i Hunden som försvann", "Skrivfokus"] }
       tabell: "Fortsättningspasset, 60 minuter"
+    # Det du visar när eleverna har läst tyst står efter delens text (K-596).
     - nar: pass 3
       del: "Ramen"
+      sist: true
       text: "Ramen: när eleverna har läst tyst, visar du hur något från ramens del 1 kommer tillbaka i del 6, och ringar in något i din del 1 som kan återkomma. Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen. Med Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann. Med egen ram står ramen och ramens text i Berättelseram 3."
     - nar: pass 3
       del: "Skriv"
@@ -465,10 +481,11 @@ plan:
       kort: "Del 2, Spänningen"
       ur: { tabell: "Kursen pass för pass", rad: "Del 2", kolumner: ["Det som händer i Den magiska skogen", "Det som händer i Hunden som försvann", "Skrivfokus", "Läsaren och svaren"] }
       tabell: "Fortsättningspasset, 60 minuter"
+    # Lappen läst högt för den som läser långsamt, ur Ditt svar (K-596).
     - nar: pass 5
       del: "Ramen"
       istallet: true
-      text: "Ramen: eleven läser din lapp, svarar på den och använder sitt svar när hen skriver vidare i Skriv."
+      text: "Ramen: eleven läser din lapp, svarar på den och använder sitt svar när hen skriver vidare i Skriv. Läs lappen högt för den som läser långsamt."
     - nar: pass 6
       kort: "Del 3, Platsen med sinnena"
       text: "Med Den magiska skogen visar exemplet passet."
@@ -487,7 +504,8 @@ plan:
     - nar: pass 6
       del: "Skrivfokus"
       istallet: true
-      text: "Skrivfokus: läs sidan Två texter, del 3: Källaren hos mormor, och sedan ramens text för del 3. Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen. Med Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann. Med egen ram står ramen och ramens text i Berättelseram 3. Du skriver din del på blädderblocket och tänker högt. Tveka högt: ”Det luktade blött. Nej, sött, som pannkakor.” Gruppen samlar ord. Vänd bort blocket."
+      # Jämförelsen av texterna, ur sidans Till läraren (K-596).
+      text: "Skrivfokus: läs sidan Två texter, del 3: Källaren hos mormor, och sedan ramens text för del 3. Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen. Med Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann. Med egen ram står ramen och ramens text i Berättelseram 3. Läs båda texterna högt, och ställ frågorna i tur och ordning. Låt paren prata om fråga 2 och 3, och ta de andra frågorna i hela gruppen. Säg sedan: ”Den andra börjar med ett annat sinne än synen.” Läs ramens text för del 3, och fråga: ”Var gör den här texten samma sak?” Du skriver din del på blädderblocket och tänker högt. Tveka högt: ”Det luktade blött. Nej, sött, som pannkakor.” Gruppen samlar ord. Vänd bort blocket."
     - nar: pass 6
       del: "Berätta"
       istallet: true
@@ -505,20 +523,26 @@ plan:
     - nar: pass 7
       del: "Skrivfokus: Två sätt i era texter"
       text: "Två sätt i era texter: en version med bara synen och en som börjar med ett annat sinne."
+    # Reserven när ni inte kan träffas, ur Läsarmötet, del 4: Provläsningen, Om något saknas (K-596).
+    - nar: pass 7
+      del: "Dela"
+      text: "Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8."
     - nar: pass 8
       kort: "Del 4, Dialogen"
       ur: { tabell: "Kursen pass för pass", rad: "Del 4", kolumner: ["Det som händer i Den magiska skogen", "Det som händer i Hunden som försvann", "Skrivfokus", "Läsaren och svaren"] }
+    # Från del 4 frågar läraren mer än hen visar, ur Lärarens roll (K-596).
     - nar: pass 8
       del: "Skrivfokus"
-      text: "Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen.\nMed Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann.\nMed egen ram står ramen och ramens text i Berättelseram 3."
+      text: "Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen.\nMed Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann.\nMed egen ram står ramen och ramens text i Berättelseram 3.\nFrån del 4 föreslår gruppen repliker och ord, och du frågar mer än du visar."
+    # Reserven ur Läsarmötet, del 4: Provläsningen, Om något saknas, efter det du tar med till mötet (K-596).
     - nar: pass 8
       del: "Före passet"
       istallet: true
-      text: "Går barnen i förskolan, kommer de till er, så att mötet ryms i passet. Till mötet tar du med elevernas böcker, bladen till provläsningen, papper och kritor. Skriv ett utkast till din del. Skriv skrivfokuset och dagens fråga på tavlan. ”Vad säger den nya först?” Bestäm paren. Blir en elev över i Berätta, är du kamrat."
+      text: "Går barnen i förskolan, kommer de till er, så att mötet ryms i passet. Till mötet tar du med elevernas böcker, papper, kritor och bladen Provläsningen, del 4: Läsaren svarar. Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25. Skriv ett utkast till din del. Skriv skrivfokuset och dagens fråga på tavlan. ”Vad säger den nya först?” Bestäm paren. Blir en elev över i Berätta, är du kamrat."
     # Provläsningen som sidan Läsarmötet, del 4: Provläsningen säger den, överst i passet: delen Provläsningen finns bara i
     # veckans fält, och planensRamFel räknar tidsschemats och tabellernas delar (sajtens steg 4b och kalla läsare, K-585).
     - nar: pass 8
-      text: "Varje elev sitter med barnet, läser del 1–3 högt och visar bilderna. Den som läser långsamt berättar del 1 och 2 med egna ord och läser del 3. Eleven frågar ”Vad tyckte du bäst om? Vad förstod du inte? Vad vill du ska hända?” och skriver några ord vid varje fråga på bladet. Sedan berättar eleven att huvudpersonen möter någon ny i nästa del, och säger: ”Rita hur du tror att den ser ut.” Har eleven redan bestämt vem huvudpersonen möter, säger hen tre saker om den först. Teckningen blir bilden till del 4 i boken, och barnets namn står vid Bilder av på omslaget."
+      text: "Varje elev sitter med barnet, läser del 1–3 högt och visar bilderna. Den som läser långsamt berättar del 1 och 2 med egna ord och läser del 3. Eleven frågar ”Vad tyckte du bäst om? Vad förstod du inte? Vad vill du ska hända?” och skriver några ord vid varje fråga på bladet Provläsningen, del 4: Läsaren svarar. Sedan berättar eleven att huvudpersonen möter någon ny i nästa del, och säger: ”Rita hur du tror att den ser ut.” Har eleven redan bestämt vem huvudpersonen möter, säger hen tre saker om den först. Teckningen blir bilden till del 4 i boken, och barnets namn står vid Bilder av på omslaget."
     - nar: pass 9
       kort: "Del 4, Dialogen"
       ur: { tabell: "Kursen pass för pass", rad: "Del 4", kolumner: ["Det som händer i Den magiska skogen", "Det som händer i Hunden som försvann", "Skrivfokus", "Läsaren och svaren"] }
@@ -548,7 +572,9 @@ plan:
     - nar: pass 10
       del: "Skrivfokus"
       istallet: true
-      text: "Skrivfokus: läs sidan Två texter, del 5: Hopptornet, och sedan ramens text för del 5. Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen. Med Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann. Med egen ram står ramen och ramens text i Berättelseram 3. Du skriver din del på blädderblocket och tänker högt. Skriv kortare och fråga gruppen mer. Gruppen samlar ord. Vänd bort blocket."
+      # Jämförelsen av texterna och det du lyssnar efter i varje ram, ur sidans Till läraren; raderna om Vilda och Bus
+      # börjar med ramens namn och står bara i den ramen (K-596).
+      text: "Skrivfokus: läs sidan Två texter, del 5: Hopptornet, och sedan ramens text för del 5. Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen. Med Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann. Med egen ram står ramen och ramens text i Berättelseram 3. Läs båda texterna högt, och ställ frågorna i tur och ordning. Låt paren prata om fråga 2 och 3, och ta de andra frågorna i hela gruppen. Säg sedan: ”Den andra visar rädslan i kroppen, och ögonblicket före valet får ta tid.” Läs ramens text för del 5, och fråga: ”Var gör den här texten samma sak?”\nMed Den magiska skogen läser du Vildas del 1: ”Men att hoppa ner från kastanjen vågar jag inte.” I del 5 lyssnar du efter benen som skakar. De tre stegen bakåt är ansatsen, och hoppet får vänta.\nMed Hunden som försvann är Bus rädd för åska, och i del 5 lyssnar du efter benen som inte vill lyda. Det som får honom att våga är Lovas röst.\nDu skriver din del på blädderblocket och tänker högt. Skriv kortare och fråga gruppen mer. Gruppen samlar ord. Vänd bort blocket."
     - nar: pass 10
       del: "Berätta"
       istallet: true
@@ -570,7 +596,7 @@ plan:
     - nar: pass 11
       del: "Ramen"
       istallet: true
-      text: "Ramen: eleven läser din lapp, svarar på den och använder sitt svar när hen skriver vidare i Skriv."
+      text: "Ramen: eleven läser din lapp, svarar på den och använder sitt svar när hen skriver vidare i Skriv. Läs lappen högt för den som läser långsamt."
     - nar: pass 12
       kort: "Del 6, Slutet"
       ur: { tabell: "Kursen pass för pass", rad: "Del 6", kolumner: ["Det som händer i Den magiska skogen", "Det som händer i Hunden som försvann", "Skrivfokus"] }
@@ -638,9 +664,13 @@ plan:
   # den skrivs i pass 1 och med egen ram i det extra passet (sajtens steg 4b, K-585).
   foreVeckor: 2
   fore:
-    - "Brevet Till läraren i den yngre klassen står under Kursens material. I brevet skriver du in datum, klockslag och rum för provläsningen i pass 8 och boksläppet i pass 15."
-    - "Presentera kursen två veckor före pass 1, och skicka brevet när gruppen är bestämd, så att du har barnens namn till pass 1."
+    # Vilka läsarna är och tabellen för en skola utan yngre elever, före brevet, så att läraren vet vem hen bokar (K-596).
+    - "Läsarna är ett barn per elev i en yngre klass, oftast förskoleklassen eller åk 1. Tabellen Läsarna i olika skolformer säger hur du gör när skolan saknar yngre elever. Brevet Till läraren i den yngre klassen står under Kursens material. I brevet skriver du in datum, klockslag och rum för provläsningen i pass 8 och boksläppet i pass 15."
+    # Skylten till presentationen i klasserna, ur skyltens Till läraren (K-596).
+    - "Presentera kursen två veckor före pass 1, och skicka brevet när gruppen är bestämd, så att du har barnens namn till pass 1. Sätt upp skylten Skriv en egen bok i varje klass där du presenterar kursen, och visa diplomet bredvid. Skriv ditt namn och dagen då kursen börjar på skyltens två rader, i Word-filen före utskriften eller för hand efteråt. Skriv ut en skylt i färg till varje klass, gärna på A3."
     - "Välj två likartade bilder utan text, där var och en visar en plats och en person som det händer något med. Spara den andra till pass 14."
+    # Skrivstödet på plats från pass 1, ur Stödet att komma igång (K-596).
+    - "Den som har skrivstöd, som tal till text eller tangentbord, använder det i hela kursen. Eleven klistrar då in en utskrift på bokens sida och gör titeln och bilden för hand."
   # Ramen är planens val (sajtens K-576; Niclas 2026-10-27: "Bygg, men visa bilder först"). Tabellen Kursen pass för pass har
   # en kolumn per ram, och en mening som börjar med "Med Hunden som försvann" står bara i den ramen. Den egna ramen har sitt
   # extra pass och lärarens texter under Före.
@@ -704,9 +734,9 @@ snabbmall:
 checklista:
   rubrik: Före kursen
   punkter:
-    - Bett om barnens namn med brevet.
+    - Bett om barnens namn med brevet Till läraren i den yngre klassen.
     - Bokat provläsningen och boksläppet, med reserv.
-    - Valt de två bilderna till den korta berättelsen.
+    - "Valt de två bilderna, som Till läraren: den korta berättelsen säger."
     - Hittat på min huvudperson.
     - Kopierat Min huvudperson, Min ram, Mitt mål och kortet Berätta.
     - Gjort en mapp per elev för bokens sidor fram till pass 14.
@@ -717,7 +747,7 @@ ramar:
   rubrik: Kursens material
   text:
     - "Först kommer sidan för varje del, och direkt efter den det som hör till delen, som skylten, Två texter, strukturen, provläsningen och boksläppet. Sedan kommer det som används i hela kursen: återkopplingen, kortet, elevens blad och bokens sidor, ramens texter till eleverna, den korta berättelsen och brevet till läraren i den yngre klassen. Sist står berättelseramarna."
-    - "Det du kopierar före pass 1 står i listan Före kursen. Före pass 2 kopierar du Min bok: sidan, sex till varje elev, och några av Min bok: fler rader. När du häftar boken efter pass 14, lägger du dem efter delens första sida. Ge hellre eleven en sida till än att låta hen skriva trångt. Före pass 8 kopierar du bladet Provläsningen, del 4: Läsaren svarar. Till mötet tar du med elevernas böcker, bladen till provläsningen, papper och kritor. Före pass 13 kopierar du Min bok: omslaget på tjockt papper, två till varje elev. Av sidan Om författaren kopierar du ett blad per två elever och klipper det itu. Av Läsarnas sida kopierar du ett eller två blad per författare. Läsarnas sida står sist i båda exemplaren av boken, och barnen ritar i elevens exemplar."
+    - "Det du kopierar före pass 1 står i listan Före kursen. Före pass 2 kopierar du Min bok: sidan, sex till varje elev, och några av Min bok: fler rader. När du häftar boken efter pass 14, lägger du dem efter delens första sida. Ge hellre eleven en sida till än att låta hen skriva trångt. Före pass 8 kopierar du bladet Provläsningen, del 4: Läsaren svarar. Till mötet tar du med elevernas böcker, papper, kritor och bladen Provläsningen, del 4: Läsaren svarar. Före pass 13 kopierar du Min bok: omslaget på tjockt papper, två till varje elev. Av sidan Om författaren kopierar du ett blad per två elever och klipper det itu. Av Läsarnas sida kopierar du ett eller två blad per författare. Läsarnas sida står sist i båda exemplaren av boken, och barnen ritar i elevens exemplar."
   ramar:
     # ---------------------------------------------------------------- Delarna
     - rubrik: "Till läraren: delarna"
@@ -812,7 +842,7 @@ ramar:
             - rubrik: Fokus
               text: "Eleven gör boken klar och läser den för barnen."
             - rubrik: Pass 14
-              text: "0–⁠17 min. Den korta berättelsen: eleven får samma uppgift som i början och skriver den korta berättelsen till en ny bild.\n17–⁠22 min. Före och efter: paren jämför berättelserna och frågar ”Vad gör du nu som du inte gjorde i början?” Eleven skriver de två sista raderna på Mitt mål.\n22–⁠27 min. Dela: eleven läser del 6 för kamraten, som säger vad hen minns.\n27–⁠34 min. Ändringarna: eleven ändrar ett ställe där barnet inte förstod och ett där läsaren behöver se mer.\n34–⁠58 min. Boken klar: eleven gör bilderna som saknas, Om författaren och Min bok: omslaget. Den som skriver långsamt skriver några ord per rad.\n58–⁠60 min. Sidorna: eleven ordnar sidorna.\nEfter passet. Kopiera boken och häfta båda exemplaren."
+              text: "0–⁠17 min. Den korta berättelsen: eleven får samma uppgift som i början och skriver den korta berättelsen till den andra bilden.\n17–⁠22 min. Före och efter: paren jämför berättelserna och frågar ”Vad gör du nu som du inte gjorde i början?” Eleven skriver de två sista raderna på Mitt mål.\n22–⁠27 min. Dela: eleven läser del 6 för kamraten, som säger vad hen minns.\n27–⁠34 min. Ändringarna: eleven ändrar ett ställe där barnet inte förstod och ett där läsaren behöver se mer.\n34–⁠58 min. Boken klar: eleven gör bilderna som saknas, Om författaren och Min bok: omslaget. Den som skriver långsamt skriver några ord per rad.\n58–⁠60 min. Sidorna: eleven ordnar sidorna.\nEfter passet. Kopiera boken och häfta båda exemplaren."
             - rubrik: Pass 15
               text: "0–⁠10 min. Läsplatserna: ordna läsplatserna, och var och en säger en mening om sin bok.\n10–⁠55 min. Boksläppet: eleverna läser för barnen i två rundor, och sist svarar barnen. Sidan Läsarna kommer säger hur ni gör.\n55–⁠60 min. Diplomen: dela ut diplomen när barnen har gått.\nEfter passet. Berätta för klassläraren vilka grepp eleven lärt sig, så att hen frågar efter dem i klassen. Skicka hem boken med diplomet."
             - rubrik: Lägg märke till
@@ -825,7 +855,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så använder du den
-              text: "Sätt upp skylten i varje klass där du presenterar kursen, och visa diplomet bredvid. Säg: ”En skrivkurs där vi skriver en hel bok var.” Säg sedan att den som vill vara med pratar med dig efteråt, och fråga de elever du har valt i förväg en och en."
+              text: "Sätt upp skylten Skriv en egen bok i varje klass där du presenterar kursen, och visa diplomet bredvid. Säg: ”En skrivkurs där vi skriver en hel bok var.” Säg sedan att den som vill vara med pratar med dig efteråt, och fråga de elever du har valt i förväg en och en."
             - rubrik: Skylten
               text: "Skriv ditt namn och dagen då kursen börjar på skyltens två rader, i Word-filen före utskriften eller för hand efteråt. Skriv ut en skylt i färg till varje klass, gärna på A3."
     - rubrik: "Två texter, del 1: Amir på rasten"
@@ -870,7 +900,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Pass 2
-              text: "Gör strukturen mitt i Skriv i pass 2, 4, 6 och 10. I pass 2 lär du ut den. Med fler än sex elever gör ni två gallerier, ett vid varje bord."
+              text: "Gör strukturen mitt i Skriv i pass 2, 4, 6 och 10. I pass 2 lär du ut den. Den som inte vill visa sin text lägger boken stängd. Med fler än sex elever gör ni två gallerier, ett vid varje bord."
       listor:
         - rubrik: Så gör ni
           rader:
@@ -930,11 +960,11 @@ ramar:
             - rubrik: Läsningen
               text: "Varje elev sitter med barnet, läser del 1–3 högt och visar bilderna. Den som läser långsamt berättar del 1 och 2 med egna ord och läser del 3."
             - rubrik: De tre frågorna
-              text: "Eleven frågar ”Vad tyckte du bäst om? Vad förstod du inte? Vad vill du ska hända?” och skriver några ord vid varje fråga på bladet."
+              text: "Eleven frågar ”Vad tyckte du bäst om? Vad förstod du inte? Vad vill du ska hända?” och skriver några ord vid varje fråga på bladet Provläsningen, del 4: Läsaren svarar."
             - rubrik: Teckningen
               text: "Sedan berättar eleven att huvudpersonen möter någon ny i nästa del, och säger: ”Rita hur du tror att den ser ut.” Har eleven redan bestämt vem huvudpersonen möter, säger hen tre saker om den först. Teckningen blir bilden till del 4 i boken, och barnets namn står vid Bilder av på omslaget."
             - rubrik: Om något saknas
-              text: "Är barnet borta, läser eleven för ett annat barn, men boken är fortfarande till samma barn. Är eleven borta, läser hen för barnet en annan dag. Går det inte att träffas, spelar eleverna in läsningen i pass 7, 50–⁠60 min. Barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25."
+              text: "Är barnet borta, läser eleven för ett annat barn, men boken är fortfarande till samma barn. Är eleven borta, läser hen för barnet en annan dag. Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25."
     - rubrik: "Provläsningen, del 4: Läsaren svarar"
       sagoform: { form: vag, titel: Provläsningen, undertitel: läsaren svarar, bilder: [ stjärna, förvånad, glödlampa, ryggsack ], radMm: 11 }
       text:

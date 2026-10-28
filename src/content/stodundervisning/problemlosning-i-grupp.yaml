@@ -30,7 +30,7 @@ material:
   - bladen Vår lösning och Två lösningar
   - konkret material
   - kortet Våra sätt
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 relaterade:
   - fyra-raknesatten
   - antalsuppfattning-i-grupp
@@ -189,7 +189,7 @@ passrutin:
       fas: Jämföra
     - text: Läraren sätter ord på sättet som fungerade, och gruppen bockar för det på kortet Våra sätt.
       fas: Avsluta
-  efterPasset: Läraren skriver i snabbmallen det hen såg, och vem som behövde vilket stöd.
+  efterPasset: Läraren skriver i snabbmallen det hen såg, och vem som behövde vilket stöd. Hen sparar parens blad Vår lösning, eftersom bladen visar hur paren tänker.
   kallas: delar
 tidsschema:
   rubrik: Ett pass på 30 minuter
@@ -400,6 +400,8 @@ plan:
   # Den sista veckan tar ledet Du gör själv när perioden är kortare än åtta veckor, som veckovalets andra mening säger
   # (Codex 2026-10-27, K-572: planens vecka 6 av sex visade Ni gör tillsammans).
   sistaRaden: true
+  # En grupp som fortsätter en period till börjar i ledet Vi gör, som beslutet efter insatsen säger (K-596).
+  stege: true
   passen:
     # Första passet: det som tar Planeras extra minuter, och bladet Två lösningar först i Jämföra (passgenomgången
     # 2026-10-26: i Planera hade paren sett A och B innan de prövade).
@@ -410,14 +412,28 @@ plan:
     - nar: första passet
       del: Jämföra
       text: "Bladet Två lösningar visar du första gången i Jämföra, när du delar ut det med B täckt."
+    # Metodens regel för nästa problem, där läraren tar det, medan planen visar nivåns problem i ordning (K-596).
+    - nar: pass 3–10
+      del: Före passet
+      text: "Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare."
     # Nivåns tio problem räcker till pass 10. Sedan säger passet varifrån nästa problem kommer och hur det förbereds
-    # (sajtens rimlighet 2026-10-26, svar-problemlosning-i-grupp.md).
+    # (sajtens rimlighet 2026-10-26, svar-problemlosning-i-grupp.md), och när gruppen kan ta nästa nivå och vilka
+    # källorna är (K-596).
     - nar: pass 11 till det sista
       kort: "Fler problem"
-      text: "Problemen finns också på sidan Ta fram ett matteproblem, och där finns fler. Ta först problem som liknar något av de tio. Varje problem du väljer förbereder du på bladet Lärarens sida för ett eget problem."
+      text: "Problemen finns också på sidan Ta fram ett matteproblem, och där finns fler. När gruppen har löst nivåns problem med lite stöd, kan den ta nästa nivå, om den kan räkna talen där. Sedan väljer du problem i läromedlets problemlösningsavsnitt, i Skolverkets två problembanker för åk 4–6 och åk 7–9 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem, med lösningar och materialet Arbeta vidare, på NCM:s webbplats. Ta först problem som liknar något av de tio. Varje problem du väljer förbereder du på bladet Lärarens sida för ett eget problem."
   fore:
     - "Kartläggningen har två blad per nivå, ett A4 före och ett efter."
     - "Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
+    # Nivån när en elev inte kan räkna talen och när gruppen landar på olika nivåer, ur Så skiljer sig nivåerna, och
+    # färdighetsträningen och klassläraren från början, ur progressionens text (K-596).
+    - "Vet eleven hur uppgift 3 i kartläggningen ska lösas men kan inte räkna talen, gör du kartläggningen på nivån under. Landar eleverna på olika nivåer, tar gruppen den lägre, så att alla kan räkna talen."
+    - "Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med."
+  # Metodens sätt att justera vid avstämningen: ord och begrepp före passet, ett liknande problem och nästa nivå (K-596).
+  justera:
+    - "Förstår eleven inte problemet när du läser det högt, går du igenom ord, begrepp och sammanhang före passet, och den som inte kan läsa texten själv får den uppläst."
+    - "Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare."
+    - "När gruppen har löst nivåns problem med lite stöd, kan den ta nästa nivå, om den kan räkna talen där."
   # Regeln för att byta led står i progressionens vidare, och upprepa citerar progressionens text som hänvisar dit
   # (K-572, del B).
   upprepa: "Gruppen byter led när den klarar det som står under Gå vidare när, och annars tar ni samma led en vecka till."

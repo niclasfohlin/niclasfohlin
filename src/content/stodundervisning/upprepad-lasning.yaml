@@ -23,7 +23,7 @@ material:
   - läsrör
   - lappen hem
   - snabbmallen
-uppdaterad: 2026-10-26
+uppdaterad: 2026-10-28
 relaterade:
   - til-i-grupp
   - laslistor-i-grupp
@@ -382,6 +382,7 @@ uppfoljning:
     - nar: Före insatsen
       tid: "före"
       perElev: 5
+      resultat: "steget på lästrappan, från 1 gissar till 5 läser med flyt"
       vad: Eleven läser en kort, ny text för dig. Fyll i protokollet Lästrappan före och efter.
     - nar: Varje vecka
       tid: "varje vecka"
@@ -389,6 +390,7 @@ uppfoljning:
     - nar: Efter sex till åtta veckor
       tid: "efter"
       perElev: 5
+      resultat: "steget på lästrappan, från 1 gissar till 5 läser med flyt"
       vad: "Eleven läser en ny text som är lika lång och på samma nivå. Fyll i protokollet Lästrappan före och efter igen och jämför med starten. Berätta för eleven vad du har hört."
 plan:
   # Stödet för passets längd (K-564): varianten för ett pass på tio minuter, som metodens sida skriver den.
@@ -412,38 +414,71 @@ plan:
     - nar: första passet
       del: Läs igen
       text: "I Läs igen visar du parläsningen tillsammans med en elev framför gruppen, innan paren läser."
+    # Med en enda elev finns inga par att visa för, ur arbetsformen (K-596).
+    - nar: första passet
+      del: Läs igen
+      text: "Har du bara en elev arbetar ni en till en, och du är elevens par. Eleven läser för dig, du visar, och sedan läser ni igen tillsammans."
     # Veckans text är ett förslag: ni byter först när läsningen flyter, och veckans strategi väljer du efter det du hör.
     - nar: veckans första pass
       text: "Ni läser samma text hela passet, eller hela veckan, och byter text först när läsningen flyter. Varje vecka övar ni också en strategi, som du väljer på strategikortet efter det du hör."
+    # Tabellen som visar vilken strategi som hjälper vid läsfelen, ur När eleven fastnar på ett ord (K-596).
+    - nar: veckans första pass
+      text: "I tabellen Läsfelen och strategierna ser du vilken strategi som hjälper vid varje läsfel."
+    # Trappsteget skrivs när eleven läser en ny text första gången, ur uppföljningen (K-596).
+    # Sist i delen: du skriver steget när du har hört eleven läsa, som lathundens schema säger.
+    - nar: veckans första pass
+      del: Första läsningen
+      sist: true
+      text: "Skriv trappsteget överst i snabbmallen när eleven läser en ny text första gången."
+    - nar: veckans första pass
+      del: Första läsningen
+      sist: true
+      text: "Trappsteget stannar mellan dig och eleven. Visa det inte inför gruppen."
+    # Stödtrappans första steg i den del där du lyssnar på varje elev, ur stegen, i alla pass (K-596).
+    - nar: veckans första pass
+      del: Läs igen
+      text: "Vänta tre sekunder innan du hjälper, och säg vad eleven gjorde och vilken strategi som hjälpte."
+    - nar: veckans övriga pass
+      del: Läs igen
+      text: "Vänta tre sekunder innan du hjälper, och säg vad eleven gjorde och vilken strategi som hjälpte."
+    - nar: veckans sista pass
+      del: Läs igen
+      text: "Vänta tre sekunder innan du hjälper, och säg vad eleven gjorde och vilken strategi som hjälpte."
+    # Så hör du om texten flyter innan ni byter, ur tabellen Lästräningstexterna vecka för vecka (K-596).
+    - nar: veckans sista pass
+      text: "Peka på orden ur texten i en annan ordning, så hör du om eleverna läser orden eller minns texten."
+    # Veckans fokus och orden ur texten, så att läraren vet vilka ord som prövas i en annan ordning (K-596).
     - nar: vecka 1
       kort: "Ola är ute"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "1 · Ola är ute", kolumner: [Veckans fokus] }
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "1 · Ola är ute", kolumner: [Veckans fokus, Ord ur texten] }
     - nar: vecka 2
       kort: "Katten Sam"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "2 · Katten Sam", kolumner: [Veckans fokus] }
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "2 · Katten Sam", kolumner: [Veckans fokus, Ord ur texten] }
     - nar: vecka 3
       kort: "Bollen"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "3 · Bollen", kolumner: [Veckans fokus] }
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "3 · Bollen", kolumner: [Veckans fokus, Ord ur texten] }
     - nar: vecka 4
       kort: "Fåglarna"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "4 · Fåglarna", kolumner: [Veckans fokus] }
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "4 · Fåglarna", kolumner: [Veckans fokus, Ord ur texten] }
     - nar: vecka 5
       kort: "Snögubben"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "5 · Snögubben", kolumner: [Veckans fokus] }
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "5 · Snögubben", kolumner: [Veckans fokus, Ord ur texten] }
     - nar: vecka 6
       kort: "Sandslottet"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "6 · Sandslottet", kolumner: [Veckans fokus] }
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "6 · Sandslottet", kolumner: [Veckans fokus, Ord ur texten] }
     - nar: vecka 7
       kort: "Draken"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "7 · Draken", kolumner: [Veckans fokus] }
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "7 · Draken", kolumner: [Veckans fokus, Ord ur texten] }
     - nar: vecka 8
       kort: "Vanten"
-      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "8 · Vanten", kolumner: [Veckans fokus] }
+      ur: { tabell: Lästräningstexterna vecka för vecka, rad: "8 · Vanten", kolumner: [Veckans fokus, Ord ur texten] }
   justera:
     - "Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
   upprepa: "Byt text när den flyter för de flesta i gruppen och eleverna kan läsa orden också i en annan ordning."
   fore:
     - "Välj två texter ur en lättläst bok eller en nivåindelad serie innan ni börjar, och spara den andra till efter perioden. De ska vara lika långa och svåra som lästräningstexterna Fåglarna och Snögubben. Ta ingen av lästräningstexterna, eftersom ni övar på dem i passen."
+    # Strategikortet behövs från första passet, ett per elev, och görs en gång, ur ramen Strategikortet (K-596).
+    - "Ett blad med strategikortet räcker till en elev. Skriv elevens namn på båda raderna, för hand eller i Word-filen innan du skriver ut, och klipp isär korten längs den streckade linjen. Laminera gärna kortet som ligger i skolan."
   utvardering:
     - "Läser eleven den nya texten på steg 4 eller 5 efter perioden, avslutar ni insatsen."
     - "Har eleven gått upp minst ett steg men står fortfarande på steg 1–3, fortsätter ni en period till med nya texter."
@@ -499,7 +534,7 @@ ramar:
             - rubrik: Så använder ni kortet
               text: "Visa en strategi i taget när du modellerar, och peka ut den på kortet. Elever på steg 1–⁠2 i lästrappan kan inte läsa kortet själva i början, så läs raden tillsammans med eleven och peka. Bilden vid varje strategi hjälper eleven att hitta den. Den som stöttar pekar på kortet innan någon säger ordet, och eleven säger vilken strategi som hjälpte."
             - rubrik: Kortet
-              text: "Ett blad räcker till en elev. Skriv elevens namn på båda raderna, för hand eller i Word-filen innan du skriver ut, och klipp isär korten längs den streckade linjen. Laminera gärna kortet som ligger i skolan. Lathundens tredje sida har samma kort."
+              text: "Ett blad med strategikortet räcker till en elev. Skriv elevens namn på båda raderna, för hand eller i Word-filen innan du skriver ut, och klipp isär korten längs den streckade linjen. Laminera gärna kortet som ligger i skolan. Lathundens tredje sida har samma kort."
     - rubrik: Lästräningstexterna
       text:
         - "Det finns en sida för varje vecka, med två läskort som du klipper isär längs den streckade linjen. Eleven tränar först på texten med stöd och läser sedan samma text utan stöd."

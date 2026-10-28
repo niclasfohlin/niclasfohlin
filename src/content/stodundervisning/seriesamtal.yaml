@@ -31,7 +31,7 @@ material:
   - pärmar
   - whiteboardpennor
   - pinnar och tejp
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 publicerad: 2026-10-04
 relaterade: [kompissamtal]
 utkast: false
@@ -650,7 +650,7 @@ plan:
   # utskriften av lärarens sidor, står under Före.
   fore:
     - "Träffa en elev i taget i cirka 15 minuter. Berätta att ni i gruppen ritar bråk som serier och spolar tillbaka till när det var lugnt. Fråga om hen vill vara med. Visa sedan provbilden och fyll i protokollet. Låt eleven säga ett mål, till exempel ”Jag vill få vara med”, och skriv det på framsidan av elevens pärm."
-    - "Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven."
+    - "Före pass 1 skriver du ut Bildserie 1–⁠6 med lärarens sidor och serierna på A3, Bubblor att klippa ut, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven."
   passen:
     - nar: första passet
       kort: "Fönsterplatsen"
@@ -684,11 +684,19 @@ plan:
       kort: "Nästan bråk"
       ur: { tabell: Perioden pass för pass, rad: Pass 7 }
       tabell: "Pass 7: en gång när det nästan blev bråk"
+    # Metodens regel för pass som blir över, när läraren bestämmer turordningen i pass 7, och hur ett sådant pass
+    # går till, ur Var hittar du bildserierna och händelserna? och noten under Ett pass med en egen serie (K-596).
+    - nar: pass 7
+      text: "Räcker passen inte till ännu en egen serie för alla, blir resten av passen över. Då ritar ni något som ska hända och som gruppen väljer, och flera i gruppen får vara med i det."
     - nar: pass 8 till det sista
       kort: "Egen händelse"
-      text: "Från pass 8 äger en elev serien i varje pass."
+      text: "Från pass 8 äger en elev serien i varje pass, i den ordning som du berättade för gruppen i pass 7, och alla får sin första egna serie innan någon får sin andra."
       ur: { tabell: Perioden pass för pass, rad: Pass 8 till det näst sista }
       tabell: "Ett pass med en egen serie"
+    - nar: pass 8 till det sista
+      text: "Handlar serien om något som ska hända, ritar ni i ruta 1 hur det brukar börja och går fram till rutan där det brukar bli bråk. Sedan får personerna tankebubblor som vanligt, och i delen Nästa gång ritar ni hur det kan bli i stället och vad eleven, den andra personen och de vuxna kan göra."
+    - nar: pass 8 till det sista
+      text: "I ett pass som blir över äger gruppen serien, och gruppen väljer händelsen i slutet av passet före. Eleverna berättar i tur och ordning där ägaren annars berättar, och gruppen väljer tillsammans där ägaren annars väljer. I delen Nästa gång ritar var och en på bladet Nästa gång vad hen kan göra, och det blir hens spanaruppdrag. Ingen fyller i bladet Min plan efter passet."
     - nar: sista passet
       kort: "Tillbaka på perioden"
       ur: { tabell: Perioden pass för pass, rad: Det sista passet }
@@ -702,6 +710,9 @@ plan:
     - nar: vecka 1
       text: "Fråga vad hen ser"
       ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Fråga vad hen ser, kolumner: ["Så gör du"] }
+    # Snabbmallen gäller två veckor, och läraren skriver teknikerna överst i vecka 1 och 3 (K-596).
+    - nar: vecka 1
+      text: "Skriv teknikerna överst i snabbmallen, och efter två veckor hur det gick med dem."
     - nar: vecka 2
       text: "Pröva en tanke till"
       ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Pröva en tanke till, kolumner: ["Så gör du"] }
@@ -714,6 +725,8 @@ plan:
     - nar: vecka 3
       text: "Skicka frågan vidare"
       ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Skicka frågan vidare, kolumner: ["Så gör du"] }
+    - nar: vecka 3
+      text: "Skriv teknikerna överst i snabbmallen, och efter två veckor hur det gick med dem."
     - nar: vecka 4
       text: "Knyt ihop"
       ur: { tabell: "Samtalsteknikerna: vad du gör och hur det låter", rad: Knyt ihop, kolumner: ["Så gör du"] }
@@ -773,7 +786,7 @@ grund:
 ramar:
   rubrik: Material att skriva ut
   text:
-    - Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut ett spanarblad till varje elev, och varannan vecka snabbmallen. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
+    - Före pass 1 skriver du ut Bildserie 1–⁠6 med lärarens sidor och serierna på A3, Bubblor att klippa ut, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut ett spanarblad till varje elev, och varannan vecka snabbmallen. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
     - Bildserierna, bubblorna, korten på bordet och bladen är elevernas. Laminera serierna och bubblorna, så att eleverna kan skriva och rita på dem med whiteboardpenna och sudda ut det efteråt. Efter passet tar du ett foto av serien innan du suddar. Vill du att eleverna ska ha serien i sin pärm, skriver du ut en papperskopia till var och en. En egen serie ritar ni på papper, så att den finns kvar. Lärarens sidor, provbildens protokoll och kortet Till de vuxna runt eleven är dina. De bildserier ni har gjort och gruppens blad sitter på väggen under perioden, och elevens egna serier ligger i pärmen.
   ramar:
     - rubrik: "Bildserie 1: Fönsterplatsen"

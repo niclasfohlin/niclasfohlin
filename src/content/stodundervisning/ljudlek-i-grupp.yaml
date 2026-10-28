@@ -23,7 +23,7 @@ material:
   - lektionens material
   - snabbmallen
   - kartläggningen
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 relaterade:
   - laslistor-i-grupp
   - til-i-grupp
@@ -286,7 +286,7 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: "Välj orden ur Ordbanken och ta fram bokstavskortet för dagens ljud och några som gruppen har haft. Lägg lektionens material vid varje plats, och en spegel per par. Bestäm paren och skriv dagens elever i snabbmallen."
+      vad: "Välj orden ur Ordbanken och ta fram kortet för dagens ljud och några som gruppen har haft ur bokstavskorten till ljudstarten. Lägg lektionens material vid varje plats, och en spegel per par. Bestäm paren och skriv dagens elever i snabbmallen."
     - tid: 0–5 min
       fas: Ljudstart
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra ord. Alla svarar samtidigt, och en av dagens elever sätter ihop ett ord ensam. Lyssna efter bokstavsnamn, pauser mellan ljuden och ett ö efter klusilerna."
@@ -390,15 +390,17 @@ urval:
     - rubrik: Gå vidare
       text: När lektionens regel säger det
 uppfoljning:
-  text: "Screeningen visar var eleven står i läsningen, och ljudkollen visar vilka av lektionernas förmågor eleven klarar. Protokollet, gruppens översikt och frågorna finns under Materialet. Berätta konkret för eleven vad hen har lärt sig. Med bladet Observation av ett pass under Materialet kan en kollega följa ett pass och ge dig återkoppling, gärna samma vecka som ljudkollen. Säg före passet vad du vill ha återkoppling på. Efteråt berättar du först vad du själv lade märke till, och sedan läser kollegan upp det som fungerade, ur sina anteckningar. Du bestämmer nästa steg, ni prövar det en gång direkt, och det blir fokus nästa gång kollegan följer ett pass. Efter perioden beslutar du hur varje elev går vidare. Klarar eleven nivå 5 eller högre i screeningen och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva. Klarar eleven inte fler uppgifter i ljudkollen än före insatsen, får hen mer intensivt stöd, gärna enskilt, och en bedömning. Annars fortsätter eleven en period till, från den lektion som gruppen har nått. Har gruppen gått den sista lektionen, börjar eleven den nya perioden i den lektion som hör till den första uppgift i ljudkollen som hen inte klarar, eller i Från ord till mening när hen klarar alla uppgifter."
+  text: "Screeningen visar var eleven står i läsningen, och ljudkollen visar vilka av lektionernas förmågor eleven klarar. Protokollet, gruppens översikt och frågorna finns under Materialet. Berätta konkret för eleven vad hen har lärt sig. Med bladet Observation av ett pass under Materialet kan en kollega följa ett pass och ge dig återkoppling, gärna samma vecka som ljudkollen. Säg före passet vad du vill ha återkoppling på. Efteråt berättar du först vad du själv lade märke till, och sedan läser kollegan upp det som fungerade, ur sina anteckningar. Du bestämmer nästa steg, ni prövar det en gång direkt, och det blir fokus nästa gång kollegan följer ett pass. Efter perioden beslutar du hur varje elev går vidare. Klarar eleven nivå 5 eller högre i screeningen, version B, och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva. Klarar eleven inte fler uppgifter i ljudkollen än före insatsen, får hen mer intensivt stöd, gärna enskilt, och en bedömning. Annars fortsätter eleven en period till, från den lektion som gruppen har nått. Har gruppen gått den sista lektionen, börjar eleven den nya perioden i den lektion som hör till den första uppgift i ljudkollen som hen inte klarar, eller i Från ord till mening när hen klarar alla uppgifter."
   rader:
     - nar: Före insatsen
       tid: "före"
       perElev: 12
+      resultat: "högsta nivå i screeningen, klarade uppgifter i ljudkollen av 9, uppgift 9 av 4"
       vad: "Gör ljudkollen och screeningen, version A, med en elev i taget utanför passen, cirka tolv minuter per elev. I gruppens översikt ser du sedan ingången."
     - nar: Var tredje vecka
       tid: "var 3:e vecka"
       perElev: [2, 3]
+      resultat: "rätt av 4 i uppgiften för gruppens förmåga och för nästa, uppgift 4 av 10"
       vad: "Gör ljudkollens uppgift för gruppens förmåga, uppgiften för nästa förmåga och uppgift 4 på två till tre minuter per elev."
     - nar: Vecka 6
       tid: "vecka 6"
@@ -406,6 +408,7 @@ uppfoljning:
     - nar: Efter 4–12 veckor
       tid: "efter"
       perElev: 12
+      resultat: "högsta nivå i screeningen, klarade uppgifter i ljudkollen av 9, uppgift 9 av 4"
       vad: "Gör hela ljudkollen och screeningen, version B, med en elev i taget, och jämför med resultaten före insatsen."
 # Planera insatsen (sajtens K-551, 2026-10-26): seriens planerare med tre ingångar och lektionen vecka för vecka. Texterna
 # är ordagranna citat ur metoden: ingångarna och längden ur lektionsbanken, beslutet efter perioden ur uppföljningen.
@@ -423,13 +426,26 @@ plan:
     text: "På 4–12 veckor kommer gruppen så långt den hinner från sin ingång. Välj tolv veckor, eller åtta till tolv från Räkna ljud med fem pass i veckan. En kortare period, fyra till sju veckor, passar en grupp som bara har de sista lektionerna kvar."
     mer: "Lektionsbanken: förmågorna och lektionerna"
     forval: 12
+  # Takten för dagens ljud i veckans första ljudstart, ordagrant ur Dagens ljud: bokstävernas ordning (K-596).
+  passen:
+    - nar: veckans första
+      del: Ljudstart
+      text: "Ta ungefär två nya ljud i veckan, och ett nytt först när gruppen säger de förra säkert. Samma ljud kan vara dagens ljud i flera pass."
   fore:
-    - "Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare."
-    - "Gruppen börjar i en ingång och går vidare lektion för lektion: vid förmåga 4 börjar den i lektionen Första ljudet och tar sedan Bokstavsgympa."
-    - "Har du inte gjort ljudkollen före första passet, väljer du lektionen Första ljudet, med s som dagens ljud."
-    - "Visar ljudkollen sedan en annan ingång, går gruppen dit."
+    # Det som skrivs ut, kopieras och lamineras före första passet, ordagrant ur Materialet och protokollets fält Kopiera (K-596).
+    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen i två versioner, ljudkollen, protokollet, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar."
+    - "Kopiera protokollet, ett papper per elev."
+    # Ingången, fyra meningar i följd ur lektionsbanken som förut, nu i en rad, eftersom schemat tar högst fyra rader (K-596).
+    - "Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare. Gruppen börjar i en ingång och går vidare lektion för lektion: vid förmåga 4 börjar den i lektionen Första ljudet och tar sedan Bokstavsgympa. Har du inte gjort ljudkollen före första passet, väljer du lektionen Första ljudet, med s som dagens ljud. Visar ljudkollen sedan en annan ingång, går gruppen dit."
+    # Hur dagens ljud väljs ur ljudkollen, ordagrant ur ljudkollens fält Bokstäverna (K-596).
+    - "Ringa in på elevens kopia de bokstäver som eleven inte kan, när hen har läst klart, och spara kopian med protokollet. Stryk ringen när eleven kan bokstaven. Den första bokstaven i ordningen s, o, l, a, r, m, e, n, i, v som fler än hälften av eleverna har inringad blir dagens ljud."
+  # Metodens sätt att justera vid avstämningen: vad ljudkollen ändrar för gruppen och för varje elev, ordagrant ur
+  # lektionsbankens not (K-596).
+  justera:
+    - "I ljudkollen var tredje vecka visar uppgiften för gruppens förmåga samma sak som lektionens regel. Uppgiften för nästa förmåga visar vem som redan är säker på den."
+    - "Den som redan är säker blir den säkrare i paret och får ord ur nästa ordgrupp. Den som inte klarar uppgifter före gruppens förmåga får ord ur en lättare ordgrupp, blir dagens elev oftare och sitter med en säker kamrat."
   utvardering:
-    - "Klarar eleven nivå 5 eller högre i screeningen och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva."
+    - "Klarar eleven nivå 5 eller högre i screeningen, version B, och läser hen alla fyra påhittade orden i ljudkollens uppgift 9, går hen vidare till Läslistor i grupp, TIL i grupp eller Säg, skriv och läs. Läslistor i grupp är för den som gissar sig fram eller ljudar utan att binda ihop ljuden, TIL i grupp för den som behöver stöd i avkodning och läsflyt, och Säg, skriv och läs för den som inte kommer igång med att skriva."
     - "Klarar eleven inte fler uppgifter i ljudkollen än före insatsen, får hen mer intensivt stöd, gärna enskilt, och en bedömning."
     - "Annars fortsätter eleven en period till, från den lektion som gruppen har nått."
     - "Har gruppen gått den sista lektionen, börjar eleven den nya perioden i den lektion som hör till den första uppgift i ljudkollen som hen inte klarar, eller i Från ord till mening när hen klarar alla uppgifter."
@@ -462,7 +478,7 @@ snabbmall:
 checklista:
   punkter:
     - Valt lektionen och orden ur Ordbanken.
-    - Tagit fram kortet för dagens ljud och några ni har haft.
+    - Tagit fram kortet för dagens ljud och några ni har haft ur bokstavskorten till ljudstarten.
     - Lagt fram lektionens sidor med passet och stegen, materialet och en spegel per par.
     - Bestämt paren och skrivit dagens elever i snabbmallen.
 grund:
@@ -471,7 +487,7 @@ grund:
 ramar:
   rubrik: Materialet
   text:
-    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen i två versioner, ljudkollen, protokollet, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar. Korten står i Andika, ett gratis typsnitt från SIL för dem som lär sig läsa."
+    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen i två versioner, ljudkollen, protokollet, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar. Korten står i Andika, ett gratis typsnitt från SIL för dem som lär sig läsa."
   ramar:
     - rubrik: Bokstavskort till ljudstarten
       text:

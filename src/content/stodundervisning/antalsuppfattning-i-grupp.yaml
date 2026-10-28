@@ -27,7 +27,7 @@ material:
   - talsortsmatta
   - veckans kort
   - sifferkort och tärning
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 relaterade:
   - problemlosning-i-grupp
   - brakkurs-i-grupp
@@ -368,7 +368,7 @@ roll:
 urval:
   rubrik: Var hittar du materialet och talen?
   text:
-    - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och arken per talsort står under Mallar att skriva ut och sist i planeringsmallarna. Bladet med sifferkort står först under Material per årskurs.
+    - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och mallen Ett ark per talsort för tiobas står under Mallar att skriva ut och sist i planeringsmallarna. Bladet med sifferkort står först under Material per årskurs.
     - Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna. Gör kartläggningen två veckor före första passet, eftersom den avgör vilket paket gruppen får. Börja sedan göra materialet. Tiobaspaketen går hem efter första passet, och talbrickorna behövs till pass 2. Till sex elever i åk 2 är det 360 talbrickor.
   kravText: "Ett tal som du visar först eller skriver på ett eget kort ska uppfylla tre krav:"
   krav:
@@ -415,6 +415,7 @@ uppfoljning:
     - nar: Före insatsen
       tid: "före"
       perElev: 10
+      resultat: "antal av uppgift 1–4 som eleven klarar säkert, 0–4"
       vad: "Gör kartläggningen i gruppens paket under Material per årskurs utanför passen, med en elev i taget, cirka tio minuter per elev. Läs uppgiften högt och hjälp inte till. Eleven bygger, berättar och skriver. Anteckna för varje uppgift på en kopia av listan: B om eleven byggde rätt, V om eleven växlade själv i materialet och S om eleven använde talsortsord. Eleven klarar en uppgift säkert när du har antecknat B och S, och på uppgift 3 och 4 också V."
     - nar: Varje pass
       tid: "varje pass"
@@ -422,21 +423,33 @@ uppfoljning:
     - nar: Efter fem veckor
       tid: "efter"
       perElev: 10
+      resultat: "antal av uppgift 1–4 som eleven klarar säkert, 0–4"
       vad: Samma kartläggning med samma uppgifter. Jämför uppgift för uppgift. Berätta för klassläraren vilket talområde eleven bygger säkert i, vilka växlingar som behöver mer träning och hur eleven klarade uppgift 5, i åk 4–5 också uppgift 6. Klarar eleven uppgift 1–4 säkert, avslutar du insatsen. Klarar eleven fler av dem säkert än före perioden men inte alla fyra, får eleven en period till med samma paket. Den nya perioden börjar med den tidigaste vecka vars uppgift någon i gruppen inte klarade, och går till och med vecka 5. Klarar eleven inte fler av dem säkert än före, tar du upp det med elevhälsan.
 plan:
+  # En grupp som får en period till börjar med den tidigaste vecka vars uppgift någon i gruppen inte klarade och går
+  # till och med vecka 5, som beslutet efter perioden säger (K-596).
+  stege: true
   utan:
     - "Remsan visar hur de 30 minuterna fördelas och när läraren visar, när alla arbetar gemensamt och när eleverna arbetar i par och enskilt."
   passen:
+    # Med tiobas ryms talen inte på lathundens matta, så pass 1 säger arken per talsort, ordagrant ur Var hittar du
+    # materialet och talen? (K-596).
     - nar: veckans första
       kort: "Tiobas"
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 1: tiobas"] }
+      text: "Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats."
+    # Tiobaspaketen går hem efter första passet, så att läraren har dem med sig till pass 1 (K-596).
+    - nar: veckans första pass i vecka 1
+      del: Före passet
+      text: "Tiobaspaketen går hem efter första passet, och talbrickorna behövs till pass 2."
     # Läxan görs i början av Första talet, som har två minuter till de passen (den stängda frågan 2026-10-26). Alla bygger
     # samma uppgift samtidigt, så att läxan ryms på två minuter med sex elever (sajtens fråga samma kväll).
     - nar: veckans första pass i vecka 2–5
       del: Första talet
       text: "Fråga i början av veckans första pass hur förra veckans läxa gick. Läs en uppgift ur läxan, och alla bygger den samtidigt på sin matta. Då ser du allas mattor. Låt en eller två elever säga vad de gjorde. Så tar läxan två minuter, också med sex elever."
+    # Var läxorna finns, de två meningarna i följd ur Hem och skola (K-596).
     - nar: veckans första
-      text: "Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan."
+      text: "Läxorna, Läxa 1–5, finns i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan."
     - nar: veckans första
       text: "Exemplen i beskrivningen av passet kommer från en grupp i åk 2. Paketet börjar med en ruta Till läraren som för varje vecka säger vad du visar först och lyssnar efter."
     - nar: veckans andra
@@ -450,22 +463,58 @@ plan:
     - nar: sista passet i vecka 5
       del: Första talet
       text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan. Läs en uppgift ur läxan, och alla bygger den samtidigt på sin matta. Då ser du allas mattor. Låt en eller två elever säga vad de gjorde. Så tar läxan två minuter, också med sex elever."
+    # I åk 4–5 handlar sista passet om negativa tal, ordagrant ur noten till tabellen Veckan: ett fokus i tre material.
+    # Meningen börjar med ”I åk 4–5” och står bara i den årskursens plan (K-596).
+    - nar: sista passet i vecka 5
+      del: Före passet
+      text: "I åk 4–5 handlar pass 3 i vecka 5 om negativa tal, på tallinjen och som skuld."
   # Materialet tar mer än en vecka: talbrickor, mynt och tiobaspaket till varje elev, och kartläggningen (passgenomgången
   # 2026-10-26, del A).
   foreVeckor: 2
   fore:
     - "Gör kartläggningen två veckor före första passet, eftersom den avgör vilket paket gruppen får. Börja sedan göra materialet. Tiobaspaketen går hem efter första passet, och talbrickorna behövs till pass 2. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
     - "Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna."
-    - "Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
-    - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med en uppgift: läs den högt, låt barnet bygga och berätta vad det gör, jämför med bilden, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
+    # Mattorna att skriva ut, i A3 och ett A4-ark per talsort, ordagrant ur Var hittar du materialet och talen? (K-596).
+    - "Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och mallen Ett ark per talsort för tiobas står under Mallar att skriva ut och sist i planeringsmallarna."
+    # Läxan och vårdnadshavarna i en rad, eftersom schemat tar högst fyra rader i fore (K-596).
+    - "Skicka hem veckans läxa efter veckans första pass, och i vecka 1 också rutan Till vårdnadshavaren. Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med en uppgift: läs den högt, låt barnet bygga och berätta vad det gör, jämför med bilden, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
   # Beslutet efter kartläggningen efter perioden, ordagrant ur uppföljningens rad Efter fem veckor (del A).
   utvardering:
     - "Klarar eleven uppgift 1–4 säkert, avslutar du insatsen."
     - "Klarar eleven fler av dem säkert än före perioden men inte alla fyra, får eleven en period till med samma paket."
     - "Den nya perioden börjar med den tidigaste vecka vars uppgift någon i gruppen inte klarade, och går till och med vecka 5."
     - "Klarar eleven inte fler av dem säkert än före, tar du upp det med elevhälsan."
+  # Gruppens årskurs är planens val: varje årskurs har sitt paket under Material per årskurs. Stödet är noten till
+  # tabellen Talområde och talsorter per årskurs, det som bara gäller åk 4–5 börjar med ”I åk 4–5” och står bara i den
+  # årskursens plan, och under Före står årskursens material och tiobaspaket, ordagrant ur paketets fält Material, ramens
+  # text och läxramen (K-596).
+  versionsval:
+    rubrik: Årskurs
+    text: "Hela gruppen arbetar med samma paket. Har gruppen elever från två årskurser gör du kartläggningen för den lägre årskursen. Klarar eleverna kartläggningens uppgift 1–4 säkert redan före perioden tar ni paketet för nästa årskurs."
+    mer: Talområde och talsorter per årskurs
+    versioner:
+      - namn: Åk 1
+        fore:
+          - "Tiostavar och ental, talbrickor med 1 och 10, och enkronor och tiokronor."
+          - "Mattan har bara Tiotal och Ental: vik bort de andra rutorna."
+          - "Paketet är av papper: tre tiostavar, 15 ental och en matta med Tiotal och Ental. Läxa 1 och 2 står på ett A4, som två läxkort att klippa isär, och likaså läxa 3 och 4. Läxa 5 har ett eget A4."
+          - "Om ingen i paret kan läsa än läser du korten under hela I par, och i Två kort läser du ett kort i taget för hela gruppen."
+      - namn: Åk 2
+        fore:
+          - "Tiostavar och ental och en hundraplatta, talbrickor med 1, 10 och 100, och enkronor, tiokronor och en hundralapp."
+          - "Mattan har Hundratal, Tiotal och Ental: vik bort Tusental."
+          - "Paketet är av papper: en hundraplatta, tio tiostavar, 15 ental och talsortsmattan i A3. Skriv ut ett A4 per läxa och elev."
+      - namn: Åk 3
+        fore:
+          - "Tiobas med hundraplattor och en tusenkub, talbrickor med 1, 10, 100 och 1000, och pengar upp till en tusenlapp. En halv sats per elev räcker till fem hundraplattor och 15 tiostavar."
+          - "Paketet är av papper: sju hundraplattor, 15 tiostavar, 15 ental och talsortsmattan i A3. Skriv ut ett A4 per läxa och elev."
+      - namn: "Åk 4–⁠5"
+        fore:
+          - "Tiobas med en tusenkub, talbrickor från 0,01 till 1000, och pengar upp till tusenlappar. Saknas tusenkuber, bygg tusentalen med talbrickor eller tusenlappar. En halv sats per elev räcker till fem hundraplattor och 15 tiostavar."
+          - "Varje elev behöver en lodrät tallinje från −10 till 10 i vecka 5 och vid kartläggningen."
+          - "Paketet är av papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och talsortsmattan och decimalmattan i A3. Skriv ut ett A4 per läxa och elev."
 mal:
-  overgripande: "kunna bygga ett tal, säga talsorterna och växla tio mot en."
+  overgripande: "kunna bygga ett tal, säga talsorterna och växla tio mot en och en mot tio."
   rubrik: "Mål: det eleven kan efter fem veckor"
   text: "Kryssa för det eleven kan, före och efter perioden:"
   punkter:
@@ -595,7 +644,7 @@ ramar:
             - - Skriv först 17 + 8 utan att bygga. Bygg sedan och kontrollera.
     - rubrik: "Åk 1: Läxa 1–5"
       text:
-        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: tre tiostavar, 15 ental och en matta med Tiotal och Ental. Läxa 1 och 2 står på ett A4, som två läxkort att klippa isär, och likaså läxa 3 och 4. Läxa 5 har ett eget A4. Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
+        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: tre tiostavar, 15 ental och en matta med Tiotal och Ental. Läxa 1 och 2 står på ett A4, som två läxkort att klippa isär, och likaså läxa 3 och 4. Läxa 5 har ett eget A4. Skicka hem veckans läxa efter veckans första pass, och i vecka 1 också rutan Till vårdnadshavaren."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
@@ -681,7 +730,7 @@ ramar:
             - - Skriv först 56 + 29 utan att bygga. Bygg sedan och kontrollera.
     - rubrik: "Åk 2: Läxa 1–5"
       text:
-        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: en hundraplatta, tio tiostavar, 15 ental och talsortsmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
+        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: en hundraplatta, tio tiostavar, 15 ental och talsortsmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och i vecka 1 också rutan Till vårdnadshavaren."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
@@ -767,7 +816,7 @@ ramar:
             - - Skriv först 347 + 185 utan att bygga. Bygg sedan och kontrollera.
     - rubrik: "Åk 3: Läxa 1–5"
       text:
-        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: sju hundraplattor, 15 tiostavar, 15 ental och talsortsmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
+        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: sju hundraplattor, 15 tiostavar, 15 ental och talsortsmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och i vecka 1 också rutan Till vårdnadshavaren."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
@@ -862,7 +911,7 @@ ramar:
             - - Du är skyldig 40 kr och får 100 kr. Hur mycket har du nu?
     - rubrik: "Åk 4–5: Läxa 1–5"
       text:
-        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och talsortsmattan och decimalmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
+        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och talsortsmattan och decimalmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och i vecka 1 också rutan Till vårdnadshavaren."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:

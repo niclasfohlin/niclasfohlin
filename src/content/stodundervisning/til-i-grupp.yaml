@@ -22,7 +22,7 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
@@ -90,7 +90,7 @@ tidsschema:
       vad: Eleverna läser sin bok. Du sätter dig hos en elev i taget, två till tre minuter var, lyssnar och ger stöd vid orden som fastnar. Övriga läser tyst eller viskande.
     - tid: 18–20 min
       fas: Avsluta
-      vad: "Upprepa hemuppdraget: läs boken en gång till med en vuxen och skriv tre favoritmeningar. Mappen i ryggsäcken. Gör den korta noteringen."
+      vad: "Upprepa hemuppdraget: läs boken en gång till med en vuxen och skriv tre favoritmeningar. Mappen i ryggsäcken. Gör den korta noteringen i snabbmallen."
     - tid: Hemma, cirka 20 min
       fas: Läs och skriv
       vad: Eleven läser boken en gång till för en vuxen, cirka tio minuter. Sedan väljer eleven tre favoritmeningar och skriver av dem i skrivboken. Den vuxne signerar lässchemat.
@@ -241,13 +241,25 @@ progression:
 uppfoljning:
   text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll. Läser eleven texten i efterkollen med flyt och läser om meningen själv när det blir fel, avslutar du insatsen och berättar för hemmet vad efterkollen visade. Har eleven kommit framåt men inte hela vägen efter åtta veckor, fortsätter ni med vecka 9–10 och gör efterkollen igen. Om de flesta böckerna har lästs två gånger men eleven inte har kommit framåt, eller inte hela vägen efter vecka 10, tar du upp det med elevhälsan. Har de flesta böckerna bara lästs en gång, ordnar du den andra läsningen först och börjar en ny period på åtta veckor.
   rader:
+    # Resultatet före och efter med orden i beslutet, och efterkollen med en elev i taget som förekollen (K-596).
     - nar: Före insatsen
       tid: "före"
       perElev: [5, 10]
+      resultat: "rätt lästa ord på en minut, ord som fastnar, läser om själv vid fel"
       vad: Eleven läser en kort text på sin nivå högt i en minut. Notera antal rätt lästa ord, vilka ord som fastnar och om eleven läser om när det blir fel. Spara texten.
     - nar: Efter 6–10 veckor
       tid: "efter"
+      perElev: [5, 10]
+      resultat: "rätt lästa ord på en minut, med flyt, läser om själv, böcker lästa två gånger"
       vad: "Låt eleven läsa en liknande text och jämför med startläget. Räkna också böckerna i lässchemat: hur många har lästs två gånger?"
+    # Läsningen hemma som uteblir och boken som är för svår, med metodens egna meningar ur hem.text och
+    # stödtrappans femte steg, så att läraren ser dem varje vecka under Håll koll på (K-596).
+    - nar: Läsningen hemma uteblir flera dagar i rad
+      tid: "villkor"
+      vad: Ring hem tidigt, innan rutinen hunnit brytas. Kommer läsningen hemma inte i gång efter samtalet, låt eleven läsa boken för en annan vuxen i skolan samma dag.
+    - nar: Eleven fastnar på fler än ett ord av tio
+      tid: "villkor"
+      vad: Boken är för svår. Byt nivå till nästa pass.
 plan:
   passen:
     - nar: första passet
@@ -267,9 +279,14 @@ plan:
     - nar: pass 49
       kort: "Nytt lässchema"
       text: "Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."
+  # Nivån först, intill förekollen, eftersom förekollens text tas på den nivån. Sedan var böckerna finns
+  # och kapitelboken för åk 3–6, och mötet med hela stycket: hur den vuxne hjälper till vid svåra ord,
+  # och kontraktet och lässchemat att skriva ut till varje elev (K-596).
   fore:
-    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen."
     - "Före första passet låter du eleven läsa en sida högt ur böcker på olika nivåer. Elevens nivå är den högsta där hen klarar minst nio ord av tio. Den första boken och texten i förekollen tar du på den nivån."
+    - "Böckerna behöver du inte leta länge efter. Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. För elever i årskurs 4–6 behöver innehållet passa åldern även när texten är lätt, och där fungerar lättlästa böcker från förlag som Nypon och Hegas samt material med flera nivåer som Mellan raderna."
+    - "För elever från ungefär årskurs 3 fungerar en och samma kapitelbok bättre än en ny liten bok varje dag. Boken ska fortfarande vara lätt att avkoda, men innehållet får bära i flera dagar."
+    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda står i Materialet, på varsitt A4 att skriva ut till varje elev."
   justera:
     - "Byt till en lättare bok när det blir många fel."
     - "Uteblir läsningen hemma flera dagar i rad, ring hem tidigt."
@@ -480,6 +497,12 @@ lathund:
       - Snabbmallen för veckans pass
       - Kontraktet, påskrivet av hem och skola
     varjePass: Hade alla läst hemma, vem byter nivå, vad blev eleverna bättre på och vad övas nästa gång?
+    # Lathundens egen uppföljning, utan villkoren under Håll koll på, så att den ryms på bild 4 (K-596).
+    uppfoljning:
+      - nar: Före insatsen
+        vad: "Eleven läser en kort text på sin nivå högt i en minut. Notera antal rätt lästa ord, vilka ord som fastnar och om eleven läser om när det blir fel. Spara texten."
+      - nar: Efter 6–10 veckor
+        vad: "Låt eleven läsa en liknande text och jämför med startläget. Räkna också böckerna i lässchemat: hur många har lästs två gånger?"
 lektionskort:
   - text: "Lektionskortet är passet på ett A4: målet, rutinen från skolan till hemmet och tillbaka, passet med det du gör och säger, det du gör när eleven fastnar och hur veckorna går. Skriv ut det och ha det framför dig under passet."
 film:

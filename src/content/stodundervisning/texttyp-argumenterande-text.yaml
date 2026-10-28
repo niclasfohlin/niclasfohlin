@@ -32,7 +32,7 @@ material:
   - diagrammet Mina texter
   - en mapp per elev
 
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -71,7 +71,7 @@ passrutin:
       fas: Visa och pröva
     - text: "Eleven läser bladet Mitt mål. Paret säger vem som läser. På lappar skriver de vad de vill och sina skäl, och lägger minst en åt sidan och resten i ordning."
       fas: Tänk och planera
-    - text: "Skribenten berättar för en läsare ur ett annat par. Läsaren har kortet och frågar det hen inte fick veta. Svaret blir en ny lapp. Sist säger läsaren sin första mening."
+    - text: "Skribenten berättar för en läsare ur ett annat par. Läsaren har kortet Läsarens frågor och frågar det hen inte fick veta. Svaret blir en ny lapp. Sist säger läsaren sin första mening."
       fas: Säg
     - text: "Var och en skriver efter planen, på varannan rad. Den som är klar läser texten som läsaren, med kortet, och skriver in det läsaren saknar."
       fas: Skriv
@@ -101,7 +101,7 @@ tidsschema:
       vad: "Lyssna på en skribent i taget, och säg ”Det du svarade nu ska med i texten.” Kan hen inte svara, tar paret reda på det."
     - tid: 33–57 min
       fas: Skriv
-      vad: "Säg ”Skriv det du sa.” Läs en mening över axeln och ställ en enda fråga ur kortet, som ”Hur menar du?” Rätta inte nu. Den som inte kommer i gång får hjälp med första meningen."
+      vad: "Säg ”Skriv det du sa.” Läs en mening över axeln och ställ en enda fråga ur kortet Läsarens frågor, som ”Hur menar du?” Rätta inte nu. Den som inte kommer i gång får hjälp med första meningen."
     - tid: 57–60 min
       fas: Läs upp
       vad: "Fråga efter ett val: ”Vilket skäl lade du åt sidan? Varför?” När en text är klar skriver eleven vad hen tar med sig."
@@ -272,7 +272,7 @@ tabeller:
         - Ett ark per par räcker till ungefär tre pass
         - "I strukturen i pass 1, och varje pass från pass 3. Hur du gör lapparna, och vad som står på dem, står under Till läraren: lapparna"
       - - Bladet Planen
-        - Ett per par i vecka 2 och 4, ett per elev i vecka 5
+        - Ett per par i vecka 2 och 4, ett per elev i vecka 5 och ett till klassläraren i pass 6
         - "Tänk och planera. Den första lappen och skälen ligger i den första rutan, i ordning uppifrån och lite omlott, och lappen åt sidan i den andra"
       - - Kortet Läsarens frågor
         - Ett per par
@@ -348,14 +348,14 @@ uppfoljning:
       tid: "efter 4–6 veckor"
       tabell: "Efter kursen: Uppgift 1"
       vad: "Eleven skriver Uppgift 1 i ett pass fyra till sex veckor efter kursen. Före passet skriver du ut den ur Uppgifter, vecka 6, och tar fram elevernas diagram och Mitt mål. Efter passet läser du texterna, rättar stapeln om den inte stämmer och svarar med tre svarsrader. Du frågar också klassläraren om eleven säger vem som läser."
-      resultat: "stapeln Efter kursen: rutor för det eleven vill, skäl och det läsaren ska göra"
+      resultat: "rutor, 0–⁠6, i stapeln Efter kursen: det eleven vill, skäl, det läsaren ska göra"
 
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).
   veckansPass: "Till läraren: veckorna"
-  # Valet av årskurs (sajtens K-569): stödet är texten till tabellen Åk 4–5 och åk 6–7. Det som bara gäller en årskurs är
-  # en mening som börjar med ”I åk 4–5” eller ”I åk 6–7”, som planen tar bort i den andra. Pass 9 har samma minuter i
-  # båda, och i åk 6–7 visar du stycke fem i början av Tänk och planera, så passet behöver inget eget fält.
+  # Valet av årskurs (sajtens K-569): stödet är texten till tabellen Åk 4–5 och åk 6–7. Det som bara gäller en årskurs är
+  # en mening som börjar med ”I åk 4–5” eller ”I åk 6–7”, som planen tar bort i den andra. Pass 9 har samma minuter i
+  # båda, och i åk 6–7 visar du stycke fem i början av Tänk och planera, så passet behöver inget eget fält.
   versionsval:
     rubrik: Årskurs
     text: "Kursen är densamma i alla årskurser, men i åk 6–⁠7 byter du läsare och fråga, använder orden åsikt och argument från vecka 1 och skriver raden Säg emot på kortet i pass 9. Går eleverna i olika årskurser, väljer du den som de flesta går i."
@@ -374,9 +374,29 @@ plan:
     - nar: pass 1
       kort: "Läsaren"
       ur: { tabell: "De sex veckorna", rad: "Vecka 1", kolumner: ["Det som händer", "Eleven skriver"] }
+    # Kursens läsare tillfrågas i vecka 1, och bladet har tre datum att fylla i, ur checklistan och ramen Till kursens
+    # läsare (K-596).
+    - nar: pass 1
+      del: Före passet
+      text: "Be i vecka 1 en vuxen på skolan vara kursens läsare, och ge hen bladet Till kursens läsare. Skriv in dagarna och klockslagen först."
+    # En grupp som har gått en annan kurs i serien gör pass 1 och pass 3 på ett annat sätt, ur tredje stycket i Till
+    # läraren: veckorna. Styckets minuter står inte här, eftersom planen inte tar passets tider ur en text (K-596).
+    - nar: pass 1
+      del: Före passet
+      text: "Har gruppen gått en annan kurs i serien, ändras pass 1 och pass 3. Efter Två texter i pass 1 läser eleven sitt sista mål och säger vad hen känner igen i den andra texten."
     - nar: pass 1
       del: Före passet
       text: "I åk 6–⁠7 kan eleven skriva brevet på linjerat papper eller på dator i stället för på bladet Brevet."
+    # Lapparna till strukturen, sidan Strukturen och blädderblocket till listan i pass 1, ur Materialet du behöver (K-596).
+    - nar: pass 1
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Lappar", kolumner: ["Material", "Hur många", "När och hur ni använder det"] }
+    - nar: pass 1
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Sidan Strukturen, vecka 1: Konstruktiv debatt", kolumner: ["Material", "Hur många", "När och hur ni använder det"] }
+    - nar: pass 1
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Ett blädderblock, eller en dator med projektor", kolumner: ["Material", "När och hur ni använder det"] }
     - nar: pass 1
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
@@ -397,6 +417,20 @@ plan:
     - nar: pass 3
       kort: "Läraren visar"
       ur: { tabell: "De sex veckorna", rad: "Vecka 2", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
+    # Pass 3 för en grupp som har gått en annan kurs i serien, greppen för återkoppling, hur många blad Planen du skriver
+    # ut och blädderblocket till det läsaren svarar, ur Till läraren: veckorna och Materialet du behöver (K-596).
+    - nar: pass 3
+      del: Före passet
+      text: "Har gruppen gått en annan kurs i serien, ändras pass 1 och pass 3. I pass 3 stryker du raden i manuset där du vänder dig till gruppen."
+    - nar: pass 3
+      del: Före passet
+      text: "De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen."
+    - nar: pass 3
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Bladet Planen", kolumner: ["Material", "Hur många"] }
+    - nar: pass 3
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Ett blädderblock, eller en dator med projektor", kolumner: ["Material", "När och hur ni använder det"] }
     - nar: pass 3
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
@@ -409,15 +443,35 @@ plan:
     - nar: pass 3
       del: Läs som läsaren
       text: "En elev läser dagens mening som läsaren. Fråga ”Vad vet du nu? Vad undrar du?” Alla skriver en ny mening som svar, och ni lägger dem bredvid varandra. Den som inte hinner skriva säger sin mening. Fråga sedan ”Vilken mening ger läsaren mest? Varför?” Var och en gör sin mening bättre. Dagens mening tar du aldrig ur en enskild elevs text."
+    # Greppens regler, ur Till läraren: återkopplingen under Reglerna (K-596).
+    - nar: pass 3
+      del: Läs som läsaren
+      text: "Du visar en elevs hela text för gruppen bara om eleven säger ja. Ett grepp mitt i texten tar högst fem minuter. Har gruppen fler än sex elever, gör ni Alla svar på bordet och Starterna vid två bord. Vid det andra bordet har en elev kortet Läsarens frågor och ställer samma frågor som du."
+    # Delarna Tänk och planera, Säg och Skriv en gång, ordagrant ur passrutinens steg och tidsschemat, och Läs upp i
+    # pass 4, så som Läs som läsaren står i pass 3, tills planen visar tidsschemats text i varje pass ur veckans sida (K-596).
+    - nar: pass 3
+      del: Tänk och planera
+      text: "Eleven läser bladet Mitt mål. Paret säger vem som läser. På lappar skriver de vad de vill och sina skäl, och lägger minst en åt sidan och resten i ordning. Fråga efter läsaren före skälen. Vid varje lapp: ”Bryr sig läsaren om det skälet?” Sedan: ”Vilken lapp lägger ni åt sidan? Varför?”"
     - nar: pass 3
       del: Säg
       text: "I delen Säg sätter sig två par ihop, och läsaren kommer ur det andra paret. De två som berättar gör det samtidigt, var och en för sin läsare. Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. Så blir det i varje pass när gruppen har två, tre, sex, sju eller tio elever. Då skriver du på bladet Det jag hör vad det paret säger, och den andra i paret säger sist sin första mening till dig."
+    - nar: pass 3
+      del: Säg
+      text: "Läsaren har kortet Läsarens frågor och frågar det hen inte fick veta. Svaret blir en ny lapp. Lyssna på en skribent i taget, och säg ”Det du svarade nu ska med i texten.” Kan hen inte svara, tar paret reda på det."
+    - nar: pass 3
+      del: Skriv
+      text: "Var och en skriver efter planen, på varannan rad. Säg ”Skriv det du sa.” Läs en mening över axeln och ställ en enda fråga ur kortet Läsarens frågor, som ”Hur menar du?” Rätta inte nu. Den som inte kommer i gång får hjälp med första meningen."
     - nar: pass 4
       kort: "Läraren visar"
       ur: { tabell: "De sex veckorna", rad: "Vecka 2", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
     - nar: pass 4
       del: Säg
       text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång."
+    # Frågan ställs när två elever har berättat om ett val, så raden står efter veckans rad (K-596).
+    - nar: pass 4
+      del: Läs upp
+      sist: true
+      text: "Fråga efter ett val: ”Vilket skäl lade du åt sidan? Varför?” När en text är klar skriver eleven vad hen tar med sig."
     # De två versionerna skriver du när du har läst texterna efter pass 4 och 8, så de står i Efter passet i passet före
     # (sajtens regel efter K-585: det som ordnas före ett pass står i Efter passet i passet före).
     - nar: pass 4
@@ -428,6 +482,13 @@ plan:
     - nar: pass 5
       kort: "Gruppens text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 3", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
+    # Häftmassan och blädderblocket till gruppens text, ur Materialet du behöver (K-596).
+    - nar: pass 5
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Häftmassa eller magneter", kolumner: ["Material", "När och hur ni använder det"] }
+    - nar: pass 5
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Ett blädderblock, eller en dator med projektor", kolumner: ["Material", "När och hur ni använder det"] }
     - nar: pass 5
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
@@ -440,6 +501,11 @@ plan:
     - nar: pass 6
       del: Säg
       text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång."
+    # Det du lyssnar efter och skriver på tavlan, ur Lägg märke till i Vecka 3 · Gruppens text, tills planen läser veckans
+    # Lägg märke till (K-593, K-596).
+    - nar: pass 6
+      del: Säg
+      text: "Eleven som säger eftersom eller till exempel när läsaren frågar hur hen menar. Skriv ordet på tavlan."
     - nar: pass 6
       del: Efter passet
       text: "Har läsaren inte svarat före pass 7, går du till hen med två elever och hämtar svaret muntligt."
@@ -449,6 +515,10 @@ plan:
     - nar: pass 7
       del: Före passet
       text: "Till pass 7 tar du fram läsarens svar och listan från pass 1."
+    # Ett nytt blad Planen till parens text, ur Materialet du behöver (K-596).
+    - nar: pass 7
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Bladet Planen", kolumner: ["Material", "Hur många"] }
     - nar: pass 7
       del: Säg
       text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång."
@@ -461,12 +531,21 @@ plan:
     - nar: pass 8
       del: Säg
       text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång."
+    # Vem som behåller parets sak, ur Lägg märke till i Vecka 4 · Parens text, tills planen läser veckans Lägg märke till
+    # (K-593, K-596).
+    - nar: pass 8
+      del: Läs upp
+      text: "Eleven som låter kamraten säga varför en lapp läggs åt sidan. Hen behåller parets sak i pass 9."
     - nar: pass 8
       del: Efter passet
       text: "Före pass 5 och 9 skriver du själv två korta versioner, en som liknar det många skrev och en med det som fattades. Ingen av dem är en elevs text."
     - nar: pass 9
       kort: "Egen text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 5", kolumner: ["Det som händer", "Eleven skriver", "Läsaren"] }
+    # Ett blad Planen per elev i vecka 5, ur Materialet du behöver (K-596).
+    - nar: pass 9
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Bladet Planen", kolumner: ["Material", "Hur många"] }
     - nar: pass 9
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
@@ -482,6 +561,10 @@ plan:
     - nar: pass 11
       del: Före passet
       text: "I åk 6–⁠7 kan eleven skriva brevet på linjerat papper eller på dator i stället för på bladet Brevet."
+    # Bladet Brevet en gång till, ur Materialet du behöver (K-596).
+    - nar: pass 11
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Brevet", kolumner: ["Material", "Hur många"] }
     - nar: pass 11
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
@@ -502,8 +585,8 @@ plan:
       del: Efter passet
       istallet: true
   # Före första passet: kursens läsare, hens tre dagar och frågans tre krav, ordagrant ur Var hittar du texterna och läsaren?
-  # Läsaren och frågan har en mening per årskurs, och orden och texterna i åk 6–7 står på den sista raden (K-569), som
-  # försvinner i åk 4–5. Orden står i noten till Läsaren frågar, och eleven svarar, och texterna i urvalet.
+  # Läsaren och frågan har en mening per årskurs, och orden och texterna i åk 6–7 står på den sista raden (K-569), som
+  # försvinner i åk 4–5. Orden står i noten till Läsaren frågar, och eleven svarar, och texterna i urvalet.
   fore:
     - "Kursens läsare är en vuxen på skolan som har något att bestämma. I åk 4–⁠5 är det någon som eleverna känner, till exempel bibliotekarien, fritidsledaren, vaktmästaren eller kökschefen. I åk 6–⁠7 är det rektorn eller den vuxna som leder elevrådet."
     - "I pass 3 kommer hen i tio minuter och ställer en fråga som hen ska avgöra, och eleverna frågar vad som behövs för att bestämma. Frågan går att svara ja eller nej på, så att texten handlar om en sak. Beslutet är läsarens eget, och hen har inte bestämt sig. Frågan gäller något eleverna har sett och kan ta reda på mer om. I åk 4–⁠5 kan frågan vara ”Ska biblioteket ha öppet på lunchrasten?” I åk 6–⁠7 kan frågan vara ”Ska eleverna få vara inne på rasterna på vintern?”"
@@ -577,7 +660,7 @@ ramar:
             - rubrik: Pass 1
               text: "Före passet. Skriv bara uppgiften på tavlan: ”Dra en fråga, och skriv ett brev till mig. Övertyga mig.” Lägg fram frågorna, bladet Brevet och papper att planera på.\n0–⁠5 min. Om kursen: ni ska övertyga en läsare som svarar. Fråga ”Vad gör en text bra?”, och spara svaren till pass 12.\n5–⁠20 min. Brevet: eleven drar en av dina två frågor och skriver ett brev som ska övertyga dig, i tio minuter utan stöd. Den som blir klar tidigt läser sitt brev en gång till.\n20–⁠32 min. Två texter: visa elevens sida i Två texter, vecka 1: Skolgården. Ställ frågorna under texterna. Säg sedan namnet: argumenterande text.\n32–⁠50 min. Strukturen: följ stegen i Strukturen, vecka 1: Konstruktiv debatt.\n50–⁠60 min. Listan: fråga ”Vem bestämmer vad?” Gruppen gör en lista över vuxna på skolan och vad de bestämmer över. Spara den till pass 7.\nEfter passet. Skriv tre svarsrader på varje brev till pass 2: Nu vet jag, Det här övertygade mig och Nu undrar jag."
             - rubrik: Pass 2
-              text: "Före passet. Ta fram breven, mentortexten Tak till cykelstället, kortet och mapparna.\n0–⁠5 min. Läs som läsaren: du läser ”Vi borde ha längre raster” och svarar själv.\n5–⁠18 min. Dina svar: ge tillbaka breven med de tre svarsraderna. Eleven stryker under det du undrade. Samla dina frågor på tavlan, och dela ut kortet Läsarens frågor.\n18–⁠36 min. Brevet till Jonas: läs det högt. Gruppen läser som Jonas och svarar på frågorna. Skälet står först i varje stycke: Jonas undrar varför innan han undrar hur.\n36–⁠52 min. Tillägget: eleven drar ett streck under sitt brev och svarar på det du undrade med minst tre meningar. Den som är klar svarar på nästa fråga på kortet.\n52–⁠60 min. Målet: eleven föreslår ett mål ur det du undrade, som ”Jag förklarar ett skäl”, och skriver det på bladet Mitt mål. Säg vad du har bestämt i brevens frågor."
+              text: "Före passet. Ta fram breven, mentortexten Tak till cykelstället, kortet Läsarens frågor och mapparna.\n0–⁠5 min. Läs som läsaren: du läser ”Vi borde ha längre raster” och svarar själv.\n5–⁠18 min. Dina svar: ge tillbaka breven med de tre svarsraderna. Eleven stryker under det du undrade. Samla dina frågor på tavlan, och dela ut kortet Läsarens frågor.\n18–⁠36 min. Brevet till Jonas: läs det högt. Gruppen läser som Jonas och svarar på frågorna. Skälet står först i varje stycke: Jonas undrar varför innan han undrar hur.\n36–⁠52 min. Tillägget: eleven drar ett streck under sitt brev och svarar på det du undrade med minst tre meningar. Den som är klar svarar på nästa fråga på kortet.\n52–⁠60 min. Målet: eleven föreslår ett mål ur det du undrade, som ”Jag förklarar ett skäl”, och skriver det på bladet Mitt mål. Säg vad du har bestämt i brevens frågor."
             - rubrik: Lägg märke till
               text: "Eleven som säger att en bra text är en rättstavad text.\nEleven som säger vad Jonas undrar utan att du frågar."
         - rubrik: "Vecka 2 · Du visar"
@@ -595,7 +678,7 @@ ramar:
             - rubrik: Fokus
               text: "Gruppen skriver till kursens läsare, och eleven förklarar ett skäl."
             - rubrik: Pass 5
-              text: "0–⁠5 min. Två sätt i era texter: visa dina två versioner och fråga ”Vad gör den andra för läsaren?”\n5–⁠12 min. Tänk och planera: säg ”Jag skriver början, ni tänker.” Sätt parens lappar på tavlan. Gruppen väljer skäl och ordning och lägger minst en lapp åt sidan.\n12–⁠21 min. Gruppens början: en elev har kortet och är läsaren. Eleverna säger varje mening innan du skriver den: vad gruppen vill, och det första skälet med förklaring.\n21–⁠45 min. Skriv: var och en skriver fortsättningen själv, alltså ännu ett skäl med förklaring, och vad läsaren ska göra.\n45–⁠53 min. Läs upp: paren läser för varandra. Två läser för gruppen, som väljer en.\n53–⁠60 min. Stapeln: läs texten högt. Fyll i gruppens stapel på tavlan, och säg vad du räknar.\nEfter passet. Skriv in fortsättningen, rätta texten och skicka den samma dag."
+              text: "0–⁠5 min. Två sätt i era texter: visa dina två versioner och fråga ”Vad gör den andra för läsaren?”\n5–⁠12 min. Tänk och planera: säg ”Jag skriver början, ni tänker.” Sätt parens lappar på tavlan. Gruppen väljer skäl och ordning och lägger minst en lapp åt sidan.\n12–⁠21 min. Gruppens början: en elev har kortet Läsarens frågor och är läsaren. Eleverna säger varje mening innan du skriver den: vad gruppen vill, och det första skälet med förklaring.\n21–⁠45 min. Skriv: var och en skriver fortsättningen själv, alltså ännu ett skäl med förklaring, och vad läsaren ska göra.\n45–⁠53 min. Läs upp: paren läser för varandra. Två läser för gruppen, som väljer en.\n53–⁠60 min. Stapeln: läs texten högt. Fyll i gruppens stapel på tavlan, och säg vad du räknar.\nEfter passet. Skriv in fortsättningen, rätta texten och skicka den samma dag."
             - rubrik: Pass 6
               text: "0–⁠5 min. Läs som läsaren: använd bara skälet ur gruppens början, som ”Det är bra för många.”\n5–⁠15 min. Visa och pröva: gör Två texter, vecka 3, och ställ frågorna under texterna.\n15–⁠19 min. Tänk och planera: eleven läser Mitt mål och dina svarsrader på texten från pass 4. Du har skrivit ”Hur menar du?” vid ett skäl.\n19–⁠25 min. Säg: eleven berättar skälet för en läsare ur ett annat par.\n25–⁠57 min. Skriv: eleven ger varje skäl en förklaring, först det du har frågat om, på den tomma raden under. De sista fem minuterna läser eleven texten för läsaren, som ringar in ett skäl och säger svarsraderna. Eleven ser om målet syns och fyller i sin första stapel.\n57–⁠60 min. Läs upp: var och en skriver på Mitt mål vad hen tar med sig.\nEfter passet. Ge klassläraren ett blad Planen, med tavlans tre rader överst."
             - rubrik: Lägg märke till
@@ -605,7 +688,7 @@ ramar:
             - rubrik: Fokus
               text: "Paret väljer själv vad de vill och säger vad läsaren ska göra."
             - rubrik: Pass 7
-              text: "0–⁠5 min. Läs som läsaren: använd en mening till ur gruppens början.\n5–⁠15 min. Visa och pröva: läs läsarens svar, och skriv på listan från pass 1 vad hen mer bestämmer över. Säg en sak du vill. Hen ska kunna svara ja eller nej. Var och en säger en.\n15–⁠27 min. Tänk och planera: eleven läser det hen tog med sig. Från och med nu lyssnar du innan du frågar vem som läser. Varje par enas om en sak, och var och en pekar på en lapp att lägga åt sidan och säger varför. Fråga ett par: ”Vilka lappar låg kvar om klassen läste?”\n27–⁠33 min. Säg: lyssna på en skribent i taget, och säg ”Det du svarade nu ska med i texten.”\n33–⁠57 min. Skriv: säg ”Skriv det du sa.” Läs en mening över axeln och ställ en enda fråga ur kortet. Du skickar inte parens texter.\n57–⁠60 min. Läs upp: varje par säger vad de tar reda på till nästa pass.\nEfter passet. Sa läsaren ja, sätter två elever upp beslutet där det gäller."
+              text: "0–⁠5 min. Läs som läsaren: använd en mening till ur gruppens början.\n5–⁠15 min. Visa och pröva: läs läsarens svar, och skriv på listan från pass 1 vad hen mer bestämmer över. Säg en sak du vill. Hen ska kunna svara ja eller nej. Var och en säger en.\n15–⁠27 min. Tänk och planera: eleven läser det hen tog med sig. Från och med nu lyssnar du innan du frågar vem som läser. Varje par enas om en sak, och var och en pekar på en lapp att lägga åt sidan och säger varför. Fråga ett par: ”Vilka lappar låg kvar om klassen läste?”\n27–⁠33 min. Säg: lyssna på en skribent i taget, och säg ”Det du svarade nu ska med i texten.”\n33–⁠57 min. Skriv: säg ”Skriv det du sa.” Läs en mening över axeln och ställ en enda fråga ur kortet Läsarens frågor. Du skickar inte parens texter.\n57–⁠60 min. Läs upp: varje par säger vad de tar reda på till nästa pass.\nEfter passet. Sa läsaren ja, sätter två elever upp beslutet där det gäller."
             - rubrik: Pass 8
               text: "0–⁠5 min. Läs som läsaren: ni svarar med en mening på det kursens läsare undrade.\n5–⁠15 min. Visa och pröva: gör Två texter, vecka 4, och ställ frågorna under texterna.\n15–⁠19 min. Tänk och planera: det paren har tagit reda på och slutet blir var sin lapp.\n19–⁠25 min. Säg: den som inte berättade i pass 7 berättar.\n25–⁠57 min. Skriv: var och en skriver klart, med slutet. Vid minut 35 gör ni greppet Två texter halvvägs. De sista fem minuterna läser eleven för sin läsare, som ringar in ett skäl och säger svarsraderna. Eleven fyller i sin stapel och skriver på Mitt mål.\n57–⁠60 min. Läs upp: fråga ”Vilken text skriver du i klassen nu? Vem läser den?” Säg vem som behåller parets sak. De andra tänker ut en egen sak till pass 9.\nEfter passet. Skriv tre svarsrader under texterna."
             - rubrik: Lägg märke till
@@ -615,7 +698,7 @@ ramar:
             - rubrik: Fokus
               text: "Eleven gör alla fyra stegen själv, med kamraten som läsare."
             - rubrik: Pass 9
-              text: "0–⁠5 min. Två sätt i era texter: visa dina två versioner ur pass 8 och fråga ”Vad gör den andra för läsaren?”\n5–⁠12 min. Visa och pröva: visa hur planen blir en lista på tomt papper, med läsaren överst, det du vill, skälen och det läsaren ska göra. Gruppen väljer vilket skäl du ska stryka och säger varför.\n12–⁠26 min. Tänk och planera: eleven läser det hen tog med sig och dina svarsrader, och skriver ett nytt mål. I åk 6–⁠7 visar du sedan stycke fem i texten Blöt sadel igen? och frågar var Elin och Samir svarar den som säger emot. I åk 6–⁠7 skriver du en rad till på kortet: Säg emot en gång. Eleven planerar sin egen sak med lappar. Den som sa sitt val i pass 7 eller 8 utan att du frågade gör en lista. Den som behåller parets sak planerar på nytt.\n26–⁠32 min. Säg: alla berättar texten för kamraten, lika länge var.\n32–⁠57 min. Skriv: vid minut 44 gör ni Starterna runt bordet, och alla läser sin början.\n57–⁠60 min. Läs upp: fråga ”Vad vet du säkert? Vad kontrollerar du till nästa pass?”"
+              text: "0–⁠5 min. Två sätt i era texter: visa dina två versioner ur pass 8 och fråga ”Vad gör den andra för läsaren?”\n5–⁠12 min. Visa och pröva: visa hur planen blir en lista på tomt papper, med läsaren överst, det du vill, skälen och det läsaren ska göra. Gruppen väljer vilket skäl du ska stryka och säger varför.\n12–⁠26 min. Tänk och planera: eleven läser det hen tog med sig och dina svarsrader, och skriver ett nytt mål. I åk 6–⁠7 visar du sedan stycke fem i texten Blöt sadel igen? och frågar var Elin och Samir svarar den som säger emot. I åk 6–⁠7 skriver du en rad till på kortet Läsarens frågor: Säg emot en gång. Eleven planerar sin egen sak med lappar. Den som sa sitt val i pass 7 eller 8 utan att du frågade gör en lista. Den som behåller parets sak planerar på nytt.\n26–⁠32 min. Säg: alla berättar texten för kamraten, lika länge var.\n32–⁠57 min. Skriv: vid minut 44 gör ni Starterna runt bordet, och alla läser sin början.\n57–⁠60 min. Läs upp: fråga ”Vad vet du säkert? Vad kontrollerar du till nästa pass?”"
             - rubrik: Pass 10
               text: "0–⁠5 min. Läs som läsaren: använd ”Du har sagt att cykelstället rostar.” Fråga sedan hur det gick med texten i klassen.\n5–⁠38 min. Skriv: eleven skriver klart, med det hen har kontrollerat. Vid minut 20, Läsaren halvvägs: eleven läser för en läsare ur andra paret.\n38–⁠47 min. Kamraten svarar: skribenten läser för kamraten, som ringar in skälet som övertygade mest och svarar med de tre svarsraderna. Skribenten svarar i texten.\n47–⁠54 min. Genomgången: gå igenom texten innan den skickas. Är den tydlig, saklig och respektfull? Vad ska läsaren göra? Eleven markerar tre ord hen är osäker på.\n54–⁠60 min. Avslut: eleven skriver under, fyller i stapeln och skriver på Mitt mål vad hen tar med sig. Den som inte är klar säger sitt slut, och du skriver det.\nEfter passet. Rätta de markerade orden, och kopiera och skicka texterna i dag."
             - rubrik: Lägg märke till
@@ -625,7 +708,7 @@ ramar:
             - rubrik: Fokus
               text: "Eleven ser vad hen gör nu och känner igen texttypen i en uppgift."
             - rubrik: Pass 11
-              text: "Före passet. Skriv två nya frågor på små papper och bara uppgiften på tavlan. Lägg fram bladet Brevet, papper och lappar. Ge varje elev penna eller dator, det hen hade i pass 1. Ta fram mapparna med första brevet och diagrammet till delen Före och efter.\n0–⁠13 min. Brevet: som i pass 1 drar eleven en av två nya frågor och skriver ett brev som ska övertyga dig, i tio minuter utan stöd. Se vem som planerar innan hen skriver.\n13–⁠25 min. Före och efter: eleven lägger breven bredvid varandra och fyller i en stapel för vartdera, det första utan tillägget. ”Vad gör du nu som du inte gjorde då?”\n25–⁠35 min. Mentortexten: läs Blöt sadel igen? högt, och ställ frågorna under texten.\n35–⁠47 min. Uppgifterna: visa elevens sida i Uppgifter, vecka 6, och ställ frågorna.\n47–⁠57 min. Skriv: utan att titta i sin text skriver eleven det hen ska säga på mötet i pass 12, alltså vad hen vill, sitt tyngsta skäl med förklaring och vad läsaren ska göra.\n57–⁠60 min. Läs upp: två elever läser det de ska säga.\nEfter passet. Skriv tre svarsrader på varje brev till pass 12."
+              text: "Före passet. Skriv två nya frågor på små papper och bara uppgiften på tavlan. Lägg fram bladet Brevet, papper och lappar. Ge varje elev penna eller dator, det hen hade i pass 1. Ta fram mapparna med första brevet och diagrammet Mina texter till delen Före och efter.\n0–⁠13 min. Brevet: som i pass 1 drar eleven en av två nya frågor och skriver ett brev som ska övertyga dig, i tio minuter utan stöd. Se vem som planerar innan hen skriver.\n13–⁠25 min. Före och efter: eleven lägger breven bredvid varandra och fyller i en stapel för vartdera, det första utan tillägget. ”Vad gör du nu som du inte gjorde då?”\n25–⁠35 min. Mentortexten: läs Blöt sadel igen? högt, och ställ frågorna under texten.\n35–⁠47 min. Uppgifterna: visa elevens sida i Uppgifter, vecka 6, och ställ frågorna.\n47–⁠57 min. Skriv: utan att titta i sin text skriver eleven det hen ska säga på mötet i pass 12, alltså vad hen vill, sitt tyngsta skäl med förklaring och vad läsaren ska göra.\n57–⁠60 min. Läs upp: två elever läser det de ska säga.\nEfter passet. Skriv tre svarsrader på varje brev till pass 12."
             - rubrik: Pass 12
               text: "0–⁠5 min. Läs som läsaren: använd en mening ur en mentortext.\n5–⁠30 min. Mötet: en elev i taget säger vad hen vill, med det hen skrev i pass 11 framför sig, och kursens läsare svarar med sitt beslut och svarsraderna. Den som hellre vill får svaret på papper. Skriv på elevens diagram vilket skäl som övertygade.\n30–⁠48 min. Svar på svaret: med kamraten som stöd skriver eleven minst fyra meningar till läsaren, alltså tack, ett svar på det läsaren sa och vad eleven gör nu. Sist skriver eleven på Mitt mål det läsaren undrade, som nästa mål.\n48–⁠60 min. Avslut: fråga igen ”Vad gör en text bra?”, och jämför med svaren från pass 1. Fråga ”När behöver du övertyga någon nästa gång?” Säg vilken dag gruppen samlas igen. Eleven får ditt svar på brevet från pass 11 och tar hem sin mapp. Kopiera breven först och behåll diagrammet och Mitt mål tills gruppen samlas igen."
             - rubrik: Lägg märke till
@@ -896,7 +979,7 @@ ramar:
             - rubrik: Före och efter
               text: "Det här gör ni i pass 11, när det nya brevet är skrivet. Eleven lägger sina två brev bredvid varandra, och du frågar: ”Vad gör du nu som du inte gjorde då? Vad gör du redan från början nästa gång?”"
             - rubrik: Reglerna
-              text: "Fråga vad varje text gör för läsaren. Ingen frågar vilken som är sämst. Du visar en elevs hela text för gruppen bara om eleven säger ja. Ett grepp mitt i texten tar högst fem minuter. Har gruppen fler än sex elever, gör ni Alla svar på bordet och Starterna vid två bord. Vid det andra bordet har en elev kortet och ställer samma frågor som du."
+              text: "Fråga vad varje text gör för läsaren. Ingen frågar vilken som är sämst. Du visar en elevs hela text för gruppen bara om eleven säger ja. Ett grepp mitt i texten tar högst fem minuter. Har gruppen fler än sex elever, gör ni Alla svar på bordet och Starterna vid två bord. Vid det andra bordet har en elev kortet Läsarens frågor och ställer samma frågor som du."
     - rubrik: "Till läraren: lapparna"
       text:
         - "Planen för varje text görs med lappar. En lapp är en sak som ska med i texten, skriven kort: några ord eller en kort mening. Lapparna går att flytta, lägga åt sidan och lägga i ordning, och därför syns elevens val på bordet."

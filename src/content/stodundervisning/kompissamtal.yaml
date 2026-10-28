@@ -26,7 +26,7 @@ material:
   - bladet Vår överenskommelse
   - penna och papper
   - lappar hem
-uppdaterad: 2026-10-26
+uppdaterad: 2026-10-28
 publicerad: 2026-10-03
 relaterade: [seriesamtal]
 utkast: false
@@ -265,7 +265,7 @@ tidsschema:
       vad: Ställ stolarna runt bordet och bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten Våra samtalsregler, Så kan du säga och Peka på känslan, bladet Vår överenskommelse, en penna och papper för förslagen till hands. Hämta gruppen, eller se till att en vuxen följer den till rummet.
     - tid: 0–4 min
       fas: Starta
-      vad: Hälsa välkommen, och gruppen säger de fyra samtalsreglerna. I samtal 1 visar du först talpinnen, läser reglerna på kortet Våra samtalsregler och frågar för varje regel hur det ser ut och låter. Sedan säger du ett du-⁠budskap och ett jag-⁠budskap, så att eleverna hör skillnaden. Säg varje gång att det ni berättar stannar i rummet, men att du inte kan lova att hålla tyst om någon far illa. Från samtal 2 läser ni sedan upp förra överenskommelsen på bladet, och du säger kort vad de vuxna har sett.
+      vad: Hälsa välkommen, och gruppen säger de fyra samtalsreglerna. I samtal 1 visar du först talpinnen, läser reglerna på kortet Våra samtalsregler och frågar för varje regel hur det ser ut och låter. Sedan säger du ett du-⁠budskap och ett jag-⁠budskap, så att eleverna hör skillnaden. Säg varje gång att det ni berättar stannar i rummet, men att du inte kan lova att hålla tyst om någon far illa. Från samtal 2 läser ni sedan upp förra överenskommelsen på bladet Vår överenskommelse, och du säger kort vad de vuxna har sett.
     - tid: 4–7 min
       fas: Rundan
       vad: Säg rundans mening, som står i tabellen Tre samtal, och gör den färdig själv först. I samtal 1 läser du också startorden på kortet Så kan du säga högt. Håll ditt svar kort. Den som står över får frågan igen när varvet är klart.
@@ -410,19 +410,27 @@ uppfoljning:
     - nar: Före samtal 1
       tid: "före"
       vad: "Titta på gruppen under en rast, och räkna bråken, sänkningarna och hur ofta någon hamnar utanför. Fråga varje elev för sig: ”Hur bra fungerar det i gruppen, från 0 till 10?”"
+      resultat: "elevens siffra från 0 till 10 på frågan hur bra det fungerar i gruppen"
     - nar: I varje samtal
       tid: "i passet"
       vad: Skriv vilka jag-⁠budskap och du-⁠budskap du hörde, vem som avbröt och vem som stod över. Fråga de vuxna runt gruppen vad de har sett.
     - nar: Efter samtal 3
       tid: "pass 3"
       vad: Räkna samma saker under en rast, och fråga varje elev igen. Jämför med det du fick före samtal 1, och bestäm om gruppen behöver ett eller två samtal till.
+      resultat: "elevens siffra från 0 till 10 på frågan hur bra det fungerar i gruppen"
     - nar: Efter det sista samtalet
       tid: "sista passet efter pass 3"
       vad: Blir serien längre än tre samtal, räknar du samma saker under en rast efter det sista samtalet och frågar varje elev igen. Jämför med det du fick före samtal 1 och efter samtal 3.
+      resultat: "elevens siffra från 0 till 10 på frågan hur bra det fungerar i gruppen"
     - nar: Fyra veckor efter sista samtalet
       tid: "efter 4 veckor"
       vad: Fråga gruppen om överenskommelsen håller och om de använder startorden. Fråga också varje elev för sig hur bra det fungerar i gruppen, från 0 till 10. Har det blivit sämre sedan det sista samtalet, påminn gruppen om överenskommelsen. Är det som före samtal 1, ta upp gruppen med elevhälsan.
+      resultat: "elevens siffra från 0 till 10 på frågan hur bra det fungerar i gruppen"
 plan:
+  # Det som skrivs ut före samtal 1 utöver checklistan: kortet Så kan du säga också till de vuxna runt gruppen, ett nytt
+  # blad Vår överenskommelse till varje samtal och kortet Samtalsteknikerna, ur ramarnas text (K-596).
+  fore:
+    - "Skriv ut korten på A4, en uppsättning till varje grupp, och laminera dem gärna. Skriv också ut kortet Så kan du säga till varje elevs bänk, till väggen i klassrummet och till de vuxna runt gruppen, och ett extra kort Våra samtalsregler till väggen. Till varje samtal skriver du ut ett nytt blad Vår överenskommelse, och till varje elev de två lapparna hem. Kortet Samtalsteknikerna är bara för dig."
   utan:
     - "Schemat har tiderna från och med samtal 2, och tiderna för samtal 1 står direkt under det."
   passen:
@@ -449,6 +457,8 @@ plan:
   justera:
     - "Går det åt rätt håll men inte för alla, eller håller överenskommelsen inte än, boka ett samtal till. Boka två när gruppen behöver ändra överenskommelsen och pröva den igen."
     - "Är siffrorna och det du räknar på rasten som före samtal 1 eller sämre, efter samtal 3 eller efter det sista samtalet, avsluta serien och ta upp gruppen med elevhälsan."
+  # När ett samtal tas en gång till: ett avbrutet samtal bokas om, ur tabellen Om något händer i gruppen (K-596).
+  upprepa: "Kommer gruppen in upprörd eller blir det inte lugnt, avbryt samtalet och boka en ny tid."
   # Beslutet efter samtal 3 vid utvärderingen (Rimligheten 2026-10-26: metodens regel stod inte där läraren beslutar;
   # passgenomgången samma kväll: rasten, varje elevs siffra, ett eller två samtal till och det som har blivit sämre).
   utvardering:

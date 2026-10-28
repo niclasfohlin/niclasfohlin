@@ -36,7 +36,7 @@ material:
   - pappersremsor och gem
   - veckans texter
 
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -209,7 +209,7 @@ tabeller:
       - - "Skriv\n24–⁠48 min"
         - "Eleven skriver, och den som inte hinner dikterar slutet för dig."
       - - "Läsaren gör\n48–⁠56 min"
-        - "Kamraten gör det som står, ett steg i taget, och eleven sätter en prick där kamraten stannar."
+        - "Kamraten gör det som står, ett steg i taget, och eleven sätter en prick där kamraten stannar. Gäller texten en lek, säger kamraten steg för steg vad hen skulle göra."
       - - "Diagrammet\n56–⁠60 min"
         - "Eleven räknar sin text och fyller i stapeln Efter kursen i diagrammet Mina texter."
   - rubrik: Det du ser, och det du gör
@@ -368,9 +368,9 @@ plan:
   # Planen visas när den har klarat Rimligheten (K-553).
   # Passets delar står i veckans fält Pass N, en rad per del, och planen läser dem där (sajtens K-553, 2026-10-27).
   veckansPass: "Till läraren: veckorna"
-  # Valet av årskurs (sajtens K-569, 2026-10-27): det som bara gäller en årskurs börjar med ”I åk 4–5” eller ”I åk 6–7”,
-  # och planen visar det bara i den årskursen. Det som är lika står utan märke. Stödet är texten till tabellen Åk 4–5 och
-  # åk 6–7, och passen har samma delar och minuter i båda årskurserna, så inget fält heter ”Pass N i åk 6–7”.
+  # Valet av årskurs (sajtens K-569, 2026-10-27): det som bara gäller en årskurs börjar med ”I åk 4–5” eller ”I åk 6–7”,
+  # och planen visar det bara i den årskursen. Det som är lika står utan märke. Stödet är texten till tabellen Åk 4–5 och
+  # åk 6–7, och passen har samma delar och minuter i båda årskurserna, så inget fält heter ”Pass N i åk 6–7”.
   versionsval:
     rubrik: Årskurs
     text: "Kursen är densamma i alla årskurser. Eleverna i åk 6–⁠7 använder fler ord för var, kan välja spel med fler regler och sätter underrubriker redan från vecka 4. Går eleverna i olika årskurser, väljer du den som de flesta går i."
@@ -392,7 +392,7 @@ plan:
     # (K-585, UPPDRAG-30): kortet Läsarens frågor ett per par i pass 2 och ett per elev i pass 8, kraven i pass 7, det som
     # ordnas före ett pass i Efter passet i passet före (versionerna, texten på dator, läsaren före pass 7 och kvällen före
     # pass 12), raden om klassläraren efter pass 6, och metodens meningar om paret över och trion där paren arbetar. Valet
-    # av årskurs (K-569): orden för var i åk 6–7 i pass 6, spelen och underrubrikerna i åk 6–7 i pass 7.
+    # av årskurs (K-569): orden för var i åk 6–7 i pass 6, spelen och underrubrikerna i åk 6–7 i pass 7.
     - nar: pass 1
       kort: "Läsaren"
       ur: { tabell: "De sex veckorna", rad: "Vecka 1", kolumner: ["Det som händer", "Eleven skriver", "Texten går till"] }
@@ -422,6 +422,14 @@ plan:
     - nar: pass 3
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    # Vad tavlans tre rader är, ur tidsschemats text, som planen inte visar när passen står på veckans sida (K-596).
+    - nar: pass 3
+      del: Före passet
+      text: "Tavlans tre rader är frågorna om läsaren: Vem läser? Vad vill vi? När får vi svar? Vid den första skriver du vem som läser. Vid den andra skriver du vad läsaren ska kunna efteråt, som också står på den första lappen. Vid den tredje skriver du när läsaren svarar: på Flygdagen, när lådan kommer tillbaka, när läsaren av parets spel har spelat eller på Spelstunden."
+    # Vem som har kortet Ord för var och när, ur Kortet Läsarens frågor, Så gör du (K-596).
+    - nar: pass 3
+      del: Säg
+      text: "Den som ser på i Säg får kortet Ord för var och när, och i Skriv har den som skriver det."
     - nar: pass 3
       del: Säg
       text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. Så blir det i varje pass när gruppen har två, tre, sex, sju eller tio elever. I ett par med tre elever säger en elev stegen i pass 3 och 7, och de två andra i pass 4 och 8."
@@ -446,6 +454,10 @@ plan:
     - nar: pass 5
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    # Veckans texter att skriva ut i vecka 3, 4 och 6, ur tabellen Materialet du behöver (K-596).
+    - nar: pass 5
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Veckans texter", kolumner: ["När och hur ni använder det", "Hur många"] }
     - nar: pass 5
       del: Efter passet
       text: "Läsaren av parets spel är en vuxen eller en kompis på skolan som inte kan spelet, och hen spelar efter elevens text mellan pass 8 och pass 9 (Spelet, vecka 4)."
@@ -455,6 +467,12 @@ plan:
     - nar: pass 6
       del: Före passet
       text: "Lägg fram två remsor, en sax och två gem vid varje elevs plats, och din helikopter från pass 4 under texten."
+    # Kortet Ord för var och när ligger framme när eleverna skriver, ur Två texter, vecka 3, Efteråt (K-596). Raden står
+    # sist i delen, eftersom texterna läggs undan när Visa och pröva är gjord (K-596, sist).
+    - nar: pass 6
+      del: Visa och pröva
+      sist: true
+      text: "Lägg undan texterna innan eleverna skriver, men låt kortet Ord för var och när ligga framme."
     - nar: pass 6
       del: Visa och pröva
       text: "I åk 6–⁠7 övar ni dessutom mått i centimeter och orden lodrät och vågrät i pass 6."
@@ -483,6 +501,10 @@ plan:
     - nar: pass 7
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    # Veckans texter att skriva ut, som i pass 5 (K-596).
+    - nar: pass 7
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Veckans texter", kolumner: ["När och hur ni använder det", "Hur många"] }
     - nar: pass 7
       del: Tänk och planera
       text: "Parets spel spelas med en kortlek, en tärning eller papper och penna. I åk 6–⁠7 kan paret också välja ett spel med poäng och fler regler."
@@ -520,12 +542,17 @@ plan:
     - nar: pass 9
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    # Underrubrikerna i åk 6–7 också i den egna texten som läsarna spelar efter på Spelstunden (K-596).
+    - nar: pass 9
+      del: Skriv
+      text: "I åk 6–⁠7 sätter eleven underrubriker från vecka 4, som ”Det här behöver du” och ”Så spelar ni”, så att läsaren hittar i texten på Spelstunden."
     - nar: pass 10
       kort: "Egen text"
       ur: { tabell: "De sex veckorna", rad: "Vecka 5", kolumner: ["Det som händer", "Eleven skriver", "Texten går till"] }
+    # Bara meningen ur Inbjudan, vecka 5, Så gör du, så att två länkar i rad inte leder till samma sida (K-596).
     - nar: pass 10
       del: Före passet
-      text: "Skriv ut en inbjudan per elev. Den står under Inbjudan, vecka 5: Spelstunden."
+      text: "Skriv ut en inbjudan per elev."
     - nar: pass 10
       text: "Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. Så blir det i varje pass när gruppen har två, tre, sex, sju eller tio elever."
     - nar: pass 10
@@ -544,6 +571,14 @@ plan:
     - nar: pass 11
       del: Före passet
       text: "Skriv ut bladet Det jag hör till varje vecka i kursen, före pass 1, 3, 5, 7, 9 och 11."
+    # Veckans texter att skriva ut, som i pass 5 (K-596).
+    - nar: pass 11
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Veckans texter", kolumner: ["När och hur ni använder det", "Hur många"] }
+    # Det andra bladet Rita efter min text, med radens namn ur tabellens första kolumn (K-596).
+    - nar: pass 11
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Bladet Rita efter min text", kolumner: ["Material", "Hur många"] }
     - nar: pass 11
       del: Efter passet
       text: "Har elevens egen text många tillägg, skriver du av den på dator kvällen före pass 12."
@@ -570,11 +605,14 @@ plan:
   # klassen inte kan komma i pass 2, ur De sex veckorna, och det som ska ordnas till pass 5, 7 och 12, ur Till läraren: veckorna.
   # Med valet av årskurs (K-569) säger den första raden meningen om en parallellklass i stället för tabellen. Regeln är
   # densamma i båda årskurserna, så meningen har inget märke (språkrundan 2026-10-27, granskare I).
+  # Schemat tar högst fyra rader, så läsarna står i den första och materialet till passen i den sista. Hur varje elev
+  # skriver, ur Materialet du behöver, och remsorna och måtten till flygarna, ur Till läraren: flygarna och Materialet
+  # du behöver (K-596).
   fore:
-    - "Läsarna går i en klass där ingen i gruppen går, helst en klass ett år yngre. Har skolan ingen yngre klass, tar ni en parallellklass."
-    - "Be läsarnas lärare om fyra saker före pass 2, helst en vecka före kursen, och ge hen bladet Till läraren i läsarnas klass. Kan läsarnas klass inte komma i pass 2, träffar eleven sin läsare på en rast före pass 3, med bladet Läsaren."
+    - "Läsarna går i en klass där ingen i gruppen går, helst en klass ett år yngre. Har skolan ingen yngre klass, tar ni en parallellklass. Be läsarnas lärare om fyra saker före pass 2, helst en vecka före kursen, och ge hen bladet Till läraren i läsarnas klass. Kan läsarnas klass inte komma i pass 2, träffar eleven sin läsare på en rast före pass 3, med bladet Läsaren."
     - "Mötet börjar när fem minuter av pass 2 har gått, Flygdagen när 35 minuter av pass 6 har gått och Spelstunden när fem minuter av pass 12 har gått."
-    - "Till pass 5 behöver du en låda, till pass 7 en kortlek per par och några tärningar, och till pass 12 ett kuvert per elev."
+    - "Bestäm före kursen, med klassläraren, hur varje elev skriver."
+    - "Klipp remsor till helikoptrarna före pass 2, ungefär åtta per elev, och ta fram gem och en sax per elev. Måtten står under Till läraren: flygarna. Till pass 5 behöver du en låda, till pass 7 en kortlek per par och några tärningar, och till pass 12 ett kuvert per elev."
   # Veckorna har bokade besök och mätningar, så planen har ingen knapp Upprepa veckan (sajtens K-586).
   utanUpprepa: true
   # Beslutet efter kursen väntar på den nya texten 4–6 veckor efter kursen (sajtens K-586).
@@ -600,7 +638,7 @@ checklista:
     - "Boka läsarnas klass, helst en vecka före kursen."
     - "Bestäm vilka som ska vara med, och sätt ihop paren."
     - "Skriv ut Huset, Båten, Det jag hör och Rita efter min text (bladet med Till och Från) till pass 1."
-    - "Gör flygarna själv, och öva högt på din visning."
+    - "Gör flygarna själv, och öva högt på din visning med manuset Visningen, vecka 2."
     - "Klipp remsor, och ta fram pärmar, gem, sugrör och tejp."
     - "Läs Texttyper i grupp, och be en kollega vara reservläsare."
 

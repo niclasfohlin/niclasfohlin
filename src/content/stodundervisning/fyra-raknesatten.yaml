@@ -27,7 +27,7 @@ material:
   - multilink
   - räknemattan och talrutan
   - övningsblad
-uppdaterad: 2026-10-27
+uppdaterad: 2026-10-28
 publicerad: 2026-10-04
 relaterade:
   - antalsuppfattning-i-grupp
@@ -76,7 +76,7 @@ tidsschema:
       vad: Välj passets tal för gruppens nivå i tabellen Talen och bladen i veckorna, och räkna dem själv medan du säger handgreppen högt. Lägg fram veckans material ur tabellen Materialet du behöver, veckans blad och elevernas Mina lärdomar.
     - tid: 0–8 min
       fas: Uppvärmningen
-      vad: Låt en elev läsa förra lärdomen och gör en uppgift som visar den. I det första passet bygger ni i stället ett tal ur kartläggningen. Säg ett tal som alla lägger med sifferkorten, drar isär och bygger, och låt dem växla. I vecka 5–8 bygger de med multilink, och korten är med i vecka 6–7. Ge sedan fyra till sex talfakta muntligt, låt eleverna tänka tyst och skriv en elevs tanke som en uträkning. Den dag ni tar upp läxan gör ni det i stället för talfakta.
+      vad: Låt en elev läsa förra lärdomen och gör en uppgift som visar den. I kursens första pass bygger ni i stället ett tal ur kartläggningen. Säg ett tal som alla lägger med sifferkorten, drar isär och bygger, och låt dem växla. I vecka 5–8 bygger de med multilink, och korten är med i vecka 6–7. Ge sedan fyra till sex talfakta muntligt, låt eleverna tänka tyst och skriv en elevs tanke som en uträkning. Den dag ni tar upp läxan gör ni det i stället för talfakta.
     - tid: 8–18 min
       fas: Genomgången
       vad: Berätta passets första uppgift som en kort händelse, gör ett överslag och räkna sedan uppgiften framför eleverna med materialet och skriften bredvid. Säg allt du gör och fråga gruppen under tiden. Visa sist veckans vanliga fel. I ett tredje pass ligger materialet kvar i asken, och du säger vad som händer i materialet medan du skriver.
@@ -97,7 +97,7 @@ steg:
   rader:
     - namn: Uppvärmningen
       fraga: Vad lärde vi oss förra gången?
-      gor: Låt en elev läsa förra lärdomen ur Mina lärdomar och gör en uppgift som visar den. I det första passet finns ingen lärdom än, och då bygger ni ett tal ur kartläggningen. Säg sedan ett tal som eleverna lägger med sifferkorten, drar isär och bygger, och låt dem växla. Ge fyra till sex talfakta muntligt i dagens par av räknesätt. Eleverna tänker tyst, och du frågar hur de tänkte och skriver tanken som en uträkning, som 7 + 3 + 2 = 12. I vecka 1–4 är två av talfakta uppdelningar som eleverna behöver till dagens hopp, som ”Åtta är tre och hur mycket?” och ”77, hur långt till 80?” I vecka 5–8 bygger eleverna talet med multilink och tar sifferkorten bara i vecka 6–7, och talfakta tar du ur tabellerna de kan. Tanken ritar du som en delad rektangel med uträkningen bredvid, som 7 · 6 = 5 · 6 + 2 · 6.
+      gor: Låt en elev läsa förra lärdomen ur Mina lärdomar och gör en uppgift som visar den. I kursens första pass finns ingen lärdom än, och då bygger ni ett tal ur kartläggningen. Säg sedan ett tal som eleverna lägger med sifferkorten, drar isär och bygger, och låt dem växla. Ge fyra till sex talfakta muntligt i dagens par av räknesätt. Eleverna tänker tyst, och du frågar hur de tänkte och skriver tanken som en uträkning, som 7 + 3 + 2 = 12. I vecka 1–4 är två av talfakta uppdelningar som eleverna behöver till dagens hopp, som ”Åtta är tre och hur mycket?” och ”77, hur långt till 80?” I vecka 5–8 bygger eleverna talet med multilink och tar sifferkorten bara i vecka 6–7, och talfakta tar du ur tabellerna de kan. Tanken ritar du som en delad rektangel med uträkningen bredvid, som 7 · 6 = 5 · 6 + 2 · 6.
       fraser:
         - Läs förra lärdomen. Kan du visa den med materialet?
         - Lägg 52 med sifferkorten och dra isär. Vad är femman värd?
@@ -118,20 +118,20 @@ steg:
       fraga: Kan vi räkna det åt andra hållet tillsammans?
       gor: Säg först hela händelsen med alla tre talen, som ”Ines hade 57 kronor, fick 28 och har nu 85”. Dölj sedan ett tal, som ”Ines har 85 kronor och fick nyss 28. Hur mycket hade hon från början?”, och fråga om ni söker helheten eller en del. Räkna sedan samma tal åt andra hållet med hela gruppen, ett handgrepp i taget. I paret bygger eller ritar den ena och den andra skriver, och till nästa uppgift med samma tal byter de, så att båda har byggt. Med ett udda antal arbetar tre tillsammans och turas om. Vänta tills alla är klara innan nästa handgrepp, och låt alla svara på tavlan eller i kör. Gå vidare till Bladet när varje elev gör nästa handgrepp rätt med högst en påminnelse och kan säga varför, som varför ni växlar eller vad raderna i rektangeln betyder.
       fraser:
+        - Samma händelse åt andra hållet. Söker vi helheten eller en del?
         - Vi räknar åt andra hållet. Vad bygger vi?
         - Räcker entalen?
         - Skrivaren, vad skriver du nu?
         - Lägg det ni tar bort på den nedre raden. Vilket tal blir raderna tillsammans?
-        - Samma händelse åt andra hållet. Söker vi helheten eller en del?
     - namn: Bladet
       fraga: Kan du göra det själv?
       gor: Eleven räknar vidare på bladet, med materialet på bordet, och en uppgift på varje blad räknar eleven också åt andra hållet. Gå runt, stanna högst en halv minut hos varje elev, lyssna och ställ klargörande frågor. Fråga vad eleven gör och ser, och har eleven räknat fel, låt hen hitta felet själv. Den som fastnar medan du är hos någon annan markerar var hen fastnade och visar sitt senaste säkra steg med materialet. Gör flera samma fel, stoppar du arbetet och gör en uppgift till med gruppen.
       fraser:
+        - Stämmer det? Räkna åt andra hållet.
         - Var behöver du växla? Hur ser du det innan du räknar?
         - Visa med materialet vad du gjorde.
         - Vad betyder den lilla ettan?
         - Hur många tiotal är kvar nu?
-        - Stämmer det? Räkna åt andra hållet.
     - namn: Lärdomen
       fraga: Vad såg vi i dag?
       gor: Lägg de två uträkningarna med svaren bredvid varandra och fråga vilka tre tal som finns i båda och vilket som är helheten. I 57 + 28 = 85 sökte ni helheten och i 85 − 28 = 57 en del. I multiplikation och division är helheten alla kuberna, och de andra två talen är antalet rader och antalet i varje rad. En rest står med i båda, som i 83/4 = 20 rest 3 och 4 · 20 + 3 = 83. Paren säger en mening till varandra, och en elev säger den till gruppen. Skriv elevens mening på väggplanschen och gör den exakt med ämnets ord. Alla skriver lärdomen i Mina lärdomar, med egna ord eller som på planschen, och den som behöver ritar den eller säger den medan du skriver. Sist säger du vad nästa pass handlar om.
@@ -413,16 +413,19 @@ uppfoljning:
     - nar: Före kursen
       tid: "före"
       perElev: 30
+      resultat: "nivå, antal rätt på bladet 0–8 och antal R+ i protokollet 0–6"
       vad: Kartläggningen. Eleven räknar åtta uppgifter på sin nivå och visar och förklarar sex uppgifter. Du skriver vad eleven gör och säger i lärarens protokoll.
     - nar: Efter varje pass
       tid: "varje pass"
       vad: Din notering och elevens lärdom i Mina lärdomar.
     - nar: Vecka 4
       tid: "vecka 4"
+      resultat: "rätt av tio i Bladet under veckan, också i den blandade repetitionen"
       vad: Den blandade repetitionen visar om addition och subtraktion sitter.
     - nar: Efter kursen
       tid: "efter"
       perElev: 30
+      resultat: "nivå, antal rätt på bladet 0–8 och antal R+ i protokollet 0–6"
       vad: Samma kartläggning veckan efter. Visa eleven skillnaden. I åk 7 stämmer du också av elevens eget mål. Skriv sedan nästa steg.
 
 plan:
@@ -447,6 +450,54 @@ plan:
     - nar: veckans tredje
       kort: "Befästa"
       text: "I ett tredje pass skriver eleverna med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
+    # Vilken av veckans tre uppgifter som är passets, före Välj passets tal (K-596).
+    - nar: veckans första
+      del: Före passet
+      text: "För varje vecka och nivå står passets första uppgift för pass 1, 2 och 3, i den ordningen, och gruppen räknar sedan samma tal åt andra hållet."
+    # Veckosidornas Pass 2 och Pass 3 i passets delar, så att det du visar står i planen (K-596).
+    - nar: veckans andra pass i vecka 1
+      del: Genomgången
+      text: "Visa 71 − 69 ur bladet och säg ”Talen ligger nära. Jag räknar upp från 69, ett till 70 och ett till 71. Det är två.”"
+    - nar: veckans andra pass i vecka 2
+      del: Genomgången
+      text: "Eleverna ritar talen med streck och prickar och ringar in tio prickar."
+    - nar: veckans andra pass i vecka 4
+      del: Genomgången
+      text: "Visa 701 − 698 på talraden och säg ”Talen ligger nära. Jag räknar upp från 698, två till 700 och en till. Det är tre.”"
+    - nar: veckans andra pass i vecka 4
+      del: Genomgången
+      text: "Läs sedan en jämförelse, ”Ellen är 152 cm och Omar 147 cm. Hur mycket längre är Ellen?” Säg att subtraktion också ger skillnaden mellan två tal, och räkna upp från 147, tre till 150 och två till 152. Ellen är fem cm längre."
+    - nar: veckans andra pass i vecka 4
+      del: Lärdomen
+      text: "I lärdomen lägger ni talraden och uppställningen för 701 − 698 bredvid varandra och frågar var det syns att talen ligger nära och vilket sätt som var kortast."
+    - nar: veckans tredje pass i vecka 4
+      text: "Eleverna räknar 1 004 − 368 på papper, och den som tvekar ritar tiobasen."
+    - nar: veckans andra pass i vecka 5
+      del: Genomgången
+      text: "Ni ritar rektangeln från hörnet vid de tjocka linjerna på talrutan, en ruta för varje kub, och skriver 24 i hörnrutan och de fyra uträkningarna bredvid. Rektanglarna kan bli gruppens multiplikationsruta på väggen."
+    - nar: veckans andra pass i vecka 6
+      del: Genomgången
+      text: "Rita förra passets rektangel på talrutan, en ruta för varje kub, med ett streck efter tjugo rutor i varje rad, och skriv 3 · 24 = 3 · 20 + 3 · 4 = 60 + 12 = 72."
+    - nar: veckans andra pass i vecka 6
+      del: Genomgången
+      text: "Rita sedan en tom rektangel utan rutor, med talen vid sidorna, och räkna åt andra hållet, ”Arean är 72 och ena sidan är 3. Vad kan jag lätt dela med tre? Sextio delat med tre är tjugo. Tolv är kvar, och tolv delat med tre är fyra. Den andra sidan är 24.”"
+    - nar: veckans andra pass i vecka 7
+      del: Genomgången
+      text: "Uppgiften är en division, 96/4, så att du visar kort division en gång till innan eleverna leder uträkningen."
+    - nar: veckans andra pass i vecka 8
+      del: Genomgången
+      text: "Visa 176/4 i den tomma rektangeln, 160 och 16, och i den korta formen, ”Ett hundratal räcker inte till fyra rader. Jag växlar det till tio tiotal, och med de sju blir det sjutton tiotal. Sjutton tiotal delat i fyra rader är fyra tiotal i varje rad, och ett tiotal blir över. Jag växlar det till tio ental, och med de sex blir det sexton. Sexton ental delat i fyra rader är fyra i varje rad.” Skriv 17¹6/4 = 44."
+    - nar: veckans andra pass i vecka 8
+      del: Genomgången
+      text: "Läs sedan tre textuppgifter och fråga vad varje tal står för, ”74 elever ska åka minibuss, och det får plats 8 i varje. Hur många bussar behövs?”, ”Du har 74 kronor, och en glass kostar 8 kronor. Hur många glassar kan du köpa?” och ”Ali har 24 kort. Sara har tre gånger så många. Hur många har Sara?”"
+    # Talrutan och de tomma talraderna inför vecka 4 och 5, så att de är utskrivna (K-596).
+    - nar: veckans första pass i vecka 4–5
+      del: Före passet
+      ur: { tabell: "Materialet du behöver", rad: "Talrutan och tomma talrader", kolumner: ["Material", "Per elev", "Var du hittar det", "När ni använder det"] }
+    # Kursintyget i sista passet, också när passet flyttas (K-596).
+    - nar: sista passet
+      del: Uppvärmningen
+      text: "I uppvärmningen räknar ni en addition och en subtraktion, och du delar ut kursintyget i sista passet."
     # Veckans uppgift står i Uppvärmningen, som på veckans sida (den stängda frågan 2026-10-26).
     - nar: veckans första pass i vecka 3
       del: Uppvärmningen
@@ -459,12 +510,19 @@ plan:
       text: "I vecka 8 räknar ni en addition och en subtraktion i uppvärmningen i varje pass, i stället för att bygga ett tal."
     - nar: vecka 5–8
       text: "I multiplikation och division frågar du efter raderna och antalet i varje rad, som i tabellen Så visar du de fyra räknesätten."
-      ur: { tabell: "Så visar du de fyra räknesätten", rad: "Multiplikation, 3 · 24", kolumner: ["Säg varje gång"] }
+      ur: { tabell: "Så visar du de fyra räknesätten", rad: "Multiplikation, 3 · 24", kolumner: ["Räknesätt", "Säg varje gång"] }
     - nar: vecka 5–8
-      ur: { tabell: "Så visar du de fyra räknesätten", rad: "Division, 72/3", kolumner: ["Säg varje gång"] }
+      ur: { tabell: "Så visar du de fyra räknesätten", rad: "Division, 72/3", kolumner: ["Räknesätt", "Säg varje gång"] }
   fore:
     - "Före kursen tar du bladet för den nivå du tror passar, och eleven räknar det på egen hand, i rutnätet och utan material. Räknar eleven färre än fyra rätt, tar hen också bladet för nivån under, och med sju eller åtta rätt bladet för nivån över. Räknar eleven färre än fyra rätt på Bas, eller ett och ett också inom tjugo, börjar hen i Antalsuppfattning i grupp."
+    # Regeln när eleverna hamnar på två nivåer, ur kartläggningens Så gör du (K-596).
+    - "Hamnar eleverna på två nivåer, tar gruppen den lägre. Den elev som hamnade på den högre nivån räknar bladen för sin nivå i Bladet. Kan eleven växla men inte förklara gånger och delat, väljer du nivån efter de fyra sista uppgifterna på bladet, multiplikationen och divisionen."
     - "Berätta för vårdnadshavarna om kursen innan den första läxan går hem."
+    # Materialet per elev, med en länk till tabellen, ur Var hittar du materialet och talen? (K-596).
+    - "Materialet och var du hittar det står i tabellen Materialet du behöver."
+  # Metodens sätt att justera vid avstämningen i vecka 4, ur inledningen (K-596).
+  justera:
+    - "Ett tredje pass befäster det som ännu inte sitter."
   utvardering:
     - "Räknar eleven sju eller åtta rätt på bladet efter kursen och har R+ på minst fyra av de sex uppgifterna i protokollet, är eleven klar med kursen."
     - "Räknar eleven färre än fyra rätt, eller visar protokollet ingen skillnad mot före kursen, tar du upp det med elevhälsan. På Bas kan eleven börja i Antalsuppfattning i grupp."
