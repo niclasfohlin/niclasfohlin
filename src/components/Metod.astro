@@ -323,7 +323,9 @@ const meny = [
   ...avsnitt.flatMap((a) => [a, ...menyTabeller.filter((m) => m.efter === a.id).map((m) => m.post), ...(a.id === 'ramar' ? menyLektioner : [])]),
 ];
 ---
-<div class="metod-modell">
+<div class="metod-modell" data-omrade={d.omrade}>
+  {/* Ämnet på modellen ger metodens sida ämnets färg, i rutan I korthet och var formen vill ha den (global.css under
+      Områdenas färg, K-617). Artikeln .metod står i sidan och känner igen ämnet här. */}
   {/* Menyn står när sidan har fler än två avsnitt, och alltid när metoden har en central sak, som står överst i den
       (granskningen 2026-10-14), eller ett lektionskort, som står bredvid Öppna lathunden (Niclas 2026-10-17); då står
       avsnitten bara när de är fler än två. */}

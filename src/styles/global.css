@@ -56,6 +56,16 @@
 @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/boksida/Cinzel-dokument.ttf') format('truetype'); }
 @font-face { font-family: 'Cinzel Decorative'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/boksida/CinzelDecorative-dokument.ttf') format('truetype'); }
 :root { --bok-ram: #4b3a2f; --bok-rod: #8c2a1e; --bok-text: #2b2622; --bok-titel: #3a2d24; --bok-not: #8a8177; --bok-skiljare: #b9a894; --bok-not-skarm: #645c53; }
+/* Formspråket (K-617, Niclas 2026-10-28: "Tycker också C för metoderna och D för texterna"): metoderna som pass i ett
+   veckoschema, med färgblock, stora tunga rubriker och högre knappar, och texterna i antikva. Variablerna står här och inte
+   i det första :root-blocket, som delningskortens kontrollsumma omfattar: en ändring där ritar om alla kort. Antikvan är
+   telefonens egen, Charter i iPhone och Noto Serif i Android, så inget typsnitt hämtas. Den bär författarens röst, och
+   metoderna, metodbanken, Planera och formulären står kvar i sans. Etiketten är de små rubrikerna över fält och rutor, i
+   vanlig skrift där de förut stod i versaler med spärrning. */
+:root {
+  --typsnitt-antikva: Charter, 'Iowan Old Style', 'Sitka Text', Cambria, 'Noto Serif', Georgia, serif;
+  --etikett: 600 0.875rem/1.3 var(--typsnitt-ui);
+}
 
 
 * { box-sizing: border-box; }
@@ -73,11 +83,16 @@ body {
 
 a { color: inherit; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; }
 a:hover { color: var(--farg-accent); }
+/* Fokus är en ram på 3 punkter i accenten, vit i sidhuvudet och på färgade ytor (K-617). En ruta med egen regel nedan
+   ändrar bara det som skiljer, som en ram inuti rutan. */
+:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
 
 h1, h2, h3 { font-family: var(--typsnitt-rubrik); font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; margin: 0 0 0.5em; overflow-wrap: anywhere; }
 h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; }
 h2 { font-size: clamp(1.4rem, 3vw, 1.75rem); }
 h3 { font-size: 1.15rem; }
+/* Inget ensamt ord sist i en rubrik på skärmen (K-617). Utskriften behåller sina rader, som A4-sidornas mått räknar med. */
+@media screen { h1, h2, h3 { text-wrap: balance; } }
 
 .hopp-lank {
   position: absolute; left: -999px; top: 0;
@@ -93,7 +108,9 @@ h3 { font-size: 1.15rem; }
 
 /* Mörkt sidhuvud över hela bredden: skuggan fyller ut utanför den centrerade ytan, clip-path släpper fram den. */
 .sidhuvud { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 2rem; padding-top: 0.85rem; padding-bottom: 0.85rem; font-family: var(--typsnitt-ui); background: var(--farg-mork); color: #fff; box-shadow: 0 0 0 100vmax var(--farg-mork); clip-path: inset(0 -100vmax); }
-.sidhuvud .namn { font-weight: 800; text-decoration: none; font-size: 1.2rem; letter-spacing: -0.01em; color: #fff; }
+/* Namnet i antikvan, författarens röst, på varje sida (K-617). */
+.sidhuvud .namn { font-family: var(--typsnitt-antikva); font-weight: 700; text-decoration: none; font-size: 1.4rem; letter-spacing: -0.01em; color: #fff; }
+.sidhuvud :focus-visible { outline-color: #fff; }
 .sidhuvud nav { display: flex; flex-wrap: wrap; gap: 0.25rem; }
 .sidhuvud nav a { text-decoration: none; color: var(--farg-mork-text); padding: 0.45rem 0.85rem; border-radius: 6px; font-weight: 500; }
 .sidhuvud nav a:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
@@ -106,8 +123,11 @@ h3 { font-size: 1.15rem; }
 /* Startsidans huvud: porträtt, rad, rubrik och ingång. */
 .hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem 2rem; align-items: center; margin: 1rem 0 0; max-width: 52rem; }
 .hero .portratt-rund { width: 8rem; height: 8rem; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--farg-yta); box-shadow: 0 0 0 1px var(--farg-kant); }
-.hero h1 { font-size: clamp(1.9rem, 4.5vw, 2.9rem); margin-bottom: 0.4em; }
+/* Rubriken och ingressen i antikvan (K-617). Raden över rubriken och länkraden står kvar i sans. */
+.hero h1 { font-family: var(--typsnitt-antikva); font-size: clamp(2rem, 7.6vw, 3.35rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 0.35em; }
 .hero p { margin: 0 0 0.75em; }
+.hero p:not(.meta, .lankrad) { font-family: var(--typsnitt-antikva); font-size: 1.12rem; line-height: 1.55; }
+@media (min-width: 40rem) { .hero p:not(.meta, .lankrad) { font-size: 1.2rem; } }
 
 /* Uppmaningen att prenumerera, längst ner på startsidan. */
 .rop { background: var(--farg-accent-ljus); border-radius: var(--radie); padding: 1.5rem 1.5rem 1.25rem; max-width: 42rem; }
@@ -117,12 +137,16 @@ h3 { font-size: 1.15rem; }
 .knapp:hover { color: #fff; background: var(--farg-accent-mork); }
 /* En knapp som är en <button> (Skriv ut alla tre sidorna på en enhets sida) får annars webbläsarens kant och mindre text. */
 button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer; }
+/* På metodens sida, i Planera och i metodbanken är knapparna högre och fastare, 48 punkter (K-617, prov C). Sidorna känns
+   igen på metodens artikel, planen och metodbankens yta. :where räknar inte sidorna i regelns styrka, så att knapparnas
+   egna regler längre ned gäller. De små knapparna står kvar. */
+:where(.metod, .plan, .innehall:has(> .mb-yta)) .knapp:not(.liten) { min-height: 3rem; padding-inline: 1.25rem; border-radius: 10px; font-weight: 700; }
 
 /* Om-sidan: porträtt bredvid ingressen, sedan tabeller för bakgrund och utbildning. */
 .om-huvud { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem 2.5rem; align-items: end; margin-bottom: 2rem; max-width: var(--matt-bredd); }
 .om-huvud .portratt { width: 100%; max-width: 14rem; height: auto; border-radius: var(--radie); }
 .om-huvud h1 { font-size: clamp(2rem, 5vw, 3rem); }
-.om-huvud .ingress { font-size: 1.2rem; line-height: 1.5; margin: 0; max-width: var(--matt-text); }
+.om-huvud .ingress { font-family: var(--typsnitt-antikva); font-size: 1.28rem; line-height: 1.45; margin: 0; max-width: var(--matt-text); }
 .cv { width: 100%; border-collapse: collapse; margin: 0 0 1.5rem; font-size: 1rem; }
 .cv th, .cv td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem 0.6rem 0; border-top: 1px solid var(--farg-kant); }
 .cv th { width: 6.5rem; font-family: var(--typsnitt-ui); font-weight: 600; white-space: nowrap; color: var(--farg-text-svag); }
@@ -130,7 +154,8 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
   .om-huvud { grid-template-columns: 14rem minmax(0, 1fr); }
 }
 
-.arsavsnitt h2 { font-family: var(--typsnitt-ui); font-size: 1rem; color: var(--farg-text-svag); letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 1rem; }
+/* Året är en etikett över årets texter, i sans och vanlig skrift (K-617). */
+.arsavsnitt h2 { font: 700 1.1rem/1.3 var(--typsnitt-ui); color: var(--farg-text); margin: 0 0 1rem; }
 
 .sidfot { color: var(--farg-text-svag); font-family: var(--typsnitt-ui); font-size: 0.9rem; margin-top: 4rem; padding-top: 1.5rem; padding-bottom: 1.5rem; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); border-top: 1px solid var(--farg-kant); }
 .sidfot-rad { margin: 0 0 0.5em; }
@@ -140,6 +165,11 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
 .text p, .text ul, .text ol { margin: 0 0 1em; }
 
 .rutnat { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
+/* Rubrikerna över texter och böcker i antikvan (K-617, prov D): Artiklar och Böcker överst på sina sidor, startsidans
+   rubriker över texterna och böckerna och böckernas grupper. Sidorna har ingen egen klass, så rubriken känns igen på
+   korten under den: text- och bokkort, inte metodkort. Årens rubriker i artikelarkivet är etiketter och står i sans. */
+.innehall:has(> section > .rutnat > .kort:not(.metodkort)) > h1, .innehall > section:not(.arsavsnitt):has(> .rutnat > .kort:not(.metodkort)) > h2 { font-family: var(--typsnitt-antikva); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; }
+.innehall > section:not(.arsavsnitt):has(> .rutnat > .kort:not(.metodkort)) > h2 { font-size: clamp(1.6rem, 4vw, 2.1rem); }
 
 .kort {
   display: block;
@@ -149,9 +179,16 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
   padding: 1.25rem;
   text-decoration: none;
 }
-.kort:hover { border-color: var(--farg-accent); box-shadow: 0 2px 8px rgba(20, 32, 43, 0.08); }
+/* Text- och bokkorten vita med tunn kant och utan skugga, också vid pekaren, och titeln och ingressen i antikvan
+   (K-617, prov D). Metodkortet har sin egen form nedan. */
+.kort:hover { border-color: var(--farg-accent); }
 .kort h2, .kort h3 { margin-bottom: 0.35em; }
+/* Titeln växer med skärmen upp till 1,4 rem, så att långa ord som "speciallärarutbildningen" ryms på en rad i 320 punkter. */
+.kort h3 { font-size: clamp(1.15rem, 6vw, 1.4rem); line-height: 1.15; }
+.kort:not(.metodkort) h3 { font-family: var(--typsnitt-antikva); letter-spacing: -0.015em; }
+.kort:not(.metodkort) h3 a { text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 .kort p { margin: 0 0 0.75em; }
+.kort:not(.metodkort) > p:not(.meta) { font-family: var(--typsnitt-antikva); font-size: 1.04rem; line-height: 1.55; }
 
 .meta { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 
@@ -178,31 +215,47 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
   margin: 1.5rem 0;
 }
 .faktaruta dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem; margin: 0; }
-.faktaruta dt { font-weight: 600; color: var(--farg-accent); }
+.faktaruta dt { font-weight: 600; color: var(--farg-text-svag); }
 .faktaruta dd { margin: 0; }
-.faktaruta-etikett { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.75rem; }
+/* I korthet har ett fyllt huvud med vit text, i ämnets färg som metodkortets block (K-617, prov C). Färgen ärver rutan av
+   .metod (Områdenas färg nedan); utan ämne står huvudet i accenten. */
+.faktaruta-etikett { margin: -1rem -1.25rem 0.85rem; padding: 0.7rem 1.25rem; background: var(--amnefarg, var(--farg-accent)); color: #fff; font: 700 1rem/1.3 var(--typsnitt-ui); }
 
+/* Källan under krönikans ingress: en svag ton med kanten till vänster (K-617, prov D). */
 .kalla {
-  border-left: 3px solid var(--farg-accent);
+  border-left: 4px solid var(--farg-accent);
+  border-radius: 0 10px 10px 0;
   padding: 0.75rem 1rem;
   margin: 1.5rem 0;
   font-family: var(--typsnitt-ui);
   font-size: 0.95rem;
-  background: var(--farg-yta);
+  background: var(--farg-ton-svag);
 }
 
-/* Artikelsidan: rubrik, ingress och källa i huvudet, sedan hela texten med läsvänlig radlängd och luft. */
+/* Artikelsidan: rubrik, ingress och källa i huvudet, sedan hela texten med läsvänlig radlängd och luft. Rubriken, ingressen
+   och hela texten står i antikvan, som i en bok (K-617, prov D); källan och signaturen i sans. */
 .artikel { max-width: var(--matt-text); }
-.artikel-huvud h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); letter-spacing: -0.01em; margin-bottom: 0.5em; }
-.artikel .ingress { font-size: 1.25rem; line-height: 1.5; font-weight: 600; margin: 0 0 1rem; }
-.brod { font-size: 1.125rem; line-height: 1.75; }
+.artikel-huvud h1 { font-family: var(--typsnitt-antikva); font-size: clamp(1.85rem, 1rem + 4.4vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.07; margin-bottom: 0.5em; }
+.artikel .ingress { font-family: var(--typsnitt-antikva); font-size: 1.25rem; line-height: 1.45; margin: 0 0 1rem; }
+.brod { font-family: var(--typsnitt-antikva); font-size: 1.125rem; line-height: 1.7; }
+@media (min-width: 40rem) { .brod { font-size: 1.1875rem; } }
 .brod > p, .brod > ul, .brod > ol { margin: 0 0 1.25em; }
 .brod > ul, .brod > ol { padding-left: 1.4em; }
 .brod li { margin-bottom: 0.4em; }
-.brod h2 { font-size: 1.4rem; margin: 2.2em 0 0.6em; }
-.brod h3 { font-size: 1.15rem; margin: 1.8em 0 0.5em; }
-.brod blockquote { margin: 1.5em 0; padding: 0 0 0 1rem; border-left: 3px solid var(--farg-accent); color: var(--farg-text-svag); }
+.brod h2 { font-family: var(--typsnitt-antikva); font-size: 1.4rem; margin: 2.2em 0 0.6em; }
+.brod h3 { font-family: var(--typsnitt-antikva); font-size: 1.15rem; margin: 1.8em 0 0.5em; }
+.brod blockquote { margin: 1.5em 0; padding: 0 0 0 1rem; border-left: 3px solid var(--farg-accent); color: var(--farg-text-svag); font-style: italic; }
 .brod .signatur { font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 2em; }
+/* Lyftcitaten (K-617, Niclas 2026-10-28: "ett citat i förväg som bygger upp spänning i texten och bryter lite mot all text
+   innan. Som en hook"): en mening ur texten, som koden sätter före stycket där den står (src/pages/artiklar/[id].astro).
+   Fet kursiv antikva och stora svenska ” i båda ändar i en mjuk blågrå (Niclas: "Linje 2 med lite mindre skarp färg på
+   """). Linjen ovanför börjar vid tecknet och tonar bort åt höger, linjen under är tunn ("Under ser okej ut"). Tecknen står
+   på linjerna och bryter dem med sidans bakgrund bakom sig; de är text och väger inget. */
+.brod aside.lyftcitat { position: relative; margin: 3.4rem 0 4rem; padding: 2.1rem 0 2.2rem; border-bottom: 1px solid var(--farg-kant); background: linear-gradient(to right, #6f8098, transparent) top left / 100% 1.5px no-repeat; }
+.brod .lyftcitat p { margin: 0; font: italic 700 clamp(1.45rem, 1.05rem + 1.8vw, 1.95rem)/1.28 var(--typsnitt-antikva); letter-spacing: -0.01em; color: var(--farg-text); text-wrap: balance; }
+.brod .lyftcitat::before, .brod .lyftcitat::after { content: '\201D'; position: absolute; z-index: 1; height: 4.2rem; overflow: hidden; font: 700 7.5rem/1 var(--typsnitt-antikva); color: #d5dce5; background: var(--farg-bakgrund); }
+.brod .lyftcitat::before { top: -2.5rem; left: 0; padding-right: 0.45rem; }
+.brod .lyftcitat::after { right: 0; bottom: -3.5rem; padding-left: 0.45rem; }
 .artikel-fot { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--farg-kant); }
 .artikel-fot .taggar { margin-bottom: 1rem; }
 
@@ -215,15 +268,27 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
 .bok-kort .bok-omslag img { display: block; width: 6.5rem; height: auto; border: 1px solid var(--farg-kant); border-radius: 4px; }
 .bok-kort h3 { font-size: 1.15rem; overflow-wrap: anywhere; hyphens: auto; }
 .bok-kort .meta { margin-bottom: 0.35rem; }
-@media (max-width: 40rem) {
+/* I telefonen står omslaget bredvid året och titeln, och beskrivningen under i hela kortets bredd (K-617, prov D). Under
+   360 punkter står omslaget över titeln som förut, så att ett långt ord som "undervisningsgrupper:" ryms på en rad. */
+@media (max-width: 22.49rem) {
   .bok-kort { grid-template-columns: 1fr; }
   .bok-kort .bok-omslag img { width: 5.5rem; }
+}
+@media (min-width: 22.5rem) and (max-width: 40rem) {
+  .bok-kort { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr auto; column-gap: 1rem; row-gap: 0; }
+  .bok-kort > div { display: contents; }
+  .bok-kort .bok-omslag { grid-column: 1; grid-row: 1 / span 2; }
+  .bok-kort .bok-omslag img { width: 4.25rem; }
+  .bok-kort .meta { grid-column: 2; grid-row: 1; align-self: start; }
+  .bok-kort h3 { grid-column: 2; grid-row: 2; align-self: start; font-size: 1.05rem; }
+  .bok-kort p:not(.meta) { grid-column: 1 / -1; grid-row: 3; margin: 0.6rem 0 0; }
 }
 .bok { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem 2.5rem; align-items: start; max-width: var(--matt-bredd); }
 .bok-omslag-stor { max-width: 15rem; width: 100%; border-radius: 4px; }
 .bok-text { max-width: var(--matt-text); }
-.bok-text h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
-.bok-text .ingress { font-size: 1.2rem; line-height: 1.5; margin: 0 0 1rem; }
+/* Bokens titel och ingress i antikvan (K-617, prov D). */
+.bok-text h1 { font-family: var(--typsnitt-antikva); font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; }
+.bok-text .ingress { font-family: var(--typsnitt-antikva); font-size: 1.28rem; line-height: 1.45; margin: 0 0 1rem; }
 .bok-lankar { font-family: var(--typsnitt-ui); margin: 1.5rem 0; }
 @media (min-width: 52rem) {
   .bok { grid-template-columns: 15rem minmax(0, 1fr); }
@@ -334,36 +399,49 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 
 /* Metodbanken: korten och raden för att ladda ner flera metoder i en fil.
    Kortet: titel med ämnesmärke, faktaremsa (årskurs, grupp, pass, hur ofta), ingress, taggar, handlingar. */
-.metodkort .kort-topp { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
-/* Kortet: en svag ton och en kant upptill och till vänster i områdets färg, så att det ser lite upphöjt ut. Vid hovring,
-   fokus och tryck lyfts det ett par punkter och får en skugga i områdets färg nedåt höger, i stället för kanten runt om
-   som andra kort får. */
-.metodkort { background: color-mix(in srgb, var(--amnefarg) 4%, white); border: 1px solid color-mix(in srgb, var(--amnefarg) 22%, white); border-top: 3px solid var(--amnefarg); border-left: 3px solid var(--amnefarg); transition: transform 0.15s ease, box-shadow 0.15s ease; }
-.metodkort .kort-fakta { background: rgba(255, 255, 255, 0.8); }
-.metodkort:hover, .metodkort:focus-within, .metodkort:active { border-color: color-mix(in srgb, var(--amnefarg) 22%, white); border-top-color: var(--amnefarg); border-left-color: var(--amnefarg); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 color-mix(in srgb, var(--amnefarg) 30%, white), 0 8px 18px rgba(20, 32, 43, 0.1); }
-@media (prefers-reduced-motion: reduce) { .metodkort { transition: none; } .metodkort:hover, .metodkort:focus-within, .metodkort:active { transform: none; } }
-.metodkort .kort-topp h3 { margin: 0; }
-.amne { flex: none; font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.3rem 0.55rem; border-radius: 6px; margin-top: 0.15rem; background: var(--farg-accent-ljus); color: var(--farg-accent); }
+/* Kortet som ett pass i ett veckoschema (K-617, prov C; Niclas 2026-10-28: "Tycker också C för metoderna"): huvudet är ett
+   block i ämnets färg med titeln i vitt och ämnet i en vit ram, och kortet har en svag ton av ämnet. Vid pekare, fokus och
+   tryck får kortet en ram i ämnets färg och står stilla. Blocket ersätter kanten upptill och till vänster och det tonade
+   märket (K-464, 2026-10-19), och Niclas har fått veta det. */
+.metodkort { padding: 0 1.15rem 1.15rem; border: 0; overflow: hidden; background: color-mix(in srgb, var(--amnefarg) 6%, white); }
+.metodkort:hover, .metodkort:focus-within, .metodkort:active { box-shadow: 0 0 0 2px var(--amnefarg); }
+.metodkort .kort-topp { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 0.5rem 0.75rem; margin: 0 -1.15rem; padding: 1rem 1.15rem 1.05rem; background: var(--amnefarg); color: #fff; }
+.metodkort .kort-topp h3 { flex: 1 1 0; margin: 0; font-size: 1.2rem; line-height: 1.2; }
+/* Ryms inte titelns längsta ord bredvid ämnet, som Antalsuppfattning i 320 punkter, står ämnet under titeln i stället för
+   att ordet bryts mitt i. På en förstorad sida, smalare än 17 rem, bryts ordet hellre än att kortet klipper det. */
+@media (min-width: 17rem) { .metodkort .kort-topp h3 { min-width: min-content; overflow-wrap: break-word; } }
+.metodkort .kort-topp h3 a { color: #fff; text-decoration-color: rgba(255, 255, 255, 0.55); }
+.metodkort .kort-topp h3 a:hover { text-decoration-color: #fff; }
+.metodkort .kort-topp :focus-visible { outline-color: #fff; }
+.amne { flex: none; font-family: var(--typsnitt-ui); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.01em; padding: 0.3rem 0.55rem; border-radius: 6px; margin-top: 0.15rem; background: var(--farg-accent-ljus); color: var(--farg-accent); }
 /* Områdenas färg på metodkorten och etiketten (K-464, Niclas 2026-10-19: "Kan inte metoden ha en svag ton av ämnet den
-   har ... så att de särskiljer lite bättre", "Border uppe och vänster så de ser lite 3D ut och i färgen för ämnet", och om
-   etiketten "lite tydligare"). Etiketten med data-amne, på korten och i täckningskartan; delningskortens mall har sin egen. */
-.metodkort, .amne[data-amne] { --amnefarg: var(--farg-accent); }
+   har ... så att de särskiljer lite bättre", och om etiketten "lite tydligare"). Etiketten med data-amne, på korten och i
+   täckningskartan; delningskortens mall har sin egen. Metodens sida får ämnet till rutan I korthet (K-617): artikeln
+   .metod står i src/pages/stodundervisning/[id].astro, och ämnet står på modellen i Metod.astro, som artikeln känner igen. */
+.metodkort, .amne[data-amne], .metod { --amnefarg: var(--farg-accent); }
 .metodkort[data-omrade="Läsning"], .amne[data-amne="Läsning"] { --amnefarg: var(--farg-lasning); }
 .metodkort[data-omrade="Skrivning"], .amne[data-amne="Skrivning"] { --amnefarg: var(--farg-skrivning); }
 .metodkort[data-omrade="Socialt"], .amne[data-amne="Socialt"] { --amnefarg: var(--farg-socialt); }
+/* Egna regler, så att en webbläsare utan :has bara tappar dem och behåller kortens färger ovan. */
+.metod:has(.metod-modell[data-omrade="Läsning"]) { --amnefarg: var(--farg-lasning); }
+.metod:has(.metod-modell[data-omrade="Skrivning"]) { --amnefarg: var(--farg-skrivning); }
+.metod:has(.metod-modell[data-omrade="Socialt"]) { --amnefarg: var(--farg-socialt); }
 .amne[data-amne] { background: color-mix(in srgb, var(--amnefarg) 16%, white); color: var(--amnefarg); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amnefarg) 55%, white); }
-.kort-fakta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1rem; margin: 0.75rem 0 0.9rem; padding: 0.7rem 0.9rem; background: var(--farg-ton); border-radius: 8px; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
-.kort-fakta div { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
-.kort-fakta dt { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--farg-text-svag); }
-/* Rutans sex uppgifter i fast form (K-465) ryms på en rad var från 360 punkter: mindre luft i rutan på smala skärmar. */
-@media (max-width: 24rem) { .kort-fakta { padding: 0.6rem 0.7rem; gap: 0.5rem 0.75rem; } }
-.kort-fakta dd { margin: 0; font-weight: 600; }
+.metodkort .amne[data-amne] { background: none; color: #fff; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6); }
+/* Faktan som en rad i schemat, direkt under blocket och i kortets hela bredd: vita celler med en tunn linje i ämnets ton
+   emellan, och värdena i fet vikt (K-617, prov C). */
+.kort-fakta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0 -1.15rem 0.9rem; padding: 0 0 1px; background: color-mix(in srgb, var(--amnefarg) 22%, white); font-family: var(--typsnitt-ui); font-size: 0.9rem; }
+.kort-fakta div { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; padding: 0.4rem 1.15rem; background: #fff; }
+.kort-fakta dt { font: var(--etikett); font-size: 0.78rem; color: var(--farg-text-svag); }
+/* Rutans sex uppgifter i fast form (K-465) ryms på en rad var från 360 punkter: mindre luft i cellerna på smala skärmar. */
+@media (max-width: 24rem) { .kort-fakta div { padding-inline: 0.75rem; } }
+.kort-fakta dd { margin: 0; font-size: 1rem; font-weight: 700; }
 .metodkort .ingress { margin: 0 0 0.75rem; }
 .metodkort .kort-rad { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; align-items: center; }
 .metodkort .valj { display: none; }
 html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; cursor: pointer; }
 .metodkort .valj input { accent-color: var(--farg-accent); width: 1.1rem; height: 1.1rem; margin: 0; }
-.metodkort.vald { border-color: var(--amnefarg); box-shadow: 0 0 0 2px color-mix(in srgb, var(--amnefarg) 30%, white); }
+.metodkort.vald { box-shadow: 0 0 0 3px var(--amnefarg); }
 .samla { display: none; }
 html.js .samla {
   position: sticky; bottom: 0.75rem; z-index: 5;
@@ -400,8 +478,8 @@ html.js .mbf { display: block; font-family: var(--typsnitt-ui); margin: 1.5rem 0
 @media (min-width: 56rem) { .mbf-ruta, .mbf-ruta:nth-child(2n) { border-right: 1px solid var(--farg-kant); border-bottom: 0; } .mbf-ruta:last-child { border-right: 0; } }
 button.mbf-ruta { cursor: pointer; }
 button.mbf-ruta:hover { background: var(--farg-ton-svag); }
-button.mbf-ruta:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: -2px; }
-.mbf-namn { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--farg-text-svag); }
+button.mbf-ruta:focus-visible { outline-offset: -3px; }
+.mbf-namn { font: var(--etikett); color: var(--farg-text-svag); }
 .mbf-varde { font-size: 1rem; font-weight: 600; color: var(--farg-accent); overflow-wrap: break-word; hyphens: auto; }
 /* Det längsta värdet, Lektionsupplägg, ryms på en rad i en halv ruta också i 320 punkter; pilen bryts för sig. */
 @media (max-width: 22.5rem) { .mbf-ruta { padding: 0.5rem 0.65rem; } .mbf-varde { font-size: 0.92rem; } }
@@ -419,7 +497,7 @@ button.mbf-ruta:focus-visible { outline: 2px solid var(--farg-accent); outline-o
 .mbf-knapp:hover { border-color: var(--farg-accent); }
 .mbf-knapp:has(input:checked) { background: var(--farg-accent); border-color: var(--farg-accent); color: #fff; font-weight: 600; }
 .mbf-knapp:has(input:checked) small { color: #dce6f3; }
-.mbf-knapp:has(input:focus-visible) { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+.mbf-knapp:has(input:focus-visible) { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
 .mbf-knapp.noll { color: var(--farg-text-svag); border-style: dashed; cursor: default; opacity: 0.75; }
 .mbf-knapp.noll:hover { border-color: var(--farg-kant); }
 .mbf-knapp[data-amne="Läsning"]:not(:has(input:checked)) { border-color: color-mix(in srgb, var(--farg-lasning) 35%, white); }
@@ -427,7 +505,7 @@ button.mbf-ruta:focus-visible { outline: 2px solid var(--farg-accent); outline-o
 .mbf-knapp[data-amne="Socialt"]:not(:has(input:checked)) { border-color: color-mix(in srgb, var(--farg-socialt) 35%, white); }
 .mbf-knapp[data-amne="Matematik"]:not(:has(input:checked)) { border-color: color-mix(in srgb, var(--farg-accent) 35%, white); }
 .mbf-grupp { margin: 0.25rem 0 0; }
-.mbf-gruppnamn { margin: 0 0 0.3rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--farg-accent); }
+.mbf-gruppnamn { margin: 0 0 0.3rem; font: var(--etikett); color: var(--farg-accent); }
 .mbf-gruppnamn[data-amne="Läsning"] { color: var(--farg-lasning); }
 .mbf-gruppnamn[data-amne="Skrivning"] { color: var(--farg-skrivning); }
 .mbf-gruppnamn[data-amne="Socialt"] { color: var(--farg-socialt); }
@@ -447,8 +525,9 @@ button.mbf-ruta:focus-visible { outline: 2px solid var(--farg-accent); outline-o
    vänster och faktarutan till höger. Under det modellen med sidnavigationen i en egen spalt. */
 .metod-topp { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "huvud" "fakta" "ladda"; gap: 1.25rem 3rem; align-items: start; padding: 1.5rem 0; margin: 0 0 1.5rem; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); border-bottom: 1px solid var(--farg-kant); }
 .metod-huvud { grid-area: huvud; max-width: 46rem; }
-.metod-huvud h1 { font-size: clamp(1.9rem, 4.5vw, 2.75rem); margin-bottom: 0.3em; }
-.metod-huvud .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-text-svag); font-size: 1.2rem; font-weight: 500; margin: 0 0 1rem; text-wrap: balance; }
+/* Titeln stor och tung som på tavlan, och undertiteln i textens färg (K-617, prov C). */
+.metod-huvud h1 { font-size: clamp(1.75rem, 9.5vw, 3.6rem); letter-spacing: -0.035em; line-height: 1; margin-bottom: 0.3em; }
+.metod-huvud .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-text); font-size: 1.2rem; font-weight: 500; margin: 0 0 1rem; text-wrap: balance; }
 .metod-huvud .ingress { font-size: 1.1rem; line-height: 1.6; margin: 0; }
 /* Filmerna ur metodriggen (Film.astro, src/lib/film.ts): huvudfilmen efter faktarutan och extrafilmerna i texten, vid sina moment.
    Hela bredden i spalten, med en tunn ram som bordet i filmen står i, och en rad under med knappen och filmens namn. */
@@ -463,7 +542,6 @@ button.mbf-ruta:focus-visible { outline: 2px solid var(--farg-accent); outline-o
 .film figcaption strong { color: var(--farg-text); font-weight: 600; }
 .film-knapp { flex: none; min-height: 2.25rem; padding: 0.3rem 0.9rem; border: 1px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-accent); font: inherit; font-weight: 600; cursor: pointer; }
 .film-knapp:hover { border-color: var(--farg-accent); }
-.film-knapp:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
 /* Spelaren överst på lathundssidan (Filmspelare.astro, Niclas 2026-10-07): metodens filmer en i taget, raden där
    läsaren väljer film och knappen som laddar ner filmerna. Raden med valen syns bara med JavaScript; utan står filmerna
    under varandra. Tre val i bredd också när metoden har två filmer, så att bilderna är lika stora i alla metoder. Från
@@ -485,11 +563,10 @@ button.mbf-ruta:focus-visible { outline: 2px solid var(--farg-accent); outline-o
 .filmspelare-film:not([hidden]) ~ .filmspelare-film:not([hidden]) { margin-top: 1.25rem; }
 .filmval-ram { display: none; }
 html.js .filmval-ram { display: block; }
-.filmval-etikett { margin: 1rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); }
+.filmval-etikett { margin: 1rem 0 0; font: var(--etikett); color: var(--farg-text-svag); }
 .filmval { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; margin: 0.4rem 0 0; padding: 0; list-style: none; }
 .filmval button { display: block; width: 100%; height: 100%; padding: 0; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-yta); color: var(--farg-text); font: inherit; text-align: left; overflow: hidden; cursor: pointer; }
 .filmval button:hover { border-color: var(--farg-accent); }
-.filmval button:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
 .filmval button[aria-pressed="true"] { border-color: var(--farg-accent); box-shadow: 0 0 0 1px var(--farg-accent); background: var(--farg-accent-ljus); }
 .filmval img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; background: #f5f3ee; border-bottom: 1px solid var(--farg-kant); }
 .filmval span { display: block; padding: 0.35rem 0.5rem 0.45rem; font-family: var(--typsnitt-ui); font-size: 0.8rem; font-weight: 600; line-height: 1.25; }
@@ -497,12 +574,15 @@ html.js .filmval-ram { display: block; }
 .film-hamta { margin: 0.7rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
 .film-hamta a { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.45rem; min-height: 2.25rem; padding: 0.3rem 0.95rem; border: 1px solid var(--farg-kant); border-radius: 1.125rem; background: var(--farg-yta); color: var(--farg-accent); font-weight: 600; text-decoration: none; }
 .film-hamta a:hover { border-color: var(--farg-accent); }
-.film-hamta a:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
 .film-hamta svg { flex: none; }
 .film-hamta small { font-size: 0.8rem; font-weight: 400; color: var(--farg-text-svag); }
-.metod-topp .faktaruta { grid-area: fakta; margin: 0; box-shadow: var(--skugga); }
+/* I korthet utan kant och skugga, med huvudet fyllt (.faktaruta-etikett) och en tunn linje mellan raderna (K-617, prov C). */
+.metod-topp .faktaruta { grid-area: fakta; margin: 0; border: 0; overflow: hidden; }
+.metod-topp .faktaruta dl { gap: 0 1rem; }
+.metod-topp .faktaruta :is(dt, dd) { padding: 0.32rem 0; border-top: 1px solid var(--farg-kant-svag); }
+.metod-topp .faktaruta dl > :nth-child(-n + 2) { border-top: 0; }
 .nedladdning { grid-area: ladda; font-family: var(--typsnitt-ui); font-size: 0.95rem; max-width: 46rem; }
-.nedladdning h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.6em; }
+.nedladdning h2 { font: var(--etikett); color: var(--farg-text-svag); margin: 0 0 0.6em; }
 .nedladdning p { margin: 0 0 0.75em; }
 /* Rutan slutar med den sista raden knappar, utan luft under (Niclas 2026-10-10). */
 .nedladdning > :last-child { margin-bottom: 0; }
@@ -544,7 +624,7 @@ button.lank:hover { color: var(--farg-accent); }
 /* Delningsraden (Delning.astro): på metodsidan mellan rutan och Ladda ner och skriv ut, och ovanför
    kommentarerna. Låg profil: samma etikett som Ladda ner och skriv ut och små knappar med ikon och ord. */
 .delning { font-family: var(--typsnitt-ui); font-size: 0.85rem; max-width: var(--matt-text); }
-.delning h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.6em; }
+.delning h2 { font: var(--etikett); color: var(--farg-text-svag); margin: 0 0 0.6em; }
 .delning ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .delning a, .delning button { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.25rem; padding: 0 0.7rem; border: 1px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
 .delning a:hover, .delning button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
@@ -596,7 +676,7 @@ button.lank:hover { color: var(--farg-accent); }
 /* Sidnavigationen: på bred skärm en egen spalt till vänster som följer med vid rullning, med det
    avsnitt som är i bild markerat (Metod.astro); på smal skärm en rad länkar överst. */
 .metod-nav { font-family: var(--typsnitt-ui); font-size: 0.95rem; margin: 0 0 1.5rem; }
-.metod-nav .nav-etikett { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.5rem; }
+.metod-nav .nav-etikett { display: block; font: var(--etikett); color: var(--farg-text-svag); margin: 0 0 0.5rem; }
 .metod-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; }
 .metod-nav a { color: var(--farg-text); text-decoration: none; }
 .metod-nav a:hover { color: var(--farg-accent); }
@@ -623,7 +703,8 @@ button.lank:hover { color: var(--farg-accent); }
   .metod-modell > .metod-nav .lathund-lank { display: block; margin: 0 0 0.75rem 0.75rem; }
 }
 .metod-modell > p, .metod-modell section > p, .metod-text > p, .m-pass-huvud > p { margin: 0 0 1em; }
-.metod-modell h2 { font-family: var(--typsnitt-ui); font-size: 1.5rem; color: var(--farg-text); margin: 2em 0 0.5em; }
+/* Avsnittens rubriker stora och tunga, som på tavlan (K-617, prov C). */
+.metod-modell h2 { font-family: var(--typsnitt-ui); font-size: clamp(1.6rem, 5.4vw, 2.25rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; color: var(--farg-text); margin: 2em 0 0.5em; }
 .metod-modell section + section { margin-top: 0; }
 .metod-modell .m-efter { color: var(--farg-text-svag); font-size: 0.98rem; }
 
@@ -668,11 +749,11 @@ button.lank:hover { color: var(--farg-accent); }
 .serie-bladdra a { display: flex; flex-direction: column; gap: 0.1rem; flex: 1 1 12rem; min-height: 2.75rem; padding: 0.55rem 0.85rem; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: 8px; text-decoration: none; font-weight: 700; color: var(--farg-accent); line-height: 1.3; }
 .serie-bladdra a:hover { border-color: var(--farg-accent); }
 .serie-bladdra a.nasta { text-align: right; }
-.serie-bladdra-etikett { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--farg-text-svag); }
+.serie-bladdra-etikett { font: var(--etikett); color: var(--farg-text-svag); }
 /* Seriens meny överst, i samma ljusa band som sidans topp. På datorn en rad flikar, på telefonen en rad som fälls ut. */
 .serie-meny { font-family: var(--typsnitt-ui); padding: 1rem 0 0; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); }
 .serie-meny + .metod-topp { padding-top: 1rem; }
-.serie-meny-namn { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.4rem; }
+.serie-meny-namn { font: var(--etikett); color: var(--farg-text-svag); margin: 0 0 0.4rem; }
 .serie-meny-flikar { display: none; }
 .serie-meny-fall { border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); }
 .serie-meny-fall summary { display: flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0.4rem 0.85rem; cursor: pointer; font-weight: 600; list-style: none; }
@@ -938,7 +1019,7 @@ button.lank:hover { color: var(--farg-accent); }
 /* Inget ensamt ord sist i en rubrik på skärmen ("…vecka 4: Till" / "laget", "SAMMA" / "PLATS"; granskningen av
    skrivkurserna i telefonen 2026-10-10). Utskriften behåller sina rader, som A4-sidornas mått räknar med. */
 @media screen {
-  .metod-text :is(h2, h3, h4), .boksida-titel, .lathund-huvud h1 { text-wrap: balance; }
+  .metod-text h4, .boksida-titel { text-wrap: balance; }
 }
 @media (max-width: 40rem) {
   .boksida-ram { padding: 1rem 1.1rem 1.25rem; }
@@ -979,7 +1060,6 @@ button.lank:hover { color: var(--farg-accent); }
 .problemsida-bild { margin: 1rem auto; max-width: var(--bild-andel, 90%); }
 .problemsida-bild img, .losningar-bild img, .m-bildpar img { display: block; width: 100%; height: auto; }
 .bild-lank { display: block; cursor: zoom-in; }
-.bild-lank:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
 .problemsida-fraga { border: 1px solid var(--bok-rod); padding: 0.7rem 1rem; margin: 1rem 0.5rem 0; font-family: var(--typsnitt-elev); font-size: 1.15rem; line-height: 1.5; }
 .problemsida-fraga-rubrik { font-family: 'Cinzel', serif; color: var(--bok-rod); font-size: 1rem; margin: 0 0 0.25rem; }
 .problemsida-fraga p { margin: 0; }
@@ -1090,7 +1170,7 @@ button.lank:hover { color: var(--farg-accent); }
 /* Det övriga materialets namn över listan och filen efter den (Metod.astro). */
 .m-ovrigt-namn { margin: 1.75rem 0 0.25rem; }
 .m-ovrigt-filer { margin: 0.5rem 0 1.5rem; }
-.bank-filer-rubrik { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.5rem; }
+.bank-filer-rubrik { font: var(--etikett); color: var(--farg-text-svag); margin: 0 0 0.5rem; }
 .bankfiler-niva { margin: 0; }
 .bankfiler-niva .filrubrik { flex-basis: 16rem; }
 /* Tabellen i nedladdningsrutan: alla nivåer och varje nivå, bara enheterna eller med följesidorna, i Pdf och Word. */
@@ -1281,6 +1361,10 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Rutan Verktyg och Stödmaterial i metodbanken (Verktygsruta.astro, Niclas 2026-10-18): på en bred skärm i en egen spalt
    bredvid metoderna, som följer med när läsaren rullar; under den bredden under sorteringen, två delar bredvid varandra på
    en surfplatta och infällda under varandra i telefonen, i täckningskartans form. Områdets färg som streck och namn i text. */
+/* Metodbankens rubrik och ämnenas rubriker stora och tunga, som på tavlan (K-617, prov C). Sidan har ingen egen klass och
+   känns igen på metodbankens yta. */
+.innehall:has(> .mb-yta) > h1 { font-size: clamp(2.1rem, 10.5vw, 4.25rem); letter-spacing: -0.035em; line-height: 1; }
+.mb-metoder > section > h2 { font-size: clamp(1.6rem, 5.4vw, 2.25rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; }
 .mb-yta { display: grid; gap: 0 2rem; }
 .mb-metoder { min-width: 0; }
 /* Metodkorten behöver mer bredd än andra kort: rutan med sex uppgifter i fast form och titeln bredvid områdets etikett
@@ -1298,7 +1382,6 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .vr-rad[data-omrade="Skrivning"] { --tk: var(--farg-skrivning); }
 .vr-rad[data-omrade="Socialt"] { --tk: var(--farg-socialt); }
 .vr-rad:hover .vr-namn { color: var(--farg-accent); text-decoration: underline; }
-.vr-rad:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
 .vr-namn { display: block; font-weight: 600; }
 .vr-meta { display: block; font-size: 0.82rem; color: var(--farg-text-svag); margin-top: 0.1rem; }
 .vr-tom { margin: 0.25rem 0 0.75rem; font-size: 0.9rem; }
@@ -1308,7 +1391,6 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
   .vr-del > summary::after { content: ''; flex: none; width: 0.5rem; height: 0.5rem; margin-left: auto; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
   .vr-del[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
   .vr-del > summary:hover { background: var(--farg-ton); }
-  .vr-del > summary:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
   .vr-rubrik { font-size: 1.05rem; font-weight: 700; }
   .vr-lista { padding: 0.35rem 0 0.9rem; }
 }
@@ -1319,7 +1401,7 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
   .mb-yta > .mb-metoder { grid-column: 1; grid-row: 1; }
   .vr-del + .vr-del { margin-top: 1.25rem; }
   .vr-del > summary { cursor: default; pointer-events: none; margin: 0 0 0.5rem; }
-  .vr-rubrik { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); }
+  .vr-rubrik { font: var(--etikett); color: var(--farg-text-svag); }
   .vr-antal { display: none; }
 }
 @media print { .vr { display: none; } }
@@ -1337,7 +1419,6 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .tk > summary::after { content: ''; flex: none; width: 0.5rem; height: 0.5rem; margin-left: auto; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
 .tk[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
 .tk > summary:hover { background: var(--farg-ton); }
-.tk > summary:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
 .tk-rubrik { font-size: 1.05rem; font-weight: 700; }
 .tk-skala { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); align-items: center; border-right: 1px solid var(--farg-kant);
   background-image: linear-gradient(to right, var(--farg-kant) 1px, transparent 1px); background-size: 10% 100%; background-position: 0 0; }
@@ -1354,7 +1435,7 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .tk-rader { list-style: none; margin: 0; padding: 0; }
 .tk-rad { display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; min-height: 2.75rem; padding: 0.2rem 0 0.3rem; text-decoration: none; color: inherit; }
 .tk-rad:hover, .tk-rad:focus-visible { background: var(--farg-ton-svag); }
-.tk-rad:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: -2px; }
+.tk-rad:focus-visible { outline-offset: -3px; }
 .tk-rad .tk-skala { grid-template-rows: auto 0.65rem; row-gap: 0.1rem; }
 .tk-etikett { grid-column: calc(var(--etikett, var(--fran)) + 1) / -1; grid-row: 1; font-size: 0.85rem; font-weight: 600; color: var(--farg-accent); line-height: 1.2; padding-left: 0.15rem; }
 .tk-ak { font-size: 0.78rem; font-weight: 400; color: var(--farg-text-svag); white-space: nowrap; }
@@ -1533,7 +1614,7 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .ri-lank { display: flex; align-items: center; min-height: 2.75rem; padding: 0.45rem 0.9rem; color: var(--farg-accent); font-weight: 600; text-decoration: none; }
 .ri a:hover { text-decoration: underline; }
 /* Fokusringen inuti raden, så att listans rundade kant inte skär av den. */
-.ri a:focus-visible, .ri summary:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: -2px; }
+.ri a:focus-visible, .ri summary:focus-visible { outline-offset: -3px; }
 /* Ett led som flera ramar delar (Åk 1: talen 0–30, Åk 1: Läxa 1–5): ledet till vänster och ramarna under varandra. */
 .ri-led { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); align-items: start; }
 .ri-ledrubrik { padding: 0.75rem 0 0.5rem 0.9rem; font-weight: 700; }
@@ -1588,7 +1669,7 @@ a.ri-titel, .ri-titel a { color: var(--farg-accent); font-weight: 600; text-deco
   .ri-rad + .ri-rad { border-top: 0; }
 }
 /* Rutans namn (Till läraren, Till vårdnadshavaren) står överst, så att texten kan hänvisa till rutan med namn. */
-.m-listnot .kicker { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.45em; }
+.m-listnot .kicker { display: block; font: var(--etikett); color: var(--farg-accent); margin: 0 0 0.45em; }
 .m-ram > h3 { margin: 0 0 0.5em; }
 .m-ramdel { border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; margin: 0 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
 .m-ramdel h4 { margin: 0; padding: 0.5rem 0.9rem; background: var(--farg-accent-ljus); color: var(--farg-accent); font-family: var(--typsnitt-ui); font-size: 1rem; border-bottom: 1px solid var(--farg-kant); }
@@ -1967,8 +2048,12 @@ html.js .bara-js { display: inline-block; }
   .faktaruta { border-color: #bbb; font-size: 9.5pt; }
   /* Faktarutan i utskriften: två uppgifter per rad, och den långa raden (Material, klassen bred) sist över hela bredden.
      Så blir rutan hälften så hög, och det som följer, som filmens stillbilder, ryms på första sidan (Niclas 2026-09-30). */
-  .metod-topp .faktaruta { padding: 0.6rem 0.9rem; }
-  .metod-topp .faktaruta-etikett { margin-bottom: 0.4rem; }
+  .metod-topp .faktaruta { padding: 0.6rem 0.9rem; border: 1px solid #bbb; }
+  /* Huvudet I korthet och metodkortets block trycks med sin färg också när bakgrunder är avslagna, annars blir den vita
+     texten osynlig (K-617). */
+  .metod-topp .faktaruta-etikett { margin: -0.6rem -0.9rem 0.4rem; padding: 0.3rem 0.9rem; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .metodkort .kort-topp { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .metod-topp .faktaruta :is(dt, dd) { padding: 0; border-top: 0; }
   .metod-topp .faktaruta dl { grid-template-columns: max-content minmax(0, 1fr) max-content minmax(0, 1fr); gap: 0.3rem 0.9rem; }
   .metod-topp .faktaruta dt.bred { grid-column: 1; order: 1; }
   .metod-topp .faktaruta dd.bred { grid-column: 2 / -1; order: 1; }
@@ -2432,12 +2517,11 @@ html.js .bara-js { display: inline-block; }
   .filval { display: flex; width: 100%; }
   .filval > a, .filval > button, .filval.liten > a, .filval.liten > button { flex: 1 1 auto; justify-content: center; min-height: 2.75rem; padding: 0 0.5rem; }
   .artikel .ingress { font-size: 1.15rem; }
-  .brod { font-size: 1.0625rem; line-height: 1.7; }
   .hero { grid-template-columns: 1fr; gap: 1rem; }
   .hero .portratt-rund { width: 6rem; height: 6rem; }
   .om-huvud .portratt { max-width: 10rem; }
   .bok-omslag-stor { max-width: 9rem; }
-  .metod-topp .faktaruta dl { grid-template-columns: max-content 1fr; gap: 0.3rem 0.8rem; font-size: 0.9rem; }
+  .metod-topp .faktaruta dl { grid-template-columns: max-content 1fr; gap: 0 0.8rem; font-size: 0.9rem; }
   .cv th { width: 5rem; white-space: normal; }
 }
 
@@ -2822,10 +2906,13 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
    Sidan /stodundervisning/<id>/planera (Planera.astro, src/scripts/planera.ts), raden Din insats på metodens sida och
    Dina insatser i metodbanken (src/scripts/insatser.ts). Telefonen först: veckan överst, sedan planen med målet och
    valen, sammanställningen och planen på en annan dator; från 64 rem står planen i en spalt till höger om veckan.
-   Etiketterna är små versaler som i faktarutan, nivåerna har sina färger, och rutor som fälls ut har sajtens vinkel. */
+   Etiketterna står i vanlig skrift och fet vikt över fälten (K-617), nivåerna har sina färger, och rutor som fälls ut har
+   sajtens vinkel. Rubriken är stor och tung som på tavlan, och Planera insatsen och märket Beta ryms på en rad i
+   telefonen (K-617, prov C). */
+.pl-huvud h1 { font-size: clamp(2rem, 8.4vw, 3.6rem); letter-spacing: -0.035em; line-height: 1; }
 .pl-huvud .ingress { max-width: var(--matt-text); }
 .pl-har-plan .pl-huvud .ingress { display: none; }
-.pl-etikett { display: block; font: 700 0.78rem/1.3 var(--typsnitt-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.35rem; }
+.pl-etikett { display: block; font: 700 0.95rem/1.3 var(--typsnitt-ui); color: var(--farg-text); margin: 0 0 0.35rem; }
 .pl-hjalp { font: 0.88rem/1.45 var(--typsnitt-ui); color: var(--farg-text-svag); margin: 0.35rem 0 0; }
 .pl-varning { color: #7a5200; }
 .pl-falt { box-sizing: border-box; width: 100%; max-width: 22rem; min-height: 2.75rem; padding: 0 0.8rem; border: 1.5px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-text); font: 1rem var(--typsnitt-ui); }
@@ -2875,8 +2962,9 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .plan:not(.pl-har-plan) .pl-andra > summary { display: none; }
 .pl-andra > summary { font: 600 1rem var(--typsnitt-ui); color: var(--farg-accent); cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; gap: 0.6rem; }
 .plan:not(.pl-har-plan) .pl-andra > summary { display: none; }
-.pl-val { font-family: var(--typsnitt-ui); background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 1rem 1.1rem 1.1rem; }
-.pl-val h2 { font-size: 1.05rem; margin: 0 0 0.9rem; }
+/* När ni träffas: rutan i sajtens ton och huvudet fyllt med vit text, som I korthet på metodens sida (K-617, prov C). */
+.pl-val { font-family: var(--typsnitt-ui); background: var(--farg-ton); border-radius: var(--radie); padding: 1rem 1.1rem 1.1rem; overflow: hidden; }
+.pl-val > h2 { margin: -1rem -1.1rem 1rem; padding: 0.7rem 1.1rem; background: var(--amnefarg, var(--farg-accent)); color: #fff; font: 700 1rem/1.3 var(--typsnitt-ui); letter-spacing: 0; }
 .pl-val > .pl-varning { margin: -0.4rem 0 0.9rem; }
 .pl-val > .pl-varning[hidden] { display: none; }
 .pl-rad { border: 0; padding: 0; margin: 0 0 1.1rem; min-width: 0; }
@@ -2982,7 +3070,7 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 /* Veckan */
 .pl-veckan { font-family: var(--typsnitt-ui); margin: 1.25rem 0 2rem; }
 .pl-veckan[hidden] { display: none; }
-.pl-veckohuvud h2 { font-size: clamp(1.6rem, 6vw, 2.1rem); margin: 0 0 0.2rem; }
+.pl-veckohuvud h2 { font-size: clamp(1.6rem, 6vw, 2.1rem); font-weight: 800; letter-spacing: -0.025em; margin: 0 0 0.2rem; }
 .pl-veckohuvud h2:focus { outline: none; }
 /* Veckorna överst: veckan gruppen är i har en prick, och veckan som visas är vald. */
 .pl-remsa { margin: 0.8rem 0 0; }
@@ -3195,12 +3283,12 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-din { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.9rem; margin: 1rem 0 0; padding: 0.7rem 1rem; background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 6px; font-family: var(--typsnitt-ui); }
 .pl-din[hidden] { display: none; }
 .pl-din p { margin: 0; line-height: 1.35; }
-.pl-din-etikett { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); }
-.pl-din-namn { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+.pl-din-etikett { display: block; font: var(--etikett); color: var(--farg-accent); }
+.pl-din-namn { overflow-wrap: anywhere; }
 /* Beta: Planera är en beta så länge den prövas på några metoder, märkt där läraren går in och planerar (Niclas 2026-10-24:
    "en BETA tagg (likt lösning och skrivning) men sådan som man känner igen som BETA"). Formen är områdenas etikett, i en
    egen bärnstensfärg. */
-.beta { display: inline-block; vertical-align: 0.15em; font-family: var(--typsnitt-ui); font-size: 0.72rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.45rem; border-radius: 6px; background: #fbe3b2; color: #6b3a00; border: 1px solid #e9b65a; }
+.beta { display: inline-block; vertical-align: 0.15em; font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.01em; padding: 0.2rem 0.45rem; border-radius: 6px; background: #fbe3b2; color: #6b3a00; border: 1px solid #e9b65a; }
 h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 /* En knapp är flex, där mellanrummet före märket faller bort; märket får luft från texten (Niclas 2026-10-24: "Beta lite
    mer åt höger från Planera insatsen ... ser ut att växa ihop med texten"). */
@@ -3237,7 +3325,7 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-avslutade[hidden] { display: none; }
 /* Insatsens läge i översikten, i Betas form (Niclas 2026-10-25: "KOMMANDE PÅGÅENDE, AVSLUTAD. Likt knappar för läsning och
    Beta"). */
-.pl-status { display: inline-block; vertical-align: 0.1em; margin-right: 0.4rem; font-family: var(--typsnitt-ui); font-size: 0.68rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.15rem 0.4rem; border-radius: 6px; border: 1px solid; }
+.pl-status { display: inline-block; vertical-align: 0.1em; margin-right: 0.4rem; font-family: var(--typsnitt-ui); font-size: 0.75rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.01em; padding: 0.15rem 0.4rem; border-radius: 6px; border: 1px solid; }
 .pl-status.pagaende { background: #e1f3e8; color: #1d5e3b; border-color: #9fd0b4; }
 .pl-status.kommande { background: #e4edf9; color: #1b4a85; border-color: #a9c3e8; }
 .pl-status.avslutad { background: #eef0f3; color: #48525c; border-color: #cfd5dc; }
@@ -3311,7 +3399,7 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-passnamn { font: 700 1.05rem/1.3 var(--typsnitt-ui); margin: 0.4rem 0 0.2rem; }
 .pl-nasta .pl-roll { margin: 0 0 0.6rem; }
 .pl-delar { background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.35rem 0.75rem 0.5rem; margin: 0.6rem 0 0.8rem; }
-.pl-delrubrik { font: 700 0.78rem/1.3 var(--typsnitt-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0.3rem 0 0.1rem !important; }
+.pl-delrubrik { font: var(--etikett); color: var(--farg-text-svag); margin: 0.3rem 0 0.1rem !important; }
 .pl-del { border-bottom: 1px solid var(--farg-kant); }
 .pl-del:last-of-type { border-bottom: 0; }
 .pl-del > summary { list-style: none; display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; cursor: pointer; }
