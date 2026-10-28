@@ -25,7 +25,7 @@ import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
 import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
-import { idagLokalt, oppnaPlanerna, valdaFiler, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
+import { APPENS_PLANER, idagLokalt, oppnaPlanerna, valdaFiler, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
 import { tidrad } from './tidrad';
 import { elevPdf, gruppPdf } from './planpdf';
@@ -2614,7 +2614,7 @@ function kopiansPaminnelse(): string {
   const efterSista = !!plan.sistaPass && plan.sistaPass <= idag && (aktiv.kopia ?? '') < plan.sistaPass;
   if (alder !== null && alder <= 7 && !efterSista) return '';
   const w = webblasaren();
-  const safari = w.ios && !w.app && !iAppen() ? ' Safari tar bort det en sida har sparat efter sju dagar utan besök. I appen Stöd gör det inte.' : '';
+  const safari = iAppen() ? ` ${APPENS_PLANER}` : w.ios && !w.app ? ' Safari tar bort det en sida har sparat efter sju dagar utan besök. I appen Stöd gör det inte.' : '';
   return `${efterSista ? 'Ladda ner planen, så finns hela insatsen med utvärderingen i filen.' : alder === null ? 'Det du för in finns bara i den här webbläsaren. Ladda ner planen, så finns det kvar.' : `${senastNer()} ${igen}`}${safari}`;
 }
 function renderaKopia() {

@@ -4,7 +4,8 @@
 // metodbanken en rad per plan, den som har nästa pass först, och planerna som är slut hopfällda sist. Utan sparade planer
 // syns ingenting.
 import { esc, liten, PLANERA } from '../lib/standard/index.js';
-import { allaPlanerna, idagLokalt, iTurOrdning, oppnaPlanerna, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, skiljNamnen, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
+import { allaPlanerna, APPENS_PLANER, idagLokalt, iTurOrdning, oppnaPlanerna, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, skiljNamnen, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
+import { iAppen } from './webblasaren';
 
 const idag = idagLokalt();
 const { planer } = lasPlaner();
@@ -60,6 +61,9 @@ if (lista && planer.length) {
   // Ladda ner alla mina planer, en zip med varje plans fil, och Öppna nedladdade planer, en zip eller flera filer, med
   // samma rot som Öppna en nedladdad plan i metoden (Niclas 2026-10-28). Beskedet står kvar efter att listan har ritats om.
   const besked = document.getElementById('pl-alla-besked');
+  // I appen står varför planerna ska laddas ner, under knapparna (APPENS_PLANER).
+  const appen = document.getElementById('pl-alla-appen');
+  if (appen && iAppen()) { appen.textContent = APPENS_PLANER; appen.hidden = false; }
   try { const b = sessionStorage.getItem('pl-alla-besked'); if (b && besked) { besked.textContent = b; besked.hidden = false; sessionStorage.removeItem('pl-alla-besked'); } } catch { /* utan lagring */ }
   document.getElementById('pl-alla-ner')?.addEventListener('click', () => {
     const fil = allaPlanerna(PLANERA.version, idag);

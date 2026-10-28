@@ -379,6 +379,12 @@ export function sparaPlanerna(nya: SparadPlan[]): { ok: boolean; sparade: number
   return { ok, sparade: att.length, aldre: nya.length - att.length };
 }
 
+/**
+ * I appen Stöd: planerna finns bara i appen och försvinner när appen tas bort, i iPhone och i Android, där Chrome varnar men
+ * varningen går att trycka bort (Niclas 2026-10-28). Sajten märker inte när appen tas bort, så den säger det före.
+ */
+export const APPENS_PLANER = 'Planerna i appen finns bara i appen. Tar du bort appen, försvinner de, så ladda ner planerna först.';
+
 /** Filerna ur ett filfält, som töms, så att samma fil går att välja igen. */
 export const valdaFiler = (e: Event) => { const input = e.target as HTMLInputElement; const filer = [...(input.files ?? [])]; input.value = ''; return filer; };
 
