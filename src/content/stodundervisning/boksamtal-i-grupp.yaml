@@ -147,7 +147,7 @@ tabeller:
     not: Eleverna turas om att berätta, med raderna som stöd. Blir dagens rad en detalj, fråga ”Vem var viktigast i dag, och vad hände?” Frågorna på tavlan är gruppens egna. Den första säger du själv, från din post-it, och sedan kommer de från eleverna. En fråga som ingen kan svara på än är bra. Du pekar på tavlan när någon undrar vem en person är.
   - rubrik: "Tavlans form: välj efter rummet"
     plats: efter-arbetsform
-    text: Grundformen är ett blädderblocksark på väggen. Tavlan ska sitta kvar mellan passen, och alla ska se den medan ni läser och samtalar, så välj en annan form om rummet kräver det.
+    text: Grundformen är ett blädderblocksark på väggen. Bokens tavla ska sitta kvar mellan passen, och alla ska se den medan ni läser och samtalar, så välj en annan form om rummet kräver det.
     kolumner:
       - Formen
       - Passar när
@@ -567,7 +567,8 @@ plan:
   # 2026-10-26: räkningen, takten och mellanpartiet när veckorna inte räcker. Nattkorpen, 12 läspass i listan, blir
   # omkring 15 och två pass till, alltså åtta eller nio veckor med två pass i veckan, så förvalet står kvar. Den andra
   # genomgången: takten räknas på listan och på den längre av bokvalets två böcker, och perioden är sex till tio veckor.
-  # Veckorna väljs före omröstningen, så stödet säger vilken bok passen bokas efter. Mellanpartiet står under länken (K-596).
+  # Veckorna väljs före omröstningen, så stödet säger vilken bok passen bokas efter. Mellanpartiet står under länken (K-596)
+  # och i bokvalet, där läsplanen görs.
   veckoval:
     text: "Räkna med omkring en fjärdedel fler läspass än listan säger, och två pass till för bokvalet och slutet. Ha två pass i veckan när listan säger högst tolv läspass, och annars tre. Boka passen efter den längre av bokvalets två böcker."
     mer: Var hittar du böckerna och läsplanen?
@@ -602,10 +603,19 @@ plan:
       text: "När boken är vald gör du läsplanen och skriver in det som är nytt i ett läspass."
       tabell: "Första passet: bokvalet"
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Bokvalet, kolumner: [Det som är nytt] }
+    # Det läsplanen ska ha, ur Var hittar du böckerna och läsplanen?: protokollet i läsplanen visar bokens mitt och slut
+    # efter bokens antal läspass, och mellanpartiet när veckorna inte räcker (Rimligheten efter omtaget).
+    - nar: första passet
+      text: "Skriv in sidorna och stoppet, och det som är nytt i ett läspass, som en samtalsregel eller protokollet. Räcker inte veckorna, kan du berätta ett mellanparti kort med egna ord. Skriv det i läsplanen och som en rad på tavlan. Läser du hela boken, tar perioden längre tid."
+    # Det du tar med till bokvalet, ur Första passet: bokvalet och Materialet (Rimligheten efter omtaget).
+    - nar: första passet
+      del: Före passet
+      text: "På bordet räcker ett exemplar av varje bok per elevpar, men till läspass 1 behöver varje elev den bok gruppen väljer."
+    - { nar: första passet, del: Före passet, ur: { tabell: "Materialet: det du skriver ut, och när", rad: Röstsedlarna, kolumner: [Vad, Hur många] } }
     # Tavlans form väljs före bokvalet, där du ritar tavlan i den form du har valt (K-596).
     - nar: första passet
       del: Före passet
-      text: "Grundformen är ett blädderblocksark på väggen. Tavlan ska sitta kvar mellan passen, och alla ska se den medan ni läser och samtalar, så välj en annan form om rummet kräver det."
+      text: "Grundformen är ett blädderblocksark på väggen. Bokens tavla ska sitta kvar mellan passen, och alla ska se den medan ni läser och samtalar, så välj en annan form om rummet kräver det."
     - nar: pass 2
       kort: "Läspass 1"
       tabell: "Läspass 1: allt visas första gången"
@@ -617,32 +627,43 @@ plan:
     - { nar: pass 3, kort: "Läspass 2", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 2 och 3, kolumner: [Det som är nytt] } }
     # Läspass 2: tråden, den första samtalsregeln före samtalet och protokollets början, ur Läspass 1, Samtalsreglerna
     # och ramen Protokollet (K-596). Samma regel och samma sätt att ta den i läspass 5 och 8, de tidigaste passen.
-    # Regelns rad visar regeln själv, och frågan om samtalet står sist i Samtala, där metoden lägger den.
+    # Regelns rad visar regeln själv, och frågan om samtalet står sist i Samtala, där metoden lägger den, också i läspasset
+    # efter, eftersom metoden säger de första passen med regeln. Hur ni tar regeln står i Före passet, så att du vet att
+    # du läser kortare innan du läser, och arket och protokollet står där i läspass 2. I Samtala prövar paren regeln
+    # först, ur Samtalet mellan eleverna, så att det syns vem som frågar ”Hur vet du det?” (Rimligheten efter omtaget).
     - { nar: pass 3, text: "Tråden och ”Hur vet du det?” kommer i läspass 2. Då skriver ni också den första samtalsregeln på arket, den du sa i läspass 1, och du läser lite kortare. Är ni fler än fem, räcker laget runt i läspass 2 också, och tråden kommer när ni har delat er, tidigast i läspass 3." }
     - { nar: pass 3, ur: { tabell: "Samtalsreglerna: tre regler, en i taget", rad: "1 · Allt vi tänker om boken är värt att säga.", kolumner: [Regeln, Se, Höra] } }
-    - { nar: pass 3, del: Samtala, text: "En regel tar ni före samtalet, på omkring fem minuter: fråga ”Vad är viktigt när man samtalar om en bok?”, säg regeln och låt gruppen säga den med egna ord. Skriv den på arket, och fyll i Se och Höra tillsammans. Läs kortare det passet." }
+    - { nar: pass 3, del: Före passet, text: "Reglerna står på ett blädderblocksark bredvid tavlan, som i tabellen." }
+    - { nar: pass 3, del: Före passet, text: "En regel tar ni före samtalet, på omkring fem minuter: fråga ”Vad är viktigt när man samtalar om en bok?”, säg regeln och låt gruppen säga den med egna ord. Skriv den på arket, och fyll i Se och Höra tillsammans. Läs kortare det passet." }
+    - { nar: pass 3, del: Före passet, ur: { tabell: "Materialet: det du skriver ut, och när", rad: Protokollet, kolumner: [Vad, Hur många] } }
+    - { nar: pass 3, del: Samtala, text: "När en regel är ny prövar paren den först, och den som lyssnar svarar med en fras från arket. I gruppen väntar du tre sekunder, så att en kamrat hinner svara." }
     - { nar: pass 3, del: Samtala, sist: true, text: "De första passen med regeln frågar du sist i Samtala ”Vad gjorde vi bra i samtalet i dag?”, och säger en sak du hörde." }
-    - { nar: pass 3, text: "Tre gånger under boken lyssnar du extra noga, två läspass i följd varje gång. Början är läspass 2 och 3, mitten två läspass mitt i boken, och slutet de två läspassen före det sista. I slutsamtalet skriver du elevens sak om hela boken." }
+    - { nar: pass 3, text: "Tre gånger under boken lyssnar du extra noga, två läspass i följd varje gång. Början är läspass 2 och 3, mitten två läspass mitt i boken, och slutet de två läspassen före det sista. I slutsamtalet skriver du elevens sak om hela boken i protokollet." }
     - { nar: pass 3, text: "Skriv passets nummer och sedan elevens egna ord. Sätt ett f efter det eleven sa som svar på en fråga från dig. Skriv direkt efter passet, medan du minns orden, och räkna med omkring tio minuter." }
     - { nar: pass 4, kort: "Läspass 3", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Läspass 2 och 3, kolumner: [Det som är nytt] } }
     - { nar: pass 4, text: "Skriv direkt efter passet, medan du minns orden, och räkna med omkring tio minuter." }
+    - { nar: pass 4, del: Samtala, sist: true, text: "De första passen med regeln frågar du sist i Samtala ”Vad gjorde vi bra i samtalet i dag?”, och säger en sak du hörde." }
     - { nar: pass 5, kort: "Läspass 4", text: "Gå vidare när gruppen klarar steget utan din hjälp, och gå tillbaka ett steg när den inte gör det längre.", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 4, kolumner: [Det som är nytt] } }
     - { nar: pass 6, kort: "Läspass 5", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 4, kolumner: [Det som är nytt] } }
     # Läspass 5: den andra regeln, och steget i Eleverna tar över som Perioden inte har, att eleverna frågar ”Hur vet du
     # det?” (K-596).
     - { nar: pass 6, ur: { tabell: "Samtalsreglerna: tre regler, en i taget", rad: "2 · Vi bygger vidare på det någon sa.", kolumner: [Regeln, Se, Höra] } }
-    - { nar: pass 6, del: Samtala, text: "En regel tar ni före samtalet, på omkring fem minuter: fråga ”Vad är viktigt när man samtalar om en bok?”, säg regeln och låt gruppen säga den med egna ord. Skriv den på arket, och fyll i Se och Höra tillsammans. Läs kortare det passet." }
+    - { nar: pass 6, del: Före passet, text: "En regel tar ni före samtalet, på omkring fem minuter: fråga ”Vad är viktigt när man samtalar om en bok?”, säg regeln och låt gruppen säga den med egna ord. Skriv den på arket, och fyll i Se och Höra tillsammans. Läs kortare det passet." }
+    - { nar: pass 6, del: Samtala, text: "När en regel är ny prövar paren den först, och den som lyssnar svarar med en fras från arket. I gruppen väntar du tre sekunder, så att en kamrat hinner svara." }
     - { nar: pass 6, del: Samtala, sist: true, text: "De första passen med regeln frågar du sist i Samtala ”Vad gjorde vi bra i samtalet i dag?”, och säger en sak du hörde." }
     - { nar: pass 6, ur: { tabell: "Eleverna tar över: en bit i taget", rad: "2 · Du frågade ”Hur vet du det?”", kolumner: [Det du gjorde, Det eleverna gör nu, Ungefär när] } }
     - { nar: pass 7, kort: "Läspass 6", text: "Gå vidare när gruppen klarar steget utan din hjälp, och gå tillbaka ett steg när den inte gör det längre.", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 7, del: Samtala, sist: true, text: "De första passen med regeln frågar du sist i Samtala ”Vad gjorde vi bra i samtalet i dag?”, och säger en sak du hörde." }
     - { nar: pass 8, kort: "Läspass 7", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
     - { nar: pass 9, kort: "Läspass 8", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
     # Läspass 8: den tredje regeln, tidigast tre läspass efter den andra (K-596).
     - { nar: pass 9, text: "Nästa regel tar ni när den förra syns och hörs i samtalet utan att du påminner, tidigast tre läspass senare." }
     - { nar: pass 9, ur: { tabell: "Samtalsreglerna: tre regler, en i taget", rad: "3 · Vi bjuder in varandra.", kolumner: [Regeln, Se, Höra] } }
-    - { nar: pass 9, del: Samtala, text: "En regel tar ni före samtalet, på omkring fem minuter: fråga ”Vad är viktigt när man samtalar om en bok?”, säg regeln och låt gruppen säga den med egna ord. Skriv den på arket, och fyll i Se och Höra tillsammans. Läs kortare det passet." }
+    - { nar: pass 9, del: Före passet, text: "En regel tar ni före samtalet, på omkring fem minuter: fråga ”Vad är viktigt när man samtalar om en bok?”, säg regeln och låt gruppen säga den med egna ord. Skriv den på arket, och fyll i Se och Höra tillsammans. Läs kortare det passet." }
+    - { nar: pass 9, del: Samtala, text: "När en regel är ny prövar paren den först, och den som lyssnar svarar med en fras från arket. I gruppen väntar du tre sekunder, så att en kamrat hinner svara." }
     - { nar: pass 9, del: Samtala, sist: true, text: "De första passen med regeln frågar du sist i Samtala ”Vad gjorde vi bra i samtalet i dag?”, och säger en sak du hörde." }
     - { nar: pass 10, kort: "Läspass 9", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
+    - { nar: pass 10, del: Samtala, sist: true, text: "De första passen med regeln frågar du sist i Samtala ”Vad gjorde vi bra i samtalet i dag?”, och säger en sak du hörde." }
     - { nar: pass 11, kort: "Läspass 10", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
     - { nar: pass 12, kort: "Läspass 11", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
     - { nar: pass 13, kort: "Läspass 12", ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Från läspass 6, kolumner: [Det som är nytt] } }
@@ -680,9 +701,10 @@ plan:
       text: "Slutsamtalet för ni tillsammans, också när ni är fler än fem. Är ni fler än fem, säger var och en sin sak till den bredvid i stället för laget runt, och du skriver några i varje spalt."
       tabell: "Sista passet: slutet"
       ur: { tabell: "Perioden: en bok från bokvalet till boktipset", rad: Slutet, kolumner: [Det som är nytt] }
-    # Protokollets sista fält, Slutsamtalet, ur ramen Protokollet (K-596).
+    # Protokollets sista fält, Slutsamtalet, ur ramen Protokollet (K-596). Meningen säger protokollet, så att den inte
+    # läses som spalterna på arket (länkarna och Rimligheten efter omtaget).
     - nar: sista passet
-      text: "I slutsamtalet skriver du elevens sak om hela boken."
+      text: "I slutsamtalet skriver du elevens sak om hela boken i protokollet."
     - nar: sista passet
       del: Boktipset
       text: "Den som skriver långsamt fyller i tre rader och säger resten."
@@ -975,7 +997,7 @@ ramar:
     - rubrik: Protokollet
       text:
         - Skriv passets nummer och sedan elevens egna ord. Sätt ett f efter det eleven sa som svar på en fråga från dig. Skriv direkt efter passet, medan du minns orden, och räkna med omkring tio minuter.
-        - Tre gånger under boken lyssnar du extra noga, två läspass i följd varje gång. Början är läspass 2 och 3, mitten två läspass mitt i boken, och slutet de två läspassen före det sista. I slutsamtalet skriver du elevens sak om hela boken.
+        - Tre gånger under boken lyssnar du extra noga, två läspass i följd varje gång. Början är läspass 2 och 3, mitten två läspass mitt i boken, och slutet de två läspassen före det sista. I slutsamtalet skriver du elevens sak om hela boken i protokollet.
         - I Var är vi? lyssnar du på den som berättar vid tavlan och på ett par när de berättar för varandra, ett nytt par varje pass. I Samtala lyssnar du på var och en, i laget runt och i tråden. Är ni fler än fem, hör du en samtalsgrupp och två par per pass.
         - Lyssna efter om eleven berättar i rätt ordning och säger namnen och hur personerna hör ihop, och om hen säger sin sak i gruppen, säger när boken svarar på en fråga, pekar i boken, bygger vidare på en kamrats tanke och ser ett mönster eller en koppling.
       huvud:

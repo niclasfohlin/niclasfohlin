@@ -278,10 +278,10 @@ fastnar:
     - Var är din huvudperson nu?
   trappa:
     - "Uppmuntran: ”Det du sa till Nora var bra. Skriv det.”"
-    - "Rita först: i två eller tre minuter ritar eleven det första huvudpersonen ser eller hör i delen, i rutan på bokens sida. Fråga ”Vad är det där?” och säg ”Skriv det.”"
+    - "Rita först: i två eller tre minuter ritar eleven det första huvudpersonen ser eller hör i delen, i rutan på Min bok: sidan. Fråga ”Vad är det där?” och säg ”Skriv det.”"
     - "Starthjälp med första meningen: ”Jag hjälper dig med första meningen. Säg den till mig.” När eleven har sagt den, säger du: ”Bra tanke. Skriv ner den.”"
     - Du skriver första meningen åt eleven, med elevens ord, och eleven skriver nästa.
-  efter: "Den som har skrivstöd, som tal till text eller tangentbord, använder det i hela kursen. Eleven klistrar då in en utskrift på bokens sida och gör titeln och bilden för hand."
+  efter: "Den som har skrivstöd, som tal till text eller tangentbord, använder det i hela kursen. Eleven klistrar då in en utskrift på Min bok: sidan och gör titeln och bilden för hand."
 exempel:
   valt:
     rubrik: Gruppen
@@ -355,6 +355,10 @@ plan:
     - nar: pass 1
       del: Efter passet
       ur: { tabell: "Det du ser, och det du gör", rad: "Eleven missade en kort berättelse", kolumner: ["Det du ser", "Det du gör"] }
+    # Med egen ram skrevs den första korta berättelsen i det extra passet, ur uppföljningen (Rimligheten efter omtaget, K-596).
+    - nar: pass 1
+      del: Efter passet
+      text: "Med egen ram skriver eleven den första i det extra passet."
     - nar: pass 14
       del: Efter passet
       ur: { tabell: "Det du ser, och det du gör", rad: "Eleven missade en kort berättelse", kolumner: ["Det du ser", "Det du gör"] }
@@ -443,7 +447,7 @@ plan:
       text: "Ramen: när eleverna har läst tyst, visar du hur något från ramens del 1 kommer tillbaka i del 6, och ringar in något i din del 1 som kan återkomma. Med Den magiska skogen står ramen i Berättelseram 1 och ramens text i Ramens texter, del 1–6: Den magiska skogen. Med Hunden som försvann står ramen i Berättelseram 2 och ramens text i Ramens texter, del 1–6: Hunden som försvann. Med egen ram står ramen och ramens text i Berättelseram 3."
     - nar: pass 3
       del: "Skriv"
-      text: "De tre första minuterna av Skriv går du igenom Stödet att komma igång. Den som inte kommer igång efter Berätta har oftast idén men inte första meningen. Börja med att fråga, och ge mer stöd ett steg i taget. Eleven väljer något, som att upprepa det hen sa till kamraten eller rita först, och skriver det vid ”När jag kör fast” på Mitt mål. Rita först: i två eller tre minuter ritar eleven det första huvudpersonen ser eller hör i delen, i rutan på bokens sida."
+      text: "De tre första minuterna av Skriv går du igenom Stödet att komma igång. Den som inte kommer igång efter Berätta har oftast idén men inte första meningen. Börja med att fråga, och ge mer stöd ett steg i taget. Eleven väljer något, som att upprepa det hen sa till kamraten eller rita först, och skriver det vid ”När jag kör fast” på Mitt mål. Rita först: i två eller tre minuter ritar eleven det första huvudpersonen ser eller hör i delen, i rutan på Min bok: sidan."
     - nar: pass 3
       del: "Dela"
       istallet: true
@@ -526,7 +530,7 @@ plan:
     # Reserven när ni inte kan träffas, ur Läsarmötet, del 4: Provläsningen, Om något saknas (K-596).
     - nar: pass 7
       del: "Dela"
-      text: "Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8."
+      text: "Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna på bladen Provläsningen, del 4: Läsaren svarar, och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter."
     - nar: pass 8
       kort: "Del 4, Dialogen"
       ur: { tabell: "Kursen pass för pass", rad: "Del 4", kolumner: ["Det som händer i Den magiska skogen", "Det som händer i Hunden som försvann", "Skrivfokus", "Läsaren och svaren"] }
@@ -538,7 +542,7 @@ plan:
     - nar: pass 8
       del: "Före passet"
       istallet: true
-      text: "Går barnen i förskolan, kommer de till er, så att mötet ryms i passet. Till mötet tar du med elevernas böcker, papper, kritor och bladen Provläsningen, del 4: Läsaren svarar. Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25. Skriv ett utkast till din del. Skriv skrivfokuset och dagens fråga på tavlan. ”Vad säger den nya först?” Bestäm paren. Blir en elev över i Berätta, är du kamrat."
+      text: "Går barnen i förskolan, kommer de till er, så att mötet ryms i passet. Till mötet tar du med elevernas böcker, papper, kritor och bladen Provläsningen, del 4: Läsaren svarar. Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna på bladen Provläsningen, del 4: Läsaren svarar, och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25. Skriv ett utkast till din del. Skriv skrivfokuset och dagens fråga på tavlan. ”Vad säger den nya först?” Bestäm paren. Blir en elev över i Berätta, är du kamrat."
     # Provläsningen som sidan Läsarmötet, del 4: Provläsningen säger den, överst i passet: delen Provläsningen finns bara i
     # veckans fält, och planensRamFel räknar tidsschemats och tabellernas delar (sajtens steg 4b och kalla läsare, K-585).
     - nar: pass 8
@@ -607,7 +611,7 @@ plan:
     - nar: pass 12
       del: "Ramen"
       istallet: true
-      text: "Ramen: eleven läser sin del 1, sitt mål och det hen ringade in. Sist pekar du på dagens del i ramen."
+      text: "Ramen: eleven läser sin del 1, sitt mål på Mitt mål och det hen ringade in i Min ram. Sist pekar du på dagens del i ramen."
     - nar: pass 12
       del: "Skrivfokus"
       istallet: true
@@ -670,7 +674,7 @@ plan:
     - "Presentera kursen två veckor före pass 1, och skicka brevet när gruppen är bestämd, så att du har barnens namn till pass 1. Sätt upp skylten Skriv en egen bok i varje klass där du presenterar kursen, och visa diplomet bredvid. Skriv ditt namn och dagen då kursen börjar på skyltens två rader, i Word-filen före utskriften eller för hand efteråt. Skriv ut en skylt i färg till varje klass, gärna på A3."
     - "Välj två likartade bilder utan text, där var och en visar en plats och en person som det händer något med. Spara den andra till pass 14."
     # Skrivstödet på plats från pass 1, ur Stödet att komma igång (K-596).
-    - "Den som har skrivstöd, som tal till text eller tangentbord, använder det i hela kursen. Eleven klistrar då in en utskrift på bokens sida och gör titeln och bilden för hand."
+    - "Den som har skrivstöd, som tal till text eller tangentbord, använder det i hela kursen. Eleven klistrar då in en utskrift på Min bok: sidan och gör titeln och bilden för hand."
   # Ramen är planens val (sajtens K-576; Niclas 2026-10-27: "Bygg, men visa bilder först"). Tabellen Kursen pass för pass har
   # en kolumn per ram, och en mening som börjar med "Med Hunden som försvann" står bara i den ramen. Den egna ramen har sitt
   # extra pass och lärarens texter under Före.
@@ -832,7 +836,7 @@ ramar:
             - rubrik: Dagens fråga
               text: "”Vad från början kommer tillbaka?”"
             - rubrik: I pass 12
-              text: "Ramen: eleven läser sin del 1, sitt mål och det hen ringade in.\nSkrivfokus: lägg ramens del 1, 3 och 6 bredvid varandra, och ställ dagens fråga. Skriv bara din sista mening.\nSkrivfokus går 5–⁠17 min, Berätta 17–⁠25 min och Skriv 25–⁠52 min. Galleriet hoppar ni över."
+              text: "Ramen: eleven läser sin del 1, sitt mål på Mitt mål och det hen ringade in i Min ram.\nSkrivfokus: lägg ramens del 1, 3 och 6 bredvid varandra, och ställ dagens fråga. Skriv bara din sista mening.\nSkrivfokus går 5–⁠17 min, Berätta 17–⁠25 min och Skriv 25–⁠52 min. Galleriet hoppar ni över."
             - rubrik: I pass 13
               text: "Ramen: ni gör Starterna runt bordet i stället för att läsa tyst.\nDelens bild: alla ritar bilden, men ingen ringar in något i Min ram.\nDela: eleven läser hela boken tyst och ändrar en sak barnet inte skulle förstå. Den som läser långsamt läser bara del 1 och 6."
             - rubrik: Lägg märke till
@@ -964,7 +968,7 @@ ramar:
             - rubrik: Teckningen
               text: "Sedan berättar eleven att huvudpersonen möter någon ny i nästa del, och säger: ”Rita hur du tror att den ser ut.” Har eleven redan bestämt vem huvudpersonen möter, säger hen tre saker om den först. Teckningen blir bilden till del 4 i boken, och barnets namn står vid Bilder av på omslaget."
             - rubrik: Om något saknas
-              text: "Är barnet borta, läser eleven för ett annat barn, men boken är fortfarande till samma barn. Är eleven borta, läser hen för barnet en annan dag. Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25."
+              text: "Är barnet borta, läser eleven för ett annat barn, men boken är fortfarande till samma barn. Är eleven borta, läser hen för barnet en annan dag. Går det inte att träffas, spelar eleverna in läsningen i slutet av pass 7. Barnens lärare ställer frågorna på bladen Provläsningen, del 4: Läsaren svarar, och skickar svaren och teckningarna före pass 8. Då börjar ni pass 8 med Dela från pass 7 i tio minuter. Sedan läser eleven svaren och tittar på teckningen till minut 25."
     - rubrik: "Provläsningen, del 4: Läsaren svarar"
       sagoform: { form: vag, titel: Provläsningen, undertitel: läsaren svarar, bilder: [ stjärna, förvånad, glödlampa, ryggsack ], radMm: 11 }
       text:

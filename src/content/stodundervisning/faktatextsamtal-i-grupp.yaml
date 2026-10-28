@@ -461,7 +461,7 @@ tabeller:
       - - Kartläggningen
         - elevens blad med texten och bilden och protokollet, ett av varje per elev
         - före och efter perioden
-    not: "Till vecka 1 skriver du ut temats första text med lärarens sida, bladet Kärnorna, kortet När det skaver, tankekartans sida med exemplet och bladet, och kartläggningen med Bäverns damm och protokollet. Bladen är liggande A4: välj A3 när du skriver ut, eller förstora till 141 procent i kopiatorn. Saknar du A3 ritar du av bladet på ett blädderblocksark. Alla blad går att plasta in. Då sätter gruppen post-it-lapparna på plasten och skriver namnen och orden med whiteboardpenna. Spara modellen med lapparna kvar, eller fotografera den innan ni suddar."
+    not: "Till vecka 1 skriver du ut temats första text med lärarens sida, bladet Kärnorna, kortet När det skaver, modellen Tankekartan med exemplet om skolan och bladet som lärarens sida säger, och kartläggningen med Bäverns damm och protokollet. Bladet Kärnorna och modellens blad är liggande A4: välj A3 när du skriver ut, eller förstora till 141 procent i kopiatorn. Saknar du A3 ritar du av bladet på ett blädderblocksark. Alla blad går att plasta in. Då sätter gruppen post-it-lapparna på plasten och skriver namnen och orden med whiteboardpenna. Spara modellen med lapparna kvar, eller fotografera den innan ni suddar."
 exempel:
   valt:
     rubrik: Texten gruppen läser
@@ -569,9 +569,13 @@ plan:
     - "Reder eleven ut det som skaver och säger kärnan med egna ord, också i klassens texter, avslutar du insatsen."
     - "Har eleven gått framåt men behöver fortfarande stöd i klassens texter, får eleven en period till med ett nytt tema. Den nya perioden börjar i vecka 1, med ett tema från sidan Ta fram en faktatext. Kartläggningen du nyss har gjort blir då kartläggningen före den nya perioden. Efter perioden gör du kartläggningen med Bäverns damm."
     - "Står inget under Det som har ändrats i protokollet, tar du det med elevhälsan."
+  # Före perioden: nivåns första text i kartläggningen, ur ramen Kartläggningen under Nivån, före perioden (omtaget K-596).
   # Det som skrivs ut till vecka 1, ur noten under Materialet: det du behöver, och när (K-596).
+  # Hur många kort När det skaver, ur ramen När det skaver under Utskrift (omtaget K-596).
   fore:
-    - "Till vecka 1 skriver du ut temats första text med lärarens sida, bladet Kärnorna, kortet När det skaver, tankekartans sida med exemplet och bladet, och kartläggningen med Bäverns damm och protokollet. Bladen är liggande A4: välj A3 när du skriver ut, eller förstora till 141 procent i kopiatorn. Saknar du A3 ritar du av bladet på ett blädderblocksark."
+    - "Sist läser eleven det första avsnittet i nivåns första text högt: Vattenplaneten, Solens familj eller Kroppens försvar. Fråga sedan: ”Vad handlade avsnittet om?”"
+    - "Till vecka 1 skriver du ut temats första text med lärarens sida, bladet Kärnorna, kortet När det skaver, modellen Tankekartan med exemplet om skolan och bladet som lärarens sida säger, och kartläggningen med Bäverns damm och protokollet. Bladet Kärnorna och modellens blad är liggande A4: välj A3 när du skriver ut, eller förstora till 141 procent i kopiatorn. Saknar du A3 ritar du av bladet på ett blädderblocksark."
+    - "Bladet När det skaver har två likadana kort, så ett blad räcker till två par. Klipp isär korten längs den streckade linjen och plasta gärna in dem."
   # Metodens sätt att justera vid avstämningen, ur stödtrappan (K-596).
   justera:
     - "Stryker någon under nästan allt, frågar du vad avsnittet handlar om i stort innan ni går in i detaljen. Händer det i flera pass läser eleven i par med en kamrat som läser högt. Gäller det flera i gruppen, läser ni veckans text på nivån under från och med nästa vecka. På Bas läser de i stället i par med en kamrat som läser högt."
@@ -595,8 +599,9 @@ plan:
     - nar: veckans första pass i vecka 3–8
       text: "På Avancerat är avsnitten längre. Räkna där med att läsa ett avsnitt till högt från vecka 3, och bestäm före passet vilket. I vecka 5 och 6 är det avsnitt 2."
     # Jobbkorten skrivs ut veckan före och sägs första gången i vecka 3, ur ramen Jobbkorten (K-596).
+    # Raden säger först när korten används, ur fältet När (omtaget K-596).
     - nar: veckans andra pass i vecka 2
-      text: "Bladet har båda jobbkorten. Skriv ut ett blad, eller två om ni är sju eller åtta. Klipp isär korten längs den streckade linjen och plasta gärna in dem."
+      text: "Från vecka 3 har två elever var sitt jobb i läspasset. Bladet har båda jobbkorten. Skriv ut ett blad, eller två om ni är sju eller åtta. Klipp isär korten längs den streckade linjen och plasta gärna in dem."
     - nar: veckans första pass i vecka 3
       text: "Säg första gången att frågorna på jobbkorten är de som du har ställt i två veckor."
     # Modellpasset med klassens text: raderna ur tabellen Vecka 6–8 står i delarna de gäller, och Orden och Svaret är som
@@ -4130,7 +4135,7 @@ ramar:
             - rubrik: Du förklarar sist
               text: Fråga ”Vad har ni prövat?” innan du säger något om ordet. När paret har prövat de fyra sätten förklarar du kort och kopplar till något eleverna redan vet, och en elev säger det med egna ord.
             - rubrik: Utskrift
-              text: Bladet har två likadana kort, så ett blad räcker till två par. Klipp isär korten längs den streckade linjen och plasta gärna in dem.
+              text: Bladet När det skaver har två likadana kort, så ett blad räcker till två par. Klipp isär korten längs den streckade linjen och plasta gärna in dem.
     - rubrik: Jobbkorten
       text:
         - Med jobbkorten tar eleverna över dina frågor i avsnittets fyra steg, och den som har ett jobb läser upp en rad i taget.

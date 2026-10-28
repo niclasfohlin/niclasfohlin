@@ -432,12 +432,15 @@ plan:
   utan:
     - "Remsan visar hur de 30 minuterna fördelas och när läraren visar, när alla arbetar gemensamt och när eleverna arbetar i par och enskilt."
   passen:
-    # Med tiobas ryms talen inte på lathundens matta, så pass 1 säger arken per talsort, ordagrant ur Var hittar du
-    # materialet och talen? (K-596).
     - nar: veckans första
       kort: "Tiobas"
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 1: tiobas"] }
-      text: "Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats."
+    # Med tiobas ryms talen inte på lathundens matta, så Före passet i pass 1 säger efter talsortsmattan arken per
+    # talsort och mallens namn, de två meningarna i följd ur Var hittar du materialet och talen? (K-596, omtagets fynd).
+    - nar: veckans första
+      del: Före passet
+      sist: true
+      text: "Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och mallen Ett ark per talsort för tiobas står under Mallar att skriva ut och sist i planeringsmallarna."
     # Tiobaspaketen går hem efter första passet, så att läraren har dem med sig till pass 1 (K-596).
     - nar: veckans första pass i vecka 1
       del: Före passet
@@ -464,9 +467,9 @@ plan:
       del: Första talet
       text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan. Läs en uppgift ur läxan, och alla bygger den samtidigt på sin matta. Då ser du allas mattor. Låt en eller två elever säga vad de gjorde. Så tar läxan två minuter, också med sex elever."
     # I åk 4–5 handlar sista passet om negativa tal, ordagrant ur noten till tabellen Veckan: ett fokus i tre material.
-    # Meningen börjar med ”I åk 4–5” och står bara i den årskursens plan (K-596).
+    # Meningen börjar med ”I åk 4–5” och står bara i den årskursens plan (K-596). Den står
+    # överst i passet, efter tabellens rad, som noten står efter tabellen på metodens sida (omtagets fynd).
     - nar: sista passet i vecka 5
-      del: Före passet
       text: "I åk 4–5 handlar pass 3 i vecka 5 om negativa tal, på tallinjen och som skuld."
   # Materialet tar mer än en vecka: talbrickor, mynt och tiobaspaket till varje elev, och kartläggningen (passgenomgången
   # 2026-10-26, del A).
@@ -498,7 +501,7 @@ plan:
           - "Tiostavar och ental, talbrickor med 1 och 10, och enkronor och tiokronor."
           - "Mattan har bara Tiotal och Ental: vik bort de andra rutorna."
           - "Paketet är av papper: tre tiostavar, 15 ental och en matta med Tiotal och Ental. Läxa 1 och 2 står på ett A4, som två läxkort att klippa isär, och likaså läxa 3 och 4. Läxa 5 har ett eget A4."
-          - "Om ingen i paret kan läsa än läser du korten under hela I par, och i Två kort läser du ett kort i taget för hela gruppen."
+          - "Om ingen i paret kan läsa än läser du korten under hela Korten, och i Två kort läser du ett kort i taget för hela gruppen."
       - namn: Åk 2
         fore:
           - "Tiostavar och ental och en hundraplatta, talbrickor med 1, 10 och 100, och enkronor, tiokronor och en hundralapp."
@@ -578,7 +581,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: "Tiostavar och ental, talbrickor med 1 och 10, och enkronor och tiokronor. Klar tidigt: Närmast målet 30 på tre slag, där varje slag räknas som tiotal eller ental. Ett slag på 4, 5 eller 6 blir ental. Per elev: 20 brickor och 20 mynt av varje talsort. Om ingen i paret kan läsa än läser du korten under hela I par, och i Två kort läser du ett kort i taget för hela gruppen."
+              text: "Tiostavar och ental, talbrickor med 1 och 10, och enkronor och tiokronor. Klar tidigt: Närmast målet 30 på tre slag, där varje slag räknas som tiotal eller ental. Ett slag på 4, 5 eller 6 blir ental. Per elev: 20 brickor och 20 mynt av varje talsort. Om ingen i paret kan läsa än läser du korten under hela Korten, och i Två kort läser du ett kort i taget för hela gruppen."
             - rubrik: Vecka 1 · Bygga och säga tal
               text: "Visa först och säg: ”Jag bygger 25. Jag tar två tiostavar och lägger dem på tiotalens plats. Jag lyfter en: tio ental som sitter ihop. Jag lägger fem ental här och pekar på dem: ett, två, tre, fyra, fem. Två tiotal och fem ental. 25.”\nLyssna efter eleven som räknar tiostaven som en, så att 14 blir fem."
             - rubrik: Vecka 2 · Siffrans plats och nollan

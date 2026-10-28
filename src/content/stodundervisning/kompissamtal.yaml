@@ -262,7 +262,7 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Ställ stolarna runt bordet och bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten Våra samtalsregler, Så kan du säga och Peka på känslan, bladet Vår överenskommelse, en penna och papper för förslagen till hands. Hämta gruppen, eller se till att en vuxen följer den till rummet.
+      vad: Ställ stolarna runt bordet och bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten Våra samtalsregler, Så kan du säga och Peka på känslan, ett nytt blad Vår överenskommelse, en penna och papper för förslagen till hands. Från samtal 2 tar du också med förra samtalets blad Vår överenskommelse. Hämta gruppen, eller se till att en vuxen följer den till rummet.
     - tid: 0–4 min
       fas: Starta
       vad: Hälsa välkommen, och gruppen säger de fyra samtalsreglerna. I samtal 1 visar du först talpinnen, läser reglerna på kortet Våra samtalsregler och frågar för varje regel hur det ser ut och låter. Sedan säger du ett du-⁠budskap och ett jag-⁠budskap, så att eleverna hör skillnaden. Säg varje gång att det ni berättar stannar i rummet, men att du inte kan lova att hålla tyst om någon far illa. Från samtal 2 läser ni sedan upp förra överenskommelsen på bladet Vår överenskommelse, och du säger kort vad de vuxna har sett.
@@ -430,7 +430,7 @@ plan:
   # Det som skrivs ut före samtal 1 utöver checklistan: kortet Så kan du säga också till de vuxna runt gruppen, ett nytt
   # blad Vår överenskommelse till varje samtal och kortet Samtalsteknikerna, ur ramarnas text (K-596).
   fore:
-    - "Skriv ut korten på A4, en uppsättning till varje grupp, och laminera dem gärna. Skriv också ut kortet Så kan du säga till varje elevs bänk, till väggen i klassrummet och till de vuxna runt gruppen, och ett extra kort Våra samtalsregler till väggen. Till varje samtal skriver du ut ett nytt blad Vår överenskommelse, och till varje elev de två lapparna hem. Kortet Samtalsteknikerna är bara för dig."
+    - "Skriv ut korten Våra samtalsregler, Så kan du säga och Peka på känslan, en uppsättning på A4 till varje grupp, och laminera dem gärna. Skriv också ut kortet Så kan du säga till varje elevs bänk, till väggen i klassrummet och till de vuxna runt gruppen, och ett extra kort Våra samtalsregler till väggen. Till varje samtal skriver du ut ett nytt blad Vår överenskommelse, och till varje elev Lappen hem före samtal 1 och Lappen hem efter samtalet. Kortet Samtalsteknikerna är bara för dig."
   utan:
     - "Schemat har tiderna från och med samtal 2, och tiderna för samtal 1 står direkt under det."
   passen:
@@ -513,7 +513,7 @@ grund:
 ramar:
   rubrik: Material att skriva ut
   text:
-    - Lektionskortet är för dig under samtalet. De andra korten är stöd som du tar fram när du ser att någon behöver dem. Samtalet, reglerna och det du modellerar kommer först. Skriv ut korten på A4, en uppsättning till varje grupp, och laminera dem gärna. Skriv också ut kortet Så kan du säga till varje elevs bänk, till väggen i klassrummet och till de vuxna runt gruppen, och ett extra kort Våra samtalsregler till väggen. Till varje samtal skriver du ut ett nytt blad Vår överenskommelse, och till varje elev de två lapparna hem. Kortet Samtalsteknikerna är bara för dig.
+    - Lektionskortet är för dig under samtalet. De andra korten är stöd som du tar fram när du ser att någon behöver dem. Samtalet, reglerna och det du modellerar kommer först. Skriv ut korten Våra samtalsregler, Så kan du säga och Peka på känslan, en uppsättning på A4 till varje grupp, och laminera dem gärna. Skriv också ut kortet Så kan du säga till varje elevs bänk, till väggen i klassrummet och till de vuxna runt gruppen, och ett extra kort Våra samtalsregler till väggen. Till varje samtal skriver du ut ett nytt blad Vår överenskommelse, och till varje elev Lappen hem före samtal 1 och Lappen hem efter samtalet. Kortet Samtalsteknikerna är bara för dig.
   ramar:
     - rubrik: Våra samtalsregler
       text:

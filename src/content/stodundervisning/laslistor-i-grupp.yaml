@@ -322,11 +322,14 @@ uppfoljning:
 plan:
   stege: true
   # Det som görs före första passet: listorna att visa stort, bokstavskorten och böckerna till avslutningen (K-596).
+  # Vilken dag som stryks med fyra pass i veckan står här, där läraren väljer dagarna före start, och inte i tisdagens
+  # pass, som i vecka 6 och 7 sa att det egna passet skulle strykas (Rimligheten efter omtaget, K-596). Bokstavskorten
+  # står i en rad, eftersom schemat tar högst fyra.
   fore:
-    - "Varje lista är ett blad till eleven, med orden stora i var sin ruta, och före bladet står hur ni arbetar med listan: vad listan tränar, hur ni gör och vad du lyssnar efter. Kopiera bladet till varje par, och visa det stort för gruppen, på tavlan eller utskrivet i A3, när du modellerar."
-    - "Med bokstavskorten bygger du ett ord vid bordet när någon läser fel."
-    - "Kopiera bladet en gång, gärna på tjockt papper, och klipp isär korten. Det räcker med en sats, eftersom det är du som bygger. Laminerar du dem, håller de hela perioden."
+    - "Varje läslista är ett blad till eleven, med orden stora i var sin ruta, och före bladet står hur ni arbetar med listan: vad listan tränar, hur ni gör och vad du lyssnar efter. Kopiera bladet till varje par, och visa det stort för gruppen, på tavlan eller utskrivet i A3, när du modellerar."
+    - "Med bokstavskorten bygger du ett ord vid bordet när någon läser fel. Kopiera bladet med bokstavskorten en gång, gärna på tjockt papper, och klipp isär korten. Det räcker med en sats, eftersom det är du som bygger. Laminerar du dem, håller de hela perioden."
     - "Böckerna till avslutningen från vecka 4 hittar du bland skolans lättlästa böcker: nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. Välj en bok som eleverna kan läsa det mesta av och som har något att prata om."
+    - "Med fyra pass i veckan stryker du en av dagarna tisdag till torsdag, och i vecka 6 och 7 tisdagen."
   utan:
     - "Remsan visar passet från vecka 4, när boken har vuxit in i avslutningen."
   passen:
@@ -337,15 +340,15 @@ plan:
     - nar: veckans övriga pass i vecka 1–5
       kort: "Dagens kolumn"
       ur: { tabell: En lista i veckan, rad: Tisdag till torsdag }
-    # Vilken dag som stryks med fyra pass i veckan, ur noten under En lista i veckan (K-596).
-    - nar: veckans övriga
-      text: "Med fyra pass i veckan stryker du en av dagarna tisdag till torsdag, och i vecka 6 och 7 tisdagen."
     - nar: veckans sista
       kort: "Varje elev läser listan"
       ur: { tabell: En lista i veckan, rad: Fredag }
     - nar: vecka 1
       text: "Modellera fyra till sex bokstäver först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
-    # Listans eget sätt att modellera, ur fältet Så gör ni i veckans läslista (K-596).
+    # Listans eget sätt att modellera, ur fältet Så gör ni i veckans läslista (K-596). En rad som börjar med ett kort
+    # namn och kolon blir passets namn för hela veckan, så att Hela listan, Dagens kolumn och Varje elev läser listan
+    # försvinner. Därför börjar vecka 5 med Fokus första mening, och vecka 6 och 7 har delens hela text (Rimligheten
+    # efter omtaget, K-596).
     - nar: vecka 2
       del: Modellering
       text: "För fingret från vänster till höger, ljuda och bind ihop: /s/ /e/ blir se. Jämför gärna spegelparen så och ås, la och al, så att eleven hör att ordningen avgör ordet."
@@ -357,28 +360,36 @@ plan:
       text: "Dela ordet i stavelser och klappa: so-⁠la, la-⁠ga, re-⁠sa. Ljuda första stavelsen, ljuda andra stavelsen, läs ihop hela ordet. Vokalen i den öppna stavelsen är lång."
     - nar: vecka 5
       del: Modellering
-      text: "Ljuda mötet som ett par: /s/ /t/ blir st, lägg sedan på resten: st-⁠en, st-⁠ol. I slutmötena: läs början, håll vokalen kort och landa i mötet: fi-⁠sk, ha-⁠nd."
+      text: "Två konsonanter i följd, först i början av ordet och sedan i slutet. Ljuda mötet som ett par: /s/ /t/ blir st, lägg sedan på resten: st-⁠en, st-⁠ol. I slutmötena: läs början, håll vokalen kort och landa i mötet: fi-⁠sk, ha-⁠nd."
+    # I vecka 6 och 7 står veckans modellering i stället för tidsschemats, som ljudar ord för ord, ljud för ljud (Rimligheten
+    # efter omtaget, K-596).
     - nar: vecka 6
       del: Modellering
-      text: "Ringa in ändelsen och fråga vad som hände med ordet: en sol, solen, flera solar. I de sammansatta orden: dela ordet i två kända ord, sol och ros blir solros."
+      istallet: true
+      text: "Sitt så att alla ser listan. Ringa in ändelsen och fråga vad som hände med ordet: en sol, solen, flera solar. I de sammansatta orden: dela ordet i två kända ord, sol och ros blir solros. Tänk högt om det som är svårt i ordet: den långa vokalen, konsonantmötet, ändelsen. Eleverna lyssnar och följer med, de läser inte än."
     - nar: vecka 7
       del: Modellering
-      text: "Läs varje mening två gånger: först med fokus på att alla ord blir rätt, sedan en gång till med flyt och läsmelodi. Stanna vid punkten."
-    # Veckans rättning när du cirkulerar mellan paren, ur fältet Lyssna efter i veckans läslista (K-596).
+      istallet: true
+      text: "Sitt så att alla ser listan. Läs varje mening två gånger: först med fokus på att alla ord blir rätt, sedan en gång till med flyt och läsmelodi. Stanna vid punkten."
+    # Veckans rättning när du cirkulerar mellan paren, ur fältet Lyssna efter i veckans läslista (K-596). Raden börjar med
+    # vad du lyssnar efter, ur progressionens rad, så att den inte blir passets namn (Rimligheten efter omtaget, K-596).
     - nar: vecka 4
       del: Parläsning
-      text: "Vid fel: täck andra stavelsen med fingret och läs delarna var för sig."
+      text: "Lyssna efter att eleven tar en stavelse i taget. Vid fel: täck andra stavelsen med fingret och läs delarna var för sig."
     - nar: vecka 5
       del: Parläsning
-      text: "Vid fel: bygg ordet med bokstavskort, ta bort en bokstav i mötet och läs det som blir kvar: sten blir sen, blad blir bad, gris blir ris."
+      text: "Lyssna efter att inget ljud tappas eller läggs till i mötet. Vid fel: bygg ordet med bokstavskort, ta bort en bokstav i mötet och läs det som blir kvar: sten blir sen, blad blir bad, gris blir ris."
     - nar: vecka 6
       del: Parläsning
-      text: "Beröm strategin: du såg ordet sol inuti solen."
+      text: "Lyssna efter att eleven läser ändelsen som en helhet. Beröm strategin: du såg ordet sol inuti solen."
     - nar: vecka 7
       del: Parläsning
-      text: "Ställ en fråga per mening: var bor musen?"
-    # Ordbilderna till meningarna från Läslista 5, ur progressionens text (K-596).
+      text: "Lyssna efter läsmelodin och prata om vad meningarna betyder. Ställ en fråga per mening: var bor musen?"
+    # Ordbilderna till meningarna från Läslista 5, ur progressionens text (K-596), sist i modelleringen, som Läslista 6
+    # har ordbilderna i Så gör ni (Rimligheten efter omtaget, K-596).
     - nar: vecka 6
+      del: Modellering
+      sist: true
       text: "Från lista 5 behövs ett litet antal ordbilder för meningarna: och, är, i, på, en, ett, har, jag, vi, det, de. Öva dem som helheter, till exempel med ordkort."
     # Körläsningen i vecka 6 och 7 läser rader och meningar i stället för kolumnen (den stängda frågan 2026-10-26).
     # Måndagens körläsning och listan delad på tisdag till torsdag i vecka 6 och 7 (sajtens fråga 2026-10-26, out/planera-r/laslistor-i-grupp-2.md).
@@ -453,7 +464,7 @@ grund:
 ramar:
   rubrik: Läslistorna
   text:
-    - "Här finns lektionskortet och sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje lista är ett blad till eleven, med orden stora i var sin ruta, och före bladet står hur ni arbetar med listan: vad listan tränar, hur ni gör och vad du lyssnar efter. Kopiera bladet till varje par, och visa det stort för gruppen, på tavlan eller utskrivet i A3, när du modellerar. Sist står bokstavskorten. Med dem bygger du ord vid bordet."
+    - "Här finns lektionskortet och sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje läslista är ett blad till eleven, med orden stora i var sin ruta, och före bladet står hur ni arbetar med listan: vad listan tränar, hur ni gör och vad du lyssnar efter. Kopiera bladet till varje par, och visa det stort för gruppen, på tavlan eller utskrivet i A3, när du modellerar. Sist står bokstavskorten. Med dem bygger du ord vid bordet."
   ramar:
     - rubrik: Läslista start
       text:
@@ -538,7 +549,7 @@ ramar:
             - rubrik: Fokus
               text: "Hela meningar av tränade ord och ordbilder, från två ord till fem. Sist en kort text. Nu ska avkodningen bära ända fram till innehållet: prata om vad meningarna betyder."
             - rubrik: Så gör ni
-              text: "Läs varje mening två gånger: först med fokus på att alla ord blir rätt, sedan en gång till med flyt och läsmelodi. Stanna vid punkten. Ordbilderna och, är, i, på, en, ett, har, jag, vi, det och de läses som helheter."
+              text: "Läs varje mening två gånger: först med fokus på att alla ord blir rätt, sedan en gång till med flyt och läsmelodi. Stanna vid punkten."
             - rubrik: Lyssna efter
               text: "Att eleven läser om meningen med flyt efter första genomläsningen och att rösten går ner vid punkt. Ställ en fråga per mening: var bor musen?"
     - rubrik: Bokstavskort
@@ -550,7 +561,7 @@ ramar:
             - rubrik: Så bygger du
               text: "Lägg ordet vänt mot eleven, och sitt gärna bredvid. Ligger ett kort upp och ner blir u ett n, b ett q och d ett p."
             - rubrik: Utskrift
-              text: "Kopiera bladet en gång, gärna på tjockt papper, och klipp isär korten. Det räcker med en sats, eftersom det är du som bygger. Laminerar du dem, håller de hela perioden."
+              text: "Kopiera bladet med bokstavskorten en gång, gärna på tjockt papper, och klipp isär korten. Det räcker med en sats, eftersom det är du som bygger. Laminerar du dem, håller de hela perioden."
       listor:
         - rubrik: "Bokstäver att bygga med"
           rader:

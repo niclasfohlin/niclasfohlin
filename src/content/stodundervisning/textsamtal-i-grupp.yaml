@@ -746,8 +746,9 @@ plan:
     - nar: veckans första
       text: "Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat."
     # Svårigheten och texterna med slaget Ordet där du väljer veckans text, ordagrant ur Lärarens sidor, delen Så väljer du
-    # text (K-596): i vecka 8 är nivåns fyra texter med slaget Ordet slut.
-    - nar: veckans första
+    # text (K-596): i vecka 8 är nivåns fyra texter med slaget Ordet slut. Svårigheten står i första passet, där insatsen
+    # börjar, så att den inte säger svårighet 1 varje måndag (Rimligheten efter omtaget, K-596).
+    - nar: första passet
       del: Före passet
       text: "Börja med svårighet 1, och ta 2 eller 3 när gruppen klarar slutsatsen med mindre stöd."
     - nar: veckans första pass i vecka 6–8
@@ -832,6 +833,17 @@ plan:
     - nar: veckans tredje
       kort: "Eleverna läser själva"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Du] }
+    # Återblicken på samtalsreglerna i Avsluta i varje pass, ordagrant ur steget Reflektera och ge återkoppling i tabellen
+    # Så lär du gruppen att samtala, eftersom Före säger att ni tittar tillbaka på reglerna i Avsluta (Rimligheten efter
+    # omtaget, K-596: inget pass sa det).
+    - nar: veckans första
+      del: Avsluta
+      sist: true
+      text: "I Avsluta frågar du: ”Vad sa din kamrat som fick dig att tänka nytt?” och ”Hur gick det att följa samtalsreglerna i dag?”"
+    - nar: veckans övriga
+      del: Avsluta
+      sist: true
+      text: "I Avsluta frågar du: ”Vad sa din kamrat som fick dig att tänka nytt?” och ”Hur gick det att följa samtalsreglerna i dag?”"
   veckoval:
     text: "Planera åtta veckor. Sluta efter vecka 6 eller 7 när lyssningsbladet visar att eleverna själva hittar ett ställe i bänkboken och att ledtråden står utan h. Tar ni ett drag en vecka till, hinner ni inte alla veckorna 6–8, men ni tar minst en av dem."
     mer: Progression över insatsperioden

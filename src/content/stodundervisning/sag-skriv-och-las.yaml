@@ -48,7 +48,7 @@ principer:
   text: "Låt eleven säga meningen igen och räkna orden innan hen bygger, så att meningen finns kvar medan hen skriver. Låt eleven läsa det som ligger, med fingret under: så upptäcker hen själv ett ljud som fattas. Bekräfta först det som stämmer, fråga sedan efter nästa ljud och låt eleven hitta resten."
 passrutin:
   kallas: delar
-  text: "Passet har samma fyra delar varje gång, och korten går tillbaka i högen efter varje ord och mening, utom den sista meningen. Här står ett pass med meningar. Vecka 1 är det ord i passets alla delar. I Jag visar skriver du ett ord ur dagens ordgrupper i tabellen Orden. I Dagens meningar bygger var och en omkring sex ord ur samma ordgrupper. I Min mening bygger eleven ett eget ord som hen vill skriva, grannen läser det, och du skriver det i skrivboken. Ordbilderna börjar vecka 2. Den som är klar före de andra får fyra kort i blandad ordning, bokstäverna i ett ord ur tabellen Orden. Hen flyttar dem och läser tills hen hittar ett ord. Är gruppen klar före tiden, gör alla det eller läser ur skrivböckerna för varandra."
+  text: "Passet har samma fyra delar varje gång, och korten går tillbaka i högen efter varje ord och mening, utom den sista meningen. Här står ett pass med meningar. Vecka 1 är det ord i passets alla delar. I Jag visar skriver du ett ord ur dagens ordgrupper i tabellen Orden. I Dagens meningar bygger var och en omkring sex ord ur samma ordgrupper. I Min mening bygger eleven ett eget ord som hen vill skriva, grannen läser det, och du skriver det i skrivboken. Ordbilderna börjar vecka 2. Den som är klar före de andra får fyra bokstavskort i blandad ordning, bokstäverna i ett ord ur tabellen Orden. Hen flyttar dem och läser tills hen hittar ett ord. Är gruppen klar före tiden, gör alla det eller läser ur skrivböckerna för varandra."
   steg:
     - text: "Var och en bygger två ord, och sist två ordbilder eller en ny, som i tabellen Ordbilderna."
       fas: "Startorden"
@@ -205,7 +205,7 @@ tabeller:
         - "Tabellen Meningarna, Fem ord med ”en”"
         - "En elev kan visa i Jag visar: du säger dagens första mening, och eleven skriver den på miniwhiteboarden och tänker högt. Den som skriver med penna prövar med raden täckt"
       - - "Ett ljudstridigt ord, vecka 7"
-        - "Ett ljudstridigt ord, på en lapp, och ordbilden ”med”"
+        - "Tabellen Meningarna, Ett ljudstridigt ord, på en lapp, och ordbilden ”med”"
         - "Eleven gör en egen mening i Min mening, som du i Jag visar. Den som har börjat med pennan skriver den direkt"
       - - "Egna meningar, vecka 8"
         - "Två egna meningar per elev, i stället för listan"
@@ -449,7 +449,7 @@ plan:
     - nar: vecka 1–8
       del: "Dagens meningar"
       sist: true
-      text: "Den som är klar före de andra får fyra kort i blandad ordning, bokstäverna i ett ord ur tabellen Orden. Hen flyttar dem och läser tills hen hittar ett ord. Är gruppen klar före tiden, gör alla det eller läser ur skrivböckerna för varandra."
+      text: "Den som är klar före de andra får fyra bokstavskort i blandad ordning, bokstäverna i ett ord ur tabellen Orden. Hen flyttar dem och läser tills hen hittar ett ord. Är gruppen klar före tiden, gör alla det eller läser ur skrivböckerna för varandra."
     - nar: vecka 8
       del: "Dagens meningar"
       istallet: true
@@ -486,12 +486,15 @@ plan:
       del: "Min mening"
       sist: true
       text: "I Min mening läser grannen den sista meningen. Står den inte redan i skrivboken, skriver ni in den där."
-    # En elev ensam, och en elev som inte vill visa grannen, ur arbetsformens text (K-596).
+    # En elev ensam, och en elev som inte vill visa grannen, ur arbetsformens text (K-596), sist i delen, efter
+    # viskningen och grannens läsning som de ändrar (Rimligheten K-596).
     - nar: vecka 1–8
       del: "Min mening"
+      sist: true
       text: "När gruppen är en enda elev, viskar eleven inte meningen till dig. Du läser raden exakt som den ligger, och sedan säger eleven vad hen ville skriva."
     - nar: vecka 1–8
       del: "Min mening"
+      sist: true
       text: "Vill eleven inte visa sin mening för grannen än, läser du raden i stället."
   # Det planen inte visar i passen, metodens regel för att ta veckan igen och justeringen efter vecka 4 (K-553).
   utan:

@@ -26,7 +26,7 @@ material:
   - Lärarens skattning
   - bladet Vår grupp
   - frågekort och meningar att avsluta
-uppdaterad: 2026-10-26
+uppdaterad: 2026-10-28
 publicerad: 2026-10-16
 centrala:
   - id: aktiviteter
@@ -324,7 +324,7 @@ urval:
 
 uppfoljning:
   rubrik: Gruppen över tid
-  text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Efter tolv veckor är diagrammet i Lärarens skattning fullt, och du bestämmer hur ni går vidare. Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen. Om gruppen inte har kommit så långt, men linjen har stigit sedan ni började eller ligger på 7 eller mer, fortsätter ni en period till med ett nytt diagram. Veckorna räknar du då vidare, vecka 13 och framåt, och bara diagrammet börjar om på vecka 1. Har linjen inte stigit och ligger under 7, tar du upp gruppen med elevhälsan. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. I återkopplingen läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Har veckan en gruppreflektion, gör ni avslutningen i stället. Vecka 12 är en vanlig vecka. Avslutar ni insatsen, gör ni avslutningen i passet efter beslutet. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Pågår kränkningar, eller skattar du 1 eller 2, går skolans rutin före raderna. Vänta då med aktiviteterna tills det går enligt rutinen. Säger två av raderna om linjen och beröringen emot varandra, gör du det som står först.
+  text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Efter tolv veckor är diagrammet i Lärarens skattning fullt, och du bestämmer hur ni går vidare. Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen. Om gruppen inte har kommit så långt, men linjen har stigit sedan ni började eller ligger på 7 eller mer, fortsätter ni en period till med ett nytt diagram i Lärarens skattning. Veckorna räknar du då vidare, vecka 13 och framåt, och bara diagrammet börjar om på vecka 1. Har linjen inte stigit och ligger under 7, tar du upp gruppen med elevhälsan. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. I återkopplingen läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Har veckan en gruppreflektion, gör ni avslutningen i stället. Vecka 12 är en vanlig vecka. Avslutar ni insatsen, gör ni avslutningen i passet efter beslutet. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Pågår kränkningar, eller skattar du 1 eller 2, går skolans rutin före raderna. Vänta då med aktiviteterna tills det går enligt rutinen. Säger två av raderna om linjen och beröringen emot varandra, gör du det som står först.
   rader:
     - nar: Lärarens skattning varje vecka
       tid: "varje vecka"
@@ -348,11 +348,13 @@ uppfoljning:
       tid: "villkor"
       vad: Ringar de flesta också in 4 eller 5 på varje påstående i Vår grupp, gör en aktivitet i veckan och en gruppreflektion i månaden i stället för varannan vecka. Går linjen under 7, gör ni som förut.
 plan:
-  # Det som skiljer passen åt (Rimligheten 2026-10-26, sajtens K-567): i första passet hur de fem delarna går till i en
-  # klass. Inga rader med metodens veckor (vecka 5) eller platsen i veckan: de slår på Upprepa veckan och veckans pass i
+  # Det som skiljer passen åt (Rimligheten 2026-10-26, sajtens K-567): i första passet hur de fem delarna går till med
+  # fyra till åtta elever och i en klass (verifieringen 2026-10-28: bara klassens rad stod). Inga rader med metodens veckor (vecka 5) eller platsen i veckan: de slår på Upprepa veckan och veckans pass i
   # hela planen. Det sista passet har ingen egen rad: vecka 12 är en vanlig vecka, och avslutningen kommer i passet efter
   # beslutet, så den står i plan.utvardering (den andra passgenomgången 2026-10-26).
   passen:
+    - nar: första passet
+      ur: { tabell: "I en klass, i en liten grupp och med de yngsta", rad: Fyra till åtta elever, kolumner: ["Gruppen", "Så gör du"] }
     - nar: första passet
       ur: { tabell: "I en klass, i en liten grupp och med de yngsta", rad: Fler än åtta eller en klass, kolumner: ["Gruppen", "Så gör du"] }
   # Före första passet: de första korten är utan beröring (Rimligheten 2026-10-26), och i en klass gör du grupperna innan
@@ -374,12 +376,12 @@ plan:
     text: "Efter tolv veckor är diagrammet i Lärarens skattning fullt, och du bestämmer hur ni går vidare. Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen."
     mer: Gruppen över tid
     forval: 12
-    # En eller två perioder med var sitt diagram, så att utvärderingen kommer när diagrammet är fullt (K-596).
-    langder: [12, 24]
+    # En period med ett diagram, så att utvärderingen och metodens beslut kommer när diagrammet är fullt efter vecka 12.
+    # En period till läggs till med Förläng insatsen efter beslutet (K-596, Rimligheten efter omtaget).
   # Att veckorna räknas vidare när ni fortsätter, och vad läraren säger i avslutningen och när den görs (K-596).
   utvardering:
     - "Har linjen legat på 7 eller mer de fyra sista veckorna, och ringar de flesta in 4 eller 5 på varje påstående i Vår grupp, avslutar ni insatsen."
-    - "Om gruppen inte har kommit så långt, men linjen har stigit sedan ni började eller ligger på 7 eller mer, fortsätter ni en period till med ett nytt diagram. Veckorna räknar du då vidare, vecka 13 och framåt, och bara diagrammet börjar om på vecka 1."
+    - "Om gruppen inte har kommit så långt, men linjen har stigit sedan ni började eller ligger på 7 eller mer, fortsätter ni en period till med ett nytt diagram i Lärarens skattning. Veckorna räknar du då vidare, vecka 13 och framåt, och bara diagrammet börjar om på vecka 1."
     - "Har linjen inte stigit och ligger under 7, tar du upp gruppen med elevhälsan."
     - "När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. I återkopplingen läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Avslutar ni insatsen, gör ni avslutningen i passet efter beslutet."
   # Metodens egna skattningar (K-559): Lärarens skattning från 1 till 10 vid Skatta gruppen, med linjen och reglerna i
@@ -401,7 +403,7 @@ plan:
       # En aktivitet på omkring tio minuter och gruppreflektionen på 20–30 minuter (andra rundan av Rimligheten 2026-10-26).
       minuter: 30
       rad: Gruppreflektion varannan vecka
-      text: "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter. Gruppreflektionen tar 20–30 minuter och slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Är eleverna fler än sex, pratar de i grupper om två till fyra medan du går runt och lyssnar, och när du lyfter det gruppen gör bra, berättar två eller tre grupper först vad de har pratat om. I en klass säger du till eleverna, innan de fyller i bladet, att gruppen på bladet är hela klassen."
+      text: "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter. Gruppreflektionen tar 20–30 minuter och slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Är eleverna fler än sex, pratar de i grupper om två till fyra medan du går runt och lyssnar, och när du lyfter det gruppen gör bra, berättar två eller tre grupper först vad de har pratat om. I en klass säger du till eleverna, innan de fyller i bladet Vår grupp, att gruppen på bladet är hela klassen."
       ram: Gruppreflektion
 mal:
   overgripande: "kunna samarbeta mot ett mål som gruppen bara når tillsammans, och pröva igen när något går fel."
@@ -455,7 +457,7 @@ ramar:
               text: Skatta gruppen som helhet, och i en klass hela klassen. Jämför inte med andra grupper. Är ni två vuxna, skattar ni var för sig de första veckorna och enas om krysset. Skattar du 1 eller 2, följer du skolans rutin.
     - rubrik: Gruppreflektion
       text:
-        - "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter. Gruppreflektionen tar 20–30 minuter och slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Är eleverna fler än sex, pratar de i grupper om två till fyra medan du går runt och lyssnar, och när du lyfter det gruppen gör bra, berättar två eller tre grupper först vad de har pratat om. I en klass säger du till eleverna, innan de fyller i bladet, att gruppen på bladet är hela klassen."
+        - "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter. Gruppreflektionen tar 20–30 minuter och slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Är eleverna fler än sex, pratar de i grupper om två till fyra medan du går runt och lyssnar, och när du lyfter det gruppen gör bra, berättar två eller tre grupper först vad de har pratat om. I en klass säger du till eleverna, innan de fyller i bladet Vår grupp, att gruppen på bladet är hela klassen."
         - "Bladet Vår grupp finns också som Google Formulär. På niclasfohlin.se/vargrupp gör du en kopia i din Google Drive, med formuläret och ett kalkylark som hör ihop. Publicera din kopia av formuläret och skicka den till eleverna, till exempel i Classroom, så svarar de i telefonen eller på datorn. Kalkylarket räknar själv gruppens snitt vid varje tillfälle, andelen som svarar 4 eller 5 och det svagaste påståendet. Svaren hamnar bara i din kopia."
       delar:
         - rubrik: Så leder du gruppreflektionen

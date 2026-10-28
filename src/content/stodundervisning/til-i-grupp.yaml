@@ -253,10 +253,11 @@ uppfoljning:
       resultat: "rätt lästa ord på en minut, med flyt, läser om själv, böcker lästa två gånger"
       vad: "Låt eleven läsa en liknande text och jämför med startläget. Räkna också böckerna i lässchemat: hur många har lästs två gånger?"
     # Läsningen hemma som uteblir och boken som är för svår, med metodens egna meningar ur hem.text och
-    # stödtrappans femte steg, så att läraren ser dem varje vecka under Håll koll på (K-596).
+    # stödtrappans femte steg, så att läraren ser dem varje vecka under Håll koll på (K-596). Läsningen för
+    # en annan vuxen har med meningen om favoritmeningarna och initialerna, som lässchemat och efterkollen räknar.
     - nar: Läsningen hemma uteblir flera dagar i rad
       tid: "villkor"
-      vad: Ring hem tidigt, innan rutinen hunnit brytas. Kommer läsningen hemma inte i gång efter samtalet, låt eleven läsa boken för en annan vuxen i skolan samma dag.
+      vad: Ring hem tidigt, innan rutinen hunnit brytas. Kommer läsningen hemma inte i gång efter samtalet, låt eleven läsa boken för en annan vuxen i skolan samma dag. Eleven skriver favoritmeningarna där, och den vuxne skriver sina initialer i lässchemat.
     - nar: Eleven fastnar på fler än ett ord av tio
       tid: "villkor"
       vad: Boken är för svår. Byt nivå till nästa pass.
@@ -280,12 +281,13 @@ plan:
       kort: "Nytt lässchema"
       text: "Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."
   # Nivån först, intill förekollen, eftersom förekollens text tas på den nivån. Sedan var böckerna finns
-  # och kapitelboken för åk 3–6, och mötet med hela stycket: hur den vuxne hjälper till vid svåra ord,
+  # och kapitelboken för åk 3–6, där dagens text är ett kapitel som skrivs i lässchemat,
+  # och mötet med hela stycket: hur den vuxne hjälper till vid svåra ord,
   # och kontraktet och lässchemat att skriva ut till varje elev (K-596).
   fore:
     - "Före första passet låter du eleven läsa en sida högt ur böcker på olika nivåer. Elevens nivå är den högsta där hen klarar minst nio ord av tio. Den första boken och texten i förekollen tar du på den nivån."
     - "Böckerna behöver du inte leta länge efter. Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. För elever i årskurs 4–6 behöver innehållet passa åldern även när texten är lätt, och där fungerar lättlästa böcker från förlag som Nypon och Hegas samt material med flera nivåer som Mellan raderna."
-    - "För elever från ungefär årskurs 3 fungerar en och samma kapitelbok bättre än en ny liten bok varje dag. Boken ska fortfarande vara lätt att avkoda, men innehållet får bära i flera dagar."
+    - "För elever från ungefär årskurs 3 fungerar en och samma kapitelbok bättre än en ny liten bok varje dag. Boken ska fortfarande vara lätt att avkoda, men innehållet får bära i flera dagar. Dagens text är då ett kapitel eller ett antal utvalda sidor som går att läsa på cirka tio minuter. Markera dagens sidor med ett bokmärke eller en lapp och skriv kapitlet i lässchemat i stället för en boktitel. Ni återkommer till samma bok varje dag tills den är utläst, och sedan väljer ni en ny."
     - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda står i Materialet, på varsitt A4 att skriva ut till varje elev."
   justera:
     - "Byt till en lättare bok när det blir många fel."

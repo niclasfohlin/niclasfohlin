@@ -328,7 +328,7 @@ roll:
 urval:
   rubrik: Var hittar du problemen?
   text:
-    - Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar. Börja med metodens problem på nivån, i ordning, ett per pass. De står under Problemen och räcker till de första tre till fem veckorna, med tre eller två pass i veckan. Problemen finns också på sidan Ta fram ett matteproblem, och där finns fler. Där väljer du nivå och innehåll, visar ett problem i taget stort och skriver ut de problem du vill ha. Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare. När gruppen har löst nivåns problem med lite stöd, kan den ta nästa nivå, om den kan räkna talen där.
+    - Gör Kartläggning före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar. Börja med metodens problem på nivån, i ordning, ett per pass. De står under Problemen och räcker till de första tre till fem veckorna, med tre eller två pass i veckan. Problemen finns också på sidan Ta fram ett matteproblem, och där finns fler. Där väljer du nivå och innehåll, visar ett problem i taget stort och skriver ut de problem du vill ha. Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare. När gruppen har löst nivåns problem med lite stöd, kan den ta nästa nivå, om den kan räkna talen där.
     - Sedan väljer du problem i läromedlets problemlösningsavsnitt, i Skolverkets två problembanker för åk 4–6 och åk 7–9 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem, med lösningar och materialet Arbeta vidare, på NCM:s webbplats. Ta först problem som liknar något av de tio. Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas (Skolverket, 2022). Varje problem du väljer förbereder du på bladet Lärarens sida för ett eget problem.
   kravText: "Välj ett problem per pass som är rikt men avgränsat och uppfyller tre krav:"
   krav:
@@ -389,7 +389,7 @@ plan:
     - "Remsan visar hur de 30 minuterna fördelas mellan passets delar och när gruppen arbetar gemensamt och i par."
   enPerPass: true
   nivaval:
-    text: "Metoden har problem på tre nivåer, Bas nära åk 4–5, Medel nära åk 6–7 och Avancerat nära åk 8–9. Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
+    text: "Metoden har problem på tre nivåer, Bas nära åk 4–5, Medel nära åk 6–7 och Avancerat nära åk 8–9. Gör Kartläggning före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
     mer: Så skiljer sig nivåerna
   # Periodens längd efter antalet pass i veckan, och Du gör själv i den sista veckan när perioden är kortare än åtta
   # veckor. Förvalet är åtta veckor, eftersom planens förval är två pass i veckan (passgenomgången 2026-10-26).
@@ -412,28 +412,29 @@ plan:
     - nar: första passet
       del: Jämföra
       text: "Bladet Två lösningar visar du första gången i Jämföra, när du delar ut det med B täckt."
-    # Metodens regel för nästa problem, där läraren tar det, medan planen visar nivåns problem i ordning (K-596).
+    # Metodens regel för nästa problem, där läraren tar det, medan planen visar nivåns problem i ordning (K-596), och
+    # varifrån det liknande problemet kommer, ur Ordningen under Lärarens sidor (rimligheten efter omtaget, K-596).
     - nar: pass 3–10
       del: Före passet
-      text: "Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare."
+      text: "Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare. Ta problemen i ordning, ett per pass, och byt ordning när gruppen behöver arbeta med ett annat område eller ett problem som liknar det förra."
     # Nivåns tio problem räcker till pass 10. Sedan säger passet varifrån nästa problem kommer och hur det förbereds
     # (sajtens rimlighet 2026-10-26, svar-problemlosning-i-grupp.md), och när gruppen kan ta nästa nivå och vilka
-    # källorna är (K-596).
+    # källorna är (K-596). Nästa nivå börjar med nivåns första problem, ur urvalets text (rimligheten efter omtaget).
     - nar: pass 11 till det sista
       kort: "Fler problem"
-      text: "Problemen finns också på sidan Ta fram ett matteproblem, och där finns fler. När gruppen har löst nivåns problem med lite stöd, kan den ta nästa nivå, om den kan räkna talen där. Sedan väljer du problem i läromedlets problemlösningsavsnitt, i Skolverkets två problembanker för åk 4–6 och åk 7–9 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem, med lösningar och materialet Arbeta vidare, på NCM:s webbplats. Ta först problem som liknar något av de tio. Varje problem du väljer förbereder du på bladet Lärarens sida för ett eget problem."
+      text: "Problemen finns också på sidan Ta fram ett matteproblem, och där finns fler. När gruppen har löst nivåns problem med lite stöd, kan den ta nästa nivå, om den kan räkna talen där. Börja med metodens problem på nivån, i ordning, ett per pass. Sedan väljer du problem i läromedlets problemlösningsavsnitt, i Skolverkets två problembanker för åk 4–6 och åk 7–9 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem, med lösningar och materialet Arbeta vidare, på NCM:s webbplats. Ta först problem som liknar något av de tio. Varje problem du väljer förbereder du på bladet Lärarens sida för ett eget problem."
   fore:
     - "Kartläggningen har två blad per nivå, ett A4 före och ett efter."
-    - "Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
+    - "Gör Kartläggning före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
     # Nivån när en elev inte kan räkna talen och när gruppen landar på olika nivåer, ur Så skiljer sig nivåerna, och
     # färdighetsträningen och klassläraren från början, ur progressionens text (K-596).
     - "Vet eleven hur uppgift 3 i kartläggningen ska lösas men kan inte räkna talen, gör du kartläggningen på nivån under. Landar eleverna på olika nivåer, tar gruppen den lägre, så att alla kan räkna talen."
     - "Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med."
-  # Metodens sätt att justera vid avstämningen: ord och begrepp före passet, ett liknande problem och nästa nivå (K-596).
+  # Metodens sätt att justera vid avstämningen: ord och begrepp före passet och ett liknande problem (K-596). Nästa nivå
+  # står bara under Fler problem, eftersom nivåns tio problem inte är lösta vid avstämningen (rimligheten efter omtaget).
   justera:
     - "Förstår eleven inte problemet när du läser det högt, går du igenom ord, begrepp och sammanhang före passet, och den som inte kan läsa texten själv får den uppläst."
     - "Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare."
-    - "När gruppen har löst nivåns problem med lite stöd, kan den ta nästa nivå, om den kan räkna talen där."
   # Regeln för att byta led står i progressionens vidare, och upprepa citerar progressionens text som hänvisar dit
   # (K-572, del B).
   upprepa: "Gruppen byter led när den klarar det som står under Gå vidare när, och annars tar ni samma led en vecka till."

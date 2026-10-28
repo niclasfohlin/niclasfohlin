@@ -330,7 +330,7 @@ plan:
     - "Översikten visar hur de 60 minuterna fördelas och vem som arbetar i varje del."
   fore:
     # Hur kartläggningen görs, så att före och efter går att jämföra, och mallarna till uppgift 3 och 4 (K-596).
-    - "Läs varje uppgift högt och hjälp inte till. Eleverna svarar på eget papper och får rita. Till uppgift 3 och 4 får varje elev mallarna Tomma tallinjer från 0 till 1 och från 0 till 2."
+    - "Läs varje uppgift högt och hjälp inte till. Eleverna svarar på eget papper och får rita. Till uppgift 3 och 4 får varje elev mallarna Tomma tallinjer från 0 till 1 och Tomma tallinjer från 0 till 2."
     - "Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Gör också en sats till dig. Det tar ungefär en kvart per sats, och satserna räcker hela kursen. Eleverna kan färglägga raderna i sin egen sats efter kartläggningen, men bitarna klipper du själv, gärna med en pappersskärare, så att delarna blir lika stora. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. I vecka 2 går bråken förbi 1, och då behöver varje elev och du halvorna och fjärdedelarna ur en extra sats. De står på mallens första sida. Ett par med en köpt sats tar dem ur en till köpt sats av samma sort, så att det hela är lika långt."
     - "Skriv ut bråkstavarna, bråkplanket och tallinjerna på samma sorts papper, A4 eller A3 liggande, så att det hela är lika långt i allt. En köpt sats har ofta en längsta stav på 20 cm. Då lägger eleverna stavarna mot tejpen och inte mot mallarna. På mallen Tomma tallinjer från 0 till 2 är det hela 13 cm, hälften så långt som staven. Där ritar och räknar eleverna, och stavarna läggs mot tejpen."
     - "Affischen är ett stort papper på väggen vid bordet, där du skriver veckans mening varje vecka. Sätt upp den före första passet."
@@ -459,16 +459,16 @@ plan:
     # förbereder passet ur planen och mallarna blir länkar (K-596).
     - nar: veckans första pass i vecka 1
       del: Före passet
-      text: "Remsor, två ark per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna."
+      text: "Remsor, två ark per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Mallen Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna."
     - nar: veckans andra pass i vecka 1
       del: Före passet
-      text: "Remsor, två ark per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna."
+      text: "Remsor, två ark per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Mallen Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna."
     - nar: veckans första pass i vecka 2
       del: Före passet
-      text: "En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev, och halvorna och fjärdedelarna ur en extra sats till varje elev och till dig, så att de räcker förbi 1. Mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1 och från 0 till 2 till pass 2."
+      text: "En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev, och halvorna och fjärdedelarna ur en extra sats till varje elev och till dig, så att de räcker förbi 1. Mallarna Tallinjer i delar, Tomma tallinjer från 0 till 1 och Tomma tallinjer från 0 till 2 till pass 2."
     - nar: veckans andra pass i vecka 2
       del: Före passet
-      text: "En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev, och halvorna och fjärdedelarna ur en extra sats till varje elev och till dig, så att de räcker förbi 1. Mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1 och från 0 till 2 till pass 2."
+      text: "En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev, och halvorna och fjärdedelarna ur en extra sats till varje elev och till dig, så att de räcker förbi 1. Mallarna Tallinjer i delar, Tomma tallinjer från 0 till 1 och Tomma tallinjer från 0 till 2 till pass 2."
     - nar: veckans första pass i vecka 3
       del: Före passet
       text: "Bråkstavar, en sats per elev, och tallinjen på bordet. Ett A4 per elev till kort 5 i pass 1. Mallen Tallinjer i delar och linjal till pass 2."
@@ -477,10 +477,10 @@ plan:
       text: "Bråkstavar, en sats per elev, och tallinjen på bordet. Ett A4 per elev till kort 5 i pass 1. Mallen Tallinjer i delar och linjal till pass 2."
     - nar: veckans första pass i vecka 4
       del: Före passet
-      text: "Bråkstavar, en sats per elev, tallinjen på bordet och remsor och sax till kort 2 i pass 1. Mallarna Tallinjer i delar och Tomma tallinjer till pass 2."
+      text: "Bråkstavar, en sats per elev, tallinjen på bordet och remsor och sax till kort 2 i pass 1. Mallarna Tallinjer i delar, Tomma tallinjer från 0 till 1 och Tomma tallinjer från 0 till 2 till pass 2."
     - nar: veckans andra pass i vecka 4
       del: Före passet
-      text: "Bråkstavar, en sats per elev, tallinjen på bordet och remsor och sax till kort 2 i pass 1. Mallarna Tallinjer i delar och Tomma tallinjer till pass 2."
+      text: "Bråkstavar, en sats per elev, tallinjen på bordet och remsor och sax till kort 2 i pass 1. Mallarna Tallinjer i delar, Tomma tallinjer från 0 till 1 och Tomma tallinjer från 0 till 2 till pass 2."
     - nar: veckans första pass i vecka 5
       del: Före passet
       text: "Knappar eller centikuber, 24 per elev. Papper, linjal och bladet Stapelrutan till pass 2."
@@ -572,7 +572,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Läs varje uppgift högt och hjälp inte till. Eleverna svarar på eget papper och får rita. Till uppgift 3 och 4 får varje elev mallarna Tomma tallinjer från 0 till 1 och från 0 till 2.
+              text: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Läs varje uppgift högt och hjälp inte till. Eleverna svarar på eget papper och får rita. Till uppgift 3 och 4 får varje elev mallarna Tomma tallinjer från 0 till 1 och Tomma tallinjer från 0 till 2.
             - rubrik: Så antecknar du
               text: Skriv elevens namn överst på en kopia av listan. I kolumnen Före skriver du R när svaret är rätt och R+ när eleven också förklarar med rätt ord, med en bild eller på tallinjen. Plustecknet gäller uppgifterna som frågar hur eleven vet. Lämna rutan tom när svaret är fel. På uppgift 8, 9 och 10 kräver R att båda delarna är rätt. Efter kursen skriver du på samma kopia, i kolumnen Efter.
             - rubrik: Uppgifterna och målen
@@ -628,7 +628,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: Remsor, två ark per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna.
+              text: Remsor, två ark per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Mallen Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna.
             - rubrik: Pass 1 · Visa först och säg
               text: "”Den här remsan är det hela. Jag viker den så att kanterna möts. De två delarna ligger precis på varandra, så de är lika stora. Varje del är en halv.” Vik igen och vik upp remsan: ”Nu är det fyra lika stora delar.” Peka på vikarna. ”Jag skriver bråkstrecket på remsan och fyran under: det hela är delat i fyra lika stora delar. Jag färglägger tre delar och skriver trean över: vi har tre sådana delar. Tre fjärdedelar.” Riv en remsa i tre olika långa bitar: ”Tre delar. Är det tredjedelar? Jag lägger bitarna under varandra, med kanterna mot samma linje. De är olika långa, så det är inga tredjedelar.”"
             - rubrik: Pass 2 · Visa först och säg
@@ -671,7 +671,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev, och halvorna och fjärdedelarna ur en extra sats till varje elev och till dig, så att de räcker förbi 1. Mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1 och från 0 till 2 till pass 2. Spelkorten till Högst vinner, en kopia per par, klippta.
+              text: En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev, och halvorna och fjärdedelarna ur en extra sats till varje elev och till dig, så att de räcker förbi 1. Mallarna Tallinjer i delar, Tomma tallinjer från 0 till 1 och Tomma tallinjer från 0 till 2 till pass 2. Spelkorten till Högst vinner, en kopia per par, klippta.
             - rubrik: Pass 1 · Visa först och säg
               text: "”Den här staven är det hela. Den börjar vid 0 och slutar vid 1.” Lägg en fjärdedel från 0, sätt ett streck där den slutar och skriv 1/4 vid strecket: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Lägg fjärdedelar en i taget, sätt ett streck där varje fjärdedel slutar och räkna: ”Två fjärdedelar, tre fjärdedelar, fyra fjärdedelar. Fyra fjärdedelar är 1.” Ta en fjärdedel till ur den andra satsen och lägg den efter 1: ”Fem fjärdedelar. Nu är vi förbi 1. Fem fjärdedelar är en och en fjärdedel.”"
             - rubrik: Pass 2 · Visa först och säg
@@ -770,7 +770,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: Bråkstavar, en sats per elev, tallinjen på bordet och remsor och sax till kort 2 i pass 1. Mallarna Tallinjer i delar och Tomma tallinjer till pass 2. Spelkorten till Närmast en hel, en kopia per par, klippta.
+              text: Bråkstavar, en sats per elev, tallinjen på bordet och remsor och sax till kort 2 i pass 1. Mallarna Tallinjer i delar, Tomma tallinjer från 0 till 1 och Tomma tallinjer från 0 till 2 till pass 2. Spelkorten till Närmast en hel, en kopia per par, klippta.
             - rubrik: Pass 1 · Visa först och säg
               text: "”Jag lägger 3/8 mot tallinjen, tre åttondelar. Jag lägger 2/8 efter, två åttondelar till. Jag räknar delarna: fem åttondelar.” Skriv 3/8 + 2/8 = 5/8. ”Delarna är lika stora, så nämnaren är densamma. Täljaren räknar delarna.” Skriv 5/16 bredvid: ”Blir det fem sextondelar? En sextondel är hälften av en åttondel, så 5/16 är kortare än 3/8. Summan kan inte vara mindre än det jag började med.”"
             - rubrik: Pass 2 · Visa först och säg

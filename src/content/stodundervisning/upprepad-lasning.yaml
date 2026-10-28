@@ -418,6 +418,13 @@ plan:
     - nar: första passet
       del: Läs igen
       text: "Har du bara en elev arbetar ni en till en, och du är elevens par. Eleven läser för dig, du visar, och sedan läser ni igen tillsammans."
+    # Veckans text i varje pass, med länken till Lästräningstexterna, ur Materialets text (länkarna K-596).
+    - nar: veckans första pass
+      text: "Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
+    - nar: veckans övriga pass
+      text: "Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
+    - nar: veckans sista pass
+      text: "Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
     # Veckans text är ett förslag: ni byter först när läsningen flyter, och veckans strategi väljer du efter det du hör.
     - nar: veckans första pass
       text: "Ni läser samma text hela passet, eller hela veckan, och byter text först när läsningen flyter. Varje vecka övar ni också en strategi, som du väljer på strategikortet efter det du hör."
@@ -445,7 +452,10 @@ plan:
       del: Läs igen
       text: "Vänta tre sekunder innan du hjälper, och säg vad eleven gjorde och vilken strategi som hjälpte."
     # Så hör du om texten flyter innan ni byter, ur tabellen Lästräningstexterna vecka för vecka (K-596).
+    # I Läs igen och sist i delen, efter omgången där du lyssnar på varje elev för sig (Rimligheten K-596).
     - nar: veckans sista pass
+      del: Läs igen
+      sist: true
       text: "Peka på orden ur texten i en annan ordning, så hör du om eleverna läser orden eller minns texten."
     # Veckans fokus och orden ur texten, så att läraren vet vilka ord som prövas i en annan ordning (K-596).
     - nar: vecka 1

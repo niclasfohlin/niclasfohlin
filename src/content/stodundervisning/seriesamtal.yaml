@@ -112,7 +112,7 @@ tabeller:
       - - Det sista passet
         - Med pärmarna och gruppens blad framför er ser ni tillbaka på perioden.
         - Var och en väljer en tumregel och en sak att ta med sig.
-    not: Personerna i Chatten och Lunchen är runt tolv år, och de fyra första serierna fungerar i hela F–⁠5. I F–⁠2 kan gruppen ta om en eller två av de fyra första serierna i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången. Bildserierna sitter på väggen under perioden, i den ordning ni har gjort dem.
+    not: Personerna i Chatten och Lunchen är runt tolv år, och de fyra första serierna fungerar i hela F–⁠5. I F–⁠2 kan gruppen ta om en eller två av Bildserie 1–⁠4 i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången. Bildserierna sitter på väggen under perioden, i den ordning ni har gjort dem.
   - rubrik: "Samtalsteknikerna: vad du gör och hur det låter"
     plats: efter-steg
     meny: true
@@ -161,7 +161,7 @@ tabeller:
       - - |-
           Förberedelse
           Före passet
-        - Skriv gruppens regler överst på ett stort papper, gruppens blad, och sätt upp det på väggen. Lägg Fönsterplatsen på A3 mitt på bordet, med rutorna 2–⁠4 täckta. Ta fram en tankebubbla och en pratbubbla på var sin pinne till varje elev och till dig själv. Lägg fram lösa bubblor, pennor och spanarbladen med det första uppdraget.
+        - Skriv gruppens regler överst på ett stort papper, gruppens blad, och sätt upp det på väggen. Lägg Fönsterplatsen på A3 mitt på bordet, med rutorna 2–⁠4 täckta. Ta fram en tankebubbla och en pratbubbla på var sin pinne till varje elev och till dig själv. Lägg fram lösa bubblor från arket Bubblor att klippa ut, pennor och spanarbladen med det första uppdraget.
       - - |-
           Varför vi ses
           0–⁠4 min
@@ -439,7 +439,7 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Lägg dagens bildserie på A3 mitt på bordet, och täck rutorna 2–⁠4 med ett halvt A4-ark på varje ruta. Lägg fram bubblorna, talpinnen, elevernas pärmar och en whiteboardpenna till var och en, i var sin färg. Talpinnen går runt i rundorna, och den som håller i den pratar. Lägg också fram bladet Nästa gång och kortet ”Vad behöver hen?”, och från pass 4 kortet Frågor vi ställer till varandra. Skriv det nya spanaruppdraget från lärarens sida på spanarbladen.
+      vad: Lägg dagens bildserie på A3 mitt på bordet, och täck rutorna 2–⁠4 med ett halvt A4-ark på varje ruta. Lägg fram bubblorna från arket Bubblor att klippa ut, talpinnen, elevernas pärmar och en whiteboardpenna till var och en, i var sin färg. Talpinnen går runt i rundorna, och den som håller i den pratar. Lägg också fram bladet Nästa gång och kortet ”Vad behöver hen?”, och från pass 4 kortet Frågor vi ställer till varandra. Skriv det nya spanaruppdraget från lärarens sida på spanarbladen.
     - tid: 0–4 min
       fas: Spaningen
       vad: Var och en håller upp bubblorna på pinne och berättar om sitt spanaruppdrag, utan att säga några namn. Du speglar det var och en såg, och från pass 4 gör en kamrat det.
@@ -623,7 +623,7 @@ progression:
       roll: Du ritar åt den som vill. Från pass 8 spolar du tillbaka till när det var lugnt och ritar elevens version, eller låter eleven rita. Efter det sista passet visar du provbilden för var och en.
       eleverna: Att berätta i sin egen serie vad man själv gjorde och hur det påverkade den andra. Att säga vad man själv tänkte och ville, och vad den andra kan ha tänkt och velat.
 uppfoljning:
-  text: Du behöver veta om eleven ser mer i en social situation än förut, och om det märks utanför rummet. Provbilden och protokollet står under Material att skriva ut. Har provbildens poäng och klasslärarens siffra stigit, avslutar du insatsen med påfyllningspasset, och de vuxna runt eleven fortsätter med frågorna och planen. Har poängen stigit men inte klasslärarens siffra, ritar du en eller två egna serier till med eleven ensam före påfyllningspasset, som i tabellen Ett pass med en egen serie. Sedan gör du en ny plan. Säger de vuxna före påfyllningspasset att planen inte går, gör ni en ny plan direkt efter påfyllningspasset. Har poängen inte stigit, tar du upp det med elevhälsan.
+  text: Du behöver veta om eleven ser mer i en social situation än förut, och om det märks utanför rummet. Provbilden och protokollet står under Material att skriva ut. Har provbildens poäng och klasslärarens siffra stigit, avslutar du insatsen med påfyllningspasset, och de vuxna runt eleven fortsätter med frågorna på kortet Till de vuxna runt eleven och planen på bladet Min plan. Har poängen stigit men inte klasslärarens siffra, ritar du en eller två egna serier till med eleven ensam före påfyllningspasset, som i tabellen Ett pass med en egen serie. Sedan gör du en ny plan. Säger de vuxna före påfyllningspasset att planen inte går, gör ni en ny plan direkt efter påfyllningspasset. Har poängen inte stigit, tar du upp det med elevhälsan.
   rader:
     - nar: Före pass 1
       tid: "före"
@@ -640,7 +640,7 @@ uppfoljning:
       resultat: "provbildens poäng 0–⁠8, klasslärarens siffra 0–⁠10, elevens siffra 0–⁠10"
     - nar: Fyra veckor efter sista passet
       tid: "efter 4 veckor"
-      vad: Fråga de vuxna runt eleven hur planen går. Håll sedan ett påfyllningspass på 30 minuter där ni läser planerna, med samma delar som i pass 7.
+      vad: "Fråga de vuxna runt eleven hur planen går. Håll sedan ett påfyllningspass på 30 minuter där ni läser planerna på bladet Min plan, med samma delar som i tabellen Pass 7: en gång när det nästan blev bråk."
 plan:
   utan:
     - "Tabellen gäller ett pass med en bildserie, pass 2–⁠6."
@@ -673,13 +673,13 @@ plan:
       text: "Bildserie 5: Chatten. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       ur: { tabell: Perioden pass för pass, rad: Pass 5 }
     - nar: pass 5
-      text: "I F–⁠2 kan gruppen ta om en eller två av de fyra första serierna i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången."
+      text: "I F–⁠2 kan gruppen ta om en eller två av Bildserie 1–⁠4 i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången."
     - nar: pass 6
       kort: "Lunchen"
       text: "Bildserie 6: Lunchen. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill."
       ur: { tabell: Perioden pass för pass, rad: Pass 6 }
     - nar: pass 6
-      text: "I F–⁠2 kan gruppen ta om en eller två av de fyra första serierna i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången."
+      text: "I F–⁠2 kan gruppen ta om en eller två av Bildserie 1–⁠4 i stället för Chatten och Lunchen. Då tar var och en först den person hen inte tog förra gången."
     - nar: pass 7
       kort: "Nästan bråk"
       ur: { tabell: Perioden pass för pass, rad: Pass 7 }
@@ -696,7 +696,7 @@ plan:
     - nar: pass 8 till det sista
       text: "Handlar serien om något som ska hända, ritar ni i ruta 1 hur det brukar börja och går fram till rutan där det brukar bli bråk. Sedan får personerna tankebubblor som vanligt, och i delen Nästa gång ritar ni hur det kan bli i stället och vad eleven, den andra personen och de vuxna kan göra."
     - nar: pass 8 till det sista
-      text: "I ett pass som blir över äger gruppen serien, och gruppen väljer händelsen i slutet av passet före. Eleverna berättar i tur och ordning där ägaren annars berättar, och gruppen väljer tillsammans där ägaren annars väljer. I delen Nästa gång ritar var och en på bladet Nästa gång vad hen kan göra, och det blir hens spanaruppdrag. Ingen fyller i bladet Min plan efter passet."
+      text: "I ett pass som blir över äger gruppen serien, och gruppen väljer händelsen i slutet av passet före. Eleverna berättar i tur och ordning där ägaren annars berättar, och gruppen väljer tillsammans där ägaren annars väljer. I delen Nästa gång ritar var och en på bladet Nästa gång vad hen kan göra, och det blir hens spanaruppdrag. Ingen fyller i bladet Min plan efter passet. Till pass 2–⁠6 och till ett pass som blir över skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad."
     - nar: sista passet
       kort: "Tillbaka på perioden"
       ur: { tabell: Perioden pass för pass, rad: Det sista passet }
@@ -740,7 +740,7 @@ plan:
     mer: Var hittar du bildserierna och händelserna?
     forval: 8
   utvardering:
-    - Har provbildens poäng och klasslärarens siffra stigit, avslutar du insatsen med påfyllningspasset, och de vuxna runt eleven fortsätter med frågorna och planen.
+    - Har provbildens poäng och klasslärarens siffra stigit, avslutar du insatsen med påfyllningspasset, och de vuxna runt eleven fortsätter med frågorna på kortet Till de vuxna runt eleven och planen på bladet Min plan.
     - Har poängen stigit men inte klasslärarens siffra, ritar du en eller två egna serier till med eleven ensam före påfyllningspasset, som i tabellen Ett pass med en egen serie. Sedan gör du en ny plan.
     - Säger de vuxna före påfyllningspasset att planen inte går, gör ni en ny plan direkt efter påfyllningspasset.
     - Har poängen inte stigit, tar du upp det med elevhälsan.
@@ -786,7 +786,7 @@ grund:
 ramar:
   rubrik: Material att skriva ut
   text:
-    - Före pass 1 skriver du ut Bildserie 1–⁠6 med lärarens sidor och serierna på A3, Bubblor att klippa ut, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut ett spanarblad till varje elev, och varannan vecka snabbmallen. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
+    - Före pass 1 skriver du ut Bildserie 1–⁠6 med lärarens sidor och serierna på A3, Bubblor att klippa ut, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut ett spanarblad till varje elev, och varannan vecka snabbmallen. Till pass 2–⁠6 och till ett pass som blir över skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
     - Bildserierna, bubblorna, korten på bordet och bladen är elevernas. Laminera serierna och bubblorna, så att eleverna kan skriva och rita på dem med whiteboardpenna och sudda ut det efteråt. Efter passet tar du ett foto av serien innan du suddar. Vill du att eleverna ska ha serien i sin pärm, skriver du ut en papperskopia till var och en. En egen serie ritar ni på papper, så att den finns kvar. Lärarens sidor, provbildens protokoll och kortet Till de vuxna runt eleven är dina. De bildserier ni har gjort och gruppens blad sitter på väggen under perioden, och elevens egna serier ligger i pärmen.
   ramar:
     - rubrik: "Bildserie 1: Fönsterplatsen"

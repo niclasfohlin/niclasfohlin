@@ -281,7 +281,7 @@ tabeller:
   - rubrik: "Pass 2 och 3: skrivpasset på 60 minuter"
     plats: efter-arbetsform
     meny: true
-    text: "Skrivpasset går från gruppen, där du skriver din text, till paren och tillbaka till gruppen. Pass 2 och 3 har samma delar, från Ordstarten till Läsa upp, och i vecka 1–4 också samma tider. I pass 2 börjar texten, och i pass 3 blir den klar. Förbered dig genom att läsa veckans sida och skriva din text en gång själv."
+    text: "Skrivpasset går från gruppen, där du skriver din text, till paren och tillbaka till gruppen. Pass 2 och 3 har samma delar, från Ordstarten till Läsa upp, och i vecka 1–4 också samma tider. I pass 2 börjar texten, och i pass 3 blir den klar. Förbered dig genom att läsa veckans sida under Till läraren: veckorna och skriva din text en gång själv."
     kolumner:
       - Del
       - Pass 2, texten börjar
@@ -311,7 +311,7 @@ tabeller:
     not: "Från vecka 5 gör var och en sin plan i pass 2, berättar texten för kamraten och säger varje mening högt innan hen skriver den. Pass 3 står då i tabellen Pass 3 från vecka 5: skrivpasset med kontrollanten. Hinner ett par före de andra, läser paret texten för dig. Sedan skriver paret vidare i pass 2 och ritar mer till bilden i pass 3. I vecka 8 skriver eleverna klart i pass 2, och pass 3 är tidningens pass, som står under Pass 24 på veckans sida."
   - rubrik: "Pass 3 från vecka 5: skrivpasset med kontrollanten"
     plats: efter-arbetsform
-    text: "Från vecka 5 skriver var och en sin egen text, och i pass 3 är kamraten kontrollant. Förlagan och Din text tar fem minuter var, så att Skriva får 35 minuter. Passets två ord till Ordstarten och det som bara gäller veckan står på veckans sida."
+    text: "Från vecka 5 skriver var och en sin egen text, och i pass 3 är kamraten kontrollant. Förlagan och Din text tar fem minuter var, så att Skriva får 35 minuter. Passets två ord till Ordstarten och det som bara gäller veckan står på veckans sida under Till läraren: veckorna."
     kolumner:
       - Del
       - Så gör du
@@ -419,7 +419,7 @@ tabeller:
         - En för gruppen
         - Efter pass 3, då du lägger tidningens sidor i mappen
       - - Kartläggningen
-        - Före och efter kursen kopierar du elevens ordlista två gånger per elev, en till eleven och en till dig. Varje elev får också bladet Dela orden, bladet Diktamen och tidningens sida, och du har lärarens sidor.
+        - "Före och efter kursen kopierar du elevens ordlista två gånger per elev, en till eleven och en till dig. Varje elev får också bladet Kartläggning: dela orden, bladet Kartläggning: diktamen och tidningens sida, och du har kartläggningen och lärarens protokoll."
         - Veckan före och veckan efter kursen
       - - Diplomet
         - Ett per elev
@@ -621,13 +621,13 @@ plan:
     # skrivpassen i den form som veckansPass läser (K-596).
     - nar: veckans andra pass i vecka 1–7
       del: Före passet
-      text: "Förbered dig genom att läsa veckans sida och skriva din text en gång själv."
+      text: "Förbered dig genom att läsa veckans sida under Till läraren: veckorna och skriva din text en gång själv."
     - nar: veckans övriga pass i vecka 8
       del: Före passet
-      text: "Förbered dig genom att läsa veckans sida och skriva din text en gång själv."
+      text: "Förbered dig genom att läsa veckans sida under Till läraren: veckorna och skriva din text en gång själv."
     - nar: veckans tredje pass i vecka 1–7
       del: Före passet
-      text: "Passets två ord till Ordstarten och det som bara gäller veckan står på veckans sida."
+      text: "Passets två ord till Ordstarten och det som bara gäller veckan står på veckans sida under Till läraren: veckorna."
     # Det som ska fram på bordet i pass 3, med namnen, ur Före passet i pass 2, före metodens "Som i pass 2" (K-596).
     - nar: veckans tredje pass i vecka 1–7
       del: Före passet
@@ -646,9 +646,6 @@ plan:
       del: Skriva
       sist: true
       text: "Skriva i pass 3: paret ritar kartan i stället för bilden i rutan, med skyltarna på kartan."
-    - nar: veckans andra pass i vecka 5
-      del: Din text
-      text: "Din text: i pass 2 säger du varje mening högt innan du skriver den, som eleverna ska göra nu när var och en skriver sin egen text."
     - nar: veckans tredje pass i vecka 5
       del: Din text
       sist: true
@@ -675,6 +672,11 @@ plan:
       kort: "Skrivpasset, texten börjar"
       tabell: "Pass 2 och 3: skrivpasset på 60 minuter"
       kolumn: "Pass 2, texten börjar"
+    # Din text i vecka 5 står efter passets kort: en rad som börjar med "Din text:" före kortet gav pass 14 namnet Din
+    # text (Rimligheten efter omtaget, K-596).
+    - nar: veckans andra pass i vecka 5
+      del: Din text
+      text: "Din text: i pass 2 säger du varje mening högt innan du skriver den, som eleverna ska göra nu när var och en skriver sin egen text."
     - nar: veckans andra pass i vecka 5–7
       del: Skriva
       istallet: true
@@ -730,8 +732,8 @@ plan:
   # Det du kopierar till kartläggningen veckan före kursen, ur Materialet du behöver, och tidningens sida att fortsätta
   # på, ur tidningens sida (K-596).
   fore:
-    - "Före och efter kursen kopierar du elevens ordlista två gånger per elev, en till eleven och en till dig. Varje elev får också bladet Dela orden, bladet Diktamen och tidningens sida, och du har lärarens sidor."
-    - "Skriv ut en första sida och en sida att fortsätta på varje vecka, till varje par i vecka 1–4 och till varje elev i vecka 5–8."
+    - "Före och efter kursen kopierar du elevens ordlista två gånger per elev, en till eleven och en till dig. Varje elev får också bladet Kartläggning: dela orden, bladet Kartläggning: diktamen och tidningens sida, och du har kartläggningen och lärarens protokoll."
+    - "Skriv ut tidningens sida och Tidningens sida: fortsättning varje vecka, till varje par i vecka 1–4 och till varje elev i vecka 5–8."
   # Metodens sätt att justera vid avstämningen, ur uppföljningens rad Efter vecka 4 (K-596).
   justera:
     - "Läs texterna från vecka 1 och 4, och ta felstavade ord till Ordstarten."
@@ -1255,7 +1257,7 @@ ramar:
             - { rubrik: Texten, text: "" }
         - rubrik: Till läraren
           falt:
-            - { rubrik: Till läraren, text: "Skriv ut en första sida och en sida att fortsätta på varje vecka, till varje par i vecka 1–4 och till varje elev i vecka 5–8. Sekreteraren, och från vecka 5 eleven, skriver textens första bokstav stort i den lilla rutan bredvid de första raderna. Paret ritar kartan i vecka 2 på ett tomt papper." }
+            - { rubrik: Till läraren, text: "Skriv ut tidningens sida och Tidningens sida: fortsättning varje vecka, till varje par i vecka 1–4 och till varje elev i vecka 5–8. Sekreteraren, och från vecka 5 eleven, skriver textens första bokstav stort i den lilla rutan bredvid de första raderna. Paret ritar kartan i vecka 2 på ett tomt papper." }
     - rubrik: "Tidningens sida: fortsättning"
       sagoform: { form: sida, titel: Tidningens sida, radMm: 11 }
       text:

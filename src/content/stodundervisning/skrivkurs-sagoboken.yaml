@@ -584,7 +584,7 @@ plan:
   # kursen bygger på, ur Kursens material, och anpassningen med dator eller diktering ur tabellen För hand eller på dator
   # (K-596).
   fore:
-    - "Till den förstorade vägen kopierar du bladet Sagans väg för er version i A3 och sätter upp det på väggen."
+    - "Till den förstorade vägen kopierar du bladet Sagans väg för er version i A3 och sätter upp det på väggen när eleverna har gjort Sagokollen före kursen."
     - "Behöver en elev dator eller diktering som anpassning, också i fyra steg, bestämmer du det före kursen. Då skriver hela paret på dator, och eleven ska ha övat på verktyget."
   # Metodens sätt att justera vid avstämningen i vecka 5, när kursen inte kan ta en vecka om: ur tidsschemats text, fältet
   # Pass 15 och noten till tabellen Berättarpasset (K-596).
@@ -630,7 +630,7 @@ plan:
     - nar: pass 7
       del: "Före passet"
       istallet: true
-      text: "Lägg fram vägskyltarna, spänningsberget i A3, rollkorten, frågekorten och Sagans väg.\nI sex steg lägger du också fram Vår saga.\nMed ett udda antal elever blir ett par en trio med Utbyggaren. I en trio får den tredje eleven kortet Utbyggaren, och korten går runt efter varje mening."
+      text: "Lägg fram vägskyltarna, spänningsberget i A3, rollkorten, frågekorten och Sagans väg.\nI sex steg lägger du också fram Vår saga.\nMed ett udda antal elever blir ett par en trio med Utbyggaren. I en trio får den tredje eleven rollkortet Utbyggaren, och korten går runt efter varje mening."
     - nar: pass 7
       del: "Skrivdraget"
       text: "Skrivdraget: du skriver och tänker högt som i tabellen Skrivdragen. Sedan föreslår varje elev en mening med draget, och gruppen väljer den som svarar bäst på stationens fråga. Du skriver den."
@@ -872,7 +872,7 @@ grund:
 ramar:
   rubrik: Kursens material
   text:
-    - "Först kommer Till läraren: veckorna, med en sida för varje vecka och veckans material direkt efter. Sedan kommer det som gäller hela kursen: återkopplingen, de två strukturerna, modellsagorna, vägskyltarna, Sagans väg, Vår saga i sex steg, Spänningsberget, Hjältens kort, tärningarna, frågekorten, rollkorten, Det här tar vi med oss, bladen till boken, Sagokollen och Parets väg. Varje blad börjar på ett nytt A4. I fyra steg skriver paret sagan direkt på bladet Sagans väg och boksagan på Vår saga i fyra steg. I sex steg planerar paret på Sagans väg och skriver på Vår saga i sex steg eller på dator. Till den förstorade vägen kopierar du bladet Sagans väg för er version i A3 och sätter upp det på väggen. Gruppens saga skriver du på blädderblocket, ett ark för varje station, och sätter upp arken under vägen. Din egen saga skriver du på blädderblocket, efter gruppens saga. Bladen till boken är omslaget, Bokens sida och Författarna. De har ingen sidfot, så att kopiorna kan bli sidor i boken som de är."
+    - "Först kommer Till läraren: veckorna, med en sida för varje vecka och veckans material direkt efter. Sedan kommer det som gäller hela kursen: återkopplingen, de två strukturerna, modellsagorna, vägskyltarna, Sagans väg, Vår saga i sex steg, Spänningsberget, Hjältens kort, tärningarna, frågekorten, rollkorten, Det här tar vi med oss, bladen till boken, Sagokollen och Parets väg. Varje blad börjar på ett nytt A4. I fyra steg skriver paret sagan direkt på bladet Sagans väg och boksagan på Vår saga i fyra steg. I sex steg planerar paret på Sagans väg och skriver på Vår saga i sex steg eller på dator. Till den förstorade vägen kopierar du bladet Sagans väg för er version i A3 och sätter upp det på väggen när eleverna har gjort Sagokollen före kursen. Gruppens saga skriver du på blädderblocket, ett ark för varje station, och sätter upp arken under vägen. Din egen saga skriver du på blädderblocket, efter gruppens saga. Bladen till boken är omslaget, Bokens sida och Författarna. De har ingen sidfot, så att kopiorna kan bli sidor i boken som de är."
   ramar:
     # ---------------------------------------------------------------- Veckorna
     - rubrik: "Till läraren: veckorna"
@@ -886,11 +886,11 @@ ramar:
             - rubrik: Fokus
               text: "Gruppen hittar sagans väg."
             - rubrik: Pass 1
-              text: "Läspass. Kopiera saga 1 till varje elev. I fyra steg är saga 1 Bockarna Bruse. I sex steg är saga 1 Hans och Greta. Ta fram Två texter, vecka 2.\n0–⁠10 min. Sagoboken: berätta om boken och paren. Läs musens andra saga.\n10–⁠25 min. Modellsagan: läs saga 1 vid skyltarna. I sex steg hoppar musens saga över skylt 3 och 4.\n25–⁠40 min. Återberätta: gruppen återberättar, och på ”Byt!” tar nästa över.\n40–⁠60 min. Sagans väg: visa sagans väg på tavlan, och gruppen hittar på rörelser."
+              text: "Läspass. Kopiera saga 1 till varje elev. I fyra steg är saga 1 Bockarna Bruse. I sex steg är saga 1 Hans och Greta. Ta fram Två texter, vecka 2.\n0–⁠10 min. Sagoboken: berätta om boken och paren. Läs musens andra saga.\n10–⁠25 min. Modellsagan: läs saga 1 vid vägskyltarna. I sex steg hoppar musens saga över skylt 3 och 4.\n25–⁠40 min. Återberätta: gruppen återberättar, och på ”Byt!” tar nästa över.\n40–⁠60 min. Sagans väg: visa sagans väg på tavlan, och gruppen hittar på rörelser."
             - rubrik: Pass 2
-              text: "Läspass. Skriv ut Två texter, vecka 1: Ekorren till varje par.\n0–⁠5 min. Musens saga: gruppen berättar musens saga med rörelserna.\n5–⁠25 min. Två texter: läs Två texter, vecka 1: Ekorren. Paret skriver vad hon vill.\n25–⁠40 min. Berget: gruppen färgar Spänningsberget för Bockarna Bruse.\n40–⁠60 min. Önskan: skriv upp önskan under Sagornas ord. Gruppen berättar ekorrens andra saga vid skyltarna."
+              text: "Läspass. Skriv ut Två texter, vecka 1: Ekorren till varje par. Kopiera Spänningsberget i A3.\n0–⁠5 min. Musens saga: gruppen berättar musens saga med rörelserna.\n5–⁠25 min. Två texter: läs Två texter, vecka 1: Ekorren. Paret skriver vad hon vill.\n25–⁠40 min. Berget: gruppen färgar Spänningsberget för Bockarna Bruse.\n40–⁠60 min. Önskan: skriv upp önskan under Sagornas ord. Gruppen berättar ekorrens andra saga vid vägskyltarna."
             - rubrik: Pass 2 i sex steg
-              text: "Läspass. Skriv ut Två texter, vecka 1: Räven till varje par.\n0–⁠5 min. Musens saga: gruppen berättar musens saga med rörelserna.\n5–⁠30 min. Högläsningen och Två texter: läs Högläsning, vecka 1: Räven som ville flyga. Läs sedan Två texter, vecka 1: Räven.\n30–⁠45 min. Bergen och ett försök: gruppen färgar Spänningsberget för varje text, och paret skriver ett försök.\n45–⁠60 min. Hans och Greta: gruppen berättar Hans och Greta vid skyltarna."
+              text: "Läspass. Skriv ut Två texter, vecka 1: Räven till varje par. Kopiera Spänningsberget i A3, ett för var och en av de två texterna.\n0–⁠5 min. Musens saga: gruppen berättar musens saga med rörelserna.\n5–⁠30 min. Högläsningen och Två texter: läs Högläsning, vecka 1: Räven som ville flyga. Läs sedan Två texter, vecka 1: Räven.\n30–⁠45 min. Bergen och ett försök: gruppen färgar Spänningsberget för varje text, och paret skriver ett försök.\n45–⁠60 min. Hans och Greta: gruppen berättar Hans och Greta vid vägskyltarna."
             - rubrik: Pass 3
               text: "Läspass med barnen. Kopiera saga 2 till varje elev och Frågorna till barnet. I fyra steg är saga 2 De tre små grisarna. I sex steg är saga 2 Jack och bönstjälken.\n0–⁠25 min. Modellsagan: berätta saga 2. Gruppen läser och återberättar.\n25–⁠42 min. Sagoteatern: barnen kommer och ser Sagoteatern med sagan. De väljer en ny hjälte, och ni berättar sagan med den nya hjälten.\n42–⁠52 min. Intervjun: paret intervjuar barnet med Frågorna till barnet, vecka 1.\n52–⁠60 min. Barnen går: du skriver det de ville ha under Sagornas ord.\nUtan barnen: filma Sagoteatern med gruppens nya hjälte, och paren spelar in Frågorna till barnet. Barnens lärare visar inspelningarna. Barnen ritar svaren före pass 4."
             - rubrik: Lägg märke till
@@ -986,7 +986,7 @@ ramar:
             - rubrik: Fokus
               text: "Barnen kommer tillbaka och hör boksagan innan paret skriver den rent. Det de undrade skriver paret in samma pass. Från pass 22 gör gruppen Sagostarten utan skyltarna."
             - rubrik: Pass 22
-              text: "Skrivpass med barnen.\n0–⁠5 min. Sagostarten: en elev slår tärningarna.\n5–⁠15 min. Det nya: paret lägger sin förra saga bredvid boksagan, ringar in det nya och visar var sagan har raderna från bladet Det här tar vi med oss.\n15–⁠30 min. Läsningen: paret läser för barnet så som i Läsarna, vecka 8. Utan barnen läser paret boksagan för sitt lyssnarpar.\n30–⁠50 min. Barnens svar: paret ser om barnet pekade vid bergets topp och skriver in vad barnet undrade. Utan barnen skriver paret in vad lyssnarparet undrade medan du spelar in ett par i taget. Barnens lärare visar inspelningarna, och före pass 23 ritar barnen det mest spännande.\n50–⁠60 min. Läsarna lyssnar: två par läser det de skrev in."
+              text: "Skrivpass med barnen.\n0–⁠5 min. Sagostarten: en elev slår tärningarna.\n5–⁠15 min. Det nya: paret lägger sin förra saga bredvid boksagan, ringar in det nya och visar var sagan har raderna från bladet Det här tar vi med oss.\n15–⁠30 min. Läsningen: paret läser för barnet så som i Läsarna, vecka 8. Utan barnen läser paret boksagan för sitt lyssnarpar.\n30–⁠50 min. Barnens svar: paret ser om barnet pekade vid Spänningsbergets topp och skriver in vad barnet undrade. Utan barnen skriver paret in vad lyssnarparet undrade medan du spelar in ett par i taget. Barnens lärare visar inspelningarna, och före pass 23 ritar barnen det mest spännande.\n50–⁠60 min. Läsarna lyssnar: två par läser det de skrev in."
             - rubrik: Pass 23
               text: "Skrivpass utan nytt drag.\nSkrivdraget: du visar i din saga hur du ändrar där en läsare undrade.\nBerätta och skriva: paret lägger till en mening, byter ett ord eller stryker en mening där lyssnarparet eller barnet undrade."
             - rubrik: Pass 24
@@ -1649,7 +1649,7 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - { rubrik: Till läraren, text: "Skriv ut den första sidan till varje par och den andra sidan till en trio, och klipp isär korten. Paren får korten i pass 7 och har dem på bordet i varje skrivpass. I en trio får den tredje eleven kortet Utbyggaren, och korten går runt efter varje mening." }
+            - { rubrik: Till läraren, text: "Skriv ut den första sidan till varje par och den andra sidan till en trio, och klipp isär korten. Paren får korten i pass 7 och har dem på bordet i varje skrivpass. I en trio får den tredje eleven rollkortet Utbyggaren, och korten går runt efter varje mening." }
       listor:
         - rubrik: Berättaren
           rader:

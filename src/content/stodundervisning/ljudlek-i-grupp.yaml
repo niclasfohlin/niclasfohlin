@@ -426,19 +426,27 @@ plan:
     text: "På 4–12 veckor kommer gruppen så långt den hinner från sin ingång. Välj tolv veckor, eller åtta till tolv från Räkna ljud med fem pass i veckan. En kortare period, fyra till sju veckor, passar en grupp som bara har de sista lektionerna kvar."
     mer: "Lektionsbanken: förmågorna och lektionerna"
     forval: 12
-  # Takten för dagens ljud i veckans första ljudstart, ordagrant ur Dagens ljud: bokstävernas ordning (K-596).
+  # Takten för dagens ljud i veckans första ljudstart, ordagrant ur Dagens ljud: bokstävernas ordning, med tabellens två
+  # rader, så att planen har hela ordningen också efter de tio första, och vad som gäller när gruppen kan alla bokstäver
+  # (K-596, Rimligheten efter omtaget).
   passen:
     - nar: veckans första
       del: Ljudstart
       text: "Ta ungefär två nya ljud i veckan, och ett nytt först när gruppen säger de förra säkert. Samma ljud kan vara dagens ljud i flera pass."
+    - { nar: veckans första, del: Ljudstart, ur: { tabell: "Dagens ljud: bokstävernas ordning", rad: "De tio första, ungefär vecka 1–⁠5", kolumner: [Ordningen, Bokstäverna] } }
+    - { nar: veckans första, del: Ljudstart, ur: { tabell: "Dagens ljud: bokstävernas ordning", rad: "Sedan, ungefär vecka 6–⁠12", kolumner: [Ordningen, Bokstäverna] } }
+    - nar: veckans första
+      del: Ljudstart
+      text: "Kan gruppen alla bokstäver blir dagens ljud de ljud som gruppen blandar ihop, som p och b eller e och ä."
   fore:
     # Det som skrivs ut, kopieras och lamineras före första passet, ordagrant ur Materialet och protokollets fält Kopiera (K-596).
-    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen i två versioner, ljudkollen, protokollet, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar."
-    - "Kopiera protokollet, ett papper per elev."
+    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen, version A och screeningen, version B, ljudkollen, protokollet för screeningen och ljudkollen, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar."
+    - "Kopiera protokollet för screeningen och ljudkollen, ett papper per elev."
+    # Hur bokstäverna i uppgift 4 ringas in på ljudkollens blad och dagens ljud väljs, hela ljudkollens fält Bokstäverna,
+    # direkt efter kopiorna (K-596, Rimligheten efter omtaget).
+    - "Bokstäverna i uppgift 4 står blandade, så att eleven inte kan säga dem i den ordning ni lär in dem. Ringa in på ljudkollens blad de bokstäver som eleven inte kan, när hen har läst klart, och spara bladet med protokollet för screeningen och ljudkollen. Stryk ringen när eleven kan bokstaven. Den första bokstaven i ordningen s, o, l, a, r, m, e, n, i, v som fler än hälften av eleverna har inringad blir dagens ljud."
     # Ingången, fyra meningar i följd ur lektionsbanken som förut, nu i en rad, eftersom schemat tar högst fyra rader (K-596).
     - "Den första förmågan där fler än hälften av eleverna inte klarar uppgiften i ljudkollen visar ingången: Rim vid 1 eller 2, Första ljudet vid 3, 4 eller 5 och Räkna ljud vid 6 eller senare. Gruppen börjar i en ingång och går vidare lektion för lektion: vid förmåga 4 börjar den i lektionen Första ljudet och tar sedan Bokstavsgympa. Har du inte gjort ljudkollen före första passet, väljer du lektionen Första ljudet, med s som dagens ljud. Visar ljudkollen sedan en annan ingång, går gruppen dit."
-    # Hur dagens ljud väljs ur ljudkollen, ordagrant ur ljudkollens fält Bokstäverna (K-596).
-    - "Ringa in på elevens kopia de bokstäver som eleven inte kan, när hen har läst klart, och spara kopian med protokollet. Stryk ringen när eleven kan bokstaven. Den första bokstaven i ordningen s, o, l, a, r, m, e, n, i, v som fler än hälften av eleverna har inringad blir dagens ljud."
   # Metodens sätt att justera vid avstämningen: vad ljudkollen ändrar för gruppen och för varje elev, ordagrant ur
   # lektionsbankens not (K-596).
   justera:
@@ -487,7 +495,7 @@ grund:
 ramar:
   rubrik: Materialet
   text:
-    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen i två versioner, ljudkollen, protokollet, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar. Korten står i Andika, ett gratis typsnitt från SIL för dem som lär sig läsa."
+    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen, version A och screeningen, version B, ljudkollen, protokollet för screeningen och ljudkollen, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar. Korten står i Andika, ett gratis typsnitt från SIL för dem som lär sig läsa."
   ramar:
     - rubrik: Bokstavskort till ljudstarten
       text:
@@ -585,7 +593,7 @@ ramar:
             - rubrik: Så gör du
               text: "Gör ljudkollen med en elev i taget, utanför passen. Före och efter insatsen gör du alla nio uppgifterna, och var tredje vecka uppgiften för gruppens förmåga, uppgiften för nästa förmåga och uppgift 4. Varje uppgift utom uppgift 4 har fyra delar, och du skriver antal rätt av 4 i protokollet. Eleven klarar en uppgift med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna, och det för du in i gruppens översikt. Säger eleven bokstavens namn eller lägger till ett ö, fråga: ”Hur låter den?” och räkna svaret som rätt om eleven då säger ljudet, som i screeningen."
             - rubrik: Bokstäverna
-              text: "Bokstäverna i uppgift 4 står blandade, så att eleven inte kan säga dem i den ordning ni lär in dem. Ringa in på elevens kopia de bokstäver som eleven inte kan, när hen har läst klart, och spara kopian med protokollet. Stryk ringen när eleven kan bokstaven. Den första bokstaven i ordningen s, o, l, a, r, m, e, n, i, v som fler än hälften av eleverna har inringad blir dagens ljud."
+              text: "Bokstäverna i uppgift 4 står blandade, så att eleven inte kan säga dem i den ordning ni lär in dem. Ringa in på ljudkollens blad de bokstäver som eleven inte kan, när hen har läst klart, och spara bladet med protokollet för screeningen och ljudkollen. Stryk ringen när eleven kan bokstaven. Den första bokstaven i ordningen s, o, l, a, r, m, e, n, i, v som fler än hälften av eleverna har inringad blir dagens ljud."
             - rubrik: Bladet
               text: "Kopiera bladet, ett per elev, och skriv elevens namn överst. Ha några markörer till uppgift 6 och papper och penna till uppgift 7 framme."
         - rubrik: Uppgift för uppgift
@@ -618,7 +626,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Kopiera
-              text: "Kopiera protokollet, ett papper per elev. Det du säger och frågar står vid screeningens två versioner och vid ljudkollen."
+              text: "Kopiera protokollet för screeningen och ljudkollen, ett papper per elev. Det du säger och frågar står vid screeningens två versioner och vid ljudkollen."
       listor:
         - rubrik: "Protokollet · Screeningen: antal rätt eller fel, ringa in den högsta nivån eleven klarar"
           kolumner:

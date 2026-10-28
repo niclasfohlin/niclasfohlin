@@ -51,7 +51,7 @@ inledning:
   - "Högläsning i par är en lässatsning för hela klassen i åk 2–5, där eleverna läser högt för varandra tre till fem dagar i veckan under åtta veckor. Målet är att varje elev läser så att den som lyssnar förstår och känner det texten säger, och till det har eleverna fem strategier för rösten. Med Tankepausen pausar eleven där en ny tanke börjar, och med Frågan och utropet hör lyssnaren om någon säger, undrar eller ropar. Med Repliken läser eleven det någon säger med personens känsla, med Det viktiga ordet säger hen ett ord lite tydligare än orden runt det, och med Lyssnarens takt läser hen lugnt, så att lyssnaren hänger med. Metoden är en egen variant, inspirerad av lågstadieläraren Malin Rosendahls HögläsningsRally, där eleverna läser kort, ofta och för varandra."
   - "Eleverna läser i par, och paret håller ihop alla åtta veckor. På bänken ligger parets bok med en post-it-lapp där de slutade förra gången. De har valt boken tillsammans och läser vidare i den i varje pass. På väggen sitter affischen med de fem strategierna och lyssnarens två meningar, som kamraten säger efter varje läsning."
   - "Varje pass går från innehållet till rösten. Först berättar paret för varandra vad som hände förra gången och svarar på din fråga om boken. Sedan visar du på ett ställe på tavlan hur en strategi får lyssnaren att förstå det texten säger, och klassen läser stället efter dig. Paren läser vidare i sin bok, en sida var. Lyssnaren säger sina två meningar, vad hen förstod och vad rösten gjorde, och läsaren hör om rösten fick fram det hen ville säga. Medan paren läser lyssnar du på några par, och sist säger du till klassen vad du hörde."
-  - "Vecka 1–5 har var sin strategi, och de tidigare följer med. I vecka 3 visar du Repliken på ett ställe du väljer, till exempel i en kort berättelse där Lisa hör det knacka på dörren: ska hennes ”Vem är det?” låta glad eller rädd? Sedan hittar paren repliker i sin egen bok. Redan i vecka 1 vet eleverna att de ska läsa för en yngre klass på skolan. I vecka 6 träffar varje elev sin yngre lyssnare och väljer en bilderbok till hen, och i vecka 8 läser eleverna för de yngre eller hemma."
+  - "Vecka 1–5 har var sin strategi, och de tidigare följer med. I vecka 3 visar du Repliken på ett ställe du väljer, till exempel i början av Hunden vid dörren, där Lisa hör det knacka på dörren: ska hennes ”Vem är det?” låta glad eller rädd? Sedan hittar paren repliker i sin egen bok. Redan i vecka 1 vet eleverna att de ska läsa för en yngre klass på skolan. I vecka 6 träffar varje elev sin yngre lyssnare och väljer en bilderbok till hen, och i vecka 8 läser eleverna för de yngre eller hemma."
 
 upplagg:
   rubrik: Så fungerar insatsen
@@ -136,7 +136,7 @@ tabeller:
   - rubrik: "Läsningen för de yngre: vecka 6–8"
     plats: efter-urval
     meny: true
-    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev ska läsa en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok. Från veckans andra pass i vecka 7 prövar de också sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. Före passet väljer du ett uppslag ur en egen bilderbok. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
+    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev ska läsa en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok. Från veckans andra pass i vecka 7 prövar de också sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. Före passet väljer du ett uppslag ur en egen bilderbok. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen Läsningen för de yngre: vecka 6–8, kamraten säger sina två meningar, och du lyssnar på dagens par. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
     kolumner: [När, Det eleverna gör]
     rader:
       - ["Vecka 6", "Träffar sin lyssnare och skriver på bladet Läsarens förberedelse vad lyssnaren tycker om. Väljer efter mötet en bilderbok till hen och börjar läsa den för sin kamrat. Blir mötet inte av, skriver de yngres lärare vad varje barn tycker om."]
@@ -264,11 +264,11 @@ progression:
     - { vecka: "7", led: Du gör, fokus: Alla fem strategierna, roll: "Klassen säger var lappen ska sitta i din bok, och eleverna förbereder sin och läser den för kamraten", eleverna: "Att skriva på lappar i bilderboken vad som händer och hur de ska läsa där, och att läsa boken så för en kamrat som bara tittar på bilderna." }
     - { vecka: "8", led: Du gör, fokus: Läsningen för de yngre, roll: "Eleverna läser för de yngre eller hemma", eleverna: "Att läsa bilderboken för sin lyssnare så att hen förstår, ställa sin fråga och berätta för kamraten vad lyssnaren svarade." }
 uppfoljning:
-  text: "Lyssna på några elever om dagen med provtexten i vecka 1 och 8, till exempel när klassen läser tyst. Varje elev tar omkring fyra minuter. Efter vecka 8 jämför du protokollen och bestämmer med eleven vad hen tränar vidare. I åk 2–3 räknar du bara med de tre första strategierna, som paren har tränat mest. Har eleven ja eller delvis under Förstod och ingen strategi på 1, är insatsen klar för hen. Står en strategi kvar på 1, eller känns det fortfarande svårt för eleven att läsa högt, läser hen för de yngre varje vecka. Du lyssnar när hen övar, och efter fyra veckor läser hen provtexten igen. Har eleven nej under Förstod fast hen läser orden säkert, tränar hen läsförståelsen i en liten grupp, till exempel i Textsamtal i grupp. Läser eleven fel på fler än 5 ord av 100 också i vecka 8, fortsätter hen att träna avkodningen vid sidan av. Har felen inte blivit färre sedan vecka 1, tar du upp det med elevhälsan."
+  text: "Lyssna på några elever om dagen med provtexten i vecka 1 och 8, till exempel när klassen läser tyst. Varje elev tar omkring fyra minuter. Efter vecka 8 jämför du lyssnarprotokollen och bestämmer med eleven vad hen tränar vidare. I åk 2–3 räknar du bara med de tre första strategierna, som paren har tränat mest. Har eleven ja eller delvis under Förstod och ingen strategi på 1, är insatsen klar för hen. Står en strategi kvar på 1, eller känns det fortfarande svårt för eleven att läsa högt, läser hen för de yngre varje vecka. Du lyssnar när hen övar, och efter fyra veckor läser hen provtexten igen, Var är mössan? i åk 2–3 och Källaren i åk 4–5. Har eleven nej under Förstod fast hen läser orden säkert, tränar hen läsförståelsen i en liten grupp, till exempel i Textsamtal i grupp. Läser eleven fel på fler än 5 ord av 100 också i vecka 8, fortsätter hen att träna avkodningen vid sidan av. Har felen inte blivit färre sedan vecka 1, tar du upp det med elevhälsan."
   rader:
     - { nar: Vecka 1, tid: "vecka 1", perElev: 4, vad: "Lyssna på några elever om dagen, till exempel när klassen läser tyst. Provtexten är Var är mössan? i åk 2–3 och Källaren i åk 4–5. Eleven läser provtexten tyst och säger vad den handlar om. Säg sedan: ”Läs den högt så att jag förstår och känner det texten säger.” Spela in hela läsningen, och fyll i lyssnarprotokollet. För varje strategi skriver du 1 om eleven inte använder den än, 2 om hen gör det på något ställe och 3 om hen gör det på de flesta ställena. På baksidan skriver du elevens svar på ”Hur känns det att läsa högt för någon?” Fler än 3 fel i åk 2–3 och fler än 4 fel i åk 4–5 betyder fel på fler än 5 ord av 100, och då lyssnar du på eleven i parets bok. Läser eleven fel på fler än 5 ord av 100 där också, väljer paret en lättare bok, och eleven tränar avkodningen vid sidan av.", resultat: "Förstod ja/delvis/nej, strategierna 1–⁠3, fel under Orden, svårt att läsa högt?" }
     - { nar: Varje pass, tid: "varje pass", vad: "Lyssna på dagens par, och skriv på klasslistan hur varje elev klarar veckans mål och vad hen ska pröva. Nästa gång du hör paret börjar du där, och det som många behöver tar du upp i nästa pass." }
-    - { nar: Vecka 8, tid: "vecka 8", perElev: 4, vad: "Lyssna på några elever om dagen, till exempel när klassen läser tyst. Eleven läser samma provtext, och du spelar in och fyller i lyssnarprotokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu. På baksidan skriver du elevens svar på ”Hur känns det att läsa högt för någon?” och det eleven säger om inspelningen. Fler än 3 fel i åk 2–3 och fler än 4 fel i åk 4–5 betyder fel på fler än 5 ord av 100.", resultat: "Förstod ja/delvis/nej, strategierna 1–⁠3, fel under Orden, svårt att läsa högt?" }
+    - { nar: Vecka 8, tid: "vecka 8", perElev: 4, vad: "Lyssna på några elever om dagen, till exempel när klassen läser tyst. Eleven läser samma provtext, Var är mössan? i åk 2–3 och Källaren i åk 4–5, och du spelar in och fyller i lyssnarprotokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu. På baksidan skriver du elevens svar på ”Hur känns det att läsa högt för någon?” och det eleven säger om inspelningen. Fler än 3 fel i åk 2–3 och fler än 4 fel i åk 4–5 betyder fel på fler än 5 ord av 100.", resultat: "Förstod ja/delvis/nej, strategierna 1–⁠3, fel under Orden, svårt att läsa högt?" }
 plan:
   fore:
     # Reserven när skolan inte har yngre elever, där läraren bokar (sajtens kalla testare 2026-10-27).
@@ -284,13 +284,9 @@ plan:
       kort: "Det första passet"
       text: "I det första passet sätter du i gång paren. Tankepausen börjar i passet efter. Hinner paren inte välja, väljer de klart i början av nästa pass."
       tabell: "Det första passet"
-    # Pass 2 är första gången du visar Tankepausen, och klassen är din lyssnare: passet får en knapp, veckans strategi och i
-    # Visa progressionens mening om lyssnarens två meningar, sist i Visa, eftersom klassen svarar på din läsning (K-596).
-    # Strategin står med i kolumnerna, så att veckans tecken syns i passet.
-    - nar: pass 2
-      kort: "Tankepausen"
-      text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
-      ur: { tabell: "De fem strategierna", rad: "1 · Tankepausen", kolumner: ["Strategin", "Fråga dig", "Så visar du", "Lyssna efter"] }
+    # Pass 2 är första gången du visar Tankepausen, och klassen är din lyssnare: i Visa progressionens mening om lyssnarens
+    # två meningar, sist i Visa, eftersom klassen svarar på din läsning (K-596). Knappen och veckans strategi får passet av
+    # raden för veckans övriga pass i vecka 1, så att strategin inte står två gånger i passet (Rimligheten, omtaget 2026-10-28).
     - nar: pass 2
       del: Visa
       sist: true
@@ -306,19 +302,22 @@ plan:
       kort: "Tankepausen"
       text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
       ur: { tabell: "De fem strategierna", rad: "1 · Tankepausen", kolumner: ["Strategin", "Fråga dig", "Så visar du", "Lyssna efter"] }
-    # Provtexten i vecka 1 kan ändra paren, och resultatet finns i veckans sista pass (K-596).
-    - nar: veckans sista pass i vecka 1
-      text: "Fungerar ett par inte, eller läser de två mycket olika säkert i provtexten i vecka 1, ger du dem nya kamrater."
     - nar: vecka 2
       text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
       ur: { tabell: "De fem strategierna", rad: "2 · Frågan och utropet", kolumner: ["Strategin", "Fråga dig", "Så visar du", "Lyssna efter"] }
+    # Provtexten i vecka 1 kan ändra paren (K-596). Bytet står före veckans första pass i vecka 2, när hela klassen har läst
+    # provtexten, med meningen om det nya parets bok (Rimligheten, omtaget 2026-10-28: i veckans sista pass i vecka 1 var
+    # provtexten inte säkert klar, och det nya paret hade ingen bok).
+    - nar: veckans första pass i vecka 2
+      del: Före passet
+      text: "Fungerar ett par inte, eller läser de två mycket olika säkert i provtexten i vecka 1, ger du dem nya kamrater. Varje nytt par väljer en bok bland två eller tre som du lägger fram."
     - nar: vecka 3
       text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
       ur: { tabell: "De fem strategierna", rad: "3 · Repliken", kolumner: ["Strategin", "Fråga dig", "Så visar du", "Lyssna efter"] }
     # Inledningens ställe till första visningen av Repliken, före passet där den nya strategin kommer (K-596).
     - nar: veckans första pass i vecka 3
       del: Före passet
-      text: "I vecka 3 visar du Repliken på ett ställe du väljer, till exempel i en kort berättelse där Lisa hör det knacka på dörren: ska hennes ”Vem är det?” låta glad eller rädd?"
+      text: "I vecka 3 visar du Repliken på ett ställe du väljer, till exempel i början av Hunden vid dörren, där Lisa hör det knacka på dörren: ska hennes ”Vem är det?” låta glad eller rädd?"
     - nar: vecka 4
       text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
       ur: { tabell: "De fem strategierna", rad: "4 · Det viktiga ordet", kolumner: ["Strategin", "Fråga dig", "Så visar du", "Lyssna efter"] }
@@ -331,6 +330,11 @@ plan:
     - nar: vecka 4
       del: Läs för en lyssnare
       text: "I paret tittar läsaren tyst igenom det hen ska läsa, väljer ett ställe där en strategi behövs och pekar på det innan hen läser, och lyssnarens ”Jag hörde att du …” gäller det stället."
+    # Det åk 2–3 pekar ut, ur progressionens rad för veckan, där paren läser (Rimligheten, omtaget 2026-10-28: raden ur
+    # tabellen Åk 2–3 och åk 4–5 stod bara i Visa).
+    - nar: vecka 4
+      del: Läs för en lyssnare
+      text: "I åk 2–3 pekar de ut en paus, en fråga eller en replik."
     - nar: vecka 5
       text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
       ur: { tabell: "De fem strategierna", rad: "5 · Lyssnarens takt", kolumner: ["Strategin", "Fråga dig", "Så visar du", "Lyssna efter"] }
@@ -341,6 +345,9 @@ plan:
     - nar: vecka 5
       del: Läs för en lyssnare
       text: "I paret tittar läsaren tyst igenom det hen ska läsa, väljer ett ställe där en strategi behövs och pekar på det innan hen läser, och lyssnarens ”Jag hörde att du …” gäller det stället."
+    - nar: vecka 5
+      del: Läs för en lyssnare
+      text: "I åk 2–3 pekar de fortfarande ut en paus, en fråga eller en replik."
     # Mötet säger hur klassen delas på de yngre, och att två elever kan dela en bok, innan böckerna väljs (sajtens kalla
     # testare 2026-10-27).
     - nar: veckans första pass i vecka 6
@@ -348,9 +355,12 @@ plan:
       utanTidsschema: true
       text: "Varje elev ska läsa en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
+    # Bladet Läsarens förberedelse, som eleven tar med till lyssnaren, ur ramens text till läraren (länkarna, omtaget
+    # 2026-10-28: passet nämnde inte bladet).
     - nar: veckans första pass i vecka 8
       kort: "Läsningen för de yngre"
       utanTidsschema: true
+      text: "Eleven gör steg 1–4 i vecka 6 och 7 och tar med bladet Läsarens förberedelse till lyssnaren i steg 5. Hen fyller i rutan om lyssnaren när hen träffar de yngre i vecka 6, och svaret på frågan efter läsningen i vecka 8."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 8" }
     # Veckorna då parets bok vilar och eleverna förbereder bilderboken (Rimligheten 2026-10-26: vecka 6 och 7 visade det
     # vanliga passet, där paren läser vidare i sin bok). Varje del har veckans text i stället för den vanliga, med tiderna
@@ -373,7 +383,7 @@ plan:
     - nar: veckans övriga pass i vecka 6
       del: Läs för en lyssnare
       istallet: true
-      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par."
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen Läsningen för de yngre: vecka 6–8, kamraten säger sina två meningar, och du lyssnar på dagens par."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
     - nar: veckans sista pass i vecka 6
       kort: "Bilderboken"
@@ -393,7 +403,7 @@ plan:
     - nar: veckans sista pass i vecka 6
       del: Läs för en lyssnare
       istallet: true
-      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par."
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen Läsningen för de yngre: vecka 6–8, kamraten säger sina två meningar, och du lyssnar på dagens par."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 6" }
     - nar: vecka 7
       kort: "Bilderboken"
@@ -423,7 +433,7 @@ plan:
     - nar: vecka 7
       del: Läs för en lyssnare
       istallet: true
-      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen, kamraten säger sina två meningar, och du lyssnar på dagens par."
+      text: "I Läs för en lyssnare gör eleverna det som står för veckan i tabellen Läsningen för de yngre: vecka 6–8, kamraten säger sina två meningar, och du lyssnar på dagens par."
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 7" }
     - nar: veckans övriga pass i vecka 8
       kort: "Parets bok igen"
@@ -439,10 +449,12 @@ plan:
     - "Paret läser i kör, och eleven knackar på bordet när hen vill läsa själv."
   # När veckan tas en gång till, ur progressionens text (K-572, del B): mötet och läsningen hos de yngre är bokade.
   upprepa: "Klarar klassen inte det som står under Gå vidare när, tar ni veckan en gång till. Tar ni om en vecka, skjuter du upp mötet och läsningen hos de yngre en vecka, om de inte redan har varit."
-  # Beslutet efter mätningen i vecka 8, ordagrant ur uppföljningen (passgenomgången 2026-10-26).
+  # Beslutet efter mätningen i vecka 8, ordagrant ur uppföljningen (passgenomgången 2026-10-26), med
+  # uppföljningens mening om lyssnarprotokollen först, som beslutet bygger på (länkarna, omtaget 2026-10-28).
   utvardering:
+    - "Efter vecka 8 jämför du lyssnarprotokollen och bestämmer med eleven vad hen tränar vidare."
     - "I åk 2–3 räknar du bara med de tre första strategierna, som paren har tränat mest. Har eleven ja eller delvis under Förstod och ingen strategi på 1, är insatsen klar för hen."
-    - "Står en strategi kvar på 1, eller känns det fortfarande svårt för eleven att läsa högt, läser hen för de yngre varje vecka. Du lyssnar när hen övar, och efter fyra veckor läser hen provtexten igen."
+    - "Står en strategi kvar på 1, eller känns det fortfarande svårt för eleven att läsa högt, läser hen för de yngre varje vecka. Du lyssnar när hen övar, och efter fyra veckor läser hen provtexten igen, Var är mössan? i åk 2–3 och Källaren i åk 4–5."
     - "Har eleven nej under Förstod fast hen läser orden säkert, tränar hen läsförståelsen i en liten grupp, till exempel i Textsamtal i grupp."
     - "Läser eleven fel på fler än 5 ord av 100 också i vecka 8, fortsätter hen att träna avkodningen vid sidan av. Har felen inte blivit färre sedan vecka 1, tar du upp det med elevhälsan."
 mal:
@@ -523,7 +535,7 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - { rubrik: Vecka 6–8, text: "Kopiera bladet till varje elev. Eleven gör steg 1–4 i vecka 6 och 7 och tar med bladet till lyssnaren i steg 5. Hen fyller i rutan om lyssnaren när hen träffar de yngre i vecka 6, och svaret på frågan efter läsningen i vecka 8." }
+            - { rubrik: Vecka 6–8, text: "Kopiera bladet till varje elev. Eleven gör steg 1–4 i vecka 6 och 7 och tar med bladet Läsarens förberedelse till lyssnaren i steg 5. Hen fyller i rutan om lyssnaren när hen träffar de yngre i vecka 6, och svaret på frågan efter läsningen i vecka 8." }
     - rubrik: Lappen hem
       text:
         - Lappen går hem i vecka 1, och en ny i vecka 8, när eleverna kan läsa sin bilderbok för någon hemma.
