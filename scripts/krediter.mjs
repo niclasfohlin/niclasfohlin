@@ -261,7 +261,10 @@ const genomgang = (d) => {
   const rader = [`Senaste dygnet: ${heltal(d.anropen)} anrop och ${mb(d.bytes)} MB, omkring ${kred(d.krediter)} krediter${slag.length ? `: ${slag.map(([n, b]) => `${n} ${mb(b)} MB`).join(', ')}` : ''}.`];
   const ut = [];
   if (per('tooling') > STICKER_UT.skript) ut.push(`våra egna skript drog ${mb(per('tooling'))} MB. Ett skript hämtar filer från sajten: se vilket med npm run krediter -- trafik (raden node), och låt det fråga med filens etikett som googleprov.mjs gör.`);
-  for (const a of d.adresser.filter((i) => i.bandwidth > STICKER_UT.adress).slice(0, 2)) ut.push(`${a.key.replace(/^https?:\/\/[^/]+/, '') || '/'} drog ${mb(a.bandwidth)} MB på ${heltal(a.count)} hämtningar. Föreslå att filen blir mindre, som bilderna i den, eller cachas längre.`);
+  // Observability delar inte adresserna på besökarens slag (topk tar inget sådant filter, prövat 2026-10-28), så en stor fil
+  // kan vara skriptens: 2026-10-28 var Kortskrivnings nivåfiler i topp, mellanled som ingen sida länkar till och som bara
+  // googleprov.mjs hämtade. GoatCounter räknar läsarnas nedladdningar som fil:<filnamn>.
+  for (const a of d.adresser.filter((i) => i.bandwidth > STICKER_UT.adress).slice(0, 2)) ut.push(`${a.key.replace(/^https?:\/\/[^/]+/, '') || '/'} drog ${mb(a.bandwidth)} MB på ${heltal(a.count)} hämtningar. Se i GoatCounter om läsarna hämtar den (fil:<filnamn>): gör de det, föreslå att filen blir mindre eller cachas längre, och annars att skriptet som hämtar den frågar med filens etikett.`);
   if (per('crawler') + per('page-preview') > STICKER_UT.robotar) ut.push(`sökrobotar och förhandsvisningar drog ${mb(per('crawler') + per('page-preview'))} MB. Föreslå en genomgång av cachen och robots.txt.`);
   if (per('ai-agent') > STICKER_UT.ai) ut.push(`AI-agenter drog ${mb(per('ai-agent'))} MB. Föreslå en genomgång av robots.txt.`);
   if (d.krediter > STICKER_UT.krediter) ut.push(`trafiken kostade ${kred(d.krediter)} krediter på ett dygn, mer än vanligt. Föreslå npm run krediter -- trafik för att se vad som har ökat.`);
