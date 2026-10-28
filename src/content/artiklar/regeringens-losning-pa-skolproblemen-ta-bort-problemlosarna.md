@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/regering
 typ: "debatt"
 medforfattare: []
 taggar: ["specialpedagogik", "lararutbildning", "sarskilt-stod", "skolpolitik", "elevhalsa"]
+citat: ["När man vill forma en skola byggd på sortering och straff blir de som envisast försvarar de utsatta eleverna ett problem som måste lösas.", "Det går inte att utveckla skolan bara genom att byta namn på en yrkesgrupp.", "Regeringens skolpolitik har blivit ett spaghettikalas – man slänger reform efter reform mot väggen och hoppas att något fastnar."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

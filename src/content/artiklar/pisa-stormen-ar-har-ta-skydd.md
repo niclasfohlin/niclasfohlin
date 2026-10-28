@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/pisa-stormen-ar-
 typ: "kronika"
 medforfattare: []
 taggar: ["pisa", "skolpolitik"]
+citat: ["Det brukar ta några månader innan något vettigt görs."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

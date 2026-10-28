@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/ny-kategori/fohlin-kognit
 typ: "kronika"
 medforfattare: []
 taggar: ["evidens", "undervisningskvalitet", "lararutbildning"]
+citat: ["När regeringen, läroplan och universitet höjer kognitionsvetenskapen över allt annat, behöver vi stå upp för vår egen vetenskap: pedagogiken.", "Det är i mötet mellan ett meningsfullt innehåll och elevgruppen som vi skapar lärmagi."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

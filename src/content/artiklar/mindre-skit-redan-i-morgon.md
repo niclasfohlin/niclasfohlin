@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-gor-skola
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "tillganglig-undervisning"]
+citat: ["Men ibland använder vi just ”elevens ansvar” som ett sätt att slippa reflektera över vårt eget ansvar som skola.", "En elev är inte sitt schema, sina betyg eller sitt åtgärdsprogram.", "När oron tar över sänker vi alla blicken."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

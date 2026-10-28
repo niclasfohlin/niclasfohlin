@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/skolpolitik/befria-skolan
 typ: "kronika"
 medforfattare: []
 taggar: ["skolutveckling", "skolpolitik"]
+citat: ["Något jag upplevt är att system för kontroll ofta blir kontraproduktiva och skapar en falsk känsla av kvalitet.", "En skola utan tillit kommer aldrig att fungera."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

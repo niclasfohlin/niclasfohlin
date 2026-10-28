@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/elevhalsa/fohlin-specialp
 typ: "debatt"
 medforfattare: []
 taggar: ["elevhalsa", "specialpedagogik", "skolpolitik", "sarskilt-stod"]
+citat: ["Problemet har varit underdimensionering och för få speciallärare.", "Ju mer jag läser, desto mer liknar utredningen ett försök att pressa in politiska direktiv, kommunala budgetar och professionernas rop på hjälp i ett och samma dokument."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

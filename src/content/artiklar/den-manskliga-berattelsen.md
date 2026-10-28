@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-den-mansk
 typ: "kronika"
 medforfattare: []
 taggar: ["undervisningskvalitet", "betyg", "lasframjande"]
+citat: ["I stället för nyfikenhet får vi frågor som: ”Kommer det här på provet?” eller ”Hur många poäng behöver jag för E?”", "Unga får i dag fakta kastade på sig från alla håll på nätet, men fakta är inte detsamma som meningsfulla och personliga lärtillfällen.", "Vi vet vad riktig kunskap känns som."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

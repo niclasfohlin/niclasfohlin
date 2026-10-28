@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/arbetsmiljo/fohlin-rappor
 typ: "kronika"
 medforfattare: []
 taggar: ["specialpedagogik", "sarskilt-stod"]
+citat: ["När jag ringde upp henne förra veckan ville hon bara prata om en sak: eleverna hon nu sviker när hon inte orkar resa sig ur sängen.", "För om vi inte agerar nu, vem ska då finnas där för våra elever i morgon?"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/diagnossjukan-ar
 typ: "kronika"
 medforfattare: []
 taggar: ["tillganglig-undervisning", "sarskilt-stod", "elevhalsa"]
+citat: ["Det är vi i skolan som sytt skjortan för trång.", "Har vi börjat tro att något är mänskligt hanterat bara för att det är professionellt beskrivet?"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

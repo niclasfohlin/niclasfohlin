@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-vi-laser-s
 typ: "debatt"
 medforfattare: []
 taggar: ["skolutveckling", "undervisningskvalitet"]
+citat: ["Det jag varnar för är att vi som profession hamnar i ett läge där vi slutar tro på vår egen förmåga att påverka det som händer i klassrummet."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

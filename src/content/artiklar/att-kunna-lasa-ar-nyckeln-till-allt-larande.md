@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/att-kunna-lasa-a
 typ: "kronika"
 medforfattare: []
 taggar: ["lasinlarning", "avkodning", "specialpedagogik", "lasframjande"]
+citat: ["För även jag hade börjat tvivla, på min egen förmåga att lära barn att läsa.", "Organisera kurser i läsning varje termin."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

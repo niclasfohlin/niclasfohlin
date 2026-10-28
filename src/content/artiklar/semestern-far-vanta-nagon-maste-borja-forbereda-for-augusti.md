@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/semestern-far-va
 typ: "kronika"
 medforfattare: []
 taggar: ["skolpolitik", "sarskilt-stod", "betyg"]
+citat: ["Att de extra anpassningarna äntligen får lämna rollen som skolans administrativa slasktratt är på tiden.", "Vi har inte dummare barn.", "I slutändan handlar allt om ören."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

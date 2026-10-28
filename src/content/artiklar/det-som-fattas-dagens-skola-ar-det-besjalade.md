@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/inlarning/fohlin-det-som-
 typ: "kronika"
 medforfattare: []
 taggar: ["undervisningskvalitet", "skolpolitik", "demokratiuppdraget"]
+citat: ["Direktörens dotter ska gå i samma klass som skomakarens son.", "Elever delas upp i de effektiva och enkla, eller de som anses vara kostnadsdrivande."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

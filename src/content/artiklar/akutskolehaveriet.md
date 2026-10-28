@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-re
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "skolpolitik", "sarskilt-stod", "evidens"]
+citat: ["Beteendeproblem som utvecklats under flera år löses inte genom ett fyraveckorsprogram på akutskolor.", "Våra barn och ungdomar förtjänar en skolpolitik som bygger på ackumulerad kunskap och god empiri – inte på mediedrev och kortsiktiga politiska vinster."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

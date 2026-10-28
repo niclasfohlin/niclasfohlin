@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/stora-lo
 typ: "debatt"
 medforfattare: []
 taggar: ["lararutbildning", "specialpedagogik", "skolpolitik"]
+citat: ["Men nu riskerar vi att slå ihop två uppdrag och behålla det sämsta ur båda.", "Två skarpa verktyg i stället för en universalkniv."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

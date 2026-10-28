@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/lararutbildning/lararutbi
 typ: "kronika"
 medforfattare: []
 taggar: ["lararutbildning", "undervisningskvalitet"]
+citat: ["Vår lärare i sista VFU-kursen ersattes – och detta är helt sant – med en disputerad ekonom.", "Det krävs mycket att uppfinna hjulet igen om ingen någonsin visat något som rullar."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

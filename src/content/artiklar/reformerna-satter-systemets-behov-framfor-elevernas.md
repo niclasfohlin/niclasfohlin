@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/reformerna-satte
 typ: "kronika"
 medforfattare: []
 taggar: ["skolpolitik", "betyg", "elevhalsa", "specialpedagogik"]
+citat: ["En uttråkad elev som känner sig som en kugge i ett maskineri lär sig sällan något bestående, oavsett hur ”kunskapstung” läroplanen är.", "Samtidigt måste vi akta oss för att “flexibla grupper” inte blir en omskrivning för att stuva undan “besvärliga” elever."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

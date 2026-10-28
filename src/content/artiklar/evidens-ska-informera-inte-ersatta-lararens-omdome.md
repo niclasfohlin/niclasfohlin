@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/niclas-fohlin-evi
 typ: "debatt"
 medforfattare: []
 taggar: ["evidens", "undervisningskvalitet"]
+citat: ["Precis som en GPS visar vägen men föraren anpassar efter väglaget, ska forskningen vägleda utan att styra detaljerna."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

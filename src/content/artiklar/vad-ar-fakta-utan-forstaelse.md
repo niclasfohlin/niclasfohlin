@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-vad-ar-fa
 typ: "kronika"
 medforfattare: []
 taggar: ["ordforrad", "undervisningskvalitet"]
+citat: ["Det är inte ovanligt att vi har begrepp i vårt tänkande vi saknar ord för.", "Skolan ska inte handla om att fylla elevernas huvud med ord utan om att utrusta dem med förståelse och förmågan att tänka och agera."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

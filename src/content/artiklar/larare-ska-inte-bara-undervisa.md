@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/larare-ska-inte-b
 typ: "debatt"
 medforfattare: ["Charlotte Friberg", "Lotta Ljungberg", "Katarina Malmström", "Malena Wengberg", "Rebecca Jernström", "Jenny Nordfors", "Karin Benchimol", "Karl Annerberg"]
 taggar: ["elevhalsa", "skolpolitik"]
+citat: ["Men medan de vuxna diskuterar, växer elevernas behov.", "Elevhälsan ska därför inte vara en vårdcentral i miniatyr.", "Skolan bär ett stort ansvar – men inte hela ansvaret för barns mående."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

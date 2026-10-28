@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/skolpolitik/fohlin-nu-mas
 typ: "kronika"
 medforfattare: []
 taggar: ["skolpolitik", "evidens"]
+citat: ["Nyanser får inte plats i den trånga, pressade skyttegraven.", "Något har gått snett när vi börjar se på varandra som motståndare i stället för samarbetspartners."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-na
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "pisa", "elevhalsa", "skolpolitik"]
+citat: ["Är det elevhälsans fel att våldet ökar?", "Vem tjänar på att ropa varg hela tiden?", "Alldeles för ofta hör jag hur känsloargument används som slagträ för reformförslag."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

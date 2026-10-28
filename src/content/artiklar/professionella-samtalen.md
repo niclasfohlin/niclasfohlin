@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/fohlin-a
 typ: "kronika"
 medforfattare: []
 taggar: ["specialpedagogik", "elevhalsa"]
+citat: ["Jag slutade jaga ordning för ordningens skull.", "Att samtala med andra är inte ett tecken på svaghet."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

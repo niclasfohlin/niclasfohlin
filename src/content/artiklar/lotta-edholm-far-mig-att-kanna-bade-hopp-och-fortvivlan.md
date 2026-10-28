@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/sarskilt-stod/niclas-fohlin-lotta-
 typ: "debatt"
 medforfattare: []
 taggar: ["elevhalsa", "sarskilt-stod", "skolpolitik", "betyg", "tillganglig-undervisning"]
+citat: ["Jag kan fortfarande inte förstå hur vi kan ha ett betygssystem som kan ge icke godkänt till en elev som varit i skolan i nio år, gjort alla uppgifter läraren bett om och varit på alla lektioner.", "Vi kan inte skapa en stark elevhälsa och samtidigt dränera skolan på fler resurser."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

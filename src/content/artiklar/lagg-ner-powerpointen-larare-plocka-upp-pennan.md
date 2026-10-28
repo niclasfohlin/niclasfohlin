@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/lagg-ner-powerpo
 typ: "kronika"
 medforfattare: []
 taggar: ["undervisningskvalitet", "skrivstrategier"]
+citat: ["Tror vi verkligen att eleven lär sig skriva genom att titta på presentationen?", "Vi skulle aldrig lära någon att laga mat genom att visa en bild på en färdig gryta och sedan säga: nu får du laga den själv.", "Elever behöver få se att skrivande inte är något som bara kommer färdigt ur huvudet på den som redan kan."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/slutrepl
 typ: "debatt"
 medforfattare: []
 taggar: ["skolutveckling", "skolpolitik"]
+citat: ["Ingen enskild lärare kan skapa det som forskningen kallar collective teacher efficacy.", "En god skola uppstår inte när varje lärare springer fortare ensam utan när personal tillsammans bestämmer sig för att skapa något stabilt, tryggt och professionellt."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

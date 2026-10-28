@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/lasinlarning/niclas-fohli
 typ: "debatt"
 medforfattare: []
 taggar: ["lasinlarning", "specialpedagogik", "skolpolitik"]
+citat: ["Tror vi att barn födda i Luleå, Piteå eller Haparanda är immuna mot dyslexi?", "Vi kan inte acceptera att barns framtid avgörs av brist på resurser, personal eller okunskap."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/fohlin-d
 typ: "debatt"
 medforfattare: []
 taggar: ["studiero", "skolpolitik"]
+citat: ["Det verkar som att frihet bara gäller oss vuxna.", "Man kan inte straffa fram tillit.", "För mig är undervisning kärlek i handling."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

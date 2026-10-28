@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/neuropedagogik/nar-ett-fa
 typ: "debatt"
 medforfattare: []
 taggar: ["evidens", "lararutbildning"]
+citat: ["I ert svar approprierar ni allt som är bra och beprövat i skolan och kallar det kognitionsvetenskap – som om läraryrket och pedagogiken inte redan inrymmer dessa insikter."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

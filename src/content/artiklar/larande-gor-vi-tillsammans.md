@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/inlarning/fohlin-larande-
 typ: "artikel"
 medforfattare: []
 taggar: ["undervisningskvalitet", "kooperativt-larande", "tillganglig-undervisning", "elevhalsa", "specialpedagogik"]
+citat: ["Det är fördelaktigt med fler elever i klassrummet eftersom vi då har fler som kan bidra med frågor och förklaringar.", "Ju mer skolan individualiserar undervisningen för dessa elever, desto större blir risken att de skapar sin egen verklighet utanför gruppen och inte ser sig som en del av klassen."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/en-epidemi-i-sko
 typ: "kronika"
 medforfattare: []
 taggar: ["skolutveckling", "undervisningskvalitet"]
+citat: ["Då riskerar vi att bli en skola som väntar, snarare än en skola som agerar.", "Det är inte någon annans uppgift."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

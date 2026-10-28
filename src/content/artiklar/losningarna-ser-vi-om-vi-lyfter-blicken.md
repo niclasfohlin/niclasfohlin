@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/speciall
 typ: "artikel"
 medforfattare: []
 taggar: ["rti", "elevhalsa", "sarskilt-stod", "betyg"]
+citat: ["Inför varje nytt läsår verkar skolan bli överraskad av elevers behov, trots att de är förutsägbara.", "Ändå har andelen elever med betyget F varit konstant i 25 år."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

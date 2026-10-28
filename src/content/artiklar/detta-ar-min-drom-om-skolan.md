@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/fohlin-d
 typ: "debatt"
 medforfattare: []
 taggar: ["skolutveckling", "demokratiuppdraget"]
+citat: ["Men inget av det som bygger upp vår skola är naturlagar.", "Skolan är vår allra mest fantastiska uppfinning."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

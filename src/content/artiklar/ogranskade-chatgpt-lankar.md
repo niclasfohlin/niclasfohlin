@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/ogranskade-chatg
 typ: "kronika"
 medforfattare: []
 taggar: ["lararutbildning", "specialpedagogik", "evidens", "skolpolitik"]
+citat: ["… och nu ska rent tyckande bära en hel reform.", "Lycka till med att öppna dem hemma vid köksbordet.", "Vi har fullt upp i skolan utan att också behöva göra statens källkritiska hemläxa."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

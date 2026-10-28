@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/historielosheten
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "demokratiuppdraget"]
+citat: ["Rädsla formar inte karaktär.", "Barn lär sig att ljuga för att undgå straff.", "Vi kan inte skapa en skola som skadar barn och sedan kalla det ordning."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/sarskilt-stod/fohlin-om-s
 typ: "kronika"
 medforfattare: []
 taggar: ["sarskilt-stod", "rti", "skolpolitik"]
+citat: ["Att slopa extra anpassningar betyder ju inte att elevernas behov försvinner.", "Alla svårigheter syns inte i årskurs 1, hur många tester man än inför."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

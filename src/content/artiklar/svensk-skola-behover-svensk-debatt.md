@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/slutrepl
 typ: "debatt"
 medforfattare: []
 taggar: ["lasinlarning", "evidens", "skolpolitik"]
+citat: ["Just därför kan det amerikanska läskriget inte översättas till svensk skola."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/vi-har-alla-skul
 typ: "kronika"
 medforfattare: []
 taggar: ["pisa", "lasforstaelse", "specialpedagogik", "skolpolitik"]
+citat: ["Men när halva klassen kör fast slutar vi titta på eleverna.", "Åkesson har alltså fel.", "Är våra barn en spegel av oss vuxna?"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

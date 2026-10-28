@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/lasinlarning/sluta-lasa-f
 typ: "kronika"
 medforfattare: []
 taggar: ["lasframjande", "lasinlarning", "lasflyt"]
+citat: ["Lärarna beskrev läsning som att borsta tänderna.", "Träning med ljud får inte elever automatiskt att gå till ett bibliotek och hämta upp nästa bok i sin favoritserie."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/lararnas
 typ: "debatt"
 medforfattare: ["Jennie Wilson"]
 taggar: ["studiero", "undervisningskvalitet", "socialt-samspel"]
+citat: ["Vi lärare måste kunna titta våra elever i ögonen efteråt och inte skämmas för vad vi har gjort.", "Våra elever förtjänar att vara i en skola som präglas av lärande och utveckling, inte rädsla och skam."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

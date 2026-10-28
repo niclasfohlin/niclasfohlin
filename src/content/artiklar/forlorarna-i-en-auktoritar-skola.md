@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-vi
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "tillganglig-undervisning"]
+citat: ["Om han gör något mot er elever som inte är okej att göra mot en vuxen, då är det inte okej att göra mot er heller!", "För många elever är skolgången svår, och för vissa rentav ett helvete."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

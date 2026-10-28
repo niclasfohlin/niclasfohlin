@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-vi
 typ: "kronika"
 medforfattare: []
 taggar: ["elevhalsa", "undervisningskvalitet", "tillganglig-undervisning", "specialpedagogik"]
+citat: ["Vi skapar ny skolkultur genom hur vi samtalar om skolan.", "Ingen av vare sig lärare eller elevhälsa bär skulden för hur skolan styrs eller hur resurser fördelas."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

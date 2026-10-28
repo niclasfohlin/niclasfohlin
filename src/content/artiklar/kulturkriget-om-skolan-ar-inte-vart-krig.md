@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/kulturkriget-om-
 typ: "kronika"
 medforfattare: []
 taggar: ["lasinlarning", "evidens", "skolpolitik", "avkodning", "lararutbildning"]
+citat: ["När politiken ska avgöra vad som är god forskning förlorar vi ett av forskningens viktigaste uppdrag, att bygga en gemensam och bred kunskapsbas."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

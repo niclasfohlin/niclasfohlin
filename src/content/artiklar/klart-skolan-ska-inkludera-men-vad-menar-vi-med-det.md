@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/niclas-f
 typ: "debatt"
 medforfattare: []
 taggar: ["tillganglig-undervisning", "undervisningskvalitet"]
+citat: ["Det handlar inte om att anpassa för dem som har svårigheter utan om att höja kvaliteten på undervisningen för alla.", "Jag tror att vi faktiskt kan lyckas med varenda unge."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

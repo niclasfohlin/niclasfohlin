@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/niclas-f
 typ: "kronika"
 medforfattare: []
 taggar: ["specialpedagogik", "elevhalsa"]
+citat: ["Det är lätt att glömma bort all fokus på kunskapskrav: skolan är en social arena där eleverna formar sin identitet."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

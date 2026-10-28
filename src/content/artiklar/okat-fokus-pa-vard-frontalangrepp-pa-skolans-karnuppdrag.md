@@ -7,6 +7,7 @@ originalUrl: "https://www.altinget.se/vard/artikel/academedia-ett-okat-fokus-paa
 typ: "debatt"
 medforfattare: ["Charlotte Friberg"]
 taggar: ["elevhalsa", "specialpedagogik", "skolpolitik"]
+citat: ["Ska deras framtid stavas ”diagnos” i stället för ”drömmar”?", "Skolan ska inte förvandlas till improviserade vårdcentraler."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

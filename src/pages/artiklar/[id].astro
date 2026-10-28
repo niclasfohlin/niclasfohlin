@@ -8,6 +8,7 @@ import Kommentarer from '../../components/Kommentarer.astro';
 import { kommentarerPa } from '../../lib/kommentarer';
 import { delningPa } from '../../lib/delning';
 import { publicerade, formateraDatum, publikationNamn, typLabel } from '../../lib/innehall';
+import { sattInLyftcitat } from '../../lib/lyftcitat';
 
 export async function getStaticPaths() {
   const artiklar = await publicerade('artiklar');
@@ -16,6 +17,10 @@ export async function getStaticPaths() {
 
 const { a } = Astro.props;
 const { Content } = await render(a);
+// Lyftcitaten sätts in i textens färdiga html, som glob-laddaren har i posten och som <Content /> annars ritar
+// (src/lib/lyftcitat.ts). En text utan citat ritas som förut. Texterna har inga bilder som Astro behandlar (bilderna
+// ligger under public/), så html:en i posten är densamma som <Content /> ger.
+const medCitat = a.data.citat ? sattInLyftcitat(a.rendered?.html ?? '', a.data.citat, a.id) : undefined;
 // "A, B och C" i stället för "A och B och C" när flera medförfattare står på texten.
 const medforfattare = new Intl.ListFormat('sv', { type: 'conjunction' }).format(a.data.medforfattare);
 const namn = publikationNamn(a.data.publikation);
@@ -31,7 +36,7 @@ const namn = publikationNamn(a.data.publikation);
       <Kalla publikation={a.data.publikation} originalUrl={a.data.originalUrl} datum={a.data.datum} typ={a.data.typ} />
     </header>
     <div class="brod">
-      <Content />
+      {medCitat ? <Fragment set:html={medCitat} /> : <Content />}
     </div>
     <footer class="artikel-fot">
       <Taggar taggar={a.data.taggar} />

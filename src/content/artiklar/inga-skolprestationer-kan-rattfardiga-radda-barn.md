@@ -7,6 +7,7 @@ originalUrl: "https://www.gp.se/debatt/inga-skolprestationer-i-varlden-kan-rattf
 typ: "debatt"
 medforfattare: []
 taggar: ["studiero", "demokratiuppdraget", "skolpolitik"]
+citat: ["Om en vuxen journalist upplever det vid ett inbokat besök, vad känner då barnen som är där varje dag?", "Man kan helt enkelt inte straffa in undervisningen i barn."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

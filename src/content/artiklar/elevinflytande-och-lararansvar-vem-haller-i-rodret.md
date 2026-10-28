@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/elevinfl
 typ: "debatt"
 medforfattare: []
 taggar: ["demokratiuppdraget", "undervisningskvalitet"]
+citat: ["Att säga nej är ibland lika viktigt som att säga ja, särskilt när elevers önskemål går emot vårt bättre vetande.", "Redan 1946 års skolkommission – alltså för nästan 80 år sedan – betonade att skolan ska främja demokratiska värden.", "Ibland, en trött torsdag, kan jag också drömma om ett klassrum där alla elever sitter knäpptysta."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-iq-ska-int
 typ: "debatt"
 medforfattare: []
 taggar: ["tillganglig-undervisning", "sarskilt-stod"]
+citat: ["Barns potential är heller inte en siffra som väntar på att bli upptäckt.", "Vad hade du själv sagt om din chef ville flytta dig till avdelningen för de mindre begåvade?"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

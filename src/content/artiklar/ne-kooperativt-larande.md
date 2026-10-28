@@ -7,6 +7,7 @@ originalUrl: "https://www.ne.se/info/i-skolans-varld/kooperativt-larande/"
 typ: "artikel"
 medforfattare: ["Jennie Wilson"]
 taggar: ["kooperativt-larande", "demokratiuppdraget", "undervisningskvalitet", "formativ-bedomning"]
+citat: ["Läraren vet enbart vad ett fåtal elever tänker i stället för vad gruppen som helhet kan eller undrar.", "Kooperativt lärande bygger på idén att vi lär oss mer när vi hjälper varandra att lära oss.", "Slutna kontrollfrågor där det eftersöks ett korrekt svar leder sällan till lärande samtal."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

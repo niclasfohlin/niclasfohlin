@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/ny-kategori/no-excuses-sv
 typ: "debatt"
 medforfattare: []
 taggar: ["studiero", "skolpolitik"]
+citat: ["Vill vi i Sverige att framtidens barn ska formas efter vad Elon Musk anser är bäst för sina egna fabriker?", "Men i den svenska debatten säljs ibland disciplin som om den vore liktydig med bildning.", "När man designar en modell som främst fungerar genom att vissa lämnar, då är framgången en illusion."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

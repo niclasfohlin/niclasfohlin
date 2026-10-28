@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/niclas-fohlin-det
 typ: "debatt"
 medforfattare: []
 taggar: ["studiero", "demokratiuppdraget", "undervisningskvalitet"]
+citat: ["Vilka föräldrar skulle på riktigt vilja ha en skola där deras barn inte förväntas trivas, bara drillas?", "Historien visar att det går skrämmande fort att göra ett öppet samhälle auktoritärt."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
