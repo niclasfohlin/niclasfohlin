@@ -3,7 +3,9 @@
 //
 //   npm run krediter                       saldot, förbrukningen per mätare, det löpande per dygn och spärren
 //   npm run krediter -- trafik [timmar]    vad trafiken består av: besökare, adresser och filtyper (förval 24)
-//   node scripts/krediter.mjs --rad        en rad till krokarna: vid varje nytt uppdrag och efter kompaktering
+//   node scripts/krediter.mjs --rad        en rad till kroken vid varje nytt uppdrag
+//   node scripts/krediter.mjs --start      raden, dygnets trafik och veckans byggen, med det som sticker ut, till kroken vid
+//                                          start, efter en clear och efter kompaktering (.claude/hooks/kontext.mjs)
 //   node scripts/krediter.mjs --grind      raden, och slutkod 1 när spärren är stängd, 3 när saldot inte gick
 //                                          att läsa (kroken .claude/hooks/skydda-main.mjs före uppladdning)
 //
@@ -223,7 +225,9 @@ const BESOKARE = {
   '': 'okänt',
 };
 
-const trafik = async (timmar) => {
+// Trafiken ur Netlifys Observability, som sparar ett dygn: besökarnas slag, adresserna, webbläsarna och filtyperna med mest
+// bandbredd. Frågorna läser bara statistiken och kostar inga krediter.
+const trafikData = async (timmar) => {
   const token = lasToken();
   const till = Date.now();
   const fran = till - timmar * 3600000;
@@ -239,10 +243,68 @@ const trafik = async (timmar) => {
     fraga('user_agents', 'Bandwidth', 6),
     fraga('content_types', 'Bandwidth', 6),
   ]);
-  const mb = (b) => decimal(b / 1e6);
   const anropen = besokare.reduce((s, i) => s + i.count, 0);
   const bytes = besokare.reduce((s, i) => s + i.bandwidth, 0);
-  console.log(`Trafiken de senaste ${timmar} timmarna: ${heltal(anropen)} anrop och ${mb(bytes)} MB, omkring ${kred((anropen / 10000) * 2 + (bytes / 1e9) * 20)} krediter.`);
+  return { besokare, adresser, agenter, typer, anropen, bytes, krediter: (anropen / 10000) * 2 + (bytes / 1e9) * 20 };
+};
+
+// Genomgången vid start (Niclas 2026-10-28: "Se till att sessioner ... gör någon form av genomgång av detta vid uppstart.
+// Inte äter krediter, men kan mäta och föreslå djupare analyser om något sticker ut"): dygnets trafik i två rader, och en
+// rad för varje sak som sticker ut, med analysen att föreslå. Gränserna utgår från dygnet 2026-10-28, då lärarna stod för
+// 406 MB och trafiken kostade omkring 25 krediter (DRIFT.md under Krediter).
+const STICKER_UT = { skript: 50e6, adress: 40e6, robotar: 250e6, ai: 50e6, krediter: 35 };
+const genomgang = (d) => {
+  const mb = (b) => heltal(Math.round(b / 1e6));
+  const per = (nyckel) => d.besokare.find((i) => i.key === nyckel)?.bandwidth ?? 0;
+  const slag = [['browser', 'läsarna'], ['tooling', 'våra skript'], ['crawler', 'sökrobotar'], ['page-preview', 'förhandsvisningar'], ['ai-agent', 'AI-agenter']]
+    .map(([k, n]) => [n, per(k)]).filter(([, b]) => b >= 1e6);
+  const rader = [`Senaste dygnet: ${heltal(d.anropen)} anrop och ${mb(d.bytes)} MB, omkring ${kred(d.krediter)} krediter${slag.length ? `: ${slag.map(([n, b]) => `${n} ${mb(b)} MB`).join(', ')}` : ''}.`];
+  const ut = [];
+  if (per('tooling') > STICKER_UT.skript) ut.push(`våra egna skript drog ${mb(per('tooling'))} MB. Ett skript hämtar filer från sajten: se vilket med npm run krediter -- trafik (raden node), och låt det fråga med filens etikett som googleprov.mjs gör.`);
+  for (const a of d.adresser.filter((i) => i.bandwidth > STICKER_UT.adress).slice(0, 2)) ut.push(`${a.key.replace(/^https?:\/\/[^/]+/, '') || '/'} drog ${mb(a.bandwidth)} MB på ${heltal(a.count)} hämtningar. Föreslå att filen blir mindre, som bilderna i den, eller cachas längre.`);
+  if (per('crawler') + per('page-preview') > STICKER_UT.robotar) ut.push(`sökrobotar och förhandsvisningar drog ${mb(per('crawler') + per('page-preview'))} MB. Föreslå en genomgång av cachen och robots.txt.`);
+  if (per('ai-agent') > STICKER_UT.ai) ut.push(`AI-agenter drog ${mb(per('ai-agent'))} MB. Föreslå en genomgång av robots.txt.`);
+  if (d.krediter > STICKER_UT.krediter) ut.push(`trafiken kostade ${kred(d.krediter)} krediter på ett dygn, mer än vanligt. Föreslå npm run krediter -- trafik för att se vad som har ökat.`);
+  rader.push(...(ut.length ? ut.map((x) => `Sticker ut: ${x}`) : ['Inget sticker ut i trafiken.']));
+  return rader.join('\n');
+};
+
+// Byggena i produktionen ur Netlifys lista över deployer, och databasens uppvaknanden, till genomgången vid start: avarter
+// i arbetssättet, som pushar som inte samlades till en (Niclas 2026-10-28: "Den får gärna hitta avarter i beteenden också.
+// Ex nya pushar om och om igen utan att samla dem i en"). Arbetssättet är högst en push per arbetspass eller nattkörning
+// (ARBETSSATT.md under Uppladdning). 2026-10-25 byggdes produktionen åtta gånger på ett dygn, omkring 120 krediter.
+const FORVANTAT = { perDygn: 2, tatt: 90 * 60000 };
+const klockan = (t) => new Date(t).toLocaleString('sv-SE', { timeZone: 'Europe/Stockholm', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+// Listan har också grenarnas deployer och utkasten, så en vecka med många utkast kan behöva mer än en sida.
+const byggena = async (nu = Date.now()) => {
+  const token = lasToken();
+  const lista = [];
+  for (let sida = 1; sida <= 3; sida += 1) {
+    const del = await anrop(token, `/sites/${SITE}/deploys?per_page=100&page=${sida}`);
+    lista.push(...del);
+    if (del.length < 100 || nu - Date.parse(del[del.length - 1].created_at) > 7 * DYGN) break;
+  }
+  return lista.filter((x) => x.context === 'production' && x.build_id && x.state === 'ready').map((x) => ({ tid: Date.parse(x.created_at), titel: String(x.title ?? '').split('\n')[0] }));
+};
+const arbetssattet = (b, grenar, nu = Date.now()) => {
+  const dygn = b.filter((x) => nu - x.tid < DYGN);
+  const vecka = b.filter((x) => nu - x.tid < 7 * DYGN).sort((x, y) => x.tid - y.tid);
+  const rader = [`Byggen i produktionen: ${dygn.length} senaste dygnet och ${vecka.length} senaste veckan, ${BYGGE} krediter styck.`];
+  const ut = [];
+  if (dygn.length > FORVANTAT.perDygn) ut.push(`${dygn.length} byggen på ett dygn, ${dygn.length * BYGGE} krediter. Arbetssättet är högst en push per arbetspass eller nattkörning (ARBETSSATT.md under Uppladdning).`);
+  const tata = vecka.flatMap((x, i) => (i && x.tid - vecka[i - 1].tid < FORVANTAT.tatt ? [[vecka[i - 1], x]] : []));
+  if (tata.length) { const [a, c] = tata[tata.length - 1]; ut.push(`${tata.length === 1 ? 'en gång' : `${tata.length} gånger`} senaste veckan kom två byggen inom 90 minuter, senast ${klockan(a.tid)} och ${klockan(c.tid)} (${Math.round((c.tid - a.tid) / 60000)} minuter). Samla rättelserna till en push.`); }
+  if (vecka.length > FORVANTAT.perDygn * 7) ut.push(`i snitt ${decimal(vecka.length / 7)} byggen om dygnet senaste veckan, mot högst ${FORVANTAT.perDygn} som arbetssättet räknar med.`);
+  // Varje uppvaknande av kommentarsdatabasen kostar en kredit (DRIFT.md under Kommentarer).
+  for (const g of grenar ?? []) if (g.vaken || (g.senast && nu - Date.parse(g.senast) < DYGN)) ut.push(`databasen${g.namn === 'production' ? '' : `s gren ${g.namn}`} ${g.vaken ? 'är vaken nu' : `vaknade senast ${klockan(Date.parse(g.senast))}`}. Varje uppvaknande kostar en kredit: se vad som väckte den (DRIFT.md under Kommentarer).`);
+  rader.push(...(ut.length ? ut.map((x) => `Sticker ut: ${x}`) : ['Inget sticker ut i byggena eller databasen.']));
+  return rader.join('\n');
+};
+
+const trafik = async (timmar) => {
+  const { besokare, adresser, agenter, typer, anropen, bytes, krediter } = await trafikData(timmar);
+  const mb = (b) => decimal(b / 1e6);
+  console.log(`Trafiken de senaste ${timmar} timmarna: ${heltal(anropen)} anrop och ${mb(bytes)} MB, omkring ${kred(krediter)} krediter.`);
   const tabell = (rubrik, rader, namn) => {
     console.log(`\n${rubrik.padEnd(62)}${'anrop'.padStart(8)}${'MB'.padStart(9)}`);
     for (const i of rader) console.log(`  ${namn(i).slice(0, 60).padEnd(60)}${heltal(i.count).padStart(8)}${mb(i.bandwidth).padStart(9)}`);
@@ -260,6 +322,12 @@ if (arHuvud) {
   try {
     if (args[0] === 'trafik') {
       await trafik(Number(args[1]) || 24);
+    } else if (args.includes('--start')) {
+      // Kroken vid start (.claude/hooks/kontext.mjs): raden om krediterna, dygnets trafik och veckans byggen.
+      const k = await hamta({});
+      console.log(rad(k, lage(k)));
+      try { console.log(`\n===== Trafiken =====\n${genomgang(await trafikData(24))}`); } catch (e) { console.log(`\n===== Trafiken =====\nTrafiken gick inte att läsa just nu (${e.message}). Kör npm run krediter -- trafik senare.`); }
+      try { console.log(`\n===== Byggena och databasen =====\n${arbetssattet(await byggena(), k.grenar)}`); } catch (e) { console.log(`\n===== Byggena och databasen =====\nByggena gick inte att läsa just nu (${e.message}).`); }
     } else if (radlage) {
       const grind = args.includes('--grind');
       const k = await hamta({ farsk: grind || args.includes('--farsk') });

@@ -33,8 +33,10 @@ const steg = kor(process.execPath, ['scripts/planera/steg.mjs', 'visa', '--kort'
 // Var arbetsgången för Planera insatsen står, också när liggaren inte har något att göra (Niclas 2026-10-28).
 if (steg) delar.push(`\n===== Planera =====\n${steg}\nArbetsgången står i PLANERA.md: Stegen för en ny plan, Omtag av en metod för en metod som redan har planen (node scripts/planera/omtag.mjs), och liggaren med node scripts/planera/steg.mjs visa.${existsSync('NATTEN.md') ? '\nPlanen till pushen står överst i NATTEN.md.' : ''}`);
 
-// Kreditspärrens läge, så att det är känt innan arbetet fortsätter (scripts/krediter.mjs, DRIFT.md under Krediter).
-const krediter = kor(process.execPath, ['scripts/krediter.mjs', '--rad'], 25000);
+// Kreditspärrens läge och genomgången av dygnets trafik, med det som sticker ut och analysen att föreslå, så att det är
+// känt innan arbetet fortsätter (scripts/krediter.mjs --start, DRIFT.md under Krediter; Niclas 2026-10-28: "Se till att
+// sessioner ... gör någon form av genomgång av detta vid uppstart").
+const krediter = kor(process.execPath, ['scripts/krediter.mjs', '--start'], 25000);
 delar.push(`\n===== Krediterna =====\n${krediter || 'Netlify-krediterna gick inte att läsa. Kör npm run krediter före uppladdning.'}`);
 
 // Kön i kort form ur registret i KO.md: det som pågår, prio 1 och det som väntar på Niclas, och antalet av resten.

@@ -31,7 +31,7 @@ Läs raden för det du ska göra. Avsnitten står i den här filen, ett per steg
 
 ## Innan du börjar en uppgift
 
-Kör `git status` och `git branch --show-current`. Läs de filer uppgiften rör innan du ändrar dem. Rör bara det uppgiften gäller. Hittar du något annat som borde fixas: lägg det i kön med `node scripts/ko.mjs lagg "<vad>" --var <fil>`, gör det inte i samma commit.
+Kör `git status` och `git branch --show-current`. Läs avsnitten Trafiken och Byggena och databasen som kroken skriver vid start, efter en clear och efter en kompaktering: sajtens storlek, cache och krediter är ditt ansvar, liksom att arbetssättet inte bygger oftare än det ska (Niclas samma dag: "Den får gärna hitta avarter i beteenden också"), och sticker något ut, säg det till Niclas och föreslå analysen som raden nämner innan arbetet fortsätter (Niclas 2026-10-28: "Du ska vara expert på sajten och tänka kring dess optimering för sitt syfte vad gäller storlek, cache och sånt här"; mätningen kostar inga krediter, och gränserna står i DRIFT.md under Krediter). Läs de filer uppgiften rör innan du ändrar dem. Rör bara det uppgiften gäller. Hittar du något annat som borde fixas: lägg det i kön med `node scripts/ko.mjs lagg "<vad>" --var <fil>`, gör det inte i samma commit.
 
 ## Kön
 

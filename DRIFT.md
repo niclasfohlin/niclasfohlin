@@ -113,7 +113,8 @@ Netlify räknar allt i krediter: ett lyckat produktionsbygge 15, bandbredd 20 pe
 |---|---|
 | Saldot, förbrukningen per mätare, det som drar utan byggen och spärren | `npm run krediter` |
 | Vad trafiken består av: besökare, adresser, webbläsare och filtyper | `npm run krediter -- trafik [timmar]` |
-| Raden vid varje nytt uppdrag och efter en kompaktering | `node scripts/krediter.mjs --rad`, från kroken UserPromptSubmit i `.claude/settings.json` och från `.claude/hooks/kontext.mjs` |
+| Raden vid varje nytt uppdrag | `node scripts/krediter.mjs --rad`, från kroken UserPromptSubmit i `.claude/settings.json` |
+| Genomgången vid start, efter en clear och efter en kompaktering: raden och dygnets trafik med det som sticker ut, som våra egna skript över 50 MB, en adress över 40 MB, sökrobotar och förhandsvisningar över 250 MB, AI-agenter över 50 MB och trafik över 35 krediter om dygnet, med analysen att föreslå; och byggena i produktionen ur Netlifys lista över deployer, med fler än två på ett dygn, två inom 90 minuter och fler än två om dygnet i snitt senaste veckan, och kommentarsdatabasen om den har vaknat det senaste dygnet | `node scripts/krediter.mjs --start`, från `.claude/hooks/kontext.mjs`; gränserna i `STICKER_UT` och `FORVANTAT` utgår från dygnet 2026-10-28 |
 | Spärren före uppladdning | `.claude/hooks/skydda-main.mjs`, som kör `node scripts/krediter.mjs --grind` |
 | Prova spärren utan att röra Netlify | `KREDITER_PROV_KVAR=110 node scripts/krediter.mjs --grind` |
 | Saldot efter ett bygge | `node scripts/deploykoll.mjs` skriver det sist |
