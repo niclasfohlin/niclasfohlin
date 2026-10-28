@@ -166,8 +166,8 @@ export function sakdelar(text, saker) {
 
 // Lärarens och elevernas egna saker, som ser ut som namn på saker men inte är metodens och inte länkas (STIL.md under
 // Hänvisningar: "elevens egna saker (bänkboken)"): klasslistan är lärarens lista över klassen (riggens omgång 1
-// 2026-10-26, Högläsning i par).
-export const EGNA_SAKER = Object.freeze(['klasslista']);
+// 2026-10-26, Högläsning i par), och namnkortet är elevens eget kort med namnet (sajtens K-596, Säg, skriv och läs).
+export const EGNA_SAKER = Object.freeze(['klasslista', 'namnkort']);
 const EGNA_FORMER = new Set(EGNA_SAKER.flatMap((n) => sakensFormer(n)).map((f) => f.toLocaleLowerCase('sv')));
 
 /**

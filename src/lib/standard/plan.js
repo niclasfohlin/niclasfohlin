@@ -66,9 +66,10 @@ export function helgdag(s) {
 
 // ---------- Metodens fält ----------
 
-// Planens fält i metodens fil: `plan` överst, `tid` och `perElev` på uppföljningens rader och `taggar` och `rubrik` på
-// progressionens.
-const PLANENS_RADER = { uppfoljning: ['tid', 'perElev', 'tabell'], progression: ['taggar', 'rubrik'] };
+// Planens fält i metodens fil: `plan` överst, `tid`, `perElev`, `tabell` och `resultat` på uppföljningens rader och
+// `taggar` och `rubrik` på progressionens. Resultatet, det läraren för in vid mätningen, står bara vid planens fält
+// (K-596: det gav nytt datum och en ny lathund fast metodens sida inte visar det).
+const PLANENS_RADER = { uppfoljning: ['tid', 'perElev', 'tabell', 'resultat'], progression: ['taggar', 'rubrik'] };
 
 /**
  * Metodens fil utan planens fält. Bara planens sida läser dem: de står inte på metodens sida, i Word eller i lathunden,
@@ -430,8 +431,9 @@ export function planensRamFel(d) {
 /**
  * En rad i en av metodens tabeller som en roll i planen hämtar sin text ur (plan.passen med ur, sajtens K-520): tabellen
  * med rubriken, raden vars första cell börjar med rad, och cellerna i kolumnerna, utom den första, med kolumnens namn. En
- * tabell med en enda kolumn efter den första ger cellen utan namn. Så visar planen metodens egen rad, och en ändring i
- * tabellen följer med.
+ * tabell med en enda kolumn efter den första ger cellen utan namn. `kolumner` kan också ta den första kolumnen, när radens
+ * namn är det läraren behöver se, som villkoret "Fler än åtta eller en klass" eller räknesättet (K-596: sex metoder kunde
+ * inte visa raden de hämtade). Så visar planen metodens egen rad, och en ändring i tabellen följer med.
  * @param {MetodensTexter} d
  * @param {{ tabell: string, rad: string, kolumner?: string[] }} ur
  * @returns {{ kolumn: string, text: string }[] | null} null när tabellen, raden eller en kolumn inte finns
@@ -445,10 +447,11 @@ export function rollensRad(d, ur) {
 const tabellOchKolumner = (d, ur) => {
   const t = (d.tabeller ?? []).find((x) => x.rubrik === ur.tabell);
   const valda = t ? ur.kolumner ?? t.kolumner.slice(1) : [];
-  return t && !valda.some((k) => t.kolumner.indexOf(k) < 1) ? { t, valda } : null;
+  return t && !valda.some((k) => t.kolumner.indexOf(k) < 0) ? { t, valda } : null;
 };
-// Cellerna i en rad i kolumnerna, med kolumnens namn, och utan namn i en tabell med en enda kolumn efter den första.
-const radensCeller = (t, r, valda) => valda.map((k) => ({ kolumn: t.kolumner.length === 2 ? '' : k, text: String(r[t.kolumner.indexOf(k)] ?? '').trim() })).filter((x) => x.text);
+// Cellerna i en rad i kolumnerna, med kolumnens namn, och utan namn när en tabell med en enda kolumn efter den första visar
+// bara den.
+const radensCeller = (t, r, valda) => valda.map((k) => ({ kolumn: t.kolumner.length === 2 && valda.length === 1 ? '' : k, text: String(r[t.kolumner.indexOf(k)] ?? '').trim() })).filter((x) => x.text);
 /** Ordet i `ur.rad` som säger att rollen hämtar veckans rad i en tabell med en rad per vecka (rollensVeckor). */
 export const VECKANS_RAD = 'veckans';
 /** Delen i en rad med del som är passets förberedelse (passetsBeskrivning). */
@@ -1050,7 +1053,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.7.0', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.8.0', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -1122,7 +1125,7 @@ export function rentaFore(fore) {
   for (const f of Array.isArray(fore) ? fore : []) {
     const dagar = veckodagar(f?.dagar);
     const fasta = Object.fromEntries(Object.entries(f?.fasta && typeof f.fasta === 'object' ? f.fasta : {}).filter(([d, nr]) => arDatum(d) && Number.isInteger(nr) && nr >= 1 && nr <= 999).sort(([a], [b]) => (a < b ? -1 : 1)));
-    if (arDatum(f?.till) && dagar.length && !ut.has(f.till)) ut.set(f.till, { till: f.till, dagar, ...(Object.keys(fasta).length ? { fasta } : {}) });
+    if (arDatum(f?.till) && dagar.length && !ut.has(f.till)) ut.set(f.till, { till: f.till, dagar, ...(f.tak === true ? { tak: true } : {}), ...(Object.keys(fasta).length ? { fasta } : {}) });
   }
   return [...ut.values()].sort((a, b) => (a.till < b.till ? -1 : 1));
 }
@@ -1146,10 +1149,27 @@ export function passdagar(val) {
     }
     return nu.includes(dag);
   };
+  // I bytets vecka får en ny dag efter bytet bara ett pass så länge veckan inte har fler pass än dagarna före eller efter
+  // bytet ger, så att en dag som byts mot en senare dag samma vecka inte ger veckan ett pass till (verifieringen
+  // 2026-10-27, K-595: tisdag och torsdag byttes mot tisdag och fredag på torsdagen, och veckan fick tre pass).
+  // Regeln gäller byten som är gjorda med den (tak), så att en plan som sparades före den räknas som förut (Codex
+  // 2026-10-28), och en dag räknas som ny mot dagarna som gällde veckans måndag, också efter två byten samma vecka.
+  const dagarVid = (datum) => fore.find((f) => datum < f.till)?.dagar ?? nu;
+  const iVeckan = (datum, dag) => {
+    const mandag = mandagen(datum);
+    if (!fore.some((f) => f.tak && f.till < datum && mandagen(f.till) === mandag)) return true;
+    const fran = dagarVid(mandag);
+    if (fran.includes(dag)) return true;
+    const tak = Math.max(fran.length, dagarVid(datum).length);
+    let antal = 0;
+    for (let d = 1; d < dag; d++) if (arPass(plusDagar(mandag, d - 1), d)) antal++;
+    return antal < tak;
+  };
+  const arPass = (datum, dag) => pa(datum, dag) && iVeckan(datum, dag);
   // Ett pass som har flyttats till en tidigare dag finns när dagarna gällde den dagen, så att ett pass som hölls före sin
   // dag inte faller bort när dagarna byts efteråt. Ett pass som har flyttats till en senare dag följer sin egen dag, så att
   // det inte kommer tillbaka när en dag läggs till igen (Codex 2026-10-25).
-  return (datum, dag) => pa(datum, dag) || (arDatum(flytta[datum]) && flytta[datum] < datum && pa(flytta[datum], dag));
+  return (datum, dag) => arPass(datum, dag) || (arDatum(flytta[datum]) && flytta[datum] < datum && pa(flytta[datum], dag));
 }
 /**
  * De fasta passen ur alla byten av dagar, passets dag och nummer, ett senare byte före ett tidigare. Ett fast pass finns
@@ -1178,7 +1198,7 @@ export function bytDagar(val, dagar, fran, plan) {
   /** @type {{ till: string, dagar: number[], fasta?: Record<string, number> }[]} */
   const fore = rentaFore(val.fore);
   let e = fran ? fore.find((f) => f.till === fran) : undefined;
-  if (fran && !e) { e = { till: fran, dagar: [...new Set(val.dagar)].sort() }; fore.push(e); }
+  if (fran && !e) { e = { till: fran, dagar: [...new Set(val.dagar)].sort(), tak: true }; fore.push(e); }
   if (e && fran && plan) {
     const eDagar = e.dagar;
     // Fast blir det som annars kan falla bort eller byta nummer: ett flyttat pass som har hållits men ligger på eller efter
@@ -1703,6 +1723,15 @@ export function passetsVisadeRoller(plan, p, passen) {
 /** En dels tid utan "min", som i passets rader och kalendern: "0–3". @param {string} tid */
 export const delensTid = (tid) => utanFogar(tid).replace(/\s*min$/, '');
 /**
+ * En dels tid i planen, efter hur metoden säger passets tider: en plats i passet, "0–4", när delarna följer på varandra från
+ * minut 0 (delarIFoljd), och annars delens längd med minuterna, "2 min" och "3–8 min", så att en längd inte läses som en
+ * plats (verifieringen 2026-10-27, K-595: Kortskrivnings första pass sa "0–4 Boken" om minuten i passet och pass 2
+ * "3–8 Skriv" om delens längd).
+ * @param {string} tid
+ * @param {{ tid: string }[]} delar passets delar, som avgör om tiderna är platser eller längder
+ */
+export const delensTidI = (tid, delar) => { const t = delensTid(tid); return delarIFoljd(delar) || !/\d$/.test(t) ? t : `${t} min`; };
+/**
  * En variant som metodens sida, Word, lathunden och lektionskortet skriver den: "Vecka 1–3: passet är bara listan, med
  * modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning 14–15." En variant för passets längd ändrar bara
  * tiderna, så de står först och variantens text efter: "Ett pass på tio minuter: första läsningen 0–2 minuter, modellering
@@ -1990,8 +2019,12 @@ export function passetsBeskrivning(roller, passet, lage) {
     const rr = iDelen(d.fas);
     if (!rr.length) return d;
     rr.forEach((r) => placerade.add(r));
-    const forst = rr.flatMap(innehall);
-    return rr.some((r) => r.istallet) ? { ...d, vad: '', mer: [], forst, istallet: true } : { ...d, forst };
+    // En rad med sist står efter delens text, som en fråga som ställs när delen är gjord (K-596: Kortskrivnings fråga i
+    // Dela stod före eleverna delade).
+    const forst = rr.filter((r) => !r.sist).flatMap(innehall);
+    const sist = rr.filter((r) => r.sist).flatMap(innehall);
+    const ut = { ...d, forst, ...(sist.length ? { sist } : {}) };
+    return rr.some((r) => r.istallet) ? { ...ut, vad: '', mer: [], istallet: true } : ut;
   });
   // Utan rader i delarna är delarna tidsschemats, variantens eller tabellens egna.
   const delar = medRader.every((d, i) => d === grund[i]) ? grund : medRader;
@@ -2126,7 +2159,7 @@ export function kodaVal(val, extra = {}) {
   if (val.mitt) delar.push(`a=${val.mitt}`);
   if (val.slut) delar.push(`e=${val.slut}`);
   const fore = rentaFore(val.fore);
-  if (fore.length) delar.push(`db=${fore.map((f) => `${f.till}~${f.dagar.join('')}${f.fasta ? `~${Object.entries(f.fasta).map(([d, nr]) => `${d}!${nr}`).join(',')}` : ''}`).join('.')}`);
+  if (fore.length) delar.push(`db=${fore.map((f) => `${f.till}~${f.dagar.join('')}${f.tak ? 't' : ''}${f.fasta ? `~${Object.entries(f.fasta).map(([d, nr]) => `${d}!${nr}`).join(',')}` : ''}`).join('.')}`);
   if (extra.id) delar.push(`p=${extra.id}`);
   if (extra.visa) delar.push(`v=${extra.visa}`);
   return delar.join('&');
@@ -2157,7 +2190,7 @@ export function lasVal(hash) {
   const slut = Number(p.get('e'));
   const tider = rentaTider(Object.fromEntries(punkter('t').map((x) => x.match(/^([1-5])-(\d{2})(\d{2})-(\d{2})(\d{2})$/)).filter(Boolean).map((m) => [m[1], [`${m[2]}:${m[3]}`, `${m[4]}:${m[5]}`]])));
   // Dagarna före ett byte av dagar mitt i insatsen: bytets dag och dagarna före, "2026-11-26~24".
-  const fore = rentaFore(punkter('db').map((x) => x.split('~')).map(([till, d, f]) => ({ till, dagar: String(d ?? '').split('').map(Number), fasta: Object.fromEntries(String(f ?? '').split(',').filter(Boolean).map((x) => x.split('!')).map(([dag, nr]) => [dag, Number(nr)])) })));
+  const fore = rentaFore(punkter('db').map((x) => x.split('~')).map(([till, d, f]) => ({ till, dagar: String(d ?? '').split('').map(Number), ...(String(d ?? '').endsWith('t') ? { tak: true } : {}), fasta: Object.fromEntries(String(f ?? '').split(',').filter(Boolean).map((x) => x.split('!')).map(([dag, nr]) => [dag, Number(nr)])) })));
   /** @type {Val} */
   const val = {
     start, dagar, langd,
@@ -2985,7 +3018,9 @@ export function extraPassetsDag(plan, val) {
  * igen kan känna igen händelserna; SEQUENCE växer med tiden, så att den senaste filen gäller. Beskrivningen har veckans hela
  * fokus och, när sidan ger det, passets delar (info.passet), så att ett möte i andra meningen syns (de kalla testarna
  * 2026-10-24). Det som görs före första passet är en händelse över hela veckan före.
- * @param {{ titel: string, uppfoljning: { nar: string }[], fokus: (string | null)[], passet?: (p: Pass) => string, extraPass?: { datum: string, text: string } }} info
+ * Ett pass som behöver mer tid än planens pass, som ett pass med egen tabell (info.minuter), bokas så länge (K-595:
+ * Kortskrivnings första pass på 25 minuter bokades på 15).
+ * @param {{ titel: string, uppfoljning: { nar: string }[], fokus: (string | null)[], passet?: (p: Pass) => string, minuter?: (p: Pass) => number, extraPass?: { datum: string, text: string } }} info
  * @param {Plan} plan
  * @param {{ id: string, lank: (vecka?: number | 'fore') => string, namn?: string, nu: Date, tider?: Val['tider'], elever?: { namn: string, fran?: string }[] }} o
  */
@@ -3011,7 +3046,10 @@ export function kalenderfil(info, plan, o) {
     // Metodens texter med planens veckor, som på sidan (veckornaIPlanen).
     const fokus = steg !== null && steg !== undefined && info.fokus[steg] ? `\n${hel(veckornaIPlanen(/** @type {string} */ (info.fokus[steg]), plan.borja))}` : '';
     const passet = info.passet ? veckornaIPlanen(info.passet(p), plan.borja) : '';
-    handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${hogstaPassnr(plan)}${vem}`, `Vecka ${planveckansNamn(plan, v).plan} i planen.${fokus}${passet ? `\n${passet}` : ''}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), tider[String(veckodag(passetsDag(p)))]);
+    const tid = tider[String(veckodag(passetsDag(p)))];
+    const behover = info.minuter?.(p) ?? 0;
+    const bokad = tid && behover > minuterAv(tid[1]) - minuterAv(tid[0]) ? [tid[0], plusMinuter(tid[0], behover)] : tid;
+    handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${hogstaPassnr(plan)}${vem}`, `Vecka ${planveckansNamn(plan, v).plan} i planen.${fokus}${passet ? `\n${passet}` : ''}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), bokad);
   }
   // En versions extra pass före pass 1, med passets klockslag den dagen (extraPassetsDag).
   if (info.extraPass) handelse(`${o.id}-extra`, info.extraPass.datum, `${info.titel}: det extra passet före pass 1${vem}`, `${hel(info.extraPass.text)}\nFöre första passet i planen: ${o.lank('fore')}`, o.lank('fore'), tider[String(veckodag(info.extraPass.datum))]);

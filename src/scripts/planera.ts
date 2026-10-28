@@ -15,7 +15,7 @@
 // fyller i den"). Elevernas namn och allt läraren för in stannar i webbläsaren och följer aldrig med länken,
 // kalenderfilen, statistiken eller texterna som kopieras.
 import {
-  arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
+  arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTidI, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsLangder, passetsVisadeRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
   bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
@@ -1024,6 +1024,8 @@ const snabbmallensNamn = () => filer.querySelector<HTMLElement>(`[data-fil="${ak
 // metodens egen fil (src/lib/metodsaker.ts). En sak på bankens nivåer, som kartläggningens text före, leder till planens nivå.
 // Veckan som visas, för en sak som finns en gång för några veckor (Mina lärdomar: vecka 1–2).
 let lankVecka: number | undefined;
+// Sakerna som uppföljningens rader nämner, som kartläggningen före och efter.
+const matningensSaker = new Set(data.uppfoljning.rader.flatMap((r) => sakdelar(r.vad, data.saker).filter((x) => x.sak !== undefined).map((x) => data.saker[x.sak!].namn)));
 const sakLank = (s: PlanData['saker'][number], text: string) => {
   const nivan = aktiv.val.niva ? s.nivaer?.[aktiv.val.niva] : undefined;
   const veckans = lankVecka !== undefined ? s.veckor?.[String(lankVecka)] : undefined;
@@ -1031,9 +1033,11 @@ const sakLank = (s: PlanData['saker'][number], text: string) => {
   const adress = nivan || veckans || s.adress;
   const lank =(a: string, t: string) => `<a href="${esc(a)}" data-goatcounter-click="planera:${esc(data.id)}:sak" data-goatcounter-title="${esc(data.titel)}: ${esc(s.namn)} från planen">${esc(t)}</a>`;
   // En sak på nivåerna leder utan vald nivå också till varje nivå, så att läraren väljer och inte hamnar på den första
-  // (Rimligheten 2026-10-26: Problemlösningens kartläggning före ledde alltid till Bas, fast nivån väljs efter den).
+  // (Rimligheten 2026-10-26: Problemlösningens kartläggning före ledde alltid till Bas, fast nivån väljs efter den). En sak
+  // som uppföljningens mätning nämner, som kartläggningen, leder också med en vald nivå till varje nivå, eftersom
+  // mätningen avgör nivån och eleven görs om på den nivå hen landade (verifieringen 2026-10-27, K-595).
   const nivaerna = (data.bank?.nivaer ?? data.nivaer ?? []).filter((n) => s.nivaer?.[n.slug]);
-  if (nivan || nivaerna.length < 2) return lank(adress, text);
+  if ((nivan && !matningensSaker.has(s.namn)) || nivaerna.length < 2) return lank(adress, text);
   return `${lank(adress, text)} (${nivaerna.map((n) => lank(s.nivaer![n.slug], n.namn)).join(', ')})`;
 };
 // Ett spann av saker med nummer, som "Bildserie 2–6", är en länk till varje sak när alla finns: Bildserie 2, 3, 4, 5 och 6
@@ -1124,7 +1128,7 @@ const uppfDagen = (x: { rad: number; datum: string; vecka: number | null }) => x
 const uppfPasset = (rad: number) => {
   const t = data.uppfoljning.rader[rad].passet;
   if (!t?.delar?.length) return '';
-  return `<details class="pl-fallut"><summary>Passets delar</summary><ul class="pl-uppf">${t.delar.map((d) => `<li><span class="pl-etikett">${esc(delensTid(d.tid))} · ${esc(d.fas)}</span><p>${lankad(mening(d.vad))}</p>${merText(d.mer)}</li>`).join('')}</ul><p class="pl-not">Delarna står i metodens tabell <a href="${esc(t.adress)}" ${goat('passets-tabell', 'passets tabell från uppföljningen')}>${esc(t.namn)}</a>.</p></details>`;
+  return `<details class="pl-fallut"><summary>Passets delar</summary><ul class="pl-uppf">${t.delar.map((d, _i, alla) => `<li><span class="pl-etikett">${esc(delensTidI(d.tid, alla))} · ${esc(d.fas)}</span><p>${lankad(mening(d.vad))}</p>${merText(d.mer)}</li>`).join('')}</ul><p class="pl-not">Delarna står i metodens tabell <a href="${esc(t.adress)}" ${goat('passets-tabell', 'passets tabell från uppföljningen')}>${esc(t.namn)}</a>.</p></details>`;
 };
 // Med tiden för gruppen när mätningen görs en elev i taget utanför passen, som under Före (Rimligheten 2026-10-27: Skrivkollen
 // efter vecka 4 och 8 tar en timme med fyra elever, och det stod bara under Före).
@@ -1323,7 +1327,7 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
   const slut = Math.max(0, ...delar.map((d) => fasTill(d.tid) ?? 0));
   // Klockslag bara när delarna följer på varandra från minut 0; en metod som säger delarnas längd behåller dem (delarIFoljd).
   const klockslag = !!tid && slut > 0 && delarIFoljd(delar) && minuterAv(tid[1]) - minuterAv(tid[0]) === slut;
-  const tidFor = (t: string) => { const f = fasFran(t); return klockslag && f !== null ? tidText(plusMinuter(tid![0], f)) : delensTid(t); };
+  const tidFor = (t: string) => { const f = fasFran(t); return klockslag && f !== null ? tidText(plusMinuter(tid![0], f)) : delensTidI(t, delar); };
   // En del där passets rad står i stället för delens vanliga text har inte metodens allmänna fraser (passetsBeskrivning).
   const stegFor = (d: { fas: string; istallet?: true }) => (egna || d.istallet ? undefined : data.passet?.steg?.rader.find((s) => s.namn.toLowerCase() === d.fas.toLowerCase()));
   const rad = (nyckel: string, tidtext: string, namn: string, inne: string) => `<details class="pl-del" data-ruta="del-${nyckel}"${oppna.has(`del-${nyckel}`) ? ' open' : ''}><summary><span class="pl-deltid">${esc(tidtext)}</span><span class="pl-delnamn">${esc(namn)}</span></summary><div class="pl-deltext">${inne}</div></details>`;
@@ -1342,11 +1346,12 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
     ...delar.map((d, i) => {
       const s = stegFor(d);
       // Fraserna kommer ur metodens exempel, med dess text, person och tal, så den första säger det en gång (Rimligheten
-      // 2026-10-26: "Om du var Sam" i serier utan Sam, och Sandslottet i alla arton pass).
+      // 2026-10-26: "Om du var Sam" i serier utan Sam, och Sandslottet i alla arton pass). En del fraser, som Kompissamtals
+      // regler i Starta, sägs varje gång, så noten säger bara att det som hör till exemplet byts (K-596).
       const forsta = i === delar.findIndex((x) => !!stegFor(x)?.fraser.length);
-      const fraser = s?.fraser.length ? `<p class="pl-etikett">${esc(data.passet!.steg!.fraserRubrik)}</p><ul class="pl-fraser">${s.fraser.map((x) => `<li>”${esc(x)}”</li>`).join('')}</ul>${forsta ? '<p class="pl-not">Fraserna kommer ur metodens exempel. Byt dem mot det ni gör i dag.</p>' : ''}` : '';
+      const fraser = s?.fraser.length ? `<p class="pl-etikett">${esc(data.passet!.steg!.fraserRubrik)}</p><ul class="pl-fraser">${s.fraser.map((x) => `<li>”${esc(x)}”</li>`).join('')}</ul>${forsta ? '<p class="pl-not">Fraserna är metodens förslag. Byt det som hör till metodens exempel, som namn och tal, mot det ni gör i dag.</p>' : ''}` : '';
       // Passets egen rad för delen först, och delens vanliga text efter, utom när raden står i stället för den.
-      return rad(`${egna ? 'egen-' : ''}${i}`, tidFor(d.tid), d.fas, `${rollRader(d.forst ?? [])}${d.vad ? `<p>${lankad(mening(d.vad))}</p>` : ''}${merText((d as { mer?: Mer }).mer)}${fraser}`);
+      return rad(`${egna ? 'egen-' : ''}${i}`, tidFor(d.tid), d.fas, `${rollRader(d.forst ?? [])}${d.vad ? `<p>${lankad(mening(d.vad))}</p>` : ''}${merText((d as { mer?: Mer }).mer)}${rollRader(d.sist ?? [])}${fraser}`);
     }),
     // En rad utan minuter, som "Hemma, cirka 20 min": ordet före kommat i tidens spalt och resten efter delens namn.
     ...(!egna ? (data.passet?.andra ?? []).map((r, i) => { const [forst, ...rest] = r.tid.split(','); return rad(`andra-${i}`, forst.trim(), [r.fas, ...rest.map((x) => x.trim())].join(', '), `<p>${lankad(mening(r.vad))}</p>`); }) : []),
@@ -1378,8 +1383,8 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
   const inledning = [...(b.rubrik && b.variantText ? [b.variantText] : []), ...(!egna && data.passet?.text ? [data.passet.text] : [])].map((t) => `<p class="pl-not pl-delinledning">${lankad(mening(t))}</p>`).join('');
   // Ett pass med egen tabell som är längre än planens pass, som Kortskrivnings första pass på 25 minuter med pass på 10–15,
   // säger till, som uppföljningen i ett pass (K-585; modulens lista efter riggens leverans 2026-10-27).
-  const tabellensMinuter = egna ? Math.max(0, ...delar.map((d) => minuterISpann(d.tid)?.till ?? 0)) : 0;
-  const langre = p && tabellensMinuter > passetsMinuter(p) ? `<p class="pl-varning">Det här passet behöver minst ${tabellensMinuter} minuter, och passet är ${passetsMinuter(p)}. Boka längre tid den dagen.</p>` : '';
+  const behover = tabellensMinuter(b);
+  const langre = p && behover > passetsMinuter(p) ? `<p class="pl-varning">Det här passet behöver minst ${behover} minuter, och passet är ${passetsMinuter(p)}. Boka längre tid den dagen.</p>` : '';
   // Det uppföljningen gör i passet står efter passets delar, eftersom det görs efter aktiviteten, som gruppreflektionen
   // (andra rundan av Rimligheten 2026-10-26: reflektionen och Efteråt stod före aktiviteten).
   return `${namn}${roll}${postRad}${tabellRad}${mitt}${rader.length ? `<div class="pl-delar"><p class="pl-delrubrik">${esc(stor(rubrik))}${klockslag ? ', med passets klockslag' : ''}</p>${inledning}${rader.join('')}</div>` : ''}${langre}${p ? uppfoljningIPasset(p, oppna) : ''}`;
@@ -1394,7 +1399,15 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
 // Det eleverna fyller i under ett pass med en egen text, som Vår grupp, står med metodens text och inte också med
 // uppföljningens rad, och säger till när passet är kortare än det behöver (andra rundan av Rimligheten 2026-10-26).
 const instrumentet = (rad: number) => (data.skattningar ?? []).find((x) => x.vem === 'eleverna' && x.rad === rad);
-const uppfoljningIPasset = (p: Pass, oppna: Set<string>) => plan.uppfoljning.filter((u) => iPassetsRuta(u.rad) && u.tillfallen.some((t) => t.datum === p.datum)).map((u) => {
+const uppfoljningenIPasset = (p: Pass) => plan.uppfoljning.filter((u) => iPassetsRuta(u.rad) && u.tillfallen.some((t) => t.datum === p.datum));
+// Minuterna som passet behöver när det är längre än planens pass: ett pass med egen tabell, som Kortskrivnings första pass
+// på 25 minuter med pass på 10–15, och det eleverna fyller i under passet, som Vår grupp. Rutan säger till, och
+// kalenderfilen bokar så länge (verifieringen 2026-10-27, K-595: filen bokade 15 minuter där rutan sa 25).
+// Också en variant vars delar följer på varandra och räcker längre än passet, som Gruppstärkande aktiviteters första pass
+// på 20 minuter med pass på tio (Codex 2026-10-28).
+const tabellensMinuter = (b: ReturnType<typeof passetFor>) => (b.egenOrdning || delarIFoljd(b.delar) ? Math.max(0, ...b.delar.map((d) => fasTill(d.tid) ?? 0)) : 0);
+const passetBehover = (p: Pass) => Math.max(tabellensMinuter(passetFor(p)), ...uppfoljningenIPasset(p).map((u) => instrumentet(u.rad)?.minuter ?? 0));
+const uppfoljningIPasset = (p: Pass, oppna: Set<string>) => uppfoljningenIPasset(p).map((u) => {
   const x = instrumentet(u.rad);
   const langd = passetsMinuter(p);
   const kort = x?.minuter && langd < x.minuter ? `<p class="pl-varning">Det här passet behöver minst ${x.minuter} minuter, och passet är ${langd}. Boka längre tid den dagen.</p>` : '';
@@ -1451,15 +1464,16 @@ function metodensLankar(p?: Pass): string {
 // Passet i kalenderns händelse, som i rutan: namnet, rollerna och delarna med minuter (de kalla testarna 2026-10-24:
 // kalendern hade bara första meningen ur veckans fokus). Kalenderfilen skriver metodens veckor som planens.
 // I en serie med veckans lektion (Codex 2026-10-27: kalendern skrev seriens allmänna pass fast veckan hade Bokstavsgympa).
-const passetIKalendern = (p: Pass) => medLektion(plan.veckor[p.vecka - 1] ? veckansLektion(plan.veckor[p.vecka - 1]) : 0, () => {
+const iPassetsLektion = <T>(p: Pass, gor: () => T): T => medLektion(plan.veckor[p.vecka - 1] ? veckansLektion(plan.veckor[p.vecka - 1]) : 0, gor);
+const passetIKalendern = (p: Pass) => iPassetsLektion(p, () => {
   const b = passetFor(p);
   // Passets problem med adressen på en egen rad, så att ingen punkt hamnar i länken.
   const x = passetsPost(p);
   const post = x ? ['slut' in x ? x.slut : `${stor(data.bank!.en)}: ${x.namn}.`, `${location.origin}${x.adress}`] : [];
   const rader = (t: { etikett: string; text: string }[]) => t.map((r) => mening(r.etikett ? `${r.etikett}: ${r.text}` : r.text)).join(' ');
   // Passets egna rader i en del står efter delarna med delens namn, som i rutan (passetsBeskrivning).
-  const iDelarna = [...(b.foreForst ? [`${FORE_PASSET}: ${rader(b.foreForst)}`] : []), ...b.delar.filter((d) => d.forst?.length).map((d) => `${d.fas}: ${rader(d.forst!)}`)];
-  return [[b.namn, ...b.texter.map((t) => (t.etikett ? `${t.etikett}: ${t.text}` : t.text))].filter(Boolean).map((t) => mening(t)).join(' '), ...post, b.delar.length ? `Passet: ${b.delar.map((d) => `${d.fas} ${delensTid(d.tid)}`).join(', ')}.` : '', ...iDelarna, efterPasset(b).length ? `Efter passet: ${efterPasset(b).map((t) => mening(t)).join(' ')}` : ''].filter(Boolean).join('\n');
+  const iDelarna = [...(b.foreForst ? [`${FORE_PASSET}: ${rader(b.foreForst)}`] : []), ...b.delar.filter((d) => d.forst?.length || d.sist?.length).map((d) => `${d.fas}: ${rader([...(d.forst ?? []), ...(d.sist ?? [])])}`)];
+  return [[b.namn, ...b.texter.map((t) => (t.etikett ? `${t.etikett}: ${t.text}` : t.text))].filter(Boolean).map((t) => mening(t)).join(' '), ...post, b.delar.length ? `Passet: ${b.delar.map((d) => `${d.fas} ${delensTidI(d.tid, b.delar)}`).join(', ')}.` : '', ...iDelarna, efterPasset(b).length ? `Efter passet: ${efterPasset(b).map((t) => mening(t)).join(' ')}` : ''].filter(Boolean).join('\n');
 });
 
 // Före första passet: kartläggningen eller förtestet, det andra metoden gör före start och checklistan inför första passet,
@@ -1509,7 +1523,7 @@ function foreDelar(oppna: Set<string>): string[] {
   const saker = [
     ...uppfoljningensTillfallen(plan).filter((x) => x.vecka === 0).map((x) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))}</span>${uppfText(x.rad)}${medResultat(x.rad, x.nyckel)}</li>`),
     // Versionens extra pass före pass 1 står med sin dag och tid (extraPassetsDag; Rimligheten 2026-10-27: Egen ram).
-    ...(extraDag ? [`<li><span class="pl-etikett">${esc(data.extraPass?.rubrik ?? 'Det extra passet')}, ${esc(extraDag)}</span>${data.extraPass?.delar?.length ? `<ul class="pl-delar">${data.extraPass.delar.map((d) => `<li><span class="pl-etikett">${esc(delensTid(d.tid))} ${esc(d.fas)}</span> ${lankad(mening(d.vad))}</li>`).join('')}</ul>` : ''}${extraBock}</li>`] : []),
+    ...(extraDag ? [`<li><span class="pl-etikett">${esc(data.extraPass?.rubrik ?? 'Det extra passet')}, ${esc(extraDag)}</span>${data.extraPass?.delar?.length ? `<ul class="pl-delar">${data.extraPass.delar.map((d, _i, alla) => `<li><span class="pl-etikett">${esc(delensTidI(d.tid, alla))} ${esc(d.fas)}</span> ${lankad(mening(d.vad))}</li>`).join('')}</ul>` : ''}${extraBock}</li>`] : []),
     ...(data.fore ?? []).map((t) => `<li><p>${lankad(mening(t))}</p></li>`),
     // I en serie materialet till vecka 1:s lektion, som skrivs ut och lamineras före första passet (Rimligheten 2026-10-27).
     ...(aktuell && data.material?.text ? [`<li><span class="pl-etikett">${esc(data.material.rubrik)} till ${esc(aktuell.namn)}</span><p>${lankad(mening(data.material.text))}</p><p><a href="${esc(data.material.adress)}" ${goat('materialet', 'materialet från planen')}>${esc(data.material.rubrik)} i ${esc(aktuell.namn)}</a></p></li>`] : []),
@@ -1886,8 +1900,9 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
     // skattningen skulle bygga på").
     const lopandeHar = plan.uppfoljning.filter((u) => u.typ === 'lopande' && !skattningensRader().has(u.rad));
     // Metodens delmål först, när målet är metodens, och sedan metodens uppföljning varje vecka (tre kalla läsare
-    // 2026-10-27: skattningen hade ingen grund).
-    const delmal = data.delmal && aktivtMal() === data.mal ? `<p>${esc(data.delmal.text)}</p><ul class="pl-delmal">${data.delmal.punkter.map((x) => `<li>${lankad(stor(x))}</li>`).join('')}</ul>` : '';
+    // 2026-10-27: skattningen hade ingen grund). Inledningen är planens egen, eftersom metodens kan säga åt läraren att kryssa
+    // före och efter perioden, som i Antalsuppfattning i grupp, och det görs inte vid veckans skattning (K-596).
+    const delmal = data.delmal && aktivtMal() === data.mal ? `<p>Metodens delmål, det eleven ska kunna efter perioden:</p><ul class="pl-delmal">${data.delmal.punkter.map((x) => `<li>${lankad(stor(x))}</li>`).join('')}</ul>` : '';
     const underlag = lopandeHar.length || delmal ? `<details class="pl-fallut pl-underlag" data-ruta="underlag"${oppna.has('underlag') ? ' open' : ''}><summary>Det du bygger skattningen på</summary>${delmal}${lopandeHar.map((u) => `<p>${lankad(mening(data.uppfoljning.rader[u.rad].vad))}</p>`).join('')}</details>` : '';
     // Metodens skattning av gruppen (K-559): gruppens skala är metodens, och elevernas 1–5 mot målet står hopfällda under den,
     // så att gruppen inte skattas två gånger. En vecka utan metodens tillfälle har bara elevernas 1–5.
@@ -2761,7 +2776,7 @@ async function kopieraLanken() {
 $('pl-lank').addEventListener('click', () => void kopieraLanken());
 $('pl-kalender').addEventListener('click', () => {
   const extra = extraPassetsDatum();
-  const text = kalenderfil({ ...(extra && data.extraPass ? { extraPass: { datum: extra, text: [data.extraPass.rubrik, ...(data.extraPass.delar ?? []).map((d) => `${d.fas} ${delensTid(d.tid)}: ${d.vad}`), data.extraPass.delar?.length ? '' : data.extraPass.fore ?? ''].filter(Boolean).join('\n') } } : {}), titel: metodensNamn(), uppfoljning: data.uppfoljning.rader, fokus: (data.progression?.rader ?? []).map((r) => r.fokus), passet: passetIKalendern }, plan, { id: aktiv.id, lank, namn: aktiv.namn || undefined, nu: new Date(), tider: aktiv.val.tider, elever: aktiv.foljd.elever });
+  const text = kalenderfil({ ...(extra && data.extraPass ? { extraPass: { datum: extra, text: [data.extraPass.rubrik, ...(data.extraPass.delar ?? []).map((d, _i, alla) => `${d.fas} ${delensTidI(d.tid, alla)}: ${d.vad}`), data.extraPass.delar?.length ? '' : data.extraPass.fore ?? ''].filter(Boolean).join('\n') } } : {}), titel: metodensNamn(), uppfoljning: data.uppfoljning.rader, fokus: (data.progression?.rader ?? []).map((r) => r.fokus), passet: passetIKalendern, minuter: (p) => iPassetsLektion(p, () => passetBehover(p)) }, plan, { id: aktiv.id, lank, namn: aktiv.namn || undefined, nu: new Date(), tider: aktiv.val.tider, elever: aktiv.foljd.elever });
   laddaNer(new Blob([vanligText(text)], { type: 'text/calendar;charset=utf-8' }), filnamnet('kalender', { vem: aktiv.namn, metod: data.id, datum: idag }));
   kvittera($('pl-kalender'), 'Hämtad');
   visaBesked('Kalenderfilen är hämtad. Öppna den, så läggs passen och uppföljningen i kalendern. I Google Kalender läggs filen in på datorn.');

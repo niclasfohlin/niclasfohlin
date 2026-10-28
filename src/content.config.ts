@@ -462,6 +462,8 @@ const metodensFalt = z.strictObject({
         //   Rimligheten 2026-10-26: veckans rad stod överst i passet, och delen under sa emot den).
         del: text.optional(),
         istallet: z.literal(true).optional(),
+        // sist: raden står efter delens text och inte först, som en fråga när delen är gjord (K-596).
+        sist: z.literal(true).optional(),
         // kolumn: passets kolumn i tabellen, när tabellen har en kolumn per pass, som Ordverkstads Pass 2 och 3 (K-575).
         kolumn: text.optional(),
       // En rad med del Efter passet och istallet kan stå utan text: den tar bort passrutinens rad Efter passet i passet, som
@@ -475,7 +477,7 @@ const metodensFalt = z.strictObject({
       justera: z.array(text).min(1).max(4).optional(),
       // Metodens regel för beslutet efter insatsen, ordagrant, som står vid utvärderingen (Rimligheten 2026-10-26:
       // Kompissamtals beslut efter samtal 3 stod inte där läraren beslutar).
-      utvardering: z.array(text).min(1).max(4).optional(),
+      utvardering: z.array(text).min(1).max(5).optional(),
       // utvarderasEfter: uppföljningens rad (När) som beslutet efter insatsen väntar på, när metoden beslutar efter en mätning
       // några veckor efter kursen, som texttypskursernas nya text efter 4–6 veckor (K-585, K-586). Utvärderingen öppnar då
       // den veckan, och till dess säger planen när den görs.

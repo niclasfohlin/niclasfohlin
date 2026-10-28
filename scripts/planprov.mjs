@@ -173,6 +173,9 @@ if (tsMp) {
   ska('kalenderfilen med tider har ett pass per händelse', tidIcs.filter((r) => r === 'BEGIN:VEVENT').length === 20 && new Set(tidIcs.filter((r) => r.startsWith('UID:'))).size === 20, tidIcs.filter((r) => r === 'BEGIN:VEVENT').length);
   ska('passen med tid har klockslaget i lärarens egen tid', tidIcs.includes('DTSTART:20261102T092000') && tidIcs.includes('DTEND:20261102T100000') && tidIcs.includes('DTSTART:20261104T130000') && tidIcs.includes('TRANSP:OPAQUE'));
   ska('ett pass på en dag utan tid är en heldag', tidIcs.includes('DTSTART;VALUE=DATE:20261106') && tidIcs.some((r) => r === 'SUMMARY:Textsamtal i grupp\\, pass 1 av 18'));
+  // K-595: ett pass som behöver längre tid än planens pass, som Kortskrivnings första pass, bokas så länge.
+  const langtIcs = s.kalenderfil({ titel: ts.titel, uppfoljning: ts.uppfoljning.rader, fokus: [], minuter: (p) => (p.nr === 1 ? 55 : 0) }, plan, { id: 'ab12cd', lank: () => 'https://niclasfohlin.se/x', nu: new Date(Date.UTC(2026, 9, 24, 12)), tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] } }).replace(/\r\n /g, '').split('\r\n');
+  ska('kalenderfilen bokar ett pass som behöver längre tid så länge, och de andra som förut', langtIcs.includes('DTEND:20261102T101500') && langtIcs.includes('DTEND:20261104T134000') && !langtIcs.includes('DTEND:20261102T100000'), langtIcs.filter((r) => r.startsWith('DTEND')).slice(0, 3));
   // Codex-granskningen av koden 2026-10-24.
   ska('ett spann av pass är alla passen i det', s.tolkaTid('pass 13–23').pass.length === 11 && s.tolkaTid('pass 13–23').pass[10] === 23, s.tolkaTid('pass 13–23'));
   const flyttadSista = s.planera(tsMp, { ...val, flytta: { '2026-12-11': '2026-12-08' } });
@@ -206,6 +209,15 @@ if (tsMp) {
   const byte = { ...val, start: '2026-11-23', dagar: [3, 4], langd: 6, fore: [{ till: '2026-11-26', dagar: [2, 4] }] };
   const datumen = (v) => s.planera(tsMp, v).pass.slice(0, 6).map((x) => x.datum.slice(5)).join();
   ska('ett byte av dagar gäller från bytets dag, och passen före står kvar', datumen(byte) === '11-24,11-26,12-02,12-03,12-09,12-10' && datumen({ ...byte, dagar: [1, 3] }) === '11-24,11-26,11-30,12-02,12-07,12-09' && s.planera(tsMp, byte).pass[1].nr === 2, [datumen(byte), datumen({ ...byte, dagar: [1, 3] })]);
+  // K-595: tisdag och torsdag byts mot tisdag och fredag på torsdagen, och veckan får inte ett tredje pass; en dag som
+  // läggs till samma dag ger veckan ett pass till.
+  const mittIVeckan = { ...val, start: '2026-11-09', dagar: [2, 5], langd: 6, fore: [{ till: '2026-11-12', dagar: [2, 4], tak: true }] };
+  ska('ett byte av dagar mitt i en vecka ger inte veckan fler pass än dagarna, och en ny dag till ger ett pass till', datumen(mittIVeckan) === '11-10,11-12,11-17,11-20,11-24,11-27' && datumen({ ...mittIVeckan, dagar: [2, 4, 5] }) === '11-10,11-12,11-13,11-17,11-19,11-20', [datumen(mittIVeckan), datumen({ ...mittIVeckan, dagar: [2, 4, 5] })]);
+  // Codex 2026-10-28: ett byte som sparades före regeln räknas som förut, två byten samma vecka ger inte ett tredje pass,
+  // och bytDagar och länken bär märket.
+  const tvaByten = { ...val, start: '2026-11-02', dagar: [2, 5], langd: 6, fore: [{ till: '2026-11-11', dagar: [1, 2], tak: true }, { till: '2026-11-12', dagar: [4, 5], tak: true }] };
+  const lankat = s.lasVal(s.kodaVal(mittIVeckan));
+  ska('ett byte av dagar före regeln räknas som förut, två byten samma vecka ger inte ett tredje pass, och märket följer med', datumen({ ...mittIVeckan, fore: [{ till: '2026-11-12', dagar: [2, 4] }] }) === '11-10,11-12,11-13,11-17,11-20,11-24' && datumen(tvaByten) === '11-02,11-03,11-09,11-10,11-17,11-20' && s.bytDagar({ ...val, dagar: [2, 4] }, [2, 5], '2026-11-12').fore?.[0]?.tak === true && lankat?.val.fore?.[0]?.tak === true, [datumen(tvaByten), lankat?.val.fore]);
   const arPassdag = s.passdagar(byte);
   ska('passdagarna före, på och efter bytets dag', arPassdag('2026-11-24', 2) && !arPassdag('2026-11-25', 3) && arPassdag('2026-11-26', 4) && arPassdag('2026-11-26', 2) && arPassdag('2026-12-02', 3) && !arPassdag('2026-12-01', 2), byte);
   // Ett byte på startdagen, ett flyttat pass som hölls före bytet, ett hållet pass på en dag som väljs bort igen samma dag,
@@ -221,7 +233,7 @@ if (tsMp) {
   const tisdag = byt(tsMp, medTid, [1, 2, 3], '2026-11-24');
   const tisdagMedTid = { ...tisdag, tider: { ...tisdag.tider, 2: ['09:00', '09:30'] } };
   const tisdagKvar = byt(tsMp, tisdagMedTid, [1, 3], '2026-11-24');
-  ska('ett pass i dag på en dag som väljs bort igen samma dag står kvar med sitt nummer och sin tid, och dagarna efter ändras inte', s.planera(tsMp, tisdagMedTid).pass.find((p) => p.datum === '2026-11-24')?.nr === 4 && JSON.stringify(tisdagKvar.fore) === '[{"till":"2026-11-24","dagar":[1,3],"fasta":{"2026-11-24":4}}]' && s.planera(tsMp, tisdagKvar).pass.find((p) => p.datum === '2026-11-24')?.nr === 4 && !!tisdagKvar.tider?.['2'] && !s.planera(tsMp, tisdagKvar).pass.some((p) => p.datum > '2026-11-24' && s.veckodag(p.datum) === 2) && s.kodaVal(tisdagKvar).includes('db=2026-11-24~13~2026-11-24!4') && JSON.stringify(s.lasVal(s.kodaVal(tisdagKvar))?.val.fore) === JSON.stringify(tisdagKvar.fore) && byt(tsMp, { ...val, start: '2026-11-16', dagar: [1, 3], langd: 6 }, [1, 3], '2026-11-24').fore === undefined, [tisdagKvar.fore, s.kodaVal(tisdagKvar)]);
+  ska('ett pass i dag på en dag som väljs bort igen samma dag står kvar med sitt nummer och sin tid, och dagarna efter ändras inte', s.planera(tsMp, tisdagMedTid).pass.find((p) => p.datum === '2026-11-24')?.nr === 4 && JSON.stringify(tisdagKvar.fore) === '[{"till":"2026-11-24","dagar":[1,3],"tak":true,"fasta":{"2026-11-24":4}}]' && s.planera(tsMp, tisdagKvar).pass.find((p) => p.datum === '2026-11-24')?.nr === 4 && !!tisdagKvar.tider?.['2'] && !s.planera(tsMp, tisdagKvar).pass.some((p) => p.datum > '2026-11-24' && s.veckodag(p.datum) === 2) && s.kodaVal(tisdagKvar).includes('db=2026-11-24~13t~2026-11-24!4') && JSON.stringify(s.lasVal(s.kodaVal(tisdagKvar))?.val.fore) === JSON.stringify(tisdagKvar.fore) && byt(tsMp, { ...val, start: '2026-11-16', dagar: [1, 3], langd: 6 }, [1, 3], '2026-11-24').fore === undefined, [tisdagKvar.fore, s.kodaVal(tisdagKvar)]);
   const onsdagFlyttad = { ...byt(tsMp, { ...val, start: '2026-11-16', dagar: [1, 5], langd: 6 }, [1, 3, 5], '2026-11-24'), flytta: { '2026-11-25': '2026-11-24' } };
   const onsdagNr = s.planera(tsMp, onsdagFlyttad).pass.find((p) => p.flyttatFran === '2026-11-25')?.nr;
   ska('ett flyttat pass i dag på en dag som väljs bort igen står kvar med sitt nummer', !!onsdagNr && s.planera(tsMp, byt(tsMp, onsdagFlyttad, [1, 5], '2026-11-24')).pass.find((p) => p.flyttatFran === '2026-11-25' && p.datum === '2026-11-24')?.nr === onsdagNr, onsdagNr);
@@ -264,7 +276,7 @@ if (tsMp) {
   ska('dagarna efter ett byte: flyttade pass är undantag, och avsnittet säger dagarna som hade pass', s.dagarText(flyttatOns, s.planera(tsMp, flyttatOns)) === 'onsdag kl. 9.15–9.35' && s.dagarText(fastTis, s.planera(tsMp, fastTis)) === 'onsdag kl. 9.15–9.35' && s.dagarText(tisTors, s.planera(tsMp, tisTors)) === 'torsdag 5 november, sedan onsdag från 11 november, kl. 9.15–9.35', [s.dagarText(flyttatOns, s.planera(tsMp, flyttatOns)), s.dagarText(fastTis, s.planera(tsMp, fastTis)), s.dagarText(tisTors, s.planera(tsMp, tisTors))]);
   const bytt = s.bytDagar({ ...val, start: '2026-11-23', dagar: [2, 4], tider: { 2: ['09:00', '09:30'], 4: ['09:00', '09:30'] } }, [4], '2026-11-26');
   const bytt2 = s.bytDagar(bytt, [3, 4], '2026-11-26');
-  ska('bytet av dagar: från ett datum står dagarna före kvar, samma dag ändras bytet, och tillbaka utan en annan dag tar bort det', JSON.stringify(bytt2.fore) === '[{"till":"2026-11-26","dagar":[2,4]}]' && bytt2.dagar.join() === '3,4' && !!bytt2.tider?.['2'] && s.bytDagar(bytt, [2, 4], '2026-11-26').fore === undefined && !s.bytDagar(bytt2, [2, 4], '2026-11-26').tider?.['3'] && s.bytDagar({ ...val, dagar: [2, 4], tider: { 2: ['09:00', '09:30'] } }, [3]).tider === undefined && s.bytDagar({ ...val, dagar: [2, 4] }, [3]).fore === undefined, [bytt2, s.bytDagar(bytt2, [2, 4], '2026-11-26')]);
+  ska('bytet av dagar: från ett datum står dagarna före kvar, samma dag ändras bytet, och tillbaka utan en annan dag tar bort det', JSON.stringify(bytt2.fore) === '[{"till":"2026-11-26","dagar":[2,4],"tak":true}]' && bytt2.dagar.join() === '3,4' && !!bytt2.tider?.['2'] && s.bytDagar(bytt, [2, 4], '2026-11-26').fore === undefined && !s.bytDagar(bytt2, [2, 4], '2026-11-26').tider?.['3'] && s.bytDagar({ ...val, dagar: [2, 4], tider: { 2: ['09:00', '09:30'] } }, [3]).tider === undefined && s.bytDagar({ ...val, dagar: [2, 4] }, [3]).fore === undefined, [bytt2, s.bytDagar(bytt2, [2, 4], '2026-11-26')]);
   ska('dagarna före ett byte rensas', JSON.stringify(s.rentaFore([{ till: '2026-12-10', dagar: [1, 3] }, { till: 'x', dagar: [2] }, { till: '2026-11-26', dagar: [4, 2, 9] }, { till: '2026-11-26', dagar: [5] }, { till: '2026-12-01', dagar: [] }])) === '[{"till":"2026-11-26","dagar":[2,4]},{"till":"2026-12-10","dagar":[1,3]}]' && s.rentaFore(undefined).length === 0, s.rentaFore([{ till: '2026-11-26', dagar: [4, 2, 9] }]));
   ska('ett slut som inte stryker något gäller inte', s.planera(tsMp, { ...val, slut: 18 }).slut === undefined && s.planera(tsMp, { ...val, slut: 40 }).pass.length === 18);
   ska('avslutet i en mening', s.avslutetText(kort) === 'Insatsen avslutades i vecka 3 (v. 47), efter 9 av 18 planerade pass.' && s.avslutetText(kort, true) === 'Insatsen avslutas i vecka 3 (v. 47), efter 9 av 18 planerade pass.' && s.avslutetText(s.planera(tsMp, val)) === '', s.avslutetText(kort));
@@ -392,13 +404,20 @@ if (tsMp) {
     const medTabell = (rader) => ({ ...au, tabeller: au.tabeller.map((t) => (t.rubrik === roll.ur.tabell ? { ...t, rader } : t)) });
     const tab = au.tabeller.find((t) => t.rubrik === roll.ur.tabell);
     ska('veckans tabell: en vecka på två rader och en vecka som saknas stoppar', s.rollensVeckor(medTabell([[`1–2${tab.rader[0][0].slice(1)}`, ...tab.rader[0].slice(1)], ...tab.rader.slice(1)]), roll.ur) === null && s.planensRamFel(medTabell(tab.rader.filter((_, i) => i !== 2))).some((x) => x.includes('saknar en rad för vecka 3')) && !s.planensRamFel(au).length, s.planensRamFel(medTabell(tab.rader.filter((_, i) => i !== 2))));
+    // K-596: en rad ur en tabell kan visa också den första kolumnen, som villkoret i Gruppstärkande aktiviteter.
+    const ga = metod('gruppstarkande-aktiviteter');
+    const medVillkor = s.rollensRad(ga, { tabell: 'I en klass, i en liten grupp och med de yngsta', rad: 'Fler än åtta eller en klass', kolumner: ['Gruppen', 'Så gör du'] });
+    const utanVillkor = s.rollensRad(ga, { tabell: 'I en klass, i en liten grupp och med de yngsta', rad: 'Fler än åtta eller en klass' });
+    ska('en rad ur en tabell med den första kolumnen: radens namn med kolumnens namn, och utan den bara cellen', medVillkor?.length === 2 && medVillkor[0].kolumn === 'Gruppen' && medVillkor[0].text === 'Fler än åtta eller en klass' && utanVillkor?.length === 1 && utanVillkor[0].kolumn === '', [medVillkor, utanVillkor]);
+    const delSist = s.passetsBeskrivning([{ del: 'Dela', text: 'Fråga sist.', sist: true }, { del: 'Dela', text: 'Först.' }], { delar: [{ tid: '0–5 min', fas: 'Dela', vad: 'Eleverna delar.' }] });
+    ska('en rad med sist står efter delens text, och en rad utan först', delSist.delar[0].sist?.[0]?.text === 'Fråga sist.' && delSist.delar[0].forst?.length === 1 && delSist.delar[0].forst[0].text === 'Först.' && delSist.delar[0].vad === 'Eleverna delar.', delSist.delar[0]);
     ska('översikten är en mening om metodens sida', s.planensRamFel({ ...metod('brakkurs-i-grupp'), plan: { ...metod('brakkurs-i-grupp').plan, utan: undefined } }).some((x) => x.includes('Översikten visar')));
     // Länkgranskningen och de kalla testarna av omgång 3: frågan om förra veckans läxa från vecka 2, och Läxa 5 bara när
     // sista passet är i vecka 5, så att en insats som avslutas tidigare inte nämner den.
     const texterFor = (p) => s.passetsRoller(apl, p, amp.passen).map((x) => au.plan.passen[x].text ?? '');
     const forsta = (v) => s.iDatumordning(s.veckansPass(apl, apl.veckor[v - 1]))[0];
     const sista5 = s.variantensNar('sista passet i vecka 5');
-    ska('läxan från vecka 2, och Läxa 5 när sista passet är i vecka 5', !texterFor(forsta(1)).some((x) => x.includes('förra veckans läxa')) && texterFor(forsta(2)).some((x) => x.includes('förra veckans läxa')) && texterFor(forsta(1)).some((x) => x.startsWith('Läxan delas ut')) && texterFor(apl.pass.at(-1)).some((x) => x.startsWith('Läxa 5')) && JSON.stringify(sista5) === '{"typ":"sista","veckor":{"fran":5,"till":5}}' && s.passetTraffas(sista5, { sista: true, vecka: 5 }) && !s.passetTraffas(sista5, { sista: true, vecka: 4 }) && !s.passetTraffas(sista5, { sista: false, vecka: 5 }), [texterFor(forsta(1)), texterFor(forsta(2)), sista5]);
+    ska('läxan från vecka 2, och Läxa 5 när sista passet är i vecka 5', !texterFor(forsta(1)).some((x) => x.includes('förra veckans läxa')) && texterFor(forsta(2)).some((x) => x.includes('förra veckans läxa')) && texterFor(forsta(1)).some((x) => x.includes('Läxan delas ut')) && texterFor(apl.pass.at(-1)).some((x) => x.startsWith('Läxa 5')) && JSON.stringify(sista5) === '{"typ":"sista","veckor":{"fran":5,"till":5}}' && s.passetTraffas(sista5, { sista: true, vecka: 5 }) && !s.passetTraffas(sista5, { sista: true, vecka: 4 }) && !s.passetTraffas(sista5, { sista: false, vecka: 5 }), [texterFor(forsta(1)), texterFor(forsta(2)), sista5]);
   }
   // Riggens omgång 5 (2026-10-26): passets tider i raden efter tidsschemat stannar som i tidsschemats text, och Kompissamtals
   // samtal 1 har variantens tider i första passet men inte i det andra.
@@ -568,7 +587,8 @@ if (tsMp) {
   const mpLl = s.metodplan(ll).plan;
   const pLl = s.planera(mpLl, { ...tom, start: '2026-11-02', dagar: [1, 2, 4, 5], langd: 7 });
   const llRader = (pl, nr) => s.passetsRoller(pl, pl.pass[nr - 1], mpLl.passen).map((r) => ll.plan.passen[r].nar);
-  const llRoll = (nr) => llRader(pLl, nr).find((n) => n.startsWith('veckans'));
+  // Platsen i veckan, också när raden gäller vissa veckor ("veckans övriga pass i vecka 1–5", K-596).
+  const llRoll = (nr) => llRader(pLl, nr).find((n) => n.startsWith('veckans'))?.replace(/ pass i vecka [\d–-]+$/, '');
   ska('Läslistor: veckans första, övriga och sista', [1, 2, 3, 4].map(llRoll).join() === 'veckans första,veckans övriga,veckans övriga,veckans sista', [1, 2, 3, 4].map(llRoll));
   // En vecka med ett enda pass, som efter en röd dag, har veckans första roll och ingen sista.
   const enda = s.planera(mpLl, { ...tom, start: '2026-12-21', dagar: [1, 4, 5], langd: 1 });
@@ -626,6 +646,11 @@ const planbara = alla.filter((m) => m.d.uppfoljning?.rader?.length && m.d.uppfol
   const langder = planbara.filter((m) => { const r = (m.d.tidsschema?.rader ?? []).filter((x) => /^\d/.test(x.tid.trim())); return r.length > 0 && !s.delarIFoljd(r); }).map((m) => m.id);
   const gruppstarkande = (alla.find((m) => m.id === 'gruppstarkande-aktiviteter')?.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim()));
   ska('passets delar som platser eller som längder', s.delarIFoljd([{ tid: '0–8 min' }, { tid: '8–18 min' }]) && !s.delarIFoljd([{ tid: '1–3 min' }, { tid: '1–2 min' }]) && !s.delarIFoljd([{ tid: '0–5 min' }, { tid: '6–9 min' }]) && !s.delarIFoljd([]) && gruppstarkande.length > 0 && !s.delarIFoljd(gruppstarkande) && langder.join() === 'gruppstarkande-aktiviteter,kortskrivning-skriv-varje-dag', langder);
+  // K-595: en längd står med minuterna, så att den inte läses som en plats i passet, som Kortskrivnings "3–8 Skriv".
+  const kort = (alla.find((m) => m.id === 'kortskrivning-skriv-varje-dag')?.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim()));
+  const iFoljd = [{ tid: '0–⁠4 min' }, { tid: '4–⁠8 min' }];
+  const tiderna = kort.map((r) => s.delensTidI(r.tid, kort)).join(', ');
+  ska('en dels tid i planen: en plats i passet utan minuter och en längd med minuterna', tiderna === '2 min, 3–8 min, 5 min' && s.delensTidI('0–⁠4 min', iFoljd) === '0–4' && s.delensTidI('Före passet', kort) === 'Före passet', tiderna);
 }
 for (const m of planbara) {
   const { fel: f, plan: mp } = s.metodplan(m.d);
@@ -649,7 +674,7 @@ const former = [
   { id: 'ljudlek-forsta-ljudet', namn: 'period i pass', period: 'Åtta till tolv pass i följd', tider: ['i passet', 'varje pass', 'var 3:e vecka'] },
   { id: 'gruppstarkande-aktiviteter', namn: 'period utan slut med villkor', tider: ['varje vecka', 'varannan vecka', 'vecka 1–4', 'villkor', 'villkor', 'villkor', 'villkor'] },
   { id: 'seriesamtal', namn: 'progression i pass', tider: ['före', 'i passet', 'efter', 'efter 4 veckor'] },
-  { id: 'til-i-grupp', namn: 'progression med vid behov', tider: ['före', 'efter'] },
+  { id: 'til-i-grupp', namn: 'progression med vid behov', tider: ['före', 'efter', 'villkor', 'villkor'] },
 ];
 for (const f of former) {
   const { fel: fe, plan: mp } = s.metodplan(medTider(f.id, f.tider, f.period));
@@ -1798,7 +1823,7 @@ try {
   const rollerna = await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-roll')].map((x) => x.textContent).join('|')`);
   sant('rollens text ur metodens tabell', rollerna?.startsWith('Så läser ni Du läser högt och stannar vid stoppet.|Du Ger tanketid, låter paren samtala vid stoppet') && rollerna.includes('|Eleverna Säger ”Jag tror att”'), rollerna);
   await f.kor(`document.querySelector('#pl-veckan .pl-del[data-ruta="del-0"]').open = true`);
-  sant('en del fälls ut till det läraren gör och säger', (await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'))?.includes('Skriv meningen på tavlan') && !!(await f.kor(`document.querySelector('#pl-veckan .pl-del[data-ruta="del-0"] .pl-fraser li')`)), await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'));
+  sant('en del fälls ut till det läraren gör och säger', (await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'))?.includes('Skriv startmeningen på tavlan') && !!(await f.kor(`document.querySelector('#pl-veckan .pl-del[data-ruta="del-0"] .pl-fraser li')`)), await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'));
   sant('veckans pass med rollerna', (await f.kor(`[...document.querySelectorAll('#pl-passen .pl-passroll')].map((x) => x.textContent).join('|')`)) === 'Läraren tänker högt|Paren samtalar|Eleverna läser själva');
   await f.tryck('#pl-passen [data-visa-pass="9"]');
   sant('ett tryck på rollen visar passet i rutan', (await f.text('#pl-veckan .pl-passnamn')) === 'Vecka 3 · pass 3 · Eleverna läser själva · 9 av 18' && (await f.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Valt pass' && !!(await f.kor(`document.querySelector('#pl-veckan .pl-nasta [data-visa-pass=""]')`)), await f.text('#pl-veckan .pl-nasta'));
@@ -2501,6 +2526,13 @@ try {
       await vanta(200);
       const post = await b.kor(`(() => { const p = [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-roll')].find((x) => x.textContent.startsWith('Passets problem')); const a = p?.querySelector('a'); return a ? [a.textContent, a.getAttribute('href')] : null; })()`);
       sant('bankens poster en per pass: passet visar sitt problem på gruppens nivå, med länk', !!utanNiva?.includes('Välj gruppens nivå, så visar passet sitt problem') && stodIVeckan && !!post && /\(Bas, problem \d+\)$/.test(post[0]) && !lankFel([post[1]]).length, [post, stodIVeckan, utanNiva?.slice(0, 160)]);
+      // K-595: kartläggningen avgör nivån, så den leder till varje nivå också när en nivå är vald, med den valda först.
+      await b.tryck('#pl-veckor [data-vy="fore"]');
+      await vanta(150);
+      const kart = await b.kor(`(() => { const a = [...document.querySelectorAll('#pl-veckan a')]; const i = a.findIndex((x) => x.textContent === 'Kartläggning före'); return i < 0 ? null : a.slice(i, i + 4).map((x) => x.textContent + ' ' + x.getAttribute('href')); })()`);
+      sant('en vald nivå: kartläggningen leder till den valda nivån och till varje nivå', !!kart && kart[0].split(' ').pop() === kart[1].split(' ').pop() && kart.slice(1).map((x) => x.split(' ')[0]).join() === 'Bas,Medel,Avancerat' && !lankFel(kart.map((x) => x.split(' ').pop())).length, kart);
+      await b.tryck('#pl-veckor [data-vy="3"]');
+      await vanta(150);
     }
     if (m.id === 'fyra-raknesatten') {
       const lektion = await b.kor(`document.querySelector('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')?.getAttribute('href')`);
