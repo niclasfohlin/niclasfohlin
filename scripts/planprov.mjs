@@ -2238,11 +2238,13 @@ try {
     const utanValKopia = (await fb.kor('window.__kopierat')) ?? '';
     await fb.kor(`(() => { document.getElementById('pl-andra').open = true; const i = document.getElementById('pl-start'); i.value = '2026-11-30'; i.dispatchEvent(new Event('change')); return true; })()`);
     await vanta(200);
+    // Knappen har valen redan före trycket, så att en lång tryckning ger samma adress (provaren 2026-10-28).
+    const foreTrycket = (await fb.kor(`document.getElementById('pl-ut').getAttribute('href')`)) ?? '';
     const medVal = await vagenUtNu();
     await fb.tryck('#pl-ut-kopiera');
     await vanta(200);
     const kopierat = (await fb.kor('window.__kopierat')) ?? '';
-    vagen[namn] = { forvalet, utanVal, utanValKopia, medVal, kopierat };
+    vagen[namn] = { forvalet, utanVal, utanValKopia, foreTrycket, medVal, kopierat };
     sant(`i Facebooks webbläsare på ${namn}: inga fel i konsolen`, !fb.undantag.length, fb.undantag);
     fb.stang();
     if (namn !== 'Android') continue;
@@ -2278,7 +2280,7 @@ try {
   const sidan = new URL(PLAN);
   const nyPlan = (adress, start) => adress.includes(`#s=${start}&`) && adress.includes('&ny=1') && !adress.includes('&p=');
   sant('utan val leder vägen ut till en ny plan med förvalet, som sidan från början', ['Android', 'iPhone'].every((n) => vagen[n] && /^\d{4}-\d{2}-\d{2}$/.test(vagen[n].forvalet) && nyPlan(vagen[n].utanVal, vagen[n].forvalet) && vagen[n].utanVal.startsWith(n === 'Android' ? `intent://${sidan.host}${sidan.pathname}#s=` : `x-safari-https://${sidan.host}${sidan.pathname}#s=`) && vagen[n].utanValKopia.startsWith(`${PLAN}#s=${vagen[n].forvalet}&`) && vagen[n].utanValKopia.endsWith('&ny=1')), vagen);
-  sant('med ett val tar vägen ut med valen som en ny plan', ['Android', 'iPhone'].every((n) => vagen[n] && nyPlan(vagen[n].medVal, '2026-11-30') && vagen[n].kopierat.startsWith(`${PLAN}#s=2026-11-30&`) && vagen[n].kopierat.endsWith('&ny=1')), vagen);
+  sant('med ett val tar vägen ut med valen som en ny plan', ['Android', 'iPhone'].every((n) => vagen[n] && nyPlan(vagen[n].foreTrycket, '2026-11-30') && nyPlan(vagen[n].medVal, '2026-11-30') && vagen[n].kopierat.startsWith(`${PLAN}#s=2026-11-30&`) && vagen[n].kopierat.endsWith('&ny=1')), vagen);
 
   // ---- Efter insatsen ----
   // Måndag 14 december, efter planens sista pass. Sista veckan har metodens uppföljning efter och utvärderingen, och

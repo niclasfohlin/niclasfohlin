@@ -2843,12 +2843,17 @@ function appensBesked(): [string, string] {
   const utKnapp = ut ? `<a class="knapp liten" id="pl-ut" href="${esc(ut.href)}" ${goat('ut-ur-appen', `${ut.text} från ${w.app} webbläsare`)}>${esc(ut.text)}</a>` : '';
   return [vagenUtText(w), `${utKnapp}<button type="button" class="knapp liten${ut ? ' sekundar' : ''}" id="pl-ut-kopiera" ${goat('lank-ur-appen', `länken kopierad i ${w.app} webbläsare`)}>Kopiera länken</button>`];
 }
-// Vägen ut och Kopiera länken i beskedet om en apps egen webbläsare bär adressen som den är vid trycket (vagensAdress), också
-// efter ett byte av plan (K-510; Codex 2026-10-25).
-$('pl-besked').addEventListener('click', async (e) => {
-  const ut = (e.target as Element).closest<HTMLAnchorElement>('#pl-ut');
+// Vägen ut i beskedet om en apps egen webbläsare har adressen med valen som de är nu (vagensAdress): rendera ritar om den
+// efter varje ändring, och trycket gör det en gång till, också efter ett byte av plan (K-510; Codex 2026-10-25). Förut
+// byttes adressen bara i trycket, så att knappen visade förvalet tills läraren tryckte (provaren 2026-10-28).
+function renderaVagenUt() {
+  const ut = document.getElementById('pl-ut') as HTMLAnchorElement | null;
   const dit = ut && vagenUt(vagensAdress(), webblasaren());
-  if (ut && dit) { ut.href = dit.href; return; }
+  if (ut && dit) ut.href = dit.href;
+}
+// Kopiera länken i beskedet kopierar samma adress som vägen ut.
+$('pl-besked').addEventListener('click', async (e) => {
+  if ((e.target as Element).closest('#pl-ut')) { renderaVagenUt(); return; }
   const knapp = (e.target as Element).closest<HTMLButtonElement>('#pl-ut-kopiera');
   if (!knapp) return;
   const ok = await kopiera(vagensAdress());
@@ -2983,6 +2988,7 @@ function rendera() {
   renderaSamman();
   renderaKopia();
   renderaGrupper();
+  renderaVagenUt();
   // Bocken ritas fram en gång, när läraren just har avslutat insatsen.
   nyssAvslutad = false;
 }
