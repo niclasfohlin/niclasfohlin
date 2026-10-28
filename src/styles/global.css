@@ -3221,6 +3221,9 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-insatser[hidden] { display: none; }
 .pl-insatser h2 { font-size: 1.05rem; margin: 0; padding: 0.8rem 1rem 0.5rem; }
 .pl-insatser ul { list-style: none; margin: 0; padding: 0; }
+/* Alla planer: knapparna och beskedet under listan, med listans luft och en linje över (K-608, K-609). */
+.pl-insatser .pl-alla-planer { margin: 0; padding: 0.75rem 1rem; border-top: 1px solid var(--farg-kant); }
+.pl-insatser #pl-alla-besked { margin: 0; padding: 0 1rem 0.75rem; }
 .pl-insatser li { border-top: 1px solid var(--farg-kant); border-left: 5px solid var(--omr, var(--farg-accent)); }
 .pl-insatser a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.1rem 0.75rem; padding: 0.7rem 1rem; text-decoration: none; color: var(--farg-text); }
 .pl-insatser a:hover { background: var(--farg-ton-svag); }

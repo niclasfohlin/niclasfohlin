@@ -51,6 +51,12 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
     <h2 id="pl-insatser-rubrik">Dina insatser</h2>
     <ul></ul>
     <div class="pl-avslutade" hidden></div>
+    {/* Alla planer som en zip, och planer in ur en zip eller flera filer, med samma rot som i metoden (insatser-lagring.ts). */}
+    <p class="pl-andra-knappar pl-alla-planer">
+      <button type="button" class="knapp sekundar liten" id="pl-alla-ner" data-goatcounter-click="insatser:alla-ner" data-goatcounter-title="Metodbanken: alla planer nedladdade">Ladda ner planer</button>
+      <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click="insatser:alla-oppna" data-goatcounter-title="Metodbanken: nedladdade planer öppnade">Öppna planer<input type="file" id="pl-alla-oppna" accept=".json,.zip,application/json,application/zip" multiple class="visually-hidden" /></label>
+    </p>
+    <p class="pl-hjalp" id="pl-alla-besked" role="status" hidden></p>
   </section>
 
   {metoder.length > 0 && (

@@ -218,7 +218,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
           <button type="button" class="knapp liten" id="pl-spara-nere" data-goatcounter-click={`planera:${data.id}:spara`} data-goatcounter-title={`${data.titel}: planen sparad längst ned`} hidden>{PLANKNAPPAR.spara}</button>
           <button type="button" class="knapp sekundar liten" id="pl-lank" data-goatcounter-click={`planera:${data.id}:lank`} data-goatcounter-title={`${data.titel}: länken till planen kopierad`}>Kopiera länken</button>
           <button type="button" class="knapp sekundar liten" id="pl-kopia-spara" data-goatcounter-click={`planera:${data.id}:kopia`} data-goatcounter-title={`${data.titel}: planen nedladdad`}>{PLANKNAPPAR.laddaNer}</button>
-          <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click={`planera:${data.id}:oppna-kopia`} data-goatcounter-title={`${data.titel}: en nedladdad plan öppnad`}>{PLANKNAPPAR.oppna}<input type="file" id="pl-kopia-fil" accept=".json,application/json" class="visually-hidden" /></label>
+          <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click={`planera:${data.id}:oppna-kopia`} data-goatcounter-title={`${data.titel}: en nedladdad plan öppnad`}>{PLANKNAPPAR.oppna}<input type="file" id="pl-kopia-fil" accept=".json,.zip,application/json,application/zip" multiple class="visually-hidden" /></label>
         </p>
         <p class="pl-ta-bort"><button type="button" class="pl-textknapp" id="pl-ta-bort" hidden>Ta bort planen</button></p>
       </section>

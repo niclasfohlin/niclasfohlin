@@ -132,12 +132,17 @@ async function dokument(titel: string) {
     for (const r of rader) {
       const x = r.etikett ? xt : KANT;
       const delar = brytt(r.text, font, storlek, A4[0] - KANT - x - 4), etikett = r.etikett ? brytt(r.etikett, fet, storlek, xt - KANT - 10) : [];
-      const h = Math.max(delar.length, etikett.length) * rad + 8;
-      plats(h);
+      // En rad som är längre än det som ryms på sidan fortsätter på nästa, rad för rad (Codex 2026-10-28).
+      plats(Math.min(Math.max(delar.length, etikett.length), 3) * rad + 8);
       sida.drawLine({ start: { x: KANT, y }, end: { x: A4[0] - KANT, y }, thickness: 0.5, color: farg.kant });
-      etikett.forEach((t, i) => sida.drawText(t, { x: KANT, y: y - 4 - storlek - i * rad, size: storlek, font: fet, color: farg.text }));
-      delar.forEach((t, i) => sida.drawText(t, { x, y: y - 4 - storlek - i * rad, size: storlek, font, color: farg.text }));
-      y -= h;
+      y -= 4;
+      for (let i = 0; i < Math.max(delar.length, etikett.length); i++) {
+        if (y - rad < KANT + 30) ny();
+        if (etikett[i]) sida.drawText(etikett[i], { x: KANT, y: y - storlek, size: storlek, font: fet, color: farg.text });
+        if (delar[i]) sida.drawText(delar[i], { x, y: y - storlek, size: storlek, font, color: farg.text });
+        y -= rad;
+      }
+      y -= 4;
     }
     sida.drawLine({ start: { x: KANT, y }, end: { x: A4[0] - KANT, y }, thickness: 0.5, color: farg.kant });
     y -= o.luft ?? 6;
@@ -145,7 +150,18 @@ async function dokument(titel: string) {
   // Eleverna vecka för vecka i en tabell (Niclas 2026-10-28: "snygga till sammanställningen"): veckorna i planen med
   // kalenderveckan överst, en rad per elev med skattningen i en ruta vars ton följer värdet, och en sista kolumn, som
   // närvaron. En rad med text i rutorna, som passen, står utan ton. Veckan mitt i insatsen har ett ljust fält i huvudet.
-  const matris = (etiketter: Veckonamn[], rader: { namn: string; varden: (number | string | undefined)[]; sist?: string }[], o: { sist?: string; mitt?: number | null } = {}) => {
+  const matris = (etiketter: Veckonamn[], rader: { namn: string; varden: (number | string | undefined)[]; sist?: string }[], o: { sist?: string; mitt?: number | null } = {}): void => {
+    // En lång plan står i flera tabeller med högst sexton veckor, så att veckorna aldrig står ovanpå varandra (Codex
+    // 2026-10-28), och den sista kolumnen står i den sista.
+    const DEL = 16;
+    if (etiketter.length > DEL) {
+      for (let i = 0; i < etiketter.length; i += DEL) {
+        const sist = i + DEL >= etiketter.length;
+        const mitt = o.mitt && o.mitt > i && o.mitt <= i + DEL ? o.mitt - i : null;
+        matris(etiketter.slice(i, i + DEL), rader.map((r) => ({ namn: r.namn, varden: r.varden.slice(i, i + DEL), ...(sist && r.sist ? { sist: r.sist } : {}) })), { ...(sist && o.sist ? { sist: o.sist } : {}), mitt });
+      }
+      return;
+    }
     const n = etiketter.length, namnB = 104, sistB = o.sist ? 74 : 0, bredd = A4[0] - 2 * KANT - namnB - sistB, steg = Math.min(34, bredd / Math.max(n, 1));
     const huvudH = 26, radH = 17, x0 = KANT + namnB;
     const huvud = () => {
@@ -161,9 +177,10 @@ async function dokument(titel: string) {
     plats(huvudH + radH * Math.min(rader.length, 3));
     huvud();
     for (const r of rader) {
-      if (y - radH < KANT + 30) { ny(); huvud(); }
-      const namn = brytt(r.namn, fet, 9, namnB - 8)[0] ?? '';
-      sida.drawText(namn, { x: KANT, y: y - 12, size: 9, font: fet, color: farg.text });
+      // Hela namnet, på flera rader när det är långt, så att två elever med samma förnamn inte heter lika (Codex 2026-10-28).
+      const namn = brytt(r.namn, fet, 9, namnB - 8), h = Math.max(radH, namn.length * 11 + 6);
+      if (y - h < KANT + 30) { ny(); huvud(); }
+      namn.forEach((t, i) => sida.drawText(t, { x: KANT, y: y - 12 - i * 11, size: 9, font: fet, color: farg.text }));
       r.varden.forEach((v, i) => {
         const x = x0 + i * steg;
         if (typeof v === 'number') {
@@ -176,7 +193,7 @@ async function dokument(titel: string) {
         } else sida.drawLine({ start: { x: x + steg / 2 - 3, y: y - 9 }, end: { x: x + steg / 2 + 3, y: y - 9 }, thickness: 0.6, color: farg.kant });
       });
       if (r.sist) sida.drawText(ren(r.sist), { x: x0 + n * steg + 6, y: y - 12, size: 8.5, font, color: farg.text });
-      y -= radH;
+      y -= h;
       sida.drawLine({ start: { x: KANT, y }, end: { x: x0 + n * steg + sistB, y }, thickness: 0.4, color: farg.kant });
     }
     y -= 6;
@@ -313,7 +330,7 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   const e = s.elever.find((x) => x.id === id)!;
   const p = await dokument(`${e.namn}: ${info.metod}`);
   huvud(p, e.namn, plan, info, idag, false);
-  innehallet(p, info.undertitel, info, ['Omfattning', 'Metoden']);
+  innehallet(p, info.undertitel, info, ['Omfattning', 'Eleven arbetar med', 'Metoden']);
   malet(p, info, s, e);
   p.rubrik('Vecka för vecka', 180);
   skalan(p, info, 6);

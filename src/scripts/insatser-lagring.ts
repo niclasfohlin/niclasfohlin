@@ -4,7 +4,7 @@
 // någonstans, utom att en plan som pågår säger det till besöksstatistiken med bara metodens namn (pagaende nedan).
 // Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det, och
 // länken till planen är kopian som håller.
-import { arDatum, dagText, gangen, insatsenAvslutad, lasVal, planensSistaDag, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { arDatum, talText, filnamnet, kodaVal, dagText, gangen, insatsenAvslutad, lasVal, planensSistaDag, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -275,4 +275,137 @@ export function raknaPagaende(planer: SparadPlan[], idag = idagLokalt()) {
   // count.js laddas asynkront; sidans load-händelse väntar in det.
   if (document.readyState === 'complete') skicka();
   else addEventListener('load', skicka, { once: true });
+}
+
+// ---------- Alla planer som en fil, och flera planer in på en gång ----------
+// Niclas 2026-10-28: "Det bör finnas en knapp för Ladda ner alla mina planer ... som laddar ner alla i en zip eller samlat
+// med datum och bra namn", "Den knappen finns bara när man har en plan sparad", och "En Ladda upp alla planer knapp brevid
+// som kan läsa in en zip eller enskilda filer. Även ladda upp planer bör kunna göra samma sak i en metod så allt har en rot".
+// Zip-filen har varje plans fil ur planfilen, så att varje fil i den också öppnas för sig, och inget nytt format behövs.
+// Zip-filen skrivs och läses här, utan beroenden: filerna lagras utan komprimering, och en zip som datorn har packat om
+// läses också när den är komprimerad (deflate), med webbläsarens egen DecompressionStream.
+
+const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+const crc32 = (b: Uint8Array) => { let c = 0xffffffff; for (const x of b) c = CRC[(c ^ x) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
+
+/** En zip med filerna, utan komprimering. */
+export function zipa(filer: { namn: string; text: string }[]): Blob {
+  const kod = new TextEncoder();
+  const delar: Uint8Array[] = [], katalog: Uint8Array[] = [];
+  let plats = 0;
+  for (const fil of filer) {
+    const namn = kod.encode(fil.namn), data = kod.encode(fil.text), crc = crc32(data);
+    const lokal = new DataView(new ArrayBuffer(30));
+    // Lokalt huvud: signatur, version 20, flagga 0x0800 (namnet i UTF-8), metod 0, tid och datum 0, crc, storlekarna, namnets längd.
+    [[0, 0x04034b50, 4], [4, 20, 2], [6, 0x0800, 2], [14, crc, 4], [18, data.length, 4], [22, data.length, 4], [26, namn.length, 2]].forEach(([o, v, n]) => (n === 4 ? lokal.setUint32(o, v, true) : lokal.setUint16(o, v, true)));
+    const central = new DataView(new ArrayBuffer(46));
+    [[0, 0x02014b50, 4], [4, 20, 2], [6, 20, 2], [8, 0x0800, 2], [16, crc, 4], [20, data.length, 4], [24, data.length, 4], [28, namn.length, 2], [42, plats, 4]].forEach(([o, v, n]) => (n === 4 ? central.setUint32(o, v, true) : central.setUint16(o, v, true)));
+    delar.push(new Uint8Array(lokal.buffer), namn, data);
+    katalog.push(new Uint8Array(central.buffer), namn);
+    plats += 30 + namn.length + data.length;
+  }
+  const storlek = katalog.reduce((n, d) => n + d.length, 0);
+  const slut = new DataView(new ArrayBuffer(22));
+  [[0, 0x06054b50, 4], [8, filer.length, 2], [10, filer.length, 2], [12, storlek, 4], [16, plats, 4]].forEach(([o, v, n]) => (n === 4 ? slut.setUint32(o, v, true) : slut.setUint16(o, v, true)));
+  return new Blob([...delar, ...katalog, new Uint8Array(slut.buffer)] as BlobPart[], { type: 'application/zip' });
+}
+
+/** Filerna i en zip, som text: lagrade eller komprimerade (deflate). En zip som inte går att läsa ger inga filer. */
+export async function packaUpp(b: Uint8Array): Promise<{ namn: string; text: string }[]> {
+  const v = new DataView(b.buffer, b.byteOffset, b.byteLength), avkod = new TextDecoder();
+  let e = b.length - 22;
+  while (e >= 0 && v.getUint32(e, true) !== 0x06054b50) e--;
+  if (e < 0) return [];
+  const antal = v.getUint16(e + 10, true);
+  let c = v.getUint32(e + 16, true);
+  const ut: { namn: string; text: string }[] = [];
+  for (let i = 0; i < antal && c + 46 <= b.length && v.getUint32(c, true) === 0x02014b50; i++) {
+    const metod = v.getUint16(c + 10, true), storlek = v.getUint32(c + 20, true), nl2 = v.getUint16(c + 28, true), xl = v.getUint16(c + 30, true), kl = v.getUint16(c + 32, true), lokal = v.getUint32(c + 42, true);
+    const namn = avkod.decode(b.subarray(c + 46, c + 46 + nl2));
+    const start = lokal + 30 + v.getUint16(lokal + 26, true) + v.getUint16(lokal + 28, true);
+    const data = b.subarray(start, start + storlek);
+    c += 46 + nl2 + xl + kl;
+    if (namn.endsWith('/')) continue;
+    try {
+      if (metod === 0) ut.push({ namn, text: avkod.decode(data) });
+      else if (metod === 8 && typeof DecompressionStream !== 'undefined') ut.push({ namn, text: await new Response(new Blob([data as BlobPart]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text() });
+    } catch { /* en fil som inte går att packa upp hoppas över */ }
+  }
+  return ut;
+}
+
+/**
+ * Planerna i en eller flera filer, en plans fil eller en zip med flera, en rot för Öppna en nedladdad plan i metoden och
+ * Öppna nedladdade planer på Stödundervisning. Varje plan läses med lasPlanfil och valen kodas om, som när en fil öppnas
+ * för sig. En fil som inte är en plan räknas, så att beskedet kan säga det.
+ */
+export async function lasPlanfilerna(filer: File[]): Promise<{ planer: { plan: SparadPlan; varningar: string[] }[]; inte: number }> {
+  const texter: string[] = [];
+  let inte = 0;
+  for (const fil of filer) {
+    const b = new Uint8Array(await fil.arrayBuffer());
+    if (b[0] === 0x50 && b[1] === 0x4b) {
+      const i = await packaUpp(b);
+      if (!i.length) inte++;
+      texter.push(...i.filter((x) => /\.json$/i.test(x.namn)).map((x) => x.text));
+    } else texter.push(new TextDecoder().decode(b));
+  }
+  const planer: { plan: SparadPlan; varningar: string[] }[] = [];
+  for (const t of texter) {
+    let innehall: unknown;
+    try { innehall = JSON.parse(t); } catch { inte++; continue; }
+    const last = lasPlanfil(innehall);
+    const valen = last ? lasVal(last.plan.val) : null;
+    if (!last || !valen) { inte++; continue; }
+    last.plan.val = kodaVal(valen.val);
+    planer.push(last);
+  }
+  // Samma plan i flera filer: den nyaste versionen, efter när planen senast ändrades (Niclas 2026-10-28: "Om en och samma
+  // plan väljs som har flera filer ska uppladdningen ladda upp den nyaste versionen av en metods insats").
+  const nyast = new Map<string, { plan: SparadPlan; varningar: string[] }>();
+  for (const x of planer) { const f = nyast.get(x.plan.id); if (!f || x.plan.andrad > f.plan.andrad) nyast.set(x.plan.id, x); }
+  return { planer: [...nyast.values()], inte };
+}
+
+/**
+ * Planerna sparas, och en plan med samma id ersätts, utom när planen i webbläsaren är nyare än filen, så att en gammal fil
+ * aldrig skriver över det läraren har fört in sedan. Svaret säger om det gick, hur många som sparades och hur många som var
+ * äldre.
+ */
+export function sparaPlanerna(nya: SparadPlan[]): { ok: boolean; sparade: number; aldre: number } {
+  const finns = lasPlaner().planer;
+  const att = nya.filter((n) => { const f = finns.find((x) => x.id === n.id); return !f || f.andrad <= n.andrad; });
+  const ok = skrivPlaner([...att, ...finns.filter((x) => !att.some((n) => n.id === x.id))]);
+  return { ok, sparade: att.length, aldre: nya.length - att.length };
+}
+
+/** Filerna ur ett filfält, som töms, så att samma fil går att välja igen. */
+export const valdaFiler = (e: Event) => { const input = e.target as HTMLInputElement; const filer = [...(input.files ?? [])]; input.value = ''; return filer; };
+
+/** Planerna ur filerna sparas, och sidan laddas om med beskedet under nyckeln, en rot för metoden och Stödundervisning. */
+export async function oppnaPlanerna(filer: File[], nyckel: string) {
+  const { planer, inte } = await lasPlanfilerna(filer);
+  const text = planernasBesked(sparaPlanerna(planer.map((x) => x.plan)), inte);
+  try { sessionStorage.setItem(nyckel, text); } catch { /* utan lagring */ }
+  location.reload();
+}
+
+/** Beskedet efter att planer har lästs in, lika i metoden och på Stödundervisning. */
+export const planernasBesked = (r: { ok: boolean; sparade: number; aldre: number }, inte: number) => (!r.ok ? 'Planerna gick inte att spara i den här webbläsaren.'
+  : [r.sparade ? `${r.sparade === 1 ? 'En plan är öppnad' : `${stor(talText(r.sparade))} planer är öppnade`} ur filerna, med allt som förts in. De står under Dina insatser och under sin metod.` : '',
+    r.aldre ? `${r.aldre === 1 ? 'En plan' : `${stor(talText(r.aldre))} planer`} i webbläsaren var nyare än filen och står kvar.` : '',
+    inte ? `${inte === 1 ? 'En fil' : `${stor(talText(inte))} filer`} var inte en nedladdad plan.` : ''].filter(Boolean).join(' ') || 'Filerna hade ingen plan.');
+
+/** Zip-filen med alla sparade planer, en plans fil i taget ur planfilen, och filens namn med dagens datum. */
+export function allaPlanerna(modul: string, idag: string): { blob: Blob; namn: string } | null {
+  const { planer } = lasPlaner();
+  if (!planer.length) return null;
+  const tagna = new Set<string>();
+  const filer = planer.map((p) => {
+    let namn = filnamnet('plan', { vem: p.namn, metod: p.metod, datum: idag });
+    for (let i = 2; tagna.has(namn); i++) namn = namn.replace(/(-\d+)?\.json$/, `-${i}.json`);
+    tagna.add(namn);
+    return { namn, text: planfilen(p, modul) };
+  });
+  return { blob: zipa(filer), namn: `alla-planer-stodundervisning-${idag}.zip` };
 }

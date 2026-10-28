@@ -175,15 +175,21 @@ if (tsMp) {
   ska('ett pass på en dag utan tid är en heldag', tidIcs.includes('DTSTART;VALUE=DATE:20261106') && tidIcs.some((r) => r === 'SUMMARY:Textsamtal i grupp\\, pass 1 av 18'));
   // Ett enskilt pass tid (passtider; Niclas 2026-10-28: "Viktigt att det bara blir det pass man ändrar", och "att denna
   // ändring syns överallt så alla läser från en rot"): bara det passet får tiden, i roten, länken, kalenderfilen och längden.
-  const ptVal = { ...val, tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] }, passtider: { '2026-11-09': ['08:00', '08:45'] } };
+  const ptVal = { ...val, tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] }, passtider: { '2026-11-09': ['08:00', '08:45', 4] } };
   const ptPlan = s.planera(tsMp, ptVal);
   const ptMandagar = ptPlan.pass.filter((p) => s.veckodag(p.datum) === 1);
   ska('en egen tid gäller bara det passet', s.passetsTid(ptVal, ptMandagar.find((p) => p.datum === '2026-11-09'))?.join() === '08:00,08:45' && ptMandagar.length > 2 && ptMandagar.filter((p) => p.datum !== '2026-11-09').every((p) => s.passetsTid(ptVal, p)?.join() === '09:20,10:00'), ptMandagar.map((p) => [p.datum, s.passetsTid(ptVal, p)]));
-  ska('länken bär passets egen tid', s.kodaVal(ptVal).includes('pt=2026-11-09-0800-0845') && JSON.stringify(s.lasVal(`#${s.kodaVal(ptVal)}`)?.val.passtider) === JSON.stringify(ptVal.passtider), s.kodaVal(ptVal));
+  ska('länken bär passets egen tid', s.kodaVal(ptVal).includes('pt=2026-11-09-0800-0845-4') && JSON.stringify(s.lasVal(`#${s.kodaVal(ptVal)}`)?.val.passtider) === JSON.stringify(ptVal.passtider), s.kodaVal(ptVal));
   ska('en egen tid som inte går att läsa tas bort', JSON.stringify(s.rentaPasstider({ '2026-11-09': ['09:00', '08:00'], x: ['08:00', '09:00'], '2026-11-10': ['8:00', '09:00'] })) === '{}' && !s.kodaVal({ ...val, passtider: { x: ['08:00', '09:00'] } }).includes('pt='));
   const ptIcs = s.kalenderfil({ titel: ts.titel, uppfoljning: ts.uppfoljning.rader, fokus: [] }, ptPlan, { id: 'ab12cd', lank: () => 'https://niclasfohlin.se/x', nu: new Date(Date.UTC(2026, 9, 24, 12)), tider: ptVal.tider, passtider: ptVal.passtider }).replace(/\r\n /g, '').split('\r\n');
   ska('kalenderfilen har passets egen tid och de andra passen veckodagens', ptIcs.includes('DTSTART:20261109T080000') && ptIcs.includes('DTEND:20261109T084500') && ptIcs.includes('DTSTART:20261102T092000') && ptIcs.includes('DTSTART:20261116T092000') && !ptIcs.includes('DTSTART:20261109T092000'), ptIcs.filter((r) => r.startsWith('DTSTART:2026110')));
   ska('passens längd räknar passets egen tid', JSON.stringify(s.passensMinuter(ptVal, 30, ptPlan)) === '[30,40,45]' && JSON.stringify(s.passensMinuter({ ...ptVal, passtider: {} }, 30, s.planera(tsMp, { ...ptVal, passtider: {} }))) === '[30,40]', s.passensMinuter(ptVal, 30, ptPlan));
+  ska('sammanfattningen och texten till åtgärdsprogrammet säger passets egen tid', s.dagarText(ptVal, ptPlan).includes('och pass 4, måndag 9 november, kl. 8.00–8.45') && !s.dagarText({ ...ptVal, passtider: {} }, ptPlan).includes('pass 4'), s.dagarText(ptVal, ptPlan));
+  // Ett lov som lägger ett annat pass på dagen ger inte det passet tiden: tiden hör till passets dag och nummer (Codex
+  // 2026-10-28).
+  const ptLov = { ...ptVal, lov: ['2026-45'] }, ptLovPlan = s.planera(tsMp, ptLov);
+  const ptLovPasset = ptLovPlan.pass.find((p) => p.datum === '2026-11-09');
+  ska('en egen tid följer inte dagen till ett annat pass efter ett lov', ptLovPasset?.nr === 1 && s.passetsTid(ptLov, ptLovPasset)?.join() === '09:20,10:00', [ptLovPasset, s.passetsTid(ptLov, ptLovPasset)]);
   // Ett flyttat pass med egen tid har tiden på den nya dagen, och passet som kommer på den gamla dagen veckan efter har
   // veckodagens.
   const ptFlytt = { ...ptVal, flytta: { '2026-11-09': '2026-11-10' } };
@@ -1297,6 +1303,20 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   const langtVal = `${plan027.plan.val}&db=${Array.from({ length: 300 }, (_, i) => `2027-01-${String((i % 28) + 1).padStart(2, '0')}~24`).join('.')}`;
   ska('planens format: ett långt val kapas inte', langtVal.length > 4000 && lagring.rensaPlan({ ...plan027.plan, val: langtVal })?.val === langtVal, langtVal.length);
   ska('planens format: en fil ur en nyare version öppnas och säger det, och en annan fil är ingen plan', lagring.lasPlanfil({ ...plan027, v: lagring.PLANFORMAT + 1 })?.varningar.some((x) => x.includes('nyare version')) && lagring.lasPlanfil({ typ: 'annat', plan: plan027.plan }) === null && lagring.lasPlanfil(null) === null && Object.keys(lagring.KONVERTERINGAR).every((x) => Number(x) >= 1 && Number(x) < lagring.PLANFORMAT));
+  // Alla planer som en zip och planer in ur en zip eller flera filer (K-608, K-609; Niclas 2026-10-28: "kan läsa in en zip
+  // eller enskilda filer", och "Om en och samma plan väljs som har flera filer ska uppladdningen ladda upp den nyaste
+  // versionen"): zip-filen packas upp till samma filer, och av två versioner av samma plan läses den nyaste.
+  {
+    const bas = lagring.lasPlanfil(lasProvfil('plan-0.2.7.json')).plan;
+    const aldre = { ...bas, andrad: '2026-11-01T10:00:00', namn: 'Äldre' }, nyare = { ...bas, andrad: '2026-11-20T10:00:00', namn: 'Nyare' };
+    const filer = [{ namn: 'a.json', text: lagring.planfilen(aldre, s.PLANERA.version) }, { namn: 'b.json', text: lagring.planfilen(nyare, s.PLANERA.version) }];
+    const zip = new Uint8Array(await lagring.zipa(filer).arrayBuffer());
+    const upp = await lagring.packaUpp(zip);
+    ska('zip-filen packas upp till samma filer', upp.length === 2 && upp.every((x, i) => x.namn === filer[i].namn && x.text === filer[i].text), upp.map((x) => x.namn));
+    const lasta = await lagring.lasPlanfilerna([new File([zip], 'alla.zip'), new File(['inte en plan'], 'x.json'), new File([filer[0].text], 'a.json')]);
+    ska('av samma plan i flera filer läses den nyaste, och en fil som inte är en plan räknas', lasta.planer.length === 1 && lasta.planer[0].plan.namn === 'Nyare' && lasta.inte === 1, [lasta.planer.map((x) => x.plan.namn), lasta.inte]);
+    ska('beskedet efter inläsningen', lagring.planernasBesked({ ok: true, sparade: 2, aldre: 1 }, 1) === 'Två planer är öppnade ur filerna, med allt som förts in. De står under Dina insatser och under sin metod. En plan i webbläsaren var nyare än filen och står kvar. En fil var inte en nedladdad plan.', lagring.planernasBesked({ ok: true, sparade: 2, aldre: 1 }, 1));
+  }
   ska('insatsens läge: ordningen', [...lagesplaner].sort(lagring.iTurOrdning('2026-11-18')).map((x) => x.namn).join() === 'Pagar,Kvar,Oppnad,Kommer,Avslutad,Sjalv', [...lagesplaner].sort(lagring.iTurOrdning('2026-11-18')).map((x) => x.namn).join());
 }
 // Pågående insatser i statistiken (K-504, src/scripts/insatser-lagring.ts): en plan som är inne i sina veckor ger händelsen
@@ -1924,7 +1944,7 @@ try {
   await vanta(300);
   const ptKal = String(await f.kor('window.__fil')).replace(/\r\n /g, '');
   sant('kalenderfilen har passets egen tid och de andra fredagarna som förut', ptKal.includes('DTSTART:20261120T090000') && ptKal.includes('DTEND:20261120T093000') && ptKal.includes('DTSTART;VALUE=DATE:20261127') && !ptKal.includes('DTSTART;VALUE=DATE:20261120'), ptKal.split('\r\n').filter((r) => r.startsWith('DTSTART')).slice(10, 14));
-  sant('länken bär passets egen tid', (await f.kor('location.hash'))?.includes('pt=2026-11-20-0900-0930'), await f.kor('location.hash'));
+  sant('länken bär passets egen tid', (await f.kor('location.hash'))?.includes('pt=2026-11-20-0900-0930-9'), await f.kor('location.hash'));
   await f.tryck('[data-vanlig-tid="2026-11-20"]');
   sant('Vanlig tid igen tar bort passets egen tid', !(await f.text('#pl-veckan .pl-passlista'))?.includes('Ny tid') && !(await f.kor('location.hash'))?.includes('pt='), await f.text('#pl-veckan .pl-passlista'));
   // Kopiera till dokumentationen och länken; kalenderfilen.

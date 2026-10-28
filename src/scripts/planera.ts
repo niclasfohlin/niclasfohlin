@@ -17,7 +17,7 @@
 import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTidI, dokumentationstext, dokumentationsrader, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsLangder, passetsVisadeRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
-  bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, radText, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
+  bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, passetsEgenTid, radText, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
@@ -25,7 +25,7 @@ import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
 import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
-import { idagLokalt, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
+import { idagLokalt, oppnaPlanerna, valdaFiler, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
 import { tidrad } from './tidrad';
 import { elevPdf, gruppPdf } from './planpdf';
@@ -1836,7 +1836,7 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
       const senare = aktiv.folj && !ar && !veckanHarBorjat ? `<span class="pl-bock senare" title="Går att bocka från ${esc(dagText(mandagen(p.datum)))}"></span>` : '<span></span>';
       const bock = aktiv.folj && (veckanHarBorjat || ar) ? bockKnapp(dag, `Pass ${p.nr} blev av`) : senare;
       // Ett pass med egen tid säger det, så att läraren ser att bara det passet har den (passtider, Niclas 2026-10-28).
-      const egenTid = !!rentaPasstider(aktiv.val.passtider)[dag];
+      const egenTid = !!passetsEgenTid(aktiv.val, p);
       const info = [passetsTidText(p), p.flyttatFran ? `Flyttat från ${dagText(p.flyttatFran)}` : egenTid ? 'Ny tid' : ''].filter(Boolean).join(' · ');
       const roll = passetFor(p).namn;
       const iRutan = rutansPass?.nr === p.nr;
@@ -2264,14 +2264,14 @@ $('pl-veckan').addEventListener('click', (e) => {
     const veckodagens = rentaTider(aktiv.val.tider)[String(veckodag(ursprung))];
     const vald: [string, string] | undefined = fran && till && till > fran ? [fran, till] : undefined;
     const egen = vald && vald.join() !== veckodagens?.join() ? vald : undefined;
-    const tidNu = rentaPasstider(aktiv.val.passtider)[ursprung];
+    const tidNu = pass ? passetsEgenTid(aktiv.val, pass) : undefined;
     const nyDag = ny !== (pass?.datum ?? ursprung), nyTid = egen?.join() !== tidNu?.join();
     if (!nyDag && !nyTid) { visaBesked('Välj en annan dag eller en annan tid för passet.'); return; }
     const klockan = vald ? ` kl. ${tidsspann(vald)}` : '';
     andra(() => {
       aktiv.val.flytta = { ...(aktiv.val.flytta ?? {}), [ursprung]: ny };
       if (ny === ursprung) delete aktiv.val.flytta![ursprung];
-      if (egen) aktiv.val.passtider = { ...rentaPasstider(aktiv.val.passtider), [ursprung]: egen }; else utanEgenTid(ursprung);
+      if (egen && pass) aktiv.val.passtider = { ...rentaPasstider(aktiv.val.passtider), [ursprung]: [...egen, pass.nr] }; else utanEgenTid(ursprung);
     }, nyDag ? `Passet flyttas till ${dagText(ny)}${klockan}.` : egen ? `Passet är nu${klockan}, bara den dagen.` : 'Passet har veckodagens tid igen.', true);
   }
 });
@@ -2284,7 +2284,9 @@ $('pl-veckan').addEventListener('change', (e) => {
   // Flytta ett pass: dagen och tiden följer passet som väljs, och slutet följer början med passets längd.
   if (falt instanceof HTMLSelectElement && (falt.id === 'pl-flytta-pass' || falt.id === 'pl-flytta-fran')) {
     const pass = plan.pass.find((p) => passetsDag(p) === $<HTMLSelectElement>('pl-flytta-pass').value);
-    const franFalt = $<HTMLSelectElement>('pl-flytta-fran'), tillFalt = $<HTMLSelectElement>('pl-flytta-till');
+    const franFalt = document.getElementById('pl-flytta-fran') as HTMLSelectElement | null, tillFalt = document.getElementById('pl-flytta-till') as HTMLSelectElement | null;
+    // En vecka som har varit har inga tidsfält, bara Ställ in (Codex 2026-10-28).
+    if (!franFalt || !tillFalt) return;
     if (falt.id === 'pl-flytta-pass') {
       const t = pass ? passetsTid(aktiv.val, pass) : undefined;
       franFalt.innerHTML = tidval(t?.[0], undefined, t ? null : 'Ingen tid');
@@ -2607,7 +2609,7 @@ const igen = 'Ladda ner den igen, så kommer det senaste med.';
 // in något och inte har laddat ner på en vecka, och efter sista passet när filen är äldre än det. I Safari i iPhone, utanför
 // appen Stöd, säger den varför.
 function kopiansPaminnelse(): string {
-  if (!aktiv.sparad || !aktiv.folj || !harInfort()) return '';
+  if (!aktiv.sparad || !aktiv.folj || !harFortIn()) return '';
   const alder = kopiansAlder();
   const efterSista = !!plan.sistaPass && plan.sistaPass <= idag && (aktiv.kopia ?? '') < plan.sistaPass;
   if (alder !== null && alder <= 7 && !efterSista) return '';
@@ -2645,10 +2647,12 @@ function sparaKopia() {
 $('pl-kopia-spara').addEventListener('click', sparaKopia);
 const tidOrd = (andrad?: string) => (!andrad ? 'tidigare' : andrad.includes('T') ? `${datumText(andrad.slice(0, 10))} kl. ${tidText(andrad.slice(11, 16))}` : datumText(andrad.slice(0, 10)));
 $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
-  const input = e.target as HTMLInputElement;
-  const fil = input.files?.[0];
-  input.value = '';
-  if (!fil) return;
+  const filer = valdaFiler(e);
+  if (!filer.length) return;
+  // Flera filer eller en zip läses med samma rot som Öppna nedladdade planer på Stödundervisning, och sidan laddas om med
+  // beskedet (Niclas 2026-10-28: "Även ladda upp planer bör kunna göra samma sak i en metod så allt har en rot").
+  if (filer.length > 1 || /\.zip$/i.test(filer[0].name)) { await oppnaPlanerna(filer, 'pl-besked'); return; }
+  const fil = filer[0];
   let innehall: unknown;
   try { innehall = JSON.parse(await fil.text()); } catch { visaBesked('Filen är inte en nedladdad plan.'); return; }
   // Kopian konverteras från formatets version och rensas innan den ersätter något: fälten som sidan kan visa, och för metoden
@@ -2685,13 +2689,20 @@ $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
   };
   // En kopia som skulle ersätta något som har ändrats efter den frågar först, också samma dag (granskningen 2026-10-24).
   if (finns && innehallAv(finns) !== innehallAv(p) && (finns.andrad ?? '') >= (p.andrad ?? '')) {
-    fragaForst(input.closest('label') as HTMLElement, `Planen i den här webbläsaren ändrades ${tidOrd(finns.andrad)}, och planen i filen ${tidOrd(p.andrad)}. Ersätta den med planen i filen?`, 'Ersätt med filen', oppna);
+    fragaForst((e.target as HTMLInputElement).closest('label') as HTMLElement, `Planen i den här webbläsaren ändrades ${tidOrd(finns.andrad)}, och planen i filen ${tidOrd(p.andrad)}. Ersätta den med planen i filen?`, 'Ersätt med filen', oppna);
     return;
   }
   oppna();
 });
 // Webbläsaren ombeds spara planerna varaktigt, så att den inte rensar dem på egen hand. Den bestämmer själv.
-const bedOmVaraktig = () => { try { void navigator.storage?.persist?.(); } catch { /* utan stöd */ } };
+/** Raden Webbläsaren med svaret om varaktig lagring, utan att skriva det två gånger. */
+function visaVaraktig(v: boolean | undefined) {
+  const teknik = document.getElementById('pl-teknik');
+  if (!teknik || v === undefined) return;
+  teknik.textContent = `${(teknik.textContent ?? '').replace(/ Sparar varaktigt: (ja|nej)\.$/, '').replace(/\.$/, '')}. Sparar varaktigt: ${v ? 'ja' : 'nej'}.`;
+}
+// Svaret syns under Webbläsaren när webbläsaren har svarat (Codex 2026-10-28: raden sa nej efter att den hade beviljats).
+const bedOmVaraktig = () => { try { void navigator.storage?.persist?.().then(visaVaraktig).catch(() => {}); } catch { /* utan stöd */ } };
 
 // ---------- Flera planer för samma metod ----------
 // Dina planer står så snart en plan är sparad, med Ny plan (granskningarna 2026-10-24: med en sparad plan fanns ingen väg
@@ -3154,8 +3165,7 @@ if (appText) notis = appText;
   ].join('. ') + '.';
   // Om webbläsaren har beviljat varaktig lagring, som skyddar planerna när enheten får ont om plats (utredningen 2026-10-28),
   // så att det syns när en lärare hör av sig. Sidan ber om den när planen sparas (bedOmVaraktig).
-  const teknik = $('pl-teknik');
-  void (navigator.storage?.persisted?.() ?? Promise.resolve(undefined)).then((v) => { if (v !== undefined) teknik.textContent = `${teknik.textContent?.replace(/\.$/, '')}. Sparar varaktigt: ${v ? 'ja' : 'nej'}.`; }).catch(() => {});
+  void (navigator.storage?.persisted?.() ?? Promise.resolve(undefined)).then(visaVaraktig).catch(() => {});
 }
 if (!lagringOk) notis = 'Webbläsaren sparar inget här, till exempel i privat läge. Kopiera länken till planen, så finns den kvar.';
 visaNotis(notis, notis === appText ? appKnappar : '');

@@ -3,8 +3,8 @@
 // (src/scripts/insatser-lagring.ts): på metodens sida raden under undertiteln med veckan i planen och nästa pass, och i
 // metodbanken en rad per plan, den som har nästa pass först, och planerna som är slut hopfällda sist. Utan sparade planer
 // syns ingenting.
-import { esc, liten } from '../lib/standard/index.js';
-import { idagLokalt, iTurOrdning, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, skiljNamnen, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
+import { esc, liten, PLANERA } from '../lib/standard/index.js';
+import { allaPlanerna, idagLokalt, iTurOrdning, oppnaPlanerna, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, skiljNamnen, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 
 const idag = idagLokalt();
 const { planer } = lasPlaner();
@@ -57,4 +57,19 @@ if (lista && planer.length) {
     fall.innerHTML = slut.length ? `<details><summary>${slut.length === 1 ? 'En avslutad insats' : `${slut.length} avslutade insatser`}</summary><ul>${slut.map(rad).join('')}</ul></details>` : '';
   }
   lista.hidden = false;
+  // Ladda ner alla mina planer, en zip med varje plans fil, och Öppna nedladdade planer, en zip eller flera filer, med
+  // samma rot som Öppna en nedladdad plan i metoden (Niclas 2026-10-28). Beskedet står kvar efter att listan har ritats om.
+  const besked = document.getElementById('pl-alla-besked');
+  try { const b = sessionStorage.getItem('pl-alla-besked'); if (b && besked) { besked.textContent = b; besked.hidden = false; sessionStorage.removeItem('pl-alla-besked'); } } catch { /* utan lagring */ }
+  document.getElementById('pl-alla-ner')?.addEventListener('click', () => {
+    const fil = allaPlanerna(PLANERA.version, idag);
+    if (!fil) return;
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(fil.blob);
+    a.download = fil.namn;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    if (besked) { besked.textContent = 'Alla planer är nedladdade i en zip. Lägg den bland skolans filer. Den har elevernas namn, så dela den inte.'; besked.hidden = false; }
+  });
+  document.getElementById('pl-alla-oppna')?.addEventListener('change', (e) => { const filer = valdaFiler(e); if (filer.length) void oppnaPlanerna(filer, 'pl-alla-besked'); });
 }

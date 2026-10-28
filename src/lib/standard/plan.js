@@ -1379,7 +1379,10 @@ export function planera(mp, val) {
   // reflektionen hamnade i onsdagens pass på 30 minuter och inte i måndagens på 40).
   const tider = rentaTider(val.tider);
   /** @param {Pass} p */
-  const passetsLangd = (p) => { const t = passetsTid(val, p); return t ? minuterAv(t[1]) - minuterAv(t[0]) : 0; };
+  // Ett pass utan klockslag har passets längd, den valda eller metodens förvalda, så att ett kort pass med egen tid inte blir
+  // veckans längsta (Codex 2026-10-28: Vår grupp flyttade till måndagens 15 minuter).
+  const utanTid = val.minuter ?? passetsLangder(mp.minuter).forval;
+  const passetsLangd = (p) => { const t = passetsTid(val, p); return t ? minuterAv(t[1]) - minuterAv(t[0]) : utanTid; };
   /** @param {PlanVecka} v */
   const langstaIVeckan = (v) => [...veckansPass({ pass }, v)].sort((a, b) => passetsLangd(a) - passetsLangd(b) || (a.datum < b.datum ? -1 : 1)).at(-1)?.datum ?? sistaIVeckan(v);
   const iPasset = new Set((mp.skattningar ?? []).filter((s) => s.vem === 'eleverna').map((s) => s.rad));
@@ -2237,8 +2240,15 @@ export const rentaTider = (tider) => rentaTidpar(tider, (d) => /^[1-5]$/.test(d)
  */
 export const rentaPasstider = (passtider) => rentaTidpar(passtider, arDatum);
 /**
- * Tider med en nyckel, veckodagen eller passets dag, och en början och ett slut: det som inte går att läsa, och en tid som
- * slutar innan den börjar, tas bort.
+ * Passets egen tid, när den hör till just det passet: passets dag och nummer, så att ett lov, en ny start eller ett byte av
+ * dagar som lägger ett annat pass på dagen aldrig ger det passet tiden (Codex 2026-10-28).
+ * @param {Val} val @param {Pass} p
+ * @returns {[string, string] | undefined}
+ */
+export const passetsEgenTid = (val, p) => { const t = rentaPasstider(val.passtider)[passetsDag(p)]; return t && t[2] === p.nr ? [t[0], t[1]] : undefined; };
+/**
+ * Tider med en nyckel, veckodagen eller passets dag, och en början och ett slut, för ett enskilt pass också passets nummer:
+ * det som inte går att läsa, och en tid som slutar innan den börjar, tas bort.
  * @param {unknown} tider @param {(d: string) => boolean} nyckel
  * @returns {Record<string, [string, string]>}
  */
@@ -2248,7 +2258,8 @@ function rentaTidpar(tider, nyckel) {
   const ut = {};
   for (const [d, par] of Object.entries(tider && typeof tider === 'object' ? tider : {})) {
     const a = klocka(Array.isArray(par) ? par[0] : null), b = klocka(Array.isArray(par) ? par[1] : null);
-    if (nyckel(d) && a && b && a < b) ut[d] = [a, b];
+    const nr = Array.isArray(par) && Number.isInteger(par[2]) && par[2] > 0 ? par[2] : undefined;
+    if (nyckel(d) && a && b && a < b) ut[d] = nr ? [a, b, nr] : [a, b];
   }
   return ut;
 }
@@ -2257,16 +2268,16 @@ function rentaTidpar(tider, nyckel) {
  * klockslagen.
  * @param {Record<string, [string, string]>} tider
  */
-const tiderILanken = (tider) => Object.entries(tider).sort().map(([d, [a, b]]) => `${d}-${a.replace(':', '')}-${b.replace(':', '')}`).join('.');
+const tiderILanken = (tider) => Object.entries(tider).sort().map(([d, [a, b, nr]]) => `${d}-${a.replace(':', '')}-${b.replace(':', '')}${nr ? `-${nr}` : ''}`).join('.');
 /** @param {string[]} punkterna @returns {Record<string, [string, string]>} */
-const tiderUrLanken = (punkterna) => Object.fromEntries(punkterna.map((x) => x.match(/^(.+)-(\d{2})(\d{2})-(\d{2})(\d{2})$/)).filter((m) => m !== null).map((m) => [m[1], [`${m[2]}:${m[3]}`, `${m[4]}:${m[5]}`]]));
+const tiderUrLanken = (punkterna) => Object.fromEntries(punkterna.map((x) => x.match(/^(.+)-(\d{2})(\d{2})-(\d{2})(\d{2})(?:-(\d+))?$/)).filter((m) => m !== null).map((m) => [m[1], m[6] ? [`${m[2]}:${m[3]}`, `${m[4]}:${m[5]}`, Number(m[6])] : [`${m[2]}:${m[3]}`, `${m[4]}:${m[5]}`]]));
 /**
  * Passets tid, roten för allt som visar den (sidan, kalenderfilen, pdf:en, sammanfattningens längd och varianten efter
  * passets längd): passets egen tid när läraren har satt en, annars tiden för veckodagen det låg på innan det flyttades,
  * eller ingen (Niclas 2026-10-28: "att denna ändring syns överallt så alla läser från en rot").
  * @param {Val} val @param {Pass} p
  */
-export const passetsTid = (val, p) => rentaPasstider(val.passtider)[passetsDag(p)] ?? rentaTider(val.tider)[String(veckodag(passetsDag(p)))];
+export const passetsTid = (val, p) => passetsEgenTid(val, p) ?? rentaTider(val.tider)[String(veckodag(passetsDag(p)))];
 /** "9.20" ur "09:20". @param {string} s */
 export const tidText = (s) => `${Number(s.slice(0, 2))}.${s.slice(3, 5)}`;
 /** "9.20–10.00". @param {[string, string]} par */
@@ -2301,6 +2312,15 @@ export function delarIFoljd(delar) {
  * @param {{ pass: Pass[] }} [plan] planen, så att ett byte av dagar säger passens egna datum
  */
 export function dagarText(val, plan) {
+  // Ett pass med egen tid står efter dagarna, med sin dag och tid, så att sammanfattningen och texten till
+  // åtgärdsprogrammet säger det som kalendern och veckan (Codex 2026-10-28; Niclas samma dag: "att denna ändring syns
+  // överallt så alla läser från en rot").
+  const egna = (plan?.pass ?? []).flatMap((p) => { const t = passetsEgenTid(val, p); return t ? [`pass ${p.nr}, ${dagText(p.datum)}, kl. ${tidsspann(t)}`] : []; });
+  const text = dagarnasText(val, plan);
+  return egna.length ? `${text}, och ${uppraknat(egna)}` : text;
+}
+/** Dagarna och deras tider, med ett byte av dagar. @param {Val} val @param {Plan} [plan] */
+function dagarnasText(val, plan) {
   const tider = rentaTider(val.tider);
   const namn = (d) => uppraknat(d.map((x) => VECKODAGAR[x - 1]));
   // Dagarnas gemensamma tid, "" när ingen dag har en tid och null när de har olika.
@@ -3129,7 +3149,7 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'nastSista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {PassensNar | { typ: 'minuter', minuter: number } | { typ: 'vecka', plats: number | 'sista' | 'ovriga', veckor: { fran: number, till: number } } | { typ: 'sista', veckor: { fran: number, till: number } }} VariantensNar
  * @typedef {{ nr?: number, sista?: boolean, nastSista?: boolean, vecka?: number, plats?: number, sistIVeckan?: boolean, minuter?: number }} PassetsLage
- * @typedef {{ start: string, dagar: number[], langd: number, lektioner?: number[], niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, passtider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
+ * @typedef {{ start: string, dagar: number[], langd: number, lektioner?: number[], niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, passtider?: Record<string, [string, string] | [string, string, number]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
  * @typedef {{ nr: number, datum: string, vecka: number, steg?: number | null, flyttatFran?: string }} Pass
  * @typedef {{ nr: number, innehall: number, igen: boolean, mandag: string, vecka: { ar: number, vecka: number }, pass: number[], bortfall: { datum: string, varfor: 'helgdag' | 'installt', namn?: string }[], steg?: number | null }} PlanVecka
  * @typedef {{ typ: 'nedat', veckor: number } | { typ: 'under', grans: number, veckor: number } | { typ: 'minst', grans: number, veckor: number }} Regel
