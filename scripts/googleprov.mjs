@@ -58,7 +58,7 @@ if (args.includes('--alla') || args.includes('--andrade')) {
     const andrade = new Set();
     // Filerna ute hämtas bara när de har ändrats sedan förra körningen: Netlify svarar 304 utan innehåll på en fråga med
     // filens etikett (If-None-Match), och innehållets summa från förra hämtningen står i ute.json. Förut hämtades varje fil
-    // varje gång, omkring 360 MB och 7 krediter per körning (Niclas 2026-10-28: "Vad äter krediter nu på sajten förutom
+    // varje gång, 144 MB och omkring 3 krediter per körning för 853 filer (Niclas 2026-10-28: "Vad äter krediter nu på sajten förutom
     // uppladdningar?"; skripten stod för 396 av dygnets 1 038 MB).
     const UTE = join(UT, 'ute.json');
     let kanda = {};
