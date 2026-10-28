@@ -38,6 +38,10 @@
   --matt-text: 42rem;
   --radie: 10px;
   --skugga: 0 1px 2px rgba(20, 32, 43, 0.06);
+  /* Tabellerna som kort (K-598): skuggan, rubrikradens ton och de svaga lodräta linjerna. */
+  --skugga-kort: 0 1px 2px rgba(20, 32, 43, 0.06), 0 3px 10px rgba(20, 32, 43, 0.06);
+  --farg-tabellhuvud: #dbe6f4;
+  --farg-kant-svag: #edf0f3;
 }
 /* Elevens typsnitt på korten och elevens blad (Ljudlek i grupp, 2026-09-29): Andika från SIL, där a och g har en båge som
    när eleven skriver dem och l inte liknar I, som delmängden Ljudlek Elev med svenska tecken (14 KB, SIL Open Font License,
@@ -724,6 +728,17 @@ button.lank:hover { color: var(--farg-accent); }
 .m-tabell .fraser li { margin: 0 0 0.25em; }
 .m-tabell.tva tbody th { background: var(--farg-accent); color: #fff; border-color: var(--farg-accent); width: 28%; }
 .m-tabell.tva tbody tr + tr th { border-top-color: rgba(255, 255, 255, 0.35); }
+/* Tabellerna som kort (K-598; Niclas 2026-10-28: "tabeller med rundade kanter och skugga som enkelt kan slå igenom på alla
+   metoder med en fix"): rundade hörn och en mjuk skugga, rubrikraden i en ljus blå ton med en blå linje under, vågräta
+   linjer mellan raderna och svaga lodräta, och ingen randning. Formen valdes av två förslag med en Sonnet och en Haiku som
+   andra öga (underlag/prov/k598). Lathundens tabeller (lh-tabell) står som i PowerPoint-filen. */
+.m-tabell:not(.lh-tabell) { border-collapse: separate; border-spacing: 0; border: 1px solid var(--farg-kant); border-radius: var(--radie); overflow: hidden; box-shadow: var(--skugga-kort); background: var(--farg-yta); }
+.m-tabell:not(.lh-tabell) :is(th, td) { border: 0; border-bottom: 1px solid var(--farg-kant); border-right: 1px solid var(--farg-kant-svag); }
+.m-tabell:not(.lh-tabell) tr > :last-child { border-right: 0; }
+.m-tabell:not(.lh-tabell) tbody tr:last-child > * { border-bottom: 0; }
+.m-tabell:not(.lh-tabell) thead th { background: var(--farg-tabellhuvud); color: var(--farg-accent-mork); border-bottom: 2px solid var(--farg-accent); border-right-color: rgba(255, 255, 255, 0.6); font-weight: 700; font-size: 0.9rem; }
+.m-tabell:not(.lh-tabell) tbody tr:nth-child(even) { background: none; }
+.m-tabell.tva tbody th { background: var(--farg-tabellhuvud); color: var(--farg-accent-mork); border-right-color: var(--farg-kant); border-bottom-color: #c5d5ea; }
 /* En ordlista eller bokstavslista (klassen tat, ramarnas översikt med korta celler): lika breda kolumner som aldrig växer ur sidan. */
 .m-tabell.tat { table-layout: fixed; }
 .m-tabell.tat td { overflow-wrap: anywhere; }
@@ -1238,13 +1253,15 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* På skärmen har bara en karta med nivåer den låga raden; en karta utan nivåer (Texttyper i grupp) har vanlig
    rubrikrad (granskningen 2026-10-09). I utskriften är raden låg i alla kartor, och veckosidans mått räknar med det. */
 .m-tabell.karta:has(th.niva) thead th { padding-top: 0.1rem; padding-bottom: 0.1rem; line-height: 1.15; }
-.m-tabell th.niva { background: var(--niva); color: var(--niva-text); border-color: var(--niva); font-size: 1.2rem; }
+.m-tabell th.niva, .m-tabell:not(.lh-tabell) th.niva { background: var(--niva); color: var(--niva-text); border-color: var(--niva); font-size: 1.2rem; }
+/* I en karta med nivåernas färger står rubrikraden som ett band: kolumnen före nivåerna i accentfärgen (K-598). */
+.m-tabell.karta:has(th.niva) thead th:not(.niva) { background: var(--farg-accent); color: #fff; border-bottom-color: var(--farg-accent); }
 /* Litteraturlistan (Litteraturlista.astro, src/lib/litteraturlista.ts; Chambers boksamtal i grupp): omslaget i en smal
    första kolumn, läspassen som ett stort tal i nivåns färg och rubrikraden i nivåns färg, med stor text som i kursens
    karta, så att kontrasten räcker. Kolumnernas andelar står i colgroup och är önskemål: en kolumn blir aldrig smalare än
    sitt längsta ord. */
 .m-bocker { font-size: 0.9rem; line-height: 1.45; }
-.m-bocker thead th, .m-bocker thead td { background: var(--niva, var(--farg-accent)); color: var(--niva-text, #fff); border-color: var(--niva, var(--farg-accent)); }
+.m-tabell.m-bocker thead th, .m-tabell.m-bocker thead td { background: var(--niva, var(--farg-accent)); color: var(--niva-text, #fff); border-color: var(--niva, var(--farg-accent)); }
 .m-bocker[style] thead th { font-size: 1.17rem; font-weight: 700; padding-top: 0.15rem; padding-bottom: 0.15rem; line-height: 1.2; }
 .m-bocker .rad { display: block; }
 .m-bocker td.omslag { padding: 0.45rem; }
@@ -1888,6 +1905,16 @@ html.js .bara-js { display: inline-block; }
   .bank-oversikt .m-tabell.stapla td:nth-child(2) { color: var(--farg-text-svag); padding-bottom: 0.25rem; }
   .bank-oversikt .m-tabell.stapla td:nth-child(n+3) { font-size: 0.92rem; }
   .bank-oversikt .m-tabell.stapla td:nth-child(n+3)::before { display: inline; content: attr(data-rubrik) ": "; font-size: inherit; }
+  /* Staplad blir varje rad ett eget kort med tabellens hörn och skugga (K-598), och tabellen själv har ingen ram. */
+  .m-tabell.stapla, .m-tabell.steg { border: 0; border-radius: 0; overflow: visible; box-shadow: none; background: none; }
+  .m-tabell.stapla tr, .m-tabell.steg tr { border-radius: var(--radie); overflow: hidden; box-shadow: var(--skugga-kort); background: var(--farg-yta); }
+  .m-tabell.stapla :is(th, td), .m-tabell.steg :is(th, td) { border: 0; border-top: 1px solid var(--farg-kant); }
+  .m-tabell.stapla tr > :first-child, .m-tabell.steg tr > :first-child { border-top: 0; }
+  /* Litteraturlistan har egna kort i telefonen: tabellen utan ram och cellerna utan linjer, utom raden med länkarna. */
+  .m-tabell.m-bocker { border: 0; border-radius: 0; overflow: visible; box-shadow: none; background: none; }
+  .m-tabell.m-bocker tbody td { border: 0; }
+  .m-tabell.m-bocker tbody td.finns { border-top: 1px solid var(--farg-kant); }
+  .m-tabell.m-bocker tbody tr { border-radius: var(--radie); box-shadow: var(--skugga-kort); background: var(--farg-yta); }
   .m-band > div { border-left: 0; border-top: 1px solid var(--farg-kant); }
   .m-band > div:first-child { border-top: 0; }
   /* Urvalsraden på mobil: låg och utan hjälptext. Antalet på en rad, kryssrutan bredvid knappen på nästa. */
@@ -1972,6 +1999,7 @@ html.js .bara-js { display: inline-block; }
   /* Korta tabeller och passöversikten med sin remsa delas inte mellan sidor, och ett stycke lämnar inte en eller två
      rader ensamma sist eller först på en sida (K-076, granskningen av Upprepad läsning). */
   .m-tabell.hel, .m-pass { break-inside: avoid; }
+  .m-tabell:not(.lh-tabell), .m-tabell.stapla tr, .m-tabell.steg tr, .m-tabell.m-bocker tr { box-shadow: none; }
   /* En lång passöversikt (över 2 300 tecken, Metod.astro) är längre än en sida och bryts mellan raderna, så att rubriken,
      ingressen och remsan står med de första raderna. Hölls den ihop, hoppade den till nästa sida och lämnade en sida med
      bara ingressen (Seriesamtal, Codex-granskningen 2026-10-04). */
@@ -2972,7 +3000,8 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-nasta .pl-etikett { color: var(--farg-accent); margin-bottom: 0.2rem; }
 .pl-nar { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.6rem; }
 .pl-nasta p { margin: 0 0 0.5rem; }
-.pl-nasta .metod-centrala { margin: 0; }
+/* Knappen till veckans manus har luft till passet under (verifieringen 2026-10-28, K-601). */
+.pl-nasta .metod-centrala { margin: 0 0 0.9rem; }
 .pl-nasta .pl-fallut { margin: 0.8rem 0 0; background: var(--farg-yta); }
 /* Vad eleverna blir bättre på i veckan, överst under veckans rubrik, med veckans fokus färg (K-572). */
 .pl-elevmal { border-left: 4px solid var(--farg-lasning); padding: 0.1rem 0 0.1rem 0.85rem; margin: 0.75rem 0 1rem; }
