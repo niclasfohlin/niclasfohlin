@@ -2,7 +2,7 @@
 
 ## 0.30.0, 2026-10-28
 
-- `plan.js`, genomgången av alla metoder med planen (sajtens K-596 och K-595): `delensTidI` skriver en dels tid som en plats i passet ("0–4") när delarna följer på varandra och annars som en längd med minuterna ("3–8 min"); `kalenderfil` tar `info.minuter` och bokar ett pass som behöver längre tid så länge; `passdagar` ger inte bytets vecka fler pass än dagarna före eller efter bytet; `rollensRad` tar också tabellens första kolumn i `kolumner`, så att radens namn eller villkor syns; `passetsBeskrivning` lägger en rad med `sist` efter delens text (`sist` på delen); `utanPlanensFalt` räknar uppföljningens `resultat` som planens fält; och `PLANERA` är 0.8.0.
+- `plan.js`, genomgången av alla metoder med planen (sajtens K-596 och K-595): `delensTidI` skriver en dels tid som en plats i passet ("0–4") när delarna följer på varandra och annars som en längd med minuterna ("3–8 min"); `kalenderfil` tar `info.minuter` och säger i händelsen när ett pass behöver längre tid än planens pass; `passdagar` ger inte bytets vecka fler pass än dagarna före eller efter bytet; `rollensRad` tar också tabellens första kolumn i `kolumner`, så att radens namn eller villkor syns; `passetsBeskrivning` lägger en rad med `sist` efter delens text (`sist` på delen); `utanPlanensFalt` räknar uppföljningens `resultat` som planens fält; och `PLANERA` är 0.8.0.
 
 ## 0.29.0, 2026-10-27 natt
 

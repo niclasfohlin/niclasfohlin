@@ -173,9 +173,9 @@ if (tsMp) {
   ska('kalenderfilen med tider har ett pass per händelse', tidIcs.filter((r) => r === 'BEGIN:VEVENT').length === 20 && new Set(tidIcs.filter((r) => r.startsWith('UID:'))).size === 20, tidIcs.filter((r) => r === 'BEGIN:VEVENT').length);
   ska('passen med tid har klockslaget i lärarens egen tid', tidIcs.includes('DTSTART:20261102T092000') && tidIcs.includes('DTEND:20261102T100000') && tidIcs.includes('DTSTART:20261104T130000') && tidIcs.includes('TRANSP:OPAQUE'));
   ska('ett pass på en dag utan tid är en heldag', tidIcs.includes('DTSTART;VALUE=DATE:20261106') && tidIcs.some((r) => r === 'SUMMARY:Textsamtal i grupp\\, pass 1 av 18'));
-  // K-595: ett pass som behöver längre tid än planens pass, som Kortskrivnings första pass, bokas så länge.
+  // K-595: ett pass som behöver längre tid än planens pass, som Kortskrivnings första pass, säger det i händelsen.
   const langtIcs = s.kalenderfil({ titel: ts.titel, uppfoljning: ts.uppfoljning.rader, fokus: [], minuter: (p) => (p.nr === 1 ? 55 : 0) }, plan, { id: 'ab12cd', lank: () => 'https://niclasfohlin.se/x', nu: new Date(Date.UTC(2026, 9, 24, 12)), tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] } }).replace(/\r\n /g, '').split('\r\n');
-  ska('kalenderfilen bokar ett pass som behöver längre tid så länge, och de andra som förut', langtIcs.includes('DTEND:20261102T101500') && langtIcs.includes('DTEND:20261104T134000') && !langtIcs.includes('DTEND:20261102T100000'), langtIcs.filter((r) => r.startsWith('DTEND')).slice(0, 3));
+  ska('kalenderfilen säger när ett pass behöver längre tid, med passets tid som planen', langtIcs.includes('DTEND:20261102T100000') && langtIcs.join('').includes('Passet behöver minst 55 minuter. Boka längre tid den dagen.') && langtIcs.filter((r) => r.includes('Passet behöver minst')).length === 1, langtIcs.filter((r) => r.startsWith('DTEND')).slice(0, 3));
   // Codex-granskningen av koden 2026-10-24.
   ska('ett spann av pass är alla passen i det', s.tolkaTid('pass 13–23').pass.length === 11 && s.tolkaTid('pass 13–23').pass[10] === 23, s.tolkaTid('pass 13–23'));
   const flyttadSista = s.planera(tsMp, { ...val, flytta: { '2026-12-11': '2026-12-08' } });
@@ -569,7 +569,7 @@ if (tsMp) {
   const mpTs = s.metodplan(ts).plan;
   const pTs = s.planera(mpTs, { ...tom, start: '2026-11-02', dagar: [1, 3, 5], langd: 6 });
   const roll = (pl, mp, nr) => s.passetsRoller(pl, pl.pass[nr - 1], mp.passen).map((r) => mp.passen[r].nar);
-  ska('veckans tre pass har var sin roll', [1, 2, 3, 4].every((n, i) => roll(pTs, mpTs, n).length > 0 && roll(pTs, mpTs, n).every((x) => x.plats === [1, 2, 3, 1][i])), [1, 2, 3, 4].map((n) => roll(pTs, mpTs, n)));
+  ska('veckans tre pass har var sin roll', [1, 2, 3, 4].every((n, i) => roll(pTs, mpTs, n).length > 0 && roll(pTs, mpTs, n).filter((x) => x.typ === 'vecka').every((x) => x.plats === [1, 2, 3, 1][i] || (x.plats === 'ovriga' && [1, 2, 3, 1][i] !== 1))), [1, 2, 3, 4].map((n) => roll(pTs, mpTs, n)));
   const ss = metod('seriesamtal');
   const mpSs = s.metodplan(ss).plan;
   const pSs = s.planera(mpSs, { ...tom, start: '2026-10-27', dagar: [2, 4], langd: 6 });
@@ -1875,6 +1875,15 @@ try {
   await f.kor(`(() => { document.getElementById('pl-flytta-pass').value = '2026-11-18'; document.getElementById('pl-flytta-dag').value = '2026-11-19'; return true; })()`);
   await f.tryck('[data-gor="flytta-klar"]');
   sant('flyttat pass', (await f.text('#pl-veckan .pl-passlista'))?.includes('Flyttat från onsdag 18 november'), await f.text('#pl-veckan .pl-passlista'));
+  // Ny dag är en dag från och med i dag, och ett flyttat pass går att flytta tillbaka vid passet (verifieringen 2026-10-28:
+  // förslaget var måndagen, som hade varit, och passen bytte innehåll).
+  const nyaDagar = await f.kor(`[...document.getElementById('pl-flytta-dag').options].map((o) => o.value).join()`);
+  sant('ny dag är en dag från och med i dag', nyaDagar === '2026-11-18,2026-11-19,2026-11-20', nyaDagar);
+  await f.tryck('[data-tillbaka="2026-11-18"]');
+  sant('ett flyttat pass går att flytta tillbaka vid passet', !(await f.text('#pl-veckan .pl-passlista'))?.includes('Flyttat från') && (await f.text('#pl-toast'))?.includes('Passet är tillbaka på onsdag 18 november'), await f.text('#pl-veckan .pl-passlista'));
+  await f.tryck('[data-gor="flytta"]');
+  await f.kor(`(() => { document.getElementById('pl-flytta-pass').value = '2026-11-18'; document.getElementById('pl-flytta-dag').value = '2026-11-19'; return true; })()`);
+  await f.tryck('[data-gor="flytta-klar"]');
   await f.tryck('[data-gor="flytta"]');
   await f.kor(`(() => { document.getElementById('pl-flytta-pass').value = '2026-11-20'; return true; })()`);
   await f.tryck('[data-gor="stall-in"]');
@@ -2333,7 +2342,10 @@ try {
   const helgLagrat = { ...slutlagrat, planer: slutlagrat.planer.map((p) => ({ ...p, foljd: { ...p.foljd, gjorda: p.foljd.gjorda.filter((d) => d < '2026-11-08') } })) };
   await helg.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(helgLagrat))})`);
   await helg.oppna(PLAN);
-  sant('på söndagen gäller rutan nästa pass och dess vecka', (await helg.text('.pl-nar')) === 'I morgon, måndag 9 november, vecka 2 i planen' && (await helg.text('#pl-veckan .pl-nasta [data-vy="2"]')) === 'Till vecka 2' && (await helg.text('#pl-veckan .pl-veckans summary'))?.startsWith('Texter till vecka 2'), [await helg.text('.pl-nar'), await helg.text('#pl-veckan .pl-veckans summary')]);
+  // Påminnelsen gäller veckan före passet i rutan, på söndagen veckan som just har slutat (verifieringen 2026-10-28).
+  const helgForra = await helg.text('#pl-veckan .pl-forra');
+  sant('på söndagen gäller påminnelsen veckan som just har slutat', !helgForra || helgForra.startsWith('Den här veckan har'), helgForra);
+  sant('på söndagen gäller rutan nästa pass och dess vecka',(await helg.text('.pl-nar')) === 'I morgon, måndag 9 november, vecka 2 i planen' && (await helg.text('#pl-veckan .pl-nasta [data-vy="2"]')) === 'Till vecka 2' && (await helg.text('#pl-veckan .pl-veckans summary'))?.startsWith('Texter till vecka 2'), [await helg.text('.pl-nar'), await helg.text('#pl-veckan .pl-veckans summary')]);
   // Ett lov i efterhand flyttar inte det som har förts in (Codex 2026-10-26): med bockar bara i vecka 45 är den veckan och
   // veckorna före låsta, vecka 46 går att välja, och raden under knapparna säger varför.
   const lovLagrat = { ...helgLagrat, planer: helgLagrat.planer.map((p) => ({ ...p, foljd: { ...p.foljd, skattning: {}, vecka: {}, resultat: {}, franvaro: {} } })) };

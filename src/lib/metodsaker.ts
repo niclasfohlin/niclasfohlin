@@ -9,6 +9,7 @@ import type { MetodData } from './metod';
 import { harLathund, passOrd, passOversikt } from './metod';
 import { arBladsida, bankAv, enhetAdress, iBanken } from './bank';
 import { arBlad, bladNamn, metodensPaBordet } from './pabordet';
+import { metodensBladmaterial } from './bladmaterial';
 import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare';
 import { metodensLektionskort } from './lektionskort';
 import { forstaLed } from './karta';
@@ -94,6 +95,10 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   const perNamn = new Map<string, { adress: string; niva?: string; veckor?: number[]; oversikt?: boolean; version?: string }[]>();
   const versioner = versionernasNamn(d);
   const egen = versionsform(version ?? versioner[0]);
+  // En ram i ett material med egna sidor, som Faktatextsamtals Modellen: Tankekartan, leder till sin sida, där knappen
+  // skriver ut ramen med bladen (planprovet 2026-10-28: modellen Tankekartan ledde till ramen på metodens sida, som inte
+  // har någon knapp under sig).
+  const egenSida = new Map((metodensBladmaterial(d, id)?.rader ?? []).map((r) => [r.ri, `${sida}/${r.slug}`]));
   ramar.forEach((r, ri) => {
     // Nivåernas översikter heter som nivåerna, och en nivå är ett urval, ingen sak. En översikt med ett namn och nivån efter
     // kolon, som "Lärarens sidor: Mellan", är en sak på varje nivå (länkgranskningen 2026-10-25: "sidan om den under
@@ -102,7 +107,7 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     const oversikt = !!bank?.oversikter.has(ri) && !!efter && nivaNamn.has(efter) && !nivaNamn.has(namn);
     if (iBanken(bank, ri) && bank.handledning !== ri && !oversikt) return;
     if (!namn) return;
-    const adress = bank?.handledning === ri ? `${sida}/texter/lararhandledning` : `${sida}#${ramAnkare[ri]}`;
+    const adress = bank?.handledning === ri ? `${sida}/texter/lararhandledning` : egenSida.get(ri) ?? `${sida}#${ramAnkare[ri]}`;
     const veckor = veckornaI(efter);
     const iVersion = efter ? versionsform(versioner.find((v) => versionsform(v) === versionsform(efter))) || undefined : undefined;
     perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}), ...(oversikt ? { oversikt } : {}), ...(iVersion ? { version: iVersion } : {}) }]);
@@ -160,7 +165,7 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     if (iBanken(bank, ri)) return;
     const titel = r.rubrik.split(':').slice(1).join(':').trim();
     // En titel med liten bokstav räknas när den är ett ord för en sak, som "lärarens protokoll".
-    if (titel && (/^\p{Lu}/u.test(titel) || arSaksord(titel)) && !nivaNamn.has(titel) && !veckornaI(titel)) titlar.set(titel, [...(titlar.get(titel) ?? []), `${sida}#${ramAnkare[ri]}`]);
+    if (titel && (/^\p{Lu}/u.test(titel) || arSaksord(titel)) && !nivaNamn.has(titel) && !veckornaI(titel)) titlar.set(titel, [...(titlar.get(titel) ?? []), egenSida.get(ri) ?? `${sida}#${ramAnkare[ri]}`]);
   });
   // Titeln länkas bara som titel, med stor bokstav mitt i en mening, så att "multiplikation" inte leder till Övningsblad:
   // Multiplikation.
@@ -187,7 +192,7 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     // En ram med lektioner, som Till läraren: veckorna, leder till veckans sida, där knappen Skriv ut veckan står
     // (planprovet 2026-10-27).
     const lv = lektionsveckor.get(`${sida}#${ramAnkare[ri]}`);
-    saker.push(lv ? sak(r.rubrik, lv[Object.keys(lv).map(Number).sort((a, b) => a - b)[0]], { veckor: lv }) : sak(r.rubrik, `${sida}#${ramAnkare[ri]}`));
+    saker.push(lv ? sak(r.rubrik, lv[Object.keys(lv).map(Number).sort((a, b) => a - b)[0]], { veckor: lv }) : sak(r.rubrik, egenSida.get(ri) ?? `${sida}#${ramAnkare[ri]}`));
   });
   // Veckans ram, i en kurs med en ram per vecka som Bråkkursens "Vecka 1: Lika delar": "veckans ram" leder i planen till
   // ramen för veckan som visas, med veckans ruta Till läraren, korten och materialet (länkgranskningen av omgång 3

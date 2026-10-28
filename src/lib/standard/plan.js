@@ -3018,7 +3018,7 @@ export function extraPassetsDag(plan, val) {
  * igen kan känna igen händelserna; SEQUENCE växer med tiden, så att den senaste filen gäller. Beskrivningen har veckans hela
  * fokus och, när sidan ger det, passets delar (info.passet), så att ett möte i andra meningen syns (de kalla testarna
  * 2026-10-24). Det som görs före första passet är en händelse över hela veckan före.
- * Ett pass som behöver mer tid än planens pass, som ett pass med egen tabell (info.minuter), bokas så länge (K-595:
+ * Ett pass som behöver mer tid än planens pass, som ett pass med egen tabell (info.minuter), säger det i händelsen (K-595:
  * Kortskrivnings första pass på 25 minuter bokades på 15).
  * @param {{ titel: string, uppfoljning: { nar: string }[], fokus: (string | null)[], passet?: (p: Pass) => string, minuter?: (p: Pass) => number, extraPass?: { datum: string, text: string } }} info
  * @param {Plan} plan
@@ -3047,9 +3047,11 @@ export function kalenderfil(info, plan, o) {
     const fokus = steg !== null && steg !== undefined && info.fokus[steg] ? `\n${hel(veckornaIPlanen(/** @type {string} */ (info.fokus[steg]), plan.borja))}` : '';
     const passet = info.passet ? veckornaIPlanen(info.passet(p), plan.borja) : '';
     const tid = tider[String(veckodag(passetsDag(p)))];
+    // Händelsen har passets tid som veckan, sammanfattningen och texten till åtgärdsprogrammet, och säger som rutan när
+    // passet behöver längre tid (samma sak överallt 2026-10-28: kalendern bokade längre än planen sa).
     const behover = info.minuter?.(p) ?? 0;
-    const bokad = tid && behover > minuterAv(tid[1]) - minuterAv(tid[0]) ? [tid[0], plusMinuter(tid[0], behover)] : tid;
-    handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${hogstaPassnr(plan)}${vem}`, `Vecka ${planveckansNamn(plan, v).plan} i planen.${fokus}${passet ? `\n${passet}` : ''}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), bokad);
+    const langre = behover > (tid ? minuterAv(tid[1]) - minuterAv(tid[0]) : 0) ? `\nPasset behöver minst ${behover} minuter. Boka längre tid den dagen.` : '';
+    handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${hogstaPassnr(plan)}${vem}`, `Vecka ${planveckansNamn(plan, v).plan} i planen.${langre}${fokus}${passet ? `\n${passet}` : ''}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), tid);
   }
   // En versions extra pass före pass 1, med passets klockslag den dagen (extraPassetsDag).
   if (info.extraPass) handelse(`${o.id}-extra`, info.extraPass.datum, `${info.titel}: det extra passet före pass 1${vem}`, `${hel(info.extraPass.text)}\nFöre första passet i planen: ${o.lank('fore')}`, o.lank('fore'), tider[String(veckodag(info.extraPass.datum))]);
