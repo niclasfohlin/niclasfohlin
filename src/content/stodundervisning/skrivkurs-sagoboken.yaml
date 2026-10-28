@@ -585,8 +585,10 @@ plan:
     - "Det som är annorlunda i de andra passen står också där, med delens namn först."
   # Det som görs före kursen utöver Sagokollen och checklistan: den förstorade vägen, som pass 1, 5 och Sagokollen sist i
   # kursen bygger på, ur Kursens material, och anpassningen med dator eller diktering ur tabellen För hand eller på dator
-  # (K-596), och när barnen bokas, ur noten till Kursen vecka för vecka (riggens K-596 punkt 9, K-605). Planen får inga
-  # egna veckor före kursen, eftersom det flyttar mätningen före kursen och dess sparade resultat (Codex 2026-10-28).
+  # (K-596), och när barnen bokas, ur noten till Kursen vecka för vecka (riggens K-596 punkt 9, K-605). Före börjar två
+  # veckor före kursen, så att planen säger datumet och varnar när det redan har varit (verifieringen K-605). Veckorna före
+  # flyttar mätningen före kursen; ingen plan i metoden var sparad när de kom (GoatCounter 2026-10-28, Codex samma dag).
+  foreVeckor: 2
   fore:
     - "Boka barnen senast två veckor före kursen, till pass 3, pass 22 och boksläppet, och fråga samtidigt hemmen om namn och bilder i boken."
     - "Till den förstorade vägen kopierar du bladet Sagans väg för er version i A3 och sätter upp det på väggen när eleverna har gjort Sagokollen före kursen."

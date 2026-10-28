@@ -4603,8 +4603,8 @@
     ]
   },
   "faktatextsamtal-i-grupp-bladen-och-korten": {
-    "word": "9e58f447967923a69393f4c9efc443011ea58c8f42a7dd4c2bd1841e1c2e2d01",
-    "pdf": "9961ee5efc99203e365325a58e4e80416462ab7fd2f4f6d4f4714588fbedce26",
+    "word": "1195113fd5aadbe7be231cc1c6a0226bb085c6afeaea224c458336ea167d574a",
+    "pdf": "b6a22d3be83c97a6c0ac4fda41200233468b14c2f43d5dd39cff31ba89b693ac",
     "sidor": 17,
     "kB": 649,
     "datum": "2026-10-28",
@@ -4915,10 +4915,10 @@
     "datum": "2026-10-28"
   },
   "faktatextsamtal-i-grupp": {
-    "word": "0d0a08e00dd2ff97d12a2938b5ae874bb07db3a71dc7df4a67b02f6c5496088a",
-    "pdf": "fb82e4429ee7bbfb89ea8438988f23faddff4257b09761159c97f1a9010b5437",
+    "word": "63ab4d41480c4c5c1d7a71371394caa4ab920bed883baf100347263b6d6b6d91",
+    "pdf": "b8895be816c8d08e65c840ea9160a41d2bf8c0420698832e39c8ca74cfc12199",
     "sidor": 176,
-    "kB": 3453,
+    "kB": 3459,
     "datum": "2026-10-28"
   },
   "faktatextsamtal-i-grupp-metoden": {
@@ -4999,17 +4999,17 @@
     "datum": "2026-10-28"
   },
   "ljudlek-i-grupp": {
-    "word": "b021bb9a9ac083eab2e83c15856fdfe0c064b3e857c1cca45472eafe4fdaeb2d",
-    "pdf": "cc20708579a731eb4b6c0a9916c2234f287161716c862bc2ba68af4476c7bfc6",
+    "word": "4cc42fdd13f40bbdbf6ee72fe2fc38eeeefa5ad42cee50e7596ca256b7d91f56",
+    "pdf": "5cdbad29b2977cd887365fd84b67e875680c1dc0f228dcc7e1121293eb0a2d2e",
     "sidor": 38,
     "kB": 915,
     "datum": "2026-10-28"
   },
   "ljudlek-i-grupp-metoden": {
-    "word": "eed0b8749878b54bfbd5f50ba362a7223f7bc00efc0aaf8f35d225017c933242",
-    "pdf": "28c4d91aeefab3df1e096f4fddb0b1d0ebb20481ee6c11db93aaa5d6c660e5e4",
+    "word": "b6ea7436ecc88aa594404044ee5b8b09a3056f55ec04ac8fec40d1d9201c0293",
+    "pdf": "2f03183ce3ad2e3558ddd4db759ddc9bd6efdf6998dab34d9d7501758a850a57",
     "sidor": 15,
-    "kB": 451,
+    "kB": 452,
     "datum": "2026-10-28"
   },
   "ljudlek-ord-och-stavelser": {
@@ -5251,8 +5251,8 @@
     "datum": "2026-10-28"
   },
   "upprepad-lasning": {
-    "word": "006e2711141d1b35a107a1870faacbcf2017d1b149f0b19fdb1a309963d9ae35",
-    "pdf": "695a58921fe2c77f2b758c7b7edf32af5366b4b1bf1cc283a16a4e4abf0f2034",
+    "word": "0ad4a36fb4f89a5be1f18247aebd3136927f93c010c13216ba08b983abf7bb4d",
+    "pdf": "03e76e76cef97d1f8a4749499e7563ead93c97ab90ff13321685cef8fe8c62cb",
     "sidor": 36,
     "kB": 982,
     "datum": "2026-10-28"
@@ -9494,11 +9494,11 @@
     "datum": "2026-10-25"
   },
   "faktatextsamtal-i-grupp-blad-kartlaggningen": {
-    "word": "b0bd6a6354c3eba9597ad21731cbd022d4acf2b475fc6d19c3002e4c72c698b4",
-    "pdf": "6717defb4a1c34f9988438a487df8f48b82879ff835d821892a5e5d9c3ca45fc",
+    "word": "8400aedebbffd4466c2fe9c05ff19f537da13a56a7f964c288c6a1cd1e15e09e",
+    "pdf": "7cc95dbf6b3c0a5f97edd1ddfced97afd7ae19d3d55e614905590123b59155a5",
     "sidor": 2,
     "kB": 279,
-    "datum": "2026-10-25"
+    "datum": "2026-10-28"
   },
   "faktatextsamtal-i-grupp-blad-kartlaggningen-protokollet": {
     "word": "ce1b5716d3d615e8557e23408aad40a75888e378cc124e42be102a7b934d1dfc",

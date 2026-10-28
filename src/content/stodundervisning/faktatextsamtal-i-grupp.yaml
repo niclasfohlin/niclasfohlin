@@ -579,7 +579,7 @@ plan:
   # Det som skrivs ut till vecka 1, ur noten under Materialet: det du behöver, och när (K-596).
   # Hur många kort När det skaver, ur ramen När det skaver under Utskrift (omtaget K-596).
   fore:
-    - "Sist läser eleven det första avsnittet i nivåns första text högt: Vattenplaneten, Solens familj eller Kroppens försvar. Fråga sedan: ”Vad handlade avsnittet om?”"
+    - "Sist läser eleven högt det första avsnittet i nivåns första text, Vattenplaneten, Solens familj eller Kroppens försvar. Fråga sedan: ”Vad handlade avsnittet om?”"
     - "Till vecka 1 skriver du ut temats första text med lärarens sida, bladet Kärnorna, kortet När det skaver, modellen Tankekartan med exemplet om skolan och bladet som lärarens sida säger, och kartläggningen med Bäverns damm och protokollet. Bladet Kärnorna och modellens blad är liggande A4: välj A3 när du skriver ut, eller förstora till 141 procent i kopiatorn. Saknar du A3 ritar du av bladet på ett blädderblocksark."
     - "Bladet När det skaver har två likadana kort, så ett blad räcker till två par. Klipp isär korten längs den streckade linjen och plasta gärna in dem."
   # Metodens sätt att justera vid avstämningen, ur stödtrappan (K-596).
@@ -4292,7 +4292,7 @@ ramar:
             - rubrik: Börja med
               text: "den nivå som brukar passa årskursen: Bas i åk 4–5, Medel i åk 6–7 och Avancerat i åk 8–9."
             - rubrik: Eleven läser högt
-              text: "Sist läser eleven det första avsnittet i nivåns första text högt: Vattenplaneten, Solens familj eller Kroppens försvar. Fråga sedan: ”Vad handlade avsnittet om?”"
+              text: "Sist läser eleven högt det första avsnittet i nivåns första text, Vattenplaneten, Solens familj eller Kroppens försvar. Fråga sedan: ”Vad handlade avsnittet om?”"
             - rubrik: Välj nivån under
               text: "om eleven stannar vid fler än ett ord av tio, eller inte kan säga något om avsnittet. Det är fler än 6 ord i Vattenplaneten, fler än 10 i Solens familj och fler än 15 i Kroppens försvar. På Bas finns ingen nivå under: då läser eleven i par med en kamrat som läser högt."
             - rubrik: Gruppen

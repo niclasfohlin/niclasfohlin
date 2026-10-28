@@ -355,11 +355,15 @@ plan:
     - nar: vecka 3
       del: Modellering
       text: "Läs en familj i taget. Ljuda första ordet helt, läs sedan de följande genom att byta ansatsen: /s/ plus al, /d/ plus al, /m/ plus al. Det är ansats och rim i praktiken."
+    # I vecka 4 och 5 står veckans modellering, stavelserna och konsonantmötena, i stället för tidsschemats, som ljudar ljud
+    # för ljud (verifieringen K-605: sidan visade båda, och kalenderfilen bara veckans).
     - nar: vecka 4
       del: Modellering
+      istallet: true
       text: "Dela ordet i stavelser och klappa: so-⁠la, la-⁠ga, re-⁠sa. Ljuda första stavelsen, ljuda andra stavelsen, läs ihop hela ordet. Vokalen i den öppna stavelsen är lång."
     - nar: vecka 5
       del: Modellering
+      istallet: true
       text: "Två konsonanter i följd, först i början av ordet och sedan i slutet. Ljuda mötet som ett par: /s/ /t/ blir st, lägg sedan på resten: st-⁠en, st-⁠ol. I slutmötena: läs början, håll vokalen kort och landa i mötet: fi-⁠sk, ha-⁠nd."
     # I vecka 6 och 7 står veckans modellering i stället för tidsschemats, som ljudar ord för ord, ljud för ljud (Rimligheten
     # efter omtaget, K-596).

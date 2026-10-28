@@ -424,7 +424,7 @@ uppfoljning:
     # Kollegans observation, samma vecka som ljudkollen, sist eftersom sparade resultat hör till radens plats (K-596).
     - nar: Observation av ett pass
       tid: "var 3:e vecka"
-      vad: "En kollega följer ett pass med bladet, gärna samma vecka som ljudkollen."
+      vad: "En kollega följer ett pass med bladet Observation av ett pass, gärna samma vecka som ljudkollen."
 # Planera insatsen (sajtens K-551, 2026-10-26): seriens planerare med tre ingångar och lektionen vecka för vecka. Texterna
 # är ordagranna citat ur metoden: ingångarna och längden ur lektionsbanken, beslutet efter perioden ur uppföljningen.
 plan:

@@ -228,9 +228,18 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   // ord, som Lässchema i "Lässchema TIL" (Codex 2026-10-24).
   if (d.hem?.kontrakt) saker.push(sak(forstaOrdet(d.hem.kontrakt.rubrik), `${sida}#kontraktet`));
   if (d.hem?.schema) saker.push(sak(forstaOrdet(d.hem.schema.rubrik), `${sida}#schemat`));
-  // Mallarna, var och en med sitt ankare under Mallar att skriva ut, och alla tillsammans.
+  // Mallarna, var och en med sitt ankare under Mallar att skriva ut, och alla tillsammans. En mall med samma namn som en ram,
+  // som Sagobokens Parets väg, är bladet som läraren skriver ut och skriver på, medan ramen har anvisningarna, så mallen står
+  // före ramen och namnet leder till mallen (länkgranskningen K-605: "Skriv ut Parets väg till varje par" ledde till ramen,
+  // vars knapp skriver ut anvisningarna).
   const mallAnkare = mallarnasAnkare(d);
-  d.mallar.forEach((m, i) => saker.push(sak(m.rubrik, `${sida}#${mallAnkare[i]}`)));
+  const ramarnasAdresser = new Set(ramar.map((_, ri) => egenSida.get(ri) ?? `${sida}#${ramAnkare[ri]}`));
+  d.mallar.forEach((m, i) => {
+    const s = sak(m.rubrik, `${sida}#${mallAnkare[i]}`);
+    const ram = saker.findIndex((x) => ramarnasAdresser.has(x.adress) && x.namn.trim().toLocaleLowerCase('sv') === m.rubrik.trim().toLocaleLowerCase('sv'));
+    if (ram >= 0) saker.splice(ram, 0, s);
+    else saker.push(s);
+  });
   // En mall med en titel efter kolon heter också det första ledet, och flera mallar med samma led, som de två sidorna
   // Bråkstavar att klippa, leder dit den första står (länkgranskningen av omgång 3 2026-10-26: "Mallen Bråkstavar att
   // klippa" blev ingen länk).

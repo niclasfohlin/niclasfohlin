@@ -434,13 +434,14 @@ plan:
     - nar: första passet
       del: Läs igen
       text: "Har du bara en elev arbetar ni en till en, och du är elevens par. Eleven läser för dig, du visar, och sedan läser ni igen tillsammans."
-    # Veckans text i varje pass, med länken till Lästräningstexterna, ur Materialets text (länkarna K-596).
+    # Veckans text i varje pass, med länken till Lästräningstexterna, ur Materialets text (länkarna K-596). Meningen säger
+    # ramens namn, så att den blir en länk i passet (länkgranskningen K-605).
     - nar: veckans första pass
-      text: "Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
+      text: "Varje text i Lästräningstexterna är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
     - nar: veckans övriga pass
-      text: "Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
+      text: "Varje text i Lästräningstexterna är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
     - nar: veckans sista pass
-      text: "Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
+      text: "Varje text i Lästräningstexterna är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
     # Veckans text är ett förslag: ni byter först när läsningen flyter, och veckans strategi väljer du efter det du hör.
     - nar: veckans första pass
       text: "Ni läser samma text hela passet, eller hela veckan, och byter text först när läsningen flyter. Varje vecka övar ni också en strategi, som du väljer på strategikortet efter det du hör."
@@ -524,7 +525,7 @@ grund:
 ramar:
   rubrik: Materialet
   text:
-    - "Här finns lektionskortet, strategikortet, en lästräningstext för varje vecka, lappen hem och protokollet för lästrappan. Allt går att kopiera. Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
+    - "Här finns lektionskortet, strategikortet, en lästräningstext för varje vecka, lappen hem och protokollet för lästrappan. Allt går att kopiera. Varje text i Lästräningstexterna är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
   ramar:
     - rubrik: Strategikortet
       text:

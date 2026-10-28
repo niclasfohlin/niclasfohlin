@@ -1134,11 +1134,14 @@ const uppfDagen = (x: { rad: number; datum: string; vecka: number | null }) => x
   : data.uppfoljning.rader[x.rad]?.perElev !== undefined && x.vecka > 0 ? esc(`${kalendervecka(isoVecka(x.datum).vecka)}, ${spannKort(mandagen(x.datum), plusDagar(mandagen(x.datum), 4))}`)
   : esc(dagText(x.datum));
 // En rad i uppföljningen som är ett pass, som passet när gruppen samlas efter kursen, har passets delar att fälla ut, ur
-// metodens tabell (K-553).
+// metodens tabell (K-553). Förberedelsen ur tabellens rad Före passet står först, som i passets ruta, så att läraren ser vad
+// passet behöver (länkgranskningen K-605: Seriesamtals påfyllningspass sa inte att mallen med fyra rutor och ett nytt blad
+// Min plan ska fram).
 const uppfPasset = (rad: number) => {
   const t = data.uppfoljning.rader[rad].passet;
   if (!t?.delar?.length) return '';
-  return `<details class="pl-fallut"><summary>Passets delar</summary><ul class="pl-uppf">${t.delar.map((d, _i, alla) => `<li><span class="pl-etikett">${esc(delensTidI(d.tid, alla))} · ${esc(d.fas)}</span><p>${lankad(mening(d.vad))}</p>${merText(d.mer)}</li>`).join('')}</ul><p class="pl-not">Delarna står i metodens tabell <a href="${esc(t.adress)}" ${goat('passets-tabell', 'passets tabell från uppföljningen')}>${esc(t.namn)}</a>.</p></details>`;
+  const fore = (t.fore ?? []).map(foreRaden).join('');
+  return `<details class="pl-fallut"><summary>Passets delar</summary>${fore}<ul class="pl-uppf">${t.delar.map((d, _i, alla) => `<li><span class="pl-etikett">${esc(delensTidI(d.tid, alla))} · ${esc(d.fas)}</span><p>${lankad(mening(d.vad))}</p>${merText(d.mer)}</li>`).join('')}</ul><p class="pl-not">Delarna står i metodens tabell <a href="${esc(t.adress)}" ${goat('passets-tabell', 'passets tabell från uppföljningen')}>${esc(t.namn)}</a>.</p></details>`;
 };
 // Med tiden för gruppen när mätningen görs en elev i taget utanför passen, som under Före (Rimligheten 2026-10-27: Skrivkollen
 // efter vecka 4 och 8 tar en timme med fyra elever, och det stod bara under Före).
@@ -1314,6 +1317,8 @@ const fasFran = (tid: string) => { const m = tid.match(/^(\d+)/); return m ? Num
 // En del i passets tabell har tabellens andra kolumner, som Du säger, med sina namn (tabellensDelar).
 type Mer = { etikett: string; text: string }[];
 const merText = (mer?: Mer) => (mer ?? []).map((m) => `<p><span class="pl-etikett">${esc(m.etikett)}</span> ${lankad(mening(m.text))}</p>`).join('');
+// En rad i förberedelsen ur ett pass med egen tabell, i passets ruta och i uppföljningens pass, en rot för båda (K-605).
+const foreRaden = (f: { nar: string; vad: string; mer?: Mer }) => `<p><span class="pl-etikett">${esc(f.nar)}</span>${lankad(mening(f.vad))}</p>${merText(f.mer)}`;
 // Passets egna rader, överst eller i en del: rollens citat, och en rad ur metodens tabell med kolumnens namn (K-520).
 const rollRader = (t: { etikett: string; text: string }[]) => t.map((x) => `<p class="pl-roll">${x.etikett ? `<span class="pl-etikett">${esc(x.etikett)}</span> ` : ''}${lankad(mening(x.text))}</p>`).join('');
 const fasTill = (tid: string) => minuterISpann(tid)?.till ?? null;
@@ -1344,7 +1349,7 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
   const fore = [
     // Passets egen rad om förberedelsen först, som en rad med del Före passet (Bråkkursens köpta sats).
     ...(b.foreForst ? [rollRader(b.foreForst)] : []),
-    ...b.foreRader.map((f) => `<p><span class="pl-etikett">${esc(f.nar)}</span>${lankad(mening(f.vad))}</p>${merText(f.mer)}`),
+    ...b.foreRader.map(foreRaden),
     // Förberedelsen säger det som gäller just passet (i pass 2 ett blad till varje par), och checklistan står efter med sin
     // rubrik när den gäller varje pass (Codex 2026-10-25: checklistan ensam tappade förberedelser). Ett pass med egen tabell
     // har sin egen förberedelse och ingen checklista, som Boksamtalets bokval (den kalla testaren 2026-10-26).
