@@ -16,7 +16,8 @@ export const OMRADEN: readonly { id: Omrade; namn: string; under?: string }[] = 
   { id: 'lasning', namn: 'Läsning' },
   { id: 'skrivning', namn: 'Skrivning' },
   { id: 'matematik', namn: 'Matematik' },
-  { id: 'amneskunskaper', namn: 'Ämneskunskaper', under: 'SO, NO och teknik' },
+  // Niclas 2026-10-29: "Istället för ämneskunskaper: ämnen". Id:t följer riggens standard tills den byter det.
+  { id: 'amneskunskaper', namn: 'Ämnen', under: 'SO, NO och teknik' },
   { id: 'socialt', namn: 'Socialt' },
 ];
 
@@ -45,8 +46,8 @@ export function primar(evidens: Record<Omrade, Omradesvarde>): string {
   return namn.length ? uppraknat(namn) : 'Inget område med minst visst stöd';
 }
 
-// Svårighet och Kostnad i ord, eftersom mer är sämre där och en stapel skulle få 5 att se bra ut. Orden är platshållare
-// tills evidensens rubrik för svensk skola är skriven.
+// Svårighet och Kostnad: ordet bredvid de neutrala staplarna (src/components/Staplar.astro). Orden är platshållare tills
+// evidensens rubrik för svensk skola är skriven.
 const INFORORD = ['', 'Mycket låg', 'Låg', 'Måttlig', 'Hög', 'Mycket hög'] as const;
 export const inforOrd = (niva: number) => INFORORD[niva];
 
