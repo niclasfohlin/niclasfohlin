@@ -1,10 +1,13 @@
 ---
-// Metodkortet, samma på startsidan och i metodbanken: titel med ämnesmärke, faktaremsa (årskurs,
+// Metodkortet i metodbanken: titel med ämnesmärke, faktaremsa (årskurs,
 // grupp, pass, hur ofta), ingress, taggar och raden med de centrala sakerna (src/lib/centrala.ts), lathund, lektionskorten
 // bredvid den (src/lib/lektionskort.ts) och filval. I metodbanken
 // också kryssrutan Välj för samlad nedladdning. En serie (Ljudlek i grupp) är ett kort som de andra, med
 // lektionerna bakom en rad som fälls ut, så att kortet inte växer med banken och lektionerna inte står som egna
-// kort; kortet filtreras på allt serien tränar (Niclas valde formen 2026-09-29).
+// kort; kortet filtreras på allt serien tränar (Niclas valde formen 2026-09-29). På startsidan är kortet en försmak
+// (forsmak) som slutar efter förklaringen och är en tryckyta i sin helhet (Niclas 2026-10-29: "Korten på huvudsidan kan
+// väl sluta vid punkten i förklaringen ... Behöver inte ha taggar på dem eller ladda ner word där. De ska bara väcka
+// intresse. Stödundervisning har hela korten kvar").
 import Taggar from './Taggar.astro';
 import Filval from './Filval.astro';
 import { harLathund } from '../lib/metod';
@@ -16,13 +19,13 @@ import { metodensCentrala } from '../lib/centrala';
 import type { MetodPost } from '../lib/metod';
 import type { Serie } from '../lib/serie';
 import { kanGorasIKlass } from '../lib/upplagg';
-interface Props { m: MetodPost; valj?: boolean; serie?: Serie; taggar?: string[] }
-const { m, valj = false, serie, taggar = m.data.taggar } = Astro.props;
+interface Props { m: MetodPost; valj?: boolean; serie?: Serie; taggar?: string[]; forsmak?: boolean }
+const { m, valj = false, serie, taggar = m.data.taggar, forsmak = false } = Astro.props;
 const lektioner = serie?.lektioner ?? [];
 const ord = serie?.ord;
 const antal = lektioner.length === 1 ? `En ${ord?.en ?? 'lektion'}` : `${lektioner.length} ${ord?.flera ?? 'lektioner'}`;
 ---
-<article class={`kort metodkort${serie ? ' seriekort' : ''}`} data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar.join(' ')} data-klass={kanGorasIKlass(m.data) ? 'klass' : 'grupp'}>
+<article class={`kort metodkort${serie ? ' seriekort' : ''}${forsmak ? ' forsmak' : ''}`} data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar.join(' ')} data-klass={kanGorasIKlass(m.data) ? 'klass' : 'grupp'}>
   <div class="kort-topp">
     <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
     <span class="amne" data-amne={m.data.omrade}>{m.data.omrade}</span>
@@ -31,7 +34,7 @@ const antal = lektioner.length === 1 ? `En ${ord?.en ?? 'lektion'}` : `${lektion
     {kortFakta(m.data).map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
   </dl>
   <p class="ingress">{m.data.ingress}</p>
-  {lektioner.length > 0 && (
+  {!forsmak && lektioner.length > 0 && (
     <details class="kort-serie">
       <summary>{antal} {ord?.iBanken}</summary>
       <ol class="kort-lektioner">
@@ -39,12 +42,12 @@ const antal = lektioner.length === 1 ? `En ${ord?.en ?? 'lektion'}` : `${lektion
       </ol>
     </details>
   )}
-  <Taggar taggar={taggar} />
-  <p class="kort-rad">
+  {!forsmak && <Taggar taggar={taggar} />}
+  {!forsmak && <p class="kort-rad">
     {metodensCentrala(m.data).map((c) => <Centralknapp c={c} metod={m.id} titel={m.data.titel} klass="central-lank" medTitel />)}
     {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
     {metodensLektionskort(m.data, m.id).map((k) => <Lektionskortknapp k={k} titel={m.data.titel} klass="central-lank" medTitel />)}
     <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} statistik={`${m.data.titel}: allt om metoden`} liten />
     {valj && <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>}
-  </p>
+  </p>}
 </article>

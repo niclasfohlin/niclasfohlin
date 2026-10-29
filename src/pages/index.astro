@@ -55,7 +55,7 @@ const bocker = (await bockerSorterade()).slice(0, 4);
       <h2>Stödundervisning</h2>
       <p class="text">De senaste metoderna. Hela metodbanken är sorterad på område, årskurs och vad metoderna tränar.</p>
       <div class="rutnat">
-        {metoder.map((m) => { const serie = serier.get(m.id); return <Metodkort m={m} serie={serie} taggar={serie && serieTaggar(serie, allaMetoder)} />; })}
+        {metoder.map((m) => { const serie = serier.get(m.id); return <Metodkort m={m} serie={serie} taggar={serie && serieTaggar(serie, allaMetoder)} forsmak />; })}
       </div>
       <p class="lankrad"><a href="/stodundervisning">Hela metodbanken</a></p>
     </section>
