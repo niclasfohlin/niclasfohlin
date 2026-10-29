@@ -4,7 +4,7 @@ import Metodkort from '../components/Metodkort.astro';
 import { bildHojd } from '../lib/bildmatt';
 import Taggar from '../components/Taggar.astro';
 import { site } from '../data/site';
-import { artiklarSorterade, metoderSenaste, metodSerier, bockerSorterade, formateraDatum, publikationNamn, typLabel, publicerade } from '../lib/innehall';
+import { artiklarSorterade, metoderSenaste, metodSerier, bockerSorterade, formateraDatum, publikationNamn, textEtikett, publicerade } from '../lib/innehall';
 import { serieTaggar } from '../lib/serie';
 
 const artiklar = await artiklarSorterade();
@@ -32,7 +32,7 @@ const bocker = (await bockerSorterade()).slice(0, 4);
     <div class="rutnat">
       {senaste.map((a) => (
         <article class="kort">
-          <p class="meta">{typLabel(a.data.typ)} · {publikationNamn(a.data.publikation)} · {formateraDatum(a.data.datum)}</p>
+          <p class="meta">{textEtikett(a.data)} · {publikationNamn(a.data.publikation)} · {formateraDatum(a.data.datum)}</p>
           <h3><a href={`/artiklar/${a.id}`}>{a.data.titel}</a></h3>
           <p>{a.data.ingress}</p>
         </article>

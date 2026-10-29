@@ -240,6 +240,9 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
 .artikel-huvud h1 { font-family: var(--typsnitt-antikva); font-size: clamp(1.85rem, 1rem + 4.4vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.07; margin-bottom: 0.5em; }
 .artikel .ingress { font-family: var(--typsnitt-ui); font-size: 1.2rem; font-weight: 700; line-height: 1.38; letter-spacing: -0.005em; margin: 0 0 1.1rem; }
 .artikel .ingress .texttyp, .artikel .ingress .texttyp-punkt { color: var(--farg-accent); }
+/* Raden under ingressen i en replik eller slutreplik: vad texten svarar på, med länk (Niclas 2026-10-29: "Viktigt att
+   repliker länkar till vad den replikerar till"). Sans som källan, i textens färg så att länkarna syns. */
+.replikrad { font-family: var(--typsnitt-ui); font-size: 1rem; line-height: 1.45; margin: -0.2rem 0 1.1rem; }
 .brod { font-family: var(--typsnitt-antikva); font-size: 1.125rem; line-height: 1.7; }
 @media (min-width: 40rem) { .brod { font-size: 1.1875rem; } }
 .brod > p, .brod > ul, .brod > ol { margin: 0 0 1.25em; }

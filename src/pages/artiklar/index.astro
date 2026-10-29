@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { site } from '../../data/site';
 import Taggar from '../../components/Taggar.astro';
-import { artiklarSorterade, formateraDatum, publikationNamn, taggLabel, typLabel } from '../../lib/innehall';
+import { artiklarSorterade, formateraDatum, publikationNamn, taggLabel, typLabel, textEtikett } from '../../lib/innehall';
 const artiklar = await artiklarSorterade();
 // Ett avsnitt per år, nyaste först.
 const ar = [...new Set(artiklar.map((a) => a.data.datum.getFullYear()))];
@@ -56,7 +56,7 @@ const typer = [...new Set(artiklar.map((a) => a.data.typ))].map((t) => ({ id: t,
       <div class="rutnat">
         {artiklar.filter((a) => a.data.datum.getFullYear() === aret).map((a) => (
           <article class="kort" data-text data-publikation={a.data.publikation} data-typ={a.data.typ} data-sok={`${a.data.titel} ${a.data.ingress} ${a.data.taggar.map(taggLabel).join(' ')} ${publikationNamn(a.data.publikation)}`.toLowerCase()}>
-            <p class="meta">{typLabel(a.data.typ)} · {publikationNamn(a.data.publikation)} · {formateraDatum(a.data.datum)}</p>
+            <p class="meta">{textEtikett(a.data)} · {publikationNamn(a.data.publikation)} · {formateraDatum(a.data.datum)}</p>
             <h3><a href={`/artiklar/${a.id}`}>{a.data.titel}</a></h3>
             <p>{a.data.ingress}</p>
             <Taggar taggar={a.data.taggar} />

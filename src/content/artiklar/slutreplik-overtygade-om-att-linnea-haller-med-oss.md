@@ -5,6 +5,13 @@ datum: 2024-06-11
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/lararnas-slutreplik-overtygade-om-att-linnea-haller-med-oss/"
 typ: "debatt"
+replik:
+  slag: "slutreplik"
+  titel: "Inte kränkande att lära elever rätt och fel"
+  av: "Linnea Lindquist"
+  tidning: "Vi Lärare"
+  url: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/linnea-lindquist-svarar-inte-krankande-att-lara-elever-ratt-och-fel/"
+  svarade: "svar-till-linnea-vi-vill-inte-ha-en-skola-som-hotar-och-skrammer"
 medforfattare: ["Jennie Wilson"]
 taggar: ["studiero", "socialt-samspel"]
 utvald: false

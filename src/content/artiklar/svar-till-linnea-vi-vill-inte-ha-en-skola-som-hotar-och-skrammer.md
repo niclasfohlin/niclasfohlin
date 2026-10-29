@@ -5,6 +5,12 @@ datum: 2024-06-04
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/lararnas-svar-till-linnea-vi-vill-inte-ha-en-skola-som-hotar-och-skrammer/"
 typ: "debatt"
+replik:
+  slag: "replik"
+  titel: "Lärarens knep fick eleven att skämmas"
+  av: "Linnea Lindquist"
+  tidning: "Expressen"
+  url: "https://www.expressen.se/ledare/linnea-lindquist/lararens-knep-fick-eleven-att-skammas/"
 medforfattare: ["Jennie Wilson"]
 taggar: ["studiero", "undervisningskvalitet", "socialt-samspel"]
 citat: ["Vi lärare måste kunna titta våra elever i ögonen efteråt och inte skämmas för vad vi har gjort.", "Våra elever förtjänar att vara i en skola som präglas av lärande och utveckling, inte rädsla och skam."]

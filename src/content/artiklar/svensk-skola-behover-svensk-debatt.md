@@ -5,6 +5,13 @@ datum: 2026-04-23
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/slutreplik-svensk-skola-behover-svensk-debatt/"
 typ: "debatt"
+replik:
+  slag: "slutreplik"
+  titel: "Vill Niclas Fohlin bevara status quo?"
+  av: "Jenny Maria Nilsson"
+  tidning: "Vi Lärare"
+  url: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/vill-niclas-fohlin-bevara-status-quo/"
+  svarade: "kulturkriget-om-skolan-ar-inte-vart-krig"
 medforfattare: []
 taggar: ["lasinlarning", "evidens", "skolpolitik"]
 citat: ["Just därför kan det amerikanska läskriget inte översättas till svensk skola."]

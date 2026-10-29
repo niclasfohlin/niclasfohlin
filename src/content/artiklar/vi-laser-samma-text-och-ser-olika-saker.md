@@ -1,10 +1,17 @@
 ---
 titel: "Vi läser samma text och ser olika saker"
-ingress: "Andreas Williamsson frågade varför krönikan om nånannanismen anammar motståndarens argument. Repliken förklarar att krönikan är riktad till alla som arbetar i skolan, lärare som rektorer och kuratorer. Den försvarar yrkets kärna, tron på att undervisningen gör skillnad, och räknar den tron till solidariteten."
+ingress: "Andreas Williamsson frågade varför krönikan om nånannanismen anammar motståndarens argument. Slutrepliken förklarar att krönikan är riktad till alla som arbetar i skolan, lärare som rektorer och kuratorer. Den försvarar yrkets kärna, tron på att undervisningen gör skillnad, och räknar den tron till solidariteten."
 datum: 2026-04-02
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-vi-laser-samma-text-och-ser-olika-saker/"
 typ: "debatt"
+replik:
+  slag: "slutreplik"
+  titel: "Varför anamma motståndarens argument?"
+  av: "Andreas Williamsson"
+  tidning: "Vi Lärare"
+  url: "https://www.vilarare.se/nyheter/vi-larare-debatt/replik-varfor-anamma-motstandarens-argument/"
+  svarade: "en-epidemi-i-skolan-nanannanismen-sprider-sig"
 medforfattare: []
 taggar: ["skolutveckling", "undervisningskvalitet"]
 citat: ["Det jag varnar för är att vi som profession hamnar i ett läge där vi slutar tro på vår egen förmåga att påverka det som händer i klassrummet."]
@@ -14,7 +21,7 @@ heltext: true
 utkast: false
 ---
 
-Andreas, tack för att du reagerar och engagerar dig. Men jag tror vi läser samma text och ser helt olika saker. Du kan även läsa min replik till HP Tran.
+Andreas, tack för att du reagerar och engagerar dig. Men jag tror vi läser samma text och ser helt olika saker. Du kan även läsa [min replik till HP Tran](/artiklar/vi-maste-dela-bade-ilskan-och-handlingskraften).
 
 Jag är lärare. Och krönikan är inte riktad mot lärare, den är riktad till alla vi som arbetar i skolan: lärare, rektorer, specialpedagoger och kuratorer. Vi tillsammans.
 

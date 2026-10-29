@@ -1,4 +1,4 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import taggarData from './data/taggar.json';
@@ -89,8 +89,21 @@ const artiklar = defineCollection({
       .min(1, 'Ta bort fältet citat när texten inte har några citat.')
       .max(3, 'Högst tre citat, och tre bara i en lång text.')
       .optional(),
+    // En replik eller slutreplik (Niclas 2026-10-29: "Ha Replik och Slutreplik som egna. Under-rubriker till debatt?").
+    // Texten är en debatt, och etiketten blir Replik eller Slutreplik (textEtikett i src/lib/innehall.ts). En replik svarar
+    // på någon annans text, en slutreplik på någons replik till Niclas text. titel, av, tidning och url är texten den svarar
+    // på, med länk när den finns ("Om de finns"); svarade är texten på sajten som den texten i sin tur svarade på.
+    replik: z.strictObject({
+      slag: z.enum(['replik', 'slutreplik']),
+      titel: z.string().trim().min(1),
+      av: z.string().trim().min(1),
+      tidning: z.string().trim().min(1),
+      url: z.url().optional(),
+      svarade: reference('artiklar').optional(),
+    }).optional(),
     utkast: z.boolean().default(false),
-  }).refine((a) => !a.citat || a.heltext, { message: 'Lyftcitat står bara i en text med hela texten (heltext: true).', path: ['citat'] }),
+  }).refine((a) => !a.citat || a.heltext, { message: 'Lyftcitat står bara i en text med hela texten (heltext: true).', path: ['citat'] })
+    .refine((a) => !a.replik || a.typ === 'debatt', { message: 'En replik eller slutreplik har typ: "debatt".', path: ['replik'] }),
 });
 
 // Böcker: presentation, omslag och länkar. Kategorin styr rubrikerna på /bocker.

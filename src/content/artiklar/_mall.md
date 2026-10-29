@@ -9,6 +9,15 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/..."
 # artikel, kronika, debatt, intervju, podd eller annat
 typ: "kronika"
+# Bara i en replik eller slutreplik, som har typ debatt: texten den svarar på, med länk när den finns. En replik svarar
+# på någon annans text, en slutreplik på någons replik till Niclas text, och svarade är då Niclas text på sajten.
+# replik:
+#   slag: "slutreplik"
+#   titel: "Rubriken på texten den svarar på"
+#   av: "Författaren"
+#   tidning: "Vi Lärare"
+#   url: "https://www.vilarare.se/..."
+#   svarade: "id-pa-niclas-text"
 medforfattare: []
 # id från src/data/taggar.json. Återanvänd före att lägga till.
 taggar: ["skolpolitik"]

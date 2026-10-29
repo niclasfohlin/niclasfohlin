@@ -115,6 +115,20 @@ export function typLabel(typ: string): string {
   return typEtiketter[typ] ?? typ;
 }
 
+// Etiketten på en text: Replik och Slutreplik är debatter med en egen etikett (fältet replik i src/content.config.ts), och
+// i filtret på /artiklar hör de till Debatt.
+export function textEtikett(data: { typ: string; replik?: { slag: 'replik' | 'slutreplik' } }): string {
+  if (data.replik) return data.replik.slag === 'replik' ? 'Replik' : 'Slutreplik';
+  return typLabel(data.typ);
+}
+
+// Etiketten i bestämd form, för raden om vad en replik svarar på: "som svarade på krönikan …".
+const bestamdForm: Record<string, string> = { Krönika: 'krönikan', Debatt: 'debattartikeln', Replik: 'repliken', Slutreplik: 'slutrepliken', Artikel: 'artikeln', Intervju: 'intervjun', Poddavsnitt: 'poddavsnittet', Text: 'texten' };
+export function textEtikettBestamd(data: Parameters<typeof textEtikett>[0]): string {
+  const e = textEtikett(data);
+  return bestamdForm[e] ?? e.toLowerCase();
+}
+
 export function formateraDatum(d: Date): string {
   return new Intl.DateTimeFormat('sv-SE', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
 }

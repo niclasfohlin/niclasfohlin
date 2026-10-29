@@ -15,7 +15,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { site } from '../data/site';
-import { publicerade, publikationNamn, typLabel, matteproblemenPaSidan } from './innehall';
+import { publicerade, publikationNamn, textEtikett, matteproblemenPaSidan } from './innehall';
 import { medDatabaserna } from './faktateman';
 import { arskursText, type MetodPost } from './metod';
 import { kortFakta } from './kortfakta';
@@ -137,7 +137,7 @@ export function allaKort(): Promise<Kort[]> {
       const ar = a.data.datum.getFullYear();
       const var_ = a.data.publikation === 'egen' ? '' : ` · ${publikationNamn(a.data.publikation)}`;
       const [titel, undertitel] = dela(a.data.titel);
-      lagg({ sida: `/artiklar/${a.id}`, typ: 'artikel', etikett: `${typLabel(a.data.typ)}${var_} · ${ar}`, titel, undertitel, bild: portratt, farg: '--farg-accent' });
+      lagg({ sida: `/artiklar/${a.id}`, typ: 'artikel', etikett: `${textEtikett(a.data)}${var_} · ${ar}`, titel, undertitel, bild: portratt, farg: '--farg-accent' });
     }
     for (const b of await publicerade('bocker')) {
       const [titel, undertitel] = dela(b.data.titel);

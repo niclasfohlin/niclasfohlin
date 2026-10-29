@@ -5,6 +5,13 @@ datum: 2026-03-27
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/slutreplik-vi-maste-dela-bade-ilskan-och-handlingskraften/"
 typ: "debatt"
+replik:
+  slag: "slutreplik"
+  titel: "Det är inte lärarna som har slutat tro på sina elever"
+  av: "HP Tran"
+  tidning: "Vi Lärare"
+  url: "https://www.vilarare.se/nyheter/kronika2/hp-tran-det-ar-inte-lararna-som-har-slutat-tro-pa-sina-elever/"
+  svarade: "en-epidemi-i-skolan-nanannanismen-sprider-sig"
 medforfattare: []
 taggar: ["skolutveckling", "skolpolitik"]
 citat: ["Ingen enskild lärare kan skapa det som forskningen kallar collective teacher efficacy.", "En god skola uppstår inte när varje lärare springer fortare ensam utan när personal tillsammans bestämmer sig för att skapa något stabilt, tryggt och professionellt."]

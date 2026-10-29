@@ -1,10 +1,17 @@
 ---
 titel: "När ett fält vill innefatta ”allt” blir gränserna suddiga"
-ingress: "Agneta Gulz och Magnus Haake läste krönikan om kognitionsvetenskap som ett frontalangrepp. Repliken välkomnar fältets bidrag men frågar vad etiketten tillför när all god pedagogik räknas dit. Arbetsminnesträningen Robomemo visar varför fältet behöver granskas, och didaktikens frågor kommer först."
+ingress: "Agneta Gulz och Magnus Haake läste krönikan om kognitionsvetenskap som ett frontalangrepp. Slutrepliken välkomnar fältets bidrag men frågar vad etiketten tillför när all god pedagogik räknas dit. Arbetsminnesträningen Robomemo visar varför fältet behöver granskas, och didaktikens frågor kommer först."
 datum: 2024-12-19
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/neuropedagogik/nar-ett-falt-vill-innefatta-allt-blir-granserna-suddiga/"
 typ: "debatt"
+replik:
+  slag: "slutreplik"
+  titel: "Halmgubbar om kognitionsvetenskap"
+  av: "Agneta Gulz och Magnus Haake"
+  tidning: "Vi Lärare"
+  url: "https://www.vilarare.se/specialpedagogik/neuropedagogik/replik-halmgubbar-om-kognitionsvetenskap/"
+  svarade: "kognitionsvetenskap-kan-aldrig-bli-mer-an-ett-komplement"
 medforfattare: []
 taggar: ["evidens", "lararutbildning"]
 citat: ["I ert svar approprierar ni allt som är bra och beprövat i skolan och kallar det kognitionsvetenskap – som om läraryrket och pedagogiken inte redan inrymmer dessa insikter."]

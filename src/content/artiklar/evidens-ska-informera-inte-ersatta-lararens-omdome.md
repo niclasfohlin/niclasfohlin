@@ -5,6 +5,13 @@ datum: 2025-11-21
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/niclas-fohlin-evidens-ska-informera--inte-ersatta-lararens-omdome/"
 typ: "debatt"
+replik:
+  slag: "slutreplik"
+  titel: "Han försöker karaktärsmörda evidensrörelsen"
+  av: "Susan Hall"
+  tidning: "Vi Lärare"
+  url: "https://www.vilarare.se/nyheter/vi-larare-debatt/forsoker-karaktarsmorda-evidensrorelsen/"
+  svarade: "darfor-far-vi-larare-problem-med-evidenshysterin"
 medforfattare: []
 taggar: ["evidens", "undervisningskvalitet"]
 citat: ["Precis som en GPS visar vägen men föraren anpassar efter väglaget, ska forskningen vägleda utan att styra detaljerna."]
