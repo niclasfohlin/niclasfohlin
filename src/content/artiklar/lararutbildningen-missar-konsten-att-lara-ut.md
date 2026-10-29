@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/lararutbildning/lararutbi
 typ: "kronika"
 medforfattare: []
 taggar: ["lararutbildning", "undervisningskvalitet"]
-citat: ["Vår lärare i sista VFU-kursen ersattes – och detta är helt sant – med en disputerad ekonom.", "Det krävs mycket att uppfinna hjulet igen om ingen någonsin visat något som rullar."]
+citat: ["Vår lärare i sista VFU-kursen ersattes – och detta är helt sant – med en disputerad ekonom.", "Jag frågade samordnare på universitetet vad de höll på med och bad att få läsa igenom kursmanualerna mer i detalj. Vad jag läste skrämde mig än mer.", {"text":"Det är som om universiteten betraktar undervisning från höga torn, avskilda från verkligheten ute i klassrummen. Den praktiska aspekten av att leda en klass nedprioriteras.","ur":"Det är som om universiteten betraktar undervisning från sina höga torn, avskilda från verkligheten ute i klassrummen. Den praktiska aspekten av att leda en klass, att faktiskt stå framför eleverna och guida dem genom lärandet, nedprioriteras till förmån för akademisk kunskap."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -37,8 +37,6 @@ Det är som om universiteten betraktar undervisning från sina höga torn, avski
 Det saknas även praktisk kunskap att undervisa i en heterogen elevgrupp. Det finns en myriad av sätt att skapa en kollektivt god undervisning, och teorin bakom dessa berörs i kurserna men inte praktiken. Studenterna förväntas själva omsätta teorin i praktik, men distansen mellan dessa är en avgrund. Det krävs mycket att uppfinna hjulet igen om ingen någonsin visat något som rullar. Och kanske är det inte så konstigt med tanke på hur universiteten fungerar?
 
 För att kunna arbeta på ett universitet krävs det en doktorsexamen. Att genomgå en sådan tar som minst fyra år. För de allra flesta lektorer innebär det att det är åratal sedan de hade en klass med elever. Och får man en sådan har man tur som lärarstudent! Ofta fylls kurserna av lektorer som är disputerade från andra fält, utan praktisk lärarkunskap. Övergången från specialiserade lärarhögskolor till att inkludera lärarutbildningen i traditionella universitet har lett till att den särskilda kompetensen för att utbilda lärare har försvunnit.
-
-Lärarutbildningarna behöver anställa lärare, specialister och metodiklärare i lika hög utsträckning som de anställer akademiker och nya doktorander.
 
 Lärarutbildningen är i dag snarare ett virrvarr av olika kurser där det saknas ett helhetsgrepp om vad som faktiskt behövs för att bli en framgångsrik lärare. Det saknas även en yrkesstolthet för läraryrket på dagens lärarutbildningar. Jag tror att universiteten saknar en tydlig bild över vilka färdigheter som behövs i klassrummet av oss lärare.
 

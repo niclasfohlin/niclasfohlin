@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/regering
 typ: "debatt"
 medforfattare: []
 taggar: ["specialpedagogik", "lararutbildning", "sarskilt-stod", "skolpolitik", "elevhalsa"]
-citat: ["När man vill forma en skola byggd på sortering och straff blir de som envisast försvarar de utsatta eleverna ett problem som måste lösas.", "Det går inte att utveckla skolan bara genom att byta namn på en yrkesgrupp.", "Regeringens skolpolitik har blivit ett spaghettikalas – man slänger reform efter reform mot väggen och hoppas att något fastnar."]
+citat: [{"text":"Det specialpedagoger utför är i allra högsta grad konkret elevarbete, inte bara ”råd och handledning” som regeringen fått för sig.","ur":"Detta är ju konkret elevarbete, inte bara ”råd och handledning” som regeringen framhäver."}, "Det går inte att utveckla skolan bara genom att byta namn på en yrkesgrupp.", "Regeringens skolpolitik har blivit ett spaghettikalas – man slänger reform efter reform mot väggen och hoppas att något fastnar."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -17,8 +17,6 @@ utkast: false
 Pressträff på Rosenbad. Regeringens femtonde skolutredning – minst – rullas ut i det halvtomma rummet. Specialpedagogutbildningen ska bort. Jahapp.
 
 Men är någon ärligt förvånad? För ett år sedan hade jag kunnat satsa pengar på att regeringen skulle fatta just detta beslut. Det har planerats steg för steg. Man vill göra sig av med dem som ses som bromsklossar för en mer repressiv skola. Specialpedagoger är trots allt den yrkesgrupp som står på barrikaderna för alla elevers rätt till en god undervisning. Det är den yrkesgrupp som har kompassen och hjärtat närmast de elever som har det svårast. De brinner för allas rätt till lärande och vill att skolan ska vara en plats att må bra och växa i. De är också den yrkesgrupp som höjer sina röster och är mest kritiskt mot straffsystem, skoluniformer och andra repressiva reformer.
-
-Det specialpedagoger utför är i allra högsta grad konkret elevarbete, inte bara ”råd och handledning” som regeringen fått för sig.
 
 När man vill forma en skola byggd på sortering och straff blir de som envisast försvarar de utsatta eleverna ett problem som måste lösas. Och lösningen? Ta bort hela professionen. Det enda som skulle förvåna mig nu är om skolan klarar sig ur det här oskadd.
 

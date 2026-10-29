@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/inlarning/fohlin-det-som-
 typ: "kronika"
 medforfattare: []
 taggar: ["undervisningskvalitet", "skolpolitik", "demokratiuppdraget"]
-citat: ["Direktörens dotter ska gå i samma klass som skomakarens son.", "Elever delas upp i de effektiva och enkla, eller de som anses vara kostnadsdrivande."]
+citat: [{"text":"Lärande är relationellt i sin natur. God undervisning bör handla om att vi gemensamt utforskar den värld vi delar tillsammans i dialog med varandra.","ur":"Det innebär att lärande är relationellt i sin natur. God undervisning bör handla om att vi gemensamt utforskar den värld vi delar tillsammans i dialog med varandra."}, {"text":"Dagens utveckling underminerar skolans potential att agera som en brobyggare mellan olika samhällsgrupper och som en katalysator för social förändring.","ur":"Denna utveckling underminerar skolans potential att agera som en brobyggare mellan olika samhällsgrupper och som en katalysator för social förändring."}, {"text":"Vi behöver en professionsstyrd skola som sätter undervisning i första rummet, en tillitsbaserad styrning som kan förse lärare med resurser, och ett erkännande att lärande är en komplex, dynamisk process som inte lätt låter sig mätas.","ur":"Jag tror att vi skulle behöva en professionsstyrd skola som sätter undervisning i första rummet och en tillitsbaserad styrning som kan förse lärare med de resurser de behöver för att kunna genomföra undervisning med hög kvalitet."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

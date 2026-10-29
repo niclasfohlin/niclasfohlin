@@ -14,7 +14,7 @@ replik:
   svarade: "en-epidemi-i-skolan-nanannanismen-sprider-sig"
 medforfattare: []
 taggar: ["skolutveckling", "skolpolitik"]
-citat: ["Ingen enskild lärare kan skapa det som forskningen kallar collective teacher efficacy.", "En god skola uppstår inte när varje lärare springer fortare ensam utan när personal tillsammans bestämmer sig för att skapa något stabilt, tryggt och professionellt."]
+citat: [{"text":"Lärarens handlingskraft kräver förutsättningar, samarbete, tillit, ledarskap och en skolorganisation som faktiskt gör kollektiv professionalitet möjlig.","ur":"Den kräver förutsättningar, samarbete, tillit, ledarskap och en skolorganisation som faktiskt gör kollektiv professionalitet möjlig."}, "Ingen enskild lärare kan skapa det som forskningen kallar collective teacher efficacy."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

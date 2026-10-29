@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/skolpolitik/fohlin-nu-mas
 typ: "kronika"
 medforfattare: []
 taggar: ["skolpolitik", "evidens"]
-citat: ["Nyanser får inte plats i den trånga, pressade skyttegraven.", "Något har gått snett när vi börjar se på varandra som motståndare i stället för samarbetspartners."]
+citat: ["När någon slår en rapport i bordet som ”bevisar allt” och samtidigt anklagar motparten för att strunta i vetenskapen så har vi kastat bort vetenskapens viktigaste möjlighet, den att finna en gemensam kunskapsgrund.", {"text":"Skolans utmaningar blir reducerade till ”tankefel” i stället för organisation, resurser och vilket stöd som behövs. Resultatet? Problemen kvarstår och förblir olösta.","ur":"Skolans utmaningar blir därmed reducerade till ”tankefel” i stället för organisation, resurser och vilket stöd som behövs. Resultatet? Problemen kvarstår och förblir olösta."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

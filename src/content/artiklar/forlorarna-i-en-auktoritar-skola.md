@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-vi
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "tillganglig-undervisning"]
-citat: ["Om han gör något mot er elever som inte är okej att göra mot en vuxen, då är det inte okej att göra mot er heller!", "För många elever är skolgången svår, och för vissa rentav ett helvete."]
+citat: [{"text":"Det var här skolan började på riktigt för mig. För första gången var det någon som såg mig. Jag började tro på att vuxna ville mig väl.","ur":"Det var egentligen här skolan började på riktigt för mig. För första gången var det någon som såg mig, tog sig tid att prata med mig, byggde en relation baserad på ömsesidigt förtroende. Jag började tro på att vuxna ville mig väl."}, "För att skapa en framgångsrik och inkluderande skolmiljö måste vi undvika den farliga genväg som de auktoritära metoderna lockar med."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

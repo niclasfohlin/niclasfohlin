@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/elevinfl
 typ: "debatt"
 medforfattare: []
 taggar: ["demokratiuppdraget", "undervisningskvalitet"]
-citat: ["Att säga nej är ibland lika viktigt som att säga ja, särskilt när elevers önskemål går emot vårt bättre vetande.", "Redan 1946 års skolkommission – alltså för nästan 80 år sedan – betonade att skolan ska främja demokratiska värden.", "Ibland, en trött torsdag, kan jag också drömma om ett klassrum där alla elever sitter knäpptysta."]
+citat: [{"text":"Elevinflytande betyder att elever ansvarsfullt ska få påverka vissa aspekter av sin utbildning, men alltid inom lärarens ramar.","ur":"Låt oss vara tydliga: elevinflytande i skolan betyder att elever ansvarsfullt ska få påverka vissa aspekter av sin utbildning – men alltid inom de ramar som läraren sätter."}, {"text":"En skicklig lärare tar vara på elevernas idéer när det gynnar lärandet men sätter också tydliga gränser. Att säga nej är ibland lika viktigt som att säga ja.","ur":"En skicklig lärare tar därför vara på elevernas idéer när det gynnar lärandet, men sätter också tydliga gränser när det behövs. Att säga nej är ibland lika viktigt som att säga ja, särskilt när elevers önskemål går emot vårt bättre vetande."}, {"text":"Att balansera elevens röst med ett tydligt professionellt ansvar är själva kärnan i läraryrket.","ur":"Att balansera elevens röst med ett tydligt professionellt ansvar är ju själva kärnan i läraryrket."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

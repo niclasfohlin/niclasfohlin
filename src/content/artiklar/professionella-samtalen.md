@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/fohlin-a
 typ: "kronika"
 medforfattare: []
 taggar: ["specialpedagogik", "elevhalsa"]
-citat: ["Jag slutade jaga ordning för ordningens skull.", "Att samtala med andra är inte ett tecken på svaghet."]
+citat: [{"text":"Våra samtal blev min livlina. Signalen dog alltid i samma tunnel men samtalet fortsatte på andra sidan, precis som tankar gör när de äntligen får syre.","ur":"Våra samtal blev min livlina. En gång i veckan blev två, sedan tre. Signalen dog alltid i samma tunnel men samtalet fortsatte på andra sidan, precis som tankar gör när de äntligen får syre."}, "Sakta förändrades min undervisning. Jag slutade jaga ordning för ordningens skull. Började se eleverna – verkligen se dem.", {"text":"Stefan kom tillbaka. Sofia berättade vad som tyngde. Emil öppnade sin bok. Inte för att jag blev perfekt, utan för att jag slutade försöka vara det ensam.","ur":"Stefan kom förresten tillbaka nästa dag. Sofia berättade till slut vad som tyngde. Emil öppnade sin bok. Inte för att jag blev perfekt, utan för att jag slutade försöka vara det ensam."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

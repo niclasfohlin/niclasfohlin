@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/inlarning/fohlin-larande-
 typ: "artikel"
 medforfattare: []
 taggar: ["undervisningskvalitet", "kooperativt-larande", "tillganglig-undervisning", "elevhalsa", "specialpedagogik"]
-citat: ["Det är fördelaktigt med fler elever i klassrummet eftersom vi då har fler som kan bidra med frågor och förklaringar.", "Ju mer skolan individualiserar undervisningen för dessa elever, desto större blir risken att de skapar sin egen verklighet utanför gruppen och inte ser sig som en del av klassen."]
+citat: ["Hur kan jag som speciallärare stödja både eleven och läraren så att undervisningen leder till lärande hos eleven?", {"text":"Ju mer skolan individualiserar undervisningen för vissa elever, desto större risk att de skapar sin egen verklighet utanför gruppen och inte ser sig som en del av klassen.","ur":"Ju mer skolan individualiserar undervisningen för dessa elever, desto större blir risken att de skapar sin egen verklighet utanför gruppen och inte ser sig som en del av klassen."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -21,8 +21,6 @@ När jag började som lärare för mer än tjugo år sedan var det vanligt att v
 Jag tror inte att det finns ett enda perfekt sätt, eller för den delen att vissa metoder alltid är bättre eller är sämre än andra. Däremot insåg jag att ett överdrivet fokus på individuellt lärande ökade klyftan mellan de elever som hade lätt att lära sig och de som hade svårare. Motiverade elever klarade sig ofta bra och gick snabbt framåt medan de som stötte på svårigheter hamnade efter. Jag lärde mig därför en viktig läxa under mina första år som lärare: Undervisning bör främst vara en kollektiv process. Det innebär att jag som lärare måste ta ansvar för att alla elever lär sig det de ska, och att eleverna får dra nytta av de fördelar som finns i ett gemensamt lärande.
 
 När jag långsamt förändrade min undervisning under vårterminen såg jag med egna ögon hur elever med svårigheter gynnades av att lärandet blev mer av en gemensam process, och att de som var snabba att lära sig inte påverkades negativt. Under några år ändrade jag därför min undervisning till att bli mer av en gemensam resa. Lärandet blev något vi gjorde tillsammans i klassen, och vi stöttade varandra när det uppstod utmaningar.
-
-Ett överdrivet fokus på individuellt lärande ökar klyftan mellan de som har lätt att lära sig och de som har svårare.
 
 Denna insikt har lett till att jag nu ser undervisning och lärande som något som sker mellan oss där elever får undersöka, tänka, ställa frågor och lära sig tillsammans. Det är fördelaktigt med fler elever i klassrummet eftersom vi då har fler som kan bidra med frågor och förklaringar. Min roll som lärare är att hålla i den röda tråden och tillhandahålla relevant och meningsfullt innehåll som vi kan utforska tillsammans.
 

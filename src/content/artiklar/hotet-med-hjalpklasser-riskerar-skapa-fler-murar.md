@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/kronika2/fohlin-hotet-med-hjalpkla
 typ: "kronika"
 medforfattare: []
 taggar: ["sarskilt-stod", "tillganglig-undervisning", "skolpolitik"]
-citat: ["Ett stödsystem ska hjälpa eleverna, inte systematiskt förtrycka dem.", "Men barn är inte per definition ”stökiga” – de formas av de förutsättningar, relationer och bemötanden de får."]
+citat: ["Jag tänker på Ingvar, som tre decennier senare dagligen bär med sig sin tid i obs-klassen på sina axlar.", "Ett stödsystem ska hjälpa eleverna, inte systematiskt förtrycka dem."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

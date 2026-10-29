@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/skolpolitik/fohlin-vi-sky
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "skolpolitik"]
-citat: ["När vi romantiserar det förflutna glömmer vi att även grymheten var genomtänkt.", "När vi ropar efter mer lydnad och hårdare tag måste vi orka se att auktoritet utan relation mest är rädsla i en ny kostym."]
+citat: ["När vi romantiserar det förflutna glömmer vi att även grymheten var genomtänkt. Vi riskerar att skapa samma skamvrå, men med nya flashiga namn.", "När vi ropar efter mer lydnad och hårdare tag måste vi orka se att auktoritet utan relation mest är rädsla i en ny kostym."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

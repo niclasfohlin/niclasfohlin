@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/lasinlarning/sluta-lasa-f
 typ: "kronika"
 medforfattare: []
 taggar: ["lasframjande", "lasinlarning", "lasflyt"]
-citat: ["Lärarna beskrev läsning som att borsta tänderna.", "Träning med ljud får inte elever automatiskt att gå till ett bibliotek och hämta upp nästa bok i sin favoritserie."]
+citat: ["En lärare berättade att de inte riktigt hade tid att hålla på med högläsning eller egen läsning med tanke på läroplanen. Stoffträngsel var ordet som användes.", "Ska din skola göra en satsning på elevernas läsning? Se då till att den innefattar högläsning, boksamtal, biblioteksbesök, litteraturpedagogik och samarbete med hemmen."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -17,8 +17,6 @@ utkast: false
 ”Vad gör du för att träna elever på att läsa?” frågar en kollega mig på en utvecklingsträff. På ett APT utbrister en rektor: ”Se på PISA, vi måste träna mer på att läsa i skolan!” En kollega viskar lite trött till bordskamraten: ”Mina elever läser för lite utanför klassrummet … trots att vi tränar läsning varje dag.”
 
 Jag brinner verkligen för att elever ska bli goda läsare. Jag är speciallärare i läs-, språk- och skrivutveckling, fackboksförfattare och har drivit läsprojekt på flera skolor. Både som speciallärare och utvecklingsledare har jag arbetat i många år för att se till att varenda unge ska känna att läsning är något för dem. Trots det vill jag säga: Sluta träna på att läsa!
-
-En hel klass läste nonsensord som “siklomusoki, pokluksumski” och listor med ord som “skredet, skruva, spretade” medan ett tidur tickade ner på tavlan. Evidensbaserat, påstods det.
 
 Efter ett besök på en skola har jag nämligen blivit bekymrad. Där genomfördes en uttalad satsning på elevernas läsning. Vid en rundvandring såg jag inga böcker i klassrummen och inte heller några läshörnor för elever att krypa in i. Efter flertalet besök på lektioner kunde jag konstatera att elevernas läsning innebar att läsa instruktioner på tavlan, sökläsa fakta i kortare texter samt läsning i läromedel. Jag blev fundersam och bad att få prata med några av lärarna efter skoldagen. Är det något jag missat?
 

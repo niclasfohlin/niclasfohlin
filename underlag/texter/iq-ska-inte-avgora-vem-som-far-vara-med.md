@@ -49,8 +49,6 @@ Vår historia borde göra oss vaksamma. När intelligensmätningar tidigare anv�
 
 Har vi inte lärt oss hur lätt en "praktisk lösning” blir till det där klassrummet längst bort i korridoren, med en stämpel som följer barnet långt efter skoltiden. Är det en sådan skola och samhälle vi vill ge våra barn?
 
-Ord gör något med oss
-
 Lösningen är att göra skolan bättre på riktigt.
 
 Skolverket och SPSM behöver ta fram konkret stöd för hur undervisning och bedömning kan utformas för elever som behöver mer tid och tydligare vägar in i lärandet, utan att svaret blir nya parallellskolor.

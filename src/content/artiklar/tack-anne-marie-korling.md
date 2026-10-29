@@ -7,6 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-ta
 typ: "kronika"
 medforfattare: []
 taggar: ["lasframjande", "lasinlarning", "undervisningskvalitet"]
+citat: [{"text":"Barn som kommer från hem som läser lite måste få komma till skolor där man läser mycket. Anne-Marie Körling.","ur":"Barn som kommer från hem som läser lite måste få komma till skolor där man läser mycket."}, {"text":"En läroplan är ingenting utan en lärare! Anne-Marie Körling.","ur":"En läroplan är ingenting utan en lärare!"}, {"text":"Var generös med högläsning, läs högt ofta på alla möjliga platser. Det räcker med korta stycken. Man måste själv vara källan till läslusten, läser vi inte själva blir det vi säger om läsandet tomma ord. Anne-Marie Körling.","ur":"Var generös med högläsning, läs högt ofta på alla möjliga platser. Det räcker med korta stycken. Man måste själv vara källan till läslusten, läser vi inte själva blir det vi säger om läsandet tomma ord."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/pisa-stormen-ar-
 typ: "kronika"
 medforfattare: []
 taggar: ["pisa", "skolpolitik"]
-citat: ["Det brukar ta några månader innan något vettigt görs."]
+citat: [{"text":"Jag skulle vilja ha en bredare diskussion kring skolans uppdrag och roll i samhället. Är vi uteslutande en kunskapsförmedlare? Eller ska vi jobba med elevernas sociala och psykiska välbefinnande också?","ur":"Jag skulle vilja ha en bredare diskussion kring skolans uppdrag och roll i samhället. Är vi uteslutande en kunskapsförmedlare i dag? Eller ska vi jobba med elevernas sociala och psykiska välbefinnande också?"}, "Det brukar ta några månader innan något vettigt görs. Innan de politiska partierna har skramlat klart och alla börjar titta på varandra och fråga sig: Vad gör vi nu?"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -19,8 +19,6 @@ Som pedagogiknörd har jag alltid fascinerats av skolmodeller – hur de uppstå
 
 Kollegan beskrev hur hundratals elever hade lämnat en närliggande charterskola som just infört modellen. Eleverna som kom över till kollegans skola berättade om hur de brottats ner på golvet och låsts in på rum av vakter, att de som inte kom till skolan hämtades upp av ett bepansrat fordon, och att skoldagen förlängdes till 18:00 innan de fick gå hem. ”Det är ju uppenbart att skolan försöker göra sig av med vissa typer av elever", konstaterade kollegan, ”och nu när över hundra slutar kan de säga att modellen är framgångsrik.”
 
-Hur troligt är det att alla dessa aktörer – näringsliv, politiker, skolprofiler – bara råkar komma med exakt samma aparta budskap precis samtidigt?
-
 Det var en berättelse från vardagen, inte en forskningsrapport. Men den fastnade, för den pekade mot en risk jag ofta varit med om förut när enkla lösningar lanseras: Vad händer med dem som inte passar i mallen?
 
 I Sverige har No Excuses nu fått en allt starkare publik. Svenskt Näringsliv har publicerat en rapport av Gabriel Heller Sahlgren som argumenterar för No Excuses, inklusive löften om förbättrade resultat i utsatta områden. Från scener har vi hört både brittiska röster från skolor som MCS och svenska företrädare från Internationella Engelska Skolan vittna om höga förväntningar, tät uppföljning och ordning som en väg ut ur skolans alla problem. Samtidigt har Moderaterna via självaste statsminister Ulf Kristersson formulerat sin linje i en omtalad debattartikel – ”Inför No Excuses även i Sverige” – med tydlig preferens för strikt disciplin och nolltolerans. Och svenska skolledare som Linnea Lindqvist har efter studiebesök i England lyft delar av modellen som positiva.

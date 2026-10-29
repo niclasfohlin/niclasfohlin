@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/vi-har-alla-skul
 typ: "kronika"
 medforfattare: []
 taggar: ["pisa", "lasforstaelse", "specialpedagogik", "skolpolitik"]
-citat: ["Men när halva klassen kör fast slutar vi titta på eleverna.", "Åkesson har alltså fel.", "Är våra barn en spegel av oss vuxna?"]
+citat: [{"text":"Även Pisas definition av läsförståelse har förändrats. 2009 lades läsengagemanget till. 2018 skrevs textvärderingar in. Definitionen har flyttat sig flera gånger, därför att läsningen i samhället gjort det.","ur":"2009 lades läsengagemanget till. 2018 skrevs textvärderingar in. Definitionen har flyttat sig flera gånger, därför att läsningen i samhället gjort det."}, {"text":"Har läsningen förändrats hos oss alla kan skolan inte lösa det ensam. Då duger det inte att peka åt ena eller andra hållet för att vinna politiska poänger.","ur":"Har läsningen förändrats hos oss alla kan ju skolan inte lösa det ensam. Då duger det inte att peka åt ena eller andra hållet för att vinna politiska poänger."}, {"text":"Den specialpedagogiska blicken fungerar på en elev. Den fungerar på en klass. Den borde gå att använda på ett land.","ur":"Det är den specialpedagogiska blicken. Den fungerar på en elev. Den fungerar på en klass. Den borde gå att använda på ett land."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

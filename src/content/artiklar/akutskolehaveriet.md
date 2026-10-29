@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-re
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "skolpolitik", "sarskilt-stod", "evidens"]
-citat: ["Beteendeproblem som utvecklats under flera år löses inte genom ett fyraveckorsprogram på akutskolor.", "Våra barn och ungdomar förtjänar en skolpolitik som bygger på ackumulerad kunskap och god empiri – inte på mediedrev och kortsiktiga politiska vinster."]
+citat: ["Att etablera akutskolor kräver inte bara lokaler utan också högst kvalificerad personal som kan hantera elever med komplexa utmaningar. Var ska denna personal komma ifrån?", {"text":"Snarare än att skapa parallella system för ”stökiga elever” borde vi investera i att göra den ordinarie skolan mer kvalitativ och resurstät.","ur":"Men snarare än att skapa parallella system för ”stökiga elever” borde vi investera i att göra den ordinarie skolan mer kvalitativ och resurstät."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/niclas-fohlin-det
 typ: "debatt"
 medforfattare: []
 taggar: ["studiero", "demokratiuppdraget", "undervisningskvalitet"]
-citat: ["Vilka föräldrar skulle på riktigt vilja ha en skola där deras barn inte förväntas trivas, bara drillas?", "Historien visar att det går skrämmande fort att göra ett öppet samhälle auktoritärt."]
+citat: [{"text":"Lärande uppstår inte av straff utan när relationen bär undervisningen: tydliga mål, modellering, samarbete, träning med återkoppling samt höga förväntningar med stöd i ett tryggt klimat, där misstag ses som tillfällen att lära sig.","ur":"Men lärande uppstår inte av straff utan när relationen bär undervisningen: tydliga mål, modellering, samarbete, träning med återkoppling, höga förväntningar med stöd i ett tryggt klimat där misstag ses som tillfällen att lära sig."}, "När elever känner tillit till lärarens välvilja och kompetens ökar deras lust att anstränga sig, våga ställa frågor och göra misstag – alltså att lära sig på riktigt. Detta är ingen flummig idé utan vetenskapligt belagd kunskap."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

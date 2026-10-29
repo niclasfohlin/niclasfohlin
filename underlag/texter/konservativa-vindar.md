@@ -33,8 +33,6 @@ Ridå.
 
 Detta är ingen engångsföreteelse. Jag märker en allt tydligare tendens: folk vill sätta etiketter på oss lärare. Antingen är vi ”för eller emot” det som kallas ”hårdare tag”. Antingen vill vi ”skärpa till” eller ”lalla runt med relationer”. Nästan ingen frågar hur vi faktiskt hjälper våra elever att utvecklas till trygga och empatiska medmänniskor.
 
-Men är det elevhälsans fel att våldet ökar? Och är elevernas kunskaper verkligen i fritt fall? Inte enligt internationella studier som TIMSS, PISA och PIAAC.
-
 I skoldebatten låter det samtidigt som om vi befinner oss på avgrundens rand. Rubriker om ”våld och ordningsproblem”, eller rop efter ”1950-talets disciplin” och krav att vi ska ”sparka ut” dem som inte sköter sig. Det talas om en skola i fritt fall, med läs- och matematikkris, kaos i korridorerna och lärare som ”kastar in handduken”. Den här domedagsretoriken får stöd från flera ledar- och debattsidor, och argumenten verkar bottna i påståendet att skolan är i förfall. Lösningen sägs vara att montera ned allt mjukt stöd – relationer, elevhälsa, specialpedagoger – så vi får en ”riktig” skola värd namnet.
 
 Men är den här bilden verkligen sann? Är det elevhälsans fel att våldet ökar? Och hur är det egentligen med kunskaperna, är de verkligen i fritt fall?

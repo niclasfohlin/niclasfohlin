@@ -13,7 +13,7 @@ replik:
   url: "https://www.expressen.se/ledare/linnea-lindquist/lararens-knep-fick-eleven-att-skammas/"
 medforfattare: ["Jennie Wilson"]
 taggar: ["studiero", "undervisningskvalitet", "socialt-samspel"]
-citat: ["Vi lärare måste kunna titta våra elever i ögonen efteråt och inte skämmas för vad vi har gjort.", "Våra elever förtjänar att vara i en skola som präglas av lärande och utveckling, inte rädsla och skam."]
+citat: ["Vi lärare måste kunna titta våra elever i ögonen efteråt och inte skämmas för vad vi har gjort.", {"text":"Vi behöver tro gott om våra elever. Vi vuxna behöver även tänka på vilket samhälle vi vill ha och bygga det på medmänsklighet och ömsesidig respekt.","ur":"Vi behöver tro gott om våra elever. Vi vuxna behöver även tänka på vilket samhälle vi vill ha och bygga det på medmänsklighet och ömsesidig respekt – ett samhälle där människor vill varandra väl och agerar rätt av rätt skäl, inte för att undvika straff."}, "Våra elever förtjänar att vara i en skola som präglas av lärande och utveckling, inte rädsla och skam."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

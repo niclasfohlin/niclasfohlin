@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/niclas-f
 typ: "debatt"
 medforfattare: []
 taggar: ["tillganglig-undervisning", "undervisningskvalitet"]
-citat: ["Det handlar inte om att anpassa för dem som har svårigheter utan om att höja kvaliteten på undervisningen för alla.", "Jag tror att vi faktiskt kan lyckas med varenda unge."]
+citat: [{"text":"Tillgänglig lärmiljö handlar inte om att anpassa för dem som har svårigheter utan om att höja kvaliteten på undervisningen för alla.","ur":"Det handlar inte om att anpassa för dem som har svårigheter utan om att höja kvaliteten på undervisningen för alla."}, "Vår övertygelse att vi faktiskt kan påverka våra elever styr våra handlingar, och våra handlingar påverkar våra elevers lärande och kunskaper.", "Jag tror att vi faktiskt kan lyckas med varenda unge. En nyckel är att vi skiftar fokus mot vårt pedagogiska uppdrag och ser oss själva som förändringsagenter."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

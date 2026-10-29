@@ -13,7 +13,7 @@ replik:
   url: "https://www.vilarare.se/nyheter/kronika2/mannerheim-elevhalsa-ar-inte-skola--det-ar-vard-och-omsorg/"
 medforfattare: ["Charlotte Friberg", "Lotta Ljungberg", "Katarina Malmström", "Malena Wengberg", "Rebecca Jernström", "Jenny Nordfors", "Karin Benchimol", "Karl Annerberg"]
 taggar: ["elevhalsa", "skolpolitik"]
-citat: ["Men medan de vuxna diskuterar, växer elevernas behov.", "Elevhälsan ska därför inte vara en vårdcentral i miniatyr.", "Skolan bär ett stort ansvar – men inte hela ansvaret för barns mående."]
+citat: ["I stället för samverkan och samarbete ser vi ibland ett ”High Chaparral” där ansvar och roller blandas ihop och kritiken flyger åt olika håll. Men medan de vuxna diskuterar, växer elevernas behov.", {"text":"Elevhälsan ska inte vara en vårdcentral i miniatyr. Att behandla sjukdom och ohälsa är primärvårdens ansvar; skolans uppdrag är ett annat.","ur":"Elevhälsan ska därför inte vara en vårdcentral i miniatyr. Att behandla sjukdom och ohälsa är primärvårdens ansvar; skolans uppdrag är ett annat."}, "Skolan bär ett stort ansvar – men inte hela ansvaret för barns mående."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -51,8 +51,6 @@ Elevhälsan fungerar inte på distans. Den behöver vara tillgänglig, närvaran
 Lärare ska inte bara undervisa – de bär också skolans värdegrundsuppdrag. Det innebär att se hela eleven, inte bara kunskapsresultat. Det arbetet kräver tid, kompetens och stöd.
 
 Elevhälsans funktion är inte att avlasta läraren från detta, utan att vara en kvalificerad samarbetspartner. Ett nära och professionellt samspel mellan skolans professioner fördjupar relationerna, berikar lärandemiljön och stärker välbefinnandet hos både elever och personal.
-
-Hälsofrämjande, förebyggande, åtgärdande
 
 Självklart ska elever få hjälp när de slår sig. Men alla mindre olyckor kräver inte legitimerad sjukvårdspersonal. Att bygga ett system där varje skrubbsår ska hanteras som ett vårdärende är varken praktiskt eller effektivt – det skapar en orealistisk bild av skolans ansvar.
 

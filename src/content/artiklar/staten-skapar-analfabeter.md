@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/lasinlarning/niclas-fohli
 typ: "debatt"
 medforfattare: []
 taggar: ["lasinlarning", "specialpedagogik", "skolpolitik"]
-citat: ["Tror vi att barn födda i Luleå, Piteå eller Haparanda är immuna mot dyslexi?", "Vi kan inte acceptera att barns framtid avgörs av brist på resurser, personal eller okunskap."]
+citat: [{"text":"Ett självklart mål är att alla elever ska kunna läsa enklare ord och meningar redan till höstlovet i årskurs 1. För att uppnå detta krävs en medveten och genomtänkt pedagogik från första skoldagen.","ur":"Därför bör det vara ett självklart mål för alla skolor att alla elever ska kunna läsa enklare ord och meningar redan till höstlovet i årskurs 1. För att uppnå detta krävs en medveten och genomtänkt pedagogik från första skoldagen."}, {"text":"Det är en fullständigt orimlig ojämlikhet. Tror vi att barn födda i Luleå, Piteå eller Haparanda är immuna mot dyslexi?","ur":"Denna ojämlikhet är fullständigt orimlig. Tror vi att barn födda i Luleå, Piteå eller Haparanda är immuna mot dyslexi?"}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

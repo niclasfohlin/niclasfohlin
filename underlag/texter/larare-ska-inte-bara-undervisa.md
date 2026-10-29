@@ -47,8 +47,6 @@ Lärare ska inte bara undervisa – de bär också skolans värdegrundsuppdrag. 
 
 Elevhälsans funktion är inte att avlasta läraren från detta, utan att vara en kvalificerad samarbetspartner. Ett nära och professionellt samspel mellan skolans professioner fördjupar relationerna, berikar lärandemiljön och stärker välbefinnandet hos både elever och personal.
 
-Hälsofrämjande, förebyggande, åtgärdande
-
 Självklart ska elever få hjälp när de slår sig. Men alla mindre olyckor kräver inte legitimerad sjukvårdspersonal. Att bygga ett system där varje skrubbsår ska hanteras som ett vårdärende är varken praktiskt eller effektivt – det skapar en orealistisk bild av skolans ansvar.
 
 ## ”Inte en vårdcentral”

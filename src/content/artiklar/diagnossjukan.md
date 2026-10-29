@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/diagnossjukan-ar
 typ: "kronika"
 medforfattare: []
 taggar: ["tillganglig-undervisning", "sarskilt-stod", "elevhalsa"]
-citat: ["Det är vi i skolan som sytt skjortan för trång.", "Har vi börjat tro att något är mänskligt hanterat bara för att det är professionellt beskrivet?"]
+citat: [{"text":"Det är inte barnen det är fel på. Det är vi i skolan som sytt skjortan för trång.","ur":"Men det är ju inte barnen det är fel på. Det är vi i skolan som sytt skjortan för trång."}, "Har vi börjat förväxla utredningar med stöd? Har vi börjat tro att något är mänskligt hanterat bara för att det är professionellt beskrivet?", {"text":"För vissa familjer är diagnosen helt avgörande. Men det betyder inte att skolan ska hetsa på varje rörelse i riktning mot ännu fler utredningar, ännu tidigare kartläggning, ännu fler etiketter.","ur":"Men det betyder inte att skolan ska hetsa på varje rörelse i riktning mot ännu fler utredningar, ännu tidigare kartläggning, ännu fler etiketter."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

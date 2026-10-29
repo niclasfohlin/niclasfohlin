@@ -1,4 +1,4 @@
-// Lyftcitaten i texterna (K-617; underlag/prov/design/BESLUT.md under Lyftcitat): en mening ur texten lyft före stället
+// Lyftcitaten i texterna (K-617; reglerna i STIL.md under Lyftcitat): en mening ur texten lyft före stället
 // där den står, som en krok som får läsaren att läsa vidare (Niclas 2026-10-28: "ett citat i förväg som bygger upp
 // spänning i texten och bryter lite mot all text innan"). Citaten står i krönikans fil (fältet citat i
 // src/content.config.ts), och platsen sätts här, i bygget, ur textens färdiga html.
@@ -15,6 +15,10 @@
 // tidigt i texten och när det inte finns något bra ställe före meningen. Texten jämförs utan skillnad i mellanslag, hårda
 // mellanslag och osynliga tecken (mjukt bindestreck, ordfog, nollbrett mellanslag). En ellips först eller sist i citatet,
 // som i "… och nu ska rent tyckande bära en hel reform.", säger att meningen är avkortad där; resten står ordagrant.
+//
+// Tidningens utdragscitat (Niclas 2026-10-29: "tidningens utdragscitat ska ju vara stora citaten vi fixat") står som
+// tidningen tryckte dem, ofta kortade så att de bär på egen hand: { text, ur }, där text är tidningens version som visas och
+// ur är meningen i texten som citatet kommer ur. Det är ur som ska stå ordagrant och som bestämmer platsen.
 
 const OSYNLIGA = /[­​-‍⁠﻿]/g;
 const ELLIPS_FORE = /^(?:…|\.\.\.)\s*/;
@@ -36,6 +40,9 @@ const avkoda = (html: string) =>
 const skydda = (text: string) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 interface Stycke { slut: number; text: string; nasta: string }
+
+/** Ett lyftcitat: en mening ur texten, eller tidningens version med meningen den kommer ur. */
+export type Lyftcitat = string | { text: string; ur: string };
 
 // Textens stycken på översta nivån, med var stycket slutar i html:en och dess text. Taggarna räknas för att veta vad som
 // ligger på översta nivån; ett p kan inte innehålla ett annat block, så stycket slutar vid sitt </p>.
@@ -63,7 +70,7 @@ function stycken(html: string): Stycke[] {
 }
 
 /** Krönikans html med lyftcitaten insatta efter sina stycken. Utan citat kommer html:en tillbaka som den är. */
-export function sattInLyftcitat(html: string, citat: readonly string[] | undefined, id: string): string {
+export function sattInLyftcitat(html: string, citat: readonly Lyftcitat[] | undefined, id: string): string {
   if (!citat?.length) return html;
   const delar = stycken(html);
   const n = delar.length;
@@ -81,15 +88,18 @@ export function sattInLyftcitat(html: string, citat: readonly string[] | undefin
     const fore = delar[g - 1], efter = delar[g];
     return !!fore && !!efter && fore.nasta === 'p' && !/:$/.test(fore.text) && !replik(fore) && !replik(efter) && !(kort(fore) && kort(efter));
   };
-  citat.forEach((c, k) => {
-    const sokt = jamforbar(c).replace(ELLIPS_FORE, '').replace(ELLIPS_EFTER, '');
+  citat.forEach((lc, k) => {
+    // c är texten som visas, ur meningen i texten som den kommer ur.
+    const c = typeof lc === 'string' ? lc : lc.text;
+    const ur = typeof lc === 'string' ? lc : lc.ur;
+    const sokt = jamforbar(ur).replace(ELLIPS_FORE, '').replace(ELLIPS_EFTER, '');
     const kalla = delar.findIndex((s) => s.text.includes(sokt)) + 1;
     if (!sokt || kalla === 0) {
-      fel.push(`"${c}" står inte ordagrant i något stycke i texten. Ett citat är en mening ur texten, ordagrant; en ellips först eller sist får visa att meningen är avkortad.`);
+      fel.push(`"${ur}" står inte ordagrant i något stycke i texten. Ett citat är en mening ur texten, ordagrant; en ellips först eller sist får visa att meningen är avkortad.`);
       return;
     }
     if (kalla <= 3) {
-      fel.push(`"${c}" står i textens ${ORDNING[kalla - 1]} stycke. Citatet står efter andra stycket och minst ett stycke före meningen, så meningen behöver stå i fjärde stycket eller senare; välj en annan mening.`);
+      fel.push(`"${ur}" står i textens ${ORDNING[kalla - 1]} stycke. Citatet står efter andra stycket och minst ett stycke före meningen, så meningen behöver stå i fjärde stycket eller senare; välj en annan mening.`);
       return;
     }
     // Det bra stället närmast den jämna platsen, före meningen och minst två stycken från ett annat citat; finns inget
@@ -110,7 +120,10 @@ export function sattInLyftcitat(html: string, citat: readonly string[] | undefin
     const slut = delar[efter - 1].slut;
     // En ellips först hålls ihop med ordet efter, så att den aldrig står ensam på citatets första rad.
     const text = skydda(c.trim()).replace(/^(…|\.\.\.) /, '$1 ');
-    ut = `${ut.slice(0, slut)}\n<aside class="lyftcitat" aria-hidden="true"><p>${text}</p></aside>${ut.slice(slut)}`;
+    // Ett citat på två eller tre meningar står i en lite mindre grad (lyftcitat-lang i global.css), så att det inte tar hela
+    // skärmen i telefonen.
+    const lang = c.trim().length > 140 ? ' lyftcitat-lang' : '';
+    ut = `${ut.slice(0, slut)}\n<aside class="lyftcitat${lang}" aria-hidden="true"><p>${text}</p></aside>${ut.slice(slut)}`;
   }
   return ut;
 }

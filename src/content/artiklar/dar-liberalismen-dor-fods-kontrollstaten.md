@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/fohlin-d
 typ: "debatt"
 medforfattare: []
 taggar: ["studiero", "skolpolitik"]
-citat: ["Det verkar som att frihet bara gäller oss vuxna.", "Man kan inte straffa fram tillit.", "För mig är undervisning kärlek i handling."]
+citat: ["När barnen kliver in i klassrummet förvandlas liberalismen till konformism. Mer kontroll, fler regler, hårdare tag, mindre frihet. En skola där barn ska tuktas, inte förstås.", "Man kan inte straffa fram tillit.", {"text":"Vi står vid ett vägskäl. Antingen väljer vi att se barn som medmänniskor eller så väljer vi en skola där lydnad värderas högre än lärandet. Som lärare har jag redan valt. Frågan är: vad väljer våra politiker?","ur":"Antingen väljer vi att se barn som medmänniskor värda respekt, tillit och ansvar. Eller så väljer vi en skola där lydnad värderas högre än lärandet. Som lärare har jag redan valt. Frågan är: vad väljer våra politiker?"}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

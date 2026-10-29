@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/stora-lo
 typ: "debatt"
 medforfattare: []
 taggar: ["lararutbildning", "specialpedagogik", "skolpolitik"]
-citat: ["Men nu riskerar vi att slå ihop två uppdrag och behålla det sämsta ur båda.", "Två skarpa verktyg i stället för en universalkniv."]
+citat: [{"text":"Nu riskerar vi att slå ihop två uppdrag och behålla det sämsta ur båda.","ur":"Men nu riskerar vi att slå ihop två uppdrag och behålla det sämsta ur båda."}, {"text":"Förskollärare blir med den nya examen behörig att undervisa i särskilt stöd ända upp i årskurs fyra utan ämnesstudier i svenska eller matematik.","ur":"Den som har förskollärarlegitimation och läser den nya examens första specialisering blir behörig att undervisa i särskilt stöd ända upp i årskurs fyra i den nya tioåriga grundskolan."}, {"text":"Två skarpa verktyg i stället för en universalkniv. 90 högskolepoäng som ska räcka till allt blir till slut varken hackat eller malet.","ur":"Två skarpa verktyg i stället för en universalkniv. 90 högskolepoäng som ska räcka till allting blir till slut varken hackat eller malet."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

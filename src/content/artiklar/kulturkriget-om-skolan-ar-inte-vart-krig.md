@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/kulturkriget-om-
 typ: "kronika"
 medforfattare: []
 taggar: ["lasinlarning", "evidens", "skolpolitik", "avkodning", "lararutbildning"]
-citat: ["När politiken ska avgöra vad som är god forskning förlorar vi ett av forskningens viktigaste uppdrag, att bygga en gemensam och bred kunskapsbas."]
+citat: [{"text":"Engelsktalande lärare har alltid behövt kombinera ljudning med sightwords och bygga på med stavningsregler. Därför är striden om the three-cueing system het i USA. Men här?","ur":"Engelsktalande lärare har alltid behövt kombinera ljudning med så kallade sightwords och sedan bygga på med stavningsregler. Därför är striden om the three-cueing system het i USA. Men här?"}, "Notera vad som händer. Först importeras den amerikanska evidensdebatten. Sedan används den amerikanska ideologiska dikotomin som ett varningsexempel.", {"text":"Ännu en importerad strid: uppdelningen av forskning i god och dålig utifrån om den är kvantitativ eller kvalitativ. Den uppdelningen är falsk.","ur":"Bakom förslaget anas ännu en importerad strid. En uppdelning av forskning i god och dålig utifrån om den är kvantitativ eller kvalitativ. Den uppdelningen är falsk."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

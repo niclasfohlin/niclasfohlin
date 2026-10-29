@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-na
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "pisa", "elevhalsa", "skolpolitik"]
-citat: ["Är det elevhälsans fel att våldet ökar?", "Vem tjänar på att ropa varg hela tiden?", "Alldeles för ofta hör jag hur känsloargument används som slagträ för reformförslag."]
+citat: [{"text":"Men är det elevhälsans fel att våldet ökar? Och är elevernas kunskaper verkligen i fritt fall? Inte enligt internationella studier som TIMSS, PISA och PIAAC.","ur":"Är det elevhälsans fel att våldet ökar? Och hur är det egentligen med kunskaperna, är de verkligen i fritt fall?"}, "Att ”slänga ut eleverna ur klassrummet” eller ”skrota elevhälsan” låter kanske beslutsamt, men är det verkligen rätt väg att gå för elevernas bästa? Är det så vi skapar en skola i världsklass?", "Vem tjänar på att ropa varg hela tiden? Jo, de som vill driva igenom stora systemförändringar på kort tid, innan man hinner analysera följderna för elever, lärare och samhället i stort."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -31,8 +31,6 @@ Luften går ur mig. Jag har knappt hunnit ta en klunk av mitt kaffe, men ställe
 Ridå.
 
 Detta är ingen engångsföreteelse. Jag märker en allt tydligare tendens: folk vill sätta etiketter på oss lärare. Antingen är vi ”för eller emot” det som kallas ”hårdare tag”. Antingen vill vi ”skärpa till” eller ”lalla runt med relationer”. Nästan ingen frågar hur vi faktiskt hjälper våra elever att utvecklas till trygga och empatiska medmänniskor.
-
-Men är det elevhälsans fel att våldet ökar? Och är elevernas kunskaper verkligen i fritt fall? Inte enligt internationella studier som TIMSS, PISA och PIAAC.
 
 I skoldebatten låter det samtidigt som om vi befinner oss på avgrundens rand. Rubriker om ”våld och ordningsproblem”, eller rop efter ”1950-talets disciplin” och krav att vi ska ”sparka ut” dem som inte sköter sig. Det talas om en skola i fritt fall, med läs- och matematikkris, kaos i korridorerna och lärare som ”kastar in handduken”. Den här domedagsretoriken får stöd från flera ledar- och debattsidor, och argumenten verkar bottna i påståendet att skolan är i förfall. Lösningen sägs vara att montera ned allt mjukt stöd – relationer, elevhälsa, specialpedagoger – så vi får en ”riktig” skola värd namnet.
 

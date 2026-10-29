@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/ogranskade-chatg
 typ: "kronika"
 medforfattare: []
 taggar: ["lararutbildning", "specialpedagogik", "evidens", "skolpolitik"]
-citat: ["… och nu ska rent tyckande bära en hel reform.", "Lycka till med att öppna dem hemma vid köksbordet.", "Vi har fullt upp i skolan utan att också behöva göra statens källkritiska hemläxa."]
+citat: [{"text":"Det blir inte nationell statistik bara för att det hamnar i en SOU – ändå är det på den punkten en av de fyra nya specialiseringarna vilar.","ur":"Men de blir inte nationell statistik bara för att de hamnar i en SOU, och ändå är det på den punkten en av de fyra nya specialiseringarna vilar."}, {"text":"Huvudbetänkandet innehåller fullständiga Google-annons/spårningslänkar. Man har suttit och googlat, och klistrat in webbadresser från den väg man råkat hitta källan.","ur":"Huvudbetänkandet innehåller också fullständiga Google-annons/spårningslänkar, med utm_source=google, gclid, kampanj-ID:n med mera. De ligger kvar både i noter och referenslista. Källförteckningen verkar med andra ord generellt ha byggts genom att man suttit och googlat, och klistrat in webbadresser från den väg man råkade hitta källan."}, "Både utredningen och regeringens direktiv bygger på en premiss som tas för given i stället för att prövas, och nu ska rent tyckande bära en hel reform."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -23,8 +23,6 @@ I helgen tänkte jag ta mig tid att läsa på, öppnade En ny speciallärarutbil
 I augusti skrev jag här om luckorna i förslaget. Visst behöver fler elever få kvalificerad undervisning, och visst behöver den specialpedagogiska kompetensen användas bättre än i dag. På bloggen Specialpedagogen lyfter Helena Wallberg dessutom en rimlig invändning mot snacket om att specialpedagogen skrotas: handledning och förebyggande arbete finns kvar i förslaget, och redan utbildade specialpedagoger kan fortsatt anställas (s. 33, 267). Men ett underlag som håller är väl ändå det minsta vi kan begära?
 
 I referensförteckningens litteraturavsnitt räknar jag till 29 studentarbeten av 55 poster (s. 287–295). Mer än hälften av litteraturavsnittet består alltså av studentuppsatser, hämtade ur DiVA, skrivna av studenter på just de program som nu ska läggas ned. Utredningen berättar öppet att den läst examensarbeten för att förstå yrkesrollerna, men redovisar varken hur arbetena valts ut eller hur deras kvalitet bedömts (s. 54–55).
-
-Huvudbetänkandet innehåller fullständiga Google-annons/spårningslänkar. Man har suttit och googlat, och klistrat in webbadresser från den väg man råkat hitta källan.
 
 Studentuppsatser kan vara värdefulla. Yrkesverksamma studenter kommer nära frågor som forskare behöver förstå, och deras intervjustudier ger oss erfarenheter som annars inte syns. Men ett godkänt examensarbete är inget frikort att dra slutsatser om hela landets utbildningar, och examinationen ersätter inte oberoende sakkunniggranskning. Urval, metod och räckvidd måste prövas och resultaten vägas mot annan forskning, och det ansvaret ligger hos Eva Durhan och utredningen. Studenterna ska inte behöva bära en reform som deras uppsatser aldrig var skrivna för att pröva.
 

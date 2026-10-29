@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/skolpolitik/befria-skolan
 typ: "kronika"
 medforfattare: []
 taggar: ["skolutveckling", "skolpolitik"]
-citat: ["Något jag upplevt är att system för kontroll ofta blir kontraproduktiva och skapar en falsk känsla av kvalitet.", "En skola utan tillit kommer aldrig att fungera."]
+citat: [{"text":"Man fokuserar i dag mer på att peka ut rätt och fel än att skapa en ansvarskultur där alla gemensamt bidrar till en positiv lärandemiljö.","ur":"Denna incident belyser en alltför vanlig inställning inom skolväsendet, där man fokuserar mer på att peka ut rätt och fel än att skapa en ansvarskultur där alla – lärare, övrig personal och elever – gemensamt bidrar till en positiv lärandemiljö."}, "När en sådan spiral av brist på tillit uppstår sker en avprofessionalisering av lärarkåren, vilket påverkar hela samhällets syn på skolan."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

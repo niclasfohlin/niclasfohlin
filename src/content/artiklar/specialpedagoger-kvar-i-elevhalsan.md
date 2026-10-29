@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/elevhalsa/fohlin-specialp
 typ: "debatt"
 medforfattare: []
 taggar: ["elevhalsa", "specialpedagogik", "skolpolitik", "sarskilt-stod"]
-citat: ["Problemet har varit underdimensionering och för få speciallärare.", "Ju mer jag läser, desto mer liknar utredningen ett försök att pressa in politiska direktiv, kommunala budgetar och professionernas rop på hjälp i ett och samma dokument."]
+citat: [{"text":"Beslut om särskild undervisningsgrupp, elevassistenter och anpassad studiegång landar på rektorns ensamma bord utan ett förankrat tvärprofessionellt EHT bakom beslutet. Vad är intentionen där?","ur":"När den specialpedagogiska insatsen i elevhälsan snävas in mot system- och länkarbete, medan undervisning, särskilt stöd och stödundervisning tydligt placeras utanför elevhälsan, riskeras att beslut om särskild undervisningsgrupp, elevassistenter och anpassad studiegång landa på rektorns ensamma bord utan ett förankrat tvärprofessionellt EHT bakom beslutet. Vad är intentionen där?"}, "Ju mer jag läser, desto mer liknar utredningen ett försök att pressa in politiska direktiv, kommunala budgetar och professionernas rop på hjälp i ett och samma dokument."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

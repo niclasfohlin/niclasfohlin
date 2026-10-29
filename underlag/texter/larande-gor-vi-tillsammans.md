@@ -23,8 +23,6 @@ Jag tror inte att det finns ett enda perfekt sätt, eller för den delen att vis
 
 När jag långsamt förändrade min undervisning under vårterminen såg jag med egna ögon hur elever med svårigheter gynnades av att lärandet blev mer av en gemensam process, och att de som var snabba att lära sig inte påverkades negativt. Under några år ändrade jag därför min undervisning till att bli mer av en gemensam resa. Lärandet blev något vi gjorde tillsammans i klassen, och vi stöttade varandra när det uppstod utmaningar.
 
-Ett överdrivet fokus på individuellt lärande ökar klyftan mellan de som har lätt att lära sig och de som har svårare.
-
 Denna insikt har lett till att jag nu ser undervisning och lärande som något som sker mellan oss där elever får undersöka, tänka, ställa frågor och lära sig tillsammans. Det är fördelaktigt med fler elever i klassrummet eftersom vi då har fler som kan bidra med frågor och förklaringar. Min roll som lärare är att hålla i den röda tråden och tillhandahålla relevant och meningsfullt innehåll som vi kan utforska tillsammans.
 
 Trots mina insikter om vikten av en sammanhållen och gemensamt lärande märker jag att vi skapar mer och mer incitament inom skolan för att bedöma, anpassa och lyfta fram individen i undervisningen. Vi har betyg, åtgärdsprogram, anpassningar, klasskonferenser och nationella prov. Visst är det viktigt att kunna se individen i den kollektiva processen. Men om vi med alla dessa verktyg endast fokuserar på individens prestation ser vi bara trädet och inte skogen.

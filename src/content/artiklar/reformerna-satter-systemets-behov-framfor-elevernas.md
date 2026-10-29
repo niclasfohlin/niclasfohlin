@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/reformerna-satte
 typ: "kronika"
 medforfattare: []
 taggar: ["skolpolitik", "betyg", "elevhalsa", "specialpedagogik"]
-citat: ["En uttråkad elev som känner sig som en kugge i ett maskineri lär sig sällan något bestående, oavsett hur ”kunskapstung” läroplanen är.", "Samtidigt måste vi akta oss för att “flexibla grupper” inte blir en omskrivning för att stuva undan “besvärliga” elever."]
+citat: ["En toppstyrd läroplan full av fina formuleringar hjälper föga om den inte tar hänsyn till elevens verklighet i klassrummet.", {"text":"Mående och lärande hänger ihop. Att koppla bort de professioner som kan länka samman elevernas hälsa och lärande vore att försvaga elevhälsan i skolan.","ur":"Elevernas mående och lärande hänger ihop – att koppla bort de professioner som kan länka samman elevernas hälsa och lärande vore att försvaga elevhälsan i skolan."}, "Elevens utveckling, hälsa och lärande ska vara utgångspunkt för alla reformer – allt annat är sekundärt."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

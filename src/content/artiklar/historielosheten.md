@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/historielosheten
 typ: "kronika"
 medforfattare: []
 taggar: ["studiero", "demokratiuppdraget"]
-citat: ["Rädsla formar inte karaktär.", "Barn lär sig att ljuga för att undgå straff.", "Vi kan inte skapa en skola som skadar barn och sedan kalla det ordning."]
+citat: ["Rädsla formar inte karaktär. Den formar strategier för att undvika obehag.", {"text":"I en sträng skola lär sig barn att ljuga för att undgå straff. De lär sig att dölja, spela teater och försöka läsa av vuxnas humör i stället för att utveckla eget omdöme. De lär sig att bli ögontjänare.","ur":"Barn lär sig att ljuga för att undgå straff. De lär sig att dölja, spela teater och försöka läsa av vuxnas humör i stället för att utveckla eget omdöme. De lär sig att bli ögontjänare."}, {"text":"Forskning bekräftar att det som visar sig verksamt för studiero inte är hårdhet och fokus på regelefterlevnad utan tydliga förväntningar, positiva relationer, elevdelaktighet och uppföljning.","ur":"Modern forskning bekräftar det. Det som visar sig verksamt för studiero är inte hårdhet och fokus på regelefterlevnad utan tydliga förväntningar, positiva relationer, elevdelaktighet och regelbunden uppföljning."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

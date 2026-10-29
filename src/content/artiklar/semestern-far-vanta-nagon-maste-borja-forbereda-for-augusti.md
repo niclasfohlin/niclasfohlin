@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/semestern-far-va
 typ: "kronika"
 medforfattare: []
 taggar: ["skolpolitik", "sarskilt-stod", "betyg"]
-citat: ["Att de extra anpassningarna äntligen får lämna rollen som skolans administrativa slasktratt är på tiden.", "Vi har inte dummare barn.", "I slutändan handlar allt om ören."]
+citat: ["Att de extra anpassningarna äntligen får lämna rollen som skolans administrativa slasktratt är på tiden.", "Norge har inte ens något underkänt betygssteg, och deras skola fungerar ändå. Vi har inte dummare barn. Vi har ställt fel krav.", {"text":"Varken rektorer eller vi med specialpedagogisk kompetens kommer att gå sysslolösa. Vi har två år på oss att bygga allt det som ska bära reformerna.","ur":"Vi har alltså två år på oss att bygga allt det som ska bära reformerna."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

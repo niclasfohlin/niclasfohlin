@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/arbetsmiljo/fohlin-rappor
 typ: "kronika"
 medforfattare: []
 taggar: ["specialpedagogik", "sarskilt-stod"]
-citat: ["När jag ringde upp henne förra veckan ville hon bara prata om en sak: eleverna hon nu sviker när hon inte orkar resa sig ur sängen.", "För om vi inte agerar nu, vem ska då finnas där för våra elever i morgon?"]
+citat: ["Jag tänker på en kollega, en erfaren speciallärare, som stod inför en omöjlig situation. Bland 160 lågstadieelever identifierade hon runt 50 som behövde extra stöd i sin läsning. Med terminens återstående tid kunde hon maximalt hjälpa tolv.", "När vi står inför en verklighet där vi inte kan ge eleverna det stöd de behöver måste systemet förändras, inte vi som individer."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

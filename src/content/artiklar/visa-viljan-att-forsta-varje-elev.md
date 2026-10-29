@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/niclas-f
 typ: "kronika"
 medforfattare: []
 taggar: ["specialpedagogik", "elevhalsa"]
-citat: ["Det är lätt att glömma bort all fokus på kunskapskrav: skolan är en social arena där eleverna formar sin identitet."]
+citat: [{"text":"När jag investerar tid i elevgruppen och i klassrummen underlättar det kommunikationen med lärarna, ökar förtroendet för mig som speciallärare och gör det lättare att sätta in rätt stöd.","ur":"Jag har märkt att när jag investerar tid i elevgruppen och i klassrummen underlättar det kommunikationen med lärarna, ökar förtroendet för mig som speciallärare och gör det lättare att sätta in rätt stöd."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

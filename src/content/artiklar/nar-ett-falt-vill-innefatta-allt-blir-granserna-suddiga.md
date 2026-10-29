@@ -14,7 +14,7 @@ replik:
   svarade: "kognitionsvetenskap-kan-aldrig-bli-mer-an-ett-komplement"
 medforfattare: []
 taggar: ["evidens", "lararutbildning"]
-citat: ["I ert svar approprierar ni allt som är bra och beprövat i skolan och kallar det kognitionsvetenskap – som om läraryrket och pedagogiken inte redan inrymmer dessa insikter."]
+citat: [{"text":"Utan pedagogisk kompass riskerar kognitionsvetenskapens insikter att bli potentiellt intressanta verktyg i avsaknad av en plan för vad som ska byggas.","ur":"Utan denna pedagogiska kompass riskerar kognitionsvetenskapens insikter att bli potentiellt intressanta verktyg i avsaknad av en plan för vad som ska byggas."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

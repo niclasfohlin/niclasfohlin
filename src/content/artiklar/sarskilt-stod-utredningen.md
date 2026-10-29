@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/sarskilt-stod/fohlin-om-s
 typ: "kronika"
 medforfattare: []
 taggar: ["sarskilt-stod", "rti", "skolpolitik"]
-citat: ["Att slopa extra anpassningar betyder ju inte att elevernas behov försvinner.", "Alla svårigheter syns inte i årskurs 1, hur många tester man än inför."]
+citat: [{"text":"Lärarnas arbetsbörda kommer inte att minska. Om elevhälsan i nuvarande form med specialpedagogisk kompetens försvinner kommer lärarna att sakna den.","ur":"Om elevhälsan i nuvarande form med specialpedagogisk kompetens försvinner kommer lärarna att sakna den."}, {"text":"Stödundervisningen riskerar att bli ännu en pappersprodukt – bra i teorin men ogenomförbar i praktiken.","ur":"Utan resurser riskerar stödundervisningen att bli ännu en pappersprodukt – bra i teorin men ogenomförbar i praktiken."}, {"text":"Det som utelämnas är att lågstadielärare ofta lyckas väldigt bra med att ge eleverna en stabil grund. Barn utvecklas olika, och vissa problem blir tydliga först när krav, ämnen och miljö ändras senare under skoltiden.","ur":"Barn utvecklas olika, och vissa problem blir tydliga först när krav, ämnen och miljö ändras senare under skoltiden."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

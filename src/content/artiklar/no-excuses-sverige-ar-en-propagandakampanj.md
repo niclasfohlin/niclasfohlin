@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/ny-kategori/no-excuses-sv
 typ: "debatt"
 medforfattare: []
 taggar: ["studiero", "skolpolitik"]
-citat: ["Vill vi i Sverige att framtidens barn ska formas efter vad Elon Musk anser är bäst för sina egna fabriker?", "Men i den svenska debatten säljs ibland disciplin som om den vore liktydig med bildning.", "När man designar en modell som främst fungerar genom att vissa lämnar, då är framgången en illusion."]
+citat: [{"text":"Hur troligt är det att alla dessa aktörer – näringsliv, politiker, skolprofiler – bara råkar komma med exakt samma aparta budskap precis samtidigt?","ur":"Hur troligt är det att alla dessa aktörer bara råkar komma med exakt samma budskap på samma gång?"}, {"text":"Skolan handlar ytterst om kultur. Det tar tid att bygga en stark skolkultur och den spricker lätt när man försöker importera den utifrån.","ur":"Av egen erfarenhet vet jag att skolan ytterst handlar om kultur. Det tar tid att bygga en stark skolkultur och den spricker lätt när man försöker importera den utifrån."}, {"text":"När man designar en modell som främst fungerar genom att vissa lämnar, då är framgången en illusion.","ur":"Tillbaka till min kollegas ord 2012 – en personlig anekdot från en trött kollega, en sen fredagskväll på andra sidan Atlanten, men kärnan i analysen känns otäckt tidsenlig: ”När man designar en modell som främst fungerar genom att vissa lämnar, då är framgången en illusion.”"}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -17,8 +17,6 @@ utkast: false
 Som pedagogiknörd har jag alltid fascinerats av skolmodeller – hur de uppstår, vad de lovar och vad som faktiskt händer i klassrummet när teorin möter verkligheten. Så när jag via en lärarkollega i USA runt 2012 för första gången hörde talas om ”No Excuses” spetsade jag öronen.
 
 Kollegan beskrev hur hundratals elever hade lämnat en närliggande charterskola som just infört modellen. Eleverna som kom över till kollegans skola berättade om hur de brottats ner på golvet och låsts in på rum av vakter, att de som inte kom till skolan hämtades upp av ett bepansrat fordon, och att skoldagen förlängdes till 18:00 innan de fick gå hem. ”Det är ju uppenbart att skolan försöker göra sig av med vissa typer av elever", konstaterade kollegan, ”och nu när över hundra slutar kan de säga att modellen är framgångsrik.”
-
-Hur troligt är det att alla dessa aktörer – näringsliv, politiker, skolprofiler – bara råkar komma med exakt samma aparta budskap precis samtidigt?
 
 Det var en berättelse från vardagen, inte en forskningsrapport. Men den fastnade, för den pekade mot en risk jag ofta varit med om förut när enkla lösningar lanseras: Vad händer med dem som inte passar i mallen?
 

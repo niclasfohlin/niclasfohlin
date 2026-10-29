@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/regeringens-stod
 typ: "kronika"
 medforfattare: []
 taggar: ["sarskilt-stod", "rti", "studiero", "skolpolitik"]
-citat: ["Men vi kan inte straffa in undervisningen i våra elever.", "Jag är rädd att skolan håller på att bli en allt kallare institution.", "Värme och tydlighet är inte motsatser."]
+citat: ["Skolan måste kunna agera när någon hotar, kränker eller använder våld. Det är självklart. Men vi kan inte straffa in undervisningen i våra elever.", "Om vi menar allvar med stödundervisning och systematisk uppföljning, då borde samma tänk gälla beteende och studiero.", "Eleven ska ju tillbaka in i undervisningen! Varje gång vi skickar bort eleven gör vi ju vägen tillbaka allt längre."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

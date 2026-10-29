@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-iq-ska-int
 typ: "debatt"
 medforfattare: []
 taggar: ["tillganglig-undervisning", "sarskilt-stod"]
-citat: ["Barns potential är heller inte en siffra som väntar på att bli upptäckt.", "Vad hade du själv sagt om din chef ville flytta dig till avdelningen för de mindre begåvade?"]
+citat: [{"text":"Barns potential är inte en siffra som väntar på att bli upptäckt. Barn formas i relation till sin omgivning: språket de får, undervisningen de möter, stressen de lever med och tryggheten de har.","ur":"Barns potential är heller inte en siffra som väntar på att bli upptäckt. Barn formas i relation till sin omgivning: språket de får, undervisningen de möter, stressen de lever med och tryggheten de har."}, "Vad hade du själv sagt om din chef ville flytta dig till avdelningen för de mindre begåvade?"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
@@ -47,8 +47,6 @@ Därför behöver vi hålla fast vid en enkel princip: tester kan hjälpa oss at
 Vår historia borde göra oss vaksamma. När intelligensmätningar tidigare användes för att sortera elever till specialklasser blev följden ofta stigmatisering, sänkta förväntningar och skillnader som bet sig fast.
 
 Har vi inte lärt oss hur lätt en "praktisk lösning” blir till det där klassrummet längst bort i korridoren, med en stämpel som följer barnet långt efter skoltiden. Är det en sådan skola och samhälle vi vill ge våra barn?
-
-Ord gör något med oss
 
 Lösningen är att göra skolan bättre på riktigt.
 

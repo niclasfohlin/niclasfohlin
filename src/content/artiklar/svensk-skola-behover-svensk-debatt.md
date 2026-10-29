@@ -14,7 +14,7 @@ replik:
   svarade: "kulturkriget-om-skolan-ar-inte-vart-krig"
 medforfattare: []
 taggar: ["lasinlarning", "evidens", "skolpolitik"]
-citat: ["Just därför kan det amerikanska läskriget inte översättas till svensk skola."]
+citat: [{"text":"Det är där arbetet ligger. I klassrummen, tillsammans med lärarna, för eleverna vi möter varje dag. Inte i skyttegravar som andra har grävt åt oss.","ur":"Det är där arbetet ligger. I klassrummen, tillsammans med lärarna, för eleverna vi möter varje dag."}]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

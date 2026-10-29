@@ -59,6 +59,19 @@ Under sifferkorten står till exempel: ”Ett A4 per elev, att klippa isär. Ele
 
 Bildtexten börjar inte med ”Bilden visar” och upprepar inte bildens rubrik. Citat ur bladet står inom citattecken. En bild utan egen bildtext, som en bild i en faktatext eller ett lösningsförslag, har bara textalternativet, eftersom texten runt bilden är dess bildtext. Vilket fält som är vilket står i METODER.md under Bladet. Bygget stannar på en bildtext som har fler än tre meningar eller fler än 250 tecken eller börjar med ”Bilden”, och på ett blad utan textalternativ, och metodriggen prövar samma sak före leveransen (`bildtextFel` i `src/lib/standard/`). Det bildtexten säger prövas i granskningen.
 
+## Lyftcitat
+
+En krönika eller debattartikel med hela texten har lyftcitat: meningar ur texten som står stora före stället där de står, som en krok som får läsaren att läsa vidare (Niclas 2026-10-28: "ett citat i förväg som bygger upp spänning i texten och bryter lite mot all text innan. Som en hook").
+
+| Delen | Vad den säger | Längd |
+|---|---|---|
+| Urvalet | Tidningens utdragscitat först, ur originalets citatrutor, och sedan egna när texten har fler bra (Niclas 2026-10-29: "tidningens utdragscitat ska ju vara stora citaten vi fixat", och "Sedan kan vi lägga egna också utöver dem om det finns bra sådana i texten"). Varje citat bär en hel tanke för den som inte har läst texten och väcker den fråga som texten svarar på (Niclas samma dag: "De måste bära en ide") | En till tre i en text, tre bara i en lång text |
+| Formen | Redaktörens grepp (Niclas samma dag: "Jag ser att redaktörens utdragscitat skär bort inledande konnektiv, garderingar och inskott för att få fristående meningar"): ett inledande Men, Och eller Så, en gardering som Jag tror att eller ju och ett inskott stryks, så att meningen står på egen hand. Inget annat i meningen skrivs om. Tidningens utdragscitat står som tidningen tryckte det | En, två eller högst tre meningar i följd ur samma stycke, helst under 220 tecken |
+
+"Men det är ju inte barnen det är fel på." blir som hos tidningen "Det är inte barnen det är fel på."
+
+Ett citat som skiljer sig från texten står i fältet citat som `{ text, ur }`: text är citatet som det visas, ur meningen i texten som det kommer ur, ordagrant (`src/content.config.ts`). Bygget sätter citatet minst ett stycke före meningen, så meningen behöver stå i textens fjärde stycke eller senare. Bygget stannar på ett citat vars mening inte står ordagrant i texten och på ett citat utan bra ställe före meningen (`src/lib/lyftcitat.ts`).
+
 ## Stöd för ett val
 
 Där läraren väljer i planen, som gruppens nivå eller passets längd, står ett stöd för valet under en nerpil som går att öppna, med en länk till mer i metoden (Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul", och "Enkelhet och att man förstår utan långa utlägg och länk för mer info"). Saknar metoden en ordentlig förklaring av valet skrivs den först i metoden, så att stödet citerar metoden.

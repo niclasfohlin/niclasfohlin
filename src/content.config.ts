@@ -82,10 +82,13 @@ const artiklar = defineCollection({
     utvald: z.boolean().default(false),
     // Sant bara när rättigheterna uttryckligen medger att hela texten ligger här.
     heltext: z.boolean().default(false),
-    // Lyftcitaten (K-617; underlag/prov/design/BESLUT.md under Lyftcitat): en till tre meningar ordagrant ur texten, tre
-    // bara i en lång text, det skarpa som får läsaren att läsa vidare. Platsen sätter src/lib/lyftcitat.ts, som också
-    // stoppar bygget när ett citat inte står i texten eller står för tidigt. Bara i en text med hela texten.
-    citat: z.array(z.string().trim().min(1, 'Ett tomt citat.'))
+    // Lyftcitaten (K-617), efter STIL.md under Lyftcitat: en mening ur texten, eller { text, ur } när citatet skiljer sig
+    // från texten, med meningen i texten som ur. Platsen sätter src/lib/lyftcitat.ts, som också stoppar bygget när meningen
+    // inte står i texten eller står för tidigt. Bara i en text med hela texten.
+    citat: z.array(z.union([
+      z.string().trim().min(1, 'Ett tomt citat.'),
+      z.strictObject({ text: z.string().trim().min(1, 'Ett tomt citat.'), ur: z.string().trim().min(1, 'Meningen i texten saknas.') }),
+    ]))
       .min(1, 'Ta bort fältet citat när texten inte har några citat.')
       .max(3, 'Högst tre citat, och tre bara i en lång text.')
       .optional(),

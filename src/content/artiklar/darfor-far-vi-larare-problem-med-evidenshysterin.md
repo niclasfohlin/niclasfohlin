@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/nyheter/kronika2/niclas-fohlin-darfor-far-
 typ: "kronika"
 medforfattare: []
 taggar: ["evidens", "undervisningskvalitet"]
-citat: ["Vi behöver sluta behandla beprövad erfarenhet som vetenskapens fattige kusin.", "Jag tror på en evidensinformerad skola, inte evidensstyrd."]
+citat: [{"text":"Samma recept kan bli succé eller katastrof.","ur":"Samma recept kan bli succé eller katastrof beroende på vem som lagar, vilka som ska äta och hur hungriga de är."}, "Jag tror på en evidensinformerad skola, inte evidensstyrd."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

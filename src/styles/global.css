@@ -260,6 +260,8 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
 .brod aside.lyftcitat { position: relative; margin: 3.4rem 0 4rem; padding: 2.1rem 0 2.2rem; border-bottom: 1px solid var(--farg-kant); background: linear-gradient(to right, #6f8098, transparent) top left / 100% 1.5px no-repeat; }
 .brod .lyftcitat p { margin: 0; font: italic 700 clamp(1.45rem, 1.05rem + 1.8vw, 1.95rem)/1.28 var(--typsnitt-antikva); letter-spacing: -0.01em; color: var(--farg-text); text-wrap: balance; }
 .brod .lyftcitat::before, .brod .lyftcitat::after { content: '\201D'; position: absolute; z-index: 1; height: 4.2rem; overflow: hidden; font: 700 7.5rem/1 var(--typsnitt-antikva); color: #d5dce5; background: var(--farg-bakgrund); }
+/* Ett citat på två eller tre meningar, som bär en hel tanke (Niclas 2026-10-29), i en lite mindre grad. */
+.brod .lyftcitat-lang p { font-size: clamp(1.28rem, 0.98rem + 1.3vw, 1.62rem); line-height: 1.3; }
 .brod .lyftcitat::before { top: -2.5rem; left: 0; padding-right: 0.45rem; }
 .brod .lyftcitat::after { right: 0; bottom: -3.5rem; padding-left: 0.45rem; }
 .artikel-fot { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--farg-kant); }

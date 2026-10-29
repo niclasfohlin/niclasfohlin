@@ -7,14 +7,14 @@ originalUrl: "https://www.gp.se/debatt/inga-skolprestationer-i-varlden-kan-rattf
 typ: "debatt"
 medforfattare: []
 taggar: ["studiero", "demokratiuppdraget", "skolpolitik"]
-citat: ["Om en vuxen journalist upplever det vid ett inbokat besök, vad känner då barnen som är där varje dag?", "Man kan helt enkelt inte straffa in undervisningen i barn."]
+citat: ["GP:s reporter beskriver hur hon kunde känna rädsla under sitt besök, rädsla för att göra något fel. Om en vuxen journalist upplever det vid ett inbokat besök, vad känner då barnen som är där varje dag?", "Elever måste veta att vi vuxna vill dem väl och att vi vill att de ska lyckas, annars blir våra krav och kritik bara ett hot.", "Man kan helt enkelt inte straffa in undervisningen i barn."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
 utkast: false
 ---
 
-I GP:s reportage om Michaela Community School ser vi en skola byggd på disciplin, högt tempo, repetition och artiga elever. Vi ser också prislappen: poängavdrag för att tappa fokus, kvarsittning för småsaker som att av misstag titta ut genom fönstret en sekund, isolering som påföljd, en vardag där barn inte får kasta en blick åt besökare. Tron att vi kan straffa eleverna till att prestera i skolan är både felaktig och farlig, skriver specialläraren Niclas Fohlin.
+I GP:s reportage om Michaela Community School ser vi en skola byggd på disciplin, högt tempo, repetition och artiga elever. Vi ser också prislappen: poängavdrag för att tappa fokus, kvarsittning för småsaker som att av misstag titta ut genom fönstret en sekund, isolering som påföljd, en vardag där barn inte får kasta en blick åt besökare. Tron att vi kan straffa eleverna till att prestera i skolan är både felaktig och farlig.
 
 Det är här svensk skoldebatt ofta går fel. Vi fastnar vid det som syns. Skalet. Reglerna. De raka leden. Den tysta korridoren. Och så drar vi en förföriskt enkel slutsats: inför modellen, så kommer resultaten.
 
@@ -29,8 +29,6 @@ Skolan har ett kunskapsuppdrag. Ja. Men skolan har också ett demokratiuppdrag. 
 I GP:s reportage från Michalea Community School möter vi elever som inte vågar vända på huvudet, som inte pratar i korridorerna, som reciterar Shakespeare tyst i kör innan de sätter sig vid lunchbordet. Det är ordning, utan tvekan. Men när ordning blir ett överordnat mål förändras skolan i grunden. Jag frågar mig: vilka delar av skolans uppdrag får då stå tillbaka? Och vilka elever blir det som får betala priset när modellen inte fungerar för dem?
 
 Vi behöver även prata om makt. Läraren har redan en oinskränkt maktposition i klassrummet. Det är ofrånkomligt. Men system som ytterligare förstärker den makten måste ha extra starka skydd mot maktmissbruk och pennalism. GP:s reporter beskriver hur hon kunde känna rädsla under sitt besök, rädsla för att göra något fel. Om en vuxen journalist upplever det vid ett inbokat besök, vad känner då barnen som är där varje dag?
-
-Elever måste veta att vi vuxna vill dem väl och att vi vill att de ska lyckas, annars blir våra krav och kritik bara ett hot
 
 Kulturminister Liljestrand säger att isolering inte ska vara ett straff utan en “pedagogisk idé”. Men när en elev sitter ensam en hel dag för att hon haft “fel frisyr”, vad är det om inte ett straff?
 
