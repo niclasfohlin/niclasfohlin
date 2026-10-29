@@ -189,6 +189,24 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
 .kort:not(.metodkort) h3 a { text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 .kort p { margin: 0 0 0.75em; }
 .kort:not(.metodkort) > p:not(.meta) { font-family: var(--typsnitt-antikva); font-size: 1.04rem; line-height: 1.55; }
+/* Textkorten (K-620; Niclas 2026-10-29 valde A, vinjetten: "Tycker A", efter "Någon markering för typ av text och någon
+   form av snyggare design"): textens typ som tidningens vinjett, en list överst och etiketten i samma färg, krönikan i
+   accenten och debatten (Debatt, Replik, Slutreplik) i mörkrött, rubriken utan understrykning, ingressen på tre rader i
+   sans och tidningen och datumet sist. Hela kortet är en tryckyta (src/components/TextKort.astro); taggarna ligger ovanpå.
+   Färgerna står här och inte i första :root, som delningskortens kontrollsumma omfattar. */
+.kort.textkort { --typfarg: var(--farg-text-svag); position: relative; padding: 1rem 1.15rem 1.05rem; border-top: 6px solid var(--typfarg); border-radius: 6px 6px var(--radie) var(--radie); }
+.kort.textkort[data-farg="kronika"] { --typfarg: var(--farg-accent); }
+.kort.textkort[data-farg="debatt"] { --typfarg: #8f2d3a; }
+.kort.textkort:hover { border-color: var(--farg-kant); border-top-color: var(--typfarg); }
+.kort.textkort:focus-within { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.kort.textkort > p.textkort-etikett { margin: 0 0 0.4rem; font: 700 0.95rem/1.2 var(--typsnitt-ui); color: var(--typfarg); }
+.kort.textkort > h3 { margin: 0 0 0.55rem; font-size: clamp(1.3rem, 5.6vw, 1.55rem); line-height: 1.12; }
+.kort.textkort > h3 a { color: var(--farg-text); text-decoration: none; }
+.kort.textkort > h3 a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+.kort.textkort:hover > h3 a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.kort.textkort > p.textkort-ingress { margin: 0 0 0.8rem; font: 400 1rem/1.5 var(--typsnitt-ui); color: var(--farg-text-svag); display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.kort.textkort > p.textkort-kalla { margin: 0; font-size: 0.875rem; color: var(--farg-text-svag); }
+.kort.textkort > .taggar { position: relative; z-index: 1; margin-top: 0.75rem; }
 
 .meta { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 

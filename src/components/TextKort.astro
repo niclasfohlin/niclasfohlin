@@ -1,0 +1,21 @@
+---
+// Kortet för en text på startsidan och i /artiklar (K-620; Niclas 2026-10-29 valde A, vinjetten: "Tycker A"): textens
+// etikett i typens färg med en list överst, rubriken, ingressen på tre rader och tidningen och datumet sist. Hela kortet
+// är en tryckyta, och taggarna ligger ovanpå och går att trycka på för sig. Färgerna står i global.css under Textkorten.
+import type { CollectionEntry } from 'astro:content';
+import Taggar from './Taggar.astro';
+import { formateraDatum, publikationNamn, textEtikett } from '../lib/innehall';
+
+interface Props { a: CollectionEntry<'artiklar'>; taggar?: boolean; [attribut: string]: unknown }
+const { a, taggar = false, ...attribut } = Astro.props;
+const etikett = textEtikett(a.data);
+// Krönikan i accenten, debatten (Debatt, Replik, Slutreplik) i mörkrött, annat i grafit.
+const farg = a.data.typ === 'kronika' ? 'kronika' : a.data.typ === 'debatt' ? 'debatt' : 'annan';
+---
+<article class="kort textkort" data-farg={farg} {...attribut}>
+  <p class="textkort-etikett">{etikett}</p>
+  <h3><a href={`/artiklar/${a.id}`}>{a.data.titel}</a></h3>
+  <p class="textkort-ingress">{a.data.ingress}</p>
+  <p class="textkort-kalla">{publikationNamn(a.data.publikation)}, {formateraDatum(a.data.datum)}</p>
+  {taggar && <Taggar taggar={a.data.taggar} />}
+</article>
