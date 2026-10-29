@@ -16,19 +16,19 @@ utkast: false
 
 Debatten om ”gråzonsbarnen” växer. Psykologer och lärare beskriver elever som kämpar sig igenom tio år av skola utan att få uppleva att de lyckas. När Love Grahn och Anna-Maria Nord efterlyser vägledning och en skola som värderar praktisk kunskap högre, sätter de fingret på något viktigt.
 
-## ”Barnen betalar priset”
+## Barnen betalar priset
 
 Men steget från berättelser om skolmisslyckanden till förslag om nya skolformer är farligt. Då blir det barnet som får betala priset för att vi vuxna inte lyckas göra skolan tillräckligt bra, och en siffra på ett IQ-test riskerar att avgöra vem som får vara del av den gemensamma skolan.
 
 Här kommer ofta siffran 14 procent in. Gråzonsbarn. Det låter sakligt. Men ordet gör något med oss. Plötsligt pratar vi om barn som en grupp som ska hanteras, i stället för individer som ska förstås. Statistik kan aldrig säga vem just ditt barn är, vad det kan växa till eller vad det bär med sig in i ett klassrum.
 
-## ”Sorteringen smyger in”
+## Sorteringen smyger in
 
 I vårt samtal flyttas fokus från vad vi vuxna behöver förändra till vad barnet påstås vara. Det är så sorteringen smyger sig in, ofta med de bästa intentionerna. Men den slår sällan rättvist. Den riskerar att drabba barn som redan kämpar, barn med språkliga hinder och barn från hem med mindre resurser. Det är inte bara en skolfråga. Det är en demokratifråga.
 
 Skolan är inte bara en plats där vi lär ut och mäter kunskap, utan en social gemenskap där barn får lära sig att höra till, ta plats och träffa vänner för livet. Om vi börjar sortera barnen tidigt säger vi samtidigt något om vem som passar in och vem som inte får vara med.
 
-## ”Där öppnas möjligheter”
+## Där öppnas möjligheter
 
 Barns potential är heller inte en siffra som väntar på att bli upptäckt. Barn formas i relation till sin omgivning: språket de får, undervisningen de möter, stressen de lever med och tryggheten de har.
 
@@ -42,7 +42,7 @@ Resultaten påverkas av språkbakgrund, skolvana och livsvillkor, och vi vet ock
 
 Därför behöver vi hålla fast vid en enkel princip: tester kan hjälpa oss att förstå, men de får aldrig bli en biljett som avgör var ett barn hör hemma. Skolan ska inte handla om att sortera barn. Skolan ska vara en plats där barn får växa.
 
-## ”Borde göra oss vaksamma”
+## Borde göra oss vaksamma
 
 Vår historia borde göra oss vaksamma. När intelligensmätningar tidigare användes för att sortera elever till specialklasser blev följden ofta stigmatisering, sänkta förväntningar och skillnader som bet sig fast.
 
@@ -54,7 +54,7 @@ Skolverket och SPSM behöver ta fram konkret stöd för hur undervisning och bed
 
 Vi behöver även fler vuxna nära undervisningen, en kunskapssyn där det praktiska och teoretiska värderas lika, bättre och snabbt stöd när det behövs, och mod att se över krav och betyg så att färre barn fastnar i F och tappar tron på sin egen förmåga.
 
-## ”En skola för alla barn”
+## En skola för alla barn
 
 En skola värd namnet är en skola för alla barn, illbattingar som läshuvuden. Och ärligt talat, de flesta av oss har varit allt det där i vår egen barndom, ibland under samma vecka.
 

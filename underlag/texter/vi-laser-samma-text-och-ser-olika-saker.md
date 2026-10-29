@@ -21,13 +21,13 @@ Jag är lärare. Och krönikan är inte riktad mot lärare, den är riktad till 
 
 Jag skriver ingenstans att strukturella problem inte spelar roll, att kampen för bättre villkor är onödig, eller att lärare ska ”bara lösa det”.
 
-## ”Värnar kärnan”
+## Värnar kärnan
 
 Tvärtom försvarar jag läraryrkets professionella kärna när jag skriver att ”även om politiken vänder och organisationen ritas om är det fortfarande vi som är närmast eleverna som behöver genomföra förändringarna. Hur vi möter en elev som går i affekt. Hur vi bygger struktur utan att skapa skam. Hur vi håller ihop en klass där rollerna låst sig. Den sortens beslut kan inte delegeras bort”.
 
 Det är inte ett argument mot facklig kamp. Det är ett försvar av det viktigaste vi har: vår undervisning och vår tro på att den kan göra skillnad.
 
-## ”Slutar tro”
+## Slutar tro
 
 Det jag varnar för är att vi som profession hamnar i ett läge där vi slutar tro på vår egen förmåga att påverka det som händer i klassrummet. Inte inför arbetsgivaren, utan inför oss själva. Även när villkoren förbättras är det vi, tillsammans, som måste omsätta det i verklig förändring för eleverna.
 

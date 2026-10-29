@@ -24,7 +24,7 @@ Debatten om elevhälsans roll i skolan är just nu både livlig och viktig. För
 
 Men något har gått förlorat i tolkningen: skolans hälsofrämjande och stödjande funktioner blandas ibland ihop med traditionell sjukvård, trots att uppdraget är ett annat.
 
-## ”Inget vårdalternativ”
+## Inget vårdalternativ
 
 Elevhälsan är inte ett vårdalternativ. Den är en integrerad del av skolan, med ett tydligt hälsofrämjande uppdrag – tillsammans med skolans övriga professioner. Att skilja ut elevhälsan som en separat del av skolan leder fel, och riskerar att underminera det stöd eleverna har rätt till.
 
@@ -32,7 +32,7 @@ För att förstå varför behöver vi titta tillbaka till 1985 års skollag. Då
 
 Med skollagen 2010:800 kom en tydlig förskjutning. Elevvård blev elevhälsa, en samlad, tvärprofessionell funktion där medicinsk, psykologisk, psykosocial och specialpedagogisk kompetens samverkar.
 
-## ”Ska stödja lärandet”
+## Ska stödja lärandet
 
 Tillsammans med skolans lärare och övrig personal är elevhälsans uppdrag att stödja elevernas lärande och utveckling genom att arbeta hälsofrämjande, förebyggande och åtgärdande.
 
@@ -54,7 +54,7 @@ Elevhälsans funktion är inte att avlasta läraren från detta, utan att vara e
 
 Självklart ska elever få hjälp när de slår sig. Men alla mindre olyckor kräver inte legitimerad sjukvårdspersonal. Att bygga ett system där varje skrubbsår ska hanteras som ett vårdärende är varken praktiskt eller effektivt – det skapar en orealistisk bild av skolans ansvar.
 
-## ”Inte en vårdcentral”
+## Inte en vårdcentral
 
 Elevhälsan ska därför inte vara en vårdcentral i miniatyr. Att behandla sjukdom och ohälsa är primärvårdens ansvar; skolans uppdrag är ett annat.
 
@@ -70,7 +70,7 @@ Vid de återkommande hälsobesöken – där skolsköterska och skolläkare möt
 
 Skolan bär ett stort ansvar – men inte hela ansvaret för barns mående. När elevhälsan beskrivs som vård skapas en felaktig bild av både uppdrag och förväntningar.
 
-## ”Inte ett parallellt system”
+## Inte ett parallellt system
 
 Elevhälsan ska bidra till en skolmiljö där elever kan må bra, vara delaktiga och få rätt stöd. Men det förutsätter samarbete, tydlighet och att varje profession får arbeta utifrån sitt expertområde.
 
