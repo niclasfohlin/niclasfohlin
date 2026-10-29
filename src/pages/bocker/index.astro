@@ -18,7 +18,7 @@ const grupper = bokKategorier.map((k) => ({ kategori: k, lista: bocker.filter((b
       <h2>{g.kategori}</h2>
       <div class="rutnat">
         {g.lista.map((b) => (
-          <BokKort b={b} beskrivning />
+          <BokKort b={b} beskrivning etikett={false} />
         ))}
       </div>
     </section>
