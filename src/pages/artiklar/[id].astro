@@ -29,9 +29,10 @@ const namn = publikationNamn(a.data.publikation);
 <Base title={a.data.titel} description={a.data.ingress} typ="article">
   <article class="artikel">
     <header class="artikel-huvud">
-      <p class="meta">{typLabel(a.data.typ)} · {namn} · {formateraDatum(a.data.datum)}</p>
+      <p class="meta">{namn} · {formateraDatum(a.data.datum)}</p>
       <h1>{a.data.titel}</h1>
-      <p class="ingress">{a.data.ingress}</p>
+      {/* Textens typ står först i ingressen, som i en dagstidning (global.css under Artikelsidan); punkten är bara form. */}
+      <p class="ingress">{a.data.typ !== 'annat' && <><span class="texttyp">{typLabel(a.data.typ)}</span><span class="texttyp-punkt" aria-hidden="true"> • </span></>}{a.data.ingress}</p>
       {a.data.medforfattare.length > 0 && <p class="meta">Tillsammans med {medforfattare}</p>}
       <Kalla publikation={a.data.publikation} originalUrl={a.data.originalUrl} datum={a.data.datum} typ={a.data.typ} />
     </header>

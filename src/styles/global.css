@@ -232,11 +232,14 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
   background: var(--farg-ton-svag);
 }
 
-/* Artikelsidan: rubrik, ingress och källa i huvudet, sedan hela texten med läsvänlig radlängd och luft. Rubriken, ingressen
-   och hela texten står i antikvan, som i en bok (K-617, prov D); källan och signaturen i sans. */
+/* Artikelsidan: rubrik, ingress och källa i huvudet, sedan hela texten med läsvänlig radlängd och luft. Rubriken och hela
+   texten står i antikvan, som i en bok (K-617, prov D); källan och signaturen i sans. Ingressen står tät och fet i sans,
+   med textens typ först i accenten, som i en dagstidning (Niclas 2026-10-29 om GP:s debattsida: "ingressen är tätare och
+   i fet stil. Gillar inte nuvarande ingresser. De har även en markering för krönika och debatt"). */
 .artikel { max-width: var(--matt-text); }
 .artikel-huvud h1 { font-family: var(--typsnitt-antikva); font-size: clamp(1.85rem, 1rem + 4.4vw, 3.2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.07; margin-bottom: 0.5em; }
-.artikel .ingress { font-family: var(--typsnitt-antikva); font-size: 1.25rem; line-height: 1.45; margin: 0 0 1rem; }
+.artikel .ingress { font-family: var(--typsnitt-ui); font-size: 1.2rem; font-weight: 700; line-height: 1.38; letter-spacing: -0.005em; margin: 0 0 1.1rem; }
+.artikel .ingress .texttyp, .artikel .ingress .texttyp-punkt { color: var(--farg-accent); }
 .brod { font-family: var(--typsnitt-antikva); font-size: 1.125rem; line-height: 1.7; }
 @media (min-width: 40rem) { .brod { font-size: 1.1875rem; } }
 .brod > p, .brod > ul, .brod > ol { margin: 0 0 1.25em; }
@@ -2516,7 +2519,7 @@ html.js .bara-js { display: inline-block; }
   /* Filvalet fyller raden på mobil och knapparna delar bredden, så att alla fyra (PPTX, Drive, Pdf, Word) syns utan att något klipps. Full träffyta på pekskärm. */
   .filval { display: flex; width: 100%; }
   .filval > a, .filval > button, .filval.liten > a, .filval.liten > button { flex: 1 1 auto; justify-content: center; min-height: 2.75rem; padding: 0 0.5rem; }
-  .artikel .ingress { font-size: 1.15rem; }
+  .artikel .ingress { font-size: 1.12rem; }
   .hero { grid-template-columns: 1fr; gap: 1rem; }
   .hero .portratt-rund { width: 6rem; height: 6rem; }
   .om-huvud .portratt { max-width: 10rem; }
