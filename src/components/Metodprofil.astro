@@ -1,17 +1,19 @@
 ---
 // Metodkortet för en undervisningsmetod, ett utkast för formen (K-623). Formen är Raderna, som båda idéförslagen
-// rekommenderade (underlag/prov/metoder/ide/): faktan som celler under huvudet, en tunn rad per område med fem staplar och
-// nivåns ord som fälls ut till motiveringen, Lärande totalt större och öppen, Primär evidens i ord, Svårighet och Kostnad
-// med neutrala staplar och ett ord, och vad nivåerna betyder sist. Nivå 1 och Negativ effekt har inga fyllda staplar,
-// eftersom en fylld stapel läses som lite stöd, och Oklart och Inte studerat har en streckad ram (riggens utkast 4). Med
-// bank är det kortet i banken: huvudet med titeln, faktan med Svårighet och Kostnad, Lärande totalt och Primär evidens.
+// rekommenderade (underlag/prov/metoder/ide/): faktan som celler under huvudet, en rad per område med namnet överst och
+// staplarna och nivåns ord under, så att ordet alltid ryms efter staplarna (Niclas 2026-10-29: "Kan du göra så att ordet
+// alltid får plats efter staplarna"). Raden fälls ut till motiveringen. Lärande totalt är större och öppen, Primär evidens
+// är sajtens områden med deras färger och märken, och Svårighet och Kostnad har neutrala staplar och ett ord. Nivå 1 och
+// Negativ effekt har inga fyllda staplar, och Oklart och Inte studerat har en streckad ram (riggens utkast 4). Kortet tar
+// det första primära områdets färg, som korten i Stödundervisning, och står i bläck utan primärt område. Med bank är det
+// kortet i banken: huvudet med titeln och områdena, faktan, och raderna Lärande totalt, Svårighet och Kostnad.
 import Staplar from './Staplar.astro';
-import { OMRADEN, laget, motiveringensDelar, primar, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAORD, type Laget, type Utkast } from '../lib/metodprofil';
+import { OMRADEN, laget, motiveringensDelar, primaraOmraden, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAORD, type Laget, type Utkast } from '../lib/metodprofil';
 import { uppraknat } from '../lib/standard/index.js';
 interface Props { m: Utkast; bank?: boolean }
 const { m, bank = false } = Astro.props;
 const total = laget(m.evidens.larande);
-const prim = primar(m.evidens);
+const prim = primaraOmraden(m.evidens);
 const kallas = `Kallas också ${uppraknat(m.alternativaNamn)}`;
 // Svårighet och Kostnad: namnet, nivån ur kriterierna, ordet och motiveringen, i samma rader som evidensen.
 const infor = [
@@ -22,27 +24,29 @@ const infor = [
 const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
 ---
 {bank ? (
-  <article class="kort metodkort mp-bank" data-del="metoder">
+  <article class="kort metodkort mp-bank" data-del="metoder" data-omrade={prim[0]}>
     <div class="kort-topp">
       <h3><a href={`/metoder/${m.id}`}>{m.titel}</a></h3>
-      <span class="beta">Platshållare</span>
+      {prim.map((o) => <span class="amne" data-amne={o}>{o}</span>)}
       <p class="mp-kallas-bank">{kallas}</p>
     </div>
     <dl class="kort-fakta">
       {m.fakta.map(([rubrik, text]) => <div><dt>{rubrik}</dt><dd>{text}</dd></div>)}
-      {infor.map((x) => <div><dt>{x.kort}</dt><dd class="mp-cell"><Staplar niva={x.niva} neutral /> {x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></dd></div>)}
     </dl>
-    <p class="mp-bank-total">
-      <span class="mp-namn">Lärande totalt</span>
-      {total.slag === 'niva'
-        ? <><Staplar niva={fylld(total)} /><span class={`mp-varde${total.negativ ? ' mp-negativ' : ''}`}>{total.ord}<span class="visually-hidden">, {total.niva} av 5</span></span></>
-        : <span class="mp-inte">{total.ord}</span>}
-    </p>
-    <p class="mp-primar"><span>Primär evidens</span> <strong>{prim}</strong></p>
+    <div class="mp-bank-rader">
+      <p class="mp-bank-rad mp-total">
+        <span class="mp-namn">Lärande totalt</span>
+        {total.slag === 'niva'
+          ? <><Staplar niva={fylld(total)} /><span class={`mp-varde${total.negativ ? ' mp-negativ' : ''}`}>{total.ord}<span class="visually-hidden">, {total.niva} av 5</span></span></>
+          : <span class="mp-inte">{total.ord}</span>}
+      </p>
+      {infor.map((x) => <p class="mp-bank-rad"><span class="mp-namn">{x.kort}</span><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></p>)}
+    </div>
     <p class="ingress">{m.ingress}</p>
+    <p class="mp-platshallare"><span class="beta">Platshållare</span> Värdena är inget omdöme om metoden.</p>
   </article>
 ) : (
-  <div class="faktaruta metodprofil" id="metodkortet">
+  <div class="faktaruta metodprofil" id="metodkortet" data-omrade={prim[0]}>
     <p class="faktaruta-etikett"><span>Metodkortet</span> <span class="beta">Platshållare</span></p>
     <dl class="kort-fakta">
       {m.fakta.map(([rubrik, text]) => <div><dt>{rubrik}</dt><dd>{text}</dd></div>)}
@@ -63,7 +67,12 @@ const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
             </summary>
             <p class="mp-skal">{forst && <strong>{forst}</strong>} {resten}</p>
           </details>
-          {radenTotal && <p class="mp-primar"><span>Primär evidens</span> <strong>{prim}</strong></p>}
+          {radenTotal && (
+            <p class="mp-primar">
+              <span>Primär evidens</span>
+              {prim.length ? <span class="mp-omraden">{prim.map((o) => <span class="amne" data-amne={o}>{o}</span>)}</span> : <strong>Inget område med minst visst stöd</strong>}
+            </p>
+          )}
         </>
       );
     })}
@@ -85,6 +94,7 @@ const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
             <tr><th scope="row"><span class="mp-inte">Inte studerat</span></th><td>Ingen studie med jämförelsegrupp har mätt området. Vi vet inte, och det betyder inte att metoden saknar effekt</td></tr>
           </tbody>
         </table>
+        <p>Primär evidens är det eller de två av sajtens fyra områden, Läsning, Skrivning, Matematik och Socialt, där stödet är starkast, minst Visst stöd. Kortet har det första områdets färg.</p>
         <p>De grå staplarna visar hur svårt och hur dyrt det är att införa metoden: Svårighet från Mycket lätt till Mycket svårt, Kostnad från Mycket låg till Mycket hög.</p>
         <p>Forskningen visar vad som ofta fungerar för många elever. Du avgör vad som fungerar i din klass.</p>
       </div>

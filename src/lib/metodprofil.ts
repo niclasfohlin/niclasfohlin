@@ -48,13 +48,30 @@ export function motiveringensDelar(text: string): { forst: string; resten: strin
   return m ? { forst: m[1], resten: m[2] } : { forst: '', resten: text };
 }
 
-/** Primär evidens: de områden utom Lärande totalt som har den högsta nivån, när den är minst 3. */
-export function primar(evidens: Record<Omrade, Omradesvarde>): string {
-  const fem = OMRADEN.filter((o) => o.id !== 'larande').map((o) => { const l = laget(evidens[o.id]); return { namn: o.namn, niva: l.slag === 'niva' ? l.niva : 0 }; });
-  const hogst = Math.max(...fem.map((x) => x.niva));
-  const namn = hogst >= 3 ? fem.filter((x) => x.niva === hogst).map((x, i) => (i ? x.namn.toLocaleLowerCase('sv') : x.namn)) : [];
-  return namn.length ? uppraknat(namn) : 'Inget område med minst visst stöd';
+/**
+ * Primär evidens: sajtens fyra områden, som i Stödundervisning, med deras färger (Niclas 2026-10-29: "ska det inte vara
+ * sajtens kort för Matematik (primär effekt blir de fyra läs, skrv, matematik, socialt)"). Högst två områden med den högsta
+ * nivån, minst Visst stöd. Står fler än två lika avgör tillförlitligheten och sedan effekten, och sist sajtens ordning.
+ * Ämnen och Lärande totalt blir aldrig primära. Kortet tar det första områdets färg.
+ */
+const FYRA: readonly { id: Omrade; namn: string }[] = [
+  { id: 'lasning', namn: 'Läsning' }, { id: 'skrivning', namn: 'Skrivning' }, { id: 'matematik', namn: 'Matematik' }, { id: 'socialt', namn: 'Socialt' },
+];
+const VIKT_T: Record<Tillforlitlighet, number> = { hog: 3, mattlig: 2, lag: 1 };
+const VIKT_E: Record<Effekt, number> = { stor: 4, mattlig: 3, liten: 2, ingen: 1, negativ: 0 };
+export function primaraOmraden(evidens: Record<Omrade, Omradesvarde>): string[] {
+  const kandidater = FYRA.map((o, ordning) => {
+    const v = evidens[o.id];
+    const l = laget(v);
+    return { namn: o.namn, ordning, niva: l.slag === 'niva' && !l.negativ ? l.niva : 0, t: 'tillforlitlighet' in v ? VIKT_T[v.tillforlitlighet] : 0, e: 'effekt' in v ? VIKT_E[v.effekt] : 0 };
+  }).filter((x) => x.niva >= 3);
+  const hogst = Math.max(0, ...kandidater.map((x) => x.niva));
+  return kandidater.filter((x) => x.niva === hogst).sort((a, b) => b.t - a.t || b.e - a.e || a.ordning - b.ordning).slice(0, 2).map((x) => x.namn);
 }
+export const primar = (evidens: Record<Omrade, Omradesvarde>): string => {
+  const namn = primaraOmraden(evidens);
+  return namn.length ? uppraknat(namn.map((n, i) => (i ? n.toLocaleLowerCase('sv') : n))) : 'Inget område med minst visst stöd';
+};
 
 // Svårighet och Kostnad ur kriterierna (evidensen.md, avsnitt 7). Svårigheten är den övre medianen av fyra, kostnaden den
 // högre av inköpet och timmarna. Orden: mer betyder mer arbete eller pengar, och de grå staplarna säger samma sak.
