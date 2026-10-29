@@ -121,13 +121,21 @@ h3 { font-size: 1.15rem; }
 .lankrad { font-family: var(--typsnitt-ui); margin: 1rem 0 0; }
 
 /* Startsidans huvud: porträtt, rad, rubrik och ingång. */
-.hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem 2rem; align-items: center; margin: 1rem 0 0; max-width: 52rem; }
-.hero .portratt-rund { width: 8rem; height: 8rem; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--farg-yta); box-shadow: 0 0 0 1px var(--farg-kant); }
+.hero { margin: 1rem 0 0; max-width: 46rem; }
+/* Porträttet bredvid raden, så att ytan bredvid bilden inte står tom (K-620). */
+.hero-person { display: flex; align-items: center; gap: 1rem; margin: 0 0 1rem; }
+.hero-person .meta { margin: 0; font-size: 1rem; line-height: 1.4; }
+.hero .portratt-rund { flex: none; width: 5.5rem; height: 5.5rem; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--farg-yta); box-shadow: 0 0 0 1px var(--farg-kant); }
+/* Metoderna som knapp, eftersom de flesta besök går dit, och Om mig och mejlen på en rad med symboler. */
+.hero .hero-knapp { margin: 0.4rem 0 0; }
+.hero-lankar { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 1rem 0 0; padding: 0; font-family: var(--typsnitt-ui); }
+.hero-lankar a { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.75rem; }
+.hero-lankar svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 /* Rubriken och ingressen i antikvan (K-617). Raden över rubriken och länkraden står kvar i sans. */
 .hero h1 { font-family: var(--typsnitt-antikva); font-size: clamp(2rem, 7.6vw, 3.35rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 0.35em; }
 .hero p { margin: 0 0 0.75em; }
-.hero p:not(.meta, .lankrad) { font-family: var(--typsnitt-antikva); font-size: 1.12rem; line-height: 1.55; }
-@media (min-width: 40rem) { .hero p:not(.meta, .lankrad) { font-size: 1.2rem; } }
+.hero p.hero-text { font-family: var(--typsnitt-antikva); font-size: 1.12rem; line-height: 1.55; }
+@media (min-width: 40rem) { .hero p.hero-text { font-size: 1.2rem; } }
 
 /* Uppmaningen att prenumerera, längst ner på startsidan. */
 .rop { background: var(--farg-accent-ljus); border-radius: var(--radie); padding: 1.5rem 1.5rem 1.25rem; max-width: 42rem; }
@@ -2561,8 +2569,8 @@ html.js .bara-js { display: inline-block; }
   .filval { display: flex; width: 100%; }
   .filval > a, .filval > button, .filval.liten > a, .filval.liten > button { flex: 1 1 auto; justify-content: center; min-height: 2.75rem; padding: 0 0.5rem; }
   .artikel .ingress { font-size: 1.12rem; }
-  .hero { grid-template-columns: 1fr; gap: 1rem; }
-  .hero .portratt-rund { width: 6rem; height: 6rem; }
+  .hero .portratt-rund { width: 4.5rem; height: 4.5rem; }
+  .hero .hero-knapp { display: flex; justify-content: center; }
   .om-huvud .portratt { max-width: 10rem; }
   .bok-omslag-stor { max-width: 9rem; }
   .metod-topp .faktaruta dl { grid-template-columns: max-content 1fr; gap: 0 0.8rem; font-size: 0.9rem; }

@@ -17,14 +17,20 @@ const bocker = (await bockerSorterade()).slice(0, 4);
 ---
 
 <Base>
+  {/* Startsidans huvud (K-620; Niclas 2026-10-29: "Länkarna nere är lite lång text och kanske en rad för dem eller symbol?"):
+      porträttet bredvid raden, rubriken, texten, metoderna som knapp och Om mig och mejlen på en rad med symboler. */}
   <section class="hero">
-    <img class="portratt-rund" src={site.portratt} alt="" width="480" height="558" />
-    <div>
+    <div class="hero-person">
+      <img class="portratt-rund" src={site.portratt} alt="" width="480" height="558" />
       <p class="meta">{site.rad}</p>
-      <h1>Texter och verktyg för en skola som fungerar bättre.</h1>
-      <p>Jag är speciallärare och specialpedagog. Här samlar jag mina krönikor och debattartiklar om skolan, böckerna om undervisning och metoder för stödundervisning i läsning, skrivning, matematik och socialt samspel.</p>
-      <p class="lankrad"><a href="/stodundervisning">Hitta en metod för stödpasset</a> · <a href="/om">Om mig</a> · <a href="/prenumerera">Få mejl när något nytt publiceras</a></p>
     </div>
+    <h1>Texter och verktyg för en skola som fungerar bättre.</h1>
+    <p class="hero-text">Jag är speciallärare och specialpedagog. Här samlar jag mina krönikor och debattartiklar om skolan, böckerna om undervisning och metoder för stödundervisning i läsning, skrivning, matematik och socialt samspel.</p>
+    <a class="knapp hero-knapp" href="/stodundervisning">Hitta en metod för stödpasset</a>
+    <ul class="hero-lankar">
+      <li><a href="/om"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" /></svg>Om mig</a></li>
+      <li><a href="/prenumerera"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6.5 8.5 7 8.5-7" /></svg>Få mejl om nytt</a></li>
+    </ul>
   </section>
 
   <section>
