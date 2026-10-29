@@ -81,8 +81,13 @@ export function sattInLyftcitat(html: string, citat: readonly Lyftcitat[] | unde
   // en lista, en rubrik eller ett citat, ingen av de två är en replik, och de är inte båda korta, som i en följd av
   // repliker eller korta rader (urvalet av citaten 2026-10-28: elva texter fick annars citatet mitt i en dialog, mellan ett
   // kolon och det som följer eller precis före en mellanrubrik).
-  // En replik börjar med tankstreck eller citattecken, eller med ett namn och kolon före citattecknet, som "Adam: ”Ehh …”".
-  const replik = (s: Stycke) => /^[–—\-”"»]/.test(s.text) || /^\p{Lu}[\p{L}-]*(?: \p{Lu}[\p{L}-]*)?: ?[”"»]/u.test(s.text);
+  // En replik börjar med tankstreck eller citattecken, eller med ett namn och kolon före citattecknet, också med en
+  // scenanvisning, som "Adam: ”Ehh …”" och "Adam (förnedrad): ”Jag förstår …”". Ett kort stycke där en mening i citattecken
+  // följer på berättelsen, som "Hon suckade. ”Jag pratar om mat …”", är också en replik (Codex 2026-10-29: citatet stod
+  // annars mellan dialogens sista rad och dess poäng).
+  const replik = (s: Stycke) => /^[–—\-”"»]/.test(s.text)
+    || /^\p{Lu}[\p{L}-]*(?: \p{Lu}[\p{L}-]*)?(?: \([^)]*\))?: ?[”"»]/u.test(s.text)
+    || (s.text.length < 250 && /[.!?…]\s*[”"»]\p{Lu}/u.test(s.text));
   const kort = (s: Stycke) => s.text.length < 90;
   const bra = (g: number) => {
     const fore = delar[g - 1], efter = delar[g];

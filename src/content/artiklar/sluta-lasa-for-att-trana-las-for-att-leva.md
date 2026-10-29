@@ -7,7 +7,7 @@ originalUrl: "https://www.vilarare.se/specialpedagogik/lasinlarning/sluta-lasa-f
 typ: "kronika"
 medforfattare: []
 taggar: ["lasframjande", "lasinlarning", "lasflyt"]
-citat: ["En lärare berättade att de inte riktigt hade tid att hålla på med högläsning eller egen läsning med tanke på läroplanen. Stoffträngsel var ordet som användes.", "Ska din skola göra en satsning på elevernas läsning? Se då till att den innefattar högläsning, boksamtal, biblioteksbesök, litteraturpedagogik och samarbete med hemmen."]
+citat: [{"text":"En lärare berättade att de inte riktigt hade tid att hålla på med högläsning eller egen läsning med tanke på läroplanen – ”stoffträngsel” var ordet som användes.","ur":"En lärare berättade att de inte riktigt hade tid att hålla på med högläsning eller egen läsning med tanke på läroplanen. Stoffträngsel var ordet som användes."}, "Ska din skola göra en satsning på elevernas läsning? Se då till att den innefattar högläsning, boksamtal, biblioteksbesök, litteraturpedagogik och samarbete med hemmen."]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
