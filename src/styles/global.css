@@ -200,12 +200,12 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
 .kort.textkort:hover { border-color: var(--farg-kant); border-top-color: var(--typfarg); }
 .kort.textkort:focus-within { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
 .kort.textkort > p.textkort-etikett { margin: 0 0 0.4rem; font: 700 0.95rem/1.2 var(--typsnitt-ui); color: var(--typfarg); }
-.kort.textkort > h3 { margin: 0 0 0.55rem; font-size: clamp(1.3rem, 5.6vw, 1.55rem); line-height: 1.12; }
+.kort.textkort > h3 { margin: 0 0 0.55rem; font-size: clamp(1.15rem, 6vw, 1.55rem); line-height: 1.12; }
 .kort.textkort > h3 a { color: var(--farg-text); text-decoration: none; }
 .kort.textkort > h3 a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
 .kort.textkort:hover > h3 a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 .kort.textkort > p.textkort-ingress { margin: 0 0 0.8rem; font: 400 1rem/1.5 var(--typsnitt-ui); color: var(--farg-text-svag); display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.kort.textkort > p.textkort-kalla { margin: 0; font-size: 0.875rem; color: var(--farg-text-svag); }
+.kort.textkort > p.textkort-kalla { margin: 0; font: 400 0.875rem/1.4 var(--typsnitt-ui); color: var(--farg-text-svag); }
 .kort.textkort > .taggar { position: relative; z-index: 1; margin-top: 0.75rem; }
 
 .meta { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
