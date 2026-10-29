@@ -50,14 +50,16 @@ const pdfMapp = join(rot, 'public', 'stodundervisning');
 const manifestFil = join(pdfMapp, 'lathund-pdf.json');
 const pdfFor = (id) => join(pdfMapp, `${id}-lathund.pdf`);
 
-// Allt som påverkar pdf:en: metodens text, koden som bygger A4-varianten av PowerPoint-filen (med sajtens adress i
-// site.ts), PowerPoint-skriptet som gör pdf:en och pptxgenjs version.
-const gemensamma = ['src/lib/metodpptx.ts', 'src/lib/metod.ts', 'src/lib/lathundsidor.ts', 'src/pages/utskrift/lathund/[id].pptx.ts', 'src/data/site.ts', 'scripts/pptx-till-pdf.ps1'];
+// Allt som påverkar pdf:en: metodens text, koden som bygger A4-varianten av PowerPoint-filen, sajtens adress,
+// PowerPoint-skriptet som gör pdf:en och pptxgenjs version. Ur site.ts läser lathunden bara adressen (site.url, i
+// [id].pptx.ts), så nyckeln tar adressen och inte hela filen: Metoder i menyn gjorde annars om alla lathundar (K-623).
+const gemensamma = ['src/lib/metodpptx.ts', 'src/lib/metod.ts', 'src/lib/lathundsidor.ts', 'src/pages/utskrift/lathund/[id].pptx.ts', 'scripts/pptx-till-pdf.ps1'];
+const sajtensAdress = readFileSync(join(rot, 'src', 'data', 'site.ts'), 'utf8').match(/^\s*url:\s*'([^']+)'/m)?.[1] ?? 'saknas:site.url';
 const pptxgenjs = (() => { try { return JSON.parse(readFileSync(join(rot, 'node_modules', 'pptxgenjs', 'package.json'), 'utf8')).version; } catch { return 'okänd'; } })();
 const hashAv = (delar) => { const h = createHash('sha256'); for (const d of delar) h.update(d); return h.digest('hex').slice(0, 16); };
 // Textfiler hashas med LF oavsett radslut: arbetskopian på Windows har CRLF, Netlifys utcheckning LF.
 const lasKalla = (f) => Buffer.from(readFileSync(f, 'utf8').replace(/\r\n/g, '\n'));
-const gemensamHash = hashAv([`pdf ur pptx i A4, pptxgenjs ${pptxgenjs}`, ...gemensamma.map((f) => (existsSync(join(rot, f)) ? lasKalla(join(rot, f)) : Buffer.from(`saknas:${f}`)))]);
+const gemensamHash = hashAv([`pdf ur pptx i A4, pptxgenjs ${pptxgenjs}`, `sajtens adress ${sajtensAdress}`, ...gemensamma.map((f) => (existsSync(join(rot, f)) ? lasKalla(join(rot, f)) : Buffer.from(`saknas:${f}`)))]);
 // Metodens del av kontrollsumman: metodens fil utan det som lathunden inte visar, så att ett nytt datum, en ändrad ruta
 // överst eller en ny länk till en annan metod inte gör om lathunden (Niclas 2026-10-03: "Varför ändras lathunden av
 // datumet?"). Lathundens kod (metodpptx.ts och lathundBarn i metoddocx.ts) läser inga av fälten; läser den ett av dem
