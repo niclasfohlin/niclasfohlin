@@ -13,7 +13,8 @@ const senaste = (utvalda.length > 0 ? utvalda : artiklar).slice(0, 3);
 const metoder = (await metoderSenaste()).slice(0, 3);
 const serier = await metodSerier();
 const allaMetoder = await publicerade('stodundervisning');
-const bocker = (await bockerSorterade()).slice(0, 4);
+// Tre av varje på startsidan: texter, böcker och metoder (Niclas 2026-10-29: "Ha 3 3 3 med 3 senaste böcker i tid").
+const bocker = (await bockerSorterade()).slice(0, 3);
 ---
 
 <Base>

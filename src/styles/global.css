@@ -165,8 +165,10 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
 /* Året är en etikett över årets texter, i sans och vanlig skrift (K-617). */
 .arsavsnitt h2 { font: 700 1.1rem/1.3 var(--typsnitt-ui); color: var(--farg-text); margin: 0 0 1rem; }
 
-.sidfot { color: var(--farg-text-svag); font-family: var(--typsnitt-ui); font-size: 0.9rem; margin-top: 4rem; padding-top: 1.5rem; padding-bottom: 1.5rem; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); border-top: 1px solid var(--farg-kant); }
-.sidfot-rad { margin: 0 0 0.5em; }
+.sidfot { color: var(--farg-text-svag); font-family: var(--typsnitt-ui); font-size: 0.9rem; margin-top: 3rem; padding-top: 1.1rem; padding-bottom: 1.1rem; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); border-top: 1px solid var(--farg-kant); }
+.sidfot-rad { margin: 0 0 0.4em; }
+.sidfot-rad:last-child { margin-bottom: 0; }
+.sidfot-namn { display: flex; flex-wrap: wrap; gap: 0.15rem 0.75rem; }
 .sidfot strong { color: var(--farg-text); }
 
 .text { max-width: var(--matt-text); }
