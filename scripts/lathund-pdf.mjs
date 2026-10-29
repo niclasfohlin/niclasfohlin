@@ -21,7 +21,8 @@
 //   node scripts/lathund-pdf.mjs --utan-bygge    hoppa över astro build (dist har redan A4-filerna ur ett
 //                                                bygge med LATHUND_A4=1)
 //
-// Kräver PowerPoint (scripts/pptx-till-pdf.ps1) och Poppler (pdfinfo, pdftotext) när en pdf ska göras.
+// Kräver PowerPoint (scripts/pptx-till-pdf.ps1), Poppler (pdfinfo, pdftotext) och Python med pikepdf
+// (scripts/pdfpack.py) när en pdf ska göras.
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, copyFileSync, renameSync, unlinkSync, rmSync } from 'node:fs';
 import { execFileSync, execSync } from 'node:child_process';
@@ -153,7 +154,11 @@ try {
         const text = execFileSync('pdftotext', ['-f', String(s), '-l', String(s), tmpPdf, '-'], { encoding: 'latin1' });
         if (!text.includes('Niclas Fohlin') || !text.includes(`niclasfohlin.se/stodundervisning/${m.id}/lathund`)) throw new Error(`sida ${s} saknar upphov eller adress`);
       }
-      copyFileSync(tmpPdf, `${ut}.tmp`);
+      // Samma innehåll blir samma fil: PowerPoints tid och id tas bort, så att en lathund som görs om utan att ändras inte
+      // blir en ny fil i git (scripts/pdfpack.py --bara-bytelik, K-624).
+      const bytelik = join(tmp, `${m.id}-lathund-bytelik.pdf`);
+      execFileSync('python', [join(rot, 'scripts', 'pdfpack.py'), '--bara-bytelik', tmpPdf, bytelik], { stdio: 'inherit', timeout: 120000 });
+      copyFileSync(bytelik, `${ut}.tmp`);
       renameSync(`${ut}.tmp`, ut);
       const iDist = join(rot, 'dist', 'stodundervisning', `${m.id}-lathund.pdf`);
       if (existsSync(dirname(iDist))) copyFileSync(ut, iDist);
