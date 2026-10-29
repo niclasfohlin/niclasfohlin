@@ -540,7 +540,10 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .mp-skal { margin: 0; padding: 0 0 0.75rem; font-size: 0.92rem; line-height: 1.5; }
 .mp-skal p { margin: 0 0 0.5rem; }
 .mp-nivaer { width: 100%; border-collapse: collapse; margin: 0 0 0.6rem; font-size: 0.9rem; }
-.mp-nivaer th { width: 2.75rem; padding: 0.2rem 0; text-align: left; vertical-align: top; }
+.mp-nivaer th { padding: 0.25rem 0.75rem 0.25rem 0; text-align: left; vertical-align: top; white-space: nowrap; font-weight: 400; }
+/* Negativ effekt har en egen markering: ordet i rost och inga fyllda staplar (riggens utkast 4). */
+.mp-negativ { color: var(--farg-socialt); }
+.mp-bank-total .mp-inte { grid-column: 1 / -1; }
 .mp-nivaer td { padding: 0.2rem 0; }
 .mp-nivaer .mp-inte { padding: 0 0.45rem; }
 .mp-primar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.15rem 1rem; margin: 0; padding: 0.6rem 0; border-top: 1px solid var(--farg-kant-svag); font-family: var(--typsnitt-ui); }

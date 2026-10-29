@@ -1,22 +1,25 @@
 ---
 // Metodkortet för en undervisningsmetod, ett utkast för formen (K-623). Formen är Raderna, som båda idéförslagen
 // rekommenderade (underlag/prov/metoder/ide/): faktan som celler under huvudet, en tunn rad per område med fem staplar och
-// nivåns ord som fälls ut till skälet, Lärande totalt större och öppen, Primär evidens i ord, Svårighet och Kostnad med
-// neutrala staplar och ett ord, och vad nivåerna betyder sist. Med bank är det kortet i banken: huvudet med titeln,
-// faktan med Svårighet och Kostnad, Lärande totalt och Primär evidens.
+// nivåns ord som fälls ut till motiveringen, Lärande totalt större och öppen, Primär evidens i ord, Svårighet och Kostnad
+// med neutrala staplar och ett ord, och vad nivåerna betyder sist. Nivå 1 och Negativ effekt har inga fyllda staplar,
+// eftersom en fylld stapel läses som lite stöd, och Oklart och Inte studerat har en streckad ram (riggens utkast 4). Med
+// bank är det kortet i banken: huvudet med titeln, faktan med Svårighet och Kostnad, Lärande totalt och Primär evidens.
 import Staplar from './Staplar.astro';
-import { OMRADEN, nivan, primar, inforOrd, NIVAORD, type Utkast } from '../lib/metodprofil';
+import { OMRADEN, laget, motiveringensDelar, primar, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAORD, type Laget, type Utkast } from '../lib/metodprofil';
 import { uppraknat } from '../lib/standard/index.js';
 interface Props { m: Utkast; bank?: boolean }
 const { m, bank = false } = Astro.props;
-const total = nivan(m.evidens.larande);
+const total = laget(m.evidens.larande);
 const prim = primar(m.evidens);
 const kallas = `Kallas också ${uppraknat(m.alternativaNamn)}`;
-// Svårighet och Kostnad: namnet, nivån och skälet, i samma rader som evidensen.
+// Svårighet och Kostnad: namnet, nivån ur kriterierna, ordet och motiveringen, i samma rader som evidensen.
 const infor = [
-  { namn: 'Svårighet att införa', kort: 'Svårighet', ...m.svarighet },
-  { namn: 'Kostnad att införa', kort: 'Kostnad', ...m.kostnad },
+  { namn: 'Svårighet att införa', kort: 'Svårighet', niva: svarighetensNiva(m.svarighet), ord: SVARIGHETENS_ORD, motivering: m.svarighet.motivering },
+  { namn: 'Kostnad att införa', kort: 'Kostnad', niva: kostnadensNiva(m.kostnad), ord: KOSTNADENS_ORD, motivering: m.kostnad.motivering },
 ];
+// Hur ett läge ritas, en rot för raderna och förklaringen: staplar och ordet, eller en streckad ram med ordet.
+const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
 ---
 {bank ? (
   <article class="kort metodkort mp-bank" data-del="metoder">
@@ -27,15 +30,14 @@ const infor = [
     </div>
     <dl class="kort-fakta">
       {m.fakta.map(([rubrik, text]) => <div><dt>{rubrik}</dt><dd>{text}</dd></div>)}
-      {infor.map((x) => <div><dt>{x.kort}</dt><dd class="mp-cell"><Staplar niva={x.niva} neutral /> {inforOrd(x.niva)}<span class="visually-hidden">, {x.niva} av 5</span></dd></div>)}
+      {infor.map((x) => <div><dt>{x.kort}</dt><dd class="mp-cell"><Staplar niva={x.niva} neutral /> {x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></dd></div>)}
     </dl>
-    {total && (
-      <p class="mp-bank-total">
-        <span class="mp-namn">Lärande totalt</span>
-        <Staplar niva={total.niva} />
-        <span class="mp-varde">{total.ord}<span class="visually-hidden">, {total.niva} av 5</span></span>
-      </p>
-    )}
+    <p class="mp-bank-total">
+      <span class="mp-namn">Lärande totalt</span>
+      {total.slag === 'niva'
+        ? <><Staplar niva={fylld(total)} /><span class={`mp-varde${total.negativ ? ' mp-negativ' : ''}`}>{total.ord}<span class="visually-hidden">, {total.niva} av 5</span></span></>
+        : <span class="mp-inte">{total.ord}</span>}
+    </p>
     <p class="mp-primar"><span>Primär evidens</span> <strong>{prim}</strong></p>
     <p class="ingress">{m.ingress}</p>
   </article>
@@ -47,40 +49,43 @@ const infor = [
     </dl>
     {OMRADEN.map((o) => {
       const v = m.evidens[o.id];
-      const n = nivan(v);
+      const l = laget(v);
       const radenTotal = o.id === 'larande';
+      const { forst, resten } = motiveringensDelar(v.motivering);
       return (
         <>
           <details class={`mp-rad${radenTotal ? ' mp-total' : ''}`} open={radenTotal}>
             <summary>
               <span class="mp-namn">{o.namn}{o.under && <small>{o.under}</small>}</span>
-              {n
-                ? <><Staplar niva={n.niva} /><span class="mp-varde">{n.ord}<span class="visually-hidden">, {n.niva} av 5</span></span></>
-                : <span class="mp-inte">Inte studerat</span>}
+              {l.slag === 'niva'
+                ? <><Staplar niva={fylld(l)} /><span class={`mp-varde${l.negativ ? ' mp-negativ' : ''}`}>{l.ord}<span class="visually-hidden">, {l.niva} av 5</span></span></>
+                : <span class="mp-inte">{l.ord}</span>}
             </summary>
-            <p class="mp-skal">{n && <strong>{n.underlag}</strong>} {v.skal}</p>
+            <p class="mp-skal">{forst && <strong>{forst}</strong>} {resten}</p>
           </details>
           {radenTotal && <p class="mp-primar"><span>Primär evidens</span> <strong>{prim}</strong></p>}
         </>
       );
     })}
     {infor.map((x) => (
-      <details class="mp-rad mp-infor">
-        <summary><span class="mp-namn">{x.namn}</span><Staplar niva={x.niva} neutral /><span class="mp-varde">{inforOrd(x.niva)}<span class="visually-hidden">, {x.niva} av 5</span></span></summary>
-        <p class="mp-skal">{x.skal}</p>
+      <details class="mp-rad">
+        <summary><span class="mp-namn">{x.namn}</span><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></summary>
+        <p class="mp-skal">{x.motivering}</p>
       </details>
     ))}
     <details class="mp-rad mp-skalan">
       <summary><span class="mp-namn">Vad nivåerna betyder</span></summary>
       <div class="mp-skal">
-        <p>Varje grön stapel svarar på en fråga: hur väl stöder forskningen att metoden förbättrar elevernas resultat i området? Nivån räknas ur hur säker forskningen är och hur stor effekten är, och säkerheten sätter taket. En stor effekt i få studier får därför högst 2.</p>
+        <p>Varje grön stapel svarar på en fråga: hur väl stöder forskningen att metoden förbättrar elevernas resultat i området? Nivån räknas ur hur tillförlitlig forskningen är och hur stor effekten är, och tillförlitligheten sätter taket. En stor effekt i få och små studier får därför högst 2.</p>
         <table class="mp-nivaer">
           <tbody>
-            {[5, 4, 3, 2, 1].map((n) => <tr><th scope="row">{n}</th><td>{n === 1 ? 'Ingen påvisad effekt, eller negativ effekt' : NIVAORD[n]}</td></tr>)}
-            <tr><th scope="row"><span class="mp-inte">–</span></th><td>Inte studerat: ingen studie med jämförelsegrupp har mätt området. Vi vet inte, och det betyder inte att metoden saknar effekt</td></tr>
+            {[5, 4, 3, 2].map((n) => <tr><th scope="row"><Staplar niva={n} /></th><td>{NIVAORD[n]}</td></tr>)}
+            <tr><th scope="row"><Staplar niva={0} /></th><td>Inget påvisat stöd: studier med jämförelsegrupp visar ingen effekt. Visar de en negativ effekt står Negativ effekt</td></tr>
+            <tr><th scope="row"><span class="mp-inte">Oklart</span></th><td>Få och osäkra studier, utan effekt eller med en negativ</td></tr>
+            <tr><th scope="row"><span class="mp-inte">Inte studerat</span></th><td>Ingen studie med jämförelsegrupp har mätt området. Vi vet inte, och det betyder inte att metoden saknar effekt</td></tr>
           </tbody>
         </table>
-        <p>De grå staplarna visar hur svårt och hur dyrt det är att införa metoden, från Mycket låg till Mycket hög.</p>
+        <p>De grå staplarna visar hur svårt och hur dyrt det är att införa metoden: Svårighet från Mycket lätt till Mycket svårt, Kostnad från Mycket låg till Mycket hög.</p>
         <p>Forskningen visar vad som ofta fungerar för många elever. Du avgör vad som fungerar i din klass.</p>
       </div>
     </details>

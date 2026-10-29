@@ -1,14 +1,15 @@
 // Metodkortets profil för undervisningsmetoderna, ett utkast för formen (K-623; Niclas 2026-10-29: "Skapa ett utkast på
-// ett kort för Direct instruction så som jag beskrev det. Mest för design."). Tabellen och orden är metodriggens utkast 2
-// (C:/metodrigg/docs/undervisningsmetoder/standarden.md, avsnitt 5): säkerheten sätter taket och effekten nivån. De flyttar
-// till src/lib/standard/ när standarden är låst, så att riggen och sajten läser samma sak, och utkastets värden byts mot
-// metodens fil i samlingen src/content/undervisningsmetoder/.
+// ett kort för Direct instruction så som jag beskrev det. Mest för design."). Tabellen, orden och funktionerna följer
+// metodriggens standard (C:/metodrigg/docs/undervisningsmetoder/evidensen.md och build/sparrprov.mjs, riggens 77c3807):
+// tillförlitligheten sätter taket och effekten nivån, låg tillförlitlighet utan effekt är Oklart, och Svårighet och
+// Kostnad räknas ur kriterierna. De flyttar till src/lib/standard/ när standarden är låst, så att riggen och sajten
+// räknar med samma funktion, och utkastets värden byts mot metodens fil i samlingen src/content/undervisningsmetoder/.
 import { uppraknat } from './standard/index.js';
 
-export type Sakerhet = 'hog' | 'mattlig' | 'lag';
+export type Tillforlitlighet = 'hog' | 'mattlig' | 'lag';
 export type Effekt = 'negativ' | 'ingen' | 'liten' | 'mattlig' | 'stor';
-export type Omradesvarde = { sakerhet: Sakerhet; effekt: Effekt; skal: string } | { inteStuderat: true; skal: string };
-export type Omrade = 'larande' | 'lasning' | 'skrivning' | 'matematik' | 'amneskunskaper' | 'socialt';
+export type Omradesvarde = { tillforlitlighet: Tillforlitlighet; effekt: Effekt; motivering: string } | { inteStuderat: true; motivering: string };
+export type Omrade = 'larande' | 'lasning' | 'skrivning' | 'matematik' | 'amnen' | 'socialt';
 
 /** Staplarnas områden i standardens ordning. Lärande totalt sammanfattar och står först. */
 export const OMRADEN: readonly { id: Omrade; namn: string; under?: string }[] = [
@@ -16,54 +17,69 @@ export const OMRADEN: readonly { id: Omrade; namn: string; under?: string }[] = 
   { id: 'lasning', namn: 'Läsning' },
   { id: 'skrivning', namn: 'Skrivning' },
   { id: 'matematik', namn: 'Matematik' },
-  // Niclas 2026-10-29: "Istället för ämneskunskaper: ämnen". Id:t följer riggens standard tills den byter det.
-  { id: 'amneskunskaper', namn: 'Ämnen', under: 'SO, NO och teknik' },
+  // Niclas 2026-10-29: "Istället för ämneskunskaper: ämnen".
+  { id: 'amnen', namn: 'Ämnen', under: 'SO, NO och teknik' },
   { id: 'socialt', namn: 'Socialt' },
 ];
 
-// Nivån ur säkerheten och effekten. Negativ och ingen effekt ger båda 1, med var sitt ord.
-const TABELL: Record<Sakerhet, Record<'ingen' | 'liten' | 'mattlig' | 'stor', number>> = {
-  hog: { ingen: 1, liten: 3, mattlig: 4, stor: 5 },
-  mattlig: { ingen: 1, liten: 3, mattlig: 4, stor: 4 },
-  lag: { ingen: 1, liten: 2, mattlig: 2, stor: 2 },
+// Nivån ur tillförlitligheten och effekten. Låg tillförlitlighet utan effekt eller med negativ effekt är Oklart, och 1
+// kräver minst måttlig tillförlitlighet.
+const TABELL: Record<Tillforlitlighet, Record<Effekt, number | 'oklart'>> = {
+  hog: { negativ: 1, ingen: 1, liten: 3, mattlig: 4, stor: 5 },
+  mattlig: { negativ: 1, ingen: 1, liten: 3, mattlig: 4, stor: 4 },
+  lag: { negativ: 'oklart', ingen: 'oklart', liten: 2, mattlig: 2, stor: 2 },
 };
-export const NIVAORD = ['', 'Ingen påvisad effekt', 'Lovande', 'Visst stöd', 'Gott stöd', 'Starkt stöd'] as const;
-const SAKERHET: Record<Sakerhet, string> = { hog: 'Hög säkerhet', mattlig: 'Måttlig säkerhet', lag: 'Låg säkerhet' };
-const EFFEKT: Record<Effekt, string> = { negativ: 'negativ effekt', ingen: 'ingen effekt', liten: 'liten effekt', mattlig: 'måttlig effekt', stor: 'stor effekt' };
+// Orden prövades på en kall läsare 2026-10-29: med Svagt stöd och Inget påvisat stöd ordnade fem lärare dem lika.
+export const NIVAORD = ['', 'Inget påvisat stöd', 'Svagt stöd', 'Visst stöd', 'Gott stöd', 'Starkt stöd'] as const;
 
-/** Nivån 1 till 5, dess ord och underlaget i ord, eller null för ett område som inte är studerat. */
-export function nivan(v: Omradesvarde): { niva: number; ord: string; underlag: string } | null {
-  if ('inteStuderat' in v) return null;
-  const niva = TABELL[v.sakerhet][v.effekt === 'negativ' ? 'ingen' : v.effekt];
-  return { niva, ord: niva === 1 && v.effekt === 'negativ' ? 'Negativ effekt' : NIVAORD[niva], underlag: `${SAKERHET[v.sakerhet]}, ${EFFEKT[v.effekt]}.` };
+/** Läget för ett område: en nivå 1 till 5 med sitt ord, Negativ effekt, Oklart eller Inte studerat. */
+export type Laget = { slag: 'niva'; niva: number; ord: string; negativ: boolean } | { slag: 'oklart' | 'inte'; ord: string };
+export function laget(v: Omradesvarde): Laget {
+  if ('inteStuderat' in v) return { slag: 'inte', ord: 'Inte studerat' };
+  const n = TABELL[v.tillforlitlighet][v.effekt];
+  if (n === 'oklart') return { slag: 'oklart', ord: 'Oklart' };
+  const negativ = n === 1 && v.effekt === 'negativ';
+  return { slag: 'niva', niva: n, ord: negativ ? 'Negativ effekt' : NIVAORD[n], negativ };
+}
+
+/** Motiveringen börjar med tillförlitligheten och effekten, som standarden kräver; kortet gör den meningen fet. */
+export function motiveringensDelar(text: string): { forst: string; resten: string } {
+  const m = text.match(/^(.+?\.)\s+(.*)$/s);
+  return m ? { forst: m[1], resten: m[2] } : { forst: '', resten: text };
 }
 
 /** Primär evidens: de områden utom Lärande totalt som har den högsta nivån, när den är minst 3. */
 export function primar(evidens: Record<Omrade, Omradesvarde>): string {
-  const fem = OMRADEN.filter((o) => o.id !== 'larande').map((o) => ({ namn: o.namn, niva: nivan(evidens[o.id])?.niva ?? 0 }));
+  const fem = OMRADEN.filter((o) => o.id !== 'larande').map((o) => { const l = laget(evidens[o.id]); return { namn: o.namn, niva: l.slag === 'niva' ? l.niva : 0 }; });
   const hogst = Math.max(...fem.map((x) => x.niva));
   const namn = hogst >= 3 ? fem.filter((x) => x.niva === hogst).map((x, i) => (i ? x.namn.toLocaleLowerCase('sv') : x.namn)) : [];
   return namn.length ? uppraknat(namn) : 'Inget område med minst visst stöd';
 }
 
-// Svårighet och Kostnad: ordet bredvid de neutrala staplarna (src/components/Staplar.astro). Orden är platshållare tills
-// evidensens rubrik för svensk skola är skriven.
-const INFORORD = ['', 'Mycket låg', 'Låg', 'Måttlig', 'Hög', 'Mycket hög'] as const;
-export const inforOrd = (niva: number) => INFORORD[niva];
+// Svårighet och Kostnad ur kriterierna (evidensen.md, avsnitt 7). Svårigheten är den övre medianen av fyra, kostnaden den
+// högre av inköpet och timmarna. Orden: mer betyder mer arbete eller pengar, och de grå staplarna säger samma sak.
+export type Svarighet = { lara: number; karnan: number; stod: number; tid: number; motivering: string };
+export type Kostnad = { kop: number; timmar: number; motivering: string };
+const median = (xs: number[]) => { const s = [...xs].sort((a, b) => a - b); return s.length % 2 ? s[(s.length - 1) / 2] : s[s.length / 2]; };
+export const svarighetensNiva = (s: Svarighet) => median([s.lara, s.karnan, s.stod, s.tid]);
+export const kostnadensNiva = (k: Kostnad) => Math.max(k.kop, k.timmar < 5 ? 1 : k.timmar < 15 ? 2 : k.timmar < 40 ? 3 : k.timmar < 80 ? 4 : 5);
+export const SVARIGHETENS_ORD = ['', 'Mycket lätt', 'Lätt', 'Medelsvårt', 'Svårt', 'Mycket svårt'] as const;
+export const KOSTNADENS_ORD = ['', 'Mycket låg', 'Låg', 'Måttlig', 'Hög', 'Mycket hög'] as const;
 
 export interface Utkast {
   id: string; titel: string; alternativaNamn: string[]; undertitel: string; ingress: string; arskursText: string;
-  fakta: [string, string][]; evidens: Record<Omrade, Omradesvarde>;
-  svarighet: { niva: number; skal: string }; kostnad: { niva: number; skal: string };
+  fakta: [string, string][]; evidens: Record<Omrade, Omradesvarde>; svarighet: Svarighet; kostnad: Kostnad;
 }
 
-const PLATS = 'Platshållare. Här står en mening om vad studierna visar, för vilka elever och hur säkert det är, med källan.';
+// Platshållarnas motivering börjar som standarden kräver, med tillförlitligheten och effekten i ord.
+const ORDET: Record<Tillforlitlighet, string> = { hog: 'Hög', mattlig: 'Måttlig', lag: 'Låg' };
+const plats = (t: Tillforlitlighet, e: Effekt) => ({ tillforlitlighet: t, effekt: e, motivering: `${ORDET[t]} tillförlitlighet, ${e === 'mattlig' ? 'måttlig' : e} effekt. Platshållare: här står vad den bästa källan visar och för vilka elever, med källan.` });
 
 /**
  * Piloten, Explicit undervisning, som riggens skelett (C:/metodrigg/docs/undervisningsmetoder/skelett-explicit-undervisning.yaml):
  * titeln som Niclas valde 2026-10-29, de alternativa namnen, undertiteln, ingressen, tiden och perioden, och riggens
- * preliminära skäl för Svårighet och Kostnad. Evidensens värden är platshållare som visar varje läge i formen, och inget
- * omdöme om metoden.
+ * kriterier och motiveringar för Svårighet och Kostnad. Evidensens värden väntar på riggens bedömning, så kortet har
+ * platshållare som visar lägena i formen, och inget omdöme om metoden.
  */
 export const PILOTEN: Utkast = {
   id: 'explicit-undervisning',
@@ -74,13 +90,13 @@ export const PILOTEN: Utkast = {
   arskursText: 'F–9',
   fakta: [['Lektion', '50 min'], ['Hur ofta', '2–5 i veckan'], ['Införande', '4 veckor'], ['Årskurs', 'F–9']],
   evidens: {
-    larande: { sakerhet: 'hog', effekt: 'mattlig', skal: PLATS },
-    lasning: { sakerhet: 'mattlig', effekt: 'mattlig', skal: PLATS },
-    skrivning: { sakerhet: 'lag', effekt: 'stor', skal: PLATS },
-    matematik: { sakerhet: 'hog', effekt: 'stor', skal: PLATS },
-    amneskunskaper: { sakerhet: 'mattlig', effekt: 'liten', skal: PLATS },
-    socialt: { inteStuderat: true, skal: 'Platshållare. Här står vad studierna i urvalet mätte, och att ingen av dem mätte det sociala. Inte studerat betyder att vi inte vet, och inte att metoden saknar effekt.' },
+    larande: plats('hog', 'mattlig'),
+    lasning: plats('mattlig', 'liten'),
+    skrivning: plats('lag', 'stor'),
+    matematik: plats('hog', 'stor'),
+    amnen: { tillforlitlighet: 'lag', effekt: 'ingen', motivering: 'Låg tillförlitlighet, ingen effekt. Platshållare: här står vad som finns, som tre små studier utan effekt, och varför det inte räcker för att säga något.' },
+    socialt: { inteStuderat: true, motivering: 'Platshållare: här står vad studierna i urvalet mätte, och att ingen av dem mätte det sociala.' },
   },
-  svarighet: { niva: 2, skal: 'Klassen lär sig få rutiner. Det svåra är att dela upp innehållet i små steg och att vänta på alla svar.' },
-  kostnad: { niva: 1, skal: 'Minitavlor och pennor. Planeringstiden går till stegen och exemplen.' },
+  svarighet: { lara: 3, karnan: 3, stod: 3, tid: 3, motivering: 'Läraren övar nya drag: att visa i små steg med samma ord, leda övningen i högt tempo och vänta med eget arbete tills nästan alla kan.' },
+  kostnad: { kop: 2, timmar: 10, motivering: 'Miniwhiteboards och exit-lappar. Timmarna är läsningen, tre möten i arbetslaget, samtalen efter två observationer och en timme i veckan för stegen och orden de första veckorna.' },
 };
