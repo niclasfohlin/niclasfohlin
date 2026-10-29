@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Metodkort from '../components/Metodkort.astro';
-import { bildHojd } from '../lib/bildmatt';
 import TextKort from '../components/TextKort.astro';
+import BokKort from '../components/BokKort.astro';
 import { site } from '../data/site';
 import { artiklarSorterade, metoderSenaste, metodSerier, bockerSorterade, publicerade } from '../lib/innehall';
 import { serieTaggar } from '../lib/serie';
@@ -43,13 +43,7 @@ const bocker = (await bockerSorterade()).slice(0, 4);
       <p class="text">Böcker om kooperativt lärande, undervisning och läsinlärning, de flesta skrivna tillsammans med Jennie Wilson.</p>
       <div class="rutnat bokrad">
         {bocker.map((b) => (
-          <article class="kort bok-kort">
-            {b.data.omslag && <a href={`/bocker/${b.id}`} class="bok-omslag" tabindex="-1" aria-hidden="true"><img src={b.data.omslag} alt="" loading="lazy" width="120" height={bildHojd(b.data.omslag, 120)} /></a>}
-            <div>
-              <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
-              <h3><a href={`/bocker/${b.id}`}>{b.data.titel}</a></h3>
-            </div>
-          </article>
+          <BokKort b={b} />
         ))}
       </div>
       <p class="lankrad"><a href="/bocker">Alla böcker</a></p>

@@ -1,0 +1,20 @@
+---
+// Kortet för en bok på startsidan och i /bocker, i textkortens form (K-620; Niclas 2026-10-29: "Enhetlig design sedan men
+// böckernas kort också?", och om provet: "Ja. Det ser bra ut"): bokens kategori som vinjett med en list överst i
+// bokbandsbrunt, titeln, förlaget och året och, i /bocker, beskrivningen. Hela kortet är en tryckyta. Reglerna står i
+// global.css under Bokkorten.
+import type { CollectionEntry } from 'astro:content';
+import { bildHojd } from '../lib/bildmatt';
+
+interface Props { b: CollectionEntry<'bocker'>; beskrivning?: boolean }
+const { b, beskrivning = false } = Astro.props;
+---
+<article class="kort bok-kort">
+  {b.data.omslag && <a href={`/bocker/${b.id}`} class="bok-omslag" tabindex="-1" aria-hidden="true"><img src={b.data.omslag} alt="" loading="lazy" width="120" height={bildHojd(b.data.omslag, 120)} /></a>}
+  <div>
+    <p class="bokkort-etikett">{b.data.kategori}</p>
+    <h3><a href={`/bocker/${b.id}`}>{b.data.titel}</a></h3>
+    <p class="bokkort-kalla">{[b.data.forlag, b.data.utgivningsar].filter(Boolean).join(', ')}</p>
+    {beskrivning && <p class="bokkort-beskrivning">{b.data.beskrivning}</p>}
+  </div>
+</article>

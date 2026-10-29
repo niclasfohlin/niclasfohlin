@@ -293,7 +293,19 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
 .bok-kort { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: start; }
 .bok-kort .bok-omslag img { display: block; width: 6.5rem; height: auto; border: 1px solid var(--farg-kant); border-radius: 4px; }
 .bok-kort h3 { font-size: 1.15rem; overflow-wrap: anywhere; hyphens: auto; }
-.bok-kort .meta { margin-bottom: 0.35rem; }
+/* Bokkorten i textkortens form (K-620; Niclas 2026-10-29: "Ja. Det ser bra ut"): kategorin som vinjett med en list
+   överst i bokbandsbrunt, som inte är någon av textkortens eller ämnenas färger, titeln utan understrykning, förlaget och
+   året sist och hela kortet en tryckyta (src/components/BokKort.astro). */
+.kort.bok-kort { --typfarg: #6b4a1d; position: relative; border-top: 6px solid var(--typfarg); border-radius: 6px 6px var(--radie) var(--radie); padding-top: 1rem; }
+.kort.bok-kort:hover { border-color: var(--farg-kant); border-top-color: var(--typfarg); }
+.kort.bok-kort:focus-within { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.kort.bok-kort p.bokkort-etikett { margin: 0 0 0.35rem; font: 700 0.95rem/1.2 var(--typsnitt-ui); color: var(--typfarg); }
+.kort.bok-kort h3 { margin: 0 0 0.5rem; font-size: clamp(1.05rem, 5vw, 1.35rem); line-height: 1.15; }
+.kort.bok-kort h3 a { color: var(--farg-text); text-decoration: none; }
+.kort.bok-kort h3 a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+.kort.bok-kort:hover h3 a { text-decoration: underline; text-underline-offset: 0.2em; }
+.kort.bok-kort p.bokkort-kalla { margin: 0; font: 400 0.875rem/1.4 var(--typsnitt-ui); color: var(--farg-text-svag); }
+.kort.bok-kort p.bokkort-beskrivning { margin: 0.6rem 0 0; }
 /* I telefonen står omslaget bredvid året och titeln, och beskrivningen under i hela kortets bredd (K-617, prov D). Under
    360 punkter står omslaget över titeln som förut, så att ett långt ord som "undervisningsgrupper:" ryms på en rad. */
 @media (max-width: 22.49rem) {
@@ -301,13 +313,14 @@ button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer
   .bok-kort .bok-omslag img { width: 5.5rem; }
 }
 @media (min-width: 22.5rem) and (max-width: 40rem) {
-  .bok-kort { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr auto; column-gap: 1rem; row-gap: 0; }
+  .bok-kort { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; column-gap: 1rem; row-gap: 0; }
   .bok-kort > div { display: contents; }
-  .bok-kort .bok-omslag { grid-column: 1; grid-row: 1 / span 2; }
+  .bok-kort .bok-omslag { grid-column: 1; grid-row: 1 / span 3; }
   .bok-kort .bok-omslag img { width: 4.25rem; }
-  .bok-kort .meta { grid-column: 2; grid-row: 1; align-self: start; }
-  .bok-kort h3 { grid-column: 2; grid-row: 2; align-self: start; font-size: 1.05rem; }
-  .bok-kort p:not(.meta) { grid-column: 1 / -1; grid-row: 3; margin: 0.6rem 0 0; }
+  .kort.bok-kort p.bokkort-etikett { grid-column: 2; grid-row: 1; }
+  .kort.bok-kort h3 { grid-column: 2; grid-row: 2; align-self: start; }
+  .kort.bok-kort p.bokkort-kalla { grid-column: 2; grid-row: 3; align-self: start; }
+  .kort.bok-kort p.bokkort-beskrivning { grid-column: 1 / -1; grid-row: 4; }
 }
 .bok { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem 2.5rem; align-items: start; max-width: var(--matt-bredd); }
 .bok-omslag-stor { max-width: 15rem; width: 100%; border-radius: 4px; }
