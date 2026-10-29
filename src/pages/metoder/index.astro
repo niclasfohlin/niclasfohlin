@@ -1,0 +1,17 @@
+---
+// Metoder: undervisningsmetoderna för helklass (K-621, K-623). Ett utkast: standarden skrivs med metodriggen
+// (C:/metodrigg/docs/undervisningsmetoder/), och sidan visar kortet för piloten tills samlingen finns.
+import Base from '../../layouts/Base.astro';
+import Metodprofil from '../../components/Metodprofil.astro';
+import { site } from '../../data/site';
+import { PILOTEN } from '../../lib/metodprofil';
+---
+
+<Base title={site.sidor.metoder.titel} description={site.sidor.metoder.beskrivning} tryckText="© Niclas Fohlin · niclasfohlin.se/metoder">
+  <h1>Metoder</h1>
+  <p class="text metodbank-ingress">Undervisningsmetoder för hela klassen, i ämnets vanliga lektioner. Varje metod visar vad forskningen säger, vad som bär effekten och hur en lektion går till, med mallar att planera med.</p>
+  <p class="mp-utkast">Ett utkast till bankens form. Kortet visar den första metoden med platshållare i stället för värden.</p>
+  <div class="rutnat mp-rutnat">
+    <Metodprofil m={PILOTEN} bank />
+  </div>
+</Base>

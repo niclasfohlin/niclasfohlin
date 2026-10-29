@@ -1,0 +1,84 @@
+---
+// Metodkortet för en undervisningsmetod, ett utkast för formen (K-623). Formen är Raderna, som båda idéförslagen
+// rekommenderade (underlag/prov/metoder/ide/): faktan som celler under huvudet, en tunn rad per område med fem staplar och
+// nivåns ord som fälls ut till skälet, Lärande totalt större och öppen, Primär evidens i ord, Svårighet och Kostnad i ord
+// i stället för staplar, och vad nivåerna betyder sist. Med bank är det kortet i banken: huvudet med titeln, faktan med
+// Svårighet och Kostnad, Lärande totalt och Primär evidens.
+import { OMRADEN, nivan, primar, inforOrd, NIVAORD, type Utkast } from '../lib/metodprofil';
+import { uppraknat } from '../lib/standard/index.js';
+interface Props { m: Utkast; bank?: boolean }
+const { m, bank = false } = Astro.props;
+const total = nivan(m.evidens.larande);
+const prim = primar(m.evidens);
+const kallas = `Kallas också ${uppraknat(m.alternativaNamn)}`;
+---
+{bank ? (
+  <article class="kort metodkort mp-bank" data-del="metoder">
+    <div class="kort-topp">
+      <h3><a href={`/metoder/${m.id}`}>{m.titel}</a></h3>
+      <span class="beta">Platshållare</span>
+      <p class="mp-kallas-bank">{kallas}</p>
+    </div>
+    <dl class="kort-fakta">
+      {m.fakta.map(([rubrik, text]) => <div><dt>{rubrik}</dt><dd>{text}</dd></div>)}
+      <div><dt>Svårighet</dt><dd>{inforOrd(m.svarighet.niva)}, <span class="mp-av">{m.svarighet.niva} av 5</span></dd></div>
+      <div><dt>Kostnad</dt><dd>{inforOrd(m.kostnad.niva)}, <span class="mp-av">{m.kostnad.niva} av 5</span></dd></div>
+    </dl>
+    {total && (
+      <p class="mp-bank-total">
+        <span class="mp-namn">Lärande totalt</span>
+        <span class="mp-staplar" aria-hidden="true">{[1, 2, 3, 4, 5].map((i) => <i class={i <= total.niva ? 'pa' : undefined}></i>)}</span>
+        <span class="mp-varde">{total.ord}<span class="visually-hidden">, {total.niva} av 5</span></span>
+      </p>
+    )}
+    <p class="mp-primar"><span>Primär evidens</span> <strong>{prim}</strong></p>
+    <p class="ingress">{m.ingress}</p>
+  </article>
+) : (
+  <div class="faktaruta metodprofil" id="metodkortet">
+    <p class="faktaruta-etikett"><span>Metodkortet</span> <span class="beta">Platshållare</span></p>
+    <dl class="kort-fakta">
+      {m.fakta.map(([rubrik, text]) => <div><dt>{rubrik}</dt><dd>{text}</dd></div>)}
+    </dl>
+    {OMRADEN.map((o) => {
+      const v = m.evidens[o.id];
+      const n = nivan(v);
+      const radenTotal = o.id === 'larande';
+      return (
+        <>
+          <details class={`mp-rad${radenTotal ? ' mp-total' : ''}`} open={radenTotal}>
+            <summary>
+              <span class="mp-namn">{o.namn}{o.under && <small>{o.under}</small>}</span>
+              {n
+                ? <><span class="mp-staplar" aria-hidden="true">{[1, 2, 3, 4, 5].map((i) => <i class={i <= n.niva ? 'pa' : undefined}></i>)}</span><span class="mp-varde">{n.ord}<span class="visually-hidden">, {n.niva} av 5</span></span></>
+                : <span class="mp-inte">Inte studerat</span>}
+            </summary>
+            <p class="mp-skal">{n && <strong>{n.underlag}</strong>} {v.skal}</p>
+          </details>
+          {radenTotal && <p class="mp-primar"><span>Primär evidens</span> <strong>{prim}</strong></p>}
+        </>
+      );
+    })}
+    <details class="mp-rad mp-infor">
+      <summary><span class="mp-namn">Svårighet att införa</span><span class="mp-varde">{inforOrd(m.svarighet.niva)}, <span class="mp-av">{m.svarighet.niva} av 5</span></span></summary>
+      <p class="mp-skal">{m.svarighet.skal}</p>
+    </details>
+    <details class="mp-rad mp-infor">
+      <summary><span class="mp-namn">Kostnad att införa</span><span class="mp-varde">{inforOrd(m.kostnad.niva)}, <span class="mp-av">{m.kostnad.niva} av 5</span></span></summary>
+      <p class="mp-skal">{m.kostnad.skal}</p>
+    </details>
+    <details class="mp-rad mp-skalan">
+      <summary><span class="mp-namn">Vad nivåerna betyder</span></summary>
+      <div class="mp-skal">
+        <p>Varje stapel svarar på en fråga: hur väl stöder forskningen att metoden förbättrar elevernas resultat i området? Nivån räknas ur hur säker forskningen är och hur stor effekten är, och säkerheten sätter taket. En stor effekt i få studier får därför högst 2.</p>
+        <table class="mp-nivaer">
+          <tbody>
+            {[5, 4, 3, 2, 1].map((n) => <tr><th scope="row">{n}</th><td>{n === 1 ? 'Ingen påvisad effekt, eller negativ effekt' : NIVAORD[n]}</td></tr>)}
+            <tr><th scope="row"><span class="mp-inte">–</span></th><td>Inte studerat: ingen studie med jämförelsegrupp har mätt området. Vi vet inte, och det betyder inte att metoden saknar effekt</td></tr>
+          </tbody>
+        </table>
+        <p>Forskningen visar vad som ofta fungerar för många elever. Du avgör vad som fungerar i din klass.</p>
+      </div>
+    </details>
+  </div>
+)}

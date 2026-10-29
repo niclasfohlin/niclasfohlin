@@ -14,6 +14,9 @@ export const site = {
     artiklar: { titel: 'Artiklar', beskrivning: 'Krönikor, debattartiklar och intervjuer om skolan, publicerade i Vi Lärare, Göteborgs-Posten och andra tidningar. Sök bland texterna eller bläddra per år.' },
     bocker: { titel: 'Böcker', beskrivning: 'Niclas Fohlins böcker om kooperativt lärande, undervisning och läsinlärning, samt läromedel och kapitel i andra böcker.' },
     stodundervisning: { titel: 'Stödundervisning', beskrivning: 'Metodbank för stödundervisning i matematik, läsning, skrivning och socialt samspel. Varje metod har körschema, exempelfraser och mallar, och går att skriva ut och ladda ner som Word-fil.' },
+    // Undervisningsmetoderna för helklass (K-621, K-623; Niclas 2026-10-29: "Den ska på sajten vara efter Stödundervisning
+    // och ha en liknande sida"). Standarden skrivs med metodriggen, och sidan är ett utkast tills den är godkänd.
+    metoder: { titel: 'Metoder', beskrivning: 'Undervisningsmetoder för helklass, som direktinstruktion och kooperativt lärande. Varje metod visar vad forskningen säger, vad som bär effekten och hur en lektion går till, med mallar att planera med.' },
     om: { titel: 'Om Niclas Fohlin', beskrivning: 'Niclas Fohlin är samordnande specialpedagog på AcadeMedias grundskolor, speciallärare, författare och föreläsare.' },
     prenumerera: { titel: 'Prenumerera', beskrivning: 'Få ett mejl när det kommer nya texter, böcker eller metoder.' },
     taggar: { titel: 'Taggar', beskrivning: 'Alla ämnen som texterna och metoderna är taggade med.' },
@@ -23,7 +26,8 @@ export const site = {
     { text: 'Artiklar', href: '/artiklar' },
     { text: 'Böcker', href: '/bocker' },
     { text: 'Stödundervisning', href: '/stodundervisning' },
-    { text: 'Om', href: '/om' },
+    // Metoder står där Om stod, och Om nås genom Om Niclas i sidfoten (Niclas 2026-10-29: "flytta Om, lägga dit Metoder").
+    { text: 'Metoder', href: '/metoder' },
   ],
   // OAuth-klient-id (webb) från Niclas Google Cloud-projekt, för knappen "Spara i Drive" vid
   // Word-filerna. Ingen hemlighet: det står i sidans kod. Tomt: knapparna visas inte. Se DRIFT.md.

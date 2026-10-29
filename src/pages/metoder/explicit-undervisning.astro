@@ -1,0 +1,24 @@
+---
+// Utkastet till en undervisningsmetods sida (K-623): huvudet och metodkortet för piloten Explicit undervisning, för formen.
+// Metoden skrivs av metodriggen efter standarden, och sidan blir då src/pages/metoder/[id].astro ur samlingen.
+import Base from '../../layouts/Base.astro';
+import Metodprofil from '../../components/Metodprofil.astro';
+import { PILOTEN as m } from '../../lib/metodprofil';
+import { uppraknat } from '../../lib/standard/index.js';
+---
+
+<Base title={m.titel} description={`${m.ingress} Ett utkast till metodkortet för undervisningsmetoderna.`} tryckText={`© Niclas Fohlin · niclasfohlin.se/metoder/${m.id}`}>
+  <article class="metod" data-del="metoder">
+    <div class="metod-topp">
+      <header class="metod-huvud">
+        <p class="meta brodsmula"><a href="/metoder">Metoder</a> · {m.arskursText}</p>
+        <h1>{m.titel}</h1>
+        <p class="mp-kallas">Kallas också {uppraknat(m.alternativaNamn)}</p>
+        <p class="undertitel">{m.undertitel}</p>
+        <p class="ingress">{m.ingress}</p>
+        <p class="mp-utkast">Ett utkast till metodkortets form. Värdena är platshållare och inget omdöme om metoden, och metoden skrivs när standarden är klar.</p>
+      </header>
+      <Metodprofil m={m} />
+    </div>
+  </article>
+</Base>
