@@ -13,6 +13,8 @@ export const mening = (s) => (/[.!?:”"]$/.test(s.trim()) ? s.trim() : `${s.tri
 export const utanPunkt = (s) => s.replace(/[.\s]+$/, '');
 /** Ett tal med decimalkomma: "3,5". @param {number | null} n */
 export const decimal = (n) => String(n).replace('.', ',');
+/** Ett tal med lika många decimaler som de andra i en kolumn: "2,0" och "4,4" (den kalla läsaren 2026-10-30, nr 17). @param {number} n @param {number} [decimaler] */
+export const medDecimaler = (n, decimaler = 1) => n.toFixed(decimaler).replace('.', ',');
 /** "09" ur 9. @param {number} n */
 export const tvasiffrigt = (n) => String(n).padStart(2, '0');
 /** Text som ska stå i HTML, med &, <, > och " skyddade. @param {string} s */

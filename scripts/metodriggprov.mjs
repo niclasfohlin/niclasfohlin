@@ -4,7 +4,8 @@
 // en metod ska skrivas och läggas in ... Vad behöver den för att [hamna] rätt i sitt bygge då?"). Provet läser riggens
 // methods/<id>/metod.yaml och out/<id>/, inte sajtens kopia, och prövar det sajten bygger på: fälten som metodens sida,
 // metodkortet och Lär dig metoden läser, filer.json med summan för metodfilen, de åtta dokumenten med © Niclas Fohlin och
-// niclasfohlin.se på varje sida, och filmerna. Standarden står i METODER.md under Undervisningsmetoderna.
+// niclasfohlin.se på varje sida, och filmerna. Lathunden krävs bara som Word: lathundens pdf och PowerPoint-fil gör sajten
+// (K-637). Standarden står i METODER.md under Undervisningsmetoderna.
 //
 //   node scripts/metodriggprov.mjs <id> [--rigg C:/metodrigg]
 import { createHash } from 'node:crypto';
@@ -29,6 +30,9 @@ const fel = undervisningsmetodensFel(d);
 const ut = join(RIGG, 'out', id);
 const forteckning = join(ut, 'filer.json');
 const SLAG = ['allt', 'metoden', 'lathund', 'lektionskort', 'planeringsmall', 'observation', 'materialet', 'referensblad'];
+// Högst så många sidor (riggens standard, avsnitt 11 och 15; Niclas 2026-10-30 om referensbladet: "Kör med 3", en grupp
+// per sida).
+const HOGST_SIDOR = { lektionskort: 1, planeringsmall: 1, observation: 2, referensblad: 3 };
 if (!existsSync(forteckning)) fel.push(`out/${id}/filer.json saknas`);
 else {
   const f = JSON.parse(readFileSync(forteckning, 'utf8'));
@@ -36,7 +40,8 @@ else {
   for (const s of SLAG) if (!(f.filer ?? []).some((x) => x.slag === s)) fel.push(`filer.json saknar ${s}`);
   for (const x of f.filer ?? []) {
     if ((x.metodSha256 ?? f.metodSha256) !== summa) fel.push(`${x.namn} är byggd ur en annan metod.yaml än den som ligger i methods/${id}/`);
-    for (const namn of [x.namn, x.pdf].filter(Boolean)) {
+    // Lathundens pdf gör sajten ur sin PowerPoint-fil (K-637), så riggens krävs inte; riggens Word-lathund krävs.
+    for (const namn of [x.namn, x.slag === 'lathund' ? undefined : x.pdf].filter(Boolean)) {
       const p = [join(ut, namn), join(RIGG, 'out', 'material', `lektionskort-${id}`, namn)].find((y) => existsSync(y));
       if (!p) { fel.push(`${namn} saknas`); continue; }
       if (namn.endsWith('.pdf')) {
@@ -44,6 +49,7 @@ else {
         const utan = sidor.map((t, i) => (t.includes('© Niclas Fohlin') && t.includes('niclasfohlin.se') ? 0 : i + 1)).filter(Boolean);
         if (utan.length) fel.push(`${namn} saknar "© Niclas Fohlin" och niclasfohlin.se på sidan ${utan.slice(0, 6).join(', ')}`);
         if (sidor.some((t) => /\[object |undefined|NaN/.test(t))) fel.push(`${namn} har [object …], undefined eller NaN i texten`);
+        if (HOGST_SIDOR[x.slag] && sidor.length > HOGST_SIDOR[x.slag]) fel.push(`${namn} har ${sidor.length} sidor, högst ${HOGST_SIDOR[x.slag]}`);
       }
     }
   }

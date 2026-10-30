@@ -17,7 +17,10 @@ export const ren = (t) => String(t).toLocaleLowerCase('sv').replace(/[\s ⁠­�
  */
 export const utanHuvudOchFot = (text) => text.split('\n').filter((r) => !/niclasfohlin\.se\s*$|^\s*©\s*Niclas Fohlin|^\s*Sida \d+ av \d+\s*$/.test(r)).join('\n');
 /**
- * Pdf:ens text med pdftotext (Poppler) i läsordning, med sidhuvud och sidfot; tom när filen inte går att läsa.
+ * Pdf:ens text med pdftotext (Poppler) i läsordning, med sidhuvud och sidfot; tom när filen inte går att läsa. Med raw läses
+ * texten i den ordning pdf:en har den, som i en pdf ur PowerPoint är formernas ordning: lathundens tabeller har celler sida
+ * vid sida, och läsordningen fogar annars ihop raderna i två celler (sajtens lathund, K-637).
  * @param {string} fil
+ * @param {{ raw?: boolean }} [o]
  */
-export const pdfText = (fil) => spawnSync('pdftotext', ['-enc', 'UTF-8', fil, '-'], { encoding: 'utf8', maxBuffer: 1 << 26 }).stdout ?? '';
+export const pdfText = (fil, o = {}) => spawnSync('pdftotext', ['-enc', 'UTF-8', ...(o.raw ? ['-raw'] : []), fil, '-'], { encoding: 'utf8', maxBuffer: 1 << 26 }).stdout ?? '';

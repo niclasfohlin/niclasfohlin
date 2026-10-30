@@ -8,7 +8,8 @@
 // (scripts/bankpdf.mjs, scripts/pdfdelar.mjs). Stående och liggande, sidornas brytning och texten är därför Word-filens.
 // Det här skriptet prövar det som återstår: att varje knapp leder till en pdf som finns och är den som knappen säger.
 //
-// Varje metodsida, varje enhets och rams sida, varje lathundssida och Ta fram-sidorna med temanas sidor öppnas i Chrome,
+// Varje metodsida, varje enhets och rams sida, varje lathundssida (också undervisningsmetodernas under /metoder/, K-637)
+// och Ta fram-sidorna med temanas sidor öppnas i Chrome,
 // med allt som går att fälla ut utfällt och Alla bland nivåerna, och så prövas:
 //   varje länk med data-skriv-ut-pdf leder till en pdf i dist, med minst en sida;
 //   en knapp som säger att bladet ligger (data-liggande) ger bara liggande sidor, och en knapp som säger hur många sidor
@@ -77,6 +78,10 @@ const sidor = metoder.flatMap((id) => [
   { id, adress: `/stodundervisning/${id}`, metodsida: true },
   ...undersidor(id, id, 2),
 ]);
+// Undervisningsmetodernas lathundssidor under Metoder (K-637), som Stödundervisnings: knappen överst leder till lathundens
+// pdf ur PowerPoint, fyra liggande sidor (data-liggande, data-sidor-hogst). Metodens andra sidor prövar scripts/metoderprov.mjs.
+const umMapp = join(dist, 'metoder');
+if (existsSync(umMapp)) for (const x of readdirSync(umMapp, { withFileTypes: true })) if (x.isDirectory() && existsSync(join(umMapp, x.name, 'lathund', 'index.html')) && (!valda.length || valda.includes(x.name))) sidor.push({ id: x.name, adress: `/metoder/${x.name}/lathund`, metodsida: false });
 
 // Inget skript i bygget skriver ut sidan: den enda utskriften är pdf:ens, ur ramen som SkrivUtPdf.astro lägger dit
 // (contentWindow.print). Skripten ligger i dist/_astro och direkt i sidorna, där Astro lägger de små.

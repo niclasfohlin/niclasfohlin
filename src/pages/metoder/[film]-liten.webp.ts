@@ -1,0 +1,24 @@
+import type { APIRoute, GetStaticPaths } from 'astro';
+import { publicerade } from '../../lib/innehall';
+import { metodensFilmer, type MetodFilm } from '../../lib/film';
+import { smabild } from '../../lib/filmfil';
+import type { Um } from '../../lib/undervisningsmetod';
+
+// /metoder/<id>-film2-liten.webp: filmens omslagsbild i litet format, till raden där läsaren väljer film i spelaren på
+// en undervisningsmetods lathundssida (Filmspelare.astro, K-634), som /stodundervisning/<id>-film2-liten.webp. Bilden görs
+// vid bygget ur omslagsbilden som scripts/filmmp4.mjs sparar med filmens mp4 i public/metoder/, för varje film i en metod
+// med lathund och mer än en film.
+export const getStaticPaths: GetStaticPaths = async () => {
+  const metoder = await publicerade('undervisningsmetoder');
+  return metoder.flatMap((m) => {
+    const d = m.data as Um;
+    const filmer = metodensFilmer({ film: d.film, filmer: d.filmer }, m.id, 'metoder');
+    if (!d.lathund || filmer.length < 2) return [];
+    return filmer.map((f) => ({ params: { film: f.bas.split('/').pop() }, props: { f, titel: m.data.titel } }));
+  });
+};
+
+export const GET: APIRoute = async ({ props }) => {
+  const bild = await smabild(props.f as MetodFilm, props.titel);
+  return new Response(new Uint8Array(bild), { headers: { 'Content-Type': 'image/webp' } });
+};

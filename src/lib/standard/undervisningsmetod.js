@@ -202,7 +202,80 @@ export function undervisningsmetodensFel(d) {
   if (meningarna(d.hinder?.kort).length > HINDRETS_KORT.meningar) fel.push(`hinder.kort har fler än ${HINDRETS_KORT.meningar} meningar`);
   if (String(d.hinder?.kort ?? '').length > HINDRETS_KORT.tecken) fel.push(`hinder.kort har fler än ${HINDRETS_KORT.tecken} tecken`);
   if ('mal' in d) fel.push('mal står i metoden: en undervisningsmetod har inget mål, läraren skriver sitt i Lär dig metoden (Niclas 2026-10-30)');
+  fel.push(...lathundensTakFel(d));
   return fel;
+}
+
+/**
+ * Lathundens tak (sajtens K-637): de längder som ryms på lathundens fyra liggande sidor i PowerPoint-filen och pdf:en, som
+ * sajten ritar för varje undervisningsmetod ur lathundensSidor. Taken är pilotens längder med marginal (brevet till riggen
+ * 2026-10-30, 06.15 punkt 3), prövade på en provmetod där varje fält står vid sitt tak: då ryms varje sida med texten i
+ * minst 85 procent av sin storlek. `tecken` är tecken per text, `alla` tecken tillsammans.
+ */
+export const LATHUNDENS_TAK = Object.freeze({
+  tid: 55,
+  metodensText: { stycken: 2, tecken: 210 },
+  lektionensText: 340,
+  karnan: { namn: 40, vad: 110 },
+  checklista: { punkter: 8, tecken: 120 },
+  fraser: 60,
+  rutinerVecka1: 1,
+  veckorna: { rader: 5, tecken: 130, alla: 1500 },
+  medDig: 360,
+  efter: 260,
+  fallgropar: { fallgrop: 80, prova: 135 },
+});
+
+/**
+ * Det i metodens fil som är längre än lathundens tak (LATHUNDENS_TAK), med fältet och var det står i lathunden. Tom lista
+ * när allt ryms.
+ * @param {Record<string, any>} d metodens fil, läst
+ * @returns {string[]}
+ */
+export function lathundensTakFel(d) {
+  const T = LATHUNDENS_TAK;
+  /** @type {string[]} */
+  const fel = [];
+  const lista = (/** @type {unknown} */ x) => /** @type {any[]} */ (Array.isArray(x) ? x : x ? [x] : []);
+  const langd = (/** @type {unknown} */ s) => String(s ?? '').length;
+  const over = (/** @type {string} */ vag, /** @type {unknown} */ s, /** @type {number} */ tak, /** @type {string} */ plats) => { if (langd(s) > tak) fel.push(`${vag} har ${langd(s)} tecken, och ${plats} rymmer ${tak}`); };
+  over('tid', d.tid, T.tid, 'faktan på lathundens sida 1');
+  const metoden = lista(d.lathund?.metoden?.text);
+  if (metoden.length > T.metodensText.stycken) fel.push(`lathund.metoden.text har ${metoden.length} stycken, och lathundens sida 1 rymmer ${T.metodensText.stycken}`);
+  metoden.forEach((s, i) => over(`lathund.metoden.text[${i}]`, s, T.metodensText.tecken, 'lathundens sida 1'));
+  over('lathund.lektion.text', lista(d.lathund?.lektion?.text).join(' '), T.lektionensText, 'Första lektionen på lathundens sida 2');
+  for (const k of lista(d.karna?.komponenter)) { over(`karna ${k.namn}.namn`, k.namn, T.karnan.namn, 'kortet på lathundens sida 1'); over(`karna ${k.namn}.vad`, k.vad, T.karnan.vad, 'kortet på lathundens sida 1'); }
+  const punkter = lista(d.checklista?.punkter);
+  if (punkter.length > T.checklista.punkter) fel.push(`checklista har ${punkter.length} punkter, och lathundens sida 2 rymmer ${T.checklista.punkter}`);
+  punkter.forEach((p, i) => over(`checklista.punkter[${i}]`, p, T.checklista.tecken, 'lathundens sida 2'));
+  for (const s of lista(d.steg?.rader)) lista(s.fraser).slice(0, 2).forEach((f, i) => over(`steg ${s.namn}.fraser[${i}]`, f, T.fraser, 'Du säger på lathundens sida 2'));
+  const rutiner = lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1');
+  if (rutiner.length > T.rutinerVecka1) fel.push(`rutiner har ${rutiner.length} rutiner i vecka 1, och lathundens sida 2 rymmer ${T.rutinerVecka1}`);
+  const veckor = lista(d.progression?.rader);
+  if (veckor.length > T.veckorna.rader) fel.push(`progression.rader har ${veckor.length} rader, och veckornas tabell på lathundens sida 4 rymmer ${T.veckorna.rader}`);
+  const celler = veckor.flatMap((r) => [[`progression vecka ${r.vecka}.eleverna`, r.eleverna ?? r.fokus], [`progression vecka ${r.vecka}.roll`, r.roll], [`progression vecka ${r.vecka}.vidare`, r.vidare]]);
+  for (const [vag, s] of celler) over(vag, s, T.veckorna.tecken, 'veckornas tabell på lathundens sida 4');
+  const alla = celler.reduce((n, [, s]) => n + langd(s), 0);
+  if (alla > T.veckorna.alla) fel.push(`veckornas tabell har ${alla} tecken i cellerna, och lathundens sida 4 rymmer ${T.veckorna.alla}`);
+  const urad = (/** @type {string} */ id) => lista(d.uppfoljning?.rader).find((r) => r.id === id)?.vad;
+  over('uppfoljning, Med dig på vägen', MED_DIG_PA_VAGEN.map(urad).filter(Boolean).join(' '), T.medDig, 'lathundens sida 4');
+  over('uppfoljning stodet, de två första meningarna', meningarna(urad('stodet')).slice(0, 2).join(' '), T.efter, 'Efter de första veckorna på lathundens sida 4');
+  for (const r of lista(d.fallgropar?.rader).filter((x) => x.komponent && x.prova)) { over(`fallgropar ${r.komponent}.fallgrop`, r.fallgrop, T.fallgropar.fallgrop, 'Om det glider på lathundens sida 4'); over(`fallgropar ${r.komponent}.prova`, r.prova, T.fallgropar.prova, 'Om det glider på lathundens sida 4'); }
+  return fel;
+}
+
+/** Orden i ett värde ur metodens fil: texterna, också i listor och objekt. @param {unknown} v @returns {number} */
+const ordI = (v) => (typeof v === 'string' ? v.split(/\s+/).filter(Boolean).length : Array.isArray(v) ? v.reduce((n, x) => n + ordI(x), 0) : v && typeof v === 'object' ? Object.values(v).reduce((n, x) => n + ordI(x), 0) : 0);
+/**
+ * Läsvägen före första lektionen, en rot för metodens sida (Vill du börja på måndag?) och Lär dig metoden (Läs in dig): del 1
+ * till 3 och Det svåraste i del 4, med ankarna på metodens sida, och tiden i minuter, 180 ord i minuten avrundat till fem
+ * (sajtens K-631; den kalla läsaren 2026-10-30: planen hade fem delar utan tid, och Det svåraste saknades).
+ * @param {Record<string, any>} d metodens fil
+ */
+export function lasvagen(d) {
+  const delar = UNDERVISNINGSMETODENS_DELAR.slice(0, 3).map((x) => ({ namn: `Del ${x.nr}, ${x.namn}`, ankare: `del-${x.id}` }));
+  const ord = ordI([d.inledning, d.roll, d.karna?.komponenter?.map((k) => [k.namn, k.vad]), d.tidsschema, d.steg, d.fastnar, (d.amnesexempel ?? []).find((e) => e.huvud), d.stod, d.checklista, d.klassen, d.forsta?.text, d.progression, d.rutiner, d.uppfoljning, d.uppdrag, d.hinder]);
+  return { delar: [...delar, { namn: 'Det svåraste, i del 4', ankare: 'det-svaraste' }], minuter: Math.max(5, Math.round(ord / 180 / 5) * 5) };
 }
 
 /** Uppföljningens rader i Med dig på vägen, i tidsordning: arbetslaget före start, besöken och arbetslaget i vecka 4 (riggens c8a40cc). En äldre fil har en rad för arbetslaget. */

@@ -48,7 +48,7 @@ if (lista && planer.length) {
     const lage = lageAv(p, idag);
     const gjorda = p.folj ? p.bockade ?? 0 : 0;
     const om = [lage.text, gjorda ? `${gjorda} pass bockade` : ''].filter(Boolean).join(' · ');
-    return `<li style="--omr:${FARG[p.omrade ?? ''] ?? 'var(--farg-accent)'}"><a href="${esc(planensAdress(p, lage.vecka))}" data-goatcounter-click="insatser:metodbanken" data-goatcounter-title="${esc(listansOrd.lista)}"><span class="pl-metod">${esc(p.titel)} · ${esc(namnen.get(p.id) ?? planensNamn(p))}</span><span class="pl-om">${marke(p)}${esc(om)}</span><span class="pl-pil" aria-hidden="true">${statusAv(p, idag) === 'avslutad' || nastaPassAv(p, idag) === '9999' ? 'Efter ›' : 'Veckan ›'}</span></a></li>`;
+    return `<li style="--omr:${FARG[p.omrade ?? ''] ?? 'var(--farg-accent)'}"><a href="${esc(planensAdress(p, lage.vecka))}" data-goatcounter-click="insatser:metodbanken" data-goatcounter-title="${esc(listansOrd.lista)}"><span class="pl-metod">${esc(p.titel)} · ${esc(namnen.get(p.id) ?? planensNamn(p))}</span><span class="pl-om">${marke(p)}${esc(om)}</span><span class="pl-pil" aria-hidden="true">${samlingen(p) === 'metoder' ? 'Planen ›' : statusAv(p, idag) === 'avslutad' || nastaPassAv(p, idag) === '9999' ? 'Efter ›' : 'Veckan ›'}</span></a></li>`;
   };
   const ordnade = [...planer].sort(iTurOrdning(idag));
   // Två planer med samma namn för samma metod skiljs åt med ett nummer.
@@ -59,8 +59,9 @@ if (lista && planer.length) {
   }
   // Pågående och kommande står öppna, i tur och ordning; de avslutade fälls ihop sist, så att listan håller också med
   // tjugo insatser och fler (Niclas 2026-10-25: "att avslutade läggs under en lista som kan tryckas ut").
-  const pagar = ordnade.filter((p) => statusAv(p, idag) !== 'avslutad');
-  const slut = ordnade.filter((p) => statusAv(p, idag) === 'avslutad');
+  const pagar = samlingAv(lista) === 'metoder' ? ordnade : ordnade.filter((p) => statusAv(p, idag) !== 'avslutad');
+  // I Metoder, en plan per metod, står en avslutad plan kvar bland de andra och fälls inte ihop (den kalla läsaren 2026-10-30).
+  const slut = samlingAv(lista) === 'metoder' ? [] : ordnade.filter((p) => statusAv(p, idag) === 'avslutad');
   lista.querySelector('ul')!.innerHTML = pagar.map(rad).join('');
   const fall = lista.querySelector<HTMLElement>('.pl-avslutade');
   if (fall) {
@@ -76,7 +77,7 @@ if (lista && planer.length) {
   if (appen && iAppen()) { appen.textContent = APPENS_PLANER; appen.hidden = false; }
   try { const b = sessionStorage.getItem('pl-alla-besked'); if (b && besked) { besked.textContent = b; besked.hidden = false; sessionStorage.removeItem('pl-alla-besked'); } } catch { /* utan lagring */ }
   document.getElementById('pl-alla-ner')?.addEventListener('click', () => {
-    const fil = allaPlanerna(PLANERA.version, idag);
+    const fil = allaPlanerna(PLANERA.version, idag, lista ? samlingAv(lista) : 'stodundervisning');
     if (!fil) return;
     laddaNer(fil.blob, fil.namn);
     if (besked) { besked.textContent = 'Alla planer är nedladdade i en zip. Lägg den bland skolans filer. Den har elevernas namn, så dela den inte.'; besked.hidden = false; }

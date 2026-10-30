@@ -176,3 +176,37 @@ export const karnanI = (d: Um, fas: string) => (d.karna?.komponenter ?? []).map(
 
 /** Tidsschemats rad för en del, som minuterna och arbetsformen. */
 export const tidsschematsRad = (d: Um, fas: string) => (d.tidsschema?.rader ?? []).find((r: { fas: string }) => r.fas === fas);
+
+/** Planeringsbladets egna ord, som bladet på sidan (Planeringsblad.astro) och i lathundens filer (metodpptx.ts) skriver. */
+export const BLADETS_ORD = {
+  klass: 'Klass', amne: 'Ämne', datum: 'Datum', lektion: 'Lektion i arbetsområdet', mal: 'När lektionen är slut ska eleverna kunna', belagg: 'Så ser jag att de kan: exit-lappen',
+  fore: 'Före lektionen', forberett: 'Förberett', blad: 'Blad och facit', stod: 'Stöd, till vem', lektionen: 'Lektionen', minuterna: 'minuterna i', karnan: 'kärnan',
+  beslutet: 'Beslutet', elever: 'elever i dag:', efter: 'Efter lektionen', karnanIlektionen: 'Kärnan i lektionen',
+} as const;
+/** Ett fält i planeringen som lista: en lista, en text som lista med en rad, eller tom. */
+export const bladetsLista = (v: unknown): string[] => (Array.isArray(v) ? v.map(String) : v ? [String(v)] : []);
+/** En rad på planeringsbladet bryts efter en mittpunkt och aldrig i ett tal (designgranskningen 2026-10-30: 14 blev 1 och 4). */
+export const bladetsRad = (t?: string) => t?.replace(/ · /g, ' · ');
+
+/**
+ * Planeringsbladets regler (riggens standard, avsnitt 11) för en ifylld plan, som Planeringsblad.astro och lathundens
+ * PowerPoint-fil och pdf ritar bladet ur (src/lib/metodpptx.ts), så att bladet säger samma sak på sidan och i filerna.
+ * Etiketterna kommer ur metodens planeringsmall. Med variant har delarna variantens minuter, som första lektionens
+ * (granskningen 2026-10-30: förlagan till lektion 1 visade 40-minutersschemats tider). Utfallets text är stegets redo utan
+ * den första meningen, som mallen och lektionskortet har den, och gränsen för klassens antal ger utfalletsGrans. Efter
+ * lektionens etiketter står utan understrecken där läraren skriver, och exit-lapparnas rad har högarna efter kolon, som
+ * läraren ringar in på det tomma bladet; på det ifyllda står bara namnet (granskare-3 nr 14).
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: string) {
+  const mall = d.planeringsmall ?? {};
+  const varianten = variant ? (d.tidsschema?.varianter ?? []).find((v: { nar: string }) => v.nar === variant) : undefined;
+  const delensTid = (fas: string): string | undefined => varianten?.delar?.find((x: { fas: string }) => x.fas === fas)?.tid ?? tidsschematsRad(d, fas)?.tid;
+  const kontrollen = (d.steg?.rader ?? []).find((s: { redo?: unknown }) => s.redo);
+  const utfalletsText = (id: string) => String(kontrollen?.redo?.[id] ?? '').replace(/^[^.]*\.\s*/, '');
+  const delarna = (mall.delar ?? []) as { fas: string; skriv?: string; not?: string }[];
+  const planensDel = (fas: string) => bladetsRad((plan.delar ?? []).find((x: { fas: string }) => x.fas === fas)?.text as string | undefined);
+  const kryss = new Set<number>(plan.efter?.kryss ?? []);
+  const etikett = (falt: string, forval: string, kolon = false) => { const t = String(mall.efter?.[falt] ?? forval).replace(/[:_\s]+$/, '').replace(/:\s*_+.*$/, '').split(/\s{2,}/)[0]; return kolon ? t.split(':')[0] : t; };
+  return { mall, varianten, delensTid, utfalletsText, delarna, planensDel, kryss, etikett };
+}

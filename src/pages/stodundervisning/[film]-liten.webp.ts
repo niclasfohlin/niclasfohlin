@@ -1,8 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import sharp from 'sharp';
 import { publicerade } from '../../lib/innehall';
 import { metodensFilmer, type MetodFilm } from '../../lib/film';
-import { omslagFil, provaFilmfiler, SMABILD } from '../../lib/filmfil';
+import { smabild } from '../../lib/filmfil';
 
 // /stodundervisning/<id>-film2-liten.webp: filmens omslagsbild i litet format, till raden där läsaren väljer film i
 // spelaren på lathundssidan (src/components/Filmspelare.astro). Bilden görs vid bygget ur omslagsbilden som
@@ -18,8 +17,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ props }) => {
-  const f = props.f as MetodFilm;
-  provaFilmfiler(f, props.titel);
-  const bild = await sharp(omslagFil(f)).resize(SMABILD.bredd, SMABILD.hojd).webp({ quality: 72, effort: 6 }).toBuffer();
+  const bild = await smabild(props.f as MetodFilm, props.titel);
   return new Response(new Uint8Array(bild), { headers: { 'Content-Type': 'image/webp' } });
 };

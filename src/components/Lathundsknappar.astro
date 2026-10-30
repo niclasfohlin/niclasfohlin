@@ -1,0 +1,14 @@
+---
+// Lathundens knappar överst på lathundssidan, i Stödundervisning och under Metoder (K-637), så att samma sak ser likadan ut
+// och heter likadant i båda (Niclas 2026-10-10: samma knapp heter samma sak på varje metodsida). Utskriften är alltid
+// pdf:en, lathunden i A4 liggande ur PowerPoint-koden (src/lib/metodpptx.ts, scripts/lathund-pdf.mjs): fyra sidor kant
+// till kant. Knappen öppnar den, och där webbläsaren kan skriva ut den direkt heter den Skriv ut och öppnar utskriftsrutan
+// (SkrivUtPdf.astro). Bredvid står filvalet med PowerPoint, Drive, pdf och Word (Filval.astro).
+// fil: lathundens adress utan ändelse, /stodundervisning/<id>-lathund eller /metoder/<id>-lathund.
+import Filval from './Filval.astro';
+interface Props { fil: string; titel: string }
+const { fil, titel } = Astro.props;
+const namn = fil.split('/').pop() ?? fil;
+---
+<a class="knapp" href={`${fil}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="4" data-direkt="Skriv ut lathunden (fyra sidor)" data-goatcounter-click={`utskrift:${namn}`} data-goatcounter-title={`${titel}: utskrift av lathunden`}>Öppna pdf:en för utskrift (fyra sidor)</a>
+{' '}<Filval fil={fil} namn={namn} rubrik="Lathunden" statistik={`${titel}: lathunden`} pdf pptx />

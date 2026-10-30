@@ -20,19 +20,19 @@ import {
   bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensText, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, passetsEgenTid, radText, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
-  ANLEDNINGENS_LANGD, harInfortEfter, lovetLast, planveckansKort, sistaInfort, regelnIVeckan, sakernasText, skolveckan, skolveckansText, veckorText,
+  ANLEDNINGENS_LANGD, iSommarlovet, lovveckornaAttValja, harInfortEfter, lovetLast, planveckansKort, sistaInfort, regelnIVeckan, sakernasText, skolveckan, skolveckansText, veckorText,
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
 import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
-import { APPENS_PLANER, idagLokalt, KOPIANS_GRANS, kopiansAlder, kopiansText, planenUrFaltet, SAMLINGENS_ORD, sparadPlan, skrivPlanen, statusAv, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, type SparadPlan } from './insatser-lagring';
+import { APPENS_PLANER, idagLokalt, KOPIANS_GRANS, kopiansAlder, kopiansText, planenUrFaltet, SAMLINGENS_ORD, sparadPlan, skrivPlanen, statusAv, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, type SparadPlan } from './insatser-lagring';
 import { tidrad } from './tidrad';
 import { elevPdf, gruppPdf } from './planpdf';
 // Skalans knappar, linjen och nedladdningen, som Lär dig metoden ritar lika (K-628).
 import { laddaNer, linjegraf, mittfaltet, pdfOrd, skalansKnappar, visaPdf } from './skattning';
 import { iAppen, vagenUt, vagenUtText, webblasaren } from './webblasaren';
-import { $, ANGRA_AVSLUTET, anledningenIFaltet, avslutaKnappen, avslutsformularet, avslutsrutan, beskedet, etikettlista, fallut, goatFor, knappen, knappraden, lagesraden, linjensRegler, lovknapp, remsansKnapp } from './byggstenar';
+import { $, ANGRA_AVSLUTET, anledningenIFaltet, avslutaKnappen, avslutsformularet, avslutsrutan, beskedet, etikettlista, fallut, goatFor, knappen, knappraden, lagesraden, linjensRegler, lovknapp, markeraAnledningen, remsansKnapp } from './byggstenar';
 
 const sida = $('plan');
 // Beskedet längst ned på skärmen (byggstenarna).
@@ -264,19 +264,10 @@ function renderaVal() {
   // eller sist i raden lov kommer en vecka till, så att ett lov på flera veckor går att trycka in (Niclas 2026-10-25:
   // "markera 52 som lov ... så finns ingen till vecka som knapp efter").
   const lov = new Set(aktiv.val.lov ?? []);
-  let forstaLov = plusDagar(forstaMandagen(aktiv.val), -14), sistaLov = plusDagar(plan.efter, 7);
-  // Uppföljningen efter insatsen kan ligga senare, som fyra veckor efter sista passet, och dess vecka går också att trycka
-  // som lov (verifieringen 2026-10-26: uppföljningen i jullovet, när listan slutade två veckor efter planen).
-  const sistaUppf = plan.uppfoljning.flatMap((u) => u.tillfallen.map((t) => mandagen(t.datum))).reduce((a, b) => (b > a ? b : a), '');
-  if (sistaUppf > sistaLov) sistaLov = sistaUppf;
-  // I sommarlovet går alla lovets veckor att trycka, så att uppföljningen kan flytta förbi lovet.
-  for (let i = 0; i < 10 && sistaLov && iSommarlovet(sistaLov); i++) sistaLov = plusDagar(sistaLov, 7);
-  for (let i = 0; i < 10 && lov.has(veckonyckel(forstaLov)); i++) forstaLov = plusDagar(forstaLov, -7);
-  for (let i = 0; i < 10 && lov.has(veckonyckel(sistaLov)); i++) sistaLov = plusDagar(sistaLov, 7);
-  const veckor: string[] = [];
-  // Taket räcker till planens längsta längd och uppföljningen efter den (Codex 2026-10-26: 42 veckor räckte inte).
-  for (let m = forstaLov; m <= sistaLov && veckor.length < 70; m = plusDagar(m, 7)) veckor.push(m);
-  const sista = sistaInfort(aktiv.foljd);
+  // Veckorna att trycka som lov, lika i båda lagren (lovveckornaAttValja i standarden): från två veckor före planen till veckan
+  // efter den eller metodens sista uppföljning, förbi sommarlovet och ett lov i var ände.
+  const veckor = lovveckornaAttValja(plan, aktiv.val, plusDagar(forstaMandagen(aktiv.val), -14));
+  const sista = sistaInfort(aktiv.foljd, plan);
   $('pl-lovveckor').innerHTML = veckor.map((m) => lovknapp(m, lov, sista)).join('');
   $('pl-lov-not').hidden = !veckor.some((m) => lovetLast(m, sista));
   foljruta.checked = aktiv.folj;
@@ -891,7 +882,6 @@ const visadVy = (): Vy => (visa === 'efter' || (visa === 'fore' && harFore()) ||
 const gjort = (dag: string) => aktiv.foljd.gjorda.includes(dag);
 // Sommarlovet, v. 26–32, är lov i alla kommuner (den kalla läsaren av Argumenterande text 2026-10-27: Efter kursen hamnade
 // i v. 28 utan att planen sa något, och lovknapparna slutade där).
-const iSommarlovet = (datum: string) => { const v = isoVecka(datum).vecka; return v >= 26 && v <= 32; };
 // Bocken för ett pass som blev av, i veckans lista och för det extra passet före pass 1.
 const bockKnapp = (dag: string, etikett: string) => `<button type="button" class="pl-bock${gjort(dag) ? ' ja' : ''}" data-bock="${esc(dag)}" aria-pressed="${gjort(dag)}" aria-label="${esc(etikett)}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7 3.7 7.3-8"/></svg></button>`;
 // En vecka går att bocka och skatta från sin måndag (Niclas 2026-10-25: "Alltså från måndag 00.01 kan man bocka den veckas
@@ -941,7 +931,7 @@ function renderaSumma() {
   const hostlov = (harFore() && plan.fore.mandag >= mandagen(idag) && isoVecka(plan.fore.mandag).vecka === 44) || (!!extraDatum && extraDatum >= idag && isoVecka(extraDatum).vecka === 44);
   // Uppföljningen görs under en vecka: bara en skolvecka som är helt i julen säger till.
   const efterDatum = efterUppfoljning().flatMap((u) => u.tillfallen.map((x) => x.datum));
-  const julUppfoljning = [...new Set(efterDatum.filter((d) => kommer(d) && iJulen(plusDagar(mandagen(d), 4))).map((d) => kalendervecka(isoVecka(d).vecka)))];
+  const julUppfoljning = [...new Set(efterDatum.filter((d) => kommer(d) && iJulen(skolveckan(mandagen(d)).till)).map((d) => kalendervecka(isoVecka(d).vecka)))];
   const sommarUppfoljning = [...new Set(efterDatum.filter((d) => d >= idag && iSommarlovet(d)).map((d) => kalendervecka(isoVecka(d).vecka)))];
   const lovetsUppfoljning = (veckor: string[], nar: string, tryck: string) => (veckor.length ? `<p class="pl-varning">Uppföljningen efter insatsen hamnar i ${esc(uppraknat(veckor))}, ${nar}. ${tryck} under Lov${aktiv.sparad ? ' i Ändra planen' : ''}, så flyttar uppföljningen till veckan efter lovet.</p>` : '');
   // Klockslag som ger andra längder än metodens säger till, som dagarna, så att ett felval syns (Codex 2026-10-24).
@@ -979,7 +969,7 @@ function renderaVeckor() {
   const rad = (attr: string, inner: string) => (klick ? `<button type="button" class="pl-veckoknapp" ${attr}>${inner}</button>` : `<div class="pl-veckoknapp">${inner}</div>`);
   const rader: string[] = [];
   const lovFore = (v: PlanVecka) => plan.lovveckor.filter((m) => m < v.mandag && (v.nr === 1 || m > plan.veckor[v.nr - 2].mandag));
-  const lovrad = (m: string) => `<li class="pl-lovvecka"><span class="pl-v">Lov</span><span class="pl-d">${esc(spannKort(m, skolveckan(m).till))}</span><span class="pl-innehall"><span class="pl-pass">${kalendervecka(isoVecka(m).vecka)}</span><span class="pl-fokus">Inga pass</span>${lovetLast(m, sistaInfort(aktiv.foljd)) ? '' : `<button type="button" class="pl-textknapp" data-lov-bort="${esc(veckonyckel(m))}" aria-label="Ta bort lovet i ${kalenderveckaUtskriven(isoVecka(m).vecka)}">Ta bort lovet</button>`}</span></li>`;
+  const lovrad = (m: string) => `<li class="pl-lovvecka"><span class="pl-v">Lov</span><span class="pl-d">${esc(spannKort(m, skolveckan(m).till))}</span><span class="pl-innehall"><span class="pl-pass">${kalendervecka(isoVecka(m).vecka)}</span><span class="pl-fokus">Inga pass</span>${lovetLast(m, sistaInfort(aktiv.foljd, plan)) ? '' : `<button type="button" class="pl-textknapp" data-lov-bort="${esc(veckonyckel(m))}" aria-label="Ta bort lovet i ${kalenderveckaUtskriven(isoVecka(m).vecka)}">Ta bort lovet</button>`}</span></li>`;
   const foljer = klick && aktiv.folj;
   const mitt = mittVeckan(plan);
   for (const v of plan.veckor) {
@@ -1001,7 +991,7 @@ function renderaVeckor() {
   // Före första passet först, med det som görs då (Opus och Sonnet 2026-10-24).
   if (harFore() && plan.veckor.length) {
     const marken = uppfoljningensTillfallen(plan).filter((x) => x.vecka === 0).map((x) => `<span class="pl-markering uppf">${esc(uppfNamn(x.rad))}</span>`).join('');
-    rader.unshift(`<li class="fore${vy === 'fore' ? ' nu' : ''}">${rad('data-vy="fore"', `<span class="pl-v">Före</span><span class="pl-d">${esc(idag > plusDagar(plan.fore.mandag, 4) && plan.forstaPass ? `före ${spannKort(plan.forstaPass, plan.forstaPass)}` : spannKort(plan.fore.mandag, plusDagar(plan.fore.mandag, 4)))}</span><span class="pl-innehall"><span class="pl-pass">${kalendervecka(isoVecka(plan.fore.mandag).vecka)}</span><span class="pl-fokus">Före första passet</span>${marken ? `<span class="pl-marken">${marken}</span>` : ''}</span>`)}</li>`);
+    rader.unshift(`<li class="fore${vy === 'fore' ? ' nu' : ''}">${rad('data-vy="fore"', `<span class="pl-v">Före</span><span class="pl-d">${esc(idag > skolveckan(plan.fore.mandag).till && plan.forstaPass ? `före ${spannKort(plan.forstaPass, plan.forstaPass)}` : spannKort(plan.fore.mandag, skolveckan(plan.fore.mandag).till))}</span><span class="pl-innehall"><span class="pl-pass">${kalendervecka(isoVecka(plan.fore.mandag).vecka)}</span><span class="pl-fokus">Före första passet</span>${marken ? `<span class="pl-marken">${marken}</span>` : ''}</span>`)}</li>`);
   }
   for (const m of plan.lovveckor.filter((x) => plan.veckor.length && x > plan.veckor[plan.veckor.length - 1].mandag)) rader.push(lovrad(m));
   // Veckorna som avslutet strök, överstrukna och utan att gå att öppna, före Efter insatsen (K-542; Niclas 2026-10-25:
@@ -1525,7 +1515,7 @@ function extraPassetsText(): string {
 }
 function foreDelar(oppna: Set<string>): string[] {
   lankVecka = plan.veckor[0]?.innehall;
-  const fredag = plusDagar(plan.fore.mandag, 4);
+  const fredag = skolveckan(plan.fore.mandag).till;
   const meta = [kalendervecka(isoVecka(plan.fore.mandag).vecka), ...(aktiv.namn ? [aktiv.namn] : []), ...(nivaNamn() ? [nivaNamn()!] : [])];
   const delar: string[] = [`<header class="pl-veckohuvud"><h2 id="pl-veckan-rubrik" tabindex="-1">Före första passet</h2><p class="meta">${meta.map(esc).join(' · ')}</p></header>`, remsa('fore')];
   const extraDag = extraPassetsText();
@@ -1672,7 +1662,7 @@ function lektionenEfterVeckan(v: PlanVecka, oppna: Set<string>, ovrigt: string[]
   // Nästa lektion gäller när lektionens regel ovan är uppfylld, eftersom snittet inte säger vilken rad gruppen har nått
   // (Rimligheten 2026-10-27: Skriv ord tillsammans har regeln i den femte raden, och sex pass räcker inte dit).
   const skalet = !n || forKort ? '' : forslag === 'nasta' ? ` Det är över ${LEKTIONENS_GRANS}, så planen föreslår nästa lektion${l.vidare ? ' när regeln ovan är uppfylld' : ''}.` : ` Det är inte över ${LEKTIONENS_GRANS}, så planen föreslår samma lektion.`;
-  const snittet = snitt !== null ? `<p>Snittet i veckans skattning mot lektionens mål är ${esc(decimal(snitt))} av 5.${skalet}</p>`
+  const snittet = snitt !== null ? `<p>Snittet i veckans skattning mot lektionens mål är ${esc(decimal(snitt))} av ${SKALAN.length}.${skalet}</p>`
     : n && !forKort && aktiv.folj ? '<p class="pl-not">Skatta veckan mot lektionens mål, så föreslår planen samma lektion eller nästa.</p>' : '';
   // Lektionens längd, och att planen föreslår samma lektion när gruppen har haft den färre veckor än lektionen tar. Passen
   // räknas från första raden, men ljudkollen sätter ofta gruppen i en senare rad, och då gäller regeln (den stängda
@@ -1735,7 +1725,7 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   const s = sammanstallning(plan, aktiv.foljd, idag, veckornasLektioner());
   const nu = nuVy();
   const passen = veckansPass(plan, v);
-  const harVarit = plusDagar(v.mandag, 6) < idag;
+  const harVarit = skolveckan(v.mandag).sondag < idag;
   // Vad eleverna blir bättre på den här veckan står överst, ur progressionens rad, som metodens fjärde kolumn (K-572, den
   // smala formen som Niclas valde 2026-10-26).
   // En vecka med pass ur två rader, som Seriesamtals pass 1 och pass 2 i vecka 1, säger raden i varje ruta (den kalla
@@ -1812,7 +1802,7 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   // Regeln som gällde efter förra veckans kryss står överst i rutan veckan efter (K-559; Niclas godkände formen 2026-10-26).
   // Veckan före passet som rutan visar, också när det är nästa veckas pass (Codex 2026-10-26).
   const foreRutan = plan.veckor[rutansVecka.nr - 2];
-  const regel = aktiv.folj && nu === v.nr && foreRutan ? regelnEfter(foreRutan) : '';
+  const regel = aktiv.folj && nu === v.nr && foreRutan ? regelnEfter(foreRutan, s) : '';
   // Metodens vecka för passet i rutan, när ett lov eller en röd dag har flyttat kursens pass till en annan av planens veckor
   // (Rimligheten 2026-10-27: Sagobokens pass 26–27 hör till metodens vecka 9, i planens vecka 10).
   const passetsKursnr = rutansPass && data.passensVeckor ? kursensPassnummer(plan, mp.takt.min, rutansPass, mp.period.enhet === 'veckor' ? mp.period.max ?? mp.period.min : undefined) : null;
@@ -1994,10 +1984,10 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
   // under Ändra planen, där lovveckorna väljs, och Avsluta insatsen står i raden överst.
   // En vecka tas inte om när något är infört i en vecka efter den, eftersom upprepningen flyttar fram veckorna efter och
   // det som står i dem skulle hamna under en annan vecka i metoden (Codex 2026-10-26, samma regel som lovet: lovetLast).
-  const kanUpprepa = veckorAttTaOm && !harVarit && !harInfortEfter(aktiv.foljd, v.mandag);
+  const kanUpprepa = veckorAttTaOm && !harVarit && !harInfortEfter(aktiv.foljd, v.mandag, plan);
   const upprepaKnapp = `<button type="button" class="knapp sekundar liten" data-gor="upprepa" ${goat('upprepa', 'veckan upprepad')}>Upprepa veckan</button>`;
   // Att ta bort en upprepning flyttar också den upprepade veckan, så det går inte när något är infört i den (Codex 2026-10-26).
-  const taBort = v.igen && kanUpprepa && !lovetLast(v.mandag, sistaInfort(aktiv.foljd)) ? '<button type="button" class="knapp sekundar liten" data-gor="ta-bort-upprepning">Ta bort upprepningen</button>' : '';
+  const taBort = v.igen && kanUpprepa && !lovetLast(v.mandag, sistaInfort(aktiv.foljd, plan)) ? '<button type="button" class="knapp sekundar liten" data-gor="ta-bort-upprepning">Ta bort upprepningen</button>' : '';
   // Regeln för att gå vidare står först, ur veckans rad i progressionen som metodens fjärde kolumn säger den, i den vecka där
   // den prövas (vidareProvasI), och sedan metodens regel för att ta veckan igen, så som den gäller veckan (upprepaIVeckan,
   // K-572). Annars planens mening om knappen, som i den sista raden, där beslutet efter perioden gäller.
@@ -2046,7 +2036,7 @@ function efterDelar(): string[] {
   // Metodens uppföljning efter insatsen, en vecka per tillfälle från måndagen. Den som gäller den här veckan, annars nästa,
   // står i rutan överst och i rubriken (verifieringen 2026-10-25: i v. 4 visade planen v. 1, och inget sa att v. 4 gällde).
   const tillfallen = iDatumordning(uppfoljningensTillfallen(plan).filter((x) => x.vecka === null));
-  const nuUppf = tillfallen.find((x) => x.datum <= idag && idag <= plusDagar(x.datum, 6));
+  const nuUppf = tillfallen.find((x) => x.datum <= idag && idag <= skolveckan(x.datum).sondag);
   const aktuell = nuUppf ?? tillfallen.find((x) => x.datum > idag);
   const datum = aktuell?.datum ?? tillfallen[tillfallen.length - 1]?.datum ?? plan.efter;
   const meta = [kalendervecka(isoVecka(datum).vecka), ...(aktiv.namn ? [aktiv.namn] : []), ...(nivaNamn() ? [nivaNamn()!] : [])];
@@ -2057,7 +2047,7 @@ function efterDelar(): string[] {
   if ((aktiv.sparad || aktiv.franLank) && plan.pass.length > 0) {
     // Läget, när passen slutar och när planen avslutas står i raden överst, så rutan säger det läraren gör nu: uppföljningen
     // efter insatsen som gäller den här veckan eller nästa (verifieringen 2026-10-25: samma mening stod två gånger).
-    if (aktuell) delar.push(`<div class="pl-nasta"><span class="pl-etikett">${aktuell === nuUppf ? 'Den här veckan' : 'Nästa uppföljning'}</span><p class="pl-nar">${esc(`${uppfNamn(aktuell.rad)}, ${kalendervecka(isoVecka(aktuell.datum).vecka)}, ${spannKort(aktuell.datum, plusDagar(aktuell.datum, 4))}`)}</p>${knappar}${metodensLankar()}</div>`);
+    if (aktuell) delar.push(`<div class="pl-nasta"><span class="pl-etikett">${aktuell === nuUppf ? 'Den här veckan' : 'Nästa uppföljning'}</span><p class="pl-nar">${esc(`${uppfNamn(aktuell.rad)}, ${skolveckansText(mandagen(aktuell.datum))}`)}</p>${knappar}${metodensLankar()}</div>`);
     else if (knappar) delar.push(knappar);
   } else {
     const sista = plan.sistaPass ? (avslutad ? hurAvslutad() : `${sistaPassetText()}${plan.slut ? ` ${avslutetText(plan, !slut)}` : ''}`) : '';
@@ -2423,11 +2413,12 @@ const mattVarde = (namn: string, mandag: string) => aktiv.foljd.matt?.[namn]?.[m
 // under Håll koll på.
 const skattningensRader = () => { const g = aktiv.folj ? gruppensSkattning() : undefined; return new Set(g ? [g.rad, ...g.regler.map((r) => r.rad)] : []); };
 // Regeln som gäller efter en veckas kryss, den första i metodens ordning, med uppföljningens rad som säger vad läraren gör.
-function regelnEfter(v: PlanVecka): string {
+function regelnEfter(v: PlanVecka, s: Sammanstallning): string {
   const g = gruppensSkattning();
   if (!g) return '';
-  const i = plan.veckor.indexOf(v);
-  const r = i >= 0 ? regelnIVeckan({ ...linjen(plan, aktiv.foljd, g), regler: g.regler }, i) : undefined;
+  // Linjen ur sammanställningen, som diagrammet ritar (granskningen rot-3, fynd 9).
+  const sk = s.skattningar.find((x) => x.namn === g.namn), i = s.veckor.findIndex((w) => w.nr === v.nr);
+  const r = sk && i >= 0 ? regelnIVeckan(sk, i) : undefined;
   if (!r) return '';
   const rad = r.rad;
   return `<p class="pl-paminn pl-regel"><b>${esc(mening(uppfNamn(rad)))}</b> ${lankad(mening(data.uppfoljning.rader[rad].vad))}${dinSammanstallning(data.uppfoljning.rader[rad].vad)}</p>`;
@@ -2446,7 +2437,7 @@ function skattaGruppen(g: PlanSkattning & { skala: Skala }, v: PlanVecka, s: Sam
   const grafen = sk?.varden.some((x) => x !== undefined) ? `<div class="pl-grafruta">${linjegraf(g, sk.varden, s.veckor.map(veckansNamn), { ring: varde === undefined && i >= 0 ? i : undefined, mitt: s.mitt })}</div>` : '<p class="pl-not">Linjen kommer med det första krysset.</p>';
   const reglerna = g.regler.length ? linjensRegler('linjen', 'Vad linjen säger', oppna.has('linjen'), g.regler.map((r) => ({ etikett: uppfNamn(r.rad), html: `${lankad(mening(data.uppfoljning.rader[r.rad].vad))}${dinSammanstallning(data.uppfoljning.rader[r.rad].vad)}` }))) : '';
   const samman = harSamman(s) ? '<p class="pl-not"><button type="button" class="pl-textknapp" data-till="pl-samman">Hela gruppens sammanställning</button></p>' : '';
-  return `<section class="pl-block pl-folj" id="pl-skatta"><h3>Skatta gruppen</h3><p class="pl-etikett">${lankad(uppfNamn(g.rad))}</p>${g.text ? `<p class="pl-fraga">${lankad(g.text)}</p>` : ''}${startad ? `${knappar}${namnen}${beskrivning}${varde !== undefined ? regelnEfter(v) : ''}${grafen}${reglerna}` : `<p class="pl-not">${esc(skattasNar(v, !!g.text))}</p>`}${samman}${under}</section>`;
+  return `<section class="pl-block pl-folj" id="pl-skatta"><h3>Skatta gruppen</h3><p class="pl-etikett">${lankad(uppfNamn(g.rad))}</p>${g.text ? `<p class="pl-fraga">${lankad(g.text)}</p>` : ''}${startad ? `${knappar}${namnen}${beskrivning}${varde !== undefined ? regelnEfter(v, s) : ''}${grafen}${reglerna}` : `<p class="pl-not">${esc(skattasNar(v, !!g.text))}</p>`}${samman}${under}</section>`;
 }
 // Linjen med texten om den, som sammanställningen, avstämningen och utvärderingen visar: värdena och reglerna som gällde,
 // med standardens ord (skattningensText).
@@ -3012,7 +3003,7 @@ $('pl-lage').addEventListener('click', (e) => {
   }
 });
 // Anledningen som läraren skriver står kvar i utkastet, så att en omritning inte tar bort den.
-$('pl-lage').addEventListener('input', (e) => { const falt = e.target as HTMLInputElement; if (falt.id === 'pl-avsluta-not' && avslutaUtkast) avslutaUtkast.not = falt.value; });
+$('pl-lage').addEventListener('input', (e) => { const falt = e.target as HTMLInputElement; if (falt.id !== 'pl-avsluta-not') return; if (avslutaUtkast) avslutaUtkast.not = falt.value; markeraAnledningen(falt); });
 // Det valda sista passet: texten säger vad som stryks, och knappen dagen.
 $('pl-lage').addEventListener('change', (e) => {
   const falt = e.target;

@@ -9,7 +9,7 @@ import Base from '../layouts/Base.astro';
 import PlanHuvud from './PlanHuvud.astro';
 import PlanFilen from './PlanFilen.astro';
 import PlanVersion from './PlanVersion.astro';
-import { PLANERA } from '../lib/standard/index.js';
+import { PLANERA, SAMLINGARNAS_LED } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { LarDigData } from '../lib/lardig';
 
@@ -35,7 +35,7 @@ const mejl = `mailto:${site.epost}?subject=${encodeURIComponent(`Lär dig metode
     <section class="pl-kopia ld-kopia" id="ld-kopia" aria-labelledby="ld-kopia-rubrik">
       <h2 id="ld-kopia-rubrik">Planen som fil</h2>
       <p class="pl-hjalp" id="ld-kopia-text"></p>
-      <PlanFilen ner="ld-ladda-ner" fil="ld-fil" bort="ld-ta-bort" goat={`lardig:${data.id}`} titel={`${data.titel}: Lär dig metoden`} />
+      <PlanFilen ner="ld-ladda-ner" fil="ld-fil" bort="ld-ta-bort" goat={`${SAMLINGARNAS_LED.metoder}:${data.id}`} titel={`${data.titel}: Lär dig metoden`} />
     </section>
 
     <PlanVersion fore="Lär dig metoden">

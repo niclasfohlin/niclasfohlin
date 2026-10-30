@@ -290,6 +290,23 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Lathundens PowerPoint-fil, spelarens småbilder och manifesten för filmernas mp4 och lathundens pdf (K-637), som
+# Stödundervisnings.
+[[headers]]
+  for = "/metoder/*.pptx"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/metoder/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/metoder/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 [[headers]]
   for = "/stodundervisning/reservbild/*"
   [headers.values]

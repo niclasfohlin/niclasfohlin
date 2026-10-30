@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Filmerna som mp4 (Niclas 2026-10-07): varje film ur metodriggen, <id>-film.svg, blir också <id>-film.mp4 och en
-// omslagsbild, <id>-film-omslag.png, i public/stodundervisning/. Mp4-filen spelar i lathundens PowerPoint, där en svg
+// omslagsbild, <id>-film-omslag.png, i public/stodundervisning/, och för undervisningsmetoderna i public/metoder/ (K-634),
+// med ett manifest i varje mapp. Mp4-filen spelar i lathundens PowerPoint, där en svg
 // med CSS-animation bara blir en trasig stillbild, och laddas ner i metodens zip (src/lib/filmfil.ts). Svg-filen är
 // källan: filmen ritas i Chrome en tidpunkt i taget, 25 bilder per sekund i 1280 × 720, och kodas med ffmpeg (H.264,
 // crf 30), 110 till 450 kB per film. Filmen ritas i 97 procent av bilden, så att en smal remsa blir fri nederst, och
@@ -55,54 +56,64 @@ const FILMVY = '0 0 960 540', BAKGRUND = '#f5f3ee';
 const STILLA_MS = 800;
 const RECEPT = `mp4 ${BREDD}x${HOJD} ${BILDER} bilder/s libx264 crf ${CRF} veryslow animation yuv420p; vy ${VY.x} ${VY.y} ${VY.w} ${VY.h}; märke "${MARKE}" 10,5; omslag innehållsrikaste stilla rutan som inte är den nollställda scenen, palett 128; v2`;
 
-const mapp = join(rot, 'public', 'stodundervisning');
-const manifestFil = join(mapp, 'film-mp4.json');
-const katalog = join(rot, 'src', 'content', 'stodundervisning');
+// Samlingarna med filmer: Stödundervisning och undervisningsmetoderna under Metoder (K-634), var och en med sin mapp i
+// public/ och sitt manifest. Undervisningsmetodernas filer ligger i public/metoder/ och följer med i varje bygge, också
+// för en metod som är utkast (scripts/metoderfiler.mjs tar in alla), så deras filmer krävs alltid.
+const SAMLINGAR = [
+  { katalog: 'stodundervisning', mapp: 'stodundervisning', allaKravs: false },
+  { katalog: 'undervisningsmetoder', mapp: 'metoder', allaKravs: true },
+].map((s) => ({ ...s, katalog: join(rot, 'src', 'content', s.katalog), mapp: join(rot, 'public', s.mapp), sida: s.mapp, manifestFil: join(rot, 'public', s.mapp, 'film-mp4.json') }));
 // Varje metods filmer: huvudfilmen <id>-film och extrafilmerna <id>-film2 och <id>-film3 (src/lib/film.ts).
-const filmer = readdirSync(katalog)
+const filmer = SAMLINGAR.flatMap((s) => readdirSync(s.katalog)
   .filter((f) => f.endsWith('.yaml') && !f.startsWith('_'))
-  .map((f) => ({ id: f.replace(/\.yaml$/, ''), data: parseYaml(readFileSync(join(katalog, f), 'utf8')) }))
+  .map((f) => ({ id: f.replace(/\.yaml$/, ''), data: parseYaml(readFileSync(join(s.katalog, f), 'utf8')) }))
   .flatMap((m) => [
     ...(m.data.film ? [{ bas: `${m.id}-film`, film: m.data.film }] : []),
     ...(m.data.filmer ?? []).map((f) => ({ bas: `${m.id}-film${f.nr}`, film: f })),
-  ].map((x) => ({ ...x, id: m.id, metod: m.data.titel, namn: x.film.titel ?? x.film.rubrik, utkast: Boolean(m.data.utkast) })));
-const svgFor = (f) => join(mapp, `${f.bas}.svg`);
-const mp4For = (bas) => join(mapp, `${bas}.mp4`);
-const omslagFor = (bas) => join(mapp, `${bas}-omslag.png`);
+  ].map((x) => ({ ...x, id: m.id, metod: m.data.titel, namn: x.film.titel ?? x.film.rubrik, utkast: Boolean(m.data.utkast), samling: s }))));
+const svgFor = (f) => join(f.samling.mapp, `${f.bas}.svg`);
+const mp4For = (f) => join(f.samling.mapp, `${f.bas}.mp4`);
+const omslagFor = (f) => join(f.samling.mapp, `${f.bas}-omslag.png`);
 const titelFor = (f) => `${f.metod}: ${f.namn}`;
 
 const hashAv = (delar) => { const h = createHash('sha256'); for (const d of delar) h.update(d); return h.digest('hex').slice(0, 16); };
 // Svg-filen hashas med LF oavsett radslut: arbetskopian på Windows kan ha CRLF, Netlifys utcheckning LF.
 const kallHash = (f) => hashAv([RECEPT, titelFor(f), readFileSync(svgFor(f), 'utf8').replace(/\r\n/g, '\n')]);
 const filHash = (p) => hashAv([readFileSync(p)]);
-const lasManifest = () => { try { return JSON.parse(readFileSync(manifestFil, 'utf8')); } catch { return {}; } };
-const skrivManifest = (m) => writeFileSync(manifestFil, `${JSON.stringify(Object.fromEntries(Object.entries(m).sort(([a], [b]) => a.localeCompare(b))), null, 2)}\n`);
+const lasManifest = (s) => { try { return JSON.parse(readFileSync(s.manifestFil, 'utf8')); } catch { return {}; } };
+const skrivManifest = (s, m) => writeFileSync(s.manifestFil, `${JSON.stringify(Object.fromEntries(Object.entries(m).sort(([a], [b]) => a.localeCompare(b))), null, 2)}\n`);
+// Samlingens filmer och manifest, var för sig, så att Stödundervisnings manifest bara har sina filmer.
+const samlingens = (s) => filmer.filter((f) => f.samling === s);
+const manifester = new Map(SAMLINGAR.map((s) => [s, lasManifest(s)]));
 
 /** Varför filmens mp4 inte duger, eller undefined när den är aktuell. */
-function felFor(f, manifest) {
-  const post = manifest[f.bas];
+function felFor(f) {
+  const post = manifester.get(f.samling)[f.bas];
   if (!existsSync(svgFor(f))) return 'svg-filen saknas';
-  if (!existsSync(mp4For(f.bas))) return 'mp4 saknas';
-  if (!existsSync(omslagFor(f.bas))) return 'omslagsbilden saknas';
+  if (!existsSync(mp4For(f))) return 'mp4 saknas';
+  if (!existsSync(omslagFor(f))) return 'omslagsbilden saknas';
   if (!post) return 'saknas i manifestet';
   if (post.kalla !== kallHash(f)) return 'mp4-filen är gjord av en äldre svg-fil, en äldre titel eller ett äldre recept';
-  if (post.mp4 !== filHash(mp4For(f.bas))) return 'mp4-filen stämmer inte med manifestet';
-  if (post.omslag !== filHash(omslagFor(f.bas))) return 'omslagsbilden stämmer inte med manifestet';
+  if (post.mp4 !== filHash(mp4For(f))) return 'mp4-filen stämmer inte med manifestet';
+  if (post.omslag !== filHash(omslagFor(f))) return 'omslagsbilden stämmer inte med manifestet';
   return undefined;
 }
-// Filer som inte hör till någon film: en film som har tagits bort eller bytt nummer.
-const kanda = new Set(filmer.flatMap((f) => [`${f.bas}.mp4`, `${f.bas}-omslag.png`]));
-const overblivna = () => readdirSync(mapp).filter((n) => (/-film\d?\.mp4$/.test(n) || /-film\d?-omslag\.png$/.test(n)) && !kanda.has(n));
+// Filer som inte hör till någon film i samlingen: en film som har tagits bort eller bytt nummer.
+const overblivna = (s) => {
+  const kanda = new Set(samlingens(s).flatMap((f) => [`${f.bas}.mp4`, `${f.bas}-omslag.png`]));
+  return existsSync(s.mapp) ? readdirSync(s.mapp).filter((n) => (/-film\d?\.mp4$/.test(n) || /-film\d?-omslag\.png$/.test(n)) && !kanda.has(n)) : [];
+};
 
 if (kontrollera) {
-  const manifest = lasManifest();
-  // Ett utkast byggs inte i produktion, så dess film krävs inte; finns filerna prövas de ändå inte här.
-  const kravda = filmer.filter((f) => !f.utkast);
-  const fel = kravda.map((f) => [f, felFor(f, manifest)]).filter(([, e]) => e).map(([f, e]) => `${f.bas}: ${e}`);
-  for (const n of overblivna()) fel.push(`${n}: filen hör inte till någon film`);
-  for (const bas of Object.keys(manifest)) if (!filmer.some((f) => f.bas === bas)) fel.push(`${bas}: står i manifestet men är ingen film`);
+  // Ett utkast i Stödundervisning byggs inte i produktion, så dess film krävs inte; finns filerna prövas de ändå inte här.
+  const kravda = filmer.filter((f) => !f.utkast || f.samling.allaKravs);
+  const fel = kravda.map((f) => [f, felFor(f)]).filter(([, e]) => e).map(([f, e]) => `${f.bas}: ${e}`);
+  for (const s of SAMLINGAR) {
+    for (const n of overblivna(s)) fel.push(`${s.sida}/${n}: filen hör inte till någon film`);
+    for (const bas of Object.keys(manifester.get(s))) if (!samlingens(s).some((f) => f.bas === bas)) fel.push(`${s.sida}/${bas}: står i manifestet men är ingen film`);
+  }
   if (fel.length) {
-    console.error(`Filmerna som mp4:\n${fel.map((r) => `  ${r}`).join('\n')}\nKör npm run validera (eller node scripts/filmmp4.mjs --vid-behov) och committa filerna i public/stodundervisning/: mp4-filerna, omslagsbilderna och film-mp4.json.`);
+    console.error(`Filmerna som mp4:\n${fel.map((r) => `  ${r}`).join('\n')}\nKör npm run validera (eller node scripts/filmmp4.mjs --vid-behov) och committa filerna i public/stodundervisning/ och public/metoder/: mp4-filerna, omslagsbilderna och film-mp4.json.`);
     process.exit(1);
   }
   console.log(`Filmerna som mp4: ${kravda.length} filmer har en aktuell mp4 och omslagsbild.`);
@@ -253,7 +264,7 @@ async function gor(f, v, port) {
     execFileSync(v.ffmpeg, ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', join(tmp, 'lista.txt'),
       '-vf', `fps=${BILDER},format=yuv420p`, '-c:v', 'libx264', '-preset', 'veryslow', '-tune', 'animation', '-crf', String(CRF), '-movflags', '+faststart', '-an', '-t', summa,
       '-metadata', `title=${titelFor(f)}`, '-metadata', 'artist=Niclas Fohlin', '-metadata', 'copyright=© Niclas Fohlin, niclasfohlin.se',
-      '-metadata', `comment=https://niclasfohlin.se/stodundervisning/${f.id} · Bilderna i filmerna: Fluent Emoji, © Microsoft Corporation, MIT-licens.`, ut]);
+      '-metadata', `comment=https://niclasfohlin.se/${f.samling.sida}/${f.id} · Bilderna i filmerna: Fluent Emoji, © Microsoft Corporation, MIT-licens.`, ut]);
     // Kontrollen: rätt mått och rätt längd, annars kastas filen.
     const strom = JSON.parse(execFileSync(v.ffprobe, ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height,codec_name:format=duration', '-of', 'json', ut], { encoding: 'utf8' }));
     const s = strom.streams[0], langd = Number(strom.format.duration);
@@ -261,25 +272,27 @@ async function gor(f, v, port) {
     if (Math.abs(langd - sekunder) > 0.1) throw new Error(`${f.bas}: mp4-filen blev ${langd} s, filmen är ${sekunder} s`);
     const vald = await valjOmslag(rutor);
     const omslag = await sharp(vald.fil).resize(BREDD, HOJD).png({ palette: true, colours: 128, effort: 10 }).toBuffer();
-    copyFileSync(ut, mp4For(f.bas));
-    writeFileSync(omslagFor(f.bas), omslag);
-    console.log(`  ${f.bas}: ${sekunder} s, ${rutor.length} rutor, mp4 ${Math.round(statSync(mp4For(f.bas)).size / 1024)} kB, omslaget ${(vald.t / 1000).toFixed(1)} s in, ${Math.round(omslag.length / 1024)} kB`);
-    return { kalla: kallHash(f), mp4: filHash(mp4For(f.bas)), omslag: filHash(omslagFor(f.bas)), sekunder, omslagVid: Number((vald.t / 1000).toFixed(2)) };
+    copyFileSync(ut, mp4For(f));
+    writeFileSync(omslagFor(f), omslag);
+    console.log(`  ${f.bas}: ${sekunder} s, ${rutor.length} rutor, mp4 ${Math.round(statSync(mp4For(f)).size / 1024)} kB, omslaget ${(vald.t / 1000).toFixed(1)} s in, ${Math.round(omslag.length / 1024)} kB`);
+    return { kalla: kallHash(f), mp4: filHash(mp4For(f)), omslag: filHash(omslagFor(f)), sekunder, omslagVid: Number((vald.t / 1000).toFixed(2)) };
   } finally {
     rmSync(tmp, { recursive: true, force: true });
   }
 }
 
-const manifest = lasManifest();
 for (const v of valda) if (!filmer.some((f) => f.bas === v)) { console.error(`${v} är ingen film. Filmerna heter <id>-film, <id>-film2 och <id>-film3.`); process.exit(1); }
-const urval = valda.length ? filmer.filter((f) => valda.includes(f.bas)) : vidBehov ? filmer.filter((f) => felFor(f, manifest)) : filmer;
+const urval = valda.length ? filmer.filter((f) => valda.includes(f.bas)) : vidBehov ? filmer.filter((f) => felFor(f)) : filmer;
 
-// Överblivet tas bort: filer och manifestposter för filmer som inte finns längre.
+// Överblivet tas bort: filer och manifestposter för filmer som inte finns längre, i varje samling.
 if (!valda.length) {
-  for (const n of overblivna()) { unlinkSync(join(mapp, n)); console.log(`  ${n}: borttagen, filen hör inte till någon film`); }
-  let andrat = false;
-  for (const bas of Object.keys(manifest)) if (!filmer.some((f) => f.bas === bas)) { delete manifest[bas]; andrat = true; }
-  if (andrat) skrivManifest(manifest);
+  for (const s of SAMLINGAR) {
+    for (const n of overblivna(s)) { unlinkSync(join(s.mapp, n)); console.log(`  ${s.sida}/${n}: borttagen, filen hör inte till någon film`); }
+    const manifest = manifester.get(s);
+    let andrat = false;
+    for (const bas of Object.keys(manifest)) if (!samlingens(s).some((f) => f.bas === bas)) { delete manifest[bas]; andrat = true; }
+    if (andrat) skrivManifest(s, manifest);
+  }
 }
 if (!urval.length) { console.log(`Filmerna som mp4: ${filmer.length} filmer har en aktuell mp4 och omslagsbild.`); process.exit(0); }
 
@@ -291,7 +304,7 @@ const fel = [];
 const port0 = 9300 + Math.floor(Math.random() * 500);
 await Promise.all(Array.from({ length: Math.min(3, ko.length) }, async (_, i) => {
   for (let f = ko.shift(); f; f = ko.shift()) {
-    try { manifest[f.bas] = await gor(f, v, port0 + i); skrivManifest(manifest); } catch (e) { fel.push(`${f.bas}: ${e.message}`); }
+    try { const manifest = manifester.get(f.samling); manifest[f.bas] = await gor(f, v, port0 + i); skrivManifest(f.samling, manifest); } catch (e) { fel.push(`${f.bas}: ${e.message}`); }
   }
 }));
-if (fel.length) { console.error(`Filmerna som mp4, fel:\n${fel.map((r) => `  ${r}`).join('\n')}`); process.exitCode = 1; } else console.log(`Filmerna som mp4: ${urval.length} gjorda. Committa mp4-filerna, omslagsbilderna och film-mp4.json i public/stodundervisning/.`);
+if (fel.length) { console.error(`Filmerna som mp4, fel:\n${fel.map((r) => `  ${r}`).join('\n')}`); process.exitCode = 1; } else console.log(`Filmerna som mp4: ${urval.length} gjorda. Committa mp4-filerna, omslagsbilderna och film-mp4.json i ${[...new Set(urval.map((f) => `public/${f.samling.sida}/`))].join(' och ')}.`);

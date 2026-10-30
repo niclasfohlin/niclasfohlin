@@ -1,0 +1,22 @@
+---
+// Lathundssidans utskrift, i Stödundervisning och under Metoder (K-637): sidan skrivs ut i A4 liggande, som lathundens
+// pdf, med upphovsraden i sidfoten, och en del som står stående (@page staende) får sin egen sida. Knapparna skriver aldrig
+// ut sidan, utan öppnar pdf:en (SkrivUtPdf.astro); det här gäller webbläsarens egen utskrift från menyn.
+import SkrivUtPdf from './SkrivUtPdf.astro';
+---
+<style is:global>
+  @media print {
+    @page {
+      size: A4 landscape;
+      margin: 9mm 11mm 13mm;
+      @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; }
+    }
+    @page staende {
+      size: A4 portrait;
+      margin: 20mm 22mm 22mm;
+      @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; }
+    }
+  }
+</style>
+
+<SkrivUtPdf />

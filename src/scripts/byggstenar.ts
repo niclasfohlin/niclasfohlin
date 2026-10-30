@@ -93,13 +93,18 @@ export const avslutsrutan = (o: { rubrik: string; text: string; knappar: string[
  * som formuläret med -not efter.
  */
 export function avslutsformularet(o: { id: string; oppen: boolean; samling: Samling; fore: string; not: string; hjalp: string; knapp: string; goat: string }) {
-  const forslag = AVSLUTETS_ANLEDNINGAR[o.samling].map((x) => `<button type="button" class="pl-chip" data-anledning="${esc(x)}">${esc(x)}</button>`).join('');
+  const forslag = AVSLUTETS_ANLEDNINGAR[o.samling].map((x) => `<button type="button" class="pl-chip" data-anledning="${esc(x)}" aria-pressed="${o.not === x}">${esc(x)}</button>`).join('');
   return `<div class="pl-flytta pl-avsluta" id="${o.id}"${o.oppen ? '' : ' hidden'}>${o.fore}<span class="pl-etikett">Varför, om du vill</span><p class="pl-andra-knappar">${forslag}</p><label class="visually-hidden" for="${o.id}-not">Anledningen</label><input class="pl-falt pl-brett" type="text" id="${o.id}-not" maxlength="${ANLEDNINGENS_LANGD}" value="${esc(o.not)}" /><p class="pl-hjalp">${esc(o.hjalp)}</p><p class="pl-andra-knappar"><button type="button" class="knapp liten" data-gor="avsluta-klar" ${o.goat}>${esc(o.knapp)}</button><button type="button" class="pl-textknapp" data-gor="avsluta-avbryt">Avbryt</button></p></div>`;
 }
 /** Ett förslag på anledning skriver den i fältet, där läraren kan skriva vidare. Svaret är fältets text, eller null när knappen inte är ett förslag. */
 export function anledningenIFaltet(knapp: HTMLElement, falt: HTMLInputElement): string | null {
   if (knapp.dataset.anledning === undefined) return null;
   falt.value = knapp.dataset.anledning;
+  markeraAnledningen(falt);
   falt.focus();
   return falt.value;
+}
+/** Förslaget som står i fältet syns som valt, också när läraren skriver det själv eller ändrar det (den kalla läsaren 2026-10-30, nr 15). */
+export function markeraAnledningen(falt: HTMLInputElement) {
+  for (const x of falt.closest('.pl-avsluta')?.querySelectorAll<HTMLElement>('[data-anledning]') ?? []) x.setAttribute('aria-pressed', String(x.dataset.anledning === falt.value.trim()));
 }

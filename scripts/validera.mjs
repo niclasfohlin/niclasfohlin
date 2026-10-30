@@ -56,8 +56,8 @@ const lastData = () => {
   const las = (fil, falt) => { try { const j = JSON.parse(readFileSync(join(rot, fil), 'utf8')); return JSON.stringify(Object.fromEntries(Object.entries(j).map(([k, v]) => [k, v?.[falt]]))); } catch { return ''; } };
   return las('src/data/lathund-word.json', 'skalor') + las('src/data/sidlas.json', 'las');
 };
-const pdfMapp = join(rot, 'public', 'stodundervisning');
-const lathundPdfer = () => new Map(readdirSync(pdfMapp).filter((f) => f.endsWith('-lathund.pdf')).map((f) => [f, summa(join(pdfMapp, f))]));
+// Lathundarnas pdf:er i båda samlingarna, Stödundervisning och Metoder (K-637), som samling/fil med sin summa.
+const lathundPdfer = () => new Map(['stodundervisning', 'metoder'].flatMap((s) => readdirSync(join(rot, 'public', s)).filter((f) => f.endsWith('-lathund.pdf')).map((f) => [`${s}/${f}`, summa(join(rot, 'public', s, f))])));
 
 steg('instruktionsprov', 'node scripts/instruktionsprov.mjs');
 steg('krokprov', 'node scripts/krokprov.mjs');
@@ -100,8 +100,8 @@ if (provNamn.length) {
   } else {
     // Lathundens nya pdf till dist, och länkarna till den med den nya versionen.
     const andrade = [...lathundPdfer()].filter(([f, s]) => pdfFore.get(f) !== s).map(([f]) => f);
-    for (const f of andrade) copyFileSync(join(pdfMapp, f), join(dist, 'stodundervisning', f));
-    if (andrade.length) bytVersioner(dist, andrade.map((f) => `/stodundervisning/${f}`));
+    for (const f of andrade) if (existsSync(dirname(join(dist, f)))) copyFileSync(join(rot, 'public', f), join(dist, f));
+    if (andrade.length) bytVersioner(dist, andrade.map((f) => `/${f}`));
   }
   for (const del of ['lathund', 'word', 'sidlas']) rmSync(join(dist, 'utskrift', del), { recursive: true, force: true });
 }

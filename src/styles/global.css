@@ -2373,12 +2373,9 @@ html.js .bara-js { display: inline-block; }
 }
 
 /* Metodernas lathund (K-632): Stödundervisnings lathund med en undervisningsmetods innehåll (Umlathund.astro). Filmerna
-   står överst, två i bredd på dator, och hör bara till skärmen. Faktan har fem celler: på dator i en rad, där Lärande
+   står överst i Stödundervisnings spelare (Filmspelare.astro, K-637). Faktan har fem celler: på dator i en rad, där Lärande
    totalt med kommentaren får mest plats, och i telefonen två i bredd med Lärande totalt över hela raden. Kärnans kort är
    metodens kort, två och två i sin kolumn. En del i hela sidans bredd har kolumnernas luft. */
-.um-lh-filmer { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; margin: 0 0 1.75rem; }
-.um-lh-filmer .film { margin: 0; max-width: none; }
-@media (min-width: 48rem) { .um-lh-filmer { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .um-lh-fakta { grid-template-columns: 1.4fr 1.2fr 1.6fr 1fr 1fr; }
 .um-lh-under { font-size: 0.85rem; line-height: 1.4; color: var(--farg-text-svag); }
 .um-lh .um-kort-rad { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2394,7 +2391,6 @@ html.js .bara-js { display: inline-block; }
   .um-lh-fakta > div:nth-child(3) { grid-column: 1 / -1; }
   .um-lh-fakta > div:nth-child(4) { border-left: 0; }
 }
-@media print { .um-lh-filmer { display: none; } }
 
 .metod-fot { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--farg-kant); }
 .metod-fot .relaterade h2 { font-size: 1.15rem; margin: 1.25rem 0 0.4em; }

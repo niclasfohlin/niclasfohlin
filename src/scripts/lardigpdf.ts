@@ -5,7 +5,7 @@
 // Planera insatsens sammanställning (dokument i src/scripts/planpdf.ts), med pdf-lib, som hämtas först när läraren trycker,
 // och den lämnar aldrig enheten. Allt som räknas och varje mening som också står på sidan kommer ur standarden
 // (larDigSammanstallning och texterna under Lär dig metoden i src/lib/standard/plan.js).
-import { datumspann, decimal, gickDetSvaret, SKATTNINGARNAS_GRANS, klassernasSkalaText, larDigetsAvslutText, larDigetsKvar, larDigetsRegler, lovetsText, mening, mittIFragan, skalansAndar, skalansAndarText, skattningensGranser, skolveckan, granslinjensText, stegetsRad, uppraknat, type LarDigSammanstallning } from '../lib/standard/index.js';
+import { datumspann, linjenRitas, medDecimaler, gickDetSvaret, SKATTNINGARNAS_GRANS, klassernasSkalaText, larDigetsAvslutText, larDigetsKvar, larDigetsRegler, lovetsText, mening, mittIFragan, skalansAndar, skalansAndarText, skattningensGranser, skolveckan, granslinjensText, stegetsRad, uppraknat, type LarDigSammanstallning } from '../lib/standard/index.js';
 import { dokument } from './planpdf';
 
 export interface LarDigPdfInfo {
@@ -29,7 +29,7 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
   // Perioden till och med veckan läraren är i, eller veckan läraren avslutade planen (s.dag), så att veckor som inte har varit
   // inte står med.
   const forsta = s.veckor[0]?.mandag, sista = s.veckor.filter((v) => v.mandag <= s.dag).at(-1)?.mandag;
-  p.huvudet('Lär dig metoden', info.metod, forsta && sista ? datumspann(forsta, skolveckan(sista).till) : '', idag);
+  p.huvudet('Lär dig metoden', info.metod, forsta && sista ? datumspann(forsta, s.avslut && s.dag < skolveckan(sista).till ? s.dag : skolveckan(sista).till) : '', idag);
   if (s.avslut) { p.rubrik('Avslutet', 30); p.text(larDigetsAvslutText(s.avslut), { luft: 2 }); }
   if (s.mal) { p.rubrik('Ditt mål', 30); p.text(mening(s.mal), { luft: 2 }); }
   if (info.klasser.length) { p.rubrik('Klasserna', 30); p.text(mening(uppraknat(info.klasser)), { luft: 2 }); }
@@ -44,7 +44,8 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
   // den och den streckade linjen förklaras under den (de kalla läsarna 2026-10-30).
   for (const [j, l] of s.linjer.entries()) {
     p.rubrik(l.namn, 150);
-    if (!l.varden.some((x) => x !== undefined)) { p.text('Inte skattad än.', { luft: 4 }); continue; }
+    // Linjen med två kryss, som på sidan (linjenRitas); ett kryss står som ett tal.
+    if (!linjenRitas(l)) { const x = l.varden.filter((v) => v !== undefined); p.text(x.length ? `Skattad en gång: ${x[0]} av ${l.skala.till}.` : 'Inte skattad än.', { luft: 4 }); continue; }
     const andar = skalansAndar(l.namn, j);
     p.not(andar ? `${skalansAndarText(l.skala, andar)}, vecka för vecka.` : `${l.skala.fran} till ${l.skala.till}, vecka för vecka.`);
     p.linje(l.varden, etiketter, { fran: l.skala.fran, till: l.skala.till, granser: skattningensGranser(l), hojd: 80, full: true });
@@ -60,7 +61,7 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
   if (s.klasstabell.rader.length) {
     p.rubrik('Klasserna vecka för vecka', 80);
     p.not(klassernasSkalaText());
-    p.matris(s.klasstabell.veckor.map((i) => s.veckor[i].namn), s.klasstabell.rader.map((r) => ({ namn: r.namn, varden: r.varden, sist: r.snitt === null ? '' : decimal(r.snitt) })), { sist: 'Snitt' });
+    p.matris(s.klasstabell.veckor.map((i) => s.veckor[i].namn), s.klasstabell.rader.map((r) => ({ namn: r.namn, varden: r.varden, sist: r.snitt === null ? '' : medDecimaler(r.snitt) })), { sist: 'Snitt' });
   }
   // Svaren Mitt i, under en rubrik med klassen.
   for (const x of s.mittSvar) {

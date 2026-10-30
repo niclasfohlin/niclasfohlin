@@ -6,40 +6,29 @@
 // lektionens (granskningen 2026-10-30: förlagan till lektion 1 visade 40-minutersschemats tider). Riggens Word-fil ritar
 // samma blad med blocket planeringsblad. Det läraren skrev går genom medSaker, så att metodens saker är länkar också här.
 import { UTFALLEN } from '../lib/standard/index.js';
-import { karnanI, tidsschematsRad, medSaker, utfalletsGrans, type Um } from '../lib/undervisningsmetod';
+import { BLADETS_ORD as O, bladetsLista, bladetsRad, karnanI, medSaker, planeringsbladet, utfalletsGrans, type Um } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface Props { d: Um; plan: Record<string, any>; amne?: string; gra?: boolean; variant?: string; saker?: MetodSak[] }
 const { d, plan, amne, gra = false, variant, saker = [] } = Astro.props;
-const mall = d.planeringsmall ?? {};
-const varianten = variant ? (d.tidsschema?.varianter ?? []).find((v: { nar: string }) => v.nar === variant) : undefined;
-const delensTid = (fas: string) => varianten?.delar?.find((x: { fas: string }) => x.fas === fas)?.tid ?? tidsschematsRad(d, fas)?.tid;
-// Utfallets text efter gränsen, som mallen och lektionskortet har den: stegets redo utan den första meningen, och gränsen
-// för klassens antal ur utfalletsGrans (samma rot som metodens sida).
-const kontrollen = (d.steg?.rader ?? []).find((s: { redo?: unknown }) => s.redo);
-const utfalletsText = (id: string) => String(kontrollen?.redo?.[id] ?? '').replace(/^[^.]*\.\s*/, '');
-const lista = (v: unknown): string[] => (Array.isArray(v) ? v.map(String) : v ? [String(v)] : []);
-const delarna = (mall.delar ?? []) as { fas: string; skriv?: string; not?: string }[];
-// Raden bryts efter en mittpunkt och aldrig i ett tal (designgranskningen 2026-10-30: 14 blev 1 och 4).
-const bryt = (t?: string) => t?.replace(/ · /g, ' · ');
-const planensDel = (fas: string) => bryt((plan.delar ?? []).find((x: { fas: string }) => x.fas === fas)?.text as string | undefined);
-const kryss = new Set<number>(plan.efter?.kryss ?? []);
+// Bladets regler (variantens minuter, utfallens texter, planens delar och Efter lektionens etiketter) står i
+// planeringsbladet i src/lib/undervisningsmetod.ts, som lathundens PowerPoint-fil och pdf ritar samma blad ur.
+const { mall, varianten, delensTid, utfalletsText, delarna, planensDel, kryss, etikett } = planeringsbladet(d, plan, variant);
+const lista = bladetsLista;
+const bryt = bladetsRad;
 // Det läraren skrev, med metodens saker som länkar.
 const k = (t: unknown) => medSaker(String(t ?? ''), saker, new Set());
-// Efter lektionens etiketter ur mallen, utan understrecken där läraren skriver. Exit-lapparnas rad har högarna efter kolon,
-// som läraren ringar in på det tomma bladet; på det ifyllda står bara namnet (granskare-3 nr 14).
-const etikett = (falt: string, forval: string, kolon = false) => { const t = String(mall.efter?.[falt] ?? forval).replace(/[:_\s]+$/, '').replace(/:\s*_+.*$/, '').split(/\s{2,}/)[0]; return kolon ? t.split(':')[0] : t; };
 ---
 <div class={`um-blad${gra ? ' um-blad-gra' : ''}`}>
   <dl class="um-blad-huvud">
-    <div><dt>Klass</dt><dd>{plan.klass}</dd></div>
-    {amne && <div><dt>Ämne</dt><dd>{amne}</dd></div>}
-    <div><dt>Datum</dt><dd>{plan.datum}</dd></div>
-    <div><dt>Lektion i arbetsområdet</dt><dd>{plan.lektion}</dd></div>
-    <div class="bred"><dt>När lektionen är slut ska eleverna kunna</dt><dd set:html={k(plan.mal)} /></div>
-    <div class="bred"><dt>Så ser jag att de kan: exit-lappen</dt><dd set:html={k(plan.belagg)} /></div>
+    <div><dt>{O.klass}</dt><dd>{plan.klass}</dd></div>
+    {amne && <div><dt>{O.amne}</dt><dd>{amne}</dd></div>}
+    <div><dt>{O.datum}</dt><dd>{plan.datum}</dd></div>
+    <div><dt>{O.lektion}</dt><dd>{plan.lektion}</dd></div>
+    <div class="bred"><dt>{O.mal}</dt><dd set:html={k(plan.mal)} /></div>
+    <div class="bred"><dt>{O.belagg}</dt><dd set:html={k(plan.belagg)} /></div>
   </dl>
-  <p class="um-blad-zon">Före lektionen</p>
+  <p class="um-blad-zon">{O.fore}</p>
   <div class="um-blad-fore">
     {(mall.fore ?? []).map((ruta: { etikett: string; rader?: string[]; falt?: string | string[]; fot?: string; fotFalt?: string }) => (
       <div class="um-blad-ruta">
@@ -51,11 +40,11 @@ const etikett = (falt: string, forval: string, kolon = false) => { const t = Str
       </div>
     ))}
     <div class="um-blad-ruta">
-      <p class="um-blad-etikett">Förberett</p>
-      <dl class="um-blad-rader"><div><dt>Blad och facit</dt><dd set:html={k(plan.blad)} /></div><div><dt>Stöd, till vem</dt><dd set:html={k(plan.forberett)} /></div></dl>
+      <p class="um-blad-etikett">{O.forberett}</p>
+      <dl class="um-blad-rader"><div><dt>{O.blad}</dt><dd set:html={k(plan.blad)} /></div><div><dt>{O.stod}</dt><dd set:html={k(plan.forberett)} /></div></dl>
     </div>
   </div>
-  <p class="um-blad-zon">Lektionen{varianten && <span class="um-blad-zon-not"> · minuterna i {varianten.nar}</span>}</p>
+  <p class="um-blad-zon">{O.lektionen}{varianten && <span class="um-blad-zon-not">{` · ${O.minuterna} ${varianten.nar}`}</span>}</p>
   <table class="um-blad-lektion">
     <tbody>
       {delarna.map((del) => {
@@ -64,12 +53,12 @@ const etikett = (falt: string, forval: string, kolon = false) => { const t = Str
         return (
           <>
             <tr>
-              <th scope="row"><span class="um-blad-fas">{del.fas}</span><span class="um-blad-tid">{delensTid(del.fas)}{karna.length > 0 && ` · kärnan ${karna.map((k: { nr: number }) => k.nr).join(' och ')}`}</span></th>
+              <th scope="row"><span class="um-blad-fas">{del.fas}</span><span class="um-blad-tid">{delensTid(del.fas)}{karna.length > 0 && ` · ${O.karnan} ${karna.map((k: { nr: number }) => k.nr).join(' och ')}`}</span></th>
               <td>{del.skriv && <span class="um-blad-skriv">{bryt(del.skriv)}</span>}{text && <span class="um-blad-text" set:html={k(text)} />}{!text && del.not && <span class="um-blad-skriv">{del.not}</span>}</td>
             </tr>
             {del.fas === 'Kontrollera' && plan.beslut && (
               <tr class="um-blad-beslut">
-                <th scope="row"><span class="um-blad-fas">Beslutet</span><span class="um-blad-tid">elever i dag: {plan.beslut.elever}</span></th>
+                <th scope="row"><span class="um-blad-fas">{O.beslutet}</span><span class="um-blad-tid">{`${O.elever} ${plan.beslut.elever}`}</span></th>
                 <td>
                   <div class="um-utfall um-utfall-litet">
                     {UTFALLEN.map((u) => (
@@ -90,12 +79,12 @@ const etikett = (falt: string, forval: string, kolon = false) => { const t = Str
   </table>
   {plan.efter && (
     <>
-      <p class="um-blad-zon">Efter lektionen</p>
+      <p class="um-blad-zon">{O.efter}</p>
       <dl class="um-blad-efter">
         <div><dt>{etikett('kontrollen', 'Kontrollen')}</dt><dd set:html={k(plan.efter.kontrollen)} /></div>
         <div><dt>{etikett('hogar', 'Exit-lapparna', true)}</dt><dd set:html={k(plan.efter.hogar)} /></div>
         <div class="bred"><dt>{etikett('sag', 'Det jag såg')}</dt><dd set:html={k(plan.efter.sag)} /></div>
-        <div class="bred um-blad-kryss"><dt>Kärnan i lektionen</dt><dd>{(d.karna?.komponenter ?? []).map((k: { kryss: string }, i: number) => <span class={kryss.has(i + 1) ? 'pa' : ''}><span aria-hidden="true">{kryss.has(i + 1) ? '☒' : '☐'}</span> {i + 1} {k.kryss.replace(/\.$/, '')}<span class="visually-hidden">{kryss.has(i + 1) ? ', kryssad' : ', inte kryssad'}</span></span>)}</dd></div>
+        <div class="bred um-blad-kryss"><dt>{O.karnanIlektionen}</dt><dd>{(d.karna?.komponenter ?? []).map((k: { kryss: string }, i: number) => <span class={kryss.has(i + 1) ? 'pa' : ''}><span aria-hidden="true">{kryss.has(i + 1) ? '☒' : '☐'}</span> {i + 1} {k.kryss.replace(/\.$/, '')}<span class="visually-hidden">{kryss.has(i + 1) ? ', kryssad' : ', inte kryssad'}</span></span>)}</dd></div>
         <div><dt>{etikett('nasta', 'Nästa lektion: två snabba')}</dt><dd set:html={k(plan.efter.nasta)} /></div>
         <div><dt>{etikett('forst', 'Jag går först till')}</dt><dd set:html={k(plan.efter.forst)} /></div>
       </dl>

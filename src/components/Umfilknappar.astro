@@ -7,12 +7,15 @@
 // direkt under det (Niclas 2026-10-20: "Ha den så nära bladet du ska skriva ut som möjligt"), och Drive och Word bredvid;
 // med blad skriver knappen ut bladets egen pdf, och Word är hela filen. bara ger bara knappen, som överst på sidan. Knappen
 // skriver ut pdf:en i Chromium på datorn och öppnar den annars (SkrivUtPdf.astro). Bara filer som finns får en knapp
-// (src/lib/undervisningsmetodfiler.ts).
+// (src/lib/undervisningsmetodfiler.ts). Lathunden har också PowerPoint-filen, som sajten bygger ur lathundens sidor
+// (/metoder/<id>-lathund.pptx), och Drive sparar den som presentation, som i Stödundervisning; pdf:en är liggande. filmer
+// är hur många filmer metoden har, och ger raden Filmerna med filmerna som zip sist i listan (Filmrad.astro, K-634).
 import Filval from './Filval.astro';
+import Filmrad from './Filmrad.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import type { UmFil, UmSlag } from '../lib/undervisningsmetodfiler';
-interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; bara?: boolean }
-const { id, filer, slag, stor = false, titel = id, blad, bara = false } = Astro.props;
+interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; bara?: boolean; filmer?: number }
+const { id, filer, slag, stor = false, titel = id, blad, bara = false, filmer = 0 } = Astro.props;
 const valda = slag.map((s) => filer[s]).filter((f): f is UmFil => !!f);
 const bas = (f: UmFil) => (f.pdf ?? f.docx ?? '').replace(/\.(pdf|docx)$/, '');
 const namn = (f: UmFil) => bas(f).split('/').pop() ?? id;
@@ -37,7 +40,8 @@ const metoden = filer.metoden;
         </span>
       </li>
     )}
-    {valda.map((f) => <li><span class="filrubrik">{f.rad}</span> <Filval fil={bas(f)} namn={namn(f)} rubrik={f.rad} statistik={`${titel}: ${iMening(f.rad)}`} pdf={!!f.pdf} pdfTitel="Ladda ner som pdf" /></li>)}
+    {valda.map((f) => <li><span class="filrubrik">{f.rad}</span> <Filval fil={bas(f)} namn={namn(f)} rubrik={f.rad} statistik={`${titel}: ${iMening(f.rad)}`} pdf={!!f.pdf} pptx={f.slag === 'lathund'} pdfTitel={f.slag === 'lathund' ? undefined : 'Ladda ner som pdf'} /></li>)}
+    {filmer > 0 && <Filmrad href={`/metoder/${id}-filmer.zip`} id={id} titel={titel} antal={filmer} />}
   </ul>
 ) : bara ? (
   knapp && <a class={stor ? 'knapp' : 'knapp sekundar'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>

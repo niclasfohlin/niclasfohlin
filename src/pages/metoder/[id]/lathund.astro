@@ -1,20 +1,23 @@
 ---
-// /metoder/<id>/lathund (K-632): lathunden Att komma igång för en undervisningsmetod, fyra sidor att ha bredvid sig när
-// läraren börjar, med metodens filmer överst. Sidorna är standardens (lathundensSidor), samma som riggen ritar i lathundens
-// pdf och Word, och sidfoten i dem leder hit. Formen är Stödundervisnings lathundssida (src/pages/stodundervisning/[id]/
-// lathund.astro): huvudet med brödsmulan, knapparna, navigeringen och sidorna, och upphovet sist. Filmerna hör till skärmen
-// och står varken i utskriften eller i pdf:en. Knapparna ger riggens filer; sidan skriver aldrig ut sig själv.
+// /metoder/<id>/lathund (K-632, K-637): lathunden Att komma igång för en undervisningsmetod, fyra sidor att ha bredvid sig
+// när läraren börjar, med metodens filmer i en spelare överst. Sidorna är standardens (lathundensSidor), samma som sajten
+// ritar i lathundens PowerPoint-fil och pdf (src/lib/metodpptx.ts, scripts/lathund-pdf.mjs), och sidfoten i dem leder hit.
+// Formen är Stödundervisnings lathundssida (src/pages/stodundervisning/[id]/lathund.astro), med samma knappar
+// (Lathundsknappar.astro), samma spelare (Filmspelare.astro) och samma utskrift i A4 liggande (Lathundsutskrift.astro):
+// huvudet med brödsmulan, knapparna, navigeringen, filmerna och sidorna, och upphovet sist. Filmerna hör till skärmen och
+// står varken i utskriften eller i pdf:en. Word-lathunden är riggens; sidan skriver aldrig ut sig själv.
 import Base from '../../../layouts/Base.astro';
 import Boklankar from '../../../components/Boklankar.astro';
-import Film from '../../../components/Film.astro';
-import Filval from '../../../components/Filval.astro';
+import Filmspelare from '../../../components/Filmspelare.astro';
+import Lathundsknappar from '../../../components/Lathundsknappar.astro';
+import Lathundsutskrift from '../../../components/Lathundsutskrift.astro';
 import Umfilknappar from '../../../components/Umfilknappar.astro';
 import Umlathund from '../../../components/Umlathund.astro';
 import { publicerade } from '../../../lib/innehall';
-import { metodensFilmer } from '../../../lib/film';
+import { FILM_UPPHOV, metodensFilmer } from '../../../lib/film';
 import { datumText, UPPHOV } from '../../../lib/metod';
 import { lathundensSidor } from '../../../lib/standard/index.js';
-import { metodensAdress, relateradeSidor, UM_NAMN, umStam, undervisningsmetodensSaker, type Um } from '../../../lib/undervisningsmetod';
+import { metodensAdress, relateradeSidor, umStam, undervisningsmetodensSaker, type Um } from '../../../lib/undervisningsmetod';
 import { metodensFiler } from '../../../lib/undervisningsmetodfiler';
 import { getCollection } from 'astro:content';
 
@@ -31,22 +34,19 @@ const adress = `niclasfohlin.se${sida}/lathund`;
 const sidor = lathundensSidor(d);
 const filer = metodensFiler(id);
 const filmer = metodensFilmer({ film: d.film, filmer: d.filmer }, id, 'metoder');
-const lathund = filer.lathund;
 // Metodens saker, som leder till metodens sida, utom lathunden själv.
 const saker = undervisningsmetodensSaker(d, id).filter((x) => x.adress !== `${sida}/lathund`);
 const relaterade = relateradeSidor(d, await getCollection('stodundervisning'));
-const iMening = (s: string) => s.charAt(0).toLocaleLowerCase('sv') + s.slice(1);
 ---
 
-<Base title={`Lathund: ${d.titel}`} description={`Lathunden Att komma igång till ${d.titel}: metoden, vägen till måndag, planeringen av en lektion och de första veckorna, på fyra sidor att skriva ut eller ladda ner i Word.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+<Base title={`Lathund: ${d.titel}`} description={`Lathunden Att komma igång till ${d.titel}: metoden, vägen till måndag, planeringen av en lektion och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="lathund">
     <header class="lathund-huvud">
       <p class="meta brodsmula"><a href="/metoder">Metoder</a> · <a href={sida}>{d.titel}</a> · Lathund</p>
       <h1>Lathund: {d.titel}</h1>
-      <p class="ingress">Fyra sidor att ha bredvid sig när du börjar: metoden, vägen till måndag, planeringen av en lektion och de första veckorna. Skriv ut dem som pdf eller ladda ner dem i Word.</p>
+      <p class="ingress">Fyra sidor att ha bredvid sig när du börjar: metoden, vägen till måndag, planeringen av en lektion och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
-        <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lathund']} stor bara />
-        {lathund?.docx && <>{' '}<Filval fil={`/metoder/${umStam(id, 'lathund')}`} namn={umStam(id, 'lathund')} rubrik={UM_NAMN.lathund} statistik={`${d.titel}: ${iMening(UM_NAMN.lathund)}`} /></>}
+        <Lathundsknappar fil={`/metoder/${umStam(id, 'lathund')}`} titel={d.titel} />
         {' '}<Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} bara />
       </p>
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
@@ -57,15 +57,13 @@ const iMening = (s: string) => s.charAt(0).toLocaleLowerCase('sv') + s.slice(1);
         </ul>
       </nav>
     </header>
-    {filmer.length > 0 && (
-      <section class="um-lh-filmer" id="lathund-film" aria-label={filmer.length === 1 ? 'Metodens film' : 'Metodens filmer'}>
-        {filmer.map((f) => <Film f={f} titel={d.titel} />)}
-      </section>
-    )}
+    {filmer.length > 0 && <Filmspelare filmer={filmer} id={id} titel={d.titel} samling="metoder" />}
     <Boklankar metod={id} titel={d.titel} knappar={false}><Umlathund d={d} id={id} sidor={sidor} filer={filer} saker={saker} relaterade={relaterade} /></Boklankar>
-    <p class="upphov">{UPPHOV}. Lathund till {d.titel}{d.uppdaterad && `, uppdaterad ${datumText(d.uppdaterad)}`}. {adress}</p>
+    <p class="upphov">{UPPHOV}. Lathund till {d.titel}{d.uppdaterad && `, uppdaterad ${datumText(d.uppdaterad)}`}. {adress}{filmer.length > 0 && `. ${FILM_UPPHOV}`}</p>
     {/* Metodens saker med sina adresser, som scripts/metoderprov.mjs prövar sidans länkar mot. */}
     <script type="application/json" id="um-saker" is:inline set:html={JSON.stringify(saker).replace(/</g, '\\u003c')} />
   </article>
   <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
 </Base>
+
+<Lathundsutskrift />

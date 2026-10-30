@@ -308,18 +308,20 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Planens format, lagringen och filen | `PLANFORMAT`, `KONVERTERINGAR`, `konverteraPlan`, `lasPlanfil`, `planfilen`, `skrivPlanen`, `sparadPlan`, `kopianOchSchemat`, `kopiansAlder`, `kopiansText` och `KOPIANS_GRANS` i `src/scripts/insatser-lagring.ts` |
 | Lovet, låst när något är infört i veckan eller senare, och lovveckorna i en mening, i båda lagren | `lovetLast` och `lovetsText` |
 | En tabell per rad och kolumn, som klassernas skattning per vecka eller lärarens per instrument | `medVardet` |
-| Lär dig metoden: metodens plan ur sidans data, veckorna, fasen, veckan läraren är i, det som är infört, Gick det? och sammanställningen | `larDigetsMetodplan`, `larDigetsVeckor`, `efterStegen`, `larDigetsFas`, `larDigetsNu`, `forstaLektionen`, `forstaLektionensDag`, `larDigetsNamn`, `larDigetsLaget`, `larDigetsLagetFor`, `larDigetsSteg`, `efterStegensTakt`, `stegetsRad`, `harInfortEfter`, `svaraGickDet`, `obesvaradVecka`, `gickDetSvaret`, `klasserUrText`, `larDigSammanstallning`, `larDigetsRegler`, `larDigetsKvar`, `skalansAndar`, `granslinjensText` och `SKATTNINGARNAS_GRANS` |
+| Lär dig metoden: metodens plan ur sidans data, veckorna, fasen, veckan läraren är i, det som är infört, Gick det? och sammanställningen | `larDigetsMetodplan`, `larDigetsVeckor`, `efterStegen`, `larDigetsFas`, `larDigetsNu`, `forstaLektionen`, `forstaLektionensDag`, `larDigetsNamn`, `larDigetsLaget`, `larDigetsLagetFor`, `larDigetsSteg`, `efterStegensTakt`, `stegetsRad`, `harInfortEfter`, `svaraGickDet`, `gickDetsFoljd`, `obesvaradVecka`, `gickDetSvaret`, `klasserUrText`, `larDigSammanstallning`, `larDigetsRegler`, `larDigetsKvar`, `skalansAndar`, `granslinjensText` och `SKATTNINGARNAS_GRANS` |
 | Lär dig metoden: klassernas skattning och tabellen med klasserna vecka för vecka | `KLASSERNAS_SKALA`, `klassensFraga`, `klassernasTabell`, `klassernasSkalaText`, `klassenHarNagot` och `skalansAndarText` |
 | Lär dig metoden: lärarens väg, listan med klasserna och kommentarernas längd, Före och ett steg till | `forlangSteget`, `larDigetsForval`, `FORE_VECKOR`, `EFTER_STEGEN_VAR`, `KLASSLISTANS_LANGD`, `KLASSENS_NAMN`, `KOMMENTARENS_LANGD`, `KLASSNOTENS_LANGD` och `regelnIOrd` |
 | Det som är infört, i båda samlingarna, och det senaste | `infordaDatum` och `sistaInfort` |
-| Skolveckan, måndag till fredag, och dess söndag, och en period i ord | `skolveckan`, `skolveckansText` och `periodensText` |
+| Skolveckan, måndag till fredag, och dess söndag, en period i ord, veckan efter planen förbi lov och veckorna att trycka som lov | `skolveckan`, `skolveckansText`, `periodensText`, `forstaSkolveckanEfter`, `mandagarna`, `iSommarlovet` och `lovveckornaAttValja` |
 | Följderna i en lista, som pass 1–3, veckorna 1–2 och kalenderveckorna v. 48–49 | `foljderna` |
 | Dagen ur ett datum i en metods fil | `dagAv` |
-| Regeln som gällde i en vecka på linjen | `regelnIVeckan` |
+| Regeln som gällde i en vecka på linjen, och om linjen ritas | `regelnIVeckan` och `linjenRitas` |
+| Lär dig metoden: läsvägen före första lektionen och metodens veckor med planens kalendervecka | `lasvagen` och `veckornaMedDatum` |
+| Ett tal med lika många decimaler i en kolumn | `medDecimaler` |
 | Skattningens knappar, skalans ändar och linjen, som båda lagren ritar | `skalansKnappar`, `skalansAndarRad` och `linjegraf` i `src/scripts/skattning.ts` |
 | Lär dig metoden: Mitt i stegen, veckan, låst när den har börjat, klassen med lägst snitt och frågan | `larDigetsMitt`, `larDigetsMittLast`, `klassenHittills`, `larDigetsMittI`, `mittIText`, `mittIFragan` och `MITT_I_LANGD` |
 | Lär dig metoden: avslutet i en mening | `larDigetsAvslutText` |
-| Byggstenarna i båda lagrens sidor: lovknappen, listorna, rutorna som fälls ut, Vad linjen säger, raden överst och avslutet | `lovknapp`, `etikettlista`, `fallut`, `linjensRegler`, `knappraden`, `lagesraden`, `avslutaKnappen`, `ANGRA_AVSLUTET`, `avslutsrutan`, `avslutsformularet` och `goatFor` i `src/scripts/byggstenar.ts` |
+| Byggstenarna i båda lagrens sidor: lovknappen, listorna, rutorna som fälls ut, Vad linjen säger, raden överst och avslutet | `lovknapp`, `etikettlista`, `fallut`, `linjensRegler`, `knappraden`, `lagesraden`, `avslutaKnappen`, `ANGRA_AVSLUTET`, `avslutsrutan`, `avslutsformularet`, `goatFor` och `remsansKnapp` i `src/scripts/byggstenar.ts`, och samlingens led i statistiken, `SAMLINGARNAS_LED` |
 | Passen och besluten | `passensRad`, `passensLage`, `narvaronText`, `narvaronKort`, `passensNarvaro`, `beslutText` och `BESLUTEN` |
 | Diagrammet | `stapelnsKant` och `prickarna` |
 | Målet | `malText`, `malensMening` och `kortetsMalFel` |

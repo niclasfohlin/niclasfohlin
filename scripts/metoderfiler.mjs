@@ -4,12 +4,14 @@
 // förteckning out/<id>/filer.json säger vilken metodfil varje dokument byggdes ur (sha256), och skriptet stannar när den
 // inte är samma fil som sajten visar: då bygger riggen om. Sajten bygger ingen egen Word-fil, så att filen och sidan inte
 // glider isär (underlag/prov/metoder/UPPDRAGET.md, besluten). Utan förteckning tar skriptet riggens filer efter namnen och
-// klipper bladen ur pdf:en med allt, och säger att kontrollen saknas.
+// klipper bladen ur pdf:en med allt, och säger att kontrollen saknas. Lathundens pdf och PowerPoint-fil är sajtens, ur
+// lathundens sidor i standarden (scripts/lathund-pdf.mjs och src/lib/metodpptx.ts, K-637), så bara riggens Word-lathund
+// tas in.
 //
 //   node scripts/metoderfiler.mjs                 ta in filerna för varje metod i src/content/undervisningsmetoder/
 //   node scripts/metoderfiler.mjs --kontrollera   pröva bara att filerna finns och hör till metodens fil
 import { createHash } from 'node:crypto';
-import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -63,7 +65,9 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     for (const post of f.filer ?? []) {
       const yamlSha = post.metodSha256 ?? f.metodSha256;
       if (yamlSha !== metodensSha) fel.push(`${id}: ${post.namn} är byggd ur en annan metodfil än sajtens (${String(yamlSha).slice(0, 8)} mot ${metodensSha.slice(0, 8)}). Kopiera riggens metod.yaml eller be riggen bygga om.`);
-      for (const namn of [post.namn, post.pdf].filter(Boolean)) {
+      // Lathundens pdf är sajtens, gjord av PowerPoint ur sajtens PowerPoint-fil (scripts/lathund-pdf.mjs, K-637), så riggens
+      // tas inte in; riggens Word-lathund tas in som förut.
+      for (const namn of [post.namn, post.slag === 'lathund' ? undefined : post.pdf].filter(Boolean)) {
         const kalla = hitta(namn);
         if (!kalla) { fel.push(`${id}: ${namn} saknas hos riggen`); continue; }
         filer.push({ slag: post.slag, kalla, typ: namn.split('.').pop() });
@@ -72,7 +76,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   } else {
     varningar.push(`${id}: riggens förteckning out/${id}/filer.json saknas, så filerna tas efter namnen och kontrollen mot metodfilen saknas`);
     const t = d.titel;
-    for (const [slag, namn] of [['allt', `${t}`], ['lathund', `${t} - Att komma igång`]]) for (const typ of ['pdf', 'docx']) if (existsSync(join(ut, `${namn}.${typ}`))) filer.push({ slag, kalla: join(ut, `${namn}.${typ}`), typ });
+    for (const [slag, namn] of [['allt', `${t}`], ['lathund', `${t} - Att komma igång`]]) for (const typ of slag === 'lathund' ? ['docx'] : ['pdf', 'docx']) if (existsSync(join(ut, `${namn}.${typ}`))) filer.push({ slag, kalla: join(ut, `${namn}.${typ}`), typ });
     const kort = join(RIGG, 'out', 'material', `lektionskort-${id}`);
     for (const typ of ['pdf', 'docx']) if (existsSync(join(kort, `Lektionskort - ${t}.${typ}`))) filer.push({ slag: 'lektionskort', kalla: join(kort, `Lektionskort - ${t}.${typ}`), typ });
   }
@@ -145,7 +149,8 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
       if (existsSync(k) && !kontrollera) copyFileSync(k, join(UT, `${sajt}${ext}.svg`));
     }
   }
-  for (const slag of ['allt', 'lathund', 'lektionskort']) if (!existsSync(join(UT, `${stam(slag)}.pdf`))) fel.push(`${id}: ${slag} saknas i public/metoder/`);
+  for (const slag of ['allt', 'lektionskort']) if (!existsSync(join(UT, `${stam(slag)}.pdf`))) fel.push(`${id}: ${slag} saknas i public/metoder/`);
+  if (d.lathund && !existsSync(join(UT, `${stam('lathund')}.docx`))) fel.push(`${id}: Word-lathunden saknas i public/metoder/`);
   // Allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se, på varje sida (CLAUDE.md under Innehållstyperna; Niclas
   // 2026-10-30: "Hör även allt (C) Niclas Fohlin som ska ha det likt stödundervisning?").
   for (const f of readdirSync(UT).filter((x) => x.startsWith(id) && x.endsWith('.pdf'))) {

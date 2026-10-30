@@ -7,6 +7,7 @@ import Planeringsblad from './Planeringsblad.astro';
 import type { LathundDel } from '../lib/standard/index.js';
 import type { MetodSak } from '../lib/metodsaker';
 import { exempletsAmne, type Um } from '../lib/undervisningsmetod';
+import { UM_MINUTERNAS_KOLUMNER } from '../lib/lathundsidor';
 interface Props { del: LathundDel; d: Um; t: (text: string) => string; saker: MetodSak[] }
 const { del: x, d, t, saker } = Astro.props;
 ---
@@ -45,7 +46,7 @@ const { del: x, d, t, saker } = Astro.props;
     <h3 class="lh-kicker">{x.rubrik}</h3>
     <table class="m-tabell lh-tabell lh-schema">
       <colgroup><col style="width:4.5rem" /><col style="width:28%" /><col /></colgroup>
-      <thead><tr><th scope="col">Minut</th><th scope="col">Delen</th><th scope="col">Du säger</th></tr></thead>
+      <thead><tr>{UM_MINUTERNAS_KOLUMNER.map((k) => <th scope="col">{k}</th>)}</tr></thead>
       <tbody>{x.delar.map((r) => <tr><th scope="row">{r.tid}</th><td>{r.fas}</td><td>{r.fraser.length > 0 && <span class="lh-fraser" set:html={t(r.fraser.map((f) => `”${f}”`).join(' '))} />}</td></tr>)}</tbody>
     </table>
   </>

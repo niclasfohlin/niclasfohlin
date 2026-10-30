@@ -1,0 +1,19 @@
+---
+// Raden Filmerna i Ladda ner och skriv ut (Niclas 2026-10-07), Filmen när metoden har en film: metodens filmer som mp4 i en
+// zip-fil, i Stödundervisning (Nedladdning.astro) och under Metoder (Umfilknappar.astro, K-634). Zip-filen byggs av
+// [id]-filmer.zip.ts i samlingens mapp ur mp4-filerna som scripts/filmmp4.mjs gör ur svg-filmerna. Raden heter inte Bara
+// filmerna: de andra raderna med Bara är delar av Allt om metoden, och filmerna ligger inte i den filen.
+// href: zip-filens adress; antal: hur många filmer metoden har.
+interface Props { href: string; id: string; titel: string; antal: number }
+const { href, id, titel, antal } = Astro.props;
+const filmord = antal === 1 ? 'filmen' : 'filmerna';
+---
+<li>
+  <span class="filrubrik">{antal === 1 ? 'Filmen' : 'Filmerna'}</span>{' '}
+  <span class="filval" role="group" aria-label={`${antal === 1 ? 'Filmen' : 'Filmerna'}: ladda ner`}>
+    <a href={href} download={`${id}-filmer.zip`} title={antal === 1 ? 'Ladda ner filmen som mp4 i en zip-fil' : `Ladda ner metodens ${antal} filmer som mp4 i en zip-fil`} data-goatcounter-click={`fil:${id}-filmer.zip`} data-goatcounter-title={`${titel}: ${filmord} som zip`}>
+      <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><rect x="3" y="3.5" width="14" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 7.5v9h11v-9M8 11h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Zip<span class="visually-hidden">: {filmord} som mp4</span>
+    </a>
+  </span>
+</li>

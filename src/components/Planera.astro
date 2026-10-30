@@ -16,7 +16,7 @@ import PlanHuvud from './PlanHuvud.astro';
 import PlanFilen from './PlanFilen.astro';
 import PlanVersion from './PlanVersion.astro';
 import { tidrad } from '../scripts/tidrad';
-import { liten, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
+import { liten, SAMLINGARNAS_LED, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -67,8 +67,8 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
           <h2 id="pl-planen-rubrik" tabindex="-1">Planen</h2>
           <div id="pl-summa-text"></div>
           <div class="pl-knappar">
-            <button type="button" class="knapp" id="pl-spara" data-goatcounter-click={`planera:${data.id}:spara`} data-goatcounter-title={`${data.titel}: planen sparad`}>{PLANKNAPPAR.spara}</button>
-            <button type="button" class="knapp sekundar" id="pl-kalender" data-goatcounter-click={`planera:${data.id}:kalender`} data-goatcounter-title={`${data.titel}: kalenderfilen hämtad`}>Lägg i kalendern</button>
+            <button type="button" class="knapp" id="pl-spara" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:spara`} data-goatcounter-title={`${data.titel}: planen sparad`}>{PLANKNAPPAR.spara}</button>
+            <button type="button" class="knapp sekundar" id="pl-kalender" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:kalender`} data-goatcounter-title={`${data.titel}: kalenderfilen hämtad`}>Lägg i kalendern</button>
           </div>
           <p class="pl-sparad" id="pl-sparad"></p>
         </div>
@@ -79,7 +79,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
           <h3 id="pl-ap-rubrik">Text till åtgärdsprogrammet</h3>
           <p class="pl-hjalp">Klistra in texten under Åtgärder, och skriv till det som gäller eleven.</p>
           <textarea class="pl-falt pl-textfalt pl-aptext" id="pl-aptext" readonly rows="8" aria-labelledby="pl-ap-rubrik"></textarea>
-          <p class="pl-andra-knappar"><button type="button" class="knapp" id="pl-dokumentation" data-goatcounter-click={`planera:${data.id}:dokumentation`} data-goatcounter-title={`${data.titel}: texten till åtgärdsprogrammet kopierad`}>Kopiera texten</button></p>
+          <p class="pl-andra-knappar"><button type="button" class="knapp" id="pl-dokumentation" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:dokumentation`} data-goatcounter-title={`${data.titel}: texten till åtgärdsprogrammet kopierad`}>Kopiera texten</button></p>
         </section>
 
 
@@ -162,7 +162,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
               <fieldset class="pl-rad">
                 <legend class="pl-etikett">{data.versionsval.rubrik}</legend>
                 <div class="sk-nivaknappar pl-nivaer" id="pl-versioner">
-                  {data.versionsval.versioner.map((v) => <button type="button" class="sk-niva pl-ingang pl-versionsknapp" data-version={v.slug} aria-pressed="false" data-goatcounter-click={`planera:${data.id}:version-${v.slug}`} data-goatcounter-title={`${data.titel}: ${v.namn}`}><span>{v.namn}</span>{v.veckor && <span class="pl-ingang-lektion">{v.veckor} veckor</span>}</button>)}
+                  {data.versionsval.versioner.map((v) => <button type="button" class="sk-niva pl-ingang pl-versionsknapp" data-version={v.slug} aria-pressed="false" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:version-${v.slug}`} data-goatcounter-title={`${data.titel}: ${v.namn}`}><span>{v.namn}</span>{v.veckor && <span class="pl-ingang-lektion">{v.veckor} veckor</span>}</button>)}
                 </div>
                 <p class="pl-hjalp pl-varning" id="pl-version-not" hidden>Du har bockat pass eller skattat, så {data.versionsval.rubrik.toLocaleLowerCase('sv')} står kvar. Gör en ny plan för att byta.</p>
                 <StodForValet id="pl-versionsstod" stod={data.versionsval} metod={data} slag="versionsstod" vad={data.versionsval.rubrik.toLocaleLowerCase('sv')} />
@@ -174,7 +174,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
               <fieldset class="pl-rad">
                 <legend class="pl-etikett">Var börjar gruppen?</legend>
                 <div class="pl-ingangar" id="pl-ingangar">
-                  {data.lektionsval.ingangar.map((i) => <button type="button" class="sk-niva pl-ingang" data-ingang={i.lektion} aria-pressed="false" data-goatcounter-click={`planera:${data.id}:ingang-${i.lektion}`} data-goatcounter-title={`${data.titel}: ingången ${i.namn}`}><span>{i.namn}</span><span class="pl-ingang-lektion">Lektion {i.lektion} · {data.lektioner!.find((l) => l.nr === i.lektion)?.namn}</span></button>)}
+                  {data.lektionsval.ingangar.map((i) => <button type="button" class="sk-niva pl-ingang" data-ingang={i.lektion} aria-pressed="false" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:ingang-${i.lektion}`} data-goatcounter-title={`${data.titel}: ingången ${i.namn}`}><span>{i.namn}</span><span class="pl-ingang-lektion">Lektion {i.lektion} · {data.lektioner!.find((l) => l.nr === i.lektion)?.namn}</span></button>)}
                 </div>
                 <p class="pl-hjalp">Ingången är lektionen i vecka 1, och har gruppen redan kommit längre byter du lektion där. Efter varje vecka väljer du om gruppen tar samma lektion igen eller nästa.</p>
                 <StodForValet id="pl-ingangsstod" stod={data.lektionsval} metod={data} slag="ingangsstod" vad="ingången" />
@@ -187,7 +187,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
             </div>
             <fieldset class="pl-rad pl-foljval">
               <legend class="pl-etikett">Följ insatsen</legend>
-              <label class="pl-kryss"><input type="checkbox" id="pl-folj" data-goatcounter-click={`planera:${data.id}:folj`} data-goatcounter-title={`${data.titel}: Följ insatsen valt`} /> <span>Följ insatsen vecka för vecka</span></label>
+              <label class="pl-kryss"><input type="checkbox" id="pl-folj" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:folj`} data-goatcounter-title={`${data.titel}: Följ insatsen valt`} /> <span>Följ insatsen vecka för vecka</span></label>
               <p class="pl-hjalp">Bocka passen och skatta {gruppensSkattning ? `gruppen i ${gruppensSkattning.namn}` : 'eleverna mot målet'} en gång i veckan.{gruppensSkattning ? ` Det är förvalt, eftersom ${gruppensSkattning.namn} är en del av metoden, och du kan välja bort det.` : ''} Inget måste fyllas i. Det du för in sparas bara i den här webbläsaren. Ladda ner planen som fil, så går det att öppna på en annan dator.</p>
               <div class="pl-elevruta" id="pl-elevruta" hidden>
                 <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
@@ -195,7 +195,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
                 <p class="pl-hjalp">Förnamn eller initialer. Namnen finns bara i den här webbläsaren, i planen du laddar ner och i kalenderfilen. {data.skattningar?.some((x) => x.vem === 'gruppen') ? 'Gruppen skattar du med metodens skala, och med en elevlista kan du också skatta varje elev mot målet.' : 'Utan elevlista skattar du gruppen.'}</p>
                 {/* Metodens grupp vid listan i varje metod, och inte listans största antal (Rimligheten 2026-10-26: "Listan rymmer
                     32 elever" stod direkt före "Metoden: två till tio elever", och TIL i grupp sa aldrig gruppens storlek). */}
-                {data.grupp && <p class="pl-hjalp">Metoden: {liten(data.grupp.text)}.{data.gruppen && <>{" "}<a href={data.gruppen.adress} data-goatcounter-click={`planera:${data.id}:gruppen`} data-goatcounter-title={`${data.titel}: gruppen från planen`}>{data.gruppen.rubrik}</a></>}</p>}
+                {data.grupp && <p class="pl-hjalp">Metoden: {liten(data.grupp.text)}.{data.gruppen && <>{" "}<a href={data.gruppen.adress} data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:gruppen`} data-goatcounter-title={`${data.titel}: gruppen från planen`}>{data.gruppen.rubrik}</a></>}</p>}
                 <p class="pl-hjalp pl-varning" id="pl-elever-not" role="status" hidden></p>
                 <div class="pl-elevfraga" id="pl-elever-fraga" role="group" aria-label="Samma elev eller en ny elev" hidden></div>
                 <label class="pl-kryss pl-narvaroval"><input type="checkbox" id="pl-narvaro" /> <span>Notera närvaro i passen</span></label>
@@ -211,18 +211,18 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
       <section class="pl-kopia" id="pl-kopia" aria-labelledby="pl-kopia-rubrik">
         <h2 id="pl-kopia-rubrik">Planen på en annan dator eller telefon</h2>
         <p class="pl-hjalp" id="pl-kopia-text"></p>
-        <PlanFilen ner="pl-kopia-spara" fil="pl-kopia-fil" bort="pl-ta-bort" goat={`planera:${data.id}`} titel={data.titel} nerLed="kopia" oppnaLed="oppna-kopia">
+        <PlanFilen ner="pl-kopia-spara" fil="pl-kopia-fil" bort="pl-ta-bort" goat={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}`} titel={data.titel} nerLed="kopia" oppnaLed="oppna-kopia">
           {/* Spara planen står också här före sparandet, där läraren är efter veckorna (Niclas 2026-10-25: "borde det inte
               finnas en Spara planen längst ner också om det inte gjorts"). Det är samma knapp som överst och går bort när planen
               är sparad. */}
-          <button type="button" class="knapp liten" id="pl-spara-nere" data-goatcounter-click={`planera:${data.id}:spara`} data-goatcounter-title={`${data.titel}: planen sparad längst ned`} hidden>{PLANKNAPPAR.spara}</button>
-          <button type="button" class="knapp sekundar liten" id="pl-lank" data-goatcounter-click={`planera:${data.id}:lank`} data-goatcounter-title={`${data.titel}: länken till planen kopierad`}>Kopiera länken</button>
+          <button type="button" class="knapp liten" id="pl-spara-nere" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:spara`} data-goatcounter-title={`${data.titel}: planen sparad längst ned`} hidden>{PLANKNAPPAR.spara}</button>
+          <button type="button" class="knapp sekundar liten" id="pl-lank" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:lank`} data-goatcounter-title={`${data.titel}: länken till planen kopierad`}>Kopiera länken</button>
         </PlanFilen>
       </section>
     </div>
 
     <PlanVersion>
-      <p>{PLANERA.namn} är modulen som räknar fram planen ur metoden och följer insatsen. {PLANERA.beta ? `Den är ny och prövas på ${antal === 1 ? 'en metod' : `${antal} metoder`}, så allt är inte prövat i skolan än. ` : ''}Fungerar något inte, mejla mig, så rättar jag det: <a href={mejl} data-goatcounter-click={`planera:${data.id}:mejl`} data-goatcounter-title={`${data.titel}: mejl om Planera`}>{site.epost}</a>.</p>
+      <p>{PLANERA.namn} är modulen som räknar fram planen ur metoden och följer insatsen. {PLANERA.beta ? `Den är ny och prövas på ${antal === 1 ? 'en metod' : `${antal} metoder`}, så allt är inte prövat i skolan än. ` : ''}Fungerar något inte, mejla mig, så rättar jag det: <a href={mejl} data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:mejl`} data-goatcounter-title={`${data.titel}: mejl om Planera`}>{site.epost}</a>.</p>
       {/* Det sidan ser av webbläsaren, för felsökning, som i en apps egen webbläsare (Niclas 2026-10-25: "Du borde kunna
           ... sniffa till dig vad som behövs för att veta att den används"). Det står bara här och skickas inte. */}
       <details class="pl-teknik"><summary>Webbläsaren, för felsökning</summary><p id="pl-teknik"></p></details>

@@ -4,8 +4,8 @@
 // sida rullar i sidled (designgranskningen 2026-10-30: planeringsbladet gjorde metodens sida 343 punkter bred i 320, och
 // utskriftsformat.mjs prövar bara Stödundervisning). På metodens sida och lathundens sida leder varje ankare till ett
 // element och varje fil som sidan länkar till finns, och på metodens sida står delarna i standardens ordning
-// (UNDERVISNINGSMETODENS_DELAR). Lathundens sida säger det riggens lathund-pdf säger (K-632): varje mening på sidan står i
-// public/metoder/<id>-lathund.pdf, och pdf:ens sidfot leder till sidan, som finns för varje metod med lathunden (granskningen
+// (UNDERVISNINGSMETODENS_DELAR). Lathundens sida säger det lathundens pdf säger (K-632): varje mening på sidan står i
+// public/metoder/<id>-lathund.pdf, som sajten gör ur sin PowerPoint-fil sedan K-637 (scripts/lathund-pdf.mjs), och pdf:ens sidfot leder till sidan, som finns för varje metod med lathunden (granskningen
 // 2026-10-30: sidfoten ledde till en adress som gav 404). Metodens saker (STIL.md under Hänvisningar,
 // undervisningsmetodensSaker i src/lib/undervisningsmetod.ts) är länkar där metodens sida nämner dem, inget namn ser ut som en
 // sak som metoden inte har (olankadeSaker i standarden), och varje sak har en knapp under sig vars fil finns, som planprov.mjs
@@ -45,7 +45,7 @@ for (const s of [...metodsidor, ...lathundsidor]) {
   const html = readFileSync(join(dist, s, 'index.html'), 'utf8');
   const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
   for (const m of html.matchAll(/href="#([^"]+)"/g)) if (!ids.has(decodeURIComponent(m[1]))) fel.push(`${s}: länken #${m[1]} leder inte till något element`);
-  for (const m of html.matchAll(/(?:href|src|data)="(\/metoder\/[^"?#]+\.(?:pdf|docx|png|svg|webp|mp4|zip))(?:\?[^"]*)?"/g)) if (!existsSync(join(dist, decodeURIComponent(m[1])))) fel.push(`${s}: filen ${m[1]} saknas`);
+  for (const m of html.matchAll(/(?:href|src|data)="(\/metoder\/[^"?#]+\.(?:pdf|docx|pptx|png|svg|webp|mp4|zip))(?:\?[^"]*)?"/g)) if (!existsSync(join(dist, decodeURIComponent(m[1])))) fel.push(`${s}: filen ${m[1]} saknas`);
   if (lathundsidor.includes(s)) {
     // Lathundens saker leder till metodens sida, och ankaret står där.
     const metod = s.replace(/\/lathund$/, '');
@@ -126,12 +126,12 @@ function provaSakerna(s, html, ids) {
   provadeSaker += saker.length;
 }
 
-// Lathundens pdf ur riggen och sidan (K-632). Texten jämförs med samma regler som metodernas paritet, och pdf:en utan
+// Lathundens pdf och sidan (K-632; pdf:en är sajtens sedan K-637). Texten jämförs med samma regler som metodernas paritet, och pdf:en utan
 // sidhuvud och sidfot (scripts/textjamforelse.mjs). Sidfoten prövas för sig: den ska leda till lathundens sida.
 const lathundPdf = new Map();
-// Det lathunden säger men riggens pdf ännu inte har: en mening på sidan som står i en av de här texterna ur
-// lathundensSidor får saknas i pdf:en, som ['vad', (sidor) => texterna]. En rad tas bort när riggen har byggt om, och
-// provet stannar då på varje mening som glider isär. Tom sedan riggen ritar lathunden ur lathundensSidor (dce9e59, K-632).
+// Det lathunden säger men pdf:en ännu inte har: en mening på sidan som står i en av de här texterna ur lathundensSidor får
+// saknas i pdf:en, som ['vad', (sidor) => texterna]. En rad tas bort när pdf:en har gjorts om, och provet stannar då på
+// varje mening som glider isär. Tom sedan pdf:en ritas ur lathundensSidor (riggens dce9e59, K-632, och sajtens K-637).
 const VANTAR = [];
 const lathundensVantande = new Map();
 const lathundenVantar = new Set();
@@ -140,7 +140,8 @@ for (const s of metodsidor) {
   const pdf = join(rot, 'public', 'metoder', `${id}-lathund.pdf`);
   if (!existsSync(pdf)) continue;
   if (!lathundsidor.includes(`${s}/lathund`)) { fel.push(`${s}: ${id}-lathund.pdf finns, men sidan ${s}/lathund, som pdf:ens sidfot leder till, finns inte`); continue; }
-  const text = pdfText(pdf);
+  // Pdf:en ur PowerPoint läses i formernas ordning, så att tabellernas celler inte fogas ihop (pdfText med raw).
+  const text = pdfText(pdf, { raw: true });
   if (!text.trim()) { fel.push(`${s}/lathund: ${id}-lathund.pdf gick inte att läsa med pdftotext`); continue; }
   if (!ren(text).includes(ren(`niclasfohlin.se${s}/lathund`))) fel.push(`${s}/lathund: sidfoten i ${id}-lathund.pdf leder inte hit`);
   lathundPdf.set(`${s}/lathund`, ren(utanHuvudOchFot(text)));
@@ -204,7 +205,7 @@ try {
       const klippt = await kor(`(() => { const ut = []; for (const e of document.querySelectorAll('.um-remsa-namn, .um-celler a, .mp-varde, .mp-namn')) { if (e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow !== 'visible') ut.push(e.textContent.trim().slice(0, 30)); const ram = e.closest('.mp-bank-halv, .mp-rad, .mp-bank-en'); if (ram && e.getBoundingClientRect().right > ram.getBoundingClientRect().right + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (utanför rutan)'); } return ut.join(' · '); })()`);
       if (klippt) fel.push(`${s}: i ${bredd} punkter klipps eller går ut: ${klippt}`);
     }
-    // Varje mening på lathundens sida står i riggens lathund-pdf (K-632).
+    // Varje mening på lathundens sida står i lathundens pdf (K-632, K-637).
     const pdf = lathundPdf.get(s);
     if (!pdf) continue;
     const texter = await kor(LATHUNDENS_TEXTER);
@@ -224,5 +225,5 @@ try {
   try { rmSync(profil, { recursive: true, force: true }); } catch { /* Chrome kan hålla filerna en stund */ }
 }
 if (fel.length) { console.error(`metoderprov: ${fel.length} fel\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt, delarna står i standardens ordning och metodens ${provadeSaker} saker är länkar där de nämns och har en knapp under sig, och ${lathundensMeningar} meningar på ${lathundsidor.length} lathundssidor står i riggens lathund-pdf.`);
-if (lathundenVantar.size) console.log(`! metoderprov: riggens lathund-pdf saknar ännu det sidan visar av ${[...lathundenVantar].join(", ")} (K-632)`);
+console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt, delarna står i standardens ordning och metodens ${provadeSaker} saker är länkar där de nämns och har en knapp under sig, och ${lathundensMeningar} meningar på ${lathundsidor.length} lathundssidor står i lathundens pdf.`);
+if (lathundenVantar.size) console.log(`! metoderprov: lathundens pdf saknar ännu det sidan visar av ${[...lathundenVantar].join(", ")} (K-632)`);

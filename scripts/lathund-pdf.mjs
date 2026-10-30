@@ -12,6 +12,11 @@
 // kör --vid-behov, som gör om just de pdf:er som är inaktuella och tar bort överblivna; bygget på Netlify kör
 // --kontrollera och stannar om en inaktuell pdf ändå har pushats.
 //
+// Undervisningsmetodernas lathund under Metoder (K-637) görs på samma sätt: A4-varianten av sajtens PowerPoint-fil
+// (src/pages/utskrift/lathund/metoder/[id].pptx.ts) blir public/metoder/<id>-lathund.pdf, med manifestet
+// public/metoder/lathund-pdf.json, och ersätter riggens pdf. Varje undervisningsmetod med lathund får sin pdf, också ett
+// utkast, eftersom metodens filer i public/metoder/ följer med i varje bygge (scripts/metoderfiler.mjs).
+//
 //   node scripts/lathund-pdf.mjs                 alla metoder med lathund
 //   node scripts/lathund-pdf.mjs <id> [<id>…]    bara de angivna
 //   node scripts/lathund-pdf.mjs --vid-behov     bara de som saknas eller är inaktuella (körs i npm run validera)
@@ -41,54 +46,67 @@ const utanBygge = args.includes('--utan-bygge');
 const behovet = args.includes('--behov');
 const valda = args.filter((a) => !a.startsWith('--'));
 
-const katalog = join(rot, 'src', 'content', 'stodundervisning');
-const metoder = readdirSync(katalog)
-  .filter((f) => f.endsWith('.yaml') && !f.startsWith('_'))
-  .map((f) => ({ id: f.replace(/\.yaml$/, ''), fil: join(katalog, f), data: parseYaml(readFileSync(join(katalog, f), 'utf8')) }))
-  .filter((m) => m.data.lathund && !m.data.utkast);
-const pdfMapp = join(rot, 'public', 'stodundervisning');
-const manifestFil = join(pdfMapp, 'lathund-pdf.json');
-const pdfFor = (id) => join(pdfMapp, `${id}-lathund.pdf`);
-
-// Allt som påverkar pdf:en: metodens text, koden som bygger A4-varianten av PowerPoint-filen, sajtens adress,
-// PowerPoint-skriptet som gör pdf:en och pptxgenjs version. Ur site.ts läser lathunden bara adressen (site.url, i
-// [id].pptx.ts), så nyckeln tar adressen och inte hela filen: Metoder i menyn gjorde annars om alla lathundar (K-623).
-const gemensamma = ['src/lib/metodpptx.ts', 'src/lib/metod.ts', 'src/lib/lathundsidor.ts', 'src/pages/utskrift/lathund/[id].pptx.ts', 'scripts/pptx-till-pdf.ps1'];
-const sajtensAdress = readFileSync(join(rot, 'src', 'data', 'site.ts'), 'utf8').match(/^\s*url:\s*'([^']+)'/m)?.[1] ?? 'saknas:site.url';
 const pptxgenjs = (() => { try { return JSON.parse(readFileSync(join(rot, 'node_modules', 'pptxgenjs', 'package.json'), 'utf8')).version; } catch { return 'okänd'; } })();
 const hashAv = (delar) => { const h = createHash('sha256'); for (const d of delar) h.update(d); return h.digest('hex').slice(0, 16); };
 // Textfiler hashas med LF oavsett radslut: arbetskopian på Windows har CRLF, Netlifys utcheckning LF.
 const lasKalla = (f) => Buffer.from(readFileSync(f, 'utf8').replace(/\r\n/g, '\n'));
-const gemensamHash = hashAv([`pdf ur pptx i A4, pptxgenjs ${pptxgenjs}`, `sajtens adress ${sajtensAdress}`, ...gemensamma.map((f) => (existsSync(join(rot, f)) ? lasKalla(join(rot, f)) : Buffer.from(`saknas:${f}`)))]);
-// Metodens del av kontrollsumman: metodens fil utan det som lathunden inte visar, så att ett nytt datum, en ändrad ruta
-// överst eller en ny länk till en annan metod inte gör om lathunden (Niclas 2026-10-03: "Varför ändras lathunden av
-// datumet?"). Lathundens kod (metodpptx.ts och lathundBarn i metoddocx.ts) läser inga av fälten; läser den ett av dem
-// en dag, ändras koden och därmed den gemensamma delen, och alla lathundar görs om.
+const sajtensAdress = readFileSync(join(rot, 'src', 'data', 'site.ts'), 'utf8').match(/^\s*url:\s*'([^']+)'/m)?.[1] ?? 'saknas:site.url';
+const gemensamHashAv = (filer) => hashAv([`pdf ur pptx i A4, pptxgenjs ${pptxgenjs}`, `sajtens adress ${sajtensAdress}`, ...filer.map((f) => (existsSync(join(rot, f)) ? lasKalla(join(rot, f)) : Buffer.from(`saknas:${f}`)))]);
+
+// Metodens del av kontrollsumman i Stödundervisning: metodens fil utan det som lathunden inte visar, så att ett nytt
+// datum, en ändrad ruta överst eller en ny länk till en annan metod inte gör om lathunden (Niclas 2026-10-03: "Varför
+// ändras lathunden av datumet?"). Lathundens kod (metodpptx.ts och lathundBarn i metoddocx.ts) läser inga av fälten; läser
+// den ett av dem en dag, ändras koden och därmed den gemensamma delen, och alla lathundar görs om.
 // film och filmer står bara på filmbilden i 16:9-filen, aldrig i pdf:en (K-242). Taggarna och format står inte i
 // lathunden (K-463).
 // Planens fält (K-489) står inte heller i lathunden (utanPlanensFalt i standarden).
 const INTE_I_LATHUNDEN = ['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'upplagg', 'gruppen', 'principer', 'film', 'filmer', 'taggar', 'format'];
-const metodKalla = (m) => { const d = utanPlanensFalt(m.data); for (const k of INTE_I_LATHUNDEN) delete d[k]; return Buffer.from(JSON.stringify(d)); };
-const kallHash = (m) => hashAv([gemensamHash, metodKalla(m)]);
+// Undervisningsmetodens del: metodens fil utan datumen, utkastet och filmerna. Lathundens sidor hämtar fält ur stora delar
+// av filen (lathundensSidor i standarden, planeringsbladet i src/lib/undervisningsmetod.ts), så allt annat räknas.
+const INTE_I_UM_LATHUNDEN = ['uppdaterad', 'publicerad', 'utkast', 'film', 'filmer'];
+
+// Samlingarna: Stödundervisnings publicerade metoder med lathund, och varje undervisningsmetod med lathund (K-637). Allt
+// som påverkar pdf:en: metodens text, koden som bygger A4-varianten av PowerPoint-filen, sajtens adress,
+// PowerPoint-skriptet som gör pdf:en och pptxgenjs version. Ur site.ts läser lathunden bara adressen (site.url, i
+// [id].pptx.ts), så nyckeln tar adressen och inte hela filen: Metoder i menyn gjorde annars om alla lathundar (K-623).
+const SAMLINGAR = [
+  {
+    katalog: 'stodundervisning', sida: 'stodundervisning', a4: 'lathund', med: (d) => d.lathund && !d.utkast,
+    kod: ['src/lib/metodpptx.ts', 'src/lib/metod.ts', 'src/lib/lathundsidor.ts', 'src/pages/utskrift/lathund/[id].pptx.ts', 'scripts/pptx-till-pdf.ps1'],
+    kalla: (d) => { const x = utanPlanensFalt(d); for (const k of INTE_I_LATHUNDEN) delete x[k]; return x; },
+  },
+  {
+    katalog: 'undervisningsmetoder', sida: 'metoder', a4: 'lathund/metoder', med: (d) => !!d.lathund,
+    kod: ['src/lib/metodpptx.ts', 'src/lib/lathundsidor.ts', 'src/lib/undervisningsmetod.ts', 'src/lib/standard/undervisningsmetod.js', 'src/lib/standard/text.js', 'src/data/teckenbredd.json', 'src/pages/utskrift/lathund/metoder/[id].pptx.ts', 'scripts/pptx-till-pdf.ps1'],
+    kalla: (d) => { const x = { ...d }; for (const k of INTE_I_UM_LATHUNDEN) delete x[k]; return x; },
+  },
+].map((s) => ({ ...s, mapp: join(rot, 'public', s.sida), manifestFil: join(rot, 'public', s.sida, 'lathund-pdf.json'), gemensamHash: gemensamHashAv(s.kod) }));
+const metoder = SAMLINGAR.flatMap((s) => readdirSync(join(rot, 'src', 'content', s.katalog))
+  .filter((f) => f.endsWith('.yaml') && !f.startsWith('_'))
+  .map((f) => ({ id: f.replace(/\.yaml$/, ''), data: parseYaml(readFileSync(join(rot, 'src', 'content', s.katalog, f), 'utf8')), samling: s }))
+  .filter((m) => s.med(m.data)));
+const pdfFor = (m) => join(m.samling.mapp, `${m.id}-lathund.pdf`);
+const kallHash = (m) => hashAv([m.samling.gemensamHash, Buffer.from(JSON.stringify(m.samling.kalla(m.data)))]);
 const filHash = (p) => hashAv([readFileSync(p)]);
-const lasManifest = () => { try { return JSON.parse(readFileSync(manifestFil, 'utf8')); } catch { return {}; } };
+const lasManifest = (s) => { try { return JSON.parse(readFileSync(s.manifestFil, 'utf8')); } catch { return {}; } };
+const manifester = new Map(SAMLINGAR.map((s) => [s, lasManifest(s)]));
+// Filerna <id>-lathund.pdf i samlingens mapp som ingen metod med lathund har.
+const overblivna = (s) => {
+  const med = new Set(metoder.filter((m) => m.samling === s).map((m) => m.id));
+  return existsSync(s.mapp) ? readdirSync(s.mapp).filter((f) => f.endsWith('-lathund.pdf') && !med.has(f.replace(/-lathund\.pdf$/, ''))) : [];
+};
 
 if (kontrollera) {
-  const manifest = lasManifest();
   const fel = [];
   for (const m of metoder) {
-    const post = manifest[m.id];
-    const pdf = pdfFor(m.id);
-    if (!existsSync(pdf)) fel.push(`${m.id}: pdf saknas`);
-    else if (!post) fel.push(`${m.id}: saknas i manifestet`);
-    else if (post.kalla !== kallHash(m)) fel.push(`${m.id}: pdf:n är gjord av en äldre metod eller äldre kod`);
-    else if (post.pdf !== filHash(pdf)) fel.push(`${m.id}: pdf-filen stämmer inte med manifestet`);
+    const post = manifester.get(m.samling)[m.id];
+    const pdf = pdfFor(m);
+    if (!existsSync(pdf)) fel.push(`${m.samling.sida}/${m.id}: pdf saknas`);
+    else if (!post) fel.push(`${m.samling.sida}/${m.id}: saknas i manifestet`);
+    else if (post.kalla !== kallHash(m)) fel.push(`${m.samling.sida}/${m.id}: pdf:n är gjord av en äldre metod eller äldre kod`);
+    else if (post.pdf !== filHash(pdf)) fel.push(`${m.samling.sida}/${m.id}: pdf-filen stämmer inte med manifestet`);
   }
-  const publicerade = new Set(metoder.map((m) => m.id));
-  for (const f of readdirSync(pdfMapp).filter((f) => f.endsWith('-lathund.pdf'))) {
-    const id = f.replace(/-lathund\.pdf$/, '');
-    if (!publicerade.has(id)) fel.push(`${f}: överbliven, metoden är borttagen, utkast eller utan lathund (ta bort filen och raden i manifestet)`);
-  }
+  for (const s of SAMLINGAR) for (const f of overblivna(s)) fel.push(`${s.sida}/${f}: överbliven, metoden är borttagen, utkast eller utan lathund (ta bort filen och raden i manifestet)`);
   if (fel.length > 0) {
     console.error(`Lathundens pdf:\n  ${fel.join('\n  ')}\nKör: node scripts/lathund-pdf.mjs`);
     process.exit(1);
@@ -98,22 +116,15 @@ if (kontrollera) {
 }
 
 // --vid-behov: tar bort överblivna pdf:er och gör om bara de som saknas eller är gjorda av en äldre metod eller äldre kod.
-const inaktuella = () => {
-  const manifest = lasManifest();
-  return metoder.filter((m) => {
-    const post = manifest[m.id];
-    const pdf = pdfFor(m.id);
-    return !existsSync(pdf) || !post || post.kalla !== kallHash(m) || post.pdf !== filHash(pdf);
-  });
-};
+const inaktuella = () => metoder.filter((m) => {
+  const post = manifester.get(m.samling)[m.id];
+  const pdf = pdfFor(m);
+  return !existsSync(pdf) || !post || post.kalla !== kallHash(m) || post.pdf !== filHash(pdf);
+});
 // --behov: metoderna vars pdf ska göras om, som JSON, så att valideringen bygger A4-filerna i sitt enda bygge (K-484).
 if (behovet) { console.log(JSON.stringify(inaktuella().map((m) => m.id))); process.exit(0); }
 if (vidBehov) {
-  const publicerade = new Set(metoder.map((m) => m.id));
-  mkdirSync(pdfMapp, { recursive: true });
-  for (const f of readdirSync(pdfMapp).filter((f) => f.endsWith('-lathund.pdf'))) {
-    if (!publicerade.has(f.replace(/-lathund\.pdf$/, ''))) { unlinkSync(join(pdfMapp, f)); console.log(`  bort ${f}: metoden har ingen publicerad lathund`); }
-  }
+  for (const s of SAMLINGAR) for (const f of overblivna(s)) { unlinkSync(join(s.mapp, f)); console.log(`  bort ${s.sida}/${f}: metoden har ingen publicerad lathund`); }
 }
 const lista = vidBehov ? inaktuella() : valda.length > 0 ? metoder.filter((m) => valda.includes(m.id)) : metoder;
 if (vidBehov && lista.length === 0) { console.log(`Lathundens pdf är aktuell för ${metoder.length} metoder.`); process.exit(0); }
@@ -128,20 +139,19 @@ if (!utanBygge) {
   execSync('npx astro build', { cwd: rot, stdio: 'ignore', env: { ...process.env, LATHUND_A4: '1' } });
 }
 const a4Mapp = join(rot, 'dist', 'utskrift');
-mkdirSync(pdfMapp, { recursive: true });
+for (const s of SAMLINGAR) mkdirSync(s.mapp, { recursive: true });
 
 const tmp = join(tmpdir(), `lathund-pdf-${process.pid}`);
 mkdirSync(tmp, { recursive: true });
-const manifest = lasManifest();
 let fel = 0;
 try {
   for (const m of lista) {
-    const pptx = join(a4Mapp, 'lathund', `${m.id}.pptx`);
+    const pptx = join(a4Mapp, m.samling.a4, `${m.id}.pptx`);
     const kopia = join(tmp, `${m.id}-lathund.pptx`);
     const tmpPdf = join(tmp, `${m.id}-lathund.pdf`);
-    const ut = pdfFor(m.id);
+    const ut = pdfFor(m);
     try {
-      if (!existsSync(pptx)) throw new Error('A4-filen saknas i dist/utskrift/lathund (bygg utan --utan-bygge)');
+      if (!existsSync(pptx)) throw new Error(`A4-filen saknas i dist/utskrift/${m.samling.a4} (bygg utan --utan-bygge)`);
       copyFileSync(pptx, kopia);
       // PowerPoint sparar pdf:en bredvid källan med samma namn.
       execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(rot, 'scripts', 'pptx-till-pdf.ps1'), kopia], { stdio: 'ignore', timeout: 120000 });
@@ -154,7 +164,7 @@ try {
       if (Math.abs(bredd - 841.9) > 2 || Math.abs(hojd - 595.3) > 2) throw new Error(`sidan är ${bredd} × ${hojd} punkter, ska vara A4 liggande (841,9 × 595,3)`);
       for (let s = 1; s <= 4; s++) {
         const text = execFileSync('pdftotext', ['-f', String(s), '-l', String(s), tmpPdf, '-'], { encoding: 'latin1' });
-        if (!text.includes('Niclas Fohlin') || !text.includes(`niclasfohlin.se/stodundervisning/${m.id}/lathund`)) throw new Error(`sida ${s} saknar upphov eller adress`);
+        if (!text.includes('Niclas Fohlin') || !text.includes(`niclasfohlin.se/${m.samling.sida}/${m.id}/lathund`)) throw new Error(`sida ${s} saknar upphov eller adress`);
       }
       // Samma innehåll blir samma fil: PowerPoints tid och id tas bort, så att en lathund som görs om utan att ändras inte
       // blir en ny fil i git (scripts/pdfpack.py --bara-bytelik, K-624).
@@ -162,10 +172,10 @@ try {
       execFileSync('python', [join(rot, 'scripts', 'pdfpack.py'), '--bara-bytelik', tmpPdf, bytelik], { stdio: 'inherit', timeout: 120000 });
       copyFileSync(bytelik, `${ut}.tmp`);
       renameSync(`${ut}.tmp`, ut);
-      const iDist = join(rot, 'dist', 'stodundervisning', `${m.id}-lathund.pdf`);
+      const iDist = join(rot, 'dist', m.samling.sida, `${m.id}-lathund.pdf`);
       if (existsSync(dirname(iDist))) copyFileSync(ut, iDist);
-      manifest[m.id] = { kalla: kallHash(m), pdf: filHash(ut), datum: new Date().toISOString().slice(0, 10) };
-      console.log(`  ok   ${m.id}: public/stodundervisning/${m.id}-lathund.pdf (fyra A4-sidor ur PowerPoint, upphov på alla)`);
+      manifester.get(m.samling)[m.id] = { kalla: kallHash(m), pdf: filHash(ut), datum: new Date().toISOString().slice(0, 10) };
+      console.log(`  ok   ${m.id}: public/${m.samling.sida}/${m.id}-lathund.pdf (fyra A4-sidor ur PowerPoint, upphov på alla)`);
     } catch (e) {
       fel++;
       console.log(`  FEL  ${m.id}: ${e.message}`);
@@ -177,8 +187,11 @@ try {
   // provfiler står i samma bygge (scripts/validera.mjs, K-484), och valideringen tar bort dem när de är lästa.
   try { rmSync(join(a4Mapp, 'lathund'), { recursive: true, force: true }); } catch { /* finns inte */ }
 }
-const publicerade = new Set(metoder.map((m) => m.id));
-for (const id of Object.keys(manifest)) if (!publicerade.has(id)) delete manifest[id];
-writeFileSync(manifestFil, JSON.stringify(manifest, null, 2) + '\n');
+for (const s of SAMLINGAR) {
+  const manifest = manifester.get(s);
+  const med = new Set(metoder.filter((m) => m.samling === s).map((m) => m.id));
+  for (const id of Object.keys(manifest)) if (!med.has(id)) delete manifest[id];
+  writeFileSync(s.manifestFil, JSON.stringify(manifest, null, 2) + '\n');
+}
 console.log(fel ? `\n${fel} fel.` : '\nAllt ok. Committa pdf-filerna och lathund-pdf.json tillsammans med metoden.');
 process.exit(fel ? 1 : 0);

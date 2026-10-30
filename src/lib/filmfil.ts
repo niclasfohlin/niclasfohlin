@@ -8,6 +8,7 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import JSZip from 'jszip';
+import sharp from 'sharp';
 import { FILM_UPPHOV, filmNamn, type MetodFilm } from './film';
 import { UPPHOV } from './metod';
 
@@ -22,6 +23,11 @@ export function provaFilmfiler(f: MetodFilm, titel: string): void {
 }
 /** Småbilden i spelaren på lathundssidan: omslagsbilden i litet format (src/pages/stodundervisning/[film]-liten.webp.ts). */
 export const SMABILD = { bredd: 384, hojd: 216 };
+/** Småbilden som webp, för båda samlingarnas sidor ([film]-liten.webp.ts under stodundervisning och metoder). */
+export async function smabild(f: MetodFilm, titel: string): Promise<Buffer> {
+  provaFilmfiler(f, titel);
+  return sharp(omslagFil(f)).resize(SMABILD.bredd, SMABILD.hojd).webp({ quality: 72, effort: 6 }).toBuffer();
+}
 /** Metodens filmer som mp4, i byte. */
 export const filmernasStorlek = (filmer: MetodFilm[]) => filmer.reduce((a, f) => a + statSync(mp4Fil(f)).size, 0);
 /** "0,6 MB", med en decimal och minst 0,1. */
@@ -37,14 +43,17 @@ export const zipNamn = (titel: string, f: MetodFilm) => `${rensa(titel)}, film $
 // version (scripts/filversion.mjs) inte byts i onödan.
 const DATUM = new Date(Date.UTC(2026, 0, 1, 12));
 
-/** Texten om upphovet som följer med filmerna: allt som laddas ner bär upphovet, och bildernas licens kräver sin rad. */
-export function upphovstext(titel: string, adress: string, filmer: MetodFilm[]): string {
+/**
+ * Texten om upphovet som följer med filmerna: allt som laddas ner bär upphovet, och bildernas licens kräver sin rad. plats
+ * säger var metoden står: i metodbanken (Stödundervisning) eller under Metoder.
+ */
+export function upphovstext(titel: string, adress: string, filmer: MetodFilm[], plats = 'i metodbanken'): string {
   const rader = [
     `${filmer.length === 1 ? 'Filmen' : 'Filmerna'} till ${titel}`,
     '',
     ...filmer.map((f) => `Film ${f.nr}: ${filmNamn(f)}, ${Math.round(f.film.sekunder)} sekunder`),
     '',
-    'Metoden står i metodbanken på niclasfohlin.se:',
+    `Metoden står ${plats} på niclasfohlin.se:`,
     adress,
     '',
     `${UPPHOV}, niclasfohlin.se`,
@@ -55,14 +64,14 @@ export function upphovstext(titel: string, adress: string, filmer: MetodFilm[]):
   return String.fromCharCode(0xfeff) + rader.join('\r\n');
 }
 
-/** Metodens filmer som zip: mp4-filerna som de är och en textfil om upphovet. */
-export async function filmZip(titel: string, adress: string, filmer: MetodFilm[]): Promise<Buffer> {
+/** Metodens filmer som zip: mp4-filerna som de är och en textfil om upphovet, där plats säger var metoden står. */
+export async function filmZip(titel: string, adress: string, filmer: MetodFilm[], plats?: string): Promise<Buffer> {
   const zip = new JSZip();
   for (const f of filmer) {
     provaFilmfiler(f, titel);
     zip.file(zipNamn(titel, f), readFileSync(mp4Fil(f)), { date: DATUM, compression: 'STORE' });
   }
-  zip.file('Upphov.txt', upphovstext(titel, adress, filmer), { date: DATUM, compression: 'DEFLATE' });
+  zip.file('Upphov.txt', upphovstext(titel, adress, filmer, plats), { date: DATUM, compression: 'DEFLATE' });
   return zip.generateAsync({ type: 'nodebuffer' });
 }
 
