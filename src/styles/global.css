@@ -953,23 +953,32 @@ html.js .samla.mp-samla { grid-template-columns: minmax(0, 1fr) auto; }
    panel är öppen, och under rutorna när alla är stängda (Niclas 2026-10-30: texten stod två gånger). */
 .mbf .mbf-panel:not([hidden]) ~ .mbf-upplagg { display: none; }
 /* Reglaget för ett filter med en ordning (K-642; Niclas 2026-10-30: "Tre av dem kan göras i en slider istället för enskilda
-   kort"): webbläsarens eget reglage med fasta lägen och Alla längst till vänster, och lägenas ord och antal under banan, ett
-   ord mitt under varje läge. Banan räcker från det första ordets mitt till det sistas, så att greppet står över ordet.
-   Banan fylls inte, eftersom ett läge visar metoderna i just det läget och inte minst så mycket. Greppets tryckyta är 44
-   punkter och den synliga pricken mindre; ett läge utan metoder är svagt. */
+   kort" och "Från-Till"): två grepp, Från och Till, på samma bana, och lägenas ord och antal under banan, ett ord mitt under
+   varje läge. Banan räcker från det första ordets mitt till det sistas och är fylld mellan greppen. Greppen är webbläsarens
+   egna reglage, som tangentbordet och skärmläsaren använder; musen och fingret tas emot av banan (src/scripts/bankfilter.ts),
+   som är 44 punkter hög, och ett finger som drar uppåt eller nedåt rullar sidan. Står greppen på samma läge glider de isär
+   en bit, så att båda syns. Ett läge utan metoder är svagt, och lägena i spannet står i accentfärgen. */
 .mbf-reglage { --grepp: 2.75rem; padding: 0.15rem 0 0.25rem; }
-.mbf-reglage input[type="range"] { -webkit-appearance: none; appearance: none; display: block; box-sizing: border-box; width: calc(100% - 100% / var(--lagen) + var(--grepp)); height: var(--grepp); margin: 0 0 0 calc(50% / var(--lagen) - var(--grepp) / 2); padding: 0; background: none; cursor: pointer; touch-action: pan-y; }
-.mbf-reglage input[type="range"]::-webkit-slider-runnable-track { height: 0.35rem; border-radius: 999px; background: var(--farg-kant); }
-.mbf-reglage input[type="range"]::-moz-range-track { height: 0.35rem; border-radius: 999px; background: var(--farg-kant); }
-.mbf-reglage input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; box-sizing: border-box; width: var(--grepp); height: var(--grepp); margin-top: calc((0.35rem - var(--grepp)) / 2); border: 0.55rem solid transparent; border-radius: 50%; background: var(--farg-accent) padding-box; box-shadow: inset 0 0 0 3px var(--farg-yta); }
-.mbf-reglage input[type="range"]::-moz-range-thumb { box-sizing: border-box; width: var(--grepp); height: var(--grepp); border: 0.55rem solid transparent; border-radius: 50%; background: var(--farg-accent) padding-box; box-shadow: inset 0 0 0 3px var(--farg-yta); }
-.mbf-reglage input[type="range"]:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.mbf-bana { position: relative; height: var(--grepp); cursor: pointer; touch-action: pan-y; }
+.mbf-bana::before, .mbf-fyllt { content: ''; position: absolute; top: 50%; height: 0.35rem; margin-top: -0.175rem; border-radius: 999px; }
+.mbf-bana::before { left: calc(50% / var(--lagen)); right: calc(50% / var(--lagen)); background: var(--farg-kant); }
+.mbf-fyllt { left: calc((var(--fran) + 0.5) * 100% / var(--lagen)); width: calc((var(--till) - var(--fran)) * 100% / var(--lagen)); background: var(--farg-accent); }
+.mbf-reglage.lika .mbf-fyllt { width: 1.1rem; margin-left: -0.55rem; }
+.mbf-bana input[type="range"] { -webkit-appearance: none; appearance: none; position: absolute; top: 0; left: calc(50% / var(--lagen) - var(--grepp) / 2); box-sizing: border-box; width: calc(100% - 100% / var(--lagen) + var(--grepp)); height: var(--grepp); margin: 0; padding: 0; background: none; pointer-events: none; }
+.mbf-reglage.lika [data-grepp="fran"] { transform: translateX(-0.55rem); }
+.mbf-reglage.lika [data-grepp="till"] { transform: translateX(0.55rem); }
+.mbf-bana input[type="range"]::-webkit-slider-runnable-track { height: var(--grepp); background: none; }
+.mbf-bana input[type="range"]::-moz-range-track { height: var(--grepp); background: none; }
+.mbf-bana input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; box-sizing: border-box; width: var(--grepp); height: var(--grepp); border: 0.55rem solid transparent; border-radius: 50%; background: var(--farg-accent) padding-box; box-shadow: inset 0 0 0 3px var(--farg-yta); }
+.mbf-bana input[type="range"]::-moz-range-thumb { box-sizing: border-box; width: var(--grepp); height: var(--grepp); border: 0.55rem solid transparent; border-radius: 50%; background: var(--farg-accent) padding-box; box-shadow: inset 0 0 0 3px var(--farg-yta); }
+.mbf-bana input[type="range"]:focus-visible { outline: none; }
+.mbf-bana input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: inset 0 0 0 3px var(--farg-yta), 0 0 0 3px var(--farg-accent); }
+.mbf-bana input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: inset 0 0 0 3px var(--farg-yta), 0 0 0 3px var(--farg-accent); }
 .mbf-lagen { display: grid; grid-template-columns: repeat(var(--lagen), minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
 .mbf-lagen li { display: flex; justify-content: center; min-width: 0; }
-.mbf-lage { position: relative; display: flex; flex-direction: column; align-items: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0.1rem 0.15rem 0.2rem; font-size: 0.8125rem; line-height: 1.2; text-align: center; color: var(--farg-text); cursor: pointer; }
-.mbf-lage input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.mbf-lage { display: flex; flex-direction: column; align-items: center; min-width: 2.75rem; min-height: 2.75rem; margin: 0; padding: 0.1rem 0.15rem 0.2rem; border: 0; background: none; font: inherit; font-size: 0.8125rem; line-height: 1.2; text-align: center; color: var(--farg-text); cursor: pointer; }
 .mbf-lage small { font-size: 0.8125rem; color: var(--farg-text-svag); }
-.mbf-lage:has(input:checked) { color: var(--farg-accent); font-weight: 700; }
+.mbf-lage.inom { color: var(--farg-accent); font-weight: 700; }
 .mbf-lage.noll { opacity: 0.55; }
 /* Förklaringen av nivåerna rad för rad ur standarden: staplarna och ordet med texten, och luft mellan raderna. Ett läge utan
    staplar bryts i första kolumnen, så att Inte sammanvägt inte gör den bred och texten smal i telefonen. */

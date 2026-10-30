@@ -16,7 +16,7 @@ import { site } from '../../data/site';
 import { publicerade } from '../../lib/innehall';
 import { PILOTEN, kortetUrFil } from '../../lib/metodprofil';
 import { UM_NAMN, type Um } from '../../lib/undervisningsmetod';
-import { bankensVal, bankensRutor, bankensValPassar, SYFTEN, ANVANDS_I, BANKENS_OMRADEN, STODETS_GRUPPER, SVARIGHETENS_GRUPPER } from '../../lib/standard/index.js';
+import { bankensVal, bankensRutor, bankensValPassar, SYFTEN, ANVANDS_I, BANKENS_OMRADEN, BANKENS_LAGEN, STODETS_GRUPPER, SVARIGHETENS_GRUPPER } from '../../lib/standard/index.js';
 import { metodensFiler } from '../../lib/undervisningsmetodfiler';
 
 const metoder = (await publicerade('undervisningsmetoder'))
@@ -30,9 +30,9 @@ const valbara = metoder.some((x) => x.fil);
 
 // Filtrets rutor i ordning, med valen ur standarden. Ett tomt värde är Alla, och i Område Lärande totalt, som Stöd gäller
 // när inget område är valt. Bara rutorna som skiljer metoderna åt visas, och utan någon visas inget filter. Används i, Stöd
-// och Svårighet har en ordning och är reglage, med lägena i standardens ordning och Alla längst till vänster (Niclas
-// 2026-10-30: "Tre av dem kan göras i en slider istället för enskilda kort"). Skärmläsaren och tangentbordet använder
-// reglaget, och lägenas ord under banan är tryckytor för den som pekar (src/scripts/bankfilter.ts).
+// och Svårighet har en ordning och är reglage med två grepp, Från och Till, med lägena i standardens ordning (BANKENS_LAGEN;
+// Niclas 2026-10-30: "Tre av dem kan göras i en slider istället för enskilda kort" och "Från-Till"). Greppen står i varsin
+// ände från början, Alla, och lägenas ord under banan är tryckytor för den som pekar (src/scripts/bankfilter.ts).
 const valen = metoder.map((x) => x.val);
 const visas = bankensRutor(valen);
 const RUTORNA = ([
@@ -42,7 +42,8 @@ const RUTORNA = ([
   { falt: 'stod', namn: 'Stöd', alla: 'Alla', reglage: true, val: STODETS_GRUPPER.map((g) => ({ varde: g.id, text: g.namn, forklaring: g.text })) },
   { falt: 'svarighet', namn: 'Svårighet', alla: 'Alla', reglage: true, val: SVARIGHETENS_GRUPPER.map((g) => ({ varde: g.id, text: g.namn, forklaring: undefined })) },
 ] as const).filter((r) => visas[r.falt]);
-const antalMed = (falt: string, varde: string) => valen.filter((v) => bankensValPassar(v, { [falt]: varde })).length;
+// Antalet med ett val, och i ett reglage antalet i just det läget.
+const antalMed = (falt: string, varde: string, reglage = false) => valen.filter((v) => bankensValPassar(v, { [falt]: reglage ? { fran: varde, till: varde } : varde })).length;
 const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
 ---
 
@@ -74,11 +75,16 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
         <fieldset class="mbf-panel" id={`mbf-${r.falt}`} data-panel={r.falt} hidden>
           <legend class="visually-hidden">{r.namn}</legend>
           {r.reglage ? (
-            <div class="mbf-reglage" style={`--lagen: ${r.val.length + 1}`}>
-              <input type="range" min="0" max={r.val.length} step="1" value="0" data-reglage={r.falt} aria-label={r.namn} aria-valuetext={`${r.alla}, ${metoderText(antalMed(r.falt, ''))}`} />
+            <div class="mbf-reglage" data-spann={r.falt} data-lagen={BANKENS_LAGEN[r.falt as keyof typeof BANKENS_LAGEN].join(' ')} data-alla={r.alla} style={`--lagen: ${r.val.length}; --fran: 0; --till: ${r.val.length - 1}`}>
+              <input type="text" name={r.falt} value="" hidden />
+              <div class="mbf-bana">
+                <span class="mbf-fyllt" aria-hidden="true"></span>
+                <input type="range" min="0" max={r.val.length - 1} step="1" value="0" data-grepp="fran" aria-label={`${r.namn}, från`} aria-valuetext={`${r.val[0].text}, ${metoderText(metoder.length)}`} />
+                <input type="range" min="0" max={r.val.length - 1} step="1" value={r.val.length - 1} data-grepp="till" aria-label={`${r.namn}, till`} aria-valuetext={`${r.val[r.val.length - 1].text}, ${metoderText(metoder.length)}`} />
+              </div>
               <ol class="mbf-lagen" aria-hidden="true">
-                {[{ varde: '', text: r.alla, forklaring: undefined }, ...r.val].map((x) => (
-                  <li><label class="mbf-lage" data-forklaring={x.forklaring}><input type="radio" name={r.falt} value={x.varde} checked={x.varde === ''} tabindex="-1" /><span data-text>{x.text}</span> <small data-n>{antalMed(r.falt, x.varde)}</small></label></li>
+                {r.val.map((x, i) => (
+                  <li><button type="button" class="mbf-lage" data-lage={i} data-forklaring={x.forklaring} tabindex="-1"><span data-text>{x.text}</span> <small data-n>{antalMed(r.falt, x.varde, true)}</small></button></li>
                 ))}
               </ol>
             </div>
@@ -130,7 +136,7 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
   // Filtret, Stödundervisnings (src/scripts/bankfilter.ts): ett kort passar valen enligt standarden (bankensValPassar), med
   // det kortet bär ur bankensVal. Med ett område valt står det områdets rad på korten i stället för Lärande totalt.
   import { bankfiltret } from '../../scripts/bankfilter';
-  import { bankensValPassar, BANKENS_OMRADEN, type bankensVal } from '../../lib/standard/index.js';
+  import { bankensValPassar, bankensValUr, BANKENS_OMRADEN, type bankensVal } from '../../lib/standard/index.js';
   const form = document.getElementById('filter') as HTMLFormElement | null;
   if (form) {
     const kort = Array.from(document.querySelectorAll<HTMLElement>('.mp-bank[data-val]'));
@@ -140,7 +146,7 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
       form,
       kort,
       namn: Array.from(form.querySelectorAll<HTMLElement>('[data-ruta]')).map((r) => r.dataset.ruta ?? ''),
-      passar: (k, val) => bankensValPassar(valen.get(k)!, val),
+      passar: (k, val) => bankensValPassar(valen.get(k)!, bankensValUr(val)),
       statistik: { adress: 'filter:metoder:', titel: 'Metoder' },
       efter: (val) => { const omrade = val.omrade || BANKENS_OMRADEN[0].id; for (const r of rader) r.hidden = r.dataset.omradeRad !== omrade; },
     });

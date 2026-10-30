@@ -684,8 +684,20 @@ export declare const STODETS_GRUPPER: readonly { id: string; namn: string; stapl
 export declare const SVARIGHETENS_GRUPPER: readonly { id: string; namn: string; nivaer: number[] }[];
 /** Det banken filtrerar en metod på. */
 export declare function bankensVal(d: Record<string, any>): { syfte: string[]; anvands: string | null; svarighet: string | null; stod: Record<string, string | null> };
-/** Om en metod passar filtrets val; Stöd gäller valt område, annars Lärande totalt. */
-export declare function bankensValPassar(v: ReturnType<typeof bankensVal>, val: Record<string, string | undefined>): boolean;
+/** Ett spann mellan reglagets två grepp, i lägenas ordning. */
+export type Spann = { fran: string; till: string };
+/** Lägena i bankens reglage, i ordning. */
+export declare const BANKENS_LAGEN: Readonly<{ anvands: readonly string[]; stod: readonly string[]; svarighet: readonly string[] }>;
+/** Spannet ur adressens text, eller null för Alla. */
+export declare function spannUr(lagen: readonly string[], text: string | null | undefined): Spann | null;
+/** Spannets text i adressen, tom för Alla. */
+export declare function spannText(lagen: readonly string[], spann: Spann | null | undefined): string;
+/** Filtrets val som bankensValPassar tar dem. */
+export type BankensVal = { syfte?: string; omrade?: string; anvands?: Spann | null; stod?: Spann | null; svarighet?: Spann | null };
+/** Om en metod passar filtrets val; spannen med ändarna, Stöd i valt område och annars Lärande totalt. */
+export declare function bankensValPassar(v: ReturnType<typeof bankensVal>, val: BankensVal): boolean;
+/** Filtrets val ur adressens eller formulärets text. */
+export declare function bankensValUr(text: Record<string, string | undefined>): BankensVal;
 /** Vilka rutor bankens filter visar: de som skiljer metoderna åt, och Område och Stöd tillsammans. */
 export declare function bankensRutor(valen: ReturnType<typeof bankensVal>[]): { syfte: boolean; anvands: boolean; omrade: boolean; stod: boolean; svarighet: boolean };
 export declare const NIVAERNAS_FORKLARING: readonly { ord: string; staplar: number | null; text: string }[];

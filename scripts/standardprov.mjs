@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -173,9 +173,20 @@ for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13
     ['trettio metoder med samma syfte i alla', Array.from({ length: 30 }, (_, i) => metod(['nytt', SYFTENA[1 + (i % 4)]], SLAGEN[i % 3], hog, hog, 1 + (i % 5))), { syfte: false, anvands: true, omrade: false, stod: false, svarighet: true }],
   ];
   for (const [namn, valen, vantat] of rutorna) { const r = bankensRutor(valen); if (JSON.stringify(r) !== JSON.stringify(vantat)) fel.push(`bankensRutor för ${namn} ger ${JSON.stringify(r)}, inte ${JSON.stringify(vantat)}`); }
-  // Ett val passar: Stöd i valt område, och utan område i Lärande totalt; ett tomt val är Alla.
-  const passar = [[{}, true], [{ syfte: 'nytt', anvands: 'strukturer', svarighet: 'latt' }, true], [{ stod: 'starkt' }, true], [{ omrade: 'lasning', stod: 'starkt' }, false], [{ omrade: 'lasning', stod: 'svagt' }, true], [{ omrade: 'matematik', stod: 'svagt' }, false], [{ syfte: 'ova' }, false]];
+  // Ett val passar: spannen med ändarna, hela banan som Alla med metoderna utan nivå, Stöd i valt område och utan område i
+  // Lärande totalt, och ett tomt val är Alla.
+  const sp = (fran, till = fran) => ({ fran, till });
+  const passar = [[{}, true], [{ syfte: 'nytt', anvands: sp('strukturer'), svarighet: sp('latt') }, true], [{ stod: sp('medel', 'starkt') }, true],
+    [{ omrade: 'lasning', stod: sp('medel', 'starkt') }, false], [{ omrade: 'lasning', stod: sp('svagt') }, true], [{ omrade: 'skrivning', stod: sp('svagt', 'medel') }, true],
+    [{ omrade: 'matematik', stod: sp('svagt', 'medel') }, false], [{ omrade: 'matematik', stod: sp('svagt', 'starkt') }, true], [{ svarighet: sp('medel', 'svart') }, false],
+    [{ anvands: sp('lektionsforlopp', 'strategier') }, false], [{ syfte: 'ova' }, false]];
   for (const [val, vantat] of passar) if (bankensValPassar(v, val) !== vantat) fel.push(`bankensValPassar(${JSON.stringify(val)}) ger ${!vantat}`);
+  // Spannet i adressen: ett läge, två i ordning, och hela banan, ett omvänt spann eller ett okänt läge som Alla.
+  const L = BANKENS_LAGEN.stod;
+  if (L.join() !== 'svagt,medel,starkt' || BANKENS_LAGEN.svarighet.join() !== 'latt,medel,svart' || BANKENS_LAGEN.anvands.join() !== 'strukturer,lektionsforlopp,strategier') fel.push('BANKENS_LAGEN står inte i reglagens ordning');
+  if (JSON.stringify([spannUr(L, 'medel-starkt'), spannUr(L, 'medel'), spannUr(L, 'svagt-starkt'), spannUr(L, 'starkt-medel'), spannUr(L, 'okant'), spannUr(L, '')]) !== JSON.stringify([sp('medel', 'starkt'), sp('medel'), null, null, null, null])
+    || spannText(L, sp('medel')) !== 'medel' || spannText(L, sp('svagt', 'medel')) !== 'svagt-medel' || spannText(L, sp('svagt', 'starkt')) !== '' || JSON.stringify(bankensValUr({ stod: 'medel-starkt', omrade: 'lasning' })) !== JSON.stringify({ omrade: 'lasning', anvands: null, stod: sp('medel', 'starkt'), svarighet: null }))
+    fel.push('spannUr, spannText eller bankensValUr läser inte spannet som adressen skriver det');
 }
 // Undervisningsmetodens fält: piloten har allt, och en fil med fel ger varje fel (sajtens K-627).
 {

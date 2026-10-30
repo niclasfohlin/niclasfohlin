@@ -518,6 +518,37 @@ export const SVARIGHETENS_GRUPPER = Object.freeze([
   { id: 'medel', namn: 'Medelsvårt', nivaer: [3] },
   { id: 'svart', namn: 'Svårt', nivaer: [4, 5] },
 ]);
+/**
+ * Lägena i bankens reglage, i ordning från lite till mycket: Används i, Stöd och Svårighet filtreras med ett spann mellan
+ * två grepp, Från och Till (Niclas 2026-10-30: "Från-Till"). Ur ANVANDS_I, STODETS_GRUPPER och SVARIGHETENS_GRUPPER.
+ */
+export const BANKENS_LAGEN = Object.freeze({
+  anvands: Object.freeze(Object.keys(ANVANDS_I)),
+  stod: Object.freeze(STODETS_GRUPPER.map((g) => g.id)),
+  svarighet: Object.freeze(SVARIGHETENS_GRUPPER.map((g) => g.id)),
+});
+/**
+ * Ett spann i ett reglages lägen ur sin text i adressen, "medel-starkt" eller "medel" när Från och Till står på samma
+ * läge, som { fran, till }. Tomt, hela banan, ett omvänt spann och ett läge som reglaget inte har är null: Alla, och då
+ * syns också metoderna utan nivå.
+ * @param {readonly string[]} lagen
+ * @param {string | null | undefined} text
+ * @returns {{ fran: string, till: string } | null}
+ */
+export function spannUr(lagen, text) {
+  const [fran, till = fran] = String(text ?? '').split('-');
+  const a = lagen.indexOf(fran), b = lagen.indexOf(till);
+  return !fran || a < 0 || b < 0 || a > b || (a === 0 && b === lagen.length - 1) ? null : { fran, till };
+}
+/**
+ * Spannets text i adressen: tom för Alla och ett läge när Från och Till är samma.
+ * @param {readonly string[]} lagen
+ * @param {{ fran: string, till: string } | null | undefined} spann
+ */
+export function spannText(lagen, spann) {
+  const s = spann ? spannUr(lagen, `${spann.fran}-${spann.till}`) : null;
+  return !s ? '' : s.fran === s.till ? s.fran : `${s.fran}-${s.till}`;
+}
 
 /**
  * Det banken filtrerar en metod på, ur metodens fil och samma rötter som metodkortet: syftena, var den används,
@@ -542,15 +573,32 @@ export function bankensVal(d) {
 
 /**
  * Om en metod passar filtrets val, en rot för bankens antal vid bygget och filtret i webbläsaren (sajtens K-642). Ett tomt
- * val är Alla. Stöd gäller området i Område, och utan valt område Lärande totalt.
+ * val är Alla. Används i, Stöd och Svårighet är spann i BANKENS_LAGEN, { fran, till } med ändarna medräknade: en metod
+ * passar när dess värde ligger i spannet, och ett spann över hela banan är Alla, där också metoderna utan nivå syns. Stöd
+ * gäller området i Område, och utan valt område Lärande totalt.
  * @param {ReturnType<typeof bankensVal>} v metodens val
- * @param {Record<string, string | undefined>} val filtrets val: syfte, anvands, omrade, stod och svarighet
+ * @param {{ syfte?: string, omrade?: string, anvands?: Spann | null, stod?: Spann | null, svarighet?: Spann | null }} val
  * @returns {boolean}
+ * @typedef {{ fran: string, till: string }} Spann
  */
 export function bankensValPassar(v, val) {
-  return (!val.syfte || v.syfte.includes(val.syfte)) && (!val.anvands || v.anvands === val.anvands)
-    && (!val.stod || v.stod[val.omrade || BANKENS_OMRADEN[0].id] === val.stod) && (!val.svarighet || v.svarighet === val.svarighet);
+  const inom = (/** @type {readonly string[]} */ lagen, /** @type {string | null | undefined} */ varde, /** @type {Spann | null | undefined} */ spann) => {
+    const s = spann ? spannUr(lagen, `${spann.fran}-${spann.till}`) : null;
+    if (!s) return true;
+    const i = lagen.indexOf(varde ?? '');
+    return i >= 0 && i >= lagen.indexOf(s.fran) && i <= lagen.indexOf(s.till);
+  };
+  return (!val.syfte || v.syfte.includes(val.syfte)) && inom(BANKENS_LAGEN.anvands, v.anvands, val.anvands)
+    && inom(BANKENS_LAGEN.stod, v.stod[val.omrade || BANKENS_OMRADEN[0].id], val.stod) && inom(BANKENS_LAGEN.svarighet, v.svarighet, val.svarighet);
 }
+/**
+ * Filtrets val ur adressens eller formulärets text, med spannen lästa ur sina lägen, som bankensValPassar tar dem.
+ * @param {Record<string, string | undefined>} text
+ */
+export const bankensValUr = (text) => ({
+  syfte: text.syfte || undefined, omrade: text.omrade || undefined,
+  anvands: spannUr(BANKENS_LAGEN.anvands, text.anvands), stod: spannUr(BANKENS_LAGEN.stod, text.stod), svarighet: spannUr(BANKENS_LAGEN.svarighet, text.svarighet),
+});
 
 /**
  * Vilka rutor banken Metoder visar i filtret, ur metodernas `bankensVal` (sajtens K-642): en ruta visas bara när den skiljer
