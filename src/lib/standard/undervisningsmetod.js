@@ -51,23 +51,44 @@ export const UTFALLEN = /** @type {const} */ ([
   { id: 'halften', namn: 'Hälften eller färre kan' },
 ]);
 
-// Metodkortets nivåer (sajtens K-623 och K-632, riggens evidensen.md, avsnitt 6 och 7): tillförlitligheten sätter taket och
-// effekten nivån, låg tillförlitlighet utan effekt eller med negativ effekt är Oklart, och nivå 1 kräver minst måttlig
-// tillförlitlighet. Svårighet och Kostnad räknas ur kriterierna. Räkningen och orden stod förut både i sajtens
-// metodprofil.ts och i riggens build/sparrprov.mjs och står nu bara här, så att metodkortet, lathunden och riggens spärrar
-// räknar med samma funktion.
+// Metodkortets nivåer (sajtens K-623, K-632 och K-641, riggens evidensen.md, avsnitt 6 och 7): tillförlitligheten sätter
+// taket och effekten nivån, och låg tillförlitlighet utan effekt eller med negativ effekt är Oklart. Antalet fyllda staplar
+// är nivån, 0 till 5 (Niclas 2026-10-30: "0 staplar men där staplarna finns är 0 effekt men mätt. Annars negativ eller
+// oklart. 1 stapel är att det finns anekdotiskt stöd ... sedan vanliga som vi har nu ungefär"): 0 är mätt utan effekt,
+// och 1 är läget anekdotiskt, utan studie med jämförelsegrupp. Svårighet och Kostnad räknas ur kriterierna. Räkningen och
+// orden stod förut både i sajtens metodprofil.ts och i riggens build/sparrprov.mjs och står nu bara här, så att
+// metodkortet, lathunden och riggens spärrar räknar med samma funktion.
 const NIVAN = {
-  hog: { negativ: 1, ingen: 1, liten: 3, mattlig: 4, stor: 5 },
-  mattlig: { negativ: 1, ingen: 1, liten: 3, mattlig: 4, stor: 4 },
+  hog: { negativ: 0, ingen: 0, liten: 3, mattlig: 4, stor: 5 },
+  mattlig: { negativ: 0, ingen: 0, liten: 3, mattlig: 4, stor: 4 },
   lag: { negativ: 'oklart', ingen: 'oklart', liten: 2, mattlig: 2, stor: 2 },
 };
-/** Nivåernas ord, 1 till 5. Orden prövades på en kall läsare 2026-10-29: med Svagt stöd och Inget påvisat stöd ordnade fem lärare dem lika. */
-export const NIVAORD = Object.freeze(['', 'Inget påvisat stöd', 'Svagt stöd', 'Visst stöd', 'Gott stöd', 'Starkt stöd']);
+/** Nivåernas ord, 0 till 5. Orden 2–5 och Inget påvisat stöd prövades på en kall läsare 2026-10-29: fem lärare ordnade dem lika. */
+export const NIVAORD = Object.freeze(['Inget påvisat stöd', 'Anekdotiskt stöd', 'Svagt stöd', 'Visst stöd', 'Gott stöd', 'Starkt stöd']);
 /** Ett område utan nivå står med sitt läge, som i metodens fil. Lärande totalt utan sammanställning är Inte sammanvägt. */
 const UTAN_NIVA = { 'inte-studerat': 'Inte studerat', 'inte-sammanvagt': 'Inte sammanvägt', vantar: 'Väntar' };
 
 /**
- * Läget för ett område i metodkortet: en nivå 1 till 5 med sitt ord, där nivå 1 med negativ effekt heter Negativ effekt,
+ * Vad varje nivå och läge betyder, i metodkortets ordning, för en lärare och med de begrepp en forskare känner igen
+ * (Niclas 2026-10-30: "förklaras på rätt ställen också med korrekt språk både för läraren och ändå okej för forskare").
+ * Metodkortets förklaring på sajten och riggens referensblad läser samma text. `staplar` är antalet fyllda staplar, och
+ * null betyder att läget står utan staplar.
+ */
+export const NIVAERNAS_FORKLARING = Object.freeze([
+  { ord: NIVAORD[5], staplar: 5, text: 'Hög tillförlitlighet och stor effekt. Flera sammanställningar och stora randomiserade försök visar samma sak.' },
+  { ord: NIVAORD[4], staplar: 4, text: 'Hög tillförlitlighet och måttlig effekt, eller måttlig tillförlitlighet och stor effekt.' },
+  { ord: NIVAORD[3], staplar: 3, text: 'Minst måttlig tillförlitlighet och en liten effekt som är säker.' },
+  { ord: NIVAORD[2], staplar: 2, text: 'Låg tillförlitlighet och en positiv effekt. Några studier med jämförelsegrupp visar effekt, men de är få, små eller har brister.' },
+  { ord: NIVAORD[1], staplar: 1, text: 'Ingen studie med jämförelsegrupp, men fallstudier, mätningar före och efter, samband i större material eller lärares erfarenheter pekar mot en effekt. Det är ett skäl att pröva metoden och följa upp den noga.' },
+  { ord: NIVAORD[0], staplar: 0, text: 'Studier med jämförelsegrupp och minst måttlig tillförlitlighet visar ingen effekt.' },
+  { ord: 'Negativ effekt', staplar: 0, text: 'Studier med jämförelsegrupp och minst måttlig tillförlitlighet visar att resultaten blir sämre.' },
+  { ord: 'Oklart', staplar: null, text: 'Få och osäkra studier, utan effekt eller med en negativ. Forskningen räcker inte för att säga något.' },
+  { ord: UTAN_NIVA['inte-studerat'], staplar: null, text: 'Ingen har undersökt området, inte heller i fallstudier eller rapporter. Vi vet inte, och det betyder inte att metoden saknar effekt.' },
+  { ord: UTAN_NIVA['inte-sammanvagt'], staplar: null, text: 'Bara för Lärande totalt: ingen sammanställning väger ihop flera ämnen.' },
+]);
+
+/**
+ * Läget för ett område i metodkortet: en nivå 0 till 5 med sitt ord, där nivå 0 med negativ effekt heter Negativ effekt,
  * Oklart, eller ett läge utan nivå med sitt ord. Ett område som saknas är Inte studerat, som i riggens skelett, och en
  * tillförlitlighet, effekt eller ett läge som tabellen inte har är okänt, med tomt ord, så att riggens spärrar kan säga det.
  * @param {{ tillforlitlighet?: string, effekt?: string, niva?: string } | undefined | null} v
@@ -75,11 +96,13 @@ const UTAN_NIVA = { 'inte-studerat': 'Inte studerat', 'inte-sammanvagt': 'Inte s
  */
 export function laget(v) {
   if (!v) return { slag: 'inte', ord: UTAN_NIVA['inte-studerat'] };
+  // Anekdotiskt stöd är nivå 1, en stapel, utan tillförlitlighet och effekt att läsa ur tabellen.
+  if ('niva' in v && v.niva === 'anekdotiskt') return { slag: 'niva', niva: 1, ord: NIVAORD[1], negativ: false };
   if ('niva' in v) return v.niva && Object.hasOwn(UTAN_NIVA, v.niva) ? { slag: 'inte', ord: UTAN_NIVA[/** @type {keyof typeof UTAN_NIVA} */ (v.niva)] } : { slag: 'okand', ord: '' };
   const n = /** @type {Record<string, Record<string, number | 'oklart'>>} */ (NIVAN)[v.tillforlitlighet ?? '']?.[v.effekt ?? ''];
   if (n === undefined) return { slag: 'okand', ord: '' };
   if (n === 'oklart') return { slag: 'oklart', ord: 'Oklart' };
-  const negativ = n === 1 && v.effekt === 'negativ';
+  const negativ = n === 0 && v.effekt === 'negativ';
   return { slag: 'niva', niva: n, ord: negativ ? 'Negativ effekt' : NIVAORD[n], negativ };
 }
 
@@ -201,6 +224,11 @@ export function undervisningsmetodensFel(d) {
   krav('hinder.kort', d.hinder?.kort, 'Det svåraste i lathunden: risken och vad läraren gör');
   if (meningarna(d.hinder?.kort).length > HINDRETS_KORT.meningar) fel.push(`hinder.kort har fler än ${HINDRETS_KORT.meningar} meningar`);
   if (String(d.hinder?.kort ?? '').length > HINDRETS_KORT.tecken) fel.push(`hinder.kort har fler än ${HINDRETS_KORT.tecken} tecken`);
+  // Bankens filter: syftet och slaget (sajtens K-642).
+  const syften = Array.isArray(d.syfte) ? d.syfte : [];
+  if (syften.length < 1 || syften.length > 2) fel.push('syfte ska ha ett eller två av ' + SYFTEN.map((x) => x.id).join(', ') + ': banken filtrerar på det under Du vill');
+  for (const s of syften) if (!SYFTEN.some((x) => x.id === s)) fel.push(`syfte ${s} finns inte i standardens SYFTEN`);
+  if (!Object.hasOwn(ANVANDS_I, d.slag)) fel.push(`slag ${d.slag} är inte ett av ${Object.keys(ANVANDS_I).join(', ')}`);
   if ('mal' in d) fel.push('mal står i metoden: en undervisningsmetod har inget mål, läraren skriver sitt i Lär dig metoden (Niclas 2026-10-30)');
   fel.push(...lathundensTakFel(d));
   return fel;
@@ -440,5 +468,109 @@ export function effektensSkala() {
       `Talet säger hur mycket bättre det gick för eleverna med metoden än för eleverna utan. Tänk dig 100 elever utan metoden på rad efter resultat. Eleven i mitten står på plats 50. Med metoden flyttar den eleven till ${plats(0.1)}, ${plats(s.stor)} och ${plats(a.stor)}.`,
       `I stora försök i många skolor är ${skalansTal(s.mattlig)} en måttlig och ${skalansTal(s.stor)} en stor effekt. Mindre studier ger ungefär dubbelt så stora tal, så där är ${skalansTal(a.mattlig)} måttlig och ${skalansTal(a.stor)} stor (Kraft, 2020; Cheung och Slavin, 2016). Under det är effekten liten. När resultatet inte är säkert står Inte säker.`,
     ],
+  };
+}
+
+/**
+ * Vad en metod är till för, ett eller två val i metodens fält `syfte`, som banken Metoder filtrerar på under Du vill
+ * (Niclas 2026-10-30: "Börja också tänka på hur man ska kunna sortera metoder. Se stödundervisning som förlaga", och
+ * idéuppdraget i sajtens underlag/prov/metoder/ide/). Ämne och årskurs skiljer inte metoderna åt, eftersom standarden
+ * kräver exempel i minst fyra ämnen och två stadier; det gör syftet.
+ */
+export const SYFTEN = Object.freeze([
+  { id: 'nytt', namn: 'Lära ut något nytt', text: 'Eleverna möter innehåll de inte kan, och du visar det steg för steg.' },
+  { id: 'ova', namn: 'Öva och befästa', text: 'Eleverna har mött innehållet och ska bli säkra och minnas det.' },
+  { id: 'samarbeta', namn: 'Samarbeta', text: 'Eleverna arbetar i par eller grupper där alla behövs.' },
+  { id: 'tanka', namn: 'Tänka och samtala', text: 'Eleverna resonerar och sätter ord på sitt tänkande, i samtal eller i skrift.' },
+  { id: 'se', namn: 'Se var eleverna är', text: 'Du tar reda på var eleverna står i varje lektion och använder det.' },
+]);
+/**
+ * Var i lektionen metoden används, ur metodens `slag`: filtret Används i, i reglagets ordning från lite till mycket (Niclas
+ * 2026-10-30: "från delar, till lektion till alla lektioner"). Stödets och svårighetens grupper nedan står också i ordning.
+ */
+export const ANVANDS_I = Object.freeze({ strukturer: 'Delar av lektionen', lektionsforlopp: 'Hela lektionen', strategier: 'Alla lektioner' });
+/**
+ * Områdena som banken filtrerar stödet på: Lärande totalt och sajtens fyra områden (Niclas 2026-10-30: "Man vill kunna
+ * hitta metoder bättre för just läsning i evidens ... Kunna sortera ur evidens i de 4 kategorierna + lärande").
+ */
+export const BANKENS_OMRADEN = Object.freeze([
+  { id: 'larande', namn: 'Lärande totalt' },
+  { id: 'lasning', namn: 'Läsning' },
+  { id: 'skrivning', namn: 'Skrivning' },
+  { id: 'matematik', namn: 'Matematik' },
+  { id: 'socialt', namn: 'Socialt' },
+]);
+/**
+ * Stödets grupper i filtret Stöd, efter antalet staplar (Niclas samma dag: "Alla, svag(1-2), medel (3), stark (4-5)", och
+ * "gillar nivåerna 1-2, 3 och 4-5", "I listan ska det vara ord" och "strömlinjeforma det till alla, svagt, visst, starkt").
+ * Valen är ord, och förklaringen under valen knyter dem till kortets ord och staplar.
+ * Ett område utan nivå, eller med 0, står bara under Alla. Banken ordnar aldrig korten efter staplarna: inom ett val står
+ * metoderna i bokstavsordning.
+ */
+export const STODETS_GRUPPER = Object.freeze([
+  { id: 'svagt', namn: 'Svagt', staplar: [1, 2], text: 'Anekdotiskt eller svagt stöd, en eller två staplar på kortet.' },
+  { id: 'medel', namn: 'Visst', staplar: [3], text: 'Visst stöd, tre staplar.' },
+  { id: 'starkt', namn: 'Starkt', staplar: [4, 5], text: 'Gott eller starkt stöd, fyra eller fem staplar.' },
+]);
+/** Svårighetens grupper i filtret Svårighet, efter nivån 1–5. */
+export const SVARIGHETENS_GRUPPER = Object.freeze([
+  { id: 'latt', namn: 'Lätt', nivaer: [1, 2] },
+  { id: 'medel', namn: 'Medelsvårt', nivaer: [3] },
+  { id: 'svart', namn: 'Svårt', nivaer: [4, 5] },
+]);
+
+/**
+ * Det banken filtrerar en metod på, ur metodens fil och samma rötter som metodkortet: syftena, var den används,
+ * svårighetens grupp och stödets grupp i varje område. En rot för bankens data, så att filtret och kortet säger samma sak.
+ * @param {Record<string, any>} d metodens fil, läst
+ * @returns {{ syfte: string[], anvands: string | null, svarighet: string | null, stod: Record<string, string | null> }}
+ */
+export function bankensVal(d) {
+  const ev = d.profil?.evidens ?? {};
+  const grupp = (/** @type {string} */ o) => {
+    const l = laget(ev[o]);
+    return l.slag === 'niva' && !l.negativ ? STODETS_GRUPPER.find((g) => g.staplar.includes(l.niva))?.id ?? null : null;
+  };
+  const sv = d.profil?.svarighet ? svarighetensNiva(d.profil.svarighet) : null;
+  return {
+    syfte: (Array.isArray(d.syfte) ? d.syfte : []).filter((/** @type {string} */ s) => SYFTEN.some((x) => x.id === s)),
+    anvands: /** @type {Record<string, string>} */ (ANVANDS_I)[d.slag] ? d.slag : null,
+    svarighet: sv === null ? null : SVARIGHETENS_GRUPPER.find((g) => g.nivaer.includes(sv))?.id ?? null,
+    stod: Object.fromEntries(BANKENS_OMRADEN.map((o) => [o.id, grupp(o.id)])),
+  };
+}
+
+/**
+ * Om en metod passar filtrets val, en rot för bankens antal vid bygget och filtret i webbläsaren (sajtens K-642). Ett tomt
+ * val är Alla. Stöd gäller området i Område, och utan valt område Lärande totalt.
+ * @param {ReturnType<typeof bankensVal>} v metodens val
+ * @param {Record<string, string | undefined>} val filtrets val: syfte, anvands, omrade, stod och svarighet
+ * @returns {boolean}
+ */
+export function bankensValPassar(v, val) {
+  return (!val.syfte || v.syfte.includes(val.syfte)) && (!val.anvands || v.anvands === val.anvands)
+    && (!val.stod || v.stod[val.omrade || BANKENS_OMRADEN[0].id] === val.stod) && (!val.svarighet || v.svarighet === val.svarighet);
+}
+
+/**
+ * Vilka rutor banken Metoder visar i filtret, ur metodernas `bankensVal` (sajtens K-642): en ruta visas bara när den skiljer
+ * metoderna åt, det vill säga när minst två val har metoder och inget val har alla. Område och Stöd visas tillsammans eller
+ * inte alls, och de visas när stödet skiljer metoderna åt i något av bankens områden. Med en metod visas alltså inget
+ * filter. Sajtens bank och riggen läser samma regel.
+ * @param {ReturnType<typeof bankensVal>[]} valen
+ * @returns {{ syfte: boolean, anvands: boolean, omrade: boolean, stod: boolean, svarighet: boolean }}
+ */
+export function bankensRutor(valen) {
+  const skiljer = (/** @type {(v: ReturnType<typeof bankensVal>) => (string | null)[]} */ varden, /** @type {string[]} */ ids) => {
+    const antal = ids.map((id) => valen.filter((v) => varden(v).includes(id)).length);
+    return antal.filter((n) => n > 0).length >= 2 && antal.every((n) => n < valen.length);
+  };
+  const stod = BANKENS_OMRADEN.some((o) => skiljer((v) => [v.stod[o.id]], STODETS_GRUPPER.map((g) => g.id)));
+  return {
+    syfte: skiljer((v) => v.syfte, SYFTEN.map((x) => x.id)),
+    anvands: skiljer((v) => [v.anvands], Object.keys(ANVANDS_I)),
+    omrade: stod,
+    stod,
+    svarighet: skiljer((v) => [v.svarighet], SVARIGHETENS_GRUPPER.map((g) => g.id)),
   };
 }

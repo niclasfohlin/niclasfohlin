@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -152,6 +152,31 @@ for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13
   if ([0, 0.2, 0.4, 0.8, -0.2].map(platsenAv100).join() !== '50,58,66,79,42') fel.push('platsenAv100 ger inte 50, 58, 66, 79 och 42 för 0, 0,2, 0,4, 0,8 och −0,2');
   if (EFFEKTENS_GRANSER.andra.mattlig !== 0.2 || EFFEKTENS_GRANSER.stora.stor !== 0.2) fel.push('EFFEKTENS_GRANSER har inte gränserna 0,20 för måttlig i andra studier och 0,20 för stor i stora försök');
 }
+// Bankens filter: stödets grupp efter staplarna, och inget område utan nivå i en grupp (K-642).
+{
+  const v = bankensVal({ syfte: ['nytt', 'okant'], slag: 'strukturer', profil: { svarighet: { lara: 2, karnan: 2, stod: 1, tid: 2 }, evidens: { larande: { tillforlitlighet: 'hog', effekt: 'stor' }, lasning: { niva: 'anekdotiskt', motivering: 'x', kallor: ['a', 'b'] }, skrivning: { tillforlitlighet: 'mattlig', effekt: 'liten' }, matematik: { tillforlitlighet: 'hog', effekt: 'ingen' }, socialt: { niva: 'inte-studerat', motivering: 'x' } } } });
+  if (JSON.stringify(v) !== JSON.stringify({ syfte: ['nytt'], anvands: 'strukturer', svarighet: 'latt', stod: { larande: 'starkt', lasning: 'svagt', skrivning: 'medel', matematik: null, socialt: null } })) fel.push(`bankensVal ger ${JSON.stringify(v)}`);
+  if (SYFTEN.length !== 5) fel.push('SYFTEN har inte fem syften');
+  // Reglagens ordning, från lite till mycket, som banken visar lägena i.
+  if (Object.values(ANVANDS_I).join() !== 'Delar av lektionen,Hela lektionen,Alla lektioner' || STODETS_GRUPPER.map((g) => g.namn).join() !== 'Svagt,Visst,Starkt' || SVARIGHETENS_GRUPPER.map((g) => g.namn).join() !== 'Lätt,Medelsvårt,Svårt') fel.push('reglagens lägen står inte från lite till mycket: ANVANDS_I, STODETS_GRUPPER eller SVARIGHETENS_GRUPPER');
+  // Bankens rutor, prövade med 1, 3 och 30 metoder: en ruta bara när den skiljer metoderna åt, och Område och Stöd
+  // tillsammans, när stödet skiljer metoderna åt i något område.
+  const inte = { niva: 'inte-studerat' }, hog = { tillforlitlighet: 'hog', effekt: 'stor' }, lag = { tillforlitlighet: 'lag', effekt: 'liten' }, ingen = { tillforlitlighet: 'hog', effekt: 'ingen' };
+  const metod = (syfte, slag, larande, lasning, sv) => bankensVal({ syfte, slag, profil: { svarighet: { lara: sv, karnan: sv, stod: sv, tid: sv }, evidens: { larande, lasning, skrivning: inte, matematik: inte, socialt: inte } } });
+  const SYFTENA = SYFTEN.map((x) => x.id), SLAGEN = ['lektionsforlopp', 'strukturer', 'strategier'];
+  const rutorna = [
+    ['en metod', [metod(['nytt'], 'strukturer', hog, lag, 3)], { syfte: false, anvands: false, omrade: false, stod: false, svarighet: false }],
+    // Tre metoder med samma slag och utan nivå i Läsning: Används i skiljer dem inte åt, men Lärande totalt gör det.
+    ['tre metoder', [metod(['nytt'], 'strukturer', hog, ingen, 2), metod(['nytt', 'ova'], 'strukturer', lag, ingen, 3), metod(['ova'], 'strukturer', hog, ingen, 4)], { syfte: true, anvands: false, omrade: true, stod: true, svarighet: true }],
+    // Trettio metoder med samma svårighet och Starkt i Lärande totalt: Stöd visas för Läsnings skull.
+    ['trettio metoder', Array.from({ length: 30 }, (_, i) => metod([SYFTENA[i % 5]], SLAGEN[i % 3], hog, i % 2 ? lag : hog, 3)), { syfte: true, anvands: true, omrade: true, stod: true, svarighet: false }],
+    ['trettio metoder med samma syfte i alla', Array.from({ length: 30 }, (_, i) => metod(['nytt', SYFTENA[1 + (i % 4)]], SLAGEN[i % 3], hog, hog, 1 + (i % 5))), { syfte: false, anvands: true, omrade: false, stod: false, svarighet: true }],
+  ];
+  for (const [namn, valen, vantat] of rutorna) { const r = bankensRutor(valen); if (JSON.stringify(r) !== JSON.stringify(vantat)) fel.push(`bankensRutor för ${namn} ger ${JSON.stringify(r)}, inte ${JSON.stringify(vantat)}`); }
+  // Ett val passar: Stöd i valt område, och utan område i Lärande totalt; ett tomt val är Alla.
+  const passar = [[{}, true], [{ syfte: 'nytt', anvands: 'strukturer', svarighet: 'latt' }, true], [{ stod: 'starkt' }, true], [{ omrade: 'lasning', stod: 'starkt' }, false], [{ omrade: 'lasning', stod: 'svagt' }, true], [{ omrade: 'matematik', stod: 'svagt' }, false], [{ syfte: 'ova' }, false]];
+  for (const [val, vantat] of passar) if (bankensValPassar(v, val) !== vantat) fel.push(`bankensValPassar(${JSON.stringify(val)}) ger ${!vantat}`);
+}
 // Undervisningsmetodens fält: piloten har allt, och en fil med fel ger varje fel (sajtens K-627).
 {
   const { parse } = await import('yaml');
@@ -177,15 +202,18 @@ if (UNDERVISNINGSMETODENS_DELAR.map((x) => x.nr).join('') !== '1234AB') fel.push
 // Metodkortets nivåer (K-632, som riggens evidensen.md): tillförlitligheten sätter taket, låg utan effekt är Oklart, nivå 1
 // med negativ effekt heter Negativ effekt, och ett läge eller värde som tabellen inte har är okänt.
 const lagesfall = [
+  // Anekdotiskt stöd är nivå 1, en stapel (K-641; Niclas 2026-10-30).
+  [{ niva: 'anekdotiskt', motivering: 'x', kallor: ['a'] }, 'niva 1 Anekdotiskt stöd'],
   [{ tillforlitlighet: 'hog', effekt: 'stor' }, 'niva 5 Starkt stöd'], [{ tillforlitlighet: 'mattlig', effekt: 'stor' }, 'niva 4 Gott stöd'],
   [{ tillforlitlighet: 'hog', effekt: 'liten' }, 'niva 3 Visst stöd'], [{ tillforlitlighet: 'lag', effekt: 'mattlig' }, 'niva 2 Svagt stöd'],
-  [{ tillforlitlighet: 'mattlig', effekt: 'ingen' }, 'niva 1 Inget påvisat stöd'], [{ tillforlitlighet: 'hog', effekt: 'negativ' }, 'niva 1 Negativ effekt'],
+  [{ tillforlitlighet: 'mattlig', effekt: 'ingen' }, 'niva 0 Inget påvisat stöd'], [{ tillforlitlighet: 'hog', effekt: 'negativ' }, 'niva 0 Negativ effekt'],
   [{ tillforlitlighet: 'lag', effekt: 'ingen' }, 'oklart Oklart'], [{ niva: 'inte-sammanvagt' }, 'inte Inte sammanvägt'], [undefined, 'inte Inte studerat'],
   [{ tillforlitlighet: 'hog', effekt: 'enorm' }, 'okand '], [{ niva: 'toString' }, 'okand '],
 ];
 for (const [v, vantat] of lagesfall) { const l = laget(v); const f = `${l.slag}${l.slag === 'niva' ? ` ${l.niva}` : ''} ${l.ord}`; if (f !== vantat) fel.push(`laget(${JSON.stringify(v)}) ger "${f}", inte "${vantat}"`); }
 if (!laget({ tillforlitlighet: 'hog', effekt: 'negativ' }).negativ || laget({ tillforlitlighet: 'hog', effekt: 'ingen' }).negativ) fel.push('laget markerar inte negativ effekt, eller markerar ingen effekt som negativ');
-if (NIVAORD.length !== 6 || SVARIGHETENS_ORD[3] !== 'Medelsvårt' || KOSTNADENS_ORD[2] !== 'Låg') fel.push('nivåernas ord har inte en tom först och fem ord');
+if (NIVAORD.length !== 6 || NIVAORD[0] !== 'Inget påvisat stöd' || NIVAORD[1] !== 'Anekdotiskt stöd' || SVARIGHETENS_ORD[3] !== 'Medelsvårt' || KOSTNADENS_ORD[2] !== 'Låg') fel.push('nivåernas ord går inte från Inget påvisat stöd (0) och Anekdotiskt stöd (1) till Starkt stöd (5)');
+if (NIVAERNAS_FORKLARING.filter((x) => x.staplar !== null).map((x) => x.staplar).join() !== '5,4,3,2,1,0,0' || NIVAERNAS_FORKLARING.some((x) => !x.text)) fel.push('NIVAERNAS_FORKLARING har inte nivåerna 5 till 0, Negativ effekt med 0 och en text för varje');
 for (const [s, vantat] of [[{ lara: 3, karnan: 3, stod: 3, tid: 3 }, 3], [{ lara: 1, karnan: 2, stod: 4, tid: 5 }, 4], [{ lara: 5, karnan: 1, stod: 5, tid: 1 }, 5], [{ lara: 2, karnan: 3 }, 3], [null, null]]) if (svarighetensNiva(s) !== vantat) fel.push(`svarighetensNiva(${JSON.stringify(s)}) ger ${svarighetensNiva(s)}, inte ${vantat} (den övre medianen)`);
 for (const [k, vantat] of [[{ kop: 2, timmar: 13 }, 2], [{ kop: 1, timmar: 15 }, 3], [{ kop: 1, timmar: 4.9 }, 1], [{ kop: 4, timmar: 0 }, 4], [{ kop: 1, timmar: 80 }, 5]]) if (kostnadensNiva(k) !== vantat) fel.push(`kostnadensNiva(${JSON.stringify(k)}) ger ${kostnadensNiva(k)}, inte ${vantat}`);
 if (larandetIKort({ kort: 'Kort.', motivering: 'Hög. Lång.' }) !== 'Kort.' || larandetIKort({ motivering: 'Måttlig tillförlitlighet, måttlig effekt. Stödet gäller små grupper (Fuchs m.fl., 2021).' }) !== 'Stödet gäller små grupper.') fel.push('larandetIKort tar inte kort först, eller tar inte bort hänvisningen ur motiveringen');

@@ -102,7 +102,7 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
         <label class="mbf-knapp"><input type="radio" name="klass" value="klass" /><span data-text>Kan göras i klass</span> <small data-n>{antalMed('klass', 'klass')}</small></label>
         <label class="mbf-knapp"><input type="radio" name="klass" value="grupp" /><span data-text>Bara i grupp</span> <small data-n>{antalMed('klass', 'grupp')}</small></label>
       </fieldset>
-      <p class="mbf-upplagg" data-upplagg-not hidden></p>
+      <p class="mbf-upplagg" data-forklaring-not hidden></p>
       <p class="mbf-tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>
     </form>
   )}
@@ -163,209 +163,71 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
 </script>
 
 <script>
-  // Filtrering utan ramverk. Utan JavaScript visas alla metoder; formuläret, urvalsrutorna och
-  // raden för samlad nedladdning visas bara när html har klassen js (sätts i Base.astro före
-  // första målningen, så att inget hoppar när sidan laddas).
+  import { urvalet } from '../../scripts/urval';
+  import { laddaNer } from '../../scripts/skattning';
+  import { bankfiltret, type Valen } from '../../scripts/bankfilter';
+  // Filtrering utan ramverk, med bankernas gemensamma filter (src/scripts/bankfilter.ts), som Metoder delar. Utan
+  // JavaScript visas alla metoder; formuläret, urvalsrutorna och raden för samlad nedladdning visas bara när html har
+  // klassen js (sätts i Base.astro före första målningen, så att inget hoppar när sidan laddas).
   // Valet speglas i adressen (?omrade=Läsning&arskurs=F-3&tagg=lasflyt&upplagg=intensivtraning&klass=klass) så att en
   // filtrerad vy går att länka.
   const form = document.getElementById('filter') as HTMLFormElement | null;
   if (form) {
-    const kort = Array.from(document.querySelectorAll<HTMLElement>('[data-metod]'));
     // Täckningskartans rader och banor (Tackning.astro) följer samma val som korten.
     const kartrader = Array.from(document.querySelectorAll<HTMLElement>('[data-karta]'));
     const banor = Array.from(document.querySelectorAll<HTMLElement>('[data-tk-grupp]'));
     const karta = document.querySelector<HTMLElement>('[data-tackning]');
     const sektioner = Array.from(document.querySelectorAll<HTMLElement>('[data-omrade-sektion]'));
-    const antal = form.querySelector('[data-antal]') as HTMLElement;
-    const namn = ['omrade', 'arskurs', 'klass', 'tagg', 'upplagg'] as const;
-    const rutor = Array.from(form.querySelectorAll<HTMLButtonElement>('[data-ruta]'));
-    const paneler = Array.from(form.querySelectorAll<HTMLElement>('[data-panel]'));
-    const radioknappar = Array.from(form.querySelectorAll<HTMLInputElement>('input[type="radio"]'));
-    const upplaggNot = form.querySelector('[data-upplagg-not]') as HTMLElement;
-    const rensaRad = form.querySelector('[data-rensa-rad]') as HTMLElement;
-    // En ruta fäller ut sina val och fäller ihop de andra; samma ruta igen, Escape eller ett val fäller ihop.
-    function oppna(falt: string | null) {
-      for (const r of rutor) r.setAttribute('aria-expanded', String(r.dataset.ruta === falt));
-      for (const p of paneler) p.hidden = p.dataset.panel !== falt;
-    }
-    // Öppnas en ruta med tangentbordet (klicket har detail 0) går fokus till det valda i panelen, som står efter alla
-    // rutorna i formuläret.
-    for (const r of rutor) r.addEventListener('click', (h) => {
-      const falt = r.getAttribute('aria-expanded') === 'true' ? null : r.dataset.ruta ?? null;
-      oppna(falt);
-      if (falt && h.detail === 0) form!.querySelector<HTMLInputElement>(`input[name="${falt}"]:checked`)?.focus();
+    const passar = (k: HTMLElement, val: Valen) =>
+      (!val.omrade || k.dataset.omrade === val.omrade) &&
+      (!val.arskurs || (k.dataset.arskurs ?? '').split(' ').includes(val.arskurs)) &&
+      (!val.tagg || (k.dataset.taggar ?? '').split(' ').includes(val.tagg)) &&
+      (!val.upplagg || (k.dataset.taggar ?? '').split(' ').includes(val.upplagg)) &&
+      (!val.klass || k.dataset.klass === val.klass);
+    bankfiltret({
+      form,
+      kort: Array.from(document.querySelectorAll<HTMLElement>('[data-metod]')),
+      namn: ['omrade', 'arskurs', 'klass', 'tagg', 'upplagg'],
+      passar,
+      statistik: { adress: 'filter:', titel: 'Metodbanken' },
+      // Intensivträning stod under Tränar till 2026-10-19, så en gammal länk ?tagg=intensivtraning väljer upplägget.
+      adressensVarde: (n, v, satt) => {
+        if (n !== 'tagg' || !Array.from(form.querySelectorAll<HTMLInputElement>('input[name="upplagg"]')).some((r) => r.value === v)) return false;
+        satt('upplagg', v);
+        return true;
+      },
+      // I Tränar döljs förmågor utan metoder när ett område är valt, så att listan blir områdets.
+      dolj: (r, tom, val) => (r.name === 'tagg' && r.value ? tom && Boolean(val.omrade) : undefined),
+      efter: (val, aktiv) => {
+        let synligaRader = 0;
+        for (const r of kartrader) { r.hidden = !passar(r, val); if (!r.hidden) synligaRader++; }
+        for (const b of banor) b.hidden = !kartrader.some((r) => !r.hidden && b.contains(r));
+        // Utan träffar göms hela kartan: väljaren säger redan att ingen metod matchar.
+        if (karta) karta.hidden = synligaRader === 0;
+        for (const s of sektioner) s.hidden = aktiv && !Array.from(s.querySelectorAll<HTMLElement>('[data-metod]')).some((k) => !k.hidden);
+        // Metodens sida och lathunden leder tillbaka till banken med samma val.
+        try { sessionStorage.setItem('metodfilter', location.search); } catch { /* utan lagring */ }
+        // Rutan Verktyg och Stödmaterial (Verktygsruta.astro) visar det som hör till metoderna som syns.
+        document.dispatchEvent(new Event('metodbank:filtrerat'));
+      },
     });
-    form.addEventListener('keydown', (h) => {
-      if (h.key !== 'Escape') return;
-      const oppen = rutor.find((r) => r.getAttribute('aria-expanded') === 'true');
-      if (oppen) { oppna(null); oppen.focus(); }
-    });
-    // Ett tryck eller klick på en knapp väljer och fäller ihop. Med tangentbordet byter piltangenterna val utan att
-    // fälla ihop (deras klick har detail 0), och Enter fäller ihop.
-    for (const p of paneler) {
-      p.addEventListener('click', (h) => {
-        const knapp = (h.target as HTMLElement).closest('label');
-        if (h.detail === 0 || !knapp || knapp.querySelector('input')?.disabled) return;
-        window.setTimeout(() => stang(p), 0);
-      });
-      p.addEventListener('keydown', (h) => { if (h.key === 'Enter' && (h.target as HTMLElement).matches('input')) { h.preventDefault(); stang(p); } });
-    }
-    function stang(p: HTMLElement) {
-      oppna(null);
-      rutor.find((r) => r.dataset.ruta === p.dataset.panel)?.focus();
-    }
-    const egenskaper = (k: HTMLElement) => ({ omrade: k.dataset.omrade ?? '', arskurs: (k.dataset.arskurs ?? '').split(' '), taggar: (k.dataset.taggar ?? '').split(' '), klass: k.dataset.klass ?? '' });
-    const kortensData = () => Array.from(document.querySelectorAll<HTMLElement>('[data-metod]')).map(egenskaper);
-    const passarVal = (k: ReturnType<typeof egenskaper>, val: Record<string, string>) =>
-      (!val.omrade || k.omrade === val.omrade) && (!val.arskurs || k.arskurs.includes(val.arskurs)) && (!val.tagg || k.taggar.includes(val.tagg)) &&
-      (!val.upplagg || k.taggar.includes(val.upplagg)) && (!val.klass || k.klass === val.klass);
-    // Rutornas värden, knapparnas antal och raden om upplägget, efter valen. Ett val som inte ger någon metod går inte
-    // att göra; i Tränar döljs förmågor utan metoder när ett område är valt, så att listan blir områdets.
-    function visaVal(val: Record<string, string>) {
-      const data = kortensData();
-      for (const r of radioknappar) {
-        const n = data.filter((k) => passarVal(k, { ...val, [r.name]: r.value })).length;
-        const knapp = r.closest('label') as HTMLElement;
-        (knapp.querySelector('[data-n]') as HTMLElement).textContent = String(n);
-        const tomt = n === 0 && !r.checked;
-        r.disabled = tomt;
-        knapp.classList.toggle('noll', tomt);
-        if (r.name === 'tagg' && r.value) knapp.hidden = tomt && Boolean(val.omrade);
-      }
-      for (const g of form!.querySelectorAll<HTMLElement>('[data-grupp]')) g.hidden = !g.querySelector('label:not([hidden])');
-      for (const r of rutor) {
-        const vald = radioknappar.find((x) => x.name === r.dataset.ruta && x.checked);
-        const text = vald?.closest('label')?.querySelector('[data-text]')?.textContent ?? '';
-        (r.querySelector('[data-varde]') as HTMLElement).textContent = text;
-        r.classList.toggle('valt', Boolean(vald?.value));
-      }
-      const upplagg = radioknappar.find((x) => x.name === 'upplagg' && x.checked && x.value);
-      const forklaring = upplagg?.closest('label')?.getAttribute('data-forklaring');
-      upplaggNot.hidden = !forklaring;
-      upplaggNot.textContent = forklaring ? `${upplagg?.closest('label')?.querySelector('[data-text]')?.textContent}: ${forklaring}` : '';
-      rensaRad.hidden = !namn.some((n) => val[n]);
-    }
-
-    const parametrar = new URLSearchParams(location.search);
-    for (const n of namn) {
-      const v = parametrar.get(n);
-      const falt = form.elements.namedItem(n) as RadioNodeList | null;
-      // Ett värde som inte finns längre (en gammal länk) lämnar Alla valt. Intensivträning stod under Tränar till
-      // 2026-10-19, så en gammal länk ?tagg=intensivtraning väljer upplägget.
-      const upplagg = form.elements.namedItem('upplagg') as RadioNodeList | null;
-      if (n === 'tagg' && v && upplagg && radioknappar.some((r) => r.name === 'upplagg' && r.value === v)) upplagg.value = v;
-      else if (v && falt && radioknappar.some((r) => r.name === n && r.value === v)) falt.value = v;
-    }
-
-    function filtrera() {
-      const data = new FormData(form!);
-      const val = Object.fromEntries(namn.map((n) => [n, String(data.get(n) ?? '')]));
-      const aktiv = namn.some((n) => val[n]);
-      const passar = (k: HTMLElement) =>
-        (!val.omrade || k.dataset.omrade === val.omrade) &&
-        (!val.arskurs || (k.dataset.arskurs ?? '').split(' ').includes(val.arskurs)) &&
-        (!val.tagg || (k.dataset.taggar ?? '').split(' ').includes(val.tagg)) &&
-        (!val.upplagg || (k.dataset.taggar ?? '').split(' ').includes(val.upplagg)) &&
-        (!val.klass || k.dataset.klass === val.klass);
-      let synliga = 0;
-      for (const k of kort) {
-        k.hidden = !passar(k);
-        if (!k.hidden) synliga++;
-      }
-      let synligaRader = 0;
-      for (const r of kartrader) { r.hidden = !passar(r); if (!r.hidden) synligaRader++; }
-      for (const b of banor) b.hidden = !kartrader.some((r) => !r.hidden && b.contains(r));
-      // Utan träffar göms hela kartan: väljaren säger redan att ingen metod matchar.
-      if (karta) karta.hidden = synligaRader === 0;
-      for (const s of sektioner) {
-        s.hidden = aktiv && !Array.from(s.querySelectorAll<HTMLElement>('[data-metod]')).some((k) => !k.hidden);
-      }
-      antal.textContent = synliga === 1 ? '1 metod' : `${synliga} metoder`;
-      tom.hidden = synliga > 0;
-      visaVal(val);
-      const q = new URLSearchParams();
-      for (const n of namn) if (val[n]) q.set(n, val[n]);
-      const frageDel = q.toString();
-      history.replaceState(null, '', frageDel ? `?${frageDel}` : location.pathname);
-      try { sessionStorage.setItem('metodfilter', frageDel ? `?${frageDel}` : ''); } catch { /* utan lagring */ }
-      // Rutan Verktyg och Stödmaterial (Verktygsruta.astro) visar det som hör till metoderna som syns.
-      document.dispatchEvent(new Event('metodbank:filtrerat'));
-    }
-
-    const tom = form.querySelector('[data-tom]') as HTMLElement;
-    // Rensa döljer sig själv, så fokus går till den första rutan.
-    for (const b of form.querySelectorAll('[data-rensa-filter]')) b.addEventListener('click', () => { form!.reset(); oppna(null); filtrera(); rutor[0]?.focus(); });
-    form.addEventListener('change', filtrera);
-    // Statistiken: ett val räknas en gång, här, och inte på etiketten, där klicket och webbläsarens klick på
-    // radioknappen räknades var för sig (granskningen 2026-10-19). Statistiksidan har en egen rad för valen.
-    form.addEventListener('change', (h) => {
-      const r = h.target as HTMLInputElement;
-      if (r.type !== 'radio') return;
-      const fraga = rutor.find((x) => x.dataset.ruta === r.name)?.querySelector('.mbf-namn')?.textContent ?? r.name;
-      const text = r.closest('label')?.querySelector('[data-text]')?.textContent ?? r.value;
-      (window as unknown as { goatcounter?: { count?: (o: object) => void } }).goatcounter?.count?.({ event: true, path: `filter:${r.name}:${r.value || 'alla'}`, title: `Metodbanken: ${fraga} ${text}` });
-    });
-    filtrera();
   }
 
 
-  // Flera metoder i en Word-fil. Data hämtas från metoder.json och filen byggs i webbläsaren
+  // Flera metoder i en Word-fil. Kryssrutorna, rutan nederst, räkningen, Rensa och minnet under besöket står i
+  // src/scripts/urval.ts, som Metoder delar. Data hämtas från metoder.json och filen byggs i webbläsaren
   // med samma generator som bygget använder (src/lib/metoddocx.ts), så innehållet är identiskt.
   const samla = document.getElementById('samla') as HTMLFormElement | null;
   if (samla) {
-    const boxar = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="valda"]'));
-    const knapp = samla.querySelector('button') as HTMLButtonElement;
-    const valda = samla.querySelector('[data-valda]') as HTMLElement;
-    const status = samla.querySelector('[data-status]') as HTMLElement;
-    const rensa = samla.querySelector('[data-rensa]') as HTMLButtonElement;
+    const { visaStatus, status, behallStatus, arbeta } = urvalet(samla, 'metodurval');
     const medMallar = samla.elements.namedItem('mallar') as HTMLInputElement;
     const bas = samla.dataset.bas ?? location.origin;
-    let bygger = false;
-    // Ett lyckat-meddelande försvinner efter en stund; timern stoppas om något nytt händer, så att den inte raderar ett senare fel.
-    let statusTimer: number | undefined;
-    const visaStatus = (html: string, tillfalligt = false) => {
-      window.clearTimeout(statusTimer);
-      status.innerHTML = html;
-      if (tillfalligt) statusTimer = window.setTimeout(() => { status.textContent = ''; }, 8000);
-    };
-
-    function uppdatera() {
-      const markerade = boxar.filter((b) => b.checked);
-      const n = markerade.length;
-      knapp.disabled = bygger || n === 0;
-      // Rutan ligger fast nederst bara när en metod är vald, så att den inte står över korten i onödan (K-463).
-      samla!.classList.toggle('har-valda', n > 0 || bygger || Boolean(status.textContent));
-      rensa.hidden = n === 0;
-      const namn = markerade.map((b) => b.closest('[data-metod]')?.querySelector('h3')?.textContent?.trim()).filter(Boolean);
-      valda.textContent = n === 0 ? 'Inga metoder valda' : `${n === 1 ? '1 metod vald' : `${n} metoder valda`}: ${namn.join(', ')}`;
-      for (const b of boxar) b.closest('[data-metod]')?.classList.toggle('vald', b.checked);
-    }
-    // Urvalet minns under besöket, så att läraren kan läsa en metod och komma tillbaka.
-    const spara = () => { try { sessionStorage.setItem('metodurval', JSON.stringify(boxar.filter((b) => b.checked).map((b) => b.value))); } catch { /* utan lagring */ } };
-    try {
-      const sparade = JSON.parse(sessionStorage.getItem('metodurval') ?? '[]') as string[];
-      for (const b of boxar) if (sparade.includes(b.value)) b.checked = true;
-    } catch { /* utan lagring */ }
-    for (const b of boxar) b.addEventListener('change', () => { uppdatera(); spara(); });
-    rensa.addEventListener('click', () => { for (const b of boxar) b.checked = false; visaStatus(''); uppdatera(); spara(); });
-    uppdatera();
-
     // Samma fil kan laddas ner eller sparas i läsarens Google Drive (knappen finns bara med klient-id).
-    const driveKnapp = samla.querySelector<HTMLButtonElement>('[data-drive-valda]');
-    const uppdateraDrive = () => { if (driveKnapp) driveKnapp.disabled = knapp.disabled; };
-    samla.addEventListener('submit', (h) => { h.preventDefault(); void bygg('ladda'); });
-    driveKnapp?.addEventListener('click', () => void bygg('drive'));
-    boxar.forEach((b) => b.addEventListener('change', uppdateraDrive));
-    rensa.addEventListener('click', uppdateraDrive);
-    uppdateraDrive();
+    samla.addEventListener('submit', (h) => { h.preventDefault(); void arbeta((valda) => bygg(valda.map((b) => b.value), 'ladda')); });
+    samla.querySelector<HTMLButtonElement>('[data-drive-valda]')?.addEventListener('click', () => void arbeta((valda) => bygg(valda.map((b) => b.value), 'drive')));
 
-    async function bygg(mal: 'ladda' | 'drive') {
-      const ids = boxar.filter((b) => b.checked).map((b) => b.value);
+    async function bygg(ids: string[], mal: 'ladda' | 'drive') {
       const medMallarVal = medMallar.checked;
-      if (ids.length === 0 || bygger) return;
-      bygger = true;
-      knapp.disabled = true;
-      uppdateraDrive();
       // Drive: be om behörighet direkt på trycket, innan filen byggs, annars kan inloggningsrutan blockeras.
       let drive: typeof import('../../scripts/drive') | undefined;
       if (mal === 'drive') {
@@ -374,9 +236,6 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
           await drive.forberedDrive();
         } catch (fel) {
           visaStatus(`Det gick inte: ${(fel as Error).message}`);
-          bygger = false;
-          uppdatera();
-          uppdateraDrive();
           return;
         }
       }
@@ -413,26 +272,16 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
         const blob = await packaWord(dokument, 'blob');
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;
         if (mal === 'drive' && drive) {
-          window.clearTimeout(statusTimer);
+          behallStatus();
           await drive.sparaIDrive(blob, filnamn, status);
         } else {
-          const lank = document.createElement('a');
-          lank.href = URL.createObjectURL(blob);
-          lank.download = filnamn;
-          document.body.appendChild(lank);
-          lank.click();
-          lank.remove();
-          setTimeout(() => URL.revokeObjectURL(lank.href), 60000);
+          laddaNer(blob, filnamn);
           visaStatus(poster.length === 1 ? 'Filen är nedladdad.' : `Filen med ${poster.length} metoder är nedladdad.`, true);
         }
       } catch (fel) {
         // Felet ligger kvar tills läsaren rensar urvalet eller lyckas.
         visaStatus(`Det gick inte att bygga filen. Ladda om sidan och försök igen, eller ladda ner <a href="/stodundervisning/alla-metoder.docx" download="alla-metoder.docx">alla metoder som en fil</a>.`);
         console.error(fel);
-      } finally {
-        bygger = false;
-        uppdatera();
-        uppdateraDrive();
       }
     }
   }

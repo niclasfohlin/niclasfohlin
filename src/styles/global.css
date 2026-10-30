@@ -854,8 +854,6 @@ html.js .um-utfall-antal { display: flex; }
 .mp-bank-halv .mp-stapelrad { flex-wrap: wrap; row-gap: 0.2rem; }
 .mp-bank-halv .mp-namn { font-size: 0.9rem; }
 .mp-bank-halv .mp-varde { font-size: 0.92rem; }
-.mp-timmar { display: block; font-size: 0.8rem; font-weight: 400; color: var(--farg-text-svag); }
-.mp-varde .mp-timmar { display: inline; font-weight: 400; }
 .um-minuter caption { caption-side: top; text-align: left; font: 700 1rem/1.3 var(--typsnitt-ui); padding: 0 0 0.4rem; }
 .um-minuter td:last-child { font-style: italic; }
 /* Designgranskningen omgång 2: inga ord klipps i remsan och cellerna, ett udda antal celler fyller raden, affischerna
@@ -902,16 +900,83 @@ html.js .um-utfall-antal { display: flex; }
 .um-sidan .metod-fot { border-top: 0; margin-top: 1.5rem; }
 /* Metodkortets etiketter i 13 punkter (design-3 nr 9), Inte studerat som text och inte som ett tomt fält (nr 21). */
 .metodkort.mp-bank .kort-fakta dt, .metodprofil .kort-fakta dt { font-size: 0.8125rem; }
-.mp-namn small, .mp-timmar { font-size: 0.8125rem; }
+.mp-namn small { font-size: 0.8125rem; }
 .mp-inte, .mp-nivaer .mp-inte { padding: 0; border: 0; font-style: normal; font-weight: 600; color: var(--farg-text-svag); }
-/* Bankens kort: botten i sajtens ton, de andra namnen under faktan, det primära områdets villkor och länkarna till Lär dig
-   metoden och lathunden (design-3 nr 17 och 22, granskare-3 nr 11). I den smalaste telefonen står ordet under staplarna i
-   både Svårighet och Kostnad. */
-.metodkort.mp-bank { background: var(--farg-ton); }
-.metodkort.mp-bank .mp-kallas-bank { margin: -0.45rem 0 0.75rem; color: var(--farg-text-svag); }
+/* Bankens kort, tätt och med texten först (Niclas 2026-10-30: "Flytta upp texten och tighta till marginaler lite på kortet
+   ... Så tightare kort i höjdled"): botten i sajtens ton, ingressen direkt efter faktan som i Stödundervisning, de andra
+   namnen i en liten rad under den, och mindre luft i kortets kant, i faktan, mellan blocken, i kommentaren, i raden Primär
+   evidens och kring linjen före Svårighet och Kostnad, och ingressen med radavståndet 1,5. Kortet blev en femtedel lägre i
+   390 punkter, 570 i stället för 717. Texten är minst 13 punkter. Titeln, länkarna och kryssrutan Välj i hörnet har
+   tryckytor på minst 44 punkter, och luften kring länkarnas text är kortets luft nederst (design-3 nr 17 och 22, granskare-3
+   nr 11). Bara .kort p sätter luft under ett stycke, så raderna nollar den. I den smalaste telefonen står ordet under
+   staplarna i både Svårighet och Kostnad. */
+.metodkort.mp-bank { padding: 0 1rem 0.25rem; background: var(--farg-ton); }
+.metodkort.mp-bank .kort-topp { margin-inline: -1rem; padding: 0.2rem 1rem; }
+.metodkort.mp-bank .kort-topp h3 a { display: flex; align-items: center; min-height: 2.75rem; }
+.metodkort.mp-bank .kort-fakta { margin: 0 -1rem 0.6rem; }
+.metodkort.mp-bank .kort-fakta div { padding-block: 0.25rem; }
+.metodkort.mp-bank .kort-fakta dd { line-height: 1.35; }
+.metodkort.mp-bank .ingress { margin: 0 0 0.3rem; line-height: 1.5; }
+.metodkort.mp-bank .mp-kallas-bank { margin: 0 0 0.55rem; font-size: 0.8125rem; line-height: 1.35; color: var(--farg-text-svag); }
+.metodkort.mp-bank .mp-bank-rader { margin: 0; }
+.metodkort.mp-bank .mp-bank-rader p { margin: 0; }
+.metodkort.mp-bank .mp-bank-total { padding-bottom: 0.5rem; }
+.metodkort.mp-bank .mp-kommentar { margin-top: 0.4rem; padding: 0.3rem 0.6rem; }
+.metodkort.mp-bank .mp-bank-primar { margin-top: 0.4rem; line-height: 1.3; }
+.metodkort.mp-bank .mp-bank-primar .amne { padding: 0.15rem 0.45rem; font-size: 0.8125rem; line-height: 1.3; }
 .mp-bank-primar-kort { margin: 0.35rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; line-height: 1.4; color: var(--farg-text-svag); }
-.mp-bank-lankar { margin: 0 0 0.25rem; }
+.metodkort.mp-bank .mp-bank-primar-kort { margin-top: 0.3rem; }
+.metodkort.mp-bank .mp-bank-par { padding: 0.45rem 0 0; }
+.metodkort.mp-bank .mp-bank-halv { gap: 0.1rem; }
+.metodkort.mp-bank .mp-bank-lankar { margin: 0.15rem 0 0; gap: 0 1rem; }
+.mp-bank-lankar a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+html.js .metodkort.mp-bank .valj { min-height: 2.75rem; padding-left: 0.5rem; }
 @media (max-width: 22.5rem) { .mp-bank-halv .mp-stapelrad { flex-direction: column; align-items: flex-start; } }
+/* Rutan nederst för de valda metoderna, Stödundervisnings form utan valet Med mallar: antalet och knapparna i två spalter,
+   och i telefonen antalet över knapparna, med Word och Rensa i en rad till höger (src/scripts/urval.ts). */
+html.js .samla.mp-samla { grid-template-columns: minmax(0, 1fr) auto; }
+.samla.mp-samla .samla-knappar { grid-column: 2; flex-wrap: nowrap; }
+.samla.mp-samla .filval { width: auto; }
+/* Bankens filter, Stödundervisnings (.mbf, K-642): så många spalter på datorn som rutorna är, eftersom en ruta bara visas när
+   den skiljer metoderna åt, och i telefonen tar en sista ruta ensam hela raden. Valen, Rensa och Visa alla metoder har
+   tryckytor på minst 44 punkter. */
+@media (min-width: 56rem) { .mp-filter .mbf-rutor { grid-template-columns: repeat(var(--rutor), minmax(0, 1fr)); } }
+@media (max-width: 55.99rem) {
+  .mp-filter .mbf-ruta:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: 0; }
+  .mp-filter .mbf-ruta:nth-child(even):nth-last-child(2) { border-bottom: 1px solid var(--farg-kant); }
+}
+.mp-filter .mbf-knapp { align-items: center; min-height: 2.75rem; }
+.mp-filter .mbf-rensa { display: inline-block; padding: 0.7rem 0.3rem; margin: -0.7rem -0.3rem; }
+.mp-filter .mbf-antal { padding-bottom: 0.75rem; }
+.mp-filter .mbf-tom button { min-height: 2.75rem; }
+/* Förklaringen för ett valt val står på ett ställe, i båda bankerna: i panelen, med alla valens förklaringar, när en
+   panel är öppen, och under rutorna när alla är stängda (Niclas 2026-10-30: texten stod två gånger). */
+.mbf .mbf-panel:not([hidden]) ~ .mbf-upplagg { display: none; }
+/* Reglaget för ett filter med en ordning (K-642; Niclas 2026-10-30: "Tre av dem kan göras i en slider istället för enskilda
+   kort"): webbläsarens eget reglage med fasta lägen och Alla längst till vänster, och lägenas ord och antal under banan, ett
+   ord mitt under varje läge. Banan räcker från det första ordets mitt till det sistas, så att greppet står över ordet.
+   Banan fylls inte, eftersom ett läge visar metoderna i just det läget och inte minst så mycket. Greppets tryckyta är 44
+   punkter och den synliga pricken mindre; ett läge utan metoder är svagt. */
+.mbf-reglage { --grepp: 2.75rem; padding: 0.15rem 0 0.25rem; }
+.mbf-reglage input[type="range"] { -webkit-appearance: none; appearance: none; display: block; box-sizing: border-box; width: calc(100% - 100% / var(--lagen) + var(--grepp)); height: var(--grepp); margin: 0 0 0 calc(50% / var(--lagen) - var(--grepp) / 2); padding: 0; background: none; cursor: pointer; touch-action: pan-y; }
+.mbf-reglage input[type="range"]::-webkit-slider-runnable-track { height: 0.35rem; border-radius: 999px; background: var(--farg-kant); }
+.mbf-reglage input[type="range"]::-moz-range-track { height: 0.35rem; border-radius: 999px; background: var(--farg-kant); }
+.mbf-reglage input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; box-sizing: border-box; width: var(--grepp); height: var(--grepp); margin-top: calc((0.35rem - var(--grepp)) / 2); border: 0.55rem solid transparent; border-radius: 50%; background: var(--farg-accent) padding-box; box-shadow: inset 0 0 0 3px var(--farg-yta); }
+.mbf-reglage input[type="range"]::-moz-range-thumb { box-sizing: border-box; width: var(--grepp); height: var(--grepp); border: 0.55rem solid transparent; border-radius: 50%; background: var(--farg-accent) padding-box; box-shadow: inset 0 0 0 3px var(--farg-yta); }
+.mbf-reglage input[type="range"]:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.mbf-lagen { display: grid; grid-template-columns: repeat(var(--lagen), minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+.mbf-lagen li { display: flex; justify-content: center; min-width: 0; }
+.mbf-lage { position: relative; display: flex; flex-direction: column; align-items: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0.1rem 0.15rem 0.2rem; font-size: 0.8125rem; line-height: 1.2; text-align: center; color: var(--farg-text); cursor: pointer; }
+.mbf-lage input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.mbf-lage small { font-size: 0.8125rem; color: var(--farg-text-svag); }
+.mbf-lage:has(input:checked) { color: var(--farg-accent); font-weight: 700; }
+.mbf-lage.noll { opacity: 0.55; }
+/* Förklaringen av nivåerna rad för rad ur standarden: staplarna och ordet med texten, och luft mellan raderna. Ett läge utan
+   staplar bryts i första kolumnen, så att Inte sammanvägt inte gör den bred och texten smal i telefonen. */
+.mp-nivaer tr + tr :is(th, td) { border-top: 1px solid var(--farg-kant-svag); }
+.mp-nivaer th, .mp-nivaer td { padding-block: 0.4rem; }
+.mp-nivaer th .mp-inte { white-space: normal; }
+.mp-nivaord { display: block; font-weight: 700; }
 /* Slut på undervisningsmetodens sida (K-621). */
 html.js .samla {
   position: sticky; bottom: 0.75rem; z-index: 5;
@@ -960,6 +1025,8 @@ button.mbf-ruta:focus-visible { outline-offset: -3px; }
 .mbf-antal .mbf-varde { font-weight: 400; color: var(--farg-text); }
 .mbf-rensa { font: inherit; background: none; border: 0; padding: 0; color: var(--farg-accent); text-decoration: underline; cursor: pointer; }
 .mbf-upplagg { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--farg-text-svag); }
+/* Förklaringen för varje valt val som har en, en rad per val (src/scripts/bankfilter.ts). */
+.mbf-upplagg span { display: block; }
 .mbf-panel { margin: 0; padding: 0.75rem 0.75rem 0.35rem; border: 1px solid var(--farg-kant); border-top: 0; border-radius: 0 0 var(--radie) var(--radie); background: var(--farg-ton); min-width: 0; }
 .mbf-knapp { position: relative; display: inline-flex; align-items: baseline; gap: 0.3rem; margin: 0 0.35rem 0.45rem 0; padding: 0.45rem 0.75rem; border: 1px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); font-size: 0.95rem; line-height: 1.25; cursor: pointer; }
 .mbf-knapp input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }

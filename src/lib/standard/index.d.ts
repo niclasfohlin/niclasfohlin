@@ -666,11 +666,29 @@ export type Tillforlitlighet = 'hog' | 'mattlig' | 'lag';
 export type Effekt = 'negativ' | 'ingen' | 'liten' | 'mattlig' | 'stor';
 /** Ett område utan nivå: Inte studerat, Inte sammanvägt eller Väntar (bara i ett skelett). */
 export type UtanNiva = 'inte-studerat' | 'inte-sammanvagt' | 'vantar';
-export type Omradesvarde = { tillforlitlighet: Tillforlitlighet; effekt: Effekt; motivering: string; kallor?: string[]; kort?: string } | { niva: UtanNiva; motivering: string; kort?: string };
+export type Omradesvarde = { tillforlitlighet: Tillforlitlighet; effekt: Effekt; motivering: string; kallor?: string[]; kort?: string } | { niva: UtanNiva; motivering: string; kort?: string } | { niva: 'anekdotiskt'; motivering: string; kallor: string[]; kort?: string };
 /** Läget för ett område: en nivå 1 till 5 med sitt ord, Oklart, ett läge utan nivå eller okänt (tomt ord). */
 export type Laget = { slag: 'niva'; niva: number; ord: string; negativ: boolean } | { slag: 'oklart' | 'inte' | 'okand'; ord: string };
 /** Nivåernas ord, 1 till 5, med en tom först. */
-export declare const NIVAORD: readonly ['', 'Inget påvisat stöd', 'Svagt stöd', 'Visst stöd', 'Gott stöd', 'Starkt stöd'];
+export declare const NIVAORD: readonly ['Inget påvisat stöd', 'Anekdotiskt stöd', 'Svagt stöd', 'Visst stöd', 'Gott stöd', 'Starkt stöd'];
+/** Vad varje nivå och läge betyder, i metodkortets ordning; staplar är antalet fyllda, null utan staplar. */
+/** Vad en metod är till för, filtret Du vill i banken Metoder. */
+export declare const SYFTEN: readonly { id: string; namn: string; text: string }[];
+/** Var i lektionen metoden används, ur slaget. */
+export declare const ANVANDS_I: Readonly<Record<'lektionsforlopp' | 'strukturer' | 'strategier', string>>;
+/** Områdena som banken filtrerar stödet på. */
+export declare const BANKENS_OMRADEN: readonly { id: string; namn: string }[];
+/** Stödets grupper efter antalet staplar. */
+export declare const STODETS_GRUPPER: readonly { id: string; namn: string; staplar: number[]; text: string }[];
+/** Svårighetens grupper efter nivån. */
+export declare const SVARIGHETENS_GRUPPER: readonly { id: string; namn: string; nivaer: number[] }[];
+/** Det banken filtrerar en metod på. */
+export declare function bankensVal(d: Record<string, any>): { syfte: string[]; anvands: string | null; svarighet: string | null; stod: Record<string, string | null> };
+/** Om en metod passar filtrets val; Stöd gäller valt område, annars Lärande totalt. */
+export declare function bankensValPassar(v: ReturnType<typeof bankensVal>, val: Record<string, string | undefined>): boolean;
+/** Vilka rutor bankens filter visar: de som skiljer metoderna åt, och Område och Stöd tillsammans. */
+export declare function bankensRutor(valen: ReturnType<typeof bankensVal>[]): { syfte: boolean; anvands: boolean; omrade: boolean; stod: boolean; svarighet: boolean };
+export declare const NIVAERNAS_FORKLARING: readonly { ord: string; staplar: number | null; text: string }[];
 export declare function laget(v: { tillforlitlighet?: string; effekt?: string; niva?: string } | undefined | null): Laget;
 export type Svarighet = { lara: number; karnan: number; stod: number; tid: number; motivering: string };
 export type Kostnad = { kop: number; timmar: number; motivering: string };

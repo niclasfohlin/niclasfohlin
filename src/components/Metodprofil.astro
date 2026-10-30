@@ -3,27 +3,36 @@
 // rekommenderade (underlag/prov/metoder/ide/): faktan som celler under huvudet, en rad per område med namnet överst och
 // staplarna och nivåns ord under, så att ordet alltid ryms efter staplarna (Niclas 2026-10-29: "Kan du göra så att ordet
 // alltid får plats efter staplarna"). Raden fälls ut till motiveringen. Lärande totalt är större och öppen, Primär evidens
-// är sajtens områden med deras färger och märken, och Svårighet och Kostnad har neutrala staplar och ett ord. Nivå 1 och
-// Negativ effekt har inga fyllda staplar, och Oklart och Inte studerat har en streckad ram (riggens utkast 4). Kortet står
-// alltid i sajtens bläck (Niclas 2026-10-30), och Primär evidens är en rad med etikett och ämnets märke. Med bank är det
-// kortet i banken: huvudet med titeln, faktan med de andra namnen under, raderna Lärande totalt, Svårighet och Kostnad,
-// ingressen och länkarna till Lär dig metoden och lathunden, som korten i Stödundervisning (design-3 nr 17 och 22).
+// är sajtens områden med deras färger och märken, och Svårighet och Kostnad har neutrala staplar och ett ord. Antalet
+// fyllda staplar är nivån, 0 till 5 (K-641): Inget påvisat stöd och Negativ effekt har tomma staplar, och Oklart och Inte
+// studerat står som ord utan staplar. Kortet står alltid i sajtens bläck (Niclas 2026-10-30), och Primär evidens är en rad
+// med etikett och ämnets märke. Timmarna i Kostnad står bara i motiveringen som fälls ut (Niclas samma dag: "Bort med 13h
+// som bara förvirrar", och om metodens sida "Även där utanför pilen ska 13 timmar bort"). Med bank är det kortet i banken,
+// tätt, i Stödundervisnings ordning (Niclas samma dag: "Flytta upp texten och tighta till marginaler lite på kortet"):
+// huvudet med titeln, faktan, ingressen, de andra namnen i en liten rad, raderna Lärande totalt, Svårighet och Kostnad, och
+// länkarna till Lär dig metoden och lathunden med kryssrutan Välj i hörnet, som korten i Stödundervisning (design-3 nr 22).
+// Kortet bär det banken filtrerar på, bankensVal ur standarden (K-642), och när filtret har Område har kortet en rad för
+// vart och ett av bankens områden: det valda områdets rad står i stället för Lärande totalt, med staplarna, ordet och
+// kommentaren, så att läraren ser nivån och villkoret för just det området (src/pages/metoder/index.astro).
 import Staplar from './Staplar.astro';
 import { OMRADEN, primaraOmraden, type Utkast } from '../lib/metodprofil';
-import { esc, effektensSkala, uppraknat, laget, motiveringensDelar, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAORD, type Laget } from '../lib/standard/index.js';
+import { esc, effektensSkala, uppraknat, laget, motiveringensDelar, svarighetensNiva, kostnadensNiva, larandetIKort, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAERNAS_FORKLARING, BANKENS_OMRADEN, type Laget, type bankensVal } from '../lib/standard/index.js';
 import { medSaker, METODKORTET } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
-interface Props { m: Utkast; bank?: boolean; kallor?: Set<string>; saker?: MetodSak[]; lankar?: { text: string; href: string; klass: string }[] }
-const { m, bank = false, kallor, saker = [], lankar = [] } = Astro.props;
+// fil är metodens Word-fil med allt, som kryssrutan Välj laddar ner i banken (src/scripts/urval.ts), val det banken
+// filtrerar på och omraden att filtret har Område, så att kortet har en rad för varje område.
+interface Props { m: Utkast; bank?: boolean; kallor?: Set<string>; saker?: MetodSak[]; lankar?: { text: string; href: string; klass: string }[]; fil?: string; val?: ReturnType<typeof bankensVal>; omraden?: boolean }
+const { m, bank = false, kallor, saker = [], lankar = [], fil, val, omraden = false } = Astro.props;
 // På metodens sida leder hänvisningarna i motiveringen till sin post i referensbladet (granskningen 2026-10-30), och
 // metodens saker, som referensbladet, är länkar (medSaker).
 const skal = (t: string) => (kallor ? medSaker(t, saker, kallor) : esc(t));
-const total = laget(m.evidens.larande);
 const prim = primaraOmraden(m.evidens);
 // Det primära områdets korta mening, när metoden har den (`kort`, som Lärande totalt): för vilka elever stödet gäller, så
 // att villkoret står också på bankens kort (granskare-3 nr 11).
 const primKort = prim.map((namn) => (m.evidens[OMRADEN.find((o) => o.namn === namn)?.id ?? 'larande'] as { kort?: string }).kort).filter((x): x is string => !!x);
 const kallas = `Kallas också ${uppraknat(m.alternativaNamn)}`;
+// Bankens rader: Lärande totalt, och med Område varje område i banken, med kommentaren ur samma rot (larandetIKort).
+const bankensRader = (omraden ? BANKENS_OMRADEN : BANKENS_OMRADEN.slice(0, 1)).map((o) => ({ ...o, l: laget(m.evidens[o.id as keyof Utkast['evidens']]), kommentar: larandetIKort(m.evidens[o.id as keyof Utkast['evidens']]) }));
 // Svårighet och Kostnad: namnet, nivån ur kriterierna, ordet och motiveringen, i samma rader som evidensen. Timmarna står
 // efter motiveringen bara när den inte redan säger talet (granskare-3 nr 15).
 const infor = [
@@ -31,36 +40,47 @@ const infor = [
   { namn: 'Kostnad att införa', kort: 'Kostnad', niva: kostnadensNiva(m.kostnad), ord: KOSTNADENS_ORD, motivering: m.kostnad.motivering, timmar: m.kostnad.timmar },
 ];
 const timmarna = (x: (typeof infor)[number]) => ('timmar' in x && x.timmar !== undefined && !new RegExp(`(^|\\D)${x.timmar}(\\D|$)`).test(x.motivering) ? ` Timmarna är lärarens första läsår, omkring ${x.timmar}.` : '');
-// Hur ett läge ritas, en rot för raderna och förklaringen: staplar och ordet, eller en streckad ram med ordet.
-const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
+// Hur ett läge ritas, en rot för raderna: antalet fyllda staplar är nivån, 0 till 5, och ett läge utan nivå står som ord.
+const fylld = (l: Laget) => (l.slag === 'niva' ? l.niva : 0);
+// Förklaringens rad för Negativ effekt får kortets markering, ordet i rost; ordet läses ur standarden och skrivs inte här.
+const NEGATIV = laget({ tillforlitlighet: 'hog', effekt: 'negativ' }).ord;
 ---
 {bank ? (
-  <article class="kort metodkort mp-bank" data-del="metoder">
+  <article class="kort metodkort mp-bank" data-del="metoder" data-val={val && JSON.stringify(val)}>
     <div class="kort-topp">
       <h3><a href={`/metoder/${m.id}`}>{m.titel}</a></h3>
     </div>
     <dl class="kort-fakta">
       {m.fakta.map(([rubrik, text]) => <div><dt>{rubrik}</dt><dd>{text}</dd></div>)}
     </dl>
+    <p class="ingress">{m.ingress}</p>
     {m.alternativaNamn.length > 0 && <p class="mp-kallas-bank">{kallas}</p>}
     <div class="mp-bank-rader">
       <div class="mp-bank-total">
-        <p class="mp-bank-en">
-          <span class="mp-namn">Lärande totalt</span>
-          {total.slag === 'niva'
-            ? <span class="mp-stapelrad"><Staplar niva={fylld(total)} /><span class={`mp-varde${total.negativ ? ' mp-negativ' : ''}`}>{total.ord}<span class="visually-hidden">, {total.niva} av 5</span></span></span>
-            : <span class="mp-inte">{total.ord}</span>}
-        </p>
-        {m.larandeKort && <p class="mp-kommentar">{m.larandeKort}</p>}
+        {bankensRader.map((o, i) => (
+          <div class="mp-bank-omrade" data-omrade-rad={o.id} hidden={i > 0}>
+            <p class="mp-bank-en">
+              <span class="mp-namn">{o.namn}</span>
+              {o.l.slag === 'niva'
+                ? <span class="mp-stapelrad"><Staplar niva={fylld(o.l)} /><span class={`mp-varde${o.l.negativ ? ' mp-negativ' : ''}`}>{o.l.ord}<span class="visually-hidden">, {o.l.niva} av 5</span></span></span>
+                : <span class="mp-inte">{o.l.ord}</span>}
+            </p>
+            {o.kommentar && <p class="mp-kommentar">{o.kommentar}</p>}
+          </div>
+        ))}
         {prim.length > 0 && <p class="mp-bank-primar"><span>Primär evidens</span><span class="mp-omraden">{prim.map((o) => <span class="amne" data-amne={o}>{o}</span>)}</span></p>}
         {primKort.map((t) => <p class="mp-bank-primar-kort">{t}</p>)}
       </div>
       <div class="mp-bank-par">
-        {infor.map((x) => <p class="mp-bank-halv"><span class="mp-namn">{x.kort}</span><span class="mp-stapelrad"><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></span>{'timmar' in x && x.timmar !== undefined && <span class="mp-timmar">omkring {x.timmar} timmar</span>}</p>)}
+        {infor.map((x) => <p class="mp-bank-halv"><span class="mp-namn">{x.kort}</span><span class="mp-stapelrad"><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></span></p>)}
       </div>
     </div>
-    <p class="ingress">{m.ingress}</p>
-    {lankar.length > 0 && <p class="kort-rad mp-bank-lankar">{lankar.map((l) => <a class={l.klass} href={l.href}>{l.text}<span class="visually-hidden">: {m.titel}</span></a>)}</p>}
+    {(lankar.length > 0 || fil) && (
+      <p class="kort-rad mp-bank-lankar">
+        {lankar.map((l) => <a class={l.klass} href={l.href}>{l.text}<span class="visually-hidden">: {m.titel}</span></a>)}
+        {fil && <label class="valj"><input type="checkbox" name="valda" value={m.id} data-fil={fil} /> Välj<span class="visually-hidden"> {m.titel}</span></label>}
+      </p>
+    )}
     {m.platshallare && <p class="mp-platshallare"><span class="beta">Platshållare</span> Värdena är inget omdöme om metoden.</p>}
   </article>
 ) : (
@@ -96,20 +116,21 @@ const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
     })}
     {infor.map((x) => (
       <details class="mp-rad">
-        <summary><span class="mp-namn">{x.namn}</span><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}{'timmar' in x && x.timmar !== undefined && <span class="mp-timmar">, omkring {x.timmar} timmar</span>}<span class="visually-hidden">, {x.niva} av 5</span></span></summary>
+        <summary><span class="mp-namn">{x.namn}</span><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></summary>
         <p class="mp-skal" set:html={skal(`${x.motivering}${timmarna(x)}`)} />
       </details>
     ))}
     <details class="mp-rad mp-skalan">
       <summary><span class="mp-namn">Vad nivåerna betyder</span></summary>
       <div class="mp-skal">
-        <p>Varje grön stapel svarar på en fråga: hur väl stöder forskningen att metoden förbättrar elevernas resultat i området? Nivån räknas ur hur tillförlitlig forskningen är och hur stor effekten är, och tillförlitligheten sätter taket. En stor effekt i få och små studier får därför högst 2.</p>
+        <p>De gröna staplarna svarar på en fråga: hur väl stöder forskningen att metoden förbättrar elevernas resultat i området? Antalet fyllda staplar är nivån, 0 till 5. Nivån räknas ur hur tillförlitlig forskningen är och hur stor effekten är, och tillförlitligheten sätter taket. En stor effekt i få och små studier får därför högst 2.</p>
+        {/* Rad för rad ur standarden (NIVAERNAS_FORKLARING), så att texten bara står där: staplarna och ordet med texten, och
+            ett läge utan staplar med ordet i första kolumnen. */}
         <table class="mp-nivaer">
           <tbody>
-            {[5, 4, 3, 2].map((n) => <tr><th scope="row"><Staplar niva={n} /></th><td>{NIVAORD[n]}</td></tr>)}
-            <tr><th scope="row"><Staplar niva={0} /></th><td>Inget påvisat stöd: studier med jämförelsegrupp visar ingen effekt. Visar de en negativ effekt står Negativ effekt</td></tr>
-            <tr><th scope="row"><span class="mp-inte">Oklart</span></th><td>Få och osäkra studier, utan effekt eller med en negativ</td></tr>
-            <tr><th scope="row"><span class="mp-inte">Inte studerat</span></th><td>Ingen studie med jämförelsegrupp har mätt området. Vi vet inte, och det betyder inte att metoden saknar effekt</td></tr>
+            {NIVAERNAS_FORKLARING.map((x) => x.staplar === null
+              ? <tr><th scope="row"><span class="mp-inte">{x.ord}</span></th><td>{x.text}</td></tr>
+              : <tr><th scope="row"><Staplar niva={x.staplar} /></th><td><span class={`mp-nivaord${x.ord === NEGATIV ? ' mp-negativ' : ''}`}>{x.ord}</span> {x.text}</td></tr>)}
           </tbody>
         </table>
         <p set:html={skal(`${effektensSkala().text[1]} Ordet vid en nivå väger alla källor för området och hur säkra de är, så det kan skilja sig från en enskild källas ord i referensbladet.`)} />

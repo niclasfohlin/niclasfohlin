@@ -3,7 +3,7 @@
 // undervisningsmetod.js, K-632), som riggen och lathunden också läser, så att kortet, lathunden och riggens spärrar säger
 // samma sak. Här står det som bara kortet gör: områdena i kortets ordning, de primära områdena och kortet ur metodens fil i
 // samlingen src/content/undervisningsmetoder/ (`kortetUrFil`). PILOTEN är utkastet med platshållare som K-623 visade formen med.
-import { faktaIFastForm, laget, larandetIKort, uppraknat, type Effekt, type Kostnad, type Omradesvarde, type Svarighet, type Tillforlitlighet } from './standard/index.js';
+import { faktaIFastForm, laget, uppraknat, type Effekt, type Kostnad, type Omradesvarde, type Svarighet, type Tillforlitlighet } from './standard/index.js';
 
 export type Omrade = 'larande' | 'lasning' | 'skrivning' | 'matematik' | 'amnen' | 'socialt';
 
@@ -48,8 +48,6 @@ export interface Utkast {
   fakta: [string, string][]; evidens: Record<Omrade, Omradesvarde>; svarighet: Svarighet; kostnad: Kostnad;
   /** Värdena är platshållare, som i K-623:s utkast, och kortet säger det. */
   platshallare?: boolean;
-  /** Kommentaren under Lärande totalt på bankens kort: effekten på lärandet i en mening, utan källor. */
-  larandeKort?: string;
 }
 
 /** Det kortet läser i metodens fil (src/content/undervisningsmetoder/<id>.yaml). */
@@ -73,7 +71,6 @@ export function kortetUrFil(id: string, d: Kortfalt): Utkast {
     id, titel: d.titel, alternativaNamn: d.alternativaNamn ?? [], undertitel: d.undertitel ?? '', ingress: d.ingress, arskursText,
     fakta: [['Lektion', f.pass!], ['Hur ofta', f.ofta!], ['De första veckorna', f.period!], ['Årskurs', arskursText]],
     evidens: d.profil.evidens, svarighet: d.profil.svarighet, kostnad: d.profil.kostnad,
-    larandeKort: larandetIKort(d.profil.evidens.larande),
   };
 }
 

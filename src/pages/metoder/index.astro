@@ -1,23 +1,49 @@
 ---
-// Metoder: undervisningsmetoderna för helklass (K-621, K-623), ett kort per metod ur samlingen undervisningsmetoder,
-// sorterade efter slaget och namnet och aldrig efter staplarna (riggens standard, avsnitt 19). Utan metoder visar banken
+// Metoder: undervisningsmetoderna för helklass (K-621, K-623), ett kort per metod ur samlingen undervisningsmetoder, i
+// bokstavsordning och aldrig efter staplarna (riggens standard, avsnitt 19), också inom varje val i filtret. Utan metoder visar banken
 // utkastets kort med platshållare, som K-623 visade formen med. Kortet har länkarna till Lär dig metoden och lathunden, som
-// korten i Stödundervisning har sina (design-3 nr 22).
+// korten i Stödundervisning har sina (design-3 nr 22), och kryssrutan Välj i hörnet, som laddar ner metodens Word-fil med
+// allt, en fil eller flera i en zip (Niclas 2026-10-30: "Det ska finnas en checkruta också likt stödundervisning för [att]
+// ladda ner hela metoden i hörnet"). Urvalet och rutan nederst är Stödundervisnings (src/scripts/urval.ts).
+// Filtret är Stödundervisnings (K-642; Niclas 2026-10-30: "Se stödundervisning som förlaga", och "Man vill kunna hitta
+// metoder bättre för just läsning i evidens"): rutorna Du vill, Används i, Område, Stöd och Svårighet med valen och deras
+// förklaringar ur standardens rötter, och Visar. Varje kort bär det banken filtrerar på (bankensVal), en ruta visas bara
+// när den skiljer metoderna åt (bankensRutor), och antalen räknas med bankensValPassar, som filtret i webbläsaren
+// (src/scripts/bankfilter.ts). Valen är ord, utan staplarnas antal (Niclas samma dag: "I listan ska det vara ord").
 import Base from '../../layouts/Base.astro';
 import Metodprofil from '../../components/Metodprofil.astro';
 import { site } from '../../data/site';
 import { publicerade } from '../../lib/innehall';
 import { PILOTEN, kortetUrFil } from '../../lib/metodprofil';
-import type { Um } from '../../lib/undervisningsmetod';
+import { UM_NAMN, type Um } from '../../lib/undervisningsmetod';
+import { bankensVal, bankensRutor, bankensValPassar, SYFTEN, ANVANDS_I, BANKENS_OMRADEN, STODETS_GRUPPER, SVARIGHETENS_GRUPPER } from '../../lib/standard/index.js';
+import { metodensFiler } from '../../lib/undervisningsmetodfiler';
 
-const SLAGEN = ['lektionsforlopp', 'strukturer', 'strategier'];
 const metoder = (await publicerade('undervisningsmetoder'))
-  .sort((a, b) => SLAGEN.indexOf(a.data.slag) - SLAGEN.indexOf(b.data.slag) || a.data.titel.localeCompare(b.data.titel, 'sv'))
-  .map((post) => ({ m: kortetUrFil(post.id, post.data), lankar: [
+  .sort((a, b) => a.data.titel.localeCompare(b.data.titel, 'sv'))
+  .map((post) => ({ m: kortetUrFil(post.id, post.data), val: bankensVal(post.data), fil: metodensFiler(post.id).allt?.docx, lankar: [
     ...((post.data as Um).plan?.skattningar?.length ? [{ text: 'Lär dig metoden', href: `/metoder/${post.id}/lar-dig`, klass: 'central-lank' }] : []),
     ...((post.data as Um).lathund ? [{ text: 'Lathund', href: `/metoder/${post.id}/lathund`, klass: 'lathund-lank' }] : []),
   ] }));
-const korten = metoder.length ? metoder : [{ m: PILOTEN, lankar: [] }];
+const korten = metoder.length ? metoder : [{ m: PILOTEN, val: undefined, fil: undefined, lankar: [] }];
+const valbara = metoder.some((x) => x.fil);
+
+// Filtrets rutor i ordning, med valen ur standarden. Ett tomt värde är Alla, och i Område Lärande totalt, som Stöd gäller
+// när inget område är valt. Bara rutorna som skiljer metoderna åt visas, och utan någon visas inget filter. Används i, Stöd
+// och Svårighet har en ordning och är reglage, med lägena i standardens ordning och Alla längst till vänster (Niclas
+// 2026-10-30: "Tre av dem kan göras i en slider istället för enskilda kort"). Skärmläsaren och tangentbordet använder
+// reglaget, och lägenas ord under banan är tryckytor för den som pekar (src/scripts/bankfilter.ts).
+const valen = metoder.map((x) => x.val);
+const visas = bankensRutor(valen);
+const RUTORNA = ([
+  { falt: 'syfte', namn: 'Du vill', alla: 'Alla', reglage: false, val: SYFTEN.map((x) => ({ varde: x.id, text: x.namn, forklaring: x.text })) },
+  { falt: 'anvands', namn: 'Används i', alla: 'Alla', reglage: true, val: Object.entries(ANVANDS_I).map(([varde, text]) => ({ varde, text, forklaring: undefined })) },
+  { falt: 'omrade', namn: 'Område', alla: BANKENS_OMRADEN[0].namn, reglage: false, val: BANKENS_OMRADEN.slice(1).map((o) => ({ varde: o.id, text: o.namn, forklaring: undefined })) },
+  { falt: 'stod', namn: 'Stöd', alla: 'Alla', reglage: true, val: STODETS_GRUPPER.map((g) => ({ varde: g.id, text: g.namn, forklaring: g.text })) },
+  { falt: 'svarighet', namn: 'Svårighet', alla: 'Alla', reglage: true, val: SVARIGHETENS_GRUPPER.map((g) => ({ varde: g.id, text: g.namn, forklaring: undefined })) },
+] as const).filter((r) => visas[r.falt]);
+const antalMed = (falt: string, varde: string) => valen.filter((v) => bankensValPassar(v, { [falt]: varde })).length;
+const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
 ---
 
 <Base title={site.sidor.metoder.titel} description={site.sidor.metoder.beskrivning} tryckText="© Niclas Fohlin · niclasfohlin.se/metoder">
@@ -36,11 +62,128 @@ const korten = metoder.length ? metoder : [{ m: PILOTEN, lankar: [] }];
     <p class="pl-hjalp" id="pl-alla-appen" hidden></p>
     <p class="pl-hjalp" id="pl-alla-besked" role="status" hidden></p>
   </section>
+  {RUTORNA.length > 0 && (
+    <form class="mbf mp-filter" id="filter" aria-label="Filtrera metoder">
+      <div class="mbf-rutor" style={`--rutor: ${RUTORNA.length + 1}`}>
+        {RUTORNA.map((r) => (
+          <button type="button" class="mbf-ruta" data-ruta={r.falt} aria-expanded="false" aria-controls={`mbf-${r.falt}`}><span class="mbf-namn">{r.namn}</span><span class="mbf-varde"><span data-varde={r.falt}>{r.alla}</span>{" "}<span class="mbf-pil" aria-hidden="true"></span></span></button>
+        ))}
+        <p class="mbf-ruta mbf-antal"><span class="mbf-namn">Visar</span><span class="mbf-varde"><span aria-live="polite" data-antal>{metoderText(metoder.length)}</span><span data-rensa-rad hidden> · <button type="button" class="mbf-rensa" data-rensa-filter>Rensa</button></span></span></p>
+      </div>
+      {RUTORNA.map((r) => (
+        <fieldset class="mbf-panel" id={`mbf-${r.falt}`} data-panel={r.falt} hidden>
+          <legend class="visually-hidden">{r.namn}</legend>
+          {r.reglage ? (
+            <div class="mbf-reglage" style={`--lagen: ${r.val.length + 1}`}>
+              <input type="range" min="0" max={r.val.length} step="1" value="0" data-reglage={r.falt} aria-label={r.namn} aria-valuetext={`${r.alla}, ${metoderText(antalMed(r.falt, ''))}`} />
+              <ol class="mbf-lagen" aria-hidden="true">
+                {[{ varde: '', text: r.alla, forklaring: undefined }, ...r.val].map((x) => (
+                  <li><label class="mbf-lage" data-forklaring={x.forklaring}><input type="radio" name={r.falt} value={x.varde} checked={x.varde === ''} tabindex="-1" /><span data-text>{x.text}</span> <small data-n>{antalMed(r.falt, x.varde)}</small></label></li>
+                ))}
+              </ol>
+            </div>
+          ) : (
+            <>
+              <label class="mbf-knapp"><input type="radio" name={r.falt} value="" checked /><span data-text>{r.alla}</span> <small data-n>{antalMed(r.falt, '')}</small></label>
+              {r.val.map((x) => <label class="mbf-knapp" data-forklaring={x.forklaring}><input type="radio" name={r.falt} value={x.varde} disabled={antalMed(r.falt, x.varde) === 0} /><span data-text>{x.text}</span> <small data-n>{antalMed(r.falt, x.varde)}</small></label>)}
+            </>
+          )}
+          {r.val.some((x) => x.forklaring) && (
+            <dl class="mbf-forklaringar">
+              {r.val.map((x) => <div><dt>{x.text}</dt><dd>{x.forklaring}</dd></div>)}
+            </dl>
+          )}
+        </fieldset>
+      ))}
+      <p class="mbf-upplagg" data-forklaring-not hidden></p>
+      <p class="mbf-tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>
+    </form>
+  )}
   <div class="rutnat mp-rutnat">
-    {korten.map((x) => <Metodprofil m={x.m} lankar={x.lankar} bank />)}
+    {korten.map((x) => <Metodprofil m={x.m} lankar={x.lankar} fil={x.fil} val={x.val} omraden={visas.omrade} bank />)}
   </div>
+
+  {/* Rutan nederst, i Stödundervisnings form och med samma ord, utan valet Med mallar: Metoder har en Word-fil per metod. */}
+  {valbara && (
+    <form class="samla mp-samla" id="samla" aria-label="Ladda ner valda metoder">
+      <p class="samla-antal" aria-live="polite" data-valda>Inga metoder valda</p>
+      <span class="samla-knappar">
+        <span class="filval" role="group" aria-label="Valda metoder: ladda ner">
+          <button type="submit" disabled title="Ladda ner de valda metodernas Word-filer" data-goatcounter-click="fil:metoder-valda.docx" data-goatcounter-title="Metoder: valda metoder som Word">
+            <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M5 2h7l4 4v12H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 2v4h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 9.5l1.4 6 1.6-4.5 1.6 4.5 1.4-6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Word<span class="visually-hidden">: ladda ner de valda metoderna</span>
+          </button>
+        </span>
+        <button type="button" class="lank" data-rensa hidden>Rensa</button>
+      </span>
+      <p class="meta" data-status role="status" aria-live="polite"></p>
+      <p class="meta samla-hjalp">Markera metoder i listan med Välj, så får du {UM_NAMN.allt} som Word-fil för var och en. Väljer du flera kommer filerna i en zip-fil.</p>
+    </form>
+  )}
 </Base>
 
 <script>
   import '../../scripts/insatser.ts';
+</script>
+
+<script>
+  // Filtret, Stödundervisnings (src/scripts/bankfilter.ts): ett kort passar valen enligt standarden (bankensValPassar), med
+  // det kortet bär ur bankensVal. Med ett område valt står det områdets rad på korten i stället för Lärande totalt.
+  import { bankfiltret } from '../../scripts/bankfilter';
+  import { bankensValPassar, BANKENS_OMRADEN, type bankensVal } from '../../lib/standard/index.js';
+  const form = document.getElementById('filter') as HTMLFormElement | null;
+  if (form) {
+    const kort = Array.from(document.querySelectorAll<HTMLElement>('.mp-bank[data-val]'));
+    const valen = new Map(kort.map((k) => [k, JSON.parse(k.dataset.val ?? '{}') as ReturnType<typeof bankensVal>]));
+    const rader = Array.from(document.querySelectorAll<HTMLElement>('[data-omrade-rad]'));
+    bankfiltret({
+      form,
+      kort,
+      namn: Array.from(form.querySelectorAll<HTMLElement>('[data-ruta]')).map((r) => r.dataset.ruta ?? ''),
+      passar: (k, val) => bankensValPassar(valen.get(k)!, val),
+      statistik: { adress: 'filter:metoder:', titel: 'Metoder' },
+      efter: (val) => { const omrade = val.omrade || BANKENS_OMRADEN[0].id; for (const r of rader) r.hidden = r.dataset.omradeRad !== omrade; },
+    });
+  }
+</script>
+
+<script>
+  // De valda metodernas Word-filer med allt (src/lib/undervisningsmetodfiler.ts): en metod laddas ner som sin fil, och
+  // flera som en zip med varje metods fil, gjord i webbläsaren med JSZip, som hämtas först när läraren laddar ner. Word-
+  // filerna är redan packade, så zip-filen lagrar dem utan att packa om. Urvalet och rutan står i src/scripts/urval.ts.
+  import { urvalet } from '../../scripts/urval';
+  import { laddaNer } from '../../scripts/skattning';
+  import { idagLokalt } from '../../scripts/insatser-lagring';
+  const samla = document.getElementById('samla') as HTMLFormElement | null;
+  if (samla) {
+    const { visaStatus, arbeta } = urvalet(samla, 'metodurval-metoder');
+    samla.addEventListener('submit', (h) => { h.preventDefault(); void arbeta(hamtaFilerna); });
+
+    async function hamtaFilerna(valda: HTMLInputElement[]) {
+      visaStatus(valda.length === 1 ? 'Hämtar filen.' : 'Hämtar filerna.');
+      try {
+        // cache: 'no-cache' frågar alltid servern om filen har ändrats, så att läraren aldrig får en äldre fil än sidan.
+        const filerna = await Promise.all(valda.map(async (b) => {
+          const adress = b.dataset.fil ?? '';
+          const svar = await fetch(adress, { cache: 'no-cache' });
+          if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`);
+          return { namn: adress.split('/').pop() ?? `${b.value}.docx`, data: await svar.arrayBuffer() };
+        }));
+        if (filerna.length === 1) {
+          laddaNer(new Blob([filerna[0].data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }), filerna[0].namn);
+          visaStatus('Filen är nedladdad.', true);
+        } else {
+          const { default: JSZip } = await import('jszip');
+          const zip = new JSZip();
+          for (const f of filerna) zip.file(f.namn, f.data);
+          laddaNer(await zip.generateAsync({ type: 'blob', compression: 'STORE' }), `metoder-valda-${idagLokalt()}.zip`);
+          visaStatus(`Zip-filen med ${filerna.length} metoder är nedladdad.`, true);
+        }
+      } catch (fel) {
+        // Felet ligger kvar tills läsaren rensar urvalet eller lyckas.
+        visaStatus('Det gick inte att hämta filerna. Ladda om sidan och försök igen, eller ladda ner Word-filen på varje metods sida.');
+        console.error(fel);
+      }
+    }
+  }
 </script>

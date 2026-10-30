@@ -12,6 +12,7 @@ arskurs: ["F-3", "4-6", "7-9"]
 arskursText: F–9
 taggar: ["explicit-undervisning", "undervisningskvalitet", "tillganglig-undervisning"]
 slag: lektionsforlopp
+syfte: [nytt]
 tid: 40 minuter per lektion, minst tre lektioner i veckan
 hurOftaSkal: "I studierna med effekt hade klasserna metoden från en lektion i veckan (Kruit m.fl., 2018) till varje dag (Stockard m.fl., 2018). Metoden föreslår minst tre i veckan, så att rutinerna hinner sitta."
 period: Fyra veckor att komma igång
@@ -58,7 +59,7 @@ profil:
     skrivning:  { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. SRSD gav stor effekt i små studier med forskarnas prov (Graham, Bollinger m.fl., 2012). Med oberoende prov blev det 0,22 i två studier och ingen effekt i 84 skolor (Slavin m.fl., 2019; Torgerson m.fl., 2018).", kallor: [graham-bollinger-m-fl-2012, slavin-m-fl-2019, torgerson-m-fl-2018] }
     matematik:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet gäller mest små grupper med elever i matematiksvårigheter: 0,31 i 14 studier (Fuchs m.fl., 2021). I hela klasser gav en av tre stora studier en säker effekt, och den var liten (Jitendra m.fl., 2019).", kallor: [fuchs-m-fl-2021, jitendra-m-fl-2019, clarke-m-fl-2015, jitendra-m-fl-2015] }
     amnen:      { tillforlitlighet: lag, effekt: stor, motivering: "Låg tillförlitlighet, stor effekt. I NO i åk 5–⁠6 gav explicit undervisning i hur man gör en undersökning stor effekt på forskarnas prov jämfört med vanlig undervisning (Kruit m.fl., 2018). SO och teknik är inte studerade.", kallor: [kruit-m-fl-2018] }
-    socialt:    { niva: inte-studerat, motivering: "Ingen studie med jämförelsegrupp har mätt metodens effekt på samarbete, beteende eller arbetsro. I små studier gav svar från alla samtidigt bättre arbetsro än handuppräckning (MacSuga-Gage och Simonsen, 2015)." }
+    socialt:    { tillforlitlighet: lag, effekt: ingen, motivering: "Låg tillförlitlighet, ingen effekt. Ingen studie med jämförelsegrupp har mätt arbetsron, och de små studierna räcker inte för att säga något. Svar från alla samtidigt gav bättre arbetsro i några av dem (MacSuga-Gage och Simonsen, 2015).", kallor: [macsuga-gage-och-simonsen-2015] }
   svarighet: { lara: 3, karnan: 3, stod: 3, tid: 3, motivering: "Läraren övar nya drag: att visa ett steg i taget, gå mellan tavlan och elevernas arbete och vänta med elevernas eget arbete tills nästan alla kan. Kärnan glider lätt när tiden är knapp." }
   kostnad:   { kop: 2, timmar: 13, motivering: "Skolan köper miniwhiteboards och exit-lappar. De 13 timmarna per lärare första läsåret går till läsningen, två möten i arbetslaget, samtalen efter observationerna och en timme i veckan för stegen de första veckorna." }
   urval:
@@ -71,6 +72,8 @@ profil:
       experiment: "Fyra stora försök prövade explicit undervisning i vanliga klasser med standardiserade prov. Ett av dem gav en säker effekt, och den var liten (Jitendra m.fl., 2019). I de andra tre var effekten inte säker, i matematik i förskoleklass och i åk 7 och i skrivning i England (Clarke m.fl., 2015; Jitendra m.fl., 2015; Torgerson m.fl., 2018). Ett mindre försök i NO i åk 5–⁠6 gav stor effekt på ett praktiskt prov som forskarna hade gjort (Kruit m.fl., 2018). I vanliga klasser är effekten alltså mindre än i sammanställningarna."
       annan: "Artiklarna och klassrumsstudierna beskriver kärnans fyra delar: små steg, svar från alla och från var och en, återkoppling direkt och en kontroll innan eleverna övar själva (Hughes m.fl., 2017; Rosenshine, 2012). I en studie hängde de egna svaren ihop med framstegen för elever i matematiksvårigheter (Doabler m.fl., 2019). När alla svarade samtidigt blev det fler svar och bättre arbetsro än när en elev i taget svarade, i små studier (MacSuga-Gage och Simonsen, 2015). Det som ofta försvinner är att eleverna visar hur de tänker: i en fallstudie kom kontrollen av förståelsen inte tillbaka trots coachning (Baco m.fl., 2023)."
     uteslutna:
+      - { namn: "Benner och Zeng (2017)", skal: "Liten studie i förskoleklass där bara sammanfattningen gick att läsa, och där det inte går att se om grupperna var lika före" }
+      - { namn: "Lane m.fl. (2011)", skal: "Undervisning en och en" }
       - { namn: "Stockard (2021)", skal: "Författarens redovisning av samma metaanalys, utan egen sökning" }
       - { namn: "Borman m.fl. (2008)", skal: "Open Court Reading, där metodens kärna inte syns i källan" }
       - { namn: "Hattie (2009)", skal: "Översikt av metaanalyser, bara använd för att hitta dem" }

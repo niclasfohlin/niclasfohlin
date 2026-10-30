@@ -1118,6 +1118,8 @@ const faktateman = defineCollection({
 const omradetsVarde = z.union([
   z.strictObject({ tillforlitlighet: z.enum(['hog', 'mattlig', 'lag']), effekt: z.enum(['negativ', 'ingen', 'liten', 'mattlig', 'stor']), motivering: text.max(250), kallor: z.array(z.string()).min(1), kort: text.max(80).optional() }),
   z.strictObject({ niva: z.enum(['inte-studerat', 'inte-sammanvagt']), motivering: text.max(250) }),
+  // Anekdotiskt stöd, nivå 1: ingen studie med jämförelsegrupp, men källor som pekar mot en effekt (K-641).
+  z.strictObject({ niva: z.literal('anekdotiskt'), motivering: text.max(250), kallor: z.array(z.string()).min(1) }),
 ]);
 const undervisningsmetoder = defineCollection({
   loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/undervisningsmetoder' }),
