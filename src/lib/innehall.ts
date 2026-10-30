@@ -15,9 +15,13 @@ import { allaTexter, kortetsMalFel, varianternasFel } from './standard/index.js'
 // antal stoppar bygget (src/lib/antal.ts, METODER.md under Antalen och databaserna, K-450). En hänvisning till Fohlin som
 // inte leder till en bok, och ett verktyg som inte finns, stoppar det också, i metodens fil och i dess lektionskort
 // (src/lib/boklankar.ts, STIL.md under Hänvisningar, K-460).
+// Undervisningsmetoderna skrivs av metodriggen och står som utkast tills Niclas har sagt ja. Ett bygge för en testsida hos
+// Netlify (scripts/utkast.mjs, som aldrig är produktionen) tar med dem med METODER_UTKAST=1, så att proven och testsidan
+// har metoden (K-629). Netlifys bygge av main sätter aldrig flaggan.
+const metodernasUtkast = (samling: string) => samling === 'undervisningsmetoder' && process.env.METODER_UTKAST === '1';
 export async function publicerade<K extends CollectionKey>(samling: K): Promise<CollectionEntry<K>[]> {
   const alla = await getCollection(samling);
-  const synliga = import.meta.env.PROD ? alla.filter((post) => !('utkast' in post.data && post.data.utkast)) : alla;
+  const synliga = import.meta.env.PROD && !metodernasUtkast(samling) ? alla.filter((post) => !('utkast' in post.data && post.data.utkast)) : alla;
   if (samling === 'stodundervisning') for (const m of synliga as CollectionEntry<'stodundervisning'>[]) provaAntal(m);
   return synliga;
 }

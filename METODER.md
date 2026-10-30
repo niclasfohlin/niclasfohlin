@@ -626,6 +626,21 @@ Det som bara gäller sajten:
 
 En ny del läggs till på fem ställen i samma commit: schemat i `src/content.config.ts`, sidan i `Metod.astro`, Word-filen i `metoddocx.ts`, utskriften i `global.css`, och `_mall.yaml` samt tabellen ovan. Lathundens blocktyper på motsvarande sätt i `Lathund.astro`, `lathundBarn` i `metoddocx.ts`, `ritaBlock` i `metodpptx.ts` och `.lh-*`.
 
+## Undervisningsmetoderna (Metoder)
+
+Undervisningsmetoderna är metoder för hela klassen, under Metoder i menyn (K-621). Metodriggen skriver dem efter sin standard (`C:/metodrigg/docs/undervisningsmetoder/standarden.md`) och bygger deras dokument: Word och pdf med allt, Metoden, lathunden Att komma igång, lektionskortet, planeringsmallen, observationsmallen, materialet för klassen och referensbladet. Sajten bygger inga egna Word-filer för dem, eftersom två byggen ur samma fil glider isär (beslutet i natten till 2026-10-30, K-629).
+
+| Delen | Var | Så |
+|---|---|---|
+| Metodens fil | `src/content/undervisningsmetoder/<id>.yaml` | En kopia av riggens `methods/<id>/metod.yaml`. Schemat sist i `src/content.config.ts` prövar huvudet, faktan, profilen och källorna, och resten tills riggens mall och sajtens schema har samma fält (K-627) |
+| Dokumenten och filmerna | `public/metoder/` | `scripts/metoderfiler.mjs` tar in dem ur riggens `out/<id>/` efter `filer.json` och stannar när de är byggda ur en annan metodfil än sajtens. Bilderna av bladens sidor görs samtidigt |
+| Delarna och ordningen | `UNDERVISNINGSMETODENS_DELAR` i `src/lib/standard/undervisningsmetod.js` | Fyra delar och två bilagor, som riggens Word-fil, med raden under bandet och övergången. Riggen läser samma lista |
+| Sidan | `src/pages/metoder/[id].astro`, `src/components/Undervisningsmetod.astro`, `Planeringsblad.astro`, `Umfilknappar.astro` | Formen är idéförslagens form 2, Läsvägen öppen (`underlag/prov/metoder/ide/`): det läraren läser före första lektionen står öppet, och det som slås upp fälls ut. Hänvisningarna leder till sin post i referensbladet |
+| Metodkortet | `src/components/Metodprofil.astro`, `src/lib/metodprofil.ts` | Alltid i sajtens bläck, med Primär evidens som en rad med etikett (Niclas 2026-10-30: "man tror att det är en matte metod"). Bankens kort har Lärande totalt med `larande.kort` under, och Svårighet och Kostnad bredvid varandra |
+| Lär dig metoden | `src/pages/metoder/[id]/lar-dig.astro`, `src/scripts/lardig.ts`, `src/lib/lardig.ts` | Planmotorns lager för undervisningsmetoderna: lärarens mål, klasserna, stegen med Gick det?, två skattningar 1–10 varje vecka och sammanställningen som pdf (`underlag/prov/metoder/PLANERA-LAGRET.md`) |
+| Proven | `scripts/metoderprov.mjs`, `scripts/planprov.mjs`, `scripts/standardprov.mjs` | Sidorna utan att rulla i sidled, ankarna och filerna, delarnas ordning, planens lager och standardens delar och gränser |
+| Testsidan | `METODER_UTKAST=1 npm run validera` och `node scripts/utkast.mjs --namn metoder` | En metod med `utkast: true` byggs bara med flaggan, som aldrig sätts i Netlifys bygge av main |
+
 ## Kontroller som gäller
 
 | Vad | Hur |

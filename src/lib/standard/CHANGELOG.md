@@ -1,5 +1,18 @@
 # Ändringar i standarden
 
+## 0.35.0, 2026-10-30
+
+- `plan.js`, Lär dig metoden (sajtens K-628, riggens standard för undervisningsmetoder, avsnitt 16; Niclas 2026-10-30: "En rot på allt, men som en egen harness för metoder"): `SKATTNINGARNAS_VEM` har `lararen`, en skattning som läraren gör av sig själv med en skala av två heltal, som ritas och räknas som gruppens med linjen och reglerna, och skalan behöver ingen tabell med stegens namn. `metodensSkattningar` läser uppföljningens rad med dess text eller dess `id`, som undervisningsmetodernas rader har, och `sammanstallning` ger en linje för varje skattning av gruppen eller läraren. Motorn läser lektionens ord som passets: "varje lektion", "första lektionen" och "en lektion på 60 minuter" (`tolkaTid`, `tolkaPassen`, `variantensNar`); Stödundervisnings tider läses som förut.
+- `plan.js`, lärarens väg: `forlangSteget` ger ett steg en vecka till som en upprepad vecka och tar bort den igen, `efterStegen` och `larDigetsVeckor` ger stegen och veckorna efter stegen, varannan skolvecka förbi loven och med varje vecka där något är infört, `larDigetsFas` och `larDigetsNu` säger var läraren är, `larDigetsNamn` namnet på en vecka efter stegen, `klasserUrText` lärarens klasser ur listan med samma id när ett namn rättas, `larDigSammanstallning` och `larDigetsRegler` sammanställningen med de två linjerna, och `larDigetsInforda` och `harInfortEfter` veckorna där något är infört. `rensaFoljd` tar lärarens klasser (högst `KLASSLISTANS_LANGD`), veckans kommentar, klassernas kommentarer, svaret på Gick det? (`GICK_DET`) och checklistans bockar, och fälten står bara i en plan som har dem.
+
+## 0.34.0, 2026-10-30
+
+- `undervisningsmetod.js`, ny (sajtens K-621, riggens standard för undervisningsmetoder, avsnitt 4 och 7): `UNDERVISNINGSMETODENS_DELAR`, delarna i lärarens väg med raden under bandet och övergångsmeningen, som sidans innehållsrad och Word-filens band läser, `delarnasText` som fyller i metodens minuter, veckor och ämne, och `utfallensGranser(n)`, utfallens gränser för en klass med n elever: Nästan alla kan när högst en femtedel har fel, Hälften eller färre när hälften eller fler har fel. Riggen läser dem genom `build/standarden.mjs`.
+
+## 0.33.0, 2026-10-29
+
+- `index.js`, undervisningsmetoderna (sajtens K-621, riggens standard för undervisningsmetoder, avsnitt 7 och 18): hur ofta läser lektioner som pass ("minst tre lektioner i veckan"), `tidensVeckotakt` säger `minst` när tiden har ett lägsta tal och inget annat, och `faktaIFastForm` tar samlingens ord för passen, så att metodkortet visar "minst 3 lektioner/vecka". Stödundervisnings tider läses som förut, också Kortskrivnings "varje dag eller minst tre gånger i veckan", som har två tal och inget lägsta.
+
 ## 0.32.0, 2026-10-28
 
 - `plan.js`, riggens metoder efter genomgången (sajtens K-605): `passetsVisadeRoller` tar tidsschemats varianter, och en rad om metodens veckor eller platsen i veckan med samma när som en variant står bara när varianten är passets (`variantenFor`). Antalsuppfattnings läxa i veckans första pass i vecka 2–5 står då inte i första passet i en ny period som börjar på vecka 3, där varianten Första passet säger att passet börjar utan läxa. Utan varianter är raderna som förut.

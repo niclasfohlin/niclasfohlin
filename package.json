@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
-    "build": "node scripts/filmmp4.mjs --kontrollera && node scripts/lathund-pdf.mjs --kontrollera && node scripts/lathund-word.mjs --kontrollera && node scripts/sidlas.mjs --kontrollera && node scripts/bladfot.mjs --kontrollera && node scripts/bilder.mjs --kontrollera && node scripts/bildbank.mjs --kontrollera && astro build && node scripts/bankpdf.mjs --kontrollera && node scripts/pdfdelar.mjs && node scripts/delningskort.mjs --kontrollera",
+    "build": "node scripts/metoderfiler.mjs --kontrollera && node scripts/filmmp4.mjs --kontrollera && node scripts/lathund-pdf.mjs --kontrollera && node scripts/lathund-word.mjs --kontrollera && node scripts/sidlas.mjs --kontrollera && node scripts/bladfot.mjs --kontrollera && node scripts/bilder.mjs --kontrollera && node scripts/bildbank.mjs --kontrollera && astro build && node scripts/bankpdf.mjs --kontrollera && node scripts/pdfdelar.mjs && node scripts/delningskort.mjs --kontrollera",
     "preview": "astro preview",
     "taggar": "node scripts/taggar.mjs",
     "validera": "node scripts/validera.mjs",

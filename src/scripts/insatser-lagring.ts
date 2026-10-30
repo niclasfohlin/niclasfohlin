@@ -9,6 +9,11 @@ import { arDatum, talText, filnamnet, kodaVal, dagText, gangen, insatsenAvslutad
 export interface SparadPlan {
   id: string;
   metod: string;
+  /**
+   * Samlingen planen hör till: Planera insatsen i Stödundervisning, eller Lär dig metoden i Metoder (K-628). En plan som
+   * sparades före fältet hör till Stödundervisning (rensaPlan), och Dina insatser och Dina planer visar bara sin samlings.
+   */
+  samling?: Samling;
   titel: string;
   /** Metodens område, för färgen i Dina insatser. */
   omrade?: string;
@@ -33,6 +38,14 @@ export interface SparadPlan {
 
 const NYCKEL = 'insatser';
 
+/** Samlingarna med planer: Stödundervisning med Planera insatsen och Metoder med Lär dig metoden (K-628). */
+export const SAMLINGAR = ['stodundervisning', 'metoder'] as const;
+export type Samling = (typeof SAMLINGAR)[number];
+/** Planens samling, med Stödundervisning för en plan utan fältet. */
+export const samlingen = (p: { samling?: unknown }): Samling => (p.samling === 'metoder' ? 'metoder' : 'stodundervisning');
+/** Planerna i en samling. */
+export const iSamlingen = <T extends { samling?: unknown }>(planer: T[], samling: Samling) => planer.filter((p) => samlingen(p) === samling);
+
 const tidpunkt = (x: unknown) => (typeof x === 'string' && /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/.test(x) ? x : undefined);
 const heltal = (x: unknown) => Number.isInteger(x) && (x as number) >= 0;
 /**
@@ -48,7 +61,7 @@ export function rensaPlan(x: unknown): SparadPlan | null {
   const veckor = rader(schema.veckor).filter((r) => heltal(r[0]) && heltal(r[1]) && (r[2] === 0 || r[2] === 1) && arDatum(r[3]) && arDatum(r[4])) as SparadPlan['schema']['veckor'];
   const kopia = tidpunkt(p.kopia), uppdaterad = tidpunkt(p.uppdaterad);
   return {
-    id: p.id, metod: p.metod, titel: rentText(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: rentText(p.omrade, 40) } : {}),
+    id: p.id, metod: p.metod, samling: samlingen(p), titel: rentText(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: rentText(p.omrade, 40) } : {}),
     namn: rentText(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 20000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
     ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor, ...(arDatum(schema.sista) ? { sista: schema.sista } : {}) },
     ...(heltal(p.bockade) ? { bockade: p.bockade } : {}),
@@ -225,8 +238,8 @@ export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan
   return `${stor(dagar)} från ${spannKort(forsta, forsta)}`;
 }
 
-/** Adressen till en sparad plan, och till en vecka i den. */
-export const planensAdress = (p: { metod: string; val: string; id: string }, vecka?: number) => `/stodundervisning/${encodeURIComponent(p.metod)}/planera#${p.val}&p=${encodeURIComponent(p.id)}${vecka ? `&v=${vecka}` : ''}`;
+/** Adressen till en sparad plan, och till en vecka i den. En plan i Metoder öppnas på metodens Lär dig metoden (K-628). */
+export const planensAdress = (p: { metod: string; val: string; id: string; samling?: unknown }, vecka?: number) => (samlingen(p) === 'metoder' ? `/metoder/${encodeURIComponent(p.metod)}/lar-dig#p=${encodeURIComponent(p.id)}` : `/stodundervisning/${encodeURIComponent(p.metod)}/planera#${p.val}&p=${encodeURIComponent(p.id)}${vecka ? `&v=${vecka}` : ''}`);
 
 /** GoatCounter, när count.js har laddats; det laddas bara på sajtens egen adress (Base.astro) och kan vara stoppat. */
 export const goatcounter = () => (window as { goatcounter?: { count?: (v: object) => void } }).goatcounter;
@@ -244,7 +257,8 @@ export const PAGAR_HOGST = 3;
 export function pagaendeHandelser(planer: SparadPlan[], idag: string): { id: string; path: string; title: string }[] {
   const perMetod = new Map<string, number>();
   const ut: { id: string; path: string; title: string }[] = [];
-  for (const p of [...planer].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))) {
+  // Bara insatserna i Stödundervisning: en plan i Lär dig metoden är ingen insats (K-628).
+  for (const p of iSamlingen([...planer], 'stodundervisning').sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))) {
     const dagar = p.schema.pass.map((x) => x[0]).sort();
     if (!dagar.length || idag < mandagen(dagar[0]) || idag > plusDagar(mandagen(dagar[dagar.length - 1]), 6)) continue;
     const n = (perMetod.get(p.metod) ?? 0) + 1;

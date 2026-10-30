@@ -4,11 +4,12 @@
 // metodbanken en rad per plan, den som har nästa pass först, och planerna som är slut hopfällda sist. Utan sparade planer
 // syns ingenting.
 import { esc, liten, PLANERA } from '../lib/standard/index.js';
-import { allaPlanerna, APPENS_PLANER, idagLokalt, iTurOrdning, oppnaPlanerna, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, skiljNamnen, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
+import { allaPlanerna, APPENS_PLANER, idagLokalt, iSamlingen, iTurOrdning, oppnaPlanerna, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, skiljNamnen, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 import { iAppen } from './webblasaren';
 
 const idag = idagLokalt();
-const { planer } = lasPlaner();
+// Insatserna i Stödundervisning; planerna i Lär dig metoden står under Metoder (K-628).
+const planer = iSamlingen(lasPlaner().planer, 'stodundervisning');
 // En plan som pågår säger det till statistiken, en gång i veckan (K-504).
 raknaPagaende(planer, idag);
 const FARG: Record<string, string> = { Läsning: 'var(--farg-lasning)', Skrivning: 'var(--farg-skrivning)', Socialt: 'var(--farg-socialt)', Matematik: 'var(--farg-accent)' };

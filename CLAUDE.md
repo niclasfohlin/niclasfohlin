@@ -44,15 +44,16 @@ Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zo
 
 Kommentarerna under artiklar, böcker och metoder är ett lager som slås av och på. Läs DRIFT.md under Kommentarer innan du rör dem eller databasen: där står kommandona, vad som väcker databasen och vad det kostar.
 
-## Tre innehållstyper
+## Innehållstyperna
 
 | Typ | Mapp | URL | Mall | Kommando |
 |---|---|---|---|---|
 | Artiklar | src/content/artiklar/ | /artiklar/<id> | _mall.md | /ny-artikel |
 | Böcker | src/content/bocker/ | /bocker/<id> | _mall.md | /ny-bok |
 | Stödundervisning | src/content/stodundervisning/ | /stodundervisning/<id> | _mall.yaml | /ny-metod |
+| Undervisningsmetoder (Metoder) | src/content/undervisningsmetoder/ | /metoder/<id> | metodriggens `methods/_mall-undervisningsmetod.yaml` | under uppbyggnad (K-621) |
 
-Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig i produktion. Scheman ligger i `src/content.config.ts` och är strikta med avsikt. Taggar och publikationer styrs av registren i `src/data/`; reglerna står i ARBETSSATT.md under Innehåll.
+Undervisningsmetoderna skrivs av metodriggen efter dess standard (`C:/metodrigg/docs/undervisningsmetoder/standarden.md`), och deras dokument och filmer tas in i public/metoder/ med `scripts/metoderfiler.mjs`, som prövar att de är byggda ur samma metodfil. Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig i produktion. Scheman ligger i `src/content.config.ts` och är strikta med avsikt. Taggar och publikationer styrs av registren i `src/data/`; reglerna står i ARBETSSATT.md under Innehåll.
 
 Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Hur en post görs ur en text, och vad som gäller för hela texten, står i ARBETSSATT.md under Texterna.
 

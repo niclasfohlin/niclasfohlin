@@ -73,7 +73,7 @@ Kreditspärren (Niclas 2026-09-27): vid 100 krediter kvar laddas inget upp. Spä
 
 ## Innehåll
 
-Poster skapas från mallen i sin mapp (tabellen i CLAUDE.md under Tre innehållstyper).
+Poster skapas från mallen i sin mapp (tabellen i CLAUDE.md under Innehållstyperna).
 
 Taggar och publikationer tas från registren i `src/data/`, och bygget stoppar en post som använder en tagg eller publikation som inte finns där. Det är avsiktligt. Innan du taggar: kör `npm run taggar` och välj bland det som finns. `node scripts/taggar.mjs --sok <ord>` slår upp om ett ord redan är en tagg, ett alias eller en publikation. Alias i registret fångar varianter som läsflyt, läs-flyt och träna läsflyt och pekar på en enda tagg. Tagg-id skrivs med a-z, 0-9 och bindestreck, och läsaren ser label. En tagg får en egen sida först när något innehåll använder den.
 

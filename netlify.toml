@@ -258,6 +258,38 @@
 # Word-filernas reservbilder (src/lib/reservbild.ts), som webbläsaren hämtar när läsaren bygger en fil med flera metoder.
 # Namnet är SVG-bildens innehåll och mått, inte PNG-bildens, så en ny ritare kan ge en ny bild under samma namn: en dag,
 # som filmerna, och webbläsaren frågar ändå servern varje gång (cache: 'no-cache' i index.astro).
+# Undervisningsmetodernas filer under /metoder/ (K-621): dokumenten ur metodriggen, bladens bilder och filmerna, en dag,
+# som Stödundervisnings filer.
+[[headers]]
+  for = "/metoder/*.docx"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/metoder/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/metoder/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/metoder/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/metoder/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/metoder/*.zip"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 [[headers]]
   for = "/stodundervisning/reservbild/*"
   [headers.values]

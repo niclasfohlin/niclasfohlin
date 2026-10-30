@@ -1,0 +1,56 @@
+---
+// Lär dig metoden (K-628): sidan /metoder/<id>/lar-dig. Lärarens väg genom en undervisningsmetod i tre faser, Före, stegen
+// en vecka var eller längre, och Efter, med veckans stund, de två skattningarna och sammanställningen. Sidan bär metodens
+// data som JSON (src/lib/lardig.ts), och src/scripts/lardig.ts räknar planen med standardens motor och ritar den. Formen är
+// Planera insatsens, och skalan och linjen är Lärarens skattning i Gruppstärkande aktiviteter (src/scripts/skattning.ts).
+//
+// Ordningen är telefonens: med en sparad plan står veckan läraren är i, med veckans stund, överst; annars Före.
+import Base from '../layouts/Base.astro';
+import { PLANERA, PLANKNAPPAR } from '../lib/standard/index.js';
+import { site } from '../data/site';
+import type { LarDigData } from '../lib/lardig';
+
+interface Props { data: LarDigData }
+const { data } = Astro.props;
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+const mejl = `mailto:${site.epost}?subject=${encodeURIComponent(`Lär dig metoden, ${PLANERA.namn} ${PLANERA.version}: ${data.titel}`)}`;
+---
+
+<Base title={`Lär dig metoden: ${data.titel}`} description={`Lär dig ${data.titel} ett steg i taget: förbered dig, ta ett steg i veckan, skatta hur säker du är och hur väl metoden fungerar, och ta med sammanställningen till arbetslaget.`} tryckText={`© Niclas Fohlin · niclasfohlin.se${data.sida}/lar-dig`}>
+  <article class="ld" id="ld" data-metod={data.id}>
+    <header class="ld-huvud">
+      <p class="meta brodsmula"><a href="/metoder">Metoder</a> · <a href={data.sida}>{data.titel}</a> · Lär dig metoden</p>
+      <h1>Lär dig metoden{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</h1>
+      <p class="ingress">Ett steg i taget. Varje vecka övar klasserna en rutin och du ett drag, och i slutet av veckan skattar du hur det gick. Nästa steg kommer när det här sitter.</p>
+      <noscript><p class="pl-utan-js">Planen räknas fram i webbläsaren och behöver JavaScript. Metoden står på <a href={data.sida}>metodens sida</a>.</p></noscript>
+      <p class="ld-lage" id="ld-lage" role="status"></p>
+    </header>
+
+    <nav class="pl-remsa ld-remsa" id="ld-remsa" aria-label="Lärarens väg genom metoden"></nav>
+
+    <div class="ld-vyn" id="ld-vyn"></div>
+
+    <section class="ld-samman" id="ld-samman" aria-labelledby="ld-samman-rubrik" hidden></section>
+
+    <section class="pl-kopia ld-kopia" id="ld-kopia" aria-labelledby="ld-kopia-rubrik">
+      <h2 id="ld-kopia-rubrik">Planen som fil</h2>
+      <p class="pl-hjalp" id="ld-kopia-text"></p>
+      <p class="pl-andra-knappar">
+        <button type="button" class="knapp sekundar liten" id="ld-ladda-ner" data-goatcounter-click={`lardig:${data.id}:ladda-ner`} data-goatcounter-title={`${data.titel}: Lär dig metoden, planen nedladdad`}>{PLANKNAPPAR.laddaNer}</button>
+        <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click={`lardig:${data.id}:oppna`} data-goatcounter-title={`${data.titel}: Lär dig metoden, en nedladdad plan öppnad`}>{PLANKNAPPAR.oppna}<input type="file" id="ld-fil" accept=".json,.zip,application/json,application/zip" multiple class="visually-hidden" /></label>
+      </p>
+      <p class="pl-ta-bort"><button type="button" class="pl-textknapp" id="ld-ta-bort" hidden>Ta bort planen</button></p>
+    </section>
+
+    <footer class="pl-version">
+      <p class="pl-version-namn">{PLANERA.beta && <span class="beta">Beta</span>}{' '}Lär dig metoden, {PLANERA.namn} {PLANERA.version}</p>
+      <p>Lär dig metoden räknar fram stegen ur metoden med samma modul som Planera insatsen. Det du för in sparas bara i den här webbläsaren och i planen du laddar ner. Fungerar något inte, mejla mig, så rättar jag det: <a href={mejl}>{site.epost}</a>.</p>
+    </footer>
+    <div class="pl-toast" id="ld-toast" role="status" aria-live="polite" hidden></div>
+    <script type="application/json" id="ld-data" is:inline set:html={json} />
+  </article>
+</Base>
+
+<script>
+  import '../scripts/lardig.ts';
+</script>

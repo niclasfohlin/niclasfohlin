@@ -295,9 +295,10 @@ const TIDORD = `(${talIRegex(1, 7)})`;
 const TIDFORE = String.raw`(?<![\p{L}\d])`;
 const TIDEFTER = String.raw`(?![\p{L}\d])`;
 const MINUTER = new RegExp(String.raw`${TIDFORE}(\d+)(?:\s*(?:[–—−-]|till)\s*(\d+))?\s*(?:minuter|min)${TIDEFTER}`, 'u');
-// Hur ofta: talet närmast före pass, gånger, dagar, samtal eller träffar i veckan, och med ett spann det lägsta ("tre till
-// fem pass i veckan" är tre). Ett tal i ett annat led, som minuterna eller veckorna, räknas inte.
-const GANGER = new RegExp(String.raw`${TIDFORE}${TIDORD}(?:\s+(?:till|eller)\s+${TIDORD})?\s+(?:pass|gånger|gång|ggr|dagar|dag|samtal|träffar|träff)\s*(?:i|per|\/)\s*veckan?${TIDEFTER}`, 'gu');
+// Hur ofta: talet närmast före pass, lektioner, gånger, dagar, samtal eller träffar i veckan, och med ett spann det lägsta
+// ("tre till fem pass i veckan" är tre). Ett tal i ett annat led, som minuterna eller veckorna, räknas inte. Lektioner är
+// undervisningsmetodernas pass (riggens standard för undervisningsmetoder, avsnitt 18).
+const GANGER = new RegExp(String.raw`${TIDFORE}${TIDORD}(?:\s+(?:till|eller)\s+${TIDORD})?\s+(?:pass|lektioner|lektion|gånger|gång|ggr|dagar|dag|samtal|träffar|träff)\s*(?:i|per|\/)\s*veckan?${TIDEFTER}`, 'gu');
 
 /**
  * Passets längd och hur ofta, ur faktarutans tid ("30 minuter per pass, tre till fem pass i veckan"): det kortaste och
@@ -371,16 +372,24 @@ export function gruppensElever(grupp) {
   return s ? { min: s.min, ...(s.max !== undefined ? { max: s.max } : {}), klass } : null;
 }
 
-/** Hur ofta, som ett spann: det minsta och största antalet pass i veckan. @param {string} tid @returns {{ min: number, max: number } | null} */
+/**
+ * Hur ofta, som ett spann: det minsta och största antalet pass i veckan. Ett lägsta tal och inget annat, som
+ * undervisningsmetodernas "minst tre lektioner i veckan", är `minst` (riggens standard för undervisningsmetoder, avsnitt
+ * 7: Hur ofta är ett lägsta tal och aldrig ett spann).
+ * @param {string} tid @returns {{ min: number, max: number, minst?: true } | null}
+ */
 export function tidensVeckotakt(tid) {
   const t = String(tid ?? '').toLowerCase();
   const lag = [], hog = [];
   if (/varje (?:dag|vardag|skoldag)|dagligen/.test(t)) { lag.push(5); hog.push(5); }
   if (/varannan dag/.test(t)) { lag.push(2); hog.push(3); }
-  for (const m of t.matchAll(GANGER)) { lag.push(talAv(m[1])); hog.push(talAv(m[2] ?? m[1])); }
+  const traffar = [...t.matchAll(GANGER)];
+  for (const m of traffar) { lag.push(talAv(m[1])); hog.push(talAv(m[2] ?? m[1])); }
   const extra = t.match(/och (?:ett|en) (andra|tredje|fjärde|femte) när det går/);
   if (extra) hog.push(ORDNINGSTAL.indexOf(extra[1]));
-  return lag.length ? { min: Math.min(...lag), max: Math.max(...hog) } : null;
+  if (!lag.length) return null;
+  const minst = lag.length === 1 && traffar.length === 1 && !traffar[0][2] && /minst\s+$/.test(t.slice(0, traffar[0].index));
+  return { min: Math.min(...lag), max: Math.max(...hog), ...(minst ? { minst: true } : {}) };
 }
 
 /** Perioden i veckor, eller i pass för en lektion i en serie, och om den kan bli längre. @param {string} period @returns {{ min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean } | null} */
@@ -394,17 +403,20 @@ export function periodensLangd(period) {
 /**
  * Metodkortets fakta i fast form, ur faktarutans fält: grupp ("2–6 elever", "4 elever–klass"), pass ("30 min", "20 min +
  * 20 hemma"), hur ofta ("3–5 pass/vecka") och period ("6–8 veckor", "12+ veckor", "6 veckor per kurs"). Ett fält som inte
- * går att läsa är null.
+ * går att läsa är null. Samlingens ord för passet står i `ord`: undervisningsmetoderna har lektioner, och ett lägsta tal
+ * står med minst ("minst 3 lektioner/vecka"). Utan ord för passen (tom text) står bara talet, "minst 3/vecka", när rubriken säger vad som räknas.
  * @param {{ grupp?: string, tid?: string, period?: string }} d
+ * @param {{ passen?: string }} [ord]
  */
-export function faktaIFastForm(d) {
+export function faktaIFastForm(d, ord = {}) {
   const g = gruppensElever(d.grupp);
   const grupp = g ? (g.klass && g.max === undefined ? `${g.min} elever–klass` : `${spann(g.min, g.max)} elever`) : null;
   const m = tidensMatt(d.tid ?? '');
   const hemma = String(d.tid ?? '').match(/och (\d+) hemma/);
   const pass = m.minst !== undefined ? `${spann(m.minst, m.minuter)} min${hemma ? ` + ${hemma[1]} hemma` : ''}` : null;
   const v = tidensVeckotakt(d.tid);
-  const ofta = v ? `${spann(v.min, v.max)} pass/vecka` : null;
+  const passord = ord.passen === '' ? '' : ` ${ord.passen ?? 'pass'}`;
+  const ofta = v ? `${v.minst ? 'minst ' : ''}${spann(v.min, v.max)}${passord}/vecka` : null;
   const p = periodensLangd(d.period);
   const enhet = p && p.enhet === 'veckor' && p.min === 1 && p.max === undefined ? 'vecka' : p?.enhet;
   const period = p ? `${p.hogst ? 'högst ' : ''}${spann(p.min, p.max)}${p.mer ? '+' : ''} ${enhet}${p.perKurs ? ' per kurs' : ''}` : null;
@@ -456,3 +468,5 @@ export * from './saker.js';
 // Små textverktyg och talen, en rot för varje (sajtens K-509): stor bokstav, mening, HTML-skyddet, namnets första led och
 // talen i ord.
 export * from './text.js';
+// Undervisningsmetoderna (sajtens K-621): delarna i lärarens väg som data, och utfallens gränser för en klass.
+export * from './undervisningsmetod.js';

@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, UNDERVISNINGSMETODENS_DELAR, delarnasText, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -134,6 +134,19 @@ const faktaFall = [
   [{ grupp: 'Två till åtta elever, eller en hel klass', tid: '10–15 minuter per pass, varje dag eller minst tre gånger i veckan', period: 'Åtta till tolv pass i följd' }, '2–8 elever|10–15 min|3–5 pass/vecka|8–12 pass'],
 ];
 for (const [d, vantat] of faktaFall) { const f = Object.values(faktaIFastForm(d)).join('|'); if (f !== vantat) fel.push(`faktaIFastForm(${JSON.stringify(d)}) ger ${f}, inte ${vantat}`); }
+// Undervisningsmetodernas tid: lektioner, och ett lägsta tal med minst (riggens standard, avsnitt 7 och 18).
+const lektionsfall = [
+  [{ tid: '40 minuter per lektion, minst tre lektioner i veckan', period: 'Fyra veckor att komma igång' }, '|40 min|minst 3 lektioner/vecka|4 veckor'],
+  [{ tid: '50 minuter per lektion, tre till fem lektioner i veckan', period: 'Sex veckor att komma igång' }, '|50 min|3–5 lektioner/vecka|6 veckor'],
+];
+if (faktaIFastForm({ tid: '40 minuter per lektion, minst tre lektioner i veckan' }, { passen: '' }).ofta !== 'minst 3/vecka') fel.push('faktaIFastForm utan ord för passen ger inte "minst 3/vecka"');
+for (const [d, vantat] of lektionsfall) { const f = Object.values(faktaIFastForm(d, { passen: 'lektioner' })).map((x) => x ?? '').join('|'); if (f !== vantat) fel.push(`faktaIFastForm(${JSON.stringify(d)}, lektioner) ger ${f}, inte ${vantat}`); }
+
+// Undervisningsmetoderna (K-621): utfallens gränser som riggens standard räknar dem, och delarnas ordning och text.
+for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13'], [5, '1|2-2|3']]) { const g = utfallensGranser(n); const f = `${g.nastanAlla}|${g.deFlesta.join('-')}|${g.halften}`; if (f !== vantat) fel.push(`utfallensGranser(${n}) ger ${f}, inte ${vantat}`); }
+if (UNDERVISNINGSMETODENS_DELAR.map((x) => x.nr).join('') !== '1234AB') fel.push('UNDERVISNINGSMETODENS_DELAR har inte delarna 1, 2, 3, 4, A och B i ordning');
+{ const t = delarnasText(UNDERVISNINGSMETODENS_DELAR[1], { minuter: 40, amne: 'matematik', andra: 4 }); if (t.rad !== 'En lektion på 40 minuter, del för del.' || !t.text.includes('i matematik och i fyra andra ämnen')) fel.push(`delarnasText fyller inte i minuterna, ämnet och exemplen: ${t.rad} / ${t.text}`); }
+{ const t = delarnasText(UNDERVISNINGSMETODENS_DELAR[2], { veckor: 4, progression: 'Metodens egen text.' }); if (!t.rad.includes('de första fyra veckorna') || t.text !== 'Metodens egen text.') fel.push(`delarnasText fyller inte i del 3: ${t.rad} / ${t.text}`); }
 
 // Bildtexten (K-486): meningarna, med citat och förkortningar, och felen.
 const meningsfall = [['Ett A4 per elev, att klippa isär. Eleverna lägger talet med korten i vecka 2.', 2], ['Läs ”Hej!” högt. Sedan t.ex. ”Vad tror du?” Klart.', 3],

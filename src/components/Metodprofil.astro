@@ -9,9 +9,12 @@
 // kortet i banken: huvudet med titeln och områdena, faktan, och raderna Lärande totalt, Svårighet och Kostnad.
 import Staplar from './Staplar.astro';
 import { OMRADEN, laget, motiveringensDelar, primaraOmraden, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAORD, type Laget, type Utkast } from '../lib/metodprofil';
-import { uppraknat } from '../lib/standard/index.js';
-interface Props { m: Utkast; bank?: boolean }
-const { m, bank = false } = Astro.props;
+import { esc, uppraknat } from '../lib/standard/index.js';
+import { medKallor } from '../lib/undervisningsmetod';
+interface Props { m: Utkast; bank?: boolean; kallor?: Set<string> }
+const { m, bank = false, kallor } = Astro.props;
+// På metodens sida leder hänvisningarna i motiveringen till sin post i referensbladet (granskningen 2026-10-30).
+const skal = (t: string) => (kallor ? medKallor(t, kallor) : esc(t));
 const total = laget(m.evidens.larande);
 const prim = primaraOmraden(m.evidens);
 const kallas = `Kallas också ${uppraknat(m.alternativaNamn)}`;
@@ -24,30 +27,35 @@ const infor = [
 const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
 ---
 {bank ? (
-  <article class="kort metodkort mp-bank" data-del="metoder" data-omrade={prim[0]}>
+  <article class="kort metodkort mp-bank" data-del="metoder">
     <div class="kort-topp">
       <h3><a href={`/metoder/${m.id}`}>{m.titel}</a></h3>
-      {prim.map((o) => <span class="amne" data-amne={o}>{o}</span>)}
       <p class="mp-kallas-bank">{kallas}</p>
     </div>
     <dl class="kort-fakta">
       {m.fakta.map(([rubrik, text]) => <div><dt>{rubrik}</dt><dd>{text}</dd></div>)}
     </dl>
     <div class="mp-bank-rader">
-      <p class="mp-bank-rad mp-total">
-        <span class="mp-namn">Lärande totalt</span>
-        {total.slag === 'niva'
-          ? <><Staplar niva={fylld(total)} /><span class={`mp-varde${total.negativ ? ' mp-negativ' : ''}`}>{total.ord}<span class="visually-hidden">, {total.niva} av 5</span></span></>
-          : <span class="mp-inte">{total.ord}</span>}
-      </p>
-      {infor.map((x) => <p class="mp-bank-rad"><span class="mp-namn">{x.kort}</span><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></p>)}
+      <div class="mp-bank-total">
+        <p class="mp-bank-en">
+          <span class="mp-namn">Lärande totalt</span>
+          {total.slag === 'niva'
+            ? <span class="mp-stapelrad"><Staplar niva={fylld(total)} /><span class={`mp-varde${total.negativ ? ' mp-negativ' : ''}`}>{total.ord}<span class="visually-hidden">, {total.niva} av 5</span></span></span>
+            : <span class="mp-inte">{total.ord}</span>}
+        </p>
+        {m.larandeKort && <p class="mp-kommentar">{m.larandeKort}</p>}
+        {prim.length > 0 && <p class="mp-bank-primar"><span>Primär evidens</span><span class="mp-omraden">{prim.map((o) => <span class="amne" data-amne={o}>{o}</span>)}</span></p>}
+      </div>
+      <div class="mp-bank-par">
+        {infor.map((x) => <p class="mp-bank-halv"><span class="mp-namn">{x.kort}</span><span class="mp-stapelrad"><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></span></p>)}
+      </div>
     </div>
     <p class="ingress">{m.ingress}</p>
-    <p class="mp-platshallare"><span class="beta">Platshållare</span> Värdena är inget omdöme om metoden.</p>
+    {m.platshallare && <p class="mp-platshallare"><span class="beta">Platshållare</span> Värdena är inget omdöme om metoden.</p>}
   </article>
 ) : (
-  <div class="faktaruta metodprofil" id="metodkortet" data-omrade={prim[0]}>
-    <p class="faktaruta-etikett"><span>Metodkortet</span> <span class="beta">Platshållare</span></p>
+  <div class="faktaruta metodprofil" id="metodkortet">
+    <p class="faktaruta-etikett"><span>Metodkortet</span> {m.platshallare && <span class="beta">Platshållare</span>}</p>
     <dl class="kort-fakta">
       {m.fakta.map(([rubrik, text]) => <div><dt>{rubrik}</dt><dd>{text}</dd></div>)}
     </dl>
@@ -65,7 +73,7 @@ const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
                 ? <><Staplar niva={fylld(l)} /><span class={`mp-varde${l.negativ ? ' mp-negativ' : ''}`}>{l.ord}<span class="visually-hidden">, {l.niva} av 5</span></span></>
                 : <span class="mp-inte">{l.ord}</span>}
             </summary>
-            <p class="mp-skal">{forst && <strong>{forst}</strong>} {resten}</p>
+            <p class="mp-skal">{forst && <strong>{forst}</strong>} <span set:html={skal(resten)} /></p>
           </details>
           {radenTotal && (
             <p class="mp-primar">

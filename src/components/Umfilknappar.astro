@@ -1,0 +1,27 @@
+---
+// Knapparna till en undervisningsmetods filer (K-621), direkt under det de skriver ut (Niclas 2026-10-20: "Ha den så nära
+// bladet du ska skriva ut som möjligt"): pdf:en öppnas för att skrivas ut, och Word-filen laddas ner. Bara filer som finns
+// får en knapp (src/lib/undervisningsmetodfiler.ts). Knapparna har filens namn och metodens id i statistiken.
+import type { UmFil, UmSlag } from '../lib/undervisningsmetodfiler';
+interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; stor?: boolean }
+const { id, filer, slag, stor = false } = Astro.props;
+const valda = slag.map((s) => filer[s]).filter((f): f is UmFil => !!f);
+---
+{valda.length > 1 ? (
+  <ul class="um-filrader">
+    {valda.map((f) => (
+      <li>
+        <span class="um-filnamn">{f.namn}</span>
+        <span class="um-filval">
+          {f.pdf && <a class="knapp" href={f.pdf} data-goatcounter-click={`fil:${f.pdf.split('/').pop()}`} data-goatcounter-title={`${f.namn}, pdf, ${id}`}>Pdf<span class="visually-hidden">: {f.namn}</span></a>}
+          {f.docx && <a class="knapp sekundar" href={f.docx} download data-goatcounter-click={`fil:${f.docx.split('/').pop()}`} data-goatcounter-title={`${f.namn}, Word, ${id}`}>Word<span class="visually-hidden">: {f.namn}</span></a>}
+        </span>
+      </li>
+    ))}
+  </ul>
+) : valda.length === 1 && (
+  <p class={`um-filknappar${stor ? ' stor' : ''}`}>
+    {valda[0].pdf && <a class="knapp" href={valda[0].pdf} data-goatcounter-click={`fil:${valda[0].pdf.split('/').pop()}`} data-goatcounter-title={`${valda[0].namn}, pdf, ${id}`}>Skriv ut {valda[0].namn.charAt(0).toLocaleLowerCase('sv') + valda[0].namn.slice(1)}</a>}
+    {valda[0].docx && <a class="knapp sekundar" href={valda[0].docx} download data-goatcounter-click={`fil:${valda[0].docx.split('/').pop()}`} data-goatcounter-title={`${valda[0].namn}, Word, ${id}`}>Word<span class="visually-hidden">: {valda[0].namn}</span></a>}
+  </p>
+)}

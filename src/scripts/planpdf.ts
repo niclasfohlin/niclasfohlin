@@ -29,11 +29,15 @@ export interface PdfInfo {
   insatsen?: { etikett?: string; text: string }[];
 }
 
-async function dokument(titel: string) {
+/**
+ * Ett nytt dokument med sidans byggstenar: texten, rubriken, staplarna, linjen, tabellen, matrisen och sidfoten. Lär dig
+ * metoden gör sin sammanställning med samma byggstenar (src/scripts/lardigpdf.ts, K-628), med sitt eget upphov.
+ */
+export async function dokument(titel: string, upphov = 'Planera insatsen, niclasfohlin.se') {
   const { PDFDocument, StandardFonts, rgb } = await import('pdf-lib');
   const doc = await PDFDocument.create();
   doc.setTitle(ren(titel));
-  doc.setAuthor('Planera insatsen, niclasfohlin.se');
+  doc.setAuthor(upphov);
   doc.setLanguage('sv-SE');
   const font = await doc.embedFont(StandardFonts.Helvetica);
   const fet = await doc.embedFont(StandardFonts.HelveticaBold);
@@ -237,7 +241,7 @@ const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
 // pdf har inte gruppens namn, som läraren har skrivit och som kan bära andra elevers namn, eftersom den kan gå till hemmet
 // och nästa lärare (Opus idérunda 2026-10-28). Perioden, passens läge, riktningen och besluten står med standardens ord, som
 // på sidan och i texterna (K-509).
-type Pdf = Awaited<ReturnType<typeof dokument>>;
+export type Pdf = Awaited<ReturnType<typeof dokument>>;
 const huvud = (p: Pdf, rubrik: string, plan: Plan, info: PdfInfo, idag: string, gruppens: boolean) => {
   p.text(rubrik, { storlek: 20, fet: true, luft: 2 });
   p.text([info.metod, gruppens ? info.grupp : '', info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });

@@ -1111,4 +1111,43 @@ const faktateman = defineCollection({
   }),
 });
 
-export const collections = { artiklar, bocker, stodundervisning, matteproblem, faktateman };
+// Undervisningsmetoder, Metoder för läsaren (K-621): metoder för hela klassen, skrivna av metodriggen efter dess standard
+// (C:/metodrigg/docs/undervisningsmetoder/standarden.md), en fil per metod. Piloten skrivs om medan riggens mall följer
+// efter, så schemat prövar i dag det sajten redan läser, huvudet, faktan, metodkortet och källorna, och släpper igenom
+// resten. Det blir strikt som Stödundervisnings när mallen och piloten har samma fält (K-627).
+const omradetsVarde = z.union([
+  z.strictObject({ tillforlitlighet: z.enum(['hog', 'mattlig', 'lag']), effekt: z.enum(['negativ', 'ingen', 'liten', 'mattlig', 'stor']), motivering: text.max(250), kallor: z.array(z.string()).min(1), kort: text.max(90).optional() }),
+  z.strictObject({ niva: z.enum(['inte-studerat', 'inte-sammanvagt']), motivering: text.max(250) }),
+]);
+const undervisningsmetoder = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/undervisningsmetoder' }),
+  schema: z.looseObject({
+    titel: text,
+    undertitel: text.optional(),
+    alternativaNamn: z.array(text.max(60)).max(4).default([]),
+    ingress: text.min(40).max(320),
+    arskurs: z.array(z.enum(['F-3', '4-6', '7-9'])).min(1),
+    arskursText: text.optional(),
+    taggar: z.array(text).min(2).max(5),
+    slag: z.enum(['lektionsforlopp', 'strukturer', 'strategier']),
+    tid: text,
+    hurOftaSkal: text.max(200).optional(),
+    period: text,
+    material: z.array(text).max(6),
+    uppdaterad: z.coerce.date(),
+    publicerad: z.coerce.date(),
+    utkast: z.boolean().default(false),
+    profil: z.looseObject({
+      evidens: z.strictObject({ larande: omradetsVarde, lasning: omradetsVarde, skrivning: omradetsVarde, matematik: omradetsVarde, amnen: omradetsVarde, socialt: omradetsVarde }),
+      svarighet: z.strictObject({ lara: z.number().int().min(1).max(5), karnan: z.number().int().min(1).max(5), stod: z.number().int().min(1).max(5), tid: z.number().int().min(1).max(5), motivering: text }),
+      kostnad: z.strictObject({ kop: z.number().int().min(1).max(5), timmar: z.number().min(0), motivering: text }),
+    }),
+    kallor: z.array(z.looseObject({ id: z.string().regex(/^[a-z0-9-]+$/), grupp: z.enum(['oversikt', 'experiment', 'annan']), titel: text, text, adress: z.url().optional() })).min(1),
+  }).superRefine((d, ctx) => {
+    // Varje källa som metodkortet nämner står i källorna, så att kortets rad kan länka till sin post.
+    const ids = new Set(d.kallor.map((k) => k.id));
+    for (const [omrade, v] of Object.entries(d.profil.evidens)) for (const k of 'kallor' in v ? v.kallor : []) if (!ids.has(k)) ctx.addIssue({ code: 'custom', path: ['profil', 'evidens', omrade, 'kallor'], message: `Källan ${k} står inte i kallor.` });
+  }),
+});
+
+export const collections = { artiklar, bocker, stodundervisning, matteproblem, faktateman, undervisningsmetoder };

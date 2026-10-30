@@ -503,8 +503,9 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .samla { display: none; }
 
 /* Metoder, undervisningsmetoderna för helklass (K-623, ett utkast för formen; idéförslagen i underlag/prov/metoder/ide/).
-   Kortet tar det första primära områdets färg, som korten i Stödundervisning, och står i sajtens bläck utan primärt område
-   (Niclas 2026-10-29: "ska det inte vara sajtens kort för Matematik"). Metodkortet är Raderna: en rad per område med
+   Kortet står alltid i sajtens bläck, så att en metod för alla ämnen inte ser ut att höra till ett (Niclas 2026-10-30:
+   "problemet med att den blir blå med matematik är att man tror att det är en matte metod"); det primära området står
+   som en rad med etikett och ämnets märke. Metodkortet är Raderna: en rad per område med
    namnet överst och fem staplar och nivåns ord under, så att ordet alltid ryms efter staplarna (Niclas samma dag: "Kan du
    göra så att ordet alltid får plats efter staplarna"), och raden fälls ut till motiveringen. Staplarna är kanter och inte
    bakgrund, så att de syns i en utskrift utan bakgrundsgrafik, och nivån står alltid i ord, så att kortet läses i gråskala.
@@ -569,6 +570,262 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .mp-bank-rad:first-child { border-top: 0; padding-top: 0; }
 .mp-bank-rad .mp-namn, .mp-bank-rad .mp-inte { grid-column: 1 / -1; }
 .mp-platshallare { margin: 0.5rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
+/* Undervisningsmetodens sida (K-621; Undervisningsmetod.astro, idéförslagens form 2, Läsvägen öppen). Formspråket C:
+   varje del börjar med ett band i bläck med numret och namnet, kärnans fyra kort och lektionens delar står i ramar med
+   tonade rutor, och utfallen har var sin färg, grön, gul och grå, med ordet först så att de läses i gråskala. Det som slås
+   upp står som rader som fälls ut. Delraden följer med överst och visar delen läraren är i. */
+.metod-topp > .um-sidospalt { grid-area: fakta; display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.metod-topp > .um-sidospalt .faktaruta { margin: 0; }
+.metod-topp > .um-under-toppen { grid-area: ladda; min-width: 0; max-width: 46rem; }
+.um-toppknappar { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.1rem 0 0; }
+.um-fakta dl { grid-template-columns: minmax(0, 1fr); }
+.um-fakta dt.bred { padding-bottom: 0; color: var(--farg-text-svag); font-weight: 600; font-size: 0.85rem; }
+.um-fakta dd.bred { border-top: 0; padding-top: 0.1rem; }
+.um-film .film { margin-top: 0; }
+.um-lasvag { margin: 1.25rem 0 0; padding: 1rem 1.15rem; background: var(--farg-yta); border: 1.5px solid var(--farg-accent); border-radius: var(--radie); font-family: var(--typsnitt-ui); }
+.um-lasvag-rubrik, .um-ruta-rubrik, .um-fragor-rubrik { margin: 0 0 0.35rem; font: 700 1rem/1.3 var(--typsnitt-ui); color: var(--farg-text); }
+.um-lasvag p { margin: 0 0 0.6rem; font-size: 0.95rem; }
+.um-lasvag ol { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+.um-lasvag a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.3rem 0.85rem; border-radius: 999px; background: var(--farg-accent-ljus); color: var(--farg-accent-mork); font-weight: 600; font-size: 0.92rem; text-decoration: none; }
+.um-lasvag a:hover { background: var(--farg-accent); color: #fff; }
+.um-nedladdning { margin: 1.25rem 0 0; font-family: var(--typsnitt-ui); }
+.um-filknappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; font-family: var(--typsnitt-ui); }
+.um-filknappar .knapp { min-height: 3rem; }
+.um-filrader { list-style: none; margin: 0.5rem 0 0; padding: 0; font-family: var(--typsnitt-ui); }
+.um-filrader li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.75rem; padding: 0.45rem 0; border-top: 1px solid var(--farg-kant); }
+.um-filnamn { font-weight: 600; }
+.um-filval { display: flex; gap: 0.4rem; }
+.um-filval .knapp { min-height: 2.75rem; padding-inline: 1rem; }
+/* Delraden: delarnas nummer i en rad som följer med, och namnet på delen läraren är i. */
+.um-delrad { position: sticky; top: 0; z-index: 6; margin: 0 0 1.5rem; padding: 0.4rem 0; background: var(--farg-bakgrund, #fff); box-shadow: 0 0 0 100vmax var(--farg-bakgrund, #fff); clip-path: inset(0 -100vmax); border-bottom: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); }
+.um-delrad ol { display: flex; gap: 0.3rem; margin: 0; padding: 0; list-style: none; }
+.um-delrad li { flex: 1 1 0; min-width: 0; }
+.um-delrad a { display: flex; align-items: center; justify-content: center; gap: 0.4rem; min-height: 2.75rem; padding: 0 0.25rem; border-radius: 6px; color: var(--farg-text); text-decoration: none; font-weight: 700; }
+.um-delrad a:hover { background: var(--farg-ton); }
+.um-delrad a[aria-current] { background: var(--farg-mork); color: #fff; }
+.um-delrad-namn { font-weight: 600; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 47.99rem) {
+  .um-delrad li:has(a[aria-current]) { flex: 3.2 1 0; }
+  .um-delrad a:not([aria-current]) .um-delrad-namn { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+@media (min-width: 48rem) { .um-delrad-namn { display: inline; } .um-delrad li { flex: 1 1 auto; } }
+/* Delens band: numret stort i bläck, namnet och raden under i vitt. */
+.um-del { margin: 0 0 2.5rem; scroll-margin-top: 3.5rem; font-size: 1.0625rem; }
+/* Raderna hålls läsbara på dator: delarna står i textens bredd, som metodsidan i Stödundervisning. */
+.um-sidan > .um-del, .um-sidan > .um-delrad > ol { max-width: 50rem; }
+.um-del :is(h3, h4, [id]) { scroll-margin-top: 4rem; }
+.um-band { display: flex; align-items: stretch; margin: 0 0 1.25rem; border-radius: var(--radie); overflow: hidden; background: var(--farg-mork); color: #fff; }
+.um-band-nr { flex: none; display: flex; align-items: center; justify-content: center; width: 3.5rem; font: 800 2rem/1 var(--typsnitt-ui); background: rgba(255, 255, 255, 0.08); }
+.um-band > div { padding: 0.75rem 1rem 0.8rem; }
+.um-band h2 { margin: 0; color: #fff; font-size: clamp(1.4rem, 5.5vw, 1.9rem); line-height: 1.15; letter-spacing: -0.01em; }
+.um-band p { margin: 0.2rem 0 0; color: var(--farg-mork-text); font-family: var(--typsnitt-ui); font-size: 0.95rem; line-height: 1.4; }
+.um-overgang { color: var(--farg-text); }
+/* Delarnas celler under bandet: avsnitten som länkar i vita celler med tunna linjer, två i bredd i telefonen och tre på dator. */
+.um-celler ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: -1.25rem 0 1.25rem; padding: 0; list-style: none; background: var(--farg-kant); border: 1px solid var(--farg-kant); border-top: 0; border-radius: 0 0 var(--radie) var(--radie); overflow: hidden; font-family: var(--typsnitt-ui); }
+@media (min-width: 48rem) { .um-celler ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.um-celler a { display: flex; align-items: center; height: 100%; min-height: 2.75rem; padding: 0.4rem 0.75rem; background: var(--farg-yta); font-weight: 700; font-size: 0.92rem; line-height: 1.25; text-decoration: none; color: var(--farg-text); }
+.um-celler a:hover { background: var(--farg-ton); color: var(--farg-accent); }
+.um-band:has(+ .um-celler) { border-radius: var(--radie) var(--radie) 0 0; }
+.um-avsnitt { margin: 2rem 0 0; }
+.um-avsnitt > h3, .um-del > h3 { font-size: 1.35rem; margin: 0 0 0.6rem; }
+.um-not { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.um-ruta { margin: 1.25rem 0; padding: 0.9rem 1.1rem; background: var(--farg-ton); border-radius: var(--radie); font-family: var(--typsnitt-ui); font-size: 0.97rem; }
+.um-ruta > :last-child { margin-bottom: 0; }
+.um-ruta-viktig { background: var(--farg-ton); border-left: 4px solid var(--farg-mork); }
+.um-ruta-viktig p { font-size: 1.02rem; }
+.um-kalla { color: inherit; text-decoration: underline dotted; text-underline-offset: 0.2em; }
+.um-replik { quotes: "”" "”"; font-style: italic; }
+/* Kärnans fyra kort, två och två i telefonen och fyra i bredd på dator. */
+.um-korten { margin: 1.25rem 0; }
+.um-kort-rad { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 48rem) { .um-kort-rad { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.um-kort { display: flex; flex-direction: column; padding: 0.8rem 0.85rem; border: 1px solid var(--farg-kant); border-top: 4px solid var(--farg-accent); border-radius: var(--radie); background: var(--farg-yta); font-family: var(--typsnitt-ui); }
+.um-kort-nr { display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--farg-accent); color: #fff; font: 700 0.9rem/1 var(--typsnitt-ui); flex: none; }
+.um-kort-namn { margin: 0.45rem 0 0.3rem; font-weight: 700; line-height: 1.25; }
+.um-kort-vad { margin: 0; font-size: 0.88rem; line-height: 1.45; }
+.um-kort-moment { margin: auto 0 0; padding-top: 0.45rem; font-size: 0.8rem; color: var(--farg-text-svag); font-style: italic; }
+.um-varv { margin: 0.6rem 0 0; font-family: var(--typsnitt-ui); font-style: italic; text-align: center; color: var(--farg-text-svag); }
+.um-fragor { margin: 1rem 0; padding: 0.9rem 1.1rem; border-left: 4px solid var(--farg-accent); background: var(--farg-accent-ljus); border-radius: 0 var(--radie) var(--radie) 0; font-family: var(--typsnitt-ui); }
+.um-fragor ol { margin: 0; padding-left: 1.3rem; }
+.um-fragor li { margin: 0.2rem 0; font-weight: 600; }
+/* Remsan: lektionens delar med minuterna, länkar till varje del. */
+.um-remsa ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 0 0 1.25rem; padding: 0; list-style: none; background: var(--farg-kant); border: 1px solid var(--farg-kant); border-radius: var(--radie); overflow: hidden; font-family: var(--typsnitt-ui); }
+@media (min-width: 48rem) { .um-remsa ol { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.um-remsa a { display: block; height: 100%; padding: 0.5rem 0.6rem; background: var(--farg-yta); text-decoration: none; }
+.um-remsa a:hover { background: var(--farg-accent-ljus); }
+.um-remsa-tid { display: block; font-size: 0.8rem; color: var(--farg-text-svag); }
+.um-remsa-namn { display: block; font-weight: 700; line-height: 1.25; }
+/* En del av lektionen i en ram: huvudet med tiden och arbetsformen, kärnan här, de tre rutorna och det du gör. */
+.um-lektionsdel { margin: 1rem 0; border: 1.5px solid var(--farg-accent); border-radius: var(--radie); overflow: hidden; background: var(--farg-yta); }
+.um-ld-huvud { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.2rem 1rem; padding: 0.6rem 1rem; background: var(--farg-accent-ljus); }
+.um-ld-huvud h4 { margin: 0; font-size: 1.2rem; color: var(--farg-accent-mork); }
+.um-ld-fakta { display: flex; flex-wrap: wrap; gap: 0 0.75rem; margin: 0; font-family: var(--typsnitt-ui); font-size: 0.88rem; font-weight: 600; color: var(--farg-accent-mork); }
+.um-ld-karna, .um-ld-vad, .um-lektionsdel > .um-gor, .um-lektionsdel > .um-beslutskarta { margin-inline: 1rem; }
+.um-ld-karna { margin-top: 0.6rem; margin-bottom: 0.2rem; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
+.um-ld-karna a { color: var(--farg-accent); }
+.um-ld-vad { margin-top: 0.5rem; }
+.um-tre { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; margin: 0.6rem 0 0; background: var(--farg-kant); border-block: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); }
+@media (min-width: 40rem) { .um-tre { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.um-tre div { padding: 0.55rem 1rem; background: var(--farg-ton); }
+.um-tre dt { font-size: 0.82rem; font-weight: 700; color: var(--farg-text-svag); }
+.um-tre dd { margin: 0.1rem 0 0; font-size: 0.93rem; line-height: 1.45; }
+.um-gor { margin-top: 0.75rem; margin-bottom: 0.9rem; padding-left: 1.4rem; }
+.um-gor li { margin: 0.35rem 0; }
+.um-gor .um-replik, .um-trappa .um-replik { display: block; margin: 0.2rem 0 0; padding-left: 0.7rem; border-left: 3px solid var(--farg-mork); font-weight: 600; }
+/* Beslutskartan: tre utfall i grönt, gult och grått, ordet först. */
+.um-beslutskarta { margin-bottom: 1rem; }
+.um-beslutskarta-rubrik { margin: 0 0 0.4rem; font: 700 0.9rem/1.3 var(--typsnitt-ui); }
+.um-utfall { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.5rem; font-family: var(--typsnitt-ui); }
+@media (min-width: 40rem) { .um-utfall { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.um-utfall-ruta { padding: 0.6rem 0.8rem; border-radius: 8px; border-left: 5px solid; font-size: 0.92rem; line-height: 1.45; }
+.um-utfall-ruta p { margin: 0; }
+.um-utfall-namn { font-weight: 800; }
+.um-utfall-nastanAlla { background: var(--farg-lasning-ljus); border-color: var(--farg-lasning); }
+.um-utfall-deFlesta { background: #fdf6e3; border-color: #c99700; }
+.um-utfall-halften { background: #eef0f3; border-color: #6f7c8a; }
+.um-fore-efter { margin: 1rem 0; padding: 0.6rem 1rem; background: var(--farg-ton); border-radius: var(--radie); font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.um-trappa { padding-left: 1.4rem; }
+.um-motto { font-weight: 600; }
+/* Rader som fälls ut, som sajtens andra rader. */
+.um-rad { border-top: 1px solid var(--farg-kant); }
+.um-rad:last-of-type { border-bottom: 1px solid var(--farg-kant); }
+.um-rad > summary { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 3rem; padding: 0.55rem 0; cursor: pointer; list-style: none; font-family: var(--typsnitt-ui); font-weight: 600; }
+.um-rad > summary::-webkit-details-marker { display: none; }
+.um-rad > summary::after { content: ''; flex: none; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--farg-text-svag); border-bottom: 2px solid var(--farg-text-svag); transform: translateY(-0.15rem) rotate(45deg); }
+.um-rad[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.um-rad > summary > span { display: flex; align-items: center; gap: 0.5rem; }
+.um-rad-inne { padding: 0 0 1rem; }
+.um-rad-inne > :first-child { margin-top: 0; }
+/* Exemplen: huvudexemplet öppet i en ram, de andra som rader. */
+.um-huvudexempel { margin: 1rem 0 1.5rem; padding: 1rem 1.1rem; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-yta); }
+.um-ex-huvud h4 { margin: 0; font-size: 1.15rem; }
+.um-ex-huvud p { margin: 0.1rem 0 0.75rem; color: var(--farg-text-svag); font-family: var(--typsnitt-ui); }
+.um-ex-overst { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; margin: 0 0 1rem; background: var(--farg-kant); border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; font-family: var(--typsnitt-ui); font-size: 0.92rem; }
+@media (min-width: 40rem) { .um-ex-overst { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.um-ex-overst div { padding: 0.5rem 0.75rem; background: var(--farg-ton); }
+.um-ex-overst dt { font-size: 0.82rem; font-weight: 700; color: var(--farg-text-svag); }
+.um-ex-overst dd { margin: 0.1rem 0 0; }
+.um-ex-remsa { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0 0 1rem; padding: 0; list-style: none; font-family: var(--typsnitt-ui); font-size: 0.88rem; }
+@media (min-width: 48rem) { .um-ex-remsa { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.um-ex-remsa li { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.6rem; border: 1px solid var(--farg-kant); border-top: 3px solid var(--farg-accent); border-radius: 8px; }
+.um-notera { padding: 0.75rem 0.9rem; background: var(--farg-ton); border-left: 4px solid var(--farg-mork); border-radius: 0 8px 8px 0; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.um-tabell { font-size: 0.93rem; }
+/* Planeringsbladet ifyllt: mallens tre zoner i rutor, med etiketterna i grått och det läraren skrev i fet stil. */
+.um-blad { margin: 1rem 0; padding: 0.9rem; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-yta); font-family: var(--typsnitt-ui); font-size: 0.9rem; line-height: 1.4; }
+.um-blad-gra .um-blad-text, .um-blad-gra dd { color: #59636e; }
+.um-blad dl { margin: 0; }
+.um-blad dt { font-size: 0.8rem; font-weight: 600; color: var(--farg-text-svag); }
+.um-blad dd { margin: 0.05rem 0 0; font-weight: 600; }
+.um-blad-huvud { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 0.75rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--farg-kant); }
+.um-blad-huvud .bred { grid-column: 1 / -1; }
+@media (min-width: 40rem) { .um-blad-huvud { grid-template-columns: repeat(4, minmax(0, 1fr)); } .um-blad-huvud .bred { grid-column: span 2; } }
+.um-blad-zon { margin: 0.9rem 0 0.4rem; padding: 0.25rem 0.6rem; background: var(--farg-accent); color: #fff; border-radius: 4px; font-weight: 700; font-size: 0.85rem; }
+.um-blad-fore { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+@media (min-width: 40rem) { .um-blad-fore { grid-template-columns: 1.3fr 1fr 1fr; } }
+.um-blad-ruta { padding: 0.5rem 0.6rem; background: var(--farg-ton); border-radius: 6px; }
+.um-blad-etikett { margin: 0 0 0.25rem; font-weight: 700; }
+.um-blad-ruta ol { margin: 0; padding-left: 1.2rem; font-weight: 600; }
+.um-blad-rader div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 0.4rem; padding: 0.1rem 0; }
+.um-blad-rader dt { font-size: 0.8rem; }
+.um-blad-fot { margin: 0.35rem 0 0; font-weight: 600; }
+.um-blad-fot span { font-weight: 400; color: var(--farg-text-svag); }
+.um-blad-lektion { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.um-blad dd, .um-blad-text, .um-blad-ruta li { overflow-wrap: anywhere; }
+.um-blad-lektion th, .um-blad-lektion td { padding: 0.45rem 0.4rem; border-top: 1px solid var(--farg-kant); vertical-align: top; text-align: left; }
+.um-blad-lektion th { width: 6.5rem; background: var(--farg-ton); }
+.um-blad-fas { display: block; font-weight: 700; color: var(--farg-accent-mork); }
+.um-blad-tid { display: block; font-size: 0.75rem; font-weight: 400; color: var(--farg-text-svag); }
+.um-blad-skriv { display: block; font-size: 0.78rem; color: var(--farg-text-svag); }
+.um-blad-text { display: block; font-weight: 600; }
+.um-blad-beslut td { padding-inline: 0 0.4rem; }
+.um-utfall-litet { gap: 0.35rem; grid-template-columns: minmax(0, 1fr) !important; }
+.um-utfall-litet .um-utfall-ruta { padding: 0.4rem 0.55rem; font-size: 0.85rem; }
+.um-utfall-grans { font-size: 0.78rem; color: var(--farg-text-svag); }
+.um-blad-efter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 0.75rem; }
+.um-blad-efter .bred { grid-column: 1 / -1; }
+.um-blad-kryss dd { display: flex; flex-direction: column; gap: 0.15rem; font-weight: 400; }
+.um-blad-kryss .pa { font-weight: 600; }
+.um-blad-lagg { margin: 0.75rem 0 0; font-style: italic; color: var(--farg-text-svag); }
+.um-arbetsomrade { font-family: var(--typsnitt-ui); }
+.um-checklista { list-style: none; padding: 0; font-family: var(--typsnitt-ui); }
+.um-checklista li { position: relative; padding: 0.4rem 0 0.4rem 2rem; border-top: 1px solid var(--farg-kant-svag); }
+.um-checklista li::before { content: ''; position: absolute; left: 0.2rem; top: 0.55rem; width: 1rem; height: 1rem; border: 1.5px solid var(--farg-accent); border-radius: 3px; }
+.um-uppf div, .um-larandet div, .um-vecka-fakta div, .um-fast-fritt div { padding: 0.45rem 0; border-top: 1px solid var(--farg-kant-svag); }
+.um-uppf dt, .um-larandet dt, .um-vecka-fakta dt, .um-fast-fritt dt { font-family: var(--typsnitt-ui); font-weight: 700; font-size: 0.9rem; }
+.um-uppf dd, .um-larandet dd, .um-vecka-fakta dd, .um-fast-fritt dd { margin: 0.1rem 0 0; }
+/* Veckorna i kort, med rutinen som hör till veckan. */
+.um-vecka { margin: 1rem 0; padding: 0.9rem 1rem; border: 1px solid var(--farg-kant); border-left: 4px solid var(--farg-mork); border-radius: var(--radie); background: var(--farg-yta); }
+.um-vecka h4 { margin: 0 0 0.35rem; font-size: 1.1rem; }
+.um-vecka-fakta { margin: 0; }
+.um-rutin-namn { margin: 0 0 0.25rem; font: 700 0.95rem/1.3 var(--typsnitt-ui); }
+.um-rutin ol { padding-left: 1.3rem; }
+.um-karnrad summary .um-kort-nr { font-size: 0.85rem; }
+.um-belagg { font-family: var(--typsnitt-ui); font-size: 0.85rem; font-weight: 600; color: var(--farg-lasning); }
+.um-hallfast li { margin: 0.5rem 0; }
+/* Bladen att skriva ut: sidorna som bilder, med knapparna direkt under. */
+.um-sidor { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0.75rem 0 0; }
+.um-sida { display: block; width: min(100%, 15rem); border: 1px solid var(--farg-kant); border-radius: 6px; overflow: hidden; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+.um-sida img { display: block; width: 100%; height: auto; }
+.um-sida-liggande { width: min(100%, 22rem); }
+.um-blad-post h4 { margin: 1.25rem 0 0.25rem; font-size: 1.05rem; }
+/* Referensbladet: grupperna i ramar med slutsatsen, och posterna med effekten stort till vänster. */
+.um-kallgrupp { margin: 1rem 0; border: 1px solid var(--farg-kant); border-radius: var(--radie); overflow: hidden; }
+.um-kallgrupp-namn { margin: 0; padding: 0.55rem 0.9rem; background: var(--farg-accent-ljus); font: 700 1rem/1.3 var(--typsnitt-ui); color: var(--farg-accent-mork); }
+.um-kallgrupp-namn span { font-weight: 400; font-size: 0.85rem; color: var(--farg-text-svag); }
+.um-slutsats { margin: 0; padding: 0.6rem 0.9rem; background: var(--farg-ton); font-family: var(--typsnitt-ui); font-size: 0.92rem; }
+.um-kallor { margin: 0; padding: 0; list-style: none; }
+.um-kallpost { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0.75rem; padding: 0.7rem 0.9rem; border-top: 1px solid var(--farg-kant-svag); font-family: var(--typsnitt-ui); font-size: 0.88rem; line-height: 1.45; }
+.um-kallpost p { margin: 0; }
+.um-kallpost:target { background: var(--farg-accent-ljus); }
+.um-kall-tal { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.um-kall-siffra { font: 800 1.35rem/1.1 var(--typsnitt-ui); color: var(--farg-accent-mork); }
+.um-kall-ord { font-size: 0.72rem; color: var(--farg-text-svag); line-height: 1.2; }
+.um-kall-rad { color: var(--farg-text-svag); }
+.um-markena { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.3rem !important; }
+.um-marke { padding: 0 0.4rem; border: 1px solid #8a96a3; border-radius: 3px; font-size: 0.75rem; }
+.um-lasmer { list-style: none; padding: 0; margin: 0 0 1rem; }
+.um-lasmer li { padding: 0.6rem 0; border-top: 1px solid var(--farg-kant-svag); }
+.um-lasmer li a { font-family: var(--typsnitt-ui); font-weight: 700; }
+.um-lasmer li p { margin: 0.15rem 0 0; }
+/* Bilaga B och andra stora avsnitt som slås upp: rubriken är raden. */
+.um-rad-stor > summary { min-height: 3.5rem; }
+.um-rad-stor > summary h3 { margin: 0; font-size: 1.2rem; }
+.um-rad-stor { margin: 0; }
+.um-rad-stor > summary h3 { font-size: 1.3rem; }
+.um-fraga { margin: 1rem 0 0.2rem; font-family: var(--typsnitt-ui); font-weight: 700; }
+.um-rutin { margin: 0.6rem 0 0; padding: 0 0.85rem; background: var(--farg-ton); border-radius: 8px; border: 0; }
+.um-rutin:last-of-type { border-bottom: 0; }
+@media (max-width: 39.99rem) { .um-sida { width: calc(50% - 0.375rem); } .um-sida-liggande { width: 100%; } .um-sidor > .um-sida:only-child { width: 70%; } }
+/* Länken från en del av lektionen till manuset för en svår stund, och del 4:s När det glider med sina avsnitt. */
+.um-ld-manus { margin: -0.4rem 1rem 0.9rem; font-family: var(--typsnitt-ui); font-size: 0.92rem; font-weight: 600; }
+.um-ld-manus a { color: var(--farg-accent); }
+.um-glider { margin: 2.25rem 0 0; font-size: 1.35rem; }
+.um-under { margin-top: 1rem; }
+.um-under > h4 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+.um-bortvalda { margin: 1rem 0; font-family: var(--typsnitt-ui); font-size: 0.88rem; }
+.um-bortvalda ul { margin: 0; padding-left: 1.1rem; color: var(--farg-text-svag); }
+.um-bortvalda li { margin: 0.15rem 0; }
+.um-skattningsruta { border-left: 4px solid var(--farg-stapel); }
+.um-exempel-rad summary strong { font-weight: 700; }
+.um-blad-zon-not { font-weight: 400; }
+/* Primär evidens på bankens kort: en rad med etikett under Lärande totalt, så att ämnets märke inte läses som metodens ämne. */
+.mp-bank-primar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.6rem; margin: 0.5rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.88rem; color: var(--farg-text-svag); }
+.mp-bank-primar .amne { margin: 0; }
+.metodkort .mp-bank-primar .amne[data-amne] { background: color-mix(in srgb, var(--amnefarg) 16%, white); color: var(--amnefarg); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amnefarg) 55%, white); }
+/* Bankens kort, tätt (Niclas 2026-10-30: "mycket outnyttjad yta bredvid ... Kanske ha de två understa i en och samma rad
+   och lärande totalt med snygg [kommentarsruta] i två rader"): Lärande totalt med staplarna och ordet på namnets rad och
+   en kommentar under, och Svårighet och Kostnad bredvid varandra. */
+.mp-bank-total { padding: 0 0 0.6rem; border-bottom: 1px solid color-mix(in srgb, var(--amnefarg) 18%, white); font-family: var(--typsnitt-ui); }
+.mp-bank-en { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem 0.75rem; margin: 0; }
+.mp-bank-en .mp-namn { font-size: 1rem; }
+.mp-stapelrad { display: inline-flex; align-items: center; gap: 0.5rem; }
+.mp-bank-en .mp-staplar i { height: 1.35rem; border-left-width: 10px; }
+.mp-kommentar { margin: 0.5rem 0 0; padding: 0.45rem 0.65rem; border-left: 3px solid var(--farg-stapel); border-radius: 0 6px 6px 0; background: var(--farg-yta); font-size: 0.85rem; line-height: 1.4; color: var(--farg-text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.mp-bank-par { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; padding: 0.6rem 0 0.25rem; font-family: var(--typsnitt-ui); }
+.mp-bank-halv { display: flex; flex-direction: column; gap: 0.2rem; margin: 0; }
+.mp-bank-halv .mp-namn { font-size: 0.9rem; }
+.mp-bank-halv .mp-varde { font-size: 0.92rem; }
+/* Slut på undervisningsmetodens sida (K-621). */
 html.js .samla {
   position: sticky; bottom: 0.75rem; z-index: 5;
   display: grid; grid-template-columns: 1fr auto auto; gap: 0.5rem 1.25rem; align-items: center;
@@ -1979,6 +2236,8 @@ html.js .bara-js { display: inline-block; }
   .lh-tavla > div + div { padding-top: 0.75rem; }
 }
 @media print {
+  /* Metoder (K-621): delraden, läsvägen och knapparna står bara på skärmen. */
+  .um-delrad, .um-lasvag, .um-filknappar, .um-filrader, .um-toppknappar, .um-remsa, .um-celler { display: none !important; }
   /* En liggande A4-sida per avsnitt: tät typografi, inga sidbrytningar inuti rutor och rader. */
   .lathund-huvud, .lathund .upphov, .lathund-nav, .lh-lank { display: none; }
   /* Spelaren hör till skärmen. Tvingad, så att ingen skärmregel med fler klasser kan visa den på papperet. */
@@ -4003,3 +4262,108 @@ button.pl-passroll { min-height: 2.75rem; }
    namnet, mejlet och upphovet står kvar. Varje sida i appen utom metodbanken har länkraden tillbaka dit (brodsmula), och Android har sin
    bakåtknapp. I webbläsaren ser sajten ut som förut. */
 @media (display-mode: standalone) { .sidhuvud, .metodbank-ingress, .sidfot .lankrad-lista { display: none; } }
+
+/* Lär dig metoden (K-628) */
+/* Lärarens väg genom en undervisningsmetod (src/components/LarDig.astro, src/scripts/lardig.ts): Planera insatsens form med
+   remsan, blocken, skalan och linjen, och veckans stund som en egen yta överst i veckan. Mobil först, knapparna 48 punkter
+   höga, och de tio knapparna i två rader om fem i telefonen, som .pl-skala-lang. Sammanställningen skrivs ut som en pdf
+   (src/scripts/lardigpdf.ts). */
+.ld { font-family: var(--typsnitt-ui); }
+.ld p, .ld li, .ld .pl-etikett { overflow-wrap: break-word; }
+.ld-huvud h1 { font-size: clamp(2rem, 8.4vw, 3.6rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1; text-wrap: balance; margin: 0.2rem 0 0.6rem; }
+.ld-huvud .ingress { max-width: var(--matt-text); }
+.ld-lage { font-weight: 600; margin: 0.6rem 0 0; }
+.ld-lage:empty { display: none; }
+.ld-remsa { margin: 1.25rem 0 0; }
+.ld-remsa .pl-remsa-vecka { min-width: 3rem; min-height: 3rem; }
+.ld-fas { margin: 1.5rem 0 2rem; }
+.ld-fas > h2 { font-size: clamp(1.6rem, 6vw, 2.1rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; text-wrap: balance; margin: 0 0 0.3rem; }
+.ld-fas > h2:focus, .ld-samman > h2:focus { outline: none; }
+.ld-stegnr { font-weight: 600; color: var(--farg-accent); margin: 0 0 0.2rem; }
+.ld-veckans-tid { color: var(--farg-text-svag); margin: 0 0 1rem; }
+.ld-ingress { font-size: 1.05rem; max-width: 40rem; }
+.ld .knapp.ld-knapp { min-height: 3rem; }
+.ld-summa { background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.25rem; }
+.ld-summa p { margin: 0 0 0.4rem; }
+.ld-summa p:last-child, .ld-summa .pl-andra-knappar { margin-bottom: 0; }
+.ld-lasvag { margin: 0.4rem 0 0.6rem; padding-left: 1.3rem; }
+.ld-lasvag a { display: inline-block; padding: 0.4rem 0; }
+.ld-val { display: grid; gap: 0.5rem; margin: 0.6rem 0 1rem; }
+.ld-valknapp { display: block; width: 100%; min-height: 3rem; padding: 0.6rem 0.85rem; text-align: left; border: 1.5px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); color: var(--farg-text); font: 1rem/1.35 var(--typsnitt-ui); cursor: pointer; }
+.ld-valnamn { display: block; font-weight: 700; margin-bottom: 0.15rem; }
+.ld-valknapp[aria-pressed="true"] { border-color: var(--farg-accent); background: var(--farg-accent-ljus); box-shadow: inset 4px 0 0 var(--farg-accent); }
+.ld-valknapp:focus-visible, .ld-gickknapp:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.ld-checklista { list-style: none; padding: 0; margin: 0.3rem 0; }
+.ld-checklista li { border-bottom: 1px solid var(--farg-kant); }
+.ld-checklista .pl-kryss { min-height: 3rem; align-items: flex-start; padding: 0.6rem 0; font-weight: 400; }
+.ld-checklista .pl-kryss input { flex: none; margin-top: 0.05rem; }
+.ld-lov { border: 0; padding: 0; margin: 1rem 0 0; min-width: 0; }
+.ld-lov legend { padding: 0; }
+/* Raderna hålls läsbara på en bred skärm, som Planera insatsens spalt. */
+.ld-fas, .ld-samman, .ld-kopia, .ld .pl-version { max-width: 46rem; }
+.ld-lov .pl-lovchip { min-height: 3rem; }
+.ld-fragor { padding-left: 1.3rem; }
+.ld-fragor li { margin: 0.3rem 0; }
+.ld .pl-bladdra .pl-textknapp { min-height: 3rem; text-align: left; }
+.ld .pl-bladdra .pl-textknapp:last-child { text-align: right; }
+/* Veckans stund: några minuter i slutet av veckan, med Gick det?, de två skattningarna, kommentaren och klasserna. */
+.ld-stund { background: var(--farg-ton-svag); border: 1px solid var(--farg-kant); border-top: 4px solid var(--farg-accent); border-radius: var(--radie); padding: 1rem 1rem 1.1rem; margin: 1rem 0 1.5rem; }
+.ld-stund > h3, .ld-steget > h3 { font-size: 1.25rem; font-weight: 800; margin: 0 0 0.2rem; }
+.ld-stund h4, .ld-steget h4 { font-size: 1.05rem; margin: 0 0 0.35rem; }
+.ld-gick, .ld-skattning, .ld-kommentar, .ld-klasser { margin: 1.1rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--farg-kant); }
+.ld-gick p { margin: 0 0 0.4rem; }
+.ld-gickval { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0.5rem 0 0.3rem; }
+.ld-gickknapp { min-height: 3rem; padding: 0.4rem 0.6rem; border: 1.5px solid var(--farg-accent); border-radius: 8px; background: var(--farg-yta); color: var(--farg-accent); font: 700 0.98rem/1.2 var(--typsnitt-ui); cursor: pointer; }
+.ld-gickknapp[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+.ld-malrad { margin: 1rem 0 0; }
+.ld-malrad .pl-etikett { margin-bottom: 0.1rem; }
+.ld .pl-skalsteg { height: 3rem; }
+.ld .pl-skala-lang { margin: 0.5rem 0 0.6rem; }
+.ld-skattning .pl-fallut { background: var(--farg-yta); margin: 0.8rem 0 0; }
+.ld-stodlista { margin: 0.2rem 0 0.6rem; padding-left: 1.2rem; }
+.ld-klasslista { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+.ld-klasslista .pl-fallut { margin: 0 0 0.45rem; background: var(--farg-yta); padding: 0.1rem 0.9rem; }
+.ld-klasslista .pl-fallut > summary { min-height: 3rem; }
+.ld-klassnamn { font-weight: 700; overflow-wrap: anywhere; }
+.ld-klass-har { font-size: 0.82rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 999px; background: var(--farg-accent-ljus); color: var(--farg-accent); }
+.ld-klassnot { margin: 0.2rem 0 0.7rem; min-height: 4rem; }
+/* Veckans steg: det klasserna lär sig, ditt drag, rutinen med hur den övas första gången och knapparna. */
+.ld-steget { margin: 1.5rem 0; }
+.ld-drag { border-left: 4px solid var(--farg-accent); padding: 0.1rem 0 0.1rem 0.85rem; margin: 0.75rem 0 1rem; }
+.ld-drag p { margin: 0.2rem 0 0; font-size: 1.05rem; }
+.ld-vidare { font-weight: 600; }
+.ld-rutin ol { margin: 0 0 0.7rem; padding-left: 1.3rem; }
+.ld-forlang { margin: 1.25rem 0 0; }
+/* Veckan med ett steg utan svar, överst tills den har svar, och planens delar i Före. */
+.ld-forra { background: #fff3d6; border-left: 4px solid #e3b341; border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.25rem; }
+.ld-forra h3 { font-size: 1.1rem; margin: 0 0 0.2rem; }
+.ld-forra-steg { margin: 0 0 0.4rem; color: var(--farg-text-svag); }
+.ld-forra .ld-gickknapp { background: var(--farg-yta); }
+.ld-forra .ld-gickknapp[aria-pressed="true"] { background: var(--farg-accent); }
+.ld-planen .ld-delblock { margin: 1.25rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--farg-kant); }
+.ld-planen h4 { font-size: 1.05rem; margin: 0 0 0.35rem; }
+.ld-tillsamman { margin: 0 0 0.75rem; }
+.ld-tillsamman .pl-textknapp { min-height: 3rem; }
+.ld .pl-regel .pl-andra-knappar { margin: 0.5rem 0 0; }
+.ld .pl-regel p:first-child { margin: 0; }
+/* Skalans knappar har sin egen bredd på en bred skärm, så att ramen inte går över hela rutan. */
+@media (min-width: 34.01rem) { .ld .pl-skala-lang { width: max-content; } }
+/* Efter stegen och Läs mer. */
+.ld-lasmer { list-style: none; padding: 0; margin: 0; }
+.ld-lasmer li { padding: 0.6rem 0; border-bottom: 1px solid var(--farg-kant); }
+.ld-lasmer a, .ld-lasmer-titel { font-weight: 600; overflow-wrap: anywhere; }
+.ld-upphov { display: block; font-size: 0.88rem; color: var(--farg-text-svag); }
+.ld-lasmer p { margin: 0.25rem 0 0; }
+/* Sammanställningen: stegen, de två linjerna och kommentarerna i veckans ordning. */
+.ld-samman { border-top: 2px solid var(--farg-kant); margin: 2rem 0 0; padding: 1rem 0 0; }
+.ld-samman[hidden] { display: none; }
+.ld-samman > h2 { font-size: clamp(1.4rem, 5vw, 1.8rem); font-weight: 800; margin: 0 0 0.3rem; }
+.ld-tabell { border-collapse: collapse; width: 100%; max-width: 32rem; font-size: 0.95rem; }
+.ld-tabell th, .ld-tabell td { text-align: left; padding: 0.45rem 0.6rem 0.45rem 0; border-bottom: 1px solid var(--farg-kant); vertical-align: top; }
+.ld-tabell th:last-child, .ld-tabell td:last-child { text-align: right; padding-right: 0; white-space: nowrap; }
+.ld-kommentarer { list-style: none; padding: 0; margin: 0; }
+.ld-kommentarer > li { border-left: 3px solid var(--farg-accent); padding: 0.1rem 0 0.1rem 0.8rem; margin: 0 0 1rem; }
+.ld-kommentarer p { margin: 0.2rem 0 0; overflow-wrap: anywhere; }
+.ld-klassnoter { list-style: none; padding: 0; margin: 0.4rem 0 0; }
+.ld-klassnoter li { margin: 0.25rem 0; overflow-wrap: anywhere; }
+.ld-klassnoter .ld-klassnamn::after { content: ":"; }

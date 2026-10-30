@@ -1,14 +1,17 @@
-// Metodkortets profil för undervisningsmetoderna, ett utkast för formen (K-623; Niclas 2026-10-29: "Skapa ett utkast på
-// ett kort för Direct instruction så som jag beskrev det. Mest för design."). Tabellen, orden och funktionerna följer
-// metodriggens standard (C:/metodrigg/docs/undervisningsmetoder/evidensen.md och build/sparrprov.mjs, riggens 77c3807):
-// tillförlitligheten sätter taket och effekten nivån, låg tillförlitlighet utan effekt är Oklart, och Svårighet och
-// Kostnad räknas ur kriterierna. De flyttar till src/lib/standard/ när standarden är låst, så att riggen och sajten
-// räknar med samma funktion, och utkastets värden byts mot metodens fil i samlingen src/content/undervisningsmetoder/.
-import { uppraknat } from './standard/index.js';
+// Metodkortets profil för undervisningsmetoderna (K-623, form godkänd som version 1; K-621, ur metodens fil). Tabellen,
+// orden och funktionerna följer metodriggens standard (C:/metodrigg/docs/undervisningsmetoder/evidensen.md och
+// build/sparrprov.mjs, riggens 77c3807): tillförlitligheten sätter taket och effekten nivån, låg tillförlitlighet utan
+// effekt är Oklart, och Svårighet och Kostnad räknas ur kriterierna. De flyttar till src/lib/standard/ när standarden är
+// låst, så att riggen och sajten räknar med samma funktion. Kortet läser metodens fil i samlingen
+// src/content/undervisningsmetoder/ (`kortetUrFil`), och PILOTEN är utkastet med platshållare som K-623 visade formen med.
+import { faktaIFastForm, uppraknat } from './standard/index.js';
 
 export type Tillforlitlighet = 'hog' | 'mattlig' | 'lag';
 export type Effekt = 'negativ' | 'ingen' | 'liten' | 'mattlig' | 'stor';
-export type Omradesvarde = { tillforlitlighet: Tillforlitlighet; effekt: Effekt; motivering: string } | { inteStuderat: true; motivering: string };
+// Ett område utan nivå står med sitt läge, som i metodens fil: Inte studerat, Inte sammanvägt (Lärande totalt när ingen
+// sammanställning väger ihop flera ämnen, ritat som Inte studerat) eller Väntar (bara i ett skelett).
+export type UtanNiva = 'inte-studerat' | 'inte-sammanvagt' | 'vantar';
+export type Omradesvarde = { tillforlitlighet: Tillforlitlighet; effekt: Effekt; motivering: string; kallor?: string[] } | { niva: UtanNiva; motivering: string };
 export type Omrade = 'larande' | 'lasning' | 'skrivning' | 'matematik' | 'amnen' | 'socialt';
 
 /** Staplarnas områden i standardens ordning. Lärande totalt sammanfattar och står först. */
@@ -34,8 +37,9 @@ export const NIVAORD = ['', 'Inget påvisat stöd', 'Svagt stöd', 'Visst stöd'
 
 /** Läget för ett område: en nivå 1 till 5 med sitt ord, Negativ effekt, Oklart eller Inte studerat. */
 export type Laget = { slag: 'niva'; niva: number; ord: string; negativ: boolean } | { slag: 'oklart' | 'inte'; ord: string };
+const UTAN_NIVA: Record<UtanNiva, string> = { 'inte-studerat': 'Inte studerat', 'inte-sammanvagt': 'Inte sammanvägt', vantar: 'Väntar' };
 export function laget(v: Omradesvarde): Laget {
-  if ('inteStuderat' in v) return { slag: 'inte', ord: 'Inte studerat' };
+  if ('niva' in v) return { slag: 'inte', ord: UTAN_NIVA[v.niva] };
   const n = TABELL[v.tillforlitlighet][v.effekt];
   if (n === 'oklart') return { slag: 'oklart', ord: 'Oklart' };
   const negativ = n === 1 && v.effekt === 'negativ';
@@ -86,6 +90,47 @@ export const KOSTNADENS_ORD = ['', 'Mycket låg', 'Låg', 'Måttlig', 'Hög', 'M
 export interface Utkast {
   id: string; titel: string; alternativaNamn: string[]; undertitel: string; ingress: string; arskursText: string;
   fakta: [string, string][]; evidens: Record<Omrade, Omradesvarde>; svarighet: Svarighet; kostnad: Kostnad;
+  /** Värdena är platshållare, som i K-623:s utkast, och kortet säger det. */
+  platshallare?: boolean;
+  /** Kommentaren under Lärande totalt på bankens kort: effekten på lärandet i en mening, utan källor. */
+  larandeKort?: string;
+}
+
+/** Det kortet läser i metodens fil (src/content/undervisningsmetoder/<id>.yaml). */
+export interface Kortfalt {
+  titel: string; alternativaNamn?: string[]; undertitel?: string; ingress: string; arskursText?: string; arskurs: string[];
+  tid: string; period: string;
+  profil: { evidens: Record<Omrade, Omradesvarde>; svarighet: Svarighet; kostnad: Kostnad };
+}
+
+/**
+ * Kommentaren under Lärande totalt på bankens kort (Niclas 2026-10-30: "lärande totalt med snygg [kommentarsruta] i två
+ * rader kopplat till sin son kort beskriver effekt på lärande"): områdets egen korta mening när metoden har den (`kort`),
+ * annars motiveringen efter den första meningen om tillförlitligheten och effekten, utan hänvisningarna.
+ */
+export function larandetIKort(v: Omradesvarde & { kort?: string }): string | undefined {
+  if (v.kort) return v.kort;
+  const { resten } = motiveringensDelar(v.motivering);
+  const t = resten.replace(/\s*\([^()]*\d{4}[^()]*\)/g, '').replace(/\s+([,.])/g, '$1').trim();
+  return t || undefined;
+}
+
+/**
+ * Kortet ur metodens fil: faktan i fast form ur faktarutans tid och period, med samlingens ord för passen, och profilen som
+ * den står. Ett faktafält som inte går att läsa stoppar bygget, som i Stödundervisning, så att kortet aldrig har en tom cell.
+ */
+export function kortetUrFil(id: string, d: Kortfalt): Utkast {
+  // Kortet har rubrikerna Lektion och Hur ofta, så takten står utan ord: "minst 3/vecka" (en rad i telefonen).
+  const f = faktaIFastForm({ tid: d.tid, period: d.period }, { passen: '' });
+  const tomma = (['pass', 'ofta', 'period'] as const).filter((k) => !f[k]);
+  if (tomma.length) throw new Error(`${id}: faktarutans ${tomma.join(', ')} går inte att läsa ur tid "${d.tid}" och period "${d.period}"`);
+  const arskursText = d.arskursText ?? d.arskurs.join(', ');
+  return {
+    id, titel: d.titel, alternativaNamn: d.alternativaNamn ?? [], undertitel: d.undertitel ?? '', ingress: d.ingress, arskursText,
+    fakta: [['Lektion', f.pass!], ['Hur ofta', f.ofta!], ['De första veckorna', f.period!], ['Årskurs', arskursText]],
+    evidens: d.profil.evidens, svarighet: d.profil.svarighet, kostnad: d.profil.kostnad,
+    larandeKort: larandetIKort(d.profil.evidens.larande),
+  };
 }
 
 // Platshållarnas motivering börjar som standarden kräver, med tillförlitligheten och effekten i ord.
@@ -112,8 +157,9 @@ export const PILOTEN: Utkast = {
     skrivning: plats('lag', 'stor'),
     matematik: plats('hog', 'stor'),
     amnen: { tillforlitlighet: 'lag', effekt: 'ingen', motivering: 'Låg tillförlitlighet, ingen effekt. Platshållare: här står vad som finns, som tre små studier utan effekt, och varför det inte räcker för att säga något.' },
-    socialt: { inteStuderat: true, motivering: 'Platshållare: här står vad studierna i urvalet mätte, och att ingen av dem mätte det sociala.' },
+    socialt: { niva: 'inte-studerat', motivering: 'Platshållare: här står vad studierna i urvalet mätte, och att ingen av dem mätte det sociala.' },
   },
   svarighet: { lara: 3, karnan: 3, stod: 3, tid: 3, motivering: 'Läraren övar nya drag: att visa i små steg med samma ord, leda övningen i högt tempo och vänta med eget arbete tills nästan alla kan.' },
   kostnad: { kop: 2, timmar: 10, motivering: 'Miniwhiteboards och exit-lappar. Timmarna är läsningen, tre möten i arbetslaget, samtalen efter två observationer och en timme i veckan för stegen och orden de första veckorna.' },
+  platshallare: true,
 };

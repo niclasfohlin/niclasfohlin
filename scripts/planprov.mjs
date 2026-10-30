@@ -483,7 +483,7 @@ if (tsMp) {
     const g = gmp.skattningar.find((x) => x.vem === 'gruppen');
     const ned = s.tolkaRegel('nedåt 2 veckor i rad'), under = s.tolkaRegel('under 7 i 4 veckor utan att stiga'), minst = s.tolkaRegel('minst 7 i 4 veckor');
     ska('metodens skattningar: reglerna på linjen', ned?.typ === 'nedat' && under?.grans === 7 && minst?.veckor === 4 && s.tolkaRegel('ibland') === null && s.regelnGaller(ned, [7, 6, 5]) && !s.regelnGaller(ned, [7, 6]) && !s.regelnGaller(ned, [7, 6, 6]) && s.regelnGaller(under, [6, 6, 5, 5]) && !s.regelnGaller(under, [6, 5, 6, 5]) && !s.regelnGaller(under, [6, 6, 7, 5]) && s.regelnGaller(minst, [7, 8, 7, 9]) && !s.regelnGaller(minst, [7, 8, 6, 9]), [ned, under, minst]);
-    ska('metodens skattningar: skalan ur metodens tabell', s.SKATTNINGARNAS_VEM.join() === 'gruppen,eleverna' && g?.skala?.steg.length === 5 && s.stegetsNamn(g.skala, 10) === 'Mycket bra' && s.stegetsNamn(g.skala, 1) === 'Fungerar inte' && s.stegetsSpann(g.skala.steg[0]) === '1–2' && s.stegetsSpann({ fran: 4, till: 4 }) === '4' && s.skattningensGranser(g).join() === '7' && !!s.skalansSteg(ga, { fran: 1, till: 10, tabell: 'Lärarens skattning' }) && s.skalansSteg(ga, { fran: 0, till: 10, tabell: 'Lärarens skattning' }) === null && gmp.skattningar.find((x) => x.vem === 'eleverna')?.namn === 'Vår grupp', g);
+    ska('metodens skattningar: skalan ur metodens tabell', s.SKATTNINGARNAS_VEM.join() === 'gruppen,eleverna,lararen' && g?.skala?.steg.length === 5 && s.stegetsNamn(g.skala, 10) === 'Mycket bra' && s.stegetsNamn(g.skala, 1) === 'Fungerar inte' && s.stegetsSpann(g.skala.steg[0]) === '1–2' && s.stegetsSpann({ fran: 4, till: 4 }) === '4' && s.skattningensGranser(g).join() === '7' && !!s.skalansSteg(ga, { fran: 1, till: 10, tabell: 'Lärarens skattning' }) && s.skalansSteg(ga, { fran: 0, till: 10, tabell: 'Lärarens skattning' }) === null && gmp.skattningar.find((x) => x.vem === 'eleverna')?.namn === 'Vår grupp', g);
     const med = (skattningar) => ({ ...ga, plan: { ...ga.plan, skattningar } });
     const felen = (x) => s.metodensSkattningar(med(x)).fel;
     const [lararens, vargrupp] = ga.plan.skattningar;
@@ -532,6 +532,69 @@ if (tsMp) {
     const efterAlla = s.sammanstallning(npl, s.rensaFoljd({ gjorda: bockade, narvaro: true, elever: [{ id: 'a1', namn: 'Ali' }, { id: 'f1', namn: 'Filip', fran: npl.pass[7].datum }], franvaro: { [bockade[1]]: ['a1'] }, listan: '2026-10-28' }), '2026-12-01');
     const efterText = s.sammanstallningstext({ titel: ga.titel, uppfoljning: ga.uppfoljning.rader }, npl, efterAlla);
     ska('gruppens närvarorad och prickarnas förklaring med en elev som kom till senare', efterText.includes('0 av 1 elever var med i alla') && s.prickarnasText({ fran: '2026-11-16' }).endsWith('streck inte bockat eller före eleven kom till.') && s.prickarnasText({}).endsWith('streck inte bockat.') && s.rensaFoljd({ listan: '2026-10-28' }).listan === '2026-10-28' && s.rensaFoljd({ listan: 'x' }).listan === undefined, efterText);
+  }
+  // Lär dig metoden (K-628; Niclas 2026-10-30: "En rot på allt, men som en egen harness för metoder"): piloten Explicit
+  // undervisning går att planera med samlingens ord för lektionen, lärarens två skattningar läses som gruppens med linjen och
+  // reglerna, ett steg får en vecka till, veckorna efter stegen är varannan skolvecka, och klasserna, kommentarerna och Gick
+  // det? sparas utan att en plan i Stödundervisning ändras.
+  {
+    const eu = parseYaml(readFileSync(join(rot, 'src/content/undervisningsmetoder/explicit-undervisning.yaml'), 'utf8'));
+    const { fel: euFel, plan: emp } = s.metodplan(eu);
+    ska('Lär dig metoden: piloten går att planera', !euFel.length && emp?.takt.min === 3 && emp.period.min === 4 && emp.steg.length === 4, euFel);
+    ska('Lär dig metoden: lektionens ord läses som passets, och passets som förut', s.tolkaTid('varje lektion')?.enhet === 'pass' && s.tolkaTid('varje pass')?.enhet === 'pass' && JSON.stringify(s.tolkaPassen('första lektionen')) === JSON.stringify(s.tolkaPassen('första passet')) && s.variantensNar('en lektion på 60 minuter')?.minuter === 60 && s.variantensNar('ett pass på 60 minuter')?.minuter === 60 && s.tolkaTid('varje lektionsbank') === null);
+    const [saker, fungerar] = emp?.skattningar ?? [];
+    const radId = (i) => eu.uppfoljning.rader[i]?.id;
+    ska('Lär dig metoden: lärarens två skattningar med skalan 1 till 10 och reglerna på uppföljningens id', saker?.vem === 'lararen' && fungerar?.vem === 'lararen' && radId(saker.rad) === 'lararen' && radId(fungerar.rad) === 'klassen' && saker.skala.fran === 1 && saker.skala.till === 10 && !saker.skala.steg.length && radId(saker.regler[0].rad) === 'osaker' && radId(fungerar.regler[0].rad) === 'klassenstar' && s.skattningensGranser(saker).join() === '5', emp?.skattningar);
+    const euFelen = (x) => s.metodensSkattningar({ ...eu, plan: { ...eu.plan, skattningar: [{ ...eu.plan.skattningar[0], ...x }] } }).fel;
+    ska('Lär dig metoden: lärarens skattning behöver en skala med två heltal', euFelen({ skala: undefined }).some((x) => x.includes('skattar läraren')) && euFelen({ skala: { fran: 3, till: 3 } }).some((x) => x.includes('skattar läraren')) && !euFelen({}).length && euFelen({ vem: 'klassen' }).some((x) => x.includes('gruppen, eleverna eller lararen')));
+    const eval0 = s.forval(emp, '2026-11-04');
+    const ep = s.planera(emp, eval0);
+    ska('Lär dig metoden: fyra steg från nästa måndag, och veckan efter stegen', eval0.start === '2026-11-09' && eval0.langd === 4 && ep.veckor.map((v) => v.innehall).join() === '1,2,3,4' && ep.veckor.map((v) => v.steg).join() === '0,1,2,3' && ep.efter === '2026-12-07', [ep.veckor.map((v) => v.mandag), ep.efter]);
+    const lang = s.forlangSteget(eval0, 2);
+    const lp = s.planera(emp, lang);
+    ska('Lär dig metoden: ett steg får en vecka till, och tillbaka', lp.veckor.map((v) => `${v.innehall}${v.igen ? 'i' : ''}`).join() === '1,2,2i,3,4' && lp.efter === '2026-12-14' && s.gangen(lp, lp.veckor[2]) === 1 && (s.forlangSteget(lang, 2, -1).upprepa ?? []).length === 0 && s.forlangSteget(s.forlangSteget(lang, 2), 2, -1).upprepa.join() === '2' && s.forlangSteget(eval0, 3, -1).upprepa.length === 0, lp.veckor.map((v) => [v.innehall, v.igen]));
+    const medLov = s.planera(emp, { ...lang, lov: ['2026-48'] });
+    ska('Lär dig metoden: ett lov hoppas över', medLov.veckor.map((v) => v.mandag).join() === '2026-11-09,2026-11-16,2026-11-30,2026-12-07,2026-12-14' && medLov.efter === '2026-12-21', medLov.veckor.map((v) => v.mandag));
+    const fs1 = saker.namn, fs2 = fungerar.namn;
+    const ef = s.rensaFoljd({
+      matt: { [fs1]: { '2026-11-09': 4, '2026-11-16': 3, '2027-01-11': 7 }, [fs2]: { '2026-11-09': 6, '2026-11-16': 6, '2026-11-23': 7 } },
+      klasser: [...Array.from({ length: 14 }, (_, i) => ({ id: `k${i}`, namn: `${i + 1}A` })), { id: 'k0', namn: 'Dubblett' }, { id: 'kb', namn: 'Borta', borta: true }],
+      kommentar: { '2026-11-09': 'Signalen satt på onsdagen.', x: 'bort' }, noter: { '2026-11-09': { k1: 'Lugnt', k2: '' }, '2026-11-16': { k1: '   ' } }, gick: { '2026-11-09': 'ja', '2026-11-16': 'inte', '2026-11-23': 'kanske' }, bockat: [0, 2, 2, -1, 'x'],
+    });
+    ska('Lär dig metoden: det läraren för in rensas, med högst tolv klasser', ef.klasser.filter((k) => !k.borta).length === 12 && ef.klasser.some((k) => k.id === 'kb' && k.borta) && !ef.klasser.some((k) => k.namn === 'Dubblett') && Object.keys(ef.kommentar).join() === '2026-11-09' && JSON.stringify(ef.noter) === '{"2026-11-09":{"k1":"Lugnt"}}' && JSON.stringify(ef.gick) === '{"2026-11-09":"ja","2026-11-16":"inte"}' && ef.bockat.join() === '0,2', ef);
+    ska('Lär dig metoden: en plan i Stödundervisning får inga nya fält', JSON.stringify(Object.keys(s.rensaFoljd({ gjorda: ['2026-11-02'] }))) === JSON.stringify(['gjorda', 'elever', 'franvaro', 'vecka', 'skattning', 'resultat']), Object.keys(s.rensaFoljd({})));
+    const esm = s.larDigSammanstallning(lp, lang, ef, '2027-01-20');
+    const veckorna = esm.veckor.map((v) => `${v.namn.kort}/${v.mandag.slice(5)}`).join(' ');
+    ska('Lär dig metoden: stegen och veckorna efter stegen varannan vecka, med en infört vecka utanför takten', veckorna === '1/11-09 2/11-16 2 igen/11-23 3/11-30 4/12-07 efter/12-14 efter/12-28 efter/01-11' && esm.fas === 'efter' && esm.nu === 8 && esm.stegen.map((x) => x.veckor).join() === '1,2,1,1', veckorna);
+    ska('Lär dig metoden: två linjer, och regeln under 5 i två veckor', esm.linjer.length === 2 && esm.linjer[0].varden.slice(0, 3).join() === '4,3,' && esm.linjer[0].varden[7] === 7 && esm.linjer[0].galler[1].join() === '0' && !esm.linjer[0].galler[0].length && !esm.linjer[1].galler.some((g) => g.length) && s.larDigetsRegler(esm, eu.uppfoljning.rader).join() === 'Om du är osäker på metoden: under 5 i två veckor utan att stiga, till och med vecka 2 (v. 47)', esm.linjer.map((l) => [l.varden, l.galler]));
+    ska('Lär dig metoden: veckans svar, kommentar och klassernas rader i sammanställningen', esm.veckor[0].gick === 'ja' && esm.veckor[1].gick === 'inte' && esm.veckor[0].kommentar === 'Signalen satt på onsdagen.' && esm.veckor[0].noter.map((x) => `${x.namn}: ${x.text}`).join() === '2A: Lugnt' && !esm.veckor[1].noter.length);
+    const efterLov = s.efterStegen(lp, { ...lang, lov: ['2026-52', '2026-53'] }, s.rensaFoljd({}), '2027-01-20');
+    ska('Lär dig metoden: veckorna efter stegen hoppar över lovet', efterLov.join() === '2026-12-14,2027-01-11' && s.efterStegen(lp, lang, s.rensaFoljd({}), '2026-12-01').length === 0, efterLov);
+    ska('Lär dig metoden: före, under och efter stegen', s.larDigetsFas(lp, '2026-11-06') === 'fore' && s.larDigetsFas(lp, '2026-11-25') === 'under' && s.larDigetsNu(lp, s.larDigetsVeckor(lp, lang, ef, '2026-11-25'), '2026-11-25') === 3 && s.larDigetsFas(lp, '2026-12-14') === 'efter' && s.larDigetsNu(lp, s.larDigetsVeckor(lp, lang, ef, '2026-11-06'), '2026-11-06') === null);
+    ska('Lär dig metoden: veckornas namn', s.larDigetsNamn({ innehall: 2, gang: 1, vecka: 48 }).text === 'vecka 2 igen (v. 48)' && s.larDigetsNamn({ innehall: 0, vecka: 2, efter: true }).kort === 'efter' && s.larDigetsNamn({ innehall: 0, vecka: 2, efter: true }).Text === 'Efter stegen (v. 2)');
+    ska('Lär dig metoden: ett steg står kvar när något är infört senare', s.harInfortEfter(ef, '2026-11-16') && !s.harInfortEfter(s.rensaFoljd({ gick: { '2026-11-16': 'ja' } }), '2026-11-16') && s.larDigetsInforda(ef).join() === '2026-11-09,2026-11-16,2026-11-23,2027-01-11');
+    // Gick det? (granskningen 2026-10-30): Inte än ger en vecka till och aldrig två för samma svar, samma svar igen tar bort det,
+    // och en vecka utan svar före veckan läraren är i sägs. Sammanställningen räknar bara stegen som har börjat.
+    const tom = s.rensaFoljd({});
+    const inte = s.svaraGickDet(ep, eval0, tom, '2026-11-16', 'inte');
+    const igen = s.svaraGickDet(s.planera(emp, inte.val), inte.val, s.rensaFoljd({ gick: inte.gick }), '2026-11-16', 'inte');
+    const ja = s.svaraGickDet(s.planera(emp, inte.val), inte.val, s.rensaFoljd({ gick: inte.gick }), '2026-11-16', 'ja');
+    const lastSvar = s.svaraGickDet(ep, eval0, s.rensaFoljd({ gick: { '2026-11-23': 'ja' } }), '2026-11-16', 'inte');
+    ska('Lär dig metoden: Inte än ger en vecka till, en gång, och ett annat svar tar bort den', inte.andrad && inte.val.upprepa.join() === '2' && inte.gick['2026-11-16'] === 'inte' && igen.andrad && !igen.val.upprepa.length && !igen.gick['2026-11-16'] && ja.andrad && !ja.val.upprepa.length && ja.gick['2026-11-16'] === 'ja' && !lastSvar.andrad && lastSvar.last && !lastSvar.val.upprepa.length && lastSvar.gick['2026-11-16'] === 'inte', [inte.val.upprepa, igen.val.upprepa, ja.val.upprepa, lastSvar]);
+    ska('Lär dig metoden: veckan före utan svar', s.obesvaradVecka(ep, tom, '2026-11-18')?.mandag === '2026-11-09' && s.obesvaradVecka(ep, s.rensaFoljd({ gick: { '2026-11-09': 'ja' } }), '2026-11-18') === null && s.obesvaradVecka(ep, tom, '2026-11-06') === null && s.obesvaradVecka(ep, tom, '2027-01-20')?.mandag === '2026-11-30');
+    const mitti = s.larDigSammanstallning(lp, lang, ef, '2026-11-25');
+    ska('Lär dig metoden: sammanställningen räknar bara stegen som har börjat', JSON.stringify(mitti.stegen.map((x) => [x.innehall, x.veckor, x.pagar])) === '[[1,1,false],[2,2,true]]' && mitti.kvar.map((x) => x.innehall).join() === '3,4' && s.regelnIOrd({ typ: 'nedat', veckor: 2 }) === 'nedåt två veckor i rad', [mitti.stegen, mitti.kvar]);
+    let n = 0;
+    const nytt = () => `n${++n}`;
+    const k1 = s.klasserUrText('3A\n3B\n\n3B\n  Ma2 grupp 1 ', [], nytt);
+    const k2 = s.klasserUrText('3A\n3C\nMa2 grupp 1', k1, nytt);
+    const k3 = s.klasserUrText('3A\nMa2 grupp 1', k2, nytt);
+    const k4 = s.klasserUrText('3A\nMa2 grupp 1\n3C', k3, nytt);
+    ska('Lär dig metoden: klasserna, ett nytt namn på samma rad är samma klass, och en borttagen klass kommer tillbaka', k1.map((k) => `${k.id}:${k.namn}`).join() === 'n1:3A,n2:3B,n3:Ma2 grupp 1' && k2.map((k) => `${k.id}:${k.namn}`).join() === 'n1:3A,n2:3C,n3:Ma2 grupp 1' && k3.find((k) => k.id === 'n2')?.borta && k4.find((k) => k.namn === '3C')?.id === 'n2' && !k4.some((k) => k.borta) && s.klasserUrText(Array.from({ length: 15 }, (_, i) => `K${i}`).join('\n'), [], nytt).length === 12 && s.klasserUrText('3A', k1, nytt, (id) => id === 'n2').map((k) => k.id).join() === 'n1,n2', [k1, k2, k3, k4]);
+    const lagring = await import('../src/scripts/insatser-lagring.ts');
+    const gammal = lagring.rensaPlan({ id: 'abc123', metod: 'textsamtal-i-grupp', val: 's=2026-11-02&d=135&l=6' });
+    const ny = lagring.rensaPlan({ id: 'abc124', metod: 'explicit-undervisning', samling: 'metoder', val: s.kodaVal(eval0), schema: { pass: [['2026-11-09', 1, 1]], veckor: [] } });
+    ska('Lär dig metoden: planens samling, Stödundervisning när den saknas, och adressen', gammal?.samling === 'stodundervisning' && ny?.samling === 'metoder' && lagring.planensAdress(ny) === '/metoder/explicit-undervisning/lar-dig#p=abc124' && lagring.planensAdress(gammal).startsWith('/stodundervisning/textsamtal-i-grupp/planera#') && lagring.iSamlingen([gammal, ny], 'metoder').length === 1 && lagring.pagaendeHandelser([ny], '2026-11-10').length === 0, [gammal?.samling, ny?.samling]);
   }
   // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): en metod med
   // nivåer har det, högst tre meningar och NIVAVALETS_LANGD tecken, och texten står ordagrant i metoden.
@@ -902,7 +965,7 @@ ska('veckans namn i en text och i diagrammet', JSON.stringify(s.veckansNamn({ in
 // gång det går"): modulens filer skriver aldrig ut en vecka eller ett datum på egen hand. Veckorna kommer ur blocket
 // Veckornas namn i standarden och datumen ur datumText, dagOchManad, dagText och spannKort. Ett fynd säger fil, rad och
 // vilken funktion som ska användas (PLANERA.md under Spärren mot drift).
-const MODULENS_FILER = ['src/lib/standard/index.js', 'src/lib/standard/plan.js', 'src/lib/standard/saker.js', 'src/lib/standard/text.js', 'src/scripts/webblasaren.ts', 'src/lib/insatsplan.ts', 'src/lib/metodsaker.ts', 'src/lib/sakfiler.ts', 'src/lib/planbar.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro', 'src/components/StodForValet.astro'];
+const MODULENS_FILER = ['src/lib/standard/index.js', 'src/lib/standard/plan.js', 'src/lib/standard/saker.js', 'src/lib/standard/text.js', 'src/scripts/webblasaren.ts', 'src/lib/insatsplan.ts', 'src/lib/metodsaker.ts', 'src/lib/sakfiler.ts', 'src/lib/planbar.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro', 'src/components/StodForValet.astro', 'src/scripts/skattning.ts'];
 const DRIFT = [
   [/v\. \$\{/, 'en kalendervecka skrivs med kalendervecka() eller kalenderveckor()'],
   [/(?<!veckornaIPlanen\(`)[Vv]ecka \$\{[^}`]*\.vecka\b/, 'en kalendervecka skrivs med kalendervecka(), inte som "vecka"'],

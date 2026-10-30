@@ -17,7 +17,7 @@
 import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTidI, dokumentationstext, dokumentationsrader, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsLangder, passetsVisadeRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
-  bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensGranser, skattningensText, stegetsNamn, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, passetsEgenTid, radText, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
+  bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensText, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, passetsEgenTid, radText, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
@@ -26,9 +26,10 @@ import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
 import { APPENS_PLANER, idagLokalt, oppnaPlanerna, valdaFiler, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, nuTid, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
-import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
 import { tidrad } from './tidrad';
 import { elevPdf, gruppPdf } from './planpdf';
+// Skalans knappar, linjen och nedladdningen, som Lär dig metoden ritar lika (K-628).
+import { laddaNer, linjegraf, mittfaltet, pdfOrd, skalansKnappar, visaPdf } from './skattning';
 import { iAppen, vagenUt, vagenUtText, webblasaren } from './webblasaren';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -67,7 +68,8 @@ const idag = idagLokalt();
 // Uppföljningens rad med sitt namn ur standarden, som i raden, texterna och pdf:en: Efter insatsen, och en vecka som i planen.
 const uppfNamn = (rad: number) => uppfoljningensNamn(plan, info(), rad);
 
-type HelFoljd = Required<Omit<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa'>> & Pick<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa'>;
+// Lär dig metodens fält (klasserna, kommentarerna, Gick det? och checklistan, K-628) finns inte i Planera insatsen.
+type HelFoljd = Required<Omit<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa' | 'klasser' | 'kommentar' | 'noter' | 'gick' | 'bockat'>> & Pick<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa'>;
 const tomFoljd = (): HelFoljd => ({ gjorda: [], elever: [], franvaro: {}, vecka: {}, skattning: {}, resultat: {} });
 // tagenMed: en ny plan som läraren tog med ur en apps webbläsare (vagensAdress), vars adress bär valen tills den sparas.
 interface Aktiv { id: string; namn: string; val: Val; folj: boolean; foljd: HelFoljd; sparad: boolean; franLank: boolean; uppdaterad?: string; kopia?: string; tagenMed?: boolean }
@@ -2390,9 +2392,7 @@ let senaste: Sammanstallning = sammanstallning(plan, aktiv.foljd, idag, veckorna
 // texten till åtgärdsprogrammet (Niclas 2026-10-28: "Ha en rubrik om Innehållet i insatsen med en text från ingress eller
 // metoden").
 const pdfInfo = () => ({ metod: metodensNamn(), grupp: aktiv.namn || undefined, niva: nivaNamn(), mal: malText(aktivtMal()), fragan: skattningsfragan(!harElever()), uppfoljning: data.uppfoljning.rader, ingress: data.ingress, undertitel: data.undertitel, insatsen: dokumentationsrader(...atgardsunderlag()) });
-// En knapp som ger en pdf heter Skriv ut där webbläsaren kan skriva ut den direkt, och annars "som pdf", som
-// utskriftsknapparna på resten av sajten (SkrivUtPdf.astro).
-const pdfOrd = (vad: string) => (kanSkrivaUtPdf() ? `Skriv ut ${vad}` : `${stor(vad)} som pdf`);
+// Knappens ord och pdf:en som skrivs ut eller laddas ner står i src/scripts/skattning.ts (pdfOrd och visaPdf).
 const narvaroFor = (e: SammanstallningElev, s: Sammanstallning) => passensNarvaro(s, e, aktiv.foljd.franvaro);
 
 // Skattningarna vecka för vecka som staplar, små på raden och stora när eleven fälls ut, med en markering vid
@@ -2410,7 +2410,7 @@ function graf(varden: (number | undefined)[], etiketter: Veckonamn[], o: { stor?
     return `${yta}${etikett}${prickar}`;
   }).join('');
   // Veckan mitt i insatsen, då läraren stämmer av, står i ett ljust fält bakom stapeln.
-  const mitt = stor && o.mitt ? `<rect x="${x0 + (o.mitt - 1) * steg + 1}" y="${topp - 26}" width="${steg - 2}" height="${h + 26}" rx="3" class="pl-mittfalt"/><text x="${x0 + (o.mitt - 1) * steg + steg / 2}" y="${topp - 16}" class="pl-axel pl-mitttext">Mitt i</text>` : '';
+  const mitt = stor && o.mitt ? mittfaltet(x0, steg, topp, h, o.mitt) : '';
   const text = varden.map((x, i) => (x ? `${etiketter[i].text}: ${x}` : '')).filter(Boolean).join(', ');
   return `<svg class="pl-graf${stor ? ' stor' : ''}" viewBox="0 0 ${bredd} ${topp + h + under}" width="${bredd}" height="${topp + h + under}" role="img" aria-label="${esc(`${o.namn}: ${text || 'inte skattad än'}`)}">${mitt}${linjer}${staplarna}</svg>`;
 }
@@ -2436,37 +2436,14 @@ function regelnEfter(v: PlanVecka): string {
   const rad = g.regler[r].rad;
   return `<p class="pl-paminn pl-regel"><b>${esc(mening(uppfNamn(rad)))}</b> ${lankad(mening(data.uppfoljning.rader[rad].vad))}${dinSammanstallning(data.uppfoljning.rader[rad].vad)}</p>`;
 }
-// Linjen i metodens skattning av gruppen: kryss vecka för vecka på metodens skala, reglernas gränser streckade, och i veckan
-// platsen för veckan som kommer som en streckad ring (Niclas godkände formen 2026-10-26). Under krysset står veckan i
-// planen och kalenderveckan, som under staplarna.
-function linjegraf(g: PlanSkattning & { skala: Skala }, varden: (number | undefined)[], etiketter: Veckonamn[], o: { ring?: number; mitt?: number | null } = {}) {
-  const { fran, till } = g.skala;
-  const steg = 36, x0 = 26, topp = o.mitt ? 34 : 14, h = 120, under = 38, bredd = x0 + varden.length * steg + 4;
-  const y = (n: number) => topp + h - ((n - fran) / (till - fran)) * h;
-  const granser = skattningensGranser(g);
-  const axlar = [...new Set([fran, ...granser, till])].sort((a, b) => a - b).map((n) => `<line x1="${x0 - 4}" x2="${bredd}" y1="${y(n)}" y2="${y(n)}" class="pl-linje${granser.includes(n) ? ' pl-grans' : ''}"/><text x="4" y="${y(n) + 4}" class="pl-axel">${n}</text>`).join('');
-  const x = (i: number) => x0 + i * steg + steg / 2;
-  const punkter = varden.flatMap((n, i) => (n === undefined ? [] : [[x(i), y(n), n] as const]));
-  // Linjen bryts vid en vecka utan kryss, som reglerna, där en vecka utan kryss bryter följden (verifieringen av K-559
-  // 2026-10-26: linjen gick förbi en vecka utan skattning, men ingen regel kom).
-  const delar: string[][] = [[]];
-  varden.forEach((n, i) => { if (n === undefined) { if (delar[delar.length - 1].length) delar.push([]); } else delar[delar.length - 1].push(`${x(i)},${y(n)}`); });
-  const banan = delar.filter((d) => d.length > 1).map((d) => `<polyline points="${d.join(' ')}" class="pl-linjen"/>`).join('');
-  const kryss = punkter.map(([a, b, n]) => `<circle cx="${a}" cy="${b}" r="5" class="pl-punkt"/><text x="${a}" y="${b - 9}" class="pl-stapelvarde">${n}</text>`).join('');
-  const ring = o.ring !== undefined ? `<circle cx="${x(o.ring)}" cy="${topp + h / 2}" r="6" class="pl-ring"/>` : '';
-  const etikett = etiketter.map((e, i) => `<text x="${x(i)}" y="${topp + h + 14}" class="pl-stapeletikett pl-planveckan">${esc(e.kort)}</text><text x="${x(i)}" y="${topp + h + 26}" class="pl-stapeletikett">${esc(e.kalender)}</text>`).join('');
-  const mitt = o.mitt ? `<rect x="${x0 + (o.mitt - 1) * steg + 1}" y="${topp - 26}" width="${steg - 2}" height="${h + 26}" rx="3" class="pl-mittfalt"/><text x="${x(o.mitt - 1)}" y="${topp - 16}" class="pl-axel pl-mitttext">Mitt i</text>` : '';
-  const text = punkter.length ? varden.flatMap((n, i) => (n === undefined ? [] : [`${etiketter[i].text}: ${n}`])).join(', ') : 'inte skattad än';
-  return `<svg class="pl-graf stor pl-linjegraf" viewBox="0 0 ${bredd} ${topp + h + under}" width="${bredd}" height="${topp + h + under}" role="img" aria-label="${esc(`${g.namn}, ${fran} till ${till}: ${text}`)}">${mitt}${axlar}${banan}${kryss}${ring}${etikett}</svg>`;
-}
+// Linjen i metodens skattning av gruppen ritas av linjegraf i src/scripts/skattning.ts, lika i Lär dig metoden (K-628).
 // Skatta gruppen med metodens skala (K-559): instrumentets rad med namnet som länk, metodens text, stegen med namnen,
 // regeln som gäller efter veckans kryss, linjen och reglerna under Vad linjen säger.
 function skattaGruppen(g: PlanSkattning & { skala: Skala }, v: PlanVecka, s: Sammanstallning, oppna: Set<string>, startad: boolean, under: string) {
   const i = plan.veckor.indexOf(v);
   const sk = s.skattningar.find((x) => x.namn === g.namn);
   const varde = mattVarde(g.namn, v.mandag);
-  const stegen = Array.from({ length: g.skala.till - g.skala.fran + 1 }, (_, k) => g.skala.fran + k);
-  const knappar = `<div class="pl-skala${stegen.length > 6 ? ' pl-skala-lang' : ''}" role="group" aria-label="${esc(`${g.namn}, ${g.skala.fran} till ${g.skala.till}`)}">${stegen.map((n) => `<button type="button" class="pl-skalsteg" data-matt="${esc(v.mandag)}" data-instrument="${esc(g.namn)}" aria-pressed="${varde === n}" aria-label="${n}, ${esc(stegetsNamn(g.skala, n).toLocaleLowerCase('sv'))}">${n}</button>`).join('')}</div>`;
+  const knappar = skalansKnappar(g, v.mandag, varde);
   const namnen = `<ul class="pl-skalnamn" aria-hidden="true">${g.skala.steg.map((x) => `<li><b>${stegetsSpann(x)}</b> ${esc(x.namn)}</li>`).join('')}</ul>`;
   // Hur gruppen ser ut vid varje steg, ur metodens tabell, som fälls ut (den kalla testaren av K-559 2026-10-26).
   const beskrivning = g.skala.steg.some((x) => x.text) ? `<details class="pl-fallut" data-ruta="skalan"${oppna.has('skalan') ? ' open' : ''}><summary>Så ser gruppen ut vid varje steg</summary><ul class="pl-uppf">${[...g.skala.steg].reverse().map((x) => `<li><span class="pl-etikett">${esc(`${stegetsSpann(x)} · ${x.namn}`)}</span>${x.text ? `<p>${lankad(x.text)}</p>` : ''}</li>`).join('')}</ul></details>` : '';
@@ -2577,22 +2554,7 @@ function renderaSamman() {
   ruta.innerHTML = delar.join('');
   ruta.hidden = false;
 }
-// En fil som laddas ner, med namnet ur standardens filnamnet (K-519): pdf:erna, kopian och kalenderfilen.
-function laddaNer(fil: Blob, filnamn: string) {
-  const url = URL.createObjectURL(fil);
-  const a = document.createElement('a');
-  a.href = url; a.download = filnamn;
-  document.body.append(a); a.click(); a.remove();
-  window.setTimeout(() => URL.revokeObjectURL(url), 60000);
-}
-// En pdf som görs i webbläsaren skrivs ut direkt där det går, och laddas annars ner, så att telefonen öppnar den.
-async function visaPdf(bytes: Uint8Array, filnamn: string) {
-  const fil = new Blob([bytes as unknown as BlobPart], { type: 'application/pdf' });
-  if (!kanSkrivaUtPdf()) { laddaNer(fil, filnamn); return; }
-  const url = URL.createObjectURL(fil);
-  skrivUt(url);
-  window.setTimeout(() => URL.revokeObjectURL(url), 60000);
-}
+// En fil som laddas ner, med namnet ur standardens filnamnet (K-519), med laddaNer i src/scripts/skattning.ts.
 // Sammanställningens knappar, och elevens när eleven är utfälld i veckan. Sammanställningen räknas när läraren trycker, så att
 // det senast ifyllda kommer med.
 async function samman(knapp: HTMLButtonElement) {

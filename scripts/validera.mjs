@@ -68,6 +68,8 @@ steg('datumkoll', 'node scripts/datumkoll.mjs');
 steg('ramindexprov', 'node scripts/ramindexprov.mjs');
 steg('veckoprov', 'node scripts/veckoprov.mjs');
 steg('bilder', 'node scripts/bilder.mjs');
+// Undervisningsmetodernas dokument och filmer ur metodriggen, prövade mot metodens fil (K-621).
+steg('metoderfiler', 'node scripts/metoderfiler.mjs');
 steg('bildbank', 'node scripts/bildbank.mjs');
 steg('filmmp4', 'node scripts/filmmp4.mjs --vid-behov');
 steg('bladfot', 'node scripts/bladfot.mjs --vid-behov');
@@ -108,6 +110,7 @@ steg('bankpdf', 'node scripts/bankpdf.mjs');
 steg('pdfdelar', 'node scripts/pdfdelar.mjs');
 steg('paritet', 'node scripts/paritet.mjs');
 steg('utskriftsformat', 'node scripts/utskriftsformat.mjs');
+steg('metoderprov', 'node scripts/metoderprov.mjs');
 steg('planprov', 'node scripts/planprov.mjs');
 steg('appprov', 'node scripts/appprov.mjs');
 steg('lathundprov', 'node scripts/lathundprov.mjs');
