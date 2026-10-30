@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, UNDERVISNINGSMETODENS_DELAR, delarnasText, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, UNDERVISNINGSMETODENS_DELAR, delarnasText, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -144,6 +144,21 @@ for (const [d, vantat] of lektionsfall) { const f = Object.values(faktaIFastForm
 
 // Undervisningsmetoderna (K-621): utfallens gränser som riggens standard räknar dem, och delarnas ordning och text.
 for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13'], [5, '1|2-2|3']]) { const g = utfallensGranser(n); const f = `${g.nastanAlla}|${g.deFlesta.join('-')}|${g.halften}`; if (f !== vantat) fel.push(`utfallensGranser(${n}) ger ${f}, inte ${vantat}`); }
+// Undervisningsmetodens fält: piloten har allt, och en fil med fel ger varje fel (sajtens K-627).
+{
+  const { parse } = await import('yaml');
+  const pilot = parse(readFileSync(join(mapp, '..', '..', 'content', 'undervisningsmetoder', 'explicit-undervisning.yaml'), 'utf8'));
+  const f0 = undervisningsmetodensFel(pilot);
+  if (f0.length) fel.push(`undervisningsmetodensFel ger fel i piloten: ${f0.slice(0, 3).join('; ')}`);
+  const trasig = structuredClone(pilot);
+  trasig.inledning = [{ ['Det här är en mening som har ett kolon mitt i sig utan citattecken']: 'resten' }];
+  trasig.profil.evidens.larande.kort = 'x'.repeat(81);
+  trasig.progression.rader[0].fraga = 'Gick det';
+  trasig.plan.skattningar[0].regler = [{ om: 'under 4 två veckor', rad: 'finns-inte' }];
+  trasig.mal = 'Ett mål';
+  const f1 = undervisningsmetodensFel(trasig).join(' | ');
+  for (const v of ['kolon utan citattecken', 'fler än 80 tecken', 'frågetecken', 'inte är en rad i uppföljningen', 'i rad"', 'inget mål']) if (!f1.includes(v)) fel.push(`undervisningsmetodensFel fångar inte ${v}`);
+}
 if (UNDERVISNINGSMETODENS_DELAR.map((x) => x.nr).join('') !== '1234AB') fel.push('UNDERVISNINGSMETODENS_DELAR har inte delarna 1, 2, 3, 4, A och B i ordning');
 { const t = delarnasText(UNDERVISNINGSMETODENS_DELAR[1], { minuter: 40, amne: 'matematik', andra: 4 }); if (t.rad !== 'En lektion på 40 minuter, del för del.' || !t.text.includes('i matematik och i fyra andra ämnen')) fel.push(`delarnasText fyller inte i minuterna, ämnet och exemplen: ${t.rad} / ${t.text}`); }
 { const t = delarnasText(UNDERVISNINGSMETODENS_DELAR[2], { veckor: 4, progression: 'Metodens egen text.' }); if (!t.rad.includes('de första fyra veckorna') || t.text !== 'Metodens egen text.') fel.push(`delarnasText fyller inte i del 3: ${t.rad} / ${t.text}`); }

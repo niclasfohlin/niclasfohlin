@@ -28,7 +28,7 @@ const CELLER: Record<string, [string, string, unknown][]> = {
   'kom-igang': [['fore-forsta', 'Före första lektionen', d.checklista], ['planera-lektionen', 'Planera lektionen', d.amnesexempel?.some((e: { plan?: unknown }) => e.plan)], ['forsta-lektionen', 'Första lektionen', d.forsta], ['de-forsta-veckorna', 'De första veckorna', d.progression], ['efter-de-forsta-veckorna', 'Efter de första veckorna', true], ['till-arbetslaget', 'Till arbetslaget', d.uppdrag]],
   'hall-i': [['karnan', 'Kärnan: fast och fritt', d.karna], ['lararens-fragor', 'Lärarens frågor', d.lararensFragor], ['nar-det-glider', 'När det glider', true]],
   'att-skriva-ut': [['materialet', 'Lektionskortet', true], ['materialet-for-klassen', 'Materialet för klassen', d.ramar], ['planeringsmallen', 'Planeringsmallen', d.planeringsmall], ['observationsmallen', 'Observationsmallen', d.observation]],
-  valet: [['nar-passar', 'När passar metoden?', d.passar], ['invandningar', 'Invändningar', d.invandningar], ['forskningen', 'Det forskningen visar', d.grund], ['referensbladet', 'Forskningen bakom', true], ['las-mer', 'Läs mer', d.lasMer]],
+  valet: [],
 };
 const celler = (did: string) => (CELLER[did] ?? []).filter(([, , finns]) => !!finns);
 const delar = metodensDelar(d);
@@ -50,7 +50,7 @@ const varianter = (d.tidsschema?.varianter ?? []) as { nar: string; text?: strin
 const forstaVariant = varianter.find((v) => v.nar === 'första lektionen');
 const andraVarianter = varianter.filter((v) => v.nar !== 'första lektionen');
 const rutinerFor = (vecka: string) => (d.rutiner?.rader ?? []).filter((r: { vecka: number }) => String(r.vecka) === String(vecka));
-const BELAGG: Record<string, string> = { provad: 'Prövad för sig', 'i-alla': 'Finns i alla prövade versioner', teori: 'Bygger på teori och klassrumsstudier' };
+const BELAGG: Record<string, string> = { provad: 'Prövad för sig', 'i-alla': 'Finns i nästan alla prövade versioner', teori: 'Bygger på teori och klassrumsstudier' };
 const fallgropFor = (namn: string) => tabellens.filter((f) => f.komponent === namn);
 const sorteradeKallor = (grupp: string) => (d.kallor ?? []).filter((x: { grupp: string }) => x.grupp === grupp);
 const lasMerKalla = (x: { kalla?: string }) => (x.kalla ? (d.kallor ?? []).find((y: { id: string }) => y.id === x.kalla) : undefined);
@@ -89,7 +89,7 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
     {d.karna?.varv && <p class="um-varv">{d.karna.varv}</p>}
   </div>
   {d.karna?.grundregel && <p>{d.karna.grundregel}</p>}
-  <Umfilknappar id={id} filer={filer} slag={['lektionskort']} />
+  <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} stor />
   {(d.inledning ?? []).slice(1).map((s: string) => <p set:html={k(s)} />)}
   {d.roll && (
     <section class="um-avsnitt" id="lararens-roll">
@@ -109,7 +109,6 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
 
 <section class="um-del" id="del-lektionen" aria-labelledby="del-lektionen-rubrik">
   <header class="um-band"><span class="um-band-nr" aria-hidden="true">2</span><div><h2 id="del-lektionen-rubrik"><span class="visually-hidden">Del 2: </span>{del('lektionen').namn}</h2><p>{del('lektionen').rad}</p></div></header>
-  <p class="um-overgang">{del('lektionen').text}</p>
   <nav class="um-remsa" aria-label="Lektionens delar">
     <ol>
       {steg.map((s) => { const r = tidsschematsRad(d, s.namn); return <li><a href={`#del-${s.namn.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}`}><span class="um-remsa-tid">{r?.tid}</span><span class="um-remsa-namn">{s.namn}</span></a></li>; })}
@@ -255,7 +254,13 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
     <section class="um-avsnitt" id="forsta-lektionen">
       <h3>{d.forsta.rubrik}</h3>
       {(d.forsta.text ?? []).map((s: string) => <p set:html={esc(s).replace(/”([^”]+)”/g, '<q class="um-replik">$1</q>')} />)}
-      {forstaVariant && <p class="um-not">Minuterna i första lektionen: {forstaVariant.delar.map((x) => `${x.fas} ${x.tid}`).join(', ')}.</p>}
+      {forstaVariant && (
+        <table class="m-tabell stapla um-tabell um-minuter">
+          <caption>Första lektionen, minut för minut</caption>
+          <thead><tr><th scope="col">Delen</th><th scope="col">Minuterna</th><th scope="col">Du säger</th></tr></thead>
+          <tbody>{forstaVariant.delar.map((x) => { const st = steg.find((y) => y.namn === x.fas); return <tr><th scope="row" data-rubrik="Delen">{x.fas}</th><td data-rubrik="Minuterna">{x.tid}</td><td data-rubrik="Du säger">{(st?.fraser ?? []).slice(0, 2).map((f: string) => `”${f}”`).join(' ')}</td></tr>; })}</tbody>
+        </table>
+      )}
       {rutinerFor('1').map((r: Record<string, any>) => (
         <div class="um-ruta" id="rutinen-vecka-1">
           <p class="um-ruta-rubrik">Rutinen: {r.namn}</p>
@@ -266,7 +271,7 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
       ))}
       {d.forsta.plan && (
         <>
-          <p class="um-ruta-rubrik">Förlagan till första lektionen, ifylld</p>
+          <p class="um-ruta-rubrik">Första lektionen ifylld i planeringsmallen, som exempel</p>
           <Planeringsblad d={d} plan={d.forsta.plan} amne={huvud ? exempletsAmne(huvud) : undefined} variant="första lektionen" />
         </>
       )}
@@ -281,18 +286,13 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
         </dl>
       )}
       {(d.plan?.skattningar ?? []).length > 0 && (
-        <div class="um-ruta um-skattningsruta">
-          <p class="um-ruta-rubrik">Varje vecka i Lär dig metoden</p>
-          <p>I slutet av veckan skattar du två frågor från 1 till 10: {d.plan.skattningar.map((x: { namn: string }) => x.namn).join(' och ')} Du skriver också en kommentar för veckan, och linjerna visar hur du utvecklas.</p>
-          <dl class="um-uppf">{uppf.filter((r) => SKATTNINGARNA.includes(r.id)).map((r) => <div><dt>{r.nar}</dt><dd>{r.vad}</dd></div>)}</dl>
-          <p class="um-filknappar"><a class="knapp sekundar" href={`/metoder/${id}/lar-dig`}>Lär dig metoden</a></p>
-        </div>
+        <p>Varje fredag skattar du två frågor från 1 till 10 i <a href={`/metoder/${id}/lar-dig`}>Lär dig metoden</a>: {d.plan.skattningar.map((x: { namn: string }) => x.namn).join(' och ')} Linjerna visar hur du utvecklas, och planen säger vad du gör om en skattning står lågt två veckor i rad.</p>
       )}
       {d.larandet && (
-        <div class="um-ruta">
-          <p class="um-ruta-rubrik">{d.larandet.rubrik}</p>
-          <dl class="um-larandet">{d.larandet.omraden.map((o: { omrade: string; syns: string }) => <div><dt>{({ amneskunskaper: 'Ämneskunskaperna', sprak: 'Språket', lasning: 'Läsningen', skrivning: 'Skrivandet', kommunikation: 'Kommunikationen', samarbete: 'Samarbetet' } as Record<string, string>)[o.omrade] ?? o.omrade}</dt><dd>{o.syns}</dd></div>)}</dl>
-        </div>
+        <details class="um-rad">
+          <summary><span>{d.larandet.rubrik}</span></summary>
+          <dl class="um-rad-inne um-larandet">{d.larandet.omraden.map((o: { omrade: string; syns: string }) => <div><dt>{({ amneskunskaper: 'Ämneskunskaperna', sprak: 'Språket', lasning: 'Läsningen', skrivning: 'Skrivandet', kommunikation: 'Kommunikationen', samarbete: 'Samarbetet' } as Record<string, string>)[o.omrade] ?? o.omrade}</dt><dd>{o.syns}</dd></div>)}</dl>
+        </details>
       )}
       {d.progression.rader.map((v: Record<string, string>) => (
         <article class="um-vecka" id={`vecka-${v.vecka}`}>
@@ -320,7 +320,7 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
   <section class="um-avsnitt" id="efter-de-forsta-veckorna">
     <h3>Efter de första veckorna</h3>
     <dl class="um-uppf">
-      {uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...MED_DIG, ...SKATTNINGARNA].includes(r.id)).map((r) => <div><dt>{r.nar}</dt><dd>{r.vad}</dd></div>)}
+      {uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...MED_DIG].includes(r.id)).map((r) => <div><dt>{r.nar}</dt><dd>{r.vad}</dd></div>)}
     </dl>
   </section>
   {d.uppdrag && (
@@ -328,19 +328,21 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
       <h3>{d.uppdrag.rubrik ?? 'Till arbetslaget'}</h3>
       {d.uppdrag.text && <p>{d.uppdrag.text}</p>}
       {d.uppdrag.forbered && (
-        <div class="um-ruta">
-          <p class="um-ruta-rubrik">Möte 1, före första lektionen</p>
-          <p>{d.uppdrag.forbered.text}</p>
-          <ol>{d.uppdrag.forbered.fragor.map((f: string) => <li>{f}</li>)}</ol>
-        </div>
+        <details class="um-rad">
+          <summary><span>Möte 1, före första lektionen</span></summary>
+          <div class="um-rad-inne">
+            <p>{d.uppdrag.forbered.text}</p>
+            <ol>{d.uppdrag.forbered.fragor.map((f: string) => <li>{f}</li>)}</ol>
+          </div>
+        </details>
       )}
       {d.uppdrag.planera && <p>{/^planera/i.test(d.uppdrag.planera) ? d.uppdrag.planera : <><strong>Planera.</strong> {d.uppdrag.planera}</>}</p>}
       {d.uppdrag.genomfor && <p>{/^(pröva|genomför)/i.test(d.uppdrag.genomfor) ? d.uppdrag.genomfor : <><strong>Genomför.</strong> {d.uppdrag.genomfor}</>}</p>}
       {d.uppdrag.reflektera && (
-        <div class="um-ruta">
-          <p class="um-ruta-rubrik">Möte 2, i slutet av de första veckorna</p>
-          <ol>{d.uppdrag.reflektera.map((f: string) => <li>{f}</li>)}</ol>
-        </div>
+        <details class="um-rad">
+          <summary><span>Möte 2, i slutet av de första veckorna</span></summary>
+          <ol class="um-rad-inne">{d.uppdrag.reflektera.map((f: string) => <li>{f}</li>)}</ol>
+        </details>
       )}
     </section>
   )}
@@ -349,11 +351,11 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
 <section class="um-del" id="del-hall-i" aria-labelledby="del-hall-i-rubrik">
   <header class="um-band"><span class="um-band-nr" aria-hidden="true">4</span><div><h2 id="del-hall-i-rubrik"><span class="visually-hidden">Del 4: </span>{del('hall-i').namn}</h2><p>{del('hall-i').rad}</p></div></header>
   <nav class="um-celler" aria-label={`Avsnitten i ${del('hall-i').namn}`}><ul>{celler('hall-i').map(([cid, namn]) => <li><a href={`#${cid}`}>{namn}</a></li>)}</ul></nav>
-  <p class="um-overgang">{del('hall-i').text}</p>
   {d.karna && (
     <section class="um-avsnitt" id="karnan">
       <h3>{d.karna.rubrik}</h3>
       <p>{d.karna.text}</p>
+      <p class="um-not">Vid varje del står belägget. Prövad för sig betyder att studier har prövat delen ensam. Finns i nästan alla prövade versioner betyder att delen finns i de program som gav effekt, men att ingen har prövat den ensam. Bygger på teori och klassrumsstudier betyder att den kommer ur hur lärandet går till och ur studier av framgångsrika lärare.</p>
       {komp.map((x, i) => (
         <details class="um-rad um-karnrad" id={`karnan-${i + 1}`}>
           <summary><span><span class="um-kort-nr" aria-hidden="true">{i + 1}</span> {x.namn}</span></summary>
@@ -400,25 +402,24 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
 <section class="um-del" id="del-att-skriva-ut" aria-labelledby="del-att-skriva-ut-rubrik">
   <header class="um-band"><span class="um-band-nr" aria-hidden="true">A</span><div><h2 id="del-att-skriva-ut-rubrik"><span class="visually-hidden">Bilaga A: </span>{del('att-skriva-ut').namn}</h2><p>{del('att-skriva-ut').rad}</p></div></header>
   <nav class="um-celler" aria-label={`Avsnitten i ${del('att-skriva-ut').namn}`}><ul>{celler('att-skriva-ut').map(([cid, namn]) => <li><a href={`#${cid}`}>{namn}</a></li>)}</ul></nav>
-  <p class="um-overgang">{del('att-skriva-ut').text}</p>
   <section class="um-avsnitt" id="materialet">
     <h3>Lektionskortet</h3>
     <p>Hela lektionen på ett A4 att ha i handen: kärnan, delarna med det du gör och säger, beslutet och rättningen.</p>
     {bilder.lektionskort?.length > 0 && <div class="um-sidor">{bilder.lektionskort.map((b) => <a href={filer.lektionskort?.pdf} data-goatcounter-click={`fil:${id}-lektionskort.pdf`} data-goatcounter-title={`Bilden av lektionskort, pdf, ${id}`} class="um-sida"><img src={b.src} alt="Lektionskortet: kärnan i fyra rutor, lektionens delar med det du gör och säger, beslutet och rättningen" loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>)}</div>}
-    <Umfilknappar id={id} filer={filer} slag={['lektionskort']} />
+    <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} />
   </section>
   {d.ramar && (
     <section class="um-avsnitt" id="materialet-for-klassen">
       <h3>{d.ramar.rubrik}</h3>
       {(d.ramar.text ?? []).map((s: string) => <p>{s}</p>)}
-      {(d.ramar.ramar ?? []).map((r: { rubrik: string; text: string[] }) => (
+      {(d.ramar.ramar ?? []).map((r: { rubrik: string; text: string[] }, i: number) => (
         <div class="um-blad-post">
+          {bilder.materialet?.[i] && <a href={filer.materialet?.pdf} data-goatcounter-click={`fil:${id}-materialet.pdf`} data-goatcounter-title={`Bilden av materialet, pdf, ${id}`} class={`um-sida${bilder.materialet[i].bredd > bilder.materialet[i].hojd ? ' um-sida-liggande' : ''}`}><img src={bilder.materialet[i].src} alt={r.rubrik} loading="lazy" decoding="async" width={bilder.materialet[i].bredd} height={bilder.materialet[i].hojd} /></a>}
           <h4>{r.rubrik}</h4>
           {r.text.map((s) => <p>{s}</p>)}
         </div>
       ))}
-      {bilder.materialet?.length > 0 && <div class="um-sidor">{bilder.materialet.map((b, i) => <a href={filer.materialet?.pdf} data-goatcounter-click={`fil:${id}-materialet.pdf`} data-goatcounter-title={`Bilden av materialet, pdf, ${id}`} class={`um-sida${b.bredd > b.hojd ? ' um-sida-liggande' : ''}`}><img src={b.src} alt={d.ramar.ramar?.[i]?.rubrik ?? 'Materialet för klassen'} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>)}</div>}
-      <Umfilknappar id={id} filer={filer} slag={['materialet']} />
+      <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} />
     </section>
   )}
   {d.planeringsmall && (
@@ -426,7 +427,7 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
       <h3>Planeringsmallen</h3>
       <p>{d.planeringsmall.text}</p>
       {bilder.planeringsmall?.length > 0 && <div class="um-sidor">{bilder.planeringsmall.map((b, i) => <a href={filer.planeringsmall?.pdf} data-goatcounter-click={`fil:${id}-planeringsmall.pdf`} data-goatcounter-title={`Bilden av planeringsmall, pdf, ${id}`} class="um-sida"><img src={b.src} alt={`Planeringsmallen, sidan ${i + 1}: Före lektionen med stegen och felet, lektionens delar med beslutet, och Efter lektionen`} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>)}</div>}
-      <Umfilknappar id={id} filer={filer} slag={['planeringsmall']} />
+      <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['planeringsmall']} />
     </section>
   )}
   {d.observation && (
@@ -435,14 +436,13 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
       <p><strong>Frågan:</strong> {d.observation.fraga}</p>
       <p>{d.observation.text}</p>
       {bilder.observation?.length > 0 && <div class="um-sidor">{bilder.observation.map((b, i) => <a href={filer.observation?.pdf} data-goatcounter-click={`fil:${id}-observation.pdf`} data-goatcounter-title={`Bilden av observation, pdf, ${id}`} class="um-sida"><img src={b.src} alt={i === 0 ? 'Observationsmallen, sidan 1: loggen under lektionen, från Jag gör till Du gör' : `Observationsmallen, sidan ${i + 1}: efter lektionen, kärnan rad för rad och samtalet`} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>)}</div>}
-      <Umfilknappar id={id} filer={filer} slag={['observation']} />
+      <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['observation']} />
     </section>
   )}
 </section>
 
 <section class="um-del" id="del-valet" aria-labelledby="del-valet-rubrik">
   <header class="um-band"><span class="um-band-nr" aria-hidden="true">B</span><div><h2 id="del-valet-rubrik"><span class="visually-hidden">Bilaga B: </span>{del('valet').namn}</h2><p>{del('valet').rad}</p></div></header>
-  <nav class="um-celler" aria-label={`Avsnitten i ${del('valet').namn}`}><ul>{celler('valet').map(([cid, namn]) => <li><a href={`#${cid}`}>{namn}</a></li>)}</ul></nav>
   {d.passar && (
     <details class="um-rad um-rad-stor" id="nar-passar">
       <summary><h3>{d.passar.rubrik}</h3></summary>
@@ -476,7 +476,7 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
   <details class="um-rad um-rad-stor um-referensblad" id="referensbladet">
     <summary><h3>Forskningen bakom {d.titel.toLocaleLowerCase('sv')}</h3></summary>
     <div class="um-rad-inne">
-    <p class="um-not">{(d.kallor ?? []).length} källor, valda {urval.datum ? new Date(urval.datum).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long', year: 'numeric' }) : ''} efter metodens regel. Talet till vänster är källans effektstorlek, och ordet under säger hur stor den är. Märkena säger vilka rader i metodkortet källan bär.</p>
+    <p class="um-not">{(d.kallor ?? []).length} källor, valda {urval.datum ? new Date(urval.datum).toLocaleDateString('sv-SE', { day: 'numeric', month: 'long', year: 'numeric' }) : ''} efter metodens regel. Talet till vänster är källans effektstorlek, och ordet under säger hur stor den är, för den källan. Nivån i metodkortet väger alla källorna för området och hur säkra de är, så den kan ha ett annat ord. Märkena säger vilka rader i metodkortet källan bär.</p>
     {KALLGRUPPER.map((g) => sorteradeKallor(g.id).length > 0 && (
       <div class="um-kallgrupp">
         <p class="um-kallgrupp-namn">{g.namn} <span>{g.text}</span></p>
@@ -489,7 +489,7 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
             const text = esc(x.text).replace(titel, x.adress ? `<a href="${esc(x.adress)}">${titel}</a>` : titel);
             return (
               <li class="um-kallpost" id={`kalla-${x.id}`}>
-                <p class="um-kall-tal">{e ? <><span class="um-kall-siffra">{e.tal}</span><span class="um-kall-ord">{e.ord}</span></> : <span class="um-kall-ord">{SLAGORD[x.slag] ?? x.slag}</span>}</p>
+                <p class="um-kall-tal">{e && /\d/.test(e.tal) && <span class="um-kall-siffra">{e.tal}</span>}<span class={`um-kall-ord${e && !/\d/.test(e.tal) ? ' ensam' : ''}`}>{e ? e.ord : SLAGORD[x.slag] ?? x.slag}</span></p>
                 <div>
                   <p set:html={text} />
                   <p class="um-kall-rad">{e ? e.resten : x.bidrag}{l && <>{' · '}<a href={l.href}>{l.text}</a></>}</p>
@@ -507,7 +507,7 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
         <ul>{urval.uteslutna.map((u: { namn: string; skal: string }) => <li><strong>{u.namn}.</strong> {u.skal}{/[.!?]$/.test(u.skal) ? '' : '.'}</li>)}</ul>
       </div>
     )}
-    <Umfilknappar id={id} filer={filer} slag={['referensblad']} />
+    <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['referensblad']} />
     </div>
   </details>
   {d.lasMer && (

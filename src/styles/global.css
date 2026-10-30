@@ -513,10 +513,6 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
    få fem att se bra ut (src/components/Staplar.astro). */
 :root { --farg-stapel: var(--farg-lasning); --farg-stapel-tom: #c8d0da; --farg-stapel-neutral: var(--farg-text-svag); }
 .metod[data-del="metoder"], .metodkort[data-del="metoder"]:not([data-omrade]), .metodprofil { --amnefarg: var(--farg-mork); }
-.metodprofil[data-omrade="Matematik"] { --amnefarg: var(--farg-accent); }
-.metodprofil[data-omrade="Läsning"] { --amnefarg: var(--farg-lasning); }
-.metodprofil[data-omrade="Skrivning"] { --amnefarg: var(--farg-skrivning); }
-.metodprofil[data-omrade="Socialt"] { --amnefarg: var(--farg-socialt); }
 .mp-kallas { margin: -0.15rem 0 0.8rem; font-family: var(--typsnitt-ui); font-size: 1rem; color: var(--farg-text-svag); text-wrap: balance; }
 .mp-utkast { margin: 1rem 0; padding: 0.55rem 0.8rem; border-left: 3px solid #e9b65a; background: #fff8ea; font-family: var(--typsnitt-ui); font-size: 0.92rem; }
 .metodprofil .faktaruta-etikett { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
@@ -556,7 +552,7 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .mp-nivaer td { padding: 0.2rem 0; }
 .mp-nivaer .mp-inte { padding: 0 0.45rem; }
 /* Primär evidens med sajtens märken för områdena, i områdets färg. */
-.mp-primar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.35rem 1rem; margin: 0; padding: 0.6rem 0; border-top: 1px solid var(--farg-kant-svag); font-family: var(--typsnitt-ui); }
+.mp-primar { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 0.35rem 1rem; margin: 0; padding: 0.6rem 0; border-top: 1px solid var(--farg-kant-svag); font-family: var(--typsnitt-ui); }
 .mp-primar > span:first-child { font-weight: 600; color: var(--farg-text-svag); }
 .mp-omraden { display: inline-flex; flex-wrap: wrap; gap: 0.35rem; }
 .mp-omraden .amne { margin: 0; }
@@ -730,7 +726,7 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .um-blad-fot { margin: 0.35rem 0 0; font-weight: 600; }
 .um-blad-fot span { font-weight: 400; color: var(--farg-text-svag); }
 .um-blad-lektion { width: 100%; border-collapse: collapse; table-layout: fixed; }
-.um-blad dd, .um-blad-text, .um-blad-ruta li { overflow-wrap: anywhere; }
+.um-blad dd, .um-blad-text, .um-blad-ruta li { overflow-wrap: break-word; }
 .um-blad-lektion th, .um-blad-lektion td { padding: 0.45rem 0.4rem; border-top: 1px solid var(--farg-kant); vertical-align: top; text-align: left; }
 .um-blad-lektion th { width: 6.5rem; background: var(--farg-ton); }
 .um-blad-fas { display: block; font-weight: 700; color: var(--farg-accent-mork); }
@@ -820,11 +816,40 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .mp-bank-en .mp-namn { font-size: 1rem; }
 .mp-stapelrad { display: inline-flex; align-items: center; gap: 0.5rem; }
 .mp-bank-en .mp-staplar i { height: 1.35rem; border-left-width: 10px; }
-.mp-kommentar { margin: 0.5rem 0 0; padding: 0.45rem 0.65rem; border-left: 3px solid var(--farg-stapel); border-radius: 0 6px 6px 0; background: var(--farg-yta); font-size: 0.85rem; line-height: 1.4; color: var(--farg-text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.mp-kommentar { margin: 0.5rem 0 0; padding: 0.45rem 0.65rem; border-left: 3px solid var(--farg-stapel); border-radius: 0 6px 6px 0; background: var(--farg-yta); font-size: 0.85rem; line-height: 1.4; color: var(--farg-text); }
 .mp-bank-par { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; padding: 0.6rem 0 0.25rem; font-family: var(--typsnitt-ui); }
-.mp-bank-halv { display: flex; flex-direction: column; gap: 0.2rem; margin: 0; }
+.mp-bank-halv { display: flex; flex-direction: column; gap: 0.2rem; margin: 0; min-width: 0; }
+.mp-bank-halv .mp-stapelrad { flex-wrap: wrap; row-gap: 0.2rem; }
 .mp-bank-halv .mp-namn { font-size: 0.9rem; }
 .mp-bank-halv .mp-varde { font-size: 0.92rem; }
+.mp-timmar { display: block; font-size: 0.8rem; font-weight: 400; color: var(--farg-text-svag); }
+.mp-varde .mp-timmar { display: inline; font-weight: 400; }
+.um-minuter caption { caption-side: top; text-align: left; font: 700 1rem/1.3 var(--typsnitt-ui); padding: 0 0 0.4rem; }
+.um-minuter td:last-child { font-style: italic; }
+/* Designgranskningen omgång 2: inga ord klipps i remsan och cellerna, ett udda antal celler fyller raden, affischerna
+   med sin text, och veckorna utan ram. */
+.um-remsa-namn, .um-celler a { overflow-wrap: break-word; hyphens: auto; }
+@media (max-width: 23.99rem) {
+  .um-remsa ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .um-celler a { padding-inline: 0.5rem; font-size: 0.875rem; }
+}
+.um-celler li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+@media (min-width: 48rem) {
+  .um-celler li:last-child:nth-child(odd) { grid-column: auto; }
+  .um-celler li:last-child:nth-child(3n + 1) { grid-column: 1 / -1; }
+  .um-celler li:last-child:nth-child(3n + 2) { grid-column: span 2; }
+  .um-blad-post { display: grid; grid-template-columns: 14rem minmax(0, 1fr); column-gap: 1.25rem; align-items: start; }
+  .um-blad-post > .um-sida { grid-column: 1; grid-row: 1 / span 3; width: 100%; margin: 1.25rem 0 0; }
+  .um-blad-post > :not(.um-sida) { grid-column: 2; }
+}
+.um-blad-post > .um-sida { margin: 0.75rem 0 0.25rem; }
+.um-vecka { border: 0; border-top: 1px solid var(--farg-kant); border-radius: 0; background: none; padding: 1rem 0 0; }
+.um-ruta > :first-child { margin-top: 0; }
+.um-sidan p { text-wrap: pretty; }
+.um-kall-ord.ensam { font-size: 0.85rem; font-weight: 700; color: var(--farg-accent-mork); }
+.um-filknappar .knapp.liten { min-height: 2.75rem; padding-inline: 1rem; }
+.um-filrader li { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+.um-filnamn { min-width: 0; }
 /* Slut på undervisningsmetodens sida (K-621). */
 html.js .samla {
   position: sticky; bottom: 0.75rem; z-index: 5;
@@ -4276,6 +4301,11 @@ button.pl-passroll { min-height: 2.75rem; }
 .ld-lage:empty { display: none; }
 .ld-remsa { margin: 1.25rem 0 0; }
 .ld-remsa .pl-remsa-vecka { min-width: 3rem; min-height: 3rem; }
+/* Remsan på en rad i den minsta telefonen, så att Efter inte står ensam under (formgranskningen 2026-10-30, fynd 10). */
+@media (max-width: 23.99rem) {
+  .ld-remsa .pl-remsa-knappar { display: grid; grid-template-columns: repeat(var(--ld-kolumner, 6), minmax(0, 1fr)); gap: 0.3rem; }
+  .ld-remsa .pl-remsa-vecka { min-width: 0; padding-inline: 0.15rem; font-size: 0.95rem; }
+}
 .ld-fas { margin: 1.5rem 0 2rem; }
 .ld-fas > h2 { font-size: clamp(1.6rem, 6vw, 2.1rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; text-wrap: balance; margin: 0 0 0.3rem; }
 .ld-fas > h2:focus, .ld-samman > h2:focus { outline: none; }
@@ -4346,8 +4376,17 @@ button.pl-passroll { min-height: 2.75rem; }
 .ld-tillsamman .pl-textknapp { min-height: 3rem; }
 .ld .pl-regel .pl-andra-knappar { margin: 0.5rem 0 0; }
 .ld .pl-regel p:first-child { margin: 0; }
-/* Skalans knappar har sin egen bredd på en bred skärm, så att ramen inte går över hela rutan. */
+/* Skalans knappar har sin egen bredd på en bred skärm, så att ramen inte går över hela rutan, och skalans ändar står under
+   knapparna i samma bredd. */
 @media (min-width: 34.01rem) { .ld .pl-skala-lang { width: max-content; } }
+.ld-skalans-andar { display: flex; justify-content: space-between; gap: 1rem; max-width: 22rem; margin: -0.3rem 0 0.6rem; font-size: 0.85rem; color: var(--farg-text-svag); }
+@media (min-width: 34.01rem) { .ld-skalans-andar { max-width: 24.2rem; } }
+/* Målets kort är val: en ring till vänster som fylls när kortet är valt. */
+.ld-valknapp { position: relative; padding-left: 2.7rem; }
+.ld-valknapp::before { content: ''; position: absolute; left: 0.85rem; top: 0.75rem; width: 1.05rem; height: 1.05rem; border: 2px solid var(--farg-accent); border-radius: 50%; background: var(--farg-yta); }
+.ld-valknapp[aria-pressed="true"]::before { background: var(--farg-accent); box-shadow: inset 0 0 0 3px var(--farg-yta); }
+.ld-valknapp:hover { border-color: var(--farg-accent); }
+.ld-malfalt { min-height: 3.6rem; }
 /* Efter stegen och Läs mer. */
 .ld-lasmer { list-style: none; padding: 0; margin: 0; }
 .ld-lasmer li { padding: 0.6rem 0; border-bottom: 1px solid var(--farg-kant); }

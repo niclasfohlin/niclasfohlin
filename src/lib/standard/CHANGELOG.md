@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.36.0, 2026-10-30
+
+- `undervisningsmetod.js` (sajtens K-627): `undervisningsmetodensFel(d)` säger vad som saknas eller har fel form i en undervisningsmetods fil för att sajten ska kunna visa den: fälten som sidan, metodkortet och Lär dig metoden läser, källorna som kortet nämner, stegens tre rutor och beslutsstället, frågan Gick det? för varje vecka, lärarens två skattningar med regler i formen "under X i N veckor i rad", filmerna, ett mål som inte ska stå där och en text som YAML har läst som ett objekt för att ett kolon saknar citattecken. Sajtens schema och leveransprovet `scripts/metodriggprov.mjs` kör den, och riggen kan läsa den genom `build/standarden.mjs`.
+
 ## 0.35.0, 2026-10-30
 
 - `plan.js`, Lär dig metoden (sajtens K-628, riggens standard för undervisningsmetoder, avsnitt 16; Niclas 2026-10-30: "En rot på allt, men som en egen harness för metoder"): `SKATTNINGARNAS_VEM` har `lararen`, en skattning som läraren gör av sig själv med en skala av två heltal, som ritas och räknas som gruppens med linjen och reglerna, och skalan behöver ingen tabell med stegens namn. `metodensSkattningar` läser uppföljningens rad med dess text eller dess `id`, som undervisningsmetodernas rader har, och `sammanstallning` ger en linje för varje skattning av gruppen eller läraren. Motorn läser lektionens ord som passets: "varje lektion", "första lektionen" och "en lektion på 60 minuter" (`tolkaTid`, `tolkaPassen`, `variantensNar`); Stödundervisnings tider läses som förut.

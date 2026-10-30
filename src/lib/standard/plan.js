@@ -893,7 +893,9 @@ export const SKATTNINGARNAS_VEM = /** @type {const} */ (['gruppen', 'eleverna', 
 
 /**
  * En regel på linjen i metodens skattning av gruppen, ur regelns ord: "nedåt 2 veckor i rad", "under 7 i 4 veckor utan att
- * stiga" och "minst 7 i 4 veckor". Vad läraren gör står i uppföljningens rad som regeln hör till.
+ * stiga", "under 5 i 2 veckor i rad" och "minst 7 i 4 veckor". Vad läraren gör står i uppföljningens rad som regeln hör till.
+ * Under i rad slår till när varje vecka i följd står under gränsen, också när linjen stiger (sajtens K-628; de kalla
+ * läsarna 2026-10-30: en lärare som skattade 3 och sedan 4 fick inget råd, eftersom linjen steg).
  * @param {unknown} text
  * @returns {Regel | null}
  */
@@ -904,6 +906,8 @@ export function tolkaRegel(text) {
   if (m) return Number(m[1]) >= 1 ? { typ: 'nedat', veckor: Number(m[1]) } : null;
   m = t.match(/^under (\d+) i (\d+) veckor utan att stiga$/u);
   if (m) return Number(m[2]) >= 2 ? { typ: 'under', grans: Number(m[1]), veckor: Number(m[2]) } : null;
+  m = t.match(/^under (\d+) i (\d+) veckor i rad$/u);
+  if (m) return Number(m[2]) >= 1 ? { typ: 'underIRad', grans: Number(m[1]), veckor: Number(m[2]) } : null;
   m = t.match(/^minst (\d+) i (\d+) veckor$/u);
   if (m) return Number(m[2]) >= 1 ? { typ: 'minst', grans: Number(m[1]), veckor: Number(m[2]) } : null;
   return null;
@@ -924,6 +928,7 @@ export function regelnGaller(r, varden) {
   if (varden.length < r.veckor) return false;
   const s = varden.slice(-r.veckor);
   if (r.typ === 'under') return s.every((v, i) => v < r.grans && (i === 0 || v <= s[i - 1]));
+  if (r.typ === 'underIRad') return s.every((v) => v < r.grans);
   return s.every((v) => v >= r.grans);
 }
 /**
@@ -1007,7 +1012,7 @@ export function metodensSkattningar(d) {
     if (s.ram && !(d.ramar?.ramar ?? []).some((r) => r.rubrik === s.ram)) fel.push(`${vad} gäller ramen "${s.ram}", som metoden inte har.`);
     const regler = (s.regler ?? []).flatMap((r) => {
       const regel = tolkaRegel(r.om), rr = radAv(r.rad);
-      if (!regel) { fel.push(`${vad}: regeln "${r.om}" går inte att läsa. Skriv den som nedåt 2 veckor i rad, under 7 i 4 veckor utan att stiga eller minst 7 i 4 veckor.`); return []; }
+      if (!regel) { fel.push(`${vad}: regeln "${r.om}" går inte att läsa. Skriv den som nedåt 2 veckor i rad, under 7 i 4 veckor utan att stiga, under 5 i 2 veckor i rad eller minst 7 i 4 veckor.`); return []; }
       if (rr < 0) { fel.push(`${vad}: regeln "${r.om}" gäller uppföljningens rad "${r.rad}", som metoden inte har.`); return []; }
       if (rader[rr].tid !== 'villkor') fel.push(`${vad}: uppföljningens rad "${r.rad}" är en regel och har tid: villkor.`);
       if (skala && 'grans' in regel && (regel.grans <= skala.fran || regel.grans > skala.till)) fel.push(`${vad}: regeln "${r.om}" har en gräns utanför skalan ${skala.fran}–${skala.till}.`);
@@ -1151,12 +1156,30 @@ export function larDigetsVeckor(plan, val, f, idag) {
 }
 
 /**
- * Var läraren är: före, före första stegets vecka; efter, från veckan efter det sista steget; och annars under stegen.
+ * Dagen för första lektionen med eleverna: dagen läraren har valt (val.start), och när den är en helg måndagen i första
+ * veckan med lektioner. Planens veckor och steg börjar med veckan för den dagen (Niclas 2026-10-30: "Bör man inte välja start
+ * för [när] man provar med elever så är 'Före' från man sparar planen till datumet för när man valt första lektionen").
+ * @param {Plan} plan
+ * @returns {string | null}
+ */
+export const forstaLektionen = (plan) => (plan.veckor.length ? (plan.start > plan.veckor[0].mandag ? plan.start : plan.veckor[0].mandag) : null);
+/**
+ * Var läraren är: före, till dagen för första lektionen; efter, från veckan efter det sista steget; och annars under stegen.
  * @param {Plan} plan
  * @param {string} idag
  * @returns {'fore' | 'under' | 'efter'}
  */
-export const larDigetsFas = (plan, idag) => (!plan.veckor.length || idag < plan.veckor[0].mandag ? 'fore' : idag >= plan.efter ? 'efter' : 'under');
+export const larDigetsFas = (plan, idag) => { const forsta = forstaLektionen(plan); return !forsta || idag < forsta ? 'fore' : idag >= plan.efter ? 'efter' : 'under'; };
+/** Hur många veckor Före räcker i förvalet: från veckan läraren gör planen till första lektionen tre veckor senare (Niclas samma dag: "Vissa kanske behöver 2-4 veckor på 'Före'"). */
+export const FORE_VECKOR = 3;
+/**
+ * Förvalet i Lär dig metoden: första lektionen på måndagen FORE_VECKOR veckor efter den här veckans, och metodens minsta antal
+ * lektioner i veckan, som forval.
+ * @param {Metodplan} mp
+ * @param {string} idag
+ * @returns {Val}
+ */
+export const larDigetsForval = (mp, idag) => ({ ...forval(mp, idag), start: plusDagar(mandagen(idag), 7 * FORE_VECKOR) });
 
 /**
  * Veckan läraren är i, som nummer bland lärarens veckor: under stegen veckan i dag, eller nästa vecka med ett steg under ett
@@ -1231,7 +1254,20 @@ export function larDigSammanstallning(plan, val, f, idag) {
   };
 }
 /** Regeln i ord, som det som hände på linjen: "under 5 i två veckor utan att stiga". @param {Regel} r */
-export const regelnIOrd = (r) => (r.typ === 'nedat' ? `nedåt ${talText(r.veckor)} veckor i rad` : r.typ === 'under' ? `under ${r.grans} i ${talText(r.veckor)} veckor utan att stiga` : `minst ${r.grans} i ${talText(r.veckor)} veckor`);
+export const regelnIOrd = (r) => (r.typ === 'nedat' ? `nedåt ${talText(r.veckor)} veckor i rad` : r.typ === 'under' ? `under ${r.grans} i ${talText(r.veckor)} veckor utan att stiga` : r.typ === 'underIRad' ? `under ${r.grans} i ${talText(r.veckor)} ${r.veckor === 1 ? 'vecka' : 'veckor i rad'}` : `minst ${r.grans} i ${talText(r.veckor)} veckor`);
+/**
+ * Den streckade linjen i lärarens diagram i en mening, ur regeln med en gräns: "Den streckade linjen är 5. Står skattningen under
+ * 5 i två veckor i rad, får du metodens råd." Utan gräns ingen (de kalla läsarna 2026-10-30: linjen vid 5 förklarades inte).
+ * @param {Regel[]} regler
+ */
+export const granslinjensText = (regler) => { const r = regler.find((x) => 'grans' in x); return r && 'grans' in r ? `Den streckade linjen är ${r.grans}. Står skattningen ${regelnIOrd(r)}, får du metodens råd.` : ''; };
+/**
+ * Skalornas ändar i Lär dig metoden, lika i alla metoder (riggens standard för undervisningsmetoder, avsnitt 16: "Frågorna och
+ * skalan 1 till 10 är desamma i alla metoder"; de kalla läsarna 2026-10-30: "Vad är 10?"). Frågorna i standardens ordning.
+ */
+export const LARARENS_SKALOR = /** @type {const} */ ([{ fraga: 'Hur säker är jag på metoden?', lagst: 'Inte alls säker', hogst: 'Helt säker' }, { fraga: 'Hur väl fungerar den i praktiken?', lagst: 'Fungerar inte', hogst: 'Fungerar mycket väl' }]);
+/** Skalans ändar för en av lärarens frågor, efter frågan och annars efter platsen i standardens ordning. @param {string} namn @param {number} j */
+export const skalansAndar = (namn, j) => LARARENS_SKALOR.find((x) => x.fraga === namn) ?? LARARENS_SKALOR[j] ?? null;
 /**
  * Reglerna som gällde i lärarens linjer, som det som hände, med uppföljningens rad och veckan: "Om du är osäker på metoden:
  * under 5 i två veckor utan att stiga, till och med vecka 2 (v. 47)". Gäller två regler samma vecka står den första.
@@ -3415,7 +3451,7 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ start: string, dagar: number[], langd: number, lektioner?: number[], niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, passtider?: Record<string, [string, string] | [string, string, number]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
  * @typedef {{ nr: number, datum: string, vecka: number, steg?: number | null, flyttatFran?: string }} Pass
  * @typedef {{ nr: number, innehall: number, igen: boolean, mandag: string, vecka: { ar: number, vecka: number }, pass: number[], bortfall: { datum: string, varfor: 'helgdag' | 'installt', namn?: string }[], steg?: number | null }} PlanVecka
- * @typedef {{ typ: 'nedat', veckor: number } | { typ: 'under', grans: number, veckor: number } | { typ: 'minst', grans: number, veckor: number }} Regel
+ * @typedef {{ typ: 'nedat', veckor: number } | { typ: 'under', grans: number, veckor: number } | { typ: 'underIRad', grans: number, veckor: number } | { typ: 'minst', grans: number, veckor: number }} Regel
  * @typedef {{ fran: number, till: number, tabell: string, steg: { fran: number, till: number, namn: string }[] }} Skala
  * @typedef {{ namn: string, vem: 'gruppen' | 'eleverna', rad: number, skala?: Skala, regler: (Regel & { rad: number })[], text?: string }} Skattning
  * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[], period?: true }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number, mitt?: number, slut?: number, planerade?: number, struket?: { pass: Pass[], veckor: PlanVecka[] }, skattningar?: Skattning[] }} Plan

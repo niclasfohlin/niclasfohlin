@@ -66,7 +66,10 @@ export function effektensDelar(effekt: string): { ord: string; tal: string; rest
   const [ord, ...rest] = effekt.split(':');
   const resten = rest.join(':').trim();
   const ordet = ord.trim();
-  const tal = /^ingen/i.test(ordet) ? '≈ 0' : resten.match(/(?:[dg]\s*=\s*)?(−?\d+,\d+)/)?.[1] ?? ordet.split(' ')[0];
+  const funnet = resten.match(/(?:[dg]\s*=\s*)?(−?\d+,\d+)/)?.[1];
+  // Det stora talet med högst två decimaler, som de andra; raden under har källans eget tal.
+  const avrundat = funnet && /,\d{3,}$/.test(funnet) ? (Math.round(Number(funnet.replace('−', '-').replace(',', '.')) * 100) / 100).toFixed(2).replace('.', ',').replace('-', '−') : funnet;
+  const tal = /^ingen/i.test(ordet) ? '≈ 0' : avrundat ?? ordet.split(' ')[0];
   return { ord: ordet, tal, resten };
 }
 

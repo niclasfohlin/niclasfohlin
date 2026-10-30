@@ -4,7 +4,7 @@
 // webbläsaren med samma byggstenar som Planera insatsens sammanställning (dokument i src/scripts/planpdf.ts), med pdf-lib,
 // som hämtas först när läraren trycker, och den lämnar aldrig enheten. Allt som räknas kommer ur standardens
 // larDigSammanstallning, som sidan visar.
-import { datumspann, datumText, isoVecka, kalendervecka, larDigetsRegler, mening, plusDagar, skattningensGranser, talText, uppraknat, type LarDigSammanstallning } from '../lib/standard/index.js';
+import { datumspann, datumText, granslinjensText, isoVecka, kalendervecka, larDigetsRegler, liten, mening, plusDagar, skalansAndar, skattningensGranser, talText, uppraknat, type LarDigSammanstallning } from '../lib/standard/index.js';
 import { dokument } from './planpdf';
 
 export interface LarDigPdfInfo {
@@ -15,6 +15,8 @@ export interface LarDigPdfInfo {
   steg: string[];
   /** Stegens fråga till Gick det? i samma ordning, eller tom när steget inte har någon. */
   fragor: string[];
+  /** Frågorna på arbetslagets möte efter stegen (uppdrag.reflektera). */
+  reflektera: string[];
   /** Uppföljningens rader, som reglerna pekar på. */
   uppfoljning: { nar: string; vad: string }[];
 }
@@ -37,12 +39,15 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
   if (s.kvar.length) p.text(`Kvar: ${uppraknat(s.kvar.map((x) => (x.steg !== null ? info.steg[x.steg] ?? '' : String(x.innehall))))}.`, { luft: 4 });
   if (s.lov.length) p.text(`Lov ${uppraknat(s.lov.map((m) => kalendervecka(isoVecka(m).vecka)))}.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
   const etiketter = s.veckor.map((v) => v.namn);
-  // Rubriken står på samma sida som skalans rad och linjen under den.
-  for (const l of s.linjer) {
-    p.rubrik(l.namn, 190);
+  // Rubriken står på samma sida som skalans rad och linjen under den. Linjen har sidans hela bredd, skalans ändar står före
+  // den och den streckade linjen förklaras under den (de kalla läsarna 2026-10-30).
+  for (const [j, l] of s.linjer.entries()) {
+    p.rubrik(l.namn, 150);
     if (!l.varden.some((x) => x !== undefined)) { p.text('Inte skattad än.', { luft: 4 }); continue; }
-    p.text(`${l.skala.fran} till ${l.skala.till}, vecka för vecka.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
-    p.linje(l.varden, etiketter, { fran: l.skala.fran, till: l.skala.till, granser: skattningensGranser(l) });
+    const andar = skalansAndar(l.namn, j);
+    p.text(andar ? `${l.skala.fran} är ${liten(andar.lagst)} och ${l.skala.till} är ${liten(andar.hogst)}, vecka för vecka.` : `${l.skala.fran} till ${l.skala.till}, vecka för vecka.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+    p.linje(l.varden, etiketter, { fran: l.skala.fran, till: l.skala.till, granser: skattningensGranser(l), hojd: 80, full: true });
+    if (granslinjensText(l.regler)) p.text(granslinjensText(l.regler), { farg: p.farg.svag, storlek: 9.5, luft: 4 });
     const regler = larDigetsRegler({ ...s, linjer: [l] }, info.uppfoljning);
     if (!regler.length) continue;
     for (const r of regler) p.text(mening(r), { luft: 2 });
@@ -61,6 +66,11 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
       rader.forEach((r, i) => p.text(r, { x: 62, luft: i === rader.length - 1 ? 8 : 1 }));
     }
   }
-  p.text('Linjerna stöder dina beslut vecka för vecka. En förändring i dem visar inte metodens effekt.', { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+  // Frågorna på arbetslagets möte, så att pdf:en går att ta med dit.
+  if (info.reflektera.length) {
+    p.rubrik('Frågorna på mötet', 60);
+    info.reflektera.forEach((x, i) => p.text(`${i + 1}. ${x}`, { luft: i === info.reflektera.length - 1 ? 8 : 2 }));
+  }
+  p.text('Skattningarna är dina egna och stöder dina beslut vecka för vecka. En förändring i dem visar inte metodens effekt.', { farg: p.farg.svag, storlek: 9.5, luft: 4 });
   return p.avsluta(`${info.metod} · Lär dig metoden på niclasfohlin.se · lärarens egen plan, sparas inte på sajten`);
 }

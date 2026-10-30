@@ -4,8 +4,8 @@
 // staplarna och nivåns ord under, så att ordet alltid ryms efter staplarna (Niclas 2026-10-29: "Kan du göra så att ordet
 // alltid får plats efter staplarna"). Raden fälls ut till motiveringen. Lärande totalt är större och öppen, Primär evidens
 // är sajtens områden med deras färger och märken, och Svårighet och Kostnad har neutrala staplar och ett ord. Nivå 1 och
-// Negativ effekt har inga fyllda staplar, och Oklart och Inte studerat har en streckad ram (riggens utkast 4). Kortet tar
-// det första primära områdets färg, som korten i Stödundervisning, och står i bläck utan primärt område. Med bank är det
+// Negativ effekt har inga fyllda staplar, och Oklart och Inte studerat har en streckad ram (riggens utkast 4). Kortet står
+// alltid i sajtens bläck (Niclas 2026-10-30), och Primär evidens är en rad med etikett och ämnets märke. Med bank är det
 // kortet i banken: huvudet med titeln och områdena, faktan, och raderna Lärande totalt, Svårighet och Kostnad.
 import Staplar from './Staplar.astro';
 import { OMRADEN, laget, motiveringensDelar, primaraOmraden, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAORD, type Laget, type Utkast } from '../lib/metodprofil';
@@ -21,7 +21,7 @@ const kallas = `Kallas också ${uppraknat(m.alternativaNamn)}`;
 // Svårighet och Kostnad: namnet, nivån ur kriterierna, ordet och motiveringen, i samma rader som evidensen.
 const infor = [
   { namn: 'Svårighet att införa', kort: 'Svårighet', niva: svarighetensNiva(m.svarighet), ord: SVARIGHETENS_ORD, motivering: m.svarighet.motivering },
-  { namn: 'Kostnad att införa', kort: 'Kostnad', niva: kostnadensNiva(m.kostnad), ord: KOSTNADENS_ORD, motivering: m.kostnad.motivering },
+  { namn: 'Kostnad att införa', kort: 'Kostnad', niva: kostnadensNiva(m.kostnad), ord: KOSTNADENS_ORD, motivering: m.kostnad.motivering, timmar: m.kostnad.timmar },
 ];
 // Hur ett läge ritas, en rot för raderna och förklaringen: staplar och ordet, eller en streckad ram med ordet.
 const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
@@ -47,7 +47,7 @@ const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
         {prim.length > 0 && <p class="mp-bank-primar"><span>Primär evidens</span><span class="mp-omraden">{prim.map((o) => <span class="amne" data-amne={o}>{o}</span>)}</span></p>}
       </div>
       <div class="mp-bank-par">
-        {infor.map((x) => <p class="mp-bank-halv"><span class="mp-namn">{x.kort}</span><span class="mp-stapelrad"><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></span></p>)}
+        {infor.map((x) => <p class="mp-bank-halv"><span class="mp-namn">{x.kort}</span><span class="mp-stapelrad"><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></span>{'timmar' in x && x.timmar !== undefined && <span class="mp-timmar">omkring {x.timmar} timmar</span>}</p>)}
       </div>
     </div>
     <p class="ingress">{m.ingress}</p>
@@ -86,8 +86,8 @@ const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
     })}
     {infor.map((x) => (
       <details class="mp-rad">
-        <summary><span class="mp-namn">{x.namn}</span><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}<span class="visually-hidden">, {x.niva} av 5</span></span></summary>
-        <p class="mp-skal">{x.motivering}</p>
+        <summary><span class="mp-namn">{x.namn}</span><Staplar niva={x.niva} neutral /><span class="mp-varde">{x.ord[x.niva]}{'timmar' in x && x.timmar !== undefined && <span class="mp-timmar">, omkring {x.timmar} timmar</span>}<span class="visually-hidden">, {x.niva} av 5</span></span></summary>
+        <p class="mp-skal">{x.motivering}{'timmar' in x && x.timmar !== undefined && ` Timmarna är lärarens första läsår, omkring ${x.timmar}.`}</p>
       </details>
     ))}
     <details class="mp-rad mp-skalan">
@@ -102,7 +102,8 @@ const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
             <tr><th scope="row"><span class="mp-inte">Inte studerat</span></th><td>Ingen studie med jämförelsegrupp har mätt området. Vi vet inte, och det betyder inte att metoden saknar effekt</td></tr>
           </tbody>
         </table>
-        <p>Primär evidens är det eller de två av sajtens fyra områden, Läsning, Skrivning, Matematik och Socialt, där stödet är starkast, minst Visst stöd. Kortet har det första områdets färg.</p>
+        <p>Effekten i ord: i stora försök i många skolor är 0,05 till 0,19 måttlig och 0,20 eller mer stor, och i andra studier är 0,10 till 0,39 måttlig och 0,40 eller mer stor. Under det är effekten liten, när den är säker. Ordet vid en nivå väger alla källor för området och hur säkra de är, så det kan skilja sig från en enskild källas ord i referensbladet.</p>
+        <p>Primär evidens är det eller de två av sajtens fyra områden, Läsning, Skrivning, Matematik och Socialt, där stödet är starkast, minst Visst stöd.</p>
         <p>De grå staplarna visar hur svårt och hur dyrt det är att införa metoden: Svårighet från Mycket lätt till Mycket svårt, Kostnad från Mycket låg till Mycket hög.</p>
         <p>Forskningen visar vad som ofta fungerar för många elever. Du avgör vad som fungerar i din klass.</p>
       </div>

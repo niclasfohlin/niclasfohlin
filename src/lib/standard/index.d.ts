@@ -219,7 +219,7 @@ export declare const filnamnet: (slag: 'sammanstallning' | 'plan' | 'kalender', 
 /** Knapparnas namn för att spara planen, ladda ner den och öppna en nedladdad plan. */
 export declare const PLANKNAPPAR: Readonly<{ spara: string; laddaNer: string; oppna: string }>;
 /** En regel på linjen i metodens skattning av gruppen (tolkaRegel). */
-export type Regel = { typ: 'nedat'; veckor: number } | { typ: 'under'; grans: number; veckor: number } | { typ: 'minst'; grans: number; veckor: number };
+export type Regel = { typ: 'nedat'; veckor: number } | { typ: 'under'; grans: number; veckor: number } | { typ: 'underIRad'; grans: number; veckor: number } | { typ: 'minst'; grans: number; veckor: number };
 /** Skalans steg med namn ur metodens tabell (skalansSteg). */
 export type Skala = { fran: number; till: number; tabell?: string; steg: { fran: number; till: number; namn: string; text?: string }[] };
 /** En av metodens egna skattningar (metodensSkattningar, K-559). */
@@ -250,12 +250,18 @@ export declare const harInfortEfter: (f: Foljd, mandag: string) => boolean;
 export declare function efterStegen(plan: Plan, val: Val, f: Foljd, idag: string): string[];
 export declare function larDigetsVeckor(plan: Plan, val: Val, f: Foljd, idag: string): LarDigVecka[];
 export declare const larDigetsFas: (plan: Plan, idag: string) => 'fore' | 'under' | 'efter';
+export declare const forstaLektionen: (plan: Plan) => string | null;
+export declare const FORE_VECKOR: number;
+export declare const larDigetsForval: (mp: Metodplan, idag: string) => Val;
 export declare function larDigetsNu(plan: Plan, veckor: LarDigVecka[], idag: string): number | null;
 export declare function klasserUrText(text: string, fore: Klass[], nyttId: () => string, behall?: (id: string) => boolean): Klass[];
 export type LarDigSammanstallning = { fas: 'fore' | 'under' | 'efter'; nu: number | null; mal: string; veckor: (LarDigVecka & { namn: Veckonamn; gick?: 'ja' | 'inte'; kommentar?: string; noter: { id: string; namn: string; text: string }[] })[]; linjer: { namn: string; skala: Skala; regler: (Regel & { rad: number })[]; varden: (number | undefined)[]; galler: number[][] }[]; stegen: { innehall: number; steg: number | null; veckor: number; pagar: boolean }[]; kvar: { innehall: number; steg: number | null }[]; lov: string[] };
 export declare function larDigSammanstallning(plan: Plan, val: Val, f: Foljd, idag: string): LarDigSammanstallning;
 export declare const larDigetsRegler: (s: LarDigSammanstallning, rader: { nar: string }[]) => string[];
 export declare const regelnIOrd: (r: Regel) => string;
+export declare const granslinjensText: (regler: Regel[]) => string;
+export declare const LARARENS_SKALOR: readonly { fraga: string; lagst: string; hogst: string }[];
+export declare const skalansAndar: (namn: string, j: number) => { fraga: string; lagst: string; hogst: string } | null;
 export declare function svaraGickDet(plan: Plan, val: Val, f: Foljd, mandag: string, svar: 'ja' | 'inte' | undefined): { val: Val; gick: Record<string, 'ja' | 'inte'>; andrad: boolean; last: boolean };
 export declare function obesvaradVecka(plan: Plan, f: Foljd, idag: string): PlanVecka | null;
 /** Metodens skattning av gruppen i ord, lika på sidan, i pdf:en och i texten som kopieras (K-559). */
@@ -535,3 +541,6 @@ export declare function delarnasText(del: { id: string; rad: string; text: strin
 export declare function utfallensGranser(n: number): { nastanAlla: number; deFlesta: [number, number]; halften: number };
 /** Utfallens namn i beslutsstället, i ordning. */
 export declare const UTFALLEN: readonly [{ id: 'nastanAlla'; namn: 'Nästan alla kan' }, { id: 'deFlesta'; namn: 'De flesta kan' }, { id: 'halften'; namn: 'Hälften eller färre kan' }];
+/** Det som saknas eller har fel form i en undervisningsmetods fil för att sajten ska kunna visa den. Tom lista när allt finns. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export declare function undervisningsmetodensFel(d: Record<string, any>): string[];

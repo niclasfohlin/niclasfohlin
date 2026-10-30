@@ -35,6 +35,8 @@ export interface LarDigData {
   larandet: { rubrik: string; rader: string[] };
   hallFast: { rubrik: string; rader: { sak: string; text: string }[] };
   lasMer: { titel: string; upphov?: string; ar?: number; adress?: string; text: string; slag?: string }[];
+  /** Metodens saker som en text kan nämna, med adressen: bladen och affischerna i Materialet för klassen, lektionskortet och mallarna. Checklistan länkar dem (sakdelar i standarden). */
+  saker: { namn: string; versal?: boolean; adress: string }[];
   /** Läsvägen i metoden, med ankarna på metodens sida. */
   lasvag: { namn: string; adress: string }[];
   /** Filernas adresser när filen finns, och annars stället på metodens sida där materialet står. */
@@ -88,6 +90,11 @@ export function larDigData(id: string, d: Um): LarDigData {
       const upphov = x.upphov ? strang(x.upphov) : k?.text ? rentText(strang(k.text).split(/\s\(\d{4}/)[0], 120) : undefined;
       return { titel: strang(x.titel) || strang(k?.titel), ...(upphov ? { upphov } : {}), ...(x.ar ? { ar: Number(x.ar) } : {}), ...(x.adress || k?.adress ? { adress: strang(x.adress) || strang(k?.adress) } : {}), text: strang(x.text), ...(x.slag ? { slag: strang(x.slag) } : {}) };
     }).filter((l) => l.titel),
+    // Ett namn i ett ord, som Stegen, är bara saken med stor bokstav, så att "skriv stegen" inte blir en länk.
+    saker: [
+      ...lista(d.ramar?.ramar).map((r) => strang((r as { rubrik?: string }).rubrik)).filter(Boolean).map((namn) => ({ namn, ...(/\s/.test(namn) ? {} : { versal: true }), adress: `${sida}#materialet-for-klassen` })),
+      { namn: 'Lektionskortet', adress: fil('lektionskort', 'materialet').adress }, { namn: 'Planeringsmallen', adress: fil('planeringsmall', 'planeringsmallen').adress }, { namn: 'Observationsmallen', adress: fil('observation', 'observationsmallen').adress },
+    ],
     lasvag: LASVAGEN.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })),
     filer: { lektionskort: fil('lektionskort', 'materialet'), planeringsmall: fil('planeringsmall', 'planeringsmallen'), materialet: fil('materialet', 'materialet-for-klassen'), observation: fil('observation', 'observationsmallen') },
   };

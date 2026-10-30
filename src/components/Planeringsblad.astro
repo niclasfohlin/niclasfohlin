@@ -24,7 +24,9 @@ const kontrollen = (d.steg?.rader ?? []).find((s: { redo?: unknown }) => s.redo)
 const utfalletsText = (id: string) => String(kontrollen?.redo?.[id] ?? '').replace(/^[^.]*\.\s*/, '');
 const lista = (v: unknown): string[] => (Array.isArray(v) ? v.map(String) : v ? [String(v)] : []);
 const delarna = (mall.delar ?? []) as { fas: string; skriv?: string; not?: string }[];
-const planensDel = (fas: string) => (plan.delar ?? []).find((x: { fas: string }) => x.fas === fas)?.text as string | undefined;
+// Raden bryts efter en mittpunkt och aldrig i ett tal (designgranskningen 2026-10-30: 14 blev 1 och 4).
+const bryt = (t?: string) => t?.replace(/\u00a0·\u00a0/g, '\u00a0· ');
+const planensDel = (fas: string) => bryt((plan.delar ?? []).find((x: { fas: string }) => x.fas === fas)?.text as string | undefined);
 const kryss = new Set<number>(plan.efter?.kryss ?? []);
 // Efter lektionens etiketter ur mallen, utan understrecken där läraren skriver.
 const etikett = (falt: string, forval: string) => String(mall.efter?.[falt] ?? forval).replace(/[:_\s]+$/, '').replace(/:\s*_+.*$/, '').split(/\s{2,}/)[0];
@@ -64,7 +66,7 @@ const etikett = (falt: string, forval: string) => String(mall.efter?.[falt] ?? f
           <>
             <tr>
               <th scope="row"><span class="um-blad-fas">{del.fas}</span><span class="um-blad-tid">{delensTid(del.fas)}{karna.length > 0 && ` · kärnan ${karna.map((k: { nr: number }) => k.nr).join(' och ')}`}</span></th>
-              <td>{del.skriv && <span class="um-blad-skriv">{del.skriv}</span>}{text && <span class="um-blad-text">{text}</span>}{!text && del.not && <span class="um-blad-skriv">{del.not}</span>}</td>
+              <td>{del.skriv && <span class="um-blad-skriv">{bryt(del.skriv)}</span>}{text && <span class="um-blad-text">{text}</span>}{!text && del.not && <span class="um-blad-skriv">{del.not}</span>}</td>
             </tr>
             {del.fas === 'Kontrollera' && plan.beslut && (
               <tr class="um-blad-beslut">

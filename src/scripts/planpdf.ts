@@ -203,10 +203,11 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
     y -= 6;
   };
   // Linjen i metodens skattning av gruppen (K-559): kryss vecka för vecka på metodens skala, reglernas gränser streckade,
-  // med veckan i planen och kalenderveckan under, som på sidan.
-  const linje = (varden: (number | undefined)[], etiketter: Veckonamn[], o: { fran: number; till: number; granser: number[]; hojd?: number; mitt?: number | null }) => {
+  // med veckan i planen och kalenderveckan under, som på sidan. Med full tar veckorna sidans hela bredd, som i Lär dig
+  // metoden (K-628).
+  const linje = (varden: (number | undefined)[], etiketter: Veckonamn[], o: { fran: number; till: number; granser: number[]; hojd?: number; mitt?: number | null; full?: boolean }) => {
     const h = o.hojd ?? 90, n = varden.length, bredd = A4[0] - 2 * KANT - 24;
-    const steg = Math.min(46, bredd / Math.max(n, 1));
+    const steg = o.full ? bredd / Math.max(n, 1) : Math.min(46, bredd / Math.max(n, 1));
     const total = h + 43 + (o.mitt ? 22 : 0);
     plats(total);
     if (o.mitt) y -= 22;

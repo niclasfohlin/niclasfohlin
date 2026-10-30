@@ -25,8 +25,11 @@ export const mittfaltet = (x0: number, steg: number, topp: number, h: number, mi
 
 // Linjen i metodens skattning av gruppen: kryss vecka för vecka på metodens skala, reglernas gränser streckade, och i veckan
 // platsen för veckan som kommer som en streckad ring (Niclas godkände formen 2026-10-26). Under krysset står veckan i
-// planen och kalenderveckan, som under staplarna.
-export function linjegraf(g: Skalskattning, varden: (number | undefined)[], etiketter: Veckonamn[], o: { ring?: number; mitt?: number | null } = {}) {
+// planen och kalenderveckan, som under staplarna. Lär dig metoden väljer två saker som Planera insatsen inte har (K-628; de
+// kalla läsarna och formgranskningen 2026-10-30): undan sätter ett tal under punkten när det annars står på den streckade
+// gränsen, och vidgas låter diagrammet växa med rutan, upp till en och en halv gång, så att det inte tar halva bredden på en
+// dator. Utan dem ritas linjen som förut.
+export function linjegraf(g: Skalskattning, varden: (number | undefined)[], etiketter: Veckonamn[], o: { ring?: number; mitt?: number | null; undan?: boolean; vidgas?: boolean } = {}) {
   const { fran, till } = g.skala;
   const steg = 36, x0 = 26, topp = o.mitt ? 34 : 14, h = 120, under = 38, bredd = x0 + varden.length * steg + 4;
   const y = (n: number) => topp + h - ((n - fran) / (till - fran)) * h;
@@ -39,12 +42,14 @@ export function linjegraf(g: Skalskattning, varden: (number | undefined)[], etik
   const delar: string[][] = [[]];
   varden.forEach((n, i) => { if (n === undefined) { if (delar[delar.length - 1].length) delar.push([]); } else delar[delar.length - 1].push(`${x(i)},${y(n)}`); });
   const banan = delar.filter((d) => d.length > 1).map((d) => `<polyline points="${d.join(' ')}" class="pl-linjen"/>`).join('');
-  const kryss = punkter.map(([a, b, n]) => `<circle cx="${a}" cy="${b}" r="5" class="pl-punkt"/><text x="${a}" y="${b - 9}" class="pl-stapelvarde">${n}</text>`).join('');
+  const paGransen = (b: number) => !!o.undan && granser.some((gr) => y(gr) > b - 21 && y(gr) < b - 5);
+  const kryss = punkter.map(([a, b, n]) => `<circle cx="${a}" cy="${b}" r="5" class="pl-punkt"/><text x="${a}" y="${paGransen(b) ? b + 17 : b - 9}" class="pl-stapelvarde">${n}</text>`).join('');
   const ring = o.ring !== undefined ? `<circle cx="${x(o.ring)}" cy="${topp + h / 2}" r="6" class="pl-ring"/>` : '';
   const etikett = etiketter.map((e, i) => `<text x="${x(i)}" y="${topp + h + 14}" class="pl-stapeletikett pl-planveckan">${esc(e.kort)}</text><text x="${x(i)}" y="${topp + h + 26}" class="pl-stapeletikett">${esc(e.kalender)}</text>`).join('');
   const mitt = o.mitt ? mittfaltet(x0, steg, topp, h, o.mitt) : '';
   const text = punkter.length ? varden.flatMap((n, i) => (n === undefined ? [] : [`${etiketter[i].text}: ${n}`])).join(', ') : 'inte skattad än';
-  return `<svg class="pl-graf stor pl-linjegraf" viewBox="0 0 ${bredd} ${topp + h + under}" width="${bredd}" height="${topp + h + under}" role="img" aria-label="${esc(`${g.namn}, ${fran} till ${till}: ${text}`)}">${mitt}${axlar}${banan}${kryss}${ring}${etikett}</svg>`;
+  const matt = o.vidgas ? `style="width: clamp(${bredd}px, 100%, ${Math.round(bredd * 1.5)}px); height: auto"` : `width="${bredd}" height="${topp + h + under}"`;
+  return `<svg class="pl-graf stor pl-linjegraf" viewBox="0 0 ${bredd} ${topp + h + under}" ${matt} role="img" aria-label="${esc(`${g.namn}, ${fran} till ${till}: ${text}`)}">${mitt}${axlar}${banan}${kryss}${ring}${etikett}</svg>`;
 }
 
 // En knapp som ger en pdf heter Skriv ut där webbläsaren kan skriva ut den direkt, och annars "som pdf", som

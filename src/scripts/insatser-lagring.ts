@@ -28,6 +28,8 @@ export interface SparadPlan {
   kopia?: string;
   /** När planen senast ändrades, ÅÅÅÅ-MM-DDTHH:MM:SS i läsarens tid, så att två kopior från samma dag går att skilja åt (granskningen 2026-10-24). */
   andrad: string;
+  /** Dagen planen sparades första gången, ÅÅÅÅ-MM-DD, där Före börjar i Lär dig metoden (K-628). En plan utan fältet börjar Före när den senast ändrades. */
+  skapad?: string;
   /** Metodens datum när planen gjordes, så att planen kan säga till när metoden har ändrats efteråt. */
   uppdaterad?: string;
   /** Passen (dag, vecka, nummer och tiden när läraren har satt en), veckorna (nummer, metodens vecka, upprepad, första och sista dagen) och planens sista dag, när uppföljningen efter kommer efter sista passet. */
@@ -41,6 +43,11 @@ const NYCKEL = 'insatser';
 /** Samlingarna med planer: Stödundervisning med Planera insatsen och Metoder med Lär dig metoden (K-628). */
 export const SAMLINGAR = ['stodundervisning', 'metoder'] as const;
 export type Samling = (typeof SAMLINGAR)[number];
+/** Samlingens ord i listan med planerna, på metodens sida och i beskedet efter Öppna planer, en tabell för båda samlingarna (K-628). */
+export const SAMLINGENS_ORD: Record<Samling, { listan: string; din: string; dina: (n: number) => string; enLank: string; flera: string; avslutade: (n: number) => string; lista: string; pagar: string }> = {
+  stodundervisning: { listan: 'Dina insatser', din: 'Din insats', dina: (n) => `Dina insatser · ${n} grupper`, enLank: 'Veckan i planen', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad insats' : `${n} avslutade insatser`), lista: 'Metodbanken: en plan under Dina insatser', pagar: 'Din insats på metodens sida' },
+  metoder: { listan: 'Dina planer', din: 'Din plan', dina: (n) => `Dina planer · ${n}`, enLank: 'Lär dig metoden', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad plan' : `${n} avslutade planer`), lista: 'Metoder: en plan under Dina planer', pagar: 'Din plan på metodens sida' },
+};
 /** Planens samling, med Stödundervisning för en plan utan fältet. */
 export const samlingen = (p: { samling?: unknown }): Samling => (p.samling === 'metoder' ? 'metoder' : 'stodundervisning');
 /** Planerna i en samling. */
@@ -63,7 +70,7 @@ export function rensaPlan(x: unknown): SparadPlan | null {
   return {
     id: p.id, metod: p.metod, samling: samlingen(p), titel: rentText(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: rentText(p.omrade, 40) } : {}),
     namn: rentText(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 20000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
-    ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor, ...(arDatum(schema.sista) ? { sista: schema.sista } : {}) },
+    ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(arDatum(p.skapad) ? { skapad: p.skapad } : {}), ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor, ...(arDatum(schema.sista) ? { sista: schema.sista } : {}) },
     ...(heltal(p.bockade) ? { bockade: p.bockade } : {}),
   };
 }
@@ -173,6 +180,7 @@ export function narText(datum: string, idag: string) {
 
 /** Var planen står i dag, ur kopian: veckan i planen och nästa pass, eller att den inte har börjat eller är slut. */
 export function lageAv(p: SparadPlan, idag: string): { text: string; vecka?: number } {
+  if (samlingen(p) === 'metoder') return larDigetsLage(p, idag);
   const pass = [...p.schema.pass].sort((a, b) => (a[0] < b[0] ? -1 : 1));
   const nasta = pass.find((x) => x[0] >= idag);
   if (!pass.length) return { text: 'Planen har inga pass' };
@@ -187,6 +195,22 @@ export function lageAv(p: SparadPlan, idag: string): { text: string; vecka?: num
   // Vilken gång veckan tas räknas av standardens gangen, som i planen, ur kopians veckor.
   const gang = v ? gangen({ veckor: p.schema.veckor.map(([nr, innehall]) => ({ nr, innehall })) }, { nr: v[0], innehall: v[1], igen: v[2] === 1 }) : 0;
   return { text: `Vecka ${v ? planveckan(v[1], gang) : '?'} i planen, pass ${nasta[2]} ${narText(nasta[0], idag)}${kl}`, vecka: v?.[0] };
+}
+
+/**
+ * Var en plan i Lär dig metoden står i dag, ur kopian, med stegen i stället för passen (K-628): Före till första lektionen,
+ * steget i veckan, och efter stegen. Första lektionen är dagen läraren valde, eller den första veckan med lektioner när den
+ * dagen är en helg (forstaLektionen i standarden).
+ */
+function larDigetsLage(p: SparadPlan, idag: string): { text: string; vecka?: number } {
+  const veckor = [...p.schema.veckor].sort((a, b) => a[0] - b[0]);
+  if (!veckor.length) return { text: 'Planen har inga steg' };
+  if (statusAv(p, idag) === 'avslutad') return { text: 'Stegen och uppföljningen är klara' };
+  const start = lasVal(p.val)?.val.start ?? veckor[0][3];
+  const forsta = start > mandagen(veckor[0][3]) ? start : mandagen(veckor[0][3]);
+  if (idag < forsta) return { text: `Före. Första lektionen ${narText(forsta, idag)}` };
+  const v = veckor.find((x) => idag <= plusDagar(mandagen(x[3]), 6));
+  return v ? { text: `Steg ${v[1]}${v[2] ? ', en vecka till' : ''}`, vecka: v[0] } : { text: 'Efter stegen' };
 }
 
 /** Dagen för planens nästa pass från och med i dag, eller 9999 när planen är slut: planerna ordnas efter den. */
@@ -228,8 +252,10 @@ export function skiljNamnen(namn: string[]): string[] {
 }
 
 /** Planens namn: gruppens, eller dagarna och första passet, som "Mån, ons, fre från 2 nov" (granskningen 2026-10-24: två planer utan namn såg likadana ut). */
-export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan['schema'] }): string {
+export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan['schema']; samling?: unknown }): string {
   if (p.namn) return p.namn;
+  // En plan i Lär dig metoden är lärarens egen, en per metod, och heter som sidan (K-628).
+  if (samlingen(p) === 'metoder') return 'Lär dig metoden';
   const v = lasVal(p.val)?.val;
   if (!v) return 'Plan utan namn';
   const dagar = [...v.dagar].sort().map((d) => veckodagKort(d)).join(', ');
@@ -404,16 +430,16 @@ export const APPENS_PLANER = 'Planerna finns bara i appen. Tar du bort appen, f�
 export const valdaFiler = (e: Event) => { const input = e.target as HTMLInputElement; const filer = [...(input.files ?? [])]; input.value = ''; return filer; };
 
 /** Planerna ur filerna sparas, och sidan laddas om med beskedet under nyckeln, en rot för metoden och Stödundervisning. */
-export async function oppnaPlanerna(filer: File[], nyckel: string) {
+export async function oppnaPlanerna(filer: File[], nyckel: string, samling: Samling = 'stodundervisning') {
   const { planer, inte } = await lasPlanfilerna(filer);
-  const text = planernasBesked(sparaPlanerna(planer.map((x) => x.plan)), inte);
+  const text = planernasBesked(sparaPlanerna(planer.map((x) => x.plan)), inte, samling);
   try { sessionStorage.setItem(nyckel, text); } catch { /* utan lagring */ }
   location.reload();
 }
 
 /** Beskedet efter att planer har lästs in, lika i metoden och på Stödundervisning. */
-export const planernasBesked = (r: { ok: boolean; sparade: number; aldre: number }, inte: number) => (!r.ok ? 'Planerna gick inte att spara i den här webbläsaren.'
-  : [r.sparade ? `${r.sparade === 1 ? 'En plan är öppnad' : `${stor(talText(r.sparade))} planer är öppnade`} ur filerna, med allt som förts in. De står under Dina insatser och under sin metod.` : '',
+export const planernasBesked = (r: { ok: boolean; sparade: number; aldre: number }, inte: number, samling: Samling = 'stodundervisning') => (!r.ok ? 'Planerna gick inte att spara i den här webbläsaren.'
+  : [r.sparade ? `${r.sparade === 1 ? 'En plan är öppnad' : `${stor(talText(r.sparade))} planer är öppnade`} ur filerna, med allt som förts in. De står under ${SAMLINGENS_ORD[samling].listan} och under sin metod.` : '',
     r.aldre ? `${r.aldre === 1 ? 'En plan' : `${stor(talText(r.aldre))} planer`} i webbläsaren var nyare än filen och står kvar.` : '',
     inte ? `${inte === 1 ? 'En fil' : `${stor(talText(inte))} filer`} var inte en nedladdad plan.` : ''].filter(Boolean).join(' ') || 'Filerna hade ingen plan.');
 

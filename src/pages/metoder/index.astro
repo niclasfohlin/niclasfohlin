@@ -19,7 +19,23 @@ const korten = metoder.length ? metoder : [PILOTEN];
   <h1>Metoder</h1>
   <p class="text metodbank-ingress">Undervisningsmetoder för hela klassen, i ämnets vanliga lektioner. Varje metod visar vad forskningen säger, vad som bär effekten och hur en lektion går till, med mallar att planera med.</p>
   {!metoder.length && <p class="mp-utkast">Ett utkast till bankens form. Kortet visar den första metoden med platshållare i stället för värden.</p>}
+  {/* Dina planer: lärarens planer ur Lär dig metoden, ur webbläsaren, som Dina insatser i Stödundervisning (src/scripts/insatser.ts, K-628). */}
+  <section class="pl-insatser" id="pl-insatser" data-samling="metoder" aria-labelledby="pl-insatser-rubrik" hidden>
+    <h2 id="pl-insatser-rubrik">Dina planer</h2>
+    <ul></ul>
+    <div class="pl-avslutade" hidden></div>
+    <p class="pl-andra-knappar pl-alla-planer">
+      <button type="button" class="knapp sekundar liten" id="pl-alla-ner" data-goatcounter-click="insatser:metoder-alla-ner" data-goatcounter-title="Metoder: alla planer nedladdade">Ladda ner planer</button>
+      <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click="insatser:metoder-alla-oppna" data-goatcounter-title="Metoder: nedladdade planer öppnade">Öppna planer<input type="file" id="pl-alla-oppna" accept=".json,.zip,application/json,application/zip" multiple class="visually-hidden" /></label>
+    </p>
+    <p class="pl-hjalp" id="pl-alla-appen" hidden></p>
+    <p class="pl-hjalp" id="pl-alla-besked" role="status" hidden></p>
+  </section>
   <div class="rutnat mp-rutnat">
     {korten.map((m) => <Metodprofil m={m} bank />)}
   </div>
 </Base>
+
+<script>
+  import '../../scripts/insatser.ts';
+</script>

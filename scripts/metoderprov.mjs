@@ -78,6 +78,9 @@ try {
       const bred = await kor(`document.fonts.ready.then(() => { document.querySelectorAll('details').forEach((x) => { x.open = true; }); const W = document.documentElement.clientWidth; const sw = document.documentElement.scrollWidth; if (sw <= W + 1) return ''; const klipps = (e) => { for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return true; return false; }; for (const e of document.querySelectorAll('body *')) { const r = e.getBoundingClientRect(); if (r.width && !klipps(e) && r.right > W + 1 && e.parentElement.getBoundingClientRect().right <= W + 1) return sw + ' punkter bred, ' + e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/)[0] : '') + ' ”' + (e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 40) + '”'; } return sw + ' punkter bred'; })`);
       if (bred === undefined) fel.push(`${s}: provet i ${bredd} punkter fick inget svar`);
       else if (bred) fel.push(`${s}: rullar i sidled i ${bredd} punkter: ${bred}`);
+      // Inget namn i remsan, cellerna eller kortets värden klipps eller går ut ur sin ruta (designgranskningen 2026-10-30).
+      const klippt = await kor(`(() => { const ut = []; for (const e of document.querySelectorAll('.um-remsa-namn, .um-celler a, .mp-varde, .mp-namn')) { if (e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow !== 'visible') ut.push(e.textContent.trim().slice(0, 30)); const ram = e.closest('.mp-bank-halv, .mp-rad, .mp-bank-en'); if (ram && e.getBoundingClientRect().right > ram.getBoundingClientRect().right + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (utanför rutan)'); } return ut.join(' · '); })()`);
+      if (klippt) fel.push(`${s}: i ${bredd} punkter klipps eller går ut: ${klippt}`);
     }
   }
   ws.close();
@@ -87,4 +90,4 @@ try {
   try { rmSync(profil, { recursive: true, force: true }); } catch { /* Chrome kan hålla filerna en stund */ }
 }
 if (fel.length) { console.error(`metoderprov: ${fel.length} fel\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt och delarna står i standardens ordning.`);
+console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt och delarna står i standardens ordning.`);

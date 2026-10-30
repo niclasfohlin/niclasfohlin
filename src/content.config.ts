@@ -14,7 +14,7 @@ import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
 import { faktaFel } from './lib/kortfakta';
-import { allaTexter, INNEHALLSTAGGAR, tidsschematsFel, varianternasFel } from './lib/standard/index.js';
+import { allaTexter, INNEHALLSTAGGAR, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -1116,7 +1116,7 @@ const faktateman = defineCollection({
 // efter, så schemat prövar i dag det sajten redan läser, huvudet, faktan, metodkortet och källorna, och släpper igenom
 // resten. Det blir strikt som Stödundervisnings när mallen och piloten har samma fält (K-627).
 const omradetsVarde = z.union([
-  z.strictObject({ tillforlitlighet: z.enum(['hog', 'mattlig', 'lag']), effekt: z.enum(['negativ', 'ingen', 'liten', 'mattlig', 'stor']), motivering: text.max(250), kallor: z.array(z.string()).min(1), kort: text.max(90).optional() }),
+  z.strictObject({ tillforlitlighet: z.enum(['hog', 'mattlig', 'lag']), effekt: z.enum(['negativ', 'ingen', 'liten', 'mattlig', 'stor']), motivering: text.max(250), kallor: z.array(z.string()).min(1), kort: text.max(80).optional() }),
   z.strictObject({ niva: z.enum(['inte-studerat', 'inte-sammanvagt']), motivering: text.max(250) }),
 ]);
 const undervisningsmetoder = defineCollection({
@@ -1147,6 +1147,8 @@ const undervisningsmetoder = defineCollection({
     // Varje källa som metodkortet nämner står i källorna, så att kortets rad kan länka till sin post.
     const ids = new Set(d.kallor.map((k) => k.id));
     for (const [omrade, v] of Object.entries(d.profil.evidens)) for (const k of 'kallor' in v ? v.kallor : []) if (!ids.has(k)) ctx.addIssue({ code: 'custom', path: ['profil', 'evidens', omrade, 'kallor'], message: `Källan ${k} står inte i kallor.` });
+    // Det som sidan, metodkortet och Lär dig metoden läser, med samma prov som riggen kör före leveransen (K-627).
+    for (const f of undervisningsmetodensFel(d)) ctx.addIssue({ code: 'custom', path: [], message: f });
   }),
 });
 
