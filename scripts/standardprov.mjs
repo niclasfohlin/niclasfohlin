@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, undervisningsmetodensFel, UNDERVISNINGSMETODENS_DELAR, delarnasText, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -156,12 +156,74 @@ for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13
   trasig.progression.rader[0].fraga = 'Gick det';
   trasig.plan.skattningar[0].regler = [{ om: 'under 4 två veckor', rad: 'finns-inte' }];
   trasig.mal = 'Ett mål';
+  trasig.hinder.kort = `Ett. Två. Tre ${'x'.repeat(220)}.`;
   const f1 = undervisningsmetodensFel(trasig).join(' | ');
-  for (const v of ['kolon utan citattecken', 'fler än 80 tecken', 'frågetecken', 'inte är en rad i uppföljningen', 'i rad"', 'inget mål']) if (!f1.includes(v)) fel.push(`undervisningsmetodensFel fångar inte ${v}`);
+  for (const v of ['kolon utan citattecken', 'fler än 80 tecken', 'frågetecken', 'inte är en rad i uppföljningen', 'i rad"', 'inget mål', 'hinder.kort har fler än 2 meningar', 'hinder.kort har fler än 220 tecken']) if (!f1.includes(v)) fel.push(`undervisningsmetodensFel fångar inte ${v}`);
+  const utanKort = structuredClone(pilot); delete utanKort.hinder.kort;
+  if (!undervisningsmetodensFel(utanKort).some((f) => f.startsWith('hinder.kort saknas'))) fel.push('undervisningsmetodensFel fångar inte en metod utan hinder.kort');
 }
 if (UNDERVISNINGSMETODENS_DELAR.map((x) => x.nr).join('') !== '1234AB') fel.push('UNDERVISNINGSMETODENS_DELAR har inte delarna 1, 2, 3, 4, A och B i ordning');
 { const t = delarnasText(UNDERVISNINGSMETODENS_DELAR[1], { minuter: 40, amne: 'matematik', andra: 4 }); if (t.rad !== 'En lektion på 40 minuter, del för del.' || !t.text.includes('i matematik och i fyra andra ämnen')) fel.push(`delarnasText fyller inte i minuterna, ämnet och exemplen: ${t.rad} / ${t.text}`); }
 { const t = delarnasText(UNDERVISNINGSMETODENS_DELAR[2], { veckor: 4, progression: 'Metodens egen text.' }); if (!t.rad.includes('de första fyra veckorna') || t.text !== 'Metodens egen text.') fel.push(`delarnasText fyller inte i del 3: ${t.rad} / ${t.text}`); }
+
+// Metodkortets nivåer (K-632, som riggens evidensen.md): tillförlitligheten sätter taket, låg utan effekt är Oklart, nivå 1
+// med negativ effekt heter Negativ effekt, och ett läge eller värde som tabellen inte har är okänt.
+const lagesfall = [
+  [{ tillforlitlighet: 'hog', effekt: 'stor' }, 'niva 5 Starkt stöd'], [{ tillforlitlighet: 'mattlig', effekt: 'stor' }, 'niva 4 Gott stöd'],
+  [{ tillforlitlighet: 'hog', effekt: 'liten' }, 'niva 3 Visst stöd'], [{ tillforlitlighet: 'lag', effekt: 'mattlig' }, 'niva 2 Svagt stöd'],
+  [{ tillforlitlighet: 'mattlig', effekt: 'ingen' }, 'niva 1 Inget påvisat stöd'], [{ tillforlitlighet: 'hog', effekt: 'negativ' }, 'niva 1 Negativ effekt'],
+  [{ tillforlitlighet: 'lag', effekt: 'ingen' }, 'oklart Oklart'], [{ niva: 'inte-sammanvagt' }, 'inte Inte sammanvägt'], [undefined, 'inte Inte studerat'],
+  [{ tillforlitlighet: 'hog', effekt: 'enorm' }, 'okand '], [{ niva: 'toString' }, 'okand '],
+];
+for (const [v, vantat] of lagesfall) { const l = laget(v); const f = `${l.slag}${l.slag === 'niva' ? ` ${l.niva}` : ''} ${l.ord}`; if (f !== vantat) fel.push(`laget(${JSON.stringify(v)}) ger "${f}", inte "${vantat}"`); }
+if (!laget({ tillforlitlighet: 'hog', effekt: 'negativ' }).negativ || laget({ tillforlitlighet: 'hog', effekt: 'ingen' }).negativ) fel.push('laget markerar inte negativ effekt, eller markerar ingen effekt som negativ');
+if (NIVAORD.length !== 6 || SVARIGHETENS_ORD[3] !== 'Medelsvårt' || KOSTNADENS_ORD[2] !== 'Låg') fel.push('nivåernas ord har inte en tom först och fem ord');
+for (const [s, vantat] of [[{ lara: 3, karnan: 3, stod: 3, tid: 3 }, 3], [{ lara: 1, karnan: 2, stod: 4, tid: 5 }, 4], [{ lara: 5, karnan: 1, stod: 5, tid: 1 }, 5], [{ lara: 2, karnan: 3 }, 3], [null, null]]) if (svarighetensNiva(s) !== vantat) fel.push(`svarighetensNiva(${JSON.stringify(s)}) ger ${svarighetensNiva(s)}, inte ${vantat} (den övre medianen)`);
+for (const [k, vantat] of [[{ kop: 2, timmar: 13 }, 2], [{ kop: 1, timmar: 15 }, 3], [{ kop: 1, timmar: 4.9 }, 1], [{ kop: 4, timmar: 0 }, 4], [{ kop: 1, timmar: 80 }, 5]]) if (kostnadensNiva(k) !== vantat) fel.push(`kostnadensNiva(${JSON.stringify(k)}) ger ${kostnadensNiva(k)}, inte ${vantat}`);
+if (larandetIKort({ kort: 'Kort.', motivering: 'Hög. Lång.' }) !== 'Kort.' || larandetIKort({ motivering: 'Måttlig tillförlitlighet, måttlig effekt. Stödet gäller små grupper (Fuchs m.fl., 2021).' }) !== 'Stödet gäller små grupper.') fel.push('larandetIKort tar inte kort först, eller tar inte bort hänvisningen ur motiveringen');
+
+// Lathundens fyra sidor ur piloten (K-632): sidorna och delarna i riggens lathunds ordning, med samma meningar ur metoden.
+{
+  const { parse } = await import('yaml');
+  const pilot = parse(readFileSync(join(mapp, '..', '..', 'content', 'undervisningsmetoder', 'explicit-undervisning.yaml'), 'utf8'));
+  const sidor = lathundensSidor(pilot);
+  const del = (s, id) => sidor.find((x) => x.id === s)?.delar.find((x) => x.id === id);
+  if (sidor.map((s) => `${s.nr}${s.id}`).join(' ') !== '1metoden 2mandag 3planera 4veckorna') fel.push(`lathundensSidor ger sidorna ${sidor.map((s) => `${s.nr}${s.id}`).join(', ')}`);
+  const fakta = del('metoden', 'fakta')?.rader ?? [];
+  if (fakta.map((r) => r.namn).join('|') !== 'Lektionen|De första veckorna|Lärande totalt|Svårighet|Kostnad') fel.push(`lathundens fakta har raderna ${fakta.map((r) => r.namn).join(', ')}`);
+  const totalt = fakta.find((r) => r.namn === 'Lärande totalt');
+  if (totalt?.text !== laget(pilot.profil.evidens.larande).ord || totalt?.under !== pilot.profil.evidens.larande.kort) fel.push('Lärande totalt i lathunden har inte kortets ord och kommentaren larande.kort');
+  const sv = fakta.find((r) => r.namn === 'Svårighet');
+  if (sv?.text !== SVARIGHETENS_ORD[svarighetensNiva(pilot.profil.svarighet)] || sv?.niva !== svarighetensNiva(pilot.profil.svarighet)) fel.push('Svårighet i lathunden räknas inte som i metodkortet');
+  if (del('metoden', 'karnan')?.kort.length !== pilot.karna.komponenter.length) fel.push('lathunden har inte ett kort per komponent i kärnan');
+  if (del('metoden', 'svarast')?.text !== pilot.hinder.kort) fel.push('Det svåraste i lathunden är inte hinder.kort');
+  { const utan = structuredClone(pilot); delete utan.hinder.kort; const t = lathundensSidor(utan)[0].delar.find((x) => x.id === 'svarast')?.text ?? ''; if (!pilot.hinder.text.startsWith(t) || !t || /\.\s/.test(t)) fel.push('utan hinder.kort är Det svåraste i lathunden inte den första meningen i hinder.text'); }
+  const minuter = del('mandag', 'minuterna')?.delar ?? [];
+  if (!minuter.length || minuter.some((x) => /min$/.test(x.tid)) || minuter[0]?.tid !== pilot.tidsschema.varianter.find((v) => v.nar === 'första lektionen').delar[0].tid.replace(/\s*min$/, '')) fel.push('lathundens minuter är inte första lektionens, utan "min"');
+  // Du säger: rutinens repliker vid den första delen, och annars högst två av stegets fraser för samma del.
+  const forstaMin = forstaLektionensMinuter(pilot);
+  const stegFor = (fas) => pilot.steg.rader.find((s) => s.namn === fas);
+  if (forstaMin.some((x, i) => x.fraser.length > (i === 0 ? 9 : 2) || (i > 0 && x.fraser.some((f) => !(stegFor(x.fas)?.fraser ?? []).includes(f))))) fel.push('forstaLektionensMinuter tar fraser som inte är stegets två första för delen');
+  if (!forstaMin[0]?.fraser.includes('1, 2, 3, visa!')) fel.push('forstaLektionensMinuter har inte rutinens repliker vid första lektionens start');
+  if (minuter.map((x) => x.fraser.join('|')).join(' ') !== forstaMin.map((x) => x.fraser.join('|')).join(' ')) fel.push('lathundens minuter har inte samma fraser som forstaLektionensMinuter');
+  if (sidor[1].delar.filter((x) => x.slag === 'rutin').length !== pilot.rutiner.rader.filter((r) => String(r.vecka) === '1').length) fel.push('lathunden har inte vecka 1:s rutiner, och bara dem');
+  const blad = del('planera', 'bladet');
+  if (blad?.plan !== pilot.forsta.plan || !blad.gra || blad.variant !== 'första lektionen') fel.push('lathundens tredje sida är inte första lektionens plan i grått');
+  const utanForsta = structuredClone(pilot); delete utanForsta.forsta.plan; delete utanForsta.hinder;
+  const blad2 = lathundensSidor(utanForsta)[2].delar[0];
+  if (blad2?.gra || blad2?.plan?.mal !== pilot.amnesexempel.find((e) => e.huvud).plan?.mal) fel.push('utan förlaga är lathundens tredje sida inte huvudexemplets plan');
+  if (lathundensSidor(utanForsta)[0].delar.some((x) => x.id === 'svarast')) fel.push('en metod utan hinder får en tom Det svåraste i lathunden');
+  const glider = del('veckorna', 'glider')?.rader ?? [];
+  const komponenter = new Set(pilot.fallgropar.rader.filter((r) => r.komponent && r.prova).map((r) => r.komponent));
+  if (glider.length !== komponenter.size) fel.push(`Om det glider har ${glider.length} rader, inte en per komponent (${komponenter.size})`);
+  const vagen = del('veckorna', 'med-dig')?.text ?? '';
+  const vagensRader = MED_DIG_PA_VAGEN.map((id) => pilot.uppfoljning.rader.find((r) => r.id === id)?.vad).filter(Boolean);
+  if (vagen !== vagensRader.join(' ')) fel.push('Med dig på vägen har inte uppföljningens rader i tidsordning');
+  if (del('veckorna', 'progression')?.rader.length !== pilot.progression.rader.length) fel.push('lathundens fjärde sida har inte alla veckor');
+  if (del('veckorna', 'hall-fast')) fel.push('Håll fast står i lathunden, men hör till del 4 på metodens sida');
+  const stodet = pilot.uppfoljning.rader.find((r) => r.id === 'stodet').vad;
+  if (del('veckorna', 'efter')?.text !== meningarna(stodet).slice(0, 2).join(' ')) fel.push('Efter de första veckorna har inte de två första meningarna i stodet');
+}
 
 // Bildtexten (K-486): meningarna, med citat och förkortningar, och felen.
 const meningsfall = [['Ett A4 per elev, att klippa isär. Eleverna lägger talet med korten i vecka 2.', 2], ['Läs ”Hej!” högt. Sedan t.ex. ”Vad tror du?” Klart.', 3],
@@ -179,4 +241,4 @@ const bildfall = [
 for (const [b, o, n] of bildfall) { const f = bildtextFel(b, o); if (f.length !== n) fel.push(`bildtextFel(${JSON.stringify(b).slice(0, 60)}) ger ${JSON.stringify(f)}`); }
 
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form och bildtextens gränser svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form, bildtextens gränser, metodkortets nivåer och lathundens sidor svarar rätt.`);

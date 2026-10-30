@@ -21,7 +21,9 @@ import { parse as parseYaml } from 'yaml';
 import { utanPlanensFalt } from '../src/lib/standard/index.js';
 
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
-const MAPP = 'src/content/stodundervisning';
+// Undervisningsmetoderna under Metoder (K-621) har samma regel, eftersom Fakta visar Uppdaterad också där; en ny samling
+// får sajtens prov från första commit (METODER.md under Undervisningsmetoderna).
+const MAPPAR = ['src/content/stodundervisning', 'src/content/undervisningsmetoder'];
 // Fält som inte är metodens innehåll: sajtens fält i scripts/metoddiff.mjs, och taggarna, som sorterar metoden i
 // metodbanken och inte är något läraren läser i den (K-463: 22 metoder fick nya taggar utan att något i dem ändrades).
 // Planens fält (Planera insatsen, K-489) är inte heller något läraren läser i metoden, och utanPlanensFalt i standarden
@@ -36,12 +38,12 @@ const datum = (x) => (x instanceof Date ? x.toISOString().slice(0, 10) : x ? Str
 const git = (args) => execFileSync('git', args, { cwd: rot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
 
 let ute;
-try { ute = new Set(git(['ls-tree', '--name-only', 'origin/main', `${MAPP}/`]).split('\n').filter(Boolean)); }
+try { ute = new Set(MAPPAR.flatMap((m) => git(['ls-tree', '--name-only', 'origin/main', `${m}/`]).split('\n').filter(Boolean))); }
 catch { console.log('Datumen: origin/main finns inte här, så inget jämförs.'); process.exit(0); }
 
 const satta = [];
 const saknas = [];
-for (const fil of readdirSync(join(rot, MAPP)).filter((f) => f.endsWith('.yaml') && !f.startsWith('_'))) {
+for (const [MAPP, fil] of MAPPAR.flatMap((m) => readdirSync(join(rot, m)).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => [m, f]))) {
   const vag = `${MAPP}/${fil}`;
   if (!ute.has(vag)) continue;
   const text = readFileSync(join(rot, vag), 'utf8');

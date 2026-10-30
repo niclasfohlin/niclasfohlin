@@ -7,33 +7,36 @@
 // metoden. Efter är att utveckla metoden. Nå stadigvarande form. Läsa på mer."): Före, stegen en vecka var eller längre, och
 // Efter. Varje vecka slutar med veckans stund: Gick det?, de två skattningarna med tio knappar och linjen, som Lärarens
 // skattning i Gruppstärkande aktiviteter (src/scripts/skattning.ts), veckans kommentar och en rad om varje klass, som fälls
-// ut. Planen sparas i webbläsaren och som fil i samma format som Planera insatsen, med samlingen metoder
-// (src/scripts/insatser-lagring.ts). Det läraren för in följer aldrig med någon länk eller statistik.
+// ut, där läraren också kan skatta hur det gick i klassen. Mitt i stegen lyfter planen fram klassen som har gått sämst, och
+// läraren kan avsluta planen med en anledning, som i Planera insatsen (K-631). Planen sparas i webbläsaren och som fil i samma
+// format som Planera insatsen, med samlingen metoder (src/scripts/insatser-lagring.ts). Det läraren för in följer aldrig med
+// någon länk eller statistik. Det som båda sidorna ritar lika, beskedet, lovknapparna, listorna, raden överst och avslutet,
+// står i src/scripts/byggstenar.ts (K-630).
 import {
-  arDatum, dagOchManad, dagText, datumText, esc, filnamnet, forstaLektionen, gangen, larDigetsForval, harInfortEfter, isoVecka, kalendervecka, kalenderveckaUtskriven, klasserUrText, kodaVal, larDigetsInforda,
-  larDigetsRegler, larDigSammanstallning, lasVal, mandagen, mening, metodplan, passetsLage, passetTraffas, planera, planveckanKort, planveckansNamn, plusDagar, PLANERA, rensaFoljd, rentMal, spannKort,
-  stor, talText, uppraknat, veckansPass, veckonyckel, vidareMening, granslinjensText, obesvaradVecka, sakdelar, skalansAndar, planensSistaDag, svaraGickDet, KLASSENS_NAMN, KLASSLISTANS_LANGD, KLASSNOTENS_LANGD, KOMMENTARENS_LANGD, type Foljd, type LarDigSammanstallning, type Plan, type PlanVecka, type Val,
+  ANLEDNINGENS_LANGD, arDatum, efterStegensTakt, gickDetSvaret, infordaDatum, klassenHarNagot, planveckansKort, sistaInfort, klassernasSkalaText, larDigetsLagetFor, larDigetsMittLast, larDigetsSteg, periodensText, planvecka, regelnIVeckan, skolveckan, skolveckansText, stegetsRad, SKATTNINGARNAS_GRANS, dagarMellan, dagOchManad, dagText, datumText, decimal, esc, filnamnet, forstaLektionen, gangen, larDigetsForval, harInfortEfter, isoVecka, kalendervecka, klassensFraga, KLASSERNAS_SKALA, klasserUrText, kodaVal, larDigetsAvslutText, larDigetsKvar, larDigetsMetodplan,
+  larDigetsRegler, larDigSammanstallning, lasVal, lovetLast, lovetsText, mandagen, medVardet, mening, mittIFragan, mittIText, MITT_I_LANGD, passetsLage, passetTraffas, planera, planveckanKort, planveckansNamn, plusDagar, PLANERA, rensaFoljd, rentMal, rentText, sakernasText, spannKort,
+  stor, talText, uppraknat, veckansPass, veckonyckel, vidareMening, granslinjensText, obesvaradVecka, skalansAndar, planensSistaDag, svaraGickDet, KLASSENS_NAMN, KLASSLISTANS_LANGD, KLASSNOTENS_LANGD, KOMMENTARENS_LANGD, type Foljd, type LarDigSammanstallning, type Plan, type PlanVecka, type Val,
 } from '../lib/standard/index.js';
 import type { LarDigData } from '../lib/lardig';
-import { APPENS_PLANER, idagLokalt, iSamlingen, lagringenArNyare, lasPlaner, lasPlanfilerna, nuTid, NYARE_VERSION, nyttId, oppnaPlanerna, planensAdress, planfilen, samlingen, schemaAv, skrivPlaner, sparaPlanerna, valdaFiler, type SparadPlan } from './insatser-lagring';
-import { laddaNer, linjegraf, pdfOrd, skalansKnappar, visaPdf } from './skattning';
+import { APPENS_PLANER, idagLokalt, iSamlingen, kopiansAlder, kopiansText, lagringenArNyare, lasPlaner, nuTid, NYARE_VERSION, nyttId, planensAdress, planenUrFaltet, planfilen, samlingen, schemaAv, skrivPlaner, skrivPlanen, sparaPlanerna, sparadPlan, SAMLINGENS_ORD, type SparadPlan } from './insatser-lagring';
+import { laddaNer, linjegraf, pdfOrd, skalansAndarRad, skalansKnappar, visaPdf } from './skattning';
+import { $, ANGRA_AVSLUTET, anledningenIFaltet, avslutaKnappen, avslutsformularet, avslutsrutan, beskedet, etikettlista, goatFor, knappen, lagesraden, linjensRegler, lovknapp, remsansKnapp, vidTryck } from './byggstenar';
 import { larDigPdf } from './lardigpdf';
 import { iAppen } from './webblasaren';
 
-const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const data: LarDigData = JSON.parse($('ld-data').textContent ?? '{}');
 const rader = data.uppfoljning.rader;
 // Metodens plan ur motorn, med lärarens skattningar; sidan byggs bara när den går att räkna (larDigFel).
-const mp = metodplan({ tid: data.tid, period: data.period, progression: data.progression, uppfoljning: data.uppfoljning, plan: { passen: data.passen, skattningar: data.skattningar } }).plan!;
+const mp = larDigetsMetodplan(data).plan!;
 const idag = idagLokalt();
 // Nyckeln för ett besked när sidan laddas om efter att planer har öppnats ur flera filer (oppnaPlanerna).
 const BESKED = 'ld-besked';
 
 // skapad är dagen planen sparades första gången, där Före börjar (Niclas 2026-10-30: "'Före' är från man sparar planen till
 // datumet för när man valt första lektionen").
-interface Aktiv { id: string; val: Val; foljd: Foljd; sparad: boolean; kopia?: string; skapad: string }
+interface Aktiv { id: string; val: Val; foljd: Foljd; sparad: boolean; kopia?: string; skapad: string; uppdaterad?: string }
 const nyAktiv = (): Aktiv => ({ id: nyttId(), val: larDigetsForval(mp, idag), foljd: rensaFoljd({}), sparad: false, skapad: idag });
-const franSparad = (p: SparadPlan): Aktiv => ({ id: p.id, val: lasVal(p.val)?.val ?? larDigetsForval(mp, idag), foljd: rensaFoljd(p.foljd), sparad: true, skapad: p.skapad ?? (arDatum(p.andrad.slice(0, 10)) ? p.andrad.slice(0, 10) : idag), ...(p.kopia ? { kopia: p.kopia } : {}) });
+const franSparad = (p: SparadPlan): Aktiv => ({ id: p.id, val: lasVal(p.val)?.val ?? larDigetsForval(mp, idag), foljd: rensaFoljd(p.foljd), sparad: true, skapad: p.skapad ?? (arDatum(p.andrad.slice(0, 10)) ? p.andrad.slice(0, 10) : idag), ...(p.kopia ? { kopia: p.kopia } : {}), ...(p.uppdaterad ? { uppdaterad: p.uppdaterad } : {}) });
 // En plan per lärare och metod (Niclas 2026-10-30): planen för metoden i samlingen Metoder, den senast ändrade, eller den som
 // adressen pekar på (planensAdress).
 const minaPlaner = () => iSamlingen(lasPlaner().planer, 'metoder').filter((p) => p.metod === data.id).sort((a, b) => (a.andrad < b.andrad ? 1 : a.andrad > b.andrad ? -1 : 0));
@@ -43,15 +46,18 @@ let aktiv: Aktiv = (() => {
   const p = (fran ? egna.find((x) => x.id === fran) : undefined) ?? egna[0];
   return p ? franSparad(p) : nyAktiv();
 })();
-let plan: Plan = planera(mp, aktiv.val);
-const rakna = () => { plan = planera(mp, aktiv.val); };
+// Planen ur valen, med veckan Mitt i låst i valen när den har börjat (larDigetsMittLast i standarden), så att ett steg som
+// förlängs efteråt inte flyttar den till en annan vecka och en annan klass (granskningen rot-3, fynd 1).
+const planen = (): Plan => { const p = planera(mp, aktiv.val); const mitt = aktiv.val.mitt ? undefined : larDigetsMittLast(p, idag); if (!mitt) return p; aktiv.val = { ...aktiv.val, mitt }; return planera(mp, aktiv.val); };
+let plan: Plan = planen();
+const rakna = () => { plan = planen(); };
 const samman = (): LarDigSammanstallning => larDigSammanstallning(plan, aktiv.val, aktiv.foljd, idag);
 
 // ---------- Lagringen ----------
-const sparadAv = (): SparadPlan => ({ id: aktiv.id, metod: data.id, samling: 'metoder', titel: data.titel, namn: '', val: kodaVal(aktiv.val), folj: true, foljd: aktiv.foljd, andrad: nuTid(), skapad: aktiv.skapad, uppdaterad: data.uppdaterad, ...(aktiv.kopia ? { kopia: aktiv.kopia } : {}), schema: schemaAv(plan, aktiv.val), bockade: 0 });
+const sparadAv = (): SparadPlan => sparadPlan(aktiv, data, plan, { samling: 'metoder', namn: '', folj: true, skapad: aktiv.skapad, bockade: 0 });
 function spara(): boolean {
   if (!aktiv.sparad) return true;
-  const ok = skrivPlaner([sparadAv(), ...lasPlaner().planer.filter((p) => p.id !== aktiv.id)]);
+  const ok = skrivPlanen(sparadAv());
   if (!ok) visaBesked(lagringenArNyare() ? NYARE_VERSION : 'Planen gick inte att spara i den här webbläsaren. Ladda ner den som fil, så finns den kvar.');
   return ok;
 }
@@ -63,24 +69,8 @@ addEventListener('pagehide', skrivKlart);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') skrivKlart(); });
 
 // ---------- Beskedet ----------
-let toastTid = 0;
-let toastGor: (() => void) | null = null;
-function visaBesked(text: string, atgard?: { text: string; gor: () => void }) {
-  const t = $('ld-toast');
-  window.clearTimeout(toastTid);
-  toastGor = atgard?.gor ?? null;
-  t.innerHTML = `<p>${esc(text)}</p>${atgard ? `<button type="button" class="pl-toast-knapp" data-toast-gor>${esc(atgard.text)}</button>` : ''}<button type="button" class="pl-toast-stang" data-toast-stang aria-label="Stäng beskedet">×</button>`;
-  t.hidden = false;
-  toastTid = window.setTimeout(() => { t.hidden = true; toastGor = null; }, atgard ? 20000 : 8000);
-}
-$('ld-toast').addEventListener('click', (e) => {
-  const b = (e.target as Element).closest('button');
-  if (!b) return;
-  const gor = b.hasAttribute('data-toast-gor') ? toastGor : null;
-  $('ld-toast').hidden = true;
-  toastGor = null;
-  gor?.();
-});
+// Beskedet längst ned på skärmen, som i Planera insatsen (byggstenarna).
+const visaBesked = beskedet('ld-toast');
 
 // En ändring med Ångra: ändringen görs, planen räknas om, sparas och ritas, och Ångra tar tillbaka valen och det som var
 // infört. En ändring som inte går att göra säger varför och returnerar false.
@@ -101,43 +91,72 @@ type Vy = 'fore' | 'efter' | number;
 const standardVy = (): Vy => { if (!aktiv.sparad) return 'fore'; const s = samman(); return s.fas === 'fore' ? 'fore' : s.fas === 'efter' ? 'efter' : s.nu ?? 1; };
 let visa: Vy = standardVy();
 const stegRad = (v: { steg?: number | null }) => (v.steg !== null && v.steg !== undefined ? data.progression.rader[v.steg] : undefined);
-const antalSteg = mp.steg.length;
-const fredagen = (m: string) => plusDagar(m, 4);
-const veckansDatum = (m: string) => `${kalendervecka(isoVecka(m).vecka)}, ${spannKort(m, fredagen(m))}`;
-const goat = (vad: string, titel: string) => `data-goatcounter-click="lardig:${esc(data.id)}:${vad}" data-goatcounter-title="${esc(data.titel)}: ${esc(titel)}"`;
-const knapplank = (adress: string, text: string, vad: string, primar = false) => `<a class="knapp ${primar ? '' : 'sekundar '}ld-knapp" href="${esc(adress)}" ${goat(vad, text)}>${esc(text)}</a>`;
+// Stegen i planen: antalet, ett stegs nummer och det sista steget (larDigetsSteg i standarden).
+const steg = () => larDigetsSteg(plan);
+const goat = goatFor(SAMLINGENS_ORD.metoder.led, data.id, data.titel);
+const knapplank = (adress: string, text: string, vad: string) => `<a class="knapp sekundar ld-knapp" href="${esc(adress)}" ${goat(vad, text)}>${esc(text)}</a>`;
 // Det som var utfällt står kvar när vyn ritas om.
 const oppnaRutor = () => new Set([...document.querySelectorAll<HTMLDetailsElement>('#ld-vyn details[data-ruta][open], #ld-samman details[data-ruta][open]')].map((d) => d.dataset.ruta!));
 const oppen = (o: Set<string>, ruta: string) => (o.has(ruta) ? ' open' : '');
-// Stegets regel som en fråga (fraga), och annars som meningen Gå vidare när (vidareMening), så att regeln står en gång.
-const fraganFor = (rad?: LarDigData['progression']['rader'][number]) => rad?.fraga ?? (rad?.vidare ? vidareMening(rad.vidare) : '');
-// Svaret med stegets fråga, i sammanställningen och pdf:en: "Visar nästan alla på signalen inom tio sekunder? Ja."
-const svaretMedFragan = (fraga: string | undefined, svar: 'ja' | 'inte') => `${fraga ?? 'Gick det?'} ${svar === 'ja' ? 'Ja.' : 'Inte än.'}`;
-// Veckan med ett steg som har varit utan svar på Gick det?, som står överst tills den har svar (obesvaradVecka i standarden).
-const obesvarad = () => (aktiv.sparad ? obesvaradVecka(plan, aktiv.foljd, idag) : null);
-const harFortIn = (s: LarDigSammanstallning) => s.linjer.some((l) => l.varden.some((x) => x !== undefined)) || s.veckor.some((w) => w.kommentar || w.noter.length || w.gick);
-const tillSamman = (s: LarDigSammanstallning) => (aktiv.sparad && harFortIn(s) ? '<p class="ld-tillsamman"><button type="button" class="pl-textknapp" data-till-samman>Till sammanställningen</button></p>' : '');
+// Stegets regel som en fråga (fraga), som varje steg har (undervisningsmetodensFel), så att regeln står en gång.
+const fraganFor = (rad?: LarDigData['progression']['rader'][number]) => rad?.fraga ?? '';
+// Veckan med ett steg som har varit utan svar på Gick det?, som står överst tills den har svar (obesvaradVecka i standarden),
+// utom i en avslutad plan.
+const obesvarad = () => (aktiv.sparad && !aktiv.foljd.avslut ? obesvaradVecka(plan, aktiv.foljd, idag) : null);
+const tillSamman = (s: LarDigSammanstallning) => (aktiv.sparad && s.harNagot ? '<p class="ld-tillsamman"><button type="button" class="pl-textknapp" data-till-samman>Till sammanställningen</button></p>' : '');
 
+// Raden överst i en sparad plan, som i Planera insatsen (lagesraden i byggstenarna): läget som märke, som under Dina planer
+// (statusAv), var läraren är och knappen Avsluta planen med formuläret under raden. En avslutad plan har rutan med bocken,
+// avslutet med anledningen och Ångra avslutet, och planen grå och streckad (K-631). Formuläret står kvar öppet med det
+// läraren har skrivit när sidan ritas om.
+let avslutaOppen = false;
+let avslutaUtkast = '';
+let nyssAvslutad = false;
 function renderaLage(s: LarDigSammanstallning) {
+  const ruta = $('ld-lage');
+  const lage = aktiv.sparad ? larDigetsLagetFor(plan, idag, !!aktiv.foljd.avslut).lage : null;
+  $('ld').classList.toggle('pl-avslutad-plan', lage === 'avslutad');
+  if (!lage) { avslutaOppen = false; ruta.className = 'ld-lage ld-forslag'; ruta.innerHTML = `<p>${esc('Ett förslag. Det du fyller i under Före sparas i den här webbläsaren.')}</p>`; return; }
+  if (s.avslut) {
+    avslutaOppen = false;
+    ruta.className = 'ld-lage';
+    ruta.innerHTML = avslutsrutan({ rubrik: 'Planen är avslutad', text: `${larDigetsAvslutText(s.avslut)} Sammanställningen och allt du har fört in finns kvar.`, knappar: [s.harNagot ? '<button type="button" class="knapp liten" data-till-samman>Till sammanställningen</button>' : '', ANGRA_AVSLUTET].filter(Boolean), ny: nyssAvslutad });
+    return;
+  }
   const forsta = forstaLektionen(plan);
   const nu = s.nu ? plan.veckor[s.nu - 1] : undefined;
   const o = obesvarad();
-  const saknas = o && stegRad(o) ? ` Du har inte svarat om steg ${o.innehall} sitter.` : '';
-  const t = !aktiv.sparad ? 'Ett förslag. Det du fyller i under Före sparas i den här webbläsaren.'
-    : s.fas === 'fore' && forsta ? `Före. Första lektionen med eleverna är ${dagText(forsta)}.`
-    : s.fas === 'under' && nu ? `Nu: steg ${nu.innehall} av ${antalSteg}, ${stegRad(nu)?.rubrik ?? ''}${gangen(plan, nu) ? ', en vecka till' : ''}.${saknas}`
-    : s.fas === 'efter' ? `Nu: efter stegen. Du skattar varannan vecka.${saknas}` : '';
-  $('ld-lage').textContent = t;
+  const saknas = o && stegRad(o) ? ` Du har inte svarat om steg ${steg().nummer(o)} sitter.` : '';
+  const text = s.fas === 'fore' && forsta ? `Före. Första lektionen med eleverna är ${dagText(forsta)}.`
+    : s.fas === 'under' && nu ? `Nu: steg ${steg().nummer(nu)} av ${steg().antal}, ${stegRad(nu)?.rubrik ?? ''}${gangen(plan, nu) ? ', en vecka till' : ''}.${saknas}`
+    : s.fas === 'efter' ? `Nu: efter stegen. Du skattar ${efterStegensTakt()}.${saknas}` : '';
+  const kanAvsluta = lage === 'pagaende';
+  if (!kanAvsluta) avslutaOppen = false;
+  ruta.className = `pl-lage ld-lage ${lage}`;
+  const formularet = kanAvsluta ? avslutsformularet({ id: 'ld-avsluta', oppen: avslutaOppen, samling: 'metoder', fore: '<p>Planen stannar i dag, där du är. Sammanställningen och allt du har fört in står kvar.</p>', not: avslutaUtkast, hjalp: 'Anledningen står i sammanställningen. Avslutet går att ångra.', knapp: 'Avsluta i dag', goat: goat('avsluta', 'planen avslutad') }) : '';
+  ruta.innerHTML = lagesraden(lage, text, { knappar: [kanAvsluta ? avslutaKnappen('Avsluta planen', 'ld-avsluta', avslutaOppen) : ''], under: formularet });
+}
+// Avsluta i dag: avslutet med dagen och anledningen i fältet, också ett tomt fält, och Ångra i beskedet.
+function avslutaKlar() {
+  const not = rentText($<HTMLInputElement>('ld-avsluta-not').value, ANLEDNINGENS_LANGD);
+  andra(() => { aktiv.foljd = { ...aktiv.foljd, avslut: { datum: idag, ...(not ? { not } : {}) } }; nyssAvslutad = true; avslutaOppen = false; avslutaUtkast = ''; }, () => 'Planen är avslutad. Sammanställningen och allt du har fört in finns kvar.', true);
+  $('ld-lage').scrollIntoView({ block: 'start' });
+  $('ld-lage').querySelector<HTMLElement>('button')?.focus({ preventScroll: true });
+}
+// Ångra avslutet: planen pågår igen, med allt som var infört.
+function angraAvslutet() {
+  andra(() => { const { avslut: _, ...utan } = aktiv.foljd; aktiv.foljd = utan; }, () => 'Avslutet är ångrat. Planen pågår igen.', true);
+  $('ld-lage').querySelector<HTMLElement>('[data-gor="avsluta"]')?.focus({ preventScroll: true });
 }
 
 function renderaRemsa(s: LarDigSammanstallning) {
-  const knapp = (vy: Vy, text: string, small: string, nu: boolean, etikett: string) => `<button type="button" class="pl-remsa-vecka${nu ? ' nu' : ''}" data-vy="${vy}" aria-pressed="${String(visa) === String(vy)}" aria-label="${esc(etikett)}"${nu ? ' aria-current="step"' : ''}>${esc(text)}${small ? `<small>${esc(small)}</small>` : ''}</button>`;
+  const knapp = (vy: Vy, k: { tal: string; om: string }, nu: boolean, etikett: string) => remsansKnapp(vy, k, { nu, vald: String(visa) === String(vy), etikett, steg: true });
   const nuNr = s.fas === 'under' ? s.nu : null;
-  const stegen = plan.veckor.map((v) => { const k = planveckanKort(v.innehall, gangen(plan, v)); return knapp(v.nr, k.tal, k.om, nuNr === v.nr, `${planveckansNamn(plan, v).Text}, ${stegRad(v)?.rubrik ?? ''}`); });
+  const stegen = plan.veckor.map((v) => knapp(v.nr, planveckansKort(plan, v), nuNr === v.nr, `${planveckansNamn(plan, v).Text}, ${stegRad(v)?.rubrik ?? ''}`));
   // Kolumnerna i den minsta telefonen: alla på en rad upp till sex, och annars jämna rader, så att ingen knapp står ensam
   // (formgranskningen 2026-10-30).
   const antal = plan.veckor.length + 2;
-  $('ld-remsa').innerHTML =`<p class="pl-etikett">Din väg</p><div class="pl-remsa-knappar" style="--ld-kolumner: ${antal <= 6 ? antal : Math.ceil(antal / 2)}">${knapp('fore', 'Före', '', s.fas === 'fore' && aktiv.sparad, 'Före första lektionen')}${stegen.join('')}${knapp('efter', 'Efter', '', s.fas === 'efter', 'Efter stegen')}</div>`;
+  $('ld-remsa').innerHTML =`<p class="pl-etikett">Din väg</p><div class="pl-remsa-knappar" style="--ld-kolumner: ${antal <= 6 ? antal : Math.ceil(antal / 2)}">${knapp('fore', { tal: 'Före', om: '' }, s.fas === 'fore' && aktiv.sparad, 'Före första lektionen')}${stegen.join('')}${knapp('efter', { tal: 'Efter', om: '' }, s.fas === 'efter', 'Efter stegen')}</div>`;
 }
 
 // ---------- Före ----------
@@ -146,21 +165,21 @@ function renderaRemsa(s: LarDigSammanstallning) {
 const forePerioden = () => {
   const forsta = forstaLektionen(plan) ?? aktiv.val.start;
   const fran = aktiv.sparad ? aktiv.skapad : idag;
-  const dagar = Math.round((Date.parse(forsta) - Date.parse(fran)) / 86400000);
-  return { forsta, fran, dagar, tid: dagar >= 10 ? `omkring ${talText(Math.round(dagar / 7))} veckor` : dagar >= 6 ? 'omkring en vecka' : dagar > 0 ? `${talText(dagar)} ${dagar === 1 ? 'dag' : 'dagar'}` : '' };
+  const dagar = dagarMellan(fran, forsta);
+  return { forsta, fran, dagar, tid: periodensText(dagar) };
 };
 // Veckorna från fran till och med till.
 const veckornaMellan = (fran: string, till: string) => { const ut: string[] = []; for (let m = fran; m <= till; m = plusDagar(m, 7)) ut.push(m); return ut; };
-const sistaInforda = () => larDigetsInforda(aktiv.foljd).at(-1);
-const lovetLast = (m: string) => { const s = sistaInforda(); return !!s && m <= mandagen(s); };
 const aktivaKlasser = () => (aktiv.foljd.klasser ?? []).filter((k) => !k.borta);
-const lovchip = (m: string, lov: Set<string>) => { const k = veckonyckel(m); const pa = lov.has(k); return `<button type="button" class="pl-chip pl-lovchip" data-lovvecka="${k}" aria-pressed="${pa}"${lovetLast(m) ? ' disabled' : ''} aria-label="${esc(`${stor(kalenderveckaUtskriven(isoVecka(m).vecka))}, ${spannKort(m, fredagen(m))}${pa ? ', lov' : ''}`)}"><span>${kalendervecka(isoVecka(m).vecka)}</span><small>${esc(spannKort(m, fredagen(m)))}</small></button>`; };
+
+// Uppföljningens rader med veckan för första tillfället, före och efter stegen.
+const uppfMedVeckan = (lista: Plan['uppfoljning']) => etikettlista(lista.map((u) => ({ etikett: `${rader[u.rad].nar}, ${skolveckansText(mandagen(u.tillfallen[0].datum))}`, html: esc(rader[u.rad].vad) })));
 // Planens rad överst i Före: stegen och om planen är sparad. Den ritas om när Före sparas av sig själv.
 const summaHtml = () => {
   const f = forePerioden();
   const fore = f.dagar > 0 ? `Före: från ${dagOchManad(f.fran)} till första lektionen, ${dagText(f.forsta)}${f.tid ? `, ${f.tid}` : ''}.` : `Första lektionen med eleverna ${f.forsta < idag ? 'var' : 'är'} ${dagText(f.forsta)}.`;
   const veckan = plan.veckor[0]?.mandag ?? f.forsta;
-  return `<p>${esc(fore)}</p><p>${esc(`${stor(talText(antalSteg))} steg från ${kalendervecka(isoVecka(veckan).vecka)}. Varje steg tar en vecka eller längre.`)}</p>${aktiv.sparad ? '<p class="pl-not">Planen är sparad i den här webbläsaren.</p>' : `<p class="pl-not">Planen sparas i den här webbläsaren när du fyller i något. Vill du ha förslaget som det är, spara det här.</p><p class="pl-andra-knappar"><button type="button" class="knapp ld-knapp" data-spara ${goat('spara', 'planen sparad')}>Spara planen</button></p>`}`;
+  return `<p>${esc(fore)}</p><p>${esc(`${stor(talText(steg().antal))} steg från ${kalendervecka(isoVecka(veckan).vecka)}. Varje steg tar en vecka eller längre.`)}</p>${aktiv.sparad ? '<p class="pl-not">Planen är sparad i den här webbläsaren.</p>' : `<p class="pl-not">Planen sparas i den här webbläsaren när du fyller i något. Vill du ha förslaget som det är, spara det här.</p><p class="pl-andra-knappar"><button type="button" class="knapp ld-knapp" data-spara ${goat('spara', 'planen sparad')}>Spara planen</button></p>`}`;
 };
 const uppdateraSumma = () => { const el = document.getElementById('ld-summa'); if (el) el.innerHTML = summaHtml(); };
 
@@ -172,35 +191,34 @@ function renderaFore(o: Set<string>): string {
   const malet = `<div class="ld-delblock"><h4 id="ld-mal-rubrik">Ditt mål med metoden</h4><p class="pl-hjalp">Metoden har inget eget mål. Ditt mål är det du vill kunna när metoden sitter. Tryck på ett av kärnans fyra, det som metoden bygger på, eller skriv ett eget.</p><div class="ld-val" role="group" aria-labelledby="ld-mal-rubrik">${data.karna.map((k) => `<button type="button" class="ld-valknapp" data-mal="${esc(k.kvar)}" aria-pressed="${mal === k.kvar}"><span class="ld-valnamn">${esc(k.namn)}</span>${esc(k.kvar)}</button>`).join('')}</div><label class="pl-etikett" for="ld-mal">Ditt mål med egna ord</label><textarea class="pl-falt pl-textfalt pl-brett ld-malfalt" id="ld-mal" rows="2" maxlength="200" autocomplete="off">${esc(mal)}</textarea><p class="pl-hjalp">Målet står i veckans stund och i sammanställningen.</p></div>`;
   const klasser = `<div class="ld-delblock"><h4 id="ld-klasser-rubrik">Dina klasser och grupper</h4><label class="pl-etikett" for="ld-klasser">En per rad, högst ${talText(KLASSLISTANS_LANGD)}</label><textarea class="pl-falt pl-textfalt" id="ld-klasser" rows="4" autocomplete="off" spellcheck="false">${esc(aktivaKlasser().map((k) => k.namn).join('\n'))}</textarea><p class="pl-hjalp">Skriv klassens eller gruppens namn, som 3B eller Ma2 grupp 1, och inga elevnamn. Varje vecka kan du skriva en rad om varje klass.</p><p class="pl-hjalp pl-varning" id="ld-klasser-not" role="status" hidden></p></div>`;
   const lov = new Set(aktiv.val.lov ?? []);
-  const last = !!sistaInforda();
+  const last = !!sistaInfort(aktiv.foljd);
   // Loven under stegen, och efter stegen till planens sista uppföljning i en rad som fälls ut, så att skattningen efter
   // stegen hoppar över dem.
   const efterFran = plusDagar(plan.efter, 14), efterTill = mandagen(planensSistaDag(plan) ?? plan.efter);
-  const efterLov = efterTill >= efterFran ? `<details class="pl-fallut" data-ruta="lov-efter"${oppen(o, 'lov-efter') || [...lov].some((k) => veckornaMellan(efterFran, efterTill).some((m) => veckonyckel(m) === k)) ? ' open' : ''}><summary>Lov efter stegen</summary><div class="pl-lovveckor">${veckornaMellan(efterFran, efterTill).map((m) => lovchip(m, lov)).join('')}</div></details>` : '';
+  const efterLov = efterTill >= efterFran ? `<details class="pl-fallut" data-ruta="lov-efter"${oppen(o, 'lov-efter') || [...lov].some((k) => veckornaMellan(efterFran, efterTill).some((m) => veckonyckel(m) === k)) ? ' open' : ''}><summary>Lov efter stegen</summary><div class="pl-lovveckor">${veckornaMellan(efterFran, efterTill).map((m) => lovknapp(m, lov, sistaInfort(aktiv.foljd))).join('')}</div></details>` : '';
   // Första lektionen med eleverna är ett datum, och Före räcker från dagen planen sparas till dess (Niclas 2026-10-30).
   const period = forePerioden();
-  const start = `<div class="ld-delblock"><h4>När du börjar</h4><label class="pl-etikett" for="ld-start">Första lektionen med eleverna</label><input class="pl-falt" type="date" id="ld-start" value="${esc(aktiv.val.start)}" min="${plusDagar(idag, -90)}" max="${plusDagar(idag, 365)}"${last ? ' disabled' : ''} /><p class="pl-hjalp">Före räcker från ${period.fran === idag ? 'i dag' : esc(dagOchManad(period.fran))} till dess. Många behöver två till fyra veckor för att läsa in sig, plocka fram materialet och träffa arbetslaget. Stegen börjar veckan för första lektionen. Metoden: ${esc(data.tid)}.${last ? ' Du har fört in något, så första lektionen står kvar.' : ''}</p><fieldset class="ld-lov"><legend class="pl-etikett">Tryck på veckorna som är lov</legend><div class="pl-lovveckor">${veckornaMellan(mandagen(aktiv.val.start), plusDagar(plan.efter, 7)).map((m) => lovchip(m, lov)).join('')}</div><p class="pl-hjalp">Stegen och skattningen hoppar över dem.</p>${efterLov}</fieldset></div>`;
+  const start = `<div class="ld-delblock"><h4>När du börjar</h4><label class="pl-etikett" for="ld-start">Första lektionen med eleverna</label><input class="pl-falt" type="date" id="ld-start" value="${esc(aktiv.val.start)}" min="${plusDagar(idag, -90)}" max="${plusDagar(idag, 365)}"${last ? ' disabled' : ''} /><p class="pl-hjalp">Före räcker från ${period.fran === idag ? 'i dag' : esc(dagOchManad(period.fran))} till dess. Många behöver två till fyra veckor för att läsa in sig, plocka fram materialet och träffa arbetslaget. Stegen börjar veckan för första lektionen. Metoden: ${esc(data.tid)}.${last ? ' Du har fört in något, så första lektionen står kvar.' : ''}</p><fieldset class="ld-lov"><legend class="pl-etikett">Tryck på veckorna som är lov</legend><div class="pl-lovveckor">${veckornaMellan(mandagen(aktiv.val.start), plusDagar(plan.efter, 7)).map((m) => lovknapp(m, lov, sistaInfort(aktiv.foljd))).join('')}</div><p class="pl-hjalp">Stegen och skattningen hoppar över dem.</p>${efterLov}</fieldset></div>`;
   const planen = `<section class="pl-block ld-planen" aria-labelledby="ld-planen-rubrik"><h3 id="ld-planen-rubrik">Din plan</h3><div class="ld-summa" id="ld-summa">${summaHtml()}</div>${malet}${klasser}${start}</section>`;
   const lasvag = `<section class="pl-block" aria-labelledby="ld-las-rubrik"><h3 id="ld-las-rubrik">Läs in dig</h3><p>Läs de här delarna av metoden före första lektionen.</p><ol class="ld-lasvag">${data.lasvag.map((x) => `<li><a href="${esc(x.adress)}" ${goat('lasvag', x.namn)}>${esc(x.namn)}</a></li>`).join('')}</ol>${data.film ? `<p><a href="${esc(`${data.sida}#filmen`)}" ${goat('filmen', 'filmen från Lär dig metoden')}>Titta på filmen: ${esc(data.film.rubrik)}</a>${data.film.ingress ? ` ${esc(data.film.ingress)}` : ''}</p>` : ''}</section>`;
   // Uppföljningens rader före start, som arbetslagets möte före första lektionen, med veckan före stegen (motorns Före).
   const egna = new Set(mp.skattningar.map((x) => x.rad));
   const foreRader = plan.uppfoljning.filter((u) => u.typ === 'fore' && !egna.has(u.rad) && u.tillfallen.length);
-  const motet = data.forbered.fragor.length || foreRader.length ? `<section class="pl-block" aria-labelledby="ld-mote-rubrik"><h3 id="ld-mote-rubrik">Arbetslagets första möte</h3>${foreRader.length ? `<ul class="pl-uppf">${foreRader.map((u) => `<li><span class="pl-etikett">${esc(`${rader[u.rad].nar}, ${veckansDatum(mandagen(u.tillfallen[0].datum))}`)}</span><p>${esc(rader[u.rad].vad)}</p></li>`).join('')}</ul>` : ''}${data.forbered.text ? `<p>${esc(data.forbered.text)}</p>` : ''}${data.forbered.fragor.length ? `<p class="pl-etikett">Frågorna att tänka igenom</p><ol class="ld-fragor">${data.forbered.fragor.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}</section>` : '';
+  const motet = data.forbered.fragor.length || foreRader.length ? `<section class="pl-block" aria-labelledby="ld-mote-rubrik"><h3 id="ld-mote-rubrik">Arbetslagets första möte</h3>${foreRader.length ? uppfMedVeckan(foreRader) : ''}${data.forbered.text ? `<p>${esc(data.forbered.text)}</p>` : ''}${data.forbered.fragor.length ? `<p class="pl-etikett">Frågorna att tänka igenom</p><ol class="ld-fragor">${data.forbered.fragor.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}</section>` : '';
   const check = `<section class="pl-block" aria-labelledby="ld-check-rubrik"><h3 id="ld-check-rubrik">Checklistan</h3><ul class="ld-checklista">${data.checklista.punkter.map((p, i) => `<li><label class="pl-kryss"><input type="checkbox" data-bock="${i}"${bockat.has(i) ? ' checked' : ''} /> <span>${medSaker(p)}</span></label></li>`).join('')}</ul><p class="pl-not" id="ld-check-antal">${esc(checkText())}</p></section>`;
   const f = data.filer;
   const material = `<section class="pl-block" aria-labelledby="ld-mat-rubrik"><h3 id="ld-mat-rubrik">Materialet</h3>${data.material.length ? `<p>${esc(mening(stor(uppraknat(data.material))))}</p>` : ''}<p class="pl-andra-knappar">${knapplank(f.lektionskort.adress, 'Lektionskortet', 'lektionskort')}${knapplank(f.planeringsmall.adress, 'Planeringsmallen', 'planeringsmall')}${knapplank(f.materialet.adress, 'Materialet för klassen', 'materialet')}</p>${f.lektionskort.fil && f.planeringsmall.fil ? '' : '<p class="pl-hjalp">Det som ännu inte finns som fil står på metodens sida.</p>'}</section>`;
   return `<section class="ld-fas" aria-labelledby="ld-vy-rubrik"><h2 id="ld-vy-rubrik" tabindex="-1">Före första lektionen</h2><p class="ld-ingress">Förbered dig, plocka fram materialet och läs in dig. Sedan tar du ett steg i taget.</p>${planen}${lasvag}${motet}${check}${material}<p class="pl-bladdra"><span></span><button type="button" class="pl-textknapp" data-vy="1">Första steget ›</button></p></section>`;
 }
 // Metodens saker i en text som länkar, som checklistans blad och affischer till Materialet för klassen på metodens sida.
-const medSaker = (text: string) => sakdelar(text, data.saker).map((x) => (x.sak === undefined ? esc(x.text) : `<a href="${esc(data.saker[x.sak].adress)}" ${goat('checklistan', data.saker[x.sak].namn)}>${esc(x.text)}</a>`)).join('');
+const medSaker = (text: string) => sakernasText(text, data.saker, (s, t) => `<a href="${esc(s.adress)}" ${goat('checklistan', s.namn)}>${esc(t)}</a>`, esc);
 const checkText = () => { const n = (aktiv.foljd.bockat ?? []).filter((i) => i < data.checklista.punkter.length).length; return `${stor(talText(n))} av ${talText(data.checklista.punkter.length)} klara.`; };
 
 // ---------- Gick det? ----------
-const arSista = (v: { steg?: number | null; innehall: number }) => v.steg !== null && v.steg !== undefined && v.innehall === Math.max(...plan.veckor.map((x) => x.innehall));
 // Knapparna Ja och Inte än för en vecka. plats skiljer knapparna åt när samma vecka har dem på två ställen.
 const gickKnappar = (v: { mandag: string; steg?: number | null; innehall: number }, plats: string, etikett: string) => {
   const svar = aktiv.foljd.gick?.[v.mandag];
-  return `<div class="ld-gickval" role="group" aria-label="${esc(etikett)}"><button type="button" class="ld-gickknapp" data-gick="ja" data-mandag="${v.mandag}" data-plats="${plats}" aria-pressed="${svar === 'ja'}">${arSista(v) ? 'Ja, stegen är klara' : 'Ja, nästa steg'}</button><button type="button" class="ld-gickknapp" data-gick="inte" data-mandag="${v.mandag}" data-plats="${plats}" aria-pressed="${svar === 'inte'}">Inte än, en vecka till</button></div>`;
+  return `<div class="ld-gickval" role="group" aria-label="${esc(etikett)}"><button type="button" class="ld-gickknapp" data-gick="ja" data-mandag="${v.mandag}" data-plats="${plats}" aria-pressed="${svar === 'ja'}">${steg().sista(v) ? 'Ja, stegen är klara' : 'Ja, nästa steg'}</button><button type="button" class="ld-gickknapp" data-gick="inte" data-mandag="${v.mandag}" data-plats="${plats}" aria-pressed="${svar === 'inte'}">Inte än, en vecka till</button></div>`;
 };
 // Vad svaret på Gick det? gör med planen, ur planen efter svaret: stegets sista vecka efter en förlängning, eller nästa vecka.
 function gickText(mandag: string): string {
@@ -217,7 +235,7 @@ function obesvaradRuta(o: PlanVecka): string {
   const rad = stegRad(o);
   const namn = planveckansNamn(plan, o);
   const fragan = fraganFor(rad);
-  return `<section class="ld-forra" aria-labelledby="ld-forra-rubrik"><h3 id="ld-forra-rubrik">${esc(`Gick det i ${namn.text}?`)}</h3><p class="ld-forra-steg">${esc(`Steg ${o.innehall}, ${rad?.rubrik ?? ''}.`)}</p>${fragan ? `<p${rad?.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${gickKnappar(o, 'forra', rad?.fraga ?? `Gick det i ${namn.text}?`)}<p class="pl-hjalp">Svarar du Inte än, får steget en vecka till, och veckan efter blir den veckan. <button type="button" class="pl-textknapp" data-vy="${o.nr}">${esc(`Till ${namn.text}`)}</button></p></section>`;
+  return `<section class="ld-forra" aria-labelledby="ld-forra-rubrik"><h3 id="ld-forra-rubrik">${esc(`Gick det i ${namn.text}?`)}</h3><p class="ld-forra-steg">${esc(`Steg ${steg().nummer(o)}, ${rad?.rubrik ?? ''}.`)}</p>${fragan ? `<p${rad?.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${gickKnappar(o, 'forra', `Gick det i ${namn.text}?`)}<p class="pl-hjalp">Svarar du Inte än, får steget en vecka till, och veckan efter blir den veckan. <button type="button" class="pl-textknapp" data-vy="${o.nr}">${esc(`Till ${namn.text}`)}</button></p></section>`;
 }
 
 // ---------- Veckans stund ----------
@@ -232,8 +250,8 @@ function skattningen(j: number, w: LarDigSammanstallning['veckor'][number], i: n
   if (!sk || !linje || !egen) return '';
   const g = { namn: sk.namn, skala: linje.skala, regler: linje.regler };
   const varde = aktiv.foljd.matt?.[sk.namn]?.[w.mandag];
-  const regel = varde !== undefined ? linje.galler[i]?.[0] : undefined;
-  const regelRad = regel !== undefined ? rader[linje.regler[regel].rad] : undefined;
+  const regel = varde !== undefined ? regelnIVeckan(linje, i) : undefined;
+  const regelRad = regel ? rader[regel.rad] : undefined;
   // Säger regelns råd en vecka till, står knappen i rutan, samma som Inte än i Gick det?.
   const v = plan.veckor.find((x) => x.mandag === w.mandag);
   const enVeckaTill = !!regelRad && medGick && !!v && /vecka till/.test(regelRad.vad) && aktiv.foljd.gick?.[w.mandag] !== 'inte' && !harInfortEfter(aktiv.foljd, w.mandag);
@@ -243,27 +261,51 @@ function skattningen(j: number, w: LarDigSammanstallning['veckor'][number], i: n
   // Linjen när den har två kryss: ett kryss säger inget mer än knappen (som staplarna i Planera insatsen).
   const grafen = linje.varden.filter((x) => x !== undefined).length >= 2 ? `<div class="pl-grafruta">${linjegraf(g, linje.varden, s.veckor.map((x) => x.namn), { ring: varde === undefined ? i : undefined, undan: true, vidgas: true })}</div>${granslinjensText(linje.regler) ? `<p class="pl-not">${esc(granslinjensText(linje.regler))}</p>` : ''}` : '';
   const andar = skalansAndar(sk.namn, j);
-  const andarna = andar ? `<p class="ld-skalans-andar" aria-hidden="true"><span>${linje.skala.fran} ${esc(andar.lagst)}</span><span>${linje.skala.till} ${esc(andar.hogst)}</span></p>` : '';
+  const andarna = andar ? skalansAndarRad(linje.skala, andar) : '';
   return `<section class="ld-skattning" aria-labelledby="ld-sk-${j}"><h4 id="ld-sk-${j}">${esc(sk.namn)}</h4>${skalansKnappar(g, w.mandag, varde)}${andarna}${regeln}${grafen}${underlag}</section>`;
 }
 
 function stunden(w: LarDigSammanstallning['veckor'][number], i: number, s: LarDigSammanstallning, o: Set<string>, medGick: boolean): string {
   const rubrik = '<h3 id="ld-stund-rubrik">Veckans stund</h3>';
   if (!aktiv.sparad) return `<section class="ld-stund" id="ld-stund" aria-labelledby="ld-stund-rubrik">${rubrik}<p class="pl-not">Fyll i något under Före, eller spara planen där, så skattar du veckan här.</p><p><button type="button" class="pl-textknapp" data-vy="fore">Till Före</button></p></section>`;
-  const harNagot = larDigetsInforda(aktiv.foljd).includes(w.mandag);
-  if (w.mandag > idag && !harNagot) return `<section class="ld-stund" id="ld-stund" aria-labelledby="ld-stund-rubrik">${rubrik}<p class="pl-not">${esc(`Veckans stund är i slutet av veckan, ${dagText(fredagen(w.mandag))}.`)}</p></section>`;
+  const harNagot = infordaDatum(aktiv.foljd).includes(w.mandag);
+  if (w.mandag > idag && !harNagot) return `<section class="ld-stund" id="ld-stund" aria-labelledby="ld-stund-rubrik">${rubrik}<p class="pl-not">${esc(`Veckans stund är i slutet av veckan, ${dagText(skolveckan(w.mandag).till)}.`)}</p></section>`;
   const rad = stegRad(w);
   const svar = aktiv.foljd.gick?.[w.mandag];
   const fragan = fraganFor(rad);
-  const gick = medGick && rad ? `<div class="ld-gick"><h4>Gick det?</h4>${fragan ? `<p${rad.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${aktivaKlasser().length > 1 ? '<p class="pl-hjalp">Svara för det mesta av klasserna. Behöver en klass en vecka till, skriv det i klassens rad längre ned.</p>' : ''}${gickKnappar(w, 'stund', rad.fraga ?? 'Gick det?')}${svar ? `<p class="pl-not">${esc(gickText(w.mandag))}</p>` : ''}</div>` : '';
+  const gick = medGick && rad ? `<div class="ld-gick"><h4>Gick det?</h4>${fragan ? `<p${rad.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${aktivaKlasser().length > 1 ? '<p class="pl-hjalp">Svara för det mesta av klasserna. Behöver en klass en vecka till, skriv det i klassens rad längre ned.</p>' : ''}${gickKnappar(w, 'stund', 'Gick det?')}${svar ? `<p class="pl-not">${esc(gickText(w.mandag))}</p>` : ''}</div>` : '';
   const mal = aktiv.val.mal ? `<p class="ld-malrad"><span class="pl-etikett">Ditt mål</span>${esc(mening(aktiv.val.mal))}</p>` : '';
   const kommentar = `<div class="ld-kommentar"><label class="pl-etikett" for="ld-kommentar">Din kommentar för veckan</label><textarea class="pl-falt pl-textfalt pl-brett" id="ld-kommentar" rows="3" maxlength="${KOMMENTARENS_LANGD}" data-kommentar="${w.mandag}">${esc(aktiv.foljd.kommentar?.[w.mandag] ?? '')}</textarea></div>`;
   const klasser = aktivaKlasser();
-  const klassrader = klasser.length ? `<div class="ld-klasser"><p class="pl-etikett">Klasserna, om du vill</p><ul class="ld-klasslista">${klasser.map((k) => { const t = aktiv.foljd.noter?.[w.mandag]?.[k.id] ?? ''; return `<li><details class="pl-fallut ld-klass" data-ruta="klass-${esc(k.id)}"${oppen(o, `klass-${k.id}`)}><summary><span class="ld-klassnamn">${esc(k.namn)}</span>${t ? '<span class="ld-klass-har">En rad</span>' : ''}</summary><label class="visually-hidden" for="ld-not-${esc(k.id)}">${esc(`Om ${k.namn} den här veckan`)}</label><textarea class="pl-falt pl-textfalt pl-brett ld-klassnot" id="ld-not-${esc(k.id)}" rows="2" maxlength="${KLASSNOTENS_LANGD}" data-klassnot="${w.mandag}|${esc(k.id)}">${esc(t)}</textarea></details></li>`; }).join('')}</ul></div>` : '<p class="pl-not">Skriv in dina klasser under Före, så kan du skriva en rad om varje klass. <button type="button" class="pl-textknapp" data-vy="fore">Till Före</button></p>';
-  // Vad linjerna säger, för båda skattningarna i en rad sist i stunden.
+  const klassrader = klasser.length ? `<div class="ld-klasser"><p class="pl-etikett">Klasserna, om du vill</p><ul class="ld-klasslista">${klasser.map((k) => klassensRad(k, w.mandag, o)).join('')}</ul></div>` : '<p class="pl-not">Skriv in dina klasser under Före, så kan du skatta och skriva en rad om varje klass. <button type="button" class="pl-textknapp" data-vy="fore">Till Före</button></p>';
+  // Vad linjerna säger, för båda skattningarna i en rad sist i stunden (byggstenarna).
   const regelRader = [...new Set(s.linjer.flatMap((l) => l.regler.map((r) => r.rad)))];
-  const reglerna = regelRader.length ? `<details class="pl-fallut" data-ruta="linjerna"${oppen(o, 'linjerna')}><summary>Vad linjerna säger</summary><p class="pl-hjalp">Veckorna räknas i följd, och en vecka utan kryss bryter följden.</p><ul class="pl-uppf">${regelRader.map((r) => `<li><span class="pl-etikett">${esc(rader[r]?.nar ?? '')}</span><p>${esc(mening(rader[r]?.vad ?? ''))}</p></li>`).join('')}</ul></details>` : '';
+  const reglerna = regelRader.length ? linjensRegler('linjerna', 'Vad linjerna säger', o.has('linjerna'), regelRader.map((r) => ({ etikett: rader[r]?.nar ?? '', html: esc(mening(rader[r]?.vad ?? '')) }))) : '';
   return `<section class="ld-stund" id="ld-stund" aria-labelledby="ld-stund-rubrik">${rubrik}<p class="pl-hjalp">Några minuter i slutet av veckan. Inget måste fyllas i.</p>${gick}${mal}${data.skattningar.map((_, j) => skattningen(j, w, i, s, o, medGick)).join('')}${kommentar}${klassrader}${reglerna}</section>`;
+}
+
+// En klass i veckans stund, som fälls ut (K-631; Niclas 2026-10-30: "skatta hur det gick för olika grupperna från 1-5 (om
+// denne vill) per vecka"): frågan med fem knappar i samma form som de tio (skalansKnappar), skalans ändar, och klassens
+// kommentar. Raden säger det som är infört när den är hopfälld: talet och om det finns en rad.
+function klassensRad(k: { id: string; namn: string }, mandag: string, o: Set<string>): string {
+  const t = aktiv.foljd.noter?.[mandag]?.[k.id] ?? '';
+  const varde = aktiv.foljd.klassvarden?.[mandag]?.[k.id];
+  const g = { namn: klassensFraga(k.namn), skala: KLASSERNAS_SKALA, regler: [] };
+  const infort = `${varde !== undefined ? `<span class="ld-klass-har">${esc(`${varde} av ${KLASSERNAS_SKALA.till}`)}</span>` : ''}${t ? '<span class="ld-klass-har ld-klass-rad">En rad</span>' : ''}`;
+  return `<li><details class="pl-fallut ld-klass" data-ruta="klass-${esc(k.id)}"${oppen(o, `klass-${k.id}`)}><summary><span class="ld-klassnamn">${esc(k.namn)}</span>${infort}</summary><p class="pl-etikett">${esc(g.namn)}</p>${skalansKnappar(g, mandag, varde, { klass: k.id })}${skalansAndarRad(KLASSERNAS_SKALA, KLASSERNAS_SKALA)}<label class="pl-etikett" for="ld-not-${esc(k.id)}">${esc(`Din kommentar om ${k.namn}`)}</label><textarea class="pl-falt pl-textfalt pl-brett ld-klassnot" id="ld-not-${esc(k.id)}" rows="2" maxlength="${KLASSNOTENS_LANGD}" data-klassnot="${mandag}|${esc(k.id)}">${esc(t)}</textarea></details></li>`;
+}
+
+// ---------- Mitt i ----------
+// Mitt i stegen (K-631; Niclas 2026-10-30: "så vecka 3 skulle den klass som fått lägst tills dess lyfts fram med frågan vad
+// läraren bör göra för att lyckas bättre med den klassen med hänvisning till metoden (om lämpligt)"): i veckan mitt i
+// (larDigetsMittI i standarden) klassen med lägst snitt i veckorna före, med lärarens rader om den, frågan med ett fält som
+// sparas i planen, och metodens När det glider och stöd när metoden har dem. Svaret står i sammanställningen.
+function mittIRuta(s: LarDigSammanstallning, nr: number): string {
+  const k = aktiv.sparad && s.mitt?.nr === nr && s.mitt.mandag <= idag ? s.mitt.klass : null;
+  if (!k) return '';
+  const noter = k.kommentarer.length ? `<p class="pl-etikett">${esc(`Dina rader om ${k.namn}`)}</p><ul class="ld-klassnoter">${k.kommentarer.map((x) => `<li><span class="ld-klassnamn">${esc(x.vecka)}</span> ${esc(x.text)}</li>`).join('')}</ul>` : '';
+  const lankar = [data.glider ? `<a href="${esc(data.glider)}" ${goat('mitt-i', 'När det glider')}>När det glider</a>` : '', data.stod ? `<a href="${esc(data.stod.adress)}" ${goat('mitt-i', data.stod.rubrik)}>${esc(data.stod.rubrik)}</a>` : ''].filter(Boolean);
+  return `<section class="ld-mitti" aria-labelledby="ld-mitti-rubrik"><h3 id="ld-mitti-rubrik">Mitt i stegen</h3><p>${esc(mittIText(k))}</p>${noter}<label class="pl-etikett" for="ld-mitti">${esc(mittIFragan(k.namn))}</label><textarea class="pl-falt pl-textfalt pl-brett" id="ld-mitti" rows="3" maxlength="${MITT_I_LANGD}" data-mitti="${esc(k.id)}" data-mitti-dag="${esc(s.mitt!.mandag)}">${esc(aktiv.foljd.mittI?.[k.id] ?? '')}</textarea>${lankar.length ? `<p class="pl-hjalp">Läs i metoden: ${uppraknat(lankar)}.</p>` : ''}</section>`;
 }
 
 // ---------- Steget ----------
@@ -281,10 +323,10 @@ function steget(v: PlanVecka, utanVidare = false): string {
   const egna = new Set(mp.skattningar.map((x) => x.rad));
   const veckans = plan.uppfoljning.filter((u) => !egna.has(u.rad) && u.typ !== 'villkor' && u.typ !== 'lopande' && u.tillfallen.some((t) => t.vecka === v.nr));
   const lopande = plan.uppfoljning.filter((u) => !egna.has(u.rad) && u.typ === 'lopande');
-  const nar = (u: (typeof veckans)[number]) => (u.typ === 'vecka' || u.typ === 'intervall' || u.typ === 'sista-veckan' ? veckansDatum(v.mandag) : dagText(u.tillfallen.find((t) => t.vecka === v.nr)!.datum));
+  const nar = (u: (typeof veckans)[number]) => (u.typ === 'vecka' || u.typ === 'intervall' || u.typ === 'sista-veckan' ? skolveckansText(v.mandag) : dagText(u.tillfallen.find((t) => t.vecka === v.nr)!.datum));
   const f = data.filer;
   const mallen = (u: (typeof veckans)[number]) => (rader[u.rad].id === 'observationerna' ? `<p class="pl-andra-knappar">${knapplank(f.observation.adress, 'Observationsmallen', 'observationsmall')}</p>` : '');
-  const uppf = veckans.length || lopande.length ? `<section class="pl-block"><h4>Metodens uppföljning</h4><ul class="pl-uppf">${veckans.map((u) => `<li><span class="pl-etikett">${esc(`${rader[u.rad].nar}, ${nar(u)}`)}</span><p>${esc(rader[u.rad].vad)}</p>${mallen(u)}</li>`).join('')}${lopande.map((u) => `<li><span class="pl-etikett">${esc(rader[u.rad].nar)}</span><p>${esc(rader[u.rad].vad)}</p></li>`).join('')}</ul></section>` : '';
+  const uppf = veckans.length || lopande.length ? `<section class="pl-block"><h4>Metodens uppföljning</h4>${etikettlista([...veckans.map((u) => ({ etikett: `${rader[u.rad].nar}, ${nar(u)}`, html: esc(rader[u.rad].vad), efter: mallen(u) })), ...lopande.map((u) => ({ etikett: rader[u.rad].nar, html: esc(rader[u.rad].vad) }))])}</section>` : '';
   const knappar = `<p class="pl-andra-knappar">${knapplank(f.lektionskort.adress, 'Lektionskortet', 'lektionskort')}${knapplank(f.planeringsmall.adress, 'Planeringsmallen', 'planeringsmall')}${knapplank(`${data.sida}#vecka-${v.innehall}`, 'Veckan i metoden', 'veckan-i-metoden')}</p>`;
   // En vecka till för steget är samma sak som svaret Inte än i veckan, så att två knappar aldrig ger två veckor (granskningen
   // 2026-10-30). En vecka som är en vecka till kan tas bort i veckan före, där svaret står.
@@ -309,59 +351,71 @@ function renderaVecka(nr: number, s: LarDigSammanstallning, o: Set<string>): str
   const forra = nr > 1 ? `<button type="button" class="pl-textknapp" data-vy="${nr - 1}">‹ ${esc(planveckansNamn(plan, plan.veckor[nr - 2]).Text)}</button>` : '<button type="button" class="pl-textknapp" data-vy="fore">‹ Före</button>';
   const nasta = nr < plan.veckor.length ? `<button type="button" class="pl-textknapp" data-vy="${nr + 1}">${esc(planveckansNamn(plan, plan.veckor[nr]).Text)} ›</button>` : '<button type="button" class="pl-textknapp" data-vy="efter">Efter stegen ›</button>';
   const sist = nr === plan.veckor.length ? `<p class="pl-not">Efter det här steget ses arbetslaget. <button type="button" class="pl-textknapp" data-vy="efter">Mötet och Efter stegen</button></p>` : '';
-  const huvud = `<p class="ld-stegnr">${esc(`Steg ${v.innehall} av ${antalSteg}${igen ? ', en vecka till' : ''}`)}</p><h2 id="ld-vy-rubrik" tabindex="-1">${esc(rad?.rubrik ?? namn.Text)}</h2><p class="ld-veckans-tid">${esc(`${stor(namn.text)}, ${spannKort(v.mandag, fredagen(v.mandag))}.`)}</p>${tillSamman(s)}`;
+  const huvud = `<p class="ld-stegnr">${esc(`Steg ${steg().nummer(v)} av ${steg().antal}${igen ? ', en vecka till' : ''}`)}</p><h2 id="ld-vy-rubrik" tabindex="-1">${esc(rad?.rubrik ?? namn.Text)}</h2><p class="ld-veckans-tid">${esc(`${stor(namn.text)}, ${spannKort(v.mandag, skolveckan(v.mandag).till)}.`)}</p>${tillSamman(s)}`;
   // Veckan med ett steg utan svar står överst i veckan läraren är i, tills den har svar.
   const o2 = obesvarad();
   const iVeckan = s.fas === 'under' && s.nu === v.nr;
   const ruta = iVeckan && o2 && o2.nr !== v.nr ? obesvaradRuta(o2) : '';
   // Steget först måndag till torsdag, och stunden först från fredag eller när något redan är infört i veckan
   // (granskningen 2026-10-30: stunden stod överst redan på måndagen, och steget började 2 000 punkter ned).
-  const stundForst = aktiv.sparad && (idag >= fredagen(v.mandag) || larDigetsInforda(aktiv.foljd).includes(v.mandag));
+  const stundForst = aktiv.sparad && (idag >= skolveckan(v.mandag).till || infordaDatum(aktiv.foljd).includes(v.mandag));
   const stund = w ? stunden(w, i, s, o, true) : '';
   // När stunden står överst säger Gick det? stegets regel, så att raden Gå vidare när inte står två gånger (formgranskningen 2026-10-30).
   const delar = stundForst ? [stund, steget(v, !!stegRad(v)?.fraga || !!stegRad(v)?.vidare)] : [steget(v), stund];
-  return `<section class="ld-fas ld-veckan" aria-labelledby="ld-vy-rubrik">${huvud}${ruta}${delar.join('')}${sist}<p class="pl-bladdra">${forra}${nasta}</p></section>`;
+  return `<section class="ld-fas ld-veckan" aria-labelledby="ld-vy-rubrik">${huvud}${ruta}${mittIRuta(s, nr)}${delar.join('')}${sist}<p class="pl-bladdra">${forra}${nasta}</p></section>`;
 }
 
 // ---------- Efter ----------
 function renderaEfter(s: LarDigSammanstallning, o: Set<string>): string {
   const efterVeckor = s.veckor.map((w, i) => ({ w, i })).filter((x) => x.w.efter);
-  const nu = s.fas === 'efter' ? [...efterVeckor].reverse().find((x) => x.w.mandag <= idag) : undefined;
+  const nu = s.fas === 'efter' ? efterVeckor.find((x) => x.w.nr === s.nu) : undefined;
   const borjar = s.fas !== 'efter' ? `<p class="pl-not">${esc(`Efter stegen börjar ${kalendervecka(isoVecka(plan.efter).vecka)}, ${dagText(plan.efter)}.`)}</p>` : '';
   const o2 = s.fas === 'efter' ? obesvarad() : null;
   const motet = `<section class="pl-block ld-motet" aria-labelledby="ld-motet-rubrik"><h3 id="ld-motet-rubrik">Mötet med arbetslaget</h3><p>Ta med sammanställningen till arbetslagets möte efter de första veckorna, och berätta vad du såg.</p>${data.reflektera.length ? `<p class="pl-etikett">Frågorna på mötet</p><ol class="ld-fragor">${data.reflektera.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}${aktiv.sparad ? `<p class="pl-andra-knappar"><button type="button" class="knapp sekundar ld-knapp" data-till-samman>Sammanställningen</button><button type="button" class="knapp sekundar ld-knapp" data-samman-pdf ${goat('sammanstallning-pdf', 'sammanställningen som pdf från mötet')}>${esc(pdfOrd('sammanställningen'))}</button></p>` : ''}</section>`;
   const stund = nu ? `<p class="ld-veckans-tid">${esc(`Skattningen ${nu.w.namn.text}.`)}</p>${stunden(nu.w, nu.i, s, o, false)}` : '';
-  const hall = data.hallFast.rader.length ? `<section class="pl-block" aria-labelledby="ld-hall-rubrik"><h3 id="ld-hall-rubrik">${esc(data.hallFast.rubrik)}</h3><ul class="pl-uppf ld-hallfast">${data.hallFast.rader.map((r) => `<li><span class="pl-etikett">${esc(r.sak)}</span><p>${esc(r.text)}</p></li>`).join('')}</ul></section>` : '';
+  const hall = data.hallFast.rader.length ? `<section class="pl-block" aria-labelledby="ld-hall-rubrik"><h3 id="ld-hall-rubrik">${esc(data.hallFast.rubrik)}</h3>${etikettlista(data.hallFast.rader.map((r) => ({ etikett: r.sak, html: esc(r.text) })))}</section>` : '';
   const efterRader = plan.uppfoljning.filter((u) => u.typ === 'efter' && u.tillfallen.length);
-  const uppf = efterRader.length ? `<section class="pl-block" aria-labelledby="ld-uppf-rubrik"><h3 id="ld-uppf-rubrik">Metodens uppföljning efter stegen</h3><ul class="pl-uppf">${efterRader.map((u) => `<li><span class="pl-etikett">${esc(`${rader[u.rad].nar}, ${veckansDatum(mandagen(u.tillfallen[0].datum))}`)}</span><p>${esc(rader[u.rad].vad)}</p></li>`).join('')}</ul></section>` : '';
+  const uppf = efterRader.length ? `<section class="pl-block" aria-labelledby="ld-uppf-rubrik"><h3 id="ld-uppf-rubrik">Metodens uppföljning efter stegen</h3>${uppfMedVeckan(efterRader)}</section>` : '';
   const las = data.lasMer.length ? `<section class="pl-block" aria-labelledby="ld-lasmer-rubrik"><h3 id="ld-lasmer-rubrik">Läs mer</h3><ul class="ld-lasmer">${data.lasMer.map((l) => `<li>${l.adress ? `<a href="${esc(l.adress)}" rel="noopener" ${goat('las-mer', l.titel)}>${esc(l.titel)}</a>` : `<span class="ld-lasmer-titel">${esc(l.titel)}</span>`}${l.upphov || l.ar ? `<span class="ld-upphov">${esc([l.upphov, l.ar].filter(Boolean).join(', '))}</span>` : ''}${l.text ? `<p>${esc(l.text)}</p>` : ''}</li>`).join('')}</ul></section>` : '';
-  return `<section class="ld-fas ld-efter" aria-labelledby="ld-vy-rubrik"><h2 id="ld-vy-rubrik" tabindex="-1">Efter stegen</h2><p class="ld-ingress">Klasserna har rutinerna, och du har övat dragen. Nu skattar du varannan vecka, så att linjerna visar hela din utveckling, och läser vidare när du vill.</p>${tillSamman(s)}${borjar}${o2 ? obesvaradRuta(o2) : ''}${stund}${motet}${hall}${uppf}${las}<p class="pl-bladdra"><button type="button" class="pl-textknapp" data-vy="${plan.veckor.length}">‹ Sista steget</button><span></span></p></section>`;
+  return `<section class="ld-fas ld-efter" aria-labelledby="ld-vy-rubrik"><h2 id="ld-vy-rubrik" tabindex="-1">Efter stegen</h2><p class="ld-ingress">Klasserna har rutinerna, och du har övat dragen. Nu skattar du ${esc(efterStegensTakt())}, så att linjerna visar hela din utveckling, och läser vidare när du vill.</p>${tillSamman(s)}${borjar}${o2 ? obesvaradRuta(o2) : ''}${stund}${motet}${hall}${uppf}${las}<p class="pl-bladdra"><button type="button" class="pl-textknapp" data-vy="${plan.veckor.length}">‹ Sista steget</button><span></span></p></section>`;
 }
 
 // ---------- Sammanställningen ----------
-// Stegen som läraren har tagit, med det som pågår, och stegen som är kvar (larDigSammanstallning; granskningen 2026-10-30).
-const stegMedNummer = (x: { innehall: number; steg: number | null }) => `${x.innehall}. ${x.steg !== null ? data.progression.rader[x.steg]?.rubrik ?? '' : ''}`;
 function renderaSamman(s: LarDigSammanstallning) {
   const ruta = $('ld-samman');
-  if (!aktiv.sparad || !harFortIn(s)) { ruta.hidden = true; ruta.innerHTML = ''; return; }
+  if (!aktiv.sparad || !s.harNagot) { ruta.hidden = true; ruta.innerHTML = ''; return; }
   const etiketter = s.veckor.map((w) => w.namn);
-  const kvar = s.kvar.length ? `<p class="pl-not">${esc(`Kvar: ${uppraknat(s.kvar.map((x) => (x.steg !== null ? data.progression.rader[x.steg]?.rubrik ?? '' : String(x.innehall))))}.`)}</p>` : '';
-  const stegen = `<section class="pl-block"><h3>Stegen</h3>${s.stegen.length ? `<table class="ld-tabell"><thead><tr><th scope="col">Steget</th><th scope="col">Veckor</th></tr></thead><tbody>${s.stegen.map((x) => `<tr><td>${esc(`${stegMedNummer(x)}${x.pagar ? ', pågår' : ''}`)}</td><td>${x.veckor}</td></tr>`).join('')}</tbody></table>` : ''}${kvar}${s.lov.length ? `<p class="pl-not">${esc(`Lov ${uppraknat(s.lov.map((m) => kalendervecka(isoVecka(m).vecka)))}.`)}</p>` : ''}</section>`;
-  const linjer = s.linjer.map((l) => { const r = larDigetsRegler({ ...s, linjer: [l] }, rader); return `<section class="pl-block"><h3>${esc(l.namn)}</h3>${l.varden.some((x) => x !== undefined) ? `<div class="pl-grafruta">${linjegraf({ namn: l.namn, skala: l.skala, regler: l.regler }, l.varden, etiketter, { undan: true, vidgas: true })}</div>${granslinjensText(l.regler) ? `<p class="pl-not">${esc(granslinjensText(l.regler))}</p>` : ''}` : '<p class="pl-not">Inte skattad än.</p>'}${r.map((x) => `<p class="pl-not">${esc(mening(x))}</p>`).join('')}</section>`; }).join('');
-  const veckorna = s.veckor.filter((w) => w.kommentar || w.noter.length || (w.gick && !w.efter));
-  const kommentarer = veckorna.length ? `<section class="pl-block"><h3>Kommentarerna</h3><ol class="ld-kommentarer">${veckorna.map((w) => { const r = stegRad(w); return `<li><span class="pl-etikett">${esc(`${w.namn.Text}${r ? `, ${r.rubrik}` : ''}`)}</span>${w.gick && !w.efter ? `<p>${esc(svaretMedFragan(r?.fraga, w.gick))}</p>` : ''}${w.kommentar ? `<p>${esc(w.kommentar)}</p>` : ''}${w.noter.length ? `<ul class="ld-klassnoter">${w.noter.map((x) => `<li><span class="ld-klassnamn">${esc(x.namn)}</span> ${esc(x.text)}</li>`).join('')}</ul>` : ''}</li>`; }).join('')}</ol></section>` : '';
-  ruta.innerHTML = `<h2 id="ld-samman-rubrik" tabindex="-1">Sammanställningen</h2><p class="pl-not">${esc(`${data.titel}, ${datumText(idag)}. Din utveckling med metoden, att ta med till arbetslaget.`)}</p>${s.mal ? `<p class="ld-malrad"><span class="pl-etikett">Ditt mål</span>${esc(mening(s.mal))}</p>` : ''}${stegen}${linjer}${kommentarer}<p class="pl-not">Skattningarna är dina egna och stöder dina beslut vecka för vecka. En förändring i dem visar inte metodens effekt.</p><p class="pl-andra-knappar"><button type="button" class="knapp ld-knapp" data-samman-pdf ${goat('sammanstallning-pdf', 'sammanställningen som pdf')}>${esc(pdfOrd('sammanställningen'))}</button></p>`;
+  const kvar = larDigetsKvar(s, data.progression.rader.map((r) => r.rubrik));
+  // Stegen som läraren har tagit, med det som pågår, och stegen som är kvar, med samma meningar som i pdf:en (stegetsRad).
+  const stegen = `<section class="pl-block"><h3>Stegen</h3>${s.stegen.length ? `<ul class="ld-stegen">${s.stegen.map((x) => `<li>${esc(stegetsRad(x, data.progression.rader.map((r) => r.rubrik)))}</li>`).join('')}</ul>` : ''}${kvar ? `<p class="pl-not">${esc(kvar)}</p>` : ''}${s.lov.length ? `<p class="pl-not">${esc(lovetsText(s.lov))}</p>` : ''}</section>`;
+  const linjer = s.linjer.map((l) => { const r = larDigetsRegler({ ...s, linjer: [l] }, rader); return `<section class="pl-block"><h3>${esc(l.namn)}</h3>${l.varden.some((x) => x !== undefined) ? `<div class="pl-grafruta">${linjegraf({ namn: l.namn, skala: l.skala, regler: l.regler }, l.varden, etiketter, { undan: true, vidgas: true })}</div>${granslinjensText(l.regler) ? `<p class="pl-not">${esc(granslinjensText(l.regler))}</p>` : ''}` : '<p class="pl-not">Inte skattad än.</p>'}${r.map((x) => `<p class="pl-not">${esc(mening(x.text))}</p>`).join('')}${r.length ? etikettlista([...new Set(r.map((x) => x.rad))].map((rad) => ({ etikett: rader[rad]?.nar ?? '', html: esc(mening(rader[rad]?.vad ?? '')) }))) : ''}</section>`; }).join('');
+  const kommentarer = s.kommenterade.length ? `<section class="pl-block"><h3>Kommentarerna</h3><ol class="ld-kommentarer">${s.kommenterade.map((w) => { const r = stegRad(w); return `<li><span class="pl-etikett">${esc(`${w.namn.Text}${r ? `, ${r.rubrik}` : ''}`)}</span>${w.gick && !w.efter ? `<p>${esc(gickDetSvaret(r?.fraga, w.gick))}</p>` : ''}${w.kommentar ? `<p>${esc(w.kommentar)}</p>` : ''}${w.noter.length ? `<ul class="ld-klassnoter">${w.noter.map((x) => `<li><span class="ld-klassnamn">${esc(x.namn)}</span> ${esc(x.text)}</li>`).join('')}</ul>` : ''}</li>`; }).join('')}</ol></section>` : '';
+  ruta.innerHTML = `<h2 id="ld-samman-rubrik" tabindex="-1">Sammanställningen</h2><p class="pl-not">${esc(`${data.titel}, ${datumText(idag)}. Din utveckling med metoden, att ta med till arbetslaget.`)}</p>${s.avslut ? `<p class="ld-malrad"><span class="pl-etikett">Avslutet</span>${esc(larDigetsAvslutText(s.avslut))}</p>` : ''}${s.mal ? `<p class="ld-malrad"><span class="pl-etikett">Ditt mål</span>${esc(mening(s.mal))}</p>` : ''}${stegen}${linjer}${klasstabellen(s)}${mittSvaren(s)}${kommentarer}<p class="pl-not">${esc(SKATTNINGARNAS_GRANS)}</p><p class="pl-andra-knappar"><button type="button" class="knapp ld-knapp" data-samman-pdf ${goat('sammanstallning-pdf', 'sammanställningen som pdf')}>${esc(pdfOrd('sammanställningen'))}</button></p>`;
   ruta.hidden = false;
 }
+
+// Klasserna vecka för vecka (klassernasTabell i standarden): en rad per skattad klass, veckorna med någon skattning som
+// kolumner, och klassens snitt sist. Talen står i cellerna, så att inget sägs bara med färg, och tabellen rullar i sidled i
+// sin ruta i en smal telefon, utan att sidan gör det.
+function klasstabellen(s: LarDigSammanstallning): string {
+  const t = s.klasstabell;
+  if (!t.rader.length) return '';
+  const namn = t.veckor.map((i) => s.veckor[i].namn);
+  const huvud = namn.map((n) => `<th scope="col"><span aria-hidden="true">${esc(n.kort)}<small>${esc(n.kalender)}</small></span><span class="visually-hidden">${esc(n.Text)}</span></th>`).join('');
+  const raderna = t.rader.map((r) => `<tr><th scope="row">${esc(r.namn)}</th>${r.varden.map((x) => `<td>${x ?? '<span class="visually-hidden">inte skattad</span>'}</td>`).join('')}<td>${r.snitt === null ? '' : esc(decimal(r.snitt))}</td></tr>`).join('');
+  return `<section class="pl-block"><h3>Klasserna vecka för vecka</h3><p class="pl-not">${esc(klassernasSkalaText())}</p><div class="ld-tabellruta"><table class="ld-tabell ld-klasstabell"><thead><tr><th scope="col">Klassen</th>${huvud}<th scope="col">Snitt</th></tr></thead><tbody>${raderna}</tbody></table></div></section>`;
+}
+// Svaren Mitt i, under en rubrik med klassen, med vad klassen hade i veckorna före.
+const mittSvaren = (s: LarDigSammanstallning) => s.mittSvar.map((x) => `<section class="pl-block"><h3>${esc(`Mitt i: ${x.namn}`)}</h3>${x.hittills ? `<p class="pl-not">${esc(x.hittills)}</p>` : ''}<p class="pl-etikett">${esc(mittIFragan(x.namn))}</p><p>${esc(x.text)}</p></section>`).join('');
 
 // ---------- Planen som fil ----------
 function renderaKopia() {
   $('ld-ladda-ner').hidden = !aktiv.sparad;
   $('ld-ta-bort').hidden = !aktiv.sparad;
-  const alder = aktiv.kopia ? Math.round((Date.parse(idag) - Date.parse(aktiv.kopia.slice(0, 10))) / 86400000) : null;
+  const alder = kopiansAlder(aktiv.kopia, idag);
   const text = !aktiv.sparad ? 'Spara planen, så finns den i den här webbläsaren och går att ladda ner som fil. Har du laddat ner en plan på en annan dator? Öppna den här.'
     : alder === null ? 'Det du för in finns bara i den här webbläsaren. Ladda ner planen och lägg filen bland skolans filer, så finns den kvar och går att öppna på en annan dator.'
-    : `Planen laddades senast ner ${datumText(aktiv.kopia!.slice(0, 10))}.${alder > 7 ? ' Ladda ner den igen, så kommer det senaste med.' : ''}`;
+    : kopiansText(aktiv.kopia!, idag);
   $('ld-kopia-text').textContent = `${text}${aktiv.sparad && iAppen() ? ` ${APPENS_PLANER}` : ''}`;
 }
 
@@ -387,6 +441,8 @@ function rendera(fokusRubrik = false) {
   renderaKopia();
   const el = fokusRubrik ? document.getElementById('ld-vy-rubrik') : nyckel ? document.querySelector<HTMLElement>(nyckel) : null;
   el?.focus({ preventScroll: !fokusRubrik });
+  // Bocken ritas fram en gång, när läraren just har avslutat planen.
+  nyssAvslutad = false;
 }
 function tillVy(vy: Vy) {
   visa = vy;
@@ -396,7 +452,7 @@ function tillVy(vy: Vy) {
 
 // ---------- Trycken ----------
 $('ld-remsa').addEventListener('click', (e) => {
-  const b = (e.target as Element).closest<HTMLButtonElement>('[data-vy]');
+  const b = knappen(e, '[data-vy]');
   if (b) tillVy(b.dataset.vy === 'fore' || b.dataset.vy === 'efter' ? b.dataset.vy : Number(b.dataset.vy));
 });
 // Svaret på Gick det?, ur standardens svaraGickDet: Inte än ger steget en vecka till och aldrig två för samma svar, och ett
@@ -427,8 +483,7 @@ function sparaForet(snart = false) {
   visaBesked('Planen är sparad i den här webbläsaren.');
 }
 $('ld-vyn').addEventListener('click', (e) => {
-  const t = e.target as Element;
-  const b = t.closest<HTMLButtonElement>('button');
+  const b = knappen(e);
   if (!b || b.disabled) return;
   if (b.dataset.vy) { tillVy(b.dataset.vy === 'fore' || b.dataset.vy === 'efter' ? b.dataset.vy : Number(b.dataset.vy)); return; }
   if (b.hasAttribute('data-spara')) {
@@ -456,18 +511,18 @@ $('ld-vyn').addEventListener('click', (e) => {
     return;
   }
   if (b.dataset.gick && b.dataset.mandag) { gickDet(b.dataset.mandag, b.dataset.gick === 'inte' ? 'inte' : 'ja'); return; }
-  if (b.dataset.matt && b.dataset.instrument) {
-    const namn = b.dataset.instrument, mandag = b.dataset.matt, n = Number(b.textContent);
-    andra(() => {
-      const matt = { ...(aktiv.foljd.matt ?? {}) };
-      const veckor = { ...(matt[namn] ?? {}) };
-      if (veckor[mandag] === n) delete veckor[mandag]; else veckor[mandag] = n;
-      matt[namn] = veckor;
-      aktiv.foljd = { ...aktiv.foljd, matt };
-    });
+  // Klassens skattning i veckans stund, och lärarens skattningar: samma tal igen tar bort det (medVardet i standarden).
+  if (b.dataset.klass && b.dataset.matt) {
+    const id = b.dataset.klass, mandag = b.dataset.matt, n = Number(b.textContent);
+    andra(() => { aktiv.foljd = { ...aktiv.foljd, klassvarden: medVardet(aktiv.foljd.klassvarden, mandag, id, aktiv.foljd.klassvarden?.[mandag]?.[id] === n ? undefined : n) }; });
     return;
   }
-  if (b.hasAttribute('data-till-samman')) { $('ld-samman').scrollIntoView({ block: 'start' }); $('ld-samman-rubrik')?.focus({ preventScroll: true }); return; }
+  if (b.dataset.matt && b.dataset.instrument) {
+    const namn = b.dataset.instrument, mandag = b.dataset.matt, n = Number(b.textContent);
+    andra(() => { aktiv.foljd = { ...aktiv.foljd, matt: medVardet(aktiv.foljd.matt, namn, mandag, aktiv.foljd.matt?.[namn]?.[mandag] === n ? undefined : n) }; });
+    return;
+  }
+  if (b.hasAttribute('data-till-samman')) { tillSammanstallningen(); return; }
   if (b.hasAttribute('data-samman-pdf')) void sammanstallningenSomPdf(b);
 });
 $('ld-vyn').addEventListener('change', (e) => {
@@ -485,7 +540,7 @@ $('ld-vyn').addEventListener('change', (e) => {
   if (t.id === 'ld-start') {
     const m = t.value;
     if (!arDatum(m)) return;
-    andra(() => { if (sistaInforda()) return false; aktiv.val = { ...aktiv.val, start: m }; }, () => `Första lektionen är ${dagText(forstaLektionen(plan) ?? m)}, och stegen börjar ${kalendervecka(isoVecka(plan.veckor[0]?.mandag ?? m).vecka)}.`);
+    andra(() => { if (sistaInfort(aktiv.foljd)) return false; aktiv.val = { ...aktiv.val, start: m }; }, () => `Första lektionen är ${dagText(forstaLektionen(plan) ?? m)}, och stegen börjar ${kalendervecka(isoVecka(plan.veckor[0]?.mandag ?? m).vecka)}.`);
     return;
   }
   if (t.id === 'ld-klasser') {
@@ -493,8 +548,8 @@ $('ld-vyn').addEventListener('change', (e) => {
     // visar sedan listan som sparades, och raden under säger det som inte kom med (granskningen 2026-10-30).
     const forut = aktiv.foljd.klasser ?? [];
     const raderna = t.value.split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
-    const harNoter = (id: string) => Object.values(aktiv.foljd.noter ?? {}).some((n) => !!n[id]);
-    const klasser = klasserUrText(t.value, forut, nyttId, harNoter);
+    // En klass med en rad, en skattning eller ett svar Mitt i står kvar som borttagen (klassenHarNagot i standarden).
+    const klasser = klasserUrText(t.value, forut, nyttId, (id) => klassenHarNagot(aktiv.foljd, id));
     aktiv.foljd = { ...aktiv.foljd, ...(klasser.length ? { klasser } : {}) };
     if (!klasser.length) delete aktiv.foljd.klasser;
     t.value = aktivaKlasser().map((k) => k.namn).join('\n');
@@ -533,13 +588,40 @@ $('ld-vyn').addEventListener('input', (e) => {
     if (Object.keys(veckan).length) noter[mandag] = veckan; else delete noter[mandag];
     aktiv.foljd = { ...aktiv.foljd, noter };
     const har = t.closest('details')?.querySelector('summary');
-    if (har) { const finns = har.querySelector('.ld-klass-har'); if (t.value.trim() && !finns) har.insertAdjacentHTML('beforeend', '<span class="ld-klass-har">En rad</span>'); if (!t.value.trim()) finns?.remove(); }
+    if (har) { const finns = har.querySelector('.ld-klass-rad'); if (t.value.trim() && !finns) har.insertAdjacentHTML('beforeend', '<span class="ld-klass-har ld-klass-rad">En rad</span>'); if (!t.value.trim()) finns?.remove(); }
+    sparaSnart();
+    return;
+  }
+  // Svaret Mitt i för klassen, som sparas med planen.
+  if (t.dataset.mitti) {
+    aktiv.foljd = { ...aktiv.foljd, mittI: { ...(aktiv.foljd.mittI ?? {}), [t.dataset.mitti]: t.value.slice(0, MITT_I_LANGD) }, ...(t.dataset.mittiDag ? { mittIDag: t.dataset.mittiDag } : {}) };
+    if (!t.value.trim()) { const { [t.dataset.mitti]: _, ...utan } = aktiv.foljd.mittI ?? {}; aktiv.foljd = { ...aktiv.foljd, mittI: utan }; }
     sparaSnart();
   }
 });
 // Sammanställningen ritas om när läraren lämnar ett fält, så att kommentaren står där.
-$('ld-vyn').addEventListener('focusout', (e) => { const t = e.target as HTMLElement; if (t.dataset.kommentar || t.dataset.klassnot) { skrivKlart(); renderaSamman(samman()); } });
-$('ld-samman').addEventListener('click', (e) => { const b = (e.target as Element).closest<HTMLButtonElement>('[data-samman-pdf]'); if (b) void sammanstallningenSomPdf(b); });
+$('ld-vyn').addEventListener('focusout', (e) => { const t = e.target as HTMLElement; if (t.dataset.kommentar || t.dataset.klassnot || t.dataset.mitti) { skrivKlart(); renderaSamman(samman()); } });
+$('ld-samman').addEventListener('click', (e) => { const b = knappen(e, '[data-samman-pdf]'); if (b) void sammanstallningenSomPdf(b); });
+// Till sammanställningen, från veckan, Efter och raden överst.
+function tillSammanstallningen() { $('ld-samman').scrollIntoView({ block: 'start' }); $('ld-samman-rubrik')?.focus({ preventScroll: true }); }
+// Raden överst: Avsluta planen öppnar och stänger formuläret, ett förslag skriver anledningen i fältet, och avslutet ångras.
+vidTryck($('ld-lage'), (b) => {
+  const gor = b.dataset.gor;
+  if (gor === 'avsluta' || gor === 'avsluta-avbryt') {
+    avslutaOppen = gor === 'avsluta' && !avslutaOppen;
+    if (!avslutaOppen) avslutaUtkast = '';
+    renderaLage(samman());
+    document.querySelector<HTMLElement>(avslutaOppen ? '#ld-avsluta-not' : '#ld-lage [data-gor="avsluta"]')?.focus();
+    return;
+  }
+  if (gor === 'avsluta-klar') { avslutaKlar(); return; }
+  if (gor === 'angra-avslut') { angraAvslutet(); return; }
+  if (b.hasAttribute('data-till-samman')) { tillSammanstallningen(); return; }
+  const falt = document.getElementById('ld-avsluta-not') as HTMLInputElement | null;
+  const anledning = falt ? anledningenIFaltet(b, falt) : null;
+  if (anledning !== null) avslutaUtkast = anledning;
+});
+$('ld-lage').addEventListener('input', (e) => { const f = e.target as HTMLInputElement; if (f.id === 'ld-avsluta-not') avslutaUtkast = f.value; });
 
 // Sammanställningen som pdf (src/scripts/lardigpdf.ts), som i Planera insatsen: den skrivs ut där webbläsaren kan skriva ut
 // en pdf direkt, och laddas annars ner (visaPdf). Den räknas när läraren trycker, så att det senast ifyllda kommer med.
@@ -564,13 +646,11 @@ $('ld-ladda-ner').addEventListener('click', () => {
   visaBesked('Planen är nedladdad. Lägg filen bland skolans filer, så går den att öppna på en annan dator.');
 });
 $<HTMLInputElement>('ld-fil').addEventListener('change', async (e) => {
-  const filer = valdaFiler(e);
-  if (!filer.length) return;
   skrivKlart();
-  // Flera filer eller en zip läses med samma rot som i Planera insatsen, och sidan laddas om med beskedet.
-  if (filer.length > 1 || /\.zip$/i.test(filer[0].name)) { await oppnaPlanerna(filer, BESKED, 'metoder'); return; }
-  const { planer } = await lasPlanfilerna(filer);
-  const last = planer[0];
+  // Flera filer eller en zip läses med samma rot som i Planera insatsen, och sidan laddas om med beskedet (planenUrFaltet).
+  const valet = await planenUrFaltet(e, BESKED, 'metoder');
+  if (!valet) return;
+  const last = valet.last;
   if (!last) { visaBesked('Filen är inte en nedladdad plan.'); return; }
   const p = last.plan;
   // En plan för en annan metod, eller i Stödundervisning, sparas och öppnas på sin sida.

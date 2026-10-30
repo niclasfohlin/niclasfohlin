@@ -1,17 +1,16 @@
 ---
 // /metoder/<id>/lar-dig: Lär dig metoden (K-628), för varje undervisningsmetod med lärarens skattningar i plan.skattningar
-// (src/lib/lardig.ts). Bygget stannar på en metod vars plan inte går att räkna, så att en lärare aldrig får en plan som
-// räknar fel.
+// (src/lib/lardig.ts). Schemat stannar bygget på en metod vars plan inte går att räkna eller som saknar det Lär dig metoden
+// behöver (undervisningsmetodensFel i standarden, som riggen också kör före leveransen), så att en lärare aldrig får en plan
+// som räknar fel.
 import LarDig from '../../../components/LarDig.astro';
 import { publicerade } from '../../../lib/innehall';
-import { harLarDig, larDigData, larDigFel } from '../../../lib/lardig';
+import { harLarDig, larDigData } from '../../../lib/lardig';
 import type { Um } from '../../../lib/undervisningsmetod';
 
 export async function getStaticPaths() {
   const metoder = (await publicerade('undervisningsmetoder')).filter((m) => harLarDig(m.data as Um));
   const data = metoder.map((m) => larDigData(m.id, m.data as Um));
-  const fel = data.flatMap(larDigFel);
-  if (fel.length) throw new Error(`Lär dig metoden: ${fel.length} fel i metodernas plan (src/lib/lardig.ts):\n  ${fel.join('\n  ')}`);
   return data.map((d) => ({ params: { id: d.id }, props: { data: d } }));
 }
 

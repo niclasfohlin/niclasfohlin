@@ -1,23 +1,28 @@
 ---
 // Metoder: undervisningsmetoderna för helklass (K-621, K-623), ett kort per metod ur samlingen undervisningsmetoder,
 // sorterade efter slaget och namnet och aldrig efter staplarna (riggens standard, avsnitt 19). Utan metoder visar banken
-// utkastets kort med platshållare, som K-623 visade formen med.
+// utkastets kort med platshållare, som K-623 visade formen med. Kortet har länkarna till Lär dig metoden och lathunden, som
+// korten i Stödundervisning har sina (design-3 nr 22).
 import Base from '../../layouts/Base.astro';
 import Metodprofil from '../../components/Metodprofil.astro';
 import { site } from '../../data/site';
 import { publicerade } from '../../lib/innehall';
 import { PILOTEN, kortetUrFil } from '../../lib/metodprofil';
+import type { Um } from '../../lib/undervisningsmetod';
 
 const SLAGEN = ['lektionsforlopp', 'strukturer', 'strategier'];
 const metoder = (await publicerade('undervisningsmetoder'))
   .sort((a, b) => SLAGEN.indexOf(a.data.slag) - SLAGEN.indexOf(b.data.slag) || a.data.titel.localeCompare(b.data.titel, 'sv'))
-  .map((post) => kortetUrFil(post.id, post.data));
-const korten = metoder.length ? metoder : [PILOTEN];
+  .map((post) => ({ m: kortetUrFil(post.id, post.data), lankar: [
+    ...((post.data as Um).plan?.skattningar?.length ? [{ text: 'Lär dig metoden', href: `/metoder/${post.id}/lar-dig`, klass: 'central-lank' }] : []),
+    ...((post.data as Um).lathund ? [{ text: 'Lathund', href: `/metoder/${post.id}/lathund`, klass: 'lathund-lank' }] : []),
+  ] }));
+const korten = metoder.length ? metoder : [{ m: PILOTEN, lankar: [] }];
 ---
 
 <Base title={site.sidor.metoder.titel} description={site.sidor.metoder.beskrivning} tryckText="© Niclas Fohlin · niclasfohlin.se/metoder">
   <h1>Metoder</h1>
-  <p class="text metodbank-ingress">Undervisningsmetoder för hela klassen, i ämnets vanliga lektioner. Varje metod visar vad forskningen säger, vad som bär effekten och hur en lektion går till, med mallar att planera med.</p>
+  <p class="text metodbank-ingress">Undervisningsmetoder för hela klassen, i ämnets vanliga lektioner. Varje metod visar vad forskningen säger, vad som måste stå kvar och hur en lektion går till, med mallar att planera med.</p>
   {!metoder.length && <p class="mp-utkast">Ett utkast till bankens form. Kortet visar den första metoden med platshållare i stället för värden.</p>}
   {/* Dina planer: lärarens planer ur Lär dig metoden, ur webbläsaren, som Dina insatser i Stödundervisning (src/scripts/insatser.ts, K-628). */}
   <section class="pl-insatser" id="pl-insatser" data-samling="metoder" aria-labelledby="pl-insatser-rubrik" hidden>
@@ -32,7 +37,7 @@ const korten = metoder.length ? metoder : [PILOTEN];
     <p class="pl-hjalp" id="pl-alla-besked" role="status" hidden></p>
   </section>
   <div class="rutnat mp-rutnat">
-    {korten.map((m) => <Metodprofil m={m} bank />)}
+    {korten.map((x) => <Metodprofil m={x.m} lankar={x.lankar} bank />)}
   </div>
 </Base>
 

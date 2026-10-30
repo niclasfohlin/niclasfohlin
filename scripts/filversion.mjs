@@ -12,8 +12,9 @@ import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from '
 import { join } from 'node:path';
 
 // Länkar, bilder, filmernas <object data> och knapparnas adresser (Drive, filmen) till filer under /stodundervisning/,
-// också zip-filen med metodens filmer, filmerna som mp4 och spelarens småbilder.
-export const FILLANK = /\b(href|src|data-drive-src|data-film|data-stillbild|data)="(\/stodundervisning\/[^"?#\s]+\.(?:docx|pptx|pdf|svg|zip|mp4|webp))"/g;
+// också zip-filen med metodens filmer, filmerna som mp4 och spelarens småbilder, och undervisningsmetodernas filer under
+// /metoder/ med bilderna av bladen (design-3 nr 25: Metoders filer kunde ligga ett dygn utan version).
+export const FILLANK = /\b(href|src|data-drive-src|data-film|data-stillbild|data)="(\/(?:stodundervisning\/[^"?#\s]+\.(?:docx|pptx|pdf|svg|zip|mp4|webp)|metoder\/[^"?#\s]+\.(?:docx|pptx|pdf|svg|zip|mp4|webp|png)))"/g;
 
 export function htmlFiler(mapp) {
   const ut = [];
@@ -71,7 +72,7 @@ export default function filversion() {
       'astro:build:done': ({ dir, logger }) => {
         const dist = dir.pathname.replace(/^\/([A-Za-z]:)/, '$1');
         const { lankar, filer } = sattVersioner(decodeURIComponent(dist));
-        logger.info(`${lankar} länkar till ${filer} filer under /stodundervisning/ bär filens version.`);
+        logger.info(`${lankar} länkar till ${filer} filer under /stodundervisning/ och /metoder/ bär filens version.`);
       },
     },
   };

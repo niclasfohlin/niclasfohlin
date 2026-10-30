@@ -5,21 +5,24 @@
 // linjen vecka för vecka med reglernas gränser streckade. Linjen och reglerna räknas i standarden (linjen i
 // src/lib/standard/plan.js), och här ritas de.
 import { esc, skattningensGranser, stegetsNamn, stor, type Regel, type Skala, type Veckonamn } from '../lib/standard/index.js';
-import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
+import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift.ts';
 
 /** En skattning med en skala, som linjen och knapparna ritar: metodens Lärarens skattning eller lärarens egen. */
 export interface Skalskattning { namn: string; skala: Skala; regler: Regel[] }
 
 /**
  * Skalans knappar för en vecka: ett tryck per steg, med stegets namn för en skärmläsare när skalan har namn. Knapparna bär
- * veckans måndag och skattningens namn (data-matt och data-instrument), som sidans skript läser.
+ * veckans måndag och skattningens namn (data-matt och data-instrument), som sidans skript läser, och sidans egna data, som
+ * klassen i Lär dig metodens skattning av klasserna (K-631).
  */
-export function skalansKnappar(g: Skalskattning, mandag: string, varde: number | undefined) {
+export function skalansKnappar(g: Skalskattning, mandag: string, varde: number | undefined, egna: Record<string, string> = {}) {
   const stegen = Array.from({ length: g.skala.till - g.skala.fran + 1 }, (_, k) => g.skala.fran + k);
   const etikett = (n: number) => { const namn = stegetsNamn(g.skala, n); return namn ? `${n}, ${esc(namn.toLocaleLowerCase('sv'))}` : String(n); };
-  return `<div class="pl-skala${stegen.length > 6 ? ' pl-skala-lang' : ''}" role="group" aria-label="${esc(`${g.namn}, ${g.skala.fran} till ${g.skala.till}`)}">${stegen.map((n) => `<button type="button" class="pl-skalsteg" data-matt="${esc(mandag)}" data-instrument="${esc(g.namn)}" aria-pressed="${varde === n}" aria-label="${etikett(n)}">${n}</button>`).join('')}</div>`;
+  return `<div class="pl-skala${stegen.length > 6 ? ' pl-skala-lang' : ''}" role="group" aria-label="${esc(`${g.namn}, ${g.skala.fran} till ${g.skala.till}`)}">${stegen.map((n) => `<button type="button" class="pl-skalsteg" data-matt="${esc(mandag)}" data-instrument="${esc(g.namn)}"${Object.entries(egna).map(([k, v]) => ` data-${k}="${esc(v)}"`).join('')} aria-pressed="${varde === n}" aria-label="${etikett(n)}">${n}</button>`).join('')}</div>`;
 }
 
+/** Skalans ändar under knapparna, gömda för en skärmläsare, som hör dem i knapparna (stegetsNamn). */
+export const skalansAndarRad = (skala: { fran: number; till: number }, andar: { lagst: string; hogst: string }) => `<p class="ld-skalans-andar" aria-hidden="true"><span>${skala.fran} ${esc(andar.lagst)}</span><span>${skala.till} ${esc(andar.hogst)}</span></p>`;
 /** Veckan mitt i insatsen, då läraren stämmer av, som ett ljust fält bakom veckan, lika i staplarna och linjen. */
 export const mittfaltet = (x0: number, steg: number, topp: number, h: number, mitt: number) => `<rect x="${x0 + (mitt - 1) * steg + 1}" y="${topp - 26}" width="${steg - 2}" height="${h + 26}" rx="3" class="pl-mittfalt"/><text x="${x0 + (mitt - 1) * steg + steg / 2}" y="${topp - 16}" class="pl-axel pl-mitttext">Mitt i</text>`;
 

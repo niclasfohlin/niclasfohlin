@@ -1,0 +1,76 @@
+---
+// En del av lathunden Att komma igång (Umlathund.astro, K-632), ritad ur sitt slag i lathundens form från Stödundervisning
+// (.lh i global.css): faktan som celler, noterna i kräm, rutorna med mörk rubrikrad och tabellerna, som staplas i telefonen.
+// Kärnans kort är samma kort som på metodens sida, och planeringsbladet är Planeringsblad.astro. Texten går genom t, som gör
+// metodens saker till länkar, och bladet får sakerna.
+import Planeringsblad from './Planeringsblad.astro';
+import type { LathundDel } from '../lib/standard/index.js';
+import type { MetodSak } from '../lib/metodsaker';
+import { exempletsAmne, type Um } from '../lib/undervisningsmetod';
+interface Props { del: LathundDel; d: Um; t: (text: string) => string; saker: MetodSak[] }
+const { del: x, d, t, saker } = Astro.props;
+---
+{x.slag === 'fakta' && (
+  <div class="lh-fakta um-lh-fakta">
+    {x.rader.map((r) => <div><span class="lh-kicker">{r.namn}</span><strong set:html={t(r.text)} />{r.under && <span class="um-lh-under">{r.under}</span>}</div>)}
+  </div>
+)}
+{x.slag === 'stycken' && <>{x.rubrik && <h3 class="lh-kicker">{x.rubrik}</h3>}{x.text.map((p) => <p set:html={t(p)} />)}</>}
+{x.slag === 'kort' && (
+  <>
+    {x.rubrik && <h3 class="lh-kicker">{x.rubrik}</h3>}
+    <ol class="um-kort-rad">
+      {x.kort.map((k) => (
+        <li class="um-kort">
+          <span class="um-kort-nr" aria-hidden="true">{k.nr}</span>
+          <p class="um-kort-namn">{k.namn}</p>
+          <p class="um-kort-vad" set:html={t(k.text)} />
+          {k.under && <p class="um-kort-moment">{k.under}</p>}
+        </li>
+      ))}
+    </ol>
+    {x.fot && <p class="um-varv">{x.fot}</p>}
+  </>
+)}
+{x.slag === 'not' && <div class="lh-not"><h3 class="lh-kicker">{x.namn}</h3><p set:html={t(x.text)} /></div>}
+{x.slag === 'checklista' && (
+  <div class="lh-ruta">
+    <h3>{x.rubrik}</h3>
+    <ul class="lh-lista lh-bockar" data-bockar>{x.punkter.map((p) => <li><label><input type="checkbox" /> <span set:html={t(p)} /></label></li>)}</ul>
+    <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
+  </div>
+)}
+{x.slag === 'minuter' && (
+  <>
+    <h3 class="lh-kicker">{x.rubrik}</h3>
+    <table class="m-tabell lh-tabell lh-schema">
+      <colgroup><col style="width:4.5rem" /><col style="width:28%" /><col /></colgroup>
+      <thead><tr><th scope="col">Minut</th><th scope="col">Delen</th><th scope="col">Du säger</th></tr></thead>
+      <tbody>{x.delar.map((r) => <tr><th scope="row">{r.tid}</th><td>{r.fas}</td><td>{r.fraser.length > 0 && <span class="lh-fraser" set:html={t(r.fraser.map((f) => `”${f}”`).join(' '))} />}</td></tr>)}</tbody>
+    </table>
+  </>
+)}
+{x.slag === 'rutin' && (
+  <div class="lh-ruta">
+    <h3>{x.rubrik}</h3>
+    <div class="lh-ruta-kropp">
+      <p set:html={t(x.text)} />
+      {x.steg.length > 0 && <ol class="um-lh-steg">{x.steg.map((s) => <li set:html={t(s)} />)}</ol>}
+    </div>
+  </div>
+)}
+{x.slag === 'planering' && (
+  <>
+    {x.text && <p class="lh-svag">{x.text}</p>}
+    <Planeringsblad d={d} plan={x.plan} amne={x.exempel ? exempletsAmne(x.exempel) : undefined} gra={x.gra} variant={x.variant} saker={saker} />
+  </>
+)}
+{x.slag === 'tabell' && (
+  <>
+    {x.rubrik && <h3 class="lh-kicker">{x.rubrik}</h3>}
+    <table class="m-tabell lh-tabell stapla">
+      <thead><tr>{x.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
+      <tbody>{x.rader.map((r) => <tr>{r.map((c, i) => (i === 0 ? <th scope="row" data-rubrik={x.kolumner[i]} set:html={t(c)} /> : <td data-rubrik={x.kolumner[i]} set:html={t(c)} />))}</tr>)}</tbody>
+    </table>
+  </>
+)}

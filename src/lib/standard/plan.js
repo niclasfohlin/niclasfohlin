@@ -5,12 +5,25 @@
 // (ÅÅÅÅ-MM-DD) i UTC, så att sommartiden aldrig flyttar en dag. Sajtens METODER.md under Planera insatsen säger hur
 // metodens fält skrivs.
 import { periodensLangd, postensRad, tidensMatt, tidensVeckotakt } from './index.js';
-import { allaTexter, decimal, forstaLedet, forstaOrdet, liten, mening, meningarna, ORDNINGSTAL, rentText, skyddaRegex, stor, talAv, talIRegex, talText, tvasiffrigt, utanPunkt } from './text.js';
+import { allaTexter, antalText, decimal, forstaLedet, forstaOrdet, liten, mening, meningarna, ORDNINGSTAL, rentText, skyddaRegex, somLista, stor, talAv, talIRegex, talText, tvasiffrigt, utanPunkt, veckorText } from './text.js';
 
 const DAG = 86400000;
 const tillTid = (s) => { const [a, m, d] = s.split('-').map(Number); return Date.UTC(a, m - 1, d); };
 const tillText = (t) => new Date(t).toISOString().slice(0, 10);
 
+/** Dagen ur ett datum i en metods fil, som YAML läser som ett datum eller en text, ÅÅÅÅ-MM-DD (granskningen rot-3, fynd 13). @param {unknown} d */
+export const dagAv = (d) => (d instanceof Date ? d.toISOString().slice(0, 10) : typeof d === 'string' ? d.slice(0, 10) : '');
+/** Dagarna från ett datum till ett annat, negativt när det andra är före: kopians ålder i båda lagren och Före i Lär dig metoden (sajtens K-630). @param {string} fran @param {string} till */
+export const dagarMellan = (fran, till) => Math.round((tillTid(till) - tillTid(fran)) / DAG);
+/**
+ * Följderna i en lista: det som följer på det före står i samma följd, som pass 3–5, veckorna 1–2 och kalenderveckorna
+ * v. 48–49, en rot för passen, kalenderveckorna och veckorna i Mitt i (granskningen rot-3, fynd 25).
+ * @template T
+ * @param {T[]} lista i ordning
+ * @param {(fore: T, x: T) => boolean} foljer
+ * @returns {T[][]}
+ */
+export const foljderna = (lista, foljer) => lista.reduce((ut, x) => { const f = ut[ut.length - 1]; if (f && foljer(f[f.length - 1], x)) f.push(x); else ut.push([x]); return ut; }, /** @type {T[][]} */ ([]));
 /** Datumet n dagar efter (eller före) s. @param {string} s @param {number} n */
 export const plusDagar = (s, n) => tillText(tillTid(s) + n * DAG);
 /** Veckodagen, 1 för måndag till 7 för söndag. @param {string} s */
@@ -693,8 +706,9 @@ export function lektionsvaletsFel(d) {
  * @returns {{ forslag: 'nasta' | 'upprepa' | null, snitt: number | null, forKort: boolean }}
  */
 export function lektionensForslag(varden, veckor, gangen = 1) {
-  const v = varden.filter((x) => Number.isFinite(x) && x >= 1 && x <= 5);
-  const snitt = v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+  // Snittet är medel med en decimal, samma tal som planen visar, så att "över 4" och talet alltid stämmer (granskningen
+  // rot-3, fynd 4: planen visade 4,333333333333333).
+  const snitt = medel(varden.filter((x) => iSkalan(x, { fran: 1, till: SKALAN.length })));
   const forKort = !!veckor && gangen < veckor.min;
   if (forKort) return { forslag: 'upprepa', snitt, forKort };
   if (snitt === null) return { forslag: null, snitt, forKort };
@@ -972,6 +986,10 @@ export const stegetsSpann = (x) => (x.fran === x.till ? String(x.fran) : `${x.fr
 /** Stegets namn på skalan: "Mycket bra" för 9. @param {Skala} skala @param {number} x */
 export const stegetsNamn = (skala, x) => skala.steg.find((s) => x >= s.fran && x <= s.till)?.namn ?? '';
 /** Gränserna i reglerna, som linjen ritar streckade: 7 ur "under 7" och "minst 7". @param {{ regler: Regel[] }} s */
+/** Är värdet ett heltal på skalan, från och med fran till och med till: linjen, det som rensas ur planen och klassernas skattning (sajtens K-631). @param {unknown} x @param {{ fran: number, till: number }} skala @returns {x is number} */
+export const iSkalan = (x, skala) => Number.isInteger(x) && /** @type {number} */ (x) >= skala.fran && /** @type {number} */ (x) <= skala.till;
+/** Regeln som gällde i en vecka på linjen, den första när två gäller, eller ingen (granskningen rot-3, fynd 9). @param {{ regler: (Regel & { rad: number })[], galler: number[][] }} l @param {number} i veckans plats */
+export const regelnIVeckan = (l, i) => (l.galler[i]?.length ? l.regler[l.galler[i][0]] : undefined);
 export const skattningensGranser = (s) => [...new Set(s.regler.flatMap((r) => ('grans' in r ? [r.grans] : [])))].sort((a, b) => a - b);
 
 /**
@@ -1038,7 +1056,7 @@ export function metodensSkattningar(d) {
  */
 export function linjen(plan, f, s) {
   const skala = s.skala;
-  const varden = plan.veckor.map((v) => { const x = f.matt?.[s.namn]?.[v.mandag]; return skala && Number.isInteger(x) && x >= skala.fran && x <= skala.till ? x : undefined; });
+  const varden = plan.veckor.map((v) => { const x = f.matt?.[s.namn]?.[v.mandag]; return skala && iSkalan(x, skala) ? x : undefined; });
   const galler = varden.map((x, i) => {
     if (x === undefined) return [];
     // Veckorna i följd till och med den, så att en vecka i planen utan kryss bryter följden, och "i rad" betyder i rad
@@ -1061,7 +1079,7 @@ export function linjen(plan, f, s) {
  */
 export function skattningensText(s, sk, info) {
   const varden = sk.varden.flatMap((x, i) => (x === undefined ? [] : [`${veckansNamn(s.veckor[i]).text}: ${x}`]));
-  const regler = sk.galler.flatMap((g, i) => (g.length ? [`${info.uppfoljning[sk.regler[g[0]].rad]?.nar ?? ''} efter ${veckansNamn(s.veckor[i]).text}`] : []));
+  const regler = sk.galler.flatMap((_, i) => { const r = regelnIVeckan(sk, i); return r ? [`${info.uppfoljning[r.rad]?.nar ?? ''} efter ${veckansNamn(s.veckor[i]).text}`] : []; });
   return { varden: varden.length ? `${sk.namn}, ${sk.skala.fran} till ${sk.skala.till}: ${varden.join(', ')}` : '', regler };
 }
 
@@ -1102,19 +1120,42 @@ export function forlangSteget(val, innehall, n = 1) {
 }
 
 /**
- * Måndagarna med något infört i Lär dig metoden: en skattning, veckans kommentar, en klass kommentar eller svaret på Gick
- * det?, i datumordning.
+ * Dagarna med något infört, i båda samlingarna och i datumordning (granskningen rot-3, fynd 12): i Planera insatsen passen,
+ * närvaron, skattningarna, veckans gång och resultaten, och i Lär dig metoden skattningarna, kommentarerna, Gick det?,
+ * klassernas skattning och svaret Mitt i, på veckan det skrevs.
  * @param {Foljd} f
  * @returns {string[]}
  */
-export const larDigetsInforda = (f) => [...new Set([...Object.values(f.matt ?? {}).flatMap((v) => Object.keys(v ?? {})), ...Object.keys(f.kommentar ?? {}), ...Object.keys(f.noter ?? {}), ...Object.keys(f.gick ?? {})])].filter((d) => arDatum(d)).sort();
+export function infordaDatum(f) {
+  // Bara det som har ett värde räknas, så att ett resultat som skrevs och raderades inte låser något (Codex 2026-10-26).
+  const med = (/** @type {Record<string, any> | undefined} */ o, /** @type {(x: any) => boolean} */ har) => Object.entries(o ?? {}).filter(([, x]) => har(x)).map(([k]) => k);
+  return [...new Set([
+    ...(f.gjorda ?? []), ...med(f.franvaro, (x) => !!x?.length), ...med(f.skattning, (x) => Object.keys(x ?? {}).length > 0), ...med(f.vecka, (x) => !!x?.varde || !!x?.not),
+    ...med(f.resultat, (x) => Object.values(x ?? {}).some(Boolean)).map((k) => k.split('-').slice(1).join('-')),
+    ...Object.values(f.matt ?? {}).flatMap((v) => Object.keys(v ?? {})), ...Object.keys(f.kommentar ?? {}), ...Object.keys(f.noter ?? {}), ...Object.keys(f.gick ?? {}), ...Object.keys(f.klassvarden ?? {}),
+    ...(f.mittIDag && Object.keys(f.mittI ?? {}).length ? [f.mittIDag] : []),
+  ])].filter((d) => arDatum(d)).sort();
+}
+/** Det senast införda datumet, som låser lovet och ett steg eller en vecka att ta om, i båda lagren. @param {Foljd} f */
+export const sistaInfort = (f) => infordaDatum(f).at(-1);
+/** Har klassen något infört: en rad, en skattning eller ett svar Mitt i, så att den står kvar som borttagen (klasserUrText). @param {Foljd} f @param {string} id */
+export const klassenHarNagot = (f, id) => [f.noter, f.klassvarden].some((x) => Object.values(x ?? {}).some((n) => n[id] !== undefined)) || !!f.mittI?.[id];
 /**
  * Är något infört i en vecka efter måndagen? Då står steget och lovet kvar, så att det läraren har skrivit inte hamnar under
  * ett annat steg (samma regel som Upprepa veckan i Planera insatsen).
  * @param {Foljd} f
  * @param {string} mandag
  */
-export const harInfortEfter = (f, mandag) => larDigetsInforda(f).some((d) => d > mandag);
+export const harInfortEfter = (f, mandag) => lovetLast(plusDagar(mandag, 7), sistaInfort(f));
+/**
+ * Är lovet i veckan låst: något är infört i den veckan eller senare, så att ett lov inte flyttar det läraren har skrivit till
+ * en annan vecka. En rot för lovknapparna i båda lagren, som var och en vet sitt senast införda datum (sajtens K-630).
+ * @param {string} mandag veckans måndag
+ * @param {string | undefined} sista det senast införda datumet
+ */
+export const lovetLast = (mandag, sista) => !!sista && mandag <= mandagen(sista);
+/** Lovveckorna i en mening, i sammanställningen och pdf:en: "Lov v. 48–49." Tom utan lov. @param {string[]} lov måndagarna */
+export const lovetsText = (lov) => (lov.length ? `Lov ${kalenderveckornaFor(lov)}.` : '');
 
 /**
  * Veckorna efter stegen som läraren skattar: varannan skolvecka från veckan efter det sista steget (plan.efter), förbi
@@ -1129,7 +1170,7 @@ export const harInfortEfter = (f, mandag) => larDigetsInforda(f).some((d) => d >
 export function efterStegen(plan, val, f, idag) {
   if (!plan.veckor.length) return [];
   const lov = new Set(val.lov ?? []);
-  const inforda = larDigetsInforda(f).filter((d) => d >= plan.efter && veckodag(d) === 1);
+  const inforda = infordaDatum(f).filter((d) => d >= plan.efter && veckodag(d) === 1);
   const till = [mandagen(idag), ...inforda].sort().pop() ?? plan.efter;
   const ut = new Set(inforda);
   for (let m = plan.efter, i = 0, n = 0; m <= till && n < 520; m = plusDagar(m, 7), n++) {
@@ -1150,8 +1191,8 @@ export function efterStegen(plan, val, f, idag) {
  * @returns {LarDigVecka[]}
  */
 export function larDigetsVeckor(plan, val, f, idag) {
-  const stegen = plan.veckor.map((v) => ({ nr: v.nr, mandag: v.mandag, vecka: v.vecka.vecka, innehall: v.innehall, gang: gangen(plan, v), steg: v.steg ?? null, efter: false }));
-  const efter = efterStegen(plan, val, f, idag).map((m, i) => ({ nr: stegen.length + i + 1, mandag: m, vecka: isoVecka(m).vecka, innehall: 0, gang: 0, steg: null, efter: true }));
+  const stegen = plan.veckor.map((v) => ({ nr: v.nr, mandag: v.mandag, vecka: v.vecka.vecka, innehall: v.innehall, gang: gangen(plan, v), steg: v.steg ?? null, efter: false, namn: planveckansNamn(plan, v) }));
+  const efter = efterStegen(plan, val, f, idag).map((m, i) => ({ nr: stegen.length + i + 1, mandag: m, vecka: isoVecka(m).vecka, innehall: 0, gang: 0, steg: null, efter: true, namn: larDigetsNamn({ innehall: 0, vecka: isoVecka(m).vecka, efter: true }) }));
   return [...stegen, ...efter];
 }
 
@@ -1162,14 +1203,48 @@ export function larDigetsVeckor(plan, val, f, idag) {
  * @param {Plan} plan
  * @returns {string | null}
  */
-export const forstaLektionen = (plan) => (plan.veckor.length ? (plan.start > plan.veckor[0].mandag ? plan.start : plan.veckor[0].mandag) : null);
+export const forstaLektionen = (plan) => (plan.veckor.length ? forstaLektionensDag(plan.start, plan.veckor[0].mandag) : null);
+/**
+ * Dagen för första lektionen ur dagen läraren valde och måndagen i planens första vecka, en rot för planen (forstaLektionen) och
+ * listan med planerna, som läser kopian av planens veckor (sajtens K-630).
+ * @param {string} start dagen läraren valde
+ * @param {string} mandag måndagen i planens första vecka
+ */
+export const forstaLektionensDag = (start, mandag) => (start > mandag ? start : mandag);
 /**
  * Var läraren är: före, till dagen för första lektionen; efter, från veckan efter det sista steget; och annars under stegen.
  * @param {Plan} plan
  * @param {string} idag
  * @returns {'fore' | 'under' | 'efter'}
  */
-export const larDigetsFas = (plan, idag) => { const forsta = forstaLektionen(plan); return !forsta || idag < forsta ? 'fore' : idag >= plan.efter ? 'efter' : 'under'; };
+export const larDigetsFas = (plan, idag) => larDigetsLagetFor(plan, idag).fas;
+/**
+ * Var läraren är i Lär dig metoden, en regel för sidan, listan med planerna och pdf:en (granskningen rot-3, fynd 2 och 3): Före
+ * till första lektionen, Efter från veckan efter stegen, och annars stegens vecka som pågår, nästa under ett lov och den sista
+ * när stegen är slut. Läget som märke: Avslutad när läraren har avslutat planen, Kommande i Före och annars Pågående.
+ * Värdena är de som både planen och kopian av den i lagringen har.
+ * @param {{ forsta: string | null, mandagar: string[], efter: string, avslutad?: boolean }} p
+ * @param {string} idag
+ * @returns {{ fas: 'fore' | 'under' | 'efter', vecka: number | null, lage: 'kommande' | 'pagaende' | 'avslutad' }}
+ */
+export function larDigetsLaget(p, idag) {
+  const fas = !p.forsta || idag < p.forsta ? 'fore' : idag >= p.efter ? 'efter' : 'under';
+  const i = p.mandagar.findIndex((m) => idag <= skolveckan(m).sondag);
+  return { fas, vecka: fas === 'under' && p.mandagar.length ? (i >= 0 ? i : p.mandagar.length - 1) + 1 : null, lage: p.avslutad ? 'avslutad' : fas === 'fore' ? 'kommande' : 'pagaende' };
+}
+/** Läget ur planen. @param {Plan} plan @param {string} idag @param {boolean} [avslutad] */
+export const larDigetsLagetFor = (plan, idag, avslutad = false) => larDigetsLaget({ forsta: forstaLektionen(plan), mandagar: plan.veckor.map((v) => v.mandag), efter: plan.efter, avslutad }, idag);
+/** Hur ofta läraren skattar efter stegen, i ord, ur EFTER_STEGEN_VAR (granskningen rot-3, fynd 19). */
+export const efterStegensTakt = () => (EFTER_STEGEN_VAR === 1 ? 'varje vecka' : EFTER_STEGEN_VAR === 2 ? 'varannan vecka' : `var ${ORDNINGSTAL[EFTER_STEGEN_VAR]} vecka`);
+/**
+ * Stegen i Lär dig metoden ur progressionens rader (v.steg), lika på sidan, i sammanställningen och i avslutet (granskningen
+ * rot-3, fynd 7): antalet, ett stegs nummer från 1 och om veckan har det sista steget.
+ * @param {{ veckor: { steg?: number | null }[] }} plan
+ */
+export const larDigetsSteg = (plan) => {
+  const rader = [...new Set(plan.veckor.flatMap((v) => (v.steg === null || v.steg === undefined ? [] : [v.steg])))].sort((a, b) => a - b);
+  return { antal: rader.length, nummer: (/** @type {{ steg?: number | null }} */ v) => rader.indexOf(v.steg ?? -1) + 1, sista: (/** @type {{ steg?: number | null }} */ v) => v.steg !== null && v.steg !== undefined && v.steg === rader[rader.length - 1] };
+};
 /** Hur många veckor Före räcker i förvalet: från veckan läraren gör planen till första lektionen tre veckor senare (Niclas samma dag: "Vissa kanske behöver 2-4 veckor på 'Före'"). */
 export const FORE_VECKOR = 3;
 /**
@@ -1192,7 +1267,7 @@ export const larDigetsForval = (mp, idag) => ({ ...forval(mp, idag), start: plus
 export function larDigetsNu(plan, veckor, idag) {
   const fas = larDigetsFas(plan, idag);
   if (fas === 'fore') return null;
-  if (fas === 'under') return veckanFor(plan, idag)?.nr ?? null;
+  if (fas === 'under') return larDigetsLagetFor(plan, idag).vecka;
   return [...veckor].reverse().find((v) => v.efter && v.mandag <= idag)?.nr ?? null;
 }
 
@@ -1229,28 +1304,42 @@ export function klasserUrText(text, fore, nyttId, behall = () => true) {
  * @param {string} idag
  */
 export function larDigSammanstallning(plan, val, f, idag) {
-  const veckor = larDigetsVeckor(plan, val, f, idag);
+  // En avslutad plan står som den var dagen läraren avslutade den: veckorna efter stegen räknas till dess, och inget steg
+  // pågår (sajtens K-631).
+  const dag = f.avslut && f.avslut.datum < idag ? f.avslut.datum : idag;
+  const veckor = larDigetsVeckor(plan, val, f, dag);
   const klasser = f.klasser ?? [];
   const linjer = (plan.skattningar ?? []).filter((s) => s.vem === 'lararen' && s.skala).map((s) => ({ namn: s.namn, skala: /** @type {Skala} */ (s.skala), regler: s.regler, ...linjen(/** @type {Plan} */ ({ veckor }), f, s) }));
   // Stegen som läraren har tagit, med veckorna som har börjat, och det som pågår; stegen som inte har börjat står kvar
   // (granskningen av Lär dig metoden 2026-10-30: sammanställningen räknade steg 3 och 4 som tagna mitt i steg 2).
-  const fas = larDigetsFas(plan, idag), nu = larDigetsNu(plan, veckor, idag);
+  const fas = larDigetsFas(plan, dag), nu = larDigetsNu(plan, veckor, dag);
   const iSteget = fas === 'under' && nu ? plan.veckor[nu - 1]?.innehall : undefined;
   /** @type {{ innehall: number, steg: number | null, veckor: number, pagar: boolean }[]} */
   const stegen = [];
-  for (const v of veckor.filter((x) => !x.efter && x.mandag <= idag)) { const g = stegen.find((x) => x.innehall === v.innehall); if (g) g.veckor += 1; else stegen.push({ innehall: v.innehall, steg: v.steg, veckor: 1, pagar: v.innehall === iSteget }); }
+  for (const v of veckor.filter((x) => !x.efter && x.mandag <= dag)) { const g = stegen.find((x) => x.innehall === v.innehall); if (g) g.veckor += 1; else stegen.push({ innehall: v.innehall, steg: v.steg, veckor: 1, pagar: !f.avslut && v.innehall === iSteget }); }
   /** @type {{ innehall: number, steg: number | null }[]} */
   const kvar = [];
-  for (const v of veckor.filter((x) => !x.efter && x.mandag > idag)) if (!stegen.some((x) => x.innehall === v.innehall) && !kvar.some((x) => x.innehall === v.innehall)) kvar.push({ innehall: v.innehall, steg: v.steg });
-  return {
-    fas, nu, mal: val.mal ?? '',
-    veckor: veckor.map((v) => ({
-      ...v, namn: larDigetsNamn(v),
+  for (const v of veckor.filter((x) => !x.efter && x.mandag > dag)) if (!stegen.some((x) => x.innehall === v.innehall) && !kvar.some((x) => x.innehall === v.innehall)) kvar.push({ innehall: v.innehall, steg: v.steg });
+  const namngivna = veckor.map((v) => ({
+      ...v,
       ...(f.gick?.[v.mandag] ? { gick: f.gick[v.mandag] } : {}),
       ...(f.kommentar?.[v.mandag] ? { kommentar: f.kommentar[v.mandag] } : {}),
       noter: klasser.flatMap((k) => (f.noter?.[v.mandag]?.[k.id] ? [{ id: k.id, namn: k.namn, text: f.noter[v.mandag][k.id] }] : [])),
-    })),
+  }));
+  const mitt = larDigetsMittI(plan, f);
+  return {
+    fas, nu, dag, mal: val.mal ?? '',
+    // Har läraren fört in något som sammanställningen visar.
+    harNagot: linjer.some((l) => l.varden.some((x) => x !== undefined)) || namngivna.some((w) => w.kommentar || w.noter.length || w.gick) || Object.keys(f.klassvarden ?? {}).length > 0 || Object.keys(f.mittI ?? {}).length > 0 || !!f.avslut,
+    veckor: namngivna,
+    // Veckorna med något att visa under Kommentarerna: veckans kommentar, en klass rad eller svaret på Gick det? i ett steg.
+    kommenterade: namngivna.filter((w) => w.kommentar || w.noter.length || (w.gick && !w.efter)),
     linjer, stegen, kvar, lov: plan.lovveckor,
+    klasstabell: klassernasTabell(veckor, f),
+    mitt,
+    // Lärarens svar Mitt i, för varje klass som har ett, med vad klassen hade i veckorna före (klassenHittills) i en mening.
+    mittSvar: mitt ? klasser.flatMap((k) => { const text = f.mittI?.[k.id]; const h = klassenHittills(plan, f, k.id, mitt.nr); return text ? [{ id: k.id, namn: k.namn, text, ...(h ? { snitt: h.snitt, veckor: h.veckor, hittills: mittIText({ namn: k.namn, ...h, ensam: true }) } : {}) }] : []; }) : [],
+    avslut: f.avslut ? { ...f.avslut, fas, steg: iSteget !== undefined ? larDigetsSteg(plan).nummer(plan.veckor[/** @type {number} */ (nu) - 1]) : null, antal: larDigetsSteg(plan).antal } : null,
   };
 }
 /** Regeln i ord, som det som hände på linjen: "under 5 i två veckor utan att stiga". @param {Regel} r */
@@ -1269,12 +1358,138 @@ export const LARARENS_SKALOR = /** @type {const} */ ([{ fraga: 'Hur säker är j
 /** Skalans ändar för en av lärarens frågor, efter frågan och annars efter platsen i standardens ordning. @param {string} namn @param {number} j */
 export const skalansAndar = (namn, j) => LARARENS_SKALOR.find((x) => x.fraga === namn) ?? LARARENS_SKALOR[j] ?? null;
 /**
+ * Klassernas skattning i Lär dig metoden, frivillig, varje vecka och klass (sajtens K-631; Niclas 2026-10-30: "läraren kunde
+ * skatta hur det gick för olika grupperna från 1-5 (om denne vill) per vecka. Del att se mönster också på klassnivå med en
+ * metod"): skalan och dess ändar, som lärarens skalor, med ändarna som skalans namngivna steg, så att knapparna säger dem för
+ * en skärmläsare (stegetsNamn).
+ */
+export const KLASSERNAS_SKALA = Object.freeze({ fran: 1, till: 5, lagst: 'Gick inte', hogst: 'Gick mycket bra', tabell: '', steg: Object.freeze([Object.freeze({ fran: 1, till: 1, namn: 'Gick inte' }), Object.freeze({ fran: 5, till: 5, namn: 'Gick mycket bra' })]) });
+/** Skalans ändar i ord, under knapparna och före linjen i pdf:en: "1 är inte alls säker och 10 är helt säker". @param {{ fran: number, till: number }} skala @param {{ lagst: string, hogst: string }} andar */
+export const skalansAndarText = (skala, andar) => `${skala.fran} är ${liten(andar.lagst)} och ${skala.till} är ${liten(andar.hogst)}`;
+/**
+ * Stegen som inte har börjat, i en mening, i sammanställningen och pdf:en: "Kvar: Paret.", och efter ett avslut "Inte tagna:
+ * Paret." Tom när alla har börjat.
+ * @param {{ kvar: { innehall: number, steg: number | null }[], avslut: unknown }} s
+ * @param {string[]} rubriker stegens namn i progressionens ordning
+ */
+export const larDigetsKvar = (s, rubriker) => (s.kvar.length ? `${s.avslut ? 'Inte tagna' : 'Kvar'}: ${uppraknat(s.kvar.map((x) => (x.steg !== null ? rubriker[x.steg] ?? '' : String(x.innehall))))}.` : '');
+/** Ett steg som läraren har tagit, i sammanställningen och pdf:en: "Steg 2: Tavlan och bänkarna, pågår, två veckor hittills." @param {{ innehall: number, steg: number | null, veckor: number, pagar: boolean }} x @param {string[]} rubriker */
+export const stegetsRad = (x, rubriker) => `Steg ${x.innehall}: ${x.steg !== null ? `${rubriker[x.steg] ?? ''}, ` : ''}${x.pagar ? `pågår, ${veckorText(x.veckor)} hittills` : veckorText(x.veckor)}.`;
+/** Klassernas skala i en mening, över tabellen på sidan och i pdf:en. */
+export const klassernasSkalaText = () => mening(`Hur det gick i klassen: ${skalansAndarText(KLASSERNAS_SKALA, KLASSERNAS_SKALA)}`);
+/** Svaret på Gick det? med stegets fråga, i sammanställningen och pdf:en: "Visar nästan alla på signalen inom tio sekunder? Ja." @param {string | undefined} fraga @param {'ja' | 'inte'} svar */
+export const gickDetSvaret = (fraga, svar) => `${fraga || 'Gick det?'} ${svar === 'ja' ? 'Ja.' : 'Inte än.'}`;
+/** Meningen sist i sammanställningen, på sidan och i pdf:en. */
+export const SKATTNINGARNAS_GRANS = 'Skattningarna är dina egna och stöder dina beslut vecka för vecka. En förändring i dem visar inte metodens effekt.';
+/** Frågan vid klassens knappar. @param {string} namn klassens namn */
+export const klassensFraga = (namn) => `Hur gick det i ${namn} den här veckan?`;
+/**
+ * Klasserna vecka för vecka, till sammanställningen på sidan och i pdf:en: varje klass med minst en skattning, också en
+ * borttagen, med talen i veckorna där någon klass är skattad och klassens medel (medel). Inget tal sägs bara med en färg.
+ * @param {{ mandag: string }[]} veckor sammanställningens veckor
+ * @param {Foljd} f
+ * @returns {{ veckor: number[], rader: { id: string, namn: string, borta?: true, varden: (number | undefined)[], snitt: number | null }[] }}
+ */
+export function klassernasTabell(veckor, f) {
+  const rader = (f.klasser ?? []).map((k) => ({ k, varden: veckor.map((v) => f.klassvarden?.[v.mandag]?.[k.id]) })).filter((r) => r.varden.some((x) => x !== undefined));
+  const kolumner = veckor.flatMap((_, i) => (rader.some((r) => r.varden[i] !== undefined) ? [i] : []));
+  return { veckor: kolumner, rader: rader.map(({ k, varden }) => ({ id: k.id, namn: k.namn, ...(k.borta ? { borta: /** @type {true} */ (true) } : {}), varden: kolumner.map((i) => varden[i]), snitt: medel(/** @type {number[]} */ (varden.filter((x) => x !== undefined))) })) };
+}
+/**
+ * Veckan mitt i stegen i Lär dig metoden, då planen lyfter fram klassen som har gått sämst (Niclas 2026-10-30: "för jämt
+ * antal mitt i +1, så vecka 3"): vecka floor(N/2) + 1 av planens N veckor med steg, med de förlängda veckorna, så 3 av 4, 3
+ * av 5 och 4 av 6. Ingen i en plan utan steg. Planera insatsens mittVeckan är en annan regel: metodens mittersta vecka, utan
+ * de upprepade veckorna, då läraren stämmer av.
+ * @param {{ veckor: unknown[] }} plan
+ * @returns {number | null}
+ */
+export const larDigetsMitt = (plan) => (plan.mitt && plan.veckor.some((v) => v.nr === plan.mitt) ? plan.mitt : plan.veckor.length ? Math.floor(plan.veckor.length / 2) + 1 : null);
+/**
+ * Veckan Mitt i att låsa i valen (val.mitt) när den har börjat, så att ett steg som förlängs efteråt inte flyttar den till en
+ * annan vecka och en annan klass, som Planera insatsens avstämning (mittVeckan, Codex 2026-10-25: "förlängningen flyttade
+ * avstämningen till en vecka som redan hade varit"; granskningen rot-3, fynd 1). Ingen före veckan.
+ * @param {Plan} plan
+ * @param {string} idag
+ */
+export const larDigetsMittLast = (plan, idag) => { const nr = larDigetsMitt(plan); return nr && plan.veckor[nr - 1].mandag <= idag ? nr : undefined; };
+/**
+ * Veckorna i en text, som de heter i planen: "vecka 2", "vecka 1–2" i följd, "vecka 2 till 2 igen" när en vecka tas om och
+ * "vecka 1–2 och 4" med en lucka (foljderna).
+ * @param {Plan} plan
+ * @param {PlanVecka[]} vs
+ */
+const veckornasText = (plan, vs) => `vecka ${uppraknat(foljderna(vs, (a, b) => b.nr === a.nr + 1).map((f) => {
+  const [a, b] = [planveckansNamn(plan, f[0]).plan, planveckansNamn(plan, f[f.length - 1]).plan];
+  return f.length === 1 ? a : /\s/.test(`${a}${b}`) ? `${a} till ${b}` : `${a}–${b}`;
+}))}`;
+/**
+ * En klass skattning i veckorna före en vecka i planen: medlet (medel), den senaste skattningen, veckorna den är skattad i
+ * en text (veckornasText) och klassens rader från de veckorna. Inget när klassen inte är skattad före veckan.
+ * @param {Plan} plan
+ * @param {Foljd} f
+ * @param {string} id klassens id
+ * @param {number} nr veckan i planen
+ * @returns {{ snitt: number, senaste: number, veckor: string, kommentarer: { vecka: string, text: string }[] } | null}
+ */
+export function klassenHittills(plan, f, id, nr) {
+  const fore = plan.veckor.slice(0, Math.max(0, nr - 1));
+  const skattade = fore.filter((v) => f.klassvarden?.[v.mandag]?.[id] !== undefined);
+  const varden = skattade.map((v) => /** @type {number} */ (f.klassvarden?.[v.mandag]?.[id]));
+  const snitt = medel(varden);
+  if (snitt === null) return null;
+  return { snitt, senaste: varden[varden.length - 1], veckor: veckornasText(plan, skattade), kommentarer: fore.flatMap((v) => { const text = f.noter?.[v.mandag]?.[id]; return text ? [{ vecka: planveckansNamn(plan, v).Text, text }] : []; }) };
+}
+/**
+ * Mitt i stegen (Niclas 2026-10-30: "så vecka 3 skulle den klass som fått lägst tills dess lyfts fram med frågan vad läraren
+ * bör göra för att lyckas bättre med den klassen med hänvisning till metoden"): veckan (larDigetsMitt) och klassen i listan
+ * med lägst medel i veckorna före, med det klassen hade (klassenHittills). Lika medel avgörs av den lägsta senaste
+ * skattningen och sedan av listans ordning. ensam säger att bara den klassen är skattad. Ingen klass när ingen är skattad före
+ * veckan, eller när den lägsta har skalans högsta i medel.
+ * @param {Plan} plan
+ * @param {Foljd} f
+ */
+export function larDigetsMittI(plan, f) {
+  const nr = larDigetsMitt(plan);
+  if (!nr) return null;
+  const skattade = (f.klasser ?? []).filter((k) => !k.borta).flatMap((k, ordning) => { const h = klassenHittills(plan, f, k.id, nr); return h ? [{ k, h, ordning }] : []; });
+  const lagst = [...skattade].sort((a, b) => a.h.snitt - b.h.snitt || a.h.senaste - b.h.senaste || a.ordning - b.ordning)[0];
+  const klass = lagst && lagst.h.snitt < KLASSERNAS_SKALA.till ? { id: lagst.k.id, namn: lagst.k.namn, ...lagst.h, ensam: skattade.length === 1 } : null;
+  return { nr, mandag: plan.veckor[nr - 1].mandag, klass };
+}
+/** Klassen Mitt i i en mening: "7B har gått sämst hittills, i snitt 2,5 av 5 i vecka 1–2.", och med bara en klass skattad "7B har i snitt …". @param {{ namn: string, snitt: number, veckor: string, ensam?: boolean }} k */
+export const mittIText = (k) => `${k.namn} har ${k.ensam ? '' : 'gått sämst hittills, '}i snitt ${decimal(k.snitt)} av ${KLASSERNAS_SKALA.till} i ${k.veckor}.`;
+/** Frågan Mitt i. @param {string} namn klassens namn */
+export const mittIFragan = (namn) => `Vad gör du för att lyckas bättre med ${namn}?`;
+/** Hur långt ett svar Mitt i får vara, som veckans kommentar. */
+export const MITT_I_LANGD = KOMMENTARENS_LANGD;
+/**
+ * Avslutet i Lär dig metoden i en mening, lika i raden överst, sammanställningen och pdf:en (sajtens K-631): dagen, var
+ * läraren var, och lärarens anledning (anledningen), som i Planera insatsen. "Du avslutade planen 30 oktober 2026, i steg 3 av
+ * 4. Anledning: Metoden sitter i min undervisning."
+ * @param {{ datum: string, not?: string, fas: 'fore' | 'under' | 'efter', steg: number | null, antal: number }} a
+ */
+export const larDigetsAvslutText = (a) => [`Du avslutade planen ${datumText(a.datum)}${a.steg !== null ? `, i steg ${a.steg} av ${a.antal}` : a.fas === 'efter' ? ', efter stegen' : a.fas === 'fore' ? ', före första lektionen' : ''}.`, anledningen(a.not)].filter(Boolean).join(' ');
+/**
+ * Förslagen på anledning när läraren avslutar en plan, i båda samlingarna, som knappar som skriver anledningen i fältet
+ * (Niclas 2026-10-25 om Planera insatsen, och 2026-10-30 om Lär dig metoden: "avsluta likt stödundervisning med två förvalda
+ * [rimliga] skäl eller skriva i själv").
+ */
+export const AVSLUTETS_ANLEDNINGAR = Object.freeze({ stodundervisning: Object.freeze(['Gruppen har nått målet', 'Skolans andra arbete tar över']), metoder: Object.freeze(['Metoden sitter i min undervisning', 'Jag tar upp metoden igen senare']) });
+/** Hur lång lärarens anledning till ett avslut får vara, i båda samlingarna. */
+export const ANLEDNINGENS_LANGD = 200;
+/**
+ * Metodens plan i Lär dig metoden ur sidans data, en rot för bygget och sidan (sajtens K-630): tiden, perioden, progressionen,
+ * uppföljningen och planens rader om passen och lärarens skattningar.
+ * @param {{ tid: string, period: string, progression: unknown, uppfoljning: unknown, passen: unknown[], skattningar: unknown[] }} data
+ */
+export const larDigetsMetodplan = (data) => metodplan(/** @type {any} */ ({ tid: data.tid, period: data.period, progression: data.progression, uppfoljning: data.uppfoljning, plan: { passen: data.passen, skattningar: data.skattningar } }));
+/**
  * Reglerna som gällde i lärarens linjer, som det som hände, med uppföljningens rad och veckan: "Om du är osäker på metoden:
  * under 5 i två veckor utan att stiga, till och med vecka 2 (v. 47)". Gäller två regler samma vecka står den första.
  * @param {ReturnType<typeof larDigSammanstallning>} s
  * @param {{ nar: string }[]} rader uppföljningens rader
  */
-export const larDigetsRegler = (s, rader) => s.linjer.flatMap((l) => l.galler.flatMap((g, i) => (g.length ? [`${rader[l.regler[g[0]].rad]?.nar ?? ''}: ${regelnIOrd(l.regler[g[0]])}, till och med ${s.veckor[i].namn.text}`] : [])));
+export const larDigetsRegler = (s, rader) => s.linjer.flatMap((l) => l.galler.flatMap((_, i) => { const r = regelnIVeckan(l, i); return r ? [{ rad: r.rad, text: `${rader[r.rad]?.nar ?? ''}: ${regelnIOrd(r)}, till och med ${s.veckor[i].namn.text}` }] : []; }));
 
 /**
  * Lärarens svar på Gick det? i en vecka, och vad det gör med planen: Inte än ger steget en vecka till, ett annat svar tar
@@ -1774,6 +1989,8 @@ export function avslutetText(plan, pagar = false) {
   const v = plan.veckor[plan.veckor.length - 1];
   return `Insatsen ${pagar ? 'avslutas' : 'avslutades'} i ${planveckansNamn(plan, v).text}, efter ${plan.pass.length} av ${plan.planerade} planerade pass.`;
 }
+/** Lärarens anledning till ett avslut i en mening, "Anledning: Gruppen har nått målet.", i båda lagren; tom utan (sajtens K-631). @param {string | undefined} not */
+export const anledningen = (not) => (not ? `Anledning: ${mening(stor(utanPunkt(not)))}` : '');
 /**
  * Utvärderingen efter insatsen, lika på sidan, i pdf:erna och i texterna som kopieras: när insatsen avslutades tidigare
  * avslutet med lärarens anledning, som är utvärderingens mening med beslutet Avsluta insatsen, och annars beslutet och
@@ -1786,7 +2003,7 @@ export function utvarderingenText(plan, u, pagar = false) {
   const beslutet = u?.beslut || u?.not ? beslutText(u) : '';
   const avslut = avslutetText(plan, pagar);
   if (!avslut) return beslutet;
-  return [avslut, u?.beslut === 'avsluta' ? (u.not ? `Anledning: ${mening(stor(utanPunkt(u.not)))}` : '') : beslutet].filter(Boolean).join(' ');
+  return [avslut, u?.beslut === 'avsluta' ? anledningen(u.not) : beslutet].filter(Boolean).join(' ');
 }
 
 /**
@@ -1835,13 +2052,7 @@ export const kalenderveckor = (a, b, streck = '–') => (b === a ? kalendervecka
  * @param {string[]} datum
  */
 export function kalenderveckornaFor(datum) {
-  /** @type {string[][]} */
-  const foljder = [];
-  for (const m of [...new Set(datum.map(mandagen))].sort()) {
-    const f = foljder[foljder.length - 1];
-    if (f && plusDagar(f[f.length - 1], 7) === m) f.push(m);
-    else foljder.push([m]);
-  }
+  const foljder = foljderna([...new Set(datum.map(mandagen))].sort(), (a, b) => plusDagar(a, 7) === b);
   return uppraknat(foljder.map((f) => kalenderveckor(isoVecka(f[0]).vecka, isoVecka(f[f.length - 1]).vecka)));
 }
 // Vilken gång i ord: "igen" och "en tredje gång", ur standardens ordningstal (text.js).
@@ -1903,6 +2114,8 @@ export const veckansNamn = (v) => {
  * @param {Plan} plan
  * @param {PlanVecka} v
  */
+/** Veckan i planen kort, till remsan i båda lagren: talet ur veckan i planen och vilken gång. @param {Plan} plan @param {PlanVecka} v */
+export const planveckansKort = (plan, v) => planveckanKort(planvecka(plan, v), gangen(plan, v));
 export const planveckansNamn = (plan, v) => veckansNamn({ innehall: planvecka(plan, v), gang: gangen(plan, v), vecka: v.vecka.vecka });
 /**
  * En vecka i Lär dig metoden med sina namn (sajtens K-628): ett steg heter som metodens vecka, "vecka 2" och "vecka 2 igen"
@@ -2751,20 +2964,26 @@ export const uppraknat = (ord) => (ord.length <= 1 ? ord.join('') : `${ord.slice
  * @param {number[]} nr
  */
 export const passnummerText = (nr) => {
-  /** @type {[number, number][]} */
-  const delar = [];
-  for (const n of [...nr].sort((a, b) => a - b)) {
-    const sist = delar[delar.length - 1];
-    if (sist && n === sist[1] + 1) sist[1] = n;
-    else delar.push([n, n]);
-  }
-  return delar.length ? `Pass ${uppraknat(delar.map(([a, b]) => (a === b ? `${a}` : `${a}–${b}`)))}` : '';
+  const delar = foljderna([...new Set(nr)].sort((a, b) => a - b), (a, b) => b === a + 1);
+  return delar.length ? `Pass ${uppraknat(delar.map((d) => (d.length === 1 ? `${d[0]}` : `${d[0]}–${d[d.length - 1]}`)))}` : '';
 };
 /** Veckans första och sista dag i planen: passens, eller måndag till fredag. @param {{ pass: Pass[] }} plan @param {PlanVecka} v */
 export function veckansDagar(plan, v) {
   const datum = veckansPass(plan, v).map((p) => p.datum).sort();
-  return { fran: datum[0] ?? v.mandag, till: datum[datum.length - 1] ?? plusDagar(v.mandag, 4) };
+  return { fran: datum[0] ?? v.mandag, till: datum[datum.length - 1] ?? skolveckan(v.mandag).till };
 }
+/**
+ * Skolveckan, måndag till fredag, och veckans söndag, en rot för veckor utan pass, som Lär dig metodens steg och lovveckorna
+ * i båda lagren (granskningen rot-3, fynd 10). @param {string} mandag
+ */
+export const skolveckan = (mandag) => ({ fran: mandag, till: plusDagar(mandag, 4), sondag: plusDagar(mandag, 6) });
+/** Skolveckan i ord: "v. 47, 16–20 nov". @param {string} mandag */
+export const skolveckansText = (mandag) => `${kalendervecka(isoVecka(mandag).vecka)}, ${spannKort(mandag, skolveckan(mandag).till)}`;
+/**
+ * Hur lång en period är i ord, som Före i Lär dig metoden: dagarna upp till fem, och sedan omkring så många veckor, aldrig färre
+ * än en (granskningen rot-3, fynd 5: tio dagar gav "omkring ett veckor"). Tom för ingen dag. @param {number} dagar
+ */
+export const periodensText = (dagar) => (dagar <= 0 ? '' : dagar < 6 ? antalText(dagar, 'dag', 'dagar') : `omkring ${veckorText(Math.max(1, Math.round(dagar / 7)))}`);
 
 // En rad i uppföljningen som heter efter insatsens vecka, som "Vecka 4", säger att det är insatsens vecka, så att den inte
 // läses som kalenderveckan bredvid (de kalla testarna 2026-10-24: "Vecka 4, vecka 48"), och veckan heter som i planen när
@@ -2904,10 +3123,10 @@ export const ELEVLISTANS_LANGD = 32;
  */
 export function rensaFoljd(f) {
   const obj = (x) => (x && typeof x === 'object' && !Array.isArray(x) ? x : {});
-  const lista = (x) => (Array.isArray(x) ? x : []);
+  const lista = somLista;
   const text = rentText;
   const id = (x) => typeof x === 'string' && /^[a-z0-9]{1,12}$/i.test(x);
-  const steg = (x) => Number.isInteger(x) && x >= 1 && x <= 5;
+  const steg = (x) => iSkalan(x, { fran: 1, till: SKALAN.length });
   const per = (x, fn) => Object.fromEntries(Object.entries(obj(x)).flatMap(([k, v]) => { const ut = fn(k, v); return ut === undefined ? [] : [[k, ut]]; }));
   const g = obj(f);
   // En elev vars namn sparades medan läraren skrev är ett utkast, som en annan flik inte sparar som ett tidigare namn (K-537).
@@ -2935,7 +3154,7 @@ export function rensaFoljd(f) {
   });
   const lektionPa = per(g.lektionPa, (d, v) => (arDatum(d) && Number.isInteger(v) && v >= 1 && v <= 99 ? v : undefined));
   // Lär dig metoden (sajtens K-628): lärarens klasser och grupper, en kommentar för veckan och en per klass, svaret på Gick
-  // det? och checklistans bockar. Fälten står bara i en plan som har dem, så att en plan i Stödundervisning är som förut.
+  // det?, checklistans bockar, klassernas skattning, svaren Mitt i och avslutet. Fälten står bara i en plan som har dem, så att en plan i Stödundervisning är som förut.
   const klasser = lista(g.klasser).flatMap((k) => (id(k?.id) && text(k?.namn, KLASSENS_NAMN) ? [{ id: k.id, namn: text(k.namn, KLASSENS_NAMN), ...(k.borta === true ? { borta: true } : {}) }] : [])).filter((k, i, alla) => alla.findIndex((x) => x.id === k.id) === i);
   const aktiva = klasser.filter((k) => !k.borta).slice(0, KLASSLISTANS_LANGD);
   const allaKlasser = [...aktiva, ...klasser.filter((k) => k.borta).slice(-2 * KLASSLISTANS_LANGD)];
@@ -2943,12 +3162,20 @@ export function rensaFoljd(f) {
   const noter = per(g.noter, (d, v) => { const n = arDatum(d) ? per(v, (k, x) => (id(k) && text(x, KLASSNOTENS_LANGD) ? text(x, KLASSNOTENS_LANGD) : undefined)) : {}; return Object.keys(n).length ? n : undefined; });
   const gick = per(g.gick, (d, x) => (arDatum(d) && GICK_DET.includes(x) ? x : undefined));
   const bockat = [...new Set(lista(g.bockat).filter((x) => Number.isInteger(x) && x >= 0 && x < 100))].sort((a, b) => a - b);
+  // Klassernas skattning på klassernas skala, lärarens svar Mitt i för en klass och avslutet med dagen och anledningen
+  // (sajtens K-631).
+  const klassvarden = per(g.klassvarden, (d, v) => { const n = arDatum(d) ? per(v, (k, x) => (id(k) && iSkalan(x, KLASSERNAS_SKALA) ? x : undefined)) : {}; return Object.keys(n).length ? n : undefined; });
+  const mittI = per(g.mittI, (k, x) => (id(k) && text(x, MITT_I_LANGD) ? text(x, MITT_I_LANGD) : undefined));
+  const avslut = obj(g.avslut), anledning = text(avslut.not, ANLEDNINGENS_LANGD);
   return {
     ...(allaKlasser.length ? { klasser: allaKlasser } : {}),
     ...(Object.keys(kommentar).length ? { kommentar } : {}),
     ...(Object.keys(noter).length ? { noter } : {}),
     ...(Object.keys(gick).length ? { gick } : {}),
     ...(bockat.length ? { bockat } : {}),
+    ...(Object.keys(klassvarden).length ? { klassvarden } : {}),
+    ...(Object.keys(mittI).length ? { mittI, ...(arDatum(g.mittIDag) ? { mittIDag: g.mittIDag } : {}) } : {}),
+    ...(arDatum(avslut.datum) ? { avslut: { datum: avslut.datum, ...(anledning ? { not: anledning } : {}) } } : {}),
     gjorda: [...new Set(lista(g.gjorda).filter(arDatum))].sort(),
     elever,
     ...(g.narvaro === true ? { narvaro: true } : {}),
@@ -2972,6 +3199,22 @@ export function rensaFoljd(f) {
     ...(Object.keys(lankar).length ? { lankar } : {}),
   };
 }
+/**
+ * En tabell per rad och kolumn, som klassernas skattning vecka för vecka eller metodens skattningar per instrument och vecka,
+ * med ett värde satt, eller borttaget med undefined, och raden borttagen när den blir tom (sajtens K-631).
+ * @template T
+ * @param {Record<string, Record<string, T>> | undefined} tabell
+ * @param {string} rad
+ * @param {string} kolumn
+ * @param {T | undefined} varde
+ * @returns {Record<string, Record<string, T>>}
+ */
+export const medVardet = (tabell, rad, kolumn, varde) => {
+  const ut = { ...(tabell ?? {}) }, r = { ...(ut[rad] ?? {}) };
+  if (varde === undefined) delete r[kolumn]; else r[kolumn] = varde;
+  if (Object.keys(r).length) ut[rad] = r; else delete ut[rad];
+  return ut;
+};
 /**
  * Namnen som texterna som lämnar webbläsaren tvättar bort: eleverna i listan och de som har stått i den. Ett namn som
  * lämnar listan sparas med planen, så att det inte följer med texten som kopieras, också i en annan flik som läser listan
@@ -3224,7 +3467,8 @@ export function elevensResultat(plan, resultat) {
     return m && u && iPlanen && typeof varde === 'string' && varde.trim() ? [{ nyckel, rad: u.rad, typ: u.typ, datum: m[2], varde: varde.trim() }] : [];
   }).sort((a, b) => efterDatum(a, b) || a.rad - b.rad);
 }
-const medel = (x) => (x.length ? Math.round((x.reduce((a, b) => a + b, 0) / x.length) * 10) / 10 : null);
+/** Medelvärdet med en decimal, eller inget utan värden: veckornas skattning i Planera insatsen och klassernas i Lär dig metoden (sajtens K-631). @param {number[]} x */
+export const medel = (x) => (x.length ? Math.round((x.reduce((a, b) => a + b, 0) / x.length) * 10) / 10 : null);
 // Skattningarna vecka för vecka i en text, "vecka 1 (v. 45): 2, vecka 2 (v. 46): 3", med veckornas namn ur roten.
 const skattningarna = (s, e) => e.skattningar.map((x) => `${veckansNamn(s.veckor[x.nr - 1]).text}${x.lektion ? `, ${x.lektion}` : ''}: ${x.varde}`).join(', ');
 

@@ -1,0 +1,24 @@
+---
+// Planens huvud, lika i Planera insatsen och Lär dig metoden (K-630): brödsmulan med banken och metoden, rubriken med Beta så
+// länge modulen är en beta, ingressen och raden till den som inte har JavaScript. Det som bara en sida har, som appraden i
+// Planera insatsen, står efter, i sidans eget huvud.
+import { PLANERA } from '../lib/standard/index.js';
+
+interface Props {
+  /** Banken planen hör till, som Stödundervisning eller Metoder. */
+  bank: { namn: string; adress: string };
+  /** Metodens sida och titel. */
+  sida: string;
+  titel: string;
+  /** Sidans namn sist i brödsmulan och dess rubrik. */
+  namn: string;
+  rubrik: string;
+  ingress: string;
+}
+const { bank, sida, titel, namn, rubrik, ingress } = Astro.props;
+---
+
+<p class="meta brodsmula"><a href={bank.adress}>{bank.namn}</a> · <a href={sida}>{titel}</a> · {namn}</p>
+<h1>{rubrik}{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</h1>
+<p class="ingress">{ingress}</p>
+<noscript><p class="pl-utan-js">Planen räknas fram i webbläsaren och behöver JavaScript. Metoden står på <a href={sida}>metodens sida</a>.</p></noscript>

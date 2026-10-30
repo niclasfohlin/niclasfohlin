@@ -1,29 +1,50 @@
 ---
-// Knapparna till en undervisningsmetods filer (K-621), i samma form som Stödundervisning, så att samma sak ser likadan ut
-// överallt (Niclas 2026-10-30: knapparna "saknar symbolen från sajten för pdf och word"). Flera filer står som rader med
-// namnet och filvalet med ikoner (Filval.astro: Drive, Pdf och Word), som nedladdningsrutan på en metodsida. En fil under
-// sitt blad har knappen som skriver ut bladet, direkt under det (Niclas 2026-10-20: "Ha den så nära bladet du ska skriva
-// ut som möjligt"), och Drive och Word bredvid. Knappen skriver ut pdf:en i Chromium på datorn och öppnar den annars
-// (SkrivUtPdf.astro). Bara filer som finns får en knapp (src/lib/undervisningsmetodfiler.ts).
+// Knapparna till en undervisningsmetods filer (K-621), i samma form och med samma ord som Stödundervisning, så att samma
+// sak ser likadan ut och heter likadant överallt (Niclas 2026-10-30: knapparna "saknar symbolen från sajten för pdf och
+// word", och 2026-10-10: samma knapp heter samma sak på varje metodsida). Flera filer står som raderna i Ladda ner och skriv
+// ut (Nedladdning.astro): Skriv ut med Allt och Metoden där knappen ger utskriftsrutan, Allt om metoden, och varje del av den
+// filen som Bara, med filvalet (Filval.astro: Drive, Pdf och Word). En fil under sitt blad har knappen som skriver ut bladet,
+// direkt under det (Niclas 2026-10-20: "Ha den så nära bladet du ska skriva ut som möjligt"), och Drive och Word bredvid;
+// med blad skriver knappen ut bladets egen pdf, och Word är hela filen. bara ger bara knappen, som överst på sidan. Knappen
+// skriver ut pdf:en i Chromium på datorn och öppnar den annars (SkrivUtPdf.astro). Bara filer som finns får en knapp
+// (src/lib/undervisningsmetodfiler.ts).
 import Filval from './Filval.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import type { UmFil, UmSlag } from '../lib/undervisningsmetodfiler';
-interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; stor?: boolean; titel?: string }
-const { id, filer, slag, stor = false, titel = id } = Astro.props;
+interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; bara?: boolean }
+const { id, filer, slag, stor = false, titel = id, blad, bara = false } = Astro.props;
 const valda = slag.map((s) => filer[s]).filter((f): f is UmFil => !!f);
 const bas = (f: UmFil) => (f.pdf ?? f.docx ?? '').replace(/\.(pdf|docx)$/, '');
 const namn = (f: UmFil) => bas(f).split('/').pop() ?? id;
-const kort = (f: UmFil) => f.namn.split(',')[0];
-const iMening = (f: UmFil) => kort(f).charAt(0).toLocaleLowerCase('sv') + kort(f).slice(1);
+const iMening = (t: string) => t.charAt(0).toLocaleLowerCase('sv') + t.slice(1);
+// Knappen som skriver ut: filens pdf, eller bladets egen.
+const en = valda[0];
+const knapp = en && (blad ? { href: blad.pdf, namn: blad.namn, stam: blad.pdf.replace(/^.*\/|\.pdf$/g, '') } : en.pdf ? { href: en.pdf, namn: en.namn, stam: namn(en) } : undefined);
+const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M5.5 7.5v-4h9v4M5.5 14.5h-2v-7h13v7h-2M5.5 11.5h9v5h-9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>';
+const allt = filer.allt;
+const metoden = filer.metoden;
 ---
 {valda.length > 1 ? (
-  <ul class="filrader um-filrader">
-    {valda.map((f) => <li><span class="filrubrik">{f.namn}</span> <Filval fil={bas(f)} namn={namn(f)} rubrik={f.namn} statistik={`${titel}: ${iMening(f)}`} pdf={!!f.pdf} pdfTitel="Ladda ner som pdf" /></li>)}
+  <ul class="filrader">
+    {/* Skriv ut: Allt och Metoden, som i Stödundervisning; raden visas bara där knappen ger utskriftsrutan (SkrivUtPdf.astro),
+        eftersom raderna under har samma pdf:er att öppna. */}
+    {slag.includes('allt') && allt?.pdf && (
+      <li data-bara-direkt hidden>
+        <span class="filrubrik" id={`skriv-ut-${id}`}>Skriv ut</span>{' '}
+        <span class="filval" role="group" aria-labelledby={`skriv-ut-${id}`}>
+          <a href={allt.pdf} target="_blank" rel="noopener" data-skriv-ut-pdf="allt" title="Word-filen med allt som pdf" data-goatcounter-click={`utskrift:${id}`} data-goatcounter-title={`${titel}: utskrift av allt`}><Fragment set:html={skrivareSvg} /><span class="skriv-ut-namn">Allt</span></a>
+          {slag.includes('metoden') && metoden?.pdf && <a href={metoden.pdf} target="_blank" rel="noopener" data-skriv-ut-pdf="metoden" title="Word-filen med bara metoden som pdf" data-goatcounter-click={`utskrift:${id}:metoden`} data-goatcounter-title={`${titel}: utskrift av metoden`}><Fragment set:html={skrivareSvg} /><span class="skriv-ut-namn">Metoden</span></a>}
+        </span>
+      </li>
+    )}
+    {valda.map((f) => <li><span class="filrubrik">{f.rad}</span> <Filval fil={bas(f)} namn={namn(f)} rubrik={f.rad} statistik={`${titel}: ${iMening(f.rad)}`} pdf={!!f.pdf} pdfTitel="Ladda ner som pdf" /></li>)}
   </ul>
-) : valda.length === 1 && (
+) : bara ? (
+  knapp && <a class={stor ? 'knapp' : 'knapp sekundar'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>
+) : en && (
   <p class="um-filknappar">
-    {valda[0].pdf && <a class={stor ? 'knapp' : 'knapp sekundar liten'} href={valda[0].pdf} target="_blank" rel="noopener" data-skriv-ut-pdf data-direkt={`Skriv ut ${iMening(valda[0])}`} data-goatcounter-click={`utskrift:${namn(valda[0])}`} data-goatcounter-title={`${titel}: ${iMening(valda[0])}, utskrift`}>{kort(valda[0])} som pdf</a>}
-    {valda[0].docx && <Filval fil={bas(valda[0])} namn={namn(valda[0])} rubrik={valda[0].namn} statistik={`${titel}: ${iMening(valda[0])}`} liten />}
+    {knapp && <a class={stor ? 'knapp' : 'knapp sekundar liten'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${blad ? knapp.namn : iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>}
+    {en.docx && <Filval fil={bas(en)} namn={namn(en)} rubrik={en.namn} statistik={`${titel}: ${iMening(en.namn)}`} liten />}
   </p>
 )}
 <SkrivUtPdf />

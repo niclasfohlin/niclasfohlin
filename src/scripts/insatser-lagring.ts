@@ -4,7 +4,7 @@
 // någonstans, utom att en plan som pågår säger det till besöksstatistiken med bara metodens namn (pagaende nedan).
 // Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det, och
 // länken till planen är kopian som håller.
-import { arDatum, talText, filnamnet, kodaVal, dagText, gangen, insatsenAvslutad, lasVal, planensSistaDag, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { arDatum, talText, filnamnet, forstaLektionensDag, kodaVal, dagarMellan, larDigetsLaget, datumText, dagText, gangen, insatsenAvslutad, lasVal, planensSistaDag, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -32,8 +32,8 @@ export interface SparadPlan {
   skapad?: string;
   /** Metodens datum när planen gjordes, så att planen kan säga till när metoden har ändrats efteråt. */
   uppdaterad?: string;
-  /** Passen (dag, vecka, nummer och tiden när läraren har satt en), veckorna (nummer, metodens vecka, upprepad, första och sista dagen) och planens sista dag, när uppföljningen efter kommer efter sista passet. */
-  schema: { pass: ([string, number, number] | [string, number, number, string])[]; veckor: [number, number, number, string, string][]; sista?: string };
+  /** Passen (dag, vecka, nummer och tiden när läraren har satt en), veckorna (nummer, metodens vecka, upprepad, första och sista dagen), planens sista dag, när uppföljningen efter kommer efter sista passet, och veckan efter stegen, som läget i Lär dig metoden läser (larDigetsLaget). */
+  schema: { pass: ([string, number, number] | [string, number, number, string])[]; veckor: [number, number, number, string, string][]; sista?: string; efter?: string };
   /** Hur många av planens pass som är bockade, till Dina insatser (Codex 2026-10-24: bockar på dagar som inte längre har pass räknades med). */
   bockade?: number;
 }
@@ -44,9 +44,9 @@ const NYCKEL = 'insatser';
 export const SAMLINGAR = ['stodundervisning', 'metoder'] as const;
 export type Samling = (typeof SAMLINGAR)[number];
 /** Samlingens ord i listan med planerna, på metodens sida och i beskedet efter Öppna planer, en tabell för båda samlingarna (K-628). */
-export const SAMLINGENS_ORD: Record<Samling, { listan: string; din: string; dina: (n: number) => string; enLank: string; flera: string; avslutade: (n: number) => string; lista: string; pagar: string }> = {
-  stodundervisning: { listan: 'Dina insatser', din: 'Din insats', dina: (n) => `Dina insatser · ${n} grupper`, enLank: 'Veckan i planen', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad insats' : `${n} avslutade insatser`), lista: 'Metodbanken: en plan under Dina insatser', pagar: 'Din insats på metodens sida' },
-  metoder: { listan: 'Dina planer', din: 'Din plan', dina: (n) => `Dina planer · ${n}`, enLank: 'Lär dig metoden', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad plan' : `${n} avslutade planer`), lista: 'Metoder: en plan under Dina planer', pagar: 'Din plan på metodens sida' },
+export const SAMLINGENS_ORD: Record<Samling, { led: string; listan: string; din: string; dina: (n: number) => string; enLank: string; flera: string; avslutade: (n: number) => string; lista: string; pagar: string }> = {
+  stodundervisning: { led: 'planera', listan: 'Dina insatser', din: 'Din insats', dina: (n) => `Dina insatser · ${n} grupper`, enLank: 'Veckan i planen', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad insats' : `${n} avslutade insatser`), lista: 'Metodbanken: en plan under Dina insatser', pagar: 'Din insats på metodens sida' },
+  metoder: { led: 'lardig', listan: 'Dina planer', din: 'Din plan', dina: (n) => `Dina planer · ${n}`, enLank: 'Lär dig metoden', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad plan' : `${n} avslutade planer`), lista: 'Metoder: en plan under Dina planer', pagar: 'Din plan på metodens sida' },
 };
 /** Planens samling, med Stödundervisning för en plan utan fältet. */
 export const samlingen = (p: { samling?: unknown }): Samling => (p.samling === 'metoder' ? 'metoder' : 'stodundervisning');
@@ -70,7 +70,7 @@ export function rensaPlan(x: unknown): SparadPlan | null {
   return {
     id: p.id, metod: p.metod, samling: samlingen(p), titel: rentText(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: rentText(p.omrade, 40) } : {}),
     namn: rentText(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 20000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
-    ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(arDatum(p.skapad) ? { skapad: p.skapad } : {}), ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor, ...(arDatum(schema.sista) ? { sista: schema.sista } : {}) },
+    ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(arDatum(p.skapad) ? { skapad: p.skapad } : {}), ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor, ...(arDatum(schema.sista) ? { sista: schema.sista } : {}), ...(arDatum(schema.efter) ? { efter: schema.efter } : {}) },
     ...(heltal(p.bockade) ? { bockade: p.bockade } : {}),
   };
 }
@@ -150,6 +150,8 @@ export function skrivPlaner(planer: SparadPlan[]): boolean {
     return false;
   }
 }
+/** En plan sparas först bland planerna och ersätter planen med samma id, i båda lagren (K-630); false när lagringen inte tar den. */
+export const skrivPlanen = (p: SparadPlan) => skrivPlaner([p, ...lasPlaner().planer.filter((x) => x.id !== p.id)]);
 
 /** Ett nytt id för en plan, sex tecken. Det står i länken, så att samma plan känns igen på en annan enhet. */
 export const nyttId = () => Math.random().toString(36).slice(2, 8).padEnd(6, '0');
@@ -163,11 +165,28 @@ export const nuTid = () => {
   return `${d.getFullYear()}-${tvasiffrigt(d.getMonth() + 1)}-${tvasiffrigt(d.getDate())}T${tvasiffrigt(d.getHours())}:${tvasiffrigt(d.getMinutes())}:${tvasiffrigt(d.getSeconds())}`;
 };
 
+/** När planen senast laddades ner och kopian av dess datum, som båda lagren sparar med planen (K-630). */
+export const kopianOchSchemat = (kopia: string | undefined, plan: Plan, val: Val) => ({ ...(kopia ? { kopia } : {}), schema: schemaAv(plan, val) });
+/** Hur många dagar sedan planen laddades ner, eller inget när den inte har laddats ner, i båda lagren (K-630). */
+export const kopiansAlder = (kopia: string | undefined, idag: string) => (kopia ? dagarMellan(kopia.slice(0, 10), idag) : null);
+/** Dagarna efter en nedladdning då planen påminner om att ladda ner igen, som Safaris sju dagar (granskningen 2026-10-24). */
+export const KOPIANS_GRANS = 7;
+/** När planen senast laddades ner, och att ladda ner igen när filen är äldre än gränsen, i båda lagren (granskningen rot-3, fynd 18). */
+export const kopiansText = (kopia: string, idag: string) => `Planen laddades senast ner ${datumText(kopia.slice(0, 10))}.${(kopiansAlder(kopia, idag) ?? 0) > KOPIANS_GRANS ? ' Ladda ner den igen, så kommer det senaste med.' : ''}`;
+/**
+ * Planen som sparas, i båda lagren (granskningen rot-3, fynd 13): det sidan vet om planen, när den ändrades, när den senast
+ * laddades ner och kopian av dess datum. uppdaterad är metodens datum när planen gjordes, så att planen kan säga till när
+ * metoden har ändrats efteråt.
+ */
+export const sparadPlan = (aktiv: { id: string; val: Val; foljd: Foljd; kopia?: string; uppdaterad?: string }, metod: { id: string; titel: string; uppdaterad?: string }, plan: Plan, egna: Pick<SparadPlan, 'namn' | 'bockade'> & Partial<Pick<SparadPlan, 'samling' | 'omrade' | 'folj' | 'skapad'>>): SparadPlan => ({
+  id: aktiv.id, metod: metod.id, titel: metod.titel, ...egna, val: kodaVal(aktiv.val), foljd: aktiv.foljd, andrad: nuTid(), uppdaterad: aktiv.uppdaterad ?? metod.uppdaterad, ...kopianOchSchemat(aktiv.kopia, plan, aktiv.val),
+});
 /** Kopian av planens datum som sparas med planen, med passets tid när läraren har satt en. */
 export const schemaAv = (plan: Plan, val?: Val): SparadPlan['schema'] => ({
   pass: plan.pass.map((p) => { const tid = val ? passetsTid(val, p) : undefined; return tid ? [p.datum, p.vecka, p.nr, `${tid[0]}`] : [p.datum, p.vecka, p.nr]; }),
   veckor: plan.veckor.map((v) => { const d = veckansDagar(plan, v); return [v.nr, planvecka(plan, v), v.igen ? 1 : 0, d.fran, d.till]; }),
   ...(planensSistaDag(plan) && planensSistaDag(plan) !== plan.sistaPass ? { sista: planensSistaDag(plan) } : {}),
+  ...(plan.efter ? { efter: plan.efter } : {}),
 });
 
 /** "i dag", "i morgon" eller "onsdag 18 november". */
@@ -202,15 +221,22 @@ export function lageAv(p: SparadPlan, idag: string): { text: string; vecka?: num
  * steget i veckan, och efter stegen. Första lektionen är dagen läraren valde, eller den första veckan med lektioner när den
  * dagen är en helg (forstaLektionen i standarden).
  */
+// Lägets värden ur kopian av planen: första lektionen ur dagen läraren valde, stegens måndagar och veckan efter stegen, som
+// sidan läser ur planen (larDigetsLaget i standarden). En kopia utan veckan efter stegen har den veckan efter det sista steget.
+function larDigetsLagetsVarden(p: SparadPlan, veckor = [...p.schema.veckor].sort((a, b) => a[0] - b[0])) {
+  const mandagar = veckor.map((x) => mandagen(x[3]));
+  const start = lasVal(p.val)?.val.start ?? veckor[0]?.[3];
+  return { forsta: mandagar.length && start ? forstaLektionensDag(start, mandagar[0]) : null, mandagar, efter: p.schema.efter ?? (mandagar.length ? plusDagar(mandagar[mandagar.length - 1], 7) : ''), avslutad: !!p.foljd?.avslut };
+}
 function larDigetsLage(p: SparadPlan, idag: string): { text: string; vecka?: number } {
   const veckor = [...p.schema.veckor].sort((a, b) => a[0] - b[0]);
   if (!veckor.length) return { text: 'Planen har inga steg' };
-  if (statusAv(p, idag) === 'avslutad') return { text: 'Stegen och uppföljningen är klara' };
-  const start = lasVal(p.val)?.val.start ?? veckor[0][3];
-  const forsta = start > mandagen(veckor[0][3]) ? start : mandagen(veckor[0][3]);
-  if (idag < forsta) return { text: `Före. Första lektionen ${narText(forsta, idag)}` };
-  const v = veckor.find((x) => idag <= plusDagar(mandagen(x[3]), 6));
-  return v ? { text: `Steg ${v[1]}${v[2] ? ', en vecka till' : ''}`, vecka: v[0] } : { text: 'Efter stegen' };
+  // En plan som läraren har avslutat säger när (K-631). Märket Avslutad står före texten (statusAv).
+  if (p.foljd?.avslut) return { text: `Du avslutade planen ${narText(p.foljd.avslut.datum, idag)}` };
+  const varden = larDigetsLagetsVarden(p, veckor), l = larDigetsLaget(varden, idag);
+  if (l.fas === 'fore') return { text: varden.forsta ? `Före. Första lektionen ${narText(varden.forsta, idag)}` : 'Före' };
+  const v = l.vecka ? veckor[l.vecka - 1] : undefined;
+  return l.fas === 'under' && v ? { text: `Steg ${v[1]}${v[2] ? ', en vecka till' : ''}`, vecka: v[0] } : { text: 'Efter stegen' };
 }
 
 /** Dagen för planens nästa pass från och med i dag, eller 9999 när planen är slut: planerna ordnas efter den. */
@@ -223,6 +249,9 @@ export const nastaPassAv = (p: SparadPlan, idag: string) => p.schema.pass.map((x
 export type Status = 'pagaende' | 'kommande' | 'avslutad';
 export const STATUSNAMN: Record<Status, string> = { pagaende: 'Pågående', kommande: 'Kommande', avslutad: 'Avslutad' };
 export function statusAv(p: SparadPlan, idag: string): Status {
+  // En plan i Lär dig metoden har läget ur samma regel som sidan: Kommande i Före, Avslutad när läraren har avslutat den, och
+  // annars Pågående, också efter stegen, där läraren skattar vidare (K-631; granskningen rot-3, fynd 3).
+  if (samlingen(p) === 'metoder') return larDigetsLaget(larDigetsLagetsVarden(p), idag).lage;
   const datum = p.schema.pass.map((x) => x[0]).sort();
   if (!datum.length || insatsenAvslutad(datum[datum.length - 1], p.foljd?.utvardering?.beslut, idag, p.foljd?.oppen, p.schema.sista)) return 'avslutad';
   return datum[0] > idag ? 'kommande' : 'pagaende';
@@ -280,6 +309,9 @@ export const goatcounter = () => (window as { goatcounter?: { count?: (v: object
 const PAGAR = 'insatser-pagar';
 export const PAGAR_HOGST = 3;
 /** Händelserna för planerna som pågår den här veckan, med planens id, i en fast ordning så att numret står kvar veckan ut. */
+// Statistikens regel för en plan som pågår är en avsiktligt annan än märket Pågående (statusAv): statistiken räknar veckorna
+// med pass, från måndagen i första passets vecka till söndagen i sista, och inte veckorna efter, när insatsen väntar på
+// utvärderingen (granskningen rot-3, fynd 20).
 export function pagaendeHandelser(planer: SparadPlan[], idag: string): { id: string; path: string; title: string }[] {
   const perMetod = new Map<string, number>();
   const ut: { id: string; path: string; title: string }[] = [];
@@ -429,6 +461,18 @@ export const APPENS_PLANER = 'Planerna finns bara i appen. Tar du bort appen, f�
 /** Filerna ur ett filfält, som töms, så att samma fil går att välja igen. */
 export const valdaFiler = (e: Event) => { const input = e.target as HTMLInputElement; const filer = [...(input.files ?? [])]; input.value = ''; return filer; };
 
+/**
+ * Planen ur filfältet Öppna en nedladdad plan, en rot för båda lagren (K-630): flera filer eller en zip sparas och sidan laddas
+ * om med beskedet (oppnaPlanerna), och en fil läses med lasPlanfilerna. Inget när inget valdes eller sidan laddas om, och
+ * { last: null } när filen inte är en plan.
+ */
+export async function planenUrFaltet(e: Event, nyckel: string, samling: Samling = 'stodundervisning'): Promise<{ last: { plan: SparadPlan; varningar: string[] } | null } | null> {
+  const filer = valdaFiler(e);
+  if (!filer.length) return null;
+  if (filer.length > 1 || /\.zip$/i.test(filer[0].name)) { await oppnaPlanerna(filer, nyckel, samling); return null; }
+  const { planer } = await lasPlanfilerna(filer);
+  return { last: planer[0] ?? null };
+}
 /** Planerna ur filerna sparas, och sidan laddas om med beskedet under nyckeln, en rot för metoden och Stödundervisning. */
 export async function oppnaPlanerna(filer: File[], nyckel: string, samling: Samling = 'stodundervisning') {
   const { planer, inte } = await lasPlanfilerna(filer);

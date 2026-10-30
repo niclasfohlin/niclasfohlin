@@ -1,0 +1,16 @@
+---
+// Modulens namn och version sist i planens sida, lika i Planera insatsen och Lär dig metoden (K-630): Beta så länge modulen är
+// en beta, och modulens namn och version ur standarden (PLANERA). Sidans egen text om modulen står i komponentens slot.
+import { PLANERA } from '../lib/standard/index.js';
+
+interface Props {
+  /** Det som står före modulens namn, som Lär dig metoden. */
+  fore?: string;
+}
+const { fore } = Astro.props;
+---
+
+<footer class="pl-version">
+  <p class="pl-version-namn">{PLANERA.beta && <span class="beta">Beta</span>}{' '}{fore ? `${fore}, ` : ''}{PLANERA.namn} {PLANERA.version}</p>
+  <slot />
+</footer>

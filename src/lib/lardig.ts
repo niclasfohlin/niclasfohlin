@@ -2,8 +2,8 @@
 // visar ur metodens fil, som JSON till sidans skript (src/scripts/lardig.ts), och bygget stannar på en metod vars plan inte
 // går att räkna. Motorn och allt som räknar står i standarden (src/lib/standard/plan.js, under Lär dig metoden), och
 // formen och faserna i underlag/prov/metoder/PLANERA-LAGRET.md och riggens standard för undervisningsmetoder, avsnitt 16.
-import { metodplan, rentText } from './standard/index.js';
-import { metodensAdress, type Um } from './undervisningsmetod';
+import { dagAv, rentText, somLista } from './standard/index.js';
+import { metodensAdress, UM_NAMN, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import { metodensFiler } from './undervisningsmetodfiler';
 
 /** Planens data, som sidan bär som JSON och skriptet räknar med. */
@@ -41,6 +41,9 @@ export interface LarDigData {
   lasvag: { namn: string; adress: string }[];
   /** Filernas adresser när filen finns, och annars stället på metodens sida där materialet står. */
   filer: { lektionskort: { adress: string; fil: boolean }; planeringsmall: { adress: string; fil: boolean }; materialet: { adress: string; fil: boolean }; observation: { adress: string; fil: boolean } };
+  /** Metodens När det glider och stödet för elever som behöver mer, när metoden har dem, som Mitt i hänvisar till (K-631). */
+  glider?: string;
+  stod?: { rubrik: string; adress: string };
 }
 
 // Läsvägen före första lektionen (PLANERA-LAGRET.md under Lärarens väg, och K-628): avsnitten på metodens sida, med ankarna
@@ -54,61 +57,50 @@ const LASVAGEN = [
 ];
 
 const strang = (x: unknown) => (typeof x === 'string' ? x : '');
-const lista = (x: unknown): unknown[] => (Array.isArray(x) ? x : []);
-const iso = (d: unknown) => (d instanceof Date ? d.toISOString().slice(0, 10) : strang(d).slice(0, 10));
 
 /** Har metoden Lär dig metoden? En undervisningsmetod med lärarens skattningar i plan.skattningar. */
-export const harLarDig = (d: Um) => lista(d.plan?.skattningar).some((x) => (x as { vem?: string })?.vem === 'lararen');
+export const harLarDig = (d: Um) => somLista(d.plan?.skattningar).some((x) => (x as { vem?: string })?.vem === 'lararen');
 
 /** Planens data ur metodens fil. */
 export function larDigData(id: string, d: Um): LarDigData {
   const sida = metodensAdress(id);
-  const kallor = new Map(lista(d.kallor).map((k) => [strang((k as { id?: string }).id), k as { titel?: string; text?: string; adress?: string }]));
+  const kallor = new Map(somLista(d.kallor).map((k) => [strang((k as { id?: string }).id), k as { titel?: string; text?: string; adress?: string }]));
   const filer = metodensFiler(id);
   const fil = (slag: 'lektionskort' | 'planeringsmall' | 'materialet' | 'observation', ankare: string) => { const f = filer[slag]; return f?.pdf || f?.docx ? { adress: (f.pdf ?? f.docx)!, fil: true } : { adress: `${sida}#${ankare}`, fil: false }; };
   return {
-    id, titel: d.titel, sida, uppdaterad: iso(d.uppdaterad), tid: d.tid, period: d.period,
-    progression: { text: strang(d.progression?.text) || undefined, rader: lista(d.progression?.rader).map((r) => { const x = r as Record<string, unknown>; return { vecka: String(x.vecka ?? ''), rubrik: strang(x.rubrik), fokus: strang(x.fokus) || undefined, eleverna: strang(x.eleverna) || undefined, roll: strang(x.roll) || undefined, vidare: strang(x.vidare) || undefined, fraga: strang(x.fraga) || undefined }; }) },
-    uppfoljning: { text: strang(d.uppfoljning?.text) || undefined, rader: lista(d.uppfoljning?.rader).map((r) => { const x = r as Record<string, unknown>; return { ...(x.id ? { id: String(x.id) } : {}), nar: strang(x.nar), tid: strang(x.tid), vad: strang(x.vad) }; }) },
-    skattningar: lista(d.plan?.skattningar).filter((x) => (x as { vem?: string })?.vem === 'lararen').map((s) => { const x = s as Record<string, any>; return { namn: strang(x.namn), vem: 'lararen' as const, rad: strang(x.rad), ...(x.text ? { text: strang(x.text) } : {}), skala: { fran: Number(x.skala?.fran), till: Number(x.skala?.till) }, regler: lista(x.regler).map((r) => ({ om: strang((r as { om?: string }).om), rad: strang((r as { rad?: string }).rad) })) }; }),
-    passen: lista(d.plan?.passen).map((p) => { const x = p as Record<string, unknown>; return { nar: strang(x.nar), ...(x.kort ? { kort: strang(x.kort) } : {}), text: strang(x.text) }; }),
-    fore: lista(d.plan?.fore).map(strang).filter(Boolean),
-    utvardering: lista(d.plan?.utvardering).map(strang).filter(Boolean),
-    rutiner: lista(d.rutiner?.rader).map((r) => { const x = r as Record<string, unknown>; return { namn: strang(x.namn), vecka: Number(x.vecka), vad: strang(x.vad), steg: lista(x.steg).map(strang).filter(Boolean), ...(x.forsta ? { forsta: strang(x.forsta) } : {}) }; }),
-    checklista: { rubrik: strang(d.checklista?.rubrik) || 'Före första lektionen', punkter: lista(d.checklista?.punkter).map(strang).filter(Boolean) },
-    material: lista(d.material).map(strang).filter(Boolean),
+    id, titel: d.titel, sida, uppdaterad: dagAv(d.uppdaterad), tid: d.tid, period: d.period,
+    progression: { text: strang(d.progression?.text) || undefined, rader: somLista(d.progression?.rader).map((r) => { const x = r as Record<string, unknown>; return { vecka: String(x.vecka ?? ''), rubrik: strang(x.rubrik), fokus: strang(x.fokus) || undefined, eleverna: strang(x.eleverna) || undefined, roll: strang(x.roll) || undefined, vidare: strang(x.vidare) || undefined, fraga: strang(x.fraga) || undefined }; }) },
+    uppfoljning: { text: strang(d.uppfoljning?.text) || undefined, rader: somLista(d.uppfoljning?.rader).map((r) => { const x = r as Record<string, unknown>; return { ...(x.id ? { id: String(x.id) } : {}), nar: strang(x.nar), tid: strang(x.tid), vad: strang(x.vad) }; }) },
+    skattningar: somLista(d.plan?.skattningar).filter((x) => (x as { vem?: string })?.vem === 'lararen').map((s) => { const x = s as Record<string, any>; return { namn: strang(x.namn), vem: 'lararen' as const, rad: strang(x.rad), ...(x.text ? { text: strang(x.text) } : {}), skala: { fran: Number(x.skala?.fran), till: Number(x.skala?.till) }, regler: somLista(x.regler).map((r) => ({ om: strang((r as { om?: string }).om), rad: strang((r as { rad?: string }).rad) })) }; }),
+    passen: somLista(d.plan?.passen).map((p) => { const x = p as Record<string, unknown>; return { nar: strang(x.nar), ...(x.kort ? { kort: strang(x.kort) } : {}), text: strang(x.text) }; }),
+    fore: somLista(d.plan?.fore).map(strang).filter(Boolean),
+    utvardering: somLista(d.plan?.utvardering).map(strang).filter(Boolean),
+    rutiner: somLista(d.rutiner?.rader).map((r) => { const x = r as Record<string, unknown>; return { namn: strang(x.namn), vecka: Number(x.vecka), vad: strang(x.vad), steg: somLista(x.steg).map(strang).filter(Boolean), ...(x.forsta ? { forsta: strang(x.forsta) } : {}) }; }),
+    checklista: { rubrik: strang(d.checklista?.rubrik) || 'Före första lektionen', punkter: somLista(d.checklista?.punkter).map(strang).filter(Boolean) },
+    material: somLista(d.material).map(strang).filter(Boolean),
     ...(d.film ? { film: { rubrik: strang(d.film.rubrik) || 'Filmen', ...(d.film.ingress ? { ingress: strang(d.film.ingress) } : {}) } } : {}),
-    forbered: { text: strang(d.uppdrag?.forbered?.text) || undefined, fragor: lista(d.uppdrag?.forbered?.fragor).map(strang).filter(Boolean) },
-    reflektera: lista(d.uppdrag?.reflektera).map(strang).filter(Boolean),
-    karna: lista(d.karna?.komponenter).map((k) => { const x = k as Record<string, unknown>; return { namn: strang(x.namn), kvar: strang(x.kvar), ...(x.kryss ? { kryss: strang(x.kryss) } : {}) }; }).filter((k) => k.namn && k.kvar),
-    larandet: { rubrik: strang(d.larandet?.rubrik) || 'Så syns lärandet i klassen', rader: lista(d.larandet?.omraden).map((x) => strang((x as { syns?: string }).syns)).filter(Boolean) },
-    hallFast: { rubrik: strang(d.hallFast?.rubrik) || 'Fem saker att hålla fast vid', rader: lista(d.hallFast?.rader).map((r) => ({ sak: strang((r as { sak?: string }).sak), text: strang((r as { text?: string }).text) })).filter((r) => r.sak) },
-    lasMer: lista(d.lasMer).map((l) => {
+    forbered: { text: strang(d.uppdrag?.forbered?.text) || undefined, fragor: somLista(d.uppdrag?.forbered?.fragor).map(strang).filter(Boolean) },
+    reflektera: somLista(d.uppdrag?.reflektera).map(strang).filter(Boolean),
+    karna: somLista(d.karna?.komponenter).map((k) => { const x = k as Record<string, unknown>; return { namn: strang(x.namn), kvar: strang(x.kvar), ...(x.kryss ? { kryss: strang(x.kryss) } : {}) }; }).filter((k) => k.namn && k.kvar),
+    larandet: { rubrik: strang(d.larandet?.rubrik) || 'Så syns lärandet i klassen', rader: somLista(d.larandet?.omraden).map((x) => strang((x as { syns?: string }).syns)).filter(Boolean) },
+    hallFast: { rubrik: strang(d.hallFast?.rubrik) || 'Fem saker att hålla fast vid', rader: somLista(d.hallFast?.rader).map((r) => ({ sak: strang((r as { sak?: string }).sak), text: strang((r as { text?: string }).text) })).filter((r) => r.sak) },
+    lasMer: somLista(d.lasMer).map((l) => {
       const x = l as Record<string, any>;
       const k = x.kalla ? kallor.get(strang(x.kalla)) : undefined;
       // En post ur referenslistan har källans titel och adress, och upphovet är referensens namn före året.
       const upphov = x.upphov ? strang(x.upphov) : k?.text ? rentText(strang(k.text).split(/\s\(\d{4}/)[0], 120) : undefined;
       return { titel: strang(x.titel) || strang(k?.titel), ...(upphov ? { upphov } : {}), ...(x.ar ? { ar: Number(x.ar) } : {}), ...(x.adress || k?.adress ? { adress: strang(x.adress) || strang(k?.adress) } : {}), text: strang(x.text), ...(x.slag ? { slag: strang(x.slag) } : {}) };
     }).filter((l) => l.titel),
-    // Ett namn i ett ord, som Stegen, är bara saken med stor bokstav, så att "skriv stegen" inte blir en länk.
-    saker: [
-      ...lista(d.ramar?.ramar).map((r) => strang((r as { rubrik?: string }).rubrik)).filter(Boolean).map((namn) => ({ namn, ...(/\s/.test(namn) ? {} : { versal: true }), adress: `${sida}#materialet-for-klassen` })),
-      { namn: 'Lektionskortet', adress: fil('lektionskort', 'materialet').adress }, { namn: 'Planeringsmallen', adress: fil('planeringsmall', 'planeringsmallen').adress }, { namn: 'Observationsmallen', adress: fil('observation', 'observationsmallen').adress },
-    ],
+    // Metodens saker som på metodens sida (undervisningsmetodensSaker), med samma namn och ankare, så att checklistans blad
+    // leder dit metodens sida leder (granskningen rot-3, fynd 6). Lektionskortet, planeringsmallen och observationsmallen leder
+    // till sin fil när den finns.
+    saker: undervisningsmetodensSaker(d, id).map((s) => { const slag = s.namn === UM_NAMN.lektionskort ? 'lektionskort' : s.namn === UM_NAMN.planeringsmall ? 'planeringsmall' : s.namn === UM_NAMN.observation ? 'observation' : null; const f = slag ? fil(slag, '') : null; return { ...s, adress: f?.fil ? f.adress : s.adress }; }),
     lasvag: LASVAGEN.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })),
     filer: { lektionskort: fil('lektionskort', 'materialet'), planeringsmall: fil('planeringsmall', 'planeringsmallen'), materialet: fil('materialet', 'materialet-for-klassen'), observation: fil('observation', 'observationsmallen') },
+    // När det glider står på metodens sida när metoden har det svåraste, fallgroparna eller det du håller fast vid, och stödet
+    // när metoden har det (src/components/Undervisningsmetod.astro).
+    ...(d.hinder || somLista(d.fallgropar?.rader).length || d.hallFast ? { glider: `${sida}#nar-det-glider` } : {}),
+    ...(d.stod?.rubrik ? { stod: { rubrik: strang(d.stod.rubrik), adress: `${sida}#mer-stod` } } : {}),
   };
 }
 
-/**
- * Felen som stoppar bygget: en plan som motorn inte kan räkna, och det Lär dig metoden behöver i metoden, stegen med det
- * eleverna lär sig, lärarens drag och när läraren går vidare, och lärarens skattningar med en skala.
- */
-export function larDigFel(data: LarDigData): string[] {
-  const { fel } = metodplan({ tid: data.tid, period: data.period, progression: data.progression, uppfoljning: data.uppfoljning, plan: { passen: data.passen, skattningar: data.skattningar } });
-  const egna: string[] = [];
-  if (!data.progression.rader.length) egna.push('Metoden har ingen progression, och Lär dig metoden tar ett steg i taget ur den.');
-  data.progression.rader.forEach((r, i) => { if (!r.rubrik || !r.eleverna || !r.roll) egna.push(`Progressionens rad "${r.vecka}" behöver rubrik, eleverna och roll.`); if (!r.vidare && i < data.progression.rader.length - 1) egna.push(`Progressionens rad "${r.vecka}" behöver vidare, som blir frågan Gick det?.`); });
-  if (!data.skattningar.length) egna.push('Metoden har inga skattningar med vem: lararen i plan.skattningar.');
-  return [...fel, ...egna].map((x) => `${data.titel}: ${x}`);
-}

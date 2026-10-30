@@ -38,6 +38,8 @@ export const kapaVidOrd = (t, max) => {
  * @param {unknown} x
  * @param {number} max
  */
+/** En lista, eller en tom lista när värdet inte är en, som det läraren har fört in eller en metods fält (sajtens K-630: samma rad stod i rensaFoljd och i sajtens Lär dig metoden). @param {unknown} x @returns {unknown[]} */
+export const somLista = (x) => (Array.isArray(x) ? x : []);
 export const rentText = (x, max) => (typeof x === 'string' ? kapaVidOrd(x.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim(), max) : '');
 /** Namnets första led, före kolon: "Lärarhandledningen" ur "Lärarhandledningen: Läs mellan raderna". @param {string} s */
 export const forstaLedet = (s) => s.split(':')[0].trim();
@@ -97,6 +99,10 @@ const TIOTAL = ['', '', 'tjugo', 'trettio', 'fyrtio', 'femtio', 'sextio', 'sjutt
 export const ORDNINGSTAL = Object.freeze(['', 'första', 'andra', 'tredje', 'fjärde', 'femte', 'sjätte', 'sjunde', 'åttonde', 'nionde', 'tionde']);
 /** Ett tal i ord upp till tolv, som i löptext, och annars med siffror. @param {number} n @param {boolean} [en] "en" i stället för "ett" */
 export const talText = (n, en = false) => (n === 1 && en ? 'en' : Number.isInteger(n) && n >= 0 && n <= 12 ? ENTAL[n] : String(n));
+/** Ett antal med ett ord av utrum i ord, som "en vecka", "två veckor" och "tre dagar" (granskningen rot-3, fynd 11). @param {number} n @param {string} en @param {string} flera */
+export const antalText = (n, en, flera) => `${talText(n, true)} ${n === 1 ? en : flera}`;
+/** Ett antal veckor i ord: "en vecka", "två veckor". @param {number} n */
+export const veckorText = (n) => antalText(n, 'vecka', 'veckor');
 /** "båda" för två och "alla tre" för fler. @param {number} n */
 export const allaAntal = (n) => (n === 2 ? 'båda' : `alla ${talText(n)}`);
 /** Ett tal ur siffror eller ord, också "en" och sammansatta som "tjugofem"; NaN när texten inte är ett tal. @param {string} s */

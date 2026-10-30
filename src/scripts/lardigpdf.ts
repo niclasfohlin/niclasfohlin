@@ -1,10 +1,11 @@
-// Sammanställningen i Lär dig metoden som pdf (K-628), lärarens utveckling att ta med till arbetslaget: metoden, lärarens
-// mål, klasserna, stegen med antalet veckor, de två skattningarnas linjer vecka för vecka på skalan 1 till 10 med regelns
-// råd när en regel slog till, och kommentarerna i veckans ordning, med klassernas under sin vecka. Pdf:en görs i
-// webbläsaren med samma byggstenar som Planera insatsens sammanställning (dokument i src/scripts/planpdf.ts), med pdf-lib,
-// som hämtas först när läraren trycker, och den lämnar aldrig enheten. Allt som räknas kommer ur standardens
-// larDigSammanstallning, som sidan visar.
-import { datumspann, datumText, granslinjensText, isoVecka, kalendervecka, larDigetsRegler, liten, mening, plusDagar, skalansAndar, skattningensGranser, talText, uppraknat, type LarDigSammanstallning } from '../lib/standard/index.js';
+// Sammanställningen i Lär dig metoden som pdf (K-628), lärarens utveckling att ta med till arbetslaget: metoden, avslutet när
+// läraren har avslutat planen, lärarens mål, klasserna, stegen med antalet veckor, de två skattningarnas linjer vecka för vecka
+// på skalan 1 till 10 med regelns råd när en regel slog till, klasserna vecka för vecka med sitt snitt, svaren Mitt i (K-631),
+// och kommentarerna i veckans ordning, med klassernas under sin vecka. Pdf:en görs i webbläsaren med samma byggstenar som
+// Planera insatsens sammanställning (dokument i src/scripts/planpdf.ts), med pdf-lib, som hämtas först när läraren trycker,
+// och den lämnar aldrig enheten. Allt som räknas och varje mening som också står på sidan kommer ur standarden
+// (larDigSammanstallning och texterna under Lär dig metoden i src/lib/standard/plan.js).
+import { datumspann, decimal, gickDetSvaret, SKATTNINGARNAS_GRANS, klassernasSkalaText, larDigetsAvslutText, larDigetsKvar, larDigetsRegler, lovetsText, mening, mittIFragan, skalansAndar, skalansAndarText, skattningensGranser, skolveckan, granslinjensText, stegetsRad, uppraknat, type LarDigSammanstallning } from '../lib/standard/index.js';
 import { dokument } from './planpdf';
 
 export interface LarDigPdfInfo {
@@ -21,23 +22,23 @@ export interface LarDigPdfInfo {
   uppfoljning: { nar: string; vad: string }[];
 }
 
-const veckorna = (n: number) => (n === 1 ? 'en vecka' : `${talText(n)} veckor`);
 
 /** Lärarens sammanställning som pdf. */
 export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, idag: string): Promise<Uint8Array> {
   const p = await dokument(`Lär dig metoden: ${info.metod}`, 'Lär dig metoden, niclasfohlin.se');
-  p.text('Lär dig metoden', { storlek: 20, fet: true, luft: 2 });
-  p.text(info.metod, { storlek: 13, fet: true, luft: 2 });
-  // Perioden till och med veckan läraren är i, så att veckor som inte har varit inte står med.
-  const forsta = s.veckor[0]?.mandag, sista = s.veckor.filter((v) => v.mandag <= idag).at(-1)?.mandag;
-  p.text(`${forsta && sista ? `${datumspann(forsta, plusDagar(sista, 4))}. ` : ''}Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
+  // Perioden till och med veckan läraren är i, eller veckan läraren avslutade planen (s.dag), så att veckor som inte har varit
+  // inte står med.
+  const forsta = s.veckor[0]?.mandag, sista = s.veckor.filter((v) => v.mandag <= s.dag).at(-1)?.mandag;
+  p.huvudet('Lär dig metoden', info.metod, forsta && sista ? datumspann(forsta, skolveckan(sista).till) : '', idag);
+  if (s.avslut) { p.rubrik('Avslutet', 30); p.text(larDigetsAvslutText(s.avslut), { luft: 2 }); }
   if (s.mal) { p.rubrik('Ditt mål', 30); p.text(mening(s.mal), { luft: 2 }); }
   if (info.klasser.length) { p.rubrik('Klasserna', 30); p.text(mening(uppraknat(info.klasser)), { luft: 2 }); }
   p.rubrik('Stegen', 60);
   // Stegen som läraren har tagit, med det som pågår, och stegen som är kvar på en rad (larDigSammanstallning).
-  if (s.stegen.length) p.tabell(s.stegen.map((x) => ({ etikett: `Steg ${x.innehall}`, text: `${x.steg !== null ? `${info.steg[x.steg] ?? ''}, ` : ''}${x.pagar ? `pågår, ${veckorna(x.veckor)} hittills` : veckorna(x.veckor)}.` })), { etikett: 50 });
-  if (s.kvar.length) p.text(`Kvar: ${uppraknat(s.kvar.map((x) => (x.steg !== null ? info.steg[x.steg] ?? '' : String(x.innehall))))}.`, { luft: 4 });
-  if (s.lov.length) p.text(`Lov ${uppraknat(s.lov.map((m) => kalendervecka(isoVecka(m).vecka)))}.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+  for (const x of s.stegen) p.text(stegetsRad(x, info.steg), { luft: 2 });
+  const kvar = larDigetsKvar(s, info.steg);
+  if (kvar) p.text(kvar, { luft: 4 });
+  if (s.lov.length) p.not(lovetsText(s.lov));
   const etiketter = s.veckor.map((v) => v.namn);
   // Rubriken står på samma sida som skalans rad och linjen under den. Linjen har sidans hela bredd, skalans ändar står före
   // den och den streckade linjen förklaras under den (de kalla läsarna 2026-10-30).
@@ -45,24 +46,36 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
     p.rubrik(l.namn, 150);
     if (!l.varden.some((x) => x !== undefined)) { p.text('Inte skattad än.', { luft: 4 }); continue; }
     const andar = skalansAndar(l.namn, j);
-    p.text(andar ? `${l.skala.fran} är ${liten(andar.lagst)} och ${l.skala.till} är ${liten(andar.hogst)}, vecka för vecka.` : `${l.skala.fran} till ${l.skala.till}, vecka för vecka.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+    p.not(andar ? `${skalansAndarText(l.skala, andar)}, vecka för vecka.` : `${l.skala.fran} till ${l.skala.till}, vecka för vecka.`);
     p.linje(l.varden, etiketter, { fran: l.skala.fran, till: l.skala.till, granser: skattningensGranser(l), hojd: 80, full: true });
-    if (granslinjensText(l.regler)) p.text(granslinjensText(l.regler), { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+    if (granslinjensText(l.regler)) p.not(granslinjensText(l.regler));
     const regler = larDigetsRegler({ ...s, linjer: [l] }, info.uppfoljning);
     if (!regler.length) continue;
-    for (const r of regler) p.text(mening(r), { luft: 2 });
-    // Regelns råd ur metodens uppföljning, en gång för varje regel som slog till.
-    const rader = [...new Set(l.galler.flatMap((g) => (g.length ? [l.regler[g[0]].rad] : [])))];
+    for (const r of regler) p.text(mening(r.text), { luft: 2 });
+    // Regelns råd ur metodens uppföljning, en gång för varje regel som slog till, som på sidan.
+    const rader = [...new Set(regler.map((r) => r.rad))];
     p.tabell(rader.map((r) => ({ etikett: info.uppfoljning[r]?.nar ?? '', text: mening(info.uppfoljning[r]?.vad ?? '') })));
   }
-  const kommentarer = s.veckor.filter((w) => w.kommentar || w.noter.length || (w.gick && !w.efter));
+  // Klasserna vecka för vecka (klassernasTabell), med talet i varje ruta och klassens snitt sist, som på sidan.
+  if (s.klasstabell.rader.length) {
+    p.rubrik('Klasserna vecka för vecka', 80);
+    p.not(klassernasSkalaText());
+    p.matris(s.klasstabell.veckor.map((i) => s.veckor[i].namn), s.klasstabell.rader.map((r) => ({ namn: r.namn, varden: r.varden, sist: r.snitt === null ? '' : decimal(r.snitt) })), { sist: 'Snitt' });
+  }
+  // Svaren Mitt i, under en rubrik med klassen.
+  for (const x of s.mittSvar) {
+    p.rubrik(`Mitt i: ${x.namn}`, 50);
+    if (x.hittills) p.not(x.hittills);
+    p.text(mittIFragan(x.namn), { fet: true, luft: 1 });
+    p.text(mening(x.text), { luft: 6 });
+  }
   // Veckan med stegets namn, och under den svaret på Gick det?, veckans kommentar och en rad för varje klass.
-  if (kommentarer.length) {
+  if (s.kommenterade.length) {
     p.rubrik('Kommentarerna', 50);
-    for (const w of kommentarer) {
+    for (const w of s.kommenterade) {
       p.text(`${w.namn.Text}${w.steg !== null && info.steg[w.steg] ? `, ${info.steg[w.steg]}` : ''}`, { fet: true, luft: 1 });
       const fraga = w.steg !== null ? info.fragor[w.steg] : '';
-      const rader = [w.gick && !w.efter ? `${fraga || 'Gick det?'} ${w.gick === 'ja' ? 'Ja.' : 'Inte än.'}` : '', w.kommentar ? mening(w.kommentar) : '', ...w.noter.map((x) => `${x.namn}: ${mening(x.text)}`)].filter(Boolean);
+      const rader = [w.gick && !w.efter ? gickDetSvaret(fraga, w.gick) : '', w.kommentar ? mening(w.kommentar) : '', ...w.noter.map((x) => `${x.namn}: ${mening(x.text)}`)].filter(Boolean);
       rader.forEach((r, i) => p.text(r, { x: 62, luft: i === rader.length - 1 ? 8 : 1 }));
     }
   }
@@ -71,6 +84,6 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
     p.rubrik('Frågorna på mötet', 60);
     info.reflektera.forEach((x, i) => p.text(`${i + 1}. ${x}`, { luft: i === info.reflektera.length - 1 ? 8 : 2 }));
   }
-  p.text('Skattningarna är dina egna och stöder dina beslut vecka för vecka. En förändring i dem visar inte metodens effekt.', { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+  p.not(SKATTNINGARNAS_GRANS);
   return p.avsluta(`${info.metod} · Lär dig metoden på niclasfohlin.se · lärarens egen plan, sparas inte på sajten`);
 }

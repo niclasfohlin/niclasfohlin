@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { arDelensTid, utanFogar, versionsform, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { arDelensTid, dagAv, utanFogar, versionsform, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
@@ -474,7 +474,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
   // En kurs med veckor har veckans titel i metoden, och den är veckans rubrik i planen när progressionen inte har en egen.
   const kurs = kursensVeckor(d, m.id, version);
   const bank = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? await planensBank(m) : undefined;
-  const uppdaterad = d.uppdaterad ? (d.uppdaterad instanceof Date ? d.uppdaterad.toISOString().slice(0, 10) : String(d.uppdaterad).slice(0, 10)) : undefined;
+  const uppdaterad = d.uppdaterad ? dagAv(d.uppdaterad) : undefined;
   const passet = planensPass(d, m.id, iV);
   const fastnar = [
     ...(d.fastnar ? [{ rubrik: d.fastnar.rubrik, adress: `${sida}#fastnar` }] : []),

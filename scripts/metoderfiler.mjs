@@ -15,6 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { parse } from 'yaml';
 import sharp from 'sharp';
+import { slugAv } from '../src/lib/standard/index.js';
 
 const ROT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const RIGG = process.env.METODRIGG ?? 'C:/metodrigg';
@@ -34,12 +35,12 @@ const klipp = (pdf, fran, till, ut) => {
   const r = spawnSync('python', ['-I', '-c', `import pikepdf,sys\nsrc=pikepdf.open(sys.argv[1])\nny=pikepdf.new()\nfor i in range(int(sys.argv[2])-1,int(sys.argv[3])): ny.pages.append(src.pages[i])\nny.save(sys.argv[4], deterministic_id=True)`, pdf, String(fran), String(till), ut], { encoding: 'utf8' });
   if (r.status !== 0) throw new Error(`klippet ${ut}: ${r.stderr}`);
 };
-// Bilderna av sidorna, 420 punkter breda, som palett-PNG.
-const bilder = async (pdf, stam) => {
+// Bilderna av sidorna, 420 punkter breda, som palett-PNG, från sidan fran (materialets blad, utan textsidan före dem).
+const bilder = async (pdf, stam, fran = 1) => {
   for (const f of readdirSync(UT)) if (f.startsWith(`${stam}-`) && /-\d+\.png$/.test(f)) rmSync(join(UT, f));
   const tmp = join(ROT, 'node_modules', '.cache', 'metoderfiler');
   mkdirSync(tmp, { recursive: true });
-  spawnSync('pdftoppm', ['-png', '-r', '72', pdf, join(tmp, 'sida')]);
+  spawnSync('pdftoppm', ['-png', '-r', '72', '-f', String(fran), pdf, join(tmp, 'sida')]);
   const sidor = readdirSync(tmp).filter((f) => f.startsWith('sida')).sort();
   for (const [i, f] of sidor.entries()) {
     await sharp(join(tmp, f)).resize({ width: 840 }).png({ compressionLevel: 9, palette: true, colours: 96 }).toFile(join(UT, `${stam}-${i + 1}.png`));
@@ -78,6 +79,21 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   const stam = (slag) => (slag === 'allt' ? id : `${id}-${slag}`);
   if (!kontrollera) for (const f of filer) copyFileSync(f.kalla, join(UT, `${stam(f.slag)}.${f.typ}`));
 
+  // Bladen i Materialet för klassen: ett blad per sida, i metodens ordning, sist i materialets pdf. En textsida före dem,
+  // med materialets rubrik överst (riggens leverans 2026-10-30: "Materialet för klassen. Utöver lektionskortet …"), hör inte
+  // till bladen. forstaBladet är bladens första sida, eller 0 när sidorna inte går ihop med bladen.
+  const bladen = (d.ramar?.ramar ?? []).map((r) => r.rubrik).filter(Boolean);
+  const material = join(UT, `${stam('materialet')}.pdf`);
+  let forstaBladet = 0;
+  if (!kontrollera && bladen.length && existsSync(material)) {
+    const s = sidorna(material);
+    const fore = s.length - 1 - bladen.length;
+    const textsida = (t) => t.split(/\r?\n/).slice(0, 4).some((rad) => rad.trim() === (d.ramar?.rubrik ?? 'Materialet för klassen'));
+    if (fore === 0) forstaBladet = 1;
+    else if (fore === 1 && textsida(s[0])) forstaBladet = 2;
+    else varningar.push(`${id}: materialets pdf har ${s.length - 1} sidor och metoden ${bladen.length} blad, så bladen klipps inte ut var för sig`);
+  }
+
   // Bladen som riggen inte har lämnat som egna filer klipps ur pdf:en med allt, efter rubrikerna på sidorna.
   const allt = join(UT, `${id}.pdf`);
   const har = new Set(filer.filter((f) => f.typ === 'pdf').map((f) => f.slag));
@@ -107,8 +123,18 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     }
     for (const slag of ['lektionskort', 'planeringsmall', 'observation', 'materialet']) {
       const pdf = join(UT, `${stam(slag)}.pdf`);
-      if (existsSync(pdf)) console.log(`metoderfiler: ${id}, ${slag}: ${await bilder(pdf, stam(slag))} bilder`);
+      if (existsSync(pdf)) console.log(`metoderfiler: ${id}, ${slag}: ${await bilder(pdf, stam(slag), slag === 'materialet' ? forstaBladet || 1 : 1)} bilder`);
     }
+  }
+
+  // Bladen i Materialet för klassen, var och en som egen pdf, <id>-blad-<namn>.pdf (src/lib/undervisningsmetodfiler.ts),
+  // så att knappen under ett blad skriver ut just det bladet (STIL.md under Hänvisningar: en bestämd sak har en knapp).
+  // Sidorna är bladens sidor ovan; går de inte ihop klipps inget, och skriptet har sagt det. Riggen kan lämna bladen som egna
+  // filer i stället, och då tas de in som de andra.
+  const bladfil = (namn) => `${id}-blad-${slugAv(namn)}.pdf`;
+  if (!kontrollera) {
+    for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-blad-`) && x.endsWith('.pdf') && !bladen.some((n) => bladfil(n) === x))) rmSync(join(UT, f));
+    if (forstaBladet) bladen.forEach((namn, i) => { if (!filer.some((f) => f.slag === `blad-${slugAv(namn)}`)) klipp(material, forstaBladet + i, forstaBladet + i, join(UT, bladfil(namn))); });
   }
 
   // Filmerna: riggens svg-filer med sajtens namn, som i Stödundervisning.

@@ -9,6 +9,8 @@
 import { esc, liten, PLANERA } from '../lib/standard/index.js';
 import { allaPlanerna, APPENS_PLANER, idagLokalt, iSamlingen, iTurOrdning, oppnaPlanerna, SAMLINGENS_ORD, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, samlingen, skiljNamnen, STATUSNAMN, statusAv, type Samling, type SparadPlan } from './insatser-lagring';
 import { iAppen } from './webblasaren';
+import { goatFor } from './byggstenar';
+import { laddaNer } from './skattning';
 
 const idag = idagLokalt();
 // Samlingens planer och ord: insatserna i Stödundervisning och planerna i Lär dig metoden under Metoder.
@@ -32,7 +34,7 @@ if (din) {
     const lage = lageAv(p, idag);
     // Etiketten står med versaler, och gruppens namn efter den som läraren skrev det (buggjakten 2026-10-24).
     const etikett = egna.length > 1 ? ord.dina(egna.length) : ord.din;
-    din.innerHTML = `<p><span class="pl-din-etikett">${esc(etikett)}${egna.length > 1 ? '' : ` · <span class="pl-din-namn">${esc(planensNamn(p))}</span>`}</span>${marke(p)}${esc(egna.length > 1 ? `${planensNamn(p)}: ${liten(lage.text)}` : lage.text)}</p><a href="${esc(planensAdress(p, lage.vecka))}" data-goatcounter-click="planera:${esc(p.metod)}:din-insats" data-goatcounter-title="${esc(din.dataset.titel ?? p.titel)}: ${ord.pagar}">${egna.length > 1 ? ord.flera : ord.enLank}</a>`;
+    din.innerHTML = `<p><span class="pl-din-etikett">${esc(etikett)}${egna.length > 1 ? '' : ` · <span class="pl-din-namn">${esc(planensNamn(p))}</span>`}</span>${marke(p)}${esc(egna.length > 1 ? `${planensNamn(p)}: ${liten(lage.text)}` : lage.text)}</p><a href="${esc(planensAdress(p, lage.vecka))}" ${goatFor(ord.led, p.metod, din.dataset.titel ?? p.titel)('din-insats', ord.pagar)}>${egna.length > 1 ? ord.flera : ord.enLank}</a>`;
     din.hidden = false;
   }
 }
@@ -76,11 +78,7 @@ if (lista && planer.length) {
   document.getElementById('pl-alla-ner')?.addEventListener('click', () => {
     const fil = allaPlanerna(PLANERA.version, idag);
     if (!fil) return;
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(fil.blob);
-    a.download = fil.namn;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    laddaNer(fil.blob, fil.namn);
     if (besked) { besked.textContent = 'Alla planer är nedladdade i en zip. Lägg den bland skolans filer. Den har elevernas namn, så dela den inte.'; besked.hidden = false; }
   });
   document.getElementById('pl-alla-oppna')?.addEventListener('change', (e) => { const filer = valdaFiler(e); if (filer.length) void oppnaPlanerna(filer, 'pl-alla-besked', lista ? samlingAv(lista) : 'stodundervisning'); });

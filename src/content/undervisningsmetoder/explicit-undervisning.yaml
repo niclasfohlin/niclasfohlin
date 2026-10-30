@@ -22,7 +22,7 @@ material:
   - affischen Så visar du
   - bladet Stegen
   - material vid bordet
-uppdaterad: 2026-10-29
+uppdaterad: 2026-10-30
 publicerad: 2026-10-29
 relaterade: ["fyra-raknesatten"]
 utkast: true
@@ -53,10 +53,10 @@ filmer:
 
 profil:
   evidens:
-    larande:    { tillforlitlighet: mattlig, effekt: mattlig, kort: "Stödet bygger mest på program med manus. I helklass var effekten mindre.", motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet bygger mest på program med manus i F–⁠3: 0,54 i 328 studier (Stockard m.fl., 2018). I stora studier i vanliga klasser var effekten mindre eller inte säker (Clarke m.fl., 2015; Torgerson m.fl., 2018).", kallor: [stockard-m-fl-2018, clarke-m-fl-2015, torgerson-m-fl-2018] }
+    larande:    { tillforlitlighet: mattlig, effekt: mattlig, kort: "Mest program med manus i F–⁠3. I vanliga klasser var effekten mindre.", motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet bygger mest på program med manus i F–⁠3: 0,54 i 328 studier (Stockard m.fl., 2018). I stora studier i vanliga klasser var effekten mindre eller inte säker (Clarke m.fl., 2015; Torgerson m.fl., 2018).", kallor: [stockard-m-fl-2018, clarke-m-fl-2015, torgerson-m-fl-2018] }
     lasning:    { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Engelmanns program med manus gav 0,10 i tre studier med oberoende prov i F–⁠3 (Slavin m.fl., 2010). Det finns ingen stor studie av metoden i helklass.", kallor: [slavin-m-fl-2010, stockard-m-fl-2018] }
     skrivning:  { tillforlitlighet: lag, effekt: liten, motivering: "Låg tillförlitlighet, liten effekt. Strategiundervisning efter SRSD gav 0,22 i två studier i England, en mindre med stor effekt och en stor i 84 skolor utan effekt (Slavin m.fl., 2019; Torgerson m.fl., 2018).", kallor: [slavin-m-fl-2019, torgerson-m-fl-2018] }
-    matematik:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet gäller elever som behöver stöd, mest i små grupper: 0,31 i 14 studier (Fuchs m.fl., 2021). I hela klasser gav en av tre stora studier en säker effekt, och den var liten (Jitendra m.fl., 2019).", kallor: [fuchs-m-fl-2021, jitendra-m-fl-2019, clarke-m-fl-2015, jitendra-m-fl-2015] }
+    matematik:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet gäller mest små grupper med elever i matematiksvårigheter: 0,31 i 14 studier (Fuchs m.fl., 2021). I hela klasser gav en av tre stora studier en säker effekt, och den var liten (Jitendra m.fl., 2019).", kallor: [fuchs-m-fl-2021, jitendra-m-fl-2019, clarke-m-fl-2015, jitendra-m-fl-2015] }
     amnen:      { tillforlitlighet: lag, effekt: stor, motivering: "Låg tillförlitlighet, stor effekt. I NO i åk 5–⁠6 gav explicit undervisning i hur man gör en undersökning stor effekt på forskarnas prov jämfört med vanlig undervisning (Kruit m.fl., 2018). SO och teknik är inte studerade.", kallor: [kruit-m-fl-2018] }
     socialt:    { niva: inte-studerat, motivering: "Ingen studie med jämförelsegrupp har mätt metodens effekt på samarbete, beteende eller arbetsro. I små studier gav svar från alla samtidigt bättre arbetsro än handuppräckning (MacSuga-Gage och Simonsen, 2015)." }
   svarighet: { lara: 3, karnan: 3, stod: 3, tid: 3, motivering: "Läraren övar nya drag: att visa ett steg i taget, gå mellan tavlan och elevernas arbete och vänta med elevernas eget arbete tills nästan alla kan. Kärnan glider lätt när tiden är knapp." }
@@ -85,15 +85,15 @@ kallor:
   - { id: stockard-m-fl-2018, doi: 10.3102/0034654317751919, slag: metaanalys, grupp: oversikt, omraden: [larande, lasning, skrivning, matematik], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: d = 0,54 i 328 studier, mest i F–⁠3", titel: "The effectiveness of Direct Instruction curricula: A meta-analysis of a half century of research", text: "Stockard, J., Wood, T. W., Coughlin, C. m.fl. (2018). The effectiveness of Direct Instruction curricula: A meta-analysis of a half century of research. Review of Educational Research.", adress: "https://doi.org/10.3102/0034654317751919", oppnad: 2026-10-29 }
   - { id: fuchs-m-fl-2021, eric: ED611018, slag: vagledning, grupp: oversikt, omraden: [matematik], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: g = 0,31 i 14 studier, små grupper, elever som behöver stöd", titel: "Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades", text: "Fuchs, L. S. m.fl. (2021). Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades. Institute of Education Sciences.", adress: "https://ies.ed.gov/ncee/wwc/Docs/PracticeGuide/WWC2021006-Math-PG.pdf", oppnad: 2026-10-29 }
   - { id: slavin-m-fl-2010, eric: ED527637, slag: systematisk-oversikt, grupp: oversikt, omraden: [lasning], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,10 i tre studier av Engelmanns program, F–⁠3", titel: "Effective Reading Programs for the Elementary Grades: A Best-Evidence Synthesis", text: "Slavin, R. E., Lake, C., Chambers, B. m.fl. (2010). Effective Reading Programs for the Elementary Grades: A Best-Evidence Synthesis. Best Evidence Encyclopedia.", adress: "https://files.eric.ed.gov/fulltext/ED527637.pdf", oppnad: 2026-10-29 }
-  - { id: slavin-m-fl-2019, eric: ED612219, slag: systematisk-oversikt, grupp: oversikt, omraden: [skrivning], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,22 för SRSD i två studier, inte säker", titel: "Writing Approaches in Years 3 to 13: Evidence Review", text: "Slavin, R. E., Lake, C., Inns, A. m.fl. (2019). Writing Approaches in Years 3 to 13: Evidence Review. Education Endowment Foundation.", adress: "https://files.eric.ed.gov/fulltext/ED612219.pdf", oppnad: 2026-10-29 }
+  - { id: slavin-m-fl-2019, eric: ED612219, slag: systematisk-oversikt, grupp: oversikt, omraden: [skrivning], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Inte säker: 0,22 för SRSD i två studier", titel: "Writing Approaches in Years 3 to 13: Evidence Review", text: "Slavin, R. E., Lake, C., Inns, A. m.fl. (2019). Writing Approaches in Years 3 to 13: Evidence Review. Education Endowment Foundation.", adress: "https://files.eric.ed.gov/fulltext/ED612219.pdf", oppnad: 2026-10-29 }
   - { id: macsuga-gage-och-simonsen-2015, doi: 10.1353/etc.2015.0009, slag: systematisk-oversikt, grupp: annan, omraden: [], strang: false, stor: false, las: fulltext, fohlin: false, bidrag: "Alla svarar samtidigt: fler svar och bättre arbetsro", titel: "Examining the effects of teacher-directed opportunities to respond on student outcomes: A systematic review of the literature", text: "MacSuga-Gage, A. S. och Simonsen, B. (2015). Examining the effects of teacher-directed opportunities to respond on student outcomes: A systematic review of the literature. Education and Treatment of Children.", adress: "https://doi.org/10.1353/etc.2015.0009", oppnad: 2026-10-29 }
-  - { id: clarke-m-fl-2015, doi: 10.1080/19345747.2014.980021, slag: studie, grupp: experiment, omraden: [larande, matematik], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Måttlig effekt: g = 0,108 på det allmänna provet TEMA, inte säker, 129 klasser", titel: "Investigating the efficacy of a core kindergarten mathematics curriculum to improve student mathematics learning outcomes", text: "Clarke, B., Baker, S., Smolkowski, K. m.fl. (2015). Investigating the efficacy of a core kindergarten mathematics curriculum to improve student mathematics learning outcomes. Journal of Research on Educational Effectiveness.", adress: "https://doi.org/10.1080/19345747.2014.980021", oppnad: 2026-10-29 }
+  - { id: clarke-m-fl-2015, doi: 10.1080/19345747.2014.980021, slag: studie, grupp: experiment, omraden: [larande, matematik], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: g = 0,108 på det allmänna provet TEMA, 129 klasser", titel: "Investigating the efficacy of a core kindergarten mathematics curriculum to improve student mathematics learning outcomes", text: "Clarke, B., Baker, S., Smolkowski, K. m.fl. (2015). Investigating the efficacy of a core kindergarten mathematics curriculum to improve student mathematics learning outcomes. Journal of Research on Educational Effectiveness.", adress: "https://doi.org/10.1080/19345747.2014.980021", oppnad: 2026-10-29 }
   - { id: jitendra-m-fl-2019, doi: 10.1037/edu0000335, slag: studie, grupp: experiment, omraden: [larande, matematik], strang: true, stor: true, las: sammanfattning, fohlin: false, effekt: "Liten effekt: säker skillnad på det allmänna provet GMADE, 1 492 elever", titel: "Improving student learning of ratio, proportion, and percent: A replication study of schema-based instruction", text: "Jitendra, A. K., Harwell, M. R., Im, S. m.fl. (2019). Improving student learning of ratio, proportion, and percent: A replication study of schema-based instruction. Journal of Educational Psychology.", adress: "https://doi.org/10.1037/edu0000335", oppnad: 2026-10-29 }
-  - { id: jitendra-m-fl-2015, doi: 10.1037/edu0000039, slag: studie, grupp: experiment, omraden: [larande, matematik], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Ingen effekt: ingen säker skillnad på det allmänna provet, 1 999 elever", titel: "Effects of a research-based intervention to improve seventh-grade students' proportional problem solving: A cluster randomized trial", text: "Jitendra, A. K., Harwell, M. R., Dupuis, D. N. m.fl. (2015). Effects of a research-based intervention to improve seventh-grade students' proportional problem solving: A cluster randomized trial. Journal of Educational Psychology.", adress: "https://doi.org/10.1037/edu0000039", oppnad: 2026-10-29 }
+  - { id: jitendra-m-fl-2015, doi: 10.1037/edu0000039, slag: studie, grupp: experiment, omraden: [larande, matematik], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: ingen säker skillnad på det allmänna provet, 1 999 elever", titel: "Effects of a research-based intervention to improve seventh-grade students' proportional problem solving: A cluster randomized trial", text: "Jitendra, A. K., Harwell, M. R., Dupuis, D. N. m.fl. (2015). Effects of a research-based intervention to improve seventh-grade students' proportional problem solving: A cluster randomized trial. Journal of Educational Psychology.", adress: "https://doi.org/10.1037/edu0000039", oppnad: 2026-10-29 }
   - { id: torgerson-m-fl-2018, doi: 10.1186/ISRCTN11002306, slag: rapport, grupp: experiment, omraden: [larande, skrivning], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Ingen effekt: −0,09 och 0,11 i två årskullar, 84 och 83 skolor", titel: "Calderdale Excellence Partnership: IPEELL", text: "Torgerson, C. J., Ainsworth, H., Bell, K. m.fl. (2018). Calderdale Excellence Partnership: IPEELL. Evaluation report and executive summary. Education Endowment Foundation.", adress: "https://d2tic4wvo1iusb.cloudfront.net/production/documents/projects/IPEELL_1.pdf", oppnad: 2026-10-29 }
   - { id: kruit-m-fl-2018, doi: 10.1080/09500693.2018.1428777, slag: studie, grupp: experiment, omraden: [amnen], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: d = 0,66 på ett praktiskt prov i NO, men inte på ett skriftligt", titel: "Effects of explicit instruction on the acquisition of students' science inquiry skills in grades 5 and 6 of primary education", text: "Kruit, P. M., Oostdam, R. J., van den Berg, E. m.fl. (2018). Effects of explicit instruction on the acquisition of students' science inquiry skills in grades 5 and 6 of primary education. International Journal of Science Education.", adress: "https://doi.org/10.1080/09500693.2018.1428777", oppnad: 2026-10-29 }
   - { id: baco-m-fl-2023, doi: 10.14221/1835-517X.5965, slag: studie, grupp: annan, omraden: [], las: fulltext, fohlin: false, bidrag: "Läraren slutade kontrollera förståelsen, trots coachning", titel: "Explicit Instruction: Evaluating the Fidelity of a Teacher's Practice Supported by Professional Development and Directive Coaching - A Case Study", text: "Baco, C., Bocquillon, M., Delbart, B. m.fl. (2023). Explicit Instruction: Evaluating the Fidelity of a Teacher's Practice Supported by Professional Development and Directive Coaching - A Case Study. Australian Journal of Teacher Education.", adress: "https://doi.org/10.14221/1835-517X.5965", oppnad: 2026-10-29 }
-  - { id: doabler-m-fl-2019, doi: 10.1177/1534508418758364, slag: studie, grupp: annan, omraden: [], las: fulltext, fohlin: false, bidrag: "Egna svar bar effekten för elever med svårigheter", titel: "Do components of explicit instruction explain the differential effectiveness of a core mathematics program for kindergarten students with mathematics difficulties? A mediated moderation analysis", text: "Doabler, C. T., Stoolmiller, M., Kennedy, P. C. m.fl. (2019). Do components of explicit instruction explain the differential effectiveness of a core mathematics program for kindergarten students with mathematics difficulties? A mediated moderation analysis. Assessment for Effective Intervention.", adress: "https://doi.org/10.1177/1534508418758364", oppnad: 2026-10-29 }
+  - { id: doabler-m-fl-2019, doi: 10.1177/1534508418758364, slag: studie, grupp: annan, omraden: [], las: fulltext, fohlin: false, bidrag: "Egna svar bar effekten för elever i matematiksvårigheter", titel: "Do components of explicit instruction explain the differential effectiveness of a core mathematics program for kindergarten students with mathematics difficulties? A mediated moderation analysis", text: "Doabler, C. T., Stoolmiller, M., Kennedy, P. C. m.fl. (2019). Do components of explicit instruction explain the differential effectiveness of a core mathematics program for kindergarten students with mathematics difficulties? A mediated moderation analysis. Assessment for Effective Intervention.", adress: "https://doi.org/10.1177/1534508418758364", oppnad: 2026-10-29 }
   - { id: hughes-m-fl-2017, doi: 10.1111/ldrp.12142, slag: artikel, grupp: annan, omraden: [], las: fulltext, fohlin: false, bidrag: "Vad explicit undervisning är, del för del", titel: "Explicit instruction: Historical and contemporary contexts", text: "Hughes, C. A., Morris, J. R., Therrien, W. J. m.fl. (2017). Explicit instruction: Historical and contemporary contexts. Learning Disabilities Research & Practice.", adress: "https://doi.org/10.1111/ldrp.12142", oppnad: 2026-10-29 }
   - { id: rosenshine-2012, eric: EJ971753, slag: artikel, grupp: annan, omraden: [], las: fulltext, fohlin: false, bidrag: "Små steg, allas svar och kontroll före eget arbete", titel: "Principles of Instruction: Research-Based Strategies That All Teachers Should Know", text: "Rosenshine, B. (2012). Principles of Instruction: Research-Based Strategies That All Teachers Should Know. American Educator.", adress: "https://www.aft.org/sites/default/files/Rosenshine.pdf", oppnad: 2026-10-29 }
 
@@ -102,7 +102,7 @@ kallor:
 # ---------------------------------------------------------------------------------------------------------------------
 inledning:
   - Explicit undervisning är ett sätt att lära klassen något nytt där det finns ett rätt sätt att göra, som ljud och bokstäver, skriftlig huvudräkning eller en stavningsregel. Före lektionen delar du upp det nya i steg och bestämmer stegens ord. Du visar det nya vid tavlan, ett steg i taget och med samma ord varje gång. Sedan gör klassen det med dig, steg för steg, och alla visar hur de gjorde. Du går till deras arbete, rättar det som är fel på plats och går tillbaka till tavlan, varv efter varv, tills nästan alla kan. Först då övar eleverna själva eller i par. Det är ingen föreläsning, eftersom eleverna visar hur de tänker många gånger medan du undervisar.
-  - På varje bänk ligger en miniwhiteboard och en penna, och på tavlan sitter lektionens delar med en bild till varje. På din signal håller alla upp miniwhiteboarden med stegen, och du ser på några sekunder vem som har förstått och var det blev fel. Du ger återkopplingen där eleverna sitter, medan de arbetar. Ett bord står fritt, där du samlar dem som hade fel i kontrollen.
+  - "På varje bänk ligger en miniwhiteboard och en penna, och på tavlan sitter lektionens delar med en bild till varje. Delarna heter efter vem som gör: i Jag gör visar du, i Vi gör gör klassen det med dig, och i Du gör övar eleverna själva. På din signal håller alla upp miniwhiteboarden med stegen, och du ser på några sekunder vem som har förstått och var det blev fel. Du ger återkopplingen där eleverna sitter, medan de arbetar. Ett bord står fritt, där du samlar dem som hade fel i kontrollen."
   - Lärandet går till så här. Arbetsminnet är litet, så det nya kommer i lagom stora bitar. Med samma ord varje gång lägger eleverna kraften på innehållet. När alla visar hur de tänker ser du felet innan eleverna har övat in det, och den du rättar direkt övar det rätta i stället för det felaktiga.
   - "De första fyra veckorna lär sig klassen tre rutiner: signalen och miniwhiteboarden, bordet och paret. Du övar på att visa ett steg i taget, gå mellan tavlan och elevernas arbete och vänta med elevernas eget arbete tills nästan alla kan. Sedan arbetar ni så när klassen ska lära sig något nytt."
 
@@ -125,7 +125,7 @@ roll:
 
 passar:
   rubrik: När passar metoden?
-  kort: "Metoden passar när eleverna ska kunna något säkert. Ska de ta över ett tänkande, passar gradvis överlämnande bättre."
+  kort: "eleverna ska kunna något säkert. Ska de ta över ett tänkande, passar gradvis överlämnande bättre."
   rader:
     - { fraga: "Vad ska eleverna lära sig?", metoden: "En avgränsad kunskap eller färdighet med ett tydligt rätt sätt, som ljud och bokstäver, skriftlig huvudräkning och en stavningsregel, eller en strategi med fasta steg.", annat: "En strategi eller förmåga som ska användas på nya sätt: förstå en text, skriva en berättelse, lösa problem, resonera. Välj gradvis överlämnande (GRR), där eleverna tar över tänkandet steg för steg." }
     - { fraga: "Hur mycket kan eleverna redan?", metoden: "Lite. Innehållet är nytt, och det är lätt att öva in fel sätt.", annat: "En del. Grunden finns och ska nu användas och fördjupas." }
@@ -273,7 +273,7 @@ karna:
   komponenter:
     - namn: Visa ett steg i taget
       moment: [Jag gör]
-      vad: Du visar det nya ett steg i taget, med samma ord och tänkandet högt.
+      vad: Du visar det nya ett steg i taget, med samma ord varje gång, och säger högt hur du tänker.
       syns: Eleverna prövar varje steg direkt efter att läraren har visat det, med stegens ord.
       raknas: false
       varfor: "Arbetsminnet är litet, och för den som är ny i ett innehåll tar varje steg plats. Utan små steg gissar eleverna och bygger egna regler. I 42 av 43 studier i matematik byggdes det nya upp steg för steg (Fuchs m.fl., 2021), men ingen har prövat små steg för sig (Hughes m.fl., 2017)."
@@ -286,7 +286,7 @@ karna:
       moment: [Vi gör, Kontrollera]
       vad: Alla gör uppgiften samtidigt och visar hur de gjorde, och du ser allas svar innan du går vidare.
       syns: Varje elev visar på lärarens signal sitt svar med stegen, på miniwhiteboarden eller i ord, så att det syns var det blev fel.
-      varfor: "Utan svar från alla ser läraren inte vem som har tappat, och de andra övar inte. Resultaten och arbetsron blir bättre när alla svarar samtidigt (MacSuga-Gage och Simonsen, 2015), och för elever med svårigheter hängde framstegen ihop med hur ofta var och en fick svara (Doabler m.fl., 2019)."
+      varfor: "Utan svar från alla ser läraren inte vem som har tappat, och de andra övar inte. Resultaten och arbetsron blir bättre när alla svarar samtidigt (MacSuga-Gage och Simonsen, 2015), och för elever i matematiksvårigheter hängde framstegen ihop med hur ofta var och en fick svara (Doabler m.fl., 2019)."
       belagg: provad
       kallor: [macsuga-gage-och-simonsen-2015, doabler-m-fl-2019]
       kvar: Alla svarar samtidigt, och du ser varje elevs steg och var det blev fel.
@@ -294,12 +294,12 @@ karna:
       kryss: Alla visade stegen samtidigt, och jag såg dem.
     - namn: Återkoppling på plats
       moment: [Vi gör, Du gör]
-      vad: Du går till elevernas arbete och agerar på det du ser, och eleven gör det rätta själv innan ni går vidare.
+      vad: Du går till elevernas arbete och svarar på det du ser, och eleven gör det rätta själv innan ni går vidare.
       syns: Den som visade fel gör samma slags uppgift rätt en stund senare, efter att läraren har varit hos hen eller visat igen för klassen.
       varfor: "Den som övar på ett felaktigt sätt övar in felet, och en rättning efteråt kommer när felet redan är övat. Återkoppling direkt fanns i 42 av 43 studier i matematik, och den hänger så nära ihop med elevernas övning att de inte går att skilja åt (Fuchs m.fl., 2021; Doabler m.fl., 2019)."
       belagg: i-alla
       kallor: [fuchs-m-fl-2021, doabler-m-fl-2019, hughes-m-fl-2017]
-      kvar: Du agerar på det du ser medan eleverna arbetar, och eleven gör det rätta själv.
+      kvar: Du svarar på det du ser medan eleverna arbetar, och eleven gör det rätta själv.
       fritt: Till hela klassen eller till en elev, i ord eller genom att visa.
       kryss: Jag rättade på plats, och eleven gjorde rätt.
     - namn: Nästan alla kan innan eget arbete
@@ -319,7 +319,7 @@ lararensFragor:
     - { fraga: "Får jag låta klassen svara i kör?", svar: "Ja, för korta svar, som vad ni gör först, och på din signal. Stegen skriver alla på miniwhiteboarden, eftersom kören inte visar vem som kan. Be också enskilda elever säga sitt steg (Doabler m.fl., 2019).", komponent: Alla prövar och visar hur de tänker }
     - { fraga: "Får jag gå vidare när de flesta kan?", svar: "Nej. Gör det utfallet De flesta säger: ett kort varv till och en ny kontroll. Den som övar själv innan hen kan övar in fel eller väntar på hjälp.", komponent: Nästan alla kan innan eget arbete }
     - { fraga: "Hur hinner jag kursen om vi går vidare först när nästan alla kan?", svar: "Låt exit-lapparna välja nästa lektions start, så att ni inte övar det klassen redan kan. Den som måste förklara länge vid bänkarna har gett den gemensamma övningen för kort tid (Rosenshine, 2012)." }
-    - { fraga: "Får jag ge läxa?", svar: "Ja, med samma slags uppgifter som eleven redan gör rätt själv på exit-lappen, med stegen. Då övar läxan det som sitter och inte ett fel." }
+    - { fraga: "Får jag ge läxa?", svar: "Ja, med samma slags uppgifter som eleven redan gör rätt själv på exit-lappen, med stegen. Då övar läxan det som redan sitter." }
     - { fraga: "Hur hinner jag planera stegen till varje lektion?", svar: "Dela upp arbetsområdet en gång, före första lektionen, och låt varje lektion ta en eller två delar av det. Planera i arbetslaget, och använd huvudexemplet som förlaga." }
 
 amnesexempel:
@@ -349,7 +349,7 @@ amnesexempel:
       - "”Min tur.” Du säger hat och drar ut vokalen: ”Lång vokal, L, ett t.” Sedan hatt: ”Kort vokal, K, dubbla t.” Alla skriver K eller L och ordet efter varje steg."
       - "”Tillsammans.” Ni skriver ful, full, tal och tall. Vid full har sex skrivit L. Du går tillbaka till tavlan och säger ful och full igen, långsamt: ”Hör ni skillnaden? Tillsammans.”"
       - "Kontrollen: fall och sal. Bara 13 av 28 har båda rätt, och de vanligaste felen är L vid fall. Det är hälften eller färre, så du gör Jag gör igen med glas och glass, och ni gör Vi gör till avslutet. Det blir ingen Du gör i dag, och exit-lappen är som vanligt."
-    notera: "Notera vad som hände. K och L skilde felen åt: felet låg i hörandet och inte i regeln. Därför börjar nästa lektion med att höra vokalen innan någon skriver ordet."
+    notera: "Notera vad som hände. K och L skilde felen åt: eleverna kunde regeln men hörde inte vokalen. Därför börjar nästa lektion med att höra vokalen innan någon skriver ordet."
   - amne: matematik
     arskurs: åk 2–⁠3
     innehall: Skriftlig huvudräkning med tiotal och ental var för sig
@@ -371,7 +371,7 @@ amnesexempel:
     delar:
       - { fas: Före lektionen, celler: ["Två snabba, tre tal till Jag gör, sex till Vi gör, två till kontrollen, tio till Du gör och exit-lappen. Stegen i tre rader"] }
       - { fas: Start, celler: ["Två snabba på miniwhiteboard: 40 + 30 och 7 + 8. ”1, 2, 3, visa!” Målet på tavlan, och varför: två priser i huvudet"] }
-      - { fas: Jag gör, celler: ["”Min tur.” 47 + 38: först tiotalen, och alla skriver 40 + 30 = 70. Sedan entalen och ihop. Sist 26 + 39, felet 75"] }
+      - { fas: Jag gör, celler: ["”Min tur.” 47 + 38: först tiotalen, och alla skriver 40 + 30 = 70. Sedan entalen och ihop. Sist felet 47 + 38 = 75"] }
       - { fas: Vi gör, celler: ["”Tillsammans.” Sex tal: de två första ett steg i taget, de fyra sista hela. Alla visar stegen, och du läser och rättar"] }
       - { fas: Kontrollera, celler: ["Alla räknar 36 + 47 och 19 + 65 själva och visar stegen. Du räknar eleverna med fel"] }
       - { fas: Du gör, celler: ["Tio uppgifter, var och en själv, och de fyra första gör alla. Uppgift 1 tillsammans, sedan bordet och en runda"] }
@@ -438,7 +438,8 @@ amnesexempel:
 # ---------------------------------------------------------------------------------------------------------------------
 hinder:
   rubrik: Det svåraste med metoden
-  text: "Det som ofta försvinner är att varje elev visar hur hen tänker, så att du ser vem som kan. I 129 klassrum hängde framstegen för eleverna med svårigheter i matematik ihop med hur ofta enskilda elever fick svara (Doabler m.fl., 2019), och i en fallstudie slutade läraren be eleverna visa vad de hade förstått, och frågorna kom inte tillbaka trots coachning (Baco m.fl., 2023). Låt alla skriva stegen varje varv, läs dem, och be enskilda elever säga sitt steg."
+  kort: "Det som ofta försvinner är att varje elev visar hur hen tänker. Låt alla skriva stegen varje varv, läs dem, och be enskilda elever säga sitt steg."
+  text: "Det som ofta försvinner är att varje elev visar hur hen tänker, så att du ser vem som kan. I 129 klassrum hängde framstegen för eleverna i matematiksvårigheter ihop med hur ofta enskilda elever fick svara (Doabler m.fl., 2019), och i en fallstudie slutade läraren be eleverna visa vad de hade förstått, och frågorna kom inte tillbaka trots coachning (Baco m.fl., 2023). Låt alla skriva stegen varje varv, läs dem, och be enskilda elever säga sitt steg."
   komponent: Alla prövar och visar hur de tänker
 fallgropar:
   rubrik: Vanliga fallgropar
@@ -472,12 +473,12 @@ hallFast:
 checklista:
   rubrik: Före första lektionen
   punkter:
-    - Träffa arbetslaget och bestäm vilka rutiner ni gör lika.
+    - Träffa arbetslaget, eller en kollega om du börjar ensam, och bestäm vilka rutiner ni gör lika.
     - Välj arbetsområde och minst tre lektioner i veckan.
     - "Dela upp arbetsområdet i lektioner. Lös en uppgift själv och skriv stegen, med samma ord varje gång."
     - Planera första lektionen i planeringsmallen.
     - Skriv ut lektionskortet, och sätt upp lektionens delar, affischen Så visar du och bladet Stegen.
-    - Lägg miniwhiteboards, eller A4 i plastfickor, pennor, sudd, exit-lappar och bladet till Du gör i en back per rad.
+    - Lägg miniwhiteboards eller A4 i plastfickor, pennor, sudd, exit-lappar och uppgifterna till Du gör i en back per rad.
     - "Ordna rummet: alla ser tavlan, du når varje bänk, och ett bord står fritt."
     - Boka specialläraren i vecka 2 och en kollega i vecka 4.
 forsta:
@@ -498,7 +499,7 @@ forsta:
     forberett: Stavar vid bordet, för alla som vill
     fore: { steg: ["Först tiotalen: 30 + 40 = 70", "Sedan entalen: 2 + 5 = 7", "Sist ihop: 70 + 7 = 77"], visar: tre rader på miniwhiteboarden, felet: "32 + 45 = 14, alla siffror ihop", isteget: "1, Först tiotalen", rattar: tre stavar och fyra stavar är sju tior }
     delar:
-      - { fas: Start, text: "Rutinen, tio minuter: 3 + 4 och 30 + 40 tills alla visar samtidigt. Korten och pilen" }
+      - { fas: Start, text: "Rutinen, tio minuter: 3 + 4 och 30 + 40 tills alla visar samtidigt. Lektionens delar på tavlan, och en elev flyttar pilen Här är vi" }
       - { fas: Jag gör, text: "32 + 45 och 21 + 36 med stegen · visa felet 32 + 45 = 14" }
       - { fas: Vi gör, text: "41 + 35 och 23 + 65 steg för steg. Sedan 62 + 17, 15 + 43, 33 + 61, 26 + 52." }
       - { fas: Kontrollera, text: "43 + 25 och 14 + 73" }
@@ -506,7 +507,7 @@ forsta:
     beslut: { elever: 28, nastanAlla: "tre tior och fyra tior med stavarna", deFlesta: ["34 + 25 tillsammans", "13 + 82 och 61 + 24"], halften: "53 + 36 med stavar på tavlan" }
 progression:
   rubrik: De första fyra veckorna
-  text: "Metoden är troligen lika ny för dig som för klassen. Gör den minst tre lektioner i veckan i fyra veckor, så blir den en rutin för er båda. Hela lektionen finns från första lektionen, utom paren: de tre första veckorna övar var och en själv i Du gör. Varje vecka lär sig klassen en rutin, och du övar ett drag. Gå vidare när det syns hos nästan alla, och ge rutinen en vecka till när det inte gör det."
+  text: "Metoden är troligen lika ny för dig som för klassen. Gör den minst tre lektioner i veckan i fyra veckor, så blir den en rutin för er båda. Hela lektionen finns från första lektionen, utom paren: de tre första veckorna övar var och en själv i Du gör. I vecka 1, 3 och 4 lär sig klassen en rutin, och varje vecka övar du ett drag. Gå vidare när det syns hos nästan alla, och ge rutinen en vecka till när det inte gör det."
   rader:
     - { vecka: "1", led: Jag gör, rubrik: Signalen och miniwhiteboarden, fokus: "Signalen och miniwhiteboarden, på känt innehåll.", eleverna: "Att skriva stegen och visa samtidigt på signalen.", roll: "Att visa ett steg och låta alla pröva det innan nästa.", vidare: "nästan alla visar på signalen inom tio sekunder", fraga: "Visar nästan alla på signalen inom tio sekunder?" }
     - { vecka: "2", led: Vi gör, rubrik: Tavlan och bänkarna, fokus: "Vi gör, där du går mellan tavlan och elevernas arbete.", eleverna: "Att göra om steget när du har pekat på det.", roll: "Att gå längs raderna medan de skriver, stanna högst en halv minut och gå tillbaka till tavlan när tre eller fler har samma fel.", vidare: "nästan alla som du rättade gör samma slags uppgift rätt senare i lektionen", fraga: "Gör nästan alla som du rättade samma slags uppgift rätt senare i lektionen?" }
@@ -517,7 +518,7 @@ rutiner:
   rader:
     - namn: Signalen och miniwhiteboarden
       vecka: 1
-      vad: "Så visar alla samtidigt. Eleverna följer affischen: Tänk, Skriv, Vänd och 1, 2, 3, visa! Den som inte vet skriver ett frågetecken."
+      vad: "Så visar alla samtidigt. Eleverna följer affischen Så visar du: Tänk, Skriv, Vänd och 1, 2, 3, visa! Den som inte vet skriver ett frågetecken."
       steg:
         - Ställ frågan, och håll upp handen medan alla tänker och skriver.
         - "”1, 2, 3, visa!” Läs miniwhiteboards över hela klassen, och steget där felet brukar sitta."
@@ -541,13 +542,13 @@ uppfoljning:
     - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "Arbetslaget ses före första lektionen och planerar tillsammans." }
     - { id: arbetslaget-efter, nar: Vecka 4, tid: vecka 4, vad: "I slutet av vecka 4 ses arbetslaget igen för att berätta vad ni såg och bestämma hur ni fortsätter." }
     - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "En kollega eller specialläraren ser en lektion i månaden terminen ut. Elever som inte lär sig det nya får stödundervisning, som De fyra räknesätten i grupp, när ni har läst deras exit-lappar." }
-    - { id: sexveckor, nar: Sex veckor senare, tid: efter 6 veckor, vad: "Samma två frågor som varje vecka: hur många som gör det nya rätt med stegen, och hur ofta kärnans fyra finns i dina lektioner." }
-    - { id: nastatermin, nar: Nästa termin, tid: efter 16 veckor, vad: "Samma två frågor igen, och om ni använder metoden i fler ämnen." }
+    - { id: sexveckor, nar: Sex veckor senare, tid: efter 6 veckor, vad: "Räkna samma två saker som varje vecka: hur många som gör det nya rätt med stegen, och hur ofta kärnans fyra finns i dina lektioner." }
+    - { id: nastatermin, nar: Nästa termin, tid: efter 16 veckor, vad: "Räkna samma två saker igen, och se om ni använder metoden i fler ämnen." }
     - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen Hur säker är jag på metoden under 5 i två veckor: ge steget en vecka till, läs delen om lektionen igen och be en kollega se en lektion." }
     - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen Hur väl fungerar den i praktiken under 5 i två veckor, eller kan hälften eller färre det nya på exit-lappen: dela stegen i mindre delar och be specialläraren se en lektion." }
 uppdrag:
   rubrik: Till arbetslaget
-  text: "Det är när ni jämför vad ni såg som metoden sätter sig. Prövar ni två och två, berätta för varandra efter varje vecka vad ni såg. Den som blir besökt delar sin planering i förväg. Är du ensam, be en kollega se en kvart av Vi gör och kontrollen."
+  text: "Det är när ni jämför vad ni såg som metoden sätter sig. Prövar ni två och två, berätta för varandra efter varje vecka vad ni såg. Den som blir besökt delar sin planering i förväg. Är du ensam, be en kollega se din lektion från Jag gör till fem minuter in i Du gör, i vecka 2 eller vecka 4."
   forbered:
     text: "Läs metoden, titta på filmen och tänk igenom frågorna. På mötet bestämmer ni vilka rutiner ni gör lika, som signalen och delarnas namn, och var och en planerar sin första lektion i planeringsmallen."
     fragor:
@@ -609,7 +610,7 @@ observation:
     - { fas: Kontrollera, rader: 2, rakna: "Med fel: ___ av ___   Läraren valde: Du gör · ett varv till · Jag gör igen" }
     - { fas: Du gör, namn: "Du gör, fem minuter", rader: 2, rakna: "Vid bordet: ___ elever   Läraren tittade hos: ___ elever" }
   streck:
-    - { etikett: Se vad de kan, drag: ["Alla visar på signalen", "En elev säger sitt steg", "Handuppräckning", "”Hänger ni med?”"] }
+    - { etikett: Se vad de kan, drag: ["Alla visar på signalen", "En elev säger sitt steg", "Hand­upp­räck­ning", "”Hänger ni med?”"] }
     - { etikett: Återkoppling, drag: ["Eleven gör om vid bänken", "Visar igen för hela klassen"] }
   rader:
     - "Samma ord för stegen: ja · nej. Alla prövade varje steg: ja · nej"
@@ -635,17 +636,17 @@ invandningar:
     - fraga: Ska inte eleverna få upptäcka själva?
       svar: "Viljan att låta eleverna tänka själva är riktig, och metoden slutar just där, när eleverna gör själva. Frågan är när. I NO lärde sig elever i åk 5–⁠6 att göra undersökningar bättre med explicit undervisning än genom att bara undersöka, också i ett ämne de inte kände (Kruit m.fl., 2018). När grunden finns kan gradvis överlämnande passa bättre."
     - fraga: Blir inte alla lektioner likadana?
-      svar: "Formen blir densamma, men innehållet varierar. En gemensam form ger ett gemensamt språk: eleverna vet vad Vi gör betyder, och kollegor som besöker varandra vet vad de ska titta efter. Den som följer delarna utan att titta på eleverna har missat poängen."
+      svar: "Formen är densamma, och innehållet byts. En gemensam form ger ett gemensamt språk: eleverna vet vad Vi gör betyder, och kollegor som besöker varandra vet vad de ska titta efter. Den som följer delarna utan att titta på eleverna har missat poängen."
     - fraga: Ger metoden effekt i en vanlig skola, eller bara i forskarnas studier?
       svar: "Inte alltid, och inte av sig själv. Av de fyra stora studierna i vanliga klasser gav en av dem en säker effekt på ett standardiserat prov (Jitendra m.fl., 2019), och de tre andra gav ingen säker skillnad (Clarke m.fl., 2015; Jitendra m.fl., 2015; Torgerson m.fl., 2018). I den stora studien i förskoleklass hängde framstegen ihop med hur ofta eleverna fick svara, och därför följer du upp kärnan varje vecka."
 
 grund:
   rubrik: Det forskningen visar
   text:
-    - Den största delen av forskningen om explicit undervisning gäller Engelmanns program Direct Instruction, med färdiga manus. I en metaanalys av 328 studier, mest i USA och i F–⁠3, blev effekten 0,54, och den var ungefär lika stor i alla elevgrupper (Stockard m.fl., 2018). Metoden här har inga manus, och därför väger de studierna lättare i metodkortet.
+    - Den största delen av forskningen om explicit undervisning gäller Engelmanns program Direct Instruction, med färdiga manus, som på svenska också kallas direktinstruktion. I en metaanalys av 328 studier, mest i USA och i F–⁠3, blev effekten 0,54, och den var ungefär lika stor i alla elevgrupper (Stockard m.fl., 2018). Metoden här har inga manus, och metodkortet säger vid Lärande totalt att stödet mest kommer därifrån.
     - I det stränga underlaget, där bara studier med jämförbara grupper och oberoende prov räknas, blir effekterna mindre. I läsning i F–⁠3 gav Engelmanns program 0,10 i tre studier (Slavin m.fl., 2010). Elever i F–⁠6 som behöver stöd i matematik fick explicit undervisning i grupper om två till sex, och i 14 studier gav den 0,31 i allmän matematik. Omedelbar återkoppling fanns i nästan alla studierna (Fuchs m.fl., 2021).
     - I hela klasser är bilden blandad. I en stor studie i 129 förskoleklasser i USA blev skillnaden på ett standardiserat matematikprov 0,108 och inte säker, och den berodde på elevernas förkunskaper (Clarke m.fl., 2015). I åk 7 gav explicit strategiundervisning i en första studie bättre resultat på forskarnas prov men inte på ett standardiserat prov (Jitendra m.fl., 2015). I en andra studie, med 1 492 elever, gav den en säker skillnad också på det standardiserade provet (Jitendra m.fl., 2019). I skrivning gav strategiundervisning efter SRSD 0,22 i två studier i England, och skillnaden var inte säker. Den mindre studien gav stor effekt, och den stora, i 84 skolor, gav ingen effekt (Slavin m.fl., 2019; Torgerson m.fl., 2018).
-    - I den stora studien i förskoleklass var det elevernas egna svar som skilde klassrummen åt. Framstegen för eleverna med svårigheter i matematik hängde ihop med hur ofta enskilda elever fick öva och svara, i de bästa klassrummen omkring en gång i minuten (Doabler m.fl., 2019). När alla svarade samtidigt, på små tavlor, kort eller i kör, blev resultaten och arbetsron bättre än när en elev i taget svarade, i små studier där de flesta följde några få elever (MacSuga-Gage och Simonsen, 2015). Att ungefär åtta av tio svar är rätt innan eget arbete kommer ur klassrumsstudier av framgångsrika lärare och är inte prövat för sig (Rosenshine, 2012).
+    - I den stora studien i förskoleklass var det elevernas egna svar som skilde klassrummen åt. Framstegen för eleverna i matematiksvårigheter hängde ihop med hur ofta enskilda elever fick öva och svara, i de bästa klassrummen omkring en gång i minuten (Doabler m.fl., 2019). När alla svarade samtidigt, på små tavlor, kort eller i kör, blev resultaten och arbetsron bättre än när en elev i taget svarade, i små studier där de flesta följde några få elever (MacSuga-Gage och Simonsen, 2015). Att ungefär åtta av tio svar är rätt innan eget arbete kommer ur klassrumsstudier av framgångsrika lärare och är inte prövat för sig (Rosenshine, 2012).
     - I NO fick elever i åk 5–⁠6 explicit undervisning i hur man gör en undersökning, i åtta lektioner. Mot vanlig undervisning gav den 0,66 på ett praktiskt prov och 0,48 när eleverna undersökte ett ämne de inte kände, men ingen säker skillnad på ett skriftligt prov (Kruit m.fl., 2018). Proven var forskarnas egna.
     - I urvalet har ingen studie mätt metoden utan manus i läsning i helklass, och ingen studie med jämförelsegrupp har mätt SO, teknik eller samarbete. Sökningen hittade ingen nordisk studie i helklass.
 
@@ -689,8 +690,5 @@ lathund:
       - Lärandet går till så här. Det nya kommer i steg som arbetsminnet klarar, och när alla visar hur de tänker ser du felet innan det övas in. Ingen övar på egen hand förrän du har sett att nästan alla kan.
   lektion:
     text: "Första lektionen lär sig klassen signalen och miniwhiteboarden på något alla kan, tills alla visar samtidigt, och starten blir tio minuter. Gå igenom delarna på tavlan, och säg varför alla visar: du vill se hur alla tänker. Du gör är enskilt, och bordet är för alla som vill ha ett exempel till. Lektionen står annars på lektionskortet."
-  planering:
-    underrad: En lektion på ett blad, med stegen och orden överst
   igang:
     rubrik: De första veckorna
-    not: Läs mer står sist på metodens sida.

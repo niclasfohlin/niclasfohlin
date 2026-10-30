@@ -633,14 +633,30 @@ Undervisningsmetoderna är metoder för hela klassen, under Metoder i menyn (K-6
 | Delen | Var | Så |
 |---|---|---|
 | Metodens fil | `src/content/undervisningsmetoder/<id>.yaml` | En kopia av riggens `methods/<id>/metod.yaml`. Schemat sist i `src/content.config.ts` prövar huvudet, faktan, profilen och källorna, och resten tills riggens mall och sajtens schema har samma fält (K-627) |
-| Dokumenten och filmerna | `public/metoder/` | `scripts/metoderfiler.mjs` tar in dem ur riggens `out/<id>/` efter `filer.json` och stannar när de är byggda ur en annan metodfil än sajtens. Bilderna av bladens sidor görs samtidigt |
+| Dokumenten och filmerna | `public/metoder/` | `scripts/metoderfiler.mjs` tar in dem ur riggens `out/<id>/` efter `filer.json` och stannar när de är byggda ur en annan metodfil än sajtens. Bilderna av bladens sidor görs samtidigt. En metod som är sajtens (Explicit undervisning sedan riggens 73d2b03) bygger sajten själv: kopiera sajtens fil till riggens `methods/<id>/metod.yaml`, kör `node build/bygg.mjs <id>` i riggen och sedan `node scripts/metoderfiler.mjs`. Riggens bygge läser sin egen kopia och inte sajtens fil |
 | Delarna och ordningen | `UNDERVISNINGSMETODENS_DELAR` i `src/lib/standard/undervisningsmetod.js` | Fyra delar och två bilagor, som riggens Word-fil, med raden under bandet och övergången. Riggen läser samma lista |
 | Sidan | `src/pages/metoder/[id].astro`, `src/components/Undervisningsmetod.astro`, `Planeringsblad.astro`, `Umfilknappar.astro` | Formen är idéförslagens form 2, Läsvägen öppen (`underlag/prov/metoder/ide/`): det läraren läser före första lektionen står öppet, och det som slås upp fälls ut. Hänvisningarna leder till sin post i referensbladet |
 | Metodkortet | `src/components/Metodprofil.astro`, `src/lib/metodprofil.ts` | Alltid i sajtens bläck, med Primär evidens som en rad med etikett (Niclas 2026-10-30: "man tror att det är en matte metod"). Bankens kort har Lärande totalt med `larande.kort` under, och Svårighet och Kostnad bredvid varandra |
-| Lär dig metoden | `src/pages/metoder/[id]/lar-dig.astro`, `src/scripts/lardig.ts`, `src/lib/lardig.ts` | Planmotorns lager för undervisningsmetoderna: lärarens mål, klasserna, stegen med Gick det?, två skattningar 1–10 varje vecka och sammanställningen som pdf (`underlag/prov/metoder/PLANERA-LAGRET.md`) |
+| Lär dig metoden | `src/pages/metoder/[id]/lar-dig.astro`, `src/scripts/lardig.ts`, `src/lib/lardig.ts` | Planmotorns lager för undervisningsmetoderna: lärarens mål, klasserna, stegen med Gick det?, två skattningar 1–10 varje vecka, klassernas skattning 1–5, Mitt i, avslutet och sammanställningen som pdf (`underlag/prov/metoder/PLANERA-LAGRET.md`) |
+| Lathunden | `src/pages/metoder/[id]/lathund.astro`, `Umlathund.astro`, `Umlathunddel.astro`, och urvalet `lathundensSidor` i standarden | Sidan `/metoder/<id>/lathund` i Stödundervisnings lathundsform (Niclas 2026-10-30: "fokus på det en lathund ska göra. Inte förklara allt. Men det viktigaste"), med filmerna, knapparna och de fyra sidorna Metoden, Vägen till måndag, Planera lektionen och De första veckorna. Riggens Word-lathund ritas ur samma urval, och `scripts/metoderprov.mjs` prövar att sidan säger det pdf:en säger och att pdf:ens sidfot leder till sidan. Sakerna är länkar utan knappar |
 | Leveransen från riggen | `node scripts/metodriggprov.mjs <id>`, som riggen kör mot sin `methods/<id>/` och `out/<id>/` innan den säger levererad | Fälten som sidan, metodkortet och Lär dig metoden läser (`undervisningsmetodensFel` i standarden, som sajtens schema också kör), `filer.json` med summan för metodfilen, de åtta dokumenten med © Niclas Fohlin och niclasfohlin.se på varje sida och utan [object …], och filmerna. Riggens brev om leveransen står överst i `C:/metodrigg/out/undervisningsmetoder/FRAN-SAJTEN.md` |
 | Proven | `scripts/metoderprov.mjs`, `scripts/planprov.mjs`, `scripts/standardprov.mjs` | Sidorna utan att rulla i sidled, ankarna och filerna, delarnas ordning, planens lager och standardens delar och gränser |
 | Testsidan | `METODER_UTKAST=1 npm run validera` och `node scripts/utkast.mjs --namn metoder` | En metod med `utkast: true` byggs bara med flaggan, som aldrig sätts i Netlifys bygge av main |
+| Pariteten | `scripts/metoderparitet.mjs`, i `npm run validera` | Varje text ur metodens fil som sidan visar står i riggens pdf med allt, och tvärtom. Undantagen står i skriptet med skälet, och det riggen ännu inte har byggt står under VANTAR med postens nummer, tills riggen har byggt om |
+
+En ny samling eller ett nytt lager ärver sajtens prov från första commit (Niclas 2026-10-30, natten: "Har du kört länkprovet och att allt namngivet som det är i metoden är länkar och att allt har en knapp? Sånt måste in i ditt arbetsätt ordentligt"). Metoder byggdes utan länkprovet, pariteten och datumet, och Lär dig metoden utan spärren mot dubbletter, tills granskningarna hittade det. Innan en samling eller ett lager får sin första sida går varje rad nedan igenom, och tabellen skrivs om när en ny kontroll kommer till.
+
+| Provet för Stödundervisning | Där det står | Metoder |
+|---|---|---|
+| Allt namngivet i metoden är en länk, och varje sak har en knapp | STIL.md under Hänvisningar, `olankadeSaker` i standarden, planprovet | `undervisningsmetodensSaker` och provet i `scripts/metoderprov.mjs` (K-621) |
+| Hänvisningar till Fohlin och verktygen är länkar | `src/lib/boklankar.ts` | Sidan och lathunden genom Boklankar (K-621) |
+| Sidan och dokumentet säger samma sak | `scripts/paritet.mjs` | `scripts/metoderparitet.mjs` |
+| Datumet följer metoden | `scripts/datumkoll.mjs` | Samma skript, med Metoders mapp |
+| Fillänkarna bär filens version | `scripts/filversion.mjs` | Samma kod (K-621) |
+| Ingen sida rullar i sidled, ankarna och filerna finns | `scripts/utskriftsformat.mjs` | `scripts/metoderprov.mjs` |
+| Ett värde som visas på flera ställen har en rot, och ingen kod står två gånger | Spärrarna i `scripts/planprov.mjs`, PLANERA.md under Spärren mot drift | Lär dig metodens filer i `MODULENS_FILER` (K-630) |
+| Statistiken har ett namn på varje fil och knapp | `scripts/paritet.mjs` | Samma prov läser `/metoder/` |
+| Allt som laddas ner bär © Niclas Fohlin | CLAUDE.md under Innehållstyperna | `scripts/metoderfiler.mjs` och `scripts/metodriggprov.mjs` |
 
 ## Kontroller som gäller
 

@@ -1,17 +1,10 @@
-// Metodkortets profil för undervisningsmetoderna (K-623, form godkänd som version 1; K-621, ur metodens fil). Tabellen,
-// orden och funktionerna följer metodriggens standard (C:/metodrigg/docs/undervisningsmetoder/evidensen.md och
-// build/sparrprov.mjs, riggens 77c3807): tillförlitligheten sätter taket och effekten nivån, låg tillförlitlighet utan
-// effekt är Oklart, och Svårighet och Kostnad räknas ur kriterierna. De flyttar till src/lib/standard/ när standarden är
-// låst, så att riggen och sajten räknar med samma funktion. Kortet läser metodens fil i samlingen
-// src/content/undervisningsmetoder/ (`kortetUrFil`), och PILOTEN är utkastet med platshållare som K-623 visade formen med.
-import { faktaIFastForm, uppraknat } from './standard/index.js';
+// Metodkortets profil för undervisningsmetoderna (K-623, form godkänd som version 1; K-621, ur metodens fil). Nivåerna,
+// orden, Svårighet och Kostnad och kommentaren under Lärande totalt räknas i standarden (src/lib/standard/
+// undervisningsmetod.js, K-632), som riggen och lathunden också läser, så att kortet, lathunden och riggens spärrar säger
+// samma sak. Här står det som bara kortet gör: områdena i kortets ordning, de primära områdena och kortet ur metodens fil i
+// samlingen src/content/undervisningsmetoder/ (`kortetUrFil`). PILOTEN är utkastet med platshållare som K-623 visade formen med.
+import { faktaIFastForm, laget, larandetIKort, uppraknat, type Effekt, type Kostnad, type Omradesvarde, type Svarighet, type Tillforlitlighet } from './standard/index.js';
 
-export type Tillforlitlighet = 'hog' | 'mattlig' | 'lag';
-export type Effekt = 'negativ' | 'ingen' | 'liten' | 'mattlig' | 'stor';
-// Ett område utan nivå står med sitt läge, som i metodens fil: Inte studerat, Inte sammanvägt (Lärande totalt när ingen
-// sammanställning väger ihop flera ämnen, ritat som Inte studerat) eller Väntar (bara i ett skelett).
-export type UtanNiva = 'inte-studerat' | 'inte-sammanvagt' | 'vantar';
-export type Omradesvarde = { tillforlitlighet: Tillforlitlighet; effekt: Effekt; motivering: string; kallor?: string[] } | { niva: UtanNiva; motivering: string };
 export type Omrade = 'larande' | 'lasning' | 'skrivning' | 'matematik' | 'amnen' | 'socialt';
 
 /** Staplarnas områden i standardens ordning. Lärande totalt sammanfattar och står först. */
@@ -24,33 +17,6 @@ export const OMRADEN: readonly { id: Omrade; namn: string; under?: string }[] = 
   { id: 'amnen', namn: 'Ämnen', under: 'SO, NO och teknik' },
   { id: 'socialt', namn: 'Socialt' },
 ];
-
-// Nivån ur tillförlitligheten och effekten. Låg tillförlitlighet utan effekt eller med negativ effekt är Oklart, och 1
-// kräver minst måttlig tillförlitlighet.
-const TABELL: Record<Tillforlitlighet, Record<Effekt, number | 'oklart'>> = {
-  hog: { negativ: 1, ingen: 1, liten: 3, mattlig: 4, stor: 5 },
-  mattlig: { negativ: 1, ingen: 1, liten: 3, mattlig: 4, stor: 4 },
-  lag: { negativ: 'oklart', ingen: 'oklart', liten: 2, mattlig: 2, stor: 2 },
-};
-// Orden prövades på en kall läsare 2026-10-29: med Svagt stöd och Inget påvisat stöd ordnade fem lärare dem lika.
-export const NIVAORD = ['', 'Inget påvisat stöd', 'Svagt stöd', 'Visst stöd', 'Gott stöd', 'Starkt stöd'] as const;
-
-/** Läget för ett område: en nivå 1 till 5 med sitt ord, Negativ effekt, Oklart eller Inte studerat. */
-export type Laget = { slag: 'niva'; niva: number; ord: string; negativ: boolean } | { slag: 'oklart' | 'inte'; ord: string };
-const UTAN_NIVA: Record<UtanNiva, string> = { 'inte-studerat': 'Inte studerat', 'inte-sammanvagt': 'Inte sammanvägt', vantar: 'Väntar' };
-export function laget(v: Omradesvarde): Laget {
-  if ('niva' in v) return { slag: 'inte', ord: UTAN_NIVA[v.niva] };
-  const n = TABELL[v.tillforlitlighet][v.effekt];
-  if (n === 'oklart') return { slag: 'oklart', ord: 'Oklart' };
-  const negativ = n === 1 && v.effekt === 'negativ';
-  return { slag: 'niva', niva: n, ord: negativ ? 'Negativ effekt' : NIVAORD[n], negativ };
-}
-
-/** Motiveringen börjar med tillförlitligheten och effekten, som standarden kräver; kortet gör den meningen fet. */
-export function motiveringensDelar(text: string): { forst: string; resten: string } {
-  const m = text.match(/^(.+?\.)\s+(.*)$/s);
-  return m ? { forst: m[1], resten: m[2] } : { forst: '', resten: text };
-}
 
 /**
  * Primär evidens: sajtens fyra områden, som i Stödundervisning, med deras färger (Niclas 2026-10-29: "ska det inte vara
@@ -77,16 +43,6 @@ export const primar = (evidens: Record<Omrade, Omradesvarde>): string => {
   return namn.length ? uppraknat(namn.map((n, i) => (i ? n.toLocaleLowerCase('sv') : n))) : 'Inget område med minst visst stöd';
 };
 
-// Svårighet och Kostnad ur kriterierna (evidensen.md, avsnitt 7). Svårigheten är den övre medianen av fyra, kostnaden den
-// högre av inköpet och timmarna. Orden: mer betyder mer arbete eller pengar, och de grå staplarna säger samma sak.
-export type Svarighet = { lara: number; karnan: number; stod: number; tid: number; motivering: string };
-export type Kostnad = { kop: number; timmar: number; motivering: string };
-const median = (xs: number[]) => { const s = [...xs].sort((a, b) => a - b); return s.length % 2 ? s[(s.length - 1) / 2] : s[s.length / 2]; };
-export const svarighetensNiva = (s: Svarighet) => median([s.lara, s.karnan, s.stod, s.tid]);
-export const kostnadensNiva = (k: Kostnad) => Math.max(k.kop, k.timmar < 5 ? 1 : k.timmar < 15 ? 2 : k.timmar < 40 ? 3 : k.timmar < 80 ? 4 : 5);
-export const SVARIGHETENS_ORD = ['', 'Mycket lätt', 'Lätt', 'Medelsvårt', 'Svårt', 'Mycket svårt'] as const;
-export const KOSTNADENS_ORD = ['', 'Mycket låg', 'Låg', 'Måttlig', 'Hög', 'Mycket hög'] as const;
-
 export interface Utkast {
   id: string; titel: string; alternativaNamn: string[]; undertitel: string; ingress: string; arskursText: string;
   fakta: [string, string][]; evidens: Record<Omrade, Omradesvarde>; svarighet: Svarighet; kostnad: Kostnad;
@@ -101,18 +57,6 @@ export interface Kortfalt {
   titel: string; alternativaNamn?: string[]; undertitel?: string; ingress: string; arskursText?: string; arskurs: string[];
   tid: string; period: string;
   profil: { evidens: Record<Omrade, Omradesvarde>; svarighet: Svarighet; kostnad: Kostnad };
-}
-
-/**
- * Kommentaren under Lärande totalt på bankens kort (Niclas 2026-10-30: "lärande totalt med snygg [kommentarsruta] i två
- * rader kopplat till sin son kort beskriver effekt på lärande"): områdets egen korta mening när metoden har den (`kort`),
- * annars motiveringen efter den första meningen om tillförlitligheten och effekten, utan hänvisningarna.
- */
-export function larandetIKort(v: Omradesvarde & { kort?: string }): string | undefined {
-  if (v.kort) return v.kort;
-  const { resten } = motiveringensDelar(v.motivering);
-  const t = resten.replace(/\s*\([^()]*\d{4}[^()]*\)/g, '').replace(/\s+([,.])/g, '$1').trim();
-  return t || undefined;
 }
 
 /**

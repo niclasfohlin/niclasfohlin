@@ -1,3 +1,13 @@
+/**
+ * En text med metodens saker, där saken blir det sidan gör av den, som en länk, och resten det sidan gör av en text: en rot
+ * för planens sidor i båda lagren, Planera insatsen och Lär dig metoden (sajtens K-630; samma följd stod i båda).
+ * @template {{ namn: string, former?: string[], versal?: boolean }} S
+ * @param {string} text
+ * @param {S[]} saker
+ * @param {(s: S, text: string) => string} sak
+ * @param {(text: string) => string} annat
+ */
+export const sakernasText = (text, saker, sak, annat) => sakdelar(text, saker).map((x) => (x.sak === undefined ? annat(x.text) : sak(saker[/** @type {number} */ (x.sak)], x.text))).join('');
 // Metodens saker i en text (sajtens K-493; Niclas 2026-10-24: "Om något är specifikt namngivet från metoden. Ett test. Ett
 // papper. En text. En specifik lektion. Då ska det vara hyperlänkat från planen", och "Du får försöka skapa en definition
 // vad namngivet och specifikt är som bör länkas"). En sak är något som metoden har ett namn på och sajten en egen adress

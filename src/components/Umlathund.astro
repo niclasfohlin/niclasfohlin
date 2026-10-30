@@ -1,0 +1,55 @@
+---
+// Lathunden Att komma igång för en undervisningsmetod (K-632): de fyra sidorna ur standarden (lathundensSidor i
+// src/lib/standard/undervisningsmetod.js), som riggen ritar i lathundens pdf och Word, i Stödundervisnings form
+// (Lathund.astro): huvudbandet med kicker, faktan under bandet och sedan två kolumner, som i telefonen blir en. Här står
+// bara vilken kolumn en del står i; varje del ritas av Umlathunddel.astro ur sitt slag. Metodens saker (saker, ur
+// undervisningsmetodensSaker) är länkar där de nämns, och sidan runt lägger Boklankar.astro utan knappar, så att sidan säger
+// det pdf:en säger.
+import Umlathunddel from './Umlathunddel.astro';
+import type { LathundDel, LathundSida } from '../lib/standard/index.js';
+import type { MetodSak } from '../lib/metodsaker';
+import { medSaker, type Um } from '../lib/undervisningsmetod';
+import type { UmFil, UmSlag } from '../lib/undervisningsmetodfiler';
+// relaterade: metoderna i Stödundervisning som metoden hör ihop med (relateradeSidor), vars titlar blir länkar.
+interface Props { d: Um; id: string; sidor: LathundSida[]; filer: Record<UmSlag, UmFil | undefined>; saker: MetodSak[]; relaterade: { titel: string; href: string }[] }
+const { d, id, sidor, filer, saker, relaterade } = Astro.props;
+// Hänvisningarna till källorna står som text: referensbladet står på metodens sida.
+const inga = new Set<string>();
+const t = (text: string) => medSaker(text, saker, inga, relaterade);
+// Delens kolumn: texten och noterna till vänster, korten, minuterna, rutinerna och tabellerna till höger. En del utan kolumn
+// står i hela bredden, före kolumnerna eller efter dem.
+const KOLUMN: Record<string, 'vanster' | 'hoger'> = { text: 'vanster', svarast: 'vanster', karnan: 'hoger', fore: 'vanster', forsta: 'hoger', minuterna: 'hoger', 'med-dig': 'vanster', efter: 'vanster', glider: 'hoger' };
+const kolumn = (x: LathundDel) => KOLUMN[x.id] ?? (x.slag === 'rutin' ? 'hoger' : undefined);
+const lagg = (s: LathundSida) => {
+  const ut = { fore: [] as LathundDel[], vanster: [] as LathundDel[], hoger: [] as LathundDel[], efter: [] as LathundDel[] };
+  for (const x of s.delar) { const k = kolumn(x); if (k) ut[k].push(x); else (ut.vanster.length || ut.hoger.length ? ut.efter : ut.fore).push(x); }
+  return ut;
+};
+const mall = filer.planeringsmall?.pdf;
+---
+<div class="lh um-lh">
+  {sidor.map((s) => {
+    const l = lagg(s);
+    return (
+      <section class="lh-sida" id={`lathund-${s.id}`} aria-labelledby={`lh-${s.nr}`}>
+        <header class="lh-huvud">
+          <span class="lh-kicker">Lathund</span><h2 id={`lh-${s.nr}`}>{s.nr === 1 ? d.titel : s.namn}</h2><span class="lh-etikett">{s.nr === 1 ? `${s.namn} · ` : ''}{s.nr}/{sidor.length}</span>
+          {s.id === 'planera' && mall && <span class="lh-lank"><a href={mall} target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${id}-planeringsmall`} data-goatcounter-title={`${d.titel}: planeringsmallen, utskrift`}>Den tomma mallen som pdf</a></span>}
+        </header>
+        {l.fore.map((x) => (x.slag === 'fakta' ? <Umlathunddel del={x} d={d} t={t} saker={saker} /> : <div class="um-lh-hel"><Umlathunddel del={x} d={d} t={t} saker={saker} /></div>))}
+        {(l.vanster.length > 0 || l.hoger.length > 0) && (
+          <div class="lh-kolumner">
+            <div class="lh-kol">{l.vanster.map((x) => <Umlathunddel del={x} d={d} t={t} saker={saker} />)}</div>
+            <div class="lh-kol">{l.hoger.map((x) => <Umlathunddel del={x} d={d} t={t} saker={saker} />)}</div>
+          </div>
+        )}
+        {l.efter.map((x) => <div class="um-lh-hel"><Umlathunddel del={x} d={d} t={t} saker={saker} /></div>)}
+      </section>
+    );
+  })}
+</div>
+
+<script>
+  // Checklistans kryss minns sitt läge i webbläsaren (src/scripts/bockar.ts).
+  import '../scripts/bockar';
+</script>

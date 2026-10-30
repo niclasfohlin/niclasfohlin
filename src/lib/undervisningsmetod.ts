@@ -1,7 +1,9 @@
 // Undervisningsmetodens sida (K-621): det sidan räknar ur metodens fil, en rot för sidan, Lär dig metoden och filerna.
 // Delarna och utfallens gränser står i standarden (src/lib/standard/undervisningsmetod.js), som riggen också läser.
+// Modulen läser inga filer, så att sidans skript kan läsa den; filerna läser src/lib/undervisningsmetodfiler.ts.
 import type { CollectionEntry } from 'astro:content';
-import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasText } from './standard/index.js';
+import type { MetodSak } from './metodsaker';
+import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasText, utfallensGranser, arSaksord, sakernasText, slugAv } from './standard/index.js';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
 // (K-627), så sidan läser resten som metodens fil har det.
@@ -9,6 +11,90 @@ import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasT
 export type Um = CollectionEntry<'undervisningsmetoder'>['data'] & Record<string, any>;
 
 export const metodensAdress = (id: string) => `/metoder/${id}`;
+/** Metoderna i Stödundervisning som metoden hör ihop med (relaterade), som sidor: deras titlar blir länkar i texten (medSaker). */
+export const relateradeSidor = (d: Um, stod: { id: string; data: { titel: string } }[]) => (d.relaterade ?? []).map((rid: string) => stod.find((x) => x.id === rid)).filter((x: unknown): x is { id: string; data: { titel: string } } => !!x).map((x: { id: string; data: { titel: string } }) => ({ titel: x.data.titel, href: `/stodundervisning/${x.id}` }));
+
+/** Filerna som riggen bygger, i nedladdningens ordning (Ladda ner och skriv ut, som i Stödundervisning). */
+export type UmSlag = 'allt' | 'metoden' | 'lathund' | 'lektionskort' | 'planeringsmall' | 'materialet' | 'observation' | 'referensblad';
+/** Filens namn, som sidan, knapparna och texterna säger det, och sakens namn i metodens saker. */
+export const UM_NAMN: Record<UmSlag, string> = {
+  allt: 'Allt om metoden', metoden: 'Metoden', lathund: 'Lathunden Att komma igång', lektionskort: 'Lektionskortet', planeringsmall: 'Planeringsmallen',
+  materialet: 'Materialet för klassen', observation: 'Observationsmallen', referensblad: 'Referensbladet',
+};
+export const UM_SLAG = Object.keys(UM_NAMN) as UmSlag[];
+/** Filens stam i public/metoder/: <id> för filen med allt, annars <id>-<slag>. */
+export const umStam = (id: string, slag: UmSlag) => (slag === 'allt' ? id : `${id}-${slag}`);
+/** Filens korta namn, utan lathundens titel: Lathunden. */
+export const umKort = (slag: UmSlag) => (slag === 'lathund' ? UM_NAMN.lathund.split(' ')[0] : UM_NAMN[slag]);
+/**
+ * Raden i Ladda ner och skriv ut, med samma ord som i Stödundervisning (Niclas 2026-10-10: samma knapp heter samma sak på
+ * varje metodsida): Allt om metoden, och varje del av den filen som Bara, som Bara metoden och Bara lathunden.
+ */
+export const umRad = (slag: UmSlag) => (slag === 'allt' ? UM_NAMN.allt : `Bara ${umKort(slag).charAt(0).toLocaleLowerCase('sv')}${umKort(slag).slice(1)}`);
+/** Metodkortet, rutan med forskningen överst på sidan (Metodprofil.astro), som texterna nämner. */
+export const METODKORTET = 'Metodkortet';
+
+/**
+ * Metodens saker (STIL.md under Hänvisningar): det metoden har ett namn på och sidan en egen plats för, med en knapp som
+ * skriver ut eller laddar ner det. Lektionskortet, varje blad i Materialet för klassen, materialet i sin helhet,
+ * planeringsmallen, observationsmallen, referensbladet och lathunden, och metodkortet, som är en del av sidan och skrivs ut
+ * med metoden (slag avsnitt, utan egen knapp). Namnen kommer ur metodens fil och UM_NAMN och adresserna ur sidans ankare,
+ * så att ett nytt blad eller namn följer med av sig själv. Standarden hittar namnen i en text (sakdelar) och de namn som
+ * ingen sak har (olankadeSaker), som i Stödundervisning (src/lib/metodsaker.ts). Adresserna är hela, så att lathundens
+ * sida kan länka hit.
+ */
+export function undervisningsmetodensSaker(d: Um, id: string): MetodSak[] {
+  const sida = metodensAdress(id);
+  // Ett namn som är ett ord för en sak (Planeringsmallen, Affischen Så visar du) hittas också med liten bokstav; ett annat,
+  // som Stegen, bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden), så att "skriv stegen" inte
+  // blir en länk.
+  const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) ? {} : { versal: true }), ...extra });
+  const saker: MetodSak[] = [sak(UM_NAMN.lektionskort, `${sida}#materialet`)];
+  if (d.ramar) {
+    saker.push(sak(d.ramar.rubrik ?? UM_NAMN.materialet, `${sida}#materialet-for-klassen`));
+    for (const r of d.ramar.ramar ?? []) saker.push(sak(r.rubrik, `${sida}#${bladetsAnkare(r.rubrik)}`));
+  }
+  if (d.planeringsmall) saker.push(sak(UM_NAMN.planeringsmall, `${sida}#planeringsmallen`));
+  if (d.observation) saker.push(sak(UM_NAMN.observation, `${sida}#observationsmallen`));
+  saker.push(sak(UM_NAMN.referensblad, `${sida}#referensbladet`));
+  if (d.lathund) for (const namn of [UM_NAMN.lathund, umKort('lathund')]) saker.push(sak(namn, `${sida}/lathund`));
+  saker.push(sak(METODKORTET, `${sida}#metodkortet`, { slag: 'avsnitt' }));
+  return saker;
+}
+/** Bladets ankare i Materialet för klassen, ur namnet. */
+export const bladetsAnkare = (namn: string) => `blad-${slugAv(namn)}`;
+
+/**
+ * Texten som HTML med metodens saker som länkar och hänvisningarna till källorna som länkar till referensbladet (medKallor):
+ * en rot för varje text på metodens sida. Böckerna och verktygen länkar Boklankar.astro runt sidan.
+ */
+export function medSaker(text: string, saker: MetodSak[], kallor: Set<string>, sidor: { titel: string; href: string }[] = []): string {
+  return sakernasText(String(text ?? ''), saker, (s, t) => `<a href="${esc(s.adress)}" class="um-sak">${esc(t)}</a>`, (t) => medKallor(t, kallor, sidor));
+}
+
+/** Utfallets gräns i en klass med n elever, i elever med fel, ur utfallensGranser i standarden: "Högst 5 av 28 med fel." */
+export function utfalletsGrans(id: 'nastanAlla' | 'deFlesta' | 'halften', n: number): string {
+  const g = utfallensGranser(n);
+  return id === 'nastanAlla' ? `Högst ${g.nastanAlla} av ${n} med fel.` : id === 'deFlesta' ? `${g.deFlesta[0]}–${g.deFlesta[1]} av ${n} med fel.` : `${g.halften} eller fler av ${n} med fel.`;
+}
+/** Regeln bakom gränserna, i ord, som utfallensGranser räknar (standarden, avsnitt 7). */
+export const UTFALLENS_REGEL = 'Nästan alla kan när högst en av fem har fel, avrundat nedåt. Hälften eller färre kan när hälften eller fler har fel, avrundat uppåt.';
+/** Klassens antal som utfallen i metodens text räknar med: talet efter "av" i den första gränsen, annars 28. */
+export const utfallensElever = (redo?: Record<string, string>) => Number(String(redo?.nastanAlla ?? '').match(/\bav (\d+)/)?.[1] ?? 28);
+/**
+ * Utfallets text som HTML, där gränserna för klassens antal står som tal som sidans skript räknar om när läraren skriver
+ * ett annat antal elever (granskare-3 nr 2): "Högst 5 av 28", "6–13 av 28", "14 eller fler" och "fler än 5 av 28" ur
+ * texten blir element med standardens tal. Talen räknas av utfallensGranser, i skriptet också.
+ */
+export function utfallensTal(text: string, n: number): string {
+  const g = utfallensGranser(n);
+  const tal = (nyckel: string, v: number) => `<span data-grans="${nyckel}">${v}</span>`;
+  const av = `<span data-elever>${n}</span>`;
+  return esc(String(text ?? ''))
+    .replace(new RegExp(`\\b${g.deFlesta[0]}–⁠?${g.deFlesta[1]} av ${n}\\b`, 'g'), `${tal('deFlesta0', g.deFlesta[0])}–${tal('deFlesta1', g.deFlesta[1])} av ${av}`)
+    .replace(new RegExp(`\\b${g.nastanAlla} av ${n}\\b`, 'g'), `${tal('nastanAlla', g.nastanAlla)} av ${av}`)
+    .replace(new RegExp(`(^|[^–\\d])${g.halften} eller fler\\b`, 'g'), `$1${tal('halften', g.halften)} eller fler`);
+}
 
 /** Huvudexemplets ämne i ord, som delarnas text säger det ("i matematik"). */
 const AMNEN: Record<string, string> = { lasning: 'läsning', skrivning: 'skrivning', matematik: 'matematik', 'so-no': 'SO och NO', 'praktisk-estetiska': 'ett praktiskt-estetiskt ämne' };
@@ -60,16 +146,18 @@ export const SLAGORD: Record<string, string> = { metaanalys: 'Metaanalys', 'syst
 /**
  * Effektens tal och ord ur källans effekt, som riggens referensblad visar dem: "Måttlig effekt: g = 0,31 i 14 studier"
  * blir talet 0,31. Ingen effekt blir ≈ 0, också när källan har två tal åt olika håll, och en effekt utan tal visar ordet
- * i stället för ett tal, så att bladet aldrig har ett tal som källan inte har (granskningen 2026-10-30).
+ * i stället för ett tal, så att bladet aldrig har ett tal som källan inte har (granskningen 2026-10-30). En effekt som
+ * källan säger inte är säker, "inte säker" eller "ingen säker skillnad", heter Inte säker, vilket tal den än har, så att det
+ * stora ordet inte säger Måttlig effekt om ett resultat som raden under kallar osäkert (design-3 nr 14, granskare-3 nr 12).
  */
 export function effektensDelar(effekt: string): { ord: string; tal: string; resten: string } {
   const [ord, ...rest] = effekt.split(':');
   const resten = rest.join(':').trim();
-  const ordet = ord.trim();
+  const ordet = /\binte säker\b|\bingen säker skillnad\b/i.test(effekt) ? 'Inte säker' : ord.trim();
   const funnet = resten.match(/(?:[dg]\s*=\s*)?(−?\d+,\d+)/)?.[1];
   // Det stora talet med högst två decimaler, som de andra; raden under har källans eget tal.
   const avrundat = funnet && /,\d{3,}$/.test(funnet) ? (Math.round(Number(funnet.replace('−', '-').replace(',', '.')) * 100) / 100).toFixed(2).replace('.', ',').replace('-', '−') : funnet;
-  const tal = /^ingen/i.test(ordet) ? '≈ 0' : avrundat ?? ordet.split(' ')[0];
+  const tal = /^ingen/i.test(ord.trim()) ? '≈ 0' : avrundat ?? ordet.split(' ')[0];
   return { ord: ordet, tal, resten };
 }
 

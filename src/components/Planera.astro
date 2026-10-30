@@ -12,6 +12,9 @@ import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import AppRad from './AppRad.astro';
 import StodForValet from './StodForValet.astro';
+import PlanHuvud from './PlanHuvud.astro';
+import PlanFilen from './PlanFilen.astro';
+import PlanVersion from './PlanVersion.astro';
 import { tidrad } from '../scripts/tidrad';
 import { liten, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
@@ -48,10 +51,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
 <Base title={`Planera insatsen: ${data.titel}`} description={`Planera ${data.titel}: välj när ni träffas, så räknar planen fram passen, veckornas fokus och uppföljningen ur metoden.`}>
   <article class="plan" id="plan" data-metod={data.id}>
     <header class="pl-huvud">
-      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={data.sida}>{data.titel}</a> · Planera</p>
-      <h1>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</h1>
-      <p class="ingress">Välj när ni träffas. Planen räknar fram passen och uppföljningen ur metoden, och varje vecka visar vad ni gör och var materialet finns.</p>
-      <noscript><p class="pl-utan-js">Planen räknas fram i webbläsaren och behöver JavaScript. Metoden står på <a href={data.sida}>metodens sida</a>.</p></noscript>
+      <PlanHuvud bank={{ namn: 'Stödundervisning', adress: '/stodundervisning' }} sida={data.sida} titel={data.titel} namn="Planera" rubrik="Planera insatsen" ingress="Välj när ni träffas. Planen räknar fram passen och uppföljningen ur metoden, och varje vecka visar vad ni gör och var materialet finns." />
       <AppRad plats="planera" metod={data.id} />
     </header>
 
@@ -211,26 +211,22 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
       <section class="pl-kopia" id="pl-kopia" aria-labelledby="pl-kopia-rubrik">
         <h2 id="pl-kopia-rubrik">Planen på en annan dator eller telefon</h2>
         <p class="pl-hjalp" id="pl-kopia-text"></p>
-        <p class="pl-andra-knappar">
+        <PlanFilen ner="pl-kopia-spara" fil="pl-kopia-fil" bort="pl-ta-bort" goat={`planera:${data.id}`} titel={data.titel} nerLed="kopia" oppnaLed="oppna-kopia">
           {/* Spara planen står också här före sparandet, där läraren är efter veckorna (Niclas 2026-10-25: "borde det inte
               finnas en Spara planen längst ner också om det inte gjorts"). Det är samma knapp som överst och går bort när planen
               är sparad. */}
           <button type="button" class="knapp liten" id="pl-spara-nere" data-goatcounter-click={`planera:${data.id}:spara`} data-goatcounter-title={`${data.titel}: planen sparad längst ned`} hidden>{PLANKNAPPAR.spara}</button>
           <button type="button" class="knapp sekundar liten" id="pl-lank" data-goatcounter-click={`planera:${data.id}:lank`} data-goatcounter-title={`${data.titel}: länken till planen kopierad`}>Kopiera länken</button>
-          <button type="button" class="knapp sekundar liten" id="pl-kopia-spara" data-goatcounter-click={`planera:${data.id}:kopia`} data-goatcounter-title={`${data.titel}: planen nedladdad`}>{PLANKNAPPAR.laddaNer}</button>
-          <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click={`planera:${data.id}:oppna-kopia`} data-goatcounter-title={`${data.titel}: en nedladdad plan öppnad`}>{PLANKNAPPAR.oppna}<input type="file" id="pl-kopia-fil" accept=".json,.zip,application/json,application/zip" multiple class="visually-hidden" /></label>
-        </p>
-        <p class="pl-ta-bort"><button type="button" class="pl-textknapp" id="pl-ta-bort" hidden>Ta bort planen</button></p>
+        </PlanFilen>
       </section>
     </div>
 
-    <footer class="pl-version">
-      <p class="pl-version-namn">{PLANERA.beta && <span class="beta">Beta</span>}{' '}{PLANERA.namn} {PLANERA.version}</p>
+    <PlanVersion>
       <p>{PLANERA.namn} är modulen som räknar fram planen ur metoden och följer insatsen. {PLANERA.beta ? `Den är ny och prövas på ${antal === 1 ? 'en metod' : `${antal} metoder`}, så allt är inte prövat i skolan än. ` : ''}Fungerar något inte, mejla mig, så rättar jag det: <a href={mejl} data-goatcounter-click={`planera:${data.id}:mejl`} data-goatcounter-title={`${data.titel}: mejl om Planera`}>{site.epost}</a>.</p>
       {/* Det sidan ser av webbläsaren, för felsökning, som i en apps egen webbläsare (Niclas 2026-10-25: "Du borde kunna
           ... sniffa till dig vad som behövs för att veta att den används"). Det står bara här och skickas inte. */}
       <details class="pl-teknik"><summary>Webbläsaren, för felsökning</summary><p id="pl-teknik"></p></details>
-    </footer>
+    </PlanVersion>
 
     <div class="pl-filer" id="pl-filer" hidden>
       {snabbmall && <a class="knapp sekundar" data-fil="snabbmall" href={`/stodundervisning/${data.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${data.id}-snabbmall`} data-goatcounter-title={`${data.titel}: ${snabbmall.rubrik}, bladet`} data-namn={snabbmallensNamn}><span data-direkt={`Skriv ut ${snabbmallensNamn}`}>{stor(snabbmallensNamn)} som pdf</span></a>}

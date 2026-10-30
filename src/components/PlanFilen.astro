@@ -1,0 +1,27 @@
+---
+// Planen som fil, lika i Planera insatsen och Lär dig metoden (K-630): knapparna Ladda ner planen och Öppna en nedladdad plan,
+// med samma namn i båda (PLANKNAPPAR), och Ta bort planen. Sidans egna knappar, som Kopiera länken i Planera insatsen, står
+// först i raden, i komponentens slot. Sidans skript binder knapparna med sina id.
+import { PLANKNAPPAR } from '../lib/standard/index.js';
+
+interface Props {
+  /** Id för Ladda ner planen, filfältet och Ta bort planen. */
+  ner: string;
+  fil: string;
+  bort: string;
+  /** Statistikens namn för knapparna, som planera:<metod>, och metodens titel. */
+  goat: string;
+  titel: string;
+  /** Statistikens sista led för Ladda ner och Öppna, när sidan har egna. */
+  nerLed?: string;
+  oppnaLed?: string;
+}
+const { ner, fil, bort, goat, titel, nerLed = 'ladda-ner', oppnaLed = 'oppna' } = Astro.props;
+---
+
+<p class="pl-andra-knappar">
+  <slot />
+  <button type="button" class="knapp sekundar liten" id={ner} data-goatcounter-click={`${goat}:${nerLed}`} data-goatcounter-title={`${titel}: planen nedladdad`}>{PLANKNAPPAR.laddaNer}</button>
+  <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click={`${goat}:${oppnaLed}`} data-goatcounter-title={`${titel}: en nedladdad plan öppnad`}>{PLANKNAPPAR.oppna}<input type="file" id={fil} accept=".json,.zip,application/json,application/zip" multiple class="visually-hidden" /></label>
+</p>
+<p class="pl-ta-bort"><button type="button" class="pl-textknapp" id={bort} hidden>Ta bort planen</button></p>

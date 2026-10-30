@@ -93,12 +93,15 @@ const PROVFILM: Film = {
 };
 const provfilm = () => typeof process !== 'undefined' && process.env?.FILMPROV === '1';
 
-/** Metodens filmer: huvudfilmen först, sedan extrafilmerna i fältets ordning. */
-export function metodensFilmer(d: MetodData, id: string): MetodFilm[] {
+/**
+ * Metodens filmer: huvudfilmen först, sedan extrafilmerna i fältets ordning. Filerna ligger i samlingens mapp i public/,
+ * stodundervisning/ eller metoder/ för undervisningsmetoderna (K-632), med samma namn.
+ */
+export function metodensFilmer(d: Partial<Pick<MetodData, 'film' | 'filmer'>>, id: string, samling: 'stodundervisning' | 'metoder' = 'stodundervisning'): MetodFilm[] {
   const ut: MetodFilm[] = [];
-  if (d.film) ut.push({ film: d.film, bas: `/stodundervisning/${id}-film`, huvud: true, nr: 1 });
-  else if (provfilm()) ut.push({ film: PROVFILM, bas: '/stodundervisning/ljudlek-rim-film', huvud: true, nr: 1 });
-  for (const f of d.filmer ?? []) ut.push({ film: f, bas: `/stodundervisning/${id}-film${f.nr}`, vid: tolkaEfter(f.efter), huvud: false, nr: f.nr });
+  if (d.film) ut.push({ film: d.film, bas: `/${samling}/${id}-film`, huvud: true, nr: 1 });
+  else if (provfilm() && samling === 'stodundervisning') ut.push({ film: PROVFILM, bas: '/stodundervisning/ljudlek-rim-film', huvud: true, nr: 1 });
+  for (const f of d.filmer ?? []) ut.push({ film: f, bas: `/${samling}/${id}-film${f.nr}`, vid: tolkaEfter(f.efter), huvud: false, nr: f.nr });
   return ut;
 }
 export const huvudfilm = (filmer: MetodFilm[]) => filmer.find((f) => f.huvud);

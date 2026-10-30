@@ -72,6 +72,11 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
   };
   // En rubrik står aldrig ensam sist på en sida: den får plats med det som följer, behov punkter.
   const rubrik = (s: string, behov = 40) => { plats(behov + 30); y -= 10; text(s, { storlek: 13, fet: true, luft: 4 }); };
+  // Pdf:ens huvud, lika i Planera insatsens och Lär dig metodens pdf:er (K-630): rubriken, det den gäller, och perioden och
+  // dagen den skrevs ut.
+  const huvudet = (s: string, under: string, period: string, idag: string) => { text(s, { storlek: 20, fet: true, luft: 2 }); text(under, { storlek: 13, fet: true, luft: 2 }); text(`${period ? `${period}. ` : ''}Utskriven ${datumText(idag)}.`, { farg: farg.svag, luft: 6 }); };
+  // En förklarande rad i mindre och svagare text, som skalans steg under en linje.
+  const not = (s: string, luft = 4) => text(s, { farg: farg.svag, storlek: 9.5, luft });
   // Staplar vecka för vecka (1 till 5), med veckan i planen och kalenderveckan under, som på sidan (veckansNamn i standarden),
   // en markering vid avstämningen och, för en elev när läraren noterar närvaron, veckans pass som prickar: fylld var med, ring
   // var inte med, streck inte bockat.
@@ -234,7 +239,7 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
     });
     y -= total - (o.mitt ? 22 : 0);
   };
-  return { text, rubrik, staplar, namnMedStaplar, linje, avsluta, tabell, matris, farg };
+  return { text, rubrik, huvudet, not, staplar, namnMedStaplar, linje, avsluta, tabell, matris, farg };
 }
 
 const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
@@ -244,9 +249,7 @@ const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
 // på sidan och i texterna (K-509).
 export type Pdf = Awaited<ReturnType<typeof dokument>>;
 const huvud = (p: Pdf, rubrik: string, plan: Plan, info: PdfInfo, idag: string, gruppens: boolean) => {
-  p.text(rubrik, { storlek: 20, fet: true, luft: 2 });
-  p.text([info.metod, gruppens ? info.grupp : '', info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
-  p.text(`${plan.forstaPass && plan.sistaPass ? datumspann(plan.forstaPass, plan.sistaPass) : ''}. Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
+  p.huvudet(rubrik, [info.metod, gruppens ? info.grupp : '', info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), plan.forstaPass && plan.sistaPass ? datumspann(plan.forstaPass, plan.sistaPass) : '', idag);
 };
 // Innehållet i insatsen (Niclas 2026-10-28: "Ha en rubrik om Innehållet i insatsen med en text från ingress eller metoden"):
 // metodens egen text, ingressen för gruppen och undertiteln för eleven, och raderna ur texten till åtgärdsprogrammet, så
@@ -291,7 +294,7 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
     const t = skattningensText(s, sk, info);
     if (!t.varden) continue;
     p.rubrik(sk.namn, 150);
-    p.text(`${sk.skala.fran} till ${sk.skala.till}: ${sk.skala.steg.map((x) => `${stegetsSpann(x)} ${x.namn.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+    p.not(`${sk.skala.fran} till ${sk.skala.till}: ${sk.skala.steg.map((x) => `${stegetsSpann(x)} ${x.namn.toLocaleLowerCase('sv')}`).join(', ')}.`);
     p.linje(sk.varden, veckoetiketter(s), { fran: sk.skala.fran, till: sk.skala.till, granser: skattningensGranser(sk), mitt: s.mitt });
     if (t.regler.length) p.text(`Det linjen sa: ${t.regler.join('; ')}.`, { luft: 8 });
   }
@@ -310,7 +313,7 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   if (rader.length) {
     p.matris(veckoetiketter(s), rader, { sist: visas.some((e) => narvaro(e)) ? 'Närvaro' : undefined, mitt: s.mitt });
     if (planens && visas.length) skalan(p, info, 4);
-    if (veckorna.length) p.text(`Veckans skattning av gruppen, medel ${decimal(s.veckomedel)} av 5.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+    if (veckorna.length) p.not(`Veckans skattning av gruppen, medel ${decimal(s.veckomedel)} av 5.`);
   }
   if (planens && utan.length) p.text(s.grupp ? 'Gruppen är inte skattad än.' : `Inte skattade än: ${utan.map((e) => e.namn).join(', ')}.`, { luft: 8 });
   // Utvecklingen elev för elev: riktningen och metodens resultat före och efter.
