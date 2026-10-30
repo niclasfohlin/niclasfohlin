@@ -10,7 +10,7 @@
 // ingressen och länkarna till Lär dig metoden och lathunden, som korten i Stödundervisning (design-3 nr 17 och 22).
 import Staplar from './Staplar.astro';
 import { OMRADEN, primaraOmraden, type Utkast } from '../lib/metodprofil';
-import { esc, uppraknat, laget, motiveringensDelar, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAORD, type Laget } from '../lib/standard/index.js';
+import { esc, effektensSkala, uppraknat, laget, motiveringensDelar, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAORD, type Laget } from '../lib/standard/index.js';
 import { medSaker, METODKORTET } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
 interface Props { m: Utkast; bank?: boolean; kallor?: Set<string>; saker?: MetodSak[]; lankar?: { text: string; href: string; klass: string }[] }
@@ -112,7 +112,7 @@ const fylld = (l: Laget) => (l.slag === 'niva' && l.niva > 1 ? l.niva : 0);
             <tr><th scope="row"><span class="mp-inte">Inte studerat</span></th><td>Ingen studie med jämförelsegrupp har mätt området. Vi vet inte, och det betyder inte att metoden saknar effekt</td></tr>
           </tbody>
         </table>
-        <p set:html={skal('Effekten i ord: i stora försök i många skolor är 0,05 till 0,19 måttlig och 0,20 eller mer stor, och i andra studier är 0,10 till 0,39 måttlig och 0,40 eller mer stor. Under det är effekten liten, när den är säker. En effekt som inte är säker heter Inte säker i referensbladet, vilket tal den än har. Ordet vid en nivå väger alla källor för området och hur säkra de är, så det kan skilja sig från en enskild källas ord i referensbladet.')} />
+        <p set:html={skal(`${effektensSkala().text[1]} Ordet vid en nivå väger alla källor för området och hur säkra de är, så det kan skilja sig från en enskild källas ord i referensbladet.`)} />
         <p>Primär evidens är det eller de två av sajtens fyra områden, Läsning, Skrivning, Matematik och Socialt, där stödet är starkast, minst Visst stöd.</p>
         <p>De grå staplarna visar hur svårt och hur dyrt det är att införa metoden: Svårighet från Mycket lätt till Mycket svårt, Kostnad från Mycket låg till Mycket hög.</p>
         <p>Forskningen visar vad som ofta fungerar för många elever. Du avgör vad som fungerar i din klass.</p>

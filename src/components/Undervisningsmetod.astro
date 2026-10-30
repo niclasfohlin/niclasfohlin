@@ -8,7 +8,7 @@
 import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
-import { stor, UTFALLEN, MED_DIG_PA_VAGEN, forstaLektionensMinuter } from '../lib/standard/index.js';
+import { stor, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter } from '../lib/standard/index.js';
 import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
@@ -500,6 +500,7 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
       {d.grund.text.map((s: string) => <p set:html={k(s)} />)}
       <p set:html={k(`${METODKORTET} säger hur väl forskningen stöder metoden i varje område, och varje rad där fälls ut till skälet.`)} />
       {urval.text && <div class="um-ruta"><p class="um-ruta-rubrik">Så valdes källorna</p><p set:html={k(urval.text)} />{urval.regel && <p class="um-not">Regeln: <span set:html={k(urval.regel)} /></p>}</div>}
+      <div class="um-ruta" id="sa-lases-effekten"><p class="um-ruta-rubrik">{effektensSkala().rubrik}</p>{effektensSkala().text.map((s) => <p set:html={k(s)} />)}</div>
       </div>
     </details>
   )}

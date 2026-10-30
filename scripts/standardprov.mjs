@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, undervisningsmetodensFel, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -144,6 +144,13 @@ for (const [d, vantat] of lektionsfall) { const f = Object.values(faktaIFastForm
 
 // Undervisningsmetoderna (K-621): utfallens gränser som riggens standard räknar dem, och delarnas ordning och text.
 for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13'], [5, '1|2-2|3']]) { const g = utfallensGranser(n); const f = `${g.nastanAlla}|${g.deFlesta.join('-')}|${g.halften}`; if (f !== vantat) fel.push(`utfallensGranser(${n}) ger ${f}, inte ${vantat}`); }
+// Effektens skala: texten säger gränserna ur konstanten, och andra kolumnen börjar vid Cohens 0,2 (Niclas 2026-10-30).
+{
+  const t = effektensSkala().text.join(' ');
+  for (const v of ['0,05 till 0,19 måttlig', '0,20 eller mer stor', '0,20 till 0,39 måttlig', '0,40 eller mer stor', 'Kraft (2020)', 'Cheung och Slavin, 2016'])
+    if (!t.includes(v)) fel.push(`effektensSkala säger inte "${v}"`);
+  if (EFFEKTENS_GRANSER.andra.mattlig !== 0.2 || EFFEKTENS_GRANSER.stora.stor !== 0.2) fel.push('EFFEKTENS_GRANSER har inte gränserna 0,20 för måttlig i andra studier och 0,20 för stor i stora försök');
+}
 // Undervisningsmetodens fält: piloten har allt, och en fil med fel ger varje fel (sajtens K-627).
 {
   const { parse } = await import('yaml');

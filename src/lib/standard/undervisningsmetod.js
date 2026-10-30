@@ -393,3 +393,40 @@ export function lathundensSidor(d) {
   };
   return sidor.map((s) => ({ ...s, delar: /** @type {LathundDel[]} */ (s.delar).filter(harInnehall) }));
 }
+
+/**
+ * Effektens gränser i standardavvikelser (riggens evidensen.md, avsnitt 3). Stora randomiserade studier med prov som
+ * forskarna inte har gjort själva följer Kraft (2020), som byggde skalan på 1 942 effekter i 747 randomiserade studier i
+ * skolan. Andra studier och sammanställningar ger ungefär dubbelt så stora tal (Cheung och Slavin, 2016), och där ligger
+ * gränserna på Cohens 0,2 och Hatties 0,40 (Niclas 2026-10-30: "Är de verkligen korrekt gängse regler att kalla ex 0.1
+ * måttlig effekt?", och "Kör dina rekommendationer"). Sajtens text om skalan och riggens spärr läser samma tal.
+ */
+export const EFFEKTENS_GRANSER = Object.freeze({
+  stora: Object.freeze({ mattlig: 0.05, stor: 0.2 }),
+  andra: Object.freeze({ mattlig: 0.2, stor: 0.4 }),
+});
+
+/** Ett tal med decimalkomma och två decimaler, som skalans gränser skrivs. @param {number} x */
+const skalansTal = (x) => x.toFixed(2).replace('.', ',');
+
+/**
+ * Hur effekten läses med orden, samma i varje undervisningsmetod: på metodens sida i bilaga B och i metodkortets
+ * förklaring, och i riggens Word-fil (Niclas 2026-10-30: "skriv en liten text om detta i B delen hur effektstorlek
+ * bedöms med orden", och "ha samma i alla metoder"). Talen kommer ur EFFEKTENS_GRANSER.
+ * @returns {{ rubrik: string, text: string[] }}
+ */
+export function effektensSkala() {
+  const s = EFFEKTENS_GRANSER.stora;
+  const a = EFFEKTENS_GRANSER.andra;
+  // Den övre gränsen för måttlig är steget före gränsen för stor, som 0,19 före 0,20.
+  const fore = (/** @type {number} */ x) => skalansTal(Math.round((x - 0.01) * 100) / 100);
+  return {
+    rubrik: 'Så läses effekten',
+    text: [
+      'Effekten är skillnaden mellan eleverna som fick metoden och eleverna i jämförelsegruppen, mätt i standardavvikelser (Cohens d eller Hedges g).',
+      `Orden följer Kraft (2020), som byggde sin skala på 747 randomiserade studier i skolan. I stora försök med prov som forskarna inte har gjort själva är ${skalansTal(s.mattlig)} till ${fore(s.stor)} måttlig och ${skalansTal(s.stor)} eller mer stor. Mindre studier och studier med forskarnas egna prov ger ungefär dubbelt så stora tal (Cheung och Slavin, 2016), och där är ${skalansTal(a.mattlig)} till ${fore(a.stor)} måttlig och ${skalansTal(a.stor)} eller mer stor. Under det är effekten liten, när den är säker. En effekt som inte är säker heter Inte säker, vilket tal den än har.`,
+      'Med Cohens äldre skala, där 0,2 är liten, 0,5 medel och 0,8 stor, skulle samma tal heta mindre. Den skalan gjordes för beteendevetenskapen, och i skolan ger de flesta insatser mindre tal än så.',
+      `Så kan talen läsas: vid ${skalansTal(s.stor)} hamnar en elev i mitten av gruppen med metoden där elev 58 av 100 i jämförelsegruppen hamnar, och vid ${skalansTal(a.stor)} där elev 66 hamnar.`,
+    ],
+  };
+}

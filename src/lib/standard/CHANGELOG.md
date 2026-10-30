@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.41.0, 2026-10-30
+
+- `undervisningsmetod.js` (Niclas 2026-10-30: "Är de verkligen korrekt gängse regler att kalla ex 0.1 måttlig effekt?", "Kör dina rekommendationer" och "ha samma i alla metoder"): `EFFEKTENS_GRANSER`, effektens gränser i standardavvikelser. Stora randomiserade studier med oberoende prov följer Kraft (2020): måttlig från 0,05, stor från 0,20. Andra studier och sammanställningar: måttlig från 0,20, stor från 0,40, förut 0,10 och 0,40. `effektensSkala()` ger texten Så läses effekten med talen ur konstanten, för bilaga B och metodkortets förklaring på sajten och i riggens Word-fil, och riggens spärr läser gränserna härifrån.
+
 ## 0.40.0, 2026-10-30
 
 - `undervisningsmetod.js`, lathundens form för alla undervisningsmetoder (sajtens K-637; Niclas 2026-10-30: "gör om standarden för denna lathund enligt nuvarande 4 steg. Men att den görs likt den andra för stödundervisning och du fixar den med filmer"): lathunden är fyra liggande sidor ur `lathundensSidor`, med filmbilden först, och sajten ritar den, i PowerPoint-filen `<id>-lathund.pptx` och dess pdf i A4 liggande; riggen ritar Word-lathunden ur samma sidor som förut. Formen gäller varje kommande metod. `LATHUNDENS_TAK` är längderna som ryms på sidorna, pilotens med marginal (brevet till riggen 06.15, punkt 3, och en rutin i vecka 1, fraserna i Du säger, veckornas tabell med högst fem rader och 1 500 tecken i cellerna, Efter de första veckorna och Om det glider), och `lathundensTakFel(d)` säger vad som är längre; `undervisningsmetodensFel` kör den, så att riggens leveransprov stannar på det före leveransen.

@@ -717,6 +717,10 @@ export declare const LATHUNDENS_TAK: {
 /** Det i metodens fil som är längre än lathundens tak, med fältet och var det står i lathunden; tom när allt ryms. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export declare function lathundensTakFel(d: Record<string, any>): string[];
+/** Effektens gränser i standardavvikelser: stora randomiserade studier med oberoende prov (Kraft, 2020) och andra studier och sammanställningar. */
+export declare const EFFEKTENS_GRANSER: { readonly stora: { readonly mattlig: number; readonly stor: number }; readonly andra: { readonly mattlig: number; readonly stor: number } };
+/** Hur effekten läses med orden, samma i varje undervisningsmetod, med talen ur EFFEKTENS_GRANSER. */
+export declare function effektensSkala(): { rubrik: string; text: string[] };
 /** Första lektionens delar med minuterna och de en eller två fraser läraren säger; den första delen har rutinens repliker. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export declare function forstaLektionensMinuter(d: Record<string, any>): { fas: string; tid: string; fraser: string[] }[];
