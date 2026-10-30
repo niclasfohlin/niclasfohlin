@@ -2,7 +2,7 @@
 
 ## 0.41.0, 2026-10-30
 
-- `undervisningsmetod.js` (Niclas 2026-10-30: "Är de verkligen korrekt gängse regler att kalla ex 0.1 måttlig effekt?", "Kör dina rekommendationer" och "ha samma i alla metoder"): `EFFEKTENS_GRANSER`, effektens gränser i standardavvikelser. Stora randomiserade studier med oberoende prov följer Kraft (2020): måttlig från 0,05, stor från 0,20. Andra studier och sammanställningar: måttlig från 0,20, stor från 0,40, förut 0,10 och 0,40. `effektensSkala()` ger texten Så läses effekten med talen ur konstanten, för bilaga B och metodkortets förklaring på sajten och i riggens Word-fil, och riggens spärr läser gränserna härifrån.
+- `undervisningsmetod.js` (Niclas 2026-10-30: "Är de verkligen korrekt gängse regler att kalla ex 0.1 måttlig effekt?", "Kör dina rekommendationer" och "ha samma i alla metoder"): `EFFEKTENS_GRANSER`, effektens gränser i standardavvikelser. Stora randomiserade studier med oberoende prov följer Kraft (2020): måttlig från 0,05, stor från 0,20. Andra studier och sammanställningar: måttlig från 0,20, stor från 0,40, förut 0,10 och 0,40. `effektensSkala()` ger texten Så läses effekten i två korta stycken för en lärare (Niclas samma dag: "Enkelt och koncist"): vad talet betyder, med platsen av 100 där eleven i mitten hamnar (`platsenAv100`), och orden, med talen ur konstanten, för bilaga B och metodkortets förklaring på sajten och i riggens Word-fil, och riggens spärr läser gränserna härifrån.
 
 ## 0.40.0, 2026-10-30
 

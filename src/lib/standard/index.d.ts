@@ -719,7 +719,9 @@ export declare const LATHUNDENS_TAK: {
 export declare function lathundensTakFel(d: Record<string, any>): string[];
 /** Effektens gränser i standardavvikelser: stora randomiserade studier med oberoende prov (Kraft, 2020) och andra studier och sammanställningar. */
 export declare const EFFEKTENS_GRANSER: { readonly stora: { readonly mattlig: number; readonly stor: number }; readonly andra: { readonly mattlig: number; readonly stor: number } };
-/** Hur effekten läses med orden, samma i varje undervisningsmetod, med talen ur EFFEKTENS_GRANSER. */
+/** Platsen av 100 där eleven i mitten hamnar med en effekt på x standardavvikelser, som 58 vid 0,20. */
+export declare function platsenAv100(x: number): number;
+/** Hur effekten läses, kort för en lärare: vad talet betyder och orden, samma i varje undervisningsmetod, med talen ur EFFEKTENS_GRANSER. */
 export declare function effektensSkala(): { rubrik: string; text: string[] };
 /** Första lektionens delar med minuterna och de en eller två fraser läraren säger; den första delen har rutinens repliker. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

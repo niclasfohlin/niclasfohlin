@@ -410,23 +410,35 @@ export const EFFEKTENS_GRANSER = Object.freeze({
 const skalansTal = (x) => x.toFixed(2).replace('.', ',');
 
 /**
- * Hur effekten läses med orden, samma i varje undervisningsmetod: på metodens sida i bilaga B och i metodkortets
- * förklaring, och i riggens Word-fil (Niclas 2026-10-30: "skriv en liten text om detta i B delen hur effektstorlek
- * bedöms med orden", och "ha samma i alla metoder"). Talen kommer ur EFFEKTENS_GRANSER.
+ * Platsen av 100 där eleven i mitten hamnar med en effekt på x standardavvikelser: normalfördelningen vid x, med erf
+ * enligt Abramowitz och Stegun 7.1.26 (felet under 0,0000002). Vid 0,20 är det plats 58.
+ * @param {number} x
+ */
+export function platsenAv100(x) {
+  const z = Math.abs(x) / Math.SQRT2;
+  const t = 1 / (1 + 0.3275911 * z);
+  const erf = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-z * z);
+  return Math.round(50 * (1 + Math.sign(x) * erf));
+}
+
+/**
+ * Hur effekten läses, samma i varje undervisningsmetod och kort nog för en lärare som inte är forskare: på metodens sida
+ * i bilaga B och i metodkortets förklaring, och i riggens Word-fil (Niclas 2026-10-30: "skriv en liten text om detta i B
+ * delen hur effektstorlek bedöms med orden", "ha samma i alla metoder", och "Det måste finnas någon kortare förklaring
+ * vad 0.2 innebär ... För en lärare som inte är forskare. Enkelt och koncist"). Första stycket säger vad talet betyder,
+ * och det andra orden. Gränserna kommer ur EFFEKTENS_GRANSER och platserna ur platsenAv100. Skälen till skalan står i
+ * riggens evidensen.md, avsnitt 3.
  * @returns {{ rubrik: string, text: string[] }}
  */
 export function effektensSkala() {
   const s = EFFEKTENS_GRANSER.stora;
   const a = EFFEKTENS_GRANSER.andra;
-  // Den övre gränsen för måttlig är steget före gränsen för stor, som 0,19 före 0,20.
-  const fore = (/** @type {number} */ x) => skalansTal(Math.round((x - 0.01) * 100) / 100);
+  const plats = (/** @type {number} */ x) => `plats ${platsenAv100(x)} vid ${skalansTal(x)}`;
   return {
     rubrik: 'Så läses effekten',
     text: [
-      'Effekten är skillnaden mellan eleverna som fick metoden och eleverna i jämförelsegruppen, mätt i standardavvikelser (Cohens d eller Hedges g).',
-      `Orden följer Kraft (2020), som byggde sin skala på 747 randomiserade studier i skolan. I stora försök med prov som forskarna inte har gjort själva är ${skalansTal(s.mattlig)} till ${fore(s.stor)} måttlig och ${skalansTal(s.stor)} eller mer stor. Mindre studier och studier med forskarnas egna prov ger ungefär dubbelt så stora tal (Cheung och Slavin, 2016), och där är ${skalansTal(a.mattlig)} till ${fore(a.stor)} måttlig och ${skalansTal(a.stor)} eller mer stor. Under det är effekten liten, när den är säker. En effekt som inte är säker heter Inte säker, vilket tal den än har.`,
-      'Med Cohens äldre skala, där 0,2 är liten, 0,5 medel och 0,8 stor, skulle samma tal heta mindre. Den skalan gjordes för beteendevetenskapen, och i skolan ger de flesta insatser mindre tal än så.',
-      `Så kan talen läsas: vid ${skalansTal(s.stor)} hamnar en elev i mitten av gruppen med metoden där elev 58 av 100 i jämförelsegruppen hamnar, och vid ${skalansTal(a.stor)} där elev 66 hamnar.`,
+      `Talet säger hur mycket bättre det gick för eleverna med metoden än för eleverna utan. Tänk dig 100 elever utan metoden på rad efter resultat. Eleven i mitten står på plats 50. Med metoden flyttar den eleven till ${plats(0.1)}, ${plats(s.stor)} och ${plats(a.stor)}.`,
+      `I stora försök i många skolor är ${skalansTal(s.mattlig)} en måttlig och ${skalansTal(s.stor)} en stor effekt. Mindre studier ger ungefär dubbelt så stora tal, så där är ${skalansTal(a.mattlig)} måttlig och ${skalansTal(a.stor)} stor (Kraft, 2020; Cheung och Slavin, 2016). Under det är effekten liten. När resultatet inte är säkert står Inte säker.`,
     ],
   };
 }
