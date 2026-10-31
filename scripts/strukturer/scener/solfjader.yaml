@@ -1,0 +1,20 @@
+# Solfjäder: den förste håller frågekorten som en solfjäder, den andre har dragit ett kort och läser frågan, den tredje svarar och den fjärde kontrollerar svaret och berömmer.
+id: solfjader
+skala: 74
+djup: false
+delar:
+  - figur: { namn: drar, x: 392, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: fragan, nar: { H: [436, 262] } }
+  - figur: { namn: svarar, x: 560, y: 392, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: drar, lutar: drar }
+  - kort: { x: 293, y: 270, b: 38, h: 54, vinkel: -20, farg: '#9bbae0' }
+  - kort: { x: 301, y: 268, b: 38, h: 54, vinkel: 0, farg: '#9bbae0' }
+  - kort: { x: 309, y: 269, b: 38, h: 54, vinkel: 20, farg: '#9bbae0' }
+  - kort: { x: 316, y: 274, b: 38, h: 54, vinkel: 40, farg: '#9bbae0' }
+  - kort: { x: 321, y: 281, b: 38, h: 54, vinkel: 60, farg: '#9bbae0' }
+  - figur: { namn: haller, x: 245, y: 520, utanBen: true, trojan: lila, ansikte: glad, tittar: drar, lutar: drar, nar: { H: [302, 298] }, armarEfter: efterBordet }
+  - figur: { namn: kollar, x: 682, y: 525, utanBen: true, trojan: orange, ansikte: glad, tittar: svarar, lutar: svarar, nar: { V: [628, 404] }, armarEfter: efterBordet }
+  - bord: { x: 270, y: 445, b: 360, d: 96, h: 50, snett: 20 }
+  - punkt: { namn: efterBordet, x: 302, y: 298 }
+  - kort: { namn: fragan, x: 444, y: 248, b: 34, h: 46, vinkel: 8, symbol: fraga }
+  - bubbla: { till: drar, dx: 10, dy: 44, symboler: [fraga], visar: "Den andre har dragit ett kort ur solfjädern och läser frågan högt" }
+  - bubbla: { till: svarar, dx: 30, dy: 44, symboler: [triangel], visar: "Den tredje svarar på frågan efter fem sekunders tanketid" }
+  - bubbla: { till: kollar, dx: 44, dy: 40, symboler: [bock, stjarna], visar: "Den fjärde kontrollerar svaret och berömmer: en bock för rätt och en stjärna för beröm" }

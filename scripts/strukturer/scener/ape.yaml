@@ -1,0 +1,17 @@
+# APE: läraren har visat modellen steg för steg på tavlan, och paret prövar den tillsammans på ett papper med samma steg:
+# den ena pekar på nästa steg på tavlan, och den andra har gjort det första och skriver det andra.
+id: ape
+skala: 80
+djup: false
+delar:
+  - tavla: { x: 490, y: 186, b: 300, h: 100 }
+  - kort: { namn: steg1, x: 412, y: 186, b: 48, h: 56, vinkel: -3, symbol: triangel }
+  - kort: { namn: steg2, x: 570, y: 186, b: 48, h: 56, vinkel: 2, symbol: kvadrat }
+  - pil: { fran: [446, 186], till: [536, 186], bage: -0.12 }
+  - figur: { namn: skriver, x: 410, y: 446, stallning: sitta, utanBen: true, trojan: gul, ansikte: skriva, tittar: bladet, lutar: bladet, nar: { H: [506, 372] }, armarEfter: bladet }
+  - figur: { namn: visar, x: 640, y: 446, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: steg2, lutar: steg2, pekar: { mal: steg2, dy: 22 } }
+  - bord: { x: 330, y: 480, b: 360, d: 100, h: 55, snett: -10 }
+  - papper: { namn: bladet, x: 474, y: 404, b: 116, h: 58, vinkel: -3, rutnat: [2, 1], symbol: triangel, symbolPlats: [-0.25, 0], symbolStorlek: 0.26 }
+  - pil: { fran: [462, 404], till: [488, 403], bage: 0, tjock: 0.8 }
+  - penna: { x: 508, y: 412, vinkel: 160, l: 46 }
+  - bubbla: { till: visar, dx: 70, dy: 20, symboler: [kvadrat], visar: "Paret tar nästa steg i lärarens modell, samma steg som på tavlan" }

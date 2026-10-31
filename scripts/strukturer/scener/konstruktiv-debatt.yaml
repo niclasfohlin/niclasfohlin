@@ -1,0 +1,13 @@
+# Konstruktiv debatt: två par står som två sidor mot varandra, det röda med triangeln och det blå med kvadraten, och efter perspektivbytet lägger det röda paret fram det blå parets ståndpunkt medan det blå tänker ut hur de ska lägga fram det rödas.
+id: konstruktiv-debatt
+skala: 68
+djup: false
+delar:
+  - figur: { namn: a2, x: 286, y: 462, trojan: rod, ansikte: glad, tittar: b1, lutar: b1, nar: { H: [302, 360] } }
+  - papper: { namn: aPapper, x: 292, y: 344, b: 60, h: 48, vinkel: 4, rader: 0, symbol: triangel, symbolStorlek: 0.3, symbolPlats: [0, 0] }
+  - figur: { namn: b2, x: 622, y: 462, trojan: bla, ansikte: glad, tittar: a1, lutar: a1, nar: { V: [606, 360] } }
+  - papper: { namn: bPapper, x: 616, y: 344, b: 60, h: 48, vinkel: -4, rader: 0, symbol: kvadrat, symbolStorlek: 0.3, symbolPlats: [0, 0] }
+  - figur: { namn: a1, x: 364, y: 476, trojan: rod, ansikte: prata, tittar: bPapper, lutar: b1, nar: { H: [430, 346] } }
+  - figur: { namn: b1, x: 544, y: 476, stallning: tanka, trojan: bla, ansikte: tanka, tittar: a1, lutar: a1 }
+  - bubbla: { till: a1, dx: -10, dy: 44, symboler: [kvadrat], visar: "Perspektivbytet: en i det röda paret lägger fram det blå parets ståndpunkt, kvadraten, så övertygande hen kan" }
+  - bubbla: { till: b1, dx: 30, dy: 44, tanke: true, symboler: [triangel], visar: "Det blå paret förbereder sig på att lägga fram det röda parets ståndpunkt, triangeln" }

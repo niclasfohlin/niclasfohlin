@@ -1,0 +1,22 @@
+# Kooperativ fyrfältare: hemgruppen fyller i fyrfältaren om sitt begrepp tillsammans, ett papper i fyra fält med en teckning, vad ordet betyder, ordet och en mening, och en förklarar begreppet för de andra.
+id: kooperativ-fyrfaltare
+skala: 74
+djup: false
+fokus: fyrfaltaren
+delar:
+  - figur: { namn: ritar, x: 392, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: skriva, tittar: teckningen, lutar: teckningen, nar: { H: [428, 330] }, armarEfter: fyrfaltaren }
+  - figur: { namn: skriver, x: 556, y: 392, stallning: sitta, utanBen: true, trojan: turkos, ansikte: skriva, tittar: betyder, lutar: betyder, nar: { V: [524, 332] }, armarEfter: fyrfaltaren }
+  - figur: { namn: forklarar, x: 240, y: 520, utanBen: true, trojan: lila, ansikte: prata, tittar: sidaH, lutar: fyrfaltaren, pekar: teckningen, armarEfter: fyrfaltaren }
+  - figur: { namn: sidaH, x: 700, y: 525, utanBen: true, trojan: rosa, ansikte: glad, tittar: forklarar, lutar: fyrfaltaren, nar: { V: [626, 410] }, armarEfter: fyrfaltaren }
+  - bord: { x: 266, y: 458, b: 400, d: 128, h: 50, snett: 20 }
+  - papper: { namn: fyrfaltaren, x: 473, y: 394, b: 220, h: 124, rader: 0, rutnat: [2, 2] }
+  - punkt: { namn: teckningen, x: 418, y: 364 }
+  - punkt: { namn: betyder, x: 528, y: 364 }
+  - symbol: { x: 412, y: 366, namn: triangel, s: 20 }
+  - rorelse: { x: 490, y: 364, riktning: 90, langd: 72, antal: 3 }
+  - rorelse: { x: 392, y: 424, riktning: 90, langd: 56, antal: 1 }
+  - rorelse: { x: 490, y: 424, riktning: 90, langd: 74, antal: 2 }
+  - penna: { x: 432, y: 372, vinkel: 200, l: 40 }
+  - penna: { x: 518, y: 366, vinkel: 160, l: 38 }
+  - bubbla: { till: forklarar, dx: -30, dy: 40, symboler: [triangel], visar: "En förklarar begreppet som gruppens fyrfältare handlar om" }
+  - bubbla: { till: sidaH, dx: 40, dy: 40, tanke: true, symboler: [triangel], visar: "Gruppen ser till att alla i hemgruppen kan förklara begreppet" }

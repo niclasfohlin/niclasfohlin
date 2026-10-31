@@ -1,0 +1,19 @@
+# Inspireras: timern har ringt mitt i arbetet, gruppens eget bord står tomt med det halvfärdiga papperet, och gruppen står runt en annan grupps bord och tittar på hur den har löst samma uppgift.
+id: inspireras
+skala: 74
+djupRam: [280, 600]
+delar:
+  # Den andra gruppens bord, med gruppen som besöker det runt om.
+  - bord: { x: 340, y: 336, b: 240, d: 64, h: 52, snett: 14 }
+  - papper: { namn: deras, x: 470, y: 302, b: 118, h: 48, vinkel: -3, rader: 2, symbol: 'cirkel:gron', symbolStorlek: 0.32 }
+  - figur: { namn: v1, x: 296, y: 404, trojan: lila, ansikte: prata, tittar: deras, lutar: deras, pekar: { mal: deras, dx: -26, dy: 0 } }
+  - figur: { namn: v2, x: 638, y: 406, trojan: lila, ansikte: tanka, tittar: deras, lutar: deras, nar: { V: [592, 322] } }
+  - figur: { namn: v3, x: 560, y: 488, trojan: lila, ansikte: bak }
+  # Gruppens eget bord längst fram: tomt, med det halvfärdiga papperet och timern som ringer.
+  - bord: { x: 150, y: 604, b: 440, d: 100, h: 50, snett: 16 }
+  - papper: { namn: egna, x: 300, y: 550, b: 124, h: 52, vinkel: 4, rader: 1, symbol: triangel, symbolStorlek: 0.3 }
+  - penna: { x: 372, y: 560, vinkel: 250, l: 40 }
+  - klocka: { x: 490, y: 532, r: 34 }
+  - stralar: { x: 490, y: 538, r: 44, antal: 7 }
+  - pil: { fran: [196, 500], till: [250, 420], bage: -0.3 }
+  - bubbla: { till: v2, dx: 56, dy: 36, tanke: true, symboler: [triangel, 'cirkel:gron'], visar: "Gruppen ser hur en annan grupp har börjat lösa samma uppgift och tar med sig idén till sin egen lösning" }

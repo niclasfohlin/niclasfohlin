@@ -1,0 +1,18 @@
+# En får gå: grupperna har talat sig samman och står upp, och den med lärarens siffra i varje grupp går till en annan grupp med sin grupps svar, så att de två som går korsar varandra.
+id: en-far-ga
+skala: 62
+djupRam: [280, 540]
+delar:
+  - figur: { namn: a1, x: 92, y: 320, ansikte: glad, tittar: ga2, lutar: a2 }
+  - figur: { namn: a2, x: 200, y: 312, ansikte: prata, tittar: ga2, lutar: ga2, stallning: halla }
+  - figur: { namn: b1, x: 704, y: 312, ansikte: glad, tittar: ga1, lutar: ga1, stallning: halla }
+  - figur: { namn: b2, x: 812, y: 320, ansikte: glad, tittar: ga1, lutar: b1 }
+  - figur: { namn: ga1, x: 382, y: 330, stallning: gaH, ansikte: glad, tittar: b1, lutar: b1 }
+  - pil: { fran: [290, 352], till: [520, 346], bage: -0.06 }
+  - figur: { namn: a3, x: 146, y: 444, ansikte: bak, lutar: a2 }
+  - figur: { namn: b3, x: 756, y: 444, ansikte: bak, lutar: b1 }
+  - figur: { namn: ga2, x: 574, y: 522, stallning: gaV, ansikte: glad, tittar: a2, lutar: a2 }
+  - pil: { fran: [660, 548], till: [384, 552], bage: -0.06 }
+  - bubbla: { till: a2, dx: 30, dy: 36, symboler: [triangel], visar: "Gruppen till vänster har talat sig samman om triangeln, och den som är kvar säger svaret för den som kommer" }
+  - bubbla: { till: ga1, dx: -34, dy: 38, tanke: true, symboler: [triangel], visar: "Den som går från gruppen till vänster tar med sig sin grupps svar, triangeln" }
+  - bubbla: { till: ga2, dx: 44, dy: 38, tanke: true, symboler: [kvadrat], visar: "Den som går från gruppen till höger tar med sig sin grupps svar, kvadraten, och jämför det med den nya gruppens" }

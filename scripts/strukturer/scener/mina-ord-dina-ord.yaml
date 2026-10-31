@@ -1,0 +1,28 @@
+# Mina ord – Dina ord: två som har mötts sitter ned med var sitt blad i två spalter; den ena pekar på triangeln i sin spalt Mina ord och säger ordet, och den andra skriver triangeln i sin spalt Dina ord.
+id: mina-ord-dina-ord
+skala: 80
+djup: false
+delar:
+  - figur: { namn: soker, x: 160, y: 430, stallning: gaH, trojan: gul, ansikte: glad, tittar: [320, 330], nar: { H: [222, 300] } }
+  - papper: { hand: [soker, H], dx: 10, dy: -6, b: 46, h: 58, rader: 0, rutnat: [2, 1] }
+  - symbol: { hand: [soker, H], dx: -2, dy: -22, namn: cirkel, s: 5 }
+  - symbol: { hand: [soker, H], dx: -2, dy: -6, namn: stjarna, s: 5 }
+  - symbol: { hand: [soker, H], dx: -2, dy: 10, namn: kvadrat, s: 5 }
+  - symbol: { hand: [soker, H], dx: 22, dy: -22, namn: hjarta, s: 5 }
+  - figur: { namn: sager, x: 395, y: 436, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: skriver, lutar: bladA, pekar: [381, 388], armarEfter: klartA }
+  - figur: { namn: skriver, x: 572, y: 440, stallning: sitta, utanBen: true, trojan: rod, ansikte: skriva, tittar: sager, lutar: sager, nar: { H: [630, 360] }, armarEfter: klartB }
+  - bord: { x: 290, y: 470, b: 400, d: 104, h: 55, snett: 20 }
+  - papper: { namn: bladA, x: 405, y: 400, b: 96, h: 80, vinkel: -2, rader: 0, rutnat: [2, 1] }
+  - symbol: { x: 381, y: 374, namn: cirkel, s: 8 }
+  - symbol: { x: 381, y: 398, namn: triangel, s: 9 }
+  - symbol: { x: 381, y: 422, namn: stjarna, s: 9 }
+  - symbol: { x: 429, y: 374, namn: hjarta, s: 8 }
+  - punkt: { namn: klartA, x: 405, y: 400 }
+  - papper: { namn: bladB, x: 582, y: 402, b: 96, h: 80, vinkel: 2, rader: 0, rutnat: [2, 1] }
+  - symbol: { x: 558, y: 376, namn: kvadrat, s: 8 }
+  - symbol: { x: 558, y: 400, namn: hjarta, s: 8 }
+  - symbol: { x: 558, y: 424, namn: cirkel, s: 8 }
+  - symbol: { x: 606, y: 378, namn: triangel, s: 9 }
+  - punkt: { namn: klartB, x: 582, y: 402 }
+  - penna: { x: 618, y: 384, vinkel: 150, l: 40 }
+  - bubbla: { till: sager, dx: -50, dy: 42, symboler: [triangel], visar: "Den ena säger ordet där fingret pekar i sin spalt Mina ord, och kamraten skriver samma ord i sin spalt Dina ord" }

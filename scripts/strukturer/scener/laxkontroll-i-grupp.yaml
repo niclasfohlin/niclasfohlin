@@ -1,0 +1,30 @@
+# Läxkontroll i grupp: gruppens mapp ligger uppslagen mitt på bordet med läxorna i fickan. Den som förklarar visar hur
+# svaret på läxan kom till, och den som kontrollerar prövar förklaringen. Rollkorten står framför dem och byter plats
+# vid nästa uppgift.
+id: laxkontroll-i-grupp
+skala: 74
+djup: false
+fokus: forklarar
+delar:
+  - figur: { namn: forklarar, x: 372, y: 392, stallning: sitta, utanBen: true, trojan: lila, ansikte: prata, tittar: kontrollerar, lutar: laxaF, pekar: { mal: laxaF, dx: 8, dy: -2 }, armarEfter: laxaF }
+  - figur: { namn: kontrollerar, x: 568, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: tanka, tittar: laxaF, lutar: laxaK, nar: { V: [554, 362] }, armarEfter: laxaK }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: orange, ansikte: glad, lutar: forklarar }
+  - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, trojan: rosa, ansikte: glad, lutar: forklarar }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - papper: { namn: laxaF, x: 372, y: 374, b: 66, h: 44, vinkel: -5, rader: 4 }
+  - papper: { namn: laxaK, x: 566, y: 374, b: 66, h: 44, vinkel: 5, rader: 4 }
+  # Rollkorten står på bordet: kugghjulet för den som förklarar och bocken för den som kontrollerar.
+  - skarm: { x: 440, y: 380, b: 36, h: 40, farg: '#f4f0e4' }
+  - symbol: { x: 440, y: 359, namn: kugghjul, s: 12 }
+  - skarm: { x: 502, y: 380, b: 36, h: 40, farg: '#f4f0e4' }
+  - symbol: { x: 502, y: 359, namn: bock, s: 11 }
+  - pil: { fran: [446, 310], till: [496, 310], bage: -0.35 }
+  - pil: { fran: [496, 316], till: [446, 316], bage: -0.35 }
+  # Gruppens mapp, uppslagen, med läxorna i fickan.
+  - papper: { x: 430, y: 418, b: 82, h: 46, vinkel: 0, rader: 0, farg: '#9bbae0' }
+  - papper: { namn: mappen, x: 512, y: 418, b: 82, h: 46, vinkel: 0, rader: 0, farg: '#9bbae0' }
+  - papper: { x: 500, y: 406, b: 50, h: 38, vinkel: -7, rader: 3 }
+  - papper: { x: 522, y: 404, b: 50, h: 38, vinkel: 6, rader: 3 }
+  - papper: { x: 512, y: 430, b: 80, h: 20, vinkel: 0, rader: 0, farg: '#7f9fd0' }
+  - bubbla: { till: forklarar, dx: -40, dy: 40, symboler: [kugghjul], visar: "Den som förklarar visar steg för steg hur svaret på läxan kom till" }
+  - bubbla: { till: kontrollerar, dx: 40, dy: 40, tanke: true, symboler: [fraga], visar: "Den som kontrollerar prövar förklaringen mot sin egen läxa" }

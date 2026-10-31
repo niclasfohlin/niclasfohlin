@@ -1,0 +1,22 @@
+# Lyssna och skriv: läraren läser nästa del av texten, och gruppen lyssnar vänd mot läraren med pennorna nedlagda.
+# Första rutan på varje papper har redan nyckelorden från förra delen, och de nya nyckelorden tar form i tanken.
+id: lyssna-och-skriv
+skala: 74
+djup: false
+fokus: lararen
+delar:
+  - figur: { namn: lararen, x: 240, y: 480, storlek: 1.1, trojan: lila, ansikte: prata, tittar: [300, 336], fokus: false, nar: { V: [262, 366], H: [318, 360] } }
+  - papper: { namn: texten, x: 292, y: 334, b: 52, h: 64, vinkel: 8, rader: 5 }
+  - figur: { namn: bakV, x: 420, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, lutar: lararen }
+  - figur: { namn: bakH, x: 588, y: 394, stallning: sitta, utanBen: true, trojan: turkos, ansikte: tanka, lutar: lararen }
+  - figur: { namn: sidaH, x: 716, y: 524, utanBen: true, trojan: rod, ansikte: glad, lutar: lararen }
+  - bord: { x: 330, y: 448, b: 340, d: 104, h: 60, snett: 20 }
+  # Var och ens papper med fyra rutor: den första har nyckelorden från förra delen, och pennan ligger bredvid.
+  - papper: { x: 446, y: 372, b: 104, h: 30, vinkel: -3, rutnat: [4, 1], symbol: cirkel, symbolStorlek: 0.3, symbolPlats: [-0.375, 0] }
+  - penna: { x: 462, y: 398, vinkel: 100, l: 40 }
+  - papper: { x: 576, y: 372, b: 104, h: 30, vinkel: 3, rutnat: [4, 1], symbol: cirkel, symbolStorlek: 0.3, symbolPlats: [-0.375, 0] }
+  - penna: { x: 560, y: 398, vinkel: 80, l: 40 }
+  - papper: { x: 610, y: 422, b: 104, h: 30, vinkel: -6, rutnat: [4, 1], symbol: cirkel, symbolStorlek: 0.3, symbolPlats: [-0.375, 0] }
+  - penna: { x: 516, y: 432, vinkel: 95, l: 40 }
+  - bubbla: { till: lararen, dx: 30, dy: 40, symboler: [bok], visar: "Läraren läser texten högt, en del i taget" }
+  - bubbla: { till: bakH, dx: 40, dy: 40, tanke: true, symboler: [kvadrat], visar: "Eleverna lyssnar utan att anteckna och väljer i tanken det nyckelord de ska skriva i nästa ruta" }

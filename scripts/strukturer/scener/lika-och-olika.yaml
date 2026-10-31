@@ -1,0 +1,17 @@
+# Lika och olika: en skärm står mellan paret, den ena beskriver det hen ser på sitt exemplar, och den andra jämför med sitt och säger till om en skillnad.
+id: lika-och-olika
+skala: 80
+djup: false
+hudStart: 5
+delar:
+  - figur: { namn: beskriver, x: 372, y: 446, stallning: sitta, utanBen: true, trojan: bla, ansikte: prata, tittar: egetV, lutar: egetV, pekar: [420, 400], armarEfter: egetV }
+  - figur: { namn: jamfor, x: 586, y: 450, stallning: sitta, utanBen: true, trojan: rod, ansikte: prata, tittar: egetH, lutar: egetH, pekar: [588, 398], armarEfter: egetH }
+  - bord: { x: 282, y: 480, b: 380, d: 100, h: 55, snett: 20 }
+  - papper: { namn: egetV, x: 396, y: 418, b: 90, h: 62, rader: 0, symbol: triangel, symbolStorlek: 0.26, symbolPlats: [0.24, 0] }
+  - markor: { x: 378, y: 412, r: 10, farg: '#efc65a' }
+  - papper: { namn: egetH, x: 562, y: 420, b: 90, h: 62, rader: 0, symbol: kvadrat, symbolStorlek: 0.26, symbolPlats: [0.24, 0] }
+  - markor: { x: 544, y: 414, r: 10, farg: '#efc65a' }
+  - kort: { x: 461, y: 350, b: 38, h: 176, farg: '#efe5d0' }
+  - kort: { x: 498, y: 354, b: 36, h: 168, farg: '#e6d8b8' }
+  - bubbla: { till: beskriver, dx: -64, dy: 36, symboler: [triangel], visar: "Den ena beskriver en sak hen ser på sitt exemplar" }
+  - bubbla: { till: jamfor, dx: 64, dy: 36, symboler: [utrop], visar: "Den andra har något annat på samma ställe i sitt exemplar och säger till: en skillnad är funnen" }

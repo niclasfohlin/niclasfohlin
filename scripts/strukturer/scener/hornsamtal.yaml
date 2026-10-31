@@ -1,0 +1,29 @@
+# Hörnsamtal: rummets fyra hörn har var sin fråga på en skylt, eleverna samtalar två och två i det hörn de valt, och en går
+# till det hörn hen har valt.
+id: hornsamtal
+skala: 62
+djupRam: [250, 560]
+delar:
+  - pil: { fran: [250, 250], till: [650, 250], bage: 0, spets: false, tjock: 0.8 }
+  - pil: { fran: [250, 250], till: [250, 60], bage: 0, spets: false, tjock: 0.8 }
+  - pil: { fran: [650, 250], till: [650, 60], bage: 0, spets: false, tjock: 0.8 }
+  - golvlinje: { fran: [250, 250], till: [90, 560], streck: 18 }
+  - golvlinje: { fran: [650, 250], till: [810, 560], streck: 18 }
+  - pil: { fran: [90, 560], till: [90, 320], bage: 0, spets: false, tjock: 0.8 }
+  - pil: { fran: [810, 560], till: [810, 320], bage: 0, spets: false, tjock: 0.8 }
+  - kort: { namn: triangeln, x: 250, y: 92, b: 60, h: 72, symbol: triangel }
+  - kort: { namn: kvadraten, x: 650, y: 92, b: 60, h: 72, symbol: kvadrat }
+  - figur: { namn: bv1, x: 282, y: 288, trojan: gul, ansikte: glad, tittar: bv2, lutar: bv2 }
+  - figur: { namn: bv2, x: 344, y: 294, stallning: halla, trojan: ljusbla, ansikte: prata, tittar: bv1 }
+  - figur: { namn: bh1, x: 520, y: 294, trojan: rod, ansikte: glad, tittar: bh2, lutar: bh2 }
+  - figur: { namn: bh2, x: 580, y: 290, trojan: gron, ansikte: prata, tittar: bh1, pekar: { mal: kvadraten, dy: 26 } }
+  - figur: { namn: gar, x: 452, y: 446, stallning: gaV, vand: vanster, trojan: orange, ansikte: glad, tittar: cirkeln, lut: 3 }
+  - pil: { fran: [420, 470], till: [318, 492], bage: 0.15, tjock: 1.1 }
+  - kort: { namn: cirkeln, x: 90, y: 330, b: 72, h: 86, symbol: "cirkel:gron" }
+  - kort: { namn: stjarnan, x: 810, y: 330, b: 72, h: 86, symbol: stjarna }
+  - figur: { namn: fv1, x: 170, y: 532, trojan: lila, ansikte: prata, tittar: fv2, lutar: fv2, stallning: halla }
+  - figur: { namn: fv2, x: 256, y: 540, trojan: rosa, ansikte: glad, tittar: fv1, lutar: fv1 }
+  - figur: { namn: fh1, x: 646, y: 540, trojan: turkos, ansikte: glad, tittar: fh2, lutar: fh2 }
+  - figur: { namn: fh2, x: 732, y: 532, trojan: ljusgron, ansikte: prata, tittar: fh1, stallning: hallaV }
+  - bubbla: { till: fv1, dx: 30, dy: 40, symboler: ["cirkel:gron"], visar: "Gruppen i hörnet samtalar om just det hörnets fråga" }
+  - bubbla: { till: gar, dx: 0, dy: 40, tanke: true, symboler: ["cirkel:gron"], visar: "Eleven har valt sitt hörn själv och går dit på lärarens signal" }

@@ -1,0 +1,16 @@
+# Öva och kontrollera i par: två par vid samma bord, och i varje par löser den ena uppgiften och förklarar stegen högt medan den andra följer med fingret och prövar att förklaringen stämmer.
+id: ova-och-kontrollera-i-par
+skala: 74
+djup: false
+delar:
+  - figur: { namn: loserA, x: 360, y: 392, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: kollarA, lutar: bladA, nar: { V: [336, 352], H: [374, 364] }, armarEfter: bladA }
+  - figur: { namn: kollarB, x: 566, y: 392, stallning: sitta, utanBen: true, trojan: orange, ansikte: glad, tittar: bladB, lutar: bladB, pekar: [620, 402], armarEfter: bladB }
+  - figur: { namn: kollarA, x: 236, y: 518, utanBen: true, trojan: ljusbla, ansikte: glad, tittar: bladA, lutar: bladA, pekar: [312, 390], armarEfter: bladA }
+  - figur: { namn: loserB, x: 744, y: 525, utanBen: true, trojan: orange, ansikte: skriva, tittar: bladB, lutar: bladB, nar: { V: [676, 380], H: [688, 362] }, armarEfter: bladB }
+  - bord: { x: 250, y: 445, b: 450, d: 100, h: 60, snett: 20 }
+  - papper: { namn: bladA, x: 346, y: 375, b: 92, h: 52, vinkel: -4, rader: 3, symbol: triangel }
+  - penna: { x: 370, y: 380, vinkel: 150, l: 40 }
+  - papper: { namn: bladB, x: 652, y: 384, b: 92, h: 52, vinkel: 5, rader: 3, symbol: kvadrat }
+  - penna: { x: 676, y: 390, vinkel: 150, l: 40 }
+  - bubbla: { till: loserA, dx: 30, dy: 44, symboler: [triangel], visar: "Den som löser förklarar varje steg högt för kamraten" }
+  - bubbla: { till: kollarA, dx: -45, dy: 40, tanke: true, symboler: [triangel, bock], visar: "Den som kontrollerar prövar förklaringen mot papperet och ser att steget stämmer" }

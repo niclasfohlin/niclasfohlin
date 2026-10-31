@@ -1,0 +1,25 @@
+# Byt och sortera: gruppen har lämnat sitt eget blandade material med facit på baksidan och roterat till ett annat bord, sorterar den gruppens kort och vänder ett kort för att se facit.
+id: byt-och-sortera
+skala: 70
+djup: false
+delar:
+  - bord: { x: 100, y: 300, b: 190, d: 60, h: 50, snett: 15 }
+  - kort: { x: 150, y: 272, b: 26, h: 32, vinkel: 14, farg: '#9bbae0' }
+  - kort: { x: 182, y: 266, b: 26, h: 32, vinkel: -10, farg: '#9bbae0' }
+  - kort: { x: 214, y: 278, b: 26, h: 32, vinkel: 22, farg: '#9bbae0' }
+  - kort: { x: 246, y: 268, b: 26, h: 32, vinkel: -4, farg: '#9bbae0' }
+  - pil: { fran: [300, 250], till: [392, 318], bage: 0.3 }
+  - punkt: { namn: facitP, x: 590, y: 330 }
+  - figur: { namn: sorterar, x: 458, y: 425, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: vander, lutar: hogen, nar: { H: [506, 384] }, armarEfter: lagd }
+  - figur: { namn: vander, x: 636, y: 425, stallning: sitta, utanBen: true, trojan: lila, ansikte: glad, tittar: facitP, lutar: facitP, nar: { V: [594, 340] }, armarEfter: facit }
+  - figur: { namn: kommer, x: 236, y: 540, stallning: gaH, trojan: turkos, ansikte: glad, tittar: hogen }
+  - bord: { x: 335, y: 478, b: 360, d: 108, h: 55, snett: 20 }
+  - kort: { x: 448, y: 404, b: 30, h: 38, vinkel: -6, symbol: triangel }
+  - kort: { namn: hogen, x: 476, y: 410, b: 30, h: 38, vinkel: 5, symbol: triangel }
+  - kort: { x: 590, y: 408, b: 30, h: 38, vinkel: 4, symbol: cirkel }
+  - kort: { x: 618, y: 402, b: 30, h: 38, vinkel: -7, symbol: cirkel }
+  - kort: { x: 538, y: 446, b: 30, h: 38, vinkel: 12, symbol: cirkel }
+  - kort: { namn: lagd, x: 506, y: 398, b: 30, h: 38, vinkel: 10, symbol: triangel }
+  - kort: { namn: facit, hand: [vander, V], dx: -24, dy: -10, b: 32, h: 40, vinkel: -6, farg: '#9bbae0', symbol: triangel }
+  - bubbla: { till: vander, dx: 50, dy: 36, symboler: [bock], visar: 'Den som har vänt kortet ser facit på baksidan: kortet ligger rätt' }
+  - bubbla: { till: sorterar, dx: -50, dy: 40, symboler: [triangel], visar: "Gruppen talar sig samman om var korten ska ligga i den andra gruppens sortering" }

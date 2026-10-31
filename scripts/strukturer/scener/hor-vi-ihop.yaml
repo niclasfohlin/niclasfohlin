@@ -1,0 +1,22 @@
+# Hör vi ihop?: eleverna går runt i rummet med var sitt kort, två visar sina kort för varandra och frågar om de hör ihop, och tre vars kort hör ihop har redan hittat varandra.
+id: hor-vi-ihop
+skala: 70
+djupRam: [300, 540]
+delar:
+  - figur: { namn: soker, x: 392, y: 300, stallning: gaH, trojan: turkos, ansikte: tanka, tittar: [520, 290] }
+  - kort: { hand: [soker, H], dx: 6, dy: -8, b: 26, h: 32, vinkel: 6, symbol: stjarna }
+  - figur: { namn: t2, x: 226, y: 434, trojan: gron, ansikte: glad, tittar: t1, nar: { H: [232, 318] } }
+  - figur: { namn: a, x: 545, y: 420, trojan: lila, ansikte: prata, tittar: [634, 336], lutar: b, nar: { H: [584, 324] } }
+  - figur: { namn: b, x: 652, y: 428, trojan: gul, ansikte: tanka, tittar: [586, 316], lutar: a, nar: { V: [634, 340] } }
+  - kort: { hand: [a, H], dx: 4, dy: -10, b: 30, h: 38, vinkel: 8, symbol: kvadrat }
+  - kort: { hand: [b, V], dx: -4, dy: -6, b: 30, h: 38, vinkel: -6, symbol: cirkel }
+  - kort: { hand: [t2, H], dx: -4, dy: -10, b: 36, h: 44, vinkel: -3, symbol: triangel }
+  - punkt: { namn: mittT, x: 226, y: 340 }
+  - figur: { namn: t1, x: 116, y: 472, trojan: rosa, ansikte: prata, tittar: t2, lutar: mittT, nar: { H: [162, 338] } }
+  - kort: { hand: [t1, H], dx: 4, dy: -14, b: 36, h: 44, vinkel: 6, symbol: triangel }
+  - figur: { namn: t3, x: 338, y: 476, trojan: rod, ansikte: glad, tittar: t2, lutar: mittT, nar: { V: [292, 340] } }
+  - kort: { hand: [t3, V], dx: -4, dy: -14, b: 36, h: 44, vinkel: -6, symbol: triangel }
+  - figur: { namn: gar, x: 780, y: 532, stallning: gaV, trojan: ljusbla, ansikte: glad, tittar: a, nar: { V: [722, 352] } }
+  - kort: { hand: [gar, V], dx: -2, dy: -12, b: 30, h: 38, vinkel: -10, symbol: kvadrat }
+  - bubbla: { till: a, dx: -20, dy: 38, symboler: [fraga], visar: "Två visar sina kort för varandra, och den ena frågar: hör vi ihop?" }
+  - bubbla: { till: t1, dx: -20, dy: 38, symboler: [triangel], visar: "De tre vars kort hör ihop har hittat varandra och talar om vad korten har gemensamt" }

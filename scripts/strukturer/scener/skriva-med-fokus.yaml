@@ -1,0 +1,25 @@
+# Skriva med fokus: gruppen har skrivit om samma bild i mitten, var och en ur sitt eget fokus, som står på en skylt
+# framför var och en, och en läser upp sin text medan de andra har sina egna fokus i tanken.
+id: skriva-med-fokus
+skala: 76
+djup: false
+fokus: laser
+delar:
+  - figur: { namn: laser, x: 384, y: 392, stallning: sitta, utanBen: true, trojan: rosa, ansikte: prata, tittar: textL, lutar: textL, nar: { H: [420, 366] }, armarEfter: textL }
+  - figur: { namn: bakH, x: 562, y: 394, stallning: sitta, utanBen: true, trojan: ljusgron, ansikte: glad, lutar: laser }
+  - figur: { namn: sidaV, x: 248, y: 524, utanBen: true, trojan: bla, ansikte: tanka, lutar: laser }
+  - bord: { x: 280, y: 448, b: 330, d: 104, h: 60, snett: 20 }
+  - kort: { namn: bilden, x: 476, y: 410, b: 84, h: 60, vinkel: 2, farg: '#dbe2f6', symbol: 'cirkel:gul' }
+  - papper: { namn: textL, x: 418, y: 370, b: 56, h: 40, vinkel: -6, rader: 3 }
+  - papper: { namn: textH, x: 548, y: 370, b: 56, h: 40, vinkel: 6, rader: 3 }
+  - papper: { namn: textV, x: 366, y: 428, b: 56, h: 40, vinkel: 8, rader: 3 }
+  # Var och ens fokus på en skylt som står på bordet: en känsla, ett sinne och en tanke.
+  - skarm: { x: 340, y: 392, b: 40, h: 46, farg: '#fdf0f2' }
+  - symbol: { x: 340, y: 368, namn: hjarta, s: 13 }
+  - skarm: { x: 604, y: 392, b: 40, h: 46, farg: '#eef8ec' }
+  - symbol: { x: 604, y: 368, namn: hand, s: 13 }
+  - skarm: { x: 310, y: 444, b: 40, h: 46, farg: '#eaf0fa' }
+  - symbol: { x: 310, y: 420, namn: kugghjul, s: 13 }
+  - bubbla: { till: laser, dx: -40, dy: 40, symboler: [hjarta], visar: "En läser upp sin text om bilden, skriven ur fokus på en känsla" }
+  - bubbla: { till: bakH, dx: 40, dy: 40, tanke: true, symboler: [hand], visar: "En annan har skrivit om samma bild ur ett annat fokus, ett sinne" }
+  - bubbla: { till: sidaV, dx: -30, dy: 40, tanke: true, symboler: [kugghjul], visar: "Den tredje har skrivit ur ett tredje fokus, och allas texter blir sedan en ny gemensam" }

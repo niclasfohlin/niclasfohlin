@@ -1,0 +1,18 @@
+# Fråga, fråga, byt!: paret har förklarat sina begrepp för varandra och byter nu kort, medan ett annat par förklarar sina och en tredje söker en ny kamrat med kortet i handen och handen uppe.
+id: fraga-fraga-byt
+skala: 80
+djupRam: [400, 600]
+delar:
+  - figur: { namn: soker, x: 750, y: 420, stallning: { V: [-168, -178], H: [28, 8], benV: [-22, -4], benH: [20, 6], lut: 3 }, trojan: gul, ansikte: glad, tittar: [640, 330] }
+  - kort: { hand: [soker, H], dx: 4, dy: 8, b: 30, h: 38, vinkel: 8, farg: '#f2b9c6', symbol: stjarna }
+  - figur: { namn: forklarar, x: 140, y: 430, trojan: lila, ansikte: prata, tittar: lyssnar, lutar: lyssnar, nar: { H: [206, 270] } }
+  - kort: { namn: kortC, hand: [forklarar, H], dx: 6, dy: -14, b: 32, h: 40, vinkel: 6, farg: '#c8edc4', symbol: cirkel }
+  - figur: { namn: lyssnar, x: 272, y: 436, trojan: gron, ansikte: glad, tittar: kortC, lutar: forklarar }
+  - kort: { hand: [lyssnar, H], dx: 2, dy: 8, b: 30, h: 38, vinkel: -6, farg: '#f3dc8e', symbol: hjarta }
+  - bubbla: { till: forklarar, dx: -45, dy: 36, symboler: [cirkel], visar: "Den ena förklarar begreppet på sitt kort för kamraten" }
+  - figur: { namn: a, x: 418, y: 600, trojan: rosa, ansikte: glad, tittar: b, lutar: b, nar: { H: [494, 468] } }
+  - figur: { namn: b, x: 622, y: 606, trojan: ljusbla, ansikte: skratt, tittar: a, lutar: a, nar: { V: [548, 468] } }
+  - kort: { namn: kortA, x: 497, y: 446, b: 40, h: 50, vinkel: 6, farg: '#f3dc8e', symbol: triangel }
+  - kort: { namn: kortB, x: 545, y: 446, b: 40, h: 50, vinkel: -6, farg: '#b6cbea', symbol: kvadrat }
+  - pil: { fran: [472, 404], till: [570, 404], bage: -0.42, tjock: 1.5 }
+  - pil: { fran: [570, 490], till: [472, 490], bage: -0.42, tjock: 1.5 }

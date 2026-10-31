@@ -1,0 +1,15 @@
+# Kontraster: tre som har skrivit olika svar har hittat varandra och håller fram sina papper mot ringens mitt, och en fjärde går med sitt svar och letar efter någon som tänkt annorlunda.
+id: kontraster
+skala: 80
+djupRam: [440, 600]
+delar:
+  - figur: { namn: letar, x: 160, y: 450, stallning: gaH, trojan: gron, ansikte: glad, tittar: svarA, nar: { H: [218, 346] } }
+  - papper: { hand: [letar, H], dx: 8, dy: -18, b: 40, h: 44, rader: 0, symbol: stjarna, symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - figur: { namn: mitten, x: 490, y: 470, trojan: gul, ansikte: glad, tittar: svarA, lutar: svarA, nar: { H: [500, 376] } }
+  - papper: { namn: svarC, x: 492, y: 344, b: 48, h: 52, vinkel: -3, rader: 0, symbol: cirkel, symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - figur: { namn: vanster, x: 330, y: 600, trojan: rod, ansikte: prata, tittar: hoger, lutar: hoger, nar: { H: [412, 464] } }
+  - papper: { namn: svarA, x: 410, y: 430, b: 52, h: 58, vinkel: 6, rader: 0, symbol: triangel, symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - figur: { namn: hoger, x: 650, y: 604, trojan: ljusbla, ansikte: prata, tittar: svarA, lutar: vanster, nar: { V: [568, 464] } }
+  - papper: { namn: svarB, x: 570, y: 432, b: 52, h: 58, vinkel: -6, rader: 0, symbol: kvadrat, symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - bubbla: { till: vanster, dx: -50, dy: 40, symboler: [triangel], visar: "En berättar vad hen svarade och varför hen tänkte så" }
+  - bubbla: { till: hoger, dx: 55, dy: 40, symboler: [kvadrat], visar: "En annan har tänkt annorlunda och berättar varför: gruppen talar om varför de tänkt olika" }

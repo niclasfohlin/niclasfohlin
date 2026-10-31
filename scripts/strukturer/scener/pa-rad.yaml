@@ -1,0 +1,15 @@
+# På rad: klassen ställer sig på en rad från den kortaste till den längsta utan att tala, och den sista som kommer söker sin plats i luckan medan en i raden visar med handen.
+id: pa-rad
+skala: 60
+djup: false
+delar:
+  - figur: { namn: r0, x: 92, y: 436, storlek: 0.8, ansikte: glad, tittar: [400, 300] }
+  - figur: { namn: r1, x: 178, y: 440, storlek: 0.85, ansikte: glad, tittar: r0 }
+  - figur: { namn: r2, x: 264, y: 436, storlek: 0.9, ansikte: glad, tittar: r3 }
+  - figur: { namn: r3, x: 350, y: 440, storlek: 0.95, ansikte: glad, tittar: kommer }
+  - figur: { namn: r4, x: 436, y: 437, storlek: 1.0, ansikte: glad, tittar: kommer, nar: { H: [496, 372] } }
+  - figur: { namn: r6, x: 608, y: 438, storlek: 1.1, ansikte: glad, tittar: kommer }
+  - figur: { namn: r7, x: 694, y: 441, storlek: 1.15, ansikte: glad, tittar: kommer }
+  - figur: { namn: r8, x: 780, y: 437, storlek: 1.2, ansikte: glad, tittar: r6 }
+  - figur: { namn: kommer, x: 524, y: 560, stallning: gaH, storlek: 1.05, ansikte: bak }
+  - bubbla: { till: kommer, dx: 30, dy: 46, tanke: true, symboler: [fraga], visar: "Utan att tala söker eleven sin plats i raden efter måttet, här längden" }

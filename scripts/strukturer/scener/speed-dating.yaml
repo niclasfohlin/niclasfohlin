@@ -1,0 +1,22 @@
+# Speed-dating: eleverna sitter mittemot varandra vid ett långbord, paret närmast jämför sina lösningar, och den högra raden
+# flyttar en stol för att få en ny partner.
+id: speed-dating
+skala: 60
+djupRam: [250, 580]
+delar:
+  - bord: { x: 405, y: 596, b: 130, d: 360, h: 50, snett: 0 }
+  - figur: { namn: v3, x: 372, y: 290, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, tittar: h3, lutar: h3, nar: { H: [422, 254] }, armarEfter: p3v }
+  - figur: { namn: h3, x: 568, y: 292, stallning: sitta, utanBen: true, trojan: turkos, ansikte: prata, tittar: v3, lutar: v3, nar: { V: [518, 254] }, armarEfter: p3h }
+  - papper: { namn: p3v, x: 434, y: 258, b: 38, h: 26, rader: 1 }
+  - papper: { namn: p3h, x: 506, y: 258, b: 38, h: 26, rader: 1 }
+  - figur: { namn: v2, x: 368, y: 430, stallning: sitta, utanBen: true, trojan: lila, ansikte: glad, tittar: h2, lutar: h2, nar: { H: [424, 392] }, armarEfter: p2v }
+  - figur: { namn: h2, x: 572, y: 432, stallning: sitta, utanBen: true, trojan: rosa, ansikte: skriva, tittar: p2h, lutar: v2, nar: { V: [516, 394] }, armarEfter: p2h }
+  - papper: { namn: p2v, x: 436, y: 396, b: 42, h: 28, rader: 1 }
+  - papper: { namn: p2h, x: 504, y: 396, b: 42, h: 28, rader: 1 }
+  - figur: { namn: v1, x: 364, y: 572, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: h1, lutar: h1, pekar: [446, 528], armarEfter: p1v }
+  - figur: { namn: h1, x: 576, y: 575, stallning: sitta, utanBen: true, trojan: orange, ansikte: glad, tittar: v1, lutar: v1, nar: { V: [524, 536] }, armarEfter: p1h }
+  - papper: { namn: p1v, x: 438, y: 532, b: 48, h: 32, rader: 0, symbol: stjarna, symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - papper: { namn: p1h, x: 504, y: 532, b: 48, h: 32, rader: 0, symbol: kvadrat, symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - pil: { fran: [628, 548], till: [626, 448], bage: 0.22, tjock: 1.3 }
+  - bubbla: { till: v1, dx: -50, dy: 30, symboler: [stjarna], visar: "Paret visar varandra sina lösningar: den ena berättar hur hen löste uppgiften" }
+  - bubbla: { till: h1, dx: 34, dy: 38, symboler: [kvadrat], visar: "Den andra har löst den på sitt sätt, och paret jämför" }

@@ -1,0 +1,14 @@
+# Skriva och redigera i par: paret har bytt texter, och den ena pekar med pennan på en rad i kamratens text där ett rättningstecken står i marginalen och föreslår en ändring, medan kamraten, med den andras text och sin penna framför sig, lutar sig in och lyssnar.
+id: skriva-och-redigera-i-par
+skala: 80
+djup: false
+delar:
+  - figur: { namn: rattar, x: 388, y: 446, stallning: sitta, utanBen: true, trojan: rod, ansikte: prata, tittar: skribent, lutar: textenS, nar: { V: [432, 368], H: [458, 396] }, armarEfter: textenS }
+  - figur: { namn: skribent, x: 572, y: 446, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: glad, tittar: textenS, lutar: textenS, nar: { V: [512, 376], H: [612, 412] }, armarEfter: textenS }
+  - bord: { x: 290, y: 476, b: 380, d: 100, h: 55, snett: 20 }
+  - papper: { namn: textenR, x: 610, y: 426, b: 60, h: 78, vinkel: 8, rader: 6 }
+  - papper: { namn: textenS, x: 478, y: 414, b: 78, h: 98, vinkel: -3, rader: 6 }
+  - symbol: { namn: kryss:rod, x: 508, y: 402, s: 8 }
+  - penna: { x: 466, y: 404, vinkel: 150, l: 44 }
+  - penna: { x: 600, y: 434, vinkel: 150, l: 40 }
+  - bubbla: { till: rattar, dx: -60, dy: 40, symboler: [kryss], visar: "Den ena har läst kamratens text, satt ett rättningstecken vid en rad och föreslår en ändring där" }

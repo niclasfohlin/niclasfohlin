@@ -1,0 +1,25 @@
+# Bygga en triangel: gruppen har lagt begreppskorten i en triangel, och en håller upp det viktigaste kortet för att lägga det överst, medan en annan frågar varför.
+id: bygga-en-triangel
+skala: 72
+djup: false
+fokus: hallet
+delar:
+  - figur: { namn: lagger, x: 418, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: prata, tittar: fragar, lutar: toppen, nar: { H: [494, 318] }, armarEfter: kortet }
+  - figur: { namn: fragar, x: 590, y: 392, stallning: sitta, utanBen: true, trojan: rosa, ansikte: glad, tittar: hallet, pekar: { mal: toppen, dx: 6, dy: -4 }, armarEfter: toppen }
+  - figur: { namn: sidaV, x: 258, y: 528, utanBen: true, trojan: gul, ansikte: tanka, tittar: toppen, lutar: toppen, nar: { H: [318, 420] }, armarEfter: toppen }
+  - figur: { namn: sidaH, x: 700, y: 532, utanBen: true, trojan: ljusbla, ansikte: glad, lutar: toppen, nar: { V: [636, 422] }, armarEfter: toppen }
+  - bord: { x: 290, y: 466, b: 360, d: 122, h: 55, snett: 20 }
+  - papper: { x: 414, y: 446, b: 36, h: 24, vinkel: -3, rader: 2 }
+  - papper: { x: 454, y: 446, b: 36, h: 24, vinkel: 2, rader: 2 }
+  - papper: { x: 494, y: 446, b: 36, h: 24, vinkel: -2, rader: 2 }
+  - papper: { x: 534, y: 446, b: 36, h: 24, vinkel: 3, rader: 2 }
+  - papper: { x: 437, y: 418, b: 36, h: 24, vinkel: 2, rader: 2 }
+  - papper: { x: 477, y: 418, b: 36, h: 24, vinkel: -3, rader: 2 }
+  - papper: { x: 517, y: 418, b: 36, h: 24, vinkel: 2, rader: 2 }
+  - papper: { x: 460, y: 390, b: 36, h: 24, vinkel: -2, rader: 2 }
+  - papper: { x: 500, y: 390, b: 36, h: 24, vinkel: 3, rader: 2 }
+  - punkt: { namn: toppen, x: 482, y: 362 }
+  - punkt: { namn: hallet, x: 500, y: 306 }
+  - kort: { namn: kortet, hand: [lagger, H], dx: 8, dy: -12, b: 46, h: 34, vinkel: 6, farg: '#f3dc8e', symbol: stjarna }
+  - bubbla: { till: lagger, dx: -50, dy: 40, symboler: [stjarna], visar: "Den som håller upp det översta kortet säger varför det är viktigast" }
+  - bubbla: { till: fragar, dx: 50, dy: 40, symboler: [fraga], visar: "En annan frågar varför: gruppen måste kunna motivera ordningen" }

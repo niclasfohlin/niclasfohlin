@@ -1,0 +1,24 @@
+# Vandrande reportern: grupperna har släppt pennan, och reportern står vid en annan grupps bord med block och penna, vänd mot den som förklarar, frågar och antecknar hur de löste uppgiften, för att sedan gå tillbaka och berätta.
+id: vandrande-reportern
+skala: 62
+djup: false
+delar:
+  - figur: { namn: hemV, x: 112, y: 388, stallning: sitta, utanBen: true, ansikte: glad, tittar: reporter, nar: { H: [150, 362] }, armarEfter: hemPapper }
+  - figur: { namn: hemH, x: 222, y: 388, stallning: sitta, utanBen: true, ansikte: glad, tittar: reporter }
+  - figur: { namn: hemS, x: 52, y: 496, utanBen: true, ansikte: glad, tittar: reporter, lut: -6 }
+  - bord: { x: 74, y: 432, b: 206, d: 84, h: 52, snett: 16 }
+  - papper: { namn: hemPapper, x: 172, y: 382, b: 70, h: 44, vinkel: -4, rader: 2, symbol: triangel }
+  - penna: { x: 222, y: 408, vinkel: 100, l: 34 }
+  - figur: { namn: forklarar, x: 600, y: 388, stallning: sitta, utanBen: true, ansikte: prata, tittar: reporter, pekar: { mal: deras, dx: 12, dy: -4 }, armarEfter: deras }
+  - figur: { namn: lyssnar, x: 712, y: 388, stallning: sitta, utanBen: true, ansikte: glad, tittar: deras, nar: { V: [676, 368] }, armarEfter: deras }
+  - figur: { namn: visS, x: 798, y: 496, utanBen: true, ansikte: glad, tittar: reporter, lut: 8 }
+  - bord: { x: 548, y: 432, b: 216, d: 84, h: 52, snett: 16 }
+  - papper: { namn: deras, x: 652, y: 384, b: 76, h: 46, vinkel: 4, rader: 2, symbol: kvadrat }
+  - penna: { x: 700, y: 410, vinkel: 80, l: 34 }
+  - figur: { namn: reporter, x: 510, y: 492, ansikte: glad, tittar: forklarar, lutar: deras, nar: { V: [504, 384], H: [530, 378] } }
+  - papper: { namn: blocket, hand: [reporter, V], dx: 10, dy: -8, b: 32, h: 40, vinkel: -6, rader: 3 }
+  - penna: { hand: [reporter, H], dx: 0, dy: -2, vinkel: 150, l: 26 }
+  - pil: { fran: [272, 296], till: [440, 290], bage: -0.25 }
+  - pil: { fran: [430, 560], till: [262, 520], bage: -0.2 }
+  - bubbla: { till: reporter, dx: -42, dy: 40, symboler: [fraga], visar: "Reportern frågar den andra gruppen hur de har löst uppgiften och antecknar i sitt block" }
+  - bubbla: { till: forklarar, dx: 34, dy: 40, symboler: [kvadrat], visar: "Den andra gruppen berättar sin lösning, som skiljer sig från hemgruppens triangel och som reportern tar med sig tillbaka" }

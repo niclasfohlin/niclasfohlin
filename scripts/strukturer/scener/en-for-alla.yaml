@@ -1,0 +1,69 @@
+# En för alla: var och en har ett eget papper med tre cirklar, Jag i mitten och Par och Grupp utanför. I fyrgruppen
+# håller en upp sitt papper och berättar en idé ur sin Jag-cirkel, och en annan skriver in den i sin yttersta cirkel,
+# Grupp.
+id: en-for-alla
+skala: 74
+djup: false
+fokus: visat
+delar:
+  - figur: { namn: bakV, x: 372, y: 392, stallning: sitta, utanBen: true, trojan: rod, ansikte: prata, tittar: sidaH, nar: { V: [316, 324], H: [430, 320] } }
+  - figur: { namn: bakH, x: 560, y: 392, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, lutar: visat }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: ljusgron, ansikte: glad, lutar: visat }
+  - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, trojan: gul, ansikte: skriva, tittar: egetSH, lutar: egetSH, nar: { V: [660, 394] }, armarEfter: egetSH }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  # Var och ens papper: tre cirklar, Jag i mitten och Par och Grupp utanför, med idéerna som prickar i cirkelns färg.
+  - papper: { namn: egetBH, x: 552, y: 372, b: 84, h: 52, vinkel: 3, rader: 0 }
+  - markor: { x: 552, y: 372, r: 37, farg: null }
+  - markor: { x: 552, y: 372, r: 26, farg: null }
+  - markor: { x: 552, y: 372, r: 14, farg: null }
+  - markor: { x: 546, y: 371, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 558, y: 369, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 552, y: 376, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 551, y: 366, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 532, y: 373, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 572, y: 370, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 563, y: 382, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 521, y: 376, r: 2.8, farg: '#6cc28a' }
+  - markor: { x: 581, y: 364, r: 2.8, farg: '#6cc28a' }
+  - papper: { namn: egetSV, x: 340, y: 420, b: 84, h: 52, vinkel: 6, rader: 0 }
+  - markor: { x: 340, y: 420, r: 37, farg: null }
+  - markor: { x: 340, y: 420, r: 26, farg: null }
+  - markor: { x: 340, y: 420, r: 14, farg: null }
+  - markor: { x: 334, y: 419, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 346, y: 417, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 340, y: 424, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 339, y: 414, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 320, y: 421, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 360, y: 418, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 351, y: 430, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 309, y: 424, r: 2.8, farg: '#6cc28a' }
+  - papper: { namn: egetSH, x: 610, y: 420, b: 84, h: 52, vinkel: -6, rader: 0 }
+  - markor: { x: 610, y: 420, r: 37, farg: null }
+  - markor: { x: 610, y: 420, r: 26, farg: null }
+  - markor: { x: 610, y: 420, r: 14, farg: null }
+  - markor: { x: 604, y: 419, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 616, y: 417, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 610, y: 424, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 609, y: 414, r: 2.8, farg: '#efc65a' }
+  - markor: { x: 590, y: 421, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 630, y: 418, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 621, y: 430, r: 2.8, farg: '#5f72d9' }
+  - markor: { x: 579, y: 424, r: 2.8, farg: '#6cc28a' }
+  # Idén som skrivs in i den yttersta cirkeln, Grupp.
+  - symbol: { x: 634, y: 430, namn: stjarna, s: 6 }
+  - penna: { x: 642, y: 426, vinkel: 150, l: 40 }
+  - papper: { namn: visat, x: 372, y: 308, b: 101, h: 62, vinkel: -4, rader: 0 }
+  - markor: { x: 372, y: 308, r: 44.4, farg: null }
+  - markor: { x: 372, y: 308, r: 31.2, farg: null }
+  - markor: { x: 372, y: 308, r: 16.8, farg: null }
+  - markor: { x: 365, y: 307, r: 3.4, farg: '#efc65a' }
+  - markor: { x: 379, y: 304, r: 3.4, farg: '#efc65a' }
+  - markor: { x: 372, y: 313, r: 3.4, farg: '#efc65a' }
+  - markor: { x: 348, y: 309, r: 3.4, farg: '#5f72d9' }
+  - markor: { x: 396, y: 306, r: 3.4, farg: '#5f72d9' }
+  - markor: { x: 385, y: 320, r: 3.4, farg: '#5f72d9' }
+  - markor: { x: 335, y: 313, r: 3.4, farg: '#6cc28a' }
+  - markor: { x: 407, y: 298, r: 3.4, farg: '#6cc28a' }
+  - symbol: { x: 371, y: 300, namn: stjarna, s: 6 }
+  - bubbla: { till: bakV, dx: -40, dy: 40, symboler: [stjarna], visar: "En i fyrgruppen visar sina cirklar och berättar en idé ur sin Jag-cirkel" }
+  - bubbla: { till: sidaH, dx: 45, dy: 36, tanke: true, symboler: [stjarna], visar: "En annan tar upp idén och skriver in den i sin yttersta cirkel, Grupp" }

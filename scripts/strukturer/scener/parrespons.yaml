@@ -1,0 +1,15 @@
+# Parrespons: båda har berättat och antecknat, och den ena ger respons ur sina anteckningar om kamratens svar, medan kamraten tittar på hen och skriver ned det viktigaste.
+id: parrespons
+skala: 80
+djup: false
+delar:
+  - figur: { namn: ger, x: 372, y: 446, stallning: sitta, utanBen: true, trojan: ljusgron, ansikte: prata, tittar: far, lutar: far, pekar: [414, 384], armarEfter: noterV }
+  - figur: { namn: far, x: 586, y: 450, stallning: sitta, utanBen: true, trojan: rosa, ansikte: glad, tittar: ger, lutar: ger, nar: { H: [578, 392] }, armarEfter: noterH }
+  - bord: { x: 286, y: 480, b: 372, d: 100, h: 55, snett: 20 }
+  - papper: { namn: noterV, x: 428, y: 414, b: 104, h: 64, vinkel: -5, rader: 0, symbol: cirkel, symbolStorlek: 0.3, symbolPlats: [-0.28, 0] }
+  - symbol: { x: 432, y: 412, namn: hjarta, s: 11 }
+  - symbol: { x: 460, y: 410, namn: fraga, s: 12 }
+  - papper: { namn: noterH, x: 548, y: 418, b: 96, h: 64, vinkel: 5, rader: 0, symbol: cirkel, symbolStorlek: 0.3, symbolPlats: [-0.24, 0] }
+  - symbol: { x: 556, y: 420, namn: hjarta, s: 11 }
+  - penna: { x: 570, y: 426, vinkel: 150, l: 40 }
+  - bubbla: { till: ger, dx: -70, dy: 30, symboler: [hjarta, fraga], visar: "Responsen: den ena säger vad som var bra i kamratens svar och frågar om det hen undrade över" }

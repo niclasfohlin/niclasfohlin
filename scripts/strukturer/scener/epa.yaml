@@ -1,0 +1,10 @@
+# EPA: var och en har tänkt själv först, och nu berättar den ena sin tanke för den andra i paret, som har en egen tanke att berätta sedan.
+id: epa
+skala: 88
+djup: false
+luft: 0.16
+delar:
+  - figur: { namn: beratter, x: 405, y: 520, utanBen: true, nar: { H: [484, 334] }, trojan: lila, ansikte: prata, tittar: lyssnar, lutar: lyssnar }
+  - figur: { namn: lyssnar, x: 548, y: 526, utanBen: true, stallning: tanka, trojan: rod, ansikte: tanka, tittar: beratter }
+  - bubbla: { till: beratter, dx: -55, dy: 40, symboler: [triangel], visar: "Paret: den ena berättar den tanke hen fick när hen tänkte själv" }
+  - bubbla: { till: lyssnar, dx: 55, dy: 40, tanke: true, symboler: [kvadrat], visar: "Enskilt först: den andra har en egen tanke, som hen berättar sedan" }

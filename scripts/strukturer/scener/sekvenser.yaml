@@ -1,0 +1,21 @@
+# Sekvenser: var och en håller sitt kort upprätt mot bröstet så att ingen annan ser det, en beskriver sitt kort, och en annan pekar på luckan i raden där det egna kortet ska in.
+id: sekvenser
+skala: 74
+djup: false
+fokus: beskriver
+delar:
+  - figur: { namn: beskriver, x: 372, y: 392, stallning: sitta, utanBen: true, trojan: rod, ansikte: prata, tittar: pekar, lutar: pekar, nar: { V: [362, 318], H: [398, 316] }, armarEfter: kortB }
+  - figur: { namn: pekar, x: 574, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: tanka, tittar: luckan, lutar: luckan, nar: { H: [596, 314] }, pekar: luckan, pekarMed: V, armarEfter: kortL }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: orange, ansikte: glad, tittar: kortV, nar: { V: [236, 404], H: [270, 402] }, armarEfter: kortV }
+  - figur: { namn: sidaH, x: 700, y: 525, utanBen: true, trojan: rosa, ansikte: glad, nar: { V: [690, 404], H: [722, 402] }, armarEfter: kortH }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - kort: { x: 432, y: 382, b: 30, h: 40, vinkel: -3, farg: '#9bbae0' }
+  - kort: { x: 470, y: 384, b: 30, h: 40, vinkel: 2, farg: '#9bbae0' }
+  - punkt: { namn: luckan, x: 508, y: 384 }
+  - kort: { x: 546, y: 384, b: 30, h: 40, vinkel: 4, farg: '#9bbae0' }
+  - kort: { namn: kortB, x: 380, y: 306, b: 36, h: 48, vinkel: -10, farg: '#9bbae0' }
+  - kort: { namn: kortL, x: 600, y: 300, b: 36, h: 48, vinkel: 12, farg: '#9bbae0' }
+  - kort: { namn: kortV, x: 254, y: 390, b: 36, h: 48, vinkel: -12, farg: '#9bbae0' }
+  - kort: { namn: kortH, x: 706, y: 390, b: 36, h: 48, vinkel: 10, farg: '#9bbae0' }
+  - bubbla: { till: beskriver, dx: -45, dy: 40, symboler: [kvadrat], visar: "En beskriver det som står på sitt kort utan att visa det" }
+  - bubbla: { till: pekar, dx: 50, dy: 38, tanke: true, symboler: [triangel, kvadrat], visar: "En annan tänker ut att det egna kortet kommer före och pekar på luckan i raden där det ska in" }

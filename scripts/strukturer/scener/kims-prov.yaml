@@ -1,0 +1,28 @@
+# Kims prov: gruppen lutar sig över ett enda påhittat prov, Kims, stort i mitten, och undersöker vad som är rätt, var
+# det blev fel och hur Kim kan ha tänkt, medan en antecknar.
+id: kims-prov
+skala: 74
+djup: false
+fokus: provet
+delar:
+  - figur: { namn: bakV, x: 380, y: 392, stallning: sitta, utanBen: true, trojan: ljusgron, ansikte: prata, lutar: provet, pekar: [454, 388], armarEfter: provet }
+  - figur: { namn: bakH, x: 566, y: 392, stallning: sitta, utanBen: true, trojan: orange, ansikte: prata, lutar: provet, pekar: [540, 404], armarEfter: provet }
+  - figur: { namn: sidaV, x: 250, y: 520, utanBen: true, stallning: tanka, trojan: lila, ansikte: tanka, lutar: provet }
+  - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, trojan: bla, ansikte: skriva, tittar: anteckningar, lutar: anteckningar, nar: { V: [636, 404] }, armarEfter: anteckningar }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  # Kims prov: ett stort blad med fyra frågor, en svarsruta vid varje rad med rättningen, och Kim överst där namnet står.
+  - papper: { namn: provet, x: 468, y: 392, b: 186, h: 108, vinkel: -2, rader: 0, farg: '#fbf3dc' }
+  - kort: { x: 394, y: 358, b: 30, h: 32, vinkel: -2, farg: '#ffffff' }
+  - figur: { namn: kim, x: 394, y: 400, utanBen: true, skala: 16, stel: true, fokus: false, trojan: gul, ansikte: glad }
+  - pil: { fran: [418, 356], till: [476, 355], bage: 0.04, spets: false, tjock: 0.6 }
+  - papper: { x: 448, y: 382, b: 120, h: 14, vinkel: -2, rader: 1, farg: '#fbf3dc' }
+  - papper: { x: 448, y: 402, b: 120, h: 14, vinkel: -2, rader: 1, farg: '#fbf3dc' }
+  - papper: { x: 449, y: 422, b: 120, h: 14, vinkel: -2, rader: 1, farg: '#fbf3dc' }
+  - kort: { x: 532, y: 380, b: 20, h: 18, vinkel: -2, symbol: bock }
+  - kort: { x: 532, y: 400, b: 20, h: 18, vinkel: -2, symbol: kryss }
+  - kort: { x: 533, y: 420, b: 20, h: 18, vinkel: -2, symbol: bock }
+  - papper: { namn: anteckningar, x: 622, y: 418, b: 56, h: 42, vinkel: -8, rader: 3 }
+  - penna: { x: 638, y: 414, vinkel: 150, l: 38 }
+  - bubbla: { till: bakV, dx: -40, dy: 40, symboler: [bock], visar: "En visar det som blev rätt i Kims prov" }
+  - bubbla: { till: bakH, dx: 30, dy: 44, symboler: [kryss], visar: "En annan visar var det blev fel i Kims prov" }
+  - bubbla: { till: sidaV, dx: -30, dy: 40, tanke: true, symboler: [fraga, kugghjul], visar: "En tredje undrar hur Kim kan ha tänkt" }

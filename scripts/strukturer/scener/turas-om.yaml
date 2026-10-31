@@ -1,0 +1,14 @@
+# Turas om: den ena arbetar med uppgiften, och den andra uppmuntrar med en hand på kamratens axel, med sin egen uppgift framför sig tills rollerna växlar.
+id: turas-om
+skala: 80
+djup: false
+delar:
+  - figur: { namn: arbetar, x: 566, y: 440, stallning: sitta, utanBen: true, trojan: gul, ansikte: skriva, tittar: uppgiften, nar: { H: [574, 392] }, armarEfter: uppgiften }
+  - figur: { namn: stottar, x: 430, y: 446, stallning: sitta, utanBen: true, trojan: lila, ansikte: glad, tittar: arbetar, lutar: arbetar, nar: { H: arbetar.axelV }, armarEfter: axeln }
+  - bord: { x: 300, y: 474, b: 360, d: 100, h: 55, snett: 20 }
+  - papper: { namn: vantar, x: 404, y: 424, b: 72, h: 48, vinkel: 5, rader: 2, symbol: kvadrat }
+  - penna: { x: 446, y: 448, vinkel: 100, l: 40 }
+  - papper: { namn: uppgiften, x: 548, y: 404, b: 96, h: 58, vinkel: -5, rader: 2, symbol: triangel }
+  - penna: { x: 562, y: 410, vinkel: 150, l: 46 }
+  - punkt: { namn: axeln, x: 520, y: 320 }
+  - bubbla: { till: stottar, dx: -62, dy: 44, b: 96, h: 78, symboler: [hjarta], visar: "Den som stöttar uppmuntrar kamraten som arbetar, och uppmuntran är rollen" }

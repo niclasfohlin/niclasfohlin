@@ -1,0 +1,30 @@
+# Provet två gånger: provet är skrivet enskilt, och den ena kopian av allas svar ligger i en hög till läraren. Nu
+# jämför gruppen svaren fråga för fråga: den som svarat rätt håller upp sitt prov och förklarar för den som svarat
+# annorlunda.
+id: provet-tva-ganger
+skala: 74
+djup: false
+fokus: visat
+delar:
+  - figur: { namn: bakV, x: 372, y: 392, stallning: sitta, utanBen: true, trojan: rosa, ansikte: prata, tittar: sidaH, nar: { V: [310, 344], H: [434, 340] } }
+  - figur: { namn: bakH, x: 566, y: 394, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, lutar: visat }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: turkos, ansikte: glad, lutar: visat }
+  - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, trojan: ljusbla, ansikte: tanka, lutar: visat, pekar: { mal: egetSH, dx: 16, dy: 0 }, armarEfter: egetSH }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  # Den ena kopian av allas svar, i en hög som ska till läraren.
+  - papper: { x: 466, y: 424, b: 58, h: 36, vinkel: -8, rader: 3 }
+  - papper: { x: 470, y: 422, b: 58, h: 36, vinkel: -2, rader: 3 }
+  - papper: { x: 474, y: 420, b: 58, h: 36, vinkel: 4, rader: 3 }
+  - papper: { x: 478, y: 418, b: 58, h: 36, vinkel: 9, rader: 3 }
+  # Var och ens egen kopia: tre frågor med svaret i en ruta vid raden.
+  - papper: { x: 556, y: 372, b: 64, h: 46, vinkel: 4, rader: 3 }
+  - kort: { x: 580, y: 374, b: 17, h: 15, vinkel: 4, symbol: cirkel }
+  - papper: { x: 332, y: 420, b: 64, h: 46, vinkel: 8, rader: 3 }
+  - kort: { x: 356, y: 425, b: 17, h: 15, vinkel: 8, symbol: cirkel }
+  - papper: { namn: egetSH, x: 604, y: 420, b: 64, h: 46, vinkel: -6, rader: 3 }
+  - kort: { x: 627, y: 418, b: 17, h: 15, vinkel: -6, symbol: kvadrat }
+  # Provet som hålls upp, med cirkeln som svar på frågan som gruppen jämför.
+  - papper: { namn: visat, x: 372, y: 320, b: 104, h: 78, vinkel: -3, rader: 3 }
+  - kort: { x: 404, y: 318, b: 28, h: 26, vinkel: -3, symbol: cirkel }
+  - bubbla: { till: bakV, dx: -46, dy: 40, symboler: [cirkel], visar: "Den som svarat rätt på frågan visar sitt svar och förklarar hur hen tänkte" }
+  - bubbla: { till: sidaH, dx: 45, dy: 36, tanke: true, symboler: [kvadrat, fraga], visar: "Den som svarade kvadraten på sitt eget prov undrar, tills hen kan förklara svaret" }

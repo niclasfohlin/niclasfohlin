@@ -1,0 +1,12 @@
+# Läsa och förklara i par: paret har läst stycket i texten, den ena sammanfattar det med egna ord, och den andra följer texten med handen och lägger till det som saknades.
+id: lasa-och-forklara-i-par
+skala: 80
+djup: false
+delar:
+  - figur: { namn: sammanfattar, x: 372, y: 446, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: kontrollerar, lutar: kontrollerar, nar: { H: [404, 346] } }
+  - figur: { namn: kontrollerar, x: 576, y: 450, stallning: sitta, utanBen: true, trojan: lila, ansikte: prata, tittar: textenH, lutar: textenH, nar: { V: [522, 392] }, armarEfter: textenH }
+  - bord: { x: 290, y: 480, b: 350, d: 100, h: 55, snett: 20 }
+  - papper: { namn: textenV, x: 440, y: 412, b: 76, h: 92, vinkel: -4, rader: 5 }
+  - papper: { namn: textenH, x: 514, y: 412, b: 76, h: 92, vinkel: 4, rader: 5 }
+  - bubbla: { till: sammanfattar, dx: -60, dy: 36, symboler: [kvadrat], visar: "Den ena sammanfattar stycket med egna ord" }
+  - bubbla: { till: kontrollerar, dx: 70, dy: 36, symboler: [kvadrat, cirkel], visar: "Den andra tar upp sammanfattningen och lägger till det som saknades" }

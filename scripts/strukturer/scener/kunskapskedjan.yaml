@@ -1,0 +1,13 @@
+# Kunskapskedjan: gruppen står tätt i en ring, och den som har turen upprepar alla ord som redan sagts och lägger till ett eget; den som sa det första ordet hör sitt ord komma igen, och nästa på tur har sitt eget klart.
+id: kunskapskedjan
+skala: 70
+djup: false
+fokus: talar
+delar:
+  - figur: { namn: talar, x: 408, y: 392, ansikte: prata, tittar: forst, lutar: forst, stallning: staHanderFram }
+  - figur: { namn: nasta, x: 528, y: 388, ansikte: tanka, lutar: talar, stallning: tanka }
+  - figur: { namn: forst, x: 334, y: 500, ansikte: bak, lutar: talar }
+  - figur: { namn: sidaH, x: 606, y: 504, ansikte: bak, lutar: talar }
+  - bubbla: { till: talar, dx: -40, dy: 40, symboler: [triangel, kvadrat, cirkel, stjarna], visar: "Den som har turen upprepar allt som sagts före, triangeln, kvadraten och cirkeln, och lägger till sitt eget ord, stjärnan" }
+  - bubbla: { till: forst, dx: -62, dy: 18, tanke: true, symboler: [triangel], visar: "Den som sa kedjans första ord, triangeln, hör sitt ord upprepas först i kedjan" }
+  - bubbla: { till: nasta, dx: 70, dy: 30, tanke: true, symboler: [hjarta], visar: "Den som står näst på tur har tänkt ut det ord hen ska lägga till när hen har upprepat hela kedjan" }

@@ -1,0 +1,23 @@
+# Topplistan: två har lagt sina listor med tre minnen sida vid sida mitt på bordet, den ena berättar om stjärnan överst på sin lista, och den andra pekar på samma stjärna på sin.
+id: topplistan
+skala: 74
+djup: false
+fokus: listaA
+delar:
+  - figur: { namn: talar, x: 372, y: 392, stallning: sitta, utanBen: true, ansikte: prata, tittar: bakH, lutar: listaA, nar: { H: [400, 372] }, armarEfter: listaA }
+  - figur: { namn: bakH, x: 572, y: 392, stallning: sitta, utanBen: true, ansikte: tanka, lutar: listaB, nar: { V: [550, 398] }, armarEfter: listaB }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, ansikte: glad, lutar: listaA, nar: { H: [318, 410] }, armarEfter: listaV }
+  - figur: { namn: sidaH, x: 695, y: 525, utanBen: true, ansikte: glad, lutar: listaB, nar: { V: [640, 412] }, armarEfter: listaH }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - papper: { namn: listaV, x: 322, y: 422, b: 38, h: 48, vinkel: 10, rader: 3 }
+  - papper: { namn: listaH, x: 628, y: 424, b: 38, h: 48, vinkel: -9, rader: 3 }
+  - papper: { namn: listaA, x: 438, y: 396, b: 62, h: 86, vinkel: -3, rutnat: [1, 3] }
+  - symbol: { x: 438, y: 371, namn: stjarna, s: 11 }
+  - symbol: { x: 438, y: 397, namn: cirkel, s: 9 }
+  - symbol: { x: 439, y: 423, namn: hjarta, s: 9 }
+  - papper: { namn: listaB, x: 512, y: 396, b: 62, h: 86, vinkel: 3, rutnat: [1, 3] }
+  - symbol: { x: 513, y: 369, namn: kvadrat, s: 9 }
+  - symbol: { x: 512, y: 396, namn: stjarna, s: 11 }
+  - symbol: { x: 511, y: 423, namn: triangel, s: 9 }
+  - bubbla: { till: talar, dx: -40, dy: 40, symboler: [stjarna], visar: "En i taget berättar vilket minne hen satt överst på sin lista och varför" }
+  - bubbla: { till: bakH, dx: 50, dy: 36, tanke: true, symboler: [stjarna], visar: "Den andra har samma minne på sin lista men på en annan plats: gruppen ser vad som är lika och vad som skiljer listorna åt" }

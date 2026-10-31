@@ -1,0 +1,22 @@
+# På sightseeing: gruppernas arbeten hänger på väggen, en grupp står vänd mot ett arbete och sätter upp stora lappar med beröm och frågor, och nästa grupp läser lapparna som redan sitter på nästa arbete innan de går vidare.
+id: pa-sightseeing
+skala: 62
+djup: false
+delar:
+  - papper: { namn: arbete1, x: 250, y: 190, b: 240, h: 144, rader: 3, symbol: triangel, symbolStorlek: 0.28, farg: '#f4f6f4' }
+  - papper: { namn: arbete2, x: 664, y: 190, b: 240, h: 144, rader: 3, symbol: kvadrat, symbolStorlek: 0.28, farg: '#f4f6f4' }
+  - kort: { namn: lappF1, x: 334, y: 150, b: 50, h: 50, vinkel: -5, farg: '#f3dc8e', symbol: fraga }
+  - kort: { namn: lappF2, x: 744, y: 150, b: 50, h: 50, vinkel: 4, farg: '#f3dc8e', symbol: fraga }
+  - kort: { namn: lappH2, x: 752, y: 226, b: 50, h: 50, vinkel: -6, farg: '#f3dc8e', symbol: hjarta }
+  - pil: { fran: [388, 98], till: [532, 98], bage: 0.22 }
+  - figur: { namn: a3, x: 92, y: 452, trojan: gron, ansikte: skriva, tittar: arbete1, lutar: arbete1, nar: { V: [96, 360], H: [128, 334] } }
+  - kort: { namn: lappA3, x: 104, y: 346, b: 44, h: 44, vinkel: 8, farg: '#f3dc8e', symbol: fraga }
+  - penna: { x: 112, y: 348, vinkel: 145, l: 30 }
+  - figur: { namn: a2, x: 196, y: 472, trojan: gron, ansikte: bak, pekar: [216, 206] }
+  - figur: { namn: a1, x: 310, y: 466, trojan: gron, ansikte: bak, nar: { H: [356, 250] } }
+  - kort: { hand: [a1, H], dx: 0, dy: -6, b: 50, h: 50, vinkel: 3, farg: '#f3dc8e', symbol: hjarta }
+  - figur: { namn: b1, x: 604, y: 474, trojan: orange, ansikte: bak }
+  - figur: { namn: b2, x: 702, y: 478, trojan: orange, ansikte: bak }
+  - figur: { namn: b3, x: 818, y: 452, trojan: orange, ansikte: prata, tittar: lappH2, lutar: lappH2, pekar: { mal: lappH2, dx: -16, dy: 14 } }
+  - bubbla: { till: a3, dx: -40, dy: 40, tanke: true, symboler: [fraga], visar: "En i gruppen skriver en fråga på en lapp till dem som gjorde arbetet" }
+  - bubbla: { till: b3, dx: 30, dy: 40, symboler: [hjarta], visar: "Nästa grupp läser högt det beröm som andra grupper har satt upp på arbetet" }

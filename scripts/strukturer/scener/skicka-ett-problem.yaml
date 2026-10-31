@@ -1,0 +1,18 @@
+# Skicka ett problem: en grupp skickar sitt problem till gruppen vid bordet bredvid, som tar emot det med ett tomt svarspapper och pennan redo.
+id: skicka-ett-problem
+skala: 64
+djup: false
+delar:
+  - figur: { namn: L1, x: 172, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, tittar: problemet, lutar: L2 }
+  - figur: { namn: L2, x: 318, y: 392, stallning: sitta, utanBen: true, trojan: lila, ansikte: glad, tittar: R1, lutar: problemet, nar: { H: [378, 328] }, armarEfter: problemet }
+  - figur: { namn: R1, x: 474, y: 392, stallning: sitta, utanBen: true, trojan: orange, ansikte: glad, tittar: problemet, lutar: problemet, nar: { V: [414, 326] }, armarEfter: problemet }
+  - figur: { namn: R2, x: 622, y: 392, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, tittar: problemet, lutar: R1, nar: { H: [648, 330] }, armarEfter: svarpenna }
+  - figur: { namn: L3, x: 64, y: 512, utanBen: true, trojan: rosa, ansikte: glad, tittar: problemet, lutar: L2, nar: { H: [118, 410] }, armarEfter: svar }
+  - figur: { namn: R3, x: 760, y: 512, utanBen: true, trojan: gron, ansikte: tanka, tittar: problemet, lutar: R2, nar: { V: [702, 410] }, armarEfter: svar }
+  - bord: { x: 80, y: 445, b: 265, d: 90, h: 55, snett: 15 }
+  - bord: { x: 445, y: 445, b: 265, d: 90, h: 55, snett: 15 }
+  - penna: { x: 210, y: 402, vinkel: 120, l: 36 }
+  - papper: { namn: svar, x: 606, y: 380, b: 56, h: 38, vinkel: -4, rader: 0 }
+  - penna: { namn: svarpenna, x: 630, y: 362, vinkel: 150, l: 36 }
+  - kort: { namn: problemet, x: 396, y: 320, b: 54, h: 42, vinkel: -6, farg: '#f3dc8e', symbol: fraga }
+  - pil: { fran: [214, 176], till: [592, 176], bage: -0.12, tjock: 1.3 }

@@ -1,0 +1,17 @@
+# Sant eller falskt: lärarens tre påståenden ligger stora i en rad på bordet, och gruppen diskuterar vilket av dem som
+# är det falska: två pekar på var sitt och motiverar, och den tredje väger deras skäl.
+id: sant-eller-falskt
+skala: 76
+djup: false
+fokus: kvadraten
+delar:
+  - figur: { namn: bakV, x: 372, y: 392, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: bakH, lutar: cirkeln, pekar: { mal: cirkeln, dx: 14, dy: -6 }, armarEfter: cirkeln }
+  - figur: { namn: bakH, x: 548, y: 394, stallning: sitta, utanBen: true, trojan: rod, ansikte: prata, tittar: bakV, lutar: kvadraten, pekar: { mal: kvadraten, dx: 18, dy: -18 }, armarEfter: kvadraten }
+  - bord: { x: 280, y: 448, b: 340, d: 104, h: 60, snett: 20 }
+  - papper: { namn: cirkeln, x: 386, y: 400, b: 80, h: 58, vinkel: -5, rader: 2, symbol: cirkel, symbolStorlek: 0.3, symbolPlats: [-0.24, 0] }
+  - papper: { namn: kvadraten, x: 470, y: 398, b: 80, h: 58, vinkel: 1, rader: 2, symbol: kvadrat, symbolStorlek: 0.3, symbolPlats: [-0.24, 0] }
+  - papper: { namn: triangeln, x: 554, y: 400, b: 80, h: 58, vinkel: 5, rader: 2, symbol: triangel, symbolStorlek: 0.3, symbolPlats: [-0.24, 0] }
+  - figur: { namn: tanker, x: 690, y: 530, utanBen: true, stallning: tanka, trojan: gul, ansikte: tanka, lutar: kvadraten }
+  - bubbla: { till: bakV, dx: -40, dy: 40, symboler: [cirkel, kryss], visar: "En tror att påståendet med cirkeln är det falska och motiverar varför" }
+  - bubbla: { till: bakH, dx: 26, dy: 46, symboler: [kvadrat, kryss], visar: "En annan tror att det falska är påståendet med kvadraten och motiverar sitt svar" }
+  - bubbla: { till: tanker, dx: 46, dy: 30, tanke: true, symboler: [fraga], visar: "Den tredje har tänkt själv först och väger nu deras skäl innan gruppen enas" }

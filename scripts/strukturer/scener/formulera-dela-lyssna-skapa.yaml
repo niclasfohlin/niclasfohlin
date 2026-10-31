@@ -1,0 +1,15 @@
+# Formulera, dela, lyssna, skapa: paret har delat sina två svar och bygger av dem ett nytt gemensamt svar, bättre än båda de första.
+id: formulera-dela-lyssna-skapa
+skala: 80
+djup: false
+delar:
+  - figur: { namn: foreslar, x: 358, y: 446, stallning: sitta, utanBen: true, trojan: rosa, ansikte: prata, tittar: skriver, lutar: nytt, pekar: [464, 386], armarEfter: nytt }
+  - figur: { namn: skriver, x: 548, y: 450, stallning: sitta, utanBen: true, trojan: turkos, ansikte: skriva, tittar: nytt, lutar: nytt, nar: { H: [508, 378] }, armarEfter: nytt }
+  - bord: { x: 290, y: 480, b: 360, d: 100, h: 55, snett: 20 }
+  - papper: { namn: egetV, x: 352, y: 444, b: 58, h: 40, vinkel: -8, rader: 0, symbol: triangel }
+  - papper: { namn: egetH, x: 598, y: 446, b: 58, h: 40, vinkel: 8, rader: 0, symbol: kvadrat }
+  - papper: { namn: nytt, x: 478, y: 404, b: 84, h: 56, vinkel: -3, rader: 0, symbol: stjarna }
+  - pil: { fran: [380, 430], till: [428, 414], bage: -0.35 }
+  - pil: { fran: [574, 432], till: [528, 416], bage: 0.35 }
+  - penna: { x: 488, y: 408, vinkel: 150, l: 44 }
+  - bubbla: { till: foreslar, dx: -60, dy: 36, symboler: [stjarna], visar: "Den ena föreslår ett nytt svar som bygger på båda de första, och paret skriver det tillsammans" }

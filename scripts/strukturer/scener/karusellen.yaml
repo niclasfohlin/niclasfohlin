@@ -1,0 +1,27 @@
+# Karusellen: grupperna sitter vid var sitt bord med en uppgift och roterar till nästa bord när klockan ringer, och gruppen längst fram läser det gruppen före skrev och skriver vidare med gruppens enda penna.
+id: karusellen
+skala: 70
+djupRam: [230, 470]
+delar:
+  - figur: { namn: b1, x: 70, y: 234, stallning: sitta, utanBen: true, trojan: rosa, ansikte: glad, tittar: bladB, lutar: bladB }
+  - figur: { namn: b2, x: 150, y: 228, stallning: sitta, utanBen: true, trojan: rosa, ansikte: skriva, tittar: bladB, lutar: bladB, nar: { V: [150, 206] }, armarEfter: bladB }
+  - figur: { namn: b3, x: 230, y: 234, stallning: sitta, utanBen: true, trojan: rosa, ansikte: tanka, tittar: bladB, lutar: bladB }
+  - bord: { x: 24, y: 256, b: 240, d: 52, h: 40, snett: 12 }
+  - papper: { namn: bladB, x: 140, y: 224, b: 90, h: 40, vinkel: -4, rader: 2, symbol: cirkel }
+  - figur: { namn: c1, x: 690, y: 234, stallning: sitta, utanBen: true, trojan: turkos, ansikte: prata, tittar: c2, lutar: bladC }
+  - figur: { namn: c2, x: 770, y: 228, stallning: sitta, utanBen: true, trojan: turkos, ansikte: skriva, tittar: bladC, lutar: bladC, nar: { V: [770, 206] }, armarEfter: bladC }
+  - figur: { namn: c3, x: 850, y: 234, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, tittar: c1, lutar: bladC }
+  - bord: { x: 644, y: 256, b: 240, d: 52, h: 40, snett: 12 }
+  - papper: { namn: bladC, x: 760, y: 224, b: 90, h: 40, vinkel: 4, rader: 2, symbol: stjarna }
+  - pil: { fran: [290, 140], till: [610, 140], bage: 0.12 }
+  - pil: { fran: [820, 300], till: [700, 424], bage: 0.25 }
+  - pil: { fran: [204, 424], till: [86, 302], bage: 0.25 }
+  - figur: { namn: a1, x: 346, y: 444, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: bladA, lutar: bladA, pekar: [424, 396], armarEfter: bladA }
+  - figur: { namn: a2, x: 450, y: 440, stallning: sitta, utanBen: true, trojan: gul, ansikte: skriva, tittar: bladA, lutar: bladA, nar: { V: [452, 388], H: [492, 404] }, armarEfter: bladA }
+  - figur: { namn: a3, x: 556, y: 444, stallning: sitta, utanBen: true, trojan: gul, ansikte: tanka, tittar: bladA, lutar: bladA }
+  - bord: { x: 290, y: 472, b: 330, d: 86, h: 50, snett: 16 }
+  - papper: { namn: bladA, x: 452, y: 410, b: 116, h: 58, vinkel: -3, rader: 2, symbol: kvadrat }
+  - penna: { x: 466, y: 412, vinkel: 150, l: 46 }
+  - klocka: { x: 584, y: 408, r: 30 }
+  - bubbla: { till: a1, dx: -56, dy: 30, symboler: [kvadrat], visar: "Gruppen läser högt det gruppen före skrev på uppgiften vid det här bordet" }
+  - bubbla: { till: a2, dx: 70, dy: 40, tanke: true, symboler: [triangel], visar: "Den som har gruppens penna bygger vidare på det som står och skriver en ny lösning under" }

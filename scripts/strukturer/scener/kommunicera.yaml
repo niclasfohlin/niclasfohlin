@@ -1,0 +1,17 @@
+# Kommunicera: en hög skärm står mellan berättaren och lyssnaren, berättaren beskriver sin bild, lyssnaren ritar efter beskrivningen och frågar, och observatören bakom skärmen antecknar.
+id: kommunicera
+skala: 74
+djup: false
+delar:
+  - figur: { namn: observator, x: 540, y: 452, utanBen: true, trojan: gron, ansikte: tanka, tittar: berattare, nar: { V: [512, 322], H: [570, 314] } }
+  - papper: { namn: anteckningar, x: 530, y: 304, b: 46, h: 54, vinkel: -8, rader: 3 }
+  - penna: { x: 538, y: 302, vinkel: 70, l: 34 }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 50, snett: 20 }
+  - skarm: { x: 466, y: 412, b: 76, h: 150 }
+  - figur: { namn: berattare, x: 262, y: 520, utanBen: true, trojan: orange, ansikte: prata, tittar: lyssnare, nar: { H: [318, 396] }, armarEfter: bilden }
+  - figur: { namn: lyssnare, x: 676, y: 525, utanBen: true, trojan: lila, ansikte: prata, tittar: berattare, lutar: ritning, nar: { V: [620, 382] }, armarEfter: ritning }
+  - papper: { namn: bilden, x: 352, y: 404, b: 78, h: 56, vinkel: 6, rader: 0, symbol: triangel, symbolStorlek: 0.3, symbolPlats: [0, 0] }
+  - papper: { namn: ritning, x: 590, y: 406, b: 78, h: 56, vinkel: -6, rader: 0, symbol: triangel, symbolStorlek: 0.17, symbolPlats: [-0.12, 0.08] }
+  - penna: { x: 598, y: 404, vinkel: 140, l: 40 }
+  - bubbla: { till: berattare, dx: -30, dy: 40, symboler: [triangel], visar: "Berättaren beskriver bilden på sitt papper, som lyssnaren inte ser bakom skärmen" }
+  - bubbla: { till: lyssnare, dx: 40, dy: 40, symboler: [fraga], visar: "Lyssnaren ritar efter beskrivningen och ställer en motfråga för att förstå bättre" }

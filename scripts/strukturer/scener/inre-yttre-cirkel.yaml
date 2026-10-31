@@ -1,19 +1,20 @@
-# Inre–yttre cirkel: två ringar, de inre vända utåt mot en partner i den yttre. Paren frågar och svarar, och den
-# yttre ringen flyttar ett steg till nästa fråga. Fyra par, så att varje par syns.
+# Inre–yttre cirkel: två ringar, de inre vända utåt mot en partner i den yttre. I paret närmast frågar den yttre och den
+# inre svarar, och den yttre ringen flyttar ett steg till nästa fråga. Fyra par snett fram och bak, så att varje par
+# möts ansikte mot ansikte och inget par står bakom ett annat.
 id: inre-yttre-cirkel
-skala: 66
-djupRam: [250, 470]
+skala: 54
+djupRam: [180, 520]
 delar:
-  - golvring: { x: 450, y: 360, rx: 150, ry: 62 }
-  - golvring: { x: 450, y: 360, rx: 300, ry: 128 }
-  - figur: { namn: yb, x: 450, y: 236, trojan: gul, ansikte: glad, tittar: ib }
-  - figur: { namn: ib, x: 450, y: 300, trojan: gron, ansikte: bak }
-  - figur: { namn: yv, x: 150, y: 368, trojan: rod, ansikte: prata, tittar: iv, lutar: iv }
-  - figur: { namn: iv, x: 302, y: 364, trojan: lila, ansikte: glad, tittar: yv }
-  - figur: { namn: ih, x: 598, y: 364, trojan: turkos, ansikte: prata, tittar: yh, stallning: halla }
-  - figur: { namn: yh, x: 750, y: 368, trojan: ljusgul, ansikte: glad, tittar: ih, lutar: ih }
-  - figur: { namn: if, x: 418, y: 424, trojan: orange, ansikte: glad, tittar: yf }
-  - figur: { namn: yf, x: 492, y: 488, trojan: bla, ansikte: bak }
-  - pil: { fran: [215, 470], till: [345, 505], bage: 0.1 }
-  - bubbla: { till: yv, dx: -30, dy: 34, symboler: [fraga], visar: "Den yttre ställer frågan" }
-  - bubbla: { till: ih, dx: 10, dy: 38, symboler: [triangel], visar: "Den inre svarar sin partner mittemot" }
+  - golvring: { x: 450, y: 340, rx: 170, ry: 98 }
+  - golvring: { x: 450, y: 340, rx: 330, ry: 190 }
+  - figur: { namn: ybv, x: 261, y: 184, trojan: gul, ansikte: glad, tittar: ibv, lutar: ibv }
+  - figur: { namn: ybh, x: 639, y: 184, trojan: rod, ansikte: prata, tittar: ibh, lutar: ibh }
+  - figur: { namn: ibv, x: 352, y: 260, trojan: gron, ansikte: bak, tittar: ybv }
+  - figur: { namn: ibh, x: 548, y: 260, trojan: lila, ansikte: bak, tittar: ybh }
+  - figur: { namn: ifv, x: 378, y: 429, trojan: orange, ansikte: prata, tittar: yfv, lutar: yfv }
+  - figur: { namn: ifh, x: 522, y: 429, trojan: turkos, ansikte: glad, tittar: yfh, lutar: yfh }
+  - figur: { namn: yfv, x: 311, y: 512, trojan: ljusbla, ansikte: bak, tittar: ifv }
+  - figur: { namn: yfh, x: 589, y: 512, trojan: ljusgul, ansikte: bak, tittar: ifh }
+  - pil: { fran: [779, 323], till: [736, 435], bage: -0.24, tjock: 1.3 }
+  - bubbla: { till: yfv, dx: -55, dy: 26, symboler: [fraga], visar: "Den yttre ställer frågan till sin partner mittemot" }
+  - bubbla: { till: ifv, dx: 46, dy: 30, symboler: [kvadrat], visar: "Den inre svarar på frågan, i samma par" }

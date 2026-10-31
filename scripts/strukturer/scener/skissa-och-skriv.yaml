@@ -1,0 +1,20 @@
+# Skissa och skriv: gruppen har lagt fram kedjans alla led i en rad, bilden, beskrivningen, teckningen och den nya
+# beskrivningen, och jämför vad som ändrades på vägen från stjärnan till det som ritades.
+id: skissa-och-skriv
+skala: 74
+djup: false
+fokus: text1
+delar:
+  - figur: { namn: v, x: 330, y: 394, stallning: sitta, utanBen: true, trojan: turkos, ansikte: prata, tittar: m, lutar: bilden, pekar: { mal: bilden, dx: 22, dy: -14 }, armarEfter: bilden }
+  - figur: { namn: m, x: 470, y: 390, stallning: sitta, utanBen: true, trojan: gul, ansikte: tanka, lutar: text1, pekar: { mal: text1, dx: 12, dy: -10 }, armarEfter: text1 }
+  - figur: { namn: h, x: 604, y: 396, stallning: sitta, utanBen: true, trojan: rosa, ansikte: prata, tittar: v, lutar: teckningen, pekar: { mal: teckningen, dx: 20, dy: -10 }, armarEfter: teckningen }
+  - bord: { x: 250, y: 452, b: 420, d: 106, h: 60, snett: 20 }
+  - kort: { namn: bilden, x: 346, y: 406, b: 72, h: 56, vinkel: -4, symbol: stjarna }
+  - papper: { namn: text1, x: 430, y: 404, b: 72, h: 56, vinkel: 2, rader: 3 }
+  - kort: { namn: teckningen, x: 514, y: 406, b: 72, h: 56, vinkel: -2, symbol: 'triangel:gul' }
+  - papper: { namn: text2, x: 598, y: 404, b: 72, h: 56, vinkel: 4, rader: 3 }
+  - pil: { fran: [366, 364], till: [410, 364], bage: -0.35, tjock: 0.9 }
+  - pil: { fran: [450, 364], till: [494, 364], bage: -0.35, tjock: 0.9 }
+  - pil: { fran: [534, 364], till: [578, 364], bage: -0.35, tjock: 0.9 }
+  - bubbla: { till: v, dx: -40, dy: 40, symboler: [stjarna], visar: "Den första visar bilden som kedjan började med" }
+  - bubbla: { till: h, dx: 40, dy: 40, symboler: [triangel:gul, utrop], visar: "En annan visar vad den blev efter beskrivningen: något har ändrats på vägen" }

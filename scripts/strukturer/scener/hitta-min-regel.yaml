@@ -1,0 +1,17 @@
+# Hitta min regel: läraren har sorterat exempel i två rutor på tavlan efter en hemlig regel, och paret diskuterar vilken regeln är.
+id: hitta-min-regel
+skala: 90
+djup: false
+delar:
+  - tavla: { x: 505, y: 170, b: 370, h: 140, rutor: 2 }
+  - kort: { x: 362, y: 146, b: 34, h: 34, vinkel: -4, symbol: 'triangel:rod' }
+  - kort: { x: 450, y: 140, b: 34, h: 34, vinkel: 3, symbol: 'kvadrat:rod' }
+  - kort: { x: 406, y: 196, b: 34, h: 34, vinkel: -2, symbol: 'cirkel:rod' }
+  - kort: { x: 538, y: 192, b: 34, h: 34, vinkel: 3, symbol: 'kvadrat:bla' }
+  - kort: { x: 576, y: 142, b: 34, h: 34, vinkel: -3, symbol: 'triangel:bla' }
+  - kort: { x: 628, y: 186, b: 34, h: 34, vinkel: 2, symbol: 'cirkel:bla' }
+  - punkt: { namn: ett, x: 420, y: 176 }
+  - figur: { namn: v, x: 508, y: 566, utanBen: true, trojan: gron, ansikte: bak, tittar: ett, pekar: ett }
+  - figur: { namn: h, x: 646, y: 572, utanBen: true, trojan: orange, ansikte: bak, tittar: v, lutar: v }
+  - bubbla: { till: v, dx: -112, dy: -10, symboler: ['stjarna:rod'], visar: "Den ena föreslår ett nytt exempel som hör till ruta ett, ett sätt att pröva regeln" }
+  - bubbla: { till: h, dx: 92, dy: 4, symboler: [fraga], visar: "Den andra frågar kamraten om förslaget: vad är regeln?" }

@@ -1,0 +1,16 @@
+# Hitta en kompis: paret som har hittat varandra sitter ned och löser uppgiften, den ena är stjärna och den andra hjärta, medan två andra ger varandra en high five och en söker med handen uppe.
+id: hitta-en-kompis
+skala: 76
+djupRam: [380, 520]
+delar:
+  - figur: { namn: soker, x: 400, y: 380, stallning: { V: [-28, -8], H: [168, 178], benV: [-20, -6], benH: [22, 4], lut: -3 }, trojan: lila, ansikte: glad, tittar: [260, 300] }
+  - figur: { namn: hfV, x: 110, y: 470, stallning: highFiveH, trojan: gul, ansikte: skratt, tittar: hfH, nar: { H: [166, 236] } }
+  - figur: { namn: hfH, x: 225, y: 476, stallning: highFiveV, trojan: gron, ansikte: glad, tittar: hfV, nar: { V: [170, 236] } }
+  - stralar: { x: 168, y: 222, r: 22 }
+  - figur: { namn: stjarnan, x: 560, y: 470, stallning: sitta, utanBen: true, trojan: rosa, ansikte: prata, tittar: uppgiften, lutar: uppgiften, pekar: [608, 440], armarEfter: uppgiften }
+  - kort: { x: 546, y: 374, b: 40, h: 42, vinkel: -5, symbol: stjarna }
+  - figur: { namn: hjartat, x: 712, y: 474, stallning: sitta, utanBen: true, trojan: orange, ansikte: skriva, tittar: uppgiften, lutar: uppgiften, nar: { V: [672, 410] }, armarEfter: uppgiften }
+  - kort: { x: 726, y: 378, b: 40, h: 42, vinkel: 5, symbol: hjarta }
+  - bord: { x: 470, y: 504, b: 330, d: 96, h: 55, snett: 20 }
+  - papper: { namn: uppgiften, x: 640, y: 434, b: 96, h: 56, vinkel: -4, rader: 2 }
+  - penna: { x: 664, y: 442, vinkel: 165, l: 40 }

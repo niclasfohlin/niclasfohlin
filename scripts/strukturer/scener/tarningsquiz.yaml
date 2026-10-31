@@ -1,0 +1,15 @@
+# Tärningsquiz: paret har slagit de två tärningarna, den ena pekar på rutan i rutnätet som tärningarna gav och läser frågan, och den andra skriver ned svaret.
+id: tarningsquiz
+skala: 80
+djup: false
+delar:
+  - figur: { namn: pekar, x: 372, y: 448, stallning: sitta, utanBen: true, trojan: gron, ansikte: prata, tittar: rutan, lutar: rutan, pekar: { mal: rutan, dx: -12, dy: 4 }, armarEfter: rutan }
+  - figur: { namn: skriver, x: 600, y: 448, stallning: sitta, utanBen: true, trojan: gul, ansikte: skriva, tittar: svaret, lutar: rutan, nar: { V: [576, 386], H: [620, 402] }, armarEfter: svaret }
+  - bord: { x: 280, y: 480, b: 400, d: 116, h: 55, snett: 20 }
+  - papper: { namn: rutnatet, x: 482, y: 412, b: 150, h: 90, rutnat: [4, 3] }
+  - kort: { namn: rutan, x: 500, y: 412, b: 35, h: 28, farg: '#f3dc8e', symbol: fraga }
+  - papper: { namn: svaret, x: 604, y: 406, b: 66, h: 46, vinkel: -6, rader: 2, symbol: triangel }
+  - penna: { x: 614, y: 410, vinkel: 150, l: 40 }
+  - tarning: { x: 458, y: 466, s: 32, farg: '#efc65a', prickar: 2 }
+  - tarning: { x: 500, y: 472, s: 32, farg: '#9bbae0', prickar: 3 }
+  - bubbla: { till: pekar, dx: -55, dy: 40, symboler: [fraga], visar: "Tärningarna har gett en ruta, och den ena läser frågan som står där" }

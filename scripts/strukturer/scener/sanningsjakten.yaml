@@ -1,0 +1,18 @@
+# Sanningsjakten: paret har kommit till ett nytt bord, där ett annat par har skrivit ett sant och ett falskt påstående överst på papperet, och den ena pekar på det påstående hen tror är sant medan den andra skriver varför, innan de går vidare till nästa bord.
+id: sanningsjakten
+skala: 76
+djup: false
+delar:
+  - figur: { namn: pekar, x: 322, y: 452, stallning: sitta, utanBen: true, trojan: lila, ansikte: prata, tittar: skriver, lutar: papperet, pekar: { mal: pastaende1, dx: -18, dy: 12 }, armarEfter: pastaende2 }
+  - figur: { namn: skriver, x: 482, y: 452, stallning: sitta, utanBen: true, trojan: gron, ansikte: skriva, tittar: papperet, lutar: papperet, nar: { V: [420, 410], H: [462, 424] }, armarEfter: pastaende2 }
+  - bord: { x: 236, y: 482, b: 320, d: 104, h: 55, snett: 20 }
+  - papper: { namn: papperet, x: 410, y: 416, b: 118, h: 74, vinkel: -2, rader: 4 }
+  - kort: { namn: pastaende1, x: 382, y: 394, b: 46, h: 28, symbol: triangel }
+  - kort: { namn: pastaende2, x: 438, y: 394, b: 46, h: 28, symbol: kvadrat }
+  - penna: { x: 406, y: 430, vinkel: 150, l: 40 }
+  - bord: { x: 610, y: 444, b: 150, d: 80, h: 55, snett: 16 }
+  - papper: { x: 688, y: 402, b: 92, h: 56, vinkel: 4, rader: 3 }
+  - kort: { x: 670, y: 386, b: 34, h: 20, symbol: cirkel }
+  - kort: { x: 710, y: 388, b: 34, h: 20, symbol: stjarna }
+  - pil: { fran: [540, 290], till: [664, 340], bage: -0.3 }
+  - bubbla: { till: pekar, dx: -60, dy: 40, symboler: [triangel, bock], visar: "Paret avgör vilket påstående som är sant: den ena pekar på triangeln och säger att det är det sanna" }

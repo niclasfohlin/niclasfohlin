@@ -1,0 +1,17 @@
+# Visa!: gruppen har tänkt var för sig, och på signalen visar alla sitt svar samtidigt, så att gruppen ser vilka svar som stämmer överens.
+id: visa
+skala: 74
+djup: false
+delar:
+  - figur: { namn: a, x: 360, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, tittar: mitten, nar: { H: [414, 282] }, armarEfter: kortA }
+  - figur: { namn: b, x: 572, y: 392, stallning: sitta, utanBen: true, trojan: rod, ansikte: prata, tittar: mitten, nar: { V: [518, 282] }, armarEfter: kortB }
+  - figur: { namn: c, x: 245, y: 520, utanBen: true, trojan: ljusbla, ansikte: glad, tittar: mitten, lutar: mitten, nar: { H: [326, 356] }, armarEfter: kortC }
+  - figur: { namn: d, x: 690, y: 525, utanBen: true, trojan: lila, ansikte: tanka, tittar: mitten, lutar: mitten, nar: { V: [606, 358] }, armarEfter: kortD }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - kort: { x: 470, y: 398, b: 34, h: 44, vinkel: 12, symbol: fraga }
+  - punkt: { namn: mitten, x: 470, y: 380 }
+  - kort: { namn: kortA, hand: [a, H], dx: 4, dy: -28, b: 52, h: 40, vinkel: 6, symbol: triangel }
+  - kort: { namn: kortB, hand: [b, V], dx: -4, dy: -28, b: 52, h: 40, vinkel: -6, symbol: triangel }
+  - kort: { namn: kortC, hand: [c, H], dx: 6, dy: -28, b: 52, h: 40, vinkel: 8, symbol: triangel }
+  - kort: { namn: kortD, hand: [d, V], dx: -6, dy: -28, b: 52, h: 40, vinkel: -8, symbol: kvadrat }
+  - bubbla: { till: b, dx: 50, dy: 40, symboler: [utrop], visar: "En säger ett, två, tre, visa, och alla visar sitt svar samtidigt" }

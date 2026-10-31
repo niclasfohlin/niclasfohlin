@@ -1,0 +1,10 @@
+# PPT – Par på tid: klockan går, och den ena i paret talar tills den ringer medan den andra lyssnar och väntar på sin tur.
+id: ppt-par-pa-tid
+skala: 88
+djup: false
+luft: 0.1
+delar:
+  - klocka: { x: 480, y: 196, r: 58 }
+  - figur: { namn: talar, x: 360, y: 520, utanBen: true, nar: { H: [436, 350] }, trojan: gron, ansikte: prata, tittar: lyssnar, lutar: lyssnar }
+  - figur: { namn: lyssnar, x: 600, y: 526, utanBen: true, trojan: orange, ansikte: glad, tittar: talar, lutar: talar }
+  - bubbla: { till: talar, dx: -74, dy: 30, symboler: [triangel], visar: "Den som har ordet talar om frågan hela sin tid, och den andra lyssnar utan att ta över" }

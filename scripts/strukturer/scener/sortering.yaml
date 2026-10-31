@@ -1,0 +1,22 @@
+# Sortering: korten ligger i två högar, gruppen är oense om var ett kort ska ligga, och kortet de inte kan enas om har lagts åt sidan vid bordets kant.
+id: sortering
+skala: 74
+djup: false
+fokus: kortet
+delar:
+  - figur: { namn: haller, x: 398, y: 392, stallning: sitta, utanBen: true, trojan: lila, ansikte: tanka, tittar: sidaV, lutar: kortet, nar: { H: [462, 318] }, armarEfter: hallet }
+  - figur: { namn: bakH, x: 556, y: 392, stallning: sitta, utanBen: true, trojan: orange, ansikte: glad, tittar: sidan, lutar: sidan, pekar: sidan, armarEfter: sidan }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: turkos, ansikte: prata, lutar: kortet, nar: { H: [318, 404] }, armarEfter: sidan }
+  - figur: { namn: sidaH, x: 708, y: 525, utanBen: true, trojan: gul, ansikte: prata, lutar: kortet, nar: { V: [642, 404] }, armarEfter: sidan }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - kort: { x: 338, y: 392, b: 32, h: 40, vinkel: -7, symbol: triangel }
+  - kort: { x: 370, y: 388, b: 32, h: 40, vinkel: 5, symbol: triangel }
+  - kort: { x: 354, y: 418, b: 32, h: 40, vinkel: -2, symbol: triangel }
+  - kort: { x: 584, y: 390, b: 32, h: 40, vinkel: 6, symbol: kvadrat }
+  - kort: { x: 616, y: 394, b: 32, h: 40, vinkel: -5, symbol: kvadrat }
+  - kort: { x: 598, y: 420, b: 32, h: 40, vinkel: 3, symbol: kvadrat }
+  - kort: { namn: sidan, x: 484, y: 410, b: 34, h: 42, vinkel: 14, symbol: fraga }
+  - punkt: { namn: kortet, x: 470, y: 316 }
+  - kort: { namn: hallet, hand: [haller, H], dx: 8, dy: -6, b: 38, h: 46, vinkel: 8, farg: '#f3dc8e' }
+  - bubbla: { till: sidaV, dx: -30, dy: 42, symboler: [triangel], visar: "En vill lägga kortet i trianglarnas hög" }
+  - bubbla: { till: sidaH, dx: 30, dy: 42, symboler: [kvadrat], visar: "En annan vill lägga det bland kvadraterna: gruppen måste enas om varje kort" }

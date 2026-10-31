@@ -1,0 +1,13 @@
+# Ping-pong-prat: paret studsar ord om temat fram och tillbaka i högt tempo, och ingen säger ett nytt ord förrän den andra sagt sitt.
+id: ping-pong-prat
+skala: 84
+djup: false
+luft: 0.1
+hudStart: 3
+delar:
+  - figur: { namn: v, x: 306, y: 520, utanBen: true, nar: { H: [394, 352] }, trojan: orange, ansikte: prata, tittar: h, lutar: h }
+  - figur: { namn: h, x: 654, y: 526, utanBen: true, nar: { V: [566, 356] }, trojan: ljusbla, ansikte: prata, tittar: v, lutar: v }
+  - bubbla: { till: v, dx: 76, dy: 56, b: 60, h: 54, symboler: [kvadrat], visar: "Den ena säger ett ord om temat" }
+  - bubbla: { till: h, dx: -76, dy: 56, b: 60, h: 54, symboler: [cirkel], visar: "Den andra svarar genast med ett eget ord, först när kamratens ord är sagt" }
+  - pil: { fran: [430, 150], till: [530, 150], bage: -0.34 }
+  - pil: { fran: [530, 206], till: [430, 206], bage: -0.34 }

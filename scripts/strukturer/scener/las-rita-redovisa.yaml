@@ -1,0 +1,22 @@
+# Läs-rita-redovisa: gruppen har läst ett stycke ur sin text och talat om vad det betyder, och nu ritar de stycket på
+# gruppens gemensamma karta, där de förra styckena redan står.
+id: las-rita-redovisa
+skala: 74
+djup: false
+delar:
+  - figur: { namn: bakV, x: 360, y: 392, stallning: sitta, utanBen: true, trojan: orange, ansikte: glad, tittar: kartan, lutar: kartan, pekar: [418, 386], armarEfter: kartan }
+  - figur: { namn: bakH, x: 566, y: 392, stallning: sitta, utanBen: true, trojan: bla, ansikte: skriva, tittar: nytt, lutar: nytt, nar: { V: [558, 350] }, armarEfter: kartan }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: gron, ansikte: prata, tittar: bakH, lutar: kartan, nar: { V: [270, 404], H: [318, 398] } }
+  - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, trojan: rosa, ansikte: glad, tittar: kartan, lutar: kartan }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - papper: { namn: kartan, x: 470, y: 396, b: 220, h: 84, vinkel: -1, rader: 0, farg: '#fbf3dc' }
+  # Det som redan är ritat: två ställen och vägen mellan dem, och det nya som ritas nu.
+  - markor: { x: 404, y: 404, r: 22, farg: '#9edcaa' }
+  - markor: { x: 462, y: 384, r: 14, farg: '#9bbae0' }
+  - pil: { fran: [420, 396], till: [452, 388], bage: 0.15, spets: false, tjock: 0.8 }
+  - pil: { fran: [472, 386], till: [516, 390], bage: -0.2, spets: false, tjock: 0.8 }
+  - kort: { namn: nytt, x: 532, y: 388, b: 30, h: 26, vinkel: 3, farg: '#fbf3dc', symbol: triangel }
+  - penna: { x: 540, y: 386, vinkel: 150, l: 40 }
+  - papper: { namn: texten, hand: [sidaV, V], dx: 22, dy: -8, b: 46, h: 58, vinkel: -14, rader: 5 }
+  - bubbla: { till: sidaV, dx: -30, dy: 40, symboler: [triangel], visar: "En säger vad stycket i gruppens text betyder" }
+  - bubbla: { till: bakH, dx: 40, dy: 40, tanke: true, symboler: [triangel], visar: "En annan ritar just det på gruppens gemensamma karta" }

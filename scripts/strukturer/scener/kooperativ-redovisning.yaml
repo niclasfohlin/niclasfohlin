@@ -1,0 +1,22 @@
+# Kooperativ redovisning: två grupper redovisar samtidigt vid var sin affisch, och framför var och en står en
+# besökande grupp som lyssnar och tar med sig det som redovisas. Sedan byter grupperna roll.
+id: kooperativ-redovisning
+skala: 60
+djupRam: [300, 520]
+delar:
+  # Den vänstra platsen.
+  - papper: { namn: affischV, x: 250, y: 186, b: 112, h: 84, vinkel: -1, rader: 3, symbol: stjarna, symbolStorlek: 0.26, farg: '#fbf3dc' }
+  - figur: { namn: rv1, x: 166, y: 336, trojan: gul, ansikte: prata, tittar: bv1, pekar: [254, 216] }
+  - figur: { namn: rv2, x: 336, y: 340, trojan: gul, ansikte: glad, tittar: bv2, lutar: bv2, stallning: hallaV }
+  # Den högra platsen.
+  - papper: { namn: affischH, x: 642, y: 186, b: 112, h: 84, vinkel: 1, rader: 3, symbol: kvadrat, symbolStorlek: 0.26, farg: '#fbf3dc' }
+  - figur: { namn: rh1, x: 558, y: 340, trojan: turkos, ansikte: glad, tittar: affischH, lutar: affischH, pekar: [600, 200] }
+  - figur: { namn: rh2, x: 728, y: 336, trojan: turkos, ansikte: prata, tittar: bh2, lutar: bh2 }
+  # De besökande grupperna står mitt emot och syns bakifrån.
+  - figur: { namn: bv1, x: 200, y: 480, trojan: rosa, ansikte: bak }
+  - figur: { namn: bv2, x: 300, y: 486, trojan: rosa, ansikte: bak }
+  - figur: { namn: bh1, x: 592, y: 486, trojan: lila, ansikte: bak }
+  - figur: { namn: bh2, x: 692, y: 480, trojan: lila, ansikte: bak }
+  - bubbla: { till: rv1, dx: -36, dy: 36, symboler: [stjarna], visar: "Den ena gruppen redovisar sitt arbete för den grupp som besöker den" }
+  - bubbla: { till: bv2, dx: 86, dy: 12, tanke: true, symboler: [stjarna], visar: "En i den besökande gruppen tar med sig det som redovisas på affischen" }
+  - bubbla: { till: bh1, dx: -86, dy: 12, tanke: true, symboler: [kvadrat], visar: "Samtidigt tar en i den andra besökande gruppen med sig det som redovisas på den andra affischen" }

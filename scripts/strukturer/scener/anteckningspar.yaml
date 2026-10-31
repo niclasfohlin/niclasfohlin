@@ -1,0 +1,18 @@
+# Anteckningspar: läraren har stannat genomgången, och paret jämför anteckningarna sida vid sida: den ena pekar på det hen har skrivit, och den andra för in det i sina egna.
+id: anteckningspar
+skala: 80
+djup: false
+hudStart: 4
+delar:
+  - tavla: { x: 476, y: 166, b: 250, h: 88, rader: 3 }
+  - figur: { namn: berattar, x: 370, y: 446, stallning: sitta, utanBen: true, trojan: turkos, ansikte: prata, tittar: skriver, lutar: noterV, pekar: [428, 378], armarEfter: cirkelV }
+  - figur: { namn: skriver, x: 592, y: 450, stallning: sitta, utanBen: true, trojan: rosa, ansikte: glad, tittar: cirkelV, lutar: noterV, nar: { H: [552, 362] }, armarEfter: cirkelH }
+  - bord: { x: 286, y: 480, b: 372, d: 100, h: 55, snett: 20 }
+  - papper: { namn: noterV, x: 428, y: 426, b: 84, h: 100, vinkel: -3, rader: 3 }
+  - symbol: { x: 417, y: 389, namn: 'cirkel:gron', s: 12 }
+  - punkt: { namn: cirkelV, x: 417, y: 389 }
+  - papper: { namn: noterH, x: 532, y: 428, b: 84, h: 100, vinkel: 3, rader: 3 }
+  - symbol: { x: 521, y: 391, namn: 'cirkel:gron', s: 12 }
+  - punkt: { namn: cirkelH, x: 521, y: 391 }
+  - penna: { x: 534, y: 393, vinkel: 150, l: 40 }
+  - bubbla: { till: berattar, dx: -66, dy: 24, symboler: ['cirkel:gron'], visar: "Den ena sammanfattar sina anteckningar, och det hen säger är det den andra för in i sina" }

@@ -1,0 +1,18 @@
+# Läs med roller: gruppen har samma text mitt på bordet och var och en håller upp sitt kort med sitt eget fokus, och den med triangeln berättar vad hen fick syn på i texten.
+id: las-med-roller
+skala: 74
+djup: false
+fokus: talar
+delar:
+  - figur: { namn: talar, x: 372, y: 392, stallning: sitta, utanBen: true, ansikte: prata, tittar: sidaH, nar: { V: [330, 322] }, pekar: { mal: texten, dx: -12, dy: -8 }, armarEfter: texten }
+  - figur: { namn: nasta, x: 568, y: 392, stallning: sitta, utanBen: true, ansikte: tanka, tittar: texten, nar: { V: [522, 372], H: [604, 336] }, armarEfter: texten }
+  - figur: { namn: sidaV, x: 248, y: 520, utanBen: true, ansikte: glad, lut: -10, nar: { H: [306, 376] } }
+  - figur: { namn: sidaH, x: 700, y: 528, utanBen: true, ansikte: glad, lut: 10, nar: { V: [634, 380] } }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - papper: { namn: texten, x: 470, y: 394, b: 100, h: 78, vinkel: -2, rader: 5 }
+  - kort: { hand: [talar, V], dx: -2, dy: -22, b: 40, h: 48, vinkel: -8, symbol: triangel }
+  - kort: { hand: [nasta, H], dx: 2, dy: -22, b: 40, h: 48, vinkel: 8, symbol: kvadrat }
+  - kort: { hand: [sidaV, H], dx: 4, dy: -22, b: 40, h: 48, vinkel: 6, symbol: cirkel }
+  - kort: { hand: [sidaH, V], dx: -4, dy: -22, b: 40, h: 48, vinkel: -6, symbol: stjarna }
+  - bubbla: { till: talar, dx: -44, dy: 40, symboler: [triangel], visar: "En i taget berättar vad hen fick syn på i texten med sitt eget fokus, triangeln på hens kort" }
+  - bubbla: { till: nasta, dx: 56, dy: 36, tanke: true, symboler: [kvadrat], visar: "Nästa har läst samma text med ett annat fokus, kvadraten, och har något annat att berätta" }

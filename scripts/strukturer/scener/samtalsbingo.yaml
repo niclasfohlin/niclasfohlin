@@ -1,0 +1,28 @@
+# Samtalsbingo: den ena håller fram sin bricka och frågar vad en ruta föreställer, och kamraten pekar på rutan och förklarar; två rutor på raden är redan förklarade.
+id: samtalsbingo
+skala: 84
+djupRam: [400, 600]
+delar:
+  - figur: { namn: soker, x: 780, y: 430, stallning: { V: [-168, -178], H: [28, 8], benV: [-22, -4], benH: [20, 6], lut: 3 }, trojan: rosa, ansikte: glad, tittar: [640, 330] }
+  - kort: { hand: [soker, H], dx: 2, dy: 2, b: 13, h: 13, farg: '#c8edc4' }
+  - kort: { hand: [soker, H], dx: 15, dy: 2, b: 13, h: 13 }
+  - kort: { hand: [soker, H], dx: 28, dy: 2, b: 13, h: 13 }
+  - kort: { hand: [soker, H], dx: 2, dy: 15, b: 13, h: 13 }
+  - kort: { hand: [soker, H], dx: 15, dy: 15, b: 13, h: 13, farg: '#c8edc4' }
+  - kort: { hand: [soker, H], dx: 28, dy: 15, b: 13, h: 13 }
+  - kort: { hand: [soker, H], dx: 2, dy: 28, b: 13, h: 13 }
+  - kort: { hand: [soker, H], dx: 15, dy: 28, b: 13, h: 13 }
+  - kort: { hand: [soker, H], dx: 28, dy: 28, b: 13, h: 13 }
+  - figur: { namn: fragar, x: 400, y: 600, trojan: gul, ansikte: prata, tittar: forklarar, lutar: [520, 420], nar: { H: [492, 458] } }
+  - kort: { namn: r1, x: 470, y: 380, b: 28, h: 28, farg: '#c8edc4', symbol: hjarta }
+  - kort: { namn: r2, x: 498, y: 380, b: 28, h: 28, farg: '#c8edc4', symbol: cirkel }
+  - kort: { namn: rutan, x: 526, y: 380, b: 28, h: 28, symbol: 'kugghjul:bla' }
+  - kort: { namn: r4, x: 470, y: 408, b: 28, h: 28, symbol: bok }
+  - kort: { namn: r5, x: 498, y: 408, b: 28, h: 28, symbol: stjarna }
+  - kort: { namn: r6, x: 526, y: 408, b: 28, h: 28, symbol: triangel }
+  - kort: { namn: r7, x: 470, y: 436, b: 28, h: 28, symbol: kvadrat }
+  - kort: { namn: r8, x: 498, y: 436, b: 28, h: 28, symbol: penna }
+  - kort: { namn: r9, x: 526, y: 436, b: 28, h: 28, symbol: hand }
+  - figur: { namn: forklarar, x: 650, y: 606, trojan: turkos, ansikte: prata, tittar: rutan, lutar: rutan, pekar: { mal: rutan, dx: 8, dy: -2 } }
+  - bubbla: { till: fragar, dx: -50, dy: 40, symboler: [fraga], visar: "Den ena frågar vad rutan på hens bricka föreställer" }
+  - bubbla: { till: forklarar, dx: 55, dy: 40, symboler: ['kugghjul:bla'], visar: "Kamraten berättar vad hen tror att rutan föreställer, och sedan skriver den första kamratens namn i rutan" }

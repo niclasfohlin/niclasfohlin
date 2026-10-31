@@ -1,0 +1,25 @@
+# Rösta!: förslagen sitter på tavlan, och var och en fäster markörer i sin egen färg på minst två av dem; en fäster en och en annan tänker ut hur hen fördelar sina.
+id: rosta
+skala: 62
+djup: false
+delar:
+  - tavla: { x: 450, y: 250, b: 540, h: 150 }
+  - kort: { namn: f1, x: 290, y: 245, b: 70, h: 84, vinkel: -2, symbol: triangel }
+  - kort: { namn: f2, x: 450, y: 245, b: 70, h: 84, vinkel: 1, symbol: kvadrat }
+  - kort: { namn: f3, x: 610, y: 245, b: 70, h: 84, vinkel: -1, symbol: stjarna }
+  - markor: { x: 266, y: 268, r: 11, farg: '#f1a868' }
+  - markor: { x: 294, y: 272, r: 11, farg: '#8fd3cf' }
+  - markor: { x: 434, y: 270, r: 11, farg: '#6cc28a' }
+  - markor: { x: 462, y: 268, r: 11, farg: '#f1a868' }
+  - markor: { x: 588, y: 268, r: 11, farg: '#d58fd9' }
+  - markor: { x: 612, y: 274, r: 11, farg: '#f1a868' }
+  - markor: { x: 632, y: 262, r: 11, farg: '#6cc28a' }
+  - figur: { namn: fester, x: 368, y: 470, trojan: magenta, ansikte: glad, tittar: f1, lutar: f1, nar: { V: [314, 272] } }
+  - figur: { namn: tanker, x: 532, y: 472, stallning: tanka, trojan: gron, ansikte: tanka, tittar: f2 }
+  - figur: { namn: tittar, x: 196, y: 482, trojan: orange, ansikte: glad, tittar: fester, lutar: fester, nar: { H: [232, 352] } }
+  - figur: { namn: fester2, x: 706, y: 480, trojan: turkos, ansikte: glad, tittar: f3, lutar: f3, nar: { V: [646, 274] } }
+  - markor: { hand: [fester, V], dx: -4, dy: -4, r: 11, farg: '#d58fd9' }
+  - markor: { hand: [fester2, V], dx: -4, dy: -4, r: 11, farg: '#8fd3cf' }
+  - markor: { hand: [tittar, H], dx: -4, dy: -10, r: 11, farg: '#f1a868' }
+  - markor: { hand: [tittar, H], dx: 12, dy: -14, r: 11, farg: '#f1a868' }
+  - bubbla: { till: tanker, dx: 4, dy: 92, tanke: true, symboler: [kvadrat, stjarna], visar: "Var och en fördelar sina markörer mellan flera förslag: den här lägger sina på två" }

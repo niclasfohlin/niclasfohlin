@@ -1,0 +1,21 @@
+# Mina bilder, dina bilder: den ena håller fram sitt blad och berättar om teckningen i ruta ett, och kamraten tittar på den och ritar samma tanke i ruta två på sitt eget blad.
+id: mina-bilder-dina-bilder
+skala: 84
+djupRam: [400, 600]
+delar:
+  - figur: { namn: soker, x: 170, y: 430, stallning: gaH, trojan: gul, ansikte: glad, tittar: [320, 330], nar: { H: [228, 330] } }
+  - papper: { hand: [soker, H], dx: 12, dy: 2, b: 54, h: 46, rader: 0, rutnat: [2, 2] }
+  - symbol: { hand: [soker, H], dx: -2, dy: -10, namn: stjarna, s: 7 }
+  - symbol: { hand: [soker, H], dx: 26, dy: -10, namn: kvadrat, s: 6 }
+  - symbol: { hand: [soker, H], dx: -2, dy: 14, namn: cirkel, s: 6 }
+  - figur: { namn: visar, x: 420, y: 600, trojan: gron, ansikte: prata, tittar: ritar, lutar: ritar, nar: { H: [492, 472] } }
+  - papper: { namn: bladA, x: 494, y: 432, b: 84, h: 72, vinkel: -3, rader: 0, rutnat: [2, 2] }
+  - symbol: { x: 474, y: 415, namn: triangel, s: 12 }
+  - symbol: { x: 515, y: 413, namn: cirkel, s: 10 }
+  - figur: { namn: ritar, x: 604, y: 606, trojan: lila, ansikte: skriva, tittar: [474, 415], lutar: visar, nar: { V: [566, 514], H: [648, 468] }, armarEfter: klartB }
+  - papper: { namn: bladB, x: 606, y: 502, b: 84, h: 72, vinkel: 3, rader: 0, rutnat: [2, 2] }
+  - symbol: { x: 586, y: 484, namn: kvadrat, s: 10 }
+  - symbol: { x: 627, y: 487, namn: triangel, s: 12 }
+  - punkt: { namn: klartB, x: 606, y: 502 }
+  - penna: { x: 638, y: 494, vinkel: 155, l: 38 }
+  - bubbla: { till: visar, dx: -50, dy: 40, symboler: [triangel], visar: "Den ena berättar vad hen har ritat i ruta ett och hur hen tänkte, och kamraten ritar samma tanke i ruta två" }

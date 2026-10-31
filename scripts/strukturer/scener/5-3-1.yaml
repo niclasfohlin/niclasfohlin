@@ -1,0 +1,30 @@
+# 5-3-1: två par har valt ut var sina tre av sina fem ord, och gruppen har enats om det enda bästa, som en i gruppen
+# håller upp.
+id: 5-3-1
+skala: 74
+djup: false
+fokus: uppe
+delar:
+  # Där gruppens enda kort hålls upp, som alla tittar på.
+  - punkt: { namn: uppe, x: 444, y: 204 }
+  - figur: { namn: bakV, x: 376, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: sidaH, lutar: mitten, nar: { H: [440, 236] } }
+  - figur: { namn: bakH, x: 560, y: 392, stallning: sitta, utanBen: true, trojan: lila, ansikte: glad, lutar: mitten }
+  - figur: { namn: sidaV, x: 256, y: 516, utanBen: true, trojan: gul, ansikte: glad, lutar: mitten }
+  - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, trojan: lila, ansikte: prata, lutar: mitten }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  # Var och ens fem ord, två listor per par.
+  - papper: { x: 336, y: 370, b: 42, h: 50, vinkel: -10, rader: 5 }
+  - papper: { x: 366, y: 372, b: 42, h: 50, vinkel: -2, rader: 5 }
+  - papper: { x: 582, y: 372, b: 42, h: 50, vinkel: 2, rader: 5 }
+  - papper: { x: 612, y: 370, b: 42, h: 50, vinkel: 10, rader: 5 }
+  - punkt: { namn: mitten, x: 470, y: 400 }
+  # Parens tre, och stjärnan i det gula parets tre är den som gruppen har valt.
+  - kort: { x: 340, y: 420, b: 28, h: 34, vinkel: -6, symbol: triangel }
+  - kort: { x: 372, y: 424, b: 28, h: 34, vinkel: 2, symbol: stjarna }
+  - kort: { x: 404, y: 426, b: 28, h: 34, vinkel: 6, symbol: cirkel }
+  - kort: { x: 538, y: 426, b: 28, h: 34, vinkel: -6, symbol: hjarta }
+  - kort: { x: 570, y: 424, b: 28, h: 34, vinkel: -2, symbol: kvadrat }
+  - kort: { x: 602, y: 420, b: 28, h: 34, vinkel: 6, symbol: 'kvadrat:gron' }
+  # Gruppens enda, uppe i handen.
+  - kort: { namn: ettan, hand: [bakV, H], dx: 4, dy: -34, b: 54, h: 66, vinkel: -4, symbol: stjarna }
+  - bubbla: { till: sidaH, dx: 45, dy: 36, symboler: [stjarna], visar: "En i det andra paret håller med: gruppen har enats om ett enda, det som hålls upp" }

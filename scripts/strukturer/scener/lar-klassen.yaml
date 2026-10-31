@@ -1,0 +1,17 @@
+# Lär klassen: en grupp på tre står framme vid tavlan och håller sitt lärtillfälle om sitt delområde, och klassen lyssnar och frågar.
+id: lar-klassen
+skala: 62
+djup: false
+delar:
+  - tavla: { x: 450, y: 196, b: 280, h: 120, rader: 2 }
+  - kort: { namn: omradet, x: 372, y: 196, b: 58, h: 66, vinkel: -3, symbol: stjarna }
+  - figur: { namn: visar, x: 254, y: 392, trojan: orange, ansikte: prata, tittar: klass1, pekar: omradet }
+  - figur: { namn: mitten, x: 574, y: 400, trojan: orange, ansikte: glad, tittar: klass2, nar: { V: [538, 320] } }
+  - figur: { namn: haller, x: 680, y: 392, trojan: orange, ansikte: glad, tittar: klass2, nar: { V: [648, 304] } }
+  - papper: { x: 642, y: 292, b: 50, h: 40, vinkel: -6, rader: 2 }
+  - figur: { namn: klass1, x: 180, y: 600, utanBen: true, skala: 66, trojan: gul, ansikte: bak }
+  - figur: { namn: klass2, x: 380, y: 610, utanBen: true, skala: 66, trojan: lila, ansikte: bak, nar: { H: [418, 330] } }
+  - figur: { namn: klass3, x: 570, y: 610, utanBen: true, skala: 66, trojan: rod, ansikte: bak }
+  - figur: { namn: klass4, x: 720, y: 600, utanBen: true, skala: 66, trojan: ljusgron, ansikte: bak }
+  - bubbla: { till: visar, dx: -40, dy: 40, symboler: [stjarna], visar: "Gruppen lär klassen om sitt delområde, stjärnan på tavlan" }
+  - bubbla: { till: klass2, dx: 70, dy: 40, symboler: [fraga], visar: "Klassen lyssnar och frågar gruppen, som för tillfället är lärarna" }

@@ -1,0 +1,14 @@
+# Berätta mera!: paret som har mötts berättar i tur om samma innehåll som alla andra, medan två andra ger varandra en high five och en elev med handen uppe söker en ny kamrat.
+id: beratta-mera
+skala: 80
+djupRam: [400, 600]
+delar:
+  - figur: { namn: soker, x: 130, y: 420, stallning: { V: [-28, -8], H: [168, 178], benV: [-20, -6], benH: [22, 4], lut: -3 }, trojan: gron, ansikte: glad, tittar: [300, 330] }
+  - figur: { namn: hfV, x: 700, y: 430, stallning: highFiveH, trojan: orange, ansikte: skratt, tittar: hfH, nar: { H: [752, 200] } }
+  - figur: { namn: hfH, x: 808, y: 436, stallning: highFiveV, trojan: lila, ansikte: glad, tittar: hfV, nar: { V: [756, 200] } }
+  - stralar: { x: 754, y: 186, r: 22 }
+  - figur: { namn: berattar, x: 360, y: 600, trojan: rod, ansikte: prata, tittar: lyssnar, lutar: lyssnar, nar: { H: [434, 412] } }
+  - figur: { namn: lyssnar, x: 528, y: 606, trojan: ljusbla, ansikte: glad, tittar: berattar, lutar: berattar }
+  - bubbla: { till: berattar, dx: -50, dy: 40, symboler: [stjarna], visar: "Den ena i paret berättar kort om innehållet som läraren har bestämt" }
+  - bubbla: { till: lyssnar, dx: 55, dy: 40, tanke: true, symboler: [stjarna], visar: "Den andra lyssnar och berättar sedan om samma innehåll när det blir hens tur" }
+  - bubbla: { till: hfH, dx: 52, dy: 30, tanke: true, symboler: [stjarna], visar: "Paret som just har mötts ska berätta om samma innehåll: alla i klassen berättar om det" }

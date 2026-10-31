@@ -1,0 +1,24 @@
+# Samtalspromenad: paret går sida vid sida mitt på en väg och samtalar om frågan hela vägen, och längre fram på vägen går nästa par och samtalar.
+id: samtalspromenad
+skala: 78
+djupRam: [300, 560]
+delar:
+  # Vägens två kanter, var och en med tre streck bredvid varandra så att kanten syns också i liten storlek.
+  - golvlinje: { fran: [20, 598.5], till: [420, 488.5], streck: 13 }
+  - golvlinje: { fran: [20, 600], till: [420, 490], streck: 13 }
+  - golvlinje: { fran: [20, 601.5], till: [420, 491.5], streck: 13 }
+  - golvlinje: { fran: [420, 488.5], till: [900, 383.5], streck: 14 }
+  - golvlinje: { fran: [420, 490], till: [900, 385], streck: 14 }
+  - golvlinje: { fran: [420, 491.5], till: [900, 386.5], streck: 14 }
+  - golvlinje: { fran: [60, 468.5], till: [400, 378.5], streck: 11 }
+  - golvlinje: { fran: [60, 470], till: [400, 380], streck: 11 }
+  - golvlinje: { fran: [60, 471.5], till: [400, 381.5], streck: 11 }
+  - golvlinje: { fran: [400, 378.5], till: [900, 298.5], streck: 14 }
+  - golvlinje: { fran: [400, 380], till: [900, 300], streck: 14 }
+  - golvlinje: { fran: [400, 381.5], till: [900, 301.5], streck: 14 }
+  - figur: { namn: c1, x: 632, y: 404, stallning: gaH, trojan: rosa, ansikte: prata, tittar: c2, lutar: c2 }
+  - figur: { namn: c2, x: 722, y: 388, stallning: gaH, trojan: turkos, ansikte: glad, tittar: c1 }
+  - figur: { namn: a, x: 236, y: 508, stallning: gaH, trojan: gul, ansikte: prata, tittar: b, lutar: b }
+  - figur: { namn: b, x: 380, y: 472, stallning: gaH, trojan: lila, ansikte: tanka, tittar: a, lutar: a }
+  - bubbla: { till: a, dx: -50, dy: 36, symboler: [triangel], visar: "Paret samtalar om frågan medan de går, och den ena säger sin tanke" }
+  - bubbla: { till: b, dx: 50, dy: 40, tanke: true, symboler: [triangel, kvadrat], visar: "Den andra går bredvid, tar upp tanken och lägger till en egen" }

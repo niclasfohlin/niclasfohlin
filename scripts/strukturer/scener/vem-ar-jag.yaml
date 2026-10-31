@@ -1,0 +1,15 @@
+# Vem är jag?: den som har ett kort på ryggen frågar om det, och kamraten tätt bakom ser kortet och svarar utan att säga vad det är.
+id: vem-ar-jag
+skala: 84
+djupRam: [400, 600]
+delar:
+  - figur: { namn: c, x: 170, y: 410, trojan: gul, ansikte: bak }
+  - kort: { namn: kortC, x: 170, y: 262, b: 34, h: 40, symbol: kvadrat }
+  - kort: { x: 170, y: 243, b: 16, h: 6, vinkel: -6, farg: '#f3dc8e' }
+  - figur: { namn: d, x: 248, y: 432, trojan: lila, ansikte: prata, tittar: kortC, lutar: kortC }
+  - figur: { namn: fragar, x: 430, y: 580, trojan: ljusbla, ansikte: bak }
+  - kort: { namn: ryggen, x: 430, y: 400, b: 44, h: 52, symbol: stjarna }
+  - kort: { x: 430, y: 375, b: 20, h: 7, vinkel: -6, farg: '#f3dc8e' }
+  - figur: { namn: ser, x: 524, y: 612, trojan: rosa, ansikte: prata, tittar: ryggen, lutar: ryggen }
+  - bubbla: { till: fragar, dx: -10, dy: 58, symboler: [fraga], visar: "Den som har kortet på ryggen frågar om det kamraten ser" }
+  - bubbla: { till: ser, dx: 70, dy: 40, tanke: true, symboler: [stjarna], visar: "Kamraten ser stjärnan på ryggen men säger den inte: hen svarar på frågan utan att säga svaret rakt ut" }

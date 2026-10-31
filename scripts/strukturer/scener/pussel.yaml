@@ -1,0 +1,17 @@
+# Pussel: experterna är tillbaka i hemgruppen, tre av delarna ligger redan ihop som pusselbitar mitt på bordet, och experten på triangeln håller upp sin bit och lär ut den innan den läggs i luckan.
+id: pussel
+skala: 74
+djup: false
+fokus: expert
+delar:
+  - figur: { namn: expert, x: 382, y: 392, stallning: sitta, utanBen: true, trojan: rod, ansikte: prata, tittar: sidaV, nar: { H: [430, 304] } }
+  - pusselbit: { namn: delTriangel, hand: [expert, H], dx: 8, dy: -22, s: 64, vinkel: -10, farg: '#f3dc8e', knoppar: [0, 1, -1, 0], symbol: triangel }
+  - figur: { namn: bakH, x: 566, y: 392, stallning: sitta, utanBen: true, trojan: bla, ansikte: glad, lutar: expert, nar: { V: [532, 376] }, armarEfter: delKvadrat }
+  - figur: { namn: sidaV, x: 245, y: 528, utanBen: true, trojan: gul, ansikte: tanka, lutar: expert }
+  - figur: { namn: sidaH, x: 690, y: 532, utanBen: true, trojan: gron, ansikte: glad, lutar: expert }
+  - bord: { x: 266, y: 462, b: 390, d: 128, h: 50, snett: 20 }
+  - pusselbit: { namn: delKvadrat, x: 505, y: 368, s: 60, farg: '#c8edc4', knoppar: [0, 0, 1, -1], symbol: kvadrat }
+  - pusselbit: { namn: delCirkel, x: 445, y: 428, s: 60, farg: '#b6cbea', knoppar: [1, -1, 0, 0], symbol: cirkel }
+  - pusselbit: { namn: delStjarna, x: 505, y: 428, s: 60, farg: '#f2b9c6', knoppar: [-1, 0, 0, 1], symbol: stjarna }
+  - bubbla: { till: expert, dx: -45, dy: 40, symboler: [triangel], visar: "Experten lär ut sin del, den som hen arbetade med i expertgruppen, till hemgruppen" }
+  - bubbla: { till: sidaV, dx: -20, dy: 40, tanke: true, symboler: [triangel], visar: "De andra i hemgruppen har var sin annan del och lär sig expertens del av hen; ingen kan helheten själv" }

@@ -1,0 +1,14 @@
+# EPK: två par har satts ihop till en kvadrat. Det ena paret håller upp sin lösning och redovisar den, och det andra paret frågar om den.
+id: epk
+skala: 76
+djup: false
+delar:
+  - figur: { namn: a1, x: 380, y: 412, stallning: sitta, utanBen: true, trojan: gron, ansikte: prata, tittar: b2, lutar: parA, nar: { H: [452, 326] }, armarEfter: parA }
+  - figur: { namn: a2, x: 600, y: 414, stallning: sitta, utanBen: true, trojan: gron, ansikte: glad, tittar: b2, lutar: parA, pekar: [516, 302], armarEfter: parA }
+  - bord: { x: 300, y: 446, b: 340, d: 96, h: 55, snett: -10 }
+  - papper: { namn: parA, x: 492, y: 304, b: 92, h: 62, vinkel: -3, rader: 0, symbol: "cirkel:gron", symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - papper: { namn: parB, x: 488, y: 410, b: 92, h: 46, vinkel: 3, rader: 0, symbol: kvadrat }
+  - figur: { namn: b1, x: 372, y: 668, utanBen: true, trojan: orange, ansikte: bak, skala: 80, nar: { H: [446, 422] } }
+  - figur: { namn: b2, x: 585, y: 672, utanBen: true, trojan: orange, ansikte: bak, skala: 80 }
+  - bubbla: { till: a1, dx: -60, dy: 30, symboler: ["cirkel:gron"], visar: "Kvadraten: det ena paret håller upp sin gemensamma lösning och redovisar den för det andra paret" }
+  - bubbla: { till: b2, dx: 60, dy: 30, symboler: [fraga], visar: "Det andra paret ställer frågor om lösningen och jämför med sin egen" }

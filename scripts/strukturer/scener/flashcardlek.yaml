@@ -1,0 +1,16 @@
+# Flashcardlek: den ena håller ut ett frågekort ur högen framför kamraten, kamraten svarar, och den som håller kortet berömmer när svaret är rätt.
+id: flashcardlek
+skala: 80
+djup: false
+delar:
+  - figur: { namn: haller, x: 372, y: 446, stallning: sitta, utanBen: true, trojan: lila, ansikte: glad, tittar: svarar, lutar: svarar, nar: { H: [474, 338] } }
+  - kort: { namn: fragan, hand: [haller, H], dx: 14, dy: -26, b: 52, h: 64, vinkel: 6, farg: '#f3dc8e', symbol: fraga }
+  - figur: { namn: svarar, x: 590, y: 450, stallning: sitta, utanBen: true, trojan: ljusgron, ansikte: prata, tittar: fragan, lutar: fragan }
+  - bord: { x: 286, y: 480, b: 372, d: 100, h: 55, snett: 20 }
+  - kort: { x: 366, y: 430, b: 44, h: 32, vinkel: -4, farg: '#f3dc8e' }
+  - kort: { x: 368, y: 425, b: 44, h: 32, vinkel: 2, farg: '#f3dc8e' }
+  - kort: { x: 365, y: 420, b: 44, h: 32, vinkel: -2, farg: '#f3dc8e' }
+  - kort: { x: 596, y: 428, b: 44, h: 32, vinkel: 8, farg: '#f3dc8e' }
+  - kort: { x: 604, y: 423, b: 44, h: 32, vinkel: -6, farg: '#f3dc8e' }
+  - bubbla: { till: svarar, dx: 64, dy: 34, symboler: [kvadrat], visar: "Den andra svarar på frågan på kortet" }
+  - bubbla: { till: haller, dx: -66, dy: 34, symboler: [stjarna], visar: "Den som håller kortet ser svaret på baksidan och berömmer när svaret är rätt" }

@@ -1,0 +1,18 @@
+# Rondellen: gruppen säger sitt i tur och ordning runt bordet, varv efter varv. Pilarna går från plats till plats, och den
+# som står på tur efter den som talar har sitt svar klart.
+id: rondellen
+skala: 74
+djup: false
+delar:
+  - figur: { namn: talar, x: 385, y: 392, stallning: sitta, utanBen: true, trojan: rosa, ansikte: prata, tittar: sidaH, lutar: mitten, nar: { H: [438, 318] } }
+  - figur: { namn: nasta, x: 548, y: 392, stallning: sitta, utanBen: true, trojan: turkos, ansikte: tanka, tittar: talar }
+  - figur: { namn: sidaV, x: 262, y: 520, utanBen: true, trojan: gul, ansikte: glad, tittar: talar, lutar: mitten }
+  - figur: { namn: sidaH, x: 672, y: 525, utanBen: true, trojan: lila, ansikte: glad, tittar: talar, lutar: mitten }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: -10 }
+  - punkt: { namn: mitten, x: 465, y: 394 }
+  - pil: { fran: [414, 351], till: [516, 351], bage: -0.05, tjock: 1.5 }
+  - pil: { fran: [561, 359], till: [613, 402], bage: -0.41, tjock: 1.5 }
+  - pil: { fran: [595, 417], till: [335, 417], bage: -0.18, tjock: 1.5 }
+  - pil: { fran: [317, 402], till: [369, 359], bage: -0.41, tjock: 1.5 }
+  - bubbla: { till: talar, dx: -40, dy: 40, symboler: [kvadrat], visar: "Den som har turen säger sitt svar, och de andra lyssnar utan att avbryta" }
+  - bubbla: { till: nasta, dx: 45, dy: 40, tanke: true, symboler: ["cirkel:gron"], visar: "Den som står näst på tur i varvet har tänkt ut sitt eget svar" }

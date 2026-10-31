@@ -1,0 +1,19 @@
+# Två löser problem: båda har löst sin egen uppgift, och paret byter kort med varandra för att lösa kamratens, medan högen med nya kort väntar mellan dem.
+id: tva-loser-problem
+skala: 80
+djup: false
+delar:
+  - figur: { namn: vanster, x: 368, y: 440, stallning: sitta, utanBen: true, trojan: rosa, ansikte: glad, tittar: hoger, nar: { H: [450, 330] }, armarEfter: kortV }
+  - figur: { namn: hoger, x: 592, y: 440, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, tittar: vanster, nar: { V: [510, 330] }, armarEfter: kortH }
+  - bord: { x: 280, y: 474, b: 400, d: 100, h: 55, snett: 20 }
+  - papper: { namn: svarV, x: 372, y: 424, b: 84, h: 52, vinkel: 6, rader: 2, symbol: triangel }
+  - penna: { x: 412, y: 448, vinkel: 100, l: 38 }
+  - papper: { namn: svarH, x: 590, y: 424, b: 84, h: 52, vinkel: -5, rader: 2, symbol: kvadrat }
+  - penna: { x: 552, y: 450, vinkel: 80, l: 38 }
+  - kort: { x: 480, y: 418, b: 36, h: 48, vinkel: 8, farg: '#c8edc4' }
+  - kort: { x: 484, y: 414, b: 36, h: 48, vinkel: -4, farg: '#c8edc4' }
+  - kort: { x: 478, y: 410, b: 36, h: 48, vinkel: 3, farg: '#c8edc4' }
+  - kort: { namn: kortV, hand: [vanster, H], dx: 2, dy: -28, b: 40, h: 52, vinkel: 6, farg: '#c8edc4', symbol: triangel }
+  - kort: { namn: kortH, hand: [hoger, V], dx: -2, dy: -28, b: 40, h: 52, vinkel: -6, farg: '#c8edc4', symbol: kvadrat }
+  - pil: { fran: [440, 258], till: [522, 258], bage: -0.22 }
+  - pil: { fran: [520, 230], till: [442, 230], bage: -0.22 }

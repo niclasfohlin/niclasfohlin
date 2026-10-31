@@ -1,0 +1,16 @@
+# Skriv, byt, matcha: paret har kommit till ett nytt bord, den ena läser en förklaring som ett annat par har skrivit, och den andra håller fram kortet som hör till den och lägger det intill förklaringen.
+id: skriv-byt-matcha
+skala: 78
+djup: false
+delar:
+  - figur: { namn: laser, x: 376, y: 452, stallning: sitta, utanBen: true, trojan: rosa, ansikte: prata, tittar: lagger, lutar: forklaring2, pekar: { mal: forklaring2, dx: -16, dy: 8 }, armarEfter: kortet }
+  - figur: { namn: lagger, x: 610, y: 452, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, tittar: forklaring2, nar: { V: [548, 364] }, armarEfter: kortet }
+  - bord: { x: 270, y: 482, b: 400, d: 110, h: 55, snett: 20 }
+  - papper: { x: 324, y: 396, b: 70, h: 30, vinkel: -2, rader: 2 }
+  - kort: { x: 374, y: 398, b: 30, h: 36, vinkel: -3, farg: '#f3dc8e', symbol: cirkel }
+  - papper: { namn: forklaring2, x: 484, y: 392, b: 70, h: 30, vinkel: 1, rader: 2 }
+  - papper: { x: 392, y: 444, b: 70, h: 30, vinkel: 2, rader: 2 }
+  - kort: { x: 520, y: 448, b: 30, h: 36, vinkel: 14, farg: '#f3dc8e', symbol: triangel }
+  - kort: { x: 556, y: 442, b: 30, h: 36, vinkel: -10, farg: '#f3dc8e', symbol: stjarna }
+  - kort: { namn: kortet, hand: [lagger, V], dx: -6, dy: -26, b: 34, h: 42, vinkel: -8, farg: '#f3dc8e', symbol: kvadrat }
+  - bubbla: { till: laser, dx: -55, dy: 40, symboler: [kvadrat], visar: "Den ena läser upp förklaringen, och den beskriver det som står på kortet med kvadraten" }

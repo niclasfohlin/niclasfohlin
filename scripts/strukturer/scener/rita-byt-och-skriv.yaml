@@ -1,0 +1,17 @@
+# Rita, byt och skriv!: den ena läser upp berättelsen som hen skrev till kamratens teckning, och kamraten som ritade den håller upp sin bild och lyssnar.
+id: rita-byt-och-skriv
+skala: 80
+djup: false
+delar:
+  - figur: { namn: laser, x: 378, y: 446, stallning: sitta, utanBen: true, trojan: orange, ansikte: prata, tittar: berattelsen, nar: { V: [372, 410], H: [440, 402] }, armarEfter: berattelsen }
+  - figur: { namn: ritade, x: 590, y: 446, stallning: sitta, utanBen: true, trojan: ljusgron, ansikte: glad, tittar: laser, nar: { V: [536, 386] }, armarEfter: teckningen }
+  - bord: { x: 280, y: 476, b: 400, d: 100, h: 55, snett: 20 }
+  - penna: { x: 452, y: 452, vinkel: 105, l: 34, farg: '#e0566e' }
+  - penna: { x: 462, y: 460, vinkel: 95, l: 34, farg: '#5f72d9' }
+  - penna: { x: 474, y: 454, vinkel: 115, l: 34, farg: '#6cc28a' }
+  - kort: { x: 610, y: 432, b: 56, h: 44, vinkel: 6, symbol: cirkel }
+  - papper: { x: 622, y: 458, b: 52, h: 30, vinkel: 3, rader: 2 }
+  - kort: { namn: teckningen, hand: [ritade, V], dx: -44, dy: -30, b: 92, h: 74, vinkel: -5, symbol: stjarna }
+  - symbol: { x: 466, y: 336, namn: cirkel, s: 9 }
+  - papper: { namn: berattelsen, x: 406, y: 380, b: 64, h: 76, vinkel: -6, rader: 5 }
+  - bubbla: { till: laser, dx: -60, dy: 40, symboler: [stjarna], visar: "Den som skrev läser upp berättelsen till kamratens bild för den som ritade den" }

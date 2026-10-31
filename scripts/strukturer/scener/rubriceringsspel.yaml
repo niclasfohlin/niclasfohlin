@@ -1,0 +1,25 @@
+# Rubriceringsspel: omgång två. De första rubrikerna ligger åt sidan och korten i en blandad hög, en håller upp gruppens nya rubrik och en skriver nästa.
+id: rubriceringsspel
+skala: 74
+djup: false
+fokus: nya
+delar:
+  - figur: { namn: skriver, x: 365, y: 392, stallning: sitta, utanBen: true, trojan: rod, ansikte: skriva, tittar: rubrikH, lutar: rubrikH, nar: { H: [442, 339] }, armarEfter: penna }
+  - figur: { namn: visar, x: 585, y: 392, stallning: sitta, utanBen: true, trojan: ljusgron, ansikte: prata, tittar: skriver, nar: { V: [548, 304] }, armarEfter: rubrikS }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: bla, ansikte: glad, lutar: nya, nar: { H: [318, 412] }, armarEfter: penna }
+  - figur: { namn: sidaH, x: 712, y: 525, utanBen: true, trojan: gul, ansikte: tanka, lutar: nya, nar: { V: [652, 398] }, armarEfter: hogen }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - kort: { x: 360, y: 424, b: 64, h: 24, vinkel: -12, farg: '#f3dc8e', symbol: cirkel }
+  - kort: { x: 370, y: 408, b: 64, h: 24, vinkel: 8, farg: '#f3dc8e', symbol: kvadrat }
+  - papper: { x: 470, y: 404, b: 36, h: 26, vinkel: 18, rader: 2 }
+  - papper: { x: 500, y: 414, b: 36, h: 26, vinkel: -22, rader: 2 }
+  - papper: { x: 486, y: 392, b: 36, h: 26, vinkel: 40, rader: 2 }
+  - papper: { x: 520, y: 398, b: 36, h: 26, vinkel: 6, rader: 2 }
+  - papper: { namn: hogen, x: 496, y: 428, b: 36, h: 26, vinkel: -8, rader: 2 }
+  - kort: { namn: rubrikH, x: 412, y: 366, b: 66, h: 24, vinkel: -3, farg: '#f3dc8e', symbol: hjarta }
+  - penna: { namn: penna, x: 426, y: 368, vinkel: 150, l: 38 }
+  - punkt: { namn: nya, x: 584, y: 294 }
+  - kort: { namn: rubrikS, x: 584, y: 294, b: 86, h: 32, vinkel: -6, farg: '#f3dc8e', symbol: stjarna }
+  - papper: { hand: [sidaH, V], dx: -8, dy: 6, b: 36, h: 26, vinkel: -10, rader: 2 }
+  - bubbla: { till: visar, dx: 45, dy: 40, symboler: [stjarna], visar: "En visar gruppens nya rubrik, som de själva har hittat på i den andra omgången" }
+  - bubbla: { till: sidaH, dx: 52, dy: 26, tanke: true, symboler: [stjarna], visar: "En annan tänker att kortet i handen hör till den nya rubriken" }

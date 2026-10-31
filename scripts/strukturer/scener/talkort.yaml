@@ -1,0 +1,17 @@
+# Talkort: den som talar lägger sitt kort i mitten, två kort ligger redan där, och den fjärde väntar med sitt kort i handen tills det blir hens tur.
+id: talkort
+skala: 74
+djup: false
+delar:
+  - figur: { namn: talar, x: 404, y: 392, stallning: sitta, utanBen: true, trojan: rod, ansikte: prata, tittar: sidaH, lutar: mitten, nar: { H: [460, 378] }, armarEfter: lagger }
+  - figur: { namn: bakH, x: 560, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, tittar: talar }
+  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: gron, ansikte: glad, tittar: talar, lutar: mitten }
+  - figur: { namn: sidaH, x: 685, y: 525, utanBen: true, trojan: lila, ansikte: tanka, tittar: mitten, nar: { V: [650, 400] }, armarEfter: vantar }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - kort: { x: 478, y: 398, b: 36, h: 46, vinkel: 18, farg: '#efc65a' }
+  - kort: { x: 514, y: 388, b: 36, h: 46, vinkel: -12, farg: '#9edcaa' }
+  - punkt: { namn: mitten, x: 490, y: 392 }
+  - kort: { namn: lagger, hand: [talar, H], dx: 8, dy: 10, b: 36, h: 46, vinkel: 30, farg: '#e56b82' }
+  - kort: { namn: vantar, hand: [sidaH, V], dx: -6, dy: 4, b: 36, h: 46, vinkel: -10, farg: '#c7a8ea' }
+  - bubbla: { till: talar, dx: -40, dy: 40, symboler: [triangel], visar: "Den som lägger sitt kort i mitten får tala och säger sin tanke" }
+  - bubbla: { till: sidaH, dx: 40, dy: 36, tanke: true, symboler: [kvadrat], visar: "Den som ännu har kortet i handen har inte talat och väntar på sin tur" }

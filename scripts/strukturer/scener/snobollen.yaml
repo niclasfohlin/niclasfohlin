@@ -1,0 +1,29 @@
+# Snöbollen: två led står mot varandra med en linje emellan, lapparna flyger som bollar över linjen, och två som har plockat upp var sin lapp ser att lapparna hör ihop.
+id: snobollen
+skala: 84
+djupRam: [330, 545]
+fokus: [470, 330]
+delar:
+  - golvlinje: { fran: [467, 286], till: [467, 586], streck: 18 }
+  - golvlinje: { fran: [470, 286], till: [470, 586], streck: 18 }
+  - golvlinje: { fran: [473, 286], till: [473, 586], streck: 18 }
+  - figur: { namn: g1, x: 392, y: 332, stallning: staHanderFram, trojan: gul, ansikte: glad, tittar: [480, 300], lutar: [470, 300] }
+  - figur: { namn: b1, x: 548, y: 336, stallning: kastaV, trojan: ljusbla, ansikte: kisa, tittar: [420, 260] }
+  - boll: { hand: [b1, V], dy: -12, r: 17, farg: '#c3cdf2' }
+  - figur: { namn: g2, x: 342, y: 374, trojan: gul, ansikte: glad, tittar: [500, 300], lutar: [470, 320] }
+  - figur: { namn: b2, x: 598, y: 378, stallning: staHanderFram, trojan: ljusbla, ansikte: glad, tittar: [440, 300], lutar: [470, 320] }
+  - figur: { namn: g3, x: 288, y: 418, stallning: staHanderFram, trojan: gul, ansikte: prata, tittar: blaa, nar: { H: [298, 276] } }
+  - kort: { hand: [g3, H], dx: 2, dy: -12, b: 34, h: 40, vinkel: 6, farg: '#c3cdf2', symbol: triangel }
+  - figur: { namn: b3, x: 650, y: 420, trojan: ljusbla, ansikte: glad, tittar: g3, lutar: [470, 330] }
+  - figur: { namn: kastare, x: 150, y: 532, stallning: kasta, trojan: gul, ansikte: kisa, tittar: [520, 300] }
+  - boll: { hand: [kastare, H], dy: -12, r: 21 }
+  - figur: { namn: blaa, x: 772, y: 534, stallning: staHanderFram, trojan: ljusbla, ansikte: prata, tittar: g3 }
+  - kort: { hand: [blaa, V], dx: -8, dy: -14, b: 34, h: 40, vinkel: -8, farg: '#efc65a', symbol: triangel }
+  - boll: { x: 498, y: 334, r: 21 }
+  - rorelse: { x: 480, y: 339, riktning: -100, langd: 34 }
+  - boll: { x: 438, y: 410, r: 21, farg: '#c3cdf2' }
+  - rorelse: { x: 456, y: 415, riktning: 100, langd: 34 }
+  - boll: { x: 392, y: 522, r: 15, farg: '#c3cdf2' }
+  - boll: { x: 560, y: 502, r: 15 }
+  - bubbla: { till: g3, dx: -30, dy: 34, symboler: [triangel], visar: "Eleven har plockat upp en lapp från andra sidan och säger vad som står på den" }
+  - bubbla: { till: blaa, dx: 60, dy: 30, symboler: [triangel], visar: "Samma symbol på andra sidan av linjen: de två lapparna hör ihop" }

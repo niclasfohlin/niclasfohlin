@@ -1,0 +1,26 @@
+# Stationssamtal: frågorna sitter uppe på väggen som stationer, och vid varje station samtalar ett par om just den frågan och skriver ned en tanke innan paret går vidare till nästa.
+id: stationssamtal
+skala: 62
+djup: false
+delar:
+  - kort: { namn: fraga1, x: 160, y: 162, b: 72, h: 92, vinkel: -3, farg: '#f3dc8e' }
+  - symbol: { x: 160, y: 146, namn: fraga, s: 20 }
+  - symbol: { x: 160, y: 190, namn: triangel, s: 12 }
+  - kort: { namn: fraga2, x: 446, y: 132, b: 72, h: 92, vinkel: 2, farg: '#c8edc4' }
+  - symbol: { x: 446, y: 116, namn: fraga, s: 20 }
+  - symbol: { x: 446, y: 160, namn: kvadrat, s: 12 }
+  - kort: { namn: fraga3, x: 756, y: 168, b: 72, h: 92, vinkel: -1, farg: '#f2b9c6' }
+  - symbol: { x: 756, y: 152, namn: fraga, s: 20 }
+  - symbol: { x: 756, y: 196, namn: stjarna, s: 12 }
+  - pil: { fran: [214, 118], till: [392, 96], bage: 0.16 }
+  - pil: { fran: [500, 96], till: [700, 124], bage: 0.16 }
+  - figur: { namn: b1, x: 398, y: 432, stallning: tanka, trojan: turkos, ansikte: tanka, tittar: b2, lutar: b2 }
+  - figur: { namn: b2, x: 486, y: 438, trojan: rosa, ansikte: prata, tittar: b1, lutar: b1, nar: { H: [520, 300] } }
+  - figur: { namn: a1, x: 92, y: 472, trojan: lila, ansikte: prata, tittar: a2, lutar: a2, pekar: { mal: fraga1, dx: -10, dy: 40 } }
+  - figur: { namn: a2, x: 200, y: 466, trojan: gul, ansikte: skriva, tittar: bladA, lutar: a1, nar: { V: [176, 384], H: [212, 352] } }
+  - papper: { namn: bladA, x: 190, y: 366, b: 46, h: 54, vinkel: -10, rader: 2, symbol: triangel }
+  - penna: { x: 198, y: 368, vinkel: 145, l: 30 }
+  - figur: { namn: c1, x: 702, y: 476, stallning: tanka, trojan: gron, ansikte: tanka, tittar: fraga3 }
+  - figur: { namn: c2, x: 806, y: 466, trojan: orange, ansikte: glad, tittar: c1, lutar: c1 }
+  - bubbla: { till: a1, dx: -40, dy: 36, symboler: [triangel], visar: "Paret samtalar om den här stationens fråga, och den ena säger sin tanke om den" }
+  - bubbla: { till: b2, dx: 40, dy: 34, symboler: [kvadrat], visar: "Vid nästa station samtalar ett annat par om just den stationens fråga" }

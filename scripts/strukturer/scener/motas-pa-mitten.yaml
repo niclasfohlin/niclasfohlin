@@ -1,15 +1,20 @@
-# Mötas på mitten: gruppen har skrivit i var sitt fält och enas om det som skrivs i mitten.
+# Mötas på mitten: var och en har skrivit i sitt fält, två har samma förslag, gruppen enas om det, och det skrivs i rutan i mitten.
 id: motas-pa-mitten
 skala: 74
 djup: false
 delar:
-  - figur: { namn: bakV, x: 360, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, tittar: mitten, lutar: mitten, pekar: mitten, armarEfter: bladet }
-  - figur: { namn: bakH, x: 560, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: skriva, tittar: mitten, lutar: mitten, nar: { V: [470, 386] }, armarEfter: bladet }
-  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: lila, ansikte: tanka, tittar: mitten, lutar: mitten, nar: { H: [372, 418] }, armarEfter: bladet }
-  - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, trojan: rosa, ansikte: glad, tittar: mitten, lutar: mitten, nar: { V: [565, 418] }, armarEfter: bladet }
-  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
+  - figur: { namn: bakV, x: 360, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: sidaH, lutar: mitten, pekar: [392, 366], armarEfter: bladet }
+  - figur: { namn: bakH, x: 560, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: skriva, tittar: mitten, lutar: mitten, nar: { V: [506, 344] }, armarEfter: bladet }
+  - figur: { namn: sidaV, x: 262, y: 520, utanBen: true, trojan: lila, ansikte: glad, tittar: bakV, lutar: mitten, nar: { H: [338, 412] }, armarEfter: bladet }
+  - figur: { namn: sidaH, x: 672, y: 525, utanBen: true, trojan: rosa, ansikte: glad, tittar: bakV, lutar: mitten, nar: { V: [602, 414] }, armarEfter: bladet }
+  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: -10 }
   - papper: { namn: bladet, x: 470, y: 395, b: 240, h: 88, rutor: 4 }
+  - symbol: { x: 380, y: 372, namn: stjarna, s: 12 }
+  - symbol: { x: 560, y: 372, namn: "cirkel:gron", s: 11 }
+  - symbol: { x: 382, y: 420, namn: kvadrat, s: 11 }
+  - symbol: { x: 560, y: 420, namn: stjarna, s: 12 }
+  - symbol: { x: 456, y: 396, namn: stjarna, s: 14 }
   - punkt: { namn: mitten, x: 470, y: 395 }
-  - penna: { x: 470, y: 386, vinkel: 205, l: 44 }
-  - bubbla: { till: bakV, dx: -40, dy: 40, symboler: [stjarna], visar: "En säger vilket förslag hen tycker är bäst" }
-  - bubbla: { till: sidaH, dx: 45, dy: 36, symboler: [stjarna], visar: "En annan har samma: gruppen enas, och det skrivs i mitten" }
+  - penna: { x: 480, y: 400, vinkel: 155, l: 60, farg: '#5f72d9' }
+  - bubbla: { till: bakV, dx: -40, dy: 40, symboler: [stjarna], visar: "En säger vilket förslag hen tycker är bäst, det som står i hens fält" }
+  - bubbla: { till: sidaH, dx: 45, dy: 36, symboler: [stjarna], visar: "En annan har samma förslag i sitt fält: gruppen enas, och det skrivs i mitten" }

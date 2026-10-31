@@ -1,0 +1,28 @@
+# Huvuden ihop: läraren har sagt huvuden ihop, och alla fyra i gruppen lutar sig in över bordet så att huvudena möts, och en viskar fram svaret som alla ska kunna ge.
+id: huvuden-ihop
+skala: 74
+djup: false
+delar:
+  - figur: { namn: bakV, x: 432, y: 396, stallning: sitta, utanBen: true, ansikte: prata, lut: -16, tittar: bakH }
+  - figur: { namn: bakH, x: 532, y: 396, stallning: sitta, utanBen: true, ansikte: glad, lut: 16, tittar: bakV }
+  - figur: { namn: sidaV, x: 352, y: 498, utanBen: true, ansikte: glad, lut: -22, tittar: bakV, nar: { H: [418, 404] }, armarEfter: mitten }
+  - figur: { namn: sidaH, x: 612, y: 502, utanBen: true, ansikte: glad, lut: 22, tittar: bakH, nar: { V: [552, 406] }, armarEfter: mitten }
+  - bord: { x: 378, y: 445, b: 196, d: 92, h: 55, snett: 16 }
+  - punkt: { namn: mitten, x: 484, y: 400 }
+  - kort: { x: 402, y: 428, b: 22, h: 26, vinkel: -6 }
+  - markor: { x: 402, y: 428, r: 2.8, farg: '#2b2b2e' }
+  - kort: { x: 456, y: 384, b: 22, h: 26, vinkel: 4 }
+  - markor: { x: 452, y: 379, r: 2.8, farg: '#2b2b2e' }
+  - markor: { x: 460, y: 389, r: 2.8, farg: '#2b2b2e' }
+  - kort: { x: 512, y: 384, b: 22, h: 26, vinkel: -4 }
+  - markor: { x: 507, y: 378, r: 2.8, farg: '#2b2b2e' }
+  - markor: { x: 512, y: 384, r: 2.8, farg: '#2b2b2e' }
+  - markor: { x: 517, y: 390, r: 2.8, farg: '#2b2b2e' }
+  - kort: { x: 566, y: 428, b: 22, h: 26, vinkel: 6 }
+  - markor: { x: 562, y: 423, r: 2.8, farg: '#2b2b2e' }
+  - markor: { x: 570, y: 423, r: 2.8, farg: '#2b2b2e' }
+  - markor: { x: 562, y: 433, r: 2.8, farg: '#2b2b2e' }
+  - markor: { x: 570, y: 433, r: 2.8, farg: '#2b2b2e' }
+  - bubbla: { till: bakV, dx: -52, dy: 30, b: 56, h: 46, symboler: [kvadrat], visar: "En viskar fram ett svar till de andra, tätt intill" }
+  - bubbla: { till: bakH, dx: 58, dy: 34, tanke: true, symboler: [kvadrat], visar: "Den andra har samma svar: gruppen enas om ett svar som var och en kan ge" }
+  - bubbla: { till: sidaH, dx: 62, dy: 18, tanke: true, symboler: [kvadrat], visar: "Också den tredje kan svaret, eftersom läraren sedan säger ett nummer och vem som helst kan få redovisa" }
