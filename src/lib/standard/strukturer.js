@@ -75,3 +75,20 @@ export function strukturensFel(s) {
   });
   return fel;
 }
+
+/**
+ * Arken när kort skrivs ut två och två: varje A4 har två kort, ett uppe och ett nere, och varje ark är två sidor, först
+ * framsidorna och sedan baksidorna i samma ordning, så att de hamnar rätt när arket skrivs ut dubbelsidigt och vänds längs
+ * långsidan, som är skrivarnas förval. Ett udda antal ger en tom nedre halva på sista arket. Talen är kortens platser i
+ * listan.
+ * @param {number} antal
+ * @returns {{ del: 'fram' | 'bak', uppe: number, nere: number | null }[]}
+ */
+export function strukturkortensArk(antal) {
+  const sidor = [];
+  for (let i = 0; i < antal; i += 2) {
+    const nere = i + 1 < antal ? i + 1 : null;
+    sidor.push({ del: 'fram', uppe: i, nere }, { del: 'bak', uppe: i, nere });
+  }
+  return sidor;
+}

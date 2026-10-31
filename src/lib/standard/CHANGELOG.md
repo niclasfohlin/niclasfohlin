@@ -2,7 +2,7 @@
 
 ## 0.46.0, 2026-10-31
 
-- `strukturer.js`, ny (sajtens K-650, verktyget Strukturer): `STRUKTURENS_SLAG` med Par, Grupp och Klass, namnen och färgerna, `STRUKTURENS_GRANSER`, `strukturensSumma` (kontrollsumman över bankens fält, så att en ändring för hand stannar bygget) och `strukturensFel`, som sajtens schema och intaget ur grundbokens bank prövar en struktur med.
+- `strukturer.js`, ny (sajtens K-650, verktyget Strukturer): `STRUKTURENS_SLAG` med Par, Grupp och Klass, namnen och färgerna, `STRUKTURENS_GRANSER`, `strukturensSumma` (kontrollsumman över bankens fält, så att en ändring för hand stannar bygget) och `strukturensFel`, som sajtens schema och intaget ur grundbokens bank prövar en struktur med, och `strukturkortensArk`, ordningen när korten skrivs ut två och två.
 
 ## 0.45.0, 2026-10-31
 

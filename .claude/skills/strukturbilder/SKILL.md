@@ -81,7 +81,11 @@ delar:
 | `utanBen` | Figuren är en byst, bakom ett bord eller längst fram i bilden |
 | `trojan`, `byxor`, `hud`, `bygg`, `storlek` | Sätts av motorn ur figurens plats; sätt dem bara med skäl |
 
-Saker: `bord`, `papper` (med `rader`, `symbol` eller `rutor: 4` för fyra fält och en ruta i mitten), `boll`, `kort`, `penna`, `klocka`, `tavla` (med `rutor` eller `rader`), `tarning`, `markor`, `pil`, `rorelse`, `stralar`, `golvring`, `golvlinje` och `punkt` (ett namn att peka mot, som inte ritas). En sak kan sitta i en hand med `hand: [figurens namn, V eller H]`.
+Saker: `bord`, `papper` (med `rader`, `symbol`, `symbolStorlek` och `symbolPlats`, `rutnat: [kolumner, rader]` för en bricka eller spalter, eller `rutor: 4` för fyra fält och en ruta i mitten, bara Mötas på mitten), `boll`, `kort`, `penna`, `klocka`, `tavla` (med `rutor` eller `rader`), `skarm` (ett skydd mellan två), `pusselbit` (med `knoppar` och `symbol`), `symbol` (en symbol var som helst, med `namn` och storleken `s`), `tarning`, `markor`, `pil`, `rorelse`, `stralar`, `golvring`, `golvlinje` och `punkt` (ett namn att peka mot, som inte ritas). En sak kan sitta i en hand med `hand: [figurens namn, V eller H]`; den kan vara mål först när den är ritad.
+
+Symbolerna i bubblor, på papper och kort: `triangel`, `kvadrat`, `cirkel`, `stjarna`, `hjarta`, `penna`, `kugghjul`, `hand`, `bok`, `fraga`, `utrop`, `bock` och `kryss`, med en färg efter kolon, som `cirkel:bla`.
+
+Scenen kan ha `fokus`: ett mål som varje figur tittar på när den inte tittar på något annat, med öppna ögon, så att ingen ser ut ur bilden. En figur med `fokus: false` eller `ansikte: bak` gör det inte. Ett mål kan vara `{ mal: <namn>, dx, dy }` för en punkt en bit från ett namn. `lut` är kroppens lutning i grader, positivt åt vänster; `lutar` mot ett mål lutar mot målet, högst 7 grader för en stående och 14 för en sittande.
 
 ## Så komponeras en scen
 
@@ -93,10 +97,13 @@ Det här lärde pilotbilderna (2026-10-31). Rita, titta på bilden i full storle
 | En hand som ska nå något | Armen är omkring 1,3 H lång från axeln. Ett mål längre bort ger en rak, stel arm: flytta figuren närmare i stället. En hand på papperet med pennan: `nar` till pennans övre ände och pennan med spetsen på papperet, ritad efter armarna |
 | Två som möts | `tittar` på varandra och `lutar` mot varandra. En high five: båda `nar` samma punkt strax ovanför huvudena, inom räckhåll, och `stralar` där |
 | En ring eller ett led | `golvring` eller `golvlinje` först, under figurerna, så att formen syns. Figurerna längst bak först i listan. Färre och tydligare figurer hellre än en folkhop: fyra par läses bättre än tio |
-| En figur som syns bakifrån | `ansikte: bak`, och den står längre fram i bilden och lite vid sidan, så att den inte täcker den den talar med |
+| En figur som syns bakifrån | `ansikte: bak`, och den står längre fram i bilden och lite vid sidan, så att den inte täcker den den talar med. Armarna står bakom bålen av sig själva. Sitter den vid bordets främre kant, står den efter bordet i listan, hel och utan `armarEfter` |
 | Bubblorna | `dx` och `dy` från huvudets topp. En bubbla per sak som strukturen bär, högst tre i en bild. Samma symbol hos två när de är överens eller när den ena tar upp det den andra sa |
 | Storleken | Bilden beskärs efter innehållet, så luften styrs av hur figurerna står. Högst elva figurer. En grupp vid ett bord: `skala` 70–80. En klass i en ring: 55–65 |
 | Det som skiljer | Läs stegen och leta efter det som bara den här strukturen har: lapparna i luften, ringen som flyttar, rutan i mitten, papperet som går runt, kortet på ryggen. Det ska synas först |
+| Det som skiljer ligger aldrig platt på bordet | Det hålls upp, står upp eller syns i luften, stort och mitt i bilden, så att det syns också i 300 punkter. Granskningen av alla 85 bilder (2026-10-31): 33 bilder var fyra elever runt ett bord sedda från samma håll, och det som skilde dem låg på bordsskivan och blev prickar. Förebilderna är klockan i PPT, ringpilen i Rondellen, skärmen i Lika och olika, dörren i Lär varandra och kortet på ryggen i Vem är jag? |
+| Bubblan bär strukturens eget tecken | Inte en triangel för att en bubbla ska ha något: 53 av 85 bilder hade en röd triangel. Visar bubblan inget som bara den här strukturen har, tas den bort |
+| Bordet är inte självklart | En grupp kan stå, sitta i en ring utan bord, ses snett ovanifrån eller tätt inpå. Välj det håll som visar kännetecknet bäst, inte det som förra bilden hade |
 
 
 ## Likhetsprovet

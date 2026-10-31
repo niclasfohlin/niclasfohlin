@@ -18,7 +18,7 @@ import { join, dirname, basename } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import YAML from 'yaml';
 import { penna, V, plus } from './figurer/penna.mjs';
-import { figur, KLADER } from './figurer/figur.mjs';
+import { figur, KLADER, STALLNINGAR } from './figurer/figur.mjs';
 import * as saker from './figurer/saker.mjs';
 
 const HAR = dirname(fileURLToPath(import.meta.url));
@@ -72,32 +72,44 @@ function utvidga(delar) {
   return ut;
 }
 
+// Färgerna, hudtonerna och byggnaden börjar på olika ställen i varje scen, ur scenens id, så att samma elever inte sitter
+// på samma platser i bild efter bild (granskningen av alla 85 bilder 2026-10-31). En scen kan sätta dem själv.
+const fro = (id, n) => [...String(id)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) % n;
+
 export function ritaScen(scen) {
+  scen = { trojStart: fro(scen.id, TROJOR.length), hudStart: fro(`${scen.id}-hud`, 7), byggStart: fro(`${scen.id}-bygg`, BYGG.length), ...scen };
   const p = penna(scen.id || 'scen', { linje: STIL.linje, krita: STIL.krita });
   const figurer = {};
   let nr = 0;
   const skala = scen.skala || 64;
-  // Ett mål (pekar, nar, tittar, lutar) är en punkt [x, y] eller namnet på en sak eller figur i scenen. En figurs namn
-  // ger dess huvud, och namn.V eller namn.H dess hand, när figuren redan är ritad.
-  const namngivna = {};
+  // Ett mål (pekar, nar, tittar, lutar) är en punkt [x, y], namnet på en sak eller figur i scenen, eller { mal, dx, dy }
+  // för en punkt en bit från ett namn. En figurs namn ger dess huvud, och namn.V eller namn.H dess hand och namn.axelV
+  // eller namn.axelH dess axel, när figuren redan är ritad. En sak i en hand har sin plats först när den är ritad.
+  const namngivna = {}, ritade = {}, iHand = new Set();
   for (const d of utvidga(scen.delar || [])) {
     const [slag] = Object.keys(d), o = d[slag];
-    if (o?.namn && slag !== 'figur') namngivna[o.namn] = [o.x, o.y];
+    if (o?.namn && slag !== 'figur') { if (o.hand) iHand.add(o.namn); else namngivna[o.namn] = [o.x, o.y]; }
     if (o?.namn && slag === 'figur') {
-      // Innan figuren är ritad: huvudet och axlarna uppskattade ur var den står.
-      const s = o.skala || scen.skala || 64;
-      namngivna[o.namn] = [o.x, o.y - 3.2 * s];
-      namngivna[`${o.namn}.axelV`] = [o.x - 0.33 * s, o.y - 2.5 * s];
-      namngivna[`${o.namn}.axelH`] = [o.x + 0.33 * s, o.y - 2.5 * s];
+      // Innan figuren är ritad: huvudet och axlarna uppskattade ur var den står, för en stående eller en sittande figur
+      // (omgång H: ett mål mot en sittande figur hamnade för högt).
+      const s = (o.skala || scen.skala || 64) * (o.storlek ?? 1);
+      const sitter = STALLNINGAR[o.stallning || 'sta']?.sitter;
+      const [huvud, axel] = sitter ? [2.1, 1.75] : [2.92, 2.45];
+      namngivna[o.namn] = [o.x, o.y - huvud * s];
+      namngivna[`${o.namn}.axelV`] = [o.x - 0.3 * s, o.y - axel * s];
+      namngivna[`${o.namn}.axelH`] = [o.x + 0.3 * s, o.y - axel * s];
     }
   }
   const punkt = (t) => {
     if (t == null || Array.isArray(t)) return t;
+    if (typeof t === 'object') { const [x, y] = punkt(t.mal); return [x + (t.dx || 0), y + (t.dy || 0)]; }
     const [namn, hand] = String(t).split('.');
     if (hand && figurer[namn]) { const h = hand.startsWith('axel') ? figurer[namn].axlar[hand.slice(4)] : figurer[namn].hander[hand]; return [h.x, h.y]; }
+    if (ritade[t]) return ritade[t];
     if (namngivna[t]) return namngivna[t];
     if (figurer[namn]) return [figurer[namn].huvud.x, figurer[namn].huvud.y];
     if (namngivna[namn]) return namngivna[namn];
+    if (iHand.has(t)) throw new Error(`Målet ${t} i scenen ${scen.id} sitter i en hand och ritas senare: rita det före, eller ta en punkt`);
     throw new Error(`Målet ${t} finns inte i scenen ${scen.id}`);
   };
   const plats = (o) => {
@@ -118,7 +130,9 @@ export function ritaScen(scen) {
       if (nr > HOGST_FIGURER && !scen.likhetsprov) throw new Error(`Scenen ${scen.id} har fler än ${HOGST_FIGURER} figurer: en huvudscen har en grupp eller en klass med högst ${HOGST_FIGURER}`);
       const f = figur(p, {
         ...o,
-        pekar: punkt(o.pekar), tittar: punkt(o.tittar), lutar: punkt(o.lutar),
+        // Scenens fokus: den som inte tittar på något annat tittar dit, så att ingen ser ut ur bilden (granskningen av
+        // omgång F: sju av elva bilder hade lyssnare som satt rakt fram med slutna ögon).
+        pekar: punkt(o.pekar), tittar: punkt(o.tittar ?? (o.ansikte === 'bak' || o.fokus === false ? undefined : scen.fokus)), lutar: punkt(o.lutar),
         nar: o.nar && Object.fromEntries(Object.entries(o.nar).map(([k, v]) => [k, punkt(v)])),
         bygg: o.bygg ?? BYGG[(i + (scen.byggStart || 0)) % BYGG.length],
         storlek: o.storlek ?? STORLEK[(i * 2 + 1) % STORLEK.length],
@@ -141,12 +155,17 @@ export function ritaScen(scen) {
       const x = f.topp.x + (o.dx ?? 0), y = f.topp.y - (o.dy ?? 40);
       saker.bubbla(p, { ...o, x, y, mot: o.tanke ? V(f.topp.x, f.topp.y) : f.mun });
     } else if (slag in saker && typeof saker[slag] === 'function') {
-      saker[slag](p, plats(o));
+      const q = plats(o);
+      saker[slag](p, q);
+      if (o.namn) ritade[o.namn] = [q.x, q.y];
     } else throw new Error(`Okänd del i scenen ${scen.id}: ${slag}`);
   }
-  for (const namn of Object.keys(efter)) if (!namngivna[namn]) throw new Error(`armarEfter: ${namn} finns inte i scenen ${scen.id}`);
+  for (const namn of Object.keys(efter)) if (!namngivna[namn] && !ritade[namn]) throw new Error(`armarEfter: ${namn} finns inte i scenen ${scen.id}`);
   const [vx, vy, vb, vh] = (scen.ram || beskar(p.ruta(), scen.luft ?? 0.05)).map((n) => Math.round(n));
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vx} ${vy} ${vb} ${vh}" width="${BREDD}" height="${HOJD}"><defs>${p.defs()}</defs><rect x="${vx}" y="${vy}" width="${vb}" height="${vh}" fill="#fff"/>\n${p.svg()}\n</svg>\n`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vx} ${vy} ${vb} ${vh}" width="${BREDD}" height="${HOJD}"><defs>${p.defs()}</defs><rect x="${vx}" y="${vy}" width="${vb}" height="${vh}" fill="#fff"/>\n${p.svg()}\n</svg>\n`;
+  // Ett tal som inte är ett tal får ett huvud eller hela bilden att försvinna utan fel (ritarnas omgångar 2026-10-31).
+  if (svg.includes('NaN')) throw new Error(`Scenen ${scen.id} gav NaN i bilden: ett mål eller en plats saknas`);
+  return svg;
 }
 
 // Beskär till det som ritats, med luft runt om, i bildens form 900 × 560.

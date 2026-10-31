@@ -21,7 +21,9 @@ export function bord(p, { x, y, b, d = 70, h = 120, snett = 30, farg = null }) {
 }
 
 // Ett papper som ligger eller hålls, med några rader klotter som text.
-export function papper(p, { x, y, b = 46, h = 34, vinkel = 0, rader = 3, farg = null, rutor = 0, symbol = null }) {
+// symbolStorlek är symbolens storlek i delar av papperets kortare sida, och symbolPlats dess plats i delar av bredden och
+// höjden från mitten. rutnat: [kolumner, rader] ritar ett rutnät utan mittruta, som en bricka eller fyra rutor i rad.
+export function papper(p, { x, y, b = 46, h = 34, vinkel = 0, rader = 3, farg = null, rutor = 0, symbol = null, symbolStorlek = 0.2, symbolPlats = [-0.22, 0], rutnat = null }) {
   const c = V(x, y);
   const hrn = [V(-b / 2, -h / 2), V(b / 2, -h / 2), V(b / 2, h / 2), V(-b / 2, h / 2)].map((q) => vrid(plus(c, q), c, vinkel));
   p.ny().form(hrn, farg, { tjock: 0.85 });
@@ -32,13 +34,22 @@ export function papper(p, { x, y, b = 46, h = 34, vinkel = 0, rader = 3, farg = 
     p.ny().form([V(-b * 0.18, -h * 0.2), V(b * 0.18, -h * 0.2), V(b * 0.18, h * 0.2), V(-b * 0.18, h * 0.2)].map((q) => vrid(plus(c, q), c, vinkel)), '#f3dc8e', { tjock: 0.75 });
     return;
   }
+  if (rutnat) {
+    const [k, r] = rutnat;
+    for (let i = 1; i < k; i++) p.streck([vrid(V(x - b / 2 + (b * i) / k, y - h / 2), c, vinkel), vrid(V(x - b / 2 + (b * i) / k, y + h / 2), c, vinkel)], { tjock: 0.6 });
+    for (let j = 1; j < r; j++) p.streck([vrid(V(x - b / 2, y - h / 2 + (h * j) / r), c, vinkel), vrid(V(x + b / 2, y - h / 2 + (h * j) / r), c, vinkel)], { tjock: 0.6 });
+  }
   // En symbol på papperet: det som någon har skrivit eller ritat, samma symbol som i en bubbla.
-  if (symbol) symbolen(p, symbol, vrid(V(x - b * 0.22, y), c, vinkel), Math.min(b, h) * 0.2);
+  if (symbol) symbolen(p, symbol, vrid(V(x + b * symbolPlats[0], y + h * symbolPlats[1]), c, vinkel), Math.min(b, h) * symbolStorlek);
+  if (rutnat) return;
+  // Raderna börjar efter symbolen, så att de inte går genom den (granskningen av omgång H).
+  const fore = symbol ? b * symbolPlats[0] + Math.min(b, h) * symbolStorlek * 1.4 : -Infinity;
+  const borjan = Math.max(-b / 2 + b * 0.14, fore);
   for (let i = 0; i < rader; i++) {
     const yy = y - h / 2 + (h / (rader + 1)) * (i + 1);
     const slut = x - b / 2 + b * (i === rader - 1 ? 0.5 : 0.82);
     const pts = [];
-    for (let xx = x - b / 2 + b * 0.14; xx < slut; xx += 5) pts.push(vrid(V(xx, yy + (pts.length % 2 ? -1.6 : 1.6)), c, vinkel));
+    for (let xx = x + borjan; xx < slut; xx += 5) pts.push(vrid(V(xx, yy + (pts.length % 2 ? -1.6 : 1.6)), c, vinkel));
     if (pts.length > 1) p.streck(pts, { tjock: 0.55, skak: 0 });
   }
 }
@@ -47,8 +58,10 @@ export function papper(p, { x, y, b = 46, h = 34, vinkel = 0, rader = 3, farg = 
 export function boll(p, { x, y, r = 13, farg = '#efc65a' }) {
   const pts = ellips(V(x, y), r, r * 0.92, { n: 11 }).map((q, i) => plus(q, ggr(enhet(minus(q, V(x, y))), (i % 2 ? -1 : 1) * r * 0.12 * p.r())));
   p.ny().form(pts, farg, { tjock: 0.85 });
-  p.streck([V(x - r * 0.4, y - r * 0.1), V(x - r * 0.05, y + r * 0.15), V(x + r * 0.2, y - r * 0.25)], { tjock: 0.55 });
-  p.streck([V(x + r * 0.1, y + r * 0.45), V(x + r * 0.45, y + r * 0.2)], { tjock: 0.55 });
+  // Vecken är raka och korta, åt olika håll, så att de inte ser ut som ett leende ansikte (granskningen av omgång C och D).
+  p.streck([V(x - r * 0.45, y - r * 0.3), V(x - r * 0.05, y - r * 0.05)], { tjock: 0.55, skak: 0 });
+  p.streck([V(x + r * 0.05, y + r * 0.1), V(x + r * 0.15, y + r * 0.5)], { tjock: 0.55, skak: 0 });
+  p.streck([V(x + r * 0.2, y - r * 0.4), V(x + r * 0.5, y - r * 0.15)], { tjock: 0.55, skak: 0 });
 }
 
 // Ett kort, som en lapp med en symbol på.
@@ -73,7 +86,7 @@ export function klocka(p, { x, y, r = 20 }) {
 }
 
 // En symbol i en bubbla eller på ett kort: triangel, kvadrat, cirkel, penna, kugghjul, hand, hjarta, stjarna, bok,
-// fraga (en krok och en prick, utan bokstav) och utrop.
+// fraga (en krok och en prick, utan bokstav), utrop, bock och kryss.
 export function symbolen(p, namn, c, s) {
   const [slag, farg] = String(namn).split(':');
   const f = SYMBOLFARG[farg] || farg || { triangel: SYMBOLFARG.rod, kvadrat: SYMBOLFARG.bla, cirkel: SYMBOLFARG.gul, hjarta: SYMBOLFARG.rod, stjarna: SYMBOLFARG.gul }[slag] || null;
@@ -100,10 +113,52 @@ export function symbolen(p, namn, c, s) {
   } else if (slag === 'fraga') {
     p.streck([V(c.x - s * 0.45, c.y - s * 0.4), V(c.x - s * 0.2, c.y - s * 0.85), V(c.x + s * 0.35, c.y - s * 0.8), V(c.x + s * 0.4, c.y - s * 0.3), V(c.x, c.y + s * 0.05), V(c.x, c.y + s * 0.35)], { tjock: 1.3 });
     p.prick(ellips(V(c.x, c.y + s * 0.8), s * 0.13, s * 0.13, { n: 8 }), '#2b2b2e');
+  } else if (slag === 'bock') {
+    p.streck([V(c.x - s * 0.8, c.y), V(c.x - s * 0.2, c.y + s * 0.65), V(c.x + s * 0.85, c.y - s * 0.75)], { tjock: 1.6, skak: 0, farg: f || '#3f9a5c' });
+  } else if (slag === 'kryss') {
+    p.streck([V(c.x - s * 0.7, c.y - s * 0.7), V(c.x + s * 0.7, c.y + s * 0.7)], { tjock: 1.6, skak: 0, farg: f || '#d9485f' });
+    p.streck([V(c.x + s * 0.7, c.y - s * 0.7), V(c.x - s * 0.7, c.y + s * 0.7)], { tjock: 1.6, skak: 0, farg: f || '#d9485f' });
   } else if (slag === 'utrop') {
     p.streck([V(c.x, c.y - s * 0.9), V(c.x, c.y + s * 0.3)], { tjock: 1.4 });
     p.prick(ellips(V(c.x, c.y + s * 0.8), s * 0.13, s * 0.13, { n: 8 }), '#2b2b2e');
   } else throw new Error(`Symbolen ${slag} finns inte`);
+}
+
+// En pusselbit: en ruta med en knopp ut eller in på varje sida (1 ut, -1 in, 0 rak), i ordningen upp, höger, ned, vänster.
+// Delarna i Pussel passar ihop till en helhet (granskningen av omgång E).
+export function pusselbit(p, { x, y, s = 40, farg = '#efc65a', vinkel = 0, knoppar = [1, -1, 0, 1], symbol = null }) {
+  const c = V(x, y), h = s / 2, k = s * 0.17;
+  const hörn = [V(-h, -h), V(h, -h), V(h, h), V(-h, h)];
+  const pts = [];
+  for (let i = 0; i < 4; i++) {
+    const a = hörn[i], b = hörn[(i + 1) % 4], ut = V((b.y - a.y) / s, -(b.x - a.x) / s);
+    pts.push(a);
+    if (knoppar[i]) {
+      const m = ggr(plus(a, b), 0.5), d = enhet(minus(b, a));
+      pts.push(minus(m, ggr(d, k * 0.6)));
+      for (let j = 0; j <= 6; j++) {
+        const t = Math.PI + (j / 6) * Math.PI;
+        pts.push(plus(m, plus(ggr(d, Math.cos(t) * k), ggr(ut, -knoppar[i] * (k * 0.9 - Math.sin(t) * k)))));
+      }
+      pts.push(plus(m, ggr(d, k * 0.6)));
+    }
+  }
+  p.ny().form(pts.map((q) => vrid(plus(c, q), c, vinkel)), farg, { tjock: 0.9 });
+  if (symbol) symbolen(p, symbol, c, s * 0.22);
+}
+
+// En symbol var som helst: på en tavla, en karta, en affisch eller ett papper, där s är dess halva storlek.
+export function symbol(p, { x, y, namn, s = 14 }) {
+  p.ny();
+  symbolen(p, namn, V(x, y), s);
+}
+
+// En skärm som står mellan två elever på ett bord, så att de inte ser varandras papper: en skiva med två små fötter.
+export function skarm(p, { x, y, b = 120, h = 90, farg = '#e8dcc2' }) {
+  p.ny();
+  p.streck([V(x - b * 0.3, y), V(x - b * 0.15, y)], { tjock: 1, skak: 0 });
+  p.streck([V(x + b * 0.15, y), V(x + b * 0.3, y)], { tjock: 1, skak: 0 });
+  p.ny().form([V(x - b / 2, y - h), V(x + b / 2, y - h * 1.04), V(x + b / 2, y - 3), V(x - b / 2, y)], farg, { tjock: 1 });
 }
 
 // En pratbubbla med svans mot munnen, eller en tankebubbla (moln och små ringar), med symboler i en rad.

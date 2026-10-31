@@ -21,7 +21,8 @@ export const MATT = {
   ben: { fäste: 0.14, lar: 0.78, smal: 0.72, w0: 0.158, w1: 0.135, fot: 0.17 },
 };
 
-// Ställningarna. arm: [överarm, underarm], ben: [lår, smalben], lut: kroppens lutning, bak: armen som är bakom kroppen.
+// Ställningarna. arm: [överarm, underarm], ben: [lår, smalben], lut: kroppens lutning i grader, positivt åt vänster och
+// negativt åt höger, bak: armen som är bakom kroppen. Huvudet lutar med kroppen.
 export const STALLNINGAR = {
   sta: { V: [-10, 16], H: [10, -16], benV: [-4, 1], benH: [4, -1] },
   staHanderFram: { V: [-18, 40], H: [18, -40], benV: [-5, -2], benH: [5, 2] },
@@ -29,8 +30,8 @@ export const STALLNINGAR = {
   kastaV: { V: [-165, -175], H: [12, -30], benV: [-8, -2], benH: [10, 4], lut: 4, bak: 'V' },
   handUpp: { V: [-10, -4], H: [170, 178], benV: [-5, -2], benH: [5, 2] },
   handUppV: { V: [-170, -178], H: [10, 4], benV: [-5, -2], benH: [5, 2] },
-  highFiveH: { V: [-20, 35], H: [158, 170], benV: [-8, -3], benH: [6, 2], lut: 6 },
-  highFiveV: { V: [-158, -170], H: [20, -35], benV: [-6, -2], benH: [8, 3], lut: -6 },
+  highFiveH: { V: [-20, 35], H: [158, 170], benV: [-8, -3], benH: [6, 2], lut: -6 },
+  highFiveV: { V: [-158, -170], H: [20, -35], benV: [-6, -2], benH: [8, 3], lut: 6 },
   halla: { V: [-14, 60], H: [14, -60], benV: [-5, -2], benH: [5, 2] },
   hallaH: { V: [-12, -4], H: [40, 120], benV: [-5, -2], benH: [5, 2] },
   hallaV: { V: [-40, -120], H: [12, 4], benV: [-5, -2], benH: [5, 2] },
@@ -38,8 +39,8 @@ export const STALLNINGAR = {
   tanka: { V: [-12, 60], H: [12, -150], benV: [-5, -2], benH: [5, 2] },
   pekaH: { V: [-10, -4], H: [80, 95], benV: [-5, -2], benH: [5, 2] },
   pekaV: { V: [-80, -95], H: [10, 4], benV: [-5, -2], benH: [5, 2] },
-  gaH: { V: [-28, -8], H: [22, 50], benV: [-20, -6], benH: [22, 4], lut: 4 },
-  gaV: { V: [-22, -50], H: [28, 8], benV: [-22, -4], benH: [20, 6], lut: -4 },
+  gaH: { V: [-28, -8], H: [22, 50], benV: [-20, -6], benH: [22, 4], lut: -4 },
+  gaV: { V: [-22, -50], H: [28, 8], benV: [-22, -4], benH: [20, 6], lut: 4 },
   handPaAxel: { V: [-12, -4], H: [60, 100], benV: [-5, -2], benH: [5, 2] },
   sitta: { V: [-20, 50], H: [20, -50], sitter: true },
   sittaSkriva: { V: [-15, 70], H: [25, -10], sitter: true, lut: 6 },
@@ -88,7 +89,10 @@ export function figur(p, o) {
   const mot = (t) => (t ? V(t[0], t[1]) : null);
   const lutMot = mot(o.lutar);
   const lut = (st.lut ?? 0) + (o.lut ?? 0) + (o.stel ? 0 : r.mellan(-2.5, 2.5))
-    + (lutMot ? Math.max(-16, Math.min(16, ((lutMot.x - fot.x) / H) * 8)) : 0);
+    // lut är positivt åt vänster (rikt(180 + lut) nedan), så ett mål till höger ger ett negativt lut.
+    // En stående figur lutar högst 7 grader och en sittande 14: mer, och den stående ser ut att buga med raka ben
+    // (granskningen av omgång A 2026-10-31).
+    + (lutMot ? Math.max(-(st.sitter ? 14 : 7), Math.min(st.sitter ? 14 : 7, -((lutMot.x - fot.x) / H) * 8)) : 0);
   const sitter = !!st.sitter;
 
   // Benen och höften.
@@ -149,7 +153,7 @@ export function figur(p, o) {
     if (o.nar?.[namn]) punkter = tvaLeder(fast, mot(o.nar[namn]), a, b, sida);
     else if (pekarHar) {
       // Handen stannar en bit före punkten och fingret pekar resten av vägen.
-      const d = minus(pekMot, fast), L = Math.min(langd(d) - 0.32 * H, (a + b) * 0.97);
+      const d = minus(pekMot, fast), L = Math.min(langd(d) - 0.2 * H, (a + b) * 0.97);
       punkter = tvaLeder(fast, plus(fast, ggr(enhet(d), Math.max(L, (a + b) * 0.5))), a, b, sida);
       finger = pekMot;
     } else {
@@ -163,8 +167,9 @@ export function figur(p, o) {
       const c = plus(hand, ggr(enhet(minus(hand, armbage)), m.arm.hand * H * 0.55));
       if (finger) {
         const d = enhet(minus(finger, c));
-        const spets = plus(c, ggr(d, Math.min(langd(minus(finger, c)) - 0.04 * H, 0.42 * H)));
-        p.ny().form(slang([c, spets], 0.055 * H), hud, { tjock: 0.8 });
+        // Ett kort, tjockt finger: ett långt och smalt ser ut som en pinne eller en krita (granskningen av pilotomgången).
+        const spets = plus(c, ggr(d, Math.min(langd(minus(finger, c)) - 0.04 * H, 0.24 * H)));
+        p.ny().form(slang([c, spets], 0.065 * H), hud, { tjock: 0.85 });
       }
       // Handen är en vante: en tumme på sidan in mot kroppen och handen över den, i hudens färg.
       const ut = enhet(minus(hand, armbage)), in_ = V(-ut.y * sida, ut.x * sida);
@@ -174,11 +179,13 @@ export function figur(p, o) {
     const lx = (q) => (q.x - axel.x) * tvar.x + (q.y - axel.y) * tvar.y;
     const ly = (q) => (q.x - axel.x) * ner.x + (q.y - axel.y) * ner.y;
     // Underarmen står framför bålen när handen är framför kroppen, från hakan till höften.
-    const framfor = (o.fram ?? st.fram)?.includes(namn) ?? (sida * lx(hand) < 0.3 * H && ly(hand) > -0.75 * H && ly(hand) < bal + 0.3 * H);
+    // En figur som syns bakifrån har armarna bakom bålen: vi ser ryggen, och armarna går bort från oss (pilotomgången
+    // 2026-10-31). Den ritas efter det den sträcker sig mot, som ett bord den sitter vid.
+    const framfor = o.ansikte === 'bak' ? false : (o.fram ?? st.fram)?.includes(namn) ?? (sida * lx(hand) < 0.3 * H && ly(hand) > -0.75 * H && ly(hand) < bal + 0.3 * H);
     const bak = (o.bak ?? st.bak) === namn;
     const k = 1 + 0.1 * bygg;
     const w = [m.arm.w0 * H * k, m.arm.w1 * H * 1.05 * k, m.arm.w1 * H * k];
-    if (o.armarEfter && (o.nar?.[namn] || pekarHar)) {
+    if (o.armarEfter && o.ansikte !== 'bak' && (o.nar?.[namn] || pekarHar)) {
       // Armen når ut över något som ritas efter figuren, som en bordsskiva: den ritas när scenen säger till, hel och
       // utan linje där den går ut ur axeln.
       senare.push(() => {
@@ -187,10 +194,13 @@ export function figur(p, o) {
         handform();
       });
     } else if (framfor && !bak) {
+      // Står armbågen vid kroppens kant får underarmen en rund armbåge; bara en armbåge inne på bålen börjar utan linje,
+      // annars blir underarmen en smal mörk kil (granskningen av omgång G).
+      const armbageInne = Math.abs(lx(armbage)) < 0.28 * H;
       delar.push({ z: 1.5, rita: () => p.ny().form(slang([fast, armbage], [w[0], w[1]]), trojan) });
       delar.push({ z: 3, rita: () => {
-        const u = slang([armbage, hand], [w[1], w[2]]);
-        p.ny().form(u, trojan, { kant: u.utanStart });
+        const u = slang([armbage, hand], [w[1] * 1.08, w[2] * 1.08]);
+        p.ny().form(u, trojan, armbageInne ? { kant: u.utanStart } : {});
         handform();
       } });
     } else {
@@ -206,19 +216,22 @@ export function figur(p, o) {
   const blickUt = tittMot ? Math.max(-1, Math.min(1, (tittMot.x - hc0.x) / (1.1 * H))) : blick;
   const nedat = tittMot ? Math.max(-0.6, Math.min(1, (tittMot.y - hc0.y) / (2.2 * H))) : (o.nedat ?? 0);
   // Huvudet lutar mot det figuren tittar på, mer när det ligger lägre, som när man lutar sig in över ett papper.
-  const hl = (o.huvudLut ?? (o.stel ? 0 : r.mellan(-7, 7)) + (tittMot ? Math.sign(tittMot.x - hc0.x) * (6 + Math.max(0, nedat) * 10) : 0)) + lut * 0.6;
+  const hl = (o.huvudLut ?? (o.stel ? 0 : r.mellan(-7, 7)) + (tittMot ? Math.sign(tittMot.x - hc0.x) * (6 + Math.max(0, nedat) * 10) : 0)) - lut * 0.6;
   const hc = hc0;
   const hb = m.huvud.b * H / 2, hh = m.huvud.h * H / 2;
   delar.push({ z: 4, rita: () => {
     p.ny().form(ellips(hc, hb, hh, { n: 32, nedre: m.huvud.nedre, vinkel: hl }), hud, { slat: true });
-    if (o.ansikte !== 'bak') ansikte(p, hc, hb, hh, blickUt, o.ansikte || 'glad', hl, nedat);
+    // En glad figur som tittar på något har öppna ögon, så att man ser vart den tittar (granskningen av omgång A och F).
+    const slagAnsikte = (o.ansikte || 'glad') === 'glad' && tittMot ? 'ser' : (o.ansikte || 'glad');
+    if (o.ansikte !== 'bak') ansikte(p, hc, hb, hh, blickUt, slagAnsikte, hl, nedat);
   } });
 
   for (const d of delar.sort((a, b) => a.z - b.z)) d.rita();
   return {
     huvud: hc, topp: plus(hc, V(0, -hh)), mun: vrid(plus(hc, V(blickUt * hb * 0.3, hh * 0.35)), hc, hl),
     hander, hoft, axel, H, sida: (s) => plus(hc, V(s * hb, 0)),
-    axlar: { V: plus(plus(axel, ggr(tvar, -0.33 * H)), ggr(ner, 0.12 * H)), H: plus(plus(axel, ggr(tvar, 0.33 * H)), ggr(ner, 0.12 * H)) },
+    // Axeln, för en hand på någons axel: ute på axelns rundning och inte vid halsen (granskningen av omgång H och E).
+    axlar: { V: plus(plus(axel, ggr(tvar, -0.38 * H)), ggr(ner, 0.26 * H)), H: plus(plus(axel, ggr(tvar, 0.38 * H)), ggr(ner, 0.26 * H)) },
     // Armarna som ritas senare, efter det som scenen säger i armarEfter.
     senare: () => senare.forEach((f) => f()),
   };
@@ -234,7 +247,9 @@ function ansikte(p, c, b, h, blick, slag, vinkel, nedat = 0) {
   const munY = mitt.y + h * 0.36;
   if (slag === 'glad' || slag === 'skratt') {
     for (const s of [-1, 1]) p.streck(bage(og(s), b * 0.13, h * 0.09), { tjock: 0.85, skak: 0 });
-  } else if (slag === 'tanka') {
+  } else if (slag === 'ser') {
+    for (const s of [-1, 1]) prick(V(og(s).x + blick * b * 0.05, og(s).y + nedat * h * 0.03), b * 0.065);
+} else if (slag === 'tanka') {
     for (const s of [-1, 1]) prick(V(og(s).x + b * 0.06, og(s).y - h * 0.08), b * 0.06);
   } else if (slag === 'skriva') {
     for (const s of [-1, 1]) p.streck([t(V(og(s).x - b * 0.1, og(s).y + h * 0.04)), t(V(og(s).x + b * 0.1, og(s).y + h * 0.04))], { tjock: 0.8, skak: 0 });

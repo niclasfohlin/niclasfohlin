@@ -57,7 +57,7 @@ Undervisningsmetoderna skrivs av metodriggen efter dess standard (`C:/metodrigg/
 
 Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Hur en post görs ur en text, och vad som gäller för hela texten, står i ARBETSSATT.md under Texterna.
 
-Verktyget Strukturers strukturer står en per fil i `src/content/strukturer/`, intagna ur grundbokens bank med `scripts/strukturer/intag.mjs`, som är källan för namnen och stegen (K-650, uppdraget i `underlag/prov/strukturer/UPPDRAGET.md`).
+Verktyget Strukturers strukturer står en per fil i `src/content/strukturer/`, intagna ur grundbokens bank med `scripts/strukturer/intag.mjs`, som är källan för namnen och stegen (K-650, uppdraget i `underlag/prov/strukturer/UPPDRAGET.md`). Korten görs till pdf av `scripts/strukturer/kort.mjs` i formen ur `scripts/strukturer/kortform.mjs`, och flera kort läggs två och två på A4 av `src/lib/strukturkort.js`.
 
 Databasens matteproblem, de som inte hör till en metod, står en per fil i `src/content/matteproblem/` och visas på Ta fram ett matteproblem, och databasens faktatexter står ett tema per fil i `src/content/faktateman/` och visas på Ta fram en faktatext (METODER.md under Ta fram ur en bank).
 
