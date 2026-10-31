@@ -3,6 +3,7 @@
 ## 0.45.0, 2026-10-31
 
 - `undervisningsmetod.js`, `EXEMPLETS_ETIKETTER`: etiketterna över ämnesexemplets två rader är Innehållet och felet och Så visar alla, en för alla slag, och sidan och riggens renderare läser dem härifrån (riggens brev om Kooperativt lärande, punkt 23: Stegen och orden stod över en text utan steg, som "Frågan har många svar").
+- `plan.js`, Lär dig metoden, lagningen inför lanseringen (sajtens K-645, B11 till B17): `klassernasTabell` har varje klass i listan när någon klass är skattad, också en utan skattningar, och en borttagen klass med skattningar med `etikett` "3B, borttagen", och `larDigetsKlasser` säger raden Klasserna med de borttagna; `larDigSammanstallning` bär `axel`, veckorna till och med avslutet, som linjerna och tabellen räknas på, `spann` ur `larDigetsSpann`, från första lektionen till det sista stegets sista skoldag eller avslutet, och `klasserna`; `forstaLektionensMening` och `forensMening` säger första lektionen och Före med rätt tid; `obesvaradVecka` tar dagen planen gjordes och frågar inte om en vecka som var slut före den; `iJulen`, `julveckorna` och `julensText` är påminnelsen om jul och nyår, som Planera insatsen och Lär dig metoden läser.
 
 ## 0.44.0, 2026-10-30
 

@@ -374,7 +374,40 @@ if (tsMp) {
   }
   // Ett lov i en vecka som har varit har ingen knapp Ta bort lovet i planens lista, så att en förlängning som lade veckan som
   // lov inte flyttar tillbaka dit.
-  ska('ett lov som har varit tas inte bort i planens lista', /\|\| skolveckanHarVarit\(m, idag\) \? '' : `<button type="button" class="pl-textknapp" data-lov-bort=/.test(readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8')));
+  // Förlängningens uppehåll heter Uppehåll i listan, utan Ta bort lovet, och står inte bland lovveckorna att trycka (C14).
+  ska('ett lov som har varit tas inte bort i planens lista', /\|\| skolveckanHarVarit\(m, idag\) \|\| uppehallet\.has\(veckonyckel\(m\)\) \? '' : `<button type="button" class="pl-textknapp" data-lov-bort=/.test(readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8')) && /uppehallet\.has\(veckonyckel\(m\)\) \? 'Uppehåll' : 'Lov'/.test(readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8')));
+  // En regel för elever och klasser: samma utan stora bokstäver och tecken eller ett tecken som skiljer är samma, och ett annat
+  // namn är nytt (verifieringen inför lanseringen, C12: Bea blev Elsa med Beas 3). Ett namn som är början på ett annat, som Cem
+  // och Cemal eller Ali och Alina, är inte samma: elevlistan frågar (Codex granskning 4, fynd 1: Alina fick Alis skattning).
+  ska('namnen nästan lika, för elever och klasser', s.namnenNastanLika('7', '7A') && s.namnenNastanLika('5a', '5A') && s.namnenNastanLika('6 B', '6B') && !s.namnenNastanLika('Cem', 'Cemal') && !s.namnenNastanLika('Ali', 'Alina') && !s.namnenNastanLika('7A', '7A Ek') && !s.namnenNastanLika('Bea', 'Elsa') && !s.namnenNastanLika('B', 'Bea') && !s.namnenNastanLika('3B', '4A'));
+  // Förlängningens uppehåll (C13, C14): veckorna och dagarna som hade varit står i valen, följer med länken och heter uppehåll i
+  // veckan, och ett pass som läraren har ställt in är inställt som förut.
+  {
+    const upVal = s.forlangdaVal(tsMp, { ...val, slut: 8, stryk: ['2026-11-09'] }, 2, '2026-12-02'), upPlan = s.planera(tsMp, upVal);
+    const bort = upPlan.veckor.flatMap((v) => v.bortfall.map((b) => `${b.datum}:${b.varfor}`));
+    const upDagar = (upVal.uppehall ?? []).filter(s.arDatum);
+    ska('förlängningens uppehåll står i valen, i länken och som uppehåll i veckan', upVal.uppehall?.join() === '2026-11-30,2026-12-02,2026-48' && s.lasVal(s.kodaVal(upVal))?.val.uppehall?.join() === upVal.uppehall.join() && upDagar.every((d) => bort.includes(`${d}:uppehall`)) && bort.includes('2026-11-09:installt') && upPlan.lovveckor.includes('2026-11-23') && !s.lasVal(s.kodaVal(val))?.val.uppehall, [upVal.uppehall, bort]);
+  }
+  // En dag har ett pass (buggjakten inför lanseringen, C17 och C18): en flytt till en dag med ett pass görs inte och sidan säger
+  // varför, och Ångra på en inställd dag dit ett pass har flyttats tar tillbaka flytten först, den senaste ändringen den dagen.
+  {
+    const ljMp = s.metodplan(metod('ljudlek-i-grupp')).plan;
+    const v0 = { start: '2026-11-09', dagar: [1, 2, 3, 4, 5], langd: 12, ...tom, stryk: ['2026-11-12'], flytta: { '2026-11-13': '2026-11-12' } };
+    const p0 = s.planera(ljMp, v0);
+    const sidan = readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8');
+    ska('en dag har ett pass: en flytt dit säger varför, och Ångra på dagen tar tillbaka flytten först', s.flyttatHit(v0, '2026-11-12') === '2026-11-13' && !s.flyttatHit(v0, '2026-11-13') && !s.flyttatHit({ ...v0, flytta: { '2026-11-12': '2026-11-12' } }, '2026-11-12') && s.passetPaDagen(p0, p0.veckor[0], '2026-11-10', '2026-11-13')?.nr === 2 && !s.passetPaDagen(p0, p0.veckor[0], '2026-11-12', '2026-11-13')
+      && /const hit = d\.angra \? flyttatHit\(aktiv\.val, d\.angra\) : undefined;/.test(sidan) && /if \(d\.angra && !hit\)/.test(sidan) && /const upptagen = passetPaDagen\(plan, v, ny, ursprung\);\n\s*if \(upptagen\) \{ visaBesked/.test(sidan));
+    // Codex granskning 4, fynd 2: torsdagen inställd, fredagens pass flyttat till torsdagen och onsdagens till fredagen. Ångra
+    // och Flytta tillbaka läser samma kontroll som en flytt, så att fredagen inte får två pass.
+    const v1 = { ...v0, flytta: { '2026-11-13': '2026-11-12', '2026-11-11': '2026-11-13' } }, p1 = s.planera(ljMp, v1);
+    ska('Ångra och Flytta tillbaka lägger aldrig två pass på en dag', s.flyttatHit(v1, '2026-11-12') === '2026-11-13' && s.passetPaDagen(p1, p1.veckor[0], '2026-11-13', '2026-11-13')?.flyttatFran === '2026-11-11'
+      && /const upptagen = veckan && passetPaDagen\(plan, veckan, fran, fran\);\n\s*if \(upptagen\) \{ visaBesked/.test(sidan));
+    // Elevlistan (verifieringen inför lanseringen, C11 och C12): det som förs in om en elev räknar listan klar först, också när
+    // knappen inte tar fokus från fältet, och radens nya id gäller bara samma namn medan det skrivs, så att en elev som skrivs in
+    // igen sist i listan känns igen och en ny elev på en annan elevs rad inte tar över det som förts in. En rättning är samma
+    // regel som klassernas (namnenNastanLika), och förnamnet som förut (sammaElev).
+    ska('elevlistan: det som förs in räknar listan klar, och en ny elev på en annan elevs rad är ny', /if \(redigering && \(d\.skatta \|\| d\.narvaro \|\| d\.bock \|\| d\.matt\)\) uppdateraElevlistan\('klar'\);/.test(sidan) && /let id = forra && namnenNastanLika\(forra\.namn, n\) \? forra\.id : undefined;/.test(sidan) && /sammaElev\(foreNamn\(id\)!, n\) \|\| namnenNastanLika\(foreNamn\(id\)!, n\)/.test(sidan));
+  }
   // En skolvecka har varit när fredagen är förbi, så att höstlovet i v. 44 inte varnar en lördag i v. 44 (C5).
   ska('en skolvecka har varit när fredagen är förbi', !s.skolveckanHarVarit('2026-10-26', '2026-10-30') && s.skolveckanHarVarit('2026-10-26', '2026-10-31'));
   ska('resultat i veckor som planen inte har visas inte', s.elevensResultat({ uppfoljning: [{ rad: 0, typ: 'vecka' }, { rad: 1, typ: 'efter' }], sistaPass: '2026-11-20' }, { '0-2026-11-27': '7 av 10', '0-2026-11-13': '5 av 10', '1-2026-12-04': '8 av 10' }).map((x) => x.nyckel).join() === '0-2026-11-13,1-2026-12-04');
@@ -428,12 +461,26 @@ if (tsMp) {
   ska('en serie: en skattning i en vecka utan lektion står kvar i texten', s.sammanstallningstext(info, p, smU).includes('Veckor utan vald lektion, mot målet ovan: medel 4, en skattning.') && s.sammanstallningstext(info, p, smU).includes('Rim: medel 2, en skattning.'), s.sammanstallningstext(info, p, smU));
   ska('ljudkollen är ett ord för en sak, och kollen står inte i spärren', s.arSaksord('Ljudkollen') && s.sakdelar('Gör ljudkollens uppgift 4.', [{ namn: 'Ljudkollen' }]).some((x) => x.sak === 0) && !s.olankadeSaker('Kollen på kartan, och kontrollen.', []).length);
   ska('utan serie jämförs första och senaste som förut', !sm.lektioner && sm.elever[0].forsta === sm.elever[0].skattningar[0] && s.riktningText(sm.elever[0]) === '2 till 3, framåt');
-  // Avslutet i sammanställningen och pdf:erna står i dåtid bara när insatsen är avslutad, som märket överst, också efter sista
-  // passet när läraren har valt Förläng insatsen (Samma sak överallt inför lanseringen, E2).
+  // Avslutet i sammanställningen och pdf:erna står i dåtid bara när insatsen är avslutad, som märket överst (Samma sak överallt
+  // inför lanseringen, E2). En insats som avslutades i förtid är avslutad tills förlängningen är gjord, också när Förläng
+  // insatsen är valt men inte längden, i planen, i listan med planerna och i sammanställningen (verifieringen, C15).
   {
     const tidigt = s.planera(tsMp, { ...val, slut: 8 });
-    const forlang = s.sammanstallning(tidigt, { utvardering: { beslut: 'forlang' } }, '2026-11-25'), avslutat = s.sammanstallning(tidigt, { utvardering: { beslut: 'avsluta' } }, '2026-11-25');
-    ska('avslutet i sammanställningen följer läget', forlang.slut && !forlang.avslutad && s.sammanstallningstext(info, tidigt, forlang).includes('Insatsen avslutas i vecka 3') && avslutat.avslutad && s.sammanstallningstext(info, tidigt, avslutat).includes('Insatsen avslutades i vecka 3'), [forlang.avslutad, avslutat.avslutad]);
+    const utan = s.sammanstallning(tidigt, {}, '2026-11-25'), forlang = s.sammanstallning(tidigt, { utvardering: { beslut: 'forlang' } }, '2026-11-25'), avslutat = s.sammanstallning(tidigt, { utvardering: { beslut: 'avsluta' } }, '2026-11-25');
+    ska('avslutet i sammanställningen följer läget', utan.slut && !utan.avslutad && s.sammanstallningstext(info, tidigt, utan).includes('Insatsen avslutas i vecka 3') && avslutat.avslutad && s.sammanstallningstext(info, tidigt, avslutat).includes('Insatsen avslutades i vecka 3'), [utan.avslutad, avslutat.avslutad]);
+    const kopian = { id: 'tid001', metod: 'textsamtal-i-grupp', titel: ts.titel, val: s.kodaVal({ ...val, slut: 8 }), folj: true, foljd: { utvardering: { beslut: 'forlang' } }, andrad: '2026-11-20', schema: { pass: tidigt.pass.map((p) => [p.datum, p.vecka, p.nr]), veckor: tidigt.veckor.map((v) => [v.nr, v.innehall, 0, v.mandag, s.plusDagar(v.mandag, 4)]) } };
+    const lagret = await import('../src/scripts/insatser-lagring.ts');
+    ska('en insats som avslutades i förtid är avslutad tills förlängningen är gjord', forlang.avslutad && s.sammanstallningstext(info, tidigt, forlang).includes('Insatsen avslutades i vecka 3') && s.insatsenAvslutad('2026-11-18', 'forlang', '2026-11-25', undefined, undefined, true) && !s.insatsenAvslutad('2026-11-18', 'forlang', '2026-11-25') && lagret.statusAv(kopian, '2026-11-25') === 'avslutad' && lagret.statusAv({ ...kopian, val: s.kodaVal(val) }, '2026-11-25') !== 'avslutad', [forlang.avslutad, lagret.statusAv(kopian, '2026-11-25')]);
+  }
+  // Texten till åtgärdsprogrammet har avstämningens beslut och mening, med samma rad som sammanställningen och utan elevernas
+  // namn, som hjälptexten vid avstämningen säger (filerna inför lanseringen, C16).
+  {
+    const stamd = { elever: [{ id: 'e1', namn: 'Ali' }], avstamning: { beslut: 'justera', not: 'Ali behöver fler ledtrådar.' } };
+    const stamP = s.planera(tsMp, val), stamS = s.sammanstallning(stamP, stamd, '2026-12-01');
+    const stamRad = s.sammanstallningstext(info, stamP, stamS).split('\n').find((r) => r.startsWith('Avstämning mitt i insatsen'));
+    const stamAp = s.dokumentationstext({ ...info, adress: 'x' }, stamP, val, { minuter: 30, folj: true, avstamning: stamd.avstamning, elever: stamd.elever }).split('\n').find((r) => r.startsWith('Avstämning mitt i insatsen'));
+    const stamVecka = s.planveckansNamn(stamP, stamP.veckor[s.mittVeckan(stamP) - 1]).text;
+    ska('texten till åtgärdsprogrammet har avstämningen som sammanställningen', !!stamRad && stamAp === `Avstämning mitt i insatsen, ${stamVecka}: Justera insatsen. En elev behöver fler ledtrådar.` && stamRad.startsWith(`Avstämning mitt i insatsen, ${stamVecka}: Justera insatsen.`) && s.avstamningensRad('vecka 1', { beslut: 'fortsatt' })?.etikett === 'Avstämning mitt i insatsen, vecka 1' && s.avstamningensRad('', {}) === null, [stamRad, stamAp]);
   }
   const tomt = s.sammanstallning(p, {}, '2026-11-18');
   ska('en tom uppföljning går att sammanställa', tomt.gjorda === 0 && tomt.elever.length === 1 && tomt.elever[0].skattningar.length === 0 && s.sammanstallningstext(info, p, tomt).includes('Pass: Inga pass är bockade än. Planen har 18 pass.'));
@@ -826,6 +873,31 @@ if (tsMp) {
     const pdfKod = readFileSync(join(rot, 'src/scripts/lardigpdf.ts'), 'utf8');
     const k3Sparr = (ld, pdf) => !/skrivPlaner\(forut\)/.test(ld) && /bytPlanen\(/.test(ld) && /larDigetsStart\(aktiv\.val, m\)/.test(ld) && /Skattad en gång, \$\{s\.veckor\[i\]\.namn\.text\}/.test(pdf);
     ska('nr 1, 5 och 7: spärren i koden', k3Sparr(ldKod, pdfKod) && !k3Sparr(ldKod + 'skrivPlaner(forut)', pdfKod) && !k3Sparr(ldKod, pdfKod.replace('Skattad en gång, ${s.veckor[i].namn.text}', 'Skattad en gång')));
+    // Lagning 2, granskningen inför lanseringen (B11 till B17): tabellen och raden Klasserna med en borttagen klass, Efter
+    // efter ett avslut, axeln som slutar vid avslutet, tiden kring första lektionen, klasslistans besked, jul och nyår ur
+    // samma rot som Planera insatsen och pdf:ens datumrad ur planens spann. Prövade åt andra hållet.
+    const b11f = s.rensaFoljd({ klasser: [{ id: 'k3c', namn: '3C' }, { id: 'k4a', namn: '4A' }, { id: 'k3b', namn: '3B', borta: true }, { id: 'k5x', namn: '5X', borta: true }], klassvarden: { '2026-11-09': { k3b: 2, k3c: 5 } }, noter: { '2026-11-09': { k5x: 'En rad' } } });
+    const b11 = s.larDigSammanstallning(ep, eval0, b11f, '2026-11-18');
+    ska('B11: tabellen har varje klass i listan och en borttagen klass med skattningar märkt borttagen, och raden Klasserna säger samma sak', b11.klasstabell.rader.map((r) => `${r.etikett}:${r.varden.map((x) => x ?? '-').join('')}`).join(' ') === '3C:5 4A:- 3B, borttagen:2' && b11.klasserna === '3C och 4A. 3B och 5X är borttagna ur listan och står kvar med det du förde in.' && s.larDigetsKlasser(s.rensaFoljd({ klasser: [{ id: 'ka', namn: '7A' }] })) === '7A.' && s.larDigetsKlasser(tom) === '' && s.klassernasTabell(b11.veckor, s.rensaFoljd({ klasser: b11f.klasser })).rader.length === 0, [b11.klasstabell.rader, b11.klasserna]);
+    const b13 = s.larDigSammanstallning(ep, eval0, s.rensaFoljd({ matt: { [emp.skattningar[0].namn]: { [ep.veckor[0].mandag]: 4 } }, avslut: { datum: ep.veckor[1].mandag } }), '2026-12-20');
+    ska('B13: axeln i diagrammen slutar vid avslutet, och utan avslut har den alla stegen', b13.axel.length === 2 && b13.linjer.every((l) => l.varden.length === 2) && b13.axel[1].text === b13.veckor[1].namn.text && s.larDigSammanstallning(ep, eval0, tom, '2026-11-18').axel.length === ep.veckor.length, [b13.axel.map((x) => x.text), b13.linjer.map((l) => l.varden.length)]);
+    ska('B14: en rot för tiden kring första lektionen, Före när dagen har varit, och ingen fråga om en vecka som var slut innan planen gjordes', s.forstaLektionensMening('Första lektionen med eleverna', '2026-10-01', '2026-10-31', '2026-09-28') === 'Första lektionen med eleverna var torsdag 1 oktober, och stegen började v. 40.' && s.forstaLektionensMening('Första lektionen med eleverna', '2026-11-05', '2026-10-31') === 'Första lektionen med eleverna är torsdag 5 november.' && s.forensMening('2026-10-31', '2026-10-01', '2026-10-31') === 'Dagen har varit, så Före är förbi.' && s.forensMening('2026-10-31', '2026-11-20', '2026-10-31') === 'Före räcker från i dag till dess.' && s.forensMening('2026-10-20', '2026-11-20', '2026-10-31') === 'Före räcker från 20 oktober till dess.' && s.obesvaradVecka(ep, tom, '2026-12-12', '2026-12-12') === null && s.obesvaradVecka(ep, tom, '2026-12-12', '2026-11-04')?.mandag === '2026-11-30' && s.obesvaradVecka(ep, tom, '2026-12-12')?.mandag === '2026-11-30');
+    const koopMp = s.larDigetsMetodplan({ tid: koop.tid, period: koop.period, progression: koop.progression, uppfoljning: koop.uppfoljning, passen: koop.plan?.passen, skattningar: koop.plan?.skattningar }).plan;
+    const julPlan = s.planera(koopMp, s.larDigetsStart(s.larDigetsForval(koopMp, '2026-11-18'), '2026-12-07'));
+    ska('B16: jul och nyår ur en rot i båda lagren', s.julveckorna(julPlan.pass.map((x) => x.datum), '2026-11-18').join() === 'v. 52,v. 53,v. 1' && s.julensText(['v. 52', 'v. 53'], 'pass', 'under Lov') === 'Planen har pass i v. 52 och v. 53, vid jul och nyår, när de flesta skolor har jullov. Är det lov hos er, tryck på veckorna under Lov.' && s.julensText(['v. 1'], 'lektioner', 'under När du börjar').endsWith('tryck på veckan under När du börjar.') && s.julensText([], 'pass', 'under Lov') === '' && s.iJulen('2026-12-21') && s.iJulen('2027-01-06') && !s.iJulen('2027-01-07') && !s.iJulen('2026-12-20') && !s.julveckorna(['2026-12-22'], '2026-12-23').length, s.julveckorna(julPlan.pass.map((x) => x.datum), '2026-11-18'));
+    ska('B17: planens spann ur en rot, till stegens sista dag eller till avslutet', JSON.stringify(s.larDigetsSpann(ep, tom)) === '{"fran":"2026-11-09","till":"2026-12-04"}' && JSON.stringify(s.larDigetsSpann(ep, s.rensaFoljd({ avslut: { datum: '2026-11-18' } }))) === '{"fran":"2026-11-09","till":"2026-11-18"}' && s.larDigetsSpann(ep, s.rensaFoljd({ avslut: { datum: '2026-11-02' } })) === null && s.larDigetsSpann({ ...ep, veckor: [] }, tom) === null && JSON.stringify(s.larDigSammanstallning(ep, eval0, tom, '2026-11-18').spann) === JSON.stringify(s.larDigetsSpann(ep, tom)), s.larDigetsSpann(ep, tom));
+    const planeraKod = readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8');
+    const l2Sparr = (ld, pdf, pl) => {
+      const efter = del(ld, 'renderaEfter'), klass = del(ld, 'lasKlasslistan');
+      return /s\.klasserna \?/.test(ld) && /esc\(r\.etikett\)/.test(ld) && /if \(s\.klasserna\)/.test(pdf) && /namn: r\.etikett/.test(pdf) && !/info\.klasser/.test(pdf) // B11
+        && /const motesRader = avslutad \? \[\]/.test(efter) && /const efterRader = avslutad \? \[\]/.test(efter) && /s\.fas !== 'efter' && !avslutad/.test(efter) && /larDigetsAvslutText\(s\.avslut\)/.test(efter) // B12
+        && /const etiketter = s\.axel;/.test(ld) && /linje\.varden, s\.axel,/.test(ld) && /const etiketter = s\.axel;/.test(pdf) // B13
+        && !/'var' : 'är'/.test(ld) && !/startNamn\} är/.test(ld) && !/Första lektionen är \$\{/.test(ld) && !/Före räcker från \$\{/.test(ld) && (ld.match(/forstaLektionensMening\(/g) ?? []).length >= 3 && /forensMening\(/.test(ld) && /obesvaradVecka\(plan, aktiv\.foljd, idag, aktiv\.skapad\)/.test(ld) // B14
+        && /klasslistansBesked\(skrivet\)/.test(klass) && klass.indexOf('const skrivet = t.value') >= 0 && klass.indexOf('const skrivet = t.value') < klass.indexOf('t.value = ') // B15
+        && /julensText\(julveckorna\(plan\.pass/.test(ld) && /julveckorna\(plan\.pass/.test(pl) && /julensText\(julveckor,/.test(pl) && !/=== 12 && d >= 21/.test(ld + pl) // B16
+        && /datumspann\(s\.spann\.fran, s\.spann\.till\)/.test(ld) && /datumspann\(s\.spann\.fran, s\.spann\.till\)/.test(pdf) && !/skolveckan\(sista\)/.test(pdf); // B17
+    };
+    ska('B11 till B17: spärren i koden', l2Sparr(ldKod, pdfKod, planeraKod) && !l2Sparr(ldKod, pdfKod.replace('namn: r.etikett', 'namn: r.namn'), planeraKod) && !l2Sparr(ldKod.replace('const efterRader = avslutad ? []', 'const efterRader = false ? []'), pdfKod, planeraKod) && !l2Sparr(ldKod.replace('linje.varden, s.axel,', 'linje.varden, s.veckor.map((x) => x.namn),'), pdfKod, planeraKod) && !l2Sparr(ldKod + "`Före räcker från ${x}`", pdfKod, planeraKod) && !l2Sparr(ldKod.replace('idag, aktiv.skapad)', 'idag)'), pdfKod, planeraKod) && !l2Sparr(ldKod.replace('klasslistansBesked(skrivet)', 'klasslistansBesked(t.value)'), pdfKod, planeraKod) && !l2Sparr(ldKod, pdfKod, planeraKod + 'return (m === 12 && d >= 21)') && !l2Sparr(ldKod, pdfKod.replace('datumspann(s.spann.fran, s.spann.till)', 'datumspann(forsta, sista)'), planeraKod));
     // E6: fältet Första lektionen visar dagen ur roten (forstaLektionen, med forstaLektionensDag), som Din plan och pdf:en.
     const e6 = (ld) => /id="ld-start" value="\$\{esc\(forstaLektionen\(plan\)/.test(ld);
     ska('E6: fältet för första lektionen visar dagen ur roten', e6(ldKod) && !e6(ldKod.replace('value="${esc(forstaLektionen(plan)', 'value="${esc(aktiv.val.start')) && s.forstaLektionen(s.planera(emp, { ...eval0, start: '2026-11-14' })) === '2026-11-16');
@@ -1990,7 +2062,8 @@ const forbered = (blockera, fast = Date.UTC(2026, 10, 18, 9, 0, 0)) => `(() => {
   window.addEventListener('error', (e) => window.__fel.push(String(e.message)));
   ${blockera ? "Storage.prototype.getItem = () => { throw new Error('nej'); }; Storage.prototype.setItem = () => { throw new Error('nej'); };" : ''}
 })();`;
-async function flik(blockera = false, fast) {
+// fokus: false ger en flik där en knapp inte tar fokus från fältet, som verktyget i verifieringen inför lanseringen (C11).
+async function flik(blockera = false, fast, fokus = true) {
   let info;
   for (let i = 0; i < 40 && !info; i++) { await vanta(250); try { info = await (await fetch(`http://127.0.0.1:${port}/json/new?about:blank`, { method: 'PUT' })).json(); } catch { /* Chrome har inte startat än */ } }
   if (!info) throw new Error('Chrome svarade inte på DevTools-porten.');
@@ -2011,7 +2084,7 @@ async function flik(blockera = false, fast) {
   await skicka('Runtime.enable');
   // Fliken räknas som den läraren står i, så att fokus och blur kommer som i en riktig webbläsare (elevlistan sparar och
   // säger till när läraren lämnar fältet).
-  await skicka('Emulation.setFocusEmulationEnabled', { enabled: true });
+  if (fokus) await skicka('Emulation.setFocusEmulationEnabled', { enabled: true });
   await skicka('Page.addScriptToEvaluateOnNewDocument', { source: forbered(blockera, fast) });
   const kor = async (expression) => { const r = await skicka('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true }); if (r.result?.exceptionDetails) throw new Error(`${expression.slice(0, 80)}: ${r.result.exceptionDetails.exception?.description ?? r.result.exceptionDetails.text}`); return r.result?.result?.value; };
   return {
@@ -3634,6 +3707,108 @@ try {
   }
   sant('elevlistan: inga fel', !el.undantag.length && !(await el.kor('window.__fel.length')), el.undantag);
   el.stang();
+
+  // ---- Elevlistan och en dag med ett pass, som en lärare gör (verifieringen inför lanseringen, C11, C12 och C17) ----
+  // Eleverna skrivs in och skattas utan att fältet lämnas, eftersom en knapp som inte tar fokus från fältet lät redigeringen
+  // fortsätta: Dan skattas, tas bort och skrivs in igen sist i listan och har kvar skattningen efter omladdning; Eva skattas och
+  // byts mot Elsa på samma rad, och sidan frågar och skattningen följer inte med; Cem skattas och rättas till Cemal och behåller
+  // den. Sedan ställs ett pass in, ett annat pass flyttas till den dagen, och Ångra på dagen tar tillbaka flytten.
+  {
+    // Fliken har inget fokus, så att knapparna inte tar fokus från fältet och redigeringen bara slutar när sidan räknar den klar.
+    const vl = await flik(false, Date.UTC(2026, 10, 25, 9, 0, 0), false);
+    const vlAdress = `${PLAN}#${s.kodaVal(slutVal, { id: 'slut01' })}`;
+    await vl.oppna(PLAN);
+    await vl.kor(`localStorage.clear(); localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(slutlagrat))})`);
+    await vl.oppna(vlAdress);
+    const v4 = slutVeckor[3];
+    const vlPlan = `JSON.parse(localStorage.getItem('insatser')).planer.find((p) => p.id === 'slut01')`;
+    const vlElev = (namn) => vl.kor(`${vlPlan}.foljd.elever.find((e) => e.namn === ${JSON.stringify(namn)})?.id ?? null`);
+    const vlSkattning = (id) => vl.kor(`${vlPlan}.foljd.skattning[${JSON.stringify(v4)}]?.[${JSON.stringify(id ?? '')}] ?? null`);
+    const vlSkriv = async (text, paus = 700) => { await vl.kor(`(() => { document.getElementById('pl-andra').open = true; const t = document.getElementById('pl-elever'); t.focus(); t.value = ${JSON.stringify(text)}; t.dispatchEvent(new Event('input')); return true; })()`); await vanta(paus); };
+    const vlSkatta = async (id, varde) => { const ok = await vl.kor(`(() => { const b = document.querySelector('#pl-skatta [data-skatta^="${v4}|${id}"][aria-label^="${varde},"]'); if (!b) return false; b.click(); return true; })()`); await vanta(200); return ok; };
+    // C11: en elev som tas bort och skrivs in igen sist i listan får tillbaka det som förts in, också efter omladdning.
+    await vlSkriv('Ali\nDan\nBea\nSebastian Ek');
+    const dan = await vlElev('Dan');
+    const danSkattad = await vlSkatta(dan, 2);
+    await vlSkriv('Ali\nBea\nSebastian Ek');
+    await vlSkriv('Ali\nBea\nSebastian Ek\nDan');
+    await vl.kor(`document.getElementById('pl-elever').blur()`);
+    await vanta(250);
+    await vl.oppna(vlAdress);
+    sant('C11: en elev som tas bort och skrivs in igen sist i listan har kvar sin skattning efter omladdning', danSkattad && !!dan && (await vlElev('Dan')) === dan && (await vlSkattning(dan)) === 2, [dan, await vlElev('Dan'), await vlSkattning(dan)]);
+    // C12: ett annat namn på en skattad elevs rad är en ny elev, och sidan frågar; en rättning behåller skattningen.
+    await vlSkriv('Ali\nEva\nBea\nSebastian Ek\nDan\nCem');
+    const eva = await vlElev('Eva'), cem = await vlElev('Cem');
+    const skattade = (await vlSkatta(eva, 3)) && (await vlSkatta(cem, 4));
+    await vlSkriv('Ali\nElsa\nBea\nSebastian Ek\nDan\nCem');
+    const elsa = await vlElev('Elsa'), fragan = await vl.text('#pl-elever-fraga p');
+    sant('C12: ett annat namn på en skattad elevs rad är en ny elev, och sidan frågar', skattade && !!elsa && elsa !== eva && (await vlSkattning(elsa)) === null && (await vlSkattning(eva)) === 3 && fragan === 'Eva är borttagen och Elsa är ny i listan. Är Elsa samma elev som Eva, med rättat namn?', [eva, elsa, fragan]);
+    await vl.tryck('#pl-elever-fraga [data-ny-elev]');
+    // Ett namn som är början på ett annat, som Cem och Cemal eller Ali och Alina, är en ny elev tills läraren svarar, och Samma
+    // elev behåller id och skattning (Codex granskning 4 inför lanseringen, fynd 1: Alina fick Alis skattning utan fråga). En
+    // skattning räknar listan klar, så att varje namnbyte är en egen ändring med sin fråga.
+    await vlSkatta(elsa, 1);
+    await vlSkriv('Ali\nElsa\nBea\nSebastian Ek\nDan\nCemal');
+    const cemal = await vlElev('Cemal'), cemFragan = await vl.text('#pl-elever-fraga p');
+    await vl.tryck('#pl-elever-fraga [data-samma-elev]');
+    await vanta(200);
+    sant('C12: Cem som blir Cemal frågar, och Samma elev behåller id och skattning', cemal !== cem && (await vlSkattning(cemal)) === null && cemFragan === 'Cem är borttagen och Cemal är ny i listan. Är Cemal samma elev som Cem, med rättat namn?' && (await vlElev('Cemal')) === cem && (await vlSkattning(cem)) === 4, [cem, cemal, cemFragan, await vlElev('Cemal')]);
+    await vlSkatta(dan, 5);
+    await vlSkriv('Alina\nElsa\nBea\nSebastian Ek\nDan\nCemal');
+    const alina = await vlElev('Alina'), aliFragan = await vl.text('#pl-elever-fraga p');
+    sant('C12: Ali som blir Alina är en ny elev, och sidan frågar', !!alina && alina !== 'e1' && (await vlSkattning(alina)) === null && (await vlSkattning('e1')) === slutSkattning[3][0] && aliFragan === 'Ali är borttagen och Alina är ny i listan. Är Alina samma elev som Ali, med rättat namn?', [alina, aliFragan]);
+    sant('C11 och C12: inga fel', !vl.undantag.length && !(await vl.kor('window.__fel.length')), vl.undantag);
+    vl.stang();
+    // C17: ett pass ställs in, ett annat pass flyttas till den dagen, och Ångra på dagen tar tillbaka flytten, så att passet är
+    // tillbaka på sin dag och ingen dag har två pass.
+    const dg = await flik(false, Date.UTC(2026, 10, 25, 9, 0, 0));
+    await dg.oppna(PLAN);
+    await dg.kor('localStorage.clear()');
+    await dg.oppna(`${PLAN}#s=2026-11-30&d=135&l=6`);
+    await dg.tryck('#pl-spara');
+    await vanta(300);
+    await dg.tryck('#pl-veckor [data-vy="1"]');
+    const valjDg = (id, varde) => dg.kor(`(() => { const s = document.getElementById(${JSON.stringify(id)}); s.value = ${JSON.stringify(varde)}; s.dispatchEvent(new Event('change', { bubbles: true })); return s.value; })()`);
+    await dg.tryck('[data-gor="flytta"]');
+    await valjDg('pl-flytta-pass', '2026-12-04');
+    await dg.tryck('[data-gor="stall-in"]');
+    await vanta(200);
+    await dg.tryck('[data-gor="flytta"]');
+    await valjDg('pl-flytta-pass', '2026-12-02');
+    await valjDg('pl-flytta-dag', '2026-12-04');
+    await dg.tryck('[data-gor="flytta-klar"]');
+    await vanta(200);
+    const flyttat = await dg.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`);
+    await dg.tryck('#pl-veckan [data-angra="2026-12-04"]');
+    await vanta(200);
+    const efter = await dg.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`);
+    const dagarna = await dg.kor(`[...document.querySelectorAll('#pl-veckan .pl-passlista li:not(.bort):not(.struket) .pl-dag')].map((x) => x.firstChild?.textContent ?? '')`);
+    sant('C17: Ångra på en inställd dag dit ett pass har flyttats tar tillbaka flytten, och ingen dag har två pass', String(flyttat).includes('f=2026-12-02~2026-12-04') && !String(efter).includes('f=') && String(efter).includes('x=2026-12-04') && dagarna?.length === 2 && new Set(dagarna).size === 2 && (await dg.text('#pl-toast'))?.includes('Passet är tillbaka på onsdag 2 december'), [flyttat, efter, dagarna, await dg.text('#pl-toast')]);
+    // Codex granskning 4 inför lanseringen, fynd 2: onsdagens pass flyttas till den inställda fredagen och måndagens till den nu
+    // lediga onsdagen. Ångra på fredagen och Flytta tillbaka skulle då lägga två pass på onsdagen, så beskedet säger varför och
+    // inget ändras.
+    await dg.tryck('[data-gor="flytta"]');
+    await valjDg('pl-flytta-pass', '2026-12-02');
+    await valjDg('pl-flytta-dag', '2026-12-04');
+    await dg.tryck('[data-gor="flytta-klar"]');
+    await vanta(200);
+    await dg.tryck('[data-gor="flytta"]');
+    await valjDg('pl-flytta-pass', '2026-11-30');
+    await valjDg('pl-flytta-dag', '2026-12-02');
+    await dg.tryck('[data-gor="flytta-klar"]');
+    await vanta(200);
+    const tvaFlyttar = await dg.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`);
+    await dg.tryck('#pl-veckan [data-angra="2026-12-04"]');
+    await vanta(200);
+    const angraBesked = await dg.text('#pl-toast');
+    await dg.tryck('#pl-veckan [data-tillbaka="2026-12-02"]');
+    await vanta(200);
+    const tillbakaBesked = await dg.text('#pl-toast');
+    const dagarnaNu = await dg.kor(`[...document.querySelectorAll('#pl-veckan .pl-passlista li:not(.bort):not(.struket) .pl-dag')].map((x) => x.firstChild?.textContent ?? '')`);
+    sant('Ångra och Flytta tillbaka lägger aldrig två pass på en dag', String(tvaFlyttar).includes('f=2026-11-30~2026-12-02.2026-12-02~2026-12-04') && (await dg.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`)) === tvaFlyttar && angraBesked?.startsWith('Onsdag 2 december har nu pass 1.') && tillbakaBesked?.startsWith('Onsdag 2 december har nu pass 1.') && dagarnaNu?.length === 2 && new Set(dagarnaNu).size === 2, [tvaFlyttar, angraBesked, tillbakaBesked, dagarnaNu]);
+    sant('C17: inga fel', !dg.undantag.length && !(await dg.kor('window.__fel.length')), dg.undantag);
+    dg.stang();
+  }
 } catch (e) {
   sidfel.push(`provet av sidan avbröts: ${e.message}`);
 } finally {

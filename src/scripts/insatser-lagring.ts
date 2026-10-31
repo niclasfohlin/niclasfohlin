@@ -357,7 +357,8 @@ export function statusAv(p: SparadPlan, idag: string): Status {
   // annars Pågående, också efter stegen, där läraren skattar vidare (K-631; granskningen rot-3, fynd 3).
   if (samlingen(p) === 'metoder') return larDigetsLaget(larDigetsLagetsVarden(p), idag).lage;
   const datum = p.schema.pass.map((x) => x[0]).sort();
-  if (!datum.length || insatsenAvslutad(datum[datum.length - 1], p.foljd?.utvardering?.beslut, idag, p.foljd?.oppen, p.schema.sista)) return 'avslutad';
+  // En insats som avslutades i förtid är avslutad tills en förlängning är gjord, som på planens sida (insatsenAvslutad; C15).
+  if (!datum.length || insatsenAvslutad(datum[datum.length - 1], p.foljd?.utvardering?.beslut, idag, p.foljd?.oppen, p.schema.sista, !!lasVal(p.val)?.val.slut)) return 'avslutad';
   return datum[0] > idag ? 'kommande' : 'pagaende';
 }
 const STATUSORDNING: Record<Status, number> = { pagaende: 0, kommande: 1, avslutad: 2 };

@@ -276,7 +276,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Metodens vecka, när en stege börjar högre upp | `metodveckan`, och i metodens texter `veckornaIPlanen` |
 | Stegets namn, med ledet först, och stegens takt i Börja på | `stegetsNamnIPlanen` och `stegensTakt` |
 | Veckorna i en rubrik, "vecka 1–2", och i början av en tabellrad, "7–8 Gruppen väljer modell" | `veckorI` och `radensVeckor` |
-| Veckans pass och datumordningen, och en vecka där alla pass är inställda | `veckansPass`, `veckansDagar`, `efterDatum`, `iDatumordning` och `allaPassInstallda` |
+| Veckans pass och datumordningen, en vecka där alla pass är inställda, och en dag med ett pass, som en flytt och Ångra läser | `veckansPass`, `veckansDagar`, `efterDatum`, `iDatumordning`, `allaPassInstallda`, `passetPaDagen` och `flyttatHit` |
 | Ett datum, och dagarna mellan två datum | `datumText`, `dagOchManad`, `dagText`, `dagKort`, `spannKort`, `datumspann`, `arDatum` och `dagarMellan` |
 | Dagens datum | `idagLokalt` i `src/scripts/insatser-lagring.ts` |
 | Veckodagarna | `VECKODAGAR` och `veckodagKort` |
@@ -284,7 +284,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Passets delar som platser i passet, när de följer på varandra från minut 0, och en dels tid som en plats eller en längd | `delarIFoljd` och `delensTidI` |
 | Talen, och ett antal i ord | `talAv`, `talText`, `talIRegex`, `allaAntal`, `ORDNINGSTAL`, `antalText` och `veckorText` |
 | Texten | `stor`, `liten`, `mening`, `utanPunkt`, `decimal`, `tvasiffrigt`, `esc`, `skyddaRegex`, `rentText`, `forstaLedet`, `kortnamn`, `meningarna`, `slutarMedPunkt`, `allaTexter`, `forstaOrdet` och `somLista` |
-| Eleverna i elevlistan | `sammaElev` |
+| Eleverna i elevlistan, och ett namn som är nästan lika, en regel för elever och klasser | `sammaElev` och `namnenNastanLika` |
 | Passet på sidan och i kalendern, med tidsschemats varianter för vissa veckor, vissa pass och ett kortare pass | `passetsBeskrivning`, `delensTid`, `variantensMening`, `variantensNar`, `variantenFor`, `tidsschematsFel` och `varianternasFel` |
 | Var ett pass står i planen, som planens rader och varianterna läser det, och raderna som passet visar | `passetsLage`, `passetTraffas`, `narensVikt` och `passetsVisadeRoller` |
 | Ett pass med egen tabell, i tabellernas former | `tabellensDelar` |
@@ -311,11 +311,11 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | En plan i flera flikar och ur en äldre fil, i båda lagren: planens innehåll, vad fliken minns, när planen ändrades i ord, frågan före en äldre fil och beskedet när planen togs bort i en annan flik (`vidAndraFlikar` lyssnar efter de andra flikarna) | `planensInnehall`, `flikensPlan`, `andradText`, `filenErsatterNyare`, `filensFraga` och `BORTTAGEN_I_ANNAN_FLIK` i `src/scripts/insatser-lagring.ts` |
 | Lovet, låst när något är infört i veckan eller senare, och lovveckorna i en mening, i båda lagren | `lovetLast` och `lovetsText` |
 | En tabell per rad och kolumn, som klassernas skattning per vecka eller lärarens per instrument | `medVardet` |
-| Lär dig metoden: metodens plan ur sidans data, veckorna, fasen, veckan läraren är i, det som är infört, Gick det? och sammanställningen | `larDigetsMetodplan`, `larDigetsVeckor`, `efterStegen`, `larDigetsFas`, `larDigetsNu`, `forstaLektionen`, `forstaLektionensDag`, `larDigetsNamn`, `larDigetsLaget`, `larDigetsLagetFor`, `larDigetsSteg`, `efterStegensTakt`, `stegetsRad`, `harInfortEfter`, `svaraGickDet`, `gickDetsFoljd`, `obesvaradVecka`, `gickDetSvaret`, `klasserUrText`, `larDigSammanstallning`, `larDigetsRegler`, `larDigetsKvar`, `skalansAndar`, `granslinjensText` och `SKATTNINGARNAS_GRANS` |
-| Lär dig metoden: klassernas skattning och tabellen med klasserna vecka för vecka | `KLASSERNAS_SKALA`, `klassensFraga`, `klassernasTabell`, `klassernasSkalaText`, `klassenHarNagot` och `skalansAndarText` |
+| Lär dig metoden: metodens plan ur sidans data, veckorna, fasen, veckan läraren är i, första lektionen och Före med rätt tid, planens spann, det som är infört, Gick det? och sammanställningen | `larDigetsMetodplan`, `larDigetsVeckor`, `efterStegen`, `larDigetsFas`, `larDigetsNu`, `forstaLektionen`, `forstaLektionensDag`, `forstaLektionensMening`, `forensMening`, `larDigetsSpann`, `larDigetsNamn`, `larDigetsLaget`, `larDigetsLagetFor`, `larDigetsSteg`, `efterStegensTakt`, `stegetsRad`, `harInfortEfter`, `svaraGickDet`, `gickDetsFoljd`, `obesvaradVecka`, `gickDetSvaret`, `klasserUrText`, `larDigSammanstallning`, `larDigetsRegler`, `larDigetsKvar`, `skalansAndar`, `granslinjensText` och `SKATTNINGARNAS_GRANS` |
+| Lär dig metoden: klassernas skattning, tabellen med klasserna vecka för vecka och raden Klasserna | `KLASSERNAS_SKALA`, `klassensFraga`, `klassernasTabell`, `larDigetsKlasser`, `klassernasSkalaText`, `klassenHarNagot` och `skalansAndarText` |
 | Lär dig metoden: lärarens väg, listan med klasserna och kommentarernas längd, Före och ett steg till | `forlangSteget`, `larDigetsForval`, `FORE_VECKOR`, `EFTER_STEGEN_VAR`, `KLASSLISTANS_LANGD`, `KLASSENS_NAMN`, `KOMMENTARENS_LANGD`, `KLASSNOTENS_LANGD` och `regelnIOrd` |
 | Det som är infört, i båda samlingarna, och det senaste | `infordaDatum` och `sistaInfort` |
-| Skolveckan, måndag till fredag, och dess söndag, om den har varit, en period i ord, veckan efter planen förbi lov och veckorna att trycka som lov | `skolveckan`, `skolveckanHarVarit`, `skolveckansText`, `periodensText`, `forstaSkolveckanEfter`, `mandagarna`, `iSommarlovet` och `lovveckornaAttValja` |
+| Skolveckan, måndag till fredag, och dess söndag, om den har varit, en period i ord, veckan efter planen förbi lov, veckorna att trycka som lov och påminnelsen om jul och nyår i båda lagren | `skolveckan`, `skolveckanHarVarit`, `skolveckansText`, `periodensText`, `forstaSkolveckanEfter`, `mandagarna`, `iSommarlovet`, `lovveckornaAttValja`, `iJulen`, `julveckorna` och `julensText` |
 | Följderna i en lista, som pass 1–3, veckorna 1–2 och kalenderveckorna v. 48–49 | `foljderna` |
 | Dagen ur ett datum i en metods fil | `dagAv` |
 | Regeln som gällde i en vecka på linjen, och om linjen ritas | `regelnIVeckan` och `linjenRitas` |
@@ -325,7 +325,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Lär dig metoden: Mitt i stegen, veckan, låst när den har börjat, klassen med lägst snitt och frågan | `larDigetsMitt`, `larDigetsMittLast`, `klassenHittills`, `larDigetsMittI`, `mittIText`, `mittIFragan` och `MITT_I_LANGD` |
 | Lär dig metoden: avslutet i en mening | `larDigetsAvslutText` |
 | Byggstenarna i båda lagrens sidor: lovknappen, listorna, rutorna som fälls ut, Vad linjen säger, raden överst och avslutet | `lovknapp`, `etikettlista`, `fallut`, `linjensRegler`, `knappraden`, `lagesraden`, `avslutaKnappen`, `ANGRA_AVSLUTET`, `avslutsrutan`, `avslutsformularet`, `goatFor` och `remsansKnapp` i `src/scripts/byggstenar.ts`, och samlingens led i statistiken, `SAMLINGARNAS_LED` |
-| Passen och besluten | `passensRad`, `passensLage`, `narvaronText`, `narvaronKort`, `passensNarvaro`, `beslutText` och `BESLUTEN` |
+| Passen och besluten, och avstämningen i sammanställningen och texten till åtgärdsprogrammet | `passensRad`, `passensLage`, `narvaronText`, `narvaronKort`, `passensNarvaro`, `beslutText`, `avstamningensRad` och `BESLUTEN` |
 | Diagrammet | `stapelnsKant` och `prickarna` |
 | Målet | `malText`, `malensMening` och `kortetsMalFel` |
 | Saker med nummer, "Bildserie 2–6" | `sakspann` |

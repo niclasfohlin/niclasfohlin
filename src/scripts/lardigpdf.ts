@@ -5,13 +5,11 @@
 // Planera insatsens sammanställning (dokument i src/scripts/planpdf.ts), med pdf-lib, som hämtas först när läraren trycker,
 // och den lämnar aldrig enheten. Allt som räknas och varje mening som också står på sidan kommer ur standarden
 // (larDigSammanstallning och texterna under Lär dig metoden i src/lib/standard/plan.js).
-import { datumspann, linjenRitas, medDecimaler, gickDetSvaret, SKATTNINGARNAS_GRANS, klassernasSkalaText, larDigetsAvslutText, larDigetsKvar, larDigetsRegler, lovetsText, mening, mittIFragan, skalansAndar, skalansAndarText, skattningensGranser, skolveckan, granslinjensText, stegetsRad, uppraknat, type LarDigSammanstallning } from '../lib/standard/index.js';
+import { datumspann, linjenRitas, medDecimaler, gickDetSvaret, SKATTNINGARNAS_GRANS, klassernasSkalaText, larDigetsAvslutText, larDigetsKvar, larDigetsRegler, lovetsText, mening, mittIFragan, skalansAndar, skalansAndarText, skattningensGranser, granslinjensText, stegetsRad, type LarDigSammanstallning } from '../lib/standard/index.js';
 import { dokument } from './planpdf';
 
 export interface LarDigPdfInfo {
   metod: string;
-  /** Lärarens klasser och grupper, de som står i listan. */
-  klasser: string[];
   /** Progressionens rubriker, stegens namn i metodens ordning. */
   steg: string[];
   /** Stegens fråga till Gick det? i samma ordning, eller tom när steget inte har någon. */
@@ -26,20 +24,21 @@ export interface LarDigPdfInfo {
 /** Lärarens sammanställning som pdf. */
 export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, idag: string): Promise<Uint8Array> {
   const p = await dokument(`Lär dig metoden: ${info.metod}`, 'Lär dig metoden, niclasfohlin.se');
-  // Perioden till och med veckan läraren är i, eller veckan läraren avslutade planen (s.dag), så att veckor som inte har varit
-  // inte står med.
-  const forsta = s.veckor[0]?.mandag, sista = s.veckor.filter((v) => v.mandag <= s.dag).at(-1)?.mandag;
-  p.huvudet('Lär dig metoden', info.metod, forsta && sista ? datumspann(forsta, s.avslut && s.dag < skolveckan(sista).till ? s.dag : skolveckan(sista).till) : '', idag);
+  // Planens spann, från första lektionen till det sista stegets sista dag eller dagen läraren avslutade planen, som på sidan
+  // (larDigetsSpann i standarden; filerna inför lanseringen, B17: raden slutade på i dag mitt i planen).
+  p.huvudet('Lär dig metoden', info.metod, s.spann ? datumspann(s.spann.fran, s.spann.till) : '', idag);
   if (s.avslut) { p.rubrik('Avslutet', 30); p.text(larDigetsAvslutText(s.avslut), { luft: 2 }); }
   if (s.mal) { p.rubrik('Ditt mål', 30); p.text(mening(s.mal), { luft: 2 }); }
-  if (info.klasser.length) { p.rubrik('Klasserna', 30); p.text(mening(uppraknat(info.klasser)), { luft: 2 }); }
+  // Klasserna i listan och de borttagna som står kvar med det läraren förde in, som tabellen visar (larDigetsKlasser; B11).
+  if (s.klasserna) { p.rubrik('Klasserna', 30); p.text(s.klasserna, { luft: 2 }); }
   p.rubrik('Stegen', 60);
   // Stegen som läraren har tagit, med det som pågår, och stegen som är kvar på en rad (larDigSammanstallning).
   for (const x of s.stegen) p.text(stegetsRad(x, info.steg), { luft: 2 });
   const kvar = larDigetsKvar(s, info.steg);
   if (kvar) p.text(kvar, { luft: 4 });
   if (s.lov.length) p.not(lovetsText(s.lov));
-  const etiketter = s.veckor.map((v) => v.namn);
+  // Axeln slutar vid avslutet, som på sidan (B13).
+  const etiketter = s.axel;
   // Rubriken står på samma sida som skalans rad och linjen under den. Linjen har sidans hela bredd, skalans ändar står före
   // den och den streckade linjen förklaras under den (de kalla läsarna 2026-10-30).
   for (const [j, l] of s.linjer.entries()) {
@@ -57,11 +56,12 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
     const rader = [...new Set(regler.map((r) => r.rad))];
     p.tabell(rader.map((r) => ({ etikett: info.uppfoljning[r]?.nar ?? '', text: mening(info.uppfoljning[r]?.vad ?? '') })));
   }
-  // Klasserna vecka för vecka (klassernasTabell), med talet i varje ruta och klassens snitt sist, som på sidan.
+  // Klasserna vecka för vecka (klassernasTabell), varje klass i listan och en borttagen märkt som borttagen, med talet i varje
+  // ruta och klassens snitt sist, som på sidan.
   if (s.klasstabell.rader.length) {
     p.rubrik('Klasserna vecka för vecka', 80);
     p.not(klassernasSkalaText());
-    p.matris(s.klasstabell.veckor.map((i) => s.veckor[i].namn), s.klasstabell.rader.map((r) => ({ namn: r.namn, varden: r.varden, sist: r.snitt === null ? '' : medDecimaler(r.snitt) })), { sist: 'Snitt' });
+    p.matris(s.klasstabell.veckor.map((i) => s.veckor[i].namn), s.klasstabell.rader.map((r) => ({ namn: r.etikett, varden: r.varden, sist: r.snitt === null ? '' : medDecimaler(r.snitt) })), { sist: 'Snitt' });
   }
   // Svaren Mitt i, under en rubrik med klassen.
   for (const x of s.mittSvar) {
