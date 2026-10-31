@@ -1,6 +1,6 @@
 import rss, { type RSSFeedItem } from '@astrojs/rss';
 import { site } from '../data/site';
-import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn } from './innehall';
+import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn, publicerade } from './innehall';
 
 export async function artikelPoster(): Promise<RSSFeedItem[]> {
   const artiklar = await artiklarSorterade();
@@ -21,6 +21,18 @@ export async function metodPoster(): Promise<RSSFeedItem[]> {
     pubDate: m.data.uppdaterad ?? new Date(0),
     link: `/stodundervisning/${m.id}`,
     categories: [m.data.omrade, ...m.data.taggar],
+  }));
+}
+
+/** Metoderna för hela klassen i Metoder (K-645), med publiceringsdagen. */
+export async function undervisningsmetodPoster(): Promise<RSSFeedItem[]> {
+  const metoder = await publicerade('undervisningsmetoder');
+  return metoder.map((u) => ({
+    title: `${u.data.titel} (metod för hela klassen)`,
+    description: u.data.ingress,
+    pubDate: u.data.publicerad,
+    link: `/metoder/${u.id}`,
+    categories: u.data.taggar,
   }));
 }
 

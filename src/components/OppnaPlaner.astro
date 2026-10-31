@@ -1,0 +1,19 @@
+---
+// Knappen som öppnar nedladdade planer, en form för planens sidor (PlanFilen.astro) och för bankerna och appens sida
+// (PlanernasKnappar.astro): filfältet tar en zip, en fil eller flera filer, och under knappen står filernas slag i liten grå
+// text (PLANFILERNAS_SLAG; Niclas 2026-10-31: "liten finstilt text under Öppna planer", och "Tänk på en rot. Därför så viktigt
+// för att inte få drift på modulen"). Sidans skript binder fältet med id eller med data-alla-oppna.
+import { PLANFILERNAS_SLAG } from '../lib/standard/index.js';
+
+interface Props {
+  /** Knappens text, Öppna en nedladdad plan eller Öppna planer. */
+  text: string;
+  /** Filfältets id på planens sidor; utan id får fältet data-alla-oppna, som bankerna och appens sida. */
+  id?: string;
+  /** Statistikens namn och titel för trycket. */
+  goat: string;
+  goatTitel: string;
+}
+const { text, id, goat, goatTitel } = Astro.props;
+---
+<span class="pl-filval"><label class="knapp sekundar liten pl-filknapp" data-goatcounter-click={goat} data-goatcounter-title={goatTitel}>{text}<input type="file" id={id} data-alla-oppna={id ? undefined : ''} accept=".json,.zip,application/json,application/zip" multiple class="visually-hidden" /></label><span class="pl-filslag">{PLANFILERNAS_SLAG}</span></span>

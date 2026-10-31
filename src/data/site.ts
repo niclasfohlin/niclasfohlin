@@ -2,7 +2,7 @@
 export const site = {
   namn: 'Niclas Fohlin',
   url: 'https://niclasfohlin.se',
-  beskrivning: 'Texter om skolan, böcker om undervisning och metoder för stödundervisning i läsning, skrivning och matematik.',
+  beskrivning: 'Texter om skolan, böcker om undervisning och metoder för hela klassen och för stödundervisning i läsning, skrivning och matematik.',
   // Kort rad under namnet i sidhuvud och på startsidan.
   rad: 'Speciallärare, specialpedagog, författare och föreläsare',
   epost: 'niclas.fohlin@gmail.com',
@@ -16,7 +16,7 @@ export const site = {
     stodundervisning: { titel: 'Stödundervisning', beskrivning: 'Metodbank för stödundervisning i matematik, läsning, skrivning och socialt samspel. Varje metod har körschema, exempelfraser och mallar, och går att skriva ut och ladda ner som Word-fil.' },
     // Undervisningsmetoderna för helklass (K-621, K-623; Niclas 2026-10-29: "Den ska på sajten vara efter Stödundervisning
     // och ha en liknande sida"). Standarden skrivs med metodriggen, och sidan är ett utkast tills den är godkänd.
-    metoder: { titel: 'Metoder', beskrivning: 'Undervisningsmetoder för helklass, som direktinstruktion och kooperativt lärande. Varje metod visar vad forskningen säger, vad som bär effekten och hur en lektion går till, med mallar att planera med.' },
+    metoder: { titel: 'Metoder', beskrivning: 'Undervisningsmetoder för hela klassen, som explicit undervisning och kooperativt lärande. Varje metod visar vad forskningen säger, vad som bär effekten och hur en lektion går till, med mallar att planera med.' },
     om: { titel: 'Om Niclas Fohlin', beskrivning: 'Niclas Fohlin är samordnande specialpedagog på AcadeMedias grundskolor, speciallärare, författare och föreläsare.' },
     prenumerera: { titel: 'Prenumerera', beskrivning: 'Få ett mejl när det kommer nya texter, böcker eller metoder.' },
     taggar: { titel: 'Taggar', beskrivning: 'Alla ämnen som texterna och metoderna är taggade med.' },

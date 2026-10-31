@@ -560,7 +560,7 @@ uppfoljning:
       tid: "före"
       perElev: 5
       vad: "Gör kartläggningen veckan före kursen. Uppgift 2, 3 och 5 gör ni i hela gruppen på omkring 25 minuter. En annan dag efter diktamen i uppgift 3 gör du uppgift 1 och 4 med en elev i taget, så att eleven inte har läst orden i uppgift 1 före diktamen. Det tar omkring fem minuter per elev. Läser eleven redan minst 14 av 16 ord rätt i uppgift 1, stavar minst 6 av 8 ord rätt i uppgift 3 och har minst 6 av 8 poäng i uppgift 4, behöver hen inte gå kursen."
-      resultat: "uppgift 1 av 16, uppgift 2 och 4 av 8 var, uppgift 3 ord av 8 och delar av 19"
+      resultat: "uppgift 1: ord av 16; 2 och 4: poäng av 8; 3: ord av 8 och delar av 19"
     - nar: Efter varje pass
       tid: "varje pass"
       vad: Skriv i protokollet.
@@ -572,7 +572,7 @@ uppfoljning:
       tid: "efter"
       perElev: 5
       vad: "Gör kartläggningen igen veckan efter kursen, med samma ord och i samma ordning som före kursen. Först gör ni uppgift 2, 3 och 5 i hela gruppen, och en annan dag gör du uppgift 1 och 4 med en elev i taget, omkring fem minuter per elev. Jämför poängen och svaren med dem före kursen, och skriv vad eleven behöver nu. Ge klassläraren resultatet."
-      resultat: "uppgift 1 av 16, uppgift 2 och 4 av 8 var, uppgift 3 ord av 8 och delar av 19"
+      resultat: "uppgift 1: ord av 16; 2 och 4: poäng av 8; 3: ord av 8 och delar av 19"
 
 plan:
   # Planen visas när den har klarat Rimligheten (K-553).

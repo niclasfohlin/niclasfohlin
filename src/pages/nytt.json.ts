@@ -1,11 +1,15 @@
 import type { APIRoute } from 'astro';
-import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn } from '../lib/innehall';
+import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn, publicerade } from '../lib/innehall';
 import { byggSerier, lektionsnamn } from '../lib/serie';
 import { arskursText } from '../lib/metod';
 import { metodensCentrala } from '../lib/centrala';
 import { LEKTIONSKORT_MEJL, metodensLektionskort } from '../lib/lektionskort';
+import { metodensSidor } from '../lib/lardig';
+import type { Um } from '../lib/undervisningsmetod';
 
-// Maskinläsbar lista över allt som är publicerat: artiklar, metoder och böcker.
+// Maskinläsbar lista över allt som är publicerat: artiklar, metoder i Stödundervisning, metoder för hela klassen i Metoder och
+// böcker (Niclas 2026-10-31: "En ny metod ska också trigga Brevo"; scripts/cacheprov.mjs stannar på en samling med sidor
+// som inte står här).
 // Byggpluginen netlify/plugins/utskick läser den efter varje lyckad deploy (via
 // netlify/functions/utskick.mjs och netlify/lib/utskick.mjs) och mejlar
 // prenumeranterna om det som tillkommit. Utkast är redan bortfiltrerade i produktion.
@@ -14,7 +18,7 @@ import { LEKTIONSKORT_MEJL, metodensLektionskort } from '../lib/lektionskort';
 // En metod med skrivkort har sidan som slumpar dem som en egen rad i brevet (lankar; Niclas 2026-10-14: sidan ska stå
 // tydligt i mejlet som skickas).
 export const GET: APIRoute = async () => {
-  const [artiklar, metoder, bocker] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade()]);
+  const [artiklar, metoder, bocker, undervisningsmetoder] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade(), publicerade('undervisningsmetoder')]);
   const serier = byggSerier(metoder);
   const poster = [
     ...artiklar.map((a) => ({
@@ -39,6 +43,20 @@ export const GET: APIRoute = async () => {
         // Lektionskorten (src/lib/lektionskort.ts) får en rad var efter de centrala sakerna.
         ...(metodensCentrala(m.data).length || m.data.lektionskort.length ? { lankar: [...metodensCentrala(m.data).map((c) => ({ url: c.adress, text: c.namn, efter: c.mejl })), ...metodensLektionskort(m.data, m.id).map((k) => ({ url: k.adress, text: k.knapp, efter: LEKTIONSKORT_MEJL }))] } : {}),
         ...(serie ? { serie: { url: `/stodundervisning/${serie.id}`, titel: serie.titel }, namn: lektionsnamn(m.data.titel), ordning: serie.lektioner.findIndex((l) => l.id === m.id), ord: { den: serie.ord.den, flera: serie.ord.flera } } : {}),
+      };
+    }),
+    ...undervisningsmetoder.map((u) => {
+      // Lär dig metoden och lathunden får en rad var med länken efter ingressen, som de centrala sakerna i Stödundervisning,
+      // ur samma rot som bankens kort (metodensSidor i src/lib/lardig.ts).
+      const sidor = metodensSidor(u.id, u.data as Um);
+      return {
+        typ: 'metod',
+        etikett: `Ny metod för hela klassen, ${u.data.arskursText ?? u.data.arskurs.join(', ')}`.replace(/⁠/g, ''),
+        url: `/metoder/${u.id}`,
+        titel: u.data.titel,
+        ingress: u.data.ingress,
+        datum: u.data.publicerad.toISOString().slice(0, 10),
+        ...(sidor.length ? { lankar: sidor.map((s) => ({ url: s.href, text: s.text, efter: s.mejl })) } : {}),
       };
     }),
     ...bocker.map((b) => ({

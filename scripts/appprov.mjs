@@ -5,7 +5,7 @@
 // | Manifestet | Namnen, start_url /app, scope /, id /stodundervisning, display standalone och ikonerna i 192 och 512 punkter, också den maskbara (https://web.dev/articles/install-criteria), ur src/lib/appen.ts |
 // | Ikonerna | Varje bild finns och har sitt mått, och iPhones ikon på 180 punkter |
 // | Sidhuvudet | Sidorna under /app, /stodundervisning och /metoder har manifestet, appens ikon, namnet Metodbanken och data-appdel; en artikel har sajtens ikon och inget manifest. Raden Hem står på varje sida utom /app |
-// | Appens sida | /app har en egen titel och beskrivning, ingen spärr för sökmotorerna, står i sajtkartan och har de två bankerna, erbjudandet och listorna för båda samlingarna |
+// | Appens sida | /app har en egen titel och beskrivning, ingen spärr för sökmotorerna, står i sajtkartan och har de två bankerna, erbjudandet och listorna för båda samlingarna, med ett par knappar under dem som laddar ner och öppnar planerna i båda; bankernas namn har luft till knappens kant i 320 till 390 punkter, och banken i raden tom är en länk i meningen |
 // | Länken | Bankerna, Planera insatsen och Lär dig metoden har länken Appen Metodbanken till /app och inte längre erbjudandet |
 // | Beskedet | webblasarensBesked i src/scripts/webblasaren.ts: Safari i iPhone och iPad, en apps webbläsare, appen, Chrome i Android och en dator |
 // | Service workern | /sw-stod.js finns, med delarna ur src/lib/appen.ts och en cacheregel i netlify.toml |
@@ -85,6 +85,8 @@ ska('appens sida har en egen titel och beskrivning', appen.includes(`<title>${AP
 ska('appens sida har ingen spärr för sökmotorerna och står i sajtkartan', !appen.includes('noindex') && readdirSync(dist).filter((f) => /^sitemap-\d+\.xml$/.test(f)).some((f) => las(f).includes('<loc>https://niclasfohlin.se/app</loc>')));
 ska('appens sida har Stöd och Metoder överst', /<nav class="app-val"[^>]*>\s*<a class="app-valet" href="\/stodundervisning"[\s\S]*?>Stöd<[\s\S]*?<a class="app-valet" href="\/metoder"[\s\S]*?>Metoder</.test(appen));
 ska('appens sida har erbjudandet och listorna för båda samlingarna', appen.includes('data-app ') && appen.includes('data-samling="stodundervisning" data-plats="app"') && appen.includes('data-samling="metoder" data-plats="app"'));
+// Ett par knappar på appens sida, Ladda ner planer och Öppna planer, för båda samlingarna (lagningen inför lanseringen, A1).
+ska('appens sida har ett par knappar, Ladda ner planer och Öppna planer, efter båda listorna', (appen.match(/data-alla-ner/g) ?? []).length === 1 && (appen.match(/data-alla-oppna/g) ?? []).length === 1 && appen.lastIndexOf('data-samling="metoder"') < appen.indexOf('data-alla-planer'), [(appen.match(/data-alla-ner/g) ?? []).length, (appen.match(/data-alla-oppna/g) ?? []).length]);
 // Länken till appen ersätter erbjudandet på bankerna och i planens sidor.
 for (const [namn, fil] of Object.entries(SIDOR)) {
   if (!fil || ['appen', 'en metod'].includes(namn)) continue;
@@ -112,6 +114,22 @@ ska('service workern har ingen cache i netlify.toml', /for = "\/sw-stod\.js"\s+\
   ska('beskedet: Facebooks webbläsare i iPhone får vägen ut och inte Safaris besked', besked(`${IOS.replace(' Safari/604.1', '')} [FBAN/FBIOS;FBAV/485.0]`)?.slag === 'appens');
   ska('beskedet: inget i appen', besked(IOS, { iAppen: true }) === null);
   ska('beskedet: inget i Chrome i Android och på en dator', besked('Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36') === null && besked('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36') === null);
+}
+// Den gamla appen Stöd (Niclas 2026-10-31): beskedet om att flytta till Metodbanken visas bara i en app i iPhone eller iPad som
+// startade i /stodundervisning, inte i Metodbanken, inte i Android, där Chrome uppdaterar appen, och inte i Safari. En rot för
+// känneteckenet och texten (webblasaren.ts), och bara appdelen.ts ritar beskedet.
+{
+  const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1';
+  const ANDROID = 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36';
+  const gamla = (start, ua, app) => w.arGamlaAppen(start, w.webblasaren(ua, { iAppen: app }), app);
+  const kallor = ['appdelen.ts', 'byggstenar.ts', 'planera.ts', 'lardig.ts', 'insatser.ts', 'appen.ts'].filter((f) => readFileSync(join(rot, 'src', 'scripts', f), 'utf8').includes('GAMLA_APPEN'));
+  ska('den gamla appen: beskedet i en app i iPhone som startade i Stöd, och inte i Metodbanken, Android eller Safari, med en rot och en som ritar', gamla('/stodundervisning', IPHONE, true) && gamla('/stodundervisning/til-i-grupp/planera', IPHONE, true) && !gamla('/app', IPHONE, true) && !gamla('/stodundervisning', ANDROID, true) && !gamla('/stodundervisning', IPHONE, false) && w.GAMLA_APPEN.steg.length === 3 && kallor.join() === 'appdelen.ts', kallor);
+}
+// Varaktig lagring (Niclas 2026-10-31): sparandet ber om den, också i Firefox, där läraren får frågan efter att ha sparat,
+// och en sida i appens delar ber om den när planer är sparade, utan att Firefox frågar när sidan öppnas.
+{
+  const kallan = (fil) => readFileSync(join(rot, 'src', 'scripts', fil), 'utf8');
+  ska('varaktig lagring: sparandet ber om den med frågan, och appens delar utan', kallan('insatser-lagring.ts').includes('begarVaraktigLagring({ fraga: true })') && /begarVaraktigLagring\(\);/.test(kallan('appdelen.ts')) && kallan('webblasaren.ts').includes('(fragar && !o.fraga)'));
 }
 if (fel.length) { console.error(`appprov: ${fel.length} fel:\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`appprov: manifestet, ikonerna, sidhuvudet, appens sida, länken, beskedet och service workern.`);
@@ -195,6 +213,11 @@ const PLANERNA = `(() => {
   return true;
 })()`;
 
+// Paret knappar under listorna på appens sida (src/components/PlanernasKnappar.astro), och om listorna har egna knappar.
+const PARET = `(() => { const b = document.querySelector('[data-alla-planer]'); return b && { syns: !b.hidden, ner: !b.querySelector('[data-alla-ner]').hidden, oppna: !!b.querySelector('[data-alla-oppna]'), iListorna: document.querySelectorAll('.pl-insatser [data-alla-ner], .pl-insatser [data-alla-oppna]').length }; })()`;
+// Luften mellan bankens namn och knappens kant på appens sida, i punkter (A8: Metoder gick ut till kanten i 320).
+const LUFTEN = `Math.min(...[...document.querySelectorAll('.app-valets-namn')].map((e) => { const r = document.createRange(); r.selectNodeContents(e); return Math.round(e.closest('.app-valet').getBoundingClientRect().right - r.getBoundingClientRect().right); }))`;
+
 let stangd = false;
 try {
   // En dator: erbjudandet först när Chrome erbjuder installation.
@@ -245,15 +268,34 @@ try {
   ska('iPhone: erbjudandet med Visa hur, utan rad om planer när inga är sparade', iphone?.syns && iphone.knapp === 'Visa hur' && iphone.expanderad === 'false' && !iphone.steg && !iphone.not, iphone);
   await f.kor(`document.querySelector('[data-app-knapp]').click()`);
   ska('iPhone: Visa hur fäller ut stegen', (await f.rad())?.steg === true && (await f.rad())?.expanderad === 'true', await f.rad());
-  // Listorna utan planer: raden om var planerna görs och Öppna planer, utan Ladda ner planer.
-  const tomma = await f.kor(`[...document.querySelectorAll('.pl-insatser')].map((l) => ({ syns: !l.hidden, tom: l.querySelector('[data-tom]')?.hidden === false ? l.querySelector('[data-tom]').textContent.trim() : '', ner: !l.querySelector('[data-alla-ner]').hidden }))`);
-  ska('appens sida utan planer: båda listorna säger var planerna görs, med Öppna planer', tomma?.length === 2 && tomma.every((x) => x.syns && x.tom && !x.ner) && tomma[0].tom.startsWith('Inga insatser än.') && tomma[1].tom.startsWith('Inga planer än.'), tomma);
+  // Listorna utan planer: raden om var planerna görs, med banken som en länk i meningen (lagningen inför lanseringen, A2:
+  // länken stod på en egen rad utan länkens färg), och under listorna ett par knappar med Öppna planer, utan Ladda ner planer.
+  const tomma = await f.kor(`[...document.querySelectorAll('.pl-insatser')].map((l) => ({ syns: !l.hidden, tom: l.querySelector('[data-tom]')?.hidden === false ? l.querySelector('[data-tom]').textContent.trim() : '', lanken: (() => { const a = l.querySelector('[data-tom] a'); return a ? getComputedStyle(a).display + ' ' + getComputedStyle(a).paddingLeft : ''; })() }))`);
+  ska('appens sida utan planer: båda listorna säger var planerna görs, med banken som en länk inne i meningen', tomma?.length === 2 && tomma.every((x) => x.syns && x.tom && x.lanken === 'inline 0px') && tomma[0].tom.startsWith('Inga insatser än.') && tomma[1].tom.startsWith('Inga planer än.'), tomma);
+  const knapparnaTom = await f.kor(PARET);
+  ska('appens sida utan planer: ett par knappar under listorna, med Öppna planer och utan Ladda ner planer', knapparnaTom?.syns && !knapparnaTom.ner && knapparnaTom.oppna && knapparnaTom.iListorna === 0, knapparnaTom);
   await f.kor(PLANERNA);
   await f.oppna(`${bas}/app`);
   ska('iPhone: med sparade planer säger erbjudandet hur de flyttas till appen', (await f.rad())?.not.includes('Ladda ner planer här och Öppna planer i appen'), await f.rad());
+  // Ett par knappar för båda samlingarna (A1: två par med samma namn gav två zip-filer, och den som flyttade med det första
+  // lämnade planen i Lär dig metoden kvar i Safari): Ladda ner planer ger en zip med planerna i båda samlingarna.
+  const paret = await f.kor(PARET);
+  ska('appens sida: ett par knappar under båda listorna, och inga knappar i listorna', paret?.syns && paret.ner && paret.oppna && paret.iListorna === 0, paret);
+  const zipen = await f.kor(`(async () => {
+    let blob, namn;
+    const skapa = URL.createObjectURL; URL.createObjectURL = (b) => { blob = b; return skapa(b); };
+    const klick = HTMLAnchorElement.prototype.click; HTMLAnchorElement.prototype.click = function () { namn = this.download; };
+    document.querySelector('[data-alla-planer] [data-alla-ner]').click();
+    URL.createObjectURL = skapa; HTMLAnchorElement.prototype.click = klick;
+    const text = blob ? await blob.text() : '';
+    return { namn, samlingar: [...new Set([...text.matchAll(/"samling": ?"(\\w+)"/g)].map((m) => m[1]))].sort().join(' '), planer: [...new Set([...text.matchAll(/"id": ?"(prov\\d+)"/g)].map((m) => m[1]))].length };
+  })()`);
+  ska('appens sida: Ladda ner planer ger en zip med alla planer i båda samlingarna', /^alla-planer-metodbanken-\d{4}-\d{2}-\d{2}\.zip$/.test(zipen?.namn ?? '') && zipen.samlingar === 'metoder stodundervisning' && zipen.planer === 4, zipen);
   // Appens sida med stegen utfällda och planerna rullar inte i sidled i 320 och 360 punkter.
   await f.kor(`document.querySelector('[data-app-knapp]').click()`);
   ska('appens sida rullar inte i sidled i 320 och 360 punkter', (await f.bredd(320)) && (await f.bredd(360)));
+  // Bankens namn har minst knappens egen luft, 16 punkter, till kanten i varje bredd.
+  for (const b of [320, 360, 390]) { await f.bredd(b); ska(`appens sida: bankernas namn har luft till knappens kant i ${b} punkter`, (await f.kor(LUFTEN)) >= 16, await f.kor(LUFTEN)); }
   await f.bredd(390);
   if (planbara.length) {
     // Beskedet i Planera insatsen, och knappen till /app med stegen utfällda.
@@ -296,11 +338,12 @@ try {
   await f.kor(PLANERNA);
   await f.oppna(`${bas}/app`);
   ska('i appen syns erbjudandet inte', (await f.rad())?.syns === false, await f.rad());
-  const listorna = await f.kor(`[...document.querySelectorAll('.pl-insatser')].map((l) => ({ id: l.id, syns: !l.hidden, rader: [...l.querySelectorAll(':scope > ul > li')].map((x) => x.querySelector('.pl-status')?.textContent + ':' + x.querySelector('.pl-metod')?.textContent), avslutade: l.querySelector('.pl-avslutade summary')?.textContent ?? '', appen: l.querySelector('[data-alla-appen]').hidden ? '' : l.querySelector('[data-alla-appen]').textContent }))`);
+  const listorna = await f.kor(`[...document.querySelectorAll('.pl-insatser')].map((l) => ({ id: l.id, syns: !l.hidden, rader: [...l.querySelectorAll(':scope > ul > li')].map((x) => x.querySelector('.pl-status')?.textContent + ':' + x.querySelector('.pl-metod')?.textContent), avslutade: l.querySelector('.pl-avslutade summary')?.textContent ?? '' }))`);
   const [stod, metoder] = listorna ?? [];
   ska('i appen: Dina insatser med pågående och kommande, och de avslutade hopfällda', stod?.syns && stod.rader.join('|') === 'Pågående:Textsamtal i grupp · Prov 1|Kommande:Seriesamtal · Prov 2' && stod.avslutade === 'En avslutad insats', stod);
   ska('i appen: Dina planer med planen i Lär dig metoden', metoder?.syns && metoder.rader.length === 1 && metoder.rader[0].startsWith('Kommande:Lär dig, provet'), metoder);
-  ska('i appen: att planerna bara finns i appen står en gång, under den sista listan', !stod?.appen && metoder?.appen.startsWith('Planerna finns bara i appen'), [stod?.appen, metoder?.appen]);
+  const appensRad = await f.kor(`[...document.querySelectorAll('[data-alla-appen]')].filter((r) => !r.hidden).map((r) => (r.closest('[data-alla-planer]') ? 'paret: ' : 'listan: ') + r.textContent)`);
+  ska('i appen: att planerna bara finns i appen står en gång, under paret knappar', appensRad?.length === 1 && appensRad[0].startsWith('paret: Planerna finns bara i appen'), appensRad);
   ska('i appen: trycket på en plan räknas som appens', (await f.kor(`document.querySelector('#pl-insatser-stod li a').dataset.goatcounterClick`)) === 'insatser:app');
   // Chrome kan inte härma att sidan körs som app för stilmallen (Emulation.setEmulatedMedia tar inte emot display-mode), så
   // reglerna läses ur stilmallen, och delarna som de gömmer finns på sidorna, så att en klass som byter namn märks.
@@ -323,6 +366,45 @@ try {
   }
   ska('i appen: inga fel i sidan', !f.undantag.length, f.undantag);
   f.stang();
+
+  // Den gamla appen Stöd i iPhone (Niclas 2026-10-31: "Om du kan testa sånt här. Gör det också i din testning"): en app som
+  // startar i /stodundervisning visar beskedet om Metodbanken, en gång i besöket, med tre steg, Ladda ner planer, som ger en
+  // fil, och Stäng; i Planera insatsen står det före beskedet om webbläsaren; Metodbanken, som startar på /app, och Android
+  // visar det inte.
+  {
+    const gamla = (g) => g.kor(`(() => { const r = document.querySelector('.app-gamla'); return r && { steg: r.querySelectorAll('li').length, knappar: [...r.querySelectorAll('button')].map((b) => b.textContent), fore: r.nextElementSibling?.hasAttribute('data-plan-notis') ? 'notisen' : '' }; })()`);
+    let g = await flik({ ua: UA.iphone, pek: true, app: true });
+    await g.oppna(`${bas}/app`);
+    await g.kor('localStorage.clear(); sessionStorage.clear()');
+    await g.kor(PLANERNA);
+    await g.kor('sessionStorage.clear()');
+    await g.oppna(`${bas}/stodundervisning`);
+    const iStod = await gamla(g);
+    ska('den gamla appen i iPhone: beskedet i Stöd med tre steg, Ladda ner planer och Stäng', iStod?.steg === 3 && iStod.knappar.join() === 'Ladda ner planer,Stäng', iStod);
+    await g.kor(`window.__storlek = 0; { const skapa = URL.createObjectURL; URL.createObjectURL = (b) => { window.__storlek = b.size; return skapa(b); }; HTMLAnchorElement.prototype.click = function () {}; }`);
+    await g.kor(`document.querySelector('.app-gamla button').click()`);
+    await vanta(1500);
+    ska('den gamla appen i iPhone: Ladda ner planer ger en fil med planerna', ((await g.kor('window.__storlek')) ?? 0) > 100, await g.kor('window.__storlek'));
+    await g.oppna(`${bas}/metoder`);
+    ska('den gamla appen i iPhone: beskedet en gång i besöket', (await gamla(g)) === null, await gamla(g));
+    ska('den gamla appen i iPhone: inga fel i sidan', !g.undantag.length, g.undantag);
+    g.stang();
+    if (planbara.length) {
+      g = await flik({ ua: UA.iphone, pek: true, app: true });
+      await g.oppna(`${bas}/stodundervisning/${planbara[0]}/planera`);
+      ska('den gamla appen i iPhone: i Planera insatsen står beskedet före beskedet om webbläsaren', (await gamla(g))?.fore === 'notisen', await gamla(g));
+      g.stang();
+    }
+    g = await flik({ ua: UA.iphone, pek: true, app: true });
+    await g.oppna(`${bas}/app`);
+    await g.oppna(`${bas}/stodundervisning`);
+    ska('Metodbanken i iPhone, som startar på /app: inget besked om den gamla appen', (await gamla(g)) === null, await gamla(g));
+    g.stang();
+    g = await flik({ ua: UA.android, pek: true, app: true });
+    await g.oppna(`${bas}/stodundervisning`);
+    ska('appen i Android, som Chrome uppdaterar: inget besked om den gamla appen', (await gamla(g)) === null, await gamla(g));
+    g.stang();
+  }
 
   // Service workern: appens sida sparas när den installeras, Metoder, Planera insatsen och Lär dig metoden när de öppnas, och
   // när servern har stängts, som när telefonen är utan nät, öppnas de ur kopian, och en sida som aldrig öppnats ger sidan Utan

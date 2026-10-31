@@ -9,7 +9,13 @@
 // 2026-10-30: sidfoten ledde till en adress som gav 404). Metodens saker (STIL.md under Hänvisningar,
 // undervisningsmetodensSaker i src/lib/undervisningsmetod.ts) är länkar där metodens sida nämner dem, inget namn ser ut som en
 // sak som metoden inte har (olankadeSaker i standarden), och varje sak har en knapp under sig vars fil finns, som planprov.mjs
-// prövar Stödundervisnings saker. Körs i npm run validera.
+// prövar Stödundervisnings saker. Lagningen inför lanseringen (2026-10-31) gav formens spärrar: i bilaga A står varje fils
+// knapp en gång och nedladdningsrutan har varje fil därifrån, faktarutans material leder till metodens saker, lathundens pdf
+// har en knapp överst, rutnäten med kort och delar slutar inte med en tom plats, kortens och remsans namn avstavas på
+// svenska, bladen står i hela bredden i telefonen och samlade bredvid bilden på datorn, lathundens kort rymmer sina ord,
+// utfallen räknas om för klassens antal, en plan i Lär dig metoden tar knappen med samma länk ur huvudet, och i banken går
+// Forskningsstödets lägen ihop med Visar, ett ord väljer bara sitt läge och Välj heter efter zip-filen den ger. Körs i npm
+// run validera.
 //
 //   node scripts/metoderprov.mjs
 import { spawn } from 'node:child_process';
@@ -19,7 +25,7 @@ import { tmpdir } from 'node:os';
 import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
-import { UNDERVISNINGSMETODENS_DELAR, meningarna, sakdelar, olankadeSaker, lathundensSidor } from '../src/lib/standard/index.js';
+import { UNDERVISNINGSMETODENS_DELAR, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser } from '../src/lib/standard/index.js';
 import { ren, utanHuvudOchFot, pdfText } from './textjamforelse.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -52,6 +58,10 @@ for (const s of [...metodsidor, ...lathundsidor]) {
     const metodens = new Set([...readFileSync(join(dist, metod, 'index.html'), 'utf8').matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
     for (const m of html.matchAll(new RegExp(`href="${metod}#([^"]+)"`, 'g'))) if (!metodens.has(decodeURIComponent(m[1]))) fel.push(`${s}: länken ${metod}#${m[1]} leder inte till något element på metodens sida`);
     provaSakerna(s, html, ids);
+    // Lathundens pdf har en knapp överst, den stora, och inte en till i filvalet bredvid (lagningen inför lanseringen, A10).
+    const huvudet = html.slice(html.indexOf('<header class="lathund-huvud"'), html.indexOf('</header>', html.indexOf('<header class="lathund-huvud"')));
+    const pdfKnappar = huvudet.split(`href="/metoder/${metod.split('/')[2]}-lathund.pdf`).length - 1;
+    if (pdfKnappar !== 1) fel.push(`${s}: lathundens pdf har ${pdfKnappar} knappar överst, ska ha en (Lathundsknappar.astro)`);
     continue;
   }
   const delar = [...html.matchAll(/<section class="um-del" id="del-([a-z-]+)"/g)].map((m) => m[1]);
@@ -60,6 +70,29 @@ for (const s of [...metodsidor, ...lathundsidor]) {
   // En länk till ett ankare på metodens egen sida med hela adressen, som metodens saker har.
   for (const m of html.matchAll(new RegExp(`href="${s}#([^"]+)"`, 'g'))) if (!ids.has(decodeURIComponent(m[1]))) fel.push(`${s}: länken ${s}#${m[1]} leder inte till något element`);
   provaSakerna(s, html, ids);
+  provaFilerna(s, html);
+}
+
+// Filerna att skriva ut (lagningen inför lanseringen, A3 och A10): i bilaga A står varje fils knapp en gång, så att Drive och
+// Word för hela materialet inte står under varje blad, och nedladdningsrutan har varje fil som bilaga A erbjuder, utom
+// bladens egna pdf:er, som står under sitt blad. Faktarutans material leder till metodens saker (D4): en del av listan som
+// börjar med en saks namn, som "symbolerna till bordsöarna", är en länk.
+function provaFilerna(s, html) {
+  const id = s.split('/')[2];
+  const bilagan = html.slice(html.indexOf('id="del-att-skriva-ut"'), html.indexOf('id="del-valet"'));
+  const rutan = html.slice(html.indexOf('id="filerna"'), html.indexOf('</aside>', html.indexOf('id="filerna"')));
+  const antal = new Map();
+  for (const m of bilagan.matchAll(/href="(\/metoder\/[^"?#]+\.docx)(?:\?[^"]*)?"/g)) antal.set(m[1], (antal.get(m[1]) ?? 0) + 1);
+  for (const [fil, n] of antal) if (n > 1) fel.push(`${s}: ${fil} har ${n} knappar i bilaga A, ska ha en (Umfilknappar.astro: under ett blad står bara bladets pdf)`);
+  const bilagansFiler = new Set([...bilagan.matchAll(new RegExp(`href="(/metoder/${id}-[a-z]+\\.(?:pdf|docx))(?:\\?[^"]*)?"`, 'g'))].map((m) => m[1]));
+  for (const fil of bilagansFiler) if (!rutan.includes(`href="${fil}`)) fel.push(`${s}: ${fil} står i bilaga A men inte i nedladdningsrutan (slag i src/pages/metoder/[id].astro)`);
+  const saker = JSON.parse(html.match(/<script type="application\/json" id="um-saker">([\s\S]*?)<\/script>/)?.[1] ?? '[]');
+  const material = html.match(/<dt class="bred">Material<\/dt><dd class="bred">([\s\S]*?)<\/dd>/)?.[1] ?? '';
+  for (const del of material.split(', ')) {
+    const text = del.replace(/<[^>]+>/g, '').trim().toLocaleLowerCase('sv');
+    const sak = saker.find((x) => x.slag !== 'avsnitt' && (x.former ?? [x.namn]).some((f) => text === f.toLocaleLowerCase('sv') || text.startsWith(`${f.toLocaleLowerCase('sv')} `)));
+    if (sak && !del.includes('<a ')) fel.push(`${s}: "${text}" i faktarutans material är ingen länk till ${sak.namn} (undervisningsmetodensSaker i src/lib/undervisningsmetod.ts)`);
+  }
 }
 
 // Metodens saker på sidan: listan står i sidan (um-saker, ur undervisningsmetodensSaker).
@@ -166,6 +199,104 @@ const LATHUNDENS_TEXTER = `(() => {
 })()`;
 let lathundensMeningar = 0;
 
+// Formen på metodens sida och lathunden (lagningen inför lanseringen): ett rutnät med kort eller delar slutar inte med en tom
+// plats (D2, D3), kortens och remsans namn avstavas på svenska (D1), ett blad i Materialet står i spaltens hela bredd i
+// telefonen (D5), och i lathunden ryms varje ord i kärnans kort (A7). Svaret är en lista med det som inte håller.
+const RUTNATEN = `for (const g of document.querySelectorAll('.um-kort-rad, .um-ex-remsa, .um-remsa ol')) {
+    const sista = g.lastElementChild;
+    if (!sista || !sista.getBoundingClientRect().width) continue;
+    const cs = getComputedStyle(g);
+    const kant = g.getBoundingClientRect().right - parseFloat(cs.paddingRight) - parseFloat(cs.borderRightWidth);
+    if (sista.getBoundingClientRect().right < kant - 2) ut.push('raden slutar med en tom plats efter ' + sista.textContent.replace(/\\s+/g, ' ').trim().slice(0, 30) + ' (' + (g.className || g.parentElement.className) + ')');
+  }`;
+const FORMEN = `(() => {
+  const ut = [];
+  ${RUTNATEN}
+  for (const e of document.querySelectorAll('.um-kort-namn, .um-remsa-namn')) if (getComputedStyle(e).hyphens !== 'auto' || !/^sv/.test(e.closest('[lang]')?.getAttribute('lang') ?? '')) ut.push('avstavas inte på svenska: ' + e.textContent.trim().slice(0, 30));
+  for (const a of document.querySelectorAll('.um-sida')) {
+    const p = a.parentElement, cs = getComputedStyle(p);
+    const inne = p.getBoundingClientRect().width - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    if (a.getBoundingClientRect().width < inne * 0.95) ut.push('bladet står inte i spaltens bredd: ' + (a.querySelector('img')?.getAttribute('alt') ?? '').slice(0, 40));
+  }
+  const c = document.createElement('canvas').getContext('2d');
+  for (const e of document.querySelectorAll('.lh .um-kort-namn')) {
+    c.font = getComputedStyle(e).font;
+    for (const o of e.textContent.trim().split(' ')) if (c.measureText(o).width > e.clientWidth + 1) ut.push('ordet ryms inte i kortet: ' + o);
+  }
+  return ut;
+})()`;
+// På datorn: rutnäten, och spalten bredvid ett blad i Materialet står samlad uppifrån, utan stora glapp mellan rubriken,
+// texten och raden som fälls ut (D6).
+const DATORN = `(() => {
+  const ut = [];
+  ${RUTNATEN}
+  for (const p of document.querySelectorAll('.um-blad-post')) {
+    const delar = [...p.querySelectorAll(':scope > h4, :scope > p:not(.um-filknappar), :scope > details, :scope > .um-blad-kropp > *')].filter((e) => e.getBoundingClientRect().height);
+    for (let i = 1; i < delar.length; i++) { const glapp = delar[i].getBoundingClientRect().top - delar[i - 1].getBoundingClientRect().bottom; if (glapp > 40) ut.push('glapp på ' + Math.round(glapp) + ' punkter i spalten vid ' + (p.querySelector('h4')?.textContent ?? p.id)); }
+  }
+  return ut;
+})()`;
+// Banken i telefonen (A4, A5): i varje område går Forskningsstödets lägen och raden om metoderna utanför skalan ihop med
+// Visar, ett tryck på ett läges ord väljer bara det läget, och med två metoder valda heter knappen efter zip-filen den ger och
+// förklaringen syns.
+const BANKEN = `(async () => {
+  const ut = [];
+  const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
+  const talet = (t) => Number(/^\\d+/.exec(String(t ?? '').trim())?.[0] ?? NaN);
+  const form = document.getElementById('filter');
+  const reg = form?.querySelector('[data-spann="stod"]');
+  if (reg) {
+    for (const o of form.querySelectorAll('input[name="omrade"]')) {
+      if (o.disabled) continue;
+      o.checked = true;
+      o.dispatchEvent(new Event('change', { bubbles: true }));
+      await vanta(30);
+      const lagen = [...reg.querySelectorAll('[data-n]')].reduce((s, x) => s + talet(x.textContent), 0);
+      const rad = reg.querySelector('[data-utanfor]');
+      const utan = rad && !rad.hidden ? talet(rad.textContent) : 0;
+      const visar = talet(form.querySelector('[data-antal]').textContent);
+      if (lagen + utan !== visar) ut.push('Forskningsstödet med området ' + (o.closest('label')?.querySelector('[data-text]')?.textContent ?? o.value) + ': lägena har ' + lagen + ' och raden under ' + utan + ', men Visar säger ' + visar);
+    }
+    form.querySelector('[data-rensa-filter]').click();
+    await vanta(30);
+    const ord = reg.querySelectorAll('.mbf-lage');
+    ord[1].click();
+    await vanta(30);
+    const fran = reg.querySelector('[data-grepp="fran"]').value, till = reg.querySelector('[data-grepp="till"]').value;
+    if (fran !== '1' || till !== '1') ut.push('ett tryck på ' + ord[1].querySelector('[data-text]').textContent + ' valde läget ' + fran + ' till ' + till + ', inte bara det');
+    form.querySelector('[data-rensa-filter]').click();
+  }
+  const boxar = [...document.querySelectorAll('input[name="valda"]')];
+  if (boxar.length > 1) {
+    boxar[0].click(); boxar[1].click();
+    await vanta(30);
+    const knappen = document.querySelector('#samla button[type="submit"]')?.textContent.replace(/\\s+/g, ' ').trim() ?? '';
+    if (!/zip/.test(knappen)) ut.push('med två metoder valda heter knappen ' + knappen + ', fast den ger en zip-fil');
+    const hjalp = document.querySelector('#samla .samla-hjalp');
+    if (!hjalp || getComputedStyle(hjalp).display === 'none') ut.push('förklaringen av zip-filen syns inte i telefonen');
+    boxar[0].click(); boxar[1].click();
+  }
+  return ut;
+})()`;
+// Utfallen för en annan klass (F2): med tre elever färre räknas alla tre gränserna om, och klassens förra antal står inte
+// kvar efter "av". Talen ur standardens utfallensGranser.
+const UTFALLEN = `(() => {
+  const ut = [];
+  for (const r of document.querySelectorAll('[data-utfall]')) {
+    const f = r.querySelector('input[type="number"]');
+    const n = Number(f.value), m = n - 3;
+    f.value = String(m);
+    f.dispatchEvent(new Event('input'));
+    const g = ${utfallensGranser.toString().replace(/^function\s*\w*/, 'function')}(m);
+    const rutor = [...r.querySelectorAll('.um-utfall-ruta')].map((x) => x.textContent.replace(/\\s+/g, ' '));
+    const krav = [g.nastanAlla + ' av ' + m, g.deFlesta[0] + '–' + g.deFlesta[1] + ' av ' + m, g.halften + ' eller fler'];
+    rutor.forEach((t, i) => { if (t.includes(' av ' + n + ' ')) ut.push('"av ' + n + '" står kvar med ' + m + ' elever: ' + t.slice(0, 60)); if (krav[i] && !t.includes(krav[i])) ut.push('"' + krav[i] + '" saknas med ' + m + ' elever: ' + t.slice(0, 60)); });
+    f.value = String(n);
+    f.dispatchEvent(new Event('input'));
+  }
+  return ut;
+})()`;
+
 // En enkel server för dist och Chrome utan fönster.
 const TYPER = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.json': 'application/json', '.woff2': 'font/woff2', '.pdf': 'application/pdf' };
 const server = createServer((req, res) => {
@@ -207,6 +338,27 @@ try {
       // inget ord i kärnans kort går ut ur kortet (Samarbetsfärdigheter i 390 punkter, K-645).
       const klippt = await kor(`(() => { const ut = []; for (const e of document.querySelectorAll('.um-remsa-namn, .um-celler a, .mp-varde, .mp-namn')) { if (e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow !== 'visible') ut.push(e.textContent.trim().slice(0, 30)); const ram = e.closest('.mp-bank-halv, .mp-rad, .mp-bank-en'); if (ram && e.getBoundingClientRect().right > ram.getBoundingClientRect().right + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (utanför rutan)'); } for (const e of document.querySelectorAll('.um-kort-namn, .um-kort-vad, .um-kort-moment')) if (e.scrollWidth > e.clientWidth + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (ut ur kortet)'); return ut.join(' · '); })()`);
       if (klippt) fel.push(`${s}: i ${bredd} punkter klipps eller går ut: ${klippt}`);
+      for (const f of (await kor(FORMEN)) ?? ['provet av formen fick inget svar']) fel.push(`${s}: i ${bredd} punkter: ${f}`);
+    }
+    if (metodsidor.includes(s)) {
+      for (const f of (await kor(UTFALLEN)) ?? ['provet av utfallen fick inget svar']) fel.push(`${s}: utfallen: ${f}`);
+      // Med en plan i Lär dig metoden bär rutan Din plan länken, och knappen med samma namn går undan (A9).
+      if (await kor(`!!document.getElementById('pl-din')`)) {
+        await kor(`(() => { const d = (n) => { const x = new Date(); x.setDate(x.getDate() + n); return new Intl.DateTimeFormat('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(x); }; localStorage.setItem('insatser', JSON.stringify({ v: 1, planer: [{ id: 'prov99', metod: ${JSON.stringify(s.split('/')[2])}, samling: 'metoder', titel: 'Provet', namn: '', val: '', andrad: d(0) + 'T10:00:00', skapad: d(0), schema: { pass: [], veckor: [[1, 1, 0, d(14), d(18)]] } }] })); return true; })()`);
+        await oppna(`${bas}${s}`);
+        await vanta(300);
+        const planen = await kor(`(() => { const din = document.querySelector('#pl-din:not([hidden]) a'); return { din: !!din, samma: din ? [...document.querySelectorAll('.um-toppknappar a')].filter((a) => getComputedStyle(a).display !== 'none' && new URL(a.href).pathname === new URL(din.href).pathname).map((a) => a.textContent.trim()) : [] }; })()`);
+        if (!planen?.din || planen.samma.length) fel.push(`${s}: med en plan står en knapp till samma sida som rutan Din plan bredvid den, ${planen?.samma?.join(', ') ?? 'och rutan syns inte'} (data-din-ersatter, src/scripts/insatser.ts)`);
+        await kor('localStorage.clear()');
+      }
+      await skicka('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false });
+      await oppna(`${bas}${s}`);
+      for (const f of (await kor(DATORN)) ?? ['provet på datorn fick inget svar']) fel.push(`${s}: på datorn: ${f}`);
+    }
+    if (s === '/metoder') {
+      await skicka('Emulation.setDeviceMetricsOverride', { width: 360, height: 800, deviceScaleFactor: 2, mobile: true });
+      await oppna(`${bas}${s}`);
+      for (const f of (await kor(BANKEN)) ?? ['provet av banken fick inget svar']) fel.push(`${s}: ${f}`);
     }
     // Varje mening på lathundens sida står i lathundens pdf (K-632, K-637).
     const pdf = lathundPdf.get(s);

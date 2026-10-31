@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import { SAMLINGARNA, samlingen } from '../lib/samlingar';
 import { kortFor } from '../lib/delningskort';
 import { appikonAdress } from '../lib/appikon';
 import { APPEN, iAppensDel } from '../lib/appen';
@@ -82,8 +83,8 @@ function aktiv(href: string) {
     {iAppen && <meta name="apple-mobile-web-app-title" content={APPEN.namn} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={`${site.namn}: allt nytt`} href="/rss.xml" />
-    <link rel="alternate" type="application/rss+xml" title={`${site.namn}: artiklar`} href="/artiklar/rss.xml" />
-    <link rel="alternate" type="application/rss+xml" title={`${site.namn}: stödundervisning`} href="/stodundervisning/rss.xml" />
+    {/* Delarnas flöden ur samlingarnas rot (src/lib/samlingar.ts), så att en ny samling får sin länk av sig själv. */}
+    {SAMLINGARNA.map(samlingen).filter((s) => s.flode).map((s) => <link rel="alternate" type="application/rss+xml" title={`${site.namn}: ${s.namn.toLowerCase()}`} href={s.flode!.adress} />)}
     <meta property="og:type" content={typ} />
     <meta property="og:title" content={title ?? site.namn} />
     <meta property="og:description" content={description} />

@@ -1,6 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
+import { SAMLINGARNA, samlingen } from '../lib/samlingar';
+
+// Delarnas egna flöden, ur roten över samlingarna (src/lib/samlingar.ts), så att ett nytt flöde står här av sig självt.
+const floden = SAMLINGARNA.flatMap((s) => samlingen(s).flode ?? []);
 ---
 
 <Base title={site.sidor.prenumerera.titel} description={site.sidor.prenumerera.beskrivning}>
@@ -17,7 +21,7 @@ import { site } from '../data/site';
       <p class="meta" id="svar" role="status" aria-live="polite"></p>
     </form>
 
-    <p class="meta">Föredrar du RSS? Alla nyheter finns i <a href="/rss.xml">/rss.xml</a>, bara artiklar i <a href="/artiklar/rss.xml">/artiklar/rss.xml</a> och bara metoder i <a href="/stodundervisning/rss.xml">/stodundervisning/rss.xml</a>.</p>
+    <p class="meta">Föredrar du RSS? Alla nyheter finns i <a href="/rss.xml">/rss.xml</a>{floden.map((f, i) => <>{i === floden.length - 1 ? ' och ' : ', '}{f.vad} i <a href={f.adress}>{f.adress}</a></>)}.</p>
   </article>
 
   <script>

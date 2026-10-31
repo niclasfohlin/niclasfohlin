@@ -16,7 +16,7 @@ import PlanNotis from './PlanNotis.astro';
 import PlanFilen from './PlanFilen.astro';
 import PlanVersion from './PlanVersion.astro';
 import { tidrad } from '../scripts/tidrad';
-import { liten, SAMLINGARNAS_LED, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
+import { liten, SAMLINGARNAS_LED, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stegensTakt, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -42,6 +42,9 @@ const gruppensSkattning = data.skattningar?.find((x) => x.vem === 'gruppen');
 const nivaer = data.bank?.nivaer ?? data.nivaer ?? [];
 // En stege, som läslistorna, kan börja högre upp: progressionens steg utom det som kommer efter insatsen.
 const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { const s = tolkaSteg(r.vecka); return s && !s.efter ? [{ fran: s.fran, namn: r.kort }] : []; }) : [];
+// Stegens takt till Börja på ur progressionens veckor, och ingen mening om takten när stegen är olika långa (stegensTakt i
+// standarden; Samma sak överallt inför lanseringen, E3: Problemlösnings steg är två veckor).
+const takten = stegensTakt(data.progression?.rader ?? []);
 // Snabbmallens namn i metoden, som Veckans cykel, eller snabbmallen: på knappen och i planens text, som läser det ur knappen
 // (användbarhetsprovet 2026-10-25: "Skriv i snabbmallen" stod ovanför knappen Veckans cykel som pdf).
 const mallnamn = (rubrik: string) => (/^snabbmall(en)?$/i.test(rubrik) ? 'snabbmallen' : rubrik);
@@ -122,7 +125,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
                 <select class="pl-falt" id="pl-borja">
                   {stegen.map((s) => <option value={s.fran}>{s.namn}</option>)}
                 </select>
-                <p class="pl-hjalp">Börja där gruppen är, efter det du såg före insatsen. Planen tar sedan ett steg i veckan.</p>
+                <p class="pl-hjalp">Börja där gruppen är, efter det du såg före insatsen.{takten && ` ${takten}`}</p>
                 <p class="pl-hjalp pl-varning" id="pl-borja-not" hidden>Du har bockat pass eller skattat, så planen börjar där den började. Gör en ny plan för att börja på ett annat steg.</p>
               </div>
             )}

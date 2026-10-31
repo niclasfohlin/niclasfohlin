@@ -3,9 +3,11 @@
 // sak ser likadan ut och heter likadant överallt (Niclas 2026-10-30: knapparna "saknar symbolen från sajten för pdf och
 // word", och 2026-10-10: samma knapp heter samma sak på varje metodsida). Flera filer står som raderna i Ladda ner och skriv
 // ut (Nedladdning.astro): Skriv ut med Allt och Metoden där knappen ger utskriftsrutan, Allt om metoden, och varje del av den
-// filen som Bara, med filvalet (Filval.astro: Drive, Pdf och Word). En fil under sitt blad har knappen som skriver ut bladet,
-// direkt under det (Niclas 2026-10-20: "Ha den så nära bladet du ska skriva ut som möjligt"), och Drive och Word bredvid;
-// med blad skriver knappen ut bladets egen pdf, och Word är hela filen. bara ger bara knappen, som överst på sidan. Knappen
+// filen som Bara, med filvalet (Filval.astro: Drive, Pdf och Word). En fil under sitt avsnitt har knappen som skriver ut den,
+// direkt under det (Niclas 2026-10-20: "Ha den så nära bladet du ska skriva ut som möjligt"), och Drive och Word bredvid.
+// Med blad står bara knappen som skriver ut bladets egen pdf, eftersom Drive och Word är hela filen: de står en gång, under
+// alla bladen, med filens namn (lagningen inför lanseringen, A3: under varje blad i Materialet stod Drive och Word, som gav
+// hela materialet). bara ger bara knappen, som överst på sidan. Knappen
 // skriver ut pdf:en i Chromium på datorn och öppnar den annars (SkrivUtPdf.astro). Bara filer som finns får en knapp
 // (src/lib/undervisningsmetodfiler.ts). Lathunden har också PowerPoint-filen, som sajten bygger ur lathundens sidor
 // (/metoder/<id>-lathund.pptx), och Drive sparar den som presentation, som i Stödundervisning; pdf:en är liggande. filmer
@@ -48,7 +50,7 @@ const metoden = filer.metoden;
 ) : en && (
   <p class="um-filknappar">
     {knapp && <a class={stor ? 'knapp' : 'knapp sekundar liten'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${blad ? knapp.namn : iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>}
-    {en.docx && <Filval fil={bas(en)} namn={namn(en)} rubrik={en.namn} statistik={`${titel}: ${iMening(en.namn)}`} liten />}
+    {en.docx && !blad && <Filval fil={bas(en)} namn={namn(en)} rubrik={en.namn} statistik={`${titel}: ${iMening(en.namn)}`} liten />}
   </p>
 )}
 <SkrivUtPdf />

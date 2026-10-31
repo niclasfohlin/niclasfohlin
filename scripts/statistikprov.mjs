@@ -51,6 +51,15 @@ const PLANERA = [
   { path: 'planera:textsamtal-i-grupp:pagar:2', title: 'Textsamtal i grupp: en insats pågår', event: true, count: 1, stats: [{ day: lokalDag(MANDAG), daily: 1 }] },
   { path: 'planera:seriesamtal:pagar', title: 'Seriesamtal: en insats pågår', event: true, count: 1, stats: [{ day: lokalDag(FORRA_ONSDAG), daily: 1 }] },
 ];
+// Metoder och Lär dig metoden (K-628, Niclas 2026-10-31): metodens sida under Metoder, och besökarna på Lär dig metoden med
+// händelserna lardig:, som står i rutan Lär dig metoden och inte bland knapparna i verktygen.
+const LARDIG = [
+  { path: '/metoder/explicit-undervisning', title: 'Explicit undervisning · Niclas Fohlin', event: false, count: 6 },
+  { path: '/metoder/explicit-undervisning/lathund', title: 'Lathund: Explicit undervisning · Niclas Fohlin', event: false, count: 2 },
+  { path: '/metoder/explicit-undervisning/lar-dig', title: 'Lär dig metoden: Explicit undervisning · Niclas Fohlin', event: false, count: 4 },
+  { path: 'lardig:explicit-undervisning:spara', title: 'Explicit undervisning: planen sparad', event: true, count: 1 },
+  { path: 'lardig:explicit-undervisning:lasvag', title: 'Explicit undervisning: Del 1', event: true, count: 3 },
+];
 const PROV = [...Array.from({ length: 125 }, (_, i) => {
   const id = i + 1;
   if (id <= 6) return { path: `dela:facebook:stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id}: delad på Facebook`, event: true, count: 1 };
@@ -58,7 +67,7 @@ const PROV = [...Array.from({ length: 125 }, (_, i) => {
   if (id > 60 && id <= 60 + SIDOR.length) return { ...SIDOR[id - 61], path_id: id };
   if (id <= 60) return { path: `fil:metod-${id}.docx`, path_id: id, title: `Metod ${id}: allt om metoden som Word`, event: true, count: 2 };
   return { path: `/stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id} · Niclas Fohlin`, event: false, count: 5 };
-}), ...PLANERA.map((h, i) => ({ ...h, path_id: 126 + i }))];
+}), ...[...PLANERA, ...LARDIG].map((h, i) => ({ ...h, path_id: 126 + i }))];
 const summa = (lista) => {
   const handelser = lista.filter((h) => h.event).reduce((a, h) => a + h.count, 0);
   const alla = lista.reduce((a, h) => a + h.count, 0);
@@ -208,7 +217,7 @@ try {
     if (!syns) fel++;
     console.log(`${syns ? 'GRÖNT' : 'RÖTT '}  filmernas zip-fil står bland filerna${syns ? '' : `: ${(filer ?? '').slice(0, 200)}`}`);
     // Besöken på varje central sida står under sin metod, med sidans namn.
-    const rader = await utvardera(`[...document.querySelectorAll('[data-kategori="metoder"] li')].map((li) => li.textContent)`);
+    const rader = await utvardera(`[...document.querySelectorAll('[data-kategori="stodundervisning"] li')].map((li) => li.textContent)`);
     CENTRALA.forEach((c, i) => {
       const metod = `Metodprov ${CENTRALA_METODER.indexOf(c.metod) + 1}`;
       const rad = (rader ?? []).find((r) => r.includes(metod)) ?? '';
@@ -221,6 +230,13 @@ try {
     const planRatt = plan?.[0]?.includes('Textsamtal i grupp7') && plan[0].includes('2 sparade') && plan?.[1]?.includes('Seriesamtal3') && plan[1].includes('0 sparade');
     if (!planRatt) fel++;
     console.log(`${planRatt ? 'GRÖNT' : 'RÖTT '}  Planera insatsen: planens sida per metod med de sparade${planRatt ? '' : `: ${(plan ?? []).join(' | ')}`}`);
+    // Metoder: metodens sida med lathunden under namnet, och Lär dig metoden i sin ruta med händelserna under namnet.
+    const metoder = await utvardera(`[...document.querySelectorAll('[data-kategori="metoder"] .stat-topp li')].map((li) => li.textContent)`);
+    const larDig = await utvardera(`[...document.querySelectorAll('[data-kategori="lardig"] .stat-topp li')].map((li) => li.textContent)`);
+    const verktyg = await utvardera(`document.querySelector('[data-kategori="verktyg"]')?.textContent ?? ''`);
+    const metoderRatt = metoder?.[0]?.includes('Explicit undervisning6') && metoder[0].includes('2 på lathunden') && larDig?.[0]?.includes('Explicit undervisning4') && larDig[0].includes('1 sparad · 3 tryck på länkarna i planen') && !(verktyg ?? '').includes('lardig:');
+    if (!metoderRatt) fel++;
+    console.log(`${metoderRatt ? 'GRÖNT' : 'RÖTT '}  Metoder och Lär dig metoden i sina rutor${metoderRatt ? '' : `: ${[...(metoder ?? []), ...(larDig ?? [])].join(' | ')}`}`);
   }
   // Pågående insatser: den här veckan och förra, ur ett eget anrop med namnen. Med riktiga siffror räcker det att rutan
   // har hämtats.

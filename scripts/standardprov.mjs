@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -234,7 +234,7 @@ for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13
 {
   const l = forstaLektionensForm({ slag: 'lektionsforlopp', forsta: { rubrik: 'Första lektionen' } });
   const s = forstaLektionensForm({ slag: 'strukturer', forsta: { rubrik: 'Första veckan' } });
-  if (l.minuterna !== 'Minuterna' || l.din !== 'din första lektion' || s.minuterna !== 'Den första hela lektionen' || !s.forlagan.startsWith('Den första hela lektionen, i grått') || /Det grå/.test(s.forlagan)) fel.push('forstaLektionensForm ger inte minuternas rubrik, lektionen i en mening och raden ovanför den grå planen för båda slagen');
+  if (l.minuterna !== 'Minuterna' || l.din !== 'din första lektion' || s.minuterna !== 'Den första hela lektionen' || s.forlagan !== 'Den första hela lektionen, ifylld som exempel. Minuterna är hållpunkter.' || /grå/.test(s.forlagan)) fel.push('forstaLektionensForm ger inte minuternas rubrik, lektionen i en mening och raden ovanför förlagan, ifylld som exempel och utan det grå (G9), för båda slagen');
   if (forstaLektionensForm({ slag: 'okant' }).namn !== SLAGENS_FORM.lektionsforlopp.forstaLektionen) fel.push('forstaLektionensForm ger inte ett okänt slag ett lektionsförlopps form');
   if (veckansRubrik({ vecka: '1', led: 'Klimatet', rubrik: 'Kamraten' }) !== 'Vecka 1, Klimatet: Kamraten' || veckansRubrik({ vecka: 2, rubrik: 'Paret' }) !== 'Vecka 2: Paret' || veckansRubrik({ vecka: '1', led: 'Jag gör', rubrik: 'Signalen' }, { vecka: false }) !== '1. Jag gör: Signalen') fel.push('veckansRubrik ger inte veckan med ledet, och utan ledet');
   if (litenForsta('T-kortet') !== 'T-kortet' || litenForsta('EPA') !== 'EPA' || litenForsta('Signalen') !== 'signalen') fel.push('litenForsta gör T-kortet, EPA eller Signalen fel');
@@ -309,6 +309,21 @@ if (larandetIKort({ kort: 'Kort.', motivering: 'Hög. Lång.' }) !== 'Kort.' || 
   if (del('veckorna', 'hall-fast')) fel.push('Håll fast står i lathunden, men hör till del 4 på metodens sida');
   const stodet = pilot.uppfoljning.rader.find((r) => r.id === 'stodet').vad;
   if (del('veckorna', 'efter')?.text !== meningarna(stodet).slice(0, 2).join(' ')) fel.push('Efter de första veckorna har inte de två första meningarna i stodet');
+  // Vägen till måndag (lagningen inför lanseringen, G1): i ett lektionsförlopp som förut, och i en metod med strukturer, där den
+  // första hela lektionen kommer efter vecka 1, vecka 1 med metodens första mening, den korta formen med sina minuter, som
+  // lathundens sida 2 visar, och veckorna för den hela lektionen.
+  if (vagenTillMandag(pilot) !== null) fel.push('vagenTillMandag ger en väg i ett lektionsförlopp, där vägen till måndag är den första lektionen');
+  const koop = parse(readFileSync(join(mapp, '..', '..', 'content', 'undervisningsmetoder', 'kooperativt-larande.yaml'), 'utf8'));
+  const kv = vagenTillMandag(koop);
+  const kort = koop.tidsschema.varianter.find((v) => v.nar === 'ett samarbete i en vanlig lektion');
+  if (!kv || kv.vecka1 !== meningarna(koop.forsta.text[0])[0] || kv.kort?.nar !== kort.nar || kv.kort.ankare !== variantensAnkare(kort.nar) || kv.kort.minuter.map((x) => x.tid).join() !== kort.delar.map((x) => x.tid).join() || !/^i vecka.2 eller 3$/.test(kv.hel.nar)) fel.push(`vagenTillMandag i kooperativt lärande ger inte vecka 1, den korta formen och veckorna för den hela lektionen: ${JSON.stringify(kv)}`);
+  const koopMin = lathundensSidor(koop)[1].delar.find((x) => x.id === 'minuterna');
+  if (koopMin?.rubrik !== kv?.kort?.rubrik || koopMin?.delar.length !== kort.delar.length) fel.push('lathundens sida 2 i kooperativt lärande har inte den korta formens minuter (G1)');
+  // Så syns lärandet i klassen (G10) och Till arbetslaget (G11) ur standardens rötter.
+  if (LARANDETS_OMRADEN.socialt !== 'Det sociala' || (koop.larandet?.omraden ?? []).some((o) => !LARANDETS_OMRADEN[o.omrade])) fel.push('LARANDETS_OMRADEN har inte ett namn för varje område i Så syns lärandet i klassen, som Det sociala');
+  const moten = arbetslagetsMoten(koop);
+  if (!moten || moten.leder !== ARBETSLAGETS_MOTEN.leder || moten.moten.map((m) => m.rubrik).join('|') !== 'Möte 1, före första lektionen|Mellan mötena|Möte 2, i slutet av vecka 5' || moten.moten[2].text[0] !== ARBETSLAGETS_MOTEN.mote2Text || moten.moten[2].fragor.at(-1) !== ARBETSLAGETS_MOTEN.sistaFragan || moten.moten[2].fragor.length !== koop.uppdrag.reflektera.length + 1) fel.push(`arbetslagetsMoten ger inte riggens ordning och fasta text: ${JSON.stringify(moten?.moten.map((m) => m.rubrik))}`);
+  if (arbetslagetsMoten({ uppdrag: { text: 'T' } })?.moten.map((m) => m.rubrik).join('|') !== ARBETSLAGETS_MOTEN.mote2UtanVecka || arbetslagetsMoten({}) !== null) fel.push('arbetslagetsMoten utan period och möten ger inte bara Möte 2 i slutet av de första veckorna, eller ger något utan uppdrag');
 }
 
 // Bildtexten (K-486): meningarna, med citat och förkortningar, och felen.

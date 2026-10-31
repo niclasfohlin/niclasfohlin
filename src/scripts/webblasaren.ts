@@ -80,6 +80,50 @@ export const vagenUtText = (w: Webblasare) => `Du har öppnat sidan i ${w.app} e
 /** Erbjudandet om appen i en apps webbläsare, som inte kan lägga sidan på hemskärmen: vart läraren går för att lägga till den. */
 export const vagenUtTillAppen = (w: Webblasare) => `Du har öppnat sidan i ${w.app} egen webbläsare, som inte kan lägga appen på hemskärmen. Öppna sidan i ${w.ios ? 'Safari' : 'webbläsaren'} och lägg till appen där.`;
 
+/**
+ * Ber webbläsaren låta det sidan har sparat stå kvar (navigator.storage.persist), när läraren sparar en plan och när en sida i
+ * appens delar öppnas med planer sparade, eftersom en beviljad begäran kan gälla bara tills webbläsaren stängs (Apples forum
+ * för utvecklare, tråd 710157, 2022; Niclas 2026-10-31: "Bör vi inte slå på det om vi kan?"). Safari och Chrome avgör själva och
+ * frågar inte läraren: WebKit beviljar efter bland annat om sidan är öppnad som app från hemskärmen (WebKit, "Updates to
+ * Storage Policy", 2023), och Chrome efter bland annat om sidan är installerad (web.dev, "Persistent storage"). Firefox frågar
+ * läraren med en ruta, och där begärs den bara när läraren sparar (fraga), så att rutan kommer efter något läraren gjorde och
+ * inte när sidan öppnas (web.dev samma artikel; Niclas samma natt: "Då kan läraren trycka ja?"). En gång per besök, och inte
+ * när lagringen redan är varaktig. Om en beviljad begäran undantar planerna från Safaris sju dagar står inte i WebKits
+ * dokumentation, så beskedet om appen och filen står kvar som skyddet.
+ */
+let lagringenBegard = false;
+export function begarVaraktigLagring(o: { fraga?: boolean } = {}, ua = navigator.userAgent): void {
+  const fragar = /Firefox\//.test(ua) && !/FxiOS/.test(ua);
+  if (lagringenBegard || (fragar && !o.fraga)) return;
+  lagringenBegard = true;
+  try {
+    const s = navigator.storage;
+    s?.persisted?.().then((ja) => (ja ? undefined : s.persist?.())).catch(() => undefined);
+  } catch { /* webbläsaren saknar Storage API */ }
+}
+
+/**
+ * Den gamla appen Stöd i iPhone och iPad (Niclas 2026-10-31: "Kan du på något sätt tvinga eller få till att de med gamla appen
+ * blir uppdaterad till nya webbappen?"). iPhone läser in appens namn, ikon och startsida när den läggs på hemskärmen och
+ * aldrig igen, så appen Stöd heter Stöd och börjar i /stodundervisning tills läraren lägger till Metodbanken, och dess planer
+ * står i dess eget minne. I Android uppdaterar Chrome appen av sig själv ur manifestet (web.dev, "How Chrome handles updates to
+ * the web app manifest"), och där visas inget. Appen känns igen på sidan den startade på: Metodbanken börjar på /app.
+ * @param start sidan som appen öppnades på, den första i besöket
+ */
+export const GAMLA_APPENS_START = '/stodundervisning';
+export function arGamlaAppen(start: string, w = webblasaren(), app = iAppen()): boolean {
+  return app && w.ios && (start === GAMLA_APPENS_START || start.startsWith(`${GAMLA_APPENS_START}/`));
+}
+/** Beskedet i den gamla appen: rubriken och stegen till Metodbanken, med planerna i en fil. */
+export const GAMLA_APPEN = Object.freeze({
+  rubrik: `Det finns en ny app, ${APPEN.namn}, med Stöd och Metoder.`,
+  steg: [
+    'Tryck Ladda ner planer här nedanför, så har du alla planer i en fil.',
+    `Öppna niclasfohlin.se${APPEN.adress} i Safari och lägg till ${APPEN.namn} på hemskärmen.`,
+    `Öppna filen i ${APPEN.namn} med Öppna planer. Sedan kan du ta bort appen Stöd.`,
+  ],
+});
+
 /** Varför planen görs i appen i iPhone och iPad, i beskedet och i påminnelsen om filen (WebKit 2020, överst i filen). */
 export const SAFARI_RADERAR = 'Safari kan radera det sidan har sparat efter sju dagar utan besök. I appen på hemskärmen finns planen kvar.';
 

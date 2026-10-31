@@ -8,8 +8,8 @@
 import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
-import { stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER } from '../lib/standard/index.js';
-import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, type Um } from '../lib/undervisningsmetod';
+import { stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
+import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
@@ -83,6 +83,8 @@ type Ram = { rubrik: string; text: string[]; listor?: { rubrik?: string; rader: 
 // Raden under Efter de första veckorna som har samma ord som rubriken står utan sin etikett (design-3 nr 18).
 const EFTER = 'Efter de första veckorna';
 const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...MED_DIG].includes(r.id));
+// Till arbetslaget med riggens fasta text om mötena (G11).
+const moten = arbetslagetsMoten(d);
 ---
 {/* Delraden och delarna: på datorn står delraden som en spalt till vänster, som menyn i Stödundervisning (design-3 nr 15). */}
 <div class="um-kropp">
@@ -100,7 +102,7 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
   <p set:html={k(d.inledning?.[0] ?? '')} />
   <div class="um-korten" id="i-korthet">
     <h3>{KARNANS_KORT}</h3>
-    <ol class="um-kort-rad">
+    <ol class="um-kort-rad" style={`--kolumner: ${kortensKolumner(komp.length)}`}>
       {komp.map((x, i) => (
         <li class="um-kort">
           <span class="um-kort-nr" aria-hidden="true">{i + 1}</span>
@@ -135,7 +137,7 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
 <section class="um-del" id="del-lektionen" aria-labelledby="del-lektionen-rubrik">
   <header class="um-band"><span class="um-band-nr" aria-hidden="true">2</span><div><h2 id="del-lektionen-rubrik"><span class="visually-hidden">Del 2: </span>{del('lektionen').namn}</h2><p>{del('lektionen').rad}</p></div></header>
   <nav class="um-remsa" aria-label="Lektionens delar">
-    <ol>
+    <ol style={`--antal: ${steg.length}`}>
       {steg.map((s) => { const r = tidsschematsRad(d, s.namn); return <li><a href={`#del-${s.namn.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}`}><span class="um-remsa-tid">{r?.tid}</span><span class="um-remsa-namn">{s.namn}</span></a></li>; })}
     </ol>
   </nav>
@@ -186,7 +188,8 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
     })}
     {efterRad && <p class="um-fore-efter"><strong>Efter lektionen.</strong> <span set:html={k(efterRad.vad)} /></p>}
     {d.tidsschema?.efter && <p class="um-not" set:html={k(d.tidsschema.efter)} />}
-    {andraVarianter.map((v) => <p class="um-not"><strong>{v.nar.charAt(0).toLocaleUpperCase('sv') + v.nar.slice(1)}.</strong> <span set:html={k(`${v.text} ${v.delar.map((x) => `${x.fas} ${x.tid}`).join(', ')}.`)} /></p>)}
+    {/* Varje variant har ett ankare, som rutan Vill du börja på måndag? leder till (variantensAnkare, G1). */}
+    {andraVarianter.map((v) => <p class="um-not" id={variantensAnkare(v.nar)}><strong>{v.nar.charAt(0).toLocaleUpperCase('sv') + v.nar.slice(1)}.</strong> <span set:html={k(`${v.text} ${v.delar.map((x) => `${x.fas} ${x.tid}`).join(', ')}.`)} /></p>)}
     {(d.lektionskort ?? []).map((x: { text: string }) => <p set:html={k(x.text)} />)}
   </section>
   {d.fastnar && (
@@ -215,7 +218,7 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
           <div><dt>{EXEMPLETS_ETIKETTER.egen}</dt><dd set:html={k(huvud.overst?.egen)} /></div>
           <div><dt>{EXEMPLETS_ETIKETTER.visar}</dt><dd set:html={k(huvud.overst?.visar)} /></div>
         </dl>
-        {huvud.remsa && <ol class="um-ex-remsa">{huvud.remsa.map((x: string, i: number) => <li><span class="um-kort-nr" aria-hidden="true">{i + 1}</span><span class="visually-hidden">Kärnan {i + 1}, {komp[i]?.namn}: </span><span set:html={k(x)} /></li>)}</ol>}
+        {huvud.remsa && <ol class="um-ex-remsa" style={`--kolumner: ${kortensKolumner(huvud.remsa.length)}`}>{huvud.remsa.map((x: string, i: number) => <li><span class="um-kort-nr" aria-hidden="true">{i + 1}</span><span class="visually-hidden">Kärnan {i + 1}, {komp[i]?.namn}: </span><span set:html={k(x)} /></li>)}</ol>}
         {(huvud.scen ?? []).map((x: string) => <p set:html={k(x)} />)}
         {huvud.notera && <p class="um-notera" set:html={k(huvud.notera)} />}
         {/* Lektionens plan står vid lektionen den planerar, så att del 3 inte har två ifyllda planer i rad med lektion 3 före
@@ -328,7 +331,7 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
       {d.larandet && (
         <details class="um-rad">
           <summary><span>{d.larandet.rubrik}</span></summary>
-          <dl class="um-rad-inne um-larandet">{d.larandet.omraden.map((o: { omrade: string; syns: string }) => <div><dt>{({ amneskunskaper: 'Ämneskunskaperna', sprak: 'Språket', lasning: 'Läsningen', skrivning: 'Skrivandet', kommunikation: 'Kommunikationen', samarbete: 'Samarbetet' } as Record<string, string>)[o.omrade] ?? o.omrade}</dt><dd set:html={k(o.syns)} /></div>)}</dl>
+          <dl class="um-rad-inne um-larandet">{d.larandet.omraden.map((o: { omrade: string; syns: string }) => <div><dt>{LARANDETS_OMRADEN[o.omrade] ?? o.omrade}</dt><dd set:html={k(o.syns)} /></div>)}</dl>
         </details>
       )}
       {d.progression.rader.map((v: Record<string, string>) => (
@@ -363,26 +366,21 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
   </section>
   {d.uppdrag && (
     <section class="um-avsnitt" id="till-arbetslaget">
-      <h3>{d.uppdrag.rubrik ?? 'Till arbetslaget'}</h3>
-      {d.uppdrag.text && <p set:html={k(d.uppdrag.text)} />}
-      {/* Planera och Genomför före mötena, så att de inte läses som Möte 1:s innehåll (design-3 nr 18). */}
-      {d.uppdrag.planera && <p>{!/^planera/i.test(d.uppdrag.planera) && <><strong>Planera.</strong>{' '}</>}<Fragment set:html={k(d.uppdrag.planera)} /></p>}
-      {d.uppdrag.genomfor && <p>{!/^(pröva|genomför)/i.test(d.uppdrag.genomfor) && <><strong>Genomför.</strong>{' '}</>}<Fragment set:html={k(d.uppdrag.genomfor)} /></p>}
-      {d.uppdrag.forbered && (
-        <details class="um-rad">
-          <summary><span>Möte 1, före första lektionen</span></summary>
+      {/* Till arbetslaget i riggens ordning och med riggens fasta text om mötena, ur standardens rot (arbetslagetsMoten), så att
+          sidan säger det Word-filen säger: vem som leder, Möte 1, Mellan mötena och Möte 2 med instruktionen och den femte
+          frågan (granskningen inför lanseringen, G11). Varje möte är en rad som fälls ut. */}
+      <h3>{moten!.rubrik}</h3>
+      {moten!.text && <p set:html={k(moten!.text)} />}
+      <p class="um-not">{moten!.leder}</p>
+      {moten!.moten.map((m) => (
+        <details class="um-rad" id={`arbetslaget-${m.id}`}>
+          <summary><span>{m.rubrik}</span></summary>
           <div class="um-rad-inne">
-            <p set:html={k(d.uppdrag.forbered.text)} />
-            <ol>{d.uppdrag.forbered.fragor.map((f: string) => <li set:html={k(f)} />)}</ol>
+            {m.text.map((t) => <p set:html={k(t)} />)}
+            {m.fragor.length > 0 && <ol>{m.fragor.map((f) => <li set:html={k(f)} />)}</ol>}
           </div>
         </details>
-      )}
-      {d.uppdrag.reflektera && (
-        <details class="um-rad">
-          <summary><span>Möte 2, i slutet av de första veckorna</span></summary>
-          <ol class="um-rad-inne">{d.uppdrag.reflektera.map((f: string) => <li set:html={k(f)} />)}</ol>
-        </details>
-      )}
+      ))}
     </section>
   )}
 </section>
@@ -457,9 +455,12 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
       <h3>{d.ramar.rubrik}</h3>
       {(d.ramar.text ?? []).map((s: string) => <p set:html={k(s)} />)}
       {/* Varje blad med rubriken och texten först, sedan bilden och knappen som skriver ut just det bladet, så att bilden
-          inte läses till texten ovanför i telefonen (design-3 nr 6). Word är hela materialet. */}
+          inte läses till texten ovanför i telefonen (design-3 nr 6). Rubriken och texten står i en spalt, som på datorn står
+          samlad uppifrån bredvid bilden (lagningen inför lanseringen, D6). Under bladet står bara bladets pdf, och hela
+          materialet har sina knappar en gång, efter bladen (A3). */}
       {(d.ramar.ramar ?? []).map((r: Ram, i: number) => (
         <div class="um-blad-post" id={bladetsAnkare(r.rubrik)}>
+          <div class="um-blad-kropp">
           <h4>{r.rubrik}</h4>
           {r.text.map((s) => <p set:html={k(s)} />)}
           {/* Ett blad med listor och delar, som strukturkorten i kooperativt lärande (riggens standard, avsnitt 7): stegen, vad
@@ -484,6 +485,7 @@ const efterRaderna = uppf.filter((r) => !['lektionen', 'klassen', 'lararen', ...
               </div>
             </details>
           )}
+          </div>
           {bilder.materialet?.[i] && <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${id}-materialet.pdf`} data-goatcounter-title={`Bilden av materialet, pdf, ${id}`} class={`um-sida${bilder.materialet[i].bredd > bilder.materialet[i].hojd ? ' um-sida-liggande' : ''}`}><img src={bilder.materialet[i].src} alt={r.rubrik} loading="lazy" decoding="async" width={bilder.materialet[i].bredd} height={bilder.materialet[i].hojd} /></a>}
           {bladen[i]?.pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: r.rubrik, pdf: bladen[i].pdf! }} />}
         </div>

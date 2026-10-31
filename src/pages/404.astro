@@ -1,10 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
+import { SAMLINGAR, SAMLINGARNA, delensAdress } from '../lib/samlingar';
+
+// Startsidan och varje del med poster, ur roten över samlingarna (src/lib/samlingar.ts), så att en ny del står här av sig själv.
+const lankar = [{ href: '/', text: 'startsidan' }, ...SAMLINGARNA.map((s) => ({ href: delensAdress(s), text: SAMLINGAR[s].bestamd }))];
+const skiljetecken = (i: number) => (i === 0 ? '' : i === lankar.length - 1 ? ' eller ' : ', ');
 ---
 
 <Base title="Sidan finns inte">
   <article class="text">
     <h1>Sidan finns inte</h1>
-    <p>Länken kan vara gammal eller felstavad. Gå till <a href="/">startsidan</a>, <a href="/artiklar">artiklarna</a> eller <a href="/stodundervisning">metodbanken</a>.</p>
+    <p>Länken kan vara gammal eller felstavad. Gå till {lankar.map((l, i) => <>{skiljetecken(i)}<a href={l.href}>{l.text}</a></>)}.</p>
   </article>
 </Base>

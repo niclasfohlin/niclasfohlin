@@ -324,7 +324,7 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   // Utvärderingen, med avslutet och anledningen när insatsen avslutades tidigare (utvarderingenText i standarden, K-542).
   besluten(p, [
     { etikett: 'Mitt i insatsen', text: s.avstamning?.beslut || s.avstamning?.not ? beslutText(s.avstamning) : '' },
-    { etikett: 'Efter insatsen', text: utvarderingenText(plan, s.utvardering, !s.slut) },
+    { etikett: 'Efter insatsen', text: utvarderingenText(plan, s.utvardering, !s.avslutad) },
   ]);
   return p.avsluta(`${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan, sparas inte på sajten`);
 }
@@ -356,7 +356,7 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   besluten(p, [
     // Avstämningen med beslutet utan lärarens mening, som kan handla om de andra eleverna.
     { etikett: 'Mitt i insatsen', text: s.avstamning?.beslut ? `${BESLUT[s.avstamning.beslut as keyof typeof BESLUT] ?? s.avstamning.beslut}.` : '' },
-    { etikett: 'Efter insatsen', text: utanNamn(utvarderingenText(plan, s.utvardering, !s.slut), s.namnen.filter((x) => x.namn !== e.namn), [e]) },
+    { etikett: 'Efter insatsen', text: utanNamn(utvarderingenText(plan, s.utvardering, !s.avslutad), s.namnen.filter((x) => x.namn !== e.namn), [e]) },
   ]);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);
 }

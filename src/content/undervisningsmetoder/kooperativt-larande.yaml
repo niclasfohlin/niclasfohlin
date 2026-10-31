@@ -12,7 +12,7 @@ taggar: ["kooperativt-larande", "socialt-samspel", "tillganglig-undervisning"]
 slag: strukturer
 syfte: [samarbeta, tanka]
 tid: 45 minuter per lektion, minst tre lektioner i veckan
-hurOftaSkal: "I den svenska studien arbetade de flesta klasserna kooperativt tre till fyra lektioner i veckan i 15 veckor (Klang m.fl., 2020). Minst tre i veckan ger rutinerna tid att sitta."
+hurOftaSkal: "I den svenska studien samarbetade de flesta klasserna tre till fyra lektioner i veckan (Klang m.fl., 2020). Minst tre samarbeten i veckan, korta eller hela lektioner, ger rutinerna tid att sitta."
 period: Fem veckor att komma igång
 material:
   - T-kortet
@@ -64,17 +64,17 @@ filmer:
 profil:
   evidens:
     larande:    { tillforlitlighet: mattlig, effekt: stor, kort: "Elever lär sig mer i grupp med gemensamma mål, mest prövat i åk 6–⁠9.", motivering: "Måttlig tillförlitlighet, stor effekt. Elever i åk 6–⁠9 som arbetade i grupp mot gemensamma mål lärde sig mer än med tävling eller eget arbete, i en översikt av 148 studier som inte skiljer ut eget ansvar (Roseth m.fl., 2008).", kallor: [roseth-m-fl-2008] }
-    lasning:    { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. Läsprogram med kooperativt lärande, mest CIRC i åk 2–⁠5, gav 0,21 i tio studier, men i den svenska studien i åk 5 blev läsförståelsen inte säkert bättre (Slavin, Lake, Chambers m.fl., 2009; Klang m.fl., 2022).", kallor: [slavin-lake-chambers-m-fl-2009, klang-m-fl-2022] }
+    lasning:    { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. Läsprogram i lag gav 0,21 i tio studier i åk 2–⁠5. The Reading Edge gav 0,15, ett annat stort försök ingen säker effekt (Slavin, Lake, Chambers m.fl., 2009; Slavin, Chamberlain m.fl., 2009; Klang m.fl., 2022).", kallor: [slavin-lake-chambers-m-fl-2009, slavin-chamberlain-m-fl-2009, klang-m-fl-2022] }
     skrivning:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Skrivprogram där eleverna i åk 3–⁠8 skriver i lag gav bättre texter, främst Student Team Writing med 0,38 i åk 6–⁠8, men i de två stora försöken av Writing Wings var skillnaden mindre (Slavin m.fl., 2019).", kallor: [slavin-m-fl-2019] }
-    matematik:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. STAD gav 0,42 i fyra studier från åk 6 till gymnasiet, och 0,21 i ett stort försök med 588 elever i 26 skolor (Slavin, Lake och Groff, 2009).", kallor: [slavin-lake-och-groff-2009] }
+    matematik:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. STAD gav 0,42 i fyra studier från åk 6 till gymnasiet och 0,21 i ett stort försök (Slavin, Lake och Groff, 2009). PowerTeaching gav ingen säker effekt i 42 engelska skolor (Slavin m.fl., 2013).", kallor: [slavin-lake-och-groff-2009, slavin-m-fl-2013] }
     amnen:      { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Träning i grupparbete gav 0,21 i NO för 8–10-åringar i England (Baines m.fl., 2007; Slavin m.fl., 2014).", kallor: [slavin-m-fl-2014, baines-m-fl-2007] }
-    socialt:    { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Kamratrelationerna blev bättre i åk 6–⁠9 med gemensamma mål i grupp än i tävling eller eget arbete (Roseth m.fl., 2008), och elever med lågt engagemang sa att de mobbades mindre (Van Ryzin och Roseth, 2018).", kallor: [roseth-m-fl-2008, van-ryzin-och-roseth-2018, klang-m-fl-2020] }
+    socialt:    { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. I åk 6–⁠9 blev kamratrelationerna bättre med gruppmål, 0,48 mot tävling och 0,42 mot eget arbete (Roseth m.fl., 2008). Stora försök gav en liten skillnad (Van Ryzin och Roseth, 2018; Klang m.fl., 2020).", kallor: [roseth-m-fl-2008, van-ryzin-och-roseth-2018, klang-m-fl-2020] }
   svarighet: { lara: 4, karnan: 3, stod: 4, tid: 4, motivering: "Du ändrar hur du leder samarbetet, och klassen lär sig ett nytt sätt att arbeta. Det tar en termin eller mer med kollegor, och en kollega ser när eget ansvar eller reflektionen saknas." }
   kostnad:   { kop: 2, timmar: 14, motivering: "Skolan har kort och kopior. Omkring 14 timmar första läsåret går till läsningen, två möten, sex samtal efter besök och en timmes extra planering i veckan de fem första veckorna. Besökarens tid räknas inte." }
   urval:
     datum: 2026-10-30
     regel: "Insatser räknas när eleverna i vanliga klasser arbetar i par eller små grupper mot ett gemensamt mål där alla behövs, med eget ansvar, i ett upplägg som läraren leder: Learning Together, STAD och CIRC, Kagans strukturer, Pussel med gruppmål, Complex Instruction och SPRinG. Räknas inte: grupparbete utan gruppmål eller eget ansvar, som CSR och Pussel utan gruppmål, kamratlärande med fasta roller, samarbete på nätet och i högskolan och översikter av metaanalyser."
-    text: "Sökningen började i Niclas bok Grundbok i kooperativt lärande och gick sedan till sammanställningar, stora försök och studier utan effekt. Bara insatser med gemensamt mål och eget ansvar räknas. Femton källor valdes, och fyra valdes bort. Niclas Fohlin är medförfattare till en av de femton, Klang m.fl. (2020)."
+    text: "Sökningen började i Niclas bok Grundbok i kooperativt lärande och gick sedan till sammanställningar, stora försök och studier utan effekt. Bara insatser med gemensamt mål och eget ansvar räknas. Sexton källor valdes, och fyra valdes bort. Niclas Fohlin är medförfattare till en av de femton, Klang m.fl. (2020)."
     slutsatser:
       oversikt: "Elever lär sig mer med gemensamma mål, och kamratrelationerna blir bättre i samma undervisning (Roseth m.fl., 2008). Med oberoende prov blir talen mindre. De är störst i matematik (Slavin, Lake och Groff, 2009) och skrivning (Slavin m.fl., 2019), och mindre i NO (Slavin m.fl., 2014) och läsning (Slavin, Lake, Chambers m.fl., 2009)."
       experiment: "I de stora försöken syns både det sociala och lärandet. Elever med lågt engagemang sa att de mobbades mindre (Van Ryzin och Roseth, 2018), och den sociala acceptansen i åk 5 blev något bättre (Klang m.fl., 2020). I ett randomiserat försök i åk 6 läste eleverna bättre. De arbetade i lag med gemensamma mål, och läraren slumpade fram den som svarade för laget (Slavin, Chamberlain m.fl., 2009). Träning i grupparbete gav bättre resultat i NO (Baines m.fl., 2007), men i den svenska studien blev läsförståelsen inte säkert bättre (Klang m.fl., 2022)."
@@ -95,7 +95,7 @@ inledning:
   - "De första veckorna lär sig klassen en färdighet och en struktur i taget, och du övar ett drag i veckan, som att ge tanketid eller att slumpa på riktigt. Strukturerna är en enkel väg in: eleverna får mer tid att tänka och prata, och du lär dig att ordna hur de arbetar tillsammans. Den första veckan gör ni två eller tre korta samarbeten med kamraten och T-kortet, och den första hela lektionen kommer i vecka 2 eller 3. Sedan kommer samtalet, paret och bordsön, och sist gruppens namn och kontrakt. Efter de första veckorna samarbetar klassen oftast i korta moment i ämnets lektioner, och du väljer strukturen efter uppgiften. Läs del 1 till 3 och Det svåraste i del 4 innan du börjar."
 karna:
   rubrik: "Kärnan: fast och fritt"
-  text: "Kärnan är de fem grundprinciperna i Grundbok i kooperativt lärande: samarbetsfärdigheter, positivt ömsesidigt beroende, eget ansvar, delaktighet och stödjande interaktion, och sist återkoppling och reflektion. Principerna bygger på grundelementen hos Johnson och Johnson (2009). Två av dem, ett mål som kräver alla och eget ansvar, finns i varje beskrivning av kooperativt lärande och är prövade för sig (Slavin, 1991). Färdigheterna och reflektionen är det du lär ut och leder. Strukturen är formen som ger alla en tur, och den väljer du fritt."
+  text: "Kärnan är de fem grundprinciperna i Grundbok i kooperativt lärande: samarbetsfärdigheter, positivt ömsesidigt beroende, eget ansvar, delaktighet och stödjande interaktion, och sist återkoppling och reflektion. Principerna bygger på grundelementen hos Johnson och Johnson (2009). Två av dem, ett mål som kräver alla och eget ansvar, finns i varje beskrivning av kooperativt lärande och är prövade för sig (Slavin, 1991). Färdigheterna och reflektionen är också prövade för sig (Baines m.fl., 2007; Johnson och Johnson, 2009), och dem lär du ut och leder. Strukturen är formen som ger alla en tur, och den väljer du fritt."
   grundregel: De fem principerna är kärnan, och dem håller du fast vid i varje samarbete. Strukturen, ämnet, paren, grupperna och materialet väljer du själv.
   varv: Du visar färdigheten, ger paret ett mål som kräver båda, lyssnar, låter var och en visa och säger vad du såg.
   komponenter:
@@ -164,12 +164,12 @@ roll:
 tidsschema:
   rubrik: En lektion på 45 minuter
   rader:
-    - { tid: Före lektionen, fas: Före lektionen, vad: "Välj strukturen och fatta fyra beslut: färdigheten, målet, hur var och en visar och frågan till reflektionen. Kan en elev lösa uppgiften ensam? Ändra den då." }
+    - { tid: Före lektionen, fas: Före lektionen, vad: "Välj strukturen och fatta fyra beslut: färdigheten, målet, hur var och en visar och frågorna till reflektionen. Kan en elev lösa uppgiften ensam? Ändra den då." }
     - { tid: 0–⁠5 min, fas: Start, form: I par, vad: "Paren vänder sig mot varandra och hälsar, och du visar veckans färdighet med T-kortet: hur den ser ut och hur den låter." }
     - { tid: 5–⁠15 min, fas: Genomgång, form: Läraren visar, vad: "Du går igenom innehållet, visar strukturen med en elev och säger målet och hur var och en kommer att visa." }
     - { tid: 15–⁠32 min, fas: Samarbetet, form: I par, vad: "Alla tänker först, och sedan arbetar paren i strukturen medan du går mellan dem, lyssnar efter färdigheten och felet och säger vad du hör." }
     - { tid: 32–⁠40 min, fas: Var och en visar, form: Enskilt, vad: "Paret, från vecka 4 bordsön, gör alla redo. Du drar en symbol, och en eller två svarar för gruppen. Sedan gör alla en egen uppgift och håller upp den." }
-    - { tid: 40–⁠45 min, fas: Avslut, form: I par, vad: "Paren säger vad som hjälpte dem att lära sig och en sak de ska göra bättre. Sedan tackar de varandra, och du säger vad du såg." }
+    - { tid: 40–⁠45 min, fas: Avslut, form: I par, vad: "Paren säger vad som hjälpte dem att lära sig och en sak de ska göra bättre. Du säger vad du såg, och sist tackar paren varandra." }
     - { tid: Efter lektionen, fas: Efter lektionen, vad: "Sortera de egna uppgifterna i kan, nästan och inte än, och läs dina anteckningar om färdigheten och felet. Välj utifrån dem vad nästa samarbete börjar med och vem du går till först." }
   varianter:
     - nar: första lektionen
@@ -218,7 +218,7 @@ steg:
       titta: "Säger båda något eget, och tar de upp det kamraten sa?"
       beslut: "Ett par fastnar: fråga paret först, som i Så stöttar du. Samma fel i flera par: stoppa klassen och visa igen."
       gor:
-        - "”Tänk själv en stund. Tummen upp när du har något.”"
+        - "Ge tanketid: ”Tänk själv en stund. Tummen upp när du har något.”"
         - Ta inga frågor de första tjugo sekunderna efter instruktionen, och peka mot kompisen när någon frågar dig.
         - "Gå först till dem som hade fel förra gången, sedan mellan paren. Anteckna färdigheten, felet och något intressant ur innehållet."
         - "Säg vad du hör med T-kortets ord: ”Jag hör att ni frågar varandra: Hur tänkte du?”"
@@ -230,11 +230,11 @@ steg:
       titta: "Kan de du frågar förklara, och syns hur alla tänkte?"
       beslut: Ett av tre utfall, nedan.
       gor:
-        - "”Ni har en minut att göra alla redo. Skriv eller rita tre stödord på lappen, gärna ämnets ord.”"
+        - "Säg: ”Ni har en minut att göra alla redo. Skriv eller rita tre stödord på lappen, gärna ämnets ord.”"
         - Dra en symbol ur skålen och ge grupperna en stund till, så att svaret blir gruppens.
-        - "”Alla trianglar, ställ er upp.” Fråga en eller två: ”Vad kom ni fram till?”"
-        - Ge en ny uppgift av samma slag, där felet du lyssnar efter syns. Var och en gör den själv.
-        - På ditt ”Håll upp!” visar alla sin minitavla, och du skriver upp dem som inte kan.
+        - "Be alla med symbolen ställa sig upp, och fråga en eller två: ”Alla trianglar, ställ er upp. Vad kom ni fram till?”"
+        - "Ge en ny uppgift av samma slag, där felet du lyssnar efter syns. Var och en gör den på minitavlan. Säg sedan: ”Håll upp!”"
+        - Räkna eleverna med fel, och skriv upp deras namn.
       fraser: ["Ni har en minut att göra alla redo.", "Alla trianglar, ställ er upp."]
       redo:
         nastanAlla: Högst 5 av 28 med fel. Gå till Avslutet. I nästa samarbete sätter du dig först med dem som inte kunde.
@@ -245,13 +245,13 @@ steg:
       fraga: "Kan paren säga vad som hjälpte dem att lära sig?"
       alla: Varje par säger med T-kortets ord vad som hjälpte och vad de gör bättre. Sedan tackar de varandra.
       titta: "Säger paren vad de gjorde, eller bara att det gick bra?"
-      beslut: "Säger de bara att det gick bra, fråga om färdigheten: ”Kan vi se och höra att den används?” Nästa gång säger du reflektionens fråga innan paren börjar."
+      beslut: "Säger de bara att det gick bra, fråga om färdigheten: ”Kan vi se och höra att den används?” Nästa gång säger du reflektionens frågor före samarbetet."
       gor:
-        - "”Vad gjorde ni bra så att ni lärde er mer? Vad kan ni göra bättre nästa gång? Viska till varandra.”"
+        - "Ställ reflektionens frågor: ”Vad hjälpte er att lära er? Vad gör ni bättre nästa gång? Viska till varandra.”"
         - "Säg vad du såg och hörde, om innehållet och om färdigheten: ”Jag hörde … och i den egna uppgiften kunde båda …”"
         - "Säg vad du vill se och höra mer av nästa gång: ”Jag vill höra fler …”"
-        - "”Tacka din kompis för något bestämt hen gjorde.”"
-      fraser: ["Vad gjorde ni bra så att ni lärde er mer?", "Tacka din kompis för något bestämt hen gjorde."]
+        - "Låt paren tacka varandra: ”Tacka din kompis för något bestämt hen gjorde.”"
+      fraser: ["Vad hjälpte er att lära er? Vad gör ni bättre nästa gång?", "Tacka din kompis för något bestämt hen gjorde."]
 lektionskort:
   - { efter: klassen, text: "Lektionen står på lektionskortet, och strukturerna står på egna A4 i Materialet. Slutar strukturen med att du drar en symbol, är det dragningen i Var och en visar, och du drar bara en gång." }
 fastnar:
@@ -312,7 +312,7 @@ amnesexempel:
         - { fas: Genomgång, text: "2 · 4 som två grupper med fyra, med material, och som 4 + 4" }
         - { fas: Samarbetet, text: "3 · 4, 2 · 3, 3 · 3 och 2 · 6, varannan var. Stopp efter två uppgifter, i alla par" }
         - { fas: Var och en visar, text: "En symbol, två svarar. 2 · 5 med bild och tal" }
-        - { fas: Avslut, text: "Vad gjorde ni bra så att ni lärde er mer?" }
+        - { fas: Avslut, text: "Vad hjälpte er att lära er? Vad gör ni bättre nästa gång?" }
       beslut: { elever: 27, nastanAlla: "dem som skrev 7", deFlesta: ["att addera talen", "2 + 5 med 5 + 5"], halften: "tre grupper med fyra, med materialet" }
       efter: { kontrollen: "8 med fel", hogar: "Kan 19 · Nästan 5 · Inte än 3", sag: "”Hur tänkte du?” vid sex bord", kryss: [1, 2, 3, 4, 5], nasta: "3 · 5 och 4 · 2", forst: "bord 2 och 6" }
       lagg: ["Lägg märke till: målet kräver två sätt, så att paret inte kan klara uppgiften med ett svar."]
@@ -367,7 +367,7 @@ stod:
 # ---------------------------------------------------------------------------------------------------------------------
 progression:
   rubrik: De första veckorna
-  text: "Metoden är troligen ny för dig och för klassen. Ordningen och takten är förslag. Ni börjar med Ping-pong-prat, och sedan lär sig klassen en färdighet och en struktur i taget medan du övar ett drag. Gå vidare när veckans färdighet syns hos nästan alla. Syns den inte, gör om veckan en eller två gånger, så flyttar besöken och mötet med. Ge gärna en struktur en till tre veckor innan nästa kommer, så att den sitter för klassen och för dig. Alla fem principerna finns med från det första samarbetet, men du kan öva på en sak i taget: välj en färdighet eller ett av besluten före lektionen, och håll fast vid det i några veckor."
+  text: "Metoden är troligen ny för dig och för klassen. Ordningen och takten är förslag. Ni börjar med kamraten och T-kortet, och sedan kommer Ping-pong-prat. Därefter lär sig klassen en färdighet och en struktur i veckan, som i tabellen, medan du övar ett drag. Gå vidare när veckans färdighet syns hos nästan alla. Syns den inte, stanna kvar och gör om veckan en eller två gånger, så att den sitter för klassen och för dig. Besöken och mötet flyttar med. Alla fem principerna finns med från det första samarbetet, men du kan öva på en sak i taget: välj en färdighet eller ett av besluten före lektionen, och håll fast vid det i några veckor."
   rader:
     - { vecka: "1", led: Klimatet, rubrik: "Kamraten, T-kortet och Ping-pong-prat", eleverna: "Att vända sig mot kamraten, vänta på sin tur och tacka.", roll: "Att visa strukturen med en elev, tänka högt om det eleverna ska tänka på i samtalet och säga vad du såg.", vidare: "nästan alla par turas om och tackar", fraga: "Turas nästan alla par om och tackar?" }
     - { vecka: "2", led: Samtalet, rubrik: "EPA och signalen", eleverna: "Att tänka själv först, säga sin tanke till kamraten och följa signalen.", roll: "Att ge tanketid och lyssna efter om båda säger något eget.", vidare: "båda i nästan alla par säger något eget", fraga: "Säger båda i nästan alla par något eget?" }
@@ -379,9 +379,9 @@ uppfoljning:
   rader:
     - { id: lektionen, nar: Varje lektion, tid: varje lektion, vad: "Den egna uppgiften och dina anteckningar visar vad paren kunde förklara och vad du tar upp nästa lektion." }
     - { id: klassen, nar: Klassens arbete varje vecka, tid: varje vecka, vad: "Räkna hur många som klarar veckans sista egna uppgift och hur många par som använder färdigheterna på T-korten utan påminnelse." }
-    - { id: lararen, nar: Dina kryss varje vecka, tid: varje vecka, vad: "Räkna hur ofta varje princip fanns i veckans lektioner. Det som oftast faller bort är färdigheten, eget ansvar och reflektionen, och det du gör själv märker du sist." }
+    - { id: lararen, nar: Dina kryss i planeringsmallen, tid: varje vecka, vad: "Räkna hur ofta varje princip fanns i veckans lektioner. Det som oftast faller bort är färdigheten, eget ansvar och reflektionen, och det du gör själv märker du sist." }
     - { id: observationerna, nar: "Vecka 2 eller 3, och vecka 4", tid: vecka 2 och 4, vad: "Specialläraren ser den första hela lektionen och de egna uppgifterna i vecka 2 eller 3, och en kollega eller rektor i vecka 4." }
-    - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "På arbetslagets första möte bestämmer ni signalen och första färdigheten, planerar första hela lektionen och bokar besöken." }
+    - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "På arbetslagets första möte bestämmer ni signalen, planerar första hela lektionen och bokar besöken." }
     - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "I slutet av de första veckorna ses ni igen, reflekterar och bestämmer hur ni fortsätter." }
     - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "En kollega besöker en lektion i månaden, fyra gånger. Du läser dina anteckningar om elevernas egna uppgifter med specialläraren, och de som inte lär sig innehållet får stödundervisning." }
     - { id: sexveckor, nar: Sex skolveckor efter de första veckorna, tid: efter 6 veckor, vad: "Räkna samma saker som varje vecka, så att du ser om metoden sitter kvar." }
@@ -396,8 +396,7 @@ checklista:
     - Förbered T-kortet för den första färdigheten, att vända sig mot kamraten, vänta på sin tur och tacka.
     - Skriv ut lektionskortet, symbolerna, fraserna att låna och veckans struktur, och ta fram skålen med symbolerna.
     - Boka besöken, ett av dem med specialläraren.
-    - Bestäm signalen och den första färdigheten med arbetslaget, eller med en kollega om du börjar ensam.
-    - "Säg till klassen varför: ni lär er mer av varandra, och samarbete går att öva."
+    - Bestäm signalen med arbetslaget, eller med en kollega om du börjar ensam.
 klassen:
   rubrik: Så ordnar du klassen
   text: Eleverna sitter vid bordsöar om fyra, på runda bord eller fyrkantiga där ingen sitter på kortsidan, och borden står så att grupperna inte stör varandra. Du sätter ihop grupperna så att olika elever möts, och den som behöver mest stöd sitter snett emot den som kan mest, bredvid en kamrat det fungerar med. Blir det elever över, blir en eller flera bordsöar trior. Var och en har sin symbol på bordet, och axelkompisen och ögonkompisen är paren. Paren och bordsöarna står kvar i några veckor. När du byter, säger du vad paren gjorde bra, och de tackar varandra innan ni börjar om med samma rutiner. Fungerar ett par inte, byter du, och vid kränkning följer du skolans rutin. I förskoleklass och åk 1 sitter paren bredvid varandra också i samlingen.
@@ -420,7 +419,7 @@ forsta:
       - { fas: Genomgång, text: "Visa att 3 · 4 och 10 + 2 ger 12. Visa EPA med en elev. Säg målet och att du drar en symbol" }
       - { fas: Samarbetet, text: "”Tänk själv på ett sätt att få 24. Säg ditt, och lyssna på kompisens. Hitta ett tredje tillsammans.” Säg vad du hör" }
       - { fas: Var och en visar, text: "En symbol, två förklarar parets sätt. Alla gör 36 på två sätt, ett med gånger" }
-      - { fas: Avslut, text: "Vad gjorde ni bra så att ni lärde er mer?" }
+      - { fas: Avslut, text: "Vad hjälpte er att lära er? Vad gör ni bättre nästa gång?" }
     beslut: { elever: 28, nastanAlla: "dem som adderade talen", deFlesta: ["30 + 6 mot 30 · 6", "sina sätt"], halften: "fyra grupper med sex, med materialet" }
 rutiner:
   rubrik: Rutinerna klassen lär sig
@@ -456,7 +455,7 @@ uppdrag:
   rubrik: Till arbetslaget
   text: Ni samarbetar som klassen. Ni planerar i par, och var och en prövar något litet flera gånger. Ni har två möten på en och en halv timme var, där ni reflekterar i EPA. Den som får besök visar sin planering före lektionen och tar med den till det andra mötet.
   forbered:
-    text: Läs metoden, och tänk igenom frågorna före mötet. På mötet bestämmer ni signalen och den första färdigheten, planerar den första hela lektionen och bokar besöken.
+    text: Läs metoden, och tänk igenom frågorna före mötet. På mötet bestämmer ni signalen, planerar den första hela lektionen och bokar besöken.
     fragor:
       - Vem pratar i dina lektioner, när och om vad, och vilka elever kommer till tals?
       - Vad gör du redan nu för att lära ut hur man samarbetar?
@@ -516,7 +515,7 @@ ramar:
   text: ["Utöver lektionskortet finns de fem strukturerna att visa på tavlan och stödmaterialet för klassen: T-kortet, symbolerna, fraserna att låna, gruppkontraktet och bladet till Mötas på mitten. Varje blad står på en egen sida."]
   ramar:
     - rubrik: T-kortet
-      text: ["Skriv ut kortet som affisch på A3. Skriv veckans färdighet överst, och fyll i med klassen under ögat vad ni vill se och under örat vad ni vill höra. Kortet hänger uppe under veckan och får sedan hänga kvar. Ett Y-kort har också ett hjärta för hur färdigheten känns."]
+      text: ["Skriv ut kortet som affisch, gärna förstorat till A3. Skriv veckans färdighet överst, och fyll i med klassen under ögat vad ni vill se och under örat vad ni vill höra. Kortet hänger uppe under veckan och får sedan hänga kvar. Vill ni också säga hur färdigheten känns, rita ett Y-kort på tavlan med ett hjärta i det tredje fältet."]
     - rubrik: Symbolerna
       text: ["Skriv ut ett blad per bordsö och ett blad till, och klipp isär de fyra korten på varje blad. Lägg korten på platserna, så att varje elev har sin symbol, och lägg korten från det extra bladet i skålen som du drar ur."]
     - rubrik: Fraserna att låna
@@ -630,7 +629,7 @@ ramar:
             - { rubrik: Medan de arbetar, text: "Veckans färdighet är att bygga vidare på kamratens idé. Lyssna efter ”Vi tar din idé och …”, och säg vad du hör." }
             - { rubrik: Så syns varje elev, text: "Var och ens ruta visar vad hen tänkte, och en eller två med symbolen som du drar förklarar mitten för klassen." }
     - rubrik: Bladet till Mötas på mitten
-      text: ["Skriv ut ett blad per bordsö på A3. Var och en skriver eller ritar i rutan vid sin symbol, och bordsön fyller i mitten tillsammans. De yngsta gör det i par, med två rutor och en mitt på ett A4 som du delar in själv."]
+      text: ["Skriv ut ett blad per bordsö, gärna förstorat till A3. Var och en skriver eller ritar i rutan vid sin symbol, och bordsön fyller i mitten tillsammans. De yngsta gör det i par, med två rutor och en mitt på ett A4 som du delar in själv."]
 planeringsmall:
   text: "Det grå gör du i varje lektion. Börja med färdigheten och målet, och skriv felet du lyssnar efter. Pröva i förväg: kan en elev lösa uppgiften ensam? Bygg uppgiften så att varje elev behövs och gruppen är klar först när alla kan innehållet."
   fore:
@@ -641,7 +640,7 @@ planeringsmall:
     - { fas: Genomgång, skriv: "Innehållet och strukturens steg:", hojd: 0.9 }
     - { fas: Samarbetet, skriv: "Uppgiften, eller en fråga med många svar:", not: "Ge tanketid först. Lyssna efter färdigheten och felet, säg vad du hör och stoppa halvvägs.", hojd: 1.1 }
     - { fas: Var och en visar, skriv: "Den egna uppgiften, där felet syns:", not: "Dra en symbol och fråga en eller två. Räkna eleverna med fel.", hojd: 0.8 }
-    - { fas: Avslut, skriv: "Frågan till reflektionen:", not: "Vad gjorde ni bra så att ni lärde er mer?", hojd: 0.6 }
+    - { fas: Avslut, skriv: "Frågorna till reflektionen:", not: "Vad hjälpte er att lära er? Vad gör ni bättre nästa gång?", hojd: 0.6 }
   beslut: { nastanAlla: "Jag sätter mig först med:", deFlesta: ["Missförståndet jag lyfter:", "Paren jämför:"], halften: "Det jag visar igen:" }
   efter:
     text: "Fyll i efter lektionen, ur dina anteckningar."
@@ -707,7 +706,7 @@ grund:
     - "Strukturen ensam räcker inte. Pussel utan gruppmål fick inte stöd i studierna, men Pussel med gruppmål och eget ansvar gav effekt. Det är de två villkoren som skiljer samarbete som ger resultat från grupparbete (Slavin, 1991). Lärarna som genomförde arbetssättet bäst lärde ut färdigheterna (Veldman m.fl., 2020). Av trettio lektioner som lärare själva kallade kooperativa hade bara två alla de fyra kännetecken som forskarna mätte (Adl-Amini m.fl., 2024)."
     - "I de stora försöken syns både det sociala och lärandet. I en stor randomiserad studie i åk 7 fick eleverna färre emotionella problem, och elever med lågt engagemang sa att de mobbades mindre (Van Ryzin och Roseth, 2018). I ett randomiserat försök i åk 6 läste eleverna bättre när de arbetade i lag (Slavin, Chamberlain m.fl., 2009). I den svenska studien i åk 5 ökade den sociala acceptansen något (Klang m.fl., 2020), men läsförståelsen blev inte säkert bättre (Klang m.fl., 2022). Niclas Fohlin är medförfattare till artikeln från 2020."
 kallor:
-  - { id: roseth-m-fl-2008, doi: 10.1037/0033-2909.134.2.223, slag: metaanalys, grupp: oversikt, omraden: [larande, socialt], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: 0,46 och 0,55 på resultaten, 148 studier, åk 6–⁠9", titel: "Promoting early adolescents' achievement and peer relationships: The effects of cooperative, competitive, and individualistic goal structures", text: "Roseth, C. J., Johnson, D. W. och Johnson, R. T. (2008). Promoting early adolescents' achievement and peer relationships: The effects of cooperative, competitive, and individualistic goal structures. Psychological Bulletin.", adress: "https://www.apa.org/pubs/journals/releases/bul-1342223.pdf", oppnad: 2026-10-30 }
+  - { id: roseth-m-fl-2008, doi: 10.1037/0033-2909.134.2.223, slag: metaanalys, grupp: oversikt, omraden: [larande, socialt], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: 0,46–0,55 på resultat, 0,42–0,48 på kamratrelationer, 148 studier", titel: "Promoting early adolescents' achievement and peer relationships: The effects of cooperative, competitive, and individualistic goal structures", text: "Roseth, C. J., Johnson, D. W. och Johnson, R. T. (2008). Promoting early adolescents' achievement and peer relationships: The effects of cooperative, competitive, and individualistic goal structures. Psychological Bulletin.", adress: "https://www.apa.org/pubs/journals/releases/bul-1342223.pdf", oppnad: 2026-10-30 }
   - { id: slavin-lake-chambers-m-fl-2009, doi: 10.3102/0034654309341374, slag: systematisk-oversikt, grupp: oversikt, omraden: [lasning], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,21 i tio studier, mest CIRC, åk 2–⁠5", titel: "Effective reading programs for the elementary grades: A best-evidence synthesis", text: "Slavin, R. E., Lake, C., Chambers, B. m.fl. (2009). Effective reading programs for the elementary grades: A best-evidence synthesis. Review of Educational Research.", adress: "https://files.eric.ed.gov/fulltext/ED527637.pdf", oppnad: 2026-10-30 }
   - { id: slavin-lake-och-groff-2009, doi: 10.3102/0034654308330968, slag: systematisk-oversikt, grupp: oversikt, omraden: [matematik], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: 0,42 för STAD i fyra studier, från åk 6 till gymnasiet", titel: "Effective programs in middle and high school mathematics: A best-evidence synthesis", text: "Slavin, R. E., Lake, C. och Groff, C. (2009). Effective programs in middle and high school mathematics: A best-evidence synthesis. Review of Educational Research.", adress: "https://bestevidence.org/wp-content/uploads/2021/02/mhs_math_oct_21_2008.pdf", oppnad: 2026-10-30 }
   - { id: slavin-m-fl-2014, doi: 10.1002/tea.21139, slag: systematisk-oversikt, grupp: oversikt, omraden: [amnen], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: SPRinG 0,21 och 0,27 i en studie till, NO i F–⁠5", titel: "Experimental evaluations of elementary science programs: A best-evidence synthesis", text: "Slavin, R. E., Lake, C., Hanley, P. m.fl. (2014). Experimental evaluations of elementary science programs: A best-evidence synthesis. Journal of Research in Science Teaching.", adress: "https://eprints.hud.ac.uk/id/eprint/29795/1/ElemSciSynth_PrePub_JRST_14.pdf", oppnad: 2026-10-30 }
@@ -717,6 +716,7 @@ kallor:
   - { id: klang-m-fl-2022, doi: 10.23865/njlr.v8.2740, slag: studie, grupp: experiment, omraden: [lasning], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: 0,10 och −0,07 på två prov i läsförståelse, 958 elever, åk 5", titel: "Intervention combining cooperative learning and instruction in reading comprehension strategies in heterogeneous classrooms", text: "Klang, N., Åsman, J., Mattsson, M. m.fl. (2022). Intervention combining cooperative learning and instruction in reading comprehension strategies in heterogeneous classrooms. Nordic Journal of Literacy Research.", adress: "https://nordicliteracy.net/index.php/njlr/article/view/2740", oppnad: 2026-10-30 }
   - { id: slavin-chamberlain-m-fl-2009, doi: 10.1080/19415530903043631, slag: studie, grupp: experiment, omraden: [lasning], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,15 i läsning, 788 elever i två skolor, åk 6", titel: "The Reading Edge: A randomized evaluation of a middle school cooperative reading program", text: "Slavin, R. E., Chamberlain, A., Daniels, C. m.fl. (2009). The Reading Edge: A randomized evaluation of a middle school cooperative reading program. Effective Education.", adress: "https://www.successforall.org/wp-content/uploads/2022/04/The-Reading-Edge-A-Randomized-Evaluation.pdf", oppnad: 2026-10-30 }
   - { id: van-ryzin-och-roseth-2018, doi: 10.1037/edu0000265, slag: studie, grupp: experiment, omraden: [socialt], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Liten effekt: mer samhörighet och färre emotionella problem, 1 460 elever, åk 7", titel: "Cooperative learning in middle school: A means to improve peer relations and reduce victimization, bullying, and related outcomes", text: "Van Ryzin, M. J. och Roseth, C. J. (2018). Cooperative learning in middle school: A means to improve peer relations and reduce victimization, bullying, and related outcomes. Journal of Educational Psychology.", adress: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6430212/", oppnad: 2026-10-30 }
+  - { id: slavin-m-fl-2013, slag: rapport, grupp: experiment, omraden: [matematik], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: −0,09 i matematik, 2 524 elever i 42 skolor, 8–10 år", titel: "Effects of Co-operative Learning and Embedded Multimedia on Mathematics Learning in Key Stage 2: Final Report", text: "Slavin, R. E., Sheard, M., Hanley, P. m.fl. (2013). Effects of Co-operative Learning and Embedded Multimedia on Mathematics Learning in Key Stage 2: Final Report. University of York.", adress: "https://eprints.hud.ac.uk/id/eprint/31184/", oppnad: 2026-10-31 }
   - { id: adl-amini-m-fl-2024, doi: 10.1007/s10212-023-00769-3, slag: studie, grupp: annan, omraden: [], bidrag: "Få lektioner har alla fyra principer som mättes", titel: "Implementation quality of cooperative learning and teacher beliefs—a mixed methods study", text: "Adl-Amini, K., Völlinger, V. A. och Eckart, A. (2024). Implementation quality of cooperative learning and teacher beliefs—a mixed methods study. European Journal of Psychology of Education.", adress: "https://doi.org/10.1007/s10212-023-00769-3", oppnad: 2026-10-30, las: sammanfattning }
   - { id: johnson-och-johnson-2009, doi: 10.3102/0013189X09339057, slag: artikel, grupp: annan, omraden: [], bidrag: "Teorin och de fem grundelementen", titel: "An educational psychology success story: Social interdependence theory and cooperative learning", text: "Johnson, D. W. och Johnson, R. T. (2009). An educational psychology success story: Social interdependence theory and cooperative learning. Educational Researcher.", adress: "https://static1.squarespace.com/static/55b8e334e4b0e176420c9949/t/57273f5b86db4345e7323102/1462189915305/ER.CL-Success-Story-Pub-Version-09.pdf", oppnad: 2026-10-30, las: fulltext }
   - { id: slavin-1991, eric: EJ421354, slag: artikel, grupp: annan, omraden: [], primarkalla: true, bidrag: "Gruppmål och eget ansvar är villkoren", titel: "Synthesis of research on cooperative learning", text: "Slavin, R. E. (1991). Synthesis of research on cooperative learning. Educational Leadership.", adress: "https://files.ascd.org/staticfiles/ascd/pdf/journals/ed_lead/el_199102_slavin.pdf", oppnad: 2026-10-30, las: fulltext }

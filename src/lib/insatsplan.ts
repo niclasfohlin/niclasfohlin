@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { arDelensTid, dagAv, utanFogar, versionsform, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { arDelensTid, dagAv, utanFogar, versionsform, faltetIVersionen, veckansPassFalt, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, slugAv, stegetsNamnIPlanen, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
@@ -564,8 +564,10 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
 
 // Veckans namn i planens lista, i Hela planen och i texten till åtgärdsprogrammet: progressionens rubrik, kursens titel för
 // veckan, titeln före kolon i fokus ("Lika delar: eleverna delar …") eller hela första meningen, utan tre punkter (de kalla
-// testarna 2026-10-26: veckans fokus var kapat i texten som klistras in i åtgärdsprogrammet).
-const veckansKort = (r: { rubrik?: string; fokus: string }, titel?: string) => r.rubrik ?? (titel || r.fokus.match(/^([^:.!?]{3,40}):\s/u)?.[1] || postensRad(r.fokus, Infinity));
+// testarna 2026-10-26: veckans fokus var kapat i texten som klistras in i åtgärdsprogrammet). Ledet som metoden kallar steget
+// står först, "Vi gör · Paren ställer …", så att steget har ett namn i alla vyer (stegetsNamnIPlanen i standarden; Samma sak
+// överallt inför lanseringen, E4).
+const veckansKort = (r: { rubrik?: string; fokus: string; led?: string }, titel?: string) => stegetsNamnIPlanen(r, r.rubrik ?? (titel || r.fokus.match(/^([^:.!?]{3,40}):\s/u)?.[1] || postensRad(r.fokus, Infinity)));
 
 /**
  * Metodens egna skattningar med adresserna (K-559): instrumentet på metodens sida, som bladet Lärarens skattning, och för

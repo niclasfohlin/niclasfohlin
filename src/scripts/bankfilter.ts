@@ -11,8 +11,10 @@
 // adressen ("medel-starkt", "medel", tomt för Alla; spannUr och spannText i standarden), två <input type="range"> på samma
 // bana och ett ord per läge under banan. Greppen står i varsin ände från början, och då är filtret av. De kan inte korsa
 // varandra. Musen och fingret flyttar det närmaste greppet, och står greppen på samma läge avgör dragets riktning vilket
-// som flyttas. Tangentbordet och skärmläsaren använder de två reglagen. Statistiken räknar spannet en gång när ett grepp
-// släpps eller en tangent trycks.
+// som flyttas; ett tryck på ett läges ord väljer bara det läget (lagningen inför lanseringen, A5: ett tryck på Visst gav
+// Visst–Starkt). Tangentbordet och skärmläsaren använder de två reglagen. Statistiken räknar spannet en gång när ett grepp
+// släpps eller en tangent trycks. Står metoder utanför skalan, som en metod med Oklart i området, säger en rad under lägena
+// hur många de är och att de bara syns med hela skalan, så att lägenas antal går ihop med Visar (A5).
 import { spannText, spannUr } from '../lib/standard/index.js';
 
 export type Valen = Record<string, string>;
@@ -34,6 +36,8 @@ export interface Bankensfilter {
   dolj?: (radio: HTMLInputElement, tom: boolean, val: Valen) => boolean | undefined;
   /** Det banken gör efter varje filtrering, med valen och om något är valt. */
   efter?: (val: Valen, aktiv: boolean) => void;
+  /** Raden under ett reglage för korten som inget läge har, med reglagets namn och de andra valen; utan den en allmän rad. */
+  utanfor?: (namn: string, kort: HTMLElement[], val: Valen) => string | undefined;
 }
 
 /** Ett reglage med två grepp i en panel. */
@@ -135,6 +139,13 @@ export function bankfiltret(o: Bankensfilter): { filtrera: () => void } {
       }
       // Förklaringen för varje läge i spannet som har en, som Stöds.
       if (!alla) for (let i = a; i <= b; i++) { const f = s.ord[i]?.getAttribute('data-forklaring'); if (f) rader.push(`${ordet(s, i)}: ${f}`); }
+      // Korten som passar de andra valen men inget läge, och därför bara syns med hela skalan.
+      const raden = s.behallare.querySelector<HTMLElement>('[data-utanfor]');
+      if (raden) {
+        const utan = kort.filter((k) => passar(k, { ...val, [s.namn]: '' }) && !s.lagen.some((l) => passar(k, { ...val, [s.namn]: l })));
+        raden.textContent = utan.length ? o.utanfor?.(s.namn, utan, val) ?? `${metoder(utan.length)} står utanför skalan och syns bara med hela skalan.` : '';
+        raden.hidden = !utan.length;
+      }
     }
     // Förklaringen för varje val som har en, som Intensivträning under Upplägg, en rad per val.
     if (forklaringen) {
@@ -223,8 +234,8 @@ export function bankfiltret(o: Bankensfilter): { filtrera: () => void } {
       g.addEventListener('input', () => flytta(s, g === s.fran ? 'fran' : 'till', Number(g.value)));
       g.addEventListener('change', (h) => { h.stopPropagation(); bekrafta(s); });
     }
-    // Ett tryck på ett ord under banan flyttar det närmaste greppet dit.
-    s.ord.forEach((ord, i) => ord.addEventListener('click', () => { flytta(s, narmast(s, i), i); bekrafta(s); }));
+    // Ett tryck på ett ord under banan väljer bara det läget: båda greppen dit.
+    s.ord.forEach((ord, i) => ord.addEventListener('click', () => { s.varde.value = spannText(s.lagen, { fran: s.lagen[i], till: s.lagen[i] }); filtrera(); bekrafta(s); }));
   }
 
   // Rensa döljer sig själv, så fokus går till den första rutan.

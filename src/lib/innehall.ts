@@ -9,6 +9,7 @@ import { hanvisningsFel } from './boklankar';
 import { metodensLektionskort } from './lektionskort';
 import { lasLektionskort } from './lektionskortdata';
 import { allaTexter, kortetsMalFel, varianternasFel } from './standard/index.js';
+import type { SamlingNyckel } from './samlingar';
 
 // Utkast visas i utvecklingsläge men aldrig i produktionsbygget. Databasens matteproblem har inget utkastläge.
 // En metods text, som också står i dess Word-filer och lathund, säger inte hur många poster en databas har: ett fast
@@ -23,7 +24,29 @@ export async function publicerade<K extends CollectionKey>(samling: K): Promise<
   const alla = await getCollection(samling);
   const synliga = import.meta.env.PROD && !metodernasUtkast(samling) ? alla.filter((post) => !('utkast' in post.data && post.data.utkast)) : alla;
   if (samling === 'stodundervisning') for (const m of synliga as CollectionEntry<'stodundervisning'>[]) provaAntal(m);
+  if (samling === 'stodundervisning' || samling === 'undervisningsmetoder') await provaHanvisade(synliga as CollectionEntry<'stodundervisning' | 'undervisningsmetoder'>[]);
   return synliga;
+}
+
+// Hör ihop med (relaterade, metoder i Stödundervisning) och valkartans metoder (passar.metoder, metoder under Metoder) pekar
+// på poster som finns. Ett okänt id stoppar bygget, så att en länk aldrig försvinner utan att någon ser det (Niclas 2026-10-31:
+// "Det skulle funnits någon spärr eller test som hittat det jag frågar om"). Ett utkast finns: sidorna visar det inte, och
+// länken kommer av sig själv när utkastet publiceras. Prövas en gång per bygge, som provaAntal.
+const hanvisningarnaProvade = new WeakSet<object>();
+async function provaHanvisade(poster: CollectionEntry<'stodundervisning' | 'undervisningsmetoder'>[]) {
+  const nya = poster.filter((p) => !hanvisningarnaProvade.has(p.data));
+  if (!nya.length) return;
+  const finns = async (samling: 'stodundervisning' | 'undervisningsmetoder') => new Set((await getCollection(samling)).map((p) => p.id));
+  const [stod, metoder] = await Promise.all([finns('stodundervisning'), finns('undervisningsmetoder')]);
+  const fel = nya.flatMap((p) => {
+    const d = p.data as { relaterade?: string[]; passar?: { metoder?: string[] } };
+    return [
+      ...(d.relaterade ?? []).filter((id) => !stod.has(id)).map((id) => `${p.filePath ?? p.id}: relaterade nämner ${id}, som inte är en metod i src/content/stodundervisning/.`),
+      ...(d.passar?.metoder ?? []).filter((id) => !metoder.has(id)).map((id) => `${p.filePath ?? p.id}: passar.metoder nämner ${id}, som inte är en metod i src/content/undervisningsmetoder/.`),
+    ];
+  });
+  if (fel.length) throw new Error(`${fel.length} okända id i Hör ihop med och valkartan:\n  ${fel.join('\n  ')}\nRätta id:t eller ta bort det.`);
+  for (const p of nya) hanvisningarnaProvade.add(p.data);
 }
 
 // En metod prövas en gång per bygge, och i utvecklingsläget igen när filen har ändrats (nytt data).
@@ -88,6 +111,20 @@ export async function metodSerier() {
 export async function bockerSorterade() {
   const poster = await publicerade('bocker');
   return poster.sort((a, b) => b.data.utgivningsar - a.data.utgivningsar);
+}
+
+export async function undervisningsmetoderSorterade() {
+  const poster = await publicerade('undervisningsmetoder');
+  return poster.sort((a, b) => a.data.titel.localeCompare(b.data.titel, 'sv'));
+}
+
+/**
+ * Varje samlings publicerade poster i sin ordning, för sidorna som räknar upp allt, som taggarnas sidor och statistiken: en
+ * nyckel per samling i roten (src/lib/samlingar.ts). En ny samling i roten som saknas här stannar astro check.
+ */
+export async function samlingarnasPoster(): Promise<{ [K in SamlingNyckel]: CollectionEntry<K>[] }> {
+  const [stodundervisning, undervisningsmetoder, artiklar, bocker] = await Promise.all([metoderSorterade(), undervisningsmetoderSorterade(), artiklarSorterade(), bockerSorterade()]);
+  return { stodundervisning, undervisningsmetoder, artiklar, bocker };
 }
 
 const taggMap = new Map(taggarData.taggar.map((t) => [t.id, t]));

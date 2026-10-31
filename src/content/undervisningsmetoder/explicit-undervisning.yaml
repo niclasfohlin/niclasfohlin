@@ -10,7 +10,7 @@ alternativaNamn: ["Direktinstruktion", "Strukturerad undervisning", "Explicit in
 ingress: När klassen ska lära sig något nytt där det finns ett rätt sätt att göra, visar du det vid tavlan, ett steg i taget, och alla elever prövar och visar hur de tänker. Du går till deras arbete och rättar felen på plats, varv efter varv, tills nästan alla kan. Först då övar eleverna själva eller i par.
 arskurs: ["F-3", "4-6", "7-9"]
 arskursText: F–9
-taggar: ["explicit-undervisning", "undervisningskvalitet", "formativ-bedomning", "tillganglig-undervisning"]
+taggar: ["undervisningskvalitet", "formativ-bedomning", "tillganglig-undervisning"]
 slag: lektionsforlopp
 syfte: [nytt]
 tid: 40 minuter per lektion, minst tre lektioner i veckan

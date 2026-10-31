@@ -3,9 +3,11 @@ import Base from '../layouts/Base.astro';
 import Metodkort from '../components/Metodkort.astro';
 import TextKort from '../components/TextKort.astro';
 import BokKort from '../components/BokKort.astro';
+import Metodprofil from '../components/Metodprofil.astro';
 import { site } from '../data/site';
 import { artiklarSorterade, metoderSenaste, metodSerier, bockerSorterade, publicerade } from '../lib/innehall';
 import { serieTaggar } from '../lib/serie';
+import { kortetUrFil } from '../lib/metodprofil';
 
 const artiklar = await artiklarSorterade();
 const utvalda = artiklar.filter((a) => a.data.utvald).slice(0, 3);
@@ -15,6 +17,11 @@ const serier = await metodSerier();
 const allaMetoder = await publicerade('stodundervisning');
 // Tre av varje på startsidan: texter, böcker och metoder (Niclas 2026-10-29: "Ha 3 3 3 med 3 senaste böcker i tid").
 const bocker = (await bockerSorterade()).slice(0, 3);
+// Metoder för hela klassen, den fjärde delen (K-645; Niclas 2026-10-31: "Tänk på att startsidan nu har en fjärde sak"): de
+// senast publicerade, högst tre, med bankens kort som försmak.
+const undervisningsmetoder = (await publicerade('undervisningsmetoder'))
+  .sort((a, b) => b.data.publicerad.getTime() - a.data.publicerad.getTime() || a.data.titel.localeCompare(b.data.titel, 'sv'))
+  .slice(0, 3);
 ---
 
 <Base>
@@ -26,7 +33,7 @@ const bocker = (await bockerSorterade()).slice(0, 3);
       <p class="meta">{site.rad}</p>
     </div>
     <h1>Texter och verktyg för en skola som fungerar bättre.</h1>
-    <p class="hero-text">Jag är speciallärare och specialpedagog. Här samlar jag mina krönikor och debattartiklar om skolan, böckerna om undervisning och metoder för stödundervisning i läsning, skrivning, matematik och socialt samspel.</p>
+    <p class="hero-text">Jag är speciallärare och specialpedagog. Här samlar jag mina krönikor och debattartiklar om skolan, böckerna om undervisning och metoder för hela klassen och för stödundervisning i läsning, skrivning, matematik och socialt samspel.</p>
     <a class="knapp hero-knapp" href="/stodundervisning">Hitta en metod för stödpasset</a>
     <ul class="hero-lankar">
       <li><a href="/om"><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" /></svg>Om mig</a></li>
@@ -65,6 +72,17 @@ const bocker = (await bockerSorterade()).slice(0, 3);
         {metoder.map((m) => { const serie = serier.get(m.id); return <Metodkort m={m} serie={serie} taggar={serie && serieTaggar(serie, allaMetoder)} forsmak />; })}
       </div>
       <p class="lankrad"><a href="/stodundervisning">Hela metodbanken</a></p>
+    </section>
+  )}
+
+  {undervisningsmetoder.length > 0 && (
+    <section>
+      <h2>Metoder</h2>
+      <p class="text">Undervisningsmetoder för hela klassen, i ämnets vanliga lektioner. Varje metod visar vad forskningen säger och hur en lektion går till.</p>
+      <div class="rutnat">
+        {undervisningsmetoder.map((post) => <Metodprofil m={kortetUrFil(post.id, post.data)} bank forsmak />)}
+      </div>
+      <p class="lankrad"><a href="/metoder">Alla metoder</a></p>
     </section>
   )}
 

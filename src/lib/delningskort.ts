@@ -1,8 +1,9 @@
 // Delningskorten (Niclas 2026-09-27): bilden som Facebook, LinkedIn, X med flera visar när en sida delas.
-// Varje artikel, bok och metod och varje huvudsida får ett eget kort, 1200 × 630 (Facebooks och LinkedIns mått;
+// Varje post i samlingarna med sidor (src/lib/samlingar.ts, POSTENS_KORT nedan) och varje huvudsida får ett eget kort,
+// 1200 × 630 (Facebooks och LinkedIns mått;
 // texten står inom mitten, där alla tjänster visar den). Texten kommer ur posten med samma ord som sidan: titeln,
-// och raden över den (Stödundervisning · Matematik · åk 4–6, Krönika · Vi Lärare · 2024, Bok · Studentlitteratur
-// · 2021). Mallen är src/pages/delning/kort/[namn].astro, med färgerna och typsnittet ur global.css.
+// och raden över den (Stödundervisning · Matematik · åk 4–6, Metoder · F–9, Krönika · Vi Lärare · 2024, Bok ·
+// Studentlitteratur · 2021). Mallen är src/pages/delning/kort/[namn].astro, med färgerna och typsnittet ur global.css.
 //
 // Filnamnet bär en kontrollsumma av allt som syns på kortet: texten, mallen, designsystemets variabler som mallen
 // läser (färgerna och typsnittet) och bilden. Texten står i datorns eget typsnitt (K-137), Segoe UI på Windows där
@@ -27,6 +28,8 @@ import { bankAv } from './bank';
 import { taFramKortposter, taFramSlag } from './tafram';
 import { bokhandledningen } from './handledning';
 import { slugAv } from './standard/index.js';
+import { SAMLINGAR, SAMLINGARNA, postensAdress, type SamlingNyckel } from './samlingar';
+import type { CollectionEntry } from 'astro:content';
 
 export const MALL = 'src/pages/delning/kort/[namn].astro';
 // Kortet för sidan som slumpar skrivkort har en egen mall, som bara räknas in i det kortet, och så har korten för
@@ -116,6 +119,35 @@ function dela(text: string): [string, string] {
 }
 const forstaMeningen = (text: string) => text.split(/(?<=\.)\s/)[0];
 
+// Kortet för en post, en rad per samling i roten (src/lib/samlingar.ts), så att en ny samling får sina kort av sig själv: en
+// samling i roten utan sin rad här stannar astro check, och scripts/cacheprov.mjs stannar på en post vars sida har delens
+// kort (Niclas 2026-10-31: "Inga drifter"; Metoders poster hade /metoders kort). Fälten står i samma ordning som de alltid
+// har stått, eftersom kontrollsumman läser kortet som text och en ny ordning skulle rita om alla kort. Metoders kort har
+// metodens bläck, som metodens sida och kort (--amnefarg i global.css), och raden över titeln är sidans brödsmula.
+type Post<K extends SamlingNyckel> = { id: string; data: CollectionEntry<K>['data'] };
+type Postkort = Pick<Kort, 'typ' | 'etikett' | 'titel' | 'undertitel' | 'bild' | 'farg'>;
+const POSTENS_KORT: { [K in SamlingNyckel]: (p: Post<K>) => Postkort } = {
+  stodundervisning: (m) => {
+    const [titel, undertitel] = dela(m.data.titel);
+    return { typ: 'metod', etikett: `${SAMLINGAR.stodundervisning.namn} · ${m.data.omrade} · ${arskursText(m.data)}`, titel, undertitel: undertitel || m.data.undertitel || '', bild: site.portratt, farg: FARG[m.data.omrade] ?? '--farg-accent' };
+  },
+  undervisningsmetoder: (u) => {
+    const [titel, undertitel] = dela(u.data.titel);
+    return { typ: 'metod', etikett: `${SAMLINGAR.undervisningsmetoder.namn} · ${arskursText(u.data)}`, titel, undertitel: undertitel || u.data.undertitel || '', bild: site.portratt, farg: '--farg-mork' };
+  },
+  artiklar: (a) => {
+    const ar = a.data.datum.getFullYear();
+    const var_ = a.data.publikation === 'egen' ? '' : ` · ${publikationNamn(a.data.publikation)}`;
+    const [titel, undertitel] = dela(a.data.titel);
+    return { typ: 'artikel', etikett: `${textEtikett(a.data)}${var_} · ${ar}`, titel, undertitel, bild: site.portratt, farg: '--farg-accent' };
+  },
+  bocker: (b) => {
+    const [titel, undertitel] = dela(b.data.titel);
+    const etikett = ['Bok', b.data.forlag, b.data.utgivningsar].filter(Boolean).join(' · ');
+    return { typ: 'bok', etikett, titel, undertitel, bild: b.data.omslag ?? site.portratt, farg: '--farg-accent' };
+  },
+};
+
 let alla: Promise<Kort[]> | undefined;
 
 export function allaKort(): Promise<Kort[]> {
@@ -133,20 +165,10 @@ export function allaKort(): Promise<Kort[]> {
       if (nyckel === 'stodundervisning') lagg({ sida: `/${nyckel}`, typ: 'metodbank', ...metodbanken(metoder), titel: s.titel, undertitel: METODBANKENS_RAD, bild: portratt, farg: '--farg-accent' });
       else lagg({ sida: `/${nyckel}`, typ: om ? 'om' : 'avsnitt', etikett: '', titel: s.titel, undertitel: om ? site.rad : forstaMeningen(s.beskrivning), bild: portratt, farg: '--farg-accent' });
     }
-    for (const a of await publicerade('artiklar')) {
-      const ar = a.data.datum.getFullYear();
-      const var_ = a.data.publikation === 'egen' ? '' : ` · ${publikationNamn(a.data.publikation)}`;
-      const [titel, undertitel] = dela(a.data.titel);
-      lagg({ sida: `/artiklar/${a.id}`, typ: 'artikel', etikett: `${textEtikett(a.data)}${var_} · ${ar}`, titel, undertitel, bild: portratt, farg: '--farg-accent' });
-    }
-    for (const b of await publicerade('bocker')) {
-      const [titel, undertitel] = dela(b.data.titel);
-      const etikett = ['Bok', b.data.forlag, b.data.utgivningsar].filter(Boolean).join(' · ');
-      lagg({ sida: `/bocker/${b.id}`, typ: 'bok', etikett, titel, undertitel, bild: b.data.omslag ?? portratt, farg: '--farg-accent' });
-    }
+    // Ett kort per post i varje samling i roten (POSTENS_KORT).
+    const poster: { [K in SamlingNyckel]: Post<K>[] } = { stodundervisning: metoder, undervisningsmetoder: await publicerade('undervisningsmetoder'), artiklar: await publicerade('artiklar'), bocker: await publicerade('bocker') };
+    for (const s of SAMLINGARNA) for (const p of poster[s] as Post<SamlingNyckel>[]) lagg({ sida: postensAdress(s, p.id), ...(POSTENS_KORT[s] as (x: Post<SamlingNyckel>) => Postkort)(p) });
     for (const m of metoder) {
-      const [titel, undertitel] = dela(m.data.titel);
-      lagg({ sida: `/stodundervisning/${m.id}`, typ: 'metod', etikett: `Stödundervisning · ${m.data.omrade} · ${arskursText(m.data)}`, titel, undertitel: undertitel || m.data.undertitel || '', bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent' });
       // Sidan som slumpar skrivkort har ett eget kort med tre skrivkort och klockan (Niclas 2026-10-14: "en direktlänk
       // till slumpgeneratorn som har egen delabild").
       const sk = skrivkortAv(m.id);

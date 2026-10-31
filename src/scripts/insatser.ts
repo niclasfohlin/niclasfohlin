@@ -38,18 +38,52 @@ if (din) {
     const etikett = egna.length > 1 ? ord.dina(egna.length) : ord.din;
     din.innerHTML = `<p><span class="pl-din-etikett">${esc(etikett)}${egna.length > 1 ? '' : ` · <span class="pl-din-namn">${esc(planensNamn(p))}</span>`}</span>${marke(p)}${esc(egna.length > 1 ? `${planensNamn(p)}: ${liten(lage.text)}` : lage.text)}</p><a href="${esc(planensAdress(p, lage.vecka))}" ${goatFor(ord.led, p.metod, din.dataset.titel ?? p.titel)('din-insats', ord.pagar)}>${egna.length > 1 ? ord.flera : ord.enLank}</a>`;
     din.hidden = false;
+    // En knapp som rutan ersätter, som Lär dig metoden på metodens sida under Metoder, går undan när rutan visar planen med
+    // sin länk (lagningen inför lanseringen, A9).
+    for (const k of document.querySelectorAll<HTMLElement>('[data-din-ersatter]')) k.hidden = true;
   }
 }
 
 // Listorna med planerna (src/components/Insatslista.astro): en på varje bank och två på appens sida, en för varje samling
-// (K-644). Varje lista ritas för sig, med sina egna knappar och sitt besked.
+// (K-644). Varje lista ritas för sig. Knapparna Ladda ner planer och Öppna planer står under en banks lista och på appens
+// sida en gång under båda listorna, och de gäller alltid alla planer i båda samlingarna, i en zip, så att samma knapp gör
+// samma sak på varje sida (src/components/PlanernasKnappar.astro; lagningen inför lanseringen, A1; Niclas 2026-10-31:
+// "Ladda ner alla planer oavsett om man är på stöd eller metoder", "I zip").
 const listorna = [...document.querySelectorAll<HTMLElement>('.pl-insatser[data-samling]')];
 for (const lista of listorna) ritaListan(lista);
-// I appen står varför planerna ska laddas ner (APPENS_PLANER), en gång, under knapparna i den sista listan med planer, så att
-// appens sida med två listor inte säger det två gånger.
+// Appens par står, som listorna där, också utan planer, med Öppna planer, men inte i en webbläsare som inte sparar.
+for (const block of document.querySelectorAll<HTMLElement>('[data-alla-planer]')) {
+  if (!lasPlaner().ok) continue;
+  block.hidden = false;
+  knapparna(block);
+}
+// I appen står varför planerna ska laddas ner (APPENS_PLANER), en gång, under det sista paret knappar med planer att ladda
+// ner, så att en sida med två listor inte säger det två gånger.
 if (iAppen()) {
-  const rad = listorna.filter((l) => !l.hidden && l.querySelector('ul li')).pop()?.querySelector<HTMLElement>('[data-alla-appen]');
+  const rad = [...document.querySelectorAll<HTMLElement>('[data-alla-appen]')].filter((r) => { const b = r.closest<HTMLElement>('.pl-insatser, [data-alla-planer]'); return !!b && !b.hidden && !!b.querySelector('[data-alla-ner]:not([hidden])'); }).pop();
   if (rad) { rad.textContent = APPENS_PLANER; rad.hidden = false; }
+}
+/**
+ * Knapparna Ladda ner planer och Öppna planer i blocket (PlanernasKnappar.astro), för alla planer i båda samlingarna: Ladda
+ * ner planer ger en zip med varje plans fil och syns när det finns planer, och Öppna planer tar en zip eller flera filer och
+ * lägger varje plan i sin samling, med samma rot som Öppna en nedladdad plan i metoden (Niclas 2026-10-28). Beskedet efter
+ * Öppna planer står kvar efter omladdningen.
+ */
+function knapparna(block: HTMLElement) {
+  const ner = block.querySelector<HTMLElement>('[data-alla-ner]');
+  if (!ner) return;
+  const samling = null;
+  const nyckel = 'pl-alla-besked:alla';
+  const besked = block.querySelector<HTMLElement>('[data-alla-besked]');
+  ner.hidden = !lasPlaner().planer.length;
+  try { const b = sessionStorage.getItem(nyckel); if (b && besked) { besked.textContent = b; besked.hidden = false; sessionStorage.removeItem(nyckel); } } catch { /* utan lagring */ }
+  block.querySelector('[data-alla-oppna]')?.addEventListener('change', (e) => { const filer = valdaFiler(e); if (filer.length) void oppnaPlanerna(filer, nyckel, samling); });
+  ner.addEventListener('click', () => {
+    const fil = allaPlanerna(PLANERA.version, idag, samling);
+    if (!fil) return;
+    laddaNer(fil.blob, fil.namn);
+    if (besked) { besked.textContent = 'Alla planer är nedladdade i en zip. Lägg den bland skolans filer. Den har elevernas namn, så dela den inte.'; besked.hidden = false; }
+  });
 }
 function ritaListan(lista: HTMLElement) {
   const samling = samlingAv(lista);
@@ -57,24 +91,19 @@ function ritaListan(lista: HTMLElement) {
   const listansOrd = SAMLINGENS_ORD[samling];
   // Trycket på en plan räknas där listan står, metodbanken eller appens sida (insatser:metodbanken och insatser:app).
   const var_ = lista.dataset.plats === 'app' ? 'app' : 'metodbanken';
-  // Besked efter Öppna planer står kvar efter omladdningen, i listans egen samling.
-  const nyckel = `pl-alla-besked:${samling}`;
-  const besked = lista.querySelector<HTMLElement>('[data-alla-besked]');
   const tom = lista.querySelector<HTMLElement>('[data-tom]');
-  const knappar = () => {
-    try { const b = sessionStorage.getItem(nyckel); if (b && besked) { besked.textContent = b; besked.hidden = false; sessionStorage.removeItem(nyckel); } } catch { /* utan lagring */ }
-    lista.querySelector('[data-alla-oppna]')?.addEventListener('change', (e) => { const filer = valdaFiler(e); if (filer.length) void oppnaPlanerna(filer, nyckel, samling); });
-  };
-  // Utan planer syns listan bara på appens sida, med raden om var planerna görs och Öppna planer, men inte i en webbläsare som
-  // inte sparar.
+  // Utan planer syns listan på appens sida med raden om var planerna görs, och på en bank som raden om planer i en fil med
+  // Öppna planer, utan rubriken, men inte i en webbläsare som inte sparar.
   if (!planer.length) {
-    if (!tom || !lasPlaner().ok) return;
-    tom.hidden = false;
-    lista.querySelector<HTMLElement>('[data-alla-ner]')!.hidden = true;
+    const iEnFil = lista.querySelector<HTMLElement>('[data-tom-bank]');
+    if (!(tom || iEnFil) || !lasPlaner().ok) return;
+    if (tom) tom.hidden = false;
+    if (iEnFil) { iEnFil.hidden = false; lista.classList.add('pl-insatser-tom'); }
     lista.hidden = false;
-    knappar();
+    knapparna(lista);
     return;
   }
+  lista.classList.remove('pl-insatser-tom');
   // Den som har nästa pass först. En avslutad plan står hopfälld sist, så att listan inte växer med gamla grupper.
   const rad = (p: SparadPlan) => {
     const lage = lageAv(p, idag);
@@ -101,13 +130,5 @@ function ritaListan(lista: HTMLElement) {
     fall.innerHTML = slut.length ? `<details><summary>${listansOrd.avslutade(slut.length)}</summary><ul>${slut.map(rad).join('')}</ul></details>` : '';
   }
   lista.hidden = false;
-  // Ladda ner alla mina planer, en zip med varje plans fil, och Öppna nedladdade planer, en zip eller flera filer, med
-  // samma rot som Öppna en nedladdad plan i metoden (Niclas 2026-10-28). Beskedet står kvar efter att listan har ritats om.
-  knappar();
-  lista.querySelector('[data-alla-ner]')?.addEventListener('click', () => {
-    const fil = allaPlanerna(PLANERA.version, idag, samling);
-    if (!fil) return;
-    laddaNer(fil.blob, fil.namn);
-    if (besked) { besked.textContent = 'Alla planer är nedladdade i en zip. Lägg den bland skolans filer. Den har elevernas namn, så dela den inte.'; besked.hidden = false; }
-  });
+  knapparna(lista);
 }

@@ -6,7 +6,7 @@
 // egna element och ord.
 import { ANLEDNINGENS_LANGD, AVSLUTETS_ANLEDNINGAR, esc, isoVecka, kalendervecka, kalenderveckaUtskriven, lovetLast, PLANKNAPPAR, skolveckan, spannKort, stor, utanFogar, veckonyckel } from '../lib/standard/index.js';
 import { APPENS_PLANER, STATUSNAMN, type Samling, type Status } from './insatser-lagring.ts';
-import { iAppen, SAFARI_RADERAR, vagenUt, webblasaren, webblasarensBesked } from './webblasaren.ts';
+import { iAppen, vagenUt, webblasaren, webblasarensBesked } from './webblasaren.ts';
 
 /** Statistikens namn för ett tryck, en rot för båda lagren och samlingarna (granskningen rot-3, fynd 14): samlingens led, metoden och vad, och titeln med metodens namn. Svaret ger attributen. */
 export const goatFor = (led: string, metod: string, titel: string) => (vad: string, text: string) => `data-goatcounter-click="${esc(led)}:${esc(metod)}:${vad}" data-goatcounter-title="${esc(titel)}: ${esc(text)}"`;
@@ -25,7 +25,9 @@ export const knappraden = (knappar: string[]) => (knappar.length ? `<p class="pl
  */
 export async function kopiera(text: string): Promise<boolean> {
   text = utanFogar(text);
-  try { await navigator.clipboard.writeText(text); return true; } catch {
+  // En apps egen webbläsare kan låta skrivningen vänta utan svar; efter en sekund kopieras texten på det äldre sättet, så
+  // att läraren alltid får ett besked (granskningen inför lanseringen, B4).
+  try { await Promise.race([navigator.clipboard.writeText(text), new Promise((_, nej) => setTimeout(() => nej(new Error('svarar inte')), 1000))]); return true; } catch {
     const t = document.createElement('textarea');
     t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;top:0;opacity:0';
     document.body.append(t); t.select();
@@ -74,10 +76,11 @@ export function webblasarensRad(o: Webblasarensrad): { slag: 'appens' | 'safari'
   return { slag: b.slag, text: b.text, knappar: `${ut}<button type="button" class="knapp liten${b.ut ? ' sekundar' : ''}" id="${o.forled}-ut-kopiera" ${o.goat('lank-ur-appen', `länken kopierad i ${w.app} webbläsare`)}>Kopiera länken</button>` };
 }
 /**
- * Varför filen skyddar planen, efter texten om planen som fil: i appen att planerna försvinner med appen (APPENS_PLANER), och
- * i Safari i iPhone och iPad att Safari kan radera dem (SAFARI_RADERAR), annars inget.
+ * Varför filen skyddar planen, efter texten om planen som fil: i appen att planerna försvinner med appen (APPENS_PLANER),
+ * annars inget. I Safari i iPhone och iPad säger beskedet överst att Safari kan radera planen, och meningen står bara där
+ * (användbarhetsprovet 2026-10-31: samma mening i två rutor i rad och en gång till i Planen som fil).
  */
-export const filensSkal = (adress: string) => (iAppen() ? APPENS_PLANER : webblasarensBesked(adress, PLANKNAPPAR)?.slag === 'safari' ? SAFARI_RADERAR : '');
+export const filensSkal = (_adress: string) => (iAppen() ? APPENS_PLANER : '');
 /** Vägen ut får adressen som den är nu: sidan ritar om den efter en ändring, och trycket gör det en gång till. */
 export function vagenUtNu(o: Pick<Webblasarensrad, 'forled' | 'adress'>) {
   const ut = document.getElementById(`${o.forled}-ut`) as HTMLAnchorElement | null;
@@ -143,7 +146,7 @@ export const etikettlista = (rader: { etikett?: string; html?: string; efter?: s
 /** En ruta som fälls ut och står kvar utfälld när sidan ritas om (data-ruta). Rubriken är text och det som står i rutan HTML. */
 export const fallut = (ruta: string, rubrik: string, inne: string, oppen: boolean) => `<details class="pl-fallut" data-ruta="${esc(ruta)}"${oppen ? ' open' : ''}><summary>${esc(rubrik)}</summary>${inne}</details>`;
 /** Vad linjen säger: skattningens regler med uppföljningens råd, i en ruta som fälls ut, och hur veckorna räknas. */
-export const linjensRegler = (ruta: string, rubrik: string, oppen: boolean, rader: { etikett: string; html: string }[]) => fallut(ruta, rubrik, `<p class="pl-hjalp">Veckorna räknas i följd, och en vecka utan kryss bryter följden.</p>${etikettlista(rader)}`, oppen);
+export const linjensRegler = (ruta: string, rubrik: string, oppen: boolean, rader: { etikett: string; html: string }[]) => fallut(ruta, rubrik, `<p class="pl-hjalp">Veckorna räknas i följd, och en vecka utan skattning bryter följden.</p>${etikettlista(rader)}`, oppen);
 
 // ---------- Avslutet ----------
 // Formuläret Avsluta, raden överst och rutan med bocken, i båda lagren (Planera insatsen K-542; Lär dig metoden K-631, Niclas
@@ -172,14 +175,13 @@ export const avslutsrutan = (o: { rubrik: string; text: string; knappar: string[
  */
 export function avslutsformularet(o: { id: string; oppen: boolean; samling: Samling; fore: string; not: string; hjalp: string; knapp: string; goat: string }) {
   const forslag = AVSLUTETS_ANLEDNINGAR[o.samling].map((x) => `<button type="button" class="pl-chip" data-anledning="${esc(x)}" aria-pressed="${o.not === x}">${esc(x)}</button>`).join('');
-  return `<div class="pl-flytta pl-avsluta" id="${o.id}"${o.oppen ? '' : ' hidden'}>${o.fore}<span class="pl-etikett">Varför, om du vill</span><p class="pl-andra-knappar">${forslag}</p><label class="visually-hidden" for="${o.id}-not">Anledningen</label><input class="pl-falt pl-brett" type="text" id="${o.id}-not" maxlength="${ANLEDNINGENS_LANGD}" value="${esc(o.not)}" /><p class="pl-hjalp">${esc(o.hjalp)}</p><p class="pl-andra-knappar"><button type="button" class="knapp liten" data-gor="avsluta-klar" ${o.goat}>${esc(o.knapp)}</button><button type="button" class="pl-textknapp" data-gor="avsluta-avbryt">Avbryt</button></p></div>`;
+  return `<div class="pl-flytta pl-avsluta" id="${o.id}"${o.oppen ? '' : ' hidden'}>${o.fore}<span class="pl-etikett">Varför, om du vill</span><p class="pl-andra-knappar">${forslag}</p><label class="pl-etikett" for="${o.id}-not">Eget skäl</label><input class="pl-falt pl-brett" type="text" id="${o.id}-not" maxlength="${ANLEDNINGENS_LANGD}" value="${esc(o.not)}" /><p class="pl-hjalp">${esc(o.hjalp)}</p><p class="pl-andra-knappar"><button type="button" class="knapp liten" data-gor="avsluta-klar" ${o.goat}>${esc(o.knapp)}</button><button type="button" class="pl-textknapp" data-gor="avsluta-avbryt">Avbryt</button></p></div>`;
 }
 /** Ett förslag på anledning skriver den i fältet, där läraren kan skriva vidare. Svaret är fältets text, eller null när knappen inte är ett förslag. */
 export function anledningenIFaltet(knapp: HTMLElement, falt: HTMLInputElement): string | null {
   if (knapp.dataset.anledning === undefined) return null;
   falt.value = knapp.dataset.anledning;
   markeraAnledningen(falt);
-  falt.focus();
   return falt.value;
 }
 /** Förslaget som står i fältet syns som valt, också när läraren skriver det själv eller ändrar det (den kalla läsaren 2026-10-30, nr 15). */

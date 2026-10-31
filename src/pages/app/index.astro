@@ -3,11 +3,13 @@
 // På denna sida finns två knappar överst: Stöd och Metoder ... Men på app sidan listas också alla ens insatser under
 // Stödundervisning ... och samma listade under Metoder"). Appen börjar här (start_url i manifestet). Överst de två bankerna,
 // sedan erbjudandet om appen, som bara syns i webbläsaren (src/components/AppRad.astro), och sist lärarens planer i båda
-// samlingarna, med samma lista och samma ord som på bankerna (src/components/Insatslista.astro, src/scripts/insatser.ts).
+// samlingarna, med samma lista och samma ord som på bankerna (src/components/Insatslista.astro, src/scripts/insatser.ts), och
+// under dem ett par knappar, Ladda ner planer och Öppna planer, för planerna i båda samlingarna.
 // Sidan skickar ingen läsare någonstans: den som går till /stodundervisning eller /metoder i webbläsaren stannar där.
 import Base from '../../layouts/Base.astro';
 import AppRad from '../../components/AppRad.astro';
 import Insatslista from '../../components/Insatslista.astro';
+import PlanernasKnappar from '../../components/PlanernasKnappar.astro';
 import { APPEN } from '../../lib/appen';
 import { site } from '../../data/site';
 ---
@@ -19,8 +21,10 @@ import { site } from '../../data/site';
     <a class="app-valet" href="/metoder" data-goatcounter-click="app:till:metoder" data-goatcounter-title={`Appen ${APPEN.namn}: till Metoder`}><span class="app-valets-namn">Metoder</span><span class="app-valets-om">Undervisning i hela klassen</span></a>
   </nav>
   <AppRad />
-  <Insatslista samling="stodundervisning" plats="app" id="pl-insatser-stod" />
-  <Insatslista samling="metoder" plats="app" id="pl-insatser-metoder" />
+  <Insatslista samling="stodundervisning" plats="app" id="pl-insatser-stod" knappar={false} />
+  <Insatslista samling="metoder" plats="app" id="pl-insatser-metoder" knappar={false} />
+  {/* Ett par knappar under båda listorna, för planerna i båda samlingarna (lagningen inför lanseringen, A1). */}
+  <div class="pl-alla" data-alla-planer hidden><PlanernasKnappar samling="alla" plats="app" /></div>
 </Base>
 
 <script>

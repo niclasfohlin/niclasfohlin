@@ -7,21 +7,42 @@
 // har ingen egen data, länkas inte från menyn, har noindex, står utanför sitemap och räknas inte själv (Base, dold).
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
-import { publicerade } from '../lib/innehall';
+import { samlingarnasPoster } from '../lib/innehall';
 import { planbar } from '../lib/planbar';
+import { SAMLINGARNA, samlingen } from '../lib/samlingar';
+import { SAMLINGARNAS_LED, uppraknat } from '../lib/standard/index.js';
 const bas = (site.statistik ?? '').replace(/\/count$/, '');
-// Metodernas namn, så att en metod heter rätt också när bara dess undersidor eller verktyg har besök i perioden
-// (granskningen av statistiken 2026-10-19: temats sida heter "Vatten: Ta fram en faktatext", utan metodens namn).
-const metoderna = await publicerade('stodundervisning');
-const metodnamn = Object.fromEntries(metoderna.map((m) => [m.id, m.data.titel]));
-// Metoderna som kan planeras, vars pågående insatser sidan hämtar med namn (Pågående insatser nedan).
-const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
+// Besöken sorteras efter samlingarna med sidor, ur roten över samlingarna (src/lib/samlingar.ts): en ruta per samling, med
+// postens sida, lathunden och undersidorna under namnet, och efter en samling med en plan planens ruta. En ny samling får sin
+// ruta av sig själv. Postens namn kommer ur samlingen, så att en post heter rätt också när bara dess undersidor eller verktyg
+// har besök i perioden (granskningen av statistiken 2026-10-19: temats sida heter "Vatten: Ta fram en faktatext", utan
+// metodens namn).
+const poster = await samlingarnasPoster();
+const namnen = Object.fromEntries(SAMLINGARNA.map((s) => [samlingen(s).led, Object.fromEntries((poster[s] as { id: string; data: { titel: string } }[]).map((p) => [p.id, p.data.titel]))]));
+// Planens ruta (K-504, K-628): besökarna på planens sida per metod, och under namnet planens händelser med orden här. Planera
+// insatsens andra knappar står bland Knapparna i verktygen och pagar under Pågående insatser, och alla Lär dig metodens
+// händelser står i dess ruta (Niclas 2026-10-31), med trycken på länkarna i planen ihop. Händelsernas förled är samlingens i
+// standarden (SAMLINGARNAS_LED). En samling med plan utan sin rad här stannar bygget.
+const PLANENS_RUTA: Record<string, { forklaring: string; ord: Record<string, [string, string]>; alltid?: string; ovriga?: string; utan?: string[] }> = {
+  stodundervisning: { forklaring: 'Besökare på planens sida. Under namnet står hur många som sparade en plan.', ord: { spara: ['sparad', 'sparade'], folj: ['valde Följ insatsen', 'valde Följ insatsen'], kalender: ['hämtade kalenderfilen', 'hämtade kalenderfilen'] }, alltid: 'spara', utan: ['pagar'] },
+  metoder: { forklaring: 'Besökare på sidan Lär dig metoden. Under namnet står hur många som sparade en plan, och vad de gjorde i planen.', ord: { spara: ['sparad', 'sparade'], avsluta: ['avslutade planen', 'avslutade planen'], 'sammanstallning-pdf': ['hämtade sammanställningen', 'hämtade sammanställningen'] }, alltid: 'spara', ovriga: 'tryck på länkarna i planen' },
+};
+const delarna = SAMLINGARNA.map((s) => {
+  const { led, namn, bestamd, plan } = samlingen(s);
+  const handelse = plan && (SAMLINGARNAS_LED as Record<string, string>)[led];
+  if (plan && (!handelse || !PLANENS_RUTA[led])) throw new Error(`Statistiken: ${namn} har planen ${plan.namn} men ${!handelse ? 'inget förled i SAMLINGARNAS_LED i standarden' : 'ingen rad i PLANENS_RUTA i src/pages/statistik.astro'}.`);
+  return { led, namn, bestamd, plan: plan && handelse ? { ...plan, handelse, ...PLANENS_RUTA[led] } : undefined };
+});
+const medPlan = delarna.filter((d) => d.plan);
+const utanPlan = delarna.filter((d) => !d.plan);
+// Metoderna i Stödundervisning som kan planeras, vars pågående insatser sidan hämtar med namn (Pågående insatser nedan).
+const planbara = poster.stodundervisning.filter((m) => planbar(m.data)).map((m) => m.id);
 ---
 
 <Base title="Statistik" description="Besök, nedladdningar och delningar på niclasfohlin.se." dold>
-  <article class="statistik" id="statistik" data-bas={bas} data-metoder={JSON.stringify(metodnamn)} data-planbara={JSON.stringify(planbara)}>
+  <article class="statistik" id="statistik" data-bas={bas} data-namnen={JSON.stringify(namnen)} data-delarna={JSON.stringify(delarna)} data-planbara={JSON.stringify(planbara)}>
     <h1>Statistik</h1>
-    <p class="ingress">Besökare, nedladdningar och delningar ur GoatCounter, ordnade som sajten: metoderna, filerna, delningarna, artiklarna och böckerna. Nedladdningarna räknar också utskrifterna, och en delning räknas när någon trycker på en knapp i raden Dela, också om hen sedan avbryter.</p>
+    <p class="ingress">Besökare, nedladdningar och delningar ur GoatCounter, ordnade som sajten: {uppraknat([...medPlan.map((d) => d.bestamd), 'filerna', 'delningarna', ...utanPlan.map((d) => d.bestamd)])}. Nedladdningarna räknar också utskrifterna, och en delning räknas när någon trycker på en knapp i raden Dela, också om hen sedan avbryter.</p>
 
     <noscript><p>Sidan hämtar siffrorna med JavaScript.</p></noscript>
 
@@ -58,13 +79,18 @@ const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
         <dl class="stat-popular" data-popular hidden></dl>
       </section>
 
-      <section class="stat-kategori" data-kategori="metoder" data-topp="3">
-        <h2>Metoderna</h2>
-      </section>
-      <section class="stat-kategori" data-kategori="planera" data-topp="5">
-        <h2>Planera insatsen</h2>
-        <p class="meta stat-forklaring" data-fast>Besökare på planens sida. Under namnet står hur många som sparade en plan.</p>
-      </section>
+      {/* Samlingarna med en plan, med planens ruta efter sig, och de andra efter delningarna (delarna ovan). */}
+      {medPlan.map((d) => (
+        <>
+          <section class="stat-kategori" data-kategori={d.led} data-topp="3">
+            <h2>{d.namn}</h2>
+          </section>
+          <section class="stat-kategori" data-kategori={d.plan!.handelse} data-topp="5">
+            <h2>{d.plan!.namn}</h2>
+            <p class="meta stat-forklaring" data-fast>{d.plan!.forklaring}</p>
+          </section>
+        </>
+      ))}
       <section class="stat-kategori" data-kategori="filer" data-topp="5">
         <h2>Filerna</h2>
       </section>
@@ -74,12 +100,11 @@ const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
       <section class="stat-kategori" data-kategori="kanaler" data-topp="6">
         <h2>Delat via</h2>
       </section>
-      <section class="stat-kategori" data-kategori="artiklar" data-topp="3">
-        <h2>Artiklarna</h2>
-      </section>
-      <section class="stat-kategori" data-kategori="bocker" data-topp="3">
-        <h2>Böckerna</h2>
-      </section>
+      {utanPlan.map((d) => (
+        <section class="stat-kategori" data-kategori={d.led} data-topp="3">
+          <h2>{d.namn}</h2>
+        </section>
+      ))}
       <section class="stat-kategori" data-kategori="utskrifter" data-topp="3">
         <h2>Utskrifterna</h2>
       </section>
@@ -113,7 +138,12 @@ const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
 
     const rot = document.getElementById('statistik') as HTMLElement;
     const bas = rot.dataset.bas ?? '';
-    const METODNAMN: Record<string, string> = JSON.parse(rot.dataset.metoder ?? '{}');
+    // Samlingarna med sidor i rotens ordning, med planens ruta, och postens namn per samling (src/lib/samlingar.ts).
+    type Del = { led: string; namn: string; plan?: { sida: string; namn: string; handelse: string; ord: Record<string, [string, string]>; alltid?: string; ovriga?: string; utan?: string[] } };
+    const DELARNA: Del[] = JSON.parse(rot.dataset.delarna ?? '[]');
+    const NAMNEN: Record<string, Record<string, string>> = JSON.parse(rot.dataset.namnen ?? '{}');
+    // Metoderna i Stödundervisning, vars pågående insatser sidan räknar.
+    const METODNAMN = NAMNEN.stodundervisning ?? {};
     const PLANBARA: string[] = JSON.parse(rot.dataset.planbara ?? '[]');
     const form = rot.querySelector('[data-nyckel]') as HTMLFormElement;
     const vy = rot.querySelector('[data-vy]') as HTMLElement;
@@ -246,25 +276,31 @@ const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
     // De centrala sidorna som hör till en metod (src/data/centrala.json), som Ta fram ett skrivkort och Ta fram en
     // aktivitet: besöken räknas under metoden, med sidans namn.
     const CENTRALA_SIDOR = new Map(CENTRALA.filter((c) => c.slag === 'sida' && c.metod).map((c) => [c.adress, c]));
+    // Planens händelser per förled, som planera:<metod>:<vad> och lardig:<metod>:<vad>.
+    const PLANENS_DEL = new Map(DELARNA.filter((d) => d.plan).map((d) => [d.plan!.handelse, d]));
     function kategorier(hits: Hit[]) {
-      const metoder = new Map<string, { namn: string; sida: number; lathund: number; enheter: number; centrala: Map<string, number> }>();
+      // Varje samlings poster: besöken på postens sida, och under namnet lathunden, de centrala sidorna och undersidorna.
+      type Post = { namn: string; sida: number; lathund: number; enheter: number; centrala: Map<string, number> };
+      const posterna = new Map<string, Map<string, Post>>(DELARNA.map((d) => [d.led, new Map()]));
       const filer = new Map<string, Rad>();
       const delningar = new Map<string, { namn: string; antal: number; kanaler: Map<string, number> }>();
-      // Planera insatsen (K-504): besökarna på planens sida, och de som sparade en plan, valde Följ insatsen och hämtade
-      // kalenderfilen. Händelsen pagar räknas bara under Pågående insatser.
-      const planera = new Map<string, { oppnade: number; sparade: number; folj: number; kalender: number }>();
-      const plan = (id: string) => {
-        let x = planera.get(id);
-        if (!x) { x = { oppnade: 0, sparade: 0, folj: 0, kalender: 0 }; planera.set(id, x); }
+      // Planens ruta per samling med plan (K-504, K-628): besökarna på planens sida, och planens händelser med orden i
+      // PLANENS_RUTA, där '' är trycken på länkarna i planen. Planera insatsens pagar räknas bara under Pågående insatser.
+      const planerna = new Map<string, Map<string, { oppnade: number; handelser: Map<string, number> }>>(DELARNA.filter((d) => d.plan).map((d) => [d.led, new Map()]));
+      const plan = (led: string, id: string) => {
+        const p = planerna.get(led)!;
+        let x = p.get(id);
+        if (!x) { x = { oppnade: 0, handelser: new Map() }; p.set(id, x); }
         return x;
       };
       let delade = 0;
-      const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], verktyg: [], filter: [], ovriga: [] };
+      const k: Record<string, Rad[]> = { utskrifter: [], verktyg: [], filter: [], ovriga: [] };
       // Nedladdningarna: filerna och utskrifterna, inte knapparna i verktygen (granskningen av statistiken 2026-10-19).
       let nedladdade = 0;
-      const metod = (id: string) => {
-        let x = metoder.get(id);
-        if (!x) { x = { namn: METODNAMN[id] ?? id, sida: 0, lathund: 0, enheter: 0, centrala: new Map() }; metoder.set(id, x); }
+      const post = (led: string, id: string) => {
+        const p = posterna.get(led)!;
+        let x = p.get(id);
+        if (!x) { x = { namn: NAMNEN[led]?.[id] ?? id, sida: 0, lathund: 0, enheter: 0, centrala: new Map() }; p.set(id, x); }
         return x;
       };
       for (const h of hits) {
@@ -281,12 +317,17 @@ const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
             delade += h.count;
             continue;
           }
-          const pl = h.path.match(/^planera:([^:]+):(spara|folj|kalender|pagar)(?::\d+)?$/);
-          if (pl) {
-            if (pl[2] === 'spara') plan(pl[1]).sparade += h.count;
-            else if (pl[2] === 'folj') plan(pl[1]).folj += h.count;
-            else if (pl[2] === 'kalender') plan(pl[1]).kalender += h.count;
-            continue;
+          const pl = h.path.match(/^([^:]+):([^:]+):([^:]+)(?::\d+)?$/);
+          const planensDel = pl ? PLANENS_DEL.get(pl[1]) : undefined;
+          if (pl && planensDel?.plan) {
+            const { ord, ovriga, utan = [] } = planensDel.plan;
+            const vad = pl[3] in ord ? pl[3] : ovriga ? '' : undefined;
+            if (utan.includes(pl[3])) continue;
+            if (vad !== undefined) {
+              const x = plan(planensDel.led, pl[2]);
+              x.handelser.set(vad, (x.handelser.get(vad) ?? 0) + h.count);
+              continue;
+            }
           }
           if (/^utskrift/.test(h.path)) { k.utskrifter.push({ namn: titel || h.path, antal: h.count }); nedladdade += h.count; continue; }
           // Filerna hette först bara filnamnet (upprepad-lasning-lathund.pdf, drive-…); de slås ihop med fil:-namnen.
@@ -306,28 +347,26 @@ const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
           k.verktyg.push({ namn: titel || h.path, under: h.path, antal: h.count });
           continue;
         }
-        let m = h.path.match(/^\/stodundervisning\/([^/]+)$/);
-        if (m) { const x = metod(m[1]); x.sida += h.count; if (titel) x.namn = titel; continue; }
-        m = h.path.match(/^\/stodundervisning\/([^/]+)\/lathund$/);
-        if (m) { const x = metod(m[1]); x.lathund += h.count; if (x.namn === m[1] && titel) x.namn = titel.replace(/^Lathund:\s*/, ''); continue; }
-        m = h.path.match(/^\/stodundervisning\/([^/]+)\/planera$/);
-        if (m) { plan(m[1]).oppnade += h.count; continue; }
+        // En sida i en samling med sidor: postens sida /<led>/<id>, lathunden, planens sida och undersidorna.
+        const s = h.path.match(/^\/([^/]+)\/([^/]+)(?:\/(.+))?$/);
+        const del = s ? DELARNA.find((d) => d.led === s[1]) : undefined;
+        if (s && del && !s[3]) { const x = post(del.led, s[2]); x.sida += h.count; if (titel) x.namn = titel; continue; }
+        if (s && del && s[3] === 'lathund') { const x = post(del.led, s[2]); x.lathund += h.count; if (x.namn === s[2] && titel) x.namn = titel.replace(/^Lathund:\s*/, ''); continue; }
+        if (s && del?.plan && s[3] === del.plan.sida) { plan(del.led, s[2]).oppnade += h.count; continue; }
+        // De centrala sidorna hör till metoder i Stödundervisning (src/data/centrala.json).
         const central = CENTRALA_SIDOR.get(h.path);
-        if (central) { const x = metod(central.metod!); x.centrala.set(central.namn, (x.centrala.get(central.namn) ?? 0) + h.count); continue; }
+        if (central) { const x = post('stodundervisning', central.metod!); x.centrala.set(central.namn, (x.centrala.get(central.namn) ?? 0) + h.count); continue; }
         // Ett problems eller en texts egen sida i en bank (src/lib/bank.ts), "Äpplena · Bas, problem 1 · Problemlösning i
         // grupp", och sidorna under ett verktyg, som temats sida och lärarhandledningen (/<id>/texter/vatten): räknas
         // under metoden, som lathunden.
-        m = h.path.match(/^\/stodundervisning\/([^/.]+)\/(.+)$/);
-        if (m) { const x = metod(m[1]); x.enheter += h.count; if (x.namn === m[1] && titel) x.namn = titel.split(' · ').at(-1) ?? x.namn; continue; }
-        if (/^\/artiklar\/[^/]+$/.test(h.path)) { k.artiklar.push({ namn: titel || h.path, antal: h.count }); continue; }
-        if (/^\/bocker\/[^/]+$/.test(h.path)) { k.bocker.push({ namn: titel || h.path, antal: h.count }); continue; }
+        if (s && del && !s[2].includes('.')) { const x = post(del.led, s[2]); x.enheter += h.count; if (x.namn === s[2] && titel) x.namn = titel.split(' · ').at(-1) ?? x.namn; continue; }
         k.ovriga.push({ namn: titel || h.path, under: h.path, antal: h.count });
       }
-      // En metod rankas efter besöken på metodsidan; lathundens och undersidornas besök står under namnet.
-      const metodRader: Rad[] = [...metoder.values()].map((x) => {
+      // En post rankas efter besöken på postens sida; lathundens och undersidornas besök står under namnet.
+      const postRader = Object.fromEntries([...posterna].map(([led, p]): [string, Rad[]] => [led, [...p.values()].map((x) => {
         const fler = [x.lathund && `${x.lathund} på lathunden`, ...[...x.centrala].map(([namn, n]) => `${n} på ${namn}`), x.enheter && `${x.enheter} på undersidorna`].filter(Boolean);
         return { namn: x.namn, under: fler.length ? `och ${fler.join(', ')}` : undefined, antal: x.sida, syns: fler.length > 0 };
-      });
+      })]));
       const delRader: Rad[] = [...delningar.values()].map((x) => ({
         namn: x.namn,
         under: [...x.kanaler].sort((a, b) => b[1] - a[1]).map(([kanal, n]) => `${KANAL[kanal] ?? kanal} ${n}`).join(' · '),
@@ -338,14 +377,16 @@ const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
       for (const x of delningar.values()) for (const [kanal, n] of x.kanaler) perKanal.set(kanal, (perKanal.get(kanal) ?? 0) + n);
       const kanalRader: Rad[] = [...perKanal].map(([kanal, n]) => ({ namn: KANAL[kanal] ?? kanal, antal: n }));
       // En metod rankas efter besökarna på planens sida. De sparade står alltid under namnet, också när de är noll, så
-      // att en plan som många öppnar men ingen sparar syns (Sonnets förslag 2026-10-25).
-      const planeraRader: Rad[] = [...planera].map(([id, x]) => ({
-        namn: METODNAMN[id] ?? id,
-        under: [`${x.sparade} ${x.sparade === 1 ? 'sparad' : 'sparade'}`, x.folj ? `${x.folj} valde Följ insatsen` : '', x.kalender ? `${x.kalender} hämtade kalenderfilen` : ''].filter(Boolean).join(' · '),
-        antal: x.oppnade,
-        syns: x.sparade > 0 || x.folj > 0 || x.kalender > 0,
+      // att en plan som många öppnar men ingen sparar syns (Sonnets förslag 2026-10-25), och de andra händelserna när de finns.
+      const planRader = Object.fromEntries(DELARNA.filter((d) => d.plan).map((d): [string, Rad[]] => {
+        const { handelse, ord, alltid, ovriga } = d.plan!;
+        return [handelse, [...planerna.get(d.led)!].map(([id, x]) => {
+          const tal = (vad: string) => x.handelser.get(vad) ?? 0;
+          const under = [...Object.entries(ord).filter(([vad]) => vad === alltid || tal(vad) > 0).map(([vad, [en, flera]]) => `${tal(vad)} ${tal(vad) === 1 ? en : flera}`), ...(ovriga && tal('') ? [`${tal('')} ${ovriga}`] : [])];
+          return { namn: NAMNEN[d.led]?.[id] ?? id, under: under.join(' · '), antal: x.oppnade, syns: [...x.handelser.values()].some((n) => n > 0) };
+        })];
       }));
-      return { rader: { metoder: metodRader, planera: planeraRader, filer: [...filer.values()], delningar: delRader, kanaler: kanalRader, ...k }, delade, nedladdade };
+      return { rader: { ...postRader, ...planRader, filer: [...filer.values()], delningar: delRader, kanaler: kanalRader, ...k }, delade, nedladdade };
     }
 
     function lista(rader: Rad[], klass: string) {

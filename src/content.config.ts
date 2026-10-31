@@ -15,6 +15,7 @@ import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
 import { faktaFel } from './lib/kortfakta';
 import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
+import { SAMLINGAR, UTAN_SIDA } from './lib/samlingar';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -1130,7 +1131,8 @@ const undervisningsmetoder = defineCollection({
     ingress: text.min(40).max(320),
     arskurs: z.array(z.enum(['F-3', '4-6', '7-9'])).min(1),
     arskursText: text.optional(),
-    taggar: z.array(text).min(2).max(5),
+    // Taggarna ur registret, som i de andra samlingarna med sidor (src/lib/samlingar.ts), så att taggens sida finns.
+    taggar,
     slag: z.enum(['lektionsforlopp', 'strukturer', 'strategier']),
     tid: text,
     hurOftaSkal: text.max(200).optional(),
@@ -1155,3 +1157,10 @@ const undervisningsmetoder = defineCollection({
 });
 
 export const collections = { artiklar, bocker, stodundervisning, matteproblem, faktateman, undervisningsmetoder };
+
+// Varje samling står i roten över samlingarna (src/lib/samlingar.ts): med sina sidor i SAMLINGAR, så att den kommer med i
+// delningskorten, taggarnas sidor, statistiken, flödena och mejlen, eller i UTAN_SIDA med skälet. En ny samling stannar
+// bygget här tills den står där.
+const utanforRoten = Object.keys(collections).filter((k) => !(k in SAMLINGAR) && !(k in UTAN_SIDA));
+const utanSamling = [...Object.keys(SAMLINGAR), ...Object.keys(UTAN_SIDA)].filter((k) => !(k in collections));
+if (utanforRoten.length || utanSamling.length) throw new Error(`Samlingarna och roten skiljer sig åt: ${[...utanforRoten.map((k) => `${k} står inte i src/lib/samlingar.ts (SAMLINGAR med sin adress, eller UTAN_SIDA med skälet)`), ...utanSamling.map((k) => `${k} står i src/lib/samlingar.ts men är ingen samling här`)].join('; ')}.`);

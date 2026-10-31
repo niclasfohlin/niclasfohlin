@@ -1,0 +1,30 @@
+---
+// Knapparna Ladda ner planer och Öppna planer (Niclas 2026-10-28), med raden om appen och beskedet under, en form för båda
+// platserna: under listan med planerna på en bank (src/components/Insatslista.astro), och på appens sida en gång under båda
+// listorna. På båda gäller de alla planer i båda samlingarna, i en zip (lagningen inför lanseringen, A1; Niclas 2026-10-31:
+// "Ladda ner alla planer oavsett om man är på stöd eller metoder"), och under Öppna planer står filernas slag.
+// src/scripts/insatser.ts kopplar knapparna, med samma rot för zip-filen och för att öppna den (insatser-lagring.ts).
+import { LISTANS_KNAPPAR, type Samling } from '../scripts/insatser-lagring';
+import { APPEN } from '../lib/appen';
+import OppnaPlaner from './OppnaPlaner.astro';
+
+interface Props {
+  /** Bankens samling, eller alla, för appens sida. */
+  samling: Samling | 'alla';
+  /** Bankens sida eller appens sida, i statistikens namn. */
+  plats: 'bank' | 'app';
+  /** Listans namn i statistikens titel, som Dina insatser; utan namn står appens namn ensamt. */
+  listan?: string;
+}
+const { samling, plats, listan } = Astro.props;
+// Statistikens namn för knapparna, som de har hetat på bankerna, och på appens sida med app- först och alla- för båda
+// samlingarna.
+const led = `${plats === 'app' ? 'app-' : ''}${samling === 'metoder' ? 'metoder-' : ''}`;
+const sidan = plats === 'app' ? `Appen ${APPEN.namn}${listan ? `, ${listan}` : ''}` : samling === 'metoder' ? 'Metoder' : 'Metodbanken';
+---
+<p class="pl-andra-knappar pl-alla-planer">
+  <button type="button" class="knapp sekundar liten" data-alla-ner data-goatcounter-click={`insatser:${led}alla-ner`} data-goatcounter-title={`${sidan}: alla planer nedladdade`}>{LISTANS_KNAPPAR.laddaNer}</button>
+  <OppnaPlaner text={LISTANS_KNAPPAR.oppna} goat={`insatser:${led}alla-oppna`} goatTitel={`${sidan}: nedladdade planer öppnade`} />
+</p>
+<p class="pl-hjalp pl-alla-appen" data-alla-appen hidden></p>
+<p class="pl-hjalp pl-alla-besked" data-alla-besked role="status" hidden></p>

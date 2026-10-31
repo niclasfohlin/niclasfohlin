@@ -3,8 +3,9 @@
 // utfallens gränser för en klass (avsnitt 7), metodkortets nivåer (avsnitt 15) och lathundens fyra sidor (avsnitt 14).
 // Riggen läser modulen genom build/standarden.mjs.
 
-import { litenForsta, meningarna, talText } from './text.js';
+import { litenForsta, meningarna, stor, talText } from './text.js';
 import { larDigetsMetodplan, uppraknat } from './plan.js';
+import { periodensLangd, slugAv } from './index.js';
 
 /**
  * Delarna i läsordning: fyra delar i lärarens tid och två bilagor. `rad` står under delens band, och `text` är
@@ -359,6 +360,48 @@ export function lasvagen(d) {
 /** Uppföljningens rader i Med dig på vägen, i tidsordning: arbetslaget före start, besöken och arbetslaget i vecka 4 (riggens c8a40cc). En äldre fil har en rad för arbetslaget. */
 export const MED_DIG_PA_VAGEN = Object.freeze(['arbetslaget-fore', 'arbetslaget', 'observationerna', 'arbetslaget-efter']);
 /**
+ * Namnen på områdena i Så syns lärandet i klassen (`larandet.omraden`), som metodens sida och riggens Word-fil skriver dem
+ * (granskningen inför lanseringen, G10: socialt saknades i sajtens lista, så id:t stod med liten bokstav där Word skriver Det
+ * sociala). Ett område som listan inte har står med sitt id.
+ */
+export const LARANDETS_OMRADEN = Object.freeze({ amneskunskaper: 'Ämneskunskaperna', sprak: 'Språket', lasning: 'Läsningen', skrivning: 'Skrivandet', kommunikation: 'Kommunikationen', samarbete: 'Samarbetet', socialt: 'Det sociala' });
+/**
+ * Riggens fasta text om arbetslagets möten i Till arbetslaget (riggens 1b71a99, build/undervisningsmetod.mjs rad 461–475),
+ * ordagrant, så att metodens sida och riggens Word-fil säger samma sak (granskningen inför lanseringen, G11: sidan saknade
+ * vem som leder, Mellan mötena, Möte 2:s instruktion och den femte frågan). arbetslagetsMoten ordnar delarna ur metodens fil.
+ */
+export const ARBETSLAGETS_MOTEN = Object.freeze({
+  leder: 'En förstelärare eller specialläraren leder mötena, och rektor ger arbetslaget tiden. Besöken är stöd och ingen bedömning.',
+  mote1: 'Möte 1, före första lektionen',
+  mellan: 'Mellan mötena',
+  mote2: 'Möte 2, i slutet av vecka',
+  mote2UtanVecka: 'Möte 2, i slutet av de första veckorna',
+  mote2Text: 'Ta med planeringsmallen med Efter lektionen ifylld och observationsmallarna. Ni tar frågorna enskilt, i par och sedan alla: var och en tänker först själv, sedan pratar ni två och två, och sist delar ni med alla. Var och en säger sist vad hen tar med sig.',
+  sistaFragan: 'Hur fortsätter vi: med metoden i vardagen, i ett ämne till, och vem besöker vem nästa gång?',
+});
+/**
+ * Till arbetslaget i riggens ordning, en rot för metodens sida och riggens renderare: metodens text (`uppdrag.text`), raden
+ * om vem som leder i liten stil, och mötena, var och ett med rubrik, stycken och en numrerad lista: Möte 1 med
+ * `uppdrag.forbered`, Mellan mötena med `uppdrag.planera` och `uppdrag.genomfor` när metoden har dem, och Möte 2 i slutet av
+ * periodens första vecka (`periodensLangd(period).min`), med Möte 2:s instruktion och `uppdrag.reflektera` och sist den femte
+ * frågan. Null utan `uppdrag`.
+ * @param {Record<string, any>} d metodens fil, läst
+ * @returns {{ rubrik: string, text: string, leder: string, moten: { id: string, rubrik: string, text: string[], fragor: string[] }[] } | null}
+ */
+export function arbetslagetsMoten(d) {
+  const u = d?.uppdrag;
+  if (!u) return null;
+  const M = ARBETSLAGETS_MOTEN;
+  const lista = (/** @type {unknown} */ x) => /** @type {string[]} */ ((Array.isArray(x) ? x : x ? [x] : []).filter(Boolean));
+  const vecka = periodensLangd(d.period)?.min;
+  const moten = [
+    { id: 'mote-1', rubrik: M.mote1, text: lista(u.forbered?.text), fragor: lista(u.forbered?.fragor) },
+    { id: 'mellan', rubrik: M.mellan, text: lista([u.planera, u.genomfor]), fragor: [] },
+    { id: 'mote-2', rubrik: vecka ? `${M.mote2} ${vecka}` : M.mote2UtanVecka, text: [M.mote2Text], fragor: [...lista(u.reflektera), M.sistaFragan] },
+  ].filter((m) => m.id === 'mote-2' || m.text.length || m.fragor.length);
+  return { rubrik: u.rubrik ?? 'Till arbetslaget', text: String(u.text ?? ''), leder: M.leder, moten };
+}
+/**
  * Det som skiljer slagen åt i vägen till måndag (sajtens K-645, riggens brev om Kooperativt lärande 2026-10-30): i ett
  * lektionsförlopp är den första lektionen med metoden en hel lektion, och i en metod med strukturer gör klassen korta
  * samarbeten den första veckan och den första hela lektionen i vecka 2 eller 3 (Niclas N2). `forstaLektionen` är lektionen
@@ -367,23 +410,68 @@ export const MED_DIG_PA_VAGEN = Object.freeze(['arbetslaget-fore', 'arbetslaget'
  * lektionsförlopps form.
  */
 export const SLAGENS_FORM = Object.freeze({
-  lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion' }),
-  strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion' }),
-  strategier: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion' }),
+  lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna' }),
+  strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion', start: 'Första samarbetet med eleverna' }),
+  strategier: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna' }),
 });
+/**
+ * Dagen planen börjar på i Lär dig metoden, efter metodens slag: första lektionen, och i strukturerna det första samarbetet,
+ * eftersom första hela lektionen kommer senare (granskningen inför lanseringen, F1). @param {Record<string, any>} d
+ */
+export const planensStart = (d) => (/** @type {Record<string, { start: string }>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp).start;
+/**
+ * Den första hela lektionen när den kommer efter vecka 1, som i strukturerna: namnet, metodens egen mening om den
+ * (tidsschemats variant för första lektionen) och veckan meningen nämner först, som Lär dig metoden visar i den veckan. Inget
+ * i ett lektionsförlopp, där första lektionen är vecka 1 (F1).
+ * @param {Record<string, any>} d
+ * @returns {{ namn: string, text: string, vecka: number } | null}
+ */
+export function forstaHelaLektionen(d) {
+  const namn = forstaLektionensForm(d).namn;
+  const text = (d?.tidsschema?.varianter ?? []).find((/** @type {{ nar?: string }} */ v) => /^första lektionen$/i.test(String(v.nar ?? '').trim()))?.text;
+  const vecka = Number(/\bvecka[\s⁠]+(\d+)/i.exec(String(text ?? ''))?.[1]);
+  return namn !== forstaLektionensForm({}).namn && text && vecka > 1 ? { namn, text: String(text), vecka } : null;
+}
+/** Ankaret på metodens sida för en variant av lektionens tider, ur dess `nar`: "variant-ett-samarbete-i-en-vanlig-lektion". @param {string} nar */
+export const variantensAnkare = (nar) => `variant-${slugAv(String(nar ?? ''))}`;
+/**
+ * Vägen till måndag när den första hela lektionen kommer efter vecka 1, som i strukturerna, en rot för rutan Vill du börja på
+ * måndag? på metodens sida och lathundens sida 2, Vägen till måndag (granskningen inför lanseringen, G1: båda visade den
+ * hela lektionen på 45 minuter, fast vecka 1 i kooperativt lärande är samarbeten på tio minuter): vecka 1 med metodens egen
+ * första mening i `forsta.text`, den korta formen som veckan görs i, det vill säga den kortaste av tidsschemats andra
+ * varianter, med sitt namn, sitt ankare på metodens sida och sina minuter, och veckorna för den första hela lektionen som
+ * metodens mening om den säger dem ("i vecka 2 eller 3"), där planeringsmallen fylls i. Null i ett lektionsförlopp, där
+ * vägen till måndag är den första lektionen, som förut.
+ * @param {Record<string, any>} d metodens fil, läst
+ * @returns {{ vecka1: string, kort: { nar: string, rubrik: string, ankare: string, minuter: { fas: string, tid: string, fraser: string[] }[] } | null, hel: { namn: string, nar: string } } | null}
+ */
+export function vagenTillMandag(d) {
+  const hel = forstaHelaLektionen(d);
+  if (!hel) return null;
+  const lista = (/** @type {unknown} */ x) => /** @type {any[]} */ (Array.isArray(x) ? x : x ? [x] : []);
+  // En variants längd: minuten där dess sista del slutar.
+  const slut = (/** @type {{ delar?: { tid?: string }[] }} */ v) => Math.max(0, ...lista(v.delar).map((x) => Number(/(\d+)\D*$/.exec(String(x.tid ?? '').replace(/\s*min\s*$/, ''))?.[1] ?? 0)));
+  const kort = lista(d.tidsschema?.varianter).filter((v) => !/^första lektionen$/i.test(String(v.nar ?? '').trim()) && lista(v.delar).length).sort((a, b) => slut(a) - slut(b))[0];
+  return {
+    vecka1: meningarna(lista(d.forsta?.text)[0])[0] ?? '',
+    kort: kort ? { nar: String(kort.nar), rubrik: stor(String(kort.nar)), ankare: variantensAnkare(kort.nar), minuter: forstaLektionensMinuter(d, kort.nar) } : null,
+    hel: { namn: hel.namn, nar: /\bi vecka[\s⁠]+\d+(?:\s+(?:eller|och|till)\s+\d+)?/i.exec(hel.text)?.[0] ?? `i vecka ${hel.vecka}` },
+  };
+}
 /**
  * Lektionen som minuterna och den grå planen gäller, med orden som metodens sida och lathunden skriver om den, en rot för
  * båda: namnet, namnet inne i en mening, rubriken på minuterna och raden ovanför den grå planen på lathundens tredje sida.
  * Minuterna heter Minuterna när avsnittet redan heter som lektionen, och annars som lektionen (riggens punkt 3). Raden
- * ovanför planen säger vilken lektion den är (punkt 4) och kallar inte det grå en förlaga, eftersom planeringsmallen säger
- * att det grå är det du gör i varje lektion (punkt 21).
+ * ovanför planen säger vilken lektion den är (punkt 4) och att den är ifylld som exempel, och talar inte om det grå,
+ * eftersom planeringsmallen säger att det grå är det du gör i varje lektion (punkt 21; granskningen inför lanseringen, G9:
+ * "i grått att skriva över" gav det grå två betydelser).
  * @param {Record<string, any>} d metodens fil
  * @returns {{ namn: string, din: string, minuterna: string, forlagan: string }}
  */
 export function forstaLektionensForm(d) {
   const form = /** @type {Record<string, { forstaLektionen: string, din: string }>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp;
   const namn = form.forstaLektionen;
-  return { namn, din: form.din, minuterna: (d?.forsta?.rubrik ?? namn) === namn ? 'Minuterna' : namn, forlagan: `${namn}, i grått att skriva över. Minuterna är hållpunkter.` };
+  return { namn, din: form.din, minuterna: (d?.forsta?.rubrik ?? namn) === namn ? 'Minuterna' : namn, forlagan: `${namn}, ifylld som exempel. Minuterna är hållpunkter.` };
 }
 /**
  * Veckans rubrik i De första veckorna, på metodens sida och i lathundens tabell (riggens punkt 10, Niclas led i
@@ -401,6 +489,13 @@ export function veckansRubrik(r, { vecka = true, nummer = true } = {}) {
   if (!vecka) return `${r.vecka}. ${led ? `${led}: ` : ''}${rubrik}`;
   return led ? `Vecka ${r.vecka}, ${led}: ${rubrik}` : `Vecka ${r.vecka}: ${rubrik}`;
 }
+/**
+ * Namnet på rutan med planens rad om första lektionen, i veckan med den i Lär dig metoden: Första lektionen, och i en metod
+ * där första hela lektionen kommer senare, som strukturerna, veckans rad i progressionen, "Vecka 1, Klimatet: …", så att
+ * vecka 1 inte heter Den första hela lektionen (granskningen inför lanseringen, B5).
+ * @param {Record<string, any>} d
+ */
+export const forstaVeckansNamn = (d) => (forstaLektionensForm(d).namn === forstaLektionensForm({}).namn || !d.progression?.rader?.[0] ? forstaLektionensForm(d).namn : veckansRubrik(d.progression.rader[0]));
 /** Det svåraste i kort form (hinder.kort), som lathunden visar: risken och vad läraren gör (sajtens K-632, Niclas 2026-10-30). */
 export const HINDRETS_KORT = Object.freeze({ meningar: 2, tecken: 220 });
 
@@ -409,13 +504,15 @@ export const HINDRETS_KORT = Object.freeze({ meningar: 2, tecken: 220 });
  * lektionen", och de en eller två första fraserna ur stegets `fraser` för samma del. Den första delen är rutinen i vecka 1
  * (forsta.text), så där står rutinens repliker, det som står inom citattecken i rutinens steg, och inte de två snabba
  * (granskare-3 nr 22). En rot för tabellen Första lektionen, minut för minut på metodens sida och Minuterna i lathunden.
- * Tom lista utan varianten.
+ * Med `nar` gäller minuterna en annan variant, som den korta formen som vecka 1 görs i (vagenTillMandag). Tom lista utan
+ * varianten.
  * @param {Record<string, any>} d metodens fil, läst
+ * @param {string} [nar] variantens `nar`, förvalt första lektionen
  * @returns {{ fas: string, tid: string, fraser: string[] }[]}
  */
-export function forstaLektionensMinuter(d) {
+export function forstaLektionensMinuter(d, nar = 'första lektionen') {
   const lista = (/** @type {unknown} */ x) => /** @type {any[]} */ (Array.isArray(x) ? x : []);
-  const varianten = lista(d.tidsschema?.varianter).find((x) => x.nar === 'första lektionen');
+  const varianten = lista(d.tidsschema?.varianter).find((x) => x.nar === nar);
   const steg = lista(d.steg?.rader);
   const rutinens = lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1').flatMap((r) => [...lista(r.steg).join(' ').matchAll(/”([^”]+)”/g)].map((m) => m[1]));
   return lista(varianten?.delar).map((x) => ({ fas: x.fas, tid: String(x.tid), fraser: x.fas === steg[0]?.namn && rutinens.length ? rutinens : lista(steg.find((y) => y.namn === x.fas)?.fraser).slice(0, 2) }));
@@ -452,7 +549,9 @@ export function forstaLektionensMinuter(d) {
  * meningar ur stodet. En del utan innehåll står inte med. Efter riggens brev om Kooperativt lärande 2026-10-30 (sajtens
  * K-645): avsnittet på sida 2 heter som metodens `forsta.rubrik`, Första lektionen eller Första veckan, och minuterna och den
  * grå planen gäller lektionen ur forstaLektionensForm; kärnans moment räknas upp med komma och och, veckorna har sitt led
- * (veckansRubrik) och fallgroparna komponentens nummer.
+ * (veckansRubrik) och fallgroparna komponentens nummer. Kommer den första hela lektionen efter vecka 1, som i strukturerna,
+ * har sida 2 minuterna för den korta form som vecka 1 görs i, ur samma rot som rutan Vill du börja på måndag?
+ * (vagenTillMandag; granskningen inför lanseringen, G1).
  * @param {Record<string, any>} d metodens fil, läst
  * @returns {LathundSida[]}
  */
@@ -471,6 +570,7 @@ export function lathundensSidor(d) {
   const fallgropar = lista(d.fallgropar?.rader).filter((x, i, alla) => x.komponent && x.prova && alla.findIndex((y) => y.komponent === x.komponent && y.prova) === i);
   const komponentensNr = (/** @type {string} */ namn) => lista(d.karna?.komponenter).findIndex((k) => k.namn === namn) + 1;
   const lektionen = forstaLektionensForm(d);
+  const vagen = vagenTillMandag(d);
   /** @type {LathundSida[]} */
   const sidor = [
     { id: 'metoden', nr: 1, namn: 'Metoden', delar: [
@@ -488,7 +588,9 @@ export function lathundensSidor(d) {
     { id: 'mandag', nr: 2, namn: 'Vägen till måndag', delar: [
       { id: 'fore', slag: 'checklista', rubrik: d.checklista?.rubrik ?? 'Före första lektionen', punkter: lista(d.checklista?.punkter) },
       { id: 'forsta', slag: 'stycken', rubrik: d.forsta?.rubrik ?? lektionen.namn, text: lista(l.lektion?.text) },
-      { id: 'minuterna', slag: 'minuter', rubrik: lektionen.minuterna, delar: forstaLektionensMinuter(d).map((x) => ({ ...x, tid: x.tid.replace(/\s*min$/, '') })) },
+      // I en metod där den första hela lektionen kommer efter vecka 1 är måndagen den korta formen, med dess minuter
+      // (vagenTillMandag, G1); den hela lektionen står som förlaga på sida 3.
+      { id: 'minuterna', slag: 'minuter', rubrik: vagen?.kort ? vagen.kort.rubrik : lektionen.minuterna, delar: (vagen?.kort ? vagen.kort.minuter : forstaLektionensMinuter(d)).map((x) => ({ ...x, tid: x.tid.replace(/\s*min$/, '') })) },
       ...lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1').map((r, i) => /** @type {LathundDel} */ ({ id: `rutin-${i + 1}`, slag: 'rutin', rubrik: `Rutinen ${litenForsta(r.namn)}`, namn: r.namn, text: r.vad ?? '', steg: lista(r.steg) })),
     ] },
     { id: 'planera', nr: 3, namn: 'Planera lektionen', delar: [

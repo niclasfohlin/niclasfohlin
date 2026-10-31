@@ -19,7 +19,6 @@ import { datumText, UPPHOV } from '../../../lib/metod';
 import { lathundensSidor } from '../../../lib/standard/index.js';
 import { metodensAdress, relateradeSidor, umStam, undervisningsmetodensSaker, type Um } from '../../../lib/undervisningsmetod';
 import { metodensFiler } from '../../../lib/undervisningsmetodfiler';
-import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('undervisningsmetoder');
@@ -36,7 +35,8 @@ const filer = metodensFiler(id);
 const filmer = metodensFilmer({ film: d.film, filmer: d.filmer }, id, 'metoder');
 // Metodens saker, som leder till metodens sida, utom lathunden själv.
 const saker = undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektionskort }).filter((x) => x.adress !== `${sida}/lathund`);
-const relaterade = relateradeSidor(d, await getCollection('stodundervisning'));
+// De publicerade metoderna, så att ett utkast aldrig blir en länk; ett okänt id stoppar bygget (provaHanvisade i src/lib/innehall.ts).
+const relaterade = relateradeSidor(d, await publicerade('stodundervisning'));
 ---
 
 <Base title={`Lathund: ${d.titel}`} description={`Lathunden Att komma igång till ${d.titel}: metoden, vägen till måndag, planeringen av en lektion och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>

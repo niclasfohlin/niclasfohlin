@@ -1,11 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { site } from '../../data/site';
-import { allaTaggar, artiklarSorterade, metoderSorterade, bockerSorterade } from '../../lib/innehall';
+import { allaTaggar, samlingarnasPoster } from '../../lib/innehall';
+import { SAMLINGARNA } from '../../lib/samlingar';
 
-const [artiklar, metoder, bocker] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade()]);
+// Antalet poster med taggen i alla samlingar med sidor (src/lib/samlingar.ts); scripts/cacheprov.mjs stannar när talet inte
+// är taggens poster.
+const poster = await samlingarnasPoster();
 const antal = new Map<string, number>();
-for (const post of [...artiklar, ...metoder, ...bocker]) {
+for (const post of SAMLINGARNA.flatMap((s) => poster[s] as { data: { taggar: string[] } }[])) {
   for (const t of post.data.taggar) antal.set(t, (antal.get(t) ?? 0) + 1);
 }
 const omraden = ['Läsning', 'Skrivning', 'Matematik', 'Socialt', 'Allmänt'];

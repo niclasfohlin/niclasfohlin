@@ -28,6 +28,7 @@ import { join, relative, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 import { mojligaUpplagg } from '../src/lib/standard/index.js';
+import { SAMLINGAR } from '../src/lib/samlingar.ts';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const taggar = JSON.parse(readFileSync(join(rot, 'src/data/taggar.json'), 'utf8')).taggar;
@@ -49,9 +50,11 @@ for (const p of publikationer) {
   for (const a of p.alias) pubAlias.set(a.toLowerCase(), p.id);
 }
 
+// Posterna i varje samling med sidor, ur roten över samlingarna (src/lib/samlingar.ts), så att en ny samling prövas här av
+// sig själv: dess taggar mot registret, i genomgången av en ny tagg och i antalen.
 function innehallsfiler() {
   const filer = [];
-  for (const samling of ['artiklar', 'bocker', 'stodundervisning']) {
+  for (const samling of Object.keys(SAMLINGAR)) {
     const dir = join(rot, 'src/content', samling);
     let namn = [];
     try { namn = readdirSync(dir); } catch { continue; }
@@ -64,7 +67,7 @@ function innehallsfiler() {
   return filer;
 }
 
-// Markdown har frontmatter mellan ---; en metod i stödundervisning är en hel YAML-fil.
+// Markdown har frontmatter mellan ---; en metod i Stödundervisning och under Metoder är en hel YAML-fil.
 function frontmatter(fil) {
   const text = readFileSync(fil, 'utf8');
   if (fil.endsWith('.yaml')) {

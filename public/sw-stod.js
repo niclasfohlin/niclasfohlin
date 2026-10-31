@@ -93,6 +93,9 @@
   self.addEventListener('activate', (e) => {
     e.waitUntil((async () => {
       const gamla = (await caches.keys()).filter((n) => n !== VIKTIGA && !n.startsWith(`${VERSION}-`));
+      // Går flytten inte, som när telefonens minne är fullt, står de gamla lådorna för filer kvar till nästa gång, och filerna
+      // söks där (Codex 2026-10-31: skripten försvann fast flytten misslyckades).
+      let flyttat = true;
       try {
         const skydd = await viktigaFiler();
         const ny = await caches.open(FILER);
@@ -104,8 +107,8 @@
             if (svar) await ny.put(k, svar);
           }
         }
-      } catch { /* de gamla lådorna tas bort ändå */ }
-      await Promise.all(gamla.map((n) => caches.delete(n)));
+      } catch { flyttat = false; }
+      await Promise.all(gamla.filter((n) => flyttat || !n.endsWith('-filer')).map((n) => caches.delete(n)));
       await self.clients.claim();
     })());
   });
@@ -134,7 +137,7 @@
     }
     if (url.pathname.startsWith('/_astro/')) {
       e.respondWith((async () => {
-        const sparat = await caches.match(fraga, { cacheName: FILER }).catch(() => undefined);
+        const sparat = (await caches.match(fraga, { cacheName: FILER }).catch(() => undefined)) || (await caches.match(fraga).catch(() => undefined));
         if (sparat) return sparat;
         const svar = await fetch(fraga);
         if (arFil(svar)) e.waitUntil(spara(FILER, fraga, svar.clone()).catch(() => { /* svaret visas ändå */ }));

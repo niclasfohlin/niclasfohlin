@@ -18,9 +18,11 @@ export interface Urvalet {
 
 /**
  * Urvalet för rutan samla, med kryssrutorna name="valda" på sidans kort (.kort) och urvalet sparat under nyckeln i
- * sessionStorage. Rutans knappar för att ladda ner står i .samla-knappar och är avstängda när inget är valt.
+ * sessionStorage. Rutans knappar för att ladda ner står i .samla-knappar och är avstängda när inget är valt. vidAntalet får
+ * antalet valda efter varje ändring, så att banken kan ge knappen namnet efter vad den ger, som Metoders zip-fil med flera
+ * Word-filer (lagningen inför lanseringen, A4).
  */
-export function urvalet(samla: HTMLFormElement, nyckel: string): Urvalet {
+export function urvalet(samla: HTMLFormElement, nyckel: string, vidAntalet?: (antal: number) => void): Urvalet {
   const boxar = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="valda"]'));
   const knappar = Array.from(samla.querySelectorAll<HTMLButtonElement>('.samla-knappar button:not([data-rensa])'));
   const valda = samla.querySelector('[data-valda]') as HTMLElement;
@@ -46,6 +48,7 @@ export function urvalet(samla: HTMLFormElement, nyckel: string): Urvalet {
     const namn = markerade().map((b) => b.closest('.kort')?.querySelector('h3')?.textContent?.trim()).filter(Boolean);
     valda.textContent = n === 0 ? 'Inga metoder valda' : `${n === 1 ? '1 metod vald' : `${n} metoder valda`}: ${namn.join(', ')}`;
     for (const b of boxar) b.closest('.kort')?.classList.toggle('vald', b.checked);
+    vidAntalet?.(n);
   }
   // Urvalet minns under besöket, så att läraren kan läsa en metod och komma tillbaka.
   const spara = () => { try { sessionStorage.setItem(nyckel, JSON.stringify(markerade().map((b) => b.value))); } catch { /* utan lagring */ } };

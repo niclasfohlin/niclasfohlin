@@ -406,12 +406,12 @@ uppfoljning:
     - nar: Före insatsen
       tid: "före"
       perElev: 12
-      resultat: "högsta nivå i screeningen, klarade uppgifter i ljudkollen av 9, uppgift 9 av 4"
+      resultat: "nivå i screeningen; klarade uppgifter av 9; påhittade ord av 4 i uppgift 9"
       vad: "Gör ljudkollen och screeningen, version A, med en elev i taget utanför passen, cirka tolv minuter per elev. I gruppens översikt ser du sedan ingången."
     - nar: Var tredje vecka
       tid: "var 3:e vecka"
       perElev: [2, 3]
-      resultat: "rätt av 4 i uppgiften för gruppens förmåga och för nästa, uppgift 4 av 10"
+      resultat: "rätt av 4 i uppgiften för gruppens förmåga och för nästa; rätt av 10 i uppgift 4"
       vad: "Gör ljudkollens uppgift för gruppens förmåga, uppgiften för nästa förmåga och uppgift 4 på två till tre minuter per elev."
     - nar: Vecka 6
       tid: "vecka 6"
@@ -419,7 +419,7 @@ uppfoljning:
     - nar: Efter 4–12 veckor
       tid: "efter"
       perElev: 12
-      resultat: "högsta nivå i screeningen, klarade uppgifter i ljudkollen av 9, uppgift 9 av 4"
+      resultat: "nivå i screeningen; klarade uppgifter av 9; påhittade ord av 4 i uppgift 9"
       vad: "Gör hela ljudkollen och screeningen, version B, med en elev i taget, och jämför med resultaten före insatsen."
     # Kollegans observation, samma vecka som ljudkollen, sist eftersom sparade resultat hör till radens plats (K-596).
     - nar: Observation av ett pass

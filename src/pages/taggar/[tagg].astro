@@ -1,47 +1,50 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { allaTaggar, artiklarSorterade, metoderSorterade, bockerSorterade, formateraDatum } from '../../lib/innehall';
+import type { CollectionEntry } from 'astro:content';
+import { allaTaggar, samlingarnasPoster, formateraDatum } from '../../lib/innehall';
+import { arskursText } from '../../lib/metod';
+import { SAMLINGAR, SAMLINGARNA, postensAdress, type SamlingNyckel } from '../../lib/samlingar';
 
-// Bara taggar som något innehåll använder får en sida; övriga finns i registret men skulle bli tomma sidor.
+type Post = { id: string; data: { titel: string; taggar: string[] } };
+
+// Bara taggar som något innehåll använder får en sida; övriga finns i registret men skulle bli tomma sidor. Taggens poster
+// står i varje samling med sidor, med samlingens namn som rubrik, i rotens ordning (src/lib/samlingar.ts). Raden efter titeln
+// säger var posten hör hemma; en samling i roten utan sin rad i RADEN stannar astro check, och scripts/cacheprov.mjs stannar
+// på en post som inte står på sina taggars sidor.
 export async function getStaticPaths() {
-  const [artiklar, metoder, bocker] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade()]);
-  const iBruk = new Set([...artiklar, ...metoder, ...bocker].flatMap((p) => p.data.taggar));
+  const RADEN: { [K in SamlingNyckel]: (p: CollectionEntry<K>) => string } = {
+    stodundervisning: (m) => `${m.data.omrade}, ${m.data.arskurs.join(', ')}`,
+    undervisningsmetoder: (u) => arskursText(u.data),
+    artiklar: (a) => formateraDatum(a.data.datum),
+    bocker: (b) => String(b.data.utgivningsar),
+  };
+  const poster = await samlingarnasPoster();
+  const alla = SAMLINGARNA.flatMap((s) => (poster[s] as Post[]).map((p) => ({ s, p })));
+  const iBruk = new Set(alla.flatMap(({ p }) => p.data.taggar));
   return allaTaggar().filter((t) => iBruk.has(t.id)).map((t) => ({
     params: { tagg: t.id },
     props: {
       tagg: t,
-      artiklar: artiklar.filter((a) => a.data.taggar.includes(t.id)),
-      metoder: metoder.filter((m) => m.data.taggar.includes(t.id)),
-      bocker: bocker.filter((b) => b.data.taggar.includes(t.id)),
+      delar: SAMLINGARNA.map((s) => ({
+        namn: SAMLINGAR[s].namn,
+        poster: alla.filter((x) => x.s === s && x.p.data.taggar.includes(t.id)).map(({ p }) => ({ href: postensAdress(s, p.id), titel: p.data.titel, rad: (RADEN[s] as (x: Post) => string)(p) })),
+      })).filter((d) => d.poster.length),
     },
   }));
 }
 
-const { tagg, artiklar, metoder, bocker } = Astro.props;
-const tomt = artiklar.length + metoder.length + bocker.length === 0;
+const { tagg, delar } = Astro.props;
 ---
 
 <Base title={tagg.label} description={tagg.beskrivning}>
   <p class="meta">Tagg · {tagg.omrade}</p>
   <h1>{tagg.label}</h1>
   <p class="text">{tagg.beskrivning}</p>
-  {tomt && <p>Inget innehåll med den här taggen ännu.</p>}
-  {metoder.length > 0 && (
+  {delar.length === 0 && <p>Inget innehåll med den här taggen ännu.</p>}
+  {delar.map((d) => (
     <section>
-      <h2>Metoder</h2>
-      <ul>{metoder.map((m) => <li><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a> <span class="meta">{m.data.omrade}, {m.data.arskurs.join(', ')}</span></li>)}</ul>
+      <h2>{d.namn}</h2>
+      <ul>{d.poster.map((p) => <li><a href={p.href}>{p.titel}</a> <span class="meta">{p.rad}</span></li>)}</ul>
     </section>
-  )}
-  {artiklar.length > 0 && (
-    <section>
-      <h2>Artiklar</h2>
-      <ul>{artiklar.map((a) => <li><a href={`/artiklar/${a.id}`}>{a.data.titel}</a> <span class="meta">{formateraDatum(a.data.datum)}</span></li>)}</ul>
-    </section>
-  )}
-  {bocker.length > 0 && (
-    <section>
-      <h2>Böcker</h2>
-      <ul>{bocker.map((b) => <li><a href={`/bocker/${b.id}`}>{b.data.titel}</a> <span class="meta">{b.data.utgivningsar}</span></li>)}</ul>
-    </section>
-  )}
+  ))}
 </Base>

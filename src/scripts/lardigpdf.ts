@@ -45,7 +45,7 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
   for (const [j, l] of s.linjer.entries()) {
     p.rubrik(l.namn, 150);
     // Linjen med två kryss, som på sidan (linjenRitas); ett kryss står som ett tal.
-    if (!linjenRitas(l)) { const x = l.varden.filter((v) => v !== undefined); p.text(x.length ? `Skattad en gång: ${x[0]} av ${l.skala.till}.` : 'Inte skattad än.', { luft: 4 }); continue; }
+    if (!linjenRitas(l)) { const i = l.varden.findIndex((v) => v !== undefined); p.text(i >= 0 ? `Skattad en gång, ${s.veckor[i].namn.text}: ${l.varden[i]} av ${l.skala.till}.` : 'Inte skattad än.', { luft: 4 }); continue; }
     const andar = skalansAndar(l.namn, j);
     p.not(andar ? `${skalansAndarText(l.skala, andar)}, vecka för vecka.` : `${l.skala.fran} till ${l.skala.till}, vecka för vecka.`);
     p.linje(l.varden, etiketter, { fran: l.skala.fran, till: l.skala.till, granser: skattningensGranser(l), hojd: 80, full: true });

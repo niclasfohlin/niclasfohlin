@@ -653,24 +653,37 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .um-ruta-viktig p { font-size: 1.02rem; }
 .um-kalla { color: inherit; text-decoration: underline dotted; text-underline-offset: 0.2em; }
 .um-replik { quotes: "”" "”"; font-style: italic; }
-/* Kärnans fyra kort, två och två i telefonen och fyra i bredd på dator. */
+/* Kärnans kort, två och två i telefonen, och på dator i lika många spalter som korten när de är fem eller färre (--kolumner,
+   kortensKolumner i src/lib/undervisningsmetod.ts). Ett udda antal i två spalter låter det sista kortet ta hela raden, så att
+   ingen tom halva står bredvid det (lagningen inför lanseringen, D2: Kärnans fem i kooperativt lärande). */
 .um-korten { margin: 1.25rem 0; }
 .um-kort-rad { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin: 0; padding: 0; list-style: none; }
-@media (min-width: 48rem) { .um-kort-rad { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.um-kort-rad > li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+@media (min-width: 48rem) {
+  .um-kort-rad { grid-template-columns: repeat(var(--kolumner, 4), minmax(0, 1fr)); }
+  .um-sidan .um-kort-rad > li:last-child { grid-column: auto; }
+}
 .um-kort { display: flex; flex-direction: column; padding: 0.8rem 0.85rem; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-yta); font-family: var(--typsnitt-ui); }
 .um-kort-nr { display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--farg-accent); color: #fff; font: 700 0.9rem/1 var(--typsnitt-ui); flex: none; }
 /* Ett långt namn, som Samarbetsfärdigheter i kooperativt lärande, avstavas i kortet i telefonen i stället för att gå ut ur
    det (riggens punkt 6, K-645). */
-.um-kort-namn { margin: 0.45rem 0 0.3rem; font-weight: 700; line-height: 1.25; overflow-wrap: break-word; hyphens: auto; }
+.um-kort-namn { margin: 0.45rem 0 0.3rem; font-weight: 700; line-height: 1.25; overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
 .um-kort-vad { margin: 0; font-size: 0.88rem; line-height: 1.45; }
 .um-kort-moment { margin: auto 0 0; padding-top: 0.45rem; font-size: 0.8125rem; color: var(--farg-text-svag); font-style: italic; }
 .um-varv { margin: 0.6rem 0 0; font-family: var(--typsnitt-ui); font-style: italic; text-align: center; color: var(--farg-text-svag); }
 .um-fragor { margin: 1rem 0; padding: 0.9rem 1.1rem; border-left: 0; background: var(--farg-ton); border-radius: var(--radie); font-family: var(--typsnitt-ui); }
 .um-fragor ol { margin: 0; padding-left: 1.3rem; }
 .um-fragor li { margin: 0.2rem 0; font-weight: 600; }
-/* Remsan: lektionens delar med minuterna, länkar till varje del. */
+/* Remsan: lektionens delar med minuterna, länkar till varje del, tre i bredd i telefonen och alla i en rad på dator (--antal,
+   delarnas antal). Den sista delen tar resten av raden, så att ingen grå tom ruta står i rutnätet (lagningen inför
+   lanseringen, D3: fem delar i ett rutnät för sex). */
 .um-remsa ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 0 0 1.25rem; padding: 0; list-style: none; background: var(--farg-kant); border: 1px solid var(--farg-kant); border-radius: var(--radie); overflow: hidden; font-family: var(--typsnitt-ui); }
-@media (min-width: 48rem) { .um-remsa ol { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.um-remsa li:last-child:nth-child(3n + 1) { grid-column: 1 / -1; }
+.um-remsa li:last-child:nth-child(3n + 2) { grid-column: span 2; }
+@media (min-width: 48rem) {
+  .um-remsa ol { grid-template-columns: repeat(var(--antal, 6), minmax(0, 1fr)); }
+  .um-remsa li:last-child:nth-child(n) { grid-column: auto; }
+}
 .um-remsa a { display: block; height: 100%; padding: 0.5rem 0.6rem; background: var(--farg-yta); text-decoration: none; }
 .um-remsa a:hover { background: var(--farg-accent-ljus); }
 .um-remsa-tid { display: block; font-size: 0.8125rem; color: var(--farg-text-svag); }
@@ -730,8 +743,14 @@ html.js .um-utfall-antal { display: flex; }
 .um-ex-overst div { padding: 0.5rem 0.75rem; background: var(--farg-ton); }
 .um-ex-overst dt { font-size: 0.8125rem; font-weight: 700; color: var(--farg-text-svag); }
 .um-ex-overst dd { margin: 0.1rem 0 0; }
+/* Exemplets rad med kärnan, som kärnans kort: det sista tar hela raden när det står ensamt i två spalter, och på dator lika
+   många spalter som delarna när de är fem eller färre (D2). */
 .um-ex-remsa { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0 0 1rem; padding: 0; list-style: none; font-family: var(--typsnitt-ui); font-size: 0.88rem; }
-@media (min-width: 48rem) { .um-ex-remsa { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.um-ex-remsa > li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+@media (min-width: 48rem) {
+  .um-ex-remsa { grid-template-columns: repeat(var(--kolumner, 4), minmax(0, 1fr)); }
+  .um-ex-remsa > li:last-child:nth-child(n) { grid-column: auto; }
+}
 .um-ex-remsa li { display: flex; flex-direction: column; gap: 0.35rem; padding: 0.6rem; border: 1px solid var(--farg-kant); border-radius: 8px; }
 .um-notera { padding: 0.75rem 0.9rem; background: var(--farg-ton); border-left: 4px solid var(--farg-mork); border-radius: 0 8px 8px 0; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
 .um-tabell { font-size: 0.93rem; }
@@ -822,7 +841,9 @@ html.js .um-utfall-antal { display: flex; }
 /* Rutinerna i veckorna som sidans andra rader (design-3 nr 19). */
 .um-rutin { margin: 0.6rem 0 0; padding: 0; background: none; border-radius: 0; border: 0; border-top: 1px solid var(--farg-kant); }
 .um-rutin:last-of-type { border-bottom: 0; }
-@media (max-width: 39.99rem) { .um-sida { width: calc(50% - 0.375rem); } .um-sida-liggande { width: 100%; } .um-sidor > .um-sida:only-child { width: 70%; } }
+/* I telefonen tar varje blad spaltens hela bredd, stående som liggande, så att texten på bladet går att läsa (lagningen inför
+   lanseringen, D5: de stående bladen stod i halva bredden). */
+@media (max-width: 39.99rem) { .um-sida { width: 100%; } }
 /* Länken från en del av lektionen till manuset för en svår stund, och del 4:s När det glider med sina avsnitt. */
 .um-ld-manus { margin: -0.4rem 1rem 0.9rem; font-family: var(--typsnitt-ui); font-size: 0.92rem; font-weight: 600; }
 .um-ld-manus a { color: var(--farg-accent); }
@@ -860,9 +881,11 @@ html.js .um-utfall-antal { display: flex; }
 .um-minuter td:last-child { font-style: italic; }
 /* Designgranskningen omgång 2: inga ord klipps i remsan och cellerna, ett udda antal celler fyller raden, affischerna
    med sin text, och veckorna utan ram. */
-.um-remsa-namn, .um-celler a { overflow-wrap: break-word; hyphens: auto; }
+.um-remsa-namn, .um-celler a { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
 @media (max-width: 23.99rem) {
   .um-remsa ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .um-remsa li:last-child:nth-child(n) { grid-column: auto; }
+  .um-remsa li:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .um-celler a { padding-inline: 0.5rem; font-size: 0.875rem; }
 }
 .um-celler li:last-child:nth-child(odd) { grid-column: 1 / -1; }
@@ -871,8 +894,8 @@ html.js .um-utfall-antal { display: flex; }
   .um-celler li:last-child:nth-child(3n + 1) { grid-column: 1 / -1; }
   .um-celler li:last-child:nth-child(3n + 2) { grid-column: span 2; }
   .um-blad-post { display: grid; grid-template-columns: 14rem minmax(0, 1fr); column-gap: 1.25rem; align-items: start; }
-  .um-blad-post > .um-sida { grid-column: 1; grid-row: 1 / span 3; width: 100%; margin: 1.25rem 0 0; }
-  .um-blad-post > :not(.um-sida) { grid-column: 2; }
+  .um-blad-post > .um-sida { grid-column: 1; grid-row: 1; width: 100%; margin: 1.25rem 0 0; }
+  .um-blad-post > .um-blad-kropp { grid-column: 2; grid-row: 1; }
   .um-blad-post > .um-filknappar { grid-column: 1 / -1; }
 }
 /* Bladet i telefonen: rubriken och texten först, sedan bilden och knappen under (design-3 nr 6). */
@@ -939,6 +962,8 @@ html.js .metodkort.mp-bank .valj { min-height: 2.75rem; padding-left: 0.5rem; }
 html.js .samla.mp-samla { grid-template-columns: minmax(0, 1fr) auto; }
 .samla.mp-samla .samla-knappar { grid-column: 2; flex-wrap: nowrap; }
 .samla.mp-samla .filval { width: auto; }
+/* Förklaringen står också i telefonen: knappen ger en zip-fil när flera metoder är valda (A4). */
+.samla.mp-samla .samla-hjalp { display: block; }
 /* Bankens filter, Stödundervisnings (.mbf, K-642): så många spalter på datorn som rutorna är, eftersom en ruta bara visas när
    den skiljer metoderna åt, och i telefonen tar en sista ruta ensam hela raden. Valen, Rensa och Visa alla metoder har
    tryckytor på minst 44 punkter. */
@@ -982,6 +1007,8 @@ html.js .samla.mp-samla { grid-template-columns: minmax(0, 1fr) auto; }
 .mbf-lage small { font-size: 0.8125rem; color: var(--farg-text-svag); }
 .mbf-lage.inom { color: var(--farg-accent); font-weight: 700; }
 .mbf-lage.noll { opacity: 0.55; }
+/* Raden under skalan om metoderna utan läge på den, som Oklart i området (src/scripts/bankfilter.ts, A5). */
+.mbf-utanfor { margin: 0.25rem 0 0; font-size: 0.85rem; line-height: 1.4; color: var(--farg-text-svag); }
 /* Förklaringen av nivåerna rad för rad ur standarden: staplarna och ordet med texten, och luft mellan raderna. Ett läge utan
    staplar bryts i första kolumnen, så att Inte sammanvägt inte gör den bred och texten smal i telefonen. */
 .mp-nivaer tr + tr :is(th, td) { border-top: 1px solid var(--farg-kant-svag); }
@@ -2457,6 +2484,9 @@ html.js .bara-js { display: inline-block; }
 .um-lh-fakta { grid-template-columns: 1.4fr 1.2fr 1.6fr 1fr 1fr; }
 .um-lh-under { font-size: 0.85rem; line-height: 1.4; color: var(--farg-text-svag); }
 .um-lh .um-kort-rad { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Kärnans kort i en spalt i telefonen, så att ett långt namn som Samarbetsfärdigheter ryms i kortet (lagningen inför
+   lanseringen, A7: i två spalter bröts rubrikerna mitt i ordet i 320 och 390 punkter). */
+@media screen and (max-width: 29.99rem) { .um-lh .um-kort-rad { grid-template-columns: minmax(0, 1fr); } }
 .um-lh .um-kort { padding: 0.7rem 0.75rem; }
 .um-lh-hel { padding: 0.75rem 1.25rem 0.25rem; }
 .um-lh-hel:last-child { padding-bottom: 1.25rem; }
@@ -3698,6 +3728,11 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-bock.ja svg { stroke: var(--farg-lasning); }
 .pl-extrabock { display: flex; align-items: center; gap: 0.6rem; margin: 0.5rem 0 0; }
 .pl-andra-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+/* En bank utan planer i webbläsaren: bara raden om planer i en fil och Öppna planer, utan listans rubrik. */
+.pl-insatser-tom > h2 { display: none; }
+/* Knappen som öppnar planer med filernas slag i liten grå text under (PLANFILERNAS_SLAG). */
+.pl-filval { display: inline-flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+.pl-filslag { font: 0.75rem/1.2 var(--typsnitt-ui); color: var(--farg-text-svag); }
 .pl-flytta { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.8rem 1rem; margin: 0.5rem 0; }
 .pl-flytta[hidden] { display: none; }
 .pl-flytta .pl-falt { margin-bottom: 0.7rem; }
@@ -3890,8 +3925,10 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-insatser .pl-alla-besked, .pl-insatser .pl-alla-appen { margin: 0; padding: 0 1rem 0.55rem; }
 .pl-insatser .pl-alla-appen { font-size: 0.8rem; line-height: 1.35; }
 .pl-insatser li { border-top: 1px solid var(--farg-kant); border-left: 5px solid var(--omr, var(--farg-accent)); }
-.pl-insatser a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.1rem 0.75rem; padding: 0.7rem 1rem; text-decoration: none; color: var(--farg-text); }
-.pl-insatser a:hover { background: var(--farg-ton-svag); }
+/* Raden för en plan är en länk i listan; en länk i löptext, som banken i raden tom på appens sida, är en vanlig länk
+   (lagningen inför lanseringen, A2: den stod på en egen rad utan länkens färg). */
+.pl-insatser li a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.1rem 0.75rem; padding: 0.7rem 1rem; text-decoration: none; color: var(--farg-text); }
+.pl-insatser li a:hover { background: var(--farg-ton-svag); }
 .pl-insatser .pl-metod { font-weight: 700; }
 .pl-insatser .pl-om { grid-column: 1; font-size: 0.88rem; color: var(--farg-text-svag); }
 .pl-insatser .pl-pil { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--farg-accent); font-weight: 600; }
@@ -4452,12 +4489,20 @@ button.pl-passroll { min-height: 2.75rem; }
 .app-valet:hover { color: #fff; background: var(--farg-accent-mork); }
 .app-valet + .app-valet:hover { background: #22303d; }
 .app-valet:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 3px; }
-.app-valets-namn { font-size: 1.75rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.01em; }
+/* Bankens namn efter knappens bredd, så att Metoder får luft till kanten också i 320 punkter (lagningen inför lanseringen,
+   A8): knappen är en behållare, och namnet är högst 1,75rem och annars 22 procent av knappens innerbredd. */
+.app-valet { container-type: inline-size; }
+.app-valets-namn { font-size: min(1.75rem, 22cqi); font-weight: 800; line-height: 1.05; letter-spacing: -0.01em; }
 .app-valets-om { font-size: 0.9rem; line-height: 1.3; color: rgba(255, 255, 255, 0.86); }
 /* De två listorna står nära varandra, som en sak, och inte med avståndet mellan sidans avsnitt. */
 .innehall > .pl-insatser + .pl-insatser { margin-top: 1rem; }
 /* Raden tom i listan på appens sida, när en samling inte har några planer än. */
 .pl-tom { margin: 0; padding: 0 1rem 0.6rem; font-size: 0.92rem; color: var(--farg-text-svag); }
+/* Knapparna för planerna i båda samlingarna under listorna på appens sida, i listornas bredd (src/components/
+   PlanernasKnappar.astro, A1). */
+.pl-alla { max-width: 42rem; margin: 0.75rem 0 1.25rem; font-family: var(--typsnitt-ui); }
+.pl-alla .pl-alla-planer { margin: 0; }
+.pl-alla .pl-hjalp { margin: 0.45rem 0 0; }
 
 /* Länken till appen på bankerna och i planens sidor (src/components/AppLank.astro): bara i telefon och surfplatta, och aldrig i
    appen själv. Den behöver inget skript. */
@@ -4624,7 +4669,8 @@ button.pl-passroll { min-height: 2.75rem; }
 .ld-klasstabell { width: auto; max-width: none; }
 .ld-klasstabell th, .ld-klasstabell td { text-align: center; padding: 0.4rem 0.5rem; white-space: nowrap; }
 .ld-klasstabell th[scope="row"], .ld-klasstabell thead th:first-child { text-align: left; padding-left: 0; position: sticky; left: 0; background: var(--farg-bakgrund); }
-.ld-klasstabell th:last-child, .ld-klasstabell td:last-child { text-align: right; font-weight: 700; }
+.ld-klasstabell .ld-snitt, .ld-klasstabell thead th:nth-child(2) { font-weight: 700; border-right: 1px solid var(--farg-kant); }
+.ld-klasstabell th, .ld-klasstabell td { padding-inline: 0.35rem; }
 .ld-klasstabell thead small { display: block; font-weight: 400; font-size: 0.78rem; color: var(--farg-text-svag); }
 /* En avslutad plan är grå och streckad, som i Planera insatsen, också i Lär dig metodens egna ytor. */
 .pl-avslutad-plan .ld-stund { border-top-color: #8a949e; }

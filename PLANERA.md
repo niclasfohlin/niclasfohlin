@@ -274,8 +274,9 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Kalenderveckan | `kalendervecka`, `kalenderveckor` och, för skärmläsare, `kalenderveckaUtskriven` |
 | Veckan i planen | `planveckan`, `planveckanKort`, `planveckansKort`, `gangen`, `veckansNamn` och `planveckansNamn` |
 | Metodens vecka, när en stege börjar högre upp | `metodveckan`, och i metodens texter `veckornaIPlanen` |
+| Stegets namn, med ledet först, och stegens takt i Börja på | `stegetsNamnIPlanen` och `stegensTakt` |
 | Veckorna i en rubrik, "vecka 1–2", och i början av en tabellrad, "7–8 Gruppen väljer modell" | `veckorI` och `radensVeckor` |
-| Veckans pass och datumordningen | `veckansPass`, `veckansDagar`, `efterDatum` och `iDatumordning` |
+| Veckans pass och datumordningen, och en vecka där alla pass är inställda | `veckansPass`, `veckansDagar`, `efterDatum`, `iDatumordning` och `allaPassInstallda` |
 | Ett datum, och dagarna mellan två datum | `datumText`, `dagOchManad`, `dagText`, `dagKort`, `spannKort`, `datumspann`, `arDatum` och `dagarMellan` |
 | Dagens datum | `idagLokalt` i `src/scripts/insatser-lagring.ts` |
 | Veckodagarna | `VECKODAGAR` och `veckodagKort` |
@@ -295,13 +296,13 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Metodens egna skattningar: fältet, reglerna, skalan, linjen, texten och lärarens länkar | `metodensSkattningar`, `SKATTNINGARNAS_VEM`, `tolkaRegel`, `regelnGaller`, `skalansSteg`, `stegetsNamn`, `stegetsSpann`, `skattningensGranser`, `iSkalan`, `linjen`, `skattningensText` och `rensadLank` |
 | Filnamnen på det som laddas ner | `filnamnet` |
 | Knapparnas namn för planen som fil | `PLANKNAPPAR` |
-| Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
+| Uppföljningen, och det läraren för in vid en mätning, ett mått i taget | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader`, `resultatText` och `resultatetsFel` |
 | Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor`, `skattningenMittI`, `riktningText`, `medel` och, om eleven har något infört, `elevenHarNagot` |
 | Nästa pass | `nastaPass`, och `nastaObockade` för rutan med nästa pass, som hoppar över det som är bockat |
-| Avslutet och utvärderingen, och lärarens anledning i båda lagren | `avslutetText`, `utvarderingenText`, `forlangdaVal`, `anledningen`, `AVSLUTETS_ANLEDNINGAR` och `ANLEDNINGENS_LANGD` |
+| Avslutet och utvärderingen, förlängningen efter dagen läraren förlänger och aldrig på veckor som har varit, och lärarens anledning i båda lagren | `avslutetText`, `utvarderingenText`, `forlangdaVal`, `anledningen`, `AVSLUTETS_ANLEDNINGAR` och `ANLEDNINGENS_LANGD` |
 | Insatsen slut och avslutad, av läraren eller av sig själv två veckor efter planens sista dag | `insatsenSlut`, `insatsenAvslutad`, `planensSistaDag`, `AVSLUTANDE` och `AVSLUTAS_EFTER` |
 | Ett pass ur sitt nummer, och passens nummer i en text, när numren har en lucka efter ett avslut | `passetMedNr`, `hogstaPassnr` och `passnummerText` |
-| Dagarna, och ett byte av dagar mitt i insatsen | `bytDagar`, `passdagar`, `rentaFore`, `dagarText` och `passensMinuter` |
+| Dagarna, ett byte av dagar mitt i insatsen, och dagarna i planens namn | `bytDagar`, `passdagar`, `rentaFore`, `dagarText`, `dagarnasAvsnitt`, `planensDagar` och `passensMinuter` |
 | Elevernas namn i texterna som lämnar webbläsaren | `elevernasNamn` och `utanNamn` |
 | Hur många elever elevlistan rymmer | `ELEVLISTANS_LANGD` |
 | En text som läraren skriver eller klistrar in, med en gräns | `rentText` och `kapaVidOrd` |
@@ -314,7 +315,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Lär dig metoden: klassernas skattning och tabellen med klasserna vecka för vecka | `KLASSERNAS_SKALA`, `klassensFraga`, `klassernasTabell`, `klassernasSkalaText`, `klassenHarNagot` och `skalansAndarText` |
 | Lär dig metoden: lärarens väg, listan med klasserna och kommentarernas längd, Före och ett steg till | `forlangSteget`, `larDigetsForval`, `FORE_VECKOR`, `EFTER_STEGEN_VAR`, `KLASSLISTANS_LANGD`, `KLASSENS_NAMN`, `KOMMENTARENS_LANGD`, `KLASSNOTENS_LANGD` och `regelnIOrd` |
 | Det som är infört, i båda samlingarna, och det senaste | `infordaDatum` och `sistaInfort` |
-| Skolveckan, måndag till fredag, och dess söndag, en period i ord, veckan efter planen förbi lov och veckorna att trycka som lov | `skolveckan`, `skolveckansText`, `periodensText`, `forstaSkolveckanEfter`, `mandagarna`, `iSommarlovet` och `lovveckornaAttValja` |
+| Skolveckan, måndag till fredag, och dess söndag, om den har varit, en period i ord, veckan efter planen förbi lov och veckorna att trycka som lov | `skolveckan`, `skolveckanHarVarit`, `skolveckansText`, `periodensText`, `forstaSkolveckanEfter`, `mandagarna`, `iSommarlovet` och `lovveckornaAttValja` |
 | Följderna i en lista, som pass 1–3, veckorna 1–2 och kalenderveckorna v. 48–49 | `foljderna` |
 | Dagen ur ett datum i en metods fil | `dagAv` |
 | Regeln som gällde i en vecka på linjen, och om linjen ritas | `regelnIVeckan` och `linjenRitas` |

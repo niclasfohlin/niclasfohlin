@@ -3,7 +3,7 @@
 // Modulen läser inga filer, så att sidans skript kan läsa den; filerna läser src/lib/undervisningsmetodfiler.ts.
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
-import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasText, utfallensGranser, arSaksord, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasText, utfallensGranser, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
 // (K-627), så sidan läser resten som metodens fil har det.
@@ -11,7 +11,11 @@ import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasT
 export type Um = CollectionEntry<'undervisningsmetoder'>['data'] & Record<string, any>;
 
 export const metodensAdress = (id: string) => `/metoder/${id}`;
-/** Metoderna i Stödundervisning som metoden hör ihop med (relaterade), som sidor: deras titlar blir länkar i texten (medSaker). */
+/**
+ * Metoderna i Stödundervisning som metoden hör ihop med (relaterade), som sidor: deras titlar blir länkar i texten (medSaker).
+ * stod är de publicerade metoderna, så att ett utkast står utanför tills det publiceras; ett id som inte finns stoppar bygget
+ * redan när metoderna läses (provaHanvisade i src/lib/innehall.ts).
+ */
 export const relateradeSidor = (d: Um, stod: { id: string; data: { titel: string } }[]) => (d.relaterade ?? []).map((rid: string) => stod.find((x) => x.id === rid)).filter((x: unknown): x is { id: string; data: { titel: string } } => !!x).map((x: { id: string; data: { titel: string } }) => ({ titel: x.data.titel, href: `/stodundervisning/${x.id}` }));
 
 /** Filerna som riggen bygger, i nedladdningens ordning (Ladda ner och skriv ut, som i Stödundervisning). */
@@ -48,12 +52,22 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   const sida = metodensAdress(id);
   // Ett namn som är ett ord för en sak (Planeringsmallen, Affischen Så visar du) hittas också med liten bokstav; ett annat,
   // som Stegen, bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden), så att "skriv stegen" inte
-  // blir en länk.
-  const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) ? {} : { versal: true }), ...extra });
+  // blir en länk. Ett namn som metoden själv skriver med liten bokstav i sin lista över materialet, faktarutans material och
+  // Materialets inledning, är metodens ord för saken och hittas också med liten bokstav: "symbolerna" och "fraserna att
+  // låna" i kooperativt lärande (lagningen inför lanseringen, D4: de var inga länkar fast bladen har egen plats och knapp).
+  const materialet = [...(d.material ?? []), ...(d.ramar?.text ?? [])].join('\n');
+  const iMaterialet = (namn: string) => new RegExp(`(^|[^\\p{L}])${skyddaRegex(liten(namn))}(?![\\p{L}])`, 'u').test(materialet);
+  const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) || iMaterialet(namn) ? {} : { versal: true }), ...extra });
   const saker: MetodSak[] = o.lektionskort === false ? [] : [sak(UM_NAMN.lektionskort, `${sida}#materialet`)];
   if (d.ramar) {
     saker.push(sak(d.ramar.rubrik ?? UM_NAMN.materialet, `${sida}#materialet-for-klassen`));
-    for (const r of d.ramar.ramar ?? []) saker.push(sak(r.rubrik, `${sida}#${bladetsAnkare(r.rubrik)}`));
+    // Ett blad vars rubrik har en etikett före kolon, som "Strukturen, vecka 1: Ping-pong-prat", hittas också med namnet
+    // efter kolon, som texten skriver det (G6).
+    for (const r of d.ramar.ramar ?? []) {
+      const s = sak(r.rubrik, `${sida}#${bladetsAnkare(r.rubrik)}`);
+      const efterKolon = /^[^:]+:\s+(\S.*)$/.exec(r.rubrik)?.[1];
+      saker.push(efterKolon ? { ...s, former: [...sakensFormer(r.rubrik), efterKolon] } : s);
+    }
   }
   if (d.planeringsmall) saker.push(sak(UM_NAMN.planeringsmall, `${sida}#planeringsmallen`));
   if (d.observation) saker.push(sak(UM_NAMN.observation, `${sida}#observationsmallen`));
@@ -84,8 +98,10 @@ export const UTFALLENS_REGEL = 'Nästan alla kan när högst en av fem har fel, 
 export const utfallensElever = (redo?: Record<string, string>) => Number(String(redo?.nastanAlla ?? '').match(/\bav (\d+)/)?.[1] ?? 28);
 /**
  * Utfallets text som HTML, där gränserna för klassens antal står som tal som sidans skript räknar om när läraren skriver
- * ett annat antal elever (granskare-3 nr 2): "Högst 5 av 28", "6–13 av 28", "14 eller fler" och "fler än 5 av 28" ur
- * texten blir element med standardens tal. Talen räknas av utfallensGranser, i skriptet också.
+ * ett annat antal elever (granskare-3 nr 2): "Högst 5 av 28", "6–13 av 28", "14 eller fler av 28", "14 eller fler" och
+ * "fler än 5 av 28" ur texten blir element med standardens tal, och klassens antal efter "av" också i Hälften eller färre
+ * (lagningen inför lanseringen, F2: "13 eller fler av 28" stod kvar med 25 elever). Talen räknas av utfallensGranser, i
+ * skriptet också.
  */
 export function utfallensTal(text: string, n: number): string {
   const g = utfallensGranser(n);
@@ -94,8 +110,15 @@ export function utfallensTal(text: string, n: number): string {
   return esc(String(text ?? ''))
     .replace(new RegExp(`\\b${g.deFlesta[0]}–⁠?${g.deFlesta[1]} av ${n}\\b`, 'g'), `${tal('deFlesta0', g.deFlesta[0])}–${tal('deFlesta1', g.deFlesta[1])} av ${av}`)
     .replace(new RegExp(`\\b${g.nastanAlla} av ${n}\\b`, 'g'), `${tal('nastanAlla', g.nastanAlla)} av ${av}`)
-    .replace(new RegExp(`(^|[^–\\d])${g.halften} eller fler\\b`, 'g'), `$1${tal('halften', g.halften)} eller fler`);
+    .replace(new RegExp(`(^|[^–\\d])${g.halften} eller fler( av ${n})?\\b`, 'g'), (_m, fore: string, avN?: string) => `${fore}${tal('halften', g.halften)} eller fler${avN ? ` av ${av}` : ''}`);
 }
+
+/**
+ * Spalterna på dator för en rad kort, som kärnans kort och exemplets rad med kärnan: lika många som korten när de är fem
+ * eller färre, och annars så få rader som möjligt med högst fem i varje (lagningen inför lanseringen, D2: Kärnans fem stod
+ * fyra och ett).
+ */
+export const kortensKolumner = (n: number) => (n <= 5 ? Math.max(1, n) : Math.ceil(n / Math.ceil(n / 5)));
 
 /** Huvudexemplets ämne i ord, som delarnas text säger det ("i matematik"). */
 const AMNEN: Record<string, string> = { lasning: 'läsning', skrivning: 'skrivning', matematik: 'matematik', 'so-no': 'SO och NO', 'praktisk-estetiska': 'ett praktiskt-estetiskt ämne' };
