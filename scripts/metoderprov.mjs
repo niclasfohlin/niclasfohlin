@@ -73,6 +73,44 @@ for (const s of [...metodsidor, ...lathundsidor]) {
   provaFilerna(s, html);
 }
 
+// Rutan Verktyg och Stödmaterial står i båda bankerna med samma saker ur samma rot (Verktygsruta.astro; Niclas 2026-10-31:
+// "Alla verktyg ska också finnas på metoder. De ska vara speglade så samma rot finns på båda"). Provet stannar när rutan
+// saknas i en av bankerna, när bankerna visar olika saker, under olika rubriker, i olika ordning eller med olika områden och
+// årskurser, när rutan i Metoder följer filtret och när Metoders tryck inte har ett eget namn i statistiken. Att rutan i
+// Metoder visar allt också med ett val i filtret prövas i Chrome nedan (BANKEN).
+const BANKERNA = { stod: '/stodundervisning', metoder: '/metoder' };
+const rutan = (sida) => {
+  const fil = join(dist, sida, 'index.html');
+  const html = existsSync(fil) ? readFileSync(fil, 'utf8') : '';
+  const start = html.search(/<aside class="vr"[^>]*\sdata-verktygsruta/);
+  if (start < 0) return undefined;
+  const aside = html.slice(start, html.indexOf('</aside>', start));
+  const delar = aside.split(/<details\b/).slice(1).map((d) => ({
+    rubrik: d.match(/<h2 class="vr-rubrik">([^<]*)/)?.[1].trim() ?? '',
+    saker: [...d.matchAll(/<a ([^>]*\bclass="vr-rad"[^>]*)>\s*<span class="vr-namn">([^<]*)<\/span>\s*<span class="vr-meta">([^<]*)<\/span>/g)].map((m) => {
+      const attr = (n) => m[1].match(new RegExp(`\\s${n}="([^"]*)"`))?.[1] ?? '';
+      return { namn: m[2].trim(), vad: `${m[2].trim()} (${attr('href').split('?')[0]}, ${attr('data-omrade')}, ${m[3].trim()})`, handelse: attr('data-goatcounter-click') };
+    }),
+  }));
+  return { foljer: /\sdata-vr-foljer\b/.test(aside.slice(0, aside.indexOf('>'))), delar };
+};
+const rutorna = Object.fromEntries(Object.entries(BANKERNA).map(([k, s]) => [k, rutan(s)]));
+for (const [k, s] of Object.entries(BANKERNA)) if (!rutorna[k]?.delar.some((d) => d.saker.length)) fel.push(`${s}: rutan Verktyg och Stödmaterial saknas eller är tom (Verktygsruta.astro, som båda bankerna tar in)`);
+let speglade = 0;
+if (rutorna.stod?.delar.length && rutorna.metoder?.delar.length) {
+  const { stod, metoder } = rutorna;
+  const lista = (r) => r.delar.flatMap((d) => d.saker.map((x) => `${d.rubrik}: ${x.vad}`));
+  const [a, b] = [lista(stod), lista(metoder)];
+  for (const x of a.filter((y) => !b.includes(y))) fel.push(`/metoder: rutan Verktyg och Stödmaterial saknar ${x}, som står i /stodundervisning`);
+  for (const x of b.filter((y) => !a.includes(y))) fel.push(`/metoder: rutan Verktyg och Stödmaterial har ${x}, som inte står så i /stodundervisning`);
+  if (a.length === b.length && a.every((x) => b.includes(x)) && a.join('\n') !== b.join('\n')) fel.push(`/metoder: rutan Verktyg och Stödmaterial har sakerna i en annan ordning än /stodundervisning`);
+  if (!stod.foljer) fel.push('/stodundervisning: rutan Verktyg och Stödmaterial följer inte bankens filter (data-vr-foljer i Verktygsruta.astro)');
+  if (metoder.foljer) fel.push('/metoder: rutan Verktyg och Stödmaterial följer bankens filter, fast sakerna hör till metoderna i Stödundervisning (data-vr-foljer i Verktygsruta.astro)');
+  const stodsTryck = new Set(stod.delar.flatMap((d) => d.saker.map((x) => x.handelse)));
+  for (const x of metoder.delar.flatMap((d) => d.saker)) if (!/^verktygsruta:metoder:[a-z0-9-]+$/.test(x.handelse) || stodsTryck.has(x.handelse)) fel.push(`/metoder: trycket på ${x.namn} i rutan Verktyg och Stödmaterial heter ${x.handelse || 'inget'} i statistiken, ska vara verktygsruta:metoder:<id> (DRIFT.md under Besöksstatistik)`);
+  if (a.join('\n') === b.join('\n')) speglade = a.length;
+}
+
 // Filerna att skriva ut (lagningen inför lanseringen, A3 och A10): i bilaga A står varje fils knapp en gång, så att Drive och
 // Word för hela materialet inte står under varje blad, och nedladdningsrutan har varje fil som bilaga A erbjuder, utom
 // bladens egna pdf:er, som står under sitt blad. Faktarutans material leder till metodens saker (D4): en del av listan som
@@ -236,14 +274,24 @@ const DATORN = `(() => {
   }
   return ut;
 })()`;
-// Banken i telefonen (A4, A5): i varje område går Forskningsstödets lägen och raden om metoderna utanför skalan ihop med
-// Visar, ett tryck på ett läges ord väljer bara det läget, och med två metoder valda heter knappen efter zip-filen den ger och
-// förklaringen syns.
+// Banken i telefonen (A4, A5): rutan Verktyg och Stödmaterial visar allt också med ett val i filtret, i varje område går
+// Forskningsstödets lägen och raden om metoderna utanför skalan ihop med Visar, ett tryck på ett läges ord väljer bara det
+// läget, och med två metoder valda heter knappen efter zip-filen den ger och förklaringen syns.
 const BANKEN = `(async () => {
   const ut = [];
   const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
   const talet = (t) => Number(/^\\d+/.exec(String(t ?? '').trim())?.[0] ?? NaN);
   const form = document.getElementById('filter');
+  // Rutan Verktyg och Stödmaterial följer inte Metoders filter (Verktygsruta.astro): med ett val i filtret syns allt.
+  const valet = form && [...form.querySelectorAll('input[type="radio"]')].find((r) => r.value && !r.disabled);
+  if (valet) {
+    valet.checked = true;
+    valet.dispatchEvent(new Event('change', { bubbles: true }));
+    await vanta(30);
+  }
+  const dolda = [...document.querySelectorAll('[data-verktygsruta] li')].filter((li) => li.hidden).map((li) => li.querySelector('.vr-namn')?.textContent.trim());
+  if (dolda.length) ut.push('rutan Verktyg och Stödmaterial döljer ' + dolda.join(', ') + (valet ? ' med ' + valet.name + ' ' + valet.value + ' valt' : '') + ', fast den inte följer filtret här');
+  if (valet) { form.querySelector('[data-rensa-filter]').click(); await vanta(30); }
   const reg = form?.querySelector('[data-spann="stod"]');
   if (reg) {
     for (const o of form.querySelectorAll('input[name="omrade"]')) {
@@ -380,5 +428,5 @@ try {
   try { rmSync(profil, { recursive: true, force: true }); } catch { /* Chrome kan hålla filerna en stund */ }
 }
 if (fel.length) { console.error(`metoderprov: ${fel.length} fel\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt, delarna står i standardens ordning och metodens ${provadeSaker} saker är länkar där de nämns och har en knapp under sig, och ${lathundensMeningar} meningar på ${lathundsidor.length} lathundssidor står i lathundens pdf.`);
+console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt, delarna står i standardens ordning och metodens ${provadeSaker} saker är länkar där de nämns och har en knapp under sig, ${lathundensMeningar} meningar på ${lathundsidor.length} lathundssidor står i lathundens pdf, och rutan Verktyg och Stödmaterial har samma ${speglade} saker i Metoder som i Stödundervisning.`);
 if (lathundenVantar.size) console.log(`! metoderprov: lathundens pdf saknar ännu det sidan visar av ${[...lathundenVantar].join(", ")} (K-632)`);

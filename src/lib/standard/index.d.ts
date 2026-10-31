@@ -119,7 +119,7 @@ export interface Metodplan { takt: { min: number; max: number }; minuter: { min:
 export interface Val { start: string; dagar: number[]; langd: number; lektioner?: number[]; niva?: string; version?: string; borja?: number; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; uppehall?: string[]; tider?: Record<string, [string, string]>; passtider?: Record<string, [string, string] | [string, string, number]>; mal?: string; mitt?: number; slut?: number; fore?: { till: string; dagar: number[]; fasta?: Record<string, number> }[] }
 export interface Pass { nr: number; datum: string; vecka: number; steg?: number | null; flyttatFran?: string }
 export interface PlanVecka { nr: number; innehall: number; igen: boolean; mandag: string; vecka: { ar: number; vecka: number }; pass: number[]; bortfall: { datum: string; varfor: 'helgdag' | 'installt' | 'uppehall'; namn?: string }[]; steg?: number | null }
-export interface Plan { start: string; enhet: 'veckor' | 'pass'; borja: number; forstaPass?: string; sistaPass?: string; sistaNr?: number; efter: string; pass: Pass[]; veckor: PlanVecka[]; lovveckor: string[]; uppfoljning: { rad: number; typ: Tid['typ']; tillfallen: { datum: string; vecka: number | null }[]; period?: true; plats?: 'forsta' | 'sista' }[]; fore: { mandag: string; overLov: boolean }; efterSteg?: number; mitt?: number; slut?: number; planerade?: number; struket?: { pass: Pass[]; veckor: PlanVecka[] }; skattningar?: Skattning[]; extraDag?: string }
+export interface Plan { start: string; enhet: 'veckor' | 'pass'; borja: number; forstaPass?: string; sistaPass?: string; sistaNr?: number; efter: string; pass: Pass[]; veckor: PlanVecka[]; lovveckor: string[]; uppfoljning: { rad: number; typ: Tid['typ']; tillfallen: { datum: string; vecka: number | null }[]; period?: true; plats?: 'forsta' | 'sista' }[]; fore: { mandag: string; overLov: boolean }; efterSteg?: number; mitt?: number; slut?: number; planerade?: number; struket?: { pass: Pass[]; veckor: PlanVecka[] }; uppehall?: string[]; skattningar?: Skattning[]; extraDag?: string }
 /** Dagen ur ett datum i en metods fil, ÅÅÅÅ-MM-DD. */
 export declare const dagAv: (d: unknown) => string;
 /** Metodens veckor i en text som planens veckor med kalenderveckan. */
@@ -330,6 +330,8 @@ export declare function forstaHelaLektionen(d: Record<string, any>): { namn: str
 export declare const forstaVeckansNamn: (d: Record<string, any>) => string;
 /** Är två namn på en klass nästan lika, som en rättning. */
 export declare function namnenNastanLika(a: string, b: string): boolean;
+/** Namnlistan, en rot för elevlistan och klasslistan: listan med id ur det läraren skriver, med de lämnade, frågorna och det som inte kom med. */
+export declare function namnlistan<T extends { id: string; namn: string; utkast?: true }>(text: string, fore: T[], o: { nyttId: () => string; langd: number; namnetsLangd: number; nu?: T[]; lamnade?: T[] }): { lista: { id: string; namn: string }[]; nya: string[]; fragor: { ny: { id: string; namn: string }; kandidater: T[] }[]; borta: T[]; lamnade: T[]; dubbletter: string[]; utanfor: string[]; kortade: string[]; enBokstav: string[]; tomma: number };
 /** Valen med dagen läraren väljer som första lektionen. */
 export declare function larDigetsStart(val: Val, start: string): Val;
 export declare function klasserUrText(text: string, fore: Klass[], nyttId: () => string, behall?: (id: string) => boolean): Klass[];
@@ -616,6 +618,8 @@ export declare const planensSistaDag: (plan: Plan) => string | undefined;
 export declare const insatsenAvslutad: (sistaPass: string | undefined, beslut: string | undefined, idag: string, oppen?: string, sistaDag?: string, iFortid?: boolean) => boolean;
 /** Beslutet och lärarens mening, med punkt. */
 export declare const beslutText: (b: { beslut?: string; not?: string }) => string;
+/** Förlängningens uppehåll i en mening, lika i texten till åtgärdsprogrammet och sammanställningen. */
+export declare function uppehalletsText(plan: Plan): string;
 /** Avstämningen mitt i insatsen som en rad, lika i sammanställningen och i texten till åtgärdsprogrammet. */
 export declare const avstamningensRad: (veckan: string, a: { beslut?: string; not?: string } | null | undefined) => { etikett: string; text: string } | null;
 /** Passens rad: läget, de som har varit utan bock, och de inställda och helgdagarna. */

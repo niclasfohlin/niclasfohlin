@@ -5,7 +5,7 @@
 // (ÅÅÅÅ-MM-DD) i UTC, så att sommartiden aldrig flyttar en dag. Sajtens METODER.md under Planera insatsen säger hur
 // metodens fält skrivs.
 import { periodensLangd, postensRad, tidensMatt, tidensVeckotakt } from './index.js';
-import { allaTexter, antalText, decimal, forstaLedet, forstaOrdet, liten, mening, meningarna, ORDNINGSTAL, rentText, skyddaRegex, somLista, stor, talAv, talIRegex, talText, tvasiffrigt, utanPunkt, veckorText } from './text.js';
+import { allaTexter, antalText, decimal, forstaLedet, forstaOrdet, liten, mening, meningarna, ORDNINGSTAL, rentText, sammaElev, skyddaRegex, somLista, stor, talAv, talIRegex, talText, tvasiffrigt, utanPunkt, veckorText } from './text.js';
 
 const DAG = 86400000;
 const tillTid = (s) => { const [a, m, d] = s.split('-').map(Number); return Date.UTC(a, m - 1, d); };
@@ -1332,30 +1332,14 @@ export function larDigetsNu(plan, veckor, idag) {
  * @param {string} text
  */
 export function klasslistansBesked(text) {
-  const rader = String(text ?? '').split(/\r?\n/).map((r) => r.trim());
-  const namn = rader.filter(Boolean);
-  const unika = [...new Set(namn.map((r) => rentText(r, KLASSENS_NAMN)))];
-  const dubbletter = [...new Set(namn.filter((r, i) => namn.findIndex((x) => rentText(x, KLASSENS_NAMN) === rentText(r, KLASSENS_NAMN)) !== i).map((r) => rentText(r, KLASSENS_NAMN)))];
-  const utanfor = unika.slice(KLASSLISTANS_LANGD);
-  const tomma = rader.slice(0, rader.length - [...rader].reverse().findIndex(Boolean)).filter((r) => !r).length;
+  const r = namnlistan(text, [], { nyttId: () => '', langd: KLASSLISTANS_LANGD, namnetsLangd: KLASSENS_NAMN });
   return [
-    utanfor.length ? `${uppraknat(utanfor)} kom inte med: listan rymmer ${talText(KLASSLISTANS_LANGD)} klasser.` : '',
-    ...dubbletter.map((n) => `${n} stod två gånger och står en gång.`),
-    namn.some((r) => rentText(r, KLASSENS_NAMN) !== r.replace(/\s+/g, ' ')) ? `Ett namn rymmer ${KLASSENS_NAMN} tecken, och ett längre är kortat.` : '',
-    tomma && namn.length ? 'De tomma raderna är borttagna.' : '',
+    r.utanfor.length ? `${uppraknat(r.utanfor)} kom inte med: listan rymmer ${talText(KLASSLISTANS_LANGD)} klasser.` : '',
+    ...r.dubbletter.map((n) => `${n} stod två gånger och står en gång.`),
+    r.kortade.length ? `Ett namn rymmer ${KLASSENS_NAMN} tecken, och ett längre är kortat.` : '',
+    r.tomma && r.lista.length ? 'De tomma raderna är borttagna.' : '',
   ].filter(Boolean).join(' ');
 }
-/**
- * Klasserna ur listan läraren skriver, en per rad: samma namn är samma klass, och en ny rad där en klass försvann är samma
- * klass med ett nytt namn, så att kommentarerna följer med när läraren rättar ett namn. En klass som tas bort och har något
- * infört (behall) står kvar som borta, så att dess kommentarer står kvar i sammanställningen, och kommer tillbaka när
- * namnet skrivs igen. Högst KLASSLISTANS_LANGD klasser, och samma namn en gång.
- * @param {string} text
- * @param {{ id: string, namn: string, borta?: true }[]} fore klasserna före
- * @param {() => string} nyttId
- * @param {(id: string) => boolean} [behall] har klassen något infört, så att den står kvar som borta
- * @returns {{ id: string, namn: string, borta?: true }[]}
- */
 /**
  * Är två namn nästan lika, som en rättning, en regel för klasserna i Lär dig metoden och eleverna i Planera insatsen: samma
  * utan stora och små bokstäver, mellanslag och skiljetecken, eller högst ett tecken som skiljer, som 5a och 5A eller 6 B och 6B.
@@ -1374,16 +1358,106 @@ export function namnenNastanLika(a, b) {
   const rest = (s, n) => s.slice(n);
   return rest(x, i + 1) === rest(y, i + 1) || rest(x, i) === rest(y, i + 1) || rest(x, i + 1) === rest(y, i);
 }
+/**
+ * Klasserna ur listan läraren skriver, en per rad, med namnlistans princip (namnlistan nedan), som elevlistan i Planera
+ * insatsen: samma namn är samma klass, också en rättning av ett tecken, och ett nytt namn är en ny klass. En klass som tas bort
+ * och har något infört (behall) står kvar som borta, så att dess kommentarer står kvar i sammanställningen, och kommer tillbaka
+ * när namnet skrivs igen. Högst KLASSLISTANS_LANGD klasser, och samma namn en gång.
+ * @param {string} text
+ * @param {{ id: string, namn: string, borta?: true }[]} fore klasserna före
+ * @param {() => string} nyttId
+ * @param {(id: string) => boolean} [behall] har klassen något infört, så att den står kvar som borta
+ * @returns {{ id: string, namn: string, borta?: true }[]}
+ */
 export function klasserUrText(text, fore, nyttId, behall = () => true) {
-  const namn = [...new Set(String(text ?? '').split(/\r?\n/).map((r) => rentText(r, KLASSENS_NAMN)).filter(Boolean))].slice(0, KLASSLISTANS_LANGD);
-  const aktiva = fore.filter((k) => !k.borta);
-  const tagna = new Set();
-  /** @type {({ id: string, namn: string } | null)[]} */
-  const ut = namn.map((n) => { const k = aktiva.find((x) => x.namn === n) ?? fore.find((x) => x.borta && x.namn === n); if (!k) return null; tagna.add(k.id); return { id: k.id, namn: n }; });
-  ut.forEach((x, i) => { const k = aktiva[i]; if (!x && k && !tagna.has(k.id) && !namn.includes(k.namn) && namnenNastanLika(k.namn, namn[i])) { tagna.add(k.id); ut[i] = { id: k.id, namn: namn[i] }; } });
-  const nya = ut.map((x, i) => x ?? { id: nyttId(), namn: namn[i] });
-  const borta = fore.filter((k) => !nya.some((x) => x.id === k.id) && behall(k.id)).map((k) => ({ id: k.id, namn: k.namn, borta: /** @type {true} */ (true) }));
-  return [...nya, ...borta];
+  const r = namnlistan(text, fore.filter((k) => !k.borta), { nyttId, langd: KLASSLISTANS_LANGD, namnetsLangd: KLASSENS_NAMN, lamnade: fore.filter((k) => k.borta) });
+  const borta = fore.filter((k) => !r.lista.some((x) => x.id === k.id) && behall(k.id)).map((k) => ({ id: k.id, namn: k.namn, borta: /** @type {true} */ (true) }));
+  return [...r.lista, ...borta];
+}
+/**
+ * Namnlistan, en rot för elevlistan i Planera insatsen och klasslistan i Lär dig metoden: listan med id ur det läraren
+ * skriver, utan att läsa sidan, så att allt som läser elevernas och klassernas id får samma lista (lagning-3, Elevlistans
+ * princip; Niclas 2026-10-31: "Om det går hitta en stabil rot för elevlistan. Se bara till att den propagerar uppåt korrekt
+ * då"). Inget id följer en rad eller en plats i listan av sig själv:
+ * 1. Samma namn är samma, var det än står: i listan nu (o.nu), i listan före (fore) och bland de lämnade (o.lamnade), och en
+ *    rättning av ett tecken i ett namn i listan är samma namn (namnenNastanLika). Ett namn på en ny rad som läraren
+ *    fortfarande skriver, som H, Hu och Hugo, behåller sitt id, och ett halvskrivet namn från en annan flik (utkast) känns
+ *    igen på förnamnet (Codex 2026-10-26).
+ * 2. Ett nytt namn där ett namn stod är nytt, och frågan gäller just den platsen: namnen ur listan före som inte står kvar,
+ *    mellan raderna som har kvar sina. Med lika många eller fler nya namn gäller frågan var sitt namn i ordning, och de sista
+ *    är nya rader, och med färre nya namn alla namn som stod där (Codex 2026-10-25: frågan kopplade Nora till Ali; verifieringen:
+ *    Cemal fick en fråga om Bea).
+ * 3. Ett namn på en ny rad, där inget namn stod, är alltid nytt, utan fråga (verifieringen: Hugo sist gav en fråga om Bo).
+ * 4. Det som har lämnat listan står bland de lämnade med sitt id, så att det kommer tillbaka med samma namn.
+ * Raderna läses en gång: ett namn högst o.namnetsLangd tecken och kortat vid ett ord, samma namn en gång utan stora och små
+ * bokstäver, och högst o.langd namn.
+ * @template {{ id: string, namn: string, utkast?: true }} T
+ * @param {string} text listan som läraren skrev, ett namn per rad
+ * @param {T[]} fore listan när läraren började skriva
+ * @param {{ nyttId: () => string, langd: number, namnetsLangd: number, nu?: T[], lamnade?: T[] }} o
+ */
+export function namnlistan(text, fore, o) {
+  const sett = new Set();
+  /** @type {string[]} */
+  const dubbletter = [], utanfor = [], kortade = [], enBokstav = [];
+  const radtext = String(text ?? '').split(/\r?\n/).map((x) => rentText(x, Infinity));
+  const sista = radtext.reduce((s, x, i) => (x ? i : s), -1);
+  const tomma = radtext.filter((x, i) => !x && i < sista).length;
+  const rader = radtext.map((hel) => {
+    if (!hel) return '';
+    const max = o.namnetsLangd;
+    const n = hel.length > max ? hel.slice(0, max + 1).replace(/\s+\S*$/, '').slice(0, max) || hel.slice(0, max) : hel;
+    if (n !== hel) kortade.push(n);
+    if (n.length === 1) enBokstav.push(n);
+    const nyckel = n.toLocaleLowerCase('sv');
+    if (sett.has(nyckel)) { dubbletter.push(n); return ''; }
+    sett.add(nyckel);
+    if (sett.size > o.langd) { utanfor.push(n); return ''; }
+    return n;
+  });
+  const nu = o.nu ?? fore, lamnadeFore = o.lamnade ?? [];
+  const iFore = (id) => fore.some((x) => x.id === id);
+  const kanda = [...nu, ...fore, ...lamnadeFore];
+  const anvanda = new Set();
+  /** @type {(T | undefined)[]} */
+  const vem = rader.map(() => undefined);
+  const ta = (i, e) => { if (!e) return; vem[i] = e; anvanda.add(e.id); };
+  rader.forEach((n, i) => { if (n) ta(i, kanda.find((x) => x.namn === n && !anvanda.has(x.id))); });
+  rader.forEach((n, i) => { if (n && !vem[i]) ta(i, lamnadeFore.find((x) => x.utkast && sammaElev(x.namn, n) && !anvanda.has(x.id) && !rader.includes(x.namn))); });
+  const nyaNu = nu.filter((x) => !iFore(x.id));
+  // En rättning av ett tecken gäller namnen i listan, inte de lämnade, som kommer tillbaka bara med samma namn: Nora är inte Nova.
+  rader.forEach((n, i) => { if (n && !vem[i]) ta(i, [...fore, ...nyaNu].find((x) => !anvanda.has(x.id) && namnenNastanLika(x.namn, n))); });
+  const plats = (e) => (e ? fore.findIndex((x) => x.id === e.id) : -1);
+  /** @type {{ ny: { id: string, namn: string }, kandidater: T[] }[]} */
+  const fragor = [];
+  /** @type {string[]} */
+  const nya = [];
+  const gap = new Map();
+  /** @type {{ id: string, namn: string }[]} */
+  const lista = [];
+  rader.forEach((n, i) => {
+    if (!n) return;
+    const e = vem[i];
+    if (e) { lista.push({ id: e.id, namn: n }); return; }
+    const ny = { id: o.nyttId(), namn: n };
+    nya.push(ny.id);
+    lista.push(ny);
+    let forut = -1, efter = fore.length;
+    for (let j = i - 1; j >= 0; j--) if (plats(vem[j]) >= 0) { forut = plats(vem[j]); break; }
+    for (let j = i + 1; j < rader.length; j++) if (plats(vem[j]) >= 0) { efter = plats(vem[j]); break; }
+    const nyckel = `${forut}|${efter}`;
+    gap.set(nyckel, [...(gap.get(nyckel) ?? []), { ny, kandidater: fore.filter((x, k) => k > forut && k < efter && !anvanda.has(x.id)) }]);
+  });
+  // Frågorna på varje plats: lika många nya namn som namn som stod där, eller fler, ger en fråga om var sitt namn i ordning, och
+  // de nya namnen efter är nya rader utan fråga; färre nya namn ger en fråga med alla namn som stod där, eftersom det inte går
+  // att veta vilket som byttes ut.
+  for (const grupp of gap.values()) {
+    const kandidater = grupp[0].kandidater;
+    grupp.forEach((x, j) => { if (grupp.length >= kandidater.length ? j < kandidater.length : kandidater.length) fragor.push({ ny: x.ny, kandidater: grupp.length >= kandidater.length ? [kandidater[j]] : kandidater }); });
+  }
+  const borta = fore.filter((x) => !lista.some((e) => e.id === x.id));
+  const lamnade = [...lamnadeFore.filter((x) => !lista.some((e) => e.id === x.id) && !borta.some((b) => b.id === x.id)), ...borta];
+  return { lista, nya, fragor, borta, lamnade, dubbletter: [...new Set(dubbletter)], utanfor, kortade, enBokstav: [...new Set(enBokstav)], tomma };
 }
 
 /**
@@ -2108,6 +2182,8 @@ export function planera(mp, val) {
     skattningar: mp.skattningar ?? [],
     // Passen planen hade före avslutet, så att texterna kan säga hur mycket tidigare insatsen slutade, och det som ströks.
     ...(slut ? { slut, planerade, struket } : {}),
+    // Förlängningens uppehåll, så att texterna kan säga det (uppehalletsText).
+    ...(uppehall.size ? { uppehall: [...uppehall].sort() } : {}),
   };
 }
 
@@ -2116,8 +2192,8 @@ export function planera(mp, val) {
  * avslutades tidigare förlängs genom planens egna veckor, med upprepningarna, så att de strukna veckorna kommer tillbaka i
  * sin ordning först, och planen blir längre först när de är slut (K-542; Codex 2026-10-25: en vecka gav två med en
  * upprepning). I en progression i pass är en vecka planens dagar.
- * Med dagen läraren förlänger läggs förlängningen efter den dagen, eller efter planens sista pass när det är senare, och
- * aldrig på veckor som har varit (Samma sak överallt inför lanseringen, E1: två veckor efter sista passet tog en förlängning
+ * Med dagen läraren förlänger börjar förlängningen den dagen, med dagens pass, eller efter planens sista pass när det är
+ * senare, och aldrig på veckor som har varit (lagning-3, L2: förlängningen kl. 9 tog bort dagens pass kl. 9) (Samma sak överallt inför lanseringen, E1: två veckor efter sista passet tog en förlängning
  * tillbaka de strukna veckorna, som redan hade varit, och gav ett enda pass framåt). En hel vecka som har varit blir lov, så
  * att dess innehåll kommer efter dagen, och ett pass som har varit i en vecka som annars är kvar ställs in. Planens pass
  * behåller sina nummer och avslutet sitt pass: ett inställt pass tar inget nummer, så ett pass ställs in bara när det inte
@@ -2135,7 +2211,6 @@ export function forlangdaVal(mp, val, n, idag) {
   const ut = forlangdaValen(mp, val, n);
   if (!idag) return ut;
   const fore = planera(mp, val);
-  const fran = fore.sistaPass && fore.sistaPass > idag ? fore.sistaPass : idag;
   const sistaMandagen = fore.veckor.at(-1)?.mandag ?? '';
   // Planens pass med sina nummer, som förlängningen inte får räkna om.
   const behaller = (v) => { const p = planera(mp, v); return fore.pass.every((x) => p.pass.some((y) => y.nr === x.nr && y.datum === x.datum)); };
@@ -2146,9 +2221,9 @@ export function forlangdaVal(mp, val, n, idag) {
   // pass ligger på en dag som har varit, utom de pass som inte går att ställa in utan att räkna om planens pass.
   for (let i = 0; i < 60; i++) {
     const p = planera(mp, ny);
-    const varit = iDatumordning(p.pass.filter((x) => x.datum > (fore.sistaPass ?? '') && x.datum <= fran && !kvar.has(passetsDag(x))));
+    const varit = iDatumordning(p.pass.filter((x) => x.datum > (fore.sistaPass ?? '') && x.datum < idag && !kvar.has(passetsDag(x))));
     if (!varit.length) return ny;
-    const lov = p.veckor.filter((v) => v.mandag > sistaMandagen && v.pass.length && veckansPass(p, v).every((x) => x.datum <= fran)).map((v) => veckonyckel(v.mandag));
+    const lov = p.veckor.filter((v) => v.mandag > sistaMandagen && v.pass.length && veckansPass(p, v).every((x) => x.datum < idag)).map((v) => veckonyckel(v.mandag));
     if (lov.length) bas = { ...bas, lov: [...new Set([...(bas.lov ?? []), ...lov])].sort(), uppehall: [...new Set([...(bas.uppehall ?? []), ...lov])].sort() };
     else {
       const prov = { ...bas, stryk: [...new Set([...(bas.stryk ?? []), passetsDag(varit[0])])].sort(), uppehall: [...new Set([...(bas.uppehall ?? []), passetsDag(varit[0])])].sort() };
@@ -3387,6 +3462,8 @@ export function dokumentationsrader(info, plan, val, o) {
   const gruppens = o.folj ? (plan.skattningar ?? []).find((x) => x.vem === 'gruppen' && x.skala) : undefined;
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
   if (plan.forstaPass && plan.sistaPass) rader.push({ etikett: 'Omfattning', text: `${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter, plan))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${o.extraPass ? `, och det extra passet före pass 1, ${dagText(o.extraPass.datum)}` : ''}${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.` });
+  // Förlängningens uppehåll, med samma mening som sammanställningen (uppehalletsText; lagning-3, L3).
+  if (uppehalletsText(plan)) rader.push({ text: uppehalletsText(plan) });
   // En insats som avslutades tidigare säger det, med lärarens anledning utan elevernas namn (K-542).
   if (avslutetText(plan)) rader.push({ text: utanNamn(utvarderingenText(plan, o.utvardering?.beslut === 'avsluta' ? o.utvardering : undefined, o.pagar), o.elever ?? []) });
   // Det eleven arbetar med: metodens steg i planens ordning, med kalenderveckorna. Pass i följd med samma steg står ihop, och
@@ -3753,6 +3830,19 @@ export const beslutText = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', 
  * @param {{ beslut?: string, not?: string } | null | undefined} a
  * @returns {{ etikett: string, text: string } | null}
  */
+/**
+ * Förlängningens uppehåll i en mening, lika i texten till åtgärdsprogrammet och i sammanställningen, som avstämningen: veckorna
+ * och dagarna utan pass och dagen insatsen började igen, "Insatsen hade uppehåll v. 3–4 och förlängdes med pass från tisdag 2
+ * februari." (lagning-3, L3: texten sa inget om avslutet, uppehållet och förlängningen). Tom utan uppehåll.
+ * @param {Plan} plan
+ */
+export function uppehalletsText(plan) {
+  const up = plan.uppehall ?? [];
+  const datum = [...plan.lovveckor.filter((m) => up.includes(veckonyckel(m))), ...up.filter(arDatum)].sort();
+  if (!datum.length) return '';
+  const igen = iDatumordning(plan.pass).find((p) => p.datum > datum[datum.length - 1]);
+  return `Insatsen hade uppehåll ${kalenderveckornaFor(datum)}${igen ? ` och förlängdes med pass från ${dagText(igen.datum)}` : ''}.`;
+}
 export const avstamningensRad = (veckan, a) => (a?.beslut || a?.not ? { etikett: `Avstämning mitt i insatsen${veckan ? `, ${veckan}` : ''}`, text: beslutText(a) } : null);
 /**
  * Passen som läraren har bockat, i en mening, lika på sidan, i pdf:en och i texten som kopieras: de bockade bland passen som
@@ -3902,6 +3992,7 @@ export function sammanstallningstext(info, plan, s) {
   if (veckorna.length) rader.push(`Hur veckorna gick, 1 till 5: ${veckorna.map((v) => `${veckansNamn(v).text}: ${v.skattning}`).join(', ')}. Medel ${decimal(s.veckomedel)}.`);
   const noter = s.veckor.filter((v) => v.not);
   if (noter.length) rader.push(`Anteckningar: ${noter.map((v) => mening(`${veckansNamn(v).text}: ${v.not}`)).join(' ')}`);
+  if (uppehalletsText(plan)) rader.push(uppehalletsText(plan));
   const avstamningen = avstamningensRad(s.mitt ? veckansNamn(s.veckor[s.mitt - 1]).text : '', s.avstamning);
   if (avstamningen) rader.push(radText(avstamningen));
   const utvarderingen = utvarderingenText(plan, s.utvardering, !s.avslutad);
@@ -4061,6 +4152,6 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ typ: 'nedat', veckor: number } | { typ: 'under', grans: number, veckor: number } | { typ: 'underIRad', grans: number, veckor: number } | { typ: 'minst', grans: number, veckor: number }} Regel
  * @typedef {{ fran: number, till: number, tabell: string, steg: { fran: number, till: number, namn: string }[] }} Skala
  * @typedef {{ namn: string, vem: 'gruppen' | 'eleverna', rad: number, skala?: Skala, regler: (Regel & { rad: number })[], text?: string }} Skattning
- * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[], period?: true }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number, mitt?: number, slut?: number, planerade?: number, struket?: { pass: Pass[], veckor: PlanVecka[] }, skattningar?: Skattning[] }} Plan
+ * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[], period?: true }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number, mitt?: number, slut?: number, planerade?: number, struket?: { pass: Pass[], veckor: PlanVecka[] }, uppehall?: string[], skattningar?: Skattning[] }} Plan
  * @typedef {{ gjorda?: string[], elever?: { id: string, namn: string, utkast?: true }[], narvaro?: boolean, franvaro?: Record<string, string[]>, vecka?: Record<string, { varde?: number, not?: string }>, skattning?: Record<string, Record<string, number>>, resultat?: Record<string, Record<string, string>>, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string }, oppen?: string, borttagna?: string[], listan?: string, lamnade?: { id: string, namn: string, utkast?: true, fran?: string }[], matt?: Record<string, Record<string, number>>, lankar?: Record<string, { formular?: string, sammanstallning?: string }> }} Foljd
  */

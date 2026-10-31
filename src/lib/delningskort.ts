@@ -30,6 +30,8 @@ import { bokhandledningen } from './handledning';
 import { slugAv } from './standard/index.js';
 import { SAMLINGAR, SAMLINGARNA, postensAdress, type SamlingNyckel } from './samlingar';
 import type { CollectionEntry } from 'astro:content';
+import { kortetUrFil, OMRADEN, primaraOmraden, type Utkast } from './metodprofil';
+import { laget, larandetIKort, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, type Laget } from './standard/index.js';
 
 export const MALL = 'src/pages/delning/kort/[namn].astro';
 // Kortet för sidan som slumpar skrivkort har en egen mall, som bara räknas in i det kortet, och så har korten för
@@ -51,11 +53,22 @@ export const METODBANKENS_METODER = ['fyra-raknesatten', 'laslistor-i-grupp', 'o
 // Raden under titeln, utan antalet metoder (Niclas 2026-10-18: "Antal uppdaterad ju löpande", och "Metoder i eller
 // metoder för").
 const METODBANKENS_RAD = 'Metoder i matematik, läsning, skrivning och socialt samspel';
+// Metoder, /metoder, har ett eget kort i metodbankens anda (Niclas 2026-10-31: "Bygg gärna ert eget snyggt delningskort för
+// metoder som du förut byggde för stödundervisning. Något lite mer intressant än standard"): titeln och raden till vänster
+// och bankens metodkort till höger i en trappa, ritade med bankens eget kort (src/components/Metodprofil.astro, bank och
+// forsmak), med titeln, faktan och Lärande totalt. Trappan har de publicerade metoderna i bankens ordning, högst tre, så att
+// en ny metod kommer med av sig själv. Varje metod har ett eget kort i en egen mall: titeln stort, faktan och Lärande
+// totalt till vänster, och metodkortets rader för områdena till höger, ur metodkortet på metodens sida.
+export const METODERMALL = 'src/pages/delning/metoder/[namn].astro';
+export const UNDERVISNINGSMETODSMALL = 'src/pages/delning/undervisningsmetod/[namn].astro';
+const METODERNAS_RAD = 'Undervisningsmetoder för hela klassen';
+const HOGST_I_TRAPPAN = 3;
 // Metodbankens kort är bara text och färgade ytor och sparas som PNG med palett: 41 kB, mot 89 kB som JPEG, utan skillnad
 // som syns förstorad (2026-10-18). Kortet ska delas många gånger, och varje tjänst som visar länken hämtar bilden.
 // Kort med foton och teckningar, som skrivkorten, blir sämre och större i en palett och är JPEG. Kortet för Ta fram ett
 // matteproblem har text, streckbilder och ytor och blir också mindre i en palett: 57 kB mot 113 kB (2026-10-18).
-const PNG: Kort['typ'][] = ['metodbank', 'tafram'];
+// Korten för Metoder och dess metoder är också text, staplar och ytor.
+const PNG: Kort['typ'][] = ['metodbank', 'tafram', 'metoder', 'undervisningsmetod'];
 // Avsnitten i global.css som korten på de egna mallarna ritas med. Aktivitetskorten och brainbreakkorten läser
 // skrivkortens färger, så deras kort räknar in båda avsnitten; skrivkortens kort bara sitt eget.
 const SKRIVKORTSSTIL = '/* Skrivkorten och sidan som slumpar dem';
@@ -69,7 +82,7 @@ const VERSION = 1;
 export interface Kort {
   sida: string; // sidans adress, t.ex. /stodundervisning/brakkurs-i-grupp
   namn: string; // filnamnets början, t.ex. stodundervisning-brakkurs-i-grupp
-  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'handledning' | 'skrivkort' | 'aktiviteter' | 'brainbreaks' | 'tafram';
+  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'handledning' | 'skrivkort' | 'aktiviteter' | 'brainbreaks' | 'tafram' | 'metoder' | 'undervisningsmetod';
   etikett: string; // raden över titeln, tom på huvudsidorna
   titel: string;
   undertitel: string;
@@ -84,7 +97,45 @@ export interface Kort {
   metodbank?: { skala: string[]; rader: { omrade: string; titel: string; spann: Spann }[]; metoder: { id: string; titel: string; omrade: string; fakta: { rubrik: string; text: string }[]; ingress: string }[] };
   /** Ta fram ur en bank: metoden och posterna som står på kortet (src/lib/tafram.ts). */
   tafram?: { metod: string; poster: string[] };
+  /** Metoder: metodkorten i trappan, med det som syns av dem (titeln, faktan och Lärande totalt). */
+  metoder?: Metodkortet[];
+  /** En metod under Metoder: det som syns av metodkortet, faktan och Lärande totalt och raderna för områdena. */
+  undervisningsmetod?: Metodkortet & { rader: { namn: string; under?: string; laget: Laget }[]; primara: string[]; infor: { namn: string; niva: number; ord: string }[] };
 }
+type Metodkortet = { id: string; titel: string; fakta: [string, string][]; larande: Laget; kommentar: string };
+
+// Det som syns av en metods metodkort på korten för Metoder, ur samma rötter som kortet på sidan (Metodprofil.astro).
+const umKort = (m: Utkast): Metodkortet => ({ id: m.id, titel: m.titel, fakta: m.fakta, larande: laget(m.evidens.larande), kommentar: larandetIKort(m.evidens.larande) ?? '' });
+const umRader = (m: Utkast) => ({
+  rader: OMRADEN.filter((o) => o.id !== 'larande').map((o) => ({ namn: o.namn, ...(o.under ? { under: o.under } : {}), laget: laget(m.evidens[o.id]) })),
+  primara: primaraOmraden(m.evidens),
+  infor: [{ namn: 'Svårighet att införa', niva: svarighetensNiva(m.svarighet), ord: SVARIGHETENS_ORD[svarighetensNiva(m.svarighet)] }, { namn: 'Kostnad att införa', niva: kostnadensNiva(m.kostnad), ord: KOSTNADENS_ORD[kostnadensNiva(m.kostnad)] }],
+});
+
+// Reglerna i global.css som en lista, utan kommentarerna, med @media- och @container-blocket som regeln står i, så att ett
+// kort kan räkna in just de regler som når det.
+function cssRegler(css: string): { valjare: string; text: string }[] {
+  const ut: { valjare: string; text: string }[] = [];
+  const ga = (text: string, inom: string) => {
+    let i = 0;
+    for (;;) {
+      const start = text.indexOf('{', i);
+      if (start < 0) return;
+      const valjare = text.slice(i, start).trim();
+      let djup = 1, j = start + 1;
+      for (; j < text.length && djup; j++) { if (text[j] === '{') djup++; else if (text[j] === '}') djup--; }
+      const kropp = text.slice(start + 1, j - 1);
+      if (/^@(media|supports|container|layer)\b/.test(valjare)) ga(kropp, `${inom}${valjare} `);
+      else ut.push({ valjare: `${inom}${valjare}`, text: `${inom}${valjare} { ${kropp.trim()} }` });
+      i = j;
+    }
+  };
+  ga(css.replace(/\/\*[\s\S]*?\*\//g, ''), '');
+  return ut;
+}
+// Klasserna i metodkortet (Metodprofil.astro och Staplar.astro), i banken och på metodens sida. Korten för Metoder räknar in
+// reglerna som nämner dem och alla :root-block, så att korten ritas om när metodkortets form ändras och inte annars.
+const METODKORTETS_KLASSER = /\.(?:kort(?:-topp|-fakta|-rad)?|metodkort|metodprofil|faktaruta(?:-etikett)?|mp-[\w-]+|amne|forsmak|beta|visually-hidden)(?![\w-])/;
 
 // Små tal med bokstäver, som i sajtens texter.
 const TAL = ['noll', 'en', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv'];
@@ -118,6 +169,8 @@ function dela(text: string): [string, string] {
   return [text.slice(0, i), rest.charAt(0).toLocaleUpperCase('sv') + rest.slice(1)];
 }
 const forstaMeningen = (text: string) => text.split(/(?<=\.)\s/)[0];
+// Årskurserna som metoderna tillsammans täcker, från den tidigaste till den senaste.
+const omfanget = (spann: Spann[]): Spann => [Math.min(...spann.map((x) => x[0])), Math.max(...spann.map((x) => x[1]))];
 
 // Kortet för en post, en rad per samling i roten (src/lib/samlingar.ts), så att en ny samling får sina kort av sig själv: en
 // samling i roten utan sin rad här stannar astro check, och scripts/cacheprov.mjs stannar på en post vars sida har delens
@@ -125,15 +178,17 @@ const forstaMeningen = (text: string) => text.split(/(?<=\.)\s/)[0];
 // har stått, eftersom kontrollsumman läser kortet som text och en ny ordning skulle rita om alla kort. Metoders kort har
 // metodens bläck, som metodens sida och kort (--amnefarg i global.css), och raden över titeln är sidans brödsmula.
 type Post<K extends SamlingNyckel> = { id: string; data: CollectionEntry<K>['data'] };
-type Postkort = Pick<Kort, 'typ' | 'etikett' | 'titel' | 'undertitel' | 'bild' | 'farg'>;
+type Postkort = Omit<Kort, 'sida' | 'namn' | 'fil'>;
 const POSTENS_KORT: { [K in SamlingNyckel]: (p: Post<K>) => Postkort } = {
   stodundervisning: (m) => {
     const [titel, undertitel] = dela(m.data.titel);
     return { typ: 'metod', etikett: `${SAMLINGAR.stodundervisning.namn} · ${m.data.omrade} · ${arskursText(m.data)}`, titel, undertitel: undertitel || m.data.undertitel || '', bild: site.portratt, farg: FARG[m.data.omrade] ?? '--farg-accent' };
   },
+  // En metod under Metoder har en egen mall (UNDERVISNINGSMETODSMALL) med det som syns av metodkortet.
   undervisningsmetoder: (u) => {
     const [titel, undertitel] = dela(u.data.titel);
-    return { typ: 'metod', etikett: `${SAMLINGAR.undervisningsmetoder.namn} · ${arskursText(u.data)}`, titel, undertitel: undertitel || u.data.undertitel || '', bild: site.portratt, farg: '--farg-mork' };
+    const m = kortetUrFil(u.id, u.data);
+    return { typ: 'undervisningsmetod', etikett: `${SAMLINGAR.undervisningsmetoder.namn} · ${arskursText(u.data)}`, titel, undertitel: undertitel || u.data.undertitel || '', bild: site.portratt, farg: '--farg-mork', undervisningsmetod: { ...umKort(m), ...umRader(m) } };
   },
   artiklar: (a) => {
     const ar = a.data.datum.getFullYear();
@@ -157,16 +212,20 @@ export function allaKort(): Promise<Kort[]> {
     const portratt = site.portratt;
     // Metoderna med databasens teman (src/lib/faktateman.ts), som Ta fram-sidorna och temanas sidor har dem.
     const metoder = await medDatabaserna(await publicerade('stodundervisning'));
+    // Metoderna under Metoder i bankens ordning, efter titeln, som trappan på kortet för /metoder tar dem.
+    const undervisningsmetoder = (await publicerade('undervisningsmetoder')).sort((a, b) => a.data.titel.localeCompare(b.data.titel, 'sv'));
 
     lagg({ sida: '/', typ: 'start', etikett: '', titel: site.namn, undertitel: site.rad, bild: portratt, farg: '--farg-accent' });
     for (const [nyckel, s] of Object.entries(site.sidor)) {
       // Om-sidan har porträttet till höger och därmed en smal spalt: där står raden under namnet i stället för beskrivningen.
       const om = nyckel === 'om';
       if (nyckel === 'stodundervisning') lagg({ sida: `/${nyckel}`, typ: 'metodbank', ...metodbanken(metoder), titel: s.titel, undertitel: METODBANKENS_RAD, bild: portratt, farg: '--farg-accent' });
+      // Metoder har bankens kort när en metod är publicerad, och annars avsnittets kort.
+      else if (nyckel === SAMLINGAR.undervisningsmetoder.led && undervisningsmetoder.length) lagg({ sida: `/${nyckel}`, typ: 'metoder', etikett: `Metodbank · ${spannText(omfanget(undervisningsmetoder.map((u) => arskursSpannet(u.data))))}`, titel: s.titel, undertitel: METODERNAS_RAD, bild: portratt, farg: '--farg-mork', metoder: undervisningsmetoder.slice(0, HOGST_I_TRAPPAN).map((u) => umKort(kortetUrFil(u.id, u.data))) });
       else lagg({ sida: `/${nyckel}`, typ: om ? 'om' : 'avsnitt', etikett: '', titel: s.titel, undertitel: om ? site.rad : forstaMeningen(s.beskrivning), bild: portratt, farg: '--farg-accent' });
     }
     // Ett kort per post i varje samling i roten (POSTENS_KORT).
-    const poster: { [K in SamlingNyckel]: Post<K>[] } = { stodundervisning: metoder, undervisningsmetoder: await publicerade('undervisningsmetoder'), artiklar: await publicerade('artiklar'), bocker: await publicerade('bocker') };
+    const poster: { [K in SamlingNyckel]: Post<K>[] } = { stodundervisning: metoder, undervisningsmetoder, artiklar: await publicerade('artiklar'), bocker: await publicerade('bocker') };
     for (const s of SAMLINGARNA) for (const p of poster[s] as Post<SamlingNyckel>[]) lagg({ sida: postensAdress(s, p.id), ...(POSTENS_KORT[s] as (x: Post<SamlingNyckel>) => Postkort)(p) });
     for (const m of metoder) {
       // Sidan som slumpar skrivkort har ett eget kort med tre skrivkort och klockan (Niclas 2026-10-14: "en direktlänk
@@ -263,9 +322,17 @@ export function allaKort(): Promise<Kort[]> {
       const stil = [stycke('\n* { box-sizing', '\n.hopp-lank'), stycke('\n.kort {', '\n.meta {'), stycke('/* Metodbanken: korten', '\n.samla {')].join('|');
       return [mall, kortet, stil, designsystem('--farg-accent', mall + stil)].join('|');
     };
+    // Korten för Metoder och dess metoder ritas med metodkortet (Metodprofil.astro och Staplar.astro) och de regler i
+    // global.css som når det, utöver grundreglerna för text och länkar, och mallen.
+    const metodkortetsSumma = (mallen: string, farg: string) => {
+      const mall = las(mallen).toString('utf8').replace(/\r\n/g, '\n');
+      const kod = ['src/components/Metodprofil.astro', 'src/components/Staplar.astro'].map((f) => las(f).toString('utf8').replace(/\r\n/g, '\n'));
+      const stil = [stycke('\n* { box-sizing', '\n.hopp-lank'), ...cssRegler(css).filter((r) => r.valjare === ':root' || METODKORTETS_KLASSER.test(r.valjare)).map((r) => r.text)].join('\n');
+      return [mall, ...kod, stil, designsystem(farg, mall + stil)].join('|');
+    };
     return utan.map((k) => {
       const h = createHash('sha256');
-      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : []), ...(k.metodbank ? [metodbankSumma()] : []), ...(k.tafram ? [taframSumma(k.tafram)] : [])]) h.update(del);
+      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : []), ...(k.metodbank ? [metodbankSumma()] : []), ...(k.tafram ? [taframSumma(k.tafram)] : []), ...(k.metoder ? [metodkortetsSumma(METODERMALL, k.farg)] : []), ...(k.undervisningsmetod ? [metodkortetsSumma(UNDERVISNINGSMETODSMALL, k.farg)] : [])]) h.update(del);
       return { ...k, fil: `/delning/${k.namn}-${h.digest('hex').slice(0, 10)}.${PNG.includes(k.typ) ? 'png' : 'jpg'}` };
     });
   })();

@@ -15,12 +15,12 @@
 // fyller i den"). Elevernas namn och allt läraren för in stannar i webbläsaren och följer aldrig med länken,
 // kalenderfilen, statistiken eller texterna som kopieras.
 import {
-  iJulen, julensText, julveckorna, arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTidI, dokumentationstext, dokumentationsrader, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
+  iJulen, julensText, julveckorna, arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, lektionernasMal, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, planensSistaDag, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTidI, dokumentationstext, dokumentationsrader, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   hogstaPassnr, LANGSTA, lasVal, malText, passetMedNr, passnummerText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsLangder, passetsVisadeRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
   bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensText, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, passetsEgenTid, radText, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
-  ANLEDNINGENS_LANGD, allaPassInstallda, flyttatHit, namnenNastanLika, passetPaDagen, utanPunkt, iSommarlovet, lovveckornaAttValja, harInfortEfter, lovetLast, planveckansKort, sistaInfort, regelnIVeckan, sakernasText, skolveckan, skolveckanHarVarit, skolveckansText, veckorText,
+  ANLEDNINGENS_LANGD, allaPassInstallda, flyttatHit, namnlistan, passetPaDagen, utanPunkt, iSommarlovet, lovveckornaAttValja, harInfortEfter, lovetLast, planveckansKort, sistaInfort, regelnIVeckan, sakernasText, skolveckan, skolveckanHarVarit, skolveckansText, veckorText,
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
@@ -542,9 +542,8 @@ narvaroruta.addEventListener('change', () => andra(() => { aktiv.foljd = { ...ak
 // skriver namnet. Vad som togs bort sägs när läraren lämnar fältet, och under fältet står det som inte kom med
 // (buggjakten samma dag: den trettonde eleven och den andra Kalle försvann utan besked).
 type Elev = { id: string; namn: string; utkast?: true; fran?: string };
-// fore: listan när läraren började skriva, och det som var infört då. radId: eleven som varje rad hör till. start: radernas
-// elever när läraren började skriva.
-let redigering: { plan: string; fore: Elev[]; foljd: HelFoljd; nya: Map<number, { id: string; namn: string }>; radId: (string | undefined)[]; start: (string | undefined)[]; lamnade: Elev[] } | null = null;
+// fore: listan när läraren började skriva, och det som var infört då. lamnade: eleverna som hade lämnat listan då.
+let redigering: { plan: string; fore: Elev[]; foljd: HelFoljd; lamnade: Elev[] } | null = null;
 let elevNot = { plan: '', text: '' };
 let elevTimer = 0;
 // Frågan under listan när en ny elev kom till i samma ändring som en annan elev togs bort (K-516): en fråga per ny elev, med
@@ -553,66 +552,20 @@ let elevFraga: { plan: string; par: { ny: Elev; kandidater: Elev[] }[] } = { pla
 // De nya elever som läraren har svarat Ny elev för, per plan, så att frågan inte kommer igen medan läraren skriver vidare
 // (verifieringen 2026-10-25: frågan om Dan kom tillbaka efter varje ändring i listan).
 const nyaBesvarade = new Map<string, Set<string>>();
+// Elevlistan ur det läraren skriver, med namnlistans princip i standarden, samma rot som klasslistan i Lär dig metoden (lagning-3,
+// Elevlistans princip; Niclas 2026-10-31: "Om det går hitta en stabil rot för elevlistan"). Sidan har inga egna regler för
+// vem en rad är: den lägger bara till dagen en elev kom till, så att närvaron räknas därifrån.
 function lasElevlistan(text: string, r: NonNullable<typeof redigering>) {
-  const sett = new Set<string>();
-  const dubbletter: string[] = [], utanfor: string[] = [], kortade: string[] = [], enBokstav: string[] = [];
-  const rader = text.split('\n').map((x) => {
-    const hel = x.trim().replace(/\s+/g, ' ');
-    // Ett namn får vara högst 30 tecken och kortas vid ett ord, inte mitt i det.
-    const n = hel.length > 30 ? hel.slice(0, 31).replace(/\s+\S*$/, '').slice(0, 30) || hel.slice(0, 30) : hel;
-    if (n !== hel) kortade.push(n);
-    if (n.length === 1) enBokstav.push(n);
-    if (!n) return '';
-    if (sett.has(n.toLocaleLowerCase('sv'))) { dubbletter.push(n); return ''; }
-    sett.add(n.toLocaleLowerCase('sv'));
-    if (sett.size > ELEVLISTANS_LANGD) { utanfor.push(n); return ''; }
-    return n;
-  });
-  // Samma namn som nu eller som när läraren började skriva är samma elev, så att ett namn som ändras fram och tillbaka
-  // behåller sitt id.
-  // Eleverna som har lämnat listan sparas med planen (lamnade), så att en elev som skrivs in igen får tillbaka det som förts
-  // in, också efter en omladdning (verifieringen av K-559 2026-10-26).
-  const kanda = [...aktiv.foljd.elever, ...r.fore, ...r.lamnade];
-  const franFor = (id: string) => kanda.find((x) => x.id === id)?.fran;
-  const medFran = (id: string, namn: string): Elev => { const f = franFor(id); return { id, namn, ...(f ? { fran: f } : {}) }; };
-  const anvanda = new Set<string>();
-  // En elev som lämnade listan med ett halvskrivet namn från en annan flik (ett utkast) känns igen på förnamnet, när inget
-  // namn i listan är detsamma (Codex 2026-10-26: Bea A från en annan flik gav Bea Andersson ett nytt id).
-  const somUtkast = (n: string) => r.lamnade.find((x) => x.utkast && sammaElev(x.namn, n) && !anvanda.has(x.id) && !rader.includes(x.namn));
-  const lika = rader.map((n) => { if (!n) return null; const e = kanda.find((x) => x.namn === n && !anvanda.has(x.id)) ?? somUtkast(n); if (e) anvanda.add(e.id); return e ? medFran(e.id, n) : null; });
-  const foreNamn = (id: string) => r.fore.find((x) => x.id === id)?.namn;
-  const namnFor = (id: string) => aktiv.foljd.elever.find((x) => x.id === id)?.namn ?? foreNamn(id);
-  const radId: (string | undefined)[] = [];
-  const elever = rader.flatMap((n, i): Elev[] => {
-    // En tom rad behåller sin elev, så att ett namn som skrivs om efter en paus är samma elev.
-    if (!n) { radId[i] = r.radId[i]; return []; }
-    if (lika[i]) { radId[i] = lika[i]!.id; return [lika[i]!]; }
-    // Ett nytt namn på en rad är radens elev med rättat namn när förnamnet är detsamma som elevens när läraren började skriva
-    // (sammaElev i standarden), som "Ali" som blir "Ali S.", eller namnen är nästan lika, med samma regel som klasserna i Lär
-    // dig metoden (namnenNastanLika; C12), och eleven inte står kvar på en annan rad. Cem som blir Cemal och Ali som blir Alina
-    // är en ny elev tills läraren svarar på frågan (Codex granskning 4 inför lanseringen, fynd 1). Radens elev är den
-    // som raden har nu eller hade när läraren började, så att en paus mitt i ett namn inte byter elev. Ett annat förnamn är
-    // en ny elev, och läraren får frågan om det är samma (K-516: Nova på Annas rad fick Annas skattningar och resultat).
-    const agare = [r.radId[i], r.start[i]].find((id): id is string => !!id && !anvanda.has(id) && foreNamn(id) !== undefined && (sammaElev(foreNamn(id)!, n) || namnenNastanLika(foreNamn(id)!, n)) && !rader.some((x, j) => j !== i && (x === foreNamn(id) || x === namnFor(id))));
-    if (agare) { anvanda.add(agare); radId[i] = agare; return [medFran(agare, n)]; }
-    // Radens nya id gäller bara samma namn medan det skrivs, som A, Al och Ali, så att ett annat namn på raden blir en ny elev
-    // och inte tar över det som förts in om eleven före (verifieringen inför lanseringen, C12: Elsa fick Beas skattning).
-    const forra = r.nya.get(i);
-    let id = forra && namnenNastanLika(forra.namn, n) ? forra.id : undefined;
-    if (!id || anvanda.has(id)) id = `e${nyttId().slice(0, 4)}`;
-    r.nya.set(i, { id, namn: n });
-    anvanda.add(id);
-    radId[i] = id;
-    // En elev som kommer till i en lista som fanns en dag före i dag, när ett pass är bockat före i dag, har dagens datum, så
-    // att närvaron räknas från i dag. En lista som skrivs in i flera steg samma dag är gruppen från början (Codex 2026-10-26).
-    const sen = r.fore.length > 0 && (!aktiv.foljd.listan || aktiv.foljd.listan < idag) && aktiv.foljd.gjorda.some((d) => d < idag);
-    return [{ id, namn: n, ...(sen ? { fran: idag } : {}) }];
-  });
-  r.radId = radId;
-  // De nya eleverna: de som fick sitt id medan läraren skrev. En elev som känns igen på namnet, också en som togs bort
-  // tidigare, är ingen ny elev.
-  const nya = new Set([...r.nya.values()].map((x) => x.id));
-  return { elever, dubbletter: [...new Set(dubbletter)], utanfor, kortade, enBokstav: [...new Set(enBokstav)], nyaElever: elever.filter((e) => nya.has(e.id)) };
+  const lamnade = [...r.lamnade, ...(aktiv.foljd.lamnade ?? [])].filter((x, i, alla) => alla.findIndex((y) => y.id === x.id) === i);
+  const listan = namnlistan(text, r.fore, { nyttId: () => `e${nyttId().slice(0, 4)}`, langd: ELEVLISTANS_LANGD, namnetsLangd: 30, nu: aktiv.foljd.elever, lamnade });
+  const kanda = [...aktiv.foljd.elever, ...r.fore, ...lamnade];
+  // En elev som kommer till i en lista som fanns en dag före i dag, när ett pass är bockat före i dag, har dagens datum, så
+  // att närvaron räknas från i dag. En lista som skrivs in i flera steg samma dag är gruppen från början (Codex 2026-10-26).
+  const sen = r.fore.length > 0 && (!aktiv.foljd.listan || aktiv.foljd.listan < idag) && aktiv.foljd.gjorda.some((d) => d < idag);
+  const medFran = (e: { id: string; namn: string }): Elev => { const f = listan.nya.includes(e.id) ? (sen ? idag : undefined) : kanda.find((x) => x.id === e.id)?.fran; return { id: e.id, namn: e.namn, ...(f ? { fran: f } : {}) }; };
+  const elever = listan.lista.map(medFran);
+  const fragor = listan.fragor.map((p) => ({ ny: elever.find((e) => e.id === p.ny.id)!, kandidater: p.kandidater }));
+  return { elever, borta: listan.borta, lamnade: listan.lamnade, dubbletter: listan.dubbletter, utanfor: listan.utanfor, kortade: listan.kortade, enBokstav: listan.enBokstav, fragor };
 }
 // Ta bort elevernas namn: namnen blir "en elev" i lärarens meningar, eftersom läraren har bett om att namnen tas bort.
 // kvar: eleverna som står kvar, vars hela namn skyddas (utanNamn i standarden).
@@ -624,7 +577,7 @@ function utanGamlaNamn(namn: { namn: string }[], kvar: Elev[]) {
   if (f.avstamning) f.avstamning = tvatta(f.avstamning);
   if (f.utvardering) f.utvardering = tvatta(f.utvardering);
 }
-const startaRedigering = () => { if (!redigering || redigering.plan !== aktiv.id) redigering = { plan: aktiv.id, fore: aktiv.foljd.elever, foljd: structuredClone(aktiv.foljd), nya: new Map(), radId: aktiv.foljd.elever.map((e) => e.id), start: aktiv.foljd.elever.map((e) => e.id), lamnade: aktiv.foljd.lamnade ?? [] }; };
+const startaRedigering = () => { if (!redigering || redigering.plan !== aktiv.id) redigering = { plan: aktiv.id, fore: aktiv.foljd.elever, foljd: structuredClone(aktiv.foljd), lamnade: aktiv.foljd.lamnade ?? [] }; };
 // skriver: medan läraren skriver. tyst: sidan sparar, som när läraren byter flik, och redigeringen fortsätter (Codex
 // 2026-10-24: ett flikbyte mitt i ett namn gav eleven ett nytt id). klar: läraren har lämnat fältet. slut: planen byts.
 function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
@@ -632,7 +585,7 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
   elevTimer = 0;
   if (!redigering || redigering.plan !== aktiv.id) { redigering = null; return; }
   const r = redigering;
-  const { elever, dubbletter, utanfor, kortade, enBokstav, nyaElever } = lasElevlistan(elevfalt.value, r);
+  const { elever, borta, lamnade: lamnadeNu, dubbletter, utanfor, kortade, enBokstav, fragor } = lasElevlistan(elevfalt.value, r);
   // Ett namn som sparas medan läraren skriver är ett utkast tills hen lämnar fältet, så att en annan flik som läser listan
   // inte sparar det som ett tidigare namn (Codex 2026-10-25: "Be" från en flik tvättade bort ordet "be" i en annan).
   // Ett namn som inte har ändrats behåller sitt märke, också ett utkast från en annan flik (Codex 2026-10-25).
@@ -649,17 +602,15 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
     enBokstav.length ? `${uppraknat(enBokstav)} har en bokstav och byts inte ut i texten som kopieras. Skriv minst två, som förnamnet eller två initialer.` : '',
   ].filter(Boolean).join(' ') };
   visaElevNot();
-  const borta = r.fore.filter((e) => !elever.some((x) => x.id === e.id));
   // Eleverna som lämnar listan sparas med planen varje gång listan sparas, också medan läraren skriver, så att en annan flik
   // och en omladdning känner igen dem. Listan räknas från den när ändringen började, så att inget halvt namn stannar där
-  // (Codex 2026-10-26). En elev som kommer tillbaka säger det, med Ångra.
-  const lamnade = [...r.lamnade.filter((x) => !borta.some((b) => b.id === x.id) && !elever.some((e) => e.id === x.id)), ...borta].slice(-64);
+  // (Codex 2026-10-26). En elev som kommer tillbaka säger det, med Ångra. Listan och de lämnade kommer ur namnlistan.
+  const lamnade = lamnadeNu.slice(-64);
   // Dagen listan fick sin första elev, men inte när eleverna kommer tillbaka från en tidigare lista, som en plan sparad före
   // ändringen som töms och skrivs in igen (Codex 2026-10-26).
   const nyLista = !r.fore.length && elever.length > 0 && !aktiv.foljd.listan && !elever.some((e) => r.lamnade.some((x) => x.id === e.id));
   aktiv.foljd = { ...aktiv.foljd, lamnade: lamnade.length ? lamnade : undefined, ...(nyLista ? { listan: idag } : {}) };
   const tillbaka = elever.filter((e) => !r.fore.some((x) => x.id === e.id) && r.lamnade.some((x) => x.id === e.id));
-  const gamla = r.fore.filter((e) => { const ny = elever.find((x) => x.id === e.id); return !ny || !sammaElev(e.namn, ny.namn); });
   // Ett namn som lämnar listan sparas med planen när listan sparas, också medan läraren skriver, så att texterna som lämnar
   // webbläsaren tvättar bort det i varje flik (elevernasNamn), och lärarens meningar står kvar som hen skrev dem (K-537;
   // Codex 2026-10-25: en annan flik läste listan utan namnet och meningarna med det).
@@ -680,14 +631,16 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
   // eleven står i listan och någon av de borttagna inte gör det.
   const finns = (id: string) => elever.some((e) => e.id === id);
   const kvar = elevFraga.plan === r.plan ? elevFraga.par.map((p) => ({ ...p, kandidater: p.kandidater.filter((k) => !finns(k.id)) })).filter((p) => finns(p.ny.id) && p.kandidater.length) : [];
-  const nyaFragor = borta.length ? nyaElever.filter((e) => !kvar.some((p) => p.ny.id === e.id) && !nyaBesvarade.get(r.plan)?.has(e.id)).map((ny) => ({ ny, kandidater: borta })) : [];
+  // En fråga per ny elev där en elev stod, med eleverna som stod där (elevlistans princip, lasElevlistan).
+  const nyaFragor = fragor.filter((p) => !kvar.some((x) => x.ny.id === p.ny.id) && !nyaBesvarade.get(r.plan)?.has(p.ny.id));
   elevFraga = { plan: r.plan, par: [...kvar, ...nyaFragor] };
   visaElevFraga();
   sparaTyst();
   renderaVeckan();
   if (lage !== 'klar') return;
   const gruppSkattad = !r.fore.length && Object.values(aktiv.foljd.skattning).some((v) => v?.[GRUPPEN]);
-  const bara = borta.filter((e) => !elevFraga.par.some((p) => p.kandidater.some((k) => k.id === e.id)));
+  // En elev som lämnar listan sägs alltid med Ångra, också när en ny elev på hennes rad ger en fråga (elevlistans princip).
+  const bara = borta;
   const angra = { text: 'Ångra', kvar: true, gor: () => {
     if (aktiv.id !== r.plan) return;
     // Namnen som lämnar listan när den återställs sparas också (Codex 2026-10-25: Ali Svensson efter Ångra).
@@ -702,7 +655,7 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
     rendera();
     visaBesked('Elevlistan är tillbaka.');
   } };
-  // Ett rättat namn är samma elev (sammaElev), och beskedet säger det, så att läraren ser vad som följde med och kan ångra
+  // Ett rättat namn är samma elev (namnlistan i standarden), och beskedet säger det, så att läraren ser vad som följde med och kan ångra
   // (användbarhetsprovet 2026-10-25: "Dina K fick Dinas utan fråga").
   const rattade = r.fore.flatMap((e) => { const ny = elever.find((x) => x.id === e.id); return ny && ny.namn !== e.namn ? [`${e.namn} heter nu ${ny.namn}`] : []; });
   // En elev som kommer tillbaka sägs alltid, också när en annan togs bort i samma ändring, så att en namne som fick en tidigare
@@ -778,6 +731,12 @@ elevfalt.addEventListener('input', () => {
   elevTimer = window.setTimeout(() => uppdateraElevlistan('skriver'), 600);
 });
 elevfalt.addEventListener('blur', () => { if (redigering) uppdateraElevlistan('klar'); });
+// Ett tryck utanför fältet räknar listan klar, som när läraren lämnar fältet, också när det som trycks inte tar fokus från
+// fältet: en elev som skrevs in i samma redigering hör då till listan före nästa ändring och känns igen när hon skrivs in igen,
+// och en skattad elev som tas bort sägs alltid med Ångra, också under Ändra planen (verifieringen inför lanseringen, C11, och
+// elevlistans princip i lagning-3).
+// Trycket räknas efter sin egen ändring, och ett tryck i elevrutan, som frågan om samma elev, hör till redigeringen.
+document.addEventListener('click', (e) => { if (redigering && !(e.target as Element | null)?.closest?.('#pl-elevruta')) uppdateraElevlistan('klar'); });
 $('pl-elever-bort').addEventListener('click', (e) => fragaForst(e.currentTarget as HTMLElement, 'Ta bort elevernas namn och allt som förts in om dem?', 'Ta bort', () => {
   const fore = ogonblick();
   andra(() => {
@@ -1000,12 +959,15 @@ function renderaVeckor() {
     const { fran: f, till: t } = veckansDagar(plan, v);
     const steg = radernaI(v)[0];
     const passText = passnummerText(v.pass) || 'Inga pass';
+    const faller = v.bortfall.filter((b) => b.varfor !== 'uppehall').length;
     const marken = [
       // I en serie veckans lektion, så att läraren ser i listan när lektionen byts (Rimligheten 2026-10-27).
       ...(serien && lektionen(veckansLektion(v)) ? [`<span class="pl-markering lektion">${esc(lektionen(veckansLektion(v))!.namn)}</span>`] : []),
       ...uppfoljningI(v).map((u) => `<span class="pl-markering uppf">${esc(veckorI(data.uppfoljning.rader[u.rad]?.nar) ? 'Uppföljning' : uppfNamn(u.rad))}</span>`),
       ...(aktiv.folj && v.nr === mitt && v.nr !== plan.veckor.length ? ['<span class="pl-markering stam">Avstämning</span>'] : []),
-      ...(v.bortfall.length ? [`<span class="pl-markering bort">${v.bortfall.length === 1 ? 'Ett pass faller bort' : `${v.bortfall.length} pass faller bort`}</span>`] : []),
+      // Dagarna i förlängningens uppehåll heter uppehåll också här, som i veckan (lagning-3, L2: "Ett pass faller bort").
+      ...(faller ? [`<span class="pl-markering bort">${faller === 1 ? 'Ett pass faller bort' : `${faller} pass faller bort`}</span>`] : []),
+      ...(faller < v.bortfall.length ? ['<span class="pl-markering bort">Uppehåll</span>'] : []),
       ...(vy === v.nr ? ['<span class="pl-markering nu">Den här veckan</span>'] : []),
       ...(plan.slut && v.nr === plan.veckor.length ? [`<span class="pl-markering struken">Slutar med pass ${plan.sistaNr}</span>`] : []),
     ];
@@ -1918,7 +1880,7 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
     passen.length ? '<button type="button" class="knapp sekundar liten" data-gor="flytta" aria-expanded="false" aria-controls="pl-flytta">Flytta eller ställ in ett pass</button>' : '',
   ].filter(Boolean);
   const alla = passknappar.length ? `<p class="pl-andra-knappar">${passknappar.join('')}</p>` : '';
-  const flyttaForm = !passen.length ? '' : `<div class="pl-flytta" id="pl-flytta" hidden><label class="pl-etikett" for="pl-flytta-pass">Passet</label><select class="pl-falt" id="pl-flytta-pass">${passen.map((p) => `<option value="${esc(passetsDag(p))}"${p.nr === forslagFlytta?.nr ? ' selected' : ''}>Pass ${p.nr}, ${esc(dagText(p.datum))}</option>`).join('')}</select>${nyaDagar.length ? `<label class="pl-etikett" for="pl-flytta-dag">Dag</label><select class="pl-falt" id="pl-flytta-dag">${nyaDagar.map((d) => `<option value="${d}"${d === forslagDag ? ' selected' : ''}>${esc(stor(dagText(d)))}</option>`).join('')}</select><fieldset class="pl-rad pl-tider pl-flytta-tid"><legend class="pl-etikett">Tid, bara för det här passet</legend><div class="pl-tidrad">${tidrad('pl-flytta-fran', 'pl-flytta-till', tidval(forslagTid?.[0], undefined, forslagTid ? null : 'Ingen tid'), slutval(forslagTid?.[0], forslagTid?.[1]), !forslagTid)}</div></fieldset>` : ''}<p class="pl-andra-knappar">${nyaDagar.length ? `<button type="button" class="knapp liten" data-gor="flytta-klar" ${goat('flytta', 'ett pass flyttat')}>Ändra passet</button>` : ''}<button type="button" class="knapp sekundar liten" data-gor="stall-in">Ställ in passet</button></p></div>`;
+  const flyttaForm = !passen.length ? '' : `<div class="pl-flytta" id="pl-flytta" hidden><label class="pl-etikett" for="pl-flytta-pass">Passet</label><select class="pl-falt" id="pl-flytta-pass">${passen.map((p) => `<option value="${esc(passetsDag(p))}"${p.nr === forslagFlytta?.nr ? ' selected' : ''}>Pass ${p.nr}, ${esc(dagText(p.datum))}</option>`).join('')}</select>${nyaDagar.length ? `<label class="pl-etikett" for="pl-flytta-dag">Dag</label><select class="pl-falt" id="pl-flytta-dag">${nyaDagar.map((d) => `<option value="${d}"${d === forslagDag ? ' selected' : ''}>${esc(stor(dagText(d)))}</option>`).join('')}</select><fieldset class="pl-rad pl-tider pl-flytta-tid"><legend class="pl-etikett">Tid, bara för det här passet</legend><div class="pl-tidrad">${tidrad('pl-flytta-fran', 'pl-flytta-till', tidval(forslagTid?.[0], undefined, forslagTid ? null : 'Ingen tid'), slutval(forslagTid?.[0], forslagTid?.[1]), !forslagTid)}</div></fieldset>` : ''}<p class="pl-varning" id="pl-flytta-not" role="status" hidden></p><p class="pl-andra-knappar">${nyaDagar.length ? `<button type="button" class="knapp liten" data-gor="flytta-klar" ${goat('flytta', 'ett pass flyttat')}>Ändra passet</button>` : ''}<button type="button" class="knapp sekundar liten" data-gor="stall-in">Ställ in passet</button></p></div>`;
   // Hjälpraden står tills läraren har bockat ett första pass. I en vecka som inte har börjat säger den när passen går att
   // bocka, och den står där varje gång.
   const veckanBorjat = passen.some((p) => mandagen(p.datum) <= idag);
@@ -2160,10 +2122,6 @@ $('pl-veckan').addEventListener('click', (e) => {
   const plats = knapp.getBoundingClientRect().top;
   const fokus = (valjare: string) => fokusPaPlats($('pl-veckan').querySelector<HTMLElement>(valjare), plats);
   const d = knapp.dataset;
-  // Det som förs in om en elev räknar elevlistan klar först, som när läraren lämnar fältet, också när knappen inte tar fokus
-  // från fältet, så att en elev som skrevs in i samma redigering hör till listan före nästa ändring: hon känns igen när hon
-  // skrivs in igen, var i listan hon än står, och sägs med Ångra när hon tas bort (verifieringen inför lanseringen, C11).
-  if (redigering && (d.skatta || d.narvaro || d.bock || d.matt)) uppdateraElevlistan('klar');
   // Skriv in eleverna öppnar elevlistan under Ändra planen, som annars är hopfälld (K-548; verifieringen 2026-10-25).
   if (d.elevlistan !== undefined) {
     ($('pl-andra') as HTMLDetailsElement).open = true;
@@ -2309,17 +2267,20 @@ $('pl-veckan').addEventListener('click', (e) => {
   else if (gor === 'flytta-klar' || gor === 'stall-in') {
     const ursprung = $<HTMLSelectElement>('pl-flytta-pass').value;
     if (gor === 'stall-in') { andra(() => { const f = { ...(aktiv.val.flytta ?? {}) }; delete f[ursprung]; aktiv.val.flytta = f; utanEgenTid(ursprung); aktiv.val.stryk = [...new Set([...(aktiv.val.stryk ?? []), ursprung])]; }, 'Passet är inställt.', true); return; }
+    // En flytt som inte görs säger varför i rutan Flytta eller ställ in ett pass, där läraren tittar, och rutan står kvar öppen
+    // (lagning-3, L1: beskedet längst ned syntes inte).
+    const iFlyttrutan = (text: string) => { const not = document.getElementById('pl-flytta-not'); if (not) { not.textContent = text; not.hidden = false; } else visaBesked(text); };
     const ny = $<HTMLInputElement>('pl-flytta-dag').value;
-    if (!arDatum(ny)) { visaBesked('Välj den nya dagen.'); return; }
+    if (!arDatum(ny)) { iFlyttrutan('Välj den nya dagen.'); return; }
     // Passet flyttas inom sin vecka, så att veckans innehåll och numren står kvar (fältets gränser går att skriva förbi).
-    if (ny < v.mandag || ny > skolveckan(v.mandag).sondag) { visaBesked(`Välj en dag i samma vecka, ${spannKort(v.mandag, skolveckan(v.mandag).till)}.`); return; }
-    if (veckodag(ny) > 5 || helgdag(ny)) { visaBesked('Den dagen har skolan stängt. Välj en annan dag.'); return; }
-    if (ny < idag && ny !== ursprung) { visaBesked('Den dagen har varit. Bocka passet om det blev av, eller välj en senare dag.'); return; }
+    if (ny < v.mandag || ny > skolveckan(v.mandag).sondag) { iFlyttrutan(`Välj en dag i samma vecka, ${spannKort(v.mandag, skolveckan(v.mandag).till)}.`); return; }
+    if (veckodag(ny) > 5 || helgdag(ny)) { iFlyttrutan('Den dagen har skolan stängt. Välj en annan dag.'); return; }
+    if (ny < idag && ny !== ursprung) { iFlyttrutan('Den dagen har varit. Bocka passet om det blev av, eller välj en senare dag.'); return; }
     // En dag har ett pass, så en flytt till en dag med ett pass säger varför den inte görs (passetPaDagen i standarden; C18).
     const upptagen = passetPaDagen(plan, v, ny, ursprung);
-    if (upptagen) { visaBesked(`${stor(dagText(ny))} har redan pass ${upptagen.nr}. Välj en dag utan pass, eller ställ in ett av passen.`); return; }
+    if (upptagen) { iFlyttrutan(`${stor(dagText(ny))} har redan pass ${upptagen.nr}. Välj en dag utan pass, eller ställ in ett av passen.`); return; }
     const rubbat = rubbatPass(veckansPass(plan, v), ursprung, ny);
-    if (rubbat) { visaBesked(rubbatText(rubbat)); return; }
+    if (rubbat) { iFlyttrutan(rubbatText(rubbat)); return; }
     // Tiden gäller bara det här passet (passtider, Niclas 2026-10-28: "Viktigt att det bara blir det pass man ändrar"). En tid
     // som är veckodagens sparas inte, så att passet följer veckodagen när den ändras.
     const pass = veckansPass(plan, v).find((p) => passetsDag(p) === ursprung);
@@ -2329,7 +2290,7 @@ $('pl-veckan').addEventListener('click', (e) => {
     const egen = vald && vald.join() !== veckodagens?.join() ? vald : undefined;
     const tidNu = pass ? passetsEgenTid(aktiv.val, pass) : undefined;
     const nyDag = ny !== (pass?.datum ?? ursprung), nyTid = egen?.join() !== tidNu?.join();
-    if (!nyDag && !nyTid) { visaBesked('Välj en annan dag eller en annan tid för passet.'); return; }
+    if (!nyDag && !nyTid) { iFlyttrutan('Välj en annan dag eller en annan tid för passet.'); return; }
     const klockan = vald ? ` kl. ${tidsspann(vald)}` : '';
     andra(() => {
       aktiv.val.flytta = { ...(aktiv.val.flytta ?? {}), [ursprung]: ny };

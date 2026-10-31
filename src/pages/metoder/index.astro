@@ -10,8 +10,11 @@
 // förklaringar ur standardens rötter, och Visar. Varje kort bär det banken filtrerar på (bankensVal), en ruta visas bara
 // när den skiljer metoderna åt (bankensRutor), och antalen räknas med bankensValPassar, som filtret i webbläsaren
 // (src/scripts/bankfilter.ts). Valen är ord, utan staplarnas antal (Niclas samma dag: "I listan ska det vara ord").
+// Rutan Verktyg och Stödmaterial är Stödundervisnings, med samma saker, och följer inte filtret här (Verktygsruta.astro;
+// Niclas 2026-10-31: "Alla verktyg ska också finnas på metoder").
 import Base from '../../layouts/Base.astro';
 import Metodprofil from '../../components/Metodprofil.astro';
+import Verktygsruta from '../../components/Verktygsruta.astro';
 import AppLank from '../../components/AppLank.astro';
 import Insatslista from '../../components/Insatslista.astro';
 import { site } from '../../data/site';
@@ -105,8 +108,15 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
       <p class="mbf-tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>
     </form>
   )}
+  {/* Rutan Verktyg och Stödmaterial står som i Stödundervisning: först, så att den kommer under filtret på en smal skärm,
+      och på en bred i en egen spalt bredvid korten (global.css, Rutan Verktyg och Stödmaterial). */}
+  <div class="mb-yta">
+  <Verktygsruta samling="undervisningsmetoder" />
+  <div class="mb-metoder">
   <div class="rutnat mp-rutnat">
     {korten.map((x) => <Metodprofil m={x.m} lankar={x.lankar} fil={x.fil} val={x.val} omraden={visas.omrade} bank />)}
+  </div>
+  </div>
   </div>
   {/* Kortens ord i områdena utan steg på Forskningsstödets skala, i kortens ordning, för raden under skalan (A5). */}
   <script type="application/json" id="mbf-utan-steg" is:inline set:html={JSON.stringify(metoder.map((x) => x.utanSteg)).replace(/</g, '\\u003c')} />

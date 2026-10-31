@@ -361,16 +361,16 @@ if (tsMp) {
   {
     const nyaPass = (v, dag) => { const fore = s.planera(tsMp, v), ny = s.planera(tsMp, s.forlangdaVal(tsMp, v, 2, dag)); return { fore, ny, nya: ny.pass.filter((p) => p.datum > fore.sistaPass) }; };
     const sen = nyaPass({ ...val, slut: 8 }, '2026-12-02'), mitt = nyaPass({ ...val, slut: 8 }, '2026-11-25'), samma = nyaPass({ ...val, slut: 8 }, '2026-11-18'), hel = nyaPass(val, '2026-12-30');
-    ska('förlängningen läggs efter dagen läraren förlänger', sen.nya.length && sen.nya.every((p) => p.datum > '2026-12-02') && sen.ny.veckor.length === sen.fore.veckor.length + 2 && sen.ny.lovveckor.join() === '2026-11-23' && sen.ny.veckor[3].innehall === 4
-      && mitt.nya.every((p) => p.datum > '2026-11-25') && mitt.nya[0].datum === '2026-11-27' && s.forlangdaVal(tsMp, { ...val, slut: 8 }, 2, '2026-11-25').stryk.includes('2026-11-23') && mitt.ny.veckor.length === mitt.fore.veckor.length + 2
+    ska('förlängningen börjar på dagen läraren förlänger, med dagens pass', sen.nya.length && sen.nya[0].datum === '2026-12-02' && sen.nya.every((p) => p.datum >= '2026-12-02') && sen.ny.veckor.length === sen.fore.veckor.length + 2 && sen.ny.lovveckor.join() === '2026-11-23' && sen.ny.veckor[3].innehall === 4
+      && mitt.nya.every((p) => p.datum >= '2026-11-25') && mitt.nya[0].datum === '2026-11-25' && s.forlangdaVal(tsMp, { ...val, slut: 8 }, 2, '2026-11-25').stryk.includes('2026-11-23') && mitt.ny.veckor.length === mitt.fore.veckor.length + 2
       && JSON.stringify(s.forlangdaVal(tsMp, { ...val, slut: 8 }, 2, '2026-11-18')) === JSON.stringify(s.forlangdaVal(tsMp, { ...val, slut: 8 }, 2)) && samma.nya[0].datum === '2026-11-20'
-      && hel.nya.length === 5 && hel.nya.every((p) => p.datum > '2026-12-30') && hel.ny.lovveckor.join() === '2026-12-14,2026-12-21,2026-12-28',
+      && hel.nya.length === 3 && hel.nya[0].datum === '2026-12-30' && hel.ny.lovveckor.join() === '2026-12-14,2026-12-21',
     [sen.nya.map((p) => p.datum), mitt.nya.map((p) => p.datum), hel.ny.lovveckor]);
     // Planens pass behåller sina nummer och avslutet sitt pass (Codex granskning 2 inför lanseringen, fynd 1): måndagens pass
     // flyttat till torsdagen efter onsdagens avslut ställs inte in, eftersom onsdagens hållna pass 2 då skulle bli pass 1.
     const flyttV = { ...val, flytta: { '2026-11-02': '2026-11-05' }, slut: 2 };
     const flyttFore = s.planera(tsMp, flyttV), flyttNy = s.planera(tsMp, s.forlangdaVal(tsMp, flyttV, 2, '2026-11-20'));
-    ska('förlängningen räknar inte om planens pass', flyttFore.pass.every((x) => flyttNy.pass.some((y) => y.nr === x.nr && y.datum === x.datum)) && flyttNy.pass.find((x) => x.datum === '2026-11-04')?.nr === 2 && !flyttNy.pass.some((x) => x.datum > '2026-11-05' && x.datum <= '2026-11-20') && flyttNy.veckor.length === 3, flyttNy.pass.slice(0, 4));
+    ska('förlängningen räknar inte om planens pass', flyttFore.pass.every((x) => flyttNy.pass.some((y) => y.nr === x.nr && y.datum === x.datum)) && flyttNy.pass.find((x) => x.datum === '2026-11-04')?.nr === 2 && !flyttNy.pass.some((x) => x.datum > '2026-11-05' && x.datum < '2026-11-20') && flyttNy.veckor.length === 3, flyttNy.pass.slice(0, 4));
   }
   // Ett lov i en vecka som har varit har ingen knapp Ta bort lovet i planens lista, så att en förlängning som lade veckan som
   // lov inte flyttar tillbaka dit.
@@ -380,13 +380,50 @@ if (tsMp) {
   // namn är nytt (verifieringen inför lanseringen, C12: Bea blev Elsa med Beas 3). Ett namn som är början på ett annat, som Cem
   // och Cemal eller Ali och Alina, är inte samma: elevlistan frågar (Codex granskning 4, fynd 1: Alina fick Alis skattning).
   ska('namnen nästan lika, för elever och klasser', s.namnenNastanLika('7', '7A') && s.namnenNastanLika('5a', '5A') && s.namnenNastanLika('6 B', '6B') && !s.namnenNastanLika('Cem', 'Cemal') && !s.namnenNastanLika('Ali', 'Alina') && !s.namnenNastanLika('7A', '7A Ek') && !s.namnenNastanLika('Bea', 'Elsa') && !s.namnenNastanLika('B', 'Bea') && !s.namnenNastanLika('3B', '4A'));
+  // Namnlistan, roten för elevlistan och klasslistan (lagning-3, Elevlistans princip; Niclas 2026-10-31: "Om det går hitta en
+  // stabil rot för elevlistan"), med många fall: samma namn på en annan rad, en rättning av ett tecken, ett nytt namn på en rad,
+  // en ny rad, en borttagen som kommer tillbaka, två ändringar i en redigering, ett namn som skrivs, dubbletter, fler än tolv
+  // och tomma rader.
+  {
+    let nr = 0;
+    const nl = { nyttId: () => `x${++nr}`, langd: 12, namnetsLangd: 30 };
+    const fyra = [{ id: 'a', namn: 'Ali' }, { id: 'b', namn: 'Bea' }, { id: 'c', namn: 'Cem' }, { id: 'd', namn: 'Dana' }];
+    const ider = (r) => r.lista.map((e) => `${e.id}:${e.namn}`).join();
+    const fragan = (r) => r.fragor.map((p) => `${p.ny.namn}>${p.kandidater.map((x) => x.id).join('')}`).join();
+    const flytt = s.namnlistan('Cem\nAli\nBea\nDana', fyra, nl), ratt = s.namnlistan('Ali\nBea\nCen\nDana', fyra, nl), nyttNamn = s.namnlistan('Ali\nElsa\nCem\nDana', fyra, nl);
+    const bo = [{ id: 'a', namn: 'Ali' }, { id: 'o', namn: 'Bo' }, { id: 'c', namn: 'Cia' }];
+    const boHugo = s.namnlistan('Ali\nBosse\nCia\nHugo', bo, nl), boSist = s.namnlistan('Ali\nCia\nBosse\nHugo', [bo[0], bo[2], bo[1]], nl);
+    const tillbaka = s.namnlistan('Ali\nBea\nDana\nCem', fyra.filter((x) => x.id !== 'c'), { ...nl, lamnade: [fyra[2]] });
+    const tva = s.namnlistan('Ali\nFia\nCemal\nDana', fyra, nl), farre = s.namnlistan('Mira\nDana', fyra, nl);
+    const lang = s.namnlistan(`Ali\n\nali\n${Array.from({ length: 13 }, (_, i) => `K${i}`).join('\n')}\n\n`, [], nl);
+    const h1 = s.namnlistan('Ali\nH', [fyra[0]], nl), h2 = s.namnlistan('Ali\nHu', [fyra[0]], { ...nl, nu: h1.lista });
+    const kort = s.namnlistan('Ett mycket långt namn som aldrig tar slut', [], nl);
+    const utkast = s.namnlistan('Ali\nBea Andersson', [fyra[0]], { ...nl, lamnade: [{ id: 'b', namn: 'Bea A', utkast: true }] });
+    // En lämnad elev kommer tillbaka bara med samma namn: Nora är inte Nova.
+    const nova = s.namnlistan('Ali\nNora', [fyra[0]], { ...nl, lamnade: [{ id: 'n', namn: 'Nova' }] });
+    ska('namnlistan: en rot för elevlistan och klasslistan, med elevlistans princip', ider(flytt) === 'c:Cem,a:Ali,b:Bea,d:Dana' && !flytt.fragor.length && !flytt.nya.length && !flytt.borta.length
+      && ider(ratt) === 'a:Ali,b:Bea,c:Cen,d:Dana' && !ratt.fragor.length
+      && nyttNamn.lista[1].id !== 'b' && fragan(nyttNamn) === 'Elsa>b' && nyttNamn.borta.map((x) => x.id).join() === 'b' && nyttNamn.lamnade.map((x) => x.id).join() === 'b'
+      && fragan(boHugo) === 'Bosse>o' && boHugo.nya.length === 2 && fragan(boSist) === 'Bosse>o'
+      && ider(tillbaka) === 'a:Ali,b:Bea,d:Dana,c:Cem' && !tillbaka.nya.length && !tillbaka.lamnade.length
+      && fragan(tva) === 'Fia>b,Cemal>c' && fragan(farre) === 'Mira>abc'
+      && lang.lista.length === 12 && lang.dubbletter.join() === 'ali' && lang.utanfor.join() === 'K11,K12' && lang.tomma === 1
+      && h2.lista[1].id === h1.lista[1].id && kort.lista[0].namn === 'Ett mycket långt namn som' && kort.kortade.length === 1 && ider(utkast) === 'a:Ali,b:Bea Andersson' && nova.lista[1].id !== 'n' && nova.lamnade.some((x) => x.id === 'n')
+      && s.klasserUrText('3A\n3C', [{ id: 'k1', namn: '3A' }, { id: 'k2', namn: '3B' }], () => 'ny').map((k) => k.id).join() === 'k1,k2',
+    { flytt: ider(flytt), ratt: ider(ratt), nyttNamn: fragan(nyttNamn), boHugo: fragan(boHugo), boSist: fragan(boSist), tillbaka: ider(tillbaka), tva: fragan(tva), farre: fragan(farre), lang: [lang.lista.length, lang.dubbletter, lang.utanfor, lang.tomma], h: [h1.lista[1]?.id, h2.lista[1]?.id], kort: kort.lista[0]?.namn });
+  }
   // Förlängningens uppehåll (C13, C14): veckorna och dagarna som hade varit står i valen, följer med länken och heter uppehåll i
   // veckan, och ett pass som läraren har ställt in är inställt som förut.
   {
     const upVal = s.forlangdaVal(tsMp, { ...val, slut: 8, stryk: ['2026-11-09'] }, 2, '2026-12-02'), upPlan = s.planera(tsMp, upVal);
     const bort = upPlan.veckor.flatMap((v) => v.bortfall.map((b) => `${b.datum}:${b.varfor}`));
+    // Uppehållet och förlängningen i en mening, lika i texten till åtgärdsprogrammet och i sammanställningen, och dagarna i
+    // uppehållet heter uppehåll också i planens lista (lagning-3, L2 och L3).
+    const upInfo = { titel: ts.titel, adress: 'x', uppfoljning: ts.uppfoljning.rader }, upMening = 'Insatsen hade uppehåll v. 48–49 och förlängdes med pass från onsdag 2 december.';
+    ska('uppehållet och förlängningen i en mening, i texten till åtgärdsprogrammet och i sammanställningen', s.uppehalletsText(upPlan) === upMening && s.dokumentationstext(upInfo, upPlan, upVal, { minuter: 30 }).split('\n').includes(upMening) && s.sammanstallningstext(upInfo, upPlan, s.sammanstallning(upPlan, {}, '2026-12-02')).includes(upMening) && s.uppehalletsText(s.planera(tsMp, val)) === ''
+      && /const faller = v\.bortfall\.filter\(\(b\) => b\.varfor !== 'uppehall'\)\.length;/.test(readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8')), s.uppehalletsText(upPlan));
     const upDagar = (upVal.uppehall ?? []).filter(s.arDatum);
-    ska('förlängningens uppehåll står i valen, i länken och som uppehåll i veckan', upVal.uppehall?.join() === '2026-11-30,2026-12-02,2026-48' && s.lasVal(s.kodaVal(upVal))?.val.uppehall?.join() === upVal.uppehall.join() && upDagar.every((d) => bort.includes(`${d}:uppehall`)) && bort.includes('2026-11-09:installt') && upPlan.lovveckor.includes('2026-11-23') && !s.lasVal(s.kodaVal(val))?.val.uppehall, [upVal.uppehall, bort]);
+    ska('förlängningens uppehåll står i valen, i länken och som uppehåll i veckan', upVal.uppehall?.join() === '2026-11-30,2026-48' && s.lasVal(s.kodaVal(upVal))?.val.uppehall?.join() === upVal.uppehall.join() && upDagar.every((d) => bort.includes(`${d}:uppehall`)) && bort.includes('2026-11-09:installt') && upPlan.lovveckor.includes('2026-11-23') && !s.lasVal(s.kodaVal(val))?.val.uppehall, [upVal.uppehall, bort]);
   }
   // En dag har ett pass (buggjakten inför lanseringen, C17 och C18): en flytt till en dag med ett pass görs inte och sidan säger
   // varför, och Ångra på en inställd dag dit ett pass har flyttats tar tillbaka flytten först, den senaste ändringen den dagen.
@@ -396,17 +433,20 @@ if (tsMp) {
     const p0 = s.planera(ljMp, v0);
     const sidan = readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8');
     ska('en dag har ett pass: en flytt dit säger varför, och Ångra på dagen tar tillbaka flytten först', s.flyttatHit(v0, '2026-11-12') === '2026-11-13' && !s.flyttatHit(v0, '2026-11-13') && !s.flyttatHit({ ...v0, flytta: { '2026-11-12': '2026-11-12' } }, '2026-11-12') && s.passetPaDagen(p0, p0.veckor[0], '2026-11-10', '2026-11-13')?.nr === 2 && !s.passetPaDagen(p0, p0.veckor[0], '2026-11-12', '2026-11-13')
-      && /const hit = d\.angra \? flyttatHit\(aktiv\.val, d\.angra\) : undefined;/.test(sidan) && /if \(d\.angra && !hit\)/.test(sidan) && /const upptagen = passetPaDagen\(plan, v, ny, ursprung\);\n\s*if \(upptagen\) \{ visaBesked/.test(sidan));
+      && /const hit = d\.angra \? flyttatHit\(aktiv\.val, d\.angra\) : undefined;/.test(sidan) && /if \(d\.angra && !hit\)/.test(sidan) && /const upptagen = passetPaDagen\(plan, v, ny, ursprung\);\n\s*if \(upptagen\) \{ iFlyttrutan/.test(sidan) && /id="pl-flytta-not" role="status"/.test(sidan));
     // Codex granskning 4, fynd 2: torsdagen inställd, fredagens pass flyttat till torsdagen och onsdagens till fredagen. Ångra
     // och Flytta tillbaka läser samma kontroll som en flytt, så att fredagen inte får två pass.
     const v1 = { ...v0, flytta: { '2026-11-13': '2026-11-12', '2026-11-11': '2026-11-13' } }, p1 = s.planera(ljMp, v1);
     ska('Ångra och Flytta tillbaka lägger aldrig två pass på en dag', s.flyttatHit(v1, '2026-11-12') === '2026-11-13' && s.passetPaDagen(p1, p1.veckor[0], '2026-11-13', '2026-11-13')?.flyttatFran === '2026-11-11'
       && /const upptagen = veckan && passetPaDagen\(plan, veckan, fran, fran\);\n\s*if \(upptagen\) \{ visaBesked/.test(sidan));
-    // Elevlistan (verifieringen inför lanseringen, C11 och C12): det som förs in om en elev räknar listan klar först, också när
-    // knappen inte tar fokus från fältet, och radens nya id gäller bara samma namn medan det skrivs, så att en elev som skrivs in
-    // igen sist i listan känns igen och en ny elev på en annan elevs rad inte tar över det som förts in. En rättning är samma
-    // regel som klassernas (namnenNastanLika), och förnamnet som förut (sammaElev).
-    ska('elevlistan: det som förs in räknar listan klar, och en ny elev på en annan elevs rad är ny', /if \(redigering && \(d\.skatta \|\| d\.narvaro \|\| d\.bock \|\| d\.matt\)\) uppdateraElevlistan\('klar'\);/.test(sidan) && /let id = forra && namnenNastanLika\(forra\.namn, n\) \? forra\.id : undefined;/.test(sidan) && /sammaElev\(foreNamn\(id\)!, n\) \|\| namnenNastanLika\(foreNamn\(id\)!, n\)/.test(sidan));
+    // Elevlistans princip (lagning-3) står i en rot, namnlistan i standarden, som elevlistan i Planera insatsen och klasslistan i
+    // Lär dig metoden läser (Niclas 2026-10-31: "Om det går hitta en stabil rot för elevlistan"). Spärren stannar när planera.ts
+    // eller lardig.ts får egna regler för vem en rad är igen, och ett tryck utanför fältet räknar listan klar.
+    const ldKoden = readFileSync(join(rot, 'src/scripts/lardig.ts'), 'utf8'), planKoden = readFileSync(join(rot, 'src/lib/standard/plan.js'), 'utf8');
+    const lasningen = sidan.split('function lasElevlistan(')[1]?.split('\n}\n')[0] ?? '';
+    ska('elevlistan och klasslistan har en rot, och sidorna har inga egna regler för listan', /document\.addEventListener\('click', \(e\) => \{ if \(redigering && !\(e\.target as Element \| null\)\?\.closest\?\.\('#pl-elevruta'\)\) uppdateraElevlistan\('klar'\); \}\);/.test(sidan) && /namnlistan\(text, r\.fore,/.test(lasningen)
+      && !/namnenNastanLika\(|sammaElev\(|anvanda|\.split\(|plats\(/.test(lasningen) && !/namnenNastanLika\(/.test(sidan) && !/namnenNastanLika\(|namnlistan\(|kandidater/.test(ldKoden) && /klasserUrText\(skrivet, forut, nyttId/.test(ldKoden)
+      && /export function klasserUrText[\s\S]{0,1200}?namnlistan\(text, fore\.filter/.test(planKoden) && /export function klasslistansBesked\(text\) \{\n\s*const r = namnlistan\(text, \[\]/.test(planKoden));
   }
   // En skolvecka har varit när fredagen är förbi, så att höstlovet i v. 44 inte varnar en lördag i v. 44 (C5).
   ska('en skolvecka har varit när fredagen är förbi', !s.skolveckanHarVarit('2026-10-26', '2026-10-30') && s.skolveckanHarVarit('2026-10-26', '2026-10-31'));
@@ -2445,22 +2485,42 @@ try {
   sant('ett bockat pass ger nästa pass i rutan, och rutan säger det', (await f.text('#pl-veckan .pl-nasta .pl-not')) === 'Pass 8 är bockat.' && (await f.text('#pl-veckan .pl-passnamn'))?.endsWith('9 av 18'), [await f.text('#pl-veckan .pl-nasta'), await f.text('#pl-veckan .pl-passnamn')]);
   await f.tryck('[data-bock="2026-11-18"]');
   sant('utan bocken gäller rutan passet igen', (await f.text('.pl-nar')) === 'I morgon, torsdag 19 november' && (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.gjorda.join()`)) === '2026-11-16', await f.text('.pl-nar'));
-  // Ett rättat namn behåller eleven och det som förts in (granskningarna 2026-10-24).
+  // Ett rättat namn på en elevs rad är en fråga om just den eleven, och Samma elev behåller eleven och det som förts in
+  // (granskningarna 2026-10-24; elevlistans princip, lagning-3).
   const idFore = await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.elever[0].id`);
   await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.value = 'Ali T\\nBea'; t.dispatchEvent(new Event('input')); return true; })()`);
   await vanta(900);
-  sant('ett rättat namn behåller elevens skattningar', await f.kor(`(() => { const p = JSON.parse(localStorage.getItem('insatser')).planer[0]; return p.foljd.elever[0].namn === 'Ali T' && p.foljd.elever[0].id === ${JSON.stringify(idFore)} && p.foljd.skattning['2026-11-16'][${JSON.stringify(idFore)}] === 3; })()`));
-  await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.value = 'Ali Test\\nBea'; t.dispatchEvent(new Event('input')); return true; })()`);
+  const rattFraga = await f.text('#pl-elever-fraga p');
+  await f.tryck('#pl-elever-fraga [data-samma-elev]');
+  await vanta(200);
+  sant('ett rättat namn frågar, och Samma elev behåller elevens skattningar', rattFraga === 'Ali Test är borttagen och Ali T är ny i listan. Är Ali T samma elev som Ali Test, med rättat namn?' && await f.kor(`(() => { const p = JSON.parse(localStorage.getItem('insatser')).planer[0]; return p.foljd.elever[0].namn === 'Ali T' && p.foljd.elever[0].id === ${JSON.stringify(idFore)} && p.foljd.skattning['2026-11-16'][${JSON.stringify(idFore)}] === 3; })()`), rattFraga);
+  // Tillbaka till Ali Test, som en ny ändring med sin fråga.
+  await f.kor(`document.getElementById('pl-elever').blur()`);
+  await vanta(300);
+  await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.focus(); t.value = 'Ali Test\\nBea'; t.dispatchEvent(new Event('input')); return true; })()`);
   await vanta(900);
-  // En paus med raden tom behåller eleven (Codex 2026-10-24: en tom rad en stund gav ett nytt id).
+  await f.tryck('#pl-elever-fraga [data-samma-elev]');
+  await vanta(200);
+  await f.kor(`document.getElementById('pl-elever').blur()`);
+  await vanta(300);
+  // En paus med raden tom och ett nytt namn efter ger samma fråga om eleven (Codex 2026-10-24: en tom rad en stund gav ett nytt id).
   await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.focus(); t.value = '\\nBea'; t.dispatchEvent(new Event('input')); return true; })()`);
   await vanta(900);
-  await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.value = 'Ali S\\nBea'; t.dispatchEvent(new Event('input')); t.blur(); return true; })()`);
+  await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.value = 'Ali S\\nBea'; t.dispatchEvent(new Event('input')); return true; })()`);
+  await vanta(900);
+  await f.tryck('#pl-elever-fraga [data-samma-elev]');
+  await vanta(200);
+  await f.kor(`document.getElementById('pl-elever').blur()`);
   await vanta(300);
-  sant('en paus med raden tom behåller eleven', await f.kor(`(() => { const p = JSON.parse(localStorage.getItem('insatser')).planer[0]; return p.foljd.elever[0].namn === 'Ali S' && p.foljd.elever[0].id === ${JSON.stringify(idFore)} && p.foljd.skattning['2026-11-16'][${JSON.stringify(idFore)}] === 3; })()`));
+  sant('en paus med raden tom behåller eleven, när läraren svarar Samma elev', await f.kor(`(() => { const p = JSON.parse(localStorage.getItem('insatser')).planer[0]; return p.foljd.elever[0].namn === 'Ali S' && p.foljd.elever[0].id === ${JSON.stringify(idFore)} && p.foljd.skattning['2026-11-16'][${JSON.stringify(idFore)}] === 3; })()`));
   // Ett rättat namn sägs, med Ångra (användbarhetsprovet 2026-10-25: "Dina K fick Dinas utan fråga").
   sant('ett rättat namn sägs i beskedet, med Ångra', (await f.text('#pl-toast'))?.includes('Ali Test heter nu Ali S, med det som förts in.') && (await f.kor(`!!document.querySelector('#pl-toast [data-toast-gor]')`)), await f.text('#pl-toast'));
-  await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.focus(); t.value = 'Ali Test\\nBea'; t.dispatchEvent(new Event('input')); t.blur(); return true; })()`);
+  // Tillbaka till Ali Test: ett nytt namn på elevens rad, så sidan frågar om just henne, och Samma elev behåller id:t.
+  await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.focus(); t.value = 'Ali Test\\nBea'; t.dispatchEvent(new Event('input')); return true; })()`);
+  await vanta(900);
+  await f.tryck('#pl-elever-fraga [data-samma-elev]');
+  await vanta(200);
+  await f.kor(`document.getElementById('pl-elever').blur()`);
   await vanta(300);
   // Ett namn tvättas ur lärarens mening först när läraren lämnar fältet: en rad som töms en stund och skrivs igen behåller
   // namnet i meningen (steget Samma sak överallt tvättade medan läraren skrev, och meningen förlorade namnet för gott).
@@ -3583,14 +3643,20 @@ try {
   await lamna();
   const utanLamna = await elever();
   sant('en elev som tas bort utan att fältet lämnas och skrivs in igen efter en omladdning får tillbaka det som förts in', utanLamna[1]?.id === 'e2' && (await skattningarna('e2')) === 6, utanLamna);
-  // Codex 2026-10-26: en elev som lämnade listan med ett halvskrivet namn från en annan flik känns igen på förnamnet.
+  // Codex 2026-10-26: en elev som lämnade listan med ett halvskrivet namn från en annan flik känns igen på förnamnet. Lagringen
+  // ändras från en sida utan planen, så att planens sida inte skriver över den när den lämnas.
+  await el.oppna(`${bas}/om/`);
   await el.kor(`(() => { const d = JSON.parse(localStorage.getItem('insatser')); const p = d.planer.find((x) => x.id === 'slut01'); p.foljd.elever = p.foljd.elever.filter((e) => e.id !== 'e2'); p.foljd.lamnade = [...(p.foljd.lamnade ?? []).filter((e) => e.id !== 'e2'), { id: 'e2', namn: 'Bea A', utkast: true }]; localStorage.setItem('insatser', JSON.stringify(d)); return true; })()`);
   await el.oppna(`${PLAN}#${s.kodaVal(slutVal, { id: 'slut01' })}`);
   await skriv('Ali\nBea Andersson\nSebastian Ek');
   await lamna();
   const halv = await elever();
   sant('en elev som lämnade listan med ett halvskrivet namn känns igen på förnamnet', halv[1]?.id === 'e2' && (await skattningarna('e2')) === 6, halv);
+  // Tillbaka till Bea: ett nytt namn på elevens rad, så sidan frågar om just henne, och Samma elev behåller id:t (elevlistans
+  // princip).
   await skriv('Ali\nBea\nSebastian Ek');
+  await el.tryck('#pl-elever-fraga [data-samma-elev]');
+  await vanta(150);
   await lamna();
   // Svaret gäller: frågan kommer inte igen när läraren skriver vidare i samma redigering (verifieringen 2026-10-25: frågan
   // om Dan kom tillbaka efter varje ändring i listan).
@@ -3637,8 +3703,8 @@ try {
   await skriv('Ali\nNora\nSebastian E', 300);
   await lamna();
   sant('en paus mitt i ett namn byter inte elev', (await elever())[2]?.id === 'e3' && (await skattningarna('e3')) === 6 && (await el.kor(`document.getElementById('pl-elever-fraga').hidden`)), await elever());
-  // Två nya elever i samma ändring: en borttagen elev kan bara vara en av dem, och Ångra tar tillbaka båda frågorna (Codex
-  // 2026-10-25: båda kunde få Alis id).
+  // Två nya elever i samma ändring: en fråga om var sin rad (elevlistans princip), en borttagen elev kan bara vara en av dem, och
+  // Ångra tar tillbaka båda frågorna (Codex 2026-10-25: båda kunde få Alis id).
   await skriv('Pia\nOlle\nSebastian E');
   await lamna();
   const piaId = (await elever())[0]?.id;
@@ -3648,7 +3714,7 @@ try {
   sant('en borttagen elev kan bara vara en av de nya', (await elever())[0]?.id === 'e1' && kvarVal?.length >= 1 && kvarVal.every((v) => !v.endsWith('|e1')), [await elever(), kvarVal]);
   await el.tryck('#pl-toast [data-toast-gor]');
   await vanta(150);
-  sant('Ångra tar tillbaka båda frågorna', (await el.kor(`[...document.querySelectorAll('#pl-elever-fraga [data-samma-elev]')].filter((b) => b.dataset.sammaElev.endsWith('|e1')).length`)) === 2 && (await elever())[0]?.id === piaId, [await el.text('#pl-elever-fraga'), await elever()]);
+  sant('Ångra tar tillbaka båda frågorna, en om var sin elev', (await el.kor(`[...document.querySelectorAll('#pl-elever-fraga [data-samma-elev]')].length`)) === 2 && (await el.kor(`[...document.querySelectorAll('#pl-elever-fraga [data-samma-elev]')].filter((b) => b.dataset.sammaElev.endsWith('|e1')).length`)) === 1 && (await elever())[0]?.id === piaId, [await el.text('#pl-elever-fraga'), await elever()]);
   await el.kor('window.__filnamn = null');
   await el.tryck('#pl-kopia-spara');
   await vanta(200);
@@ -3703,7 +3769,7 @@ try {
     const g = await k556b();
     const annika2 = g.elever.find((e) => e.namn === 'Annika');
     const annikas2 = Object.values(g.skattning).filter((v) => v[annika2?.id] !== undefined).length;
-    sant('K-556: också när båda namnen byts i en ändring', tva.includes('Anna och Carl är borttagna') && mitt.startsWith('e1:Annika') && annika2?.id === 'e1' && annikas2 === slutVeckor.length && !(await fraga()), { tva, mitt, elever: g.elever, annikas2, fraga: await fraga() });
+    sant('K-556: också när båda namnen byts i en ändring, med en fråga om var sin rad', tva.includes('Är Annika samma elev som Anna, med rättat namn?') && tva.includes('Är Erik samma elev som Carl, med rättat namn?') && mitt.startsWith('e1:Annika') && annika2?.id === 'e1' && annikas2 === slutVeckor.length && !(await fraga()), { tva, mitt, elever: g.elever, annikas2, fraga: await fraga() });
   }
   sant('elevlistan: inga fel', !el.undantag.length && !(await el.kor('window.__fel.length')), el.undantag);
   el.stang();
@@ -3763,6 +3829,8 @@ try {
     // tillbaka på sin dag och ingen dag har två pass.
     const dg = await flik(false, Date.UTC(2026, 10, 25, 9, 0, 0));
     await dg.oppna(PLAN);
+    // En ny flik som inte hann ladda sidan får ett försök till.
+    if (!String(await dg.kor('location.protocol')).startsWith('http')) await dg.oppna(PLAN);
     await dg.kor('localStorage.clear()');
     await dg.oppna(`${PLAN}#s=2026-11-30&d=135&l=6`);
     await dg.tryck('#pl-spara');
@@ -3806,8 +3874,90 @@ try {
     const tillbakaBesked = await dg.text('#pl-toast');
     const dagarnaNu = await dg.kor(`[...document.querySelectorAll('#pl-veckan .pl-passlista li:not(.bort):not(.struket) .pl-dag')].map((x) => x.firstChild?.textContent ?? '')`);
     sant('Ångra och Flytta tillbaka lägger aldrig två pass på en dag', String(tvaFlyttar).includes('f=2026-11-30~2026-12-02.2026-12-02~2026-12-04') && (await dg.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`)) === tvaFlyttar && angraBesked?.startsWith('Onsdag 2 december har nu pass 1.') && tillbakaBesked?.startsWith('Onsdag 2 december har nu pass 1.') && dagarnaNu?.length === 2 && new Set(dagarnaNu).size === 2, [tvaFlyttar, angraBesked, tillbakaBesked, dagarnaNu]);
+    // En flytt till en dag som redan har ett pass säger varför i rutan Flytta eller ställ in ett pass, där läraren tittar, och
+    // rutan står kvar öppen (lagning-3, L1).
+    await dg.tryck('[data-gor="flytta"]');
+    await valjDg('pl-flytta-pass', '2026-11-30');
+    await valjDg('pl-flytta-dag', '2026-12-04');
+    await dg.tryck('[data-gor="flytta-klar"]');
+    await vanta(200);
+    const iRutan = await dg.kor(`(() => { const n = document.getElementById('pl-flytta-not'); return { text: n && !n.hidden ? n.textContent : null, oppen: !document.getElementById('pl-flytta').hidden }; })()`);
+    sant('L1: en flytt till en dag med ett pass säger varför i rutan, och rutan står kvar öppen', iRutan?.text === 'Fredag 4 december har redan pass 2. Välj en dag utan pass, eller ställ in ett av passen.' && iRutan.oppen && (await dg.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`)) === tvaFlyttar, iRutan);
     sant('C17: inga fel', !dg.undantag.length && !(await dg.kor('window.__fel.length')), dg.undantag);
     dg.stang();
+  }
+
+  // ---- Elevlistans princip (lagning-3, efter den sista verifieringen) ----
+  // Inget id följer en rad av sig själv: samma namn är samma elev var det än står, ett nytt namn där en elev stod ger en fråga
+  // om just den raden, ett namn på en ny rad är en ny elev utan fråga, och en skattad elev som tas bort sägs alltid med Ångra.
+  // Följderna är verifieringens, i en flik utan fokus, där en knapp inte tar fokus från fältet.
+  {
+    const pr = await flik(false, Date.UTC(2026, 10, 25, 9, 0, 0), false);
+    const p0 = slutlagrat.planer[0];
+    const fem = [{ id: 'p1', namn: 'Ali' }, { id: 'p2', namn: 'Bea' }, { id: 'p3', namn: 'Cem' }, { id: 'p4', namn: 'Dana' }, { id: 'p5', namn: 'Elsa' }];
+    const v4 = slutVeckor[3];
+    const lagrat = { v: 1, planer: [{ ...p0, id: 'prin01', foljd: { ...p0.foljd, elever: fem, franvaro: {}, resultat: {}, avstamning: undefined, skattning: { [v4]: { p1: 1, p2: 2, p3: 3, p4: 4, p5: 5 } } } }] };
+    await pr.oppna(PLAN);
+    if (!String(await pr.kor('location.protocol')).startsWith('http')) await pr.oppna(PLAN);
+    await pr.kor(`localStorage.clear(); localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(lagrat))})`);
+    const adress = `${PLAN}#${s.kodaVal(slutVal, { id: 'prin01' })}`;
+    await pr.oppna(adress);
+    const plan = `JSON.parse(localStorage.getItem('insatser')).planer.find((p) => p.id === 'prin01')`;
+    const id = (namn) => pr.kor(`${plan}.foljd.elever.find((e) => e.namn === ${JSON.stringify(namn)})?.id ?? null`);
+    const skattning = (eid) => pr.kor(`${plan}.foljd.skattning[${JSON.stringify(v4)}]?.[${JSON.stringify(eid ?? '')}] ?? null`);
+    const fragorna = () => pr.kor(`document.getElementById('pl-elever-fraga').hidden ? [] : [...document.querySelectorAll('#pl-elever-fraga p:not(.pl-andra-knappar)')].map((p) => p.textContent)`);
+    const skriv = async (text) => { await pr.kor(`(() => { document.getElementById('pl-andra').open = true; const t = document.getElementById('pl-elever'); t.focus(); t.value = ${JSON.stringify(text)}; t.dispatchEvent(new Event('input')); return true; })()`); await vanta(700); };
+    // Ett tryck i ett annat fält under Ändra planen, som läraren gör efter listan.
+    const annatFalt = async () => { await pr.kor(`document.getElementById('pl-namn').click()`); await vanta(250); };
+    // Cem tas bort, och beskedet säger det med Ångra; Cem skrivs in igen och har sin skattning; Cem rättas till Cemal, och sidan
+    // frågar bara om Cem; Samma elev behåller skattningen; Bea blir Fia, och sidan frågar bara om Bea.
+    await skriv('Ali\nBea\nDana\nElsa');
+    await annatFalt();
+    const bortCem = await pr.text('#pl-toast');
+    const angraCem = await pr.kor(`!!document.querySelector('#pl-toast [data-toast-gor]')`);
+    await skriv('Ali\nBea\nDana\nElsa\nCem');
+    await annatFalt();
+    const cemIgen = { id: await id('Cem'), skattning: await skattning('p3') };
+    await skriv('Ali\nBea\nDana\nElsa\nCemal');
+    const cemalFragor = await fragorna();
+    await pr.tryck('#pl-elever-fraga [data-samma-elev]');
+    await vanta(200);
+    await annatFalt();
+    await skriv('Ali\nFia\nDana\nElsa\nCemal');
+    const fiaFragor = await fragorna();
+    sant('princip: en skattad elev som tas bort sägs med Ångra, kommer tillbaka med samma namn, och ett nytt namn på hennes rad ger en fråga bara om henne', bortCem?.startsWith('Cem är borttagen ur elevlistan.') && angraCem && cemIgen.id === 'p3' && cemIgen.skattning === 3 && cemalFragor.join('|') === 'Cem är borttagen och Cemal är ny i listan. Är Cemal samma elev som Cem, med rättat namn?' && (await id('Cemal')) === 'p3' && (await skattning('p3')) === 3 && fiaFragor.join('|') === 'Bea är borttagen och Fia är ny i listan. Är Fia samma elev som Bea, med rättat namn?' && (await skattning(await id('Fia'))) === null, { bortCem, cemIgen, cemalFragor, fiaFragor });
+    await pr.tryck('#pl-elever-fraga [data-ny-elev]');
+    await annatFalt();
+    // Bo skrivs på en ny rad och är en ny elev utan fråga, och när Bo blir Bosse medan Hugo läggs till sist kommer en fråga om
+    // Bosse, och Hugo är en ny elev utan fråga.
+    await skriv('Ali\nFia\nDana\nElsa\nCemal\nBo');
+    const boUtanFraga = await fragorna();
+    await annatFalt();
+    const bo = await id('Bo');
+    await pr.kor(`(() => { const b = document.querySelector('#pl-skatta [data-skatta^="${v4}|${bo}"][aria-label^="2,"]'); if (!b) return false; b.click(); return true; })()`);
+    await vanta(200);
+    await skriv('Ali\nFia\nDana\nElsa\nCemal\nBosse\nHugo');
+    const boFragor = await fragorna();
+    const hugo = await id('Hugo');
+    sant('princip: ett namn på en ny rad är en ny elev utan fråga, och ett nytt namn där en elev stod ger en fråga om just henne', !boUtanFraga.length && boFragor.join('|') === 'Bo är borttagen och Bosse är ny i listan. Är Bosse samma elev som Bo, med rättat namn?' && !!hugo && hugo !== bo && (await skattning(hugo)) === null, { boFragor, hugo, bo });
+    await pr.tryck('#pl-elever-fraga [data-samma-elev]');
+    await vanta(200);
+    await annatFalt();
+    // Cem, nu Cemal, och Elsa tas bort under Ändra planen, och läraren trycker i ett annat fält: beskedet säger båda med Ångra,
+    // och Ångra tar tillbaka dem med skattningarna.
+    await skriv('Ali\nFia\nDana\nBosse\nHugo');
+    await annatFalt();
+    const bortBada = await pr.text('#pl-toast');
+    await pr.tryck('#pl-toast [data-toast-gor]');
+    await vanta(250);
+    sant('princip: skattade elever som tas bort under Ändra planen sägs med Ångra, och Ångra tar tillbaka dem', bortBada?.startsWith('Elsa och Cemal är borttagna ur elevlistan.') && (await id('Cemal')) === 'p3' && (await id('Elsa')) === 'p5' && (await skattning('p3')) === 3 && (await skattning('p5')) === 5, { bortBada, cemal: await id('Cemal'), elsa: await id('Elsa') });
+    // Det som läser elevernas id följer med (Niclas 2026-10-31: "Se bara till att den propagerar uppåt korrekt"): veckans
+    // skattning visar varje elev med sitt nya namn och sin skattning, Bosse har Bos id och skattning, och Fia och Hugo, som är
+    // nya, har ingen.
+    const skattade = await pr.kor(`[...document.querySelectorAll('#pl-skatta .pl-skattning > li')].map((li) => li.querySelector('.pl-elevnamn').textContent + ':' + (li.querySelector('.pl-skalsteg[aria-pressed="true"]')?.textContent ?? '-')).join('|')`);
+    sant('princip: veckans skattning läser listan ur roten, med de rättade namnen och skattningarna kvar', skattade === 'Ali:1|Fia:-|Dana:4|Elsa:5|Cemal:3|Bosse:2|Hugo:-' && (await id('Bosse')) === bo && (await skattning(bo)) === 2, { skattade, bosse: await id('Bosse'), bo });
+    sant('princip: inga fel', !pr.undantag.length && !(await pr.kor('window.__fel.length')), pr.undantag);
+    pr.stang();
   }
 } catch (e) {
   sidfel.push(`provet av sidan avbröts: ${e.message}`);

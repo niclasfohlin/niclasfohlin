@@ -100,7 +100,7 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
   {/* Rutan Verktyg och Stödmaterial står först, så att den kommer under sorteringen på en smal skärm; på en bred står
       den i en egen spalt bredvid metoderna (global.css, Rutan Verktyg och Stödmaterial). */}
   <div class="mb-yta">
-  <Verktygsruta metoder={allaMetoder} />
+  <Verktygsruta samling="stodundervisning" />
   <div class="mb-metoder">
   {metoder.length > 0 && <Tackning metoder={metoder} taggar={(m) => { const serie = serier.get(m.id); return serie ? serieTaggar(serie, allaMetoder) : m.data.taggar; }} />}
 
