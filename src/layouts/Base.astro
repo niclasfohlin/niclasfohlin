@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { site } from '../data/site';
 import { kortFor } from '../lib/delningskort';
 import { appikonAdress } from '../lib/appikon';
+import { APPEN, iAppensDel } from '../lib/appen';
 
 interface Props {
   title?: string;
@@ -27,16 +28,17 @@ const kort = await kortFor(Astro.url.pathname);
 const bildUrl = new URL(bild ?? kort.fil, Astro.site).href;
 const bildAlt = kort.undertitel ? `${kort.titel}. ${kort.undertitel}` : kort.titel;
 const nuvarande = Astro.url.pathname;
-// Sidorna under /stodundervisning hör till appen Stöd (K-505, DRIFT.md under Appen Stöd): manifestet, appens ikon för
-// iPhones hemskärm och namnet under ikonen. Resten av sajten har sajtens ikon.
-const iAppen = nuvarande === '/stodundervisning' || nuvarande.startsWith('/stodundervisning/');
+// Sidorna under /app, /stodundervisning och /metoder hör till appen Metodbanken (K-505, K-644, src/lib/appen.ts, DRIFT.md
+// under Appen Metodbanken): manifestet, appens ikon för iPhones hemskärm, namnet under ikonen, service workern och
+// data-appdel, som i appen gömmer sajtens meny (global.css). Resten av sajten har sajtens ikon, och i appen sajtens meny.
+const iAppen = iAppensDel(nuvarande);
 function aktiv(href: string) {
   return nuvarande === href || nuvarande.startsWith(href + '/') ? 'page' : undefined;
 }
 ---
 
 <!doctype html>
-<html lang={site.sprak} style={htmlStil} data-drive-klient={site.driveKlientId || undefined}>
+<html lang={site.sprak} style={htmlStil} data-drive-klient={site.driveKlientId || undefined} data-appdel={iAppen ? '' : undefined}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -76,8 +78,8 @@ function aktiv(href: string) {
     <link rel="canonical" href={canonical.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href={iAppen ? appikonAdress('ikon-180') : '/apple-touch-icon.png'} />
-    {iAppen && <link rel="manifest" href="/stodundervisning/manifest.webmanifest" />}
-    {iAppen && <meta name="apple-mobile-web-app-title" content="Stöd" />}
+    {iAppen && <link rel="manifest" href={APPEN.manifest} />}
+    {iAppen && <meta name="apple-mobile-web-app-title" content={APPEN.namn} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={`${site.namn}: allt nytt`} href="/rss.xml" />
     <link rel="alternate" type="application/rss+xml" title={`${site.namn}: artiklar`} href="/artiklar/rss.xml" />
@@ -98,6 +100,11 @@ function aktiv(href: string) {
   </head>
   <body>
     <a class="hopp-lank" href="#innehall">Hoppa till innehållet</a>
+    {/* Raden Hem, bara i appen (global.css): appen har ingen bakåtknapp i iPhone, så varje sida utom appens egen leder hem till
+        /app, också en artikel eller bok, som i appen har sajtens meny under raden (K-644). */}
+    {nuvarande !== APPEN.adress && (
+      <nav class="app-hem" aria-label={`Appen ${APPEN.namn}`}><a href={APPEN.adress}><svg class="ikon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11 12 4l8.5 7M6 9.5V20h4.5v-5.5h3V20H18V9.5" /></svg>Hem</a></nav>
+    )}
     <header class="sidhuvud">
       <a class="namn" href="/">{site.namn}</a>
       <nav aria-label="Huvudmeny">
@@ -120,5 +127,6 @@ function aktiv(href: string) {
       </ul>
       <p class="sidfot-rad">© {new Date().getFullYear()} {site.namn}</p>
     </footer>
+    {iAppen && <script>import '../scripts/appdelen';</script>}
   </body>
 </html>

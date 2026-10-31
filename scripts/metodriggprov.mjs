@@ -13,7 +13,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { parse } from 'yaml';
-import { undervisningsmetodensFel } from '../src/lib/standard/index.js';
+import { undervisningsmetodensFel, metodensFilmnamn } from '../src/lib/standard/index.js';
 
 const args = process.argv.slice(2);
 const id = args.find((a) => !a.startsWith('--'));
@@ -56,7 +56,7 @@ else {
 }
 
 // 3. Filmerna.
-for (const [namn, nr] of [['film', null], ...(d.filmer ?? []).map((f) => [`film${f.nr}`, f.nr])]) for (const ext of ['', '-1', '-2', '-3', '-4']) if (!existsSync(join(ut, `${namn}${ext}.svg`))) fel.push(`out/${id}/${namn}${ext}.svg saknas${nr ? ` (extrafilm ${nr})` : ''}`);
+for (const namn of metodensFilmnamn(d)) for (const ext of ['', '-1', '-2', '-3', '-4']) if (!existsSync(join(ut, `${namn}${ext}.svg`))) fel.push(`out/${id}/${namn}${ext}.svg saknas${namn === 'film' ? '' : ` (extrafilm ${namn.slice(4)})`}`);
 
 if (fel.length) { console.error(`metodriggprov: ${id}, ${fel.length} fel:\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`metodriggprov: ${id} har allt sajten läser, och filer.json, de åtta dokumenten med upphovsraden och filmerna hör till metodfilen.`);

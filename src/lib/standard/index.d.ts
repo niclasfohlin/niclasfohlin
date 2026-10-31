@@ -611,6 +611,10 @@ export declare function sakspann(text: string): { index: number; langd: number; 
 /** Små textverktyg och talen (sajtens K-509, text.js), en rot för varje. */
 export declare const stor: (s: string) => string;
 export declare const liten: (s: string) => string;
+/** Liten bokstav först i ett namn inne i en mening, utom i en förkortning eller en bokstav med bindestreck, som T-kortet. */
+export declare const litenForsta: (s: string) => string;
+/** Hårda bindestreck mellan bokstäver och hårt mellanslag efter ett fristående tal, för filer med fasta rader. */
+export declare const utanRadbrytning: (s: string) => string;
 export declare const mening: (s: string) => string;
 export declare const utanPunkt: (s: string) => string;
 export declare const decimal: (n: number | null) => string;
@@ -752,7 +756,27 @@ export declare const EFFEKTENS_GRANSER: { readonly stora: { readonly mattlig: nu
 /** Platsen av 100 där eleven i mitten hamnar med en effekt på x standardavvikelser, som 58 vid 0,20. */
 export declare function platsenAv100(x: number): number;
 /** Hur effekten läses, kort för en lärare: vad talet betyder och orden, samma i varje undervisningsmetod, med talen ur EFFEKTENS_GRANSER. */
-export declare function effektensSkala(): { rubrik: string; text: string[] };
+export declare function effektensSkala(): { rubrik: string; text: string[]; kallor: { namn: string; text: string; doi: string }[] };
+/** Det som skiljer slagen åt i vägen till måndag: lektionen som minuterna och den grå planen gäller, och samma i en mening. */
+export declare const SLAGENS_FORM: Readonly<Record<'lektionsforlopp' | 'strukturer' | 'strategier', Readonly<{ forstaLektionen: string; din: string }>>>;
+/** Lektionen som minuterna och den grå planen gäller, med namnet i en mening, minuternas rubrik och raden ovanför planen. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export declare function forstaLektionensForm(d: Record<string, any>): { namn: string; din: string; minuterna: string; forlagan: string };
+/** Veckans rubrik med numret, ledet när raden har det och rubriken: "Vecka 1, Klimatet: …", eller "1. Klimatet: …". */
+export declare function veckansRubrik(r: { vecka?: string | number; led?: string; rubrik?: string }, o?: { vecka?: boolean; nummer?: boolean }): string;
+/** Raden under ett områdes namn på metodkortet. */
+export declare const OMRADENAS_RAD: Readonly<{ lasning: string; amnen: string }>;
+/** Faktarutans material: högst så många delar. */
+export declare const FAKTANS_MATERIAL: number;
+/** Etiketterna över ämnesexemplets två rader, en för alla slag. */
+export declare const EXEMPLETS_ETIKETTER: Readonly<{ egen: string; visar: string }>;
+/** Primär evidens: de högst två av sajtens fyra områden med starkast stöd, minst Visst stöd, och alla som står helt lika. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export declare function primaraOmraden(evidens: Record<string, any>): string[];
+/** Regeln för Primär evidens i ord. */
+export declare const PRIMARA_REGELN: string;
+/** Filmernas namn, film och film<nr> för varje extrafilm. */
+export declare const metodensFilmnamn: (d: { film?: unknown; filmer?: { nr: number }[] }) => string[];
 /** Första lektionens delar med minuterna och de en eller två fraser läraren säger; den första delen har rutinens repliker. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export declare function forstaLektionensMinuter(d: Record<string, any>): { fas: string; tid: string; fraser: string[] }[];

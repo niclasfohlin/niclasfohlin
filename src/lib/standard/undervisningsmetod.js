@@ -3,8 +3,8 @@
 // utfallens gränser för en klass (avsnitt 7), metodkortets nivåer (avsnitt 15) och lathundens fyra sidor (avsnitt 14).
 // Riggen läser modulen genom build/standarden.mjs.
 
-import { liten, meningarna, talText } from './text.js';
-import { larDigetsMetodplan } from './plan.js';
+import { litenForsta, meningarna, talText } from './text.js';
+import { larDigetsMetodplan, uppraknat } from './plan.js';
 
 /**
  * Delarna i läsordning: fyra delar i lärarens tid och två bilagor. `rad` står under delens band, och `text` är
@@ -76,7 +76,7 @@ const UTAN_NIVA = { 'inte-studerat': 'Inte studerat', 'inte-sammanvagt': 'Inte s
  */
 export const NIVAERNAS_FORKLARING = Object.freeze([
   { ord: NIVAORD[5], staplar: 5, text: 'Hög tillförlitlighet och stor effekt. Flera sammanställningar och stora randomiserade försök visar samma sak.' },
-  { ord: NIVAORD[4], staplar: 4, text: 'Hög tillförlitlighet och måttlig effekt, eller måttlig tillförlitlighet och stor effekt.' },
+  { ord: NIVAORD[4], staplar: 4, text: 'Minst måttlig tillförlitlighet och minst måttlig effekt.' },
   { ord: NIVAORD[3], staplar: 3, text: 'Minst måttlig tillförlitlighet och en liten effekt som är säker.' },
   { ord: NIVAORD[2], staplar: 2, text: 'Låg tillförlitlighet och en positiv effekt. Några studier med jämförelsegrupp visar effekt, men de är få, små eller har brister.' },
   { ord: NIVAORD[1], staplar: 1, text: 'Ingen studie med jämförelsegrupp, men fallstudier, mätningar före och efter, samband i större material eller lärares erfarenheter pekar mot en effekt. Det är ett skäl att pröva metoden och följa upp den noga.' },
@@ -158,6 +158,53 @@ export function larandetIKort(v) {
 
 /** Metodkortets områden, i kortets ordning (standarden, avsnitt 15). */
 const KORTETS_OMRADEN = ['larande', 'lasning', 'skrivning', 'matematik', 'amnen', 'socialt'];
+/**
+ * Raden under ett områdes namn på metodkortet, som säger vad området räknar: Ämnen är SO, NO och teknik (Niclas
+ * 2026-10-29), och Läsning räknar läsförståelse också i engelska och moderna språk (Niclas beslut i Kooperativt lärande,
+ * riggens punkt 14: flyttprovets engelsklärare visste inte vilket stöd metoden har i engelska).
+ */
+export const OMRADENAS_RAD = Object.freeze({ lasning: 'Också engelska och moderna språk', amnen: 'SO, NO och teknik' });
+/** Faktarutans material: högst så många delar (undervisningsmetodensFel och sajtens schema). */
+export const FAKTANS_MATERIAL = 6;
+/**
+ * Etiketterna över ämnesexemplets två rader, `overst.egen` och `overst.visar`, en för alla slag, så att sidan och riggens
+ * Word-fil säger samma sak (riggens brev om Kooperativt lärande, punkt 23: Stegen och orden stod över en text utan steg).
+ */
+export const EXEMPLETS_ETIKETTER = Object.freeze({ egen: 'Innehållet och felet', visar: 'Så visar alla' });
+
+/**
+ * Primär evidens på metodkortet: det eller de två av sajtens fyra områden, som i Stödundervisning, där stödet är starkast,
+ * minst Visst stöd (Niclas 2026-10-29). Ämnen och Lärande totalt blir aldrig primära. Står fler än två lika avgör
+ * tillförlitligheten och sedan effekten, och står de lika också där, står alla (sajtens K-645, riggens punkt 12: i
+ * Kooperativt lärande har Skrivning, Matematik och Socialt samma nivå, tillförlitlighet och effekt, och ordningen valde
+ * förut bort Socialt). Räkningen stod förut i sajtens metodprofil.ts och står nu här, så att riggens spärr kan läsa den.
+ * Kortet tar det första områdets färg.
+ * @param {Record<string, any>} evidens metodens profil.evidens
+ * @returns {string[]} områdenas namn
+ */
+export function primaraOmraden(evidens) {
+  const T = { hog: 3, mattlig: 2, lag: 1 };
+  const E = { stor: 4, mattlig: 3, liten: 2, ingen: 1, negativ: 0 };
+  const kandidater = BANKENS_OMRADEN.slice(1).map((o, ordning) => {
+    const v = evidens?.[o.id];
+    const l = laget(v);
+    return { namn: o.namn, ordning, niva: l.slag === 'niva' && !l.negativ ? l.niva : 0, t: /** @type {Record<string, number>} */ (T)[v?.tillforlitlighet] ?? 0, e: /** @type {Record<string, number>} */ (E)[v?.effekt] ?? 0 };
+  }).filter((x) => x.niva >= 3);
+  const hogst = Math.max(0, ...kandidater.map((x) => x.niva));
+  const lika = kandidater.filter((x) => x.niva === hogst).sort((a, b) => b.t - a.t || b.e - a.e || a.ordning - b.ordning);
+  return lika.filter((x, i) => i < 2 || (x.t === lika[1].t && x.e === lika[1].e)).map((x) => x.namn);
+}
+/** Regeln för Primär evidens i ord, i metodkortets förklaring. */
+export const PRIMARA_REGELN = 'Primär evidens är det eller de två av sajtens fyra områden, Läsning, Skrivning, Matematik och Socialt, där stödet är starkast, minst Visst stöd. Står fler än två lika avgör tillförlitligheten och sedan effekten, och står de lika också där, står alla.';
+/**
+ * Filmernas namn i riggens out/<id>/ och, med metodens id först, i sajtens public/metoder/: huvudfilmen `film` och en
+ * `film<nr>` för varje extrafilm i `filmer`, som src/lib/film.ts ger adresserna. En rot för intaget
+ * (scripts/metoderfiler.mjs) och leveransprovet (scripts/metodriggprov.mjs), så att en tredje film följer med av sig själv
+ * (K-645: intaget tog förut bara film och film2).
+ * @param {{ film?: unknown, filmer?: { nr: number }[] }} d metodens fil
+ * @returns {string[]}
+ */
+export const metodensFilmnamn = (d) => [...(d.film ? ['film'] : []), ...(Array.isArray(d.filmer) ? d.filmer : []).map((f) => `film${f.nr}`)];
 /** Fälten som en del på metodens sida läser, med delen. */
 const SIDANS_FALT = ['karna', 'fastnar', 'stod', 'amnesexempel', 'hinder', 'fallgropar', 'hallFast', 'checklista', 'forsta', 'progression', 'rutiner', 'uppfoljning', 'uppdrag', 'planeringsmall', 'observation', 'ramar', 'passar', 'invandningar', 'grund', 'lasMer', 'larandet', 'roll', 'klassen'];
 
@@ -219,6 +266,9 @@ export function undervisningsmetodensFel(d) {
     if (!uppf.has(r.rad)) fel.push(`regeln i ${x.namn} pekar på ${r.rad}, som inte är en rad i uppföljningen`);
     if (!/^under \d+ i \d+ veckor i rad$/.test(r.om)) fel.push(`regeln "${r.om}" i ${x.namn} har inte formen "under X i N veckor i rad"`);
   }
+  // Faktarutans material, det viktigaste på några rader, som i Stödundervisning (Niclas 2026-10-02: "Viktigaste och en länk
+  // till rätt ställe"). Regeln stod förut bara i sajtens schema, så riggens leveransprov såg den inte (K-645).
+  if (Array.isArray(d.material) && d.material.length > FAKTANS_MATERIAL) fel.push(`material har ${d.material.length} delar, och faktarutan rymmer ${FAKTANS_MATERIAL}: det viktigaste, och resten i Materialet för klassen`);
   krav('film', d.film, 'huvudfilmen');
   for (const f of d.filmer ?? []) krav(`filmer ${f.nr}.efter`, f.efter, 'platsen för extrafilmen');
   krav('hinder.kort', d.hinder?.kort, 'Det svåraste i lathunden: risken och vad läraren gör');
@@ -308,8 +358,49 @@ export function lasvagen(d) {
 
 /** Uppföljningens rader i Med dig på vägen, i tidsordning: arbetslaget före start, besöken och arbetslaget i vecka 4 (riggens c8a40cc). En äldre fil har en rad för arbetslaget. */
 export const MED_DIG_PA_VAGEN = Object.freeze(['arbetslaget-fore', 'arbetslaget', 'observationerna', 'arbetslaget-efter']);
-/** Förlagans rad på lathundens tredje sida, när planeringsbladet är första lektionen i grått (riggens planeringsblad). */
-const FORLAGAN = 'Det grå är en förlaga att skriva över. Minuterna är hållpunkter.';
+/**
+ * Det som skiljer slagen åt i vägen till måndag (sajtens K-645, riggens brev om Kooperativt lärande 2026-10-30): i ett
+ * lektionsförlopp är den första lektionen med metoden en hel lektion, och i en metod med strukturer gör klassen korta
+ * samarbeten den första veckan och den första hela lektionen i vecka 2 eller 3 (Niclas N2). `forstaLektionen` är lektionen
+ * som minuterna och den grå planen i planeringsmallen gäller, och `din` samma lektion inne i en mening. Avsnittets rubrik,
+ * Första lektionen eller Första veckan, är metodens egen (`forsta.rubrik`). Ett slag som tabellen inte har får ett
+ * lektionsförlopps form.
+ */
+export const SLAGENS_FORM = Object.freeze({
+  lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion' }),
+  strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion' }),
+  strategier: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion' }),
+});
+/**
+ * Lektionen som minuterna och den grå planen gäller, med orden som metodens sida och lathunden skriver om den, en rot för
+ * båda: namnet, namnet inne i en mening, rubriken på minuterna och raden ovanför den grå planen på lathundens tredje sida.
+ * Minuterna heter Minuterna när avsnittet redan heter som lektionen, och annars som lektionen (riggens punkt 3). Raden
+ * ovanför planen säger vilken lektion den är (punkt 4) och kallar inte det grå en förlaga, eftersom planeringsmallen säger
+ * att det grå är det du gör i varje lektion (punkt 21).
+ * @param {Record<string, any>} d metodens fil
+ * @returns {{ namn: string, din: string, minuterna: string, forlagan: string }}
+ */
+export function forstaLektionensForm(d) {
+  const form = /** @type {Record<string, { forstaLektionen: string, din: string }>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp;
+  const namn = form.forstaLektionen;
+  return { namn, din: form.din, minuterna: (d?.forsta?.rubrik ?? namn) === namn ? 'Minuterna' : namn, forlagan: `${namn}, i grått att skriva över. Minuterna är hållpunkter.` };
+}
+/**
+ * Veckans rubrik i De första veckorna, på metodens sida och i lathundens tabell (riggens punkt 10, Niclas led i
+ * progressionen): numret, ledet när raden har det (`led`, som Klimatet eller Jag gör) och rubriken, "Vecka 1, Klimatet:
+ * Kamraten, T-kortet och Ping-pong-prat". Utan ledet står "Vecka 1: …". Med `vecka: false` står numret utan ordet, som i
+ * lathundens kolumn Vecka: "1. Klimatet: …".
+ * @param {{ vecka?: string | number, led?: string, rubrik?: string }} r
+ * @param {{ vecka?: boolean, nummer?: boolean }} [o] med `nummer: false` står bara ledet och rubriken, "Klimatet: …", som
+ * stegets namn i Lär dig metoden, där veckan står för sig
+ */
+export function veckansRubrik(r, { vecka = true, nummer = true } = {}) {
+  const led = String(r.led ?? '').trim();
+  const rubrik = String(r.rubrik ?? '');
+  if (!nummer) return `${led ? `${led}: ` : ''}${rubrik}`;
+  if (!vecka) return `${r.vecka}. ${led ? `${led}: ` : ''}${rubrik}`;
+  return led ? `Vecka ${r.vecka}, ${led}: ${rubrik}` : `Vecka ${r.vecka}: ${rubrik}`;
+}
 /** Det svåraste i kort form (hinder.kort), som lathunden visar: risken och vad läraren gör (sajtens K-632, Niclas 2026-10-30). */
 export const HINDRETS_KORT = Object.freeze({ meningar: 2, tecken: 220 });
 
@@ -358,7 +449,10 @@ export function forstaLektionensMinuter(d) {
  * tiden efter och står i del 4 på metodens sida. Niclas beslut 2026-10-30, efter granskningen: Lärande totalt har
  * kommentaren under ordet (larandetIKort), som säger för vilka elever och i vilken form stödet gäller; det svåraste är
  * hinder.kort, risken och vad läraren gör, och utan den första meningen i hinder.text; Efter de första veckorna har två
- * meningar ur stodet. En del utan innehåll står inte med.
+ * meningar ur stodet. En del utan innehåll står inte med. Efter riggens brev om Kooperativt lärande 2026-10-30 (sajtens
+ * K-645): avsnittet på sida 2 heter som metodens `forsta.rubrik`, Första lektionen eller Första veckan, och minuterna och den
+ * grå planen gäller lektionen ur forstaLektionensForm; kärnans moment räknas upp med komma och och, veckorna har sitt led
+ * (veckansRubrik) och fallgroparna komponentens nummer.
  * @param {Record<string, any>} d metodens fil, läst
  * @returns {LathundSida[]}
  */
@@ -372,8 +466,11 @@ export function lathundensSidor(d) {
   const ko = kostnadensNiva(d.profil?.kostnad);
   const huvud = lista(d.amnesexempel).find((e) => e.huvud);
   const urad = (/** @type {string} */ id) => lista(d.uppfoljning?.rader).find((r) => r.id === id)?.vad;
-  // En fallgrop per komponent, den första med Pröva i stället. Manusen för en svår stund står på metodens sida.
+  // En fallgrop per komponent, den första med Pröva i stället, med komponentens nummer först, så att det syns vilken del av
+  // kärnan som glider (riggens punkt 9). Manusen för en svår stund står på metodens sida.
   const fallgropar = lista(d.fallgropar?.rader).filter((x, i, alla) => x.komponent && x.prova && alla.findIndex((y) => y.komponent === x.komponent && y.prova) === i);
+  const komponentensNr = (/** @type {string} */ namn) => lista(d.karna?.komponenter).findIndex((k) => k.namn === namn) + 1;
+  const lektionen = forstaLektionensForm(d);
   /** @type {LathundSida[]} */
   const sidor = [
     { id: 'metoden', nr: 1, namn: 'Metoden', delar: [
@@ -385,26 +482,26 @@ export function lathundensSidor(d) {
         { namn: 'Kostnad', text: d.profil?.kostnad ? KOSTNADENS_ORD[ko] : '', niva: ko },
       ].filter((r) => r.text) },
       { id: 'text', slag: 'stycken', rubrik: 'Metoden', text: lista(l.metoden?.text) },
-      { id: 'karnan', slag: 'kort', rubrik: 'Kärnan', kort: lista(d.karna?.komponenter).map((k, i) => ({ nr: i + 1, namn: k.namn, text: k.vad, under: lista(k.moment).join(' och ') })), fot: d.karna?.varv },
+      { id: 'karnan', slag: 'kort', rubrik: 'Kärnan', kort: lista(d.karna?.komponenter).map((k, i) => ({ nr: i + 1, namn: k.namn, text: k.vad, under: uppraknat(lista(k.moment)) })), fot: d.karna?.varv },
       { id: 'svarast', slag: 'not', namn: 'Det svåraste', text: d.hinder?.kort || forsta(d.hinder?.text) },
     ] },
     { id: 'mandag', nr: 2, namn: 'Vägen till måndag', delar: [
       { id: 'fore', slag: 'checklista', rubrik: d.checklista?.rubrik ?? 'Före första lektionen', punkter: lista(d.checklista?.punkter) },
-      { id: 'forsta', slag: 'stycken', rubrik: 'Första lektionen', text: lista(l.lektion?.text) },
-      { id: 'minuterna', slag: 'minuter', rubrik: 'Minuterna', delar: forstaLektionensMinuter(d).map((x) => ({ ...x, tid: x.tid.replace(/\s*min$/, '') })) },
-      ...lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1').map((r, i) => /** @type {LathundDel} */ ({ id: `rutin-${i + 1}`, slag: 'rutin', rubrik: `Rutinen ${liten(r.namn)}`, namn: r.namn, text: r.vad ?? '', steg: lista(r.steg) })),
+      { id: 'forsta', slag: 'stycken', rubrik: d.forsta?.rubrik ?? lektionen.namn, text: lista(l.lektion?.text) },
+      { id: 'minuterna', slag: 'minuter', rubrik: lektionen.minuterna, delar: forstaLektionensMinuter(d).map((x) => ({ ...x, tid: x.tid.replace(/\s*min$/, '') })) },
+      ...lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1').map((r, i) => /** @type {LathundDel} */ ({ id: `rutin-${i + 1}`, slag: 'rutin', rubrik: `Rutinen ${litenForsta(r.namn)}`, namn: r.namn, text: r.vad ?? '', steg: lista(r.steg) })),
     ] },
     { id: 'planera', nr: 3, namn: 'Planera lektionen', delar: [
       d.forsta?.plan
-        ? { id: 'bladet', slag: 'planering', plan: d.forsta.plan, exempel: huvud, variant: 'första lektionen', gra: true, text: FORLAGAN }
+        ? { id: 'bladet', slag: 'planering', plan: d.forsta.plan, exempel: huvud, variant: 'första lektionen', gra: true, text: lektionen.forlagan }
         : { id: 'bladet', slag: 'planering', plan: huvud?.plan, exempel: huvud, gra: false },
     ] },
     { id: 'veckorna', nr: 4, namn: l.igang?.rubrik ?? 'De första veckorna', delar: [
       { id: 'inledning', slag: 'stycken', text: [forsta(d.progression?.text, 2)] },
-      { id: 'progression', slag: 'tabell', kolumner: ['Vecka', 'Klassen lär sig', 'Du övar', 'Gå vidare när'], rader: lista(d.progression?.rader).map((r) => [`${r.vecka}. ${r.rubrik}`, r.eleverna ?? r.fokus ?? '', r.roll ?? '', r.vidare ?? '']) },
+      { id: 'progression', slag: 'tabell', kolumner: ['Vecka', 'Klassen lär sig', 'Du övar', 'Gå vidare när'], rader: lista(d.progression?.rader).map((r) => [veckansRubrik(r, { vecka: false }), r.eleverna ?? r.fokus ?? '', r.roll ?? '', r.vidare ?? '']) },
       { id: 'med-dig', slag: 'not', namn: 'Med dig på vägen', text: MED_DIG_PA_VAGEN.map(urad).filter(Boolean).join(' ') },
       { id: 'efter', slag: 'not', namn: 'Efter de första veckorna', text: forsta(urad('stodet'), 2) },
-      { id: 'glider', slag: 'tabell', rubrik: 'Om det glider', kolumner: ['Fallgropen', 'Pröva i stället'], rader: fallgropar.map((r) => [r.fallgrop, r.prova]) },
+      { id: 'glider', slag: 'tabell', rubrik: 'Om det glider', kolumner: ['Fallgropen', 'Pröva i stället'], rader: fallgropar.map((r) => [komponentensNr(r.komponent) ? `${komponentensNr(r.komponent)} ${r.fallgrop}` : r.fallgrop, r.prova]) },
     ] },
   ];
   const harInnehall = (/** @type {LathundDel} */ x) => {
@@ -455,8 +552,10 @@ export function platsenAv100(x) {
  * delen hur effektstorlek bedöms med orden", "ha samma i alla metoder", och "Det måste finnas någon kortare förklaring
  * vad 0.2 innebär ... För en lärare som inte är forskare. Enkelt och koncist"). Första stycket säger vad talet betyder,
  * och det andra orden. Gränserna kommer ur EFFEKTENS_GRANSER och platserna ur platsenAv100. Skälen till skalan står i
- * riggens evidensen.md, avsnitt 3.
- * @returns {{ rubrik: string, text: string[] }}
+ * riggens evidensen.md, avsnitt 3. Skalans två källor står inte i metodens referenslista, så de står på en egen rad med hela
+ * referensen (`kallor`) och inte som hänvisningar i texten, som läsaren inte hittar i referensbladet (riggens brev om
+ * Kooperativt lärande, punkt 19).
+ * @returns {{ rubrik: string, text: string[], kallor: { namn: string, text: string, doi: string }[] }}
  */
 export function effektensSkala() {
   const s = EFFEKTENS_GRANSER.stora;
@@ -466,7 +565,11 @@ export function effektensSkala() {
     rubrik: 'Så läses effekten',
     text: [
       `Talet säger hur mycket bättre det gick för eleverna med metoden än för eleverna utan. Tänk dig 100 elever utan metoden på rad efter resultat. Eleven i mitten står på plats 50. Med metoden flyttar den eleven till ${plats(0.1)}, ${plats(s.stor)} och ${plats(a.stor)}.`,
-      `I stora försök i många skolor är ${skalansTal(s.mattlig)} en måttlig och ${skalansTal(s.stor)} en stor effekt. Mindre studier ger ungefär dubbelt så stora tal, så där är ${skalansTal(a.mattlig)} måttlig och ${skalansTal(a.stor)} stor (Kraft, 2020; Cheung och Slavin, 2016). Under det är effekten liten. När resultatet inte är säkert står Inte säker.`,
+      `I stora försök i många skolor är ${skalansTal(s.mattlig)} en måttlig och ${skalansTal(s.stor)} en stor effekt. Mindre studier ger ungefär dubbelt så stora tal, så där är ${skalansTal(a.mattlig)} måttlig och ${skalansTal(a.stor)} stor. Under det är effekten liten. När resultatet inte är säkert står Inte säker.`,
+    ],
+    kallor: [
+      { namn: 'Kraft (2020)', text: 'Kraft, M. A. (2020). Interpreting effect sizes of education interventions. Educational Researcher, 49(4), 241–253.', doi: '10.3102/0013189X20912798' },
+      { namn: 'Cheung och Slavin (2016)', text: 'Cheung, A. C. K. och Slavin, R. E. (2016). How methodological features affect effect sizes in education. Educational Researcher, 45(5), 283–292.', doi: '10.3102/0013189X16656615' },
     ],
   };
 }

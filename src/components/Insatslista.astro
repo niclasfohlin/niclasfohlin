@@ -1,0 +1,36 @@
+---
+// Listan med lärarens planer (K-489, K-628, K-644): Dina insatser i Stödundervisning och Dina planer i Metoder, på bankerna och
+// på appens sida, en form för båda samlingarna och alla tre sidorna (Niclas 2026-10-30: "på app sidan listas också alla ens
+// insatser under Stödundervisning som är pågående och kommande samt avslutade likt på stödundervisning sida och samma listade
+// under Metoder"). Planerna ritas ur webbläsaren av src/scripts/insatser.ts, med orden ur SAMLINGENS_ORD. Utan JavaScript och
+// utan planer syns listan inte, utom på appens sida, där raden tom säger var planerna görs och Öppna planer tar in planer ur
+// filer, som när en plan flyttas från Safari till appen i iPhone.
+import { LISTANS_KNAPPAR, SAMLINGENS_ORD, type Samling } from '../scripts/insatser-lagring';
+import { APPEN } from '../lib/appen';
+
+interface Props {
+  samling: Samling;
+  /** Bankens sida eller appens sida, i statistikens namn. */
+  plats: 'bank' | 'app';
+  id?: string;
+}
+const { samling, plats, id = 'pl-insatser' } = Astro.props;
+const ord = SAMLINGENS_ORD[samling];
+// Statistikens namn för knapparna, som de har hetat på bankerna, och på appens sida med app- först.
+const led = `${plats === 'app' ? 'app-' : ''}${samling === 'metoder' ? 'metoder-' : ''}`;
+const sidan = plats === 'app' ? `Appen ${APPEN.namn}, ${ord.listan}` : samling === 'metoder' ? 'Metoder' : 'Metodbanken';
+---
+
+<section class="pl-insatser" id={id} data-samling={samling} data-plats={plats} aria-labelledby={`${id}-rubrik`} hidden>
+  <h2 id={`${id}-rubrik`}>{ord.listan}</h2>
+  {plats === 'app' && <p class="pl-tom" data-tom hidden>{ord.tom} <a href={ord.bank.adress}>{ord.bank.namn}</a>.</p>}
+  <ul></ul>
+  <div class="pl-avslutade" hidden></div>
+  {/* Alla planer som en zip, och planer in ur en zip eller flera filer, med samma rot som i metoden (insatser-lagring.ts). */}
+  <p class="pl-andra-knappar pl-alla-planer">
+    <button type="button" class="knapp sekundar liten" data-alla-ner data-goatcounter-click={`insatser:${led}alla-ner`} data-goatcounter-title={`${sidan}: alla planer nedladdade`}>{LISTANS_KNAPPAR.laddaNer}</button>
+    <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click={`insatser:${led}alla-oppna`} data-goatcounter-title={`${sidan}: nedladdade planer öppnade`}>{LISTANS_KNAPPAR.oppna}<input type="file" data-alla-oppna accept=".json,.zip,application/json,application/zip" multiple class="visually-hidden" /></label>
+  </p>
+  <p class="pl-hjalp pl-alla-appen" data-alla-appen hidden></p>
+  <p class="pl-hjalp pl-alla-besked" data-alla-besked role="status" hidden></p>
+</section>

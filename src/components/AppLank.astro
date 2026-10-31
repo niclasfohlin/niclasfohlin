@@ -1,0 +1,18 @@
+---
+// Länken till appen Metodbanken (K-644; Niclas 2026-10-30: "Kan man göra att den inte öppnas automatiskt. Men trycker man på
+// den kommer man till en sida som niclasfohlin.se/app"): en liten rad på bankerna och i planens sidor, som leder till appens
+// sida, där appen erbjuds (src/components/AppRad.astro). Den syns bara i telefon och surfplatta och aldrig i appen själv
+// (global.css under Appen Metodbanken), så den behöver inget skript.
+import { appikonSvg } from '../lib/appikon';
+import { APPEN } from '../lib/appen';
+
+interface Props {
+  /** Var länken står, i statistikens namn: stodundervisning, metoder, planera eller lar-dig. */
+  plats: string;
+  /** Sidans namn i statistikens titel. */
+  titel: string;
+}
+const { plats, titel } = Astro.props;
+---
+
+<p class="app-lank"><a href={APPEN.adress} data-goatcounter-click={`app:lank:${plats}`} data-goatcounter-title={`Appen ${APPEN.namn}: länken på ${titel}`}><span class="app-lank-ikon" aria-hidden="true" set:html={appikonSvg()} />Appen {APPEN.namn}</a></p>

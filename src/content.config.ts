@@ -14,7 +14,7 @@ import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
 import { faktaFel } from './lib/kortfakta';
-import { allaTexter, INNEHALLSTAGGAR, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
+import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -1135,7 +1135,7 @@ const undervisningsmetoder = defineCollection({
     tid: text,
     hurOftaSkal: text.max(200).optional(),
     period: text,
-    material: z.array(text).max(6),
+    material: z.array(text).max(FAKTANS_MATERIAL),
     uppdaterad: z.coerce.date(),
     publicerad: z.coerce.date(),
     utkast: z.boolean().default(false),

@@ -29,8 +29,8 @@ import { filmbildNamn, sidetikett, umLathundHuvud, umLathundSpalter, UM_MINUTERN
 import TECKENBREDD from '../data/teckenbredd.json';
 import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passOrd, passTextKort } from './metod';
 import type { MetodData } from './metod';
-import { lathundensSidor, UTFALLEN, type LathundDel, type LathundFakta, type LathundSida } from './standard/index.js';
-import { BLADETS_ORD, bladetsLista, bladetsRad, exempletsAmne, karnanI, metodensAdress, planeringsbladet, utfalletsGrans, type Um } from './undervisningsmetod';
+import { lathundensSidor, utanRadbrytning, UTFALLEN, type LathundDel, type LathundFakta, type LathundSida } from './standard/index.js';
+import { BLADETS_ORD, bladetsLista, bladetsRad, exempletsAmne, metodensAdress, planeringsbladet, utfalletsGrans, type Um } from './undervisningsmetod';
 
 export const PPTX_TYP = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
 
@@ -159,7 +159,8 @@ const TECKENINDEX = new Map([...TECKENBREDD.tecken].map((c, i) => [c, i]));
 /** En texts bredd i punkter i Calibri, med typsnittets egna teckenbredder. */
 function calibriPunkter(text: string, punkter: number, fet = false): number {
   const tabell = (TECKENBREDD.bredd as Record<string, (number | null)[]>)[fet ? 'Calibri fet' : 'Calibri'];
-  return [...text].reduce((s, c) => s + (tabell[TECKENINDEX.get(c) ?? -1] ?? 600) / 1000, 0) * punkter;
+  // Det hårda bindestrecket (utanRadbrytning i standarden) är lika brett som bindestrecket.
+  return [...text].reduce((s, c) => s + (tabell[TECKENINDEX.get(c === '\u2011' ? '-' : c) ?? -1] ?? 600) / 1000, 0) * punkter;
 }
 function calibriRader(text: string, tum: number, punkter: number, fet = false): number {
   const bredd = (ord: string) => calibriPunkter(ord, punkter, fet);
@@ -864,7 +865,9 @@ export async function undervisningsmetodensLathundPptx(m: CollectionEntry<'under
 function ritaUmLathund(m: CollectionEntry<'undervisningsmetoder'>, bas: string, format: LathundFormat, grad: number, medFilmer = true): Ritad {
   const d = m.data as Um;
   if (!d.lathund) throw new Error(`${m.id} har ingen lathund`);
-  const sidor = lathundensSidor(d);
+  // Raderna bryts inte vid ett bindestreck eller efter ett nummer (utanRadbrytning, riggens punkt 7). Planeringsbladet läser
+  // planen efter delarnas namn och står som det är.
+  const sidor = lathundensSidor(d).map((sida) => ({ ...sida, delar: sida.delar.map((x) => (x.slag === 'planering' ? x : JSON.parse(JSON.stringify(x), (k, t) => (typeof t === 'string' && k !== 'id' && k !== 'slag' ? utanRadbrytning(t) : t)) as LathundDel)) }));
   const filmer = format === '16:9' && medFilmer ? metodensFilmer({ film: d.film, filmer: d.filmer }, m.id, 'metoder') : [];
   const pres = nyPresentation(format, `Lathund: ${d.titel}`, d.ingress);
   const adress = `${bas.replace(/^https?:\/\//, '')}${metodensAdress(m.id)}/lathund`;
@@ -998,8 +1001,12 @@ function umStycken(v: Verktyg, s: any, x: number, y: number, w: number, rubrik: 
  */
 function umKortrad(v: Verktyg, s: any, x: number, y: number, w: number, rubrik: string | undefined, kort: { nr: number; namn: string; text: string; under: string }[], fot: string | undefined, z: number): number {
   const { frame, txt, label, pres, sx, sy, grad } = v;
-  const NAMN = 12 * z, TEXT = 10.5 * z, UNDER = 9.5 * z, MELLAN = 0.14, D = 0.3;
+  const TEXT = 10.5 * z, UNDER = 9.5 * z, MELLAN = 0.14, D = 0.3;
   const cw = (w - MELLAN) / 2, inre = cw - 0.24;
+  // Namnen står så stora att det längsta ordet ryms på en rad i kortet, så att inget ord bryts mitt i, som
+  // Samarbetsfärdigheter i en smal spalt (riggens punkt 6), och lika stora i alla kort.
+  const plats = (inre - D - 0.1) * sx * 72 * 0.97;
+  const NAMN = Math.min(12 * z, ...kort.flatMap((k) => k.namn.split(/\s+/)).map((o) => (12 * z * plats) / Math.max(1, calibriPunkter(o, 12 * z * grad, true))));
   let h = 0;
   if (rubrik) { label(s, versaler(rubrik), x, y, w); h += 0.3; }
   const matt = kort.map((k) => ({ namn: Math.max(D, textHojd(v, k.namn, inre - D - 0.1, NAMN, true)), text: textHojd(v, k.text, inre, TEXT), under: k.under ? textHojd(v, k.under, inre, UNDER) : 0 }));
@@ -1096,7 +1103,7 @@ const UTFALLETS_FARG: Record<string, { fyll: string; kant: string }> = { nastanA
 function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: number, del: Extract<LathundDel, { slag: 'planering' }>, z: number): number {
   const { rect, txt } = v;
   const plan = del.plan;
-  const { mall, varianten, delensTid, utfalletsText, delarna, planensDel, kryss, etikett } = planeringsbladet(d, plan, del.variant);
+  const { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, del.variant);
   const O = BLADETS_ORD;
   const amne = del.exempel ? exempletsAmne(del.exempel) : undefined;
   const VARDE = del.gra ? BLAD.gra : INK;
@@ -1188,9 +1195,10 @@ function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: nu
       h += ruta(s, bx, by + h, bw, O.forberett, (s, ix, iy, iw) => radlista(s, ix, iy, iw, [[O.blad, plan.blad], [O.stod, plan.forberett]]));
       return h + 0.08;
     },
-    // Lektionen: delarna med minuterna och kärnan, och beslutet efter Kontrollera med utfallens gränser för klassen.
+    // Lektionen: delarna med minuterna och kärnan, och beslutet efter delen där läraren ser om klassen är redo, med utfallens
+    // gränser för klassen.
     (s, bx, by, bw) => {
-      let h = zon(s, bx, by, bw, O.lektionen, varianten ? ` · ${O.minuterna} ${varianten.nar}` : undefined);
+      let h = zon(s, bx, by, bw, O.lektionen, varianten ? ` · ${O.minuterna} ${variantensNamn}` : undefined);
       const c1 = 1.3, rw = bw - c1 - 0.2;
       const rad = (s: any, ry: number, fas: string, tid: string, hoger: (s: any, hx: number, hy: number) => number) => {
         const fh = textHojd(v, fas, c1 - 0.16, TEXT, true), th = textHojd(v, tid, c1 - 0.16, ETIKETT);
@@ -1204,9 +1212,8 @@ function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: nu
         return rh;
       };
       for (const del of delarna) {
-        const karna = karnanI(d, del.fas);
         const text = planensDel(del.fas);
-        const tid = `${delensTid(del.fas) ?? ''}${karna.length > 0 ? ` · ${O.karnan} ${karna.map((k: { nr: number }) => k.nr).join(' och ')}` : ''}`;
+        const tid = `${delensTid(del.fas) ?? ''}${karnansNr(del.fas) ? ` · ${karnansNr(del.fas)}` : ''}`;
         h += rad(s, by + h, del.fas, tid, (s, hx, hy) => {
           let ih = 0;
           const skriv = del.skriv ? bladetsRad(del.skriv) : !text && del.not ? del.not : undefined;
@@ -1214,7 +1221,7 @@ function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: nu
           if (text) { const th = textHojd(v, text, rw, TEXT, true); txt(s, text, hx, hy + ih, rw, th, { size: TEXT, bold: true, color: VARDE }); ih += th; }
           return ih;
         });
-        if (del.fas === 'Kontrollera' && plan.beslut) {
+        if (del.fas === beslutetsFas && plan.beslut) {
           h += rad(s, by + h, O.beslutet, `${O.elever} ${plan.beslut.elever}`, (s, hx, hy) => {
             const uw = (rw - 0.16) / 3;
             const inne = (s: any, u: (typeof UTFALLEN)[number], ux: number, uy: number) => {

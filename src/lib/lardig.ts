@@ -2,7 +2,7 @@
 // visar ur metodens fil, som JSON till sidans skript (src/scripts/lardig.ts), och bygget stannar på en metod vars plan inte
 // går att räkna. Motorn och allt som räknar står i standarden (src/lib/standard/plan.js, under Lär dig metoden), och
 // formen och faserna i underlag/prov/metoder/PLANERA-LAGRET.md och riggens standard för undervisningsmetoder, avsnitt 16.
-import { dagAv, lasvagen, rentText, somLista } from './standard/index.js';
+import { dagAv, forstaLektionensForm, lasvagen, rentText, somLista } from './standard/index.js';
 import { metodensAdress, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import { metodensFiler } from './undervisningsmetodfiler';
 
@@ -13,10 +13,12 @@ export interface LarDigData {
   /** Metodens sida, som läsvägen och knapparna leder till. */
   sida: string;
   uppdaterad: string;
+  /** Namnet på första lektionen efter metodens slag, som Den första hela lektionen i strukturerna (forstaLektionensForm). */
+  forstaLektionen: string;
   tid: string;
   period: string;
   /** Stegen: `vidare` säger när läraren går vidare, och `fraga` är samma regel som en fråga till Gick det? vid veckans slut. */
-  progression: { text?: string; rader: { vecka: string; rubrik: string; fokus?: string; eleverna?: string; roll?: string; vidare?: string; fraga?: string }[] };
+  progression: { text?: string; rader: { vecka: string; rubrik: string; led?: string; fokus?: string; eleverna?: string; roll?: string; vidare?: string; fraga?: string }[] };
   uppfoljning: { text?: string; rader: { id?: string; nar: string; tid: string; vad: string }[] };
   skattningar: { namn: string; vem: 'lararen'; rad: string; text?: string; skala: { fran: number; till: number }; regler: { om: string; rad: string }[] }[];
   /** Planens rader om enskilda lektioner, som Första lektionen, med metodens text. */
@@ -29,7 +31,7 @@ export interface LarDigData {
   film?: { rubrik: string; ingress?: string };
   forbered: { text?: string; fragor: string[] };
   reflektera: string[];
-  /** Kärnans fyra: namnet, det som står kvar (förslagen till lärarens mål) och raden att kryssa i dåtid (stödet vid Hur säker). */
+  /** Kärnans komponenter: namnet, det som står kvar (förslagen till lärarens mål) och raden att kryssa i dåtid (stödet vid Hur säker). */
   karna: { namn: string; kvar: string; kryss?: string }[];
   /** Så syns lärandet i klassen: stödet vid Hur väl fungerar den. */
   larandet: { rubrik: string; rader: string[] };
@@ -59,8 +61,8 @@ export function larDigData(id: string, d: Um): LarDigData {
   const filer = metodensFiler(id);
   const fil = (slag: 'lektionskort' | 'planeringsmall' | 'materialet' | 'observation', ankare: string) => { const f = filer[slag]; return f?.pdf || f?.docx ? { adress: (f.pdf ?? f.docx)!, fil: true } : { adress: `${sida}#${ankare}`, fil: false }; };
   return {
-    id, titel: d.titel, sida, uppdaterad: dagAv(d.uppdaterad), tid: d.tid, period: d.period,
-    progression: { text: strang(d.progression?.text) || undefined, rader: somLista(d.progression?.rader).map((r) => { const x = r as Record<string, unknown>; return { vecka: String(x.vecka ?? ''), rubrik: strang(x.rubrik), fokus: strang(x.fokus) || undefined, eleverna: strang(x.eleverna) || undefined, roll: strang(x.roll) || undefined, vidare: strang(x.vidare) || undefined, fraga: strang(x.fraga) || undefined }; }) },
+    id, titel: d.titel, sida, uppdaterad: dagAv(d.uppdaterad), forstaLektionen: forstaLektionensForm(d).namn, tid: d.tid, period: d.period,
+    progression: { text: strang(d.progression?.text) || undefined, rader: somLista(d.progression?.rader).map((r) => { const x = r as Record<string, unknown>; return { vecka: String(x.vecka ?? ''), rubrik: strang(x.rubrik), ...(x.led ? { led: strang(x.led) } : {}), fokus: strang(x.fokus) || undefined, eleverna: strang(x.eleverna) || undefined, roll: strang(x.roll) || undefined, vidare: strang(x.vidare) || undefined, fraga: strang(x.fraga) || undefined }; }) },
     uppfoljning: { text: strang(d.uppfoljning?.text) || undefined, rader: somLista(d.uppfoljning?.rader).map((r) => { const x = r as Record<string, unknown>; return { ...(x.id ? { id: String(x.id) } : {}), nar: strang(x.nar), tid: strang(x.tid), vad: strang(x.vad) }; }) },
     skattningar: somLista(d.plan?.skattningar).filter((x) => (x as { vem?: string })?.vem === 'lararen').map((s) => { const x = s as Record<string, any>; return { namn: strang(x.namn), vem: 'lararen' as const, rad: strang(x.rad), ...(x.text ? { text: strang(x.text) } : {}), skala: { fran: Number(x.skala?.fran), till: Number(x.skala?.till) }, regler: somLista(x.regler).map((r) => ({ om: strang((r as { om?: string }).om), rad: strang((r as { rad?: string }).rad) })) }; }),
     passen: somLista(d.plan?.passen).map((p) => { const x = p as Record<string, unknown>; return { nar: strang(x.nar), ...(x.kort ? { kort: strang(x.kort) } : {}), text: strang(x.text) }; }),
@@ -84,7 +86,7 @@ export function larDigData(id: string, d: Um): LarDigData {
     }).filter((l) => l.titel),
     // Metodens saker som på metodens sida och i lathunden (undervisningsmetodensSaker), med samma ankare, så att samma ord leder
     // till samma sak (granskningen rot-3, fynd 6, och den kalla läsaren 2026-10-30, nr 12).
-    saker: undervisningsmetodensSaker(d, id),
+    saker: undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektionskort }),
     lasvag: (() => { const l = lasvagen(d); return { delar: l.delar.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })), minuter: l.minuter }; })(),
     filer: { lektionskort: fil('lektionskort', 'materialet'), planeringsmall: fil('planeringsmall', 'planeringsmallen'), materialet: fil('materialet', 'materialet-for-klassen'), observation: fil('observation', 'observationsmallen') },
     // När det glider står på metodens sida när metoden har det svåraste, fallgroparna eller det du håller fast vid, och stödet

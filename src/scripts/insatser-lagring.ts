@@ -4,6 +4,7 @@
 // någonstans, utom att en plan som pågår säger det till besöksstatistiken med bara metodens namn (pagaende nedan).
 // Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det, och
 // länken till planen är kopian som håller.
+import { goatcounter, idagLokalt } from './raknare.ts';
 import { arDatum, talText, filnamnet, forstaLektionensDag, forstaSkolveckanEfter, SAMLINGARNAS_LED, skolveckan, kodaVal, dagarMellan, larDigetsLaget, datumText, dagText, gangen, insatsenAvslutad, lasVal, planensSistaDag, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
@@ -43,11 +44,16 @@ const NYCKEL = 'insatser';
 /** Samlingarna med planer: Stödundervisning med Planera insatsen och Metoder med Lär dig metoden (K-628). */
 export const SAMLINGAR = ['stodundervisning', 'metoder'] as const;
 export type Samling = (typeof SAMLINGAR)[number];
-/** Samlingens ord i listan med planerna, på metodens sida och i beskedet efter Öppna planer, en tabell för båda samlingarna (K-628). */
-export const SAMLINGENS_ORD: Record<Samling, { led: string; listan: string; din: string; dina: (n: number) => string; enLank: string; flera: string; avslutade: (n: number) => string; lista: string; pagar: string }> = {
-  stodundervisning: { led: SAMLINGARNAS_LED.stodundervisning, listan: 'Dina insatser', din: 'Din insats', dina: (n) => `Dina insatser · ${n} grupper`, enLank: 'Veckan i planen', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad insats' : `${n} avslutade insatser`), lista: 'Metodbanken: en plan under Dina insatser', pagar: 'Din insats på metodens sida' },
-  metoder: { led: SAMLINGARNAS_LED.metoder, listan: 'Dina planer', din: 'Din plan', dina: (n) => `Dina planer · ${n}`, enLank: 'Lär dig metoden', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad plan' : `${n} avslutade planer`), lista: 'Metoder: en plan under Dina planer', pagar: 'Din plan på metodens sida' },
+/**
+ * Samlingens ord i listan med planerna, på metodens sida och i beskedet efter Öppna planer, en tabell för båda samlingarna
+ * (K-628). På appens sida står listan också utan planer, med raden tom och banken där planerna görs (K-644).
+ */
+export const SAMLINGENS_ORD: Record<Samling, { led: string; listan: string; din: string; dina: (n: number) => string; enLank: string; flera: string; avslutade: (n: number) => string; lista: string; pagar: string; tom: string; bank: { namn: string; adress: string } }> = {
+  stodundervisning: { led: SAMLINGARNAS_LED.stodundervisning, listan: 'Dina insatser', din: 'Din insats', dina: (n) => `Dina insatser · ${n} grupper`, enLank: 'Veckan i planen', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad insats' : `${n} avslutade insatser`), lista: 'Metodbanken: en plan under Dina insatser', pagar: 'Din insats på metodens sida', tom: 'Inga insatser än. Du planerar en insats med Planera insatsen på en metods sida i', bank: { namn: 'Stöd', adress: '/stodundervisning' } },
+  metoder: { led: SAMLINGARNAS_LED.metoder, listan: 'Dina planer', din: 'Din plan', dina: (n) => `Dina planer · ${n}`, enLank: 'Lär dig metoden', flera: 'Planerna', avslutade: (n) => (n === 1 ? 'En avslutad plan' : `${n} avslutade planer`), lista: 'Metoder: en plan under Dina planer', pagar: 'Din plan på metodens sida', tom: 'Inga planer än. Du gör en plan med Lär dig metoden på en metods sida i', bank: { namn: 'Metoder', adress: '/metoder' } },
 };
+/** Knapparna under listan med planerna, i båda samlingarna och på appens sida (Niclas 2026-10-28). */
+export const LISTANS_KNAPPAR = Object.freeze({ laddaNer: 'Ladda ner planer', oppna: 'Öppna planer' });
 /** Planens samling, med Stödundervisning för en plan utan fältet. */
 export const samlingen = (p: { samling?: unknown }): Samling => (p.samling === 'metoder' ? 'metoder' : 'stodundervisning');
 /** Planerna i en samling. */
@@ -84,16 +90,20 @@ export function rensaPlan(x: unknown): SparadPlan | null {
  * konvertering från versionen före i KONVERTERINGAR. Provfilerna i scripts/planera/filer/ är formatet som varje version skrev
  * det, och planprovet öppnar dem (PLANERA.md under Planens fil och lagringen).
  */
-export const PLANFORMAT = 1;
+export const PLANFORMAT = 2;
 /** Meningen när en nyare version av Planera insatsen har sparat planen eller planerna i webbläsaren. */
 export const NYARE_VERSION = 'Planen är sparad i en nyare version av Planera insatsen. Ladda om sidan, så kommer allt med.';
 export const PLANFILENS_TYP = 'planera-insatsen';
 /**
  * Konverteringarna från en version av formatet till nästa: KONVERTERINGAR[1] gör en plan i version 1 till version 2 och
- * säger vad som saknades, när läraren behöver veta det. Inga än: version 1 har gällt sedan 0.2.7, och det som har lagts till
- * sedan dess har ett standardvärde.
+ * säger vad som saknades, när läraren behöver veta det. Version 1 gällde från 0.2.7 till 0.8.2. Version 2, från Planera
+ * 0.9.0, har samma fält och de nya för Lär dig metoden (samling, skapad och klasserna i följden), så en plan i version 1 är
+ * en plan i version 2 som den är. Versionen höjdes så att en flik med en äldre version, som står öppen när sajten laddas
+ * upp, säger till och inte skriver tillbaka planerna utan de nya fälten (lagringenArNyare; Codex 2026-10-31).
  */
-export const KONVERTERINGAR: Record<number, (plan: Record<string, unknown>) => { plan: Record<string, unknown>; varningar: string[] }> = {};
+export const KONVERTERINGAR: Record<number, (plan: Record<string, unknown>) => { plan: Record<string, unknown>; varningar: string[] }> = {
+  1: (plan) => ({ plan, varningar: [] }),
+};
 /** En plan i en äldre version av formatet, konverterad till den här, med varningarna, och en varning för en plan ur en nyare version. */
 export function konverteraPlan(plan: unknown, v: unknown): { plan: unknown; varningar: string[] } {
   const fran = Number.isInteger(v) && (v as number) >= 1 ? (v as number) : 1;
@@ -150,14 +160,53 @@ export function skrivPlaner(planer: SparadPlan[]): boolean {
     return false;
   }
 }
+/**
+ * Planens innehåll som text, med nycklarna i ordning och det införda rensat, så att samma plan ger samma text var den än
+ * kommer ifrån: lagringen, en fil eller sidan. En rot för båda lagren (Codex 2026-10-31, fynd 2 och 4).
+ */
+export const planensInnehall = (p: { val: string; namn?: string; folj?: boolean; foljd?: unknown }) => JSON.stringify([p.val, p.namn ?? '', !!p.folj, rensaFoljd(p.foljd)], (_, v) => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.entries(v).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))) : v));
+/** När en plan ändrades, i ord: "30 oktober 2026 kl. 9.15", och "tidigare" utan tid. */
+export const andradText = (andrad?: string) => (!andrad ? 'tidigare' : andrad.includes('T') ? `${datumText(andrad.slice(0, 10))} kl. ${tidText(andrad.slice(11, 16))}` : datumText(andrad.slice(0, 10)));
+/**
+ * Skulle en plan ur en fil ersätta en plan i webbläsaren som har ändrats efter filen, också samma dag? Då frågar sidan först,
+ * med frågan i filensFraga, i båda lagren (granskningen 2026-10-24, och Codex 2026-10-31, fynd 4).
+ */
+export const filenErsatterNyare = (finns: SparadPlan | undefined, fil: SparadPlan) => !!finns && planensInnehall(finns) !== planensInnehall(fil) && (finns.andrad ?? '') >= (fil.andrad ?? '');
+/** Frågan före en äldre fil. */
+export const filensFraga = (finns: SparadPlan, fil: SparadPlan) => `Planen i den här webbläsaren ändrades ${andradText(finns.andrad)}, och planen i filen ${andradText(fil.andrad)}. Ersätta den med planen i filen?`;
+/**
+ * En annan flik med samma plan, i båda lagren (Codex 2026-10-24 och 2026-10-31, fynd 2): det den sparar visas här också, så att
+ * den här fliken inte skriver över det med det den hade, utom det den här fliken har skrivit men inte sparat än, som vinner. En
+ * plan som tas bort i en annan flik stängs här. senast är planens innehåll när fliken senast läste eller sparade den.
+ */
+/**
+ * Det fliken minns om sin plan: innehållet när den senast läste eller sparade den, som vidAndraFlikar jämför med, och att spara
+ * den, i båda lagren (Codex 2026-10-31, fynd 2).
+ */
+export function flikensPlan() {
+  let senast = '';
+  return { senast: () => senast, minns: (p: SparadPlan) => { senast = planensInnehall(p); }, skriv: (p: SparadPlan) => { const ok = skrivPlanen(p); if (ok) senast = planensInnehall(p); return ok; } };
+}
+/** Beskedet när planen togs bort i en annan flik. */
+export const BORTTAGEN_I_ANNAN_FLIK = 'Planen togs bort i en annan flik.';
+export function vidAndraFlikar(o: { aktiv: () => { id: string; sparad: boolean }; minne: ReturnType<typeof flikensPlan>; vantar: () => boolean; borta: (besked: string) => void; andrad: (p: SparadPlan) => void; ovrigt?: () => void }) {
+  addEventListener('storage', (e) => {
+    if (e.key !== null && e.key !== NYCKEL) return;
+    const a = o.aktiv();
+    const p = a.sparad ? lasPlaner().planer.find((x) => x.id === a.id) : undefined;
+    if (a.sparad && !p) { o.borta(BORTTAGEN_I_ANNAN_FLIK); return; }
+    if (p && planensInnehall(p) !== o.minne.senast() && !o.vantar()) { o.andrad(p); return; }
+    o.ovrigt?.();
+  });
+}
 /** En plan sparas först bland planerna och ersätter planen med samma id, i båda lagren (K-630); false när lagringen inte tar den. */
 export const skrivPlanen = (p: SparadPlan) => skrivPlaner([p, ...lasPlaner().planer.filter((x) => x.id !== p.id)]);
 
 /** Ett nytt id för en plan, sex tecken. Det står i länken, så att samma plan känns igen på en annan enhet. */
 export const nyttId = () => Math.random().toString(36).slice(2, 8).padEnd(6, '0');
 
-/** Dagens datum i läsarens egen tid, ÅÅÅÅ-MM-DD. */
-export const idagLokalt = () => new Intl.DateTimeFormat('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+// Dagens datum i läsarens egen tid och GoatCounter står i src/scripts/raknare.ts, som appens skript läser utan standarden.
+export { goatcounter, idagLokalt };
 
 /** Klockslaget nu, ÅÅÅÅ-MM-DDTHH:MM:SS i läsarens tid. */
 const nuTid = () => {
@@ -296,9 +345,6 @@ export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan
 
 /** Adressen till en sparad plan, och till en vecka i den. En plan i Metoder öppnas på metodens Lär dig metoden (K-628). */
 export const planensAdress = (p: { metod: string; val: string; id: string; samling?: unknown }, vecka?: number) => (samlingen(p) === 'metoder' ? `/metoder/${encodeURIComponent(p.metod)}/lar-dig#p=${encodeURIComponent(p.id)}` : `/stodundervisning/${encodeURIComponent(p.metod)}/planera#${p.val}&p=${encodeURIComponent(p.id)}${vecka ? `&v=${vecka}` : ''}`);
-
-/** GoatCounter, när count.js har laddats; det laddas bara på sajtens egen adress (Base.astro) och kan vara stoppat. */
-export const goatcounter = () => (window as { goatcounter?: { count?: (v: object) => void } }).goatcounter;
 
 // Pågående insatser i statistiken (K-504, Niclas 2026-10-25: "en lista på pågående Planerade insatser just nu i antal för
 // sin metod"). En sparad plan som är inne i sina veckor, från veckan med första passet till veckan med det sista, säger
@@ -453,7 +499,7 @@ export function sparaPlanerna(nya: SparadPlan[]): { ok: boolean; sparade: number
 }
 
 /**
- * I appen Stöd: planerna finns bara i appen och försvinner när appen tas bort, i iPhone och i Android, där Chrome varnar men
+ * I appen Metodbanken: planerna finns bara i appen och försvinner när appen tas bort, i iPhone och i Android, där Chrome varnar men
  * varningen går att trycka bort (Niclas 2026-10-28). Sajten märker inte när appen tas bort, så den säger det före, på högst
  * två rader under knapparna Ladda ner planer och Öppna planer, som säger vad läraren gör (Niclas samma dag: "kortare text").
  */

@@ -16,7 +16,7 @@
 // kommentaren, så att läraren ser nivån och villkoret för just det området (src/pages/metoder/index.astro).
 import Staplar from './Staplar.astro';
 import { OMRADEN, primaraOmraden, type Utkast } from '../lib/metodprofil';
-import { esc, effektensSkala, uppraknat, laget, motiveringensDelar, svarighetensNiva, kostnadensNiva, larandetIKort, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAERNAS_FORKLARING, BANKENS_OMRADEN, type Laget, type bankensVal } from '../lib/standard/index.js';
+import { esc, effektensSkala, uppraknat, laget, PRIMARA_REGELN, motiveringensDelar, svarighetensNiva, kostnadensNiva, larandetIKort, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAERNAS_FORKLARING, BANKENS_OMRADEN, type Laget, type bankensVal } from '../lib/standard/index.js';
 import { medSaker, METODKORTET } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
 // fil är metodens Word-fil med allt, som kryssrutan Välj laddar ner i banken (src/scripts/urval.ts), val det banken
@@ -134,7 +134,9 @@ const NEGATIV = laget({ tillforlitlighet: 'hog', effekt: 'negativ' }).ord;
           </tbody>
         </table>
         <p set:html={skal(`${effektensSkala().text[1]} Ordet vid en nivå väger alla källor för området och hur säkra de är, så det kan skilja sig från en enskild källas ord i referensbladet.`)} />
-        <p>Primär evidens är det eller de två av sajtens fyra områden, Läsning, Skrivning, Matematik och Socialt, där stödet är starkast, minst Visst stöd.</p>
+        {/* Skalans källor står inte i metodens referenslista, så de leder till sin artikel (riggens punkt 19). */}
+        <p class="mp-skalans-kallor">Skalan: {effektensSkala().kallor.map((x, i) => <>{i > 0 && ' och '}<a href={`https://doi.org/${x.doi}`}>{x.namn}</a></>)}.</p>
+        <p>{PRIMARA_REGELN}</p>
         <p>De grå staplarna visar hur svårt och hur dyrt det är att införa metoden: Svårighet från Mycket lätt till Mycket svårt, Kostnad från Mycket låg till Mycket hög.</p>
         <p>Forskningen visar vad som ofta fungerar för många elever. Du avgör vad som fungerar i din klass.</p>
       </div>

@@ -5,11 +5,13 @@
 // syns ingenting. Samma kod visar Dina planer i Metoder, med planerna ur Lär dig metoden (K-628; Niclas 2026-10-30: "Om man
 // sparar en metod ska den dyka upp under metoder som en sparad metod också med kommande, pågående och avslutad [likt]
 // stödundervisning. [Men] Lär dig metoden ska bara såklart hamna i metoder"): elementets data-samling väljer samlingen och
-// orden, och Stödundervisning visar aldrig Metoders planer eller tvärtom.
+// orden, och Stödundervisning visar aldrig Metoders planer eller tvärtom. Appens sida, /app, visar båda listorna med samma kod
+// (K-644, src/components/Insatslista.astro).
 import { esc, liten, PLANERA } from '../lib/standard/index.js';
 import { allaPlanerna, APPENS_PLANER, idagLokalt, iSamlingen, iTurOrdning, oppnaPlanerna, SAMLINGENS_ORD, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, samlingen, skiljNamnen, STATUSNAMN, statusAv, type Samling, type SparadPlan } from './insatser-lagring';
 import { iAppen } from './webblasaren';
 import { goatFor } from './byggstenar';
+import { APPEN } from '../lib/appen';
 import { laddaNer } from './skattning';
 
 const idag = idagLokalt();
@@ -39,16 +41,46 @@ if (din) {
   }
 }
 
-const lista = document.getElementById('pl-insatser');
-const planer = lista ? planerI(samlingAv(lista)) : [];
-const listansOrd = SAMLINGENS_ORD[lista ? samlingAv(lista) : 'stodundervisning'];
-if (lista && planer.length) {
+// Listorna med planerna (src/components/Insatslista.astro): en på varje bank och två på appens sida, en för varje samling
+// (K-644). Varje lista ritas för sig, med sina egna knappar och sitt besked.
+const listorna = [...document.querySelectorAll<HTMLElement>('.pl-insatser[data-samling]')];
+for (const lista of listorna) ritaListan(lista);
+// I appen står varför planerna ska laddas ner (APPENS_PLANER), en gång, under knapparna i den sista listan med planer, så att
+// appens sida med två listor inte säger det två gånger.
+if (iAppen()) {
+  const rad = listorna.filter((l) => !l.hidden && l.querySelector('ul li')).pop()?.querySelector<HTMLElement>('[data-alla-appen]');
+  if (rad) { rad.textContent = APPENS_PLANER; rad.hidden = false; }
+}
+function ritaListan(lista: HTMLElement) {
+  const samling = samlingAv(lista);
+  const planer = planerI(samling);
+  const listansOrd = SAMLINGENS_ORD[samling];
+  // Trycket på en plan räknas där listan står, metodbanken eller appens sida (insatser:metodbanken och insatser:app).
+  const var_ = lista.dataset.plats === 'app' ? 'app' : 'metodbanken';
+  // Besked efter Öppna planer står kvar efter omladdningen, i listans egen samling.
+  const nyckel = `pl-alla-besked:${samling}`;
+  const besked = lista.querySelector<HTMLElement>('[data-alla-besked]');
+  const tom = lista.querySelector<HTMLElement>('[data-tom]');
+  const knappar = () => {
+    try { const b = sessionStorage.getItem(nyckel); if (b && besked) { besked.textContent = b; besked.hidden = false; sessionStorage.removeItem(nyckel); } } catch { /* utan lagring */ }
+    lista.querySelector('[data-alla-oppna]')?.addEventListener('change', (e) => { const filer = valdaFiler(e); if (filer.length) void oppnaPlanerna(filer, nyckel, samling); });
+  };
+  // Utan planer syns listan bara på appens sida, med raden om var planerna görs och Öppna planer, men inte i en webbläsare som
+  // inte sparar.
+  if (!planer.length) {
+    if (!tom || !lasPlaner().ok) return;
+    tom.hidden = false;
+    lista.querySelector<HTMLElement>('[data-alla-ner]')!.hidden = true;
+    lista.hidden = false;
+    knappar();
+    return;
+  }
   // Den som har nästa pass först. En avslutad plan står hopfälld sist, så att listan inte växer med gamla grupper.
   const rad = (p: SparadPlan) => {
     const lage = lageAv(p, idag);
     const gjorda = p.folj ? p.bockade ?? 0 : 0;
     const om = [lage.text, gjorda ? `${gjorda} pass bockade` : ''].filter(Boolean).join(' · ');
-    return `<li style="--omr:${FARG[p.omrade ?? ''] ?? 'var(--farg-accent)'}"><a href="${esc(planensAdress(p, lage.vecka))}" data-goatcounter-click="insatser:metodbanken" data-goatcounter-title="${esc(listansOrd.lista)}"><span class="pl-metod">${esc(p.titel)} · ${esc(namnen.get(p.id) ?? planensNamn(p))}</span><span class="pl-om">${marke(p)}${esc(om)}</span><span class="pl-pil" aria-hidden="true">${samlingen(p) === 'metoder' ? 'Planen ›' : statusAv(p, idag) === 'avslutad' || nastaPassAv(p, idag) === '9999' ? 'Efter ›' : 'Veckan ›'}</span></a></li>`;
+    return `<li style="--omr:${FARG[p.omrade ?? ''] ?? 'var(--farg-accent)'}"><a href="${esc(planensAdress(p, lage.vecka))}" data-goatcounter-click="insatser:${var_}" data-goatcounter-title="${esc(var_ === 'app' ? `Appen ${APPEN.namn}: en plan under ${listansOrd.listan}` : listansOrd.lista)}"><span class="pl-metod">${esc(p.titel)} · ${esc(namnen.get(p.id) ?? planensNamn(p))}</span><span class="pl-om">${marke(p)}${esc(om)}</span><span class="pl-pil" aria-hidden="true">${samlingen(p) === 'metoder' ? 'Planen ›' : statusAv(p, idag) === 'avslutad' || nastaPassAv(p, idag) === '9999' ? 'Efter ›' : 'Veckan ›'}</span></a></li>`;
   };
   const ordnade = [...planer].sort(iTurOrdning(idag));
   // Två planer med samma namn för samma metod skiljs åt med ett nummer.
@@ -59,9 +91,9 @@ if (lista && planer.length) {
   }
   // Pågående och kommande står öppna, i tur och ordning; de avslutade fälls ihop sist, så att listan håller också med
   // tjugo insatser och fler (Niclas 2026-10-25: "att avslutade läggs under en lista som kan tryckas ut").
-  const pagar = samlingAv(lista) === 'metoder' ? ordnade : ordnade.filter((p) => statusAv(p, idag) !== 'avslutad');
+  const pagar = samling === 'metoder' ? ordnade : ordnade.filter((p) => statusAv(p, idag) !== 'avslutad');
   // I Metoder, en plan per metod, står en avslutad plan kvar bland de andra och fälls inte ihop (den kalla läsaren 2026-10-30).
-  const slut = samlingAv(lista) === 'metoder' ? [] : ordnade.filter((p) => statusAv(p, idag) === 'avslutad');
+  const slut = samling === 'metoder' ? [] : ordnade.filter((p) => statusAv(p, idag) === 'avslutad');
   lista.querySelector('ul')!.innerHTML = pagar.map(rad).join('');
   const fall = lista.querySelector<HTMLElement>('.pl-avslutade');
   if (fall) {
@@ -71,16 +103,11 @@ if (lista && planer.length) {
   lista.hidden = false;
   // Ladda ner alla mina planer, en zip med varje plans fil, och Öppna nedladdade planer, en zip eller flera filer, med
   // samma rot som Öppna en nedladdad plan i metoden (Niclas 2026-10-28). Beskedet står kvar efter att listan har ritats om.
-  const besked = document.getElementById('pl-alla-besked');
-  // I appen står varför planerna ska laddas ner, under knapparna (APPENS_PLANER).
-  const appen = document.getElementById('pl-alla-appen');
-  if (appen && iAppen()) { appen.textContent = APPENS_PLANER; appen.hidden = false; }
-  try { const b = sessionStorage.getItem('pl-alla-besked'); if (b && besked) { besked.textContent = b; besked.hidden = false; sessionStorage.removeItem('pl-alla-besked'); } } catch { /* utan lagring */ }
-  document.getElementById('pl-alla-ner')?.addEventListener('click', () => {
-    const fil = allaPlanerna(PLANERA.version, idag, lista ? samlingAv(lista) : 'stodundervisning');
+  knappar();
+  lista.querySelector('[data-alla-ner]')?.addEventListener('click', () => {
+    const fil = allaPlanerna(PLANERA.version, idag, samling);
     if (!fil) return;
     laddaNer(fil.blob, fil.namn);
     if (besked) { besked.textContent = 'Alla planer är nedladdade i en zip. Lägg den bland skolans filer. Den har elevernas namn, så dela den inte.'; besked.hidden = false; }
   });
-  document.getElementById('pl-alla-oppna')?.addEventListener('change', (e) => { const filer = valdaFiler(e); if (filer.length) void oppnaPlanerna(filer, 'pl-alla-besked', lista ? samlingAv(lista) : 'stodundervisning'); });
 }

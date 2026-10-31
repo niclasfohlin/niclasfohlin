@@ -1,4 +1,5 @@
-// Ikonen för appen Stöd (K-505, Niclas 2026-10-25: "E ser okej ut"): fyra rundade rutor i områdenas färger med en vit
+// Ikonen för appen Metodbanken, som hette Stöd till 2026-10-30 (K-505, K-644; Niclas 2026-10-25: "E ser okej ut"): fyra
+// rundade rutor i områdenas färger med en vit
 // symbol i varje, en bok för Läsning, en penna för Skrivning, ett plus för Matematik och två personer för Socialt, på
 // vit botten. Formgiven ur en Sonnets och en Opus förslag, med symbolerna efter Niclas fråga samma morgon. Ikonen är bara
 // former, så att bygget ritar den i varje storlek utan typsnitt (src/pages/stodundervisning/app/[ikon].png.ts), och

@@ -35,7 +35,7 @@ const sidor = lathundensSidor(d);
 const filer = metodensFiler(id);
 const filmer = metodensFilmer({ film: d.film, filmer: d.filmer }, id, 'metoder');
 // Metodens saker, som leder till metodens sida, utom lathunden själv.
-const saker = undervisningsmetodensSaker(d, id).filter((x) => x.adress !== `${sida}/lathund`);
+const saker = undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektionskort }).filter((x) => x.adress !== `${sida}/lathund`);
 const relaterade = relateradeSidor(d, await getCollection('stodundervisning'));
 ---
 

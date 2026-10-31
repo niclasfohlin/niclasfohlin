@@ -1,0 +1,28 @@
+---
+// /app: appen Metodbankens sida (K-644; Niclas 2026-10-30: "trycker man på den kommer man till en sida som niclasfohlin.se/app.
+// På denna sida finns två knappar överst: Stöd och Metoder ... Men på app sidan listas också alla ens insatser under
+// Stödundervisning ... och samma listade under Metoder"). Appen börjar här (start_url i manifestet). Överst de två bankerna,
+// sedan erbjudandet om appen, som bara syns i webbläsaren (src/components/AppRad.astro), och sist lärarens planer i båda
+// samlingarna, med samma lista och samma ord som på bankerna (src/components/Insatslista.astro, src/scripts/insatser.ts).
+// Sidan skickar ingen läsare någonstans: den som går till /stodundervisning eller /metoder i webbläsaren stannar där.
+import Base from '../../layouts/Base.astro';
+import AppRad from '../../components/AppRad.astro';
+import Insatslista from '../../components/Insatslista.astro';
+import { APPEN } from '../../lib/appen';
+import { site } from '../../data/site';
+---
+
+<Base title={APPEN.namn} description={APPEN.beskrivning}>
+  <h1 class="app-titel">{APPEN.namn}</h1>
+  <nav class="app-val" aria-label="Bankerna">
+    <a class="app-valet" href="/stodundervisning" data-goatcounter-click="app:till:stodundervisning" data-goatcounter-title={`Appen ${APPEN.namn}: till Stöd`}><span class="app-valets-namn">Stöd</span><span class="app-valets-om">{site.sidor.stodundervisning.titel} i grupp</span></a>
+    <a class="app-valet" href="/metoder" data-goatcounter-click="app:till:metoder" data-goatcounter-title={`Appen ${APPEN.namn}: till Metoder`}><span class="app-valets-namn">Metoder</span><span class="app-valets-om">Undervisning i hela klassen</span></a>
+  </nav>
+  <AppRad />
+  <Insatslista samling="stodundervisning" plats="app" id="pl-insatser-stod" />
+  <Insatslista samling="metoder" plats="app" id="pl-insatser-metoder" />
+</Base>
+
+<script>
+  import '../../scripts/insatser.ts';
+</script>

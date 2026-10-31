@@ -10,7 +10,7 @@ alternativaNamn: ["Direktinstruktion", "Strukturerad undervisning", "Explicit in
 ingress: När klassen ska lära sig något nytt där det finns ett rätt sätt att göra, visar du det vid tavlan, ett steg i taget, och alla elever prövar och visar hur de tänker. Du går till deras arbete och rättar felen på plats, varv efter varv, tills nästan alla kan. Först då övar eleverna själva eller i par.
 arskurs: ["F-3", "4-6", "7-9"]
 arskursText: F–9
-taggar: ["explicit-undervisning", "undervisningskvalitet", "tillganglig-undervisning"]
+taggar: ["explicit-undervisning", "undervisningskvalitet", "formativ-bedomning", "tillganglig-undervisning"]
 slag: lektionsforlopp
 syfte: [nytt]
 tid: 40 minuter per lektion, minst tre lektioner i veckan
@@ -26,7 +26,7 @@ material:
 uppdaterad: 2026-10-30
 publicerad: 2026-10-29
 relaterade: ["fyra-raknesatten"]
-utkast: true
+utkast: false
 film:
   sekunder: 29.3
   beskrivning: "Läraren visar 47 + 38 vid tavlan med stegens ord. Alla räknar 44 + 38 och visar stegen på miniwhiteboarden. Läraren ser att en elev har tappat tiotalet i 12, går dit och rättar steget med ”Min tur”, ”Tillsammans” och ”Din tur”, och går tillbaka till tavlan. I kontrollen, 36 + 47, kan nästan alla, och klassen övar själv."
@@ -134,10 +134,11 @@ passar:
     - { fraga: "Vad ska eleverna lära sig?", metoden: "En avgränsad kunskap eller färdighet med ett tydligt rätt sätt, som ljud och bokstäver, skriftlig huvudräkning och en stavningsregel, eller en strategi med fasta steg.", annat: "En strategi eller förmåga som ska användas på nya sätt: förstå en text, skriva en berättelse, lösa problem, resonera. Välj gradvis överlämnande (GRR), där eleverna tar över tänkandet steg för steg." }
     - { fraga: "Hur mycket kan eleverna redan?", metoden: "Lite. Innehållet är nytt, och det är lätt att öva in fel sätt.", annat: "En del. Grunden finns och ska nu användas och fördjupas." }
     - { fraga: "Vad ska eleverna kunna när lektionen är slut?", metoden: "Göra rätt och säkert, allt snabbare och utan att tänka på varje steg.", annat: "Göra det själva i en ny situation och förklara hur de tänkte." }
-    - { fraga: "Hur mycket behöver eleverna prata?", metoden: "Lite. Korta svar räcker, gärna alla samtidigt.", annat: "Mycket. Eleverna behöver pröva sina tankar i ord med varandra." }
+    - { fraga: "Hur mycket behöver eleverna prata?", metoden: "Lite. Korta svar räcker, gärna alla samtidigt.", annat: "Mycket. Eleverna behöver pröva sina tankar i ord med varandra. Välj kooperativt lärande." }
     - { fraga: "Vad behöver eleverna innan de gör själva?", metoden: "Att ha gjort rätt tillräckligt många gånger. Då behövs kontrollen.", annat: "Att ha prövat sina tankar med någon annan. Då behövs samarbetet." }
     - { fraga: "Vad går oftast snett?", metoden: "Eleverna vet inte hur de ska börja, eller övar in ett felaktigt sätt.", annat: "Eleverna klarar det när du visar, men inte utan dig." }
   tumregel: Finns det ett rätt sätt som eleverna ska kunna säkert, välj explicit undervisning, och ska de ta över ett tänkande med många bra svar, välj GRR. Metoderna kan följa på varandra, och valkartan är ett stöd för tanken och ingen regel.
+  metoder: [kooperativt-larande]
 
 larandet:
   rubrik: Så syns lärandet i klassen
@@ -397,7 +398,7 @@ amnesexempel:
         - { fas: Vi gör, text: "44 + 38 och 25 + 37 steg för steg. Sedan 49 + 27, 17 + 46, 65 + 29, 39 + 52." }
         - { fas: Kontrollera, text: "36 + 47 och 19 + 65" }
         - { fas: Du gör, text: "Ett blad med tio uppgifter · 26 + 48, 57 + 35, 18 + 69, 19 + 77 · en egen uppgift till grannen" }
-      beslut: { elever: 28, nastanAlla: "kuberna, tio ental blir en stav", deFlesta: ["38 + 57 tillsammans", "18 + 59 och 37 + 29"], halften: "35 + 29 med stavar och kuber på tavlan" }
+      beslut: { elever: 28, nastanAlla: "kuberna, tio ental blir en stav", deFlesta: "38 + 57 tillsammans, sedan 18 + 59 och 37 + 29", halften: "35 + 29 med stavar och kuber på tavlan" }
       efter: { kontrollen: "5 med fel: Nästan alla", hogar: "Kan 24 · Nästan 2 · Inte än 2", sag: "Inte än: 71. Nästan: 8 + 3 = 12.", kryss: [1, 2, 3, 4], nasta: "70 + 11 och 8 + 3", forst: "de två i Inte än, med stav och kuber" }
       lagg: ["Lägg märke till: alla uppgifter efter starten har ental över tio, så att felet kan synas."]
     # Så kan det se ut: berättelsen står under Lektionen, med remsan i kärnans fyra och Notera vad som hände.
@@ -508,7 +509,7 @@ forsta:
       - { fas: Vi gör, text: "41 + 35 och 23 + 65 steg för steg. Sedan 62 + 17, 15 + 43, 33 + 61, 26 + 52." }
       - { fas: Kontrollera, text: "43 + 25 och 14 + 73" }
       - { fas: Du gör, text: "Tio uppgifter, själv · uppgift 1–⁠4 · en egen uppgift till grannen" }
-    beslut: { elever: 28, nastanAlla: "tre tior och fyra tior med stavarna", deFlesta: ["34 + 25 tillsammans", "13 + 82 och 61 + 24"], halften: "53 + 36 med stavar på tavlan" }
+    beslut: { elever: 28, nastanAlla: "tre tior och fyra tior med stavarna", deFlesta: "34 + 25 tillsammans, sedan 13 + 82 och 61 + 24", halften: "53 + 36 med stavar på tavlan" }
 progression:
   rubrik: De första fyra veckorna
   text: "Metoden är troligen lika ny för dig som för klassen. Gör den minst tre lektioner i veckan i fyra veckor, så blir den en rutin för er båda. Hela lektionen finns från första lektionen, utom paren: de tre första veckorna övar var och en själv i Du gör. I vecka 1, 3 och 4 lär sig klassen en rutin, och varje vecka övar du ett drag. Gå vidare när det syns hos nästan alla, och ge rutinen en vecka till när det inte gör det."
@@ -573,19 +574,19 @@ uppdrag:
 # 5. Mallar och fördjupning
 # ---------------------------------------------------------------------------------------------------------------------
 planeringsmall:
-  text: "Skriv kort. Det grå gör du i varje lektion. Börja med målet och exit-lappen. Stegen får du när du löser en uppgift själv och skriver det du gör, i tre till fem korta steg. Felet är det eleverna oftast gör."
+  text: "Skriv kort. Det grå gör du i varje lektion. Börja med målet och exit-lappen. Stegen får du när du löser en uppgift själv, i tre till fem korta steg."
   # Bladet i tre zoner (Niclas 2026-10-29: ”ändamålsenlig för en lärare som planerar”, och Opus förslag i omgång 2).
   fore:
     - { etikett: "Stegen, med samma ord varje gång", rader: ["1", "2", "3", "4"], falt: steg, fot: "Så skriver alla stegen:", fotFalt: visar }
     - { etikett: Felet jag letar efter, rader: ["Felet:", "I steget:", "Så rättar jag:"], falt: [felet, isteget, rattar] }
   delar:
-    - { fas: Start, skriv: "Två snabba uppgifter, på det som det nya bygger på:", hojd: 0.7 }
-    - { fas: Jag gör, skriv: "Steg för steg · Ett helt exempel · Det felaktiga svaret", hojd: 1.0 }
-    - { fas: Vi gör, skriv: "Uppgifterna, de första steg för steg.", not: "Välj några där felet kan synas.", hojd: 1.1 }
-    - { fas: Kontrollera, skriv: "Två nya uppgifter där felet kan synas.", not: "Rätt är båda med alla steg. Räkna eleverna med fel.", hojd: 0.8 }
-    - { fas: Du gör, skriv: "Uppgifterna · De fyra som alla gör · Till den som är klar", hojd: 0.9 }
+    - { fas: Start, skriv: "Två snabba uppgifter, på det som det nya bygger på:", hojd: 0.6 }
+    - { fas: Jag gör, skriv: "Steg för steg · Ett helt exempel · Det felaktiga svaret", hojd: 0.9 }
+    - { fas: Vi gör, skriv: "Uppgifterna, de första steg för steg.", not: "Välj några där felet kan synas.", hojd: 0.8 }
+    - { fas: Kontrollera, skriv: "Två nya uppgifter där felet kan synas.", not: "Rätt är båda med alla steg. Räkna eleverna med fel.", hojd: 0.7 }
+    - { fas: Du gör, skriv: "Uppgifterna · De fyra som alla gör · Till den som är klar", hojd: 0.8 }
     - { fas: Avslut, not: "Exit-lappens uppgift står överst, i Så ser jag att de kan.", hojd: 0.5 }
-  beslut: { nastanAlla: "Vid bordet:", deFlesta: ["Varvet:", "Ny kontroll:"], halften: "Det nya exemplet:" }
+  beslut: { nastanAlla: "Vid bordet:", deFlesta: "Varvet och ny kontroll:", halften: "Det nya exemplet:" }
   efter:
     text: "Fyll i när lapparna är sorterade i kan, nästan och inte än."
     kontrollen: "Kontrollen: ___ med fel"
@@ -604,13 +605,13 @@ observation:
   fokus: Hur många av eleverna hinner jag se i Vi gör, och vad gör jag med det jag ser?
   huvud: ["Stegen och felet"]
   kolumner:
-    - { namn: Vid tavlan, text: det läraren visar och säger, bredd: 29 }
-    - { namn: Alla visar, text: uppe · fel · bara svar, bredd: 13, elever: true }
-    - { namn: Vid elevernas arbete, text: "det läraren ser, säger och gör, och det eleverna säger", bredd: 39 }
+    - { namn: Vid tavlan, text: det läraren visar och säger, bredd: 27 }
+    - { namn: Alla visar, text: uppe · fel · bara svar, bredd: 18, elever: true }
+    - { namn: Vid elevernas arbete, text: "det läraren ser, säger och gör, och det eleverna säger", bredd: 36 }
   tecken: "+ rätt med stegen, s bara svaret, x fel, 0 inte uppe. Ring in tecknet när läraren rättar eleven, var det än sker."
   delar:
     - { fas: Jag gör, rader: 2, rakna: "Alla prövade varje steg: ja · nej" }
-    - { fas: Vi gör, rader: 4 }
+    - { fas: Vi gör, rader: 3 }
     - { fas: Kontrollera, rader: 2, rakna: "Med fel: ___ av ___   Läraren valde: Du gör · ett varv till · Jag gör igen" }
     - { fas: Du gör, namn: "Du gör, fem minuter", rader: 2, rakna: "Vid bordet: ___ elever   Läraren tittade hos: ___ elever" }
   streck:

@@ -24,6 +24,7 @@ const UNDANTAG = [
   [/^lathund\./, 'lathundens texter, som står i lathunden och inte i filen med allt'],
   [/\.(doi|eric|url|id|slug)$/, 'adresser och id'],
   [/^(tid|period)$/, 'faktan, som sidan skriver i fast form (faktaIFastForm i standarden)'],
+  [/^uppfoljning\.rader\.tid$/, 'uppföljningens tid, som planen läser (tolkaTid) och läsaren ser i rubriken nar'],
   [/^(planeringsmall|observation)\.|^karna\.komponenter\.kryss$/, 'de tomma mallarna, som står på sidan som bilder av bladen'],
 ];
 // Texter som riggens pdf med allt ännu inte har, fast sidan visar dem, med postens nummer: [/fältets väg/, 'vad', 'K-nnn'].

@@ -3,7 +3,7 @@
 // Modulen läser inga filer, så att sidans skript kan läsa den; filerna läser src/lib/undervisningsmetodfiler.ts.
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
-import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasText, utfallensGranser, arSaksord, sakernasText, slugAv } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasText, utfallensGranser, arSaksord, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
 // (K-627), så sidan läser resten som metodens fil har det.
@@ -41,15 +41,16 @@ export const METODKORTET = 'Metodkortet';
  * med metoden (slag avsnitt, utan egen knapp). Namnen kommer ur metodens fil och UM_NAMN och adresserna ur sidans ankare,
  * så att ett nytt blad eller namn följer med av sig själv. Standarden hittar namnen i en text (sakdelar) och de namn som
  * ingen sak har (olankadeSaker), som i Stödundervisning (src/lib/metodsaker.ts). Adresserna är hela, så att lathundens
- * sida kan länka hit.
+ * sida kan länka hit. Utan lektionskortets fil, när kortet väntar på Niclas ja (VANTAR i scripts/metoderfiler.mjs), är
+ * kortet ingen sak, så att ingen länk leder till en knapp som inte finns.
  */
-export function undervisningsmetodensSaker(d: Um, id: string): MetodSak[] {
+export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean } = {}): MetodSak[] {
   const sida = metodensAdress(id);
   // Ett namn som är ett ord för en sak (Planeringsmallen, Affischen Så visar du) hittas också med liten bokstav; ett annat,
   // som Stegen, bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden), så att "skriv stegen" inte
   // blir en länk.
   const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) ? {} : { versal: true }), ...extra });
-  const saker: MetodSak[] = [sak(UM_NAMN.lektionskort, `${sida}#materialet`)];
+  const saker: MetodSak[] = o.lektionskort === false ? [] : [sak(UM_NAMN.lektionskort, `${sida}#materialet`)];
   if (d.ramar) {
     saker.push(sak(d.ramar.rubrik ?? UM_NAMN.materialet, `${sida}#materialet-for-klassen`));
     for (const r of d.ramar.ramar ?? []) saker.push(sak(r.rubrik, `${sida}#${bladetsAnkare(r.rubrik)}`));
@@ -120,8 +121,12 @@ export const kallansId = (namn: string, ar: string) => `${namn} ${ar}`.toLocaleL
  */
 export function medKallor(text: string, kallor: Set<string>, sidor: { titel: string; href: string }[] = []): string {
   let t = esc(String(text ?? ''));
-  // En metod som sajten har, som De fyra räknesätten i grupp, är en länk dit (STIL.md under Hänvisningar).
-  for (const s of sidor) t = t.replace(esc(s.titel), `<a href="${s.href}">${esc(s.titel)}</a>`);
+  // En metod som sajten har, som De fyra räknesätten i grupp eller explicit undervisning, är en länk dit (STIL.md under
+  // Hänvisningar), också med liten bokstav först inne i en mening.
+  for (const s of sidor) {
+    const m = t.match(new RegExp(`(^|[^\\p{L}])(${[esc(s.titel), esc(liten(s.titel))].map(skyddaRegex).join('|')})(?!\\p{L})`, 'u'));
+    if (m) t = `${t.slice(0, m.index! + m[1].length)}<a href="${s.href}">${m[2]}</a>${t.slice(m.index! + m[0].length)}`;
+  }
   return t.replace(/\(([^()]*\d{4}[^()]*)\)/g, (hel, inne: string) => {
     const delar = inne.split(/;\s*/).map((del) => {
       const m = del.match(/^(.*?),?\s+(\d{4}[a-z]?)$/);
@@ -179,7 +184,7 @@ export const tidsschematsRad = (d: Um, fas: string) => (d.tidsschema?.rader ?? [
 
 /** Planeringsbladets egna ord, som bladet på sidan (Planeringsblad.astro) och i lathundens filer (metodpptx.ts) skriver. */
 export const BLADETS_ORD = {
-  klass: 'Klass', amne: 'Ämne', datum: 'Datum', lektion: 'Lektion i arbetsområdet', mal: 'När lektionen är slut ska eleverna kunna', belagg: 'Så ser jag att de kan: exit-lappen',
+  klass: 'Klass', amne: 'Ämne', datum: 'Datum', lektion: 'Lektion i arbetsområdet', mal: 'När lektionen är slut ska eleverna kunna', belagg: 'Så ser jag att de kan',
   fore: 'Före lektionen', forberett: 'Förberett', blad: 'Blad och facit', stod: 'Stöd, till vem', lektionen: 'Lektionen', minuterna: 'minuterna i', karnan: 'kärnan',
   beslutet: 'Beslutet', elever: 'elever i dag:', efter: 'Efter lektionen', karnanIlektionen: 'Kärnan i lektionen',
 } as const;
@@ -202,11 +207,19 @@ export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: str
   const mall = d.planeringsmall ?? {};
   const varianten = variant ? (d.tidsschema?.varianter ?? []).find((v: { nar: string }) => v.nar === variant) : undefined;
   const delensTid = (fas: string): string | undefined => varianten?.delar?.find((x: { fas: string }) => x.fas === fas)?.tid ?? tidsschematsRad(d, fas)?.tid;
+  // Beslutet står efter den del där läraren ser om klassen är redo, stegets redo: Kontrollera i explicit undervisning och
+  // Var och en visar i kooperativt lärande.
   const kontrollen = (d.steg?.rader ?? []).find((s: { redo?: unknown }) => s.redo);
+  const beslutetsFas: string | undefined = kontrollen?.namn;
   const utfalletsText = (id: string) => String(kontrollen?.redo?.[id] ?? '').replace(/^[^.]*\.\s*/, '');
   const delarna = (mall.delar ?? []) as { fas: string; skriv?: string; not?: string }[];
   const planensDel = (fas: string) => bladetsRad((plan.delar ?? []).find((x: { fas: string }) => x.fas === fas)?.text as string | undefined);
   const kryss = new Set<number>(plan.efter?.kryss ?? []);
   const etikett = (falt: string, forval: string, kolon = false) => { const t = String(mall.efter?.[falt] ?? forval).replace(/[:_\s]+$/, '').replace(/:\s*_+.*$/, '').split(/\s{2,}/)[0]; return kolon ? t.split(':')[0] : t; };
-  return { mall, varianten, delensTid, utfalletsText, delarna, planensDel, kryss, etikett };
+  // Lektionen som variantens minuter gäller, i en mening: första lektionen, och i en metod med strukturer den första hela
+  // lektionen (forstaLektionensForm i standarden, K-645).
+  const variantensNamn: string | undefined = varianten ? (varianten.nar === 'första lektionen' ? liten(forstaLektionensForm(d).namn) : varianten.nar) : undefined;
+  // Kärnans nummer vid en del, uppräknade med komma och och: "kärnan 1, 2, 4 och 5" (riggens punkt 8).
+  const karnansNr = (fas: string) => { const k = karnanI(d, fas); return k.length ? `${BLADETS_ORD.karnan} ${uppraknat(k.map((x: { nr: number }) => String(x.nr)))}` : ''; };
+  return { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr };
 }

@@ -26,13 +26,14 @@ import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
 import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
-import { APPENS_PLANER, idagLokalt, KOPIANS_GRANS, kopiansAlder, kopiansText, planenUrFaltet, SAMLINGENS_ORD, sparadPlan, skrivPlanen, statusAv, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, type SparadPlan } from './insatser-lagring';
+import { filenErsatterNyare, filensFraga, flikensPlan, planensInnehall, vidAndraFlikar, idagLokalt, KOPIANS_GRANS, kopiansAlder, kopiansText, planenUrFaltet, SAMLINGENS_ORD, sparadPlan, skrivPlanen, statusAv, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, NYARE_VERSION, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, type SparadPlan } from './insatser-lagring';
 import { tidrad } from './tidrad';
 import { elevPdf, gruppPdf } from './planpdf';
 // Skalans knappar, linjen och nedladdningen, som Lär dig metoden ritar lika (K-628).
 import { laddaNer, linjegraf, mittfaltet, pdfOrd, skalansKnappar, visaPdf } from './skattning';
-import { iAppen, vagenUt, vagenUtText, webblasaren } from './webblasaren';
-import { $, ANGRA_AVSLUTET, anledningenIFaltet, avslutaKnappen, avslutsformularet, avslutsrutan, beskedet, etikettlista, fallut, goatFor, knappen, knappraden, lagesraden, linjensRegler, lovknapp, markeraAnledningen, remsansKnapp } from './byggstenar';
+import { iAppen, webblasaren } from './webblasaren';
+import { APPEN } from '../lib/appen';
+import { $, ANGRA_AVSLUTET, anledningenIFaltet, avslutaKnappen, avslutsformularet, avslutsrutan, beskedet, etikettlista, fallut, filensSkal, goatFor, knappen, knappraden, kopiera, kvittera, lagesraden, linjensRegler, lovknapp, markeraAnledningen, notisen, remsansKnapp, vagenUtNu, webblasarensRad, webblasarensTryck } from './byggstenar';
 
 const sida = $('plan');
 // Beskedet längst ned på skärmen (byggstenarna).
@@ -92,13 +93,11 @@ const { planer, ok: lagringOk, varningar: lagringensVarningar } = lasPlaner();
 const mina = () => lasPlaner().planer.filter((p) => p.metod === data.id).sort(iTurOrdning(idag));
 // Planens innehåll som text, med nycklarna i ordning och det införda rensat, så att samma plan ger samma text var den än
 // kommer ifrån: lagringen, en kopia eller sidan.
-const kanon = (x: unknown): string => JSON.stringify(x, (_, v) => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.entries(v).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))) : v));
-const innehallAv = (p: { val: string; namn?: string; folj?: boolean; foljd?: unknown }) => kanon([p.val, p.namn ?? '', !!p.folj, rensaFoljd(p.foljd)]);
 // Den aktiva planens innehåll som fliken senast läste eller sparade, så att en annan fliks ändring av en annan plan inte
 // tar över den här (Codex 2026-10-24).
-let senast = '';
+const minne = flikensPlan();
 const franSparad = (p: SparadPlan): Aktiv => {
-  senast = innehallAv(p);
+  minne.minns(p);
   return { id: p.id, namn: p.namn ?? '', val: lasVal(p.val)?.val ?? forval(mp, idag), folj: !!p.folj, foljd: { ...tomFoljd(), ...(p.foljd ?? {}) }, sparad: true, franLank: false, uppdaterad: p.uppdaterad, kopia: p.kopia };
 };
 // En plan som läraren öppnar i fliken: ett namn som sparades medan läraren skrev är färdigt, eftersom skrivandet tog slut.
@@ -141,8 +140,7 @@ const sparadAv = (): SparadPlan => sparadPlan(aktiv, data, plan, { omrade: data.
 function spara(): boolean {
   if (!aktiv.sparad) return true;
   const egen = sparadAv();
-  const ok = skrivPlanen(egen);
-  if (ok) senast = innehallAv(egen);
+  const ok = minne.skriv(egen);
   return ok;
 }
 // Kopian av datumen som metodbanken och metodens sida läser görs om när en plan öppnas, så att den följer metoden som den
@@ -2575,14 +2573,14 @@ $('pl-samman').addEventListener('click', (e) => { const knapp = (e.target as Ele
 // att de raderas eller försvinner"; utredningen samma dag, underlag/prov/k598/lagring/svar.md: filen är det enda som klarar
 // Safaris sju dagar, en rensad skoldator, privat läge och en förlorad telefon). Den står när läraren följer insatsen, har fört
 // in något och inte har laddat ner på en vecka, och efter sista passet när filen är äldre än det. I Safari i iPhone, utanför
-// appen Stöd, säger den varför.
+// appen Metodbanken, säger den varför, med samma mening som beskedet överst (filensSkal i byggstenarna).
 function kopiansPaminnelse(): string {
   if (!aktiv.sparad || !aktiv.folj || !harFortIn()) return '';
   const alder = kopiansAlder(aktiv.kopia, idag);
   const efterSista = !!plan.sistaPass && plan.sistaPass <= idag && (aktiv.kopia ?? '') < plan.sistaPass;
   if (alder !== null && alder <= KOPIANS_GRANS && !efterSista) return '';
-  const w = webblasaren();
-  const safari = iAppen() ? ` ${APPENS_PLANER}` : w.ios && !w.app ? ' Safari tar bort det en sida har sparat efter sju dagar utan besök. I appen Stöd gör det inte.' : '';
+  const skal = filensSkal(vagensAdress());
+  const safari = skal ? ` ${skal}` : '';
   return `${efterSista ? 'Ladda ner planen, så finns hela insatsen med utvärderingen i filen.' : alder === null ? 'Det du för in finns bara i den här webbläsaren. Ladda ner planen, så finns det kvar.' : kopiansText(aktiv.kopia!, idag)}${safari}`;
 }
 function renderaKopia() {
@@ -2613,7 +2611,6 @@ function sparaKopia() {
   visaBesked('Planen är nedladdad. Lägg filen bland skolans filer. Den har elevernas namn, så dela den inte.');
 }
 $('pl-kopia-spara').addEventListener('click', sparaKopia);
-const tidOrd = (andrad?: string) => (!andrad ? 'tidigare' : andrad.includes('T') ? `${datumText(andrad.slice(0, 10))} kl. ${tidText(andrad.slice(11, 16))}` : datumText(andrad.slice(0, 10)));
 $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
   // Flera filer eller en zip läses med samma rot som Öppna nedladdade planer på Stödundervisning, och sidan laddas om med
   // beskedet (Niclas 2026-10-28: "Även ladda upp planer bör kunna göra samma sak i en metod så allt har en rot"), och en fil
@@ -2653,8 +2650,8 @@ $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
     visaBesked(['Planen är öppnad ur filen, med allt som förts in.', ...(last?.varningar ?? [])].join(' '), finns ? { text: 'Ångra', kvar: true, gor: () => { skrivPlanen(finns); aktiv = franSparad(finns); rakna(); uppdateraAdressen(); rendera(); visaBesked('Planen är som före kopian.'); } } : undefined);
   };
   // En kopia som skulle ersätta något som har ändrats efter den frågar först, också samma dag (granskningen 2026-10-24).
-  if (finns && innehallAv(finns) !== innehallAv(p) && (finns.andrad ?? '') >= (p.andrad ?? '')) {
-    fragaForst((e.target as HTMLInputElement).closest('label') as HTMLElement, `Planen i den här webbläsaren ändrades ${tidOrd(finns.andrad)}, och planen i filen ${tidOrd(p.andrad)}. Ersätta den med planen i filen?`, 'Ersätt med filen', oppna);
+  if (finns && filenErsatterNyare(finns, p)) {
+    fragaForst((e.target as HTMLInputElement).closest('label') as HTMLElement, filensFraga(finns, p), 'Ersätt med filen', oppna);
     return;
   }
   oppna();
@@ -2708,61 +2705,32 @@ $('pl-grupper').addEventListener('click', (e) => {
 // ---------- Knapparna ----------
 // Text som kopieras eller laddas ned är vanlig text: utan ordfogarna som håller ihop F–5 och 2–6 på sidan (verifieringen
 // 2026-10-25: ett osynligt tecken mellan tankstrecket och siffran i texten till åtgärdsprogrammet och i kalenderfilen).
+// Kopieringen står i byggstenarna (kopiera), lika i båda modulerna.
 function vanligText(s: string): string { return utanFogar(s); }
-async function kopiera(text: string): Promise<boolean> {
-  text = vanligText(text);
-  try { await navigator.clipboard.writeText(text); return true; } catch {
-    const t = document.createElement('textarea');
-    t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;top:0;opacity:0';
-    document.body.append(t); t.select();
-    let ok = false;
-    try { ok = document.execCommand('copy'); } catch { ok = false; }
-    t.remove();
-    return ok;
-  }
-}
-// Det som gäller hela sidan står överst: en plan ur en länk, en metod som har ändrats och en webbläsare som inte sparar.
-function visaNotis(text: string, knappar = '') {
-  $('pl-besked-text').textContent = text;
-  const k = $('pl-besked-knappar');
-  k.innerHTML = knappar;
-  k.hidden = !knappar;
-  $('pl-besked').hidden = !text;
-}
+// Det som gäller hela sidan står överst: en plan ur en länk, en metod som har ändrats, en webbläsare som inte sparar och
+// webbläsarens besked (byggstenarna).
+const visaNotis = notisen('pl-besked');
 // En app med egen webbläsare, som Facebook och Instagram, har sin egen lagring: en plan som sparas där finns inte i Safari
 // eller Chrome på samma telefon (granskningen 2026-10-24; många kommer till sajten från Facebook). Beskedet står också efter
 // att planen har sparats, med vägen ut och en knapp som kopierar länken, som håller där vägen ut inte öppnas (K-510,
-// src/scripts/webblasaren.ts).
+// src/scripts/webblasaren.ts). I Safari i iPhone och iPad står att planen görs i appen Metodbanken (K-644). Beskedet och
+// knapparna är byggstenarnas, lika i Lär dig metoden.
 // Vägen ut fortsätter där läraren är (Niclas 2026-10-28: "blir nästa vy inte där jag planerar, utan datumet blir som valt
 // istället för från början som jag var ifrån"): en ny plan blir en ny plan med samma val, också förvalet, och inte en plan
 // ur en länk (medValen). En sparad plan och en plan ur en länk följer med som planens länk, och sidan säger då vad som inte
 // följer med. Valen följer med också när de inte är sparade (Codex 2026-10-25).
 const vagensAdress = () => (aktiv.sparad || aktiv.franLank ? lank() : `${location.origin}${location.pathname}#${medValen()}`);
-function appensBesked(): [string, string] {
-  const w = webblasaren();
-  if (!w.app || !lagringOk) return ['', ''];
-  // Adressen görs om vid trycket.
-  const ut = vagenUt(vagensAdress(), w);
-  const utKnapp = ut ? `<a class="knapp liten" id="pl-ut" href="${esc(ut.href)}" ${goat('ut-ur-appen', `${ut.text} från ${w.app} webbläsare`)}>${esc(ut.text)}</a>` : '';
-  return [vagenUtText(w), `${utKnapp}<button type="button" class="knapp liten${ut ? ' sekundar' : ''}" id="pl-ut-kopiera" ${goat('lank-ur-appen', `länken kopierad i ${w.app} webbläsare`)}>Kopiera länken</button>`];
+/** Webbläsarens besked med knapparna, och slaget, eller tomt där inget gäller; inget när webbläsaren inte sparar. */
+function appensBesked(): [string, string, 'appens' | 'safari' | ''] {
+  const rad = lagringOk ? webblasarensRad({ forled: 'pl', adress: vagensAdress, goat }) : null;
+  return rad ? [rad.text, rad.knappar, rad.slag] : ['', '', ''];
 }
 // Vägen ut i beskedet om en apps egen webbläsare har adressen med valen som de är nu (vagensAdress): rendera ritar om den
 // efter varje ändring, och trycket gör det en gång till, också efter ett byte av plan (K-510; Codex 2026-10-25). Förut
 // byttes adressen bara i trycket, så att knappen visade förvalet tills läraren tryckte (provaren 2026-10-28).
-function renderaVagenUt() {
-  const ut = document.getElementById('pl-ut') as HTMLAnchorElement | null;
-  const dit = ut && vagenUt(vagensAdress(), webblasaren());
-  if (ut && dit) ut.href = dit.href;
-}
+function renderaVagenUt() { vagenUtNu({ forled: 'pl', adress: vagensAdress }); }
 // Kopiera länken i beskedet kopierar samma adress som vägen ut.
-$('pl-besked').addEventListener('click', async (e) => {
-  if ((e.target as Element).closest('#pl-ut')) { renderaVagenUt(); return; }
-  const knapp = (e.target as Element).closest<HTMLButtonElement>('#pl-ut-kopiera');
-  if (!knapp) return;
-  const ok = await kopiera(vagensAdress());
-  if (ok) kvittera(knapp, 'Kopierad');
-  visaBesked(ok ? `Länken är kopierad. Klistra in den i ${webblasaren().ios ? 'Safari' : 'webbläsaren'}.` : 'Länken gick inte att kopiera i den här webbläsaren.');
-});
+webblasarensTryck($('pl-besked'), { forled: 'pl', adress: vagensAdress, visaBesked });
 // Ett tryck som tar bort något frågar först i sidan, med Avbryt förvalt (Niclas 2026-10-24: "med någon spärr för
 // misstryck"), och det borttagna går att ångra efteråt.
 function fragaForst(knapp: HTMLElement, fraga: string, ja: string, gor: () => void) {
@@ -2791,8 +2759,6 @@ function sparaPlanen() {
   if (!spara()) { aktiv.sparad = false; sparfel(); return; }
   bedOmVaraktig();
   raknaPagaende(lasPlaner().planer);
-  // Raden om appen Stöd följer om planen är sparad (src/scripts/appen.ts).
-  document.dispatchEvent(new Event('planera:sparad'));
   uppdateraAdressen();
   const [appText, appKnappar] = appensBesked();
   notis = appText;
@@ -2814,14 +2780,7 @@ function atgardsunderlag(): Parameters<typeof dokumentationstext> {
   return [{ titel: metodensNamn(), undertitel: data.undertitel, adress: data.adress, mal: data.mal, steg: (data.progression?.rader ?? []).map((r) => r.kort), uppfoljning: data.uppfoljning.rader, nivaNamn: nivaNamn() }, plan, aktiv.val, { minuter: minuter(), folj: aktiv.folj, utvardering: aktiv.foljd.utvardering, elever: elevernasNamn(aktiv.foljd), pagar: !!plan.sistaPass && !slutNu(), ...genomforda, ...lektionernasText(), ...(extraPassetsDatum() ? { extraPass: { datum: extraPassetsDatum()! } } : {}) }];
 }
 function atgardstext() { return dokumentationstext(...atgardsunderlag()); }
-// En knapp som har gjort det den ska säger det själv en stund, intill där läraren tryckte (de kalla läsarna 2026-10-24:
-// "Kopiera texten ger ingen bekräftelse").
-function kvittera(knapp: HTMLElement, text: string) {
-  if (!knapp.dataset.text) knapp.dataset.text = knapp.textContent ?? '';
-  knapp.textContent = `${text} ✓`;
-  knapp.classList.add('pl-kvitto');
-  window.setTimeout(() => { if (knapp.dataset.text) knapp.textContent = knapp.dataset.text; knapp.classList.remove('pl-kvitto'); delete knapp.dataset.text; }, 3000);
-}
+// En knapp som har gjort det den ska säger det själv en stund (kvittera i byggstenarna).
 $('pl-dokumentation').addEventListener('click', async (e) => {
   // Knappen tas innan kopieringen: efter en await är e.currentTarget tom.
   const knapp = e.currentTarget as HTMLElement;
@@ -3038,11 +2997,9 @@ function angraAvslutet() {
 // En annan flik med samma plan: det den sparar visas här också, så att den här fliken inte skriver över det med det den hade
 // (Codex 2026-10-24: en bock i en flik försvann när en skattning sparades i en annan). En plan som tas bort i en annan flik
 // stängs här.
-addEventListener('storage', (e) => {
-  if (e.key !== null && e.key !== 'insatser') return;
-  const p = aktiv.sparad ? lasPlaner().planer.find((x) => x.id === aktiv.id) : undefined;
-  // Ett besked med Ångra gäller det som stod före, så det går bort när en annan flik har ändrat planen (Codex 2026-10-25).
-  if (aktiv.sparad && !p) {
+vidAndraFlikar({
+  aktiv: () => aktiv, minne, vantar: harVantande, ovrigt: renderaGrupper,
+  borta: (besked) => {
     const egna = mina();
     aktiv = egna.length ? franSparad(egna[0]) : nyAktiv();
     visa = undefined; olikaTider = false; redigering = null;
@@ -3050,12 +3007,9 @@ addEventListener('storage', (e) => {
     rakna();
     history.replaceState(null, '', aktiv.sparad ? `#${kodaVal(aktiv.val, { id: aktiv.id })}` : location.pathname);
     rendera();
-    visaNotis('Planen togs bort i en annan flik.');
-    return;
-  }
-  if (p && innehallAv(p) !== senast) {
-    // Det den här fliken har skrivit men inte sparat än går före: det sparas strax och vinner.
-    if (harVantande()) { renderaGrupper(); return; }
+    visaNotis(besked);
+  },
+  andrad: (p: SparadPlan) => {
     const vy = visa;
     aktiv = franSparad(p);
     visa = vy; redigering = null;
@@ -3063,9 +3017,7 @@ addEventListener('storage', (e) => {
     rakna();
     uppdateraAdressen();
     rendera();
-    return;
-  }
-  renderaGrupper();
+  },
 });
 // En länk till en annan plan i samma flik byter bara det som står efter #, och sidan läses då om, så att planen i länken
 // visas (buggjakten 2026-10-24). En länk till en vecka i samma plan visar veckan. En länk med märket ny (medValen) läses
@@ -3087,8 +3039,11 @@ rendera();
 raknaPagaende(lasPlaner().planer);
 ($('pl-andra') as HTMLDetailsElement).open = !aktiv.sparad;
 if (aktiv.uppdaterad && data.uppdaterad && aktiv.uppdaterad < data.uppdaterad && !notis) notis = `Metoden har uppdaterats ${data.uppdateradText ?? data.uppdaterad}, efter att planen gjordes. Planen följer metoden som den är nu.`;
-const [appText, appKnappar] = appensBesked();
-if (appText) notis = appText;
+// En apps egen webbläsare går före det andra. Beskedet i Safari i iPhone och iPad står efter det andra, så att en plan ur en
+// länk och en metod som har ändrats syns också där.
+const [appText, appKnappar, appSlag] = appensBesked();
+if (appSlag === 'appens') notis = appText;
+else if (appSlag === 'safari') notis = [notis, appText].filter(Boolean).join(' ');
 // Det sidan ser av webbläsaren, längst ned under Webbläsaren, för felsökning: namnet, Client Hints, om sidan känner igen
 // en apps egen webbläsare, och om den sparar (Niclas 2026-10-25, om LinkedIns webbläsare på Android). Det står bara här.
 {
@@ -3097,7 +3052,7 @@ if (appText) notis = appText;
   $('pl-teknik').textContent = [
     `Webbläsarens namn: ${navigator.userAgent}`,
     `Client Hints: ${ch?.brands?.length ? ch.brands.map((b) => `${b.brand} ${b.version}`).join(', ') : 'saknas'}`,
-    `Sidan känner igen: ${w.app ? `${w.app} egen webbläsare` : iAppen() ? 'appen Stöd' : 'en vanlig webbläsare'}`,
+    `Sidan känner igen: ${w.app ? `${w.app} egen webbläsare` : iAppen() ? `appen ${APPEN.namn}` : 'en vanlig webbläsare'}`,
     `Sparar: ${lagringOk ? 'ja' : 'nej'}`,
   ].join('. ') + '.';
   // Om webbläsaren har beviljat varaktig lagring, som skyddar planerna när enheten får ont om plats (utredningen 2026-10-28),
@@ -3105,7 +3060,7 @@ if (appText) notis = appText;
   void (navigator.storage?.persisted?.() ?? Promise.resolve(undefined)).then(visaVaraktig).catch(() => {});
 }
 if (!lagringOk) notis = 'Webbläsaren sparar inget här, till exempel i privat läge. Kopiera länken till planen, så finns den kvar.';
-visaNotis(notis, notis === appText ? appKnappar : '');
+visaNotis(notis, appText && notis.includes(appText) ? appKnappar : '');
 if (lamnatBesked) visaBesked(lamnatBesked);
 uppdateraAdressen();
 sida.classList.add('pl-klar');

@@ -10,9 +10,9 @@
 import Base from '../layouts/Base.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
-import AppRad from './AppRad.astro';
 import StodForValet from './StodForValet.astro';
 import PlanHuvud from './PlanHuvud.astro';
+import PlanNotis from './PlanNotis.astro';
 import PlanFilen from './PlanFilen.astro';
 import PlanVersion from './PlanVersion.astro';
 import { tidrad } from '../scripts/tidrad';
@@ -51,13 +51,12 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
 <Base title={`Planera insatsen: ${data.titel}`} description={`Planera ${data.titel}: välj när ni träffas, så räknar planen fram passen, veckornas fokus och uppföljningen ur metoden.`}>
   <article class="plan" id="plan" data-metod={data.id}>
     <header class="pl-huvud">
-      <PlanHuvud bank={{ namn: 'Stödundervisning', adress: '/stodundervisning' }} sida={data.sida} titel={data.titel} namn="Planera" rubrik="Planera insatsen" ingress="Välj när ni träffas. Planen räknar fram passen och uppföljningen ur metoden, och varje vecka visar vad ni gör och var materialet finns." />
-      <AppRad plats="planera" metod={data.id} />
+      <PlanHuvud plats="planera" bank={{ namn: 'Stödundervisning', adress: '/stodundervisning' }} sida={data.sida} titel={data.titel} namn="Planera" rubrik="Planera insatsen" ingress="Välj när ni träffas. Planen räknar fram passen och uppföljningen ur metoden, och varje vecka visar vad ni gör och var materialet finns." />
     </header>
 
     <nav class="pl-grupper" id="pl-grupper" aria-label="Dina planer för metoden" hidden></nav>
     <div class="pl-lage" id="pl-lage" hidden></div>
-    <div class="pl-besked" id="pl-besked" hidden><p id="pl-besked-text" role="status"></p><p class="pl-andra-knappar" id="pl-besked-knappar" hidden></p></div>
+    <PlanNotis id="pl-besked" />
 
     <div class="pl-yta">
       <section class="pl-veckan" id="pl-veckan" aria-labelledby="pl-veckan-rubrik" hidden></section>

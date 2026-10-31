@@ -12,5 +12,26 @@
     "omslag": "427bca59a7eb8c7c",
     "sekunder": 29.95,
     "omslagVid": 7
+  },
+  "kooperativt-larande-film": {
+    "kalla": "9916b9c356762109",
+    "mp4": "c71d44ea948919c7",
+    "omslag": "deb422f7931daa21",
+    "sekunder": 28.66,
+    "omslagVid": 24.2
+  },
+  "kooperativt-larande-film2": {
+    "kalla": "a9394a2517bd3ff9",
+    "mp4": "9aa618128d8321d9",
+    "omslag": "c906921a786c1cfe",
+    "sekunder": 28.2,
+    "omslagVid": 19.56
+  },
+  "kooperativt-larande-film3": {
+    "kalla": "1c4fdd843118a468",
+    "mp4": "56fedcf8449c4bb8",
+    "omslag": "bd2d0ff7c731fe49",
+    "sekunder": 27.39,
+    "omslagVid": 22
   }
 }

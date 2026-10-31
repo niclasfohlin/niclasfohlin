@@ -7,6 +7,20 @@
 export const stor = (s) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 /** Liten bokstav först, som när en mening ur metoden står inne i en annan. @param {string} s */
 export const liten = (s) => s.charAt(0).toLocaleLowerCase('sv') + s.slice(1);
+/**
+ * Liten bokstav först i ett namn som står inne i en mening, utom när namnet börjar med en förkortning eller en bokstav med
+ * bindestreck, som T-kortet och EPA, som riggens renderare (riggens brev om Kooperativt lärande 2026-10-30, punkt 1:
+ * "Rutinen t-kortet" ska vara "Rutinen T-kortet"). @param {string} s
+ */
+export const litenForsta = (s) => (/^\p{Lu}\p{Ll}/u.test(String(s ?? '')) ? liten(String(s)) : String(s ?? ''));
+/**
+ * En text där raden inte bryts på fel ställe, för en fil med fasta rader som lathundens PowerPoint-fil och dess pdf
+ * (riggens brev om Kooperativt lärande 2026-10-30, punkt 7: "T- / kortet", "Ping- / pong-prat" och "interaktion, 5 /
+ * Återkoppling"): ett bindestreck mellan två bokstäver blir ett hårt bindestreck (U+2011), och mellanslaget efter ett tal som
+ * står för sig före ett ord blir ett hårt mellanslag (U+00A0), så att numret följer med ordet. Sidan behåller vanliga tecken,
+ * så att metodens saker hittas i texten. @param {string} s
+ */
+export const utanRadbrytning = (s) => String(s ?? '').replace(/(\p{L})-(?=\p{L})/gu, '$1\u2011').replace(/(^|[\s(])(\d+) (?=\p{L})/gu, '$1$2\u00a0');
 /** En mening slutar med punkt, om den inte redan slutar med ett skiljetecken. @param {string} s */
 export const mening = (s) => (/[.!?:”"]$/.test(s.trim()) ? s.trim() : `${s.trim()}.`);
 /** Utan punkt och blanksteg sist, så att texten kan stå inne i en längre mening. @param {string} s */

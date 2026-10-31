@@ -6,14 +6,14 @@
 // lektionens (granskningen 2026-10-30: förlagan till lektion 1 visade 40-minutersschemats tider). Riggens Word-fil ritar
 // samma blad med blocket planeringsblad. Det läraren skrev går genom medSaker, så att metodens saker är länkar också här.
 import { UTFALLEN } from '../lib/standard/index.js';
-import { BLADETS_ORD as O, bladetsLista, bladetsRad, karnanI, medSaker, planeringsbladet, utfalletsGrans, type Um } from '../lib/undervisningsmetod';
+import { BLADETS_ORD as O, bladetsLista, bladetsRad, medSaker, planeringsbladet, utfalletsGrans, type Um } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface Props { d: Um; plan: Record<string, any>; amne?: string; gra?: boolean; variant?: string; saker?: MetodSak[] }
 const { d, plan, amne, gra = false, variant, saker = [] } = Astro.props;
 // Bladets regler (variantens minuter, utfallens texter, planens delar och Efter lektionens etiketter) står i
 // planeringsbladet i src/lib/undervisningsmetod.ts, som lathundens PowerPoint-fil och pdf ritar samma blad ur.
-const { mall, varianten, delensTid, utfalletsText, delarna, planensDel, kryss, etikett } = planeringsbladet(d, plan, variant);
+const { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, variant);
 const lista = bladetsLista;
 const bryt = bladetsRad;
 // Det läraren skrev, med metodens saker som länkar.
@@ -44,19 +44,18 @@ const k = (t: unknown) => medSaker(String(t ?? ''), saker, new Set());
       <dl class="um-blad-rader"><div><dt>{O.blad}</dt><dd set:html={k(plan.blad)} /></div><div><dt>{O.stod}</dt><dd set:html={k(plan.forberett)} /></div></dl>
     </div>
   </div>
-  <p class="um-blad-zon">{O.lektionen}{varianten && <span class="um-blad-zon-not">{` · ${O.minuterna} ${varianten.nar}`}</span>}</p>
+  <p class="um-blad-zon">{O.lektionen}{varianten && <span class="um-blad-zon-not">{` · ${O.minuterna} ${variantensNamn}`}</span>}</p>
   <table class="um-blad-lektion">
     <tbody>
       {delarna.map((del) => {
-        const karna = karnanI(d, del.fas);
         const text = planensDel(del.fas);
         return (
           <>
             <tr>
-              <th scope="row"><span class="um-blad-fas">{del.fas}</span><span class="um-blad-tid">{delensTid(del.fas)}{karna.length > 0 && ` · ${O.karnan} ${karna.map((k: { nr: number }) => k.nr).join(' och ')}`}</span></th>
+              <th scope="row"><span class="um-blad-fas">{del.fas}</span><span class="um-blad-tid">{delensTid(del.fas)}{karnansNr(del.fas) && ` · ${karnansNr(del.fas)}`}</span></th>
               <td>{del.skriv && <span class="um-blad-skriv">{bryt(del.skriv)}</span>}{text && <span class="um-blad-text" set:html={k(text)} />}{!text && del.not && <span class="um-blad-skriv">{del.not}</span>}</td>
             </tr>
-            {del.fas === 'Kontrollera' && plan.beslut && (
+            {del.fas === beslutetsFas && plan.beslut && (
               <tr class="um-blad-beslut">
                 <th scope="row"><span class="um-blad-fas">{O.beslutet}</span><span class="um-blad-tid">{`${O.elever} ${plan.beslut.elever}`}</span></th>
                 <td>

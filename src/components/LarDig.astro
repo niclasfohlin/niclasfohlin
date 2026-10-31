@@ -7,6 +7,7 @@
 // Ordningen är telefonens: med en sparad plan står veckan läraren är i, med veckans stund, överst; annars Före.
 import Base from '../layouts/Base.astro';
 import PlanHuvud from './PlanHuvud.astro';
+import PlanNotis from './PlanNotis.astro';
 import PlanFilen from './PlanFilen.astro';
 import PlanVersion from './PlanVersion.astro';
 import { PLANERA, SAMLINGARNAS_LED } from '../lib/standard/index.js';
@@ -22,9 +23,12 @@ const mejl = `mailto:${site.epost}?subject=${encodeURIComponent(`Lär dig metode
 <Base title={`Lär dig metoden: ${data.titel}`} description={`Lär dig ${data.titel} ett steg i taget: förbered dig, ta ett steg i veckan, skatta hur säker du är och hur väl metoden fungerar, och ta med sammanställningen till arbetslaget.`} tryckText={`© Niclas Fohlin · niclasfohlin.se${data.sida}/lar-dig`}>
   <article class="ld" id="ld" data-metod={data.id}>
     <header class="ld-huvud">
-      <PlanHuvud bank={{ namn: 'Metoder', adress: '/metoder' }} sida={data.sida} titel={data.titel} namn="Lär dig metoden" rubrik="Lär dig metoden" ingress="Ett steg i taget. Varje vecka övar klasserna en rutin och du ett drag, och i slutet av veckan skattar du hur det gick. Nästa steg kommer när det här sitter." />
+      <PlanHuvud plats="lar-dig" bank={{ namn: 'Metoder', adress: '/metoder' }} sida={data.sida} titel={data.titel} namn="Lär dig metoden" rubrik="Lär dig metoden" ingress="Ett steg i taget. Varje vecka övar klasserna en rutin och du ett drag, och i slutet av veckan skattar du hur det gick. Nästa steg kommer när det här sitter." />
       <div class="ld-lage" id="ld-lage"></div>
     </header>
+
+    {/* Webbläsarens besked, som i Planera insatsen: en apps egen webbläsare och Safari i iPhone och iPad (K-644). */}
+    <PlanNotis id="ld-notis" />
 
     <nav class="pl-remsa ld-remsa" id="ld-remsa" aria-label="Lärarens väg genom metoden"></nav>
 

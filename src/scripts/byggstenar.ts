@@ -4,8 +4,9 @@
 // sak"). Här räknas inget: det som räknas och de texter som visas på flera ställen står i standarden
 // (src/lib/standard/plan.js), och det som sparas i src/scripts/insatser-lagring.ts. Varje sida anropar byggstenen med sina
 // egna element och ord.
-import { ANLEDNINGENS_LANGD, AVSLUTETS_ANLEDNINGAR, esc, isoVecka, kalendervecka, kalenderveckaUtskriven, lovetLast, skolveckan, spannKort, stor, veckonyckel } from '../lib/standard/index.js';
-import { STATUSNAMN, type Samling, type Status } from './insatser-lagring.ts';
+import { ANLEDNINGENS_LANGD, AVSLUTETS_ANLEDNINGAR, esc, isoVecka, kalendervecka, kalenderveckaUtskriven, lovetLast, PLANKNAPPAR, skolveckan, spannKort, stor, utanFogar, veckonyckel } from '../lib/standard/index.js';
+import { APPENS_PLANER, STATUSNAMN, type Samling, type Status } from './insatser-lagring.ts';
+import { iAppen, SAFARI_RADERAR, vagenUt, webblasaren, webblasarensBesked } from './webblasaren.ts';
 
 /** Statistikens namn för ett tryck, en rot för båda lagren och samlingarna (granskningen rot-3, fynd 14): samlingens led, metoden och vad, och titeln med metodens namn. Svaret ger attributen. */
 export const goatFor = (led: string, metod: string, titel: string) => (vad: string, text: string) => `data-goatcounter-click="${esc(led)}:${esc(metod)}:${vad}" data-goatcounter-title="${esc(titel)}: ${esc(text)}"`;
@@ -17,6 +18,83 @@ export const knappen = <T extends Element = HTMLButtonElement>(e: Event, valjare
 export const vidTryck = (ruta: HTMLElement, gor: (b: HTMLButtonElement) => void) => ruta.addEventListener('click', (e) => { const b = knappen(e); if (b) gor(b); });
 /** En rad med knappar, eller inget utan knappar. */
 export const knappraden = (knappar: string[]) => (knappar.length ? `<p class="pl-andra-knappar">${knappar.join('')}</p>` : '');
+
+/**
+ * Text till urklipp, som vanlig text utan ordfogarna som håller ihop F–5 och 2–6 på sidan (verifieringen 2026-10-25), med
+ * en reserv för webbläsare utan urklippets API; false när den inte gick att kopiera.
+ */
+export async function kopiera(text: string): Promise<boolean> {
+  text = utanFogar(text);
+  try { await navigator.clipboard.writeText(text); return true; } catch {
+    const t = document.createElement('textarea');
+    t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;top:0;opacity:0';
+    document.body.append(t); t.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch { ok = false; }
+    t.remove();
+    return ok;
+  }
+}
+// En knapp som har gjort det den ska säger det själv en stund, intill där läraren tryckte (de kalla läsarna 2026-10-24:
+// "Kopiera texten ger ingen bekräftelse").
+export function kvittera(knapp: HTMLElement, text: string) {
+  if (!knapp.dataset.text) knapp.dataset.text = knapp.textContent ?? '';
+  knapp.textContent = `${text} ✓`;
+  knapp.classList.add('pl-kvitto');
+  window.setTimeout(() => { if (knapp.dataset.text) knapp.textContent = knapp.dataset.text; knapp.classList.remove('pl-kvitto'); delete knapp.dataset.text; }, 3000);
+}
+
+/**
+ * Beskedet överst i planens sidor (PlanNotis.astro): det som gäller hela sidan, som en plan ur en länk, en metod som har
+ * ändrats, en webbläsare som inte sparar och webbläsarens besked. Svaret är funktionen som visar en text med knappar, och en
+ * tom text tar bort beskedet.
+ */
+export const notisen = (id: string) => (text: string, knappar = '') => {
+  $(`${id}-text`).textContent = text;
+  const k = $(`${id}-knappar`);
+  k.innerHTML = knappar;
+  k.hidden = !knappar;
+  $(id).hidden = !text;
+};
+
+// ---------- Webbläsarens besked ----------
+// I båda modulerna (K-644; Niclas 2026-10-30: "Måste ha samma kod och rot för både metoder och stödundervisning när man går in
+// på modulen i någon av dem"): vilket besked som gäller avgör webblasarensBesked (src/scripts/webblasaren.ts), och här ritas
+// knapparna och binds trycken. Knapparnas id börjar med sidans förled, pl i Planera insatsen och ld i Lär dig metoden, och
+// adressen är planens adress som den är vid trycket, så att vägen ut fortsätter där läraren är (K-510).
+interface Webblasarensrad { forled: string; adress: () => string; goat: (vad: string, text: string) => string }
+/** Beskedet om webbläsaren med sina knappar, eller null där inget besked gäller. */
+export function webblasarensRad(o: Webblasarensrad): { slag: 'appens' | 'safari'; text: string; knappar: string } | null {
+  const b = webblasarensBesked(o.adress(), PLANKNAPPAR);
+  if (!b) return null;
+  // Safari i iPhone och iPad: knappen till appens sida, där stegen står utfällda.
+  if (b.slag === 'safari') return { slag: b.slag, text: b.text, knappar: `<a class="knapp liten" id="${o.forled}-till-appen" href="${esc(b.till.href)}" ${o.goat('till-appen', 'Så lägger du till appen, från Safari')}>${esc(b.till.text)}</a>` };
+  const w = webblasaren();
+  const ut = b.ut ? `<a class="knapp liten" id="${o.forled}-ut" href="${esc(b.ut.href)}" ${o.goat('ut-ur-appen', `${b.ut.text} från ${w.app} webbläsare`)}>${esc(b.ut.text)}</a>` : '';
+  return { slag: b.slag, text: b.text, knappar: `${ut}<button type="button" class="knapp liten${b.ut ? ' sekundar' : ''}" id="${o.forled}-ut-kopiera" ${o.goat('lank-ur-appen', `länken kopierad i ${w.app} webbläsare`)}>Kopiera länken</button>` };
+}
+/**
+ * Varför filen skyddar planen, efter texten om planen som fil: i appen att planerna försvinner med appen (APPENS_PLANER), och
+ * i Safari i iPhone och iPad att Safari kan radera dem (SAFARI_RADERAR), annars inget.
+ */
+export const filensSkal = (adress: string) => (iAppen() ? APPENS_PLANER : webblasarensBesked(adress, PLANKNAPPAR)?.slag === 'safari' ? SAFARI_RADERAR : '');
+/** Vägen ut får adressen som den är nu: sidan ritar om den efter en ändring, och trycket gör det en gång till. */
+export function vagenUtNu(o: Pick<Webblasarensrad, 'forled' | 'adress'>) {
+  const ut = document.getElementById(`${o.forled}-ut`) as HTMLAnchorElement | null;
+  const dit = ut && vagenUt(o.adress(), webblasaren());
+  if (ut && dit) ut.href = dit.href;
+}
+/** Trycken i beskedet: vägen ut med adressen som den är nu, och Kopiera länken, som kopierar samma adress. */
+export function webblasarensTryck(ruta: HTMLElement, o: Pick<Webblasarensrad, 'forled' | 'adress'> & { visaBesked: (text: string) => void }) {
+  ruta.addEventListener('click', async (e) => {
+    if ((e.target as Element).closest(`#${o.forled}-ut`)) { vagenUtNu(o); return; }
+    const knapp = (e.target as Element).closest<HTMLButtonElement>(`#${o.forled}-ut-kopiera`);
+    if (!knapp) return;
+    const ok = await kopiera(o.adress());
+    if (ok) kvittera(knapp, 'Kopierad');
+    o.visaBesked(ok ? `Länken är kopierad. Klistra in den i ${webblasaren().ios ? 'Safari' : 'webbläsaren'}.` : 'Länken gick inte att kopiera i den här webbläsaren.');
+  });
+}
 
 /**
  * Beskedet längst ned på skärmen, där läraren ser det (granskningarna 2026-10-24: beskedet överst syntes inte från knapparna

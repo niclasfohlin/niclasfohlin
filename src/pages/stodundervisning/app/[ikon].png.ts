@@ -2,7 +2,7 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import sharp from 'sharp';
 import { APPIKONER, appikonSvg, type Appikon } from '../../../lib/appikon';
 
-// /stodundervisning/app/<ikon>.png: appen Stöds ikon i de storlekar som manifestet och iPhone läser (src/lib/appikon.ts),
+// /stodundervisning/app/<ikon>.png: appen Metodbankens ikon i de storlekar som manifestet och iPhone läser (src/lib/appikon.ts),
 // ritad ur svg:en vid varje bygge, så att ingen bild måste göras om för hand.
 export const getStaticPaths: GetStaticPaths = () => Object.keys(APPIKONER).map((ikon) => ({ params: { ikon } }));
 

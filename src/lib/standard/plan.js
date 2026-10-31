@@ -1210,11 +1210,17 @@ export function larDigetsVeckor(plan, val, f, idag) {
 export const forstaLektionen = (plan) => (plan.veckor.length ? forstaLektionensDag(plan.start, plan.veckor[0].mandag) : null);
 /**
  * Dagen för första lektionen ur dagen läraren valde och måndagen i planens första vecka, en rot för planen (forstaLektionen) och
- * listan med planerna, som läser kopian av planens veckor (sajtens K-630).
+ * listan med planerna, som läser kopian av planens veckor (sajtens K-630): den senare av dem, och nästa skoldag när den är en
+ * helg eller en röd dag.
  * @param {string} start dagen läraren valde
  * @param {string} mandag måndagen i planens första vecka
  */
-export const forstaLektionensDag = (start, mandag) => (start > mandag ? start : mandag);
+export const forstaLektionensDag = (start, mandag) => {
+  // En helg eller en röd dag är ingen lektionsdag: första lektionen är då nästa skoldag (Codex 2026-10-31, trettondagen).
+  let d = start > mandag ? start : mandag;
+  while (veckodag(d) > 5 || helgdag(d)) d = plusDagar(d, 1);
+  return d;
+};
 /**
  * Var läraren är: före, till dagen för första lektionen; efter, från veckan efter det sista steget; och annars under stegen.
  * @param {Plan} plan
@@ -1568,7 +1574,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.8.2', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.9.0', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -1577,7 +1583,7 @@ export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.8.2', beta: 
 const FILERNA = Object.freeze({ sammanstallning: 'pdf', plan: 'json', kalender: 'ics', planer: 'zip' });
 /** Samlingens ord i filnamnen, så att en fil från Metoder säger det (den kalla läsaren 2026-10-30, nr 18). */
 const SAMLINGENS_FILNAMN = Object.freeze({ stodundervisning: 'stodundervisning', metoder: 'lar-dig-metoden' });
-// Knapparna för att spara planen och ta den till en annan dator, lika på planens sida och i raden om appen Stöd (Niclas
+// Knapparna för att spara planen och ta den till en annan dator, lika på planens sida och i beskedet om appen Metodbanken (Niclas
 // 2026-10-25: "om det ska heta 'Ladda ner planen' och 'Ladda upp planen' eller om det finns bättre ord"). Filen läses i
 // webbläsaren och skickas aldrig någonstans, så knappen som läser den heter Öppna och inte Ladda upp: elevernas namn lämnar
 // aldrig telefonen eller datorn.
@@ -1745,8 +1751,10 @@ export function forstaMandagen(val) {
   if (!val.dagar.length) return m;
   // Passdagarna, också före och på ett byte av dagar och dit ett pass har flyttats (Codex 2026-10-25: ett byte på startdagen
   // tappade första veckan).
+  // En röd dag är ingen passdag, så att en start på nyårsdagen eller julafton inte ger en första vecka utan pass (Codex
+  // 2026-10-31).
   const arPassdag = passdagar(val);
-  return [1, 2, 3, 4, 5].some((d) => plusDagar(m, d - 1) >= val.start && arPassdag(plusDagar(m, d - 1), d)) ? m : plusDagar(m, 7);
+  return [1, 2, 3, 4, 5].some((d) => plusDagar(m, d - 1) >= val.start && arPassdag(plusDagar(m, d - 1), d) && !helgdag(plusDagar(m, d - 1))) ? m : plusDagar(m, 7);
 }
 
 /**

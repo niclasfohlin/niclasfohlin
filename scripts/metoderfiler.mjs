@@ -17,7 +17,13 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { parse } from 'yaml';
 import sharp from 'sharp';
-import { slugAv } from '../src/lib/standard/index.js';
+import { slugAv, metodensFilmnamn } from '../src/lib/standard/index.js';
+
+// Det som riggen har byggt men som väntar på Niclas ja, som { id, slag, skal }: filen tas inte in, och sidan, lathunden och
+// proven klarar metoden utan den, eftersom sidan bara visar en knapp för en fil som finns (src/lib/undervisningsmetodfiler.ts).
+// En rad tas bort när Niclas har sagt ja och riggens brev säger det. Tom sedan Niclas ja till Kooperativt lärandes
+// lektionskort 2026-10-30 (K-645).
+const VANTAR = [];
 
 const ROT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const RIGG = process.env.METODRIGG ?? 'C:/metodrigg';
@@ -63,6 +69,8 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     // Riggens filer står i out/<id>/, och lektionskortet i out/material/lektionskort-<id>/.
     const hitta = (namn) => [join(ut, namn), join(RIGG, 'out', 'material', `lektionskort-${id}`, namn)].find((x) => existsSync(x));
     for (const post of f.filer ?? []) {
+      const vantar = VANTAR.find((v) => v.id === id && v.slag === post.slag);
+      if (vantar) { varningar.push(`${id}: ${post.namn} tas inte in: ${vantar.skal}`); continue; }
       const yamlSha = post.metodSha256 ?? f.metodSha256;
       if (yamlSha !== metodensSha) fel.push(`${id}: ${post.namn} är byggd ur en annan metodfil än sajtens (${String(yamlSha).slice(0, 8)} mot ${metodensSha.slice(0, 8)}). Kopiera riggens metod.yaml eller be riggen bygga om.`);
       // Lathundens pdf är sajtens, gjord av PowerPoint ur sajtens PowerPoint-fil (scripts/lathund-pdf.mjs, K-637), så riggens
@@ -141,15 +149,17 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     if (forstaBladet) bladen.forEach((namn, i) => { if (!filer.some((f) => f.slag === `blad-${slugAv(namn)}`)) klipp(material, forstaBladet + i, forstaBladet + i, join(UT, bladfil(namn))); });
   }
 
-  // Filmerna: riggens svg-filer med sajtens namn, som i Stödundervisning.
-  const filmer = [['film', `${id}-film`], ['film2', `${id}-film2`]];
-  for (const [rigg, sajt] of filmer) {
+  // Filmerna: riggens svg-filer med sajtens namn, som i Stödundervisning, en för huvudfilmen och en för varje extrafilm i
+  // metodens fil (metodensFilmnamn i standarden, som leveransprovet läser).
+  for (const namn of metodensFilmnamn(d)) {
     for (const ext of ['', '-1', '-2', '-3', '-4']) {
-      const k = join(ut, `${rigg}${ext}.svg`);
-      if (existsSync(k) && !kontrollera) copyFileSync(k, join(UT, `${sajt}${ext}.svg`));
+      // Med --kontrollera, som i Netlifys bygge utan riggen, prövas sajtens kopia.
+      const k = kontrollera ? join(UT, `${id}-${namn}${ext}.svg`) : join(ut, `${namn}${ext}.svg`);
+      if (!existsSync(k)) { fel.push(`${id}: ${kontrollera ? `${id}-${namn}${ext}.svg saknas i public/metoder/` : `${namn}${ext}.svg saknas hos riggen`}`); continue; }
+      if (!kontrollera) copyFileSync(k, join(UT, `${id}-${namn}${ext}.svg`));
     }
   }
-  for (const slag of ['allt', 'lektionskort']) if (!existsSync(join(UT, `${stam(slag)}.pdf`))) fel.push(`${id}: ${slag} saknas i public/metoder/`);
+  for (const slag of ['allt', 'lektionskort'].filter((s) => !VANTAR.some((v) => v.id === id && v.slag === s))) if (!existsSync(join(UT, `${stam(slag)}.pdf`))) fel.push(`${id}: ${slag} saknas i public/metoder/`);
   if (d.lathund && !existsSync(join(UT, `${stam('lathund')}.docx`))) fel.push(`${id}: Word-lathunden saknas i public/metoder/`);
   // Allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se, på varje sida (CLAUDE.md under Innehållstyperna; Niclas
   // 2026-10-30: "Hör även allt (C) Niclas Fohlin som ska ha det likt stödundervisning?").

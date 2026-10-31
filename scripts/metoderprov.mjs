@@ -72,7 +72,9 @@ function provaSakerna(s, html, ids) {
   // bara står för skärmläsaren och upphovsraden (STIL.md under Hänvisningar: rubrikerna och etiketterna länkas inte).
   const HOPPA = new Set(['a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'nav', 'dt', 'th', 'caption', 'label', 'summary', 'script', 'style', 'svg', 'title', 'template', 'textarea', 'select', 'option', 'noscript']);
   const TOMMA = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
-  const KLASS = /\bclass="[^"]*\b(upphov|filrubrik|faktaruta-etikett|visually-hidden|tryck-fot)\b/;
+  // Rutornas rubriker och planeringsbladets etiketter är rubriker och etiketter, som Rutinen: T-kortet och Färdigheten på
+  // T-kortet (K-645).
+  const KLASS = /\bclass="[^"]*\b(upphov|filrubrik|faktaruta-etikett|visually-hidden|tryck-fot|um-ruta-rubrik|um-blad-etikett)\b/;
   const tecken = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
   const avkoda = (t) => t.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (h, k) => (k[0] === '#' ? String.fromCodePoint(k[1] === 'x' || k[1] === 'X' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : tecken[k.toLowerCase()] ?? h));
   const kropp = html.slice(html.indexOf('<article'), html.lastIndexOf('</article>'));
@@ -201,8 +203,9 @@ try {
       const bred = await kor(`document.fonts.ready.then(() => { document.querySelectorAll('details').forEach((x) => { x.open = true; }); const W = document.documentElement.clientWidth; const sw = document.documentElement.scrollWidth; if (sw <= W + 1) return ''; const klipps = (e) => { for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return true; return false; }; for (const e of document.querySelectorAll('body *')) { const r = e.getBoundingClientRect(); if (r.width && !klipps(e) && r.right > W + 1 && e.parentElement.getBoundingClientRect().right <= W + 1) return sw + ' punkter bred, ' + e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/)[0] : '') + ' ”' + (e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 40) + '”'; } return sw + ' punkter bred'; })`);
       if (bred === undefined) fel.push(`${s}: provet i ${bredd} punkter fick inget svar`);
       else if (bred) fel.push(`${s}: rullar i sidled i ${bredd} punkter: ${bred}`);
-      // Inget namn i remsan, cellerna eller kortets värden klipps eller går ut ur sin ruta (designgranskningen 2026-10-30).
-      const klippt = await kor(`(() => { const ut = []; for (const e of document.querySelectorAll('.um-remsa-namn, .um-celler a, .mp-varde, .mp-namn')) { if (e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow !== 'visible') ut.push(e.textContent.trim().slice(0, 30)); const ram = e.closest('.mp-bank-halv, .mp-rad, .mp-bank-en'); if (ram && e.getBoundingClientRect().right > ram.getBoundingClientRect().right + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (utanför rutan)'); } return ut.join(' · '); })()`);
+      // Inget namn i remsan, cellerna eller kortets värden klipps eller går ut ur sin ruta (designgranskningen 2026-10-30), och
+      // inget ord i kärnans kort går ut ur kortet (Samarbetsfärdigheter i 390 punkter, K-645).
+      const klippt = await kor(`(() => { const ut = []; for (const e of document.querySelectorAll('.um-remsa-namn, .um-celler a, .mp-varde, .mp-namn')) { if (e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow !== 'visible') ut.push(e.textContent.trim().slice(0, 30)); const ram = e.closest('.mp-bank-halv, .mp-rad, .mp-bank-en'); if (ram && e.getBoundingClientRect().right > ram.getBoundingClientRect().right + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (utanför rutan)'); } for (const e of document.querySelectorAll('.um-kort-namn, .um-kort-vad, .um-kort-moment')) if (e.scrollWidth > e.clientWidth + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (ut ur kortet)'); return ut.join(' · '); })()`);
       if (klippt) fel.push(`${s}: i ${bredd} punkter klipps eller går ut: ${klippt}`);
     }
     // Varje mening på lathundens sida står i lathundens pdf (K-632, K-637).

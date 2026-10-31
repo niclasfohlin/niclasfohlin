@@ -3,45 +3,27 @@
 // undervisningsmetod.js, K-632), som riggen och lathunden också läser, så att kortet, lathunden och riggens spärrar säger
 // samma sak. Här står det som bara kortet gör: områdena i kortets ordning, de primära områdena och kortet ur metodens fil i
 // samlingen src/content/undervisningsmetoder/ (`kortetUrFil`). PILOTEN är utkastet med platshållare som K-623 visade formen med.
-import { faktaIFastForm, laget, uppraknat, type Effekt, type Kostnad, type Omradesvarde, type Svarighet, type Tillforlitlighet } from './standard/index.js';
+import { faktaIFastForm, OMRADENAS_RAD, primaraOmraden as standardensPrimara, type Effekt, type Kostnad, type Omradesvarde, type Svarighet, type Tillforlitlighet } from './standard/index.js';
 
 export type Omrade = 'larande' | 'lasning' | 'skrivning' | 'matematik' | 'amnen' | 'socialt';
 
 /** Staplarnas områden i standardens ordning. Lärande totalt sammanfattar och står först. */
 export const OMRADEN: readonly { id: Omrade; namn: string; under?: string }[] = [
   { id: 'larande', namn: 'Lärande totalt' },
-  { id: 'lasning', namn: 'Läsning' },
+  { id: 'lasning', namn: 'Läsning', under: OMRADENAS_RAD.lasning },
   { id: 'skrivning', namn: 'Skrivning' },
   { id: 'matematik', namn: 'Matematik' },
-  // Niclas 2026-10-29: "Istället för ämneskunskaper: ämnen".
-  { id: 'amnen', namn: 'Ämnen', under: 'SO, NO och teknik' },
+  // Niclas 2026-10-29: "Istället för ämneskunskaper: ämnen". Raden under namnet står i standarden (OMRADENAS_RAD).
+  { id: 'amnen', namn: 'Ämnen', under: OMRADENAS_RAD.amnen },
   { id: 'socialt', namn: 'Socialt' },
 ];
 
 /**
- * Primär evidens: sajtens fyra områden, som i Stödundervisning, med deras färger (Niclas 2026-10-29: "ska det inte vara
- * sajtens kort för Matematik (primär effekt blir de fyra läs, skrv, matematik, socialt)"). Högst två områden med den högsta
- * nivån, minst Visst stöd. Står fler än två lika avgör tillförlitligheten och sedan effekten, och sist sajtens ordning.
- * Ämnen och Lärande totalt blir aldrig primära. Kortet tar det första områdets färg.
+ * Primär evidens: det eller de två av sajtens fyra områden där stödet är starkast, minst Visst stöd, och alla som står lika
+ * också i tillförlitligheten och effekten. Regeln står i standarden (primaraOmraden i src/lib/standard/undervisningsmetod.js,
+ * K-645), som riggens spärr kan läsa.
  */
-const FYRA: readonly { id: Omrade; namn: string }[] = [
-  { id: 'lasning', namn: 'Läsning' }, { id: 'skrivning', namn: 'Skrivning' }, { id: 'matematik', namn: 'Matematik' }, { id: 'socialt', namn: 'Socialt' },
-];
-const VIKT_T: Record<Tillforlitlighet, number> = { hog: 3, mattlig: 2, lag: 1 };
-const VIKT_E: Record<Effekt, number> = { stor: 4, mattlig: 3, liten: 2, ingen: 1, negativ: 0 };
-export function primaraOmraden(evidens: Record<Omrade, Omradesvarde>): string[] {
-  const kandidater = FYRA.map((o, ordning) => {
-    const v = evidens[o.id];
-    const l = laget(v);
-    return { namn: o.namn, ordning, niva: l.slag === 'niva' && !l.negativ ? l.niva : 0, t: 'tillforlitlighet' in v ? VIKT_T[v.tillforlitlighet] : 0, e: 'effekt' in v ? VIKT_E[v.effekt] : 0 };
-  }).filter((x) => x.niva >= 3);
-  const hogst = Math.max(0, ...kandidater.map((x) => x.niva));
-  return kandidater.filter((x) => x.niva === hogst).sort((a, b) => b.t - a.t || b.e - a.e || a.ordning - b.ordning).slice(0, 2).map((x) => x.namn);
-}
-export const primar = (evidens: Record<Omrade, Omradesvarde>): string => {
-  const namn = primaraOmraden(evidens);
-  return namn.length ? uppraknat(namn.map((n, i) => (i ? n.toLocaleLowerCase('sv') : n))) : 'Inget område med minst visst stöd';
-};
+export const primaraOmraden = (evidens: Record<Omrade, Omradesvarde>): string[] => standardensPrimara(evidens);
 
 export interface Utkast {
   id: string; titel: string; alternativaNamn: string[]; undertitel: string; ingress: string; arskursText: string;

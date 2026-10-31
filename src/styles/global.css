@@ -659,7 +659,9 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 @media (min-width: 48rem) { .um-kort-rad { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .um-kort { display: flex; flex-direction: column; padding: 0.8rem 0.85rem; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-yta); font-family: var(--typsnitt-ui); }
 .um-kort-nr { display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--farg-accent); color: #fff; font: 700 0.9rem/1 var(--typsnitt-ui); flex: none; }
-.um-kort-namn { margin: 0.45rem 0 0.3rem; font-weight: 700; line-height: 1.25; }
+/* Ett långt namn, som Samarbetsfärdigheter i kooperativt lärande, avstavas i kortet i telefonen i stället för att gå ut ur
+   det (riggens punkt 6, K-645). */
+.um-kort-namn { margin: 0.45rem 0 0.3rem; font-weight: 700; line-height: 1.25; overflow-wrap: break-word; hyphens: auto; }
 .um-kort-vad { margin: 0; font-size: 0.88rem; line-height: 1.45; }
 .um-kort-moment { margin: auto 0 0; padding-top: 0.45rem; font-size: 0.8125rem; color: var(--farg-text-svag); font-style: italic; }
 .um-varv { margin: 0.6rem 0 0; font-family: var(--typsnitt-ui); font-style: italic; text-align: center; color: var(--farg-text-svag); }
@@ -3885,8 +3887,8 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
    utrymme för knapparna + texten"). */
 .pl-insatser .pl-alla-planer { margin: 0; padding: 0.55rem 1rem 0.45rem; gap: 0.4rem; border-top: 1px solid var(--farg-kant); }
 .pl-insatser .pl-alla-planer .knapp { min-height: 2.25rem; padding: 0.15rem 0.75rem; font-size: 0.85rem; }
-.pl-insatser #pl-alla-besked, .pl-insatser #pl-alla-appen { margin: 0; padding: 0 1rem 0.55rem; }
-.pl-insatser #pl-alla-appen { font-size: 0.8rem; line-height: 1.35; }
+.pl-insatser .pl-alla-besked, .pl-insatser .pl-alla-appen { margin: 0; padding: 0 1rem 0.55rem; }
+.pl-insatser .pl-alla-appen { font-size: 0.8rem; line-height: 1.35; }
 .pl-insatser li { border-top: 1px solid var(--farg-kant); border-left: 5px solid var(--omr, var(--farg-accent)); }
 .pl-insatser a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.1rem 0.75rem; padding: 0.7rem 1rem; text-decoration: none; color: var(--farg-text); }
 .pl-insatser a:hover { background: var(--farg-ton-svag); }
@@ -4419,10 +4421,10 @@ button.pl-passroll { min-height: 2.75rem; }
 /* Slut på stilarna som delningskorten på de egna mallarna räknar in (src/lib/delningskort.ts). Ett nytt avsnitt står
    efter den här raden, så att korten inte ritas om. */
 
-/* Appen Stöd (K-505): raden som erbjuder metodbanken som app på hemskärmen, på metodbanken och Planera insatsen i
-   telefon och surfplatta (src/components/AppRad.astro, src/scripts/appen.ts). Mobil först: ikonen till vänster, rubriken
-   och en rad under den, krysset uppe till höger och knappen under texten, så att texten får bredden; på en bred skärm står
-   knappen bredvid texten. Stegen för iPhone står under hela raden. */
+/* Appen Metodbanken, som hette Stöd till 2026-10-30 (K-505, K-644): erbjudandet på appens sida, /app (src/components/AppRad.astro,
+   src/scripts/appen.ts). Mobil först: ikonen till vänster, rubriken och en rad under den, krysset uppe till höger och knappen
+   under texten, så att texten får bredden; på en bred skärm står knappen bredvid texten. Stegen för iPhone står under hela
+   raden. */
 .app-rad { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "ikon text stang" ". knapp ." "steg steg steg"; align-items: start; column-gap: 0.7rem; row-gap: 0.5rem; margin: 0 0 1.25rem; padding: 0.6rem 0.25rem 0.7rem 0.75rem; background: var(--farg-ton); border: 1px solid var(--farg-kant); border-radius: var(--radie); }
 @media (min-width: 40rem) { .app-rad { grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "ikon text knapp stang" "steg steg steg steg"; align-items: center; padding-bottom: 0.6rem; } }
 .app-rad[hidden] { display: none; }
@@ -4439,12 +4441,45 @@ button.pl-passroll { min-height: 2.75rem; }
 .app-steg li + li { margin-top: 0.25rem; }
 .app-dela { width: 1.15em; height: 1.15em; vertical-align: -0.2em; }
 .app-not { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--farg-text-svag); }
-@media print { .app-rad { display: none !important; } }
-/* I appen själv är appen bara Stödundervisning (Niclas 2026-10-25: "över menyraden inte skulle visas i appen och den bara
-   hade sidan stödundervisning som app"): sajtens menyrad, metodbankens ingress och sidfotens länkar ut ur appen göms, och
-   namnet, mejlet och upphovet står kvar. Varje sida i appen utom metodbanken har länkraden tillbaka dit (brodsmula), och Android har sin
-   bakåtknapp. I webbläsaren ser sajten ut som förut. */
-@media (display-mode: standalone) { .sidhuvud, .metodbank-ingress, .sidfot .lankrad-lista { display: none; } }
+@media print { .app-rad, .app-hem, .app-lank { display: none !important; } }
+
+/* Appens sida, /app (src/pages/app/index.astro): de två bankerna överst som två stora block i metodernas färgblock (K-617),
+   bredvid varandra också i 320 punkter, med bankens namn stort och en rad under. Sedan erbjudandet och listorna. */
+.app-titel { margin-bottom: 1rem; }
+.app-val { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin: 0 0 1.5rem; max-width: 42rem; font-family: var(--typsnitt-ui); }
+.app-valet { display: flex; flex-direction: column; justify-content: flex-end; gap: 0.3rem; min-height: 7.5rem; padding: 0.9rem 1rem; border-radius: var(--radie); background: var(--farg-accent); color: #fff; text-decoration: none; box-shadow: var(--skugga-kort); }
+.app-valet + .app-valet { background: var(--farg-mork); }
+.app-valet:hover { color: #fff; background: var(--farg-accent-mork); }
+.app-valet + .app-valet:hover { background: #22303d; }
+.app-valet:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 3px; }
+.app-valets-namn { font-size: 1.75rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.01em; }
+.app-valets-om { font-size: 0.9rem; line-height: 1.3; color: rgba(255, 255, 255, 0.86); }
+/* De två listorna står nära varandra, som en sak, och inte med avståndet mellan sidans avsnitt. */
+.innehall > .pl-insatser + .pl-insatser { margin-top: 1rem; }
+/* Raden tom i listan på appens sida, när en samling inte har några planer än. */
+.pl-tom { margin: 0; padding: 0 1rem 0.6rem; font-size: 0.92rem; color: var(--farg-text-svag); }
+
+/* Länken till appen på bankerna och i planens sidor (src/components/AppLank.astro): bara i telefon och surfplatta, och aldrig i
+   appen själv. Den behöver inget skript. */
+.app-lank { display: none; margin: -0.25rem 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.92rem; }
+.app-lank a { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; font-weight: 600; }
+.app-lank-ikon { display: block; flex: none; width: 1.6rem; height: 1.6rem; border-radius: 0.4rem; overflow: hidden; box-shadow: 0 0 0 1px var(--farg-kant); }
+.app-lank-ikon svg { display: block; width: 100%; height: 100%; }
+@media (pointer: coarse) { .app-lank { display: block; } }
+
+/* Raden Hem överst, bara i appen (Base.astro): appen har ingen bakåtknapp i iPhone, så varje sida utom /app leder hem dit. */
+.app-hem { display: none; max-width: var(--matt-bredd); margin: 0 auto; padding: 0 1.25rem; font-family: var(--typsnitt-ui); background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); }
+.app-hem a { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.75rem; font-weight: 600; text-decoration: none; }
+.app-hem svg { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* I appen själv är Stöd, Metoder och appens sida en app (Niclas 2026-10-25: "över menyraden inte skulle visas i appen", och
+   2026-10-30: "De leder till sidorna utan text längst upp"): på deras sidor (data-appdel, Base.astro) göms sajtens menyrad och
+   sidfotens länkar ut ur appen, och på bankerna ingressen; namnet, mejlet och upphovet står kvar. En artikel eller bok har sin
+   meny. Varje sida utom /app har raden Hem, och länken till appen göms. I webbläsaren ser sajten ut som förut. */
+@media (display-mode: standalone) {
+  [data-appdel] .sidhuvud, .metodbank-ingress, [data-appdel] .sidfot .lankrad-lista, .app-lank { display: none; }
+  .app-hem { display: block; }
+}
 
 /* Lär dig metoden (K-628) */
 /* Lärarens väg genom en undervisningsmetod (src/components/LarDig.astro, src/scripts/lardig.ts): Planera insatsens form med

@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -147,8 +147,11 @@ for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13
 // Effektens skala: texten säger gränserna ur konstanten, och andra kolumnen börjar vid Cohens 0,2 (Niclas 2026-10-30).
 {
   const t = effektensSkala().text.join(' ');
-  for (const v of ['plats 54 vid 0,10', 'plats 58 vid 0,20', 'plats 66 vid 0,40', '0,05 en måttlig och 0,20 en stor', '0,20 måttlig och 0,40 stor', 'Kraft, 2020', 'Cheung och Slavin, 2016'])
+  for (const v of ['plats 54 vid 0,10', 'plats 58 vid 0,20', 'plats 66 vid 0,40', '0,05 en måttlig och 0,20 en stor', '0,20 måttlig och 0,40 stor'])
     if (!t.includes(v)) fel.push(`effektensSkala säger inte "${v}"`);
+  // Skalans källor står på en egen rad med hela referensen och doi, och inte som hänvisningar i texten (riggens punkt 19, K-645).
+  const kallor = effektensSkala().kallor ?? [];
+  if (/\(Kraft|Cheung/.test(t) || kallor.map((x) => x.namn).join('|') !== 'Kraft (2020)|Cheung och Slavin (2016)' || kallor.some((x) => !/^10\.\d{4}\//.test(x.doi) || !x.text.includes(x.namn.replace(/ \(\d{4}\)$/, '').split(' och ')[0]))) fel.push('effektensSkala har inte skalans två källor på en egen rad, Kraft (2020) och Cheung och Slavin (2016) med doi, och inga hänvisningar i texten');
   if ([0, 0.2, 0.4, 0.8, -0.2].map(platsenAv100).join() !== '50,58,66,79,42') fel.push('platsenAv100 ger inte 50, 58, 66, 79 och 42 för 0, 0,2, 0,4, 0,8 och −0,2');
   if (EFFEKTENS_GRANSER.andra.mattlig !== 0.2 || EFFEKTENS_GRANSER.stora.stor !== 0.2) fel.push('EFFEKTENS_GRANSER har inte gränserna 0,20 för måttlig i andra studier och 0,20 för stor i stora försök');
 }
@@ -205,6 +208,37 @@ for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13
   for (const v of ['kolon utan citattecken', 'fler än 80 tecken', 'frågetecken', 'inte är en rad i uppföljningen', 'i rad"', 'inget mål', 'hinder.kort har fler än 2 meningar', 'hinder.kort har fler än 220 tecken']) if (!f1.includes(v)) fel.push(`undervisningsmetodensFel fångar inte ${v}`);
   const utanKort = structuredClone(pilot); delete utanKort.hinder.kort;
   if (!undervisningsmetodensFel(utanKort).some((f) => f.startsWith('hinder.kort saknas'))) fel.push('undervisningsmetodensFel fångar inte en metod utan hinder.kort');
+  // Faktarutans material har högst sex delar, som sajtens schema, så att riggens leveransprov ser samma regel (K-645).
+  const sju = structuredClone(pilot); sju.material = [...pilot.material, ...Array.from({ length: FAKTANS_MATERIAL + 1 - pilot.material.length }, (_, i) => `del ${i}`)];
+  if (FAKTANS_MATERIAL !== 6 || !undervisningsmetodensFel(sju).some((f) => f.startsWith(`material har ${FAKTANS_MATERIAL + 1} delar`))) fel.push('undervisningsmetodensFel fångar inte faktarutans material med fler än sex delar');
+  // Filmernas namn: huvudfilmen och en för varje extrafilm (K-645: intaget tog förut bara två).
+  if (metodensFilmnamn({ film: {}, filmer: [{ nr: 2 }, { nr: 3 }] }).join() !== 'film,film2,film3' || metodensFilmnamn({}).length) fel.push('metodensFilmnamn ger inte film, film2 och film3');
+}
+// Primär evidens (K-645, riggens punkt 12): högst två av de fyra områdena med den högsta nivån, minst Visst stöd, och alla som
+// står helt lika i tillförlitligheten och effekten, så att ordningen aldrig väljer bort ett område.
+{
+  const v = (t, e) => ({ tillforlitlighet: t, effekt: e, motivering: 'x', kallor: ['a'] });
+  const ev = (lasning, skrivning, matematik, socialt) => ({ larande: v('hog', 'stor'), lasning, skrivning, matematik, amnen: v('hog', 'stor'), socialt });
+  const fall = [
+    [ev(v('mattlig', 'liten'), v('mattlig', 'mattlig'), v('mattlig', 'mattlig'), v('mattlig', 'mattlig')), 'Skrivning|Matematik|Socialt'],
+    [ev(v('lag', 'ingen'), v('mattlig', 'liten'), v('mattlig', 'mattlig'), v('lag', 'ingen')), 'Matematik'],
+    [ev(v('hog', 'mattlig'), v('mattlig', 'stor'), v('mattlig', 'mattlig'), v('mattlig', 'mattlig')), 'Läsning|Skrivning'],
+    [ev(v('lag', 'stor'), v('lag', 'stor'), v('mattlig', 'ingen'), { niva: 'inte-studerat', motivering: 'x' }), ''],
+  ];
+  for (const [e, vantat] of fall) if (primaraOmraden(e).join('|') !== vantat) fel.push(`primaraOmraden ger ${primaraOmraden(e).join(', ') || 'inget'}, inte ${vantat || 'inget'}`);
+  if (!PRIMARA_REGELN.includes('står alla')) fel.push('PRIMARA_REGELN säger inte att alla som står lika står');
+  if (!OMRADENAS_RAD.lasning.includes('engelska') || OMRADENAS_RAD.amnen !== 'SO, NO och teknik') fel.push('OMRADENAS_RAD säger inte att Läsning räknar engelska och moderna språk och Ämnen SO, NO och teknik');
+}
+// Slagens form och veckans rubrik (K-645): Första lektionen i ett lektionsförlopp och Den första hela lektionen i en metod med
+// strukturer, och veckan med sitt led.
+{
+  const l = forstaLektionensForm({ slag: 'lektionsforlopp', forsta: { rubrik: 'Första lektionen' } });
+  const s = forstaLektionensForm({ slag: 'strukturer', forsta: { rubrik: 'Första veckan' } });
+  if (l.minuterna !== 'Minuterna' || l.din !== 'din första lektion' || s.minuterna !== 'Den första hela lektionen' || !s.forlagan.startsWith('Den första hela lektionen, i grått') || /Det grå/.test(s.forlagan)) fel.push('forstaLektionensForm ger inte minuternas rubrik, lektionen i en mening och raden ovanför den grå planen för båda slagen');
+  if (forstaLektionensForm({ slag: 'okant' }).namn !== SLAGENS_FORM.lektionsforlopp.forstaLektionen) fel.push('forstaLektionensForm ger inte ett okänt slag ett lektionsförlopps form');
+  if (veckansRubrik({ vecka: '1', led: 'Klimatet', rubrik: 'Kamraten' }) !== 'Vecka 1, Klimatet: Kamraten' || veckansRubrik({ vecka: 2, rubrik: 'Paret' }) !== 'Vecka 2: Paret' || veckansRubrik({ vecka: '1', led: 'Jag gör', rubrik: 'Signalen' }, { vecka: false }) !== '1. Jag gör: Signalen') fel.push('veckansRubrik ger inte veckan med ledet, och utan ledet');
+  if (litenForsta('T-kortet') !== 'T-kortet' || litenForsta('EPA') !== 'EPA' || litenForsta('Signalen') !== 'signalen') fel.push('litenForsta gör T-kortet, EPA eller Signalen fel');
+  if (utanRadbrytning('Ping-pong-prat och 5 Återkoppling, 0–5 min och 3 · 4') !== 'Ping\u2011pong\u2011prat och 5\u00a0Återkoppling, 0–5 min och 3 · 4') fel.push('utanRadbrytning sätter inte hårda bindestreck och hårt mellanslag efter ett nummer, eller ändrar något annat');
 }
 if (UNDERVISNINGSMETODENS_DELAR.map((x) => x.nr).join('') !== '1234AB') fel.push('UNDERVISNINGSMETODENS_DELAR har inte delarna 1, 2, 3, 4, A och B i ordning');
 { const t = delarnasText(UNDERVISNINGSMETODENS_DELAR[1], { minuter: 40, amne: 'matematik', andra: 4 }); if (t.rad !== 'En lektion på 40 minuter, del för del.' || !t.text.includes('i matematik och i fyra andra ämnen')) fel.push(`delarnasText fyller inte i minuterna, ämnet och exemplen: ${t.rad} / ${t.text}`); }
@@ -263,6 +297,11 @@ if (larandetIKort({ kort: 'Kort.', motivering: 'Hög. Lång.' }) !== 'Kort.' || 
   const glider = del('veckorna', 'glider')?.rader ?? [];
   const komponenter = new Set(pilot.fallgropar.rader.filter((r) => r.komponent && r.prova).map((r) => r.komponent));
   if (glider.length !== komponenter.size) fel.push(`Om det glider har ${glider.length} rader, inte en per komponent (${komponenter.size})`);
+  // Fallgropen har komponentens nummer först, kärnans moment räknas upp och veckan har sitt led (riggens punkter 8–10, K-645).
+  if (glider.some((r) => !/^[1-5] /.test(r[0]))) fel.push('Om det glider har inte komponentens nummer före fallgropen');
+  if (del('metoden', 'karnan')?.kort.some((k) => / och .* och /.test(k.under))) fel.push('kärnans moment står med och mellan alla, inte med komma och och');
+  if (del('veckorna', 'progression')?.rader[0][0] !== veckansRubrik(pilot.progression.rader[0], { vecka: false })) fel.push('lathundens veckor har inte veckans rubrik med ledet');
+  if (del('mandag', 'forsta')?.rubrik !== pilot.forsta.rubrik) fel.push('lathundens andra sida har inte metodens rubrik på Första lektionen');
   const vagen = del('veckorna', 'med-dig')?.text ?? '';
   const vagensRader = MED_DIG_PA_VAGEN.map((id) => pilot.uppfoljning.rader.find((r) => r.id === id)?.vad).filter(Boolean);
   if (vagen !== vagensRader.join(' ')) fel.push('Med dig på vägen har inte uppföljningens rader i tidsordning');

@@ -1,0 +1,9 @@
+---
+// Beskedet överst i planens sidor, lika i Planera insatsen och Lär dig metoden (K-644): det som gäller hela sidan, som en plan
+// ur en länk, en webbläsare som inte sparar och webbläsarens besked, med sina knappar. Byggstenen notisen visar det, och
+// webblasarensRad ritar webbläsarens besked (src/scripts/byggstenar.ts).
+interface Props { id: string }
+const { id } = Astro.props;
+---
+
+<div class="pl-besked" id={id} hidden><p id={`${id}-text`} role="status"></p><p class="pl-andra-knappar" id={`${id}-knappar`} hidden></p></div>

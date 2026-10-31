@@ -1,0 +1,769 @@
+# Kooperativt lärande, en undervisningsmetod för helklass. Skriven 2026-10-30 ur methods/_mall-undervisningsmetod.yaml,
+# efter analysen (analys.md) och den andra analysen. Niclas material: Grundbok-repot och det digitala paketet
+# (intake/kooperativt-larande.md). Förlagan Explicit undervisning är läst för form och ton.
+
+titel: Kooperativt lärande
+undertitel: Så lär du klassen att lära av varandra, F–⁠9
+alternativaNamn: ["Samarbetslärande"]
+ingress: "Eleverna lär sig ämnet i par och små grupper, där alla behövs och var och en kan visa vad hen har lärt sig. Du lär ut samarbetet lika medvetet som ämnet: du visar en färdighet, följer hur paren använder den och säger vad du såg."
+arskurs: ["F-3", "4-6", "7-9"]
+arskursText: F–9
+taggar: ["kooperativt-larande", "socialt-samspel", "tillganglig-undervisning"]
+slag: strukturer
+syfte: [samarbeta, tanka]
+tid: 45 minuter per lektion, minst tre lektioner i veckan
+hurOftaSkal: "I den svenska studien arbetade de flesta klasserna kooperativt tre till fyra lektioner i veckan i 15 veckor (Klang m.fl., 2020). Minst tre i veckan ger rutinerna tid att sitta."
+period: Fem veckor att komma igång
+material:
+  - T-kortet
+  - symbolerna till bordsöarna
+  - fraserna att låna
+  - minitavlor och pennor
+  - lappar till stödorden
+  - en skål med de fyra symbolerna
+uppdaterad: 2026-10-30
+publicerad: 2026-10-30
+relaterade: ["gruppstarkande-aktiviteter", "hoglasning-i-par", "texttyper-i-grupp"]
+utkast: false
+film:
+  sekunder: 28.66
+  beskrivning: "Läraren visar veckans färdighet med T-kortets öga och öra. Paren studsar ord om insekter i Ping-pong-prat, alla par samtidigt, och läraren går mellan dem och säger vad hen hör. Sedan drar läraren en symbol ur skålen, alla med symbolen ställer sig upp, och en säger ordet paret valde."
+  rubrik: "Så leder läraren samarbetet: färdigheten, paren och symbolen"
+  ingress: "Filmen visar en lektion i NO, där paren studsar ord om insekter i Ping-pong-prat. Läraren visar färdigheten, lyssnar efter den och slumpar vem som svarar för gruppen."
+  stillbilder:
+    - text: "Läraren visar veckans färdighet med T-kortet."
+    - text: "Paren studsar ord, och alla par arbetar samtidigt."
+    - text: "Läraren går mellan paren och säger vad hen hör."
+    - text: "En triangel står upp och säger ordet paret valde."
+filmer:
+  - nr: 2
+    titel: "Turas om i paret"
+    sekunder: 28.2
+    beskrivning: "Läraren visar de två rollerna. Läraren säger: ”Den ena löser och tänker högt.” Läraren säger: ”Den andra hjälper utan att säga svaret.” Cirkeln säger: ”Tre och fyra. Sju.” Stjärnan säger: ”Prova att lägga upp det.” Cirkeln säger: ”Tre grupper med fyra. Tolv!” Stjärnan säger: ”Min tur. Två grupper med tre.” Cirkeln frågar: ”Kan du visa ett sätt till?” Stjärnan säger: ”Tre och tre. Sex.” Paret kollar att båda kan förklara. Cirkeln frågar: ”Kan du förklara 3 · 4 på två sätt?” Stjärnan säger: ”Tre grupper med fyra. Och 4 + 4 + 4.”"
+    rubrik: "Turas om i paret"
+    ingress: "I en lektion i matematik i åk 3 löser den ena och tänker högt, och kompisen hjälper utan att säga svaret. Sedan byter de, och paret kollar att båda kan förklara."
+    efter: "steg 3"
+    stillbilder:
+      - text: "Läraren ger uppgiften och visar de två rollerna."
+      - text: "Cirkeln säger 7. Stjärnan hjälper utan svaret."
+      - text: "Paret byter roller vid nästa uppgift."
+      - text: "Paret kollar att båda kan förklara."
+  - nr: 3
+    titel: "Var och en visar"
+    sekunder: 27.39
+    beskrivning: "Paren gör alla redo på en minut. Läraren säger: ”Ni har en minut att göra alla redo.” Stjärnan frågar: ”Hur tänkte du?” Läraren drar en symbol ur skålen. Läraren säger: ”Alla trianglar, ställ er upp. Vad kom ni fram till?” En triangel säger: ”Vi tänker tre grupper med fyra. Tolv.” Läraren säger: ”Nu gör alla 2 · 5 själva. Håll upp!” Alla håller upp sin egen uppgift. Läraren räknar: 8 av 27 har fel. Läraren säger: ”Jämför 2 + 5 och 5 + 5 med din kompis.”"
+    rubrik: "Var och en visar: läraren ser om klassen är redo"
+    ingress: "I samma lektion i matematik i åk 3 gör paren alla redo, och läraren drar en symbol ur skålen. Sedan gör alla en egen uppgift och håller upp den, och läraren räknar eleverna med fel och väljer vad klassen gör."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Paren gör alla redo på en minut."
+      - text: "Läraren drar triangeln, och en triangel förklarar."
+      - text: "Alla håller upp, och läraren räknar eleverna med fel."
+      - text: "De flesta kan. Paren jämför 2 + 5 och 5 + 5."
+
+profil:
+  evidens:
+    larande:    { tillforlitlighet: mattlig, effekt: stor, kort: "Elever lär sig mer i grupp med gemensamma mål, mest prövat i åk 6–⁠9.", motivering: "Måttlig tillförlitlighet, stor effekt. Elever i åk 6–⁠9 som arbetade i grupp mot gemensamma mål lärde sig mer än med tävling eller eget arbete, i en översikt av 148 studier som inte skiljer ut eget ansvar (Roseth m.fl., 2008).", kallor: [roseth-m-fl-2008] }
+    lasning:    { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. Läsprogram med kooperativt lärande, mest CIRC i åk 2–⁠5, gav 0,21 i tio studier, men i den svenska studien i åk 5 blev läsförståelsen inte säkert bättre (Slavin, Lake, Chambers m.fl., 2009; Klang m.fl., 2022).", kallor: [slavin-lake-chambers-m-fl-2009, klang-m-fl-2022] }
+    skrivning:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Skrivprogram där eleverna i åk 3–⁠8 skriver i lag gav bättre texter, främst Student Team Writing med 0,38 i åk 6–⁠8, men i de två stora försöken av Writing Wings var skillnaden mindre (Slavin m.fl., 2019).", kallor: [slavin-m-fl-2019] }
+    matematik:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. STAD gav 0,42 i fyra studier från åk 6 till gymnasiet, och 0,21 i ett stort försök med 588 elever i 26 skolor (Slavin, Lake och Groff, 2009).", kallor: [slavin-lake-och-groff-2009] }
+    amnen:      { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Träning i grupparbete gav 0,21 i NO för 8–10-åringar i England (Baines m.fl., 2007; Slavin m.fl., 2014).", kallor: [slavin-m-fl-2014, baines-m-fl-2007] }
+    socialt:    { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Kamratrelationerna blev bättre i åk 6–⁠9 med gemensamma mål i grupp än i tävling eller eget arbete (Roseth m.fl., 2008), och elever med lågt engagemang sa att de mobbades mindre (Van Ryzin och Roseth, 2018).", kallor: [roseth-m-fl-2008, van-ryzin-och-roseth-2018, klang-m-fl-2020] }
+  svarighet: { lara: 4, karnan: 3, stod: 4, tid: 4, motivering: "Du ändrar hur du leder samarbetet, och klassen lär sig ett nytt sätt att arbeta. Det tar en termin eller mer med kollegor, och en kollega ser när eget ansvar eller reflektionen saknas." }
+  kostnad:   { kop: 2, timmar: 14, motivering: "Skolan har kort och kopior. Omkring 14 timmar första läsåret går till läsningen, två möten, sex samtal efter besök och en timmes extra planering i veckan de fem första veckorna. Besökarens tid räknas inte." }
+  urval:
+    datum: 2026-10-30
+    regel: "Insatser räknas när eleverna i vanliga klasser arbetar i par eller små grupper mot ett gemensamt mål där alla behövs, med eget ansvar, i ett upplägg som läraren leder: Learning Together, STAD och CIRC, Kagans strukturer, Pussel med gruppmål, Complex Instruction och SPRinG. Räknas inte: grupparbete utan gruppmål eller eget ansvar, som CSR och Pussel utan gruppmål, kamratlärande med fasta roller, samarbete på nätet och i högskolan och översikter av metaanalyser."
+    text: "Sökningen började i Niclas bok Grundbok i kooperativt lärande och gick sedan till sammanställningar, stora försök och studier utan effekt. Bara insatser med gemensamt mål och eget ansvar räknas. Femton källor valdes, och fyra valdes bort. Niclas Fohlin är medförfattare till en av de femton, Klang m.fl. (2020)."
+    slutsatser:
+      oversikt: "Elever lär sig mer med gemensamma mål, och kamratrelationerna blir bättre i samma undervisning (Roseth m.fl., 2008). Med oberoende prov blir talen mindre. De är störst i matematik (Slavin, Lake och Groff, 2009) och skrivning (Slavin m.fl., 2019), och mindre i NO (Slavin m.fl., 2014) och läsning (Slavin, Lake, Chambers m.fl., 2009)."
+      experiment: "I de stora försöken syns både det sociala och lärandet. Elever med lågt engagemang sa att de mobbades mindre (Van Ryzin och Roseth, 2018), och den sociala acceptansen i åk 5 blev något bättre (Klang m.fl., 2020). I ett randomiserat försök i åk 6 läste eleverna bättre. De arbetade i lag med gemensamma mål, och läraren slumpade fram den som svarade för laget (Slavin, Chamberlain m.fl., 2009). Träning i grupparbete gav bättre resultat i NO (Baines m.fl., 2007), men i den svenska studien blev läsförståelsen inte säkert bättre (Klang m.fl., 2022)."
+      annan: "Villkoren för att samarbetet ska ge resultat är gruppmål och eget ansvar (Slavin, 1991), och de fem grundelementen bygger på teorin om ömsesidigt beroende (Johnson och Johnson, 2009). Lärarens tal blir elevernas modell (Webb, 2009), och lärarna som genomförde arbetssättet bäst lärde ut färdigheterna (Veldman m.fl., 2020). Av trettio lektioner som lärare kallade kooperativa hade bara två alla de fyra kännetecken som forskarna mätte (Adl-Amini m.fl., 2024)."
+    uteslutna:
+      - { namn: "Güngör m.fl. (2026)", skal: "Översikt av metaanalyser, som standarden inte räknar" }
+      - { namn: "Cheung m.fl. (2021)", skal: "Ett program, Success for All, där gruppmål och eget ansvar inte beskrivs" }
+      - { namn: "Tenenbaum m.fl. (2020)", skal: "Kamratinteraktion i vid mening, mest uppgifter i labb" }
+      - { namn: "Hattie (2009)", skal: "Översikt av metaanalyser, bara pekare" }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 1 Metoden
+# ---------------------------------------------------------------------------------------------------------------------
+inledning:
+  - "I kooperativt lärande lär sig eleverna ämnet i par och små grupper. Alla behövs för ett gemensamt mål, och var och en ska kunna visa vad hen har lärt sig. Du lär ut hur man samarbetar, lika medvetet som du lär ut ämnet, eftersom grupper och färdiga strukturer inte räcker på egen hand."
+  - I klassrummet sitter eleverna vid bordsöar om fyra, med var sin symbol, och paren är axelkompisar bredvid eller ögonkompisar mitt emot. På väggen hänger veckans T-kort, som visar hur färdigheten ser ut och låter. Du går igenom innehållet, och sedan arbetar paren i en struktur, ett fast mönster där alla får en tur, medan du går mellan dem och lyssnar. Efter samarbetet gör paret eller bordsön alla redo att svara. Du drar en symbol ur en skål, alla med den symbolen ställer sig upp, och en eller två förklarar gruppens svar. Sedan gör alla en egen uppgift.
+  - Lärandet går till så här. När eleverna förklarar för varandra hör både de själva och du hur de tänker. När målet kräver båda och vem som helst kan få visa, lönar det sig för paret att förklara tills båda kan. Då kommer också de som annars är tysta till tals. Eleverna lär sig att deras tankar kan hjälpa en kamrat framåt, och klassen går från ett jag till ett vi.
+  - "De första veckorna lär sig klassen en färdighet och en struktur i taget, och du övar ett drag i veckan, som att ge tanketid eller att slumpa på riktigt. Strukturerna är en enkel väg in: eleverna får mer tid att tänka och prata, och du lär dig att ordna hur de arbetar tillsammans. Den första veckan gör ni två eller tre korta samarbeten med kamraten och T-kortet, och den första hela lektionen kommer i vecka 2 eller 3. Sedan kommer samtalet, paret och bordsön, och sist gruppens namn och kontrakt. Efter de första veckorna samarbetar klassen oftast i korta moment i ämnets lektioner, och du väljer strukturen efter uppgiften. Läs del 1 till 3 och Det svåraste i del 4 innan du börjar."
+karna:
+  rubrik: "Kärnan: fast och fritt"
+  text: "Kärnan är de fem grundprinciperna i Grundbok i kooperativt lärande: samarbetsfärdigheter, positivt ömsesidigt beroende, eget ansvar, delaktighet och stödjande interaktion, och sist återkoppling och reflektion. Principerna bygger på grundelementen hos Johnson och Johnson (2009). Två av dem, ett mål som kräver alla och eget ansvar, finns i varje beskrivning av kooperativt lärande och är prövade för sig (Slavin, 1991). Färdigheterna och reflektionen är det du lär ut och leder. Strukturen är formen som ger alla en tur, och den väljer du fritt."
+  grundregel: De fem principerna är kärnan, och dem håller du fast vid i varje samarbete. Strukturen, ämnet, paren, grupperna och materialet väljer du själv.
+  varv: Du visar färdigheten, ger paret ett mål som kräver båda, lyssnar, låter var och en visa och säger vad du såg.
+  komponenter:
+    - namn: Samarbetsfärdigheter
+      moment: [Start, Samarbetet, Avslut]
+      vad: "Du lär ut en färdighet i taget: du visar hur den ser ut och låter, och klassen övar den."
+      syns: Eleverna använder veckans färdighet i ord och handling, som att vända sig mot kamraten och fråga hur hen tänkte.
+      varfor: "Utan färdigheten talar eleverna i munnen på varandra eller inte alls. Studier visar att grupper som hade tränat samarbete fick bättre resultat i NO (Baines m.fl., 2007), och lärarna som genomförde arbetssättet bäst lärde ut färdigheterna (Veldman m.fl., 2020)."
+      belagg: provad
+      kallor: [baines-m-fl-2007, veldman-m-fl-2020]
+      kvar: En färdighet i taget, som klassen ser, hör och övar i ämnets uppgifter.
+      fritt: "Vilken färdighet och hur länge, T-kort eller Y-kort med hjärtat, fraser eller ett foto av ett par, och om klassen väljer färdigheten."
+      kryss: Jag visade färdigheten, och klassen övade den.
+    - namn: Positivt ömsesidigt beroende
+      moment: [Genomgång, Samarbetet]
+      vad: Paret eller gruppen har ett mål som de når först när alla kan, och de behöver varandra för det.
+      syns: "Paret arbetar mot målet läraren har sagt, som ”Ni är klara när båda kan förklara …”, och kollar att båda kan innan de säger att de är klara."
+      varfor: "Med egna mål arbetar eleverna bredvid varandra, eller så gör den snabbaste uppgiften. Studier visar att elever med gemensamma mål lärde sig mer än med tävling eller eget arbete (Roseth m.fl., 2008), och mest när målet är att var och en lär sig (Slavin, 1991)."
+      belagg: provad
+      kallor: [roseth-m-fl-2008, slavin-1991]
+      kvar: Alla i paret eller gruppen behöver varandra för att nå målet.
+      fritt: "Målets ord, roller, ett delat material eller delad information, gruppens namn, och om målet gäller paret, bordsön eller klassen."
+      kryss: Jag gav ett gemensamt mål som krävde alla.
+    - namn: Eget ansvar
+      moment: [Genomgång, Var och en visar]
+      vad: "Vem som helst kan få förklara gruppens svar, och sedan gör varje elev en egen uppgift."
+      syns: De elever läraren slumpar fram förklarar gruppens svar med egna ord, och varje elev gör en egen uppgift där det syns hur hen tänkte.
+      varfor: "Utan eget ansvar är det den som redan kan som gör arbetet, och de andra vilar. Studier visar att 37 av 44 jämförelser med gruppmål och eget ansvar var positiva, mot 4 av 23 utan dem (Slavin, 1991)."
+      belagg: provad
+      kallor: [slavin-1991, adl-amini-m-fl-2024]
+      kvar: Eleverna vet i förväg att var och en kan få visa, och det händer i lektionen.
+      fritt: "Hur du väljer den som förklarar gruppens svar, som symbolen eller ett nummer, och hur var och en visar själv: en egen uppgift, redovisning för en ny kamrat eller en egen förklaring i ord eller bild."
+      kryss: Jag sa hur var och en visar, och alla visade.
+    - namn: Delaktighet och stödjande interaktion
+      moment: [Samarbetet]
+      vad: Alla tänker först själva och deltar sedan samtidigt och på lika villkor. Strukturen ger alla en tur.
+      syns: Var och en i paret bidrar med något eget, i ord, med en bild eller genom att peka, och bygger vidare på kamratens bidrag. Alla par arbetar samtidigt.
+      varfor: "När en elev i taget svarar i helklass kan de andra sluta lyssna, och du ser inte vad alla tänker. Principen vilar på att eleverna lär sig mer när de förklarar och bygger vidare på varandras tankar än när de bara får ett svar (Webb, 2009)."
+      belagg: teori
+      kallor: [webb-2009]
+      kvar: Alla har tänkt själva, och i paret eller gruppen hoppas ingen över.
+      fritt: "Strukturen, par eller bordsö, tanketidens längd, vem som börjar, att visa, rita eller peka i stället för att tala, och att låna kamratens tanke när man inte har någon egen."
+      kryss: Jag gav alla tanketid och en tur.
+    - namn: Återkoppling och reflektion
+      moment: [Samarbetet, Avslut]
+      vad: "Paret eller gruppen reflekterar, och du ger återkoppling: du säger konkret vad du såg och hörde."
+      syns: "Paret säger med T-kortets ord vad som hjälpte dem att lära sig och en sak de ska göra bättre, och läraren säger vad hen såg hos klassen, gruppen eller en elev."
+      varfor: "Eleverna ser sällan vad de själva gör i gruppen, och det de inte ser kan de inte ändra. I ett litet försök fick några grupper tala om hur de hade arbetat, och de lärde sig mer än de andra (Johnson och Johnson, 2009). Allmänna frågor som ”Går det bra?” ändrade inget (Webb, 2009)."
+      belagg: provad
+      kallor: [johnson-och-johnson-2009, webb-2009]
+      kvar: Paret eller gruppen säger varje lektion vad som hjälpte och en sak att göra bättre, och du återkopplar medan de arbetar.
+      fritt: "När reflektionen kommer, mitt i eller sist, formen, som tummen med ett skäl, två stjärnor och en önskan eller loggboken, och om en elev observerar."
+      kryss: Paren reflekterade, och jag sa konkret vad jag såg.
+roll:
+  rubrik: "Lärarens roll: modellen för samarbetet"
+  text: Du visar färdigheten med kropp och röst, följer hur eleverna använder den och säger till klassen, gruppen och den enskilda eleven vad du såg.
+  fragor:
+    - Vad ser och hör jag när de använder färdigheten?
+    - Behöver de varandra, och kan var och en förklara?
+    - "Vem säger jag det till nu: klassen, gruppen eller en elev?"
+  fragornaText: "Till en elev kan du säga: ”Jag ser att du väntade och tittade på din kompis när hen pratade”, och till klassen: ”Jag hör att ni tackar efter samtalet.”"
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 2 Lektionen
+# ---------------------------------------------------------------------------------------------------------------------
+tidsschema:
+  rubrik: En lektion på 45 minuter
+  rader:
+    - { tid: Före lektionen, fas: Före lektionen, vad: "Välj strukturen och fatta fyra beslut: färdigheten, målet, hur var och en visar och frågan till reflektionen. Kan en elev lösa uppgiften ensam? Ändra den då." }
+    - { tid: 0–⁠5 min, fas: Start, form: I par, vad: "Paren vänder sig mot varandra och hälsar, och du visar veckans färdighet med T-kortet: hur den ser ut och hur den låter." }
+    - { tid: 5–⁠15 min, fas: Genomgång, form: Läraren visar, vad: "Du går igenom innehållet, visar strukturen med en elev och säger målet och hur var och en kommer att visa." }
+    - { tid: 15–⁠32 min, fas: Samarbetet, form: I par, vad: "Alla tänker först, och sedan arbetar paren i strukturen medan du går mellan dem, lyssnar efter färdigheten och felet och säger vad du hör." }
+    - { tid: 32–⁠40 min, fas: Var och en visar, form: Enskilt, vad: "Paret, från vecka 4 bordsön, gör alla redo. Du drar en symbol, och en eller två svarar för gruppen. Sedan gör alla en egen uppgift och håller upp den." }
+    - { tid: 40–⁠45 min, fas: Avslut, form: I par, vad: "Paren säger vad som hjälpte dem att lära sig och en sak de ska göra bättre. Sedan tackar de varandra, och du säger vad du såg." }
+    - { tid: Efter lektionen, fas: Efter lektionen, vad: "Sortera de egna uppgifterna i kan, nästan och inte än, och läs dina anteckningar om färdigheten och felet. Välj utifrån dem vad nästa samarbete börjar med och vem du går till först." }
+  varianter:
+    - nar: första lektionen
+      text: "Den första hela lektionen, i vecka 2 eller 3, har ett innehåll klassen kan."
+      delar:
+        - { fas: Start, tid: 0–⁠5 min }
+        - { fas: Genomgång, tid: 5–⁠15 min }
+        - { fas: Samarbetet, tid: 15–⁠32 min }
+        - { fas: Var och en visar, tid: 32–⁠40 min }
+        - { fas: Avslut, tid: 40–⁠45 min }
+    - nar: ett samarbete i en vanlig lektion
+      text: "Samarbetet tar tio minuter av ämnets lektion. I Start säger du färdigheten, målet och hur var och en visar. Du drar en symbol och frågar en elev med den. Den egna uppgiften är den uppgift eleverna sedan gör själva i lektionen. Börja nästa samarbete med att säga vad eleverna kunde i den."
+      delar:
+        - { fas: Start, tid: 0–⁠2 min }
+        - { fas: Samarbetet, tid: 2–⁠6 min }
+        - { fas: Var och en visar, tid: 6–⁠8 min }
+        - { fas: Avslut, tid: 8–⁠10 min }
+  efter: Minuterna är hållpunkter. Turas om fyller hela samarbetet, och med en kort struktur, som Ping-pong-prat, gör paren först strukturen och sedan en uppgift mot målet.
+steg:
+  rader:
+    - namn: Start
+      fraga: "Sitter alla nära och vända mot kamraten?"
+      alla: Varje par säger frasen under örat på T-kortet till varandra.
+      titta: "Sitter alla nära och vända mot kamraten?"
+      beslut: "Sitter några långt ifrån: be dem flytta närmare innan ni börjar."
+      gor:
+        - "Ge signalen, och säg: ”Vänd er mot er kompis och säg hej med namnet.”"
+        - "Peka på ögat och örat på T-kortet: ”Jag vill se … Jag vill höra …”"
+        - Visa färdigheten med kropp och röst tillsammans med en elev, och låt paren säga frasen till varandra.
+      fraser: ["Vänd er mot er kompis och säg hej med namnet.", "Jag vill se … Jag vill höra …"]
+    - namn: Genomgång
+      fraga: "Vet varje par vad de ska göra och vem som börjar?"
+      alla: Varje par säger till varandra vad de ska göra först.
+      titta: "Vet varje par vad de ska göra och vem som börjar?"
+      beslut: "Är flera osäkra: låt ett par visa stegen för klassen innan ni börjar."
+      gor:
+        - Gå igenom innehållet kort, med ett exempel på det nya, så att paren har något att tänka tillsammans om.
+        - Visa strukturens steg med en elev, och säg högt vad du gör.
+        - "Skriv målet på tavlan: ”Ni är klara när båda kan förklara …”"
+        - "Säg hur var och en visar: ”Sedan drar jag en symbol ur skålen.”"
+      fraser: ["Ni är klara när båda kan förklara …", "Sedan drar jag en symbol ur skålen."]
+    - namn: Samarbetet
+      vem: "i par, bordsön i vecka 4–⁠5"
+      fraga: "Säger båda något eget, och hör jag felet?"
+      alla: Båda i paret talar om innehållet och gör det som står på T-kortet.
+      titta: "Säger båda något eget, och tar de upp det kamraten sa?"
+      beslut: "Ett par fastnar: fråga paret först, som i Så stöttar du. Samma fel i flera par: stoppa klassen och visa igen."
+      gor:
+        - "”Tänk själv en stund. Tummen upp när du har något.”"
+        - Ta inga frågor de första tjugo sekunderna efter instruktionen, och peka mot kompisen när någon frågar dig.
+        - "Gå först till dem som hade fel förra gången, sedan mellan paren. Anteckna färdigheten, felet och något intressant ur innehållet."
+        - "Säg vad du hör med T-kortets ord: ”Jag hör att ni frågar varandra: Hur tänkte du?”"
+        - "Stoppa halvvägs och fråga om färdigheten: ”Kan vi se och höra att den används? Kan båda förklara? Viska till varandra.”"
+      fraser: ["Tänk själv en stund.", "Jag hör att ni frågar varandra: Hur tänkte du?"]
+    - namn: Var och en visar
+      fraga: "Kan var och en göra det själv?"
+      alla: En eller två med symbolen förklarar gruppens svar, och alla håller upp sin egen uppgift.
+      titta: "Kan de du frågar förklara, och syns hur alla tänkte?"
+      beslut: Ett av tre utfall, nedan.
+      gor:
+        - "”Ni har en minut att göra alla redo. Skriv eller rita tre stödord på lappen, gärna ämnets ord.”"
+        - Dra en symbol ur skålen och ge grupperna en stund till, så att svaret blir gruppens.
+        - "”Alla trianglar, ställ er upp.” Fråga en eller två: ”Vad kom ni fram till?”"
+        - Ge en ny uppgift av samma slag, där felet du lyssnar efter syns. Var och en gör den själv.
+        - På ditt ”Håll upp!” visar alla sin minitavla, och du skriver upp dem som inte kan.
+      fraser: ["Ni har en minut att göra alla redo.", "Alla trianglar, ställ er upp."]
+      redo:
+        nastanAlla: Högst 5 av 28 med fel. Gå till Avslutet. I nästa samarbete sätter du dig först med dem som inte kunde.
+        deFlesta: 6–13 av 28 med fel. Paren visar varandra sina lösningar och förklarar, och du lyfter ett vanligt missförstånd.
+        halften: 14 eller fler av 28 med fel. Stanna och visa igen, och låt paren göra en uppgift till tillsammans.
+        tiden: "Räcker tiden inte: korta Avslutet till tacket, och låt paren börja nästa samarbete med samma slags uppgift. Gå först till dem som hade fel."
+    - namn: Avslut
+      fraga: "Kan paren säga vad som hjälpte dem att lära sig?"
+      alla: Varje par säger med T-kortets ord vad som hjälpte och vad de gör bättre. Sedan tackar de varandra.
+      titta: "Säger paren vad de gjorde, eller bara att det gick bra?"
+      beslut: "Säger de bara att det gick bra, fråga om färdigheten: ”Kan vi se och höra att den används?” Nästa gång säger du reflektionens fråga innan paren börjar."
+      gor:
+        - "”Vad gjorde ni bra så att ni lärde er mer? Vad kan ni göra bättre nästa gång? Viska till varandra.”"
+        - "Säg vad du såg och hörde, om innehållet och om färdigheten: ”Jag hörde … och i den egna uppgiften kunde båda …”"
+        - "Säg vad du vill se och höra mer av nästa gång: ”Jag vill höra fler …”"
+        - "”Tacka din kompis för något bestämt hen gjorde.”"
+      fraser: ["Vad gjorde ni bra så att ni lärde er mer?", "Tacka din kompis för något bestämt hen gjorde."]
+lektionskort:
+  - { efter: klassen, text: "Lektionen står på lektionskortet, och strukturerna står på egna A4 i Materialet. Slutar strukturen med att du drar en symbol, är det dragningen i Var och en visar, och du drar bara en gång." }
+fastnar:
+  rubrik: Så stöttar du
+  text: När ett par fastnar, i innehållet eller i samarbetet, lyssnar du först och frågar hela paret. Ansvaret för att båda förstår ligger kvar hos paret.
+  trappa:
+    - "Lyssna i ögonhöjd: ”Vad gör ni nu? Hur tänkte ni?”"
+    - "Ge paret ansvaret: ”Hur kan ni se till att båda förstår?”"
+    - "Ge dem en kort stund att hitta en väg, och kom tillbaka. Står de still, visa ett första steg."
+    - "Har flera par samma problem, stoppa klassen, visa igen och låt dem fortsätta."
+  motto: Du hjälper paret att hjälpa varandra. Målet är deras.
+amnesexempel:
+  - amne: lasning
+    arskurs: åk 5
+    innehall: "Läsförståelse: att dra slutsatser om en person i en berättelse"
+    overst:
+      egen: "Frågan har många svar: Varför gör hon så? Felet: att svara med en händelse i stället för ett skäl."
+      visar: Två med symbolen säger gruppens skäl ur texten, och alla skriver ett skäl till en ny fråga på minitavlan.
+    scen:
+      - Tänk dig en lektion i svenska i åk 5. Klassen har läst kapitel fyra i högläsningsboken, där huvudpersonen ljuger för sin bästa vän. Veckans färdighet är att kolla att alla kan, och på T-kortet står ”Kan du säga det?”
+      - "Du frågar: ”Varför ljuger hon, tror ni?” Alla tänker en halv minut, och du säger: ”Huvuden ihop!” Vid ett bord hör du: ”Hon vill inte att vännen ska bli ledsen.” ”Hur vet du det?” ”Hon säger ju att hon är rädd att förlora henne.”"
+      - "Efter en minut drar du stjärnan ur skålen, och grupperna får en stund till att göra sin stjärna redo. Alla stjärnor ställer sig upp, och två av dem tittar på stödorden och säger skälet med egna ord. Sedan frågar du: ”Varför går vännen därifrån?” Alla skriver ett skäl ur texten på sin minitavla och håller upp den. Två av 27 skriver bara vad som händer. Nästan alla kan, och i nästa samarbete sätter du dig först med de två."
+    notera: Notera vad som hände. Stödorden på lappen gjorde att de du frågade kunde svara. Hade hälften skrivit en händelse utan skäl, hade du visat skillnaden med ett eget exempel och låtit grupperna försöka igen.
+  - amne: skrivning
+    arskurs: åk 2
+    innehall: Att skriva en kort text om ett tema, med ord man har samlat
+    overst:
+      egen: "Ord om hur något ser ut, låter och känns. Felet: att bara säga ord för saker, som löv och svamp."
+      visar: Paren säger ord i tur och ordning, och alla skriver en mening med ett ord ur samtalet.
+    scen:
+      - Tänk dig en lektion i svenska i åk 2. Klassen ska skriva om höstskogen, och veckans färdighet är att vänta på sin tur.
+      - "Du visar en bild av skogen och säger: ”Vi letar ord för hur det ser ut, låter och känns. Ni är klara när båda har ett sådant ord.” Alla tänker en stund, och sedan gör paren en high five och börjar: ”Löv.” ”Prassel.” ”Svamp.” ”Blött.” Den som inte kommer på något säger pass, och kompisen fortsätter. Efter två minuter bryter du."
+      - "Du drar en symbol, och två elever med den säger ett ord paret tyckte om. Sedan skriver alla var sin mening med ett ord ur samtalet för hur det låter eller känns, och kompisen läser den. Du går längs borden och läser: 10 av 26 har bara ord för saker. De flesta kan. Du visar hur ”löv” kan bli ”löven prasslar”, och var och en skriver om sin mening med kompisens hjälp."
+    notera: Notera vad som hände. Ping-pong-prat gav alla ord att skriva med. Hade hälften eller fler bara haft ord för saker, hade du stannat och samlat ord för ljud och känsla på tavlan med klassen.
+  - amne: matematik
+    arskurs: åk 3
+    innehall: Multiplikation som lika stora grupper och som upprepad addition
+    huvud: true
+    arbetsomradet:
+      - "Lektion 1–⁠2: lika stora grupper med material, och upprepad addition"
+      - "Lektion 3–⁠4: multiplikationstecknet, 3 · 4 som tre grupper med fyra"
+      - "Lektion 5–⁠6: tvåans, femmans och tians tabell, med bild och tal"
+      - "Lektion 7–⁠8: textuppgifter där eleverna väljer räknesätt"
+    overst:
+      egen: "Tre grupper med fyra är 3 · 4 och 4 + 4 + 4. Felet: att addera talen, så att 3 · 4 blir 7."
+      visar: Paret förklarar med ”Jag tänker … därför att …”, och alla visar den egna uppgiften med en bild och ett tal.
+    plan:
+      klass: 3B
+      datum: ons 18/11
+      lektion: 3 av 8
+      mal: förklara multiplikation som lika stora grupper och som upprepad addition
+      belagg: 2 · 5 med bild och tal på minitavlan
+      blad: ett uppgiftsblad per par, minitavlor och facit
+      forberett: material att bygga med, och en trygg kamrat till den som behöver det
+      fore: { fardigheten: "Hjälpa utan att säga svaret", ogat: "pekar på materialet och väntar", orat: "Hur tänkte du? Prova att lägga upp det.", strukturen: "Turas om", malet: "båda kan förklara 3 · 4 på två sätt", visar: "en symbol och den egna uppgiften", felet: "adderar talen, så att 3 · 4 blir 7" }
+      delar:
+        - { fas: Start, text: "Visa färdigheten med en elev: peka, vänta och fråga" }
+        - { fas: Genomgång, text: "2 · 4 som två grupper med fyra, med material, och som 4 + 4" }
+        - { fas: Samarbetet, text: "3 · 4, 2 · 3, 3 · 3 och 2 · 6, varannan var. Stopp efter två uppgifter, i alla par" }
+        - { fas: Var och en visar, text: "En symbol, två svarar. 2 · 5 med bild och tal" }
+        - { fas: Avslut, text: "Vad gjorde ni bra så att ni lärde er mer?" }
+      beslut: { elever: 27, nastanAlla: "dem som skrev 7", deFlesta: ["att addera talen", "2 + 5 med 5 + 5"], halften: "tre grupper med fyra, med materialet" }
+      efter: { kontrollen: "8 med fel", hogar: "Kan 19 · Nästan 5 · Inte än 3", sag: "”Hur tänkte du?” vid sex bord", kryss: [1, 2, 3, 4, 5], nasta: "3 · 5 och 4 · 2", forst: "bord 2 och 6" }
+      lagg: ["Lägg märke till: målet kräver två sätt, så att paret inte kan klara uppgiften med ett svar."]
+    remsa:
+      - Färdigheten att hjälpa utan att säga svaret visades med kropp och röst, och T-kortet hängde uppe.
+      - Målet var att båda kunde förklara 3 · 4 på två sätt, med ett blad mellan dem.
+      - Du drog en symbol, och två svarade. Alla gjorde 2 · 5 själva på minitavlan.
+      - "Paren turades om: en löste och tänkte högt, en stöttade, och sedan bytte de."
+      - Du sa vad du hörde, och paren sa vad som hjälpte dem att lära sig.
+    scen:
+      - Tänk dig lektion 3 av 8 i matematik i åk 3. Det är vecka 3, och i dag kommer multiplikationstecknet. Veckans färdighet är att hjälpa utan att säga svaret.
+      - "Du visar 2 · 4 som två grupper med fyra och som 4 + 4. Du visar rollerna med en elev: hen bygger, och du pekar, väntar och frågar: ”Hur tänkte du?” På tavlan står målet: ”Ni är klara när båda kan förklara 3 · 4 på två sätt.” Paren turas om. Vid ett bord säger en elev: ”Jag lägger tre grupper med fyra. Då blir det 4 + 4 + 4, tolv.”"
+      - "I ett par säger en elev 7. Kamraten säger inte svaret: ”Prova att lägga upp det.” Du stoppar halvvägs och låter paren viska om färdigheten."
+      - "Paren gör alla redo. Du drar triangeln, och två trianglar förklarar. Sedan gör alla 2 · 5 och håller upp minitavlan: 8 av 27 har fel, och flera har skrivit 7. De flesta kan. Paren jämför 2 + 5 med 5 + 5 och visar varandra sina bilder, och du lyfter felet för klassen."
+    notera: Notera vad som hände. Felet syntes i den egna uppgiften. De som skrev 7 hade adderat talen, och det hade flera par inte märkt. Hade högst fem haft fel, hade du börjat nästa samarbete hos dem. Hade hälften haft fel, hade du och klassen lagt tre grupper med fyra med materialet igen.
+  - amne: so-no
+    amnesnamn: Biologi
+    arskurs: åk 8
+    innehall: "Fotosyntesen: vad växten tar in och vad den bildar"
+    overst:
+      egen: "I fotosyntesen bildar växten socker och syre av koldioxid och vatten. Felet: att den tar in syre, som i cellandningen."
+      visar: Två med symbolen förklarar gruppens svar, och alla ritar vad en växt i en sluten burk tar in och bildar i fotosyntesen.
+    scen:
+      - Tänk dig en lektion i biologi i åk 8. Klassen har sett en film om fotosyntesen, och veckans färdighet är att kolla att alla kan. Bordsöarna har sina symboler.
+      - "Du frågar: ”Vad tar växten in i fotosyntesen, och vad bildar den?” Efter tanketiden säger du: ”Huvuden ihop!” Vid ett bord hör du: ”Den tar in syre och släpper ut koldioxid.” ”Nej, det är andningen. I fotosyntesen är det tvärtom.” Du antecknar felet."
+      - "Du drar kvadraten, och alla kvadrater ställer sig upp. Den första du frågar förklarar rätt, och den andra säger att fotosyntesen tar in syre. Alla ritar med pilar på minitavlan vad en växt i en sluten burk tar in och bildar i fotosyntesen, och håller upp den. Du går längs borden och räknar: 15 av 28 har pilarna fel. Hälften eller färre kan, och du stannar och visar igen."
+    notera: Notera vad som hände. Felet spreds till flera bord, eftersom det lät rätt. Därför visade du igen, med fotosyntesen och cellandningen bredvid varandra. Hade de flesta kunnat, hade paren jämfört sina bilder.
+  - amne: praktisk-estetiska
+    amnesnamn: Textilslöjd
+    arskurs: åk 5
+    innehall: Att trä symaskinen och sy en rak söm
+    overst:
+      egen: "Trädningen i ordning: trådrullen, trådspänningen, trådtilldragaren och nålen. Felet: att hoppa över trådspänningen."
+      visar: Var och en trär maskinen själv och syr fem centimeter rakt, medan du går runt.
+    scen:
+      - Tänk dig en lektion i textilslöjd i åk 5. Paren ska lära sig trä symaskinen, och veckans färdighet är att uppmuntra med ord som säger vad kamraten gjorde.
+      - "Den ena trär och förklarar: ”Tråden går runt här, annars blir den lös.” Den andra följer stegen på bladet och uppmuntrar: ”Bra, du kollade spänningen.” Sedan byter de. Du stannar vid paren och säger vad du hör: ”Jag hör att du säger precis vad hon gjorde.”"
+      - Efter samarbetet turas paret om vid maskinen. Var och en trär den själv och syr fem centimeter, och du går runt och räknar. Tre av 24 hoppar över trådspänningen. Nästan alla kan, och i nästa samarbete sätter du dig först med de tre.
+    notera: Notera vad som hände. När paren uppmuntrade med ord om vad kamraten gjorde, mindes de också stegen. Hade fler hoppat över spänningen, hade paren visat varandra just det steget en gång till.
+stod:
+  rubrik: Elever som behöver mer stöd
+  rader:
+    - { nar: Den som är ny i svenska, metoden: "Paret ger ett litet sammanhang att tala i, och temat kan vara en bild. Hen kan visa, rita eller peka i samma uppgift som de andra, också när hens symbol dras.", du: "Lägg fraserna att låna och ämnets ord med en bild på bordet, och rita instruktionen på tavlan. Har paret ett starkare språk gemensamt, får det första samtalet vara på det." }
+    - { nar: När många behöver hjälp samtidigt, metoden: "Paren frågar varandra och ett annat par först, och när båda kan går paret vidare till en uppgift till.", du: "Gå först till dem du skrev upp, och ha en svårare uppgift på bladet för par som är klara." }
+    - { nar: Den som de andra sällan lyssnar på, metoden: "Strukturen ger hen en tur, och slumpen kan låta hen svara för gruppen.", du: "Säg högt vad hen bidrog med och vad det ledde till för gruppen, och ge hen en roll som kräver ett bidrag." }
+    - { nar: Den som inte vill delta, metoden: "Hen kan delta genom att visa, peka eller rita, och paret är det minsta sammanhanget.", du: "Ge hen en roll i parets uppgift, och låt hen börja med den kamrat det redan fungerar med." }
+    - { nar: Den som behöver förutsägbarhet, metoden: "Strukturens steg står likadant på tavlan varje gång, så att eleven vet vad som ska hända.", du: "Låt hen ha cirkelns plats, så att hen varje gång hämtar och lämnar lådan med materialet. Ge korta uppgifter som går att lyckas med." }
+    - { nar: När metoden inte räcker, metoden: "En del elever lär sig inte färdigheten i klassen, och det är väntat.", du: "Träna färdigheten med eleven i korta stunder vid sidan av, och ta det med specialläraren. Räcker inte det, ta det med elevhälsan." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 3 Kom igång
+# ---------------------------------------------------------------------------------------------------------------------
+progression:
+  rubrik: De första veckorna
+  text: "Metoden är troligen ny för dig och för klassen. Ordningen och takten är förslag. Ni börjar med Ping-pong-prat, och sedan lär sig klassen en färdighet och en struktur i taget medan du övar ett drag. Gå vidare när veckans färdighet syns hos nästan alla. Syns den inte, gör om veckan en eller två gånger, så flyttar besöken och mötet med. Ge gärna en struktur en till tre veckor innan nästa kommer, så att den sitter för klassen och för dig. Alla fem principerna finns med från det första samarbetet, men du kan öva på en sak i taget: välj en färdighet eller ett av besluten före lektionen, och håll fast vid det i några veckor."
+  rader:
+    - { vecka: "1", led: Klimatet, rubrik: "Kamraten, T-kortet och Ping-pong-prat", eleverna: "Att vända sig mot kamraten, vänta på sin tur och tacka.", roll: "Att visa strukturen med en elev, tänka högt om det eleverna ska tänka på i samtalet och säga vad du såg.", vidare: "nästan alla par turas om och tackar", fraga: "Turas nästan alla par om och tackar?" }
+    - { vecka: "2", led: Samtalet, rubrik: "EPA och signalen", eleverna: "Att tänka själv först, säga sin tanke till kamraten och följa signalen.", roll: "Att ge tanketid och lyssna efter om båda säger något eget.", vidare: "båda i nästan alla par säger något eget", fraga: "Säger båda i nästan alla par något eget?" }
+    - { vecka: "3", led: Paret, rubrik: Turas om, eleverna: "Att turas om, hjälpa utan att säga svaret och fråga kompisen först.", roll: "Att fråga paret i stället för att ge svaret.", vidare: "båda i nästan alla par du lyssnar på kan förklara parets lösningar", fraga: "Kan båda i nästan alla par du lyssnar på förklara parets lösningar?" }
+    - { vecka: "4", led: Grupperna, rubrik: Bordsön och Huvuden ihop, eleverna: "Att kolla att alla kan, och att enas vid bordsön om ett svar som alla kan ge.", roll: "Att dra en symbol ur skålen och låta bordsön hjälpa den som har symbolen att bli redo.", vidare: "de du frågar kan svara för gruppen vid nästan alla bordsöar", fraga: "Kan de du frågar svara för gruppen vid nästan alla bordsöar?" }
+    - { vecka: "5", led: Grupperna, rubrik: "Gruppen och Mötas på mitten", eleverna: "Att bygga vidare på kamratens idé och ge gruppen namn och kontrakt.", roll: "Att säga vad varje elev bidrog med.", vidare: "nästan alla grupper visar hur de byggde vidare och säger vad de ska göra bättre", fraga: "Visar nästan alla grupper hur de byggde vidare och säger vad de ska göra bättre?" }
+uppfoljning:
+  text: Du ser om metoden fungerar i elevernas egna uppgifter, i klassens samarbete och i dina kryss.
+  rader:
+    - { id: lektionen, nar: Varje lektion, tid: varje lektion, vad: "Den egna uppgiften och dina anteckningar visar vad paren kunde förklara och vad du tar upp nästa lektion." }
+    - { id: klassen, nar: Klassens arbete varje vecka, tid: varje vecka, vad: "Räkna hur många som klarar veckans sista egna uppgift och hur många par som använder färdigheterna på T-korten utan påminnelse." }
+    - { id: lararen, nar: Dina kryss varje vecka, tid: varje vecka, vad: "Räkna hur ofta varje princip fanns i veckans lektioner. Det som oftast faller bort är färdigheten, eget ansvar och reflektionen, och det du gör själv märker du sist." }
+    - { id: observationerna, nar: "Vecka 2 eller 3, och vecka 4", tid: vecka 2 och 4, vad: "Specialläraren ser den första hela lektionen och de egna uppgifterna i vecka 2 eller 3, och en kollega eller rektor i vecka 4." }
+    - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "På arbetslagets första möte bestämmer ni signalen och första färdigheten, planerar första hela lektionen och bokar besöken." }
+    - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "I slutet av de första veckorna ses ni igen, reflekterar och bestämmer hur ni fortsätter." }
+    - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "En kollega besöker en lektion i månaden, fyra gånger. Du läser dina anteckningar om elevernas egna uppgifter med specialläraren, och de som inte lär sig innehållet får stödundervisning." }
+    - { id: sexveckor, nar: Sex skolveckor efter de första veckorna, tid: efter 6 veckor, vad: "Räkna samma saker som varje vecka, så att du ser om metoden sitter kvar." }
+    - { id: nastatermin, nar: Nästa termin, tid: efter 16 veckor, vad: "Räkna igen, och se om ni använder metoden i fler ämnen." }
+    - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen ”Hur säker är jag på metoden?” under 5 i två veckor i rad, gör om veckan och be en kollega se ett samarbete." }
+    - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen ”Hur väl fungerar den i praktiken?” under 5 i två veckor i rad, gör samarbetet kortare och be specialläraren se en lektion. Likaså när hälften eller färre kan den egna uppgiften." }
+checklista:
+  rubrik: Före första lektionen
+  punkter:
+    - Planera den första veckans två eller tre korta samarbeten och den första hela lektionen.
+    - Sätt ihop paren och bordsöarna så att olika elever möts, och lägg en symbol på varje plats.
+    - Förbered T-kortet för den första färdigheten, att vända sig mot kamraten, vänta på sin tur och tacka.
+    - Skriv ut lektionskortet, symbolerna, fraserna att låna och veckans struktur, och ta fram skålen med symbolerna.
+    - Boka besöken, ett av dem med specialläraren.
+    - Bestäm signalen och den första färdigheten med arbetslaget, eller med en kollega om du börjar ensam.
+    - "Säg till klassen varför: ni lär er mer av varandra, och samarbete går att öva."
+klassen:
+  rubrik: Så ordnar du klassen
+  text: Eleverna sitter vid bordsöar om fyra, på runda bord eller fyrkantiga där ingen sitter på kortsidan, och borden står så att grupperna inte stör varandra. Du sätter ihop grupperna så att olika elever möts, och den som behöver mest stöd sitter snett emot den som kan mest, bredvid en kamrat det fungerar med. Blir det elever över, blir en eller flera bordsöar trior. Var och en har sin symbol på bordet, och axelkompisen och ögonkompisen är paren. Paren och bordsöarna står kvar i några veckor. När du byter, säger du vad paren gjorde bra, och de tackar varandra innan ni börjar om med samma rutiner. Fungerar ett par inte, byter du, och vid kränkning följer du skolans rutin. I förskoleklass och åk 1 sitter paren bredvid varandra också i samlingen.
+forsta:
+  rubrik: Första veckan
+  text:
+    - "Den första veckan gör ni två eller tre samarbeten på tio minuter i vanliga lektioner, på något paren redan kan. I det första kan paren leta efter tre saker de har gemensamt, och den första färdigheten är att vända sig mot kamraten, vänta på sin tur och tacka. Ni fyller i T-kortet tillsammans, och du visar också signalen och symbolerna, som rutinerna säger."
+    - "Sedan kommer Ping-pong-prat, och i slutet av veckan gärna EPA (enskilt, par, alla). Huvudfilmen visar ett samarbete med Ping-pong-prat. Du visar strukturen med en elev och tänker högt om det eleverna ska tänka på i samtalet. Säg varför: ni lär er mer av varandra, och det viktiga är att hjälpa varandra att lära er så mycket som möjligt."
+  plan:
+    klass: 4B
+    datum: tis 10/11
+    lektion: "1"
+    mal: "förklara olika sätt att få samma tal, med multiplikation och addition"
+    belagg: "36 på två sätt, ett med gånger, på minitavlan"
+    blad: "T-kortet, EPA och minitavlor"
+    forberett: "en trygg kamrat till den som behöver det, och ”Jag tänker … därför att …” på tavlan"
+    fore: { fardigheten: "Tänka själv först och säga sin tanke", ogat: "tummen upp, sedan knä mot knä", orat: "Jag tänker … därför att …", strukturen: "EPA", malet: "båda kan förklara tre sätt att få 24", visar: "en symbol och den egna uppgiften", felet: "adderar talen, så att 30 · 6 blir 36" }
+    delar:
+      - { fas: Start, text: "Paren hälsar. Visa färdigheten med en elev: tänk först, säg sedan" }
+      - { fas: Genomgång, text: "Visa att 3 · 4 och 10 + 2 ger 12. Visa EPA med en elev. Säg målet och att du drar en symbol" }
+      - { fas: Samarbetet, text: "”Tänk själv på ett sätt att få 24. Säg ditt, och lyssna på kompisens. Hitta ett tredje tillsammans.” Säg vad du hör" }
+      - { fas: Var och en visar, text: "En symbol, två förklarar parets sätt. Alla gör 36 på två sätt, ett med gånger" }
+      - { fas: Avslut, text: "Vad gjorde ni bra så att ni lärde er mer?" }
+    beslut: { elever: 28, nastanAlla: "dem som adderade talen", deFlesta: ["30 + 6 mot 30 · 6", "sina sätt"], halften: "fyra grupper med sex, med materialet" }
+rutiner:
+  rubrik: Rutinerna klassen lär sig
+  rader:
+    - namn: T-kortet
+      vecka: 1
+      vad: "Överst på T-kortet, ovanför taket på T:et, står samarbetsfärdigheten. Under ögat står vad ni vill se när färdigheten används, och under örat vad ni vill höra. Då är det tydligt hur ni ska samarbeta, och efteråt kan ni fråga er om ni såg och hörde det."
+      steg: ["Skriv veckans färdighet överst, ovanför taket på T:et.", "Skriv med elevernas ord under ögat vad ni vill se och under örat vad ni vill höra när färdigheten används.", "Visa färdigheten med en elev, och låt alla göra likadant i tio sekunder.", "Peka på kortet när du ser och hör färdigheten, och fråga efteråt: Såg och hörde vi det som står på kortet?"]
+      forsta: Fyll i kortet med klassen för den första färdigheten, och låt paren pröva den i en kort uppgift.
+    - namn: Signalen
+      vecka: 2
+      vad: Signalen är ett tecken som betyder att alla tystnar och vänder sig mot dig, också mitt i ett livligt samtal.
+      steg: ["Ge tecknet, som handen upp, och vänta.", "Tacka när alla är med."]
+      forsta: Visa tecknet i det första samarbetet, och öva det när paren letar efter tre saker de har gemensamt. I vecka 2 övar ni tills alla tystnar inom fem sekunder.
+    - namn: Fråga kompisen först
+      vecka: 3
+      vad: Den som fastnar frågar kompisen eller gruppen först. Vet ingen, räcker hela gruppen upp handen.
+      steg: ["Fråga kompisen: Kan du hjälpa mig?", "Fråga ett annat par vid bordet.", "Vet ingen: alla räcker upp handen."]
+      forsta: Säg rutinen när du ger instruktionen, och låt klassen säga stegen efter dig.
+    - namn: Bordsön och symbolerna
+      vecka: 4
+      vad: Fyra elever sitter vid ett bord, var och en med sin symbol. Symbolen väljer vem som svarar, får en roll eller byter grupp. Materialet ligger i en låda på bordsön, och cirkeln hämtar och lämnar den.
+      steg: ["Sätt dig där din symbol ligger.", "Axelkompisen och ögonkompisen är paren vid bordet.", "Läraren drar en symbol ur skålen, och ni får en stund till att hjälpa den som har symbolen att bli redo. Alla med symbolen ställer sig upp, och läraren frågar en eller två.", "Saknas någon, blir ni en trio: rollerna går runt, och en av er tar också den saknade symbolen."]
+      forsta: Visa symbolerna i det första samarbetet med en lätt fråga, så att alla ser hur dragningen går till. Fram till vecka 4 hjälper paret den som har symbolen att bli redo, och sedan gör bordsön det.
+larandet:
+  rubrik: Så syns lärandet i klassen
+  omraden:
+    - { omrade: amneskunskaper, syns: "I den egna uppgiften efteråt gör eleverna själva det paret arbetade med och kan förklara hur de tänkte." }
+    - { omrade: kommunikation, syns: "Eleverna förklarar hur de tänker, med ”Jag tänker … därför att …”, och ställer frågor till kamraten." }
+    - { omrade: socialt, syns: "Eleverna använder veckans färdighet utan påminnelse och arbetar med fler kamrater i klassen." }
+    - { omrade: sprak, syns: Eleverna använder ämnets ord när de förklarar för kamraten. }
+uppdrag:
+  rubrik: Till arbetslaget
+  text: Ni samarbetar som klassen. Ni planerar i par, och var och en prövar något litet flera gånger. Ni har två möten på en och en halv timme var, där ni reflekterar i EPA. Den som får besök visar sin planering före lektionen och tar med den till det andra mötet.
+  forbered:
+    text: Läs metoden, och tänk igenom frågorna före mötet. På mötet bestämmer ni signalen och den första färdigheten, planerar den första hela lektionen och bokar besöken.
+    fragor:
+      - Vem pratar i dina lektioner, när och om vad, och vilka elever kommer till tals?
+      - Vad gör du redan nu för att lära ut hur man samarbetar?
+      - Behöver dina elever varandra när de arbetar ihop, och syns vad var och en kan?
+      - "Titta på huvudfilmen: vad gör läraren när hen går mellan paren?"
+  planera: Planera nästa samarbete i planeringsmallen, med en färdighet och ett mål som kräver båda. Ni som har samma klass säger varje vecka till varandra vilken färdighet klassen övar.
+  genomfor: Pröva gärna veckans struktur i ett ämne till, följ Lär dig metoden på metodens sida och be en kollega se ett samarbete.
+  reflektera: ["Hur fungerade det för dig och för eleverna?", "Hur påverkades elevernas lärande?", "När syntes varje elevs bidrag, och när vilade någon?", "Vad gjorde du för att stötta samtalen?"]
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 4 Håll i
+# ---------------------------------------------------------------------------------------------------------------------
+lararensFragor:
+  rubrik: Lärarens frågor
+  fragor:
+    - { fraga: "Får jag använda strukturerna utan att lära ut en färdighet?", svar: "Nej. Strukturen är bara formen och räcker inte ensam. Ge varje struktur en färdighet på T-kortet.", komponent: Samarbetsfärdigheter }
+    - { fraga: "Får jag hoppa över reflektionen när tiden är knapp?", svar: "Nej. Gör den kort i stoppet halvvägs i Samarbetet. I den svenska studien var reflektionen en av de delar lärarna oftast inte gjorde fullt ut (Klang m.fl., 2020).", komponent: Återkoppling och reflektion }
+    - { fraga: "Får jag ge båda i paret varsitt papper?", svar: "Ja, med stopp där de jämför och förklarar hur de tänkt. Ett gemensamt papper och roller ger mer samarbete, och varsitt papper utan stopp blir ofta arbete bredvid varandra.", komponent: Positivt ömsesidigt beroende }
+    - { fraga: "Får jag ta en annan struktur än de fem?", svar: "Ja, om den ger var och en sin tur. Fatta samma fyra beslut som i Före lektionen. Pröva en ny struktur i taget, först på känt innehåll.", komponent: Delaktighet och stödjande interaktion }
+    - { fraga: "Hur hinner jag kursen när samarbetet tar tid?", svar: "Lägg korta samarbeten i ämnets lektion, som varianten på tio minuter, och låt paren förklara uppgiften för varandra innan de börjar. Då räcker färre upp handen, och du hinner till dem som behöver dig." }
+    - { fraga: "Hur bedömer jag varje elev när eleverna arbetar ihop?", svar: "Bedöm den egna uppgiften efter samarbetet och gruppens arbete var för sig. Bedöm båda mot det eleverna ska kunna, och jämför inte eleverna med varandra." }
+hinder:
+  rubrik: Det svåraste med metoden
+  text: "Det som ofta faller bort är att du lär ut färdigheten: du ber om samarbete men visar aldrig hur det ser ut och låter. Lärarna som genomförde arbetssättet bäst lärde ut färdigheterna (Veldman m.fl., 2020). Av trettio lektioner som lärare kallade kooperativa hade bara två alla de fyra kännetecken som forskarna mätte (Adl-Amini m.fl., 2024). Visa färdigheten med T-kortet, låt klassen öva den, lyssna efter den i samarbetet och säg vad du hörde."
+  kort: Det som ofta faller bort är att du lär ut färdigheten. Visa den med T-kortet, låt klassen öva, lyssna efter den och säg vad du hörde.
+  komponent: Samarbetsfärdigheter
+fallgropar:
+  rubrik: Vanliga fallgropar
+  rader:
+    - { fallgrop: "Du ber om färdigheten men visar den inte", hander: "Du säger ”Samarbeta och hjälp varandra”, och eleverna talar i munnen på varandra eller inte alls.", prova: "Namnge en färdighet i taget och visa hur den låter. Fyll i T-kortet med klassen, och säg efteråt vad du såg.", komponent: Samarbetsfärdigheter }
+    - { fallgrop: "Uppgiften går att lösa ensam", hander: "Eleverna delar upp arbetet och sätter ihop delarna på slutet, eller den snabbaste gör allt.", prova: "Skriv om frågan så att svaret kräver allas delar, eller dela materialet så att var och en bär en del.", komponent: Positivt ömsesidigt beroende }
+    - { fallgrop: "Slumpen blir inte av", hander: "Du säger att du ska slumpa, men du vill inte att eleven står tom inför klassen, så du frågar den som räcker upp handen.", prova: "Tre stödord på lappen och en stund till efter dragningen gör att de som står kan svara. Dra symbolen inför klassen.", komponent: Eget ansvar }
+    - { fallgrop: "Två av fyra pratar", hander: "Samma två talar vid bordet, och de andra sitter tysta.", prova: "Ge var och en ett talkort, som ett gem. Den som har talat lägger det i mitten, och ingen talar igen förrän alla har lagt sitt.", komponent: Delaktighet och stödjande interaktion }
+    - { fallgrop: "Reflektionen hinns inte med", hander: "Lektionen tar slut, och paren går utan att ha talat om samarbetet.", prova: "Stoppa halvvägs, som i Samarbetet, och fråga om färdigheten: Kan vi se och höra att den används?", komponent: Återkoppling och reflektion }
+    - fallgrop: När den du frågar inte kan svara
+      moment: [Var och en visar]
+      hander: Den du frågar tystnar inför klassen, och du vill fråga någon annan.
+      steg: ["Vänta lugnt en stund.", "Låt gruppen påminna om vad de sa, utan att svara åt hen.", "Ge gruppen en minut till, och kom tillbaka till samma elev.", "Tacka eleven och gruppen för svaret."]
+    - fallgrop: När en gör allt och kamraten tittar på
+      moment: [Samarbetet]
+      hander: En elev svarar och gör uppgifterna, och kamraten sitter bredvid och tittar.
+      steg: ["Gå dit och lyssna en stund.", "Säg vad du hör, utan kritik: ”Jag har hört dig svara på alla uppgifter.”", "Ge paret ansvaret: ”Hur ser ni till att båda får vara med?”", "Låt dem byta roll, eller ge kamraten en roll.", "Kom tillbaka och säg vad du ser nu."]
+hallFast:
+  rubrik: Fem saker att hålla fast vid
+  rader:
+    - { sak: "Efter ett lov: öva en känd struktur med T-kortet", text: "Rutinerna och färdigheterna glider under ett lov. Med T-kortet uppe och en struktur som klassen kan hittar klassen tillbaka." }
+    - { sak: "När det går bra: slumpa ändå", text: "När paren arbetar bra är det lätt att låta bli att slumpa, och då ser du inte längre den som vilar." }
+    - { sak: "När tiden är knapp: skydda den egna uppgiften", text: "Det som ligger sist faller bort först. Reflektera i stoppet halvvägs, och bryt samarbetet i tid så att alla gör den egna uppgiften." }
+    - { sak: "Nytt arbetsområde: välj färdigheten ur uppgiften", text: "Efter de första veckorna kräver nytt innehåll egna färdigheter, som att fråga varför, säga emot vänligt och ändå enas om ett svar. Välj färdigheten ur det paren ska göra." }
+    - { sak: "Inför prov: behåll paren före och efter eget arbete", text: "Inför ett prov glider arbetssättet lätt över i eget arbete. Behåll paren före och efter det egna arbetet, och slumpa som vanligt." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga A Att skriva ut
+# ---------------------------------------------------------------------------------------------------------------------
+ramar:
+  rubrik: Materialet för klassen
+  text: ["Utöver lektionskortet finns de fem strukturerna att visa på tavlan och stödmaterialet för klassen: T-kortet, symbolerna, fraserna att låna, gruppkontraktet och bladet till Mötas på mitten. Varje blad står på en egen sida."]
+  ramar:
+    - rubrik: T-kortet
+      text: ["Skriv ut kortet som affisch på A3. Skriv veckans färdighet överst, och fyll i med klassen under ögat vad ni vill se och under örat vad ni vill höra. Kortet hänger uppe under veckan och får sedan hänga kvar. Ett Y-kort har också ett hjärta för hur färdigheten känns."]
+    - rubrik: Symbolerna
+      text: ["Skriv ut ett blad per bordsö och ett blad till, och klipp isär de fyra korten på varje blad. Lägg korten på platserna, så att varje elev har sin symbol, och lägg korten från det extra bladet i skålen som du drar ur."]
+    - rubrik: Fraserna att låna
+      text: ["Lägg ett blad mitt på varje bordsö. Säg fraserna i kör med klassen innan paren börjar, och peka på den du vill höra."]
+    - rubrik: Gruppkontraktet
+      text: ["Varje bordsö fyller i ett blad i den första lektionen i vecka 5. Gruppen väljer ett namn, en färdighet de ska öva på och tre sätt att göra den, och var och en skriver sitt namn vid sin symbol. I varje Avslut efter det tar gruppen fram kontraktet: Hur kan vi stötta varandra på bästa sätt nästa gång vi samarbetar?"]
+    - rubrik: "Strukturen, vecka 1: Ping-pong-prat"
+      text: ["I ett parsamtal studsar orden fram och tillbaka, och ingen säger ett nytt ord förrän kompisen har sagt sitt."]
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Läraren säger temat, och var och en tänker tyst en stund."]
+            - ["Vänd er mot varandra och gör en high five."]
+            - ["Den som börjar säger ett ord eller en kort mening om temat."]
+            - ["Kompisen säger nästa, och ingen säger ett nytt ord förrän den andra sagt sitt."]
+            - ["Kommer du inte på något, säg pass, så fortsätter kompisen."]
+            - ["Fortsätt tills läraren bryter."]
+            - ["Tacka varandra, och enas om ett ord ni båda tyckte om. Vem som helst av er kan få säga det för klassen."]
+        - rubrik: Så tränar ni samtalet
+          rader:
+            - ["Ni lyssnar in kompisen och väntar på er tur. Ni får också fram det ni redan vet om temat, så att alla har ord att tänka med i nästa uppgift."]
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: När, text: "Före ett nytt arbetsområde eller en text, när temat ger många korta svar. Håll tiden kort, en till två minuter." }
+            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att vända sig mot kamraten, vänta på sin tur och tacka. Lyssna efter om båda säger ord, och säg vad du hör." }
+            - { rubrik: Så syns varje elev, text: "Var och en säger ord i tur och ordning. Sedan drar du en symbol, alla med den ställer sig upp, och en eller två säger ordet paret enades om." }
+    - rubrik: "Strukturen, vecka 2: EPA"
+      text: ["Enskilt, par, alla: var och en tänker först själv, sedan säger paret sina tankar, och sist får klassen höra några."]
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Läraren ställer en fråga som har många svar."]
+            - ["Tänk själv en stund, och visa tummen upp när du har något."]
+            - ["Vänd dig mot din kompis, knä mot knä."]
+            - ["Säg din tanke: Jag tänker … därför att … Lyssna på kompisens."]
+            - ["Ni är klara när båda kan säga kompisens tanke. Tacka då varandra och vänd er mot läraren."]
+            - ["Läraren drar en symbol, alla med den ställer sig upp, och en eller två berättar kompisens tanke."]
+        - rubrik: Så tränar ni att tänka tillsammans
+          rader:
+            - ["Alla hinner tänka innan någon svarar, och i paret får båda säga sin tanke. Så har alla något att säga när klassen lyssnar."]
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: När, text: "När alla ska tänka på en fråga, i vilket ämne som helst." }
+            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att tänka själv först och säga sin tanke till kamraten. Lyssna efter om båda säger något eget, och säg vad du hör." }
+            - { rubrik: Så syns varje elev, text: "Var och en säger sin tanke i paret, och en eller två med symbolen som du drar berättar kompisens tanke." }
+    - rubrik: "Strukturen, vecka 3: Turas om"
+      text: ["Den ena löser och tänker högt, och den andra stöttar och uppmuntrar. Sedan byter ni."]
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Läraren ger minst två uppgifter och visar de två rollerna med en elev."]
+            - ["Den som börjar läser uppgiften, löser den och säger högt: Jag tänker … därför att …"]
+            - ["Kompisen lyssnar, frågar, uppmuntrar och hjälper utan att säga svaret."]
+            - ["När ni är överens skriver kompisen svaret."]
+            - ["Byt roller vid nästa uppgift."]
+            - ["Fastnar ni båda, fråga ett annat par vid bordet."]
+            - ["När ni är klara jämför ni svaren med ett annat par och tackar varandra."]
+        - rubrik: Så tränar ni att lära av varandra
+          rader:
+            - ["Den som förklarar sätter ord på sitt tänkande, och den som stöttar lär sig att hjälpa utan att ta över. Båda ska kunna förklara när ni är klara."]
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: När, text: "När paren ska öva och förstå något de har mött, som ord att bygga med bokstäver, en räkneuppgift, ett stycke i en text eller ett moment i slöjd." }
+            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att hjälpa utan att säga svaret. Lyssna efter ”Prova att …”, och fråga paret först." }
+            - { rubrik: Så syns varje elev, text: "De löser varannan uppgift, och efteråt gör alla en egen uppgift av samma slag." }
+    - rubrik: "Strukturen, vecka 4: Huvuden ihop"
+      text: ["Bordsön enas om ett svar som alla kan ge."]
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Var och en har sin symbol vid bordsön: cirkel, triangel, kvadrat eller stjärna."]
+            - ["Läraren ställer en fråga, ger tanketid och säger: Huvuden ihop!"]
+            - ["Ni lutar er mot varandra, säger var sin tanke och viskar fram ett svar som alla kan ge. Skriv eller rita tre stödord på en lapp, gärna ämnets ord."]
+            - ["Kolla att alla kan svaret, lägg händerna i mitten och vänd er mot läraren."]
+            - ["Läraren drar en symbol ur skålen, och ni får en stund till att hjälpa den som har symbolen att bli redo."]
+            - ["Alla med symbolen ställer sig upp, och en eller två svarar för gruppen: Vi tänker … De andra vid bordet får påminna utan att svara åt hen."]
+            - ["Nästa fråga går likadant."]
+            - ["Tacka varandra."]
+        - rubrik: Så tränar ni att alla kan
+          rader:
+            - ["Ni förklarar för varandra tills alla kan, eftersom vem som helst kan få svara."]
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: När, text: "När bordsön ska enas om ett svar eller sammanfatta en genomgång, en film eller en text." }
+            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att kolla att alla kan. Lyssna efter frågan ”Kan du säga det?” vid borden." }
+            - { rubrik: Så syns varje elev, text: "Svaret är gruppens: oavsett vem som får svara har alla hjälpt varandra att förstå." }
+    - rubrik: "Strukturen, vecka 5: Mötas på mitten"
+      text: ["Var och en fyller i sin ruta, och bordsön fyller i mitten tillsammans."]
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Lägg bladet mitt på bordet, så att var och en har sin ruta närmast sig."]
+            - ["Läraren ger uppgiften och tid att tänka."]
+            - ["Skriv eller rita i din egen ruta, utan att prata."]
+            - ["Visa din ruta i tur och ordning: Jag har skrivit … De andra lyssnar och säger: Jag ser …"]
+            - ["Prata om vad mitten ska visa, och ta med något från allas rutor: Vi tar din idé och min idé."]
+            - ["Skriv eller rita i mitten tillsammans, och kolla att alla kan förklara den."]
+            - ["Tacka varandra och säg vad kamraten gjorde bra: Bra att du lyssnade."]
+            - ["Läraren drar en symbol, alla med den ställer sig upp, och en eller två förklarar mitten för klassen."]
+        - rubrik: Så tränar ni att bygga vidare
+          rader:
+            - ["Var och ens tanke syns i rutan, och ni bygger vidare på varandras idéer. Mitten blir bättre än det någon hade kommit på själv."]
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: När, text: "När bordsön ska samla det de vet eller komma på idéer, innan de skriver eller efter en genomgång. I par ritar de yngsta i två rutor och en mitt." }
+            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att bygga vidare på kamratens idé. Lyssna efter ”Vi tar din idé och …”, och säg vad du hör." }
+            - { rubrik: Så syns varje elev, text: "Var och ens ruta visar vad hen tänkte, och en eller två med symbolen som du drar förklarar mitten för klassen." }
+    - rubrik: Bladet till Mötas på mitten
+      text: ["Skriv ut ett blad per bordsö på A3. Var och en skriver eller ritar i rutan vid sin symbol, och bordsön fyller i mitten tillsammans. De yngsta gör det i par, med två rutor och en mitt på ett A4 som du delar in själv."]
+planeringsmall:
+  text: "Det grå gör du i varje lektion. Börja med färdigheten och målet, och skriv felet du lyssnar efter. Pröva i förväg: kan en elev lösa uppgiften ensam? Bygg uppgiften så att varje elev behövs och gruppen är klar först när alla kan innehållet."
+  fore:
+    - { etikett: "Färdigheten på T-kortet", rader: ["Färdigheten:", "Ögat:", "Örat:"], falt: [fardigheten, ogat, orat] }
+    - { etikett: "Målet och hur var och en visar", rader: ["Strukturen:", "Ni är klara när:", "Var och en visar:", "Felet jag lyssnar efter:"], falt: [strukturen, malet, visar, felet] }
+  delar:
+    - { fas: Start, skriv: "Färdigheten och det jag visar:", hojd: 0.6 }
+    - { fas: Genomgång, skriv: "Innehållet och strukturens steg:", hojd: 0.9 }
+    - { fas: Samarbetet, skriv: "Uppgiften, eller en fråga med många svar:", not: "Ge tanketid först. Lyssna efter färdigheten och felet, säg vad du hör och stoppa halvvägs.", hojd: 1.1 }
+    - { fas: Var och en visar, skriv: "Den egna uppgiften, där felet syns:", not: "Dra en symbol och fråga en eller två. Räkna eleverna med fel.", hojd: 0.8 }
+    - { fas: Avslut, skriv: "Frågan till reflektionen:", not: "Vad gjorde ni bra så att ni lärde er mer?", hojd: 0.6 }
+  beslut: { nastanAlla: "Jag sätter mig först med:", deFlesta: ["Missförståndet jag lyfter:", "Paren jämför:"], halften: "Det jag visar igen:" }
+  efter:
+    text: "Fyll i efter lektionen, ur dina anteckningar."
+    kontrollen: "Den egna uppgiften: ___ med fel"
+    hogar: "De egna uppgifterna: Kan   Nästan   Inte än, och namnen på Inte än"
+    sag: "Det jag såg och hörde, med elevernas ord"
+    nasta: "Nästa samarbete börjar med"
+    forst: "I samarbetet går jag först till"
+  overst: ["Färdigheten, målet och felet jag lyssnar efter"]
+  kolumner: ["Vad jag gör och vad paren gör"]
+  sist: ["Efter lektionen: kan, nästan och inte än", Nästa lektion]
+observation:
+  fraga: Behöver eleverna varandra, och syns vad var och en kan?
+  text: "Skriv ut dubbelsidigt, och välj med läraren två elever att följa, A och B, gärna en som brukar vara tyst. Stå hela lektionen där du hör två bordsöar, och räkna hur många elever som sitter vid dem. När alla håller upp minitavlan, räknar du hur många i hela klassen som har fel. Symbolen visar elevens plats vid bordsön. Går läraren till ett bord du inte hör, skriv bordets nummer och det du ser."
+  fokus: Säger båda i varje par något eget, och vad säger jag när jag går förbi?
+  huvud: ["Färdigheten och målet"]
+  kolumner:
+    - { namn: Vid tavlan, text: det läraren visar och säger, bredd: 25 }
+    - { namn: Paren, text: "+ eget · t tar upp kamratens · 0 tyst · g gör allt", bredd: 17, elever: true }
+    - { namn: Vid paren, text: "det läraren hör, säger och gör, och det paren säger", bredd: 39 }
+  tecken: "+ eget bidrag i ord, bild eller pekning, t tar upp kamratens, 0 tyst, g gör allt. Ring in tecknet när läraren talar med paret."
+  delar:
+    - { fas: Start, rader: 1, rakna: "Färdigheten visad: ja · nej   Övad i paren: ja · nej" }
+    - { fas: Genomgång, rader: 1, rakna: "Målet sagt: ja · nej   Hur var och en visar sagt: ja · nej" }
+    - { fas: Samarbetet, rader: 3, rakna: "Elever med ett eget bidrag: ___ av ___   Med färdigheten: ___ av ___" }
+    - { fas: Var och en visar, rader: 2, rakna: "Med fel: ___ av ___   Utfallet: Nästan alla · De flesta · Hälften eller färre" }
+    - { fas: Avslut, rader: 1, rakna: "Paren sa vad som hjälpte, i stoppet eller sist: ja · nej" }
+  streck:
+    - { etikett: Återkoppling, drag: ["Säger vad hen ser och hör", "Berömmer allmänt, som bra", "Frågar paret först", "Ger svaret"] }
+    - { etikett: Var och en, drag: ["Slumpar inför klassen", "Frågar den som räcker upp handen"] }
+  rader:
+    - "Färdigheten visad och övad: ja · nej. Elever med färdigheten: __ av __"
+    - "Målet krävde alla: ja · nej. Par som kollade att båda kunde innan de var klara: __ av __"
+    - "De läraren frågade förklarade som målet säger: __ av __. Utan fel i den egna uppgiften: __ av __"
+    - "Elever med ett eget bidrag: __ av __. A och B tysta hela samarbetet: __ av 2"
+    - "Elever som sa eller skrev vad som hjälpte: __ av __. Läraren sa konkret vad hen såg: ja · nej"
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga B Valet och forskningen
+# ---------------------------------------------------------------------------------------------------------------------
+passar:
+  rubrik: När passar metoden?
+  kort: "eleverna ska förstå och förklara något tillsammans. Möter de något nytt, börjar du med explicit undervisning."
+  rader:
+    - { fraga: "Vad ska eleverna lära sig?", metoden: "Att förstå, förklara och resonera om något de har mött, och att befästa det.", annat: "Något nytt där det finns ett rätt sätt att göra. Då passar explicit undervisning, och kooperativt lärande efter genomgången." }
+    - { fraga: "Hur mycket kan eleverna redan?", metoden: "Tillräckligt för att ha något att tänka tillsammans om.", annat: "Nästan inget om innehållet. Börja med explicit undervisning, och samarbeta sedan." }
+    - { fraga: "Vad ska eleverna kunna efteråt?", metoden: "Förklara hur de tänkte, och göra det själva.", annat: "Ett snabbt och säkert svar utan förklaring. Då kan övning på egen hand räcka." }
+    - { fraga: "Vad behöver eleverna innan de gör själva?", metoden: "En kamrat att pröva tanken med, och någon som kollar att de kan.", annat: "Ett exempel steg för steg, som i explicit undervisning." }
+    - { fraga: "Vad går oftast snett?", metoden: "Färdigheten lärs inte ut: visa den med T-kortet, låt klassen öva och säg vad du hörde.", annat: "Grupparbete utan gruppmål och utan att var och en visar vad hen kan ger sällan bättre resultat (Slavin, 1991)." }
+  tumregel: Lägg samarbetet efter genomgången, när eleverna har något att samtala om. Tabellen är ett stöd för tanken och ingen regel.
+  metoder: [explicit-undervisning]
+invandningar:
+  rubrik: Invändningar och nyanser
+  fragor:
+    - { fraga: "Är inte kooperativt lärande bara grupparbete?", svar: "Nej. Grupparbete utan mål som kräver alla och utan att var och en visar vad hen kan ger sällan bättre resultat. Pussel utan gruppmål fick inte stöd i studierna, men med gruppmål och eget ansvar gav det effekt, liksom de flesta jämförelser med båda villkoren (Slavin, 1991). En struktur som Pussel ger alltså inget av sig själv." }
+    - { fraga: "Gör inte de duktiga allt arbete?", svar: "Det gör de när alla vet att den som kan mest svarar för gruppen. Med eget ansvar kan vem som helst få förklara, och då lönar det sig för gruppen att förklara för den som inte kan. Eget ansvar är ett av villkoren för att samarbetet ska ge resultat (Slavin, 1991), och därför hör slumpen och den egna uppgiften till varje lektion." }
+    - { fraga: "Tar inte samarbetet tid från kunskaperna?", svar: "Kunskaperna och relationerna växer i samma undervisning: elever lärde sig mer och fick bättre kamratrelationer med gemensamma mål än med tävling eller eget arbete (Roseth m.fl., 2008). Samarbetet är oftast korta moment i ämnets lektion, efter genomgången." }
+grund:
+  rubrik: Det forskningen visar
+  text:
+    - "Kooperativt lärande är ett av skolans mest undersökta arbetssätt. I en översikt av 148 studier lärde sig elever i åk 6–⁠9 mer och fick bättre kamratrelationer med gemensamma mål än med tävling eller eget arbete (Roseth m.fl., 2008). Studierna är mest gjorda i USA, och översikten säger inte vilka studier som hade eget ansvar. Få studier om kooperativt lärande gäller förskoleklass och åk 1."
+    - "I det stränga underlaget, där bara studier med jämförbara grupper och oberoende prov räknas, blir talen mindre. I matematik från åk 6 till gymnasiet gav STAD 0,42 i fyra studier (Slavin, Lake och Groff, 2009). I läsning gav program med kooperativt lärande, mest CIRC, 0,21 i tio studier i åk 2–⁠5 (Slavin, Lake, Chambers m.fl., 2009). I skrivning blev texterna bättre med program där eleverna skriver i lag, mest med Student Team Writing, som gav 0,38 i åk 6–⁠8. I två stora försök med Writing Wings var skillnaden mindre (Slavin m.fl., 2019). I NO gav träning i grupparbete bättre resultat för 8–10-åringar i England (Baines m.fl., 2007; Slavin m.fl., 2014)."
+    - "Strukturen ensam räcker inte. Pussel utan gruppmål fick inte stöd i studierna, men Pussel med gruppmål och eget ansvar gav effekt. Det är de två villkoren som skiljer samarbete som ger resultat från grupparbete (Slavin, 1991). Lärarna som genomförde arbetssättet bäst lärde ut färdigheterna (Veldman m.fl., 2020). Av trettio lektioner som lärare själva kallade kooperativa hade bara två alla de fyra kännetecken som forskarna mätte (Adl-Amini m.fl., 2024)."
+    - "I de stora försöken syns både det sociala och lärandet. I en stor randomiserad studie i åk 7 fick eleverna färre emotionella problem, och elever med lågt engagemang sa att de mobbades mindre (Van Ryzin och Roseth, 2018). I ett randomiserat försök i åk 6 läste eleverna bättre när de arbetade i lag (Slavin, Chamberlain m.fl., 2009). I den svenska studien i åk 5 ökade den sociala acceptansen något (Klang m.fl., 2020), men läsförståelsen blev inte säkert bättre (Klang m.fl., 2022). Niclas Fohlin är medförfattare till artikeln från 2020."
+kallor:
+  - { id: roseth-m-fl-2008, doi: 10.1037/0033-2909.134.2.223, slag: metaanalys, grupp: oversikt, omraden: [larande, socialt], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: 0,46 och 0,55 på resultaten, 148 studier, åk 6–⁠9", titel: "Promoting early adolescents' achievement and peer relationships: The effects of cooperative, competitive, and individualistic goal structures", text: "Roseth, C. J., Johnson, D. W. och Johnson, R. T. (2008). Promoting early adolescents' achievement and peer relationships: The effects of cooperative, competitive, and individualistic goal structures. Psychological Bulletin.", adress: "https://www.apa.org/pubs/journals/releases/bul-1342223.pdf", oppnad: 2026-10-30 }
+  - { id: slavin-lake-chambers-m-fl-2009, doi: 10.3102/0034654309341374, slag: systematisk-oversikt, grupp: oversikt, omraden: [lasning], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,21 i tio studier, mest CIRC, åk 2–⁠5", titel: "Effective reading programs for the elementary grades: A best-evidence synthesis", text: "Slavin, R. E., Lake, C., Chambers, B. m.fl. (2009). Effective reading programs for the elementary grades: A best-evidence synthesis. Review of Educational Research.", adress: "https://files.eric.ed.gov/fulltext/ED527637.pdf", oppnad: 2026-10-30 }
+  - { id: slavin-lake-och-groff-2009, doi: 10.3102/0034654308330968, slag: systematisk-oversikt, grupp: oversikt, omraden: [matematik], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: 0,42 för STAD i fyra studier, från åk 6 till gymnasiet", titel: "Effective programs in middle and high school mathematics: A best-evidence synthesis", text: "Slavin, R. E., Lake, C. och Groff, C. (2009). Effective programs in middle and high school mathematics: A best-evidence synthesis. Review of Educational Research.", adress: "https://bestevidence.org/wp-content/uploads/2021/02/mhs_math_oct_21_2008.pdf", oppnad: 2026-10-30 }
+  - { id: slavin-m-fl-2014, doi: 10.1002/tea.21139, slag: systematisk-oversikt, grupp: oversikt, omraden: [amnen], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: SPRinG 0,21 och 0,27 i en studie till, NO i F–⁠5", titel: "Experimental evaluations of elementary science programs: A best-evidence synthesis", text: "Slavin, R. E., Lake, C., Hanley, P. m.fl. (2014). Experimental evaluations of elementary science programs: A best-evidence synthesis. Journal of Research in Science Teaching.", adress: "https://eprints.hud.ac.uk/id/eprint/29795/1/ElemSciSynth_PrePub_JRST_14.pdf", oppnad: 2026-10-30 }
+  - { id: slavin-m-fl-2019, eric: ED612219, slag: systematisk-oversikt, grupp: oversikt, omraden: [skrivning], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,38 för Student Team Writing i åk 6–⁠8", titel: "Writing Approaches in Years 3 to 13: Evidence Review", text: "Slavin, R. E., Lake, C., Inns, A. m.fl. (2019). Writing Approaches in Years 3 to 13: Evidence Review. Education Endowment Foundation.", adress: "https://files.eric.ed.gov/fulltext/ED612219.pdf", oppnad: 2026-10-30 }
+  - { id: baines-m-fl-2007, doi: 10.1080/01411920701582231, slag: studie, grupp: experiment, omraden: [amnen], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Måttlig effekt: 0,21 i NO, 1 587 elever i 31 skolor, 8–10 år", titel: "Improving the effectiveness of collaborative group work in primary schools: effects on science attainment", text: "Baines, E., Blatchford, P. och Chowne, A. (2007). Improving the effectiveness of collaborative group work in primary schools: effects on science attainment. British Educational Research Journal.", adress: "https://doi.org/10.1080/01411920701582231", oppnad: 2026-10-30 }
+  - { id: klang-m-fl-2020, doi: 10.3389/fpsyg.2020.586489, slag: studie, grupp: experiment, omraden: [socialt], strang: false, stor: true, las: fulltext, fohlin: true, effekt: "Liten effekt: något bättre acceptans, inget jämförbart tal, 958 elever, åk 5", titel: "A Cooperative Learning Intervention to Promote Social Inclusion in Heterogeneous Classrooms", text: "Klang, N., Olsson, I., Wilder, J. m.fl. (2020). A Cooperative Learning Intervention to Promote Social Inclusion in Heterogeneous Classrooms. Frontiers in Psychology.", adress: "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2020.586489/full", oppnad: 2026-10-30 }
+  - { id: klang-m-fl-2022, doi: 10.23865/njlr.v8.2740, slag: studie, grupp: experiment, omraden: [lasning], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: 0,10 och −0,07 på två prov i läsförståelse, 958 elever, åk 5", titel: "Intervention combining cooperative learning and instruction in reading comprehension strategies in heterogeneous classrooms", text: "Klang, N., Åsman, J., Mattsson, M. m.fl. (2022). Intervention combining cooperative learning and instruction in reading comprehension strategies in heterogeneous classrooms. Nordic Journal of Literacy Research.", adress: "https://nordicliteracy.net/index.php/njlr/article/view/2740", oppnad: 2026-10-30 }
+  - { id: slavin-chamberlain-m-fl-2009, doi: 10.1080/19415530903043631, slag: studie, grupp: experiment, omraden: [lasning], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,15 i läsning, 788 elever i två skolor, åk 6", titel: "The Reading Edge: A randomized evaluation of a middle school cooperative reading program", text: "Slavin, R. E., Chamberlain, A., Daniels, C. m.fl. (2009). The Reading Edge: A randomized evaluation of a middle school cooperative reading program. Effective Education.", adress: "https://www.successforall.org/wp-content/uploads/2022/04/The-Reading-Edge-A-Randomized-Evaluation.pdf", oppnad: 2026-10-30 }
+  - { id: van-ryzin-och-roseth-2018, doi: 10.1037/edu0000265, slag: studie, grupp: experiment, omraden: [socialt], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Liten effekt: mer samhörighet och färre emotionella problem, 1 460 elever, åk 7", titel: "Cooperative learning in middle school: A means to improve peer relations and reduce victimization, bullying, and related outcomes", text: "Van Ryzin, M. J. och Roseth, C. J. (2018). Cooperative learning in middle school: A means to improve peer relations and reduce victimization, bullying, and related outcomes. Journal of Educational Psychology.", adress: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6430212/", oppnad: 2026-10-30 }
+  - { id: adl-amini-m-fl-2024, doi: 10.1007/s10212-023-00769-3, slag: studie, grupp: annan, omraden: [], bidrag: "Få lektioner har alla fyra principer som mättes", titel: "Implementation quality of cooperative learning and teacher beliefs—a mixed methods study", text: "Adl-Amini, K., Völlinger, V. A. och Eckart, A. (2024). Implementation quality of cooperative learning and teacher beliefs—a mixed methods study. European Journal of Psychology of Education.", adress: "https://doi.org/10.1007/s10212-023-00769-3", oppnad: 2026-10-30, las: sammanfattning }
+  - { id: johnson-och-johnson-2009, doi: 10.3102/0013189X09339057, slag: artikel, grupp: annan, omraden: [], bidrag: "Teorin och de fem grundelementen", titel: "An educational psychology success story: Social interdependence theory and cooperative learning", text: "Johnson, D. W. och Johnson, R. T. (2009). An educational psychology success story: Social interdependence theory and cooperative learning. Educational Researcher.", adress: "https://static1.squarespace.com/static/55b8e334e4b0e176420c9949/t/57273f5b86db4345e7323102/1462189915305/ER.CL-Success-Story-Pub-Version-09.pdf", oppnad: 2026-10-30, las: fulltext }
+  - { id: slavin-1991, eric: EJ421354, slag: artikel, grupp: annan, omraden: [], primarkalla: true, bidrag: "Gruppmål och eget ansvar är villkoren", titel: "Synthesis of research on cooperative learning", text: "Slavin, R. E. (1991). Synthesis of research on cooperative learning. Educational Leadership.", adress: "https://files.ascd.org/staticfiles/ascd/pdf/journals/ed_lead/el_199102_slavin.pdf", oppnad: 2026-10-30, las: fulltext }
+  - { id: veldman-m-fl-2020, doi: 10.1080/13540602.2020.1740197, slag: studie, grupp: annan, omraden: [], bidrag: "Lärarna som genomförde det bäst lärde ut färdigheterna", titel: "The proof of the pudding is in the eating? Implementation of cooperative learning: differences in teachers' attitudes and beliefs", text: "Veldman, M. A., Van Kuijk, M. F., Doolaard, S. m.fl. (2020). The proof of the pudding is in the eating? Implementation of cooperative learning: differences in teachers' attitudes and beliefs. Teachers and Teaching.", adress: "https://research.hanze.nl/en/publications/the-proof-of-the-pudding-is-in-the-eating-implementation-of-coope/", oppnad: 2026-10-30, las: fulltext }
+  - { id: webb-2009, doi: 10.1348/000709908X380772, slag: artikel, grupp: annan, omraden: [], bidrag: "Lärarens tal blir elevernas modell", titel: "The teacher's role in promoting collaborative dialogue in the classroom", text: "Webb, N. M. (2009). The teacher's role in promoting collaborative dialogue in the classroom. British Journal of Educational Psychology.", adress: "https://goglobal.fiu.edu/_assets/docs/collaborative-dialogue-1-1.pdf", oppnad: 2026-10-30, las: fulltext }
+lasMer:
+  - { slag: text, titel: "Projekt- och grupparbete och elever med NPF", upphov: "Skolverket", ar: 2026, adress: "https://www.skolverket.se/skolutveckling/inspiration-och-stod-i-arbetet/stod-i-arbetet/projekt--och-grupparbete-och-elever-med-npf", oppnad: 2026-10-30, text: "Frågor att planera grupparbete med: roller, tid, talutrymme och vad du gör när samarbetet inte fungerar." }
+  - { slag: text, titel: "Hantera övergångar under en lektion", upphov: "Skolverket", adress: "https://www.skolverket.se/skolutveckling/inspiration-och-stod-i-arbetet/stod-i-arbetet/stod-for-ledarskap-i-undervisningen/hantera-overgangar-under-en-lektion", oppnad: 2026-10-30, text: "Hur instruktionen på tavlan säger vad eleverna gör, hur länge och vad de gör om de behöver hjälp." }
+  - { slag: text, titel: "Collaborative learning approaches", upphov: "Evidence for Learning och Education Endowment Foundation", adress: "https://evidenceforlearning.org.au/education-evidence/teaching-learning-toolkit/collaborative-learning-approaches", oppnad: 2026-10-30, text: "EEF:s sammanfattning på engelska av vad samarbete ger, vad det kostar och vad som krävs." }
+  - { slag: text, titel: "Cooperative Learning: Review of Research and Practice", upphov: "Robyn M. Gillies", ar: 2016, adress: "https://ro.ecu.edu.au/ajte/vol41/iss3/3/", oppnad: 2026-10-30, text: "En översikt på engelska om lärarens roll och om hur lärare lär ut samarbetet." }
+  - { kalla: webb-2009, text: "Hur läraren följer paren och frågar efter förklaringar, och varför allmänna frågor inte hjälper." }
+  - { slag: film, titel: "60-Second Strategy: Sage and Scribe", upphov: "Edutopia", ar: 2025, adress: "https://www.edutopia.org/video/60-second-strategy-sage-scribe-cooperative-learning-activity/", oppnad: 2026-10-30, text: "En minut om en parstruktur i åk 1, där den ena berättar och den andra skriver." }
+  - { slag: film, titel: "Cooperative Structures: Overview", upphov: "Center for the Collaborative Classroom", adress: "https://archived-inside.collaborativeclassroom.org/video/760/cooperative-structures-overview", oppnad: 2026-10-30, text: "Tre minuter om hur kooperativa strukturer används i klassrummet, i åk 3–⁠5." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lär dig metoden
+# ---------------------------------------------------------------------------------------------------------------------
+plan:
+  passen:
+    - { nar: första lektionen, kort: Rutinerna, text: "Den första veckan gör ni två eller tre samarbeten på tio minuter i vanliga lektioner, på något paren redan kan." }
+  fore: ["Planera den första veckans två eller tre korta samarbeten och den första hela lektionen."]
+  utvardering: ["En kollega besöker en lektion i månaden, fyra gånger. Du läser dina anteckningar om elevernas egna uppgifter med specialläraren, och de som inte lär sig innehållet får stödundervisning."]
+  skattningar:
+    - namn: Hur säker är jag på metoden?
+      vem: lararen
+      rad: lararen
+      text: "Skatta i slutet av veckan. Tänk på de fem principerna: Visade du färdigheten, och övade klassen den? Gav du ett mål som krävde alla? Sa du hur var och en visar, och visade alla? Fick alla tänka själva och få sin tur? Reflekterade paren, och sa du konkret vad du såg?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: osaker }
+    - namn: Hur väl fungerar den i praktiken?
+      vem: lararen
+      rad: klassen
+      text: "Tänk på det du ser i klasserna: Gör eleverna på egen hand det de arbetade med i paret? Förklarar de för kamraten hur de tänker? Använder de veckans färdighet utan påminnelse?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: klassenstar }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lathunden Att komma igång
+# ---------------------------------------------------------------------------------------------------------------------
+lathund:
+  metoden:
+    text:
+      - Paren och bordsöarna lär sig ämnet i strukturer där alla behövs och var och en kan visa vad hen kan. Du lär ut samarbetet lika medvetet som ämnet.
+      - Lärandet går till så här. När eleverna förklarar för varandra hör både de själva och du hur de tänker. När vem som helst kan få svara, lönar det sig att förklara tills alla kan.
+  lektion:
+    text: "Den första veckan gör ni två eller tre korta samarbeten. I det första kan paren leta efter tre saker de har gemensamt, och ni fyller i T-kortet för den första färdigheten: att vända sig mot kamraten, vänta på sin tur och tacka. Sedan kommer Ping-pong-prat. Den första hela lektionen, i vecka 2 eller 3, står på lektionskortet."
+  igang:
+    rubrik: De första veckorna
