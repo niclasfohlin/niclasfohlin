@@ -20,7 +20,11 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync as lasFilen, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+// Provet läser källkoden med mönster som har radbrytningen LF. Git skriver ut filerna med CRLF i arbetskopian när
+// core.autocrlf är på, som efter en sammanslagning till main (K-650: sex prov stannade på rätt kod), så en fil som läses
+// som text får sina CRLF som LF här, på ett ställe.
+const readFileSync = (fil, kod) => { const t = lasFilen(fil, kod); return typeof t === 'string' ? t.replace(/\r\n/g, '\n') : t; };
 import { tmpdir } from 'node:os';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
