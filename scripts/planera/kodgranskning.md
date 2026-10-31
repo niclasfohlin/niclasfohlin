@@ -8,7 +8,7 @@ Planera insatsen är en modul som räknar fram en plan för en insats i stödund
 
 {{nytt}}
 
-Reglerna står i `METODER.md` under Planera insatsen och i `PLANERA.md`. Provet, som visar vad som redan prövas: `scripts/planprov.mjs`.
+Läs först `PLANERA.md` under Principerna för modulen, och granska mot dem: en ändring som bryter mot en princip är ett fynd också när den ger rätt svar i dag. Reglerna står i `METODER.md` under Planera insatsen och i `PLANERA.md`. Provet, som visar vad som redan prövas: `scripts/planprov.mjs`.
 
 ## Leta särskilt efter
 

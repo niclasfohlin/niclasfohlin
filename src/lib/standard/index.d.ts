@@ -235,6 +235,8 @@ export declare function vidareProvasI(mp: Metodplan, plan: Plan, v: { innehall: 
 export declare function upprepaIVeckan(upprepa: string | undefined, medRegler: boolean, provas: boolean): { text: string; hela: boolean } | null;
 export declare const harElevernasKolumn: (d: { progression?: { rader: { eleverna?: string; vidare?: string }[] } }) => boolean;
 export declare function elevernasFel(d: { plan?: unknown; progression?: { rader: { vecka: string; eleverna?: string; vidare?: string }[] } }): string[];
+/** Spärren för lärarens roll i en metod som kan planeras: ingen mening i `roll` börjar med "Läraren", eftersom planen visar den under Det du gör. */
+export declare function rollensFel(d: { plan?: unknown; progression?: { rader: { vecka: string; roll?: string }[] } }): string[];
 export declare function planFel(d: Parameters<typeof metodplan>[0] & MetodensTexter): string[];
 /** Metodens fil utan planens fält (`plan`, uppföljningens `tid`, progressionens `taggar` och `rubrik`), som bara planens sida läser. */
 export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;
@@ -419,7 +421,7 @@ export declare function avslutetText(plan: Plan, pagar?: boolean): string;
 export declare const anledningen: (not: string | undefined) => string;
 /** Medelvärdet med en decimal, eller inget utan värden. */
 export declare const medel: (x: number[]) => number | null;
-export declare function utvarderingenText(plan: Plan, u: { beslut?: string; not?: string } | null | undefined, pagar?: boolean): string;
+export declare function utvarderingenText(plan: Plan, u: { beslut?: string; not?: string } | null | undefined, pagar?: boolean, tidigare?: Avslutet[] | Avslutet | null): string;
 export declare const kalenderveckor: (a: number, b: number, streck?: string) => string;
 /** Kalenderveckorna för några datum, med veckor i följd ihop och ett lov som bryter följden: "v. 45 och v. 47". */
 export declare function kalenderveckornaFor(datum: string[]): string;
@@ -482,6 +484,8 @@ export declare function stegUtanfor(mp: Metodplan, plan: Plan): { rad: number; f
 export declare function stegensTakt(rader: { vecka: string }[]): string;
 /** Stegets namn i planen: ledet före det korta namnet, "Vi gör · Paren ställer frågorna …". */
 export declare const stegetsNamnIPlanen: (r: { led?: string }, kort: string) => string;
+/** Stegets innehåll utan ledet, för raden Eleven arbetar med i texten till åtgärdsprogrammet. */
+export declare const stegetsInnehall: (r: { led?: string; kort: string }) => string;
 export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
 export declare function nastaPass(plan: Plan, datum: string): Pass | null;
 /** Nästa pass som inte är bockat, från och med datumet, och de bockade före det. */
@@ -505,7 +509,7 @@ export declare const uppraknat: (ord: string[]) => string;
 /** Passens nummer i en text, "Pass 4–6" eller "Pass 4 och 6" när ett pass är struket däremellan. */
 export declare const passnummerText: (nr: number[]) => string;
 export declare function veckansDagar(plan: { pass: Pass[] }, v: PlanVecka): { fran: string; till: string };
-export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: string; steg?: string[]; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number; folj?: boolean; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string }; elever?: { namn: string }[]; pagar?: boolean; lektioner?: { namn: string; datum: string[] }[]; lektionerSedan?: boolean; extraPass?: { datum: string } }): string;
+export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: string; steg?: string[]; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number; folj?: boolean; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string }; elever?: { namn: string }[]; pagar?: boolean; lektioner?: { namn: string; datum: string[] }[]; lektionerSedan?: boolean; extraPass?: { datum: string }; tidigareAvslut?: Avslutet[] | null; resultat?: string[] }): string;
 /** Passens längd i minuter efter dagarnas klockslag, och passets längd för en dag utan klockslag; olika längder var för sig, i storleksordning. */
 export declare function passensMinuter(val: Val, standard: number, plan?: { pass: Pass[] }): number[];
 /** "30", eller "30 eller 40". */
@@ -557,12 +561,20 @@ export declare function passdagar(val: Val): (datum: string, dag: number) => boo
 export declare function bytDagar(val: Val, dagar: number[], fran?: string, plan?: { pass: Pass[] }): Val;
 
 /** Det läraren för in när hen följer insatsen, allt valfritt: passen som blev av (passens dagar), skattningen vecka för vecka (veckans måndag, sedan elevens id eller grupp), elevlistan, resultaten i metodens uppföljning och besluten mitt i och efter. */
-export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string; utkast?: true; fran?: string }[]; narvaro?: boolean; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string }; oppen?: string; borttagna?: string[]; listan?: string; lamnade?: { id: string; namn: string; utkast?: true; fran?: string }[]; matt?: Record<string, Record<string, number>>; lankar?: Record<string, { formular?: string; sammanstallning?: string }>; lektionPa?: Record<string, number>; klasser?: Klass[]; kommentar?: Record<string, string>; noter?: Record<string, Record<string, string>>; gick?: Record<string, 'ja' | 'inte'>; bockat?: number[]; klassvarden?: Record<string, Record<string, number>>; mittI?: Record<string, string>; avslut?: { datum: string; not?: string } }
+export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string; utkast?: true; fran?: string }[]; narvaro?: boolean; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string }; oppen?: string; borttagna?: string[]; listan?: string; lamnade?: { id: string; namn: string; utkast?: true; fran?: string }[]; matt?: Record<string, Record<string, number>>; lankar?: Record<string, { formular?: string; sammanstallning?: string }>; lektionPa?: Record<string, number>; klasser?: Klass[]; kommentar?: Record<string, string>; noter?: Record<string, Record<string, string>>; gick?: Record<string, 'ja' | 'inte'>; bockat?: number[]; klassvarden?: Record<string, Record<string, number>>; mittI?: Record<string, string>; avslut?: { datum: string; not?: string }; tidigareAvslut?: Avslutet[] }
 export declare const passetsDag: (p: Pass) => string;
 /** Passet som redan ligger på en dag i veckan, utom passet som flyttas. */
 export declare const passetPaDagen: (plan: { pass: Pass[] }, v: PlanVecka, datum: string, utom: string) => Pass | undefined;
 /** Dagen som ett pass hade innan det flyttades till datumet. */
 export declare const flyttatHit: (val: Val, datum: string) => string | undefined;
+/** Valen när läraren ställer in passet på en dag; det sista passet efter ett avslut ger slutet till passet före (fore), och utan pass före null. */
+export declare function installtPass(plan: Plan, val: Val, dag: string): { val: Val; fore?: Pass } | null;
+/** Ett avslut som ett annat beslut har kommit efter: passet insatsen slutade med och lärarens anledning (Foljd.tidigareAvslut). */
+export interface Avslutet { pass: number; not?: string }
+/** Avsluten som en lista i ordning, också ur ett enda avslut som en plan sparade före listan. */
+export declare const avslutenFore: (x: unknown) => Avslutet[];
+/** Hur många avslut planen minns. */
+export declare const AVSLUTENS_LANGD: number;
 export declare const SKALAN: readonly string[];
 export declare const skattningsfragan: (grupp?: boolean) => string;
 export declare const GRUPPEN: 'grupp';
@@ -571,7 +583,7 @@ export declare function rensaFoljd(f: unknown): Required<Pick<Foljd, 'gjorda' | 
 export declare function mittVeckan(plan: Plan): number | null;
 export interface SammanstallningVecka { lektion?: string; nr: number; mandag: string; vecka: number; innehall: number; igen: boolean; pass: { nr: number; dag: string; datum: string; gjort: boolean }[]; gjorda: number; planerade: number; varit: number; installda: number; helgdagar: number; helgdagarKvar: number; skattning?: number; not?: string }
 export interface SammanstallningElev { id: string; namn: string; fran?: string; passen?: number; skattningar: { nr: number; vecka: number; varde: number; lektion?: string }[]; forsta: { nr: number; vecka: number; varde: number; lektion?: string } | null; senaste: { nr: number; vecka: number; varde: number; lektion?: string } | null; narvaro: number | null; resultat: Record<string, string> }
-export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; lektioner?: { namn: string; mal: string; veckor: number[] }[]; grupp: boolean; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; gjordaVarit: number; installda: number; helgdagar: number; helgdagarKvar?: number; slut: boolean; avslutad?: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null; namnen: { namn: string }[]; skattningar: { namn: string; skala: Skala; regler: (Regel & { rad: number })[]; varden: (number | undefined)[]; galler: number[][] }[] }
+export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; lektioner?: { namn: string; mal: string; veckor: number[] }[]; grupp: boolean; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; gjordaVarit: number; installda: number; helgdagar: number; helgdagarKvar?: number; slut: boolean; avslutad?: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null; tidigareAvslut?: Avslutet[] | null; resultat?: string[]; namnen: { namn: string }[]; skattningar: { namn: string; skala: Skala; regler: (Regel & { rad: number })[]; varden: (number | undefined)[]; galler: number[][] }[] }
 /** Namnen som texterna som lämnar webbläsaren tvättar bort: eleverna i listan och de som har stått i den. */
 export declare const elevernasNamn: (f: Foljd | undefined) => { namn: string }[];
 export declare function sammanstallning(plan: Plan, f: Foljd, idag: string, lektioner?: ({ namn: string; mal: string } | null | undefined)[]): Sammanstallning;
@@ -591,11 +603,15 @@ export declare function elevensResultat(plan: Plan, resultat: Record<string, str
 export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning): string;
 export declare function elevtext(info: { mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;
 /** Uppföljningens rad: namnet och kalenderveckorna, "Efter insatsen, v. 51". */
-export declare function uppfoljningensRad(plan: Plan, info: { uppfoljning: { nar: string }[] }, u: Plan['uppfoljning'][number]): string;
+export declare function uppfoljningensRad(plan: Plan, info: { uppfoljning: { nar: string }[] }, u: Plan['uppfoljning'][number], nycklar?: string[]): string;
+/** Uppföljningens datum för en rad, med en mätning vid ett tidigare slut som en förlängning har flyttat. */
+export declare function uppfoljningensDatum(u: Plan['uppfoljning'][number], nycklar?: string[]): string[];
+/** Nycklarna till resultaten som har förts in, "rad-datum". */
+export declare const resultatensNycklar: (f: { resultat?: Record<string, Record<string, string>> } | null | undefined) => string[];
 /** Uppföljningens rad med sitt namn: Efter insatsen, eller radens namn i metoden. */
 export declare const uppfoljningensNamn: (plan: Plan, info: { uppfoljning: { nar: string }[] }, rad: number) => string;
 /** Uppföljningens rader med datum. */
-export declare const uppfoljningensRader: (plan: Plan, info: { uppfoljning: { nar: string }[] }) => string[];
+export declare const uppfoljningensRader: (plan: Plan, info: { uppfoljning: { nar: string }[] }, nycklar?: string[]) => string[];
 /** Veckorna där läraren har skattat hur veckan gick. */
 export declare const skattadeVeckor: <T extends { skattning?: number }>(s: { veckor: T[] }) => T[];
 /** Vad skattningen är, i en text. */
@@ -619,7 +635,15 @@ export declare const insatsenAvslutad: (sistaPass: string | undefined, beslut: s
 /** Beslutet och lärarens mening, med punkt. */
 export declare const beslutText: (b: { beslut?: string; not?: string }) => string;
 /** Förlängningens uppehåll i en mening, lika i texten till åtgärdsprogrammet och sammanställningen. */
-export declare function uppehalletsText(plan: Plan): string;
+export declare function uppehalletsText(plan: Plan, tidigare?: Avslutet[] | Avslutet | null): string;
+/** Uppehållets hela veckor efter en förlängning, deras måndagar. */
+export declare const uppehalletsVeckor: (plan: Plan) => string[];
+/** Beskedet när elever lämnar elevlistan, med det som förts in om dem. */
+export declare function borttagnasBesked(borta: { namn: string; harInfort: boolean }[]): string;
+/** Har läraren fört in något om eleven: en skattning, ett resultat eller frånvaro. */
+export declare const elevenHarInfort: (f: Foljd, id: string) => boolean;
+/** Dagen en ny elev kom till elevlistan, ur listans historia: i dag när gruppen har haft en lista före i dag och ett pass är bockat före i dag, annars ingen. */
+export declare const nyaElevensDag: (f: Foljd, fore: number, idag: string) => string | undefined;
 /** Avstämningen mitt i insatsen som en rad, lika i sammanställningen och i texten till åtgärdsprogrammet. */
 export declare const avstamningensRad: (veckan: string, a: { beslut?: string; not?: string } | null | undefined) => { etikett: string; text: string } | null;
 /** Passens rad: läget, de som har varit utan bock, och de inställda och helgdagarna. */

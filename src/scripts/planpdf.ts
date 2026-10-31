@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppehalletsText, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -99,16 +99,16 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
     if (o.mitt) y -= 22;
     const botten = y - h - 6, x0 = KANT + 24;
     mittfalt(o.mitt, x0, steg, botten, h);
-    for (let v = 1; v <= 5; v++) {
-      const ly = botten + (v / 5) * h;
+    for (let v = 1; v <= SKALAN.length; v++) {
+      const ly = botten + (v / SKALAN.length) * h;
       sida.drawLine({ start: { x: x0 - 4, y: ly }, end: { x: x0 + n * steg, y: ly }, thickness: 0.5, color: farg.kant });
       sida.drawText(String(v), { x: KANT + 6, y: ly - 3, size: 7.5, font, color: farg.svag });
     }
     varden.forEach((x, i) => {
       const bx = stapelnsKant(x0, i, steg, b);
       if (x) {
-        sida.drawRectangle({ x: bx, y: botten, width: b, height: (x / 5) * h, color: farg.accent });
-        sida.drawText(String(x), { x: bx + b / 2 - 2.5, y: botten + (x / 5) * h + 3, size: 8, font: fet, color: farg.text });
+        sida.drawRectangle({ x: bx, y: botten, width: b, height: (x / SKALAN.length) * h, color: farg.accent });
+        sida.drawText(String(x), { x: bx + b / 2 - 2.5, y: botten + (x / SKALAN.length) * h + 3, size: 8, font: fet, color: farg.text });
       } else sida.drawRectangle({ x: bx, y: botten, width: b, height: 1.2, color: farg.kant });
       const iPlanen = ren(etiketter[i].kort), kalender = ren(etiketter[i].kalender);
       sida.drawText(iPlanen, { x: bx + b / 2 - fet.widthOfTextAtSize(iPlanen, 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
@@ -274,7 +274,7 @@ const besluten = (p: Pdf, rader: { etikett: string; text: string }[]) => {
   p.tabell(med);
 };
 // Skalan med frågan, före staplarna.
-const skalan = (p: Pdf, info: PdfInfo, luft: number) => p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft });
+const skalan = (p: Pdf, info: PdfInfo, luft: number) => p.text(`${info.fragan} 1 till ${SKALAN.length}: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft });
 
 /**
  * Gruppens sammanställning som pdf, för läraren, rektor och elevhälsan: Innehållet i insatsen med samma rader som texten till
@@ -322,9 +322,12 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   const anteckningar = s.veckor.filter((v) => v.not).map((v) => ({ etikett: veckansNamn(v).Text, text: mening(v.not!) }));
   if (anteckningar.length) { p.rubrik('Veckornas anteckningar', 40); p.tabell(anteckningar); }
   // Utvärderingen, med avslutet och anledningen när insatsen avslutades tidigare (utvarderingenText i standarden, K-542).
+  // Avslutet före förlängningen med anledningen, och uppehållet, ur samma rot som texten till åtgärdsprogrammet (verifieringen 3
+  // inför lanseringen: pdf:en sa inget om avslut, uppehåll eller förlängning).
   besluten(p, [
+    { etikett: 'Förlängningen', text: uppehalletsText(plan, s.tidigareAvslut) },
     { etikett: 'Mitt i insatsen', text: s.avstamning?.beslut || s.avstamning?.not ? beslutText(s.avstamning) : '' },
-    { etikett: 'Efter insatsen', text: utvarderingenText(plan, s.utvardering, !s.avslutad) },
+    { etikett: 'Efter insatsen', text: utvarderingenText(plan, s.utvardering, !s.avslutad, s.tidigareAvslut) },
   ]);
   return p.avsluta(`${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan, sparas inte på sajten`);
 }
@@ -354,9 +357,10 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   // 2026-10-25: "kommer med på totala sammaställningen och för varje elev"). Meningen gäller gruppen, så de andra elevernas
   // namn står inte i den här elevens utskrift.
   besluten(p, [
+    { etikett: 'Förlängningen', text: utanNamn(uppehalletsText(plan, s.tidigareAvslut), s.namnen.filter((x) => x.namn !== e.namn), [e]) },
     // Avstämningen med beslutet utan lärarens mening, som kan handla om de andra eleverna.
     { etikett: 'Mitt i insatsen', text: s.avstamning?.beslut ? `${BESLUT[s.avstamning.beslut as keyof typeof BESLUT] ?? s.avstamning.beslut}.` : '' },
-    { etikett: 'Efter insatsen', text: utanNamn(utvarderingenText(plan, s.utvardering, !s.avslutad), s.namnen.filter((x) => x.namn !== e.namn), [e]) },
+    { etikett: 'Efter insatsen', text: utanNamn(utvarderingenText(plan, s.utvardering, !s.avslutad, s.tidigareAvslut), s.namnen.filter((x) => x.namn !== e.namn), [e]) },
   ]);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);
 }

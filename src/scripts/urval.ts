@@ -3,6 +3,8 @@
 // ligger fast när något är valt, räkningen med metodernas namn, Rensa och minnet under besöket. Det som laddas ner skiljer
 // sig och står i bankens sida: Stödundervisning bygger en Word-fil med de valda metoderna (src/pages/stodundervisning/
 // index.astro), och Metoder hämtar varje vald metods Word-fil, en fil eller flera i en zip (src/pages/metoder/index.astro).
+// Rutans knappar, Word och Drive, står i Urvalsknappar.astro, och Drive sparar i läsarens Google Drive med driveIUrvalet
+// nedan, en rot för båda bankerna (Niclas 2026-10-31: "Varför har inte Metoder skicka till drive som stödundervisning?").
 // Utan JavaScript syns varken kryssrutorna eller rutan (global.css, html.js).
 
 export interface Urvalet {
@@ -45,7 +47,7 @@ export function urvalet(samla: HTMLFormElement, nyckel: string, vidAntalet?: (an
     // Rutan ligger fast nederst bara när en metod är vald, så att den inte står över korten i onödan (K-463).
     samla.classList.toggle('har-valda', n > 0 || arbetar || Boolean(status.textContent));
     rensa.hidden = n === 0;
-    const namn = markerade().map((b) => b.closest('.kort')?.querySelector('h3')?.textContent?.trim()).filter(Boolean);
+    const namn = markerade().map(kortetsNamn).filter(Boolean);
     valda.textContent = n === 0 ? 'Inga metoder valda' : `${n === 1 ? '1 metod vald' : `${n} metoder valda`}: ${namn.join(', ')}`;
     for (const b of boxar) b.closest('.kort')?.classList.toggle('vald', b.checked);
     vidAntalet?.(n);
@@ -68,4 +70,52 @@ export function urvalet(samla: HTMLFormElement, nyckel: string, vidAntalet?: (an
     try { await arbete(valda); } finally { arbetar = false; uppdatera(); }
   }
   return { visaStatus, status, behallStatus, arbeta };
+}
+
+/** Den valda metodens namn, som kortets rubrik visar det. */
+export const kortetsNamn = (b: HTMLInputElement) => b.closest('.kort')?.querySelector('h3')?.textContent?.trim();
+
+/** En fil som Drive-knappen i rutan sparar: filen, dess namn i Drive och, när de är flera, namnet i beskedet. */
+export interface DriveFil { blob: Blob; namn: string; titel?: string }
+
+/**
+ * Drive-knappen i rutan (data-drive-valda, Urvalsknappar.astro), en rot för båda bankerna. Googles inloggningsruta öppnas
+ * direkt på trycket, innan något hämtas eller byggs, annars kan webbläsaren blockera den (src/scripts/drive.ts). vidTrycket
+ * får de valda på trycket, läser där det banken behöver, som Stödundervisnings Med mallar, och ger arbetet som gör filerna
+ * efter inloggningen. Arbetet kastar ett fel när filerna inte gick att göra, och banken skriver då sitt besked med vidFel.
+ * Varje fil sparas som eget dokument i Drive: en fil med beskedet i rutan, som Stödundervisnings fil med alla valda, och
+ * flera med en rad per fil och filens titel, som Metoders metoder, eftersom Drive inte öppnar en zip-fil som dokument.
+ * Utan knappen, som utan site.driveKlientId, händer inget.
+ */
+export function driveIUrvalet(samla: HTMLFormElement, u: Urvalet, vidTrycket: (valda: HTMLInputElement[]) => () => Promise<DriveFil[]>, vidFel: (fel: unknown) => void) {
+  samla.querySelector<HTMLButtonElement>('[data-drive-valda]')?.addEventListener('click', () => void u.arbeta(async (valda) => {
+    const gor = vidTrycket(valda);
+    let drive: typeof import('./drive');
+    try {
+      drive = await import('./drive');
+      await drive.forberedDrive();
+    } catch (fel) {
+      u.visaStatus(`Det gick inte: ${(fel as Error).message}`);
+      return;
+    }
+    let filer: DriveFil[];
+    try {
+      filer = await gor();
+    } catch (fel) {
+      vidFel(fel);
+      return;
+    }
+    u.behallStatus();
+    if (filer.length === 1) {
+      await drive.sparaIDrive(filer[0].blob, filer[0].namn, u.status);
+      return;
+    }
+    u.status.replaceChildren();
+    for (const f of filer) {
+      const rad = document.createElement('span');
+      rad.className = 'drive-rad';
+      u.status.append(rad);
+      await drive.sparaIDrive(f.blob, f.namn, rad, undefined, f.titel ?? f.namn);
+    }
+  }));
 }

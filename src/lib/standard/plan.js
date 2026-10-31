@@ -875,6 +875,20 @@ export const harElevernasKolumn = (d) => !!d.progression?.rader.some((r) => r.el
 export const ELEVERNAS_LANGD = 200;
 
 /**
+ * Spärren för lärarens roll i en metod som kan planeras: planen visar `roll` under Det du gör och talar till läraren med du,
+ * så ingen mening och inget led efter "och", "men" eller "sedan" börjar med "Läraren" (verifieringen 2 inför lanseringen: "Det
+ * du gör: Läraren tänker högt …" i Problemlösning i grupp, där fokus på samma rad sa "medan du tänker högt"). En annan lärare
+ * mitt i en mening, som "Fråga läraren i SO", och klassläraren räknas inte. Riggen kör samma spärr före leveransen.
+ * @param {{ plan?: unknown, progression?: { rader: { vecka: string, roll?: string }[] } }} d
+ * @returns {string[]}
+ */
+export function rollensFel(d) {
+  if (!d.plan) return [];
+  return (d.progression?.rader ?? []).filter((r) => /(?:^|[.!?:]\s+|,\s+(?:och|men|sedan)\s+)läraren(?![\p{L}\p{N}])/iu.test(String(r.roll ?? '').trim()))
+    .map((r) => `Progressionens rad "${r.vecka}": roll står i planen under Det du gör och skrivs till läraren med du, som "Du tänker högt …", och inte "Läraren …" (METODER.md under Fälten i metodens fil).`);
+}
+
+/**
  * Spärren för elevernas riktning: `eleverna` är en mening som börjar med "Att", om något eleverna gör eller säger, högst två
  * meningar och 200 tecken, och `vidare` är fortsättningen på "Gå vidare när", med liten bokstav först och utan punkt sist.
  * En metod som kan planeras har `eleverna` i varje rad, och den sista raden har inget `vidare`, eftersom beslutet efter
@@ -1758,7 +1772,7 @@ export function obesvaradVecka(plan, f, idag, skapad) {
 }
 
 /** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen, citatens och nivåvalets. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */
-export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...versionsvaletsFel(d), ...utvarderingensFel(d), ...elevernasFel(d), ...resultatetsFel(d)];
+export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...versionsvaletsFel(d), ...utvarderingensFel(d), ...elevernasFel(d), ...rollensFel(d), ...resultatetsFel(d)];
 
 // ---------- Modulen ----------
 
@@ -2270,21 +2284,53 @@ export function avslutetText(plan, pagar = false) {
   const v = plan.veckor[plan.veckor.length - 1];
   return `Insatsen ${pagar ? 'avslutas' : 'avslutades'} i ${planveckansNamn(plan, v).text}, efter ${plan.pass.length} av ${plan.planerade} planerade pass.`;
 }
+/**
+ * Beskedet när elever lämnar elevlistan, som sidan visar med Ångra: namnen, och för den som har något infört att det inte står
+ * i sammanställningen och kommer tillbaka med samma namn (verifieringen 3 inför lanseringen och lagning-4, M1 och M4: Elsa och
+ * hennes skattning försvann utan besked, och beskedet vid ett byte av elev sa inte att det som förts in följde med bort).
+ * @param {{ namn: string, harInfort: boolean }[]} borta
+ */
+export function borttagnasBesked(borta) {
+  if (!borta.length) return '';
+  const infort = borta.filter((e) => e.harInfort);
+  return `${uppraknat(borta.map((e) => e.namn))} ${borta.length === 1 ? 'är borttagen' : 'är borttagna'} ur elevlistan.${infort.length ? ` Det som har förts in om ${uppraknat(infort.map((e) => e.namn))} står inte i sammanställningen och kommer tillbaka om du skriver ${infort.length === 1 ? 'namnet' : 'namnen'} igen.` : ''}`;
+}
+/**
+ * Dagen en ny elev kom till elevlistan, så att närvaron räknas därifrån, i allt som läser den (sammanställningen, pdf:erna,
+ * texterna och kalenderfilen): i dag, när gruppen har haft en elevlista före i dag och ett pass är bockat före i dag, och annars
+ * ingen, så att en lista som skrivs in första gången, också i flera steg samma dag, är gruppen från början. Listans historia
+ * avgör och inte bara listan när läraren började skriva: en lista som har tömts har kvar de lämnade eleverna och dagen den fick
+ * sin första elev (rotprovet 2026-10-31, Codex fynd 2: Bea fick Alis bockade pass före sin start, när listan hade tömts först).
+ * @param {Foljd} f följden, med de lämnade eleverna och dagen listan fick sin första elev (listan)
+ * @param {number} fore hur många elever listan hade när läraren började skriva
+ * @param {string} idag
+ * @returns {string | undefined}
+ */
+export const nyaElevensDag = (f, fore, idag) => ((fore > 0 || (f.lamnade ?? []).length > 0 || !!f.listan) && (!f.listan || f.listan < idag) && (f.gjorda ?? []).some((d) => d < idag) ? idag : undefined);
+/** Har läraren fört in något om eleven: en skattning, ett resultat eller frånvaro. @param {Foljd} f @param {string} id */
+export const elevenHarInfort = (f, id) => Object.values(f.skattning ?? {}).some((v) => v?.[id] !== undefined) || Object.values(f.resultat ?? {}).some((v) => String(v?.[id] ?? '').trim() !== '') || Object.values(f.franvaro ?? {}).some((l) => (l ?? []).includes(id));
 /** Lärarens anledning till ett avslut i en mening, "Anledning: Gruppen har nått målet.", i båda lagren; tom utan (sajtens K-631). @param {string | undefined} not */
 export const anledningen = (not) => (not ? `Anledning: ${mening(stor(utanPunkt(not)))}` : '');
 /**
  * Utvärderingen efter insatsen, lika på sidan, i pdf:erna och i texterna som kopieras: när insatsen avslutades tidigare
  * avslutet med lärarens anledning, som är utvärderingens mening med beslutet Avsluta insatsen, och annars beslutet och
- * meningen. Tom när inget är valt eller skrivet.
+ * meningen. Tom när inget är valt eller skrivet. Ett annat beslut efter avslutet, som Förläng insatsen innan veckorna är
+ * valda, står som beslut, "Beslut: Förläng insatsen.", så att det inte läses som en uppmaning eller som avslutets anledning
+ * (verifieringen 2 inför lanseringen: "… efter 10 av 15 planerade pass. Förläng insatsen.").
  * @param {Plan} plan
  * @param {{ beslut?: string, not?: string } | null | undefined} u
  * @param {boolean} [pagar] insatsen pågår, sista passet har inte varit
+ * @param {{ pass: number, not?: string }[] | { pass: number, not?: string } | null} [tidigare] avsluten som ett annat beslut har kommit efter (Foljd.tidigareAvslut)
  */
-export function utvarderingenText(plan, u, pagar = false) {
+export function utvarderingenText(plan, u, pagar = false, tidigare) {
   const beslutet = u?.beslut || u?.not ? beslutText(u) : '';
   const avslut = avslutetText(plan, pagar);
   if (!avslut) return beslutet;
-  return [avslut, u?.beslut === 'avsluta' ? anledningen(u.not) : beslutet].filter(Boolean).join(' ');
+  if (u?.beslut === 'avsluta') return [avslut, anledningen(u.not)].filter(Boolean).join(' ');
+  // Anledningen till avslutet står kvar när ett annat beslut har kommit efter det (tidigareAvslut; verifieringen 3 inför
+  // lanseringen: skälet försvann när läraren valde Förläng insatsen, fast avslutsrutan lovar att det står i varje sammanställning).
+  const anledning = anledningen(avslutenFore(tidigare).findLast((t) => t.pass === plan.slut)?.not);
+  return [avslut, anledning, u?.beslut ? `Beslut: ${beslutet}` : beslutet].filter(Boolean).join(' ');
 }
 
 /**
@@ -2882,14 +2928,25 @@ export function stegensTakt(rader) {
   const n = langder[0];
   return `Planen tar sedan ett steg ${n === 1 ? 'i veckan' : n === 2 ? 'varannan vecka' : `var ${ORDNINGSTAL[n] ?? `${n}:e`} vecka`}.`;
 }
+// Mellan ledet och stegets korta namn, i stegetsNamnIPlanen och stegetsInnehall.
+const LEDETS_SKILJE = ' · ';
 /**
- * Stegets namn, ett och samma i Börja på, planens lista, veckan, texten till åtgärdsprogrammet och pdf:erna: ledet som metoden
- * kallar steget, som "Vi gör", före stegets korta namn, så att utvärderingens "ni börjar i ledet Vi gör" och veckans rubrik
- * har ett namn som Börja på och listan har (Samma sak överallt inför lanseringen, E4). Utan led står det korta namnet ensamt.
+ * Stegets namn, ett och samma i Börja på, planens lista, veckan och pdf:erna: ledet som metoden kallar steget, som "Vi gör",
+ * före stegets korta namn, så att utvärderingens "ni börjar i ledet Vi gör" och veckans rubrik har ett namn som Börja på och
+ * listan har (Samma sak överallt inför lanseringen, E4). Utan led står det korta namnet ensamt. Raden Eleven arbetar med, i
+ * texten till åtgärdsprogrammet och i pdf:ens Innehållet i insatsen, säger stegets innehåll utan ledet (stegetsInnehall).
  * @param {{ led?: string }} r progressionens rad
  * @param {string} kort stegets korta namn: rubriken, kursveckans titel eller fokus första mening
  */
-export const stegetsNamnIPlanen = (r, kort) => { const led = String(r.led ?? '').trim(); return led && kort !== led ? `${led} · ${kort}` : kort || led; };
+export const stegetsNamnIPlanen = (r, kort) => { const led = String(r.led ?? '').trim(); return led && kort !== led ? `${led}${LEDETS_SKILJE}${kort}` : kort || led; };
+/**
+ * Stegets innehåll utan ledet, för raden Eleven arbetar med i texten till åtgärdsprogrammet och sammanställningens pdf: raden
+ * säger vad eleven arbetar med, och ledet, som Jag gör och Vi gör, säger hur läraren och eleverna delar på arbetet, med
+ * lärarens ord (verifieringen 2 inför lanseringen: "Eleven arbetar med: Jag gör · Paren berättar …", där Jag gör är läraren).
+ * Planens andra vyer har ledet först (stegetsNamnIPlanen). Ett steg som bara har ledet till namn behåller det.
+ * @param {{ led?: string, kort: string }} r progressionens rad, med stegets namn i planen (kort)
+ */
+export const stegetsInnehall = (r) => { const led = String(r.led ?? '').trim(), namn = String(r.kort ?? ''); return led && namn.startsWith(`${led}${LEDETS_SKILJE}`) ? namn.slice(led.length + LEDETS_SKILJE.length) : namn; };
 
 /** Planens vecka för ett datum: veckan datumet ligger i, nästa vecka före start, och sista veckan efter slutet. @param {Plan} plan @param {string} datum */
 export function veckanFor(plan, datum) {
@@ -3404,10 +3461,25 @@ const narIText = (nar, borja) => {
  * @param {{ uppfoljning: { nar: string }[] }} info
  * @param {Plan['uppfoljning'][number]} u
  */
-export function uppfoljningensRad(plan, info, u) {
+export function uppfoljningensRad(plan, info, u, nycklar = []) {
   const namn = uppfoljningensNamn(plan, info, u.rad);
-  return u.tillfallen.length ? `${namn}, ${uppraknat([...new Set(u.tillfallen.map((t) => kalendervecka(isoVecka(t.datum).vecka)))])}` : namn;
+  const datum = uppfoljningensDatum(u, nycklar);
+  return datum.length ? `${namn}, ${uppraknat([...new Set(datum.map((d) => kalendervecka(isoVecka(d).vecka)))])}` : namn;
 }
+/**
+ * Uppföljningens datum för en rad: tillfällena i planen, och efter insatsen också en mätning vid ett tidigare slut som en
+ * förlängning har flyttat, när läraren har fört in resultat då, så att raden Uppföljning och resultatet säger samma vecka
+ * (lagning-4, M2: "Efter insatsen, v. 2" i raden och "Efter insatsen, v. 53" vid resultatet).
+ * @param {Plan['uppfoljning'][number]} u
+ * @param {string[]} [nycklar] resultatens nycklar, "rad-datum" (resultatensNycklar)
+ */
+export function uppfoljningensDatum(u, nycklar = []) {
+  const egna = u.tillfallen.map((t) => t.datum).sort();
+  const forut = u.typ !== 'efter' ? [] : nycklar.map((k) => /^(\d+)-(\d{4}-\d{2}-\d{2})$/.exec(k)).flatMap((m) => (m && Number(m[1]) === u.rad && !egna.includes(m[2]) && (!egna.length || m[2] < egna[0]) ? [m[2]] : []));
+  return [...new Set([...forut, ...egna])].sort();
+}
+/** Nycklarna till resultaten som har förts in, "rad-datum", med något värde. @param {{ resultat?: Record<string, Record<string, string>> } | null | undefined} f */
+export const resultatensNycklar = (f) => Object.entries(f?.resultat ?? {}).filter(([, v]) => Object.values(v ?? {}).some((x) => String(x ?? '').trim())).map(([k]) => k).sort();
 /**
  * Uppföljningens rad med sitt namn, i raden och vid elevens resultat: den första raden efter insatsen heter Efter insatsen,
  * en rad som heter efter insatsens vecka säger det, och metodens veckor i namnet heter som planens (narIText; Codex
@@ -3417,8 +3489,8 @@ export function uppfoljningensRad(plan, info, u) {
  * @param {number} rad
  */
 export const uppfoljningensNamn = (plan, info, rad) => (rad === plan.uppfoljning.find((x) => x.typ === 'efter')?.rad ? 'Efter insatsen' : narIText(info.uppfoljning[rad]?.nar ?? '', plan.borja));
-/** Uppföljningens rader med datum, som sammanställningen, sidan och pdf:en visar dem. @param {Plan} plan @param {{ uppfoljning: { nar: string }[] }} info */
-export const uppfoljningensRader = (plan, info) => plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => uppfoljningensRad(plan, info, u));
+/** Uppföljningens rader med datum, som sammanställningen, sidan och pdf:en visar dem. @param {Plan} plan @param {{ uppfoljning: { nar: string }[] }} info @param {string[]} [nycklar] resultatens nycklar (resultatensNycklar) */
+export const uppfoljningensRader = (plan, info, nycklar = []) => plan.uppfoljning.filter((u) => uppfoljningensDatum(u, nycklar).length).map((u) => uppfoljningensRad(plan, info, u, nycklar));
 /** Vad skattningen är, i en text: "skattning varje vecka, 1 till 5, av hur väl eleven klarar målet på egen hand". @param {string} vem eleven, eleverna eller gruppen @param {boolean} [varjeVecka] */
 export const skattningenText = (vem, varjeVecka = true, mal = 'målet') => `skattning${varjeVecka ? ' varje vecka' : ''}, 1 till 5, av hur väl ${vem} klarar ${mal} på egen hand`;
 
@@ -3445,7 +3517,7 @@ export const radText = (r) => (r.etikett ? `${r.etikett}: ${r.text}` : r.text);
  * @param {{ titel: string, undertitel?: string, adress: string, mal?: string, steg?: string[], uppfoljning: { nar: string }[], nivaNamn?: string }} info
  * @param {Plan} plan
  * @param {Val} val
- * @param {{ minuter: number, genomforda?: number, folj?: boolean, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string }, elever?: { namn: string }[], pagar?: boolean, lektioner?: { namn: string, datum: string[] }[], lektionerSedan?: boolean, extraPass?: { datum: string } }} o utvärderingen och eleverna: anledningen när insatsen avslutades tidigare, utan elevernas namn; i en serie de valda lektionerna med passens datum, och om fler väljs sedan; en versions extra pass före pass 1 (extraPassetsDag), som omfattningen räknar med (Codex 2026-10-27)
+ * @param {{ minuter: number, genomforda?: number, folj?: boolean, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string }, elever?: { namn: string }[], pagar?: boolean, lektioner?: { namn: string, datum: string[] }[], lektionerSedan?: boolean, extraPass?: { datum: string }, tidigareAvslut?: { pass: number, not?: string }[] | null, resultat?: string[] }} o utvärderingen och eleverna: anledningen när insatsen avslutades tidigare, utan elevernas namn; i en serie de valda lektionerna med passens datum, och om fler väljs sedan; en versions extra pass före pass 1 (extraPassetsDag), som omfattningen räknar med (Codex 2026-10-27)
  * @returns {{ etikett?: string, text: string }[]}
  */
 export function dokumentationsrader(info, plan, val, o) {
@@ -3463,9 +3535,10 @@ export function dokumentationsrader(info, plan, val, o) {
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
   if (plan.forstaPass && plan.sistaPass) rader.push({ etikett: 'Omfattning', text: `${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter, plan))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${o.extraPass ? `, och det extra passet före pass 1, ${dagText(o.extraPass.datum)}` : ''}${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.` });
   // Förlängningens uppehåll, med samma mening som sammanställningen (uppehalletsText; lagning-3, L3).
-  if (uppehalletsText(plan)) rader.push({ text: uppehalletsText(plan) });
-  // En insats som avslutades tidigare säger det, med lärarens anledning utan elevernas namn (K-542).
-  if (avslutetText(plan)) rader.push({ text: utanNamn(utvarderingenText(plan, o.utvardering?.beslut === 'avsluta' ? o.utvardering : undefined, o.pagar), o.elever ?? []) });
+  if (uppehalletsText(plan, o.tidigareAvslut)) rader.push({ text: utanNamn(uppehalletsText(plan, o.tidigareAvslut), o.elever ?? []) });
+  // En insats som avslutades tidigare säger det, med lärarens anledning utan elevernas namn (K-542), också när ett annat
+  // beslut har kommit efter avslutet (tidigareAvslut).
+  if (avslutetText(plan)) rader.push({ text: utanNamn(utvarderingenText(plan, o.utvardering?.beslut === 'avsluta' ? o.utvardering : undefined, o.pagar, o.tidigareAvslut), o.elever ?? []) });
   // Det eleven arbetar med: metodens steg i planens ordning, med kalenderveckorna. Pass i följd med samma steg står ihop, och
   // ett lov mitt i står inte med i veckorna (kalenderveckornaFor).
   /** @type {{ steg: number | null, datum: string[] }[]} */
@@ -3482,11 +3555,17 @@ export function dokumentationsrader(info, plan, val, o) {
   if (o.lektioner) {
     const valda = o.lektioner.map((g) => `${g.namn} (${kalenderveckornaFor(g.datum)})`);
     rader.push({ etikett: 'Eleven arbetar med', text: `${valda.length ? `${valda.join('; ')}. ` : ''}${o.lektionerSedan ? `${valda.length ? 'Lektionerna efter' : 'Lektionerna'} väljs vecka för vecka efter vad gruppen klarar.` : ''}`.trim() });
-  } else if (innehall.length) rader.push({ etikett: 'Eleven arbetar med', text: `${innehall.join('; ')}.` });
+  } else if (innehall.length) {
+    // Passen efter metodens sista steg, som en förlängnings veckor, har inget eget steg i metoden, och raden säger att insatsen
+    // fortsätter med stegen de veckorna (lagning-4, M3: förlängningens veckor räknades inte in).
+    const sistaSteget = grupper.map((g) => g.steg !== null).lastIndexOf(true);
+    const efter = grupper.slice(sistaSteget + 1).flatMap((g) => g.datum);
+    rader.push({ etikett: 'Eleven arbetar med', text: `${[...innehall, ...(efter.length ? [`fortsättning på stegen (${kalenderveckornaFor(efter)})`] : [])].join('; ')}.` });
+  }
   // Uppföljningens rader som planen har kvar: de med datum, och det som görs i varje pass eller vecka. En rad vars tillfällen
   // ligger efter planens slut står inte med, och villkoren, som läraren bedömer när det händer, inte heller (buggjakten
   // inför lanseringen, C1: efter ett avslut i vecka 3 stod "Var tredje vecka." och "Vecka 6 i insatsen." utan veckor).
-  const tider = plan.uppfoljning.filter((u) => (u.tillfallen.length || u.typ === 'lopande') && u.rad !== gruppens?.rad && !u.period).map((u) => uppfoljningensRad(plan, info, u));
+  const tider = plan.uppfoljning.filter((u) => (uppfoljningensDatum(u, o.resultat).length || u.typ === 'lopande') && u.rad !== gruppens?.rad && !u.period).map((u) => uppfoljningensRad(plan, info, u, o.resultat));
   if (tider.length) rader.push({ etikett: 'Uppföljning', text: `${tider.join('. ')}.` });
   if (o.folj) {
     const m = mittVeckan(plan);
@@ -3524,6 +3603,26 @@ export const passetPaDagen = (plan, v, datum, utom) => veckansPass(plan, v).find
  * @param {Val} val @param {string} datum
  */
 export const flyttatHit = (val, datum) => Object.entries(val.flytta ?? {}).find(([fran, till]) => till === datum && fran !== datum)?.[0];
+/**
+ * Valen när läraren ställer in passet på en dag: dagen stryks och flytten dit tas bort, och är passet insatsens sista efter ett
+ * avslut slutar insatsen med passet före. Avslutet gäller dagen läraren valde, så nästa pass får inte numret och inget pass som
+ * avslutet strök kommer tillbaka (rotprovet 2026-10-31, B2: fredagens pass fick numret 8 och insatsen slutade med ett pass som
+ * avslutet hade strukit). Har det sista passet inget pass före sig går det inte att ställa in (null), och fore säger passet
+ * insatsen nu slutar med.
+ * @param {Plan} plan
+ * @param {Val} val
+ * @param {string} dag passets dag i planen (passetsDag)
+ * @returns {{ val: Val, fore?: Pass } | null}
+ */
+export function installtPass(plan, val, dag) {
+  const flytta = { ...(val.flytta ?? {}) };
+  delete flytta[dag];
+  const ut = { ...val, flytta, stryk: [...new Set([...(val.stryk ?? []), dag])] };
+  const pass = plan.pass.find((p) => passetsDag(p) === dag);
+  if (!plan.slut || !pass || pass.nr !== plan.slut) return { val: ut };
+  const fore = iDatumordning(plan.pass).filter((p) => efterDatum(p, pass) < 0).pop();
+  return fore ? { val: { ...ut, slut: fore.nr }, fore } : null;
+}
 
 /**
  * Skalan när läraren följer insatsen (Niclas 2026-10-24: "skatta enkelt 1-5 hur väl den nu klarar av metodens centrala
@@ -3591,7 +3690,12 @@ export function rensaFoljd(f) {
   const klassvarden = per(g.klassvarden, (d, v) => { const n = arDatum(d) ? per(v, (k, x) => (id(k) && iSkalan(x, KLASSERNAS_SKALA) ? x : undefined)) : {}; return Object.keys(n).length ? n : undefined; });
   const mittI = per(g.mittI, (k, x) => (id(k) && text(x, MITT_I_LANGD) ? text(x, MITT_I_LANGD) : undefined));
   const avslut = obj(g.avslut), anledning = text(avslut.not, ANLEDNINGENS_LANGD);
+  // Avsluten i Planera insatsen som ett annat beslut har kommit efter, i ordning, med passet och lärarens anledning, så att varje
+  // anledning står kvar efter förlängningarna (verifieringen 3 inför lanseringen, och rotprovet 2026-10-31, B1: planen minns
+  // varje avslut). En plan som sparades med ett enda avslut läses som en lista med ett.
+  const tidigare = avslutenFore(g.tidigareAvslut).slice(-AVSLUTENS_LANGD).flatMap((t) => { const x = obj(t), not = text(x.not, ANLEDNINGENS_LANGD); return Number.isInteger(x.pass) && x.pass > 0 ? [{ pass: x.pass, ...(not ? { not } : {}) }] : []; });
   return {
+    ...(tidigare.length ? { tidigareAvslut: tidigare } : {}),
     ...(allaKlasser.length ? { klasser: allaKlasser } : {}),
     ...(Object.keys(kommentar).length ? { kommentar } : {}),
     ...(Object.keys(noter).length ? { noter } : {}),
@@ -3751,6 +3855,10 @@ export function sammanstallning(plan, f, idag, lektioner) {
     // texterna och pdf:erna, men lärarens beslut ligger kvar och kommer tillbaka med Ångra avslutet (buggjakten
     // 2026-10-25: avstämningen var borta i veckan men stod kvar i texten till åtgärdsprogrammet).
     avstamning: mittVeckan(plan) ? f.avstamning ?? null : null, utvardering: f.utvardering ?? null,
+    // Avslutet före ett annat beslut eller en förlängning, med lärarens anledning (uppehalletsText, utvarderingenText).
+    tidigareAvslut: f.tidigareAvslut ?? null,
+    // Resultaten som har förts in, med uppföljningens nyckel, så att raden Uppföljning säger en mätning vid ett tidigare slut.
+    resultat: resultatensNycklar(f),
     // Namnen som texterna tvättar bort, ur en rot (elevernasNamn).
     namnen: elevernasNamn(f),
     // Metodens skattning av gruppen med linjen och reglerna (K-559).
@@ -3831,18 +3939,61 @@ export const beslutText = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', 
  * @returns {{ etikett: string, text: string } | null}
  */
 /**
- * Förlängningens uppehåll i en mening, lika i texten till åtgärdsprogrammet och i sammanställningen, som avstämningen: veckorna
- * och dagarna utan pass och dagen insatsen började igen, "Insatsen hade uppehåll v. 3–4 och förlängdes med pass från tisdag 2
- * februari." (lagning-3, L3: texten sa inget om avslutet, uppehållet och förlängningen). Tom utan uppehåll.
+ * Förlängningens uppehåll i en mening, lika i lägesraden, texten till åtgärdsprogrammet och sammanställningen på sidan, i
+ * texten och i pdf:erna, som avstämningen: veckorna utan pass och dagen insatsen började igen, "Insatsen hade uppehåll v. 3–4
+ * och förlängdes med pass från tisdag 2 februari." (lagning-3, L3). Avslutades insatsen före förlängningen står avslutet
+ * först, med veckan, passen och lärarens anledning (verifieringen 3 inför lanseringen: skälet försvann överallt efter
+ * förlängningen). Planen minns varje avslut, och texten säger dem i ordning, vart och ett med sitt uppehåll och dagen insatsen
+ * började igen (rotprovet 2026-10-31, B1: det första avslutets anledning försvann efter en andra förlängning). Tom utan uppehåll
+ * och utan ett avslut som en förlängning tog bort.
+ * @param {Plan} plan
+ * @param {{ pass: number, not?: string }[] | { pass: number, not?: string } | null} [tidigare] avsluten före förlängningarna (Foljd.tidigareAvslut)
+ */
+export function uppehalletsText(plan, tidigare) {
+  const up = plan.uppehall ?? [];
+  const veckor = uppehalletsVeckor(plan), dagar = up.filter(arDatum).sort();
+  // Avsluten som en förlängning har tagit bort: passet insatsen slutade med finns, det är inte planens slut nu, och planen har
+  // pass efter det. De står i passens ordning.
+  const avsluten = avslutenFore(tidigare).filter((t) => !(plan.slut && plan.slut === t.pass) && plan.pass.some((p) => p.nr > t.pass)).map((t) => ({ t, pass: passetMedNr(plan, t.pass) })).filter((x) => x.pass).sort((a, b) => efterDatum(a.pass, b.pass));
+  if (!veckor.length && !dagar.length && !avsluten.length) return '';
+  // Avsluten och uppehållen i datumordning, i delar: ett avslut börjar en ny del, och ett uppehåll efter ett pass också, så att
+  // varje del säger sitt uppehåll och dagen insatsen började igen.
+  const handelser = [...avsluten.map((x) => ({ fran: x.pass.datum, till: x.pass.datum, x })), ...veckor.map((m) => ({ fran: m, till: skolveckan(m).sondag, vecka: m })), ...dagar.map((d) => ({ fran: d, till: d, dag: d }))]
+    .sort((a, b) => (a.fran < b.fran ? -1 : a.fran > b.fran ? 1 : a.x ? -1 : b.x ? 1 : 0));
+  /** @type {{ x?: (typeof avsluten)[number], veckor: string[], dagar: string[], till: string }[]} */
+  const delar = [];
+  for (const h of handelser) {
+    const forra = delar.at(-1);
+    if (!forra || h.x || plan.pass.some((p) => p.datum > forra.till && p.datum < h.fran)) delar.push({ ...(h.x ? { x: h.x } : {}), veckor: [], dagar: [], till: h.till });
+    const nu = /** @type {(typeof delar)[number]} */ (delar.at(-1));
+    if (h.vecka) nu.veckor.push(h.vecka);
+    if (h.dag) nu.dagar.push(h.dag);
+    if (h.till > nu.till) nu.till = h.till;
+  }
+  return delar.flatMap(({ x, veckor: vk, dagar: dg, till }) => {
+    const igen = iDatumordning(plan.pass).find((p) => p.datum > till);
+    // Uppehållets veckor är de hela veckor som har varit utan pass; en dag i en vecka med pass sägs bara när ingen hel vecka
+    // var uppehåll (verifieringen 3 inför lanseringen: "uppehåll v. 2–4" när beskedet och Hela planen sa v. 3–4).
+    const uppehall = vk.length ? kalenderveckornaFor(vk) : uppraknat(dg.map(dagText));
+    const forlangdes = `Insatsen ${uppehall ? `hade uppehåll ${uppehall} och ` : ''}förlängdes${igen ? ` med pass från ${dagText(igen.datum)}` : ''}.`;
+    if (!x) return [forlangdes];
+    const v = plan.veckor[x.pass.vecka - 1];
+    return [`Insatsen avslutades${v ? ` i ${planveckansNamn(plan, v).text}` : ''}, efter ${plan.pass.filter((p) => p.nr <= x.t.pass).length} pass.`, anledningen(x.t.not), forlangdes].filter(Boolean);
+  }).join(' ');
+}
+/** Hur många avslut planen minns (Foljd.tidigareAvslut). */
+export const AVSLUTENS_LANGD = 20;
+/**
+ * Avsluten som ett annat beslut har kommit efter, som en lista i ordning, ur planens fält: en lista, eller ett enda avslut som en
+ * plan sparade före listan (rotprovet 2026-10-31, B1). @param {unknown} x @returns {{ pass: number, not?: string }[]}
+ */
+export const avslutenFore = (x) => /** @type {{ pass: number, not?: string }[]} */ ((Array.isArray(x) ? x : x && typeof x === 'object' ? [x] : []).filter((t) => t && typeof t === 'object'));
+/**
+ * Uppehållets veckor efter en förlängning: måndagarna i de hela veckor som har varit utan pass (valens uppehall), en rot för
+ * beskedet efter förlängningen, Hela planen och texterna (uppehalletsText).
  * @param {Plan} plan
  */
-export function uppehalletsText(plan) {
-  const up = plan.uppehall ?? [];
-  const datum = [...plan.lovveckor.filter((m) => up.includes(veckonyckel(m))), ...up.filter(arDatum)].sort();
-  if (!datum.length) return '';
-  const igen = iDatumordning(plan.pass).find((p) => p.datum > datum[datum.length - 1]);
-  return `Insatsen hade uppehåll ${kalenderveckornaFor(datum)}${igen ? ` och förlängdes med pass från ${dagText(igen.datum)}` : ''}.`;
-}
+export const uppehalletsVeckor = (plan) => plan.lovveckor.filter((m) => (plan.uppehall ?? []).includes(veckonyckel(m)));
 export const avstamningensRad = (veckan, a) => (a?.beslut || a?.not ? { etikett: `Avstämning mitt i insatsen${veckan ? `, ${veckan}` : ''}`, text: beslutText(a) } : null);
 /**
  * Passen som läraren har bockat, i en mening, lika på sidan, i pdf:en och i texten som kopieras: de bockade bland passen som
@@ -3992,12 +4143,12 @@ export function sammanstallningstext(info, plan, s) {
   if (veckorna.length) rader.push(`Hur veckorna gick, 1 till 5: ${veckorna.map((v) => `${veckansNamn(v).text}: ${v.skattning}`).join(', ')}. Medel ${decimal(s.veckomedel)}.`);
   const noter = s.veckor.filter((v) => v.not);
   if (noter.length) rader.push(`Anteckningar: ${noter.map((v) => mening(`${veckansNamn(v).text}: ${v.not}`)).join(' ')}`);
-  if (uppehalletsText(plan)) rader.push(uppehalletsText(plan));
+  if (uppehalletsText(plan, s.tidigareAvslut)) rader.push(uppehalletsText(plan, s.tidigareAvslut));
   const avstamningen = avstamningensRad(s.mitt ? veckansNamn(s.veckor[s.mitt - 1]).text : '', s.avstamning);
   if (avstamningen) rader.push(radText(avstamningen));
-  const utvarderingen = utvarderingenText(plan, s.utvardering, !s.avslutad);
+  const utvarderingen = utvarderingenText(plan, s.utvardering, !s.avslutad, s.tidigareAvslut);
   if (utvarderingen) rader.push(`Utvärdering efter insatsen: ${utvarderingen}`);
-  const tider = uppfoljningensRader(plan, info);
+  const tider = uppfoljningensRader(plan, info, s.resultat);
   if (tider.length) rader.push(`Uppföljning: ${tider.join('. ')}.`);
   return utanNamn(rader.join('\n'), s.namnen);
 }
@@ -4021,7 +4172,8 @@ export function elevtext(info, plan, s, id) {
   for (const t of elevensResultat(plan, e.resultat)) delar.push(mening(resultatText(plan, info, t)));
   // Utvärderingen, med avslutet och anledningen när insatsen avslutades tidigare, står också i elevens rad (K-542; Niclas
   // 2026-10-25: "kommer med på totala sammaställningen och för varje elev").
-  const utvarderingen = utvarderingenText(plan, s.utvardering, !s.avslutad);
+  if (uppehalletsText(plan, s.tidigareAvslut)) delar.push(uppehalletsText(plan, s.tidigareAvslut));
+  const utvarderingen = utvarderingenText(plan, s.utvardering, !s.avslutad, s.tidigareAvslut);
   if (utvarderingen) delar.push(`Utvärdering efter insatsen: ${utvarderingen}`);
   return utanNamn(delar.join(' '), s.namnen);
 }
@@ -4153,5 +4305,5 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ fran: number, till: number, tabell: string, steg: { fran: number, till: number, namn: string }[] }} Skala
  * @typedef {{ namn: string, vem: 'gruppen' | 'eleverna', rad: number, skala?: Skala, regler: (Regel & { rad: number })[], text?: string }} Skattning
  * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[], period?: true }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number, mitt?: number, slut?: number, planerade?: number, struket?: { pass: Pass[], veckor: PlanVecka[] }, uppehall?: string[], skattningar?: Skattning[] }} Plan
- * @typedef {{ gjorda?: string[], elever?: { id: string, namn: string, utkast?: true }[], narvaro?: boolean, franvaro?: Record<string, string[]>, vecka?: Record<string, { varde?: number, not?: string }>, skattning?: Record<string, Record<string, number>>, resultat?: Record<string, Record<string, string>>, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string }, oppen?: string, borttagna?: string[], listan?: string, lamnade?: { id: string, namn: string, utkast?: true, fran?: string }[], matt?: Record<string, Record<string, number>>, lankar?: Record<string, { formular?: string, sammanstallning?: string }> }} Foljd
+ * @typedef {{ gjorda?: string[], elever?: { id: string, namn: string, utkast?: true }[], narvaro?: boolean, franvaro?: Record<string, string[]>, vecka?: Record<string, { varde?: number, not?: string }>, skattning?: Record<string, Record<string, number>>, resultat?: Record<string, Record<string, string>>, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string }, oppen?: string, borttagna?: string[], listan?: string, lamnade?: { id: string, namn: string, utkast?: true, fran?: string }[], matt?: Record<string, Record<string, number>>, lankar?: Record<string, { formular?: string, sammanstallning?: string }>, tidigareAvslut?: { pass: number, not?: string }[] }} Foljd
  */

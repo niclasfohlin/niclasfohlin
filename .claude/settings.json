@@ -119,6 +119,16 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "matcher": "Read|Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/modulen.mjs",
+            "timeout": 30
+          }
+        ]
       }
     ]
   }

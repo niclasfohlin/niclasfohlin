@@ -2,9 +2,11 @@
 // Metoder: undervisningsmetoderna för helklass (K-621, K-623), ett kort per metod ur samlingen undervisningsmetoder, i
 // bokstavsordning och aldrig efter staplarna (riggens standard, avsnitt 19), också inom varje val i filtret. Utan metoder visar banken
 // utkastets kort med platshållare, som K-623 visade formen med. Kortet har länkarna till Lär dig metoden och lathunden, som
-// korten i Stödundervisning har sina (design-3 nr 22), och kryssrutan Välj i hörnet, som laddar ner metodens Word-fil med
-// allt, en fil eller flera i en zip (Niclas 2026-10-30: "Det ska finnas en checkruta också likt stödundervisning för [att]
-// ladda ner hela metoden i hörnet"). Urvalet och rutan nederst är Stödundervisnings (src/scripts/urval.ts).
+// korten i Stödundervisning har sina (design-3 nr 22), raden med Drive och Word för metodens fil med allt, och kryssrutan
+// Välj i hörnet, som laddar ner metodens Word-fil med allt, en fil eller flera i en zip (Niclas 2026-10-30: "Det ska finnas
+// en checkruta också likt stödundervisning för [att] ladda ner hela metoden i hörnet"). Urvalet och rutan nederst, med Word
+// och Drive, är Stödundervisnings (src/scripts/urval.ts, Urvalsknappar.astro; Niclas 2026-10-31: "Varför har inte Metoder
+// skicka till drive som stödundervisning?"), och scripts/metoderprov.mjs stannar när de glider isär.
 // Filtret är Stödundervisnings (K-642; Niclas 2026-10-30: "Se stödundervisning som förlaga", och "Man vill kunna hitta
 // metoder bättre för just läsning i evidens"): rutorna Du vill, Används i, Område, Forskningsstöd och Svårighet med valen och deras
 // förklaringar ur standardens rötter, och Visar. Varje kort bär det banken filtrerar på (bankensVal), en ruta visas bara
@@ -17,6 +19,7 @@ import Metodprofil from '../../components/Metodprofil.astro';
 import Verktygsruta from '../../components/Verktygsruta.astro';
 import AppLank from '../../components/AppLank.astro';
 import Insatslista from '../../components/Insatslista.astro';
+import Urvalsknappar from '../../components/Urvalsknappar.astro';
 import { site } from '../../data/site';
 import { publicerade } from '../../lib/innehall';
 import { PILOTEN, kortetUrFil } from '../../lib/metodprofil';
@@ -121,23 +124,17 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
   {/* Kortens ord i områdena utan steg på Forskningsstödets skala, i kortens ordning, för raden under skalan (A5). */}
   <script type="application/json" id="mbf-utan-steg" is:inline set:html={JSON.stringify(metoder.map((x) => x.utanSteg)).replace(/</g, '\\u003c')} />
 
-  {/* Rutan nederst, i Stödundervisnings form och med samma ord, utan valet Med mallar: Metoder har en Word-fil per metod. */}
+  {/* Rutan nederst, i Stödundervisnings form och med samma ord, utan valet Med mallar: Metoder har en Word-fil per metod.
+      Word och Drive är Stödundervisnings knappar ur samma rot (Urvalsknappar.astro). */}
   {valbara && (
     <form class="samla mp-samla" id="samla" aria-label="Ladda ner valda metoder">
       <p class="samla-antal" aria-live="polite" data-valda>Inga metoder valda</p>
-      <span class="samla-knappar">
-        <span class="filval" role="group" aria-label="Valda metoder: ladda ner">
-          <button type="submit" disabled title="Ladda ner de valda metodernas Word-filer" data-goatcounter-click="fil:metoder-valda.docx" data-goatcounter-title="Metoder: valda metoder som Word">
-            <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M5 2h7l4 4v12H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 2v4h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 9.5l1.4 6 1.6-4.5 1.6 4.5 1.4-6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span data-samla-namn>Word</span><span class="visually-hidden">: ladda ner de valda metoderna</span>
-          </button>
-        </span>
-        <button type="button" class="lank" data-rensa hidden>Rensa</button>
-      </span>
+      <Urvalsknappar bank="Metoder" handelse="metoder-valda" wordTitel="Ladda ner de valda metodernas Word-filer" />
       <p class="meta" data-status role="status" aria-live="polite"></p>
       {/* Förklaringen står också i telefonen, eftersom knappen ger en zip-fil när flera är valda och Stöds knapp ger en Word-fil
-          med alla (lagningen inför lanseringen, A4). */}
-      <p class="meta samla-hjalp">{UM_NAMN.allt} som Word-fil för varje vald metod, och flera i en zip-fil.</p>
+          med alla (lagningen inför lanseringen, A4), och Drive sparar varje metod för sig, eftersom Drive inte öppnar en zip-fil
+          som dokument. */}
+      <p class="meta samla-hjalp">{site.driveKlientId ? `${UM_NAMN.allt} för varje vald metod: Word ger flera i en zip-fil, Drive ett dokument per metod.` : `${UM_NAMN.allt} som Word-fil för varje vald metod, och flera i en zip-fil.`}</p>
     </form>
   )}
 </Base>
@@ -179,43 +176,57 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
 <script>
   // De valda metodernas Word-filer med allt (src/lib/undervisningsmetodfiler.ts): en metod laddas ner som sin fil, och
   // flera som en zip med varje metods fil, gjord i webbläsaren med JSZip, som hämtas först när läraren laddar ner. Word-
-  // filerna är redan packade, så zip-filen lagrar dem utan att packa om. Urvalet och rutan står i src/scripts/urval.ts.
-  import { urvalet } from '../../scripts/urval';
+  // filerna är redan packade, så zip-filen lagrar dem utan att packa om. Drive sparar varje metods fil som eget dokument,
+  // eftersom Drive inte öppnar en zip-fil som dokument, med Stödundervisnings Drive (driveIUrvalet). Urvalet, rutan och
+  // Drive står i src/scripts/urval.ts.
+  import { urvalet, driveIUrvalet, kortetsNamn } from '../../scripts/urval';
   import { laddaNer } from '../../scripts/skattning';
   import { idagLokalt } from '../../scripts/insatser-lagring';
+  const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
   const samla = document.getElementById('samla') as HTMLFormElement | null;
   if (samla) {
     // Knappen heter efter vad den ger: Word för en metod och Word-filerna i en zip för flera (A4: samma knapp i Stöd ger en
     // Word-fil med alla valda).
     const knappnamn = samla.querySelector<HTMLElement>('[data-samla-namn]');
-    const { visaStatus, arbeta } = urvalet(samla, 'metodurval-metoder', (n) => { if (knappnamn) knappnamn.textContent = n > 1 ? 'Word-filerna i en zip' : 'Word'; });
-    samla.addEventListener('submit', (h) => { h.preventDefault(); void arbeta(hamtaFilerna); });
+    const u = urvalet(samla, 'metodurval-metoder', (n) => { if (knappnamn) knappnamn.textContent = n > 1 ? 'Word-filerna i en zip' : 'Word'; });
+    const { visaStatus, arbeta } = u;
+    // Felet ligger kvar tills läsaren rensar urvalet eller lyckas.
+    const visaFel = (fel: unknown) => {
+      visaStatus('Det gick inte att hämta filerna. Ladda om sidan och försök igen, eller ladda ner Word-filen på varje metods sida.');
+      console.error(fel);
+    };
+    samla.addEventListener('submit', (h) => {
+      h.preventDefault();
+      void arbeta(async (valda) => {
+        try {
+          const filerna = await hamtaFilerna(valda);
+          if (filerna.length === 1) {
+            laddaNer(new Blob([filerna[0].data], { type: DOCX }), filerna[0].namn);
+            visaStatus('Filen är nedladdad.', true);
+          } else {
+            const { default: JSZip } = await import('jszip');
+            const zip = new JSZip();
+            for (const f of filerna) zip.file(f.namn, f.data);
+            laddaNer(await zip.generateAsync({ type: 'blob', compression: 'STORE' }), `metoder-valda-${idagLokalt()}.zip`);
+            visaStatus(`Zip-filen med ${filerna.length} metoder är nedladdad.`, true);
+          }
+        } catch (fel) {
+          visaFel(fel);
+        }
+      });
+    });
+    driveIUrvalet(samla, u, (valda) => async () => (await hamtaFilerna(valda)).map((f) => ({ blob: new Blob([f.data], { type: DOCX }), namn: f.namn, titel: f.titel })), visaFel);
 
+    /** Hämtar de valdas Word-filer med allt, med filens namn och metodens; kastar ett fel när en fil inte gick att hämta. */
     async function hamtaFilerna(valda: HTMLInputElement[]) {
       visaStatus(valda.length === 1 ? 'Hämtar filen.' : 'Hämtar filerna.');
-      try {
-        // cache: 'no-cache' frågar alltid servern om filen har ändrats, så att läraren aldrig får en äldre fil än sidan.
-        const filerna = await Promise.all(valda.map(async (b) => {
-          const adress = b.dataset.fil ?? '';
-          const svar = await fetch(adress, { cache: 'no-cache' });
-          if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`);
-          return { namn: adress.split('/').pop() ?? `${b.value}.docx`, data: await svar.arrayBuffer() };
-        }));
-        if (filerna.length === 1) {
-          laddaNer(new Blob([filerna[0].data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }), filerna[0].namn);
-          visaStatus('Filen är nedladdad.', true);
-        } else {
-          const { default: JSZip } = await import('jszip');
-          const zip = new JSZip();
-          for (const f of filerna) zip.file(f.namn, f.data);
-          laddaNer(await zip.generateAsync({ type: 'blob', compression: 'STORE' }), `metoder-valda-${idagLokalt()}.zip`);
-          visaStatus(`Zip-filen med ${filerna.length} metoder är nedladdad.`, true);
-        }
-      } catch (fel) {
-        // Felet ligger kvar tills läsaren rensar urvalet eller lyckas.
-        visaStatus('Det gick inte att hämta filerna. Ladda om sidan och försök igen, eller ladda ner Word-filen på varje metods sida.');
-        console.error(fel);
-      }
+      // cache: 'no-cache' frågar alltid servern om filen har ändrats, så att läraren aldrig får en äldre fil än sidan.
+      return Promise.all(valda.map(async (b) => {
+        const adress = b.dataset.fil ?? '';
+        const svar = await fetch(adress, { cache: 'no-cache' });
+        if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`);
+        return { namn: adress.split('/').pop() ?? `${b.value}.docx`, titel: kortetsNamn(b) ?? b.value, data: await svar.arrayBuffer() };
+      }));
     }
   }
 </script>

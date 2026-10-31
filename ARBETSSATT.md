@@ -12,13 +12,15 @@ Läs raden för det du ska göra. Avsnitten står i den här filen, ett per steg
 | göra en commit | Grenar och commits |
 | ladda upp till sajten | Kontroll före uppladdning, sedan Uppladdning |
 | ta emot en ny metod | flödet `/ny-metod` (`.claude/commands/ny-metod.md`) och METODER.md |
+| ta emot en ny metod för hela klassen i Metoder | flödet `/ny-undervisningsmetod` (`.claude/commands/ny-undervisningsmetod.md`) och METODER.md under Undervisningsmetoderna (Metoder) |
 | ändra en metod som ligger ute, eller koden som bygger metoderna | METODER.md, och Design och kod |
 | lägga upp en artikel | flödet `/ny-artikel` (`.claude/commands/ny-artikel.md`), Texterna och Innehåll |
 | lägga upp en bok | flödet `/ny-bok` (`.claude/commands/ny-bok.md`) och Innehåll |
 | tagga en post, skapa en tagg eller lägga in en bild | Innehåll |
 | skriva en ingress, en beskrivning eller en rapport till Niclas | STIL.md |
 | ändra kod eller design | Design och kod, och KONCEPT.md |
-| ge en metod Planera insatsen, eller ändra planens modul | PLANERA.md, och METODER.md under Planera insatsen |
+| ge en metod Planera insatsen, eller ändra planens modul, också Lär dig metoden i Metoder | PLANERA.md, och METODER.md under Planera insatsen |
+| ändra appen Metodbanken, /app eller planfilerna | DRIFT.md under Appen Metodbanken, och PLANERA.md |
 | ändra en metod som redan har planen (omtag), som en ny leverans från riggen | PLANERA.md under Omtag av en metod |
 | avgöra om ett fel eller en ändring hör till metoden, mötet eller modulen | PLANERA.md under Metod, möte och modul |
 | sköta en tjänst, logga in eller röra en hemlighet | Drift, och DRIFT.md |

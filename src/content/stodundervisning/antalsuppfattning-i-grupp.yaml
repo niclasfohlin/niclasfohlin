@@ -27,7 +27,7 @@ material:
   - talsortsmatta
   - veckans kort
   - sifferkort och tärning
-uppdaterad: 2026-10-28
+uppdaterad: 2026-10-31
 relaterade:
   - problemlosning-i-grupp
   - brakkurs-i-grupp
@@ -406,27 +406,27 @@ progression:
   rader:
     - vecka: "1"
       fokus: "Bygga och säga tal: tio av en talsort är en av nästa större. Kartläggningen görs före första passet."
-      roll: Läraren gör först och säger varje talsort.
+      roll: Du gör först och säger varje talsort.
       eleverna: "Att bygga ett tal inom sitt talområde och säga hur många det är av varje talsort, som ”tre tiotal och sex ental”."
       vidare: "de flesta i gruppen bygger talen på sina två kort själva och säger hur många det är av varje talsort, i veckans två sista pass"
     - vecka: "2"
       fokus: "Siffrans plats och nollan: samma siffror på olika platser, och en tom plats där nollan håller platsen."
-      roll: Läraren gör först, och paren börjar läsa korten för varandra.
+      roll: Du gör först, och paren börjar läsa korten för varandra.
       eleverna: "Att läsa, skriva och jämföra tal med nollor och tal med samma siffror på olika platser. I åk 4–5 bygger och jämför de också decimaltal med tiondelar."
       vidare: "de flesta i gruppen klarar sina två kort själva och säger vad varje siffra visar, i veckans två sista pass"
     - vecka: "3"
       fokus: "Lägga till och växla upp: tio i en talsort blir en i nästa större."
-      roll: Läraren gör växlingen långsamt först, och eleverna gör den själva.
+      roll: Du gör växlingen långsamt först, och eleverna gör den själva.
       eleverna: "Att själva lägga till och växla upp i materialet och säga vad som händer. I åk 4–5 gör de det också med tiondelar och hundradelar."
       vidare: "de flesta i gruppen växlar upp själva på sina två kort och säger vad som hände, i veckans två sista pass"
     - vecka: "4"
       fokus: "Ta bort och växla ned: en från nästa större talsort blir tio."
-      roll: Läraren gör först och frågar mer.
+      roll: Du gör först och frågar mer.
       eleverna: "Att själva ta bort och växla ned i materialet när det inte räcker, och säga vad som händer. I åk 4–5 gör de det också med decimaltal."
       vidare: "de flesta i gruppen växlar ned själva på sina två kort och säger vad som hände, i veckans två sista pass"
     - vecka: "5"
       fokus: "Från material till skrift: bygg, anteckna och tänk dig till sist materialet. I åk 4–5 handlar pass 3 om negativa tal. Kartläggningen görs efter sista passet."
-      roll: Eleven skriver det hen bygger, och läraren kontrollerar mot materialet.
+      roll: Eleven skriver det hen bygger, och du kontrollerar mot materialet.
       eleverna: "Att räkna talsort för talsort, skriva varje steg som skriftlig huvudräkning och visa i materialet det de har skrivit. I åk 4–5 visar de också negativa tal på tallinjen."
 uppfoljning:
   rader:

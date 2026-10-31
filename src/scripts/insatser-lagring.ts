@@ -201,20 +201,26 @@ export const filensFraga = (finns: SparadPlan, fil: SparadPlan) => `Planen i den
  * den, i båda lagren (Codex 2026-10-31, fynd 2).
  */
 export function flikensPlan() {
-  let senast = '', bas: SparadPlan | null = null, sammanslagen: SparadPlan | null = null;
+  let senast = '', bas: SparadPlan | null = null;
+  // Basen är en kopia av planen och aldrig sidans egen, så att det läraren för in efteråt, som sidan skriver in i samma följd,
+  // inte blir basen också, och sammanslagningen då tar den andra flikens i stället (rotprovet 2026-10-31, R4: en mening om veckan
+  // som väntade försvann när en annan flik förlängde planen, eftersom basen var sidans egen följd).
+  const kopia = (p: SparadPlan): SparadPlan => structuredClone(p);
   return {
     senast: () => senast,
-    minns: (p: SparadPlan) => { senast = planensInnehall(p); bas = p; },
+    minns: (p: SparadPlan) => { senast = planensInnehall(p); bas = kopia(p); },
     // Har en annan flik sparat planen sedan fliken läste den, läggs flikens egna ändringar på den andra flikens plan, så att
-    // inget av det den andra fliken förde in skrivs över (Codex 2026-10-31, nr 2). sammanslagen säger planen fliken ska visa.
-    skriv: (p: SparadPlan) => {
+    // inget av det den andra fliken förde in skrivs över (Codex 2026-10-31, nr 2). Den sammanslagna planen går till sidan
+    // (tillSidan), som visar den och ger tillbaka den med kopian av datumen räknad ur de sammanslagna valen, och det är den som
+    // sparas, en väg för båda lagren (rotprovet 2026-10-31, Codex fynd 1: en förlängning i en annan flik skrevs bort, eftersom
+    // Planera insatsen inte tog den sammanslagna planen och kopian av datumen var den gamla).
+    skriv: (p: SparadPlan, tillSidan: (sammanslagen: SparadPlan) => SparadPlan) => {
       const lagrad = lasPlaner().planer.find((x) => x.id === p.id);
-      const ny = lagrad && bas && planensInnehall(lagrad) !== senast ? slaSamman(bas, lagrad, p) : p;
+      const ny = lagrad && bas && planensInnehall(lagrad) !== senast ? tillSidan(slaSamman(bas, lagrad, p)) : p;
       const ok = skrivPlanen(ny);
-      if (ok) { senast = planensInnehall(ny); bas = ny; sammanslagen = ny === p ? null : ny; }
+      if (ok) { senast = planensInnehall(ny); bas = kopia(ny); }
       return ok;
     },
-    sammanslagen: () => { const s = sammanslagen; sammanslagen = null; return s; },
   };
 }
 /**
@@ -255,6 +261,22 @@ export const nyttId = () => Math.random().toString(36).slice(2, 8).padEnd(6, '0'
 
 // Dagens datum i läsarens egen tid och GoatCounter står i src/scripts/raknare.ts, som appens skript läser utan standarden.
 export { goatcounter, idagLokalt };
+/**
+ * Ett nytt dygn medan sidan står öppen, en rot för Planera insatsen, Lär dig metoden och listorna med planerna (rotprovet
+ * 2026-10-31, Codex fynd 3: dagens datum lästes en gång när sidan öppnades, så Avsluta i dag och en förlängning sparade
+ * gårdagens datum när sidan hade stått öppen över midnatt, som en telefon gör). Sidan prövar datumet när den visas igen, när
+ * fönstret får fokus och en gång i minuten, och gor får det nya datumet, så att sidan räknar och ritar om med det.
+ * @returns prova, som sidan också kan anropa själv
+ */
+export function vidNyttDygn(gor: (idag: string) => void, idag = idagLokalt()) {
+  let senast = idag;
+  const prova = () => { const nu = idagLokalt(); if (nu === senast) return; senast = nu; gor(nu); };
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') prova(); });
+  addEventListener('pageshow', prova);
+  addEventListener('focus', prova);
+  window.setInterval(prova, 60000);
+  return prova;
+}
 
 /** Klockslaget nu, ÅÅÅÅ-MM-DDTHH:MM:SS i läsarens tid. */
 const nuTid = () => {
@@ -584,18 +606,40 @@ export async function planenUrFaltet(e: Event, nyckel: string, samling: Samling 
  * Ladda ner planer på appens sida ger, nämner båda listorna (lagningen inför lanseringen, A1).
  */
 export async function oppnaPlanerna(filer: File[], nyckel: string, samling: Samling | null = 'stodundervisning') {
-  const { planer, inte } = await lasPlanfilerna(filer);
-  const samlingarna = SAMLINGAR.filter((s) => planer.some((x) => samlingen(x.plan) === s));
-  const text = planernasBesked(sparaPlanerna(planer.map((x) => x.plan)), inte, samlingarna.length ? samlingarna : samling ?? 'stodundervisning');
+  const text = oppnadePlaner(await lasPlanfilerna(filer), samling);
   try { sessionStorage.setItem(nyckel, text); } catch { /* utan lagring */ }
   location.reload();
 }
+/** Beskedet när en plan är öppnad ur en fil, i båda lagren, före filens varningar. */
+export const OPPNAD_UR_FILEN = 'Planen är öppnad ur filen, med allt som förts in.';
+/**
+ * En plan ur en fil som hör till en annan sida, en annan metod eller den andra samlingen, sparas och öppnas där, med beskedet
+ * och filens varningar, en rot för båda lagren (rotprovet 2026-10-31, R4: Lär dig metoden sparade en sådan plan med
+ * sparaPlanerna, som låter en nyare plan i webbläsaren stå kvar, och sa ändå att planen var öppnad, utan att fråga och utan
+ * filens varningar, medan Planera insatsen frågade först). Sidan frågar före en äldre fil (filenErsatterNyare) innan den
+ * anropar den här. false när planen inte gick att spara.
+ */
+export function oppnaPaSinSida(p: SparadPlan, varningar: string[]): boolean {
+  if (!skrivPlanen(p)) return false;
+  try { sessionStorage.setItem(BESKEDETS_NYCKEL[samlingen(p)], [OPPNAD_UR_FILEN, ...varningar].join(' ')); } catch { /* utan lagring */ }
+  location.href = planensAdress(p);
+  return true;
+}
+/**
+ * Planerna ur filerna sparas, och beskedet säger det, med varningarna ur filerna, som när en fil kommer ur en nyare version av
+ * formatet, så att samma fil ger samma besked oavsett om den öppnas för sig eller med flera (rotprovet 2026-10-31, Codex fynd 4:
+ * zip-vägen tappade varningen och sa bara "med allt som förts in").
+ */
+export function oppnadePlaner(l: { planer: { plan: SparadPlan; varningar: string[] }[]; inte: number }, samling: Samling | null = 'stodundervisning') {
+  const samlingarna = SAMLINGAR.filter((s) => l.planer.some((x) => samlingen(x.plan) === s));
+  return planernasBesked(sparaPlanerna(l.planer.map((x) => x.plan)), l.inte, samlingarna.length ? samlingarna : samling ?? 'stodundervisning', [...new Set(l.planer.flatMap((x) => x.varningar))]);
+}
 
-/** Beskedet efter att planer har lästs in, lika i metoden och på bankerna, med listan eller listorna som planerna står under. */
-export const planernasBesked = (r: { ok: boolean; sparade: number; aldre: number }, inte: number, samling: Samling | readonly Samling[] = 'stodundervisning') => (!r.ok ? 'Planerna gick inte att spara i den här webbläsaren.'
+/** Beskedet efter att planer har lästs in, lika i metoden och på bankerna, med listan eller listorna som planerna står under, och filernas varningar sist (oppnadePlaner). */
+export const planernasBesked = (r: { ok: boolean; sparade: number; aldre: number }, inte: number, samling: Samling | readonly Samling[] = 'stodundervisning', varningar: string[] = []) => (!r.ok ? 'Planerna gick inte att spara i den här webbläsaren.'
   : [r.sparade ? `${r.sparade === 1 ? 'En plan är öppnad' : `${stor(talText(r.sparade))} planer är öppnade`} ur filerna, med allt som förts in. De står under ${(typeof samling === 'string' ? [samling] : samling).map((s) => SAMLINGENS_ORD[s].listan).join(' och ')}${typeof samling !== 'string' && samling.length > 1 ? ',' : ''} och under sin metod.` : '',
     r.aldre ? `${r.aldre === 1 ? 'En fil' : `${stor(talText(r.aldre))} filer`} hade en äldre version av en plan, och den nyaste står kvar. ${LISTANS_KNAPPAR.laddaNer} igen, så har filen det senaste.` : '',
-    inte ? `${inte === 1 ? 'En fil' : `${stor(talText(inte))} filer`} var inte en nedladdad plan.` : ''].filter(Boolean).join(' ') || 'Filerna hade ingen plan.');
+    inte ? `${inte === 1 ? 'En fil' : `${stor(talText(inte))} filer`} var inte en nedladdad plan.` : '', ...varningar].filter(Boolean).join(' ') || 'Filerna hade ingen plan.');
 
 /**
  * Zip-filen med alla sparade planer i samlingen, en plans fil i taget ur planfilen, och filens namn med dagens datum. Utan

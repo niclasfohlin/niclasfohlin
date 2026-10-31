@@ -14,8 +14,9 @@
 // har en knapp överst, rutnäten med kort och delar slutar inte med en tom plats, kortens och remsans namn avstavas på
 // svenska, bladen står i hela bredden i telefonen och samlade bredvid bilden på datorn, lathundens kort rymmer sina ord,
 // utfallen räknas om för klassens antal, en plan i Lär dig metoden tar knappen med samma länk ur huvudet, och i banken går
-// Forskningsstödets lägen ihop med Visar, ett ord väljer bara sitt läge och Välj heter efter zip-filen den ger. Körs i npm
-// run validera.
+// Forskningsstödets lägen ihop med Visar, ett ord väljer bara sitt läge och Välj heter efter zip-filen den ger. Bankens kort
+// och rutan nederst har Stödundervisnings Drive och Word, och Drive sparar rätt filer med inloggningen härmad (2026-10-31).
+// Körs i npm run validera.
 //
 //   node scripts/metoderprov.mjs
 import { spawn } from 'node:child_process';
@@ -109,6 +110,118 @@ if (rutorna.stod?.delar.length && rutorna.metoder?.delar.length) {
   const stodsTryck = new Set(stod.delar.flatMap((d) => d.saker.map((x) => x.handelse)));
   for (const x of metoder.delar.flatMap((d) => d.saker)) if (!/^verktygsruta:metoder:[a-z0-9-]+$/.test(x.handelse) || stodsTryck.has(x.handelse)) fel.push(`/metoder: trycket på ${x.namn} i rutan Verktyg och Stödmaterial heter ${x.handelse || 'inget'} i statistiken, ska vara verktygsruta:metoder:<id> (DRIFT.md under Besöksstatistik)`);
   if (a.join('\n') === b.join('\n')) speglade = a.length;
+}
+
+// Drive och Word i bankerna (Niclas 2026-10-31: "Varför har inte Metoder skicka till drive som stödundervisning?"; 2026-10-10:
+// samma knapp betyder samma sak på varje sida). Varje kort i Metoder har samma filval som korten i Stödundervisning (Filval.astro):
+// samma knappar i samma ordning, med samma ikoner, ord och titlar, och statistikens namn i samma form med metodens namn, för
+// metodens fil med allt, samma fil som Välj laddar ner. Rutan nederst har samma knappar som Stödundervisnings
+// (Urvalsknappar.astro), utom Word-knappens titel, som säger vad den ger, och Metoders tryck har egna namn i statistiken (DRIFT.md
+// under Besöksstatistik). Har rutan Drive säger raden under knapparna vad Drive ger. Att knapparna syns, ryms och sparar rätt
+// filer prövas i Chrome nedan (KORTEN och DRIVEN).
+const elementet = (html, start) => {
+  const tagg = html.slice(start).match(/^<([a-z][a-z0-9]*)/)[1];
+  let djup = 0;
+  for (const m of html.slice(start).matchAll(new RegExp(`<(/?)${tagg}\\b[^>]*>`, 'g'))) { djup += m[1] ? -1 : 1; if (!djup) return html.slice(start, start + m.index + m[0].length); }
+  return html.slice(start);
+};
+const attr = (a, n) => a.match(new RegExp(`\\s${n}="([^"]*)"`))?.[1];
+const harAttr = (a, n) => new RegExp(`\\s${n}(?:=|\\s|$)`).test(a);
+// En knapp eller länk i ett filval eller i rutan, med fälten att jämföra och ersatt för det som hör till metoden.
+const knappen = (tagg, a, inre, ersatt = (x) => x) => {
+  const svg = inre.match(/<svg[\s\S]*?<\/svg>/)?.[0] ?? '';
+  const dold = [...inre.matchAll(/<span class="visually-hidden">([^<]*)<\/span>/g)].map((m) => m[1]).join(' ');
+  const synlig = inre.replace(/<svg[\s\S]*?<\/svg>/g, '').replace(/<span class="visually-hidden">[^<]*<\/span>/g, '').replace(/<[^>]+>/g, '').trim();
+  const falt = {
+    taggen: tagg, klassen: attr(a, 'class') ?? '', typen: attr(a, 'type') ?? '', titeln: attr(a, 'title') ?? '',
+    märkena: ['data-drive-src', 'data-drive-valda', 'disabled', 'hidden'].filter((n) => harAttr(a, n)).join(' '),
+    ordet: synlig, 'texten för skärmläsaren': dold, download: attr(a, 'download') ?? '', 'namnet i Drive': attr(a, 'data-drive-namn') ?? '',
+    'namnet i statistiken': attr(a, 'data-goatcounter-click') ?? '', 'titeln i statistiken': attr(a, 'data-goatcounter-title') ?? '', ikonen: svg,
+  };
+  return { namn: synlig || dold, a, falt: Object.fromEntries(Object.entries(falt).map(([k, v]) => [k, ersatt(v)])) };
+};
+// Knapparna jämförda med förlagans i /stodundervisning: först namnen i ordning, sedan varje fält utom de som får skilja sig.
+const jamfor = (vad, har, forv, rot, far = () => []) => {
+  const namnen = (l) => l.map((x) => x.namn).join(', ');
+  if (namnen(har.knappar) !== namnen(forv.knappar)) { fel.push(`${vad} har ${namnen(har.knappar) || 'inga knappar'}, där /stodundervisning har ${namnen(forv.knappar)} (${rot})`); return false; }
+  let lika = har.grupp === forv.grupp;
+  if (!lika) fel.push(`${vad}: knappgruppen heter ${har.grupp} för skärmläsaren, i /stodundervisning ${forv.grupp} (${rot})`);
+  har.knappar.forEach((x, i) => {
+    for (const [f, v] of Object.entries(x.falt)) {
+      const ska = forv.knappar[i].falt[f];
+      if (v === ska || far(x).includes(f)) continue;
+      lika = false;
+      fel.push(`${vad}: ${x.namn} har ${f === 'ikonen' ? 'en annan ikon än' : `${f} ${v || '(inget)'}, där`} /stodundervisning${f === 'ikonen' ? '' : ` har ${ska || '(inget)'}`} (${rot})`);
+    }
+  });
+  return lika;
+};
+const filvalet = (html) => {
+  const start = html.search(/<span class="filval\b/);
+  if (start < 0) return undefined;
+  const span = elementet(html, start);
+  return { grupp: attr(span.slice(0, span.indexOf('>')), 'aria-label') ?? '', knappar: [...span.matchAll(/<(a|button)\b([^>]*)>([\s\S]*?)<\/\1>/g)].map((m) => ({ tagg: m[1], a: m[2], inre: m[3] })) };
+};
+const bankenshtml = Object.fromEntries(Object.entries(BANKERNA).map(([k, s]) => [k, existsSync(join(dist, s, 'index.html')) ? readFileSync(join(dist, s, 'index.html'), 'utf8') : '']));
+const bankensKort = (html, klass) => [...html.matchAll(new RegExp(`<article class="kort metodkort[^"]*"[^>]*${klass}`, 'g'))].map((m) => elementet(html, m.index));
+const kortetsFilval = (kort) => {
+  const titel = kort.match(/<h3><a href="[^"]*">([^<]*)<\/a><\/h3>/)?.[1] ?? '';
+  const valj = kort.match(/<input type="checkbox" name="valda"[^>]*?\sdata-fil="([^"]*)"/)?.[1];
+  const f = filvalet(kort);
+  if (!f) return { titel, valj, utanFiler: !/<label class="valj"/.test(kort) };
+  const stam = (f.knappar.map((k) => attr(k.a, 'download')).find(Boolean) ?? '').replace(/\.docx$/, '');
+  const ersatt = (x) => [titel, titel.toLocaleLowerCase('sv')].reduce((t, n) => (n ? t.split(n).join('<titel>') : t), x).split(stam || '\u0000').join('<fil>');
+  return { titel, valj, grupp: ersatt(f.grupp), knappar: f.knappar.map((k) => knappen(k.tagg, k.a, k.inre, ersatt)), fore: kort.indexOf('class="filval') < kort.search(/<label class="valj"/) };
+};
+const stodsKort = bankensKort(bankenshtml.stod, 'data-metod').map(kortetsFilval).filter((k) => k.knappar);
+const metodersKort = bankensKort(bankenshtml.metoder, 'data-del="metoder"').map(kortetsFilval);
+// Förlagan: Stödundervisnings kort i den form de flesta har.
+const formen = (k) => JSON.stringify([k.grupp, k.knappar.map((x) => x.falt)]);
+const formerna = new Map();
+for (const k of stodsKort) formerna.set(formen(k), [...(formerna.get(formen(k)) ?? []), k]);
+const forlagan = [...formerna.values()].sort((a, b) => b.length - a.length)[0]?.[0];
+let spegladeKort = 0;
+if (!forlagan) fel.push('/stodundervisning: korten har inget filval att jämföra Metoders kort med (Metodkort.astro)');
+else for (const k of metodersKort) {
+  const vad = `/metoder: kortet ${k.titel || '(utan titel)'}`;
+  // Utkastets kort, som banken visar utan metoder, har inga filer och varken filval eller Välj.
+  if (k.utanFiler) continue;
+  if (!k.knappar) { fel.push(`${vad} har ingen rad med ${forlagan.knappar.map((x) => x.namn).join(' och ')}, som korten i /stodundervisning har (Filval i Metodprofil.astro)`); continue; }
+  const lika = jamfor(vad, k, forlagan, 'Filval i Metodprofil.astro');
+  if (!k.fore) fel.push(`${vad}: filvalet står efter Välj, och i /stodundervisning står det före`);
+  // Filvalet ger metodens fil med allt, samma fil som Välj laddar ner, och filen finns.
+  for (const x of k.knappar) {
+    const fil = (attr(x.a, 'href') ?? attr(x.a, 'data-drive-src') ?? '').split('?')[0];
+    if (!fil || !existsSync(join(dist, decodeURIComponent(fil)))) fel.push(`${vad}: ${x.namn} leder till ${fil || 'ingen fil'}, som inte finns i dist`);
+    else if (fil !== k.valj) fel.push(`${vad}: ${x.namn} ger ${fil}, men Välj laddar ner ${k.valj ?? 'ingen fil'}`);
+  }
+  if (lika && k.fore) spegladeKort++;
+}
+// Rutan nederst: samma knappar som Stödundervisnings, i samma ordning, och egna namn i statistiken.
+const rutansKnappar = (html) => {
+  const start = html.search(/<span class="samla-knappar"/);
+  if (start < 0) return undefined;
+  const span = elementet(html, start);
+  return { grupp: filvalet(span)?.grupp ?? '', knappar: [...span.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)].map((m) => knappen('button', m[1], m[2])) };
+};
+const rutornas = { stod: rutansKnappar(bankenshtml.stod), metoder: rutansKnappar(bankenshtml.metoder) };
+let spegladRuta = false;
+if (!rutornas.stod) fel.push('/stodundervisning: rutan nederst saknar sina knappar (Urvalsknappar.astro)');
+else if (!rutornas.metoder) { if (metodersKort.some((k) => k.knappar)) fel.push('/metoder: rutan nederst saknar sina knappar, fast korten har Välj (Urvalsknappar.astro)'); }
+else {
+  // Statistikens namn prövas för sig nedan, och Word-knappens titel säger vad den ger: en Word-fil eller Word-filerna.
+  spegladRuta = jamfor('/metoder: rutan nederst', rutornas.metoder, rutornas.stod, 'Urvalsknappar.astro', (x) => ['namnet i statistiken', 'titeln i statistiken', ...(x.falt.typen === 'submit' ? ['titeln'] : [])]);
+  const stodsTryck = new Set(rutornas.stod.knappar.map((x) => x.falt['namnet i statistiken']).filter(Boolean));
+  for (const x of rutornas.metoder.knappar) {
+    const tryck = x.falt['namnet i statistiken'];
+    if (!tryck) continue;
+    const titel = x.falt['titeln i statistiken'];
+    const stods = rutornas.stod.knappar.find((y) => y.namn === x.namn);
+    if (!/^fil:(drive:)?[a-z0-9-]+\.docx$/.test(tryck) || stodsTryck.has(tryck)) fel.push(`/metoder: ${x.namn} i rutan nederst heter ${tryck} i statistiken, ska vara fil:<namn>.docx eller fil:drive:<namn>.docx och skilja sig från /stodundervisning (DRIFT.md under Besöksstatistik)`);
+    if (stods && titel.replace(/^Metoder: /, 'Metodbanken: ') !== stods.falt['titeln i statistiken']) fel.push(`/metoder: ${x.namn} i rutan nederst har titeln ${titel} i statistiken, ska vara som i /stodundervisning med Metoder först`);
+  }
+  const hjalp = bankenshtml.metoder.match(/<p class="meta samla-hjalp">([^<]*)<\/p>/)?.[1] ?? '';
+  if (rutornas.metoder.knappar.some((x) => harAttr(x.a, 'data-drive-valda')) && !/Drive/.test(hjalp)) fel.push(`/metoder: raden under knapparna i rutan nederst säger inte vad Drive ger: "${hjalp}"`);
 }
 
 // Filerna att skriva ut (lagningen inför lanseringen, A3 och A10): i bilaga A står varje fils knapp en gång, så att Drive och
@@ -326,6 +439,92 @@ const BANKEN = `(async () => {
   }
   return ut;
 })()`;
+// Bankens kort och rutan nederst i telefonen: raden med Drive och Word syns och står inom kortet, som kortet klipper (overflow
+// hidden), och med två metoder valda syns rutans knappar, Drive kan tryckas och allt står inom rutan och fönstret.
+const KORTEN = `(async () => {
+  const ut = [];
+  const inom = (e, ram, namn) => { const r = e.getBoundingClientRect(), y = ram.getBoundingClientRect(); if (r.width && (r.right > y.right + 1 || r.left < y.left - 1)) ut.push(namn + ' går utanför ' + (ram.id ? '#' + ram.id : 'kortet') + ' med ' + Math.round(Math.max(r.right - y.right, y.left - r.left)) + ' punkter'); };
+  for (const k of document.querySelectorAll('.mp-bank')) {
+    const titel = k.querySelector('h3')?.textContent.trim();
+    const rad = k.querySelector('.mp-bank-lankar');
+    if (!rad) continue;
+    for (const e of rad.querySelectorAll(':scope > a, :scope > .valj, .filval > *')) inom(e, k, titel + ': ' + e.textContent.replace(/\\s+/g, ' ').trim().slice(0, 30));
+    const drive = rad.querySelector('[data-drive-src]');
+    if (rad.querySelector('.filval') && (!drive || getComputedStyle(drive).display === 'none')) ut.push(titel + ': Drive syns inte i kortet');
+  }
+  const samla = document.getElementById('samla');
+  const boxar = [...document.querySelectorAll('input[name="valda"]')];
+  if (samla && boxar.length > 1) {
+    boxar[0].click(); boxar[1].click();
+    await new Promise((r) => setTimeout(r, 30));
+    for (const k of samla.querySelectorAll('.samla-knappar button:not([hidden])')) {
+      const namn = 'rutans ' + k.textContent.replace(/\\s+/g, ' ').trim().split(':')[0];
+      if (getComputedStyle(k).display === 'none') ut.push(namn + ' syns inte med två metoder valda');
+      else if (k.disabled) ut.push(namn + ' kan inte tryckas med två metoder valda');
+      inom(k, samla, namn);
+    }
+    const r = samla.getBoundingClientRect();
+    if (r.right > document.documentElement.clientWidth + 1 || samla.scrollWidth > samla.clientWidth + 1) ut.push('rutan nederst är bredare än fönstret eller sitt innehåll');
+    boxar[0].click(); boxar[1].click();
+  }
+  return ut;
+})()`;
+// Drive i banken med Googles inloggning och Drive härmade, eftersom den riktiga inloggningen inte går att pröva utan en
+// människa: rutan sparar varje vald metods fil som eget dokument med en rad per metod, en vald metod med rutans besked, och
+// kortets Drive kortets fil, och inloggningen kommer före filerna (src/scripts/drive.ts, driveIUrvalet i src/scripts/urval.ts).
+const DRIVEN = `(async () => {
+  const ut = [];
+  const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+  const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
+  const upp = [], ordning = [];
+  window.google = { accounts: { oauth2: { initTokenClient: (o) => ({ requestAccessToken: () => { ordning.push('inloggning'); setTimeout(() => o.callback({ access_token: 'prov' }), 5); } }), hasGrantedAllScopes: () => true } } };
+  const f = window.fetch;
+  window.fetch = async (u, o) => {
+    if (String(u).startsWith('https://www.googleapis.com/upload/')) {
+      const meta = JSON.parse((await o.body.slice(0, 600).text()).split('\\r\\n')[3]);
+      upp.push(meta.name);
+      if (meta.mimeType !== DOCX) ut.push(meta.name + ' sparades i Drive som ' + meta.mimeType + ', ska vara en Word-fil');
+      return new Response(JSON.stringify({ id: 'prov', webViewLink: 'https://drive.google.com/file/d/prov' }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    if (/\\.docx/.test(String(u))) ordning.push('filen');
+    return f(u, o);
+  };
+  const samla = document.getElementById('samla');
+  const status = samla?.querySelector('[data-status]');
+  const knapp = samla?.querySelector('[data-drive-valda]');
+  const boxar = [...document.querySelectorAll('input[name="valda"]')];
+  const filnamn = (b) => (b.dataset.fil ?? '').split('/').pop();
+  const tills = async (villkor) => { for (let i = 0; i < 100 && !villkor(); i++) await vanta(50); };
+  if (!knapp) ut.push('rutan nederst har ingen Drive');
+  else if (boxar.length > 1) {
+    boxar[0].click(); boxar[1].click();
+    knapp.click();
+    await tills(() => (status.textContent.match(/sparad i Drive|Det gick inte/g) ?? []).length >= 2);
+    const vantat = [filnamn(boxar[0]), filnamn(boxar[1])];
+    if (upp.join(', ') !== vantat.join(', ')) ut.push('Drive med två valda sparade ' + (upp.join(', ') || 'inget') + ', skulle spara ' + vantat.join(', '));
+    const rader = [...status.querySelectorAll('.drive-rad')].map((r) => r.textContent);
+    const titlar = [boxar[0], boxar[1]].map((b) => b.closest('.kort').querySelector('h3').textContent.trim());
+    if (rader.length !== 2 || !rader.every((r, i) => r.startsWith(titlar[i] + ' är sparad i Drive') && r.includes('öppna'))) ut.push('Drive med två valda säger ' + (status.textContent || 'inget') + ', skulle ha en rad per metod med länken');
+    if (ordning.length && ordning[0] !== 'inloggning') ut.push('Drive hämtade filerna före inloggningen: ' + ordning.join(', '));
+    upp.length = 0;
+    boxar[1].click();
+    knapp.click();
+    await tills(() => /Sparad i Drive|Det gick inte/.test(status.textContent));
+    if (upp.join(', ') !== filnamn(boxar[0])) ut.push('Drive med en vald sparade ' + (upp.join(', ') || 'inget') + ', skulle spara ' + filnamn(boxar[0]));
+    if (!/^Sparad i Drive: öppna\\.$/.test(status.textContent.trim())) ut.push('Drive med en vald säger ' + (status.textContent || 'inget') + ', skulle säga Sparad i Drive: öppna.');
+    boxar[0].click();
+  }
+  upp.length = 0;
+  const kortets = document.querySelector('.mp-bank [data-drive-src]');
+  if (kortets) {
+    kortets.click();
+    await tills(() => /Sparad i Drive|Det gick inte/.test(kortets.closest('.filval').nextElementSibling?.textContent ?? ''));
+    const vantat = kortets.dataset.driveNamn;
+    if (upp.join(', ') !== vantat) ut.push('kortets Drive sparade ' + (upp.join(', ') || 'inget') + ', skulle spara ' + vantat);
+  }
+  window.fetch = f;
+  return ut;
+})()`;
 // Utfallen för en annan klass (F2): med tre elever färre räknas alla tre gränserna om, och klassens förra antal står inte
 // kvar efter "av". Talen ur standardens utfallensGranser.
 const UTFALLEN = `(() => {
@@ -387,6 +586,7 @@ try {
       const klippt = await kor(`(() => { const ut = []; for (const e of document.querySelectorAll('.um-remsa-namn, .um-celler a, .mp-varde, .mp-namn')) { if (e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflow !== 'visible') ut.push(e.textContent.trim().slice(0, 30)); const ram = e.closest('.mp-bank-halv, .mp-rad, .mp-bank-en'); if (ram && e.getBoundingClientRect().right > ram.getBoundingClientRect().right + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (utanför rutan)'); } for (const e of document.querySelectorAll('.um-kort-namn, .um-kort-vad, .um-kort-moment')) if (e.scrollWidth > e.clientWidth + 1) ut.push(e.textContent.trim().slice(0, 30) + ' (ut ur kortet)'); return ut.join(' · '); })()`);
       if (klippt) fel.push(`${s}: i ${bredd} punkter klipps eller går ut: ${klippt}`);
       for (const f of (await kor(FORMEN)) ?? ['provet av formen fick inget svar']) fel.push(`${s}: i ${bredd} punkter: ${f}`);
+      if (s === '/metoder') for (const f of (await kor(KORTEN)) ?? ['provet av korten och rutan fick inget svar']) fel.push(`${s}: i ${bredd} punkter: ${f}`);
     }
     if (metodsidor.includes(s)) {
       for (const f of (await kor(UTFALLEN)) ?? ['provet av utfallen fick inget svar']) fel.push(`${s}: utfallen: ${f}`);
@@ -407,6 +607,10 @@ try {
       await skicka('Emulation.setDeviceMetricsOverride', { width: 360, height: 800, deviceScaleFactor: 2, mobile: true });
       await oppna(`${bas}${s}`);
       for (const f of (await kor(BANKEN)) ?? ['provet av banken fick inget svar']) fel.push(`${s}: ${f}`);
+      if (metodersKort.some((k) => k.knappar)) {
+        await oppna(`${bas}${s}`);
+        for (const f of (await kor(DRIVEN)) ?? ['provet av Drive fick inget svar']) fel.push(`${s}: ${f}`);
+      }
     }
     // Varje mening på lathundens sida står i lathundens pdf (K-632, K-637).
     const pdf = lathundPdf.get(s);
@@ -428,5 +632,5 @@ try {
   try { rmSync(profil, { recursive: true, force: true }); } catch { /* Chrome kan hålla filerna en stund */ }
 }
 if (fel.length) { console.error(`metoderprov: ${fel.length} fel\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt, delarna står i standardens ordning och metodens ${provadeSaker} saker är länkar där de nämns och har en knapp under sig, ${lathundensMeningar} meningar på ${lathundsidor.length} lathundssidor står i lathundens pdf, och rutan Verktyg och Stödmaterial har samma ${speglade} saker i Metoder som i Stödundervisning.`);
+console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt, delarna står i standardens ordning och metodens ${provadeSaker} saker är länkar där de nämns och har en knapp under sig, ${lathundensMeningar} meningar på ${lathundsidor.length} lathundssidor står i lathundens pdf, rutan Verktyg och Stödmaterial har samma ${speglade} saker i Metoder som i Stödundervisning, och ${spegladeKort} kort${spegladRuta ? ' och rutan nederst' : ''} i Metoder har Stödundervisnings ${rutornas.stod?.knappar.filter((x) => !harAttr(x.a, 'data-rensa')).map((x) => x.namn).join(' och ') ?? 'Drive och Word'}.`);
 if (lathundenVantar.size) console.log(`! metoderprov: lathundens pdf saknar ännu det sidan visar av ${[...lathundenVantar].join(", ")} (K-632)`);

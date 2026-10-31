@@ -1036,6 +1036,8 @@ html.js .samla {
 .samla-knappar button.lank { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .samla [data-status], .samla .samla-hjalp { grid-column: 1 / -1; }
 .samla [data-status]:empty { display: none; }
+/* Drive med flera filer, som Metoders metoder: en rad per fil (driveIUrvalet i src/scripts/urval.ts). */
+.samla .drive-rad { display: block; }
 .samla-alla { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 1rem 0 0; }
 .filter .tom { grid-column: 1 / -1; margin: 0; }
 .filter .tom button { font: inherit; background: none; border: 0; padding: 0; color: var(--farg-accent); text-decoration: underline; cursor: pointer; }

@@ -91,13 +91,16 @@ function statusFor(knapp: HTMLElement): HTMLElement {
   return el;
 }
 
-/** Steg två: sparar en färdig fil i Drive och skriver utfallet i status. Kräver forberedDrive() först. */
-export async function sparaIDrive(blob: Blob, namn: string, status: HTMLElement, knapp?: HTMLButtonElement) {
+/**
+ * Steg två: sparar en färdig fil i Drive och skriver utfallet i status. Kräver forberedDrive() först. Med titel säger
+ * beskedet vilken fil det gäller, som när rutan i Metoder sparar flera metoder med en rad för var och en (src/scripts/urval.ts).
+ */
+export async function sparaIDrive(blob: Blob, namn: string, status: HTMLElement, knapp?: HTMLButtonElement, titel?: string) {
   if (knapp) knapp.disabled = true;
-  status.textContent = 'Sparar i Drive …';
+  status.textContent = titel ? `Sparar ${titel} i Drive …` : 'Sparar i Drive …';
   try {
     const fil = await laddaUpp(blob, namn);
-    status.replaceChildren('Sparad i Drive');
+    status.replaceChildren(titel ? `${titel} är sparad i Drive` : 'Sparad i Drive');
     if (fil.webViewLink) {
       const a = document.createElement('a');
       a.href = fil.webViewLink; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'öppna';
@@ -106,7 +109,7 @@ export async function sparaIDrive(blob: Blob, namn: string, status: HTMLElement,
     status.append('.');
     if (knapp) knapp.title = 'Spara en ny kopia i din Google Drive';
   } catch (e) {
-    status.textContent = `Det gick inte: ${(e as Error).message}`;
+    status.textContent = titel ? `Det gick inte att spara ${titel}: ${(e as Error).message}` : `Det gick inte: ${(e as Error).message}`;
   } finally {
     if (knapp) knapp.disabled = false;
   }

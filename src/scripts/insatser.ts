@@ -8,13 +8,14 @@
 // orden, och Stödundervisning visar aldrig Metoders planer eller tvärtom. Appens sida, /app, visar båda listorna med samma kod
 // (K-644, src/components/Insatslista.astro).
 import { esc, liten, PLANERA } from '../lib/standard/index.js';
-import { allaPlanerna, APPENS_PLANER, idagLokalt, iSamlingen, iTurOrdning, oppnaPlanerna, SAMLINGENS_ORD, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, samlingen, skiljNamnen, STATUSNAMN, statusAv, type Samling, type SparadPlan } from './insatser-lagring';
+import { allaPlanerna, APPENS_PLANER, idagLokalt, iSamlingen, iTurOrdning, oppnaPlanerna, SAMLINGENS_ORD, valdaFiler, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, samlingen, skiljNamnen, STATUSNAMN, statusAv, vidNyttDygn, type Samling, type SparadPlan } from './insatser-lagring';
 import { iAppen } from './webblasaren';
 import { goatFor } from './byggstenar';
 import { APPEN } from '../lib/appen';
 import { laddaNer } from './skattning';
 
-const idag = idagLokalt();
+// Dagens datum, som listorna läser om när ett nytt dygn har börjat medan sidan stod öppen (vidNyttDygn nedan).
+let idag = idagLokalt();
 // Samlingens planer och ord: insatserna i Stödundervisning och planerna i Lär dig metoden under Metoder.
 const samlingAv = (el: HTMLElement): Samling => samlingen({ samling: el.dataset.samling });
 const planerI = (samling: Samling) => iSamlingen(lasPlaner().planer, samling);
@@ -26,7 +27,8 @@ const FARG: Record<string, string> = { Läsning: 'var(--farg-lasning)', Skrivnin
 const marke = (p: SparadPlan) => { const s = statusAv(p, idag); return `<span class="pl-status ${s}">${STATUSNAMN[s]}</span>`; };
 
 const din = document.getElementById('pl-din');
-if (din) {
+function ritaDin() {
+  if (!din) return;
   const ord = SAMLINGENS_ORD[samlingAv(din)];
   // Planen med nästa pass först; med flera grupper står gruppens namn vid läget, så att det syns vilken plan det gäller
   // (granskningen 2026-10-24).
@@ -43,6 +45,7 @@ if (din) {
     for (const k of document.querySelectorAll<HTMLElement>('[data-din-ersatter]')) k.hidden = true;
   }
 }
+ritaDin();
 
 // Listorna med planerna (src/components/Insatslista.astro): en på varje bank och två på appens sida, en för varje samling
 // (K-644). Varje lista ritas för sig. Knapparna Ladda ner planer och Öppna planer står under en banks lista och på appens
@@ -51,6 +54,9 @@ if (din) {
 // "Ladda ner alla planer oavsett om man är på stöd eller metoder", "I zip").
 const listorna = [...document.querySelectorAll<HTMLElement>('.pl-insatser[data-samling]')];
 for (const lista of listorna) ritaListan(lista);
+// Ett nytt dygn medan sidan står öppen: raden och listorna ritas om med dagens läge, utan att knapparna läggs till igen
+// (vidNyttDygn; rotprovet 2026-10-31, Codex fynd 3).
+vidNyttDygn((ny) => { idag = ny; ritaDin(); for (const lista of listorna) ritaListan(lista, false); raknaPagaende(planerI('stodundervisning'), idag); }, idag);
 // Appens par står, som listorna där, också utan planer, med Öppna planer, men inte i en webbläsare som inte sparar.
 for (const block of document.querySelectorAll<HTMLElement>('[data-alla-planer]')) {
   if (!lasPlaner().ok) continue;
@@ -85,7 +91,7 @@ function knapparna(block: HTMLElement) {
     if (besked) { besked.textContent = 'Alla planer är nedladdade i en zip. Lägg den bland skolans filer. Den har elevernas namn, så dela den inte.'; besked.hidden = false; }
   });
 }
-function ritaListan(lista: HTMLElement) {
+function ritaListan(lista: HTMLElement, medKnappar = true) {
   const samling = samlingAv(lista);
   const planer = planerI(samling);
   const listansOrd = SAMLINGENS_ORD[samling];
@@ -100,7 +106,7 @@ function ritaListan(lista: HTMLElement) {
     if (tom) tom.hidden = false;
     if (iEnFil) { iEnFil.hidden = false; lista.classList.add('pl-insatser-tom'); }
     lista.hidden = false;
-    knapparna(lista);
+    if (medKnappar) knapparna(lista);
     return;
   }
   lista.classList.remove('pl-insatser-tom');
@@ -130,5 +136,5 @@ function ritaListan(lista: HTMLElement) {
     fall.innerHTML = slut.length ? `<details><summary>${listansOrd.avslutade(slut.length)}</summary><ul>${slut.map(rad).join('')}</ul></details>` : '';
   }
   lista.hidden = false;
-  knapparna(lista);
+  if (medKnappar) knapparna(lista);
 }

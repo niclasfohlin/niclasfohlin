@@ -18,7 +18,7 @@ import {
   stor, talText, uppraknat, veckansPass, veckonyckel, vidareMening, granslinjensText, obesvaradVecka, skalansAndar, svaraGickDet, KLASSENS_NAMN, KLASSLISTANS_LANGD, KLASSNOTENS_LANGD, KOMMENTARENS_LANGD, type Foljd, type LarDigSammanstallning, type Plan, type PlanVecka, type Val,
 } from '../lib/standard/index.js';
 import type { LarDigData } from '../lib/lardig';
-import { BESKEDETS_NYCKEL, idagLokalt, iSamlingen, kopiansAlder, kopiansText, lagringenArNyare, lasPlaner, NYARE_VERSION, nyttId, planensAdress, planenUrFaltet, planfilen, samlingen, schemaAv, skrivPlaner, skrivPlanen, sparaPlanerna, sparadPlan, bytPlanen, filenErsatterNyare, filensFraga, flikensPlan, vidAndraFlikar, SAMLINGENS_ORD, type SparadPlan } from './insatser-lagring';
+import { BESKEDETS_NYCKEL, idagLokalt, iSamlingen, kopiansAlder, kopiansText, lagringenArNyare, lasPlaner, NYARE_VERSION, nyttId, planenUrFaltet, planfilen, samlingen, schemaAv, skrivPlaner, skrivPlanen, sparadPlan, bytPlanen, filenErsatterNyare, filensFraga, flikensPlan, vidAndraFlikar, vidNyttDygn, OPPNAD_UR_FILEN, oppnaPaSinSida, SAMLINGENS_ORD, type SparadPlan } from './insatser-lagring';
 import { laddaNer, linjegraf, pdfOrd, skalansAndarRad, skalansKnappar, visaPdf } from './skattning';
 import { $, ANGRA_AVSLUTET, anledningenIFaltet, avslutaKnappen, avslutsformularet, avslutsrutan, beskedet, etikettlista, filensSkal, goatFor, knappen, lagesraden, linjensRegler, lovknapp, notisen, remsansKnapp, vidTryck, markeraAnledningen, webblasarensRad, webblasarensTryck } from './byggstenar';
 import { larDigPdf } from './lardigpdf';
@@ -27,7 +27,8 @@ const data: LarDigData = JSON.parse($('ld-data').textContent ?? '{}');
 const rader = data.uppfoljning.rader;
 // Metodens plan ur motorn, med lärarens skattningar; sidan byggs bara när den går att räkna (larDigFel).
 const mp = larDigetsMetodplan(data).plan!;
-const idag = idagLokalt();
+// Dagens datum, som sidan läser om när ett nytt dygn har börjat medan den stod öppen (vidNyttDygn nedan).
+let idag = idagLokalt();
 // Nyckeln för ett besked när sidan laddas om efter att planer har öppnats ur flera filer (oppnaPlanerna).
 const BESKED = BESKEDETS_NYCKEL.metoder;
 
@@ -58,10 +59,9 @@ const samman = (): LarDigSammanstallning => larDigSammanstallning(plan, aktiv.va
 const sparadAv = (): SparadPlan => sparadPlan(aktiv, data, plan, { samling: 'metoder', namn: '', folj: true, skapad: aktiv.skapad, bockade: 0 });
 function spara(): boolean {
   if (!aktiv.sparad) return true;
-  const ok = minne.skriv(sparadAv());
-  // Har en annan flik sparat under tiden, visar fliken planen med båda flikarnas ändringar (flikensPlan).
-  const samman = ok ? minne.sammanslagen() : null;
-  if (samman) { aktiv = franSparad(samman); rakna(); }
+  // Har en annan flik sparat under tiden, visar fliken planen med båda flikarnas ändringar, och kopian av datumen räknas ur de
+  // sammanslagna valen (flikensPlan; rotprovet 2026-10-31, Codex fynd 1).
+  const ok = minne.skriv(sparadAv(), (ihop) => { aktiv = franSparad(ihop); rakna(); return sparadAv(); });
   if (!ok) visaBesked(lagringenArNyare() ? NYARE_VERSION : 'Planen gick inte att spara i den här webbläsaren. Ladda ner den som fil, så finns den kvar.');
   return ok;
 }
@@ -693,12 +693,13 @@ $<HTMLInputElement>('ld-fil').addEventListener('change', async (e) => {
   const last = valet.last;
   if (!last) { visaBesked('Filen är inte en nedladdad plan.'); return; }
   const p = last.plan;
-  // En plan för en annan metod, eller i Stödundervisning, sparas och öppnas på sin sida.
+  // En plan för en annan metod, eller i Stödundervisning, sparas och öppnas på sin sida med filens varningar, och en fil som
+  // skulle ersätta en nyare plan frågar först, med samma rot som i Planera insatsen (oppnaPaSinSida; rotprovet 2026-10-31, R4).
   if (samlingen(p) !== 'metoder' || p.metod !== data.id) {
-    const r = sparaPlanerna([p]);
-    if (!r.ok) { visaBesked('Planen i filen gick inte att spara i den här webbläsaren.'); return; }
-    try { sessionStorage.setItem(BESKEDETS_NYCKEL[samlingen(p)], 'Planen är öppnad ur filen, med allt som förts in.'); } catch { /* utan lagring */ }
-    location.href = planensAdress(p);
+    const dar = lasPlaner().planer.find((x) => x.id === p.id);
+    const tillSidan = () => { if (!oppnaPaSinSida(p, last.varningar)) visaBesked(lagringenArNyare() ? NYARE_VERSION : 'Planen i filen gick inte att spara i den här webbläsaren.'); };
+    if (dar && filenErsatterNyare(dar, p)) { visaBesked(filensFraga(dar, p), { text: 'Ersätt med filen', gor: tillSidan }); return; }
+    tillSidan();
     return;
   }
   // En plan per lärare och metod: planen i filen ersätter metodens plan i webbläsaren, och Ångra tar tillbaka den.
@@ -721,7 +722,7 @@ function oppnaFilen(p: SparadPlan, varningar: string[], forut: SparadPlan[]) {
   rakna();
   visa = standardVy();
   rendera(true);
-  visaBesked(['Planen är öppnad ur filen, med allt som förts in.', ...varningar].join(' '), { text: 'Ångra', gor: () => { bytPlanen(p.id, forut.find((x) => samlingen(x) === 'metoder' && x.metod === data.id)); aktiv = gamla; rakna(); visa = standardVy(); rendera(true); visaBesked('Planen är som före filen.'); } });
+  visaBesked([OPPNAD_UR_FILEN, ...varningar].join(' '), { text: 'Ångra', gor: () => { bytPlanen(p.id, forut.find((x) => samlingen(x) === 'metoder' && x.metod === data.id)); aktiv = gamla; rakna(); visa = standardVy(); rendera(true); visaBesked('Planen är som före filen.'); } });
 }
 $('ld-ta-bort').addEventListener('click', () => {
   skrivKlart();
@@ -742,6 +743,10 @@ vidAndraFlikar({
   borta: (besked) => { const egna = minaPlaner(); aktiv = egna.length ? franSparad(egna[0]) : nyAktiv(); rakna(); visa = standardVy(); rendera(true); visaBesked(besked); },
   andrad: (p) => visaPlanen(p, visa),
 });
+
+// Ett nytt dygn medan sidan står öppen, som i en telefon över natten: det som väntar sparas, och planen räknas och ritas om med
+// dagens datum, så att läget, veckan och Avsluta i dag gäller i dag (vidNyttDygn; rotprovet 2026-10-31, Codex fynd 3).
+vidNyttDygn((ny) => { skrivKlart(); idag = ny; rakna(); rendera(); }, idag);
 
 // ---------- Start ----------
 rendera();

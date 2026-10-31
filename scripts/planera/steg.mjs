@@ -19,6 +19,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import { iModulen } from './modulen.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const LIGGARE = join(rot, 'underlag', 'prov', 'planera-steg.json');
@@ -40,8 +41,8 @@ const STEGEN = {
 };
 const FOR_METOD = ['1', '3', '4', '4b', '6', '11'];
 const FOR_MODULEN = ['7', '8', '8b', '9', '11'];
-// Modulens kod: det som räknar, visar och sparar planen (PLANERA.md under Stegen, Tre slags arbete).
-const MODULEN = [/^src\/lib\/standard\/(plan|saker|text)\.js$/, /^src\/lib\/(insatsplan|metodsaker|planbar)\.ts$/, /^src\/scripts\/(planera|planpdf|insatser[^/]*)\.ts$/, /^src\/components\/Planera[^/]*\.astro$/, /^src\/pages\/stodundervisning\/\[id\]\/planera\.astro$/, /^src\/content\.config\.ts$/];
+// Modulens kod: det som räknar, visar och sparar planen (PLANERA.md under Stegen, Tre slags arbete), ur modulens lista i
+// scripts/planera/modulen.mjs (iModulen), som planprovet och kroken också läser, så att Lär dig metoden räknas med (Niclas 2026-10-31).
 
 const args = process.argv.slice(2);
 const varde = (namn, forval) => (args.includes(namn) ? args[args.indexOf(namn) + 1] : forval);
@@ -62,8 +63,10 @@ function omgangen(till) {
     try { d = parse(git('show', `${till}:${f}`)); } catch { continue; }
     if (d?.plan && !d.plan.vantar && !d.utkast) metoder.push({ id: m[1], titel: d.titel ?? m[1] });
   }
-  return { bas: b, metoder, modulen: filer.some((f) => MODULEN.some((r) => r.test(f))) };
+  return { bas: b, metoder, modulen: modulenAndrad(filer) };
 }
+/** Har modulen ändrats: någon av filerna hör till modulen (iModulen), också Lär dig metoden. Planprovet prövar den. @param {string[]} filer */
+export const modulenAndrad = (filer) => filer.some(iModulen);
 
 function lasLiggaren(b) {
   if (!existsSync(LIGGARE)) return { bas: b, steg: {} };
@@ -83,8 +86,9 @@ function lage(till) {
   return { o, l, rader };
 }
 
-const kommando = args[0];
-if (kommando === 'gjort') {
+// Kommandona körs när skriptet startas, inte när planprovet läser modulenAndrad.
+const kommando = process.argv[1] && resolve(process.argv[1]).toLowerCase() === fileURLToPath(import.meta.url).toLowerCase() ? args[0] : null;
+if (kommando === null) { /* läst av ett annat skript */ } else if (kommando === 'gjort') {
   const [, vem, steg, svar] = args;
   if (!vem || !STEGEN[steg]) { console.error(`steg: skriv gjort <id|modulen> <steg> <svar>, med ett steg av ${Object.keys(STEGEN).join(', ')}.`); process.exit(1); }
   const skal = varde('--skal');

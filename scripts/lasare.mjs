@@ -89,6 +89,10 @@ async function serve(port, bildmapp) {
   const telefon = async (ua = IPHONE) => { skarm = 'telefon'; await skicka('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await skicka('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 }); await skicka('Network.setUserAgentOverride', { userAgent: ua, userAgentMetadata: { brands: [], platform: 'iOS', platformVersion: '18.0', architecture: '', model: 'iPhone', mobile: true } }); };
   const dator = async () => { skarm = 'dator'; await skicka('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false }); await skicka('Emulation.setTouchEmulationEnabled', { enabled: false }); await skicka('Network.setUserAgentOverride', { userAgent: '' }); };
   await telefon();
+  // Sidan har fokus som i en webbläsare som läraren tittar på, också när Chrome körs utan fönster: utan det kommer focus och
+  // blur aldrig, och ett fält som läraren lämnar räknas inte som lämnat (agenten för Planera 2026-10-31: verifieringens fel i
+  // elevlistan kom av att blur aldrig kom).
+  await skicka('Emulation.setFocusEmulationEnabled', { enabled: true });
   const oppna = async (url) => { const klar = new Promise((r) => { laddad = r; }); await skicka('Page.navigate', { url }); await Promise.race([klar, vanta(20000)]); await vanta(500); };
   // Det synliga som går att använda, numrerat: knappar, länkar, fält, listor, kryssrutor och rubriker som fäller ut.
   const LISTA = `(() => {

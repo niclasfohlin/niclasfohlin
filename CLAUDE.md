@@ -51,7 +51,7 @@ Kommentarerna under artiklar, böcker och metoder är ett lager som slås av och
 | Artiklar | src/content/artiklar/ | /artiklar/<id> | _mall.md | /ny-artikel |
 | Böcker | src/content/bocker/ | /bocker/<id> | _mall.md | /ny-bok |
 | Stödundervisning | src/content/stodundervisning/ | /stodundervisning/<id> | _mall.yaml | /ny-metod |
-| Undervisningsmetoder (Metoder) | src/content/undervisningsmetoder/ | /metoder/<id> | metodriggens `methods/_mall-undervisningsmetod.yaml` | under uppbyggnad (K-621) |
+| Undervisningsmetoder (Metoder) | src/content/undervisningsmetoder/ | /metoder/<id> | metodriggens `methods/_mall-undervisningsmetod.yaml` | /ny-undervisningsmetod |
 
 Undervisningsmetoderna skrivs av metodriggen efter dess standard (`C:/metodrigg/docs/undervisningsmetoder/standarden.md`), och deras dokument och filmer tas in i public/metoder/ med `scripts/metoderfiler.mjs`, som prövar att de är byggda ur samma metodfil. Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig i produktion. Scheman ligger i `src/content.config.ts` och är strikta med avsikt. Taggar och publikationer styrs av registren i `src/data/`; reglerna står i ARBETSSATT.md under Innehåll.
 

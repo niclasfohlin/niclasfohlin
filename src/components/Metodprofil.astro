@@ -10,17 +10,20 @@
 // som bara förvirrar", och om metodens sida "Även där utanför pilen ska 13 timmar bort"). Med bank är det kortet i banken,
 // tätt, i Stödundervisnings ordning (Niclas samma dag: "Flytta upp texten och tighta till marginaler lite på kortet"):
 // huvudet med titeln, faktan, ingressen, de andra namnen i en liten rad, raderna Lärande totalt, Svårighet och Kostnad, och
-// länkarna till Lär dig metoden och lathunden med kryssrutan Välj i hörnet, som korten i Stödundervisning (design-3 nr 22).
+// länkarna till Lär dig metoden och lathunden, filvalet med Drive och Word för metodens fil med allt och kryssrutan Välj i
+// hörnet, som korten i Stödundervisning (design-3 nr 22; Niclas 2026-10-31: "Varför har inte Metoder skicka till drive som
+// stödundervisning?"). Filvalet är Stödundervisnings (Filval.astro), med samma namn i statistiken som på metodens sida.
 // Kortet bär det banken filtrerar på, bankensVal ur standarden (K-642), och när filtret har Område har kortet en rad för
 // vart och ett av bankens områden: det valda områdets rad står i stället för Lärande totalt, med staplarna, ordet och
 // kommentaren, så att läraren ser nivån och villkoret för just det området (src/pages/metoder/index.astro).
 import Staplar from './Staplar.astro';
+import Filval from './Filval.astro';
 import { OMRADEN, primaraOmraden, type Utkast } from '../lib/metodprofil';
 import { esc, effektensSkala, uppraknat, laget, PRIMARA_REGELN, motiveringensDelar, svarighetensNiva, kostnadensNiva, larandetIKort, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAERNAS_FORKLARING, BANKENS_OMRADEN, type Laget, type bankensVal } from '../lib/standard/index.js';
-import { medSaker, METODKORTET } from '../lib/undervisningsmetod';
+import { medSaker, METODKORTET, UM_NAMN } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
-// fil är metodens Word-fil med allt, som kryssrutan Välj laddar ner i banken (src/scripts/urval.ts), val det banken
-// filtrerar på och omraden att filtret har Område, så att kortet har en rad för varje område.
+// fil är metodens Word-fil med allt, som filvalet ger och kryssrutan Välj laddar ner i banken (src/scripts/urval.ts), val
+// det banken filtrerar på och omraden att filtret har Område, så att kortet har en rad för varje område.
 // forsmak är bankens kort på startsidan, en försmak som Stödundervisnings kort där (Metodkort.astro): titeln, faktan,
 // ingressen och Lärande totalt med kommentaren, som säger för vilka och i vilken form stödet gäller (Niclas 2026-10-30), utan
 // svårighet, kostnad, Primär evidens, länkar och Välj, och hela kortet är en tryckyta (Niclas 2026-10-31: "gör deras kort
@@ -48,6 +51,10 @@ const timmarna = (x: (typeof infor)[number]) => ('timmar' in x && x.timmar !== u
 const fylld = (l: Laget) => (l.slag === 'niva' ? l.niva : 0);
 // Förklaringens rad för Negativ effekt får kortets markering, ordet i rost; ordet läses ur standarden och skrivs inte här.
 const NEGATIV = laget({ tillforlitlighet: 'hog', effekt: 'negativ' }).ord;
+// Filvalet på bankens kort: samma fil som Välj, utan ändelse, och namnen som Stödundervisnings kort (Metodkort.astro) och
+// metodens sida (Umfilknappar.astro) ger dem, "Explicit undervisning: allt om metoden som Word" (DRIFT.md under Besöksstatistik).
+const filensStam = fil?.replace(/\.docx$/, '');
+const alltIMening = UM_NAMN.allt.charAt(0).toLocaleLowerCase('sv') + UM_NAMN.allt.slice(1);
 ---
 {bank ? (
   <article class={`kort metodkort mp-bank${forsmak ? ' forsmak' : ''}`} data-del="metoder" data-val={val && JSON.stringify(val)}>
@@ -82,6 +89,7 @@ const NEGATIV = laget({ tillforlitlighet: 'hog', effekt: 'negativ' }).ord;
     {!forsmak && (lankar.length > 0 || fil) && (
       <p class="kort-rad mp-bank-lankar">
         {lankar.map((l) => <a class={l.klass} href={l.href}>{l.text}<span class="visually-hidden">: {m.titel}</span></a>)}
+        {filensStam && <Filval fil={filensStam} namn={filensStam.split('/').pop() ?? m.id} rubrik={`Allt om ${m.titel}`} statistik={`${m.titel}: ${alltIMening}`} liten />}
         {fil && <label class="valj"><input type="checkbox" name="valda" value={m.id} data-fil={fil} /> Välj<span class="visually-hidden"> {m.titel}</span></label>}
       </p>
     )}

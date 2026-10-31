@@ -26,7 +26,7 @@ material:
   - mallar och blad
   - veckans kort
   - knappar och tärning
-uppdaterad: 2026-10-28
+uppdaterad: 2026-10-31
 relaterade:
   - antalsuppfattning-i-grupp
   - problemlosning-i-grupp
@@ -292,27 +292,27 @@ progression:
   rader:
     - vecka: "1"
       fokus: "Lika delar: eleverna delar det hela i lika stora delar och lär sig orden nämnare och täljare. Du gör kartläggningen före första passet."
-      roll: Läraren viker först och säger varje del.
+      roll: Du viker först och säger varje del.
       eleverna: "Att dela det hela i lika stora delar och säga vad nämnaren och täljaren betyder."
       vidare: "de flesta i gruppen visar att delarna är lika stora och säger vad nämnaren och täljaren betyder, i pass 1 och pass 2"
     - vecka: "2"
       fokus: "Bråk på tallinjen: staven blir ett mått, och bråket får en plats mellan 0 och 2, också bråk större än 1."
-      roll: Läraren lägger stavarna mot tallinjen och räknar delarna högt.
+      roll: Du lägger stavarna mot tallinjen och räknar delarna högt.
       eleverna: "Att sätta ut bråket vid strecket där delen slutar, också när bråket är större än 1. Att jämföra bråk med hjälp av 0, en halv och en hel, och av det som fattas till en hel."
       vidare: "de flesta i gruppen sätter ut bråket vid strecket där delen slutar och säger om det är mer eller mindre än en halv, i pass 1 och pass 2"
     - vecka: "3"
       fokus: "Likvärdiga bråk: bråk som hamnar på samma punkt är samma tal. Eleverna skriver tiondelar som decimaltal, och en halv, en fjärdedel och tre fjärdedelar i procent."
-      roll: Läraren visar samma punkt och frågar hur eleverna vet.
+      roll: Du visar samma punkt och frågar hur eleverna vet.
       eleverna: "Att visa att två bråk hamnar på samma punkt och säga hur de vet. Att skriva tiondelar som decimaltal och skriva en halv, en fjärdedel och tre fjärdedelar i procent."
       vidare: "de flesta i gruppen visar med stavarna eller på tallinjen att två bråk är samma tal och säger hur de vet, i pass 1 och pass 2"
     - vecka: "4"
       fokus: "Addera och subtrahera: eleverna räknar delar som är lika stora, byter till mindre delar och uppskattar först."
-      roll: Läraren uppskattar högt innan hen räknar.
+      roll: Du uppskattar högt innan du räknar.
       eleverna: "Att först uppskatta om svaret blir mer eller mindre än 1 och sedan räkna delar som är lika stora, också när de byter en del mot mindre delar."
       vidare: "de flesta i gruppen uppskattar först och räknar sedan delarna utan att lägga ihop nämnarna, i pass 1 och pass 2"
     - vecka: "5"
       fokus: "Bråk av antal: eleverna delar i lika stora grupper och hittar det hela när en del är känd. Du gör kartläggningen efter sista passet."
-      roll: Läraren visar kort, och eleverna berättar mer själva.
+      roll: Du visar kort, och eleverna berättar mer själva.
       eleverna: "Att dela ett antal i lika stora delar och ta så många delar som täljaren säger, och att hitta det hela när en del är känd."
 uppfoljning:
   rader:
