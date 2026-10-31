@@ -1,14 +1,17 @@
-# Par-pussel: paren är tillbaka i fyrgruppen, det gula paret håller upp sin uppgift med triangeln mot det blå paret och lär dem hur de löste den, och det blå parets uppgift med kvadraten väntar på deras tur.
+# Par-pussel: fyrgruppen har delat sig i två par som sitter på var sin plats i rummet, och varje par löser sin egen uppgift, det gula med triangeln och det blå med kvadraten, innan de går tillbaka och lär varandra.
 id: par-pussel
-skala: 74
-djup: false
+skala: 78
+djupRam: [250, 520]
 delar:
-  - figur: { namn: a1, x: 378, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: b1, lutar: b1, nar: { H: [430, 328] } }
-  - figur: { namn: b1, x: 590, y: 392, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: tanka, tittar: aUppgift, lutar: aUppgift }
-  - figur: { namn: a2, x: 262, y: 516, utanBen: true, trojan: gul, ansikte: glad, tittar: b1, lutar: aUppgift, pekar: [418, 334], armarEfter: aUppgift }
-  - figur: { namn: b2, x: 690, y: 525, utanBen: true, trojan: ljusbla, ansikte: glad, tittar: aUppgift, lutar: aUppgift, nar: { V: [636, 408] }, armarEfter: bUppgift }
-  - bord: { x: 270, y: 445, b: 380, d: 100, h: 50, snett: 20 }
-  - papper: { namn: aUppgift, x: 450, y: 308, b: 74, h: 62, vinkel: 6, rader: 2, symbol: triangel, symbolStorlek: 0.3 }
-  - papper: { namn: bUppgift, x: 598, y: 408, b: 76, h: 52, vinkel: -6, rader: 2, symbol: kvadrat, symbolStorlek: 0.26 }
-  - bubbla: { till: a1, dx: -50, dy: 40, symboler: [triangel], visar: "Det gula paret visar sin uppgift och lär det blå paret hur de löste den" }
-  - bubbla: { till: b1, dx: 40, dy: 40, tanke: true, symboler: [triangel], visar: "Det blå paret lär sig det gula parets lösning; deras egen uppgift ligger framför dem och lärs ut sedan" }
+  - figur: { namn: a1, x: 178, y: 282, stallning: sitta, utanBen: true, trojan: gul, ansikte: skriva, tittar: aUppgift, lutar: aUppgift, nar: { H: [226, 266] }, armarEfter: aUppgift }
+  - figur: { namn: a2, x: 288, y: 282, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: a1, lutar: aUppgift, pekar: { mal: aUppgift, dx: -2, dy: 10 }, armarEfter: aUppgift }
+  - bord: { x: 120, y: 330, b: 220, d: 80, h: 45, snett: 16 }
+  - papper: { namn: aUppgift, x: 236, y: 288, b: 84, h: 48, vinkel: -4, rader: 0, symbol: triangel, symbolStorlek: 0.3, symbolPlats: [0.24, 0.02] }
+  - penna: { x: 216, y: 290, vinkel: 150, l: 36 }
+  - figur: { namn: b1, x: 556, y: 448, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: b2, lutar: bUppgift, pekar: { mal: bUppgift, dx: 10, dy: 12 }, armarEfter: bUppgift }
+  - figur: { namn: b2, x: 680, y: 448, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: skriva, tittar: bUppgift, lutar: bUppgift, nar: { V: [630, 424] }, armarEfter: bUppgift }
+  - bord: { x: 486, y: 502, b: 260, d: 92, h: 50, snett: 18 }
+  - papper: { namn: bUppgift, x: 620, y: 452, b: 92, h: 54, vinkel: 4, rader: 2, symbol: kvadrat, symbolStorlek: 0.3 }
+  - penna: { x: 638, y: 456, vinkel: 210, l: 38 }
+  - bubbla: { till: a2, dx: 30, dy: 44, symboler: [triangel], visar: "Det gula paret löser sin uppgift, triangeln, på sin plats" }
+  - bubbla: { till: b1, dx: -40, dy: 44, symboler: [kvadrat], visar: "Det blå paret löser en annan uppgift, kvadraten, på en annan plats i rummet" }

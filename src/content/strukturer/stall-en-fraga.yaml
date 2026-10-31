@@ -15,5 +15,5 @@ kalla:
   rubrik: Ställ en fråga
   commit: b492447
   summa: fc458e24
-bild: { scen: stall-en-fraga, alt: "Till vänster går en elev med ett blad i handen, med ett frågetecken överst och skrivna rader under. I mitten håller en elev ett likadant blad framför sig, med ett stort frågetecken överst. Eleven tittar på kamraten och skriver med en penna på den nedersta raden, där det står en triangel. Till höger svarar kamraten, och pratbubblan visar samma triangel. Kamraten har ett eget blad med ett frågetecken i handen." }
+bild: { scen: stall-en-fraga, alt: "Två elever står tätt intill varandra. Eleven till höger håller upp sitt blad mellan dem, med ett stort frågetecken överst och två skrivna rader under. Eleven till vänster säger sitt svar, och pratbubblan visar en triangel. Hen skriver samma triangel med en penna på bladet, under raderna. Eleven till höger tittar på det som skrivs." }
 utkast: true

@@ -1,30 +1,25 @@
-# Provet två gånger: provet är skrivet enskilt, och den ena kopian av allas svar ligger i en hög till läraren. Nu
-# jämför gruppen svaren fråga för fråga: den som svarat rätt håller upp sitt prov och förklarar för den som svarat
-# annorlunda.
+# Provet två gånger: provet är skrivet, och en elev håller sina två likadana kopior, en i varje hand. Den ena lämnas
+# till läraren, som redan har gruppens andra kopior, och den andra behåller eleven för att jämföra i gruppen.
 id: provet-tva-ganger
 skala: 74
 djup: false
-fokus: visat
+fokus: elev
 delar:
-  - figur: { namn: bakV, x: 372, y: 392, stallning: sitta, utanBen: true, trojan: rosa, ansikte: prata, tittar: sidaH, nar: { V: [310, 344], H: [434, 340] } }
-  - figur: { namn: bakH, x: 566, y: 394, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, lutar: visat }
-  - figur: { namn: sidaV, x: 245, y: 520, utanBen: true, trojan: turkos, ansikte: glad, lutar: visat }
-  - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, trojan: ljusbla, ansikte: tanka, lutar: visat, pekar: { mal: egetSH, dx: 16, dy: 0 }, armarEfter: egetSH }
-  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
-  # Den ena kopian av allas svar, i en hög som ska till läraren.
-  - papper: { x: 466, y: 424, b: 58, h: 36, vinkel: -8, rader: 3 }
-  - papper: { x: 470, y: 422, b: 58, h: 36, vinkel: -2, rader: 3 }
-  - papper: { x: 474, y: 420, b: 58, h: 36, vinkel: 4, rader: 3 }
-  - papper: { x: 478, y: 418, b: 58, h: 36, vinkel: 9, rader: 3 }
-  # Var och ens egen kopia: tre frågor med svaret i en ruta vid raden.
-  - papper: { x: 556, y: 372, b: 64, h: 46, vinkel: 4, rader: 3 }
-  - kort: { x: 580, y: 374, b: 17, h: 15, vinkel: 4, symbol: cirkel }
-  - papper: { x: 332, y: 420, b: 64, h: 46, vinkel: 8, rader: 3 }
-  - kort: { x: 356, y: 425, b: 17, h: 15, vinkel: 8, symbol: cirkel }
-  - papper: { namn: egetSH, x: 604, y: 420, b: 64, h: 46, vinkel: -6, rader: 3 }
-  - kort: { x: 627, y: 418, b: 17, h: 15, vinkel: -6, symbol: kvadrat }
-  # Provet som hålls upp, med cirkeln som svar på frågan som gruppen jämför.
-  - papper: { namn: visat, x: 372, y: 320, b: 104, h: 78, vinkel: -3, rader: 3 }
-  - kort: { x: 404, y: 318, b: 28, h: 26, vinkel: -3, symbol: cirkel }
-  - bubbla: { till: bakV, dx: -46, dy: 40, symboler: [cirkel], visar: "Den som svarat rätt på frågan visar sitt svar och förklarar hur hen tänkte" }
-  - bubbla: { till: sidaH, dx: 45, dy: 36, tanke: true, symboler: [kvadrat, fraga], visar: "Den som svarade kvadraten på sitt eget prov undrar, tills hen kan förklara svaret" }
+  - figur: { namn: bakV, x: 490, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, lutar: elev }
+  - figur: { namn: bakH, x: 646, y: 394, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, lutar: elev }
+  - bord: { x: 420, y: 450, b: 300, d: 100, h: 60, snett: 20 }
+  # De andras behållna kopior på bordet.
+  - papper: { x: 512, y: 382, b: 56, h: 44, vinkel: -4, rader: 3 }
+  - kort: { x: 533, y: 380, b: 20, h: 18, vinkel: -4, symbol: cirkel }
+  - papper: { x: 626, y: 384, b: 56, h: 44, vinkel: 5, rader: 3 }
+  - kort: { x: 647, y: 386, b: 20, h: 18, vinkel: 5, symbol: kvadrat }
+  - figur: { namn: elev, x: 336, y: 500, trojan: rosa, ansikte: glad, tittar: lararen, fokus: false, nar: { V: [262, 372], H: [400, 380] } }
+  - figur: { namn: lararen, x: 150, y: 500, storlek: 1.1, trojan: lila, ansikte: glad, tittar: elev, fokus: false, nar: { V: [116, 376], H: [228, 364] } }
+  # Lärarens hög med gruppens kopior.
+  - papper: { hand: [lararen, V], dx: 8, dy: -10, b: 52, h: 64, vinkel: -14, rader: 4 }
+  - papper: { hand: [lararen, V], dx: 12, dy: -14, b: 52, h: 64, vinkel: -8, rader: 4 }
+  # Elevens två likadana kopior, en i varje hand, med samma svar i rutan: den ena lämnas, den andra behålls.
+  - papper: { hand: [elev, V], dx: -14, dy: -24, b: 60, h: 76, vinkel: -6, rader: 4 }
+  - kort: { hand: [elev, V], dx: 0, dy: -44, b: 26, h: 23, vinkel: -6, symbol: cirkel }
+  - papper: { hand: [elev, H], dx: 8, dy: -24, b: 60, h: 76, vinkel: 6, rader: 4 }
+  - kort: { hand: [elev, H], dx: 22, dy: -42, b: 26, h: 23, vinkel: 6, symbol: cirkel }

@@ -1,11 +1,13 @@
-# Kloka pennan: tänkaren löser uppgiften högt och visar med handen, och den med kloka pennan är ensam om pennan och skriver ned det tänkaren säger.
+# Kloka pennan: tänkaren löser uppgiften högt och visar med handen, och den med kloka pennan, en penna större än ett huvud,
+# är ensam om den och skriver ned det tänkaren säger.
 id: kloka-pennan
 skala: 80
 djup: false
 delar:
-  - figur: { namn: tankaren, x: 392, y: 436, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: skrivaren, lutar: bladet, nar: { H: [458, 330] } }
-  - figur: { namn: skrivaren, x: 548, y: 440, stallning: sitta, utanBen: true, trojan: orange, ansikte: skriva, tittar: bladet, lutar: bladet, nar: { H: [556, 378] }, armarEfter: bladet }
-  - bord: { x: 300, y: 470, b: 340, d: 100, h: 55, snett: -10 }
-  - papper: { namn: bladet, x: 490, y: 400, b: 100, h: 60, vinkel: -4, rader: 2, symbol: triangel, symbolStorlek: 0.26 }
-  - penna: { x: 500, y: 410, vinkel: 120, l: 64 }
+  - figur: { namn: tankaren, x: 418, y: 436, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: skrivaren, lutar: bladet, nar: { H: [474, 334] } }
+  - figur: { namn: skrivaren, x: 592, y: 440, stallning: sitta, utanBen: true, trojan: orange, ansikte: skriva, tittar: bladet, lutar: bladet, nar: { H: [571, 359] }, armarEfter: pennan }
+  - bord: { x: 320, y: 470, b: 360, d: 100, h: 55, snett: -10 }
+  - papper: { namn: bladet, x: 486, y: 402, b: 104, h: 60, vinkel: -4, rader: 2, symbol: triangel, symbolStorlek: 0.26 }
+  - penna: { x: 496, y: 412, vinkel: 125, l: 24 }
+  - kort: { namn: pennan, x: 557, y: 370, b: 17, h: 120, vinkel: -125, farg: '#efc65a' }
   - bubbla: { till: tankaren, dx: -60, dy: 40, symboler: [triangel], visar: "Tänkaren säger lösningen högt, och skrivaren skriver ned just det" }

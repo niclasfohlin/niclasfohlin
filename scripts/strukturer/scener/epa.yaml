@@ -1,10 +1,11 @@
-# EPA: var och en har tänkt själv först, och nu berättar den ena sin tanke för den andra i paret, som har en egen tanke att berätta sedan.
+# EPA: var och en har tänkt själv först och har sin egen tanke kvar i en tankebubbla, och nu talar paret om båda tankarna.
 id: epa
 skala: 88
 djup: false
-luft: 0.16
+luft: 0.12
 delar:
-  - figur: { namn: beratter, x: 405, y: 520, utanBen: true, nar: { H: [484, 334] }, trojan: lila, ansikte: prata, tittar: lyssnar, lutar: lyssnar }
-  - figur: { namn: lyssnar, x: 548, y: 526, utanBen: true, stallning: tanka, trojan: rod, ansikte: tanka, tittar: beratter }
-  - bubbla: { till: beratter, dx: -55, dy: 40, symboler: [triangel], visar: "Paret: den ena berättar den tanke hen fick när hen tänkte själv" }
-  - bubbla: { till: lyssnar, dx: 55, dy: 40, tanke: true, symboler: [kvadrat], visar: "Enskilt först: den andra har en egen tanke, som hen berättar sedan" }
+  - figur: { namn: beratter, x: 380, y: 520, utanBen: true, nar: { H: [458, 336] }, trojan: lila, ansikte: prata, tittar: lyssnar, lutar: lyssnar }
+  - figur: { namn: lyssnar, x: 584, y: 526, utanBen: true, nar: { V: [520, 352] }, trojan: rod, ansikte: glad, tittar: beratter, lutar: beratter }
+  - bubbla: { till: beratter, dx: -30, dy: 78, tanke: true, symboler: [triangel], visar: "Enskilt först: den ena har tänkt ut sin egen tanke" }
+  - bubbla: { till: lyssnar, dx: 30, dy: 78, tanke: true, symboler: [kvadrat], visar: "Enskilt först: den andra har en annan egen tanke" }
+  - bubbla: { till: beratter, dx: 104, dy: 6, symboler: [triangel, kvadrat], visar: "Paret: de berättar sina tankar för varandra och talar om båda" }

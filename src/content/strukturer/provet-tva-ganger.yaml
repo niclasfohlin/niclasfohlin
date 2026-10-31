@@ -16,5 +16,5 @@ kalla:
   rubrik: Provet två gånger
   commit: b492447
   summa: 02a4ceb3
-bild: { scen: provet-tva-ganger, alt: "Fyra elever sitter runt ett bord. Eleven bakom bordet till vänster håller upp sitt prov, där en cirkel står i svarsrutan vid den mellersta frågan, och förklarar, med en cirkel i pratbubblan. De andra har var sitt likadant prov framför sig, två med en cirkel i rutan och ett med en kvadrat. Mitt på bordet ligger en hög med kopior av proven. Eleven till höger, som har kvadraten, pekar på sin ruta och har en kvadrat och ett frågetecken i en tankebubbla. De två andra tittar på provet som hålls upp." }
+bild: { scen: provet-tva-ganger, alt: "Läraren står till vänster med några prov i ena handen och tar emot ett prov med den andra. En elev står framför läraren och håller två likadana kopior av sitt prov, en i varje hand, båda med en cirkel i svarsrutan: den ena räcker eleven fram till läraren och den andra behåller hen. Vid ett bord bredvid sitter två elever från gruppen med var sin kopia framför sig, den ena med en cirkel och den andra med en kvadrat i rutan, och tittar på eleven." }
 utkast: true

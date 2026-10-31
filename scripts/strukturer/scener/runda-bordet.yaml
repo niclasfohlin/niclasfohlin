@@ -1,11 +1,11 @@
-# Runda bordet: papperen går runt bordet till kamraten till höger, alla åt samma håll, och den som får ett papper läser svaret
-# där och skriver ett nytt eget. Ingen pratar: allt sker på papperen.
+# Runda bordet: ett papper är i luften mitt i överlämningen till kamraten bredvid, och de som har fått sitt papper läser
+# svaret där och skriver ett nytt eget. Ingen pratar: allt sker på papperen.
 id: runda-bordet
 skala: 74
 djup: false
 delar:
-  - figur: { namn: bakV, x: 382, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: glad, tittar: skickas, lutar: skickas, nar: { H: [436, 320] }, armarEfter: skickas }
-  - figur: { namn: bakH, x: 545, y: 392, stallning: sitta, utanBen: true, trojan: rod, ansikte: glad, tittar: bakV, nar: { V: [516, 316] }, armarEfter: skickas }
+  - figur: { namn: bakV, x: 366, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: glad, tittar: skickas, lutar: skickas, nar: { H: [426, 312] }, armarEfter: skickas }
+  - figur: { namn: bakH, x: 580, y: 392, stallning: sitta, utanBen: true, trojan: rod, ansikte: glad, tittar: bakV, nar: { V: [524, 296] }, armarEfter: skickas }
   - figur: { namn: sidaV, x: 255, y: 520, utanBen: true, trojan: ljusbla, ansikte: skriva, tittar: egetV, lutar: egetV, nar: { H: [325, 395] }, armarEfter: egetV }
   - figur: { namn: sidaH, x: 672, y: 525, utanBen: true, trojan: gul, ansikte: skriva, tittar: egetH, lutar: egetH, nar: { V: [635, 392] }, armarEfter: egetH }
   - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: -10 }
@@ -13,9 +13,6 @@ delar:
   - penna: { x: 346, y: 422, vinkel: 215, l: 40 }
   - papper: { namn: egetH, x: 604, y: 412, b: 76, h: 50, vinkel: -6, rader: 2, symbol: "cirkel:gron" }
   - penna: { x: 612, y: 418, vinkel: 140, l: 40 }
-  - papper: { namn: skickas, x: 472, y: 322, b: 86, h: 52, vinkel: 8, rader: 2, symbol: hjarta }
-  - pil: { fran: [514, 256], till: [430, 256], bage: 0.35, tjock: 1.3 }
-  - pil: { fran: [380, 352], till: [338, 382], bage: 0.3, tjock: 1.3 }
-  - pil: { fran: [370, 426], till: [562, 426], bage: 0.06, tjock: 1.3 }
-  - pil: { fran: [592, 382], till: [560, 350], bage: -0.15, tjock: 1.3 }
+  - papper: { namn: skickas, x: 474, y: 300, b: 104, h: 68, vinkel: 12, rader: 2, symbol: hjarta, symbolStorlek: 0.24 }
+  - rorelse: { x: 530, y: 262, riktning: 80, langd: 26 }
   - bubbla: { till: sidaV, dx: -40, dy: 40, tanke: true, symboler: [kvadrat], visar: "Den som har fått papperet läser kamratens svar där och tänker ut ett nytt eget att skriva under" }

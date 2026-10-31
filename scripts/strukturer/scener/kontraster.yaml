@@ -1,15 +1,14 @@
-# Kontraster: tre som har skrivit olika svar har hittat varandra och håller fram sina papper mot ringens mitt, och en fjärde går med sitt svar och letar efter någon som tänkt annorlunda.
+# Kontraster: den som letar har gått förbi en kamrat med samma svar, boken, och har hittat en som tänkt annorlunda, kugghjulen, och pekar på hens blad.
 id: kontraster
-skala: 80
-djupRam: [440, 600]
+skala: 84
+djupRam: [420, 600]
 delar:
-  - figur: { namn: letar, x: 160, y: 450, stallning: gaH, trojan: gron, ansikte: glad, tittar: svarA, nar: { H: [218, 346] } }
-  - papper: { hand: [letar, H], dx: 8, dy: -18, b: 40, h: 44, rader: 0, symbol: stjarna, symbolPlats: [0, 0], symbolStorlek: 0.3 }
-  - figur: { namn: mitten, x: 490, y: 470, trojan: gul, ansikte: glad, tittar: svarA, lutar: svarA, nar: { H: [500, 376] } }
-  - papper: { namn: svarC, x: 492, y: 344, b: 48, h: 52, vinkel: -3, rader: 0, symbol: cirkel, symbolPlats: [0, 0], symbolStorlek: 0.3 }
-  - figur: { namn: vanster, x: 330, y: 600, trojan: rod, ansikte: prata, tittar: hoger, lutar: hoger, nar: { H: [412, 464] } }
-  - papper: { namn: svarA, x: 410, y: 430, b: 52, h: 58, vinkel: 6, rader: 0, symbol: triangel, symbolPlats: [0, 0], symbolStorlek: 0.3 }
-  - figur: { namn: hoger, x: 650, y: 604, trojan: ljusbla, ansikte: prata, tittar: svarA, lutar: vanster, nar: { V: [568, 464] } }
-  - papper: { namn: svarB, x: 570, y: 432, b: 52, h: 58, vinkel: -6, rader: 0, symbol: kvadrat, symbolPlats: [0, 0], symbolStorlek: 0.3 }
-  - bubbla: { till: vanster, dx: -50, dy: 40, symboler: [triangel], visar: "En berättar vad hen svarade och varför hen tänkte så" }
-  - bubbla: { till: hoger, dx: 55, dy: 40, symboler: [kvadrat], visar: "En annan har tänkt annorlunda och berättar varför: gruppen talar om varför de tänkt olika" }
+  - figur: { namn: samma, x: 180, y: 452, trojan: gul, ansikte: glad, tittar: letar, nar: { H: [236, 344] } }
+  - papper: { namn: svarL, hand: [samma, H], dx: 6, dy: -14, b: 46, h: 52, vinkel: 6, rader: 0, symbol: 'bok:rod', symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - rorelse: { x: 384, y: 512, riktning: -90, langd: 36, antal: 3 }
+  - figur: { namn: letar, x: 430, y: 600, stallning: gaH, trojan: lila, ansikte: prata, tittar: svarH, lutar: hittad, nar: { V: [414, 496] }, pekar: [560, 446], armarEfter: klart }
+  - papper: { namn: svarS, x: 438, y: 462, b: 54, h: 62, vinkel: -4, rader: 0, symbol: 'bok:rod', symbolPlats: [0, 0], symbolStorlek: 0.3 }
+  - figur: { namn: hittad, x: 666, y: 596, trojan: turkos, ansikte: glad, tittar: svarS, lutar: letar, nar: { V: [606, 470] } }
+  - papper: { namn: svarH, x: 594, y: 440, b: 54, h: 62, vinkel: 6, rader: 0, symbol: 'kugghjul:gron', symbolPlats: [0.04, 0], symbolStorlek: 0.3 }
+  - punkt: { namn: klart, x: 520, y: 450 }
+  - bubbla: { till: letar, dx: -40, dy: 44, symboler: ['bok:rod', 'kugghjul:gron'], visar: "Den som letade har hittat någon som tänkt annorlunda, och de talar om varför de svarat olika" }

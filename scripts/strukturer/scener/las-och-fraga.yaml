@@ -1,17 +1,15 @@
-# Läs och fråga: alla har samma text, en har ställt sin fråga och sitter tillbakalutad och lyssnar utan att svara, medan de tre andra lutar sig in över texten och reder ut frågan.
+# Läs och fråga: den som har ställt sin fråga sitter ensam på bordets bortre sida med stängd mun och lyssnar, medan de tre andra lutar sig ihop över texten och reder ut frågan.
 id: las-och-fraga
 skala: 74
 djup: false
-fokus: textT
+fokus: texten
 delar:
-  - figur: { namn: talar, x: 380, y: 392, stallning: sitta, utanBen: true, ansikte: prata, tittar: bakH, lut: -6, pekar: { mal: textT, dx: 6, dy: -6 }, armarEfter: textT }
-  - figur: { namn: bakH, x: 552, y: 392, stallning: sitta, utanBen: true, ansikte: prata, tittar: talar, lut: 14, nar: { V: [500, 368] }, armarEfter: textB }
-  - figur: { namn: sidaV, x: 262, y: 518, utanBen: true, ansikte: glad, lut: -18, nar: { H: [334, 404] }, armarEfter: textV }
-  - figur: { namn: fragar, x: 690, y: 526, utanBen: true, ansikte: glad, tittar: talar, lut: -8 }
-  - bord: { x: 270, y: 445, b: 380, d: 100, h: 60, snett: 20 }
-  - papper: { namn: textV, x: 336, y: 420, b: 56, h: 66, vinkel: 8, rader: 4 }
-  - papper: { namn: textT, x: 432, y: 372, b: 56, h: 66, vinkel: -4, rader: 4 }
-  - papper: { namn: textB, x: 510, y: 376, b: 56, h: 66, vinkel: 5, rader: 4 }
-  - papper: { namn: textF, x: 616, y: 420, b: 56, h: 66, vinkel: -7, rader: 4 }
-  - bubbla: { till: fragar, dx: 46, dy: 40, b: 86, h: 74, symboler: [fraga], visar: "Den som har ställt sin fråga om texten sitter tillbakalutad med stängd mun och lyssnar utan att svara själv" }
-  - bubbla: { till: talar, dx: -44, dy: 40, symboler: ["bok:bla"], visar: "De andra reder ut frågan i texten: en visar var svaret står" }
+  - figur: { namn: fragar, x: 476, y: 388, stallning: sitta, utanBen: true, ansikte: glad, tittar: { mal: texten, dx: 0, dy: 20 } }
+  - figur: { namn: sidaV, x: 334, y: 518, utanBen: true, ansikte: prata, tittar: sidaH, lut: -20, pekar: { mal: texten, dx: -10, dy: 2 }, armarEfter: texten }
+  - figur: { namn: sidaH, x: 628, y: 522, utanBen: true, ansikte: prata, tittar: sidaV, lut: 20, nar: { V: [540, 414] }, armarEfter: texten }
+  - bord: { x: 350, y: 456, b: 240, d: 108, h: 58, snett: 18 }
+  - papper: { namn: egen, x: 478, y: 368, b: 54, h: 40, vinkel: 2, rader: 3 }
+  - papper: { namn: texten, x: 492, y: 422, b: 92, h: 56, vinkel: -3, rader: 4 }
+  - figur: { namn: fram, x: 644, y: 684, utanBen: true, ansikte: bak, lut: 10, tittar: sidaV }
+  - bubbla: { till: fragar, dx: 34, dy: 50, b: 84, h: 70, tanke: true, symboler: [fraga], visar: "Den som har ställt sin fråga om texten tiger nu och lyssnar, med stängd mun och händerna stilla" }
+  - bubbla: { till: sidaV, dx: -62, dy: 30, symboler: [fraga, "bok:bla"], visar: "De andra tar upp frågan och reder ut den i texten: en visar var svaret står, och de talar med varandra" }

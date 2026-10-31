@@ -1,21 +1,14 @@
-# Ställ en fråga: den ena har sin fråga överst på bladet och skriver kamratens svar under den, och kamraten svarar.
+# Ställ en fråga: frågaren håller upp sitt blad med frågan överst, och kamraten säger sitt svar och skriver det under frågan, under svaren från dem frågaren redan har mött.
 id: stall-en-fraga
-skala: 84
-djupRam: [400, 600]
+skala: 92
+djup: false
 delar:
-  - figur: { namn: soker, x: 170, y: 430, stallning: gaH, trojan: gron, ansikte: glad, tittar: [320, 330], nar: { H: [226, 330] } }
-  - kort: { hand: [soker, H], dx: 8, dy: -12, b: 44, h: 24 }
-  - symbol: { hand: [soker, H], dx: 8, dy: -12, namn: fraga, s: 9 }
-  - papper: { hand: [soker, H], dx: 8, dy: 16, b: 44, h: 32, rader: 2 }
-  - figur: { namn: fragar, x: 420, y: 600, trojan: orange, ansikte: glad, tittar: svarar, lutar: svarar, nar: { V: [394, 504], H: [464, 490] }, armarEfter: klart }
-  - kort: { namn: fragan, x: 428, y: 452, b: 76, h: 34 }
-  - symbol: { x: 428, y: 452, namn: fraga, s: 15 }
-  - papper: { namn: svaren, x: 428, y: 497, b: 76, h: 56, rader: 3 }
-  - symbol: { x: 438, y: 511, namn: triangel, s: 7 }
-  - punkt: { namn: klart, x: 428, y: 497 }
-  - penna: { x: 450, y: 514, vinkel: 150, l: 38 }
-  - figur: { namn: svarar, x: 588, y: 606, trojan: ljusbla, ansikte: prata, tittar: fragar, lutar: fragar }
-  - kort: { hand: [svarar, H], dx: 4, dy: -2, b: 36, h: 20, vinkel: 6 }
-  - symbol: { hand: [svarar, H], dx: 4, dy: -2, namn: fraga, s: 7 }
-  - papper: { hand: [svarar, H], dx: 5, dy: 20, b: 36, h: 26, vinkel: 6, rader: 1 }
-  - bubbla: { till: svarar, dx: 55, dy: 40, symboler: [triangel], visar: "Kamraten svarar på frågan, och svaret skrivs ned under frågan på bladet" }
+  - figur: { namn: svarar, x: 380, y: 560, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: { mal: bladet, dx: -10, dy: 20 }, nar: { H: [470, 348] }, armarEfter: klart }
+  - figur: { namn: fragar, x: 606, y: 566, utanBen: true, trojan: orange, ansikte: glad, tittar: { mal: bladet, dx: -14, dy: 24 }, nar: { V: [542, 338] }, armarEfter: klart }
+  - kort: { namn: fragan, x: 496, y: 290, b: 90, h: 42 }
+  - symbol: { x: 496, y: 290, namn: fraga, s: 20 }
+  - papper: { namn: bladet, x: 496, y: 348, b: 90, h: 74, rader: 2 }
+  - symbol: { x: 496, y: 377, namn: triangel, s: 9 }
+  - punkt: { namn: klart, x: 496, y: 348 }
+  - penna: { x: 482, y: 383, vinkel: 200, l: 40 }
+  - bubbla: { till: svarar, dx: -50, dy: 40, symboler: [triangel], visar: "Kamraten säger sitt svar och skriver det under frågan på frågarens blad" }
