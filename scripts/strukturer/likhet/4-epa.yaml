@@ -1,0 +1,19 @@
+id: 4-epa
+skala: 66
+likhetsprov: true
+djup: false
+delar:
+  - figur: { namn: korsar, x: 215, y: 470, stallning: armarIKors, trojan: rod, hud: 1, blick: 0.6, ansikte: kisa, utanBen: true }
+  - figur: { namn: tanker, x: 130, y: 500, stallning: tanka, trojan: lila, hud: 5, blick: -0.2, ansikte: tanka, utanBen: true }
+  - figur: { namn: pratarV, x: 405, y: 560, stallning: halla, trojan: ljusbla, hud: 5, ansikte: prata, utanBen: true, tittar: [495, 420], lutar: [495, 420], pekar: [470, 470] }
+  - figur: { namn: pratarH, x: 495, y: 565, trojan: rod, hud: 1, ansikte: glad, utanBen: true, tittar: [405, 420] }
+  - figur: { namn: g1, x: 700, y: 380, trojan: ljusbla, hud: 5, ansikte: glad, utanBen: true, skala: 56 }
+  - figur: { namn: g2, x: 790, y: 380, stallning: armarIKors, trojan: rod, hud: 1, ansikte: skratt, utanBen: true, skala: 56 }
+  - figur: { x: 640, y: 470, trojan: magenta, hud: 0, ansikte: bak, utanBen: true, skala: 60 }
+  - figur: { x: 735, y: 480, trojan: bla, hud: 0, ansikte: bak, utanBen: true, skala: 60 }
+  - figur: { x: 830, y: 470, trojan: gron, hud: 0, ansikte: bak, utanBen: true, skala: 60 }
+  - bubbla: { till: tanker, dx: -30, dy: 40, tanke: true, symboler: [triangel], visar: "Enskilt: var och en tänker själv först" }
+  - bubbla: { till: korsar, dx: 30, dy: 30, tanke: true, symboler: [kvadrat], visar: "Den andra tänker något annat" }
+  - bubbla: { till: pratarV, dx: -15, dy: 36, symboler: [triangel], visar: "Par: den första berättar det hen tänkte" }
+  - bubbla: { till: pratarH, dx: 25, dy: 44, symboler: [kvadrat], visar: "Den andra berättar sitt" }
+  - bubbla: { till: g1, dx: 35, dy: 30, symboler: [triangel, kvadrat], visar: "Alla: paret delar båda tankarna med klassen" }

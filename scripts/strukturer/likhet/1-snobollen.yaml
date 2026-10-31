@@ -1,0 +1,15 @@
+id: 1-snobollen
+skala: 92
+djupRam: [330, 545]
+delar:
+  - led: { fran: [372, 335], till: [292, 400], antal: 3, trojan: gul, blick: 0.7, figurer: [{stallning: staHanderFram, hud: 1}, {hud: 4}, {hud: 0, namn: gul3}] }
+  - led: { fran: [585, 345], till: [650, 405], antal: 2, trojan: ljusbla, blick: -0.7, figurer: [{hud: 3}, {hud: 2}] }
+  - figur: { namn: kastare, x: 150, y: 528, stallning: kasta, trojan: gul, hud: 0, blick: 0.6, ansikte: kisa }
+  - figur: { namn: blaa, x: 770, y: 530, stallning: staHanderFram, trojan: ljusbla, hud: 6, blick: -0.6, ansikte: glad }
+  - boll: { hand: [kastare, H], dy: -12, r: 19 }
+  - boll: { x: 415, y: 285, r: 13, farg: '#c3cdf2' }
+  - boll: { x: 500, y: 372, r: 13 }
+  - boll: { x: 452, y: 470, r: 12, farg: '#c3cdf2' }
+  - rorelse: { x: 410, y: 291, riktning: -100, langd: 22 }
+  - bubbla: { till: gul3, dx: -20, dy: 34, symboler: [triangel], visar: "Eleven säger vad som står på lappen" }
+  - bubbla: { till: blaa, dx: 60, dy: 30, symboler: [triangel], visar: "Samma symbol på andra sidan: lapparna hör ihop" }

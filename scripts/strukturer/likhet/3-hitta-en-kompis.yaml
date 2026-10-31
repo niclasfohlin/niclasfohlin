@@ -1,0 +1,20 @@
+id: 3-hitta-en-kompis
+skala: 70
+djupRam: [300, 520]
+delar:
+  - bord: { x: 40, y: 250, b: 150, d: 45, h: 80, snett: 45 }
+  - figur: { namn: vantar, x: 150, y: 330, stallning: handUpp, trojan: rosa, hud: 6, blick: 0.2, ansikte: glad, skala: 54 }
+  - papper: { hand: [vantar, V], dy: -10, b: 30, h: 38, vinkel: 10, rader: 0 }
+  - figur: { namn: soker, x: 610, y: 410, stallning: handUpp, trojan: lila, hud: 1, blick: -0.2, ansikte: skratt, skala: 64 }
+  - papper: { hand: [soker, V], dy: -8, b: 34, h: 44, vinkel: -4, rader: 0 }
+  - bord: { x: 70, y: 410, b: 220, d: 70, h: 120, snett: 70 }
+  - figur: { namn: v, x: 335, y: 520, stallning: highFiveH, trojan: ljusgul, hud: 0, ansikte: glad, tittar: [430, 270], nar: { H: [384, 228] } }
+  - figur: { namn: h, x: 430, y: 525, stallning: highFiveV, trojan: ljusgron, hud: 5, ansikte: glad, tittar: [335, 270], nar: { V: [390, 228] } }
+  - stralar: { x: 387, y: 214, r: 26 }
+  - papper: { hand: [v, V], dy: 8, b: 32, h: 44, vinkel: 12, rader: 0 }
+  - papper: { hand: [h, H], dy: 8, b: 32, h: 44, vinkel: -10, rader: 0 }
+  - figur: { namn: s1, x: 760, y: 370, stallning: sitta, trojan: lila, hud: 6, ansikte: skriva, skala: 60, tittar: [770, 325], lutar: [800, 325], nar: { H: [770, 330] }, armarEfter: lapp }
+  - figur: { namn: s2, x: 812, y: 380, stallning: sitta, trojan: ljusgul, hud: 1, ansikte: tanka, skala: 60, tittar: [770, 325], lutar: [760, 325], nar: { V: [790, 332] }, armarEfter: lapp }
+  - bord: { x: 690, y: 345, b: 190, d: 60, h: 110, snett: 20 }
+  - papper: { namn: lapp, x: 765, y: 325, b: 50, h: 32, vinkel: 8, rader: 3 }
+  - kort: { x: 830, y: 330, b: 22, h: 26, vinkel: 6, symbol: hjarta }

@@ -1,0 +1,19 @@
+# Inre–yttre cirkel: två ringar, de inre vända utåt mot en partner i den yttre. Paren frågar och svarar, och den
+# yttre ringen flyttar ett steg till nästa fråga. Fyra par, så att varje par syns.
+id: inre-yttre-cirkel
+skala: 66
+djupRam: [250, 470]
+delar:
+  - golvring: { x: 450, y: 360, rx: 150, ry: 62 }
+  - golvring: { x: 450, y: 360, rx: 300, ry: 128 }
+  - figur: { namn: yb, x: 450, y: 236, trojan: gul, ansikte: glad, tittar: ib }
+  - figur: { namn: ib, x: 450, y: 300, trojan: gron, ansikte: bak }
+  - figur: { namn: yv, x: 150, y: 368, trojan: rod, ansikte: prata, tittar: iv, lutar: iv }
+  - figur: { namn: iv, x: 302, y: 364, trojan: lila, ansikte: glad, tittar: yv }
+  - figur: { namn: ih, x: 598, y: 364, trojan: turkos, ansikte: prata, tittar: yh, stallning: halla }
+  - figur: { namn: yh, x: 750, y: 368, trojan: ljusgul, ansikte: glad, tittar: ih, lutar: ih }
+  - figur: { namn: if, x: 418, y: 424, trojan: orange, ansikte: glad, tittar: yf }
+  - figur: { namn: yf, x: 492, y: 488, trojan: bla, ansikte: bak }
+  - pil: { fran: [215, 470], till: [345, 505], bage: 0.1 }
+  - bubbla: { till: yv, dx: -30, dy: 34, symboler: [fraga], visar: "Den yttre ställer frågan" }
+  - bubbla: { till: ih, dx: 10, dy: 38, symboler: [triangel], visar: "Den inre svarar sin partner mittemot" }

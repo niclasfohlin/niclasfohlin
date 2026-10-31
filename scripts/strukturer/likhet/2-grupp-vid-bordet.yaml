@@ -1,0 +1,17 @@
+id: 2-grupp-vid-bordet
+skala: 82
+djup: false
+delar:
+  - figur: { namn: stottar, x: 245, y: 470, utanBen: true, trojan: rosa, hud: 6, ansikte: glad, tittar: blad1, lutar: blad1, nar: { H: skriver1.axelV } }
+  - figur: { namn: tanker, x: 545, y: 455, utanBen: true, stallning: tanka, trojan: ljusgron, hud: 5, ansikte: tanka, tittar: blad1 }
+  - figur: { namn: skriver1, x: 370, y: 500, utanBen: true, trojan: ljusbla, hud: 1, ansikte: skriva, tittar: blad1, lutar: blad1, nar: { H: [418, 392], V: [372, 398] }, armarEfter: blad1 }
+  - figur: { namn: skriver2, x: 690, y: 500, utanBen: true, trojan: ljusbla, hud: 0, ansikte: skriva, skala: 66, tittar: blad2, lutar: blad2, nar: { V: [598, 398], H: [640, 392] }, armarEfter: blad2 }
+  - bord: { namn: bordet, x: 205, y: 420, b: 470, d: 95, h: 135, snett: 70 }
+  - papper: { namn: blad1, x: 400, y: 392, b: 74, h: 46, vinkel: -14, rader: 4 }
+  - papper: { namn: blad2, x: 585, y: 395, b: 68, h: 42, vinkel: -10, rader: 3 }
+  - penna: { x: 420, y: 395, vinkel: 200, l: 46 }
+  - penna: { x: 600, y: 398, vinkel: 205, l: 40 }
+  - bubbla: { till: stottar, dx: -35, dy: 40, symboler: [hjarta], visar: "Hen uppmuntrar den som skriver: rollen syns i bubblan" }
+  - bubbla: { till: skriver1, dx: 10, dy: 40, symboler: [penna], visar: "Hen skriver gruppens svar" }
+  - bubbla: { till: tanker, dx: 15, dy: 40, symboler: [kugghjul], visar: "Hen tänker ut lösningen" }
+  - bubbla: { till: skriver2, dx: 30, dy: 34, symboler: [penna], visar: "Hen skriver också: två skriver var sitt papper" }

@@ -1,0 +1,20 @@
+id: 5-ape
+skala: 66
+likhetsprov: true
+djup: false
+delar:
+  - figur: { namn: g1, x: 115, y: 380, trojan: ljusbla, hud: 5, ansikte: glad, utanBen: true, skala: 56 }
+  - figur: { namn: g2, x: 205, y: 380, stallning: armarIKors, trojan: rod, hud: 1, ansikte: skratt, utanBen: true, skala: 56 }
+  - figur: { x: 55, y: 470, trojan: magenta, hud: 0, ansikte: bak, utanBen: true, skala: 60 }
+  - figur: { x: 150, y: 480, trojan: bla, hud: 0, ansikte: bak, utanBen: true, skala: 60 }
+  - figur: { x: 245, y: 470, trojan: gron, hud: 0, ansikte: bak, utanBen: true, skala: 60 }
+  - figur: { namn: pratarV, x: 405, y: 560, stallning: halla, trojan: ljusbla, hud: 5, ansikte: prata, utanBen: true, tittar: [495, 420], lutar: [495, 420], pekar: [470, 470] }
+  - figur: { namn: pratarH, x: 495, y: 565, trojan: rod, hud: 1, ansikte: glad, utanBen: true, tittar: [405, 420] }
+  - figur: { namn: enskild, x: 735, y: 470, stallning: sitta, trojan: ljusbla, hud: 5, ansikte: skriva, tittar: [755, 400], lutar: [760, 400], nar: { H: [768, 402], V: [738, 404] }, armarEfter: blad }
+  - bord: { x: 640, y: 420, b: 190, d: 50, h: 120, snett: 30, farg: '#e9dcb6' }
+  - papper: { namn: blad, x: 755, y: 400, b: 56, h: 30, vinkel: -6, rader: 3 }
+  - penna: { x: 772, y: 400, vinkel: 205, l: 36 }
+  - bubbla: { till: g1, dx: 45, dy: 30, symboler: [triangel, kvadrat], visar: "Alla: läraren visar modellen och klassen talar om den" }
+  - bubbla: { till: pratarV, dx: -15, dy: 36, symboler: [triangel], visar: "Par: paret prövar modellen tillsammans" }
+  - bubbla: { till: pratarH, dx: 25, dy: 44, symboler: [kvadrat], visar: "Den andra lägger till sitt" }
+  - bubbla: { till: enskild, dx: 0, dy: 40, tanke: true, symboler: [triangel, kvadrat], visar: "Enskilt: eleven arbetar själv med båda delarna" }

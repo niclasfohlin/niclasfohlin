@@ -1,0 +1,276 @@
+{
+  "om": "Stilen i strukturernas bilder (K-650). `linje` och `krita` läses av motorn (rita.mjs), i enheter av bildens bredd 900. `hand` är mätt för hand i referensbilderna. `matt` skrivs av matstil.mjs.",
+  "linje": 2.05,
+  "krita": {
+    "ruta": 97,
+    "ton": 0.6,
+    "flackar": 4,
+    "streck": 30,
+    "langd": [
+      10,
+      38
+    ],
+    "bredd": [
+      1.6,
+      4.6
+    ],
+    "spridning": 28,
+    "tackning": [
+      0.2,
+      0.7
+    ],
+    "vinkel": -35
+  },
+  "hand": {
+    "huvudetsHojdAvFiguren": 0.26,
+    "huvudetsBreddAvHojden": 0.84,
+    "linjenAvHuvudetsHojd": 0.05,
+    "figurensHojdAvBilden": 0.47,
+    "kalla": "Snöbollen, den som kastar: huvudet 28 × 34 och figuren 132 bildpunkter hög i 450 × 280; Hitta en kompis och Gruppen vid bordet ger samma huvud inom 10 procent"
+  },
+  "matt": {
+    "datum": "2026-10-31",
+    "sammanfattning": {
+      "luft": 0.85,
+      "linjeDelAvBredden": 0.0032,
+      "krita": 7.9
+    },
+    "bilder": {
+      "1-snobollen.jpg": {
+        "storlek": [
+          450,
+          280
+        ],
+        "luft": 0.863,
+        "linje": {
+          "andel": 0.0385,
+          "bredd": 1.69,
+          "delAvBredden": 0.0038
+        },
+        "farger": [
+          {
+            "hex": "#b3cbe7",
+            "andel": 0.104
+          },
+          {
+            "hex": "#f6e09b",
+            "andel": 0.093
+          },
+          {
+            "hex": "#ead182",
+            "andel": 0.061
+          },
+          {
+            "hex": "#eacd6e",
+            "andel": 0.052
+          },
+          {
+            "hex": "#f8e7b2",
+            "andel": 0.051
+          },
+          {
+            "hex": "#f2d482",
+            "andel": 0.045
+          },
+          {
+            "hex": "#9bbae0",
+            "andel": 0.043
+          },
+          {
+            "hex": "#f4db88",
+            "andel": 0.037
+          }
+        ],
+        "krita": 8.86
+      },
+      "2-grupp-vid-bordet.jpg": {
+        "storlek": [
+          400,
+          267
+        ],
+        "luft": 0.888,
+        "linje": {
+          "andel": 0.0267,
+          "bredd": 1.68,
+          "delAvBredden": 0.0042
+        },
+        "farger": [
+          {
+            "hex": "#e8e7c9",
+            "andel": 0.158
+          },
+          {
+            "hex": "#dffade",
+            "andel": 0.116
+          },
+          {
+            "hex": "#f7f8dd",
+            "andel": 0.079
+          },
+          {
+            "hex": "#f3f5cf",
+            "andel": 0.078
+          },
+          {
+            "hex": "#cde8cc",
+            "andel": 0.074
+          },
+          {
+            "hex": "#e7f3cf",
+            "andel": 0.067
+          },
+          {
+            "hex": "#f9e0e2",
+            "andel": 0.053
+          },
+          {
+            "hex": "#d3f5d1",
+            "andel": 0.04
+          }
+        ],
+        "krita": 7.95
+      },
+      "3-hitta-en-kompis.png": {
+        "storlek": [
+          617,
+          280
+        ],
+        "luft": 0.883,
+        "linje": {
+          "andel": 0.0274,
+          "bredd": 1.7,
+          "delAvBredden": 0.0028
+        },
+        "farger": [
+          {
+            "hex": "#f4f3cf",
+            "andel": 0.192
+          },
+          {
+            "hex": "#e5e0b3",
+            "andel": 0.093
+          },
+          {
+            "hex": "#cef3d0",
+            "andel": 0.086
+          },
+          {
+            "hex": "#f4cff3",
+            "andel": 0.076
+          },
+          {
+            "hex": "#f6dbf5",
+            "andel": 0.066
+          },
+          {
+            "hex": "#ece8c5",
+            "andel": 0.065
+          },
+          {
+            "hex": "#dcd49a",
+            "andel": 0.043
+          },
+          {
+            "hex": "#f8f7dd",
+            "andel": 0.031
+          }
+        ],
+        "krita": 5.61
+      },
+      "4-epa.jpg": {
+        "storlek": [
+          450,
+          280
+        ],
+        "luft": 0.811,
+        "linje": {
+          "andel": 0.0319,
+          "bredd": 1.46,
+          "delAvBredden": 0.0032
+        },
+        "farger": [
+          {
+            "hex": "#e56b82",
+            "andel": 0.12
+          },
+          {
+            "hex": "#ced0f7",
+            "andel": 0.105
+          },
+          {
+            "hex": "#f9e9cf",
+            "andel": 0.095
+          },
+          {
+            "hex": "#fcf3df",
+            "andel": 0.035
+          },
+          {
+            "hex": "#f9ecdb",
+            "andel": 0.028
+          },
+          {
+            "hex": "#98f5ba",
+            "andel": 0.028
+          },
+          {
+            "hex": "#c5c36c",
+            "andel": 0.027
+          },
+          {
+            "hex": "#bbb968",
+            "andel": 0.024
+          }
+        ],
+        "krita": 7.23
+      },
+      "5-ape.jpg": {
+        "storlek": [
+          450,
+          280
+        ],
+        "luft": 0.806,
+        "linje": {
+          "andel": 0.0277,
+          "bredd": 1.44,
+          "delAvBredden": 0.0032
+        },
+        "farger": [
+          {
+            "hex": "#ced0f7",
+            "andel": 0.116
+          },
+          {
+            "hex": "#e5e4b2",
+            "andel": 0.061
+          },
+          {
+            "hex": "#e56b82",
+            "andel": 0.061
+          },
+          {
+            "hex": "#f8e9d0",
+            "andel": 0.06
+          },
+          {
+            "hex": "#e0dea0",
+            "andel": 0.037
+          },
+          {
+            "hex": "#c6c36b",
+            "andel": 0.028
+          },
+          {
+            "hex": "#fcf4de",
+            "andel": 0.027
+          },
+          {
+            "hex": "#98f5bb",
+            "andel": 0.027
+          }
+        ],
+        "krita": 9.83
+      }
+    }
+  }
+}

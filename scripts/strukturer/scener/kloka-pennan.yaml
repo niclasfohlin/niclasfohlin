@@ -1,0 +1,11 @@
+# Kloka pennan: tänkaren löser uppgiften högt, och den med kloka pennan skriver ned det tänkaren säger.
+id: kloka-pennan
+skala: 80
+djup: false
+delar:
+  - figur: { namn: tankaren, x: 395, y: 436, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: bladet, lutar: bladet, pekar: [448, 392], armarEfter: bladet }
+  - figur: { namn: skrivaren, x: 540, y: 440, stallning: sitta, utanBen: true, trojan: orange, ansikte: skriva, tittar: bladet, lutar: bladet, nar: { V: [488, 376], H: [530, 400] }, armarEfter: bladet }
+  - bord: { x: 300, y: 470, b: 330, d: 100, h: 55, snett: 20 }
+  - papper: { namn: bladet, x: 466, y: 398, b: 96, h: 58, vinkel: -6, rader: 2, symbol: triangel }
+  - penna: { x: 474, y: 400, vinkel: 150, l: 50 }
+  - bubbla: { till: tankaren, dx: -55, dy: 44, symboler: [triangel], visar: "Tänkaren säger lösningen högt, och skrivaren skriver ned just det" }
