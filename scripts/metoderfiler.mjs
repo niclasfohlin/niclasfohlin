@@ -162,8 +162,10 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   for (const slag of ['allt', 'lektionskort'].filter((s) => !VANTAR.some((v) => v.id === id && v.slag === s))) if (!existsSync(join(UT, `${stam(slag)}.pdf`))) fel.push(`${id}: ${slag} saknas i public/metoder/`);
   if (d.lathund && !existsSync(join(UT, `${stam('lathund')}.docx`))) fel.push(`${id}: Word-lathunden saknas i public/metoder/`);
   // Allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se, på varje sida (CLAUDE.md under Innehållstyperna; Niclas
-  // 2026-10-30: "Hör även allt (C) Niclas Fohlin som ska ha det likt stödundervisning?").
-  for (const f of readdirSync(UT).filter((x) => x.startsWith(id) && x.endsWith('.pdf'))) {
+  // 2026-10-30: "Hör även allt (C) Niclas Fohlin som ska ha det likt stödundervisning?"). Raden läses med Popplers pdftotext,
+  // som Netlifys byggmiljö saknar, så den prövas i npm run validera och inte med --kontrollera (det första bygget av main med
+  // Metoder 2026-10-31 stannade på det).
+  if (!kontrollera) for (const f of readdirSync(UT).filter((x) => x.startsWith(id) && x.endsWith('.pdf'))) {
     const utan = sidorna(join(UT, f)).map((t, i) => ({ t, i })).filter(({ t }) => t.trim() && !(t.includes('© Niclas Fohlin') && t.includes('niclasfohlin.se'))).map(({ i }) => i + 1);
     if (utan.length) fel.push(`${id}: ${f} saknar "© Niclas Fohlin" och niclasfohlin.se på sidan ${utan.slice(0, 8).join(', ')}${utan.length > 8 ? ' …' : ''}. Riggen sätter raden i sidfoten på varje sida`);
   }
