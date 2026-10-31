@@ -17,5 +17,24 @@ kalla:
   rubrik: Talkort
   commit: b492447
   summa: "51217950"
-bild: { scen: talkort, alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger ett gult och ett grönt kort. Eleven i röd tröja lägger sitt röda kort bredvid dem och talar, och pratbubblan visar en triangel. Eleven i lila tröja håller sitt lila kort i handen och väntar, med en kvadrat i tankebubblan. Eleverna i gul och grön tröja lyssnar." }
-utkast: true
+bild:
+  scen: talkort
+  alt: Fyra elever sitter runt ett bord, och mitt på bordet ligger ett gult och ett grönt kort. Eleven i röd tröja lägger sitt röda kort bredvid dem och talar, och pratbubblan visar en triangel. Eleven i lila tröja håller sitt lila kort i handen och väntar, med en kvadrat i tankebubblan. Eleverna i gul och grön tröja lyssnar.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen har läst en kapitelbok där en pojke måste välja mellan att säga sanningen och att skydda sin kompis. Du introducerar samtalsämnet: Varför väljer pojken som han gör, och vad i boken visar det? Du delar ut en markör till var och en, bestämmer att den som talar lägger sin i mitten och fördelar rollen som tidshållare i varje grupp. Ingen får ordet igen förrän alla har lagt sin markör. Till sist ser eleverna om alla markörer ligger i mitten och säger hur samarbetet gick."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva insändare om längre lunchrast. Du introducerar samtalsämnet: Vilka tre argument bör en insändare ta upp för att övertyga rektorn, och varför just de? Du delar ut en markör till var och en, bestämmer att den som talar lägger sin i mitten och utser en fokushållare i varje grupp. Ingen får ordet igen förrän alla har lagt sin markör. Till sist ser eleverna om alla markörer ligger i mitten, och sedan skriver var och en sin insändare."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Klassen arbetar med addition över tiotalet. Du introducerar samtalsämnet: Hur räknar du 9 + 6 i huvudet, och varför tänker du så? Du delar ut en markör till var och en och bestämmer att den som berättar sitt sätt lägger sin markör i mitten. Ingen får ordet igen förrän alla har lagt sin markör. Till sist ser eleverna om alla markörer ligger i mitten och säger hur samarbetet gick."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen har klassråd, och du vill att alla ska höras. Du introducerar samtalsämnet: Vad gör vi när någon blir utanför på rasten? Du delar ut en markör till var och en, bestämmer att den som talar lägger sin i mitten och fördelar rollerna tidshållare och ordfördelare i varje grupp. Ingen får ordet igen förrän alla har lagt sin markör. Till sist ser eleverna om alla markörer ligger i mitten och säger hur samarbetet gick."
+utkast: false

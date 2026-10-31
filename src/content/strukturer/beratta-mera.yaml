@@ -17,5 +17,24 @@ kalla:
   rubrik: Berätta mera!
   commit: b492447
   summa: 0d39a158
-bild: { scen: beratta-mera, alt: "Till vänster går en elev genom rummet med ena handen uppsträckt. I mitten står två elever vända mot varandra. Den ena berättar och visar med handen, och pratbubblan visar en stjärna. Den andra lyssnar och tittar på den som berättar, och har samma stjärna i sin tankebubbla. Till höger ger två elever varandra en high five ovanför huvudena, och den ena har också en stjärna i en tankebubbla." }
-utkast: true
+bild:
+  scen: beratta-mera
+  alt: Till vänster går en elev genom rummet med ena handen uppsträckt. I mitten står två elever vända mot varandra. Den ena berättar och visar med handen, och pratbubblan visar en stjärna. Den andra lyssnar och tittar på den som berättar, och har samma stjärna i sin tankebubbla. Till höger ger två elever varandra en high five ovanför huvudena, och den ena har också en stjärna i en tankebubbla.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen har lyssnat på kapitel tre i högläsningsboken. Alla ska berätta vad som hände med huvudpersonen i kapitlet. Eleverna rör sig med handen uppsträckt, ger en high five när de möts och turas om att berätta kort. De tackar, sträcker upp handen igen och söker upp en ny kamrat. Du avbryter, och varje elev säger något hen minns från samtalen.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen ska skriva en debattartikel om mobilfria skoldagar. Alla ska berätta vad de tycker och vilket argument de tror mest på. Eleverna går runt med handen uppsträckt, ger en high five när de möts och turas om att berätta kort. Efter varje samtal tackar de och söker upp en ny kamrat, så att alla övar sina argument flera gånger. Du avbryter, och varje elev sammanfattar något hen minns från samtalen och vill ta med i sin text.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Klassen har just löst en uppgift om arean av en trädgård som har formen av ett L. Alla ska berätta hur de kom fram till svaret. Eleverna går runt med handen uppsträckt, ger en high five och turas om att berätta kort. De tackar, söker upp en ny kamrat och hör fler sätt att räkna ut samma area. Du avbryter, och varje elev sammanfattar ett sätt som en kamrat berättade.
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: Klassen ska komma överens om hur det ska vara på rasten. Alla ska berätta vad en bra kompis gör på rasten. Eleverna går runt med handen uppsträckt, ger varandra en high five och turas om att berätta. De tackar, sträcker upp handen igen och söker upp en ny kamrat. Du avbryter, och varje elev sammanfattar en idé hen minns från samtalen.
+utkast: false

@@ -19,5 +19,24 @@ kalla:
   rubrik: Speed-dating
   commit: b492447
   summa: 52c8a280
-bild: { scen: speed-dating, alt: "Sex elever sitter vid ett långt bord, tre på var sida, mittemot varandra i par, och var och en har ett litet papper framför sig. Paren lutar sig mot varandra över bordet. I paret närmast pekar den ena på stjärnan på sitt papper och berättar, och pratbubblan visar stjärnan. Den andra har en kvadrat på sitt papper och i sin pratbubbla. En kort pil längs den högra raden visar att de som sitter där flyttar en stol och får en ny partner." }
-utkast: true
+bild:
+  scen: speed-dating
+  alt: Sex elever sitter vid ett långt bord, tre på var sida, mittemot varandra i par, och var och en har ett litet papper framför sig. Paren lutar sig mot varandra över bordet. I paret närmast pekar den ena på stjärnan på sitt papper och berättar, och pratbubblan visar stjärnan. Den andra har en kvadrat på sitt papper och i sin pratbubbla. En kort pil längs den högra raden visar att de som sitter där flyttar en stol och får en ny partner.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Du ställer fram ett långbord med stolar på båda sidor, och eleverna sitter mittemot varandra med ett litet papper var. Uppgiften i varje omgång är ett kort stycke på tavlan med ett ovanligt ord, som ”förbryllad”, och eleverna letar efter ledtrådar i stycket till vad ordet betyder. Efter trettio sekunders tanketid skriver var och en sitt svar, och paret diskuterar svaren i en minut. Du lyfter några svar i helgrupp, och sedan flyttar eleverna en stol och får en ny partner och ett nytt stycke.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Eleverna sätter sig mittemot varandra vid ett långbord, och var och en får ett litet papper. Uppgiften i varje omgång är en mening som säger för lite, som ”Det var en fin dag”, och eleverna skriver om den så att läsaren ser dagen framför sig. Efter trettio sekunders tanketid skriver var och en sin version, och paret läser och jämför dem i en minut. Du lyfter några versioner i helgrupp, och sedan flyttar eleverna en stol och får en ny partner och en ny mening.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Du ställer fram ett långbord med stolar på båda sidor, och eleverna sitter mittemot varandra med ett litet papper var. Uppgiften i varje omgång är en addition över tiotalet, som 8 + 5, och eleverna ska rita eller skriva hur de räknade. Efter trettio sekunders tanketid löser var och en uppgiften, och paret visar varandra sina sätt i en minut. Du lyfter några sätt i helgrupp, och sedan flyttar eleverna en stol och får en ny partner och en ny addition.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Eleverna sitter mittemot varandra vid ett långbord, och var och en har ett litet papper att anteckna på. Uppgiften i varje omgång är en situation, som att en kompis blir lämnad utanför en lek, och eleverna skriver vad de skulle göra. Efter trettio sekunders tanketid skriver var och en sitt förslag, och paret jämför förslagen i en minut. Du lyfter några förslag i helgrupp, och sedan flyttar eleverna en stol och får en ny partner och en ny situation.
+utkast: false

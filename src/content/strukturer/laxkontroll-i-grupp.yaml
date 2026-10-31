@@ -17,5 +17,24 @@ kalla:
   rubrik: Läxkontroll i grupp
   commit: b492447
   summa: 8b960061
-bild: { scen: laxkontroll-i-grupp, alt: "Fyra elever sitter runt ett bord. Mitt på bordet ligger gruppens blå mapp uppslagen, med läxpapper som sticker upp ur fickan. De två bakom bordet har var sitt läxpapper, och mellan dem står två små skyltar, den ena med två kugghjul och den andra med en bock, med två böjda pilar ovanför som visar att de byter plats. Eleven till vänster pekar på sin läxa och förklarar, med två kugghjul i pratbubblan. Eleven till höger håller handen på sin egen läxa och har ett frågetecken i en tankebubbla. De två vid bordets sidor vänder sig mot den som förklarar." }
-utkast: true
+bild:
+  scen: laxkontroll-i-grupp
+  alt: Fyra elever sitter runt ett bord. Mitt på bordet ligger gruppens blå mapp uppslagen, med läxpapper som sticker upp ur fickan. De två bakom bordet har var sitt läxpapper, och mellan dem står två små skyltar, den ena med två kugghjul och den andra med en bock, med två böjda pilar ovanför som visar att de byter plats. Eleven till vänster pekar på sin läxa och förklarar, med två kugghjul i pratbubblan. Eleven till höger håller handen på sin egen läxa och har ett frågetecken i en tankebubbla. De två vid bordets sidor vänder sig mot den som förklarar.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: SO
+    text: "Hemuppgiften var att läsa om vikingatiden och besvara fyra frågor, bland dem: Varför seglade vikingarna västerut? Eleverna sätter sig i sina grupper, och en hämtar gruppens mapp och delar ut materialet. Du ger rollerna: en förklarar hur svaret kom till steg för steg, och en prövar förklaringen mot texten. Eleverna tar frågorna en i taget, och är de oense söker de upp stället i boken. Efter varje fråga byter de roller, och när de är klara lägger de tillbaka arbetet i mappen."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Hemuppgiften var tio meningar där eleverna skulle sätta ut punkt, frågetecken och kommatecken i uppräkningar. Eleverna sätter sig i sina grupper, en hämtar mappen och delar ut materialet, och du ger rollerna förklarare och kontrollant. De går igenom meningarna en i taget, och den som förklarar visar steg för steg hur hen kom fram till tecknet medan den andra prövar förklaringen. Är de oense söker de upp regeln i språkboken. Sedan byter de roller och tar nästa mening.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Hemuppgiften var fem additioner med tiotalsövergång, som 28 + 7. Eleverna sätter sig i sina grupper, och en hämtar mappen och delar ut materialet. Du ger två roller: en förklarar och en kontrollerar. Eleverna tar uppgifterna en i taget och jämför sina svar, och den som förklarar visar steg för steg på tiotalsmaterialet hur hen räknade medan den andra prövar. Är de oense söker de upp exemplet i boken, och sedan byter de roller och tar nästa uppgift."
+  - omrade: lasning
+    arskurs: 7–9
+    amne: engelska
+    text: "Hemuppgiften var att läsa en novell på engelska och svara på tre frågor, bland dem: Why does Sam lie to his friend? Eleverna sätter sig i sina grupper, och en hämtar mappen och delar ut novellen och frågorna. Du ger rollerna förklarare och kontrollant. Den som förklarar visar steg för steg hur svaret kom till, med stöd i texten, och den andra prövar förklaringen. Är de oense söker de upp meningen i novellen, och sedan byter de roller och tar nästa fråga."
+utkast: false

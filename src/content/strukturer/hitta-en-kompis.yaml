@@ -17,5 +17,24 @@ kalla:
   rubrik: Hitta en kompis
   commit: b492447
   summa: b1602c7b
-bild: { scen: hitta-en-kompis, alt: "Till vänster ger två elever varandra en high five ovanför huvudena. I mitten går en elev med handen uppsträckt. Till höger sitter två elever bredvid varandra vid en bänk med ett gemensamt papper. Den ena har ett kort med en stjärna på bröstet och den andra ett kort med ett hjärta. Eleven med stjärnan pekar på papperet, och eleven med hjärtat skriver på det med en penna." }
-utkast: true
+bild:
+  scen: hitta-en-kompis
+  alt: Till vänster ger två elever varandra en high five ovanför huvudena. I mitten går en elev med handen uppsträckt. Till höger sitter två elever bredvid varandra vid en bänk med ett gemensamt papper. Den ena har ett kort med en stjärna på bröstet och den andra ett kort med ett hjärta. Eleven med stjärnan pekar på papperet, och eleven med hjärtat skriver på det med en penna.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen har läst en novell om en pojke som flyttar till en ny stad, och uppgiften är att hitta tre ställen i texten som visar hur han känner sig. Eleverna står upp med handen uppsträckt, ger en high five och sätter sig två och två. Paret bestämmer vem som är stjärna och vem som är hjärta, och de letar ställena tillsammans. Du slumpar ett par och ber stjärnan eller hjärtat läsa upp ett av ställena. Sedan tackar de varandra och letar med en ny partner efter stället där det vänder.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen skriver noveller, och uppgiften är att hitta på en första mening som får läsaren att vilja läsa vidare. Eleverna ställer sig upp med handen uppsträckt, söker ögonkontakt, ger en high five och sätter sig två och två. Paret bestämmer vem som är stjärna och vem som är hjärta, och de formulerar meningen tillsammans. Du slumpar ett par och ber stjärnan eller hjärtat läsa upp parets första mening för klassen. Sedan tackar eleverna varandra och gör om det med en ny partner.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Klassen arbetar med talet 10, och uppgiften är att hitta alla sätt att göra tio med två tal. Eleverna ställer sig upp med handen uppsträckt, ger en high five till den de möter och sätter sig två och två. Paret bestämmer vem som är stjärna och vem som är hjärta, och de lägger sätten med kuber och skriver dem. Du slumpar ett par och ber stjärnan eller hjärtat visa ett sätt och förklara hur paret vet att det blir tio. Sedan tackar de varandra och letar sätt att göra 8 med en ny partner.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "På mentorstiden vill du blanda klassen, och den öppna frågan är: Vad gör att det känns tryggt att säga sin åsikt i en grupp? Eleverna står upp med handen uppsträckt, söker ögonkontakt, ger en high five och sätter sig två och två. Paret bestämmer vem som är stjärna och vem som är hjärta, och de svarar på frågan tillsammans. Du slumpar ett par och ber stjärnan eller hjärtat berätta vad paret kom fram till. Sedan tackar eleverna varandra och gör om det med en ny partner."
+utkast: false

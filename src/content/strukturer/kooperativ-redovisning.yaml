@@ -15,5 +15,24 @@ kalla:
   rubrik: Kooperativ redovisning
   commit: b492447
   summa: 7e0a3ae8
-bild: { scen: kooperativ-redovisning, alt: "Två grupper redovisar samtidigt, var och en vid sin affisch på väggen. Vid den vänstra affischen, som har en stjärna och text, står två elever i gula tröjor: den ena pekar på affischen och har en stjärna i pratbubblan, och den andra vänder sig mot de besökande. Vid den högra affischen, som har en kvadrat och text, står två elever i turkosa tröjor: den ena pekar på affischen och den andra talar till de besökande. Framför varje affisch står två elever ur en besökande grupp, sedda bakifrån, och en i varje grupp har affischens symbol i en tankebubbla." }
-utkast: true
+bild:
+  scen: kooperativ-redovisning
+  alt: "Två grupper redovisar samtidigt, var och en vid sin affisch på väggen. Vid den vänstra affischen, som har en stjärna och text, står två elever i gula tröjor: den ena pekar på affischen och har en stjärna i pratbubblan, och den andra vänder sig mot de besökande. Vid den högra affischen, som har en kvadrat och text, står två elever i turkosa tröjor: den ena pekar på affischen och den andra talar till de besökande. Framför varje affisch står två elever ur en besökande grupp, sedda bakifrån, och en i varje grupp har affischens symbol i en tankebubbla."
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Grupperna har läst var sin bok i en bokcirkel och gjort en affisch om sin bok. Du låter halva klassens grupper göra sig redo vid sina affischer, medan de andra grupperna ställer sig mitt emot, en grupp vid varje affisch. De som står vid affischen berättar om boken för besökarna, alla grupper samtidigt. De som lyssnat ger respons genom att säga vad som fick dem att vilja läsa boken. Grupperna byter roller och gör om det, medan du går runt, lyssnar och ger återkoppling.
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Grupperna om tre har skrivit var sin berättelse om en dag i skogen. Du låter halva grupperna göra sig redo på var sin plats med sin text. De andra grupperna ställer sig mitt emot, en grupp vid varje, och de som skrivit läser upp sin berättelse, alla grupper samtidigt. De som lyssnat ger respons genom att säga en sak de gillade och en sak de undrar över. Grupperna byter roller och gör om det, och du går runt, lyssnar och ger återkoppling.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Varje grupp har löst ett problem om en linjär funktion, som en taxiresa med startavgift och pris per kilometer, och gjort en affisch med tabell, graf och förklaring. Du låter halva klassens grupper göra sig redo vid sina affischer, och de andra ställer sig mitt emot, en grupp vid varje. Grupperna vid affischerna redovisar sin lösning, alla samtidigt. Besökarna ger respons på hur tydlig lösningen var och om de kan förklara den vidare. Grupperna byter roller och gör om det, och du går runt, lyssnar och ger återkoppling.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Grupperna har tagit fram var sitt förslag på hur rasten kan bli bättre för alla och gjort en affisch. Du låter halva klassens grupper göra sig redo vid sina affischer, och de andra ställer sig mitt emot, en grupp vid varje. De som står vid affischen presenterar sitt förslag för besökarna, alla grupper samtidigt. Besökarna ger respons på vad som skulle fungera på skolan. Grupperna byter roller och gör om det, och du går runt, lyssnar och ger återkoppling till grupperna och klassen.
+utkast: false

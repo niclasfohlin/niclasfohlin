@@ -17,5 +17,24 @@ kalla:
   rubrik: En för alla
   commit: b492447
   summa: e4e8cf8a
-bild: { scen: en-for-alla, alt: "Fyra elever sitter runt ett bord, och var och en har ett eget papper med tre cirklar i varandra och prickar i cirklarna: flest gula i den innersta, några blå i den mellersta och ett par gröna i den yttersta. Eleven bakom bordet till vänster håller upp sitt papper, där en stjärna står i den innersta cirkeln, och berättar, med en stjärna i pratbubblan. De andra vänder sig mot papperet. Eleven till höger skriver en stjärna med en penna i den yttersta cirkeln på sitt eget papper och har en stjärna i en tankebubbla." }
-utkast: true
+bild:
+  scen: en-for-alla
+  alt: "Fyra elever sitter runt ett bord, och var och en har ett eget papper med tre cirklar i varandra och prickar i cirklarna: flest gula i den innersta, några blå i den mellersta och ett par gröna i den yttersta. Eleven bakom bordet till vänster håller upp sitt papper, där en stjärna står i den innersta cirkeln, och berättar, med en stjärna i pratbubblan. De andra vänder sig mot papperet. Eleven till höger skriver en stjärna med en penna i den yttersta cirkeln på sitt eget papper och har en stjärna i en tankebubbla."
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: SO
+    text: "Klassen ska läsa ett avsnitt om industrialiseringen, och du börjar med det eleverna redan vet. Du frågar: Vad vet ni om hur människor levde och arbetade för hundrafemtio år sedan? Var och en skriver alla sina idéer i den innersta cirkeln på två minuter. Paret delar sina idéer och lägger kamratens tankar i cirkeln Par, och fyrgrupperna gör samma sak i cirkeln Grupp. Du summerar vad grupperna har kommit fram till, eleverna fyller på det de saknar och tackar varandra innan klassen läser avsnittet."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen ska skriva en saga om en skog på natten. Du frågar: Vilka ord kan vi använda om skogen på natten? Eleverna skriver på tre minuter så många ord de kan i den innersta cirkeln. Sedan delar de orden i par och i fyrgrupper och lägger kamraternas ord i cirklarna Par och Grupp. Du skriver upp alla gruppers ord på tavlan, och eleverna lägger till de ord de saknar och tackar varandra."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen har just börjat med fyrhörningar. Du frågar: Vilka fyrhörningar känner ni till, och vad gör dem olika? Var och en ritar och skriver på fyra minuter så många exempel hen kan i den innersta cirkeln. Paret delar och lägger till varandras figurer i cirkeln Par, och fyrgrupperna gör samma sak i cirkeln Grupp. Du summerar vad grupperna har kommit på, eleverna fyller på det de saknar och tackar varandra."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Klassen har pratat om att många inte vågar säga något i helklass. Du frågar: Vad kan vi göra så att fler vågar prata? Var och en skriver sina förslag i den innersta cirkeln på tre minuter, utan att prata. Paret delar förslagen och lägger kamratens i cirkeln Par, och fyrgrupperna gör samma sak i cirkeln Grupp. Du läser upp förslagen från alla grupper, och eleverna lägger till de som saknas och tackar varandra för det de har lärt sig."
+utkast: false

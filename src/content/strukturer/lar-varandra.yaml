@@ -14,5 +14,24 @@ kalla:
   rubrik: Lär varandra
   commit: b492447
   summa: a320a768
-bild: { scen: lar-varandra, alt: "Längst till vänster står en dörr på glänt. Framför den, vid bordets kortsida, står en elev i orange tröja som just har kommit in och frågar, med ett frågetecken i pratbubblan. Tre elever sitter bakom bordet och vänder sig mot hen. Eleven i grön tröja håller fram ett papper med en triangel och förklarar, och pratbubblan visar en triangel. Eleverna i rosa och blå tröja lutar sig mot den som kom in." }
-utkast: true
+bild:
+  scen: lar-varandra
+  alt: Längst till vänster står en dörr på glänt. Framför den, vid bordets kortsida, står en elev i orange tröja som just har kommit in och frågar, med ett frågetecken i pratbubblan. Tre elever sitter bakom bordet och vänder sig mot hen. Eleven i grön tröja håller fram ett papper med en triangel och förklarar, och pratbubblan visar en triangel. Eleverna i rosa och blå tröja lutar sig mot den som kom in.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen läser en kapitelbok. Du väljer eller slumpar en elev ur varje grupp som går ut ur rummet. Du läser dagens kapitel högt för dem som är kvar. Gruppen sammanfattar kapitlet och planerar hur de ska berätta det. När eleverna kommer in igen berättar gruppen kapitlet för dem, och sedan löser var och en samma uppgift: att lägga tre bildkort från kapitlet i rätt ordning."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen övar att skriva instruktioner. Du väljer eller slumpar en elev ur varje grupp som går ut ur rummet. Du visar dem som är kvar tre tips för en bra instruktion, med att koka ägg som exempel: vad man behöver står först, stegen är numrerade och varje steg börjar med ett verb. Gruppen sammanfattar tipsen och planerar hur de ska lära ut dem. När eleverna kommer in igen lär gruppen dem tipsen, och sedan skriver var och en en instruktion på fyra rader för att göra en macka."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen arbetar med ekvationer. Du väljer eller slumpar en elev ur varje grupp som går ut ur rummet. Du visar dem som är kvar hur man löser ekvationen 3x + 5 = 20 med balansmetoden. Gruppen sammanfattar stegen och planerar hur de ska lära ut dem. När eleverna kommer in igen lär gruppen dem balansmetoden, och sedan löser var och en en ekvation som du har gett, till exempel 4x + 3 = 19.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Klassen övar att ge varandra återkoppling. Du väljer eller slumpar en elev ur varje grupp som går ut ur rummet. Du visar dem som är kvar en modell för återkoppling i tre delar, med ett exempel: vad som fungerade, ett tips och en fråga. Gruppen sammanfattar modellen och planerar hur de ska lära ut den. När eleverna kommer in igen lär gruppen dem modellen, och sedan ger var och en återkoppling på en kort text som du har delat ut."
+utkast: false

@@ -16,5 +16,24 @@ kalla:
   rubrik: Lika och olika
   commit: b492447
   summa: b4bc5253
-bild: { scen: lika-och-olika, alt: "Två elever sitter vid ett bord, och mitt på bordet står en hopvikt skärm mellan dem. Var och en har ett papper med en gul oval till vänster. På samma ställe till höger har den vänstras papper en triangel och den högras en kvadrat. Eleven till vänster pekar på triangeln och berättar, och pratbubblan visar en triangel. Eleven till höger pekar på kvadraten, och pratbubblan visar ett utropstecken." }
-utkast: true
+bild:
+  scen: lika-och-olika
+  alt: Två elever sitter vid ett bord, och mitt på bordet står en hopvikt skärm mellan dem. Var och en har ett papper med en gul oval till vänster. På samma ställe till höger har den vänstras papper en triangel och den högras en kvadrat. Eleven till vänster pekar på triangeln och berättar, och pratbubblan visar en triangel. Eleven till höger pekar på kvadraten, och pratbubblan visar ett utropstecken.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Du ger paret var sitt blad med sex ord i rader, till exempel kul, kol, kal, bil, bal och bål, där tre ord skiljer sig mellan bladen, och sätter en skärm emellan dem. Eleverna turas om att läsa upp ett ord i taget och säga var det står, och kamraten följer med i sitt eget blad. Står det ett annat ord på samma plats i det egna bladet, säger kamraten till. De fortsätter tills alla tre skillnaderna är funna. Sist tar de bort skärmen och kontrollerar tillsammans.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Du ger paret var sin version av samma korta text, där den ena har rätt skiljetecken och stora bokstäver och den andra har sex fel, och sätter en skärm emellan dem. Eleverna turas om att läsa upp en rad och säga var det står punkt, komma och stor bokstav. Kamraten lyssnar, jämför med sin egen text och säger till när något verkar skilja sig. De fortsätter tills alla sex skillnaderna är funna. Sist tar de bort skärmen, ser tillsammans vilken text som följer skrivreglerna och rättar den andra.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Du ger paret var sitt blad med ett koordinatsystem och en rät linje, där bladen skiljer sig på fem ställen, till exempel var linjen skär y-axeln och vilka punkter som är markerade, och sätter en skärm emellan dem. Eleverna turas om att beskriva en detalj i sin graf med matematiska ord, som lutning och skärning med y-axeln. Kamraten lyssnar, jämför med sin egen graf och säger till när något verkar skilja sig. De fortsätter tills alla fem skillnaderna är funna. Sist tar de bort skärmen och kontrollerar tillsammans.
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: Klassen i åk 2 övar på att vänta på sin tur och lyssna färdigt. Du ger paret var sin bild av en skolgård och sätter en skärm emellan dem. Bilderna skiljer sig på fem ställen, till exempel leker två barn med samma boll på den ena bilden och bråkar om den på den andra. Eleverna turas om att beskriva en sak de ser, och kamraten lyssnar färdigt, jämför och säger till när något skiljer sig. De fortsätter tills alla fem skillnaderna är funna, tar bort skärmen och kontrollerar tillsammans.
+utkast: false

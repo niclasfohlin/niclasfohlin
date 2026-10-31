@@ -16,5 +16,24 @@ kalla:
   rubrik: Solfjäder
   commit: b492447
   summa: 906f610a
-bild: { scen: solfjader, alt: "Fyra elever sitter runt ett bord. Eleven i lila tröja håller upp frågekorten som en solfjäder med baksidan utåt. Eleven i gul tröja har dragit ett kort med ett frågetecken och läser frågan högt, och pratbubblan visar ett frågetecken. Eleven i ljusblå tröja svarar, och pratbubblan visar en triangel. Eleven i orange tröja lutar sig mot den som svarar och kontrollerar svaret, och pratbubblan visar en bock och en stjärna." }
-utkast: true
+bild:
+  scen: solfjader
+  alt: Fyra elever sitter runt ett bord. Eleven i lila tröja håller upp frågekorten som en solfjäder med baksidan utåt. Eleven i gul tröja har dragit ett kort med ett frågetecken och läser frågan högt, och pratbubblan visar ett frågetecken. Eleven i ljusblå tröja svarar, och pratbubblan visar en triangel. Eleven i orange tröja lutar sig mot den som svarar och kontrollerar svaret, och pratbubblan visar en bock och en stjärna.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen har läst en kapitelbok om en hund som går vilse, och varje grupp har ett exemplar. Du ger varje grupp frågekort om boken, till exempel: Vad gjorde flickan när hunden försvann? Den första eleven håller korten som en solfjäder med baksidan utåt, den andra drar ett kort och läser frågan högt, och den tredje får fem sekunders tanketid och svarar. Den fjärde slår upp sidan i boken, kontrollerar svaret och berömmer eller ger ett tips. Sedan flyttar rollerna ett steg och gruppen tar nästa kort."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen skriver debattartiklar. Du ger varje grupp frågekort med öppna frågor om skrivandet, till exempel: Hur får du läsaren att fortsätta efter första meningen? Den första eleven håller korten som en solfjäder, den andra drar ett kort och läser frågan högt, och den tredje får fem sekunders tanketid och svarar med ett exempel ur sin egen text. Frågorna är öppna, så den fjärde sammanfattar tankegången i stället. Sedan flyttar rollerna ett steg och gruppen tar nästa kort."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen övar att multiplicera tvåsiffriga tal med ensiffriga. Du ger varje grupp frågekort med en uppgift på varje, till exempel: Vad är 14 gånger 6, och hur räknade du? Den första eleven håller korten som en solfjäder, den andra drar ett kort och läser uppgiften högt, och den tredje tänker i fem sekunder och svarar. Den fjärde kontrollerar svaret med miniräknaren och berömmer eller ger ett tips. Rollerna flyttas ett steg och gruppen tar nästa kort."
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: "Klassen pratar om hur man är en bra kompis. Du ger varje grupp frågekort med öppna frågor, till exempel: Vad kan du göra när en kompis står ensam på rasten? Den första eleven håller korten som en solfjäder, den andra drar ett kort och läser frågan högt, och den tredje får fem sekunders tanketid och svarar. Frågorna har inget rätt svar, så den fjärde sammanfattar tankegången i stället. Sedan flyttar rollerna ett steg och gruppen tar nästa kort."
+utkast: false

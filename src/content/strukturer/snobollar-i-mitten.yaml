@@ -17,5 +17,24 @@ kalla:
   rubrik: Snöbollar i mitten
   commit: b492447
   summa: 4b76151f
-bild: { scen: snobollar-i-mitten, alt: "Fyra elever sitter runt ett bord med pappersbollar som de har tagit ur högen i mitten. Mitt på bordet ligger ett stort uppvecklat papper där det redan står en triangel med text, och eleven bakom bordet till vänster skriver en kvadrat under den med en penna och har en kvadrat i tankebubblan. Två andra skriver på var sitt uppvecklat papper, det ena med en stjärna och det andra med en cirkel. Två hopskrynklade vita bollar ligger kvar på bordet, och eleven vid bordets högra kortsida håller en boll i händerna och vecklar upp den." }
-utkast: true
+bild:
+  scen: snobollar-i-mitten
+  alt: Fyra elever sitter runt ett bord med pappersbollar som de har tagit ur högen i mitten. Mitt på bordet ligger ett stort uppvecklat papper där det redan står en triangel med text, och eleven bakom bordet till vänster skriver en kvadrat under den med en penna och har en kvadrat i tankebubblan. Två andra skriver på var sitt uppvecklat papper, det ena med en stjärna och det andra med en cirkel. Två hopskrynklade vita bollar ligger kvar på bordet, och eleven vid bordets högra kortsida håller en boll i händerna och vecklar upp den.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen har läst en novell. Eleverna sitter i grupper om fyra med var sitt papper, och du ställer den öppna frågan: Vad vill författaren att vi ska tänka på när vi har läst novellen? Var och en skriver ett svar, skrynklar ihop papperet till en boll och lägger den mitt på bordet. Bollarna blandas, och alla tar en boll, öppnar den och skriver en tolkning som inte redan står där. Grupperna gör om det ett par gånger, och sist läser eleverna upp lapparna de har och väljer ut några tolkningar att dela med klassen."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen ska skriva spänningsberättelser. Eleverna sitter i grupper om fyra med var sitt papper, och du ställer den öppna frågan: Hur kan en spännande berättelse börja? Var och en skriver en första mening, skrynklar ihop papperet till en boll och lägger den mitt på bordet. Bollarna blandas, och alla tar en boll, öppnar den och skriver en annan början som inte redan står där. Grupperna gör om det ett par gånger, och sist läser eleverna upp lapparna de har och väljer ut de inledningar som mest får läsaren att vilja veta mer."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Klassen arbetar med talet 10. Eleverna sitter i grupper om fyra med var sitt papper, och du ställer den öppna frågan: På vilka olika sätt kan man visa talet 10? Var och en skriver eller ritar ett sätt, som 6 + 4, skrynklar ihop papperet till en boll och lägger den mitt på bordet. Bollarna blandas, och alla tar en boll, öppnar den och skriver ett sätt som inte redan står där. Grupperna gör om det ett par gånger, och sist läser eleverna upp lapparna de har och väljer ut de sätt som skiljer sig mest från varandra."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Mentorsgruppen pratar om att säga sin åsikt i klassen. Eleverna sitter i grupper om fyra med var sitt papper, och du ställer den öppna frågan: Vad gör att man vågar räcka upp handen i klassrummet? Var och en skriver ett svar utan namn, skrynklar ihop papperet till en boll och lägger den mitt på bordet. Bollarna blandas, och alla tar en boll, öppnar den och skriver något som inte redan står där. Grupperna gör om det ett par gånger, och sist läser eleverna upp lapparna de har och väljer ut några svar att berätta om för klassen."
+utkast: false

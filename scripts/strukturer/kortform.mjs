@@ -16,9 +16,10 @@
 //                          utskrift eller klippning på arket ("Ingen text om klipp mm i själva kortet")
 //
 // Varje kort är två stående A4 med kortet på den övre halvan: framsidan och baksidan. Utskriften av ett urval lägger två
-// kort på varje A4 (src/lib/strukturkort.ts). Sidan mäter sig själv när typsnittet har laddats och skriver storlekarna i
+// kort på varje A4 (src/lib/strukturkort.js), och filen med alla kort har två kort på varje A4 direkt (tvaOchTva). Sidan mäter sig själv när typsnittet har laddats och skriver storlekarna i
 // data-attribut, som scripts/strukturer/kort.mjs läser.
 import { symbol, SLAGEN } from './symboler.mjs';
+import { strukturkortensArk } from '../../src/lib/standard/strukturer.js';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // Bankens platshållare står i kursiv, som *frågan*.
@@ -34,6 +35,7 @@ const stil = (typsnitt) => `
 body { margin: 0; font-family: Fredoka, sans-serif; color: #14202b; }
 .ark { width: 210mm; height: 297mm; position: relative; page-break-after: always; overflow: hidden; }
 .kort { position: absolute; left: 0; top: 0; width: 210mm; height: 148.5mm; }
+.kort.nere { top: 148.5mm; }
 .ram { position: absolute; inset: 10mm 5.5mm 5.5mm 5.5mm; border: 0.9mm solid var(--slag); border-radius: 3mm; }
 .flik { position: absolute; top: -6.4mm; right: 7mm; background: #fff; padding: 0 2.5mm; display: flex; align-items: center; gap: 2mm; font-weight: 600; font-size: 16pt; color: color-mix(in srgb, var(--slag) 82%, #000); }
 .flik svg { width: 12mm; height: 12mm; }
@@ -62,6 +64,17 @@ const MATNING = `<script>document.fonts.ready.then(() => {
     n.dataset.pt = pt; n.dataset.rader = Math.round(n.getBoundingClientRect().height / (pt * 1.333));
     n.closest('.kort').style.setProperty('--bildtopp', (3 + n.getBoundingClientRect().height / 3.7795 + 3) + 'mm');
   }
+  // Baksidans namn står på en rad till 24 punkter och får sedan två; stegen börjar under namnet, också när det har två
+  // rader (provningen 2026-11-01: Formulera, dela, lyssna, skapa lade sig över steg 1).
+  for (const n of document.querySelectorAll('.bak .namn')) {
+    let pt = 32; n.style.whiteSpace = 'nowrap'; n.style.fontSize = pt + 'pt';
+    while (n.scrollWidth > n.clientWidth && pt > 24) { pt -= 1; n.style.fontSize = pt + 'pt'; }
+    if (n.scrollWidth > n.clientWidth) n.style.whiteSpace = 'normal';
+    n.dataset.pt = pt;
+    const yta = n.parentElement.querySelector('.stegyta');
+    const under = n.getBoundingClientRect().bottom - yta.getBoundingClientRect().top + 3 * 3.7795;
+    yta.querySelector('ol').style.paddingTop = Math.max(15 * 3.7795, under) + 'px';
+  }
   for (const ol of document.querySelectorAll('.stegyta ol')) {
     const ryms = () => ol.lastElementChild.getBoundingClientRect().bottom <= ol.parentElement.getBoundingClientRect().bottom;
     let pt = S.steg;
@@ -74,18 +87,24 @@ const MATNING = `<script>document.fonts.ready.then(() => {
 });</script>`;
 
 /**
- * Korten som en sida att skriva ut: för varje kort ett A4 med framsidan och ett med baksidan, kortet på den övre halvan.
+ * Korten som en sida att skriva ut. Förvalt: för varje kort ett A4 med framsidan och ett med baksidan, kortet på den
+ * övre halvan. Med tvaOchTva två kort på varje A4, i arkens ordning ur standarden (strukturkortensArk), som filen med
+ * alla kort: Chrome skriver ut den i ett svep, så att typsnittet och varje bild finns en gång i filen.
  * @param {{ id: string, namn: string, slag: 'par'|'grupp'|'klass', steg: string[], bild: string }[]} kort  bild är bildens adress
- * @param {{ typsnitt: string }} o  mappen med Fredoka, som adress
+ * @param {{ typsnitt: string, tvaOchTva?: boolean, titel?: string }} o  typsnitt är mappen med Fredoka, som adress
  */
-export function kortenHtml(kort, { typsnitt }) {
-  const sida = (k, del) => {
+export function kortenHtml(kort, { typsnitt, tvaOchTva = false, titel = 'Strukturkort' }) {
+  const kortet = (k, del, nere = false) => {
     const s = SLAGEN[k.slag];
     const flik = `<div class="flik">${symbol(k.slag, { klass: '' })}<span>${s.namn}</span></div>`;
     const inne = del === 'fram'
       ? `<h2 class="namn">${esc(k.namn)}</h2><img src="${esc(k.bild)}" alt="">`
       : `<h2 class="namn">${esc(k.namn)}</h2><div class="stegyta"><img class="mini" src="${esc(k.bild)}" alt=""><ol>${k.steg.map((t) => `<li>${steget(t)}</li>`).join('')}</ol></div><div class="upphov">© Niclas Fohlin · niclasfohlin.se</div>`;
-    return `<div class="ark" data-id="${esc(k.id)}" data-sida="${del}"><div class="kort ${del}" style="--slag:${s.farg}"><div class="ram">${flik}${inne}</div></div><div class="klipp"></div></div>`;
+    return `<div class="kort ${del}${nere ? ' nere' : ''}" data-id="${esc(k.id)}" style="--slag:${s.farg}"><div class="ram">${flik}${inne}</div></div>`;
   };
-  return `<!doctype html><html lang="sv"><head><meta charset="utf-8"><title>Strukturkort</title><style>${stil(typsnitt)}</style></head><body>${kort.map((k) => sida(k, 'fram') + sida(k, 'bak')).join('')}${MATNING}</body></html>`;
+  const sida = (k, del) => `<div class="ark" data-id="${esc(k.id)}" data-sida="${del}">${kortet(k, del)}<div class="klipp"></div></div>`;
+  const sidorna = tvaOchTva
+    ? strukturkortensArk(kort.length).map((a) => `<div class="ark" data-sida="${a.del}">${kortet(kort[a.uppe], a.del)}${a.nere === null ? '' : kortet(kort[a.nere], a.del, true)}<div class="klipp"></div></div>`)
+    : kort.map((k) => sida(k, 'fram') + sida(k, 'bak'));
+  return `<!doctype html><html lang="sv"><head><meta charset="utf-8"><title>${esc(titel)}</title><style>${stil(typsnitt)}</style></head><body>${sidorna.join('')}${MATNING}</body></html>`;
 }

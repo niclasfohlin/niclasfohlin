@@ -15,5 +15,24 @@ kalla:
   rubrik: En får gå
   commit: b492447
   summa: 64e8d841
-bild: { scen: en-far-ga, alt: "Två grupper med tre elever i varje står upp en bit från varandra. Från varje grupp går en elev till den andra gruppen, och de två korsar varandra mitt i bilden, med var sin pil på golvet. I gruppen till vänster säger eleven i gul tröja en triangel, och eleven i rosa tröja som går därifrån tänker på samma triangel. Eleven i blå tröja går från gruppen till höger mot gruppen till vänster och tänker på en kvadrat. Grupperna vänder sig mot den som kommer." }
-utkast: true
+bild:
+  scen: en-far-ga
+  alt: Två grupper med tre elever i varje står upp en bit från varandra. Från varje grupp går en elev till den andra gruppen, och de två korsar varandra mitt i bilden, med var sin pil på golvet. I gruppen till vänster säger eleven i gul tröja en triangel, och eleven i rosa tröja som går därifrån tänker på samma triangel. Eleven i blå tröja går från gruppen till höger mot gruppen till vänster och tänker på en kvadrat. Grupperna vänder sig mot den som kommer.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: SO
+    text: "Klassen har läst en text om industrialiseringen. Du delar in eleverna i fyrgrupper, numrerar dem ett till fyra och frågar: Vilken förändring i texten fick störst följder för barnen, och hur vet ni det? Grupperna talar sig samman tills alla vet vad gruppen svarar, och eleverna ställer sig upp när de är klara. Du säger tre, och alla treor går till en annan grupp, där eleverna delar sina svar och jämför dem. Sedan frågar du vem i texten som tjänade mest på förändringarna, och klassen gör om det."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen ska skriva berättelser och behöver idéer till hur de kan börja. Du delar in eleverna i fyrgrupper, numrerar dem ett till fyra och frågar: Hur kan en berättelse börja så att läsaren vill veta mer? Grupperna talar sig samman tills alla har något att berätta, och eleverna ställer sig upp när de är klara. Du säger två, och alla tvåor byter grupp, delar sina svar i den nya gruppen och jämför dem. Sedan frågar du hur en berättelse kan sluta, och klassen gör om det."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Klassen arbetar med att mäta längd, och du har delat in eleverna i fyrgrupper med numren ett till fyra. Du frågar: Hur kan vi ta reda på hur långt klassrummet är utan linjal? Grupperna talar sig samman tills alla har något att berätta, och eleverna ställer sig upp när de är klara. Du säger en siffra, och de eleverna byter till en annan grupp, delar sitt svar där och jämför med de andras. Sedan frågar du varför två elever kan få olika svar när de mäter med fötterna, och klassen gör om det."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "På mentorstiden pratar klassen om att arbeta i grupp. Du delar in eleverna i fyrgrupper, numrerar dem ett till fyra och frågar: Vad behöver en grupp för att alla ska våga säga vad de tycker? Grupperna talar sig samman tills alla vet vad gruppen svarar, och eleverna ställer sig upp när de är klara. Du säger en siffra, och de eleverna byter till en annan grupp, delar gruppens svar där och jämför med de andras. Sedan frågar du vad var och en kan göra för det, och klassen gör om det."
+utkast: false

@@ -17,5 +17,24 @@ kalla:
   rubrik: Skissa och skriv
   commit: b492447
   summa: 660e98fe
-bild: { scen: skissa-och-skriv, alt: "Tre elever sitter bakom ett bord där fyra papper ligger i en rad med pilar mellan sig: en bild av en gul stjärna, en text, en teckning av en gul triangel och en text till. Eleven till vänster pekar på stjärnan och har en stjärna i pratbubblan. Eleven i mitten lutar sig fram och pekar på den första texten. Eleven till höger pekar på triangeln och har en triangel och ett utropstecken i pratbubblan." }
-utkast: true
+bild:
+  scen: skissa-och-skriv
+  alt: "Tre elever sitter bakom ett bord där fyra papper ligger i en rad med pilar mellan sig: en bild av en gul stjärna, en text, en teckning av en gul triangel och en text till. Eleven till vänster pekar på stjärnan och har en stjärna i pratbubblan. Eleven i mitten lutar sig fram och pekar på den första texten. Eleven till höger pekar på triangeln och har en triangel och ett utropstecken i pratbubblan."
+forslag:
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Eleverna sitter i grupper om tre, och var och en får en egen bild av ett djur, som en hund, en katt eller en fågel. Var och en skriver hur djuret ser ut, med färger och former, gömmer bilden och skickar texten till kamraten bredvid. Kamraten ritar det texten säger utan att se bilden och skickar teckningen vidare, och nästa elev skriver en ny beskrivning till teckningen. Grupperna lägger fram alla leden och jämför vad som ändrades på vägen. Du leder ett samtal om vad en beskrivning behöver för att läsaren ska kunna rita rätt.
+  - omrade: lasning
+    arskurs: 7–9
+    amne: engelska
+    text: Eleverna sitter i grupper om tre, och var och en får en bild av ett rum, som ett kök eller ett sovrum, och beskriver det på engelska. Eleverna gömmer bilden och skickar texten till kamraten bredvid, som stryker under orden för möbler och lägen och ritar rummet utan att se bilden. Teckningen går vidare till den tredje eleven, som beskriver den på engelska. Grupperna lägger fram alla leden och jämför vad som ändrades, till exempel var möblerna hamnade. Du leder ett samtal om vilka ord läsaren behövde för att kunna rita rummet.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Eleverna sitter i grupper om tre, och var och en får sin egen bild av en sammansatt figur, som en rektangel med en triangel ovanpå. Eleverna beskriver figuren med matematiska ord som sida, vinkel och parallell, gömmer bilden och skickar texten till kamraten bredvid. Kamraten ritar figuren utan att se bilden, och teckningen går vidare till den tredje eleven, som beskriver den. Grupperna lägger fram alla leden och jämför vad som ändrades på vägen. Du leder ett samtal om vilka matematiska ord som behövs för att figuren ska bli rätt.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Eleverna sitter i grupper om tre, och var och en får en egen bild från skolgården, till exempel två elever som står för sig själva vid ett staket. Var och en skriver vad hen ser, gömmer bilden och skickar texten till kamraten bredvid. Kamraten ritar det texten säger utan att se bilden, och teckningen går vidare till den tredje eleven, som beskriver den. Grupperna lägger fram alla leden och jämför vad som ändrades, till exempel en känsla eller en avsikt som bilden inte visar. Du leder ett samtal om vad en beskrivning behöver och om skillnaden mellan det vi ser och det vi tror om andra.
+utkast: false

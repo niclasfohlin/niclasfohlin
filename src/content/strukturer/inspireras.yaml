@@ -18,5 +18,24 @@ kalla:
   rubrik: Inspireras
   commit: b492447
   summa: e49b7eae
-bild: { scen: inspireras, alt: "Längst fram står ett bord utan elever, med ett papper med en triangel, en penna och en stor klocka som ringer. En pil går från bordet till ett bord längre bak, där tre elever i lila tröjor står runt om och tittar på ett papper med en grön cirkel. Den till vänster pekar på cirkeln och talar. Den till höger har handen på bordet och en triangel och en grön cirkel i tankebubblan. Den tredje står framför bordet och syns bakifrån." }
-utkast: true
+bild:
+  scen: inspireras
+  alt: Längst fram står ett bord utan elever, med ett papper med en triangel, en penna och en stor klocka som ringer. En pil går från bordet till ett bord längre bak, där tre elever i lila tröjor står runt om och tittar på ett papper med en grön cirkel. Den till vänster pekar på cirkeln och talar. Den till höger har handen på bordet och en triangel och en grön cirkel i tankebubblan. Den tredje står framför bordet och syns bakifrån.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen har läst en novell. Du delar in eleverna i par, sätter en timer på åtta minuter och ger frågan: Vad vill författaren säga med slutet, och vilka ställen i texten visar det? Paren skriver sina svar på ett papper, och du går runt och stöttar bara vid behov. När timern ringer går paren runt och läser de andras svar, och tillbaka på plats pekar de på det svar de förstod bäst. Du slumpar fram några som berättar varför, och sedan arbetar paren klart och delar sina färdiga svar."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen skriver instruktioner. Du delar in eleverna i grupper om tre, sätter en timer på tio minuter och ger frågan: Hur skriver ni så att en kompis kan göra en macka utan att fråga? Grupperna börjar skriva, och du går runt och stöttar bara vid behov. När timern ringer går grupperna runt och läser de andras instruktioner, och tillbaka på plats pekar de på den de förstod bäst. Du slumpar fram några som berättar varför, och sedan skriver grupperna klart och läser upp sina instruktioner."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Klassen arbetar med talet 10. Du delar in klassen i par, ger varje par papper och tio kuber, sätter en timer på sju minuter och ger frågan: På hur många sätt kan ni dela tio kuber i två högar? Paren bygger och skriver, och du går runt och stöttar bara vid behov. När timern ringer går paren runt och tittar på de andras lösningar, och tillbaka på plats pekar de på den lösning de förstod bäst. Du slumpar fram några som berättar varför, och sedan arbetar paren klart och delar sina färdiga lösningar."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Klassen pratar om hur de lyssnar på varandra. Du delar in eleverna i grupper om tre, sätter en timer på tio minuter och ger frågan: Vad kan vi göra så att alla blir hörda i klassen? Grupperna skriver tre förslag, och du går runt och stöttar bara vid behov. När timern ringer går grupperna runt och läser de andras förslag, och tillbaka på plats pekar de på det förslag de förstod bäst. Du slumpar fram några som berättar varför, och sedan skriver grupperna klart och delar sina färdiga förslag."
+utkast: false

@@ -16,5 +16,24 @@ kalla:
   rubrik: EPK
   commit: b492447
   summa: ea004a57
-bild: { scen: epk, alt: "Fyra elever sitter runt ett bord som två par mittemot varandra. Paret bakom bordet har gröna tröjor: den ena håller upp parets papper med en grön cirkel och berättar, med cirkeln i pratbubblan, och den andra pekar på cirkeln. Paret närmast har tröjor i orange och syns bakifrån. Den ena har handen på deras papper med en kvadrat, och den andra frågar, med ett frågetecken i pratbubblan." }
-utkast: true
+bild:
+  scen: epk
+  alt: "Fyra elever sitter runt ett bord som två par mittemot varandra. Paret bakom bordet har gröna tröjor: den ena håller upp parets papper med en grön cirkel och berättar, med cirkeln i pratbubblan, och den andra pekar på cirkeln. Paret närmast har tröjor i orange och syns bakifrån. Den ena har handen på deras papper med en kvadrat, och den andra frågar, med ett frågetecken i pratbubblan."
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: engelska
+    text: "Klassen har läst en kort novell på engelska där huvudpersonen ändrar sig i slutet. Du ger problemet: Varför ändrar huvudpersonen sig, och vilka ställen i texten visar det? Eleverna tänker själva och talar i par, och du sätter ihop två par till en kvadrat där de berättar för varandra hur de tänkte. Kvadraten jämför, ställer frågor och bygger ett gemensamt svar, och du slumpar en elev per kvadrat som redovisar."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen skriver berättelser om ett spöke. Du ger problemet: Hur kan första meningen få läsaren att vilja läsa vidare? Eleverna tänker och skriver en mening var för sig och pratar om dem i par, sedan sätter du ihop två par till en kvadrat där de läser sina meningar för varandra. Kvadraten jämför, ställer frågor och skriver en ny första mening tillsammans, och du slumpar en elev per kvadrat som läser upp den."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen arbetar med bråk. Du ger problemet: Fyra kompisar delar lika på tre pizzor. Hur mycket pizza får var och en, och hur kan du visa det med en bild? Eleverna tänker själva och talar i par, sedan sätter du ihop två par till en kvadrat där de jämför sina bilder och frågar varandra hur de tänkte. Kvadraten ritar en gemensam lösning, och du slumpar en elev per kvadrat som redovisar den."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: samhällskunskap
+    text: "Klassen arbetar med livet på nätet. Du ger problemet: Någon lägger ut en pinsam bild på en klasskamrat i klassens chatt. Vad gör du som klasskamrat, och vad kan klassen göra tillsammans? Eleverna tänker själva och talar i par, sedan sätter du ihop två par till en kvadrat där de berättar för varandra vad de skulle göra. Kvadraten jämför, ställer frågor och kommer fram till ett gemensamt svar, och du slumpar en elev per kvadrat som redovisar."
+utkast: false

@@ -1,20 +1,23 @@
 #!/usr/bin/env node
 // Strukturkortens pdf:er (K-650): ett kort per struktur, framsidan och baksidan på var sitt A4 med kortet på den övre
-// halvan, i formen ur scripts/strukturer/kortform.mjs. Chrome skriver ut korten (beslutet i
-// underlag/prov/strukturer/UPPDRAGET.md under Läget: formen är enkel i HTML och svår i Word, och ingen Word-fil erbjuds),
-// och pdf-lib delar utskriften i ett kort per fil. Bilden är scenens png i 1600 punkter med så få färger som bilden tål
-// (Niclas 2026-10-31: "Ska vara en halv A4a och inte se suddiga ut. Men också optimeras för hur de ska komprimeras för
-// sina färger").
+// halvan, i formen ur scripts/strukturer/kortform.mjs, och filen med alla kort, två på varje A4. Chrome skriver ut korten
+// (beslutet i underlag/prov/strukturer/UPPDRAGET.md under Läget: formen är enkel i HTML och svår i Word, och ingen
+// Word-fil erbjuds), och pdf-lib delar utskriften i ett kort per fil. Bilden är scenens png i 1600 punkter med så få
+// färger som bilden tål (Niclas 2026-10-31: "Ska vara en halv A4a och inte se suddiga ut. Men också optimeras för hur de
+// ska komprimeras för sina färger").
 //
 //   node scripts/strukturer/kort.mjs                 alla strukturer som har en bild
 //   node scripts/strukturer/kort.mjs <id> [<id>…]    bara de angivna
-//   node scripts/strukturer/kort.mjs --vid-behov     bara de som saknas eller vars kort har ändrats
+//   node scripts/strukturer/kort.mjs --vid-behov     bara de som saknas eller vars kort har ändrats (i npm run validera)
 //
-// Netlify har ingen Chrome, så pdf:erna committas, med ett manifest (kort.json) som har en kontrollsumma per kort över
-// strukturens fält, scenen, motorn, formen och typsnitten. Ett utkast får sitt kort i underlag/prov/strukturer/kort/,
-// som git ignorerar, och en struktur som visas i public/strukturer/kort/. Manifestet har också kortets mått: stegens
-// storlek och om de fick mindre luft. Ett kort som behövde mindre luft eller mindre text listas som en text att korta,
-// och ett kort vars steg inte ryms i 16 punkter stannar skriptet.
+// Netlify har ingen Chrome, så pdf:erna committas, med ett manifest som har en kontrollsumma per kort: innehall över
+// strukturens namn, slag, steg och scen, som bygget räknar om och stannar på när ett kort är gammalt
+// (src/lib/strukturer.ts), och summa, som också tar med motorn, formen och typsnitten. Ett utkast får sitt kort i
+// underlag/prov/strukturer/kort/, som git ignorerar, med manifestet kort.json där, och en struktur som visas i
+// public/strukturer/kort/, med manifestet src/data/strukturkort.json. Manifestet har också kortets mått: stegens storlek
+// och om de fick mindre luft. Ett kort som behövde mindre luft eller mindre text listas som en text att korta, och ett
+// kort vars steg inte ryms i 16 punkter stannar skriptet. Ändras ett kort som visas görs filen med alla kort om, i
+// slagens ordning, Par, Grupp och Klass, och efter namnet, som verktygets sida har dem.
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, mkdtempSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -26,18 +29,17 @@ import sharp from 'sharp';
 import { PDFDocument } from 'pdf-lib';
 import { ritaScen } from './rita.mjs';
 import { kortenHtml, KORTETS_STANDARD } from './kortform.mjs';
+import { strukturkortetsInnehall, strukturkortetsFil, STRUKTURKORTEN_ALLA, STRUKTURENS_SLAG } from '../../src/lib/standard/strukturer.js';
 
 const HAR = dirname(fileURLToPath(import.meta.url));
 const ROT = join(HAR, '..', '..');
 const STRUKTURER = join(ROT, 'src', 'content', 'strukturer');
 const SCENER = join(HAR, 'scener');
 const UT = { utkast: join(ROT, 'underlag', 'prov', 'strukturer', 'kort'), visas: join(ROT, 'public', 'strukturer', 'kort') };
+const MANIFEST = { utkast: join(UT.utkast, 'kort.json'), visas: join(ROT, 'src', 'data', 'strukturkort.json') };
 const args = process.argv.slice(2);
 const vidBehov = args.includes('--vid-behov');
 const valda = args.filter((a) => !a.startsWith('--'));
-
-const chrome = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
-if (!chrome) { console.error('Chrome hittades inte: korten skrivs ut med Chrome.'); process.exit(1); }
 
 // Det som ett kort görs av, utöver strukturens egen fil och scen: motorn, formen och typsnitten.
 const lasAlla = (mapp, filter) => readdirSync(mapp).filter(filter).sort().map((f) => readFileSync(join(mapp, f)));
@@ -50,22 +52,37 @@ for (const b of [
 const GEMENSAM = gemensamt.digest('hex');
 
 const strukturer = readdirSync(STRUKTURER).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), ...YAML.parse(readFileSync(join(STRUKTURER, f), 'utf8')) }));
-const medBild = strukturer.filter((s) => s.bild?.scen && !s.vantar && existsSync(join(SCENER, `${s.bild.scen}.yaml`)) && (!valda.length || valda.includes(s.id)));
-const summa = (s) => createHash('sha256').update(GEMENSAM).update(JSON.stringify([s.namn, s.slag, s.steg])).update(readFileSync(join(SCENER, `${s.bild.scen}.yaml`))).digest('hex').slice(0, 16);
+const medBild = strukturer.filter((s) => s.bild?.scen && !s.vantar && existsSync(join(SCENER, `${s.bild.scen}.yaml`)));
+const scenen = (s) => readFileSync(join(SCENER, `${s.bild.scen}.yaml`), 'utf8');
+const innehall = (s) => strukturkortetsInnehall(s, scenen(s));
+const summa = (s) => createHash('sha256').update(GEMENSAM).update(innehall(s)).digest('hex').slice(0, 16);
+const delen = (s) => (s.utkast ? 'utkast' : 'visas');
 
 const manifest = {};
-for (const [del, mapp] of Object.entries(UT)) {
-  const fil = join(mapp, 'kort.json');
-  manifest[del] = existsSync(fil) ? JSON.parse(readFileSync(fil, 'utf8')) : {};
-}
-const delen = (s) => (s.utkast ? 'utkast' : 'visas');
-const attGora = medBild.filter((s) => !vidBehov || manifest[delen(s)][s.id]?.summa !== summa(s) || !existsSync(join(UT[delen(s)], `${s.id}.pdf`)));
-if (!attGora.length) { console.log(`Strukturkorten är aktuella (${medBild.length} kort).`); process.exit(0); }
+for (const [del, fil] of Object.entries(MANIFEST)) manifest[del] = existsSync(fil) ? JSON.parse(readFileSync(fil, 'utf8')) : {};
+const alla = manifest.visas[STRUKTURKORTEN_ALLA.nyckel];
+// Ett kort som har bytt del, från utkast till visas, tas bort ur den gamla delens manifest.
+for (const s of medBild) delete manifest[delen(s) === 'visas' ? 'utkast' : 'visas'][s.id];
+for (const del of Object.keys(manifest)) for (const id of Object.keys(manifest[del])) if (id !== STRUKTURKORTEN_ALLA.nyckel && !medBild.some((s) => s.id === id)) delete manifest[del][id];
+
+const aktuellt = (s) => manifest[delen(s)][s.id]?.summa === summa(s) && existsSync(join(UT[delen(s)], strukturkortetsFil(s.id)));
+const attGora = medBild.filter((s) => (!valda.length || valda.includes(s.id)) && (!vidBehov || !aktuellt(s)));
+// Filen med alla kort, i verktygets ordning.
+const ORDNINGEN = Object.keys(STRUKTURENS_SLAG);
+const visas = medBild.filter((s) => !s.utkast).sort((a, b) => ORDNINGEN.indexOf(a.slag) - ORDNINGEN.indexOf(b.slag) || a.namn.localeCompare(b.namn, 'sv'));
+const allasSumma = createHash('sha256').update(GEMENSAM).update(JSON.stringify(visas.map((s) => [s.id, innehall(s)]))).digest('hex').slice(0, 16);
+const allaAttGora = visas.length > 0 && (alla?.summa !== allasSumma || !existsSync(join(UT.visas, STRUKTURKORTEN_ALLA.fil)));
+if (!attGora.length && !allaAttGora) { console.log(`Strukturkorten är aktuella (${medBild.length} kort, ${visas.length} som visas).`); process.exit(0); }
+
+const chrome = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
+if (!chrome) { console.error('Chrome hittades inte: korten skrivs ut med Chrome.'); process.exit(1); }
 
 // Bildens png: så få färger som bilden tål. Medelfelet mot bilden i alla färger ska vara under 0,6 av 255.
 const tmp = mkdtempSync(join(tmpdir(), 'strukturkort-'));
+const bilder = {};
 async function bilden(s) {
-  const svg = Buffer.from(ritaScen(YAML.parse(readFileSync(join(SCENER, `${s.bild.scen}.yaml`), 'utf8'))));
+  if (bilder[s.id]) return bilder[s.id];
+  const svg = Buffer.from(ritaScen(YAML.parse(scenen(s))));
   const bas = sharp(svg, { density: Math.round(72 * 1600 / 900) }).resize({ width: 1600 }).flatten({ background: '#fff' });
   const full = await bas.clone().raw().toBuffer();
   let vald = null;
@@ -79,59 +96,79 @@ async function bilden(s) {
   }
   const fil = join(tmp, `${s.id}.png`);
   writeFileSync(fil, vald.png);
-  return { fil, colours: vald.colours, kb: Math.round(vald.png.length / 1024) };
+  return (bilder[s.id] = { fil, colours: vald.colours, kb: Math.round(vald.png.length / 1024) });
 }
 
-const bilder = {};
-for (const s of attGora) bilder[s.id] = await bilden(s);
 const url = (p) => pathToFileURL(p).href;
-const html = kortenHtml(attGora.map((s) => ({ id: s.id, namn: s.namn, slag: s.slag, steg: s.steg, bild: url(bilder[s.id].fil) })), { typsnitt: url(join(HAR, 'typsnitt')) });
-const htmlFil = join(tmp, 'kort.html');
-writeFileSync(htmlFil, html);
-const pdfFil = join(tmp, 'kort.pdf');
 const flaggor = ['--headless=new', '--disable-gpu', '--no-pdf-header-footer', '--virtual-time-budget=10000'];
-execFileSync(chrome, [...flaggor, `--print-to-pdf=${pdfFil}`, url(htmlFil)], { stdio: 'ignore', timeout: 300000 });
-const dom = execFileSync(chrome, [...flaggor, '--dump-dom', url(htmlFil)], { encoding: 'utf8', timeout: 300000, maxBuffer: 1 << 26 });
-if (!/<body[^>]*data-klar="1"/.test(dom)) { console.error('Korten mättes inte: sidan blev inte klar i Chrome.'); process.exit(1); }
+const kortet = async (s) => ({ id: s.id, namn: s.namn, slag: s.slag, steg: s.steg, bild: url((await bilden(s)).fil) });
+// Chrome skriver ut sidan till pdf och ger sidans DOM efter mätningen.
+function skrivUt(namn, html) {
+  const htmlFil = join(tmp, `${namn}.html`);
+  writeFileSync(htmlFil, html);
+  const pdfFil = join(tmp, `${namn}.pdf`);
+  execFileSync(chrome, [...flaggor, `--print-to-pdf=${pdfFil}`, url(htmlFil)], { stdio: 'ignore', timeout: 600000 });
+  const dom = execFileSync(chrome, [...flaggor, '--dump-dom', url(htmlFil)], { encoding: 'utf8', timeout: 600000, maxBuffer: 1 << 27 });
+  if (!/<body[^>]*data-klar="1"/.test(dom)) { console.error(`Korten (${namn}) mättes inte: sidan blev inte klar i Chrome.`); process.exit(1); }
+  return { pdf: readFileSync(pdfFil), dom };
+}
 
-// Måtten per kort ur sidan.
-const matt = {};
-for (const m of dom.matchAll(/<div class="ark" data-id="([^"]+)" data-sida="(fram|bak)">([\s\S]*?)<div class="klipp">/g)) {
-  const [, id, del, inne] = m;
-  matt[id] ||= {};
-  if (del === 'fram') { const n = inne.match(/<h2 class="namn"[^>]*data-pt="([\d.]+)"[^>]*data-rader="(\d+)"/); matt[id].namn = n ? { pt: +n[1], rader: +n[2] } : null; }
-  else {
-    const ol = inne.match(/<ol([^>]*)>/)?.[1] ?? '';
-    matt[id].steg = { pt: +(ol.match(/data-pt="([\d.]+)"/)?.[1] ?? 0), tat: /data-tat/.test(ol), rymsInte: /data-ryms-inte/.test(ol) };
+const fel = [], korta = [];
+if (attGora.length) {
+  const { pdf, dom } = skrivUt('kort', kortenHtml(await Promise.all(attGora.map(kortet)), { typsnitt: url(join(HAR, 'typsnitt')) }));
+  // Måtten per kort ur sidan.
+  const matt = {};
+  for (const m of dom.matchAll(/<div class="ark" data-id="([^"]+)" data-sida="(fram|bak)">([\s\S]*?)<div class="klipp">/g)) {
+    const [, id, del, inne] = m;
+    matt[id] ||= {};
+    if (del === 'fram') { const n = inne.match(/<h2 class="namn"[^>]*data-pt="([\d.]+)"[^>]*data-rader="(\d+)"/); matt[id].namn = n ? { pt: +n[1], rader: +n[2] } : null; }
+    else {
+      const ol = inne.match(/<ol([^>]*)>/)?.[1] ?? '';
+      matt[id].steg = { pt: +(ol.match(/data-pt="([\d.]+)"/)?.[1] ?? 0), tat: /data-tat/.test(ol), rymsInte: /data-ryms-inte/.test(ol) };
+    }
+  }
+  // Utskriften delad i ett kort per fil: sida 2i är framsidan och 2i + 1 baksidan.
+  const utskrift = await PDFDocument.load(pdf);
+  if (utskrift.getPageCount() !== attGora.length * 2) { console.error(`Utskriften har ${utskrift.getPageCount()} sidor, inte ${attGora.length * 2}.`); process.exit(1); }
+  for (const [i, s] of attGora.entries()) {
+    const m = matt[s.id];
+    if (!m?.steg || !m?.namn) { fel.push(`${s.namn}: kortet mättes inte`); continue; }
+    if (m.steg.rymsInte) fel.push(`${s.namn}: stegen ryms inte i ${KORTETS_STANDARD.stegMinst} punkter; skriv dem kortare i grundbokens bank`);
+    if (m.steg.tat || m.steg.pt < KORTETS_STANDARD.steg) korta.push(`${s.namn} (${m.steg.pt} punkter${m.steg.tat ? ', mindre luft' : ''})`);
+    const ett = await PDFDocument.create();
+    for (const p of await ett.copyPages(utskrift, [2 * i, 2 * i + 1])) ett.addPage(p);
+    ett.setTitle(`${s.namn}: strukturkort`);
+    ett.setAuthor('Niclas Fohlin');
+    const mapp = UT[delen(s)];
+    mkdirSync(mapp, { recursive: true });
+    const bytes = await ett.save({ useObjectStreams: true });
+    writeFileSync(join(mapp, strukturkortetsFil(s.id)), bytes);
+    manifest[delen(s)][s.id] = { innehall: innehall(s), summa: summa(s), kb: Math.round(bytes.length / 1024), bild: { colours: bilder[s.id].colours, kb: bilder[s.id].kb }, namn: m.namn, steg: m.steg };
   }
 }
 
-// Utskriften delad i ett kort per fil: sida 2i är framsidan och 2i + 1 baksidan.
-const alla = await PDFDocument.load(readFileSync(pdfFil));
-if (alla.getPageCount() !== attGora.length * 2) { console.error(`Utskriften har ${alla.getPageCount()} sidor, inte ${attGora.length * 2}.`); process.exit(1); }
-const fel = [], korta = [];
-for (const [i, s] of attGora.entries()) {
-  const m = matt[s.id];
-  if (!m?.steg || !m?.namn) { fel.push(`${s.namn}: kortet mättes inte`); continue; }
-  if (m.steg.rymsInte) fel.push(`${s.namn}: stegen ryms inte i ${KORTETS_STANDARD.stegMinst} punkter; skriv dem kortare i grundbokens bank`);
-  if (m.steg.tat || m.steg.pt < KORTETS_STANDARD.steg) korta.push(`${s.namn} (${m.steg.pt} punkter${m.steg.tat ? ', mindre luft' : ''})`);
-  const ett = await PDFDocument.create();
-  for (const p of await ett.copyPages(alla, [2 * i, 2 * i + 1])) ett.addPage(p);
-  ett.setTitle(`${s.namn}: strukturkort`);
-  ett.setAuthor('Niclas Fohlin');
-  const mapp = UT[delen(s)];
-  mkdirSync(mapp, { recursive: true });
-  const bytes = await ett.save();
-  writeFileSync(join(mapp, `${s.id}.pdf`), bytes);
-  manifest[delen(s)][s.id] = { summa: summa(s), kb: Math.round(bytes.length / 1024), bild: { colours: bilder[s.id].colours, kb: bilder[s.id].kb }, namn: m.namn, steg: m.steg };
+if (allaAttGora && !fel.length) {
+  const { pdf, dom } = skrivUt('alla', kortenHtml(await Promise.all(visas.map(kortet)), { typsnitt: url(join(HAR, 'typsnitt')), tvaOchTva: true, titel: 'Strukturkort: alla' }));
+  if (/data-ryms-inte/.test(dom)) fel.push('Filen med alla kort: ett kort ryms inte i 16 punkter');
+  const doc = await PDFDocument.load(pdf);
+  const vantat = 2 * Math.ceil(visas.length / 2);
+  if (doc.getPageCount() !== vantat) fel.push(`Filen med alla kort har ${doc.getPageCount()} sidor, inte ${vantat}`);
+  doc.setTitle('Strukturkort: alla');
+  doc.setAuthor('Niclas Fohlin');
+  const bytes = await doc.save({ useObjectStreams: true });
+  mkdirSync(UT.visas, { recursive: true });
+  writeFileSync(join(UT.visas, STRUKTURKORTEN_ALLA.fil), bytes);
+  manifest.visas[STRUKTURKORTEN_ALLA.nyckel] = { summa: allasSumma, kort: visas.map((s) => s.id), kb: Math.round(bytes.length / 1024) };
+  console.log(`Filen med alla kort: ${visas.length} kort på ${doc.getPageCount()} sidor, ${Math.round(bytes.length / 1024)} kB.`);
 }
-for (const [del, mapp] of Object.entries(UT)) {
-  if (!Object.keys(manifest[del]).length) continue;
-  mkdirSync(mapp, { recursive: true });
+
+for (const [del, fil] of Object.entries(MANIFEST)) {
+  if (!Object.keys(manifest[del]).length && !existsSync(fil)) continue;
+  mkdirSync(dirname(fil), { recursive: true });
   const sorterad = Object.fromEntries(Object.entries(manifest[del]).sort(([a], [b]) => a.localeCompare(b)));
-  writeFileSync(join(mapp, 'kort.json'), JSON.stringify(sorterad, null, 2) + '\n');
+  writeFileSync(fil, JSON.stringify(sorterad, null, 2) + '\n');
 }
 const kb = attGora.reduce((a, s) => a + (manifest[delen(s)][s.id]?.kb ?? 0), 0);
-console.log(`Strukturkorten: ${attGora.length} kort, ${kb} kB.`);
+if (attGora.length) console.log(`Strukturkorten: ${attGora.length} kort, ${kb} kB.`);
 if (korta.length) console.log(`  ! ryms inte i ${KORTETS_STANDARD.steg} punkter, texter att korta (${korta.length}): ${korta.join(', ')}`);
 if (fel.length) { console.error(`Strukturkorten stannade:\n  ${fel.join('\n  ')}`); process.exit(1); }

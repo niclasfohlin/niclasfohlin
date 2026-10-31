@@ -15,5 +15,24 @@ kalla:
   rubrik: Lyssna och skriv
   commit: b492447
   summa: 556abc0d
-bild: { scen: lyssna-och-skriv, alt: "Läraren står vid gruppens bord och läser högt ur en text som hen håller i båda händerna, med en bok i pratbubblan. Tre elever sitter vid bordet, lutar sig mot läraren och tittar på hen. Var och en har ett papper med fyra rutor i en rad, där den första rutan har en cirkel och de andra är tomma, och pennorna ligger nedlagda bredvid. En av eleverna har en kvadrat i en tankebubbla." }
-utkast: true
+bild:
+  scen: lyssna-och-skriv
+  alt: Läraren står vid gruppens bord och läser högt ur en text som hen håller i båda händerna, med en bok i pratbubblan. Tre elever sitter vid bordet, lutar sig mot läraren och tittar på hen. Var och en har ett papper med fyra rutor i en rad, där den första rutan har en cirkel och de andra är tomma, och pennorna ligger nedlagda bredvid. En av eleverna har en kvadrat i en tankebubbla.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: NO
+    text: Du ska läsa en text om hur bin gör honung och har delat den i fyra delar. Eleverna sitter i grupper om fyra med var sitt papper med fyra rutor. De lägger ned pennorna medan du läser första delen och skriver sedan tre eller fyra nyckelord i den första rutan. I gruppen läser de upp sina ord och jämför dem. Du läser nästa del och eleverna gör likadant, och när texten är slut sammanfattar gruppen den tillsammans.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen övar att sammanfatta med egna ord. Du läser en nyhetsartikel om en skolgård som har byggts om, delad i tre delar, för grupper om tre. Eleverna lyssnar med pennorna nedlagda, skriver sedan tre eller fyra nyckelord i rutan för delen och jämför orden i gruppen. Du läser nästa del, och eleverna gör likadant. Till sist skriver gruppen en sammanfattning på tre meningar med nyckelorden som stöd.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen arbetar med ränta, och eleverna sitter i grupper om tre. Du läser en text i tre delar om en elev som sätter in 5 000 kronor på ett konto med fem procents ränta, en del för varje år. Pennorna ligger nedlagda under läsningen, och efter varje del skriver eleverna enskilt tre eller fyra nyckelord, som ränta, år och belopp, och jämför dem i gruppen. Du läser nästa del, och eleverna gör likadant. Till sist sammanfattar gruppen hur beloppet växer och varför ökningen blir lite större för varje år.
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: Du läser en berättelse om en flicka som inte får vara med i leken, delad i tre delar. Eleverna sitter i grupper om tre med var sitt papper med tre rutor. Under läsningen ligger pennorna nedlagda, och efter varje del skriver eleverna tre ord om vad som hände och vad flickan kände. De visar orden för varandra och pratar om varför de valde dem. När berättelsen är slut berättar gruppen tillsammans vad den handlade om.
+utkast: false

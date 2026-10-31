@@ -15,5 +15,24 @@ kalla:
   rubrik: Formulera, dela, lyssna, skapa
   commit: b492447
   summa: 9b67308a
-bild: { scen: formulera-dela-lyssna-skapa, alt: "Två elever sitter vid ett bord. Framför den vänstra ligger ett papper med en triangel och framför den högra ett papper med en kvadrat. Från båda papperen går en pil till ett papper i mitten med en stjärna. Eleven till vänster pekar på mittpapperet och har en stjärna i pratbubblan, och eleven till höger skriver på det med en penna." }
-utkast: true
+bild:
+  scen: formulera-dela-lyssna-skapa
+  alt: Två elever sitter vid ett bord. Framför den vänstra ligger ett papper med en triangel och framför den högra ett papper med en kvadrat. Från båda papperen går en pil till ett papper i mitten med en stjärna. Eleven till vänster pekar på mittpapperet och har en stjärna i pratbubblan, och eleven till höger skriver på det med en penna.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen har läst ett kapitel i högläsningsboken, och du frågar: Varför tror du att huvudpersonen inte berättar för sin kompis vad som hände? Eleverna vänder sig till närmaste kamrat och formulerar var för sig sitt svar. De delar sina svar och lyssnar färdigt på varandra utan att avbryta. Sedan bygger paret ett gemensamt svar som är bättre än båda de första och stöder sig på en mening ur kapitlet. Du slumpar fram tre elever som läser upp vad deras par kom fram till."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva noveller, och du skriver en situation på tavlan: En pojke vaknar och huset är tomt. Du frågar: Vilken första mening får läsaren att vilja läsa vidare? Eleverna vänder sig till närmaste kamrat och skriver var för sig en första mening. De läser upp sina meningar för varandra och lyssnar färdigt utan att avbryta, och sedan skriver paret en gemensam mening som är bättre än båda de första. Du slumpar fram några elever som läser upp vad deras par kom fram till."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Klassen i åk 1 övar på att dela upp tal, och du frågar: På hur många sätt kan man dela upp åtta kulor i två högar? Eleverna vänder sig till närmaste kamrat och ritar eller skriver var för sig sitt svar. De visar varandra och lyssnar färdigt utan att avbryta. Sedan gör paret en gemensam lista där inget sätt saknas. Du slumpar fram några elever som visar sin och kamratens lista för klassen."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen har pratat om att några ofta sitter själva i matsalen. Du ställer frågan: Vad kan vi göra för att alla ska ha någon att sitta med? Eleverna vänder sig till närmaste kamrat och formulerar var för sig ett förslag. De delar sina förslag, lyssnar färdigt utan att avbryta och bygger ett gemensamt förslag som är bättre än de två första. Du slumpar fram några elever som berättar för klassen vad de kom fram till i paret."
+utkast: false

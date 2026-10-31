@@ -16,5 +16,24 @@ kalla:
   rubrik: Snöbollen
   commit: b492447
   summa: 077c5e32
-bild: { scen: snobollen, alt: "Två led av elever står mot varandra med en streckad linje på golvet emellan, de i gula tröjor till vänster och de i blå till höger, och de lutar sig mot linjen. Längst fram till vänster kastar en elev en gul pappersboll, och i det blå ledet håller en elev en blå boll i den lyfta handen. Över linjen flyger en gul och en blå boll, och två bollar ligger på golvet. I det gula ledet håller en elev upp en blå lapp med en triangel framför sig, och pratbubblan visar en triangel. Längst fram till höger håller en elev i blå tröja en gul lapp med en triangel, och hens pratbubbla visar också en triangel." }
-utkast: true
+bild:
+  scen: snobollen
+  alt: Två led av elever står mot varandra med en streckad linje på golvet emellan, de i gula tröjor till vänster och de i blå till höger, och de lutar sig mot linjen. Längst fram till vänster kastar en elev en gul pappersboll, och i det blå ledet håller en elev en blå boll i den lyfta handen. Över linjen flyger en gul och en blå boll, och två bollar ligger på golvet. I det gula ledet håller en elev upp en blå lapp med en triangel framför sig, och pratbubblan visar en triangel. Längst fram till höger håller en elev i blå tröja en gul lapp med en triangel, och hens pratbubbla visar också en triangel.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen har läst en faktabok om djur i skogen. Hälften av eleverna får en gul lapp med ett djurs namn, till exempel igelkott, och hälften en blå lapp med en mening om ett djur, till exempel ”Den rullar ihop sig när den blir rädd”. Eleverna ställer sig i två led mot varandra, skrynklar lapparna och kastar dem över linjen när du ger signalen. Var och en plockar upp en boll, söker upp den vars lapp hör ihop med den egna och berättar varför djuret och meningen passar.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen övar på att välja verb som visar läsaren hur något händer. Hälften får en gul lapp med en mening, som ”Pojken smög in i rummet” eller ”Pojken rusade in i rummet”, och hälften en blå lapp med ett skäl, som ”Han ville inte väcka sin lillasyster” eller ”Bussen skulle gå om en minut”. Eleverna skrynklar lapparna, kastar dem över linjen på din signal, plockar upp varsin boll och söker upp den vars lapp hör ihop med deras. Paret berättar för varandra varför verbet passar till skälet.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen arbetar med att multiplicera in i parenteser. Du ger hälften av eleverna en gul lapp med ett uttryck, till exempel 3(x + 2), och hälften en blå lapp med samma uttryck utan parentes, till exempel 3x + 6. Eleverna ställer sig i två led, skrynklar lapparna och kastar dem över linjen när du ger signalen. Var och en plockar upp en boll, söker upp den vars uttryck hör ihop med det egna och förklarar för varandra hur man kommer från det ena till det andra.
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: Klassen pratar om hur man kan hjälpa varandra på rasten. De gula lapparna beskriver en situation, till exempel ”En kompis står ensam vid gungorna”, och de blå något man kan säga eller göra, till exempel ”Du kan vara med oss”. Eleverna skrynklar lapparna till bollar, kastar dem över linjen på din signal och plockar upp en boll var. Sedan söker de upp den vars lapp hör ihop med deras och berättar för varandra varför det är ett bra sätt att lösa situationen.
+utkast: false

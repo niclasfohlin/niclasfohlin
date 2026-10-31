@@ -17,5 +17,24 @@ kalla:
   rubrik: Se och lär
   commit: b492447
   summa: 9ccd11a8
-bild: { scen: se-och-lar, alt: "Tre elever sitter vid ett bord i mitten med ett gemensamt papper. Den ena talar till den andra, och pratbubblan visar ett hjärta, och den andra skrattar. Runt bordet står fyra elever med papper och penna, och på varje papper står ett hjärta. De skriver och tittar på dem vid bordet, och den längst till vänster har ett hjärta i tankebubblan." }
-utkast: true
+bild:
+  scen: se-och-lar
+  alt: Tre elever sitter vid ett bord i mitten med ett gemensamt papper. Den ena talar till den andra, och pratbubblan visar ett hjärta, och den andra skrattar. Runt bordet står fyra elever med papper och penna, och på varje papper står ett hjärta. De skriver och tittar på dem vid bordet, och den längst till vänster har ett hjärta i tankebubblan.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen övar på att tänka högt när man läser en svår text. Du och klassen bestämmer hur det syns och hur det låter, till exempel att läsaren stannar vid ett ord, säger ”Jag förstår inte det här” och läser om meningen. Du väljer tre elever som kan det väl, och de läser i tur och ordning ett stycke högt medan de andra observerar och skriver ned vad de ser och hör. Eleverna jämför sina anteckningar i par, och du sammanfattar i helklass vad som sågs och vad som kan tränas mer.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen övar på kamratrespons inför novellskrivandet. Du och klassen bestämmer hur en bra respons syns och låter, till exempel att den börjar med vad som fungerar och sedan ställer en fråga om det som är oklart. Du väljer tre elever som kan det väl, och de ger respons på ett kort textutdrag på tavlan medan de andra observerar och skriver ned vad de ser och hör. Eleverna diskuterar sina iakttagelser i grupper om fyra, och du sammanfattar i helklass vad som sågs och vad klassen kan träna mer.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Klassen övar på att räkna med tiotalsövergång. Du och klassen bestämmer hur det syns och hur det låter, till exempel att man delar upp det andra talet i tiotal och ental och säger högt vad man gör. Du väljer tre elever som kan det väl, och de räknar 28 + 15 med tiobasmaterial medan de andra observerar och skriver ned vad de ser och hör. Eleverna berättar för en kompis vad de såg, och du sammanfattar i helklass vad som kan tränas mer.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Klassen övar på att säga ifrån lugnt. Du och klassen bestämmer hur det syns och hur det låter, till exempel rak rygg, ögonkontakt, lugn röst och en mening som börjar med ”Jag”. Du väljer tre elever som klarar det väl, och de spelar upp en kort situation där någon säger ifrån medan de andra observerar och skriver ned vad de ser och hör. Eleverna diskuterar sina iakttagelser i par, och du sammanfattar i helklass vad som sågs och vad klassen kan träna mer.
+utkast: false

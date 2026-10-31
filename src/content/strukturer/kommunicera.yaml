@@ -18,5 +18,24 @@ kalla:
   rubrik: Kommunicera
   commit: b492447
   summa: fd8c6f77
-bild: { scen: kommunicera, alt: "Två elever sitter bredvid varandra bakom ett bord, och mellan dem står en hög skärm. Eleven i orange tröja har ett papper med en stor triangel framför sig och beskriver den, och pratbubblan visar en triangel. Eleven i lila tröja på andra sidan skärmen ritar en liten triangel på sitt papper och ställer en fråga, och pratbubblan visar ett frågetecken. Längst fram till vänster står en elev i grön tröja med ett block, tittar på den som beskriver och antecknar." }
-utkast: true
+bild:
+  scen: kommunicera
+  alt: Två elever sitter bredvid varandra bakom ett bord, och mellan dem står en hög skärm. Eleven i orange tröja har ett papper med en stor triangel framför sig och beskriver den, och pratbubblan visar en triangel. Eleven i lila tröja på andra sidan skärmen ritar en liten triangel på sitt papper och ställer en fråga, och pratbubblan visar ett frågetecken. Längst fram till vänster står en elev i grön tröja med ett block, tittar på den som beskriver och antecknar.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: NO
+    text: "Klassen har läst en faktatext om vattnets kretslopp. Du delar in eleverna i grupper om tre, sätter berättaren och lyssnaren mitt emot varandra med en pärm emellan och ger observatören papper och penna. Berättaren får textens bild av kretsloppet, som lyssnaren inte ser, och beskriver den med textens ord så tydligt hen kan. Lyssnaren ritar och ställer motfrågor som: Åt vilket håll går pilen? Observatören antecknar vad som fungerar och vad som kan bli bättre och ger sina tips, och berättaren fortsätter med dem."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen ska skriva en beskrivande text om ett djur. Du delar in eleverna i grupper om tre, ställer en pärm mellan berättaren och lyssnaren och ger observatören papper och penna. Berättaren beskriver en bild på ett djur som lyssnaren inte ser, och lyssnaren ritar och frågar, till exempel: Hur stora är öronen? Observatören skriver upp orden som hjälpte lyssnaren och ger sina tips, och berättaren fortsätter beskriva med dem. Orden blir sedan gruppens ordlista när var och en skriver sin text."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen arbetar med linjära funktioner. Du delar in eleverna i grupper om tre, ställer en pärm mellan berättaren och lyssnaren och ger observatören papper och penna. Berättaren får ett koordinatsystem med en rät linje, som lyssnaren inte ser, och beskriver var linjen skär y-axeln och hur brant den går. Lyssnaren ritar linjen och ställer motfrågor. Observatören antecknar vilka begrepp som fungerade och vad som saknades och ger sina tips, och berättaren fortsätter med dem.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: livskunskap
+    text: Klassen övar att göra sig förstådd och att lyssna. Du delar in eleverna i grupper om tre, ställer en pärm mellan berättaren och lyssnaren och ger observatören papper och penna. Berättaren får en teckning som lyssnaren inte ser, till exempel en elev som står ensam på rasten medan de andra leker, och beskriver vad som händer och hur eleverna i bilden kan känna sig. Lyssnaren ritar och ställer motfrågor. Observatören antecknar vad som fungerar och vad som kan bli bättre och ger sina tips, och berättaren fortsätter med dem.
+utkast: false

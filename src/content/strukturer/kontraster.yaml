@@ -16,5 +16,24 @@ kalla:
   rubrik: Kontraster
   commit: b492447
   summa: dee71d85
-bild: { scen: kontraster, alt: "Till vänster står en elev med ett papper med en röd bok och tittar efter en kamrat som går förbi. Kamraten i mitten är på väg och har också en röd bok på sitt papper. Hen pekar på papperet hos en elev till höger, som har gröna kugghjul, och pratbubblan visar både boken och kugghjulen. Eleven till höger håller fram sitt papper och tittar på boken." }
-utkast: true
+bild:
+  scen: kontraster
+  alt: Till vänster står en elev med ett papper med en röd bok och tittar efter en kamrat som går förbi. Kamraten i mitten är på väg och har också en röd bok på sitt papper. Hen pekar på papperet hos en elev till höger, som har gröna kugghjul, och pratbubblan visar både boken och kugghjulen. Eleven till höger håller fram sitt papper och tittar på boken.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen har lyssnat på sagan om räven och korpen, och den öppna frågan är: Var det rätt av räven att lura korpen? Eleverna får tanketid och skriver sitt svar i en mening. De går runt och letar efter någon som tänkt annorlunda, och bildar par eller små grupper om tre till fyra. De berättar för varandra vad de tänkt och varför, och talar om varför de har tänkt på olika sätt. Till sist skriver var och en ned vad hen tycker nu."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva en debattartikel, och den öppna frågan är: Vilket sätt att börja är bäst, med en fråga, en siffra eller en kort berättelse? Eleverna får tanketid och skriver sitt svar. De går runt och letar efter någon som tänkt annorlunda, och bildar par eller små grupper om tre till fyra. De berättar vad de tänkt och varför, och talar om varför de har tänkt på olika sätt. Till sist skriver var och en ned vad hen tycker nu."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen arbetar med division, och den öppna frågan är: Hur kan 24 kex delas rättvist mellan 5 barn? Eleverna får tanketid och skriver sitt svar med en bild eller ett tal. De går runt och letar efter någon som tänkt annorlunda, och bildar par eller små grupper om tre till fyra. De berättar vad de tänkt och varför, och talar om varför de har kommit fram till olika svar. Till sist skriver var och en ned vad hen nu tycker är det rättvisaste sättet."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "På mentorstiden ställer du den öppna frågan: Vad behövs mest för att en klass ska fungera bra? Eleverna får tanketid och skriver sitt svar. De går runt och letar efter någon som tänkt annorlunda, och bildar par eller små grupper om tre till fyra. De berättar vad de tänkt och varför, och talar om varför de har tänkt på olika sätt. Till sist skriver var och en ned vad hen tycker nu."
+utkast: false

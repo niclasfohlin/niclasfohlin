@@ -17,5 +17,24 @@ kalla:
   rubrik: PPT – Par på tid
   commit: b492447
   summa: db36fc1d
-bild: { scen: ppt-par-pa-tid, alt: "Två elever vänder sig mot varandra, och högt upp mellan dem hänger en stor klocka. Eleven till vänster pratar och visar med öppen hand mot kamraten, och pratbubblan visar en triangel. Eleven till höger ler och tittar på den som pratar." }
-utkast: true
+bild:
+  scen: ppt-par-pa-tid
+  alt: Två elever vänder sig mot varandra, och högt upp mellan dem hänger en stor klocka. Eleven till vänster pratar och visar med öppen hand mot kamraten, och pratbubblan visar en triangel. Eleven till höger ler och tittar på den som pratar.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen har läst ett kapitel i en roman, och du delar upp eleverna i par. Du bestämmer att den som fyller år först på året börjar, och ställer frågan: Vad tror du händer i nästa kapitel, och vad i texten får dig att tro det? Efter minst trettio sekunders tanketid säger du Par på tid och startar klockan på en minut. Den ena talar tills klockan ringer, sedan byter paret roller och den andra bygger vidare på det som sas först. Du slumpar fram några par som lyfter sina tankar för klassen."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen skriver berättelser, och innan eleverna skriver sina slut delar du upp dem i par och bestämmer att den som fyller år först på året börjar. Du ställer frågan: Vad gör att ett slut känns bra för läsaren? Efter minst trettio sekunders tanketid säger du Par på tid och startar klockan, och den ena talar tills den ringer. Sedan byter paret roller, och den andra bygger vidare på det som sas först. Du slumpar fram några par som lyfter sina tankar för klassen innan alla skriver."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Du delar upp klassen i par, och den som bor närmast skolan börjar. Du skriver 12, 21, 27, 45 och 51 på tavlan och frågar: Alla talen går att dela med 3, så vad har de gemensamt? Efter minst trettio sekunders tanketid säger du Par på tid och startar klockan, och den ena talar tills den ringer. Paret byter roller, och den andra bygger vidare på det som sas först. Du slumpar fram några par som berättar för klassen vad de kom fram till."
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: "Du delar upp klassen i par, och den som fyller år först på året börjar. Du ställer frågan: Vad gör du när du blir arg på en kompis? Efter minst trettio sekunders tanketid säger du Par på tid och startar en timer på en halv minut som alla ser, och den ena talar tills den ringer. Paret byter roller, och den andra bygger vidare på det som sas först. Du slumpar fram några par som berättar för klassen vad de kom fram till."
+utkast: false

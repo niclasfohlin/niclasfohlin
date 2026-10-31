@@ -888,3 +888,9 @@ export declare function strukturensSumma(s: { namn?: string; andra?: string[]; s
 export declare function strukturensFel(s: { namn?: string; andra?: string[]; syfte?: string; kalla?: { summa: string }; slag?: string; steg?: string[]; bild?: { scen?: string; alt?: string }; forslag?: { omrade: string; arskurs: string; amne?: string; text: string }[]; utkast?: boolean }): string[];
 /** Arken när strukturkort skrivs ut två och två: framsidorna och sedan baksidorna i samma ordning, med kortens platser. */
 export declare function strukturkortensArk(antal: number): { del: 'fram' | 'bak'; uppe: number; nere: number | null }[];
+/** Kontrollsumman över det ett strukturkort visar: namnet, slaget, stegen och scenens fil. */
+export declare function strukturkortetsInnehall(s: { namn: string; slag: string; steg: string[] }, scen: string): string;
+/** Kortets fil, strukturkort-<id>.pdf. */
+export declare function strukturkortetsFil(id: string): string;
+/** Filen med alla strukturkort och dess nyckel i manifestet. */
+export declare const STRUKTURKORTEN_ALLA: Readonly<{ fil: string; nyckel: string }>;

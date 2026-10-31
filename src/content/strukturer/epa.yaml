@@ -15,5 +15,24 @@ kalla:
   rubrik: EPA
   commit: b492447
   summa: 7a8e7d63
-bild: { scen: epa, alt: "Två elever vänder sig mot varandra och visar med handen. Över var och en står en egen tankebubbla, en triangel hos den ena och en kvadrat hos den andra. Mellan dem står en pratbubbla med både triangeln och kvadraten." }
-utkast: true
+bild:
+  scen: epa
+  alt: Två elever vänder sig mot varandra och visar med handen. Över var och en står en egen tankebubbla, en triangel hos den ena och en kvadrat hos den andra. Mellan dem står en pratbubbla med både triangeln och kvadraten.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Du läser högt ur en saga om en räv som är rädd för mörkret och stannar mitt i. Du frågar: Vad tror du att räven gör sedan, och vad i sagan får dig att tänka så? Var och en tänker en stund, sedan berättar eleverna sin gissning för varandra i paren. Du låter några par berätta för klassen vad de kom fram till."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva en debattartikel om skolmaten. Du frågar: Vilket är det starkaste argumentet för din åsikt, och vilken invändning måste du bemöta? Var och en tänker och skriver några stolpar, sedan prövar eleverna sina argument på varandra i paren. Du låter fyra par berätta för klassen vilket argument de skulle börja med."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen arbetar med area. Du frågar: Vilka rektanglar med hela centimeter som sidor har arean 24 kvadratcentimeter, och hur vet du att du har hittat alla? Var och en tänker och ritar en stund, sedan jämför eleverna i paren sina rektanglar och hur de vet att ingen fattas. Du låter några par visa sitt sätt på tavlan för klassen."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen har klassråd, och rasterna har blivit stökiga. Du frågar: Vad skulle få rasten att fungera för alla, och vad kan du göra själv? Var och en tänker en stund, sedan pratar eleverna i paren och väljer ett förslag. Du låter paren berätta sina förslag för klassen och skriver dem på tavlan."
+utkast: false

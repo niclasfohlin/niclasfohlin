@@ -15,5 +15,24 @@ kalla:
   rubrik: Läs-rita-redovisa
   commit: b492447
   summa: 185fb68f
-bild: { scen: las-rita-redovisa, alt: "Fyra elever sitter runt ett bord med ett stort gemensamt papper i mitten, gruppens karta, där en grön och en blå form redan är ritade och förbundna med linjer. Eleven till vänster håller ett papper med text och berättar, med en triangel i pratbubblan. En elev bakom bordet ritar en triangel på kartan med en penna och har en triangel i en tankebubbla. En annan pekar på kartan, och den fjärde tittar på den." }
-utkast: true
+bild:
+  scen: las-rita-redovisa
+  alt: Fyra elever sitter runt ett bord med ett stort gemensamt papper i mitten, gruppens karta, där en grön och en blå form redan är ritade och förbundna med linjer. Eleven till vänster håller ett papper med text och berättar, med en triangel i pratbubblan. En elev bakom bordet ritar en triangel på kartan med en penna och har en triangel i en tankebubbla. En annan pekar på kartan, och den fjärde tittar på den.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: NO
+    text: Klassen läser om djur, och varje grupp får en egen text om ett djur, till exempel igelkotten eller vargen, delad i tre stycken. Eleverna läser första stycket var för sig och skriver ett ord om det som fastnade. Gruppen pratar om vad stycket berättar. Eleverna ritar och skriver stycket på en gemensam karta och tar sedan nästa stycke på samma sätt. Till sist visar varje grupp sin karta för de andra grupperna.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Inför ett skrivprojekt får varje grupp en egen förebild att undersöka, en debattartikel, en recension, en novell eller ett reportage, delad i tre stycken. Eleverna läser första stycket var för sig och antecknar vad stycket gör för läsaren. De pratar om det i gruppen och ritar sedan på kartan hur stycket är byggt. Gruppen gör samma sak med de andra styckena. Varje grupp redovisar sin karta för de andra grupperna, så att alla ser hur fyra olika texter är uppbyggda.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Varje grupp får en egen textuppgift i tre stycken, till exempel en där ett recept ger 12 bullar med 3 dl mjölk, klassen behöver 30 bullar och frågan är hur mycket mjölk som går åt. Eleverna läser första stycket var för sig och skriver vad man vet eller vad som frågas efter. De pratar om stycket och ritar sedan situationen på kartan, med tal och bilder. Så fortsätter de stycke för stycke tills hela uppgiften är ritad. Varje grupp redovisar kartan för de andra grupperna och visar hur de kom fram till svaret.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: Varje grupp får en egen text om en konflikt mellan två elever, delad i tre stycken som visar hur den börjar, vad som händer och hur den slutar. Eleverna läser första stycket var för sig och antecknar en tanke om vad var och en i texten kan ha känt. De talar om stycket i gruppen och ritar och skriver det på kartan, med personerna och pilar för vad de gör mot varandra. Gruppen gör samma sak med de andra styckena. Varje grupp redovisar sin karta för de andra grupperna.
+utkast: false

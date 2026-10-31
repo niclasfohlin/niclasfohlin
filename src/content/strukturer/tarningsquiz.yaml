@@ -14,5 +14,24 @@ kalla:
   rubrik: Tärningsquiz
   commit: b492447
   summa: 54cec8cf
-bild: { scen: tarningsquiz, alt: "Två elever sitter vid en bänk med ett rutnät av tolv rutor mellan sig, och framför rutnätet står två tärningar, en gul och en blå. Den till vänster pekar på en gul ruta med ett frågetecken och läser frågan, och pratbubblan visar ett frågetecken. Den till höger skriver svaret på ett papper med en triangel." }
-utkast: true
+bild:
+  scen: tarningsquiz
+  alt: Två elever sitter vid en bänk med ett rutnät av tolv rutor mellan sig, och framför rutnätet står två tärningar, en gul och en blå. Den till vänster pekar på en gul ruta med ett frågetecken och läser frågan, och pratbubblan visar ett frågetecken. Den till höger skriver svaret på ett papper med en triangel.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen i åk 2 har läst en bok om en hund, och rutnätet har frågor om boken, som ”Var bor hunden?” och ”Vad hände sist i boken?” Du delar in eleverna i par, och paret bestämmer vem som börjar. Den som börjar slår tärningarna och hittar rutan som tärningarna pekar ut. Hen läser frågan högt, och paret pratar om svaret och skriver ned det tillsammans. Sedan slår kamraten, och paret fortsätter tills tiden är slut.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: engelska
+    text: I engelskan i åk 7 har rutnätet frågor på engelska, som ”What makes a good friend?” och ”What would you do if you won a million dollars?” Du delar in eleverna i par och delar ut rutnäten, och paren bestämmer vem som börjar. Den som börjar slår tärningarna och hittar rutan som tärningarna pekar ut. Hen läser frågan högt, och paret skriver tillsammans ett svar på två hela meningar på engelska. Sedan slår kamraten, och paret fortsätter tills tiden är slut.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Klassen i åk 6 repeterar procent, och rutnätet har uppgifter som ”Hur mycket är 25 procent av 80 kronor?” Du delar in eleverna i par eller grupper om tre, och de bestämmer vem som börjar. Den som börjar slår tärningarna och hittar rutan som tärningarna pekar ut. Gruppen läser uppgiften, räknar och skriver ned svaret tillsammans. Sedan är det nästa elevs tur att slå.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: På mentorstid i åk 8 har rutnätet frågor om hur man är en bra kompis, som ”Vad gör du om någon i gruppchatten blir utesluten?” Du delar in eleverna i grupper om tre eller fyra, och de bestämmer vem som börjar. Den som börjar slår tärningarna och hittar rutan som tärningarna pekar ut. Gruppen läser frågan, pratar om den och skriver ned ett svar som alla kan stå för. Sedan slår nästa elev, och gruppen fortsätter tills du avslutar.
+utkast: false

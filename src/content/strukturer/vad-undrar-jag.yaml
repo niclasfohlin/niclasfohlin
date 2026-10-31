@@ -16,5 +16,24 @@ kalla:
   rubrik: Vad undrar jag?
   commit: b492447
   summa: b7021ce3
-bild: { scen: vad-undrar-jag, alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger en hög med hopskrynklade gula lappar. Eleven i ljusblå tröja håller upp en uppvecklad lapp med vecken kvar och ett frågetecken och läser högt, och pratbubblan visar samma frågetecken. Eleverna i lila, turkos och ljusgrön tröja vänder sig mot den som läser." }
-utkast: true
+bild:
+  scen: vad-undrar-jag
+  alt: Fyra elever sitter runt ett bord, och mitt på bordet ligger en hög med hopskrynklade gula lappar. Eleven i ljusblå tröja håller upp en uppvecklad lapp med vecken kvar och ett frågetecken och läser högt, och pratbubblan visar samma frågetecken. Eleverna i lila, turkos och ljusgrön tröja vänder sig mot den som läser.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: NO
+    text: Du läser högt ur en faktabok om rymden, och eleverna sitter i grupper om fyra. Eleverna skriver var sin lapp med något de undrar över och skrynklar ihop den eller lägger den upp och ned mitt på bordet. En i gruppen drar en lapp och läser frågan högt, och gruppen pratar om vad de tänker och vad de kan om den. När de är klara drar de en ny lapp. Efter en stund bryter du och låter varje grupp dela en fråga med klassen.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen ska skriva argumenterande texter, och du går igenom hur en sådan är byggd medan eleverna sitter i grupper om fyra. Eleverna skriver var sin lapp med något de undrar över, till exempel hur man bemöter ett motargument, och skrynklar ihop den eller lägger den upp och ned mitt på bordet. En i gruppen drar en lapp och läser frågan högt, och gruppen pratar om vad de tänker och vad de kan om den. När de är klara drar de en ny lapp. Efter en stund bryter du och låter varje grupp dela en fråga med klassen.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Du går igenom hur man tar fram 10 och 25 procent av ett tal, och eleverna sitter i grupper om fyra. Eleverna skriver var sin lapp med något de undrar över, till exempel varför 25 procent är en fjärdedel, och skrynklar ihop den eller lägger den upp och ned mitt på bordet. En i gruppen drar en lapp och läser frågan högt, och gruppen pratar om vad de tänker och vad de kan om den. När de är klara drar de en ny lapp. Efter en stund bryter du och låter varje grupp dela en fråga med klassen.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: Du visar en kort film om hur sociala medier påverkar hur vi mår, och eleverna sitter i grupper om fyra. Eleverna skriver var sin lapp med något de undrar över, till exempel varför det är svårt att sluta skrolla, och skrynklar ihop den eller lägger den upp och ned mitt på bordet. En i gruppen drar en lapp och läser frågan högt, och gruppen pratar om vad de tänker och vad de kan om den. När de är klara drar de en ny lapp. Efter en stund bryter du och låter varje grupp dela en fråga med klassen.
+utkast: false

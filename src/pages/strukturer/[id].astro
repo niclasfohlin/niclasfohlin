@@ -1,0 +1,72 @@
+---
+// /strukturer/<id>: en struktur i verktyget Strukturer (K-650), i formen som valdes i fas 0 (underlag/prov/strukturer/
+// UPPDRAGET.md under Läget): namnet, slaget, bilden och knapparna först, och stegen och de fyra förslagen öppna under
+// (Niclas 2026-10-31: "Trycker man på en struktur ska man också kunna se ett användningsförslag i läsning, skrivning,
+// matematik och socialt"). Stegen är grundbokens bank, ordagrant, och kortet är samma steg och samma bild ur samma scen.
+// Förslagen står bara här, inte på kortet.
+import Base from '../../layouts/Base.astro';
+import Strukturlistan from '../../components/Strukturlistan.astro';
+import { strukturerna, strukturensAdress, bildensAdress, kortetsAdress, SLAGEN, OMRADENA, stegHtml, slagensStil, STRUKTURERNAS_ADRESS } from '../../lib/strukturer';
+import { symbol } from '../../../scripts/strukturer/symboler.mjs';
+
+export async function getStaticPaths() {
+  return (await strukturerna()).map((s) => ({ params: { id: s.id }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const d = s.data;
+const slag = SLAGEN.find((x) => x.slag === d.slag)!;
+const forslag = d.forslag ?? [];
+const beskrivning = `${d.syfte}. Strukturen ${d.namn} för ${slag.namn.toLowerCase() === 'klass' ? 'hela klassen' : slag.namn.toLowerCase() === 'grupp' ? 'grupper' : 'par'}, med stegen, förslag på användning och kortet att skriva ut.`;
+---
+
+<Base title={`${d.namn}: struktur`} description={beskrivning} tryckText={`© Niclas Fohlin · niclasfohlin.se${strukturensAdress(s.id)}`}>
+  <div class="st-yta">
+    <article class="st-sida st-struktur" data-slag={d.slag} style={slagensStil(d.slag)}>
+      <header>
+        <p class="meta brodsmula"><a href="/metoder">Metoder</a> · <a href={STRUKTURERNAS_ADRESS}>Strukturer</a> · {slag.namn}</p>
+        <h1>{d.namn}</h1>
+        <p class="st-slag"><Fragment set:html={symbol(d.slag)} />{slag.namn}</p>
+        {d.andra.length > 0 && <p class="st-andra">Kallas också {d.andra.join(', ')}</p>}
+        <p class="ingress st-syfte">{d.syfte}.</p>
+      </header>
+
+      <img class="st-sida-bild" src={bildensAdress(s.id)} alt={d.bild!.alt} width="900" height="560" />
+
+      <div class="st-utskrift">
+        <a class="knapp" href={kortetsAdress(s.id)} target="_blank" rel="noopener" data-skrivut-ett data-goatcounter-click={`utskrift:strukturer/${s.id}`} data-goatcounter-title={`${d.namn}: strukturkortet utskrivet`}>Skriv ut kortet</a>
+        <button type="button" class="knapp sekundar" data-valj={s.id} aria-pressed="false">Lägg i Att skriva ut</button>
+      </div>
+      <p class="st-utskriftsrad">Kortet är ett halvt A4. Skriv ut dubbelsidigt, vänd längs långsidan och klipp längs den streckade linjen.</p>
+
+      <h2 class="st-rubrik2">Steg</h2>
+      <ol class="st-steg">
+        {d.steg.map((t) => <li set:html={stegHtml(t)} />)}
+      </ol>
+
+      {forslag.length > 0 && (
+        <>
+          <h2 class="st-rubrik2">Förslag på användning</h2>
+          <div class="st-forslag">
+            {forslag.map((f) => (
+              <section style={`--amnefarg: ${OMRADENA[f.omrade as keyof typeof OMRADENA].farg}`}>
+                <h3>{OMRADENA[f.omrade as keyof typeof OMRADENA].namn} <span>· {f.arskurs.replace('–', '⁠–⁠')}, {f.amne}</span></h3>
+                <p>{f.text}</p>
+              </section>
+            ))}
+          </div>
+        </>
+      )}
+
+      <p class="st-tillbaka"><a href={STRUKTURERNAS_ADRESS}>Alla strukturer</a></p>
+      <p class="upphov">Strukturen kommer ur Niclas Fohlins bank för kooperativt lärande. Bilden och kortet © Niclas Fohlin.</p>
+    </article>
+    <Strukturlistan />
+  </div>
+</Base>
+
+<script>
+  import { ettkortLank } from '../../scripts/pdfutskrift';
+  const lank = document.querySelector<HTMLAnchorElement>('[data-skrivut-ett]');
+  if (lank) ettkortLank(lank);
+</script>

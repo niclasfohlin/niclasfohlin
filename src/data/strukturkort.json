@@ -1,0 +1,1623 @@
+{
+  "_alla": {
+    "summa": "175627cacf26ac08",
+    "kort": [
+      "anteckningspar",
+      "ape",
+      "epa",
+      "flashcardlek",
+      "formulera-dela-lyssna-skapa",
+      "hitta-min-regel",
+      "kloka-pennan",
+      "lika-och-olika",
+      "lasa-och-forklara-i-par",
+      "parrespons",
+      "ping-pong-prat",
+      "ppt-par-pa-tid",
+      "rita-byt-och-skriv",
+      "samtalspromenad",
+      "sanningsjakten",
+      "skriv-byt-matcha",
+      "skriva-och-redigera-i-par",
+      "turas-om",
+      "tva-loser-problem",
+      "tarningsquiz",
+      "ova-och-kontrollera-i-par",
+      "5-3-1",
+      "brainstorm",
+      "bygga-en-triangel",
+      "byt-och-sortera",
+      "en-far-ga",
+      "en-for-alla",
+      "epk",
+      "huvuden-ihop",
+      "inspireras",
+      "karusellen",
+      "kims-prov",
+      "kommunicera",
+      "konstruktiv-debatt",
+      "kooperativ-fyrfaltare",
+      "kooperativ-redovisning",
+      "kunskapskedjan",
+      "lyssna-och-skriv",
+      "lar-klassen",
+      "lar-varandra",
+      "las-med-roller",
+      "las-och-fraga",
+      "las-rita-redovisa",
+      "laxkontroll-i-grupp",
+      "motas-pa-mitten",
+      "par-pussel",
+      "provet-tva-ganger",
+      "pussel",
+      "rondellen",
+      "rubriceringsspel",
+      "runda-bordet",
+      "rosta",
+      "samtalstrappan",
+      "sant-eller-falskt",
+      "sekvenser",
+      "skicka-ett-problem",
+      "skissa-och-skriv",
+      "skriva-med-fokus",
+      "snobollar-i-mitten",
+      "solfjader",
+      "sortering",
+      "talkort",
+      "topplistan",
+      "trestegsintervju",
+      "vad-undrar-jag",
+      "vandrande-reportern",
+      "visa",
+      "beratta-mera",
+      "fraga-fraga-byt",
+      "hitta-en-kompis",
+      "hor-vi-ihop",
+      "hornsamtal",
+      "inre-yttre-cirkel",
+      "kontraster",
+      "mina-bilder-dina-bilder",
+      "mina-ord-dina-ord",
+      "pa-rad",
+      "pa-sightseeing",
+      "samtalsbingo",
+      "se-och-lar",
+      "snobollen",
+      "speed-dating",
+      "stationssamtal",
+      "stall-en-fraga",
+      "vem-ar-jag"
+    ],
+    "kb": 7156
+  },
+  "5-3-1": {
+    "innehall": "ac3bdc17",
+    "summa": "138151f07b9e7567",
+    "kb": 85,
+    "bild": {
+      "colours": 12,
+      "kb": 39
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "anteckningspar": {
+    "innehall": "b837a98e",
+    "summa": "6c2f0c66eb2fa088",
+    "kb": 67,
+    "bild": {
+      "colours": 12,
+      "kb": 27
+    },
+    "namn": {
+      "pt": 74,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "ape": {
+    "innehall": "2a3b6a2f",
+    "summa": "5fb3aa5b3ad5c50f",
+    "kb": 67,
+    "bild": {
+      "colours": 12,
+      "kb": 26
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "beratta-mera": {
+    "innehall": "dacdd18c",
+    "summa": "1c3956727710e896",
+    "kb": 171,
+    "bild": {
+      "colours": 24,
+      "kb": 82
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "brainstorm": {
+    "innehall": "646e9e85",
+    "summa": "89b814eb1e6a16da",
+    "kb": 173,
+    "bild": {
+      "colours": 24,
+      "kb": 84
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "bygga-en-triangel": {
+    "innehall": "bd71e8ec",
+    "summa": "22ace18da022ab67",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 34
+    },
+    "namn": {
+      "pt": 66,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "byt-och-sortera": {
+    "innehall": "64244177",
+    "summa": "762bcda32326b197",
+    "kb": 83,
+    "bild": {
+      "colours": 12,
+      "kb": 35
+    },
+    "namn": {
+      "pt": 74,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "en-far-ga": {
+    "innehall": "a35a03f8",
+    "summa": "38de97734ef3e652",
+    "kb": 166,
+    "bild": {
+      "colours": 24,
+      "kb": 81
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "en-for-alla": {
+    "innehall": "ed958555",
+    "summa": "f5bb206272de6087",
+    "kb": 84,
+    "bild": {
+      "colours": 12,
+      "kb": 37
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "epa": {
+    "innehall": "cd081348",
+    "summa": "717a859385b04d3d",
+    "kb": 67,
+    "bild": {
+      "colours": 12,
+      "kb": 27
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "epk": {
+    "innehall": "27d5efd5",
+    "summa": "d55c2ce4360186ca",
+    "kb": 73,
+    "bild": {
+      "colours": 12,
+      "kb": 30
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "flashcardlek": {
+    "innehall": "31b8f69a",
+    "summa": "eb5b1972a73aadfa",
+    "kb": 68,
+    "bild": {
+      "colours": 12,
+      "kb": 26
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "formulera-dela-lyssna-skapa": {
+    "innehall": "17371dea",
+    "summa": "4bacd7da6b872736",
+    "kb": 59,
+    "bild": {
+      "colours": 12,
+      "kb": 21
+    },
+    "namn": {
+      "pt": 56,
+      "rader": 2
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "fraga-fraga-byt": {
+    "innehall": "aa6b7a9e",
+    "summa": "101967218d0db57c",
+    "kb": 172,
+    "bild": {
+      "colours": 24,
+      "kb": 82
+    },
+    "namn": {
+      "pt": 68,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "hitta-en-kompis": {
+    "innehall": "6071ae1f",
+    "summa": "b4cd8bff18f9530e",
+    "kb": 84,
+    "bild": {
+      "colours": 12,
+      "kb": 34
+    },
+    "namn": {
+      "pt": 76,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "hitta-min-regel": {
+    "innehall": "98b18d81",
+    "summa": "ea4a4e043b221779",
+    "kb": 84,
+    "bild": {
+      "colours": 12,
+      "kb": 36
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "hor-vi-ihop": {
+    "innehall": "fe2b5ece",
+    "summa": "d619f3181123520a",
+    "kb": 192,
+    "bild": {
+      "colours": 24,
+      "kb": 95
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "hornsamtal": {
+    "innehall": "6cc5c1e2",
+    "summa": "d0a652075d6e2ba3",
+    "kb": 199,
+    "bild": {
+      "colours": 24,
+      "kb": 97
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "huvuden-ihop": {
+    "innehall": "aadab898",
+    "summa": "3c8c8c4c72cffaa7",
+    "kb": 73,
+    "bild": {
+      "colours": 12,
+      "kb": 30
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "inre-yttre-cirkel": {
+    "innehall": "e2fd252f",
+    "summa": "6ab64bf4a348f97b",
+    "kb": 87,
+    "bild": {
+      "colours": 12,
+      "kb": 36
+    },
+    "namn": {
+      "pt": 74,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "inspireras": {
+    "innehall": "46d84ea2",
+    "summa": "5b282cfbd1f4e814",
+    "kb": 64,
+    "bild": {
+      "colours": 12,
+      "kb": 24
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "karusellen": {
+    "innehall": "40c02225",
+    "summa": "755966a37b8e806f",
+    "kb": 84,
+    "bild": {
+      "colours": 12,
+      "kb": 38
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "kims-prov": {
+    "innehall": "75969d4d",
+    "summa": "86aa29019159bd4b",
+    "kb": 83,
+    "bild": {
+      "colours": 12,
+      "kb": 37
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 16.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "kloka-pennan": {
+    "innehall": "c47b66b7",
+    "summa": "e6fa51826ca8d370",
+    "kb": 60,
+    "bild": {
+      "colours": 12,
+      "kb": 21
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "kommunicera": {
+    "innehall": "57b015d3",
+    "summa": "1b8f8441dd5f2628",
+    "kb": 73,
+    "bild": {
+      "colours": 12,
+      "kb": 29
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 16,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "konstruktiv-debatt": {
+    "innehall": "6055745e",
+    "summa": "7b2b9252c9b7c33b",
+    "kb": 86,
+    "bild": {
+      "colours": 12,
+      "kb": 37
+    },
+    "namn": {
+      "pt": 62,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 16,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "kontraster": {
+    "innehall": "0b3dc619",
+    "summa": "4e9805676d169f04",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 30
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "kooperativ-fyrfaltare": {
+    "innehall": "89330f44",
+    "summa": "978e93daf0311804",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 32
+    },
+    "namn": {
+      "pt": 56,
+      "rader": 2
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "kooperativ-redovisning": {
+    "innehall": "51948221",
+    "summa": "b66ad9cc3b1fe67c",
+    "kb": 206,
+    "bild": {
+      "colours": 24,
+      "kb": 105
+    },
+    "namn": {
+      "pt": 56,
+      "rader": 2
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "kunskapskedjan": {
+    "innehall": "6bb3e182",
+    "summa": "4c33a130d9a1bb0b",
+    "kb": 159,
+    "bild": {
+      "colours": 24,
+      "kb": 76
+    },
+    "namn": {
+      "pt": 74,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "lar-klassen": {
+    "innehall": "25a9e507",
+    "summa": "79c83f2825ffba86",
+    "kb": 196,
+    "bild": {
+      "colours": 24,
+      "kb": 99
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "lar-varandra": {
+    "innehall": "4b471ff8",
+    "summa": "7c05ce159faae205",
+    "kb": 176,
+    "bild": {
+      "colours": 24,
+      "kb": 88
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "las-med-roller": {
+    "innehall": "df571c66",
+    "summa": "316fd0e1bffefa9a",
+    "kb": 74,
+    "bild": {
+      "colours": 12,
+      "kb": 30
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "las-och-fraga": {
+    "innehall": "f87b45ae",
+    "summa": "02fce4e3356de580",
+    "kb": 67,
+    "bild": {
+      "colours": 12,
+      "kb": 25
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "las-rita-redovisa": {
+    "innehall": "ec5d65f2",
+    "summa": "be8e45a0de0d57dd",
+    "kb": 79,
+    "bild": {
+      "colours": 12,
+      "kb": 34
+    },
+    "namn": {
+      "pt": 66,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "lasa-och-forklara-i-par": {
+    "innehall": "d8f4e620",
+    "summa": "356a543a5365e4c3",
+    "kb": 67,
+    "bild": {
+      "colours": 12,
+      "kb": 25
+    },
+    "namn": {
+      "pt": 56,
+      "rader": 2
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "laxkontroll-i-grupp": {
+    "innehall": "45f55362",
+    "summa": "9749adc2700b532c",
+    "kb": 157,
+    "bild": {
+      "colours": 24,
+      "kb": 75
+    },
+    "namn": {
+      "pt": 62,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "lika-och-olika": {
+    "innehall": "0e565a65",
+    "summa": "04ba2f358c509030",
+    "kb": 71,
+    "bild": {
+      "colours": 12,
+      "kb": 28
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "lyssna-och-skriv": {
+    "innehall": "bc4d8ff1",
+    "summa": "c615757959147bb3",
+    "kb": 80,
+    "bild": {
+      "colours": 12,
+      "kb": 33
+    },
+    "namn": {
+      "pt": 72,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "mina-bilder-dina-bilder": {
+    "innehall": "05c57643",
+    "summa": "59d98f29a984da2d",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 30
+    },
+    "namn": {
+      "pt": 56,
+      "rader": 2
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "mina-ord-dina-ord": {
+    "innehall": "b8688123",
+    "summa": "8b516a28fb95ea05",
+    "kb": 80,
+    "bild": {
+      "colours": 12,
+      "kb": 31
+    },
+    "namn": {
+      "pt": 60,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "motas-pa-mitten": {
+    "innehall": "c348c85c",
+    "summa": "657dc864ff7b053e",
+    "kb": 157,
+    "bild": {
+      "colours": 24,
+      "kb": 75
+    },
+    "namn": {
+      "pt": 72,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "ova-och-kontrollera-i-par": {
+    "innehall": "4e0be37e",
+    "summa": "684717c566a7ed94",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 33
+    },
+    "namn": {
+      "pt": 56,
+      "rader": 2
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "pa-rad": {
+    "innehall": "a3597740",
+    "summa": "82c3b0107b74cd1f",
+    "kb": 201,
+    "bild": {
+      "colours": 24,
+      "kb": 103
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "pa-sightseeing": {
+    "innehall": "cbb4b4aa",
+    "summa": "94f7158cf6568173",
+    "kb": 212,
+    "bild": {
+      "colours": 24,
+      "kb": 110
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "par-pussel": {
+    "innehall": "6e9056f5",
+    "summa": "920fa95693f5b865",
+    "kb": 68,
+    "bild": {
+      "colours": 12,
+      "kb": 27
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "parrespons": {
+    "innehall": "6a5405b5",
+    "summa": "b2a8aae28fef1be4",
+    "kb": 63,
+    "bild": {
+      "colours": 12,
+      "kb": 24
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "ping-pong-prat": {
+    "innehall": "3e16e068",
+    "summa": "ecb4fc3fd38e07a0",
+    "kb": 67,
+    "bild": {
+      "colours": 12,
+      "kb": 26
+    },
+    "namn": {
+      "pt": 76,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "ppt-par-pa-tid": {
+    "innehall": "c3b35999",
+    "summa": "5feb961042419253",
+    "kb": 67,
+    "bild": {
+      "colours": 12,
+      "kb": 26
+    },
+    "namn": {
+      "pt": 72,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "provet-tva-ganger": {
+    "innehall": "49874d90",
+    "summa": "4c88cfd0a1a721bc",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 32
+    },
+    "namn": {
+      "pt": 64,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "pussel": {
+    "innehall": "2c368648",
+    "summa": "86541526ae055564",
+    "kb": 150,
+    "bild": {
+      "colours": 24,
+      "kb": 72
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "rita-byt-och-skriv": {
+    "innehall": "4ff8e6f7",
+    "summa": "ee2d57c9589a14b4",
+    "kb": 71,
+    "bild": {
+      "colours": 12,
+      "kb": 28
+    },
+    "namn": {
+      "pt": 62,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "rondellen": {
+    "innehall": "a0336c0d",
+    "summa": "c4ee61c2daef352e",
+    "kb": 68,
+    "bild": {
+      "colours": 12,
+      "kb": 26
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "rosta": {
+    "innehall": "28571174",
+    "summa": "9203759b0fdd0663",
+    "kb": 224,
+    "bild": {
+      "colours": 24,
+      "kb": 120
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "rubriceringsspel": {
+    "innehall": "caa5e9ec",
+    "summa": "6b45c6065c2046c4",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 33
+    },
+    "namn": {
+      "pt": 70,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "runda-bordet": {
+    "innehall": "d23d8d3e",
+    "summa": "9d4c12ae0d124543",
+    "kb": 161,
+    "bild": {
+      "colours": 24,
+      "kb": 75
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "samtalsbingo": {
+    "innehall": "4a0ca72a",
+    "summa": "d7635adcbb91b922",
+    "kb": 80,
+    "bild": {
+      "colours": 12,
+      "kb": 31
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "samtalspromenad": {
+    "innehall": "d51a019d",
+    "summa": "938b3d035f0bca4f",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 34
+    },
+    "namn": {
+      "pt": 64,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "samtalstrappan": {
+    "innehall": "8f7b03f2",
+    "summa": "32606e3b26d46b0d",
+    "kb": 68,
+    "bild": {
+      "colours": 12,
+      "kb": 25
+    },
+    "namn": {
+      "pt": 72,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "sanningsjakten": {
+    "innehall": "27fa7556",
+    "summa": "8fa87289330e0929",
+    "kb": 71,
+    "bild": {
+      "colours": 12,
+      "kb": 28
+    },
+    "namn": {
+      "pt": 76,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "sant-eller-falskt": {
+    "innehall": "8d7e728e",
+    "summa": "4b13fa8b45b57653",
+    "kb": 74,
+    "bild": {
+      "colours": 12,
+      "kb": 31
+    },
+    "namn": {
+      "pt": 72,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "se-och-lar": {
+    "innehall": "408e7c37",
+    "summa": "1feba918dc56a4ff",
+    "kb": 167,
+    "bild": {
+      "colours": 24,
+      "kb": 79
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "sekvenser": {
+    "innehall": "863e5fba",
+    "summa": "be03019dc090f81d",
+    "kb": 158,
+    "bild": {
+      "colours": 24,
+      "kb": 76
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "skicka-ett-problem": {
+    "innehall": "36cb848b",
+    "summa": "01934dbe825f9111",
+    "kb": 70,
+    "bild": {
+      "colours": 12,
+      "kb": 29
+    },
+    "namn": {
+      "pt": 64,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "skissa-och-skriv": {
+    "innehall": "6012e904",
+    "summa": "c04815e2545a445e",
+    "kb": 76,
+    "bild": {
+      "colours": 12,
+      "kb": 32
+    },
+    "namn": {
+      "pt": 74,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "skriv-byt-matcha": {
+    "innehall": "7d41202e",
+    "summa": "43f3e5ad62a7faee",
+    "kb": 64,
+    "bild": {
+      "colours": 12,
+      "kb": 24
+    },
+    "namn": {
+      "pt": 66,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "skriva-med-fokus": {
+    "innehall": "0ae608c0",
+    "summa": "c872a0fb53ab386c",
+    "kb": 80,
+    "bild": {
+      "colours": 12,
+      "kb": 34
+    },
+    "namn": {
+      "pt": 68,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "skriva-och-redigera-i-par": {
+    "innehall": "3a0178de",
+    "summa": "b53af833b3e5bb8f",
+    "kb": 69,
+    "bild": {
+      "colours": 12,
+      "kb": 27
+    },
+    "namn": {
+      "pt": 56,
+      "rader": 2
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "snobollar-i-mitten": {
+    "innehall": "487db0f2",
+    "summa": "7bb2d3fb706db277",
+    "kb": 78,
+    "bild": {
+      "colours": 12,
+      "kb": 33
+    },
+    "namn": {
+      "pt": 66,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "snobollen": {
+    "innehall": "b5c7c1ee",
+    "summa": "ca817a325c378631",
+    "kb": 228,
+    "bild": {
+      "colours": 24,
+      "kb": 116
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "solfjader": {
+    "innehall": "f437fe75",
+    "summa": "91ef6cfa53654c64",
+    "kb": 81,
+    "bild": {
+      "colours": 12,
+      "kb": 35
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "sortering": {
+    "innehall": "7356191d",
+    "summa": "2cdca73cb400881a",
+    "kb": 171,
+    "bild": {
+      "colours": 24,
+      "kb": 83
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "speed-dating": {
+    "innehall": "ce1a5120",
+    "summa": "48963f629f5165c6",
+    "kb": 75,
+    "bild": {
+      "colours": 12,
+      "kb": 29
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "stall-en-fraga": {
+    "innehall": "bdbcc246",
+    "summa": "456f7b43bf501054",
+    "kb": 82,
+    "bild": {
+      "colours": 12,
+      "kb": 34
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "stationssamtal": {
+    "innehall": "3cf9cc47",
+    "summa": "48d65a566c1ad686",
+    "kb": 183,
+    "bild": {
+      "colours": 24,
+      "kb": 90
+    },
+    "namn": {
+      "pt": 76,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "talkort": {
+    "innehall": "23989747",
+    "summa": "14bbdebf091237a0",
+    "kb": 73,
+    "bild": {
+      "colours": 12,
+      "kb": 31
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "tarningsquiz": {
+    "innehall": "1cea23a4",
+    "summa": "7d9b98d203a3269c",
+    "kb": 67,
+    "bild": {
+      "colours": 12,
+      "kb": 26
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "topplistan": {
+    "innehall": "a738b3f6",
+    "summa": "443b3493df333109",
+    "kb": 82,
+    "bild": {
+      "colours": 12,
+      "kb": 35
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "trestegsintervju": {
+    "innehall": "5673be5f",
+    "summa": "8d19ff03982de992",
+    "kb": 92,
+    "bild": {
+      "colours": 12,
+      "kb": 41
+    },
+    "namn": {
+      "pt": 70,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "turas-om": {
+    "innehall": "f986ea90",
+    "summa": "d4173e3734a98511",
+    "kb": 60,
+    "bild": {
+      "colours": 12,
+      "kb": 22
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "tva-loser-problem": {
+    "innehall": "2c9559c0",
+    "summa": "2076f09eb8f7bdba",
+    "kb": 71,
+    "bild": {
+      "colours": 12,
+      "kb": 28
+    },
+    "namn": {
+      "pt": 64,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "vad-undrar-jag": {
+    "innehall": "ac2b67df",
+    "summa": "31aa40ebb204025e",
+    "kb": 71,
+    "bild": {
+      "colours": 12,
+      "kb": 28
+    },
+    "namn": {
+      "pt": 74,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "vandrande-reportern": {
+    "innehall": "e342b9c9",
+    "summa": "d1f919646a05dc04",
+    "kb": 83,
+    "bild": {
+      "colours": 12,
+      "kb": 36
+    },
+    "namn": {
+      "pt": 56,
+      "rader": 2
+    },
+    "steg": {
+      "pt": 17.5,
+      "tat": true,
+      "rymsInte": false
+    }
+  },
+  "vem-ar-jag": {
+    "innehall": "4e8e268b",
+    "summa": "24a6d6c368464402",
+    "kb": 84,
+    "bild": {
+      "colours": 12,
+      "kb": 34
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "visa": {
+    "innehall": "4a57e3ee",
+    "summa": "9d91eee754ebdd23",
+    "kb": 71,
+    "bild": {
+      "colours": 12,
+      "kb": 29
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  }
+}

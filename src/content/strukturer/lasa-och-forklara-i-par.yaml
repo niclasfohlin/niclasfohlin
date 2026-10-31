@@ -16,5 +16,24 @@ kalla:
   rubrik: Läsa och förklara i par
   commit: b492447
   summa: c26021c9
-bild: { scen: lasa-och-forklara-i-par, alt: "Två elever sitter vid ett bord med en uppslagen text mellan sig. Eleven till vänster vänder sig mot kamraten och berättar med handen framför bröstet, och pratbubblan visar en kvadrat. Eleven till höger har handen på texten, och pratbubblan visar samma kvadrat och en cirkel bredvid." }
-utkast: true
+bild:
+  scen: lasa-och-forklara-i-par
+  alt: Två elever sitter vid ett bord med en uppslagen text mellan sig. Eleven till vänster vänder sig mot kamraten och berättar med handen framför bröstet, och pratbubblan visar en kvadrat. Eleven till höger har handen på texten, och pratbubblan visar samma kvadrat och en cirkel bredvid.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: NO
+    text: Du delar in klassen i par och ger dem en kort faktatext om igelkottar med rubriker och tre stycken. Paren läser rubrikerna tillsammans för att få en överblick. Båda läser första stycket tyst, och den ena berättar med egna ord vad det handlade om. Den andra rättar det som blev fel, lägger till det som saknades och berättar vad den själv redan vet om igelkottar. Paret byter roller för nästa stycke och enas till sist om en gemensam sammanfattning av hela texten.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen i åk 8 ska skriva debattartiklar, och du ger paren en debattartikel om mobilförbud i skolan att läsa som förebild. Paret läser rubrikerna tillsammans och sedan första stycket tyst var för sig. Den ena sammanfattar stycket med egna ord, och den andra rättar det som blev fel, lägger till det som saknades och säger vilken del av en debattartikel stycket är, som tesen eller ett argument. Paret byter roller och gör likadant med varje nytt stycke. Till sist enas paret om artikelns tes och argument och skriver dem som en disposition att följa i sina egna artiklar.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Du delar in klassen i par och ger dem sidan i matematikboken som förklarar decimaltal, med rubriker och tre stycken. Paren läser rubrikerna tillsammans och sedan första stycket tyst var för sig. Den ena förklarar stycket med egna ord, och den andra rättar det som blev fel, lägger till det som saknades och knyter till något de kan sedan förut, som att 2,50 kronor är två kronor och femtio öre. Paret byter roller och gör likadant med nästa stycke. Till sist enas paret om vad sidan handlar om och skriver en gemensam sammanfattning.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: klassens råd
+    text: Du delar in klassen i par och ger dem en kort artikel om grupptryck på sociala medier. Paret läser rubrikerna tillsammans och läser sedan första stycket tyst var för sig. Den ena sammanfattar stycket med egna ord, och den andra rättar det som blev fel, lägger till det som saknades och knyter till något de själva har sett eller varit med om. Paret byter roller och gör likadant med nästa stycke. Till sist enas paret om vad artikeln säger om hur man kan stå emot grupptryck och formulerar en gemensam sammanfattning.
+utkast: false

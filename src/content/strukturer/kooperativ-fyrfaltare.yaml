@@ -15,5 +15,24 @@ kalla:
   rubrik: Kooperativ fyrfältare
   commit: b492447
   summa: 1103a2f3
-bild: { scen: kooperativ-fyrfaltare, alt: "Fyra elever sitter runt ett bord med ett stort papper delat i fyra fält: en teckning av en röd triangel, några rader om vad ordet betyder, ordet och en mening. Eleven i lila tröja pekar på teckningen och förklarar, och pratbubblan visar en triangel. Eleven i gul tröja ritar i teckningens fält, och eleven i turkos tröja skriver i fältet bredvid. Eleven i rosa tröja lutar sig in och lyssnar, och tankebubblan visar samma triangel." }
-utkast: true
+bild:
+  scen: kooperativ-fyrfaltare
+  alt: "Fyra elever sitter runt ett bord med ett stort papper delat i fyra fält: en teckning av en röd triangel, några rader om vad ordet betyder, ordet och en mening. Eleven i lila tröja pekar på teckningen och förklarar, och pratbubblan visar en triangel. Eleven i gul tröja ritar i teckningens fält, och eleven i turkos tröja skriver i fältet bredvid. Eleven i rosa tröja lutar sig in och lyssnar, och tankebubblan visar samma triangel."
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen har läst en faktatext om skogen. Du delar in eleverna i hemgrupper och ger varje grupp ett ord ur texten, till exempel mossa, kotte eller myrstack. Gruppen fyller i sin fyrfältare med vad ordet betyder, en teckning och en mening, och ser till att alla kan förklara ordet. Du bildar expertgrupper med en elev från varje hemgrupp, och eleverna förklarar sitt ord med fyrfältaren som stöd. Sedan återvänder de till hemgruppen och talar om de nya orden.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen arbetar med språkliga bilder. Du delar in eleverna i hemgrupper och ger varje grupp ett begrepp: liknelse, metafor, personifikation eller överdrift. Gruppen fyller i sin fyrfältare med vad begreppet betyder, en teckning och en egen mening, och ser till att alla kan förklara det. Du bildar expertgrupper med en elev från varje hemgrupp, och eleverna förklarar sitt begrepp med fyrfältaren som stöd. Sedan återvänder de till hemgruppen och talar om de nya begreppen."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen arbetar med geometri. Du delar in eleverna i hemgrupper och ger varje grupp ett begrepp: omkrets, area, vinkel eller parallella linjer. Gruppen fyller i sin fyrfältare med vad begreppet betyder, en teckning med mått och en mening, och ser till att alla kan förklara det. Du bildar expertgrupper med en elev från varje hemgrupp, och eleverna förklarar sitt begrepp med fyrfältaren som stöd. Sedan återvänder de till hemgruppen och talar om de nya begreppen."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen pratar om vad som gör en klass trygg. Du delar in eleverna i hemgrupper och ger varje grupp ett begrepp: respekt, mod, rättvisa eller vänskap. Gruppen fyller i sin fyrfältare med vad ordet betyder, en teckning av en situation där det syns och en mening, och ser till att alla kan förklara det. Du bildar expertgrupper med en elev från varje hemgrupp, och eleverna förklarar sitt ord med fyrfältaren som stöd. Sedan återvänder de till hemgruppen och talar om de nya begreppen."
+utkast: false

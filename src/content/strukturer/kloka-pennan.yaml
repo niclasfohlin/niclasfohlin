@@ -15,5 +15,24 @@ kalla:
   rubrik: Kloka pennan
   commit: b492447
   summa: e0ab4e08
-bild: { scen: kloka-pennan, alt: "Två elever sitter bredvid varandra vid ett bord med ett papper. Den ena talar och visar med handen mot den andra, och pratbubblan visar en triangel. Den andra håller en stor penna, längre än ett huvud, och skriver på papperet, där samma triangel står." }
-utkast: true
+bild:
+  scen: kloka-pennan
+  alt: Två elever sitter bredvid varandra vid ett bord med ett papper. Den ena talar och visar med handen mot den andra, och pratbubblan visar en triangel. Den andra håller en stor penna, längre än ett huvud, och skriver på papperet, där samma triangel står.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen har läst en saga, och du delar in eleverna i par. Uppgiften är att berätta vad som händer i början, i mitten och i slutet och rita eller skriva det på ett papper. Paret bestämmer vem som tänker och vem som skriver. Tänkaren berättar sagan högt, och den med Kloka pennan ritar eller skriver stödord utan att ändra. På din signal växlar paret roller, och den nya tänkaren säger vad sagan handlar om i en mening som den andra skriver.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen ska skriva berättelser, och du delar in eleverna i par. Uppgiften är att planera en berättelse på ett papper med huvudperson, plats, problem och lösning. Paret bestämmer vem som tänker och vem som skriver. Tänkaren berättar planen högt, och den med Kloka pennan skriver ned den i stolpar utan att ändra. På din signal växlar paret roller och sammanfattar planen i två meningar.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Du delar in eleverna i par och ger uppgiften: En taxi kostar 50 kronor plus 12 kronor per kilometer. Hur långt kommer man för 200 kronor? Paret bestämmer vem som tänker och vem som skriver. Tänkaren löser uppgiften högt, och den med Kloka pennan skriver uträkningen och ritar skissen utan att ändra. På din signal växlar paret roller och sammanfattar sitt svar."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Du delar in eleverna i par inför klassrådet. Uppgiften är att hitta tre sätt att lösa en konflikt där två kompisar vill ha samma boll och skriva dem i stolpar. Paret bestämmer vem som tänker och vem som skriver. Tänkaren föreslår sätten högt, och den med Kloka pennan skriver ned dem utan att ändra. På din signal växlar paret roller och sammanfattar sitt bästa förslag.
+utkast: false

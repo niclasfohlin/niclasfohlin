@@ -16,5 +16,24 @@ kalla:
   rubrik: Trestegsintervju
   commit: b492447
   summa: 9bd87b80
-bild: { scen: trestegsintervju, alt: "Två par står var för sig och intervjuar varandra, ett i gröna tröjor till vänster och ett i orange tröjor till höger. I det gröna paret håller den ena ett block och en penna och frågar, med ett frågetecken i pratbubblan, och den andra svarar, med en gul cirkel i pratbubblan. I det orange paret svarar den ena, med en stjärna i pratbubblan, och den andra antecknar svaret i sitt block." }
-utkast: true
+bild:
+  scen: trestegsintervju
+  alt: Två par står var för sig och intervjuar varandra, ett i gröna tröjor till vänster och ett i orange tröjor till höger. I det gröna paret håller den ena ett block och en penna och frågar, med ett frågetecken i pratbubblan, och den andra svarar, med en gul cirkel i pratbubblan. I det orange paret svarar den ena, med en stjärna i pratbubblan, och den andra antecknar svaret i sitt block.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen har läst en kapitelbok. Du ger frågan: Vilken del av boken gjorde dig mest nyfiken, och varför? Du delar varje fyrgrupp i två par, och i paret intervjuar den ena den andra och antecknar svaret med ord eller en liten teckning, och på din signal byter paret roller. Paren går tillbaka till fyrgruppen och berättar i tur och ordning vad kamraten sa. Gruppen ser till att alla får lika lång tid, väljer de svar som säger mest och delar dem med klassen."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva noveller. Du ger frågan: Vilken plats skulle du vilja skriva en novell om, och vad händer där? Du delar varje fyrgrupp i två par, och i paret intervjuar den ena den andra och antecknar svaren, och på din signal byter paret roller. Tillbaka i fyrgruppen berättar var och en vad kamraten svarade, och gruppen ser till att alla får ungefär lika lång tid. Gruppen väljer de svar som säger mest och delar dem med klassen."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen övar huvudräkning. Du ger frågan: Hur räknar du ut 18 gånger 5 i huvudet? Du delar varje fyrgrupp i två par, och i paret intervjuar den ena den andra och antecknar hur hen tänkte, och på din signal byter paret roller. Tillbaka i fyrgruppen berättar var och en hur kamraten räknade, och gruppen ser till att alla får lika lång tid. Gruppen väljer de svar som säger mest, till exempel två olika sätt att räkna, och delar dem med klassen."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: livskunskap
+    text: "Klassen pratar om vad som gör en klass trygg. Du ger frågan: Vad får dig att våga räcka upp handen på lektionen? Du delar varje fyrgrupp i två par, och i paret intervjuar den ena den andra och antecknar svaret, och på din signal byter paret roller. Tillbaka i fyrgruppen berättar var och en vad kamraten sa, och gruppen ser till att alla får ungefär lika lång tid. Gruppen väljer de svar som säger mest och delar dem med klassen."
+utkast: false

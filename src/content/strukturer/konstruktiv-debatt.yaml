@@ -17,5 +17,24 @@ kalla:
   rubrik: Konstruktiv debatt
   commit: b492447
   summa: 80067eda
-bild: { scen: konstruktiv-debatt, alt: "Två par står mitt emot varandra som två sidor, ett i röda tröjor till vänster och ett i blå tröjor till höger. Det röda paret håller fram ett papper med en röd triangel och det blå paret ett papper med en blå kvadrat. En i det röda paret talar och visar med handen mot det blå paret, och pratbubblan visar det blå parets kvadrat. En i det blå paret tänker med handen under hakan, och tankebubblan visar det röda parets triangel." }
-utkast: true
+bild:
+  scen: konstruktiv-debatt
+  alt: Två par står mitt emot varandra som två sidor, ett i röda tröjor till vänster och ett i blå tröjor till höger. Det röda paret håller fram ett papper med en röd triangel och det blå paret ett papper med en blå kvadrat. En i det röda paret talar och visar med handen mot det blå paret, och pratbubblan visar det blå parets kvadrat. En i det blå paret tänker med handen under hakan, och tankebubblan visar det röda parets triangel.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen har läst en ungdomsroman där huvudpersonen ljuger för sin bästa vän, och du ger frågan: Var det rätt av henne att ljuga? Du delar varje grupp i två par, ena paret för ja och det andra för nej, och paren letar belägg i boken och förbereder vad de ska säga. Paren lägger fram sin ståndpunkt utan att bli avbrutna, diskuterar öppet och byter sedan sida och försvarar den andra. Gruppen släpper rollerna, enas om en slutsats, skriver ned den med skälen och skriver under. Till sist skriver var och en vad som talar för ja och för nej."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen ska skriva insändare. Du ger frågan: Ska skolan ha längre raster? Du delar varje grupp i två par, ena paret för ja och det andra för nej, och paren samlar skäl och förbereder vad de ska säga. Paren lägger fram sin ståndpunkt utan att bli avbrutna, diskuterar öppet, byter sida och försvarar den andra. Gruppen skriver ned en slutsats med skälen och alla skriver under, och sedan skriver var och en en kort insändare där hen tar ställning och bemöter ett skäl från den andra sidan."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Klassen har lärt sig två sätt att räkna procent. Du ger frågan: Är det bäst att räkna ut 15 procent av 240 som 10 procent plus 5 procent eller som 240 gånger 0,15? Du delar varje grupp i två par som försvarar var sitt sätt, prövar det på tre egna tal och förbereder vad de ska säga. Paren lägger fram sitt sätt utan att bli avbrutna, diskuterar öppet, byter sida och försvarar det andra. Gruppen skriver ned en slutsats med skälen och alla skriver under, och sedan räknar var och en ut 35 procent av 80 med båda sätten."
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: "Klassen pratar om hur klassrummet ska fungera. Du ger frågan: Ska vi ha bestämda platser eller välja själva? Du delar varje grupp i två par, ena paret för bestämda platser och det andra för fria, och paren tänker ut skäl och övar vad de ska säga. Paren berättar sin sida utan att bli avbrutna, pratar och ber varandra om skäl, och byter sedan sida och berättar det andra parets skäl. Gruppen ritar eller skriver en slutsats med skälen och alla skriver sitt namn under, och sist ritar eller skriver var och en ett skäl för varje sida på en lapp."
+utkast: false

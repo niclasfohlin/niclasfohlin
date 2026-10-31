@@ -14,5 +14,24 @@ kalla:
   rubrik: Vem är jag?
   commit: b492447
   summa: da1b61a6
-bild: { scen: vem-ar-jag, alt: "Två elever syns bakifrån med ett kort fäst med tejp högt upp på ryggen. Till vänster har kortet en kvadrat, och en kamrat tätt intill tittar på kortet och pratar. Till höger har kortet en stjärna. Eleven med stjärnan på ryggen frågar, och pratbubblan visar ett frågetecken. Kamraten tätt intill lutar sig mot ryggen, tittar på stjärnan och svarar, och tankebubblan visar stjärnan." }
-utkast: true
+bild:
+  scen: vem-ar-jag
+  alt: Två elever syns bakifrån med ett kort fäst med tejp högt upp på ryggen. Till vänster har kortet en kvadrat, och en kamrat tätt intill tittar på kortet och pratar. Till höger har kortet en stjärna. Eleven med stjärnan på ryggen frågar, och pratbubblan visar ett frågetecken. Kamraten tätt intill lutar sig mot ryggen, tittar på stjärnan och svarar, och tankebubblan visar stjärnan.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Du fäster ett kort på varje elevs rygg med namnet på en gestalt ur böcker klassen har läst, som Pippi, Alfons Åberg eller Rödluvan. Eleverna går runt och ställer frågor till varandra om vem de är, till exempel om de har en häst eller går genom en skog. Kamraterna svarar utan att säga namnet rakt ut. Den som tror sig veta sätter sig ned. Till sist berättar var och en för klassen vem hen var och vilken fråga som avgjorde det.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen skriver nyhetsartiklar, och du fäster ett kort på varje elevs rygg med en del av en artikel, som rubrik, ingress, brödtext, bildtext eller citat. Eleverna går runt och ställer frågor till varandra om vad de har på ryggen, till exempel om det står först i artikeln eller är någons egna ord. Kamraterna svarar utan att säga svaret rakt ut. Den som tror sig veta sätter sig ned. Till sist berättar var och en för klassen vad hen hade och vilken fråga som avgjorde det.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Du fäster ett kort på varje elevs rygg med ett begrepp ur geometrin, som cylinder, radie, parallellogram eller hypotenusa. Eleverna går runt och ställer frågor till varandra om vad de har på ryggen, till exempel om det är en figur eller om den har en rät vinkel. Kamraterna svarar utan att säga begreppet rakt ut. Den som tror sig veta sätter sig ned. Till sist berättar var och en för klassen vad hen hade och vilken fråga som avgjorde det.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: Du fäster ett kort på varje elevs rygg med ett begrepp som klassen pratar om, som grupptryck, rykte, kompromiss eller integritet. Eleverna går runt och ställer frågor till varandra om vad de har på ryggen, till exempel om det är något som kan hända på nätet. Kamraterna svarar utan att säga begreppet rakt ut. Den som tror sig veta sätter sig ned. Till sist berättar var och en för klassen vad hen hade och vilken fråga som avgjorde det.
+utkast: false

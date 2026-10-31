@@ -15,5 +15,24 @@ kalla:
   rubrik: Samtalstrappan
   commit: b492447
   summa: 9f2be010
-bild: { scen: samtalstrappan, alt: "Fyra elever sitter runt ett bord. Mitt på bordet står en liten skiva med en trappa i tre steg: det lägsta steget är grönt, det mellersta gult och det översta tomt. Eleven i grön tröja talar, och pratbubblan visar en kvadrat. Eleven i rosa tröja håller upp ett litet tidtagarur och tittar på det. Eleverna i röd och lila tröja vid bordets kortsidor lyssnar." }
-utkast: true
+bild:
+  scen: samtalstrappan
+  alt: "Fyra elever sitter runt ett bord. Mitt på bordet står en liten skiva med en trappa i tre steg: det lägsta steget är grönt, det mellersta gult och det översta tomt. Eleven i grön tröja talar, och pratbubblan visar en kvadrat. Eleven i rosa tröja håller upp ett litet tidtagarur och tittar på det. Eleverna i röd och lila tröja vid bordets kortsidor lyssnar."
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen har läst en bilderbok om en räv som blir utanför. Du delar in eleverna i grupper om fyra, utser en tidshållare i varje grupp och frågar: Hur märks det i boken att räven känner sig utanför? Eleverna tänker enskilt en stund och talar sedan en i taget, medan tidshållaren tar tiden med ett timglas och avbryter. Du bryter samtalet och lägger till en regel, till exempel att man visar i boken var man ser det man säger. Grupperna gör om samtalet med regeln och en ny tidshållare."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva insändare om skolmaten. Du delar in eleverna i grupper, utser en tidshållare i varje grupp och frågar: Vilket argument för att ändra skolmaten är starkast, och hur får man läsaren att hålla med? Eleverna tänker enskilt en stund och talar sedan en i taget medan tidshållaren tar tiden och avbryter. När du bryter lägger du till en regel, till exempel att börja med att återge vad den förra sa. Grupperna gör om samtalet med regeln och en ny tidshållare."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen har räknat ut hur mycket som är kvar av en pizza när Ali har ätit en fjärdedel och Bea en halv, och svaren på tavlan är olika. Du delar in eleverna i grupper, utser en tidshållare i varje grupp och frågar: Vilket svar är rimligast, och hur kan vi pröva det? Eleverna tänker enskilt en stund och talar sedan en i taget medan tidshållaren tar tiden och avbryter. Du bryter och lägger till en regel, till exempel att säga om man håller med den förra och varför. Grupperna gör om samtalet med regeln och en ny tidshållare."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "På mentorstiden pratar klassen om tonen i klassens gruppchatt. Du delar in eleverna i grupper, utser en tidshållare i varje grupp och frågar: Vad ska vi skriva till varandra i chatten när vi är oense? Eleverna tänker enskilt en stund och talar sedan en i taget medan tidshållaren tar tiden och avbryter. Du bryter och lägger till en regel, till exempel att vänta fem sekunder innan man talar. Grupperna gör om samtalet med regeln och en ny tidshållare."
+utkast: false

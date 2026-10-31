@@ -1,5 +1,10 @@
 # Ändringar i standarden
 
+## 0.47.0, 2026-11-01
+
+- `strukturer.js` (sajtens K-650): `strukturkortetsInnehall`, kontrollsumman över det ett strukturkort visar, som skriptet som gör korten skriver i manifestet och bygget räknar om, med scenens radslut som 
+; `strukturkortetsFil` och `STRUKTURKORTEN_ALLA`, kortets fil och filen med alla kort.
+
 ## 0.46.0, 2026-10-31
 
 - `strukturer.js`, ny (sajtens K-650, verktyget Strukturer): `STRUKTURENS_SLAG` med Par, Grupp och Klass, namnen och färgerna, `STRUKTURENS_GRANSER`, `strukturensSumma` (kontrollsumman över bankens fält, så att en ändring för hand stannar bygget) och `strukturensFel`, som sajtens schema och intaget ur grundbokens bank prövar en struktur med, och `strukturkortensArk`, ordningen när korten skrivs ut två och två.

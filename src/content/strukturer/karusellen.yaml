@@ -17,5 +17,24 @@ kalla:
   rubrik: Karusellen
   commit: b492447
   summa: 6489b015
-bild: { scen: karusellen, alt: "Tre bord står i en ring, och en pil går från varje bord till nästa. Vid vart och ett av de två borden längst bak sitter tre elever kring ett papper, det ena med en cirkel och det andra med en stjärna, och en vid varje bord skriver. Vid bordet längst fram sitter tre elever i gula tröjor kring ett papper med en kvadrat, och på bordet står en stor klocka. Den till vänster pekar på kvadraten och läser, och pratbubblan visar en kvadrat. Den i mitten skriver med gruppens penna och har en triangel i tankebubblan." }
-utkast: true
+bild:
+  scen: karusellen
+  alt: Tre bord står i en ring, och en pil går från varje bord till nästa. Vid vart och ett av de två borden längst bak sitter tre elever kring ett papper, det ena med en cirkel och det andra med en stjärna, och en vid varje bord skriver. Vid bordet längst fram sitter tre elever i gula tröjor kring ett papper med en kvadrat, och på bordet står en stor klocka. Den till vänster pekar på kvadraten och läser, och pratbubblan visar en kvadrat. Den i mitten skriver med gruppens penna och har en triangel i tankebubblan.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen har läst ett kapitel ur romanen. Du delar in eleverna i grupper om tre till fyra och lägger en uppgift på varje bord, till exempel ”Skriv vad huvudpersonen kunde ha gjort i stället” och ”Skriv frågor till författaren”. Varje grupp får en penna, och du sätter en timer på fyra minuter. Grupperna skriver så många svar de hinner, går till nästa bord när tiden är slut, läser vad gruppen före skrivit och bygger vidare tills alla varit vid alla bord. Du lyfter fram spännande svar i helklass.
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen övar på att beskriva med ord. Du delar in eleverna i grupper om tre och lägger en bild på varje bord, till exempel en höstskog, ett hav eller en lekplats, och uppgiften är att skriva så många ord som passar till bilden. Du ger varje grupp en penna och sätter en timer på tre minuter. När tiden är slut går grupperna till nästa bord, läser vad gruppen före skrivit och bygger vidare med fler ord eller en mening tills alla varit vid alla bord. Du lyfter fram de färgstarkaste orden i helklass.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen arbetar med linjära funktioner. Du delar in eleverna i grupper om fyra och lägger en uppgift med många svar på varje bord, till exempel ”Skriv så många funktioner ni kan som går genom punkten (2, 5)”. Varje grupp får en penna, och du sätter en timer på fem minuter. Grupperna skriver så många lösningar de hinner, går till nästa bord när tiden är slut, läser vad gruppen före skrivit och bygger vidare tills alla varit vid alla bord. I helklass lyfter du fram lösningar du inte väntade dig.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Klassen pratar om hur man är en bra kompis. Du delar in eleverna i grupper om tre till fyra och lägger en uppgift på varje bord, till exempel att bjuda in någon till leken, att säga ifrån snällt eller att säga förlåt. Varje grupp får en penna, och du sätter en timer på fyra minuter. Grupperna skriver så många sätt de hinner, går till nästa bord när tiden är slut, läser vad gruppen före skrivit och bygger vidare tills alla varit vid alla bord. Du lyfter fram några spännande förslag i helklass.
+utkast: false

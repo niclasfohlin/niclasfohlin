@@ -15,5 +15,24 @@ kalla:
   rubrik: Visa!
   commit: b492447
   summa: 5dbddfe5
-bild: { scen: visa, alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger ett kort med ett frågetecken. Alla fyra håller upp var sitt kort med sitt svar på samma gång. Tre kort visar en triangel och ett visar en kvadrat. Eleven i röd tröja säger visa, och pratbubblan visar ett utropstecken." }
-utkast: true
+bild:
+  scen: visa
+  alt: Fyra elever sitter runt ett bord, och mitt på bordet ligger ett kort med ett frågetecken. Alla fyra håller upp var sitt kort med sitt svar på samma gång. Tre kort visar en triangel och ett visar en kvadrat. Eleven i röd tröja säger visa, och pratbubblan visar ett utropstecken.
+forslag:
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen i åk 5 arbetar med decimaltal. Du ger frågan: Vilket tal är störst, 0,7 eller 0,25? Var och en i gruppen tänker själv och skriver sitt svar på en lapp med skriften nedåt. Du säger ett, två, tre, visa, och alla vänder sin lapp samtidigt. Stämmer svaren överens går gruppen vidare till nästa fråga, och skiljer de sig åt jämför eleverna hur de tänkte."
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen i åk 8 har läst en novell, och på tavlan står frågan: Vilken mening är novellens vändpunkt, A, B eller C? Var och en i gruppen läser om de tre meningarna och väljer en bokstav på egen hand. Du säger ett, två, tre, visa, och alla håller upp en lapp med sin bokstav. Är bokstäverna desamma går gruppen vidare till nästa fråga. Skiljer de sig åt visar var och en vilken rad i novellen som fick hen att välja."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen i åk 2 övar ord med sj-ljudet, och frågekorten har en bild av till exempel en skjorta, en sjö eller ett sjukhus. En i gruppen drar ett kort, och alla skriver ordet på sin lilla tavla utan att titta på varandra. Du eller en elev säger ett, två, tre, visa, och alla håller upp sin tavla. Har alla stavat likadant går gruppen vidare till nästa kort. Har någon stavat annorlunda berättar var och en hur hen tänkte.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: mentorstid
+    text: På mentorstid i åk 6 får grupperna frågekort med påståenden, som ”Jag vågar räcka upp handen i vår klass” med en skala från 1 till 5. Var och en tänker själv och bestämmer sitt tal utan att visa det. Du säger ett, två, tre, visa, och alla håller upp sina fingrar. Är talen lika går gruppen vidare till nästa kort. Skiljer de sig åt berättar var och en vad som låg bakom talet, och ingen behöver ursäkta sitt val.
+utkast: false

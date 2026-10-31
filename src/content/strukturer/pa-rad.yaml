@@ -14,5 +14,24 @@ kalla:
   rubrik: På rad
   commit: b492447
   summa: 78aaacb3
-bild: { scen: pa-rad, alt: "Åtta elever står på en rad, från den kortaste längst till vänster till den längsta längst till höger. Mitt i raden finns en lucka, och eleven till vänster om luckan visar med handen in i den utan att säga något. Framför luckan går en elev, som syns bakifrån, in mot sin plats med ett frågetecken i tankebubblan." }
-utkast: true
+bild:
+  scen: pa-rad
+  alt: Åtta elever står på en rad, från den kortaste längst till vänster till den längsta längst till höger. Mitt i raden finns en lucka, och eleven till vänster om luckan visar med handen in i den utan att säga något. Framför luckan går en elev, som syns bakifrån, in mot sin plats med ett frågetecken i tankebubblan.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen har läst ut högläsningsboken. Varje elev får en bild av en händelse i boken, och du säger att raden ska följa ordningen i boken. Eleverna ställer sig på rad utan att tala, och sedan kontrollerar de ordningen genom att berätta om sina bilder en i taget, från början till slut. Du delar raden på mitten, och eleverna som står mitt emot varandra bildar par som sedan läser nästa bok tillsammans.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen samlar ord för att vara arg inför en berättelse. Du har skrivit ett ord på varje kort, till exempel sur, irriterad, ilsken eller rasande, och måttet är hur stark ilskan är. Eleverna ställer sig på rad utan att tala, från svagast till starkast, och kontrollerar sedan tillsammans att ordningen stämmer. Du delar raden på mitten, och eleverna som står mitt emot varandra bildar par som väljer vilket av orden som passar bäst i deras berättelse.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen arbetar med negativa tal och bråk. Varje elev får ett kort med ett tal, till exempel minus 3/2, 0,8, minus 1, 5/4 eller minus 0,25, och du säger att måttet är talets storlek från minst till störst. Eleverna ställer sig på rad utan att tala och kontrollerar sedan tillsammans att ordningen stämmer, och den som är osäker får höra hur de andra tänker. Du delar raden på mitten, och eleverna som står mitt emot varandra bildar par eller fyrgrupper som sedan jämför sina tal.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: Klassen pratar om skämt och gränser. Du läser upp påståendet ”Det är okej att skoja om en kompis om kompisen själv skrattar”, och raden ska gå från dem som håller med helt till dem som inte håller med alls. Eleverna ställer sig på rad utan att tala och visar med fingrarna, från ett till fem, hur mycket de håller med. Sedan kontrollerar de tillsammans att ordningen stämmer. Du delar raden på mitten, och de som står mitt emot varandra bildar par som tycker olika och lyssnar på varandras skäl.
+utkast: false

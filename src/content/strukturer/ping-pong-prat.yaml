@@ -17,5 +17,24 @@ kalla:
   rubrik: Ping-pong-prat
   commit: b492447
   summa: 736d0e63
-bild: { scen: ping-pong-prat, alt: "Två elever står mittemot varandra och pratar, med var sin öppen hand framsträckt mot den andra. Den vänstras pratbubbla visar en kvadrat och den högras en gul cirkel. Mellan bubblorna går två böjda pilar, den övre åt höger och den nedre åt vänster." }
-utkast: true
+bild:
+  scen: ping-pong-prat
+  alt: Två elever står mittemot varandra och pratar, med var sin öppen hand framsträckt mot den andra. Den vänstras pratbubbla visar en kvadrat och den högras en gul cirkel. Mellan bubblorna går två böjda pilar, den övre åt höger och den nedre åt vänster.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: NO
+    text: Innan klassen läser en faktatext om rymden delar du in eleverna i par och ger temat Rymden, så att de får fram det de redan vet. Eleverna tänker en kort stund i tystnad. På din signal säger den ena ett ord om rymden, till exempel planet, och den andra svarar med ett ord eller en kort mening. De turas om, och kommer någon inte på något säger den pass och kamraten fortsätter. När du bryter tackar paret varandra och återger för en ny kamrat vad de sa.
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Du delar in klassen i par och ger temat Hösten, som eleverna ska skriva om nästa lektion. Efter en kort stunds tystnad börjar paret på din signal, och den ena säger ett ord om hösten, till exempel löv eller mörkt. De turas om, och ingen säger ett nytt ord förrän den andra har sagt sitt. Kommer någon inte på något säger den pass, och kamraten fortsätter. När du bryter tackar paret varandra och återger för en ny kamrat vad de sa.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Du delar in klassen i par och ger temat Fyrhörningar när ni börjar ett nytt område i geometri. Eleverna tänker en stund i tystnad, och på din signal säger den ena ett ord om fyrhörningar, till exempel parallell eller rät vinkel. Den andra svarar med ett ord eller en kort mening, och de turas om utan att någon säger ett nytt ord förrän den andra sagt sitt. Kommer någon inte på något säger den pass och kamraten fortsätter. När du bryter tackar paret varandra och återger för en ny kamrat vad de sa.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: klassens råd
+    text: Inför klassens samtal om arbetsron delar du in eleverna i par och ger temat Respekt. Efter en kort stunds tystnad börjar paret på din signal, och den ena säger ett ord om respekt, till exempel lyssna eller vänta. Den andra svarar med ett ord eller en kort mening, och de turas om. Kommer någon inte på något säger den pass, och kamraten fortsätter. Paret håller igång tills du bryter, och sedan tackar de varandra och återger för en ny kamrat vad de sa.
+utkast: false

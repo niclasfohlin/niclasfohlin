@@ -27,6 +27,7 @@ import { centralAv } from './centrala';
 import { bankAv } from './bank';
 import { taFramKortposter, taFramSlag } from './tafram';
 import { bokhandledningen } from './handledning';
+import { strukturerna, STRUKTURERNAS_ADRESS } from './strukturer';
 import { slugAv } from './standard/index.js';
 import { SAMLINGAR, SAMLINGARNA, postensAdress, type SamlingNyckel } from './samlingar';
 import type { CollectionEntry } from 'astro:content';
@@ -224,6 +225,8 @@ export function allaKort(): Promise<Kort[]> {
       else if (nyckel === SAMLINGAR.undervisningsmetoder.led && undervisningsmetoder.length) lagg({ sida: `/${nyckel}`, typ: 'metoder', etikett: `Metodbank · ${spannText(omfanget(undervisningsmetoder.map((u) => arskursSpannet(u.data))))}`, titel: s.titel, undertitel: METODERNAS_RAD, bild: portratt, farg: '--farg-mork', metoder: undervisningsmetoder.slice(0, HOGST_I_TRAPPAN).map((u) => umKort(kortetUrFil(u.id, u.data))) });
       else lagg({ sida: `/${nyckel}`, typ: om ? 'om' : 'avsnitt', etikett: '', titel: s.titel, undertitel: om ? site.rad : forstaMeningen(s.beskrivning), bild: portratt, farg: '--farg-accent' });
     }
+    // Verktyget Strukturer (K-650) har avsnittets kort, och strukturernas sidor får det, som närmaste överordnade sida.
+    if ((await strukturerna()).length) lagg({ sida: STRUKTURERNAS_ADRESS, typ: 'avsnitt', etikett: '', titel: 'Strukturer', undertitel: 'Kort för samarbete i par, i grupp och i hela klassen, att skriva ut', bild: portratt, farg: '--farg-accent' });
     // Ett kort per post i varje samling i roten (POSTENS_KORT).
     const poster: { [K in SamlingNyckel]: Post<K>[] } = { stodundervisning: metoder, undervisningsmetoder, artiklar: await publicerade('artiklar'), bocker: await publicerade('bocker') };
     for (const s of SAMLINGARNA) for (const p of poster[s] as Post<SamlingNyckel>[]) lagg({ sida: postensAdress(s, p.id), ...(POSTENS_KORT[s] as (x: Post<SamlingNyckel>) => Postkort)(p) });

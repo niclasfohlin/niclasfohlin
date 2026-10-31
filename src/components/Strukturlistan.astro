@@ -1,0 +1,31 @@
+---
+// Listan Att skriva ut i verktyget Strukturer (K-650), på /strukturer och på varje strukturs sida: på en bred skärm en spalt
+// som följer med, i telefonen en rad längst ned som fäller ut listan, som på Ta fram en aktivitet (klasserna ak-valda i
+// global.css). Skriptet src/scripts/strukturlistan.ts fyller den och skriver ut korten två och två på A4.
+import { strukturerna, kortetsAdressMedVersion, SLAGEN } from '../lib/strukturer';
+
+const farg = Object.fromEntries(SLAGEN.map((s) => [s.slag, s.farg]));
+const data = Object.fromEntries((await strukturerna()).map((s) => [s.id, { namn: s.data.namn, slag: s.data.slag, farg: farg[s.data.slag], kort: kortetsAdressMedVersion(s.id) }]));
+---
+
+<aside class="ak-valda st-valda" id="st-valda" aria-labelledby="st-valda-rubrik" data-oppen="false" data-strukturer={JSON.stringify(data)}>
+  <button type="button" class="ak-valda-rad" id="st-valda-rad" aria-expanded="false" aria-controls="st-valda-innehall">
+    <span>Att skriva ut</span> <span class="ak-valda-antal st-valda-antal">0</span>
+  </button>
+  <div class="ak-valda-innehall" id="st-valda-innehall">
+    <h2 class="ak-valda-rubrik" id="st-valda-rubrik" tabindex="-1">Att skriva ut <span class="ak-valda-antal st-valda-antal">0</span></h2>
+    <p class="ak-valda-tom" id="st-valda-tom">Listan är tom. Tryck på bocken på ett kort, så hamnar strukturen här.</p>
+    <ol class="ak-valda-lista" id="st-valda-lista"></ol>
+    <div class="sk-atgarder ak-valda-knappar">
+      <a class="knapp" id="st-skrivut-valda" href="#" aria-disabled="true">Skriv ut kortet</a>
+      <button type="button" class="knapp sekundar" id="st-kopiera" data-goatcounter-click="strukturer:lank" data-goatcounter-title="Strukturer: listans länk kopierad" hidden>Kopiera listans länk</button>
+      <button type="button" class="knapp sekundar" id="st-tom" hidden>Töm listan</button>
+    </div>
+    <p class="st-utskriftsrad">Två kort på varje A4. Skriv ut dubbelsidigt, vänd längs långsidan och klipp längs den streckade linjen.</p>
+    <p class="ak-valda-not" id="st-valda-not" role="status"></p>
+  </div>
+</aside>
+
+<script>
+  import '../scripts/strukturlistan';
+</script>

@@ -14,5 +14,24 @@ kalla:
   rubrik: Samtalspromenad
   commit: b492447
   summa: c5741d86
-bild: { scen: samtalspromenad, alt: "Två elever går sida vid sida mitt på en väg som är markerad med streckade linjer, och de vänder sig mot varandra. Den ena talar, och pratbubblan visar en triangel. Den andra har en triangel och en kvadrat i tankebubblan. Längre fram på vägen går två andra elever och samtalar." }
-utkast: true
+bild:
+  scen: samtalspromenad
+  alt: Två elever går sida vid sida mitt på en väg som är markerad med streckade linjer, och de vänder sig mot varandra. Den ena talar, och pratbubblan visar en triangel. Den andra har en triangel och en kvadrat i tankebubblan. Längre fram på vägen går två andra elever och samtalar.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen har läst tre kapitel i romanen. Du delar in eleverna i par, låter dem hälsa på varandra och ger frågan: Vem i boken har det svårast just nu, och vad får dig att tro det? Paren går en promenad på tio minuter, ute eller i korridoren, och samtalar om frågan hela vägen. När du ger signalen kommer alla tillbaka, och paren berättar sina tankar för ett annat par."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen ska skriva om sin helg. Du delar in eleverna i par, låter dem hälsa på varandra och ger frågan: Vad gjorde du i helgen som du vill berätta om? Paren går en promenad på åtta minuter och samtalar om frågan hela vägen, och de turas om att berätta och lyssna. Du kallar tillbaka dem med en signal, och eleverna berättar för ett annat par vad kompisen berättade innan var och en skriver om sin helg."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Klassen har arbetat med procent. Du delar in eleverna i par, låter dem hälsa på varandra och ger frågan: Kan tio procent av ett tal vara större än tjugo procent av ett annat tal, och när? Paren går en promenad på tio minuter och samtalar om frågan hela vägen. När du ger signalen kommer alla tillbaka, och paren berättar sina exempel för klassen."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen pratar om rasten. Du delar in eleverna i par, låter dem hälsa på varandra och ger frågan: Vad kan du göra när du ser att någon står själv och vill vara med? Paren går en promenad på åtta minuter och samtalar om frågan hela vägen. När du ger signalen kommer alla tillbaka, och varje par berättar sina tankar för ett annat par."
+utkast: false

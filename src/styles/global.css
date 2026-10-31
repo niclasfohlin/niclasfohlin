@@ -4691,3 +4691,71 @@ button.pl-passroll { min-height: 2.75rem; }
 /* En avslutad plan är grå och streckad, som i Planera insatsen, också i Lär dig metodens egna ytor. */
 .pl-avslutad-plan .ld-stund { border-top-color: #8a949e; }
 .pl-avslutad-plan .ld-drag, .pl-avslutad-plan .ld-summa, .pl-avslutad-plan .ld-mitti { border-left-color: #8a949e; }
+
+/* Verktyget Strukturer (K-650): /strukturer och /strukturer/<id>, i formen som valdes i fas 0 (underlag/prov/strukturer/
+   UPPDRAGET.md under Läget). Slagets färg (Par, Grupp, Klass) kommer ur standarden (STRUKTURENS_SLAG) och bär aldrig slaget
+   ensam: symbolen och ordet gör det. Listan Att skriva ut är Ta fram en aktivitets (ak-valda ovan), i en spalt till höger
+   på en bred skärm och bakom en rad längst ned i telefonen. */
+/* --slag sätts på elementet ur standarden (slagensStil i src/lib/strukturer.ts), så att färgen har en rot. */
+.st-yta { display: grid; gap: 1.5rem; align-items: start; }
+@media (min-width: 60rem) { .st-yta { grid-template-columns: minmax(0, 1fr) 17.5rem; } }
+.st-sida { min-width: 0; }
+.st-sida .ingress { max-width: var(--matt-text); }
+.st-symbol { width: 1.35em; height: 1.35em; vertical-align: -0.32em; flex: none; }
+.st-slag { display: inline-flex; align-items: center; gap: 0.35rem; margin: 0; font-family: var(--typsnitt-ui); font-size: 0.95rem; font-weight: 700; color: color-mix(in srgb, var(--slag) 80%, #000); }
+.st-slag .st-symbol { width: 1.8rem; height: 1.8rem; }
+.st-andra { margin: 0.2rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.st-syfte { margin-top: 0.6rem; }
+.st-rubrik2 { font-size: 1.2rem; margin: 1.8rem 0 0.7rem; }
+.st-kort-lista { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+@media (min-width: 40rem) { .st-kort-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.st-kort-lista > li { display: grid; }
+.st-kort { position: relative; display: flex; flex-direction: column; border: 1.5px solid color-mix(in srgb, var(--slag) 45%, white); border-radius: 10px; background: #fff; overflow: hidden; font-family: var(--typsnitt-ui); }
+.st-kort > a { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
+.st-kort > a:hover .st-kort-namn { text-decoration: underline; }
+.st-kort > a:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: -3px; }
+.st-kort img { display: block; width: 100%; height: auto; aspect-ratio: 900 / 560; object-fit: contain; border-bottom: 1px solid var(--farg-kant); background: #fff; }
+.st-kort-text { display: grid; gap: 0.2rem; padding: 0.5rem 0.6rem 0.65rem; }
+.st-kort-namn { font-size: 1rem; font-weight: 700; line-height: 1.25; overflow-wrap: break-word; hyphens: auto; }
+.st-kort-rad { font-size: 0.84rem; line-height: 1.35; color: var(--farg-text-svag); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+@media (min-width: 40rem) { .st-kort-rad { -webkit-line-clamp: 4; line-clamp: 4; } }
+.st-kort.vald { border-color: var(--farg-accent); box-shadow: 0 0 0 1px var(--farg-accent); }
+.st-nr { position: absolute; top: 0.4rem; left: 0.45rem; display: grid; place-items: center; min-width: 1.6rem; height: 1.6rem; border-radius: 99px; background: var(--farg-mork); color: #fff; font-size: 0.82rem; font-weight: 700; }
+/* Bocken, som på Ta fram en aktivitet: en liten ring som fylls blå när strukturen står i listan, i bildens övre hörn, så att
+   namnet får hela bredden. Ytan att trycka på är 44 punkter. */
+.st-bock { position: absolute; right: 0.25rem; top: 0.25rem; display: grid; place-items: center; width: 2.2rem; height: 2.2rem; padding: 0; border: 0; background: none; cursor: pointer; }
+.st-bock::before { content: ''; position: absolute; inset: calc((100% - 2.75rem) / 2); }
+.st-bock svg { width: 1.45rem; height: 1.45rem; border-radius: 50%; border: 1.5px solid #9aa5b1; background: #fff; fill: none; stroke: #9aa5b1; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.st-bock:hover svg { border-color: var(--farg-accent); stroke: var(--farg-accent); }
+.st-bock[aria-pressed="true"] svg { background: var(--farg-accent); border-color: var(--farg-accent); stroke: #fff; }
+.st-bock:focus-visible { outline: none; }
+.st-bock:focus-visible svg { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+/* Raderna Par, Grupp och Klass, som fälls ut. */
+.st-hylla { margin: 0 0 0.6rem; border: 1px solid var(--farg-kant); border-left: 6px solid var(--slag); border-radius: 8px; background: #fff; font-family: var(--typsnitt-ui); }
+.st-hylla > summary { display: flex; align-items: center; gap: 0.6rem; min-height: 3rem; padding: 0.6rem 0.8rem; list-style: none; cursor: pointer; }
+.st-hylla > summary::-webkit-details-marker { display: none; }
+.st-hylla > summary:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.st-hylla > summary .st-symbol { width: 2rem; height: 2rem; }
+.st-hylla-namn { font-size: 1.15rem; font-weight: 700; color: color-mix(in srgb, var(--slag) 85%, #000); }
+.st-hylla-antal { color: var(--farg-text-svag); font-size: 0.95rem; }
+.st-hylla-pil { margin-left: auto; transition: transform 0.15s; flex: none; }
+.st-hylla[open] .st-hylla-pil { transform: rotate(180deg); }
+.st-hylla-inne { padding: 0 0.6rem 0.8rem; }
+.st-hylla-text { margin: 0 0.2rem 0.7rem; font-size: 0.92rem; color: var(--farg-text-svag); }
+.st-utskrift { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; }
+.st-utskriftsrad { margin: 0.5rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.88rem; color: var(--farg-text-svag); max-width: var(--matt-text); }
+.st-valda .st-utskriftsrad { margin: 0.6rem 0 0; font-size: 0.82rem; }
+.st-valda .ak-valt-namn { display: flex; align-items: center; text-decoration: none; }
+.st-valda .ak-valt-namn:hover { text-decoration: underline; }
+/* Strukturens sida. */
+.st-sida-bild { display: block; width: 100%; max-width: 46rem; height: auto; margin: 1rem 0 0.5rem; border: 1px solid var(--farg-kant); border-radius: 10px; background: #fff; }
+.st-steg { max-width: var(--matt-text); margin: 0.3rem 0 0; padding-left: 1.6rem; display: grid; gap: 0.45rem; }
+.st-steg li::marker { font-weight: 700; }
+.st-forslag { max-width: var(--matt-text); display: grid; gap: 1rem; margin-top: 0.4rem; }
+.st-forslag section { border-left: 4px solid var(--amnefarg); padding: 0.1rem 0 0.1rem 0.85rem; }
+.st-forslag h3 { margin: 0 0 0.25rem; font-family: var(--typsnitt-ui); font-size: 1rem; color: var(--amnefarg); }
+.st-forslag h3 span { color: var(--farg-text-svag); font-weight: 400; }
+.st-forslag p { margin: 0; }
+.st-tillbaka { margin: 2rem 0 0; font-family: var(--typsnitt-ui); }
+@media (max-width: 59.99rem) { .st-yta { padding-bottom: 4rem; } }
+@media print { .st-valda, .st-bock, .st-utskrift, .st-utskriftsrad { display: none; } }

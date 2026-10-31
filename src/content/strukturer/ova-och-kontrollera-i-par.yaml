@@ -17,5 +17,24 @@ kalla:
   rubrik: Öva och kontrollera i par
   commit: b492447
   summa: 90d273ac
-bild: { scen: ova-och-kontrollera-i-par, alt: "Fyra elever sitter runt ett bord i två par med ett glapp mellan sig, ett par i ljusblå tröjor till vänster och ett par i orange till höger, och varje par har ett papper med skrivna steg. I det ljusblå paret skriver den ena och förklarar högt, och pratbubblan visar en triangel. Kamraten pekar på triangeln på papperet och har triangeln och en bock i tankebubblan. I det orange paret skriver den ena medan den andra pekar på kvadraten på deras papper." }
-utkast: true
+bild:
+  scen: ova-och-kontrollera-i-par
+  alt: Fyra elever sitter runt ett bord i två par med ett glapp mellan sig, ett par i ljusblå tröjor till vänster och ett par i orange till höger, och varje par har ett papper med skrivna steg. I det ljusblå paret skriver den ena och förklarar högt, och pratbubblan visar en triangel. Kamraten pekar på triangeln på papperet och har triangeln och en bock i tankebubblan. I det orange paret skriver den ena medan den andra pekar på kvadraten på deras papper.
+forslag:
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen i åk 8 övar ekvationer, och uppgifterna är sex ekvationer, till exempel 3(x + 2) = 21. Du sätter två par vid samma bord, och i varje par löser den ena den första ekvationen och förklarar varje steg högt. Kamraten följer med, prövar om förklaringen stämmer och uppmuntrar, och sedan byter de roller på nästa ekvation. Efter varannan ekvation jämför de två paren sina svar, och de som är oense reder ut det tills de är eniga. Till sist slumpar du fram en elev som får förklara en av ekvationerna för klassen.
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen i åk 6 övar att läsa mellan raderna i en nyhetstext, och uppgifterna är fyra frågor till texten, som ”Varför tror du att reportern valde just den rubriken?” Du sätter två par vid samma bord, och i varje par svarar den ena på första frågan och förklarar högt var i texten hen hittat stödet. Kamraten prövar om förklaringen stämmer, uppmuntrar och stöttar, och sedan byter de roller på nästa fråga. Efter varannan fråga jämför paren sina svar, och de som är oense reder ut det tills de är eniga. Sist slumpar du fram en elev som förklarar ett av svaren för klassen.
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen i åk 3 övar stor bokstav och punkt, och uppgifterna är fem meningar som saknar båda, till exempel ”hunden sprang ut i snön”. Du sätter två par vid samma bord, och i varje par rättar den ena den första meningen och säger högt varför, som ”Stor bokstav för att meningen börjar här”. Kamraten kontrollerar att det stämmer, uppmuntrar och stöttar, och sedan byter de roller på nästa mening. Efter varannan mening jämför paren sina rättningar, och de som är oense reder ut det tills de är eniga. Sist slumpar du fram en elev som förklarar hur en av meningarna ska skrivas.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: På klassens råd i åk 5 övar klassen att lösa konflikter, och uppgifterna är fyra korta situationer, som två elever som vill ha samma boll på rasten. Du sätter två par vid samma bord, och i varje par berättar den ena steg för steg och högt vad hen skulle säga och göra i första situationen. Kamraten prövar om det skulle fungera, uppmuntrar och stöttar, och sedan byter de roller på nästa situation. Efter varannan situation jämför paren sina lösningar, och de som är oense reder ut det tills de är eniga. Till sist slumpar du fram en elev som förklarar en av lösningarna för klassen.
+utkast: false

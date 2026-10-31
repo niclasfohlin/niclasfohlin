@@ -16,5 +16,24 @@ kalla:
   rubrik: Rita, byt och skriv!
   commit: b492447
   summa: ddeaaea6
-bild: { scen: rita-byt-och-skriv, alt: "Två elever sitter vid en bänk. Den till vänster håller ett papper med skrivna rader och läser högt, och pratbubblan visar en stjärna. Den till höger håller upp sin teckning med en stor stjärna och en liten gul cirkel mot den som läser och lyssnar. På bänken ligger tre färgpennor, och framför den till höger ligger en teckning av en cirkel och en kort skriven text." }
-utkast: true
+bild:
+  scen: rita-byt-och-skriv
+  alt: Två elever sitter vid en bänk. Den till vänster håller ett papper med skrivna rader och läser högt, och pratbubblan visar en stjärna. Den till höger håller upp sin teckning med en stor stjärna och en liten gul cirkel mot den som läser och lyssnar. På bänken ligger tre färgpennor, och framför den till höger ligger en teckning av en cirkel och en kort skriven text.
+forslag:
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen i åk 2 övar på berättelser med början, mitt och slut. Du ger temat Något oväntat hände i skogen och säger att en kamrat ska skriva till bilden, och eleverna ritar var sin. De byter teckning med sin kamrat, funderar ut en berättelse som passar bilden de fick och berättar sin idé för varandra. Sedan skriver var och en sin berättelse med början, mitt och slut. Författaren läser den för den som ritade, och du samlar bilder och texter i en pärm som klassen läser.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: engelska
+    text: I engelskan i åk 8 övar klassen på att skriva berättelser i förfluten tid. Du ger temat An unexpected day at school och säger att en kamrat ska skriva till bilden och att några streckgubbar och en plats räcker. Eleverna ritar var sin, byter teckning, funderar ut en berättelse till bilden de fick och berättar idén för sin kamrat på engelska. Sedan skriver var och en sin berättelse med början, mitt och slut. Författaren läser den för den som ritade, och du samlar bilder och texter i en samling som klassen läser.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Klassen i åk 4 arbetar med bråk. Du ger temat Vi delar och säger att en kamrat ska skriva till bilden, och varje elev ritar något som är delat, som en pizza där tre av åtta bitar är uppätna. Eleverna byter teckning, funderar ut en räknehändelse till bilden de fick och berättar idén för varandra. De skriver räknehändelsen med början, mitt och slut, och bråket på bilden ska vara med i handlingen. Författaren läser upp den för den som ritade, som hör om bråket stämmer, och du samlar allt i en bråkbok för klassen.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: mentorstid
+    text: På mentorstid pratar klassen om att vara en bra kompis. Du ger temat En kompis som hjälper till och säger att en kamrat ska skriva till bilden, och eleverna ritar en situation där någon får hjälp. Efter bytet funderar var och en ut en berättelse som passar bilden och berättar idén för sin kamrat. Var och en skriver berättelsen med början, mitt och slut, så att den visar vad kompisen gör och hur den som får hjälp känner sig. Författaren läser den för den som ritade, och du samlar bilderna och texterna i en bok som klassen läser tillsammans.
+utkast: false

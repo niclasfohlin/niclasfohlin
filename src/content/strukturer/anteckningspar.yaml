@@ -17,5 +17,24 @@ kalla:
   rubrik: Anteckningspar
   commit: b492447
   summa: 40fcab2f
-bild: { scen: anteckningspar, alt: "Överst hänger en tavla med rader av text. Under den sitter två elever vid ett bord med var sina anteckningar sida vid sida, och överst på båda står en grön cirkel. Eleven till vänster pekar på cirkeln i sina anteckningar och pratar, och pratbubblan visar samma gröna cirkel. Eleven till höger tittar på kamratens anteckningar och skriver vid cirkeln i sina egna med en penna." }
-utkast: true
+bild:
+  scen: anteckningspar
+  alt: Överst hänger en tavla med rader av text. Under den sitter två elever vid ett bord med var sina anteckningar sida vid sida, och överst på båda står en grön cirkel. Eleven till vänster pekar på cirkeln i sina anteckningar och pratar, och pratbubblan visar samma gröna cirkel. Eleven till höger tittar på kamratens anteckningar och skriver vid cirkeln i sina egna med en penna.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: SO
+    text: Du delar in klassen i par och läser högt ur faktatexten om vikingatiden medan eleverna följer med i sin bok. Eleverna antecknar nyckelord och årtal ur texten var för sig. Efter omkring tio minuter stannar du, och den ena sammanfattar sina anteckningar för den andra, som sedan gör detsamma. Var och en för in något ur kamratens anteckningar i sina egna. Paren gör om det med nästa avsnitt tills texten är läst, och sist skriver de under varandras anteckningar.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Du delar in klassen i par och går igenom hur en argumenterande text byggs upp, med tes, argument, motargument och slutsats. Eleverna antecknar uppbyggnaden med egna ord medan du talar och skriver på tavlan. Efter omkring tio minuter stannar du, och eleverna turas om att sammanfatta sina anteckningar för varandra. Var och en för in det som saknades ur kamratens anteckningar. När anteckningarna är fullständiga skriver paret under varandras, och båda har då en disposition att skriva sin egen text efter.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Du delar in klassen i par och går igenom hur man räknar ut arean av en triangel, med exempel som du räknar på tavlan. Eleverna antecknar stegen och exemplen var för sig medan du talar. Efter omkring tio minuter stannar du, och den ena sammanfattar sina anteckningar för den andra, som sedan gör detsamma. Var och en för in något som saknades ur kamratens anteckningar, till exempel ett steg eller en uträkning. Paren gör om det efter nästa exempel tills genomgången är slut och skriver sist under varandras anteckningar.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: samarbete
+    text: Inför ett längre grupparbete delar du in klassen i par och går igenom hur en grupp fördelar ansvar, ber om hjälp och ger varandra respons. Eleverna antecknar vad de vill ta med sig in i sin egen grupp. Efter omkring tio minuter stannar du, och paret turas om att sammanfatta sina anteckningar för varandra. Var och en för in något ur kamratens anteckningar i sina egna. När genomgången är slut skriver paret under varandras anteckningar.
+utkast: false

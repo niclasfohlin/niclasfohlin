@@ -17,5 +17,24 @@ kalla:
   rubrik: Rondellen
   commit: b492447
   summa: 28cc602e
-bild: { scen: rondellen, alt: "Fyra elever sitter runt ett bord, och på bordet går fyra pilar i en ring, från plats till plats. Den som talar visar med handen, och pratbubblan visar en kvadrat. Bredvid sitter den som har turen efter och tänker, med en grön cirkel i tankebubblan. De två vid bordets kortsidor tittar på den som talar." }
-utkast: true
+bild:
+  scen: rondellen
+  alt: Fyra elever sitter runt ett bord, och på bordet går fyra pilar i en ring, från plats till plats. Den som talar visar med handen, och pratbubblan visar en kvadrat. Bredvid sitter den som har turen efter och tänker, med en grön cirkel i tankebubblan. De två vid bordets kortsidor tittar på den som talar.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen har läst en bilderbok om en hund som tappar bort sin boll, och du delar in eleverna i grupper om fyra. Du frågar: Hur känns det för hunden, och vad i bilderna visar det? Eleverna tänker en stund själva och turas sedan om att säga sin tanke, varv efter varv tills du säger stopp. Du låter varje grupp berätta för klassen vad som kom fram."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen skriver berättelser med dialog, och du delar in eleverna i grupper om fyra. Du frågar: Vilka ord kan stå i stället för ”sa”, och vad visar varje ord om den som pratar? Eleverna tänker själva en stund och turas sedan om att säga ett ord, varv efter varv tills du säger stopp. Grupperna sammanfattar vilka ord de vill använda i sina texter."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Klassen arbetar med procent, och du delar in eleverna i grupper om fyra. Du frågar: Vilka sätt finns det att räkna ut 15 procent av 240, och vad är bra med varje sätt? Eleverna tänker själva och turas sedan om att säga ett sätt, varv efter varv tills du säger stopp. Grupperna sammanfattar vilka sätt de hittade och vilket som går snabbast."
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: "Det är klassråd, och du delar in klassen i grupper om fyra. Du frågar: Vad kan vi göra så att alla får vara med i leken på rasten? Eleverna tänker själva en stund och turas sedan om att säga sitt förslag, varv efter varv tills du säger stopp. Varje grupp sammanfattar sina förslag och berättar dem för klassen."
+utkast: false

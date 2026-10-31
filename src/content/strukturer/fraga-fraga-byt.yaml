@@ -17,5 +17,24 @@ kalla:
   rubrik: Fråga, fråga, byt!
   commit: b492447
   summa: 6ec64df4
-bild: { scen: fraga-fraga-byt, alt: "Till vänster håller en elev upp ett kort med en cirkel och förklarar för en kamrat, och pratbubblan visar samma cirkel. Kamraten lyssnar och har ett eget kort med ett hjärta i handen. I mitten håller två elever fram sina kort mot varandra i brösthöjd, det ena med en triangel och det andra med en kvadrat, och två pilar i en ring runt korten visar att de byter kort. Till höger går en elev med ett kort med en stjärna i ena handen och den andra handen uppsträckt." }
-utkast: true
+bild:
+  scen: fraga-fraga-byt
+  alt: Till vänster håller en elev upp ett kort med en cirkel och förklarar för en kamrat, och pratbubblan visar samma cirkel. Kamraten lyssnar och har ett eget kort med ett hjärta i handen. I mitten håller två elever fram sina kort mot varandra i brösthöjd, det ena med en triangel och det andra med en kvadrat, och två pilar i en ring runt korten visar att de byter kort. Till höger går en elev med ett kort med en stjärna i ena handen och den andra handen uppsträckt.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen har läst en faktatext om skogen, och varje elev får ett kort med ett ord ur texten, som mossa, kotte eller myrstack, och en förklaring på baksidan. Eleverna går omkring med handen uppsträckt, ger en high five när de möts och den ena förklarar sitt ord. Sedan gör den andra likadant. Därefter byter de kort, men den som inte kunde förklara får först se baksidan och höra kamraten förklara. De går vidare till en ny kamrat tills du avbryter.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen ska skriva en berättelse, och varje elev får ett kort med ett begrepp, som inledning, vändpunkt, dialog eller miljöbeskrivning, och en förklaring på baksidan. Eleverna går omkring med handen uppsträckt och ger en high five när de möts. Den ena förklarar sitt begrepp med ett exempel ur en bok ni har läst, och sedan den andra. Därefter byter de kort, men den som inte kunde förklara får först se baksidan och höra kamraten förklara. De går vidare till en ny kamrat tills du avbryter.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen har arbetat med procent, och varje elev får ett kort med ett begrepp, som rabatt, ränta, förändringsfaktor eller procentenhet, och en förklaring med ett räkneexempel på baksidan. Eleverna går omkring med handen uppsträckt, ger en high five när de möts och den ena förklarar sitt begrepp med egna ord. Sedan gör den andra likadant. Därefter byter de kort, men den som inte kunde förklara får först se baksidan och höra kamraten förklara. De fortsätter med nya kamrater tills du avbryter.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Klassen pratar om hur ni ska vara mot varandra, och varje elev får ett kort med ett begrepp, som respekt, rättvisa eller ansvar, och en förklaring på baksidan. Eleverna går omkring med handen uppsträckt, ger en high five när de möts och den ena förklarar sitt begrepp med ett exempel från skolan. Sedan gör den andra likadant. Därefter byter de kort, men den som inte kunde förklara får först se baksidan och höra kamraten förklara. Det fortsätter med nya kamrater tills du avbryter.
+utkast: false

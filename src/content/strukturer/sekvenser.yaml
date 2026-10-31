@@ -16,5 +16,24 @@ kalla:
   rubrik: Sekvenser
   commit: b492447
   summa: a3110353
-bild: { scen: sekvenser, alt: "Fyra elever sitter runt ett bord, och var och en håller ett blått kort upprätt mot bröstet med baksidan utåt, så att ingen annan ser vad som står på det. Eleven bakom bordet till vänster beskriver sitt kort, och pratbubblan visar en kvadrat. På bordet ligger tre blå kort i en rad med baksidan upp och en lucka mellan det andra och det tredje. Eleven bakom bordet till höger pekar på luckan, där det egna kortet ska in, och har en triangel och en kvadrat efter varandra i tankebubblan." }
-utkast: true
+bild:
+  scen: sekvenser
+  alt: Fyra elever sitter runt ett bord, och var och en håller ett blått kort upprätt mot bröstet med baksidan utåt, så att ingen annan ser vad som står på det. Eleven bakom bordet till vänster beskriver sitt kort, och pratbubblan visar en kvadrat. På bordet ligger tre blå kort i en rad med baksidan upp och en lucka mellan det andra och det tredje. Eleven bakom bordet till höger pekar på luckan, där det egna kortet ska in, och har en triangel och en kvadrat efter varandra i tankebubblan.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen har läst en saga, och du delar in eleverna i grupper om fyra. Varje grupp får åtta bildkort med händelser ur sagan. Eleverna delar ut korten med baksidan upp, märker baksidorna så att de känner igen sina och beskriver sina bilder för varandra utan att visa dem. Gruppen enas om ordningen, vänder korten och kontrollerar mot boken. Till sist pratar eleverna om vad som gjorde det svårt eller lätt.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva nyhetsartiklar och tränar på hur de är byggda. Du delar in eleverna i grupper om tre och ger varje grupp en kort artikel klippt i sex kort: rubrik, ingress och fyra stycken. Eleverna delar ut korten med baksidan upp, märker baksidorna och beskriver sina delar för varandra med egna ord utan att visa dem. Gruppen enas om ordningen, vänder korten och kontrollerar mot artikeln. Sedan pratar eleverna om vad som gjorde det svårt eller lätt, till exempel hur de såg att det viktigaste kommer först."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Klassen arbetar med decimaltal, och du delar in eleverna i grupper om fyra. Varje grupp får åtta kort med tal mellan 0 och 2, som 0,05; 0,5; 0,75 och 1,25. Eleverna delar ut korten med baksidan upp, märker baksidorna och beskriver sina tal med ord, som ”lite mindre än en hel”, utan att visa korten. Gruppen enas om storleksordningen, vänder korten och kontrollerar. Sedan talar eleverna om vad som gjorde det svårt eller lätt att jämföra talen.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: Mentorsgruppen pratar om hur en konflikt växer, och du delar in eleverna i grupper om fyra. Varje grupp får åtta kort som beskriver ett förlopp, från två olika åsikter till ett öppet bråk. Eleverna delar ut korten med baksidan upp, märker baksidorna och beskriver sina kort för varandra med egna ord utan att visa dem. Gruppen enas om ordningen, vänder korten och kontrollerar. Sedan talar eleverna om vad som gjorde det svårt eller lätt att se ordningen.
+utkast: false

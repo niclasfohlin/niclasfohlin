@@ -17,5 +17,24 @@ kalla:
   rubrik: Mina ord – Dina ord
   commit: b492447
   summa: 5bf0e99d
-bild: { scen: mina-ord-dina-ord, alt: "Till vänster går en elev med ett blad i handen. Bladet har två spalter med ett streck emellan, med tre små former i den vänstra spalten och en i den högra. Till höger sitter två elever vid en bänk, och var och en har ett eget sådant blad framför sig. Den ena pekar på en triangel i den vänstra spalten på sitt blad och säger den, och pratbubblan visar triangeln. Den andra vänder huvudet mot kamraten och skriver samma triangel överst i den högra spalten på sitt blad." }
-utkast: true
+bild:
+  scen: mina-ord-dina-ord
+  alt: Till vänster går en elev med ett blad i handen. Bladet har två spalter med ett streck emellan, med tre små former i den vänstra spalten och en i den högra. Till höger sitter två elever vid en bänk, och var och en har ett eget sådant blad framför sig. Den ena pekar på en triangel i den vänstra spalten på sitt blad och säger den, och pratbubblan visar triangeln. Den andra vänder huvudet mot kamraten och skriver samma triangel överst i den högra spalten på sitt blad.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: SO
+    text: "Klassen ska läsa ett kapitel om industrialiseringen, och du väljer att eleverna först tänker enskilt. Du frågar: Vilka ord kan du som har med industrialiseringen att göra? Eleverna får tanketid och skriver sina ord i spalten Mina ord. När timern ringer söker de upp en kamrat, hälsar, sätter sig och skriver in kamratens ord i spalten Dina ord innan de går vidare till nästa. Du samlar alla ord i helklass innan ni läser kapitlet."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen ska skriva en berättelse som utspelar sig i en skog på natten, och du väljer att eleverna tänker i par. Du frågar: Vilka ord kan beskriva en skog på natten? Paren får tanketid och skriver sina ord i spalten Mina ord. När timern ringer söker paren upp ett annat par, hälsar, sätter sig och skriver in det andra parets ord i spalten Dina ord innan de går vidare till nästa par. Du samlar alla ord i helklass, så att alla har många ord att skriva med."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Klassen börjar arbeta med längd, och du väljer att eleverna tänker enskilt. Du frågar: Vilka ord kan du som har med längd att göra? Eleverna får tanketid och skriver sina ord i spalten Mina ord. När timern ringer söker de upp en kamrat, hälsar, sätter sig och skriver in kamratens ord i spalten Dina ord innan de går vidare till nästa. Du samlar alla ord i helklass, som längre, kortare, meter och lika lång."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen ska komma överens om hur alla vill ha det i klassrummet, och du väljer att eleverna tänker enskilt. Du frågar: Vilka ord beskriver en klass där alla trivs? Eleverna får tanketid och skriver sina ord i spalten Mina ord. När timern ringer söker de upp en kamrat, hälsar, sätter sig och skriver in kamratens ord i spalten Dina ord innan de går vidare till nästa. Du samlar alla ord i helklass, och orden blir början på klassens regler."
+utkast: false

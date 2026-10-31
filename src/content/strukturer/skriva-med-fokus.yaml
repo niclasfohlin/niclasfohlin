@@ -15,5 +15,24 @@ kalla:
   rubrik: Skriva med fokus
   commit: b492447
   summa: ccc70f36
-bild: { scen: skriva-med-fokus, alt: "Tre elever sitter runt ett bord med en gemensam bild i mitten, en gul sol på blå botten. Var och en har en egen text och en liten skylt som står på bordet med sitt fokus: ett hjärta, en hand och två kugghjul. Eleven bakom bordet till vänster har handen på sin text och läser upp den, med ett hjärta i pratbubblan. De två andra vänder sig mot den som läser och har var sin tankebubbla, den ena med en hand och den andra med två kugghjul." }
-utkast: true
+bild:
+  scen: skriva-med-fokus
+  alt: "Tre elever sitter runt ett bord med en gemensam bild i mitten, en gul sol på blå botten. Var och en har en egen text och en liten skylt som står på bordet med sitt fokus: ett hjärta, en hand och två kugghjul. Eleven bakom bordet till vänster har handen på sin text och läser upp den, med ett hjärta i pratbubblan. De två andra vänder sig mot den som läser och har var sin tankebubbla, den ena med en hand och den andra med två kugghjul."
+forslag:
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Varje grupp om tre får samma foto av en stormig strand som underlag. Du ger varje elev ett eget fokus på ett kort: det man ser, det man hör eller det man känner. Eleverna skriver var sin korta text om stranden ur sitt fokus och läser upp den för de andra i gruppen. Sedan skriver de en ny gemensam text om stranden med stöd av allas fokustexter. Grupperna läser sin färdiga text för klassen."
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Varje grupp om fyra får samma novell som underlag. Du ger varje elev ett eget fokus på ett kort: miljön, huvudpersonen, konflikten eller budskapet. Eleverna skriver var sin korta text om novellen ur sitt fokus, med stöd i det de läst, och läser upp den i gruppen. Därefter skriver de en gemensam tolkning av novellen med stöd av allas texter. Grupperna delar tolkningen med klassen."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Varje grupp om tre får samma bild av en fruktkorg med fyra äpplen, åtta päron och tre bananer som underlag. Du ger varje elev ett eget fokus på ett kort: hur många det är av varje sort, vilken sort det finns flest av eller hur frukten kan delas lika mellan fyra barn. Eleverna skriver var sin korta text med tal och matematiska ord och läser upp den i gruppen. De skriver en ny gemensam text om fruktkorgen med stöd av allas texter. Grupperna läser texten för klassen."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Varje grupp om fyra får samma berättelse som underlag, om en elev som skrattas åt i en gruppchatt. Du ger varje elev ett eget fokus på ett kort: den som blir utsatt, den som skrattar, den som ser på eller en vuxen i skolan. Eleverna skriver var sin korta text om vad personen känner och tänker och läser upp den i gruppen. De skriver sedan en gemensam text om vad som hade kunnat hjälpa, med stöd av allas texter. Grupperna delar sina texter med klassen."
+utkast: false

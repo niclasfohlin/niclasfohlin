@@ -15,5 +15,24 @@ kalla:
   rubrik: Topplistan
   commit: b492447
   summa: 00f29dcd
-bild: { scen: topplistan, alt: "Fyra elever sitter runt ett bord. Mitt på bordet ligger två listor sida vid sida, var och en med tre rader och ett tecken på varje rad. Den vänstra listan har en stjärna överst och sedan en cirkel och ett hjärta, och den högra har en kvadrat, en stjärna och en triangel. Eleven i rosa tröja har handen vid sin lista och talar, och pratbubblan visar en stjärna. Eleven i röd tröja har handen vid den andra listan och tänker på samma stjärna. Eleverna i lila och blå tröja vid kortsidorna har var sin lista framför sig." }
-utkast: true
+bild:
+  scen: topplistan
+  alt: Fyra elever sitter runt ett bord. Mitt på bordet ligger två listor sida vid sida, var och en med tre rader och ett tecken på varje rad. Den vänstra listan har en stjärna överst och sedan en cirkel och ett hjärta, och den högra har en kvadrat, en stjärna och en triangel. Eleven i rosa tröja har handen vid sin lista och talar, och pratbubblan visar en stjärna. Eleven i röd tröja har handen vid den andra listan och tänker på samma stjärna. Eleverna i lila och blå tröja vid kortsidorna har var sin lista framför sig.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen har läst klart en kapitelbok, och du delar in eleverna i grupper om fyra. Var och en skriver ned sina tre mest intressanta minnen från boken, till exempel en scen eller en replik. Eleverna berättar om ett val i taget och motiverar det, och sedan pratar de om vad som skiljer och vad som är lika mellan listorna. Du går runt, lyssnar och slumpar fram några som delar med klassen. Till sist samlar du klassens svar till en topplista på tavlan.
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen har skrivit sagor i två veckor, och du delar in eleverna i grupper om fyra. Var och en skriver ned sina tre mest intressanta minnen från skrivandet, till exempel en idé de fick, ett ord de lärde sig eller en bild de ritade till sagan. Eleverna berättar om ett val i taget och motiverar det, och sedan pratar de om vad som skiljer och vad som är lika mellan listorna. Du går runt, lyssnar och slumpar fram några som delar med klassen. Du samlar klassens svar till en gemensam lista på tavlan.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen har arbetat med sannolikhet i tre veckor, och du delar in eleverna i grupper om fyra. Var och en skriver ned sina tre mest intressanta minnen från arbetsområdet, till exempel ett försök med tärningar, en uppgift eller ett ögonblick då något föll på plats. Eleverna berättar om ett val i taget och motiverar det, och sedan pratar de om vad som skiljer och vad som är lika mellan listorna. Du går runt, lyssnar och slumpar fram några som delar. Till sist samlar du klassens svar till en gemensam lista.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: temavecka
+    text: Klassen har haft en temavecka om vänskap, och du delar in eleverna i grupper om fyra. Var och en skriver ned sina tre mest intressanta minnen från veckan, till exempel en övning, ett samtal eller en film. Eleverna berättar om ett val i taget och motiverar det, och sedan pratar de om vad som skiljer och vad som är lika mellan listorna. Du går runt, lyssnar och slumpar fram några som delar med klassen. Till sist samlar du klassens svar till en gemensam lista.
+utkast: false

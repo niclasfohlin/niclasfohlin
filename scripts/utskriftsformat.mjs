@@ -83,6 +83,14 @@ const sidor = metoder.flatMap((id) => [
 const umMapp = join(dist, 'metoder');
 if (existsSync(umMapp)) for (const x of readdirSync(umMapp, { withFileTypes: true })) if (x.isDirectory() && existsSync(join(umMapp, x.name, 'lathund', 'index.html')) && (!valda.length || valda.includes(x.name))) sidor.push({ id: x.name, adress: `/metoder/${x.name}/lathund`, metodsida: false });
 
+// Verktyget Strukturer (K-650): verktygets sida och varje strukturs sida, som prövas i 320 och 360 punkter. Korten och
+// utskriften prövar scripts/strukturer/prov.mjs.
+const stMapp = join(dist, 'strukturer');
+if (!valda.length && existsSync(join(stMapp, 'index.html'))) {
+  sidor.push({ id: 'strukturer', adress: '/strukturer', metodsida: false });
+  for (const x of readdirSync(stMapp, { withFileTypes: true })) if (x.isDirectory() && existsSync(join(stMapp, x.name, 'index.html'))) sidor.push({ id: x.name, adress: `/strukturer/${x.name}`, metodsida: false });
+}
+
 // Inget skript i bygget skriver ut sidan: den enda utskriften är pdf:ens, ur ramen som SkrivUtPdf.astro lägger dit
 // (contentWindow.print). Skripten ligger i dist/_astro och direkt i sidorna, där Astro lägger de små.
 const SKRIVER_UT = /(?<![\w.])(?:window\.|self\.|globalThis\.)?print\(\)/;

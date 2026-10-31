@@ -1,0 +1,23 @@
+---
+// Ett kort på /strukturer (K-650): bilden, namnet och syftet som en länk till strukturens sida, och bocken som lägger
+// strukturen i listan Att skriva ut (src/scripts/strukturlistan.ts). I topplistan bär kortet sin plats.
+import { strukturensAdress, bildensAdress, slagensStil, type Struktur } from '../lib/strukturer';
+
+interface Props { s: Struktur; nr?: number }
+const { s, nr } = Astro.props;
+const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7 3.7 7.3-8"/></svg>';
+---
+
+<li>
+  <article class="st-kort" data-slag={s.data.slag} style={slagensStil(s.data.slag)}>
+    <a href={strukturensAdress(s.id)}>
+      <img src={bildensAdress(s.id)} alt="" width="900" height="560" loading="lazy" decoding="async" />
+      <span class="st-kort-text">
+        <span class="st-kort-namn">{s.data.namn}</span>
+        <span class="st-kort-rad">{s.data.syfte}</span>
+      </span>
+    </a>
+    {nr !== undefined && <span class="st-nr" aria-label={`Plats ${nr}`}>{nr}</span>}
+    <button type="button" class="st-bock" data-valj={s.id} aria-pressed="false" aria-label={`${s.data.namn} i listan att skriva ut`}><Fragment set:html={BOCK} /></button>
+  </article>
+</li>

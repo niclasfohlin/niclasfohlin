@@ -16,5 +16,24 @@ kalla:
   rubrik: Parrespons
   commit: b492447
   summa: c462a6db
-bild: { scen: parrespons, alt: "Två elever sitter vid ett bord med var sitt papper. På den vänstras papper står en cirkel, ett hjärta och ett frågetecken. Eleven till vänster pekar på sitt papper och pratar, och pratbubblan visar ett hjärta och ett frågetecken. Eleven till höger tittar på kamraten och ler, och skriver ett hjärta bredvid cirkeln på sitt eget papper." }
-utkast: true
+bild:
+  scen: parrespons
+  alt: Två elever sitter vid ett bord med var sitt papper. På den vänstras papper står en cirkel, ett hjärta och ett frågetecken. Eleven till vänster pekar på sitt papper och pratar, och pratbubblan visar ett hjärta och ett frågetecken. Eleven till höger tittar på kamraten och ler, och skriver ett hjärta bredvid cirkeln på sitt eget papper.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen har läst en novell, och du ger den öppna frågan: Vad lär sig huvudpersonen, och var i texten ser du det? Efter trettio sekunders tanketid berättar den ena sitt svar medan den andra lyssnar och skriver ned sina tankar om det som sägs. Eleverna byter roller och gör om det. Sedan ger de varandra sin respons, en i taget, till exempel om stället i texten stöder svaret, och skriver ned det viktigaste de fick. De svarar på responsen och tackar varandra för samarbetet."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Eleverna har skrivit ett första utkast till en berättelse, och du ger den öppna frågan: Hur börjar din berättelse, och vad vill du att läsaren ska känna? Efter trettio sekunders tanketid berättar den ena sitt svar, och den andra lyssnar och skriver ned sina tankar. Eleverna byter roller och gör om det. Sedan ger de varandra sin respons, en i taget, till exempel vad som väckte nyfikenhet och vad de ville veta mer om. Var och en skriver ned det viktigaste den fick, svarar på responsen och tackar kamraten för samarbetet."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Eleverna har löst en textuppgift om att dela tolv kakor mellan fyra barn, och du ger den öppna frågan: Hur tänkte du när du löste uppgiften? Efter trettio sekunders tanketid berättar den ena sitt svar medan den andra lyssnar och skriver ned ett par ord om det som sägs. Eleverna byter roller och gör om det. Sedan ger de varandra sin respons, en i taget, till exempel vilket steg som var lätt att förstå. Var och en skriver ned det viktigaste den fick och svarar på responsen, och sist tackar de varandra."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: samarbete
+    text: "Efter en vecka med grupparbete sätter du ihop par som har arbetat i samma grupp och ger den öppna frågan: Vad gjorde du som hjälpte gruppen, och vad vill du göra annorlunda nästa gång? Efter trettio sekunders tanketid berättar den ena sitt svar, och den andra lyssnar och skriver ned sina tankar om det som sägs. Eleverna byter roller och gör om det. Sedan ger de varandra sin respons, en i taget, till exempel något de såg kamraten göra i gruppen. Var och en skriver ned det viktigaste den fick, svarar på responsen och tackar kamraten för samarbetet."
+utkast: false

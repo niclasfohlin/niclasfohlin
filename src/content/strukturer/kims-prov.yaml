@@ -16,5 +16,24 @@ kalla:
   rubrik: Kims prov
   commit: b492447
   summa: f9baa6f1
-bild: { scen: kims-prov, alt: "Fyra elever sitter runt ett bord och lutar sig över ett stort gulvitt prov som ligger i mitten. Överst på provet sitter en liten bild av en elev, och under den står tre frågor med en svarsruta vid varje rad: en bock, ett kryss och en bock. Eleven bakom bordet till vänster pekar på den första frågan och har en bock i pratbubblan. Eleven bredvid pekar på rutan med krysset och har ett kryss i pratbubblan. Eleven vid bordets vänstra sida håller handen under hakan och har ett frågetecken och två kugghjul i en tankebubbla. Eleven till höger skriver anteckningar med en penna på ett eget litet papper." }
-utkast: true
+bild:
+  scen: kims-prov
+  alt: "Fyra elever sitter runt ett bord och lutar sig över ett stort gulvitt prov som ligger i mitten. Överst på provet sitter en liten bild av en elev, och under den står tre frågor med en svarsruta vid varje rad: en bock, ett kryss och en bock. Eleven bakom bordet till vänster pekar på den första frågan och har en bock i pratbubblan. Eleven bredvid pekar på rutan med krysset och har ett kryss i pratbubblan. Eleven vid bordets vänstra sida håller handen under hakan och har ett frågetecken och två kugghjul i en tankebubbla. Eleven till höger skriver anteckningar med en penna på ett eget litet papper."
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen har läst en bok om en hund som tappar sin boll och svarat skriftligt på fyra frågor, bland dem: Varför blev hunden ledsen? Du plockar ut ett svar på varje fråga, både bra svar och sådana som bygger på ett missförstånd, skriver av dem utan namn och sätter ihop dem till Kims prov. Grupper om två eller tre markerar det som är bra och pratar om hur Kim kan ha tänkt när svaret blev fel. De skriver upp det de ser medan du går runt och lyssnar. Sedan delar grupperna sina iakttagelser, och du samlar ihop de vanligaste missförstånden."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen har skrivit argumenterande texter om skolmaten. Du plockar ut stycken ur texterna, både starka inledningar och stycken där tesen saknas eller argumenten upprepar varandra, skriver av dem utan namn och sätter ihop dem till en text som Kim har skrivit. Grupper om tre undersöker vad som fungerar i Kims text, var den tappar läsaren och hur Kim kan ha tänkt. De antecknar medan du går runt och lyssnar. Grupperna delar sina iakttagelser med klassen, och du knyter ihop de vanligaste problemen och det som nästan fungerade.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen har skrivit ett litet prov om bråk, med uppgifter som: Hur mycket är 3/4 av 12? Du plockar ut ett svar på varje uppgift, så att provet får rätta, intressanta och felaktiga svar, skriver av dem utan namn och sätter ihop dem till Kims prov. Grupper om tre undersöker vad som är bra, var det blev fel och hur Kim kan ha tänkt, och de skriver upp det de ser medan du lyssnar. Grupperna delar sina iakttagelser i klassen. Du knyter ihop de vanligaste missförstånden, till exempel att svaret blir 3 när eleven bara har delat med fyra."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen har svarat skriftligt på tre frågor om rasten, bland dem: Vad gör du när en kompis hamnar utanför? Du plockar ut ett svar på varje fråga, både sådana som hjälper och sådana som gör det svårare för kompisen, skriver av dem utan namn och sätter ihop dem till Kims prov. Grupper om tre pratar om vad som fungerar i provet, vad som blev fel och hur Kim kan ha tänkt. De antecknar medan du går runt och lyssnar. Sedan delar grupperna sina iakttagelser, och du knyter ihop vad som hjälper en kompis och vad som gör det värre."
+utkast: false

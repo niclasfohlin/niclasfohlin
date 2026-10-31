@@ -16,5 +16,24 @@ kalla:
   rubrik: Huvuden ihop
   commit: b492447
   summa: c7ae46c5
-bild: { scen: huvuden-ihop, alt: "Fyra elever sitter tätt runt ett litet bord och lutar sig in, så att alla fyra huvudena möts över bordets mitt. Eleven i lila tröja viskar, och den lilla pratbubblan visar en kvadrat. Eleven i blå tröja bredvid och eleven i turkos tröja vid bordets kortsida tänker på samma kvadrat, och eleven i orange tröja lutar sig in från andra kortsidan. Framför var och en på bordet ligger en liten lapp med en, två, tre eller fyra prickar, elevens nummer." }
-utkast: true
+bild:
+  scen: huvuden-ihop
+  alt: Fyra elever sitter tätt runt ett litet bord och lutar sig in, så att alla fyra huvudena möts över bordets mitt. Eleven i lila tröja viskar, och den lilla pratbubblan visar en kvadrat. Eleven i blå tröja bredvid och eleven i turkos tröja vid bordets kortsida tänker på samma kvadrat, och eleven i orange tröja lutar sig in från andra kortsidan. Framför var och en på bordet ligger en liten lapp med en, två, tre eller fyra prickar, elevens nummer.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen har läst första kapitlet i en spänningsbok, där huvudpersonen hittar något och inte säger det till någon. Eleverna sitter i grupper om fyra med var sitt nummer, och du frågar: Varför tror ni att huvudpersonen håller det hemligt? Du säger huvuden ihop, och grupperna lutar sig mot varandra och viskar fram ett svar som alla kan ge. Du säger ett nummer, och de eleverna delar gruppens tankar med klassen. Därefter frågar du vad i texten som får dem att tro det, och ett annat nummer redovisar."
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva noveller. Eleverna sitter i grupper om tre eller fyra med var sitt nummer, och du frågar: Hur kan en novell börja mitt i en händelse? Du säger huvuden ihop, och eleverna lutar sig mot varandra och viskar fram en första mening som alla i gruppen kan säga. Sedan säger du nummer två, och de eleverna säger gruppens mening och berättar hur den fungerar. Därefter frågar du hur novellen kan sluta utan att allt förklaras, och ett annat nummer redovisar."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: "Klassen arbetar med addition inom 20, och eleverna sitter i grupper om tre eller fyra med var sitt nummer. Du frågar: Hur kan man räkna ut 8 plus 7 utan att räkna på fingrarna? Du säger huvuden ihop, och eleverna lutar sig mot varandra och viskar fram ett sätt som alla i gruppen kan förklara. Sedan säger du ett nummer, och de eleverna berättar hur gruppen tänkte. Du ställer en ny fråga, till exempel hur man räknar ut 9 plus 6, och ett annat nummer redovisar."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "På klassens råd pratar klassen om rasten. Eleverna sitter i grupper om fyra med var sitt nummer, och du frågar: Vad kan vi göra när någon står ensam och vill vara med? Du säger huvuden ihop, och grupperna lutar sig mot varandra och viskar fram ett förslag som alla kan stå för. Du säger ett nummer, och de eleverna delar gruppens tankar. Sedan frågar du hur man kan märka att någon vill vara med, och ett annat nummer redovisar."
+utkast: false

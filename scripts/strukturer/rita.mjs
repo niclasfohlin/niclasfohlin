@@ -20,9 +20,11 @@ import YAML from 'yaml';
 import { penna, V, plus } from './figurer/penna.mjs';
 import { figur, KLADER, STALLNINGAR } from './figurer/figur.mjs';
 import * as saker from './figurer/saker.mjs';
+// Stilen som JSON-import, så att sajtens bygge kan rita bilderna (src/pages/strukturer/[id].svg.ts) också när modulen
+// är paketerad av Vite och inte står bredvid stil.json.
+import STIL_FIL from './stil.json' with { type: 'json' };
 
-const HAR = dirname(fileURLToPath(import.meta.url));
-export const STIL = JSON.parse(readFileSync(join(HAR, 'stil.json'), 'utf8'));
+export const STIL = STIL_FIL;
 export const BREDD = 900, HOJD = 560;
 
 // Figurerna får olika hudtoner och tröjor efter sin plats i scenen, när scenen inte säger något annat, så att en

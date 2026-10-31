@@ -15,5 +15,24 @@ kalla:
   rubrik: Turas om
   commit: b492447
   summa: ecffcb36
-bild: { scen: turas-om, alt: "Två elever sitter bredvid varandra vid en bänk. Den till vänster har handen på kamratens axel, tittar på kamraten och uppmuntrar, och pratbubblan visar ett stort hjärta. Framför hen ligger ett eget papper med en kvadrat och en penna, som väntar tills rollerna växlar. Den till höger arbetar och skriver med pennan på ett papper med en triangel." }
-utkast: true
+bild:
+  scen: turas-om
+  alt: Två elever sitter bredvid varandra vid en bänk. Den till vänster har handen på kamratens axel, tittar på kamraten och uppmuntrar, och pratbubblan visar ett stort hjärta. Framför hen ligger ett eget papper med en kvadrat och en penna, som väntar tills rollerna växlar. Den till höger arbetar och skriver med pennan på ett papper med en triangel.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen i åk 2 övar på att läsa och svara på frågor, och uppgifterna är två korta texter om djur med tre frågor till varje. Du visar de två rollerna med en elev: den som arbetar läser texten högt och svarar, och den som uppmuntrar säger till exempel Bra läst och Prova igen. Du delar ut rollerna i varje par. Vid din signal växlar paret roller och tar nästa text. Till sist jämför två par sina svar på frågorna."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen i åk 4 övar på att beskriva med många sinnen, och uppgifterna är två bilder, till exempel en lekplats och ett torg i regn, som eleverna skriver fyra meningar till. Du modellerar rollerna med en elev: den som arbetar skriver, och den som uppmuntrar säger till exempel Fortsätt och Den meningen var bra. Du bestämmer rollerna i varje par. Efter din signal växlar de roller, och den andra skriver till nästa bild. Två par läser sina meningar för varandra och jämför vilka ord de valde."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Klassen i åk 7 övar ekvationer, och uppgifterna är tre ekvationer, till exempel 3x + 5 = 20 och 2(x + 4) = 14. Du visar rollerna med en elev vid tavlan: den som arbetar löser ekvationen, och den som uppmuntrar säger till exempel Bra tänkt och Du klarar nästa steg. Du bestämmer rollerna i varje par. Paret växlar roller på din signal eller när de själva vill, och tar nästa ekvation. Sist jämför två par sina lösningar och kontrollerar dem genom att sätta in värdet på x i ekvationen."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: mentorstid
+    text: "På mentorstid i åk 6 övar klassen att uppmuntra varandra, och uppgifterna är två byggen: ett så högt torn som möjligt av fem papper och en bro av tre papper och tejp som bär ett suddgummi. Du visar rollerna med en elev: den som arbetar bygger, och den som uppmuntrar säger vad hen ser, till exempel Du hittade ett bra sätt att hålla ihop den. Du lottar rollerna i varje par. På din signal växlar paren roller och tar nästa bygge. Sist visar två par sina byggen för varandra och berättar vilka uppmuntrande ord som hjälpte."
+utkast: false

@@ -14,5 +14,24 @@ kalla:
   rubrik: Byt och sortera
   commit: b492447
   summa: 67273d69
-bild: { scen: byt-och-sortera, alt: "Uppe till vänster står ett bord utan elever, där fyra blå kort ligger blandade med baksidan upp, och en pil går därifrån till ett större bord. En elev går från det första bordet mot det större. Vid det större bordet sitter två elever och sorterar den andra gruppens kort i två högar, en med trianglar och en med cirklar. Eleven till vänster lägger ett kort med en triangel på trianglarnas hög, och pratbubblan visar en triangel. Eleven till höger har vänt ett kort och tittar på baksidan, som är blå med en triangel, och pratbubblan visar en bock: kortet ligger rätt enligt facit." }
-utkast: true
+bild:
+  scen: byt-och-sortera
+  alt: "Uppe till vänster står ett bord utan elever, där fyra blå kort ligger blandade med baksidan upp, och en pil går därifrån till ett större bord. En elev går från det första bordet mot det större. Vid det större bordet sitter två elever och sorterar den andra gruppens kort i två högar, en med trianglar och en med cirklar. Eleven till vänster lägger ett kort med en triangel på trianglarnas hög, och pratbubblan visar en triangel. Eleven till höger har vänt ett kort och tittar på baksidan, som är blå med en triangel, och pratbubblan visar en bock: kortet ligger rätt enligt facit."
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen har läst en kapitelbok, och du ger varje grupp åtta kort med händelser ur ett eget kapitel. Gruppen lägger korten i den ordning händelserna kom, skriver numren på baksidan som facit och blandar om korten. Grupperna roterar till nästa bord, där de talar sig samman om hur den andra gruppens kort ska ligga och lägger dem. Sedan vänder de korten, kontrollerar mot facit och roterar vidare till nästa bord.
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen tränar stavning av sj-ljudet. Du ger varje grupp tolv egna ordkort, som sjö, skjorta, stjärna, chef, sjal och station, och ber gruppen sortera dem efter hur sj-ljudet stavas. Gruppen skriver stavningen på baksidan av varje kort som facit och blandar om korten. Grupperna roterar till ett annat bord, där de talar sig samman om hur den andra gruppens ord ska sorteras och sorterar dem. Sedan kontrollerar de mot facit och roterar vidare.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen arbetar med algebraiska uttryck. Du ger varje grupp tolv egna kort med uttryck, som 2(x + 3), 2x + 6, 3x + 6 och 6 + x, och ber gruppen lägga uttryck som är lika i samma hög. Gruppen skriver på baksidan vilken hög varje kort hör till som facit och blandar om korten. Grupperna roterar till ett annat bord, där de talar sig samman om hur uttrycken ska sorteras och sorterar dem. Sedan kontrollerar de mot facit och roterar vidare till nästa bord.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen har tränat stegen i att lösa en konflikt: berätta vad som hände, lyssna på den andra och föreslå en lösning. Du ger varje grupp sex kort med repliker ur en egen konflikt på rasten, som ”Jag blev arg när du tog bollen”, och gruppen lägger dem i den ordning som stegen säger. Gruppen skriver numren på baksidan som facit och blandar om korten. Grupperna roterar till ett annat bord, där de talar sig samman om ordningen och lägger korten. Sedan kontrollerar de mot facit och roterar vidare."
+utkast: false

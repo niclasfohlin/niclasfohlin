@@ -46,6 +46,26 @@ export function strukturensSumma(s) {
 }
 
 /**
+ * Kontrollsumman över det ett strukturkort visar: namnet, slaget, stegen och bildens scen. Skriptet som gör korten
+ * (scripts/strukturer/kort.mjs) skriver den i manifestet, och bygget räknar om den och stannar på ett kort som är äldre än
+ * strukturen. Radsluten i scenens fil räknas som \n, så att en arbetskopia i Windows och Netlifys bygge räknar samma.
+ * @param {{ namn: string, slag: string, steg: string[] }} s
+ * @param {string} scen  scenens fil, som text
+ * @returns {string}
+ */
+export function strukturkortetsInnehall(s, scen) {
+  const t = JSON.stringify([s.namn, s.slag, s.steg, scen.replace(/\r\n/g, '\n')]);
+  let h = 0x811c9dc5;
+  for (let i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h.toString(16).padStart(8, '0');
+}
+
+/** Kortets fil, i public/strukturer/kort/ och på /strukturer/kort/. */
+export const strukturkortetsFil = (id) => `strukturkort-${id}.pdf`;
+/** Filen med alla kort, två på varje A4, och dess nyckel i manifestet. */
+export const STRUKTURKORTEN_ALLA = Object.freeze({ fil: 'strukturkort-alla.pdf', nyckel: '_alla' });
+
+/**
  * Felen i en struktur, som en lista. En struktur som är utkast får sakna bild och förslag; en struktur som visas har
  * båda, och bilden har sitt textalternativ.
  * @param {{ namn?: string, andra?: string[], syfte?: string, slag?: string, steg?: string[], kalla?: { summa: string }, bild?: { scen?: string, alt?: string }, forslag?: { omrade: string, arskurs: string, amne?: string, text: string }[], utkast?: boolean }} s

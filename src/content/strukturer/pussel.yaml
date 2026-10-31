@@ -15,5 +15,24 @@ kalla:
   rubrik: Pussel
   commit: b492447
   summa: 4a0445bc
-bild: { scen: pussel, alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger tre pusselbitar ihop: en grön med en kvadrat, en blå med en cirkel och en rosa med en stjärna. Den fjärde biten fattas. Eleven i gul tröja till vänster lyssnar, och tankebubblan visar en triangel. Eleven i röd tröja håller upp den gula biten med triangeln och förklarar, och pratbubblan visar samma triangel. Eleverna i blå och grön tröja lutar sig mot den som förklarar, och den i blå tröja har handen vid sin bit." }
-utkast: true
+bild:
+  scen: pussel
+  alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger tre pusselbitar ihop: en grön med en kvadrat, en blå med en cirkel och en rosa med en stjärna. Den fjärde biten fattas. Eleven i gul tröja till vänster lyssnar, och tankebubblan visar en triangel. Eleven i röd tröja håller upp den gula biten med triangeln och förklarar, och pratbubblan visar samma triangel. Eleverna i blå och grön tröja lutar sig mot den som förklarar, och den i blå tröja har handen vid sin bit."
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: SO
+    text: Klassen läser om vikingatiden. Du delar in eleverna i hemgrupper och numrerar dem ett till fyra, och delarna är hus och mat, skepp och färder, gudar och tro samt samhälle och lag. Eleverna med samma nummer samlas i en expertgrupp, läser sin del och skriver tre nyckelord. Experterna går tillbaka till hemgruppen och lär ut det de kan. Du avslutar med frågor om hela vikingatiden som var och en svarar på själv.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen lär sig bygga en argumenterande text. Du delar in eleverna i hemgrupper och numrerar dem ett till fyra, och delarna är inledning med tes, argument, motargument och avslutning. Eleverna med samma nummer samlas i en expertgrupp, letar upp sin del i en debattartikel som du har delat ut och skriver vad den gör för läsaren. Experterna går tillbaka till hemgruppen och lär ut sin del. Du avslutar med att var och en skriver en kort argumenterande text om läxor.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen arbetar med bråk. Du delar in eleverna i hemgrupper och numrerar dem ett till fyra. Delarna är fyra sätt att visa tre fjärdedelar: som del av en figur, som del av ett antal, på en tallinje och som decimaltal. Eleverna med samma nummer samlas i en expertgrupp, gör egna exempel på sitt sätt och övar på att förklara det. Experterna lär ut i hemgruppen, och du avslutar med fyra uppgifter som var och en löser själv."
+  - omrade: socialt
+    arskurs: F–3
+    amne: livskunskap
+    text: "Klassen pratar om att lyssna på varandra. Du delar in eleverna i hemgrupper och numrerar dem ett till fyra, och delarna är fyra sätt att visa att man lyssnar: titta på den som pratar, vänta på sin tur, fråga mer och säga med egna ord vad man hörde. Eleverna med samma nummer samlas i en expertgrupp, får ett bildkort med sitt sätt och övar det tillsammans. Experterna går tillbaka till hemgruppen och lär ut sitt sätt. Du avslutar med frågor till klassen: Vilka fyra sätt har vi lärt oss, och när använder vi dem?"
+utkast: false

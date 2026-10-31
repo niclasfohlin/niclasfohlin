@@ -14,5 +14,24 @@ kalla:
   rubrik: Skicka ett problem
   commit: b492447
   summa: 1bf130ea
-bild: { scen: skicka-ett-problem, alt: "Två grupper sitter vid var sitt bord bredvid varandra. En elev i gruppen till vänster räcker över ett gult papper med ett frågetecken, gruppens problem, till en elev i gruppen till höger. En lång pil högt ovanför går från det vänstra bordet till det högra. I gruppen till höger ligger ett tomt papper för svaret, och en elev håller pennan redo över det. Alla tittar på problemet som lämnas över." }
-utkast: true
+bild:
+  scen: skicka-ett-problem
+  alt: Två grupper sitter vid var sitt bord bredvid varandra. En elev i gruppen till vänster räcker över ett gult papper med ett frågetecken, gruppens problem, till en elev i gruppen till höger. En lång pil högt ovanför går från det vänstra bordet till det högra. I gruppen till höger ligger ett tomt papper för svaret, och en elev håller pennan redo över det. Alla tittar på problemet som lämnas över.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen har läst en kapitelbok tillsammans. Du säger att problemen ska handla om de val som huvudpersonen gör, och varje grupp skriver en fråga om ett av valen i boken. Grupperna skickar frågan vidare, och gruppen som får den läser den och talar om vad de tänker, med stöd i boken. De antecknar sitt svar och skickar frågan vidare till en ny grupp.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen tränar på att göra texter mer levande. Du säger att problemen ska vara platta meningar, och varje grupp skriver en mening som en annan grupp ska skriva om, till exempel ”Hunden var arg”. Grupperna skickar meningen vidare, och gruppen som får den talar om hur den kan bli mer levande. De antecknar sin version och skickar meningen vidare till en ny grupp.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Klassen arbetar med addition och subtraktion i talområdet till 20. Du säger att problemen ska handla om skolans fruktkorg, och varje grupp skriver ett problem, till exempel hur många äpplen som är kvar när det fanns 15 och klassen har ätit upp 7. Grupperna skickar problemet vidare, och gruppen som får det läser det och talar om hur de räknar. De antecknar sitt svar och skickar problemet vidare till en ny grupp.
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: Mentorsgruppen arbetar med hur man är en bra kompis på nätet. Du säger att problemen ska vara svåra lägen i klassens gruppchatt, och varje grupp skriver ett, till exempel att någon lägger upp en bild som kan såra en kompis. Grupperna skickar problemet vidare, och gruppen som får det läser det och talar om vad de skulle göra och varför. De antecknar sitt svar och skickar problemet vidare till en ny grupp.
+utkast: false

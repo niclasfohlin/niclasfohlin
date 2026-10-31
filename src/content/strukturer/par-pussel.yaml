@@ -17,5 +17,24 @@ kalla:
   rubrik: Par-pussel
   commit: b492447
   summa: 0a074872
-bild: { scen: par-pussel, alt: "Två par sitter vid var sitt bord på olika platser i rummet. Det gula paret längst bak till vänster löser en uppgift med en triangel: den ena skriver och den andra pekar och förklarar, med en triangel i pratbubblan. Det blå paret längre fram till höger löser en annan uppgift med en kvadrat: den ena pekar och förklarar, med en kvadrat i pratbubblan, och den andra skriver." }
-utkast: true
+bild:
+  scen: par-pussel
+  alt: "Två par sitter vid var sitt bord på olika platser i rummet. Det gula paret längst bak till vänster löser en uppgift med en triangel: den ena skriver och den andra pekar och förklarar, med en triangel i pratbubblan. Det blå paret längre fram till höger löser en annan uppgift med en kvadrat: den ena pekar och förklarar, med en kvadrat i pratbubblan, och den andra skriver."
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen övar källkritik. Du delar in eleverna i fyrgrupper med två par, och ena paret får en nyhetsartikel och det andra ett blogginlägg om samma händelse. Uppgiften är att läsa sin text, markera vad som är fakta och vad som är åsikt och skriva en mening om vad avsändaren vill. Paren går till var sin plats i rummet och löser uppgiften. Tillbaka i fyrgruppen visar paren sin text och lär det andra paret hur de löste uppgiften, och sedan talar de om hur samarbetet gick.
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen övar att skriva meningar med stor bokstav och punkt. Du delar in eleverna i fyrgrupper med två par. Ena paret ska skriva tre meningar om sommaren och det andra tre frågor om sommaren med frågetecken. Paren går till var sin plats i rummet och skriver. Tillbaka i fyrgruppen visar paren vad de har skrivit och lär det andra paret var stor bokstav, punkt och frågetecken ska stå, och sedan talar de om hur samarbetet gick.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Klassen arbetar med bråk. Du delar in eleverna i fyrgrupper med två par, och ena paret får uppgiften att räkna ut 3/4 av 24 och det andra 2/3 av 24. Paren går till var sin plats i rummet, löser uppgiften och ritar lösningen. Tillbaka i fyrgruppen visar paren sin uppgift och lär det andra paret hur de löste den. Sedan talar de om hur samarbetet gick.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Klassen pratar om hur man välkomnar någon ny. Du delar in eleverna i fyrgrupper med två par, och ena paret får uppgiften att planera hur man tar emot en ny elev första dagen och det andra hur man bjuder in en kompis till en lek. Paren går till var sin plats i rummet och skriver eller ritar sin plan. Tillbaka i fyrgruppen visar paren planen och lär det andra paret hur de tänkte. Sedan talar de om hur samarbetet gick.
+utkast: false

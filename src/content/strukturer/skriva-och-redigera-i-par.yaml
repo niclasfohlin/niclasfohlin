@@ -17,5 +17,24 @@ kalla:
   rubrik: Skriva och redigera i par
   commit: b492447
   summa: 9fe88ae4
-bild: { scen: skriva-och-redigera-i-par, alt: "Två elever sitter vid en bänk med var sin skriven text. Den till vänster pekar med pennan på en rad i kamratens text, där ett rött kryss står i marginalen. Hen föreslår en ändring, och pratbubblan visar krysset. Den till höger lutar sig in med handen på sin text och lyssnar, och med den andra handen håller hen sin penna på kamratens text, som ligger framför hen." }
-utkast: true
+bild:
+  scen: skriva-och-redigera-i-par
+  alt: Två elever sitter vid en bänk med var sin skriven text. Den till vänster pekar med pennan på en rad i kamratens text, där ett rött kryss står i marginalen. Hen föreslår en ändring, och pratbubblan visar krysset. Den till höger lutar sig in med handen på sin text och lyssnar, och med den andra handen håller hen sin penna på kamratens text, som ligger framför hen.
+forslag:
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen i åk 3 skriver korta faktatexter om husdjur, och du har lagt fram faktaböcker på borden. Paren berättar i tur och ordning vad de tänker skriva medan kamraten frågar och skriver tre rubriker som disposition, till exempel Utseende, Mat och Boende. Var och en söker fakta i böckerna och håller utkik efter sådant kamraten behöver. Det första stycket skriver paret tillsammans i båda texterna, och resten skriver var och en själv. Sist läser eleverna varandras texter, rättar stor bokstav och punkt, bearbetar och skriver under varandras när de är felfria.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: samhällskunskap
+    text: I samhällskunskapen i åk 8 är skrivuppgiften en kort insändare om något i kommunen som eleven vill ändra, som fler cykelbanor. Paren berättar i tur och ordning vad de vill skriva, och kamraten frågar och gör en disposition med tes, argument och motargument. Var och en söker fakta i artiklar ur lokaltidningen som du har valt ut och håller utkik efter sådant kamraten behöver. Paret skriver inledningen till båda insändarna tillsammans, och resten skriver var och en själv. Sist läser de varandras insändare, rättar och föreslår ändringar, bearbetar och skriver under varandras när de är felfria.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: I åk 5 är skrivuppgiften att förklara för en elev i åk 3 hur man jämför två bråk. Paren berättar i tur och ordning vad de tänker skriva, medan kamraten frågar och gör en disposition med exempel, bild och förklaring. Var och en söker exempel i läroboken och håller utkik efter sådant som kamraten behöver. Paret skriver det första stycket i båda texterna tillsammans och skriver resten själva, med olika bråk i sina exempel. Till sist läser de varandras förklaringar, rättar och föreslår ändringar, bearbetar och skriver under varandras när matematiken och språket är felfria.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: På klassens råd i åk 5 är skrivuppgiften ett brev till en ny elev om hur klassen gör för att alla ska känna sig trygga. Paren berättar i tur och ordning vad de tänker skriva, medan kamraten frågar och gör en disposition. Var och en söker material i klassrådets protokoll och i klassens regler och håller utkik efter sådant kamraten kan använda. Det första stycket skriver paret tillsammans i båda breven, och resten skriver var och en själv. Sedan läser de varandras brev, rättar och föreslår ändringar, bearbetar och skriver under varandras när breven är felfria.
+utkast: false

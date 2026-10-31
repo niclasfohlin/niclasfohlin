@@ -17,5 +17,24 @@ kalla:
   rubrik: Runda bordet
   commit: b492447
   summa: c23bae9d
-bild: { scen: runda-bordet, alt: "Fyra elever sitter runt ett bord. Mellan de två bakom bordet är ett papper med ett hjärta i luften: den ena släpper det, och den andra tar emot det. Eleverna vid bordets kortsidor skriver med penna på var sitt papper, det ena med en stjärna och det andra med en grön cirkel. Den till vänster har en kvadrat i tankebubblan, det nya svar hen ska skriva." }
-utkast: true
+bild:
+  scen: runda-bordet
+  alt: "Fyra elever sitter runt ett bord. Mellan de två bakom bordet är ett papper med ett hjärta i luften: den ena släpper det, och den andra tar emot det. Eleverna vid bordets kortsidor skriver med penna på var sitt papper, det ena med en stjärna och det andra med en grön cirkel. Den till vänster har en kvadrat i tankebubblan, det nya svar hen ska skriva."
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen har läst en dikt om att flytta. Du ställer den öppna frågan: Vad får dikten dig att tänka på, och vilka ord i dikten gör det? Eleverna skriver var sitt svar på sitt papper, och på din signal skickar de papperet till kamraten till höger. Kamraten läser och skriver ett nytt svar, och papperen går runt tills du bryter. Gruppen väljer ut två svar att dela med klassen."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen ska skriva berättelser om en hemlig låda. Du ställer den öppna frågan: Vad kan finnas i lådan? Eleverna skriver ett ord eller en mening på sitt papper, och på din signal skickar de papperet till kamraten till höger. Kamraten läser och skriver ett nytt förslag, och papperen går runt tills du bryter. Gruppen väljer ut två förslag att dela med klassen."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen arbetar med bråk. Du ställer den öppna frågan: Hur kan du visa att 3/4 och 6/8 är lika mycket? Eleverna skriver ett sätt på sitt papper, till exempel en bild, en uträkning eller en tallinje, och skickar papperet till kamraten till höger på din signal. Kamraten läser och skriver ett nytt sätt, och papperen går runt tills du bryter. Gruppen väljer ut ett par sätt att visa för klassen."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Klassen ska börja ett grupparbete. Du ställer den öppna frågan: Vad behövs för att alla i en grupp ska våga säga vad de tycker? Eleverna skriver var sitt svar på sitt papper, och på din signal skickar de papperet till kamraten till höger. Kamraten läser och skriver ett nytt svar, och papperen går runt tills du bryter. Gruppen väljer ut två svar att dela med klassen."
+utkast: false

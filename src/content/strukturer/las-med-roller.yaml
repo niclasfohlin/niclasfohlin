@@ -16,5 +16,24 @@ kalla:
   rubrik: Läs med roller
   commit: b492447
   summa: 39575ffe
-bild: { scen: las-med-roller, alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger en text. Var och en håller upp ett kort med sitt eget tecken: en triangel, en kvadrat, en cirkel och en stjärna. Eleven i orange tröja, som har triangeln, pekar i texten och talar, och pratbubblan visar en triangel. Eleven i turkos tröja, som har kvadraten, tänker på en kvadrat. Eleverna i ljusgrön och gul tröja vid kortsidorna håller upp cirkeln och stjärnan." }
-utkast: true
+bild:
+  scen: las-med-roller
+  alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger en text. Var och en håller upp ett kort med sitt eget tecken: en triangel, en kvadrat, en cirkel och en stjärna. Eleven i orange tröja, som har triangeln, pekar i texten och talar, och pratbubblan visar en triangel. Eleven i turkos tröja, som har kvadraten, tänker på en kvadrat. Eleverna i ljusgrön och gul tröja vid kortsidorna håller upp cirkeln och stjärnan."
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: NO
+    text: "Du delar in eleverna i grupper om fyra och ger alla samma text, en kort text om hur djur klarar vintern. Du ger varje elev ett eget fokus att läsa efter: vad djuren äter, var de sover, hur de håller värmen eller vilka djur som flyttar. Eleverna läser texten, högt i tur och ordning eller var för sig, och skriver några stödord om sitt fokus. De berättar en i taget vad de fick syn på och för sedan ett öppet samtal om vad texten säger. Grupperna berättar för klassen vad de kom fram till."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen ska skriva egna faktatexter om djur. Du delar in eleverna i grupper om fyra, ger alla samma faktatext om vargen och ger varje elev ett eget fokus att läsa efter: rubriken, inledningen, hur svåra ord förklaras eller avslutningen. Eleverna läser texten, högt i tur och ordning eller var för sig, och skriver stödord om sitt fokus. De berättar en i taget vad de fick syn på och samtalar sedan öppet om vad texten säger och hur den är byggd. Grupperna berättar för klassen vad de vill ta med till sina egna texter."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Du delar in eleverna i grupper om fyra och ger alla samma textuppgift, där en klass köper glass till skolavslutningen med 15 procent rabatt. Du ger varje elev ett eget fokus: vad som frågas efter, vilka tal som finns, vilket räknesätt orden pekar på eller vad som inte behövs för svaret. Eleverna läser uppgiften var för sig och skriver stödord om sitt fokus. De berättar en i taget vad de fick syn på och samtalar sedan öppet om vad uppgiften säger. Grupperna berättar för klassen hur de vill lösa den."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Du delar in eleverna i grupper om fyra och ger alla samma text, en kort berättelse om en konflikt på rasten. Du ger varje elev ett eget fokus att läsa efter: vad huvudpersonen känner, vad de andra säger, vad som händer eller vad någon kunde ha gjort annorlunda. Eleverna läser berättelsen, högt i tur och ordning eller var för sig, och skriver stödord om sitt fokus. De berättar en i taget vad de fick syn på och för sedan ett öppet samtal om berättelsen. Grupperna berättar för klassen vad de kom fram till."
+utkast: false

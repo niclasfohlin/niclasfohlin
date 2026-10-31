@@ -16,5 +16,24 @@ kalla:
   rubrik: Hör vi ihop?
   commit: b492447
   summa: 51f18cee
-bild: { scen: hor-vi-ihop, alt: "Elever går omkring i rummet med var sitt kort. Till vänster står tre elever tätt ihop och håller upp var sitt kort med en triangel bredvid varandra, och den ena talar, med en triangel i pratbubblan. I mitten håller två elever fram sina kort mot varandra, det ena med en kvadrat och det andra med en cirkel, och den med kvadraten frågar, med ett frågetecken i pratbubblan. Längst fram till höger kommer en elev gående mot dem med ett kort med en kvadrat, och längre bak går en elev med ett kort med en stjärna." }
-utkast: true
+bild:
+  scen: hor-vi-ihop
+  alt: Elever går omkring i rummet med var sitt kort. Till vänster står tre elever tätt ihop och håller upp var sitt kort med en triangel bredvid varandra, och den ena talar, med en triangel i pratbubblan. I mitten håller två elever fram sina kort mot varandra, det ena med en kvadrat och det andra med en cirkel, och den med kvadraten frågar, med ett frågetecken i pratbubblan. Längst fram till höger kommer en elev gående mot dem med ett kort med en kvadrat, och längre bak går en elev med ett kort med en stjärna.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen läser dikter och övar på bildspråk. Varje elev får ett kort med en mening, till exempel ”Tiden är en tjuv”, ”Hon sjöng som en lärka” eller ”Vinden viskade i träden”. Eleverna läser sitt kort, berättar för bänkgrannen hur de tänkt och går sedan omkring och letar efter dem vars meningar har samma slags bildspråk. Grupperna funderar på vad deras meningar har gemensamt, och du sammanfattar med klassen hur liknelse, metafor och besjälning skiljer sig åt.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen förbereder en argumenterande text. Varje elev får ett kort med ett sambandsord, till exempel eftersom, därför, dessutom, dock, trots att eller i stället. Eleverna tittar på sitt ord, berättar för bänkgrannen hur de tänkt och går sedan omkring och letar efter dem vars ord gör samma jobb: visar orsak eller följd, lägger till något eller visar en motsats. Grupperna funderar på vad orden har gemensamt, och du sammanfattar med klassen var i en argumenterande text de olika orden behövs."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Klassen arbetar med bråk, decimaltal och procent. Varje elev får ett kort med ett tal i en av formerna, till exempel 3/4, 0,75 eller 75 procent. Eleverna tänker först ut vad talet blir i de andra formerna, berättar för bänkgrannen hur de tänkt och går sedan omkring och letar efter dem vars kort har samma värde. Grupperna funderar på vad de har gemensamt, och du sammanfattar med klassen hur man känner igen samma tal i olika former.
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: Klassen pratar om känslor. Varje elev får ett kort med ett känsloord, till exempel glad, jublande, ledsen, besviken, arg eller ilsken. Eleverna visar kortet för bänkgrannen och berättar hur de tänkt, och går sedan omkring för att hitta dem vars ord hör till samma känsla. Grupperna funderar på vad de har gemensamt, och du sammanfattar med klassen hur man kan se och känna i kroppen att man är glad, ledsen eller arg.
+utkast: false

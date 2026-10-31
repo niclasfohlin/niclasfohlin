@@ -73,6 +73,10 @@ steg('metoderfiler', 'node scripts/metoderfiler.mjs');
 steg('bildbank', 'node scripts/bildbank.mjs');
 steg('filmmp4', 'node scripts/filmmp4.mjs --vid-behov');
 steg('bladfot', 'node scripts/bladfot.mjs --vid-behov');
+// Strukturkorten (K-650): pdf:erna görs om med Chrome när en struktur, en scen, motorn eller kortets form har ändrats, och
+// bygget stannar på ett kort som är äldre än strukturen (src/lib/strukturer.ts).
+steg('strukturkort', 'node scripts/strukturer/kort.mjs --vid-behov');
+steg('strukturtopp', 'node scripts/strukturer/topplistan.mjs --vid-behov');
 
 const pdf = behov('lathund-pdf', 'lathund-pdf.mjs');
 const word = behov('lathund-word', 'lathund-word.mjs');
@@ -110,6 +114,7 @@ steg('bankpdf', 'node scripts/bankpdf.mjs');
 steg('pdfdelar', 'node scripts/pdfdelar.mjs');
 steg('paritet', 'node scripts/paritet.mjs');
 steg('utskriftsformat', 'node scripts/utskriftsformat.mjs');
+steg('strukturprov', 'node scripts/strukturer/prov.mjs');
 steg('metoderprov', 'node scripts/metoderprov.mjs');
 steg('metoderparitet', 'node scripts/metoderparitet.mjs');
 steg('planprov', 'node scripts/planprov.mjs');

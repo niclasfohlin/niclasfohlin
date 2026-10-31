@@ -16,5 +16,24 @@ kalla:
   rubrik: 5-3-1
   commit: b492447
   summa: 3aa78c12
-bild: { scen: 5-3-1, alt: "Fyra elever sitter runt ett bord som två par, två i gula tröjor och två i lila. Mitt på bordet ligger kort i en tratt: fem kort i en rad längst bak, med en triangel, en stjärna, en cirkel, ett hjärta och en kvadrat, tre kort under dem, med en stjärna, en cirkel och ett hjärta, och längst fram ett enda kort med en stjärna. Alla lutar sig mot tratten. En i det gula paret och en i det lila paret har var sin stjärna i pratbubblan." }
-utkast: true
+bild:
+  scen: 5-3-1
+  alt: "Fyra elever sitter runt ett bord som två par, två i gula tröjor och två i lila. Mitt på bordet ligger kort i en tratt: fem kort i en rad längst bak, med en triangel, en stjärna, en cirkel, ett hjärta och en kvadrat, tre kort under dem, med en stjärna, en cirkel och ett hjärta, och längst fram ett enda kort med en stjärna. Alla lutar sig mot tratten. En i det gula paret och en i det lila paret har var sin stjärna i pratbubblan."
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: NO
+    text: Klassen har läst en faktatext om vattnets kretslopp, och du ber eleverna sammanfatta den. Var och en skriver fem ord ur texten, till exempel avdunstning och moln. Paret delar sina ord och väljer de tre bästa. Två par delar sina tre och enas om det ord som säger mest om texten. Varje grupp berättar för klassen vilket ord de valde och varför.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen ska skriva en debattartikel om mobilfria skoldagar och har just sett ett filmklipp med argument för och emot. Du ber eleverna sammanfatta klippet med fem ord eller korta meningar var. Paret delar sina fem och väljer de tre som är viktigast att ha med i artikeln. Två par delar sina tre och enas om det starkaste argumentet. Varje grupp redovisar sitt argument för klassen, och efteråt skriver eleverna sina egna artiklar.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Klassen har arbetat med klockan i två veckor. Du ber eleverna skriva fem ord eller korta meningar om vad de vet om klockan, till exempel timvisare och kvart över. Paret läser upp sina ord för varandra och väljer tre. Två par sätter sig ihop, delar sina tre och enas om det viktigaste de vet om klockan. Varje grupp berättar för klassen vilket det blev och visar det på en klocka.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Klassen har pratat om hur det är att bli lämnad utanför i ett grupparbete. Du ber eleverna sammanfatta vad en bra kamrat gör i en grupp, och var och en skriver fem ord eller korta meningar. Paret delar sina fem och väljer tre. Två par delar sina tre och enas om det som är viktigast. Varje grupp läser upp sitt val för klassen.
+utkast: false

@@ -16,5 +16,24 @@ kalla:
   rubrik: På sightseeing
   commit: b492447
   summa: 01ffd51d
-bild: { scen: pa-sightseeing, alt: "På väggen hänger två arbeten, ett med en triangel och ett med en kvadrat, och en pil mellan dem visar att grupperna går vidare till nästa arbete. På båda sitter stora gula lappar med ett frågetecken eller ett hjärta. Framför det första arbetet står tre elever i gröna tröjor. Två syns bakifrån, och den ena pekar på triangeln medan den andra sätter upp en lapp med ett hjärta. Den tredje står vid sidan och skriver en lapp med ett frågetecken, med ett frågetecken i tankebubblan. Framför det andra arbetet står tre elever i orange tröjor. Två syns bakifrån, och den tredje pekar på lappen med hjärtat och har ett hjärta i pratbubblan." }
-utkast: true
+bild:
+  scen: pa-sightseeing
+  alt: På väggen hänger två arbeten, ett med en triangel och ett med en kvadrat, och en pil mellan dem visar att grupperna går vidare till nästa arbete. På båda sitter stora gula lappar med ett frågetecken eller ett hjärta. Framför det första arbetet står tre elever i gröna tröjor. Två syns bakifrån, och den ena pekar på triangeln medan den andra sätter upp en lapp med ett hjärta. Den tredje står vid sidan och skriver en lapp med ett frågetecken, med ett frågetecken i tankebubblan. Framför det andra arbetet står tre elever i orange tröjor. Två syns bakifrån, och den tredje pekar på lappen med hjärtat och har ett hjärta i pratbubblan.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Grupperna har läst var sin faktabok om ett djur och gjort en affisch om det de lärde sig. Du låter alla grupper hänga upp sin affisch på väggen. Eleverna vandrar medsols med sin grupp förbi alla affischer och sätter upp lappar med något de gillar eller en fråga om djuret. Tillbaka vid sin egen affisch läser gruppen lapparna, letar svar på frågorna i boken och skriver till dem på affischen. Sedan berättar grupperna vad de ändrade och varför.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Grupperna har skrivit en inledning till en novell, och du låter alla hänga upp sin inledning på väggen. Eleverna vandrar medsols med sin grupp förbi alla inledningar och skriver på lappar vad som får dem att vilja läsa vidare eller vad de undrar över. Tillbaka vid sin egen inledning läser gruppen lapparna och bearbetar texten. Därefter redovisar varje grupp vad de ändrade och varför.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Grupperna har löst problemet att dela tre pizzor rättvist mellan fyra personer, och du låter alla hänga upp sin lösning på väggen. Eleverna vandrar medsols med sin grupp förbi alla lösningar och sätter upp lappar med något de tycker är bra eller en fråga om hur gruppen tänkt. Tillbaka vid sin egen lösning läser gruppen lapparna och bearbetar lösningen. Sedan redovisar grupperna vad de ändrade och varför.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Grupperna har gjort varsin affisch med förslag på hur klassen vill ha det på rasten, och du låter alla hänga upp sin affisch på väggen. Eleverna vandrar medsols med sin grupp förbi alla affischer och skriver på lappar vad de gillar eller en fråga, till exempel hur ett förslag fungerar när många vill vara med. Tillbaka vid sin egen affisch läser gruppen lapparna och bearbetar sitt förslag. Därefter berättar grupperna vad de ändrade och varför.
+utkast: false

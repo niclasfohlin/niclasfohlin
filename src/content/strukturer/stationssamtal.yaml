@@ -13,5 +13,24 @@ kalla:
   rubrik: Stationssamtal
   commit: b492447
   summa: f4b5a772
-bild: { scen: stationssamtal, alt: "Tre frågor sitter uppe på väggen, var och en ett kort med ett frågetecken och en symbol: en triangel på det gula, en kvadrat på det gröna och en stjärna på det rosa. Pilar mellan korten visar att paren går från fråga till fråga. Under varje fråga står ett par vänt mot varandra. Vid den första pekar den ena upp på frågan och säger sin tanke, med en triangel i pratbubblan, och den andra skriver ned en triangel på ett papper. Vid den andra talar den ena, med en kvadrat i pratbubblan, och den andra lyssnar med handen under hakan. Vid den tredje tittar den ena upp på frågan och tänker, och den andra ser på hen." }
-utkast: true
+bild:
+  scen: stationssamtal
+  alt: "Tre frågor sitter uppe på väggen, var och en ett kort med ett frågetecken och en symbol: en triangel på det gula, en kvadrat på det gröna och en stjärna på det rosa. Pilar mellan korten visar att paren går från fråga till fråga. Under varje fråga står ett par vänt mot varandra. Vid den första pekar den ena upp på frågan och säger sin tanke, med en triangel i pratbubblan, och den andra skriver ned en triangel på ett papper. Vid den andra talar den ena, med en kvadrat i pratbubblan, och den andra lyssnar med handen under hakan. Vid den tredje tittar den ena upp på frågan och tänker, och den andra ser på hen."
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen har läst ett kapitel i romanen ni arbetar med. Du sätter upp fyra frågor på väggarna i rummet, till exempel ”Vilket beslut tar huvudpersonen, och varför?” och ”Vad tror du händer i nästa kapitel?” Paren går runt och samtalar om en fråga i taget, och vid varje fråga skriver de ned en eller två tankar. Efter rundan leder du ett samtal i helklass om frågorna.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen ska skriva varsin novell. Du sätter upp fyra novellinledningar på väggarna, och vid var och en står frågan: Vad får dig att vilja läsa vidare? Paren går runt och samtalar om en inledning i taget, och vid varje station skriver de ned några tankar om vad inledningen gör med läsaren. Du leder sedan ett samtal i helklass om vad en bra inledning behöver."
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Klassen arbetar med jämna och udda tal. Du sätter upp tre frågor på väggarna, till exempel ”Hur vet du att 7 är ett udda tal?” och ”Kan nio kakor delas rättvist mellan två?” Paren går runt och samtalar om en fråga i taget, och vid varje fråga skriver de ned ett par ord eller en mening. Du samlar klassen och leder ett samtal om vad paren kom fram till.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Klassen pratar om vad som gör en bra kompis. Du sätter upp fyra frågor på väggarna, till exempel ”Vad gör du när en kompis är ledsen?” och ”Hur märker du att någon vill vara med?” Grupper om tre går runt och samtalar om en fråga i taget, och vid varje fråga skriver de ned en gemensam tanke. Du leder sedan ett samtal i helklass om frågorna.
+utkast: false

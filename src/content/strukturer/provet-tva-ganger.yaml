@@ -16,5 +16,24 @@ kalla:
   rubrik: Provet två gånger
   commit: b492447
   summa: 02a4ceb3
-bild: { scen: provet-tva-ganger, alt: "Läraren står till vänster med några prov i ena handen och tar emot ett prov med den andra. En elev står framför läraren och håller två likadana kopior av sitt prov, en i varje hand, båda med en cirkel i svarsrutan: den ena räcker eleven fram till läraren och den andra behåller hen. Vid ett bord bredvid sitter två elever från gruppen med var sin kopia framför sig, den ena med en cirkel och den andra med en kvadrat i rutan, och tittar på eleven." }
-utkast: true
+bild:
+  scen: provet-tva-ganger
+  alt: "Läraren står till vänster med några prov i ena handen och tar emot ett prov med den andra. En elev står framför läraren och håller två likadana kopior av sitt prov, en i varje hand, båda med en cirkel i svarsrutan: den ena räcker eleven fram till läraren och den andra behåller hen. Vid ett bord bredvid sitter två elever från gruppen med var sin kopia framför sig, den ena med en cirkel och den andra med en kvadrat i rutan, och tittar på eleven."
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: NO
+    text: Klassen har läst en faktatext om igelkottar. Du ger sex studiefrågor om vad igelkotten äter, var den bor och hur den klarar vintern, och grupperna förbereder sig tillsammans. Eleverna gör sedan provet var för sig, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen jämför de svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense söker de upp stället i texten, och gruppen går vidare först när alla kan förklara svaret.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen har arbetat med argumenterande texter. Du ger åtta studiefrågor om tes, argument och motargument, och grupperna förbereder sig tillsammans. Eleverna gör provet enskilt, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen jämför de svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense söker de upp stället i kursboken, och gruppen går vidare först när alla kan förklara svaret.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Klassen har arbetat med area och omkrets. Du ger sju studiefrågor om rektanglar och sammansatta figurer, som omkretsen och arean av en rektangel på 6 gånger 4 cm, och grupperna förbereder sig tillsammans. Eleverna gör provet enskilt, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen jämför de svaren en uppgift i taget, och den som räknat rätt förklarar hur hen tänkte. Är de oense söker de upp exemplet i boken, och gruppen går vidare först när alla kan förklara lösningen.
+  - omrade: lasning
+    arskurs: 7–9
+    amne: SO
+    text: Klassen har läst kapitlet om klimatförändringar i geografiboken. Du ger åtta studiefrågor om växthuseffekten, varför jorden blir varmare och hur utsläppen kan minska, och grupperna förbereder sig tillsammans. Eleverna gör provet var för sig, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen jämför de svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense letar de upp stället i kapitlet, och gruppen går vidare först när alla kan förklara svaret.
+utkast: false

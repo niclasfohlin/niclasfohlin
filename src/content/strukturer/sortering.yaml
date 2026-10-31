@@ -15,5 +15,24 @@ kalla:
   rubrik: Sortering
   commit: b492447
   summa: 268cba9e
-bild: { scen: sortering, alt: "Fyra elever sitter runt ett bord där korten ligger i två högar, en med trianglar till vänster och en med kvadrater till höger. Eleven bakom bordet till vänster håller upp ett gult kort mellan högarna och funderar. Eleven vid bordets vänstra kortsida vill lägga kortet bland trianglarna, och pratbubblan visar en triangel. Eleven vid den högra kortsidan vill lägga det bland kvadraterna, och pratbubblan visar en kvadrat. Mellan högarna, vid bordets främre kant, ligger ett kort med ett frågetecken för sig, och eleven bakom bordet till höger pekar på det." }
-utkast: true
+bild:
+  scen: sortering
+  alt: Fyra elever sitter runt ett bord där korten ligger i två högar, en med trianglar till vänster och en med kvadrater till höger. Eleven bakom bordet till vänster håller upp ett gult kort mellan högarna och funderar. Eleven vid bordets vänstra kortsida vill lägga kortet bland trianglarna, och pratbubblan visar en triangel. Eleven vid den högra kortsidan vill lägga det bland kvadraterna, och pratbubblan visar en kvadrat. Mellan högarna, vid bordets främre kant, ligger ett kort med ett frågetecken för sig, och eleven bakom bordet till höger pekar på det.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Klassen tränar på ord med lång och kort vokal. Du delar ut ordkort som sol, boll, tak, hatt, bil och sill, så att alla i gruppen får några, och säger att kategorierna är lång vokal och kort vokal. Eleverna läser sina kort tyst en stund och talar sig sedan samman om var varje kort ska ligga. Ett kort de inte kan enas om läggs åt sidan, och gruppen återkommer till det när de andra korten ligger. Till sist förklarar gruppen sin sortering för en annan grupp.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen ska skriva ett mejl till kommunen och övar på att välja ord efter mottagaren. Du delar ut kort med meningar som ”Tjena, läget” och ”Med vänliga hälsningar”, så att alla i gruppen får några, och säger att kategorierna är mejlet till kommunen och sms till en kompis. Eleverna läser sina kort tyst en stund och talar sig sedan samman om var varje mening ska ligga. Ett kort de inte kan enas om, som ”Tack på förhand”, läggs åt sidan tills de andra ligger. Sedan förklarar gruppen sin sortering för en annan grupp och pekar på orden som avgjorde.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Klassen arbetar med geometriska former. Du delar ut kort med bilder av cirklar, trianglar, kvadrater, rektanglar och femhörningar, så att alla i gruppen får några, och säger att grupperna ska hitta egna kategorier. Eleverna tittar tyst på korten en stund och talar sig sedan samman om hur de ska sortera dem. Ett kort som gruppen inte kan enas om läggs åt sidan och tas upp igen sist. Därefter berättar gruppen för en annan grupp hur den sorterade, till exempel efter antal hörn.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Klassen pratar om vad som kan vara svårt på rasten. Du delar ut kort med små händelser, som ”någon fick inte vara med i leken” och ”bollen hamnade på taket”, så att alla i gruppen får några, och säger att kategorierna är ”Vi löser det själva” och ”Vi hämtar en vuxen”. Eleverna läser korten tyst en stund och talar sig sedan samman om var varje händelse ska ligga. Ett kort de inte kan enas om läggs åt sidan, och gruppen återkommer till det sist. Sedan förklarar gruppen sin sortering för en annan grupp.
+utkast: false

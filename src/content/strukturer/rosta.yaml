@@ -15,5 +15,24 @@ kalla:
   rubrik: Rösta!
   commit: b492447
   summa: b41422ec
-bild: { scen: rosta, alt: "Tre förslag sitter på en tavla: en triangel, en kvadrat och en stjärna. På förslagen sitter runda markörer i olika färger. Fyra elever står vid tavlan, och var och en har markörer i sin egen färg. Eleven i lila tröja fäster en lila markör på triangeln, och eleven i turkos tröja en turkos markör på stjärnan. Eleven i grön tröja tänker med handen under hakan, med en kvadrat och en stjärna i tankebubblan, de två förslag där de gröna markörerna sitter. Eleven längst till vänster håller sina orange markörer i en öppen hand i brösthöjd." }
-utkast: true
+bild:
+  scen: rosta
+  alt: "Tre förslag sitter på en tavla: en triangel, en kvadrat och en stjärna. På förslagen sitter runda markörer i olika färger. Fyra elever står vid tavlan, och var och en har markörer i sin egen färg. Eleven i lila tröja fäster en lila markör på triangeln, och eleven i turkos tröja en turkos markör på stjärnan. Eleven i grön tröja tänker med handen under hakan, med en kvadrat och en stjärna i tankebubblan, de två förslag där de gröna markörerna sitter. Eleven längst till vänster håller sina orange markörer i en öppen hand i brösthöjd."
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen har läst en faktatext om fjällräven och ska välja en rubrik till den. Du frågar: Vilken rubrik passar texten bäst? Varje grupp skriver sina förslag på ett papper mitt på bordet, och du ger varje elev fem klisterprickar i en egen färg. Eleverna funderar var och en på vilka förslag som håller och sätter sina prickar på minst två av dem. Gruppen räknar tillsammans vilken rubrik som fick flest prickar och pratar om varför den passar texten bäst."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Varje grupp ska skriva en saga tillsammans. Du frågar: Hur ska sagan börja? Gruppen skriver sina förslag på första meningen på ett papper mitt på bordet, och du ger varje elev fem klisterprickar i en egen färg. Eleverna funderar var och en på vilka meningar som får dem att vilja höra mer och sätter prickar på minst två av dem. Gruppen räknar tillsammans vilken mening som fick flest och pratar om varför just den vann."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen tränar huvudräkning. Du frågar: Vilket sätt är smartast för att räkna ut 28 · 15 i huvudet? Varje grupp skriver sina sätt på ett papper mitt på bordet, som 28 · 10 + 28 · 5 och 14 · 30, och du ger varje elev fem klisterprickar i en egen färg. Eleverna funderar var och en på vilka sätt som håller och sätter prickar på minst två av dem. Gruppen räknar tillsammans vilket sätt som fick flest prickar och pratar om vad som gjorde att det vann."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "På mentorstiden pratar klassen om stämningen i klassen. Du frågar: Vilken idé för en bättre stämning ska gruppen föreslå för klassen? Varje grupp skriver sina idéer på ett papper mitt på bordet, och du ger varje elev fem klisterprickar i en egen färg. Eleverna funderar var och en på vilka idéer som håller och sätter prickarna på minst två av dem. Gruppen räknar tillsammans vilken idé som fick flest och pratar om varför just den vann."
+utkast: false

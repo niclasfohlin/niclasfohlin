@@ -14,5 +14,24 @@ kalla:
   rubrik: Två löser problem
   commit: b492447
   summa: 8d62fc3a
-bild: { scen: tva-loser-problem, alt: "Två elever sitter vid en bänk med var sitt papper framför sig, det ena med en triangel och det andra med en kvadrat, och mellan dem ligger en hög gröna kort. Ovanför högen håller de fram var sitt grönt kort mot varandra, det ena med en triangel och det andra med en kvadrat. Två pilar ovanför korten visar att de byter kort med varandra." }
-utkast: true
+bild:
+  scen: tva-loser-problem
+  alt: Två elever sitter vid en bänk med var sitt papper framför sig, det ena med en triangel och det andra med en kvadrat, och mellan dem ligger en hög gröna kort. Ovanför högen håller de fram var sitt grönt kort mot varandra, det ena med en triangel och det andra med en kvadrat. Två pilar ovanför korten visar att de byter kort med varandra.
+forslag:
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Klassen i åk 2 övar textuppgifter med plus och minus, och uppgiftskorten har uppgifter som ”Hur många kulor har Mira kvar om hon hade 24 och gav bort 9?” Varje par får fem kort, och var och en drar ett kort och löser det på egen hand. När båda är klara byter de kort och löser kamratens uppgift. Paret jämför sina två svar och talar om hur rimliga de är, till exempel om svaret kan vara större än 24. Så fortsätter de med nya kort tills du bryter.
+  - omrade: lasning
+    arskurs: 4–6
+    amne: NO
+    text: Klassen i åk 5 övar att läsa mellan raderna, och uppgiftskorten har en kort text om ett djur och en fråga, till exempel ”Varför tror du att kamelen har långa ögonfransar?” Varje par får sex kort, och var och en drar ett kort, läser och svarar skriftligt. När båda är klara byter de kort och läser och svarar på kamratens kort. De jämför sina två svar och talar om hur rimliga de är och vilken mening i texten som stöder dem. Så fortsätter de med nya kort tills korten är slut.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen i åk 8 övar argumenterande text, och uppgiftskorten har påståenden som ”Mobilen bör lämnas i en låda under lektionerna”. Varje par får fyra kort, och var och en drar ett kort och skriver på egen hand ett argument för eller emot, med ett exempel som stöder det. När båda är klara byter de kort och skriver ett argument till kamratens påstående. De jämför sina två argument och talar om hur rimliga de är och vilka som håller för en motfråga. Så fortsätter de med nya kort tills du bryter.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: På klassens råd i åk 4 har uppgiftskorten små situationer, till exempel ”Vad gör du när en kompis står ensam på rasten?” Varje par får fem kort, och var och en drar ett kort och skriver på egen hand vad hen skulle göra. När båda är klara byter de kort och skriver vad de skulle göra i kamratens situation. De jämför sina två svar och talar om hur rimliga de är och om förslaget går att göra redan i morgon. Så fortsätter de med nya kort tills du bryter.
+utkast: false

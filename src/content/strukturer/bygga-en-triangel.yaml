@@ -15,5 +15,24 @@ kalla:
   rubrik: Bygga en triangel
   commit: b492447
   summa: 8ab29558
-bild: { scen: bygga-en-triangel, alt: "Fyra elever sitter runt ett bord där nio kort med skrivna ord ligger i en triangel: fyra i den nedersta raden, tre i nästa och två överst. Eleven bakom bordet till vänster håller upp ett gult kort med en stjärna över triangeln för att lägga det överst och säger varför, och pratbubblan visar en stjärna. Eleven bredvid pekar mot triangelns topp och frågar, och pratbubblan visar ett frågetecken. De två vid bordets kortsidor lutar sig mot triangeln." }
-utkast: true
+bild:
+  scen: bygga-en-triangel
+  alt: "Fyra elever sitter runt ett bord där nio kort med skrivna ord ligger i en triangel: fyra i den nedersta raden, tre i nästa och två överst. Eleven bakom bordet till vänster håller upp ett gult kort med en stjärna över triangeln för att lägga det överst och säger varför, och pratbubblan visar en stjärna. Eleven bredvid pekar mot triangelns topp och frågar, och pratbubblan visar ett frågetecken. De två vid bordets kortsidor lutar sig mot triangeln."
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: NO
+    text: Klassen har läst en faktatext om vattnets kretslopp. Du ger varje grupp tio kort med begrepp ur texten, som avdunstning, moln, nederbörd och grundvatten. Eleverna diskuterar korten och bygger en triangel där begreppet som är viktigast för att förstå texten ligger överst. Innan triangeln är klar ser gruppen till att alla kan förklara hur ordningen kom till. Du slumpar fram en elev i varje grupp som redovisar triangeln för klassen.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: Klassen ska skriva argumenterande texter. Du ger varje grupp tio kort med begrepp, som tes, argument, motargument, belägg, slutsats och rubrik. Grupperna diskuterar korten och placerar dem i en triangel med det som är viktigast för att övertyga läsaren överst. Var och en ser till att kunna förklara varför triangeln ser ut som den gör. Du slumpar fram en elev per grupp som redovisar triangeln.
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: Klassen tränar på textuppgifter. Du ger varje grupp tio kort med det man kan göra när man löser en textuppgift, som läsa uppgiften, rita en bild, välja räknesätt, uppskatta svaret och kontrollera svaret. Eleverna diskuterar korten och bygger en triangel med det som är viktigast för att komma rätt överst. Alla i gruppen ser till att kunna förklara varför ordningen blev som den blev. Du slumpar fram en elev per grupp som redovisar triangeln för klassen.
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: Klassen pratar om vad som gör en bra kompis. Du ger varje grupp tio kort med ord och en liten bild, som dela med sig, lyssna, hjälpa till, vara snäll och våga fråga. Eleverna diskuterar korten och lägger dem i en triangel med det som är viktigast överst. Gruppen ser till att alla kan berätta varför korten ligger som de gör. Du slumpar fram en elev i varje grupp som redovisar triangeln.
+utkast: false

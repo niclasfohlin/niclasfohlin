@@ -17,5 +17,24 @@ kalla:
   rubrik: APE
   commit: b492447
   summa: ca979b65
-bild: { scen: ape, alt: "Överst sitter en tavla med två kort, en triangel och en kvadrat, och en pil från triangeln till kvadraten. Under tavlan sitter två elever vid en bänk, och på deras papper står samma två rutor med en pil. Triangeln är ritad, och den ena skriver med pennan i den andra rutan. Den andra pekar på kvadraten på tavlan och säger nästa steg, och pratbubblan visar kvadraten." }
-utkast: true
+bild:
+  scen: ape
+  alt: Överst sitter en tavla med två kort, en triangel och en kvadrat, och en pil från triangeln till kvadraten. Under tavlan sitter två elever vid en bänk, och på deras papper står samma två rutor med en pil. Triangeln är ritad, och den ena skriver med pennan i den andra rutan. Den andra pekar på kvadraten på tavlan och säger nästa steg, och pratbubblan visar kvadraten.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Du visar på tavlan hur man läser ett nytt ord: säg ljuden ett i taget, dra ihop dem och läs om meningen för att höra att ordet passar. Du stämmer av med ett multisvar: du ljudar ett ord, och eleverna visar med ett, två eller tre fingrar vilket av tre ord på tavlan det blev. Fyrgrupperna talar om när modellen hjälper och vad som är svårt, sedan börjar paren läsa en sida i läseboken tillsammans. Uppgiften är att läsa sidan klart enskilt, och sedan jämför eleverna i nya par vilka ord de knäckte."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Du visar på tavlan en modell för en inledning: första meningen säger var vi är, den andra vem det handlar om och den tredje vad som händer. Du stämmer av med ett multisvar, och eleverna väljer vilken av tre inledningar som har alla tre delarna. Fyrgrupperna talar om hur modellen kan användas och vad som är svårt, sedan skriver paren första meningen ihop i en berättelse om en hemlig dörr. Uppgiften är att skriva klart inledningen enskilt, och sedan jämför eleverna sina inledningar i nya par."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Du visar balansmetoden på ekvationen 3x + 5 = 20: gör samma sak på båda sidor, först minus 5 och sedan delat med 3, så att x = 5. Du stämmer av med ett multisvar, och eleverna visar A, B eller C för första steget i 4x − 3 = 17: minus 3, plus 3 eller delat med 4. Fyrgrupperna talar om hur modellen kan användas och vad som är svårt, sedan börjar paren på 2x + 7 = 19 tillsammans. Uppgiften är fyra liknande ekvationer som var och en löser enskilt, och sedan jämför eleverna sina lösningar i nya par."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Du visar på tavlan hur ett jag-budskap är byggt: vad den andra gör, vad jag känner och vad jag vill att den andra gör. Du stämmer av med ett multisvar, och eleverna väljer vilken av tre meningar som är ett jag-budskap. Fyrgrupperna talar om när modellen kan användas och vad som är svårt, sedan skriver paren ett jag-budskap till en kompis som ofta avbryter. Uppgiften är ett eget jag-budskap om en situation som eleverna känner igen från skolan, som var och en skriver enskilt och jämför i nya par."
+utkast: false

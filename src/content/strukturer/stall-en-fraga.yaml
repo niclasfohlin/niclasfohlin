@@ -15,5 +15,24 @@ kalla:
   rubrik: Ställ en fråga
   commit: b492447
   summa: fc458e24
-bild: { scen: stall-en-fraga, alt: "Två elever står tätt intill varandra. Eleven till höger håller upp sitt blad mellan dem, med ett stort frågetecken överst och två skrivna rader under. Eleven till vänster säger sitt svar, och pratbubblan visar en triangel. Hen skriver samma triangel med en penna på bladet, under raderna. Eleven till höger tittar på det som skrivs." }
-utkast: true
+bild:
+  scen: stall-en-fraga
+  alt: Två elever står tätt intill varandra. Eleven till höger håller upp sitt blad mellan dem, med ett stort frågetecken överst och två skrivna rader under. Eleven till vänster säger sitt svar, och pratbubblan visar en triangel. Hen skriver samma triangel med en penna på bladet, under raderna. Eleven till höger tittar på det som skrivs.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: SO
+    text: Du presenterar ett kapitel om hur Sverige förändrades under industrialiseringen, och eleverna läser det. Var och en skriver ned en fråga eller en fundering om kapitlet, som Varför flyttade så många till städerna? Eleverna går runt, ställer sin fråga till den de möter och skriver ned svaret under frågan. De svarar också på kamraternas frågor och fortsätter tills de är nöjda eller du säger stopp. Till sist redovisar var och en ett av svaren i sin grupp.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Du går igenom hur en faktatext är byggd, med rubrik, ingress och stycken, och eleverna läser ett exempel. Var och en skriver ned en fråga om hur man gör, som Hur långt ska ett stycke vara? Eleverna går runt, ställer sin fråga till den de möter och skriver ned svaret under frågan. De svarar också på kamraternas frågor och fortsätter tills de är nöjda eller du säger stopp. Till sist redovisar var och en ett av svaren i sin grupp.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Du visar hur man räknar 7 + 8 genom att först fylla upp till tio, och eleverna provar sättet med kuber. Var och en skriver ned en fråga eller en fundering, som Funkar det med 9 + 6? Eleverna går runt, ställer sin fråga till den de möter och skriver ned svaret under frågan. De svarar också på kamraternas frågor och fortsätter tills de är nöjda eller du säger stopp. Till sist redovisar var och en ett av svaren i sin grupp.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Du presenterar ett förslag om en kompisbänk på skolgården, och eleverna får höra hur den skulle fungera. Var och en skriver ned en fråga om förslaget, som Vem bestämmer vem som får sitta där? Eleverna går runt, ställer sin fråga till den de möter och skriver ned svaret under frågan. De svarar också på kamraternas frågor och fortsätter tills de är nöjda eller du säger stopp. Till sist redovisar var och en ett av svaren i sin grupp.
+utkast: false

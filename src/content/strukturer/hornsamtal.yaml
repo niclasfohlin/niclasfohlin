@@ -14,5 +14,24 @@ kalla:
   rubrik: Hörnsamtal
   commit: b492447
   summa: 7535090c
-bild: { scen: hornsamtal, alt: "Ett rum med fyra hörn, och i varje hörn sitter en skylt med en triangel, en kvadrat, en grön cirkel eller en stjärna. I varje hörn står två elever och samtalar. I kvadratens hörn pekar en elev upp på skylten. I cirkelns hörn talar en elev, och pratbubblan visar cirkeln. Mitt i rummet går en elev mot cirkelns hörn, med cirkeln i tankebubblan och en pil på golvet." }
-utkast: true
+bild:
+  scen: hornsamtal
+  alt: Ett rum med fyra hörn, och i varje hörn sitter en skylt med en triangel, en kvadrat, en grön cirkel eller en stjärna. I varje hörn står två elever och samtalar. I kvadratens hörn pekar en elev upp på skylten. I cirkelns hörn talar en elev, och pratbubblan visar cirkeln. Mitt i rummet går en elev mot cirkelns hörn, med cirkeln i tankebubblan och en pil på golvet.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: "Klassen har läst en roman. Du sätter en fråga i vart och ett av rummets hörn: vilken scen som berörde mest, vem som förändras mest, vad man hade ändrat i slutet och vad författaren vill säga. Eleverna tänker enskilt på vilket hörn de vill gå till och går dit på din signal. Där delar de in sig i mindre grupper och samtalar om hörnets fråga, och du slumpar en elev ur varje hörn som delar en tanke med klassen."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen ska skriva om något de själva har varit med om. Du sätter en fråga i vart och ett av rummets hörn och läser dem högt: vad man gjorde i somras, en gång när man blev riktigt glad, en gång när man hjälpte någon och något man gjorde för första gången. Eleverna tänker enskilt på vilket hörn de vill gå till och går dit på din signal. Där delar de in sig i mindre grupper och berättar för varandra. Du slumpar en elev ur varje hörn som delar en tanke, och sedan skriver var och en sin text."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Klassen ska göra en enkät i klassen och visa svaren i ett diagram. Du sätter en fråga i vart och ett av rummets hörn: hur lång tid vägen till skolan tar, hur många syskon vi har, vilken frukt vi helst äter och hur många steg vi tar på en minut. Eleverna tänker enskilt på vilket hörn de vill gå till och går dit på din signal. Där samtalar de i mindre grupper om hur de kan samla in svaren och visa dem i ett diagram, och du slumpar en elev ur varje hörn som delar en tanke."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Klassen pratar om rätt och fel på mentorstiden. Du sätter en fråga i vart och ett av rummets hörn: om man alltid ska säga sanningen, om man får bryta mot en regel som är orättvis, om man ska säga till när en kompis fuskar och hur man ber om ursäkt på ett bra sätt. Eleverna tänker enskilt på vilket hörn de vill gå till och går dit på din signal. Där samtalar de i mindre grupper om hörnets fråga, och du slumpar en elev ur varje hörn som delar en tanke."
+utkast: false

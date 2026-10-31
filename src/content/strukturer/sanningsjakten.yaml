@@ -17,5 +17,24 @@ kalla:
   rubrik: Sanningsjakten
   commit: b492447
   summa: 521a0e07
-bild: { scen: sanningsjakten, alt: "Två elever sitter vid en bänk med ett papper där två påståenden står överst, det ena med en triangel och det andra med en kvadrat, och skrivna rader under. Den till vänster pekar på triangelns påstående, och pratbubblan visar triangeln och en bock. Den till höger skriver med penna under påståendena. En pil går från paret till ett bord intill, där ett annat papper med två påståenden, en cirkel och en stjärna, ligger och väntar." }
-utkast: true
+bild:
+  scen: sanningsjakten
+  alt: Två elever sitter vid en bänk med ett papper där två påståenden står överst, det ena med en triangel och det andra med en kvadrat, och skrivna rader under. Den till vänster pekar på triangelns påstående, och pratbubblan visar triangeln och en bock. Den till höger skriver med penna under påståendena. En pil går från paret till ett bord intill, där ett annat papper med två påståenden, en cirkel och en stjärna, ligger och väntar.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: NO
+    text: Klassen har läst en faktatext om vattnets kretslopp. Paren talar om vad de minns ur texten och skriver högst upp på sitt papper ett sant och ett falskt påstående, till exempel ”Vattnet avdunstar när solen värmer sjön” och ”Regn bildas när vattenångan värms upp”. Paren roterar till ett nytt bord, läser påståendena och skriver under varje vilket de tror är sant och varför, med stöd i texten. Vid nästa bord skriver de ett skäl som ingen har skrivit förut. Till sist får paren tillbaka sina egna påståenden och läser alla svar.
+  - omrade: skrivning
+    arskurs: 7–9
+    amne: svenska
+    text: I svenskan i åk 8 repeterar klassen hur en argumenterande text byggs upp. Paren talar om vad de kan och skriver högst upp på sitt papper ett sant och ett falskt påstående, som ”Varje argument ska stödja tesen” och ”Man ska aldrig nämna motargument”. De roterar till ett nytt bord, läser påståendena och skriver under varje vilket de tror är sant och varför. Vid nästa bord skriver de ett skäl som ingen har skrivit förut. När paren har fått tillbaka sina påståenden läser de alla skälen och ser vilka som övertygar mest.
+  - omrade: matematik
+    arskurs: F–3
+    amne: matematik
+    text: Klassen i åk 3 har arbetat med udda och jämna tal. Paren talar om vad de vet och skriver högst upp på sitt papper ett sant och ett falskt påstående, till exempel ”Alla tal som slutar på 2 är jämna” och ”Alla tal som slutar på 5 är jämna”. Paren roterar till ett nytt bord, prövar påståendena med egna exempel och skriver under varje vilket de tror är sant och varför. Vid nästa bord skriver de ett skäl eller ett exempel som ingen har skrivit förut. När paren får tillbaka sina påståenden läser de alla svar.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: "Klassen har bytt platser, och du vill att alla ska lära känna varandra bättre. Paren skriver om sig själva: eleverna talar om vad de har gemensamt och skriver högst upp på sitt papper ett sant och ett falskt påstående, till exempel ”Vi har båda en lillebror” och ”Vi spelar båda fotboll”. Paren roterar till ett nytt bord, läser påståendena och skriver under varje vilket de tror är sant och varför. Vid nästa bord skriver de ett skäl som ingen har skrivit förut. När paren får tillbaka sitt papper läser de alla svar och ser vad klasskamraterna trodde om dem."
+utkast: false

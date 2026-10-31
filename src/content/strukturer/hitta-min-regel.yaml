@@ -17,5 +17,24 @@ kalla:
   rubrik: Hitta min regel
   commit: b492447
   summa: bc571cbe
-bild: { scen: hitta-min-regel, alt: "Överst hänger en tavla med två rutor. I den vänstra rutan sitter en röd triangel, en röd kvadrat och en röd cirkel, och i den högra en blå triangel, en blå kvadrat och en blå cirkel. Två elever syns bakifrån framför tavlan. Den vänstra pekar på den vänstra rutan, och pratbubblan visar en röd stjärna. Den högra lutar sig mot kamraten och frågar, med ett frågetecken i pratbubblan." }
-utkast: true
+bild:
+  scen: hitta-min-regel
+  alt: Överst hänger en tavla med två rutor. I den vänstra rutan sitter en röd triangel, en röd kvadrat och en röd cirkel, och i den högra en blå triangel, en blå kvadrat och en blå cirkel. Två elever syns bakifrån framför tavlan. Den vänstra pekar på den vänstra rutan, och pratbubblan visar en röd stjärna. Den högra lutar sig mot kamraten och frågar, med ett frågetecken i pratbubblan.
+forslag:
+  - omrade: lasning
+    arskurs: 7–9
+    amne: svenska
+    text: Innan klassen läser debattartiklar ritar du två rutor på tavlan och skriver ”Skolan har 400 elever” och ”Biblioteket stänger klockan fem” i ruta ett och ”Skolmaten är för dålig” och ”Alla borde läsa mer” i ruta två. Du frågar vad regeln är, och paren diskuterar förslag. Du lägger till ”Provet var på tisdagen” i ruta ett och ”Läxor är onödiga” i ruta två, och paren diskuterar igen. Sedan lägger du till fler meningar, eleverna diskuterar i fyrgrupper och du ber dem föreslå egna meningar till rutorna. När de flesta grupper har hittat regeln, fakta i ruta ett och åsikter i ruta två, ber du någon förklara den.
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Du ritar två rutor på tavlan och skriver två ord i vardera: katt och sommar i ruta ett, hus och bok i ruta två. Du frågar vad regeln är, och eleverna diskuterar förslag i par. Du lägger till mamma i ruta ett och snö i ruta två, och paren diskuterar igen. Sedan lägger du till fler ord, eleverna diskuterar i fyrgrupper och du ber dem föreslå ord som passar i vardera rutan. När de flesta grupper har hittat regeln, att orden i ruta ett har dubbelteckning, ber du någon förklara den."
+  - omrade: matematik
+    arskurs: 4–6
+    amne: matematik
+    text: "Du ritar två rutor på tavlan och skriver två tal i vardera: 8 och 20 i ruta ett, 6 och 10 i ruta två. Du frågar vad regeln är, och eleverna funderar och diskuterar förslag i par. Du lägger till 12 i ruta ett och 14 i ruta två, och paren diskuterar igen. Sedan lägger du till fler tal, eleverna diskuterar i fyrgrupper och du ber dem föreslå tal som passar i vardera rutan. När de flesta grupper har hittat regeln, att talen i ruta ett går att dela med 4, ber du någon förklara den."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Du ritar två rutor på tavlan och skriver ”Jag blir ledsen när du skrattar åt mig” och ”Jag vill ha tillbaka pennan” i ruta ett och ”Du är dum” och ”Ge hit pennan” i ruta två. Du frågar vad regeln är, och eleverna funderar och diskuterar förslag i par. Du lägger till ”Jag tycker att det var orättvist” i ruta ett och ”Du förstör alltid” i ruta två, och paren diskuterar igen. Sedan lägger du till fler meningar, eleverna diskuterar i fyrgrupper och du ber dem föreslå egna meningar till rutorna. När de flesta grupper har hittat regeln, att ruta ett har jag-budskap, ber du någon förklara den.
+utkast: false

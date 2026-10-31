@@ -14,5 +14,24 @@ kalla:
   rubrik: Kunskapskedjan
   commit: b492447
   summa: c1d74852
-bild: { scen: kunskapskedjan, alt: "Fyra elever står tätt i en ring. Eleven i turkos tröja talar, och pratbubblan visar en rad med fyra tecken: en triangel, en kvadrat, en cirkel och en stjärna. Eleven i gul tröja, som syns bakifrån, tänker på triangeln, kedjans första tecken. Eleven i ljusgrön tröja håller handen vid hakan och tänker på ett hjärta. Eleven i ljusblå tröja, också bakifrån, lyssnar." }
-utkast: true
+bild:
+  scen: kunskapskedjan
+  alt: "Fyra elever står tätt i en ring. Eleven i turkos tröja talar, och pratbubblan visar en rad med fyra tecken: en triangel, en kvadrat, en cirkel och en stjärna. Eleven i gul tröja, som syns bakifrån, tänker på triangeln, kedjans första tecken. Eleven i ljusgrön tröja håller handen vid hakan och tänker på ett hjärta. Eleven i ljusblå tröja, också bakifrån, lyssnar."
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: NO
+    text: "Klassen ska snart läsa en text om skogen. Du delar in eleverna i grupper om fem och ger dem temat skogen, så att orden är bekanta när eleverna möter dem i texten. En elev säger ett ord som hör till temat, till exempel myrstack, och sedan turas eleverna om: var och en upprepar alla ord som sagts och lägger till ett eget. Den som fastnar får hjälp av de andra. Du bryter efter några minuter, och gruppen räknar hur lång kedjan blev."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen övar på att binda ihop meningarna i sina texter med sambandsord. Du delar in eleverna i grupper om fyra och ger dem temat sambandsord, och en elev säger ett, till exempel dessutom. Eleverna turas om, och var och en upprepar alla ord som sagts och lägger till ett eget, som därför, sedan eller trots att. De hjälper den som fastnar. Du bryter, och gruppen räknar hur lång kedjan blev.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen har börjat arbeta med ekvationer. Du delar in eleverna i grupper om fem och ger dem temat ekvationer, och en elev säger ett ord som hör till det, till exempel variabel. Eleverna turas om, och var och en upprepar alla ord som sagts och lägger till ett eget, som likhetstecken, term eller lösning. Den som fastnar får hjälp av de andra. Du bryter, och gruppen räknar hur lång kedjan blev.
+  - omrade: socialt
+    arskurs: F–3
+    amne: klassens råd
+    text: På klassens råd delar du in eleverna i grupper om fyra och ger dem temat en bra kompis. En elev säger ett ord som hör till temat, till exempel snäll. Eleverna turas om, och var och en upprepar alla ord som sagts och lägger till ett eget, som lyssnar eller delar med sig. De hjälper den som fastnar. Du bryter, och gruppen räknar hur lång kedjan blev.
+utkast: false

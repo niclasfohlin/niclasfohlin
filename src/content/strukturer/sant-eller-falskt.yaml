@@ -16,5 +16,24 @@ kalla:
   rubrik: Sant eller falskt
   commit: b492447
   summa: 9d296eb4
-bild: { scen: sant-eller-falskt, alt: "Tre elever är vid ett bord där tre stora papper ligger i en rad, med en cirkel, en kvadrat och en triangel. Eleven bakom bordet till vänster pekar på papperet med cirkeln och har en cirkel och ett kryss i pratbubblan. Eleven bredvid pekar på papperet med kvadraten och har en kvadrat och ett kryss i pratbubblan. Den tredje sitter vid bordets hörn med handen under hakan och har ett frågetecken i en tankebubbla." }
-utkast: true
+bild:
+  scen: sant-eller-falskt
+  alt: Tre elever är vid ett bord där tre stora papper ligger i en rad, med en cirkel, en kvadrat och en triangel. Eleven bakom bordet till vänster pekar på papperet med cirkeln och har en cirkel och ett kryss i pratbubblan. Eleven bredvid pekar på papperet med kvadraten och har en kvadrat och ett kryss i pratbubblan. Den tredje sitter vid bordets hörn med handen under hakan och har ett frågetecken i en tankebubbla.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen har läst sagan om de tre bockarna Bruse. Du delar in eleverna i grupper om tre och läser upp tre påståenden om sagan: Den minsta bocken går först över bron, trollet bor under bron och trollet blir vän med bockarna. Eleverna tänker en stund själva och pratar sedan i gruppen om vilket påstående som är falskt och hur de vet det. Grupperna visar samtidigt med fingrarna, ett, två eller tre, vilket de tror är falskt. Du låter några grupper förklara hur de tänkte och var i sagan det står."
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen har arbetat med skiljetecken. Du delar in eleverna i grupper om fyra och läser upp tre påståenden: En fråga slutar med frågetecken, ett utropstecken visar att något sägs med känsla, och i en uppräkning sätter man kommatecken före ordet och. Eleverna tänker en stund var för sig och diskuterar sedan i gruppen vilket påstående som är falskt, med exempel som stöd. Grupperna visar sina svar samtidigt. Du låter några grupper förklara hur de tänkte."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Klassen arbetar med bråk och procent. Du delar in eleverna i grupper om tre och läser upp tre påståenden: 3/8 är mer än 35 procent, 15 procent av 60 är lika mycket som 60 procent av 15, och ett pris som först höjs med 20 procent och sedan sänks med 20 procent är tillbaka där det började. Eleverna tänker själva en stund och diskuterar sedan i gruppen vilket som är falskt, med räkneexempel som stöd. Grupperna visar sina svar samtidigt. Du låter några grupper förklara hur de tänkte."
+  - omrade: socialt
+    arskurs: 7–9
+    amne: mentorstid
+    text: "Klassen pratar om att dela bilder på nätet. Du delar in eleverna i grupper om fyra och läser upp tre påståenden: En bild som man har raderat kan finnas kvar hos andra, den som får en bild kan spara den med en skärmbild, och en bild som man skickar i en privat chatt kan inte spridas vidare. Eleverna tänker en stund var för sig och diskuterar sedan i gruppen vilket påstående som är falskt och varför. Grupperna visar sina svar samtidigt, och du låter några grupper förklara hur de tänkte."
+utkast: false

@@ -307,6 +307,18 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Verktyget Strukturer (K-650): bilderna, som bygget ritar ur scenerna, och strukturkorten: en dag, som de andra filerna.
+# Sidornas länkar och listans hämtningar bär filens version (scripts/filversion.mjs, src/components/Strukturlistan.astro).
+[[headers]]
+  for = "/strukturer/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/strukturer/kort/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 [[headers]]
   for = "/stodundervisning/reservbild/*"
   [headers.values]

@@ -16,5 +16,24 @@ kalla:
   rubrik: Läs och fråga
   commit: b492447
   summa: 7c110f57
-bild: { scen: las-och-fraga, alt: "Fyra elever sitter runt ett bord. Eleven i grön tröja sitter ensam på bordets bortre sida med händerna stilla och stängd mun och lyssnar, och i hens tankebubbla står ett frågetecken, frågan hen har ställt. Framför hen ligger hens egen text. På bordets närmre del ligger samma text, och de tre andra lutar sig in över den. Eleven i rosa tröja pekar i texten och talar, och pratbubblan visar frågetecknet och en bok. Eleven i röd tröja har handen på texten och talar med eleven i rosa tröja, och eleven i lila tröja sitter vid bordets främre hörn och syns bakifrån." }
-utkast: true
+bild:
+  scen: las-och-fraga
+  alt: Fyra elever sitter runt ett bord. Eleven i grön tröja sitter ensam på bordets bortre sida med händerna stilla och stängd mun och lyssnar, och i hens tankebubbla står ett frågetecken, frågan hen har ställt. Framför hen ligger hens egen text. På bordets närmre del ligger samma text, och de tre andra lutar sig in över den. Eleven i rosa tröja pekar i texten och talar, och pratbubblan visar frågetecknet och en bok. Eleven i röd tröja har handen på texten och talar med eleven i rosa tröja, och eleven i lila tröja sitter vid bordets främre hörn och syns bakifrån.
+forslag:
+  - omrade: lasning
+    arskurs: F–3
+    amne: svenska
+    text: Du delar in eleverna i grupper om fyra och ger alla samma text, en kort faktatext om bin. Eleverna läser texten och förbereder var sin fråga om den, till exempel om något de undrar över eller ett ord de inte förstår. De ställer sin fråga till gruppen en i taget, och den som frågar lyssnar utan att svara medan de andra reder ut frågan. Det fortsätter tills alla har frågat. Gruppen sammanfattar vad de förstod och vad de tar med sig.
+  - omrade: skrivning
+    arskurs: 4–6
+    amne: svenska
+    text: Klassen ska skriva bokrecensioner, och du delar in eleverna i grupper om fyra och ger alla samma text, en välskriven recension av en bok som klassen har läst. Eleverna läser den och förbereder var sin fråga om hur den är skriven, till exempel varför den börjar som den gör. De ställer sin fråga till gruppen en i taget, och den som frågar lyssnar utan att svara medan de andra reder ut frågan. Så fortsätter det tills alla har frågat. Gruppen sammanfattar vad de förstod och vad de tar med sig till sina egna recensioner.
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: Klassen börjar arbeta med sparande, och du delar in eleverna i grupper om fyra och ger alla samma text, en kort förklaring av ränta på ränta med ett räkneexempel. Eleverna läser texten och förbereder var sin fråga om den, till exempel varför summan växer mer för varje år. De ställer sin fråga till gruppen en i taget, och den som frågar lyssnar utan att svara medan de andra reder ut frågan. Så fortsätter det tills alla har frågat. Gruppen sammanfattar vad de förstod och vad de tar med sig.
+  - omrade: socialt
+    arskurs: 4–6
+    amne: klassens råd
+    text: Du delar in eleverna i grupper om fyra och ger alla samma text, en kort berättelse om en elev som är ny i klassen. Eleverna läser berättelsen och förbereder var sin fråga om den, till exempel hur den nya eleven känner sig eller vad de andra kunde ha gjort. De ställer sin fråga till gruppen en i taget, och den som frågar lyssnar utan att svara medan de andra reder ut frågan. Så fortsätter det tills alla har frågat. Gruppen sammanfattar vad de förstod och vad de tar med sig när någon ny börjar i klassen.
+utkast: false
