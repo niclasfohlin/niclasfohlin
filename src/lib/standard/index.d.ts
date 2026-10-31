@@ -872,3 +872,17 @@ export declare function vagenTillMandag(d: Record<string, any>): { vecka1: strin
 /** Lathundens fyra sidor ur metodens fält: Metoden, Vägen till måndag, Planera lektionen och De första veckorna, utan Håll fast. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export declare function lathundensSidor(d: Record<string, any>): LathundSida[];
+
+/** Strukturernas slag med namnet för läsaren och färgen, en rot för kortet, filtret, sidan och symbolerna (K-650). */
+export declare const STRUKTURENS_SLAG: Readonly<Record<'par' | 'grupp' | 'klass', { namn: string; farg: string; ljus: string }>>;
+/** Gränserna för en struktur: stegens antal och längd, förslagens antal och meningar, områdena och årskurserna. */
+export declare const STRUKTURENS_GRANSER: Readonly<{
+  steg: Readonly<{ minst: number; 'högst': number; tecken: number; allaTecken: number }>;
+  forslag: Readonly<{ antal: number; meningar: readonly [number, number] }>;
+  omraden: readonly string[];
+  arskurser: readonly string[];
+}>;
+/** Kontrollsumman över bankens fält i en struktur: namnet, andra namn, syftet och stegen. */
+export declare function strukturensSumma(s: { namn?: string; andra?: string[]; syfte?: string; steg?: string[] }): string;
+/** Felen i en struktur, som en lista. Ett utkast får sakna bild och förslag. */
+export declare function strukturensFel(s: { namn?: string; andra?: string[]; syfte?: string; kalla?: { summa: string }; slag?: string; steg?: string[]; bild?: { scen?: string; alt?: string }; forslag?: { omrade: string; arskurs: string; amne?: string; text: string }[]; utkast?: boolean }): string[];

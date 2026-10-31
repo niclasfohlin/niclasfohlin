@@ -1,0 +1,19 @@
+# Lika och olika. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Lika och olika
+andra:
+  - Lika/Olika
+syfte: Två elever har var sitt exemplar de inte får se och beskriver tills skillnaderna är funna
+steg:
+  - Läraren ger paret var sitt *exemplar* och sätter en skärm emellan dem.
+  - Eleverna turas om att beskriva en sak de ser, en åt gången.
+  - Eleverna lyssnar och jämför med sitt eget exemplar.
+  - Eleverna säger till när de tror att de hittat en skillnad.
+  - Eleverna fortsätter tills alla skillnader är funna.
+  - Eleverna tar bort skärmen och kontrollerar tillsammans.
+slag: par
+kalla:
+  rubrik: Lika och olika
+  commit: b492447
+  summa: b4bc5253
+utkast: true

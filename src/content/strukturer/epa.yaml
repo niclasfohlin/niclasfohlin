@@ -1,0 +1,18 @@
+# EPA. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: EPA
+andra:
+  - Enskilt, par, alla
+  - Think-Pair-Share
+syfte: Var och en tänker först, sedan par, sedan helklass
+steg:
+  - Läraren ställer *frågan*, som ska vara öppen.
+  - Eleverna får tanketid och funderar på svaret enskilt.
+  - Eleverna diskuterar svaret i par.
+  - Eleverna delar sina svar med hela klassen.
+slag: par
+kalla:
+  rubrik: EPA
+  commit: b492447
+  summa: 7a8e7d63
+utkast: true

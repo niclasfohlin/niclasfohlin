@@ -1,0 +1,19 @@
+# Sant eller falskt. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Sant eller falskt
+andra:
+  - Tre påståenden
+syfte: Gruppen ska hitta det falska bland tre påståenden
+steg:
+  - Läraren delar upp eleverna i grupper om två till fyra.
+  - Läraren läser upp tre *påståenden* varav ett är falskt.
+  - Eleverna får tid att tänka själva.
+  - Eleverna diskuterar påståendena i gruppen och motiverar sina svar.
+  - Grupperna visar sina svar samtidigt.
+  - Läraren låter några grupper förklara hur de tänkte.
+slag: grupp
+kalla:
+  rubrik: Sant eller falskt
+  commit: b492447
+  summa: 9d296eb4
+utkast: true

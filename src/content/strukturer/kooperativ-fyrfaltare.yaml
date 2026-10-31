@@ -1,0 +1,18 @@
+# Kooperativ fyrfältare. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Kooperativ fyrfältare
+andra: []
+syfte: Varje hemgrupp gör en fyrfältare om sitt begrepp och blir experter på det
+steg:
+  - Läraren delar in eleverna i hemgrupper och ger varje grupp ett *begrepp*.
+  - "Eleverna fyller i sin fyrfältare tillsammans: vad ordet betyder, en teckning och en mening."
+  - Eleverna ser till att alla i hemgruppen kan förklara begreppet.
+  - Läraren bildar expertgrupper med en elev från varje hemgrupp.
+  - Eleverna förklarar sitt begrepp för de andra med fyrfältaren som stöd.
+  - Eleverna återvänder till hemgruppen och talar om de nya begreppen.
+slag: grupp
+kalla:
+  rubrik: Kooperativ fyrfältare
+  commit: b492447
+  summa: 1103a2f3
+utkast: true

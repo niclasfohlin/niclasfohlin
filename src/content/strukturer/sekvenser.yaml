@@ -1,0 +1,19 @@
+# Sekvenser. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Sekvenser
+andra: []
+syfte: Var och en har ett kort ingen annan ser, och gruppen ordnar dem genom att beskriva
+steg:
+  - Läraren ger varje grupp en serie *kort* som har en naturlig ordning.
+  - Eleverna delar ut korten med baksidan upp så att ingen ser något.
+  - Eleverna märker baksidan av sina kort så att de går att känna igen.
+  - Eleverna beskriver sina kort för varandra utan att visa dem.
+  - Eleverna enas om vilken ordning korten ska ligga i.
+  - Eleverna vänder korten och kontrollerar ordningen.
+  - Eleverna talar om vad som gjorde det svårt eller lätt.
+slag: grupp
+kalla:
+  rubrik: Sekvenser
+  commit: b492447
+  summa: a3110353
+utkast: true

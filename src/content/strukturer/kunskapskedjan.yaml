@@ -1,0 +1,17 @@
+# Kunskapskedjan. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Kunskapskedjan
+andra: []
+syfte: Var och en upprepar allt de andra sagt innan de lägger till sitt eget
+steg:
+  - Läraren ger *temat* som kedjan ska handla om.
+  - Eleverna låter en av dem säga ett ord som hör till temat.
+  - Eleverna turas om, och var och en upprepar allt som sagts innan de lägger till ett eget.
+  - Eleverna hjälper den som fastnar i stället för att gå vidare.
+  - Läraren bryter och gruppen räknar hur lång kedjan blev.
+slag: grupp
+kalla:
+  rubrik: Kunskapskedjan
+  commit: b492447
+  summa: c1d74852
+utkast: true

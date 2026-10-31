@@ -1,0 +1,20 @@
+# Multisvar i par. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Multisvar i par
+andra: []
+syfte: Paret enas om ett svar och alla par håller upp det samtidigt
+steg:
+  - Läraren ställer *frågan* och delar in eleverna i par.
+  - Eleverna får egen tanketid.
+  - Eleverna samtalar i paret om frågan.
+  - Eleverna enas om ett svar och skriver eller ritar det på en gemensam yta.
+  - Läraren räknar till tre och alla par håller upp sitt svar.
+  - Läraren ber några par berätta hur de tänkte.
+  - Läraren sammanfattar de svar hen ser för hela klassen.
+slag: par
+kalla:
+  rubrik: Multisvar i par
+  commit: b492447
+  summa: de3f7cf9
+vantar: "Går upp i Visa! som variant: förslag till grundboken 2026-10-31"
+utkast: true

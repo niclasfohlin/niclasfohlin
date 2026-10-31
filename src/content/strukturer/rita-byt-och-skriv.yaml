@@ -1,0 +1,19 @@
+# Rita, byt och skriv!. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Rita, byt och skriv!
+andra: []
+syfte: Var och en ritar en bild och skriver sedan en berättelse till kamratens bild
+steg:
+  - Läraren ger *temat*, säger att en kamrat ska skriva till bilden, och eleverna ritar var sin.
+  - Eleverna byter teckningar med sin kamrat.
+  - Eleverna funderar ut en berättelse som passar till bilden de fått.
+  - Eleverna berättar sin idé för varandra i paret.
+  - Eleverna skriver berättelsen med början, mitt och slut.
+  - Eleverna läser upp den för den som ritade bilden.
+  - Läraren samlar bilder och texter till en gemensam samling som klassen kan läsa.
+slag: par
+kalla:
+  rubrik: Rita, byt och skriv!
+  commit: b492447
+  summa: ddeaaea6
+utkast: true

@@ -1,0 +1,18 @@
+# En får gå. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: En får gå
+andra: []
+syfte: En elev ur varje grupp byter grupp efter varje fråga och tar med sig svaret
+steg:
+  - Läraren delar in eleverna i fyrgrupper, numrerar dem ett till fyra och ställer *frågan*.
+  - Eleverna talar sig samman i gruppen tills alla vet något.
+  - Eleverna ställer sig upp när gruppen är klar.
+  - Läraren säger en siffra, och den eleven byter till en annan grupp.
+  - Eleverna delar sina svar i den nya gruppen och jämför dem.
+  - Läraren ställer en ny fråga och klassen gör om det.
+slag: grupp
+kalla:
+  rubrik: En får gå
+  commit: b492447
+  summa: 64e8d841
+utkast: true

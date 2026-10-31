@@ -1,0 +1,19 @@
+# Kims prov. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Kims prov
+andra: []
+syfte: Avidentifierade elevsvar blir ett påhittat prov som grupperna undersöker tillsammans
+steg:
+  - Läraren plockar ut elevsvar ur *uppgiften*, både bra, intressanta och felaktiga, och avidentifierar dem.
+  - Läraren sätter ihop svaren till ett prov under ett påhittat namn som ingen i klassen har.
+  - Läraren delar ut det påhittade provet till grupper om två till fyra.
+  - Eleverna undersöker vad som är bra, var det blev fel och hur Kim kan ha tänkt.
+  - Eleverna antecknar sina iakttagelser medan läraren går runt och lyssnar.
+  - Eleverna delar sina iakttagelser i helklass.
+  - Läraren knyter ihop de vanligaste missförstånden och det som var nästan rätt.
+slag: grupp
+kalla:
+  rubrik: Kims prov
+  commit: b492447
+  summa: f9baa6f1
+utkast: true

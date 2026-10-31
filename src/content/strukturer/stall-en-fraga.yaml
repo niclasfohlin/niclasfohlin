@@ -1,0 +1,18 @@
+# Ställ en fråga. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Ställ en fråga
+andra: []
+syfte: Varje elev skriver en fråga om innehållet och samlar svar från flera kamrater
+steg:
+  - Läraren presenterar *innehållet* och eleverna tar del av det.
+  - Eleverna skriver ned en fråga eller en fundering om det.
+  - Eleverna går runt i rummet och ställer sin fråga till den de möter.
+  - Eleverna svarar på varandras frågor och skriver ned svaren under frågan.
+  - Eleverna fortsätter samla svar tills de är nöjda eller läraren bryter.
+  - Eleverna redovisar ett av svaren i sin grupp.
+slag: klass
+kalla:
+  rubrik: Ställ en fråga
+  commit: b492447
+  summa: fc458e24
+utkast: true

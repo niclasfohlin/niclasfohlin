@@ -1,0 +1,20 @@
+# Skriva och redigera i par. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Skriva och redigera i par
+andra: []
+syfte: Kamraten intervjuar och gör dispositionen, båda skriver var sin text och rättar varandras
+steg:
+  - Läraren delar in eleverna i par och ger *skrivuppgiften*.
+  - Den ena berättar vad hen tänker skriva medan den andra frågar och gör en disposition.
+  - Eleverna byter roller och gör om steg två.
+  - Eleverna söker sitt material var för sig och håller utkik efter sådant kamraten behöver.
+  - Eleverna skriver det första stycket i båda texterna tillsammans.
+  - Eleverna skriver resten av sin egen text var för sig.
+  - Eleverna läser varandras texter, rättar och föreslår ändringar.
+  - Eleverna bearbetar sina texter och skriver under varandras när de är felfria.
+slag: par
+kalla:
+  rubrik: Skriva och redigera i par
+  commit: b492447
+  summa: 9fe88ae4
+utkast: true

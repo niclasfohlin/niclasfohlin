@@ -1,0 +1,20 @@
+# Fråga, fråga, byt!. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Fråga, fråga, byt!
+andra:
+  - Quiz-quiz-trade
+syfte: Eleverna förhör varandra parvis och byter kort
+steg:
+  - Läraren delar ut ett kort med ett *begrepp* till varje elev.
+  - Eleverna går omkring i rummet med handen uppsträckt för att visa att de är redo.
+  - Eleverna som möts ger varandra en high five, och den ena förklarar sitt begrepp.
+  - Eleverna byter roller så att den andra får förklara sitt.
+  - Eleverna som båda kunde förklara byter kort med varandra.
+  - Eleven som inte kunde får se förklaringen och höra svaret av kamraten före bytet.
+  - Eleverna går vidare och hittar en ny kamrat tills läraren avbryter.
+slag: klass
+kalla:
+  rubrik: Fråga, fråga, byt!
+  commit: b492447
+  summa: 6ec64df4
+utkast: true

@@ -1,0 +1,17 @@
+# Samtalspromenad. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Samtalspromenad
+andra: []
+syfte: Paret samtalar om frågan under en promenad och berättar sedan för andra
+steg:
+  - Läraren delar in eleverna i par eller grupper och låter dem hälsa på varandra.
+  - Läraren ger *frågan* och säger hur lång promenaden är.
+  - Eleverna går sin promenad och samtalar om frågan hela vägen.
+  - Läraren kallar tillbaka dem med en signal när tiden är slut.
+  - Eleverna berättar om sina tankar i en ny gruppering eller inför klassen.
+slag: par
+kalla:
+  rubrik: Samtalspromenad
+  commit: b492447
+  summa: c5741d86
+utkast: true

@@ -1,0 +1,21 @@
+# Inre–yttre cirkel. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Inre–yttre cirkel
+andra:
+  - Karusellsamtal
+syfte: Två cirklar roterar så att alla möter många partner
+steg:
+  - Läraren delar upp klassen i två halvor.
+  - Eleverna i den ena halvan ställer sig axel mot axel i en cirkel med ryggen inåt.
+  - Eleverna i den andra halvan ställer sig i en yttre cirkel, vända mot en partner.
+  - Läraren ger *frågan* eller delar ut frågekort.
+  - Läraren bestämmer vilken cirkel som ska fråga.
+  - Eleverna ställer frågan till den mittemot, som svarar, och frågeställaren ger återkoppling.
+  - Eleverna i den ena cirkeln roterar ett steg innan nästa fråga.
+  - Läraren avslutar och låter några par redovisa vad de hört.
+slag: klass
+kalla:
+  rubrik: Inre–yttre cirkel
+  commit: b492447
+  summa: 3f4005d7
+utkast: true

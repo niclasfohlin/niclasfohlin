@@ -1,0 +1,19 @@
+# Mötas på mitten. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Mötas på mitten
+andra:
+  - Placemat
+syfte: Var och en skriver i sitt fält, gruppen enas i mitten
+steg:
+  - Läraren delar ut ett gemensamt papper eller en whiteboard per grupp.
+  - Läraren ställer *frågan*, som ska vara öppen.
+  - Eleverna funderar först själva och skriver i sitt eget fält.
+  - Eleverna delar sina tankar med gruppen när läraren bryter.
+  - Eleverna väljer ut sina bästa gemensamma argument och skriver dem i mitten.
+  - Grupperna jämför sina mittfält med varandra eller i helklass.
+slag: grupp
+kalla:
+  rubrik: Mötas på mitten
+  commit: b492447
+  summa: 6fa539ad
+utkast: true

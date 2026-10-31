@@ -1,0 +1,20 @@
+# Berätta mera!. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Berätta mera!
+andra:
+  - Berättaren
+syfte: Alla samtalar parvis om samma innehåll, med nya partner varje runda
+steg:
+  - Läraren bestämmer *innehållet* som alla ska berätta om.
+  - Eleverna rör sig fritt i rummet med en hand uppsträckt, vilket betyder att de är lediga för samtal.
+  - Eleverna som möts med uppsträckt hand ger varandra en high five.
+  - Eleverna turas om att kort berätta om innehållet.
+  - Eleverna tackar för samtalet och sträcker upp handen igen.
+  - Eleverna söker upp en ny kamrat och gör om det.
+  - Läraren avbryter och låter varje elev sammanfatta något hen minns från samtalen.
+slag: klass
+kalla:
+  rubrik: Berätta mera!
+  commit: b492447
+  summa: 0d39a158
+utkast: true

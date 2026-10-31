@@ -1,0 +1,21 @@
+# Kommunicera. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Kommunicera
+andra:
+  - Beskriv och rita
+syfte: En beskriver, en lyssnar, en observerar kommunikationen
+steg:
+  - Läraren delar in eleverna i grupper om tre och fördelar rollerna berättare, lyssnare och observatör.
+  - Läraren placerar berättaren och lyssnaren mitt emot varandra med ett skydd emellan.
+  - Läraren ger observatören något att anteckna på.
+  - Berättaren får ett *innehåll* att beskriva, som lyssnaren inte ser.
+  - Berättaren beskriver innehållet så tydligt hen kan.
+  - Lyssnaren ställer motfrågor för att förstå bättre.
+  - Observatören antecknar vad som fungerar och vad som kan bli bättre.
+  - Observatören ger återkoppling, och berättaren fortsätter med de tipsen.
+slag: grupp
+kalla:
+  rubrik: Kommunicera
+  commit: b492447
+  summa: fd8c6f77
+utkast: true

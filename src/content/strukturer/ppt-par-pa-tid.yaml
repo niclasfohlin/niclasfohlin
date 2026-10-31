@@ -1,0 +1,20 @@
+# PPT – Par på tid. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: PPT – Par på tid
+andra:
+  - Par på tid
+syfte: Båda i paret talar lika länge på klocka
+steg:
+  - Läraren delar upp klassen i par.
+  - Läraren bestämmer vem i paret som börjar, till exempel efter födelsedag.
+  - Läraren ställer *frågan* och ger minst trettio sekunders tanketid.
+  - Läraren säger Par på tid och startar klockan.
+  - Den ena i paret talar tills klockan ringer.
+  - Eleverna byter roller, och den andra bygger vidare på det första sagt.
+  - Läraren slumpar fram några par som lyfter sina tankar i klassen.
+slag: par
+kalla:
+  rubrik: PPT – Par på tid
+  commit: b492447
+  summa: db36fc1d
+utkast: true

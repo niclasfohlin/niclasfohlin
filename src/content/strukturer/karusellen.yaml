@@ -1,0 +1,20 @@
+# Karusellen. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Karusellen
+andra: []
+syfte: Grupperna roterar mellan uppgifter på tid
+steg:
+  - Läraren delar in eleverna i grupper om tre till fyra.
+  - Läraren lägger ut *uppgifter* på borden, en per bord.
+  - Läraren ger varje grupp en penna och sätter en timer.
+  - Eleverna samarbetar och skriver så många lösningar de hinner.
+  - Eleverna roterar till nästa bord när tiden är slut.
+  - Eleverna läser vad de föregående skrivit och bygger vidare.
+  - Eleverna fortsätter tills alla grupper varit vid alla uppgifter.
+  - Läraren lyfter fram spännande lösningar i helklass.
+slag: grupp
+kalla:
+  rubrik: Karusellen
+  commit: b492447
+  summa: 6489b015
+utkast: true

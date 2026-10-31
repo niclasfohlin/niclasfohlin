@@ -1,0 +1,19 @@
+# Huvuden ihop. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Huvuden ihop
+andra:
+  - Numbered heads together
+syfte: Gruppen enas om ett svar, och ett slumpat nummer redovisar
+steg:
+  - Läraren delar in eleverna i grupper om tre till fyra och numrerar dem.
+  - Läraren ställer *frågan*, som ska vara öppen.
+  - "Läraren säger: huvuden ihop."
+  - Eleverna lutar sig mot varandra och viskar fram ett svar som alla kan ge.
+  - Läraren säger ett nummer, och eleverna med det numret delar gruppens tankar.
+  - Läraren ställer en ny fråga och låter ett annat nummer redovisa.
+slag: grupp
+kalla:
+  rubrik: Huvuden ihop
+  commit: b492447
+  summa: c7ae46c5
+utkast: true

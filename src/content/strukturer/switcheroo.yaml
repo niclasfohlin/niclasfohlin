@@ -1,0 +1,20 @@
+# Switcheroo!. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Switcheroo!
+andra: []
+syfte: En numrerad elev går vidare och sammanfattar sin grupps samtal i nästa grupp
+steg:
+  - Läraren delar in eleverna i grupper om tre till fyra och numrerar dem.
+  - Eleverna löser *uppgiften* i sin grupp med en annan struktur.
+  - Läraren säger switcheroo, och nummer ett går vidare till nästa grupp.
+  - Eleverna som bytt sammanfattar sin egen grupps samtal för den nya gruppen.
+  - Eleverna talar vidare om det som kom in i gruppen.
+  - Eleverna går tillbaka till sin hemgrupp och får nästa uppgift.
+  - Läraren låter nummer två byta nästa gång, tills alla har bytt.
+slag: grupp
+kalla:
+  rubrik: Switcheroo!
+  commit: b492447
+  summa: b653fdcd
+vantar: "Går upp i En får gå som variant: förslag till grundboken 2026-10-31"
+utkast: true

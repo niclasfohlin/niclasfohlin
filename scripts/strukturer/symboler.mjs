@@ -8,13 +8,9 @@
 //   symbol('par', { farg })   med en annan färg, som vitt på en mörk yta
 //   symbol('par', { klass })  med en annan klass än st-symbol, eller ingen med klass: ''
 
-// Slagens färger är förslag (2026-10-31), skilda från ämnenas (Läsning grön, Skrivning plommon, Matematik blå,
-// Socialt rost) och hämtade ur bildernas färger: blått, ockra och rosenrött.
-export const SLAGEN = {
-  par: { namn: 'Par', farg: '#2a7a96', ljus: '#dcedf3' },
-  grupp: { namn: 'Grupp', farg: '#a8730e', ljus: '#f6ead2' },
-  klass: { namn: 'Klass', farg: '#b8475f', ljus: '#f6e0e5' },
-};
+// Slagen, namnen och färgerna står i standarden, en rot för kortet, filtret och sidan.
+import { STRUKTURENS_SLAG } from '../../src/lib/standard/strukturer.js';
+export const SLAGEN = STRUKTURENS_SLAG;
 
 const LINJE = '#2b2b30';
 const huvud = (x, y, r, fyll) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${fyll}" stroke="${LINJE}" stroke-width="2.2"/>`;

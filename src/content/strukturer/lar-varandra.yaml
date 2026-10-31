@@ -1,0 +1,17 @@
+# Lär varandra. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Lär varandra
+andra: []
+syfte: En elev lämnar rummet och gruppen lär ut det de fått veta när hen kommer tillbaka
+steg:
+  - Läraren väljer eller slumpar en elev ur varje grupp som går ut ur rummet.
+  - Läraren lär ut *innehållet* till de grupper som är kvar.
+  - Eleverna sammanfattar i gruppen och planerar hur de ska lära ut det.
+  - Eleverna som varit utanför kommer in och gruppen lär dem *innehållet*.
+  - Eleverna löser var sin uppgift som visar att alla i gruppen förstått.
+slag: grupp
+kalla:
+  rubrik: Lär varandra
+  commit: b492447
+  summa: a320a768
+utkast: true

@@ -1,0 +1,19 @@
+# Snöbollen. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Snöbollen
+andra: []
+syfte: Lapparna kastas över en linje och var och en söker upp den vars lapp hör ihop
+steg:
+  - Läraren ger halva klassen lappar i en färg och halva i en annan, med *par som hör ihop*.
+  - Eleverna ställer sig på två led mot varandra med en tänkt linje emellan.
+  - Eleverna skrynklar ihop sina lappar till bollar.
+  - Eleverna kastar bollarna över linjen på lärarens signal.
+  - Eleverna plockar upp en boll som den andra sidan kastat.
+  - Eleverna söker upp den vars lapp hör ihop med deras.
+  - Eleverna berättar för varandra varför lapparna hör ihop.
+slag: klass
+kalla:
+  rubrik: Snöbollen
+  commit: b492447
+  summa: 077c5e32
+utkast: true

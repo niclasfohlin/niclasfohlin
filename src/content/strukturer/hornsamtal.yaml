@@ -1,0 +1,17 @@
+# Hörnsamtal. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Hörnsamtal
+andra: []
+syfte: Rummets fyra hörn får var sin fråga och eleverna går till den de vill tala om
+steg:
+  - Läraren sätter en *fråga* i vart och ett av rummets fyra hörn.
+  - Eleverna tänker enskilt på vilket hörn de vill gå till.
+  - Eleverna går till sitt hörn på lärarens signal.
+  - Eleverna delar in sig i mindre grupper och samtalar om hörnets fråga.
+  - Läraren slumpar en elev ur varje hörn som delar en tanke.
+slag: klass
+kalla:
+  rubrik: Hörnsamtal
+  commit: b492447
+  summa: 7535090c
+utkast: true

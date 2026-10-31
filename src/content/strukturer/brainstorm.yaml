@@ -1,0 +1,20 @@
+# Brainstorm. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Brainstorm
+andra: []
+syfte: Gruppen samlar många svar samtidigt och ser sin gemensamma kunskap
+steg:
+  - Läraren delar in eleverna i grupper om två till fyra.
+  - Läraren delar ut lappar eller miniwhiteboards till alla.
+  - Läraren ställer *frågan*, som ska vara öppen.
+  - Läraren sätter en timer på en till tre minuter.
+  - Eleverna skriver alla sina svar på var sin lapp och lägger dem på bordet.
+  - Eleverna diskuterar kort sina svar inom gruppen när timern ringer.
+  - Eleverna vandrar runt och tittar på de andra gruppernas lösningar.
+  - Läraren lyfter några svar i helklass.
+slag: grupp
+kalla:
+  rubrik: Brainstorm
+  commit: b492447
+  summa: 100fb0bf
+utkast: true

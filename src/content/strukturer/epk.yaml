@@ -1,0 +1,19 @@
+# EPK. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: EPK
+andra:
+  - Enskilt, par, kvadrat
+syfte: "Svaret prövas i tre led: enskilt, i par och i en kvadrat av två par"
+steg:
+  - Läraren ger *problemet* och eleverna tänker enskilt kring det.
+  - Eleverna bildar par och talar om *problemet*.
+  - Läraren sätter ihop två par till en kvadrat.
+  - Eleverna redovisar sina tankar för varandra i kvadraten.
+  - Eleverna jämför, ställer frågor och utvecklar lösningen tillsammans.
+  - Läraren slumpar en elev per kvadrat som redovisar.
+slag: grupp
+kalla:
+  rubrik: EPK
+  commit: b492447
+  summa: ea004a57
+utkast: true

@@ -1,0 +1,20 @@
+# Vi jämför. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Vi jämför
+andra:
+  - Hemliga svar
+  - Två jämför
+syfte: Eleverna skriver var för sig och jämför sedan
+steg:
+  - Läraren, en elev eller en grupp ställer *frågan*.
+  - Eleverna skriver enskilt ned sina svar och håller dem hemliga tills tiden är slut.
+  - Paret jämför sina svar och diskuterar likheter och skillnader.
+  - Paret jämför sedan med ett annat par och söker fler lösningar.
+  - Läraren låter några par redovisa vad de kom fram till.
+slag: par
+kalla:
+  rubrik: Vi jämför
+  commit: b492447
+  summa: e42f4364
+vantar: "Går upp i EPK som variant: förslag till grundboken 2026-10-31"
+utkast: true

@@ -470,3 +470,5 @@ export * from './saker.js';
 export * from './text.js';
 // Undervisningsmetoderna (sajtens K-621): delarna i lärarens väg som data, och utfallens gränser för en klass.
 export * from './undervisningsmetod.js';
+// Strukturerna (sajtens K-650): slagen Par, Grupp och Klass och reglerna för en struktur i verktyget Strukturer.
+export * from './strukturer.js';

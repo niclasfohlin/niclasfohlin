@@ -1,0 +1,17 @@
+# Vem är jag?. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Vem är jag?
+andra: []
+syfte: Var och en har ett kort på ryggen och ställer frågor för att lista ut vad det är
+steg:
+  - Läraren fäster ett kort med *begreppet* på ryggen av varje elev.
+  - Eleverna går runt och ställer frågor till varandra om vad de har på ryggen.
+  - Eleverna svarar på varandras frågor utan att säga svaret rakt ut.
+  - Eleverna sätter sig ned när de tror sig veta vad de har.
+  - Eleverna berättar för klassen vad de hade och vilken fråga som avgjorde det.
+slag: klass
+kalla:
+  rubrik: Vem är jag?
+  commit: b492447
+  summa: da1b61a6
+utkast: true

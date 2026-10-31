@@ -1,0 +1,20 @@
+# Hitta min regel. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Hitta min regel
+andra: []
+syfte: Eleverna listar ut lärarens sorteringsregel ur exempel
+steg:
+  - Läraren ritar två rutor på tavlan och numrerar dem ett och två.
+  - Läraren skriver två *exempel* i vardera rutan och frågar vad regeln är.
+  - Eleverna funderar och diskuterar förslag i par.
+  - Läraren skriver ytterligare ett exempel i varje ruta.
+  - Eleverna diskuterar i par igen.
+  - Läraren lägger till fler exempel, och eleverna diskuterar i fyrgrupper.
+  - Läraren ber eleverna föreslå vad som kan skrivas i vardera rutan.
+  - Läraren ber någon förklara regeln när de flesta grupper har hittat den.
+slag: par
+kalla:
+  rubrik: Hitta min regel
+  commit: b492447
+  summa: bc571cbe
+utkast: true

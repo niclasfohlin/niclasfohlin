@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD, STRUKTURENS_SLAG, strukturensFel, strukturensSumma } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -341,5 +341,30 @@ const bildfall = [
 ];
 for (const [b, o, n] of bildfall) { const f = bildtextFel(b, o); if (f.length !== n) fel.push(`bildtextFel(${JSON.stringify(b).slice(0, 60)}) ger ${JSON.stringify(f)}`); }
 
+// Strukturerna (K-650): ett utkast med fyra steg går igenom, och varje regel stannar på sitt fel, prövat åt andra hållet.
+const steg4 = ['Läraren ställer *frågan*.', 'Eleverna tänker.', 'Eleverna talar i par.', 'Eleverna delar med klassen.'];
+const forslag4 = ['lasning', 'skrivning', 'matematik', 'socialt'].map((omrade) => ({ omrade, arskurs: '4–6', text: 'Ett. Två. Tre.' }));
+const hel = { namn: 'EPA', slag: 'par', steg: steg4, bild: { scen: 'epa', alt: 'Två elever talar.' }, forslag: forslag4 };
+const strukturfall = [
+  [{ namn: 'EPA', slag: 'par', steg: steg4, utkast: true }, 0],
+  [hel, 0],
+  [{ ...hel, slag: 'trio' }, 1],
+  [{ ...hel, steg: steg4.slice(0, 3) }, 1],
+  [{ ...hel, steg: [...steg4, ...steg4, 'Ett nionde.'] }, 1],
+  [{ ...hel, steg: [...steg4.slice(0, 3), 'x'.repeat(141)] }, 1],
+  [{ ...hel, bild: undefined }, 1],
+  [{ ...hel, bild: { scen: 'epa' } }, 1],
+  [{ ...hel, forslag: forslag4.slice(0, 3) }, 1],
+  [{ ...hel, forslag: [{ ...forslag4[0], text: 'Ett. Två.' }, ...forslag4.slice(1)] }, 1],
+  [{ ...hel, forslag: [{ ...forslag4[0], omrade: 'musik', arskurs: '1–2' }, ...forslag4.slice(1)] }, 2],
+];
+for (const [s, n] of strukturfall) { const f = strukturensFel(s); if (f.length !== n) fel.push(`strukturensFel(${JSON.stringify(s).slice(0, 70)}) ger ${JSON.stringify(f)}, inte ${n} fel`); }
+const kallad = { ...hel, andra: [], syfte: 'Var och en tänker först.', kalla: { summa: '' } };
+kallad.kalla.summa = strukturensSumma(kallad);
+if (strukturensFel(kallad).length) fel.push(`strukturensFel ger fel på en struktur med rätt kontrollsumma: ${strukturensFel(kallad)}`);
+if (strukturensFel({ ...kallad, steg: [...steg4.slice(0, 3), 'Eleverna delar med hela klassen.'] }).length !== 1) fel.push('strukturensFel släpper igenom ett steg som är ändrat för hand');
+if (strukturensSumma({ namn: 'a' }) === strukturensSumma({ namn: 'b' })) fel.push('strukturensSumma ger samma summa för olika namn');
+if (Object.keys(STRUKTURENS_SLAG).join() !== 'par,grupp,klass') fel.push('STRUKTURENS_SLAG har inte slagen par, grupp och klass i den ordningen');
+
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form, bildtextens gränser, metodkortets nivåer och lathundens sidor svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och strukturernas regler, slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form, bildtextens gränser, metodkortets nivåer och lathundens sidor svarar rätt.`);

@@ -1,0 +1,18 @@
+# Turas om. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Turas om
+andra:
+  - Arbeta och uppmuntra
+syfte: En arbetar och en uppmuntrar, och rollerna växlar
+steg:
+  - Läraren delar upp klassen i par och ger minst två *uppgifter*.
+  - "Läraren modellerar de två rollerna: den som arbetar och den som uppmuntrar."
+  - Läraren tilldelar rollerna i varje par.
+  - Paret växlar roller på signal eller när de själva vill.
+  - Två par jämför sina svar med varandra.
+slag: par
+kalla:
+  rubrik: Turas om
+  commit: b492447
+  summa: ecffcb36
+utkast: true

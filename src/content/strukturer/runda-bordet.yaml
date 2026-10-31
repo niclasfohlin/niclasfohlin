@@ -1,0 +1,20 @@
+# Runda bordet. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Runda bordet
+andra:
+  - Write around
+  - Roundtable
+syfte: Gruppen skriver svar och skickar papperet runt så att var och en bygger vidare
+steg:
+  - Läraren ställer *den öppna frågan*.
+  - Eleverna skriver var sitt svar på sitt eget papper.
+  - Eleverna skickar papperet till kamraten till höger på lärarens signal.
+  - Eleverna läser vad kamraten skrivit och skriver ett nytt eget svar.
+  - Eleverna fortsätter skicka runt tills läraren bryter.
+  - Eleverna väljer i gruppen ut ett par svar att dela med klassen.
+slag: grupp
+kalla:
+  rubrik: Runda bordet
+  commit: b492447
+  summa: c23bae9d
+utkast: true

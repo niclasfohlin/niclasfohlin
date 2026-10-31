@@ -1,0 +1,17 @@
+# Tärningsquiz. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Tärningsquiz
+andra:
+  - Rutnätsquiz
+syfte: Tärningarna väljer frågan ur ett rutnät
+steg:
+  - Läraren delar in eleverna i par eller grupper och delar ut *rutnätet* med frågor.
+  - Eleverna bestämmer vem som börjar.
+  - Eleverna slår tärningarna och hittar rätt ruta i rutnätet.
+  - Eleverna läser frågan och skriver ned svaret tillsammans.
+slag: par
+kalla:
+  rubrik: Tärningsquiz
+  commit: b492447
+  summa: 54cec8cf
+utkast: true

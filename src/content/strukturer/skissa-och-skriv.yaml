@@ -1,0 +1,20 @@
+# Skissa och skriv. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Skissa och skriv
+andra: []
+syfte: En bild beskrivs i text, texten ritas av nästa elev, och den nya bilden beskrivs igen
+steg:
+  - Läraren delar in eleverna i grupper om minst tre och delar ut olika *bilder*, en var.
+  - Eleverna skriver en beskrivning av det de ser.
+  - Eleverna gömmer bilden och skickar beskrivningen till kamraten bredvid.
+  - Eleverna ritar av beskrivningen de fått, utan att se originalet.
+  - Eleverna skickar teckningen vidare till nästa kamrat.
+  - Eleverna skriver en beskrivning till teckningen de nu fått.
+  - Eleverna lägger fram alla leden och jämför vad som ändrades på vägen.
+  - Läraren leder ett samtal om vad en beskrivning behöver för att bära.
+slag: grupp
+kalla:
+  rubrik: Skissa och skriv
+  commit: b492447
+  summa: 660e98fe
+utkast: true

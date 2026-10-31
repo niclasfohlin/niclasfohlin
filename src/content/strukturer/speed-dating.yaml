@@ -1,0 +1,22 @@
+# Speed-dating. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Speed-dating
+andra:
+  - Snabbmöten
+  - Speed-dejting
+syfte: Eleverna byter partner efter varje uppgift
+steg:
+  - Läraren ställer fram ett långbord med stolar på båda sidor.
+  - Eleverna sätter sig så att de ser varandra.
+  - Läraren ger varje elev något att anteckna på.
+  - Läraren ger *uppgiften*.
+  - Eleverna får trettio sekunders tanketid och löser sedan uppgiften var för sig.
+  - Paret diskuterar sina lösningar med varandra en minut.
+  - Läraren lyfter lösningar i helgrupp.
+  - Eleverna flyttar en stol åt sidan och får en ny partner.
+slag: klass
+kalla:
+  rubrik: Speed-dating
+  commit: b492447
+  summa: 52c8a280
+utkast: true

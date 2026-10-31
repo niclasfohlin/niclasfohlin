@@ -1,0 +1,19 @@
+# Provet två gånger. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Provet två gånger
+andra: []
+syfte: Provet skrivs enskilt och görs sedan om i gruppen, som undervisning
+steg:
+  - Läraren ger *studiefrågorna* och grupperna förbereder sig tillsammans.
+  - Eleverna skriver provet enskilt och gör två kopior av sina svar.
+  - Eleverna lämnar den ena kopian till läraren och behåller den andra.
+  - Eleverna jämför sina svar i gruppen, en fråga i taget.
+  - Den som svarat rätt förklarar hur hen tänkte.
+  - Eleverna som är oense söker upp stället i materialet där svaret står.
+  - Gruppen går vidare först när alla kan förklara svaret.
+slag: grupp
+kalla:
+  rubrik: Provet två gånger
+  commit: b492447
+  summa: 02a4ceb3
+utkast: true

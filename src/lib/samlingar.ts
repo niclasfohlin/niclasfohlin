@@ -45,6 +45,7 @@ export const SAMLINGARNA = Object.keys(SAMLINGAR) as SamlingNyckel[];
 export const UTAN_SIDA = {
   matteproblem: 'posterna står i Ta fram ett matteproblem och i metodens bank, utan egen sida',
   faktateman: 'temana står i Ta fram en faktatext, utan egen sida',
+  strukturer: 'utkast tills verktyget Strukturer får sina sidor i K-650 (underlag/prov/strukturer/UPPDRAGET.md, fas 6)',
 } as const satisfies Partial<Record<CollectionKey, string>>;
 
 /** Samlingens rad, med alla fält, också de som raden saknar. */

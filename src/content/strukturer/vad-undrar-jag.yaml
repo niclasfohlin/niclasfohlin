@@ -1,0 +1,19 @@
+# Vad undrar jag?. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Vad undrar jag?
+andra: []
+syfte: Eleverna skriver var sin fråga och gruppen drar dem en i taget ur högen
+steg:
+  - Läraren presenterar *innehållet* och eleverna tar del av det.
+  - Eleverna skriver på en lapp vad de undrar över.
+  - Eleverna skrynklar ihop lappen eller lägger den upp och ned mitt på bordet.
+  - Eleverna låter en i gruppen dra en lapp och läsa frågan högt.
+  - Eleverna talar om vad de tänker och vad de kan om frågan.
+  - Eleverna drar en ny lapp när de är klara med den förra.
+  - Läraren bryter efter lämplig tid och låter varje grupp dela en fråga.
+slag: grupp
+kalla:
+  rubrik: Vad undrar jag?
+  commit: b492447
+  summa: b7021ce3
+utkast: true

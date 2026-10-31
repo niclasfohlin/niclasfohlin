@@ -1,0 +1,19 @@
+# Flashcardlek. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Flashcardlek
+andra: []
+syfte: Paret nöter frågorna med kort, och den som håller kortet berömmer eller coachar
+steg:
+  - Läraren ger varje par en hög med *frågekort* som har svaret på baksidan.
+  - Eleverna bestämmer vem som håller korten först.
+  - Eleverna låter den ene hålla upp ett kort och läsa frågan.
+  - Eleverna svarar, och den som håller kortet berömmer när svaret är rätt.
+  - Eleverna ger kortet till den som svarade rätt.
+  - Eleverna coachar fram rätt svar när det blev fel och lägger kortet tillbaka i högen.
+  - Eleverna byter roller och fortsätter tills högen är slut.
+slag: par
+kalla:
+  rubrik: Flashcardlek
+  commit: b492447
+  summa: 89cd5972
+utkast: true

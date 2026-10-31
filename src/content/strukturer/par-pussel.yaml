@@ -1,0 +1,20 @@
+# Par-pussel. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Par-pussel
+andra:
+  - Kvadraten
+  - Pairs compare
+syfte: Två par i fyrgruppen löser var sin uppgift och lär sedan varandra hur de gjorde
+steg:
+  - Läraren delar in eleverna i fyrgrupper med två par i varje.
+  - Eleverna går med sitt par till var sin plats i rummet.
+  - Eleverna löser sin *uppgift* i paret och skriver eller ritar lösningen.
+  - Paren återförenas i sin fyrgrupp.
+  - Eleverna visar sitt problem och lär det andra paret hur de löste det.
+  - Eleverna talar om hur samarbetet gick.
+slag: grupp
+kalla:
+  rubrik: Par-pussel
+  commit: b492447
+  summa: 0a074872
+utkast: true

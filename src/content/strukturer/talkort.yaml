@@ -1,0 +1,20 @@
+# Talkort. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Talkort
+andra:
+  - Samtalskort
+  - Talking chips
+syfte: Var och en lägger ett kort för att tala, och alla ska ha talat
+steg:
+  - Läraren introducerar *samtalsämnet* som gruppen ska diskutera.
+  - Läraren delar ut markörer och bestämmer reglerna för hur de används.
+  - Läraren kan fördela roller som tidshållare, fokushållare och ordfördelare.
+  - Eleverna påbörjar diskussionen.
+  - Eleven som talar lägger sin markör i mitten, och ingen får ordet igen förrän alla lagt sin.
+  - Eleverna utvärderar samarbetet genom att se om alla markörer ligger där.
+slag: grupp
+kalla:
+  rubrik: Talkort
+  commit: b492447
+  summa: "51217950"
+utkast: true

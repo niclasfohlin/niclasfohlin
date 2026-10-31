@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.46.0, 2026-10-31
+
+- `strukturer.js`, ny (sajtens K-650, verktyget Strukturer): `STRUKTURENS_SLAG` med Par, Grupp och Klass, namnen och färgerna, `STRUKTURENS_GRANSER`, `strukturensSumma` (kontrollsumman över bankens fält, så att en ändring för hand stannar bygget) och `strukturensFel`, som sajtens schema och intaget ur grundbokens bank prövar en struktur med.
+
 ## 0.45.0, 2026-10-31
 
 - `plan.js`, verifieringen 4 inför lanseringen (sajtens underlag/prov/lansering/verifiering-4-svar.md): `borttagnasBesked` tar `{ klasser: true }` för listan med klasserna i Lär dig metoden, där det som förts in står kvar i sammanställningen, märkt borttagen (fynd 2). `resultatetsDelar`, `resultatMedDelar` och `resultatetsVarde` parar ihop varje värde läraren förde in vid en mätning med sin del ur uppföljningens `resultat`, där delarna skiljs med semikolon, och `resultatText` säger det, "nivå i screeningen 2, klarade uppgifter 6 av 9, påhittade ord 3 av 4 i uppgift 9"; fler eller färre värden än delar står som läraren skrev dem (fynd 3). `installtPass` ger `fore` också när det sista passet i en period i veckor ställs in utan avslut, och `avslutet` efter ett avslut, och `installtBesked` är beskedet i båda fallen (fynd 7).

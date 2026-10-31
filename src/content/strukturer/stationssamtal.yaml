@@ -1,0 +1,16 @@
+# Stationssamtal. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Stationssamtal
+andra: []
+syfte: Samtalsfrågorna sitter uppe i rummet och grupperna vandrar och talar om en i taget
+steg:
+  - Läraren sätter upp *samtalsfrågorna* på väggarna i rummet.
+  - Eleverna går runt i sina par eller grupper och samtalar om en fråga i taget.
+  - Eleverna skriver ned några tankar från varje samtal, gemensamt eller var för sig.
+  - Läraren leder ett samtal i helklass om frågorna.
+slag: klass
+kalla:
+  rubrik: Stationssamtal
+  commit: b492447
+  summa: f4b5a772
+utkast: true

@@ -1,0 +1,19 @@
+# Läs och fråga. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Läs och fråga
+andra: []
+syfte: Var och en ställer sin fråga till gruppen och lyssnar medan de andra reder ut den
+steg:
+  - Läraren delar in eleverna i grupper och ger alla *samma text*.
+  - Eleverna läser texten.
+  - Eleverna förbereder var sin fråga om det de läst.
+  - Eleverna ställer sin fråga till gruppen, en i taget.
+  - Eleven som frågade lyssnar utan att svara medan de andra diskuterar.
+  - Eleverna gör om steg fyra och fem tills alla har frågat.
+  - Gruppen sammanfattar vad de förstod och vad de tar med sig.
+slag: grupp
+kalla:
+  rubrik: Läs och fråga
+  commit: b492447
+  summa: 7c110f57
+utkast: true

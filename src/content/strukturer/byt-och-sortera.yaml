@@ -1,0 +1,17 @@
+# Byt och sortera. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Byt och sortera
+andra: []
+syfte: Grupperna bygger var sin sortering med facit och löser sedan varandras
+steg:
+  - Läraren ger *materialet* och ber varje grupp skapa en sekvens eller gruppering av det.
+  - Eleverna markerar facit på baksidan och blandar sedan om materialet.
+  - Eleverna roterar till ett annat bord och tittar på den gruppens material.
+  - Eleverna talar sig samman om hur det ska sorteras och sorterar det.
+  - Eleverna kontrollerar mot facit och roterar vidare till nästa bord.
+slag: grupp
+kalla:
+  rubrik: Byt och sortera
+  commit: b492447
+  summa: 67273d69
+utkast: true

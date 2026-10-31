@@ -1,0 +1,20 @@
+# Mina bilder, dina bilder. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Mina bilder, dina bilder
+andra: []
+syfte: Var och en ritar sin tanke i en fyrfältare och fyller resten med kamraternas
+steg:
+  - Läraren ger *frågan* och delar ut ett papper med fyra numrerade rutor.
+  - Eleverna ritar sin egen tanke i ruta ett.
+  - Eleverna söker upp en kamrat när de är färdiga.
+  - Eleverna berättar för varandra vad de ritat och hur de tänkte.
+  - Eleverna ritar kamratens tanke i ruta två.
+  - Eleverna tackar varandra och söker upp en ny kamrat.
+  - Eleverna fortsätter tills alla fyra rutor är fyllda.
+  - Eleverna berättar om en av kamraternas tankar för gruppen.
+slag: klass
+kalla:
+  rubrik: Mina bilder, dina bilder
+  commit: b492447
+  summa: 1a396c5c
+utkast: true

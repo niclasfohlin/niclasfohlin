@@ -1,0 +1,19 @@
+# Lär klassen. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Lär klassen
+andra: []
+syfte: Varje grupp sätter sig in i ett delområde och håller sedan ett lärtillfälle om det
+steg:
+  - Läraren ger *temat* och delar det i lika många delområden som det finns grupper.
+  - Eleverna sätter sig in i sitt delområde och lär varandra inom gruppen.
+  - Eleverna sammanfattar det viktigaste i sitt område.
+  - Eleverna planerar hur de ska lära resten av klassen om det.
+  - Läraren talar med klassen om olika sätt att lära ut.
+  - Eleverna håller sitt lärtillfälle för klassen eller i tvärgrupper.
+  - Läraren leder ett avslutande samtal om vad klassen lärt sig.
+slag: grupp
+kalla:
+  rubrik: Lär klassen
+  commit: b492447
+  summa: 200bf997
+utkast: true

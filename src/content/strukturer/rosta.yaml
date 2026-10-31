@@ -1,0 +1,18 @@
+# Rösta!. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Rösta!
+andra: []
+syfte: Var och en fördelar sina markörer mellan flera förslag i stället för ett
+steg:
+  - Läraren ger *frågan* som gruppen ska enas om och låter förslagen samlas synligt.
+  - Läraren ger varje elev fem markörer i en egen färg.
+  - Eleverna funderar enskilt på vilka förslag som håller.
+  - Eleverna lägger sina markörer på minst två av förslagen.
+  - Eleverna räknar tillsammans vilket förslag som fick flest.
+  - Eleverna talar om varför just det förslaget vann.
+slag: grupp
+kalla:
+  rubrik: Rösta!
+  commit: b492447
+  summa: b41422ec
+utkast: true

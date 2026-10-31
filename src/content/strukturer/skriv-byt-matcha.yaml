@@ -1,0 +1,19 @@
+# Skriv, byt, matcha. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Skriv, byt, matcha
+andra: []
+syfte: Paren skriver förklaringar och nästa par parar ihop förklaring med kort
+steg:
+  - Läraren delar in eleverna i par och ger varje par en uppsättning *kort*.
+  - Eleverna turas om att skriva en förklaring till varje kort.
+  - Eleverna kontrollerar tillsammans att förklaringarna stämmer.
+  - Eleverna blandar korten och lägger dem mitt på bordet.
+  - Paren roterar till ett nytt bord.
+  - Eleverna läser förklaringarna och lägger rätt kort vid rätt förklaring.
+  - Paren roterar vidare till ett nytt bord.
+slag: par
+kalla:
+  rubrik: Skriv, byt, matcha
+  commit: b492447
+  summa: 91a84289
+utkast: true

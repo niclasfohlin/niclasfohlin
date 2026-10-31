@@ -1,0 +1,20 @@
+# Snöbollar i mitten. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Snöbollar i mitten
+andra:
+  - Snöbollar
+syfte: Var och en skriver ett svar, byter lapp och fyller på med något som inte redan står där
+steg:
+  - Läraren ger *den öppna frågan* och ett papper till var och en.
+  - Eleverna skriver ett svar och skrynklar ihop papperet till en boll.
+  - Eleverna lägger bollarna mitt på bordet och blandar dem.
+  - Eleverna tar var sin boll och öppnar den.
+  - Eleverna läser vad som står och skriver ett svar som inte redan finns där.
+  - Eleverna gör om steg två till fem ett par gånger.
+  - Eleverna läser upp den sista lappen de fått och gruppen väljer ut några svar.
+slag: grupp
+kalla:
+  rubrik: Snöbollar i mitten
+  commit: b492447
+  summa: 4b76151f
+utkast: true

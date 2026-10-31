@@ -1,0 +1,20 @@
+# Se och lär. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Se och lär
+andra:
+  - Modellering med observatörer
+syfte: Några visar en färdighet medan de andra observerar
+steg:
+  - Läraren väljer ut den *färdighet* gruppen ska träna.
+  - "Läraren definierar färdigheten tillsammans med klassen: hur den syns och hur den låter."
+  - Läraren väljer ut tre till fem elever som kan färdigheten väl.
+  - Experterna utför färdigheten medan de övriga observerar.
+  - Observatörerna skriver ned vad de ser och hör.
+  - Eleverna diskuterar sina iakttagelser i par eller grupp.
+  - Läraren sammanfattar i helklass vad som sågs och vad som kan tränas mer.
+slag: klass
+kalla:
+  rubrik: Se och lär
+  commit: b492447
+  summa: 9ccd11a8
+utkast: true

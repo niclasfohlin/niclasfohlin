@@ -1,0 +1,18 @@
+# Rubriceringsspel. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Rubriceringsspel
+andra: []
+syfte: Gruppen hittar på egna rubriker att sortera korten efter, och gör sedan om det
+steg:
+  - Läraren ger varje grupp en uppsättning *kort*.
+  - Eleverna talar sig samman om vilka rubriker korten kan sorteras under.
+  - Eleverna sorterar korten och skriver upp rubrikerna och vad som hamnade var.
+  - Eleverna blandar korten och hittar på nya rubriker.
+  - Eleverna gör om sorteringen efter de nya rubrikerna.
+  - Läraren jämför gruppernas lösningar i helklass och söker likheter.
+slag: grupp
+kalla:
+  rubrik: Rubriceringsspel
+  commit: b492447
+  summa: 976347d8
+utkast: true

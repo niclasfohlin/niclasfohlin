@@ -1,0 +1,20 @@
+# Sanningsjakten. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Sanningsjakten
+andra: []
+syfte: Paren skriver ett sant och ett falskt påstående och motiverar andras
+steg:
+  - Läraren ger *innehållet* som paren ska skriva om.
+  - Eleverna talar i paret om vad de kan om det.
+  - Eleverna skriver ett sant och ett falskt påstående högst upp på var sitt papper.
+  - Paren roterar till ett nytt bord.
+  - Eleverna läser påståendena och talar om vad de tror.
+  - Eleverna skriver under varje påstående vilket de tror är sant och varför.
+  - Paren roterar vidare och skriver ett skäl som ingen skrivit förut.
+  - Eleverna får tillbaka sina egna påståenden och läser alla svar.
+slag: par
+kalla:
+  rubrik: Sanningsjakten
+  commit: b492447
+  summa: 521a0e07
+utkast: true

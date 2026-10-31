@@ -1,0 +1,18 @@
+# Bygga en triangel. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Bygga en triangel
+andra:
+  - Prioriteringstriangeln
+syfte: Gruppen rangordnar kort och måste motivera ordningen
+steg:
+  - Läraren delar ut minst tio kort med *begrepp* till varje grupp.
+  - Eleverna diskuterar korten i gruppen.
+  - Eleverna placerar korten i en triangel med det viktigaste överst.
+  - Eleverna säkerställer att var och en kan förklara hur gruppen kom fram till ordningen.
+  - Läraren slumpar fram en elev per grupp som redovisar triangeln.
+slag: grupp
+kalla:
+  rubrik: Bygga en triangel
+  commit: b492447
+  summa: 8ab29558
+utkast: true

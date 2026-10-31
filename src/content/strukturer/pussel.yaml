@@ -1,0 +1,18 @@
+# Pussel. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Pussel
+andra:
+  - Hem- och expertgrupper
+  - Jigsaw
+syfte: Var och en blir expert på en del och lär ut den
+steg:
+  - Läraren delar in eleverna i hemgrupper och numrerar dem ett till fyra.
+  - Eleverna med samma nummer samlas i en expertgrupp och bearbetar sin *del*.
+  - Experterna går tillbaka till sin hemgrupp och lär ut det de kan.
+  - Läraren avslutar med ett individuellt prov eller frågor på helheten.
+slag: grupp
+kalla:
+  rubrik: Pussel
+  commit: b492447
+  summa: 4a0445bc
+utkast: true

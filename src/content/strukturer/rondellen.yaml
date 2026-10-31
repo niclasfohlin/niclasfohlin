@@ -1,0 +1,20 @@
+# Rondellen. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Rondellen
+andra:
+  - Runda
+  - Round robin
+syfte: Alla i gruppen säger sitt i tur och ordning
+steg:
+  - Läraren delar in eleverna i grupper om fyra.
+  - Läraren ställer *frågan*, som ska vara öppen.
+  - Eleverna får tid att tänka själva.
+  - Eleverna turas om att säga sitt svar eller sin tanke.
+  - Eleverna fortsätter varv efter varv tills läraren säger stopp.
+  - Läraren låter grupperna sammanfatta vad som kom fram.
+slag: grupp
+kalla:
+  rubrik: Rondellen
+  commit: b492447
+  summa: 28cc602e
+utkast: true

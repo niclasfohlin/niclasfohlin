@@ -1,0 +1,20 @@
+# Konstruktiv debatt. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Konstruktiv debatt
+andra: []
+syfte: Två par driver var sin ståndpunkt, lägger sedan fram varandras, och enas till sist
+steg:
+  - Läraren delar varje grupp i två par och ger dem var sin ståndpunkt i *frågan*.
+  - Paren söker underlag och förbereder en övertygande framställning av sin ståndpunkt.
+  - Paren lägger fram sin ståndpunkt för varandra utan att bli avbrutna, och antecknar.
+  - Eleverna diskuterar öppet, ber varandra om skäl och prövar båda ståndpunkterna.
+  - Paren byter plats och lägger fram varandras ståndpunkt så övertygande de kan.
+  - Eleverna släpper sina roller och söker den slutsats de kan enas om.
+  - Gruppen skriver ned slutsatsen med skälen, och alla skriver under.
+  - Eleverna prövar var för sig vad de kan om båda ståndpunkterna.
+slag: grupp
+kalla:
+  rubrik: Konstruktiv debatt
+  commit: b492447
+  summa: 80067eda
+utkast: true

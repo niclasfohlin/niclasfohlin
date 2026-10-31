@@ -1,0 +1,18 @@
+# Samtalstrappan. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Samtalstrappan
+andra: []
+syfte: Gruppen samtalar under en regel i taget, och en ny regel läggs till varje runda
+steg:
+  - Läraren delar in eleverna i grupper, utser en tidshållare och ger *frågan*.
+  - Eleverna tänker enskilt på vad de tycker.
+  - Eleverna talar en i taget medan tidshållaren tar tiden och avbryter.
+  - Eleverna fortsätter tills läraren bryter.
+  - Läraren lägger till en regel, till exempel att vänta fem sekunder innan man talar.
+  - Eleverna gör om samtalet med den nya regeln och en ny tidshållare.
+slag: grupp
+kalla:
+  rubrik: Samtalstrappan
+  commit: b492447
+  summa: 9f2be010
+utkast: true

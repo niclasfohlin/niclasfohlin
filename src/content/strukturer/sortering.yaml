@@ -1,0 +1,18 @@
+# Sortering. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Sortering
+andra: []
+syfte: Gruppen sorterar kort eller föremål i kategorier och måste enas om varje placering
+steg:
+  - Läraren delar ut *korten* så att var och en får några och alla blir delaktiga.
+  - Läraren säger om kategorierna är givna eller om gruppen ska hitta egna.
+  - Eleverna studerar *korten* under tystnad en kort stund.
+  - Eleverna talar sig samman om var varje kort ska ligga.
+  - Eleverna lägger det kort de inte kan enas om åt sidan och återkommer till det.
+  - Eleverna förklarar sin sortering för en annan grupp.
+slag: grupp
+kalla:
+  rubrik: Sortering
+  commit: b492447
+  summa: 268cba9e
+utkast: true

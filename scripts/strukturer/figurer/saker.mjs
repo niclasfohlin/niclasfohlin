@@ -162,6 +162,48 @@ export function golvring(p, { x, y, rx, ry, streck = 26 }) {
   }
 }
 
+// En linje på golvet, streckad och ljus, som linjen mellan två led i Snöbollen.
+export function golvlinje(p, { fran, till, streck = 14 }) {
+  const a = V(...fran), b = V(...till);
+  p.ny();
+  for (let i = 0; i < streck; i++) {
+    const t0 = i / streck, t1 = t0 + 0.55 / streck;
+    p.streck([plus(a, ggr(minus(b, a), t0)), plus(a, ggr(minus(b, a), t1))], { tjock: 0.7, skak: 0, farg: '#a9a9b2' });
+  }
+}
+
+// En tavla på väggen med en ram och, om scenen vill, rutor eller rader klotter: läraren skriver exempel i två rutor.
+export function tavla(p, { x, y, b = 220, h = 120, rutor = 0, rader = 0 }) {
+  const c = V(x, y);
+  p.ny().form([V(x - b / 2, y - h / 2), V(x + b / 2, y - h / 2), V(x + b / 2, y + h / 2), V(x - b / 2, y + h / 2)], '#f4f6f4', { tjock: 1 });
+  for (let i = 0; i < rutor; i++) {
+    const bb = (b - 30) / rutor, x0 = x - b / 2 + 15 + i * bb;
+    p.form([V(x0 + 5, y - h / 2 + 15), V(x0 + bb - 5, y - h / 2 + 15), V(x0 + bb - 5, y + h / 2 - 15), V(x0 + 5, y + h / 2 - 15)], null, { tjock: 0.7, botten: false });
+  }
+  for (let i = 0; i < rader; i++) {
+    const yy = y - h / 2 + (h / (rader + 1)) * (i + 1), pts = [];
+    for (let xx = x - b / 2 + 20; xx < x + b / 2 - 30; xx += 7) pts.push(V(xx, yy + (pts.length % 2 ? -2 : 2)));
+    p.streck(pts, { tjock: 0.6, skak: 0 });
+  }
+  return c;
+}
+
+// En tärning, sedd snett ovanifrån, med prickarna på ovansidan.
+export function tarning(p, { x, y, s = 22, farg = '#ffffff', prickar = 3 }) {
+  const a = V(x - s / 2, y - s / 4), b = V(x, y - s / 2), c = V(x + s / 2, y - s / 4), d = V(x, y);
+  p.ny().form([a, b, c, d], farg, { tjock: 0.85 });
+  p.form([a, d, V(d.x, d.y + s * 0.6), V(a.x, a.y + s * 0.6)], farg, { tjock: 0.85 });
+  p.form([d, c, V(c.x, c.y + s * 0.6), V(d.x, d.y + s * 0.6)], farg, { tjock: 0.85 });
+  const m = V(x, y - s / 4);
+  const lagen = { 1: [[0, 0]], 2: [[-0.25, 0], [0.25, 0]], 3: [[-0.28, 0.05], [0, 0], [0.28, -0.05]] }[prickar] || [[0, 0]];
+  for (const [dx, dy] of lagen) p.prick(ellips(V(m.x + dx * s, m.y + dy * s), s * 0.07, s * 0.05, { n: 8 }), '#2b2b2e');
+}
+
+// En markör, som en bricka eller ett talkort: en liten rund platta i en färg.
+export function markor(p, { x, y, r = 9, farg = '#e0566e' }) {
+  p.ny().form(ellips(V(x, y), r, r * 0.62, { n: 12 }), farg, { tjock: 0.8, glid: 0.3 });
+}
+
 // Rörelsestreck bakom en sak i luften, och små strålar runt en high five.
 export function rorelse(p, { x, y, riktning = 0, langd: l = 22, antal = 3 }) {
   const d = rikt(riktning), n = normal(d);

@@ -14,7 +14,7 @@ import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
 import { faktaFel } from './lib/kortfakta';
-import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
+import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, STRUKTURENS_GRANSER, strukturensFel, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
 import { SAMLINGAR, UTAN_SIDA } from './lib/samlingar';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
@@ -1156,7 +1156,34 @@ const undervisningsmetoder = defineCollection({
   }),
 });
 
-export const collections = { artiklar, bocker, stodundervisning, matteproblem, faktateman, undervisningsmetoder };
+// Verktyget Strukturer (K-650, underlag/prov/strukturer/UPPDRAGET.md): en struktur per fil, intagen ur grundbokens bank
+// med scripts/strukturer/intag.mjs. Namnet, andra namn, syftet och stegen är bankens och skrivs om vid varje intag;
+// kontrollsumman i kalla stannar bygget när de har ändrats för hand. Slaget, bilden (scenen till bildmotorn i
+// scripts/strukturer/scener/ och textalternativet), förslagen och prövningen är sajtens. Reglerna står i standarden
+// (strukturensFel), så att intaget och riggen prövar samma sak. vantar säger varför en struktur står som utkast.
+const strukturer = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/strukturer' }),
+  schema: z.strictObject({
+    namn: text,
+    andra: z.array(text).default([]),
+    syfte: text,
+    steg: z.array(text),
+    slag: z.enum(['par', 'grupp', 'klass']),
+    kalla: z.strictObject({ rubrik: text, commit: text, summa: text }),
+    bild: z.strictObject({ scen: text, alt: text }).optional(),
+    forslag: z.array(z.strictObject({
+      omrade: z.enum(STRUKTURENS_GRANSER.omraden as unknown as [string, ...string[]]),
+      arskurs: z.enum(STRUKTURENS_GRANSER.arskurser as unknown as [string, ...string[]]),
+      amne: text,
+      text,
+    })).optional(),
+    provad: z.strictObject({ datum: text, svar: text }).optional(),
+    vantar: text.optional(),
+    utkast: z.boolean().default(false),
+  }).superRefine((s, ctx) => { for (const f of strukturensFel(s)) ctx.addIssue({ code: 'custom', path: [], message: f }); }),
+});
+
+export const collections = { artiklar, bocker, stodundervisning, matteproblem, faktateman, undervisningsmetoder, strukturer };
 
 // Varje samling står i roten över samlingarna (src/lib/samlingar.ts): med sina sidor i SAMLINGAR, så att den kommer med i
 // delningskorten, taggarnas sidor, statistiken, flödena och mejlen, eller i UTAN_SIDA med skälet. En ny samling stannar

@@ -1,0 +1,20 @@
+# Ping-pong-prat. Namnet, andra namn, syftet och stegen kommer ur grundbokens bank (docs/strukturer.md) och skrivs om av
+# node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
+namn: Ping-pong-prat
+andra:
+  - PingPong
+syfte: Paret studsar ord och korta meningar om temat mellan sig i högt tempo
+steg:
+  - Läraren delar in eleverna i par och ger *temat*.
+  - Eleverna tänker en kort stund under tystnad.
+  - Eleverna börjar på lärarens signal, och den ena säger ett ord om temat.
+  - Eleverna turas om, och ingen säger ett nytt ord förrän den andra sagt sitt.
+  - Eleverna säger pass när de inte kommer på något och låter kamraten fortsätta.
+  - Eleverna håller igång så länge de kan tills läraren bryter.
+  - Eleverna tackar varandra och återger för en ny kamrat vad paret sagt.
+slag: par
+kalla:
+  rubrik: Ping-pong-prat
+  commit: b492447
+  summa: 736d0e63
+utkast: true
