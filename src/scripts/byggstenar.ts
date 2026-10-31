@@ -107,10 +107,29 @@ export function webblasarensTryck(ruta: HTMLElement, o: Pick<Webblasarensrad, 'f
  * funktionen som visar ett besked, och en tom text tar bort det.
  */
 export function beskedet(id: string) {
-  let tid = 0, vid = 0, tryckVid = 0;
+  let tid = 0, vid = 0, tryckVid = 0, ram = 0;
   let gor: (() => void) | null = null;
   const ruta = () => $(id);
   const gom = () => { ruta().hidden = true; gor = null; };
+  // Beskedet täcker aldrig en fråga som läraren ska svara på (data-fraga), som frågan om samma elev eller Ta bort?: skulle det
+  // täcka frågan längst ned står det överst, och täcker det den också där flyttas sidan så att frågan står ovanför beskedet
+  // (verifieringen 4 inför lanseringen, fynd 1: beskedet låg över Samma elev och Ny elev i telefonen). Platsen prövas när
+  // beskedet har ritats, efter det som ritades i samma tryck, och igen när sidan rullar eller ändrar storlek; då flyttas sidan
+  // aldrig, så att beskedet inte rullar mot läraren.
+  const fri = (flytta: boolean) => {
+    const t = ruta();
+    t.classList.remove('uppe');
+    if (t.hidden) return;
+    const fragor = [...document.querySelectorAll<HTMLElement>('[data-fraga]')].filter((f) => !f.hidden && f.getClientRects().length);
+    const tacker = () => { const r = t.getBoundingClientRect(); return fragor.find((f) => { const q = f.getBoundingClientRect(); return q.bottom > r.top && q.top < r.bottom; }); };
+    if (!tacker()) return;
+    t.classList.add('uppe');
+    if (!tacker()) return;
+    t.classList.remove('uppe');
+    const f = tacker();
+    if (f && flytta) window.scrollBy(0, f.getBoundingClientRect().bottom - t.getBoundingClientRect().top + 8);
+  };
+  const friSnart = (flytta = false) => { cancelAnimationFrame(ram); ram = requestAnimationFrame(() => fri(flytta)); };
   const visa = (text: string, atgard?: { text: string; gor: () => void; kvar?: boolean }) => {
     const t = ruta();
     window.clearTimeout(tid);
@@ -120,7 +139,9 @@ export function beskedet(id: string) {
     t.hidden = false;
     vid = performance.now();
     tid = window.setTimeout(gom, atgard ? 30000 : 8000);
+    friSnart(true);
   };
+  for (const h of ['scroll', 'resize']) window.addEventListener(h, () => { if (!ruta().hidden) friSnart(); }, { passive: true });
   document.addEventListener('pointerdown', () => { tryckVid = performance.now(); }, true);
   // Ett besked som kom av samma tryck, som när ett fält lämnas, står kvar; ett tryck med tangentbordet har inget pointerdown.
   document.addEventListener('click', (e) => { if (e.detail > 0 && vid > tryckVid) return; if (!ruta().hidden && !ruta().contains(e.target as Node)) gom(); }, true);

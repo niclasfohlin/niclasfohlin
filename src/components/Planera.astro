@@ -199,7 +199,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
                     32 elever" stod direkt före "Metoden: två till tio elever", och TIL i grupp sa aldrig gruppens storlek). */}
                 {data.grupp && <p class="pl-hjalp">Metoden: {liten(data.grupp.text)}.{data.gruppen && <>{" "}<a href={data.gruppen.adress} data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:gruppen`} data-goatcounter-title={`${data.titel}: gruppen från planen`}>{data.gruppen.rubrik}</a></>}</p>}
                 <p class="pl-hjalp pl-varning" id="pl-elever-not" role="status" hidden></p>
-                <div class="pl-elevfraga" id="pl-elever-fraga" role="group" aria-label="Samma elev eller en ny elev" hidden></div>
+                <div class="pl-elevfraga" id="pl-elever-fraga" role="group" aria-label="Samma elev eller en ny elev" data-fraga hidden></div>
                 <label class="pl-kryss pl-narvaroval"><input type="checkbox" id="pl-narvaro" /> <span>Notera närvaro i passen</span></label>
                 <p><button type="button" class="pl-textknapp" id="pl-elever-bort" hidden>Ta bort elevernas namn och det som förts in om dem</button></p>
               </div>

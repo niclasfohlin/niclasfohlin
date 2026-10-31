@@ -3817,7 +3817,9 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-beslut .knapp[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
 .pl-forlang { margin: 0 0 0.8rem; }
 .pl-forlang .sk-segment { flex-wrap: wrap; }
-.pl-resultat { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 0.4rem 0.8rem; margin: 0.5rem 0 0; }
+/* Fältet är så brett som metodens delar kräver (--delar, antalet delar i uppföljningens resultat), och hela raden när det inte
+   ryms två i bredd, så att det läraren skriver inte klipps av (verifieringen 4 inför lanseringen, fynd 4). */
+.pl-resultat { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(4rem + var(--delar, 1) * 5rem)), 1fr)); gap: 0.4rem 0.8rem; margin: 0.5rem 0 0; }
 .pl-resultat .pl-hjalp { grid-column: 1 / -1; margin: 0; }
 .pl-resultat label { display: grid; gap: 0.15rem; font-size: 0.88rem; font-weight: 600; }
 .pl-resultat .pl-falt { min-height: 2.4rem; }
@@ -3891,6 +3893,8 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 /* Beskedet efter ett tryck, längst ned på skärmen där läraren ser det, med Ångra när något går att ångra. */
 .pl-toast { position: fixed; left: 50%; bottom: max(1rem, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: 0.4rem 0.8rem; width: min(36rem, calc(100% - 2rem)); box-sizing: border-box; padding: 0.7rem 0.6rem 0.7rem 1rem; border-radius: 8px; background: #1d2731; color: #fff; font: 0.95rem/1.4 var(--typsnitt-ui); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25); }
 .pl-toast[hidden] { display: none; }
+/* Beskedet överst, när det längst ned skulle täcka en fråga som läraren ska svara på (beskedet i byggstenar.ts). */
+.pl-toast.uppe { bottom: auto; top: max(1rem, env(safe-area-inset-top)); }
 /* Texten får en hel rad när knappen har en lång text, och knappen går under (K-523: "Kalendern och åtgärdsprogrammet"
    tryckte texten till ett ord per rad i telefonen). */
 .pl-toast { flex-wrap: wrap; }

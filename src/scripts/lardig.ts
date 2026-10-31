@@ -13,7 +13,7 @@
 // någon länk eller statistik. Det som båda sidorna ritar lika, beskedet, lovknapparna, listorna, raden överst och avslutet,
 // står i src/scripts/byggstenar.ts (K-630).
 import {
-  ANLEDNINGENS_LANGD, veckansRubrik, arDatum, datumspann, forensMening, forstaLektionensMening, julensText, julveckorna, efterStegensTakt, gickDetSvaret, gickDetsFoljd, lovveckornaAttValja, linjenRitas, medDecimaler, veckornaMedDatum, infordaDatum, klassenHarNagot, planveckansKort, sistaInfort, klassernasSkalaText, larDigetsLagetFor, larDigetsMittLast, larDigetsSteg, larDigetsStart, klasslistansBesked, sakdelar, veckorI, periodensText, regelnIVeckan, skolveckan, skolveckansText, stegetsRad, SKATTNINGARNAS_GRANS, dagarMellan, dagOchManad, dagText, decimal, esc, filnamnet, forstaLektionen, gangen, larDigetsForval, harInfortEfter, isoVecka, kalendervecka, klassensFraga, KLASSERNAS_SKALA, klasserUrText, larDigetsAvslutText, larDigetsKvar, larDigetsMetodplan,
+  ANLEDNINGENS_LANGD, veckansRubrik, arDatum, datumspann, forensMening, forstaLektionensMening, julensText, julveckorna, efterStegensTakt, gickDetSvaret, gickDetsFoljd, lovveckornaAttValja, linjenRitas, medDecimaler, veckornaMedDatum, infordaDatum, klassenHarNagot, borttagnasBesked, planveckansKort, sistaInfort, klassernasSkalaText, larDigetsLagetFor, larDigetsMittLast, larDigetsSteg, larDigetsStart, klasslistansBesked, sakdelar, veckorI, periodensText, regelnIVeckan, skolveckan, skolveckansText, stegetsRad, SKATTNINGARNAS_GRANS, dagarMellan, dagOchManad, dagText, decimal, esc, filnamnet, forstaLektionen, gangen, larDigetsForval, harInfortEfter, isoVecka, kalendervecka, klassensFraga, KLASSERNAS_SKALA, klasserUrText, larDigetsAvslutText, larDigetsKvar, larDigetsMetodplan,
   larDigetsRegler, larDigSammanstallning, lasVal, lovetsText, mandagen, medVardet, mening, mittIFragan, mittIText, MITT_I_LANGD, passetsLage, passetTraffas, planera, planveckansNamn, plusDagar, PLANERA, rensaFoljd, rentMal, rentText, sakernasText, spannKort,
   stor, talText, uppraknat, veckansPass, veckonyckel, vidareMening, granslinjensText, obesvaradVecka, skalansAndar, svaraGickDet, KLASSENS_NAMN, KLASSLISTANS_LANGD, KLASSNOTENS_LANGD, KOMMENTARENS_LANGD, type Foljd, type LarDigSammanstallning, type Plan, type PlanVecka, type Val,
 } from '../lib/standard/index.js';
@@ -595,13 +595,21 @@ function lasKlasslistan(t: HTMLTextAreaElement) {
     if (!klasser.length) delete aktiv.foljd.klasser;
     t.value = aktivaKlasser().map((k) => k.namn).join('\n');
     const not = document.getElementById('ld-klasser-not');
-    const borta = klasser.filter((k) => k.borta && !forut.some((x) => x.id === k.id && x.borta));
-    const text = [
-      klasslistansBesked(skrivet),
-      borta.length ? `Kommentarerna om ${uppraknat(borta.map((k) => k.namn))} står kvar i sammanställningen.` : '',
-    ].filter(Boolean).join(' ');
+    const text = klasslistansBesked(skrivet);
     if (not) { not.textContent = text; not.hidden = !text; }
   sparaForet();
+  // En klass som lämnar listan sägs med Ångra, ur samma rot som elevlistan i Planera insatsen (borttagnasBesked), och beskedet
+  // säger att det som förts in står kvar i sammanställningen, märkt borttagen, eftersom den är lärarens egen logg
+  // (verifieringen 4 inför lanseringen, fynd 2: 5A med en skattning togs bort utan besked och utan Ångra). Ångra lägger
+  // tillbaka listan som den var.
+  const borta = forut.filter((k) => !k.borta && !aktivaKlasser().some((x) => x.id === k.id));
+  const id = aktiv.id;
+  if (borta.length) visaBesked(borttagnasBesked(borta.map((k) => ({ namn: k.namn, harInfort: klassenHarNagot(aktiv.foljd, k.id) })), { klasser: true }), { text: 'Ångra', kvar: true, gor: () => {
+    if (aktiv.id !== id) return;
+    aktiv.foljd = { ...aktiv.foljd, klasser: forut };
+    spara(); rendera();
+    visaBesked('Listan med klasserna är tillbaka.');
+  } });
 }
 $('ld-vyn').addEventListener('input', (e) => {
   const t = e.target as HTMLInputElement | HTMLTextAreaElement;

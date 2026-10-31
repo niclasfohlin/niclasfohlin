@@ -2285,15 +2285,20 @@ export function avslutetText(plan, pagar = false) {
   return `Insatsen ${pagar ? 'avslutas' : 'avslutades'} i ${planveckansNamn(plan, v).text}, efter ${plan.pass.length} av ${plan.planerade} planerade pass.`;
 }
 /**
- * Beskedet när elever lämnar elevlistan, som sidan visar med Ångra: namnen, och för den som har något infört att det inte står
- * i sammanställningen och kommer tillbaka med samma namn (verifieringen 3 inför lanseringen och lagning-4, M1 och M4: Elsa och
- * hennes skattning försvann utan besked, och beskedet vid ett byte av elev sa inte att det som förts in följde med bort).
+ * Beskedet när elever lämnar elevlistan, eller klasser listan i Lär dig metoden, som sidan visar med Ångra: namnen, och för
+ * den som har något infört vad som händer med det (verifieringen 3 inför lanseringen och lagning-4, M1 och M4: Elsa och
+ * hennes skattning försvann utan besked, och beskedet vid ett byte av elev sa inte att det som förts in följde med bort). En
+ * elevs står inte i sammanställningen och kommer tillbaka med samma namn. En klass står kvar i Lär dig metodens
+ * sammanställning, märkt borttagen, eftersom den är lärarens egen logg (o.klasser; verifieringen 4 inför lanseringen, fynd 2:
+ * en klass med en skattning togs bort utan besked och utan Ångra).
  * @param {{ namn: string, harInfort: boolean }[]} borta
+ * @param {{ klasser?: boolean }} [o]
  */
-export function borttagnasBesked(borta) {
+export function borttagnasBesked(borta, o = {}) {
   if (!borta.length) return '';
-  const infort = borta.filter((e) => e.harInfort);
-  return `${uppraknat(borta.map((e) => e.namn))} ${borta.length === 1 ? 'är borttagen' : 'är borttagna'} ur elevlistan.${infort.length ? ` Det som har förts in om ${uppraknat(infort.map((e) => e.namn))} står inte i sammanställningen och kommer tillbaka om du skriver ${infort.length === 1 ? 'namnet' : 'namnen'} igen.` : ''}`;
+  const infort = borta.filter((e) => e.harInfort), namnet = infort.length === 1 ? 'namnet' : 'namnen';
+  const vad = o.klasser ? `står kvar i sammanställningen, märkt borttagen, och kommer tillbaka i veckorna om du skriver ${namnet} igen` : `står inte i sammanställningen och kommer tillbaka om du skriver ${namnet} igen`;
+  return `${uppraknat(borta.map((e) => e.namn))} ${borta.length === 1 ? 'är borttagen' : 'är borttagna'} ur ${o.klasser ? 'listan' : 'elevlistan'}.${infort.length ? ` Det som har förts in om ${uppraknat(infort.map((e) => e.namn))} ${vad}.` : ''}`;
 }
 /**
  * Dagen en ny elev kom till elevlistan, så att närvaron räknas därifrån, i allt som läser den (sammanställningen, pdf:erna,
@@ -3619,10 +3624,21 @@ export function installtPass(plan, val, dag) {
   delete flytta[dag];
   const ut = { ...val, flytta, stryk: [...new Set([...(val.stryk ?? []), dag])] };
   const pass = plan.pass.find((p) => passetsDag(p) === dag);
-  if (!plan.slut || !pass || pass.nr !== plan.slut) return { val: ut };
-  const fore = iDatumordning(plan.pass).filter((p) => efterDatum(p, pass) < 0).pop();
-  return fore ? { val: { ...ut, slut: fore.nr }, fore } : null;
+  const ordning = iDatumordning(plan.pass);
+  const fore = pass ? ordning.filter((p) => efterDatum(p, pass) < 0).pop() : undefined;
+  if (plan.slut && pass && pass.nr === plan.slut) return fore ? { val: { ...ut, slut: fore.nr }, fore, avslutet: true } : null;
+  // Det sista passet i en period i veckor, utan avslut: insatsen slutar med passet före, och fore säger det, så att beskedet
+  // kan säga det (verifieringen 4 inför lanseringen, fynd 7: beskedet sa bara "Passet är inställt."). I en period i pass får
+  // kursen ett nytt pass sist, så där slutar insatsen inte tidigare.
+  return pass && fore && plan.enhet === 'veckor' && ordning[ordning.length - 1] === pass ? { val: ut, fore } : { val: ut };
 }
+/**
+ * Beskedet när läraren ställer in ett pass, ur installtPass: slutar insatsen nu med passet före säger det vilket pass och vilken
+ * dag, och efter ett avslut att passen som avslutet strök inte kommer tillbaka (rotprovet 2026-10-31, B2; verifieringen 4
+ * inför lanseringen, fynd 7).
+ * @param {{ fore?: Pass, avslutet?: boolean }} inst
+ */
+export const installtBesked = (inst) => (inst.fore ? `Passet är inställt. Insatsen slutar nu med pass ${inst.fore.nr}, ${dagText(inst.fore.datum)}${inst.avslutet ? ', och passen som avslutet strök kommer inte tillbaka' : ''}.` : 'Passet är inställt.');
 
 /**
  * Skalan när läraren följer insatsen (Niclas 2026-10-24: "skatta enkelt 1-5 hur väl den nu klarar av metodens centrala
@@ -4034,8 +4050,46 @@ export const narvaronKort = (e, s) => `med i ${e.narvaro} av ${e.passen ?? s.gjo
  * kom till senare (Codex 2026-10-26). @param {{ fran?: string }} e */
 export const prickarnasText = (e) => `Prickarna under veckan är passen: fylld var med, ring var inte med, streck inte bockat${e.fran ? ' eller före eleven kom till' : ''}.`;
 export const passensNarvaro = (s, e, franvaro) => s.veckor.map((v) => v.pass.map((p) => (!p.gjort || (e.fran && p.datum < e.fran) ? 'inte' : (franvaro?.[p.dag] ?? []).includes(e.id) ? 'borta' : 'med')));
-/** Ett resultat i metodens uppföljning, med radens namn som i uppföljningens rad: "Efter insatsen, v. 51: 6 av 8". @param {Plan} plan @param {{ uppfoljning: { nar: string }[] }} info @param {{ rad: number, datum: string, varde: string }} t */
-export const resultatText = (plan, info, t) => `${uppfoljningensNamn(plan, info, t.rad)}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${utanPunkt(t.varde)}`;
+/**
+ * Delarna i en mätnings resultat, som metoden skriver dem i uppföljningens `resultat` med semikolon mellan, "nivå i screeningen;
+ * klarade uppgifter av 9; påhittade ord av 4 i uppgift 9". Ett resultat utan semikolon har en del.
+ * @param {string | undefined} resultat
+ * @returns {string[]}
+ */
+export const resultatetsDelar = (resultat) => String(resultat ?? '').split(';').map((x) => x.trim()).filter(Boolean);
+// Ett värde som är ett tal, 6 eller 6,5.
+const ETT_TAL = /^\d+(?:[,.]\d+)?$/;
+/**
+ * Det läraren förde in vid en mätning, med vad varje värde står för ur metodens delar (resultatetsDelar), lika på sidan, i
+ * texterna och i pdf:erna (verifieringen 4 inför lanseringen, fynd 3: "Före insatsen, v. 6: 2; 6; 3"). "2; 6; 3" blir "nivå i
+ * screeningen 2, klarade uppgifter 6 av 9, påhittade ord 3 av 4 i uppgift 9": ett tal står före delens "av", och efter delen
+ * när den inte har något "av"; en del med två "av", som "ord av 8 och delar av 19", tar två tal, som "5/14"; ett annat värde
+ * står efter delen med ett kolon. Värdena skiljs med semikolon, eller med komma eller mellanslag när alla är tal. Har metoden
+ * en enda del, eller är värdena fler eller färre än delarna, står värdena som läraren skrev dem.
+ * @param {string | undefined} resultat metodens resultat, med delarna
+ * @param {string} varde det läraren skrev
+ */
+export function resultatMedDelar(resultat, varde) {
+  const v = utanPunkt(String(varde ?? '').trim());
+  const delar = resultatetsDelar(resultat);
+  if (delar.length < 2) return v;
+  const semikolon = v.split(/\s*;\s*/), tal = v.split(/,\s+|\s+/);
+  const varden = semikolon.length === delar.length ? semikolon : tal.length === delar.length && tal.every((x) => ETT_TAL.test(x)) ? tal : null;
+  if (!varden || varden.some((x) => !x)) return v;
+  const parade = delar.map((d, i) => {
+    const matt = d.match(/\sav\s+\d/g)?.length ?? 0;
+    const x = varden[i], xs = matt > 1 ? x.split(/\s*\/\s*|\s+och\s+|,\s+|\s+/) : [x];
+    if (!xs.every((y) => ETT_TAL.test(y)) || (matt > 1 && xs.length !== matt)) return `${d}: ${x}`;
+    if (!matt) return `${d} ${x}`;
+    let n = 0;
+    return d.replace(/\s(av\s+\d)/g, (_, av) => ` ${xs[n++]} ${av}`);
+  });
+  return parade.join(delar.some((d) => d.includes(',')) ? '; ' : ', ');
+}
+/** Det läraren förde in vid uppföljningens rad, med radens delar (resultatMedDelar). @param {{ uppfoljning: { resultat?: string }[] }} info @param {{ rad: number, varde: string }} t */
+export const resultatetsVarde = (info, t) => resultatMedDelar(info.uppfoljning[t.rad]?.resultat, t.varde);
+/** Ett resultat i metodens uppföljning, med radens namn som i uppföljningens rad och vad talen står för: "Före insatsen, v. 6: nivå i screeningen 2, klarade uppgifter 6 av 9, påhittade ord 3 av 4 i uppgift 9". @param {Plan} plan @param {{ uppfoljning: { nar: string, resultat?: string }[] }} info @param {{ rad: number, datum: string, varde: string }} t */
+export const resultatText = (plan, info, t) => `${uppfoljningensNamn(plan, info, t.rad)}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${resultatetsVarde(info, t)}`;
 /** Veckorna där läraren har skattat hur veckan gick. @template {{ skattning?: number }} T @param {{ veckor: T[] }} s @returns {T[]} */
 export const skattadeVeckor = (s) => s.veckor.filter((v) => v.skattning);
 /**

@@ -20,7 +20,7 @@ import {
   bytDagar, delarIFoljd, elevenHarNagot, narvaronKort, passensNarvaro, prickarnasText, formularetText, linjen, rensadLank, skattningensText, stegetsSpann, ELEVLISTANS_LANGD, elevernasNamn, kapaVidOrd, mandagen, passetsLage, rensaFoljd, rentaFore, rentaTider, rentaPasstider, passetsEgenTid, radText, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   ELEVERNAS_KOLUMN, kursensPassnummer, variantenFor, upprepaIVeckan, vidareMening, vidareProvasI, uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, FORE_PASSET, type Veckonamn,
   type Foljd, type Pass, type Skala, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
-  ANLEDNINGENS_LANGD, allaPassInstallda, flyttatHit, installtPass, namnlistan, nyaElevensDag, passetPaDagen, utanPunkt, iSommarlovet, lovveckornaAttValja, harInfortEfter, lovetLast, planveckansKort, sistaInfort, regelnIVeckan, sakernasText, skolveckan, skolveckanHarVarit, skolveckansText, stegetsInnehall, veckorText, borttagnasBesked, elevenHarInfort, resultatensNycklar, uppehalletsText, uppehalletsVeckor,
+  ANLEDNINGENS_LANGD, allaPassInstallda, flyttatHit, installtPass, installtBesked, resultatetsDelar, resultatetsVarde, namnlistan, nyaElevensDag, passetPaDagen, utanPunkt, iSommarlovet, lovveckornaAttValja, harInfortEfter, lovetLast, planveckansKort, sistaInfort, regelnIVeckan, sakernasText, skolveckan, skolveckanHarVarit, skolveckansText, stegetsInnehall, veckorText, borttagnasBesked, elevenHarInfort, resultatensNycklar, uppehalletsText, uppehalletsVeckor,
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
@@ -554,6 +554,16 @@ let elevFraga: { plan: string; par: { ny: Elev; kandidater: Elev[] }[] } = { pla
 // De nya elever som läraren har svarat Ny elev för, per plan, så att frågan inte kommer igen medan läraren skriver vidare
 // (verifieringen 2026-10-25: frågan om Dan kom tillbaka efter varje ändring i listan).
 const nyaBesvarade = new Map<string, Set<string>>();
+// Elevlistans princip, frågan är beskedet (verifieringen 4 inför lanseringen, fynd 1: frågan om Cemal och beskedet att Cem var
+// borttagen kom samtidigt, sa olika saker om Cems skattning, och beskedet täckte frågans knappar i telefonen): en borttagen elev
+// som en öppen fråga gäller sägs inte i ett besked. Svarar läraren på frågan, och ingen annan fråga gäller henne, kommer beskedet
+// om henne då, med Ångra. sagdaBorta: de borttagna vars besked kom med svaret, per plan, så att det inte kommer igen när listan
+// blir klar.
+const sagdaBorta = new Map<string, Set<string>>();
+const iEnFraga = (plan: string, id: string) => elevFraga.plan === plan && elevFraga.par.some((p) => p.kandidater.some((k) => k.id === id));
+// Beskedet om elever som har lämnat listan, med det som förts in om dem (borttagnasBesked i standarden).
+const bortasBesked = (borta: Elev[]) => borttagnasBesked(borta.map((e) => ({ namn: e.namn, harInfort: elevenHarInfort(aktiv.foljd, e.id) })));
+const tillbakaMening = (namn: string[]) => `${uppraknat(namn)} är tillbaka i listan, med det som förts in.`;
 // Elevlistan ur det läraren skriver, med namnlistans princip i standarden, samma rot som klasslistan i Lär dig metoden (lagning-3,
 // Elevlistans princip; Niclas 2026-10-31: "Om det går hitta en stabil rot för elevlistan"). Sidan har inga egna regler för
 // vem en rad är: den lägger bara till dagen en elev kom till, så att närvaron räknas därifrån.
@@ -643,8 +653,11 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
   renderaVeckan();
   if (lage !== 'klar') return;
   const gruppSkattad = !r.fore.length && Object.values(aktiv.foljd.skattning).some((v) => v?.[GRUPPEN]);
-  // En elev som lämnar listan sägs alltid med Ångra, också när en ny elev på hennes rad ger en fråga (elevlistans princip).
-  const bara = borta;
+  // En elev som lämnar listan sägs med Ångra, utom när en öppen fråga gäller henne eller hennes besked kom med svaret på en
+  // fråga (elevlistans princip, frågan är beskedet).
+  const sagda = sagdaBorta.get(r.plan);
+  sagdaBorta.delete(r.plan);
+  const bara = borta.filter((e) => !iEnFraga(r.plan, e.id) && !sagda?.has(e.id));
   const angra = { text: 'Ångra', kvar: true, gor: () => {
     if (aktiv.id !== r.plan) return;
     // Namnen som lämnar listan när den återställs sparas också (Codex 2026-10-25: Ali Svensson efter Ångra).
@@ -664,8 +677,8 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
   const rattade = r.fore.flatMap((e) => { const ny = elever.find((x) => x.id === e.id); return ny && ny.namn !== e.namn ? [`${e.namn} heter nu ${ny.namn}`] : []; });
   // En elev som kommer tillbaka sägs alltid, också när en annan togs bort i samma ändring, så att en namne som fick en tidigare
   // elevs skattningar syns och går att ångra (Codex 2026-10-26).
-  const tillbakaText = tillbaka.length ? ` ${uppraknat(tillbaka.map((e) => e.namn))} är tillbaka i listan, med det som förts in.` : '';
-  if (bara.length) visaBesked(`${borttagnasBesked(bara.map((e) => ({ namn: e.namn, harInfort: elevenHarInfort(aktiv.foljd, e.id) })))}${tillbakaText}`, angra);
+  const tillbakaText = tillbaka.length ? ` ${tillbakaMening(tillbaka.map((e) => e.namn))}` : '';
+  if (bara.length) visaBesked(`${bortasBesked(bara)}${tillbakaText}`, angra);
   else if (rattade.length) visaBesked(`${uppraknat(rattade)}, med det som förts in.${tillbakaText}`, angra);
   else if (tillbaka.length) visaBesked(tillbakaText.trim(), angra);
   else if (gruppSkattad && elever.length) visaBesked('Gruppens skattningar finns kvar i sammanställningen, under Gruppen.');
@@ -694,6 +707,31 @@ function visaElevFraga() {
     return `<p>${fraga}</p><p class="pl-andra-knappar">${knappar}<button type="button" class="knapp sekundar liten" data-ny-elev="${esc(x.ny.id)}">Ny elev</button></p>`;
   }).join('');
 }
+// De borttagna i en besvarad fråga som inte står i listan och som ingen annan öppen fråga gäller: deras besked kommer med svaret,
+// och sägs inte igen när listan blir klar (sagdaBorta).
+function sagdaMedSvaret(kandidater: Elev[]) {
+  const ut = kandidater.filter((k) => !aktiv.foljd.elever.some((e) => e.id === k.id) && !iEnFraga(aktiv.id, k.id));
+  if (ut.length) sagdaBorta.set(aktiv.id, new Set([...(sagdaBorta.get(aktiv.id) ?? []), ...ut.map((k) => k.id)]));
+  return ut;
+}
+// Ångra på beskedet efter svaret Ny elev: de borttagna kommer tillbaka i listan, på raden före den nya eleven, med det som förts
+// in om dem, och den nya eleven står kvar, eftersom läraren har svarat att hen är ny. Ett namn som redan står i listan kommer
+// inte en gång till.
+function tillbakaIListan(plan: string, ut: Elev[], fore: string) {
+  if (aktiv.id !== plan) { visaBesked('Ändringen gällde en annan plan och går inte att ångra här.'); return; }
+  listanKlar();
+  const f = aktiv.foljd, namnet = (n: string) => n.toLocaleLowerCase('sv');
+  const igen = ut.filter((k) => !f.elever.some((e) => e.id === k.id || namnet(e.namn) === namnet(k.namn)));
+  if (!igen.length) return;
+  const lista = [...f.elever], plats = lista.findIndex((e) => e.id === fore);
+  lista.splice(plats < 0 ? lista.length : plats, 0, ...igen.map((k) => ({ id: k.id, namn: k.namn, ...(k.fran ? { fran: k.fran } : {}) })));
+  const lamnade = (f.lamnade ?? []).filter((x) => !igen.some((k) => k.id === x.id));
+  aktiv.foljd = { ...f, elever: lista.slice(0, ELEVLISTANS_LANGD), lamnade: lamnade.length ? lamnade : undefined };
+  sparaTyst();
+  elevfalt.value = aktiv.foljd.elever.map((e) => e.namn).join('\n');
+  rendera();
+  visaBesked(tillbakaMening(igen.map((e) => e.namn)));
+}
 function sammaElevSom(ny: Elev, forut: Elev) {
   const f = aktiv.foljd;
   f.elever = f.elever.map((e) => (e.id === ny.id ? { id: forut.id, namn: e.namn, ...(forut.fran ? { fran: forut.fran } : {}) } : e));
@@ -713,8 +751,12 @@ $('pl-elever-fraga').addEventListener('click', (e) => {
   const forut = x.kandidater.find((k) => k.id === forutId);
   const ny = aktiv.foljd.elever.find((el) => el.id === x.ny.id);
   if (!b.dataset.sammaElev || !forut || !ny) {
-    if (b.dataset.nyElev) nyaBesvarade.set(aktiv.id, new Set([...(nyaBesvarade.get(aktiv.id) ?? []), x.ny.id]));
     visaElevFraga();
+    if (!b.dataset.nyElev) return;
+    nyaBesvarade.set(aktiv.id, new Set([...(nyaBesvarade.get(aktiv.id) ?? []), x.ny.id]));
+    // Ny elev: frågan var beskedet om de borttagna, och nu kommer beskedet om dem, med Ångra som tar tillbaka dem.
+    const plan = aktiv.id, ut = sagdaMedSvaret(x.kandidater);
+    if (ut.length) visaBesked(bortasBesked(ut), { text: 'Ångra', kvar: true, gor: () => tillbakaIListan(plan, ut, x.ny.id) });
     return;
   }
   // En borttagen elev kan bara vara en av de nya: den som redan står i listan går inte att välja igen, och de andra frågorna
@@ -725,8 +767,10 @@ $('pl-elever-fraga').addEventListener('click', (e) => {
   elevFraga.par = elevFraga.par.map((p) => ({ ...p, kandidater: p.kandidater.filter((k) => k.id !== forut.id) })).filter((p) => p.kandidater.length);
   sparaTyst();
   rendera();
-  // Ångra tar tillbaka listan och frågorna, så att läraren kan svara igen.
-  visaBesked(`${ny.namn} är samma elev som ${forut.namn}, med det som förts in.`, { text: 'Ångra', kvar: true, gor: () => { elevFraga = fragorFore; aterstall(fore, 'Elevlistan är som före.'); visaElevFraga(); } });
+  // Ångra tar tillbaka listan och frågorna, så att läraren kan svara igen. En annan borttagen elev i frågan, som ingen fråga
+  // gäller nu, sägs i samma besked (frågan är beskedet).
+  const ut = sagdaMedSvaret(x.kandidater.filter((k) => k.id !== forut.id));
+  visaBesked(`${ny.namn} är samma elev som ${forut.namn}, med det som förts in.${ut.length ? ` ${bortasBesked(ut)}` : ''}`, { text: 'Ångra', kvar: true, gor: () => { elevFraga = fragorFore; sagdaBorta.delete(aktiv.id); aterstall(fore, 'Elevlistan är som före.'); visaElevFraga(); } });
 });
 elevfalt.addEventListener('focus', startaRedigering);
 // Listan är klar när fältet inte längre har fokus, också när blur inte kommer, som när ett annat fält får fokus medan sidan
@@ -1109,8 +1153,10 @@ const foreOchEfter = (e: SammanstallningElev, plats: string) => {
   const alla = elevensResultat(plan, e.resultat);
   const fore = alla.find((x) => x.typ === 'fore');
   const sedan = alla.filter((x) => (plats === 'efter' ? x.typ === 'efter' : x.typ !== 'fore' && x.typ !== 'efter'));
-  // Med uppföljningens namn, "Före samtal 1: 5", så att resultatet inte läses som skattningen (den kalla testaren 2026-10-26).
-  return [...(fore ? [fore] : []), ...sedan].map((x) => `${uppfNamn(x.rad)}: ${x.varde}`).join(', ');
+  // Med uppföljningens namn, "Före samtal 1: 5", så att resultatet inte läses som skattningen (den kalla testaren 2026-10-26),
+  // och vad varje tal står för ur metodens delar, som i sammanställningen (resultatetsVarde; verifieringen 4, fynd 3).
+  // Semikolon mellan mätningarna, eftersom delarna har komma mellan sig.
+  return [...(fore ? [fore] : []), ...sedan].map((x) => `${uppfNamn(x.rad)}: ${resultatetsVarde(info(), x)}`).join('; ');
 };
 // Ett namn går att trycka på var det står, och fäller ut elevens utveckling under raden: i skattningen, avstämningen och
 // utvärderingen (Niclas 2026-10-24: "trycka på ett namn och se dennes utveckling", "både sammanställning av alla elever i
@@ -1126,7 +1172,9 @@ const riktningar = (s: Sammanstallning, plats: string, medResultat = false) => `
 }).join('')}</ul>`;
 // Det läraren för in står vid fältet, med metodens skala (K-579), som "Resultat för varje elev, om du vill: ljud av 21".
 // Skalan står över fälten och inte i dem, där den klipps av i telefonen (den kalla läsaren av Berättelseramen 2026-10-27).
-const resultatfalt = (nyckel: string) => { const skala = data.uppfoljning.rader[Number(nyckel.split('-')[0])]?.resultat; return harElever() ? `<div class="pl-resultat"><span class="pl-hjalp">Resultat för varje elev, om du vill${skala ? `: ${esc(skala)}` : ''}</span>${aktiv.foljd.elever.map((e) => `<label><span>${esc(e.namn)}</span><input class="pl-falt" type="text" maxlength="${RESULTATETS_LANGD}" data-resultat="${esc(nyckel)}|${esc(e.id)}" value="${esc(aktiv.foljd.resultat[nyckel]?.[e.id] ?? '')}" /></label>`).join('')}</div>` : ''; };
+// Ett resultat med flera delar säger att delarna skiljs med semikolon, och fältet är så brett som delarna kräver, ur antalet
+// delar (--delar i global.css), så att det läraren skriver inte klipps av (resultatetsDelar; verifieringen 4, fynd 3 och 4).
+const resultatfalt = (nyckel: string) => { const skala = data.uppfoljning.rader[Number(nyckel.split('-')[0])]?.resultat; const delar = resultatetsDelar(skala).length; return harElever() ? `<div class="pl-resultat" style="--delar: ${Math.max(1, delar)}"><span class="pl-hjalp">Resultat för varje elev, om du vill${skala ? `${delar > 1 ? ', med semikolon mellan delarna' : ''}: ${esc(skala)}` : ''}</span>${aktiv.foljd.elever.map((e) => `<label><span>${esc(e.namn)}</span><input class="pl-falt" type="text" maxlength="${RESULTATETS_LANGD}" data-resultat="${esc(nyckel)}|${esc(e.id)}" value="${esc(aktiv.foljd.resultat[nyckel]?.[e.id] ?? '')}" /></label>`).join('')}</div>` : ''; };
 // Uppföljningens namn ur standarden, som i raden och texterna: Efter insatsen för den första efter insatsen (buggjakten
 // 2026-10-25: Efter-sidan sa "Efter sex till åtta veckor" om en plan på fyra veckor).
 // Resultat per elev hör till uppföljningens mätningar, före, efter och vid ett visst pass eller en viss vecka, och inte till
@@ -2309,12 +2357,12 @@ $('pl-veckan').addEventListener('click', (e) => {
     // En flytt som inte görs säger varför i rutan Flytta eller ställ in ett pass, där läraren tittar, och rutan står kvar öppen
     // (lagning-3, L1: beskedet längst ned syntes inte).
     const iFlyttrutan = (text: string) => { const not = document.getElementById('pl-flytta-not'); if (not) { not.textContent = text; not.hidden = false; } else visaBesked(text); };
-    // Är passet insatsens sista efter ett avslut, slutar insatsen med passet före, och beskedet säger det (installtPass;
-    // rotprovet 2026-10-31, B2).
+    // Är passet insatsens sista, efter ett avslut eller i en period i veckor, slutar insatsen med passet före, och beskedet säger
+    // det med Ångra (installtPass och installtBesked; rotprovet 2026-10-31, B2, och verifieringen 4 inför lanseringen, fynd 7).
     if (gor === 'stall-in') {
       const inst = installtPass(plan, aktiv.val, ursprung);
       if (!inst) { iFlyttrutan(`Pass ${plan.sistaNr} är insatsens enda pass. Ångra avslutet överst först, så går det att ställa in.`); return; }
-      andra(() => { aktiv.val = inst.val; utanEgenTid(ursprung); }, inst.fore ? `Passet är inställt. Insatsen slutar nu med pass ${inst.fore.nr}, ${dagText(inst.fore.datum)}, och passen som avslutet strök kommer inte tillbaka.` : 'Passet är inställt.', true);
+      andra(() => { aktiv.val = inst.val; utanEgenTid(ursprung); }, installtBesked(inst), true);
       return;
     }
     const ny = $<HTMLInputElement>('pl-flytta-dag').value;
@@ -2802,6 +2850,8 @@ function fragaForst(knapp: HTMLElement, fraga: string, ja: string, gor: () => vo
   if (knapp.nextElementSibling?.classList.contains('pl-fraga-forst')) return;
   const ruta = document.createElement('div');
   ruta.className = 'pl-fraga-forst';
+  // En fråga som läraren svarar på, som beskedet inte täcker (beskedet i byggstenarna).
+  ruta.dataset.fraga = '';
   ruta.setAttribute('role', 'group');
   ruta.setAttribute('aria-label', fraga);
   ruta.innerHTML = `<p>${esc(fraga)}</p><p class="pl-andra-knappar"><button type="button" class="knapp liten pl-farlig" data-ja>${esc(ja)}</button><button type="button" class="knapp sekundar liten" data-nej>Avbryt</button></p>`;

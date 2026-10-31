@@ -567,8 +567,10 @@ export declare const passetsDag: (p: Pass) => string;
 export declare const passetPaDagen: (plan: { pass: Pass[] }, v: PlanVecka, datum: string, utom: string) => Pass | undefined;
 /** Dagen som ett pass hade innan det flyttades till datumet. */
 export declare const flyttatHit: (val: Val, datum: string) => string | undefined;
-/** Valen när läraren ställer in passet på en dag; det sista passet efter ett avslut ger slutet till passet före (fore), och utan pass före null. */
-export declare function installtPass(plan: Plan, val: Val, dag: string): { val: Val; fore?: Pass } | null;
+/** Valen när läraren ställer in passet på en dag; det sista passet efter ett avslut ger slutet till passet före (fore, avslutet), och utan pass före null; det sista passet i en period i veckor ger fore utan avslutet. */
+export declare function installtPass(plan: Plan, val: Val, dag: string): { val: Val; fore?: Pass; avslutet?: boolean } | null;
+/** Beskedet när läraren ställer in ett pass, ur installtPass: passet insatsen nu slutar med, och efter ett avslut att det som avslutet strök inte kommer tillbaka. */
+export declare const installtBesked: (inst: { fore?: Pass; avslutet?: boolean }) => string;
 /** Ett avslut som ett annat beslut har kommit efter: passet insatsen slutade med och lärarens anledning (Foljd.tidigareAvslut). */
 export interface Avslutet { pass: number; not?: string }
 /** Avsluten som en lista i ordning, också ur ett enda avslut som en plan sparade före listan. */
@@ -638,8 +640,8 @@ export declare const beslutText: (b: { beslut?: string; not?: string }) => strin
 export declare function uppehalletsText(plan: Plan, tidigare?: Avslutet[] | Avslutet | null): string;
 /** Uppehållets hela veckor efter en förlängning, deras måndagar. */
 export declare const uppehalletsVeckor: (plan: Plan) => string[];
-/** Beskedet när elever lämnar elevlistan, med det som förts in om dem. */
-export declare function borttagnasBesked(borta: { namn: string; harInfort: boolean }[]): string;
+/** Beskedet när elever lämnar elevlistan, eller klasser listan i Lär dig metoden (klasser), med vad som händer med det som förts in om dem. */
+export declare function borttagnasBesked(borta: { namn: string; harInfort: boolean }[], o?: { klasser?: boolean }): string;
 /** Har läraren fört in något om eleven: en skattning, ett resultat eller frånvaro. */
 export declare const elevenHarInfort: (f: Foljd, id: string) => boolean;
 /** Dagen en ny elev kom till elevlistan, ur listans historia: i dag när gruppen har haft en lista före i dag och ett pass är bockat före i dag, annars ingen. */
@@ -652,8 +654,14 @@ export declare function passensRad(s: { planerade: number; gjorda: number; varit
 export declare function passensLage(s: { planerade: number; gjorda: number; varit: number; gjordaVarit: number; slut: boolean }): string;
 /** Elevens närvaro i en mening. */
 export declare const narvaronText: (e: { narvaro: number | null }, s: { gjorda: number }) => string;
-/** Ett resultat i metodens uppföljning: "Före insatsen, v. 45: 4 av 8". */
-export declare const resultatText: (plan: Plan, info: { uppfoljning: { nar: string }[] }, t: { rad: number; datum: string; varde: string }) => string;
+/** Delarna i en mätnings resultat, med semikolon mellan i metodens fält. */
+export declare const resultatetsDelar: (resultat: string | undefined) => string[];
+/** Det läraren förde in vid en mätning, med vad varje värde står för ur metodens delar, eller som läraren skrev det. */
+export declare function resultatMedDelar(resultat: string | undefined, varde: string): string;
+/** Det läraren förde in vid uppföljningens rad, med radens delar. */
+export declare const resultatetsVarde: (info: { uppfoljning: { resultat?: string }[] }, t: { rad: number; varde: string }) => string;
+/** Ett resultat i metodens uppföljning, med vad talen står för: "Före insatsen, v. 45: nivå i screeningen 2, klarade uppgifter 6 av 9". */
+export declare const resultatText: (plan: Plan, info: { uppfoljning: { nar: string; resultat?: string }[] }, t: { rad: number; datum: string; varde: string }) => string;
 /** En elevs skattningar vecka för vecka, till diagrammen. */
 export declare const elevensVarden: (s: { veckor: { nr: number }[] }, e: { skattningar: { nr: number; varde: number }[] }) => (number | undefined)[];
 /** Stapelns vänsterkant i veckans fack. */
