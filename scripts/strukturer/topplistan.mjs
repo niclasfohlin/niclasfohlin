@@ -17,6 +17,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { strukturernasTopplista } from '../../src/lib/standard/strukturer.js';
 
 const ROT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const FIL = join(ROT, 'src', 'data', 'strukturer-topp.json');
@@ -55,17 +56,8 @@ async function hits() {
   return ut;
 }
 
-const UTSKRIFTENS_VIKT = 5;
 try {
-  const rakning = new Map();
-  for (const h of await hits()) {
-    const m = h.path.match(/^(\/strukturer\/|utskrift:strukturer\/)([a-z0-9-]+)$/);
-    if (!m || m[2] === 'listan' || m[2] === 'alla') continue;
-    const r = rakning.get(m[2]) ?? { besok: 0, utskrifter: 0 };
-    r[m[1].startsWith('utskrift') ? 'utskrifter' : 'besok'] += h.count;
-    rakning.set(m[2], r);
-  }
-  const strukturer = [...rakning].map(([id, r]) => ({ id, antal: r.besok + UTSKRIFTENS_VIKT * r.utskrifter, ...r })).sort((a, b) => b.antal - a.antal || a.id.localeCompare(b.id));
+  const strukturer = strukturernasTopplista(await hits());
   writeFileSync(FIL, JSON.stringify({ datum: new Date().toISOString(), strukturer }, null, 2) + '\n');
   console.log(`Strukturernas topplista: ${strukturer.length} strukturer med besök eller utskrifter de senaste 30 dagarna.`);
 } catch (e) {

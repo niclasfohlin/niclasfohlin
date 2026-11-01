@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.49.0, 2026-11-01
+
+- `strukturer.js` (sajtens K-665): `strukturernasTopplista` och `UTSKRIFTENS_VIKT`, topplistans räkning ur GoatCounters sidor och händelser, med en utskrift som fem besök, som bygget och sajtens funktion delar.
+
 ## 0.48.0, 2026-11-01
 
 - `strukturer.js` (sajtens K-661): en metod importerar strukturer ur verktyget Strukturer med fältet `strukturkort` (`text` och `strukturer`, id i utskriftens ordning). `strukturkortensFel` prövar fältet, med ett jämnt antal mellan `METODENS_STRUKTURKORT.minst` och `högst`, eftersom korten skrivs ut två och två, och `undervisningsmetodensFel` kör den. `metodensStrukturkort` är metodens fil med korten. Sajten prövar att varje id finns och visas.

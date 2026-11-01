@@ -38,3 +38,6 @@ underlag/metoder/
 .codex/config.toml
 underlag/texter/_hamtning.json
 __pycache__/
+
+# Arbetskopior som Claude Code gör åt agenter (git worktree), som slås ihop eller tas bort efter arbetet.
+.claude/worktrees/

@@ -44,7 +44,10 @@ if (ruta) {
       b.closest('.st-kort')?.classList.toggle('vald', med);
     } else b.textContent = med ? 'Ta bort ur Att skriva ut' : 'Lägg i Att skriva ut';
   }
-  for (const b of knappar()) b.addEventListener('click', () => valj(b.dataset.valj!, !vald(b.dataset.valj!)));
+  // Ett tryck på en bock eller knapp med data-valj, också på kort som topplistan lägger in efter laddningen
+  // (src/pages/strukturer/index.astro), som då säger till med händelsen strukturer:ritad.
+  document.addEventListener('click', (e) => { const b = (e.target as Element | null)?.closest?.<HTMLElement>('[data-valj]'); if (b) valj(b.dataset.valj!, !vald(b.dataset.valj!)); });
+  document.addEventListener('strukturer:ritad', () => visa());
 
   function visa() {
     const n = sparat.valda.length;

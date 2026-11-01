@@ -45,14 +45,14 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
         <p class="st-utskriftsrad">{TVA_PA_A4}</p>
       </header>
 
-      {topp.length === 5 && (
-        <section aria-labelledby="st-topp-rubrik">
-          <h2 class="st-rubrik2" id="st-topp-rubrik">Mest använda den senaste månaden</h2>
-          <ol class="st-kort-lista st-topp">
-            {topp.map((s, i) => <Kortet s={s} nr={i + 1} />)}
-          </ol>
-        </section>
-      )}
+      {/* Topplistan: bygget skriver den som den var (topp), och sidan hämtar dagens lista från funktionen
+          netlify/functions/strukturer-topp.mjs, som svarar 503 utan nyckel och då står listan från bygget kvar (K-665). */}
+      <section id="st-topp" aria-labelledby="st-topp-rubrik" hidden={topp.length !== 5}>
+        <h2 class="st-rubrik2" id="st-topp-rubrik">Mest använda den senaste månaden</h2>
+        <ol class="st-kort-lista st-topp">
+          {topp.map((s, i) => <Kortet s={s} nr={i + 1} />)}
+        </ol>
+      </section>
 
       <h2 class="st-rubrik2">Alla strukturer</h2>
       {rader.map((r, i) => (
@@ -74,3 +74,26 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
   </div>
 </Base>
 
+<script>
+  // Dagens topplista ur funktionen (K-665): korten tas ur raderna, så att bilden, namnet och bocken är desamma, och de fem
+  // får sin plats. Svarar funktionen inte, eller har färre än fem strukturer besök, står listan från bygget kvar.
+  const sektion = document.getElementById('st-topp');
+  fetch('/api/strukturer-topp').then((r) => (r.ok ? r.json() : null)).then((d: { strukturer?: { id: string; antal: number }[] } | null) => {
+    if (!sektion || !d?.strukturer) return;
+    const kort = new Map([...document.querySelectorAll<HTMLElement>('.st-hylla [data-valj]')].map((b) => [b.dataset.valj!, b.closest('li')!]));
+    const ids = d.strukturer.filter((x) => x.antal > 0 && kort.has(x.id)).map((x) => x.id).slice(0, 5);
+    if (ids.length < 5) return;
+    sektion.querySelector('ol')!.replaceChildren(...ids.map((id, i) => {
+      const li = kort.get(id)!.cloneNode(true) as HTMLElement;
+      const nr = document.createElement('span');
+      nr.className = 'st-nr';
+      nr.textContent = String(i + 1);
+      nr.setAttribute('aria-label', `Plats ${i + 1}`);
+      li.querySelector('.st-kort')!.append(nr);
+      li.querySelector('img')?.setAttribute('loading', 'eager');
+      return li;
+    }));
+    sektion.hidden = false;
+    document.dispatchEvent(new CustomEvent('strukturer:ritad'));
+  }).catch(() => { /* listan från bygget står kvar */ });
+</script>

@@ -86,6 +86,30 @@ export function strukturkortensFel(sk) {
   return fel;
 }
 
+/**
+ * Topplistans räkning (sajtens K-650 och K-665): varje strukturs besök (/strukturer/<id>) och utskrifter (händelsen
+ * utskrift:strukturer/<id>) ur GoatCounters lista över sidor och händelser, med en utskrift som fem besök (Niclas 2026-11-01:
+ * "Utskrift av en struktur kanske ger 5 besök?"). Filen med alla kort och listans egen händelse räknas inte per kort.
+ * Samma räkning i bygget (scripts/strukturer/topplistan.mjs) och i funktionen (netlify/functions/strukturer-topp.mjs).
+ */
+export const UTSKRIFTENS_VIKT = 5;
+/**
+ * @param {{ path: string, count: number }[]} hits
+ * @returns {{ id: string, antal: number, besok: number, utskrifter: number }[]}  flest först, sedan efter id
+ */
+export function strukturernasTopplista(hits) {
+  /** @type {Map<string, { besok: number, utskrifter: number }>} */
+  const rakning = new Map();
+  for (const h of hits) {
+    const m = /^(\/strukturer\/|utskrift:strukturer\/)([a-z0-9-]+)$/.exec(String(h.path));
+    if (!m || m[2] === 'listan' || m[2] === 'alla') continue;
+    const r = rakning.get(m[2]) ?? { besok: 0, utskrifter: 0 };
+    if (m[1].startsWith('utskrift')) r.utskrifter += h.count; else r.besok += h.count;
+    rakning.set(m[2], r);
+  }
+  return [...rakning].map(([id, r]) => ({ id, antal: r.besok + UTSKRIFTENS_VIKT * r.utskrifter, ...r })).sort((a, b) => b.antal - a.antal || a.id.localeCompare(b.id));
+}
+
 /** Kortets fil, i public/strukturer/kort/ och på /strukturer/kort/. */
 export const strukturkortetsFil = (id) => `strukturkort-${id}.pdf`;
 /** Filen med alla kort, två på varje A4, och dess nyckel i manifestet. */

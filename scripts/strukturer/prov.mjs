@@ -87,5 +87,19 @@ const alla = join(ROT, 'public', 'strukturer', 'kort', STRUKTURKORTEN_ALLA.fil);
 if (!existsSync(alla)) fel.push(`${STRUKTURKORTEN_ALLA.fil} saknas`);
 else fel.push(...ordningensFel(sidorna(readFileSync(alla)), visas, 'Filen med alla kort'));
 
+// Topplistans funktion (K-665) med härmade svar från GoatCounter: listan i rätt ordning och sparad ett dygn hos Netlify,
+// och 503 utan nyckel och när GoatCounter svarar 429, så att sidan står kvar med listan från bygget.
+{
+  const { topplistansSvar } = await import('../../netlify/functions/strukturer-topp.mjs');
+  const svar = (status, json) => async () => ({ ok: status === 200, status, json: async () => json });
+  const hits = [{ path: '/strukturer/epa', count: 3, path_id: 1 }, { path: 'utskrift:strukturer/epa', count: 2, path_id: 2 }, { path: '/strukturer/visa', count: 9, path_id: 3 }, { path: 'utskrift:strukturer/alla', count: 40, path_id: 4 }];
+  const r = await topplistansSvar({ nyckel: 'prov', hamta: svar(200, { hits, more: false }) });
+  const d = await r.json();
+  if (r.status !== 200 || d.strukturer.map((x) => x.id).join() !== 'epa,visa') fel.push(`Topplistans funktion svarade ${r.status} med ${JSON.stringify(d).slice(0, 120)}`);
+  if (!/s-maxage=86400/.test(r.headers.get('netlify-cdn-cache-control') ?? '')) fel.push('Topplistans funktion sparas inte ett dygn hos Netlify (Netlify-CDN-Cache-Control)');
+  if ((await topplistansSvar({ nyckel: '' })).status !== 503) fel.push('Topplistans funktion utan nyckel svarar inte 503');
+  if ((await topplistansSvar({ nyckel: 'prov', hamta: svar(429, {}) })).status !== 503) fel.push('Topplistans funktion svarar inte 503 när GoatCounter svarar 429');
+}
+
 if (fel.length) { console.error(`Strukturer: ${fel.length} fel:\n  ${fel.slice(0, 30).join('\n  ')}`); process.exit(1); }
-console.log(`Strukturer: ${visas.length} strukturer med sida, bild, kort och bock; utskriften två och två prövad med ${urval.length} och 2 kort och i filen med alla (${Math.ceil(visas.length / 2)} ark), och provet ser ett urval i omvänd ordning.`);
+console.log(`Strukturer: ${visas.length} strukturer med sida, bild, kort och bock; utskriften två och två prövad med ${urval.length} och 2 kort och i filen med alla (${Math.ceil(visas.length / 2)} ark), och provet ser ett urval i omvänd ordning; topplistans funktion prövad med härmade svar, utan nyckel och med 429.`);

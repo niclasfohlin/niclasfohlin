@@ -896,6 +896,10 @@ export declare function strukturkortetsFil(id: string): string;
 export declare const STRUKTURKORTEN_ALLA: Readonly<{ fil: string; nyckel: string }>;
 /** En metods strukturkort två och två på A4, och nyckeln i manifestet. */
 export declare function metodensStrukturkort(metod: string): Readonly<{ fil: string; nyckel: string }>;
+/** En utskrift väger som så många besök i topplistan. */
+export declare const UTSKRIFTENS_VIKT: number;
+/** Topplistans räkning ur GoatCounters sidor och händelser, flest först. */
+export declare function strukturernasTopplista(hits: { path: string; count: number }[]): { id: string; antal: number; besok: number; utskrifter: number }[];
 /** Gränserna för strukturerna i en metods fält strukturkort. */
 export declare const METODENS_STRUKTURKORT: Readonly<{ minst: number; högst: number }>;
 /** Felen i en metods fält strukturkort, tomt när fältet saknas. */
