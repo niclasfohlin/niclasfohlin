@@ -1,6 +1,6 @@
 // Sakerna i strukturernas bilder (K-650): bord, papper, pappersbollar, kort, pennor, en klocka, pilar för rörelse
 // och bubblor med symboler i stället för ord. Allt ritas med samma penna som figurerna.
-import { V, plus, minus, ggr, rikt, vrid, ellips, enhet, normal, langd } from './penna.mjs';
+import { V, plus, minus, ggr, rikt, vrid, ellips, enhet, normal, langd, slump } from './penna.mjs';
 
 export const SYMBOLFARG = { rod: '#e0566e', bla: '#5f72d9', gul: '#efc65a', gron: '#6cc28a', gra: '#9a9aa2' };
 
@@ -23,7 +23,11 @@ export function bord(p, { x, y, b, d = 70, h = 120, snett = 30, farg = null }) {
 // Ett papper som ligger eller hålls, med några rader klotter som text.
 // symbolStorlek är symbolens storlek i delar av papperets kortare sida, och symbolPlats dess plats i delar av bredden och
 // höjden från mitten. rutnat: [kolumner, rader] ritar ett rutnät utan mittruta, som en bricka eller fyra rutor i rad.
-export function papper(p, { x, y, b = 46, h = 34, vinkel = 0, rader = 3, farg = null, rutor = 0, symbol = null, symbolStorlek = 0.2, symbolPlats = [-0.22, 0], rutnat = null }) {
+// På ett papper med rutnät står raderna i rutorna (önskemål A efter omtaget): `rader` är ett tal för alla rutor eller en
+// lista med ett tal per ruta, rad för rad, som [3, 1] för en full vänsterspalt och en nästan tom högerspalt. Utan `rader`
+// är rutorna tomma, som förut. Rutan med symbolen får inga rader.
+export function papper(p, { x, y, b = 46, h = 34, vinkel = 0, rader, farg = null, rutor = 0, symbol = null, symbolStorlek = 0.2, symbolPlats = [-0.22, 0], rutnat = null }) {
+  rader ??= rutnat ? 0 : 3;
   const c = V(x, y);
   const hrn = [V(-b / 2, -h / 2), V(b / 2, -h / 2), V(b / 2, h / 2), V(-b / 2, h / 2)].map((q) => vrid(plus(c, q), c, vinkel));
   p.ny().form(hrn, farg, { tjock: 0.85 });
@@ -41,7 +45,17 @@ export function papper(p, { x, y, b = 46, h = 34, vinkel = 0, rader = 3, farg = 
   }
   // En symbol på papperet: det som någon har skrivit eller ritat, samma symbol som i en bubbla.
   if (symbol) symbolen(p, symbol, vrid(V(x + b * symbolPlats[0], y + h * symbolPlats[1]), c, vinkel), Math.min(b, h) * symbolStorlek);
-  if (rutnat) return;
+  if (rutnat) {
+    const [k, r] = rutnat, rb = b / k, rh = h / r;
+    for (let j = 0; j < r; j++) for (let i = 0; i < k; i++) {
+      const n = Array.isArray(rader) ? rader[j * k + i] ?? 0 : rader;
+      const x0 = -b / 2 + i * rb, y0 = -h / 2 + j * rh;
+      // Rutan där symbolen står får inga rader.
+      if (!n || (symbol && b * symbolPlats[0] > x0 && b * symbolPlats[0] < x0 + rb && h * symbolPlats[1] > y0 && h * symbolPlats[1] < y0 + rh)) continue;
+      klotter(p, c, vinkel, x0 + rb * 0.14, x0 + rb * 0.86, y0, rh, n);
+    }
+    return;
+  }
   // Raderna börjar efter symbolen, så att de inte går genom den (granskningen av omgång H).
   const fore = symbol ? b * symbolPlats[0] + Math.min(b, h) * symbolStorlek * 1.4 : -Infinity;
   const borjan = Math.max(-b / 2 + b * 0.14, fore);
@@ -54,14 +68,42 @@ export function papper(p, { x, y, b = 46, h = 34, vinkel = 0, rader = 3, farg = 
   }
 }
 
-// En pappersboll, skrynklig, med några veck.
-export function boll(p, { x, y, r = 13, farg = '#efc65a' }) {
-  const pts = ellips(V(x, y), r, r * 0.92, { n: 11 }).map((q, i) => plus(q, ggr(enhet(minus(q, V(x, y))), (i % 2 ? -1 : 1) * r * 0.12 * p.r())));
+// Rader klotter i en ruta på ett papper: från x0 till x1 och i höjden från y0 och rh nedåt, räknat från papperets mitt
+// c, vridet med papperet. Den sista raden är kortare, som när en text slutar.
+function klotter(p, c, vinkel, x0, x1, y0, rh, n) {
+  const steg = Math.max(3, Math.min(5, (x1 - x0) / 6));
+  for (let i = 0; i < n; i++) {
+    const yy = y0 + (rh / (n + 1)) * (i + 1);
+    const slut = i === n - 1 && n > 1 ? x0 + (x1 - x0) * 0.55 : x1;
+    const pts = [];
+    for (let xx = x0; xx < slut; xx += steg) pts.push(vrid(V(c.x + xx, c.y + yy + (pts.length % 2 ? -1.4 : 1.4)), c, vinkel));
+    if (pts.length > 1) p.streck(pts, { tjock: 0.55, skak: 0 });
+  }
+}
+
+// En pappersboll, en skrynklig klump med veck. Varje boll har sin form och sina veck ur ett eget frö (`fro`, annars
+// bollens plats), så att bollarna i en hög inte ser stämplade ut (önskemål D efter omtaget, som referensen 1-snobollen).
+// Kanten går in och ut runt bollen, och vecken är korta brutna linjer från kanten in mot mitten, åt olika håll, så att
+// de inte ser ut som ett ansikte (granskningen av omgång C och D).
+export function boll(p, { x, y, r = 13, farg = '#efc65a', fro = null }) {
+  const s = slump(fro ?? `boll ${Math.round(x)} ${Math.round(y)} ${r}`);
+  const c = V(x, y), n = 9 + Math.floor(s() * 4), vrid0 = s() * 360, platt = s.mellan(0.82, 0.96);
+  const pts = Array.from({ length: n }, (_, i) => {
+    const t = ((i + s.mellan(-0.25, 0.25)) / n) * 360 + vrid0;
+    const k = (i % 2 ? s.mellan(0.8, 0.92) : s.mellan(0.98, 1.12));
+    const d = rikt(t);
+    return plus(c, V(d.x * r * k, d.y * r * k * platt));
+  });
   p.ny().form(pts, farg, { tjock: 0.85 });
-  // Vecken är raka och korta, åt olika håll, så att de inte ser ut som ett leende ansikte (granskningen av omgång C och D).
-  p.streck([V(x - r * 0.45, y - r * 0.3), V(x - r * 0.05, y - r * 0.05)], { tjock: 0.55, skak: 0 });
-  p.streck([V(x + r * 0.05, y + r * 0.1), V(x + r * 0.15, y + r * 0.5)], { tjock: 0.55, skak: 0 });
-  p.streck([V(x + r * 0.2, y - r * 0.4), V(x + r * 0.5, y - r * 0.15)], { tjock: 0.55, skak: 0 });
+  const antal = 2 + Math.floor(s() * 3);
+  const start = s() * 360;
+  for (let i = 0; i < antal; i++) {
+    const t = start + (i * 360) / antal + s.mellan(-30, 30);
+    const a = plus(c, ggr(rikt(t), r * s.mellan(0.5, 0.75)));
+    const b = plus(c, ggr(rikt(t + s.mellan(-50, 50)), r * s.mellan(0.05, 0.3)));
+    const knack = plus(ggr(plus(a, b), 0.5), ggr(normal(minus(b, a)), r * s.mellan(-0.18, 0.18)));
+    p.streck(s() < 0.5 ? [a, knack, b] : [a, b], { tjock: 0.55, skak: 0 });
+  }
 }
 
 // Ett kort, som en lapp med en symbol på.
@@ -71,18 +113,40 @@ export function kort(p, { x, y, b = 28, h = 38, vinkel = 0, farg = '#ffffff', sy
   if (symbol) symbolen(p, symbol, c, Math.min(b, h) * 0.32);
 }
 
-// En penna, från spetsen och åt ett håll.
-export function penna(p, { x, y, vinkel = 200, l = 40, farg = '#efc65a' }) {
-  const s = V(x, y), d = rikt(vinkel), n = normal(d), w = 3.6;
-  const spets = s, a = plus(s, ggr(d, 9)), b = plus(s, ggr(d, l));
-  p.ny().form([spets, plus(a, ggr(n, w)), plus(b, ggr(n, w)), minus(b, ggr(n, w)), minus(a, ggr(n, w))], farg, { tjock: 0.75, glid: 0.3 });
+// En penna, från spetsen och åt ett håll. `bredd` är pennans tjocklek (förval 7,2), som Kloka pennans stora penna
+// (önskemål P efter omtaget). En tjock penna får den vässade spetsen i träets färg och stiftet mörkt, och ett
+// suddgummi i änden, så att den syns som en penna och inte som en pinne.
+export function penna(p, { x, y, vinkel = 200, l = 40, farg = '#efc65a', bredd = 7.2 }) {
+  const s = V(x, y), d = rikt(vinkel), n = normal(d), w = bredd / 2;
+  const spets = s, a = plus(s, ggr(d, 9 * (bredd / 7.2))), b = plus(s, ggr(d, l));
+  if (bredd < 12) {
+    p.ny().form([spets, plus(a, ggr(n, w)), plus(b, ggr(n, w)), minus(b, ggr(n, w)), minus(a, ggr(n, w))], farg, { tjock: 0.75, glid: 0.3 });
+    return;
+  }
+  const gummi = minus(b, ggr(d, Math.min(l * 0.14, bredd * 1.1)));
+  p.ny().form([plus(a, ggr(n, w)), plus(gummi, ggr(n, w)), minus(gummi, ggr(n, w)), minus(a, ggr(n, w))], farg, { tjock: 0.85, glid: 0.3 });
+  p.form([plus(gummi, ggr(n, w)), plus(b, ggr(n, w * 0.92)), minus(b, ggr(n, w * 0.92)), minus(gummi, ggr(n, w))], '#f2b9c6', { tjock: 0.85, glid: 0.3 });
+  p.form([spets, plus(a, ggr(n, w)), minus(a, ggr(n, w))], '#f1dcbf', { tjock: 0.85, glid: 0.2 });
+  const stift = plus(s, ggr(d, 9 * (bredd / 7.2) * 0.32));
+  p.form([spets, plus(stift, ggr(n, w * 0.32)), minus(stift, ggr(n, w * 0.32))], '#3c3c42', { tjock: 0.6, glid: 0 });
 }
 
-// En klocka med visare.
-export function klocka(p, { x, y, r = 20 }) {
-  p.ny().form(ellips(V(x, y), r, r, { n: 20 }), '#f3dc8e');
-  p.streck([V(x, y), V(x, y - r * 0.65)], { tjock: 0.9, skak: 0 });
-  p.streck([V(x, y), V(x + r * 0.45, y + r * 0.1)], { tjock: 0.9, skak: 0 });
+// En klocka med visare. `tid` är den del av varvet som har gått, från tolv och medsols till visaren, som en fylld
+// tårtbit, så att det syns att tiden går och är bestämd (önskemål G efter omtaget, för PPT – Par på tid). Utan `tid`
+// har klockan två visare.
+export function klocka(p, { x, y, r = 20, tid = null, farg = '#e56b82' }) {
+  const c = V(x, y);
+  p.ny().form(ellips(c, r, r, { n: 20 }), '#f3dc8e');
+  if (tid == null) {
+    p.streck([c, V(x, y - r * 0.65)], { tjock: 0.9, skak: 0 });
+    p.streck([c, V(x + r * 0.45, y + r * 0.1)], { tjock: 0.9, skak: 0 });
+    return;
+  }
+  const del = Math.max(0.02, Math.min(1, tid)), n = Math.max(3, Math.ceil(del * 24));
+  const kant = (k) => plus(c, ggr(rikt(180 - k * del * 360), r * 0.8));
+  p.form([c, ...Array.from({ length: n + 1 }, (_, i) => kant(i / n))], farg, { botten: false, tjock: 0.7, glid: 0.2 });
+  p.streck([c, kant(1)], { tjock: 1.1, skak: 0 });
+  p.prick(ellips(c, r * 0.06, r * 0.06, { n: 8 }), '#3c3c42');
 }
 
 // En symbol i en bubbla eller på ett kort: triangel, kvadrat, cirkel, penna, kugghjul, hand, hjarta, stjarna, bok,
@@ -105,8 +169,11 @@ export function symbolen(p, namn, c, s) {
       p.form(ellips(m, r * 0.28, r * 0.28, { n: 8 }), '#ffffff', { botten: false, tjock: 0.5, glid: 0 });
     }
   } else if (slag === 'hand') {
-    const pts = [V(-0.6, 0.9), V(-0.65, -0.1), V(-0.5, -0.75), V(-0.25, -0.15), V(-0.15, -0.95), V(0.05, -0.2), V(0.2, -0.9), V(0.32, -0.15), V(0.55, -0.6), V(0.65, 0.2), V(0.45, 0.9)];
-    p.form(pts.map((q) => plus(c, ggr(q, s))), f || '#f6d6cc', { botten: false, tjock: 0.6, glid: 0 });
+    // En vante med tummen ut åt sidan och en kort handled, en enda form, så att den syns som en hand också i 16
+    // punkter (önskemål F efter omtaget: fem smala fingrar blev en kam i liten storlek).
+    const pts = [V(-0.34, 0.95), V(-0.36, 0.45), V(-0.5, 0.3), V(-0.78, 0.02), V(-0.82, -0.2), V(-0.66, -0.26), V(-0.46, -0.04),
+      V(-0.48, -0.42), V(-0.36, -0.8), V(0, -0.96), V(0.36, -0.82), V(0.52, -0.4), V(0.5, 0.15), V(0.38, 0.45), V(0.36, 0.95)];
+    p.form(pts.map((q) => plus(c, ggr(q, s))), f || '#f1c9b8', { botten: false, tjock: 0.6, glid: 0 });
   } else if (slag === 'bok') {
     fyll([V(c.x - s, c.y - s * 0.6), V(c.x, c.y - s * 0.4), V(c.x + s, c.y - s * 0.6), V(c.x + s, c.y + s * 0.7), V(c.x, c.y + s * 0.9), V(c.x - s, c.y + s * 0.7)]);
     p.streck([V(c.x, c.y - s * 0.4), V(c.x, c.y + s * 0.9)], { tjock: 0.6, skak: 0 });
@@ -208,23 +275,66 @@ export function pil(p, { fran, till, bage = 0.2, spets = true, tjock = 1 }) {
 }
 
 // En ring på golvet, streckad och ljus, som visar var eleverna står i en cirkel. Den ritas först, under figurerna.
-export function golvring(p, { x, y, rx, ry, streck = 26 }) {
+// `tjock` är strecket i delar av linjens bredd (förval 0,7); ett tjockare streck blir också lite mörkare, så att ringen
+// eller linjen syns tydligt (önskemål B efter omtaget, i stället för tre linjer bredvid varandra).
+const golvfarg = (tjock) => (tjock > 1.2 ? '#97979f' : '#a9a9b2');
+export function golvring(p, { x, y, rx, ry, streck = 26, tjock = 0.7, farg = golvfarg(tjock) }) {
   p.ny();
   for (let i = 0; i < streck; i++) {
     const t0 = (i / streck) * Math.PI * 2, t1 = t0 + (Math.PI * 2 / streck) * 0.55;
     const pts = [0, 0.5, 1].map((k) => { const t = t0 + (t1 - t0) * k; return V(x + Math.cos(t) * rx, y + Math.sin(t) * ry); });
-    p.streck(pts, { tjock: 0.7, skak: 0, farg: '#a9a9b2' });
+    p.streck(pts, { tjock, skak: 0, farg });
   }
 }
 
-// En linje på golvet, streckad och ljus, som linjen mellan två led i Snöbollen.
-export function golvlinje(p, { fran, till, streck = 14 }) {
+// En linje på golvet, streckad och ljus, som linjen mellan två led i Snöbollen. `tjock` som på golvringen.
+export function golvlinje(p, { fran, till, streck = 14, tjock = 0.7, farg = golvfarg(tjock) }) {
   const a = V(...fran), b = V(...till);
   p.ny();
   for (let i = 0; i < streck; i++) {
     const t0 = i / streck, t1 = t0 + 0.55 / streck;
-    p.streck([plus(a, ggr(minus(b, a), t0)), plus(a, ggr(minus(b, a), t1))], { tjock: 0.7, skak: 0, farg: '#a9a9b2' });
+    p.streck([plus(a, ggr(minus(b, a), t0)), plus(a, ggr(minus(b, a), t1))], { tjock, skak: 0, farg });
   }
+}
+
+// En dörr i en vägg: karmen, öppningen och dörrbladet på glänt, som Lär varandras dörr som eleven just har kommit in
+// genom (önskemål E efter omtaget). (x, y) är tröskelns mitt, b karmens bredd och h dess höjd. `glant` är den del av
+// öppningen som syns förbi dörrbladet (0 stängd, 1 helt öppen), och `sida` är gångjärnens sida, V eller H. Bladet har
+// gått in i rummet bakom, så att dess fria kant är lite kortare, och har ett handtag vid kanten.
+export function dorr(p, { x, y, b = 110, h = 230, glant = 0.5, sida = 'V', farg = '#ecd9b4' }) {
+  const k = b * 0.08, x0 = x - b / 2 + k, x1 = x + b / 2 - k, topp = y - h + k;
+  p.ny().form([V(x - b / 2, y - h), V(x + b / 2, y - h), V(x + b / 2, y), V(x - b / 2, y)], '#ffffff', { tjock: 1 });
+  p.form([V(x0, topp), V(x1, topp), V(x1, y), V(x0, y)], '#d8dbe0', { tjock: 0.9 });
+  const bredd = (x1 - x0) * Math.max(0, Math.min(1, 1 - glant)), s = sida === 'H' ? -1 : 1;
+  const fast = s > 0 ? x0 : x1, fri = fast + s * bredd, kort = (y - topp) * 0.035;
+  p.form([V(fast, topp), V(fri, topp + kort), V(fri, y - kort * 0.4), V(fast, y)], farg, { tjock: 0.9 });
+  p.form(ellips(V(fri - s * bredd * 0.16, topp + (y - topp) * 0.53), Math.max(2.5, b * 0.035), Math.max(2.5, b * 0.035), { n: 8 }), '#9a9aa2', { tjock: 0.6, glid: 0 });
+}
+
+// En mapp, uppslagen med en rygg i mitten och en ficka på högra sidan där papperen sticker upp, eller stängd med
+// ryggen till vänster (önskemål F efter omtaget, för Läxkontroll i grupps mapp). (x, y) är mitten, b och h hela
+// mappens mått, `blad` antalet papper i fickan och `farg` mappens färg; fickan är en mörkare ton av den.
+export function mapp(p, { x, y, b = 160, h = 56, vinkel = 0, farg = '#9bbae0', ficka = '#7f9fd0', uppslagen = true, blad = 2 }) {
+  const c = V(x, y);
+  const ruta = (x0, y0, x1, y1) => [V(x0, y0), V(x1, y0), V(x1, y1), V(x0, y1)].map((q) => vrid(plus(c, q), c, vinkel));
+  const sida = uppslagen ? b / 2 : b;
+  const hoger = uppslagen ? 0 : -b / 2;
+  p.ny();
+  if (uppslagen) p.form(ruta(-b / 2, -h / 2, 0, h / 2), farg, { tjock: 0.9 });
+  p.form(ruta(hoger, -h / 2, b / 2, h / 2), farg, { tjock: 0.9 });
+  // Papperen i fickan sticker upp över dess kant, lite vridna åt olika håll.
+  for (let i = 0; i < blad; i++) {
+    const m = hoger + sida * (0.36 + (0.3 * i) / Math.max(1, blad - 1)), bb = sida * 0.56, hh = h * 0.78;
+    const v = (i % 2 ? 1 : -1) * (4 + 2 * i);
+    const mitt = vrid(plus(c, V(m, -h * 0.06)), c, vinkel);
+    papper(p, { x: mitt.x, y: mitt.y, b: bb, h: hh, vinkel: vinkel + v, rader: 3 });
+  }
+  // Fickan: den nedre delen av sidan, med en sned överkant, framför papperen.
+  p.ny().form([V(hoger + sida * 0.06, h * 0.02), V(b / 2 - sida * 0.04, -h * 0.08), V(b / 2 - sida * 0.04, h / 2 - h * 0.06), V(hoger + sida * 0.06, h / 2 - h * 0.06)]
+    .map((q) => vrid(plus(c, q), c, vinkel)), ficka, { tjock: 0.85 });
+  // Ryggen: i mitten på en uppslagen mapp, till vänster på en stängd.
+  const rygg = uppslagen ? 0 : -b / 2 + b * 0.06;
+  p.streck([vrid(plus(c, V(rygg, -h / 2)), c, vinkel), vrid(plus(c, V(rygg, h / 2)), c, vinkel)], { tjock: 1.1, skak: 0 });
 }
 
 // En tavla på väggen med en ram och, om scenen vill, rutor eller rader klotter: läraren skriver exempel i två rutor.

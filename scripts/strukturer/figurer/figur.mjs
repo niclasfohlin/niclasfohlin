@@ -143,6 +143,28 @@ export function figur(p, o) {
   // börjar vid armbågen utan linje tvärs över, så att armen ser ut att böja sig fram.
   const hander = {};
   const senare = [];
+  // Punktens läge i bålens ram: tvärs ut från axlarnas mitt och nedåt längs bålen.
+  const lx = (q) => (q.x - axel.x) * tvar.x + (q.y - axel.y) * tvar.y;
+  const ly = (q) => (q.x - axel.x) * ner.x + (q.y - axel.y) * ner.y;
+  // En hand som håller något framför bålen, mellan bröstet och magen, har armbågen nedåt längs sidan och underarmen
+  // uppåt mot handen, som när man håller ett papper mot bröstet (önskemål A efter omtaget: med två leder i bildens plan
+  // gick armbågen ut åt sidan, som händer på höfterna). Överarmen hänger snett ut så att den syns bredvid bålen, och den
+  // förkortas, som när den pekar fram mot betraktaren, tills underarmen når handen. Det gäller en stående figur och en
+  // hand som håller en sak (`haller`, som rita.mjs sätter ur scenens `hand`). En sittande som visar med handen, en arm
+  // som når ut över ett bord (`armarEfter`) och en figur bakifrån behåller armbågen ute, som när man skriver eller
+  // sträcker sig. `armbage: ned` eller `ut` på figuren avgör det i stället, som för kort som hålls mot bröstet vid ett bord.
+  const haller = new Set(o.haller || []);
+  const armNed = (namn, T, sida) => (o.armbage ? o.armbage === 'ned'
+    : o.ansikte !== 'bak' && !o.armarEfter && (haller.has(namn) || !st.sitter)) && framforBalen(T, sida);
+  const framforBalen = (T, sida) => sida * lx(T) < 0.38 * H && ly(T) > 0.15 * H && ly(T) < 0.95 * bal;
+  const armbageNed = (S, T, a, b, sida) => {
+    for (const k of [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.42]) for (const g of [16, 22, 28, 36]) {
+      const v = (g * Math.PI) / 180;
+      const E = plus(S, ggr(plus(ggr(ner, Math.cos(v)), ggr(tvar, sida * Math.sin(v))), a * k));
+      if (langd(minus(T, E)) <= b) return [S, E, T];
+    }
+    return null;
+  };
   const arm = (sida) => {
     const fast = plus(plus(axel, ggr(tvar, sida * m.arm.fäste * H * (1 + 0.13 * bygg))), ggr(ner, 0.22 * H));
     const namn = sida < 0 ? 'V' : 'H';
@@ -150,8 +172,10 @@ export function figur(p, o) {
     let punkter, finger = null;
     const pekMot = mot(o.pekar);
     const pekarHar = pekMot && (o.pekarMed ? o.pekarMed === namn : (pekMot.x >= axel.x ? 'H' : 'V') === namn);
-    if (o.nar?.[namn]) punkter = tvaLeder(fast, mot(o.nar[namn]), a, b, sida);
-    else if (pekarHar) {
+    if (o.nar?.[namn]) {
+      const T = mot(o.nar[namn]);
+      punkter = (armNed(namn, T, sida) && armbageNed(fast, T, a, b, sida)) || tvaLeder(fast, T, a, b, sida);
+    } else if (pekarHar) {
       // Handen stannar en bit före punkten och fingret pekar resten av vägen.
       const d = minus(pekMot, fast), L = Math.min(langd(d) - 0.2 * H, (a + b) * 0.97);
       punkter = tvaLeder(fast, plus(fast, ggr(enhet(d), Math.max(L, (a + b) * 0.5))), a, b, sida);
@@ -176,8 +200,6 @@ export function figur(p, o) {
       p.ny().form(ellips(plus(c, plus(ggr(in_, -m.arm.hand * H * 0.75), ggr(ut, -m.arm.hand * H * 0.2))), m.arm.hand * H * 0.42, m.arm.hand * H * 0.32, { n: 10, vinkel: Math.atan2(ut.y, ut.x) * 180 / Math.PI }), hud, { slat: true, glid: 0.4 });
       p.ny().form(ellips(c, m.arm.hand * H * 0.92, m.arm.hand * H * 1.05, { n: 14, vinkel: Math.atan2(ut.y, ut.x) * 180 / Math.PI + 90 }), hud, { slat: true, glid: 0.5 });
     };
-    const lx = (q) => (q.x - axel.x) * tvar.x + (q.y - axel.y) * tvar.y;
-    const ly = (q) => (q.x - axel.x) * ner.x + (q.y - axel.y) * ner.y;
     // Underarmen står framför bålen när handen är framför kroppen, från hakan till höften.
     // En figur som syns bakifrån har armarna bakom bålen: vi ser ryggen, och armarna går bort från oss (pilotomgången
     // 2026-10-31). Den ritas efter det den sträcker sig mot, som ett bord den sitter vid.
