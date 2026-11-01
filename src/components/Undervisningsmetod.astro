@@ -14,6 +14,8 @@ import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
 import Umfilknappar from './Umfilknappar.astro';
+import MetodTabell from './MetodTabell.astro';
+import { friTabellensKlass } from '../lib/metod';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
 interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[]; strukturer?: ImporteradStruktur[] }
 const { d, id, extrafilmer, filer, bilder, sidor = [], saker, strukturer = [] } = Astro.props;
@@ -356,6 +358,16 @@ const moten = arbetslagetsMoten(d);
             </details>
           ))}
         </article>
+      ))}
+      {/* Fria tabeller med plats efter-progression, efter veckorna där läraren planerar dem, som samarbetsfärdigheterna
+          (riggens leverans 2026-11-01, K-671). Samma tabell och form som en fri tabell i stödundervisning (FriTabell.astro). */}
+      {(d.tabeller ?? []).filter((t: { plats?: string }) => t.plats === 'efter-progression').map((t: { rubrik: string; text?: string; kolumner: string[]; rader: string[][]; not?: string }) => (
+        <div class="um-tabell">
+          <h4>{t.rubrik}</h4>
+          {t.text && <p set:html={k(t.text)} />}
+          <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} />
+          {t.not && <p class="um-not" set:html={k(t.not)} />}
+        </div>
       ))}
     </section>
   )}

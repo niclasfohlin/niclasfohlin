@@ -282,7 +282,7 @@ amnesexempel:
       egen: "Ord om hur något ser ut, låter och känns. Felet: att bara säga ord för saker, som löv och svamp."
       visar: Paren säger ord i tur och ordning, och alla skriver en mening med ett ord ur samtalet.
     scen:
-      - Tänk dig en lektion i svenska i åk 2. Klassen ska skriva om höstskogen, och veckans färdighet är att vänta på sin tur.
+      - Tänk dig en lektion i svenska i åk 2. Klassen ska skriva om höstskogen, och veckans färdighet är att lyssna aktivt och vänta på sin tur.
       - "Du visar en bild av skogen och säger: ”Vi letar ord för hur det ser ut, låter och känns. Ni är klara när båda har ett sådant ord.” Alla tänker en stund, och sedan gör paren en high five och börjar: ”Löv.” ”Prassel.” ”Svamp.” ”Blött.” Den som inte kommer på något säger pass, och kompisen fortsätter. Efter två minuter bryter du."
       - "Du drar en symbol, och två elever med den säger ett ord paret tyckte om. Sedan skriver alla var sin mening med ett ord ur samtalet för hur det låter eller känns, och kompisen läser den. Du går längs borden och läser: 10 av 26 har bara ord för saker. De flesta kan. Du visar hur ”löv” kan bli ”löven prasslar”, och var och en skriver om sin mening med kompisens hjälp."
     notera: Notera vad som hände. Ping-pong-prat gav alla ord att skriva med. Hade hälften eller fler bara haft ord för saker, hade du stannat och samlat ord för ljud och känsla på tavlan med klassen.
@@ -306,7 +306,7 @@ amnesexempel:
       belagg: 2 · 5 med bild och tal på minitavlan
       blad: ett uppgiftsblad per par, minitavlor och facit
       forberett: material att bygga med, och en trygg kamrat till den som behöver det
-      fore: { fardigheten: "Hjälpa utan att säga svaret", ogat: "pekar på materialet och väntar", orat: "Hur tänkte du? Prova att lägga upp det.", strukturen: "Turas om", malet: "båda kan förklara 3 · 4 på två sätt", visar: "en symbol och den egna uppgiften", felet: "adderar talen, så att 3 · 4 blir 7" }
+      fore: { fardigheten: "Ställa frågor i stället för att säga svaret", ogat: "pekar på materialet och väntar", orat: "Hur tänkte du? Prova att lägga upp det.", strukturen: "Turas om", malet: "båda kan förklara 3 · 4 på två sätt", visar: "en symbol och den egna uppgiften", felet: "adderar talen, så att 3 · 4 blir 7" }
       delar:
         - { fas: Start, text: "Visa färdigheten med en elev: peka, vänta och fråga" }
         - { fas: Genomgång, text: "2 · 4 som två grupper med fyra, med material, och som 4 + 4" }
@@ -317,13 +317,13 @@ amnesexempel:
       efter: { kontrollen: "8 med fel", hogar: "Kan 19 · Nästan 5 · Inte än 3", sag: "”Hur tänkte du?” vid sex bord", kryss: [1, 2, 3, 4, 5], nasta: "3 · 5 och 4 · 2", forst: "bord 2 och 6" }
       lagg: ["Lägg märke till: målet kräver två sätt, så att paret inte kan klara uppgiften med ett svar."]
     remsa:
-      - Färdigheten att hjälpa utan att säga svaret visades med kropp och röst, och T-kortet hängde uppe.
+      - Färdigheten att ställa frågor visades med kropp och röst, och T-kortet hängde uppe.
       - Målet var att båda kunde förklara 3 · 4 på två sätt, med ett blad mellan dem.
       - Du drog en symbol, och två svarade. Alla gjorde 2 · 5 själva på minitavlan.
       - "Paren turades om: en löste och tänkte högt, en stöttade, och sedan bytte de."
       - Du sa vad du hörde, och paren sa vad som hjälpte dem att lära sig.
     scen:
-      - Tänk dig lektion 3 av 8 i matematik i åk 3. Det är vecka 3, och i dag kommer multiplikationstecknet. Veckans färdighet är att hjälpa utan att säga svaret.
+      - Tänk dig lektion 3 av 8 i matematik i åk 3. Det är vecka 3, och i dag kommer multiplikationstecknet. Veckans färdighet är att ställa frågor.
       - "Du visar 2 · 4 som två grupper med fyra och som 4 + 4. Du visar rollerna med en elev: hen bygger, och du pekar, väntar och frågar: ”Hur tänkte du?” På tavlan står målet: ”Ni är klara när båda kan förklara 3 · 4 på två sätt.” Paren turas om. Vid ett bord säger en elev: ”Jag lägger tre grupper med fyra. Då blir det 4 + 4 + 4, tolv.”"
       - "I ett par säger en elev 7. Kamraten säger inte svaret: ”Prova att lägga upp det.” Du stoppar halvvägs och låter paren viska om färdigheten."
       - "Paren gör alla redo. Du drar triangeln, och två trianglar förklarar. Sedan gör alla 2 · 5 och håller upp minitavlan: 8 av 27 har fel, och flera har skrivit 7. De flesta kan. Paren jämför 2 + 5 med 5 + 5 och visar varandra sina bilder, och du lyfter felet för klassen."
@@ -369,9 +369,9 @@ progression:
   rubrik: De första veckorna
   text: "Metoden är troligen ny för dig och för klassen. Ordningen och takten är förslag. Ni börjar med kamraten och T-kortet, och sedan kommer Ping-pong-prat. Därefter lär sig klassen en färdighet och en struktur i veckan, som i tabellen, medan du övar ett drag. Gå vidare när veckans färdighet syns hos nästan alla. Syns den inte, stanna kvar och gör om veckan en eller två gånger, så att den sitter för klassen och för dig. Besöken och mötet flyttar med. Alla fem principerna finns med från det första samarbetet, men du kan öva på en sak i taget: välj en färdighet eller ett av besluten före lektionen, och håll fast vid det i några veckor."
   rader:
-    - { vecka: "1", led: Klimatet, rubrik: "Kamraten, T-kortet och Ping-pong-prat", eleverna: "Att vända sig mot kamraten, vänta på sin tur och tacka.", roll: "Att visa strukturen med en elev, tänka högt om det eleverna ska tänka på i samtalet och säga vad du såg.", vidare: "nästan alla par turas om och tackar", fraga: "Turas nästan alla par om och tackar?" }
-    - { vecka: "2", led: Samtalet, rubrik: "EPA och signalen", eleverna: "Att tänka själv först, säga sin tanke till kamraten och följa signalen.", roll: "Att ge tanketid och lyssna efter om båda säger något eget.", vidare: "båda i nästan alla par säger något eget", fraga: "Säger båda i nästan alla par något eget?" }
-    - { vecka: "3", led: Paret, rubrik: Turas om, eleverna: "Att turas om, hjälpa utan att säga svaret och fråga kompisen först.", roll: "Att fråga paret i stället för att ge svaret.", vidare: "båda i nästan alla par du lyssnar på kan förklara parets lösningar", fraga: "Kan båda i nästan alla par du lyssnar på förklara parets lösningar?" }
+    - { vecka: "1", led: Klimatet, rubrik: "Kamraten, T-kortet och Ping-pong-prat", eleverna: "Att lyssna aktivt: vända sig mot kamraten, vänta på sin tur och tacka.", roll: "Att visa strukturen med en elev, tänka högt om det eleverna ska tänka på i samtalet och säga vad du såg.", vidare: "nästan alla par turas om och tackar", fraga: "Turas nästan alla par om och tackar?" }
+    - { vecka: "2", led: Samtalet, rubrik: "EPA och signalen", eleverna: "Att tänka högt: tänka själv först och säga sin tanke till kamraten, och att följa signalen.", roll: "Att ge tanketid och lyssna efter om båda säger något eget.", vidare: "båda i nästan alla par säger något eget", fraga: "Säger båda i nästan alla par något eget?" }
+    - { vecka: "3", led: Paret, rubrik: Turas om, eleverna: "Att ställa frågor: fråga kompisen först och hjälpa utan att säga svaret.", roll: "Att fråga paret i stället för att ge svaret.", vidare: "båda i nästan alla par du lyssnar på kan förklara parets lösningar", fraga: "Kan båda i nästan alla par du lyssnar på förklara parets lösningar?" }
     - { vecka: "4", led: Grupperna, rubrik: Bordsön och Huvuden ihop, eleverna: "Att kolla att alla kan, och att enas vid bordsön om ett svar som alla kan ge.", roll: "Att dra en symbol ur skålen och låta bordsön hjälpa den som har symbolen att bli redo.", vidare: "de du frågar kan svara för gruppen vid nästan alla bordsöar", fraga: "Kan de du frågar svara för gruppen vid nästan alla bordsöar?" }
     - { vecka: "5", led: Grupperna, rubrik: "Gruppen och Mötas på mitten", eleverna: "Att bygga vidare på kamratens idé och ge gruppen namn och kontrakt.", roll: "Att säga vad varje elev bidrog med.", vidare: "nästan alla grupper visar hur de byggde vidare och säger vad de ska göra bättre", fraga: "Visar nästan alla grupper hur de byggde vidare och säger vad de ska göra bättre?" }
 uppfoljning:
@@ -393,7 +393,7 @@ checklista:
   punkter:
     - Planera den första veckans två eller tre korta samarbeten och den första hela lektionen.
     - Sätt ihop paren och bordsöarna så att olika elever möts, och lägg en symbol på varje plats.
-    - Förbered T-kortet för den första färdigheten, att vända sig mot kamraten, vänta på sin tur och tacka.
+    - "Förbered T-kortet för den första färdigheten, att lyssna aktivt: vända sig mot kamraten, vänta på sin tur och tacka."
     - Skriv ut lektionskortet, symbolerna, fraserna att låna och veckans strukturkort, och ta fram skålen med symbolerna.
     - Boka besöken, ett av dem med specialläraren.
     - Bestäm signalen med arbetslaget, eller med en kollega om du börjar ensam.
@@ -403,7 +403,7 @@ klassen:
 forsta:
   rubrik: Första veckan
   text:
-    - "Den första veckan gör ni två eller tre samarbeten på tio minuter i vanliga lektioner, på något paren redan kan. I det första kan paren leta efter tre saker de har gemensamt, och den första färdigheten är att vända sig mot kamraten, vänta på sin tur och tacka. Ni fyller i T-kortet tillsammans, och du visar också signalen och symbolerna, som rutinerna säger."
+    - "Den första veckan gör ni två eller tre korta samarbeten i vanliga lektioner, på något paren redan kan. I det första kan paren leta efter tre saker de har gemensamt, och den första färdigheten är att lyssna aktivt: vända sig mot kamraten, vänta på sin tur och tacka. Ni fyller i T-kortet tillsammans, och du visar signalen och symbolerna, som rutinerna säger."
     - "Sedan kommer Ping-pong-prat, och i slutet av veckan gärna EPA (enskilt, par, alla). Huvudfilmen visar ett samarbete med Ping-pong-prat. Du visar strukturen med en elev och tänker högt om det eleverna ska tänka på i samtalet. Säg varför: ni lär er mer av varandra, och det viktiga är att hjälpa varandra att lära er så mycket som möjligt."
   plan:
     klass: 4B
@@ -413,7 +413,7 @@ forsta:
     belagg: "36 på två sätt, ett med gånger, på minitavlan"
     blad: "T-kortet, EPA och minitavlor"
     forberett: "en trygg kamrat till den som behöver det, och ”Jag tänker … därför att …” på tavlan"
-    fore: { fardigheten: "Tänka själv först och säga sin tanke", ogat: "tummen upp, sedan knä mot knä", orat: "Jag tänker … därför att …", strukturen: "EPA", malet: "båda kan förklara tre sätt att få 24", visar: "en symbol och den egna uppgiften", felet: "adderar talen, så att 30 · 6 blir 36" }
+    fore: { fardigheten: "Tänka högt: tänka själv först och säga sin tanke", ogat: "tummen upp, sedan knä mot knä", orat: "Jag tänker … därför att …", strukturen: "EPA", malet: "båda kan förklara tre sätt att få 24", visar: "en symbol och den egna uppgiften", felet: "adderar talen, så att 30 · 6 blir 36" }
     delar:
       - { fas: Start, text: "Paren hälsar. Visa färdigheten med en elev: tänk först, säg sedan" }
       - { fas: Genomgång, text: "Visa att 3 · 4 och 10 + 2 ger 12. Visa EPA med en elev. Säg målet och att du drar en symbol" }
@@ -515,8 +515,10 @@ strukturkort:
   strukturer: [ping-pong-prat, epa, turas-om, huvuden-ihop, motas-pa-mitten, rondellen]
 ramar:
   rubrik: Materialet för klassen
-  text: ["Utöver lektionskortet och strukturkorten finns stödmaterialet för klassen: T-kortet, symbolerna, fraserna att låna, gruppkontraktet och bladet till Mötas på mitten. Varje blad står på en egen sida."]
+  text: ["Utöver lektionskortet och strukturkorten finns stödmaterialet för klassen: samarbetsfärdigheterna, T-kortet, symbolerna, fraserna att låna, gruppkontraktet och bladet till Mötas på mitten. Varje blad står på en egen sida."]
   ramar:
+    - rubrik: Samarbetsfärdigheterna
+      text: ["Skriv ut bladet till dig själv när du planerar veckan, och sätt gärna upp det förstorat till A3 som affisch. Klassen lär sig de tre första, en i veckan. De andra väljer du när du ser att klassen behöver dem."]
     - rubrik: T-kortet
       text: ["Skriv ut kortet som affisch, gärna förstorat till A3. Skriv veckans färdighet överst, och fyll i med klassen under ögat vad ni vill se och under örat vad ni vill höra. Kortet hänger uppe under veckan och får sedan hänga kvar. Vill ni också säga hur färdigheten känns, rita ett Y-kort på tavlan med ett hjärta i det tredje fältet."]
     - rubrik: Symbolerna
@@ -527,6 +529,27 @@ ramar:
       text: ["Varje bordsö fyller i ett blad i den första lektionen i vecka 5. Gruppen väljer ett namn, en färdighet de ska öva på och tre sätt att göra den, och var och en skriver sitt namn vid sin symbol. I varje Avslut efter det tar gruppen fram kontraktet: Hur kan vi stötta varandra på bästa sätt nästa gång vi samarbetar?"]
     - rubrik: Bladet till Mötas på mitten
       text: ["Skriv ut ett blad per bordsö, gärna förstorat till A3. Var och en skriver eller ritar i rutan vid sin symbol, och bordsön fyller i mitten tillsammans. De yngsta gör det i par, med två rutor och en mitt på ett A4 som du delar in själv."]
+# Samarbetsfärdigheterna efter De första veckorna (Niclas 2026-11-01: ”Först tre viktiga. Sedan andra lämpliga.”).
+# De tre första följer veckorna 1–3, och de andra är Niclas lista i Text 3, ordnad efter det läraren ser i samarbetet.
+tabeller:
+  - rubrik: Samarbetsfärdigheterna
+    plats: efter-progression
+    text: "För effektiva samarbeten krävs att eleverna kan lyssna aktivt, tänka högt och ställa relevanta frågor till varandra, och det tar tid att lära sig. Klassen lär sig en av dem i veckan, i den här ordningen, och övar den i ämnets uppgifter. Visa färdigheten med kropp och röst, och skriv på T-kortet vad ni vill se och höra."
+    kolumner: [Färdigheten, Så ser det ut, Så låter det]
+    rader:
+      - ["Vecka 1: Lyssna aktivt", "Du lutar dig mot kamraten och nickar.", "”Du sa att …” ”Hur menar du?”"]
+      - ["Vecka 2: Tänka högt", "Du pekar och visar medan du förklarar.", "”Jag tänker … därför att …”"]
+      - ["Vecka 3: Ställa frågor", "Du ser på kamraten och väntar på svaret.", "”Vad tänker du?” ”Varför tänker du det?”"]
+  - rubrik: Fler samarbetsfärdigheter, när klassen behöver dem
+    plats: efter-progression
+    text: "Efter de tre första väljer du nästa färdighet utifrån det du ser i samarbetet. Äldre elever och klasser som har arbetat med kooperativt lärande en tid kan vara med och välja. En färdighet i taget, och på T-kortet står vad ni vill se och höra."
+    kolumner: [När, Färdigheterna]
+    rader:
+      - ["Vecka 4 och 5", "Kolla att alla kan. Bygga vidare på kamratens idé."]
+      - ["När någon inte kommer till tals", "Låta alla tala färdigt. Ta egen plats i gruppen. Be om hjälp. Våga säga vad man tycker."]
+      - ["När tonen hårdnar", "Reagera vänligt på varandra. Uppmuntra varandra. Använda varandras namn. Prata lugnt."]
+      - ["När arbetet spretar", "Planera arbetet tillsammans. Hålla fokus på målet. Stanna i sin grupp. Fortsätta med uppgiften tills den är klar."]
+      - ["När tänkandet ska gå djupare", "Ge varandra tanketid. Ta in varandras idéer. Slå ihop flera idéer till en lösning."]
 planeringsmall:
   text: "Det grå gör du i varje lektion. Börja med färdigheten och målet, och skriv felet du lyssnar efter. Pröva i förväg: kan en elev lösa uppgiften ensam? Bygg uppgiften så att varje elev behövs och gruppen är klar först när alla kan innehållet."
   fore:
@@ -661,6 +684,6 @@ lathund:
       - Paren och bordsöarna lär sig ämnet i strukturer där alla behövs och var och en kan visa vad hen kan. Du lär ut samarbetet lika medvetet som ämnet.
       - Lärandet går till så här. När eleverna förklarar för varandra hör både de själva och du hur de tänker. När vem som helst kan få svara, lönar det sig att förklara tills alla kan.
   lektion:
-    text: "Den första veckan gör ni två eller tre korta samarbeten. I det första kan paren leta efter tre saker de har gemensamt, och ni fyller i T-kortet för den första färdigheten: att vända sig mot kamraten, vänta på sin tur och tacka. Sedan kommer Ping-pong-prat. Den första hela lektionen, i vecka 2 eller 3, står på lektionskortet."
+    text: "Den första veckan gör ni två eller tre korta samarbeten. I det första kan paren leta efter tre saker de har gemensamt, och ni fyller i T-kortet för den första färdigheten, lyssna aktivt: vända sig mot kamraten, vänta på sin tur och tacka. Sedan kommer Ping-pong-prat. Den första hela lektionen, i vecka 2 eller 3, står på lektionskortet."
   igang:
     rubrik: De första veckorna

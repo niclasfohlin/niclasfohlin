@@ -35,7 +35,7 @@ import { losningarnasNiva, losningarnasNot, problemformer } from '../lib/problem
 import { filmerVid, grundUpphov, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
-import { ejBryt, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
+import { ejBryt, friTabellensKlass, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { site } from '../data/site';
 import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening, vidareTillLektion } from '../lib/standard/index.js';
 import { materialAttribut } from '../lib/material';
@@ -120,6 +120,7 @@ const efterSteg = d.tabeller.filter((t) => t.plats === 'efter-steg');
 const efterArbetsform = d.tabeller.filter((t) => t.plats === 'efter-arbetsform');
 const efterUrval = d.tabeller.filter((t) => t.plats === 'efter-urval');
 const efterFastnar = d.tabeller.filter((t) => t.plats === 'efter-fastnar');
+const efterProgression = d.tabeller.filter((t) => t.plats === 'efter-progression');
 const efterGrund = d.tabeller.filter((t) => t.plats === 'efter-grund');
 // En översikt med bara korta celler (en ordlista, en bokstavslista) får lika breda kolumner (klassen tat)
 // och plats även på mobil; bara översikter med längre text och fler än tre kolumner staplas.
@@ -128,8 +129,8 @@ const kortaCeller = (rader: string[][]) => rader.every((r) => r.every((c) => c.l
 const radaUpp = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} och ${xs[xs.length - 1]}` : xs[0] ?? '');
 // Exemplet berättas rakt; replikerna (”…”) sätts kursiva, som exempelfraserna i stegtabellen, så att en lärare hittar det som sägs.
 const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
-// En fri tabell med tre kolumner och längre text staplas på mobil, som de med fler kolumner; tre korta kolumner får plats.
-const friKlass = (t: { kolumner: string[]; rader: string[][] }) => (t.kolumner.length > 3 || (t.kolumner.length === 3 && t.rader.some((r) => r.some((c) => c.length > 40))) ? 'fri stapla' : 'fri');
+// En fri tabell med tre kolumner och längre text staplas på mobil, som de med fler kolumner (friTabellensKlass i src/lib/metod.ts).
+const friKlass = friTabellensKlass;
 // Passöversikten: rutin, tidsschema och arbetsform i en bild när stegen har faser.
 const pass = passOversikt(d);
 // Extrafilmerna (src/lib/film.ts, fältet filmer) står vid momentet de förklarar: sist i ett avsnitt, efter en fri tabell
@@ -309,7 +310,7 @@ const arLararsida = (ram: { rubrik: string; serie?: string }) => /^Lärarens sid
 // (Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp, som läraren letar efter varje pass).
 const menyEfter: Record<string, string | undefined> = {
   'efter-tidsschema': pass ? 'passrutin' : 'tidsschema', 'efter-steg': 'steg', 'efter-arbetsform': 'arbetsform',
-  'efter-fastnar': 'fastnar', 'efter-urval': bank ? 'lektionsbank' : 'urval', 'efter-grund': 'grund',
+  'efter-fastnar': 'fastnar', 'efter-urval': bank ? 'lektionsbank' : 'urval', 'efter-progression': 'progression', 'efter-grund': 'grund',
 };
 // Saknar metoden avsnittet tabellen står efter (Texttyper i grupp har tabeller efter steg men ingen stegtabell), står
 // posten efter det närmaste avsnittet före i sidans ordning som finns, eller överst, så att ingen tabell faller ur
@@ -560,6 +561,8 @@ const meny = [
       <Filmruta filmer={vid({ avsnitt: 'progression' })} titel={d.titel} />
     </section>
   )}
+
+  {efterProgression.map((t) => <FriTabell {...friTabell(t)} />)}
 
   {d.uppfoljning && (
     <section id="uppfoljning">

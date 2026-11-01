@@ -368,7 +368,9 @@ const metodensFalt = z.strictObject({
     tabeller: z.array(z.strictObject({
       rubrik: z.string(),
       text: z.string().optional(),
-      plats: z.enum(['efter-inledning', 'efter-tidsschema', 'efter-steg', 'efter-arbetsform', 'efter-fastnar', 'efter-urval', 'efter-grund']).default('efter-arbetsform'),
+      // efter-progression: efter veckorna, där läraren planerar dem, som samarbetsfärdigheterna i Kooperativt lärande (riggens
+      // leverans 2026-11-01, K-671); i en undervisningsmetod efter veckorna i De första veckorna.
+      plats: z.enum(['efter-inledning', 'efter-tidsschema', 'efter-steg', 'efter-arbetsform', 'efter-fastnar', 'efter-urval', 'efter-progression', 'efter-grund']).default('efter-arbetsform'),
       // meny: tabellen står i sidans meny, efter avsnittet den ligger efter, med rubrikens första led som namn. För det läraren
       // letar efter varje pass, som Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp (läsbarheten 2026-09-29).
       meny: z.boolean().optional(),

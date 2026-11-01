@@ -75,6 +75,10 @@ export function etikettOchText(rad: string): { etikett: string; text: string } {
   return m ? { etikett: `${m[1]}:`, text: m[2] } : { etikett: '', text: rad };
 }
 
+/** En fri tabells form på sidan: med fler än tre kolumner, eller tre med längre text, staplas den på mobil; tre korta
+ *  kolumner får plats. Stödundervisningens och undervisningsmetodens sidor ritar fria tabeller med samma form (K-671). */
+export const friTabellensKlass = (t: { kolumner: string[]; rader: string[][] }) => (t.kolumner.length > 3 || (t.kolumner.length === 3 && t.rader.some((r) => r.some((c) => c.length > 40))) ? 'fri stapla' : 'fri');
+
 export function ejBryt(text: string): string {
   return text.replace(/(\S)–(?=\d)/g, '$1–⁠');
 }

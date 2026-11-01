@@ -3292,6 +3292,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll', ...(elevernas ? [ELEVERNAS_KOLUMN] : [])], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll, ...(elevernas ? [elevernasCell(r)] : [])]), elevernas ? [1350, 2800, 2700, BREDD - 6850] : [1700, 4000, BREDD - 5700], { hallIhop: d.progression.rader.length <= 6 }));
     filmVid({ avsnitt: 'progression' });
   }
+  for (const t of d.tabeller.filter((x) => x.plats === 'efter-progression')) friTabell(t);
   if (d.uppfoljning) {
     ut.push(h2(d.uppfoljning.rubrik));
     if (d.uppfoljning.text) ut.push(stycke(d.uppfoljning.text, { hallIhop: true }));

@@ -805,6 +805,10 @@ html.js .um-utfall-antal { display: flex; }
 /* Veckorna i kort, med rutinen som hör till veckan. */
 .um-vecka { margin: 1rem 0; padding: 0.9rem 1rem; border: 1px solid var(--farg-kant); border-left: 4px solid var(--farg-mork); border-radius: var(--radie); background: var(--farg-yta); }
 .um-vecka h4 { margin: 0 0 0.35rem; font-size: 1.1rem; }
+/* En fri tabell efter veckorna (Undervisningsmetod.astro, K-671): rubriken som en veckas, och tabellen i Stödundervisningens form. */
+.um-tabell { margin: 1.75rem 0 0; }
+.um-tabell h4 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+.um-tabell > p { max-width: var(--matt-text); }
 .um-vecka-fakta { margin: 0; }
 .um-rutin-namn { margin: 0 0 0.25rem; font: 700 0.95rem/1.3 var(--typsnitt-ui); }
 .um-rutin ol { padding-left: 1.3rem; }
