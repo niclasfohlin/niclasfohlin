@@ -154,9 +154,11 @@ export function figur(p, o) {
   // som når ut över ett bord (`armarEfter`) och en figur bakifrån behåller armbågen ute, som när man skriver eller
   // sträcker sig. `armbage: ned` eller `ut` på figuren avgör det i stället, som för kort som hålls mot bröstet vid ett bord.
   const haller = new Set(o.haller || []);
+  // Framför bålen: handen inte längre ut än bålens kant, och mellan bröstet och magen. Med `armbage: ned` räcker det att
+  // handen är vid bålens sida, som när båda händerna håller i ett papper.
+  const framforBalen = (T, sida) => sida * lx(T) < (o.armbage === 'ned' ? 0.55 : 0.44) * H && ly(T) > 0.15 * H && ly(T) < 0.95 * bal;
   const armNed = (namn, T, sida) => (o.armbage ? o.armbage === 'ned'
     : o.ansikte !== 'bak' && !o.armarEfter && (haller.has(namn) || !st.sitter)) && framforBalen(T, sida);
-  const framforBalen = (T, sida) => sida * lx(T) < 0.38 * H && ly(T) > 0.15 * H && ly(T) < 0.95 * bal;
   const armbageNed = (S, T, a, b, sida) => {
     for (const k of [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.42]) for (const g of [16, 22, 28, 36]) {
       const v = (g * Math.PI) / 180;

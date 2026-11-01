@@ -322,11 +322,12 @@ export function mapp(p, { x, y, b = 160, h = 56, vinkel = 0, farg = '#9bbae0', f
   p.ny();
   if (uppslagen) p.form(ruta(-b / 2, -h / 2, 0, h / 2), farg, { tjock: 0.9 });
   p.form(ruta(hoger, -h / 2, b / 2, h / 2), farg, { tjock: 0.9 });
-  // Papperen i fickan sticker upp över dess kant, lite vridna åt olika håll.
+  // Papperen i fickan sticker upp över fickan och lite över mappens kant, lite vridna åt olika håll, så att det syns
+  // att det ligger papper i den också i liten storlek.
   for (let i = 0; i < blad; i++) {
-    const m = hoger + sida * (0.36 + (0.3 * i) / Math.max(1, blad - 1)), bb = sida * 0.56, hh = h * 0.78;
+    const m = hoger + sida * (0.36 + (0.3 * i) / Math.max(1, blad - 1)), bb = sida * 0.56, hh = h * 0.84;
     const v = (i % 2 ? 1 : -1) * (4 + 2 * i);
-    const mitt = vrid(plus(c, V(m, -h * 0.06)), c, vinkel);
+    const mitt = vrid(plus(c, V(m, -h * (0.16 + 0.04 * (i % 2)))), c, vinkel);
     papper(p, { x: mitt.x, y: mitt.y, b: bb, h: hh, vinkel: vinkel + v, rader: 3 });
   }
   // Fickan: den nedre delen av sidan, med en sned överkant, framför papperen.
