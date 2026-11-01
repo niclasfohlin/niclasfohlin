@@ -60,6 +60,9 @@ if (args.includes('--alla') || args.includes('--andrade')) {
     // filens etikett (If-None-Match), och innehållets summa från förra hämtningen står i ute.json. Förut hämtades varje fil
     // varje gång, 144 MB och omkring 3 krediter per körning för 853 filer (Niclas 2026-10-28: "Vad äter krediter nu på sajten förutom
     // uppladdningar?"; skripten stod för 396 av dygnets 1 038 MB).
+    // Etiketten räcker inte: Word-filens byte skiftar vid varje bygge fast innehållet är detsamma (K-422), så efter varje
+    // uppladdning svarade Netlify 200 på alla filer, 290 MB på ett dygn (Niclas 2026-11-01: "kan du slimma ner så skripten ...
+    // tar mindre?"). Har filen här samma innehåll som filen ute hade när den senast lästes, frågas sajten därför inte alls.
     const UTE = join(UT, 'ute.json');
     let kanda = {};
     try { kanda = JSON.parse(readFileSync(UTE, 'utf8')); } catch { /* första körningen */ }
@@ -73,6 +76,8 @@ if (args.includes('--alla') || args.includes('--andrade')) {
         const f = lista[nasta++];
         const namn = basename(f);
         const kand = kanda[namn];
+        const lokal = await summa(readFileSync(f));
+        if (kand?.summa === lokal) continue;
         // Okomprimerat: med gzip eller br svarade Netlify 200 på de flesta filerna fast etiketten stämde, och utan svarar det
         // 304 varje gång. Word-filen är redan komprimerad inuti, så det kostar nästan inget när filen har ändrats.
         const ute = await fetch(`https://niclasfohlin.se/stodundervisning/${namn}`, { headers: { 'Accept-Encoding': 'identity', ...(kand?.etag ? { 'If-None-Match': kand.etag } : {}) } });
@@ -87,12 +92,12 @@ if (args.includes('--alla') || args.includes('--andrade')) {
           const etag = ute.headers.get('etag');
           if (etag) kanda[namn] = { etag, summa: uteSumma };
         }
-        if (uteSumma === undefined || uteSumma !== (await summa(readFileSync(f)))) andrade.add(f);
+        if (uteSumma === undefined || uteSumma !== lokal) andrade.add(f);
       }
     }));
     mkdirSync(UT, { recursive: true });
     writeFileSync(UTE, `${JSON.stringify(kanda, null, 1)}\n`);
-    console.log(`${hamtade} av ${lista.length} filer hämtades från sajten; de andra var oförändrade sedan förra körningen.`);
+    console.log(`${hamtade} av ${lista.length} filer hämtades från sajten; de andra har samma innehåll som när de senast lästes ute, eller var oförändrade där.`);
     filer = lista.filter((f) => andrade.has(f));
     console.log(`${filer.length} Word-filer skiljer sig från dem som ligger ute.`);
   }
