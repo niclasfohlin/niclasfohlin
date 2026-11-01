@@ -34,4 +34,7 @@ forslag:
     arskurs: F–3
     amne: klassens råd
     text: På klassens råd delar du in eleverna i grupper om fyra och ger dem temat en bra kompis. En elev säger ett ord som hör till temat, till exempel snäll. Eleverna turas om, och var och en upprepar alla ord som sagts och lägger till ett eget, som lyssnar eller delar med sig. De hjälper den som fastnar. Du bryter, och gruppen räknar hur lång kedjan blev.
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

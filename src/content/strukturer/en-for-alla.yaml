@@ -37,4 +37,8 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "Klassen har pratat om att många inte vågar säga något i helklass. Du frågar: Vad kan vi göra så att fler vågar prata? Var och en skriver sina förslag i den innersta cirkeln på tre minuter, utan att prata. Paret delar förslagen och lägger kamratens i cirkeln Par, och fyrgrupperna gör samma sak i cirkeln Grupp. Du läser upp förslagen från alla grupper, och eleverna lägger till de som saknas och tackar varandra för det de har lärt sig."
-utkast: false
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
+vantar: "Inget steg delar ut papperet med cirklarna, och lärare som följer kortet stannar vid steg 2: steg 1 och 5 ändras i grundbokens bank (provningen 2026-11-01, underlag/prov/strukturer/provning/avgorande.md)"
+utkast: true

@@ -37,4 +37,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "Mentorsgruppen pratar om att säga sin åsikt i klassen. Eleverna sitter i grupper om fyra med var sitt papper, och du ställer den öppna frågan: Vad gör att man vågar räcka upp handen i klassrummet? Var och en skriver ett svar utan namn, skrynklar ihop papperet till en boll och lägger den mitt på bordet. Bollarna blandas, och alla tar en boll, öppnar den och skriver något som inte redan står där. Grupperna gör om det ett par gånger, och sist läser eleverna upp lapparna de har och väljer ut några svar att berätta om för klassen."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

@@ -34,4 +34,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "Klassen pratar om rätt och fel på mentorstiden. Du sätter en fråga i vart och ett av rummets hörn: om man alltid ska säga sanningen, om man får bryta mot en regel som är orättvis, om man ska säga till när en kompis fuskar och hur man ber om ursäkt på ett bra sätt. Eleverna tänker enskilt på vilket hörn de vill gå till och går dit på din signal. Där samtalar de i mindre grupper om hörnets fråga, och du slumpar en elev ur varje hörn som delar en tanke."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

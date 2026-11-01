@@ -35,4 +35,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "På mentorstiden pratar klassen om tonen i klassens gruppchatt. Du delar in eleverna i grupper, utser en tidshållare i varje grupp och frågar: Vad ska vi skriva till varandra i chatten när vi är oense? Eleverna tänker enskilt en stund och talar sedan en i taget medan tidshållaren tar tiden och avbryter. Du bryter och lägger till en regel, till exempel att vänta fem sekunder innan man talar. Grupperna gör om samtalet med regeln och en ny tidshållare."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

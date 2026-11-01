@@ -36,4 +36,7 @@ forslag:
     arskurs: F–3
     amne: klassens råd
     text: "Klassen pratar om hur man är en bra kompis. Du ger varje grupp frågekort med öppna frågor, till exempel: Vad kan du göra när en kompis står ensam på rasten? Den första eleven håller korten som en solfjäder, den andra drar ett kort och läser frågan högt, och den tredje får fem sekunders tanketid och svarar. Frågorna har inget rätt svar, så den fjärde sammanfattar tankegången i stället. Sedan flyttar rollerna ett steg och gruppen tar nästa kort."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

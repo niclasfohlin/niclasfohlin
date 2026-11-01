@@ -35,4 +35,7 @@ forslag:
     arskurs: F–3
     amne: klassens råd
     text: Du läser en berättelse om en flicka som inte får vara med i leken, delad i tre delar. Eleverna sitter i grupper om tre med var sitt papper med tre rutor. Under läsningen ligger pennorna nedlagda, och efter varje del skriver eleverna tre ord om vad som hände och vad flickan kände. De visar orden för varandra och pratar om varför de valde dem. När berättelsen är slut berättar gruppen tillsammans vad den handlade om.
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

@@ -36,4 +36,7 @@ forslag:
     arskurs: 4–6
     amne: klassens råd
     text: Du delar in eleverna i grupper om fyra och ger alla samma text, en kort berättelse om en elev som är ny i klassen. Eleverna läser berättelsen och förbereder var sin fråga om den, till exempel hur den nya eleven känner sig eller vad de andra kunde ha gjort. De ställer sin fråga till gruppen en i taget, och den som frågar lyssnar utan att svara medan de andra reder ut frågan. Så fortsätter det tills alla har frågat. Gruppen sammanfattar vad de förstod och vad de tar med sig när någon ny börjar i klassen.
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

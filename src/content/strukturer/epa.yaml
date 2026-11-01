@@ -35,4 +35,7 @@ forslag:
     arskurs: 4–6
     amne: klassens råd
     text: "Klassen har klassråd, och rasterna har blivit stökiga. Du frågar: Vad skulle få rasten att fungera för alla, och vad kan du göra själv? Var och en tänker en stund, sedan pratar eleverna i paren och väljer ett förslag. Du låter paren berätta sina förslag för klassen och skriver dem på tavlan."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

@@ -35,4 +35,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "På mentorstiden pratar klassen om stämningen i klassen. Du frågar: Vilken idé för en bättre stämning ska gruppen föreslå för klassen? Varje grupp skriver sina idéer på ett papper mitt på bordet, och du ger varje elev fem klisterprickar i en egen färg. Eleverna funderar var och en på vilka idéer som håller och sätter prickarna på minst två av dem. Gruppen räknar tillsammans vilken idé som fick flest och pratar om varför just den vann."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

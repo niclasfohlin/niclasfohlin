@@ -344,7 +344,7 @@ for (const [b, o, n] of bildfall) { const f = bildtextFel(b, o); if (f.length !=
 // Strukturerna (K-650): ett utkast med fyra steg går igenom, och varje regel stannar på sitt fel, prövat åt andra hållet.
 const steg4 = ['Läraren ställer *frågan*.', 'Eleverna tänker.', 'Eleverna talar i par.', 'Eleverna delar med klassen.'];
 const forslag4 = ['lasning', 'skrivning', 'matematik', 'socialt'].map((omrade) => ({ omrade, arskurs: '4–6', text: 'Ett. Två. Tre.' }));
-const hel = { namn: 'EPA', slag: 'par', steg: steg4, bild: { scen: 'epa', alt: 'Två elever talar.' }, forslag: forslag4 };
+const hel = { namn: 'EPA', slag: 'par', steg: steg4, bild: { scen: 'epa', alt: 'Två elever talar.' }, forslag: forslag4, provad: { datum: '2026-11-01', svar: 'avgorande.md' } };
 const strukturfall = [
   [{ namn: 'EPA', slag: 'par', steg: steg4, utkast: true }, 0],
   [hel, 0],
@@ -353,6 +353,7 @@ const strukturfall = [
   [{ ...hel, steg: [...steg4, ...steg4, 'Ett nionde.'] }, 1],
   [{ ...hel, steg: [...steg4.slice(0, 3), 'x'.repeat(141)] }, 1],
   [{ ...hel, bild: undefined }, 1],
+  [{ ...hel, provad: undefined }, 1],
   [{ ...hel, bild: { scen: 'epa' } }, 1],
   [{ ...hel, forslag: forslag4.slice(0, 3) }, 1],
   [{ ...hel, forslag: [{ ...forslag4[0], text: 'Ett. Två.' }, ...forslag4.slice(1)] }, 1],

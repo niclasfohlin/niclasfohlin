@@ -36,4 +36,7 @@ forslag:
     arskurs: F–3
     amne: klassens råd
     text: Klassen pratar om hur man kan hjälpa varandra på rasten. De gula lapparna beskriver en situation, till exempel ”En kompis står ensam vid gungorna”, och de blå något man kan säga eller göra, till exempel ”Du kan vara med oss”. Eleverna skrynklar lapparna till bollar, kastar dem över linjen på din signal och plockar upp en boll var. Sedan söker de upp den vars lapp hör ihop med deras och berättar för varandra varför det är ett bra sätt att lösa situationen.
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

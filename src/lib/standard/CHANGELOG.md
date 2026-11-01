@@ -3,7 +3,7 @@
 ## 0.47.0, 2026-11-01
 
 - `strukturer.js` (sajtens K-650): `strukturkortetsInnehall`, kontrollsumman över det ett strukturkort visar, som skriptet som gör korten skriver i manifestet och bygget räknar om, med scenens radslut som 
-; `strukturkortetsFil` och `STRUKTURKORTEN_ALLA`, kortets fil och filen med alla kort.
+; `strukturkortetsFil` och `STRUKTURKORTEN_ALLA`, kortets fil och filen med alla kort. `strukturensFel` kräver att en struktur som visas är prövad (`provad`).
 
 ## 0.46.0, 2026-10-31
 

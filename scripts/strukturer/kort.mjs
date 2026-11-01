@@ -18,7 +18,7 @@
 // och om de fick mindre luft. Ett kort som behövde mindre luft eller mindre text listas som en text att korta, och ett
 // kort vars steg inte ryms i 16 punkter stannar skriptet. Ändras ett kort som visas görs filen med alla kort om, i
 // slagens ordning, Par, Grupp och Klass, och efter namnet, som verktygets sida har dem.
-import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, mkdtempSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, mkdtempSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -61,9 +61,19 @@ const delen = (s) => (s.utkast ? 'utkast' : 'visas');
 const manifest = {};
 for (const [del, fil] of Object.entries(MANIFEST)) manifest[del] = existsSync(fil) ? JSON.parse(readFileSync(fil, 'utf8')) : {};
 const alla = manifest.visas[STRUKTURKORTEN_ALLA.nyckel];
-// Ett kort som har bytt del, från utkast till visas, tas bort ur den gamla delens manifest.
-for (const s of medBild) delete manifest[delen(s) === 'visas' ? 'utkast' : 'visas'][s.id];
+// Ett kort som har bytt del, från utkast till visas eller tillbaka, tas bort ur den gamla delens manifest och mapp, så att
+// ett utkasts kort aldrig ligger kvar på sajten.
+for (const s of medBild) {
+  const gamla = delen(s) === 'visas' ? 'utkast' : 'visas';
+  delete manifest[gamla][s.id];
+  if (existsSync(join(UT[gamla], strukturkortetsFil(s.id)))) unlinkSync(join(UT[gamla], strukturkortetsFil(s.id)));
+}
+// En struktur som inte har något kort längre, som en som väntar på banken (vantar), har inget kort på sajten.
 for (const del of Object.keys(manifest)) for (const id of Object.keys(manifest[del])) if (id !== STRUKTURKORTEN_ALLA.nyckel && !medBild.some((s) => s.id === id)) delete manifest[del][id];
+for (const f of existsSync(UT.visas) ? readdirSync(UT.visas) : []) {
+  const id = f.match(/^strukturkort-(.+)\.pdf$/)?.[1];
+  if (id && f !== STRUKTURKORTEN_ALLA.fil && !medBild.some((s) => s.id === id && !s.utkast)) unlinkSync(join(UT.visas, f));
+}
 
 const aktuellt = (s) => manifest[delen(s)][s.id]?.summa === summa(s) && existsSync(join(UT[delen(s)], strukturkortetsFil(s.id)));
 const attGora = medBild.filter((s) => (!valda.length || valda.includes(s.id)) && (!vidBehov || !aktuellt(s)));

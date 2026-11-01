@@ -36,4 +36,7 @@ forslag:
     arskurs: 4–6
     amne: klassens råd
     text: "Klassen har svarat skriftligt på tre frågor om rasten, bland dem: Vad gör du när en kompis hamnar utanför? Du plockar ut ett svar på varje fråga, både sådana som hjälper och sådana som gör det svårare för kompisen, skriver av dem utan namn och sätter ihop dem till Kims prov. Grupper om tre pratar om vad som fungerar i provet, vad som blev fel och hur Kim kan ha tänkt. De antecknar medan du går runt och lyssnar. Sedan delar grupperna sina iakttagelser, och du knyter ihop vad som hjälper en kompis och vad som gör det värre."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

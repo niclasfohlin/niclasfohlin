@@ -35,4 +35,7 @@ forslag:
     arskurs: 4–6
     amne: klassens råd
     text: Du presenterar ett förslag om en kompisbänk på skolgården, och eleverna får höra hur den skulle fungera. Var och en skriver ned en fråga om förslaget, som Vem bestämmer vem som får sitta där? Eleverna går runt, ställer sin fråga till den de möter och skriver ned svaret under frågan. De svarar också på kamraternas frågor och fortsätter tills de är nöjda eller du säger stopp. Till sist redovisar var och en ett av svaren i sin grupp.
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

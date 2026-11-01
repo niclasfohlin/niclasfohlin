@@ -884,8 +884,8 @@ export declare const STRUKTURENS_GRANSER: Readonly<{
 }>;
 /** Kontrollsumman över bankens fält i en struktur: namnet, andra namn, syftet och stegen. */
 export declare function strukturensSumma(s: { namn?: string; andra?: string[]; syfte?: string; steg?: string[] }): string;
-/** Felen i en struktur, som en lista. Ett utkast får sakna bild och förslag. */
-export declare function strukturensFel(s: { namn?: string; andra?: string[]; syfte?: string; kalla?: { summa: string }; slag?: string; steg?: string[]; bild?: { scen?: string; alt?: string }; forslag?: { omrade: string; arskurs: string; amne?: string; text: string }[]; utkast?: boolean }): string[];
+/** Felen i en struktur, som en lista. Ett utkast får sakna bild, förslag och prövning. */
+export declare function strukturensFel(s: { namn?: string; andra?: string[]; syfte?: string; kalla?: { summa: string }; slag?: string; steg?: string[]; bild?: { scen?: string; alt?: string }; forslag?: { omrade: string; arskurs: string; amne?: string; text: string }[]; provad?: { datum: string; svar: string }; utkast?: boolean }): string[];
 /** Arken när strukturkort skrivs ut två och två: framsidorna och sedan baksidorna i samma ordning, med kortens platser. */
 export declare function strukturkortensArk(antal: number): { del: 'fram' | 'bak'; uppe: number; nere: number | null }[];
 /** Kontrollsumman över det ett strukturkort visar: namnet, slaget, stegen och scenens fil. */

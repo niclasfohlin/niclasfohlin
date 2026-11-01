@@ -6,7 +6,7 @@
 // Förslagen står bara här, inte på kortet.
 import Base from '../../layouts/Base.astro';
 import Strukturlistan from '../../components/Strukturlistan.astro';
-import { strukturerna, strukturensAdress, bildensAdress, kortetsAdress, SLAGEN, OMRADENA, stegHtml, slagensStil, STRUKTURERNAS_ADRESS } from '../../lib/strukturer';
+import { strukturerna, strukturernasMetod, strukturensAdress, bildensAdress, kortetsAdress, SLAGEN, OMRADENA, stegHtml, slagensStil, STRUKTURERNAS_ADRESS } from '../../lib/strukturer';
 import { symbol } from '../../../scripts/strukturer/symboler.mjs';
 
 export async function getStaticPaths() {
@@ -17,6 +17,7 @@ const { s } = Astro.props;
 const d = s.data;
 const slag = SLAGEN.find((x) => x.slag === d.slag)!;
 const forslag = d.forslag ?? [];
+const metoden = await strukturernasMetod();
 const beskrivning = `${d.syfte}. Strukturen ${d.namn} för ${slag.namn.toLowerCase() === 'klass' ? 'hela klassen' : slag.namn.toLowerCase() === 'grupp' ? 'grupper' : 'par'}, med stegen, förslag på användning och kortet att skriva ut.`;
 ---
 
@@ -24,7 +25,7 @@ const beskrivning = `${d.syfte}. Strukturen ${d.namn} för ${slag.namn.toLowerCa
   <div class="st-yta">
     <article class="st-sida st-struktur" data-slag={d.slag} style={slagensStil(d.slag)}>
       <header>
-        <p class="meta brodsmula"><a href="/metoder">Metoder</a> · <a href={STRUKTURERNAS_ADRESS}>Strukturer</a> · {slag.namn}</p>
+        <p class="meta brodsmula"><a href="/metoder">Metoder</a>{metoden && <> · <a href={`/metoder/${metoden.id}`}>{metoden.data.titel}</a></>} · <a href={STRUKTURERNAS_ADRESS}>Strukturer</a></p>
         <h1>{d.namn}</h1>
         <p class="st-slag"><Fragment set:html={symbol(d.slag)} />{slag.namn}</p>
         {d.andra.length > 0 && <p class="st-andra">Kallas också {d.andra.join(', ')}</p>}

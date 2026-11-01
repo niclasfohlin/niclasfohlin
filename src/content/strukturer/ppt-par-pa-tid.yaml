@@ -37,4 +37,7 @@ forslag:
     arskurs: F–3
     amne: klassens råd
     text: "Du delar upp klassen i par, och den som fyller år först på året börjar. Du ställer frågan: Vad gör du när du blir arg på en kompis? Efter minst trettio sekunders tanketid säger du Par på tid och startar en timer på en halv minut som alla ser, och den ena talar tills den ringer. Paret byter roller, och den andra bygger vidare på det som sas först. Du slumpar fram några par som berättar för klassen vad de kom fram till."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

@@ -36,4 +36,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "Klassen pratar om att dela bilder på nätet. Du delar in eleverna i grupper om fyra och läser upp tre påståenden: En bild som man har raderat kan finnas kvar hos andra, den som får en bild kan spara den med en skärmbild, och en bild som man skickar i en privat chatt kan inte spridas vidare. Eleverna tänker en stund var för sig och diskuterar sedan i gruppen vilket påstående som är falskt och varför. Grupperna visar sina svar samtidigt, och du låter några grupper förklara hur de tänkte."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

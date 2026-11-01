@@ -38,4 +38,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "Klassen pratar om hur de lyssnar på varandra. Du delar in eleverna i grupper om tre, sätter en timer på tio minuter och ger frågan: Vad kan vi göra så att alla blir hörda i klassen? Grupperna skriver tre förslag, och du går runt och stöttar bara vid behov. När timern ringer går grupperna runt och läser de andras förslag, och tillbaka på plats pekar de på det förslag de förstod bäst. Du slumpar fram några som berättar varför, och sedan skriver grupperna klart och delar sina färdiga förslag."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

@@ -35,4 +35,7 @@ forslag:
     arskurs: 4–6
     amne: mentorstid
     text: På mentorstid i åk 6 får grupperna frågekort med påståenden, som ”Jag vågar räcka upp handen i vår klass” med en skala från 1 till 5. Var och en tänker själv och bestämmer sitt tal utan att visa det. Du säger ett, två, tre, visa, och alla håller upp sina fingrar. Är talen lika går gruppen vidare till nästa kort. Skiljer de sig åt berättar var och en vad som låg bakom talet, och ingen behöver ursäkta sitt val.
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

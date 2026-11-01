@@ -83,6 +83,7 @@ export function strukturensFel(s) {
   const alla = steg.reduce((a, t) => a + t.length, 0);
   if (alla > g.steg.allaTecken) fel.push(`Stegen har ${alla} tecken tillsammans; baksidan rymmer ${g.steg.allaTecken}.`);
   if (s.utkast) return fel;
+  if (!s.provad) fel.push('Strukturen är inte prövad: stegen prövas av två lärare i rollen och avgörs innan strukturen visas (provad).');
   if (!s.bild?.scen) fel.push('Strukturen har ingen bild, och bara ett utkast får sakna den.');
   else if (!s.bild.alt) fel.push('Bilden har inget textalternativ.');
   const forslag = s.forslag ?? [];

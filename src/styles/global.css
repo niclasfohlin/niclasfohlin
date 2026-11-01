@@ -4748,7 +4748,7 @@ button.pl-passroll { min-height: 2.75rem; }
 .st-valda .ak-valt-namn { display: flex; align-items: center; text-decoration: none; }
 .st-valda .ak-valt-namn:hover { text-decoration: underline; }
 /* Strukturens sida. */
-.st-sida-bild { display: block; width: 100%; max-width: 46rem; height: auto; margin: 1rem 0 0.5rem; border: 1px solid var(--farg-kant); border-radius: 10px; background: #fff; }
+.st-sida-bild { display: block; width: 100%; max-width: 34rem; height: auto; margin: 1rem 0 0.5rem; border: 1px solid var(--farg-kant); border-radius: 10px; background: #fff; }
 .st-steg { max-width: var(--matt-text); margin: 0.3rem 0 0; padding-left: 1.6rem; display: grid; gap: 0.45rem; }
 .st-steg li::marker { font-weight: 700; }
 .st-forslag { max-width: var(--matt-text); display: grid; gap: 1rem; margin-top: 0.4rem; }

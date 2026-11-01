@@ -37,4 +37,7 @@ forslag:
     arskurs: F–3
     amne: klassens råd
     text: "Klassen pratar om hur klassrummet ska fungera. Du ger frågan: Ska vi ha bestämda platser eller välja själva? Du delar varje grupp i två par, ena paret för bestämda platser och det andra för fria, och paren tänker ut skäl och övar vad de ska säga. Paren berättar sin sida utan att bli avbrutna, pratar och ber varandra om skäl, och byter sedan sida och berättar det andra parets skäl. Gruppen ritar eller skriver en slutsats med skälen och alla skriver sitt namn under, och sist ritar eller skriver var och en ett skäl för varje sida på en lapp."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

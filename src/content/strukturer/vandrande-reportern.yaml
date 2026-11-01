@@ -38,4 +38,7 @@ forslag:
     arskurs: 4–6
     amne: klassens råd
     text: "På klassens råd sitter eleverna i fyrgrupper med papper och penna. Du frågar: Hur kan två lag dela på fotbollsplanen på rasten så att det blir rättvist? Alla får trettio sekunders egen tanketid, och sedan enas gruppen om ett förslag medan timern räknar ned och du går runt och stöttar. När timern ringer släpper alla pennan, och du utser en reporter i varje grupp som går till en annan grupp, frågar vad de har kommit fram till och lyssnar. Reportern går tillbaka och berättar, och gruppen skriver klart sitt förslag."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

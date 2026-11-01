@@ -37,4 +37,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "På mentorstiden vill du blanda klassen, och den öppna frågan är: Vad gör att det känns tryggt att säga sin åsikt i en grupp? Eleverna står upp med handen uppsträckt, söker ögonkontakt, ger en high five och sätter sig två och två. Paret bestämmer vem som är stjärna och vem som är hjärta, och de svarar på frågan tillsammans. Du slumpar ett par och ber stjärnan eller hjärtat berätta vad paret kom fram till. Sedan tackar eleverna varandra och gör om det med en ny partner."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

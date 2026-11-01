@@ -36,4 +36,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "På mentorstiden ställer du den öppna frågan: Vad behövs mest för att en klass ska fungera bra? Eleverna får tanketid och skriver sitt svar. De går runt och letar efter någon som tänkt annorlunda, och bildar par eller små grupper om tre till fyra. De berättar vad de tänkt och varför, och talar om varför de har tänkt på olika sätt. Till sist skriver var och en ned vad hen tycker nu."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

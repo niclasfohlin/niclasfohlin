@@ -36,4 +36,7 @@ forslag:
     arskurs: 7–9
     amne: samhällskunskap
     text: "Klassen arbetar med livet på nätet. Du ger problemet: Någon lägger ut en pinsam bild på en klasskamrat i klassens chatt. Vad gör du som klasskamrat, och vad kan klassen göra tillsammans? Eleverna tänker själva och talar i par, sedan sätter du ihop två par till en kvadrat där de berättar för varandra vad de skulle göra. Kvadraten jämför, ställer frågor och kommer fram till ett gemensamt svar, och du slumpar en elev per kvadrat som redovisar."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

@@ -15,6 +15,9 @@ import topplistan from '../data/strukturer-topp.json';
 export type Struktur = CollectionEntry<'strukturer'>;
 export type Slag = keyof typeof STRUKTURENS_SLAG;
 
+/** Metoden som verktyget hör till, i Metoder, som brödsmulorna leder till när den är publicerad. */
+export const strukturernasMetod = async () => (await publicerade('undervisningsmetoder')).find((m) => m.id === 'kooperativt-larande');
+
 /** Verktygets sida. */
 export const STRUKTURERNAS_ADRESS = '/strukturer';
 export const strukturensAdress = (id: string) => `/strukturer/${id}`;

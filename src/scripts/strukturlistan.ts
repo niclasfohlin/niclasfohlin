@@ -42,7 +42,7 @@ if (ruta) {
       b.setAttribute('aria-label', `${namn} i listan att skriva ut`);
       b.title = med ? 'I listan att skriva ut. Tryck för att ta bort' : 'Lägg i listan att skriva ut';
       b.closest('.st-kort')?.classList.toggle('vald', med);
-    } else b.textContent = med ? 'I listan Att skriva ut ✓' : 'Lägg i Att skriva ut';
+    } else b.textContent = med ? 'Ta bort ur Att skriva ut' : 'Lägg i Att skriva ut';
   }
   for (const b of knappar()) b.addEventListener('click', () => valj(b.dataset.valj!, !vald(b.dataset.valj!)));
 
@@ -72,7 +72,9 @@ if (ruta) {
     knappar().forEach(visaKnapp);
     ruta!.classList.toggle('har-kort', n > 0);
     $('st-skrivut-valda').setAttribute('aria-disabled', String(n === 0));
-    $('st-skrivut-valda').textContent = n > 1 ? `Skriv ut ${n} kort` : 'Skriv ut kortet';
+    // Listans knapp heter efter antalet, så att den inte delar namn med Skriv ut kortet på strukturens sida (de kalla
+    // läsarna 2026-11-01).
+    $('st-skrivut-valda').textContent = n ? `Skriv ut ${n} kort` : 'Skriv ut listan';
     $('st-tom').hidden = n === 0;
     $('st-kopiera').hidden = n === 0;
   }
@@ -87,8 +89,13 @@ if (ruta) {
   // Listans länk: verktygets adress med strukturerna i listan.
   $('st-kopiera').addEventListener('click', async () => {
     const url = `${location.origin}/strukturer#lista=${sparat.valda.join(',')}`;
-    try { await navigator.clipboard.writeText(url); not.textContent = 'Länken är kopierad. Öppna den på en annan enhet, så har du samma lista där.'; } catch { not.textContent = url; }
-    window.setTimeout(() => { not.textContent = ''; }, 6000);
+    const knappen = $('st-kopiera');
+    try {
+      await navigator.clipboard.writeText(url);
+      not.textContent = 'Länken är kopierad. Öppna den på en annan enhet, så har du samma lista där.';
+      knappen.textContent = 'Länken är kopierad';
+    } catch { not.textContent = url; }
+    window.setTimeout(() => { not.textContent = ''; knappen.textContent = 'Kopiera listans länk'; }, 8000);
   });
 
   // Utskriften: korten två och två på A4. Där webbläsaren kan skriva ut en pdf direkt öppnas utskriftsrutan; annars

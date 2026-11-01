@@ -37,4 +37,7 @@ forslag:
     arskurs: F–3
     amne: klassens råd
     text: "Det är klassråd, och du delar in klassen i grupper om fyra. Du frågar: Vad kan vi göra så att alla får vara med i leken på rasten? Eleverna tänker själva en stund och turas sedan om att säga sitt förslag, varv efter varv tills du säger stopp. Varje grupp sammanfattar sina förslag och berättar dem för klassen."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

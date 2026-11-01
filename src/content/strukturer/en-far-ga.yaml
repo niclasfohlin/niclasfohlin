@@ -35,4 +35,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "På mentorstiden pratar klassen om att arbeta i grupp. Du delar in eleverna i fyrgrupper, numrerar dem ett till fyra och frågar: Vad behöver en grupp för att alla ska våga säga vad de tycker? Grupperna talar sig samman tills alla vet vad gruppen svarar, och eleverna ställer sig upp när de är klara. Du säger en siffra, och de eleverna byter till en annan grupp, delar gruppens svar där och jämför med de andras. Sedan frågar du vad var och en kan göra för det, och klassen gör om det."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

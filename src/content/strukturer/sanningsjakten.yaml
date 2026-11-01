@@ -37,4 +37,7 @@ forslag:
     arskurs: 4–6
     amne: klassens råd
     text: "Klassen har bytt platser, och du vill att alla ska lära känna varandra bättre. Paren skriver om sig själva: eleverna talar om vad de har gemensamt och skriver högst upp på sitt papper ett sant och ett falskt påstående, till exempel ”Vi har båda en lillebror” och ”Vi spelar båda fotboll”. Paren roterar till ett nytt bord, läser påståendena och skriver under varje vilket de tror är sant och varför. Vid nästa bord skriver de ett skäl som ingen har skrivit förut. När paren får tillbaka sitt papper läser de alla svar och ser vad klasskamraterna trodde om dem."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

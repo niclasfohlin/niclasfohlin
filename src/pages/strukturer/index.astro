@@ -15,14 +15,13 @@
 import Base from '../../layouts/Base.astro';
 import Strukturlistan from '../../components/Strukturlistan.astro';
 import Kortet from '../../components/Strukturkortet.astro';
-import { strukturerna, ALLA_KORTENS_ADRESS, allaKortensStorlek, topplistanIBygget, slagensStil, SLAGEN } from '../../lib/strukturer';
+import { strukturerna, strukturernasMetod, ALLA_KORTENS_ADRESS, allaKortensStorlek, topplistanIBygget, slagensStil, SLAGEN } from '../../lib/strukturer';
 import { symbol } from '../../../scripts/strukturer/symboler.mjs';
-import { publicerade } from '../../lib/innehall';
 
 const alla = await strukturerna();
 const medId = new Map(alla.map((s) => [s.id, s]));
 const topp = topplistanIBygget(new Set(medId.keys())).map((id) => medId.get(id)!);
-const metoden = (await publicerade('undervisningsmetoder')).find((m) => m.id === 'kooperativt-larande');
+const metoden = await strukturernasMetod();
 const rader = SLAGEN.map((s) => ({ ...s, strukturer: alla.filter((x) => x.data.slag === s.slag) }));
 const PIL = '<svg class="st-hylla-pil" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
 const titel = 'Strukturer';
@@ -36,6 +35,10 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
         <p class="meta brodsmula"><a href="/metoder">Metoder</a>{metoden && <> · <a href={`/metoder/${metoden.id}`}>{metoden.data.titel}</a></>} · Strukturer</p>
         <h1>{titel}</h1>
         <p class="ingress">Kort för samarbete i par, i grupp och i hela klassen. Tryck på en struktur för stegen och förslag på användning, och på bocken för att lägga kortet i listan att skriva ut.</p>
+        <div class="st-utskrift">
+          <a class="knapp sekundar" href={ALLA_KORTENS_ADRESS} target="_blank" rel="noopener" data-goatcounter-click="utskrift:strukturer/alla" data-goatcounter-title="Strukturer: alla kort">Skriv ut alla {alla.length} kort (pdf, {allaKortensStorlek()})</a>
+        </div>
+        <p class="st-utskriftsrad">Två kort på varje A4. Skriv ut dubbelsidigt, vänd längs långsidan och klipp längs den streckade linjen.</p>
       </header>
 
       {topp.length === 5 && (
@@ -60,10 +63,6 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
         </details>
       ))}
 
-      <div class="st-utskrift">
-        <a class="knapp sekundar" href={ALLA_KORTENS_ADRESS} target="_blank" rel="noopener" data-goatcounter-click="utskrift:strukturer/alla" data-goatcounter-title="Strukturer: alla kort">Skriv ut alla {alla.length} kort (pdf, {allaKortensStorlek()})</a>
-      </div>
-      <p class="st-utskriftsrad">Två kort på varje A4. Skriv ut dubbelsidigt, vänd längs långsidan och klipp längs den streckade linjen.</p>
 
       <p class="upphov">Strukturerna kommer ur Niclas Fohlins bank för kooperativt lärande. Bilderna och korten © Niclas Fohlin.</p>
     </article>
@@ -71,8 +70,3 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
   </div>
 </Base>
 
-<script>
-  import { ettkortLank } from '../../scripts/pdfutskrift';
-  const alla = document.querySelector<HTMLAnchorElement>('.st-utskrift a');
-  if (alla) ettkortLank(alla);
-</script>

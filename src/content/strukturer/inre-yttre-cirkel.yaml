@@ -38,4 +38,7 @@ forslag:
     arskurs: 4–6
     amne: klassens råd
     text: "Klassen ska lära känna varandra bättre, och du delar upp eleverna i två halvor som bildar en inre och en yttre cirkel med en partner mittemot varje elev. Du bestämmer att den yttre cirkeln frågar och delar ut frågekort som: Berätta om en gång då en kompis gjorde dig glad. Den som frågar lyssnar och säger vad hen hörde, och sedan tar den yttre cirkeln ett steg inför nästa fråga. Efter några varv bestämmer du att den inre cirkeln frågar, och till sist låter du några par berätta vad de hört."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

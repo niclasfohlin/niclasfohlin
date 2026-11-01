@@ -36,4 +36,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "Det har varit stökigt i korridoren, och du delar ut ett stort papper med ett fält per elev och en ruta i mitten till varje grupp. Du ställer den öppna frågan: Vad får korridoren att kännas trygg för alla, och vad kan vi göra själva? Eleverna funderar först själva och skriver i sitt eget fält. När du bryter delar de sina tankar med gruppen, väljer ut de förslag som alla kan stå för och skriver dem i mitten. Grupperna jämför sina mittfält med varandra."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false

@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "175627cacf26ac08",
+    "summa": "f96a2d4a25ed4afd",
     "kort": [
       "anteckningspar",
       "ape",
@@ -28,7 +28,6 @@
       "bygga-en-triangel",
       "byt-och-sortera",
       "en-far-ga",
-      "en-for-alla",
       "epk",
       "huvuden-ihop",
       "inspireras",
@@ -88,7 +87,7 @@
       "stall-en-fraga",
       "vem-ar-jag"
     ],
-    "kb": 7156
+    "kb": 7085
   },
   "5-3-1": {
     "innehall": "ac3bdc17",
@@ -231,24 +230,6 @@
     "steg": {
       "pt": 18,
       "tat": false,
-      "rymsInte": false
-    }
-  },
-  "en-for-alla": {
-    "innehall": "ed958555",
-    "summa": "f5bb206272de6087",
-    "kb": 84,
-    "bild": {
-      "colours": 12,
-      "kb": 37
-    },
-    "namn": {
-      "pt": 80,
-      "rader": 1
-    },
-    "steg": {
-      "pt": 17.5,
-      "tat": true,
       "rymsInte": false
     }
   },

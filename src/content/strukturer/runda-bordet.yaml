@@ -37,4 +37,7 @@ forslag:
     arskurs: 7–9
     amne: mentorstid
     text: "Klassen ska börja ett grupparbete. Du ställer den öppna frågan: Vad behövs för att alla i en grupp ska våga säga vad de tycker? Eleverna skriver var sitt svar på sitt papper, och på din signal skickar de papperet till kamraten till höger. Kamraten läser och skriver ett nytt svar, och papperen går runt tills du bryter. Gruppen väljer ut två svar att dela med klassen."
+provad:
+  datum: "2026-11-01"
+  svar: underlag/prov/strukturer/provning/avgorande.md
 utkast: false
