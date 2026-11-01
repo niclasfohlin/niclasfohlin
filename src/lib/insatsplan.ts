@@ -13,6 +13,7 @@ import { kursensVeckor, metodensSaker, sakernaI, sidansAnkare, sidansAvsnitt, ve
 import { passOversikt } from './metod';
 import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
+import { vavdaIBorjan } from './vav';
 import { publicerade } from './innehall';
 import { site } from '../data/site';
 import type { Skattning } from './standard/index.js';
@@ -480,8 +481,10 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(d.fastnar ? [{ rubrik: d.fastnar.rubrik, adress: `${sida}#fastnar` }] : []),
     ...d.tabeller.filter((t) => t.plats === 'efter-fastnar').flatMap((t) => { const a = tabellensAdress(d, m.id, t.rubrik); return a ? [{ rubrik: t.rubrik, adress: a }] : []; }),
   ];
-  const centrala = (d.centrala ?? []).flatMap((c) => {
-    const x = CENTRALA.find((y) => y.id === c.id);
+  // Samma verktyg som i början av metodens sida ([id].astro): fältet centrala och ett verktyg som är invävt med många delar,
+  // som Strukturer (vavdaIBorjan i src/lib/vav.ts; Niclas 2026-11-01: "Du gjorde relevanta ändringar i Planera insatsen
+  // antar jag?"), så att planen och sidan inte skiljer sig.
+  const centrala = [...(d.centrala ?? []).map((c) => CENTRALA.find((y) => y.id === c.id)), ...vavdaIBorjan(m.id, d)].flatMap((x) => {
     if (!x || x.slag === 'formular' || (bank && (x.adress === bank.adress || lasbarAdress(x) === bank.adress))) return [];
     return [{ namn: x.namn, adress: lasbarAdress(x), pdf: x.slag === 'pdf' }];
   });
