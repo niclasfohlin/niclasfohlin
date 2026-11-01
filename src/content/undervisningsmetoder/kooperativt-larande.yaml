@@ -15,12 +15,12 @@ tid: 45 minuter per lektion, minst tre lektioner i veckan
 hurOftaSkal: "I den svenska studien samarbetade de flesta klasserna tre till fyra lektioner i veckan (Klang m.fl., 2020). Minst tre samarbeten i veckan, korta eller hela lektioner, ger rutinerna tid att sitta."
 period: Fem veckor att komma igång
 material:
+  - samarbetsfärdigheterna
   - T-kortet
-  - symbolerna till bordsöarna
+  - symbolerna till bordsöarna och en skål
   - fraserna att låna
   - minitavlor och pennor
   - lappar till stödorden
-  - en skål med de fyra symbolerna
 uppdaterad: 2026-11-01
 publicerad: 2026-10-30
 relaterade: ["gruppstarkande-aktiviteter", "hoglasning-i-par", "texttyper-i-grupp"]
@@ -367,7 +367,7 @@ stod:
 # ---------------------------------------------------------------------------------------------------------------------
 progression:
   rubrik: De första veckorna
-  text: "Metoden är troligen ny för dig och för klassen. Ordningen och takten är förslag. Ni börjar med kamraten och T-kortet, och sedan kommer Ping-pong-prat. Därefter lär sig klassen en färdighet och en struktur i veckan, som i tabellen, medan du övar ett drag. Gå vidare när veckans färdighet syns hos nästan alla. Syns den inte, stanna kvar och gör om veckan en eller två gånger, så att den sitter för klassen och för dig. Besöken och mötet flyttar med. Alla fem principerna finns med från det första samarbetet, men du kan öva på en sak i taget: välj en färdighet eller ett av besluten före lektionen, och håll fast vid det i några veckor."
+  text: "Metoden är troligen ny för dig och för klassen. Ordningen och takten är förslag. Ni börjar med kamraten och T-kortet, och sedan kommer Ping-pong-prat. Därefter lär sig klassen en färdighet och en struktur i veckan, som i tabellen, medan du övar ett drag. Färdigheterna står efter veckorna och på bladet Samarbetsfärdigheterna. Gå vidare när veckans färdighet syns hos nästan alla. Syns den inte, stanna kvar och gör om veckan en eller två gånger, så att den sitter för klassen och för dig. Besöken och mötet flyttar med. Alla fem principerna finns med från det första samarbetet, men du kan öva på en sak i taget: välj en färdighet eller ett av besluten före lektionen, och håll fast vid det i några veckor."
   rader:
     - { vecka: "1", led: Klimatet, rubrik: "Kamraten, T-kortet och Ping-pong-prat", eleverna: "Att lyssna aktivt: vända sig mot kamraten, vänta på sin tur och tacka.", roll: "Att visa strukturen med en elev, tänka högt om det eleverna ska tänka på i samtalet och säga vad du såg.", vidare: "nästan alla par turas om och tackar", fraga: "Turas nästan alla par om och tackar?" }
     - { vecka: "2", led: Samtalet, rubrik: "EPA och signalen", eleverna: "Att tänka högt: tänka själv först och säga sin tanke till kamraten, och att följa signalen.", roll: "Att ge tanketid och lyssna efter om båda säger något eget.", vidare: "båda i nästan alla par säger något eget", fraga: "Säger båda i nästan alla par något eget?" }
@@ -393,7 +393,7 @@ checklista:
   punkter:
     - Planera den första veckans två eller tre korta samarbeten och den första hela lektionen.
     - Sätt ihop paren och bordsöarna så att olika elever möts, och lägg en symbol på varje plats.
-    - "Förbered T-kortet för den första färdigheten, att lyssna aktivt: vända sig mot kamraten, vänta på sin tur och tacka."
+    - Skriv ut bladet Samarbetsfärdigheterna, och förbered T-kortet för den första färdigheten, lyssna aktivt.
     - Skriv ut lektionskortet, symbolerna, fraserna att låna och veckans strukturkort, och ta fram skålen med symbolerna.
     - Boka besöken, ett av dem med specialläraren.
     - Bestäm signalen med arbetslaget, eller med en kollega om du börjar ensam.
