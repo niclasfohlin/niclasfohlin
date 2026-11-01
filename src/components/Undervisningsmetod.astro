@@ -362,7 +362,7 @@ const moten = arbetslagetsMoten(d);
       {/* Fria tabeller med plats efter-progression, efter veckorna där läraren planerar dem, som samarbetsfärdigheterna
           (riggens leverans 2026-11-01, K-671). Samma tabell och form som en fri tabell i stödundervisning (FriTabell.astro). */}
       {(d.tabeller ?? []).filter((t: { plats?: string }) => t.plats === 'efter-progression').map((t: { rubrik: string; text?: string; kolumner: string[]; rader: string[][]; not?: string }) => (
-        <div class="um-tabell">
+        <div class="um-fritabell">
           <h4>{t.rubrik}</h4>
           {t.text && <p set:html={k(t.text)} />}
           <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} />
