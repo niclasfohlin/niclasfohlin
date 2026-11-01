@@ -21,10 +21,6 @@ delar:
   - pil: { fran: [446, 310], till: [496, 310], bage: -0.35 }
   - pil: { fran: [496, 316], till: [446, 316], bage: -0.35 }
   # Gruppens mapp, uppslagen, med läxorna i fickan.
-  - papper: { x: 430, y: 418, b: 82, h: 46, vinkel: 0, rader: 0, farg: '#9bbae0' }
-  - papper: { namn: mappen, x: 512, y: 418, b: 82, h: 46, vinkel: 0, rader: 0, farg: '#9bbae0' }
-  - papper: { x: 500, y: 406, b: 50, h: 38, vinkel: -7, rader: 3 }
-  - papper: { x: 522, y: 404, b: 50, h: 38, vinkel: 6, rader: 3 }
-  - papper: { x: 512, y: 430, b: 80, h: 20, vinkel: 0, rader: 0, farg: '#7f9fd0' }
+  - mapp: { namn: mappen, x: 471, y: 418, b: 170, h: 52, blad: 2 }
   - bubbla: { till: forklarar, dx: -40, dy: 40, symboler: [kugghjul], visar: "Den som förklarar visar steg för steg hur svaret på läxan kom till" }
   - bubbla: { till: kontrollerar, dx: 40, dy: 40, tanke: true, symboler: [fraga], visar: "Den som kontrollerar prövar förklaringen mot sin egen läxa" }

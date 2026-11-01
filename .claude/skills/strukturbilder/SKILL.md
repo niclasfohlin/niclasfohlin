@@ -38,7 +38,7 @@ Enkla figurer med runda, kala huvuden som ägg och små ansikten, olika hudtoner
 | `scripts/strukturer/rita.mjs` | Läser en scen och ritar den till svg, och med `--png` till png. Beskär bilden efter innehållet i formen 900 × 560 |
 | `scripts/strukturer/figurer/penna.mjs` | Pennan: linjen, kritans mönster, slumpen ur ett fast frö. Varje form skrivs en gång och används för botten, färg och linje |
 | `scripts/strukturer/figurer/figur.mjs` | Figuren: skelettet, ställningarna, bålen, armarna med två leder, huvudet och ansiktet |
-| `scripts/strukturer/figurer/saker.mjs` | Bord, papper, bollar, kort, pennor, klocka, bubblor, symboler, pilar, ringar på golvet |
+| `scripts/strukturer/figurer/saker.mjs` | Bord, papper, bollar, kort, pennor, klocka, bubblor, symboler, pilar, ringar på golvet, dörr och mapp |
 | `scripts/strukturer/symboler.mjs` | Symbolerna och färgerna för Par, Grupp och Klass, en rot för kortet, filtret och sidan |
 | `scripts/strukturer/likhet.mjs` | Likhetsprovet: ritar om referenserna ur `scripts/strukturer/likhet/` och ställer dem sida vid sida |
 | `scripts/strukturer/scener/` | En scen per struktur, `<id>.yaml` |
@@ -76,12 +76,23 @@ delar:
 | `stallning` | `sta`, `staHanderFram`, `kasta`, `handUpp`, `highFiveH`, `halla`, `armarIKors`, `tanka`, `pekaH`, `gaH`, `handPaAxel`, `sitta` och fler i `STALLNINGAR` i `figur.mjs` |
 | `ansikte` | `glad`, `skratt`, `prata`, `tanka`, `skriva`, `kisa`, eller `bak` för en figur som syns bakifrån |
 | `tittar`, `lutar`, `pekar` | En punkt `[x, y]` eller ett namn i scenen: en sak, en `punkt`, en figur (dess huvud) eller `figur.V`, `figur.H`, `figur.axelV`, `figur.axelH` |
-| `nar` | `{ V: mål, H: mål }`: handen når målet, och armen räknas ut med två leder |
+| `nar` | `{ V: mål, H: mål }`: handen når målet, och armen räknas ut med två leder. När handen håller något framför bålen, mellan bröstet och magen, går armbågen nedåt längs sidan och underarmen upp mot handen, som när man håller ett papper mot bröstet. Det gäller en stående figur och en hand som håller en sak (`hand` på saken); en sittande som visar med handen och en arm med `armarEfter` behåller armbågen ute |
+| `armbage` | `ned` eller `ut`: avgör armbågen för händerna i `nar` i stället för motorn, som `ned` för kort som hålls mot bröstet vid ett bord |
 | `armarEfter` | Namnet på en sak som armarna ska ritas efter, som papperet på ett bord |
 | `utanBen` | Figuren är en byst, bakom ett bord eller längst fram i bilden |
 | `trojan`, `byxor`, `hud`, `bygg`, `storlek` | Sätts av motorn ur figurens plats; sätt dem bara med skäl |
 
-Saker: `bord`, `papper` (med `rader`, `symbol`, `symbolStorlek` och `symbolPlats`, `rutnat: [kolumner, rader]` för en bricka eller spalter, eller `rutor: 4` för fyra fält och en ruta i mitten, bara Mötas på mitten), `boll`, `kort`, `penna`, `klocka`, `tavla` (med `rutor` eller `rader`), `skarm` (ett skydd mellan två), `pusselbit` (med `knoppar` och `symbol`), `symbol` (en symbol var som helst, med `namn` och storleken `s`), `tarning`, `markor`, `pil`, `rorelse`, `stralar`, `golvring`, `golvlinje` och `punkt` (ett namn att peka mot, som inte ritas). En sak kan sitta i en hand med `hand: [figurens namn, V eller H]`; den kan vara mål först när den är ritad.
+Saker: `bord`, `papper` (med `rader`, `symbol`, `symbolStorlek` och `symbolPlats`, `rutnat: [kolumner, rader]` för en bricka eller spalter, eller `rutor: 4` för fyra fält och en ruta i mitten, bara Mötas på mitten), `boll`, `kort`, `penna`, `klocka`, `tavla` (med `rutor` eller `rader`), `skarm` (ett skydd mellan två), `pusselbit` (med `knoppar` och `symbol`), `symbol` (en symbol var som helst, med `namn` och storleken `s`), `tarning`, `markor`, `pil`, `rorelse`, `stralar`, `golvring`, `golvlinje`, `dorr`, `mapp` och `punkt` (ett namn att peka mot, som inte ritas). En sak kan sitta i en hand med `hand: [figurens namn, V eller H]`; den kan vara mål först när den är ritad.
+
+| Saken | Fälten utöver platsen |
+|---|---|
+| `papper` med `rutnat` | `rader` i rutorna: ett tal för alla, eller en lista med ett tal per ruta, rad för rad, som `[4, 1]` för en full vänsterspalt och en nästan tom högerspalt. Utan `rader` är rutorna tomma. Rutan med symbolen får inga rader |
+| `klocka` | `tid`: den del av varvet som har gått, från tolv till visaren, som en fylld tårtbit (`farg`, förval rött), som i PPT – Par på tid. Utan `tid` har klockan två visare |
+| `penna` | `bredd`: tjockleken, förval 7,2. En penna från 12 och uppåt får vässad spets, stift och suddgummi, som Kloka pennans stora penna |
+| `boll` | Formen och vecken ur ett eget frö, `fro` eller bollens plats, så att bollarna i en hög skiljer sig |
+| `golvlinje`, `golvring` | `tjock`: strecket, förval 0,7; från 1,2 och uppåt också lite mörkare. En tjock linje i stället för flera bredvid varandra |
+| `dorr` | (x, y) är tröskelns mitt, `b` och `h` karmens mått, `glant` den del av öppningen som syns förbi dörrbladet (0 stängd, 1 öppen), `sida` gångjärnens sida, V eller H |
+| `mapp` | (x, y) är mitten, `b` och `h` hela mappens mått. Uppslagen med ryggen i mitten och fickan till höger med `blad` papper som sticker upp, eller `uppslagen: false` med ryggen till vänster |
 
 Symbolerna i bubblor, på papper och kort: `triangel`, `kvadrat`, `cirkel`, `stjarna`, `hjarta`, `penna`, `kugghjul`, `hand`, `bok`, `fraga`, `utrop`, `bock` och `kryss`, med en färg efter kolon, som `cirkel:bla`.
 
@@ -103,7 +114,8 @@ Det här lärde pilotbilderna (2026-10-31). Rita, titta på bilden i full storle
 | Det som skiljer | Läs stegen och leta efter det som bara den här strukturen har: lapparna i luften, ringen som flyttar, rutan i mitten, papperet som går runt, kortet på ryggen. Det ska synas först |
 | Det som skiljer ligger aldrig platt på bordet | Det hålls upp, står upp eller syns i luften, stort och mitt i bilden, så att det syns också i 300 punkter. Granskningen av alla 85 bilder (2026-10-31): 33 bilder var fyra elever runt ett bord sedda från samma håll, och det som skilde dem låg på bordsskivan och blev prickar. Förebilderna är klockan i PPT, ringpilen i Rondellen, skärmen i Lika och olika, dörren i Lär varandra och kortet på ryggen i Vem är jag? |
 | Bubblan bär strukturens eget tecken | Inte en triangel för att en bubbla ska ha något: 53 av 85 bilder hade en röd triangel. Visar bubblan inget som bara den här strukturen har, tas den bort |
-| Ett upphållet blad är inget kännetecken | Andra granskningen av arket (2026-11-01): när det platta kännetecknet lyftes upp blev "en håller upp ett blad" så vanligt att 5-3-1, Par-pussel, Provet två gånger, Trestegsintervju och Läs och fråga såg likadana ut. Håll upp ett blad bara när strukturen handlar om att visa det. Leta annars efter det strukturen gör: paren som sitter isär, två likadana kopior, den som tiger, papperet i luften mitt i överlämningen |
+| Ett upphållet blad är inget kännetecken | Andra granskningen av arket (2026-11-01): när det platta kännetecknet lyftes upp blev "en håller upp ett blad" så vanligt att 5-3-1, Par-pussel, Provet två gånger, Trestegsintervju och Läs och fråga såg likadana ut. Håll upp ett blad bara när strukturen handlar om att visa det. Leta annars efter det strukturen gör: paren som sitter isär, två likadana kopior, den som tiger, papperet i luften mitt i överlämningen. Ett gult kort som hålls upp vid bordet har bara Flashcardlek, där steget är att hålla upp kortet och läsa frågan (tredje varvet) |
+| En lärare | Läraren är vuxen och ska synas som lärare: `storlek` omkring 1,3, så att hen är tydligt längre än eleverna, `byxor: gra`, och vid tavlan när scenen har plats. Förebilden är Provet två gånger (granskningen av arket, tredje varvet: läraren i samma storlek som eleverna lästes som en elev) |
 | Bordet är inte självklart | En grupp kan stå, sitta i en ring utan bord, ses snett ovanifrån eller tätt inpå. Välj det håll som visar kännetecknet bäst, inte det som förra bilden hade |
 
 

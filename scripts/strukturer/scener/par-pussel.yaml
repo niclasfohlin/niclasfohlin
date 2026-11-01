@@ -1,17 +1,19 @@
-# Par-pussel: fyrgruppen har delat sig i två par som sitter på var sin plats i rummet, och varje par löser sin egen uppgift, det gula med triangeln och det blå med kvadraten, innan de går tillbaka och lär varandra.
+# Par-pussel: fyrgruppen har delat sig i två par som sitter på var sin plats i rummet, och varje par löser sin egen uppgift,
+# det ena med triangeln och det andra med kvadraten, innan de går tillbaka och lär varandra. Alla fyra har samma tröjfärg,
+# så att de syns som en fyrgrupp i två delar och inte som två grupper (granskningen av arket, tredje varvet).
 id: par-pussel
 skala: 78
 djupRam: [250, 520]
 delar:
-  - figur: { namn: a1, x: 178, y: 282, stallning: sitta, utanBen: true, trojan: gul, ansikte: skriva, tittar: aUppgift, lutar: aUppgift, nar: { H: [226, 266] }, armarEfter: aUppgift }
-  - figur: { namn: a2, x: 288, y: 282, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: a1, lutar: aUppgift, pekar: { mal: aUppgift, dx: -2, dy: 10 }, armarEfter: aUppgift }
+  - figur: { namn: a1, x: 178, y: 282, stallning: sitta, utanBen: true, trojan: gron, ansikte: skriva, tittar: aUppgift, lutar: aUppgift, nar: { H: [226, 266] }, armarEfter: aUppgift }
+  - figur: { namn: a2, x: 288, y: 282, stallning: sitta, utanBen: true, trojan: gron, ansikte: prata, tittar: a1, lutar: aUppgift, pekar: { mal: aUppgift, dx: -2, dy: 10 }, armarEfter: aUppgift }
   - bord: { x: 120, y: 330, b: 220, d: 80, h: 45, snett: 16 }
   - papper: { namn: aUppgift, x: 236, y: 288, b: 84, h: 48, vinkel: -4, rader: 0, symbol: triangel, symbolStorlek: 0.3, symbolPlats: [0.24, 0.02] }
   - penna: { x: 216, y: 290, vinkel: 150, l: 36 }
-  - figur: { namn: b1, x: 556, y: 448, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: b2, lutar: bUppgift, pekar: { mal: bUppgift, dx: 10, dy: 12 }, armarEfter: bUppgift }
-  - figur: { namn: b2, x: 680, y: 448, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: skriva, tittar: bUppgift, lutar: bUppgift, nar: { V: [630, 424] }, armarEfter: bUppgift }
+  - figur: { namn: b1, x: 556, y: 448, stallning: sitta, utanBen: true, trojan: gron, ansikte: prata, tittar: b2, lutar: bUppgift, pekar: { mal: bUppgift, dx: 10, dy: 12 }, armarEfter: bUppgift }
+  - figur: { namn: b2, x: 680, y: 448, stallning: sitta, utanBen: true, trojan: gron, ansikte: skriva, tittar: bUppgift, lutar: bUppgift, nar: { V: [630, 424] }, armarEfter: bUppgift }
   - bord: { x: 486, y: 502, b: 260, d: 92, h: 50, snett: 18 }
   - papper: { namn: bUppgift, x: 620, y: 452, b: 92, h: 54, vinkel: 4, rader: 2, symbol: kvadrat, symbolStorlek: 0.3 }
   - penna: { x: 638, y: 456, vinkel: 210, l: 38 }
-  - bubbla: { till: a2, dx: 30, dy: 44, symboler: [triangel], visar: "Det gula paret löser sin uppgift, triangeln, på sin plats" }
-  - bubbla: { till: b1, dx: -40, dy: 44, symboler: [kvadrat], visar: "Det blå paret löser en annan uppgift, kvadraten, på en annan plats i rummet" }
+  - bubbla: { till: a2, dx: 30, dy: 44, symboler: [triangel], visar: "Det ena paret ur fyrgruppen löser sin uppgift, triangeln, på sin plats" }
+  - bubbla: { till: b1, dx: -40, dy: 44, symboler: [kvadrat], visar: "Det andra paret ur samma fyrgrupp löser en annan uppgift, kvadraten, på en annan plats i rummet" }

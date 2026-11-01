@@ -4,10 +4,7 @@ skala: 72
 djup: false
 fokus: kommer
 delar:
-  - kort: { x: 132, y: 300, b: 118, h: 236, farg: '#ffffff' }
-  - kort: { x: 132, y: 302, b: 102, h: 226, farg: '#d8dbe0' }
-  - kort: { x: 94, y: 306, b: 40, h: 234, vinkel: 2, farg: '#ecd9b4' }
-  - markor: { x: 104, y: 312, r: 6, farg: '#9a9aa2' }
+  - dorr: { x: 132, y: 418, b: 118, h: 236, glant: 0.6 }
   - figur: { namn: gron, x: 440, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: prata, tittar: kommer, lutar: kommer, nar: { V: [380, 330] } }
   - figur: { namn: rosa, x: 556, y: 392, stallning: sitta, utanBen: true, trojan: rosa, ansikte: glad, lutar: kommer }
   - figur: { namn: bla, x: 668, y: 392, stallning: sitta, utanBen: true, storlek: 1, trojan: bla, ansikte: prata, lutar: kommer, nar: { V: [628, 360] }, armarEfter: efterBordet }

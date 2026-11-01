@@ -87,9 +87,11 @@ export function ritaScen(scen) {
   // Ett mål (pekar, nar, tittar, lutar) är en punkt [x, y], namnet på en sak eller figur i scenen, eller { mal, dx, dy }
   // för en punkt en bit från ett namn. En figurs namn ger dess huvud, och namn.V eller namn.H dess hand och namn.axelV
   // eller namn.axelH dess axel, när figuren redan är ritad. En sak i en hand har sin plats först när den är ritad.
-  const namngivna = {}, ritade = {}, iHand = new Set();
+  const namngivna = {}, ritade = {}, iHand = new Set(), haller = {};
   for (const d of utvidga(scen.delar || [])) {
     const [slag] = Object.keys(d), o = d[slag];
+    // Händerna som håller en sak: figuren får dem, så att armbågen går nedåt när saken hålls framför bålen.
+    if (o?.hand) (haller[o.hand[0]] ||= new Set()).add(o.hand[1]);
     if (o?.namn && slag !== 'figur') { if (o.hand) iHand.add(o.namn); else namngivna[o.namn] = [o.x, o.y]; }
     if (o?.namn && slag === 'figur') {
       // Innan figuren är ritad: huvudet och axlarna uppskattade ur var den står, för en stående eller en sittande figur
@@ -136,6 +138,7 @@ export function ritaScen(scen) {
         // omgång F: sju av elva bilder hade lyssnare som satt rakt fram med slutna ögon).
         pekar: punkt(o.pekar), tittar: punkt(o.tittar ?? (o.ansikte === 'bak' || o.fokus === false ? undefined : scen.fokus)), lutar: punkt(o.lutar),
         nar: o.nar && Object.fromEntries(Object.entries(o.nar).map(([k, v]) => [k, punkt(v)])),
+        haller: [...(haller[o.namn] || [])],
         bygg: o.bygg ?? BYGG[(i + (scen.byggStart || 0)) % BYGG.length],
         storlek: o.storlek ?? STORLEK[(i * 2 + 1) % STORLEK.length],
         skala: (o.skala || skala) * djupskala(scen, o.y),

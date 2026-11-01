@@ -1,25 +1,27 @@
-# Bygga en triangel: gruppen har lagt begreppskorten i en triangel, och en håller upp det viktigaste kortet för att lägga det överst, medan en annan frågar varför.
+# Bygga en triangel: gruppen har satt upp begreppskorten i en triangel på tavlan, med det viktigaste överst, och står
+# runt den. En pekar på kortet i toppen och säger varför det är viktigast, och en annan pekar dit och frågar varför.
+# Triangeln står upp på väggen och inte platt på ett bord, så att den inte förväxlas med 5-3-1:s tratt på bordet
+# (granskningen av arket, tredje varvet), och ingen håller upp ett kort.
 id: bygga-en-triangel
-skala: 72
+skala: 70
 djup: false
-fokus: hallet
+luft: 0.06
+fokus: toppen
 delar:
-  - figur: { namn: lagger, x: 418, y: 392, stallning: sitta, utanBen: true, trojan: gron, ansikte: prata, tittar: fragar, lutar: toppen, nar: { H: [494, 318] }, armarEfter: kortet }
-  - figur: { namn: fragar, x: 590, y: 392, stallning: sitta, utanBen: true, trojan: rosa, ansikte: glad, tittar: hallet, pekar: { mal: toppen, dx: 6, dy: -4 }, armarEfter: toppen }
-  - figur: { namn: sidaV, x: 258, y: 528, utanBen: true, trojan: gul, ansikte: tanka, tittar: toppen, lutar: toppen, nar: { H: [318, 420] }, armarEfter: toppen }
-  - figur: { namn: sidaH, x: 700, y: 532, utanBen: true, trojan: ljusbla, ansikte: glad, lutar: toppen, nar: { V: [636, 422] }, armarEfter: toppen }
-  - bord: { x: 290, y: 466, b: 360, d: 122, h: 55, snett: 20 }
-  - papper: { x: 414, y: 446, b: 36, h: 24, vinkel: -3, rader: 2 }
-  - papper: { x: 454, y: 446, b: 36, h: 24, vinkel: 2, rader: 2 }
-  - papper: { x: 494, y: 446, b: 36, h: 24, vinkel: -2, rader: 2 }
-  - papper: { x: 534, y: 446, b: 36, h: 24, vinkel: 3, rader: 2 }
-  - papper: { x: 437, y: 418, b: 36, h: 24, vinkel: 2, rader: 2 }
-  - papper: { x: 477, y: 418, b: 36, h: 24, vinkel: -3, rader: 2 }
-  - papper: { x: 517, y: 418, b: 36, h: 24, vinkel: 2, rader: 2 }
-  - papper: { x: 460, y: 390, b: 36, h: 24, vinkel: -2, rader: 2 }
-  - papper: { x: 500, y: 390, b: 36, h: 24, vinkel: 3, rader: 2 }
-  - punkt: { namn: toppen, x: 482, y: 362 }
-  - punkt: { namn: hallet, x: 500, y: 306 }
-  - kort: { namn: kortet, hand: [lagger, H], dx: 8, dy: -12, b: 46, h: 34, vinkel: 6, farg: '#f3dc8e', symbol: stjarna }
-  - bubbla: { till: lagger, dx: -50, dy: 40, symboler: [stjarna], visar: "Den som håller upp det översta kortet säger varför det är viktigast" }
-  - bubbla: { till: fragar, dx: 50, dy: 40, symboler: [fraga], visar: "En annan frågar varför: gruppen måste kunna motivera ordningen" }
+  - tavla: { x: 450, y: 300, b: 290, h: 236 }
+  - papper: { x: 366, y: 362, b: 48, h: 32, vinkel: -2, rader: 2 }
+  - papper: { x: 422, y: 362, b: 48, h: 32, vinkel: 2, rader: 2 }
+  - papper: { x: 478, y: 362, b: 48, h: 32, vinkel: -1, rader: 2 }
+  - papper: { x: 534, y: 362, b: 48, h: 32, vinkel: 3, rader: 2 }
+  - papper: { x: 394, y: 316, b: 48, h: 32, vinkel: 1, rader: 2 }
+  - papper: { x: 450, y: 316, b: 48, h: 32, vinkel: -3, rader: 2 }
+  - papper: { x: 506, y: 316, b: 48, h: 32, vinkel: 2, rader: 2 }
+  - papper: { x: 422, y: 270, b: 48, h: 32, vinkel: -2, rader: 2 }
+  - papper: { x: 478, y: 270, b: 48, h: 32, vinkel: 2, rader: 2 }
+  - papper: { namn: toppen, x: 450, y: 222, b: 52, h: 34, vinkel: -1, rader: 0, symbol: stjarna, symbolPlats: [0, 0], symbolStorlek: 0.36 }
+  - figur: { namn: bredvidV, x: 186, y: 520, trojan: gul, ansikte: glad, tittar: toppen, lutar: toppen }
+  - figur: { namn: forklarar, x: 270, y: 526, trojan: gron, ansikte: prata, tittar: fragar, lutar: toppen, pekar: { mal: toppen, dx: -18, dy: 4 } }
+  - figur: { namn: fragar, x: 632, y: 526, trojan: rosa, ansikte: glad, tittar: forklarar, lutar: toppen, pekar: { mal: toppen, dx: 20, dy: 6 } }
+  - figur: { namn: bredvidH, x: 716, y: 520, trojan: ljusbla, ansikte: tanka, tittar: toppen, lutar: toppen }
+  - bubbla: { till: forklarar, dx: -40, dy: 40, symboler: [stjarna], visar: "Den som pekar på kortet i toppen säger varför det är viktigast" }
+  - bubbla: { till: fragar, dx: 40, dy: 40, symboler: [fraga], visar: "En annan frågar varför: gruppen måste kunna motivera ordningen" }

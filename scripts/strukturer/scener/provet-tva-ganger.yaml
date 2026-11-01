@@ -1,25 +1,27 @@
 # Provet två gånger: provet är skrivet, och en elev håller sina två likadana kopior, en i varje hand. Den ena lämnas
-# till läraren, som redan har gruppens andra kopior, och den andra behåller eleven för att jämföra i gruppen.
+# till läraren, som redan har gruppens andra kopior i sin mapp, och den andra behåller eleven för att jämföra i gruppen.
+# Läraren är vuxen: tydligt längre än eleverna, i grå byxor, och står vid tavlan (granskningen av arket, tredje varvet:
+# läraren såg ut som en elev).
 id: provet-tva-ganger
-skala: 74
+skala: 72
 djup: false
 fokus: elev
 delar:
-  - figur: { namn: bakV, x: 490, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, lutar: elev }
-  - figur: { namn: bakH, x: 646, y: 394, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, lutar: elev }
-  - bord: { x: 420, y: 450, b: 300, d: 100, h: 60, snett: 20 }
+  - tavla: { x: 150, y: 196, b: 230, h: 120, rader: 3 }
+  - figur: { namn: bakV, x: 500, y: 392, stallning: sitta, utanBen: true, trojan: gul, ansikte: glad, lutar: elev }
+  - figur: { namn: bakH, x: 652, y: 394, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, lutar: elev }
+  - bord: { x: 430, y: 450, b: 296, d: 100, h: 60, snett: 20 }
   # De andras behållna kopior på bordet.
-  - papper: { x: 512, y: 382, b: 56, h: 44, vinkel: -4, rader: 3 }
-  - kort: { x: 533, y: 380, b: 20, h: 18, vinkel: -4, symbol: cirkel }
-  - papper: { x: 626, y: 384, b: 56, h: 44, vinkel: 5, rader: 3 }
-  - kort: { x: 647, y: 386, b: 20, h: 18, vinkel: 5, symbol: kvadrat }
-  - figur: { namn: elev, x: 336, y: 500, trojan: rosa, ansikte: glad, tittar: lararen, fokus: false, nar: { V: [262, 372], H: [400, 380] } }
-  - figur: { namn: lararen, x: 150, y: 500, storlek: 1.1, trojan: lila, ansikte: glad, tittar: elev, fokus: false, nar: { V: [116, 376], H: [228, 364] } }
-  # Lärarens hög med gruppens kopior.
-  - papper: { hand: [lararen, V], dx: 8, dy: -10, b: 52, h: 64, vinkel: -14, rader: 4 }
-  - papper: { hand: [lararen, V], dx: 12, dy: -14, b: 52, h: 64, vinkel: -8, rader: 4 }
+  - papper: { x: 522, y: 382, b: 56, h: 44, vinkel: -4, rader: 3 }
+  - kort: { x: 543, y: 380, b: 20, h: 18, vinkel: -4, symbol: cirkel }
+  - papper: { x: 632, y: 384, b: 56, h: 44, vinkel: 5, rader: 3 }
+  - kort: { x: 653, y: 386, b: 20, h: 18, vinkel: 5, symbol: kvadrat }
+  - figur: { namn: lararen, x: 130, y: 520, storlek: 1.32, trojan: lila, byxor: gra, ansikte: glad, tittar: elev, fokus: false, nar: { V: [110, 352], H: [232, 352] } }
+  # Lärarens mapp med gruppens kopior, mot bröstet.
+  - mapp: { hand: [lararen, V], dx: 6, dy: -4, b: 58, h: 76, vinkel: -4, uppslagen: false, blad: 2, farg: '#9bbae0' }
+  - figur: { namn: elev, x: 350, y: 506, trojan: rosa, ansikte: glad, tittar: lararen, fokus: false, nar: { V: [262, 360], H: [412, 384] } }
   # Elevens två likadana kopior, en i varje hand, med samma svar i rutan: den ena lämnas, den andra behålls.
-  - papper: { hand: [elev, V], dx: -14, dy: -24, b: 60, h: 76, vinkel: -6, rader: 4 }
-  - kort: { hand: [elev, V], dx: 0, dy: -44, b: 26, h: 23, vinkel: -6, symbol: cirkel }
-  - papper: { hand: [elev, H], dx: 8, dy: -24, b: 60, h: 76, vinkel: 6, rader: 4 }
-  - kort: { hand: [elev, H], dx: 22, dy: -42, b: 26, h: 23, vinkel: 6, symbol: cirkel }
+  - papper: { hand: [elev, V], dx: -12, dy: -24, b: 58, h: 74, vinkel: -6, rader: 4 }
+  - kort: { hand: [elev, V], dx: 2, dy: -43, b: 25, h: 22, vinkel: -6, symbol: cirkel }
+  - papper: { hand: [elev, H], dx: 8, dy: -24, b: 58, h: 74, vinkel: 6, rader: 4 }
+  - kort: { hand: [elev, H], dx: 22, dy: -42, b: 25, h: 22, vinkel: 6, symbol: cirkel }
