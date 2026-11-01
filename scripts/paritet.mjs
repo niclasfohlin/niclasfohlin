@@ -263,13 +263,18 @@ for (const fil of filer) {
   const word = norm(avkoda([xml, ...huvudOchFot].join(' ').replace(/<[^>]+>/g, '')));
   // Det sajten väver in (src/lib/vav.ts): knappen i början är gränsen (K-668). En metod med knappen har varje plats delar som
   // länkar i Word-filen, och en metod utan den har inga.
-  const vavt = VAVT.get(id) ?? [];
-  // Knappen i rutan på platsen (Vavruta.astro) är inte knappen i början.
-  const knappen = /<a class="[^"]*knapp[^"]*" href="\/strukturer"/.test(html.replace(/<aside class="vav[\s\S]*?<\/aside>/g, ''));
-  if (knappen !== vavt.length > 0) { console.error(`paritet: ${id} ${knappen ? 'har knappen Strukturer men ingen sådd i Word' : 'har sådden i Word men inte knappen i början'} (vavIWord i src/lib/vav.ts).`); fel++; }
-  const iLankar = [...new Set([...wordLankar.matchAll(/Target="[^"]*(\/strukturer\/[a-z0-9-]+)"/g)].map((x) => x[1]))].sort().join();
-  const iVav = [...new Set(vavt.flatMap((v) => v.delar.map((x) => x.adress)))].sort().join();
-  if (iLankar !== iVav) { console.error(`paritet: ${id}.docx har länkarna ${iLankar || 'inga'} till strukturerna, men sådden har ${iVav || 'inga'} (en plats i metoddocx.ts som inte frågar filmVid?).`); fel++; }
+  // Varje plats räknas, utom vid en strukturs egen sida, där namnen står samlade en gång först i Materialet (metoddocx.ts).
+  const sidornasRamar = new Set((d.ramar?.ramar ?? []).filter(arStruktur).map((r) => r.rubrik));
+  for (const c of CENTRALA.filter((x) => x.vav)) {
+    const vavt = (VAVT.get(id) ?? []).filter((v) => v.verktyg.namn === c.namn);
+    // Knappen i rutan på platsen (Vavruta.astro) är inte knappen i början.
+    const knappen = new RegExp(`<a class="[^"]*knapp[^"]*" href="${c.adress}"`).test(html.replace(/<aside class="vav[\s\S]*?<\/aside>/g, ''));
+    if (knappen !== vavt.length > 0) { console.error(`paritet: ${id} ${knappen ? `har knappen ${c.namn} men ingen sådd i Word` : `har sådden i Word men inte knappen ${c.namn} i början`} (vavIWord i src/lib/vav.ts).`); fel++; }
+    const iLankar = [...wordLankar.matchAll(new RegExp(`Target="[^"]*(${c.adress}/[a-z0-9-]+)"`, 'g'))].map((x) => x[1]).sort().join();
+    const adresser = (rader) => rader.flatMap((v) => v.delar.map((x) => x.adress));
+    const iVav = [...adresser(vavt.filter((v) => !sidornasRamar.has(v.vid.ram))), ...new Set(adresser(vavt.filter((v) => sidornasRamar.has(v.vid.ram))))].sort().join();
+    if (iLankar !== iVav) { console.error(`paritet: ${id}.docx har länkarna ${iLankar || 'inga'} till ${c.namn}, men sådden har ${iVav || 'inga'} (en plats i metoddocx.ts som inte frågar filmVid?).`); fel++; }
+  }
   // De centrala sakerna (src/lib/centrala.ts): metodens sida har knappen till saken, och Word-filen raden med namnet och
   // adressen. Platsen sätts av samma kod i båda; här prövas att ingen av dem faller bort (granskningen 2026-10-14).
   for (const x of d.centrala ?? []) {

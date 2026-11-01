@@ -3367,7 +3367,9 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     // En strukturs egen sida (strukturAv) är ett fullt A4 för eleverna, och en rad före eller efter den fick ofta en egen sida.
     // Det sajten väver in vid de sidorna står därför en gång här, med varje namn en gång, där texten alltid löper (K-668).
     const vidSidorna = vavRader(...d.ramar.ramar.filter((r) => strukturAv(r)).map((r) => ({ ram: r.rubrik })));
-    if (vidSidorna.length) ut.push(...vavBarn([{ ...vidSidorna[0], delar: [...new Map(vidSidorna.flatMap((v) => v.delar).map((x) => [x.adress, x])).values()] }], bas, true));
+    const samlade = new Map<string, VavIWord>();
+    for (const v of vidSidorna) { const nyckel = `${v.verktyg.namn}|${v.etikett}`; samlade.set(nyckel, { ...v, delar: [...new Map([...(samlade.get(nyckel)?.delar ?? []), ...v.delar].map((x) => [x.adress, x])).values()] }); }
+    ut.push(...vavBarn([...samlade.values()], bas, true));
     ut.push(...ljudRader(d));
     const boksidor = lastexter(d.ramar.ramar);
     const ramarna = d.ramar.ramar;
