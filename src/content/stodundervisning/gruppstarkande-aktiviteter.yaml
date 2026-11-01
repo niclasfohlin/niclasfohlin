@@ -26,12 +26,14 @@ material:
   - Lärarens skattning
   - bladet Vår grupp
   - frågekort och meningar att avsluta
-uppdaterad: 2026-10-28
+uppdaterad: 2026-11-01
 publicerad: 2026-10-16
 centrala:
   - id: aktiviteter
     efterText: urval
   - id: brainbreaks
+    efterText: urval
+  - id: strukturer
     efterText: urval
 relaterade:
   - kompissamtal
@@ -311,6 +313,7 @@ urval:
   text:
     - Aktivitetskorten ligger på sidan Ta fram en aktivitet, ordnade i kategorier. Välj om du vill se ett kort eller sex, och tryck på en kategori. Varje tryck ger nya kort. Tryck på bocken i hörnet på de kort du vill ha, så hamnar de i listan att skriva ut. Slumpa igen, lägg till fler och skriv ut listan. Kortet är ett A4 med rubrikerna Så gör ni, Material och Att tänka på. Tiden på kortet gäller alla fem delarna, och kortet säger om eleverna rör vid varandra. En aktivitet som tar mer än 30 minuter, till exempel hälften av dem i Skapa och bygga, delar ni upp på två pass, och båda passen slutar med återkopplingen och tacket. I det andra passet säger en elev målet och var ni slutade, och sedan fortsätter ni i Genomför. Aktivitetens andra pass gör ni nästa gång ni har ett pass utan gruppreflektion. Gör gärna samma aktivitet flera gånger, eftersom gruppen samarbetar bättre i en aktivitet som den känner igen. Spara de kort som gruppen har gjort och vill göra igen.
     - "Brainbreakkorten ligger på sidan Ta fram en brainbreak, ordnade i kategorierna Rörelse, Dans & rytm, Lek, Hjärngympa och Lugn. Sidan slumpar fram sex ur alla eller ur en kategori, och gruppen väljer ett. Kortet visas stort med en klocka som är ställd på kortets minuter, och du kan sätta på glad och peppig musik, dansmusik och modern musik eller lugn och avslappnad musik från sidans radio. Du startar klockan och är själv med, och du avslutar genom att räcka upp handen och säga stopp. Ska gruppen orka mer efteråt, gör ni två eller tre pigga brainbreaks i rad och sist en lugn, så att pausen blir omkring tio minuter."
+    - "Flera aktiviteter är strukturer ur kooperativt lärande: Fråga, fråga, byt!, Speed-dejting, Berätta mera och Inre och yttre cirkel. Fler strukturer för samarbete i par och grupp finns på sidan Strukturer."
   kravText: "En aktivitet som du väljer, eller gör själv, ska klara fyra krav:"
   krav:
     - rubrik: Alla behövs
