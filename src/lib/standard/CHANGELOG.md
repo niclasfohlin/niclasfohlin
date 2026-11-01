@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.52.0, 2026-11-01
+
+- `undervisningsmetod.js` (riggens brev om Formativ bedömning): `delarnaAv`, delarna för en metod, där del 2 i slaget strategier heter Lagret, och `planerasNamn`, rubriken för planeringen efter slaget, Lagret på din planering i strategierna. `lasvagen` och lathunden läser dem. `relateradeAv`, det en metod hör ihop med, i Stödundervisning eller Metoder, med länken och raden under.
+
 ## 0.51.0, 2026-11-01
 
 - `strukturer.js` (sajtens K-669): `TOPPLISTANS_ANTAL`, sex, hur många strukturer topplistan visar och hur många som behöver ha besök innan den visas, så att korten fyller hela rader två i bredd och tre i bredd. Bygget och sidan läser samma tal.

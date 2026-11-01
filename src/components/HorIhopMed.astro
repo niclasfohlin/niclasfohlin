@@ -1,0 +1,13 @@
+---
+// Hör ihop med, på en metods sida i Stödundervisning och i Metoder (relateradeMetoder i src/lib/innehall.ts): metoderna i båda
+// samlingarna, med samlingen, området och årskursen på raden efter (Niclas 2026-11-01: "Både stöd och metoder ska funka för
+// det med EN rot").
+interface Props { relaterade: { titel: string; href: string; meta: string }[] }
+const { relaterade } = Astro.props;
+---
+{relaterade.length > 0 && (
+  <section class="relaterade">
+    <h2>Hör ihop med</h2>
+    <ul>{relaterade.map((r) => <li><a href={r.href}>{r.titel}</a>{' '}<span class="meta">{r.meta}</span></li>)}</ul>
+  </section>
+)}

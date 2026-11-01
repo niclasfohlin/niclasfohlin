@@ -1,3 +1,5 @@
+import { relateradeAv } from './standard/index.js';
+import { arskursText } from './metod';
 import { getCollection, type CollectionEntry, type CollectionKey } from 'astro:content';
 import taggarData from '../data/taggar.json';
 import publikationerData from '../data/publikationer.json';
@@ -28,7 +30,7 @@ export async function publicerade<K extends CollectionKey>(samling: K): Promise<
   return synliga;
 }
 
-// Hör ihop med (relaterade, metoder i Stödundervisning) och valkartans metoder (passar.metoder, metoder under Metoder) pekar
+// Hör ihop med (relaterade, metoder i Stödundervisning eller Metoder) och valkartans metoder (passar.metoder, metoder under Metoder) pekar
 // på poster som finns. Ett okänt id stoppar bygget, så att en länk aldrig försvinner utan att någon ser det (Niclas 2026-10-31:
 // "Det skulle funnits någon spärr eller test som hittat det jag frågar om"). Ett utkast finns: sidorna visar det inte, och
 // länken kommer av sig själv när utkastet publiceras. Prövas en gång per bygge, som provaAntal.
@@ -41,7 +43,7 @@ async function provaHanvisade(poster: CollectionEntry<'stodundervisning' | 'unde
   const fel = nya.flatMap((p) => {
     const d = p.data as { relaterade?: string[]; passar?: { metoder?: string[] } };
     return [
-      ...(d.relaterade ?? []).filter((id) => !stod.has(id)).map((id) => `${p.filePath ?? p.id}: relaterade nämner ${id}, som inte är en metod i src/content/stodundervisning/.`),
+      ...(d.relaterade ?? []).filter((id) => !stod.has(id) && !metoder.has(id)).map((id) => `${p.filePath ?? p.id}: relaterade nämner ${id}, som inte är en metod i src/content/stodundervisning/ eller src/content/undervisningsmetoder/.`),
       ...(d.passar?.metoder ?? []).filter((id) => !metoder.has(id)).map((id) => `${p.filePath ?? p.id}: passar.metoder nämner ${id}, som inte är en metod i src/content/undervisningsmetoder/.`),
     ];
   });
@@ -85,6 +87,12 @@ export async function matteproblemenPaSidan(): Promise<{ metod: CollectionEntry<
 export async function artiklarSorterade() {
   const poster = await publicerade('artiklar');
   return poster.sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime());
+}
+
+/** Det en metod hör ihop med, i båda samlingarna och bara det publicerade (relateradeAv i standarden). */
+export async function relateradeMetoder(d: object) {
+  const [stod, metoder] = await Promise.all([publicerade('stodundervisning'), publicerade('undervisningsmetoder')]);
+  return relateradeAv(d as { relaterade?: string[] }, { stod, metoder }, arskursText);
 }
 
 export async function metoderSorterade() {

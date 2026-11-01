@@ -12,7 +12,7 @@ import type { MetodSak } from '../lib/metodsaker';
 import { medSaker, type Um } from '../lib/undervisningsmetod';
 import { umLathundHuvud, umLathundSpalter } from '../lib/lathundsidor';
 import type { UmFil, UmSlag } from '../lib/undervisningsmetodfiler';
-// relaterade: metoderna i Stödundervisning som metoden hör ihop med (relateradeSidor), vars titlar blir länkar.
+// relaterade: metoderna som metoden hör ihop med (relateradeMetoder), vars titlar blir länkar.
 interface Props { d: Um; id: string; sidor: LathundSida[]; filer: Record<UmSlag, UmFil | undefined>; saker: MetodSak[]; relaterade: { titel: string; href: string }[] }
 const { d, id, sidor, filer, saker, relaterade } = Astro.props;
 // Hänvisningarna till källorna står som text: referensbladet står på metodens sida.

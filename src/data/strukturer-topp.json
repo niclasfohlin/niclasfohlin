@@ -1,4 +1,125 @@
 {
-  "datum": "2026-11-01T00:18:48.138Z",
-  "strukturer": []
+  "datum": "2026-11-01T20:51:04.246Z",
+  "strukturer": [
+    {
+      "id": "turas-om",
+      "antal": 8,
+      "besok": 3,
+      "utskrifter": 1
+    },
+    {
+      "id": "beratta-mera",
+      "antal": 6,
+      "besok": 1,
+      "utskrifter": 1
+    },
+    {
+      "id": "epa",
+      "antal": 6,
+      "besok": 1,
+      "utskrifter": 1
+    },
+    {
+      "id": "inspireras",
+      "antal": 6,
+      "besok": 1,
+      "utskrifter": 1
+    },
+    {
+      "id": "kloka-pennan",
+      "antal": 6,
+      "besok": 1,
+      "utskrifter": 1
+    },
+    {
+      "id": "lyssna-och-skriv",
+      "antal": 6,
+      "besok": 1,
+      "utskrifter": 1
+    },
+    {
+      "id": "ping-pong-prat",
+      "antal": 6,
+      "besok": 1,
+      "utskrifter": 1
+    },
+    {
+      "id": "laxkontroll-i-grupp",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "byt-och-sortera",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "en-far-ga",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "huvuden-ihop",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "karusellen",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "kims-prov",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "kooperativ-fyrfaltare",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "kooperativ-redovisning",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "kunskapskedjan",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "lar-klassen",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "motas-pa-mitten",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "rosta",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "rubriceringsspel",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    }
+  ]
 }

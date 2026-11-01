@@ -3,7 +3,7 @@
 // Modulen läser inga filer, så att sidans skript kan läsa den; filerna läser src/lib/undervisningsmetodfiler.ts.
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
-import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasText, utfallensGranser, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, utfallensGranser, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
 // (K-627), så sidan läser resten som metodens fil har det.
@@ -11,12 +11,6 @@ import { esc, tidensMatt, periodensLangd, UNDERVISNINGSMETODENS_DELAR, delarnasT
 export type Um = CollectionEntry<'undervisningsmetoder'>['data'] & Record<string, any>;
 
 export const metodensAdress = (id: string) => `/metoder/${id}`;
-/**
- * Metoderna i Stödundervisning som metoden hör ihop med (relaterade), som sidor: deras titlar blir länkar i texten (medSaker).
- * stod är de publicerade metoderna, så att ett utkast står utanför tills det publiceras; ett id som inte finns stoppar bygget
- * redan när metoderna läses (provaHanvisade i src/lib/innehall.ts).
- */
-export const relateradeSidor = (d: Um, stod: { id: string; data: { titel: string } }[]) => (d.relaterade ?? []).map((rid: string) => stod.find((x) => x.id === rid)).filter((x: unknown): x is { id: string; data: { titel: string } } => !!x).map((x: { id: string; data: { titel: string } }) => ({ titel: x.data.titel, href: `/stodundervisning/${x.id}` }));
 
 /** Filerna som riggen bygger, i nedladdningens ordning (Ladda ner och skriv ut, som i Stödundervisning). */
 export type UmSlag = 'allt' | 'metoden' | 'lathund' | 'lektionskort' | 'planeringsmall' | 'materialet' | 'observation' | 'referensblad';
@@ -142,7 +136,7 @@ export function metodensDelar(d: Um) {
   const veckor = periodensLangd(d.period)?.min;
   const huvud = (d.amnesexempel ?? []).find((e: { huvud?: boolean }) => e.huvud);
   const andra = (d.amnesexempel ?? []).filter((e: { huvud?: boolean }) => !e.huvud).length;
-  return UNDERVISNINGSMETODENS_DELAR.map((del) => ({ ...del, ...delarnasText(del, { minuter, veckor, amne: huvud ? (huvud.amnesnamn?.toLocaleLowerCase('sv') ?? AMNEN[huvud.amne]) : undefined, andra, progression: d.progression?.text }) }));
+  return delarnaAv(d).map((del) => ({ ...del, ...delarnasText(del, { minuter, veckor, amne: huvud ? (huvud.amnesnamn?.toLocaleLowerCase('sv') ?? AMNEN[huvud.amne]) : undefined, andra, progression: d.progression?.text }) }));
 }
 
 /** En hänvisnings nyckel som riggens id för källan: å och ä som a, ö som o, é som e, m.fl. som m-fl, och året sist. */

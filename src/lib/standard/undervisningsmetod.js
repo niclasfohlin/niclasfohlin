@@ -23,6 +23,30 @@ export const UNDERVISNINGSMETODENS_DELAR = [
 ];
 
 /**
+ * Delarna för en metod. I slaget strategier är del 2 ett lager som läraren lägger över sin egen planering, och ingen lektion på
+ * ett antal minuter (Niclas 2026-11-01: "formativ bedömning är inte en lektion man planerar. Det är ett lager man lägger över
+ * sin egen planering"). Ankaret är detsamma.
+ * @param {Record<string, any>} d metodens fil
+ */
+export const delarnaAv = (d) => UNDERVISNINGSMETODENS_DELAR.map((x) => (x.id === 'lektionen' && d?.slag === 'strategier' ? { ...x, namn: 'Lagret', rad: 'Det du lägger över din planering, ställe för ställe.', text: 'Här står lagret ställe för ställe, med det du gör och säger. Sedan ser du det i en lektion i {amne} och i {andra} andra ämnen.' } : x));
+
+/**
+ * Det en metod hör ihop med (fältet relaterade), i Stödundervisning eller Metoder: en rot för båda samlingarnas sidor, lathunden
+ * och länkarna i texten (Niclas 2026-11-01: "Både stöd och metoder ska funka för det med EN rot"). stod och metoder är de
+ * publicerade, så att ett utkast står utanför tills det publiceras; ett id som inte finns stoppar bygget redan när metoderna
+ * läses (provaHanvisade i src/lib/innehall.ts).
+ * @param {{ relaterade?: string[] }} d metodens fil
+ * @param {{ stod: { id: string, data: any }[], metoder: { id: string, data: any }[] }} poster
+ * @param {(data: any) => string} arskursAv
+ */
+export const relateradeAv = (d, { stod, metoder }, arskursAv) => (d?.relaterade ?? []).flatMap((id) => {
+  const s = stod.find((x) => x.id === id);
+  if (s) return [{ id, titel: s.data.titel, href: `/stodundervisning/${id}`, meta: `Stödundervisning · ${s.data.omrade} · ${arskursAv(s.data)}` }];
+  const m = metoder.find((x) => x.id === id);
+  return m ? [{ id, titel: m.data.titel, href: `/metoder/${id}`, meta: `Metoder · ${arskursAv(m.data)}` }] : [];
+});
+
+/**
  * En dels rad och text med metodens tal: minuterna i en lektion, veckorna att komma igång i ord, huvudexemplets ämne och
  * antalet andra exempel. Del 3:s text är metodens egen (`progression.text`).
  * @param {{ id: string, rad: string, text: string }} del
@@ -354,7 +378,7 @@ const ordI = (v) => (typeof v === 'string' ? v.split(/\s+/).filter(Boolean).leng
  * @param {Record<string, any>} d metodens fil
  */
 export function lasvagen(d) {
-  const delar = UNDERVISNINGSMETODENS_DELAR.slice(0, 3).map((x) => ({ namn: `Del ${x.nr}, ${x.namn}`, ankare: `del-${x.id}` }));
+  const delar = delarnaAv(d).slice(0, 3).map((x) => ({ namn: `Del ${x.nr}, ${x.namn}`, ankare: `del-${x.id}` }));
   const ord = ordI([d.inledning, d.roll, d.karna?.komponenter?.map((k) => [k.namn, k.vad]), d.tidsschema, d.steg, d.fastnar, (d.amnesexempel ?? []).find((e) => e.huvud), d.stod, d.checklista, d.klassen, d.forsta?.text, d.progression, d.rutiner, d.uppfoljning, d.uppdrag, d.hinder]);
   return { delar: [...delar, { namn: 'Det svåraste, i del 4', ankare: 'det-svaraste' }], minuter: Math.max(5, Math.round(ord / 180 / 5) * 5) };
 }
@@ -412,10 +436,12 @@ export function arbetslagetsMoten(d) {
  * lektionsförlopps form.
  */
 export const SLAGENS_FORM = Object.freeze({
-  lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna' }),
-  strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion', start: 'Första samarbetet med eleverna' }),
-  strategier: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna' }),
+  lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna', planera: 'Planera lektionen' }),
+  strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion', start: 'Första samarbetet med eleverna', planera: 'Planera lektionen' }),
+  strategier: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna', planera: 'Lagret på din planering' }),
 });
+/** Rubriken för planeringen på metodens sida och i lathunden, efter metodens slag. @param {Record<string, any>} d metodens fil */
+export const planerasNamn = (d) => (/** @type {Record<string, { planera: string }>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp).planera;
 /**
  * Dagen planen börjar på i Lär dig metoden, efter metodens slag: första lektionen, och i strukturerna det första samarbetet,
  * eftersom första hela lektionen kommer senare (granskningen inför lanseringen, F1). @param {Record<string, any>} d
@@ -595,7 +621,7 @@ export function lathundensSidor(d) {
       { id: 'minuterna', slag: 'minuter', rubrik: vagen?.kort ? vagen.kort.rubrik : lektionen.minuterna, delar: (vagen?.kort ? vagen.kort.minuter : forstaLektionensMinuter(d)).map((x) => ({ ...x, tid: x.tid.replace(/\s*min$/, '') })) },
       ...lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1').map((r, i) => /** @type {LathundDel} */ ({ id: `rutin-${i + 1}`, slag: 'rutin', rubrik: `Rutinen ${litenForsta(r.namn)}`, namn: r.namn, text: r.vad ?? '', steg: lista(r.steg) })),
     ] },
-    { id: 'planera', nr: 3, namn: 'Planera lektionen', delar: [
+    { id: 'planera', nr: 3, namn: planerasNamn(d), delar: [
       d.forsta?.plan
         ? { id: 'bladet', slag: 'planering', plan: d.forsta.plan, exempel: huvud, variant: 'första lektionen', gra: true, text: lektionen.forlagan }
         : { id: 'bladet', slag: 'planering', plan: huvud?.plan, exempel: huvud, gra: false },

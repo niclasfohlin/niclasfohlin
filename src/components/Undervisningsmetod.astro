@@ -8,14 +8,14 @@
 import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
-import { stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
+import { planerasNamn, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
 import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
 import Umfilknappar from './Umfilknappar.astro';
 import MetodTabell from './MetodTabell.astro';
-import { friTabellensKlass } from '../lib/metod';
+import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
 interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[]; strukturer?: ImporteradStruktur[] }
 const { d, id, extrafilmer, filer, bilder, sidor = [], saker, strukturer = [] } = Astro.props;
@@ -39,7 +39,7 @@ const FORSTA = d.forsta?.rubrik ?? forstaL.namn;
 // Delarnas celler under bandet: avsnitten som länkar, i formspråket C. Bara avsnitt som metoden har.
 const CELLER: Record<string, [string, string, unknown][]> = {
   metoden: [['det-har-ar', `Det här är ${d.titel.toLocaleLowerCase('sv')}`, true], ['i-korthet', KARNANS_KORT, d.karna], ['lararens-roll', 'Lärarens roll', d.roll]],
-  'kom-igang': [['fore-forsta', 'Före första lektionen', d.checklista], ['planera-lektionen', 'Planera lektionen', d.amnesexempel?.some((e: { plan?: unknown }) => e.plan)], ['forsta-lektionen', FORSTA, d.forsta], ['de-forsta-veckorna', 'De första veckorna', d.progression], ['efter-de-forsta-veckorna', 'Efter de första veckorna', true], ['till-arbetslaget', 'Till arbetslaget', d.uppdrag]],
+  'kom-igang': [['fore-forsta', 'Före första lektionen', d.checklista], ['planera-lektionen', planerasNamn(d), d.amnesexempel?.some((e: { plan?: unknown }) => e.plan)], ['forsta-lektionen', FORSTA, d.forsta], ['de-forsta-veckorna', 'De första veckorna', d.progression], ['efter-de-forsta-veckorna', 'Efter de första veckorna', true], ['till-arbetslaget', 'Till arbetslaget', d.uppdrag]],
   'hall-i': [['karnan', 'Kärnan: fast och fritt', d.karna], ['lararens-fragor', 'Lärarens frågor', d.lararensFragor], ['nar-det-glider', 'När det glider', true]],
   'att-skriva-ut': [['materialet', UM_NAMN.lektionskort, filer.lektionskort], ['strukturkorten', STRUKTURKORTEN, strukturer.length],['materialet-for-klassen', d.ramar?.rubrik ?? UM_NAMN.materialet, d.ramar], ['planeringsmallen', UM_NAMN.planeringsmall, d.planeringsmall], ['observationsmallen', UM_NAMN.observation, d.observation]],
   valet: [],
@@ -67,7 +67,7 @@ const rutinerFor = (vecka: string) => (d.rutiner?.rader ?? []).filter((r: { veck
 // Första lektionen, minut för minut: minuterna och det läraren säger ur standarden, samma rot som lathunden; vid den första
 // delen står rutinens repliker (granskare-3 nr 22).
 const minuterna = forstaLektionensMinuter(d);
-const BELAGG: Record<string, string> = { provad: 'Prövad för sig', 'i-alla': 'Finns i nästan alla prövade versioner', teori: 'Bygger på teori och klassrumsstudier' };
+const BELAGG: Record<string, string> = { provad: 'Prövad', 'i-alla': 'Finns i nästan alla prövade versioner', teori: 'Bygger på teori och klassrumsstudier' };
 const fallgropFor = (namn: string) => tabellens.filter((f) => f.komponent === namn);
 const sorteradeKallor = (grupp: string) => (d.kallor ?? []).filter((x: { grupp: string }) => x.grupp === grupp);
 const lasMerKalla = (x: { kalla?: string }) => (x.kalla ? (d.kallor ?? []).find((y: { id: string }) => y.id === x.kalla) : undefined);
@@ -133,6 +133,7 @@ const moten = arbetslagetsMoten(d);
       {d.roll.fragornaText && <p set:html={k(d.roll.fragornaText)} />}
     </section>
   )}
+  <UmFriaTabeller tabeller={d.tabeller} plats="efter-inledning" k={k} />
   {/* Lektionskortet efter Lärarens roll, där del 1 slutar, och inte mitt i texten (granskare-3 nr 20). */}
   <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} stor />
   {del('metoden').text && <p class="um-overgang" set:html={k(del('metoden').text)} />}
@@ -281,7 +282,7 @@ const moten = arbetslagetsMoten(d);
   {d.klassen && <div class="um-ruta" id="klassen"><p class="um-ruta-rubrik">{d.klassen.rubrik}</p><p set:html={k(d.klassen.text)} /></div>}
   {huvud?.plan && (
     <section class="um-avsnitt" id="planera-lektionen">
-      <h3>Planera lektionen</h3>
+      <h3>{planerasNamn(d)}</h3>
       {huvud.arbetsomradet && (
         <>
           <p class="um-ruta-rubrik">Arbetsområdet, lektion för lektion</p>
@@ -359,16 +360,7 @@ const moten = arbetslagetsMoten(d);
           ))}
         </article>
       ))}
-      {/* Fria tabeller med plats efter-progression, efter veckorna där läraren planerar dem, som samarbetsfärdigheterna
-          (riggens leverans 2026-11-01, K-671). Samma tabell och form som en fri tabell i stödundervisning (FriTabell.astro). */}
-      {(d.tabeller ?? []).filter((t: { plats?: string }) => t.plats === 'efter-progression').map((t: { rubrik: string; text?: string; kolumner: string[]; rader: string[][]; not?: string }) => (
-        <div class="um-fritabell">
-          <h4>{t.rubrik}</h4>
-          {t.text && <p set:html={k(t.text)} />}
-          <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} />
-          {t.not && <p class="um-not" set:html={k(t.not)} />}
-        </div>
-      ))}
+      <UmFriaTabeller tabeller={d.tabeller} plats="efter-progression" k={k} />
     </section>
   )}
   <section class="um-avsnitt" id="efter-de-forsta-veckorna">
@@ -406,7 +398,7 @@ const moten = arbetslagetsMoten(d);
     <section class="um-avsnitt" id="karnan">
       <h3>{d.karna.rubrik}</h3>
       <p set:html={k(d.karna.text)} />
-      <p class="um-not">Vid varje del står belägget. Prövad för sig betyder att studier har prövat delen ensam. Finns i nästan alla prövade versioner betyder att delen finns i de program som gav effekt, men att ingen har prövat den ensam. Bygger på teori och klassrumsstudier betyder att den kommer ur hur lärandet går till och ur studier av framgångsrika lärare.</p>
+      <p class="um-not">Vid varje del står belägget. Prövad betyder att studier har prövat delen, och Varför säger hur. Finns i nästan alla prövade versioner betyder att delen finns i de program som gav effekt, men att ingen har prövat den ensam. Bygger på teori och klassrumsstudier betyder att den kommer ur hur lärandet går till och ur studier av framgångsrika lärare.</p>
       {komp.map((x, i) => (
         <details class="um-rad um-karnrad" id={`karnan-${i + 1}`}>
           <summary><span><span class="um-kort-nr" aria-hidden="true">{i + 1}</span> {x.namn}</span></summary>

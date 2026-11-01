@@ -673,6 +673,8 @@ En ny samling eller ett nytt lager ärver sajtens prov från första commit (Nic
 | Statistiken har ett namn på varje fil och knapp | `scripts/paritet.mjs` | Samma prov läser `/metoder/` |
 | Allt som laddas ner bär © Niclas Fohlin | CLAUDE.md under Innehållstyperna | `scripts/metoderfiler.mjs` och `scripts/metodriggprov.mjs` |
 
+Slaget strategier är ett lager som läraren lägger över sin planering: del 2 heter Lagret och planeringen Lagret på din planering (`delarnaAv` och `planerasNamn` i standarden). En fri tabell med plats `efter-inledning` står sist i del 1 och en med `efter-progression` efter veckorna (`UmFriaTabeller.astro`). Fältet `relaterade` tar metoder i båda samlingarna, Stödundervisning och Metoder, och allt som visar det läser samma rot (`relateradeAv` i standarden, `relateradeMetoder` i `src/lib/innehall.ts`, `HorIhopMed.astro`; Niclas 2026-11-01: "Både stöd och metoder ska funka för det med EN rot").
+
 ## Kontroller som gäller
 
 | Vad | Hur |
