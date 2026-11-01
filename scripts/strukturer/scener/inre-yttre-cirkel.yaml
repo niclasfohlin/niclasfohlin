@@ -5,8 +5,8 @@ id: inre-yttre-cirkel
 skala: 54
 djupRam: [180, 520]
 delar:
-  - golvring: { x: 450, y: 340, rx: 170, ry: 98 }
-  - golvring: { x: 450, y: 340, rx: 330, ry: 190 }
+  - golvring: { x: 450, y: 340, rx: 170, ry: 98, tjock: 1.4 }
+  - golvring: { x: 450, y: 340, rx: 330, ry: 190, tjock: 1.4 }
   - figur: { namn: ybv, x: 261, y: 184, trojan: gul, ansikte: glad, tittar: ibv, lutar: ibv }
   - figur: { namn: ybh, x: 639, y: 184, trojan: rod, ansikte: prata, tittar: ibh, lutar: ibh }
   - figur: { namn: ibv, x: 352, y: 260, trojan: gron, ansikte: bak, tittar: ybv }

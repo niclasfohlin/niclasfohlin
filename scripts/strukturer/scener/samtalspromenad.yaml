@@ -3,19 +3,11 @@ id: samtalspromenad
 skala: 78
 djupRam: [300, 560]
 delar:
-  # Vägens två kanter, var och en med tre streck bredvid varandra så att kanten syns också i liten storlek.
-  - golvlinje: { fran: [20, 598.5], till: [420, 488.5], streck: 13 }
-  - golvlinje: { fran: [20, 600], till: [420, 490], streck: 13 }
-  - golvlinje: { fran: [20, 601.5], till: [420, 491.5], streck: 13 }
-  - golvlinje: { fran: [420, 488.5], till: [900, 383.5], streck: 14 }
-  - golvlinje: { fran: [420, 490], till: [900, 385], streck: 14 }
-  - golvlinje: { fran: [420, 491.5], till: [900, 386.5], streck: 14 }
-  - golvlinje: { fran: [60, 468.5], till: [400, 378.5], streck: 11 }
-  - golvlinje: { fran: [60, 470], till: [400, 380], streck: 11 }
-  - golvlinje: { fran: [60, 471.5], till: [400, 381.5], streck: 11 }
-  - golvlinje: { fran: [400, 378.5], till: [900, 298.5], streck: 14 }
-  - golvlinje: { fran: [400, 380], till: [900, 300], streck: 14 }
-  - golvlinje: { fran: [400, 381.5], till: [900, 301.5], streck: 14 }
+  # Vägens två kanter, med tjocka streck så att kanten syns också i liten storlek.
+  - golvlinje: { fran: [20, 600], till: [420, 490], streck: 13, tjock: 2 }
+  - golvlinje: { fran: [420, 490], till: [900, 385], streck: 14, tjock: 2 }
+  - golvlinje: { fran: [60, 470], till: [400, 380], streck: 11, tjock: 2 }
+  - golvlinje: { fran: [400, 380], till: [900, 300], streck: 14, tjock: 2 }
   - figur: { namn: c1, x: 632, y: 404, stallning: gaH, trojan: rosa, ansikte: prata, tittar: c2, lutar: c2 }
   - figur: { namn: c2, x: 722, y: 388, stallning: gaH, trojan: turkos, ansikte: glad, tittar: c1 }
   - figur: { namn: a, x: 236, y: 508, stallning: gaH, trojan: gul, ansikte: prata, tittar: b, lutar: b }

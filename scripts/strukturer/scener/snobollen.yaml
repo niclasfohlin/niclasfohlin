@@ -4,9 +4,7 @@ skala: 84
 djupRam: [330, 545]
 fokus: [470, 330]
 delar:
-  - golvlinje: { fran: [467, 286], till: [467, 586], streck: 18 }
-  - golvlinje: { fran: [470, 286], till: [470, 586], streck: 18 }
-  - golvlinje: { fran: [473, 286], till: [473, 586], streck: 18 }
+  - golvlinje: { fran: [470, 286], till: [470, 586], streck: 18, tjock: 2.2 }
   - figur: { namn: g1, x: 392, y: 332, stallning: staHanderFram, trojan: gul, ansikte: glad, tittar: [480, 300], lutar: [470, 300] }
   - figur: { namn: b1, x: 548, y: 336, stallning: kastaV, trojan: ljusbla, ansikte: kisa, tittar: [420, 260] }
   - boll: { hand: [b1, V], dy: -12, r: 17, farg: '#c3cdf2' }
