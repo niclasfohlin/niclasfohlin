@@ -24,6 +24,11 @@ import { slugAv, metodensFilmnamn } from '../src/lib/standard/index.js';
 // En rad tas bort när Niclas har sagt ja och riggens brev säger det. Tom sedan Niclas ja till Kooperativt lärandes
 // lektionskort 2026-10-30 (K-645).
 const VANTAR = [];
+// Riggens filer som sajten inte tar in än, och där sajten behåller filen den har, som `<id>/<slag>`. Riggens 2ce06e1 byter
+// etiketten Prövad i filen med allt och Metoden, och bara de är prövade i Google. De andra är byggda med en renderare i arbete,
+// och Explicit undervisnings lektionskort har ett ord som riggens bygge säger nej till (riggens brev 2026-11-02). Listan tas bort
+// med riggens nästa hela leverans (K-676).
+const BEHALLS = ['explicit-undervisning', 'kooperativt-larande'].flatMap((id) => ['lathund', 'lektionskort', 'planeringsmall', 'observation', 'materialet', 'referensblad'].map((slag) => `${id}/${slag}`));
 
 const ROT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const RIGG = process.env.METODRIGG ?? 'C:/metodrigg';
@@ -89,7 +94,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     for (const typ of ['pdf', 'docx']) if (existsSync(join(kort, `Lektionskort - ${t}.${typ}`))) filer.push({ slag: 'lektionskort', kalla: join(kort, `Lektionskort - ${t}.${typ}`), typ });
   }
   const stam = (slag) => (slag === 'allt' ? id : `${id}-${slag}`);
-  if (!kontrollera) for (const f of filer) copyFileSync(f.kalla, join(UT, `${stam(f.slag)}.${f.typ}`));
+  if (!kontrollera) for (const f of filer) if (!BEHALLS.includes(`${id}/${f.slag}`)) copyFileSync(f.kalla, join(UT, `${stam(f.slag)}.${f.typ}`));
 
   // Bladen i Materialet för klassen: ett blad per sida, i metodens ordning, sist i materialets pdf. En textsida före dem,
   // med materialets rubrik överst (riggens leverans 2026-10-30: "Materialet för klassen. Utöver lektionskortet …"), hör inte
