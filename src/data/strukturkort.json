@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "f96a2d4a25ed4afd",
+    "summa": "ee2e7d7039141a35",
     "kort": [
       "anteckningspar",
       "ape",
@@ -87,10 +87,10 @@
       "stall-en-fraga",
       "vem-ar-jag"
     ],
-    "kb": 7085
+    "kb": 7335
   },
   "_metod:kooperativt-larande": {
-    "summa": "5ac2524e84d26d56",
+    "summa": "38162519355d9548",
     "kort": [
       "ping-pong-prat",
       "epa",
@@ -99,11 +99,11 @@
       "motas-pa-mitten",
       "rondellen"
     ],
-    "kb": 397
+    "kb": 475
   },
   "5-3-1": {
     "innehall": "ac3bdc17",
-    "summa": "138151f07b9e7567",
+    "summa": "a420fa127bfef2ac",
     "kb": 85,
     "bild": {
       "colours": 12,
@@ -121,7 +121,7 @@
   },
   "anteckningspar": {
     "innehall": "b837a98e",
-    "summa": "6c2f0c66eb2fa088",
+    "summa": "41e8df49d211d379",
     "kb": 67,
     "bild": {
       "colours": 12,
@@ -139,7 +139,7 @@
   },
   "ape": {
     "innehall": "2a3b6a2f",
-    "summa": "5fb3aa5b3ad5c50f",
+    "summa": "8df075824eecbeb6",
     "kb": 67,
     "bild": {
       "colours": 12,
@@ -157,7 +157,7 @@
   },
   "beratta-mera": {
     "innehall": "dacdd18c",
-    "summa": "1c3956727710e896",
+    "summa": "abb143eb9737ac95",
     "kb": 171,
     "bild": {
       "colours": 24,
@@ -175,7 +175,7 @@
   },
   "brainstorm": {
     "innehall": "646e9e85",
-    "summa": "89b814eb1e6a16da",
+    "summa": "03fd0a6bf46339b1",
     "kb": 173,
     "bild": {
       "colours": 24,
@@ -192,12 +192,12 @@
     }
   },
   "bygga-en-triangel": {
-    "innehall": "bd71e8ec",
-    "summa": "22ace18da022ab67",
-    "kb": 78,
+    "innehall": "6088cc8e",
+    "summa": "557e1b4f6b3ae9c8",
+    "kb": 236,
     "bild": {
-      "colours": 12,
-      "kb": 34
+      "colours": 24,
+      "kb": 126
     },
     "namn": {
       "pt": 66,
@@ -211,7 +211,7 @@
   },
   "byt-och-sortera": {
     "innehall": "64244177",
-    "summa": "762bcda32326b197",
+    "summa": "204c3be3934a4c33",
     "kb": 83,
     "bild": {
       "colours": 12,
@@ -229,7 +229,7 @@
   },
   "en-far-ga": {
     "innehall": "a35a03f8",
-    "summa": "38de97734ef3e652",
+    "summa": "9c7e9a6b099b58d3",
     "kb": 166,
     "bild": {
       "colours": 24,
@@ -246,12 +246,12 @@
     }
   },
   "epa": {
-    "innehall": "cd081348",
-    "summa": "717a859385b04d3d",
-    "kb": 67,
+    "innehall": "ffdffe20",
+    "summa": "c9e05cfc04093716",
+    "kb": 144,
     "bild": {
-      "colours": 12,
-      "kb": 27
+      "colours": 24,
+      "kb": 68
     },
     "namn": {
       "pt": 80,
@@ -265,7 +265,7 @@
   },
   "epk": {
     "innehall": "27d5efd5",
-    "summa": "d55c2ce4360186ca",
+    "summa": "930910543aa5241d",
     "kb": 73,
     "bild": {
       "colours": 12,
@@ -283,7 +283,7 @@
   },
   "flashcardlek": {
     "innehall": "31b8f69a",
-    "summa": "eb5b1972a73aadfa",
+    "summa": "b6c2f2de57d7d6cc",
     "kb": 68,
     "bild": {
       "colours": 12,
@@ -301,7 +301,7 @@
   },
   "formulera-dela-lyssna-skapa": {
     "innehall": "17371dea",
-    "summa": "4bacd7da6b872736",
+    "summa": "741b24361194f52c",
     "kb": 59,
     "bild": {
       "colours": 12,
@@ -319,7 +319,7 @@
   },
   "fraga-fraga-byt": {
     "innehall": "aa6b7a9e",
-    "summa": "101967218d0db57c",
+    "summa": "286bf4b66d6173ba",
     "kb": 172,
     "bild": {
       "colours": 24,
@@ -337,7 +337,7 @@
   },
   "hitta-en-kompis": {
     "innehall": "6071ae1f",
-    "summa": "b4cd8bff18f9530e",
+    "summa": "14ca6e35489859b0",
     "kb": 84,
     "bild": {
       "colours": 12,
@@ -355,7 +355,7 @@
   },
   "hitta-min-regel": {
     "innehall": "98b18d81",
-    "summa": "ea4a4e043b221779",
+    "summa": "f9da9b8032e37629",
     "kb": 84,
     "bild": {
       "colours": 12,
@@ -373,7 +373,7 @@
   },
   "hor-vi-ihop": {
     "innehall": "fe2b5ece",
-    "summa": "d619f3181123520a",
+    "summa": "2766076fae5ee9b8",
     "kb": 192,
     "bild": {
       "colours": 24,
@@ -391,7 +391,7 @@
   },
   "hornsamtal": {
     "innehall": "6cc5c1e2",
-    "summa": "d0a652075d6e2ba3",
+    "summa": "dc01dffbd7d4a253",
     "kb": 199,
     "bild": {
       "colours": 24,
@@ -409,7 +409,7 @@
   },
   "huvuden-ihop": {
     "innehall": "aadab898",
-    "summa": "3c8c8c4c72cffaa7",
+    "summa": "c4a68353ab3be6bd",
     "kb": 73,
     "bild": {
       "colours": 12,
@@ -426,12 +426,12 @@
     }
   },
   "inre-yttre-cirkel": {
-    "innehall": "e2fd252f",
-    "summa": "6ab64bf4a348f97b",
-    "kb": 87,
+    "innehall": "6570afeb",
+    "summa": "4fe12c893eb3131b",
+    "kb": 158,
     "bild": {
-      "colours": 12,
-      "kb": 36
+      "colours": 24,
+      "kb": 73
     },
     "namn": {
       "pt": 74,
@@ -445,7 +445,7 @@
   },
   "inspireras": {
     "innehall": "46d84ea2",
-    "summa": "5b282cfbd1f4e814",
+    "summa": "d7a1c22f3dec87d8",
     "kb": 64,
     "bild": {
       "colours": 12,
@@ -463,7 +463,7 @@
   },
   "karusellen": {
     "innehall": "40c02225",
-    "summa": "755966a37b8e806f",
+    "summa": "0cd4c5b3620c6093",
     "kb": 84,
     "bild": {
       "colours": 12,
@@ -481,7 +481,7 @@
   },
   "kims-prov": {
     "innehall": "75969d4d",
-    "summa": "86aa29019159bd4b",
+    "summa": "485303b6bb63b0ac",
     "kb": 83,
     "bild": {
       "colours": 12,
@@ -498,9 +498,9 @@
     }
   },
   "kloka-pennan": {
-    "innehall": "c47b66b7",
-    "summa": "e6fa51826ca8d370",
-    "kb": 60,
+    "innehall": "e65e80c6",
+    "summa": "d455d8e9ceaaaa7d",
+    "kb": 59,
     "bild": {
       "colours": 12,
       "kb": 21
@@ -517,7 +517,7 @@
   },
   "kommunicera": {
     "innehall": "57b015d3",
-    "summa": "1b8f8441dd5f2628",
+    "summa": "1455ae5e424f49aa",
     "kb": 73,
     "bild": {
       "colours": 12,
@@ -535,7 +535,7 @@
   },
   "konstruktiv-debatt": {
     "innehall": "6055745e",
-    "summa": "7b2b9252c9b7c33b",
+    "summa": "1b9e2416e5466701",
     "kb": 86,
     "bild": {
       "colours": 12,
@@ -553,7 +553,7 @@
   },
   "kontraster": {
     "innehall": "0b3dc619",
-    "summa": "4e9805676d169f04",
+    "summa": "88febeec1fb66e8a",
     "kb": 78,
     "bild": {
       "colours": 12,
@@ -571,7 +571,7 @@
   },
   "kooperativ-fyrfaltare": {
     "innehall": "89330f44",
-    "summa": "978e93daf0311804",
+    "summa": "428fbd9785f7ef6e",
     "kb": 78,
     "bild": {
       "colours": 12,
@@ -589,7 +589,7 @@
   },
   "kooperativ-redovisning": {
     "innehall": "51948221",
-    "summa": "b66ad9cc3b1fe67c",
+    "summa": "de83a674b6a7859d",
     "kb": 206,
     "bild": {
       "colours": 24,
@@ -607,7 +607,7 @@
   },
   "kunskapskedjan": {
     "innehall": "6bb3e182",
-    "summa": "4c33a130d9a1bb0b",
+    "summa": "5e0c80871512f5a0",
     "kb": 159,
     "bild": {
       "colours": 24,
@@ -625,7 +625,7 @@
   },
   "lar-klassen": {
     "innehall": "25a9e507",
-    "summa": "79c83f2825ffba86",
+    "summa": "e73d22070745e991",
     "kb": 196,
     "bild": {
       "colours": 24,
@@ -642,12 +642,12 @@
     }
   },
   "lar-varandra": {
-    "innehall": "4b471ff8",
-    "summa": "7c05ce159faae205",
-    "kb": 176,
+    "innehall": "5bafa985",
+    "summa": "50465124511c9fda",
+    "kb": 173,
     "bild": {
       "colours": 24,
-      "kb": 88
+      "kb": 87
     },
     "namn": {
       "pt": 80,
@@ -661,7 +661,7 @@
   },
   "las-med-roller": {
     "innehall": "df571c66",
-    "summa": "316fd0e1bffefa9a",
+    "summa": "d702a020f48c8435",
     "kb": 74,
     "bild": {
       "colours": 12,
@@ -679,7 +679,7 @@
   },
   "las-och-fraga": {
     "innehall": "f87b45ae",
-    "summa": "02fce4e3356de580",
+    "summa": "cb1d65fe0afa5e73",
     "kb": 67,
     "bild": {
       "colours": 12,
@@ -697,7 +697,7 @@
   },
   "las-rita-redovisa": {
     "innehall": "ec5d65f2",
-    "summa": "be8e45a0de0d57dd",
+    "summa": "211b66f02eff32d6",
     "kb": 79,
     "bild": {
       "colours": 12,
@@ -715,7 +715,7 @@
   },
   "lasa-och-forklara-i-par": {
     "innehall": "d8f4e620",
-    "summa": "356a543a5365e4c3",
+    "summa": "ec2716812074beb4",
     "kb": 67,
     "bild": {
       "colours": 12,
@@ -732,12 +732,12 @@
     }
   },
   "laxkontroll-i-grupp": {
-    "innehall": "45f55362",
-    "summa": "9749adc2700b532c",
-    "kb": 157,
+    "innehall": "e3ce7571",
+    "summa": "f04666442ccc0141",
+    "kb": 82,
     "bild": {
-      "colours": 24,
-      "kb": 75
+      "colours": 12,
+      "kb": 34
     },
     "namn": {
       "pt": 62,
@@ -751,7 +751,7 @@
   },
   "lika-och-olika": {
     "innehall": "0e565a65",
-    "summa": "04ba2f358c509030",
+    "summa": "5ce3d14c8f5498f5",
     "kb": 71,
     "bild": {
       "colours": 12,
@@ -769,7 +769,7 @@
   },
   "lyssna-och-skriv": {
     "innehall": "bc4d8ff1",
-    "summa": "c615757959147bb3",
+    "summa": "217be430f0e07554",
     "kb": 80,
     "bild": {
       "colours": 12,
@@ -787,7 +787,7 @@
   },
   "mina-bilder-dina-bilder": {
     "innehall": "05c57643",
-    "summa": "59d98f29a984da2d",
+    "summa": "df957cb13814df64",
     "kb": 78,
     "bild": {
       "colours": 12,
@@ -805,8 +805,8 @@
   },
   "mina-ord-dina-ord": {
     "innehall": "b8688123",
-    "summa": "8b516a28fb95ea05",
-    "kb": 80,
+    "summa": "213b9832adad18ff",
+    "kb": 79,
     "bild": {
       "colours": 12,
       "kb": 31
@@ -823,7 +823,7 @@
   },
   "motas-pa-mitten": {
     "innehall": "c348c85c",
-    "summa": "657dc864ff7b053e",
+    "summa": "fe781a7713147b85",
     "kb": 157,
     "bild": {
       "colours": 24,
@@ -841,7 +841,7 @@
   },
   "ova-och-kontrollera-i-par": {
     "innehall": "4e0be37e",
-    "summa": "684717c566a7ed94",
+    "summa": "ad86d2b92be40b77",
     "kb": 78,
     "bild": {
       "colours": 12,
@@ -859,7 +859,7 @@
   },
   "pa-rad": {
     "innehall": "a3597740",
-    "summa": "82c3b0107b74cd1f",
+    "summa": "64a59b1ca7fb7f1e",
     "kb": 201,
     "bild": {
       "colours": 24,
@@ -877,11 +877,11 @@
   },
   "pa-sightseeing": {
     "innehall": "cbb4b4aa",
-    "summa": "94f7158cf6568173",
-    "kb": 212,
+    "summa": "5e0abab13754f525",
+    "kb": 213,
     "bild": {
       "colours": 24,
-      "kb": 110
+      "kb": 112
     },
     "namn": {
       "pt": 80,
@@ -894,12 +894,12 @@
     }
   },
   "par-pussel": {
-    "innehall": "6e9056f5",
-    "summa": "920fa95693f5b865",
-    "kb": 68,
+    "innehall": "a05815e3",
+    "summa": "43b717b6d9a277cd",
+    "kb": 66,
     "bild": {
       "colours": 12,
-      "kb": 27
+      "kb": 26
     },
     "namn": {
       "pt": 80,
@@ -913,7 +913,7 @@
   },
   "parrespons": {
     "innehall": "6a5405b5",
-    "summa": "b2a8aae28fef1be4",
+    "summa": "4dbd74f97fcd3fe0",
     "kb": 63,
     "bild": {
       "colours": 12,
@@ -931,7 +931,7 @@
   },
   "ping-pong-prat": {
     "innehall": "3e16e068",
-    "summa": "ecb4fc3fd38e07a0",
+    "summa": "517af2cc56cd9d1a",
     "kb": 67,
     "bild": {
       "colours": 12,
@@ -948,12 +948,12 @@
     }
   },
   "ppt-par-pa-tid": {
-    "innehall": "c3b35999",
-    "summa": "5feb961042419253",
-    "kb": 67,
+    "innehall": "310cfc6d",
+    "summa": "c13437adb0eaf9a9",
+    "kb": 68,
     "bild": {
       "colours": 12,
-      "kb": 26
+      "kb": 27
     },
     "namn": {
       "pt": 72,
@@ -966,12 +966,12 @@
     }
   },
   "provet-tva-ganger": {
-    "innehall": "49874d90",
-    "summa": "4c88cfd0a1a721bc",
-    "kb": 78,
+    "innehall": "d186879f",
+    "summa": "c5bc50095e7e4092",
+    "kb": 186,
     "bild": {
-      "colours": 12,
-      "kb": 32
+      "colours": 24,
+      "kb": 93
     },
     "namn": {
       "pt": 64,
@@ -985,7 +985,7 @@
   },
   "pussel": {
     "innehall": "2c368648",
-    "summa": "86541526ae055564",
+    "summa": "9821947e1acf2f33",
     "kb": 150,
     "bild": {
       "colours": 24,
@@ -1003,7 +1003,7 @@
   },
   "rita-byt-och-skriv": {
     "innehall": "4ff8e6f7",
-    "summa": "ee2d57c9589a14b4",
+    "summa": "192db2e26a3dd24c",
     "kb": 71,
     "bild": {
       "colours": 12,
@@ -1021,7 +1021,7 @@
   },
   "rondellen": {
     "innehall": "a0336c0d",
-    "summa": "c4ee61c2daef352e",
+    "summa": "090a59cc8c25f8e5",
     "kb": 68,
     "bild": {
       "colours": 12,
@@ -1039,7 +1039,7 @@
   },
   "rosta": {
     "innehall": "28571174",
-    "summa": "9203759b0fdd0663",
+    "summa": "ba04d7c96b089cb1",
     "kb": 224,
     "bild": {
       "colours": 24,
@@ -1057,7 +1057,7 @@
   },
   "rubriceringsspel": {
     "innehall": "caa5e9ec",
-    "summa": "6b45c6065c2046c4",
+    "summa": "9b123452f929d52f",
     "kb": 78,
     "bild": {
       "colours": 12,
@@ -1075,7 +1075,7 @@
   },
   "runda-bordet": {
     "innehall": "d23d8d3e",
-    "summa": "9d4c12ae0d124543",
+    "summa": "546169c083e18c8d",
     "kb": 161,
     "bild": {
       "colours": 24,
@@ -1093,7 +1093,7 @@
   },
   "samtalsbingo": {
     "innehall": "4a0ca72a",
-    "summa": "d7635adcbb91b922",
+    "summa": "81a49f4856a54668",
     "kb": 80,
     "bild": {
       "colours": 12,
@@ -1110,12 +1110,12 @@
     }
   },
   "samtalspromenad": {
-    "innehall": "d51a019d",
-    "summa": "938b3d035f0bca4f",
-    "kb": 78,
+    "innehall": "6445d91c",
+    "summa": "2db9ee4d4e2f0bab",
+    "kb": 75,
     "bild": {
       "colours": 12,
-      "kb": 34
+      "kb": 31
     },
     "namn": {
       "pt": 64,
@@ -1129,7 +1129,7 @@
   },
   "samtalstrappan": {
     "innehall": "8f7b03f2",
-    "summa": "32606e3b26d46b0d",
+    "summa": "243b172a0adbf9f6",
     "kb": 68,
     "bild": {
       "colours": 12,
@@ -1147,7 +1147,7 @@
   },
   "sanningsjakten": {
     "innehall": "27fa7556",
-    "summa": "8fa87289330e0929",
+    "summa": "28d4a25e97c855f2",
     "kb": 71,
     "bild": {
       "colours": 12,
@@ -1165,7 +1165,7 @@
   },
   "sant-eller-falskt": {
     "innehall": "8d7e728e",
-    "summa": "4b13fa8b45b57653",
+    "summa": "985544cb1621d808",
     "kb": 74,
     "bild": {
       "colours": 12,
@@ -1183,11 +1183,11 @@
   },
   "se-och-lar": {
     "innehall": "408e7c37",
-    "summa": "1feba918dc56a4ff",
-    "kb": 167,
+    "summa": "7bdaf643d41f77b1",
+    "kb": 163,
     "bild": {
       "colours": 24,
-      "kb": 79
+      "kb": 77
     },
     "namn": {
       "pt": 80,
@@ -1200,12 +1200,12 @@
     }
   },
   "sekvenser": {
-    "innehall": "863e5fba",
-    "summa": "be03019dc090f81d",
-    "kb": 158,
+    "innehall": "73dd414e",
+    "summa": "c4ce08e1754573dd",
+    "kb": 75,
     "bild": {
-      "colours": 24,
-      "kb": 76
+      "colours": 12,
+      "kb": 31
     },
     "namn": {
       "pt": 80,
@@ -1219,7 +1219,7 @@
   },
   "skicka-ett-problem": {
     "innehall": "36cb848b",
-    "summa": "01934dbe825f9111",
+    "summa": "7eeb135a82d218e4",
     "kb": 70,
     "bild": {
       "colours": 12,
@@ -1237,7 +1237,7 @@
   },
   "skissa-och-skriv": {
     "innehall": "6012e904",
-    "summa": "c04815e2545a445e",
+    "summa": "e023b5273d33998f",
     "kb": 76,
     "bild": {
       "colours": 12,
@@ -1255,7 +1255,7 @@
   },
   "skriv-byt-matcha": {
     "innehall": "7d41202e",
-    "summa": "43f3e5ad62a7faee",
+    "summa": "5ffef02b628ffe40",
     "kb": 64,
     "bild": {
       "colours": 12,
@@ -1273,11 +1273,11 @@
   },
   "skriva-med-fokus": {
     "innehall": "0ae608c0",
-    "summa": "c872a0fb53ab386c",
-    "kb": 80,
+    "summa": "0340e0f26d310738",
+    "kb": 81,
     "bild": {
       "colours": 12,
-      "kb": 34
+      "kb": 35
     },
     "namn": {
       "pt": 68,
@@ -1291,7 +1291,7 @@
   },
   "skriva-och-redigera-i-par": {
     "innehall": "3a0178de",
-    "summa": "b53af833b3e5bb8f",
+    "summa": "08420a6028e64dfb",
     "kb": 69,
     "bild": {
       "colours": 12,
@@ -1309,11 +1309,11 @@
   },
   "snobollar-i-mitten": {
     "innehall": "487db0f2",
-    "summa": "7bb2d3fb706db277",
-    "kb": 78,
+    "summa": "84b368b0ad28e967",
+    "kb": 79,
     "bild": {
       "colours": 12,
-      "kb": 33
+      "kb": 34
     },
     "namn": {
       "pt": 66,
@@ -1326,12 +1326,12 @@
     }
   },
   "snobollen": {
-    "innehall": "b5c7c1ee",
-    "summa": "ca817a325c378631",
-    "kb": 228,
+    "innehall": "ab8641df",
+    "summa": "d9153893602352ef",
+    "kb": 232,
     "bild": {
       "colours": 24,
-      "kb": 116
+      "kb": 117
     },
     "namn": {
       "pt": 80,
@@ -1345,7 +1345,7 @@
   },
   "solfjader": {
     "innehall": "f437fe75",
-    "summa": "91ef6cfa53654c64",
+    "summa": "868a05acb8c542cb",
     "kb": 81,
     "bild": {
       "colours": 12,
@@ -1363,7 +1363,7 @@
   },
   "sortering": {
     "innehall": "7356191d",
-    "summa": "2cdca73cb400881a",
+    "summa": "70c1928550390891",
     "kb": 171,
     "bild": {
       "colours": 24,
@@ -1381,7 +1381,7 @@
   },
   "speed-dating": {
     "innehall": "ce1a5120",
-    "summa": "48963f629f5165c6",
+    "summa": "82154b6d7dcb0bbd",
     "kb": 75,
     "bild": {
       "colours": 12,
@@ -1399,7 +1399,7 @@
   },
   "stall-en-fraga": {
     "innehall": "bdbcc246",
-    "summa": "456f7b43bf501054",
+    "summa": "1377a5390308d1df",
     "kb": 82,
     "bild": {
       "colours": 12,
@@ -1417,11 +1417,11 @@
   },
   "stationssamtal": {
     "innehall": "3cf9cc47",
-    "summa": "48d65a566c1ad686",
-    "kb": 183,
+    "summa": "617e058582f7dc72",
+    "kb": 184,
     "bild": {
       "colours": 24,
-      "kb": 90
+      "kb": 91
     },
     "namn": {
       "pt": 76,
@@ -1435,7 +1435,7 @@
   },
   "talkort": {
     "innehall": "23989747",
-    "summa": "14bbdebf091237a0",
+    "summa": "0cf1ff7ff887e5c5",
     "kb": 73,
     "bild": {
       "colours": 12,
@@ -1453,7 +1453,7 @@
   },
   "tarningsquiz": {
     "innehall": "1cea23a4",
-    "summa": "7d9b98d203a3269c",
+    "summa": "e615b0903a79a932",
     "kb": 67,
     "bild": {
       "colours": 12,
@@ -1471,7 +1471,7 @@
   },
   "topplistan": {
     "innehall": "a738b3f6",
-    "summa": "443b3493df333109",
+    "summa": "32f34eef989632be",
     "kb": 82,
     "bild": {
       "colours": 12,
@@ -1489,11 +1489,11 @@
   },
   "trestegsintervju": {
     "innehall": "5673be5f",
-    "summa": "8d19ff03982de992",
+    "summa": "fcfbd9dc34c7c870",
     "kb": 92,
     "bild": {
       "colours": 12,
-      "kb": 41
+      "kb": 40
     },
     "namn": {
       "pt": 70,
@@ -1507,7 +1507,7 @@
   },
   "turas-om": {
     "innehall": "f986ea90",
-    "summa": "d4173e3734a98511",
+    "summa": "fc1fad23267c1179",
     "kb": 60,
     "bild": {
       "colours": 12,
@@ -1525,7 +1525,7 @@
   },
   "tva-loser-problem": {
     "innehall": "2c9559c0",
-    "summa": "2076f09eb8f7bdba",
+    "summa": "36dd807073ab90ec",
     "kb": 71,
     "bild": {
       "colours": 12,
@@ -1542,8 +1542,8 @@
     }
   },
   "vad-undrar-jag": {
-    "innehall": "ac2b67df",
-    "summa": "31aa40ebb204025e",
+    "innehall": "e6a9f8ad",
+    "summa": "aece75ea65ca2791",
     "kb": 71,
     "bild": {
       "colours": 12,
@@ -1561,11 +1561,11 @@
   },
   "vandrande-reportern": {
     "innehall": "e342b9c9",
-    "summa": "d1f919646a05dc04",
-    "kb": 83,
+    "summa": "8058335610fa3995",
+    "kb": 82,
     "bild": {
       "colours": 12,
-      "kb": 36
+      "kb": 35
     },
     "namn": {
       "pt": 56,
@@ -1579,7 +1579,7 @@
   },
   "vem-ar-jag": {
     "innehall": "4e8e268b",
-    "summa": "24a6d6c368464402",
+    "summa": "1809b9e317a8e050",
     "kb": 84,
     "bild": {
       "colours": 12,
@@ -1597,7 +1597,7 @@
   },
   "visa": {
     "innehall": "4a57e3ee",
-    "summa": "9d91eee754ebdd23",
+    "summa": "e84f8b653f33fe5c",
     "kb": 71,
     "bild": {
       "colours": 12,
