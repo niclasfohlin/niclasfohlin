@@ -21,7 +21,8 @@ import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import { platsISerien, type MetodPostISerie, type SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, arBildlista, bildFor as bildForOrd, bildlistansNamn, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
 import { arElevensBlad, elevbladRyms, FAKTAORD, faktatexter, harFaktatexter, harFragor, lastexter, protokollDelas, strukturAv, textlangd, textparAv, textparLarare, arTextparLista, type Faktadel, type Faktatext, type Lastext, type Struktur, type Textpar } from './ramform';
-import { filmerVid, grundUpphov, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
+import type { VavIWord } from './vav';
+import { filmerVid, grundUpphov, huvudfilm, metodensFilmer, passar, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import { arkAdress, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieAdress, svgMatt } from './bildserier';
 import { SNABB, snabbFalt, snabbRadHojd, snabbSist, snabbVeckorna, type Snabbmall } from './snabbmall';
@@ -132,7 +133,8 @@ const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyt
 // faktatypsnitt: Anton till faktatexternas rubriker (public/fonts/faktatext/), när metoden har faktatexter.
 // lektionskort: lektionskortens innehåll efter stam (src/lib/lektionskortdata.ts), vid bygget lästa ur src/data/lektionskort/,
 // i webbläsaren ur metoder.json.
-export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; boktypsnitt?: { cinzel: Uint8Array; dekor: Uint8Array }; faktatypsnitt?: Uint8Array; lektionskort?: Map<string, Papper>; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
+// vav: det sajten väver in i varje metod (vavIWord i src/lib/vav.ts), vid bygget ur registren, i webbläsaren ur metoder.json.
+export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; boktypsnitt?: { cinzel: Uint8Array; dekor: Uint8Array }; faktatypsnitt?: Uint8Array; lektionskort?: Map<string, Papper>; vav?: Map<string, VavIWord[]>; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
 let RESURSER: MetodResurser = { bilder: new Map() };
 // Varje bild i Word-filen är en SVG med sin reservbild (Niclas 2026-09-30: i Google Dokument blev bilderna blå rutor).
 // Saknas reservbilden stannar bygget, så att en fil med en tom reservbild aldrig kan laddas upp eller hämtas.
@@ -3055,8 +3057,30 @@ function lankRad(namn: string, adress: string, bas: string): Paragraph {
   const lank = `${bas.replace(/\/$/, '')}${adress}`;
   return new Paragraph({ spacing: { before: 0, after: 120 }, children: [
     textRun({ text: `${namn}: ` }),
-    new ExternalHyperlink({ link: lank, children: [textRun({ text: lank.replace(/^https?:\/\//, ''), color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] }),
+    lankad(lank.replace(/^https?:\/\//, ''), lank),
   ] });
+}
+const lankad = (text: string, lank: string) => new ExternalHyperlink({ link: lank, children: [textRun({ text, color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] });
+
+// Det sajten väver in (src/lib/vav.ts) i en metod med verktygets knapp i början: en enkel rad sist på platsen, som på sidan,
+// med delarnas namn som länkar och verktygets namn med adressen, som också går att läsa på papper (Niclas 2026-11-01: "också
+// såddad i docx med liknande enkel placeholders"). Verktyget står en gång på platsen, och inte där knappens rad redan står.
+function vavBarn(vavt: VavIWord[], bas: string, efterText = false): Paragraph[] {
+  const rot = bas.replace(/\/$/, '');
+  return vavt.flatMap((v, i) => {
+    const { namn, adress } = v.verktyg;
+    const namnen = v.delar.flatMap((x, n) => [...(n ? [textRun({ text: n === v.delar.length - 1 ? ' och ' : ', ' })] : []), lankad(x.namn, `${rot}${x.adress}`)]);
+    const medRaden = i === vavt.length - 1 && !v.knappenFinns;
+    return [
+      ...(v.text ? [stycke(v.text, { fore: 120, hallIhop: true })] : []),
+      new Paragraph({ spacing: { before: v.text || efterText ? 0 : 120, after: efterText ? 60 : 120 }, children: [
+        textRun({ text: `${v.etikett}: ` }),
+        ...namnen,
+        textRun({ text: `${/[.!?]$/.test(v.delar.at(-1)?.namn ?? '') ? '' : '.'}${medRaden ? ` ${namn}: ` : ''}` }),
+        ...(medRaden ? [lankad(`${rot}${adress}`.replace(/^https?:\/\//, ''), `${rot}${adress}`)] : []),
+      ] }),
+    ];
+  });
 }
 
 // Lektionsbanken i den generella metoden (Ljudlek i grupp): förmågorna i ordning med lektionerna och vad eleven tränar,
@@ -3159,7 +3183,9 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   // först på platsen, före en film på samma plats, som på sidan.
   const lektionskort = metodensLektionskort(d, post.id);
   const kortVid = (p: FilmPlats) => lektionskortVid(lektionskort, p).map((k) => lankRad(k.knapp, k.adress, bas));
-  const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { ut.push(...kortVid(p)); for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) if (!placerade.has(b)) ut.push(...bordsbild(b)); } };
+  const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { ut.push(...kortVid(p)); for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) if (!placerade.has(b)) ut.push(...bordsbild(b)); ut.push(...vavVid(p)); } };
+  const vavRader = (...platser: FilmPlats[]) => platser.flatMap((p) => (RESURSER.vav?.get(post.id) ?? []).filter((v) => passar(v.vid, p)));
+  const vavVid = (p: FilmPlats) => vavBarn(vavRader(p), bas);
   const efterDel = (rubrik: string, maxHojd?: number) => [...kortVid({ del: rubrik }), ...filmerVid(filmer, { del: rubrik }).flatMap(filmBarn), ...paBordetVid(bilderPaBordet, { del: rubrik }).flatMap((b) => pabordetBarn(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235))];
   // De centrala sakerna (src/lib/centrala.ts): namnet och adressen som länk direkt efter texten som nämner saken, där sidan
   // har knappen. Hålls texten ihop med det som följer, hålls raden också ihop med det.
@@ -3338,6 +3364,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   if (d.ramar && (o.material || !MATERIAL.has('ramar'))) {
     ut.push(h2(d.ramar.rubrik));
     for (const s of d.ramar.text) ut.push(stycke(s));
+    // En strukturs egen sida (strukturAv) är ett fullt A4 för eleverna, och en rad före eller efter den fick ofta en egen sida.
+    // Det sajten väver in vid de sidorna står därför en gång här, med varje namn en gång, där texten alltid löper (K-668).
+    const vidSidorna = vavRader(...d.ramar.ramar.filter((r) => strukturAv(r)).map((r) => ({ ram: r.rubrik })));
+    if (vidSidorna.length) ut.push(...vavBarn([{ ...vidSidorna[0], delar: [...new Map(vidSidorna.flatMap((v) => v.delar).map((x) => [x.adress, x])).values()] }], bas, true));
     ut.push(...ljudRader(d));
     const boksidor = lastexter(d.ramar.ramar);
     const ramarna = d.ramar.ramar;

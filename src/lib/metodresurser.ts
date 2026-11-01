@@ -14,6 +14,7 @@ import { serieBilder } from './bildserier';
 import { serieantal, serieFil } from './bildserier-bygge';
 import { metodensLektionskort } from './lektionskort';
 import { lasLektionskort } from './lektionskortdata';
+import { vavIWord } from './vav';
 import type { MetodPost } from './metod';
 import type { MetodResurser } from './metoddocx';
 import { reservMatt, reservNyckel, samlaReservbilder } from './reservbild';
@@ -35,6 +36,8 @@ export function lasResurser(poster: MetodPost[]): MetodResurser {
     faktatypsnitt: poster.some((p) => harFaktatexter(p.data)) ? las(FAKTATYPSNITT_TTF) : undefined,
     // Lektionskorten (src/lib/lektionskortdata.ts), som står först i Materialet och i planeringsmallarna.
     lektionskort: lasLektionskort(poster.flatMap((p) => metodensLektionskort(p.data, p.id))),
+    // Det sajten väver in i metoden, när metoden har verktygets knapp i början (src/lib/vav.ts).
+    vav: new Map(poster.map((p) => [p.id, vavIWord(p.id, p.data)])),
   };
 }
 

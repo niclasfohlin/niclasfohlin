@@ -1,7 +1,7 @@
 // Det sajten väver in i en metod (Niclas 2026-11-01: "De kan vävas in på sajten och behövs inte i själva docx för
 // metoden", "Med en standard och en rot är det som en placeholder att bara med en kodsnutt läggs in" och "Det är lite så
-// jag tänker man ska sådda med verktyg när nya kommer"): ett verktyg sås i en metod på metodens sida, utan att metodens fil,
-// Word-filen eller utskriften ändras. Roten är två register. src/data/centrala.json har verktygets standard i fältet vav:
+// jag tänker man ska sådda med verktyg när nya kommer"): ett verktyg sås i en metod på metodens sida, utan att metodens fil
+// ändras, och i Word-filen och pdf:en bara när metoden har verktygets knapp i början (vavIWord nedan). Roten är två register. src/data/centrala.json har verktygets standard i fältet vav:
 // rutans text och kortradens rad. src/data/sadd.json har sådden, metodens ja med platserna: var, med filmernas ord för
 // platsen (src/lib/film.ts), formen och de delar av verktyget som står där, som strukturerna. Filmruta.astro ritar det på
 // platsen med Vavruta.astro, bland filmerna och bilderna På bordet, så att varje plats i en metod går att använda utan ny
@@ -11,7 +11,7 @@
 // till verktyget; och rutan, där eleverna arbetar med verktygets delar i passets kärna, med texten, korten och verktygets
 // knapp. Står verktygets knapp redan på platsen (fältet centrala), står den inte en gång till, och inte heller kortradens rad.
 import register from '../data/sadd.json';
-import { CENTRALA, tolkaTextplats, type Central } from './centrala';
+import { CENTRALA, lasbarAdress, tolkaTextplats, type Central } from './centrala';
 import { passar, sammaRubrik, tolkaEfter, type FilmPlats } from './film';
 import { bildensAdress, slagensStil, strukturensAdress, strukturernaAv } from './strukturer';
 import { strukturnamnetI } from './standard/index.js';
@@ -43,11 +43,9 @@ const vavda = () => CENTRALA.filter((c) => c.vav);
 const raderFor = (metod: string, c: Central): Rad[] => { const ja = saker[c.id]?.ja?.[metod]; return typeof ja === 'object' ? ja.vav ?? [] : []; };
 
 type MetodForVav = { centrala?: { id: string; efterText: string }[] };
-/** Det som vävs in på platsen i metoden, i registrets ordning. */
-export function vavtVid(metod: string, d: MetodForVav, plats: FilmPlats): Vav[] {
-  return vavda().flatMap((c) => raderFor(metod, c).filter((r) => { const v = tolkaEfter(r.efter); return v && passar(v, plats); }).map((r) => {
-    const delar = DELAR[c.id]?.(r.delar ?? [], `src/data/sadd.json, ${c.id}, ${metod}`) ?? [];
-    return {
+function vavAv(metod: string, d: MetodForVav, c: Central, r: Rad): Vav {
+  const delar = DELAR[c.id]?.(r.delar ?? [], `src/data/sadd.json, ${c.id}, ${metod}`) ?? [];
+  return {
     vav: c,
     metod,
     form: r.form ?? 'kort',
@@ -58,8 +56,20 @@ export function vavtVid(metod: string, d: MetodForVav, plats: FilmPlats): Vav[] 
     slag: r.slag ?? 'form',
     // Knappen står redan på platsen när metoden visar verktyget där med fältet centrala (src/lib/centrala.ts).
     knappenFinns: (d.centrala ?? []).some((x) => { if (x.id !== c.id) return false; const t = tolkaTextplats(x.efterText); const v = tolkaEfter(r.efter); return !!t && !!v && passar(v, t); }),
-    };
-  }));
+  };
+}
+/** Det som vävs in på platsen i metoden, i registrets ordning. */
+export function vavtVid(metod: string, d: MetodForVav, plats: FilmPlats): Vav[] {
+  return vavda().flatMap((c) => raderFor(metod, c).filter((r) => { const v = tolkaEfter(r.efter); return v && passar(v, plats); }).map((r) => vavAv(metod, d, c, r)));
+}
+/** Etiketten över det som vävs in, på sidan och i Word: den säger om metoden nämner delen, om eleverna arbetar i samma form
+ *  (Skrivkurs: sagoboken och Kloka pennan) eller om delen passar till den delen av passet. Word har etiketten och namnen på
+ *  samma rad, med ett komma efter delen av passet. */
+export function vavensEtikett(v: Vav, efterOm = ': '): string {
+  const s = v.vav.vav!;
+  const fler = v.delar.length > 1;
+  const hur = v.slag === 'forslag' ? (fler ? s.passarFler : s.passar) : (fler ? s.liknarFler : s.liknar);
+  return v.namngivna ? s.etikett : v.om ? `${v.om}${efterOm}${hur.charAt(0).toLowerCase()}${hur.slice(1)}` : hur;
 }
 // Namnet i metodens text, med standardens regel, som såddprovet också läser namnen med (scripts/saddprov.mjs).
 const metodensText = new WeakMap<object, string>();
@@ -73,7 +83,23 @@ function namnetI(namn: string, d: object): boolean {
 export const I_BORJAN_FRAN = 3;
 /** Verktygen som står i början av metodens sida för att de är invävda med många delar, och som metoden inte redan visar med
  *  fältet centrala. */
-export const vavdaIBorjan = (metod: string, d: MetodForVav): Central[] => vavda().filter((c) => !(d.centrala ?? []).some((x) => x.id === c.id) && new Set(raderFor(metod, c).flatMap((r) => r.delar ?? [])).size >= I_BORJAN_FRAN);
+const medManga = (metod: string, c: Central) => new Set(raderFor(metod, c).flatMap((r) => r.delar ?? [])).size >= I_BORJAN_FRAN;
+const visarSjalv = (d: MetodForVav, c: Central) => (d.centrala ?? []).some((x) => x.id === c.id);
+export const vavdaIBorjan = (metod: string, d: MetodForVav): Central[] => vavda().filter((c) => !visarSjalv(d, c) && medManga(metod, c));
+
+/** Det Word-filen har på en plats. Följer med i src/lib/metodresurser.ts och i metoder.json, eftersom metoddocx.ts också körs i
+ *  webbläsaren, som inte läser delarnas filer. */
+export type VavIWord = { vid: FilmPlats; etikett: string; text?: string; delar: { namn: string; adress: string }[]; verktyg: { namn: string; adress: string }; knappenFinns: boolean };
+const iWord = new WeakMap<object, VavIWord[]>();
+/** Knappen i början är gränsen (Niclas 2026-11-01: "Att det är spärren mellan sida bara och sådd även i pdf/docx"): en metod
+ *  som har verktygets knapp i början har sådden också i Word-filen och därmed i pdf:en, och andra metoder bara på sidan. */
+export function vavIWord(metod: string, d: MetodForVav): VavIWord[] {
+  if (!iWord.has(d)) iWord.set(d, vavda().filter((c) => visarSjalv(d, c) || medManga(metod, c)).flatMap((c) => raderFor(metod, c).map((r) => {
+    const v = vavAv(metod, d, c, r);
+    return { vid: tolkaEfter(r.efter)!, etikett: vavensEtikett(v, ', '), text: v.form === 'ruta' ? c.vav!.text : undefined, delar: v.delar.map((x) => ({ namn: x.namn, adress: x.adress })), verktyg: { namn: c.namn, adress: lasbarAdress(c) }, knappenFinns: v.knappenFinns };
+  })));
+  return iWord.get(d)!;
+}
 
 type MetodForPlats = MetodForVav & { inledning?: string[]; tabeller?: { rubrik: string }[]; ramar?: { ramar: { rubrik: string }[] } } & Record<string, unknown>;
 /** Beskedet när platsen inte finns i metoden, annars undefined. */

@@ -1,21 +1,16 @@
 ---
 // Det sajten väver in på en plats i metoden (src/lib/vav.ts): kortraden med delarnas små kort och en rad till verktyget,
-// eller rutan med verktygets text, korten och knappen. Bara på skärmen: metodens fil, Word-filen och utskriften är
-// desamma utan den (Niclas 2026-11-01: "De kan vävas in på sajten och behövs inte i själva docx för metoden").
+// eller rutan med verktygets text, korten och knappen. Bara på skärmen: metodens fil är densamma utan den, och Word-filen och
+// pdf:en har en enkel rad på platsen när metoden har verktygets knapp i början (vavIWord i src/lib/vav.ts, vavBarn i metoddocx.ts).
 import Centralknapp from './Centralknapp.astro';
-import type { Vav } from '../lib/vav';
+import { vavensEtikett, type Vav } from '../lib/vav';
 // sist är den sista rutan på platsen: raden till verktyget står en gång, också när flera rutor står efter varandra.
 interface Props { v: Vav; titel: string; sist?: boolean }
 const { v, titel, sist = true } = Astro.props;
 const c = v.vav;
 const i = c.vav!.rad.lastIndexOf(c.namn);
 const [fore, efter] = [c.vav!.rad.slice(0, i), c.vav!.rad.slice(i + c.namn.length)];
-// Nämner metoden ingen av delarna, arbetar eleverna i samma form, och etiketten säger det (Skrivkurs: sagoboken och Kloka
-// pennan).
-// En del som bara passar till delen av passet (slag forslag) säger det i stället.
-const fler = v.delar.length > 1;
-const hur = v.slag === 'forslag' ? (fler ? c.vav!.passarFler : c.vav!.passar) : (fler ? c.vav!.liknarFler : c.vav!.liknar);
-const etikett = v.namngivna ? c.vav!.etikett : v.om ? `${v.om}: ${hur.charAt(0).toLowerCase()}${hur.slice(1)}` : hur;
+const etikett = vavensEtikett(v);
 ---
 <aside class:list={['vav', `vav-${v.form}`]} aria-label={etikett}>
   <p class="vav-etikett">{etikett}</p>

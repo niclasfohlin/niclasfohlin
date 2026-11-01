@@ -227,6 +227,7 @@ function texter(x, vag, ut, minst = MINST) {
 // eleven ser på bilden.
 const bilddata = existsSync(join(rot, 'src/data/pabordet.json')) ? JSON.parse(readFileSync(join(rot, 'src/data/pabordet.json'), 'utf8')) : {};
 // Bankernas filer, ur bygget (src/pages/stodundervisning/bankfiler.json.ts).
+const VAVT = new Map(JSON.parse(readFileSync(join(rot, 'dist/stodundervisning/metoder.json'), 'utf8')).metoder.map((m) => [m.id, m.vav ?? []]));
 const bankfiler = existsSync(join(rot, 'dist/stodundervisning/bankfiler.json')) ? JSON.parse(readFileSync(join(rot, 'dist/stodundervisning/bankfiler.json'), 'utf8')) : [];
 const mapp = join(rot, 'src/content/stodundervisning');
 const teman = await lasTeman(join(rot, 'src/content/faktateman'), parseYaml);
@@ -250,14 +251,25 @@ for (const fil of filer) {
   const tryckt = utskriftstext(html);
   const utskrift = norm(tryckt.text);
   let xml = '';
+  let wordLankar = '';
   const huvudOchFot = [];
   for (const fil of [docx]) {
     const zip = await JSZip.loadAsync(readFileSync(fil));
     xml += await zip.file('word/document.xml').async('string');
+    wordLankar = await zip.file('word/_rels/document.xml.rels').async('string');
     // Sidhuvuden och sidfötter hör till Word-filen: boksidornas rad Till läraren står i sidfoten.
     huvudOchFot.push(...await Promise.all(Object.keys(zip.files).filter((n) => /^word\/(header|footer)\d*\.xml$/.test(n)).map((n) => zip.file(n).async('string'))));
   }
   const word = norm(avkoda([xml, ...huvudOchFot].join(' ').replace(/<[^>]+>/g, '')));
+  // Det sajten väver in (src/lib/vav.ts): knappen i början är gränsen (K-668). En metod med knappen har varje plats delar som
+  // länkar i Word-filen, och en metod utan den har inga.
+  const vavt = VAVT.get(id) ?? [];
+  // Knappen i rutan på platsen (Vavruta.astro) är inte knappen i början.
+  const knappen = /<a class="[^"]*knapp[^"]*" href="\/strukturer"/.test(html.replace(/<aside class="vav[\s\S]*?<\/aside>/g, ''));
+  if (knappen !== vavt.length > 0) { console.error(`paritet: ${id} ${knappen ? 'har knappen Strukturer men ingen sådd i Word' : 'har sådden i Word men inte knappen i början'} (vavIWord i src/lib/vav.ts).`); fel++; }
+  const iLankar = [...new Set([...wordLankar.matchAll(/Target="[^"]*(\/strukturer\/[a-z0-9-]+)"/g)].map((x) => x[1]))].sort().join();
+  const iVav = [...new Set(vavt.flatMap((v) => v.delar.map((x) => x.adress)))].sort().join();
+  if (iLankar !== iVav) { console.error(`paritet: ${id}.docx har länkarna ${iLankar || 'inga'} till strukturerna, men sådden har ${iVav || 'inga'} (en plats i metoddocx.ts som inte frågar filmVid?).`); fel++; }
   // De centrala sakerna (src/lib/centrala.ts): metodens sida har knappen till saken, och Word-filen raden med namnet och
   // adressen. Platsen sätts av samma kod i båda; här prövas att ingen av dem faller bort (granskningen 2026-10-14).
   for (const x of d.centrala ?? []) {

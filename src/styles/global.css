@@ -4773,7 +4773,7 @@ button.pl-passroll { min-height: 2.75rem; }
 .um-strukturkort a.st-kort:focus-visible, .vav-kort a.st-kort:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
 .um-strukturknappar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 /* Det sajten väver in i en metod (src/lib/vav.ts, Vavruta.astro): kortraden och rutan, bara på skärmen, eftersom metodens
-   fil, Word-filen och utskriften är desamma utan dem. */
+   fil är densamma utan dem och Word-filen och pdf:en har en enkel rad där metoden har verktygets knapp i början. */
 .vav { margin: 1.25rem 0; padding: 0.8rem 0.9rem 0.9rem; border-radius: 10px; background: var(--farg-ton-svag); font-family: var(--typsnitt-ui); }
 .vav-etikett { margin: 0 0 0.55rem; font: var(--etikett); color: var(--farg-accent); }
 .vav-text { margin: 0 0 0.8rem; font-size: 0.95rem; line-height: 1.5; max-width: var(--matt-text); }
