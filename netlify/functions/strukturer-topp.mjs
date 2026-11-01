@@ -8,10 +8,11 @@
 // eller svarar 429, svarar funktionen 503, och sidan visar listan som den var när sajten byggdes
 // (src/data/strukturer-topp.json, scripts/strukturer/topplistan.mjs).
 //
-// Miljövariabel (sätts av Niclas, aldrig av Claude Code, som de andra nycklarna):
-//   GC_LASNYCKEL   en API-nyckel i GoatCounter som bara kan läsa statistiken (Settings, API, New API key, Read statistics)
+// Miljövariabel: GC_LASNYCKEL, en API-nyckel i GoatCounter som bara kan läsa statistiken. Claude Code satte den i Netlify
+// 2026-11-01 på Niclas begäran ("Den läser BARA statistik och är INGEN HEMLIGHET"), med netlify env:set i den länkade
+// mappen; med --site satte kommandot tyst ingenting.
 //
-// Varje körning gör högst 20 anrop mot GoatCounters 500 i timmen och slutar efter åtta sekunder med det den har hunnit.
+// Varje körning gör högst 20 anrop mot GoatCounters 500 i timmen och slutar efter sex sekunder med det den har hunnit, så att svaret kommer inom Netlifys tio sekunder.
 import { strukturernasTopplista } from '../../src/lib/standard/strukturer.js';
 
 export const config = { path: '/api/strukturer-topp' };
@@ -23,7 +24,7 @@ const svar = (status, data, cache) => new Response(JSON.stringify(data), {
 });
 
 /** Alla besök och händelser i perioden, 100 i taget, med de hämtade som exclude_paths, som statistiksidan. */
-export async function hamtaHits(nyckel, { hamta = fetch, nu = new Date(), tidsgrans = 8000 } = {}) {
+export async function hamtaHits(nyckel, { hamta = fetch, nu = new Date(), tidsgrans = 6000, paus = 300 } = {}) {
   const slut = new Date(nu); slut.setMinutes(0, 0, 0); slut.setHours(slut.getHours() + 1);
   const start = new Date(slut.getTime() - 30 * 86400000);
   const borjan = Date.now();
@@ -35,6 +36,8 @@ export async function hamtaHits(nyckel, { hamta = fetch, nu = new Date(), tidsgr
     u.searchParams.set('end', iso(slut));
     u.searchParams.set('limit', '100');
     if (sedda.size) u.searchParams.set('exclude_paths', [...sedda].join(','));
+    // GoatCounter tar högst fyra anrop i sekunden och svarar annars 429 (prövat 2026-11-01: sjätte sidan utan paus).
+    if (i) await new Promise((r) => setTimeout(r, paus));
     const r = await hamta(u, { headers: { Authorization: `Bearer ${nyckel}` }, signal: AbortSignal.timeout(4000) });
     if (!r.ok) throw new Error(`GoatCounter svarade ${r.status}`);
     const json = await r.json();
@@ -46,10 +49,10 @@ export async function hamtaHits(nyckel, { hamta = fetch, nu = new Date(), tidsgr
 }
 
 /** Svaret, med nyckeln och hämtningen som argument, så att provet kan härma GoatCounter (scripts/strukturer/prov.mjs). */
-export async function topplistansSvar({ nyckel, hamta = fetch, nu = new Date(), tidsgrans = 8000 } = {}) {
+export async function topplistansSvar({ nyckel, hamta = fetch, nu = new Date(), tidsgrans = 6000, paus = 300 } = {}) {
   if (!nyckel) return svar(503, { meddelande: 'Topplistan har ingen nyckel; sidan visar listan från bygget.' });
   try {
-    const strukturer = strukturernasTopplista(await hamtaHits(nyckel, { hamta, nu, tidsgrans })).slice(0, 20);
+    const strukturer = strukturernasTopplista(await hamtaHits(nyckel, { hamta, nu, tidsgrans, paus })).slice(0, 20);
     return svar(200, { datum: new Date().toISOString(), strukturer }, true);
   } catch (e) {
     return svar(503, { meddelande: `Topplistan kunde inte hämtas: ${e.message}` });
