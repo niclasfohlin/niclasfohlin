@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.53.0, 2026-11-01
+
+- `undervisningsmetod.js` (granskningen av 0.52.0): `slagensOrd`, slagets ord för sidan, planeringsbladet, lathunden, metodkortet och mejlet, så att slaget strategier säger Lagret, Eleverna, Så avgör du, Vägarna och Din lektion överallt. `hanvisadeMetodersFel`, ett id som inte finns eller som är en metod i båda samlingarna. `friTabellensPlats`, där allt annat än `efter-inledning` och `efter-progression` står sist i bilaga A, som i riggens Word-fil.
+
 ## 0.52.0, 2026-11-01
 
 - `undervisningsmetod.js` (riggens brev om Formativ bedömning): `delarnaAv`, delarna för en metod, där del 2 i slaget strategier heter Lagret, och `planerasNamn`, rubriken för planeringen efter slaget, Lagret på din planering i strategierna. `lasvagen` och lathunden läser dem. `relateradeAv`, det en metod hör ihop med, i Stödundervisning eller Metoder, med länken och raden under.

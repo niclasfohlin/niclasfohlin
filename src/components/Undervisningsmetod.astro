@@ -8,7 +8,7 @@
 import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
-import { planerasNamn, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
+import { friTabellensPlats, planerasNamn, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
 import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
@@ -37,11 +37,14 @@ const KARNANS_KORT = `Kärnans ${talText((d.karna?.komponenter ?? []).length)}`;
 const forstaL = forstaLektionensForm(d);
 const FORSTA = d.forsta?.rubrik ?? forstaL.namn;
 // Delarnas celler under bandet: avsnitten som länkar, i formspråket C. Bara avsnitt som metoden har.
+const slagetsOrd = slagensOrd(d);
+// En fri tabell med meny: true har en rad i menyn där den står (UmFriaTabeller.astro).
+const tabellCeller = (plats: string) => ((d.tabeller ?? []) as { rubrik: string; plats?: string; meny?: boolean }[]).filter((t) => t.meny && friTabellensPlats(t, d) === plats).map((t): [string, string, unknown] => [slugAv(t.rubrik), t.rubrik, true]);
 const CELLER: Record<string, [string, string, unknown][]> = {
-  metoden: [['det-har-ar', `Det här är ${d.titel.toLocaleLowerCase('sv')}`, true], ['i-korthet', KARNANS_KORT, d.karna], ['lararens-roll', 'Lärarens roll', d.roll]],
-  'kom-igang': [['fore-forsta', 'Före första lektionen', d.checklista], ['planera-lektionen', planerasNamn(d), d.amnesexempel?.some((e: { plan?: unknown }) => e.plan)], ['forsta-lektionen', FORSTA, d.forsta], ['de-forsta-veckorna', 'De första veckorna', d.progression], ['efter-de-forsta-veckorna', 'Efter de första veckorna', true], ['till-arbetslaget', 'Till arbetslaget', d.uppdrag]],
+  metoden: [['det-har-ar', `Det här är ${d.titel.toLocaleLowerCase('sv')}`, true], ['i-korthet', KARNANS_KORT, d.karna], ['lararens-roll', 'Lärarens roll', d.roll], ...tabellCeller('efter-inledning')],
+  'kom-igang': [['fore-forsta', 'Före första lektionen', d.checklista], ['planera-lektionen', planerasNamn(d), d.amnesexempel?.some((e: { plan?: unknown }) => e.plan)], ['forsta-lektionen', FORSTA, d.forsta], ['de-forsta-veckorna', 'De första veckorna', d.progression], ...tabellCeller('efter-progression'), ['efter-de-forsta-veckorna', 'Efter de första veckorna', true], ['till-arbetslaget', 'Till arbetslaget', d.uppdrag]],
   'hall-i': [['karnan', 'Kärnan: fast och fritt', d.karna], ['lararens-fragor', 'Lärarens frågor', d.lararensFragor], ['nar-det-glider', 'När det glider', true]],
-  'att-skriva-ut': [['materialet', UM_NAMN.lektionskort, filer.lektionskort], ['strukturkorten', STRUKTURKORTEN, strukturer.length],['materialet-for-klassen', d.ramar?.rubrik ?? UM_NAMN.materialet, d.ramar], ['planeringsmallen', UM_NAMN.planeringsmall, d.planeringsmall], ['observationsmallen', UM_NAMN.observation, d.observation]],
+  'att-skriva-ut': [['materialet', UM_NAMN.lektionskort, filer.lektionskort], ['strukturkorten', STRUKTURKORTEN, strukturer.length],['materialet-for-klassen', d.ramar?.rubrik ?? UM_NAMN.materialet, d.ramar], ['planeringsmallen', UM_NAMN.planeringsmall, d.planeringsmall], ['observationsmallen', UM_NAMN.observation, d.observation], ...tabellCeller('bilaga-a')],
   valet: [],
 };
 const celler = (did: string) => (CELLER[did] ?? []).filter(([, , finns]) => !!finns);
@@ -133,7 +136,7 @@ const moten = arbetslagetsMoten(d);
       {d.roll.fragornaText && <p set:html={k(d.roll.fragornaText)} />}
     </section>
   )}
-  <UmFriaTabeller tabeller={d.tabeller} plats="efter-inledning" k={k} />
+  <UmFriaTabeller d={d} plats="efter-inledning" k={k} />
   {/* Lektionskortet efter Lärarens roll, där del 1 slutar, och inte mitt i texten (granskare-3 nr 20). */}
   <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} stor />
   {del('metoden').text && <p class="um-overgang" set:html={k(del('metoden').text)} />}
@@ -141,7 +144,7 @@ const moten = arbetslagetsMoten(d);
 
 <section class="um-del" id="del-lektionen" aria-labelledby="del-lektionen-rubrik">
   <header class="um-band"><span class="um-band-nr" aria-hidden="true">2</span><div><h2 id="del-lektionen-rubrik"><span class="visually-hidden">Del 2: </span>{del('lektionen').namn}</h2><p>{del('lektionen').rad}</p></div></header>
-  <nav class="um-remsa" aria-label="Lektionens delar">
+  <nav class="um-remsa" aria-label={slagetsOrd.delarna}>
     <ol style={`--antal: ${steg.length}`}>
       {steg.map((s) => { const r = tidsschematsRad(d, s.namn); return <li><a href={`#del-${s.namn.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}`}><span class="um-remsa-tid">{r?.tid}</span><span class="um-remsa-namn">{s.namn}</span></a></li>; })}
     </ol>
@@ -166,9 +169,9 @@ const moten = arbetslagetsMoten(d);
             {karna.length > 0 && <p class="um-ld-karna">Kärnan här: {karna.map((x: { nr: number; namn: string }, i: number) => <>{i > 0 && ', '}<a href={`#karnan-${x.nr}`}>{x.nr} {x.namn}</a></>)}</p>}
             {r?.vad && <p class="um-ld-vad" set:html={k(r.vad)} />}
             <dl class="um-tre">
-              <div><dt>Alla elever visar</dt><dd set:html={k(s.alla)} /></div>
+              <div><dt>{slagetsOrd.alla}</dt><dd set:html={k(s.alla)} /></div>
               <div><dt>Du tittar efter</dt><dd set:html={k(s.titta)} /></div>
-              <div><dt>Beslutet</dt><dd set:html={k(s.beslut)} /></div>
+              <div><dt>{slagetsOrd.beslut}</dt><dd set:html={k(s.beslut)} /></div>
             </dl>
             <ol class="um-gor">
               {(Array.isArray(s.gor) ? s.gor : [s.gor]).map((g: string) => <li set:html={replik(g, (f) => fraser.has(f) || f.length < 90)} />)}
@@ -290,7 +293,7 @@ const moten = arbetslagetsMoten(d);
         </>
       )}
       {/* Bladets överkant med mallens egna ord, så att raden säger vad just den här metoden börjar med. */}
-      <p><Fragment set:html={k(`Planera varje lektion på ett blad i planeringsmallen.${d.planeringsmall?.overst?.[0] ? ` Börja överst: ${liten(d.planeringsmall.overst[0])}.` : ''}`)} /> Den tomma mallen står i <a href="#planeringsmallen">bilaga A</a>, förlagan till {forstaL.din} står under <a href="#forsta-lektionen">{FORSTA}</a>, och lektion {String(huvud.plan.lektion ?? '').split(' ')[0]} i huvudexemplet står ifylld <a href="#huvudexemplets-plan">vid exemplet</a> i del 2.</p>
+      <p><Fragment set:html={k(`${slagetsOrd.planeraRad}${d.planeringsmall?.overst?.[0] ? ` Börja överst: ${liten(d.planeringsmall.overst[0])}.` : ''}`)} /> Den tomma mallen står i <a href="#planeringsmallen">bilaga A</a>, förlagan till {forstaL.din} står under <a href="#forsta-lektionen">{FORSTA}</a>, och lektion {String(huvud.plan.lektion ?? '').split(' ')[0]} i huvudexemplet står ifylld <a href="#huvudexemplets-plan">vid exemplet</a> i del 2.</p>
     </section>
   )}
   {d.forsta && (
@@ -360,7 +363,7 @@ const moten = arbetslagetsMoten(d);
           ))}
         </article>
       ))}
-      <UmFriaTabeller tabeller={d.tabeller} plats="efter-progression" k={k} />
+      <UmFriaTabeller d={d} plats="efter-progression" k={k} />
     </section>
   )}
   <section class="um-avsnitt" id="efter-de-forsta-veckorna">
@@ -451,7 +454,7 @@ const moten = arbetslagetsMoten(d);
   {filer.lektionskort && (
     <section class="um-avsnitt" id="materialet">
       <h3>{UM_NAMN.lektionskort}</h3>
-      <p>Hela lektionen på ett A4 att ha i handen: kärnan, delarna med det du gör och säger, beslutet och {d.fastnar?.rubrik ?? 'rättningen'}.</p>
+      <p>{slagetsOrd.hela} på ett A4 att ha i handen: kärnan, delarna med det du gör och säger, beslutet och {d.fastnar?.rubrik ?? 'rättningen'}.</p>
       {bilder.lektionskort?.length > 0 && <div class="um-sidor">{bilder.lektionskort.map((b) => <a href={filer.lektionskort?.pdf} data-goatcounter-click={`fil:${id}-lektionskort.pdf`} data-goatcounter-title={`Bilden av lektionskort, pdf, ${id}`} class="um-sida"><img src={b.src} alt={`Lektionskortet: kärnan i ${talText(komp.length)} rutor, lektionens delar med det du gör och säger, beslutet och ${d.fastnar?.rubrik ?? 'rättningen'}`} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>)}</div>}
       <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} />
     </section>
@@ -540,6 +543,7 @@ const moten = arbetslagetsMoten(d);
       <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['observation']} />
     </section>
   )}
+  <UmFriaTabeller d={d} plats="bilaga-a" k={k} />
 </section>
 
 <section class="um-del" id="del-valet" aria-labelledby="del-valet-rubrik">

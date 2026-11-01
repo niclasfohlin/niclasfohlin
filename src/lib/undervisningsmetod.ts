@@ -3,7 +3,7 @@
 // Modulen läser inga filer, så att sidans skript kan läsa den; filerna läser src/lib/undervisningsmetodfiler.ts.
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
-import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, utfallensGranser, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, utfallensGranser, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
 // (K-627), så sidan läser resten som metodens fil har det.
@@ -56,6 +56,8 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   const iMaterialet = (namn: string) => new RegExp(`(^|[^\\p{L}])${skyddaRegex(liten(namn))}(?![\\p{L}])`, 'u').test(materialet);
   const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) || iMaterialet(namn) ? {} : { versal: true }), ...extra });
   const saker: MetodSak[] = o.lektionskort === false ? [] : [sak(UM_NAMN.lektionskort, `${sida}#materialet`)];
+  // En fri tabell med en rad i menyn har en egen plats på sidan, som Frågor att låna i Formativ bedömning.
+  for (const t of (d.tabeller ?? []) as { rubrik: string; meny?: boolean }[]) if (t.meny) saker.push(sak(t.rubrik, `${sida}#${slugAv(t.rubrik)}`));
   if (d.ramar) {
     saker.push(sak(d.ramar.rubrik ?? UM_NAMN.materialet, `${sida}#materialet-for-klassen`));
     // Ett blad vars rubrik har en etikett före kolon, som "Strukturen, vecka 1: Ping-pong-prat", hittas också med namnet
@@ -149,8 +151,9 @@ export const kallansId = (namn: string, ar: string) => `${namn} ${ar}`.toLocaleL
 export function medKallor(text: string, kallor: Set<string>, sidor: { titel: string; href: string }[] = []): string {
   let t = esc(String(text ?? ''));
   // En metod som sajten har, som De fyra räknesätten i grupp eller explicit undervisning, är en länk dit (STIL.md under
-  // Hänvisningar), också med liten bokstav först inne i en mening.
-  for (const s of sidor) {
+  // Hänvisningar), också med liten bokstav först inne i en mening. En metod som står i två listor, som relaterade och
+  // passar.metoder, länkas en gång.
+  for (const s of new Map(sidor.map((x) => [x.href, x])).values()) {
     const m = t.match(new RegExp(`(^|[^\\p{L}])(${[esc(s.titel), esc(liten(s.titel))].map(skyddaRegex).join('|')})(?!\\p{L})`, 'u'));
     if (m) t = `${t.slice(0, m.index! + m[1].length)}<a href="${s.href}">${m[2]}</a>${t.slice(m.index! + m[0].length)}`;
   }
@@ -215,6 +218,8 @@ export const BLADETS_ORD = {
   fore: 'Före lektionen', forberett: 'Förberett', blad: 'Blad och facit', stod: 'Stöd, till vem', lektionen: 'Lektionen', minuterna: 'minuterna i', karnan: 'kärnan',
   beslutet: 'Beslutet', elever: 'elever i dag:', efter: 'Efter lektionen', karnanIlektionen: 'Kärnan i lektionen',
 } as const;
+/** Bladets ord för en metod: zonen och beslutet heter efter metodens slag (slagensOrd i standarden), som i riggens Word-fil. */
+export const bladetsOrd = (d: Um) => { const o = slagensOrd(d); return { ...BLADETS_ORD, lektionen: o.zon, beslutet: o.bladetsBeslut }; };
 /** Ett fält i planeringen som lista: en lista, en text som lista med en rad, eller tom. */
 export const bladetsLista = (v: unknown): string[] => (Array.isArray(v) ? v.map(String) : v ? [String(v)] : []);
 /** En rad på planeringsbladet bryts efter en mittpunkt och aldrig i ett tal (designgranskningen 2026-10-30: 14 blev 1 och 4). */

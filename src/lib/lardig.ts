@@ -2,7 +2,7 @@
 // visar ur metodens fil, som JSON till sidans skript (src/scripts/lardig.ts), och bygget stannar på en metod vars plan inte
 // går att räkna. Motorn och allt som räknar står i standarden (src/lib/standard/plan.js, under Lär dig metoden), och
 // formen och faserna i underlag/prov/metoder/PLANERA-LAGRET.md och riggens standard för undervisningsmetoder, avsnitt 16.
-import { dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, lasvagen, planensStart, rentText, somLista } from './standard/index.js';
+import { dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, lasvagen, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
 import { metodensAdress, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import { metodensStrukturer, metodensKortAdress, ALLA_KORTENS_ADRESS, kortensVersion, allaKortensAntal, allaKortensStorlek, TVA_PA_A4 } from './strukturer';
 import { metodensFiler } from './undervisningsmetodfiler';
@@ -71,7 +71,7 @@ export const harLarDig = (d: Um) => somLista(d.plan?.skattningar).some((x) => (x
  */
 export const metodensSidor = (id: string, d: Um) => [
   ...(harLarDig(d) ? [{ text: 'Lär dig metoden', href: `${metodensAdress(id)}/lar-dig`, klass: 'central-lank', mejl: 'ett steg i taget, där klasserna varje vecka övar en rutin och du ett drag, och du skattar hur det gick' }] : []),
-  ...(d.lathund ? [{ text: 'Lathund', href: `${metodensAdress(id)}/lathund`, klass: 'lathund-lank', mejl: 'fyra sidor att ha bredvid sig när du börjar, med metoden, vägen till måndag, planeringen av en lektion och de första veckorna' }] : []),
+  ...(d.lathund ? [{ text: 'Lathund', href: `${metodensAdress(id)}/lathund`, klass: 'lathund-lank', mejl: `fyra sidor att ha bredvid sig när du börjar, med metoden, vägen till måndag, ${slagensOrd(d).lathunden} och de första veckorna` }] : []),
 ];
 
 /** Planens data ur metodens fil. */

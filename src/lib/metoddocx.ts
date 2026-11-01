@@ -8,6 +8,7 @@ import {
   Paragraph, type Run, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, TextWrappingType, UnderlineType, VerticalAlign, VerticalPositionRelativeFrom, WidthType,
   type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
+import type { ParagraphChild } from 'docx';
 import { centralaVid, lasbarAdress, metodensCentrala, type Textplats } from './centrala';
 import { centraltPapper } from './centraladata';
 import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening, vidareTillLektion } from './standard/index.js';
@@ -172,7 +173,7 @@ function dubbelRam(bredd: number, kant: IBorderOptions, inre: (bredd: number) =>
 // brak: bråken i texten står staplade (elevmaterial); nySida: stycket börjar på en ny sida; hel: stycket delas inte
 // mellan två sidor.
 // niva4: stycket är en rubrik på nivå 4 i Word (en listas rubrik under ramens nivå 3), så att den syns i navigeringen (K-035).
-interface StyckeVal { kursiv?: boolean; fet?: boolean; farg?: string; storlek?: number; fore?: number; efter?: number; hallIhop?: boolean; mitt?: boolean; versaler?: boolean; font?: string; brak?: boolean; nySida?: boolean; hel?: boolean; niva4?: boolean; radbryt?: boolean; understruken?: boolean }
+interface StyckeVal { sist?: ParagraphChild[]; kursiv?: boolean; fet?: boolean; farg?: string; storlek?: number; fore?: number; efter?: number; hallIhop?: boolean; mitt?: boolean; versaler?: boolean; font?: string; brak?: boolean; nySida?: boolean; hel?: boolean; niva4?: boolean; radbryt?: boolean; understruken?: boolean }
 
 // Elevens typsnitt i elevmaterialet (K-130, src/lib/ljudkort.ts): medan medElevtypsnitt gäller får varje textlöpa utan
 // eget typsnitt elevens, så att korten att klippa och mallarna står i det, som på sidan. Utanför gäller husets.
@@ -294,7 +295,7 @@ function stycke(text: string, o: StyckeVal = {}): Paragraph {
     // Faktatextsamtal i grupp har tre ledtrådar under varandra i en cell, och de lästes som en fras (granskningen
     // 2026-10-13, P1). Röstsedlarna i Boksamtal i grupp och provbildens frågor i Seriesamtal hade samma fel.
     // scripts/paritet.mjs stannar på ett radslut inne i en text i en Word-fil.
-    children: o.brak ? brakBarn(text, o) : radRuns(text, o),
+    children: [...(o.brak ? brakBarn(text, o) : radRuns(text, o)), ...(o.sist ?? [])],
     spacing: { before: o.fore ?? 0, after: o.efter ?? 120 },
     keepNext: o.hallIhop,
     keepLines: o.hel,
@@ -3065,20 +3066,23 @@ const lankad = (text: string, lank: string) => new ExternalHyperlink({ link: lan
 // Det sajten väver in (src/lib/vav.ts) i en metod med verktygets knapp i början: en enkel rad sist på platsen, som på sidan,
 // med delarnas namn som länkar och verktygets namn med adressen, som också går att läsa på papper (Niclas 2026-11-01: "också
 // såddad i docx med liknande enkel placeholders"). Verktyget står en gång på platsen, och inte där knappens rad redan står.
-function vavBarn(vavt: VavIWord[], bas: string, efterText = false): Paragraph[] {
+function vavRadens(v: VavIWord, bas: string, medRaden: boolean) {
   const rot = bas.replace(/\/$/, '');
+  const { namn, adress } = v.verktyg;
+  const namnen = v.delar.flatMap((x, n) => [...(n ? [textRun({ text: n === v.delar.length - 1 ? ' och ' : ', ' })] : []), lankad(x.namn, `${rot}${x.adress}`)]);
+  return [
+    textRun({ text: `${v.etikett}: ` }),
+    ...namnen,
+    textRun({ text: `${/[.!?]$/.test(v.delar.at(-1)?.namn ?? '') ? '' : '.'}${medRaden ? ` ${namn}: ` : ''}` }),
+    ...(medRaden ? [lankad(`${rot}${adress}`.replace(/^https?:\/\//, ''), `${rot}${adress}`)] : []),
+  ];
+}
+function vavBarn(vavt: VavIWord[], bas: string): Paragraph[] {
   return vavt.flatMap((v, i) => {
-    const { namn, adress } = v.verktyg;
-    const namnen = v.delar.flatMap((x, n) => [...(n ? [textRun({ text: n === v.delar.length - 1 ? ' och ' : ', ' })] : []), lankad(x.namn, `${rot}${x.adress}`)]);
     const medRaden = i === vavt.length - 1 && !v.knappenFinns;
     return [
       ...(v.text ? [stycke(v.text, { fore: 120, hallIhop: true })] : []),
-      new Paragraph({ spacing: { before: v.text || efterText ? 0 : 120, after: efterText ? 60 : 120 }, children: [
-        textRun({ text: `${v.etikett}: ` }),
-        ...namnen,
-        textRun({ text: `${/[.!?]$/.test(v.delar.at(-1)?.namn ?? '') ? '' : '.'}${medRaden ? ` ${namn}: ` : ''}` }),
-        ...(medRaden ? [lankad(`${rot}${adress}`.replace(/^https?:\/\//, ''), `${rot}${adress}`)] : []),
-      ] }),
+      new Paragraph({ spacing: { before: v.text ? 0 : 120, after: 120 }, children: vavRadens(v, bas, medRaden) }),
     ];
   });
 }
@@ -3363,13 +3367,16 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   let efterElevsida = false;
   if (d.ramar && (o.material || !MATERIAL.has('ramar'))) {
     ut.push(h2(d.ramar.rubrik));
-    for (const s of d.ramar.text) ut.push(stycke(s));
     // En strukturs egen sida (strukturAv) är ett fullt A4 för eleverna, och en rad före eller efter den fick ofta en egen sida.
-    // Det sajten väver in vid de sidorna står därför en gång här, med varje namn en gång, där texten alltid löper (K-668).
+    // Det sajten väver in vid de sidorna står därför en gång här, med varje namn en gång, sist i inledningens sista stycke. Som
+    // en egen rad sköt den meningen om Andika till en egen sida i Texttyp: Instruerande text (K-668).
     const vidSidorna = vavRader(...d.ramar.ramar.filter((r) => strukturAv(r)).map((r) => ({ ram: r.rubrik })));
     const samlade = new Map<string, VavIWord>();
     for (const v of vidSidorna) { const nyckel = `${v.verktyg.namn}|${v.etikett}`; samlade.set(nyckel, { ...v, delar: [...new Map([...(samlade.get(nyckel)?.delar ?? []), ...v.delar].map((x) => [x.adress, x])).values()] }); }
-    ut.push(...vavBarn([...samlade.values()], bas, true));
+    const iStycket = [...samlade.values()].filter((v) => !v.text && d.ramar!.text.length);
+    const sist = iStycket.flatMap((v, i) => [textRun({ text: ' ' }), ...vavRadens(v, bas, i === iStycket.length - 1 && !v.knappenFinns)]);
+    d.ramar.text.forEach((s, i, alla) => ut.push(stycke(s, i === alla.length - 1 ? { sist } : {})));
+    ut.push(...vavBarn([...samlade.values()].filter((v) => !iStycket.includes(v)), bas));
     ut.push(...ljudRader(d));
     const boksidor = lastexter(d.ramar.ramar);
     const ramarna = d.ramar.ramar;

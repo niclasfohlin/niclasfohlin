@@ -16,7 +16,7 @@ import Umlathund from '../../../components/Umlathund.astro';
 import { relateradeMetoder, publicerade } from '../../../lib/innehall';
 import { FILM_UPPHOV, metodensFilmer } from '../../../lib/film';
 import { datumText, UPPHOV } from '../../../lib/metod';
-import { lathundensSidor } from '../../../lib/standard/index.js';
+import { lathundensSidor, slagensOrd } from '../../../lib/standard/index.js';
 import { metodensAdress, umStam, undervisningsmetodensSaker, type Um } from '../../../lib/undervisningsmetod';
 import { metodensStrukturer } from '../../../lib/strukturer';
 import { metodensFiler } from '../../../lib/undervisningsmetodfiler';
@@ -40,12 +40,12 @@ const saker = undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektions
 const relaterade = await relateradeMetoder(d);
 ---
 
-<Base title={`Lathund: ${d.titel}`} description={`Lathunden Att komma igång till ${d.titel}: metoden, vägen till måndag, planeringen av en lektion och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+<Base title={`Lathund: ${d.titel}`} description={`Lathunden Att komma igång till ${d.titel}: metoden, vägen till måndag, ${slagensOrd(d).lathunden} och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="lathund">
     <header class="lathund-huvud">
       <p class="meta brodsmula"><a href="/metoder">Metoder</a> · <a href={sida}>{d.titel}</a> · Lathund</p>
       <h1>Lathund: {d.titel}</h1>
-      <p class="ingress">Fyra sidor att ha bredvid sig när du börjar: metoden, vägen till måndag, planeringen av en lektion och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
+      <p class="ingress">Fyra sidor att ha bredvid sig när du börjar: metoden, vägen till måndag, {slagensOrd(d).lathunden} och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
         <Lathundsknappar fil={`/metoder/${umStam(id, 'lathund')}`} titel={d.titel} />
         {' '}<Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} bara />

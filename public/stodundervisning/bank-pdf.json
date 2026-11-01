@@ -4887,10 +4887,10 @@
     "datum": "2026-11-01"
   },
   "boksamtal-i-grupp": {
-    "word": "50b9c62deaac90753b02d1e0ea47daf8ce1a8df8c7ad13048a49d70c442e5f8d",
-    "pdf": "54f85a2d7b390f4c1277f44234cf0746445df6d641cb42747f6f7119a1fe8a2a",
+    "word": "c638581edad33ae0d0f619866e29aca76c596b7cf95ff6cdd5967d90718d49c3",
+    "pdf": "8c14e27477c150e2338edda21bcfb9f8350e7bf95bcfdada6b5a7926b0b51da5",
     "sidor": 48,
-    "kB": 1159,
+    "kB": 1156,
     "datum": "2026-11-01"
   },
   "boksamtal-i-grupp-metoden": {
@@ -5153,10 +5153,10 @@
     "datum": "2026-10-28"
   },
   "skrivkurs-vardeskapande": {
-    "word": "542856867e565d52d6355580cc401da53e312547ebe80b1329516be643c898fe",
-    "pdf": "bcac443296ae4e597730a8447a793f3d118ff9cb3dcda7c3a1cc0e15c80bba63",
+    "word": "23b20155d9f6e065cedf434fd545d9043e48f61b5ec9f869c77146dac6c29cbf",
+    "pdf": "63f492c932f27cc0d15825f72c76749444e38bdbe8068c4c3789758e4073c33e",
     "sidor": 76,
-    "kB": 1243,
+    "kB": 1246,
     "datum": "2026-11-01"
   },
   "skrivkurs-vardeskapande-metoden": {
@@ -5181,8 +5181,8 @@
     "datum": "2026-11-01"
   },
   "texttyp-argumenterande-text": {
-    "word": "957859544c52ed56a7623cc43e5dbab4bbb80927b5f5bd574af9c35b97391ee0",
-    "pdf": "a287c381d0da83ee43dbd907858edb7145bb6f0201984ad38bd22ab2211f4a14",
+    "word": "9cffb5338670ab45fc1a2dae0f975b827930caa85a65c7a460608f49bdba20b7",
+    "pdf": "014a5d972866a9f44f04006bfb32691cb170264782f29a7988aa85196870341d",
     "sidor": 51,
     "kB": 977,
     "datum": "2026-11-01"
@@ -5195,10 +5195,10 @@
     "datum": "2026-10-28"
   },
   "texttyp-berattande-text": {
-    "word": "8360019fdebef50fc8dcbe08e42ffe6f4c6c4555dd5024d357991e4edace4ac2",
-    "pdf": "034d660045d88cb12aae1efb04402856c48fcec07571b56a78b269d2ac59d0c5",
+    "word": "44d44e128070318308b36c53ddd050771ccf6d59804251ea7ede47fb73f82fa0",
+    "pdf": "c475e711bef4c9342ba2c803fb9f44b0a32f39649a4c8624ce5992953c6310df",
     "sidor": 70,
-    "kB": 1409,
+    "kB": 1412,
     "datum": "2026-11-01"
   },
   "texttyp-berattande-text-metoden": {
@@ -5209,10 +5209,10 @@
     "datum": "2026-10-28"
   },
   "texttyp-beskrivande-text": {
-    "word": "8c1a2b020ef984847ff9aa8bbb9a60a250f67c84230066af75a9def9d64cf3ac",
-    "pdf": "600a79dc56c8e7a5f26c7b31707d3dab76cc581e3c9a02bba6293725c920677a",
+    "word": "1c9a2d34aff9153be308eede11f62ea3f53cf76de5dcd436a44707ae8316fbdc",
+    "pdf": "b63d4b9f14e5bf237a41d249dee2e75c21e9070c18d2a133e934b57d8e71c9f7",
     "sidor": 60,
-    "kB": 1066,
+    "kB": 1064,
     "datum": "2026-11-01"
   },
   "texttyp-beskrivande-text-metoden": {
@@ -5223,9 +5223,9 @@
     "datum": "2026-11-01"
   },
   "texttyp-instruerande-text": {
-    "word": "170077f259c12cc17b9459c14dfc75a234a5feaab12d7babaec73b581749d160",
-    "pdf": "8b11e8f92b17874c10964ab01e09da600535138e3a806fd465cc0226c033618e",
-    "sidor": 64,
+    "word": "aab9efae9d17c72b7a065606dcde4e4846a40517a5f87b41e39866f94083a92f",
+    "pdf": "154612016f5152444f93dd817ebf6e20e2461a624d57d9721db3f8dc63fa904a",
+    "sidor": 63,
     "kB": 1078,
     "datum": "2026-11-01"
   },
@@ -7672,8 +7672,8 @@
     ]
   },
   "hoglasning-i-par": {
-    "word": "64515a773246bf8c5ce36c7c8f1d73889c6a5de04ef23a36bc678335c02be3d3",
-    "pdf": "f22ecf0738381a9a398bba2faeb3eaaf3b86c69562e4c8918a8e0c41c472f415",
+    "word": "ef310777afdeed423d0a9b11228117ee4982042607a91f2f15c09b511961f59a",
+    "pdf": "7516ad1bcd395d54d36bd065c77becdb410df84a9ad5ca555e9b3e76d298418d",
     "sidor": 31,
     "kB": 858,
     "datum": "2026-11-01"

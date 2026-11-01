@@ -10,7 +10,7 @@ import { metodensFastaAntal } from './antal';
 import { hanvisningsFel } from './boklankar';
 import { metodensLektionskort } from './lektionskort';
 import { lasLektionskort } from './lektionskortdata';
-import { allaTexter, kortetsMalFel, varianternasFel } from './standard/index.js';
+import { allaTexter, hanvisadeMetodersFel, kortetsMalFel, varianternasFel } from './standard/index.js';
 import type { SamlingNyckel } from './samlingar';
 
 // Utkast visas i utvecklingsläge men aldrig i produktionsbygget. Databasens matteproblem har inget utkastläge.
@@ -40,14 +40,8 @@ async function provaHanvisade(poster: CollectionEntry<'stodundervisning' | 'unde
   if (!nya.length) return;
   const finns = async (samling: 'stodundervisning' | 'undervisningsmetoder') => new Set((await getCollection(samling)).map((p) => p.id));
   const [stod, metoder] = await Promise.all([finns('stodundervisning'), finns('undervisningsmetoder')]);
-  const fel = nya.flatMap((p) => {
-    const d = p.data as { relaterade?: string[]; passar?: { metoder?: string[] } };
-    return [
-      ...(d.relaterade ?? []).filter((id) => !stod.has(id) && !metoder.has(id)).map((id) => `${p.filePath ?? p.id}: relaterade nämner ${id}, som inte är en metod i src/content/stodundervisning/ eller src/content/undervisningsmetoder/.`),
-      ...(d.passar?.metoder ?? []).filter((id) => !metoder.has(id)).map((id) => `${p.filePath ?? p.id}: passar.metoder nämner ${id}, som inte är en metod i src/content/undervisningsmetoder/.`),
-    ];
-  });
-  if (fel.length) throw new Error(`${fel.length} okända id i Hör ihop med och valkartan:\n  ${fel.join('\n  ')}\nRätta id:t eller ta bort det.`);
+  const fel = nya.flatMap((p) => hanvisadeMetodersFel(p.data as { relaterade?: string[]; passar?: { metoder?: string[] } }, { stod, metoder }).map((f) => `${p.filePath ?? p.id}: ${f}`));
+  if (fel.length) throw new Error(`${fel.length} fel i Hör ihop med och valkartan:\n  ${fel.join('\n  ')}\nRätta id:t eller ta bort det.`);
   for (const p of nya) hanvisningarnaProvade.add(p.data);
 }
 

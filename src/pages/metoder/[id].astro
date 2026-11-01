@@ -51,7 +51,7 @@ const huvudexemplet = (d.amnesexempel ?? []).find((e: { huvud?: boolean }) => e.
 const lv = lasvagenFor(d);
 const lastid = lv.minuter;
 const kallor = new Set<string>((d.kallor ?? []).map((x: { id: string }) => x.id));
-// Metoderna i Stödundervisning som metoden hör ihop med: deras titlar blir länkar i texten, och de står i Hör ihop med. Bara
+// Metoderna som metoden hör ihop med, i Stödundervisning eller Metoder: deras titlar blir länkar i texten, och de står i Hör ihop med. Bara
 // de publicerade, så att ett utkast aldrig blir en länk; ett okänt id stoppar bygget (provaHanvisade i src/lib/innehall.ts).
 const relaterade = await relateradeMetoder(d);
 // Metoderna under Metoder som valkartan pekar på (passar.metoder), som Explicit undervisning i Kooperativt lärandes När

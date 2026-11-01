@@ -12,6 +12,7 @@ import '../../../styles/global.css';
 import { site } from '../../../data/site';
 import { allaKort, type Kort } from '../../../lib/delningskort';
 import { publicerade } from '../../../lib/innehall';
+import { slagensOrd } from '../../../lib/standard/index.js';
 import { kortetUrFil, OMRADEN } from '../../../lib/metodprofil';
 import Metodprofil from '../../../components/Metodprofil.astro';
 import Staplar from '../../../components/Staplar.astro';
@@ -26,7 +27,7 @@ const post = (await publicerade('undervisningsmetoder')).find((p) => p.id === um
 if (!post) throw new Error(`Delningskortet för ${kort.sida}: metoden ${um.id} är inte publicerad.`);
 const m = kortetUrFil(post.id, post.data);
 // Faktan till vänster: lektionens längd, hur ofta och årskursen. De första veckorna står i utsnittet av metodkortet på sidan.
-const fakta = um.fakta.filter(([rubrik]) => ['Lektion', 'Hur ofta', 'Årskurs'].includes(rubrik));
+const fakta = um.fakta.filter(([rubrik]) => [slagensOrd(post.data).kortet, 'Hur ofta', 'Årskurs'].includes(rubrik));
 const l = um.larande;
 const n = kort.titel.length;
 const storlek = n <= 22 ? 78 : n <= 34 ? 64 : 54;

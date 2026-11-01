@@ -47,6 +47,27 @@ export const relateradeAv = (d, { stod, metoder }, arskursAv) => (d?.relaterade 
 });
 
 /**
+ * Felen i det en metod hänvisar till: ett id som inte finns, och ett id som är en metod i båda samlingarna, där länken annars
+ * tyst leder till Stödundervisning, eller byter mål den dag ett utkast publiceras (provaHanvisade i src/lib/innehall.ts).
+ * @param {{ relaterade?: string[], passar?: { metoder?: string[] } }} d metodens fil
+ * @param {{ stod: Set<string>, metoder: Set<string> }} finns alla id i samlingarna, också utkasten
+ */
+export const hanvisadeMetodersFel = (d, { stod, metoder }) => [
+  ...(d?.relaterade ?? []).filter((id) => !stod.has(id) && !metoder.has(id)).map((id) => `relaterade nämner ${id}, som inte är en metod i src/content/stodundervisning/ eller src/content/undervisningsmetoder/.`),
+  ...(d?.relaterade ?? []).filter((id) => stod.has(id) && metoder.has(id)).map((id) => `relaterade nämner ${id}, som är en metod både i src/content/stodundervisning/ och i src/content/undervisningsmetoder/, så länken kan leda fel.`),
+  ...(d?.passar?.metoder ?? []).filter((id) => !metoder.has(id)).map((id) => `passar.metoder nämner ${id}, som inte är en metod i src/content/undervisningsmetoder/.`),
+];
+
+/**
+ * Var en fri tabell står i en undervisningsmetod: `efter-inledning` sist i del 1 och `efter-progression` efter veckorna. Allt
+ * annat, som en tabell utan plats eller med mallens `efter-grund`, står sist i bilaga A, som i riggens Word-fil, så att ingen
+ * tabell finns i filen men inte på sidan.
+ * @param {{ plats?: string }} t tabellen
+ * @param {{ progression?: unknown }} d metodens fil
+ */
+export const friTabellensPlats = (t, d) => (t?.plats === 'efter-inledning' || (t?.plats === 'efter-progression' && d?.progression) ? t.plats : 'bilaga-a');
+
+/**
  * En dels rad och text med metodens tal: minuterna i en lektion, veckorna att komma igång i ord, huvudexemplets ämne och
  * antalet andra exempel. Del 3:s text är metodens egen (`progression.text`).
  * @param {{ id: string, rad: string, text: string }} del
@@ -435,13 +456,21 @@ export function arbetslagetsMoten(d) {
  * Första lektionen eller Första veckan, är metodens egen (`forsta.rubrik`). Ett slag som tabellen inte har får ett
  * lektionsförlopps form.
  */
+const LEKTIONENS_ORD = Object.freeze({ planera: 'Planera lektionen', planeraRad: 'Planera varje lektion på ett blad i planeringsmallen.', delarna: 'Lektionens delar', hela: 'Hela lektionen', lathunden: 'planeringen av en lektion', kortet: 'Lektion', alla: 'Alla elever visar', beslut: 'Beslutet', zon: 'Lektionen', bladetsBeslut: 'Beslutet' });
+const LAGRETS_ORD = Object.freeze({ planera: 'Lagret på din planering', planeraRad: 'Skriv det här på den planering du har, eller på bladet i planeringsmallen när du vill.', delarna: 'Lagrets delar', hela: 'Hela lagret', lathunden: 'lagret på din planering', kortet: 'Din lektion', alla: 'Eleverna', beslut: 'Så avgör du', zon: 'Lagret', bladetsBeslut: 'Vägarna' });
 export const SLAGENS_FORM = Object.freeze({
-  lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna', planera: 'Planera lektionen' }),
-  strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion', start: 'Första samarbetet med eleverna', planera: 'Planera lektionen' }),
-  strategier: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna', planera: 'Lagret på din planering' }),
+  lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna', ...LEKTIONENS_ORD }),
+  strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion', start: 'Första samarbetet med eleverna', ...LEKTIONENS_ORD }),
+  strategier: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna', ...LAGRETS_ORD }),
 });
+/**
+ * Slagets ord, en rot för sidan, planeringsbladet, lathunden, metodkortet och mejlet: i slaget strategier säger de lagret och
+ * din egen lektion, och aldrig en lektion att planera (Niclas 2026-11-01). Ett slag som tabellen inte har får ett lektionsförlopps ord.
+ * @param {Record<string, any>} d metodens fil
+ */
+export const slagensOrd = (d) => /** @type {Record<string, typeof SLAGENS_FORM.lektionsforlopp>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp;
 /** Rubriken för planeringen på metodens sida och i lathunden, efter metodens slag. @param {Record<string, any>} d metodens fil */
-export const planerasNamn = (d) => (/** @type {Record<string, { planera: string }>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp).planera;
+export const planerasNamn = (d) => slagensOrd(d).planera;
 /**
  * Dagen planen börjar på i Lär dig metoden, efter metodens slag: första lektionen, och i strukturerna det första samarbetet,
  * eftersom första hela lektionen kommer senare (granskningen inför lanseringen, F1). @param {Record<string, any>} d

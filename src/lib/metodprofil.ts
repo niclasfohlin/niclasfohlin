@@ -3,7 +3,7 @@
 // undervisningsmetod.js, K-632), som riggen och lathunden också läser, så att kortet, lathunden och riggens spärrar säger
 // samma sak. Här står det som bara kortet gör: områdena i kortets ordning, de primära områdena och kortet ur metodens fil i
 // samlingen src/content/undervisningsmetoder/ (`kortetUrFil`). PILOTEN är utkastet med platshållare som K-623 visade formen med.
-import { faktaIFastForm, OMRADENAS_RAD, primaraOmraden as standardensPrimara, type Effekt, type Kostnad, type Omradesvarde, type Svarighet, type Tillforlitlighet } from './standard/index.js';
+import { faktaIFastForm, OMRADENAS_RAD, slagensOrd, primaraOmraden as standardensPrimara, type Effekt, type Kostnad, type Omradesvarde, type Svarighet, type Tillforlitlighet } from './standard/index.js';
 
 export type Omrade = 'larande' | 'lasning' | 'skrivning' | 'matematik' | 'amnen' | 'socialt';
 
@@ -35,7 +35,7 @@ export interface Utkast {
 /** Det kortet läser i metodens fil (src/content/undervisningsmetoder/<id>.yaml). */
 export interface Kortfalt {
   titel: string; alternativaNamn?: string[]; undertitel?: string; ingress: string; arskursText?: string; arskurs: string[];
-  tid: string; period: string;
+  tid: string; period: string; slag?: string;
   profil: { evidens: Record<Omrade, Omradesvarde>; svarighet: Svarighet; kostnad: Kostnad };
 }
 
@@ -51,7 +51,7 @@ export function kortetUrFil(id: string, d: Kortfalt): Utkast {
   const arskursText = d.arskursText ?? d.arskurs.join(', ');
   return {
     id, titel: d.titel, alternativaNamn: d.alternativaNamn ?? [], undertitel: d.undertitel ?? '', ingress: d.ingress, arskursText,
-    fakta: [['Lektion', f.pass!], ['Hur ofta', f.ofta!], ['De första veckorna', f.period!], ['Årskurs', arskursText]],
+    fakta: [[slagensOrd(d).kortet, f.pass!], ['Hur ofta', f.ofta!], ['De första veckorna', f.period!], ['Årskurs', arskursText]],
     evidens: d.profil.evidens, svarighet: d.profil.svarighet, kostnad: d.profil.kostnad,
   };
 }

@@ -30,7 +30,7 @@ import TECKENBREDD from '../data/teckenbredd.json';
 import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passOrd, passTextKort } from './metod';
 import type { MetodData } from './metod';
 import { lathundensSidor, utanRadbrytning, UTFALLEN, type LathundDel, type LathundFakta, type LathundSida } from './standard/index.js';
-import { BLADETS_ORD, bladetsLista, bladetsRad, exempletsAmne, metodensAdress, planeringsbladet, utfalletsGrans, type Um } from './undervisningsmetod';
+import { bladetsOrd, bladetsLista, bladetsRad, exempletsAmne, metodensAdress, planeringsbladet, utfalletsGrans, type Um } from './undervisningsmetod';
 
 export const PPTX_TYP = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
 
@@ -849,7 +849,7 @@ function filmbilden(pres: any, v: Verktyg, filmer: MetodFilm[], o: { titel: stri
 // fyra sidorna ur standarden (lathundensSidor), samma som sidan /metoder/<id>/lathund visar, ritade med byggstenarna ovan i
 // Stödundervisnings form. Filmbilden står först i 16:9-filen utan nummer, och sedan kommer de fyra sidorna kant till kant,
 // med sidhuvudet och delarnas spalter ur src/lib/lathundsidor.ts, som sidan läser. Varje del ritas av sitt slag (umDel), och
-// planeringsbladet efter samma regler och ord som Planeringsblad.astro (planeringsbladet och BLADETS_ORD i
+// planeringsbladet efter samma regler och ord som Planeringsblad.astro (planeringsbladet och bladetsOrd i
 // src/lib/undervisningsmetod.ts), med utfallens gränser ur standarden (utfalletsGrans). Formen är standardformen för varje
 // undervisningsmetod, så inget här vet något om en enskild metod: en sida ritas så stor som den ryms, först i sidans spalter,
 // sedan med den sista delen i en spalt flyttad till den andra eller med spalterna delade på ett annat ställe i läsordningen,
@@ -1104,7 +1104,7 @@ function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: nu
   const { rect, txt } = v;
   const plan = del.plan;
   const { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, del.variant);
-  const O = BLADETS_ORD;
+  const O = bladetsOrd(d);
   const amne = del.exempel ? exempletsAmne(del.exempel) : undefined;
   const VARDE = del.gra ? BLAD.gra : INK;
   const ETIKETT = 9.5 * z, TEXT = 10.5 * z, ZON = 10.5 * z;

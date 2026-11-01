@@ -6,11 +6,12 @@
 // lektionens (granskningen 2026-10-30: förlagan till lektion 1 visade 40-minutersschemats tider). Riggens Word-fil ritar
 // samma blad med blocket planeringsblad. Det läraren skrev går genom medSaker, så att metodens saker är länkar också här.
 import { UTFALLEN } from '../lib/standard/index.js';
-import { BLADETS_ORD as O, bladetsLista, bladetsRad, medSaker, planeringsbladet, utfalletsGrans, type Um } from '../lib/undervisningsmetod';
+import { bladetsOrd, bladetsLista, bladetsRad, medSaker, planeringsbladet, utfalletsGrans, type Um } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface Props { d: Um; plan: Record<string, any>; amne?: string; gra?: boolean; variant?: string; saker?: MetodSak[] }
 const { d, plan, amne, gra = false, variant, saker = [] } = Astro.props;
+const O = bladetsOrd(d);
 // Bladets regler (variantens minuter, utfallens texter, planens delar och Efter lektionens etiketter) står i
 // planeringsbladet i src/lib/undervisningsmetod.ts, som lathundens PowerPoint-fil och pdf ritar samma blad ur.
 const { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, variant);
