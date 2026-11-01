@@ -3907,7 +3907,9 @@ try {
     const lagrat = (planer) => JSON.stringify(JSON.stringify({ v: lagringen.PLANFORMAT, planer }));
     const lagrade = () => zv.kor(`JSON.parse(localStorage.getItem('insatser') ?? '{"planer":[]}').planer.map((p) => p.id + ':' + (p.samling ?? 'stodundervisning') + ':' + (p.namn ?? ''))`);
     const zipfil = async (namn, planer) => { const fil = join(profil, namn); writeFileSync(fil, new Uint8Array(await lagringen.zipa(planer.map((p, i) => ({ namn: `plan-${i}.json`, text: lagringen.planfilen(p, s.PLANERA.version) }))).arrayBuffer())); return fil; };
-    const slaget = (synlig) => zv.kor(`(() => { const r = [...document.querySelectorAll('.pl-filval')]; return r.length > 0 && r.every((x) => x.querySelector('label.pl-filknapp + .pl-filslag')?.textContent === ${JSON.stringify(s.PLANFILERNAS_SLAG)} && (!${synlig} || x.querySelector('.pl-filslag').checkVisibility())); })()`);
+    const slaget = (synlig) => zv.kor(`(() => { const r = [...document.querySelectorAll('label.pl-filknapp')]; return r.length > 0 && r.every((x) => x.querySelector('.pl-filslag')?.textContent === ${JSON.stringify(s.PLANFILERNAS_SLAG)} && (!${synlig} || x.querySelector('.pl-filslag').checkVisibility())); })()`);
+    // Ladda ner planer och Öppna planer är lika stora, med filernas slag i knappen (Niclas 2026-11-01).
+    const likaStora = () => zv.kor(`(() => { const r = [...document.querySelectorAll('.pl-alla-planer')].filter((x) => x.checkVisibility()); return r.length > 0 && r.every((x) => { const k = [...x.querySelectorAll(':scope > .knapp')].filter((y) => y.checkVisibility()).map((y) => y.getBoundingClientRect()); return k.length === 2 && Math.abs(k[0].width - k[1].width) < 1 && Math.abs(k[0].height - k[1].height) < 1; }); })()`);
     // 1. På en bank, med en plan i varje samling: Ladda ner planer ger en zip med båda planerna och namnet för båda samlingarna.
     await zv.oppna(`${bas}/stodundervisning`);
     await zv.kor(`localStorage.clear(); localStorage.setItem('insatser', ${lagrat([stodPlan, ldPlan])})`);
@@ -3920,6 +3922,7 @@ try {
     sant('under Öppna planer på Stödundervisning står filernas slag', await slaget(true));
     await zv.oppna(`${bas}/metoder`);
     sant('under Öppna planer på Metoder står filernas slag', await slaget(true));
+    sant('Ladda ner planer och Öppna planer är lika stora', await likaStora());
     await zv.oppna(`${bas}/app`);
     sant('under Öppna planer på appens sida står filernas slag', await slaget(true));
     await zv.oppna(PLAN);

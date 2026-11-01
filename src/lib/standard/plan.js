@@ -1799,7 +1799,7 @@ const SAMLINGENS_FILNAMN = Object.freeze({ stodundervisning: 'stodundervisning',
 // webbläsaren och skickas aldrig någonstans, så knappen som läser den heter Öppna och inte Ladda upp: elevernas namn lämnar
 // aldrig telefonen eller datorn.
 export const PLANKNAPPAR = Object.freeze({ spara: 'Spara planen', laddaNer: 'Ladda ner planen', oppna: 'Öppna en nedladdad plan' });
-/** Raden under knapparna som öppnar planer, i planens sidor, på bankerna och på appens sida (Niclas 2026-10-31: "liten finstilt text under Öppna planer"). */
+/** Raden i knapparna som öppnar planer, under namnet, i planens sidor, på bankerna och på appens sida (Niclas 2026-11-01: ".zip och .json kan väl vara i knappen"). */
 export const PLANFILERNAS_SLAG = '.zip eller .json';
 // En del av ett filnamn: bokstäverna, också å, ä och ö, och siffrorna som de är skrivna, och bindestreck i stället för
 // allt annat, så att Åsa och Asa får olika namn (Codex 2026-10-25).

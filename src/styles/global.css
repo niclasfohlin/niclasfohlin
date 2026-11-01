@@ -3746,9 +3746,12 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-andra-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
 /* En bank utan planer i webbläsaren: bara raden om planer i en fil och Öppna planer, utan listans rubrik. */
 .pl-insatser-tom > h2 { display: none; }
-/* Knappen som öppnar planer med filernas slag i liten grå text under (PLANFILERNAS_SLAG). */
-.pl-filval { display: inline-flex; flex-direction: column; align-items: center; gap: 0.15rem; }
-.pl-filslag { font: 0.75rem/1.2 var(--typsnitt-ui); color: var(--farg-text-svag); }
+/* Knappen som öppnar planer har filernas slag i liten svagare text under namnet (PLANFILERNAS_SLAG). Färgen följer knappen,
+   också när den är tryckt. Bredvid Ladda ner planer är knapparna lika stora. */
+.knapp.pl-filknapp { flex-direction: column; justify-content: center; }
+.pl-filslag { font: 400 0.6875rem/1.15 var(--typsnitt-ui); opacity: 0.8; }
+.pl-andra-knappar.pl-alla-planer { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; width: fit-content; max-width: 100%; }
+.pl-alla-planer > .knapp { justify-content: center; }
 .pl-flytta { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.8rem 1rem; margin: 0.5rem 0; }
 .pl-flytta[hidden] { display: none; }
 .pl-flytta .pl-falt { margin-bottom: 0.7rem; }
