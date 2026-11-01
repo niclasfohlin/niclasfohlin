@@ -3,7 +3,9 @@
 // strukturerna i verktyget (kan använda goatcounter för att uppdatera den listan)"): räknar varje strukturs besök
 // (/strukturer/<id>) och utskrifter (händelsen utskrift:strukturer/<id>, från knappen Skriv ut kortet och från listan
 // Att skriva ut) de senaste 30 dagarna ur GoatCounters API och skriver dem till src/data/strukturer-topp.json, som sidan
-// /strukturer visar när minst fem strukturer har besök (src/lib/strukturer.ts).
+// /strukturer visar när minst fem strukturer har besök (src/lib/strukturer.ts). En utskrift väger som fem besök (Niclas
+// 2026-11-01: "Utskrift av en struktur kanske ger 5 besök?"): ett kort som skrivs ut kommer till användning. Filen med
+// alla kort räknas inte per kort, så att den som skriver ut hela leken inte lyfter alla.
 //
 //   node scripts/strukturer/topplistan.mjs              hämtar listan
 //   node scripts/strukturer/topplistan.mjs --vid-behov  bara när listan är äldre än 20 timmar (i npm run validera)
@@ -53,14 +55,17 @@ async function hits() {
   return ut;
 }
 
+const UTSKRIFTENS_VIKT = 5;
 try {
-  const antal = new Map();
+  const rakning = new Map();
   for (const h of await hits()) {
-    const id = h.path.match(/^(?:\/strukturer\/|utskrift:strukturer\/)([a-z0-9-]+)$/)?.[1];
-    if (!id || id === 'listan' || id === 'alla') continue;
-    antal.set(id, (antal.get(id) ?? 0) + h.count);
+    const m = h.path.match(/^(\/strukturer\/|utskrift:strukturer\/)([a-z0-9-]+)$/);
+    if (!m || m[2] === 'listan' || m[2] === 'alla') continue;
+    const r = rakning.get(m[2]) ?? { besok: 0, utskrifter: 0 };
+    r[m[1].startsWith('utskrift') ? 'utskrifter' : 'besok'] += h.count;
+    rakning.set(m[2], r);
   }
-  const strukturer = [...antal].map(([id, n]) => ({ id, antal: n })).sort((a, b) => b.antal - a.antal || a.id.localeCompare(b.id));
+  const strukturer = [...rakning].map(([id, r]) => ({ id, antal: r.besok + UTSKRIFTENS_VIKT * r.utskrifter, ...r })).sort((a, b) => b.antal - a.antal || a.id.localeCompare(b.id));
   writeFileSync(FIL, JSON.stringify({ datum: new Date().toISOString(), strukturer }, null, 2) + '\n');
   console.log(`Strukturernas topplista: ${strukturer.length} strukturer med besök eller utskrifter de senaste 30 dagarna.`);
 } catch (e) {
