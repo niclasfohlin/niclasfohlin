@@ -10,7 +10,7 @@ import YAML from 'yaml';
 import { join } from 'node:path';
 import type { CollectionEntry } from 'astro:content';
 import { publicerade } from './innehall';
-import { STRUKTURENS_SLAG, strukturkortetsInnehall, strukturkortetsFil, STRUKTURKORTEN_ALLA, metodensStrukturkort } from './standard/index.js';
+import { STRUKTURENS_SLAG, strukturkortetsInnehall, strukturkortetsFil, STRUKTURKORTEN_ALLA, metodensStrukturkort, TOPPLISTANS_ANTAL } from './standard/index.js';
 import manifest from '../data/strukturkort.json';
 import topplistan from '../data/strukturer-topp.json';
 
@@ -95,13 +95,14 @@ export function allaKortensStorlek(): string {
 
 /**
  * Topplistan när bygget gjordes: de strukturer som visats och skrivits ut mest de senaste 30 dagarna, ur GoatCounter
- * (src/data/strukturer-topp.json, som scripts/strukturer/topplistan.mjs skriver). Sidan visar den när minst fem strukturer
- * har besök (Niclas 2026-10-31: "en topplista över de 5 mest tittade på och nedladdade strukturerna").
+ * (src/data/strukturer-topp.json, som scripts/strukturer/topplistan.mjs skriver). Sidan visar den när så många strukturer
+ * som listan har (TOPPLISTANS_ANTAL i standarden, sex) har besök (Niclas 2026-10-31: "en topplista över de 5 mest tittade på
+ * och nedladdade strukturerna", och 2026-11-01: "Vi kör sex").
  */
 export function topplistanIBygget(finns: Set<string>): string[] {
   const t = topplistan as { strukturer: { id: string; antal: number }[] };
   const ids = t.strukturer.filter((x) => x.antal > 0 && finns.has(x.id)).map((x) => x.id);
-  return ids.length >= 5 ? ids.slice(0, 5) : [];
+  return ids.length >= TOPPLISTANS_ANTAL ? ids.slice(0, TOPPLISTANS_ANTAL) : [];
 }
 
 /** En struktur som en metod importerar: det metodens sida, saker och kort behöver. */

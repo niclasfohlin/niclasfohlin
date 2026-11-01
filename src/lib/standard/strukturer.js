@@ -94,6 +94,12 @@ export function strukturkortensFel(sk) {
  */
 export const UTSKRIFTENS_VIKT = 5;
 /**
+ * Hur många strukturer topplistan visar, och hur många som behöver ha besök innan den visas: sex, så att korten fyller hela
+ * rader både två i bredd i telefonen och tre på datorn (Niclas 2026-11-01, med en bild där fem lämnade en halv rad: "Vi kör
+ * sex"). Bygget och sidan läser samma tal.
+ */
+export const TOPPLISTANS_ANTAL = 6;
+/**
  * @param {{ path: string, count: number }[]} hits
  * @returns {{ id: string, antal: number, besok: number, utskrifter: number }[]}  flest först, sedan efter id
  */

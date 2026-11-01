@@ -902,6 +902,8 @@ export declare function strukturnamnensFormer(namn: string): string[];
 export declare function strukturnamnetI(namn: string, text: string): boolean;
 /** En utskrift väger som så många besök i topplistan. */
 export declare const UTSKRIFTENS_VIKT: number;
+/** Hur många strukturer topplistan visar, och hur många som behöver ha besök innan den visas. */
+export declare const TOPPLISTANS_ANTAL: number;
 /** Topplistans räkning ur GoatCounters sidor och händelser, flest först. */
 export declare function strukturernasTopplista(hits: { path: string; count: number }[]): { id: string; antal: number; besok: number; utskrifter: number }[];
 /** Gränserna för strukturerna i en metods fält strukturkort. */

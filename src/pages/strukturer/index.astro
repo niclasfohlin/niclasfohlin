@@ -4,8 +4,9 @@
 // strukturkort (bild på framsida med titel, stegen på baksidan med titel) ... Man ska kunna välja enskilda strukturer, de
 // man väljer ut som plockas ihop och alla."
 //
-//   Topplistan  De fem strukturer som visats och skrivits ut mest de senaste 30 dagarna, när minst fem har besök (Niclas:
-//               "en topplista över de 5 mest tittade på och nedladdade strukturerna i verktyget"). Bygget skriver
+//   Topplistan  De sex strukturer som visats och skrivits ut mest de senaste 30 dagarna, när minst sex har besök (Niclas:
+//               "en topplista över de 5 mest tittade på och nedladdade strukturerna i verktyget", och 2026-11-01 "Vi kör
+//               sex", så att korten fyller hela rader i telefonen och på datorn; TOPPLISTANS_ANTAL i standarden). Bygget skriver
 //               listan som den var (src/data/strukturer-topp.json), och sidan visar den.
 //   Raderna     Par, Grupp och Klass som rader i slagets färg som fälls ut, med korten i två spalter i telefonen och tre på
 //               en bred skärm (formen som valdes i fas 0, underlag/prov/strukturer/granskning/ide-*.md).
@@ -17,6 +18,7 @@ import Strukturlistan from '../../components/Strukturlistan.astro';
 import Kortet from '../../components/Strukturkortet.astro';
 import { strukturerna, strukturernasMetod, ALLA_KORTENS_ADRESS, allaKortensStorlek, topplistanIBygget, slagensStil, SLAGEN, TVA_PA_A4 } from '../../lib/strukturer';
 import { symbol } from '../../../scripts/strukturer/symboler.mjs';
+import { TOPPLISTANS_ANTAL } from '../../lib/standard/index.js';
 
 const alla = await strukturerna();
 const medId = new Map(alla.map((s) => [s.id, s]));
@@ -47,7 +49,7 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
 
       {/* Topplistan: bygget skriver den som den var (topp), och sidan hämtar dagens lista från funktionen
           netlify/functions/strukturer-topp.mjs, som svarar 503 utan nyckel och då står listan från bygget kvar (K-665). */}
-      <section id="st-topp" aria-labelledby="st-topp-rubrik" hidden={topp.length !== 5}>
+      <section id="st-topp" aria-labelledby="st-topp-rubrik" hidden={topp.length !== TOPPLISTANS_ANTAL}>
         <h2 class="st-rubrik2" id="st-topp-rubrik">Mest använda den senaste månaden</h2>
         <ol class="st-kort-lista st-topp">
           {topp.map((s, i) => <Kortet s={s} nr={i + 1} />)}
@@ -75,14 +77,15 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
 </Base>
 
 <script>
-  // Dagens topplista ur funktionen (K-665): korten tas ur raderna, så att bilden, namnet och bocken är desamma, och de fem
-  // får sin plats. Svarar funktionen inte, eller har färre än fem strukturer besök, står listan från bygget kvar.
+  // Dagens topplista ur funktionen (K-665): korten tas ur raderna, så att bilden, namnet och bocken är desamma, och de sex
+  // får sin plats. Svarar funktionen inte, eller har färre än sex strukturer besök, står listan från bygget kvar.
+  import { TOPPLISTANS_ANTAL } from '../../lib/standard/index.js';
   const sektion = document.getElementById('st-topp');
   fetch('/api/strukturer-topp').then((r) => (r.ok ? r.json() : null)).then((d: { strukturer?: { id: string; antal: number }[] } | null) => {
     if (!sektion || !d?.strukturer) return;
     const kort = new Map([...document.querySelectorAll<HTMLElement>('.st-hylla [data-valj]')].map((b) => [b.dataset.valj!, b.closest('li')!]));
-    const ids = d.strukturer.filter((x) => x.antal > 0 && kort.has(x.id)).map((x) => x.id).slice(0, 5);
-    if (ids.length < 5) return;
+    const ids = d.strukturer.filter((x) => x.antal > 0 && kort.has(x.id)).map((x) => x.id).slice(0, TOPPLISTANS_ANTAL);
+    if (ids.length < TOPPLISTANS_ANTAL) return;
     sektion.querySelector('ol')!.replaceChildren(...ids.map((id, i) => {
       const li = kort.get(id)!.cloneNode(true) as HTMLElement;
       const nr = document.createElement('span');

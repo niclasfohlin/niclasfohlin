@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.51.0, 2026-11-01
+
+- `strukturer.js` (sajtens K-669): `TOPPLISTANS_ANTAL`, sex, hur många strukturer topplistan visar och hur många som behöver ha besök innan den visas, så att korten fyller hela rader två i bredd och tre i bredd. Bygget och sidan läser samma tal.
+
 ## 0.50.0, 2026-11-01
 
 - `strukturer.js` (sajtens sådd av Strukturer i Stödundervisning): `strukturnamnensFormer` och `strukturnamnetI`, formerna som en strukturs namn står i i en metods text (utan utropstecknet i ett namn med flera ord, med och i stället för tankstrecket, i bestämd form för ett namn med ett ord) och om namnet står där, med stor bokstav utom i ett namn med kommatecken. Sajtens vävning och såddprov läser namnen med samma funktion.
