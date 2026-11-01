@@ -1,11 +1,20 @@
-# EPA: var och en har tänkt själv först och har sin egen tanke kvar i en tankebubbla, och nu talar paret om båda tankarna.
+# EPA: läraren har ställt frågan och gett tanketid, och nu vänder sig hela klassen till sin bänkkamrat. Tre par vid var
+# sin bänk talar samtidigt. I paret i mitten har var och en sin egen tanke kvar i en tankebubbla, och de talar om båda.
 id: epa
-skala: 88
+skala: 72
 djup: false
-luft: 0.12
+luft: 0.06
 delar:
-  - figur: { namn: beratter, x: 380, y: 520, utanBen: true, nar: { H: [458, 336] }, trojan: lila, ansikte: prata, tittar: lyssnar, lutar: lyssnar }
-  - figur: { namn: lyssnar, x: 584, y: 526, utanBen: true, nar: { V: [520, 352] }, trojan: rod, ansikte: glad, tittar: beratter, lutar: beratter }
-  - bubbla: { till: beratter, dx: -30, dy: 78, tanke: true, symboler: [triangel], visar: "Enskilt först: den ena har tänkt ut sin egen tanke" }
-  - bubbla: { till: lyssnar, dx: 30, dy: 78, tanke: true, symboler: [kvadrat], visar: "Enskilt först: den andra har en annan egen tanke" }
-  - bubbla: { till: beratter, dx: 104, dy: 6, symboler: [triangel, kvadrat], visar: "Paret: de berättar sina tankar för varandra och talar om båda" }
+  # Tre par vid var sin bänk med luft emellan, så att paren syns som par och klassen som en klass.
+  - figur: { namn: v1, x: 108, y: 404, stallning: sitta, utanBen: true, trojan: gul, ansikte: prata, tittar: h1, lut: -8, nar: { H: [164, 340] } }
+  - figur: { namn: h1, x: 222, y: 404, stallning: sitta, utanBen: true, trojan: turkos, ansikte: glad, tittar: v1, lut: 8 }
+  - bord: { x: 54, y: 432, b: 220, d: 64, h: 34, snett: 10 }
+  - figur: { namn: v3, x: 678, y: 404, stallning: sitta, utanBen: true, trojan: orange, ansikte: glad, tittar: h3, lut: -8 }
+  - figur: { namn: h3, x: 792, y: 404, stallning: sitta, utanBen: true, trojan: ljusgron, ansikte: prata, tittar: v3, lut: 8, nar: { V: [736, 340] } }
+  - bord: { x: 624, y: 432, b: 220, d: 64, h: 34, snett: 10 }
+  - figur: { namn: beratter, x: 390, y: 412, stallning: sitta, utanBen: true, trojan: lila, ansikte: prata, tittar: lyssnar, lut: -6, nar: { H: [448, 342] } }
+  - figur: { namn: lyssnar, x: 510, y: 412, stallning: sitta, utanBen: true, trojan: rod, ansikte: glad, tittar: beratter, lut: 6 }
+  - bord: { x: 334, y: 440, b: 230, d: 64, h: 34, snett: 10 }
+  - bubbla: { till: beratter, dx: -54, dy: 62, tanke: true, symboler: [triangel], visar: "Enskilt först: den ena har tänkt ut sin egen tanke under tanketiden" }
+  - bubbla: { till: lyssnar, dx: 54, dy: 62, tanke: true, symboler: [kvadrat], visar: "Enskilt först: den andra har en annan egen tanke" }
+  - bubbla: { till: beratter, dx: 60, dy: 126, symboler: [triangel, kvadrat], visar: "Paret: de berättar sina tankar för varandra och talar om båda, som alla par i klassen gör samtidigt" }

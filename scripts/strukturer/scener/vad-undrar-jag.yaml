@@ -1,10 +1,13 @@
-# Vad undrar jag?: gruppens frågelappar ligger hopskrynklade mitt på bordet, och en har dragit en lapp, vecklat upp den och läser frågan högt medan de andra vänder sig mot hen.
+# Vad undrar jag?: gruppens frågelappar ligger hopskrynklade mitt på bordet, och en har dragit en lapp, vecklat upp den
+# och läser frågan högt medan de andra vänder sig mot hen. Lappen hålls med båda händerna framför bröstet, skrynklig med
+# vecken kvar, och inte upp i luften som kortet i Flashcardlek (granskningen av arket, tredje varvet).
 id: vad-undrar-jag
 skala: 74
 djup: false
 fokus: laser
 delar:
-  - figur: { namn: laser, x: 380, y: 392, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: lappen, lut: -4, nar: { H: [434, 308] } }
+  - figur: { namn: laser, x: 384, y: 392, stallning: sitta, utanBen: true, trojan: ljusbla, ansikte: prata, tittar: [386, 300], nar: { V: [352, 326], H: [420, 324] }, armbage: ned }
+  - papper: { namn: lappen, hand: [laser, H], dx: -34, dy: -24, b: 72, h: 50, vinkel: 2, farg: '#f3dc8e', rutnat: [2, 2], rader: [1, 2, 2, 1], symbol: fraga, symbolPlats: [-0.25, -0.22], symbolStorlek: 0.3 }
   - figur: { namn: bakH, x: 560, y: 392, stallning: sitta, utanBen: true, trojan: lila, ansikte: tanka, tittar: lappen, lut: 10 }
   - figur: { namn: sidaV, x: 250, y: 520, utanBen: true, ansikte: glad, lut: -14, nar: { H: [334, 400] }, armarEfter: hogen }
   - figur: { namn: sidaH, x: 690, y: 525, utanBen: true, ansikte: glad, lut: 12 }
@@ -13,6 +16,4 @@ delar:
   - boll: { x: 486, y: 410, r: 16, farg: '#f3dc8e' }
   - boll: { x: 514, y: 388, r: 16, farg: '#f3dc8e' }
   - boll: { namn: hogen, x: 476, y: 378, r: 16, farg: '#f3dc8e' }
-  - punkt: { namn: lappen, x: 452, y: 288 }
-  - papper: { hand: [laser, H], dx: 12, dy: -20, b: 54, h: 46, vinkel: 9, farg: '#f3dc8e', rutnat: [2, 2], symbol: fraga, symbolPlats: [0.02, 0], symbolStorlek: 0.36 }
   - bubbla: { till: laser, dx: -40, dy: 40, symboler: [fraga], visar: "En har dragit en lapp ur högen och läser frågan högt för gruppen" }
