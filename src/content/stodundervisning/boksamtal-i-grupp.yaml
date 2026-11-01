@@ -32,7 +32,7 @@ material:
   - ett exemplar av boken per elev
   - bokens tavla
   - post-it och ett frågekort
-uppdaterad: 2026-10-28
+uppdaterad: 2026-11-01
 relaterade:
   - textsamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -42,6 +42,9 @@ nivaer:
   - { namn: Bas, farg: "4E7A43" }
   - { namn: Medel, farg: "A8742A" }
   - { namn: Avancerat, farg: "6E3450" }
+centrala:
+  - id: strukturer
+    efterText: "tabell: Samtalsreglerna: tre regler, en i taget"
 inledning:
   - Chambers boksamtal i grupp är en lärarledd insats där fyra till tio elever i åk 4–9 läser en hel bok tillsammans och samtalar om den. Den är för elever som behöver stöd i läsförståelsen, och för den som aldrig har läst ut en bok som andra pratar om. Eleven lär sig att hålla ihop en berättelse över flera veckor och att samtala om den, som läsare gör.
   - Du läser högt, och varje elev följer med i sitt eget exemplar av boken. På väggen sitter bokens tavla, en tavla för hela boken, oftast ett blädderblocksark. I din bok sitter en post-it som du har skrivit före passet, på ett ställe där texten blir svår. Varje elev har en egen, tom post-it och sätter den under läsningen där hen vill säga något. När ni samtalar ligger frågekortet mitt på bordet, med Aidan Chambers fyra frågor, och var och en väljer en.
@@ -275,7 +278,7 @@ tabeller:
   - rubrik: "Samtalsreglerna: tre regler, en i taget"
     plats: efter-fastnar
     meny: true
-    text: "Många elever talar till dig och väntar på nästa fråga. De behöver lära sig att tala med varandra. Tre saker hjälper dem: paret först, tre samtalsregler som gruppen tar en i taget, och talkort när några få talar mest. Reglerna står på ett blädderblocksark bredvid tavlan, som i tabellen."
+    text: "Många elever talar till dig och väntar på nästa fråga. De behöver lära sig att tala med varandra. Tre saker hjälper dem: paret först, tre samtalsregler som gruppen tar en i taget, och talkort när några få talar mest. Reglerna står på ett blädderblocksark bredvid tavlan, som i tabellen. Paret först och laget runt heter EPA och Rondellen i det kooperativa lärandet, och fler sätt att samarbeta finns på sidan Strukturer."
     kolumner:
       - Regeln
       - Se

@@ -6,7 +6,7 @@
 // Förslagen står bara här, inte på kortet.
 import Base from '../../layouts/Base.astro';
 import Strukturlistan from '../../components/Strukturlistan.astro';
-import { strukturerna, strukturernasMetod, strukturensAdress, bildensAdress, kortetsAdress, SLAGEN, OMRADENA, stegHtml, slagensStil, STRUKTURERNAS_ADRESS } from '../../lib/strukturer';
+import { strukturerna, strukturernasMetod, strukturensAdress, bildensAdress, kortetsAdress, SLAGEN, OMRADENA, stegHtml, slagensStil, STRUKTURERNAS_ADRESS, DUBBELSIDIGT } from '../../lib/strukturer';
 import { symbol } from '../../../scripts/strukturer/symboler.mjs';
 
 export async function getStaticPaths() {
@@ -38,7 +38,7 @@ const beskrivning = `${d.syfte}. Strukturen ${d.namn} för ${slag.namn.toLowerCa
         <a class="knapp" href={kortetsAdress(s.id)} target="_blank" rel="noopener" data-skrivut-ett data-goatcounter-click={`utskrift:strukturer/${s.id}`} data-goatcounter-title={`${d.namn}: strukturkortet utskrivet`}>Skriv ut kortet</a>
         <button type="button" class="knapp sekundar" data-valj={s.id} aria-pressed="false">Lägg i Att skriva ut</button>
       </div>
-      <p class="st-utskriftsrad">Kortet är ett halvt A4. Skriv ut dubbelsidigt, vänd längs långsidan och klipp längs den streckade linjen.</p>
+      <p class="st-utskriftsrad">Kortet är ett halvt A4. {DUBBELSIDIGT}</p>
 
       <h2 class="st-rubrik2">Steg</h2>
       <ol class="st-steg">

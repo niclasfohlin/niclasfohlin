@@ -29,7 +29,7 @@ import sharp from 'sharp';
 import { PDFDocument } from 'pdf-lib';
 import { ritaScen } from './rita.mjs';
 import { kortenHtml, KORTETS_STANDARD } from './kortform.mjs';
-import { strukturkortetsInnehall, strukturkortetsFil, STRUKTURKORTEN_ALLA, STRUKTURENS_SLAG } from '../../src/lib/standard/strukturer.js';
+import { strukturkortetsInnehall, strukturkortetsFil, STRUKTURKORTEN_ALLA, STRUKTURENS_SLAG, metodensStrukturkort } from '../../src/lib/standard/strukturer.js';
 
 const HAR = dirname(fileURLToPath(import.meta.url));
 const ROT = join(HAR, '..', '..');
@@ -69,10 +69,10 @@ for (const s of medBild) {
   if (existsSync(join(UT[gamla], strukturkortetsFil(s.id)))) unlinkSync(join(UT[gamla], strukturkortetsFil(s.id)));
 }
 // En struktur som inte har något kort längre, som en som väntar på banken (vantar), har inget kort på sajten.
-for (const del of Object.keys(manifest)) for (const id of Object.keys(manifest[del])) if (id !== STRUKTURKORTEN_ALLA.nyckel && !medBild.some((s) => s.id === id)) delete manifest[del][id];
+for (const del of Object.keys(manifest)) for (const id of Object.keys(manifest[del])) if (!id.startsWith('_') && !medBild.some((s) => s.id === id)) delete manifest[del][id];
 for (const f of existsSync(UT.visas) ? readdirSync(UT.visas) : []) {
   const id = f.match(/^strukturkort-(.+)\.pdf$/)?.[1];
-  if (id && f !== STRUKTURKORTEN_ALLA.fil && !medBild.some((s) => s.id === id && !s.utkast)) unlinkSync(join(UT.visas, f));
+  if (id && f !== STRUKTURKORTEN_ALLA.fil && !medBild.some((s) => s.id === id && !s.utkast) && !existsSync(join(ROT, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`)) && !existsSync(join(ROT, 'src', 'content', 'stodundervisning', `${id}.yaml`))) unlinkSync(join(UT.visas, f));
 }
 
 const aktuellt = (s) => manifest[delen(s)][s.id]?.summa === summa(s) && existsSync(join(UT[delen(s)], strukturkortetsFil(s.id)));
@@ -82,7 +82,21 @@ const ORDNINGEN = Object.keys(STRUKTURENS_SLAG);
 const visas = medBild.filter((s) => !s.utkast).sort((a, b) => ORDNINGEN.indexOf(a.slag) - ORDNINGEN.indexOf(b.slag) || a.namn.localeCompare(b.namn, 'sv'));
 const allasSumma = createHash('sha256').update(GEMENSAM).update(JSON.stringify(visas.map((s) => [s.id, innehall(s)]))).digest('hex').slice(0, 16);
 const allaAttGora = visas.length > 0 && (alla?.summa !== allasSumma || !existsSync(join(UT.visas, STRUKTURKORTEN_ALLA.fil)));
-if (!attGora.length && !allaAttGora) { console.log(`Strukturkorten är aktuella (${medBild.length} kort, ${visas.length} som visas).`); process.exit(0); }
+// Metodernas strukturkort (K-661): en metod som importerar strukturer med fältet strukturkort får sina kort två och två på
+// A4 i en egen fil, i metodens ordning. En struktur som inte visas stannar skriptet, som bygget gör.
+const METODMAPPAR = ['undervisningsmetoder', 'stodundervisning'].map((m) => join(ROT, 'src', 'content', m));
+const metoderna = METODMAPPAR.flatMap((mapp) => readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/.yaml$/, ''), d: YAML.parse(readFileSync(join(mapp, f), 'utf8')) })))
+  .filter((m) => m.d?.strukturkort?.strukturer?.length);
+const metodFel = [];
+const metodensKort = metoderna.map((m) => {
+  const kort = m.d.strukturkort.strukturer.map((id) => visas.find((s) => s.id === id) ?? (metodFel.push(`${m.d.titel}: strukturen ${id} visas inte i verktyget`), null)).filter(Boolean);
+  const summa = createHash('sha256').update(GEMENSAM).update(JSON.stringify(kort.map((s) => [s.id, innehall(s)]))).digest('hex').slice(0, 16);
+  return { ...m, kort, summa, ...metodensStrukturkort(m.id) };
+});
+if (metodFel.length) { console.error(`Metodernas strukturkort:\n  ${metodFel.join('\n  ')}`); process.exit(1); }
+for (const k of Object.keys(manifest.visas)) if (k.startsWith('_metod:') && !metodensKort.some((m) => m.nyckel === k)) { delete manifest.visas[k]; const f = join(UT.visas, `strukturkort-${k.slice(7)}.pdf`); if (existsSync(f)) unlinkSync(f); }
+const metodernaAttGora = metodensKort.filter((m) => manifest.visas[m.nyckel]?.summa !== m.summa || !existsSync(join(UT.visas, m.fil)));
+if (!attGora.length && !allaAttGora && !metodernaAttGora.length) { console.log(`Strukturkorten är aktuella (${medBild.length} kort, ${visas.length} som visas).`); process.exit(0); }
 
 const chrome = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
 if (!chrome) { console.error('Chrome hittades inte: korten skrivs ut med Chrome.'); process.exit(1); }
@@ -157,6 +171,18 @@ if (attGora.length) {
   }
 }
 
+for (const m of fel.length ? [] : metodernaAttGora) {
+  const { pdf, dom } = skrivUt(`metod-${m.id}`, kortenHtml(await Promise.all(m.kort.map(kortet)), { typsnitt: url(join(HAR, 'typsnitt')), tvaOchTva: true, titel: `Strukturkort: ${m.d.titel}` }));
+  if (/data-ryms-inte/.test(dom)) fel.push(`${m.d.titel}: ett kort ryms inte i 16 punkter`);
+  const doc = await PDFDocument.load(pdf);
+  doc.setTitle(`Strukturkort: ${m.d.titel}`);
+  doc.setAuthor('Niclas Fohlin');
+  const bytes = await doc.save({ useObjectStreams: true });
+  mkdirSync(UT.visas, { recursive: true });
+  writeFileSync(join(UT.visas, m.fil), bytes);
+  manifest.visas[m.nyckel] = { summa: m.summa, kort: m.kort.map((s) => s.id), kb: Math.round(bytes.length / 1024) };
+  console.log(`${m.d.titel}: ${m.kort.length} strukturkort på ${doc.getPageCount()} sidor, ${Math.round(bytes.length / 1024)} kB.`);
+}
 if (allaAttGora && !fel.length) {
   const { pdf, dom } = skrivUt('alla', kortenHtml(await Promise.all(visas.map(kortet)), { typsnitt: url(join(HAR, 'typsnitt')), tvaOchTva: true, titel: 'Strukturkort: alla' }));
   if (/data-ryms-inte/.test(dom)) fel.push('Filen med alla kort: ett kort ryms inte i 16 punkter');

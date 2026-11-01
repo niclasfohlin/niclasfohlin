@@ -22,6 +22,7 @@ import { UPPHOV, SAJT } from '../../lib/metod';
 import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, vagenTillMandag } from '../../lib/standard/index.js';
 import { medKallor, medSaker, relateradeSidor, undervisningsmetodensSaker, type Um } from '../../lib/undervisningsmetod';
 import { harLarDig as metodenHarLarDig } from '../../lib/lardig';
+import { metodensStrukturer } from '../../lib/strukturer';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('undervisningsmetoder');
@@ -34,7 +35,8 @@ const m = kortetUrFil(id, post.data);
 const adress = `niclasfohlin.se/metoder/${id}`;
 const filer = metodensFiler(id);
 const bilder = metodensBilder(id);
-const saker = undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektionskort });
+const strukturer = metodensStrukturer(d, d.titel);
+const saker = undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektionskort, strukturer });
 // Huvudfilmen efter läsvägen, och extrafilmerna vid sin del (riggens filmer, i public/metoder/ som <id>-film och <id>-filmN),
 // med samma rot som Stödundervisning och lathunden (metodensFilmer i src/lib/film.ts).
 const filmer = metodensFilmer({ film: d.film, filmer: d.filmer }, id, 'metoder');
@@ -86,6 +88,9 @@ const lasvagen = vagen
               lanseringen, A9). */}
           {harLarDig && <a class="knapp" href={`/metoder/${id}/lar-dig`} data-din-ersatter>Lär dig metoden</a>}
           {d.lathund && <a class="knapp sekundar" href={`/metoder/${id}/lathund`}>Öppna lathunden</a>}
+          {/* Verktyget Strukturer, för en metod som importerar strukturkort (K-661; Niclas 2026-11-01: "Samt verktyg inuti
+              kooperativt lärande"). */}
+          {strukturer.length > 0 && <a class="knapp sekundar" href="/strukturer">Strukturer</a>}
           <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} bara />
         </p>
         {/* Din plan: lärarens plan ur Lär dig metoden, om den finns i webbläsaren (src/scripts/insatser.ts, K-628). */}
@@ -119,7 +124,7 @@ const lasvagen = vagen
       </div>
     </div>
 
-    <Undervisningsmetod d={d} id={id} extrafilmer={extrafilmer} filer={filer} bilder={bilder} sidor={sidor} saker={saker} />
+    <Undervisningsmetod d={d} id={id} extrafilmer={extrafilmer} filer={filer} bilder={bilder} sidor={sidor} saker={saker} strukturer={strukturer} />
 
     <footer class="metod-fot">
       {relaterade.length > 0 && (

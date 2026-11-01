@@ -74,6 +74,50 @@
       "nej": {
         "laslistor-i-grupp": "Passets kärna är ord och listor som eleverna läser i kör, och rösten vid punkt är en liten del. Lässtrategier täcker ordet och meningen. Niclas 2026-10-20: \"Läslistor nej\""
       }
+    },
+    "strukturer": {
+      "tranar": [
+        "socialt-samspel",
+        "lasforstaelse",
+        "problemlosning",
+        "skrivstrategier",
+        "ordforrad"
+      ],
+      "karna": [
+        "\\bi par\\b",
+        "\\bpar(?:en|et)\\b",
+        "\\btill (?:den bredvid|sin kamrat|en kamrat|varandra)\\b",
+        "\\bgrannen\\b",
+        "\\bturas om\\b",
+        "\\bbyter roll",
+        "\\blaget runt\\b",
+        "\\bi tur och ordning\\b",
+        "\\btalpinne"
+      ],
+      "provad": "2026-11-01",
+      "ja": {
+        "boksamtal-i-grupp": "Efter tabellen Samtalsreglerna. Var och en säger sin sak till den bredvid och sedan laget runt i varje läspass, och talkort kommer när några få talar mest. Metoden kallar själv formerna EPA, Rondellen och Talkort, strukturer ur det kooperativa lärandet, och i helklass samtalar klassen i grupper om tre till fem"
+      },
+      "nej": {
+        "faktatextsamtal-i-grupp": "Paren läser och säger kärnan i varje pass, men i metodens egen form, Ett avsnitt i fyra steg med kortet När det skaver",
+        "hoglasning-i-par": "Visar redan två delade stödmaterial, Utveckla högläsning och Lässtrategier, och parets läsning har en egen rutin",
+        "kompissamtal": "Talpinnen och rundan är metodens egen form, och samtalen bygger på gruppens egna konflikter med dig som ledare",
+        "kortskrivning-skriv-varje-dag": "Kärnan är att var och en skriver utan att stanna, och paret delar bara en rad i Dela med metodens egen fråga ”Berätta mer om …”",
+        "ordverkstad-i-grupp": "Paren bygger och läser ord med metodens ordkort och de fyra stegen, en egen form för ordens delar",
+        "problemlosning-i-grupp": "Paren löser problemet i varje pass, men i metodens egen form: pennan byter hand halvvägs i Lösa, och Jämföra har bladet Två lösningar",
+        "seriesamtal": "Talpinnen går runt bordet och eleverna har rollerna personerna och detektiven kring en egen konflikt, så passet har ingen form för samarbete i par eller grupp som strukturerna",
+        "skrivkurs-berattelseram": "Paret berättar med kortet Berätta, och Dela och Galleriet är kursens egna former, också i en klass",
+        "skrivkurs-sagoboken": "Paret arbetar som Berättaren och Skrivaren med rollkorten och frågekorten, kursens egen form",
+        "skrivkurs-vardeskapande": "Eleven säger texten för en kamrat, och en annan läser den som läsaren med Kortet till skribenten, kursens egen form",
+        "textsamtal-i-grupp": "Parsamtalet vid stoppet har egna steg, A säger, B frågar och sedan byter de, så metoden har redan sin form",
+        "texttyp-argumenterande-text": "I delen Säg berättar skribenten för en läsare ur det andra paret med kortet Läsarens frågor, kursens egen form",
+        "texttyp-berattande-text": "I delen Säg berättar skribenten för en läsare ur det andra paret med kortet Läsarens frågor, kursens egen form",
+        "texttyp-beskrivande-text": "I delen Säg berättar skribenten för en läsare ur det andra paret med kortet Läsarens frågor, kursens egen form",
+        "texttyp-instruerande-text": "I delen Säg berättar skribenten för en läsare ur det andra paret med kortet Läsarens frågor, kursens egen form",
+        "texttyper-i-grupp": "Paren pratar om elevens sida och berättar texten för en läsare som frågar, i strategin Tänk, Planera, Säg, Skriv, de fyra kursernas egen form",
+        "upprepad-lasning": "Visar redan två delade stödmaterial, Lässtrategier och Utveckla högläsning, och i par läser eleverna om texten med en kamrat som stöd medan du ger återkoppling",
+        "gruppstarkande-aktiviteter": "Tveksamt: strukturerna hjälper mest i återkopplingen och reflektionen i en klass och mindre i själva aktiviteten, och metodens aktivitetskort har redan sina egna former, så tveksamt blir nej (METODER.md under Sådden)"
+      }
     }
   }
 }

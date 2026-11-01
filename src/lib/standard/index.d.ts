@@ -894,3 +894,9 @@ export declare function strukturkortetsInnehall(s: { namn: string; slag: string;
 export declare function strukturkortetsFil(id: string): string;
 /** Filen med alla strukturkort och dess nyckel i manifestet. */
 export declare const STRUKTURKORTEN_ALLA: Readonly<{ fil: string; nyckel: string }>;
+/** En metods strukturkort två och två på A4, och nyckeln i manifestet. */
+export declare function metodensStrukturkort(metod: string): Readonly<{ fil: string; nyckel: string }>;
+/** Gränserna för strukturerna i en metods fält strukturkort. */
+export declare const METODENS_STRUKTURKORT: Readonly<{ minst: number; högst: number }>;
+/** Felen i en metods fält strukturkort, tomt när fältet saknas. */
+export declare function strukturkortensFel(sk: unknown): string[];

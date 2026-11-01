@@ -4759,3 +4759,10 @@ button.pl-passroll { min-height: 2.75rem; }
 .st-tillbaka { margin: 2rem 0 0; font-family: var(--typsnitt-ui); }
 @media (max-width: 59.99rem) { .st-yta { padding-bottom: 4rem; } }
 @media print { .st-valda, .st-bock, .st-utskrift, .st-utskriftsrad { display: none; } }
+/* Strukturkorten i en metod som importerar dem (fältet strukturkort, K-661): verktygets kort, som länkar till strukturens sida. */
+.um-strukturkort { margin: 0.8rem 0; }
+.um-strukturkort a.st-kort { height: 100%; color: inherit; text-decoration: none; }
+.um-strukturkort a.st-kort:hover .st-kort-namn { text-decoration: underline; }
+.um-strukturkort a.st-kort:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.um-strukturknappar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.st-syftet { max-width: var(--matt-text); font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text); background: var(--farg-ton-svag); border-left: 4px solid var(--farg-accent); border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.8rem 0 0; }

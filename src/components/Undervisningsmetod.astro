@@ -9,13 +9,15 @@ import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
 import { stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
-import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, kortensKolumner, type Um } from '../lib/undervisningsmetod';
+import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
 import Umfilknappar from './Umfilknappar.astro';
-interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[] }
-const { d, id, extrafilmer, filer, bilder, sidor = [], saker } = Astro.props;
+import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
+interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[]; strukturer?: ImporteradStruktur[] }
+const { d, id, extrafilmer, filer, bilder, sidor = [], saker, strukturer = [] } = Astro.props;
+if (strukturer.length) provaMetodensKort(id, strukturer.map((x) => x.id));
 const kallor = new Set<string>((d.kallor ?? []).map((k: { id: string }) => k.id));
 // Varje text som HTML: metodens saker och källorna som länkar (medSaker), och en replik inom citattecken på egen rad.
 const k = (t: string) => medSaker(t, saker, kallor, sidor);
@@ -37,7 +39,7 @@ const CELLER: Record<string, [string, string, unknown][]> = {
   metoden: [['det-har-ar', `Det här är ${d.titel.toLocaleLowerCase('sv')}`, true], ['i-korthet', KARNANS_KORT, d.karna], ['lararens-roll', 'Lärarens roll', d.roll]],
   'kom-igang': [['fore-forsta', 'Före första lektionen', d.checklista], ['planera-lektionen', 'Planera lektionen', d.amnesexempel?.some((e: { plan?: unknown }) => e.plan)], ['forsta-lektionen', FORSTA, d.forsta], ['de-forsta-veckorna', 'De första veckorna', d.progression], ['efter-de-forsta-veckorna', 'Efter de första veckorna', true], ['till-arbetslaget', 'Till arbetslaget', d.uppdrag]],
   'hall-i': [['karnan', 'Kärnan: fast och fritt', d.karna], ['lararens-fragor', 'Lärarens frågor', d.lararensFragor], ['nar-det-glider', 'När det glider', true]],
-  'att-skriva-ut': [['materialet', UM_NAMN.lektionskort, filer.lektionskort], ['materialet-for-klassen', d.ramar?.rubrik ?? UM_NAMN.materialet, d.ramar], ['planeringsmallen', UM_NAMN.planeringsmall, d.planeringsmall], ['observationsmallen', UM_NAMN.observation, d.observation]],
+  'att-skriva-ut': [['materialet', UM_NAMN.lektionskort, filer.lektionskort], ['strukturkorten', STRUKTURKORTEN, strukturer.length],['materialet-for-klassen', d.ramar?.rubrik ?? UM_NAMN.materialet, d.ramar], ['planeringsmallen', UM_NAMN.planeringsmall, d.planeringsmall], ['observationsmallen', UM_NAMN.observation, d.observation]],
   valet: [],
 };
 const celler = (did: string) => (CELLER[did] ?? []).filter(([, , finns]) => !!finns);
@@ -448,6 +450,30 @@ const moten = arbetslagetsMoten(d);
       <p>Hela lektionen på ett A4 att ha i handen: kärnan, delarna med det du gör och säger, beslutet och {d.fastnar?.rubrik ?? 'rättningen'}.</p>
       {bilder.lektionskort?.length > 0 && <div class="um-sidor">{bilder.lektionskort.map((b) => <a href={filer.lektionskort?.pdf} data-goatcounter-click={`fil:${id}-lektionskort.pdf`} data-goatcounter-title={`Bilden av lektionskort, pdf, ${id}`} class="um-sida"><img src={b.src} alt={`Lektionskortet: kärnan i ${talText(komp.length)} rutor, lektionens delar med det du gör och säger, beslutet och ${d.fastnar?.rubrik ?? 'rättningen'}`} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>)}</div>}
       <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} />
+    </section>
+  )}
+  {/* Strukturkorten som metoden importerar ur verktyget Strukturer (fältet strukturkort, K-661): texten, korten med bild,
+      namn och syfte som leder till strukturens sida, och knappen som skriver ut dem två och två på A4. Korten och bilderna
+      är verktygets, ur samma filer, så att metoden och verktyget aldrig glider isär. */}
+  {strukturer.length > 0 && (
+    <section class="um-avsnitt" id="strukturkorten">
+      <h3>{STRUKTURKORTEN}</h3>
+      <p set:html={k(d.strukturkort.text)} />
+      <ol class="st-kort-lista um-strukturkort">
+        {strukturer.map((x) => (
+          <li>
+            <a class="st-kort" href={strukturensAdress(x.id)} style={slagensStil(x.slag)}>
+              <img src={bildensAdress(x.id)} alt="" width="900" height="560" loading="lazy" decoding="async" />
+              <span class="st-kort-text"><span class="st-kort-namn">{x.namn}</span><span class="st-kort-rad">{x.syfte}</span></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <p class="um-strukturknappar">
+        <a class="knapp" href={metodensKortAdress(id)} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${id}/strukturkort`} data-goatcounter-title={`${d.titel}: strukturkorten`}><span data-direkt={`Skriv ut de ${talText(strukturer.length)} korten`}>De {talText(strukturer.length)} korten som pdf</span></a>
+        <a class="knapp sekundar" href="/strukturer">Alla strukturer</a>
+      </p>
+      <p class="st-utskriftsrad">{TVA_PA_A4}</p>
     </section>
   )}
   {d.ramar && (

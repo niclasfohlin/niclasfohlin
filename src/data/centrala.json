@@ -95,5 +95,15 @@
     "adress": "/vargrupp",
     "metod": "gruppstarkande-aktiviteter",
     "mejl": "kopiera formuläret och sammanställningen, skicka formuläret till eleverna och se gruppens snitt vid varje tillfälle"
+  },
+  {
+    "id": "strukturer",
+    "namn": "Strukturer",
+    "slag": "sida",
+    "del": "verktyg",
+    "adress": "/strukturer",
+    "arskurs": "F–9",
+    "omraden": "alla",
+    "mejl": "kort för samarbete i par, i grupp och i hela klassen, med stegen och förslag på användning, att skriva ut två och två på A4"
   }
 ]

@@ -35,6 +35,8 @@ export const umKort = (slag: UmSlag) => (slag === 'lathund' ? UM_NAMN.lathund.sp
  * varje metodsida): Allt om metoden, och varje del av den filen som Bara, som Bara metoden och Bara lathunden.
  */
 export const umRad = (slag: UmSlag) => (slag === 'allt' ? UM_NAMN.allt : `Bara ${umKort(slag).charAt(0).toLocaleLowerCase('sv')}${umKort(slag).slice(1)}`);
+/** Avsnittet med strukturkorten som metoden importerar (fältet strukturkort). */
+export const STRUKTURKORTEN = 'Strukturkorten';
 /** Metodkortet, rutan med forskningen överst på sidan (Metodprofil.astro), som texterna nämner. */
 export const METODKORTET = 'Metodkortet';
 
@@ -42,13 +44,14 @@ export const METODKORTET = 'Metodkortet';
  * Metodens saker (STIL.md under Hänvisningar): det metoden har ett namn på och sidan en egen plats för, med en knapp som
  * skriver ut eller laddar ner det. Lektionskortet, varje blad i Materialet för klassen, materialet i sin helhet,
  * planeringsmallen, observationsmallen, referensbladet och lathunden, och metodkortet, som är en del av sidan och skrivs ut
- * med metoden (slag avsnitt, utan egen knapp). Namnen kommer ur metodens fil och UM_NAMN och adresserna ur sidans ankare,
+ * med metoden (slag avsnitt, utan egen knapp), och strukturkorten och strukturerna som metoden importerar ur verktyget
+ * Strukturer, som läses ur verktygets filer och kommer in som o.strukturer (metodensStrukturer i src/lib/strukturer.ts). Namnen kommer ur metodens fil och UM_NAMN och adresserna ur sidans ankare,
  * så att ett nytt blad eller namn följer med av sig själv. Standarden hittar namnen i en text (sakdelar) och de namn som
  * ingen sak har (olankadeSaker), som i Stödundervisning (src/lib/metodsaker.ts). Adresserna är hela, så att lathundens
  * sida kan länka hit. Utan lektionskortets fil, när kortet väntar på Niclas ja (VANTAR i scripts/metoderfiler.mjs), är
  * kortet ingen sak, så att ingen länk leder till en knapp som inte finns.
  */
-export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean } = {}): MetodSak[] {
+export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; strukturer?: { id: string; namn: string }[] } = {}): MetodSak[] {
   const sida = metodensAdress(id);
   // Ett namn som är ett ord för en sak (Planeringsmallen, Affischen Så visar du) hittas också med liten bokstav; ett annat,
   // som Stegen, bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden), så att "skriv stegen" inte
@@ -68,6 +71,13 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
       const efterKolon = /^[^:]+:\s+(\S.*)$/.exec(r.rubrik)?.[1];
       saker.push(efterKolon ? { ...s, former: [...sakensFormer(r.rubrik), efterKolon] } : s);
     }
+  }
+  // Strukturerna som metoden importerar ur verktyget Strukturer (fältet strukturkort, K-661): avsnittet Strukturkorten och
+  // varje struktur med sitt namn, som leder till strukturens sida, så att Ping-pong-prat i texten är strukturen.
+  if (d.strukturkort) {
+    saker.push(sak(STRUKTURKORTEN, `${sida}#strukturkorten`));
+    // Bara med stor bokstav, som en titel: verbet "turas om" är ingen länk till Turas om (granskningen 2026-11-01, P1).
+    for (const x of o.strukturer ?? []) saker.push({ ...sak(x.namn, `/strukturer/${x.id}`), versal: true });
   }
   if (d.planeringsmall) saker.push(sak(UM_NAMN.planeringsmall, `${sida}#planeringsmallen`));
   if (d.observation) saker.push(sak(UM_NAMN.observation, `${sida}#observationsmallen`));

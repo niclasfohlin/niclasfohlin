@@ -60,10 +60,38 @@ export function strukturkortetsInnehall(s, scen) {
   return h.toString(16).padStart(8, '0');
 }
 
+/**
+ * Strukturkorten i en metod (sajtens K-661; Niclas 2026-11-01: "De strukturer som nu finns i den får ersättas av dessa. Så
+ * någon enkel import funktion för en struktur"): fältet `strukturkort` i metodens fil, med en text och strukturernas id i
+ * verktyget Strukturer, i den ordning de skrivs ut. Korten skrivs ut två och två, så att ett jämnt antal fyller arken (Niclas
+ * samma dag: "eftersom de skrivs ut två och två bör du välja ut en till så det blir 6st"). Sajten prövar att varje id finns.
+ */
+export const METODENS_STRUKTURKORT = Object.freeze({ minst: 2, högst: 8 });
+/**
+ * Felen i en metods fält strukturkort, som en lista; tomt när fältet saknas.
+ * @param {unknown} sk
+ * @returns {string[]}
+ */
+export function strukturkortensFel(sk) {
+  if (sk === undefined) return [];
+  const g = METODENS_STRUKTURKORT;
+  const x = /** @type {{ text?: unknown, strukturer?: unknown }} */ (sk ?? {});
+  const fel = [];
+  if (typeof x.text !== 'string' || !x.text.trim()) fel.push('strukturkort.text saknas: en text om korten, som sidan och Word-filen visar.');
+  const ids = Array.isArray(x.strukturer) ? x.strukturer : [];
+  if (ids.length < g.minst || ids.length > g.högst) fel.push(`strukturkort.strukturer har ${ids.length} strukturer; en metod har ${g.minst} till ${g.högst}.`);
+  if (ids.length % 2) fel.push(`strukturkort.strukturer har ett udda antal (${ids.length}): korten skrivs ut två och två, så välj ett jämnt antal.`);
+  for (const id of ids) if (typeof id !== 'string' || !/^[a-z0-9-]+$/.test(id)) fel.push(`strukturkort.strukturer: "${id}" är inget id i verktyget Strukturer.`);
+  if (new Set(ids).size !== ids.length) fel.push('strukturkort.strukturer har en struktur två gånger.');
+  return fel;
+}
+
 /** Kortets fil, i public/strukturer/kort/ och på /strukturer/kort/. */
 export const strukturkortetsFil = (id) => `strukturkort-${id}.pdf`;
 /** Filen med alla kort, två på varje A4, och dess nyckel i manifestet. */
 export const STRUKTURKORTEN_ALLA = Object.freeze({ fil: 'strukturkort-alla.pdf', nyckel: '_alla' });
+/** En metods strukturkort, två och två på A4, och nyckeln i manifestet. */
+export const metodensStrukturkort = (metod) => Object.freeze({ fil: `strukturkort-${metod}.pdf`, nyckel: `_metod:${metod}` });
 
 /**
  * Felen i en struktur, som en lista. En struktur som är utkast får sakna bild och förslag; en struktur som visas har

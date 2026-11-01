@@ -21,7 +21,7 @@ material:
   - minitavlor och pennor
   - lappar till stödorden
   - en skål med de fyra symbolerna
-uppdaterad: 2026-10-30
+uppdaterad: 2026-11-01
 publicerad: 2026-10-30
 relaterade: ["gruppstarkande-aktiviteter", "hoglasning-i-par", "texttyper-i-grupp"]
 utkast: false
@@ -253,7 +253,7 @@ steg:
         - "Låt paren tacka varandra: ”Tacka din kompis för något bestämt hen gjorde.”"
       fraser: ["Vad hjälpte er att lära er? Vad gör ni bättre nästa gång?", "Tacka din kompis för något bestämt hen gjorde."]
 lektionskort:
-  - { efter: klassen, text: "Lektionen står på lektionskortet, och strukturerna står på egna A4 i Materialet. Slutar strukturen med att du drar en symbol, är det dragningen i Var och en visar, och du drar bara en gång." }
+  - { efter: klassen, text: "Lektionen står på lektionskortet och strukturerna på strukturkorten. Slumpas någon fram i strukturen, gör du det med dragningen av en symbol i Var och en visar, och du drar bara en gång." }
 fastnar:
   rubrik: Så stöttar du
   text: När ett par fastnar, i innehållet eller i samarbetet, lyssnar du först och frågar hela paret. Ansvaret för att båda förstår ligger kvar hos paret.
@@ -394,7 +394,7 @@ checklista:
     - Planera den första veckans två eller tre korta samarbeten och den första hela lektionen.
     - Sätt ihop paren och bordsöarna så att olika elever möts, och lägg en symbol på varje plats.
     - Förbered T-kortet för den första färdigheten, att vända sig mot kamraten, vänta på sin tur och tacka.
-    - Skriv ut lektionskortet, symbolerna, fraserna att låna och veckans struktur, och ta fram skålen med symbolerna.
+    - Skriv ut lektionskortet, symbolerna, fraserna att låna och veckans strukturkort, och ta fram skålen med symbolerna.
     - Boka besöken, ett av dem med specialläraren.
     - Bestäm signalen med arbetslaget, eller med en kollega om du börjar ensam.
 klassen:
@@ -474,7 +474,7 @@ lararensFragor:
     - { fraga: "Får jag använda strukturerna utan att lära ut en färdighet?", svar: "Nej. Strukturen är bara formen och räcker inte ensam. Ge varje struktur en färdighet på T-kortet.", komponent: Samarbetsfärdigheter }
     - { fraga: "Får jag hoppa över reflektionen när tiden är knapp?", svar: "Nej. Gör den kort i stoppet halvvägs i Samarbetet. I den svenska studien var reflektionen en av de delar lärarna oftast inte gjorde fullt ut (Klang m.fl., 2020).", komponent: Återkoppling och reflektion }
     - { fraga: "Får jag ge båda i paret varsitt papper?", svar: "Ja, med stopp där de jämför och förklarar hur de tänkt. Ett gemensamt papper och roller ger mer samarbete, och varsitt papper utan stopp blir ofta arbete bredvid varandra.", komponent: Positivt ömsesidigt beroende }
-    - { fraga: "Får jag ta en annan struktur än de fem?", svar: "Ja, om den ger var och en sin tur. Fatta samma fyra beslut som i Före lektionen. Pröva en ny struktur i taget, först på känt innehåll.", komponent: Delaktighet och stödjande interaktion }
+    - { fraga: "Får jag ta en annan struktur än de sex?", svar: "Ja, om den ger var och en sin tur. Fler strukturer finns på sidan Strukturer. Fatta samma fyra beslut som i Före lektionen. Pröva en ny struktur i taget, först på känt innehåll.", komponent: Delaktighet och stödjande interaktion }
     - { fraga: "Hur hinner jag kursen när samarbetet tar tid?", svar: "Lägg korta samarbeten i ämnets lektion, som varianten på tio minuter, och låt paren förklara uppgiften för varandra innan de börjar. Då räcker färre upp handen, och du hinner till dem som behöver dig." }
     - { fraga: "Hur bedömer jag varje elev när eleverna arbetar ihop?", svar: "Bedöm den egna uppgiften efter samarbetet och gruppens arbete var för sig. Bedöm båda mot det eleverna ska kunna, och jämför inte eleverna med varandra." }
 hinder:
@@ -510,9 +510,12 @@ hallFast:
 # ---------------------------------------------------------------------------------------------------------------------
 # Bilaga A Att skriva ut
 # ---------------------------------------------------------------------------------------------------------------------
+strukturkort:
+  text: "Här är de sex strukturerna att komma igång med, som kort på ett halvt A4: framsidan med bilden visar du för klassen, och baksidan har stegen. De fem första är strukturerna i De första veckorna, en i veckan, och Rondellen tar ni när bordsöarna har lärt sig Huvuden ihop och Mötas på mitten. Skriv ut korten och ha dem till hands, gärna också fler från sidan Strukturer. En struktur är ett hjälpmedel, och lektionens syfte är det viktiga: ta en struktur när den hjälper eleverna att lära sig det lektionen handlar om. Strukturen gör samarbetet snabbare att komma igång med och låter eleverna lägga kraften på lärandet, särskilt när de känner igen den från förut."
+  strukturer: [ping-pong-prat, epa, turas-om, huvuden-ihop, motas-pa-mitten, rondellen]
 ramar:
   rubrik: Materialet för klassen
-  text: ["Utöver lektionskortet finns de fem strukturerna att visa på tavlan och stödmaterialet för klassen: T-kortet, symbolerna, fraserna att låna, gruppkontraktet och bladet till Mötas på mitten. Varje blad står på en egen sida."]
+  text: ["Utöver lektionskortet och strukturkorten finns stödmaterialet för klassen: T-kortet, symbolerna, fraserna att låna, gruppkontraktet och bladet till Mötas på mitten. Varje blad står på en egen sida."]
   ramar:
     - rubrik: T-kortet
       text: ["Skriv ut kortet som affisch, gärna förstorat till A3. Skriv veckans färdighet överst, och fyll i med klassen under ögat vad ni vill se och under örat vad ni vill höra. Kortet hänger uppe under veckan och får sedan hänga kvar. Vill ni också säga hur färdigheten känns, rita ett Y-kort på tavlan med ett hjärta i det tredje fältet."]
@@ -522,112 +525,6 @@ ramar:
       text: ["Lägg ett blad mitt på varje bordsö. Säg fraserna i kör med klassen innan paren börjar, och peka på den du vill höra."]
     - rubrik: Gruppkontraktet
       text: ["Varje bordsö fyller i ett blad i den första lektionen i vecka 5. Gruppen väljer ett namn, en färdighet de ska öva på och tre sätt att göra den, och var och en skriver sitt namn vid sin symbol. I varje Avslut efter det tar gruppen fram kontraktet: Hur kan vi stötta varandra på bästa sätt nästa gång vi samarbetar?"]
-    - rubrik: "Strukturen, vecka 1: Ping-pong-prat"
-      text: ["I ett parsamtal studsar orden fram och tillbaka, och ingen säger ett nytt ord förrän kompisen har sagt sitt."]
-      listor:
-        - rubrik: Så gör ni
-          rader:
-            - ["Läraren säger temat, och var och en tänker tyst en stund."]
-            - ["Vänd er mot varandra och gör en high five."]
-            - ["Den som börjar säger ett ord eller en kort mening om temat."]
-            - ["Kompisen säger nästa, och ingen säger ett nytt ord förrän den andra sagt sitt."]
-            - ["Kommer du inte på något, säg pass, så fortsätter kompisen."]
-            - ["Fortsätt tills läraren bryter."]
-            - ["Tacka varandra, och enas om ett ord ni båda tyckte om. Vem som helst av er kan få säga det för klassen."]
-        - rubrik: Så tränar ni samtalet
-          rader:
-            - ["Ni lyssnar in kompisen och väntar på er tur. Ni får också fram det ni redan vet om temat, så att alla har ord att tänka med i nästa uppgift."]
-      delar:
-        - rubrik: Till läraren
-          falt:
-            - { rubrik: När, text: "Före ett nytt arbetsområde eller en text, när temat ger många korta svar. Håll tiden kort, en till två minuter." }
-            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att vända sig mot kamraten, vänta på sin tur och tacka. Lyssna efter om båda säger ord, och säg vad du hör." }
-            - { rubrik: Så syns varje elev, text: "Var och en säger ord i tur och ordning. Sedan drar du en symbol, alla med den ställer sig upp, och en eller två säger ordet paret enades om." }
-    - rubrik: "Strukturen, vecka 2: EPA"
-      text: ["Enskilt, par, alla: var och en tänker först själv, sedan säger paret sina tankar, och sist får klassen höra några."]
-      listor:
-        - rubrik: Så gör ni
-          rader:
-            - ["Läraren ställer en fråga som har många svar."]
-            - ["Tänk själv en stund, och visa tummen upp när du har något."]
-            - ["Vänd dig mot din kompis, knä mot knä."]
-            - ["Säg din tanke: Jag tänker … därför att … Lyssna på kompisens."]
-            - ["Ni är klara när båda kan säga kompisens tanke. Tacka då varandra och vänd er mot läraren."]
-            - ["Läraren drar en symbol, alla med den ställer sig upp, och en eller två berättar kompisens tanke."]
-        - rubrik: Så tränar ni att tänka tillsammans
-          rader:
-            - ["Alla hinner tänka innan någon svarar, och i paret får båda säga sin tanke. Så har alla något att säga när klassen lyssnar."]
-      delar:
-        - rubrik: Till läraren
-          falt:
-            - { rubrik: När, text: "När alla ska tänka på en fråga, i vilket ämne som helst." }
-            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att tänka själv först och säga sin tanke till kamraten. Lyssna efter om båda säger något eget, och säg vad du hör." }
-            - { rubrik: Så syns varje elev, text: "Var och en säger sin tanke i paret, och en eller två med symbolen som du drar berättar kompisens tanke." }
-    - rubrik: "Strukturen, vecka 3: Turas om"
-      text: ["Den ena löser och tänker högt, och den andra stöttar och uppmuntrar. Sedan byter ni."]
-      listor:
-        - rubrik: Så gör ni
-          rader:
-            - ["Läraren ger minst två uppgifter och visar de två rollerna med en elev."]
-            - ["Den som börjar läser uppgiften, löser den och säger högt: Jag tänker … därför att …"]
-            - ["Kompisen lyssnar, frågar, uppmuntrar och hjälper utan att säga svaret."]
-            - ["När ni är överens skriver kompisen svaret."]
-            - ["Byt roller vid nästa uppgift."]
-            - ["Fastnar ni båda, fråga ett annat par vid bordet."]
-            - ["När ni är klara jämför ni svaren med ett annat par och tackar varandra."]
-        - rubrik: Så tränar ni att lära av varandra
-          rader:
-            - ["Den som förklarar sätter ord på sitt tänkande, och den som stöttar lär sig att hjälpa utan att ta över. Båda ska kunna förklara när ni är klara."]
-      delar:
-        - rubrik: Till läraren
-          falt:
-            - { rubrik: När, text: "När paren ska öva och förstå något de har mött, som ord att bygga med bokstäver, en räkneuppgift, ett stycke i en text eller ett moment i slöjd." }
-            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att hjälpa utan att säga svaret. Lyssna efter ”Prova att …”, och fråga paret först." }
-            - { rubrik: Så syns varje elev, text: "De löser varannan uppgift, och efteråt gör alla en egen uppgift av samma slag." }
-    - rubrik: "Strukturen, vecka 4: Huvuden ihop"
-      text: ["Bordsön enas om ett svar som alla kan ge."]
-      listor:
-        - rubrik: Så gör ni
-          rader:
-            - ["Var och en har sin symbol vid bordsön: cirkel, triangel, kvadrat eller stjärna."]
-            - ["Läraren ställer en fråga, ger tanketid och säger: Huvuden ihop!"]
-            - ["Ni lutar er mot varandra, säger var sin tanke och viskar fram ett svar som alla kan ge. Skriv eller rita tre stödord på en lapp, gärna ämnets ord."]
-            - ["Kolla att alla kan svaret, lägg händerna i mitten och vänd er mot läraren."]
-            - ["Läraren drar en symbol ur skålen, och ni får en stund till att hjälpa den som har symbolen att bli redo."]
-            - ["Alla med symbolen ställer sig upp, och en eller två svarar för gruppen: Vi tänker … De andra vid bordet får påminna utan att svara åt hen."]
-            - ["Nästa fråga går likadant."]
-            - ["Tacka varandra."]
-        - rubrik: Så tränar ni att alla kan
-          rader:
-            - ["Ni förklarar för varandra tills alla kan, eftersom vem som helst kan få svara."]
-      delar:
-        - rubrik: Till läraren
-          falt:
-            - { rubrik: När, text: "När bordsön ska enas om ett svar eller sammanfatta en genomgång, en film eller en text." }
-            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att kolla att alla kan. Lyssna efter frågan ”Kan du säga det?” vid borden." }
-            - { rubrik: Så syns varje elev, text: "Svaret är gruppens: oavsett vem som får svara har alla hjälpt varandra att förstå." }
-    - rubrik: "Strukturen, vecka 5: Mötas på mitten"
-      text: ["Var och en fyller i sin ruta, och bordsön fyller i mitten tillsammans."]
-      listor:
-        - rubrik: Så gör ni
-          rader:
-            - ["Lägg bladet mitt på bordet, så att var och en har sin ruta närmast sig."]
-            - ["Läraren ger uppgiften och tid att tänka."]
-            - ["Skriv eller rita i din egen ruta, utan att prata."]
-            - ["Visa din ruta i tur och ordning: Jag har skrivit … De andra lyssnar och säger: Jag ser …"]
-            - ["Prata om vad mitten ska visa, och ta med något från allas rutor: Vi tar din idé och min idé."]
-            - ["Skriv eller rita i mitten tillsammans, och kolla att alla kan förklara den."]
-            - ["Tacka varandra och säg vad kamraten gjorde bra: Bra att du lyssnade."]
-            - ["Läraren drar en symbol, alla med den ställer sig upp, och en eller två förklarar mitten för klassen."]
-        - rubrik: Så tränar ni att bygga vidare
-          rader:
-            - ["Var och ens tanke syns i rutan, och ni bygger vidare på varandras idéer. Mitten blir bättre än det någon hade kommit på själv."]
-      delar:
-        - rubrik: Till läraren
-          falt:
-            - { rubrik: När, text: "När bordsön ska samla det de vet eller komma på idéer, innan de skriver eller efter en genomgång. I par ritar de yngsta i två rutor och en mitt." }
-            - { rubrik: Medan de arbetar, text: "Veckans färdighet är att bygga vidare på kamratens idé. Lyssna efter ”Vi tar din idé och …”, och säg vad du hör." }
-            - { rubrik: Så syns varje elev, text: "Var och ens ruta visar vad hen tänkte, och en eller två med symbolen som du drar förklarar mitten för klassen." }
     - rubrik: Bladet till Mötas på mitten
       text: ["Skriv ut ett blad per bordsö, gärna förstorat till A3. Var och en skriver eller ritar i rutan vid sin symbol, och bordsön fyller i mitten tillsammans. De yngsta gör det i par, med två rutor och en mitt på ett A4 som du delar in själv."]
 planeringsmall:

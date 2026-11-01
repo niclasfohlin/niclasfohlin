@@ -39,7 +39,9 @@ const delar = DELAR.map((del) => ({
   ...del,
   saker: CENTRALA.filter((c) => c.del === del.id).map((c) => {
     const ms = visar(c);
-    const omraden = site.omraden.filter((o) => ms.some((m) => m.data.omrade === o));
+    // En sak för alla områden (fältet omraden: alla, som verktyget Strukturer) står utan område, också när de metoder som
+    // visar den har ett.
+    const omraden = c.omraden === 'alla' ? [] : site.omraden.filter((o) => ms.some((m) => m.data.omrade === o));
     // En delad sak med eget spann (fältet arskurs, src/lib/centrala.ts) visar det, också där metoderna är färre.
     const egen = c.arskurs ? spannITexten(c.arskurs) : undefined;
     const spann = [...ms.map((m) => arskursSpannet(m.data)), ...(egen ? [egen] : [])];
@@ -48,7 +50,7 @@ const delar = DELAR.map((del) => ({
       c,
       metoder: [...new Set(ms.map((m) => m.data.serie ?? m.id))],
       omrade: omraden[0],
-      text: `${omraden.join(' och ')} · ${sp[0] === 0 ? spannText(sp) : `åk ${spannText(sp)}`}`,
+      text: `${c.omraden === 'alla' ? 'Alla områden' : omraden.join(' och ')} · ${sp[0] === 0 ? spannText(sp) : `åk ${spannText(sp)}`}`,
       // En pdf och ett formulär öppnas i en ny flik, som metodens knapp gör (src/lib/centrala.ts, centralLank).
       ny: c.slag !== 'sida',
     };

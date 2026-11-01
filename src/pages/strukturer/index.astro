@@ -15,7 +15,7 @@
 import Base from '../../layouts/Base.astro';
 import Strukturlistan from '../../components/Strukturlistan.astro';
 import Kortet from '../../components/Strukturkortet.astro';
-import { strukturerna, strukturernasMetod, ALLA_KORTENS_ADRESS, allaKortensStorlek, topplistanIBygget, slagensStil, SLAGEN } from '../../lib/strukturer';
+import { strukturerna, strukturernasMetod, ALLA_KORTENS_ADRESS, allaKortensStorlek, topplistanIBygget, slagensStil, SLAGEN, TVA_PA_A4 } from '../../lib/strukturer';
 import { symbol } from '../../../scripts/strukturer/symboler.mjs';
 
 const alla = await strukturerna();
@@ -35,10 +35,14 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
         <p class="meta brodsmula"><a href="/metoder">Metoder</a>{metoden && <> · <a href={`/metoder/${metoden.id}`}>{metoden.data.titel}</a></>} · Strukturer</p>
         <h1>{titel}</h1>
         <p class="ingress">Kort för samarbete i par, i grupp och i hela klassen. Tryck på en struktur för stegen och förslag på användning, och på bocken för att lägga kortet i listan att skriva ut.</p>
+        {/* Syftet först (Niclas 2026-11-01: "någon text i hela att viktigast inte att pressa på med strukturer. Utan att
+            undervisningen syfte är det viktiga. Strukturer kan däremot hjälpa läraren effektivisera samarbete och hjälpa eleverna
+            ha fokus på lärandet än hur de ska samarbeta. Särskilt när de känner igen strukturen från förut"). */}
+        <p class="st-syftet">En struktur är ett hjälpmedel, och lektionens syfte är det viktiga. Ta en struktur när den hjälper eleverna att lära sig det lektionen handlar om. Den gör samarbetet snabbare att komma igång med och låter eleverna lägga kraften på lärandet, särskilt när de känner igen strukturen från förut.</p>
         <div class="st-utskrift">
           <a class="knapp sekundar" href={ALLA_KORTENS_ADRESS} target="_blank" rel="noopener" data-goatcounter-click="utskrift:strukturer/alla" data-goatcounter-title="Strukturer: alla kort">Skriv ut alla {alla.length} kort (pdf, {allaKortensStorlek()})</a>
         </div>
-        <p class="st-utskriftsrad">Två kort på varje A4. Skriv ut dubbelsidigt, vänd längs långsidan och klipp längs den streckade linjen.</p>
+        <p class="st-utskriftsrad">{TVA_PA_A4}</p>
       </header>
 
       {topp.length === 5 && (

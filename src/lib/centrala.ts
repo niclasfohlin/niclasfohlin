@@ -27,7 +27,7 @@ const DATABASENS_ORD = ['problem', 'problemen', 'texter', 'texterna', 'lästexte
  *  den inte är gemensam. del är rutans rubrik i metodbanken. mejl är det som följer på länken i mejlet om en ny metod.
  *  arskurs är årskurserna som en delad sak är gjord för, som F–9, när de är fler än metodernas som visar den: Utveckla
  *  högläsning stöder all högläsning i F–9 men sås bara där den stöder metodens kärna (Niclas 2026-10-20, såddprovet). */
-export type Central = { id: string; namn: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string; arskurs?: string };
+export type Central = { id: string; namn: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string; arskurs?: string; omraden?: 'alla' };
 export const CENTRALA = data as Central[];
 export const centralAv = (id: string) => CENTRALA.find((c) => c.id === id);
 
@@ -46,6 +46,7 @@ export function registerFel(): string[] {
     if (c.slag === 'sida' && !/^\/[a-z0-9/-]+$/.test(c.adress ?? '')) fel.push(`${vem}: en sidas adress börjar med / och har inget filnamn.`);
     if (c.kort !== undefined && !/^\/[a-z0-9-]+$/.test(c.kort)) fel.push(`${vem}: kort är en adress med ett led, som /skrivkort.`);
     if (!c.mejl?.trim()) fel.push(`${vem}: mejl är det som följer på länken i mejlet om en ny metod och saknas.`);
+    if (c.omraden !== undefined && (c.omraden !== 'alla' || c.metod)) fel.push(`${vem}: omraden är "alla", för en delad sak som gäller alla områden, som verktyget Strukturer, och bara en delad sak (utan metod) har det.`);
     if (c.arskurs !== undefined && (c.metod || !spannITexten(c.arskurs))) fel.push(`${vem}: arskurs är ett spann som "F–9" eller "åk 2–6", och bara en delad sak (utan metod) har det.`);
     // Registret säger inte hur stora databaserna är: talen står på sidorna, som räknar dem (METODER.md under Antalen, K-450).
     for (const t of fastaAntal(`${c.namn ?? ''} ${c.mejl ?? ''}`, DATABASENS_ORD, ['teman', 'kategorier'])) fel.push(`${vem}: "${t}" är ett fast antal av en databas poster och slutar stämma när databasen växer. Skriv utan antal.`);

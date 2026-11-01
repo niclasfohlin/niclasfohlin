@@ -5,10 +5,12 @@
 // committas, med manifestet src/data/strukturkort.json. Bygget stannar på en struktur som visas men vars kort saknas eller
 // är äldre än strukturen, och på ett manifest som är äldre än filen med alla kort.
 import { readFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import YAML from 'yaml';
 import { join } from 'node:path';
 import type { CollectionEntry } from 'astro:content';
 import { publicerade } from './innehall';
-import { STRUKTURENS_SLAG, strukturkortetsInnehall, strukturkortetsFil, STRUKTURKORTEN_ALLA } from './standard/index.js';
+import { STRUKTURENS_SLAG, strukturkortetsInnehall, strukturkortetsFil, STRUKTURKORTEN_ALLA, metodensStrukturkort } from './standard/index.js';
 import manifest from '../data/strukturkort.json';
 import topplistan from '../data/strukturer-topp.json';
 
@@ -24,6 +26,13 @@ export const strukturensAdress = (id: string) => `/strukturer/${id}`;
 export const bildensAdress = (id: string) => `/strukturer/${id}.svg`;
 export const kortetsAdress = (id: string) => `/strukturer/kort/${strukturkortetsFil(id)}`;
 export const ALLA_KORTENS_ADRESS = `/strukturer/kort/${STRUKTURKORTEN_ALLA.fil}`;
+
+/**
+ * Hur korten skrivs ut, en text för varje ställe där de skrivs ut (Niclas 2026-11-01: "Sannolikt vill man skriva ut den
+ * tvåsidigt gärna. Info om det där man kan skriva ut dem. Så framsida och baksida hamnar på samma kort").
+ */
+export const DUBBELSIDIGT = 'Skriv ut dubbelsidigt och vänd längs långsidan, så hamnar framsidan och baksidan på samma kort. Klipp sedan längs den streckade linjen.';
+export const TVA_PA_A4 = `Två kort på varje A4. ${DUBBELSIDIGT}`;
 
 /** Slagen i verktygets ordning, med en rad om vad slaget är. */
 export const SLAGEN: { slag: Slag; namn: string; farg: string; ljus: string; text: string }[] = [
@@ -59,6 +68,7 @@ function provaKorten(alla: Struktur[]) {
     else if (m.innehall !== strukturkortetsInnehall(s.data, scenen(s.data.bild!.scen))) fel.push(`${s.data.namn}: kortet är äldre än strukturen eller scenen`);
     if (!existsSync(join(process.cwd(), 'public', 'strukturer', 'kort', strukturkortetsFil(s.id)))) fel.push(`${s.data.namn}: public/strukturer/kort/${strukturkortetsFil(s.id)} saknas`);
   }
+  if (alla.length && !existsSync(join(process.cwd(), 'public', 'strukturer', 'kort', STRUKTURKORTEN_ALLA.fil))) fel.push(`public/strukturer/kort/${STRUKTURKORTEN_ALLA.fil} saknas`);
   const allas = MANIFESTET[STRUKTURKORTEN_ALLA.nyckel]?.kort ?? [];
   if (alla.length && [...allas].sort().join() !== alla.map((s) => s.id).sort().join()) fel.push('Filen med alla kort har inte samma strukturer som sidan');
   if (fel.length) throw new Error(`Strukturkorten:\n  ${fel.join('\n  ')}\nGör om dem med node scripts/strukturer/kort.mjs --vid-behov (npm run validera gör det).`);
@@ -73,8 +83,10 @@ export async function strukturerna(): Promise<Struktur[]> {
 }
 
 /** Kortets adress med version, för listans hämtningar, som länkarna på sidorna får av scripts/filversion.mjs. */
-export const kortetsAdressMedVersion = (id: string) => `${kortetsAdress(id)}?v=${(MANIFESTET[id]?.summa ?? '').slice(0, 8)}`;
+export const kortetsAdressMedVersion = (id: string) => kortensVersion(kortetsAdress(id));
 
+/** Antalet kort i filen med alla kort. */
+export const allaKortensAntal = () => (MANIFESTET[STRUKTURKORTEN_ALLA.nyckel]?.kort ?? []).length;
 /** Filen med alla korts storlek, som "6 MB" eller "800 kB". */
 export function allaKortensStorlek(): string {
   const kb = MANIFESTET[STRUKTURKORTEN_ALLA.nyckel]?.kb ?? 0;
@@ -90,6 +102,46 @@ export function topplistanIBygget(finns: Set<string>): string[] {
   const t = topplistan as { strukturer: { id: string; antal: number }[] };
   const ids = t.strukturer.filter((x) => x.antal > 0 && finns.has(x.id)).map((x) => x.id);
   return ids.length >= 5 ? ids.slice(0, 5) : [];
+}
+
+/** En struktur som en metod importerar: det metodens sida, saker och kort behöver. */
+export type ImporteradStruktur = { id: string; namn: string; slag: Slag; syfte: string; alt: string };
+/**
+ * Strukturerna som en metod importerar med fältet strukturkort (K-661; Niclas 2026-11-01: "Så någon enkel import funktion
+ * för en struktur"), i utskriftens ordning, ur verktygets filer i src/content/strukturer/. Läses direkt ur filerna, så att
+ * Lär dig metoden och metodens saker kan läsa dem utan samlingen. En struktur som inte finns eller inte visas (utkast,
+ * vantar eller utan bild) stoppar bygget, så att metoden aldrig leder till ett kort som saknas.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function metodensStrukturer(d: Record<string, any>, vem: string): ImporteradStruktur[] {
+  return ((d.strukturkort?.strukturer ?? []) as string[]).map((id) => {
+    const fil = join(process.cwd(), 'src', 'content', 'strukturer', `${id}.yaml`);
+    if (!existsSync(fil)) throw new Error(`${vem}: strukturkort nämner ${id}, som inte är en struktur i src/content/strukturer/.`);
+    const x = YAML.parse(readFileSync(fil, 'utf8'));
+    if (x.utkast || x.vantar || !x.bild) throw new Error(`${vem}: strukturkort nämner ${x.namn}, som inte visas i verktyget Strukturer${x.vantar ? ` (${x.vantar})` : ''}.`);
+    return { id, namn: x.namn, slag: x.slag, syfte: x.syfte, alt: x.bild.alt };
+  });
+}
+/**
+ * Adressen med filens version, som scripts/filversion.mjs sätter på sidornas länkar (filens sha256, åtta tecken), för en
+ * adress som inte står i sidans html, som listans hämtningar och Lär dig metodens knappar. Samma fil får samma version
+ * överallt (granskningen 2026-11-01, P2).
+ */
+const versioner = new Map<string, string>();
+export const kortensVersion = (adress: string) => {
+  if (!versioner.has(adress)) {
+    const fil = join(process.cwd(), 'public', adress);
+    versioner.set(adress, existsSync(fil) ? `${adress}?v=${createHash('sha256').update(readFileSync(fil)).digest('hex').slice(0, 8)}` : adress);
+  }
+  return versioner.get(adress)!;
+};
+/** Metodens strukturkort två och två på A4, som scripts/strukturer/kort.mjs gör; länken får sin version av scripts/filversion.mjs. */
+export const metodensKortAdress = (metod: string) => `/strukturer/kort/${metodensStrukturkort(metod).fil}`;
+/** Metodens kortfil finns och har metodens strukturer i metodens ordning; annars stannar bygget, som för verktygets kort. */
+export function provaMetodensKort(metod: string, ids: string[]) {
+  const m = MANIFESTET[metodensStrukturkort(metod).nyckel];
+  const fil = join(process.cwd(), 'public', 'strukturer', 'kort', metodensStrukturkort(metod).fil);
+  if (!m || !existsSync(fil) || (m.kort ?? []).join() !== ids.join()) throw new Error(`${metod}: strukturkorten i public/strukturer/kort/${metodensStrukturkort(metod).fil} saknas eller har andra strukturer än metodens fält strukturkort. Gör om dem med node scripts/strukturer/kort.mjs --vid-behov (npm run validera gör det).`);
 }
 
 /** Platshållarna i bankens steg står i kursiv, som *frågan*: som html, med resten av texten skyddad. */

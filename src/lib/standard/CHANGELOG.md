@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.48.0, 2026-11-01
+
+- `strukturer.js` (sajtens K-661): en metod importerar strukturer ur verktyget Strukturer med fältet `strukturkort` (`text` och `strukturer`, id i utskriftens ordning). `strukturkortensFel` prövar fältet, med ett jämnt antal mellan `METODENS_STRUKTURKORT.minst` och `högst`, eftersom korten skrivs ut två och två, och `undervisningsmetodensFel` kör den. `metodensStrukturkort` är metodens fil med korten. Sajten prövar att varje id finns och visas.
+
 ## 0.47.0, 2026-11-01
 
 - `strukturer.js` (sajtens K-650): `strukturkortetsInnehall`, kontrollsumman över det ett strukturkort visar, som skriptet som gör korten skriver i manifestet och bygget räknar om, med scenens radslut som 
