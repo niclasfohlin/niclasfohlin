@@ -422,9 +422,17 @@
             {
               "efter": "tidsschema",
               "delar": [
-                "turas-om",
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Korten"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
                 "kloka-pennan"
               ],
+              "slag": "forslag",
               "om": "Paren i Korten"
             },
             {
@@ -446,9 +454,17 @@
             {
               "efter": "tidsschema",
               "delar": [
-                "turas-om",
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Korten"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
                 "kloka-pennan"
               ],
+              "slag": "forslag",
               "om": "Paren i Korten"
             },
             {
@@ -475,7 +491,7 @@
             {
               "efter": "tabell: Ett avsnitt i fyra steg: Läs, Red ut, Kärnan och Lappen",
               "delar": [
-                "lasa-och-forklara-i-par"
+                "turas-om"
               ],
               "slag": "forslag",
               "om": "Paren i avsnitten"
@@ -539,14 +555,6 @@
           "skal": "I en hel klass läser eleverna sin rad i par, och Berätta mera! låter var och en läsa den för flera kamrater, medan Kloka pennan ger rollerna när paret skriver vidare på en rad och turas om med pennan.",
           "vav": [
             {
-              "efter": "tabell: I en klass, med de yngsta och på dator",
-              "delar": [
-                "beratta-mera"
-              ],
-              "slag": "forslag",
-              "om": "Dela i en hel klass"
-            },
-            {
               "efter": "tabell: Från delande till en klass med skribenter",
               "delar": [
                 "kloka-pennan"
@@ -604,12 +612,12 @@
               "om": "Pennan i Lösa"
             },
             {
-              "efter": "tidsschema",
+              "efter": "progression",
               "delar": [
                 "tva-loser-problem"
               ],
               "slag": "forslag",
-              "om": "Paren i Lösa"
+              "om": "Färdighetsträningen bredvid insatsen"
             }
           ],
           "inte": {
@@ -647,14 +655,6 @@
               ],
               "slag": "form",
               "om": "Rundorna med talpinnen"
-            },
-            {
-              "efter": "tidsschema",
-              "delar": [
-                "las-med-roller"
-              ],
-              "slag": "forslag",
-              "om": "Personerna och detektiven i Tankarna"
             },
             {
               "efter": "tabell: Om något händer",
@@ -804,7 +804,7 @@
               "delar": [
                 "turas-om"
               ],
-              "slag": "form",
+              "slag": "forslag",
               "om": "Paren i Bygg och ändra"
             },
             {
@@ -973,7 +973,7 @@
               "delar": [
                 "turas-om"
               ],
-              "slag": "form",
+              "slag": "forslag",
               "om": "Paren i Kedjan i rutorna"
             },
             {
