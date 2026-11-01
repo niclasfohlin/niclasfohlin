@@ -7,7 +7,8 @@
 // Varje metod jämförs med samma fil på origin/main, det som ligger ute. Skiljer sig något i metoden, och är uppdaterad
 // samma som där, sätts dagens datum (svensk tid) på raden uppdaterad. Det som inte är metodens innehåll räknas inte:
 // datumet självt, relaterade (länkarna till andra metoder, som ändras när en ny metod kommer), utkast och tecken som bara
-// styr radbrytningen (hårt mellanslag och ordfog). En ny metod har sitt eget datum och lämnas som den är. En ändring i
+// styr radbrytningen (hårt mellanslag och ordfog). Står metoden kvar som den committades samma dag som datumet säger, är
+// datumet rätt också när dygnet går innan den laddas upp. En ny metod har sitt eget datum och lämnas som den är. En ändring i
 // den gemensamma koden (formen) ändrar inte metodens fil och inte datumet.
 //
 // npm run validera kör skriptet före lathundarna, så att datumet står rätt också i Word, PowerPoint och pdf.
@@ -32,7 +33,8 @@ const INTE_INNEHALL = new Set(['uppdaterad', 'publicerad', 'relaterade', 'utkast
 const kontrollera = process.argv.includes('--kontrollera');
 
 // Dagens datum i svensk tid, som YYYY-MM-DD.
-const idag = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+const dagen = (d) => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+const idag = dagen(new Date());
 const utan = (x) => JSON.stringify(x ?? null).replace(/ /g, ' ').replace(/⁠/g, '');
 const datum = (x) => (x instanceof Date ? x.toISOString().slice(0, 10) : x ? String(x).slice(0, 10) : '');
 const git = (args) => execFileSync('git', args, { cwd: rot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
@@ -52,6 +54,10 @@ for (const [MAPP, fil] of MAPPAR.flatMap((m) => readdirSync(join(rot, m)).filter
   const falt = [...new Set([...Object.keys(nu), ...Object.keys(fore)])].filter((k) => !INTE_INNEHALL.has(k));
   const andrade = falt.filter((k) => utan(nu[k]) !== utan(fore[k]));
   if (!andrade.length || datum(nu.uppdaterad) !== datum(fore.uppdaterad)) continue;
+  // Kooperativt lärande ändrades och committades 2026-11-01, samma dag som det som låg ute, och fick annars ett nytt datum efter
+  // midnatt, så att filen inte längre var den som riggens dokument är byggda ur (scripts/metoderfiler.mjs).
+  const committad = git(['log', '-1', '--format=%cI', '--', vag]).trim();
+  if (!git(['status', '--porcelain', '--', vag]).trim() && committad && dagen(new Date(committad)) === datum(nu.uppdaterad)) continue;
   if (kontrollera) { saknas.push(`${fil} (${andrade.join(', ')})`); continue; }
   // Radslutet står kvar, också CRLF i arbetskopian.
   const rad = /^uppdaterad:[ \t]*("?)\d{4}-\d{2}-\d{2}\1[ \t]*(\r?)$/m;
