@@ -5,17 +5,17 @@ andra: []
 syfte: Paren skriver förklaringar och nästa par parar ihop förklaring med kort
 steg:
   - Läraren delar in eleverna i par och ger varje par en uppsättning *kort*.
-  - Eleverna turas om att skriva en förklaring till varje kort.
-  - Eleverna kontrollerar tillsammans att förklaringarna stämmer.
-  - Eleverna blandar korten och lägger dem mitt på bordet.
-  - Paren roterar till ett nytt bord.
-  - Eleverna läser förklaringarna och lägger rätt kort vid rätt förklaring.
-  - Paren roterar vidare till ett nytt bord.
+  - Eleverna turas om att skriva en förklaring till varje kort på en egen lapp.
+  - Paret kontrollerar att förklaringarna stämmer.
+  - Paret blandar korten och lägger dem mitt på bordet, med lapparna bredvid.
+  - Paren går till ett nytt bord.
+  - Eleverna lägger rätt kort vid varje förklaring.
+  - Paren går tillbaka till sitt bord och ser om korten ligger rätt.
 slag: par
 kalla:
   rubrik: Skriv, byt, matcha
-  commit: b492447
-  summa: 91a84289
+  commit: 20a0fea
+  summa: efd7e183
 bild:
   scen: skriv-byt-matcha
   alt: Två elever sitter vid en bänk med lappar där förklaringar är skrivna. Bredvid den första lappen ligger redan ett gult kort med en cirkel. Den till vänster pekar på nästa lapp och läser förklaringen, och pratbubblan visar en kvadrat. Den till höger håller fram kortet med kvadraten bredvid den lappen för att lägga det där. Längst fram ligger en lapp till och två kort som är kvar, med en triangel och en stjärna.
@@ -23,19 +23,19 @@ forslag:
   - omrade: lasning
     arskurs: 4–6
     amne: SO
-    text: Klassen har läst en faktatext om medeltiden i SO. Korten är ord ur texten, som borg, riddare och tionde, och varje par får en uppsättning. Paren turas om att skriva en förklaring till varje ord på en lapp och kontrollerar tillsammans att den stämmer med texten. De blandar korten, lägger dem mitt på bordet och roterar till ett nytt bord. Där läser de förklaringarna och lägger rätt kort vid rätt förklaring, och sedan roterar paren vidare.
+    text: Klassen har läst en faktatext om medeltiden i SO. Korten är ord ur texten, som borg, riddare och tionde, och varje par får en uppsättning. Paren turas om att skriva en förklaring till varje ord på en lapp och kontrollerar tillsammans att den stämmer med texten. De blandar korten, lägger dem mitt på bordet och går till ett nytt bord. Där läser de förklaringarna och lägger rätt kort vid rätt förklaring, och sedan går paren tillbaka till sitt eget bord och ser om korten ligger rätt.
   - omrade: skrivning
     arskurs: 7–9
     amne: svenska
-    text: I svenskan i åk 7 repeterar klassen begrepp som används när man skriver, och varje par får kort med till exempel bindeord, stycke och tes. Paret turas om att skriva en förklaring med ett eget exempel till varje kort och kontrollerar sedan tillsammans att förklaringarna stämmer. De blandar korten, lägger dem mitt på bordet och roterar till ett nytt bord. Där läser eleverna förklaringarna, lägger rätt kort vid rätt förklaring och roterar vidare.
+    text: I svenskan i åk 7 repeterar klassen begrepp som används när man skriver, och varje par får kort med till exempel bindeord, stycke och tes. Paret turas om att skriva en förklaring med ett eget exempel till varje kort och kontrollerar sedan tillsammans att förklaringarna stämmer. De blandar korten, lägger dem mitt på bordet och går till ett nytt bord. Där läser eleverna förklaringarna, lägger rätt kort vid rätt förklaring och går sedan tillbaka till sitt eget bord för att se om korten ligger rätt.
   - omrade: matematik
     arskurs: 4–6
     amne: matematik
-    text: Klassen i åk 4 arbetar med bråk, och korten har bilder av cirklar och rektanglar där en del är färglagd. Varje par får en uppsättning kort. Paren turas om att skriva en förklaring till varje bild i ord, som ”Figuren är delad i fyra lika delar och tre är färgade”, och kontrollerar tillsammans att den stämmer. De blandar korten, lägger dem mitt på bordet och roterar till ett nytt bord. Där läser de förklaringarna och lägger rätt kort vid rätt förklaring, och sedan roterar paren vidare.
+    text: Klassen i åk 4 arbetar med bråk, och korten har bilder av cirklar och rektanglar där en del är färglagd. Varje par får en uppsättning kort. Paren turas om att skriva en förklaring till varje bild i ord, som ”Figuren är delad i fyra lika delar och tre är färgade”, och kontrollerar tillsammans att den stämmer. De blandar korten, lägger dem mitt på bordet och går till ett nytt bord. Där läser de förklaringarna och lägger rätt kort vid rätt förklaring, och sedan går paren tillbaka till sitt eget bord och ser om korten ligger rätt.
   - omrade: socialt
     arskurs: F–3
     amne: klassens råd
-    text: På klassens råd i åk 2 övar klassen att sätta ord på känslor. Varje par får kort med ansikten som är glada, arga, ledsna, rädda och stolta. Paren turas om att skriva en förklaring till varje ansikte, som ”Man är stolt när man har klarat något svårt”, och kontrollerar tillsammans att den passar. De blandar korten, lägger dem mitt på bordet och roterar till ett nytt bord. Där läser de förklaringarna och lägger rätt ansikte vid rätt förklaring, och sedan roterar paren vidare.
+    text: På klassens råd i åk 2 övar klassen att sätta ord på känslor. Varje par får kort med ansikten som är glada, arga, ledsna, rädda och stolta. Paren turas om att skriva en förklaring till varje ansikte, som ”Man är stolt när man har klarat något svårt”, och kontrollerar tillsammans att den passar. De blandar korten, lägger dem mitt på bordet och går till ett nytt bord. Där läser de förklaringarna och lägger rätt ansikte vid rätt förklaring, och sedan går paren tillbaka till sitt eget bord och ser om ansiktena ligger rätt.
 provad:
   datum: "2026-11-01"
   svar: underlag/prov/strukturer/provning/avgorande.md

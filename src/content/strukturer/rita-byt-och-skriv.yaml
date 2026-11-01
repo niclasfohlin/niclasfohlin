@@ -4,18 +4,18 @@ namn: Rita, byt och skriv!
 andra: []
 syfte: Var och en ritar en bild och skriver sedan en berättelse till kamratens bild
 steg:
-  - Läraren ger *temat*, säger att en kamrat ska skriva till bilden, och eleverna ritar var sin.
-  - Eleverna byter teckningar med sin kamrat.
-  - Eleverna funderar ut en berättelse som passar till bilden de fått.
-  - Eleverna berättar sin idé för varandra i paret.
+  - Läraren delar in eleverna i par och ger *temat*, och var och en ritar en bild som kamraten ska skriva till.
+  - Eleverna byter teckningar med varandra.
+  - Eleverna hittar på en berättelse till bilden de fått.
+  - Eleverna berättar sin idé för varandra.
   - Eleverna skriver berättelsen med början, mitt och slut.
   - Eleverna läser upp den för den som ritade bilden.
-  - Läraren samlar bilder och texter till en gemensam samling som klassen kan läsa.
+  - Läraren samlar bilder och texter till en samling som klassen kan läsa.
 slag: par
 kalla:
   rubrik: Rita, byt och skriv!
-  commit: b492447
-  summa: ddeaaea6
+  commit: 20a0fea
+  summa: ec92369c
 bild:
   scen: rita-byt-och-skriv
   alt: Två elever sitter vid en bänk. Den till vänster håller ett papper med skrivna rader och läser högt, och pratbubblan visar en stjärna. Den till höger håller upp sin teckning med en stor stjärna och en liten gul cirkel mot den som läser och lyssnar. På bänken ligger tre färgpennor, och framför den till höger ligger en teckning av en cirkel och en kort skriven text.

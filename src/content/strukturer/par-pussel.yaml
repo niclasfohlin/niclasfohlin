@@ -6,17 +6,17 @@ andra:
   - Pairs compare
 syfte: Två par i fyrgruppen löser var sin uppgift och lär sedan varandra hur de gjorde
 steg:
-  - Läraren delar in eleverna i fyrgrupper med två par i varje.
+  - Läraren delar in eleverna i fyrgrupper med två par i varje och ger paren var sin *uppgift*.
   - Eleverna går med sitt par till var sin plats i rummet.
-  - Eleverna löser sin *uppgift* i paret och skriver eller ritar lösningen.
+  - Eleverna löser uppgiften i paret och skriver eller ritar lösningen.
   - Paren återförenas i sin fyrgrupp.
-  - Eleverna visar sitt problem och lär det andra paret hur de löste det.
+  - Paren visar sin uppgift för varandra och lär ut hur de löste den.
   - Eleverna talar om hur samarbetet gick.
 slag: grupp
 kalla:
   rubrik: Par-pussel
-  commit: b492447
-  summa: 0a074872
+  commit: f8e8717
+  summa: a250a982
 bild:
   scen: par-pussel
   alt: "Två par i gröna tröjor, en fyrgrupp som har delat sig, sitter vid var sitt bord på olika platser i rummet. Paret längst bak till vänster löser en uppgift med en triangel: den ena skriver och den andra pekar och förklarar, med en triangel i pratbubblan. Paret längre fram till höger löser en annan uppgift med en kvadrat: den ena pekar och förklarar, med en kvadrat i pratbubblan, och den andra skriver."

@@ -4,19 +4,19 @@ namn: Konstruktiv debatt
 andra: []
 syfte: Två par driver var sin ståndpunkt, lägger sedan fram varandras, och enas till sist
 steg:
-  - Läraren delar varje grupp i två par och ger dem var sin ståndpunkt i *frågan*.
-  - Paren söker underlag och förbereder en övertygande framställning av sin ståndpunkt.
-  - Paren lägger fram sin ståndpunkt för varandra utan att bli avbrutna, och antecknar.
-  - Eleverna diskuterar öppet, ber varandra om skäl och prövar båda ståndpunkterna.
-  - Paren byter plats och lägger fram varandras ståndpunkt så övertygande de kan.
-  - Eleverna släpper sina roller och söker den slutsats de kan enas om.
-  - Gruppen skriver ned slutsatsen med skälen, och alla skriver under.
-  - Eleverna prövar var för sig vad de kan om båda ståndpunkterna.
+  - Läraren delar varje grupp i två par med var sin ståndpunkt i *frågan*.
+  - Paren förbereder sin ståndpunkt.
+  - Paren lägger fram den utan avbrott och antecknar varandras.
+  - Eleverna diskuterar och ber varandra om skäl.
+  - Paren byter sida och driver den andra ståndpunkten.
+  - Eleverna släpper rollerna och enas om en slutsats.
+  - Gruppen skriver slutsatsen med skäl, och alla skriver under.
+  - Var och en skriver vad hen kan om båda ståndpunkterna.
 slag: grupp
 kalla:
   rubrik: Konstruktiv debatt
-  commit: b492447
-  summa: 80067eda
+  commit: f8e8717
+  summa: 392c6c37
 bild:
   scen: konstruktiv-debatt
   alt: Två par står mitt emot varandra som två sidor, ett i röda tröjor till vänster och ett i blå tröjor till höger. Det röda paret håller fram ett papper med en röd triangel och det blå paret ett papper med en blå kvadrat. En i det röda paret talar och visar med handen mot det blå paret, och pratbubblan visar det blå parets kvadrat. En i det blå paret tänker med handen under hakan, och tankebubblan visar det röda parets triangel.

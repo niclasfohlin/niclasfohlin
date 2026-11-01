@@ -5,19 +5,18 @@ andra:
   - Galleri
 syfte: Grupperna tittar på varandras lösningar mitt i arbetet
 steg:
-  - Läraren delar in eleverna i par eller mindre grupper och ger anteckningsmaterial.
-  - Läraren ger *frågan* och sätter en timer.
-  - Eleverna börjar lösa uppgiften i sin grupp.
-  - Läraren går runt, observerar och stöttar bara vid behov.
-  - Eleverna går tillsammans med sin grupp runt och tittar på de andras lösningar när timern ringer.
-  - Eleverna pekar på den lösning de förstod bäst när de är tillbaka på plats.
+  - Läraren delar in eleverna i par eller små grupper och ger anteckningsmaterial.
+  - Läraren ger *uppgiften* och sätter en timer.
+  - Grupperna börjar, och läraren stöttar bara vid behov.
+  - När timern ringer går grupperna runt och ser de andras lösningar.
+  - Vid bordet pekar eleverna ut den lösning de förstod bäst.
   - Läraren slumpar fram några som berättar varför.
-  - Grupperna arbetar klart och delar sina färdiga lösningar.
+  - Grupperna arbetar klart med sin egen lösning och delar den.
 slag: grupp
 kalla:
   rubrik: Inspireras
-  commit: b492447
-  summa: e49b7eae
+  commit: 20a0fea
+  summa: 2a2a44a8
 bild:
   scen: inspireras
   alt: Längst fram står ett bord utan elever, med ett papper med en triangel, en penna och en stor klocka som ringer. En pil går från bordet till ett bord längre bak, där tre elever i lila tröjor står runt om och tittar på ett papper med en grön cirkel. Den till vänster pekar på cirkeln och talar. Den till höger har handen på bordet och en triangel och en grön cirkel i tankebubblan. Den tredje står framför bordet och syns bakifrån.

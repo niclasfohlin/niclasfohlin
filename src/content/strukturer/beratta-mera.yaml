@@ -6,17 +6,15 @@ andra:
 syfte: Alla samtalar parvis om samma innehåll, med nya partner varje runda
 steg:
   - Läraren bestämmer *innehållet* som alla ska berätta om.
-  - Eleverna rör sig fritt i rummet med en hand uppsträckt, vilket betyder att de är lediga för samtal.
-  - Eleverna som möts med uppsträckt hand ger varandra en high five.
-  - Eleverna turas om att kort berätta om innehållet.
-  - Eleverna tackar för samtalet och sträcker upp handen igen.
-  - Eleverna söker upp en ny kamrat och gör om det.
+  - Eleverna går runt i rummet med en hand uppsträckt, som visar att de är lediga för ett samtal.
+  - Två som möts ger varandra en high five och turas om att kort berätta om innehållet.
+  - Eleverna tackar varandra, sträcker upp handen igen och söker upp en ny kamrat.
   - Läraren avbryter och låter varje elev sammanfatta något hen minns från samtalen.
 slag: klass
 kalla:
   rubrik: Berätta mera!
-  commit: b492447
-  summa: 0d39a158
+  commit: f8e8717
+  summa: 2b13d25a
 bild:
   scen: beratta-mera
   alt: Till vänster går en elev genom rummet med ena handen uppsträckt. I mitten står två elever vända mot varandra. Den ena berättar och visar med handen, och pratbubblan visar en stjärna. Den andra lyssnar och tittar på den som berättar, och har samma stjärna i sin tankebubbla. Till höger ger två elever varandra en high five ovanför huvudena, och den ena har också en stjärna i en tankebubbla.

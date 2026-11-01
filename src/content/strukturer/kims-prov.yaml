@@ -4,18 +4,17 @@ namn: Kims prov
 andra: []
 syfte: Avidentifierade elevsvar blir ett påhittat prov som grupperna undersöker tillsammans
 steg:
-  - Läraren plockar ut elevsvar ur *uppgiften*, både bra, intressanta och felaktiga, och avidentifierar dem.
-  - Läraren sätter ihop svaren till ett prov under ett påhittat namn som ingen i klassen har.
-  - Läraren delar ut det påhittade provet till grupper om två till fyra.
-  - Eleverna undersöker vad som är bra, var det blev fel och hur Kim kan ha tänkt.
-  - Eleverna antecknar sina iakttagelser medan läraren går runt och lyssnar.
-  - Eleverna delar sina iakttagelser i helklass.
+  - Läraren väljer bra, intressanta och felaktiga elevsvar på en *uppgift* som klassen har gjort och tar bort namnen.
+  - Läraren sätter ihop svaren till ett prov under ett namn som ingen i klassen har, till exempel Kim.
+  - "Grupper om två till fyra undersöker provet: vad som är bra, var det blev fel och hur Kim kan ha tänkt."
+  - Eleverna antecknar medan läraren går runt och lyssnar.
+  - Grupperna delar sina iakttagelser i helklass.
   - Läraren knyter ihop de vanligaste missförstånden och det som var nästan rätt.
 slag: grupp
 kalla:
   rubrik: Kims prov
-  commit: b492447
-  summa: f9baa6f1
+  commit: f8e8717
+  summa: 7dc4873b
 bild:
   scen: kims-prov
   alt: "Fyra elever sitter runt ett bord och lutar sig över ett stort gulvitt prov som ligger i mitten. Överst på provet sitter en liten bild av en elev, och under den står tre frågor med en svarsruta vid varje rad: en bock, ett kryss och en bock. Eleven bakom bordet till vänster pekar på den första frågan och har en bock i pratbubblan. Eleven bredvid pekar på rutan med krysset och har ett kryss i pratbubblan. Eleven vid bordets vänstra sida håller handen under hakan och har ett frågetecken och två kugghjul i en tankebubbla. Eleven till höger skriver anteckningar med en penna på ett eget litet papper."

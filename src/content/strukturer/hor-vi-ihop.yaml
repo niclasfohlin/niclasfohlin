@@ -5,17 +5,17 @@ andra:
   - Para ihop
 syfte: Eleverna söker upp de kort som hör ihop med deras eget
 steg:
-  - Läraren delar ut ett kort med ett *begrepp* till varje elev.
-  - Eleverna tittar först på sitt eget kort och försöker lista ut vad de har.
+  - Läraren ger varje elev ett kort med ett *begrepp*, så att två till fyra kort hör ihop.
+  - Eleverna läser sitt kort och funderar på vad det betyder.
   - Eleverna visar kortet för bänkgrannen och berättar hur de tänkt.
-  - Eleverna går omkring i rummet och hittar dem vars kort hör ihop med deras.
-  - Gruppen som hittat varandra funderar på vad de har gemensamt.
-  - Grupperna sammanfattar lärdomarna tillsammans med läraren.
+  - Eleverna går runt och söker upp dem vars kort hör ihop med deras.
+  - Gruppen talar om vad korten har gemensamt.
+  - Grupperna sammanfattar lärdomarna med läraren.
 slag: klass
 kalla:
   rubrik: Hör vi ihop?
-  commit: b492447
-  summa: 51f18cee
+  commit: f8e8717
+  summa: 44a11ee1
 bild:
   scen: hor-vi-ihop
   alt: Elever går omkring i rummet med var sitt kort. Till vänster står tre elever tätt ihop och håller upp var sitt kort med en triangel bredvid varandra, och den ena talar, med en triangel i pratbubblan. I mitten håller två elever fram sina kort mot varandra, det ena med en kvadrat och det andra med en cirkel, och den med kvadraten frågar, med ett frågetecken i pratbubblan. Längst fram till höger kommer en elev gående mot dem med ett kort med en kvadrat, och längre bak går en elev med ett kort med en stjärna.

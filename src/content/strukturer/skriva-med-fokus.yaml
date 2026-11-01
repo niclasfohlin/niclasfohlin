@@ -5,16 +5,16 @@ andra: []
 syfte: Gruppen skriver om samma sak men var och en ur ett eget fokus
 steg:
   - Läraren ger varje grupp *ett gemensamt underlag* att skriva om.
-  - Läraren ger varje elev i gruppen ett eget fokus att utgå från.
+  - Läraren ger varje elev i gruppen ett eget fokus att skriva ur, till exempel en känsla, ett sinne eller en person.
   - Eleverna skriver var sin korta text om underlaget ur sitt fokus.
   - Eleverna läser upp sina texter för varandra i gruppen.
-  - Eleverna skriver en ny text med stöd av allas fokustexter.
+  - Gruppen skriver tillsammans en ny text med stöd av allas fokustexter.
   - Grupperna delar den färdiga texten med klassen.
 slag: grupp
 kalla:
   rubrik: Skriva med fokus
-  commit: b492447
-  summa: ccc70f36
+  commit: f8e8717
+  summa: 2d79ed6a
 bild:
   scen: skriva-med-fokus
   alt: "Tre elever sitter runt ett bord med en gemensam bild i mitten, en gul sol på blå botten. Var och en har en egen text och en liten skylt som står på bordet med sitt fokus: ett hjärta, en hand och två kugghjul. Eleven bakom bordet till vänster har handen på sin text och läser upp den, med ett hjärta i pratbubblan. De två andra vänder sig mot den som läser och har var sin tankebubbla, den ena med en hand och den andra med två kugghjul."

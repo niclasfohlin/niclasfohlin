@@ -2,7 +2,7 @@
 # node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
 namn: Mina bilder, dina bilder
 andra: []
-syfte: Var och en ritar sin tanke i en fyrfältare och fyller resten med kamraternas
+syfte: Var och en ritar sin tanke i en fyrfältare och fyller resten med kamraternas tankar
 steg:
   - Läraren ger *frågan* och delar ut ett papper med fyra numrerade rutor.
   - Eleverna ritar sin egen tanke i ruta ett.
@@ -11,12 +11,12 @@ steg:
   - Eleverna ritar kamratens tanke i ruta två.
   - Eleverna tackar varandra och söker upp en ny kamrat.
   - Eleverna fortsätter tills alla fyra rutor är fyllda.
-  - Eleverna berättar om en av kamraternas tankar för gruppen.
+  - Eleverna sätter sig i grupper som läraren bestämmer och berättar om en av kamraternas tankar.
 slag: klass
 kalla:
   rubrik: Mina bilder, dina bilder
-  commit: b492447
-  summa: 1a396c5c
+  commit: a79a53f
+  summa: bdfa0495
 bild:
   scen: mina-bilder-dina-bilder
   alt: Till vänster går en elev med ett blad med fyra rutor, där tre rutor har en teckning. I mitten håller en elev fram sitt blad med fyra rutor mot en kamrat. I den första rutan står en triangel och i den andra en cirkel. Eleven berättar, och pratbubblan visar triangeln. Till höger tittar kamraten på triangeln och ritar med en penna i den andra rutan på sitt eget blad. I kamratens första ruta står en kvadrat, och i den andra står nu triangeln.
@@ -24,19 +24,19 @@ forslag:
   - omrade: lasning
     arskurs: F–3
     amne: svenska
-    text: "Klassen har lyssnat på en saga om en räv och en korp, och du delar ut ett papper med fyra numrerade rutor. Du frågar: Hur tror du att korpen kände sig när osten föll? Eleverna ritar sin tanke i ruta ett, söker upp en kamrat och berättar vad de ritat och hur de tänkte. Sedan ritar de kamratens tanke i ruta två, tackar och söker upp en ny kamrat, tills alla fyra rutor är fyllda. Till sist berättar var och en om en av kamraternas tankar för gruppen."
+    text: "Klassen har lyssnat på en saga om en räv och en korp, och du delar ut ett papper med fyra numrerade rutor. Du frågar: Hur tror du att korpen kände sig när osten föll? Eleverna ritar sin tanke i ruta ett, söker upp en kamrat och berättar vad de ritat och hur de tänkte. Sedan ritar de kamratens tanke i ruta två, tackar och söker upp en ny kamrat, tills alla fyra rutor är fyllda. Till sist sätter sig eleverna i grupper, och var och en berättar om en av kamraternas tankar."
   - omrade: skrivning
     arskurs: 4–6
     amne: svenska
-    text: "Klassen ska skriva en berättelse, och du delar ut ett papper med fyra numrerade rutor. Du frågar: Hur ser platsen ut där din berättelse ska börja? Eleverna ritar sin plats i ruta ett, söker upp en kamrat och berättar vad de ritat och hur de tänkte. De ritar kamratens plats i ruta två, tackar och söker upp en ny kamrat, tills alla fyra rutor är fyllda. Till sist berättar var och en om en av kamraternas platser för gruppen, och rutorna blir en idébank när berättelserna skrivs."
+    text: "Klassen ska skriva en berättelse, och du delar ut ett papper med fyra numrerade rutor. Du frågar: Hur ser platsen ut där din berättelse ska börja? Eleverna ritar sin plats i ruta ett, söker upp en kamrat och berättar vad de ritat och hur de tänkte. De ritar kamratens plats i ruta två, tackar och söker upp en ny kamrat, tills alla fyra rutor är fyllda. Till sist sätter sig eleverna i grupper, och var och en berättar om en av kamraternas platser, och rutorna blir en idébank när berättelserna skrivs."
   - omrade: matematik
     arskurs: 7–9
     amne: matematik
-    text: "Klassen har arbetat med att multiplicera parenteser, och du delar ut ett papper med fyra numrerade rutor. Du frågar: Hur kan du visa med en bild att (x + 3)(x + 2) blir x² + 5x + 6? Eleverna ritar sitt sätt i ruta ett, söker upp en kamrat och berättar hur de tänkte. De ritar kamratens sätt i ruta två, tackar och söker upp en ny kamrat, tills alla fyra rutor är fyllda. Till sist berättar var och en om en av kamraternas bilder för gruppen."
+    text: "Klassen har arbetat med att multiplicera parenteser, och du delar ut ett papper med fyra numrerade rutor. Du frågar: Hur kan du visa med en bild att (x + 3)(x + 2) blir x² + 5x + 6? Eleverna ritar sitt sätt i ruta ett, söker upp en kamrat och berättar hur de tänkte. De ritar kamratens sätt i ruta två, tackar och söker upp en ny kamrat, tills alla fyra rutor är fyllda. Till sist sätter sig eleverna i grupper, och var och en berättar om en av kamraternas bilder."
   - omrade: socialt
     arskurs: 4–6
     amne: klassens råd
-    text: "Klassen har haft friluftsdag tillsammans, och du delar ut ett papper med fyra numrerade rutor. Du frågar: Vad gjorde att friluftsdagen blev bra för alla? Eleverna ritar sin tanke i ruta ett, söker upp en kamrat och berättar vad de ritat och hur de tänkte. De ritar kamratens tanke i ruta två, tackar och söker upp en ny kamrat, tills alla fyra rutor är fyllda. Till sist berättar var och en om en av kamraternas tankar för gruppen."
+    text: "Klassen har haft friluftsdag tillsammans, och du delar ut ett papper med fyra numrerade rutor. Du frågar: Vad gjorde att friluftsdagen blev bra för alla? Eleverna ritar sin tanke i ruta ett, söker upp en kamrat och berättar vad de ritat och hur de tänkte. De ritar kamratens tanke i ruta två, tackar och söker upp en ny kamrat, tills alla fyra rutor är fyllda. Till sist sätter sig eleverna i grupper, och var och en berättar om en av kamraternas tankar."
 provad:
   datum: "2026-11-01"
   svar: underlag/prov/strukturer/provning/avgorande.md

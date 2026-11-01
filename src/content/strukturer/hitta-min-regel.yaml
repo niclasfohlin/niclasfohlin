@@ -4,19 +4,18 @@ namn: Hitta min regel
 andra: []
 syfte: Eleverna listar ut lärarens sorteringsregel ur exempel
 steg:
-  - Läraren ritar två rutor på tavlan och numrerar dem ett och två.
-  - Läraren skriver två *exempel* i vardera rutan och frågar vad regeln är.
-  - Eleverna funderar och diskuterar förslag i par.
-  - Läraren skriver ytterligare ett exempel i varje ruta.
-  - Eleverna diskuterar i par igen.
-  - Läraren lägger till fler exempel, och eleverna diskuterar i fyrgrupper.
-  - Läraren ber eleverna föreslå vad som kan skrivas i vardera rutan.
-  - Läraren ber någon förklara regeln när de flesta grupper har hittat den.
+  - Läraren bestämmer en hemlig regel och ritar ruta ett och ruta två på tavlan.
+  - Läraren sorterar två *exempel* i varje ruta efter regeln.
+  - Paren diskuterar vad regeln kan vara.
+  - Läraren lägger till ett exempel i varje ruta, och paren diskuterar igen.
+  - Läraren lägger till fler, och eleverna diskuterar i fyrgrupper.
+  - Eleverna föreslår nya exempel till varje ruta.
+  - Läraren ber någon förklara regeln när de flesta har hittat den.
 slag: par
 kalla:
   rubrik: Hitta min regel
-  commit: b492447
-  summa: bc571cbe
+  commit: f8e8717
+  summa: a56ffa8b
 bild:
   scen: hitta-min-regel
   alt: Överst hänger en tavla med två rutor. I den vänstra rutan sitter en röd triangel, en röd kvadrat och en röd cirkel, och i den högra en blå triangel, en blå kvadrat och en blå cirkel. Två elever syns bakifrån framför tavlan. Den vänstra pekar på den vänstra rutan, och pratbubblan visar en röd stjärna. Den högra lutar sig mot kamraten och frågar, med ett frågetecken i pratbubblan.

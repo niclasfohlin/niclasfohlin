@@ -6,18 +6,17 @@ andra:
 syfte: En från varje grupp hämtar idéer hos de andra
 steg:
   - Läraren delar in eleverna i par eller fyrgrupper och ger anteckningsmaterial.
-  - Läraren ställer *frågan* och ger trettio sekunders egen tanketid.
-  - Eleverna enas om ett gemensamt svar medan timern räknar ned.
-  - Läraren går runt och ser om någon grupp behöver stöttning.
-  - Eleverna släpper pennan när timern ringer.
+  - Läraren ställer *frågan* och ger trettio sekunders tanketid.
+  - Läraren sätter en timer, och grupperna börjar skriva ett gemensamt svar.
+  - Eleverna lägger ned pennorna när timern ringer.
   - Läraren utser en reporter i varje grupp.
-  - Reportern går till en annan grupp, frågar och lyssnar på hur de löst uppgiften.
-  - Reportern återgår och rapporterar, och gruppen skriver klart sin lösning.
+  - Reportern går till en annan grupp och hör hur de har tänkt.
+  - Reportern berättar för sin grupp, som skriver klart sitt svar.
 slag: grupp
 kalla:
   rubrik: Vandrande reportern
-  commit: b492447
-  summa: 5d102206
+  commit: f8e8717
+  summa: 1131a9d8
 bild:
   scen: vandrande-reportern
   alt: Två grupper sitter vid var sitt bord. Vid bordet till vänster sitter tre elever med sitt papper, där det står en triangel, och pennan ligger bredvid på bordet. De tittar mot en elev i grön tröja som står vid bordet till höger med ett block och en penna i händerna och frågar, och pratbubblan visar ett frågetecken. Vid det bordet sitter tre elever, och eleven i ljusgrön tröja pekar på gruppens papper och berättar, med en kvadrat i pratbubblan. En pil går från bordet till vänster till eleven med blocket, och en annan pil går tillbaka.

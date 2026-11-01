@@ -6,16 +6,16 @@ syfte: Den ena sammanfattar stycket med egna ord och den andra kontrollerar och 
 steg:
   - Läraren delar in eleverna i par och ger dem *texten*.
   - Eleverna läser rubrikerna tillsammans för att få en överblick.
-  - Eleverna läser det första stycket tyst var för sig.
+  - Eleverna läser första stycket tyst var för sig.
   - Den ena sammanfattar stycket med egna ord.
-  - Den andra rättar det som blev fel, lägger till det som saknades och knyter till det de kan sedan.
+  - Den andra rättar, fyller på och knyter an till det de redan kan.
   - Eleverna byter roller och gör om steg tre till fem med nästa stycke.
-  - Eleverna enas om vad hela texten betyder och formulerar en gemensam sammanfattning.
+  - Paret skriver en gemensam sammanfattning av hela texten.
 slag: par
 kalla:
   rubrik: Läsa och förklara i par
-  commit: b492447
-  summa: c26021c9
+  commit: f8e8717
+  summa: 9bcb3e78
 bild:
   scen: lasa-och-forklara-i-par
   alt: Två elever sitter vid ett bord med en uppslagen text mellan sig. Eleven till vänster vänder sig mot kamraten och berättar med handen framför bröstet, och pratbubblan visar en kvadrat. Eleven till höger har handen på texten, och pratbubblan visar samma kvadrat och en cirkel bredvid.

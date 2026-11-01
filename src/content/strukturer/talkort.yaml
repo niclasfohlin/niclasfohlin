@@ -6,17 +6,18 @@ andra:
   - Talking chips
 syfte: Var och en lägger ett kort för att tala, och alla ska ha talat
 steg:
-  - Läraren introducerar *samtalsämnet* som gruppen ska diskutera.
-  - Läraren delar ut markörer och bestämmer reglerna för hur de används.
-  - Läraren kan fördela roller som tidshållare, fokushållare och ordfördelare.
-  - Eleverna påbörjar diskussionen.
-  - Eleven som talar lägger sin markör i mitten, och ingen får ordet igen förrän alla lagt sin.
-  - Eleverna utvärderar samarbetet genom att se om alla markörer ligger där.
+  - Läraren ger gruppen *samtalsämnet*.
+  - Läraren ger varje elev en markör, till exempel ett kort.
+  - Läraren kan ge roller som tidshållare och ordfördelare.
+  - Eleverna börjar samtala.
+  - Den som talar lägger sin markör i mitten, och ingen får ordet igen förrän alla lagt sin.
+  - När alla har lagt sin tar var och en tillbaka den, och en ny runda börjar.
+  - Sist talar gruppen om hur samarbetet gick.
 slag: grupp
 kalla:
   rubrik: Talkort
-  commit: b492447
-  summa: "51217950"
+  commit: 1f33312
+  summa: fa8f85e1
 bild:
   scen: talkort
   alt: Fyra elever sitter runt ett bord, och mitt på bordet ligger ett gult och ett grönt kort. Eleven i röd tröja lägger sitt röda kort bredvid dem och talar, och pratbubblan visar en triangel. Eleven i lila tröja håller sitt lila kort i handen och väntar, med en kvadrat i tankebubblan. Eleverna i gul och grön tröja lyssnar.

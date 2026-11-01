@@ -8,15 +8,14 @@ steg:
   - Läraren ger *den öppna frågan* och ett papper till var och en.
   - Eleverna skriver ett svar och skrynklar ihop papperet till en boll.
   - Eleverna lägger bollarna mitt på bordet och blandar dem.
-  - Eleverna tar var sin boll och öppnar den.
-  - Eleverna läser vad som står och skriver ett svar som inte redan finns där.
-  - Eleverna gör om steg två till fem ett par gånger.
-  - Eleverna läser upp den sista lappen de fått och gruppen väljer ut några svar.
+  - Eleverna tar var sin boll, läser och skriver ett svar som inte redan står där.
+  - Eleverna skrynklar ihop papperet igen och gör om steg tre och fyra ett par gånger.
+  - Eleverna läser upp den sista lappen, och gruppen väljer ut några svar.
 slag: grupp
 kalla:
   rubrik: Snöbollar i mitten
-  commit: b492447
-  summa: 4b76151f
+  commit: f8e8717
+  summa: 90d020f1
 bild:
   scen: snobollar-i-mitten
   alt: Fyra elever sitter runt ett bord med pappersbollar som de har tagit ur högen i mitten. Mitt på bordet ligger ett stort uppvecklat papper där det redan står en triangel med text, och eleven bakom bordet till vänster skriver en kvadrat under den med en penna och har en kvadrat i tankebubblan. Två andra skriver på var sitt uppvecklat papper, det ena med en stjärna och det andra med en cirkel. Två hopskrynklade vita bollar ligger kvar på bordet, och eleven vid bordets högra kortsida håller en boll i händerna och vecklar upp den.

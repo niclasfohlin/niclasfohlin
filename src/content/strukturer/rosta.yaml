@@ -4,7 +4,7 @@ namn: Rösta!
 andra: []
 syfte: Var och en fördelar sina markörer mellan flera förslag i stället för ett
 steg:
-  - Läraren ger *frågan* som gruppen ska enas om och låter förslagen samlas synligt.
+  - Läraren ger *frågan* som gruppen ska enas om, och gruppen skriver upp sina förslag så att alla ser dem.
   - Läraren ger varje elev fem markörer i en egen färg.
   - Eleverna funderar enskilt på vilka förslag som håller.
   - Eleverna lägger sina markörer på minst två av förslagen.
@@ -13,8 +13,8 @@ steg:
 slag: grupp
 kalla:
   rubrik: Rösta!
-  commit: b492447
-  summa: b41422ec
+  commit: f8e8717
+  summa: caad05c4
 bild:
   scen: rosta
   alt: "Tre förslag sitter på en tavla: en triangel, en kvadrat och en stjärna. På förslagen sitter runda markörer i olika färger. Fyra elever står vid tavlan, och var och en har markörer i sin egen färg. Eleven i lila tröja fäster en lila markör på triangeln, och eleven i turkos tröja en turkos markör på stjärnan. Eleven i grön tröja tänker med handen under hakan, med en kvadrat och en stjärna i tankebubblan, de två förslag där de gröna markörerna sitter. Eleven längst till vänster håller sina orange markörer i en öppen hand i brösthöjd."

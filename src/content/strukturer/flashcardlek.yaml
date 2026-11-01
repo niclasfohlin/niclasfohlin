@@ -4,18 +4,17 @@ namn: Flashcardlek
 andra: []
 syfte: Paret nöter frågorna med kort, och den som håller kortet berömmer eller coachar
 steg:
-  - Läraren ger varje par en hög med *frågekort* som har svaret på baksidan.
+  - Läraren ger varje par en hög *frågekort* med svaret på baksidan.
   - Eleverna bestämmer vem som håller korten först.
-  - Eleverna låter den ene hålla upp ett kort och läsa frågan.
-  - Eleverna svarar, och den som håller kortet berömmer när svaret är rätt.
-  - Eleverna ger kortet till den som svarade rätt.
-  - Eleverna coachar fram rätt svar när det blev fel och lägger kortet tillbaka i högen.
-  - Eleverna byter roller och fortsätter tills högen är slut.
+  - Den som håller korten läser en fråga, och kamraten svarar.
+  - Den som håller korten berömmer ett rätt svar och ger kortet till kamraten, som lägger det i en egen hög.
+  - Vid fel ger den som håller korten ledtrådar tills svaret blir rätt och lägger kortet sist i högen.
+  - När kamraten har fått alla kort byter eleverna roller och börjar om med hela högen.
 slag: par
 kalla:
   rubrik: Flashcardlek
-  commit: b492447
-  summa: 89cd5972
+  commit: a79a53f
+  summa: f8d1503e
 bild:
   scen: flashcardlek
   alt: Två elever sitter vid ett bord. Eleven till vänster håller ut ett gult kort med ett frågetecken framför kamraten, ler och har en stjärna i pratbubblan. Eleven till höger tittar på kortet och svarar, och pratbubblan visar en kvadrat. På bordet ligger en hög med likadana kort framför den vänstra och två kort framför den högra.
@@ -23,19 +22,19 @@ forslag:
   - omrade: lasning
     arskurs: F–3
     amne: svenska
-    text: "Du ger varje par en hög frågekort med ord som kjol, tjuv och sked, med ordet på framsidan och en bild av det på baksidan. Den som håller korten visar ordet för kamraten och frågar: Vad står det? Läser kamraten rätt, berömmer den som håller kortet och ger kortet till kamraten. Läser kamraten fel, ger den som håller kortet en ledtråd, till exempel första ljudet, och lägger kortet tillbaka i högen. Paret byter roller och fortsätter tills högen är slut."
+    text: "Du ger varje par en hög frågekort med ord som kjol, tjuv och sked, med ordet på framsidan och en bild av det på baksidan. Den som håller korten visar ordet för kamraten och frågar: Vad står det? Läser kamraten rätt, berömmer den som håller kortet och ger kortet till kamraten. Läser kamraten fel, ger den som håller kortet en ledtråd, till exempel första ljudet, och lägger kortet sist i högen. När kamraten har fått alla kort byter paret roller och börjar om."
   - omrade: skrivning
     arskurs: 4–6
     amne: svenska
-    text: "Du ger varje par en hög frågekort med ord där j-ljudet stavas hj eller lj, till exempel hjärta, hjälm och ljus, med en bild på framsidan och ordet på baksidan. Frågan är alltid densamma: Hur stavas ordet? Kamraten skriver ordet på ett papper, och den som håller kortet jämför med baksidan, berömmer när det blir rätt och ger över kortet. Blir det fel, coachar den som håller kortet fram rätt stavning och lägger tillbaka kortet i högen. Paret byter roller och fortsätter tills högen är slut."
+    text: "Du ger varje par en hög frågekort med ord där j-ljudet stavas hj eller lj, till exempel hjärta, hjälm och ljus, med en bild på framsidan och ordet på baksidan. Frågan är alltid densamma: Hur stavas ordet? Kamraten skriver ordet på ett papper, och den som håller kortet jämför med baksidan, berömmer när det blir rätt och ger över kortet. Blir det fel, coachar den som håller kortet fram rätt stavning och lägger kortet sist i högen. När kamraten har fått alla kort byter paret roller och börjar om."
   - omrade: matematik
     arskurs: 7–9
     amne: matematik
-    text: "Du ger varje par en hög frågekort med tal i bråkform, till exempel 3/8 och 7/20. Frågan på varje kort är densamma: Hur skriver du talet som decimaltal och i procent? Svaret står på baksidan, och den som håller kortet berömmer när kamraten svarar rätt och ger då över kortet. Svarar kamraten fel, coachar den som håller kortet fram rätt svar, till exempel genom att fråga hur mycket 1/8 är, och lägger tillbaka kortet i högen. Paret byter roller och fortsätter tills högen är slut."
+    text: "Du ger varje par en hög frågekort med tal i bråkform, till exempel 3/8 och 7/20. Frågan på varje kort är densamma: Hur skriver du talet som decimaltal och i procent? Svaret står på baksidan, och den som håller kortet berömmer när kamraten svarar rätt och ger då över kortet. Svarar kamraten fel, coachar den som håller kortet fram rätt svar, till exempel genom att fråga hur mycket 1/8 är, och lägger kortet sist i högen. När kamraten har fått alla kort byter paret roller och börjar om."
   - omrade: socialt
     arskurs: F–3
     amne: klassens råd
-    text: Du ger varje par en hög frågekort med bilder från rasten, till exempel ett barn som står själv vid staketet, och på baksidan står ett förslag som ”Vill du vara med oss?” Den som håller korten visar bilden och frågar vad kamraten kan säga, och kamraten svarar med egna ord. Passar svaret, berömmer den som håller kortet och ger över det. Annars hjälper hen kamraten fram till ett bättre svar och lägger tillbaka kortet i högen. Paret byter roller och fortsätter tills högen är slut.
+    text: Du ger varje par en hög frågekort med bilder från rasten, till exempel ett barn som står själv vid staketet, och på baksidan står ett förslag som ”Vill du vara med oss?” Den som håller korten visar bilden och frågar vad kamraten kan säga, och kamraten svarar med egna ord. Passar svaret, berömmer den som håller kortet och ger över det. Annars hjälper hen kamraten fram till ett bättre svar och lägger kortet sist i högen. När kamraten har fått alla kort byter paret roller och börjar om.
 provad:
   datum: "2026-11-01"
   svar: underlag/prov/strukturer/provning/avgorande.md

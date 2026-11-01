@@ -5,18 +5,16 @@ andra: []
 syfte: Eleverna söker upp en partner och löser en uppgift tillsammans
 steg:
   - Läraren ber eleverna ställa sig upp och sträcka upp handen.
-  - Eleverna rör sig i rummet, söker ögonkontakt och ger varandra en high five.
-  - Eleverna sätter sig ned tillsammans två och två.
-  - Läraren ger *uppgiften* eller ställer en öppen fråga.
-  - Paret bestämmer vem som är stjärna och vem som är hjärta.
-  - Paret löser uppgiften tillsammans.
-  - Läraren slumpar frågor till paren och riktar dem till stjärnan eller hjärtan.
+  - Eleverna går runt, söker ögonkontakt och ger varandra en high five.
+  - Paret sätter sig ned och bestämmer vem som är stjärna och vem som är hjärta.
+  - Läraren ger *uppgiften*, och paret löser den tillsammans.
+  - Läraren slumpar fram ett par i taget och säger om stjärnan eller hjärtat ska svara.
   - Eleverna tackar varandra och gör om det med en ny partner.
 slag: klass
 kalla:
   rubrik: Hitta en kompis
-  commit: b492447
-  summa: b1602c7b
+  commit: f8e8717
+  summa: fc444326
 bild:
   scen: hitta-en-kompis
   alt: Till vänster ger två elever varandra en high five ovanför huvudena. I mitten går en elev med handen uppsträckt. Till höger sitter två elever bredvid varandra vid en bänk med ett gemensamt papper. Den ena har ett kort med en stjärna på bröstet och den andra ett kort med ett hjärta. Eleven med stjärnan pekar på papperet, och eleven med hjärtat skriver på det med en penna.

@@ -6,15 +6,15 @@ andra:
   - Jigsaw
 syfte: Var och en blir expert på en del och lär ut den
 steg:
-  - Läraren delar in eleverna i hemgrupper och numrerar dem ett till fyra.
-  - Eleverna med samma nummer samlas i en expertgrupp och bearbetar sin *del*.
+  - Läraren delar *innehållet* i fyra delar och eleverna i hemgrupper om fyra, numrerade ett till fyra.
+  - Eleverna med samma nummer samlas i en expertgrupp och bearbetar sin del.
   - Experterna går tillbaka till sin hemgrupp och lär ut det de kan.
   - Läraren avslutar med ett individuellt prov eller frågor på helheten.
 slag: grupp
 kalla:
   rubrik: Pussel
-  commit: b492447
-  summa: 4a0445bc
+  commit: f8e8717
+  summa: c5df01a7
 bild:
   scen: pussel
   alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger tre pusselbitar ihop: en grön med en kvadrat, en blå med en cirkel och en rosa med en stjärna. Den fjärde biten fattas. Eleven i gul tröja till vänster lyssnar, och tankebubblan visar en triangel. Eleven i röd tröja håller upp den gula biten med triangeln och förklarar, och pratbubblan visar samma triangel. Eleverna i blå och grön tröja lutar sig mot den som förklarar, och den i blå tröja har handen vid sin bit."

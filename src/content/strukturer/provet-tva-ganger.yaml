@@ -4,18 +4,17 @@ namn: Provet två gånger
 andra: []
 syfte: Provet skrivs enskilt och görs sedan om i gruppen, som undervisning
 steg:
-  - Läraren ger *studiefrågorna* och grupperna förbereder sig tillsammans.
-  - Eleverna skriver provet enskilt och gör två kopior av sina svar.
-  - Eleverna lämnar den ena kopian till läraren och behåller den andra.
-  - Eleverna jämför sina svar i gruppen, en fråga i taget.
-  - Den som svarat rätt förklarar hur hen tänkte.
-  - Eleverna som är oense söker upp stället i materialet där svaret står.
+  - Läraren delar in eleverna i grupper och ger *studiefrågorna* inför provet, och grupperna förbereder sig tillsammans.
+  - Eleverna skriver provet enskilt och skriver av sina svar på ett extra papper.
+  - Eleverna lämnar provet till läraren och behåller kopian.
+  - Gruppen gör provet en gång till tillsammans, en fråga i taget, och var och en förklarar hur hen tänkte.
+  - Är eleverna oense söker de upp stället i materialet där svaret står.
   - Gruppen går vidare först när alla kan förklara svaret.
 slag: grupp
 kalla:
   rubrik: Provet två gånger
-  commit: b492447
-  summa: 02a4ceb3
+  commit: b05a5ba
+  summa: aa2c36c4
 bild:
   scen: provet-tva-ganger
   alt: "Läraren, en vuxen som är längre än eleverna, står vid tavlan till vänster med en mapp med gruppens kopior mot bröstet och tar emot ett prov med den andra handen. En elev står framför läraren och håller två likadana kopior av sitt prov, en i varje hand, båda med en cirkel i svarsrutan: den ena räcker eleven fram till läraren och den andra behåller hen. Vid ett bord bredvid sitter två elever från gruppen med var sin kopia framför sig, den ena med en cirkel och den andra med en kvadrat i rutan, och tittar på eleven."
@@ -23,19 +22,19 @@ forslag:
   - omrade: lasning
     arskurs: F–3
     amne: NO
-    text: Klassen har läst en faktatext om igelkottar. Du ger sex studiefrågor om vad igelkotten äter, var den bor och hur den klarar vintern, och grupperna förbereder sig tillsammans. Eleverna gör sedan provet var för sig, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen jämför de svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense söker de upp stället i texten, och gruppen går vidare först när alla kan förklara svaret.
+    text: Klassen har läst en faktatext om igelkottar. Du ger sex studiefrågor om vad igelkotten äter, var den bor och hur den klarar vintern, och grupperna förbereder sig tillsammans. Eleverna gör sedan provet var för sig, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen gör de provet en gång till och jämför svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense söker de upp stället i texten, och gruppen går vidare först när alla kan förklara svaret.
   - omrade: skrivning
     arskurs: 7–9
     amne: svenska
-    text: Klassen har arbetat med argumenterande texter. Du ger åtta studiefrågor om tes, argument och motargument, och grupperna förbereder sig tillsammans. Eleverna gör provet enskilt, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen jämför de svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense söker de upp stället i kursboken, och gruppen går vidare först när alla kan förklara svaret.
+    text: Klassen har arbetat med argumenterande texter. Du ger åtta studiefrågor om tes, argument och motargument, och grupperna förbereder sig tillsammans. Eleverna gör provet enskilt, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen gör de provet en gång till och jämför svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense söker de upp stället i kursboken, och gruppen går vidare först när alla kan förklara svaret.
   - omrade: matematik
     arskurs: 4–6
     amne: matematik
-    text: Klassen har arbetat med area och omkrets. Du ger sju studiefrågor om rektanglar och sammansatta figurer, som omkretsen och arean av en rektangel på 6 gånger 4 cm, och grupperna förbereder sig tillsammans. Eleverna gör provet enskilt, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen jämför de svaren en uppgift i taget, och den som räknat rätt förklarar hur hen tänkte. Är de oense söker de upp exemplet i boken, och gruppen går vidare först när alla kan förklara lösningen.
+    text: Klassen har arbetat med area och omkrets. Du ger sju studiefrågor om rektanglar och sammansatta figurer, som omkretsen och arean av en rektangel på 6 gånger 4 cm, och grupperna förbereder sig tillsammans. Eleverna gör provet enskilt, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen gör de provet en gång till och jämför svaren en uppgift i taget, och den som räknat rätt förklarar hur hen tänkte. Är de oense söker de upp exemplet i boken, och gruppen går vidare först när alla kan förklara lösningen.
   - omrade: lasning
     arskurs: 7–9
     amne: SO
-    text: Klassen har läst kapitlet om klimatförändringar i geografiboken. Du ger åtta studiefrågor om växthuseffekten, varför jorden blir varmare och hur utsläppen kan minska, och grupperna förbereder sig tillsammans. Eleverna gör provet var för sig, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen jämför de svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense letar de upp stället i kapitlet, och gruppen går vidare först när alla kan förklara svaret.
+    text: Klassen har läst kapitlet om klimatförändringar i geografiboken. Du ger åtta studiefrågor om växthuseffekten, varför jorden blir varmare och hur utsläppen kan minska, och grupperna förbereder sig tillsammans. Eleverna gör provet var för sig, skriver av svaren på ett andra blad, lämnar provet till dig och behåller bladet. I gruppen gör de provet en gång till och jämför svaren en fråga i taget, och den som svarat rätt förklarar hur hen tänkte. Är de oense letar de upp stället i kapitlet, och gruppen går vidare först när alla kan förklara svaret.
 provad:
   datum: "2026-11-01"
   svar: underlag/prov/strukturer/provning/avgorande.md

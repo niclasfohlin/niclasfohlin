@@ -7,13 +7,13 @@ syfte: Tärningarna väljer frågan ur ett rutnät
 steg:
   - Läraren delar in eleverna i par eller grupper och delar ut *rutnätet* med frågor.
   - Eleverna bestämmer vem som börjar.
-  - Eleverna slår tärningarna och hittar rätt ruta i rutnätet.
+  - "Eleverna turas om att slå två tärningar: den ena visar raden och den andra kolumnen i rutnätet."
   - Eleverna läser frågan och skriver ned svaret tillsammans.
 slag: par
 kalla:
   rubrik: Tärningsquiz
-  commit: b492447
-  summa: 54cec8cf
+  commit: f8e8717
+  summa: 5fb71fcd
 bild:
   scen: tarningsquiz
   alt: Två elever sitter vid en bänk med ett rutnät av tolv rutor mellan sig, och framför rutnätet står två tärningar, en gul och en blå. Den till vänster pekar på en gul ruta med ett frågetecken och läser frågan, och pratbubblan visar ett frågetecken. Den till höger skriver svaret på ett papper med en triangel.

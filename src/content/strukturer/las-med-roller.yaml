@@ -5,7 +5,7 @@ andra: []
 syfte: Var och en i gruppen läser samma text med ett eget fokus och berättar vad de såg
 steg:
   - Läraren delar in eleverna i grupper och ger alla *samma text*.
-  - Läraren ger varje elev i gruppen ett eget fokus att läsa efter.
+  - Läraren ger varje elev i gruppen ett eget fokus att läsa efter, till exempel nya ord, miljön eller frågor.
   - Eleverna läser texten, högt i tur och ordning eller var för sig.
   - Eleverna antecknar stödord utifrån sitt eget fokus medan de läser.
   - Eleverna sammanfattar en i taget vad de fick syn på.
@@ -14,8 +14,8 @@ steg:
 slag: grupp
 kalla:
   rubrik: Läs med roller
-  commit: b492447
-  summa: 39575ffe
+  commit: f8e8717
+  summa: 968bb431
 bild:
   scen: las-med-roller
   alt: "Fyra elever sitter runt ett bord, och mitt på bordet ligger en text. Var och en håller upp ett kort med sitt eget tecken: en triangel, en kvadrat, en cirkel och en stjärna. Eleven i orange tröja, som har triangeln, pekar i texten och talar, och pratbubblan visar en triangel. Eleven i turkos tröja, som har kvadraten, tänker på en kvadrat. Eleverna i ljusgrön och gul tröja vid kortsidorna håller upp cirkeln och stjärnan."

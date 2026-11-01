@@ -6,17 +6,17 @@ andra:
 syfte: Paret studsar ord och korta meningar om temat mellan sig i högt tempo
 steg:
   - Läraren delar in eleverna i par och ger *temat*.
-  - Eleverna tänker en kort stund under tystnad.
-  - Eleverna börjar på lärarens signal, och den ena säger ett ord om temat.
-  - Eleverna turas om, och ingen säger ett nytt ord förrän den andra sagt sitt.
-  - Eleverna säger pass när de inte kommer på något och låter kamraten fortsätta.
-  - Eleverna håller igång så länge de kan tills läraren bryter.
-  - Eleverna tackar varandra och återger för en ny kamrat vad paret sagt.
+  - Eleverna tänker tyst en kort stund.
+  - På lärarens signal säger den ena ett ord om temat.
+  - Eleverna turas om och säger ett ord i taget.
+  - Den som inte kommer på något säger pass, och kamraten fortsätter.
+  - Paret håller igång tills läraren bryter.
+  - Eleverna tackar varandra, söker upp en ny kamrat och berättar vad paret sa.
 slag: par
 kalla:
   rubrik: Ping-pong-prat
-  commit: b492447
-  summa: 736d0e63
+  commit: f8e8717
+  summa: f6c8c574
 bild:
   scen: ping-pong-prat
   alt: Två elever står mittemot varandra och pratar, med var sin öppen hand framsträckt mot den andra. Den vänstras pratbubbla visar en kvadrat och den högras en gul cirkel. Mellan bubblorna går två böjda pilar, den övre åt höger och den nedre åt vänster.

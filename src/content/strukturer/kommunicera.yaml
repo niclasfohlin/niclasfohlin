@@ -5,19 +5,18 @@ andra:
   - Beskriv och rita
 syfte: En beskriver, en lyssnar, en observerar kommunikationen
 steg:
-  - Läraren delar in eleverna i grupper om tre och fördelar rollerna berättare, lyssnare och observatör.
-  - Läraren placerar berättaren och lyssnaren mitt emot varandra med ett skydd emellan.
-  - Läraren ger observatören något att anteckna på.
-  - Berättaren får ett *innehåll* att beskriva, som lyssnaren inte ser.
-  - Berättaren beskriver innehållet så tydligt hen kan.
-  - Lyssnaren ställer motfrågor för att förstå bättre.
+  - "Läraren delar in eleverna i grupper om tre: berättare, lyssnare och observatör."
+  - Berättaren och lyssnaren sitter med ett skydd emellan.
+  - Berättaren beskriver *innehållet*, som lyssnaren inte ser.
+  - Lyssnaren ritar det hen hör och ställer frågor.
   - Observatören antecknar vad som fungerar och vad som kan bli bättre.
-  - Observatören ger återkoppling, och berättaren fortsätter med de tipsen.
+  - Observatören ger tips, och berättaren fortsätter med dem.
+  - Eleverna jämför teckningen med originalet.
 slag: grupp
 kalla:
   rubrik: Kommunicera
-  commit: b492447
-  summa: fd8c6f77
+  commit: f8e8717
+  summa: 39daba13
 bild:
   scen: kommunicera
   alt: Två elever sitter bredvid varandra bakom ett bord, och mellan dem står en hög skärm. Eleven i orange tröja har ett papper med en stor triangel framför sig och beskriver den, och pratbubblan visar en triangel. Eleven i lila tröja på andra sidan skärmen ritar en liten triangel på sitt papper och ställer en fråga, och pratbubblan visar ett frågetecken. Längst fram till vänster står en elev i grön tröja med ett block, tittar på den som beskriver och antecknar.

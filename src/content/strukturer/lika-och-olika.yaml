@@ -5,7 +5,7 @@ andra:
   - Lika/Olika
 syfte: Två elever har var sitt exemplar de inte får se och beskriver tills skillnaderna är funna
 steg:
-  - Läraren ger paret var sitt *exemplar* och sätter en skärm emellan dem.
+  - Läraren ger paret två nästan likadana *exemplar*, ett var, och sätter en skärm emellan dem.
   - Eleverna turas om att beskriva en sak de ser, en åt gången.
   - Eleverna lyssnar och jämför med sitt eget exemplar.
   - Eleverna säger till när de tror att de hittat en skillnad.
@@ -14,8 +14,8 @@ steg:
 slag: par
 kalla:
   rubrik: Lika och olika
-  commit: b492447
-  summa: b4bc5253
+  commit: f8e8717
+  summa: 29a59342
 bild:
   scen: lika-och-olika
   alt: Två elever sitter vid ett bord, och mitt på bordet står en hopvikt skärm mellan dem. Var och en har ett papper med en gul oval till vänster. På samma ställe till höger har den vänstras papper en triangel och den högras en kvadrat. Eleven till vänster pekar på triangeln och berättar, och pratbubblan visar en triangel. Eleven till höger pekar på kvadraten, och pratbubblan visar ett utropstecken.

@@ -5,19 +5,18 @@ andra:
   - Karusellsamtal
 syfte: Två cirklar roterar så att alla möter många partner
 steg:
-  - Läraren delar upp klassen i två halvor.
-  - Eleverna i den ena halvan ställer sig axel mot axel i en cirkel med ryggen inåt.
-  - Eleverna i den andra halvan ställer sig i en yttre cirkel, vända mot en partner.
-  - Läraren ger *frågan* eller delar ut frågekort.
-  - Läraren bestämmer vilken cirkel som ska fråga.
-  - Eleverna ställer frågan till den mittemot, som svarar, och frågeställaren ger återkoppling.
-  - Eleverna i den ena cirkeln roterar ett steg innan nästa fråga.
-  - Läraren avslutar och låter några par redovisa vad de hört.
+  - Läraren delar klassen i två halvor.
+  - Den ena halvan ställer sig i en inre cirkel med ansiktet utåt.
+  - Den andra halvan ställer sig i en yttre cirkel, mitt emot var sin kamrat.
+  - Läraren ger *frågan* och säger vilken cirkel som frågar.
+  - Den som frågar ställer frågan och ger återkoppling på kamratens svar.
+  - Den yttre cirkeln går ett steg åt höger inför nästa fråga.
+  - Läraren avslutar och låter några berätta vad de hört.
 slag: klass
 kalla:
   rubrik: Inre–yttre cirkel
-  commit: b492447
-  summa: 3f4005d7
+  commit: a79a53f
+  summa: "04619007"
 bild:
   scen: inre-yttre-cirkel
   alt: Två ringar är ritade på golvet, en inre och en yttre, och fyra par står snett fram och bak, en i den inre ringen och en i den yttre, vända mot varandra. I paret närmast till vänster ställer den yttre, som syns bakifrån, en fråga med ett frågetecken i pratbubblan, och den inre svarar med en kvadrat i pratbubblan. En pil längs den yttre ringen visar att den flyttar ett steg.

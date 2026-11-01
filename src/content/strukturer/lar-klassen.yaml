@@ -9,13 +9,13 @@ steg:
   - Eleverna sammanfattar det viktigaste i sitt område.
   - Eleverna planerar hur de ska lära resten av klassen om det.
   - Läraren talar med klassen om olika sätt att lära ut.
-  - Eleverna håller sitt lärtillfälle för klassen eller i tvärgrupper.
+  - Eleverna håller sitt lärtillfälle för klassen.
   - Läraren leder ett avslutande samtal om vad klassen lärt sig.
 slag: grupp
 kalla:
   rubrik: Lär klassen
-  commit: b492447
-  summa: 200bf997
+  commit: f8e8717
+  summa: 6b2c003b
 bild:
   scen: lar-klassen
   alt: Tre elever i orange tröjor står framme vid tavlan. Den ena pekar på ett kort med en stjärna på tavlan och förklarar, och pratbubblan visar en stjärna. De två andra tittar ut mot klassen, och den ena håller ett papper med anteckningar. Fyra elever sitter med ryggen mot oss och lyssnar, och eleven i lila tröja räcker upp handen och frågar, med ett frågetecken i pratbubblan.

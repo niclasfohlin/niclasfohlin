@@ -7,16 +7,15 @@ steg:
   - Läraren delar in eleverna i par och sätter två par tillsammans.
   - Läraren ger *uppgifterna* som ska övas.
   - Den ena löser den första uppgiften och förklarar varje steg högt.
-  - Den andra prövar om förklaringen stämmer, uppmuntrar och stöttar.
-  - Eleverna byter roller och gör om steg tre och fyra med nästa uppgift.
-  - Paren jämför sina svar med det andra paret efter varannan uppgift.
-  - Eleverna som är oense reder ut det tills de är eniga.
+  - Den andra prövar förklaringen, uppmuntrar och stöttar.
+  - Eleverna byter roller vid nästa uppgift.
+  - Paret jämför svaren med det andra paret efter varannan uppgift och reder ut det de är oense om.
   - Läraren slumpar fram någon som förklarar en av uppgifterna.
 slag: par
 kalla:
   rubrik: Öva och kontrollera i par
-  commit: b492447
-  summa: 90d273ac
+  commit: f8e8717
+  summa: 50367f5f
 bild:
   scen: ova-och-kontrollera-i-par
   alt: Fyra elever sitter runt ett bord i två par med ett glapp mellan sig, ett par i ljusblå tröjor till vänster och ett par i orange till höger, och varje par har ett papper med skrivna steg. I det ljusblå paret skriver den ena och förklarar högt, och pratbubblan visar en triangel. Kamraten pekar på triangeln på papperet och har triangeln och en bock i tankebubblan. I det orange paret skriver den ena medan den andra pekar på kvadraten på deras papper.

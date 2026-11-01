@@ -5,14 +5,14 @@ andra: []
 syfte: Samtalsfrågorna sitter uppe i rummet och grupperna vandrar och talar om en i taget
 steg:
   - Läraren sätter upp *samtalsfrågorna* på väggarna i rummet.
-  - Eleverna går runt i sina par eller grupper och samtalar om en fråga i taget.
+  - Eleverna går runt i sina par eller grupper, samtalar om en fråga i taget och går vidare när de talat färdigt.
   - Eleverna skriver ned några tankar från varje samtal, gemensamt eller var för sig.
   - Läraren leder ett samtal i helklass om frågorna.
 slag: klass
 kalla:
   rubrik: Stationssamtal
-  commit: b492447
-  summa: f4b5a772
+  commit: f8e8717
+  summa: e5221190
 bild:
   scen: stationssamtal
   alt: "Tre frågor sitter uppe på väggen, var och en ett kort med ett frågetecken och en symbol: en triangel på det gula, en kvadrat på det gröna och en stjärna på det rosa. Pilar mellan korten visar att paren går från fråga till fråga. Under varje fråga står ett par vänt mot varandra. Vid den första pekar den ena upp på frågan och säger sin tanke, med en triangel i pratbubblan, och den andra skriver ned en triangel på ett papper. Vid den andra talar den ena, med en kvadrat i pratbubblan, och den andra lyssnar med handen under hakan. Vid den tredje tittar den ena upp på frågan och tänker, och den andra ser på hen."

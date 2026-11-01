@@ -2,7 +2,7 @@
 # node scripts/strukturer/intag.mjs: ändra dem i banken. Slaget, bilden och förslagen är sajtens.
 namn: 5-3-1
 andra: []
-syfte: Var och en skriver fem ord, paret väljer tre och gruppen enas om ett
+syfte: Var och en skriver fem ord, paret väljer tre och gruppen enas om ett av dem
 steg:
   - Läraren ger *innehållet* som ska sammanfattas.
   - Eleverna skriver enskilt fem ord eller korta meningar om det.
@@ -14,8 +14,8 @@ steg:
 slag: grupp
 kalla:
   rubrik: 5-3-1
-  commit: b492447
-  summa: 3aa78c12
+  commit: f8e8717
+  summa: 59e31a43
 bild:
   scen: 5-3-1
   alt: "Fyra elever sitter runt ett bord som två par, två i gula tröjor och två i lila. Mitt på bordet ligger kort i en tratt: fem kort i en rad längst bak, med en triangel, en stjärna, en cirkel, ett hjärta och en kvadrat, tre kort under dem, med en stjärna, en cirkel och ett hjärta, och längst fram ett enda kort med en stjärna. Alla lutar sig mot tratten. En i det gula paret och en i det lila paret har var sin stjärna i pratbubblan."

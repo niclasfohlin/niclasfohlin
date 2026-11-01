@@ -5,18 +5,17 @@ andra:
   - En för alla, alla för en
 syfte: Var och en bidrar, och gruppen samlar allas idéer i cirklar
 steg:
-  - Läraren ställer *frågan* eller ber eleverna skriva ned sina tankar om ett område.
-  - Eleverna skriver på tid alla exempel de kommer på i den innersta cirkeln.
-  - Eleverna bildar par.
-  - Paret delar sina idéer och lägger till kamratens tankar i cirkeln Par.
-  - Paren bildar fyrgrupper, utbyter idéer och lägger till nya tankar i cirkeln Grupp.
-  - Läraren summerar alla gruppers idéer, och eleverna lägger till det de saknar.
-  - Eleverna tackar varandra för att de lärt varandra något nytt.
+  - Läraren ger alla ett papper med fyra cirklar i varandra, Jag innerst och sedan Par, Grupp och Klass, och ställer *frågan*.
+  - Eleverna skriver på tid alla idéer de kommer på i cirkeln Jag.
+  - Eleverna delar sina idéer i par och skriver kamratens i cirkeln Par.
+  - Två par bildar en grupp, delar idéer och skriver de nya i cirkeln Grupp.
+  - Läraren summerar gruppernas idéer, och eleverna skriver det de saknar i cirkeln Klass.
+  - Eleverna tackar varandra för det de har lärt sig.
 slag: grupp
 kalla:
   rubrik: En för alla
-  commit: b492447
-  summa: e4e8cf8a
+  commit: f8e8717
+  summa: 4a2adac2
 bild:
   scen: en-for-alla
   alt: "Fyra elever sitter runt ett bord, och var och en har ett eget papper med tre cirklar i varandra och prickar i cirklarna: flest gula i den innersta, några blå i den mellersta och ett par gröna i den yttersta. Eleven bakom bordet till vänster håller upp sitt papper, där en stjärna står i den innersta cirkeln, och berättar, med en stjärna i pratbubblan. De andra vänder sig mot papperet. Eleven till höger skriver en stjärna med en penna i den yttersta cirkeln på sitt eget papper och har en stjärna i en tankebubbla."
@@ -40,5 +39,4 @@ forslag:
 provad:
   datum: "2026-11-01"
   svar: underlag/prov/strukturer/provning/avgorande.md
-vantar: "Inget steg delar ut papperet med cirklarna, och lärare som följer kortet stannar vid steg 2: steg 1 och 5 ändras i grundbokens bank (provningen 2026-11-01, underlag/prov/strukturer/provning/avgorande.md)"
-utkast: true
+utkast: false

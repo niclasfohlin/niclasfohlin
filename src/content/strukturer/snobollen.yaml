@@ -4,18 +4,18 @@ namn: Snöbollen
 andra: []
 syfte: Lapparna kastas över en linje och var och en söker upp den vars lapp hör ihop
 steg:
-  - Läraren ger halva klassen lappar i en färg och halva i en annan, med *par som hör ihop*.
-  - Eleverna ställer sig på två led mot varandra med en tänkt linje emellan.
-  - Eleverna skrynklar ihop sina lappar till bollar.
-  - Eleverna kastar bollarna över linjen på lärarens signal.
-  - Eleverna plockar upp en boll som den andra sidan kastat.
+  - Läraren skriver lappar i två färger som hör ihop två och två, som fråga och svar.
+  - Halva klassen får en lapp i ena färgen, halva i den andra.
+  - Varje färg ställer sig i ett led, med en tänkt linje mellan leden.
+  - Eleverna skrynklar ihop lappen till en boll och kastar den över linjen på lärarens signal.
+  - Eleverna plockar upp en boll från andra sidan.
   - Eleverna söker upp den vars lapp hör ihop med deras.
-  - Eleverna berättar för varandra varför lapparna hör ihop.
+  - Paret berättar för varandra varför lapparna hör ihop.
 slag: klass
 kalla:
   rubrik: Snöbollen
-  commit: b492447
-  summa: 077c5e32
+  commit: abe4404
+  summa: 40dbe4f1
 bild:
   scen: snobollen
   alt: Två led av elever står mot varandra med en streckad linje på golvet emellan, de i gula tröjor till vänster och de i blå till höger, och de lutar sig mot linjen. Längst fram till vänster kastar en elev en gul pappersboll, och i det blå ledet håller en elev en blå boll i den lyfta handen. Över linjen flyger en gul och en blå boll, och två bollar ligger på golvet. I det gula ledet håller en elev upp en blå lapp med en triangel framför sig, och pratbubblan visar en triangel. Längst fram till höger håller en elev i blå tröja en gul lapp med en triangel, och hens pratbubbla visar också en triangel.

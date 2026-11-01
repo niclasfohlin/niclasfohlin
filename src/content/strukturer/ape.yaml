@@ -7,7 +7,7 @@ andra:
 syfte: Läraren visar modellen för klassen, och den prövas sedan i grupp, i par och enskilt
 steg:
   - Läraren visar *modellen* steg för steg för hela klassen.
-  - Läraren stämmer av att alla förstått, till exempel med multisvar.
+  - Läraren stämmer av att alla förstått, till exempel genom att alla visar sitt svar samtidigt.
   - Eleverna talar i fyrgrupp om hur modellen kan användas och vad som är svårt.
   - Eleverna går ihop i par och börjar arbeta med modellen tillsammans.
   - Eleverna arbetar vidare enskilt med *uppgiften*.
@@ -15,8 +15,8 @@ steg:
 slag: par
 kalla:
   rubrik: APE
-  commit: b492447
-  summa: ca979b65
+  commit: f8e8717
+  summa: ef7ceb96
 bild:
   scen: ape
   alt: Överst sitter en tavla med två kort, en triangel och en kvadrat, och en pil från triangeln till kvadraten. Under tavlan sitter två elever vid en bänk, och på deras papper står samma två rutor med en pil. Triangeln är ritad, och den ena skriver med pennan i den andra rutan. Den andra pekar på kvadraten på tavlan och säger nästa steg, och pratbubblan visar kvadraten.

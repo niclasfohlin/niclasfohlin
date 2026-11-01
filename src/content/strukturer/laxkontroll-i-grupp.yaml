@@ -4,19 +4,18 @@ namn: Läxkontroll i grupp
 andra: []
 syfte: Gruppen går igenom läxan i början av lektionen med två roller som vandrar
 steg:
-  - Läraren har gett *hemuppgiften* i förväg, och eleverna sätter sig i sina grupper med den.
-  - Eleverna låter en av dem hämta gruppens mapp och dela ut materialet.
+  - Eleverna sätter sig i grupperna med *hemuppgiften*.
   - "Läraren ger två roller: en som förklarar och en som kontrollerar."
-  - Eleverna går igenom uppgifterna en i taget och jämför sina svar.
-  - Den som förklarar visar steg för steg hur svaret kom till, och den andra prövar förklaringen.
-  - Eleverna som är oense söker upp stället i materialet där det står.
-  - Eleverna byter roller och tar nästa uppgift.
-  - Eleverna lägger tillbaka arbetet i mappen och ger varandra en hemuppgift vid behov.
+  - Gruppen tar uppgifterna en i taget och jämför svaren.
+  - Den som förklarar visar hur svaret kom till, och den som kontrollerar prövar det.
+  - Är eleverna oense söker de upp stället i materialet.
+  - Rollerna går vidare i gruppen vid nästa uppgift.
+  - Gruppen ger den som behöver öva mer en liknande läxa.
 slag: grupp
 kalla:
   rubrik: Läxkontroll i grupp
-  commit: b492447
-  summa: 8b960061
+  commit: 1f33312
+  summa: 4d7d92ac
 bild:
   scen: laxkontroll-i-grupp
   alt: Fyra elever sitter runt ett bord. Mitt på bordet ligger gruppens blå mapp uppslagen, med läxpapper som sticker upp ur fickan. De två bakom bordet har var sitt läxpapper, och mellan dem står två små skyltar, den ena med två kugghjul och den andra med en bock, med två böjda pilar ovanför som visar att de byter plats. Eleven till vänster pekar på sin läxa och förklarar, med två kugghjul i pratbubblan. Eleven till höger håller handen på sin egen läxa och har ett frågetecken i en tankebubbla. De två vid bordets sidor vänder sig mot den som förklarar.

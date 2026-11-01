@@ -4,18 +4,17 @@ namn: Trestegsintervju
 andra: []
 syfte: Fyrgruppen intervjuar varandra i två omgångar och för sedan samman allt
 steg:
-  - Läraren ger *frågan* och delar fyrgruppen i två par.
-  - Eleverna låter den ene intervjua den andre om frågan och antecknar svaren.
-  - Eleverna byter roller på lärarens signal och intervjuar åt andra hållet.
-  - Paren återvänder till sin fyrgrupp.
-  - Eleverna berättar i tur och ordning vad deras kamrat sa, inte vad de själva sa.
-  - Gruppen ser till att var och en får ungefär lika lång tid.
+  - Läraren ger *frågan* och delar varje fyrgrupp i två par.
+  - Den ena i paret intervjuar den andra om frågan och antecknar svaren.
+  - Paret byter roller på lärarens signal.
+  - Paren går tillbaka till sin fyrgrupp.
+  - Eleverna återger i tur och ordning vad kamraten sa, ungefär lika länge var.
   - Gruppen väljer ut de svar som säger mest och delar dem med klassen.
 slag: grupp
 kalla:
   rubrik: Trestegsintervju
-  commit: b492447
-  summa: 9bd87b80
+  commit: f8e8717
+  summa: bdaa01ce
 bild:
   scen: trestegsintervju
   alt: Två par står var för sig och intervjuar varandra, ett i gröna tröjor till vänster och ett i orange tröjor till höger. I det gröna paret håller den ena ett block och en penna och frågar, med ett frågetecken i pratbubblan, och den andra svarar, med en gul cirkel i pratbubblan. I det orange paret svarar den ena, med en stjärna i pratbubblan, och den andra antecknar svaret i sitt block.

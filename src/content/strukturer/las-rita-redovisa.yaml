@@ -4,17 +4,17 @@ namn: Läs-rita-redovisa
 andra: []
 syfte: Varje grupp läser sin egen text stycke för stycke och ritar den på en karta
 steg:
-  - Läraren ger varje grupp en egen *text* och delar den i två till fyra stycken.
+  - Läraren ger varje grupp en egen *text* i två till fyra stycken och ett stort papper där gruppen ritar en karta över texten.
   - Eleverna läser första stycket var för sig och antecknar en tanke.
   - Eleverna talar om stycket och vad det betyder.
-  - Eleverna ritar och skriver stycket på gruppens gemensamma karta.
+  - Eleverna ritar och skriver stycket på kartan, så att varje stycke får en egen plats.
   - Eleverna gör om steg två till fyra för varje stycke.
   - Eleverna redovisar sin karta för de andra grupperna.
 slag: grupp
 kalla:
   rubrik: Läs-rita-redovisa
-  commit: b492447
-  summa: 185fb68f
+  commit: f8e8717
+  summa: 7e5de39f
 bild:
   scen: las-rita-redovisa
   alt: Fyra elever sitter runt ett bord med ett stort gemensamt papper i mitten, gruppens karta, där en grön och en blå form redan är ritade och förbundna med linjer. Eleven till vänster håller ett papper med text och berättar, med en triangel i pratbubblan. En elev bakom bordet ritar en triangel på kartan med en penna och har en triangel i en tankebubbla. En annan pekar på kartan, och den fjärde tittar på den.

@@ -5,16 +5,16 @@ andra: []
 syfte: Läraren läser ett stycke i taget och eleverna skriver nyckelord och jämför
 steg:
   - Läraren delar *texten* i tre eller fyra delar och eleverna i grupper om tre till fyra.
-  - Eleverna lägger ned pennorna och lyssnar på första delen utan att anteckna.
-  - Eleverna skriver enskilt tre eller fyra nyckelord i den första rutan.
+  - Läraren läser första delen, och eleverna lyssnar utan att anteckna.
+  - Eleverna skriver enskilt tre eller fyra nyckelord i första rutan på ett papper med en ruta per del.
   - Eleverna delar sina nyckelord i gruppen och jämför dem.
   - Läraren läser nästa del och eleverna gör om steg tre och fyra.
   - Eleverna sammanfattar hela texten tillsammans.
 slag: grupp
 kalla:
   rubrik: Lyssna och skriv
-  commit: b492447
-  summa: 556abc0d
+  commit: f8e8717
+  summa: 3374debf
 bild:
   scen: lyssna-och-skriv
   alt: Läraren står vid gruppens bord och läser högt ur en text som hen håller i båda händerna, med en bok i pratbubblan. Tre elever sitter vid bordet, lutar sig mot läraren och tittar på hen. Var och en har ett papper med fyra rutor i en rad, där den första rutan har en cirkel och de andra är tomma, och pennorna ligger nedlagda bredvid. En av eleverna har en kvadrat i en tankebubbla.

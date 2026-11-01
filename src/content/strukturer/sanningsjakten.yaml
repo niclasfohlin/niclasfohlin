@@ -4,19 +4,18 @@ namn: Sanningsjakten
 andra: []
 syfte: Paren skriver ett sant och ett falskt påstående och motiverar andras
 steg:
-  - Läraren ger *innehållet* som paren ska skriva om.
-  - Eleverna talar i paret om vad de kan om det.
-  - Eleverna skriver ett sant och ett falskt påstående högst upp på var sitt papper.
-  - Paren roterar till ett nytt bord.
-  - Eleverna läser påståendena och talar om vad de tror.
-  - Eleverna skriver under varje påstående vilket de tror är sant och varför.
-  - Paren roterar vidare och skriver ett skäl som ingen skrivit förut.
-  - Eleverna får tillbaka sina egna påståenden och läser alla svar.
+  - Läraren ger paren *innehållet* att skriva om.
+  - Paret talar om vad de kan om det.
+  - Paret skriver ett sant påstående högst upp på ett papper och ett falskt på ett annat.
+  - Paren lämnar papperen och går till ett nytt bord.
+  - Paret läser påståendena och skriver under vilket de tror är sant och varför.
+  - Vid nästa bord gör paret samma sak, med ett skäl som ingen har skrivit förut.
+  - Paren går tillbaka till sitt bord och läser alla svar.
 slag: par
 kalla:
   rubrik: Sanningsjakten
-  commit: b492447
-  summa: 521a0e07
+  commit: abe4404
+  summa: cac864f1
 bild:
   scen: sanningsjakten
   alt: Två elever sitter vid en bänk med ett papper där två påståenden står överst, det ena med en triangel och det andra med en kvadrat, och skrivna rader under. Den till vänster pekar på triangelns påstående, och pratbubblan visar triangeln och en bock. Den till höger skriver med penna under påståendena. En pil går från paret till ett bord intill, där ett annat papper med två påståenden, en cirkel och en stjärna, ligger och väntar.

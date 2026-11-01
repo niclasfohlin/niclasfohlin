@@ -5,18 +5,18 @@ andra: []
 syfte: Kamraten intervjuar och gör dispositionen, båda skriver var sin text och rättar varandras
 steg:
   - Läraren delar in eleverna i par och ger *skrivuppgiften*.
-  - Den ena berättar vad hen tänker skriva medan den andra frågar och gör en disposition.
+  - Den ena berättar vad hen vill skriva, och den andra frågar och skriver en disposition.
   - Eleverna byter roller och gör om steg två.
-  - Eleverna söker sitt material var för sig och håller utkik efter sådant kamraten behöver.
-  - Eleverna skriver det första stycket i båda texterna tillsammans.
-  - Eleverna skriver resten av sin egen text var för sig.
+  - Eleverna söker underlag var för sig och tipsar varandra.
+  - Paret skriver första stycket i båda texterna tillsammans.
+  - Var och en skriver resten av sin text.
   - Eleverna läser varandras texter, rättar och föreslår ändringar.
-  - Eleverna bearbetar sina texter och skriver under varandras när de är felfria.
+  - Eleverna bearbetar texterna tills kamraten kan skriva under.
 slag: par
 kalla:
   rubrik: Skriva och redigera i par
-  commit: b492447
-  summa: 9fe88ae4
+  commit: f8e8717
+  summa: "4010e285"
 bild:
   scen: skriva-och-redigera-i-par
   alt: Två elever sitter vid en bänk med var sin skriven text. Den till vänster pekar med pennan på en rad i kamratens text, där ett rött kryss står i marginalen. Hen föreslår en ändring, och pratbubblan visar krysset. Den till höger lutar sig in med handen på sin text och lyssnar, och med den andra handen håller hen sin penna på kamratens text, som ligger framför hen.
