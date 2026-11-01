@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD, STRUKTURENS_SLAG, strukturensFel, strukturensSumma, strukturkortensArk, strukturkortensFel, strukturernasTopplista } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD, STRUKTURENS_SLAG, strukturensFel, strukturensSumma, strukturkortensArk, strukturkortensFel, strukturernasTopplista, strukturnamnetI } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -368,6 +368,13 @@ if (strukturensSumma({ namn: 'a' }) === strukturensSumma({ namn: 'b' })) fel.pus
 // Topplistan (K-665): en utskrift väger som fem besök, och filen med alla kort och listan räknas inte per kort.
 { const t = strukturernasTopplista([{ path: '/strukturer/epa', count: 3 }, { path: 'utskrift:strukturer/epa', count: 2 }, { path: '/strukturer/visa', count: 9 }, { path: 'utskrift:strukturer/alla', count: 40 }, { path: 'utskrift:strukturer/listan', count: 7 }, { path: '/metoder', count: 99 }]);
   if (t.map((x) => `${x.id}:${x.antal}`).join() !== 'epa:13,visa:9') fel.push(`strukturernasTopplista räknar fel: ${JSON.stringify(t)}`); }
+// Sådden läser strukturernas namn med samma regel som vävningen (METODER.md under Sådden): namnet, utan utropstecknet i ett
+// namn med flera ord, med och för tankstrecket, i bestämd form, och utan stor bokstav bara i ett namn med kommatecken.
+for (const [namn, text, ja] of [
+  ['Galleri', 'Galleriet är en vägg i rummet.', true], ['Berätta mera!', 'Gör Berätta mera med frågekorten.', true],
+  ['Inre–yttre cirkel', 'aktiviteterna Inre och yttre cirkel', true], ['Jag gör, vi gör, du gör', 'arbetsform: jag gör, vi gör, du gör', true],
+  ['Visa!', 'Visa korten för gruppen.', false], ['Turas om', 'Eleverna turas om att läsa.', false], ['Runda', 'Rundan går runt', false],
+]) if (strukturnamnetI(namn, text) !== ja) fel.push(`strukturnamnetI("${namn}", "${text}") ger ${!ja}, inte ${ja}`);
 // Metodens prov kör strukturkortens regel (granskningen 2026-11-01, P2: den var importerad men kördes inte).
 if (!undervisningsmetodensFel({ strukturkort: { text: 'Korten.', strukturer: ['epa', 'epa', 'visa'] } }).some((x) => x.startsWith('strukturkort'))) fel.push('undervisningsmetodensFel prövar inte fältet strukturkort');
 // En metods strukturkort (K-661): ett jämnt antal id, var och ett en gång, och en text; utan fältet inga fel.

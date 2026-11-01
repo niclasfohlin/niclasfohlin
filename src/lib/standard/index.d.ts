@@ -896,6 +896,10 @@ export declare function strukturkortetsFil(id: string): string;
 export declare const STRUKTURKORTEN_ALLA: Readonly<{ fil: string; nyckel: string }>;
 /** En metods strukturkort två och två på A4, och nyckeln i manifestet. */
 export declare function metodensStrukturkort(metod: string): Readonly<{ fil: string; nyckel: string }>;
+/** Formerna som en strukturs namn står i i en metods text, för sådden. */
+export declare function strukturnamnensFormer(namn: string): string[];
+/** Står strukturens namn i texten, med stor bokstav utom i ett namn med kommatecken? */
+export declare function strukturnamnetI(namn: string, text: string): boolean;
 /** En utskrift väger som så många besök i topplistan. */
 export declare const UTSKRIFTENS_VIKT: number;
 /** Topplistans räkning ur GoatCounters sidor och händelser, flest först. */

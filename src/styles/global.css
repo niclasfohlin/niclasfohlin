@@ -4780,5 +4780,6 @@ button.pl-passroll { min-height: 2.75rem; }
 .vav-kort .st-kort-text { padding: 0.4rem 0.65rem; }
 .vav-rad { margin: 0; font-size: 0.9rem; color: var(--farg-text-svag); }
 .vav > :last-child { margin-bottom: 0; }
+.vav + .vav { margin-top: -0.6rem; }
 @media print { .vav { display: none; } }
 .st-syftet { max-width: var(--matt-text); font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text); background: var(--farg-ton-svag); border-left: 4px solid var(--farg-accent); border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.8rem 0 0; }

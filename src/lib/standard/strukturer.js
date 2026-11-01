@@ -118,6 +118,32 @@ export const STRUKTURKORTEN_ALLA = Object.freeze({ fil: 'strukturkort-alla.pdf',
 export const metodensStrukturkort = (metod) => Object.freeze({ fil: `strukturkort-${metod}.pdf`, nyckel: `_metod:${metod}` });
 
 /**
+ * Formerna som en strukturs namn står i i en metods text, för sådden (sajtens src/lib/vav.ts och scripts/saddprov.mjs): namnet;
+ * ett namn med flera ord också utan utropstecken eller frågetecken (Berätta mera); ett namn med tankstreck också med "och"
+ * (Inre och yttre cirkel); och ett namn med ett ord också i bestämd form (Galleriet för Galleri). Ett namn med ett ord och ett
+ * tecken, som Visa! och Rösta!, behåller tecknet, eftersom ordet utan det är ett vanligt verb.
+ * @param {string} namn
+ * @returns {string[]}
+ */
+export function strukturnamnensFormer(namn) {
+  const former = new Set([namn]);
+  if (namn.includes(' ')) former.add(namn.replace(/[!?]$/, ''));
+  if (namn.includes('–')) former.add(namn.replace(/\s*–\s*/g, ' och '));
+  if (/^\p{L}+$/u.test(namn)) { former.add(`${namn}et`); former.add(`${namn}en`); }
+  return [...former].filter((n) => n.length >= 3);
+}
+const esc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/**
+ * Står strukturens namn i texten? Med stor bokstav, som ett namn, så att verbet "turas om" inte räknas, utom ett namn med
+ * kommatecken, som "jag gör, vi gör, du gör", som inte kan vara vanliga ord.
+ * @param {string} namn
+ * @param {string} text
+ */
+export function strukturnamnetI(namn, text) {
+  return strukturnamnensFormer(namn).some((n) => new RegExp(`(^|[^\\p{L}])${esc(n)}(?![\\p{L}])`, n.includes(',') ? 'iu' : 'u').test(text));
+}
+
+/**
  * Felen i en struktur, som en lista. En struktur som är utkast får sakna bild och förslag; en struktur som visas har
  * båda, och bilden har sitt textalternativ.
  * @param {{ namn?: string, andra?: string[], syfte?: string, slag?: string, steg?: string[], kalla?: { summa: string }, bild?: { scen?: string, alt?: string }, forslag?: { omrade: string, arskurs: string, amne?: string, text: string }[], utkast?: boolean }} s

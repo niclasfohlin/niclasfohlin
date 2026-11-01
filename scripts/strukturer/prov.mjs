@@ -101,5 +101,24 @@ else fel.push(...ordningensFel(sidorna(readFileSync(alla)), visas, 'Filen med al
   if ((await topplistansSvar({ nyckel: 'prov', hamta: svar(429, {}) })).status !== 503) fel.push('Topplistans funktion svarar inte 503 när GoatCounter svarar 429');
 }
 
+// Sådden (src/lib/vav.ts, METODER.md under Sådden): varje plats i src/data/sadd.json är ritad på metodens sida, med ett litet
+// kort för varje struktur, i registrets ordning. En plats som metoden har men som sidan inte ritar, som en ram i en bank,
+// försvinner annars utan att bygget stannar (granskningen 2026-11-01, 5b).
+const saddJa = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'sadd.json'), 'utf8')).saker.strukturer?.ja ?? {};
+let platser = 0;
+for (const [metod, x] of Object.entries(saddJa)) {
+  if (typeof x !== 'object' || !x.vav) continue;
+  const fil = join(DIST, 'stodundervisning', metod, 'index.html');
+  if (!existsSync(fil)) { fel.push(`Sådden: ${metod} har ingen sida i dist`); continue; }
+  const rutor = [...readFileSync(fil, 'utf8').matchAll(/<aside class="vav[\s\S]*?<\/aside>/g)].map((m) => m[0]);
+  if (rutor.length !== x.vav.length) fel.push(`Sådden: ${metod} har ${rutor.length} invävda rutor på sidan, och src/data/sadd.json ${x.vav.length} platser`);
+  // Rutorna står i sidans ordning och platserna i registrets, så korten jämförs utan ordningen mellan platserna.
+  const pasidan = rutor.map((r) => [...r.matchAll(/href="\/strukturer\/([a-z0-9-]+)"/g)].map((m) => m[1]).join()).sort();
+  const iregistret = x.vav.map((r) => (r.delar ?? []).join()).sort();
+  if (rutor.length === x.vav.length && pasidan.join(' | ') !== iregistret.join(' | ')) fel.push(`Sådden: ${metod} har korten ${pasidan.join(' | ')} på sidan och ska ha ${iregistret.join(' | ')}`);
+  platser += x.vav.length;
+}
+
 if (fel.length) { console.error(`Strukturer: ${fel.length} fel:\n  ${fel.slice(0, 30).join('\n  ')}`); process.exit(1); }
+console.log(`Sådden: ${platser} platser i ${Object.values(saddJa).filter((x) => typeof x === 'object' && x.vav).length} metoder är ritade med sina kort.`);
 console.log(`Strukturer: ${visas.length} strukturer med sida, bild, kort och bock; utskriften två och två prövad med ${urval.length} och 2 kort och i filen med alla (${Math.ceil(visas.length / 2)} ark), och provet ser ett urval i omvänd ordning; topplistans funktion prövad med härmade svar, utan nyckel och med 429.`);

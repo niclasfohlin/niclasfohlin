@@ -22,6 +22,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
+import { strukturnamnetI } from '../src/lib/standard/index.js';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const MAPP = join(rot, 'src/content/stodundervisning');
@@ -37,18 +38,15 @@ const register = JSON.parse(readFileSync(REGISTER, 'utf8'));
 const delade = centrala.filter((c) => !c.metod && c.slag !== 'formular');
 const metoder = readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => { const text = readFileSync(join(MAPP, f), 'utf8'); return { id: f.replace(/\.yaml$/, ''), d: parseYaml(text), text }; }).filter((m) => m.d.utkast !== true);
 
-// De namngivna sakerna i en mapp (fältet namnen): namnet och de andra namnen i varje fil som visas, med stor bokstav som i ett
-// namn, så att verbet "turas om" inte räknas. Ett namn med flera ord räknas också utan sitt utropstecken eller frågetecken,
-// och ett namn med tankstreck också med "och", som metoderna skriver det: Berätta mera för Berätta mera! och Inre och yttre
-// cirkel för Inre–yttre cirkel (Gruppstärkande aktiviteter). Ett namn med ett ord, som Visa! och Rösta!, behåller tecknet,
-// eftersom ordet utan det är ett vanligt verb.
-const esc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const varianter = (n) => [...new Set([n, ...(n.includes(' ') ? [n.replace(/[!?]$/, '')] : []), n.replace(/\s*–\s*/g, ' och ')])];
+// De namngivna sakerna i en mapp (fältet namnen): namnet och de andra namnen i varje fil som visas, i de former som standarden
+// läser dem (strukturnamnetI i src/lib/standard/strukturer.js, som sajtens vävning också använder): med stor bokstav, så att
+// verbet "turas om" inte räknas, utan utropstecknet i Berätta mera!, med och i Inre och yttre cirkel, i bestämd form som
+// Galleriet och utan krav på stor bokstav i ett namn med kommatecken som "jag gör, vi gör, du gör".
 function namnenI(s) {
   if (!s?.namnen?.mapp) return [];
   const mapp = join(rot, s.namnen.mapp);
   return readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), ...parseYaml(readFileSync(join(mapp, f), 'utf8')) })).filter((x) => !x.utkast && !x.vantar)
-    .flatMap((x) => [x.namn, ...(x.andra ?? [])].filter((n) => typeof n === 'string').flatMap(varianter).filter((n) => n.length >= 3).map((n) => ({ namn: n, id: x.id, re: new RegExp(`(^|[^\\p{L}])${esc(n)}(?![\\p{L}])`, 'u') })));
+    .flatMap((x) => [x.namn, ...(x.andra ?? [])].filter((n) => typeof n === 'string' && n.length >= 3).map((n) => ({ namn: n, id: x.id, re: { test: (text) => strukturnamnetI(n, text) } })));
 }
 // Ett verktyg som sajten väver in (src/lib/vav.ts) visas av metodens ja i registret, med platserna i vav, och inte av fältet
 // centrala; en del som metoden nämner utan att använda står i inte, med skälet.
@@ -90,6 +88,13 @@ if (process.argv.includes('--kontrollera')) {
       const ja = !!s.ja?.[m.id];
       if (visar(m.d, c.id) && !ja) fel.push(`${m.id} visar ${c.id} utan att stå bland dess ja i src/data/sadd.json. Bedöm metoden med de tre frågorna och skriv in den.`);
       if (ja && !visar(m.d, c.id) && !vavs(s, m.id)) vantar.push(`${m.id} (${c.id})`);
+      // En sak med alla sås i varje metod, med minst en del (Niclas 2026-11-01, om Strukturer: "Egentligen bör alla ha minst
+      // en sådd av strukturer. Medans vissa har fler."), också i en ny metod.
+      if (s.alla && !(vavs(s, m.id) && s.ja[m.id].vav.some((r) => r.delar?.length))) fel.push(`${m.id} har inget kort till ${c.namn}: varje metod har minst en sådd av ${c.namn} (fältet alla i src/data/sadd.json). Välj platsen där eleverna samarbetar och strukturen som passar där, och skriv metoden bland ja med vav.`);
+      // En metod med nej prövas också: skälet tar upp varje del som metoden nämner, så att ett namn som kommer in senare
+      // stoppar provet tills någon har bedömt det (granskningen 2026-11-01, 4c).
+      const nej = s.nej?.[m.id];
+      if (typeof nej === 'string') for (const x of namnen.filter((n) => n.re.test(m.text) && !n.re.test(nej))) fel.push(`${m.id} nämner ${x.namn} (${x.id}), som skälet för nej i src/data/sadd.json inte tar upp. Bedöm namnet och skriv det i skälet, eller flytta metoden till ja.`);
       if (!vavs(s, m.id)) continue;
       // Varje del som metoden nämner vid namn får sitt lilla kort, eller står i inte med skälet (Niclas 2026-11-01: "en liten
       // bild på varje struktur som nämns").

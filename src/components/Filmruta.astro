@@ -22,4 +22,4 @@ const ovriga = filmer.filter((f): f is MetodFilm | PaBordet => !('lektionskort' 
 ---
 {kort.length > 0 && <p class="m-central-knapp m-lektionskortrad">{kort.map((k) => <Lektionskortknapp k={k} titel={titel} />)}</p>}
 {ovriga.map((f) => ('bild' in f ? <Pabordet b={f} /> : <><Film f={f} titel={titel} /><Filmbilder f={f} /></>))}
-{vavt.map((v) => <Vavruta v={v} titel={titel} />)}
+{vavt.map((v, i) => <Vavruta v={v} titel={titel} sist={i === vavt.length - 1} />)}

@@ -24,7 +24,7 @@ import { bankAv, nivaFarger } from '../../lib/bank';
 import { harMaterial, hemsidansNamn } from '../../lib/material';
 import Centralknapp from '../../components/Centralknapp.astro';
 import { metodensCentrala, provaCentrala } from '../../lib/centrala';
-import { provaVav } from '../../lib/vav';
+import { provaVav, vavdaIBorjan } from '../../lib/vav';
 import { metodensLektionskort } from '../../lib/lektionskort';
 import { planbar, planensAdress } from '../../lib/insatsplan';
 import { PLANERA } from '../../lib/standard/index.js';
@@ -46,7 +46,8 @@ const d = m.data;
 // Huvudfilmen efter faktarutan (src/lib/film.ts); extrafilmerna ritar Metod.astro vid sina moment.
 const filmer = metodensFilmer(d, m.id);
 const huvud = huvudfilm(filmer);
-const centrala = metodensCentrala(d);
+// Ett verktyg som är invävt med många delar står också här (src/lib/vav.ts, vavdaIBorjan).
+const centrala = [...metodensCentrala(d), ...vavdaIBorjan(m.id, d)];
 // Planera insatsen (K-489): knappen och raden Din insats, för en metod som kan planeras (src/lib/insatsplan.ts).
 const kanPlaneras = planbar(d);
 // En lektion i en serie planeras i seriens enda planerare (K-551; Niclas 2026-10-26: "Ljudlek får därmed bara EN planerare

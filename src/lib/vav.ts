@@ -14,21 +14,27 @@ import register from '../data/sadd.json';
 import { CENTRALA, tolkaTextplats, type Central } from './centrala';
 import { passar, sammaRubrik, tolkaEfter, type FilmPlats } from './film';
 import { bildensAdress, slagensStil, strukturensAdress, strukturernaAv } from './strukturer';
+import { strukturnamnetI } from './standard/index.js';
 
 export const VAVFORMER = ['kort', 'ruta'] as const;
 type Form = (typeof VAVFORMER)[number];
-/** En plats i registret: efter är platsen, form kortraden eller rutan, delar id:n på verktygets delar. */
-type Rad = { efter: string; form?: Form; delar?: string[] };
+/** Hur en del hör till metoden när metoden inte nämner den: eleverna gör redan dess steg (form), eller den passar till
+ *  delen av passet (forslag, Niclas 2026-11-01: "Egentligen bör alla ha minst en sådd av strukturer"). */
+export const VAVSLAG = ['form', 'forslag'] as const;
+type Slag = (typeof VAVSLAG)[number];
+/** En plats i registret: efter är platsen, form kortraden eller rutan, delar id:n på verktygets delar, och om den del av
+ *  passet som har delens form, när metoden inte nämner delen (Berättaren och Skrivaren i Skrivkurs: sagoboken). */
+type Rad = { efter: string; form?: Form; delar?: string[]; om?: string; slag?: Slag };
 type Ja = { skal: string; vav?: Rad[] };
 /** En del av verktyget som ett litet kort: bilden och namnet leder till delens sida. */
-export type Del = { id: string; namn: string; andra: string[]; rad: string; adress: string; bild: string; stil?: string };
+export type Del = { id: string; namn: string; andra: string[]; rad: string; adress: string; bild?: { src: string; bredd: number; hojd: number }; stil?: string };
 /** Det som ritas på en plats: verktyget, metoden, formen, delarna, om metoden nämner någon av dem och om verktygets knapp
  *  redan står där. */
-export type Vav = { vav: Central; metod: string; form: Form; delar: Del[]; namngivna: boolean; knappenFinns: boolean };
+export type Vav = { vav: Central; metod: string; form: Form; delar: Del[]; namngivna: boolean; om?: string; slag: Slag; knappenFinns: boolean };
 
 // Var delarna av ett verktyg står: namnet, raden under och sidan. Strukturerna läses ur src/content/strukturer/.
 const DELAR: Record<string, (ids: string[], vem: string) => Del[]> = {
-  strukturer: (ids, vem) => strukturernaAv(ids, vem).map((s) => ({ id: s.id, namn: s.namn, andra: s.andra, rad: s.syfte, adress: strukturensAdress(s.id), bild: bildensAdress(s.id), stil: slagensStil(s.slag) })),
+  strukturer: (ids, vem) => strukturernaAv(ids, vem).map((s) => ({ id: s.id, namn: s.namn, andra: s.andra, rad: s.syfte, adress: strukturensAdress(s.id), bild: { src: bildensAdress(s.id), bredd: 900, hojd: 560 }, stil: slagensStil(s.slag) })),
 };
 
 const saker = (register as unknown as { saker: Record<string, { ja?: Record<string, string | Ja> }> }).saker;
@@ -48,21 +54,26 @@ export function vavtVid(metod: string, d: MetodForVav, plats: FilmPlats): Vav[] 
     delar,
     // Nämner metoden ingen av delarna, arbetar eleverna i samma form utan att metoden säger det, och etiketten säger det.
     namngivna: !delar.length || delar.some((x) => [x.namn, ...x.andra].some((n) => namnetI(n, d))),
+    om: r.om,
+    slag: r.slag ?? 'form',
     // Knappen står redan på platsen när metoden visar verktyget där med fältet centrala (src/lib/centrala.ts).
     knappenFinns: (d.centrala ?? []).some((x) => { if (x.id !== c.id) return false; const t = tolkaTextplats(x.efterText); const v = tolkaEfter(r.efter); return !!t && !!v && passar(v, t); }),
     };
   }));
 }
-// Namnet i metodens text, som såddprovet läser det (scripts/saddprov.mjs): med stor bokstav, också utan utropstecknet i ett
-// namn med flera ord och med "och" i stället för tankstrecket.
+// Namnet i metodens text, med standardens regel, som såddprovet också läser namnen med (scripts/saddprov.mjs).
 const metodensText = new WeakMap<object, string>();
-const esc = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 function namnetI(namn: string, d: object): boolean {
   if (!metodensText.has(d)) metodensText.set(d, JSON.stringify(d));
-  const text = metodensText.get(d)!;
-  const varianter = [namn, ...(namn.includes(' ') ? [namn.replace(/[!?]$/, '')] : []), namn.replace(/\s*–\s*/g, ' och ')];
-  return varianter.some((n) => n.length >= 3 && new RegExp(`(^|[^\\p{L}])${esc(n)}(?![\\p{L}])`, 'u').test(text));
+  return strukturnamnetI(namn, metodensText.get(d)!);
 }
+
+/** Hur många delar ett verktyg är invävt med innan det också står i början av metodens sida, under ingressen och i menyn,
+ *  som metodens egna verktyg (Niclas 2026-11-01: "De som har fler än 2 såddningar i sig kan ha kortet också i början"). */
+export const I_BORJAN_FRAN = 3;
+/** Verktygen som står i början av metodens sida för att de är invävda med många delar, och som metoden inte redan visar med
+ *  fältet centrala. */
+export const vavdaIBorjan = (metod: string, d: MetodForVav): Central[] => vavda().filter((c) => !(d.centrala ?? []).some((x) => x.id === c.id) && new Set(raderFor(metod, c).flatMap((r) => r.delar ?? [])).size >= I_BORJAN_FRAN);
 
 type MetodForPlats = MetodForVav & { inledning?: string[]; tabeller?: { rubrik: string }[]; ramar?: { ramar: { rubrik: string }[] } } & Record<string, unknown>;
 /** Beskedet när platsen inte finns i metoden, annars undefined. */
@@ -95,6 +106,8 @@ export function provaVav(metoder: { id: string; data: MetodForPlats }[]): void {
         const pf = platsFel(m.data, p);
         if (pf) fel.push(`${vem}, plats ${i + 1}: ${pf}.`);
         if (r.form !== undefined && !(VAVFORMER as readonly string[]).includes(r.form)) fel.push(`${vem}, plats ${i + 1}: form är ${VAVFORMER.join(' eller ')}.`);
+        if (r.slag !== undefined && !(VAVSLAG as readonly string[]).includes(r.slag)) fel.push(`${vem}, plats ${i + 1}: slag är ${VAVSLAG.join(' eller ')}.`);
+        if (r.om !== undefined && (!r.om.trim() || /[.!?]$/.test(r.om))) fel.push(`${vem}, plats ${i + 1}: om är den del av passet som har delens form, några ord utan punkt, som "Berättaren och Skrivaren".`);
         if ((r.form ?? 'kort') === 'kort' && !r.delar?.length) fel.push(`${vem}, plats ${i + 1}: kortraden visar delarna som metoden nämner och behöver minst en.`);
         if (r.delar?.length && !DELAR[c.id]) fel.push(`${vem}, plats ${i + 1}: ${c.id} har inga delar att visa (DELAR i src/lib/vav.ts).`);
         else if (r.delar?.length) try { DELAR[c.id](r.delar, vem); } catch (e) { fel.push((e as Error).message); }

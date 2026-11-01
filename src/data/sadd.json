@@ -1,5 +1,5 @@
 {
-  "_kommentar": "Såddprovet (Niclas 2026-10-20): ett delat stödmaterial sås bara i de metoder där det stöder en central del av metoden och det eleverna tränar. tranar är förmågornas taggar som saken är gjord för, karna orden (reguljära uttryck) för det eleverna gör i passet, provad datumet för bedömningen, ja metoderna som ska visa saken med platsen och skälet, och nej kandidaterna som inte ska, med skälet. Kör node scripts/saddprov.mjs <id>; regeln står i METODER.md under De centrala sakerna. namnen är mappen med sakens namngivna delar, som strukturerna: en metod som nämner en av dem vid namn är en kandidat. Ett verktyg som sajten väver in (fältet vav i src/data/centrala.json, src/lib/vav.ts) har ja med skal och vav, platserna: efter med filmernas ord för platsen, form kort eller ruta och delar; inte är namnen som metoden nämner utan att använda delen, med skälet.",
+  "_kommentar": "Såddprovet (Niclas 2026-10-20): ett delat stödmaterial sås bara i de metoder där det stöder en central del av metoden och det eleverna tränar. tranar är förmågornas taggar som saken är gjord för, karna orden (reguljära uttryck) för det eleverna gör i passet, provad datumet för bedömningen, ja metoderna som ska visa saken med platsen och skälet, och nej kandidaterna som inte ska, med skälet. Kör node scripts/saddprov.mjs <id>; regeln står i METODER.md under De centrala sakerna. namnen är mappen med sakens namngivna delar, som strukturerna: en metod som nämner en av dem vid namn är en kandidat. Ett verktyg som sajten väver in (fältet vav i src/data/centrala.json, src/lib/vav.ts) har ja med skal och vav, platserna: efter med filmernas ord för platsen, form kort eller ruta och delar; inte är namnen som metoden nämner utan att använda delen, med skälet. En plats kan ha om, den del av passet som har strukturens form när metoden inte nämner strukturen. En metod med nej har ett skäl som tar upp varje del som metoden nämner vid namn. alla betyder att varje metod sås med minst en del, som Strukturer, och slag på en plats säger om eleverna gör delens steg (form) eller om delen passar till den delen av passet (forslag).",
   "saker": {
     "lasstrategier": {
       "tranar": [
@@ -79,6 +79,7 @@
       "namnen": {
         "mapp": "src/content/strukturer"
       },
+      "alla": true,
       "tranar": [
         "socialt-samspel",
         "lasforstaelse",
@@ -129,10 +130,19 @@
                 "beratta-mera",
                 "ping-pong-prat"
               ]
+            },
+            {
+              "efter": "tabell: Parsamtalet vid stoppet",
+              "delar": [
+                "epa"
+              ],
+              "slag": "form",
+              "om": "Parsamtalet vid stoppet"
             }
           ],
           "inte": {
-            "Berättaren": "berättaren i texterna, ingen struktur"
+            "Berättaren": "berättaren i texterna, ingen struktur",
+            "Samtalskort": "metodens eget samtalskort, ingen struktur"
           }
         },
         "ordverkstad-i-grupp": {
@@ -144,6 +154,14 @@
               "delar": [
                 "kloka-pennan"
               ]
+            },
+            {
+              "efter": "tabell: Pass 2 och 3: skrivpasset på 60 minuter",
+              "delar": [
+                "parrespons"
+              ],
+              "slag": "forslag",
+              "om": "Paret berättar texten för ett annat par"
             }
           ]
         },
@@ -159,6 +177,14 @@
                 "beratta-mera",
                 "inre-yttre-cirkel"
               ]
+            },
+            {
+              "efter": "ram: Gruppreflektion",
+              "delar": [
+                "epa"
+              ],
+              "slag": "forslag",
+              "om": "Frågorna i gruppreflektionen"
             }
           ]
         },
@@ -176,6 +202,14 @@
               "delar": [
                 "speed-dating"
               ]
+            },
+            {
+              "efter": "tabell: Paren: samma kamrat och samma bok",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "forslag",
+              "om": "Läsningen i paret"
             }
           ]
         },
@@ -193,6 +227,22 @@
               "delar": [
                 "kommunicera"
               ]
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "ppt-par-pa-tid"
+              ],
+              "slag": "forslag",
+              "om": "Eleven säger texten för en kamrat"
+            },
+            {
+              "efter": "ram: Till läraren: återkopplingen",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "forslag",
+              "om": "Starterna runt bordet"
             }
           ],
           "inte": {
@@ -207,6 +257,15 @@
               "delar": [
                 "konstruktiv-debatt"
               ]
+            },
+            {
+              "efter": "ram: Till läraren: återkopplingen",
+              "delar": [
+                "inspireras",
+                "rondellen"
+              ],
+              "slag": "forslag",
+              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ]
         },
@@ -218,6 +277,15 @@
               "delar": [
                 "beratta-mera"
               ]
+            },
+            {
+              "efter": "ram: Till läraren: återkopplingen",
+              "delar": [
+                "inspireras",
+                "rondellen"
+              ],
+              "slag": "forslag",
+              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ]
         },
@@ -229,6 +297,23 @@
               "delar": [
                 "lika-och-olika"
               ]
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "kommunicera"
+              ],
+              "slag": "forslag",
+              "om": "Säg, där läsaren ritar det hen hör"
+            },
+            {
+              "efter": "ram: Till läraren: återkopplingen",
+              "delar": [
+                "inspireras",
+                "rondellen"
+              ],
+              "slag": "forslag",
+              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ],
           "inte": {
@@ -243,6 +328,23 @@
               "delar": [
                 "kommunicera"
               ]
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "kloka-pennan"
+              ],
+              "slag": "forslag",
+              "om": "Paret i Tänk och planera"
+            },
+            {
+              "efter": "ram: Till läraren: återkopplingen",
+              "delar": [
+                "inspireras",
+                "rondellen"
+              ],
+              "slag": "forslag",
+              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ],
           "inte": {
@@ -254,13 +356,21 @@
           "vav": [
             {
               "efter": "tabell: De fyra kurserna bredvid varandra",
-              "form": "ruta",
               "delar": [
                 "konstruktiv-debatt",
                 "beratta-mera",
                 "lika-och-olika",
                 "kommunicera"
               ]
+            },
+            {
+              "efter": "tabell: Återkopplingen",
+              "delar": [
+                "inspireras",
+                "rondellen"
+              ],
+              "slag": "forslag",
+              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ]
         },
@@ -271,21 +381,59 @@
               "efter": "passrutin",
               "delar": [
                 "kloka-pennan"
-              ]
+              ],
+              "om": "Berättaren och Skrivaren"
+            },
+            {
+              "efter": "ram: Till läraren: återkopplingen",
+              "delar": [
+                "inspireras"
+              ],
+              "slag": "forslag",
+              "om": "Parens versioner på bordet"
             }
           ],
           "inte": {
             "Berättaren": "rollen i paret, som Kloka pennans tänkare"
           }
         },
-        "antalsuppfattning-i-grupp": {
-          "skal": "I delen Korten bygger den ena i paret och berättar vad hen gör, den andra kontrollerar, och de byter roller efter varje kort: kärnan i Öva och kontrollera i par.",
+        "skrivkurs-berattelseram": {
+          "skal": "Galleriet, kursens sida Strukturen, del 1, har Inspireras form: mitt i skrivandet går alla ett varv, läser hur kamraterna har börjat och skriver sedan vidare i sin egen text med det de lånade.",
           "vav": [
             {
-              "efter": "arbetsform",
+              "efter": "ram: Strukturen, del 1: Galleriet",
               "delar": [
-                "ova-och-kontrollera-i-par"
+                "inspireras"
               ]
+            },
+            {
+              "efter": "ram: Till läraren: återkopplingen",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "forslag",
+              "om": "Starterna runt bordet"
+            }
+          ]
+        },
+        "antalsuppfattning-i-grupp": {
+          "skal": "Niclas 2026-11-01: ”Antalsuppfattning borde sådda både turas om och kloka pennan.” I Korten bygger den ena i paret och berättar vad hen gör, den andra kontrollerar, och de byter roller efter varje kort.",
+          "vav": [
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "turas-om",
+                "kloka-pennan"
+              ],
+              "om": "Paren i Korten"
+            },
+            {
+              "efter": "hem",
+              "delar": [
+                "visa"
+              ],
+              "slag": "forslag",
+              "om": "Läxan i början av passet"
             }
           ],
           "inte": {
@@ -293,27 +441,598 @@
           }
         },
         "brakkurs-i-grupp": {
-          "skal": "I delen Korten gör den ena i paret kortet och berättar vad hen gör, den andra kontrollerar med materialet eller tallinjen, och de byter roller efter varje kort: kärnan i Öva och kontrollera i par.",
+          "skal": "Samma parform som Antalsuppfattning i grupp, där Niclas 2026-11-01 sådde Turas om och Kloka pennan: i Korten gör den ena i paret kortet och berättar vad hen gör, den andra kontrollerar med materialet eller tallinjen, och de byter roller efter varje kort.",
+          "vav": [
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "turas-om",
+                "kloka-pennan"
+              ],
+              "om": "Paren i Korten"
+            },
+            {
+              "efter": "tabell: Pass 3, när det går: spel och problem",
+              "delar": [
+                "epk"
+              ],
+              "slag": "forslag",
+              "om": "Problemet i pass 3"
+            }
+          ]
+        },
+        "faktatextsamtal-i-grupp": {
+          "skal": "Var och en säger gissningen och kärnan till den bredvid innan gruppen hör den, i EPA:s form, paren läser ett avsnitt i taget och byter vid nästa som i Läsa och förklara i par, och i modellpasset återger var och en texten för den bredvid, där Par på tid ger båda lika lång tid.",
           "vav": [
             {
               "efter": "arbetsform",
               "delar": [
-                "ova-och-kontrollera-i-par"
-              ]
+                "epa"
+              ],
+              "slag": "form",
+              "om": "Gissningen och kärnan"
+            },
+            {
+              "efter": "tabell: Ett avsnitt i fyra steg: Läs, Red ut, Kärnan och Lappen",
+              "delar": [
+                "lasa-och-forklara-i-par"
+              ],
+              "slag": "forslag",
+              "om": "Paren i avsnitten"
+            },
+            {
+              "efter": "tabell: Modellpasset på 40 minuter",
+              "delar": [
+                "ppt-par-pa-tid"
+              ],
+              "slag": "forslag",
+              "om": "Återberättandet för den bredvid"
+            }
+          ]
+        },
+        "fyra-raknesatten": {
+          "skal": "I Åt andra hållet bygger den ena i paret och den andra skriver, och i ett tredje pass säger den ena vad som händer i materialet medan den andra skriver, som i Kloka pennan, och i Lärdomen säger paren en mening till varandra innan en elev säger den till gruppen, som i EPA.",
+          "vav": [
+            {
+              "efter": "steg",
+              "delar": [
+                "kloka-pennan"
+              ],
+              "slag": "forslag",
+              "om": "Paren i Åt andra hållet"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "epa"
+              ],
+              "slag": "forslag",
+              "om": "Lärdomen i par"
+            }
+          ],
+          "inte": {
+            "Jag gör, vi gör, du gör": "arbetsformens rubrik, din genomgång med gruppen där du styr varje handgrepp, utan APE:s samtal i fyrgrupp"
+          }
+        },
+        "kompissamtal": {
+          "skal": "Talpinnen går ett varv i Rundan och i Avsluta, så att var och en gör meningen färdig i tur och ordning som i Rondellen, och när några tar över samtalet ger Talkort alla en tur innan någon talar igen.",
+          "vav": [
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Rundan och sista varvet"
+            },
+            {
+              "efter": "tabell: Om något händer i gruppen",
+              "delar": [
+                "talkort"
+              ],
+              "slag": "forslag",
+              "om": "När några tar över samtalet"
+            }
+          ]
+        },
+        "kortskrivning-skriv-varje-dag": {
+          "skal": "I en hel klass läser eleverna sin rad i par, och Berätta mera! låter var och en läsa den för flera kamrater, medan Kloka pennan ger rollerna när paret skriver vidare på en rad och turas om med pennan.",
+          "vav": [
+            {
+              "efter": "tabell: I en klass, med de yngsta och på dator",
+              "delar": [
+                "beratta-mera"
+              ],
+              "slag": "forslag",
+              "om": "Dela i en hel klass"
+            },
+            {
+              "efter": "tabell: Från delande till en klass med skribenter",
+              "delar": [
+                "kloka-pennan"
+              ],
+              "slag": "forslag",
+              "om": "Skriva i par"
+            }
+          ],
+          "inte": {
+            "Galleri": "Galleriet är en vägg där den som vill sätter upp en renskriven text några dagar, ingen rundvandring mitt i skrivandet som i Inspireras"
+          }
+        },
+        "laslistor-i-grupp": {
+          "skal": "I parläsningen pekar den ena och hjälper vid svåra ord medan den andra läser, och de byter roller efter en genomläsning, samma form som Turas om, och i bokstunden från vecka 4 låter EPA var och en tänka och säga sin tanke till kamraten innan gruppen pratar.",
+          "vav": [
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Parläsningen"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "epa"
+              ],
+              "slag": "forslag",
+              "om": "Boken i avslutningen"
+            }
+          ],
+          "inte": {
+            "Ställ en fråga": "din uppmaning i vecka 7, ”Ställ en fråga per mening”, där eleverna inte skriver någon fråga och inte samlar svar",
+            "Jag gör, vi gör, du gör": "en hänvisning till forskningen i grunden (Fisher och Frey, 2008)"
+          }
+        },
+        "problemlosning-i-grupp": {
+          "skal": "I Förstå berättar paren problemet för varandra innan en elev berättar för gruppen, som i EPA, i Lösa håller en i paret pennan och de byter halvvägs på din signal, som i Kloka pennan, och Två löser problem passar när var och en börjar själv i ledet Du gör själv och när ett par blir klart tidigt.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "epa"
+              ],
+              "slag": "forslag",
+              "om": "Återberättandet i Förstå"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "kloka-pennan"
+              ],
+              "slag": "forslag",
+              "om": "Pennan i Lösa"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "tva-loser-problem"
+              ],
+              "slag": "forslag",
+              "om": "Paren i Lösa"
+            }
+          ],
+          "inte": {
+            "Kvadraten": "namnet på problem 7 på nivån Avancerat, ingen struktur"
+          }
+        },
+        "sag-skriv-och-las": {
+          "skal": "I Min mening läser grannen raden som kamraten har byggt, och Turas om ger paret en tur var att bygga och att läsa, och när gruppen är klar före tiden kan paren nöta ordbilderna med Flashcardlek, där den ena säger ordet och den andra bygger det och vänder kortet.",
+          "vav": [
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "forslag",
+              "om": "Grannen i Min mening"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "flashcardlek"
+              ],
+              "slag": "forslag",
+              "om": "Ordbilderna när gruppen är klar"
+            }
+          ]
+        },
+        "seriesamtal": {
+          "skal": "Talpinnen går runt bordet i Spaningen och i Med mig, i tur och ordning som i Rondellen, i Tankarna har var och en sin roll som en av personerna eller detektiven, som i Läs med roller, och när någon tar över samtalet ger Talkort alla en tur.",
+          "vav": [
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Rundorna med talpinnen"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "las-med-roller"
+              ],
+              "slag": "forslag",
+              "om": "Personerna och detektiven i Tankarna"
+            },
+            {
+              "efter": "tabell: Om något händer",
+              "delar": [
+                "talkort"
+              ],
+              "slag": "forslag",
+              "om": "När någon tar över samtalet"
+            }
+          ]
+        },
+        "til-i-grupp": {
+          "skal": "I Återkoppla läser var och en upp sina tre favoritmeningar och säger varför hen valde dem, och Topplistan och Rondellen låter gruppen ta en mening i taget med skälet, varv efter varv.",
+          "vav": [
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "topplistan",
+                "rondellen"
+              ],
+              "slag": "forslag",
+              "om": "Favoritmeningarna i Återkoppla"
+            }
+          ]
+        },
+        "upprepad-lasning": {
+          "skal": "I parläsningen läser den ena och den andra pekar, ger stöd vid svåra ord och visar strategikortet, och sedan byter paret roller och läser samma text igen, samma form som Turas om.",
+          "vav": [
+            {
+              "efter": "tabell: Sätt att läsa igen",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Parläsningen"
+            }
+          ]
+        },
+        "ljudlek-i-grupp": {
+          "skal": "Alla svarar samtidigt på ditt tecken i ljudstarten, paren turas om i steg 3 och byter roller efter varje ord, och i avslutet säger var och en ett ord i tur och ordning.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten"
+            },
+            {
+              "efter": "tabell: Lektionens fyra steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i steg 3"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-bokstavsgympa": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, och i Peka och säg pekar den ena på kartan och den andra säger ljudet, och paret turas om efter varje bokstav.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Peka och säg"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-forsta-ljudet": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, alla pekar på bokstaven samtidigt i steg 2, och i Sortera lägger den ena kortet i en hög för ljudet, den andra avgör om det stämmer och de byter.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten och Peka på bokstaven"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Sortera"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "sortering"
+              ],
+              "slag": "forslag",
+              "om": "Paren i Sortera"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-fran-ljud-till-ord": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, gruppen tänker ordet tyst och säger det på ditt tecken i steg 2, och i Bygg och ändra bygger den ena och den andra gör ändringen, och de byter roller efter varje ord.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten och Tänk och säg"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Bygg och ändra"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-fran-ord-till-mening": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, och paret bygger meningen ett ord var och turas sedan om att byta ett ord medan den andra läser.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Meningen ur högen och Byt ett ord"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-ord-och-stavelser": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, alla visar klossarna samtidigt i steg 2, och i Dela och sätt ihop säger den ena ordet i delar, den andra lägger klossarna och vänder kortet, och de turas om.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten och Säg och räkna"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Dela och sätt ihop"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "flashcardlek"
+              ],
+              "slag": "forslag",
+              "om": "Paren i Dela och sätt ihop"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-rakna-ljud": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, och i Säg och lägg säger den ena ordet, den andra lägger en markör för varje ljud och vänder kortet, och de byter efter varje ord.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Säg och lägg"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "flashcardlek"
+              ],
+              "slag": "forslag",
+              "om": "Paren i Säg och lägg"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-rim": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, alla visar tummen på ditt tecken i steg 2, i Rimpar säger den ena ordet och den andra letar upp rimmet innan de byter roller, och i varianten Rimlek i par säger paret så många rim som möjligt.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten och Tummen upp"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Rimpar"
+            },
+            {
+              "efter": "tabell: Varianter",
+              "delar": [
+                "ping-pong-prat"
+              ],
+              "slag": "forslag",
+              "om": "Rimlek i par"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-skriv-ord-tillsammans": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, i Kedjan i rutorna byter den ena kortet och den andra läser, och i Ordjakt säger den ena ordet och den andra skriver det hen hör, och sedan turas de om.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Kedjan i rutorna"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "kloka-pennan"
+              ],
+              "slag": "form",
+              "om": "Paren i Ordjakt"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
+            }
+          ]
+        },
+        "ljudlek-smaka-pa-ljud": {
+          "skal": "Samma ljudstart och avslut som i Ljudlek i grupp, alla visar bokstaven samtidigt i steg 2, och i Fråga och svara visar den ena kortet och frågar, den andra svarar och de vänder kortet och byter roller.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "visa"
+              ],
+              "slag": "form",
+              "om": "Ljudstarten och Skriv i rutan"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "form",
+              "om": "Paren i Fråga och svara"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "flashcardlek"
+              ],
+              "slag": "forslag",
+              "om": "Paren i Fråga och svara"
+            },
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "rondellen"
+              ],
+              "slag": "form",
+              "om": "Avslutet"
             }
           ]
         }
       },
-      "nej": {
-        "faktatextsamtal-i-grupp": "Paren läser och säger kärnan i varje pass, men i metodens egen form, Ett avsnitt i fyra steg med kortet När det skaver",
-        "kompissamtal": "Talpinnen och rundan är metodens egen form, och samtalen bygger på gruppens egna konflikter med dig som ledare",
-        "kortskrivning-skriv-varje-dag": "Kärnan är att var och en skriver utan att stanna, och paret delar bara en rad i Dela med metodens egen fråga ”Berätta mer om …”",
-        "problemlosning-i-grupp": "Paren löser problemet i metodens egen form, och Kvadraten är namnet på ett problem, inte strukturen Par-pussel",
-        "seriesamtal": "Talpinnen går runt bordet och eleverna har rollerna personerna och detektiven kring en egen konflikt, så passet har ingen form för samarbete i par eller grupp som strukturerna",
-        "skrivkurs-berattelseram": "Paret berättar med kortet Berätta, och Dela och Galleriet är kursens egna former, också i en klass",
-        "upprepad-lasning": "I par läser eleverna om texten med en kamrat som stöd medan du ger återkoppling, metodens egen form och ingen av strukturernas steg",
-        "laslistor-i-grupp": "”Ställ en fråga per mening” är din uppmaning i parläsningen, och eleverna skriver ingen fråga och samlar inga svar som i Ställ en fråga"
-      }
+      "nej": {}
     }
   }
 }

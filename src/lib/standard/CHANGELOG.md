@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.50.0, 2026-11-01
+
+- `strukturer.js` (sajtens sådd av Strukturer i Stödundervisning): `strukturnamnensFormer` och `strukturnamnetI`, formerna som en strukturs namn står i i en metods text (utan utropstecknet i ett namn med flera ord, med och i stället för tankstrecket, i bestämd form för ett namn med ett ord) och om namnet står där, med stor bokstav utom i ett namn med kommatecken. Sajtens vävning och såddprov läser namnen med samma funktion.
+
 ## 0.49.0, 2026-11-01
 
 - `strukturer.js` (sajtens K-665): `strukturernasTopplista` och `UTSKRIFTENS_VIKT`, topplistans räkning ur GoatCounters sidor och händelser, med en utskrift som fem besök, som bygget och sajtens funktion delar.
