@@ -1,5 +1,5 @@
 {
-  "_kommentar": "Såddprovet (Niclas 2026-10-20): ett delat stödmaterial sås bara i de metoder där det stöder en central del av metoden och det eleverna tränar. tranar är förmågornas taggar som saken är gjord för, karna orden (reguljära uttryck) för det eleverna gör i passet, provad datumet för bedömningen, ja metoderna som ska visa saken med platsen och skälet, och nej kandidaterna som inte ska, med skälet. Kör node scripts/saddprov.mjs <id>; regeln står i METODER.md under De centrala sakerna.",
+  "_kommentar": "Såddprovet (Niclas 2026-10-20): ett delat stödmaterial sås bara i de metoder där det stöder en central del av metoden och det eleverna tränar. tranar är förmågornas taggar som saken är gjord för, karna orden (reguljära uttryck) för det eleverna gör i passet, provad datumet för bedömningen, ja metoderna som ska visa saken med platsen och skälet, och nej kandidaterna som inte ska, med skälet. Kör node scripts/saddprov.mjs <id>; regeln står i METODER.md under De centrala sakerna. namnen är mappen med sakens namngivna delar, som strukturerna: en metod som nämner en av dem vid namn är en kandidat. Ett verktyg som sajten väver in (fältet vav i src/data/centrala.json, src/lib/vav.ts) har ja med skal och vav, platserna: efter med filmernas ord för platsen, form kort eller ruta och delar; inte är namnen som metoden nämner utan att använda delen, med skälet.",
   "saker": {
     "lasstrategier": {
       "tranar": [
@@ -76,6 +76,9 @@
       }
     },
     "strukturer": {
+      "namnen": {
+        "mapp": "src/content/strukturer"
+      },
       "tranar": [
         "socialt-samspel",
         "lasforstaelse",
@@ -96,27 +99,220 @@
       ],
       "provad": "2026-11-01",
       "ja": {
-        "boksamtal-i-grupp": "Efter tabellen Samtalsreglerna. Var och en säger sin sak till den bredvid och sedan laget runt i varje läspass, och talkort kommer när några få talar mest. Metoden kallar själv formerna EPA, Rondellen och Talkort, strukturer ur det kooperativa lärandet, och i helklass samtalar klassen i grupper om tre till fem"
+        "boksamtal-i-grupp": {
+          "skal": "Efter tabellen Samtalsreglerna. Var och en säger sin sak till den bredvid och sedan laget runt i varje läspass, och talkort kommer när några få talar mest. Metoden kallar själv formerna EPA, Rondellen och Talkort, strukturer ur det kooperativa lärandet, och i helklass samtalar klassen i grupper om tre till fem",
+          "vav": [
+            {
+              "efter": "tabell: Samtalsreglerna: tre regler, en i taget",
+              "delar": [
+                "epa",
+                "rondellen"
+              ]
+            },
+            {
+              "efter": "ram: Strukturen, samtalet: Talkort",
+              "delar": [
+                "talkort"
+              ]
+            }
+          ]
+        },
+        "textsamtal-i-grupp": {
+          "skal": "Rundan i varje pass är en kort Rondell, och tabellen Samtalet i olika former har Läs och fråga, Berätta mera! och Ping-pong med ledtrådar, som är Ping-pong-prat i metodens form, som former som ersätter rundan.",
+          "vav": [
+            {
+              "efter": "tabell: Samtalet i olika former",
+              "form": "ruta",
+              "delar": [
+                "rondellen",
+                "las-och-fraga",
+                "beratta-mera",
+                "ping-pong-prat"
+              ]
+            }
+          ],
+          "inte": {
+            "Berättaren": "berättaren i texterna, ingen struktur"
+          }
+        },
+        "ordverkstad-i-grupp": {
+          "skal": "I skrivpassen skriver paret med Kloka pennan, där meningsbyggaren säger meningen och sekreteraren säger den igen och skriver den, och de byter roller.",
+          "vav": [
+            {
+              "efter": "tabell: Pass 2 och 3: skrivpasset på 60 minuter",
+              "form": "ruta",
+              "delar": [
+                "kloka-pennan"
+              ]
+            }
+          ]
+        },
+        "gruppstarkande-aktiviteter": {
+          "skal": "Aktivitetskorten Fråga, fråga, byt!, Speed-dejting med tärning, Berätta mera och Inre och yttre cirkel har strukturernas steg, där eleverna möts två och två, frågar och svarar och byter kamrat.",
+          "vav": [
+            {
+              "efter": "urval",
+              "form": "ruta",
+              "delar": [
+                "fraga-fraga-byt",
+                "speed-dating",
+                "beratta-mera",
+                "inre-yttre-cirkel"
+              ]
+            }
+          ]
+        },
+        "hoglasning-i-par": {
+          "skal": "Metoden har sidorna Strukturen, extra träning: Berätta mera! och Speed-dating, där eleven läser sitt ställe för en ny lyssnare i taget, och tabellen Tips att plocka ur säger när klassen gör dem.",
+          "vav": [
+            {
+              "efter": "ram: Strukturen, extra träning: Berätta mera!",
+              "delar": [
+                "beratta-mera"
+              ]
+            },
+            {
+              "efter": "ram: Strukturen, extra träning: Speed-dating",
+              "delar": [
+                "speed-dating"
+              ]
+            }
+          ]
+        },
+        "skrivkurs-vardeskapande": {
+          "skal": "I vecka 2 av båda projekten gör gruppen Kommunicera i trior, med en egen sida i varje projekt, där berättaren säger ledtråden eller vägen bakom en pärm och lyssnaren pekar eller följer kartan.",
+          "vav": [
+            {
+              "efter": "ram: Strukturen, Skattjakten vecka 2: Kommunicera",
+              "delar": [
+                "kommunicera"
+              ]
+            },
+            {
+              "efter": "ram: Strukturen, Guideboken vecka 2: Kommunicera",
+              "delar": [
+                "kommunicera"
+              ]
+            }
+          ],
+          "inte": {
+            "Berättaren": "rollen i Kommunicera, ingen egen struktur"
+          }
+        },
+        "texttyp-argumenterande-text": {
+          "skal": "I pass 1 gör gruppen Konstruktiv debatt med strukturens steg, med kursens sida Strukturen, vecka 1.",
+          "vav": [
+            {
+              "efter": "ram: Strukturen, vecka 1: Konstruktiv debatt",
+              "delar": [
+                "konstruktiv-debatt"
+              ]
+            }
+          ]
+        },
+        "texttyp-berattande-text": {
+          "skal": "I pass 1 berättar eleverna två och två, lyssnaren säger ”Berätta mera!”, och var och en hittar en ny kamrat, med kursens sida Strukturen, vecka 1.",
+          "vav": [
+            {
+              "efter": "ram: Strukturen, vecka 1: Berätta mera!",
+              "delar": [
+                "beratta-mera"
+              ]
+            }
+          ]
+        },
+        "texttyp-beskrivande-text": {
+          "skal": "I pass 1 beskriver paren bild A och bild B bakom en pärm tills de har hittat det som skiljer, med kursens sida Strukturen, vecka 1.",
+          "vav": [
+            {
+              "efter": "ram: Strukturen, vecka 1: Lika och olika",
+              "delar": [
+                "lika-och-olika"
+              ]
+            }
+          ],
+          "inte": {
+            "Turas om": "ett steg i Lika och olika, verbet med stor bokstav"
+          }
+        },
+        "texttyp-instruerande-text": {
+          "skal": "Från pass 3 gör paren Kommunicera i delen Säg, där skribenten säger stegen bakom en pärm och läsaren gör bara det hen hör, med kursens sida Strukturen, vecka 2.",
+          "vav": [
+            {
+              "efter": "ram: Strukturen, vecka 2: Kommunicera",
+              "delar": [
+                "kommunicera"
+              ]
+            }
+          ],
+          "inte": {
+            "Turas om": "i spelets regler, verbet med stor bokstav"
+          }
+        },
+        "texttyper-i-grupp": {
+          "skal": "Varje kurs i serien har en struktur som gruppen gör i ett av de första passen, och tabellen De fyra kurserna bredvid varandra nämner Konstruktiv debatt, Berätta mera!, Lika och olika och Kommunicera.",
+          "vav": [
+            {
+              "efter": "tabell: De fyra kurserna bredvid varandra",
+              "form": "ruta",
+              "delar": [
+                "konstruktiv-debatt",
+                "beratta-mera",
+                "lika-och-olika",
+                "kommunicera"
+              ]
+            }
+          ]
+        },
+        "skrivkurs-sagoboken": {
+          "skal": "Berättaren säger en mening, Skrivaren säger den igen och skriver, och de byter roll: samma steg och roller som Kloka pennan, som Ordverkstad i grupp kallar formen.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "kloka-pennan"
+              ]
+            }
+          ],
+          "inte": {
+            "Berättaren": "rollen i paret, som Kloka pennans tänkare"
+          }
+        },
+        "antalsuppfattning-i-grupp": {
+          "skal": "I delen Korten bygger den ena i paret och berättar vad hen gör, den andra kontrollerar, och de byter roller efter varje kort: kärnan i Öva och kontrollera i par.",
+          "vav": [
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "ova-och-kontrollera-i-par"
+              ]
+            }
+          ],
+          "inte": {
+            "Runda": "Runda lappar i kartong, talbrickorna"
+          }
+        },
+        "brakkurs-i-grupp": {
+          "skal": "I delen Korten gör den ena i paret kortet och berättar vad hen gör, den andra kontrollerar med materialet eller tallinjen, och de byter roller efter varje kort: kärnan i Öva och kontrollera i par.",
+          "vav": [
+            {
+              "efter": "arbetsform",
+              "delar": [
+                "ova-och-kontrollera-i-par"
+              ]
+            }
+          ]
+        }
       },
       "nej": {
         "faktatextsamtal-i-grupp": "Paren läser och säger kärnan i varje pass, men i metodens egen form, Ett avsnitt i fyra steg med kortet När det skaver",
-        "hoglasning-i-par": "Visar redan två delade stödmaterial, Utveckla högläsning och Lässtrategier, och parets läsning har en egen rutin",
         "kompissamtal": "Talpinnen och rundan är metodens egen form, och samtalen bygger på gruppens egna konflikter med dig som ledare",
         "kortskrivning-skriv-varje-dag": "Kärnan är att var och en skriver utan att stanna, och paret delar bara en rad i Dela med metodens egen fråga ”Berätta mer om …”",
-        "ordverkstad-i-grupp": "Paren bygger och läser ord med metodens ordkort och de fyra stegen, en egen form för ordens delar",
-        "problemlosning-i-grupp": "Paren löser problemet i varje pass, men i metodens egen form: pennan byter hand halvvägs i Lösa, och Jämföra har bladet Två lösningar",
+        "problemlosning-i-grupp": "Paren löser problemet i metodens egen form, och Kvadraten är namnet på ett problem, inte strukturen Par-pussel",
         "seriesamtal": "Talpinnen går runt bordet och eleverna har rollerna personerna och detektiven kring en egen konflikt, så passet har ingen form för samarbete i par eller grupp som strukturerna",
         "skrivkurs-berattelseram": "Paret berättar med kortet Berätta, och Dela och Galleriet är kursens egna former, också i en klass",
-        "skrivkurs-sagoboken": "Paret arbetar som Berättaren och Skrivaren med rollkorten och frågekorten, kursens egen form",
-        "skrivkurs-vardeskapande": "Eleven säger texten för en kamrat, och en annan läser den som läsaren med Kortet till skribenten, kursens egen form",
-        "textsamtal-i-grupp": "Parsamtalet vid stoppet har egna steg, A säger, B frågar och sedan byter de, så metoden har redan sin form",
-        "texttyp-argumenterande-text": "I delen Säg berättar skribenten för en läsare ur det andra paret med kortet Läsarens frågor, kursens egen form",
-        "texttyp-berattande-text": "I delen Säg berättar skribenten för en läsare ur det andra paret med kortet Läsarens frågor, kursens egen form",
-        "texttyp-beskrivande-text": "I delen Säg berättar skribenten för en läsare ur det andra paret med kortet Läsarens frågor, kursens egen form",
-        "texttyp-instruerande-text": "I delen Säg berättar skribenten för en läsare ur det andra paret med kortet Läsarens frågor, kursens egen form",
-        "texttyper-i-grupp": "Paren pratar om elevens sida och berättar texten för en läsare som frågar, i strategin Tänk, Planera, Säg, Skriv, de fyra kursernas egen form",
-        "upprepad-lasning": "Visar redan två delade stödmaterial, Lässtrategier och Utveckla högläsning, och i par läser eleverna om texten med en kamrat som stöd medan du ger återkoppling",
-        "gruppstarkande-aktiviteter": "Tveksamt: strukturerna hjälper mest i återkopplingen och reflektionen i en klass och mindre i själva aktiviteten, och metodens aktivitetskort har redan sina egna former, så tveksamt blir nej (METODER.md under Sådden)"
+        "upprepad-lasning": "I par läser eleverna om texten med en kamrat som stöd medan du ger återkoppling, metodens egen form och ingen av strukturernas steg",
+        "laslistor-i-grupp": "”Ställ en fråga per mening” är din uppmaning i parläsningen, och eleverna skriver ingen fråga och samlar inga svar som i Ställ en fråga"
       }
     }
   }

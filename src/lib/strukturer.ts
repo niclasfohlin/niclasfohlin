@@ -105,7 +105,7 @@ export function topplistanIBygget(finns: Set<string>): string[] {
 }
 
 /** En struktur som en metod importerar: det metodens sida, saker och kort behöver. */
-export type ImporteradStruktur = { id: string; namn: string; slag: Slag; syfte: string; alt: string };
+export type ImporteradStruktur = { id: string; namn: string; andra: string[]; slag: Slag; syfte: string; alt: string };
 /**
  * Strukturerna som en metod importerar med fältet strukturkort (K-661; Niclas 2026-11-01: "Så någon enkel import funktion
  * för en struktur"), i utskriftens ordning, ur verktygets filer i src/content/strukturer/. Läses direkt ur filerna, så att
@@ -113,13 +113,16 @@ export type ImporteradStruktur = { id: string; namn: string; slag: Slag; syfte: 
  * vantar eller utan bild) stoppar bygget, så att metoden aldrig leder till ett kort som saknas.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function metodensStrukturer(d: Record<string, any>, vem: string): ImporteradStruktur[] {
-  return ((d.strukturkort?.strukturer ?? []) as string[]).map((id) => {
+export const metodensStrukturer = (d: Record<string, any>, vem: string): ImporteradStruktur[] => strukturernaAv((d.strukturkort?.strukturer ?? []) as string[], `${vem}: strukturkort`);
+/** Strukturerna med id:n i ordning, för en metod som visar dem: strukturkort i Metoder och sådden i Stödundervisning
+ *  (src/lib/vav.ts). En struktur som inte finns eller inte visas stoppar bygget. */
+export function strukturernaAv(ids: string[], vem: string): ImporteradStruktur[] {
+  return ids.map((id) => {
     const fil = join(process.cwd(), 'src', 'content', 'strukturer', `${id}.yaml`);
-    if (!existsSync(fil)) throw new Error(`${vem}: strukturkort nämner ${id}, som inte är en struktur i src/content/strukturer/.`);
+    if (!existsSync(fil)) throw new Error(`${vem} nämner ${id}, som inte är en struktur i src/content/strukturer/.`);
     const x = YAML.parse(readFileSync(fil, 'utf8'));
-    if (x.utkast || x.vantar || !x.bild) throw new Error(`${vem}: strukturkort nämner ${x.namn}, som inte visas i verktyget Strukturer${x.vantar ? ` (${x.vantar})` : ''}.`);
-    return { id, namn: x.namn, slag: x.slag, syfte: x.syfte, alt: x.bild.alt };
+    if (x.utkast || x.vantar || !x.bild) throw new Error(`${vem} nämner ${x.namn}, som inte visas i verktyget Strukturer${x.vantar ? ` (${x.vantar})` : ''}.`);
+    return { id, namn: x.namn, andra: x.andra ?? [], slag: x.slag, syfte: x.syfte, alt: x.bild.alt };
   });
 }
 /**

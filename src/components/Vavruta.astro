@@ -1,0 +1,34 @@
+---
+// Det sajten väver in på en plats i metoden (src/lib/vav.ts): kortraden med delarnas små kort och en rad till verktyget,
+// eller rutan med verktygets text, korten och knappen. Bara på skärmen: metodens fil, Word-filen och utskriften är
+// desamma utan den (Niclas 2026-11-01: "De kan vävas in på sajten och behövs inte i själva docx för metoden").
+import Centralknapp from './Centralknapp.astro';
+import type { Vav } from '../lib/vav';
+interface Props { v: Vav; titel: string }
+const { v, titel } = Astro.props;
+const c = v.vav;
+const i = c.vav!.rad.lastIndexOf(c.namn);
+const [fore, efter] = [c.vav!.rad.slice(0, i), c.vav!.rad.slice(i + c.namn.length)];
+// Nämner metoden ingen av delarna, arbetar eleverna i samma form, och etiketten säger det (Skrivkurs: sagoboken och Kloka
+// pennan).
+const etikett = v.namngivna ? c.vav!.etikett : c.vav!.liknar;
+---
+<aside class:list={['vav', `vav-${v.form}`]} aria-label={etikett}>
+  <p class="vav-etikett">{etikett}</p>
+  {v.form === 'ruta' && <p class="vav-text">{c.vav!.text}</p>}
+  {v.delar.length > 0 && (
+    <ul class="st-kort-lista vav-kort">
+      {v.delar.map((x) => (
+        <li>
+          <a class="st-kort" href={x.adress} style={x.stil}>
+            <img src={x.bild} alt="" width="900" height="560" loading="lazy" decoding="async" />
+            <span class="st-kort-text"><span class="st-kort-namn">{x.namn}</span><span class="st-kort-rad">{x.rad}</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+  {!v.knappenFinns && (v.form === 'ruta'
+    ? <p class="m-central-knapp"><Centralknapp c={c} metod={v.metod} titel={titel} /></p>
+    : <p class="vav-rad">{fore}<a href={c.adress}>{c.namn}</a>{efter}</p>)}
+</aside>

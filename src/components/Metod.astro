@@ -66,6 +66,7 @@ import Centralknapp from './Centralknapp.astro';
 import Centralrad from './Centralrad.astro';
 import FriTabell from './FriTabell.astro';
 import { centralaVid, metodensCentrala } from '../lib/centrala';
+import { vavtVid } from '../lib/vav';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import Hemsidaknapp from './Hemsidaknapp.astro';
 import { lektionskortVid, metodensLektionskort } from '../lib/lektionskort';
@@ -152,7 +153,10 @@ const tabellensFil = (t: (typeof d.tabeller)[number]) => (undersida ? undefined 
 // Lektionskorten (src/lib/lektionskort.ts): bredvid Öppna lathunden i menyn och vid lektionen i texten, först på platsen,
 // så att knappen står direkt efter det som beskriver lektionen och före en film på samma plats.
 const lektionskort = metodensLektionskort(d, id);
-const vid = (p: FilmPlats) => [...lektionskortVid(lektionskort, p), ...filmerVid(filmer, p), ...paBordetVid(bilderPaBordet, p)];
+// Det sajten väver in, som strukturernas små kort (src/lib/vav.ts), står sist på platsen och bara på metodens egen sida,
+// också efter en ram som ritas av en egen komponent (strukturens sida, lösningsförslaget, faktatexten).
+const vavt = (p: FilmPlats) => (undersida ? [] : vavtVid(id, d, p));
+const vid = (p: FilmPlats) => [...lektionskortVid(lektionskort, p), ...filmerVid(filmer, p), ...paBordetVid(bilderPaBordet, p), ...vavt(p)];
 const ord = passOrd(d);
 const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'tavla') : undefined;
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
@@ -692,16 +696,16 @@ const meny = [
         <Bokhandledning h={bhl} metod={d.titel} id={`ram-${ri + 1}`} rubrik="h3" />
       ) : lf ? (<>
         <Losningsforslag lf={lf} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={bankFarger[lf.niva] ?? BOKNIVA[lf.nivaNr] ?? '#4b3a2f'} />
-        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...vavt({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : pbild ? (<>
         <Problemsida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={bankFarger[boksidor.get(ram)!.niva] ?? BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} bild={pbild} />
-        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...vavt({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : par && losning.length === 2 ? (<>
         <Textpar p={par} id={`ram-${ri + 1}`} bilder={losning} rubrik={ram.rubrik} not={losningarnasNot(ram)} farg={bankFarger[losningarnasNiva(ram.rubrik)?.niva ?? '']} />
-        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...vavt({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : faktasidor.has(ram) ? (<>
         <Faktatext f={faktasidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={nivaFarg(faktasidor.get(ram)!.niva, faktasidor.get(ram)!.nivaNr)} rubrik={ram.rubrik} bilder={faktabilder(ram)} las={sidlasFor(id, ram.rubrik)} />
-        <Filmruta filmer={[...utanPlats(ram), ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+        <Filmruta filmer={[...utanPlats(ram), ...filmerVid(filmer, { ram: ram.rubrik }), ...vavt({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : boksidor.has(ram) ? (<>
         {/* En lästext utanför banken har sin egen fil, som Högläsning i pars provtexter, och knappen står sist i sidan
             (src/lib/sakfiler.ts). */}
@@ -711,7 +715,7 @@ const meny = [
         const [bild, ...fler] = paBordetVid(bilderPaBordet, { ram: ram.rubrik });
         return (<>
           <Struktur s={strukturer.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} bild={bild}>{(!lage || lage === 'material') && !undersida && saker.ram.get(ri) && <Sakknapp fil={saker.ram.get(ri)!} metod={d.titel} />}</Struktur>
-          <Filmruta filmer={[...fler, ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+          <Filmruta filmer={[...fler, ...filmerVid(filmer, { ram: ram.rubrik }), ...vavt({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
         </>);
       })() : (<>
         <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${problemet ? ' m-problemlarare' : ''}${lage === 'material' ? ' m-veckans' : ''}${par ? ' m-textpar-larare' : ''}${helaKursen ? ' m-hela-kursen' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>

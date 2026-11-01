@@ -24,6 +24,7 @@ import { bankAv, nivaFarger } from '../../lib/bank';
 import { harMaterial, hemsidansNamn } from '../../lib/material';
 import Centralknapp from '../../components/Centralknapp.astro';
 import { metodensCentrala, provaCentrala } from '../../lib/centrala';
+import { provaVav } from '../../lib/vav';
 import { metodensLektionskort } from '../../lib/lektionskort';
 import { planbar, planensAdress } from '../../lib/insatsplan';
 import { PLANERA } from '../../lib/standard/index.js';
@@ -34,6 +35,8 @@ export async function getStaticPaths() {
   provaHuvudfilmer(metoder);
   // Varje central sak visas av metoden den hör till och av minst en metod (src/lib/centrala.ts).
   provaCentrala(metoder);
+  // Det som sajten väver in i metoderna har en plats som metoden har och delar som visas (src/lib/vav.ts).
+  provaVav(metoder);
   const serier = byggSerier(metoder);
   return metoder.map((m) => ({ params: { id: m.id }, props: { m, alla: metoder, koppling: serieKoppling(m.id, m.data, serier) } }));
 }

@@ -205,12 +205,13 @@ export function hanvisningsFel(text: string): string[] {
 }
 
 // Sidans HTML: texten mellan taggarna får länkarna, utom inne i det som redan är en länk eller en knapp, rubrikerna,
-// etiketterna (kolumnernas och fältens namn), upphovsraden (som har sidans egen adress) och det som inte är text (skript,
+// etiketterna (kolumnernas och fältens namn), upphovsraden (som har sidans egen adress), det som sajten väver in
+// (src/lib/vav.ts, med sina egna länkar och knappar) och det som inte är text (skript,
 // stilar, svg, formulärets fält). Astros HTML är välformad, så taggarna räcker för att veta var texten står; ett skript
 // eller en stil hoppas över i sin helhet, eftersom innehållet kan ha tecknet <. Texten läses som den står i HTML: namnen
 // har inga tecken som skrivs om, och "&" i en hänvisning läser standarden också som &amp;.
 const HOPPA = new Set(['a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'th', 'dt', 'caption', 'script', 'style', 'svg', 'title', 'summary', 'label', 'textarea', 'select', 'option', 'noscript', 'code', 'pre', 'template']);
-const HOPPA_KLASS = /\sclass="[^"]*\bupphov\b/;
+const HOPPA_KLASS = /\sclass="[^"]*\b(?:upphov|vav)\b/;
 // Ett stycke i en lista, en cell, ett citat eller en ruta får ingen knapp efter sig: knappen hör till metodens löptext.
 const RUTA = new Set(['li', 'td', 'th', 'dd', 'blockquote', 'aside', 'figure']);
 const TOMMA = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
