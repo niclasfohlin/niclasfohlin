@@ -3,21 +3,24 @@
 // Lärarens roll, som tanken bakom greppen i Formativ bedömning, efter-progression efter veckorna där läraren planerar dem, som
 // samarbetsfärdigheterna (riggens leverans 2026-11-01, K-671), och alla andra sist i bilaga A, som i riggens Word-fil. Samma
 // tabell och form som en fri tabell i stödundervisning (FriTabell.astro). Ankaret är rubrikens, som menyn och länkarna i
-// texten leder till (tabellCeller i Undervisningsmetod.astro, undervisningsmetodensSaker).
+// texten leder till (tabellCeller i Undervisningsmetod.astro, undervisningsmetodensSaker). En cell som är en saks namn, som
+// Färgkortet eller strukturen Kims prov, leder till saken, och andra namn i cellerna är länkar som i texten runt tabellen.
 import MetodTabell from './MetodTabell.astro';
 import { friTabellensPlats, slugAv } from '../lib/standard/index.js';
 import { friTabellensKlass } from '../lib/metod';
 import type { Um } from '../lib/undervisningsmetod';
+import type { MetodSak } from '../lib/metodsaker';
 type Tabell = { plats?: string; rubrik: string; text?: string; kolumner: string[]; rader: string[][]; not?: string };
-interface Props { d: Um; plats: string; k: (t: string) => string }
-const { d, plats, k } = Astro.props;
+interface Props { d: Um; plats: string; k: (t: string) => string; saker: MetodSak[] }
+const { d, plats, k, saker } = Astro.props;
+const cellank = (cell: string) => saker.find((s) => [s.namn, ...(s.former ?? [])].includes(cell.trim()))?.adress;
 const Rubrik = plats === 'bilaga-a' ? 'h3' : 'h4';
 ---
 {((d.tabeller ?? []) as Tabell[]).filter((t) => friTabellensPlats(t, d) === plats).map((t) => (
   <div class="um-fritabell" id={slugAv(t.rubrik)}>
     <Rubrik>{t.rubrik}</Rubrik>
     {t.text && <p set:html={k(t.text)} />}
-    <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} />
+    <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} cellank={cellank} celltext={k} />
     {t.not && <p class="um-not" set:html={k(t.not)} />}
   </div>
 ))}

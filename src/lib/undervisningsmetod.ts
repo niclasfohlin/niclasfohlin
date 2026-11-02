@@ -56,8 +56,8 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   const iMaterialet = (namn: string) => new RegExp(`(^|[^\\p{L}])${skyddaRegex(liten(namn))}(?![\\p{L}])`, 'u').test(materialet);
   const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) || iMaterialet(namn) ? {} : { versal: true }), ...extra });
   const saker: MetodSak[] = o.lektionskort === false ? [] : [sak(UM_NAMN.lektionskort, `${sida}#materialet`)];
-  // En fri tabell med en rad i menyn har en egen plats på sidan, som Frågor att låna i Formativ bedömning.
-  for (const t of (d.tabeller ?? []) as { rubrik: string; meny?: boolean }[]) if (t.meny) saker.push(sak(t.rubrik, `${sida}#${slugAv(t.rubrik)}`));
+  // En fri tabell med en rad i menyn har en egen plats på sidan, som Frågor att låna i Formativ bedömning, och skrivs ut med metoden.
+  for (const t of (d.tabeller ?? []) as { rubrik: string; meny?: boolean }[]) if (t.meny) saker.push(sak(t.rubrik, `${sida}#${slugAv(t.rubrik)}`, { slag: 'avsnitt' }));
   if (d.ramar) {
     saker.push(sak(d.ramar.rubrik ?? UM_NAMN.materialet, `${sida}#materialet-for-klassen`));
     // Ett blad vars rubrik har en etikett före kolon, som "Strukturen, vecka 1: Ping-pong-prat", hittas också med namnet

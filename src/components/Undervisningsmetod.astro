@@ -136,7 +136,7 @@ const moten = arbetslagetsMoten(d);
       {d.roll.fragornaText && <p set:html={k(d.roll.fragornaText)} />}
     </section>
   )}
-  <UmFriaTabeller d={d} plats="efter-inledning" k={k} />
+  <UmFriaTabeller d={d} plats="efter-inledning" k={k} saker={saker} />
   {/* Lektionskortet efter Lärarens roll, där del 1 slutar, och inte mitt i texten (granskare-3 nr 20). */}
   <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} stor />
   {del('metoden').text && <p class="um-overgang" set:html={k(del('metoden').text)} />}
@@ -363,7 +363,7 @@ const moten = arbetslagetsMoten(d);
           ))}
         </article>
       ))}
-      <UmFriaTabeller d={d} plats="efter-progression" k={k} />
+      <UmFriaTabeller d={d} plats="efter-progression" k={k} saker={saker} />
     </section>
   )}
   <section class="um-avsnitt" id="efter-de-forsta-veckorna">
@@ -543,7 +543,7 @@ const moten = arbetslagetsMoten(d);
       <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['observation']} />
     </section>
   )}
-  <UmFriaTabeller d={d} plats="bilaga-a" k={k} />
+  <UmFriaTabeller d={d} plats="bilaga-a" k={k} saker={saker} />
 </section>
 
 <section class="um-del" id="del-valet" aria-labelledby="del-valet-rubrik">

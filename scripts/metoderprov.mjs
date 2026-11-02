@@ -257,8 +257,8 @@ function provaSakerna(s, html, ids) {
   const HOPPA = new Set(['a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'nav', 'dt', 'th', 'caption', 'label', 'summary', 'script', 'style', 'svg', 'title', 'template', 'textarea', 'select', 'option', 'noscript']);
   const TOMMA = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
   // Rutornas rubriker och planeringsbladets etiketter är rubriker och etiketter, som Rutinen: T-kortet och Färdigheten på
-  // T-kortet (K-645).
-  const KLASS = /\bclass="[^"]*\b(upphov|filrubrik|faktaruta-etikett|visually-hidden|tryck-fot|um-ruta-rubrik|um-blad-etikett|film-titel)\b/;
+  // T-kortet (K-645). Raden under en del av kärnan nämner lektionens delar, och Exit-lappen där är delen och inte bladet.
+  const KLASS = /\bclass="[^"]*\b(upphov|filrubrik|faktaruta-etikett|visually-hidden|tryck-fot|um-ruta-rubrik|um-blad-etikett|um-kort-moment|film-titel)\b/;
   const tecken = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
   const avkoda = (t) => t.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (h, k) => (k[0] === '#' ? String.fromCodePoint(k[1] === 'x' || k[1] === 'X' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : tecken[k.toLowerCase()] ?? h));
   const kropp = html.slice(html.indexOf('<article'), html.lastIndexOf('</article>'));

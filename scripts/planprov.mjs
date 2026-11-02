@@ -630,6 +630,7 @@ if (tsMp) {
   const sakDelar = s.sakdelar('Du läser lyssningsbladen och samtalskortets rader, och skriver startmeningen. Kvart i åtta står först. Ta Kvart i åtta.', saker);
   ska('namnen i en text', sakDelar.filter((x) => x.sak !== undefined).map((x) => x.text).join('|') === 'lyssningsbladen|samtalskortets|startmeningen|Kvart i åtta', sakDelar);
   ska('ett namn som ingen sak har', s.olankadeSaker('Lägg fram elevbladet, lyssningsbladet och korten.', saker).join() === 'elevbladet', s.olankadeSaker('Lägg fram elevbladet, lyssningsbladet och korten.', saker));
+  ska('ett namn med en sak är inte okänt när ordet före gör det till något annat, men ett utan sak är det', !s.olankadeSaker('Raden Helklassbladet i Utveckla metoden säger hur.', [{ namn: 'Helklassbladet' }]).length && s.olankadeSaker('Raden Lyssningsbladet säger hur.', [{ namn: 'Helklassbladet' }]).join() === 'Lyssningsbladet', s.olankadeSaker('Raden Helklassbladet i Utveckla metoden säger hur.', [{ namn: 'Helklassbladet' }]).join());
   // Riggens omgång 1 (2026-10-26): klasslistan är lärarens egen lista och ingen sak i metoden, men elevlistan är fortfarande ett namn som ingen sak har.
   // Länkgranskningen av omgång 1 (2026-10-26): affischen, lappen hem, röstsedlar, läsplanen och lärarens sida med liten
   // bokstav är namn på saker, men inte ett pronomen i genitiv.

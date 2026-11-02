@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.53.1, 2026-11-02
+
+- `saker.js` (Formativ bedömning): `olankadeSaker` kallar inte ett namn okänt när metoden har en sak med det namnet, också när ordet före gör att namnet inte blir en länk, som "Raden Helklassbladet i Utveckla metoden".
+
 ## 0.53.0, 2026-11-01
 
 - `undervisningsmetod.js` (granskningen av 0.52.0): `slagensOrd`, slagets ord för sidan, planeringsbladet, lathunden, metodkortet och mejlet, så att slaget strategier säger Lagret, Eleverna, Så avgör du, Vägarna och Din lektion överallt. `hanvisadeMetodersFel`, ett id som inte finns eller som är en metod i båda samlingarna. `friTabellensPlats`, där allt annat än `efter-inledning` och `efter-progression` står sist i bilaga A, som i riggens Word-fil.

@@ -193,7 +193,10 @@ export function olankadeSaker(text, saker) {
   const fritt = sakdelar(text ?? '', saker ?? []).filter((d) => d.sak === undefined).map((d) => d.text).join('\n');
   // Utan lookbehind, som Safari före 16.4 inte kan: tecknet före ordet fångas.
   const ord = [...fritt.matchAll(new RegExp(`(^|[^\\p{L}])(\\p{L}{3,}(?:${BESTAMDA.join('|')}))(?![\\p{L}])`, 'giu'))].map((m) => m[2]);
-  return [...new Set(ord)].filter((o) => !EGNA_FORMER.has(o.toLocaleLowerCase('sv')));
+  // Ett namn som inte blev en länk för att ordet före säger att det gäller något annat, som "Raden Helklassbladet i Utveckla
+  // metoden", har ändå en sak med det namnet.
+  const kanda = new Set((saker ?? []).flatMap((s) => s.former ?? sakensFormer(s.namn)).map((f) => f.toLocaleLowerCase('sv')));
+  return [...new Set(ord)].filter((o) => !EGNA_FORMER.has(o.toLocaleLowerCase('sv')) && !kanda.has(o.toLocaleLowerCase('sv')));
 }
 
 /**
