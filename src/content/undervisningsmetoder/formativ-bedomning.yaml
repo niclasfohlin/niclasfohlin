@@ -192,7 +192,7 @@ steg:
       gor:
         - "Säg gärna: ”Snart kommer en fråga.”"
         - "Från vecka 2, efter en instruktion: ”Säg till din kompis vad ni ska göra och i vilken ordning.”"
-        - "Från vecka 4 stannar du också för ett parsamtal där du har planerat: ”Stopp. Vilket steg måste jag göra först, och varför?”"
+        - "Från vecka 4 stannar du också för ett parsamtal där du har planerat: ”Stopp. Vilket steg gör jag först, och varför?”"
         - Gå runt och lyssna i högst en minut.
         - "”Jag hörde att flera av er tänkte att …”"
       fraser: ["Snart kommer en fråga."]
@@ -276,12 +276,6 @@ amnesexempel:
     arskurs: åk 5
     innehall: "Bråk: att förkorta genom att dividera täljare och nämnare med samma tal"
     huvud: true
-    arbetsomradet:
-      - "Bråk som del av en helhet, med bilder"
-      - "Likvärdiga bråk"
-      - "Att förlänga"
-      - "Att förkorta"
-      - "Att jämföra bråk"
     overst:
       egen: "Dividera täljare och nämnare med samma tal. Felet: att bara dividera täljaren, så att 4/6 blir 2/6."
       visar: Två bråk på miniwhiteboarden, och alla håller upp svaren samtidigt.
@@ -355,8 +349,8 @@ progression:
   text: "Metoden är troligen lika ny för dig som för eleverna. Gör varje grepp flera gånger tills det blir en rutin, och lägg till ett i taget. Du behöver ingen ny planering. De tre första veckorna lägger du små saker ovanpå den du har. Du börjar med tre rader på den: frågan, felet och vad du gör om många har fel. Vecka 2 kommer först Säg instruktionen och sedan frågan på lappen, och vecka 3 den nya frågan. De första veckorna ser du fler fel än du är van vid. Felen fanns där förut, och nu går det att göra något åt dem. Alla fyra delarna av kärnan finns från första lektionen. Ordningen och takten är förslag: gör om en vecka tills greppet sitter, och ta ett annat grepp först om det passar dig bättre, så länge de fyra delarna finns."
   rader:
     - { vecka: "1", led: Små saker, rubrik: Tummen och ett påstående, eleverna: "Att tänka tyst, visa på signalen och säga varför till axelkompisen.", roll: "Att skriva ett vanligt fel som en mening, ibland något sant, välja väg före frågan, räkna felen och säga vad du såg.", vidare: "nästan alla visar på signalen, och nästa steg följer det du såg", fraga: "Visar nästan alla på signalen, och följer nästa steg det du såg?" }
-    - { vecka: "2", led: Små saker, rubrik: Instruktionen och exit-lappen, eleverna: "Att säga till kompisen vad de ska göra, och att svara med ett skäl.", roll: "Att lyssna på paren, lägga lapparna i tre högar och börja nästa lektion med det du såg.", vidare: "nästa lektion börjar med det du såg på lapparna", fraga: "Började nästa lektion med det du såg på lapparna?" }
-    - { vecka: "3", led: Små saker, rubrik: Miniwhiteboarden och en ny fråga, eleverna: "Att skriva stort, hålla svaret nere och skriva ett frågetecken när de inte vet.", roll: "Att läsa stegen, sätta felet bredvid det rätta och ställa en ny fråga, som du skriver på din planering.", vidare: "du ser felet, ställer en ny fråga och säger hur många som har fel före och efter", fraga: "Såg du vilket fel det var, och sa du hur många som hade fel före och efter den nya frågan?" }
+    - { vecka: "2", led: Små saker, rubrik: Instruktionen och exit-lappen, eleverna: "Att säga till kompisen vad de ska göra, och att svara med ett skäl.", roll: "Att lyssna på paren, lägga lapparna i högarna Rätt, Felet och Något annat, och börja nästa lektion med det du såg.", vidare: "nästa lektion börjar med det du såg på lapparna", fraga: "Började nästa lektion med det du såg på lapparna?" }
+    - { vecka: "3", led: Små saker, rubrik: Miniwhiteboarden och en ny fråga, eleverna: "Att skriva stort, hålla svaret nere och skriva ett frågetecken när de inte vet.", roll: "Att läsa stegen, sätta felet bredvid det rätta och ställa en ny fråga, som du skriver på din planering.", vidare: "du ser felet, ställer en ny fråga och säger antalet före och efter", fraga: "Såg du vilket fel det var, och sa du hur många som hade fel före och efter den nya frågan?" }
     - { vecka: "4", led: Lite mer, rubrik: Frågan ur felet och Jag hörde, eleverna: "Att visa svaret med fingrarna och på en minut säga varför till axelkompisen med ämnets ord.", roll: "Att ställa minst en fråga i veckan ur ett väntat fel, ta samma slags fråga i Starten veckan efter och väva in det du hör.", vidare: "du ställer en fråga ur ett väntat fel och väver in det du hör", fraga: "Ställde du en fråga ur ett väntat fel, och vävde du in det du hörde?" }
     - { vecka: "5", led: Lite mer, rubrik: Eleven bedömer sitt eget, eleverna: "Att vända färgkortet efter vad de kan visa, ringa in var det syns och rätta sitt eget i annan färg.", roll: "Att gå till dem du skrev upp, sedan till rött, fråga ”Hur vet du?” vid grönt och räkna hur många med grönt som har fel.", vidare: "eleverna vänder kortet själva, och grönt stämmer oftare på den nya frågan", fraga: "Vänder eleverna kortet själva, och stämmer grönt oftare på den nya frågan?" }
 uppfoljning:
@@ -376,11 +370,11 @@ uppfoljning:
 checklista:
   rubrik: Före första lektionen
   punkter:
-    - Läs lathundens sida 1 och 2 och lektionskortet, och se huvudfilmen. Metoden, Lagret och Kom igång läser du vecka 1.
+    - Läs lathundens sida 1–⁠2 och lektionskortet, och se huvudfilmen. Under vecka 1 läser du Metoden, Lagret och Kom igång.
     - Välj den klass och det ämne där du redan vet vilka fel eleverna gör.
     - Välj vad du gör mindre av, till exempel en övning, så att du hinner stanna.
-    - Skriv ett vanligt fel som en mening till varje lektion vecka 1. Frågor att låna står efter veckorna i metoden.
-    - "Skriv ut på metodens sida: gärna affischen vecka 1, lappar vecka 2, färgkort vecka 5. Vecka 3: miniwhiteboards."
+    - Skriv ett vanligt fel som en mening till varje lektion vecka 1. Ta gärna ett ur Frågor att låna i Kom igång.
+    - "Skriv gärna ut: vecka 1 affischen Så visar vi, vecka 2 exit-lappar, vecka 5 färgkort. Vecka 3: miniwhiteboards."
     - Boka besöken i vecka 2 och 4, ett av dem med specialläraren.
     - "Bestäm signalen med arbetslaget. Börjar du ensam är signalen ”1, 2, 3, visa!”"
     - Läs under Första lektionen vad du säger till klassen.
@@ -415,7 +409,7 @@ rutiner:
   rader:
     - namn: Tänk och visa
       vecka: 1
-      vad: "Tanken är att du ser hela klassen på en gång och varje elev tar ställning innan någon annan har svarat. Det kallas multisvar. Tumme upp betyder att eleven håller med, stopphand att hen inte håller med och vickande hand att hen är osäker. Från vecka 4 visar eleverna svarets nummer med fingrarna och handen mot bröstet. I idrott, bild, musik och slöjd kan de visa med kroppen, i ett hörn eller i sitt arbete."
+      vad: "Tanken är att du ser hela klassen på en gång och varje elev tar ställning innan någon annan har svarat. Det kallas multisvar. Tumme upp betyder att eleven håller med, stopphand att hen inte håller med och vickande hand att hen är osäker. Från vecka 4 visar eleverna svarets nummer med fingrarna och handen mot bröstet. I idrott, bild, musik och slöjd kan de visa med kroppen, i ett hörn eller i sitt arbete. Stegen står på affischen Så visar vi."
       steg: ["Lyssna på påståendet, och tänk tyst med händerna på bänken.", "”1, 2, 3, visa!” Visa mot läraren, och håll handen stilla.", "Ser läraren olika svar, säg till din kompis varför. Har ni olika svar, övertyga varandra. Har ni samma, hur tänkte den som valde något annat?", "”1, 2, 3, visa!” igen. Lyssna på vad som stämmer, och tänk: vad ändrar jag?"]
       forsta: "Öva på något lätt där inget står på spel, och gör om tills signalen och visningen går på 15 sekunder. Visa sedan parsamtalet med en elev: ”Jag tror … eftersom …” Båda säger något, en i taget. Ta ibland ett sant påstående om samma sak, eftersom svaret annars går att gissa."
     - namn: Säg instruktionen
@@ -425,7 +419,7 @@ rutiner:
       forsta: "Visa rutinen med en elev, och säg ett steg fel med flit, så att klassen ser att kompisen får rätta. Säg vem som börjar, och byt nästa gång. Gå runt och lyssna. Saknar flera samma steg, säg det en gång till, och skriv stegen på tavlan."
     - namn: Exit-lappen
       vecka: 2
-      vad: "Tanken är att du vet före nästa lektion var klassen står, och att eleven hämtar det viktigaste ur minnet, säger det och gör svaret bättre. En eller två gånger i veckan räcker. Ta lappen de dagar du hinner läsa svaren och ändra nästa lektion. Möter du klassen en gång i veckan, läs lapparna samma dag och skriv direkt hur nästa lektion börjar. Ibland ställer du i stället tre andra frågor: Vad tycker du var det viktigaste du lärde dig? Vad var svårast eller mest förvirrande? Vad har du för frågor kvar? Då ser du hur lektionen kändes, men mindre av vad eleverna kan."
+      vad: "Tanken är att du vet före nästa lektion var klassen står, och att eleven hämtar det viktigaste ur minnet, säger det och gör svaret bättre. Ta exit-lappen när Säg instruktionen sitter, de dagar du hinner läsa svaren och ändra nästa lektion. En eller två gånger i veckan räcker. Möter du klassen en gång i veckan, läs lapparna samma dag och skriv direkt hur nästa lektion börjar. Ibland ställer du i stället tre andra frågor: Vad tycker du var det viktigaste du lärde dig? Vad var svårast eller mest förvirrande? Vad har du för frågor kvar? Då ser du hur lektionen kändes, men mindre av vad eleverna kan."
       steg: ["Stäng boken. Läs frågan på tavlan.", "Skriv ett svar och ett skäl på två minuter. Inget betyg.", "Säg det till din kompis. Ändra i annan färg om du vill.", "Skriv ditt namn, och lämna lappen när tiden är slut. En elev per bord samlar in."]
       forsta: "Tänk högt om en påhittad lapp på tavlan: vilken hög hör den till? Spara ett felsvar, utan namn, till Starten. Nästa lektion börjar du med: ”Ni skrev, så jag ändrade.” Då förstår klassen vad lappen är till för. Den första Starten är ett nytt påstående med tummen."
     - namn: Miniwhiteboarden
@@ -483,7 +477,7 @@ hinder:
 fallgropar:
   rubrik: Vanliga fallgropar
   rader:
-    - { fallgrop: "Frågan säger inget", hander: "Du frågar ”Vad tänker ni om det här?” eller ”Förstår alla?” Svaren säger inget, eller så går det att få rätt med felet kvar.", prova: "Fråga om det man måste förstå, som ”Vilket steg måste jag göra först, och varför?” Utgå från felet, och ibland från det svåra.", komponent: En fråga som säger något }
+    - { fallgrop: "Frågan säger inget", hander: "Du frågar ”Vad tänker ni om det här?” eller ”Förstår alla?” Svaren säger inget, eller så går det att få rätt med felet kvar.", prova: "Fråga om det man måste förstå, som ”Vilket steg gör jag först, och varför?” Utgå från felet, och ibland från det svåra.", komponent: En fråga som säger något }
     - { fallgrop: "Handen går upp igen", hander: "En pressad vecka frågar du klassen, och de tre snabbaste svarar.", prova: "Börja om med tummen en vecka, och säg varför.", komponent: Alla visar samtidigt }
     - { fallgrop: "Alla visar, och planen rullar vidare", hander: "Du säger ”bra”, och lektionen går som du tänkte.", prova: "Säg efter varje visning, också när ni går vidare: ”Jag såg … Därför …”", komponent: Beslutet }
     - { fallgrop: "Lapparna blir liggande", hander: "Högen ligger kvar till nästa vecka, och nästa lektion blir som planerat.", prova: "Ta färre lappar: en fråga, tre högar samma dag och en mening. Du rättar dem inte.", komponent: Beslutet }
@@ -572,7 +566,7 @@ tabeller:
   - rubrik: Utveckla metoden
     plats: efter-progression
     meny: true
-    text: "Inget av det här behövs för att börja. Formativ bedömning brukar beskrivas med fem strategier, och de finns redan i liten form i lagret: mål och kriterier, frågor som visar var eleverna står, återkoppling, eleverna som resurser för varandra och eleverna som resurser för sig själva. Efter de fem första veckorna har en vanlig vecka en fråga i varje lektion och en fråga ur felet. Lappen och Starten tar du en eller två gånger, Säg instruktionen före arbetet, färgkortet när eleverna arbetar och Rätta själv när klassen har lämnat ett arbete. När den veckan sitter kan du bygga på, en sak i taget. Till fyra av raderna finns kort, som du skriver ut från metodens sida."
+    text: "Inget av det här behövs för att börja. Formativ bedömning brukar beskrivas med fem strategier, och de finns redan i liten form i lagret: mål och kriterier, frågor som visar var eleverna står, återkoppling, eleverna som resurser för varandra och eleverna som resurser för sig själva. Efter de fem första veckorna har en vanlig vecka en fråga i varje lektion och en fråga ur felet. Lappen och Starten tar du en eller två gånger, Säg instruktionen före arbetet, färgkortet när eleverna arbetar och Rätta själv när klassen har lämnat ett arbete. När den veckan sitter kan du bygga på, en sak i taget. Till fyra av raderna finns strukturkort, som du skriver ut från metodens sida."
     kolumner: [Det du bygger på, Så gör du, Tanken]
     rader:
       - ["Två exempel före arbetet", "När eleverna inte vet vad som är bra: visa två lösningar eller texter. ”Vilken skulle du visa en kompis, och varför?” Klassen skriver två saker att titta efter.", "Eleven ser vad som är bra innan hen börjar, och du slipper förklara det efteråt."]
@@ -584,8 +578,8 @@ tabeller:
       - ["Helklassbladet", "När klassen har lämnat in ett arbete: läs det med bladet bredvid, skriv inget i böckerna, och visa ett starkt exempel och ett vanligt fel.", "Du skriver färre kommentarer, och alla rättar sitt eget."]
       - ["Eleven skriver frågan", "När klassen är van vid frågor ur felet: ”Skriv en egen fråga med två felsvar.”", "Du ser vad eleven tror att felen är, och eleven tänker igenom innehållet."]
       - ["EPA", "Vid ett samtal tänker var och en först, sedan pratar de i par och till sist hela klassen.", "Alla får tänka först, och du hör vad paren säger."]
-      - ["Lyssna och skriv", "Vid en lång genomgång, en film eller en text skriver eleverna efter varje del och jämför sedan vad de skrev i par.", "Du ser vad som gick fram, och eleven hämtar det ur minnet."]
-      - ["Vad undrar jag?", "När du vill se kopplingar och luckor skriver eleverna egna frågor, och du läser dem efteråt.", "Du ser luckorna, och eleven säger vad hen inte förstår."]
+      - ["Lyssna och skriv", "När du har en text, en film eller en längre genomgång skriver eleverna nyckelord efter varje del och jämför dem i grupper om tre till fyra. Gå runt och läs orden.", "Du ser vad som gick fram, och eleven hämtar det ur minnet."]
+      - ["Vad undrar jag?", "När du vill se kopplingar och luckor skriver eleverna på var sin lapp vad de undrar över. I grupper drar de en lapp i taget och pratar om frågan. Sedan sorterar du frågorna inför nästa genomgång.", "Du ser luckorna, och eleven säger vad hen inte förstår."]
       - ["Fråga, pausa, nedslag och studs", "När klassen är trygg: ingen räcker upp handen, och du väntar. Du väljer en elev, som svarar eller säger pass, och nästa elev bygger vidare.", "Samtalet går djupare, och alla är beredda på att svara."]
 planeringsmall:
   text: "Planeringsmallen är ingen ny planering: skriv det här på den du har, eller på bladet när du vill. Det räcker med frågan, felet och vad du gör om många har fel. Tänk igenom vad du letar efter och vad du gör vid varje utfall innan du står framför eleverna."
@@ -695,7 +689,7 @@ lasMer:
 # ---------------------------------------------------------------------------------------------------------------------
 plan:
   passen:
-    - { nar: första lektionen, kort: Rutinerna, text: "Du håller din egen lektion och lägger till ett påstående." }
+    - { nar: första lektionen, kort: Tänk och visa, text: "Du håller din egen lektion och lägger till ett påstående." }
   fore: ["Välj den klass och det ämne där du redan vet vilka fel eleverna gör."]
   utvardering: ["Ni ses fyra gånger efter de första veckorna, med frågorna från mötet i vecka 5, och var och en skriver vad hen prövar. Elever som har samma fel kvar får stödundervisning, med lapparna som underlag."]
   skattningar:
