@@ -6,7 +6,7 @@
 import Planeringsblad from './Planeringsblad.astro';
 import type { LathundDel } from '../lib/standard/index.js';
 import type { MetodSak } from '../lib/metodsaker';
-import { exempletsAmne, type Um } from '../lib/undervisningsmetod';
+import { planensAmne, type Um } from '../lib/undervisningsmetod';
 import { UM_MINUTERNAS_KOLUMNER } from '../lib/lathundsidor';
 interface Props { del: LathundDel; d: Um; t: (text: string) => string; saker: MetodSak[] }
 const { del: x, d, t, saker } = Astro.props;
@@ -63,7 +63,7 @@ const { del: x, d, t, saker } = Astro.props;
 {x.slag === 'planering' && (
   <>
     {x.text && <p class="lh-svag">{x.text}</p>}
-    <Planeringsblad d={d} plan={x.plan} amne={x.exempel ? exempletsAmne(x.exempel) : undefined} gra={x.gra} variant={x.variant} saker={saker} />
+    <Planeringsblad d={d} plan={x.plan} amne={planensAmne(x.plan, x.exempel)} gra={x.gra} variant={x.variant} saker={saker} />
   </>
 )}
 {x.slag === 'tabell' && (

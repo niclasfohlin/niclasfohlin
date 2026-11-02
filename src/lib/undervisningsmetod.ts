@@ -131,6 +131,9 @@ const AMNEN: Record<string, string> = { lasning: 'läsning', skrivning: 'skrivni
 export const AMNESNAMN: Record<string, string> = { lasning: 'Läsning', skrivning: 'Skrivning', matematik: 'Matematik', 'so-no': 'SO och NO', 'praktisk-estetiska': 'Praktisk-estetiska ämnen' };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const exempletsAmne = (e: Record<string, any>): string => e.amnesnamn ?? AMNESNAMN[e.amne] ?? e.amne;
+/** Ämnet på ett ifyllt blad: planens eget, som första lektionen i Formativ bedömning, som är samhällskunskap där huvudexemplet är matematik, annars exemplets. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const planensAmne = (plan: Record<string, any> | undefined, e?: Record<string, any>): string | undefined => (plan?.amne ? AMNESNAMN[plan.amne] ?? plan.amne : e ? exempletsAmne(e) : undefined);
 
 /** Delarna med metodens rad och övergångsmening. */
 export function metodensDelar(d: Um) {
@@ -238,7 +241,8 @@ export const bladetsRad = (t?: string) => t?.replace(/ · /g, ' · ');
 export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: string) {
   const mall = d.planeringsmall ?? {};
   const varianten = variant ? (d.tidsschema?.varianter ?? []).find((v: { nar: string }) => v.nar === variant) : undefined;
-  const delensTid = (fas: string): string | undefined => varianten?.delar?.find((x: { fas: string }) => x.fas === fas)?.tid ?? tidsschematsRad(d, fas)?.tid;
+  // En del som varianten inte har får ingen tid: första lektionen i Formativ bedömning har ingen Start och ingen Exit-lapp.
+  const delensTid = (fas: string): string | undefined => (varianten?.delar ? varianten.delar.find((x: { fas: string }) => x.fas === fas)?.tid : tidsschematsRad(d, fas)?.tid);
   // Beslutet står efter den del där läraren ser om klassen är redo, stegets redo: Kontrollera i explicit undervisning och
   // Var och en visar i kooperativt lärande.
   const kontrollen = (d.steg?.rader ?? []).find((s: { redo?: unknown }) => s.redo);

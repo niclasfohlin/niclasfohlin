@@ -20,7 +20,7 @@ import { kortetUrFil } from '../../lib/metodprofil';
 import { metodensFiler, metodensBilder } from '../../lib/undervisningsmetodfiler';
 import { huvudfilm as huvudfilmen, metodensFilmer } from '../../lib/film';
 import { UPPHOV, SAJT } from '../../lib/metod';
-import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, vagenTillMandag } from '../../lib/standard/index.js';
+import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, lagretsVagTillMandag, vagenTillMandag } from '../../lib/standard/index.js';
 import { medKallor, medSaker, undervisningsmetodensSaker, type Um } from '../../lib/undervisningsmetod';
 import { harLarDig as metodenHarLarDig } from '../../lib/lardig';
 import { metodensStrukturer } from '../../lib/strukturer';
@@ -63,11 +63,15 @@ const s = (t: string) => medSaker(t, saker, kallor, sidor);
 // planeringsmallen och lathunden är metodens saker. Lathunden har samma väg till måndag på fyra sidor (granskare-3 nr 4).
 // Kommer den första hela lektionen efter vecka 1, som i strukturerna, säger rutan vecka 1 med metodens egen mening, leder till
 // minuterna för den korta formen och säger när planeringsmallen fylls i för den hela lektionen, ur samma rot som lathundens
-// sida 2 (vagenTillMandag i standarden; granskningen inför lanseringen, G1). Ett lektionsförlopp har rutan som förut. Metodens
-// fält skyddas där de sätts in som text (Codex 2026-10-31).
+// sida 2 (vagenTillMandag i standarden; granskningen inför lanseringen, G1). Ett lektionsförlopp har rutan som förut. I slaget
+// strategier säger rutan metodens egna första steg (lagretsVagTillMandag). Metodens fält skyddas där de sätts in som text
+// (Codex 2026-10-31).
 const vagen = vagenTillMandag(d);
+const lagret = lagretsVagTillMandag(d);
 const lathundsrad = d.lathund ? ` ${s('Allt du behöver till måndag står också på fyra sidor i lathunden Att komma igång.')}` : '';
-const lasvagen = vagen
+const lasvagen = lagret
+  ? s(lagret)
+  : vagen
   ? `Läs <a href="#${lv.delar[0].ankare}">del 1–3</a> och <a href="#${lv.delar[3].ankare}">Det svåraste</a> i del 4, omkring ${lastid} minuter. ${s(vagen.vecka1)}${vagen.kort ? ` Minuterna för <a href="#${esc(vagen.kort.ankare)}">${esc(vagen.kort.nar)}</a> står i del 2.` : ''} Fyll i ${s('planeringsmallen')} för <a href="#forsta-lektionen">${esc(liten(vagen.hel.namn))}</a>, ${esc(vagen.hel.nar)}. Resten slår du upp när du behöver det.${lathundsrad}`
   : `Läs <a href="#${lv.delar[0].ankare}">del 1–3</a> och <a href="#${lv.delar[3].ankare}">Det svåraste</a> i del 4, omkring ${lastid} minuter, och fyll i ${s('planeringsmallen')} för <a href="#forsta-lektionen">${forstaLektionensForm(d).din}</a>. Resten slår du upp när du behöver det.${lathundsrad}`;
 ---

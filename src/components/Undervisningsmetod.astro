@@ -8,13 +8,12 @@
 import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
-import { friTabellensPlats, planerasNamn, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
-import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
+import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
+import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
 import Umfilknappar from './Umfilknappar.astro';
-import MetodTabell from './MetodTabell.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
 interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[]; strukturer?: ImporteradStruktur[] }
@@ -293,7 +292,7 @@ const moten = arbetslagetsMoten(d);
         </>
       )}
       {/* Bladets överkant med mallens egna ord, så att raden säger vad just den här metoden börjar med. */}
-      <p><Fragment set:html={k(`${slagetsOrd.planeraRad}${d.planeringsmall?.overst?.[0] ? ` Börja överst: ${liten(d.planeringsmall.overst[0])}.` : ''}`)} /> Den tomma mallen står i <a href="#planeringsmallen">bilaga A</a>, förlagan till {forstaL.din} står under <a href="#forsta-lektionen">{FORSTA}</a>, och lektion {String(huvud.plan.lektion ?? '').split(' ')[0]} i huvudexemplet står ifylld <a href="#huvudexemplets-plan">vid exemplet</a> i del 2.</p>
+      <p><Fragment set:html={k(`${planerasRad(d)}${d.planeringsmall?.overst?.[0] ? ` Börja överst: ${liten(d.planeringsmall.overst[0])}.` : ''}`)} /> Den tomma mallen står i <a href="#planeringsmallen">bilaga A</a>, förlagan till {forstaL.din} står under <a href="#forsta-lektionen">{FORSTA}</a>, och lektion {String(huvud.plan.lektion ?? '').split(' ')[0]} i huvudexemplet står ifylld <a href="#huvudexemplets-plan">vid exemplet</a> i del 2.</p>
     </section>
   )}
   {d.forsta && (
@@ -319,7 +318,7 @@ const moten = arbetslagetsMoten(d);
       {d.forsta.plan && (
         <>
           <p class="um-ruta-rubrik" set:html={k(`${forstaL.namn} ifylld i planeringsmallen, som exempel`)} />
-          <Planeringsblad d={d} plan={d.forsta.plan} amne={huvud ? exempletsAmne(huvud) : undefined} variant="första lektionen" saker={saker} />
+          <Planeringsblad d={d} plan={d.forsta.plan} amne={planensAmne(d.forsta.plan, huvud)} variant="första lektionen" saker={saker} />
         </>
       )}
     </section>
@@ -519,7 +518,7 @@ const moten = arbetslagetsMoten(d);
             </details>
           )}
           </div>
-          {bilder.materialet?.[i] && <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${id}-materialet.pdf`} data-goatcounter-title={`Bilden av materialet, pdf, ${id}`} class={`um-sida${bilder.materialet[i].bredd > bilder.materialet[i].hojd ? ' um-sida-liggande' : ''}`}><img src={bilder.materialet[i].src} alt={r.rubrik} loading="lazy" decoding="async" width={bilder.materialet[i].bredd} height={bilder.materialet[i].hojd} /></a>}
+          {bilder.materialet?.[i] && <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${bladen[i]?.pdf ? String(bladen[i].pdf).replace(/^.*\//, '').replace(/\?.*$/, '') : `${id}-materialet.pdf`}`} data-goatcounter-title={`Bilden av ${r.rubrik}, pdf, ${id}`} class={`um-sida${bilder.materialet[i].bredd > bilder.materialet[i].hojd ? ' um-sida-liggande' : ''}`}><img src={bilder.materialet[i].src} alt={r.rubrik} loading="lazy" decoding="async" width={bilder.materialet[i].bredd} height={bilder.materialet[i].hojd} /></a>}
           {bladen[i]?.pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: r.rubrik, pdf: bladen[i].pdf! }} />}
         </div>
       ))}
@@ -530,7 +529,7 @@ const moten = arbetslagetsMoten(d);
     <section class="um-avsnitt" id="planeringsmallen">
       <h3>{UM_NAMN.planeringsmall}</h3>
       <p set:html={k(d.planeringsmall.text)} />
-      {bilder.planeringsmall?.length > 0 && <div class="um-sidor">{bilder.planeringsmall.map((b, i) => <a href={filer.planeringsmall?.pdf} data-goatcounter-click={`fil:${id}-planeringsmall.pdf`} data-goatcounter-title={`Bilden av planeringsmall, pdf, ${id}`} class="um-sida"><img src={b.src} alt={`Planeringsmallen, sidan ${i + 1}: Före lektionen med rutorna ${(d.planeringsmall.fore ?? []).map((x: { etikett: string }) => x.etikett).join(' och ')}, lektionens delar med beslutet, och Efter lektionen`} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>)}</div>}
+      {bilder.planeringsmall?.length > 0 && <div class="um-sidor">{bilder.planeringsmall.map((b, i) => <a href={filer.planeringsmall?.pdf} data-goatcounter-click={`fil:${id}-planeringsmall.pdf`} data-goatcounter-title={`Bilden av planeringsmall, pdf, ${id}`} class="um-sida"><img src={b.src} alt={`Planeringsmallen, sidan ${i + 1}: Före lektionen med rutorna ${(d.planeringsmall.fore ?? []).map((x: { etikett: string }) => x.etikett).join(' och ')}, ${liten(slagetsOrd.delarna)} med ${liten(slagetsOrd.bladetsBeslut)}, och Efter lektionen`} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>)}</div>}
       <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['planeringsmall']} />
     </section>
   )}

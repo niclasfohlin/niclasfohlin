@@ -30,7 +30,7 @@ import TECKENBREDD from '../data/teckenbredd.json';
 import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passOrd, passTextKort } from './metod';
 import type { MetodData } from './metod';
 import { lathundensSidor, utanRadbrytning, UTFALLEN, type LathundDel, type LathundFakta, type LathundSida } from './standard/index.js';
-import { bladetsOrd, bladetsLista, bladetsRad, exempletsAmne, metodensAdress, planeringsbladet, utfalletsGrans, type Um } from './undervisningsmetod';
+import { bladetsOrd, bladetsLista, bladetsRad, planensAmne, metodensAdress, planeringsbladet, utfalletsGrans, type Um } from './undervisningsmetod';
 
 export const PPTX_TYP = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
 
@@ -1105,7 +1105,7 @@ function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: nu
   const plan = del.plan;
   const { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, del.variant);
   const O = bladetsOrd(d);
-  const amne = del.exempel ? exempletsAmne(del.exempel) : undefined;
+  const amne = planensAmne(plan, del.exempel);
   const VARDE = del.gra ? BLAD.gra : INK;
   const ETIKETT = 9.5 * z, TEXT = 10.5 * z, ZON = 10.5 * z;
   // Ett fält: etiketten i grått och det läraren skrev i fet stil under, eh under fältets överkant.

@@ -423,7 +423,7 @@ export const ARBETSLAGETS_MOTEN = Object.freeze({
   mellan: 'Mellan mötena',
   mote2: 'Möte 2, i slutet av vecka',
   mote2UtanVecka: 'Möte 2, i slutet av de första veckorna',
-  mote2Text: 'Ta med planeringsmallen med Efter lektionen ifylld och observationsmallarna. Ni tar frågorna enskilt, i par och sedan alla: var och en tänker först själv, sedan pratar ni två och två, och sist delar ni med alla. Var och en säger sist vad hen tar med sig.',
+  mote2Text: 'Ni tar frågorna enskilt, i par och sedan alla: var och en tänker först själv, sedan pratar ni två och två, och sist delar ni med alla. Var och en säger sist vad hen tar med sig.',
   sistaFragan: 'Hur fortsätter vi: med metoden i vardagen, i ett ämne till, och vem besöker vem nästa gång?',
 });
 /**
@@ -444,7 +444,7 @@ export function arbetslagetsMoten(d) {
   const moten = [
     { id: 'mote-1', rubrik: M.mote1, text: lista(u.forbered?.text), fragor: lista(u.forbered?.fragor) },
     { id: 'mellan', rubrik: M.mellan, text: lista([u.planera, u.genomfor]), fragor: [] },
-    { id: 'mote-2', rubrik: vecka ? `${M.mote2} ${vecka}` : M.mote2UtanVecka, text: [M.mote2Text], fragor: [...lista(u.reflektera), M.sistaFragan] },
+    { id: 'mote-2', rubrik: vecka ? `${M.mote2} ${vecka}` : M.mote2UtanVecka, text: [`${slagensOrd(d).taMed} ${M.mote2Text}`], fragor: [...lista(u.reflektera), M.sistaFragan] },
   ].filter((m) => m.id === 'mote-2' || m.text.length || m.fragor.length);
   return { rubrik: u.rubrik ?? 'Till arbetslaget', text: String(u.text ?? ''), leder: M.leder, moten };
 }
@@ -456,8 +456,8 @@ export function arbetslagetsMoten(d) {
  * Första lektionen eller Första veckan, är metodens egen (`forsta.rubrik`). Ett slag som tabellen inte har får ett
  * lektionsförlopps form.
  */
-const LEKTIONENS_ORD = Object.freeze({ planera: 'Planera lektionen', planeraRad: 'Planera varje lektion på ett blad i planeringsmallen.', delarna: 'Lektionens delar', hela: 'Hela lektionen', lathunden: 'planeringen av en lektion', kortet: 'Lektion', alla: 'Alla elever visar', beslut: 'Beslutet', zon: 'Lektionen', bladetsBeslut: 'Beslutet' });
-const LAGRETS_ORD = Object.freeze({ planera: 'Lagret på din planering', planeraRad: 'Skriv det här på den planering du har, eller på bladet i planeringsmallen när du vill.', delarna: 'Lagrets delar', hela: 'Hela lagret', lathunden: 'lagret på din planering', kortet: 'Din lektion', alla: 'Eleverna', beslut: 'Så avgör du', zon: 'Lagret', bladetsBeslut: 'Vägarna' });
+const LEKTIONENS_ORD = Object.freeze({ planera: 'Planera lektionen', planeraRad: 'Planera varje lektion på ett blad i planeringsmallen.', delarna: 'Lektionens delar', hela: 'Hela lektionen', lathunden: 'planeringen av en lektion', kortet: 'Lektion', alla: 'Alla elever visar', beslut: 'Beslutet', zon: 'Lektionen', bladetsBeslut: 'Beslutet', lasning: 'före första lektionen', strukturkortVid: 'fore', taMed: 'Ta med planeringsmallen med Efter lektionen ifylld och observationsmallarna.' });
+const LAGRETS_ORD = Object.freeze({ planera: 'Lagret på din planering', planeraRad: 'Skriv det här på den planering du har, eller på bladet i planeringsmallen när du vill.', delarna: 'Lagrets delar', hela: 'Hela lagret', lathunden: 'lagret på din planering', kortet: 'Din lektion', alla: 'Eleverna', beslut: 'Så avgör du', zon: 'Lagret', bladetsBeslut: 'Vägarna', lasning: 'under vecka 1', strukturkortVid: 'efter', taMed: 'Ta med din planering med dina kryss och observationsmallarna.' });
 export const SLAGENS_FORM = Object.freeze({
   lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna', ...LEKTIONENS_ORD }),
   strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion', start: 'Första samarbetet med eleverna', ...LEKTIONENS_ORD }),
@@ -469,6 +469,16 @@ export const SLAGENS_FORM = Object.freeze({
  * @param {Record<string, any>} d metodens fil
  */
 export const slagensOrd = (d) => /** @type {Record<string, typeof SLAGENS_FORM.lektionsforlopp>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp;
+/**
+ * Vägen till måndag i slaget strategier, en mening för rutan Vill du börja på måndag?: metodens första punkt i checklistan och
+ * tidsschemats första rad, ordagrant, eftersom läraren lägger lagret på sin egen lektion (den kalla läsaren 2026-11-02: rutan sa
+ * fyll i planeringsmallen, och metoden säger att ingen ny planering behövs). Null i andra slag.
+ * @param {Record<string, any>} d metodens fil
+ * @returns {string | null}
+ */
+export const lagretsVagTillMandag = (d) => (d?.slag === 'strategier' ? [d.checklista?.punkter?.[0], d.tidsschema?.rader?.[0]?.vad].filter(Boolean).join(' ') || null : null);
+/** Raden under Planera på metodens sida: i slaget strategier tidsschemats första rad, det läraren skriver på sin planering, ordagrant. @param {Record<string, any>} d metodens fil */
+export const planerasRad = (d) => (d?.slag === 'strategier' && d.tidsschema?.rader?.[0]?.vad) || slagensOrd(d).planeraRad;
 /** Rubriken för planeringen på metodens sida och i lathunden, efter metodens slag. @param {Record<string, any>} d metodens fil */
 export const planerasNamn = (d) => slagensOrd(d).planera;
 /**

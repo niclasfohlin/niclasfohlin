@@ -1,5 +1,10 @@
 # Ändringar i standarden
 
+## 0.54.0, 2026-11-02
+
+- `undervisningsmetod.js` (den kalla läsaren på Formativ bedömning): `lagretsVagTillMandag`, rutan Vill du börja på måndag? i slaget strategier ur metodens egna fält, och `slagensOrd(d).lasning`, när läraren läser delarna, under vecka 1 i strategierna och annars före första lektionen.
+- `undervisningsmetod.js` (andra ögat på Formativ bedömning): `slagensOrd(d).strukturkortVid`, när Lär dig metoden tar upp strukturkorten, efter stegen i strategierna, `slagensOrd(d).taMed`, vad läraren tar med till Möte 2, som `arbetslagetsMoten` läser, och `planerasRad`, raden under Planera.
+
 ## 0.53.1, 2026-11-02
 
 - `saker.js` (Formativ bedömning): `olankadeSaker` kallar inte ett namn okänt när metoden har en sak med det namnet, också när ordet före gör att namnet inte blir en länk, som "Raden Helklassbladet i Utveckla metoden".

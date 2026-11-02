@@ -47,11 +47,11 @@ export interface LarDigData {
   /** Metodens saker som en text kan nämna, med adressen: bladen och affischerna i Materialet för klassen, lektionskortet och mallarna. Checklistan länkar dem (sakdelar i standarden). */
   saker: { namn: string; versal?: boolean; adress: string }[];
   /** Läsvägen i metoden, med ankarna på metodens sida. */
-  lasvag: { delar: { namn: string; adress: string }[]; minuter: number };
+  lasvag: { delar: { namn: string; adress: string }[]; minuter: number; nar: string };
   /** Filernas adresser när filen finns, och annars stället på metodens sida där materialet står. */
   filer: { lektionskort: { adress: string; fil: boolean }; planeringsmall: { adress: string; fil: boolean }; materialet: { adress: string; fil: boolean }; observation: { adress: string; fil: boolean } };
   /** Strukturkorten som metoden importerar, att skriva ut och ha till hands: metodens kort och alla kort i verktyget (K-661). */
-  strukturkort?: { metodens: string; antal: number; alla: string; allaAntal: number; allaStorlek: string; utskrift: string };
+  strukturkort?: { metodens: string; antal: number; alla: string; allaAntal: number; allaStorlek: string; utskrift: string; vid: string; text: string };
   /** Metodens När det glider och stödet för elever som behöver mer, när metoden har dem, som Mitt i hänvisar till (K-631). */
   glider?: string;
   stod?: { rubrik: string; adress: string };
@@ -107,8 +107,8 @@ export function larDigData(id: string, d: Um): LarDigData {
     // Metodens saker som på metodens sida och i lathunden (undervisningsmetodensSaker), med samma ankare, så att samma ord leder
     // till samma sak (granskningen rot-3, fynd 6, och den kalla läsaren 2026-10-30, nr 12).
     saker: undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektionskort, strukturer: metodensStrukturer(d, strang(d.titel)) }),
-    lasvag: (() => { const l = lasvagen(d); return { delar: l.delar.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })), minuter: l.minuter }; })(),
-    ...(d.strukturkort ? { strukturkort: { metodens: kortensVersion(metodensKortAdress(id)), antal: somLista(d.strukturkort.strukturer).length, alla: kortensVersion(ALLA_KORTENS_ADRESS), allaAntal: allaKortensAntal(), allaStorlek: allaKortensStorlek(), utskrift: TVA_PA_A4 } } : {}),
+    lasvag: (() => { const l = lasvagen(d); return { delar: l.delar.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })), minuter: l.minuter, nar: slagensOrd(d).lasning }; })(),
+    ...(d.strukturkort ? { strukturkort: { metodens: kortensVersion(metodensKortAdress(id)), antal: somLista(d.strukturkort.strukturer).length, alla: kortensVersion(ALLA_KORTENS_ADRESS), allaAntal: allaKortensAntal(), allaStorlek: allaKortensStorlek(), utskrift: TVA_PA_A4, vid: slagensOrd(d).strukturkortVid, text: strang(d.strukturkort.text) } } : {}),
     filer: { lektionskort: fil('lektionskort', 'materialet'), planeringsmall: fil('planeringsmall', 'planeringsmallen'), materialet: fil('materialet', 'materialet-for-klassen'), observation: fil('observation', 'observationsmallen') },
     // När det glider står på metodens sida när metoden har det svåraste, fallgroparna eller det du håller fast vid, och stödet
     // när metoden har det (src/components/Undervisningsmetod.astro).

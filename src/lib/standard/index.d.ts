@@ -734,6 +734,8 @@ export declare const talIRegex: (fran: number, till: number, siffror?: boolean) 
 export declare const UNDERVISNINGSMETODENS_DELAR: readonly { id: string; nr: string; namn: string; rad: string; text: string }[];
 export declare function delarnaAv(d: Record<string, any>): { id: string; nr: string; namn: string; rad: string; text: string }[];
 export declare function planerasNamn(d: Record<string, any>): string;
+export declare function planerasRad(d: Record<string, any>): string;
+export declare function lagretsVagTillMandag(d: Record<string, any>): string | null;
 export declare function relateradeAv(d: { relaterade?: string[] }, poster: { stod: { id: string; data: any }[]; metoder: { id: string; data: any }[] }, arskursAv: (data: any) => string): { id: string; titel: string; href: string; meta: string }[];
 /** En dels rad och övergångsmening med metodens minuter, veckor och huvudexemplets ämne. */
 export declare function delarnasText(del: { id: string; rad: string; text: string }, m: { minuter?: number; veckor?: number; amne?: string; andra?: number; progression?: string }): { rad: string; text: string };
@@ -845,7 +847,7 @@ export declare function platsenAv100(x: number): number;
 /** Hur effekten läses, kort för en lärare: vad talet betyder och orden, samma i varje undervisningsmetod, med talen ur EFFEKTENS_GRANSER. */
 export declare function effektensSkala(): { rubrik: string; text: string[]; kallor: { namn: string; text: string; doi: string }[] };
 /** Det som skiljer slagen åt i vägen till måndag: lektionen som minuterna och den grå planen gäller, och samma i en mening. */
-export declare const SLAGENS_FORM: Readonly<Record<'lektionsforlopp' | 'strukturer' | 'strategier', Readonly<{ forstaLektionen: string; din: string; start: string; planera: string; planeraRad: string; delarna: string; hela: string; lathunden: string; kortet: string; alla: string; beslut: string; zon: string; bladetsBeslut: string }>>>;
+export declare const SLAGENS_FORM: Readonly<Record<'lektionsforlopp' | 'strukturer' | 'strategier', Readonly<{ forstaLektionen: string; din: string; start: string; planera: string; planeraRad: string; delarna: string; hela: string; lathunden: string; kortet: string; alla: string; beslut: string; zon: string; bladetsBeslut: string; lasning: string; strukturkortVid: string; taMed: string }>>>;
 /** Slagets ord, en rot för sidan, planeringsbladet, lathunden, metodkortet och mejlet. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export declare function slagensOrd(d: Record<string, any>): (typeof SLAGENS_FORM)['lektionsforlopp'];
