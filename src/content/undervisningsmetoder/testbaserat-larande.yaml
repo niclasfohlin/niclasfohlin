@@ -56,7 +56,7 @@ profil:
     lasning:    { tillforlitlighet: lag, effekt: ingen, motivering: "Låg tillförlitlighet, ingen effekt. Bara ordförråd är studerat, i små studier som ger olika svar. Studien närmast vanliga lektioner, i åk 2–⁠6, fann ingen nytta (Goossens m.fl., 2016). Läsförståelse är inte studerad.", kallor: [goossens-m-fl-2016, ruitenburg-m-fl-2026] }
     skrivning:  { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Bara stavning är studerad, i små studier där de flesta visar effekt, och den största fann ingen säker skillnad (Ruitenburg m.fl., 2026; Bouwmeester och Verkoeijen, 2011). Textskrivning är inte studerad.", kallor: [ruitenburg-m-fl-2026, bouwmeester-och-verkoeijen-2011] }
     matematik:  { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Framplockning gav 0,35 i 10 små studier, men talet är osäkert, och blandade uppgifter gav 0,54 (Ruitenburg m.fl., 2026). Ett läsår i Nigeria gav ingen säker effekt på årsprovet (van der Haar m.fl., 2023).", kallor: [ruitenburg-m-fl-2026, rohrer-m-fl-2020, van-der-haar-m-fl-2023] }
-    amnen:      { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. I NO gav framplockning 0,51 i 9 små studier, mest på faktakunskap. Ett startprov i NO gav ingen skillnad mot en startdiskussion i 15 skolor (Ruitenburg m.fl., 2026; Roy m.fl., 2023). Teknik är inte studerad.", kallor: [ruitenburg-m-fl-2026, roy-m-fl-2023] }
+    amnen:      { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Framplockning gav 0,51 i 9 små studier i NO, mest faktakunskap, och 0,45 i 4 i SO, ett osäkert tal. Ett startprov i NO gav ingen skillnad mot en startdiskussion (Ruitenburg m.fl., 2026; Roy m.fl., 2023).", kallor: [ruitenburg-m-fl-2026, roy-m-fl-2023] }
     socialt:    { tillforlitlighet: lag, effekt: ingen, motivering: "Låg tillförlitlighet, ingen effekt. Ingen studie med jämförelsegrupp har mätt studiero eller samarbete. Lärare i ett försök tyckte att lektionerna blev lugnare med prov i starten (Roy m.fl., 2023).", kallor: [roy-m-fl-2023] }
   svarighet: { lara: 2, karnan: 3, stod: 3, tid: 3, motivering: "Proven liknar det du redan gör, men kärnan glider lätt mot frågor om fakta utan återkomst. Lärarna behövde en fast rutin och stöd under året för att använda kontrasten (Rittle-Johnson m.fl., 2020)." }
   kostnad:   { kop: 2, timmar: 14, motivering: "Skolan köper färgpennor och kopierar provbladet. Omkring 14 timmar första läsåret går till läsningen, två möten, två samtal efter besök, ett besök per termin, grovplaneringen, en kvart i månaden i ämneslaget och planering de första veckorna." }
@@ -90,7 +90,7 @@ karna:
   komponenter:
     - namn: Frågor om det som ska sitta
       moment: [Provet]
-      vad: Frågorna gäller grunden i ämnet, och minst en kräver ett varför, ett exempel eller en metod.
+      vad: Minst en fråga kräver ett varför, ett exempel eller en metod.
       syns: "Eleverna förklarar varför, ger ett exempel eller väljer metod på minst en av provets frågor, utöver frågorna om ord och fakta."
       raknas: false
       varfor: "Eleven blir bäst på det slag av frågor hen övar på. Jämför man studier, gav proven 0,53 för fakta men ingen säker vinst för förståelse och överföring (Ruitenburg m.fl., 2026). Den amerikanska IES-vägledningen bedömde stödet för varför-frågor som starkt (Pashler m.fl., 2007)."
@@ -101,7 +101,7 @@ karna:
       kryss: Minst en fråga krävde ett varför, ett exempel eller en metod
     - namn: Alla svarar ur minnet
       moment: [Provet]
-      vad: Varje elev svarar själv ur minnet, utan bok eller kamrat, innan något svar visas.
+      vad: Varje elev svarar själv ur minnet, innan något svar visas.
       syns: Alla elever skriver samtidigt med stängd bok, och läraren ser ett svar från varje elev innan facit kommer.
       varfor: "Att läsa om ger en känsla av att kunna. Att själv plocka fram stärker minnet och visar vad som inte satt. Det gav 0,37 mot att läsa om eller sammanfatta i 31 studier i skolan (Ruitenburg m.fl., 2026), och 0,22 mot inget prov (Dietrichson m.fl., 2026)."
       belagg: provad
@@ -121,7 +121,7 @@ karna:
       kryss: Eleverna rättade mot facit samma lektion
     - namn: Två svar bredvid varandra
       moment: [Kontrasten]
-      vad: Två svar på samma fråga står bredvid varandra, och klassen säger vad som skiljer dem.
+      vad: Två svar står bredvid varandra, och klassen säger vad som skiljer.
       syns: "Eleverna säger eller skriver vad det ena svaret visar som det andra inte visar, först själva och sedan i par."
       varfor: "Ett prov befäster det eleven har förstått men ger ingen säker vinst för förståelsen (Ruitenburg m.fl., 2026). Komponenten bygger på att två lösningar sida vid sida lär eleven välja mellan sätt, och att fel bredvid rätt gav mer förståelse i en studie (Rittle-Johnson m.fl., 2020)."
       belagg: teori
@@ -131,7 +131,7 @@ karna:
       kryss: Klassen jämförde två svar och sa vad som skilde dem
     - namn: Tillbaka efter några veckor
       moment: [Provet]
-      vad: Varje område kommer tillbaka i proven efter en vecka, några veckor och några månader.
+      vad: Varje område kommer tillbaka efter en vecka, veckor och månader.
       syns: Provet har frågor från förra veckan, förra området och förra terminen, och i matematik en uppgift som inte säger vilken metod den kräver.
       raknas: false
       varfor: "Det som övas vid ett tillfälle glöms fort. Spridd övning gav 0,39 mot samma övning samlad, mest när uppehållet mellan övningarna var minst en tiondel av tiden fram till provet, och blandade uppgifter gav 0,54 i matematik (Ruitenburg m.fl., 2026). I åk 7 gav de 0,83 (Rohrer m.fl., 2020)."
@@ -167,7 +167,7 @@ tidsschema:
       delar:
         - { fas: Provet, tid: 0–⁠5 min }
         - { fas: Facit, tid: 5–⁠9 min }
-        - { fas: Kontrasten, tid: 9–⁠11 min }
+        - { fas: Kontrasten, tid: 9–⁠11 min, fraser: ["Svar A säger bara ordet. Svar B säger vad man gör.", "Säg till din kamrat vad svar B visar."] }
         - { fas: Din lektion, tid: 11–⁠45 min }
     - nar: när provet ligger senare i lektionen
       text: "I idrott och hälsa, slöjd eller hem- och konsumentkunskap kan provet komma när klassen samlas efter uppvärmningen eller i en paus i arbetet. Eleverna svarar muntligt eller visar med kroppen, och facit kommer direkt efter. Raden på provbladet skriver de nästa gång de har skrivboken."
@@ -327,7 +327,7 @@ stod:
   rubrik: Elever som behöver mer stöd
   rader:
     - { nar: Den som är ny i svenska, metoden: "Du läser frågorna högt, och eleven svarar med ett ord, en bild, en siffra eller genom att peka. Varför-frågan kan hen besvara med en bild eller muntligt.", du: "Visa ämnets ord med bild före lektionen, och låt bild och ord stå kvar vid facit och kontrasten. Ge instruktionen på modersmålet när det går." }
-    - { nar: Den yngsta, metoden: "Bestämda frågor, bilder och muntliga svar gör att eleven kan plocka fram utan att skriva allt.", du: "Ställ en bestämd fråga, som ”Var lägger grodan sina ägg?” Ge en ledtråd, som första ljudet, till den som behöver den." }
+    - { nar: Den yngsta, metoden: "Bestämda frågor, bilder och muntliga svar gör att eleven kan plocka fram utan att skriva allt.", du: "I F–⁠4: ställ bestämda frågor, som ”Var lägger grodan sina ägg?”, läs upp facit och ha en eller två korta meningar att bocka. Ge en ledtråd, som första ljudet, till den som behöver den." }
     - { nar: Den som ofta har fel, metoden: "Provet räknas inte, frågorna går att svara på delvis, och facit kommer direkt.", du: "Börja med en fråga som de flesta klarar, och ge en ledtråd bara till hen. Visa vid facit vad hen hade rätt på, och gå först till hen i din lektion med en ny uppgift av samma slag." }
     - { nar: Den som redan kan, metoden: "Varför-frågan och frågorna från äldre områden ger något att arbeta med.", du: "Ge extrafrågan eller en uppgift i ett nytt sammanhang, eller be eleven skriva en fråga med facit till ett senare prov." }
     - { nar: När många behöver hjälp samtidigt, metoden: "I kontrasten arbetar hela klassen med frågan med flest fel på en gång.", du: "Visa två svar bredvid varandra och ställ en följdfråga som alla svarar på, i stället för att gå runt till var och en. De som är klara gör extrafrågan." }
@@ -356,7 +356,7 @@ uppfoljning:
     - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "Ni ses igen i slutet av vecka 5 med grovplaneringarna och bestämmer hur ni fortsätter." }
     - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "Ämneslaget går igenom grovplaneringarna en gång i månaden: vad kom tillbaka, och vad föll bort? En kollega är med vid ett prov per termin. Elever med samma fel kvar får stödundervisning." }
     - { id: sexveckor, nar: Sex veckor efter de första veckorna, tid: efter 6 veckor, vad: "Räkna samma saker som varje vecka, och be en kollega se ett prov. Kommer frågorna från äldre områden fortfarande tillbaka?" }
-    - { id: nastatermin, nar: Nästa termin, tid: efter 16 veckor, vad: "Första veckan efter lovet har provet frågor från förra terminen. Räkna hur många som klarar dem, och se om ni använder metoden i fler ämnen." }
+    - { id: nastatermin, nar: Nästa termin, tid: nästa termin, vad: "Första veckan efter lovet har provet frågor från förra terminen. Räkna hur många som klarar dem, och se om ni använder metoden i fler ämnen." }
     - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen ”Hur säker är jag på metoden?” under 5 i två veckor i rad, gör om veckan och be en kollega se ett prov och facit." }
     - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen ”Hur väl fungerar den i praktiken?” under 5 i två veckor i rad, ta färre och lättare frågor och be specialläraren läsa provbladen." }
 checklista:
@@ -376,7 +376,7 @@ klassen:
 forsta:
   rubrik: Första lektionen
   text:
-    - "Första gången är provet två frågor om förra lektionen och en lätt fråga från förra terminen, på något klassen kan, så att alla svarar på något. Den andra frågan om förra lektionen är ett varför. Facit och kontrasten visar du själv: ni rättar varför-frågan högt tillsammans, och du tänker högt om två svar medan du pekar mellan dem. Ni övar rutinen Provet."
+    - "Första gången är provet två frågor om förra lektionen och en lätt fråga från förra terminen, på något klassen kan, så att alla svarar på något. Den andra frågan om förra lektionen är ett varför. Facit och kontrasten visar du själv: ni rättar varför-frågan högt tillsammans, och du tänker högt om två svar medan du pekar mellan dem: ”Svar A säger bara ordet. Svar B säger vad man gör.” Sedan: ”Säg till din kamrat vad svar B visar.” Ni övar rutinen Provet."
     - "Du säger: ”Det här är ett prov som inte räknas. Det samlas inte in. Det hjälper er att minnas, och det ni inte minns är det vi ska öva på.” Säg också att det ska kännas lite svårt."
   plan:
     amne: Matematik
@@ -420,6 +420,7 @@ larandet:
 uppdrag:
   rubrik: Till arbetslaget
   text: "Ämneslaget gör grovplaneringen och delar frågorna, så att återkomsterna står i den gemensamma planeringen och följer med när någon slutar. Ni har två möten på en timme var och två besök de första veckorna. Sedan tar ni en kvart på ämneslagets möte en gång i månaden, med grovplaneringarna och två elevsvar bredvid varandra. En gång per termin sitter ni med vid varandras prov. Har skolan inget ämneslag i ämnet, gör du grovplaneringen med en kollega i samma årskurs."
+  taMed: "Ta med grovplaneringarna, dina kryss och observationsmallarna."
   forbered:
     text: Läs metoden och lathunden, och tänk igenom frågorna före första mötet.
     fragor:
@@ -504,7 +505,7 @@ strukturkort:
   strukturer: [kontraster, provet-tva-ganger]
 ramar:
   rubrik: Materialet för klassen
-  text: ["Utöver lektionskortet och strukturkorten finns två blad: provbladet för eleverna och affischen Så gör vi provet. Varje blad står på en egen sida. Grovplaneringen för dig och ämneslaget är en mall att skriva i, och den står efter observationsmallen."]
+  text: ["Utöver lektionskortet och strukturkorten finns två blad: provbladet för eleverna och affischen Så gör vi provet. Varje blad står på en egen sida. Grovplaneringen för dig och ämneslaget är en mall att skriva i, och den står sist i bilaga A."]
   ramar:
     - rubrik: Provbladet
       text: ["Skriv ut liggande och klipp isär, så att varje elev får ett A5. Eleven klistrar in det längst bak i skrivboken och skriver svaren på sidorna närmast bladet. Efter varje prov skriver eleven en rad med datumet och det hen hade fel på, med ord och inte frågans nummer. Svarar eleven rätt när en sådan fråga kommer tillbaka, skriver hen den under Fel förut, rätt nu. Har du klassen i flera ämnen, får varje skrivbok sitt blad. I F–⁠2 skriver du klassens rad på tavlan i stället."]
@@ -513,6 +514,7 @@ ramar:
 tabeller:
   - rubrik: Veckans träning
     plats: efter-progression
+    meny: true
     text: "När provet har blivit en rutin kan du ge eleverna 30 till 60 minuter i veckan att träna på det deras prov visade. Det passar när ni har prov ofta, eleverna skriver sina fel på provbladet och du har material att träna med, som grovplaneringens frågor med facit och bokens uppgifter av samma slag. När eleven vet vad hen kan och inte kan, är det lättare för er båda att lägga övningen där den behövs. Ingen blir ensam med det som är svårt."
     kolumner: [Formen, Så gör ni, Tanken]
     rader:
@@ -696,7 +698,7 @@ lasMer:
 # ---------------------------------------------------------------------------------------------------------------------
 plan:
   passen:
-    - { nar: första lektionen, kort: Provet, text: "Första gången är provet två frågor om förra lektionen och en lätt fråga från förra terminen, på något klassen kan." }
+    - { nar: första lektionen, kort: Provet, text: "Första gången är provet två frågor om förra lektionen, den andra ett varför, och en lätt fråga från förra terminen, på något klassen kan. Facit och kontrasten visar du själv." }
   fore: ["Välj ämnet och de två eller tre lektioner i veckan där provet ligger."]
   utvardering: ["Ämneslaget går igenom grovplaneringarna en gång i månaden: vad kom tillbaka, och vad föll bort? En kollega är med vid ett prov per termin. Elever med samma fel kvar får stödundervisning."]
   skattningar:

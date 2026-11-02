@@ -25,7 +25,7 @@ material:
   - material vid bordet
 uppdaterad: 2026-10-30
 publicerad: 2026-10-29
-relaterade: ["fyra-raknesatten", "formativ-bedomning"]
+relaterade: ["fyra-raknesatten", "formativ-bedomning", "testbaserat-larande"]
 utkast: false
 film:
   sekunder: 29.3
@@ -548,7 +548,7 @@ uppfoljning:
     - { id: arbetslaget-efter, nar: Vecka 4, tid: vecka 4, vad: "I slutet av vecka 4 ses arbetslaget igen för att berätta vad ni såg och bestämma hur ni fortsätter." }
     - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "En kollega eller specialläraren ser en lektion i månaden terminen ut. Elever som inte lär sig det nya får stödundervisning, som De fyra räknesätten i grupp, när ni har läst deras exit-lappar." }
     - { id: sexveckor, nar: Sex veckor senare, tid: efter 6 veckor, vad: "Räkna samma två saker som varje vecka: hur många som gör det nya rätt med stegen, och hur ofta kärnans fyra finns i dina lektioner." }
-    - { id: nastatermin, nar: Nästa termin, tid: efter 16 veckor, vad: "Räkna samma två saker igen, och se om ni använder metoden i fler ämnen." }
+    - { id: nastatermin, nar: Nästa termin, tid: nästa termin, vad: "Räkna samma två saker igen, och se om ni använder metoden i fler ämnen." }
     - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen Hur säker är jag på metoden under 5 i två veckor: ge steget en vecka till, läs delen om lektionen igen och be en kollega se en lektion." }
     - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen Hur väl fungerar den i praktiken under 5 i två veckor, eller kan hälften eller färre det nya på exit-lappen: dela stegen i mindre delar och be specialläraren se en lektion." }
 uppdrag:

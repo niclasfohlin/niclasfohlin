@@ -23,7 +23,7 @@ material:
   - lappar till stödorden
 uppdaterad: 2026-11-02
 publicerad: 2026-10-30
-relaterade: ["gruppstarkande-aktiviteter", "hoglasning-i-par", "texttyper-i-grupp", "formativ-bedomning"]
+relaterade: ["gruppstarkande-aktiviteter", "hoglasning-i-par", "texttyper-i-grupp", "formativ-bedomning", "testbaserat-larande"]
 utkast: false
 film:
   sekunder: 28.66
@@ -385,7 +385,7 @@ uppfoljning:
     - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "I slutet av de första veckorna ses ni igen, reflekterar och bestämmer hur ni fortsätter." }
     - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "En kollega besöker en lektion i månaden, fyra gånger. Du läser dina anteckningar om elevernas egna uppgifter med specialläraren, och de som inte lär sig innehållet får stödundervisning." }
     - { id: sexveckor, nar: Sex skolveckor efter de första veckorna, tid: efter 6 veckor, vad: "Räkna samma saker som varje vecka, så att du ser om metoden sitter kvar." }
-    - { id: nastatermin, nar: Nästa termin, tid: efter 16 veckor, vad: "Räkna igen, och se om ni använder metoden i fler ämnen." }
+    - { id: nastatermin, nar: Nästa termin, tid: nästa termin, vad: "Räkna igen, och se om ni använder metoden i fler ämnen." }
     - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen ”Hur säker är jag på metoden?” under 5 i två veckor i rad, gör om veckan och be en kollega se ett samarbete." }
     - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen ”Hur väl fungerar den i praktiken?” under 5 i två veckor i rad, gör samarbetet kortare och be specialläraren se en lektion. Likaså när hälften eller färre kan den egna uppgiften." }
 checklista:
