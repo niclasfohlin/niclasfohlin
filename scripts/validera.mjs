@@ -62,6 +62,7 @@ const lathundPdfer = () => new Map(['stodundervisning', 'metoder'].flatMap((s) =
 steg('instruktionsprov', 'node scripts/instruktionsprov.mjs');
 steg('krokprov', 'node scripts/krokprov.mjs');
 steg('standardprov', 'node scripts/standardprov.mjs');
+steg('krediterprov', 'node scripts/krediter.mjs --prov');
 steg('taggar', 'node scripts/taggar.mjs --kontrollera');
 steg('saddprov', 'node scripts/saddprov.mjs --kontrollera');
 steg('datumkoll', 'node scripts/datumkoll.mjs');

@@ -2,12 +2,13 @@
 // Netlify-krediterna: saldot, vad som drar dem och kreditspärren före uppladdning.
 //
 //   npm run krediter                       saldot, förbrukningen per mätare, det löpande per dygn och spärren
-//   npm run krediter -- trafik [timmar]    vad trafiken består av: besökare, adresser och filtyper (förval 24)
+//   npm run krediter -- trafik [timmar] [sajt]   vad trafiken består av: besökare, adresser och filtyper (förval 24 timmar och den här sajten)
 //   node scripts/krediter.mjs --rad        en rad till kroken vid varje nytt uppdrag
 //   node scripts/krediter.mjs --start      raden, dygnets trafik och veckans byggen, med det som sticker ut, till kroken vid
 //                                          start, efter en clear och efter kompaktering (.claude/hooks/kontext.mjs)
 //   node scripts/krediter.mjs --grind      raden, och slutkod 1 när spärren är stängd, 3 när saldot inte gick
 //                                          att läsa (kroken .claude/hooks/skydda-main.mjs före uppladdning)
+//   node scripts/krediter.mjs --prov       prövar mätningen av kontots andra sajter utan att fråga Netlify (npm run validera)
 //
 // Kreditspärren (Niclas 2026-09-27): vid 100 krediter kvar laddas inget upp till sajten. Spärren stänger när
 // nästa produktionsbygge, 15 krediter, skulle ta saldot under 100. Då fortsätter arbetet lokalt som vanligt,
@@ -67,11 +68,12 @@ const tal = (x) => Number(x) || 0;
 // snittet för de tre senaste hela dygnen (UTC), så att en ändring av trafiken syns inom några dagar.
 export const lasKrediter = async () => {
   const token = lasToken();
-  const [saldo, matare, dagar, grenar] = await Promise.all([
+  const [saldo, matare, dagar, grenar, andra] = await Promise.all([
     anrop(token, `/${TEAM}/billing/credits`),
     anrop(token, `/${TEAM}/billing/credit_usage`),
     anrop(token, `/${TEAM}/credit_usage_insights`),
     anrop(token, `/sites/${SITE}/database/branches`).catch(() => null),
+    andraSajter(token).catch(() => null),
   ]);
   if (!saldo?.plan_credits) throw new Error('Netlify redovisade inget saldo (har planen bytts?)');
   const block = (saldo.active_credit_blocks ?? []).find((b) => b.subscription_allocation) ?? (saldo.active_credit_blocks ?? [])[0] ?? {};
@@ -87,6 +89,7 @@ export const lasKrediter = async () => {
     perDygn: lopande.length ? lopande.reduce((a, b) => a + b, 0) / lopande.length : 0,
     matare: Object.fromEntries(Object.entries(matare ?? {}).map(([k, v]) => [k, { krediter: tal(v?.credits_used), mangd: tal(v?.usage_used) }])),
     grenar: grenar ? tolkaGrenar(grenar) : null,
+    andra,
     last: new Date().toISOString(),
   };
 };
@@ -187,6 +190,7 @@ const paminnelser = (k) => {
   const p = [];
   for (const g of (k.grenar ?? []).filter((g) => g.namn !== 'production')) p.push(`Databasens testgren ${g.namn} finns kvar; Niclas tar bort den i Netlify under Database (INSTRUKTIONER.docx).`);
   if (migreringar()) p.push('netlify/database/migrations har filer, så varje bygge väcker databasen för omkring 1 kredit; se DRIFT.md under Kommentarer.');
+  for (const s of k.andra ?? []) p.push(...andraUt(s));
   return p.length ? ` ${p.join(' ')}` : '';
 };
 
@@ -213,6 +217,7 @@ const visa = (k) => {
       ? `Databasen: ${lage}.`
       : `Databasgrenen ${g.namn} (${g.sammanhang || 'okänt sammanhang'}) ${lage}: en testgren, som Niclas tar bort i Netlify under Database.`);
   }
+  for (const x of andraGenomgang(k)) console.log(x);
 };
 
 const BESOKARE = {
@@ -227,16 +232,18 @@ const BESOKARE = {
 
 // Trafiken ur Netlifys Observability, som sparar ett dygn: besökarnas slag, adresserna, webbläsarna och filtyperna med mest
 // bandbredd. Frågorna läser bara statistiken och kostar inga krediter.
-const trafikData = async (timmar) => {
+const trafikensKrediter = (anropen, bytes) => (anropen / 10000) * 2 + (bytes / 1e9) * 20;
+const topk = async (token, site, fran, till, name, falt, antal) => {
+  const svar = await anrop(token, `/sites/${site}/observability/query/topk?from_ts=${fran}&to_ts=${till}`, {
+    data: [{ attributes: { queries: [{ name, filters: [], sort_by: [{ field: falt, order: 'DESC' }], page: 1, per_page: antal }] } }],
+  });
+  return svar?.data?.[0]?.attributes?.items ?? [];
+};
+const trafikData = async (timmar, site = SITE) => {
   const token = lasToken();
   const till = Date.now();
   const fran = till - timmar * 3600000;
-  const fraga = async (name, falt, antal = 10) => {
-    const svar = await anrop(token, `/sites/${SITE}/observability/query/topk?from_ts=${fran}&to_ts=${till}`, {
-      data: [{ attributes: { queries: [{ name, filters: [], sort_by: [{ field: falt, order: 'DESC' }], page: 1, per_page: antal }] } }],
-    });
-    return svar?.data?.[0]?.attributes?.items ?? [];
-  };
+  const fraga = (name, falt, antal = 10) => topk(token, site, fran, till, name, falt, antal);
   const [besokare, adresser, agenter, typer] = await Promise.all([
     fraga('user_agent_categories', 'Bandwidth', 20),
     fraga('urls', 'Bandwidth'),
@@ -245,14 +252,80 @@ const trafikData = async (timmar) => {
   ]);
   const anropen = besokare.reduce((s, i) => s + i.count, 0);
   const bytes = besokare.reduce((s, i) => s + i.bandwidth, 0);
-  return { besokare, adresser, agenter, typer, anropen, bytes, krediter: (anropen / 10000) * 2 + (bytes / 1e9) * 20 };
+  return { besokare, adresser, agenter, typer, anropen, bytes, krediter: trafikensKrediter(anropen, bytes) };
+};
+
+// Potten delas av hela kontot, så kontots andra sajter mäts också (K-677; Niclas 2026-11-02 om sparlaget-guld: "Den ska vara
+// avstängd och inte ta något när den inte används"). En produktionsdeploy kostar 15 krediter också utan bygge: 2026-11-01 drog
+// byggena 105 krediter, fem här och två netlify deploy --prod där. Av sig själv startar en sajt bara genom ett kopplat repo, en
+// byggkrok eller en schemalagd funktion; utan dem kostar den bara när den används. Frågorna läser och kostar inga krediter.
+const andraSajter = async (token, nu = Date.now()) => {
+  const sajter = await anrop(token, '/sites?per_page=100');
+  return Promise.all(sajter.filter((s) => s.id !== SITE).map(async (s) => {
+    const [deployer, krokar, funktioner, trafiken] = await Promise.all([
+      anrop(token, `/sites/${s.id}/deploys?per_page=100`),
+      anrop(token, `/sites/${s.id}/build_hooks`),
+      anrop(token, `/sites/${s.id}/functions`),
+      topk(token, s.id, nu - DYGN, nu, 'user_agent_categories', 'Bandwidth', 20),
+    ]);
+    return {
+      namn: s.name,
+      deployer: deployer.filter((x) => x.context === 'production' && x.state === 'ready').map((x) => Date.parse(x.created_at)),
+      avSigSjalv: [
+        ...(s.build_settings?.repo_url && !s.build_settings?.stop_builds ? ['ett kopplat repo'] : []),
+        ...(krokar.length ? ['en byggkrok'] : []),
+        ...(funktioner?.functions ?? []).filter((f) => f.schedule).map((f) => `den schemalagda funktionen ${f.n}`),
+      ],
+      anrop: trafiken.reduce((a, i) => a + i.count, 0),
+      bytes: trafiken.reduce((a, i) => a + i.bandwidth, 0),
+    };
+  }));
+};
+const sajtensRad = (s, start) => {
+  const deployer = s.deployer.filter((t) => !start || t >= Date.parse(start)).length;
+  return `${s.namn}: ${deployer} produktionsdeployer i perioden, ${deployer * BYGGE} krediter; senaste dygnet ${heltal(s.anrop)} anrop och ${decimal(s.bytes / 1e6)} MB, omkring ${kred(trafikensKrediter(s.anrop, s.bytes))} krediter. ${s.avSigSjalv.length ? `Startar av sig själv genom ${s.avSigSjalv.join(' och ')}.` : 'Startar inget av sig själv.'}`;
+};
+const andraUt = (s, nu = Date.now()) => {
+  const ut = [];
+  const dygnet = s.deployer.filter((t) => nu - t < DYGN).length;
+  if (s.avSigSjalv.length) ut.push(`${s.namn} startar av sig själv genom ${s.avSigSjalv.join(' och ')}, och ska vara avstängd när den inte används (DRIFT.md under Krediter).`);
+  if (dygnet) ut.push(`${s.namn} drog ${dygnet * BYGGE} krediter på ${dygnet} ${dygnet === 1 ? 'produktionsdeploy' : 'produktionsdeployer'} senaste dygnet, ur samma pott.`);
+  if (s.anrop > STICKER_UT.annanSajtAnrop || trafikensKrediter(s.anrop, s.bytes) > STICKER_UT.annanSajt) ut.push(`${s.namn} fick ${heltal(s.anrop)} anrop och ${decimal(s.bytes / 1e6)} MB senaste dygnet: se vad med npm run krediter -- trafik 24 ${s.namn}.`);
+  return ut;
+};
+const andraGenomgang = (k) => {
+  if (k.andra === null) return ['Kontots andra sajter gick inte att läsa just nu.'];
+  const sajter = k.andra ?? [];
+  return [
+    ...sajter.filter((s) => s.deployer.length || s.anrop).map((s) => `Annan sajt på kontot, ${sajtensRad(s, k.start)}`),
+    ...sajter.flatMap((s) => andraUt(s)).map((x) => `Sticker ut: ${x}`),
+  ];
+};
+// Mätningen prövad åt båda hållen, utan att fråga Netlify.
+const prov = () => {
+  const nu = Date.parse('2026-11-02T12:00:00Z');
+  const sajt = { namn: 'x', deployer: [], avSigSjalv: [], anrop: 212, bytes: 2e5 };
+  const fall = [
+    ['en sajt som bara svarar när den används sticker inte ut', andraUt(sajt, nu).length === 0],
+    ['en deploy förra veckan sticker inte ut', andraUt({ ...sajt, deployer: [nu - 7 * DYGN] }, nu).length === 0],
+    ['en deploy senaste dygnet är 15 krediter', /15 krediter/.test(andraUt({ ...sajt, deployer: [nu - 3600000] }, nu).join())],
+    ['ett schema sticker ut', /schemalagda funktionen mcp/.test(andraUt({ ...sajt, avSigSjalv: ['den schemalagda funktionen mcp'] }, nu).join())],
+    ['många anrop sticker ut', andraUt({ ...sajt, anrop: 1001 }, nu).length === 1],
+    ['mycket bandbredd sticker ut', andraUt({ ...sajt, bytes: 60e6 }, nu).length === 1],
+    ['bara periodens deployer räknas', /2 produktionsdeployer i perioden, 30 krediter/.test(sajtensRad({ ...sajt, deployer: [nu, nu - 1, nu - 40 * DYGN] }, new Date(nu - 10 * DYGN).toISOString()))],
+    ['sajter som inte gick att läsa sägs', /gick inte att läsa/.test(andraGenomgang({ andra: null }).join())],
+    ['en tom sajt syns inte', andraGenomgang({ andra: [{ ...sajt, anrop: 0, bytes: 0 }] }).length === 0],
+  ];
+  const fel = fall.filter(([, ok]) => !ok).map(([n]) => n);
+  if (fel.length) { console.error(`krediter --prov stannar: ${fel.join('; ')}`); process.exit(1); }
+  console.log(`krediter --prov: ${fall.length} fall om kontots andra sajter stämmer.`);
 };
 
 // Genomgången vid start (Niclas 2026-10-28: "Se till att sessioner ... gör någon form av genomgång av detta vid uppstart.
 // Inte äter krediter, men kan mäta och föreslå djupare analyser om något sticker ut"): dygnets trafik i två rader, och en
 // rad för varje sak som sticker ut, med analysen att föreslå. Gränserna utgår från dygnet 2026-10-28, då lärarna stod för
 // 406 MB och trafiken kostade omkring 25 krediter (DRIFT.md under Krediter).
-const STICKER_UT = { skript: 50e6, adress: 40e6, robotar: 250e6, ai: 50e6, krediter: 35 };
+const STICKER_UT = { skript: 50e6, adress: 40e6, robotar: 250e6, ai: 50e6, krediter: 35, annanSajt: 1, annanSajtAnrop: 1000 };
 const genomgang = (d) => {
   const mb = (b) => heltal(Math.round(b / 1e6));
   const per = (nyckel) => d.besokare.find((i) => i.key === nyckel)?.bandwidth ?? 0;
@@ -304,8 +377,8 @@ const arbetssattet = (b, grenar, nu = Date.now()) => {
   return rader.join('\n');
 };
 
-const trafik = async (timmar) => {
-  const { besokare, adresser, agenter, typer, anropen, bytes, krediter } = await trafikData(timmar);
+const trafik = async (timmar, site) => {
+  const { besokare, adresser, agenter, typer, anropen, bytes, krediter } = await trafikData(timmar, site);
   const mb = (b) => decimal(b / 1e6);
   console.log(`Trafiken de senaste ${timmar} timmarna: ${heltal(anropen)} anrop och ${mb(bytes)} MB, omkring ${kred(krediter)} krediter.`);
   const tabell = (rubrik, rader, namn) => {
@@ -323,14 +396,18 @@ if (arHuvud) {
   const args = process.argv.slice(2);
   const radlage = args.includes('--rad') || args.includes('--grind');
   try {
-    if (args[0] === 'trafik') {
-      await trafik(Number(args[1]) || 24);
+    if (args.includes('--prov')) {
+      prov();
+    } else if (args[0] === 'trafik') {
+      const site = args[2] ? (await anrop(lasToken(), '/sites?per_page=100')).find((s) => s.name === args[2])?.id : SITE;
+      if (!site) throw new Error(`ingen sajt heter ${args[2]} på kontot`);
+      await trafik(Number(args[1]) || 24, site);
     } else if (args.includes('--start')) {
       // Kroken vid start (.claude/hooks/kontext.mjs): raden om krediterna, dygnets trafik och veckans byggen.
       const k = await hamta({});
-      console.log(rad(k, lage(k)));
+      console.log(rad({ ...k, andra: undefined }, lage(k)));
       try { console.log(`\n===== Trafiken =====\n${genomgang(await trafikData(24))}`); } catch (e) { console.log(`\n===== Trafiken =====\nTrafiken gick inte att läsa just nu (${e.message}). Kör npm run krediter -- trafik senare.`); }
-      try { console.log(`\n===== Byggena och databasen =====\n${arbetssattet(await byggena(), k.grenar)}`); } catch (e) { console.log(`\n===== Byggena och databasen =====\nByggena gick inte att läsa just nu (${e.message}).`); }
+      try { console.log(`\n===== Byggena och databasen =====\n${[arbetssattet(await byggena(), k.grenar), ...andraGenomgang(k)].join('\n')}`); } catch (e) { console.log(`\n===== Byggena och databasen =====\nByggena gick inte att läsa just nu (${e.message}).`); }
     } else if (radlage) {
       const grind = args.includes('--grind');
       const k = await hamta({ farsk: grind || args.includes('--farsk') });
