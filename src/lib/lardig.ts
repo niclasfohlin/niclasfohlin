@@ -2,8 +2,8 @@
 // visar ur metodens fil, som JSON till sidans skript (src/scripts/lardig.ts), och bygget stannar på en metod vars plan inte
 // går att räkna. Motorn och allt som räknar står i standarden (src/lib/standard/plan.js, under Lär dig metoden), och
 // formen och faserna i underlag/prov/metoder/PLANERA-LAGRET.md och riggens standard för undervisningsmetoder, avsnitt 16.
-import { dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, lasvagen, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
-import { metodensAdress, stegetsAnkare, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
+import { arbetslagetsMoten, dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, lasvagen, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
+import { metodensAdress, utfalletsAnkare, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import { metodensStrukturer, metodensKortAdress, ALLA_KORTENS_ADRESS, kortensVersion, allaKortensAntal, allaKortensStorlek, TVA_PA_A4 } from './strukturer';
 import { metodensFiler, metodensTabellfiler, sakernasFiler } from './undervisningsmetodfiler';
 
@@ -37,7 +37,11 @@ export interface LarDigData {
   material: string[];
   film?: { rubrik: string; ingress?: string };
   forbered: { text?: string; fragor: string[] };
+  /** Möte 2 med arbetslaget: frågorna och det läraren tar med, ur samma rot som metodens sida och riggens Word-fil
+   * (arbetslagetsMoten i standarden; verifieringen 2026-11-02: Lär dig metoden saknade det metoden säger att ni tar med och
+   * den sista frågan). */
   reflektera: string[];
+  mote2Text?: string;
   /** Kärnans komponenter: namnet, det som står kvar (förslagen till lärarens mål) och raden att kryssa i dåtid (stödet vid Hur säker). */
   karna: { namn: string; kvar: string; kryss?: string }[];
   /** Så syns lärandet i klassen: stödet vid Hur väl fungerar den. */
@@ -97,7 +101,7 @@ export function larDigData(id: string, d: Um): LarDigData {
     material: somLista(d.material).map(strang).filter(Boolean),
     ...(d.film ? { film: { rubrik: strang(d.film.rubrik) || 'Filmen', ...(d.film.ingress ? { ingress: strang(d.film.ingress) } : {}) } } : {}),
     forbered: { text: strang(d.uppdrag?.forbered?.text) || undefined, fragor: somLista(d.uppdrag?.forbered?.fragor).map(strang).filter(Boolean) },
-    reflektera: somLista(d.uppdrag?.reflektera).map(strang).filter(Boolean),
+    ...(() => { const m = arbetslagetsMoten(d)?.moten.find((x) => x.id === 'mote-2'); return { reflektera: m?.fragor ?? [], ...(m?.text[0] ? { mote2Text: m.text[0] } : {}) }; })(),
     karna: somLista(d.karna?.komponenter).map((k) => { const x = k as Record<string, unknown>; return { namn: strang(x.namn), kvar: strang(x.kvar), ...(x.kryss ? { kryss: strang(x.kryss) } : {}) }; }).filter((k) => k.namn && k.kvar),
     larandet: { rubrik: strang(d.larandet?.rubrik) || 'Så syns lärandet i klassen', rader: somLista(d.larandet?.omraden).map((x) => strang((x as { syns?: string }).syns)).filter(Boolean) },
     hallFast: { rubrik: strang(d.hallFast?.rubrik) || 'Fem saker att hålla fast vid', rader: somLista(d.hallFast?.rader).map((r) => ({ sak: strang((r as { sak?: string }).sak), text: strang((r as { text?: string }).text) })).filter((r) => r.sak) },
@@ -117,7 +121,7 @@ export function larDigData(id: string, d: Um): LarDigData {
     ...(() => {
       const s = somLista(d.steg?.rader).find((x) => (x as { redo?: unknown }).redo) as { namn?: string } | undefined;
       const veckor = somLista(d.progression?.rader).filter((r) => { const x = r as Record<string, unknown>; return /\butfall/i.test(`${strang(x.roll)} ${strang(x.vidare)} ${strang(x.eleverna)}`); }).map((r) => String((r as { vecka?: unknown }).vecka ?? ''));
-      return s?.namn && veckor.length ? { utfallen: { namn: 'Utfallet', adress: `${sida}#${stegetsAnkare(s.namn)}`, veckor } } : {};
+      return s?.namn && veckor.length ? { utfallen: { namn: 'Utfallet', adress: `${sida}#${utfalletsAnkare(s.namn)}`, veckor } } : {};
     })(),
     filer: { lektionskort: fil('lektionskort', 'materialet'), planeringsmall: fil('planeringsmall', 'planeringsmallen'), materialet: fil('materialet', 'materialet-for-klassen'), observation: fil('observation', 'observationsmallen'), tabeller: metodensTabellfiler(id, somLista(d.tabeller).map((t) => strang((t as { rubrik?: string }).rubrik))).map((f) => ({ namn: f.namn, adress: (f.pdf ?? f.docx)! })) },
     // När det glider står på metodens sida när metoden har det svåraste, fallgroparna eller det du håller fast vid, och stödet

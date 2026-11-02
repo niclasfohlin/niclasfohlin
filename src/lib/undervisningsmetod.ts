@@ -89,6 +89,9 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
 }
 /** Ett stegs ankare i lektionen på metodens sida, del-<namn>, som remsan, Lär dig metoden och utfallens knapp leder till. */
 export const stegetsAnkare = (namn: string) => `del-${namn.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}`;
+/** Utfallens ruta i ett steg, som knappen Utfallet i Lär dig metoden leder till (verifieringen 2026-11-02: knappen ledde till
+ * stegets början, en och en halv skärm ovanför utfallen). */
+export const utfalletsAnkare = (namn: string) => `${stegetsAnkare(namn)}-utfallet`;
 /** Bladets ankare i Materialet för klassen, ur namnet. */
 export const bladetsAnkare = (namn: string) => `blad-${slugAv(namn)}`;
 

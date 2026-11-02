@@ -88,7 +88,9 @@ function provaLarDig(s, ids) {
   const harUtfall = (d.steg?.rader ?? []).some((x) => x.redo);
   const veckor = (d.progression?.rader ?? []).filter((r) => /\butfall/i.test(`${r.roll ?? ''} ${r.vidare ?? ''} ${r.eleverna ?? ''}`)).map((r) => String(r.vecka));
   if (harUtfall && veckor.length && data.utfallen?.veckor?.join() !== veckor.join()) fel.push(`${s}/lar-dig: veckorna ${veckor.join(', ')} säger utfall, och knappen till utfallen står i ${data.utfallen?.veckor?.join(', ') || 'ingen'}`);
-  if (data.utfallen && !ids.has(data.utfallen.adress.split('#')[1])) fel.push(`${s}/lar-dig: knappen till utfallen leder till ${data.utfallen.adress}, som inte finns på metodens sida`);
+  // Knappen leder till utfallens ruta, och inte till stegets början en och en halv skärm ovanför (verifieringen 2026-11-02).
+  const sidan = readFileSync(join(dist, s, 'index.html'), 'utf8');
+  if (data.utfallen && !new RegExp(`class="um-beslutskarta" id="${data.utfallen.adress.split('#')[1]}"`).test(sidan)) fel.push(`${s}/lar-dig: knappen till utfallen leder till ${data.utfallen.adress}, som inte är utfallens ruta på metodens sida`);
   const tabeller = readdirSync(join(dist, 'metoder')).filter((f) => f.startsWith(`${s.split('/')[2]}-tabell-`) && f.endsWith('.pdf'));
   if ((data.filer?.tabeller ?? []).length !== tabeller.length) fel.push(`${s}/lar-dig: metoden har ${tabeller.length} tabeller med egen fil, och Före har ${(data.filer?.tabeller ?? []).length}`);
 }

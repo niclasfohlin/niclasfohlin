@@ -249,6 +249,8 @@ export const PRIMARA_REGELN = 'Primär evidens är det eller de två av sajtens 
  * Testbaserat lärande 2026-11-02). Sajtens kort och riggens Word-fil läser samma ord.
  */
 export const PRIMARA_UTAN_OMRADE = 'Inget av läsning, skrivning, matematik och socialt har minst visst stöd';
+/** Raden under, som säger varför Ämnen eller Lärande totalt med Gott stöd inte räknas (verifieringen 2026-11-02). */
+export const PRIMARA_RAKNAS_INTE = 'Ämnen och Lärande totalt räknas inte här.';
 /**
  * Filmernas namn i riggens out/<id>/ och, med metodens id först, i sajtens public/metoder/: huvudfilmen `film` och en
  * `film<nr>` för varje extrafilm i `filmer`, som src/lib/film.ts ger adresserna. En rot för intaget

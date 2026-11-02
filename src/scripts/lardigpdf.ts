@@ -14,7 +14,7 @@ export interface LarDigPdfInfo {
   steg: string[];
   /** Stegens fråga till Gick det? i samma ordning, eller tom när steget inte har någon. */
   fragor: string[];
-  /** Frågorna på arbetslagets möte efter stegen (uppdrag.reflektera). */
+  /** Frågorna på arbetslagets möte efter stegen, Möte 2:s frågor (arbetslagetsMoten i standarden). */
   reflektera: string[];
   /** Uppföljningens rader, som reglerna pekar på. */
   uppfoljning: { nar: string; vad: string }[];

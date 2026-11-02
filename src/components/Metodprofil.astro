@@ -19,7 +19,7 @@
 import Staplar from './Staplar.astro';
 import Filval from './Filval.astro';
 import { OMRADEN, primaraOmraden, type Utkast } from '../lib/metodprofil';
-import { esc, effektensSkala, uppraknat, laget, PRIMARA_REGELN, PRIMARA_UTAN_OMRADE, motiveringensDelar, svarighetensNiva, kostnadensNiva, larandetIKort, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAERNAS_FORKLARING, BANKENS_OMRADEN, type Laget, type bankensVal } from '../lib/standard/index.js';
+import { esc, effektensSkala, uppraknat, laget, PRIMARA_REGELN, PRIMARA_UTAN_OMRADE, PRIMARA_RAKNAS_INTE, motiveringensDelar, svarighetensNiva, kostnadensNiva, larandetIKort, SVARIGHETENS_ORD, KOSTNADENS_ORD, NIVAERNAS_FORKLARING, BANKENS_OMRADEN, type Laget, type bankensVal } from '../lib/standard/index.js';
 import { medSaker, METODKORTET, UM_NAMN } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
 // fil är metodens Word-fil med allt, som filvalet ger och kryssrutan Välj laddar ner i banken (src/scripts/urval.ts), val
@@ -120,7 +120,7 @@ const alltIMening = UM_NAMN.allt.charAt(0).toLocaleLowerCase('sv') + UM_NAMN.all
           {radenTotal && (
             <p class="mp-primar">
               <span>Primär evidens</span>
-              {prim.length ? <span class="mp-omraden">{prim.map((o) => <span class="amne" data-amne={o}>{o}</span>)}</span> : <strong>{PRIMARA_UTAN_OMRADE}</strong>}
+              {prim.length ? <span class="mp-omraden">{prim.map((o) => <span class="amne" data-amne={o}>{o}</span>)}</span> : <><strong>{PRIMARA_UTAN_OMRADE}</strong><span class="mp-primar-not">{PRIMARA_RAKNAS_INTE}</span></>}
             </p>
           )}
         </>

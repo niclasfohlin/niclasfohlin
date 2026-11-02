@@ -9,7 +9,7 @@ import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
 import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
-import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfallensElever, utfalletsText, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
+import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfalletsAnkare, utfallensElever, utfalletsText, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
@@ -180,7 +180,7 @@ const moten = arbetslagetsMoten(d);
             </ol>
             {manus.filter((f) => (f.moment ?? []).includes(s.namn)).map((f) => <p class="um-ld-manus"><a href={`#${ankareFor(f.fallgrop)}`}>Så gör du {f.fallgrop.charAt(0).toLocaleLowerCase('sv') + f.fallgrop.slice(1)}</a></p>)}
             {s.redo && (
-              <div class="um-beslutskarta" data-utfall>
+              <div class="um-beslutskarta" id={utfalletsAnkare(s.namn)} data-utfall>
                 <p class="um-beslutskarta-rubrik">Utfallet, i en klass på <span data-elever>{elever}</span></p>
                 <div class="um-utfall">
                   {UTFALLEN.map((u) => <div class={`um-utfall-ruta um-utfall-${u.id}`}><p class="um-utfall-namn">{u.namn}</p><p set:html={utfalletsText(s.redo[u.id], elever, saker)} /></div>)}

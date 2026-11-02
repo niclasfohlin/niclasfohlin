@@ -97,9 +97,12 @@ if (tsMp) {
   // Testbaserat lärande 2026-11-02).
   {
     const medTermin = { ...tsMp, uppfoljning: [...tsMp.uppfoljning, { rad: tsMp.uppfoljning.length, tid: s.tolkaTid('Nästa termin'), perElev: false }] };
-    const termin = (start, lov = []) => s.planera(medTermin, { ...val, start, lov }).uppfoljning.at(-1);
+    const termin = (start, lov = [], langd = val.langd) => s.planera(medTermin, { ...val, start, lov, langd }).uppfoljning.at(-1);
     ska('nästa termin är en rad efter, och veckan efter jullovet eller sommarlovet', JSON.stringify(s.tolkaTid('nästa termin')) === JSON.stringify({ typ: 'efter', veckor: 0, termin: true }) && termin('2026-11-02').tillfallen[0]?.datum === '2027-01-11' && termin('2027-03-01').tillfallen[0]?.datum === '2027-08-16' && termin('2026-11-02').typ === 'efter', [termin('2026-11-02').tillfallen, termin('2027-03-01').tillfallen]);
     // Lärarens jullov direkt efter stegen flyttar inte nästa termin till efter sommaren (kodgranskningen 2026-11-02, P1).
+    // Jullovet mitt i stegen, så att sista steget ligger i januari: nästa termin är ändå veckan efter jullovet, terminen efter
+    // den läraren började i (verifieringen 2026-11-02 gav augusti).
+    ska('nästa termin med jullovet mitt i stegen är veckan efter jullovet', termin('2026-11-23', ['2026-52', '2026-53', '2027-01'], 5).tillfallen[0]?.datum === '2027-01-11', termin('2026-11-23', ['2026-52', '2026-53', '2027-01'], 5).tillfallen);
     ska('nästa termin med lärarens jullov direkt efter stegen är veckan efter jullovet', termin('2026-11-02', ['2026-51', '2026-52', '2026-53', '2027-01']).tillfallen[0]?.datum === '2027-01-11', termin('2026-11-02', ['2026-51', '2026-52', '2026-53', '2027-01']).tillfallen);
   }
   ska('veckanFor onsdag 18 november är vecka 3', s.veckanFor(p, '2026-11-18').nr === 3);

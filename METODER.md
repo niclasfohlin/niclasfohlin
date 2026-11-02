@@ -381,7 +381,7 @@ Fälten står inte på metodens sida, i Word eller i lathunden. De ger därför 
 |---|---|
 | `före` | veckan före planens första vecka, förbi ett lov; står under Före |
 | `efter`, `efter 4 veckor`, `efter 4–6 veckor` | veckan efter sista passet, eller så många veckor efter den; en lovvecka flyttar den till veckan efter lovet |
-| `nästa termin` | veckan efter nästa jullov eller sommarlov efter sista passet, räknat från veckan efter sista passet; en lovvecka som läraren har tryckt in flyttar den sedan till veckan efter lovet (Planera 0.9.1) |
+| `nästa termin` | veckan efter det första jullovet eller sommarlovet efter första passet, terminen efter den läraren började i, också när lovet ligger mitt i stegen; en lovvecka som läraren har tryckt in flyttar den sedan till veckan efter lovet (Planera 0.9.1) |
 | `varje pass`, `i passet`, `varje vecka` | inget datum; står i varje vecka |
 | `varannan vecka`, `var 3:e vecka` | sista passet i var andra eller tredje vecka, räknat bland veckorna med pass, så att en vecka där passet faller bort inte ger tillfällen två veckor i rad |
 | `vecka 4`, `vecka 2 och 6`, `första veckan`, `sista veckan` | sista passet i de veckorna, eller i nästa vecka med pass när veckans pass faller bort; en upprepad vecka räknas där den slutar |

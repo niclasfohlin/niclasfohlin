@@ -876,6 +876,8 @@ export declare function primaraOmraden(evidens: Record<string, any>): string[];
 export declare const PRIMARA_REGELN: string;
 /** Raden Primär evidens när inget av de fyra områdena har minst Visst stöd. */
 export declare const PRIMARA_UTAN_OMRADE: string;
+/** Raden under: Ämnen och Lärande totalt räknas inte här. */
+export declare const PRIMARA_RAKNAS_INTE: string;
 /** Filmernas namn, film och film<nr> för varje extrafilm. */
 export declare const metodensFilmnamn: (d: { film?: unknown; filmer?: { nr: number }[] }) => string[];
 /** Första lektionens delar med minuterna och de en eller två fraser läraren säger; den första delen har rutinens repliker. */
