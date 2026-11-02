@@ -1,0 +1,729 @@
+# Testbaserat lärande, en undervisningsmetod för helklass av slaget strategier. Skriven 2026-11-02 ur
+# methods/_mall-undervisningsmetod.yaml, efter analysen (analys.md) och den andra analysen, innehållsbankerna
+# (innehall-praktiken.md P1–P141 och innehall-karnan.md K1–K56) och facit evidens.json. Formativ bedömning är läst för
+# form och ton, och förlagan Explicit undervisning för formen. Fälten film och filmer skrivs om ur de ritade filmerna i
+# steg 7 (node build/filmfalt.mjs testbaserat-larande).
+
+titel: Testbaserat lärande
+undertitel: "Ett kort prov ur minnet och en plan för terminen, så att det klassen har förstått sitter kvar, F–⁠9"
+alternativaNamn: ["Retrieval practice", "Test-enhanced learning", "Successive relearning"]
+ingress: "I Testbaserat lärande plockar eleverna själva fram det klassen har förstått ur minnet i korta prov som inte räknas. De ser det rätta samma lektion och jämför två svar, och varje område kommer tillbaka efter veckor och månader. Proven ligger i dina vanliga lektioner."
+arskurs: ["F-3", "4-6", "7-9"]
+arskursText: F–9
+taggar: ["undervisningskvalitet", "evidens"]
+slag: strategier
+syfte: [ova]
+tid: "12 minuter i din lektion, minst två lektioner i veckan"
+hurOftaSkal: "Få studier jämför hur ofta proven ges, och antalet gjorde nästan ingen skillnad (Dietrichson m.fl., 2026). Två lektioner i veckan ger provet tid att bli en rutin."
+period: Fem veckor att komma igång
+material:
+  - lektionskortet
+  - provbladet längst bak i skrivboken
+  - färgpennor
+  - grovplaneringen
+  - affischen Så gör vi provet
+uppdaterad: 2026-11-02
+publicerad: 2026-11-02
+relaterade: ["explicit-undervisning", "kooperativt-larande", "formativ-bedomning"]
+utkast: false
+film:
+  sekunder: 28.44
+  beskrivning: "Alla skriver själva, med boken stängd. Läraren säger: ”Skriv det du minns. Det räknas inte.” Läraren säger: ”Ta färgpennan. Ordet ensamt ger ingen bock. Räck upp handen om du hade fel på fråga 2.” Läraren tänker: ”16 av 28 har bara ordet.” Läraren frågar: ”Vad visar svar B som svar A inte visar?” Läraren säger: ”En minut själv, en minut i par.” Eleven säger: ”B förklarar vad som händer.” Läraren säger: ”Exoterm betyder att energi avges.”"
+  rubrik: "Provet, facit och kontrasten i en lektion i kemi"
+  ingress: "Filmen visar början av en lektion i kemi i åk 8. Alla svarar ur minnet med boken stängd och rättar mot facit med två meningar att bocka. 16 av 28 har bara ordet exoterm, och läraren visar det bredvid förklaringen."
+  stillbilder:
+    - text: "Läraren frågar. Alla skriver ur minnet, boken stängd."
+    - text: "Läraren räknar händerna: 16 av 28 har bara ordet."
+    - text: "Läraren visar ordet bredvid förklaringen och frågar."
+    - text: "Paren säger vad svar B visar. Läraren förklarar igen."
+filmer:
+  - nr: 2
+    titel: "Tillbaka efter några veckor"
+    sekunder: 23.09
+    beskrivning: "Grovplaneringen säger när området kommer tillbaka. Fem veckor senare frågar läraren om en ny reaktion. Läraren säger: ”Skriv det du minns. Det räknas inte.” Läraren säger: ”Pennan ner. Ta färgpennan.” Fler skriver rätt: nu har 4 av 28 fel. Läraren tänker: ”4 av 28 har fel. Vidare.” Läraren säger: ”Räck upp handen om du hade fel förra gången och rätt i dag.”"
+    rubrik: "Tillbaka efter några veckor"
+    ingress: "Filmen visar samma klass i kemi i åk 8. Grovplaneringen säger att området reaktioner kommer tillbaka i vecka 37, 41 och 46. I vecka 46 kommer frågan tillbaka igen, med en ny reaktion. Fler skriver rätt, och de som hade fel förra gången och rätt i dag räcker upp handen."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Läraren ser i grovplaneringen vad som kommer tillbaka."
+      - text: "Fem veckor senare frågar läraren om en ny reaktion."
+      - text: "Läraren ser 4 av 28 med fel och går vidare."
+      - text: "Fel förra gången och rätt i dag: handen upp."
+
+profil:
+  evidens:
+    larande:    { tillforlitlighet: mattlig, effekt: liten, kort: "Korta prov hjälper eleverna att minnas, mest fakta, men effekten är liten.", motivering: "Måttlig tillförlitlighet, liten effekt. Korta prov gav 0,22 mot inget prov i 38 studier, mest mätt med forskarnas prov inom en vecka. Mot en startdiskussion gav ett startprov ingen skillnad på skolans prov (Dietrichson m.fl., 2026; Roy m.fl., 2023).", kallor: [dietrichson-m-fl-2026, roy-m-fl-2023] }
+    lasning:    { tillforlitlighet: lag, effekt: ingen, motivering: "Låg tillförlitlighet, ingen effekt. Bara ordförråd är studerat, i små studier som ger olika svar. Studien närmast vanliga lektioner, i åk 2–⁠6, fann ingen nytta (Goossens m.fl., 2016). Läsförståelse är inte studerad.", kallor: [goossens-m-fl-2016, ruitenburg-m-fl-2026] }
+    skrivning:  { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Bara stavning är studerad, i små studier där de flesta visar effekt, och den största fann ingen säker skillnad (Ruitenburg m.fl., 2026; Bouwmeester och Verkoeijen, 2011). Textskrivning är inte studerad.", kallor: [ruitenburg-m-fl-2026, bouwmeester-och-verkoeijen-2011] }
+    matematik:  { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Framplockning gav 0,35 i 10 små studier, men talet är osäkert, och blandade uppgifter gav 0,54 (Ruitenburg m.fl., 2026). Ett läsår i Nigeria gav ingen säker effekt på årsprovet (van der Haar m.fl., 2023).", kallor: [ruitenburg-m-fl-2026, rohrer-m-fl-2020, van-der-haar-m-fl-2023] }
+    amnen:      { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. I NO gav framplockning 0,51 i 9 små studier, mest på faktakunskap. Ett startprov i NO gav ingen skillnad mot en startdiskussion i 15 skolor (Ruitenburg m.fl., 2026; Roy m.fl., 2023). Teknik är inte studerad.", kallor: [ruitenburg-m-fl-2026, roy-m-fl-2023] }
+    socialt:    { tillforlitlighet: lag, effekt: ingen, motivering: "Låg tillförlitlighet, ingen effekt. Ingen studie med jämförelsegrupp har mätt studiero eller samarbete. Lärare i ett försök tyckte att lektionerna blev lugnare med prov i starten (Roy m.fl., 2023).", kallor: [roy-m-fl-2023] }
+  svarighet: { lara: 2, karnan: 3, stod: 3, tid: 3, motivering: "Proven liknar det du redan gör, men kärnan glider lätt mot frågor om fakta utan återkomst. Lärarna behövde en fast rutin och stöd under året för att använda kontrasten (Rittle-Johnson m.fl., 2020)." }
+  kostnad:   { kop: 2, timmar: 14, motivering: "Skolan köper färgpennor och kopierar provbladet. Omkring 14 timmar första läsåret går till läsningen, två möten, två samtal efter besök, ett besök per termin, grovplaneringen, en kvart i månaden i ämneslaget och planering de första veckorna." }
+  urval:
+    datum: 2026-11-02
+    regel: "Studier räknas när eleverna plockar fram skolans innehåll ur minnet i prov utan betyg, när framplockningen eller övningen sprids över dagar och veckor, eller när uppgifter av olika slag blandas så att eleven väljer metod. De jämförs med att läsa om, samla övningen, öva en sorts uppgift i taget, inte repetera alls eller undervisa som vanligt. Räknas inte: spridd genomgång där eleverna inte plockar fram själva, prov med betyg, laboratoriestudier med konstruerat material, förprov och högskola. Studier om kontrasten räknas inte."
+    text: "Vi sökte 2026-11-02 i sammanställningar om skolan, följde referenserna bakåt och framåt i en metaanalys om skolan, sökte i ERIC område för område och en gång till i varje område med svagt stöd. Vi valde sammanställningar om skolan före dem om högskolan och laboratoriet. De flesta studier mätte med forskarnas egna prov inom en vecka, och den enda stora studien med skolans egna prov fann ingen skillnad mot en startdiskussion. Vi valde femton källor."
+    slutsatser:
+      oversikt: "Fem sammanställningar pekar åt samma håll: korta prov utan betyg ger bättre minne av det som övades. I skolan gav framplockning 0,37, spridning 0,20 och blandning 0,40 (Ruitenburg m.fl., 2026), och proven 0,22 mot inget prov (Dietrichson m.fl., 2026). Effekten gäller mest fakta, mätt inom några dagar, och större tal kommer mest från högskolan (Yang m.fl., 2021)."
+      experiment: "De största försöken med effekt gäller matematik med blandade uppgifter: i åk 7 gav de 0,83 på forskarnas prov en månad senare (Rohrer m.fl., 2020). Ett läsår i Nigeria gav 0,29 på terminsproven men ingen säker effekt på årsprovet (van der Haar m.fl., 2023). I 15 engelska skolor gav ett startprov i NO ingen skillnad mot en startdiskussion (Roy m.fl., 2023), och en studie av ordförråd i vanliga lektioner i åk 2–⁠6 fann ingen nytta (Goossens m.fl., 2016). I stavning blev det ingen säker skillnad (Bouwmeester och Verkoeijen, 2011)."
+      annan: "De två vägledningarna ger samma råd: sprid det viktiga över veckor, låt alla plocka fram ur minnet, visa det rätta och planera hela kursen (Pashler m.fl., 2007; EEF, 2021). Effekten minskar när innehållet har många delar som hänger ihop (Van Gog och Sweller, 2015), och att jämföra lösningar stöder förståelsen (Rittle-Johnson m.fl., 2020). Kristiansson och Swärd (2025) visar hur proven och facit kan se ut i svenska klasser i åk 5–⁠6."
+    uteslutna:
+      - { namn: "Agarwal m.fl. (2021)", skal: "Översikt som ingen nivå bygger på, och Churches m.fl. fick platsen i listan" }
+      - { namn: "Molin m.fl. (2021)", skal: "Mätte provängslan, som inte räknas till Socialt" }
+      - { namn: "Murray m.fl. (2025)", skal: "Sammanställning med mest studier från högskolan" }
+      - { namn: "Mawson och Kang (2025)", skal: "Blandar in högskolan och spridd omläsning" }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 1 Metoden
+# ---------------------------------------------------------------------------------------------------------------------
+inledning:
+  - "Testbaserat lärande är två lager över din undervisning, ett kort prov i dina lektioner och en grovplanering för terminen, så att det klassen har förstått sitter kvar efter veckor och månader. I början av två eller tre lektioner i veckan gör eleverna ett kort prov ur minnet med minst ett varför, ser det rätta samma lektion och jämför två svar. Provet räknas inte. Det är själva övningen och ingen mätning, och det visar eleverna vad de kan och dig vad undervisningen behöver mer av."
+  - "På bänken ligger elevens skrivbok, med provbladet inklistrat längst bak. Eleven skriver svaren på sidorna närmast bladet och rättar dem med en färgpenna. På provbladet skriver hen en rad per prov med det hen hade fel på. Frågorna står på tavlan, och affischen Så gör vi provet sitter på väggen. Din grovplanering, som du gör med ämneslaget, säger vecka för vecka vad som kommer tillbaka i provet."
+  - "Lärandet går till så här. Den som läser om känner att hen kan, medan den som själv plockar fram stärker minnet och ser vad som inte satt. Facit samma lektion gör att felet inte sitter kvar. När två svar står bredvid varandra ser eleven vad det ena visar som det andra inte visar, som skillnaden mellan att kunna ett ord och att förstå ett begrepp. Det som kommer tillbaka efter ett uppehåll måste plockas fram igen, och då sitter det längre."
+  - "Alla fem delarna av kärnan finns i liten form från första lektionen, och veckorna säger vad ni övar särskilt. Vecka 1 har provet två frågor om förra lektionen, den andra ett varför, och en lätt fråga från förra terminen. Vecka 2 övar ni facit och färgpennan, vecka 3 frågor från olika tider och vecka 4 kontrasten. Vecka 5 kommer området från vecka 1 tillbaka med nya tal eller ett nytt exempel, och eleverna ser på provbladet vad som satt. Efter fem veckor är provet en rutin, och i grovplaneringen står det som ska komma tillbaka resten av terminen."
+karna:
+  rubrik: "Kärnan: fast och fritt"
+  text: "Proven hjälper när eleverna gör det som ger effekten: alla plockar fram själva, ser det rätta samma lektion och möter innehållet igen efter ett uppehåll. Frågorna och kontrasten gör att eleverna också prövar förståelsen bakom orden. Därför är frågorna en egen del av kärnan. Det är där metoden skiljer sig från mekanisk minnesträning."
+  grundregel: De fem är kärnan, och den håller du fast vid. Proven gäller det klassen har förstått, och frågorna, svarsformen och ämnet väljer du.
+  varv: Fråga om det som ska sitta, låt alla svara ur minnet, visa facit, räkna felen, jämför två svar och ta frågan igen.
+  komponenter:
+    - namn: Frågor om det som ska sitta
+      moment: [Provet]
+      vad: Frågorna gäller grunden i ämnet, och minst en kräver ett varför, ett exempel eller en metod.
+      syns: "Eleverna förklarar varför, ger ett exempel eller väljer metod på minst en av provets frågor, utöver frågorna om ord och fakta."
+      raknas: false
+      varfor: "Eleven blir bäst på det slag av frågor hen övar på. Jämför man studier, gav proven 0,53 för fakta men ingen säker vinst för förståelse och överföring (Ruitenburg m.fl., 2026). Den amerikanska IES-vägledningen bedömde stödet för varför-frågor som starkt (Pashler m.fl., 2007)."
+      belagg: provad
+      kallor: [ruitenburg-m-fl-2026, pashler-m-fl-2007]
+      kvar: Frågorna gäller det eleverna ska kunna om en månad, och minst en kräver ett varför, ett exempel eller en metod.
+      fritt: "Antalet frågor, flerval eller kort svar, frågor ur läromedlet eller från ämneslaget, vilken fråga som kräver en förklaring, och i moderna språk varför-frågan på svenska."
+      kryss: Minst en fråga krävde ett varför, ett exempel eller en metod
+    - namn: Alla svarar ur minnet
+      moment: [Provet]
+      vad: Varje elev svarar själv ur minnet, utan bok eller kamrat, innan något svar visas.
+      syns: Alla elever skriver samtidigt med stängd bok, och läraren ser ett svar från varje elev innan facit kommer.
+      varfor: "Att läsa om ger en känsla av att kunna. Att själv plocka fram stärker minnet och visar vad som inte satt. Det gav 0,37 mot att läsa om eller sammanfatta i 31 studier i skolan (Ruitenburg m.fl., 2026), och 0,22 mot inget prov (Dietrichson m.fl., 2026)."
+      belagg: provad
+      kallor: [ruitenburg-m-fl-2026, dietrichson-m-fl-2026]
+      kvar: Varje elev svarar själv och ur minnet innan svaret visas, och provet räknas inte till något betyg.
+      fritt: "Papper, minitavla, kort, muntligt eller att visa med kroppen, när alla svarar först. Ledtrådar och bilder för de yngsta."
+      kryss: Alla svarade själva innan svaret visades
+    - namn: Det rätta samma lektion
+      moment: [Facit]
+      vad: När alla har svarat visar du det rätta, och varje elev rättar sitt svar.
+      syns: Eleverna rättar sina svar med färgpennan mot facit innan lektionen går vidare, och markerar det de inte kunde.
+      varfor: "Utan facit sitter felen kvar till nästa prov (Pashler m.fl., 2007). Jämför man studier, gav prov med facit 0,54 och prov utan 0,37 (Yang m.fl., 2021), men två nyare översikter fann ingen säker skillnad (Ruitenburg m.fl., 2026; Dietrichson m.fl., 2026)."
+      belagg: provad
+      kallor: [pashler-m-fl-2007, yang-m-fl-2021, ruitenburg-m-fl-2026, dietrichson-m-fl-2026]
+      kvar: Det rätta visas samma lektion, när alla har svarat, och varje elev rättar sitt eget svar mot det.
+      fritt: "Facit på tavlan eller på ett blad, färgpenna eller bock, och eleven rättar själv eller i par. Provbladet stannar hos eleven."
+      kryss: Eleverna rättade mot facit samma lektion
+    - namn: Två svar bredvid varandra
+      moment: [Kontrasten]
+      vad: Två svar på samma fråga står bredvid varandra, och klassen säger vad som skiljer dem.
+      syns: "Eleverna säger eller skriver vad det ena svaret visar som det andra inte visar, först själva och sedan i par."
+      varfor: "Ett prov befäster det eleven har förstått men ger ingen säker vinst för förståelsen (Ruitenburg m.fl., 2026). Komponenten bygger på att två lösningar sida vid sida lär eleven välja mellan sätt, och att fel bredvid rätt gav mer förståelse i en studie (Rittle-Johnson m.fl., 2020)."
+      belagg: teori
+      kallor: [ruitenburg-m-fl-2026, rittle-johnson-m-fl-2020, pashler-m-fl-2007]
+      kvar: Svaren står bredvid varandra, eleverna säger vad som skiljer dem, och du säger vad som håller.
+      fritt: "Två eller tre svar: felet eller ordet bredvid ett svar som håller, och två rätta sätt när nästan alla kan, på tavlan eller på papper."
+      kryss: Klassen jämförde två svar och sa vad som skilde dem
+    - namn: Tillbaka efter några veckor
+      moment: [Provet]
+      vad: Varje område kommer tillbaka i proven efter en vecka, några veckor och några månader.
+      syns: Provet har frågor från förra veckan, förra området och förra terminen, och i matematik en uppgift som inte säger vilken metod den kräver.
+      raknas: false
+      varfor: "Det som övas vid ett tillfälle glöms fort. Spridd övning gav 0,39 mot samma övning samlad, mest när uppehållet mellan övningarna var minst en tiondel av tiden fram till provet, och blandade uppgifter gav 0,54 i matematik (Ruitenburg m.fl., 2026). I åk 7 gav de 0,83 (Rohrer m.fl., 2020)."
+      belagg: provad
+      kallor: [ruitenburg-m-fl-2026, pashler-m-fl-2007, rohrer-m-fl-2020]
+      kvar: Eleverna plockar fram det viktiga igen minst två gånger med veckor emellan, i matematik blandat så att de väljer metod.
+      fritt: "Hur många veckor emellan och vilka områden, provet igen med nya tal, en uppgift i ett nytt sammanhang och läxan."
+      kryss: Provet hade en fråga från ett äldre område
+roll:
+  rubrik: "Lärarens roll: du frågar om det som varit och låter det komma tillbaka"
+  text: Du leder provet och facit, låter klassen tänka själv i kontrasten och ser till att det som ska sitta kommer tillbaka efter några veckor.
+  fragor:
+    - Vad ska sitta om en månad?
+    - Vad visar svaren om hur de tänker?
+    - När kommer det här tillbaka?
+  fragornaText: "Du har dem med dig i varje del: när du väljer frågorna, när du läser svaren vid facit och kontrasten, och när du räknar felen och bestämmer när frågan kommer tillbaka."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 2 Lektionen: lagret i din lektion
+# ---------------------------------------------------------------------------------------------------------------------
+tidsschema:
+  rubrik: Provet i din lektion
+  rader:
+    - { tid: Före lektionen, fas: Före lektionen, vad: "Välj tre till fem frågor efter grovplaneringen: en lätt om förra veckan först, varför-frågan som nummer två och en om ett äldre område. Skriv dem på tavlan, och skriv facit till varför-frågan med två eller tre meningar att bocka." }
+    - { tid: 5 min, fas: Provet, form: Enskilt, vad: "Alla svarar ur minnet i skrivboken, med böckerna stängda, på frågor från olika tider." }
+    - { tid: 4 min, fas: Facit, form: Enskilt, vad: "Du visar facit, eleverna rättar med färgpennan och skriver en rad på provbladet, och du räknar eleverna med fel på frågan med flest fel." }
+    - { tid: 3 min, fas: Kontrasten, form: Gemensamt, vad: "Två svar på samma fråga står bredvid varandra, och eleverna säger vad som skiljer dem, först själva och sedan i par. Sist svarar alla på en följdfråga." }
+    - { tid: 30 min eller mer, fas: Din lektion, form: Läraren visar, vad: "Resten av lektionen undervisar du som du har planerat." }
+    - { tid: Efter lektionen, fas: Efter lektionen, vad: "Skriv frågan med flest fel i grovplaneringen, i den vecka den kommer tillbaka, med de två svar ni jämförde eller vill jämföra." }
+  varianter:
+    - nar: första lektionen
+      text: "Provet har två frågor om förra lektionen, den andra ett varför, och en lätt fråga från förra terminen. Kontrasten tar två minuter: du tänker högt om två svar på varför-frågan, och paren säger efter dig vad svar B visar."
+      delar:
+        - { fas: Provet, tid: 0–⁠5 min }
+        - { fas: Facit, tid: 5–⁠9 min }
+        - { fas: Kontrasten, tid: 9–⁠11 min }
+        - { fas: Din lektion, tid: 11–⁠45 min }
+    - nar: när provet ligger senare i lektionen
+      text: "I idrott och hälsa, slöjd eller hem- och konsumentkunskap kan provet komma när klassen samlas efter uppvärmningen eller i en paus i arbetet. Eleverna svarar muntligt eller visar med kroppen, och facit kommer direkt efter. Raden på provbladet skriver de nästa gång de har skrivboken."
+      delar:
+        - { fas: Din lektion, tid: 0–⁠20 min }
+        - { fas: Provet, tid: 20–⁠25 min }
+        - { fas: Facit, tid: 25–⁠29 min }
+        - { fas: Kontrasten, tid: 29–⁠32 min }
+  efter: "Kontrasten gör ni när fler än var femte har fel, och minst en gång i veckan. När hälften eller fler har fel, förklarar du dessutom igen med ett nytt exempel när din lektion börjar. De andra dagarna går minuterna till din lektion, och det som ska komma tillbaka står i grovplaneringen."
+steg:
+  rader:
+    - namn: Provet
+      fraga: "Plockar alla fram själva?"
+      alla: Skriver sitt eget svar i skrivboken i tystnad, med boken stängd, innan något svar visas.
+      titta: Tomma rader, och den som tittar hos grannen eller skriver snabbt men fel.
+      beslut: "Om fler än var femte har tomma rader eller tittar i boken, är frågorna för svåra. Ta en lättare fråga först nästa gång, och ge en ledtråd till den som behöver."
+      gor:
+        - Frågorna står på tavlan när eleverna kommer in. Läs dem högt när provet börjar, så att den som läser långsamt hinner.
+        - "”Läroböckerna stängda. Skriv det du minns. Det räknas inte.”"
+        - Ställ en klocka på fem minuter som alla ser, och gå runt utan att hjälpa till med svaren. Leta efter två svar till kontrasten.
+        - "Säg efter tre minuter: ”Gå vidare till fråga 3.” Den som blir klar tidigt svarar på extrafrågan, en svårare fråga sist på tavlan."
+        - "Säg ”Pennan ner”, också om några inte är klara."
+      fraser: ["Skriv det du minns. Det räknas inte.", "Pennan ner. Facit."]
+    - namn: Facit
+      fraga: "Vilken fråga hade flest fel, och hur många?"
+      alla: Rättar med färgpennan, räcker upp handen för det de hade fel på och skriver en rad på provbladet.
+      titta: Frågan med flest fel, och felet som kommer igen.
+      beslut: "Räkna eleverna med fel på frågan med flest fel, efter händerna och det du såg under provet. Saknas en enda bock på varför-frågan, är svaret fel. Talet avgör."
+      gor:
+        - "”Pennan ner. Ta färgpennan, och sudda inte.” Visa facit, i matematik med uträkningen, och varför-frågans två eller tre meningar."
+        - "”En bock för varje mening du har med. Ordet ensamt ger ingen bock.”"
+        - "”Räck upp handen om du hade fel på fråga 2.” Räkna händerna fråga för fråga, och se vilken som hade flest fel."
+        - "”Skriv en rad på provbladet.” Kommer en fråga tillbaka: ”Räck upp handen om du hade fel förra gången och rätt i dag.”"
+        - Gå bara igenom frågan med flest fel. Gör ni ingen kontrast, säg kort varför det rätta svaret håller.
+      fraser: ["Pennan ner. Ta färgpennan.", "Räck upp handen om du hade fel på fråga 2."]
+      redo:
+        nastanAlla: Högst 5 av 28 med fel. Gå vidare, och ge dem med fel en ny uppgift av samma slag när klassen arbetar. Frågan kommer tillbaka om några veckor.
+        deFlesta: 6–13 av 28 med fel. Gör kontrasten och ställ en följdfråga till alla. Ta frågan igen nästa vecka.
+        halften: 14 eller fler av 28 med fel. Gör kontrasten, och förklara igen med ett nytt exempel när din lektion börjar. Frågan kommer tillbaka nästa lektion.
+        tiden: "Räcker tiden inte till kontrasten, börjar ni nästa lektion med de två svaren. Skriv frågan i grovplaneringen."
+    - namn: Kontrasten
+      fraga: "Vad visar det ena svaret som det andra inte visar?"
+      alla: Säger vad som skiljer de två svaren, först själva och sedan i par, och svarar själva på följdfrågan.
+      titta: Att paren talar om innehållet och inte om vem som skrev.
+      beslut: "Säg själv vad som håller när klassen har jämfört. Såg klassen inte skillnaden, visa ett eget svar bredvid de två."
+      gor:
+        - Ta de två svaren ur din planering, eller två du såg under provet. Skriv av svaren utan namn, som svar A och svar B.
+        - Grundformen är ett fel eller ett svar med bara ordet, bredvid ett svar som håller. När nästan alla kan, passar två rätta sätt.
+        - "”Vad visar svar B som svar A inte visar? En minut själv, en minut i par.” Skriv på tavlan: ”Svar B visar …”"
+        - Peka växelvis på svaren och ringa in det som skiljer. Säg sist i en mening vad som håller, och skriv den bredvid svaren.
+        - Ställ en följdfråga om samma sak i ny form. Alla svarar i färg under sitt eget svar, och du ser vem som har felet kvar.
+      fraser: ["Vad visar svar B som svar A inte visar?", "En minut själv, en minut i par."]
+    - namn: Din lektion
+      vem: som du har planerat
+      fraga: "Vad från i dag ska komma tillbaka senare?"
+      alla: Arbetar med dagens innehåll, som du har planerat.
+      titta: Det i dagens lektion som är värt att minnas om en månad.
+      beslut: Skriv det i grovplaneringen efter lektionen, så att det kommer tillbaka första gången om ungefär en vecka.
+      gor:
+        - Undervisa som du har planerat. Frågor om det dagens lektion bygger på ställer du här, och inte i provet.
+        - Är frågan med flest fel en förkunskap till i dag, börja lektionen där.
+      fraser: ["Det här ska ni kunna om en månad."]
+lektionskort:
+  - { efter: klassen, text: "Lektionskortet är lektionen på ett A4: kärnan, provet, facit och kontrasten med det du säger, de tre utfallen och trappan. Skriv ut det och ha det i handen." }
+fastnar:
+  rubrik: Så rättar du
+  text: "Du rättar inte i efterhand. Eleven rättar sitt eget svar mot facit samma lektion, och du går bara igenom frågan med flest fel. Varför-frågan rättar eleven mot meningarna i facit, en bock per mening."
+  trappa:
+    - "Visa facit: ”Pennan ner. Ta färgpennan.”"
+    - Säg kort varför svaret håller.
+    - Visa två svar bredvid varandra när svaren skilde sig.
+    - Ge dem med fel samma slags uppgift samma lektion, med nya tal eller ett nytt exempel.
+    - Ta frågan igen i ett senare prov.
+  motto: Felet visar vad vi ska öva på.
+amnesexempel:
+  - amne: lasning
+    arskurs: åk 2
+    innehall: "Faktatext om grodan: ord och innehåll en vecka senare"
+    overst:
+      egen: "Bestämda frågor om förra veckans faktatext, och ett varför. Att skriva allt man minns ger för lite hos de yngsta."
+      visar: Alla ritar eller skriver ett ord på minitavlan och visar på signalen.
+    scen:
+      - "Tänk dig en lektion i svenska i åk 2. För en vecka sedan läste klassen en faktatext om grodan. Boken är stängd. Du läser tre frågor högt och visar en bild till varje: ”Var lägger grodan sina ägg? Vad kallas ungarna? Varför kan grodynglet inte leva på land?”"
+      - "Alla tänker tyst, ritar eller skriver ett ord på minitavlan och visar på din signal. Du läser facit och visar bilden ur boken. Fråga 3 har flest fel: 4 av 26. Nästan alla kan. Du säger: ”Grodynglet andas med gälar, som en fisk.” Frågan kommer tillbaka om några veckor."
+    notera: "Notera vad som hände. Bestämda frågor och bilder gav alla något att plocka fram utan att skriva mycket. Hade fler än fem haft fel, hade du visat två svar bredvid varandra: ”Det kan inte gå” och ”Det andas med gälar”."
+  - amne: skrivning
+    arskurs: åk 9
+    innehall: "Argumenterande text: ett argument och en förklaring i samma stycke"
+    overst:
+      egen: "Ett stycke har ett argument och en förklaring. Felet: att kunna regeln men skriva argumentet utan förklaring."
+      visar: Alla skriver i skrivboken, och skriver om sin mening i färg efter kontrasten.
+    scen:
+      - "Tänk dig en lektion i svenska i åk 9. För fyra veckor sedan skrev klassen insändare, och fråga 2 i provet är: ”Skriv ett stycke om mobilfria skolor, med ett argument och en förklaring.”"
+      - "Facit har två meningar att bocka: ett argument och en förklaring av varför det håller. 11 av 28 har bara argumentet. De flesta kan. Du skriver två elevsvar bredvid varandra, utan namn. Svar A: ”Mobilen stör i klassrummet.” Svar B: ”Mobilen stör, eftersom den som får ett meddelande tappar tråden.” Du frågar: ”Vad visar svar B som svar A inte visar?”"
+      - "Paren säger att svar B förklarar. Alla skriver om sin egen mening i färg med ett eftersom, och du läser några högt."
+    notera: "Notera vad som hände. Regeln satt, men den syntes inte i texterna förrän två meningar stod bredvid varandra. Hade högst fem haft fel, hade frågan kommit tillbaka i ett prov om några veckor."
+  - amne: matematik
+    arskurs: åk 6
+    innehall: "Omkrets och area hos rektanglar, och skala från förra området"
+    huvud: true
+    overst:
+      egen: "Omkrets och area är olika saker, och samma omkrets kan ge olika area."
+      visar: Alla skriver i skrivboken och räcker efter facit upp handen för de frågor de hade fel på.
+    plan:
+      klass: 6B
+      datum: ons 9/9
+      lektion: 2 av 12
+      mal: "räkna ut 10 % och 25 % av ett belopp"
+      belagg: "25 % av 60 kr sist i lektionen"
+      blad: "frågorna på tavlan och facit med tre meningar"
+      forberett: "frågorna uppläsda, och rutpapper till den som vill rita"
+      fore: { veckan: "Staketet runt en rabatt som är 8 m och 3 m", omradet: "Skala 1:1 000, 3 cm på kartan", terminen: "Inget i dag", varfor: "Två rektanglar med omkretsen 18 cm: samma area?", svarA: "”5 och 4, 6 och 3. Samma omkrets, samma area.”", svarB: "”5 och 4 är 20 rutor, 6 och 3 är 18. Olika area.”", fragan: "Vad visar svar B som svar A inte visar?" }
+      delar:
+        - { fas: Provet, text: "Rita en kvadrat med omkretsen 20 cm. Hur stor är arean?" }
+        - { fas: Facit, text: "Två rektanglar, arean för båda, och att den kan skilja sig" }
+        - { fas: Kontrasten, text: "Omkretsen är kanten, arean är rutorna innanför." }
+        - { fas: Din lektion, text: "Procent: 10 % och 25 % av ett belopp" }
+      beslut: { elever: 28, nastanAlla: "om tre veckor, med omkretsen 24 cm", deFlesta: ["svar A bredvid svar B", "7 och 2 har också omkretsen 18 cm. Hur stor är arean?"], halften: "rutpapper: rita och räkna rutorna" }
+      efter: { kontrollen: "fråga 2, 9 av 28 med fel", hogar: "ett svar som räknade omkretsen i stället för arean", sag: "”B räknade rutorna, och det gjorde inte A.”", kryss: [1, 2, 3, 4, 5], nasta: "arean med omkretsen 24 cm, och 25 % av 60 kr", forst: "omkrets och area igen om tre veckor" }
+      lagg: ["Lägg märke till: båda svaren har rätt rektanglar, och bara svar B räknar arean."]
+    remsa:
+      - "Fråga 2 krävde en förklaring av omkrets och area, och ett tal räckte inte."
+      - Alla 28 skrev ur minnet i skrivboken, med böckerna stängda.
+      - Samma lektion rättade alla med färgpennan mot facit, med tre meningar att bocka.
+      - "Svar A stod bredvid svar B: samma rektanglar, men bara B räknade arean."
+      - Skala kom från förra området, och arean kommer tillbaka nästa vecka med omkretsen 24 cm.
+    scen:
+      - "Tänk dig en lektion i matematik i åk 6. Omkrets och area var förra veckan, och skala förra området. På tavlan står: ”1 En rektangulär rabatt är 8 m och 3 m. Hur långt staket behövs runt den? 2 Rita två rektanglar som båda har omkretsen 18 cm. Har de samma area? Förklara. 3 En karta har skalan 1:1 000. Hur långt är 3 cm på kartan i verkligheten?”"
+      - "Efter fem minuter visar du facit, och för fråga 2 tre meningar att bocka."
+      - "Fråga 2 har flest fel: 9 av 28 svarade att arean blir lika. De flesta kan. Du visar två svar. Svar A: ”5 och 4, 6 och 3. Samma omkrets, samma area.” Svar B: ”5 och 4 är 20 rutor, 6 och 3 är 18. Olika area.” Du frågar: ”Vad visar svar B som svar A inte visar?” Paren räknar rutorna. Du säger: ”Omkretsen är kanten, arean är rutorna innanför.” Alla svarar i färg på följdfrågan: ”7 och 2 har också omkretsen 18 cm. Hur stor är arean?”"
+    notera: "Notera vad som hände. Fråga 1 sa inte omkrets, så eleverna valde metod själva. Facit med meningarna lät eleverna rätta varför-frågan själva, svar B visade det som svar A bara hade gissat, och följdfrågan visade vem som hade felet kvar. Med högst fem fel hade frågan väntat tre veckor, och med 14 eller fler hade du förklarat igen med rutpapper. Nu kommer den tillbaka nästa vecka med omkretsen 24 cm, och om tre veckor i ett nytt sammanhang."
+  - amne: so-no
+    amnesnamn: Kemi
+    arskurs: åk 8
+    innehall: "Kemiska reaktioner och energi: vad som händer vid en exoterm reaktion"
+    overst:
+      egen: "Vid en exoterm reaktion avges energi, ofta som värme. Felet: att kunna ordet exoterm utan att kunna säga vad som händer."
+      visar: Alla skriver i skrivboken och rättar mot facit med två meningar att bocka.
+    scen:
+      - "Tänk dig en lektion i kemi i åk 8. Klassen arbetade med kemiska reaktioner för fem veckor sedan, och frågan kommer från grovplaneringen: ”Vad händer vid en exoterm reaktion? Förklara med egna ord.”"
+      - "Facit har två meningar att bocka: ämnena reagerar och bildar nya ämnen, och energi avges, ofta som värme. Ordet ensamt ger ingen bock. 16 av 28 har bara skrivit ”Det är en exoterm reaktion”. Hälften eller färre kan."
+      - "Du visar två svar bredvid varandra. Svar A: ”Det är en exoterm reaktion.” Svar B: ”Två ämnen reagerar och blir ett nytt ämne, och då blir det varmt. Värme går ut.” Du frågar: ”Vad visar svar B som svar A inte visar?” Sedan förklarar du igen med stålull som brinner, där värmen känns. Frågan kommer tillbaka nästa lektion."
+    notera: "Notera vad som hände. Facit med meningarna gjorde att ordet ensamt inte räckte, och kontrasten visade varför. Hade högst fem haft fel, hade frågan kommit tillbaka om en månad med en ny reaktion."
+  - amne: praktisk-estetiska
+    amnesnamn: Idrott och hälsa
+    arskurs: åk 5
+    innehall: "Taktik i lagspel: att spela sig fri och skapa en tom yta i anfall"
+    overst:
+      egen: "Den som inte har bollen rör sig bort från försvararen, mot en tom yta. Felet: att alla springer mot bollen."
+      visar: Alla ställer sig på planen där de skulle vara, och säger sitt varför till en kamrat.
+    scen:
+      - "Tänk dig en lektion i idrott och hälsa i åk 5. För tre veckor sedan spelade klassen basket och övade att spela sig fri. Provet kommer efter uppvärmningen, när klassen samlas i mittcirkeln."
+      - "Du ritar en situation i anfall på en whiteboard: ”Din lagkamrat har bollen vid sidlinjen, och en försvarare står framför dig. Vart springer du, och varför?” Alla tänker tyst och ställer sig på din signal där de skulle vara. Sedan säger var och en sitt varför till en kamrat."
+      - "Du visar facit: bort från försvararen, ut mot en tom yta, så att bollen kan spelas fram. 3 av 24 springer mot bollen. Nästan alla kan. Klassen spelar, och du går först till de tre."
+    notera: "Notera vad som hände. Provet kom senare i lektionen och var muntligt och med kroppen, och alla svarade själva innan facit. Hade fler än fyra sprungit mot bollen, hade du visat två placeringar bredvid varandra först."
+stod:
+  rubrik: Elever som behöver mer stöd
+  rader:
+    - { nar: Den som är ny i svenska, metoden: "Du läser frågorna högt, och eleven svarar med ett ord, en bild, en siffra eller genom att peka. Varför-frågan kan hen besvara med en bild eller muntligt.", du: "Visa ämnets ord med bild före lektionen, och låt bild och ord stå kvar vid facit och kontrasten. Ge instruktionen på modersmålet när det går." }
+    - { nar: Den yngsta, metoden: "Bestämda frågor, bilder och muntliga svar gör att eleven kan plocka fram utan att skriva allt.", du: "Ställ en bestämd fråga, som ”Var lägger grodan sina ägg?” Ge en ledtråd, som första ljudet, till den som behöver den." }
+    - { nar: Den som ofta har fel, metoden: "Provet räknas inte, frågorna går att svara på delvis, och facit kommer direkt.", du: "Börja med en fråga som de flesta klarar, och ge en ledtråd bara till hen. Visa vid facit vad hen hade rätt på, och gå först till hen i din lektion med en ny uppgift av samma slag." }
+    - { nar: Den som redan kan, metoden: "Varför-frågan och frågorna från äldre områden ger något att arbeta med.", du: "Ge extrafrågan eller en uppgift i ett nytt sammanhang, eller be eleven skriva en fråga med facit till ett senare prov." }
+    - { nar: När många behöver hjälp samtidigt, metoden: "I kontrasten arbetar hela klassen med frågan med flest fel på en gång.", du: "Visa två svar bredvid varandra och ställ en följdfråga som alla svarar på, i stället för att gå runt till var och en. De som är klara gör extrafrågan." }
+    - { nar: När metoden inte räcker, metoden: "Provbladet visar om eleven har fel på samma slags fråga gång på gång.", du: "Har eleven samma fel efter kontrasten och ett nytt exempel, visa hens provblad för specialläraren. Räcker inte det, ta det med elevhälsan." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 3 Kom igång
+# ---------------------------------------------------------------------------------------------------------------------
+progression:
+  rubrik: De första veckorna
+  text: "Metoden är ny för dig och för klassen. Alla fem delarna av kärnan finns från första lektionen i liten form, och veckorna säger vad ni övar särskilt. I vecka 5 kommer området från vecka 1 tillbaka, med nya tal eller ett nytt exempel. Upprepa en vecka tills rutinen sitter."
+  rader:
+    - { vecka: "1", led: I liten form, rubrik: Provet ur minnet, eleverna: "Att svara själv ur minnet, med boken stängd, innan svaret visas.", roll: "Att fråga bakåt, läsa frågorna högt och vänta med facit till ”Pennan ner”.", vidare: "nästan alla skriver ett eget svar innan facit visas", fraga: "Skriver nästan alla ett eget svar innan facit visas?" }
+    - { vecka: "2", led: I liten form, rubrik: Facit och färgpennan, eleverna: "Att rätta sitt eget svar med färgpennan och skriva en rad på provbladet.", roll: "Att räkna eleverna med fel på frågan med flest fel och välja utfall efter talet.", vidare: "nästan alla rättar sitt eget svar, och du väljer utfall efter talet", fraga: "Rättar nästan alla sitt eget svar, och väljer du utfall efter talet?" }
+    - { vecka: "3", led: I liten form, rubrik: Frågor från olika tider, eleverna: "Att svara på frågor om förra veckan och förra området.", roll: "Att välja frågorna efter grovplaneringen, med en varför-fråga i varje prov.", vidare: "de flesta svarar på frågan från förra området och varför-frågan", fraga: "Hade varje prov en fråga från förra området och ett varför, och svarade de flesta på dem?" }
+    - { vecka: "4", led: Hela varvet, rubrik: Kontrasten, eleverna: "Att hitta vad som skiljer två svar, själv och i par, och svara på följdfrågan.", roll: "Att välja två svar under provet, vänta på paren och säga sist vad som håller.", vidare: "de flesta svarar rätt på följdfrågan efter kontrasten", fraga: "Säger nästan alla vad som skiljer svaren, och svarar de flesta rätt på följdfrågan?" }
+    - { vecka: "5", led: Hela varvet, rubrik: Tillbaka efter några veckor, eleverna: "Att skriva det som blev rätt sedan vecka 1 under Fel förut, rätt nu.", roll: "Att visa var eleverna skriver det som blev rätt, och räkna händerna för fel då och rätt i dag.", vidare: "nästan alla hittar raden från vecka 1 på provbladet", fraga: "Hittar nästan alla raden från vecka 1, och vet du hur många som hade fel då och rätt nu?" }
+uppfoljning:
+  text: Du ser om metoden fungerar på frågan med flest fel, på frågorna från äldre områden och i grovplaneringen.
+  rader:
+    - { id: lektionen, nar: Varje lektion, tid: varje lektion, vad: "Räkna felen på frågan med flest fel, och skriv i grovplaneringen när den kommer tillbaka: nästa lektion, nästa vecka eller om några veckor." }
+    - { id: klassen, nar: Klassens svar varje vecka, tid: varje vecka, vad: "Räkna hur många som klarar frågan från ett äldre område. Det är där återkomsten syns, och talet växer långsamt." }
+    - { id: lararen, nar: Dina kryss varje vecka, tid: varje vecka, vad: "Räkna hur ofta kärnans fem delar fanns i veckans lektioner. Kärnan glider lätt mot frågor om fakta utan återkomst, och det märks inte i en lektion." }
+    - { id: observationerna, nar: Vecka 2 och 5, tid: vecka 2 och 5, vad: "Specialläraren besöker klassen i vecka 2 och läser provbladen hos dem som ofta har fel. En kollega eller rektor besöker klassen i vecka 5 och läser grovplaneringen." }
+    - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "Ämneslaget skriver in återkomsterna i grovplaneringen före den tredje veckan med provet och bokar besöken." }
+    - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "Ni ses igen i slutet av vecka 5 med grovplaneringarna och bestämmer hur ni fortsätter." }
+    - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "Ämneslaget går igenom grovplaneringarna en gång i månaden: vad kom tillbaka, och vad föll bort? En kollega är med vid ett prov per termin. Elever med samma fel kvar får stödundervisning." }
+    - { id: sexveckor, nar: Sex veckor efter de första veckorna, tid: efter 6 veckor, vad: "Räkna samma saker som varje vecka, och be en kollega se ett prov. Kommer frågorna från äldre områden fortfarande tillbaka?" }
+    - { id: nastatermin, nar: Nästa termin, tid: efter 16 veckor, vad: "Första veckan efter lovet har provet frågor från förra terminen. Räkna hur många som klarar dem, och se om ni använder metoden i fler ämnen." }
+    - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen ”Hur säker är jag på metoden?” under 5 i två veckor i rad, gör om veckan och be en kollega se ett prov och facit." }
+    - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen ”Hur väl fungerar den i praktiken?” under 5 i två veckor i rad, ta färre och lättare frågor och be specialläraren läsa provbladen." }
+checklista:
+  rubrik: Före första lektionen
+  punkter:
+    - Välj ämnet och de två eller tre lektioner i veckan där provet ligger.
+    - "Skriv upp det som är värt att minnas i arbetsområdet: begreppen och de uppgifter eleverna ska klara."
+    - "Kopiera den tomma grovplaneringen i bilaga A och skriv in återkomsterna före den tredje veckan med provet."
+    - Klistra in provbladet längst bak i varje elevs skrivbok, och lägg fram färgpennor.
+    - Skriv ut affischen Så gör vi provet, och sätt upp den där alla ser den.
+    - Boka observationerna, en av dem med specialläraren.
+    - Bestäm med ämneslaget vilka frågor och vilken grovplanering ni delar.
+    - Säg till klassen och vårdnadshavarna att proven inte räknas, och varför ni gör dem.
+klassen:
+  rubrik: Så ordnar du klassen
+  text: "Under provet ligger läroböckerna undan och skrivboken uppslagen längst bak, med färgpennan framme. Varje elev har en bestämd kamrat bredvid sig för kontrasten. Den som behöver en ledtråd sitter där du kan ge den utan att stoppa klassen, och den som är ny i svenska sitter där hen ser bilderna på tavlan."
+forsta:
+  rubrik: Första lektionen
+  text:
+    - "Första gången är provet två frågor om förra lektionen och en lätt fråga från förra terminen, på något klassen kan, så att alla svarar på något. Den andra frågan om förra lektionen är ett varför. Facit och kontrasten visar du själv: ni rättar varför-frågan högt tillsammans, och du tänker högt om två svar medan du pekar mellan dem. Ni övar rutinen Provet."
+    - "Du säger: ”Det här är ett prov som inte räknas. Det samlas inte in. Det hjälper er att minnas, och det ni inte minns är det vi ska öva på.” Säg också att det ska kännas lite svårt."
+  plan:
+    amne: Matematik
+    klass: 6B
+    datum: mån 31/8
+    lektion: "4 av 6"
+    mal: "räkna ut omkretsen och arean av en rektangel"
+    belagg: "en rektangel med omkretsen 20 cm sist i lektionen"
+    blad: "provbladen inklistrade, och färgpennor"
+    forberett: "frågorna uppläsda till den som behöver"
+    fore: { veckan: "Omkretsen av 7 cm och 2 cm, från förra lektionen", terminen: "3/4 av 20, från åk 5", varfor: "Varför lägger du ihop alla fyra sidorna?", svarA: "”Det är omkretsen.”", svarB: "”Man går runt hela, två långa och två korta sidor.”", fragan: "Vad visar svar B som svar A inte visar?" }
+    delar:
+      - { fas: Provet, text: "Omkretsen av en kvadrat med sidan 6 cm" }
+      - { fas: Facit, text: "Omkretsen går runt hela. Två långa och två korta sidor." }
+      - { fas: Kontrasten, text: "Omkretsen är hela vägen runt." }
+      - { fas: Din lektion, text: "Arean av en rektangel" }
+    beslut: { elever: 28, nastanAlla: "om några veckor, vecka 40", deFlesta: ["svar A bredvid svar B", "omkretsen av 5 cm och 3 cm"], halften: "en rektangel på rutpapper, sida för sida" }
+rutiner:
+  rubrik: Rutinerna klassen lär sig
+  rader:
+    - namn: Provet
+      vecka: 1
+      vad: "Provet är tre till fem frågor ur minnet i högst fem minuter när lektionen börjar, med böckerna stängda. Det räknas inte, och eleverna skriver svaren längst bak i skrivboken. Stegen står på affischen Så gör vi provet. Den som blir klar tidigt svarar på extrafrågan."
+      steg: ["Läs frågorna på tavlan när du kommer in.", "Stäng läroboken och svara själv, i tystnad.", "Pennan ner när de fem minuterna är slut."]
+      forsta: "Öva med två frågor om förra lektionen och en lätt från förra terminen. Säg varför ni gör provet och att det ska kännas lite svårt, och peka på affischen."
+    - namn: Facit och färgpennan
+      vecka: 2
+      vad: "Eleverna rättar sitt eget svar mot facit samma lektion, i en annan färg och utan att sudda. De räcker upp handen för det de hade fel på och skriver en rad på provbladet. Du samlar inte in."
+      steg: ["Ta färgpennan, och sudda inte.", "Rätta ditt eget svar mot facit, bocka varje mening du har med och skriv det rätta bredvid felet.", "Räck upp handen för det du hade fel på.", "Skriv på provbladet det du hade fel på, och det som var fel förut och är rätt nu."]
+      forsta: "Facit finns från första lektionen. De första gångerna rättar ni varför-frågan högt tillsammans, en bock per mening, och du visar ett provblad med ett fel i färg: ”Det här är det vi ska öva på.” I vecka 2 rättar eleverna själva."
+    - namn: Kontrasten
+      vecka: 4
+      vad: "Du visar två svar på samma fråga bredvid varandra, utan namn, och klassen säger vad som skiljer dem. Grundformen är felet eller ordet bredvid ett svar som håller. Två rätta sätt passar när nästan alla kan."
+      steg: ["Titta på svar A och svar B.", "En minut själv: vad visar det ena som det andra inte visar?", "En minut i par.", "Läraren säger vad som håller.", "Svara själv på följdfrågan, i färg."]
+      forsta: "Kontrasten finns från första lektionen. De första gångerna jämför du själv: ta två svar på en fråga alla känner igen, peka mellan svaren och tänk högt, och låt paren säga efter dig vad svar B visar. I vecka 4 säger paren det först."
+larandet:
+  rubrik: Så syns lärandet i klassen
+  omraden:
+    - { omrade: amneskunskaper, syns: "Fler svarar rätt på frågor om det ni gick igenom för veckor sedan, och förklarar varför i stället för att bara ge ordet." }
+    - { omrade: sprak, syns: "Eleverna förklarar ämnets begrepp med egna ord och exempel, också när de saknar ordet." }
+uppdrag:
+  rubrik: Till arbetslaget
+  text: "Ämneslaget gör grovplaneringen och delar frågorna, så att återkomsterna står i den gemensamma planeringen och följer med när någon slutar. Ni har två möten på en timme var och två besök de första veckorna. Sedan tar ni en kvart på ämneslagets möte en gång i månaden, med grovplaneringarna och två elevsvar bredvid varandra. En gång per termin sitter ni med vid varandras prov. Har skolan inget ämneslag i ämnet, gör du grovplaneringen med en kollega i samma årskurs."
+  forbered:
+    text: Läs metoden och lathunden, och tänk igenom frågorna före första mötet.
+    fragor:
+      - Vad i ditt arbetsområde är värt att minnas om ett år?
+      - Var i dina lektioner berättar du vad ni gjorde förra gången, och var plockar eleverna fram det själva?
+      - Ta två elevsvar på samma fråga i ditt ämne. Vad kan den ena eleven, och vad kan den andra?
+      - "Titta på huvudfilmen: vad gör eleverna innan läraren visar facit?"
+  planera: "Skriv in återkomsterna för nästa arbetsområde i grovplaneringen tillsammans, och samla frågorna med två elevsvar till varje i ämneslagets mapp. Jämför två elevsvar på samma fråga tillsammans, som en kontrast för er själva."
+  genomfor: Gör provet två gånger i veckan i tre veckor innan du bedömer hur det går, och följ Lär dig metoden på metodens sida.
+  reflektera:
+    - Vilken fråga kom tillbaka efter några veckor, och hur många kunde den då?
+    - Vilka två svar visade du bredvid varandra, och vad sa eleverna?
+    - Vad bytte du ut för att få tid, och vad saknade du?
+    - Vad i grovplaneringen kom inte tillbaka, och varför?
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 4 Håll i
+# ---------------------------------------------------------------------------------------------------------------------
+lararensFragor:
+  rubrik: Lärarens frågor
+  fragor:
+    - { fraga: "Får jag sätta poäng på provet?", svar: "Nej. Provet räknas inte, och då vågar eleverna svara fel. Slutprovet i arbetsområdet bedömer du som vanligt. Prov utan betyg kändes mindre pressande (Yang m.fl., 2023).", komponent: Alla svarar ur minnet }
+    - { fraga: "Får jag hoppa över facit när tiden är knapp?", svar: "Nej. Ta hellre tre frågor och facit, och gå bara igenom frågan med flest fel. Utan facit står felen kvar till nästa prov (Pashler m.fl., 2007).", komponent: Det rätta samma lektion }
+    - { fraga: "Eleverna har glömt nästan allt. Har jag misslyckats?", svar: "Nej. Glömskan är väntad vid den första återkomsten, och det eleverna lär om går fortare än första gången (Pashler m.fl., 2007). Säg det till dem, och ta frågan igen nästa lektion.", komponent: Tillbaka efter några veckor }
+    - { fraga: "Får jag hoppa över kontrasten?", svar: "När nästan alla kan, ja, och minuterna går till din lektion. Gör den ändå minst en gång i veckan. Det är där klassen ser vad som skiljer ett ord från ett begrepp.", komponent: Två svar bredvid varandra }
+    - { fraga: "Får jag behålla min vanliga start på lektionen?", svar: "Ja, om den blir provet. Ett quiz utan poäng går bra. Ett startprov om tidigare innehåll gav inte mer än en startdiskussion i 15 skolor (Roy m.fl., 2023). Låt därför frågorna återkomma efter veckor, med ett varför.", komponent: Tillbaka efter några veckor }
+    - { fraga: "Hur hinner jag kursen när det gamla ska komma tillbaka?", svar: "Provet ersätter din egen repetition och en del av bokens uppgifter, och lagret tar tolv minuter två eller tre gånger i veckan. Lägg några av återkomsterna i läxan, så får lektionen mer tid (Pashler m.fl., 2007)." }
+hinder:
+  rubrik: Det svåraste med metoden
+  text: "Det svåraste är att låta innehållet komma tillbaka när klassen har gått vidare. Stoffet tränger på, läroboken går framåt, och provet krymper till en fråga om förra lektionen. Då försvinner det som får kunskapen att hålla över veckor, och återkomsterna kräver att du planerar hela kursen (EEF, 2021). Skriv därför in dem i grovplaneringen, helst innan terminen börjar och senast före den tredje veckan med provet, och hämta provets frågor därifrån (Pashler m.fl., 2007)."
+  kort: "Det som ofta faller bort är att innehållet kommer tillbaka när klassen har gått vidare. Skriv in återkomsterna i grovplaneringen senast före den tredje veckan med provet, och ta provets frågor därifrån."
+  komponent: Tillbaka efter några veckor
+fallgropar:
+  rubrik: Vanliga fallgropar
+  rader:
+    - { fallgrop: "Frågorna prövar bara ordet", hander: "Provet frågar efter namn, ord och årtal. Eleverna kan ordet men känner inte igen begreppet i en ny mening eller uppgift.", prova: "Byt en faktafråga mot ”Förklara varför” eller ”Ge ett exempel”, och i matematik mot en blandad uppgift.", komponent: Frågor om det som ska sitta }
+    - { fallgrop: "Svaren kommer från någon annan", hander: "Svaren ropas ut, paret svarar direkt eller eleverna tittar i boken. De som väntar känner igen svaret utan att ha plockat fram det.", prova: "Lägg undan böckerna. Alla skriver ett eget svar innan någon säger något, och sedan kommer facit.", komponent: Alla svarar ur minnet }
+    - { fallgrop: "Facit kommer senare", hander: "Du samlar in och rättar senare. Felen står kvar till nästa prov, eleven vet inte vad hen kan, och rättningen tar dina kvällar.", prova: "Visa facit samma lektion, och eleverna rättar själva med färgpennan.", komponent: Det rätta samma lektion }
+    - { fallgrop: "Kontrasten blir en uppvisning", hander: "Elev efter elev visar hur hen gjorde, och samtalet handlar om vem som skrev. Eller så visar du bara det rätta, och klassen ser inte varför.", prova: "Välj två svar medan eleverna skriver, visa dem utan namn och fråga vad det ena visar som det andra inte visar.", komponent: Två svar bredvid varandra }
+    - { fallgrop: "Inget kommer tillbaka", hander: "Provet gäller bara förra lektionen, och området bockas av när det är klart. Efter en månad har klassen glömt det mesta.", prova: "Ta en fråga från ett äldre område i varje prov, och välj den ur grovplaneringen.", komponent: Tillbaka efter några veckor }
+    - fallgrop: När eleverna tittar i boken eller hos grannen
+      moment: [Provet]
+      hander: Några tittar i boken eller hos grannen, och svaren visar inte vad var och en minns.
+      steg:
+        - Lägg undan böckerna innan du läser frågorna, och stå där du ser skrivböckerna.
+        - "Säg lugnt: ”Det du inte minns är det vi ska öva på.”"
+        - Ställ dig bredvid den som tittar, utan att säga något mer.
+        - Säg vid facit att ett tomt svar visar vad klassen ska öva på.
+        - Ta en lättare första fråga nästa gång.
+    - fallgrop: När en elev blir orolig
+      moment: [Provet]
+      hander: En elev säger att hen inte kan något, låser sig eller lämnar raderna tomma.
+      steg:
+        - Gå fram och tala lågt.
+        - "Säg: ”Skriv det lilla du minns. Det du inte minns ska vi öva på.”"
+        - Ge en bestämd fråga eller de första bokstäverna, bara till eleven.
+        - Påminn om att provet inte samlas in.
+        - Kom tillbaka vid facit och visa vad hen hade rätt på.
+    - fallgrop: När provet tar för lång tid
+      moment: [Provet, Facit]
+      hander: Provet växer till tio minuter och mer, och din lektion krymper.
+      steg:
+        - Ställ en klocka på fem minuter för hela provet, så att alla ser den.
+        - "Säg ”Pennan ner” när tiden är slut, också om några inte är klara."
+        - Visa facit och låt eleverna rätta själva.
+        - Gå bara igenom frågan med flest fel.
+        - Ta färre frågor nästa gång.
+hallFast:
+  rubrik: Fem saker att hålla fast vid
+  rader:
+    - { sak: "När arbetsområdet byts: för in det förra i grovplaneringen", text: "Annars bockas kunskaperna av som en lista när området är klart, och det som skulle komma tillbaka kommer inte." }
+    - { sak: "Efter ett lov: börja med frågor från före lovet", text: "Glömskan efter ett lov är väntad, och det som lärs om går fortare än första gången. Säg det till eleverna." }
+    - { sak: "När provet har blivit en vana: läs en veckas frågor", text: "Frågorna glider lätt mot ord och fakta, och utan facit och kontrast blir provet en kul start. Byt en faktafråga mot ett varför." }
+    - { sak: "Inför ett stort prov: fortsätt med de korta proven", text: "Spridd övning ger mer än samma övning samlad, och de korta proven är redan repetitionen." }
+    - { sak: "När en kollega tar över: lämna över grovplaneringen", text: "Det som står i den delade grovplaneringen blir kvar när någon slutar, och kollegan ser där vad som ska komma tillbaka." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga A Att skriva ut
+# ---------------------------------------------------------------------------------------------------------------------
+strukturkort:
+  text: "Två strukturkort ur verktyget Strukturer passar metoden när grunden sitter. Med strukturen Kontraster söker eleverna själva upp någon som har tänkt annorlunda, och med Provet två gånger gör de ett större prov enskilt och sedan i små grupper. Det viktiga är lektionens syfte, och strukturen är ett hjälpmedel. Den hör till metoden när eleverna först plockar fram själva och sedan jämför."
+  strukturer: [kontraster, provet-tva-ganger]
+ramar:
+  rubrik: Materialet för klassen
+  text: ["Utöver lektionskortet och strukturkorten finns två blad: provbladet för eleverna och affischen Så gör vi provet. Varje blad står på en egen sida. Grovplaneringen för dig och ämneslaget är en mall att skriva i, och den står efter observationsmallen."]
+  ramar:
+    - rubrik: Provbladet
+      text: ["Skriv ut liggande och klipp isär, så att varje elev får ett A5. Eleven klistrar in det längst bak i skrivboken och skriver svaren på sidorna närmast bladet. Efter varje prov skriver eleven en rad med datumet och det hen hade fel på, med ord och inte frågans nummer. Svarar eleven rätt när en sådan fråga kommer tillbaka, skriver hen den under Fel förut, rätt nu. Har du klassen i flera ämnen, får varje skrivbok sitt blad. I F–⁠2 skriver du klassens rad på tavlan i stället."]
+    - rubrik: Så gör vi provet
+      text: ["Skriv ut affischen i A3 och sätt upp den vid tavlan, eller visa den på skärmen. De första veckorna pekar du på stegen när klassen övar provet och facit."]
+tabeller:
+  - rubrik: Veckans träning
+    plats: efter-progression
+    text: "När provet har blivit en rutin kan du ge eleverna 30 till 60 minuter i veckan att träna på det deras prov visade. Det passar när ni har prov ofta, eleverna skriver sina fel på provbladet och du har material att träna med, som grovplaneringens frågor med facit och bokens uppgifter av samma slag. När eleven vet vad hen kan och inte kan, är det lättare för er båda att lägga övningen där den behövs. Ingen blir ensam med det som är svårt."
+    kolumner: [Formen, Så gör ni, Tanken]
+    rader:
+      - ["Vid ett bord", "Elever med samma slags fel sitter vid ett bord med material till just det: uppgifter med facit och ett exempel som är löst steg för steg. Du sitter med vid det bord som behöver dig mest.", "Eleverna samlas kring det de har svårt med, och du ser var många fastnar."]
+      - ["I par", "Den ena berättar vad hen hade svårt med, de läser materialet tillsammans, och den andra förhör. Sedan byter de.", "Eleven förklarar och övar med någon, och blir inte ensam med det svåra."]
+      - ["Sist, i båda formerna", "Var och en svarar ur minnet på en fråga om det hen tränade och rättar mot facit. Är svaret rätt, skriver eleven det under Fel förut, rätt nu.", "Träningen slutar med att eleven plockar fram själv, och provbladet visar vad som sitter."]
+  - rubrik: Utveckla metoden
+    plats: efter-progression
+    meny: true
+    text: "Du behöver inget av det här för att börja. När provet, facit, kontrasten och grovplaneringen sitter, kan du lägga till en sak i taget. Till två av raderna finns strukturkort, som du skriver ut från metodens sida."
+    kolumner: [Det du bygger på, Så gör du, Tanken]
+    rader:
+      - ["Kontraster", "Du ställer en öppen fråga, och eleverna skriver sitt svar. De går runt, letar upp någon som har tänkt annorlunda och berättar vad de tänkt och varför. Sist skriver var och en vad hen tycker nu.", "Eleven söker själv upp ett annat sätt att tänka."]
+      - ["Provet två gånger", "Eleverna skriver ett större prov enskilt och behåller en kopia av svaren. Sedan gör de provet en gång till i små grupper, en fråga i taget, och var och en förklarar hur hen tänkte.", "Provet blir undervisning, och alla kan förklara svaret innan gruppen går vidare."]
+      - ["Mellanprovet", "Halvvägs i ett arbetsområde får eleverna samma uppgifter som i början, med nya tal, och ser på provbladet vad de hade fel på då.", "Eleven ser vad som har satt sig sedan början."]
+      - ["Frågeburken", "Skriv frågor med facit på lappar, och dra några till varje prov. Eleverna kan skriva egna frågor till burken.", "Frågorna finns kvar till nästa återkomst."]
+      - ["Egna frågor", "Eleverna skriver frågor med facit efter regler: sant eller falskt kräver en förklaring, och högst två frågor i rad får bara be om ett namn.", "Eleven tänker igenom vad som är värt att minnas."]
+      - ["Rösta två gånger", "Alla väljer ett svar, pratar med någon som valde ett annat, och väljer igen innan facit.", "Eleven prövar sitt svar mot ett annat."]
+      - ["Läxa med äldre uppgifter", "Lägg några uppgifter från en eller två månader tillbaka i läxan, och ta upp dem i nästa prov.", "Återkomsten får mer tid utan att lektionen krymper."]
+      - ["Felsvar bland svaren", "I en fråga med svar att välja mellan bygger du felsvaren på vanliga fel.", "Felsvaret eleven väljer visar vilket fel hen gör."]
+  - rubrik: Grovplaneringen
+    text: "Grovplaneringen är terminens plan för provet: vad som ska sitta i varje område och vilka veckor det kommer tillbaka. Ni gör den på en timme i ämneslaget före terminen, och du fyller på efter lektionerna. Kopiera den tomma mallen till Google Dokument eller Word, och dela den med ämneslaget. Exemplet är 6B i matematik under en hösttermin."
+    kolumner: [Terminen, I exemplet]
+    rader:
+      - ["Klass och ämne", "6B, matematik"]
+      - ["Terminen", "Hösten, vecka 34–51"]
+      - ["Lektionerna med provet", "Måndag och onsdag, från vecka 36"]
+      - ["Veckor utan prov", "Vecka 34–35, när terminen börjar, och höstlovet i vecka 44"]
+      - ["Ämneslaget", "Matematiklärarna i åk 6, med en delad mapp"]
+  - rubrik: "Grovplaneringen: områdena"
+    text: "Skriv en rad per område före terminen, med det som ska sitta om en månad, felet ni väntar er, en varför-fråga och de veckor då området kommer tillbaka: efter ungefär en vecka, några veckor och några månader. Det klassen använder varje lektion behöver inte komma tillbaka."
+    kolumner: [Området och veckorna, Det som ska sitta, Felet vi väntar oss, Varför-frågan, Tillbaka vecka]
+    rader:
+      - ["Skala\nvecka 34", "I skalan 1:1 000 är 1 cm på kartan 1 000 cm i verkligheten", "Gångrar åt fel håll, eller byter inte enhet", "Varför blir 3 cm på kartan 30 m i verkligheten?", "37, 40 och 47"]
+      - ["Omkrets och area\nvecka 35–36", "Omkretsen är kanten, och arean är rutorna innanför", "Tror att samma omkrets ger samma area", "Har två rektanglar med samma omkrets samma area?", "37, 40 och 48"]
+      - ["Procent\nvecka 37–40", "Procent är hundradelar. 10 % och 25 % av ett belopp i huvudet", "Tror att 25 % av 60 kr är 25 kr", "Varför är 25 % detsamma som en fjärdedel?", "41, 43 och 50"]
+      - ["Statistik\nvecka 41–43", "Medelvärde, typvärde och median, och att läsa ett diagram", "Tar mittersta talet utan att ordna talen", "Varför kan medelvärdet och medianen bli olika?", "45, 47 och 3 i vår"]
+      - ["Bråk\nvecka 45–47", "Bråk som en del av en helhet och som ett tal på tallinjen", "Tror att 1/8 är större än 1/6, eftersom 8 är större", "Varför är 1/8 mindre än 1/6?", "48, 50 och 5 i vår"]
+      - ["Sannolikhet\nvecka 48–50", "Sannolikhet som ett tal från 0 till 1", "Tror att en sexa blir mindre trolig efter tre sexor", "Varför är chansen lika stor vid nästa kast?", "51, i vår 2 och 6"]
+  - rubrik: "Grovplaneringen: veckorna"
+    text: "Skriv en rad per vecka, också för lov och veckor utan prov, så att återkomsterna hamnar i veckor med prov. Provet har alltid frågor om förra veckan, och Tillbaka i provet säger vad som kommer från äldre områden. Efter lektionen skriver du frågan med flest fel i den vecka den kommer tillbaka. Har du flera klasser, får varje klass en egen tabell."
+    kolumner: [Vecka, Vi arbetar med, Tillbaka i provet, Frågan med flest fel]
+    rader:
+      - ["34–35", "Skala, och omkrets och area", "Inget prov än", ""]
+      - ["36", "Omkrets och area", "Provet börjar: förra lektionen, och bråk från åk 5", "Omkretsen av 7 cm och 2 cm, 3 av 28 med fel. Tillbaka vecka 40"]
+      - ["37", "Procent", "Omkrets och area, och skala", "Två rektanglar, 9 av 28 med fel. Tillbaka vecka 38"]
+      - ["38", "Procent", "Två rektanglar, med nya tal", "Två rektanglar, 4 av 28 med fel. Tillbaka vecka 40"]
+      - ["39", "Procent", "Omkrets och area, förra området", "25 % av 60 kr, 11 av 28 med fel. Tillbaka vecka 40"]
+      - ["40", "Procent", "Omkrets och area, skala, och 25 % av ett belopp", ""]
+      - ["41", "Statistik", "Procent", "Procent som andel, 7 av 28 med fel. Tillbaka vecka 42"]
+      - ["42", "Statistik", "Procent som andel", ""]
+      - ["43", "Statistik", "Procent", "Typvärdet, 4 av 28 med fel. Tillbaka vecka 45"]
+      - ["44", "Höstlov", "", ""]
+      - ["45", "Bråk", "Från före lovet: statistik", "Medianen, 6 av 28 med fel. Tillbaka vecka 46"]
+      - ["46", "Bråk", "Medianen", ""]
+      - ["47", "Bråk", "Statistik, och skala", "Medelvärdet, 10 av 28 med fel. Tillbaka vecka 48"]
+      - ["48", "Sannolikhet", "Bråk, omkrets och area, medelvärdet", ""]
+      - ["49", "Sannolikhet", "Bråk, från förra området", ""]
+      - ["50", "Sannolikhet", "Bråk, och procent", "Att jämföra 3/4 och 5/8, 12 av 28 med fel. Tillbaka vecka 51"]
+      - ["51", "Repetition", "Blandat från hela terminen", ""]
+  - rubrik: "Grovplaneringen: frågorna"
+    text: "Frågorna med facit samlar ni område för område, när ni har gått igenom området. Till varje återkomst gör ni samma slags fråga med nya tal eller ett nytt exempel, så att eleverna inte lär sig svaret utantill. Varför-frågan börjar ofta med Varför, Förklara, ”Ge ett exempel” eller ”Vad skiljer”, och facit har två eller tre meningar, en för varje sak svaret ska visa. I matematik säger minst en fråga inte vilken metod den kräver, som staketet runt rabatten. Skriv två svar att visa bredvid frågan, så att kontrasten kommer tillbaka med den. Exemplet är området Omkrets och area."
+    kolumner: [Frågan, "Facit, det som ska bockas", Två svar att visa, Slaget och veckan]
+    rader:
+      - ["Hur stor är omkretsen av en rektangel som är 7 cm och 2 cm?", "7 + 2 + 7 + 2 = 18 cm", "A: 7 + 2 + 7 + 2\nB: (7 + 2) · 2", "Minns, 36"]
+      - ["En rektangulär rabatt är 8 m och 3 m. Hur långt staket behövs runt den?", "8 + 3 + 8 + 3 = 22 m. Staketet går runt, och 24 m² är arean", "A: 8 · 3 = 24\nB: 8 + 3 + 8 + 3 = 22 m", "Välj metod, 37"]
+      - ["Rita två rektanglar som båda har omkretsen 18 cm. Har de samma area? Förklara.", "Två rektanglar med omkretsen 18 cm. Arean räknad för båda. Arean kan skilja sig", "A: 5 och 4, 6 och 3, samma area\nB: 20 och 18 rutor", "Varför, 37"]
+      - ["Rita två rektanglar som båda har omkretsen 24 cm. Har de samma area? Förklara.", "Till exempel 8 och 4 cm, 32 cm², och 6 och 6 cm, 36 cm². Arean kan skilja sig", "A: 8 och 4, 6 och 6, samma area\nB: 32 cm² och 36 cm²", "Varför, nya tal, 38"]
+      - ["En rektangulär hage ska ha 24 m staket. Vilka mått ger störst yta? Förklara.", "6 m och 6 m ger 36 m². Ju smalare hagen är, desto mindre yta", "A: 8 m och 4 m\nB: 6 m och 6 m, 36 m²", "Nytt sammanhang, 40"]
+      - ["En kvadrat och en annan rektangel har båda omkretsen 16 cm. Vilken har störst area? Förklara.", "Kvadraten, 4 och 4 cm, har 16 cm². En rektangel som är 6 och 2 cm har 12 cm²", "A: Lika stora\nB: 16 cm² och 12 cm²", "Varför, nytt exempel, 48"]
+  - rubrik: "Grovplaneringen: till nästa termin"
+    text: "Den här delen skriver ni i ämneslaget sist på terminen. Det som ska fortsätta komma tillbaka står först i nästa termins grovplanering. Första veckan efter lovet har provet frågor från förra terminen."
+    kolumner: [Det som kommer tillbaka, Vecka i vår, Det ni såg i höst]
+    rader:
+      - ["Sannolikhet", "2 och 6", "Det sista området, med en återkomst i höst"]
+      - ["Statistik", "3", "Medianen satt, men medelvärdet hade flest fel i vecka 47"]
+      - ["Bråk", "5", "Att jämföra bråk med olika nämnare hade flest fel"]
+      - ["Procent", "8", "Satt efter tre återkomster, så det räcker med en"]
+planeringsmall:
+  text: "Skriv på din egen planering eller på bladet, och välj frågorna efter grovplaneringen."
+  fore:
+    - { etikett: "Frågorna i provet", rader: ["Förra veckan:", "Varför-frågan:", "Förra området:", "Förra terminen:"], falt: [veckan, varfor, omradet, terminen] }
+    - { etikett: "Kontrasten jag kan visa", rader: ["Svar A:", "Svar B:", "Frågan till klassen:"], falt: [svarA, svarB, fragan] }
+  delar:
+    - { fas: Provet, skriv: "Extrafrågan:", not: "Den som blir klar tidigt svarar på en svårare fråga sist på tavlan.", hojd: 0.9 }
+    - { fas: Facit, skriv: "Meningarna att bocka:", not: "Saknas en enda bock på varför-frågan, är det fel.", hojd: 1.0 }
+    - { fas: Kontrasten, skriv: "Det jag säger sist:", hojd: 0.7 }
+    - { fas: Din lektion, skriv: "Lektionen:", hojd: 0.6 }
+  beslut: { nastanAlla: "Kommer tillbaka:", deFlesta: ["Två svar:", "Följdfrågan:"], halften: "Det nya exemplet:" }
+  efter:
+    text: "Fyll i direkt efter lektionen. Det tar en minut."
+    kontrollen: "Frågan med flest fel: ___ av ___ med fel"
+    hogar: "Svaren jag sparar till nästa kontrast"
+    sag: "Det eleverna sa om de två svaren"
+    nasta: "I nästa prov tar jag med"
+    forst: "I grovplaneringen:"
+  overst: ["Det som ska sitta om en månad"]
+  kolumner: ["Vad jag gör och vad eleverna gör"]
+  sist: ["Efter lektionen: frågan med flest fel och när den kommer tillbaka", Nästa prov]
+observation:
+  fraga: Plockar alla fram själva innan facit visas, och vad gör läraren och klassen med svaren?
+  text: "Skriv ut dubbelsidigt, och välj med läraren två elever att följa, A och B, gärna en som ofta har fel. Stå där du ser deras skrivböcker. Skriv frågornas början och hur långt tillbaka de går, räkna hur många som skriver ett eget svar och skriv vad läraren gör efter facit."
+  fokus: Hur många skrev ett eget svar innan facit?
+  huvud: ["Frågorna i dag och hur långt tillbaka de går"]
+  kolumner:
+    - { namn: Frågan, text: "början av frågan, och hur långt tillbaka den går", bredd: 30 }
+    - { namn: Alla svarar, text: "eget svar · tomt · tittar", bredd: 17, elever: true }
+    - { namn: Efter svaren, text: "facit, kontrasten och beslutet", bredd: 30 }
+  tecken: "+ eget svar ur minnet, t tittar i boken eller hos grannen, 0 tomt, h handen upp vid facit, s säger något i kontrasten."
+  delar:
+    - { fas: Provet, rader: 4, rakna: "Skrev ett eget svar: ___ av ___   Frågor från ett äldre område: ___   Ett varför: ja · nej" }
+    - { fas: Facit, rader: 2, rakna: "Rättade sitt eget svar: ___ av ___   Frågan med flest fel: ___ med fel" }
+    - { fas: Kontrasten, rader: 2, rakna: "Två svar bredvid varandra: ja · nej   Sa vad som skilde svaren: ___ av ___" }
+  streck:
+    - { etikett: Frågorna, drag: ["En fråga om något från veckor sedan", "En fråga med ett varför eller en metod"] }
+    - { etikett: Efter svaren, drag: ["Facit samma lektion", "Två svar bredvid varandra", "Sparar frågan till senare"] }
+  rader:
+    - "Frågor som krävde ett varför, ett exempel eller en metod: __ av __"
+    - "Elever som skrev ett eget svar innan facit: __ av __"
+    - "Elever som rättade sitt eget svar samma lektion: __ av __"
+    - "Elever som sa något om vad som skilde de två svaren: __ av __"
+    - "Frågor från ett äldre område: __ av __. Frågan med flest fel i grovplaneringen: ja · nej"
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga B Valet och forskningen
+# ---------------------------------------------------------------------------------------------------------------------
+passar:
+  rubrik: När passar metoden?
+  kort: "klassen har förstått något som ska sitta länge. Är innehållet nytt, passar Explicit undervisning bättre."
+  rader:
+    - { fraga: "Vad ska eleverna lära sig?", metoden: "Det som ska sitta länge och användas igen: begrepp, fakta och färdigheter som ämnet bygger på.", annat: "Något nytt som klassen inte har mött. Då passar Explicit undervisning, och det nya kommer med i provet senare." }
+    - { fraga: "Hur mycket kan eleverna redan?", metoden: "De har mött och förstått innehållet, och nu ska det hålla.", annat: "De har inte förstått det än. Undervisa först, och låt det komma tillbaka sedan." }
+    - { fraga: "Hur hänger innehållet ihop?", metoden: "Delar som går att plocka fram och sedan använda i större uppgifter.", annat: "Många delar som hänger ihop för en nybörjare. Börja med lösta exempel och genomgång, eftersom effekten av proven då minskar (Van Gog och Sweller, 2015)." }
+    - { fraga: "Vad vill du veta efter provet?", metoden: "Vad klassen minns efter veckor, och vad som ska komma tillbaka.", annat: "Var klassen är i dag, för att välja nästa steg i lektionen. Då passar Formativ bedömning." }
+    - { fraga: "Vad går oftast snett?", metoden: "Eleverna klarar provet i arbetsområdet och har glömt innehållet en månad senare.", annat: "Eleverna samarbetar inte, och samtalen kommer inte igång. Då passar Kooperativt lärande, och ni kan göra kontrasten i en struktur." }
+  tumregel: "Har klassen förstått något som ska sitta länge, låt det komma tillbaka i korta prov. Har den inte förstått det än, undervisa först. Valkartan är ett stöd för tanken och ingen regel."
+  metoder: [explicit-undervisning, formativ-bedomning, kooperativt-larande]
+invandningar:
+  rubrik: Invändningar och nyanser
+  fragor:
+    - { fraga: "Blir det inte mekanisk minnesträning?", svar: "Risken finns. Framplockningen hjälper mest med det som saknar sammanhang (Van Gog och Sweller, 2015). I skolan gav den 0,53 för fakta och ingen säker vinst för förståelse eller överföring (Ruitenburg m.fl., 2026). En lärare invänder i Nämnaren att elever som ser mening behöver mindre repetition, och texten står i Läs mer. Därför gäller frågorna det ämnet bygger på, eleverna förklarar, och klassen jämför två sätt att tänka. Proven gäller det klassen redan har förstått." }
+    - { fraga: "Blir eleverna inte stressade av fler prov?", svar: "Prov ur minnet minskade provängslan i 24 studier (Yang m.fl., 2023). Samma översikt varnar för att själva provet kan kännas pressande, och lätta prov minskade ängslan mest. Därför räknas proven inte, första frågan är lätt, och felen visar vad klassen ska öva på." }
+    - { fraga: "Är det inte formativ bedömning med ett annat namn?", svar: "Nej. Här lär sig eleverna av själva framplockningen. IES bedömde stödet för prov ur minnet som starkt, och stödet för prov som visar vad eleverna behöver lära sig som lågt (Pashler m.fl., 2007). Du använder svaren, men effekten kommer av att alla plockar fram och att innehållet kommer tillbaka över veckorna. Metoderna går bra ihop." }
+    - { fraga: "Fungerar det i matematik, eller bara för glosor och fakta?", svar: "I matematik är det blandningen som hjälper mest. Blandade uppgifter där eleven väljer metod gav 0,54, och de gav också säkra vinster för förståelse och överföring (Ruitenburg m.fl., 2026). Blandade uppgiftsblad i åk 7 gav 0,83 på forskarnas prov efter en månad (Rohrer m.fl., 2020), men ett läsår med blandade uppgifter i Nigeria gav ingen säker effekt på årsprovet (van der Haar m.fl., 2023). Att bara plocka fram en räknemetod har osäkrare stöd." }
+grund:
+  rubrik: Det forskningen visar
+  text:
+    - "Det metoden bygger på heter i forskningen framplockning (retrieval practice), spridning (spaced practice) och blandning (interleaved practice). De studeras oftast var för sig men hänger ihop: spridningen verkar genom att eleven plockar fram, och blandningen är alltid spridd. I 53 studier i grundskolans och gymnasiets klassrum gav framplockning 0,37, spridning 0,20 och blandning 0,40, jämfört med att läsa om, samla övningen eller öva en sorts uppgift i taget (Ruitenburg m.fl., 2026). Spridningen jämfördes med samlad eller mindre spridd övning, och mot mindre spridd blev det ingen säker skillnad."
+    - "Mot inget prov alls gav korta prov utan betyg 0,22 i 38 studier från åk 3 till gymnasiet, och 0,46 när samma elever övade både med och utan prov (Dietrichson m.fl., 2026). Nästan alla prov var korta och utan betyg, och resultatet mättes inom en vecka, oftast på forskarnas egna prov. Antalet prov gjorde nästan ingen skillnad. Små försök som lärare i engelska skolor själva ledde gav 0,30 (Churches m.fl., 2020)."
+    - "Proven gav 0,53 för fakta, men ingen säker vinst för begrepp, förståelse och överföring (Ruitenburg m.fl., 2026). Effekten minskar när innehållet har många delar som hänger ihop (Van Gog och Sweller, 2015), och den är mindre mot lösta exempel och andra aktiva arbetssätt än mot att läsa om (Dietrichson m.fl., 2026). Därför låter metoden eleverna förklara och jämföra svar, och proven gäller det klassen redan har förstått."
+    - "I matematik hjälper blandningen mest. Uppgifter av olika slag där eleven väljer metod gav 0,54, och också säkra vinster för förståelse och överföring (Ruitenburg m.fl., 2026). I den största studien i matematik, 787 elever i 54 klasser i åk 7, hade eleverna med blandade uppgifter 61 procent rätt mot 38 på ett prov en månad senare (Rohrer m.fl., 2020). Ett läsår i Nigeria gav en effekt på terminsproven men ingen säker effekt på årsprovet (van der Haar m.fl., 2023)."
+    - "I den enda stora studien med skolornas egna prov fick 1 074 elever i 15 engelska skolor ett startprov eller en startdiskussion i NO, och det blev ingen skillnad (Roy m.fl., 2023). Spridningen hjälpte mest när uppehållet var minst en tiondel av tiden till slutprovet, och det viktiga bör komma tillbaka minst två gånger med veckor emellan (Ruitenburg m.fl., 2026; Pashler m.fl., 2007). Om facit gör skillnad är inte avgjort: en stor översikt fann större effekt med facit, och två nyare fann ingen säker skillnad (Yang m.fl., 2021; Ruitenburg m.fl., 2026; Dietrichson m.fl., 2026)."
+    - "Proven minskade provängslan i 24 studier (Yang m.fl., 2023). I ordförråd fann den studie som låg närmast vanliga lektioner ingen nytta (Goossens m.fl., 2016). I stavning blev det ingen säker skillnad i den största studien (Bouwmeester och Verkoeijen, 2011). Att jämföra lösningar sida vid sida har stöd i forskning om matematik (Rittle-Johnson m.fl., 2020). Läsförståelse, textskrivning, teknik och studiero är inte studerade."
+kallor:
+  - { id: ruitenburg-m-fl-2026, doi: 10.1007/s10648-026-10225-5, slag: metaanalys, grupp: oversikt, omraden: [larande, lasning, skrivning, matematik, amnen], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,37 för framplockning, 0,20 för spridning, 0,40 för blandning", titel: "A Meta-Analysis of the Effectiveness and Boundary Conditions of Retrieval Practice, Distributed Practice, and Interleaved Practice in Authentic School Classrooms", text: "Ruitenburg, S. K., Goos, M., Lambert, G. m.fl. (2026). A Meta-Analysis of the Effectiveness and Boundary Conditions of Retrieval Practice, Distributed Practice, and Interleaved Practice in Authentic School Classrooms. Educational Psychology Review.", adress: "https://doi.org/10.1007/s10648-026-10225-5", oppnad: 2026-11-02 }
+  - { id: dietrichson-m-fl-2026, doi: 10.26300/jas3-2b83, slag: systematisk-oversikt, grupp: oversikt, omraden: [larande], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: g = 0,22 mot inget prov i 38 studier, åk 3 till gymnasiet", titel: "Testing frequency and student achievement: A systematic review", text: "Dietrichson, J., Seerup, J. K., Bondebjerg, A. m.fl. (2026). Testing frequency and student achievement: A systematic review. EdWorkingPaper, Annenberg Institute at Brown University.", adress: "https://doi.org/10.26300/jas3-2b83", oppnad: 2026-11-02 }
+  - { id: churches-m-fl-2020, doi: 10.1111/mbe.12243, slag: metaanalys, grupp: oversikt, omraden: [larande, lasning, skrivning, matematik, amnen], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Måttlig effekt: d = 0,30 i 34 små försök som lärarna själva ledde", titel: "Translating Laboratory Evidence into Classroom Practice with Teacher-Led Randomized Controlled Trials: A Perspective and Meta-Analysis", text: "Churches, R., Dommett, E. J., Devonshire, I. M. m.fl. (2020). Translating Laboratory Evidence into Classroom Practice with Teacher-Led Randomized Controlled Trials: A Perspective and Meta-Analysis. Mind, Brain, and Education.", adress: "https://doi.org/10.1111/mbe.12243", oppnad: 2026-11-02 }
+  - { id: yang-m-fl-2021, doi: 10.1037/bul0000309, slag: metaanalys, grupp: oversikt, omraden: [larande], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: g = 0,50 i 222 studier i klassrum, mest på högskolan", titel: "Testing (quizzing) boosts classroom learning: A systematic and meta-analytic review", text: "Yang, C., Luo, L., Vadillo, M. A. m.fl. (2021). Testing (quizzing) boosts classroom learning: A systematic and meta-analytic review. Psychological Bulletin.", adress: "https://doi.org/10.1037/bul0000309", oppnad: 2026-11-02 }
+  - { id: yang-m-fl-2023, doi: 10.1007/s10648-023-09801-w, slag: metaanalys, grupp: oversikt, omraden: [], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: provängslan minskade med g = 0,52 i 24 studier", titel: "Do Practice Tests (Quizzes) Reduce or Provoke Test Anxiety? A Meta-Analytic Review", text: "Yang, C., Li, J., Zhao, W. m.fl. (2023). Do Practice Tests (Quizzes) Reduce or Provoke Test Anxiety? A Meta-Analytic Review. Educational Psychology Review.", adress: "https://doi.org/10.1007/s10648-023-09801-w", oppnad: 2026-11-02 }
+  - { id: roy-m-fl-2023, slag: rapport, grupp: experiment, omraden: [larande, amnen, socialt], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: g = −0,01 mot en startdiskussion i NO, 1 074 elever i 15 skolor", titel: "Teacher Choices Trial: A Winning Start (second run). Evaluation report", text: "Roy, P., Tang, S., Harland, J. m.fl. (2023). Teacher Choices Trial: A Winning Start (second run). Evaluation report. Education Endowment Foundation.", adress: "https://d2tic4wvo1iusb.cloudfront.net/production/documents/projects/A-Winning-Start-second-run-Final.pdf", oppnad: 2026-11-02 }
+  - { id: rohrer-m-fl-2020, doi: 10.1037/edu0000367, slag: studie, grupp: experiment, omraden: [matematik], strang: false, stor: true, las: fulltext, fohlin: false, effekt: "Stor effekt: d = 0,83 på forskarnas prov, 787 elever i 54 klasser i åk 7", titel: "A randomized controlled trial of interleaved mathematics practice", text: "Rohrer, D., Dedrick, R. F., Hartwig, M. K. m.fl. (2020). A randomized controlled trial of interleaved mathematics practice. Journal of Educational Psychology.", adress: "https://doi.org/10.1037/edu0000367", oppnad: 2026-11-02 }
+  - { id: van-der-haar-m-fl-2023, doi: 10.26300/t8ht-2r44, eric: ED672238, slag: studie, grupp: experiment, omraden: [matematik], strang: false, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: 0,04 på årsprovet och 0,29 på terminsproven, 687 elever i Nigeria", titel: "The Long-Term Distributional Impacts of a Full-Year Interleaving Math Program in Nigeria", text: "van der Haar, L., Gray-Lobe, G., Kremer, M. m.fl. (2023). The Long-Term Distributional Impacts of a Full-Year Interleaving Math Program in Nigeria. EdWorkingPaper, Annenberg Institute at Brown University.", adress: "https://doi.org/10.26300/t8ht-2r44", oppnad: 2026-11-02 }
+  - { id: bouwmeester-och-verkoeijen-2011, doi: 10.1007/s10212-010-0036-3, slag: studie, grupp: experiment, omraden: [skrivning], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Inte säker: ingen säker skillnad i stavning, 186 elever i åk 3–⁠5", titel: "The effect of instruction method and relearning on Dutch spelling performance of third- through fifth-graders", text: "Bouwmeester, S. och Verkoeijen, P. P. J. L. (2011). The effect of instruction method and relearning on Dutch spelling performance of third- through fifth-graders. European Journal of Psychology of Education.", adress: "https://doi.org/10.1007/s10212-010-0036-3", oppnad: 2026-11-02 }
+  - { id: goossens-m-fl-2016, doi: 10.1002/acp.3245, slag: studie, grupp: experiment, omraden: [lasning], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Inte säker: ingen fördel i ordförråd, åk 2–⁠6 i vanliga lektioner", titel: "Distributed Practice and Retrieval Practice in Primary School Vocabulary Learning: A Multi-classroom Study", text: "Goossens, N. A. M. C., Camp, G., Verkoeijen, P. P. J. L. m.fl. (2016). Distributed Practice and Retrieval Practice in Primary School Vocabulary Learning: A Multi-classroom Study. Applied Cognitive Psychology.", adress: "https://repub.eur.nl/pub/98666", oppnad: 2026-11-02 }
+  - { id: pashler-m-fl-2007, eric: ED498555, slag: vagledning, grupp: annan, omraden: [], bidrag: "IES: starkt stöd för prov ur minnet och frågor om varför", titel: "Organizing Instruction and Study to Improve Student Learning", text: "Pashler, H., Bain, P. M., Bottge, B. A. m.fl. (2007). Organizing Instruction and Study to Improve Student Learning. IES Practice Guide, National Center for Education Research.", adress: "https://files.eric.ed.gov/fulltext/ED498555.pdf", oppnad: 2026-11-02, las: fulltext }
+  - { id: eef-2021, slag: vagledning, grupp: annan, omraden: [], bidrag: "Spridningen kräver en plan för hela kursen", titel: "Cognitive science approaches in the classroom: A review of the evidence", text: "EEF, Education Endowment Foundation (2021). Cognitive science approaches in the classroom: A review of the evidence. Education Endowment Foundation.", adress: "https://d2tic4wvo1iusb.cloudfront.net/production/documents/guidance/Cognitive_science_approaches_in_the_classroom_-_A_review_of_the_evidence.pdf", oppnad: 2026-11-02, las: fulltext }
+  - { id: kristiansson-och-sward-2025, slag: artikel, grupp: annan, omraden: [], bidrag: "Facit på tavlan och samma prov med nya tal, åk 5–⁠6", titel: "Testbaserat lärande i matematik", text: "Kristiansson, R. och Swärd, C. (2025). Testbaserat lärande i matematik. Nämnaren.", adress: "https://ncm.gu.se/wp-content/uploads/2026/03/3540_25_4.pdf", oppnad: 2026-11-02, las: fulltext }
+  - { id: rittle-johnson-m-fl-2020, doi: 10.1177/0963721420969365, slag: artikel, grupp: annan, omraden: [], bidrag: "Lösningar sida vid sida ger flexibilitet och förståelse", titel: "How Can Cognitive-Science Research Help Improve Education? The Case of Comparing Multiple Strategies to Improve Mathematics Learning and Teaching", text: "Rittle-Johnson, B., Star, J. R. och Durkin, K. (2020). How Can Cognitive-Science Research Help Improve Education? The Case of Comparing Multiple Strategies to Improve Mathematics Learning and Teaching. Current Directions in Psychological Science.", adress: "https://doi.org/10.1177/0963721420969365", oppnad: 2026-11-02, las: fulltext }
+  - { id: van-gog-och-sweller-2015, doi: 10.1007/s10648-015-9310-x, slag: artikel, grupp: annan, omraden: [], bidrag: "Effekten minskar när innehållet hänger ihop", titel: "Not New, but Nearly Forgotten: the Testing Effect Decreases or even Disappears as the Complexity of Learning Materials Increases", text: "Van Gog, T. och Sweller, J. (2015). Not New, but Nearly Forgotten: the Testing Effect Decreases or even Disappears as the Complexity of Learning Materials Increases. Educational Psychology Review.", adress: "https://doi.org/10.1007/s10648-015-9310-x", oppnad: 2026-11-02, las: fulltext }
+lasMer:
+  - { slag: bok, titel: "Testbaserat lärande: att stärka inlärning och minne", upphov: "Bert Jonsson och Lars Nyberg, Natur & Kultur", ar: 2020, adress: "https://libris.kb.se/r4px7d0pps8bpvc5", oppnad: 2026-11-02, text: "Grundboken på svenska av två minnesforskare i Umeå, om forskningen som metoden bygger på." }
+  - { kalla: kristiansson-och-sward-2025, text: "Tre mellanstadieklasser med inträdesbiljett, samma prov tre gånger med nya tal och facit på tavlan." }
+  - { slag: text, titel: "Undervisning genom problemlösning", upphov: "Hanna Palmér och Helena Grundén, Skolverket", ar: 2021, adress: "https://larportalen.skolverket.se/api/resource/P03WCPLAR153854", oppnad: 2026-11-02, text: "Hur du väljer ut och ordnar elevernas lösningar, så att jämförelsen handlar om matematiken." }
+  - { slag: text, titel: "Plugga matte med tidsfördelad repetition", upphov: "Magnus Lindström, Nämnaren", ar: 2024, adress: "https://ncm.gu.se/wp-content/uploads/2025/02/4549_24_1.pdf", oppnad: 2026-11-02, text: "En gymnasielärare som lägger in återkomster i matematiken. Läs den med nästa text." }
+  - { slag: text, titel: "Meningsfull minnesträning?", upphov: "Bo Sjöström, Nämnaren", ar: 2025, adress: "https://ncm.gu.se/wp-content/uploads/2026/10/1617_25_2.pdf", oppnad: 2026-11-02, text: "En lärare invänder att elever som ser mening behöver mindre repetition." }
+  - { kalla: pashler-m-fl-2007, text: "IES-guiden med sju råd, stödet för vart och ett och en checklista för läraren. På engelska." }
+  - { slag: text, titel: "How to Use Retrieval Practice to Improve Learning", upphov: "Pooja K. Agarwal m.fl.", ar: 2020, adress: "https://pdf.retrievalpractice.org/RetrievalPracticeGuide.pdf", oppnad: 2026-11-02, text: "En kort guide om hur du börjar, med en checklista. På engelska." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lär dig metoden
+# ---------------------------------------------------------------------------------------------------------------------
+plan:
+  passen:
+    - { nar: första lektionen, kort: Provet, text: "Första gången är provet två frågor om förra lektionen och en lätt fråga från förra terminen, på något klassen kan." }
+  fore: ["Välj ämnet och de två eller tre lektioner i veckan där provet ligger."]
+  utvardering: ["Ämneslaget går igenom grovplaneringarna en gång i månaden: vad kom tillbaka, och vad föll bort? En kollega är med vid ett prov per termin. Elever med samma fel kvar får stödundervisning."]
+  skattningar:
+    - namn: Hur säker är jag på metoden?
+      vem: lararen
+      rad: lararen
+      text: "Skatta i slutet av veckan. Tänk på kärnan: Krävde en fråga ett varför? Svarade alla själva? Rättade de mot facit samma lektion? Jämförde ni två svar? Kom en fråga från ett äldre område?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: osaker }
+    - namn: Hur väl fungerar den i praktiken?
+      vem: lararen
+      rad: klassen
+      text: "Tänk på det du ser i klasserna: Klarar fler än förut frågan från ett äldre område? Förklarar de varför med egna ord, också när de saknar fackordet?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: klassenstar }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lathunden Att komma igång
+# ---------------------------------------------------------------------------------------------------------------------
+lathund:
+  metoden:
+    text:
+      - "Ett kort prov ur minnet i början av två eller tre lektioner i veckan, med facit samma lektion. Det räknas inte, och det klassen har lärt sig kommer tillbaka efter veckor och månader."
+      - "Lärandet går till så här. Eleverna plockar fram själva, ser det rätta och jämför två svar, och det som kommer tillbaka efter ett uppehåll sitter längre."
+  lektion:
+    text: "Provet har två frågor om förra lektionen, den andra ett varför, och en lätt fråga från förra terminen. Säg: ”Det här är ett prov som inte räknas. Det hjälper er att minnas.” Alla skriver, och du visar facit samma lektion. Kontrasten tar två minuter: du tänker högt om två svar på varför-frågan."
+  igang:
+    rubrik: De första veckorna

@@ -54,5 +54,19 @@
     "omslag": "bd2d0ff7c731fe49",
     "sekunder": 27.39,
     "omslagVid": 22
+  },
+  "testbaserat-larande-film": {
+    "kalla": "581d5c5b8a4436be",
+    "mp4": "6397d38b887f0c27",
+    "omslag": "168ec6ab1436bf57",
+    "sekunder": 28.44,
+    "omslagVid": 24.72
+  },
+  "testbaserat-larande-film2": {
+    "kalla": "da6afac5fd92d0ea",
+    "mp4": "2868e0312187758d",
+    "omslag": "155850df739ea350",
+    "sekunder": 23.09,
+    "omslagVid": 17.08
   }
 }

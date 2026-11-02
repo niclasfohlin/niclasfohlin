@@ -1,10 +1,22 @@
 {
-  "datum": "2026-11-01T20:51:04.246Z",
+  "datum": "2026-11-02T17:02:50.535Z",
   "strukturer": [
     {
       "id": "turas-om",
+      "antal": 26,
+      "besok": 6,
+      "utskrifter": 4
+    },
+    {
+      "id": "kloka-pennan",
       "antal": 8,
       "besok": 3,
+      "utskrifter": 1
+    },
+    {
+      "id": "visa",
+      "antal": 7,
+      "besok": 2,
       "utskrifter": 1
     },
     {
@@ -26,12 +38,6 @@
       "utskrifter": 1
     },
     {
-      "id": "kloka-pennan",
-      "antal": 6,
-      "besok": 1,
-      "utskrifter": 1
-    },
-    {
       "id": "lyssna-och-skriv",
       "antal": 6,
       "besok": 1,
@@ -39,6 +45,12 @@
     },
     {
       "id": "ping-pong-prat",
+      "antal": 6,
+      "besok": 1,
+      "utskrifter": 1
+    },
+    {
+      "id": "sanningsjakten",
       "antal": 6,
       "besok": 1,
       "utskrifter": 1
