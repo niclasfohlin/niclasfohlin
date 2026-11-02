@@ -4,9 +4,10 @@ import { allaKort } from '../../lib/delningskort';
 
 export async function GET() {
   // Sidan som slumpar skrivkort har en egen mall (src/pages/delning/skrivkort/[namn].astro), och så har sidorna som
-  // slumpar aktivitetskort och brainbreaks (src/pages/delning/aktiviteter/ och brainbreaks/) och metodbanken
+  // slumpar aktivitetskort och brainbreaks (src/pages/delning/aktiviteter/ och brainbreaks/), verktyget Strukturer
+  // (src/pages/delning/strukturer/) och metodbanken
   // (src/pages/delning/metodbank/), och Ta fram ett matteproblem (src/pages/delning/tafram/), och Metoder och varje metod där
   // (src/pages/delning/metoder/ och undervisningsmetod/).
-  const kort = (await allaKort()).map(({ sida, namn, fil, skrivkort, kortbank, metodbank, tafram, metoder, undervisningsmetod }) => ({ sida, namn, fil, mall: skrivkort ? `/delning/skrivkort/${namn}` : kortbank ? `/delning/${kortbank.slag}/${namn}` : metodbank ? `/delning/metodbank/${namn}` : tafram ? `/delning/tafram/${namn}` : metoder ? `/delning/metoder/${namn}` : undervisningsmetod ? `/delning/undervisningsmetod/${namn}` : `/delning/kort/${namn}` }));
+  const kort = (await allaKort()).map(({ sida, namn, fil, skrivkort, kortbank, metodbank, tafram, metoder, undervisningsmetod, strukturer }) => ({ sida, namn, fil, mall: skrivkort ? `/delning/skrivkort/${namn}` : kortbank ? `/delning/${kortbank.slag}/${namn}` : metodbank ? `/delning/metodbank/${namn}` : tafram ? `/delning/tafram/${namn}` : metoder ? `/delning/metoder/${namn}` : undervisningsmetod ? `/delning/undervisningsmetod/${namn}` : strukturer ? `/delning/strukturer/${namn}` : `/delning/kort/${namn}` }));
   return new Response(JSON.stringify(kort, null, 1) + '\n', { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 }
