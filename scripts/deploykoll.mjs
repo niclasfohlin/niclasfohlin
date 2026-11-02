@@ -5,7 +5,7 @@
 //   node scripts/deploykoll.mjs <commit>     Bygget för en viss commit (kort eller lång sha)
 //   node scripts/deploykoll.mjs --tyst       Bara slutraden
 //
-// Frågar Netlify var tionde sekund i upp till fem minuter (ett bygge tar omkring en minut). Matchar på
+// Frågar Netlify var tionde sekund i upp till femton minuter (ett bygge tar omkring tio minuter). Matchar på
 // commit_ref, inte på ordningen i svaret. Avslutar med 0 när deployen är ready, 1 när den är error
 // (med felet utskrivet), 2 om den inte dykt upp eller blivit klar i tid, 3 om netlify inte svarar.
 // När bygget är grönt säger skriptet om just den här deployen mejlade prenumeranterna, och visar kreditsaldot.
@@ -36,7 +36,7 @@ const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const start = Date.now();
 let sett = false;
-while (Date.now() - start < 5 * 60 * 1000) {
+while (Date.now() - start < 15 * 60 * 1000) {
   let lista;
   try { lista = deployer(); } catch (e) { console.error('netlify svarar inte. Är du inloggad (netlify status)? Är NETLIFY_AUTH_TOKEN satt i skalet? Kör unset NETLIFY_AUTH_TOKEN.'); process.exit(3); }
   const d = lista.find((x) => (x.commit_ref ?? '').startsWith(commit));
@@ -73,5 +73,7 @@ while (Date.now() - start < 5 * 60 * 1000) {
   } else if (!tyst) console.log(`  inget bygge för ${commit} än …`);
   await vanta(10000);
 }
-console.error(`ingen färdig deploy för ${commit} inom fem minuter. Startade inget bygge alls: se webhooken under "När något är rött" i DRIFT.md.`);
+console.error(sett
+  ? `bygget för ${commit} är inte klart efter femton minuter. Kör skriptet igen, eller läs bygget i Netlify.`
+  : `ingen deploy för ${commit} inom femton minuter. Startade inget bygge alls: se webhooken under "När något är rött" i DRIFT.md.`);
 process.exit(2);
