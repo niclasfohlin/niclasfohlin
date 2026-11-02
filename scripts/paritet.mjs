@@ -282,7 +282,8 @@ for (const fil of filer) {
     if (!c) continue;
     const rad = `${c.namn}: ${SAJT}${c.kort ?? c.adress}`;
     if (!word.includes(norm(rad))) { console.error(`paritet: ${id}.docx saknar raden "${rad}" (centrala, ${c.id}).`); fel++; }
-    const knappar = [...html.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].filter((m) => m[1].split('?')[0] === c.adress && m[2].replace(/<[^>]+>/g, '').startsWith(c.namn));
+    // Knappen heter sakens korta namn när registret har ett (knapp, knappensNamn i src/lib/centrala.ts), som Matteproblem.
+    const knappar = [...html.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].filter((m) => m[1].split('?')[0] === c.adress && m[2].replace(/<[^>]+>/g, '').startsWith(c.knapp ?? c.namn));
     if (knappar.length < 3) { console.error(`paritet: ${id} har ${knappar.length} knappar till ${c.namn}; sidan ska ha den under ingressen, överst i menyn och i texten (centrala, ${c.id}).`); fel++; }
   }
   // Lektionskorten (src/lib/lektionskort.ts): knappen bredvid Öppna lathunden i nedladdningsrutan och i menyn och vid

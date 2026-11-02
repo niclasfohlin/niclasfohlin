@@ -17,8 +17,9 @@ import Filmrad from './Filmrad.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import type { UmFil, UmSlag } from '../lib/undervisningsmetodfiler';
 // tabeller är de fria tabeller som har en egen fil, som Grovplaneringen (metodensTabellfiler), efter filerna i slag.
-interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; tabeller?: UmFil[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; bara?: boolean; filmer?: number }
-const { id, filer, slag, tabeller = [], stor = false, titel = id, blad, bara = false, filmer = 0 } = Astro.props;
+// namn: knappens namn i läget bara, som Lektionskort överst på sidan (KNAPPARNAS_NAMN i standarden).
+interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; tabeller?: UmFil[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; bara?: boolean; filmer?: number; namn?: string }
+const { id, filer, slag, tabeller = [], stor = false, titel = id, blad, bara = false, filmer = 0, namn: kortNamn } = Astro.props;
 const valda = [...slag.map((s) => filer[s]), ...tabeller].filter((f): f is UmFil => !!f);
 const bas = (f: UmFil) => (f.pdf ?? f.docx ?? '').replace(/\.(pdf|docx)$/, '');
 const namn = (f: UmFil) => bas(f).split('/').pop() ?? id;
@@ -47,7 +48,7 @@ const metoden = filer.metoden;
     {filmer > 0 && <Filmrad href={`/metoder/${id}-filmer.zip`} id={id} titel={titel} antal={filmer} />}
   </ul>
 ) : bara ? (
-  knapp && <a class={stor ? 'knapp' : 'knapp sekundar'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>
+  knapp && <a class={stor ? 'knapp' : 'knapp sekundar'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={kortNamn ?? `Skriv ut ${iMening(knapp.namn)}`}>{kortNamn ?? `${knapp.namn} som pdf`}</span></a>
 ) : en && (
   <p class="um-filknappar">
     {knapp && <a class={stor ? 'knapp' : 'knapp sekundar liten'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${blad ? knapp.namn : iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>}

@@ -15,6 +15,7 @@
 // sparad som pdf av Word (scripts/bankpdf.mjs), så att kortet är samma sidor överallt. I en serie står korten också vid
 // lektionerna i lektionsbanken, med en knapp som skriver ut alla på en gång (Lektionsbank.astro). Modulen läser inga filer,
 // eftersom webbläsaren bygger Word-filen med samma kod; kortens innehåll läser src/lib/lektionskortdata.ts.
+import { KNAPPARNAS_NAMN } from './standard/index.js';
 import { passar, tolkaEfter, type FilmPlats } from './film';
 
 export const HOGST_LEKTIONSKORT = 3;
@@ -48,7 +49,7 @@ export function metodensLektionskort(d: Kortfalt, id: string): Lektionskort[] {
     metod: id,
     nr: i + 1,
     namn: k.namn,
-    knapp: lista.length > 1 && k.namn ? `Lektionskort: ${k.namn}` : 'Lektionskort',
+    knapp: lista.length > 1 && k.namn ? `${KNAPPARNAS_NAMN.lektionskort}: ${k.namn}` : KNAPPARNAS_NAMN.lektionskort,
     rubrik: lista.length > 1 && k.namn ? `Lektionskort: ${k.namn}` : 'Lektionskortet',
     text: k.text ?? LEKTIONSKORT_TEXT,
     stam: lektionskortStam(id, i + 1),

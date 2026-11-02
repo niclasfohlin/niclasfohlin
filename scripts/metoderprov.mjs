@@ -26,7 +26,7 @@ import { tmpdir } from 'node:os';
 import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
-import { UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser } from '../src/lib/standard/index.js';
+import { UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser } from '../src/lib/standard/index.js';
 import { ren, utanHuvudOchFot, pdfText } from './textjamforelse.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -91,6 +91,17 @@ for (const samling of ['stodundervisning', 'metoder']) {
     const lista = html.slice(b, html.indexOf('</ul>', b));
     nedladdningsrutor++;
     for (const m of lista.matchAll(/<span class="filrubrik"[^>]*>([^<]+)<\/span>/g)) if (!NEDLADDNINGENS_RADER.includes(m[1].trim())) fel.push(`/${samling}/${e.name}: rutan Ladda ner och skriv ut har raden ${m[1].trim()}, som inte är en av standardens (${NEDLADDNINGENS_RADER.join(', ')})`);
+    // Knapparna överst (KNAPPARNAS_NAMN och KNAPPENS_KLASS i standarden): en blå knapp går till en sida eller ett verktyg,
+    // en vit öppnar en fil, och namnet är ett kort ord, utom Planera insatsen och Lär dig metoden (Niclas 2026-11-02).
+    const h = html.indexOf('<header class="metod-huvud"');
+    const topp = h < 0 ? '' : html.slice(html.indexOf('<p class="metod-centrala', h), html.indexOf('</p>', html.indexOf('<p class="metod-centrala', h)));
+    for (const k of html.indexOf('<p class="metod-centrala', h) > h && h >= 0 ? topp.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g) : []) {
+      const klass = k[1].match(/class="([^"]*)"/)?.[1] ?? '';
+      const fil = /href="[^"]+\.(?:pdf|docx)(?:\?[^"]*)?"/.test(k[1]);
+      const namn = k[2].replace(/<span class="visually-hidden">[\s\S]*?<\/span>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().replace(/ Beta$/, '');
+      if (fil !== /\bsekundar\b/.test(klass)) fel.push(`/${samling}/${e.name}: knappen ${namn} överst ${fil ? 'öppnar en fil men är blå' : 'går till en sida men är vit'} (KNAPPENS_KLASS i standarden)`);
+      if (![KNAPPARNAS_NAMN.larDig, KNAPPARNAS_NAMN.planera].includes(namn) && namn.split(' ').length > 2) fel.push(`/${samling}/${e.name}: knappen överst heter ${namn}, ska vara ett kort ord (KNAPPARNAS_NAMN, knapp i src/data/centrala.json)`);
+    }
   }
 }
 

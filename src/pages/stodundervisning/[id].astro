@@ -28,7 +28,7 @@ import { metodensCentrala, provaCentrala } from '../../lib/centrala';
 import { provaVav, vavdaIBorjan } from '../../lib/vav';
 import { metodensLektionskort } from '../../lib/lektionskort';
 import { planbar, planensAdress } from '../../lib/insatsplan';
-import { PLANERA } from '../../lib/standard/index.js';
+import { KNAPPENS_KLASS, PLANERA } from '../../lib/standard/index.js';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
@@ -88,7 +88,7 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
         <p class="ingress">{ejBryt(d.ingress)}</p>
         {/* De centrala sakerna (src/lib/centrala.ts), överst så att de syns när metoden öppnas (Niclas 2026-10-14), och
             Planera insatsen, på samma plats i varje metod som kan planeras. */}
-        {(centrala.length > 0 || planeras) && <p class="metod-centrala">{centrala.map((c) => <Centralknapp c={c} metod={m.id} titel={d.titel} />)}{planeras && <a class="knapp sekundar" href={planensAdress(planeras.id)} data-goatcounter-click={`planera:${m.id}:metoden`} data-goatcounter-title={`${d.titel}: Planera insatsen från metodens sida`}>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</a>}</p>}
+        {(centrala.length > 0 || planeras) && <p class="metod-centrala">{centrala.map((c) => <Centralknapp c={c} metod={m.id} titel={d.titel} />)}{planeras && <a class={KNAPPENS_KLASS.sida} href={planensAdress(planeras.id)} data-goatcounter-click={`planera:${m.id}:metoden`} data-goatcounter-title={`${d.titel}: Planera insatsen från metodens sida`}>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</a>}</p>}
       </header>
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>

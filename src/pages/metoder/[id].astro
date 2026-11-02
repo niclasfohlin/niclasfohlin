@@ -20,7 +20,7 @@ import { kortetUrFil } from '../../lib/metodprofil';
 import { metodensFiler, metodensBilder, metodensTabellfiler, sakernasFiler } from '../../lib/undervisningsmetodfiler';
 import { huvudfilm as huvudfilmen, metodensFilmer } from '../../lib/film';
 import { UPPHOV, SAJT } from '../../lib/metod';
-import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, lagretsVagTillMandag, vagenTillMandag } from '../../lib/standard/index.js';
+import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, lagretsVagTillMandag, vagenTillMandag, KNAPPARNAS_NAMN, KNAPPENS_KLASS } from '../../lib/standard/index.js';
 import { medKallor, medSaker, undervisningsmetodensSaker, NEDLADDNINGENS_SLAG, type Um } from '../../lib/undervisningsmetod';
 import { harLarDig as metodenHarLarDig } from '../../lib/lardig';
 import { metodensStrukturer } from '../../lib/strukturer';
@@ -91,12 +91,12 @@ const lasvagen = lagret
           {/* När läraren har en plan bär rutan Din plan länken till Lär dig metoden ensam, och knappen går undan, så att två
               länkar med samma namn inte står efter varandra (data-din-ersatter, src/scripts/insatser.ts; lagningen inför
               lanseringen, A9). */}
-          {harLarDig && <a class="knapp" href={`/metoder/${id}/lar-dig`} data-din-ersatter>Lär dig metoden</a>}
-          {d.lathund && <a class="knapp sekundar" href={`/metoder/${id}/lathund`}>Öppna lathunden</a>}
+          {harLarDig && <a class={KNAPPENS_KLASS.sida} href={`/metoder/${id}/lar-dig`} data-din-ersatter>{KNAPPARNAS_NAMN.larDig}</a>}
+          {d.lathund && <a class={KNAPPENS_KLASS.sida} href={`/metoder/${id}/lathund`}>{KNAPPARNAS_NAMN.lathund}</a>}
           {/* Verktyget Strukturer, för en metod som importerar strukturkort (K-661; Niclas 2026-11-01: "Samt verktyg inuti
               kooperativt lärande"). */}
-          {strukturer.length > 0 && <a class="knapp sekundar" href="/strukturer">Strukturer</a>}
-          <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} bara />
+          {strukturer.length > 0 && <a class={KNAPPENS_KLASS.sida} href="/strukturer">{KNAPPARNAS_NAMN.strukturer}</a>}
+          <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} bara namn={KNAPPARNAS_NAMN.lektionskort} />
         </p>
         {/* Din plan: lärarens plan ur Lär dig metoden, om den finns i webbläsaren (src/scripts/insatser.ts, K-628). */}
         {harLarDig && <div class="pl-din" id="pl-din" data-metod={id} data-titel={d.titel} data-samling="metoder" hidden></div>}

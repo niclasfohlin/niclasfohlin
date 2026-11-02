@@ -223,3 +223,12 @@ export function sakspann(text) {
  * inte hit. scripts/metoderprov.mjs stannar på en rad som inte står här.
  */
 export const NEDLADDNINGENS_RADER = Object.freeze(['Skriv ut', 'Allt om metoden', 'Bara metoden', 'Bara lathunden', 'Filmen', 'Filmerna']);
+
+/**
+ * Knapparnas namn och färg, lika i Stödundervisning och Metoder (Niclas 2026-11-02: "Kan de inte bara heta Lathund.
+ * Lektionskort ... En standard här med och samma rot för namnet på knappen", och om färgen: "Blå knapp ett verktyg/sida",
+ * "Vit knapp är en pdf"). Namnen är ett kort ord i obestämd form, i plural när saken är många, och färgen säger vad ett
+ * tryck gör: en blå knapp går till en sida eller ett verktyg, en vit knapp öppnar en fil, pdf eller Word.
+ */
+export const KNAPPARNAS_NAMN = Object.freeze({ larDig: 'Lär dig metoden', planera: 'Planera insatsen', lathund: 'Lathund', lektionskort: 'Lektionskort', strukturer: 'Strukturer' });
+export const KNAPPENS_KLASS = Object.freeze({ sida: 'knapp', fil: 'knapp sekundar' });

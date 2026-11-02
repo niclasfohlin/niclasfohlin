@@ -16,7 +16,7 @@
 // knapparna, så att det inte blir två knappar för samma sak.
 import data from '../data/centrala.json';
 import { sammaRubrik } from './film';
-import { fastaAntal } from './standard/index.js';
+import { fastaAntal, KNAPPENS_KLASS } from './standard/index.js';
 import { spannITexten } from './tackning';
 
 // Databasernas substantiv, som provet av fasta antal i registret letar efter (fastaAntal i standarden).
@@ -27,7 +27,7 @@ const DATABASENS_ORD = ['problem', 'problemen', 'texter', 'texterna', 'lästexte
  *  den inte är gemensam. del är rutans rubrik i metodbanken. mejl är det som följer på länken i mejlet om en ny metod.
  *  arskurs är årskurserna som en delad sak är gjord för, som F–9, när de är fler än metodernas som visar den: Utveckla
  *  högläsning stöder all högläsning i F–9 men sås bara där den stöder metodens kärna (Niclas 2026-10-20, såddprovet). */
-export type Central = { id: string; namn: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string; arskurs?: string; omraden?: 'alla'; vav?: { etikett: string; liknar: string; liknarFler: string; passar: string; passarFler: string; text: string; rad: string } };
+export type Central = { id: string; namn: string; knapp?: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string; arskurs?: string; omraden?: 'alla'; vav?: { etikett: string; liknar: string; liknarFler: string; passar: string; passarFler: string; text: string; rad: string } };
 // vav är standarden för ett delat verktyg som sajten väver in i metoderna (src/lib/vav.ts): etikett står över det som vävs
 // in, och liknar i stället när metoden inte nämner delen men eleverna arbetar i samma form; text står i rutan före verktygets
 // knapp, och rad står under kortraden med delarnas små kort och leder till verktyget.
@@ -41,7 +41,11 @@ export function registerFel(): string[] {
     const vem = `src/data/centrala.json, post ${i + 1} (${c.id ?? 'utan id'})`;
     if (!/^[a-z0-9-]+$/.test(c.id ?? '')) fel.push(`${vem}: id skrivs med a-z, 0-9 och bindestreck.`);
     if (CENTRALA.findIndex((x) => x.id === c.id) !== i) fel.push(`${vem}: id finns redan.`);
-    if (!c.namn?.trim()) fel.push(`${vem}: namn är knappens text och saknas.`);
+    if (!c.namn?.trim()) fel.push(`${vem}: namn är sakens namn, som texten och knappen säger, och saknas.`);
+    // Knappen har ett kort namn i obestämd form, inte en mening (Niclas 2026-11-02: "inga knappar med meningar förutom
+    // Planera insatsen och Lär dig metoden", och "Andra ska vara ett kort ord. Obestämd form"). Ett långt namn, som Ta fram ett
+    // matteproblem, får knappens namn i knapp; namnet står kvar i texten, där det blir en länk.
+    if (knappensNamn(c).trim().split(/\s+/).length > 2) fel.push(`${vem}: knappens namn "${knappensNamn(c)}" är för långt; skriv ett kort ord i obestämd form i knapp, som Matteproblem.`);
     if (c.slag !== 'sida' && c.slag !== 'pdf' && c.slag !== 'formular') fel.push(`${vem}: slag är sida, pdf eller formular.`);
     if (c.del !== 'verktyg' && c.del !== 'stodmaterial') fel.push(`${vem}: del är verktyg eller stodmaterial, rubriken i rutan i metodbanken.`);
     if (c.slag === 'formular' && (!/^\/[a-z0-9-]+$/.test(c.adress ?? '') || c.kort !== undefined || !c.metod)) fel.push(`${vem}: ett formulär har den korta adressen som adress (som /vargrupp, utan kort) och metoden vars blad har fältet google.`);
@@ -57,6 +61,9 @@ export function registerFel(): string[] {
   });
   return fel;
 }
+
+/** Knappens namn: ett kort ord i obestämd form ur knapp, annars sakens namn. */
+export const knappensNamn = (c: Central) => c.knapp ?? c.namn;
 
 /** Adressen som läraren skriver eller läser på papper: den korta, annars sakens egen. */
 export const lasbarAdress = (c: Central) => c.kort ?? c.adress;
@@ -131,9 +138,9 @@ export function centralLank(c: Central, metod: string, titel: string): Record<st
 const skyddad = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 /** Knappen till en central sak som HTML: Centralknapp.astro ritar den, och länkningen i texten (src/lib/boklankar.ts)
  *  lägger den efter ett stycke som skickar läsaren till saken, så att knappen ser likadan ut överallt. */
-export function centralKnappHtml(c: Central, metod: string, titel: string, klass = 'knapp', medTitel = false): string {
+export function centralKnappHtml(c: Central, metod: string, titel: string, klass = c.slag === 'pdf' ? KNAPPENS_KLASS.fil : KNAPPENS_KLASS.sida, medTitel = false): string {
   const attr = Object.entries(centralLank(c, metod, titel)).map(([k, v]) => ` ${k}="${skyddad(v)}"`).join('');
-  return `<a class="${skyddad(klass)}"${attr}>${skyddad(c.namn)}${medTitel ? `<span class="visually-hidden">: ${skyddad(titel)}</span>` : ''}${c.slag === 'pdf' ? '<span class="visually-hidden">, pdf</span>' : ''}</a>`;
+  return `<a class="${skyddad(klass)}"${attr}>${skyddad(knappensNamn(c))}${medTitel ? `<span class="visually-hidden">: ${skyddad(titel)}</span>` : ''}${c.slag === 'pdf' ? '<span class="visually-hidden">, pdf</span>' : ''}</a>`;
 }
 
 /** Metoderna som en sak hör till men inte visar, och saker som ingen metod visar: fel som stoppar bygget ([id].astro). */

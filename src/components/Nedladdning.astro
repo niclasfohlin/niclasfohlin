@@ -6,6 +6,7 @@
 // automatiskt ur lathundens PowerPoint-kod i A4 liggande av npm run validera (scripts/lathund-pdf.mjs --vid-behov). Varje fil erbjuds med samma val (Word, PowerPoint, Drive, pdf) genom Filval.astro.
 // Metodens filmer är en egen rad, Filmerna (Niclas 2026-10-07): en zip-fil med filmerna som mp4 (Filmrad.astro, som
 // undervisningsmetodernas rad också är).
+import { KNAPPARNAS_NAMN, KNAPPENS_KLASS } from '../lib/standard/index.js';
 import Filval from './Filval.astro';
 import Filmrad from './Filmrad.astro';
 import Bankfiler from './Bankfiler.astro';
@@ -43,7 +44,7 @@ const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" heig
   <h2 id={`nedladdning-${id}`}>Ladda ner och skriv ut</h2>
   {(harLathund || lektionskort.length > 0) && (
     <ul class="nedladdning-lista">
-      {harLathund && <li><a class="knapp" href={`${bas}/lathund`}>Öppna lathunden</a></li>}
+      {harLathund && <li><a class={KNAPPENS_KLASS.sida} href={`${bas}/lathund`}>{KNAPPARNAS_NAMN.lathund}</a></li>}
       {lektionskort.map((k) => <li><Lektionskortknapp k={k} titel={titel} /></li>)}
     </ul>
   )}

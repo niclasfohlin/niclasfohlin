@@ -1275,6 +1275,14 @@ button.lank:hover { color: var(--farg-accent); }
    lämnar de sidan. Under ingressen och i texten är de blå knappar i en rad. */
 .metod-nav .central-lank { margin-right: 1.1rem; }
 .metod-centrala { margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+/* Knapparna överst på en metods sida, lika i båda samlingarna (Niclas 2026-11-02: "något snyggare placering av 2 eller
+   fler"): lika breda, två i bredd i telefonen, och en udda sista knapp över hela bredden. På datorn står de på en rad. */
+.metod-huvud .metod-centrala { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+.metod-huvud .metod-centrala > a { justify-content: center; text-align: center; margin: 0; }
+.metod-huvud .metod-centrala > a:last-of-type:nth-of-type(odd) { grid-column: 1 / -1; }
+@media (min-width: 48rem) {
+  .metod-huvud .metod-centrala { display: flex; flex-wrap: wrap; }
+}
 .m-central-knapp { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .metodkort .central-lank { font-weight: 600; }
 .metod-modell section, .metod-modell .m-ruta[id], .metod-modell .m-ram h3[id] { scroll-margin-top: 1.5rem; }

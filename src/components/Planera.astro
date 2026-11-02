@@ -16,7 +16,7 @@ import PlanNotis from './PlanNotis.astro';
 import PlanFilen from './PlanFilen.astro';
 import PlanVersion from './PlanVersion.astro';
 import { tidrad } from '../scripts/tidrad';
-import { liten, SAMLINGARNAS_LED, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stegensTakt, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
+import { KNAPPARNAS_NAMN, KNAPPENS_KLASS, liten, SAMLINGARNAS_LED, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stegensTakt, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -235,7 +235,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
       {lektionskort.map((k, i) => <span class="pl-fil" data-fil={`lektionskort-${i + 1}`}><Lektionskortknapp k={k} titel={data.titel} klass="knapp sekundar" /></span>)}
       {Object.entries(lektionernasMallar).map(([nr, x]) => <a class="knapp sekundar" data-fil={`lektion-${nr}-snabbmall`} href={`/stodundervisning/${x.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${x.id}-snabbmall`} data-goatcounter-title={`${x.titel}: ${x.rubrik}, bladet`} data-namn={mallnamn(x.rubrik)}><span data-direkt={`Skriv ut ${mallnamn(x.rubrik)}`}>{stor(mallnamn(x.rubrik))} som pdf</span></a>)}
       {Object.entries(lektionernasKort).flatMap(([nr, kort]) => kort.map((k, i) => <span class="pl-fil" data-fil={`lektion-${nr}-kort-${i + 1}`}><Lektionskortknapp k={k} titel={data.lektioner?.find((l) => String(l.nr) === nr)?.namn ?? data.titel} klass="knapp sekundar" /></span>))}
-      {data.harLathund && <a class="knapp sekundar" data-fil="lathund" href={`${data.sida}/lathund`}>Öppna lathunden</a>}
+      {data.harLathund && <a class={KNAPPENS_KLASS.sida} data-fil="lathund" href={`${data.sida}/lathund`}>{KNAPPARNAS_NAMN.lathund}</a>}
     </div>
     <div class="pl-toast" id="pl-toast" role="status" aria-live="polite" hidden></div>
     <script type="application/json" id="pl-data" is:inline set:html={json} />

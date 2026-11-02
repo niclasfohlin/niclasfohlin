@@ -37,7 +37,7 @@ import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, friTabellensKlass, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { site } from '../data/site';
-import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening, vidareTillLektion } from '../lib/standard/index.js';
+import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, KNAPPARNAS_NAMN, malensMening, variantensMening, vidareTillLektion } from '../lib/standard/index.js';
 import { materialAttribut } from '../lib/material';
 import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
@@ -337,7 +337,7 @@ const meny = [
   {(meny.length > 2 || centrala.length > 0 || lektionskort.length > 0) && !undersida && (
     <nav class="metod-nav" aria-label="På den här sidan">
       {centrala.map((c) => <Centralknapp c={c} metod={id} titel={d.titel} klass="lathund-lank central-lank" />)}
-      {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a>}
+      {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>{KNAPPARNAS_NAMN.lathund}</a>}
       {lektionskort.map((k) => <Lektionskortknapp k={k} titel={d.titel} klass="lathund-lank central-lank" />)}
       {meny.length > 2 && <><span class="nav-etikett" aria-hidden="true">På den här sidan</span>
       <ul>{meny.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul></>}

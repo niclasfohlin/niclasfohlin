@@ -5,6 +5,6 @@
 // Knappen ritas av centralKnappHtml, som länkningen i texten också använder (src/lib/boklankar.ts).
 import { centralKnappHtml, type Central } from '../lib/centrala';
 interface Props { c: Central; metod: string; titel: string; klass?: string; medTitel?: boolean }
-const { c, metod, titel, klass = 'knapp', medTitel = false } = Astro.props;
+const { c, metod, titel, klass, medTitel = false } = Astro.props;
 ---
 <Fragment set:html={centralKnappHtml(c, metod, titel, klass, medTitel)} />
