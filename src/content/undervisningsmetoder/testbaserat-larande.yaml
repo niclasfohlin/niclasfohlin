@@ -5,9 +5,9 @@
 # steg 7 (node build/filmfalt.mjs testbaserat-larande).
 
 titel: Testbaserat lärande
-undertitel: "Ett kort prov ur minnet och en plan för terminen, så att det klassen har förstått sitter kvar, F–⁠9"
+undertitel: "Så hjälper du klassen att minnas det den har lärt sig, F–⁠9"
 alternativaNamn: ["Retrieval practice", "Test-enhanced learning", "Successive relearning"]
-ingress: "I Testbaserat lärande plockar eleverna själva fram det klassen har förstått ur minnet i korta prov som inte räknas. De ser det rätta samma lektion och jämför två svar, och varje område kommer tillbaka efter veckor och månader. Proven ligger i dina vanliga lektioner."
+ingress: "Testbaserat lärande är korta prov ur minnet som inte bedöms och inte blir betygsunderlag. Syftet är lärandet: eleverna plockar själva fram det klassen har förstått, ser det rätta samma lektion och jämför två svar. Varje område kommer tillbaka efter veckor och månader, i dina vanliga lektioner."
 arskurs: ["F-3", "4-6", "7-9"]
 arskursText: F–9
 taggar: ["undervisningskvalitet", "evidens"]

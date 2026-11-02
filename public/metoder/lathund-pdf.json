@@ -1,22 +1,22 @@
 {
   "explicit-undervisning": {
-    "kalla": "f99a825c2b4467e0",
+    "kalla": "40c771cf828a3336",
     "pdf": "b570a81ed6bbe0a9",
     "datum": "2026-11-02"
   },
   "kooperativt-larande": {
-    "kalla": "c2284ecd4640ffaf",
+    "kalla": "cb16adfe72dc7c36",
     "pdf": "a1b7101691a283b1",
     "datum": "2026-11-02"
   },
   "formativ-bedomning": {
-    "kalla": "b30801bdb7a95410",
+    "kalla": "294e5b8858402a59",
     "pdf": "f4d40f609d6a5721",
     "datum": "2026-11-02"
   },
   "testbaserat-larande": {
-    "kalla": "b6bdcf5b024d8b89",
-    "pdf": "e0f085f437ebf730",
+    "kalla": "63843953cbf14dfe",
+    "pdf": "5377c65709f8f01b",
     "datum": "2026-11-02"
   }
 }
