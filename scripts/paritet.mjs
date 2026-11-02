@@ -336,7 +336,8 @@ for (const fil of filer) {
       const knappar = [...del.matchAll(/<a\b[^>]*>/g)].filter((m) => new RegExp(`\\bhref="/stodundervisning/${stam}\\.pdf(?:\\?[^"]*)?"`).test(m[0]) && /\bdata-skriv-ut-pdf\b/.test(m[0]));
       if (!knappar.length) { console.error(`paritet: ${id} saknar utskriftsknappen till ${stam}.pdf i ${plats} (hem.${vad}).`); fel++; }
     }
-    if (!new RegExp(`href="/stodundervisning/${stam}\\.docx(?:\\?[^"]*)?"`).test(html)) { console.error(`paritet: ${id} saknar raden med ${stam}.docx i nedladdningsrutan (hem.${vad}).`); fel++; }
+    // Ingen rad i nedladdningsrutan: rutan har standardens rader (NEDLADDNINGENS_RADER; Niclas 2026-11-02: "Allt material
+    // behövs inte"), och kontraktet och schemat står i Allt om metoden och har sina knappar ovan.
     const sakensTexter = (vad === 'kontrakt' ? [sak.rubrik ?? 'Kontrakt', sak.inledning, ...sak.ansvar.flatMap((a) => [a.rubrik, a.text]), sak.efter] : [sak.rubrik, sak.text, ...sak.kolumner]).filter(Boolean);
     for (const namn of [`${stam}.docx`, `${id}-mallar.docx`]) {
       const fil = join(rot, 'dist/stodundervisning', namn);

@@ -682,6 +682,8 @@ export declare const sakernasText: <S extends Sak>(text: string, saker: S[], sak
 /** Namn som ser ut som en sak (ett sammansatt ord på blad, kort, mall …) men inte är någon av sakerna. */
 export declare function olankadeSaker(text: string, saker: Sak[]): string[];
 export declare const EGNA_SAKER: readonly string[];
+/** Raderna i rutan Ladda ner och skriv ut på en metods sida, lika i Stödundervisning och Metoder. */
+export declare const NEDLADDNINGENS_RADER: readonly string[];
 /** Spannen av saker med nummer i en text, som "Bildserie 2–6". */
 export declare function sakspann(text: string): { index: number; langd: number; text: string; namn: string[]; fran: number; till: number; nummer: number[] }[];
 

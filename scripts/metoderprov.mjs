@@ -10,7 +10,7 @@
 // undervisningsmetodensSaker i src/lib/undervisningsmetod.ts) är länkar där metodens sida nämner dem, inget namn ser ut som en
 // sak som metoden inte har (olankadeSaker i standarden), och varje sak har en knapp under sig vars fil finns, som planprov.mjs
 // prövar Stödundervisnings saker. Lagningen inför lanseringen (2026-10-31) gav formens spärrar: i bilaga A står varje fils
-// knapp en gång och nedladdningsrutan har varje fil därifrån, faktarutans material leder till metodens saker, lathundens pdf
+// knapp en gång och nedladdningsrutan har bara standardens rader i båda samlingarna, faktarutans material leder till metodens saker, lathundens pdf
 // har en knapp överst, rutnäten med kort och delar slutar inte med en tom plats, kortens och remsans namn avstavas på
 // svenska, bladen står i hela bredden i telefonen och samlade bredvid bilden på datorn, lathundens kort rymmer sina ord,
 // utfallen räknas om för klassens antal, en plan i Lär dig metoden tar knappen med samma länk ur huvudet, och i banken går
@@ -26,7 +26,7 @@ import { tmpdir } from 'node:os';
 import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
-import { UNDERVISNINGSMETODENS_DELAR, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser } from '../src/lib/standard/index.js';
+import { UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser } from '../src/lib/standard/index.js';
 import { ren, utanHuvudOchFot, pdfText } from './textjamforelse.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -73,6 +73,25 @@ for (const s of [...metodsidor, ...lathundsidor]) {
   provaSakerna(s, html, ids);
   provaFilerna(s, html);
   provaLarDig(s, ids);
+}
+
+// Rutan Ladda ner och skriv ut har bara standardens rader, på varje metods sida i Stödundervisning och Metoder
+// (NEDLADDNINGENS_RADER; Niclas 2026-11-02: "Det har blivit run off av detta ... Behövs en standard här"). Bankernas tabeller
+// efter raderna räknas inte.
+let nedladdningsrutor = 0;
+for (const samling of ['stodundervisning', 'metoder']) {
+  for (const e of readdirSync(join(dist, samling), { withFileTypes: true })) {
+    const fil = join(dist, samling, e.name, 'index.html');
+    if (!e.isDirectory() || !existsSync(fil)) continue;
+    const html = readFileSync(fil, 'utf8');
+    const a = html.indexOf('<aside class="nedladdning');
+    if (a < 0) continue;
+    const b = html.indexOf('<ul class="filrader', a);
+    if (b < 0 || b > html.indexOf('</aside>', a)) continue;
+    const lista = html.slice(b, html.indexOf('</ul>', b));
+    nedladdningsrutor++;
+    for (const m of lista.matchAll(/<span class="filrubrik"[^>]*>([^<]+)<\/span>/g)) if (!NEDLADDNINGENS_RADER.includes(m[1].trim())) fel.push(`/${samling}/${e.name}: rutan Ladda ner och skriv ut har raden ${m[1].trim()}, som inte är en av standardens (${NEDLADDNINGENS_RADER.join(', ')})`);
+  }
 }
 
 // Lär dig metodens data, som sidans skript ritar ur (src/lib/lardig.ts): en vecka vars rad säger att läraren väljer utfall
@@ -246,18 +265,15 @@ else {
 }
 
 // Filerna att skriva ut (lagningen inför lanseringen, A3 och A10): i bilaga A står varje fils knapp en gång, så att Drive och
-// Word för hela materialet inte står under varje blad, och nedladdningsrutan har varje fil som bilaga A erbjuder, utom
-// bladens egna pdf:er, som står under sitt blad. Faktarutans material leder till metodens saker (D4): en del av listan som
+// Word för hela materialet inte står under varje blad. Nedladdningsrutan har bara standardens rader (NEDLADDNINGENS_RADER,
+// provet ovan; Niclas 2026-11-02: "Det har blivit run off av detta"), så filerna i bilaga A står där och inte i rutan. Faktarutans material leder till metodens saker (D4): en del av listan som
 // börjar med en saks namn, som "symbolerna till bordsöarna", är en länk.
 function provaFilerna(s, html) {
   const id = s.split('/')[2];
   const bilagan = html.slice(html.indexOf('id="del-att-skriva-ut"'), html.indexOf('id="del-valet"'));
-  const rutan = html.slice(html.indexOf('id="filerna"'), html.indexOf('</aside>', html.indexOf('id="filerna"')));
   const antal = new Map();
   for (const m of bilagan.matchAll(/href="(\/metoder\/[^"?#]+\.docx)(?:\?[^"]*)?"/g)) antal.set(m[1], (antal.get(m[1]) ?? 0) + 1);
   for (const [fil, n] of antal) if (n > 1) fel.push(`${s}: ${fil} har ${n} knappar i bilaga A, ska ha en (Umfilknappar.astro: under ett blad står bara bladets pdf)`);
-  const bilagansFiler = new Set([...bilagan.matchAll(new RegExp(`href="(/metoder/${id}-[a-z]+\\.(?:pdf|docx))(?:\\?[^"]*)?"`, 'g'))].map((m) => m[1]));
-  for (const fil of bilagansFiler) if (!rutan.includes(`href="${fil}`)) fel.push(`${s}: ${fil} står i bilaga A men inte i nedladdningsrutan (slag i src/pages/metoder/[id].astro)`);
   const saker = JSON.parse(html.match(/<script type="application\/json" id="um-saker">([\s\S]*?)<\/script>/)?.[1] ?? '[]');
   const material = html.match(/<dt class="bred">Material<\/dt><dd class="bred">([\s\S]*?)<\/dd>/)?.[1] ?? '';
   for (const del of material.split(', ')) {
@@ -656,4 +672,5 @@ try {
 }
 if (fel.length) { console.error(`metoderprov: ${fel.length} fel\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt, delarna står i standardens ordning och metodens ${provadeSaker} saker är länkar där de nämns och har en knapp under sig, ${lathundensMeningar} meningar på ${lathundsidor.length} lathundssidor står i lathundens pdf, rutan Verktyg och Stödmaterial har samma ${speglade} saker i Metoder som i Stödundervisning, och ${spegladeKort} kort${spegladRuta ? ' och rutan nederst' : ''} i Metoder har Stödundervisnings ${rutornas.stod?.knappar.filter((x) => !harAttr(x.a, 'data-rensa')).map((x) => x.namn).join(' och ') ?? 'Drive och Word'}.`);
+console.log(`metoderprov: rutan Ladda ner och skriv ut har bara standardens rader på ${nedladdningsrutor} metodsidor (NEDLADDNINGENS_RADER).`);
 if (lathundenVantar.size) console.log(`! metoderprov: lathundens pdf saknar ännu det sidan visar av ${[...lathundenVantar].join(", ")} (K-632)`);

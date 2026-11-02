@@ -29,6 +29,9 @@ export const umKort = (slag: UmSlag) => (slag === 'lathund' ? UM_NAMN.lathund.sp
  * varje metodsida): Allt om metoden, och varje del av den filen som Bara, som Bara metoden och Bara lathunden.
  */
 export const umRad = (slag: UmSlag) => (slag === 'allt' ? UM_NAMN.allt : `Bara ${umKort(slag).charAt(0).toLocaleLowerCase('sv')}${umKort(slag).slice(1)}`);
+/** Filerna i rutan Ladda ner och skriv ut, standardens rader (NEDLADDNINGENS_RADER i standarden): allt, bara metoden och bara
+ * lathunden, och filmerna efter dem. De andra filerna har sin knapp där saken står på sidan. */
+export const NEDLADDNINGENS_SLAG: UmSlag[] = ['allt', 'metoden', 'lathund'];
 /** Avsnittet med strukturkorten som metoden importerar (fältet strukturkort). */
 export const STRUKTURKORTEN = 'Strukturkorten';
 /** Metodkortet, rutan med forskningen överst på sidan (Metodprofil.astro), som texterna nämner. */

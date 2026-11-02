@@ -21,7 +21,7 @@ import { metodensFiler, metodensBilder, metodensTabellfiler, sakernasFiler } fro
 import { huvudfilm as huvudfilmen, metodensFilmer } from '../../lib/film';
 import { UPPHOV, SAJT } from '../../lib/metod';
 import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, lagretsVagTillMandag, vagenTillMandag } from '../../lib/standard/index.js';
-import { medKallor, medSaker, undervisningsmetodensSaker, type Um } from '../../lib/undervisningsmetod';
+import { medKallor, medSaker, undervisningsmetodensSaker, NEDLADDNINGENS_SLAG, type Um } from '../../lib/undervisningsmetod';
 import { harLarDig as metodenHarLarDig } from '../../lib/lardig';
 import { metodensStrukturer } from '../../lib/strukturer';
 
@@ -123,7 +123,7 @@ const lasvagen = lagret
       {(filer.allt || filer.metoden) && (
         <aside class="nedladdning um-nedladdning" id="filerna" aria-labelledby="filerna-rubrik">
           <h2 id="filerna-rubrik">Ladda ner och skriv ut</h2>
-          <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['allt', 'metoden', 'lathund', 'lektionskort', 'planeringsmall', 'materialet', 'observation']} tabeller={tabellfiler} filmer={filmer.length} />
+          <Umfilknappar id={id} titel={d.titel} filer={filer} slag={NEDLADDNINGENS_SLAG} filmer={filmer.length} />
         </aside>
       )}
       </div>

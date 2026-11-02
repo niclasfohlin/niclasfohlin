@@ -18,11 +18,11 @@ import { delningPa } from '../../lib/delning';
 import Kommentarer from '../../components/Kommentarer.astro';
 import { kommentarerPa } from '../../lib/kommentarer';
 import { relateradeMetoder, publicerade, formateraDatum } from '../../lib/innehall';
-import { arskursText, ejBryt, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
+import { arskursText, ejBryt, harLathund, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
 import { byggSerier, platsISerien, serieKoppling } from '../../lib/serie';
 import { site } from '../../data/site';
 import { bankAv, nivaFarger } from '../../lib/bank';
-import { harMaterial, hemsidansNamn } from '../../lib/material';
+import { harMaterial } from '../../lib/material';
 import Centralknapp from '../../components/Centralknapp.astro';
 import { metodensCentrala, provaCentrala } from '../../lib/centrala';
 import { provaVav, vavdaIBorjan } from '../../lib/vav';
@@ -110,7 +110,7 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
           faktarutan, som på Word-filens första sida. Extrafilmerna står i texten (Metod.astro). */}
       {huvud && <Filmruta filmer={[huvud]} titel={d.titel} />}
       {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} plats="topp" />}
-      <Nedladdning id={m.id} titel={d.titel} lektionskort={metodensLektionskort(d, m.id)} allaLektionskort={serie && !lektion ? serie.allaLektionskort : undefined} hemsidor={[...(d.hem?.kontrakt ? [{ stam: `${m.id}-kontrakt`, namn: hemsidansNamn('kontrakt') }] : []), ...(d.hem?.schema ? [{ stam: `${m.id}-schema`, namn: hemsidansNamn('schema', d.hem.schema.rubrik) }] : [])]} harMallar={harMallar(d)} harLathund={harLathund(d)} harMaterial={harMaterial(d)} ramar={d.ramar?.rubrik.toLowerCase()} filmer={filmer.length} bank={bank} farger={bank ? nivaFarger(d, bank) : undefined} nivamaterial={metodensNivamaterial(d)} bladmaterial={metodensBladmaterial(d, m.id)} ovrigt={ovrigtfil(d, m.id)} />
+      <Nedladdning id={m.id} titel={d.titel} lektionskort={metodensLektionskort(d, m.id)} harLathund={harLathund(d)} harMaterial={harMaterial(d)} filmer={filmer.length} bank={bank} farger={bank ? nivaFarger(d, bank) : undefined} nivamaterial={metodensNivamaterial(d)} bladmaterial={metodensBladmaterial(d, m.id)} ovrigt={ovrigtfil(d, m.id)} />
     </div>
 
     <Metod d={d} id={m.id} koppling={koppling} />

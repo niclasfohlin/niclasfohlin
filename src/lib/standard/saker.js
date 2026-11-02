@@ -213,3 +213,13 @@ export function sakspann(text) {
     return till > fran && till - fran <= 7 ? [{ index: /** @type {number} */ (m.index), langd: m[0].length, text: m[1], namn: [...new Set([m[1], /** @type {string} */ (m[1].split(' ').pop())])], fran, till, nummer: Array.from({ length: till - fran + 1 }, (_, i) => fran + i) }] : [];
   });
 }
+
+/**
+ * Raderna i rutan Ladda ner och skriv ut på en metods sida, i ordning och lika i Stödundervisning och Metoder (Niclas
+ * 2026-11-02: "Det har blivit run off av detta ... Man behöver väl hela metoden, bara metoden ... lathunden och filmerna",
+ * "Allt material behövs inte" och "Den finns väl hela metoden utskriften"). Materialet och mallarna står i Allt om metoden,
+ * och en enskild sak, som lektionskortet, en mall, kontraktet eller grovplaneringen, har sin knapp där den står på sidan och
+ * ingen rad här. Filmen heter Filmen när metoden har en. Bankernas tabeller i Stödundervisning står efter raderna och hör
+ * inte hit. scripts/metoderprov.mjs stannar på en rad som inte står här.
+ */
+export const NEDLADDNINGENS_RADER = Object.freeze(['Skriv ut', 'Allt om metoden', 'Bara metoden', 'Bara lathunden', 'Filmen', 'Filmerna']);
