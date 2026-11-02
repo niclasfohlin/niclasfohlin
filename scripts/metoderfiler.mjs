@@ -75,10 +75,17 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
       if (yamlSha !== metodensSha) fel.push(`${id}: ${post.namn} är byggd ur en annan metodfil än sajtens (${String(yamlSha).slice(0, 8)} mot ${metodensSha.slice(0, 8)}). Kopiera riggens metod.yaml eller be riggen bygga om.`);
       // Lathundens pdf är sajtens, gjord av PowerPoint ur sajtens PowerPoint-fil (scripts/lathund-pdf.mjs, K-637), så riggens
       // tas inte in; riggens Word-lathund tas in som förut.
+      // En fri tabell med egen fil, som Grovplaneringen i Testbaserat lärande (K-684), står med slag tabell och tabellens
+      // rubrik, och heter <id>-tabell-<rubrik> som i Stödundervisning (tabellensStam i src/lib/undervisningsmetodfiler.ts).
+      let slag = post.slag;
+      if (slag === 'tabell') {
+        if (!(d.tabeller ?? []).some((t) => t.rubrik === post.rubrik)) { fel.push(`${id}: ${post.namn} hör till tabellen "${post.rubrik}", som metoden inte har`); continue; }
+        slag = `tabell-${slugAv(post.rubrik)}`;
+      }
       for (const namn of [post.namn, post.slag === 'lathund' ? undefined : post.pdf].filter(Boolean)) {
         const kalla = hitta(namn);
         if (!kalla) { fel.push(`${id}: ${namn} saknas hos riggen`); continue; }
-        filer.push({ slag: post.slag, kalla, typ: namn.split('.').pop() });
+        filer.push({ slag, kalla, typ: namn.split('.').pop() });
       }
     }
   } else {
@@ -89,7 +96,11 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     for (const typ of ['pdf', 'docx']) if (existsSync(join(kort, `Lektionskort - ${t}.${typ}`))) filer.push({ slag: 'lektionskort', kalla: join(kort, `Lektionskort - ${t}.${typ}`), typ });
   }
   const stam = (slag) => (slag === 'allt' ? id : `${id}-${slag}`);
-  if (!kontrollera) for (const f of filer) copyFileSync(f.kalla, join(UT, `${stam(f.slag)}.${f.typ}`));
+  if (!kontrollera) {
+    // En tabells fil som riggen inte längre lämnar tas bort, som bladen nedan.
+    for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-tabell-`) && !filer.some((y) => x === `${stam(y.slag)}.${y.typ}`))) rmSync(join(UT, f));
+    for (const f of filer) copyFileSync(f.kalla, join(UT, `${stam(f.slag)}.${f.typ}`));
+  }
 
   // Bladen i Materialet för klassen: ett blad per sida, i metodens ordning, sist i materialets pdf. En textsida före dem,
   // med materialets rubrik överst (riggens leverans 2026-10-30: "Materialet för klassen. Utöver lektionskortet …"), hör inte

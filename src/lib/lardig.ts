@@ -2,10 +2,10 @@
 // visar ur metodens fil, som JSON till sidans skript (src/scripts/lardig.ts), och bygget stannar på en metod vars plan inte
 // går att räkna. Motorn och allt som räknar står i standarden (src/lib/standard/plan.js, under Lär dig metoden), och
 // formen och faserna i underlag/prov/metoder/PLANERA-LAGRET.md och riggens standard för undervisningsmetoder, avsnitt 16.
-import { dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, lasvagen, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
-import { metodensAdress, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
+import { dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, lasvagen, liten, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
+import { metodensAdress, stegetsAnkare, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import { metodensStrukturer, metodensKortAdress, ALLA_KORTENS_ADRESS, kortensVersion, allaKortensAntal, allaKortensStorlek, TVA_PA_A4 } from './strukturer';
-import { metodensFiler } from './undervisningsmetodfiler';
+import { metodensFiler, metodensTabellfiler, sakernasFiler } from './undervisningsmetodfiler';
 
 /** Planens data, som sidan bär som JSON och skriptet räknar med. */
 export interface LarDigData {
@@ -49,7 +49,11 @@ export interface LarDigData {
   /** Läsvägen i metoden, med ankarna på metodens sida. */
   lasvag: { delar: { namn: string; adress: string }[]; minuter: number; nar: string };
   /** Filernas adresser när filen finns, och annars stället på metodens sida där materialet står. */
-  filer: { lektionskort: { adress: string; fil: boolean }; planeringsmall: { adress: string; fil: boolean }; materialet: { adress: string; fil: boolean }; observation: { adress: string; fil: boolean } };
+  /** Steget med utfallen efter talet, som Facit, och dess plats på metodens sida, där läraren skriver klassens storlek
+   * (andra ögat på Testbaserat lärande 2026-11-02: vecka 2 sa välja utfall efter talet, och Lär dig metoden visade inga). */
+  utfallen?: { namn: string; adress: string };
+  /** Tabellerna med egen fil, som Grovplaneringen (metodensTabellfiler), som knappar bredvid Planeringsmallen i Före. */
+  filer: { lektionskort: { adress: string; fil: boolean }; planeringsmall: { adress: string; fil: boolean }; materialet: { adress: string; fil: boolean }; observation: { adress: string; fil: boolean }; tabeller: { namn: string; adress: string }[] };
   /** Strukturkorten som metoden importerar, att skriva ut och ha till hands: metodens kort och alla kort i verktyget (K-661). */
   strukturkort?: { metodens: string; antal: number; alla: string; allaAntal: number; allaStorlek: string; utskrift: string; vid: string; text: string };
   /** Metodens När det glider och stödet för elever som behöver mer, när metoden har dem, som Mitt i hänvisar till (K-631). */
@@ -106,10 +110,11 @@ export function larDigData(id: string, d: Um): LarDigData {
     }).filter((l) => l.titel),
     // Metodens saker som på metodens sida och i lathunden (undervisningsmetodensSaker), med samma ankare, så att samma ord leder
     // till samma sak (granskningen rot-3, fynd 6, och den kalla läsaren 2026-10-30, nr 12).
-    saker: undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektionskort, strukturer: metodensStrukturer(d, strang(d.titel)) }),
+    saker: undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer: metodensStrukturer(d, strang(d.titel)) }),
     lasvag: (() => { const l = lasvagen(d); return { delar: l.delar.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })), minuter: l.minuter, nar: slagensOrd(d).lasning }; })(),
     ...(d.strukturkort ? { strukturkort: { metodens: kortensVersion(metodensKortAdress(id)), antal: somLista(d.strukturkort.strukturer).length, alla: kortensVersion(ALLA_KORTENS_ADRESS), allaAntal: allaKortensAntal(), allaStorlek: allaKortensStorlek(), utskrift: TVA_PA_A4, vid: slagensOrd(d).strukturkortVid, text: strang(d.strukturkort.text) } } : {}),
-    filer: { lektionskort: fil('lektionskort', 'materialet'), planeringsmall: fil('planeringsmall', 'planeringsmallen'), materialet: fil('materialet', 'materialet-for-klassen'), observation: fil('observation', 'observationsmallen') },
+    ...(() => { const s = somLista(d.steg?.rader).find((x) => (x as { redo?: unknown }).redo) as { namn?: string } | undefined; return s?.namn ? { utfallen: { namn: `Utfallen efter ${liten(s.namn)}`, adress: `${sida}#${stegetsAnkare(s.namn)}` } } : {}; })(),
+    filer: { lektionskort: fil('lektionskort', 'materialet'), planeringsmall: fil('planeringsmall', 'planeringsmallen'), materialet: fil('materialet', 'materialet-for-klassen'), observation: fil('observation', 'observationsmallen'), tabeller: metodensTabellfiler(id, somLista(d.tabeller).map((t) => strang((t as { rubrik?: string }).rubrik))).map((f) => ({ namn: f.namn, adress: (f.pdf ?? f.docx)! })) },
     // När det glider står på metodens sida när metoden har det svåraste, fallgroparna eller det du håller fast vid, och stödet
     // när metoden har det (src/components/Undervisningsmetod.astro).
     ...(d.hinder || somLista(d.fallgropar?.rader).length || d.hallFast ? { glider: `${sida}#nar-det-glider` } : {}),

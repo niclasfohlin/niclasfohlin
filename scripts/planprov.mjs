@@ -93,6 +93,13 @@ if (tsMp) {
   // Före insatsen står i veckan före planens första vecka, som vecka 0 (Planera 0.2, de kalla testarna 2026-10-24).
   ska('uppföljningen före är veckan före och efter veckan efter', p.uppfoljning[0].tillfallen[0].datum === '2026-10-26' && p.uppfoljning[0].tillfallen[0].vecka === 0 && p.fore.mandag === '2026-10-26' && !p.fore.overLov && p.uppfoljning[2].tillfallen[0].datum === '2026-12-14');
   ska('varje vecka har inget datum', p.uppfoljning[1].typ === 'lopande' && p.uppfoljning[1].tillfallen.length === 0);
+  // Nästa termin: veckan efter jullovet med start i november, och efter sommarlovet med start i mars (andra ögat på
+  // Testbaserat lärande 2026-11-02).
+  {
+    const medTermin = { ...tsMp, uppfoljning: [...tsMp.uppfoljning, { rad: tsMp.uppfoljning.length, tid: s.tolkaTid('Nästa termin'), perElev: false }] };
+    const termin = (start) => s.planera(medTermin, { ...val, start }).uppfoljning.at(-1);
+    ska('nästa termin är en rad efter, och veckan efter jullovet eller sommarlovet', JSON.stringify(s.tolkaTid('nästa termin')) === JSON.stringify({ typ: 'efter', veckor: 0, termin: true }) && termin('2026-11-02').tillfallen[0]?.datum === '2027-01-11' && termin('2027-03-01').tillfallen[0]?.datum === '2027-08-16' && termin('2026-11-02').typ === 'efter', [termin('2026-11-02').tillfallen, termin('2027-03-01').tillfallen]);
+  }
   ska('veckanFor onsdag 18 november är vecka 3', s.veckanFor(p, '2026-11-18').nr === 3);
   ska('nästa pass onsdag 18 november är pass 8', s.nastaPass(p, '2026-11-18').nr === 8);
   ska('nästa pass som inte är bockat, med de bockade före det', s.nastaObockade(p, '2026-11-18', (x) => x.nr === 8 || x.nr === 9).pass.nr === 10 && s.nastaObockade(p, '2026-11-18', (x) => x.nr === 8 || x.nr === 9).bockade.map((x) => x.nr).join() === '8,9' && s.nastaObockade(p, '2026-11-18', () => false).pass.nr === 8 && s.nastaObockade(p, '2026-11-18', () => false).bockade.length === 0 && s.nastaObockade(p, '2026-11-18', () => true).pass === null);

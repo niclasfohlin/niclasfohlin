@@ -1,5 +1,12 @@
 # Ändringar i standarden
 
+## 0.55.0, 2026-11-02
+
+- `undervisningsmetod.js` (riggens förslag 1 ur Testbaserat lärande): `PRIMARA_UTAN_OMRADE`, raden Primär evidens när inget av de fyra områdena har minst Visst stöd, "Inget av läsning, skrivning, matematik och socialt har minst visst stöd". Sajtens metodkort och riggens Word-fil läser samma ord.
+- `undervisningsmetod.js` (den kalla läsaren på Testbaserat lärande): `lagretIDinLektion(d)`, säger tiden i slaget strategier lagrets minuter i lektionen ("12 minuter i din lektion") och inte lektionen som lagret ligger över ("Din lektion, 45 minuter")? Då är `slagensOrd(d).kortet` "I din lektion", och `bankensVal(d).anvands` är delar av lektionen.
+- `undervisningsmetod.js` (andra ögat på Testbaserat lärande): `lagretsVagTillMandag` säger det första stycket om första lektionen (`forsta.text`) efter checklistans första punkt, och tidsschemats första rad bara när metoden inte har något om första lektionen. `slagensOrd(d).lasning` är "under vecka 1" bara när metodens checklista säger "Under vecka 1 läser du", och annars före första lektionen. `arbetslagetsMoten` säger metodens egen mening om det ni tar med till Möte 2 (`uppdrag.taMed`) när den finns. `forstaLektionensMinuter` säger en dels egna `fraser` i varianten när den har dem. Bilaga A:s rad är "Lektionskortet, materialet för klassen och mallarna."
+- `plan.js` (andra ögat på Testbaserat lärande): `tolkaTid("nästa termin")` är en rad efter de första veckorna med `termin: true`, och planen lägger den i veckan efter nästa jullov eller sommarlov. Planera 0.9.1.
+
 ## 0.54.0, 2026-11-02
 
 - `undervisningsmetod.js` (den kalla läsaren på Formativ bedömning): `lagretsVagTillMandag`, rutan Vill du börja på måndag? i slaget strategier ur metodens egna fält, och `slagensOrd(d).lasning`, när läraren läser delarna, under vecka 1 i strategierna och annars före första lektionen.

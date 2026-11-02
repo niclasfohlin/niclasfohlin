@@ -19,7 +19,7 @@ import { datumText, UPPHOV } from '../../../lib/metod';
 import { lathundensSidor, slagensOrd } from '../../../lib/standard/index.js';
 import { metodensAdress, umStam, undervisningsmetodensSaker, type Um } from '../../../lib/undervisningsmetod';
 import { metodensStrukturer } from '../../../lib/strukturer';
-import { metodensFiler } from '../../../lib/undervisningsmetodfiler';
+import { metodensFiler, sakernasFiler } from '../../../lib/undervisningsmetodfiler';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('undervisningsmetoder');
@@ -35,7 +35,7 @@ const sidor = lathundensSidor(d);
 const filer = metodensFiler(id);
 const filmer = metodensFilmer({ film: d.film, filmer: d.filmer }, id, 'metoder');
 // Metodens saker, som leder till metodens sida, utom lathunden själv.
-const saker = undervisningsmetodensSaker(d, id, { lektionskort: !!filer.lektionskort, strukturer: metodensStrukturer(d, d.titel) }).filter((x) => x.adress !== `${sida}/lathund`);
+const saker = undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer: metodensStrukturer(d, d.titel) }).filter((x) => x.adress !== `${sida}/lathund`);
 // De publicerade metoderna, så att ett utkast aldrig blir en länk; ett okänt id stoppar bygget (provaHanvisade i src/lib/innehall.ts).
 const relaterade = await relateradeMetoder(d);
 ---

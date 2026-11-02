@@ -129,6 +129,9 @@ export function tolkaTid(text) {
   // I en versions extra pass före pass 1, som Berättelseramens egna ram (Codex 2026-10-27).
   if (t === 'i det extra passet') return { typ: 'extra' };
   if (t === 'efter') return { typ: 'efter', veckor: 0 };
+  // Nästa termin: första veckan efter nästa jullov eller sommarlov, som en rad efter de första veckorna (andra ögat på
+  // Testbaserat lärande 2026-11-02: "efter 16 veckor" hamnade i januari med start i augusti och i april med start i november).
+  if (t === 'nästa termin') return { typ: 'efter', veckor: 0, termin: true };
   let m = t.match(new RegExp(String.raw`^efter ${TAL}(?:${STRECK}${TAL})? veckor?$`, 'u'));
   if (m) return { typ: 'efter', veckor: talAv(m[1]), ...(m[2] ? { till: talAv(m[2]) } : {}) };
   if (t === 'varje pass' || t === 'i passet') return { typ: 'lopande', enhet: 'pass' };
@@ -1782,7 +1785,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.9.0', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.9.1', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -2146,6 +2149,16 @@ export function planera(mp, val) {
     // 2026-10-25: fyra veckor efter räknades från veckan efter och blev fem).
     else if (tid.typ === 'efter') {
       let datum = tid.veckor && sista ? mandagen(plusDagar(sista.datum, tid.veckor * 7)) : plusDagar(efter, tid.veckor * 7);
+      // Nästa termin: veckan efter nästa jullov (en vardag mellan jul och trettondagen) eller sommarlov.
+      if ('termin' in tid && tid.termin) {
+        let iLovet = false;
+        for (let i = 0; i < 60; i++) {
+          const langtLov = iJulen(datum) || iJulen(plusDagar(datum, 4)) || iSommarlovet(datum);
+          if (langtLov) iLovet = true;
+          else if (iLovet) break;
+          datum = plusDagar(datum, 7);
+        }
+      }
       // En lovvecka flyttar uppföljningen till veckan efter lovet (verifieringen 2026-10-26: uppföljningen fyra veckor efter
       // hamnade i jullovet, och veckan gick inte att trycka som lov).
       for (let i = 0; i < 53 && lov.has(veckonyckel(datum)); i++) datum = plusDagar(datum, 7);

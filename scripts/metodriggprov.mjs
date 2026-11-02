@@ -40,6 +40,8 @@ else {
   for (const s of SLAG) if (!(f.filer ?? []).some((x) => x.slag === s)) fel.push(`filer.json saknar ${s}`);
   for (const x of f.filer ?? []) {
     if ((x.metodSha256 ?? f.metodSha256) !== summa) fel.push(`${x.namn} är byggd ur en annan metod.yaml än den som ligger i methods/${id}/`);
+    // En fri tabell med egen fil, utöver de åtta, bär tabellens rubrik som den står i tabeller (K-684, Grovplaneringen).
+    if (x.slag === 'tabell' && !(d.tabeller ?? []).some((t) => t.rubrik === x.rubrik)) fel.push(`${x.namn} har slag tabell och rubriken "${x.rubrik ?? ''}", som ingen tabell i metoden har`);
     // Lathundens pdf gör sajten ur sin PowerPoint-fil (K-637), så riggens krävs inte; riggens Word-lathund krävs.
     for (const namn of [x.namn, x.slag === 'lathund' ? undefined : x.pdf].filter(Boolean)) {
       const p = [join(ut, namn), join(RIGG, 'out', 'material', `lektionskort-${id}`, namn)].find((y) => existsSync(y));

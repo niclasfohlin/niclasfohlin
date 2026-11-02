@@ -45,7 +45,7 @@ export const METODKORTET = 'Metodkortet';
  * sida kan länka hit. Utan lektionskortets fil, när kortet väntar på Niclas ja (VANTAR i scripts/metoderfiler.mjs), är
  * kortet ingen sak, så att ingen länk leder till en knapp som inte finns.
  */
-export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; strukturer?: { id: string; namn: string }[] } = {}): MetodSak[] {
+export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; tabeller?: string[]; strukturer?: { id: string; namn: string }[] } = {}): MetodSak[] {
   const sida = metodensAdress(id);
   // Ett namn som är ett ord för en sak (Planeringsmallen, Affischen Så visar du) hittas också med liten bokstav; ett annat,
   // som Stegen, bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden), så att "skriv stegen" inte
@@ -56,8 +56,13 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   const iMaterialet = (namn: string) => new RegExp(`(^|[^\\p{L}])${skyddaRegex(liten(namn))}(?![\\p{L}])`, 'u').test(materialet);
   const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) || iMaterialet(namn) ? {} : { versal: true }), ...extra });
   const saker: MetodSak[] = o.lektionskort === false ? [] : [sak(UM_NAMN.lektionskort, `${sida}#materialet`)];
-  // En fri tabell med en rad i menyn har en egen plats på sidan, som Frågor att låna i Formativ bedömning, och skrivs ut med metoden.
-  for (const t of (d.tabeller ?? []) as { rubrik: string; meny?: boolean }[]) if (t.meny) saker.push(sak(t.rubrik, `${sida}#${slugAv(t.rubrik)}`, { slag: 'avsnitt' }));
+  // En fri tabell med en egen fil, som Grovplaneringen i Testbaserat lärande (o.tabeller, sakernasFiler i
+  // src/lib/undervisningsmetodfiler.ts), är en sak med knappen under tabellen (K-684). En med en rad i menyn har en egen plats
+  // på sidan, som Frågor att låna i Formativ bedömning, och skrivs ut med metoden.
+  for (const t of (d.tabeller ?? []) as { rubrik: string; meny?: boolean }[]) {
+    if (o.tabeller?.includes(t.rubrik)) saker.push(sak(t.rubrik, `${sida}#${slugAv(t.rubrik)}`));
+    else if (t.meny) saker.push(sak(t.rubrik, `${sida}#${slugAv(t.rubrik)}`, { slag: 'avsnitt' }));
+  }
   if (d.ramar) {
     saker.push(sak(d.ramar.rubrik ?? UM_NAMN.materialet, `${sida}#materialet-for-klassen`));
     // Ett blad vars rubrik har en etikett före kolon, som "Strukturen, vecka 1: Ping-pong-prat", hittas också med namnet
@@ -82,6 +87,8 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   saker.push(sak(METODKORTET, `${sida}#metodkortet`, { slag: 'avsnitt' }));
   return saker;
 }
+/** Ett stegs ankare i lektionen på metodens sida, del-<namn>, som remsan, Lär dig metoden och utfallens knapp leder till. */
+export const stegetsAnkare = (namn: string) => `del-${namn.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}`;
 /** Bladets ankare i Materialet för klassen, ur namnet. */
 export const bladetsAnkare = (namn: string) => `blad-${slugAv(namn)}`;
 

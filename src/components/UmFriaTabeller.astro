@@ -5,14 +5,18 @@
 // tabell och form som en fri tabell i stödundervisning (FriTabell.astro). Ankaret är rubrikens, som menyn och länkarna i
 // texten leder till (tabellCeller i Undervisningsmetod.astro, undervisningsmetodensSaker). En cell som är en saks namn, som
 // Färgkortet eller strukturen Kims prov, leder till saken, och andra namn i cellerna är länkar som i texten runt tabellen.
+// En tabell med en egen fil, som Grovplaneringen i Testbaserat lärande (metodensTabellfiler, K-684), har knappen under sig,
+// som ett blad: filen är mallen att skriva i, med alla grovplaneringens delar.
 import MetodTabell from './MetodTabell.astro';
+import Umfilknappar from './Umfilknappar.astro';
 import { friTabellensPlats, slugAv } from '../lib/standard/index.js';
 import { friTabellensKlass } from '../lib/metod';
 import type { Um } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
+import type { UmFil } from '../lib/undervisningsmetodfiler';
 type Tabell = { plats?: string; rubrik: string; text?: string; kolumner: string[]; rader: string[][]; not?: string };
-interface Props { d: Um; plats: string; k: (t: string) => string; saker: MetodSak[] }
-const { d, plats, k, saker } = Astro.props;
+interface Props { d: Um; id: string; plats: string; k: (t: string) => string; saker: MetodSak[]; filer?: UmFil[] }
+const { d, id, plats, k, saker, filer = [] } = Astro.props;
 const cellank = (cell: string) => saker.find((s) => [s.namn, ...(s.former ?? [])].includes(cell.trim()))?.adress;
 const Rubrik = plats === 'bilaga-a' ? 'h3' : 'h4';
 ---
@@ -22,5 +26,6 @@ const Rubrik = plats === 'bilaga-a' ? 'h3' : 'h4';
     {t.text && <p set:html={k(t.text)} />}
     <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} cellank={cellank} celltext={k} />
     {t.not && <p class="um-not" set:html={k(t.not)} />}
+    {filer.some((f) => f.namn === t.rubrik) && <Umfilknappar id={id} titel={d.titel} filer={{}} slag={[]} tabeller={filer.filter((f) => f.namn === t.rubrik)} />}
   </div>
 ))}

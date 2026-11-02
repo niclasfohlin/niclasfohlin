@@ -4,11 +4,11 @@
 // i src/lib/undervisningsmetod.ts (UM_NAMN), där metodens saker också läser dem och som sidans skript kan läsa utan filerna.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { slugAv } from './standard/index.js';
-import { UM_NAMN, UM_SLAG, umRad, umStam, type UmSlag } from './undervisningsmetod';
+import { liten, slugAv } from './standard/index.js';
+import { UM_NAMN, UM_SLAG, umRad, umStam, type Um, type UmSlag } from './undervisningsmetod';
 
 export type { UmSlag };
-export interface UmFil { slag: UmSlag; namn: string; rad: string; pdf?: string; docx?: string }
+export interface UmFil { slag: UmSlag | 'tabell'; namn: string; rad: string; pdf?: string; docx?: string }
 
 const MAPP = join(process.cwd(), 'public', 'metoder');
 
@@ -48,3 +48,28 @@ export const bladetsStam = (id: string, namn: string) => `${id}-blad-${slugAv(na
 export function metodensBlad(id: string, rubriker: string[]): { namn: string; pdf?: string }[] {
   return rubriker.map((namn) => { const stam = bladetsStam(id, namn); return { namn, ...(existsSync(join(MAPP, `${stam}.pdf`)) ? { pdf: `/metoder/${stam}.pdf` } : {}) }; });
 }
+
+/**
+ * En fri tabell med egen fil, som Grovplaneringen i Testbaserat lärande, en mall att skriva i Word eller Google (K-684;
+ * Niclas till riggen 2026-11-02: "Då vill man ju ofta mest ha en bra mall för drive eller docx"). Filen heter
+ * <id>-tabell-<rubrik>, som tabellernas filer i Stödundervisning, och riggen lämnar den i filer.json med slag tabell
+ * (scripts/metoderfiler.mjs). Tabellen får knappen under sig och en rad i Ladda ner och skriv ut, och den är en sak.
+ */
+export const tabellensStam = (id: string, rubrik: string) => `${id}-tabell-${slugAv(rubrik)}`;
+export function metodensTabellfiler(id: string, rubriker: string[]): UmFil[] {
+  return rubriker.flatMap((rubrik) => {
+    const stam = tabellensStam(id, rubrik);
+    const pdf = existsSync(join(MAPP, `${stam}.pdf`)) ? `/metoder/${stam}.pdf` : undefined;
+    const docx = existsSync(join(MAPP, `${stam}.docx`)) ? `/metoder/${stam}.docx` : undefined;
+    return pdf || docx ? [{ slag: 'tabell' as const, namn: rubrik, rad: `Bara ${liten(rubrik)}`, pdf, docx }] : [];
+  });
+}
+
+/**
+ * Det metodens saker behöver veta om filerna (undervisningsmetodensSaker): om lektionskortet finns, och vilka fria tabeller
+ * som har en egen fil. En rot för metodens sida, lathunden och Lär dig metoden, så att samma ord leder till samma sak.
+ */
+export const sakernasFiler = (id: string, d: Um) => ({
+  lektionskort: !!metodensFiler(id).lektionskort,
+  tabeller: metodensTabellfiler(id, ((d.tabeller ?? []) as { rubrik: string }[]).map((t) => t.rubrik)).map((f) => f.namn),
+});

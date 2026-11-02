@@ -16,9 +16,10 @@ import Filval from './Filval.astro';
 import Filmrad from './Filmrad.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import type { UmFil, UmSlag } from '../lib/undervisningsmetodfiler';
-interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; bara?: boolean; filmer?: number }
-const { id, filer, slag, stor = false, titel = id, blad, bara = false, filmer = 0 } = Astro.props;
-const valda = slag.map((s) => filer[s]).filter((f): f is UmFil => !!f);
+// tabeller är de fria tabeller som har en egen fil, som Grovplaneringen (metodensTabellfiler), efter filerna i slag.
+interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; tabeller?: UmFil[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; bara?: boolean; filmer?: number }
+const { id, filer, slag, tabeller = [], stor = false, titel = id, blad, bara = false, filmer = 0 } = Astro.props;
+const valda = [...slag.map((s) => filer[s]), ...tabeller].filter((f): f is UmFil => !!f);
 const bas = (f: UmFil) => (f.pdf ?? f.docx ?? '').replace(/\.(pdf|docx)$/, '');
 const namn = (f: UmFil) => bas(f).split('/').pop() ?? id;
 const iMening = (t: string) => t.charAt(0).toLocaleLowerCase('sv') + t.slice(1);

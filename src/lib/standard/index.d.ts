@@ -104,7 +104,7 @@ export declare function meningarI(text: string): number;
 export declare function bildtextFel(bild: { rubrik?: string; text: string; alt?: string }, o?: { blad?: boolean; visas?: boolean }): string[];
 
 /** Planera insatsen (sajtens K-489, plan.js): när en rad i uppföljningen görs, ur fältet tid. */
-export type Tid = { typ: 'fore' } | { typ: 'extra' } | { typ: 'efter'; veckor: number; till?: number } | { typ: 'lopande'; enhet: 'pass' | 'vecka' } | { typ: 'intervall'; var: number } | { typ: 'vecka'; veckor: number[]; plats?: 'forsta' | 'sista' } | { typ: 'sista-veckan'; plats?: 'forsta' | 'sista' } | { typ: 'pass'; pass: number[]; kurs?: true } | { typ: 'sista-passet'; efter?: number } | { typ: 'villkor' };
+export type Tid = { typ: 'fore' } | { typ: 'extra' } | { typ: 'efter'; veckor: number; till?: number; termin?: true } | { typ: 'lopande'; enhet: 'pass' | 'vecka' } | { typ: 'intervall'; var: number } | { typ: 'vecka'; veckor: number[]; plats?: 'forsta' | 'sista' } | { typ: 'sista-veckan'; plats?: 'forsta' | 'sista' } | { typ: 'pass'; pass: number[]; kurs?: true } | { typ: 'sista-passet'; efter?: number } | { typ: 'villkor' };
 /** En rad i progressionen: veckorna eller passen den gäller; till saknas när den gäller till slutet. */
 export interface Steg { rad: number; fran: number; till?: number; vidBehov: boolean; efter?: true }
 /** Vilka pass en rad i planens passen gäller: platsen i veckan, eller numret i insatsen. */
@@ -851,6 +851,8 @@ export declare const SLAGENS_FORM: Readonly<Record<'lektionsforlopp' | 'struktur
 /** Slagets ord, en rot för sidan, planeringsbladet, lathunden, metodkortet och mejlet. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export declare function slagensOrd(d: Record<string, any>): (typeof SLAGENS_FORM)['lektionsforlopp'];
+/** Säger tiden i slaget strategier lagrets minuter i lektionen, och inte lektionen som lagret ligger över? */
+export declare function lagretIDinLektion(d: Record<string, any>): boolean;
 /** Felen i det en metod hänvisar till: ett id som inte finns, och ett id som är en metod i båda samlingarna. */
 export declare function hanvisadeMetodersFel(d: { relaterade?: string[]; passar?: { metoder?: string[] } }, finns: { stod: Set<string>; metoder: Set<string> }): string[];
 /** Var en fri tabell står i en undervisningsmetod: sist i del 1, efter veckorna eller, annars, sist i bilaga A. */
@@ -872,6 +874,8 @@ export declare const EXEMPLETS_ETIKETTER: Readonly<{ egen: string; visar: string
 export declare function primaraOmraden(evidens: Record<string, any>): string[];
 /** Regeln för Primär evidens i ord. */
 export declare const PRIMARA_REGELN: string;
+/** Raden Primär evidens när inget av de fyra områdena har minst Visst stöd. */
+export declare const PRIMARA_UTAN_OMRADE: string;
 /** Filmernas namn, film och film<nr> för varje extrafilm. */
 export declare const metodensFilmnamn: (d: { film?: unknown; filmer?: { nr: number }[] }) => string[];
 /** Första lektionens delar med minuterna och de en eller två fraser läraren säger; den första delen har rutinens repliker. */

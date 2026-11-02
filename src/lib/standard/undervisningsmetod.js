@@ -18,7 +18,7 @@ export const UNDERVISNINGSMETODENS_DELAR = [
   { id: 'lektionen', nr: '2', namn: 'Lektionen', rad: 'En lektion på {minuter} minuter, del för del.', text: 'Här står lektionen del för del, med det du gör och säger. Sedan ser du den i en lektion i {amne} och i {andra} andra ämnen.' },
   { id: 'kom-igang', nr: '3', namn: 'Kom igång', rad: 'Före första lektionen, planeringen, de första {veckor} veckorna och arbetslaget.', text: '' },
   { id: 'hall-i', nr: '4', namn: 'Håll i', rad: 'Vad du håller fast vid, vad du får ändra och vad du gör när metoden glider.', text: 'Här står vad du håller fast vid och varför, vad du får ändra och vad du gör när metoden börjar glida. Läs den hel efter första veckan.' },
-  { id: 'att-skriva-ut', nr: 'A', namn: 'Att skriva ut', rad: 'Lektionskortet, materialet för klassen, planeringsmallen och observationsmallen.', text: 'Här står det du skriver ut: lektionskortet, materialet för klassen, planeringsmallen och observationsmallen för den som besöker en lektion.' },
+  { id: 'att-skriva-ut', nr: 'A', namn: 'Att skriva ut', rad: 'Lektionskortet, materialet för klassen och mallarna.', text: 'Här står det du skriver ut: lektionskortet, materialet för klassen, planeringsmallen och observationsmallen för den som besöker en lektion.' },
   { id: 'valet', nr: 'B', namn: 'Valet och forskningen', rad: 'När metoden passar, vad kritiker säger och vad studierna visar.', text: '' },
 ];
 
@@ -244,6 +244,12 @@ export function primaraOmraden(evidens) {
 /** Regeln för Primär evidens i ord, i metodkortets förklaring. */
 export const PRIMARA_REGELN = 'Primär evidens är det eller de två av sajtens fyra områden, Läsning, Skrivning, Matematik och Socialt, där stödet är starkast, minst Visst stöd. Står fler än två lika avgör tillförlitligheten och sedan effekten, och står de lika också där, står alla.';
 /**
+ * Raden Primär evidens när inget av de fyra områdena har minst Visst stöd. Den nämner områdena, eftersom Ämnen eller
+ * Lärande totalt kan ha Gott stöd två rader ovanför, och "Inget område" lästes då som ett fel (riggens kalla läsare på
+ * Testbaserat lärande 2026-11-02). Sajtens kort och riggens Word-fil läser samma ord.
+ */
+export const PRIMARA_UTAN_OMRADE = 'Inget av läsning, skrivning, matematik och socialt har minst visst stöd';
+/**
  * Filmernas namn i riggens out/<id>/ och, med metodens id först, i sajtens public/metoder/: huvudfilmen `film` och en
  * `film<nr>` för varje extrafilm i `filmer`, som src/lib/film.ts ger adresserna. En rot för intaget
  * (scripts/metoderfiler.mjs) och leveransprovet (scripts/metodriggprov.mjs), så att en tredje film följer med av sig själv
@@ -430,8 +436,8 @@ export const ARBETSLAGETS_MOTEN = Object.freeze({
  * Till arbetslaget i riggens ordning, en rot för metodens sida och riggens renderare: metodens text (`uppdrag.text`), raden
  * om vem som leder i liten stil, och mötena, var och ett med rubrik, stycken och en numrerad lista: Möte 1 med
  * `uppdrag.forbered`, Mellan mötena med `uppdrag.planera` och `uppdrag.genomfor` när metoden har dem, och Möte 2 i slutet av
- * periodens första vecka (`periodensLangd(period).min`), med Möte 2:s instruktion och `uppdrag.reflektera` och sist den femte
- * frågan. Null utan `uppdrag`.
+ * periodens första vecka (`periodensLangd(period).min`), med det ni tar med (`uppdrag.taMed` eller slagets), Möte 2:s
+ * instruktion och `uppdrag.reflektera` och sist den femte frågan. Null utan `uppdrag`.
  * @param {Record<string, any>} d metodens fil, läst
  * @returns {{ rubrik: string, text: string, leder: string, moten: { id: string, rubrik: string, text: string[], fragor: string[] }[] } | null}
  */
@@ -444,7 +450,10 @@ export function arbetslagetsMoten(d) {
   const moten = [
     { id: 'mote-1', rubrik: M.mote1, text: lista(u.forbered?.text), fragor: lista(u.forbered?.fragor) },
     { id: 'mellan', rubrik: M.mellan, text: lista([u.planera, u.genomfor]), fragor: [] },
-    { id: 'mote-2', rubrik: vecka ? `${M.mote2} ${vecka}` : M.mote2UtanVecka, text: [`${slagensOrd(d).taMed} ${M.mote2Text}`], fragor: [...lista(u.reflektera), M.sistaFragan] },
+    // Det ni tar med till Möte 2 är metodens egen mening när den har en (`uppdrag.taMed`), som grovplaneringarna i
+    // Testbaserat lärande, och annars slagets (andra ögat 2026-11-02: Möte 2 sa planeringen med kryssen, och metoden ses med
+    // grovplaneringarna).
+    { id: 'mote-2', rubrik: vecka ? `${M.mote2} ${vecka}` : M.mote2UtanVecka, text: [`${u.taMed ?? slagensOrd(d).taMed} ${M.mote2Text}`], fragor: [...lista(u.reflektera), M.sistaFragan] },
   ].filter((m) => m.id === 'mote-2' || m.text.length || m.fragor.length);
   return { rubrik: u.rubrik ?? 'Till arbetslaget', text: String(u.text ?? ''), leder: M.leder, moten };
 }
@@ -468,15 +477,39 @@ export const SLAGENS_FORM = Object.freeze({
  * din egen lektion, och aldrig en lektion att planera (Niclas 2026-11-01). Ett slag som tabellen inte har får ett lektionsförlopps ord.
  * @param {Record<string, any>} d metodens fil
  */
-export const slagensOrd = (d) => /** @type {Record<string, typeof SLAGENS_FORM.lektionsforlopp>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp;
+/**
+ * Säger tiden i slaget strategier lagrets minuter i lektionen, "12 minuter i din lektion" i Testbaserat lärande, och inte
+ * lektionen som lagret ligger över, "Din lektion, 45 minuter" i Formativ bedömning? Metodkortets etikett och bankens Används i
+ * läser samma sak.
+ * @param {Record<string, any>} d metodens fil
+ */
+export const lagretIDinLektion = (d) => d?.slag === 'strategier' && /\bi din lektion\b/i.test(String(d?.tid ?? ''));
+export const slagensOrd = (d) => {
+  const form = /** @type {Record<string, typeof SLAGENS_FORM.lektionsforlopp>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp;
+  // I slaget strategier säger tiden antingen lektionen som lagret ligger över, "Din lektion, 45 minuter" i Formativ bedömning,
+  // eller lagrets minuter i lektionen, "12 minuter i din lektion" i Testbaserat lärande. Metodkortets etikett säger samma
+  // sak som tiden, så att 12 min inte läses som lektionens längd (den kalla läsaren på Testbaserat lärande 2026-11-02).
+  // Läraren läser delarna under vecka 1 när metodens checklista säger det, som i Formativ bedömning, och annars före första
+  // lektionen (andra ögat på Testbaserat lärande 2026-11-02: Läs in dig sa vecka 1, och metoden säger före första mötet).
+  if (d?.slag !== 'strategier') return form;
+  const kortet = lagretIDinLektion(d) ? 'I din lektion' : form.kortet;
+  const lasning = (d?.checklista?.punkter ?? []).some((/** @type {unknown} */ p) => /\bunder vecka 1 läser du\b/i.test(String(p))) ? form.lasning : SLAGENS_FORM.lektionsforlopp.lasning;
+  return kortet === form.kortet && lasning === form.lasning ? form : { ...form, kortet, lasning };
+};
 /**
  * Vägen till måndag i slaget strategier, en mening för rutan Vill du börja på måndag?: metodens första punkt i checklistan och
- * tidsschemats första rad, ordagrant, eftersom läraren lägger lagret på sin egen lektion (den kalla läsaren 2026-11-02: rutan sa
- * fyll i planeringsmallen, och metoden säger att ingen ny planering behövs). Null i andra slag.
+ * det första stycket om första lektionen (`forsta.text`), ordagrant, eftersom läraren lägger lagret på sin egen lektion (den
+ * kalla läsaren 2026-11-02: rutan sa fyll i planeringsmallen, och metoden säger att ingen ny planering behövs). Har metoden
+ * inget om första lektionen står tidsschemats första rad. Tidsschemat gäller en vanlig lektion, och i Testbaserat lärande är
+ * första gången ett annat prov än det vanliga (andra ögat 2026-11-02, P1). Null i andra slag.
  * @param {Record<string, any>} d metodens fil
  * @returns {string | null}
  */
-export const lagretsVagTillMandag = (d) => (d?.slag === 'strategier' ? [d.checklista?.punkter?.[0], d.tidsschema?.rader?.[0]?.vad].filter(Boolean).join(' ') || null : null);
+export const lagretsVagTillMandag = (d) => {
+  if (d?.slag !== 'strategier') return null;
+  const forsta = Array.isArray(d.forsta?.text) ? d.forsta.text[0] : d.forsta?.text;
+  return [d.checklista?.punkter?.[0], forsta || d.tidsschema?.rader?.[0]?.vad].filter(Boolean).join(' ') || null;
+};
 /** Raden under Planera på metodens sida: i slaget strategier tidsschemats första rad, det läraren skriver på sin planering, ordagrant. @param {Record<string, any>} d metodens fil */
 export const planerasRad = (d) => (d?.slag === 'strategier' && d.tidsschema?.rader?.[0]?.vad) || slagensOrd(d).planeraRad;
 /** Rubriken för planeringen på metodens sida och i lathunden, efter metodens slag. @param {Record<string, any>} d metodens fil */
@@ -568,7 +601,7 @@ export const HINDRETS_KORT = Object.freeze({ meningar: 2, tecken: 220 });
 
 /**
  * Första lektionens minuter med det läraren säger i varje del: delarna och minuterna ur tidsschemats variant "första
- * lektionen", och de en eller två första fraserna ur stegets `fraser` för samma del. Den första delen är rutinen i vecka 1
+ * lektionen", och delens egna `fraser` eller de en eller två första fraserna ur stegets `fraser` för samma del. Den första delen är rutinen i vecka 1
  * (forsta.text), så där står rutinens repliker, det som står inom citattecken i rutinens steg, och inte de två snabba
  * (granskare-3 nr 22). En rot för tabellen Första lektionen, minut för minut på metodens sida och Minuterna i lathunden.
  * Med `nar` gäller minuterna en annan variant, som den korta formen som vecka 1 görs i (vagenTillMandag). Tom lista utan
@@ -582,7 +615,9 @@ export function forstaLektionensMinuter(d, nar = 'första lektionen') {
   const varianten = lista(d.tidsschema?.varianter).find((x) => x.nar === nar);
   const steg = lista(d.steg?.rader);
   const rutinens = lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1').flatMap((r) => [...lista(r.steg).join(' ').matchAll(/”([^”]+)”/g)].map((m) => m[1]));
-  return lista(varianten?.delar).map((x) => ({ fas: x.fas, tid: String(x.tid), fraser: x.fas === steg[0]?.namn && rutinens.length ? rutinens : lista(steg.find((y) => y.namn === x.fas)?.fraser).slice(0, 2) }));
+  // En del i varianten med egna fraser säger dem, som kontrasten i Testbaserat lärandes första lektion, där läraren tänker
+  // högt i stället för paren (den kalla läsaren 2026-11-02: minuterna sa ”En minut själv, en minut i par”).
+  return lista(varianten?.delar).map((x) => ({ fas: x.fas, tid: String(x.tid), fraser: lista(x.fraser).length ? lista(x.fraser) : x.fas === steg[0]?.namn && rutinens.length ? rutinens : lista(steg.find((y) => y.namn === x.fas)?.fraser).slice(0, 2) }));
 }
 
 /**
@@ -837,7 +872,9 @@ export function bankensVal(d) {
   const sv = d.profil?.svarighet ? svarighetensNiva(d.profil.svarighet) : null;
   return {
     syfte: (Array.isArray(d.syfte) ? d.syfte : []).filter((/** @type {string} */ s) => SYFTEN.some((x) => x.id === s)),
-    anvands: /** @type {Record<string, string>} */ (ANVANDS_I)[d.slag] ? d.slag : null,
+    // Ett lager som är några minuter i lektionen, som provet i Testbaserat lärande, används i delar av lektionen och inte i
+    // alla lektioner (andra ögat 2026-11-02), med samma läsning av tiden som metodkortets etikett (lagretIDinLektion).
+    anvands: lagretIDinLektion(d) ? 'strukturer' : /** @type {Record<string, string>} */ (ANVANDS_I)[d.slag] ? d.slag : null,
     svarighet: sv === null ? null : SVARIGHETENS_GRUPPER.find((g) => g.nivaer.includes(sv))?.id ?? null,
     stod: Object.fromEntries(BANKENS_OMRADEN.map((o) => [o.id, grupp(o.id)])),
   };
