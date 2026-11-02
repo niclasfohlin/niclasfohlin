@@ -351,8 +351,9 @@ function steget(v: PlanVecka, utanVidare = false): string {
   const f = data.filer;
   const mallen = (u: (typeof veckans)[number]) => (rader[u.rad].id === 'observationerna' ? `<p class="pl-andra-knappar">${knapplank(f.observation.adress, 'Observationsmallen', 'observationsmall')}</p>` : '');
   const uppf = veckans.length || lopande.length ? `<section class="pl-block"><h4>Metodens uppföljning</h4>${etikettlista([...veckans.map((u) => ({ etikett: uppfNar(u.rad, nar(u)), html: esc(veckornaMedDatum(rader[u.rad].vad, plan)), efter: mallen(u) })), ...lopande.map((u) => ({ etikett: rader[u.rad].nar, html: esc(veckornaMedDatum(rader[u.rad].vad, plan)) }))])}</section>` : '';
-  // Säger veckan att läraren väljer utfall, leder en knapp till utfallen på metodens sida, där klassens storlek räknas om.
-  const utfallen = data.utfallen && /utfall/i.test(`${rad.roll ?? ''} ${rad.vidare ?? ''} ${rad.eleverna ?? ''}`) ? knapplank(data.utfallen.adress, data.utfallen.namn, 'utfallen') : '';
+  // Säger veckan att läraren väljer utfall (data.utfallen.veckor), leder en knapp till utfallen på metodens sida, där klassens
+  // storlek räknas om.
+  const utfallen = data.utfallen?.veckor.includes(rad.vecka) ? knapplank(data.utfallen.adress, data.utfallen.namn, 'utfallen') : '';
   const knappar = `<p class="pl-andra-knappar">${knapplank(f.lektionskort.adress, 'Lektionskortet', 'lektionskort')}${utfallen}${knapplank(f.planeringsmall.adress, 'Planeringsmallen', 'planeringsmall')}${veckansSaker(v, [rad.rubrik, rad.eleverna ?? '', rad.roll ?? '', ...rutiner.flatMap((r) => [r.namn, r.vad, ...r.steg, r.forsta ?? ''])]).map((s) => knapplank(s.adress, s.namn, 'sak')).join('')}${knapplank(`${data.sida}#vecka-${v.innehall}`, 'Veckan i metoden', 'veckan-i-metoden')}</p>`;
   // Den första hela lektionen i veckan metoden säger, med metodens mening, när den kommer efter vecka 1 (strukturerna).
   const hela = data.forstaHela && data.forstaHela.vecka === v.innehall && !gangen(plan, v) ? `<div class="pl-nasta"><p class="pl-etikett">${esc(data.forstaHela.namn)}</p><p>${medSaker(data.forstaHela.text)}</p></div>` : '';

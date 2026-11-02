@@ -99,6 +99,13 @@ export const bladetsAnkare = (namn: string) => `blad-${slugAv(namn)}`;
 export function medSaker(text: string, saker: MetodSak[], kallor: Set<string>, sidor: { titel: string; href: string }[] = []): string {
   return sakernasText(String(text ?? ''), saker, (s, t) => `<a href="${esc(s.adress)}" class="um-sak">${esc(t)}</a>`, (t) => medKallor(t, kallor, sidor));
 }
+/**
+ * Ett utfalls text som HTML: metodens saker som länkar, som i medSaker, och talen för klassens storlek i resten (utfallensTal),
+ * så att "Skriv frågan i grovplaneringen" leder till grovplaneringen (granskningen av Testbaserat lärande 2026-11-02).
+ */
+export function utfalletsText(text: string, n: number, saker: MetodSak[]): string {
+  return sakernasText(String(text ?? ''), saker, (s, t) => `<a href="${esc(s.adress)}" class="um-sak">${esc(t)}</a>`, (t) => utfallensTal(t, n));
+}
 
 /** Utfallets gräns i en klass med n elever, i elever med fel, ur utfallensGranser i standarden: "Högst 5 av 28 med fel." */
 export function utfalletsGrans(id: 'nastanAlla' | 'deFlesta' | 'halften', n: number): string {

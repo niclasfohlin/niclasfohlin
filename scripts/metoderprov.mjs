@@ -72,6 +72,25 @@ for (const s of [...metodsidor, ...lathundsidor]) {
   for (const m of html.matchAll(new RegExp(`href="${s}#([^"]+)"`, 'g'))) if (!ids.has(decodeURIComponent(m[1]))) fel.push(`${s}: länken ${s}#${m[1]} leder inte till något element`);
   provaSakerna(s, html, ids);
   provaFilerna(s, html);
+  provaLarDig(s, ids);
+}
+
+// Lär dig metodens data, som sidans skript ritar ur (src/lib/lardig.ts): en vecka vars rad säger att läraren väljer utfall
+// har knappen till utfallen, som leder till steget med utfallen på metodens sida, och en fri tabell med egen fil står bland
+// filerna i Före (granskningen av Testbaserat lärande 2026-11-02: knappen kom aldrig fram, och inget prov såg det).
+function provaLarDig(s, ids) {
+  const fil = join(dist, s, 'lar-dig', 'index.html');
+  if (!existsSync(fil)) return;
+  const json = readFileSync(fil, 'utf8').match(/<script type="application\/json" id="ld-data"[^>]*>([\s\S]*?)<\/script>/)?.[1];
+  if (!json) { fel.push(`${s}/lar-dig: planens data saknas (ld-data)`); return; }
+  const data = JSON.parse(json);
+  const d = parse(readFileSync(join(rot, 'src', 'content', 'undervisningsmetoder', `${s.split('/')[2]}.yaml`), 'utf8'));
+  const harUtfall = (d.steg?.rader ?? []).some((x) => x.redo);
+  const veckor = (d.progression?.rader ?? []).filter((r) => /\butfall/i.test(`${r.roll ?? ''} ${r.vidare ?? ''} ${r.eleverna ?? ''}`)).map((r) => String(r.vecka));
+  if (harUtfall && veckor.length && data.utfallen?.veckor?.join() !== veckor.join()) fel.push(`${s}/lar-dig: veckorna ${veckor.join(', ')} säger utfall, och knappen till utfallen står i ${data.utfallen?.veckor?.join(', ') || 'ingen'}`);
+  if (data.utfallen && !ids.has(data.utfallen.adress.split('#')[1])) fel.push(`${s}/lar-dig: knappen till utfallen leder till ${data.utfallen.adress}, som inte finns på metodens sida`);
+  const tabeller = readdirSync(join(dist, 'metoder')).filter((f) => f.startsWith(`${s.split('/')[2]}-tabell-`) && f.endsWith('.pdf'));
+  if ((data.filer?.tabeller ?? []).length !== tabeller.length) fel.push(`${s}/lar-dig: metoden har ${tabeller.length} tabeller med egen fil, och Före har ${(data.filer?.tabeller ?? []).length}`);
 }
 
 // Rutan Verktyg och Stödmaterial står i båda bankerna med samma saker ur samma rot (Verktygsruta.astro; Niclas 2026-10-31:

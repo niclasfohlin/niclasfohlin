@@ -97,8 +97,10 @@ if (tsMp) {
   // Testbaserat lärande 2026-11-02).
   {
     const medTermin = { ...tsMp, uppfoljning: [...tsMp.uppfoljning, { rad: tsMp.uppfoljning.length, tid: s.tolkaTid('Nästa termin'), perElev: false }] };
-    const termin = (start) => s.planera(medTermin, { ...val, start }).uppfoljning.at(-1);
+    const termin = (start, lov = []) => s.planera(medTermin, { ...val, start, lov }).uppfoljning.at(-1);
     ska('nästa termin är en rad efter, och veckan efter jullovet eller sommarlovet', JSON.stringify(s.tolkaTid('nästa termin')) === JSON.stringify({ typ: 'efter', veckor: 0, termin: true }) && termin('2026-11-02').tillfallen[0]?.datum === '2027-01-11' && termin('2027-03-01').tillfallen[0]?.datum === '2027-08-16' && termin('2026-11-02').typ === 'efter', [termin('2026-11-02').tillfallen, termin('2027-03-01').tillfallen]);
+    // Lärarens jullov direkt efter stegen flyttar inte nästa termin till efter sommaren (kodgranskningen 2026-11-02, P1).
+    ska('nästa termin med lärarens jullov direkt efter stegen är veckan efter jullovet', termin('2026-11-02', ['2026-51', '2026-52', '2026-53', '2027-01']).tillfallen[0]?.datum === '2027-01-11', termin('2026-11-02', ['2026-51', '2026-52', '2026-53', '2027-01']).tillfallen);
   }
   ska('veckanFor onsdag 18 november är vecka 3', s.veckanFor(p, '2026-11-18').nr === 3);
   ska('nästa pass onsdag 18 november är pass 8', s.nastaPass(p, '2026-11-18').nr === 8);

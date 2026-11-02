@@ -9,7 +9,7 @@ import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
 import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
-import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfallensElever, utfallensTal, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
+import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfallensElever, utfalletsText, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
@@ -183,9 +183,9 @@ const moten = arbetslagetsMoten(d);
               <div class="um-beslutskarta" data-utfall>
                 <p class="um-beslutskarta-rubrik">Utfallet, i en klass på <span data-elever>{elever}</span></p>
                 <div class="um-utfall">
-                  {UTFALLEN.map((u) => <div class={`um-utfall-ruta um-utfall-${u.id}`}><p class="um-utfall-namn">{u.namn}</p><p set:html={utfallensTal(s.redo[u.id], elever)} /></div>)}
+                  {UTFALLEN.map((u) => <div class={`um-utfall-ruta um-utfall-${u.id}`}><p class="um-utfall-namn">{u.namn}</p><p set:html={utfalletsText(s.redo[u.id], elever, saker)} /></div>)}
                 </div>
-                {s.redo.tiden && <p class="um-not" set:html={utfallensTal(s.redo.tiden, elever)} />}
+                {s.redo.tiden && <p class="um-not" set:html={utfalletsText(s.redo.tiden, elever, saker)} />}
                 {/* Gränserna för en annan klass, ur standardens utfallensGranser, i sidans skript nedan (granskare-3 nr 2). */}
                 <p class="um-not um-utfall-regel">I en annan klass: {UTFALLENS_REGEL}</p>
                 <p class="um-utfall-antal"><label for={`${ankare}-elever`}>Elever i klassen</label> <input id={`${ankare}-elever`} type="number" inputmode="numeric" min="10" max="40" step="1" value={elever} /></p>

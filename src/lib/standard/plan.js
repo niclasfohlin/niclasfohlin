@@ -2151,6 +2151,10 @@ export function planera(mp, val) {
       let datum = tid.veckor && sista ? mandagen(plusDagar(sista.datum, tid.veckor * 7)) : plusDagar(efter, tid.veckor * 7);
       // Nästa termin: veckan efter nästa jullov (en vardag mellan jul och trettondagen) eller sommarlov.
       if ('termin' in tid && tid.termin) {
+        // Sökningen börjar veckan efter sista passet och inte i `efter`, som redan har hoppat över lärarens lovveckor: ett
+        // jullov som läraren har tryckt in direkt efter stegen gav annars nästa termin efter sommaren (kodgranskningen
+        // 2026-11-02, P1).
+        if (sista) datum = plusDagar(mandagen(sista.datum), 7);
         let iLovet = false;
         for (let i = 0; i < 60; i++) {
           const langtLov = iJulen(datum) || iJulen(plusDagar(datum, 4)) || iSommarlovet(datum);

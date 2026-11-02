@@ -493,12 +493,13 @@ export const slagensOrd = (d) => {
   // lektionen (andra ögat på Testbaserat lärande 2026-11-02: Läs in dig sa vecka 1, och metoden säger före första mötet).
   if (d?.slag !== 'strategier') return form;
   const kortet = lagretIDinLektion(d) ? 'I din lektion' : form.kortet;
-  const lasning = (d?.checklista?.punkter ?? []).some((/** @type {unknown} */ p) => /\bunder vecka 1 läser du\b/i.test(String(p))) ? form.lasning : SLAGENS_FORM.lektionsforlopp.lasning;
+  const lasning = (d?.checklista?.punkter ?? []).some((/** @type {unknown} */ p) => /\bunder\s+vecka\s+1\s+läser du\b/i.test(String(p))) ? form.lasning : SLAGENS_FORM.lektionsforlopp.lasning;
   return kortet === form.kortet && lasning === form.lasning ? form : { ...form, kortet, lasning };
 };
 /**
  * Vägen till måndag i slaget strategier, en mening för rutan Vill du börja på måndag?: metodens första punkt i checklistan och
- * det första stycket om första lektionen (`forsta.text`), ordagrant, eftersom läraren lägger lagret på sin egen lektion (den
+ * lathundens första lektion (`lathund.lektion.text`), som rutan hänvisar till, eller annars det första stycket om första
+ * lektionen (`forsta.text`), ordagrant, eftersom läraren lägger lagret på sin egen lektion (den
  * kalla läsaren 2026-11-02: rutan sa fyll i planeringsmallen, och metoden säger att ingen ny planering behövs). Har metoden
  * inget om första lektionen står tidsschemats första rad. Tidsschemat gäller en vanlig lektion, och i Testbaserat lärande är
  * första gången ett annat prov än det vanliga (andra ögat 2026-11-02, P1). Null i andra slag.
@@ -508,7 +509,9 @@ export const slagensOrd = (d) => {
 export const lagretsVagTillMandag = (d) => {
   if (d?.slag !== 'strategier') return null;
   const forsta = Array.isArray(d.forsta?.text) ? d.forsta.text[0] : d.forsta?.text;
-  return [d.checklista?.punkter?.[0], forsta || d.tidsschema?.rader?.[0]?.vad].filter(Boolean).join(' ') || null;
+  // Lathundens första lektion först, så att rutan säger samma sak som lathundens sida 2 (kodgranskningen 2026-11-02: Formativ
+  // bedömning tappade "Tre rader räcker" när rutan tog forsta.text).
+  return [d.checklista?.punkter?.[0], d.lathund?.lektion?.text || forsta || d.tidsschema?.rader?.[0]?.vad].filter(Boolean).join(' ') || null;
 };
 /** Raden under Planera på metodens sida: i slaget strategier tidsschemats första rad, det läraren skriver på sin planering, ordagrant. @param {Record<string, any>} d metodens fil */
 export const planerasRad = (d) => (d?.slag === 'strategier' && d.tidsschema?.rader?.[0]?.vad) || slagensOrd(d).planeraRad;
