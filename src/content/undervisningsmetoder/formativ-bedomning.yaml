@@ -1,0 +1,728 @@
+# Formativ bedömning, en undervisningsmetod för helklass och den första av slaget strategier. Skriven 2026-11-01 ur
+# methods/_mall-undervisningsmetod.yaml, efter analysen (analys.md) och den andra analysen. Niclas material:
+# Lärarhandledning formativa metoder, 2026-05-13 (intake/formativ-bedomning.md). Förlagan Explicit undervisning är läst för form och ton.
+
+titel: Formativ bedömning
+undertitel: Ett lager över din egen planering, så att du ser vad klassen har förstått och kan ändra lektionen, F–⁠9
+alternativaNamn: ["Formativa metoder", "Bedömning för lärande", "BFL"]
+ingress: "Formativ bedömning är ingen lektion du planerar. Det är ett lager över din egen planering, så att du ser vad alla elever har förstått medan du kan göra något åt det. Du ställer en fråga, alla visar sitt svar, du väljer vad ni gör, och efter en ändring visar alla igen. Varje grepp har en tanke, för dig och för eleven."
+arskurs: ["F-3", "4-6", "7-9"]
+arskursText: F–9
+taggar: ["formativ-bedomning", "undervisningskvalitet"]
+slag: strategier
+syfte: [se]
+tid: Din lektion, 45 minuter, minst tre lektioner i veckan
+hurOftaSkal: "I studierna med effekt visade eleverna sitt kunnande från två gånger i veckan till varje lektion (Klute m.fl., 2017). Minst tre i veckan ger greppen tid att bli en rutin."
+period: Fem veckor att komma igång
+material:
+  - lektionskortet
+  - affischen Så visar vi
+  - exit-lappen
+  - miniwhiteboards och pennor från vecka 3
+  - färgkortet från vecka 5
+uppdaterad: 2026-11-02
+publicerad: 2026-11-02
+relaterade: ["explicit-undervisning", "kooperativt-larande"]
+utkast: false
+film:
+  sekunder: 29.63
+  beskrivning: "Läraren frågar hela klassen. Läraren säger: ”Tänk själv. Håll svaret nere.” Alla visar samtidigt. Läraren säger: ”1, 2, 3, visa!” Läraren räknar: 6 av 24 har samma fel. Läraren skriver felet bredvid det rätta, utan namn. Läraren säger: ”Jag såg samma fel. Därför frågar jag: vad skiljer dem?” Läraren visar skillnaden. Nu en ny fråga. Alla visar igen. Nu har 1 av 24 fel. Läraren säger: ”1, 2, 3, visa!” Läraren säger: ”Det rätta är 4/5. Har du något annat?”"
+  rubrik: "Så ser läraren vad klassen förstod: frågan, beslutet och en ny fråga"
+  ingress: "Filmen visar lagret på en vanlig lektion i matematik i åk 5, där klassen förkortar bråk. Alla visar sitt svar samtidigt, läraren ser att 6 av 24 har samma fel och sätter felet bredvid det rätta, och alla svarar på en ny fråga."
+  stillbilder:
+    - text: "Läraren frågar, och alla tänker själva."
+    - text: "Alla visar, och 6 av 24 har samma fel."
+    - text: "Läraren säger vad hen såg, med felet bredvid det rätta."
+    - text: "Alla svarar på en ny fråga, och nu har 1 av 24 fel."
+filmer:
+  - nr: 2
+    titel: "När klassen är delad"
+    sekunder: 29.76
+    beskrivning: "Läraren läser upp ett påstående med ett vanligt fel. Läraren säger: ”Tänk själv.” Alla visar samtidigt, och klassen är delad. Läraren säger: ”1, 2, 3, visa!” Läraren säger inte svaret än. Läraren säger: ”Jag ser olika svar. Säg till din kompis varför.” Eleven säger: ”Regeringen bestämmer ju.” Eleven säger: ”Men riksdagen röstar.” Alla visar igen, och nu har fler rätt. Läraren säger: ”1, 2, 3, visa!” Först nu säger läraren vad som stämmer. Läraren säger: ”Det är riksdagen som stiftar lagarna.”"
+    rubrik: "När klassen är delad"
+    ingress: "På en lektion i samhällskunskap i åk 8 svarar alla med tummen på ett påstående, och klassen är delad. Läraren säger inte svaret än. Paren förklarar sina svar, alla visar igen, och först då säger läraren vad som stämmer."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Den som håller med visar tumme upp, annars stopphand."
+      - text: "Läraren väntar med svaret, och paren förklarar."
+      - text: "Alla visar igen, och nu har fler rätt."
+      - text: "Först nu säger läraren vad som stämmer, och varför."
+  - nr: 3
+    titel: "Tre högar och nästa lektion"
+    sekunder: 29.69
+    beskrivning: "Sist i lektionen skriver alla på en lapp. Läraren säger: ”Ett svar och ett skäl. Det här är inget betyg.” Efter lektionen lägger läraren tre högar på fem minuter. Nästa lektion börjar med det läraren såg. Läraren säger: ”Ni skrev, så jag ändrade. Nio av er satte punkt bara sist.” Alla svarar på en ny fråga om felet. Läraren säger: ”1, 2, 3, visa!” Eleven säger: ”Två meningar! Punkt efter sov.” Eleverna ser att deras svar ändrade lektionen."
+    rubrik: "Tre högar och nästa lektion"
+    ingress: "På en lektion i svenska i åk 2 skriver alla på en exit-lapp. Efter lektionen lägger läraren lapparna i tre högar på fem minuter, och nästa lektion börjar med det läraren såg."
+    efter: "steg 5"
+    stillbilder:
+      - text: "Alla skriver sitt svar på exit-lappen."
+      - text: "Läraren lägger tre högar: rätt, felet och något annat."
+      - text: "Nästa lektion börjar med det läraren såg."
+      - text: "Eleverna ser att deras svar ändrade lektionen."
+
+profil:
+  evidens:
+    larande:    { tillforlitlighet: mattlig, effekt: mattlig, kort: "Måttlig effekt, mest prövat i åk 1–⁠6 och i elevgrupper som behöver stöd.", motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet gäller åk 1–⁠6, mest täta mätningar och självbedömning, över hälften i grupper med specialundervisning: 0,26 i 19 studier (Klute m.fl., 2017). Ett stort försök: 0,09, inte säkert (Anders m.fl., 2022).", kallor: [klute-m-fl-2017, yao-m-fl-2024, anders-m-fl-2022] }
+    lasning:    { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. Gäller åk 1–⁠6, mest täta mätningar i grupper med specialundervisning: 0,22 i sju studier (Klute m.fl., 2017). 48 bredare ger 0,19 (Xuan m.fl., 2022), och svarsdosor i 97 skolor noll (Wiggins m.fl., 2017).", kallor: [klute-m-fl-2017, xuan-m-fl-2022, wiggins-m-fl-2017] }
+    skrivning:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet gäller åk 2–⁠8, mest täta mätningar i grupper med specialundervisning: 0,21 i sex studier (Klute m.fl., 2017). Återkoppling på texten ger mer, och lärarens uppföljning mindre (Graham m.fl., 2015).", kallor: [klute-m-fl-2017, graham-m-fl-2015] }
+    matematik:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet gäller åk 2–⁠8, mest självbedömning, kort i par och program: 0,36 i sex studier (Klute m.fl., 2017). Stora försök går från noll (Wiggins m.fl., 2017) till 0,66 på eget prov (Andersson och Palm, 2017).", kallor: [klute-m-fl-2017, kingston-och-nash-2011, wiggins-m-fl-2017, anders-m-fl-2022, andersson-och-palm-2017, bostrom-och-palm-2023] }
+    amnen:      { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. I NO blir det 0,19 i 17 effekter (Kingston och Nash, 2011, rättad 2015), och i 121 skolor gav metoden 0,17 på oberoende prov för 9–10-åringar (Mujtaba m.fl., 2022). SO är knappt studerat och teknik inte alls.", kallor: [kingston-och-nash-2011, mujtaba-m-fl-2022, anders-m-fl-2022] }
+    socialt:    { niva: anekdotiskt, motivering: "Ingen studie med jämförelsegrupp. I upprepade mätningar minskade svarskort tiden då eleverna gjorde annat (Marsh m.fl., 2023), och lärare i en engelsk prövning rapporterade bättre uppförande (Speckesser m.fl., 2018).", kallor: [marsh-m-fl-2023, speckesser-m-fl-2018] }
+  svarighet: { lara: 3, karnan: 3, stod: 3, tid: 3, motivering: "Du övar nya drag och klassen nya rutiner, och kärnan glider lätt mot det du redan gör. Studierna med effekt hade allt från en dags fortbildning (Lichtenberger m.fl., 2025) till 144 mötestimmar (Andersson och Palm, 2017)." }
+  kostnad:   { kop: 2, timmar: 14, motivering: "Skolan har miniwhiteboards, lappar och kopior. Omkring 14 timmar första läsåret går till läsningen, sex möten, fyra korta samtal efter besök och en timmes extra planering i veckan de fem första veckorna." }
+  urval:
+    datum: 2026-11-01
+    regel: "Arbetssätt räknas när läraren under undervisningen tar reda på vad eleverna kan och ändrar undervisningen efter det eller ger återkoppling som för lärandet framåt. Också svar från alla räknas, och täta mätningar där en regel säger vad läraren gör. Utvecklare är Fuchs (täta mätningar), Graham och Harris (självreglering), Abrami och Meyer (ePEARL) och Ysseldyke (Accelerated Math). Räknas inte: prov, betyg, avstämningsprov och reformer utan ändring i klassrummet, översikter om bara återkoppling och översikter av metaanalyser."
+    text: "Vi sökte 2026-11-01 i sammanställningar, följde referenserna i Yao m.fl. (2024), sökte i ERIC område för område och prövade med enkla sökningar på webben. En sökning till gav ett stort försök i NO. Vi valde femton källor."
+    slutsatser:
+      oversikt: "Klutes urval ger 0,26, mest i åk 1–⁠6, och över hälften av studierna gäller elevgrupper med specialundervisning eller låga resultat (Klute m.fl., 2017). En större metaanalys ger 0,25 (Yao m.fl., 2024). Mellan studier i läsning gav metoden 0,24 när läraren anpassade undervisningen och 0,05 utan (Xuan m.fl., 2022). I skrivning ger återkopplingen mer än uppföljningen (Graham m.fl., 2015). NO har 0,19 (Kingston och Nash, 2011), SO är knappt studerat och teknik inte alls."
+      experiment: "Försöken går från ingen skillnad till en stor effekt, och de ger inget samlat tal. På oberoende prov i England gav hela arbetssättet 0,09, inte säkert (Anders m.fl., 2022), digitala svarsdosor ingen skillnad (Wiggins m.fl., 2017) och metoden i NO för 9–10-åringar 0,17 (Mujtaba m.fl., 2022). På forskarnas prov gav metoden 0,66 i svensk åk 4 (Andersson och Palm, 2017) och ingen skillnad i svensk åk 7 (Boström och Palm, 2023)."
+      annan: "Det formativa sitter i att resultaten används för att ändra undervisningen (Black och Wiliam, 1998). I fysik på gymnasiet gav fortbildning med kamratsamtal mer än samma frågor, där läraren själv valde vad hen gjorde med svaren (Lichtenberger m.fl., 2025). Svenska matematiklärare samlade sällan in svar från alla (Andersson m.fl., 2017). Att alla visar samtidigt ger mer deltagande i små studier (Marsh m.fl., 2023), och i England var klassrumsbesöken svårast (Speckesser m.fl., 2018)."
+    uteslutna:
+      - { namn: "Sortwell m.fl. (2024)", skal: "Översikt av metaanalyser" }
+      - { namn: "West m.fl. (2016)", skal: "Avstämningsprov utan ändring i klassrummet" }
+      - { namn: "Hattie (2009)", skal: "Översikt av metaanalyser" }
+      - { namn: "Konstantopoulos m.fl. (2013)", skal: "Avstämningsprov utan ändring i klassrummet" }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 1 Metoden
+# ---------------------------------------------------------------------------------------------------------------------
+inledning:
+  - "Formativ bedömning är ingen lektion du planerar. Det är ett lager du lägger över din egen planering, så att du får veta vad alla elever har förstått medan du fortfarande kan göra något åt det. Ju snabbare du vet, desto snabbare kan du agera. Det är inget prov och ingen betygssättning, och det är mer än elevaktivitet: en fråga eller en exit-lapp blir formativ först när du eller eleven ändrar något efter svaren."
+  - "I vilket ämne som helst står din planering kvar: en genomgång, en text, en film eller en laboration. Du lägger lagret på några ställen i den. På ett ställe stannar du och ställer en fråga, och alla visar sitt svar samtidigt på din signal, med tummen, fingrarna eller en miniwhiteboard. Handuppräckningen ger dig svaret från de tre snabbaste, och det är ofta de som redan kan. Nu ser du hela klassen. Du räknar hur många som har fel, säger vad du såg och vad ni gör nu: ni går vidare, eleverna förklarar sitt svar för axelkompisen eller du visar på ett nytt sätt."
+  - "Varje grepp har en tanke, något det ska ge dig och elevens lärande. För dig är det att se vad alla har förstått. För eleven är det att ta ställning: Vad tänker jag? Vad tror jag är rätt? När eleverna måste välja i stället för att bara lyssna, fastnar innehållet på ett annat sätt. Du ser vad som hindrar dem från att förstå, och de märker att deras svar ändrar lektionen."
+  - "De första veckorna lägger du till en liten sak i taget. Vecka 1 säger du ett vanligt fel som ett påstående, och alla visar med tummen, utan material. Är klassen delad säger de varför till axelkompisen och visar igen. Vecka 2 säger paren efter en instruktion till varandra vad de ska göra, och du hör vad som gick fram. Samma vecka avgör exit-lappen Starten, alltså hur nästa lektion börjar. Vecka 3 kommer miniwhiteboarden. Vecka 4 ställer du frågor med felen bland svaren och väver in det du hör från paren. Vecka 5 börjar eleverna bedöma sitt eget arbete: de vänder ett färgkort på bänken och rättar i annan färg. Efter fem veckor kan eleverna visa och förklara sina svar och säga hur långt de har kommit, och du kan ändra lektionen efter det du ser."
+karna:
+  rubrik: "Kärnan: fast och fritt"
+  text: "Du lägger lagret på din egen planering, och kärnans fyra delar håller ihop det. Grundidén är att du ändrar undervisningen och eleverna ändrar sitt eget arbete efter det de visar, mitt i lektionen och mellan lektionerna. Mål och kriterier, återkoppling och eleverna som resurser hör också till formativ bedömning, och du möter dem i frågan, i beslutet, när alla visar igen och i det eleverna börjar göra själva vecka 2 och 5."
+  grundregel: De fyra är kärnan, och dem håller du fast vid. Din planering, frågan, svarsformen och vad du gör vid varje utfall väljer du själv.
+  varv: Du frågar, alla visar, du väljer vad ni gör, och efter en ändring visar alla igen.
+  komponenter:
+    - namn: En fråga som säger något
+      moment: [Alla visar, Exit-lappen]
+      vad: Du ställer en fråga där rätt och fel tänkande ger olika svar, och du vet vilket fel du letar efter.
+      syns: Eleverna svarar på en fråga där svaren skiljer sig efter hur de har tänkt, och läraren kan säga vilket fel hen letade efter.
+      raknas: false
+      varfor: "Frågor där alla svar är lika rimliga säger inget om vad eleverna har förstått. Komponenten bygger på att felsvaren visar hur eleverna tänker (Lichtenberger m.fl., 2025). I svensk åk 7 blev det ingen skillnad, kanske för att en del lärare mest ställde frågor om baskunskaper (Boström och Palm, 2023)."
+      belagg: teori
+      kallor: [lichtenberger-m-fl-2025, bostrom-och-palm-2023, andersson-m-fl-2017]
+      kvar: Du kan säga vilket fel du letar efter innan du frågar.
+      fritt: "Ett påstående, svar att välja mellan, en uppgift, en bild eller ett påhittat elevsvar, muntligt eller skriftligt. Frågan får vara din egen eller lånad."
+      kryss: Jag ställde en fråga som skilde rätt tänkande från fel.
+    - namn: Alla visar samtidigt
+      moment: [Alla visar]
+      vad: Alla tänker först själva och visar sedan samtidigt, så att du ser hela klassen på en gång.
+      syns: "På lärarens signal visar varje elev sitt svar med handen eller på miniwhiteboard."
+      varfor: "Den som räcker upp handen är ofta den som redan kan. Svenska matematiklärare i en kommun samlade sällan in svar från alla (Andersson m.fl., 2017). Med svarskort deltar eleverna mer (Marsh m.fl., 2023), men i 97 engelska skolor gav svarsdosor ingen skillnad på proven (Wiggins m.fl., 2017)."
+      belagg: provad
+      kallor: [marsh-m-fl-2023, andersson-m-fl-2017, wiggins-m-fl-2017]
+      kvar: Alla tänker själva och visar samtidigt, innan någon säger svaret högt, och lappen ersätter inte frågan mitt i lektionen.
+      fritt: "Tumme, fingrar eller miniwhiteboard, öppet för klassen eller synligt bara för dig. Parsamtalet visar dig hur eleverna tänker, men inte allas svar."
+      kryss: Alla visade samtidigt, och jag såg dem.
+    - namn: Beslutet
+      moment: [Starten, Beslutet]
+      vad: Före frågan har du tänkt igenom vad du gör vid varje utfall, och nästa steg följer det du såg.
+      syns: "Läraren gör olika efter vad klassen visade. Hen går vidare, låter paren förklara sina svar eller visar på ett nytt sätt, och säger vad hen såg."
+      raknas: false
+      varfor: "Utan beslutet går lektionen vidare som om eleverna inte hade svarat. Det formativa sitter i att svaren används (Black och Wiliam, 1998). Jämför man studier i läsning, gav metoden 0,24 när läraren anpassade undervisningen, 0,05 utan och 0,36 med bara självbedömning (Xuan m.fl., 2022)."
+      belagg: provad
+      kallor: [xuan-m-fl-2022, klute-m-fl-2017, black-och-wiliam-1998]
+      kvar: Det du såg förklarar vägen du tar, och du valde den före frågan.
+      fritt: "Vad du gör vid varje utfall, när det sker och för vilka. Ett oväntat fel får ändra planen."
+      kryss: Jag valde nästa steg efter det jag såg.
+    - namn: Alla visar igen
+      moment: [Starten, Beslutet]
+      vad: Efter en ändring visar alla igen, så att ni ser om det hjälpte.
+      syns: Eleverna visar igen efter lärarens ändring, ser det rätta svaret och jämför med sitt eget, och läraren räknar hur många som nu har rätt.
+      varfor: "Utan en ny visning vet varken du eller eleven om ändringen hjälpte. Komponenten bygger på en ny uppgift när läraren har undervisat igen (Klute m.fl., 2017) och på att alla svarade igen efter parsamtalet, såg det rätta svaret och skrev upp om deras eget stämde (Lichtenberger m.fl., 2025)."
+      belagg: teori
+      kallor: [klute-m-fl-2017, lichtenberger-m-fl-2025]
+      kvar: Alla visar igen och ser det rätta svaret, så att var och en vet om det hjälpte.
+      fritt: "När bara paren har pratat ställer du samma fråga och ser vad samtalet gav. När du själv har visat ställer du en ny och ser vad var och en kan."
+      kryss: Alla visade igen efter ändringen och såg det rätta.
+roll:
+  rubrik: "Lärarens roll: du låter svaren styra"
+  text: Du planerar och undervisar som du brukar, stannar där det är avgörande, ser vad alla har förstått och låter det ändra nästa steg.
+  fragor:
+    - Vad såg jag hos eleverna?
+    - Vad hörde jag dem säga?
+    - Vad gör jag som lärare nu?
+  fragornaText: "Den sista frågan svarar du på högt: ”Jag såg … Därför …”"
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 2 Lektionen
+# ---------------------------------------------------------------------------------------------------------------------
+tidsschema:
+  rubrik: Lagret i din lektion
+  rader:
+    - { tid: Före lektionen, fas: Före lektionen, vad: "Ta din planering och skriv tre rader på den: frågan, felet du letar efter och vad du gör om många har fel. Då vet du vad du tittar efter." }
+    - { tid: 5 min, fas: Starten, form: Gemensamt, vad: "Utan namn börjar du med det du såg förra gången, på lapparna eller när alla visade." }
+    - { tid: 10 min eller mer, fas: Din planering, form: Läraren visar, vad: "En genomgång, en text, en film, en laboration eller något skapande. Stanna före det som bygger på det ni just gjorde. I en längre lektion stannar du två gånger." }
+    - { tid: 5 min, fas: Alla visar, form: Enskilt, vad: "Du ställer frågan, alla tänker och visar samtidigt, och du räknar eleverna med fel." }
+    - { tid: 1 min och sedan vägen, fas: Beslutet, form: Enskilt, vad: "Du säger vad du såg och vilken väg ni tar." }
+    - { tid: 5 min, fas: Exit-lappen, form: Enskilt, vad: "En eller två gånger i veckan svarar alla med ett skäl på en fråga om det viktigaste." }
+    - { tid: Efter lektionen, fas: Efter lektionen, vad: "Med lappar: tre högar på fem minuter, rätt, felet och något annat, efter första svaret. Läs de två sista, rätta inget, och skriv hur nästa lektion börjar." }
+  varianter:
+    - nar: första lektionen
+      text: "Starten och exit-lappen kommer i vecka 2. Du övar signalen på något klassen kan och tar sedan ett påstående på dagens innehåll."
+      delar:
+        - { fas: Din planering, tid: 0–⁠15 min }
+        - { fas: Alla visar, tid: 15–⁠25 min }
+        - { fas: Beslutet, tid: 25–⁠45 min }
+  efter: "Du använder inte alla ställen varje gång: vecka 1 lägger du bara till Alla visar och Beslutet, och från vecka 2 Starten och exit-lappen en eller två gånger i veckan."
+steg:
+  rader:
+    - namn: Starten
+      fraga: "Sitter felet från förra lektionen kvar?"
+      alla: Svarar på en ny fråga om felet du såg, eller om det ni gjorde för en vecka sedan.
+      titta: "Hur många har felet kvar?"
+      beslut: "Har 6 eller fler av 28 felet kvar, ta det nu och korta din planering. Annars går ni vidare till det nya."
+      gor:
+        - "”Ni skrev, så jag ändrade.” Skriv felet på tavlan, utan namn. ”Tre av er skrev att 10/14 blir 5/14.”"
+        - "Utan lappar: ”Ni visade, så jag ändrade.”"
+        - "”Ni ville göra det enklare, och det är rätt tanke. Vad hände med nämnaren? Prata en halv minut.”"
+        - "”Förkorta 4/14. 1, 2, 3, visa!” Skriv 2/7 på tavlan. ”Har du något annat? Vad ändrar du?”"
+      fraser: ["Ni skrev, så jag ändrade.", "1, 2, 3, visa!"]
+    - namn: Din planering
+      vem: som du har planerat
+      fraga: "Vad säger de när jag stannar?"
+      alla: Från vecka 2 säger de till axelkompisen vad de ska göra, och från vecka 4 sitt svar.
+      titta: "Vilket steg fattas? Vilken tanke kommer igen?"
+      beslut: Väv in det du hörde direkt, eller byt nästa exempel.
+      gor:
+        - "Säg gärna: ”Snart kommer en fråga.”"
+        - "Från vecka 2, efter en instruktion: ”Säg till din kompis vad ni ska göra och i vilken ordning.”"
+        - "Från vecka 4 stannar du också för ett parsamtal där du har planerat: ”Stopp. Vilket steg måste jag göra först, och varför?”"
+        - Gå runt och lyssna i högst en minut.
+        - "”Jag hörde att flera av er tänkte att …”"
+      fraser: ["Snart kommer en fråga."]
+    - namn: Alla visar
+      fraga: "Hur många har fel, och är det samma fel?"
+      alla: "Visar mot dig på signalen, med tummen, fingrarna eller en miniwhiteboard, eller går till ett hörn."
+      titta: "Hur många har fel, och är det felet du letade efter?"
+      beslut: Räkna färdigt innan du säger något. Du har redan tänkt igenom vad du gör.
+      gor:
+        - "Ställ frågan och skriv den på tavlan. ”Tänk själv. Håll svaret nere.”"
+        - "Vänta från 15 sekunder för tummen till två minuter för en uträkning. Ingen räcker upp handen."
+        - "”1, 2, 3, visa!”"
+        - "Gå samma väg över rummet varje gång, och räkna en sak: hur många har fel? Vickande hand, frågetecken och tomt räknas som fel."
+        - "Är det samma fel? Skriv upp några som har fel."
+      fraser: ["Tänk själv. Håll svaret nere.", "1, 2, 3, visa!"]
+    - namn: Beslutet
+      vem: "alla, sedan var och en"
+      fraga: "Vilken väg tar vi, och höll ändringen?"
+      alla: "Arbetar själva, säger varför till axelkompisen eller följer dig."
+      titta: "Höll det du ändrade? Vilket fel står kvar?"
+      beslut: Ett av tre utfall, nedan. Talen är hållpunkter. Efter en ändring visar alla igen innan eleverna arbetar.
+      gor:
+        - "Säg på en halv minut, också när ni går vidare: ”Jag såg … Därför …”"
+        - Ta den väg du tänkte igenom. Ett oväntat fel får ändra planen.
+        - "Har många valt två olika svar är klassen delad: ”Jag ser olika svar.” Samma fel i stegen ser du på miniwhiteboarden och i texter."
+        - "Efter en ändring: ”1, 2, 3, visa!” Säg antalet och det rätta: ”Först sex. Nu en. Har du något annat? Vad ändrar du?”"
+        - När eleverna arbetar går du först till dem du skrev upp. Från vecka 5 går du sedan till dem med rött.
+      fraser: ["Jag såg … Därför …", "1, 2, 3, visa!"]
+      redo:
+        nastanAlla: "Högst 5 av 28 med fel. Visa det rätta och varför. Eleverna arbetar direkt, gärna på en högre nivå: ”Hur vet du?” Du går först till dem du skrev upp."
+        deFlesta: "6–13 av 28 med fel. Delad klass: paren säger varför, alla visar igen, du säger svaret. Samma fel i stegen: felet bredvid det rätta, och en ny fråga."
+        halften: "14 eller fler av 28 med fel. Delad klass: paren först. Annars ett nytt sätt: en bild eller ett nytt exempel. Spridda fel: bryt ner steget. Alla visar igen."
+        tiden: "Tiden räcker inte: ställ den nya frågan i nästa lektion, och låt lappen vänta. Det höll inte: samla dem med fel, de andra arbetar, och börja nästa lektion där."
+    - namn: Exit-lappen
+      fraga: "Vad tar de med sig, och vad börjar jag med nästa gång?"
+      alla: Skriver ett svar och ett skäl på lappen.
+      titta: "Rätt, felet du letade efter eller något annat?"
+      beslut: Efter lektionen gör du tre högar och skriver en mening om hur nästa lektion börjar. Dem i högen Något annat skriver du upp.
+      gor:
+        - Visa frågan och ge tanketid.
+        - "Ge två minuter med klockan synlig: ”Ett svar och ett skäl. Det här är inget betyg.”"
+        - "Ge en minut till: ”Säg det till din kompis. Ändra i annan färg om du vill.”"
+        - Den som inte vet skriver ett frågetecken och vad hen tänker. Samla in lapparna.
+      fraser: ["Ett svar och ett skäl.", "Det här är inget betyg."]
+lektionskort:
+  - { efter: klassen, text: "Lektionskortet är ett eget A4 att ha i handen, med det du gör på varje ställe i din lektion." }
+fastnar:
+  rubrik: Så rättar du
+  text: Det här gäller en elev. Har många samma fel hör det till Beslutet, och då lyfter du felet utan namn.
+  trappa:
+    - "Säg: ”Berätta hur du tänkte.”"
+    - "Är det slarv, säg var och inte vad: ”Det är fel på en av de här raderna. Hitta den.”"
+    - Har eleven tänkt fel, ge en ledtråd eller visa steget.
+    - Låt eleven rätta i annan färg medan du går till nästa.
+    - Kom tillbaka med en ny fråga av samma slag, och se att det håller.
+  motto: Det viktigaste lärtillfället ligger ofta i det som var nästan rätt.
+amnesexempel:
+  - amne: lasning
+    arskurs: förskoleklass
+    innehall: "Rim och ljud: att höra att två ord slutar lika"
+    overst:
+      egen: "Vilken bild rimmar på hus? Hund kan visa att eleven lyssnar på första ljudet, och dörr att hen tänker på betydelsen."
+      visar: Tre bilder med nummer. Alla håller handen mot bröstet och visar bildens nummer med fingrarna.
+    scen:
+      - "Tänk dig en lektion i förskoleklassen. Klassen har arbetat med rim. Du håller upp tre bilder med nummer, 1 mus, 2 hund och 3 dörr, och säger: ”Vilken rimmar på hus? Tänk. Håll handen mot bröstet.”"
+      - "”1, 2, 3, visa!” Fingrarna kommer upp, och du går över rummet. Fyra av 28 visar något annat än ett finger. Tre visar hund och lyssnar kanske på första ljudet, och en visar dörr och tänker kanske på vad orden betyder."
+      - "Det är högst fem. Du säger: ”Jag såg att nästan alla hör rimmet: hus och mus slutar lika. Därför går vi vidare.” Klassen arbetar med sina rimbilder, och du går först till de fyra: ”Lyssna på slutet: hus, hund. Låter de lika?”"
+    notera: "Notera vad som hände. Svaren sa olika saker utan att någon behövde skriva. Hade tio visat hund, hade ni lekt med hur orden slutar, och du hade frågat igen vilken som rimmar på hatt: katt, höna eller mössa."
+  - amne: skrivning
+    arskurs: åk 7
+    innehall: Att skriva argumenterande text, med skäl som förklarar
+    overst:
+      egen: "Ett påstående och ett skäl som förklarar varför. Felet: att påstå något utan att förklara."
+      visar: Alla lämnar en text, och du läser texterna utan att skriva i dem.
+    scen:
+      - Tänk dig en lektion i svenska i åk 7, när klassen har skrivit insändare om skoldagens längd. Du har Helklassbladet utskrivet bredvid dig och läser de 28 texterna på en kvart, letar efter en enda sak och skriver inget i dem.
+      - "12 av 28 påstår utan att förklara: ”Skoldagen är för lång, och många tycker det.” På bladet skriver du meningen utan namn, en mening som förklarar och fyra elever att tala med."
+      - "Nästa lektion börjar du: ”Jag läste era texter. Jag såg att många påstår något utan att säga varför. Därför gör vi det här.” Du sätter de två meningarna bredvid varandra. ”Vad skiljer dem?” Paren säger det, och alla letar upp en mening i sin egen text och skriver om den i annan färg, medan du går till de fyra. I nästa text letar du efter samma sak, och då ser du om det höll."
+    notera: "Notera vad som hände. Eleverna fick något att göra, och du skrev inga kommentarer. Hade högst fem påstått utan att förklara, hade du bara talat med dem. Hade hälften eller fler gjort det, hade du visat skillnaden först."
+  - amne: matematik
+    arskurs: åk 5
+    innehall: "Bråk: att förkorta genom att dividera täljare och nämnare med samma tal"
+    huvud: true
+    arbetsomradet:
+      - "Bråk som del av en helhet, med bilder"
+      - "Likvärdiga bråk"
+      - "Att förlänga"
+      - "Att förkorta"
+      - "Att jämföra bråk"
+    overst:
+      egen: "Dividera täljare och nämnare med samma tal. Felet: att bara dividera täljaren, så att 4/6 blir 2/6."
+      visar: Två bråk på miniwhiteboarden, och alla håller upp svaren samtidigt.
+    plan:
+      klass: 5A
+      datum: tors 19/11
+      lektion: 4 av 5
+      mal: förkorta bråk genom att dividera täljare och nämnare med samma tal
+      belagg: "förkorta 10/14 så långt det går"
+      blad: "miniwhiteboards och exit-lappar"
+      forberett: "bilder av bråken till den som behöver se dem"
+      fore: { fragan: "Förkorta 4/6 och 6/10", svaret: "2/3 och 3/5", felet: "bara täljaren: 2/6 och 3/10", nya: "8/10 och 6/15" }
+      delar:
+        - { fas: Starten, text: "Förra lappen, att förlänga: 2/3 blev 2/15" }
+        - { fas: Din planering, text: "Som jag har planerat: 6/8 blir 3/4, och två exempel till" }
+        - { fas: Alla visar, text: "Miniwhiteboard: 4/6 och 6/10" }
+        - { fas: Beslutet, text: "Uppgifterna på sidan 43 i boken" }
+        - { fas: Exit-lappen, text: "Förkorta 10/14, och skriv varför du gjorde så" }
+      beslut: { elever: 24, deFlesta: "2/6 bredvid 2/3", halften: "bråken som bilder" }
+      efter: { kontrollen: "6 med fel", hogar: "Rätt 19 · Felet 3 · Annat 2", sag: "”Man delar det som är uppe.” Felet bredvid det rätta hjälpte", kryss: [1, 2, 3, 4], nasta: "5/14 på tavlan, och vad som hände med nämnaren", forst: "de två i högen Något annat" }
+      lagg: ["Lägg märke till: den nya frågan har andra tal, så att eleven måste tänka igen."]
+    remsa:
+      - "Förkorta 4/6 och 6/10. Du letade efter felet att bara dividera täljaren."
+      - 24 miniwhiteboards gick upp på signalen, och du såg stegen.
+      - "Sex hade samma fel, så du stannade och satte felet bredvid det rätta."
+      - "Två nya bråk: 23 av 24 hade rätt, och eleverna arbetade själva."
+    scen:
+      - "Tänk dig en lektion i matematik i åk 5. Du undervisar som planerat och visar att 6/8 kan förkortas till 3/4 om man dividerar täljaren och nämnaren med samma tal. Du skriver 4/6 och 6/10 på tavlan: ”Förkorta så långt det går.” Två minuter senare säger du ”1, 2, 3, visa!”, och tjugofyra miniwhiteboards går upp samtidigt."
+      - "Sex har samma fel: de har dividerat bara täljaren, så att 4/6 blev 2/6. Du stannar: ”Jag såg att några av er har gjort på ett sätt som är värt att titta på.” Du skriver 2/6 bredvid 2/3, utan namn. ”Vad skiljer dem?” Paren pratar, och du lyssnar. Du tänker högt: ”Nämnaren säger hur stora delarna är. 2/6 är bara hälften av 4/6, men i 2/3 är delarna dubbelt så stora.”"
+      - "Du ställer en ny fråga: 8/10 och 6/15. ”1, 2, 3, visa!” 23 av 24 har rätt. Du skriver 4/5 och 2/5 på tavlan: ”Har du något annat, vad ändrar du?” Eleverna arbetar själva, och du går först till den som kämpar."
+    notera: "Notera vad som hände. Frågan var mer än en kontroll: det eleverna hade förstått styrde ditt nästa beslut. Hade högst fyra haft fel, hade du gått vidare och hjälpt dem under övningen. Hade hälften eller fler haft samma fel, hade du tagit om genomgången på ett nytt sätt. Nästa vecka ställer du samma slags fråga i Starten, och några har felet igen. Det hör till."
+  - amne: so-no
+    amnesnamn: Fysik
+    arskurs: åk 8
+    innehall: Krafter och jämvikt, när något ligger still
+    overst:
+      egen: "Krafterna på något som ligger still tar ut varandra. Felet: att inga krafter verkar, eller att bordet inte trycker."
+      visar: Fyra svar på tavlan. Alla håller handen mot bröstet och visar svarets nummer med fingrarna.
+    scen:
+      - "Tänk dig en lektion i fysik i åk 8. En bok ligger på bordet. ”Varför faller den inte? 1 Inga krafter verkar på den. 2 Tyngdkraften drar, och bordet är bara i vägen. 3 Bordet trycker upp lika mycket som tyngdkraften drar ned. 4 Boken är för lätt.”"
+      - "”1, 2, 3, visa!” 19 av 28 har fel: 15 visar två fingrar och 4 visar ett. Klassen är delad på 2 och 3, och du stannar: ”Jag såg att många väljer 2. Därför gör vi det här. Säg till din kompis på en halv minut: hur kan någon ha tänkt som valde 2?” Du lägger boken på handen. ”Vad gör min hand?” Handen måste trycka upp, och det gör bordet också."
+      - "En ny fråga: ”En lampa hänger still i sin sladd. Varför faller den inte? 1 Sladden drar upp lika mycket som tyngdkraften drar ned. 2 Inga krafter. 3 Tyngdkraften drar, och sladden är bara i vägen. 4 Lampan är för lätt.” 4 av 28 har fel. Du visar det rätta, och klassen arbetar medan du går till de fyra."
+    notera: "Notera vad som hände. Svar 2 bestämde vad du gjorde: paren fick resonera om det, och du behövde bara visa bordets kraft. Hade felen varit spridda på alla svar, hade du brutit ner steget."
+  - amne: praktisk-estetiska
+    amnesnamn: Bild
+    arskurs: åk 3
+    innehall: Att skapa djup i en bild, med något nära och något långt bort
+    overst:
+      egen: "På marken blir det som är långt bort mindre och högre upp. Felet: att eleven ritar allt lika stort, på samma linje."
+      visar: Tre skisser på tavlan, och alla visar skissens nummer med fingrarna.
+    scen:
+      - "Tänk dig en lektion i bild i åk 3. Klassen ska rita ett landskap. Du sätter upp tre skisser: i den första är huset lika stort som trädet längst fram, i den andra är huset litet och högre upp, och i den tredje är huset stort och längst ned. ”Vilken gör att huset ser ut att vara långt bort? Det handlar inte om vilken som är finast.”"
+      - "”1, 2, 3, visa!” 9 av 26 har fel, och de flesta av dem visar ett finger. Klassen är delad. Du säger inte svaret än: ”Säg till din kompis varför du valde den.” Paren pratar en halv minut, och du lyssnar: ”Den är ju finast.” ”Men huset är lika stort som trädet.” Du frågar igen om samma skisser: ”1, 2, 3, visa!” Tre av 26 har fel."
+      - "Du säger varför skiss 2 fungerar, och alla ritar. Du går först till de tre."
+    notera: "Notera vad som hände. Frågan gällde det ni tränar på, och inte smaken. Hade nästan alla valt rätt, hade alla börjat rita direkt. Hade hälften eller fler valt fel, hade du ritat huset på tavlan, litet och högt upp."
+stod:
+  rubrik: Elever som behöver mer stöd
+  rader:
+    - { nar: Den som är ny i svenska, metoden: "Eleven visar med fingrarna, en bild, ett tal eller ett ord, i samma uppgift som de andra. Du ser först efter om hen har förstått innehållet. Ämnets ord står på tavlan, och resten säger du enklare.", du: "Skriv frågan på tavlan, ha bild vid svaren och låt eleven prata med axelkompisen på det språk hen väljer. Skälet på lappen får vara en uträkning, en bild eller ett ord." }
+    - { nar: När många behöver hjälp samtidigt, metoden: "Det är ett utfall och inget problem: du lyfter felet, och de som är klara arbetar vidare.", du: "De som är klara svarar på ”Hur vet du?” på sin miniwhiteboard medan du lyfter felet. Alla visar igen, och du går först till dem du skrev upp." }
+    - { nar: Den som behöver stöd för att komma med, metoden: "Alla svarar, så eleven som sällan räcker upp handen kommer med.", du: "Börja med två alternativ, gärna med bild. Visa hur man svarar, ge tanketid och följ hens svar. Hen kan visa i stället för att säga." }
+    - { nar: Den som inte skriver än, metoden: "Tummen, fingrarna och bilder räcker, och exit-lappen kan vara en bild eleven ringar in.", du: "Ge återkopplingen muntligt medan eleven arbetar, och låt hen använda den genast." }
+    - { nar: Den som redan kan, metoden: "Eleven får en fråga till: varför är de andra svaren fel?", du: "”Övertyga mig: varför är de andra svaren fel?” ”Skriv en egen fråga med två felsvar.”" }
+    - { nar: När metoden inte räcker, metoden: "Exit-lapparna visar vem som har samma fel kvar, om du sparar dem en månad.", du: "Gör eleven samma fel tre gånger på samma slags fråga, läs hens lappar med specialläraren. Räcker inte det, ta det med elevhälsan." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 3 Kom igång
+# ---------------------------------------------------------------------------------------------------------------------
+progression:
+  rubrik: De första veckorna
+  text: "Metoden är troligen lika ny för dig som för eleverna. Gör varje grepp flera gånger tills det blir en rutin, och lägg till ett i taget. Du behöver ingen ny planering. De tre första veckorna lägger du små saker ovanpå den du har. Du börjar med tre rader på den: frågan, felet och vad du gör om många har fel. Vecka 2 kommer först Säg instruktionen och sedan frågan på lappen, och vecka 3 den nya frågan. De första veckorna ser du fler fel än du är van vid. Felen fanns där förut, och nu går det att göra något åt dem. Alla fyra delarna av kärnan finns från första lektionen. Ordningen och takten är förslag: gör om en vecka tills greppet sitter, och ta ett annat grepp först om det passar dig bättre, så länge de fyra delarna finns."
+  rader:
+    - { vecka: "1", led: Små saker, rubrik: Tummen och ett påstående, eleverna: "Att tänka tyst, visa på signalen och säga varför till axelkompisen.", roll: "Att skriva ett vanligt fel som en mening, ibland något sant, välja väg före frågan, räkna felen och säga vad du såg.", vidare: "nästan alla visar på signalen, och nästa steg följer det du såg", fraga: "Visar nästan alla på signalen, och följer nästa steg det du såg?" }
+    - { vecka: "2", led: Små saker, rubrik: Instruktionen och exit-lappen, eleverna: "Att säga till kompisen vad de ska göra, och att svara med ett skäl.", roll: "Att lyssna på paren, lägga lapparna i tre högar och börja nästa lektion med det du såg.", vidare: "nästa lektion börjar med det du såg på lapparna", fraga: "Började nästa lektion med det du såg på lapparna?" }
+    - { vecka: "3", led: Små saker, rubrik: Miniwhiteboarden och en ny fråga, eleverna: "Att skriva stort, hålla svaret nere och skriva ett frågetecken när de inte vet.", roll: "Att läsa stegen, sätta felet bredvid det rätta och ställa en ny fråga, som du skriver på din planering.", vidare: "du ser felet, ställer en ny fråga och säger hur många som har fel före och efter", fraga: "Såg du vilket fel det var, och sa du hur många som hade fel före och efter den nya frågan?" }
+    - { vecka: "4", led: Lite mer, rubrik: Frågan ur felet och Jag hörde, eleverna: "Att visa svaret med fingrarna och på en minut säga varför till axelkompisen med ämnets ord.", roll: "Att ställa minst en fråga i veckan ur ett väntat fel, ta samma slags fråga i Starten veckan efter och väva in det du hör.", vidare: "du ställer en fråga ur ett väntat fel och väver in det du hör", fraga: "Ställde du en fråga ur ett väntat fel, och vävde du in det du hörde?" }
+    - { vecka: "5", led: Lite mer, rubrik: Eleven bedömer sitt eget, eleverna: "Att vända färgkortet efter vad de kan visa, ringa in var det syns och rätta sitt eget i annan färg.", roll: "Att gå till dem du skrev upp, sedan till rött, fråga ”Hur vet du?” vid grönt och räkna hur många med grönt som har fel.", vidare: "eleverna vänder kortet själva, och grönt stämmer oftare på den nya frågan", fraga: "Vänder eleverna kortet själva, och stämmer grönt oftare på den nya frågan?" }
+uppfoljning:
+  text: Du ser om metoden fungerar i det eleverna visar, på lapparna och i det du ändrade.
+  rader:
+    - { id: lektionen, nar: Varje lektion, tid: varje lektion, vad: "Det alla visade säger vad du gör nu. De dagar du har lappar säger högarna vad nästa lektion börjar med." }
+    - { id: klassen, nar: Klassens svar varje vecka, tid: varje vecka, vad: "Räkna hur många som har rätt på den andra visningen och på samma slags fråga en vecka senare." }
+    - { id: lararen, nar: Dina kryss varje vecka, tid: varje vecka, vad: "Räkna hur ofta kärnans fyra delar fanns, och vilken som föll bort. Ett kryss på din planering räcker." }
+    - { id: observationerna, nar: "Vecka 2 och 4", tid: vecka 2 och 4, vad: "Specialläraren ser dig ställa en fråga och läser lapparna i vecka 2, och en kollega eller rektor ser hela varvet i vecka 4. Tio minuter räcker." }
+    - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "På arbetslagets första möte skriver ni varsitt fel som en mening, bestämmer signalen och bokar besöken och de fyra mötena efter vecka 5." }
+    - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "I slutet av vecka 5 ses ni igen och bestämmer hur ni fortsätter." }
+    - { id: stodet, nar: Varje månad, tid: efter, vad: "Ni ses fyra gånger efter de första veckorna, med frågorna från mötet i vecka 5, och var och en skriver vad hen prövar. Elever som har samma fel kvar får stödundervisning, med lapparna som underlag." }
+    - { id: sexveckor, nar: Sex skolveckor efter vecka 5, tid: efter 6 veckor, vad: "Räkna samma saker som varje vecka, och be en kollega se vad du ändrar efter en fråga. Går inte besöket, berätta om frågan, talet och vad du gjorde. Efter ett lov börjar du om med tummen en vecka." }
+    - { id: nastatermin, nar: Nästa termin, tid: efter 16 veckor, vad: "Räkna igen, be en kollega se dig fråga och se om ni använder metoden i fler ämnen. Sedan frågar ni ”Vad ändrade du efter det eleverna visade?” på arbetslagets vanliga möten." }
+    - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen ”Hur säker är jag på metoden?” under 5 i två veckor i rad, gör om veckan och be en kollega se dig fråga." }
+    - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen ”Hur väl fungerar den i praktiken?” under 5 i två veckor i rad, gå tillbaka till tummen och be specialläraren se en lektion." }
+checklista:
+  rubrik: Före första lektionen
+  punkter:
+    - Läs lathundens sida 1 och 2 och lektionskortet, och se huvudfilmen. Metoden, Lagret och Kom igång läser du vecka 1.
+    - Välj den klass och det ämne där du redan vet vilka fel eleverna gör.
+    - Välj vad du gör mindre av, till exempel en övning, så att du hinner stanna.
+    - Skriv ett vanligt fel som en mening till varje lektion vecka 1. Frågor att låna står efter veckorna i metoden.
+    - "Skriv ut på metodens sida: gärna affischen vecka 1, lappar vecka 2, färgkort vecka 5. Vecka 3: miniwhiteboards."
+    - Boka besöken i vecka 2 och 4, ett av dem med specialläraren.
+    - "Bestäm signalen med arbetslaget. Börjar du ensam är signalen ”1, 2, 3, visa!”"
+    - Läs under Första lektionen vad du säger till klassen.
+klassen:
+  rubrik: Så ordnar du klassen
+  text: Du ser alla, och alla kan visa mot dig utan att vända sig om. Var och en har en axelkompis att prata med. Eleverna vänder miniwhiteboarden och handen mot dig, så att de jämför sig mindre med varandra. Den som behöver stöd sitter först på din bana genom rummet. Den som är ny i svenska sitter bredvid någon som har samma språk eller gärna hjälper.
+forsta:
+  rubrik: Första lektionen
+  text:
+    - "Du håller din egen lektion och lägger till ett påstående. Du säger: ”Jag behöver veta vad ni har förstått, så att jag vet vad jag ska göra härnäst. Det är inget prov. Fel svar hjälper mig mest.” När du stannar övar ni rutinen Tänk och visa."
+    - "Sedan tar du ett påstående om dagens innehåll: ett fel elever brukar göra, skrivet som en mening, och ibland något sant. Är klassen delad säger du inte svaret än. Paren säger varför, alla visar igen, och först då säger du vad som stämmer."
+    - "Så kan tre rader se ut. Frågan: Det är regeringen som stiftar Sveriges lagar. Felet: blandar stifta och styra. Om många har fel: paren säger varför, alla visar igen, och jag ritar två kolumner."
+  plan:
+    amne: Samhällskunskap
+    klass: 7B
+    datum: mån 9/11
+    lektion: "1"
+    mal: förklara vad riksdagen och regeringen gör
+    belagg: "tummen på påståendet"
+    blad: "inget, bara händerna"
+    forberett: "påståendet på tavlan, till den som behöver läsa det"
+    fore: { fragan: "Det är regeringen som stiftar Sveriges lagar.", svaret: "falskt, riksdagen stiftar", felet: "blandar stifta och styra", nya: "samma, eller en ny om jag har visat" }
+    delar:
+      - { fas: Starten, text: "Inget än. Starten kommer i vecka 2" }
+      - { fas: Din planering, text: "Min genomgång om riksdag och regering" }
+      - { fas: Alla visar, text: "Först på något alla kan. Sedan: Det är regeringen som stiftar Sveriges lagar" }
+      - { fas: Beslutet, text: "Uppgiften om lagens väg" }
+      - { fas: Exit-lappen, text: "Ingen än. Lappen kommer i vecka 2" }
+    beslut: { elever: 28, deFlesta: "två kolumner, stifta och styra", halften: "en lag från förslag till beslut, på tavlan" }
+rutiner:
+  rubrik: Rutinerna klassen lär sig
+  rader:
+    - namn: Tänk och visa
+      vecka: 1
+      vad: "Tanken är att du ser hela klassen på en gång och varje elev tar ställning innan någon annan har svarat. Det kallas multisvar. Tumme upp betyder att eleven håller med, stopphand att hen inte håller med och vickande hand att hen är osäker. Från vecka 4 visar eleverna svarets nummer med fingrarna och handen mot bröstet. I idrott, bild, musik och slöjd kan de visa med kroppen, i ett hörn eller i sitt arbete."
+      steg: ["Lyssna på påståendet, och tänk tyst med händerna på bänken.", "”1, 2, 3, visa!” Visa mot läraren, och håll handen stilla.", "Ser läraren olika svar, säg till din kompis varför. Har ni olika svar, övertyga varandra. Har ni samma, hur tänkte den som valde något annat?", "”1, 2, 3, visa!” igen. Lyssna på vad som stämmer, och tänk: vad ändrar jag?"]
+      forsta: "Öva på något lätt där inget står på spel, och gör om tills signalen och visningen går på 15 sekunder. Visa sedan parsamtalet med en elev: ”Jag tror … eftersom …” Båda säger något, en i taget. Ta ibland ett sant påstående om samma sak, eftersom svaret annars går att gissa."
+    - namn: Säg instruktionen
+      vecka: 2
+      vad: "Tanken är att eleverna blir resurser för varandra och kommer igång själva, och att du hör vad som gick fram innan de börjar. Efter en instruktion säger eleverna till sin axelkompis vad de ska göra och i vilken ordning. Det tar en halv minut och kräver ingen förberedelse."
+      steg: ["Lyssna på instruktionen.", "Säg till din kompis vad ni ska göra och i vilken ordning.", "Lyssna på kompisen, och lägg till det som fattas.", "Vet ni inte, fråga ett annat par. Börja sedan."]
+      forsta: "Visa rutinen med en elev, och säg ett steg fel med flit, så att klassen ser att kompisen får rätta. Säg vem som börjar, och byt nästa gång. Gå runt och lyssna. Saknar flera samma steg, säg det en gång till, och skriv stegen på tavlan."
+    - namn: Exit-lappen
+      vecka: 2
+      vad: "Tanken är att du vet före nästa lektion var klassen står, och att eleven hämtar det viktigaste ur minnet, säger det och gör svaret bättre. En eller två gånger i veckan räcker. Ta lappen de dagar du hinner läsa svaren och ändra nästa lektion. Möter du klassen en gång i veckan, läs lapparna samma dag och skriv direkt hur nästa lektion börjar. Ibland ställer du i stället tre andra frågor: Vad tycker du var det viktigaste du lärde dig? Vad var svårast eller mest förvirrande? Vad har du för frågor kvar? Då ser du hur lektionen kändes, men mindre av vad eleverna kan."
+      steg: ["Stäng boken. Läs frågan på tavlan.", "Skriv ett svar och ett skäl på två minuter. Inget betyg.", "Säg det till din kompis. Ändra i annan färg om du vill.", "Skriv ditt namn, och lämna lappen när tiden är slut. En elev per bord samlar in."]
+      forsta: "Tänk högt om en påhittad lapp på tavlan: vilken hög hör den till? Spara ett felsvar, utan namn, till Starten. Nästa lektion börjar du med: ”Ni skrev, så jag ändrade.” Då förstår klassen vad lappen är till för. Den första Starten är ett nytt påstående med tummen."
+    - namn: Miniwhiteboarden
+      vecka: 3
+      vad: Tanken är att du ser stegen och var det blev fel, och att eleven visar hur hen tänkte och kan sudda och pröva igen. Den passar till svar som är en uträkning, en mening eller en skiss. Miniwhiteboard och penna ligger i en låda på varje bord, och du har extra pennor.
+      steg: ["Skriv stort. Vet du inte, skriv ett frågetecken.", "Håll den nere.", "”1, 2, 3, visa!” Håll den stilla mot läraren.", "Titta på det rätta, och ändra ditt svar. Sudda, stapla och lägg tillbaka pennorna."]
+      forsta: "Låt alla rita fritt en minut, så blir det inte lika lockande nästa gång. Öva med en vanlig uppgift, tills miniwhiteboarden är framme på 15 sekunder. Har ni inga än, ta fingrar, papper eller A4 i plastfickor. Den som inte är klar visar det hen har."
+    - namn: Färgkortet
+      vecka: 5
+      vad: "Tanken är att eleven tar ställning till sitt eget lärande, och att du ser var du behövs. Utgå från felet du letar efter, och säg först vad som ska synas i arbetet: ”Grönt i dag: du kan visa var du dividerade täljaren och nämnaren med samma tal, och säga varför.” Medan eleverna arbetar står kortet på bänken med färgen mot dig: grönt om eleven kan visa och förklara, gult om hen är på väg och rött om hen har fastnat. Färgen säger vad eleven tror, så kompisen och du prövar den med ”Hur vet du?”, och du ställer en ny fråga. Visar många rött: stanna, och låt alla visa sitt svar."
+      steg: ["Vänd kortet efter det du kan visa.", "Grönt: ring in eller visa var det syns. Hittar du inget, gör det som fattas eller vänd till gult.", "Visa din kompis. Kompisen frågar: ”Hur vet du?” Rött: fråga din kompis, sedan ett annat par, och arbeta vidare med det du kan.", "Läraren ställer en ny fråga. Stämde din färg? Säg till kompisen: ”Jag såg … Därför …” Vänd kortet igen."]
+      forsta: "Öva på något klassen kan, och säg: ”Gult är ett bra svar. Då vet jag var jag behövs. Färgen gäller just nu och är inget betyg.” Tänk högt om ett påhittat arbete: ”Jag satte grönt, men jag hittar inte var det syns. Då är det gult.” Ta färgkortet när du hinner gå runt, eftersom eleven med rött annars bara blir frustrerad. Vill eleven inte att klassen ser färgen, kan hen ha kortet i knät, vänt mot dig."
+    - namn: Rätta själv
+      vecka: 5
+      vad: Tanken är att eleven använder återkopplingen och tänker om själv, och att du skriver färre kommentarer. Eleven får tid i lektionen att hitta sitt fel och rätta det i annan färg. Ta rutinen när färgkortet sitter, eller när klassen har lämnat ett arbete.
+      steg: ["Titta på det rätta på tavlan.", "Hitta ditt fel och rätta i annan färg.", "Säg till din kompis vad du ändrade: ”Jag såg … Därför …”", "Gör en ny uppgift av samma slag."]
+      forsta: "Rätta ett påhittat arbete högt, och säg att det rätta kommer på tavlan och varför eleverna rättar själva. Börja med en uppgift som går att rätta på några minuter."
+larandet:
+  rubrik: Så syns lärandet i klassen
+  omraden:
+    - { omrade: amneskunskaper, syns: "På den nya frågan har fler rätt än på den första, och i Starten eller på lappen veckan efter klarar eleverna samma slags fråga." }
+    - { omrade: kommunikation, syns: "Eleverna säger till axelkompisen hur de tänkte, och förklarar sitt svar med egna ord när du frågar." }
+    - { omrade: sprak, syns: "Eleverna använder ämnets ord när de förklarar, också när du lyssnar på paren." }
+uppdrag:
+  rubrik: Till arbetslaget
+  text: "Välj ut ett grepp tillsammans, planera hur ni vill pröva det, gör det i era egna klassrum och kom tillbaka och prata om vad ni såg. Det är när ni jämför era erfarenheter som metoden sätter sig på riktigt. Den som har prövat ett grepp tre gånger med en klass har alltid något att berätta. Ni har två möten på en timme var och två korta besök de första veckorna, och sedan fortsätter ni enligt uppföljningen."
+  forbered:
+    text: Läs lathundens sida 1 och 2, och tänk igenom frågorna före mötet. På mötet väljer ni vilket grepp ni börjar med, skriver varsitt fel som en mening, bestämmer signalen och bokar besöken och de fyra mötena efter vecka 5.
+    fragor:
+      - När visste du senast, mitt i en lektion, vad alla elever hade förstått?
+      - Vilket fel ser du varje år i det du undervisar om nu?
+      - Vad gjorde du sist när svaren inte var de du väntade dig?
+      - "Titta på huvudfilmen: vad gör läraren direkt efter att alla har visat?"
+  planera: "Planera för fel: välj ett moment, och fråga er var eleverna gör fel, varför och vad ni gör åt det. Var och en skriver tre rader på sin planering inför nästa lektion."
+  genomfor: Pröva varje grepp flera gånger med en klass innan du lägger till nästa. Lappen har du bara en eller två gånger i veckan, så den får två veckor och fortsätter när miniwhiteboarden kommer. Följ Lär dig metoden på metodens sida.
+  reflektera: ["Vad såg du som du inte hade sett med handuppräckning?", "När ändrade du något, och vad?", "Vilken fråga sa mest, och vilken sa inget?", "Märkte eleverna att deras svar ändrade lektionen, och stämde färgen med svaret på den nya frågan?", "Vilket fel såg du, och vad hjälpte? Spara det till nästa år."]
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 4 Håll i
+# ---------------------------------------------------------------------------------------------------------------------
+lararensFragor:
+  rubrik: Lärarens frågor
+  fragor:
+    - { fraga: "Får jag hoppa över beslutet när tiden är knapp?", svar: "Nej. Lägg mindre tid på frågan, och ta beslutet i Starten om tiden tar slut. Frågorna ensamma, utan fortbildning i att använda svaren, gav ingen säker vinst i fysik på gymnasiet (Lichtenberger m.fl., 2025).", komponent: Beslutet }
+    - { fraga: "Får jag låta eleverna räcka upp handen ibland?", svar: "Ja, när du vill höra en tanke. När du ska avgöra vad ni gör härnäst behöver du allas svar, eftersom ändringar annars bygger på några få (Andersson m.fl., 2017).", komponent: Alla visar samtidigt }
+    - { fraga: "Får jag använda en vanlig uppgift i stället för en fråga med svar att välja mellan?", svar: "Ja, från vecka 3, när eleverna har miniwhiteboarden. Svaren på en vanlig uppgift visar också felen, om stegen syns. Frågor ur felet kommer i vecka 4.", komponent: En fråga som säger något }
+    - { fraga: "Måste jag låta alla visa igen varje gång?", svar: "Efter en ändring, ja. Hinner du inte, visar de igen först i nästa lektion. Går ni vidare utan ändring behövs ingen ny visning.", komponent: Alla visar igen }
+    - { fraga: "Hur hinner jag kursen?", svar: "Lagret tar omkring tio minuter, 15–20 en dag med lapp och ändring. Stryk en övning eller en del av genomgången. I fysik på gymnasiet tog metoden fyra av fjorton lektioner (Lichtenberger m.fl., 2025)." }
+    - { fraga: "Vad gör jag när jag inte vet vad felet betyder?", svar: "Fråga eleven: ”Hur fick du det?” Är det språket, läs frågan högt eller rita. Visa sedan felet för en kollega i samma ämne, som kan känna igen det." }
+hinder:
+  rubrik: Det svåraste med metoden
+  text: "Det som ofta försvinner är beslutet: alla visar, men nästa steg är detsamma som innan du frågade. Du märker det sällan själv: i England ändrade många skolor programmet och sa ändå att de följde andan i det (Speckesser m.fl., 2018). I svensk åk 7, där metoden inte gav någon skillnad, använde nästan alla lärare lappar, men bara hälften lät alla visa varje dag och ändrade direkt (Boström och Palm, 2023). Tänk igenom före frågan vad du gör, säg högt vad du såg, och be en kollega se vad som följer."
+  kort: "Det som ofta försvinner är beslutet: alla visar, men nästa steg är detsamma som innan du frågade. Tänk igenom före frågan vad du gör vid varje utfall, och säg högt vad du såg."
+  komponent: Beslutet
+fallgropar:
+  rubrik: Vanliga fallgropar
+  rader:
+    - { fallgrop: "Frågan säger inget", hander: "Du frågar ”Vad tänker ni om det här?” eller ”Förstår alla?” Svaren säger inget, eller så går det att få rätt med felet kvar.", prova: "Fråga om det man måste förstå, som ”Vilket steg måste jag göra först, och varför?” Utgå från felet, och ibland från det svåra.", komponent: En fråga som säger något }
+    - { fallgrop: "Handen går upp igen", hander: "En pressad vecka frågar du klassen, och de tre snabbaste svarar.", prova: "Börja om med tummen en vecka, och säg varför.", komponent: Alla visar samtidigt }
+    - { fallgrop: "Alla visar, och planen rullar vidare", hander: "Du säger ”bra”, och lektionen går som du tänkte.", prova: "Säg efter varje visning, också när ni går vidare: ”Jag såg … Därför …”", komponent: Beslutet }
+    - { fallgrop: "Lapparna blir liggande", hander: "Högen ligger kvar till nästa vecka, och nästa lektion blir som planerat.", prova: "Ta färre lappar: en fråga, tre högar samma dag och en mening. Du rättar dem inte.", komponent: Beslutet }
+    - { fallgrop: "Du ändrade, men frågade inte igen", hander: "Du förklarar igen och går vidare, och vet inte om det hjälpte. Eleverna vet det inte heller.", prova: "Låt alla visa igen: samma fråga när bara paren har pratat, en ny när du har visat. Förklara inte samma sak högre.", komponent: Alla visar igen }
+    - fallgrop: När klassen är delad
+      moment: [Beslutet]
+      hander: Klassen har valt två olika svar, och det är lätt att säga svaret direkt.
+      steg: ["Håll masken: ”Jag ser olika svar. Bra, då har vi något att reda ut.”", "”Har ni olika svar, övertyga varandra. Har ni samma, hur tänkte de andra?”", "Gå runt en halv minut, och lyssna efter det vanligaste skälet.", "”1, 2, 3, visa!” på samma fråga, eftersom bara paren har pratat.", "Säg nu vad som stämmer, och varför."]
+    - fallgrop: När många har fel
+      moment: [Beslutet]
+      hander: Planen spricker, och det är lätt att gå vidare ändå.
+      steg: ["Säg: ”Jag såg att många gör så här. Därför gör vi det här.”", "Skriv felet bredvid det rätta, utan namn. ”Vad skiljer dem?”", "Tänk högt om skillnaden, med ett nytt exempel, en bild eller ett föremål.", "Är felen spridda, ta i stället ett steg i taget och fråga efter varje.", "”1, 2, 3, visa!” på en ny fråga, och visa det rätta."]
+    - fallgrop: När någon inte visar
+      moment: [Alla visar, Beslutet]
+      hander: Eleven har handen nere eller miniwhiteboarden tom, eller någon skrattar åt ett svar.
+      steg: ["Säg i förväg: ”Vet du inte, visa vickande hand eller skriv ett frågetecken.”", "Ropar eller skrattar någon, ta det genast: ”Jag behöver alla svar.”", "Har någon ropat svaret, ta en ny fråga av samma slag.", "Säg inget högt om eleven. Gå dit när de andra arbetar eller pratar.", "Fråga tyst: ”Vad är det första du kan säga om det här?”", "Har eleven inte börjat, gör första uppgiften ihop och kom tillbaka."]
+hallFast:
+  rubrik: Fem saker att hålla fast vid
+  rader:
+    - { sak: "När arbetslagets möte hotas: behåll tiden", text: "Det som har bokad tid sitter kvar, också när skolan får en ny satsning. Boka nästa möte innan ni går. Är tiden kort, ta bara vad var och en ändrade och vad hen gör härnäst." }
+    - { sak: "När tiden är knapp: ställ frågan före genomgången", text: "Då ser du vad du kan hoppa över, och du går igenom det eleverna hade fel på. Det gäller innehåll klassen har mött. Nytt innehåll går du igenom först." }
+    - { sak: "När arbetsområdet byts: ta fram felen först", text: "Varje område har sina fel. Spara till nästa år det du skrev om felet och det som hjälpte." }
+    - { sak: "När det rullar på: gissa före frågan", text: "Skriv hur många du tror har fel, och jämför med det du räknar. Den egna känslan säger lite, och därför kommer kollegan på besök också när det går bra." }
+    - { sak: "När klassen är van: ge eleverna en del av jobbet", text: "Låt dem skriva en fråga med felsvar eller titta efter en sak i kompisens arbete. Fler grepp står i Utveckla metoden." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga A Att skriva ut
+# ---------------------------------------------------------------------------------------------------------------------
+strukturkort:
+  text: "Här är fyra strukturer att bygga på när grunden sitter. Du behöver dem inte för att börja. Lektionens syfte är det viktiga, och strukturen är ett hjälpmedel. Den blir formativ först när du tar reda på vad eleverna tänker och gör något med det. Utan det blir den bara en aktivitet."
+  strukturer: [epa, lyssna-och-skriv, vad-undrar-jag, kims-prov]
+ramar:
+  rubrik: Materialet för klassen
+  text: ["Utöver lektionskortet och strukturkorten finns affischen Så visar vi, exit-lappen och färgkortet för klassen, och Helklassbladet för dig. Varje blad står på en egen sida."]
+  ramar:
+    - rubrik: Så visar vi
+      text: ["Skriv ut affischen i A3 och sätt upp den där alla ser den, eller visa den på tavlan. De första veckorna pekar du på den, när ni övar rutinen Tänk och visa."]
+    - rubrik: Exit-lappen
+      text: ["Skriv ut och klipp isär de fyra lapparna, eller använd vanliga lappar. Skriv frågan på tavlan. Eleverna skriver ett svar och ett skäl."]
+    - rubrik: Färgkortet
+      text: ["Skriv ut i färg, klipp ut en remsa per elev, vik längs strecken och tejpa fliken, så att kortet står på bänken. Har du ingen färgskrivare, ta tre muggar eller skriv ut i svartvitt, eftersom orden står kvar. Eleven vänder färgen och orden mot dig."]
+    - rubrik: Helklassbladet
+      text: ["Bladet är ditt, och du tar det när du vill. Raden Helklassbladet i Utveckla metoden säger hur."]
+tabeller:
+  - rubrik: Samma varv vid två tillfällen
+    plats: efter-inledning
+    text: "I lagret gör du samma varv vid två tillfällen."
+    kolumner: [När, Frågan, Alla visar, Beslutet, Alla visar igen]
+    rader:
+      - ["Mitt i lektionen", "När du stannar", "Tumme, fingrar eller miniwhiteboard", "”Jag såg … Därför …”", "Efter en ändring"]
+      - ["Mellan lektionerna", "På en lapp eller i ett arbete", "Alla lämnar sitt svar", "Tre högar och en mening", "I Starten, nästa lektion"]
+  - rubrik: Tanken bakom greppen
+    plats: efter-inledning
+    text: "Vet du varför du gör ett grepp, är det lättare att ändra formen utan att tappa tanken."
+    kolumner: [Greppet, Det ger dig, Det ger eleven]
+    rader:
+      - ["Tummen på ett påstående", "Du ser hela klassen på en gång.", "Eleven tar ställning själv före de andra."]
+      - ["Säg varför till kompisen", "Du hör hur de tänker.", "Eleven sätter ord på sin tanke och hör kompisens."]
+      - ["Säg instruktionen", "Du hör vad som gick fram, och färre frågar vad de ska göra.", "Eleven sätter ord på vad hen ska göra, och kompisen fyller i det som fattas."]
+      - ["Jag såg … Därför …", "Du måste välja och kan inte glida vidare.", "Eleven hör vilket fel du såg och att svaren räknas."]
+      - ["Alla visar igen", "Du ser om ändringen hjälpte.", "Eleven ser det rätta bredvid sitt svar och vet om hen har kommit vidare."]
+      - ["Exit-lappen och tre högar", "På fem minuter vet du var klassen står inför nästa lektion.", "Eleven hämtar det viktigaste ur minnet, och den som har felet möter det igen."]
+      - ["Starten med det du såg", "Du ser om felet sitter kvar.", "Eleven prövar igen efter ett uppehåll och märker att svaren ändrade lektionen."]
+      - ["Miniwhiteboarden", "Du ser stegen och var det blev fel.", "Eleven ser sina steg bredvid det rätta och kan sudda och pröva igen."]
+      - ["Frågan ur felet", "Felsvaren säger vad du ska ändra.", "Eleven måste skilja felet från det rätta."]
+      - ["Färgkortet", "Du ser var du behövs.", "Eleven tar ställning till sitt eget lärande, och prövar om färgen stämde."]
+      - ["Rätta själv", "Du skriver färre kommentarer.", "Eleven använder återkopplingen."]
+  - rubrik: Frågor att låna
+    plats: efter-progression
+    meny: true
+    text: "Vecka 1 tar du ett felsvar här och säger det som en mening, som ”Allt som rör sig lever.” Från vecka 4 lånar du frågan, eller skriver en egen: ta ett vanligt fel, gör det till ett av svaren, och låt det rätta svaret byta plats från fråga till fråga. Numrera svaren på tavlan, så att eleverna visar numret och inte talet. Kan en elev få rätt med felet kvar, ändra frågan. Hittar du inget fel, titta i förra provet eller fråga en kollega vad eleverna brukar svara."
+    kolumner: [Ämne och årskurs, Frågan, Rätt svar och vad felen kan säga]
+    rader:
+      - ["Svenska, förskoleklass", "Vilken bild rimmar på hus? Mus, hund eller dörr.", "Mus. Hund: lyssnar på första ljudet. Dörr: tänker på vad orden betyder."]
+      - ["Matematik, åk 1", "10 − 3 = 7, 13 eller 8?", "7. 13: adderar. 8: räknar 10 som första steget bakåt."]
+      - ["Matematik, åk 2–⁠3", "34 + 8 = 42, 312, 41 eller 26?", "42. 312: ingen växling. 41: räknar 34 som första steget. 26: subtraherar."]
+      - ["NO, åk 1–⁠3", "Vad lever? Bilen, trädet, molnet eller stenen.", "Trädet. Bilen eller molnet: det som rör sig lever. Stenen: gissar."]
+      - ["Svenska, åk 4–⁠6", "Maja smällde igen dörren och svarade inte. Vilket svar har bäst stöd i texten? 1 Arg, det står i texten. 2 Arg, hon smäller och svarar inte. 3 Trött, jag svarar inte när jag är trött.", "Rätt: 2. Väljer 1: tror att det står utskrivet. Väljer 3: utgår från sig själv."]
+      - ["SO, åk 4–⁠6", "Vem stiftar Sveriges lagar? Regeringen, kungen, riksdagen eller EU-kommissionen.", "Riksdagen. Regeringen: blandar stifta och styra. Kungen: blandar statschef och makt. EU-kommissionen: drar EU:s roll för långt."]
+      - ["Musik, åk 4–⁠6", "Spela något. Två- eller tretakt? Fingrar på signalen, två omgångar.", "Fel antal: kan ha svårt att höra betoningen. En omgång räcker inte, eftersom hälften kan gissa rätt."]
+      - ["Engelska, åk 4–⁠6", "Yesterday I ___ to school. Go, goed eller went?", "Went. Go: tänker inte på tiden. Goed: använder -ed på allt."]
+      - ["Slöjd, åk 4–⁠6", "I vilken riktning slipar du trä? Tvärs över, längs fibrerna eller runt runt. Visa med handen på din bit.", "Längs fibrerna. Tvärs över: kan tänka att snabbare är bättre. Runt runt: tänker inte på riktningen."]
+      - ["Matematik, åk 5–⁠9", "(3 + 2 · 4) + (9 − 3 + 1) = 27, 18, 16 eller 25?", "18. 27: räknar från vänster. 16: tar 3 + 1 först. 25: båda felen."]
+      - ["Historia, åk 7–⁠9", "Varför kunde ett skott i Sarajevo bli ett världskrig? 1 Franz Ferdinand sköts av en nationalist. 2 Länderna hade lovat att hjälpa varandra, så fler drogs in. 3 Miljontals soldater dog.", "Rätt: 2. Väljer 1: återger händelsen. Väljer 3: ger en följd."]
+      - ["Idrott och hälsa, åk 7–⁠9", "Du ska springa 1 500 meter och orka hela vägen. Visa med fingrarna, och gå sedan till hörnet med ditt nummer: 1 Börja så snabbt du orkar. 2 Håll samma tempo hela vägen. 3 Börja sakta och spara allt till slutet.", "Rätt: 2. Väljer 1: tror att försprång räcker. Väljer 3: sparar för mycket."]
+  - rubrik: Utveckla metoden
+    plats: efter-progression
+    meny: true
+    text: "Inget av det här behövs för att börja. Formativ bedömning brukar beskrivas med fem strategier, och de finns redan i liten form i lagret: mål och kriterier, frågor som visar var eleverna står, återkoppling, eleverna som resurser för varandra och eleverna som resurser för sig själva. Efter de fem första veckorna har en vanlig vecka en fråga i varje lektion och en fråga ur felet. Lappen och Starten tar du en eller två gånger, Säg instruktionen före arbetet, färgkortet när eleverna arbetar och Rätta själv när klassen har lämnat ett arbete. När den veckan sitter kan du bygga på, en sak i taget. Till fyra av raderna finns kort, som du skriver ut från metodens sida."
+    kolumner: [Det du bygger på, Så gör du, Tanken]
+    rader:
+      - ["Två exempel före arbetet", "När eleverna inte vet vad som är bra: visa två lösningar eller texter. ”Vilken skulle du visa en kompis, och varför?” Klassen skriver två saker att titta efter.", "Eleven ser vad som är bra innan hen börjar, och du slipper förklara det efteråt."]
+      - ["Kims prov", "Efter en uppgift eller ett prov visar du elevsvar utan namn, och eleverna säger vad som är bra och var det blev fel.", "Eleven känner först igen felet hos någon annan, och du ser vilka fel klassen ser."]
+      - ["En sak att titta efter", "När klassen har övat Rätta själv: paren läser varandras arbete och tittar efter en enda sak, och var och en säger vad hen gör härnäst.", "En kompis hjälper eleven vidare, och du behöver inte nå alla."]
+      - ["Klädnypan på stegen", "Skriv tre steg i arbetsområdet på en remsa, med elevens ord. Eleven flyttar en klädnypa på remsan före och efter arbetet. ”Visa mig var det syns.”", "Eleven ser var hen är, och du ser vilka som står kvar."]
+      - ["Gå till exemplet", "Du sätter upp tre exempel på olika nivå i rummet. Eleven ställer sig vid det som liknar det egna arbetet mest och säger vad nästa steg är.", "Eleven bedömer sitt arbete och hittar nästa steg, och du ser spridningen på en gång."]
+      - ["Kompisen signerar", "Innan eleven lämnar in läser en kompis arbetet med kraven bredvid och signerar när allt finns med.", "Båda läser kraven en gång till, och du slipper påpeka det som saknas."]
+      - ["Helklassbladet", "När klassen har lämnat in ett arbete: läs det med bladet bredvid, skriv inget i böckerna, och visa ett starkt exempel och ett vanligt fel.", "Du skriver färre kommentarer, och alla rättar sitt eget."]
+      - ["Eleven skriver frågan", "När klassen är van vid frågor ur felet: ”Skriv en egen fråga med två felsvar.”", "Du ser vad eleven tror att felen är, och eleven tänker igenom innehållet."]
+      - ["EPA", "Vid ett samtal tänker var och en först, sedan pratar de i par och till sist hela klassen.", "Alla får tänka först, och du hör vad paren säger."]
+      - ["Lyssna och skriv", "Vid en lång genomgång, en film eller en text skriver eleverna efter varje del och jämför sedan vad de skrev i par.", "Du ser vad som gick fram, och eleven hämtar det ur minnet."]
+      - ["Vad undrar jag?", "När du vill se kopplingar och luckor skriver eleverna egna frågor, och du läser dem efteråt.", "Du ser luckorna, och eleven säger vad hen inte förstår."]
+      - ["Fråga, pausa, nedslag och studs", "När klassen är trygg: ingen räcker upp handen, och du väntar. Du väljer en elev, som svarar eller säger pass, och nästa elev bygger vidare.", "Samtalet går djupare, och alla är beredda på att svara."]
+planeringsmall:
+  text: "Planeringsmallen är ingen ny planering: skriv det här på den du har, eller på bladet när du vill. Det räcker med frågan, felet och vad du gör om många har fel. Tänk igenom vad du letar efter och vad du gör vid varje utfall innan du står framför eleverna."
+  fore:
+    - { etikett: "Frågan och svaret", rader: ["Ordagrant:", "Det rätta svaret:"], falt: [fragan, svaret] }
+    - { etikett: "Felet och den nya frågan", rader: ["Felet jag letar efter:", "Den nya frågan:"], falt: [felet, nya] }
+  delar:
+    - { fas: Starten, skriv: "Det jag såg sist:", hojd: 0.7 }
+    - { fas: Din planering, skriv: "En rad om det jag har planerat, och var jag stannar:", hojd: 0.8 }
+    - { fas: Alla visar, skriv: "Tummen, fingrarna eller miniwhiteboarden:", not: "Räkna hur många som har fel. Vickande hand, frågetecken och tomt räknas som fel.", hojd: 0.9 }
+    - { fas: Beslutet, skriv: "Sedan arbetar eleverna med:", not: "Säg: Jag såg … Därför … Efter en ändring visar alla igen.", hojd: 1.0 }
+    - { fas: Exit-lappen, skriv: "Frågan på lappen:", hojd: 0.8 }
+  beslut: { deFlesta: "Det jag lyfter:", halften: "Det nya sättet:" }
+  efter:
+    text: "Fyll i samma dag, också lapparna när du har dem."
+    kontrollen: "Alla visar: ___ med fel"
+    hogar: "Lapparna: rätt ___ felet ___ annat ___"
+    sag: "Felet, med elevernas ord, och det som hjälpte"
+    nasta: "Nästa lektion börjar med"
+    forst: "Jag går först till"
+  overst: ["Felet jag letar efter, och vad jag gör"]
+  kolumner: ["Vad jag gör och vad eleverna visar"]
+  sist: ["Efter lektionen: rätt, felet och något annat", Nästa lektion]
+observation:
+  fraga: Vad ändrade läraren i lektionen efter det eleverna visade?
+  text: "Skriv ut dubbelsidigt, och välj med läraren två elever att följa, A och B, gärna en som brukar ha det svårt. Stå där du ser svaren. Skriv frågan ordagrant, räkna hur många som har fel och skriv vad läraren säger och gör direkt efter. Tio minuter runt frågan räcker, och det du inte ser får stå tomt."
+  fokus: Vad gjorde jag direkt efter att alla hade visat?
+  huvud: ["Felet läraren letar efter"]
+  kolumner:
+    - { namn: Läraren frågar och säger, text: "frågan ordagrant, och det läraren säger", bredd: 30 }
+    - { namn: Alla visar, text: "rätt · fel · tomt", bredd: 13, elever: true }
+    - { namn: Direkt efter, text: "det läraren säger och gör, och vad eleverna gör då", bredd: 34 }
+  tecken: "+ rätt, f fel, ? frågetecken eller vickande hand, 0 visar inget. Allt utom + räknas som fel."
+  delar:
+    - { fas: Starten, rader: 1, rakna: "Började med det läraren såg: ja · nej   Med fel: ___ av ___" }
+    - { fas: Din planering, rader: 2, rakna: "Stannade: ___ gånger   Vävde in det hen hörde: ja · nej   Paren sa instruktionen: ja · nej" }
+    - { fas: Alla visar, rader: 2, rakna: "Visade på signalen: ___ av ___   Med fel: ___ av ___" }
+    - { fas: Beslutet, rader: 3, rakna: "Med fel när alla visade igen: ___ av ___   Utfallet: Nästan alla · De flesta · Hälften eller färre" }
+    - { fas: Exit-lappen, rader: 1, rakna: "Frågan gällde det viktigaste: ja · nej   Lämnade lapp: ___ av ___" }
+  streck:
+    - { etikett: Efter visningen, drag: ["Säger vad hen såg", "Går vidare som planerat", "Paren säger varför", "Sätter felet bredvid det rätta", "Visar på ett nytt sätt", "Alla visar igen"] }
+  rader:
+    - "Frågan skilde rätt tänkande från fel: ja · nej. Elever med felet läraren letade efter: __ av __"
+    - "Visade på signalen: __ av __. Tittade först på grannen eller visade inget: __"
+    - "Vad läraren gjorde direkt efter, med dina ord, och om det utgick från det eleverna visade"
+    - "Visade igen efter ändringen: __ av __. Med fel första gången: __. Med fel andra gången: __. Såg det rätta: ja · nej"
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga B Valet och forskningen
+# ---------------------------------------------------------------------------------------------------------------------
+passar:
+  rubrik: När passar metoden?
+  kort: "du vill veta vad eleverna har förstått medan du kan göra något åt det, med vilket innehåll som helst."
+  rader:
+    - { fraga: "Vad vill du veta?", metoden: "Vad klassen har förstått just nu, medan du kan ändra nästa steg.", annat: "Vad var och en kan efter ett arbetsområde. Då behövs en enskild bedömning, som ett prov, och den kan du också använda formativt efteråt." }
+    - { fraga: "Kan svaret ändra det du gör?", metoden: "Du vet vad du gör vid varje utfall.", annat: "Du går vidare vad svaren än blir. Ställ då inte frågan." }
+    - { fraga: "Är innehållet helt nytt?", metoden: "Du har redan en genomgång, och greppen visar om den gick fram.", annat: "Du behöver bygga lektionen steg för steg. Då passar explicit undervisning, och en fråga som säger något kan stå i den." }
+    - { fraga: "Ska eleverna samarbeta?", metoden: "Parsamtalet är kort, och du lyssnar efter hur de tänker.", annat: "Eleverna ska lära genom samarbete, med gemensamma mål och eget ansvar. Då passar kooperativt lärande, och du kan lyssna på samma sätt." }
+    - { fraga: "Gäller det hela klassen?", metoden: "I stunden tar du ett beslut för klassen eller för några.", annat: "En elev står kvar i samma fel vecka efter vecka. Då behöver hen stödundervisning, med lapparna som underlag." }
+  tumregel: Fråga när svaret kan ändra vad du gör härnäst. Metoden går ihop med de andra metoderna, och tabellen är ett stöd för tanken och ingen regel.
+  metoder: [explicit-undervisning, kooperativt-larande]
+
+invandningar:
+  rubrik: Invändningar och nyanser
+  fragor:
+    - { fraga: "Är det inte bara prov?", svar: "Nej. Ett prov eller en lapp blir formativt när någon använder resultatet för att ändra undervisningen eller lärandet (Black och Wiliam, 1998). Det mesta gör du medan du undervisar: en fråga, alla visar, och du väljer nästa steg. Det eleverna visar blir inget betyg." }
+    - { fraga: "Är det inte bara det vi redan gör?", svar: "Delvis. I England sa 31 av 40 ansvariga lärare att arbetssättet liknade det skolan redan gjorde, och på några skolor blev det en ny rättningspolicy (Speckesser m.fl., 2018). I Sverige samlade 38 matematiklärare sällan in svar från alla (Andersson m.fl., 2017). Metoden lägger till att alla svarar samtidigt, och att nästa steg följer det du såg. Det är ingen garanti: i svensk åk 7 samlade lärarna oftare in svar från alla och ändrade oftare, men det gav ingen skillnad (Boström och Palm, 2023)." }
+    - { fraga: "Stämmer de stora effekttalen?", svar: "De som brukar nämnas kan du inte räkna med. Talen 0,4–0,7 kommer ur en berättande översikt (Black och Wiliam, 1998), och en senare genomgång av 13 studier gav omkring 0,20 (Kingston och Nash, 2011). Sammanställningar med jämförelsegrupp ger 0,19–0,26 (Xuan m.fl., 2022; Klute m.fl., 2017), och ett försök i 140 engelska skolor 0,09 (Anders m.fl., 2022). Effekten är måttlig, och den beror på hur du använder metoden." }
+    - { fraga: "Är det inte bara explicit undervisning med miniwhiteboards?", svar: "Båda metoderna låter alla visa samtidigt, och de går bra ihop. Explicit undervisning är ett förlopp för hela lektionen, och för många fel betyder att du visar igen. Det här är ett lager över din egen planering, som ett samtal, en text eller en laboration, och det fortsätter till nästa lektion. Du skriver frågan så att felsvaren säger något, och beslutet har flera vägar, till exempel att eleverna övertygar varandra." }
+grund:
+  rubrik: Det forskningen visar
+  text:
+    - "Forskningen om formativ bedömning ger en måttlig effekt. I ett urval efter strikta krav är effekten 0,26 i 19 studier. De flesta gäller åk 1–⁠6, och över hälften gäller elevgrupper med specialundervisning eller låga resultat (Klute m.fl., 2017). En större metaanalys över grund- och gymnasieskolan ger 0,25 (Yao m.fl., 2024), och 48 studier i läsning 0,19 (Xuan m.fl., 2022). I skrivning ger återkoppling på texten mer än att läraren bara följer elevernas framsteg (Graham m.fl., 2015)."
+    - "I stora försök i vanliga skolor blir effekten mindre och resultaten mer blandade. I 140 engelska skolor med 25 393 elever gav hela arbetssättet 0,09 på nationella prov, och skillnaden var inte säker. Lärarna valde greppen själva (Anders m.fl., 2022). I 97 engelska skolor svarade alla på digitala svarsdosor, och det gav ingen skillnad i läsning eller matematik. Rapporten visar inte hur mycket lärarna ändrade undervisningen (Wiggins m.fl., 2017). I NO för 9–10-åringar i 121 engelska skolor gav metoden 0,17 på ett oberoende prov (Mujtaba m.fl., 2022)."
+    - "I svensk matematik står två försök bredvid varandra. I åk 4 gav en fortbildning med 144 mötestimmar 0,66, räknat på klassernas medelvärden och på ett prov som forskarna hade gjort (Andersson och Palm, 2017). I åk 7, med samma upplägg och 96 mötestimmar, blev det ingen skillnad, fast lärarna samlade in svar från alla oftare och ändrade oftare. Lärarna lade till 3–19 nya aktiviteter, och antalet hängde inte säkert ihop med resultaten. Författarna förklarar det med att en del lärare mest ställde frågor om baskunskaper, att bara hälften använde miniwhiteboards varje dag och ändrade direkt och att eleverna hade en liten roll. Förklaringen är inte prövad (Boström och Palm, 2023)."
+    - "Mycket talar för att kopplingen mellan det eleverna visar och det läraren gör sedan spelar roll, men den är inte prövad för sig. Jämför man studier i läsning, gav metoden 0,24 när läraren anpassade undervisningen och 0,05 utan, men nästan alla studier med anpassning hade också fortbildning (Xuan m.fl., 2022). I fysik på schweiziska gymnasier fick en del lärare en dags fortbildning och ett paket till fyra av fjorton lektioner. Andra ställde samma frågor och valde själva vad de gjorde med svaren. Mot dem gav paketet 0,37 på ett begreppsprov, och effekten stod kvar efter tre månader. Frågorna ensamma gav ingen säker skillnad mot vanlig undervisning, och på ett räkneprov fann försöket ingen säker skillnad. I paketet ingick också kamratsamtal och elevens egen uppföljning (Lichtenberger m.fl., 2025). I små studier deltar eleverna mer när alla visar samtidigt (Marsh m.fl., 2023)."
+    - "Eleverna kan göra en del av jobbet. I läsning gav lärare och elever tillsammans mer än läraren ensam (Xuan m.fl., 2022). I matematik i åk 5–⁠6 fick eleven fem minuter sist i lektionen att skriva vad hen hade lärt sig, prata med en kamrat och skriva om. Det gav 0,49, utan att lärarna ändrade något (Klute m.fl., 2017). I matematik gav Klutes urval 0,36, till stor del med självbedömning (Klute m.fl., 2017). I läsning gav studier med bara självbedömning 0,36 mot 0,24 när läraren anpassade undervisningen, en skillnad som inte är säker (Xuan m.fl., 2022). Elevstyrda grepp i läsning gav däremot −0,15 i två små studier (Klute m.fl., 2017)."
+    - "Mycket är inte studerat. Klutes urval har inga studier i NO eller SO (Klute m.fl., 2017). SO är knappt studerat och teknik inte alls. I vårt urval har ingen studie med jämförelsegrupp mätt det sociala, och ingen har prövat hur ofta metoden behövs eller om kortare varv ger mer."
+kallor:
+  - { id: klute-m-fl-2017, eric: ED572929, slag: systematisk-oversikt, grupp: oversikt, omraden: [larande, lasning, skrivning, matematik], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,26 i 19 studier, mest åk 1–⁠6; 0,36 i matematik", titel: "Formative assessment and elementary school student academic achievement: A review of the evidence", text: "Klute, M., Apthorp, H., Harlacher, J. m.fl. (2017). Formative assessment and elementary school student academic achievement: A review of the evidence. Regional Educational Laboratory Central.", adress: "https://files.eric.ed.gov/fulltext/ED572929.pdf", oppnad: 2026-11-02 }
+  - { id: yao-m-fl-2024, doi: 10.1080/13803611.2024.2363831, slag: metaanalys, grupp: oversikt, omraden: [larande], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Måttlig effekt: g = 0,25 i 118 studier, grund- och gymnasieskola", titel: "The impact of formative assessment on K-12 learning: a meta-analysis", text: "Yao, Y., Amos, M., Snider, K. m.fl. (2024). The impact of formative assessment on K-12 learning: a meta-analysis. Educational Research and Evaluation.", adress: "https://doi.org/10.1080/13803611.2024.2363831", oppnad: 2026-11-02 }
+  - { id: xuan-m-fl-2022, doi: 10.3389/fpsyg.2022.990196, slag: metaanalys, grupp: oversikt, omraden: [lasning], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Liten effekt: 0,19 i 48 studier i läsning; 0,24 med anpassad undervisning", titel: "The effectiveness of formative assessment for enhancing reading achievement in K-12 classrooms: A meta-analysis", text: "Xuan, Q., Cheung, A. och Sun, D. (2022). The effectiveness of formative assessment for enhancing reading achievement in K-12 classrooms: A meta-analysis. Frontiers in Psychology.", adress: "https://doi.org/10.3389/fpsyg.2022.990196", oppnad: 2026-11-02 }
+  - { id: graham-m-fl-2015, doi: 10.1086/681947, slag: metaanalys, grupp: oversikt, omraden: [skrivning], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Stor effekt: 0,87 för återkoppling från vuxna på elevernas texter", titel: "Formative assessment and writing", text: "Graham, S., Hebert, M. och Harris, K. R. (2015). Formative assessment and writing. The Elementary School Journal.", adress: "https://doi.org/10.1086/681947", oppnad: 2026-11-02 }
+  - { id: kingston-och-nash-2011, doi: 10.1111/j.1745-3992.2011.00220.x, slag: metaanalys, grupp: oversikt, omraden: [amnen, matematik], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Liten effekt: 0,19 [0,06; 0,31] i NO, efter rättelsen 2015", titel: "Formative assessment: A meta-analysis and a call for research", text: "Kingston, N. och Nash, B. (2011). Formative assessment: A meta-analysis and a call for research. Educational Measurement: Issues and Practice.", adress: "https://ncme.org/wp-content/uploads/2025/10/Erratum_to_Kingston___Nash__Vol__34__No__2_.pdf", oppnad: 2026-11-02 }
+  - { id: anders-m-fl-2022, doi: 10.1080/19345747.2021.2018746, eric: EJ1367837, slag: studie, grupp: experiment, omraden: [larande, matematik, amnen], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: d = 0,09 [−0,01; 0,18] på nationella prov, 25 393 elever, 140 skolor", titel: "The effect of embedding formative assessment on pupil attainment", text: "Anders, J., Foliano, F., Bursnall, M. m.fl. (2022). The effect of embedding formative assessment on pupil attainment. Journal of Research on Educational Effectiveness.", adress: "https://discovery.ucl.ac.uk/id/eprint/10137314/", oppnad: 2026-11-02 }
+  - { id: wiggins-m-fl-2017, eric: ED581136, slag: rapport, grupp: experiment, omraden: [larande, lasning, matematik], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: 0,00 och −0,04 i läsning, två årskullar, nationella prov, 97 skolor", titel: "Learner Response System: Evaluation report and executive summary", text: "Wiggins, M., Sawtell, M. och Jerrim, J. (2017). Learner Response System: Evaluation report and executive summary. Education Endowment Foundation.", adress: "https://files.eric.ed.gov/fulltext/ED581136.pdf", oppnad: 2026-11-02 }
+  - { id: mujtaba-m-fl-2022, slag: rapport, grupp: experiment, omraden: [amnen], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Måttlig effekt: g = 0,17 [0,03; 0,32] i NO, 2 882 elever i 121 skolor", titel: "Focus for Teacher Assessment of Primary Science (Focus4TAPS): Evaluation report", text: "Mujtaba, T., Sheldrake, R., Hodgen, J. m.fl. (2022). Focus for Teacher Assessment of Primary Science (Focus4TAPS): Evaluation report. Education Endowment Foundation.", adress: "https://discovery.ucl.ac.uk/10161783/1/Focus4TAPS-Report.pdf", oppnad: 2026-11-02 }
+  - { id: andersson-och-palm-2017, doi: 10.1016/j.learninstruc.2016.12.006, slag: studie, grupp: experiment, omraden: [matematik], strang: false, stor: true, las: sammanfattning, fohlin: false, effekt: "Stor effekt: d = 0,66 på klassmedelvärden, 738 elever i åk 4", titel: "The impact of formative assessment on student achievement: A study of the effects of changes to classroom practice after a comprehensive professional development programme", text: "Andersson, C. och Palm, T. (2017). The impact of formative assessment on student achievement: A study of the effects of changes to classroom practice after a comprehensive professional development programme. Learning and Instruction.", adress: "https://doi.org/10.1016/j.learninstruc.2016.12.006", oppnad: 2026-11-02 }
+  - { id: bostrom-och-palm-2023, doi: 10.3389/feduc.2023.1101192, slag: studie, grupp: experiment, omraden: [matematik], strang: false, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: partiell eta² = 0,00, p = 0,85, 566 elever i 14 skolor i åk 7", titel: "The effect of a formative assessment practice on student achievement in mathematics", text: "Boström, E. och Palm, T. (2023). The effect of a formative assessment practice on student achievement in mathematics. Frontiers in Education.", adress: "https://doi.org/10.3389/feduc.2023.1101192", oppnad: 2026-11-02 }
+  - { id: andersson-m-fl-2017, slag: studie, grupp: annan, omraden: [], bidrag: "38 lärare samlade sällan in från alla och ändrade efter få", titel: "Formative assessment in Swedish mathematics classroom practice", text: "Andersson, C., Boström, E. och Palm, T. (2017). Formative assessment in Swedish mathematics classroom practice. Nordic Studies in Mathematics Education.", adress: "https://ncm.gu.se/wp-content/uploads/2020/06/22_1_005020_andersson.pdf", oppnad: 2026-11-02, las: fulltext }
+  - { id: black-och-wiliam-1998, doi: 10.1080/0969595980050102, slag: artikel, grupp: annan, omraden: [], primarkalla: true, bidrag: "Grunden: resultaten måste ändra undervisningen", titel: "Assessment and classroom learning", text: "Black, P. och Wiliam, D. (1998). Assessment and classroom learning. Assessment in Education: Principles, Policy and Practice.", adress: "https://doi.org/10.1080/0969595980050102", oppnad: 2026-11-02, las: sammanfattning }
+  - { id: lichtenberger-m-fl-2025, doi: 10.1007/s11092-024-09445-6, slag: studie, grupp: annan, omraden: [], bidrag: "Frågorna ensamma gav ingen säker skillnad", titel: "Enhanced conceptual understanding through formative assessment: Results of a randomized controlled intervention study in physics classes", text: "Lichtenberger, A., Hofer, S. I., Stern, E. m.fl. (2025). Enhanced conceptual understanding through formative assessment: Results of a randomized controlled intervention study in physics classes. Educational Assessment, Evaluation and Accountability.", adress: "https://doi.org/10.1007/s11092-024-09445-6", oppnad: 2026-11-02, las: fulltext }
+  - { id: marsh-m-fl-2023, doi: 10.1007/s10864-021-09463-0, slag: metaanalys, grupp: annan, omraden: [socialt], strang: false, bidrag: "Svarskort: mer deltagande, utan jämförelsegrupp", titel: "Updated meta-analysis of the research on response cards", text: "Marsh, R. J., Cumming, T. M., Randolph, J. J. m.fl. (2023). Updated meta-analysis of the research on response cards. Journal of Behavioral Education.", adress: "https://doi.org/10.1007/s10864-021-09463-0", oppnad: 2026-11-02, las: sammanfattning }
+  - { id: speckesser-m-fl-2018, slag: rapport, grupp: annan, omraden: [socialt], strang: false, bidrag: "Lärare såg bättre uppförande, och kollegabesök var svårast", titel: "Embedding Formative Assessment: Evaluation report and executive summary", text: "Speckesser, S., Runge, J., Foliano, F. m.fl. (2018). Embedding Formative Assessment: Evaluation report and executive summary. Education Endowment Foundation.", adress: "https://dera.ioe.ac.uk//32012/1/EFA_evaluation_report.pdf", oppnad: 2026-11-02, las: fulltext }
+lasMer:
+  - { slag: text, titel: "Formativ bedömning på 2000-talet", upphov: "Åsa Hirsh och Viveca Lindberg, Vetenskapsrådet", ar: 2015, adress: "https://www.vr.se/download/18.2412c5311624176023d25aca/1555423122350/Formativ-bedoemning-svensk-o-internationell-forskning_VR_2015.pdf", oppnad: 2026-11-02, text: "Svensk översikt över forskningen, varför ett samlat tal är svårt att ange och hur metoden kan bli en ritual." }
+  - { slag: text, titel: "Bedömning i matematikklassrummet", upphov: "Anna-Lena Ekdahl och Constanta Olteanu, Skolverket", ar: 2022, adress: "https://larportalen.skolverket.se/api/resource/P03WCPLAR173051", oppnad: 2026-11-02, text: "De fem strategierna på svenska, med ett exempel i algebra, miniwhiteboards och följdfrågor." }
+  - { slag: text, titel: "Formativ återkoppling: utveckla undervisningen och stötta elevernas kunskapsutveckling", upphov: "Agneta Grönlund, Skolverket", ar: 2023, adress: "https://www.skolverket.se/download/18.644dedc01969f3c8c228bba/1747140730140/Formativ_aterkoppling_utveckla_undervisningen_stotta_elevernas_kunskapsutveckling.pdf", oppnad: 2026-11-02, text: "Hur du planerar återkopplingen, vad den säger och hur du ger den i olika åldrar och ämnen." }
+  - { slag: text, titel: "”Nu vet jag att jag vet”: en aktionsstudie med fokus på återkoppling genom exit tickets", upphov: "Lina Rosander, Skolporten", ar: 2025, adress: "https://www.skolporten.se/app/uploads/2026/01/utveckla_skolan_7_2025.pdf", oppnad: 2026-11-02, text: "En lärares arbete med lappar i matematik på gymnasiet, och vad som hände när lappen flyttades till mitten av lektionen." }
+  - { kalla: andersson-m-fl-2017, text: "Vad 38 svenska matematiklärare faktiskt gjorde, med de vanligaste greppen i en tabell. På engelska." }
+  - { slag: film, titel: "Checking for understanding: response systems", upphov: "NSW Department of Education", adress: "https://education.nsw.gov.au/teaching-and-learning/curriculum/explicit-teaching/explicit-teaching-snapshots-of-practice/checking-for-understanding-response-systems", oppnad: 2026-11-02, text: "Du ser miniwhiteboards, handsignaler och slumpade namn på lågstadiet och högstadiet. På engelska." }
+  - { slag: film, titel: "Austin's Butterfly: Building Excellence in Student Work", upphov: "Ron Berger, EL Education", adress: "https://vimeo.com/38247060", oppnad: 2026-11-02, text: "Hur en förstaklassare gör sin teckning bättre med kritik och flera utkast. Nästa steg i bild och slöjd. På engelska." }
+  - { slag: bok, titel: "Att följa lärande: formativ bedömning i praktiken", upphov: "Dylan Wiliam", ar: 2019, adress: "https://libris.kb.se/fqlh1dp8cxq68vmx", oppnad: 2026-11-02, text: "Grundboken på svenska, med de fem strategierna och många fler grepp att bygga vidare med." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lär dig metoden
+# ---------------------------------------------------------------------------------------------------------------------
+plan:
+  passen:
+    - { nar: första lektionen, kort: Rutinerna, text: "Du håller din egen lektion och lägger till ett påstående." }
+  fore: ["Välj den klass och det ämne där du redan vet vilka fel eleverna gör."]
+  utvardering: ["Ni ses fyra gånger efter de första veckorna, med frågorna från mötet i vecka 5, och var och en skriver vad hen prövar. Elever som har samma fel kvar får stödundervisning, med lapparna som underlag."]
+  skattningar:
+    - namn: Hur säker är jag på metoden?
+      vem: lararen
+      rad: lararen
+      text: "Skatta i slutet av veckan. Tänk på kärnan: Skilde din fråga rätt tänkande från fel? Visade alla samtidigt, och såg du dem? Följde nästa steg det du såg? Visade alla igen efter ändringen, och såg de det rätta?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: osaker }
+    - namn: Hur väl fungerar den i praktiken?
+      vem: lararen
+      rad: klassen
+      text: "Tänk på det du ser i klasserna: Har fler rätt än första gången när alla visar igen? Säger de hur de tänkte? Från vecka 5: Klarar de samma slags fråga en vecka senare, och stämmer färgen med svaret?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: klassenstar }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lathunden Att komma igång
+# ---------------------------------------------------------------------------------------------------------------------
+lathund:
+  metoden:
+    text:
+      - Du lägger ett lager över din egen planering, så att du får veta vad alla har förstått medan du kan göra något åt det. Det du ser avgör nästa steg.
+      - Lärandet går till så här. Eleverna tar ställning, du får veta vad som hindrar dem, och de märker att deras svar ändrar lektionen.
+  lektion:
+    text: "Du håller din egen lektion och lägger till ett påstående. Tre rader räcker: frågan, felet och vad du gör om många har fel. Säg: ”Jag behöver veta vad ni har förstått. Det är inget prov.” Öva signalen först. Säg sedan ett vanligt fel, ibland något sant. Är klassen delad säger paren varför, alla visar igen, och du säger svaret."
+  igang:
+    rubrik: De första veckorna
