@@ -162,5 +162,16 @@
       "text": "Rita blodomloppet som två slingor medan du förklarar, en slinga i taget, och peka: ”Här lämnar blodet lungorna med syre, följ pilen.” Sedan stänger eleverna boken och ritar ur minnet med pilar och fem ord: lungorna, kroppen, hjärtat, syrerikt och syrefattigt. De förklarar för grannen och lägger till det som saknades i en annan färg. Titta efter två slingor och pilar åt rätt håll, och lyssna efter därför och sedan."
     }
   ],
-  "metoderSomGorDen": []
+  "metoderSomGorDen": [
+    {
+      "metod": "formativ-bedomning",
+      "avsnitt": "Lagret: Beslutet",
+      "mening": "Annars ett nytt sätt: en bild eller ett nytt exempel."
+    },
+    {
+      "metod": "kooperativt-larande",
+      "avsnitt": "Så kan det se ut: Biologi, åk 8",
+      "mening": "Två med symbolen förklarar gruppens svar, och alla ritar vad en växt i en sluten burk tar in och bildar i fotosyntesen."
+    }
+  ]
 }

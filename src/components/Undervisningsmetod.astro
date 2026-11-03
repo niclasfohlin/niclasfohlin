@@ -16,9 +16,16 @@ import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetod
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
+import { strategiernaAv, strategikortetI, provaMetodensStrategikort, metodensKortAdress as metodensStrategikortAdress, strategiensAdress, strategiernasStil, STRATEGIERNAS_ADRESS } from '../lib/strategier';
 interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; tabellfiler?: UmFil[]; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[]; strukturer?: ImporteradStruktur[] }
 const { d, id, extrafilmer, filer, tabellfiler = [], bilder, sidor = [], saker, strukturer = [] } = Astro.props;
 if (strukturer.length) provaMetodensKort(id, strukturer.map((x) => x.id));
+// Strategierna som metoden visar ur verktyget Strategier, som strukturkorten: metodens fält strategikort eller sajtens
+// sådd (K-699, K-702).
+const STRATEGIERNA = 'Strategier för lärande';
+const strategikortet = strategikortetI(id, d);
+const strategierna = strategikortet ? strategiernaAv(strategikortet.strategier, `${d.titel}: strategikort`) : [];
+if (strategierna.length) provaMetodensStrategikort(id, strategierna.map((x) => x.id));
 const kallor = new Set<string>((d.kallor ?? []).map((k: { id: string }) => k.id));
 // Varje text som HTML: metodens saker och källorna som länkar (medSaker), och en replik inom citattecken på egen rad. En replik
 // som meningen fortsätter efter, med komma eller liten bokstav, står kvar i meningen (um-replik-i), så att "Säg ”Pennan ner”,
@@ -46,7 +53,7 @@ const CELLER: Record<string, [string, string, unknown][]> = {
   metoden: [['det-har-ar', `Det här är ${d.titel.toLocaleLowerCase('sv')}`, true], ['i-korthet', KARNANS_KORT, d.karna], ['lararens-roll', 'Lärarens roll', d.roll], ...tabellCeller('efter-inledning')],
   'kom-igang': [['fore-forsta', 'Före första lektionen', d.checklista], ['planera-lektionen', planerasNamn(d), d.amnesexempel?.some((e: { plan?: unknown }) => e.plan)], ['forsta-lektionen', FORSTA, d.forsta], ['de-forsta-veckorna', 'De första veckorna', d.progression], ...tabellCeller('efter-progression'), ['efter-de-forsta-veckorna', 'Efter de första veckorna', true], ['till-arbetslaget', 'Till arbetslaget', d.uppdrag]],
   'hall-i': [['karnan', 'Kärnan: fast och fritt', d.karna], ['lararens-fragor', 'Lärarens frågor', d.lararensFragor], ['nar-det-glider', 'När det glider', true]],
-  'att-skriva-ut': [['materialet', UM_NAMN.lektionskort, filer.lektionskort], ['strukturkorten', STRUKTURKORTEN, strukturer.length],['materialet-for-klassen', d.ramar?.rubrik ?? UM_NAMN.materialet, d.ramar], ['planeringsmallen', UM_NAMN.planeringsmall, d.planeringsmall], ['observationsmallen', UM_NAMN.observation, d.observation], ...tabellCeller('bilaga-a')],
+  'att-skriva-ut': [['materialet', UM_NAMN.lektionskort, filer.lektionskort], ['strukturkorten', STRUKTURKORTEN, strukturer.length], ['strategierna', STRATEGIERNA, strategierna.length], ['materialet-for-klassen', d.ramar?.rubrik ?? UM_NAMN.materialet, d.ramar], ['planeringsmallen', UM_NAMN.planeringsmall, d.planeringsmall], ['observationsmallen', UM_NAMN.observation, d.observation], ...tabellCeller('bilaga-a')],
   valet: [],
 };
 const celler = (did: string) => (CELLER[did] ?? []).filter(([, , finns]) => !!finns);
@@ -483,6 +490,30 @@ const moten = arbetslagetsMoten(d);
       <p class="um-strukturknappar">
         <a class="knapp" href={metodensKortAdress(id)} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${id}/strukturkort`} data-goatcounter-title={`${d.titel}: strukturkorten`}><span data-direkt={`Skriv ut de ${talText(strukturer.length)} korten`}>De {talText(strukturer.length)} korten som pdf</span></a>
         <a class="knapp sekundar" href="/strukturer">Alla strukturer</a>
+      </p>
+      <p class="st-utskriftsrad">{TVA_PA_A4}</p>
+    </section>
+  )}
+  {/* Strategierna som metoden visar ur verktyget Strategier (fältet strategikort, K-699): texten, korten med berättelsens
+      bilder, numret, namnet och meningen som leder till strategins sida, och knappen som skriver ut dem två och två på A4. */}
+  {strategierna.length > 0 && (
+    <section class="um-avsnitt" id="strategierna" style={strategiernasStil}>
+      <h3>{STRATEGIERNA}</h3>
+      <p set:html={k(strategikortet!.text)} />
+      <ol class="st-kort-lista um-strukturkort">
+        {strategierna.map((x) => (
+          <li>
+            <a class="st-kort" href={strategiensAdress(x.id)} style={strategiernasStil}>
+              <span class="sg-tre" aria-hidden="true">{x.bilder.map((b) => (b ? <img src={b} alt="" width="500" height="500" loading="lazy" decoding="async" /> : <span class="sg-bild-tom">Bild</span>))}</span>
+              <span class="st-kort-text"><span class="st-kort-namn">{x.namn}</span><span class="st-kort-rad">{x.mening}</span></span>
+              <span class="sg-nr" aria-label={`Strategi ${x.nr}`}>{x.nr}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <p class="um-strukturknappar">
+        <a class="knapp" href={metodensStrategikortAdress(id)} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${id}/strategikort`} data-goatcounter-title={`${d.titel}: strategikorten`}><span data-direkt={`Skriv ut de ${talText(strategierna.length)} korten`}>De {talText(strategierna.length)} korten som pdf</span></a>
+        <a class="knapp sekundar" href={STRATEGIERNAS_ADRESS}>Alla strategier</a>
       </p>
       <p class="st-utskriftsrad">{TVA_PA_A4}</p>
     </section>

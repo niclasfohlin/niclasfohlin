@@ -9,10 +9,14 @@ import type { CollectionEntry } from 'astro:content';
 import { publicerade } from './innehall';
 import { strategikortetsData, strategikortetsInnehall, strategikortetsFil, STRATEGIKORTEN_ALLA, STRATEGIBLADET, STRATEGIERNAS_FARG, STRATEGINS_OMRADEN, metodensStrategikort } from './standard/index.js';
 import manifest from '../data/strategikort.json';
+import sadden from '../data/strategier-i-metoder.json';
 
 export type Strategi = CollectionEntry<'strategier'>;
 
-/** Verktygets namn och adress, ett ställe tills Niclas har valt namnet. */
+/**
+ * Verktygets namn och adress (Niclas 2026-11-03: "De kan kallas strategier. Men i sådden och texter kallad för
+ * kognitionsvetenskapliga strategier och strategier för lärande").
+ */
 export const STRATEGIERNAS_NAMN = 'Strategier';
 export const STRATEGIERNAS_ADRESS = '/strategier';
 export const strategiensAdress = (id: string) => `/strategier/${id}`;
@@ -89,6 +93,38 @@ export function allaKortensStorlek(): string {
   return kb >= 1000 ? `${(kb / 1024).toFixed(1).replace('.', ',')} MB` : `${kb} kB`;
 }
 export const allaKortensAntal = () => (MANIFESTET[STRATEGIKORTEN_ALLA.nyckel]?.kort ?? []).length;
+
+/**
+ * Strategierna som en metod i Metoder visar: metodens eget fält strategikort, eller sajtens sådd i
+ * src/data/strategier-i-metoder.json, som väver in dem utan att metodens fil ändras (K-702; Niclas 2026-11-03).
+ */
+type Strategikortet = { text: string; strategier: string[] };
+export function strategikortetI(id: string, d: object): Strategikortet | undefined {
+  return (d as { strategikort?: Strategikortet }).strategikort ?? (sadden as unknown as Record<string, Strategikortet | undefined>)[id];
+}
+
+/** En strategi som en metod visar: det metodens avsnitt och dess små kort behöver. */
+export type ImporteradStrategi = { id: string; nr: number; namn: string; mening: string; bilder: (string | null)[] };
+/**
+ * Strategierna som en metod i Metoder visar med fältet strategikort, i metodens ordning, ur verktygets filer i
+ * src/content/strategier/, som strukturerna med fältet strukturkort (src/lib/strukturer.ts, strukturernaAv). Läses direkt ur
+ * filerna, så att metodens sida och saker kan läsa dem utan samlingen. En strategi som inte finns eller är utkast stoppar
+ * bygget, så att metoden aldrig leder till ett kort som saknas.
+ */
+export function strategiernaAv(ids: string[], vem: string): ImporteradStrategi[] {
+  return ids.map((id) => {
+    const fil = join(process.cwd(), 'src', 'content', 'strategier', `${id}.json`);
+    if (!existsSync(fil)) throw new Error(`${vem} nämner ${id}, som inte är en strategi i src/content/strategier/.`);
+    const x = JSON.parse(readFileSync(fil, 'utf8'));
+    if (x.utkast) throw new Error(`${vem} nämner ${x.namn}, som är utkast i verktyget Strategier.`);
+    return { id, nr: x.nr, namn: x.namn, mening: x.framsida.mening, bilder: (x.framsida.bild?.steg ?? []).map((b: { fil?: string }) => (b.fil ? bildensAdress(b.fil) : null)) };
+  });
+}
+/** Metodens strategikort finns och har metodens strategier i metodens ordning; annars stannar bygget, som för strukturkorten. */
+export function provaMetodensStrategikort(metod: string, ids: string[]) {
+  const m = MANIFESTET[metodensStrategikort(metod).nyckel];
+  if (!m || !existsSync(publikt('strategier', 'kort', metodensStrategikort(metod).fil)) || (m.kort ?? []).join() !== ids.join()) throw new Error(`${metod}: strategikorten i public/strategier/kort/${metodensStrategikort(metod).fil} saknas eller har andra strategier än metodens fält strategikort. Gör om dem med node scripts/strategier/kort.mjs --vid-behov (npm run validera gör det).`);
+}
 
 /** Bladet med alla strategier som visas, väggens mitt, ett liggande A4 (scripts/strategier/kort.mjs). */
 export const BLADETS_ADRESS = `/strategier/kort/${STRATEGIBLADET.fil}`;

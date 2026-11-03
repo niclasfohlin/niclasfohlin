@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "f0fb52fa7997896d",
+    "summa": "fd419bcc36ecbb38",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -11,7 +11,7 @@
     "kb": 619
   },
   "_bladet": {
-    "summa": "323e884c6f37eb33",
+    "summa": "9b5180c9fc6d96bf",
     "strategier": [
       "plocka-fram",
       "sprid-ut",
@@ -21,10 +21,48 @@
     ],
     "kb": 23
   },
+  "_metod:explicit-undervisning": {
+    "summa": "9cf2cfad032d7e59",
+    "kort": [
+      "plocka-fram",
+      "sprid-ut",
+      "avlasta-minnet",
+      "blanda-uppgifter"
+    ],
+    "kb": 497
+  },
+  "_metod:formativ-bedomning": {
+    "summa": "214c40b420a14522",
+    "kort": [
+      "plocka-fram",
+      "sprid-ut",
+      "avlasta-minnet",
+      "ord-och-bild"
+    ],
+    "kb": 501
+  },
+  "_metod:kooperativt-larande": {
+    "summa": "2095ca773bd92779",
+    "kort": [
+      "avlasta-minnet",
+      "ord-och-bild"
+    ],
+    "kb": 256
+  },
+  "_metod:testbaserat-larande": {
+    "summa": "9cf2cfad032d7e59",
+    "kort": [
+      "plocka-fram",
+      "sprid-ut",
+      "avlasta-minnet",
+      "blanda-uppgifter"
+    ],
+    "kb": 497
+  },
   "avlasta-minnet": {
     "innehall": "4842fb00",
-    "summa": "19e053d758c6d95c",
-    "kb": 135,
+    "summa": "6ef8f33dac53ea25",
+    "kb": 136,
     "namn": {
       "pt": 78,
       "rader": 1
@@ -37,7 +75,7 @@
   },
   "blanda-uppgifter": {
     "innehall": "104e2aa5",
-    "summa": "c3e411dc57efcd66",
+    "summa": "46bb6230c3f14910",
     "kb": 131,
     "namn": {
       "pt": 70,
@@ -51,7 +89,7 @@
   },
   "ord-och-bild": {
     "innehall": "ce75fa4a",
-    "summa": "c709a3c335708c06",
+    "summa": "7cb29569d882bc4c",
     "kb": 138,
     "namn": {
       "pt": 80,
@@ -65,7 +103,7 @@
   },
   "plocka-fram": {
     "innehall": "92454424",
-    "summa": "428f5326bada14ac",
+    "summa": "d50f0a3ce1531fe6",
     "kb": 155,
     "namn": {
       "pt": 80,
@@ -79,7 +117,7 @@
   },
   "sprid-ut": {
     "innehall": "f8b8b2b5",
-    "summa": "74f0b3c457be6b9f",
+    "summa": "e7a727c49edc3911",
     "kb": 124,
     "namn": {
       "pt": 80,

@@ -172,6 +172,11 @@
       "metod": "formativ-bedomning",
       "avsnitt": "Rutinerna: Exit-lappen",
       "mening": "Tanken är att du vet före nästa lektion var klassen står, och att eleven hämtar det viktigaste ur minnet, säger det och gör svaret bättre."
+    },
+    {
+      "metod": "explicit-undervisning",
+      "avsnitt": "Lektionen: Start",
+      "mening": "Två snabba uppgifter med det som det nya bygger på, som 40 + 30 före plus med tiotal: ”Två snabba. 1, 2, 3, visa!”"
     }
   ]
 }

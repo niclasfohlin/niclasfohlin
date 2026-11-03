@@ -7,6 +7,7 @@ import { litenForsta, meningarna, stor, talText } from './text.js';
 import { larDigetsMetodplan, uppraknat } from './plan.js';
 import { periodensLangd, slugAv } from './index.js';
 import { strukturkortensFel } from './strukturer.js';
+import { strategikortensFel } from './strategier.js';
 
 /**
  * Delarna i läsordning: fyra delar i lärarens tid och två bilagor. `rad` står under delens band, och `text` är
@@ -337,6 +338,7 @@ export function undervisningsmetodensFel(d) {
   if ('mal' in d) fel.push('mal står i metoden: en undervisningsmetod har inget mål, läraren skriver sitt i Lär dig metoden (Niclas 2026-10-30)');
   fel.push(...lathundensTakFel(d));
   fel.push(...strukturkortensFel(d.strukturkort));
+  fel.push(...strategikortensFel(d.strategikort));
   return fel;
 }
 

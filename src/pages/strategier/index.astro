@@ -1,8 +1,10 @@
 ---
-// /strategier: verktyget Strategier (K-699, arbetsnamnet; underlag/prov/strategier/UPPDRAGET.md), som Niclas beställde
-// 2026-11-03: strategier ur kognitionsvetenskapen, "ett verktyg likt strukturer", med ett kort per strategi att skriva ut.
-// Strategierna står efter numret; metodens fem är 1 till 5 och står därför först. Filen med alla kort, två på varje A4,
-// har samma ordning (scripts/strategier/kort.mjs).
+// /strategier: verktyget Strategier (K-699, underlag/prov/strategier/UPPDRAGET.md), som Niclas beställde 2026-11-03:
+// kognitionsvetenskapliga strategier, "ett verktyg likt strukturer", med ett kort per strategi att skriva ut. Texterna kallar
+// dem kognitionsvetenskapliga strategier och strategier för lärande (Niclas samma dag). Strategierna står efter numret;
+// metodens fem är 1 till 5 i den ordning de lärs. Filen med alla kort, två på varje A4, har samma ordning
+// (scripts/strategier/kort.mjs). Meningen i rutan överst är riggens ur metodens inledning, samma som mitten på bladet med
+// alla (src/data/strategier-bladet.json, som intaget skriver), och står inte här förrän den finns.
 import Base from '../../layouts/Base.astro';
 import Kortet from '../../components/Strategikortet.astro';
 import { strategierna, strategiernasMetod, ALLA_KORTENS_ADRESS, BLADETS_ADRESS, allaKortensStorlek, allaKortensAntal, bladetFinns, strategiernasStil, STRATEGIERNAS_NAMN } from '../../lib/strategier';
@@ -11,7 +13,8 @@ import { TVA_PA_A4 } from '../../lib/strukturer';
 const alla = await strategierna();
 const metoden = await strategiernasMetod();
 const titel = STRATEGIERNAS_NAMN;
-const beskrivning = `${alla.length} strategier ur kognitionsvetenskapen för hur lärandet fastnar, med stegen, förslag på användning och kort att skriva ut, två på varje A4.`;
+const mitten = Object.values(import.meta.glob<{ mitten: string }>('../../data/strategier-bladet.json', { eager: true, import: 'default' }))[0]?.mitten;
+const beskrivning = `${alla.length} kognitionsvetenskapliga strategier för lärande, med stegen, förslag på användning och kort att skriva ut, två på varje A4.`;
 ---
 
 <Base title={titel} description={beskrivning} tryckText="© Niclas Fohlin · niclasfohlin.se/strategier">
@@ -20,8 +23,8 @@ const beskrivning = `${alla.length} strategier ur kognitionsvetenskapen för hur
       <header>
         <p class="meta brodsmula"><a href="/metoder">Metoder</a>{metoden && <> · <a href={`/metoder/${metoden.id}`}>{metoden.data.titel}</a></>} · {titel}</p>
         <h1>{titel}</h1>
-        <p class="ingress">Kort för hur lärandet fastnar. Tryck på en strategi för förklaringen, stegen och förslag på användning.</p>
-        <p class="st-syftet sg-insikt">En strategi tjänar innehållet. Bestäm först vad klassen ska förstå, och välj sedan den strategi som hjälper eleverna att minnas och förstå det.</p>
+        <p class="ingress">Kognitionsvetenskapliga strategier för lärande, ett kort för var och en. Tryck på en strategi för förklaringen, stegen och förslag på användning.</p>
+        {mitten && <p class="st-syftet sg-insikt">{mitten}</p>}
         {allaKortensAntal() > 0 && (
           <>
             <div class="st-utskrift">

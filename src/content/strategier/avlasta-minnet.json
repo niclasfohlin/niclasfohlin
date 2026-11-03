@@ -182,6 +182,21 @@
       "metod": "explicit-undervisning",
       "avsnitt": "Kärnan: Visa ett steg i taget",
       "mening": "Arbetsminnet är litet, och för den som är ny i ett innehåll tar varje steg plats."
+    },
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Kom igång: Veckans träning",
+      "mening": "Elever med samma slags fel sitter vid ett bord med material till just det: uppgifter med facit och ett exempel som är löst steg för steg."
+    },
+    {
+      "metod": "kooperativt-larande",
+      "avsnitt": "Lektionen: Genomgång",
+      "mening": "Visa strukturens steg med en elev, och säg högt vad du gör."
+    },
+    {
+      "metod": "formativ-bedomning",
+      "avsnitt": "Lagret: Beslutet",
+      "mening": "Spridda fel: bryt ner steget."
     }
   ]
 }

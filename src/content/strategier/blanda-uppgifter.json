@@ -173,6 +173,11 @@
       "metod": "testbaserat-larande",
       "avsnitt": "Kärnan: Tillbaka efter några veckor",
       "mening": "Eleverna plockar fram det viktiga igen minst två gånger med veckor emellan, i matematik blandat så att de väljer metod."
+    },
+    {
+      "metod": "explicit-undervisning",
+      "avsnitt": "Kom igång: Arbetsområdet, lektion för lektion",
+      "mening": "Lektion 6: blandat, också äldre, utan stavar, och Jag gör där felen satt"
     }
   ]
 }

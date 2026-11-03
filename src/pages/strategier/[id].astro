@@ -20,7 +20,7 @@ const forslag = (d.forslag ?? []) as { omrade: keyof typeof OMRADENA; arskurs: s
 const text = (x: { text: string } | string) => (typeof x === 'string' ? x : x.text);
 const metoden = await strategiernasMetod();
 const harKort = kortetFinns(s);
-const beskrivning = `${f.mening} Strategin ${d.namn} ur kognitionsvetenskapen, med stegen, förslag på användning och kortet att skriva ut.`;
+const beskrivning = `${f.mening} ${d.namn} är en kognitionsvetenskaplig strategi för lärande, med stegen, förslag på användning och kortet att skriva ut.`;
 ---
 
 <Base title={`${d.namn}: strategi`} description={beskrivning} tryckText={`© Niclas Fohlin · niclasfohlin.se${strategiensAdress(s.id)}`}>

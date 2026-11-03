@@ -1,0 +1,140 @@
+{
+  "_om": "Sådden av verktyget Strategier i Metoder (K-699, K-702; Niclas 2026-11-03: \"Vill ha sådana där minikort som du sådden ur för strukturer där dessa används\", och i riggen samma kväll: \"Tänk om sajten gör sådden?\"). Sajten väver in korten på metodens sida utan att metodens fil ändras, så att riggens dokument fortfarande är byggda ur samma fil (scripts/metoderfiler.mjs). text och strategier är riggens, språkgranskade i out/strategier/TILL-SAJTEN-sadd.md och prövade mot metodens text, och visas i avsnittet Strategier för lärande (src/components/Undervisningsmetod.astro) och strategierna blir metodens kortfil (scripts/strategier/kort.mjs); platser och skal är beläggen ur sökningen, underlag/prov/strategier/sadd-svar-c.md. En metod med eget fält strategikort, som riggens nya metod, läser fältet i stället.",
+  "explicit-undervisning": {
+    "text": "Fyra kognitionsvetenskapliga strategier finns redan i lektionen och arbetsområdet. Plocka fram finns i de två snabba i starten, där alla ur minnet tar fram det lektionen bygger på. Sprid ut finns också i starten, där det klassen har lärt sig kommer tillbaka veckor senare. Avlasta minnet finns i Jag gör, där du visar ett steg i taget med samma ord och sist ett helt exempel. Blanda uppgifter finns i arbetsområdet när grunden sitter. I huvudexemplets lektion 6 kommer tal med och utan växling om vartannat, och eleverna ser först vilket slag uppgiften är.",
+    "strategier": [
+      "plocka-fram",
+      "sprid-ut",
+      "avlasta-minnet",
+      "blanda-uppgifter"
+    ],
+    "skal": "De två snabba i starten låter alla plocka fram det lektionen bygger på, Jag gör visar ett löst exempel ett steg i taget med samma ord, och arbetsområdet blandar slagen och låter det äldre komma tillbaka när grunden sitter.",
+    "platser": [
+      {
+        "efter": "steg 1",
+        "delar": [
+          "plocka-fram"
+        ],
+        "slag": "form",
+        "om": "De två snabba"
+      },
+      {
+        "efter": "steg 2",
+        "delar": [
+          "avlasta-minnet"
+        ],
+        "slag": "form",
+        "om": "Jag gör"
+      },
+      {
+        "efter": "arbetsomradet",
+        "delar": [
+          "blanda-uppgifter",
+          "sprid-ut"
+        ],
+        "slag": "form",
+        "om": "Blandat och äldre i arbetsområdet"
+      }
+    ]
+  },
+  "testbaserat-larande": {
+    "text": "Metoden bygger på tre kognitionsvetenskapliga strategier. Plocka fram finns i provet, där alla svarar ur minnet innan facit kommer. Sprid ut finns i grovplaneringen, där varje område kommer tillbaka i provet efter veckor och månader. Blanda uppgifter finns i provet i matematik, där en uppgift inte säger vilken metod den kräver och eleverna själva väljer. En fjärde strategi, Avlasta minnet, finns i Veckans träning, där eleverna vid ett bord har uppgifter med facit och ett exempel som är löst steg för steg.",
+    "strategier": [
+      "plocka-fram",
+      "sprid-ut",
+      "avlasta-minnet",
+      "blanda-uppgifter"
+    ],
+    "skal": "Provet är framplockning med facit samma lektion, kärnans Tillbaka efter några veckor är spridning och i matematik blandning, och Veckans träning ger ett exempel som är löst steg för steg.",
+    "platser": [
+      {
+        "efter": "steg 1",
+        "delar": [
+          "plocka-fram"
+        ],
+        "slag": "form",
+        "om": "Provet ur minnet"
+      },
+      {
+        "efter": "karna: Tillbaka efter några veckor",
+        "delar": [
+          "sprid-ut",
+          "blanda-uppgifter"
+        ],
+        "slag": "form",
+        "om": "Tillbaka efter några veckor"
+      },
+      {
+        "efter": "tabell: Veckans träning",
+        "delar": [
+          "avlasta-minnet"
+        ],
+        "slag": "form",
+        "om": "Träningen vid ett bord"
+      }
+    ]
+  },
+  "formativ-bedomning": {
+    "text": "Fyra strategier för lärande finns redan i lagret. Plocka fram finns på exit-lappen, där eleven hämtar det viktigaste ur minnet och skriver ett svar och ett skäl. Sprid ut finns i Starten, där eleverna svarar på en ny fråga om felet från förra lektionen eller om det ni gjorde för en vecka sedan. Avlasta minnet och Ord och bild finns i Beslutet, när många har fel och du visar på ett nytt sätt. Då tänker du högt med ett nytt exempel eller en bild, och är felen spridda tar du ett steg i taget.",
+    "strategier": [
+      "plocka-fram",
+      "sprid-ut",
+      "avlasta-minnet",
+      "ord-och-bild"
+    ],
+    "skal": "Starten tar upp felet igen efter en lektion eller en vecka, exit-lappen låter eleven hämta det viktigaste ur minnet med stängd bok, och när många har fel ber beslutet om ett nytt sätt med en bild eller ett nytt exempel, som Ord och bild och Avlasta minnet visar hur man gör.",
+    "platser": [
+      {
+        "efter": "steg 1",
+        "delar": [
+          "sprid-ut"
+        ],
+        "slag": "form",
+        "om": "Starten"
+      },
+      {
+        "efter": "steg 4",
+        "delar": [
+          "ord-och-bild",
+          "avlasta-minnet"
+        ],
+        "slag": "forslag",
+        "om": "Ett nytt sätt när många har fel"
+      },
+      {
+        "efter": "steg 5",
+        "delar": [
+          "plocka-fram"
+        ],
+        "slag": "form",
+        "om": "Exit-lappen"
+      }
+    ]
+  },
+  "kooperativt-larande": {
+    "text": "Två strategier för lärande finns redan i samarbetet. Avlasta minnet finns i genomgången, där du visar strukturen med en elev och säger högt vad du gör. Klassen lär sig också en ny struktur i taget och prövar den först på känt innehåll, så att eleverna kan lägga kraften på det de ska lära sig. Ord och bild finns i den egna uppgiften, där eleverna ritar sambandet och förklarar det med ämnets ord, som pilarna i fotosyntesen.",
+    "strategier": [
+      "avlasta-minnet",
+      "ord-och-bild"
+    ],
+    "skal": "Genomgången visar strukturen med en elev och tar en ny struktur i taget på känt innehåll, så att eleverna lägger kraften på lärandet, och den egna uppgiften kan visa sambandet i en bild med ämnets ord, som metodens exempel gör.",
+    "platser": [
+      {
+        "efter": "steg 2",
+        "delar": [
+          "avlasta-minnet"
+        ],
+        "slag": "form",
+        "om": "Strukturen i genomgången"
+      },
+      {
+        "efter": "steg 4",
+        "delar": [
+          "ord-och-bild"
+        ],
+        "slag": "forslag",
+        "om": "Stödorden och den egna uppgiften"
+      }
+    ]
+  }
+}

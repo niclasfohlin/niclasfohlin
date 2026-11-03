@@ -171,6 +171,16 @@
       "metod": "testbaserat-larande",
       "avsnitt": "Kärnan: Tillbaka efter några veckor",
       "mening": "Varje område kommer tillbaka efter en vecka, veckor och månader."
+    },
+    {
+      "metod": "explicit-undervisning",
+      "avsnitt": "Kom igång: Arbetsområdet, lektion för lektion",
+      "mening": "Sedan: stegen tas bort från tavlan, och två tal i starten varje lektion"
+    },
+    {
+      "metod": "formativ-bedomning",
+      "avsnitt": "Lagret: Starten",
+      "mening": "Svarar på en ny fråga om felet du såg, eller om det ni gjorde för en vecka sedan."
     }
   ]
 }

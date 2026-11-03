@@ -81,7 +81,11 @@ if (!visas.length && manifest.visas[STRATEGIKORTEN_ALLA.nyckel]) { delete manife
 // Metodernas strategikort: en metod med fältet strategikort får sina kort två och två på A4 i en egen fil, i metodens
 // ordning. En strategi som inte visas stannar skriptet, som bygget gör.
 const METODMAPPAR = ['undervisningsmetoder', 'stodundervisning'].map((m) => join(ROT, 'src', 'content', m));
+// Också sajtens sådd i Metoder (src/data/strategier-i-metoder.json), som väver in strategierna utan att metodens fil
+// ändras; metodens eget fält går före, som på metodens sida (strategikortetI i src/lib/strategier.ts).
+const SADDEN = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'strategier-i-metoder.json'), 'utf8'));
 const metoderna = METODMAPPAR.flatMap((mapp) => readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), d: YAML.parse(readFileSync(join(mapp, f), 'utf8')) })))
+  .map((m) => (m.d?.strategikort || !SADDEN[m.id] ? m : { ...m, d: { ...m.d, strategikort: SADDEN[m.id] } }))
   .filter((m) => m.d?.strategikort?.strategier?.length);
 const metodensKort = metoderna.map((m) => {
   const kort = m.d.strategikort.strategier.map((id) => visas.find((s) => s.id === id) ?? (fel.push(`${m.d.titel}: strategin ${id} visas inte i verktyget`), null)).filter(Boolean);
