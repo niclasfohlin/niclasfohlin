@@ -11,19 +11,19 @@
           "rubrik": "Första gången",
           "utfall": "Glöms fort",
           "fil": "sprid-ut-1.svg",
-          "alt": "En kalender med fyra veckor. Första dagen har en stor mörk prick, och prickarna dagarna efter bleknar fort och är borta efter en vecka."
+          "alt": "En kalender med fyra veckor, och ett barn bredvid. En kurva börjar högt första dagen och faller fort, och efter en vecka ligger den vid botten. I hörnet en bock och en stapel av fem."
         },
         {
           "rubrik": "Efter tre dagar",
           "utfall": "Glöms långsamt",
           "fil": "sprid-ut-2.svg",
-          "alt": "Samma kalender. Efter tre dagar kommer en stor mörk prick till, och prickarna efter den bleknar långsammare, i två veckor."
+          "alt": "Samma kalender. Efter tre dagar går kurvan upp igen vid en ädelsten i en cirkel och faller sedan långsammare, i två veckor. Barnet funderar. I hörnet ett förstoringsglas och tre staplar av fem."
         },
         {
           "rubrik": "Efter två veckor",
           "utfall": "Sitter kvar",
           "fil": "sprid-ut-3.svg",
-          "alt": "Samma kalender. Två veckor senare kommer en tredje stor mörk prick, och prickarna efter den är tydliga ända till månadens slut."
+          "alt": "Samma kalender. Två veckor senare går kurvan upp vid en ädelsten till och ligger sedan nästan rak till månadens slut. Barnet funderar. I hörnet ett förstoringsglas och alla fem staplarna."
         }
       ]
     },

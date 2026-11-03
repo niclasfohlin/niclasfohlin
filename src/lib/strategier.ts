@@ -22,6 +22,13 @@ export const kortetsAdress = (id: string) => `/strategier/kort/${strategikortets
 export const ALLA_KORTENS_ADRESS = `/strategier/kort/${STRATEGIKORTEN_ALLA.fil}`;
 export const metodensKortAdress = (metod: string) => `/strategier/kort/${metodensStrategikort(metod).fil}`;
 
+/**
+ * Meningen under berättelsens bilder på strategins sida, som förklarar kapseln uppe till vänster i varje bild (riggens
+ * informationsgrafik 2026-11-03): cirkeln är hur det går för eleven just då och staplarna hur väl eleven kan det. Riggens
+ * förslag, ett ställe för alla strategier.
+ */
+export const BILDERNAS_FORKLARING = 'Cirkeln visar hur det går, och staplarna hur väl eleven kan det.';
+
 /** Strategiernas färg som css-variabler, för style på sidan och korten, ur standarden som kortet. */
 export const strategiernasStil = `--slag: ${STRATEGIERNAS_FARG.farg}; --slag-ljus: ${STRATEGIERNAS_FARG.ljus}; --slag-mork: ${STRATEGIERNAS_FARG.mork}`;
 

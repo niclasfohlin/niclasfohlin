@@ -4814,6 +4814,7 @@ button.pl-passroll { min-height: 2.75rem; }
 .sg-berattelse img, .sg-bild-tom { display: block; width: 100%; aspect-ratio: 1; border-radius: 8px; background: #dfeedb; }
 .sg-bild-tom { display: grid; place-items: center; color: #5c7b53; font-size: 0.85rem; }
 .sg-berattelse .sg-utfall { font-size: 0.92rem; font-weight: 700; color: var(--slag-mork); }
+.sg-forklaring { max-width: 34rem; margin: 0.4rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
 .sg-handling { list-style: none; margin: 0.9rem 0 0; padding: 0.55rem 0.7rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; max-width: 34rem; border-radius: 8px; background: var(--slag); color: #fff; font-family: var(--typsnitt-ui); font-weight: 700; }
 .sg-handling li { display: flex; align-items: center; gap: 0.45rem; }
 .sg-handling img { width: 1.9rem; height: 1.9rem; padding: 0.25rem; border-radius: 50%; background: #fff; flex: none; }

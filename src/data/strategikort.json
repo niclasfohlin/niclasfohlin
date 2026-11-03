@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "77509e9343bb6d55",
+    "summa": "a4bce99fc7b7e400",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -8,7 +8,7 @@
       "ord-och-bild",
       "avlasta-minnet"
     ],
-    "kb": 428
+    "kb": 619
   },
   "_bladet": {
     "summa": "caf689d3f1ba9a01",
@@ -22,9 +22,9 @@
     "kb": 23
   },
   "avlasta-minnet": {
-    "innehall": "878c15d6",
-    "summa": "c0a0b71a2655a173",
-    "kb": 94,
+    "innehall": "cf3a2e9a",
+    "summa": "1b48dd0362de7292",
+    "kb": 136,
     "namn": {
       "pt": 78,
       "rader": 1
@@ -36,9 +36,9 @@
     }
   },
   "blanda-uppgifter": {
-    "innehall": "21af38b5",
-    "summa": "f591a3b45414aa22",
-    "kb": 87,
+    "innehall": "660abdaf",
+    "summa": "a468e58256d90adf",
+    "kb": 131,
     "namn": {
       "pt": 70,
       "rader": 1
@@ -50,9 +50,9 @@
     }
   },
   "ord-och-bild": {
-    "innehall": "efd50550",
-    "summa": "ab449d31a41f7270",
-    "kb": 108,
+    "innehall": "ce75fa4a",
+    "summa": "c709a3c335708c06",
+    "kb": 138,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -64,9 +64,9 @@
     }
   },
   "plocka-fram": {
-    "innehall": "febea8dd",
-    "summa": "5ae29abc2a305f58",
-    "kb": 95,
+    "innehall": "92454424",
+    "summa": "428f5326bada14ac",
+    "kb": 155,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -78,9 +78,9 @@
     }
   },
   "sprid-ut": {
-    "innehall": "692fd9fe",
-    "summa": "7d323ad79d1fa35c",
-    "kb": 105,
+    "innehall": "f8b8b2b5",
+    "summa": "74f0b3c457be6b9f",
+    "kb": 124,
     "namn": {
       "pt": 80,
       "rader": 1

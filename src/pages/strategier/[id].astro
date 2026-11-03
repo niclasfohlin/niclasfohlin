@@ -4,7 +4,7 @@
 // knapparna först; sedan insikten, förklaringen, minnets bild och stegen som på baksidan, och det som bara står här:
 // förslagen, Tänk på, forskningen och Fördjupa. Allt ur strategins fil, som kortet.
 import Base from '../../layouts/Base.astro';
-import { strategierna, strategiernasMetod, strategiensAdress, bildensAdress, ikonensAdress, kortetsAdress, kortetFinns, strategiernasStil, OMRADENA, STRATEGIERNAS_ADRESS, STRATEGIERNAS_NAMN } from '../../lib/strategier';
+import { strategierna, strategiernasMetod, strategiensAdress, bildensAdress, ikonensAdress, kortetsAdress, kortetFinns, strategiernasStil, OMRADENA, STRATEGIERNAS_ADRESS, STRATEGIERNAS_NAMN, BILDERNAS_FORKLARING } from '../../lib/strategier';
 import { DUBBELSIDIGT } from '../../lib/strukturer';
 
 export async function getStaticPaths() {
@@ -42,6 +42,7 @@ const beskrivning = `${f.mening} Strategin ${d.namn} ur kognitionsvetenskapen, m
           </li>
         ))}
       </ol>
+      {f.bild.steg.some((x) => x.fil) && <p class="sg-forklaring">{BILDERNAS_FORKLARING}</p>}
       <ol class="sg-handling" aria-label="Så gör eleven">
         {f.handling.map((h) => <li><img src={ikonensAdress(h.ikon)} alt="" width="32" height="32" />{h.text}</li>)}
       </ol>
