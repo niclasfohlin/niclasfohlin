@@ -11,14 +11,24 @@
 # räknas ur innehållet. Titeln, författaren och resten står kvar. Mätt 2026-10-29: två pdf:er som Word gjorde av samma
 # Word-fil skilde sig bara i det.
 #
+# Bilderna som palett (K-700): Chrome lägger en png med palett som RGB i pdf:en, så strukturkortens bilder, som har 12
+# till 64 färger, tog mer plats i pdf:en än som png. Filen med alla strukturkort var 7,5 MB, varav bilderna 90 procent, och
+# drog 1,4 GB trafik på ett dygn 2026-11-02 till 03. palett() lägger varje bild med högst 256 färger som en palettbild
+# (Indexed) med samma bildpunkter, och lämnar bilden som den var om en enda punkt skulle ändras. Mätt 2026-11-03: filen
+# med alla blev 5,1 MB, och sidan ritad med pdftoppm var densamma i varje bildpunkt.
+#
 #   python scripts/pdfpack.py <in.pdf> <ut.pdf>                 packa och gör bytelik (bankpdf.mjs)
 #   python scripts/pdfpack.py --bara-bytelik <in.pdf> <ut.pdf>  bara bytelik, för PowerPoints lathund (lathund-pdf.mjs)
-#   (kräver pip install pikepdf)
+#   python scripts/pdfpack.py --palett <in.pdf> <ut.pdf>        bilderna som palett och bytelik (strukturer/kort.mjs)
+#   (kräver pip install pikepdf, som tar med Pillow)
 import decimal
+import io
 import math
+import struct
 import sys
 
 import pikepdf
+from PIL import Image
 
 DECIMALER = 2
 TOLERANS = 0.05
@@ -94,6 +104,62 @@ def bara_bytelik(kalla, ut):
     spara(pdf, ut)
 
 
+def idat(png):
+    """En pngs bilddata (IDAT), som är Flate med png:s prediktorer: det som pdf läser med Predictor 15."""
+    i, ut = 8, b''
+    while i < len(png):
+        n = struct.unpack('>I', png[i:i + 4])[0]
+        if png[i + 4:i + 8] == b'IDAT':
+            ut += png[i + 8:i + 8 + n]
+        i += 12 + n
+    return ut
+
+
+def palettbild(strom):
+    """Bilden som palettbild, eller None när den har fler än 256 färger, en mask eller blir större."""
+    if strom.get('/SMask') is not None or strom.get('/Mask') is not None or strom.get('/ImageMask'):
+        return None
+    bas = strom.get('/ColorSpace')
+    if isinstance(bas, pikepdf.Array) and bas[0] == '/Indexed':
+        return None
+    bild = pikepdf.PdfImage(strom).as_pil_image()
+    if bild.mode != 'RGB':
+        return None
+    farger = bild.getcolors(256)
+    if farger is None:
+        return None
+    # Medianklyvningen med lika många lådor som färger ger varje färg sin egen låda och sin exakta färg. En palett som
+    # skickas in (quantize(palette=…)) letar närmaste färg genom en grövre kub och tog fel på bilder med fler än 16 färger.
+    p = bild.quantize(colors=len(farger), method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
+    bitar = 8 if len(farger) > 16 else 4 if len(farger) > 4 else 2
+    buf = io.BytesIO()
+    p.save(buf, 'PNG', optimize=True, bits=bitar)
+    tillbaka = Image.open(io.BytesIO(buf.getvalue()))
+    if tillbaka.convert('RGB').tobytes() != bild.tobytes():
+        return None
+    data = idat(buf.getvalue())
+    if len(data) >= len(strom.read_raw_bytes()):
+        return None
+    # Paletten ur den sparade png:n, eftersom det är den som indexen pekar i.
+    hogst = tillbaka.getextrema()[1]
+    return data, bitar, bas, bytes(tillbaka.getpalette()[:3 * (hogst + 1)]), hogst, bild.size[0]
+
+
+def palett(kalla, ut):
+    pdf = pikepdf.open(kalla)
+    for strom in list(pdf.objects):
+        if not isinstance(strom, pikepdf.Stream) or strom.get('/Subtype') != '/Image':
+            continue
+        ny = palettbild(strom)
+        if ny is None:
+            continue
+        data, bitar, bas, lista, hogst, bredd = ny
+        strom.write(data, filter=pikepdf.Name.FlateDecode, decode_parms=pikepdf.Dictionary(Predictor=15, Colors=1, BitsPerComponent=bitar, Columns=bredd))
+        strom.ColorSpace = pikepdf.Array([pikepdf.Name.Indexed, bas, hogst, pikepdf.String(lista)])
+        strom.BitsPerComponent = bitar
+    spara(pdf, ut)
+
+
 def main(kalla, ut):
     pdf = pikepdf.open(kalla)
     sedda = set()
@@ -132,7 +198,9 @@ if __name__ == '__main__':
     args = sys.argv[1:]
     if args[:1] == ['--bara-bytelik'] and len(args) == 3:
         bara_bytelik(args[1], args[2])
+    elif args[:1] == ['--palett'] and len(args) == 3:
+        palett(args[1], args[2])
     elif len(args) == 2:
         main(args[0], args[1])
     else:
-        sys.exit('Ange in- och utfil: python scripts/pdfpack.py [--bara-bytelik] <in.pdf> <ut.pdf>')
+        sys.exit('Ange in- och utfil: python scripts/pdfpack.py [--bara-bytelik | --palett] <in.pdf> <ut.pdf>')

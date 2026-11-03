@@ -4,7 +4,8 @@
 // (beslutet i underlag/prov/strukturer/UPPDRAGET.md under Läget: formen är enkel i HTML och svår i Word, och ingen
 // Word-fil erbjuds), och pdf-lib delar utskriften i ett kort per fil. Bilden är scenens png i 1600 punkter med så få
 // färger som bilden tål (Niclas 2026-10-31: "Ska vara en halv A4a och inte se suddiga ut. Men också optimeras för hur de
-// ska komprimeras för sina färger").
+// ska komprimeras för sina färger"). Chrome lägger bilden som RGB i pdf:en, så varje pdf görs om med bilden som palett
+// och samma bildpunkter (scripts/pdfpack.py --palett, K-700): filen med alla kort gick från 7,5 till 5,1 MB.
 //
 //   node scripts/strukturer/kort.mjs                 alla strukturer som har en bild
 //   node scripts/strukturer/kort.mjs <id> [<id>…]    bara de angivna
@@ -46,6 +47,7 @@ const lasAlla = (mapp, filter) => readdirSync(mapp).filter(filter).sort().map((f
 const gemensamt = createHash('sha256');
 for (const b of [
   ...['rita.mjs', 'stil.json', 'symboler.mjs', 'kortform.mjs'].map((f) => readFileSync(join(HAR, f))),
+  readFileSync(join(ROT, 'scripts', 'pdfpack.py')),
   ...lasAlla(join(HAR, 'figurer'), (f) => f.endsWith('.mjs')),
   ...lasAlla(join(HAR, 'typsnitt'), (f) => f.endsWith('.ttf')),
 ]) gemensamt.update(b);
@@ -136,6 +138,14 @@ function skrivUt(namn, html) {
   if (!/<body[^>]*data-klar="1"/.test(dom)) { console.error(`Korten (${namn}) mättes inte: sidan blev inte klar i Chrome.`); process.exit(1); }
   return { pdf: readFileSync(pdfFil), dom };
 }
+// Sparar pdf:en med bilderna som palett och utan tider, så att samma kort blir samma fil (scripts/pdfpack.py --palett), och
+// ger storleken i kB.
+function spara(bytes, fil) {
+  const fore = join(tmp, 'packa.pdf');
+  writeFileSync(fore, bytes);
+  execFileSync('python', [join(ROT, 'scripts', 'pdfpack.py'), '--palett', fore, fil], { stdio: 'inherit', timeout: 600000 });
+  return Math.round(readFileSync(fil).length / 1024);
+}
 
 const fel = [], korta = [];
 if (attGora.length) {
@@ -165,9 +175,8 @@ if (attGora.length) {
     ett.setAuthor('Niclas Fohlin');
     const mapp = UT[delen(s)];
     mkdirSync(mapp, { recursive: true });
-    const bytes = await ett.save({ useObjectStreams: true });
-    writeFileSync(join(mapp, strukturkortetsFil(s.id)), bytes);
-    manifest[delen(s)][s.id] = { innehall: innehall(s), summa: summa(s), kb: Math.round(bytes.length / 1024), bild: { colours: bilder[s.id].colours, kb: bilder[s.id].kb }, namn: m.namn, steg: m.steg };
+    const kb = spara(await ett.save({ useObjectStreams: true }), join(mapp, strukturkortetsFil(s.id)));
+    manifest[delen(s)][s.id] = { innehall: innehall(s), summa: summa(s), kb, bild: { colours: bilder[s.id].colours, kb: bilder[s.id].kb }, namn: m.namn, steg: m.steg };
   }
 }
 
@@ -177,11 +186,10 @@ for (const m of fel.length ? [] : metodernaAttGora) {
   const doc = await PDFDocument.load(pdf);
   doc.setTitle(`Strukturkort: ${m.d.titel}`);
   doc.setAuthor('Niclas Fohlin');
-  const bytes = await doc.save({ useObjectStreams: true });
   mkdirSync(UT.visas, { recursive: true });
-  writeFileSync(join(UT.visas, m.fil), bytes);
-  manifest.visas[m.nyckel] = { summa: m.summa, kort: m.kort.map((s) => s.id), kb: Math.round(bytes.length / 1024) };
-  console.log(`${m.d.titel}: ${m.kort.length} strukturkort på ${doc.getPageCount()} sidor, ${Math.round(bytes.length / 1024)} kB.`);
+  const kb = spara(await doc.save({ useObjectStreams: true }), join(UT.visas, m.fil));
+  manifest.visas[m.nyckel] = { summa: m.summa, kort: m.kort.map((s) => s.id), kb };
+  console.log(`${m.d.titel}: ${m.kort.length} strukturkort på ${doc.getPageCount()} sidor, ${kb} kB.`);
 }
 if (allaAttGora && !fel.length) {
   const { pdf, dom } = skrivUt('alla', kortenHtml(await Promise.all(visas.map(kortet)), { typsnitt: url(join(HAR, 'typsnitt')), tvaOchTva: true, titel: 'Strukturkort: alla' }));
@@ -191,11 +199,10 @@ if (allaAttGora && !fel.length) {
   if (doc.getPageCount() !== vantat) fel.push(`Filen med alla kort har ${doc.getPageCount()} sidor, inte ${vantat}`);
   doc.setTitle('Strukturkort: alla');
   doc.setAuthor('Niclas Fohlin');
-  const bytes = await doc.save({ useObjectStreams: true });
   mkdirSync(UT.visas, { recursive: true });
-  writeFileSync(join(UT.visas, STRUKTURKORTEN_ALLA.fil), bytes);
-  manifest.visas[STRUKTURKORTEN_ALLA.nyckel] = { summa: allasSumma, kort: visas.map((s) => s.id), kb: Math.round(bytes.length / 1024) };
-  console.log(`Filen med alla kort: ${visas.length} kort på ${doc.getPageCount()} sidor, ${Math.round(bytes.length / 1024)} kB.`);
+  const kb = spara(await doc.save({ useObjectStreams: true }), join(UT.visas, STRUKTURKORTEN_ALLA.fil));
+  manifest.visas[STRUKTURKORTEN_ALLA.nyckel] = { summa: allasSumma, kort: visas.map((s) => s.id), kb };
+  console.log(`Filen med alla kort: ${visas.length} kort på ${doc.getPageCount()} sidor, ${kb} kB.`);
 }
 
 for (const [del, fil] of Object.entries(MANIFEST)) {
