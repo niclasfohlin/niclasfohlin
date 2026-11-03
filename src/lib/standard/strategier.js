@@ -173,5 +173,8 @@ export function strategikortetsInnehall(s, filerna) {
 export const strategikortetsFil = (id) => `strategikort-${id}.pdf`;
 /** Filen med alla kort, två på varje A4, och dess nyckel i manifestet. */
 export const STRATEGIKORTEN_ALLA = Object.freeze({ fil: 'strategikort-alla.pdf', nyckel: '_alla' });
+/** Bladet med alla strategier, väggens mitt, och dess nyckel i manifestet; en metods blad med sina strategier. */
+export const STRATEGIBLADET = Object.freeze({ fil: 'strategier-bladet.pdf', nyckel: '_bladet' });
+export const metodensStrategiblad = (metod) => Object.freeze({ fil: `strategier-bladet-${metod}.pdf`, nyckel: `_blad:${metod}` });
 /** En metods strategikort, två och två på A4, och nyckeln i manifestet. */
 export const metodensStrategikort = (metod) => Object.freeze({ fil: `strategikort-${metod}.pdf`, nyckel: `_metod:${metod}` });

@@ -964,5 +964,9 @@ export declare function strategikortetsInnehall(s: Record<string, any>, filerna:
 export declare function strategikortetsFil(id: string): string;
 /** Filen med alla strategikort och dess nyckel i manifestet. */
 export declare const STRATEGIKORTEN_ALLA: Readonly<{ fil: string; nyckel: string }>;
+/** Bladet med alla strategier och dess nyckel i manifestet. */
+export declare const STRATEGIBLADET: Readonly<{ fil: string; nyckel: string }>;
+/** En metods blad med sina strategier och nyckeln i manifestet. */
+export declare function metodensStrategiblad(metod: string): Readonly<{ fil: string; nyckel: string }>;
 /** En metods strategikort två och två på A4, och nyckeln i manifestet. */
 export declare function metodensStrategikort(metod: string): Readonly<{ fil: string; nyckel: string }>;

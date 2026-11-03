@@ -23,8 +23,8 @@ import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import YAML from 'yaml';
 import { PDFDocument } from 'pdf-lib';
-import { kortenHtml, STRATEGIKORTETS_STANDARD } from './kortform.mjs';
-import { strategikortetsData, strategikortetsInnehall, strategikortetsFil, STRATEGIKORTEN_ALLA, metodensStrategikort } from '../../src/lib/standard/strategier.js';
+import { kortenHtml, bladetHtml, STRATEGIKORTETS_STANDARD } from './kortform.mjs';
+import { strategikortetsData, strategikortetsInnehall, strategikortetsFil, STRATEGIKORTEN_ALLA, STRATEGIBLADET, metodensStrategikort, metodensStrategiblad } from '../../src/lib/standard/strategier.js';
 
 const HAR = dirname(fileURLToPath(import.meta.url));
 const ROT = join(HAR, '..', '..');
@@ -88,6 +88,19 @@ const metodensKort = metoderna.map((m) => {
 if (fel.length) { console.error(`Strategikorten:\n  ${fel.join('\n  ')}`); process.exit(1); }
 for (const k of Object.keys(manifest.visas)) if (k.startsWith('_metod:') && !metodensKort.some((m) => m.nyckel === k)) { delete manifest.visas[k]; const f = join(UT.visas, `strategikort-${k.slice(7)}.pdf`); if (existsSync(f)) unlinkSync(f); }
 const metodernaAttGora = metodensKort.filter((m) => manifest.visas[m.nyckel]?.summa !== m.summa || !existsSync(join(UT.visas, m.fil)));
+// Bladen: verktygets blad med alla strategier som visas (med utkasten i underlag/prov/ när ingen visas än), och för varje
+// metod som namnger sitt blad (strategikort.blad) ett blad med metodens strategier. Meningen i mitten är riggens, ur
+// leveransens bladet.json, som intaget lägger i src/data/strategier-bladet.json.
+const MITTEN_FIL = join(ROT, 'src', 'data', 'strategier-bladet.json');
+const mitten = existsSync(MITTEN_FIL) ? JSON.parse(readFileSync(MITTEN_FIL, 'utf8')).mitten : undefined;
+const bladetsRader = (lista) => lista.map((s) => { const d = strategikortetsData(s); return { nr: d.nr, namn: d.namn, mening: d.mening }; });
+const bladetsSumma = (lista, titel) => createHash('sha256').update(GEMENSAM).update(JSON.stringify([titel, mitten ?? '', bladetsRader(lista)])).digest('hex').slice(0, 16);
+const bladen = [
+  ...(visas.length ? [{ del: 'visas', lista: visas, titel: 'Strategier', fil: STRATEGIBLADET.fil, nyckel: STRATEGIBLADET.nyckel }] : strategier.length ? [{ del: 'utkast', lista: [...strategier].sort((a, b) => a.nr - b.nr), titel: 'Strategier', fil: STRATEGIBLADET.fil, nyckel: STRATEGIBLADET.nyckel }] : []),
+  ...metodensKort.filter((m) => m.d.strategikort.blad).map((m) => ({ del: 'visas', lista: m.kort, titel: m.d.strategikort.blad, ...metodensStrategiblad(m.id) })),
+].map((b) => ({ ...b, summa: bladetsSumma(b.lista, b.titel) }));
+for (const del of Object.keys(manifest)) for (const k of Object.keys(manifest[del])) if ((k === STRATEGIBLADET.nyckel || k.startsWith('_blad:')) && !bladen.some((b) => b.del === del && b.nyckel === k)) { const f = join(UT[del], k === STRATEGIBLADET.nyckel ? STRATEGIBLADET.fil : metodensStrategiblad(k.slice(6)).fil); delete manifest[del][k]; if (existsSync(f)) unlinkSync(f); }
+const bladenAttGora = bladen.filter((b) => manifest[b.del][b.nyckel]?.summa !== b.summa || !existsSync(join(UT[b.del], b.fil)));
 
 const skrivManifest = () => {
   for (const [del, fil] of Object.entries(MANIFEST)) {
@@ -96,7 +109,7 @@ const skrivManifest = () => {
     writeFileSync(fil, JSON.stringify(Object.fromEntries(Object.entries(manifest[del]).sort(([a], [b]) => a.localeCompare(b))), null, 2) + '\n');
   }
 };
-if (!attGora.length && !allaAttGora && !metodernaAttGora.length) { skrivManifest(); console.log(`Strategikorten är aktuella (${strategier.length} kort, ${visas.length} som visas).`); process.exit(0); }
+if (!attGora.length && !allaAttGora && !metodernaAttGora.length && !bladenAttGora.length) { skrivManifest(); console.log(`Strategikorten är aktuella (${strategier.length} kort, ${visas.length} som visas).`); process.exit(0); }
 
 const chrome = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
 if (!chrome) { console.error('Chrome hittades inte: korten skrivs ut med Chrome.'); process.exit(1); }
@@ -180,6 +193,18 @@ if (allaAttGora && !fel.length) {
   const kb = spara(await doc.save({ useObjectStreams: true }), join(UT.visas, STRATEGIKORTEN_ALLA.fil));
   manifest.visas[STRATEGIKORTEN_ALLA.nyckel] = { summa: allasSumma, kort: visas.map((s) => s.id), kb };
   console.log(`Filen med alla kort: ${visas.length} kort på ${doc.getPageCount()} sidor, ${kb} kB.`);
+}
+
+for (const b of fel.length ? [] : bladenAttGora) {
+  const { pdf } = skrivUt(`blad-${b.nyckel.replace(/\W/g, '')}`, bladetHtml(bladetsRader(b.lista), { typsnitt: url(TYPSNITT), titel: b.titel, mitten }));
+  const doc = await PDFDocument.load(pdf);
+  if (doc.getPageCount() !== 1) fel.push(`${b.titel}: bladet har ${doc.getPageCount()} sidor, inte en; för många strategier för ett A4`);
+  doc.setTitle(b.titel);
+  doc.setAuthor('Niclas Fohlin');
+  mkdirSync(UT[b.del], { recursive: true });
+  const kb = spara(await doc.save({ useObjectStreams: true }), join(UT[b.del], b.fil));
+  manifest[b.del][b.nyckel] = { summa: b.summa, strategier: b.lista.map((s) => s.id), kb };
+  console.log(`${b.titel}: bladet med ${b.lista.length} strategier, ${kb} kB.`);
 }
 
 skrivManifest();

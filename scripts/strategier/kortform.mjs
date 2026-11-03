@@ -127,6 +127,33 @@ export function minnetsBild(m) {
 }
 
 /**
+ * Bladet med strategierna (K-699): ett liggande A4 med numret, namnet och meningen för varje strategi, och meningen till
+ * mitten överst, för väggens mitt med korten runt omkring (Niclas om väggen i klassrummet, riggens brev 2026-11-03). Samma
+ * funktion gör verktygets blad med alla strategier och metodens blad med sina, ur fältet strategikort.
+ * @param {{ nr: number, namn: string, mening: string }[]} strategier
+ * @param {{ typsnitt: string, titel: string, mitten?: string }} o
+ */
+export function bladetHtml(strategier, { typsnitt, titel, mitten }) {
+  // Spalterna efter antalet, så att bladet alltid är ett A4: tre för en metods fem, fyra till tolv och fem till tjugo.
+  const kolumner = strategier.length <= 6 ? 3 : strategier.length <= 12 ? 4 : 5;
+  const tat = strategier.length > 12;
+  return `<!doctype html><html lang="sv"><head><meta charset="utf-8"><title>${esc(titel)}</title><style>${stil(typsnitt)}
+@page { size: A4 landscape; margin: 0; }
+.blad { width: 297mm; height: 210mm; padding: 12mm 14mm 10mm; display: flex; flex-direction: column; gap: 6mm; position: relative; }
+.blad h1 { margin: 0; font-size: 40pt; font-weight: 600; line-height: 1; color: var(--strategi-mork); }
+.blad .mitten { margin: 0; padding: 4mm 6mm; border-radius: 3mm; background: var(--strategi-ljus); font-size: 18pt; font-weight: 600; line-height: 1.2; color: var(--strategi-mork); }
+.blad ol { list-style: none; margin: 0; padding: 0; flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(${kolumner}, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: ${tat ? 3 : 4}mm; }
+.blad li { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 1mm 2.5mm; align-content: center; min-height: 0; padding: ${tat ? '2mm 3mm' : '3mm 4mm'}; border: 0.6mm solid var(--strategi); border-radius: 3mm; overflow: hidden; }
+.blad li .nr { grid-row: span 2; width: ${tat ? 9 : 11}mm; height: ${tat ? 9 : 11}mm; font-size: ${tat ? 15 : 18}pt; align-self: center; color: #fff; }
+.blad li b { font-size: ${tat ? 14 : 17}pt; font-weight: 600; line-height: 1.1; }
+.blad li .rad { font-size: ${tat ? 10.5 : 12}pt; line-height: 1.22; color: var(--blak-svag); }
+.blad .upphov { position: absolute; left: 14mm; bottom: 4mm; padding: 0; }
+</style></head><body><div class="blad"><h1>${esc(titel)}</h1>${mitten ? `<p class="mitten">${esc(mitten)}</p>` : ''}
+<ol>${strategier.map((s) => `<li><span class="nr">${s.nr}</span><b>${esc(s.namn)}</b><span class="rad">${esc(s.mening)}</span></li>`).join('')}</ol>
+<div class="upphov">© Niclas Fohlin · niclasfohlin.se/strategier</div></div><script>document.fonts.ready.then(() => { document.body.dataset.klar = '1'; });</script></body></html>`;
+}
+
+/**
  * Korten som en sida att skriva ut. Förvalt: för varje kort ett A4 med framsidan och ett med baksidan, kortet på den
  * övre halvan. Med tvaOchTva två kort på varje A4, i arkens ordning ur standarden.
  * @param {{ id: string, nr: number, namn: string, mening: string, berattelsen: { rubrik: string, utfall: string, bild?: string }[], handling: { text: string, ikon: string }[], insikt: string, minnet: object, steg: { rubrik: string, text: string }[], avgor: { rubrik: string, text: string } }[]} kort  bild och ikon är adresser

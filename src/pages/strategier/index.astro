@@ -5,7 +5,7 @@
 // har samma ordning (scripts/strategier/kort.mjs).
 import Base from '../../layouts/Base.astro';
 import Kortet from '../../components/Strategikortet.astro';
-import { strategierna, strategiernasMetod, ALLA_KORTENS_ADRESS, allaKortensStorlek, allaKortensAntal, strategiernasStil, STRATEGIERNAS_NAMN } from '../../lib/strategier';
+import { strategierna, strategiernasMetod, ALLA_KORTENS_ADRESS, BLADETS_ADRESS, allaKortensStorlek, allaKortensAntal, bladetFinns, strategiernasStil, STRATEGIERNAS_NAMN } from '../../lib/strategier';
 import { TVA_PA_A4 } from '../../lib/strukturer';
 
 const alla = await strategierna();
@@ -26,8 +26,9 @@ const beskrivning = `${alla.length} strategier ur kognitionsvetenskapen för hur
           <>
             <div class="st-utskrift">
               <a class="knapp sekundar" href={ALLA_KORTENS_ADRESS} target="_blank" rel="noopener" data-goatcounter-click="utskrift:strategier/alla" data-goatcounter-title="Strategier: alla kort">Skriv ut alla {allaKortensAntal()} kort (pdf, {allaKortensStorlek()})</a>
+              {bladetFinns() && <a class="knapp sekundar" href={BLADETS_ADRESS} target="_blank" rel="noopener" data-goatcounter-click="utskrift:strategier/bladet" data-goatcounter-title="Strategier: bladet med alla">Skriv ut bladet med alla (pdf)</a>}
             </div>
-            <p class="st-utskriftsrad">{TVA_PA_A4}</p>
+            <p class="st-utskriftsrad">{TVA_PA_A4} Bladet med alla är ett liggande A4 för väggens mitt, med korten runt omkring.</p>
           </>
         )}
       </header>

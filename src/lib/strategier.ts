@@ -7,7 +7,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { CollectionEntry } from 'astro:content';
 import { publicerade } from './innehall';
-import { strategikortetsData, strategikortetsInnehall, strategikortetsFil, STRATEGIKORTEN_ALLA, STRATEGIERNAS_FARG, STRATEGINS_OMRADEN, metodensStrategikort } from './standard/index.js';
+import { strategikortetsData, strategikortetsInnehall, strategikortetsFil, STRATEGIKORTEN_ALLA, STRATEGIBLADET, STRATEGIERNAS_FARG, STRATEGINS_OMRADEN, metodensStrategikort } from './standard/index.js';
 import manifest from '../data/strategikort.json';
 
 export type Strategi = CollectionEntry<'strategier'>;
@@ -82,3 +82,7 @@ export function allaKortensStorlek(): string {
   return kb >= 1000 ? `${(kb / 1024).toFixed(1).replace('.', ',')} MB` : `${kb} kB`;
 }
 export const allaKortensAntal = () => (MANIFESTET[STRATEGIKORTEN_ALLA.nyckel]?.kort ?? []).length;
+
+/** Bladet med alla strategier som visas, väggens mitt, ett liggande A4 (scripts/strategier/kort.mjs). */
+export const BLADETS_ADRESS = `/strategier/kort/${STRATEGIBLADET.fil}`;
+export const bladetFinns = () => Boolean(MANIFESTET[STRATEGIBLADET.nyckel]) && existsSync(publikt('strategier', 'kort', STRATEGIBLADET.fil));

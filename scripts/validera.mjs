@@ -118,6 +118,7 @@ steg('pdfdelar', 'node scripts/pdfdelar.mjs');
 steg('paritet', 'node scripts/paritet.mjs');
 steg('utskriftsformat', 'node scripts/utskriftsformat.mjs');
 steg('strukturprov', 'node scripts/strukturer/prov.mjs');
+steg('strategiprov', 'node scripts/strategier/prov.mjs');
 steg('metoderprov', 'node scripts/metoderprov.mjs');
 steg('metoderparitet', 'node scripts/metoderparitet.mjs');
 steg('planprov', 'node scripts/planprov.mjs');
