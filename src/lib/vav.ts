@@ -14,6 +14,7 @@ import register from '../data/sadd.json';
 import { CENTRALA, lasbarAdress, tolkaTextplats, type Central } from './centrala';
 import { passar, sammaRubrik, tolkaEfter, type FilmPlats } from './film';
 import { bildensAdress, slagensStil, strukturensAdress, strukturernaAv } from './strukturer';
+import { strategiernaAv, strategiensAdress, strategiernasStil } from './strategier';
 import { strukturnamnetI } from './standard/index.js';
 
 export const VAVFORMER = ['kort', 'ruta'] as const;
@@ -27,14 +28,16 @@ type Slag = (typeof VAVSLAG)[number];
 type Rad = { efter: string; form?: Form; delar?: string[]; om?: string; slag?: Slag };
 type Ja = { skal: string; vav?: Rad[] };
 /** En del av verktyget som ett litet kort: bilden och namnet leder till delens sida. */
-export type Del = { id: string; namn: string; andra: string[]; rad: string; adress: string; bild?: { src: string; bredd: number; hojd: number }; stil?: string };
+export type Del = { id: string; namn: string; andra: string[]; rad: string; adress: string; bild?: { src: string; bredd: number; hojd: number }; bilder?: (string | null)[]; nr?: number; stil?: string };
 /** Det som ritas på en plats: verktyget, metoden, formen, delarna, om metoden nämner någon av dem och om verktygets knapp
  *  redan står där. */
 export type Vav = { vav: Central; metod: string; form: Form; delar: Del[]; namngivna: boolean; om?: string; slag: Slag; knappenFinns: boolean };
 
-// Var delarna av ett verktyg står: namnet, raden under och sidan. Strukturerna läses ur src/content/strukturer/.
+// Var delarna av ett verktyg står: namnet, raden under och sidan. Strukturerna läses ur src/content/strukturer/, och
+// strategierna (K-702) ur src/content/strategier/, med berättelsens tre bilder och numret, som på /strategier.
 const DELAR: Record<string, (ids: string[], vem: string) => Del[]> = {
   strukturer: (ids, vem) => strukturernaAv(ids, vem).map((s) => ({ id: s.id, namn: s.namn, andra: s.andra, rad: s.syfte, adress: strukturensAdress(s.id), bild: { src: bildensAdress(s.id), bredd: 900, hojd: 560 }, stil: slagensStil(s.slag) })),
+  strategier: (ids, vem) => strategiernaAv(ids, vem).map((s) => ({ id: s.id, namn: s.namn, andra: [], rad: s.mening, adress: strategiensAdress(s.id), bilder: s.bilder, nr: s.nr, stil: strategiernasStil })),
 };
 
 const saker = (register as unknown as { saker: Record<string, { ja?: Record<string, string | Ja> }> }).saker;

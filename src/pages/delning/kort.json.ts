@@ -8,6 +8,6 @@ export async function GET() {
   // (src/pages/delning/strukturer/) och metodbanken
   // (src/pages/delning/metodbank/), och Ta fram ett matteproblem (src/pages/delning/tafram/), och Metoder och varje metod där
   // (src/pages/delning/metoder/ och undervisningsmetod/).
-  const kort = (await allaKort()).map(({ sida, namn, fil, skrivkort, kortbank, metodbank, tafram, metoder, undervisningsmetod, strukturer }) => ({ sida, namn, fil, mall: skrivkort ? `/delning/skrivkort/${namn}` : kortbank ? `/delning/${kortbank.slag}/${namn}` : metodbank ? `/delning/metodbank/${namn}` : tafram ? `/delning/tafram/${namn}` : metoder ? `/delning/metoder/${namn}` : undervisningsmetod ? `/delning/undervisningsmetod/${namn}` : strukturer ? `/delning/strukturer/${namn}` : `/delning/kort/${namn}` }));
+  const kort = (await allaKort()).map(({ sida, namn, fil, skrivkort, kortbank, metodbank, tafram, metoder, undervisningsmetod, strukturer, strategier }) => ({ sida, namn, fil, mall: skrivkort ? `/delning/skrivkort/${namn}` : kortbank ? `/delning/${kortbank.slag}/${namn}` : metodbank ? `/delning/metodbank/${namn}` : tafram ? `/delning/tafram/${namn}` : metoder ? `/delning/metoder/${namn}` : undervisningsmetod ? `/delning/undervisningsmetod/${namn}` : strukturer ? `/delning/strukturer/${namn}` : strategier ? `/delning/strategier/${namn}` : `/delning/kort/${namn}` }));
   return new Response(JSON.stringify(kort, null, 1) + '\n', { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 }

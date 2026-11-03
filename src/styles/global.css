@@ -4831,4 +4831,9 @@ button.pl-passroll { min-height: 2.75rem; }
 .sg-kallor { max-width: var(--matt-text); margin: 0.4rem 0 0; padding-left: 1.2rem; font-size: 0.9rem; color: var(--farg-text-svag); }
 .st-kort .sg-tre { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-bottom: 1px solid var(--farg-kant); background: #fff; }
 .st-kort .sg-tre img, .st-kort .sg-tre .sg-bild-tom { aspect-ratio: 1; width: 100%; border-radius: 0; border: 0; font-size: 0.7rem; }
-.st-kort .sg-nr { position: absolute; top: 0.4rem; left: 0.45rem; width: 1.6rem; height: 1.6rem; font-size: 0.9rem; }
+/* Numret uppe till höger, så att det inte täcker kapseln uppe till vänster i den första bilden. */
+.st-kort .sg-nr { position: absolute; top: 0.4rem; right: 0.45rem; width: 1.6rem; height: 1.6rem; font-size: 0.9rem; }
+/* I sådden står korten liggande (.vav-kort): berättelsens tre bilder som en smal remsa till vänster, så att namnet och
+   meningen får plats, och numret mindre i hörnet. */
+.vav-kort .st-kort .sg-tre { width: 8.4rem; flex: none; align-self: center; border-bottom: 0; border-right: 1px solid var(--farg-kant); }
+.vav-kort .st-kort .sg-nr { top: 0.2rem; left: 0.2rem; right: auto; width: 1.25rem; height: 1.25rem; font-size: 0.72rem; }

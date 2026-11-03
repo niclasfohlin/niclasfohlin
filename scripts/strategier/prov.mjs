@@ -75,7 +75,26 @@ if (visas.length) {
   }
 }
 
+// Sådden (K-702): varje plats i src/data/sadd.json står som en invävd ruta på metodens sida med sina strategier, som
+// strukturernas i scripts/strukturer/prov.mjs, och varje metod i Metoder i sajtens register har avsnittet med sina kort.
+const saddJa = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'sadd.json'), 'utf8')).saker.strategier?.ja ?? {};
+let platser = 0;
+for (const [metod, x] of Object.entries(saddJa)) {
+  if (typeof x !== 'object' || !x.vav) continue;
+  const fil = join(DIST, 'stodundervisning', metod, 'index.html');
+  if (!existsSync(fil)) { fel.push(`Sådden: ${metod} har ingen sida i dist`); continue; }
+  const rutor = [...readFileSync(fil, 'utf8').matchAll(/<aside class="vav[\s\S]*?<\/aside>/g)].map((m) => m[0]).filter((r) => r.includes('href="/strategier'));
+  if (rutor.length !== x.vav.length) { fel.push(`Sådden: ${metod} har ${rutor.length} rutor med strategier på sidan, och src/data/sadd.json ${x.vav.length} platser`); continue; }
+  const pasidan = rutor.map((r) => [...r.matchAll(/href="\/strategier\/([a-z0-9-]+)"/g)].map((m) => m[1]).join()).sort();
+  const iregistret = x.vav.map((r) => (r.delar ?? []).join()).sort();
+  if (pasidan.join(' | ') !== iregistret.join(' | ')) fel.push(`Sådden: ${metod} har strategierna ${pasidan.join(' | ')} på sidan och ska ha ${iregistret.join(' | ')}`);
+  platser += x.vav.length;
+}
+const iMetoder = Object.keys(JSON.parse(readFileSync(join(ROT, 'src', 'data', 'strategier-i-metoder.json'), 'utf8'))).filter((k) => !k.startsWith('_'));
+for (const metod of iMetoder) { const sida = html(join('metoder', metod)); if (sida && !sida.includes('id="strategierna"')) fel.push(`Sådden: ${metod} i Metoder saknar avsnittet Strategier för lärande`); }
+
 if (fel.length) { console.error(`Strategier, provet stannade:\n  ${fel.join('\n  ')}`); process.exit(1); }
+console.log(`Strategier, sådden: ${platser} platser i ${Object.keys(saddJa).length} metoder i Stödundervisning och avsnittet i ${iMetoder.length} metoder i Metoder.`);
 console.log(visas.length
   ? `Strategier: ${visas.length} strategier med sida och kort, filen med alla i numrens ordning (prövad åt andra hållet) och bladet på ett A4; ${utkast.length} utkast utanför sajten.`
   : `Strategier: ingen strategi visas än; ${utkast.length} utkast har varken sida eller kort på sajten.`);

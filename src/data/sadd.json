@@ -1033,6 +1033,883 @@
         }
       },
       "nej": {}
+    },
+    "strategier": {
+      "tranar": [
+        "aterkommande-pass",
+        "avkodning",
+        "bokstavskunskap",
+        "brak",
+        "fonologisk-medvetenhet",
+        "formativ-bedomning",
+        "huvudrakning",
+        "intensivtraning",
+        "konflikthantering",
+        "kooperativt-larande",
+        "lasflyt",
+        "lasforstaelse",
+        "lasframjande",
+        "lektionsupplagg",
+        "meningsbyggnad",
+        "ordforrad",
+        "positionssystemet",
+        "problemlosning",
+        "skrivflyt",
+        "skrivstrategier",
+        "socialt-samspel",
+        "stavning",
+        "taluppfattning",
+        "textsamtal",
+        "textstruktur"
+      ],
+      "karna": [
+        "\\bur minnet\\b",
+        "\\butan att titta\\b",
+        "\\bvisar\\b[^.]{0,60}\\bförst\\b",
+        "\\bmodellera",
+        "\\bjag gör\\b",
+        "\\brepeter",
+        "\\bkommer tillbaka\\b",
+        "\\bigen efter\\b",
+        "\\bblanda",
+        "\\bom vartannat\\b",
+        "\\brita",
+        "\\bbild(?:en|er|erna)?\\b"
+      ],
+      "provad": "2026-11-03",
+      "ja": {
+        "boksamtal-i-grupp": {
+          "skal": "Passet börjar med att var och en säger till den bredvid vad som hände förra gången, tabellen Eleverna tar över lämnar det minsta först och ett steg i taget, och tavlans personer står med streck mellan dem som hör ihop.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "plocka-fram"
+              ],
+              "slag": "form",
+              "om": "Berättandet i början av passet"
+            },
+            {
+              "efter": "tabell: Eleverna tar över: en bit i taget",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Det du lämnar över en bit i taget"
+            }
+          ]
+        },
+        "faktatextsamtal-i-grupp": {
+          "skal": "Modellerna visar hur en faktatext är byggd och gruppen återger texten ur dem, läraren tänker högt i vecka 1 och 2 och frågar sedan i stället, svaret skrivs med texten med baksidan upp, och i vecka 6 till 8 väljer gruppen själv bland modellerna.",
+          "vav": [
+            {
+              "efter": "tabell: De fem modellerna: en för varje sätt att bygga en text",
+              "delar": [
+                "ord-och-bild"
+              ],
+              "slag": "form",
+              "om": "Modellerna med lapparna"
+            },
+            {
+              "efter": "tabell: Så visar du i läspasset",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Du visar först, sedan frågar du"
+            },
+            {
+              "efter": "tabell: Modellpasset på 40 minuter",
+              "delar": [
+                "plocka-fram"
+              ],
+              "slag": "form",
+              "om": "Svaret ur modellen"
+            },
+            {
+              "efter": "tabell: Vecka 6–8: klassens texter",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Valet av modell i klassens texter"
+            }
+          ]
+        },
+        "textsamtal-i-grupp": {
+          "skal": "Veckans tre pass går från att läraren tänker högt till att eleverna tänker själva, och i frågorna på, mellan och bortom raderna avgör eleverna först vilket slags fråga det är.",
+          "vav": [
+            {
+              "efter": "tabell: Veckans tre pass: vem som tänker",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Från att du tänker högt till att eleverna tänker själva"
+            }
+          ]
+        },
+        "hoglasning-i-par": {
+          "skal": "Varje pass börjar med att paren berättar vad som hände förra gången, veckans strategi kommer tillbaka i de följande veckorna, och läraren visar först medan klassen från vecka 4 säger var tecknet ska stå och läsaren pekar ut stället själv.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "plocka-fram"
+              ],
+              "slag": "form",
+              "om": "Texten i början av passet"
+            },
+            {
+              "efter": "progression",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Du visar först, sedan väljer paren själva"
+            },
+            {
+              "efter": "progression",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Strategierna som följer med"
+            }
+          ]
+        },
+        "upprepad-lasning": {
+          "skal": "Sätten att läsa igen går från eko och kör till par och en ny lyssnare, och lästräningstexten läses först med stöd och sedan utan, så att stödet tas bort ett steg i taget.",
+          "vav": [
+            {
+              "efter": "tabell: Sätt att läsa igen",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Läsningen igen med stödet som tas bort"
+            }
+          ]
+        },
+        "laslistor-i-grupp": {
+          "skal": "Rörelsen med modellering, körläsning och parläsning går från mest till minst stöd, och det är rörelsen som är metoden.",
+          "vav": [
+            {
+              "efter": "tabell: Rörelsen: från mest till minst stöd",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Modelleringen, körläsningen och parläsningen"
+            }
+          ]
+        },
+        "til-i-grupp": {
+          "skal": "Ansvaret flyttas gradvis till eleven: läraren leder bildvandringen och modellerar i vecka 1 och 2, väntar längre i vecka 3 till 5 och visar i vecka 6 till 8 bara de svåra orden.",
+          "vav": [
+            {
+              "efter": "progression",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stödet i bildvandringen som minskar"
+            }
+          ]
+        },
+        "sag-skriv-och-las": {
+          "skal": "Bokstavskorten tar bort det tunga i att forma bokstäverna så att eleven kan hålla kvar meningen, och ordbilderna byggs utan att titta, vänds och kommer tillbaka som en av de förra i varje pass.",
+          "vav": [
+            {
+              "efter": "stycke 3",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Korten som bär det tunga"
+            },
+            {
+              "efter": "tabell: Ordbilderna",
+              "delar": [
+                "plocka-fram",
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Ordbilderna som kommer tillbaka"
+            }
+          ]
+        },
+        "ljudlek-i-grupp": {
+          "skal": "Ljudstarten är samma fem minuter varje pass och tar tillbaka bokstäver som gruppen har haft, orden i Dela upp har olika många ljud, och lektionens fyra steg lämnar över ansvaret från läraren till eleven.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Orden med olika många ljud"
+            },
+            {
+              "efter": "tabell: Lektionens fyra steg",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            }
+          ]
+        },
+        "ljudlek-bokstavsgympa": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, lektionen går från att du visar till att var och en läser ordet på golvet, och i Peka och säg har kartan en bild för varje bokstav.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Orden med olika många ljud"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            }
+          ]
+        },
+        "ljudlek-forsta-ljudet": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, lektionen går från att du visar till att var och en gör själv, och i Skriv första ljudet skriver eleven bokstaven och vänder kortet först efteråt.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Orden med olika många ljud"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "plocka-fram"
+              ],
+              "slag": "form",
+              "om": "Skriv första ljudet i steg 4"
+            }
+          ]
+        },
+        "ljudlek-fran-ljud-till-ord": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, och lektionen går från att du visar korten på tavlan till att var och en skriver ordet och det nya ordet själv.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Orden med olika många ljud"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            }
+          ]
+        },
+        "ljudlek-fran-ord-till-mening": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, och klossarna ligger kvar så att eleven kan peka och säga meningen igen medan hen bygger den, med en mening som växer ett ord i taget.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Orden med olika många ljud"
+            },
+            {
+              "efter": "tabell: Så blir lektionen svårare",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Meningen som eleven har att hålla kvar"
+            }
+          ]
+        },
+        "ljudlek-ord-och-stavelser": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, och lektionen går från att du lägger klossarna till att var och en delar tre ord själv.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Orden med olika många ljud"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            }
+          ]
+        },
+        "ljudlek-rakna-ljud": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, och lektionen går från att du flyttar markören till att var och en räknar ljuden i sina egna ord och vänder kortet.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Orden med olika många ljud"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            }
+          ]
+        },
+        "ljudlek-rim": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, ordparen i steg 2 sägs i blandad ordning där hälften rimmar, och lektionen går från att du delar ordet till att var och en gör det själv.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ordparen",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Rimmande och inte rimmande par"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            }
+          ]
+        },
+        "ljudlek-skriv-ord-tillsammans": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, raden Blandat byter bokstav på olika platser i ordet med frågan om var orden skiljer sig först, och lektionen går från att du bygger kedjan till att var och en skriver det hen hör.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Så blir lektionen svårare",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Bytena på olika platser i ordet"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            }
+          ]
+        },
+        "ljudlek-smaka-pa-ljud": {
+          "skal": "Samma ljudstart som i Ljudlek i grupp, lektionen går från att du visar till att var och en gör själv, och i Skriv i rutan skriver alla bokstaven med handen över den innan de visar samtidigt.",
+          "vav": [
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Bokstäverna från tidigare pass"
+            },
+            {
+              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
+              "delar": [
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Orden med olika många ljud"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stegen från att du visar till eleven själv"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "plocka-fram"
+              ],
+              "slag": "form",
+              "om": "Skriv i rutan i steg 2"
+            }
+          ]
+        },
+        "kortskrivning-skriv-varje-dag": {
+          "skal": "Läraren skriver först och tänker högt i första passet, och i vecka 6 och 12 skriver eleven nytt om en text från början av kursen.",
+          "vav": [
+            {
+              "efter": "tabell: Första passet, omkring 25 minuter",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Läraren skriver först"
+            }
+          ]
+        },
+        "ordverkstad-i-grupp": {
+          "skal": "Diktamen görs med dolda ord, stödet flyttas från läraren till eleverna vecka för vecka, förra veckans delar kommer tillbaka i varje Ordstart och förlagans bilder visas före läsningen.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "forslag",
+              "om": "Veckans och förra veckans delar i Ordstarten"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "plocka-fram"
+              ],
+              "slag": "form",
+              "om": "Diktamen med dolda ord"
+            },
+            {
+              "efter": "progression",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stödet som flyttas vecka för vecka"
+            }
+          ]
+        },
+        "skrivkurs-berattelseram": {
+          "skal": "I varje del skriver läraren sin egen text på blädderblocket och tänker högt innan eleverna berättar och skriver sin del.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Skrivfokus: läraren skriver och tänker högt"
+            }
+          ]
+        },
+        "skrivkurs-sagoboken": {
+          "skal": "Läraren skriver nästa station i sin egen saga och tänker högt i Skrivdraget, och paret ritar eller skriver vid varje station och färgar lågorna på Spänningsberget.",
+          "vav": [
+            {
+              "efter": "tabell: Skrivdragen",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Skrivdraget: läraren skriver och tänker högt"
+            },
+            {
+              "efter": "tabell: Planeringspasset",
+              "delar": [
+                "ord-och-bild"
+              ],
+              "slag": "form",
+              "om": "Vägen och berget i planeringspasset"
+            }
+          ]
+        },
+        "skrivkurs-vardeskapande": {
+          "skal": "I Läraren skriver skriver läraren sin text med draget och tänker högt, och de gamla dragen på Mina drag kommer tillbaka när nästa vecka tar ett nytt drag.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Läraren skriver på tavlan"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "forslag",
+              "om": "De gamla dragen"
+            }
+          ]
+        },
+        "texttyp-argumenterande-text": {
+          "skal": "De sex veckorna går från att läraren visar till att eleven skriver själv, och eleven skriver Uppgift 1 på nytt fyra till sex veckor efter kursen.",
+          "vav": [
+            {
+              "efter": "tabell: De sex veckorna",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Från att du visar till att eleven skriver själv"
+            },
+            {
+              "efter": "tabell: Efter kursen: Uppgift 1",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Uppgiften fyra till sex veckor efter kursen"
+            }
+          ]
+        },
+        "texttyp-berattande-text": {
+          "skal": "De sex veckorna går från att läraren visar till att eleven skriver själv, och eleven skriver Uppgift 1 på nytt fyra till sex veckor efter kursen.",
+          "vav": [
+            {
+              "efter": "tabell: De sex veckorna",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Från att du visar till att eleven skriver själv"
+            },
+            {
+              "efter": "tabell: Efter kursen: Uppgift 1",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Uppgiften fyra till sex veckor efter kursen"
+            }
+          ]
+        },
+        "texttyp-beskrivande-text": {
+          "skal": "De sex veckorna går från att läraren visar till att eleven skriver själv, läsaren ritar det hen hör i delen Säg, och eleven skriver Uppgift 1 på nytt fyra till sex veckor efter kursen.",
+          "vav": [
+            {
+              "efter": "tabell: De sex veckorna",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Från att du visar till att eleven skriver själv"
+            },
+            {
+              "efter": "tabell: Efter kursen: Uppgift 1",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Uppgiften fyra till sex veckor efter kursen"
+            }
+          ]
+        },
+        "texttyp-instruerande-text": {
+          "skal": "De sex veckorna går från att läraren visar till att eleven skriver själv, och eleven skriver Uppgift 1 på nytt fyra till sex veckor efter kursen.",
+          "vav": [
+            {
+              "efter": "tabell: De sex veckorna",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Från att du visar till att eleven skriver själv"
+            },
+            {
+              "efter": "tabell: Efter kursen: Uppgift 1",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Uppgiften fyra till sex veckor efter kursen"
+            }
+          ]
+        },
+        "texttyper-i-grupp": {
+          "skal": "Kursen går från att läraren visar till att eleven skriver själv, med stödet som tas bort vecka för vecka, och gruppen samlas igen fyra till sex veckor efter kursen med en ny text.",
+          "vav": [
+            {
+              "efter": "progression",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stödet som tas bort vecka för vecka"
+            },
+            {
+              "efter": "uppfoljning",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Passet fyra till sex veckor efter kursen"
+            }
+          ]
+        },
+        "antalsuppfattning-i-grupp": {
+          "skal": "Läraren bygger talet först och säger allt hen gör innan eleverna bygger, och läxan kommer tillbaka i början av veckans första pass.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Läraren bygger först"
+            },
+            {
+              "efter": "hem",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "forslag",
+              "om": "Läxan och förra veckans läxa"
+            }
+          ]
+        },
+        "brakkurs-i-grupp": {
+          "skal": "Läraren visar bråket först och säger allt hen gör, eleverna visar bråket som material, bild, tallinje och siffror, och pass 3 repeterar veckan.",
+          "vav": [
+            {
+              "efter": "passrutin",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Läraren visar först"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "ord-och-bild"
+              ],
+              "slag": "form",
+              "om": "Fyra sätt: bråket som bild"
+            },
+            {
+              "efter": "tabell: Pass 3, när det går: spel och problem",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "forslag",
+              "om": "Pass 3, repetitionen av veckan"
+            }
+          ]
+        },
+        "fyra-raknesatten": {
+          "skal": "Läraren tonar ut stödet vecka för vecka, uppvärmningen tar fram förra lärdomen och talfakta, vecka 4 och 8 repeterar uppgifter ur tidigare blad blandade med nya, och materialet, bilden och skriften visas tillsammans.",
+          "vav": [
+            {
+              "efter": "progression",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Stödet som tonas ut vecka för vecka"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "plocka-fram"
+              ],
+              "slag": "form",
+              "om": "Uppvärmningen: förra lärdomen och talfakta"
+            },
+            {
+              "efter": "tabell: Talen och bladen i veckorna",
+              "delar": [
+                "sprid-ut",
+                "blanda-uppgifter"
+              ],
+              "slag": "form",
+              "om": "Repetitionen i vecka 4 och 8"
+            },
+            {
+              "efter": "tabell: Så visar du de fyra räknesätten",
+              "delar": [
+                "ord-och-bild"
+              ],
+              "slag": "form",
+              "om": "Material, bild och skrift tillsammans"
+            }
+          ]
+        },
+        "problemlosning-i-grupp": {
+          "skal": "Ansvaret flyttas i fyra led från Jag gör till Du gör själv, och i Planera väljer paren sätt att visa problemet som bild, tabell, tallinje eller material.",
+          "vav": [
+            {
+              "efter": "progression",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Ansvaret som flyttas i fyra led"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "ord-och-bild"
+              ],
+              "slag": "form",
+              "om": "Planera: sätt att visa problemet"
+            }
+          ]
+        },
+        "kompissamtal": {
+          "skal": "Läraren modellerar startorden och gör rundans mening färdig själv först, och gruppen säger de fyra samtalsreglerna i början av varje samtal.",
+          "vav": [
+            {
+              "efter": "tabell: Så kan eleverna säga: startorden",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Startorden: läraren säger dem först"
+            }
+          ]
+        },
+        "seriesamtal": {
+          "skal": "Samtalet är ritprat, där det som ritas står kvar medan eleven berättar, rutorna tas fram en i taget, ansvaret lämnas över till eleverna och gruppen ses igen fyra veckor efter det sista passet.",
+          "vav": [
+            {
+              "efter": "stycke 3",
+              "delar": [
+                "ord-och-bild"
+              ],
+              "slag": "form",
+              "om": "Ritprat i rutor"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Rutorna en i taget i Spola tillbaka"
+            },
+            {
+              "efter": "progression",
+              "delar": [
+                "avlasta-minnet"
+              ],
+              "slag": "form",
+              "om": "Ansvaret som lämnas över"
+            },
+            {
+              "efter": "tabell: Påfyllningspasset",
+              "delar": [
+                "sprid-ut"
+              ],
+              "slag": "form",
+              "om": "Passet fyra veckor efter det sista"
+            }
+          ]
+        }
+      },
+      "nej": {
+        "gruppstarkande-aktiviteter": "Modelleringen i aktiviteterna gäller ett socialt beteende och inget innehåll som eleverna ska lära sig och ta fram igen, så ingen av strategierna för lärande stöder metodens kärna (sökningen 2026-11-03, underlag/prov/strategier/sadd-svar-b.md)."
+      }
     }
   }
 }

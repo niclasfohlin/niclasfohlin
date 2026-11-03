@@ -15,6 +15,7 @@
 // av bladet i metoden som har fältet google med samma adress (Pabordet.astro), med bladets egen knapp och utan de blå
 // knapparna, så att det inte blir två knappar för samma sak.
 import data from '../data/centrala.json';
+import sadd from '../data/sadd.json';
 import { sammaRubrik } from './film';
 import { fastaAntal, KNAPPENS_KLASS } from './standard/index.js';
 import { spannITexten } from './tackning';
@@ -159,7 +160,11 @@ export function provaCentrala(metoder: { id: string; data: MetodForText }[]): vo
       if (!m) return [`src/data/centrala.json: ${c.id} hör till ${c.metod}, som inte finns bland de publicerade metoderna.`];
       if (!m.data.centrala?.some((x) => x.id === c.id)) return [`${c.metod} visar inte sin centrala sak ${c.id}: lägg den i fältet centrala med sin plats i texten.`];
     }
-    if (!metoder.some((m) => m.data.centrala?.some((x) => x.id === c.id))) return [`src/data/centrala.json: ingen publicerad metod visar ${c.id}.`];
+    // En metod visar saken med fältet centrala, eller med sådden, när sajten väver in sakens delar på platser i metoden
+    // (src/data/sadd.json, src/lib/vav.ts), som verktyget Strategier (K-702).
+    const vavda = (sadd as unknown as { saker: Record<string, { ja?: Record<string, { vav?: unknown[] } | string> }> }).saker[c.id]?.ja ?? {};
+    const vavar = (m: string) => { const j = vavda[m]; return typeof j === 'object' && (j.vav?.length ?? 0) > 0; };
+    if (!metoder.some((m) => m.data.centrala?.some((x) => x.id === c.id) || vavar(m.id))) return [`src/data/centrala.json: ingen publicerad metod visar ${c.id}.`];
     return [];
   });
   if (fel.length) throw new Error(`De centrala sakerna:\n${fel.join('\n')}`);

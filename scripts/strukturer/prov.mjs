@@ -110,7 +110,8 @@ for (const [metod, x] of Object.entries(saddJa)) {
   if (typeof x !== 'object' || !x.vav) continue;
   const fil = join(DIST, 'stodundervisning', metod, 'index.html');
   if (!existsSync(fil)) { fel.push(`Sådden: ${metod} har ingen sida i dist`); continue; }
-  const rutor = [...readFileSync(fil, 'utf8').matchAll(/<aside class="vav[\s\S]*?<\/aside>/g)].map((m) => m[0]);
+  // Bara strukturernas rutor: de leder till /strukturer, och andra verktygs rutor, som strategiernas, till sina sidor.
+  const rutor = [...readFileSync(fil, 'utf8').matchAll(/<aside class="vav[\s\S]*?<\/aside>/g)].map((m) => m[0]).filter((r) => r.includes('href="/strukturer'));
   if (rutor.length !== x.vav.length) fel.push(`Sådden: ${metod} har ${rutor.length} invävda rutor på sidan, och src/data/sadd.json ${x.vav.length} platser`);
   // Rutorna står i sidans ordning och platserna i registrets, så korten jämförs utan ordningen mellan platserna.
   const pasidan = rutor.map((r) => [...r.matchAll(/href="\/strukturer\/([a-z0-9-]+)"/g)].map((m) => m[1]).join()).sort();

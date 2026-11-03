@@ -28,6 +28,7 @@ import { bankAv } from './bank';
 import { taFramKortposter, taFramSlag } from './tafram';
 import { bokhandledningen } from './handledning';
 import { strukturerna, STRUKTURERNAS_ADRESS } from './strukturer';
+import { strategierna, STRATEGIERNAS_ADRESS, STRATEGIERNAS_NAMN } from './strategier';
 import { slugAv, STRUKTURENS_SLAG } from './standard/index.js';
 import { SAMLINGAR, SAMLINGARNA, postensAdress, type SamlingNyckel } from './samlingar';
 import type { CollectionEntry } from 'astro:content';
@@ -67,6 +68,10 @@ export const UNDERVISNINGSMETODSMALL = 'src/pages/delning/undervisningsmetod/[na
 // spännande"). Strukturerna byts när Niclas vill; finns en inte längre stannar bygget.
 export const STRUKTURERNASMALL = 'src/pages/delning/strukturer/[namn].astro';
 export const STRUKTURERNAS_KORT = ['turas-om', 'visa', 'beratta-mera'];
+// Verktyget Strategier (K-699) har samma form med tre strategier, var och en med den sista av berättelsens bilder, numret,
+// namnet och meningen, i strategiernas färg. Strategierna byts när Niclas vill; finns en inte längre stannar bygget.
+export const STRATEGIERNASMALL = 'src/pages/delning/strategier/[namn].astro';
+export const STRATEGIERNAS_KORT = ['plocka-fram', 'sprid-ut', 'ord-och-bild'];
 // Varje verktyg i registret (src/data/centrala.json, del verktyg) har ett kort i en egen mall och aldrig standardkortet
 // med porträttet (Niclas samma dag: "Alla verktyg ska alltid ha ett mer spännande delningskort än standard").
 // Standardkortets slag står här, och bygget stannar på ett verktyg med ett av dem (DRIFT.md under Delning och bilder).
@@ -92,7 +97,7 @@ const VERSION = 1;
 export interface Kort {
   sida: string; // sidans adress, t.ex. /stodundervisning/brakkurs-i-grupp
   namn: string; // filnamnets början, t.ex. stodundervisning-brakkurs-i-grupp
-  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'handledning' | 'skrivkort' | 'aktiviteter' | 'brainbreaks' | 'tafram' | 'metoder' | 'undervisningsmetod' | 'strukturer';
+  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'handledning' | 'skrivkort' | 'aktiviteter' | 'brainbreaks' | 'tafram' | 'metoder' | 'undervisningsmetod' | 'strukturer' | 'strategier';
   etikett: string; // raden över titeln, tom på huvudsidorna
   titel: string;
   undertitel: string;
@@ -107,6 +112,8 @@ export interface Kort {
   metodbank?: { skala: string[]; rader: { omrade: string; titel: string; spann: Spann }[]; metoder: { id: string; titel: string; omrade: string; fakta: { rubrik: string; text: string }[]; ingress: string }[] };
   /** Verktyget Strukturer: strukturerna i solfjädern, med det som syns av dem och scenen som bilden ritas ur. */
   strukturer?: { id: string; namn: string; syfte: string; slag: string; slagNamn: string; scen: string }[];
+  /** Verktyget Strategier: strategierna i solfjädern, med numret, namnet, meningen och bildens fil i public/strategier/bilder/. */
+  strategier?: { id: string; nr: number; namn: string; mening: string; bild: string }[];
   /** Ta fram ur en bank: metoden och posterna som står på kortet (src/lib/tafram.ts). */
   tafram?: { metod: string; poster: string[] };
   /** Metoder: metodkorten i trappan, med det som syns av dem (titeln, faktan och Lärande totalt). */
@@ -247,6 +254,17 @@ export function allaKort(): Promise<Kort[]> {
       });
       lagg({ sida: STRUKTURERNAS_ADRESS, typ: 'strukturer', etikett: 'Kooperativt lärande', titel: 'Strukturer', undertitel: `${allaStrukturer.length} kort för samarbete i par, i grupp och i hela klassen, att skriva ut`, bild: portratt, farg: '--farg-accent', strukturer: valda });
     }
+    // Verktyget Strategier (K-699) har samma form med tre strategier (STRATEGIERNASMALL).
+    const allaStrategier = await strategierna();
+    if (allaStrategier.length) {
+      const valda = STRATEGIERNAS_KORT.map((id) => {
+        const s = allaStrategier.find((x) => x.id === id);
+        if (!s) throw new Error(`Strategiernas delningskort: strategin ${id} finns inte. Byt den i STRATEGIERNAS_KORT i src/lib/delningskort.ts.`);
+        const f = s.data.framsida as { mening: string; bild: { steg: { fil?: string }[] } };
+        return { id: s.id, nr: s.data.nr, namn: s.data.namn, mening: f.mening, bild: f.bild.steg.at(-1)?.fil ?? '' };
+      });
+      lagg({ sida: STRATEGIERNAS_ADRESS, typ: 'strategier', etikett: 'Kognitionsvetenskapliga strategier', titel: STRATEGIERNAS_NAMN, undertitel: `${allaStrategier.length} kort med strategier för lärande, att skriva ut`, bild: portratt, farg: '--farg-accent', strategier: valda });
+    }
     // Ett kort per post i varje samling i roten (POSTENS_KORT).
     const poster: { [K in SamlingNyckel]: Post<K>[] } = { stodundervisning: metoder, undervisningsmetoder, artiklar: await publicerade('artiklar'), bocker: await publicerade('bocker') };
     for (const s of SAMLINGARNA) for (const p of poster[s] as Post<SamlingNyckel>[]) lagg({ sida: postensAdress(s, p.id), ...(POSTENS_KORT[s] as (x: Post<SamlingNyckel>) => Postkort)(p) });
@@ -347,6 +365,8 @@ export function allaKort(): Promise<Kort[]> {
     // Strukturernas kort ritas med bilderna ur bildmotorn (scripts/strukturer/), ur varje strukturs scen.
     const lf = (f: string) => las(f).toString('utf8').replace(/\r\n/g, '\n');
     const motorn = ['rita.mjs', 'stil.json', 'figurer/penna.mjs', 'figurer/figur.mjs', 'figurer/saker.mjs'].map((f) => lf(join('scripts', 'strukturer', f)));
+    // Strategiernas kort ritas med riggens bilder ur public/strategier/bilder/.
+    const strategiernasSumma = (s: NonNullable<Kort['strategier']>) => [lf(STRATEGIERNASMALL), ...s.map((x) => lf(join('public', 'strategier', 'bilder', x.bild)))].join('|');
     const strukturernasSumma = (s: NonNullable<Kort['strukturer']>) => [lf(STRUKTURERNASMALL), ...motorn, ...s.map((x) => lf(join('scripts', 'strukturer', 'scener', `${x.scen}.yaml`)))].join('|');
     const metodbankSumma = () => {
       const mall = las(METODBANKSMALL).toString('utf8').replace(/\r\n/g, '\n');
@@ -364,7 +384,7 @@ export function allaKort(): Promise<Kort[]> {
     };
     return utan.map((k) => {
       const h = createHash('sha256');
-      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : []), ...(k.metodbank ? [metodbankSumma()] : []), ...(k.tafram ? [taframSumma(k.tafram)] : []), ...(k.metoder ? [metodkortetsSumma(METODERMALL, k.farg)] : []), ...(k.undervisningsmetod ? [metodkortetsSumma(UNDERVISNINGSMETODSMALL, k.farg)] : []), ...(k.strukturer ? [strukturernasSumma(k.strukturer)] : [])]) h.update(del);
+      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : []), ...(k.metodbank ? [metodbankSumma()] : []), ...(k.tafram ? [taframSumma(k.tafram)] : []), ...(k.metoder ? [metodkortetsSumma(METODERMALL, k.farg)] : []), ...(k.undervisningsmetod ? [metodkortetsSumma(UNDERVISNINGSMETODSMALL, k.farg)] : []), ...(k.strukturer ? [strukturernasSumma(k.strukturer)] : []), ...(k.strategier ? [strategiernasSumma(k.strategier)] : [])]) h.update(del);
       return { ...k, fil: `/delning/${k.namn}-${h.digest('hex').slice(0, 10)}.${PNG.includes(k.typ) ? 'png' : 'jpg'}` };
     });
   })();

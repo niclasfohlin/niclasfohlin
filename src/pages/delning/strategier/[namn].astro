@@ -1,0 +1,91 @@
+---
+// Mallen för delningskortet till verktyget Strategier (K-699), 1200 × 630, i samma form som Strukturers
+// (src/pages/delning/strukturer/[namn].astro; Niclas 2026-11-02: "Alla verktyg ska alltid ha ett mer spännande
+// delningskort än standard"): titeln till vänster, och till höger tre strategier i en solfjäder, var och en med den sista
+// av berättelsens bilder, numret, namnet och meningen i strategiernas färg. Strategierna står i src/lib/delningskort.ts
+// (STRATEGIERNAS_KORT). Sidan finns bara för att scripts/delningskort.mjs ska fotografera den; den länkas inte och
+// indexeras inte.
+import '../../../styles/global.css';
+import { site } from '../../../data/site';
+import { allaKort, type Kort } from '../../../lib/delningskort';
+import { bildensAdress, strategiernasStil } from '../../../lib/strategier';
+
+export async function getStaticPaths() {
+  return (await allaKort()).filter((kort) => kort.strategier).map((kort) => ({ params: { namn: kort.namn }, props: { kort } }));
+}
+
+const { kort } = Astro.props as { kort: Kort };
+const n = kort.titel.length;
+const storlek = n <= 18 ? 76 : n <= 36 ? 62 : 52;
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{kort.titel}</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: #fff; }
+      .dk { display: flex; width: 1200px; height: 630px; overflow: hidden; background: var(--farg-yta); color: var(--farg-text); font-family: var(--typsnitt-rubrik); }
+      .dk-streck { flex: none; width: 18px; background: var(--slag); }
+      .dk-text { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 56px 40px 56px 64px; }
+      .dk-etikett { margin: 0 0 26px; max-width: none; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--slag); }
+      .dk-titel { margin: 0; max-width: none; font-size: var(--dk-storlek); line-height: 1.06; font-weight: 800; letter-spacing: -0.015em; color: var(--farg-text); text-wrap: balance; }
+      .dk-under { margin: 22px 0 0; max-width: none; font-size: 32px; line-height: 1.3; font-weight: 500; color: var(--farg-text-svag); text-wrap: pretty; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .dk-innehall { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 16px; }
+      .dk-fot { flex: none; display: flex; align-items: center; gap: 18px; }
+      .dk-fot img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--farg-kant); }
+      .dk-namn { font-size: 27px; line-height: 1.2; font-weight: 700; }
+      .dk-adress { font-size: 23px; line-height: 1.3; color: var(--farg-text-svag); }
+      .dk-korten { position: relative; flex: none; width: 640px; overflow: hidden; background: linear-gradient(180deg, #ece8f8, #f6f4fc); }
+      /* En strategi som på /strategier: bilden överst, numret i en cirkel, namnet och meningen under. */
+      .dk-sg { position: absolute; top: 150px; width: 250px; box-sizing: border-box; border: 2.5px solid color-mix(in srgb, var(--slag) 45%, white); border-radius: 14px; background: #fff; overflow: hidden; box-shadow: 0 14px 34px rgba(60, 49, 114, 0.24); font-family: var(--typsnitt-ui); }
+      .dk-sg:nth-child(1) { left: 14px; transform: rotate(-6deg); }
+      .dk-sg:nth-child(2) { left: 195px; top: 30px; z-index: 2; }
+      .dk-sg:nth-child(3) { left: 376px; transform: rotate(6deg); }
+      .dk-sg img { display: block; width: 100%; height: auto; aspect-ratio: 1; background: #fff; }
+      /* Numret till höger, så att det inte täcker kapseln uppe till vänster i bilden. */
+      .dk-sg-nr { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--slag); color: #fff; font-size: 22px; font-weight: 800; }
+      .dk-sg-text { display: block; padding: 12px 16px 16px; border-top: 1.5px solid color-mix(in srgb, var(--slag) 30%, white); background: color-mix(in srgb, var(--slag-ljus) 60%, white); }
+      .dk-sg-namn { display: block; font-size: 24px; line-height: 1.15; font-weight: 800; color: var(--farg-text); }
+      .dk-sg-rad { display: -webkit-box; margin-top: 6px; font-size: 15px; line-height: 1.35; color: var(--farg-text-svag); -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    </style>
+  </head>
+  <body>
+    <div class="dk" style={`${strategiernasStil}; --dk-storlek: ${storlek}px`}>
+      <div class="dk-streck"></div>
+      <div class="dk-text">
+        <div class="dk-innehall">
+          {kort.etikett && <p class="dk-etikett">{kort.etikett}</p>}
+          <h1 class="dk-titel">{kort.titel}</h1>
+          {kort.undertitel && <p class="dk-under">{kort.undertitel}</p>}
+        </div>
+        <div class="dk-fot">
+          <img src={site.portratt} alt="" />
+          <div>
+            <div class="dk-namn">{site.namn}</div>
+            <div class="dk-adress">niclasfohlin.se</div>
+          </div>
+        </div>
+      </div>
+      <div class="dk-korten">
+        {kort.strategier!.map((s) => (
+          <div class="dk-sg">
+            <img src={bildensAdress(s.bild)} alt="" width="500" height="500" />
+            <span class="dk-sg-nr">{s.nr}</span>
+            <span class="dk-sg-text">
+              <span class="dk-sg-namn">{s.namn}</span>
+              <span class="dk-sg-rad">{s.mening}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <script>
+      // scripts/delningskort.mjs väntar på dkKlar, så att typsnitten och bilderna är inne innan kortet fotograferas.
+      (window as Window & { dkKlar?: Promise<unknown> }).dkKlar = document.fonts.ready
+        .then(() => Promise.all([...document.images].map((i) => (i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))));
+    </script>
+  </body>
+</html>

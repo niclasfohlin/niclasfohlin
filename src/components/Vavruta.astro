@@ -21,7 +21,9 @@ const etikett = vavensEtikett(v);
         <li>
           <a class="st-kort" href={x.adress} style={x.stil}>
             {x.bild && <img src={x.bild.src} alt="" width={x.bild.bredd} height={x.bild.hojd} loading="lazy" decoding="async" />}
+            {x.bilder && <span class="sg-tre" aria-hidden="true">{x.bilder.map((b) => (b ? <img src={b} alt="" width="500" height="500" loading="lazy" decoding="async" /> : <span class="sg-bild-tom">Bild</span>))}</span>}
             <span class="st-kort-text"><span class="st-kort-namn">{x.namn}</span><span class="st-kort-rad">{x.rad}</span></span>
+            {x.nr !== undefined && <span class="sg-nr" aria-label={`Strategi ${x.nr}`}>{x.nr}</span>}
           </a>
         </li>
       ))}

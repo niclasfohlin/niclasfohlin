@@ -121,5 +121,24 @@
       "text": "En struktur är ett fast sätt att samarbeta i par och grupp. När eleverna känner igen strukturen vet de vad de ska göra och kan lägga kraften på det de ska lära sig. Varje struktur har en sida med stegen, ett kort att skriva ut och förslag på hur den används.",
       "rad": "Fler strukturer för samarbete i par och grupp finns på sidan Strukturer."
     }
+  },
+  {
+    "id": "strategier",
+    "namn": "Strategier",
+    "slag": "sida",
+    "del": "verktyg",
+    "adress": "/strategier",
+    "arskurs": "F–9",
+    "omraden": "alla",
+    "mejl": "kort med kognitionsvetenskapliga strategier för lärande, med stegen och förslag på användning, att skriva ut två och två på A4",
+    "vav": {
+      "etikett": "Strategier för lärande i metoden",
+      "liknar": "En kognitionsvetenskaplig strategi",
+      "liknarFler": "Kognitionsvetenskapliga strategier",
+      "passar": "En strategi för lärande som passar",
+      "passarFler": "Strategier för lärande som passar",
+      "text": "En kognitionsvetenskaplig strategi är ett sätt att undervisa som hjälper eleverna att förstå och minnas det de lär sig. Varje strategi har en sida med stegen, ett kort att skriva ut och förslag på hur den används.",
+      "rad": "Fler kognitionsvetenskapliga strategier för lärande finns på sidan Strategier."
+    }
   }
 ]
