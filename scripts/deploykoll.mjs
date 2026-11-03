@@ -56,8 +56,10 @@ while (Date.now() - start < 15 * 60 * 1000) {
         const pagar = () => omejlat().length > 0 || (hit() && ['skapar', 'skapad'].includes(lager.senast.status));
         for (let i = 0; i < 6 && pagar(); i++) { await vanta(10000); lager = lasLager(); }
         const s = lager.senast ?? {};
-        const vad = `${s.kampanj ? `kampanj ${s.kampanj}` : 'ingen kampanj'}${s.poster?.length ? `, ${s.poster.join(', ')}` : ''}${s.fel ? `, fel: ${s.fel}` : ''}`;
+        const vad = `${s.kampanjer?.length > 1 ? `kampanjerna ${s.kampanjer.join(' och ')}` : s.kampanj ? `kampanj ${s.kampanj}` : 'ingen kampanj'}${s.poster?.length ? `, ${s.poster.join(', ')}` : ''}${s.fel ? `, fel: ${s.fel}` : ''}`;
         if (omejlat().length) console.log(`utskick: OBS, nytt innehåll är inte mejlat efter en minut: ${omejlat().join(', ')}. Läs deployens sammanfattning i Netlify (DRIFT.md under Brevo).`);
+        // Nattetid schemaläggs utskicket till 07.00 (sandtid i netlify/lib/utskick.mjs); kontrollera då i Brevo att kampanjen står som schemalagd.
+        else if (hit() && s.status === 'schemalagd') console.log(`utskick: den här deployen schemalade utskicket till ${s.schemalagd}: ${vad}. Kontrollera i Brevo att kampanjen står som schemalagd: node scripts/brevo.mjs kampanjer`);
         else if (hit()) console.log(`utskick: den här deployen mejlade prenumeranterna (${s.status ?? 'okänt läge'}): ${vad}`);
         else console.log(`utskick: inget nytt mejl vid den här deployen, allt publicerat var redan mejlat. Det senaste utskicket gick ${String(s.datum ?? 'okänt datum').slice(0, 10)}: ${vad}`);
       } catch { console.log('utskick: kunde inte läsa lagret (netlify blobs:get utskick skickat).'); }

@@ -12,6 +12,30 @@ const SVAR_TILL = 'niclas.fohlin@gmail.com';
 
 const html = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
+// Sändtiden (Niclas 2026-11-03: "Jag vill att Brevo kampanjer aldrig skickas mellan 21-07. Från 0700 på morgonen och senast
+// till 21. Om något laddas upp nattetid läggs Brevo till skicka ut 0700."): utanför 07.00–21.00 svensk tid ger sandtid
+// nästa 07.00 med tidszonen, som Brevos scheduledAt tar emot (2017-06-01T12:30:00+02:00 i Brevos dokumentation), och inom
+// tiden null, så skickas kampanjen direkt. Används också av scripts/brevo.mjs.
+const svenskt = (d) => Object.fromEntries(new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23', timeZoneName: 'longOffset' }).formatToParts(d).map((x) => [x.type, x.value]));
+export const inomSandtiden = (tid) => { const timme = Number(svenskt(tid).hour); return timme >= 7 && timme < 21; };
+export function sandtid(nu = new Date()) {
+  if (inomSandtiden(nu)) return null;
+  const timme = Number(svenskt(nu).hour);
+  // Dagen och tidszonen för den 07.00 som kommer: i morgon efter 21, annars i dag. Tidszonen läses kring 07.00 den dagen,
+  // så att en natt när sommartiden börjar eller slutar ger rätt tid.
+  const kring = new Date(nu.getTime() + (timme >= 21 ? 31 - timme : 8 - timme) * 3600e3);
+  const d = svenskt(kring);
+  const zon = d.timeZoneName.replace('GMT', '') || '+00:00';
+  // En tid som har passerat när Brevo tar emot kampanjen ger ett fel, så minuterna före 07.00 ger 07.10 (andra ögat på
+  // Strategier 2026-11-03).
+  const sju = `${d.year}-${d.month}-${d.day}T07:00:00${zon}`;
+  return new Date(sju).getTime() - nu.getTime() < 5 * 60e3 ? sju.replace('T07:00', 'T07:10') : sju;
+}
+
+// Nya verktyg får ett eget utskick, skilt från nya texter och metoder (Niclas 2026-11-03: "Ett Brevo för metoden och ett
+// Brevo för två verktygen").
+export const utskicken = (nya) => [nya.filter((p) => p.typ !== 'verktyg'), nya.filter((p) => p.typ === 'verktyg')].filter((g) => g.length);
+
 // En serie (Ljudlek i grupp) är en generell metod med lektioner som egna poster. Är den generella metoden ny står
 // lektionerna under den, som en rad med länkar, och räknas inte som egna inlägg; en lektion som kommer senare står för
 // sig som en nyhet i serien (etiketten Ny lektion i … kommer från nytt.json).
@@ -33,7 +57,7 @@ export function brev(nya, sajt) {
     <p style="margin:0 0 12px;">${html(p.ingress)}</p>${(p.lankar ?? []).map((l) => `
     <p style="margin:0 0 12px;">${lank(l, l.text)}${l.efter ? `: ${html(l.efter)}` : ''}.</p>`).join('')}${p.lektioner?.length ? `
     <p style="margin:0 0 12px;">${p.lektioner.length === 1 ? `Med ${p.lektioner[0].ord?.den ?? 'lektionen'}` : `Med ${p.lektioner.length} ${p.lektioner[0].ord?.flera ?? 'lektioner'}`}: ${p.lektioner.map((l) => lank(l, l.namn ?? l.titel)).join(', ')}.</p>` : ''}
-    <p style="margin:0 0 28px;">${lank(p, 'Läs på niclasfohlin.se')}</p>`).join('');
+    <p style="margin:0 0 28px;">${lank(p, p.typ === 'verktyg' ? 'Öppna verktyget på niclasfohlin.se' : 'Läs på niclasfohlin.se')}</p>`).join('');
   return `<!doctype html>
 <html lang="sv"><body style="margin:0;padding:0;background:#f7f6f1;font-family:Georgia,'Times New Roman',serif;color:#18221d;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f6f1;"><tr><td align="center" style="padding:32px 16px;">
@@ -78,7 +102,7 @@ export async function lasNytt(bas) {
  * @param {string | undefined} arg.listId
  * @returns {Promise<{steg: string, antal?: number, nya?: string[], kampanj?: number}>}
  */
-export async function mejlaNytt({ poster, sajt, lager, brevoNyckel, listId }) {
+export async function mejlaNytt({ poster, sajt, lager, brevoNyckel, listId, nu = new Date() }) {
   const skickat = await lager.get('skickat', { type: 'json' });
   if (!skickat) {
     await lager.setJSON('skickat', { urler: poster.map((p) => p.url), initierad: new Date().toISOString() });
@@ -94,29 +118,39 @@ export async function mejlaNytt({ poster, sajt, lager, brevoNyckel, listId }) {
   // försöker igen. Misslyckas sändningen skickar nästa körning inte samma innehåll en gång till:
   // kampanjen står i lagret med status avbruten och får i så fall skickas för hand i Brevo.
   const urler = [...skickat.urler, ...nya.map((p) => p.url)];
-  const senast = { datum: new Date().toISOString(), poster: nya.map((p) => p.url), status: 'skapar', kampanj: undefined, fel: undefined };
+  const tid = sandtid(nu);
+  const senast = { datum: nu.toISOString(), poster: nya.map((p) => p.url), status: 'skapar', kampanj: undefined, kampanjer: [], schemalagd: tid ?? undefined, fel: undefined };
   const spara = () => lager.setJSON('skickat', { urler, initierad: skickat.initierad, senast });
   await spara();
 
-  // En serie med sina lektioner är ett inlägg i ämnesraden: Nytt på niclasfohlin.se: Ljudlek i grupp.
-  const grupper = grupperaNya(nya);
-  const amne = grupper.length === 1 ? `Nytt på niclasfohlin.se: ${grupper[0].titel}` : `Nytt på niclasfohlin.se: ${grupper.length} nya inlägg`;
   try {
-    const kampanj = await brevo('/emailCampaigns', {
-      name: `Nytt ${new Date().toISOString().slice(0, 16)}: ${grupper.map((p) => p.titel).join(' | ').slice(0, 120)}`,
-      subject: amne,
-      sender: AVSANDARE,
-      replyTo: SVAR_TILL,
-      htmlContent: brev(nya, sajt),
-      recipients: { listIds: [Number(listId)] },
-    }, brevoNyckel);
-    senast.kampanj = kampanj.id;
-    senast.status = 'skapad';
+    // Ett utskick för nya texter och metoder och ett för nya verktyg (utskicken), schemalagt till 07.00 utanför sändtiden.
+    for (const grupp of utskicken(nya)) {
+      // En serie med sina lektioner är ett inlägg i ämnesraden: Nytt på niclasfohlin.se: Ljudlek i grupp.
+      const grupper = grupperaNya(grupp);
+      const verktyg = grupp[0].typ === 'verktyg';
+      const titlar = grupper.map((p) => p.titel);
+      const amne = verktyg
+        ? `${grupper.length === 1 ? 'Nytt verktyg' : 'Nya verktyg'} på niclasfohlin.se: ${titlar.length === 1 ? titlar[0] : `${titlar.slice(0, -1).join(', ')} och ${titlar.at(-1)}`}`
+        : grupper.length === 1 ? `Nytt på niclasfohlin.se: ${titlar[0]}` : `Nytt på niclasfohlin.se: ${grupper.length} nya inlägg`;
+      const kampanj = await brevo('/emailCampaigns', {
+        name: `Nytt ${nu.toISOString().slice(0, 16)}: ${titlar.join(' | ').slice(0, 120)}`,
+        subject: amne,
+        sender: AVSANDARE,
+        replyTo: SVAR_TILL,
+        htmlContent: brev(grupp, sajt),
+        recipients: { listIds: [Number(listId)] },
+        ...(tid ? { scheduledAt: tid } : {}),
+      }, brevoNyckel);
+      senast.kampanj = kampanj.id;
+      senast.kampanjer.push(kampanj.id);
+      senast.status = 'skapad';
+      await spara();
+      if (!tid) await brevo(`/emailCampaigns/${kampanj.id}/sendNow`, {}, brevoNyckel);
+    }
+    senast.status = tid ? 'schemalagd' : 'skickad';
     await spara();
-    await brevo(`/emailCampaigns/${kampanj.id}/sendNow`, {}, brevoNyckel);
-    senast.status = 'skickad';
-    await spara();
-    return { steg: 'kampanj skickad', kampanj: kampanj.id, nya: senast.poster };
+    return { steg: tid ? `kampanj schemalagd till ${tid}` : 'kampanj skickad', kampanj: senast.kampanj, kampanjer: senast.kampanjer, nya: senast.poster };
   } catch (fel) {
     senast.status = 'avbruten';
     senast.fel = String(fel?.message ?? fel).slice(0, 300);

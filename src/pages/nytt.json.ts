@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn, publicerade } from '../lib/innehall';
 import { byggSerier, lektionsnamn } from '../lib/serie';
 import { arskursText } from '../lib/metod';
-import { metodensCentrala } from '../lib/centrala';
+import { metodensCentrala, CENTRALA } from '../lib/centrala';
 import { LEKTIONSKORT_MEJL, metodensLektionskort } from '../lib/lektionskort';
 import { metodensSidor } from '../lib/lardig';
 import type { Um } from '../lib/undervisningsmetod';
@@ -66,6 +66,17 @@ export const GET: APIRoute = async () => {
       titel: b.data.titel,
       ingress: b.data.beskrivning,
       datum: `${b.data.utgivningsar}-01-01`,
+    })),
+    // Ett nytt verktyg med publicerad i src/data/centrala.json, som Strukturer och Strategier (Niclas 2026-11-03: mejla den nya
+    // metoden och också de två nya verktygen, "Ett Brevo för metoden och ett Brevo för två verktygen"). Utskicket lägger
+    // verktygen i ett eget mejl (utskicken i netlify/lib/utskick.mjs). Ingressen är verktygets rad för mejlen.
+    ...CENTRALA.filter((c) => c.del === 'verktyg' && c.publicerad).map((c) => ({
+      typ: 'verktyg',
+      etikett: 'Nytt verktyg',
+      url: c.adress,
+      titel: c.namn,
+      ingress: `${c.mejl.charAt(0).toUpperCase()}${c.mejl.slice(1)}.`,
+      datum: c.publicerad!,
     })),
   ];
   return new Response(JSON.stringify({ genererad: new Date().toISOString(), antal: poster.length, poster }), {

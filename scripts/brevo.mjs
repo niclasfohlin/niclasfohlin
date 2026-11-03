@@ -17,6 +17,7 @@ import { execSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { inomSandtiden, sandtid } from '../netlify/lib/utskick.mjs';
 
 const DOMAN = 'niclasfohlin.se';
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -110,7 +111,13 @@ if (kommando === 'status') {
 } else if (kommando === 'anrop') {
   const [metod, sokvag, kropp] = rest;
   if (!metod || !sokvag) { console.error('anrop <METOD> <sökväg> [json]'); process.exit(1); }
-  const svar = await brevo(metod.toUpperCase(), sokvag, kropp ? JSON.parse(kropp) : undefined);
+  // Sändtiden (CLAUDE.md under Prenumeration och utskick): mellan 21.00 och 07.00 skickas ingen kampanj, utan den
+  // schemaläggs till 07.00 med scheduledAt, och en kampanj schemaläggs inte heller till en tid mellan 21.00 och 07.00.
+  const tid = sandtid();
+  if (tid && /\/emailCampaigns\/\d+\/send(Now)?\b/i.test(sokvag)) { console.error(`Klockan är mellan 21.00 och 07.00: kampanjen skickas inte nu. Schemalägg den: anrop PUT ${sokvag.replace(/\/send(Now)?$/i, '')} '{"scheduledAt":"${tid}"}'.`); process.exit(1); }
+  const json = kropp ? JSON.parse(kropp) : undefined;
+  if (json?.scheduledAt && /\/emailCampaigns/i.test(sokvag) && !inomSandtiden(new Date(json.scheduledAt))) { console.error(`scheduledAt ${json.scheduledAt} är mellan 21.00 och 07.00 svensk tid. Välj en tid mellan 07.00 och 21.00${tid ? `, som ${tid}` : ''}.`); process.exit(1); }
+  const svar = await brevo(metod.toUpperCase(), sokvag, json);
   visa({ status: svar.status, svar: svar.data });
   if (!svar.ok) process.exit(1);
 } else {

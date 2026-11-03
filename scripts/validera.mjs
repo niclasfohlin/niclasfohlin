@@ -62,6 +62,8 @@ const lathundPdfer = () => new Map(['stodundervisning', 'metoder'].flatMap((s) =
 steg('instruktionsprov', 'node scripts/instruktionsprov.mjs');
 steg('krokprov', 'node scripts/krokprov.mjs');
 steg('standardprov', 'node scripts/standardprov.mjs');
+// Utskicket (K-704): sändtiden 07.00–21.00 och nya verktyg i ett eget utskick.
+steg('utskicksprov', 'node scripts/utskicksprov.mjs');
 steg('krediterprov', 'node scripts/krediter.mjs --prov');
 steg('taggar', 'node scripts/taggar.mjs --kontrollera');
 steg('saddprov', 'node scripts/saddprov.mjs --kontrollera');
