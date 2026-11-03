@@ -50,7 +50,7 @@
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Det som övas klart vid ett tillfälle känns lätt, eftersom svaret ligger kvar i huvudet, men det glöms fort. Efter ett uppehåll måste eleven anstränga sig för att ta fram det, och då håller det längre. Samma tid, fördelad över dagar och veckor, ger mer än allt på en gång. Det är framplockningen som ska spridas: att gå igenom samma sak igen gör inte samma nytta."
+      "text": "Det som övas klart vid ett tillfälle känns lätt, eftersom svaret ligger kvar i huvudet, men det glöms fort. Efter ett uppehåll måste eleven anstränga sig för att ta fram det, och då håller det längre. Samma tid, fördelad över dagar och veckor, ger mer än allt på en gång. Det är framplockningen som ska spridas, så eleverna tar fram det själva varje gång det kommer tillbaka."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -107,7 +107,7 @@
     },
     "tankPa": "Strategin tjänar innehållet: välj det som ska sitta om en månad, och inte allt. Inget schema för uppehållen är belagt, så det viktiga är att återkomsterna blir av, och därför skrivs de in i förväg. Innan eleverna kan det nya behöver de öva tätare, och uppehållen kan växa när grunden sitter.",
     "forskningen": {
-      "text": "I vanliga klassrum gav spridd övning 0,20 i 15 studier, och 0,39 mot samma övning samlad vid ett tillfälle (Ruitenburg m.fl., 2026). EEF:s översikt fann en positiv effekt med låg tilltro, mest på forskarnas prov och för fakta, och inget schema för uppehållen som är bättre än andra (Perry m.fl., 2021). IES-vägledningen säger minst två tillfällen med veckor emellan (Pashler m.fl., 2007).",
+      "text": "I vanliga klassrum gav spridd övning 0,20 i 15 studier, och 0,39 mot samma övning samlad vid ett tillfälle (Ruitenburg m.fl., 2026). EEF:s översikt fann en liten positiv effekt med låg tilltro i matematik och NO, mest på forskarnas prov med enkla minnesfrågor, och liten eller ingen effekt i läsning och ordförråd. Studierna räckte inte för att säga hur långa uppehållen ska vara (Perry m.fl., 2021). IES-vägledningen säger minst två tillfällen med veckor till månader emellan (Pashler m.fl., 2007).",
       "kallor": [
         {
           "id": "ruitenburg-m-fl-2026",
@@ -145,13 +145,13 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "I stället för en lång ljudstund har klassen tre korta om två till tre minuter: på morgonen, efter lunch och innan eleverna går hem. Varje stund har veckans bokstav och två bokstäver från tidigare veckor. Eleverna säger ljudet och läser ord som sol, mos och sal med bokstäver som klassen redan har haft. Lägg märke till vem som tvekar på de äldre bokstäverna, och låt dem komma tillbaka oftare."
+      "text": "I stället för en lång ljudstund har klassen tre korta om två till tre minuter: på morgonen, efter lunch och innan eleverna går hem. Varje stund har veckans bokstav och två bokstäver från tidigare veckor. Eleverna säger ljudet och läser ord som sol, mos och sal med bokstäver som klassen redan har haft. Spridning har gett liten effekt i studier av läsning, så lägg märke till vem som tvekar på de äldre bokstäverna och låt dem komma tillbaka oftare."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Tio ord som klassen ofta stavar fel kommer tillbaka i korta diktamina efter några dagar, efter en vecka och efter en månad. Eleverna skriver orden ur minnet, och sedan visar du orden och de rättar med en annan färg. Ord som de flesta stavar rätt får vänta längre, och ord med många fel kommer tillbaka tidigare. Skriv på återkomstlistan när varje ord ska komma igen."
+      "text": "Tio ord som klassen ofta stavar fel kommer tillbaka i korta diktamina efter några dagar, efter en vecka och efter en månad. Eleverna skriver orden ur minnet, och sedan visar du orden och de rättar med en annan färg. Ord som de flesta stavar rätt får vänta längre, och ord med många fel kommer tillbaka tidigare. Spridning har gett liten effekt i studier av språk och ordförråd, så räkna felen efter en månad och se om de blir färre."
     },
     {
       "omrade": "matematik",

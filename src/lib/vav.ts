@@ -54,13 +54,24 @@ function vavAv(metod: string, d: MetodForVav, c: Central, r: Rad): Vav {
     form: r.form ?? 'kort',
     delar,
     // Nämner metoden ingen av delarna, arbetar eleverna i samma form utan att metoden säger det, och etiketten säger det.
-    namngivna: !delar.length || delar.some((x) => [x.namn, ...x.andra].some((n) => namnetI(n, d))),
+    namngivna: !delar.length || delar.some((x) => [x.namn, ...x.andra].some((n) => namnetI(n, d, c.id === 'strategier'))),
     om: r.om,
     slag: r.slag ?? 'form',
     // Knappen står redan på platsen när metoden visar verktyget där med fältet centrala (src/lib/centrala.ts).
     knappenFinns: (d.centrala ?? []).some((x) => { if (x.id !== c.id) return false; const t = tolkaTextplats(x.efterText); const v = tolkaEfter(r.efter); return !!t && !!v && passar(v, t); }),
   };
 }
+/**
+ * Det som vävs in i en metod i Metoder (K-702; Niclas 2026-11-03: "Du får ju sådda även denna med små bilder på strategierna
+ * på rätt ställe från verktyget"): metoderna där har inga filmplatser, så platsen är sidans egen form, som filmerna i Metoder
+ * anger den (steg N för lektionens del N, karna: <komponent>, tabell: <rubrik> och arbetsomradet), och rutan är densamma som
+ * i Stödundervisning (Vavruta.astro). Platserna står i sajtens register, src/data/strategier-i-metoder.json.
+ */
+export function vavtIMetoder(metod: string, d: object, verktyg: string, rader: Rad[]): (Vav & { efter: string })[] {
+  const c = vavda().find((x) => x.id === verktyg);
+  return c ? rader.map((r) => ({ ...vavAv(metod, d as MetodForVav, c, r), efter: r.efter })) : [];
+}
+
 /** Det som vävs in på platsen i metoden, i registrets ordning. */
 export function vavtVid(metod: string, d: MetodForVav, plats: FilmPlats): Vav[] {
   return vavda().flatMap((c) => raderFor(metod, c).filter((r) => { const v = tolkaEfter(r.efter); return v && passar(v, plats); }).map((r) => vavAv(metod, d, c, r)));
@@ -74,11 +85,17 @@ export function vavensEtikett(v: Vav, efterOm = ': '): string {
   const hur = v.slag === 'forslag' ? (fler ? s.passarFler : s.passar) : (fler ? s.liknarFler : s.liknar);
   return v.namngivna ? s.etikett : v.om ? `${v.om}${efterOm}${hur.charAt(0).toLowerCase()}${hur.slice(1)}` : hur;
 }
-// Namnet i metodens text, med standardens regel, som såddprovet också läser namnen med (scripts/saddprov.mjs).
+// Namnet i metodens text, med standardens regel, som såddprovet också läser namnen med (scripts/saddprov.mjs). En strategis
+// namn är ett verb, och först i en mening eller i ett av metodens fält är det verbet och inte strategin, som "Blanda
+// uppgifter med och utan växling" i Fyra räknesätten (andra ögat på Strategier 2026-11-03; sakdelar i standarden har samma
+// regel). JSON har varje fält inom citattecken och radbrytningen som \n.
 const metodensText = new WeakMap<object, string>();
-function namnetI(namn: string, d: object): boolean {
+const esc = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function namnetI(namn: string, d: object, inteForst = false): boolean {
   if (!metodensText.has(d)) metodensText.set(d, JSON.stringify(d));
-  return strukturnamnetI(namn, metodensText.get(d)!);
+  const text = metodensText.get(d)!;
+  if (!inteForst) return strukturnamnetI(namn, text);
+  return [...text.matchAll(new RegExp(`(^|[^\\p{L}])${esc(namn)}(?![\\p{L}])`, 'gu'))].some((m) => !/(^|[.!?:]\s*|\\n\s*|"\s*)$/.test(text.slice(0, m.index + m[1].length)));
 }
 
 /** Hur många delar ett verktyg är invävt med innan det också står i början av metodens sida, under ingressen och i menyn,

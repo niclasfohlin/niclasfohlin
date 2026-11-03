@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Arbetsminnet rymmer lite nytt åt gången. Ta bort det som tynger, inte det svåra.",
+    "insikt": "Ett löst exempel ger kraften åt det nya. Ta bort det som tynger och behåll det svåra.",
     "handling": [
       {
         "ikon": "forstoringsglas",
@@ -90,29 +90,29 @@
     },
     "saGorDu": [
       {
-        "rubrik": "Samla",
-        "text": "Texten där den behövs: namnen i bilden och förklaringen vid ordet."
-      },
-      {
-        "rubrik": "Skala",
-        "text": "Stryk pynt och det du ändå säger. En sak framme i taget."
+        "rubrik": "Rensa",
+        "text": "Stryk pynt, samla texten vid bilden och ha en sak framme i taget."
       },
       {
         "rubrik": "Visa ett exempel",
-        "text": "Ett löst exempel, och direkt en liknande uppgift."
+        "text": "Ett löst exempel steg för steg, och direkt en liknande uppgift."
+      },
+      {
+        "rubrik": "Säg varför",
+        "text": "Eleverna säger varför steget görs, i exemplet och i sin egen uppgift."
       },
       {
         "rubrik": "Ett steg mindre",
-        "text": "Ta bort ett steg i taget av stödet, efter det eleverna visar."
+        "text": "Ta bort ett löst steg i taget, efter det eleverna visar."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
       "text": "När det är nytt för eleven. Den som kan störs av stödet."
     },
-    "tankPa": "Strategin tjänar innehållet: behåll det svåra som eleverna ska lära sig. Lösta exempel är mest prövade i matematik och NO för 11–18 år, och i textskrivning gav de ingen skillnad i ett stort försök. Välj stödet efter det varje elev visar, och ge inte alla samma mall.",
+    "tankPa": "Strategin tjänar innehållet: behåll det svåra som eleverna ska lära sig. Lösta exempel är mest prövade i matematik och NO för 11–⁠18 år, och i textskrivning gav de ingen skillnad i ett stort försök. Välj stödet efter det varje elev visar, och ge inte alla samma mall.",
     "forskningen": {
-      "text": "EEF:s översikt har måttlig tilltro för lösta exempel i matematik och NO för 11–18 år, och för stöd som tas bort steg för steg (Perry m.fl., 2021). Belastningsteorin förklarar varför: arbetsminnet rymmer få nya delar, och det eleven redan kan avgör hur tungt något är (Sweller m.fl., 2019; CESE, 2018). I ett stort försök i grammatik i textskrivning i åk 6 gav lösta exempel ingen skillnad (Aston m.fl., 2025).",
+      "text": "EEF:s översikt har måttlig tilltro för lösta exempel i matematik och NO för 11–⁠18 år, och för väl valt stöd, som ledtrådar och uppgiftens struktur, för 8–⁠16 år (Perry m.fl., 2021). Belastningsteorin förklarar varför och säger att stödet tas bort när eleven kan mer: arbetsminnet rymmer få nya delar, och det eleven redan kan avgör hur tungt något är (Sweller m.fl., 2019; CESE, 2018). I ett stort försök i grammatik i textskrivning i åk 6 gav lösta exempel ingen skillnad mot att samtala om exemplen (Aston m.fl., 2025).",
       "kallor": [
         {
           "id": "perry-m-fl-2021",
@@ -162,7 +162,7 @@
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När eleverna ska skriva, säg instruktionen i korta meningar och ha en sak framme i taget: först bilden de ska skriva om, sedan raderna att skriva på. Skriv stegen på tavlan med en bild vid varje steg, så att eleverna inte behöver hålla instruktionen i huvudet. Ta bort stegen på tavlan när klassen kan dem. Lösta exempel gav ingen skillnad i ett stort försök i textskrivning med äldre elever, så lägg kraften på att ta bort det som tynger."
+      "text": "När eleverna ska skriva, säg instruktionen i korta meningar och ha en sak framme i taget: först bilden de ska skriva om, sedan raderna att skriva på. Skriv stegen på tavlan med en bild vid varje steg, så att eleverna inte behöver hålla instruktionen i huvudet. Ta bort stegen på tavlan när klassen kan dem. I ett stort försök i textskrivning med äldre elever gav lösta exempel ingen skillnad, så se efter om fler kommer igång när stegen står på tavlan."
     },
     {
       "omrade": "matematik",
@@ -174,7 +174,7 @@
       "omrade": "amnen",
       "arskurs": "4–6",
       "amne": "NO",
-      "text": "Gör ett flödesschema i fem rutor för hur ett kolkraftverk gör el: kolet brinner, vattnet blir ånga, ångan driver turbinen, turbinen driver generatorn och generatorn ger el. Skriv ett eller två ord i varje ruta, i rutan och inte under bilden. Visa en ruta i taget, säg en kort mening och peka. Då slipper eleverna leta i bilden medan du pratar."
+      "text": "När klassen ska rita en sluten krets visar du ett löst exempel på tavlan och ritar det steg för steg: batteriet, sladden till lampan, lampan och sladden tillbaka till batteriet. Säg varför varje steg behövs: strömmen måste kunna gå runt. Bredvid står en nästan likadan uppgift med en lampa och en strömbrytare, som eleverna ritar själva. I nästa uppgift är bara början ritad, och sist ritar eleverna utan exempel."
     }
   ],
   "metoderSomGorDen": [

@@ -150,7 +150,8 @@ export function minnetsBild(m) {
 /**
  * Bladet med strategierna (K-699): ett liggande A4 med numret, namnet och meningen för varje strategi, och meningen till
  * mitten överst, för väggens mitt med korten runt omkring (Niclas om väggen i klassrummet, riggens brev 2026-11-03). Samma
- * funktion gör verktygets blad med alla strategier och metodens blad med sina, ur fältet strategikort.
+ * funktion gör verktygets blad med alla strategier och metodens blad med sina, ur fältet strategikort. Rubriken är alltid
+ * Strategier, för den är vad eleverna läser på väggen, och bladets namn (titel) står bara i dokumentets titel.
  * @param {{ nr: number, namn: string, mening: string }[]} strategier
  * @param {{ typsnitt: string, titel: string, mitten?: string }} o
  */
@@ -169,7 +170,7 @@ export function bladetHtml(strategier, { typsnitt, titel, mitten }) {
 .blad li b { font-size: ${tat ? 14 : 17}pt; font-weight: 600; line-height: 1.1; }
 .blad li .rad { font-size: ${tat ? 10.5 : 12}pt; line-height: 1.22; color: var(--blak-svag); }
 .blad .upphov { left: 14mm; right: auto; bottom: 4mm; }
-</style></head><body><div class="blad"><h1>${esc(titel)}</h1>${mitten ? `<p class="mitten">${esc(mitten)}</p>` : ''}
+</style></head><body><div class="blad"><h1>Strategier</h1>${mitten ? `<p class="mitten">${esc(mitten)}</p>` : ''}
 <ol>${strategier.map((s) => `<li><span class="nr">${s.nr}</span><b>${esc(s.namn)}</b><span class="rad">${esc(s.mening)}</span></li>`).join('')}</ol>
 <div class="upphov">© Niclas Fohlin · niclasfohlin.se/strategier</div></div><script>document.fonts.ready.then(() => { document.body.dataset.klar = '1'; });</script></body></html>`;
 }

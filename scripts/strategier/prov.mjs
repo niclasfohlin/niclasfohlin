@@ -90,8 +90,18 @@ for (const [metod, x] of Object.entries(saddJa)) {
   if (pasidan.join(' | ') !== iregistret.join(' | ')) fel.push(`Sådden: ${metod} har strategierna ${pasidan.join(' | ')} på sidan och ska ha ${iregistret.join(' | ')}`);
   platser += x.vav.length;
 }
-const iMetoder = Object.keys(JSON.parse(readFileSync(join(ROT, 'src', 'data', 'strategier-i-metoder.json'), 'utf8'))).filter((k) => !k.startsWith('_'));
-for (const metod of iMetoder) { const sida = html(join('metoder', metod)); if (sida && !sida.includes('id="strategierna"')) fel.push(`Sådden: ${metod} i Metoder saknar avsnittet Strategier för lärande`); }
+const registret = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'strategier-i-metoder.json'), 'utf8'));
+const iMetoder = Object.keys(registret).filter((k) => !k.startsWith('_'));
+for (const metod of iMetoder) {
+  const sida = html(join('metoder', metod));
+  if (!sida) continue;
+  // Avsnittet står när metoden har text och strategier i registret eller eget fält; rutorna på platserna när den har platser.
+  if (registret[metod].strategier && !sida.includes('id="strategierna"')) fel.push(`Sådden: ${metod} i Metoder saknar avsnittet Strategier för lärande`);
+  const rutor = [...sida.matchAll(/<aside class="vav[\s\S]*?<\/aside>/g)].map((m) => m[0]).filter((r) => r.includes('href="/strategier'));
+  const platserna = registret[metod].platser ?? [];
+  if (rutor.length !== platserna.length) fel.push(`Sådden: ${metod} i Metoder har ${rutor.length} rutor med strategier på sidan och ${platserna.length} platser i src/data/strategier-i-metoder.json; en plats som sidan inte har (steg N, karna:, tabell: eller arbetsomradet) ritas inte`);
+  platser += rutor.length;
+}
 
 if (fel.length) { console.error(`Strategier, provet stannade:\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`Strategier, sådden: ${platser} platser i ${Object.keys(saddJa).length} metoder i Stödundervisning och avsnittet i ${iMetoder.length} metoder i Metoder.`);

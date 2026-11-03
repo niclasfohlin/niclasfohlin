@@ -14,8 +14,9 @@ import { join } from 'node:path';
 // Länkar, bilder, filmernas <object data> och knapparnas adresser (Drive, filmen) till filer under /stodundervisning/,
 // också zip-filen med metodens filmer, filmerna som mp4 och spelarens småbilder, och undervisningsmetodernas filer under
 // /metoder/ med bilderna av bladen (design-3 nr 25: Metoders filer kunde ligga ett dygn utan version), och verktyget
-// Strukturers bilder och kort under /strukturer/ (K-650).
-export const FILLANK = /\b(href|src|data-drive-src|data-film|data-stillbild|data)="(\/(?:stodundervisning\/[^"?#\s]+\.(?:docx|pptx|pdf|svg|zip|mp4|webp)|metoder\/[^"?#\s]+\.(?:docx|pptx|pdf|svg|zip|mp4|webp|png)|strukturer\/[^"?#\s]+\.(?:pdf|svg)))"/g;
+// Strukturers bilder och kort under /strukturer/ (K-650), och verktyget Strategiers kort, bilder och ikoner under
+// /strategier/ (K-699), som har ett dygns cache som strukturernas.
+export const FILLANK = /\b(href|src|data-drive-src|data-film|data-stillbild|data)="(\/(?:stodundervisning\/[^"?#\s]+\.(?:docx|pptx|pdf|svg|zip|mp4|webp)|metoder\/[^"?#\s]+\.(?:docx|pptx|pdf|svg|zip|mp4|webp|png)|strukturer\/[^"?#\s]+\.(?:pdf|svg)|strategier\/[^"?#\s]+\.(?:pdf|svg)))"/g;
 
 export function htmlFiler(mapp) {
   const ut = [];

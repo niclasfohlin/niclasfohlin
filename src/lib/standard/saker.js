@@ -1,7 +1,7 @@
 /**
  * En text med metodens saker, där saken blir det sidan gör av den, som en länk, och resten det sidan gör av en text: en rot
  * för planens sidor i båda lagren, Planera insatsen och Lär dig metoden (sajtens K-630; samma följd stod i båda).
- * @template {{ namn: string, former?: string[], versal?: boolean }} S
+ * @template {{ namn: string, former?: string[], versal?: boolean, forst?: boolean }} S
  * @param {string} text
  * @param {S[]} saker
  * @param {(s: S, text: string) => string} sak
@@ -131,9 +131,11 @@ const forstIMening = (fore) => /(^|[.!?:]\s*|\n\s*)$/.test(fore);
 
 /**
  * Texten i delar, där en del med sak är ett namn på en av sakerna: den längsta träffen först, och bara hela ord. En titel
- * (versal) hittas bara som den står och inte först i en mening.
+ * (versal) hittas bara som den står och inte först i en mening, utom när saken säger forst: en strategis namn i en metod
+ * som lär ut strategierna, där "Plocka fram och Sprid ut är ramen" är strategierna och inte verben (andra ögat på
+ * Strategier 2026-11-03).
  * @param {string} text
- * @param {{ namn: string, former?: string[], versal?: boolean }[]} saker
+ * @param {{ namn: string, former?: string[], versal?: boolean, forst?: boolean }[]} saker
  * @returns {{ text: string, sak?: number }[]}
  */
 export function sakdelar(text, saker) {
@@ -145,7 +147,7 @@ export function sakdelar(text, saker) {
       for (const m of text.matchAll(new RegExp(`(^|[^\\p{L}\\p{N}])(${formMonster(f, s.versal)})(?![\\p{L}\\p{N}])`, 'gu'))) {
         const start = m.index + m[1].length;
         // En titel med en siffra, som Addition 1, är en titel också först i en mening.
-        if (s.versal && !/\d/.test(f) && forstIMening(text.slice(0, start))) continue;
+        if (s.versal && !s.forst && !/\d/.test(f) && forstIMening(text.slice(0, start))) continue;
         // Ett namn med en siffra som börjar ett spann, som "Bildserie 2–6", är spannet och inte saken (betan 2026-10-24).
         if (/\d$/.test(f) && /^\s*[–-]⁠?\s*\d/.test(text.slice(start + m[2].length))) continue;
         // Ett namn efter ett ord för en del av något, som "stapeln Efter kursen" i ett diagram och "rutan Till läraren" i en
@@ -177,7 +179,9 @@ export function sakdelar(text, saker) {
 // Lärarens och elevernas egna saker, som ser ut som namn på saker men inte är metodens och inte länkas (STIL.md under
 // Hänvisningar: "elevens egna saker (bänkboken)"): klasslistan är lärarens lista över klassen (riggens omgång 1
 // 2026-10-26, Högläsning i par), och namnkortet är elevens eget kort med namnet (sajtens K-596, Säg, skriv och läs).
-export const EGNA_SAKER = Object.freeze(['klasslista', 'namnkort']);
+// Kursplanen är Skolverkets, inte en sak i metoden (Lärande på kognitionsvetenskaplig grund 2026-11-03: "det kommer från dig,
+// kursplanen och läromedlet").
+export const EGNA_SAKER = Object.freeze(['klasslista', 'namnkort', 'kursplan']);
 const EGNA_FORMER = new Set(EGNA_SAKER.flatMap((n) => sakensFormer(n)).map((f) => f.toLocaleLowerCase('sv')));
 
 /**
@@ -186,7 +190,7 @@ const EGNA_FORMER = new Set(EGNA_SAKER.flatMap((n) => sakensFormer(n)).map((f) =
  * en text aldrig nämner ett blad som metoden inte har, också efter en ändring i metoden. Ett ord för sig, som "korten",
  * säger inte vilken sak det är och prövas inte, och inte heller lärarens och elevernas egna saker (`EGNA_SAKER`).
  * @param {string} text
- * @param {{ namn: string, former?: string[], versal?: boolean }[]} saker
+ * @param {{ namn: string, former?: string[], versal?: boolean, forst?: boolean }[]} saker
  * @returns {string[]}
  */
 export function olankadeSaker(text, saker) {

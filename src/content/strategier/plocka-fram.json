@@ -81,6 +81,10 @@
     },
     "saGorDu": [
       {
+        "rubrik": "Välj frågorna",
+        "text": "Det klassen ska förstå, och minst en fråga om varför."
+      },
+      {
         "rubrik": "Stäng boken",
         "text": "Alla skriver, ritar eller säger det de minns innan svaret visas."
       },
@@ -91,19 +95,15 @@
       {
         "rubrik": "Rätta direkt",
         "text": "Visa det rätta samma lektion. Eleverna rättar med en annan färg."
-      },
-      {
-        "rubrik": "Fråga varför",
-        "text": "Minst en fråga gäller ett varför, inte bara ord och namn."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
       "text": "När klassen har förstått. Den befäster men bygger inte förståelsen."
     },
-    "tankPa": "Strategin tjänar innehållet: bestäm först vad klassen ska förstå och varför. Räkna det inte till betyget, så vågar eleverna svara fel. Med de yngsta fungerar en frågekarta, bilder och muntliga svar bättre än att skriva allt de minns.",
+    "tankPa": "Strategin tjänar innehållet: bestäm först vad klassen ska förstå och varför. Räkna det inte till betyget, så vågar eleverna svara fel. Med de yngsta ställer du bestämda frågor, som på en frågekarta, i stället för att be dem skriva allt de minns, och svaren får vara bilder eller muntliga.",
     "forskningen": {
-      "text": "I vanliga klassrum gav framplockning 0,37 mot att läsa om, i 31 studier, mest för fakta, och ingen säker vinst för förståelsen (Ruitenburg m.fl., 2026). Ett quiz i starten gav ingen skillnad mot en diskussion i NO i 15 skolor (Roy m.fl., 2023). IES-vägledningen bedömer stödet för quiz och för frågor om varför som starkt (Pashler m.fl., 2007).",
+      "text": "I vanliga klassrum gav framplockning 0,37 mot att läsa om, skriva av eller bearbeta texten, i 31 studier, mest för fakta, och ingen säker vinst för förståelsen (Ruitenburg m.fl., 2026). Ett quiz i starten gav ingen skillnad mot en diskussion i NO i 15 skolor (Roy m.fl., 2023). IES-vägledningen bedömer stödet för quiz och för frågor om varför som starkt (Pashler m.fl., 2007).",
       "kallor": [
         {
           "id": "ruitenburg-m-fl-2026",
@@ -153,7 +153,7 @@
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Efter ett arbetsområde om linjära funktioner delar eleverna en tom sida i fyra rutor: formeln, ett eget exempel, en graf och när man använder den. De fyller i rutorna ur minnet i fem minuter, utan bok och utan att prata. Sedan jämför de med sammanfattningen i boken och fyller i det som saknades med en annan färg. Rutan om när man använder den är varför-frågan, och den visar om eleven har förstått mer än formeln."
+      "text": "Efter ett arbetsområde om linjära funktioner delar eleverna en tom sida i fyra rutor: formeln, ett eget exempel, en graf och varför grafen blir en rät linje. De fyller i rutorna ur minnet i fem minuter, utan bok och utan att prata. Sedan jämför de med sammanfattningen i boken och fyller i det som saknades med en annan färg. Rutan om varför grafen blir rät är varför-frågan, och den visar om eleven har förstått mer än formeln."
     },
     {
       "omrade": "amnen",

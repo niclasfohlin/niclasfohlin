@@ -1,8 +1,10 @@
 // Undervisningsmetodens sida (K-621): det sidan räknar ur metodens fil, en rot för sidan, Lär dig metoden och filerna.
 // Delarna och utfallens gränser står i standarden (src/lib/standard/undervisningsmetod.js), som riggen också läser.
-// Modulen läser inga filer, så att sidans skript kan läsa den; filerna läser src/lib/undervisningsmetodfiler.ts.
+// Modulen läser inga filer själv, så att sidans skript kan läsa den; filerna läser src/lib/undervisningsmetodfiler.ts. Den
+// importerar src/lib/strategier.ts, som läser strategierna, och sidans skript får därför bara importera typer härifrån.
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
+import { strategikortetI, strategiernaAv } from './strategier';
 import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, utfallensGranser, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
@@ -82,6 +84,18 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
     saker.push(sak(STRUKTURKORTEN, `${sida}#strukturkorten`));
     // Bara med stor bokstav, som en titel: verbet "turas om" är ingen länk till Turas om (granskningen 2026-11-01, P1).
     for (const x of o.strukturer ?? []) saker.push({ ...sak(x.namn, `/strukturer/${x.id}`), versal: true });
+  }
+  // Strategierna för lärande som metoden visar ur verktyget Strategier (fältet strategikort eller sajtens sådd, K-699,
+  // K-702): avsnittet Strategikorten, metodens blad när det har ett namn, som Strategibladet, och varje strategi med sitt
+  // namn med stor bokstav, som leder till strategins sida. En metod som lär ut strategierna i sitt fält strategikort länkar
+  // namnen också först i en mening (forst i sakdelar), där det är strategin och inte verbet.
+  const sk = strategikortetI(id, d);
+  if (sk) {
+    saker.push(sak('Strategikorten', `${sida}#strategierna`));
+    const blad = (d as { strategikort?: { blad?: string } }).strategikort?.blad;
+    // Bladet har sin knapp i avsnittet, som de andra sakerna, och namnet i texten leder dit.
+    if (blad) saker.push(sak(blad, `${sida}#strategierna`));
+    for (const x of strategiernaAv(sk.strategier, `${d.titel}: strategikort`)) saker.push({ ...sak(x.namn, `/strategier/${x.id}`), versal: true, ...((d as { strategikort?: unknown }).strategikort ? { forst: true } : {}) });
   }
   if (d.planeringsmall) saker.push(sak(UM_NAMN.planeringsmall, `${sida}#planeringsmallen`));
   if (d.observation) saker.push(sak(UM_NAMN.observation, `${sida}#observationsmallen`));

@@ -16,7 +16,10 @@ import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetod
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
-import { strategiernaAv, strategikortetI, provaMetodensStrategikort, metodensKortAdress as metodensStrategikortAdress, strategiensAdress, strategiernasStil, STRATEGIERNAS_ADRESS } from '../lib/strategier';
+import { metodensStrategiblad } from '../lib/standard/index.js';
+import Vavruta from './Vavruta.astro';
+import { vavtIMetoder } from '../lib/vav';
+import { strategiernaAv, strategikortetI, strategiernasPlatser, provaMetodensStrategikort, metodensKortAdress as metodensStrategikortAdress, strategiensAdress, strategiernasStil, STRATEGIERNAS_ADRESS } from '../lib/strategier';
 interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; tabellfiler?: UmFil[]; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[]; strukturer?: ImporteradStruktur[] }
 const { d, id, extrafilmer, filer, tabellfiler = [], bilder, sidor = [], saker, strukturer = [] } = Astro.props;
 if (strukturer.length) provaMetodensKort(id, strukturer.map((x) => x.id));
@@ -26,6 +29,11 @@ const STRATEGIERNA = 'Strategier för lärande';
 const strategikortet = strategikortetI(id, d);
 const strategierna = strategikortet ? strategiernaAv(strategikortet.strategier, `${d.titel}: strategikort`) : [];
 if (strategierna.length) provaMetodensStrategikort(id, strategierna.map((x) => x.id));
+// Strategiernas små kort på platserna i texten (K-702), i sidans egen form: steg N, karna: <komponent>, tabell: <rubrik> och
+// arbetsomradet (vavtIMetoder i src/lib/vav.ts). En plats som sidan inte har stoppar bygget. Raden till verktyget står en
+// gång på sidan, och inte alls när sidan har avsnittet med knappen Alla strategier.
+const vavt = vavtIMetoder(id, d, 'strategier', strategiernasPlatser(id)).map((v, i) => ({ ...v, sist: !strategierna.length && i === 0 }));
+const vavtVidPlats = (efter: string) => vavt.filter((v) => v.efter === efter);
 const kallor = new Set<string>((d.kallor ?? []).map((k: { id: string }) => k.id));
 // Varje text som HTML: metodens saker och källorna som länkar (medSaker), och en replik inom citattecken på egen rad. En replik
 // som meningen fortsätter efter, med komma eller liten bokstav, står kvar i meningen (um-replik-i), så att "Säg ”Pennan ner”,
@@ -145,7 +153,7 @@ const moten = arbetslagetsMoten(d);
       {d.roll.fragornaText && <p set:html={k(d.roll.fragornaText)} />}
     </section>
   )}
-  <UmFriaTabeller d={d} id={id} plats="efter-inledning" k={k} saker={saker} filer={tabellfiler} />
+  <UmFriaTabeller d={d} id={id} plats="efter-inledning" k={k} saker={saker} filer={tabellfiler} vavt={vavt} />
   {/* Lektionskortet efter Lärarens roll, där del 1 slutar, och inte mitt i texten (granskare-3 nr 20). */}
   <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} stor />
   {del('metoden').text && <p class="um-overgang" set:html={k(del('metoden').text)} />}
@@ -200,6 +208,7 @@ const moten = arbetslagetsMoten(d);
             )}
           </article>
           {extrafilmer.filter((f) => f.vid && 'steg' in f.vid && steg[(f.vid as { steg: number }).steg - 1]?.namn === s.namn).map((f) => <div class="um-film"><Film f={f} titel={d.titel} /><Filmbilder f={f} /></div>)}
+          {vavtVidPlats(`steg ${steg.indexOf(s) + 1}`).map((v) => <Vavruta v={v} titel={d.titel} sist={v.sist} />)}
         </>
       );
     })}
@@ -299,6 +308,7 @@ const moten = arbetslagetsMoten(d);
         <>
           <p class="um-ruta-rubrik">Arbetsområdet, lektion för lektion</p>
           <ol class="um-arbetsomrade">{huvud.arbetsomradet.map((x: string) => <li set:html={k(x)} />)}</ol>
+          {vavtVidPlats('arbetsomradet').map((v) => <Vavruta v={v} titel={d.titel} sist={v.sist} />)}
         </>
       )}
       {/* Bladets överkant med mallens egna ord, så att raden säger vad just den här metoden börjar med. En mall med delar ritar
@@ -374,7 +384,7 @@ const moten = arbetslagetsMoten(d);
           ))}
         </article>
       ))}
-      <UmFriaTabeller d={d} id={id} plats="efter-progression" k={k} saker={saker} filer={tabellfiler} />
+      <UmFriaTabeller d={d} id={id} plats="efter-progression" k={k} saker={saker} filer={tabellfiler} vavt={vavt} />
     </section>
   )}
   <section class="um-avsnitt" id="efter-de-forsta-veckorna">
@@ -424,6 +434,7 @@ const moten = arbetslagetsMoten(d);
               <div><dt>Det du får ändra</dt><dd set:html={k(x.fritt)} /></div>
               {fallgropFor(x.namn).length > 0 && <div><dt>När den tappas</dt><dd set:html={k(fallgropFor(x.namn).map((f) => f.fallgrop).join('. '))} /></div>}
             </dl>
+            {vavtVidPlats(`karna: ${x.namn}`).map((v) => <Vavruta v={v} titel={d.titel} sist={v.sist} />)}
           </div>
         </details>
       ))}
@@ -506,13 +517,14 @@ const moten = arbetslagetsMoten(d);
             <a class="st-kort" href={strategiensAdress(x.id)} style={strategiernasStil}>
               <span class="sg-tre" aria-hidden="true">{x.bilder.map((b) => (b ? <img src={b} alt="" width="500" height="500" loading="lazy" decoding="async" /> : <span class="sg-bild-tom">Bild</span>))}</span>
               <span class="st-kort-text"><span class="st-kort-namn">{x.namn}</span><span class="st-kort-rad">{x.mening}</span></span>
-              <span class="sg-nr" aria-label={`Strategi ${x.nr}`}>{x.nr}</span>
+              <span class="sg-nr"><span class="visually-hidden">Strategi </span>{x.nr}</span>
             </a>
           </li>
         ))}
       </ol>
       <p class="um-strukturknappar">
-        <a class="knapp" href={metodensStrategikortAdress(id)} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${id}/strategikort`} data-goatcounter-title={`${d.titel}: strategikorten`}><span data-direkt={`Skriv ut de ${talText(strategierna.length)} korten`}>De {talText(strategierna.length)} korten som pdf</span></a>
+        <a class="knapp" href={metodensStrategikortAdress(id)} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${id}/strategikort`} data-goatcounter-title={`${d.titel}: strategikorten`}>{strategierna.length === 1 ? <span data-direkt="Skriv ut kortet">Kortet som pdf</span> : <span data-direkt={`Skriv ut de ${talText(strategierna.length)} korten`}>De {talText(strategierna.length)} korten som pdf</span>}</a>
+        {d.strategikort?.blad && <a class="knapp sekundar" href={`/strategier/kort/${metodensStrategiblad(id).fil}`} target="_blank" rel="noopener" data-goatcounter-click={`fil:${metodensStrategiblad(id).fil}`} data-goatcounter-title={`${d.titel}: ${d.strategikort.blad}`}>{d.strategikort.blad}</a>}
         <a class="knapp sekundar" href={STRATEGIERNAS_ADRESS}>Alla strategier</a>
       </p>
       <p class="st-utskriftsrad">{TVA_PA_A4}</p>
@@ -578,7 +590,7 @@ const moten = arbetslagetsMoten(d);
       <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['observation']} />
     </section>
   )}
-  <UmFriaTabeller d={d} id={id} plats="bilaga-a" k={k} saker={saker} filer={tabellfiler} />
+  <UmFriaTabeller d={d} id={id} plats="bilaga-a" k={k} saker={saker} filer={tabellfiler} vavt={vavt} />
 </section>
 
 <section class="um-del" id="del-valet" aria-labelledby="del-valet-rubrik">
@@ -631,7 +643,8 @@ const moten = arbetslagetsMoten(d);
                 <p class="um-kall-tal">{e && /\d/.test(e.tal) && <span class="um-kall-siffra">{e.tal}</span>}<span class={`um-kall-ord${e && !/\d/.test(e.tal) ? ' ensam' : ''}`}>{e ? e.ord : SLAGORD[x.slag] ?? x.slag}</span></p>
                 <div>
                   <p>{x.adress ? <>{String(x.text).split(x.titel)[0]}<a href={x.adress}>{x.titel}</a>{String(x.text).split(x.titel).slice(1).join(x.titel)}</> : x.text}</p>
-                  <p class="um-kall-rad">{e ? e.resten : x.bidrag}{l && <>{' · '}<a href={l.href}>{l.text}</a></>}</p>
+                  {/* Källans bidrag som metodens andra texter, så att en sak eller en strategi som den nämner, som Ord och bild, är en länk. */}
+                  <p class="um-kall-rad"><Fragment set:html={k(e ? e.resten : x.bidrag)} />{l && <>{' · '}<a href={l.href}>{l.text}</a></>}</p>
                   {(x.omraden ?? []).length > 0 && <p class="um-markena">{x.omraden.map((o: string) => OMRADESORD[o] ?? o).join(', ')}</p>}
                 </div>
               </li>

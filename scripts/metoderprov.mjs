@@ -306,7 +306,8 @@ function provaSakerna(s, html, ids) {
   const TOMMA = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
   // Rutornas rubriker och planeringsbladets etiketter är rubriker och etiketter, som Rutinen: T-kortet och Färdigheten på
   // T-kortet (K-645). Raden under en del av kärnan nämner lektionens delar, och Exit-lappen där är delen och inte bladet.
-  const KLASS = /\bclass="[^"]*\b(upphov|filrubrik|faktaruta-etikett|visually-hidden|tryck-fot|um-ruta-rubrik|um-blad-etikett|um-kort-moment|film-titel)\b/;
+  // Namnet på kärnans kort är kortets rubrik, också när det är en strategis namn (Lärande på kognitionsvetenskaplig grund).
+  const KLASS = /\bclass="[^"]*\b(upphov|filrubrik|faktaruta-etikett|visually-hidden|tryck-fot|um-ruta-rubrik|um-blad-etikett|um-kort-moment|um-kort-namn|film-titel)\b/;
   const tecken = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
   const avkoda = (t) => t.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (h, k) => (k[0] === '#' ? String.fromCodePoint(k[1] === 'x' || k[1] === 'X' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : tecken[k.toLowerCase()] ?? h));
   const kropp = html.slice(html.indexOf('<article'), html.lastIndexOf('</article>'));
@@ -345,7 +346,7 @@ function provaSakerna(s, html, ids) {
       if (!existsSync(join(dist, vag, 'index.html'))) fel.push(`${s}: ${x.namn} leder till ${vag}, som inte finns i dist`);
       // En struktur ur verktyget Strukturer (K-661) leder till sin sida med sitt kort under Strukturkorten på metodens sida;
       // lathunden länkar dit utan kort.
-      if (!new RegExp(`<a class="(?:knapp|st-kort)[^"]*" href="${vag}"`).test(html) && !(vag.startsWith('/strukturer/') && s.endsWith('/lathund'))) fel.push(`${s}: ${x.namn} har ingen knapp till ${vag}`);
+      if (!new RegExp(`<a class="(?:knapp|st-kort)[^"]*" href="${vag}"`).test(html) && !((vag.startsWith('/strukturer/') || vag.startsWith('/strategier/')) && s.endsWith('/lathund'))) fel.push(`${s}: ${x.namn} har ingen knapp till ${vag}`);
       continue;
     }
     if (vag !== s || !ids.has(ankare)) continue;

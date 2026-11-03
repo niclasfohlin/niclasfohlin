@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "fd419bcc36ecbb38",
+    "summa": "b875b7852099f6a7",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -10,8 +10,8 @@
     ],
     "kb": 619
   },
-  "_bladet": {
-    "summa": "9b5180c9fc6d96bf",
+  "_blad:larande-pa-kognitionsvetenskaplig-grund": {
+    "summa": "46678a4e5a0ba753",
     "strategier": [
       "plocka-fram",
       "sprid-ut",
@@ -19,10 +19,21 @@
       "ord-och-bild",
       "blanda-uppgifter"
     ],
-    "kb": 23
+    "kb": 31
+  },
+  "_bladet": {
+    "summa": "c7856011bbebd963",
+    "strategier": [
+      "plocka-fram",
+      "sprid-ut",
+      "avlasta-minnet",
+      "ord-och-bild",
+      "blanda-uppgifter"
+    ],
+    "kb": 31
   },
   "_metod:explicit-undervisning": {
-    "summa": "9cf2cfad032d7e59",
+    "summa": "66528b99281a6713",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -32,7 +43,7 @@
     "kb": 497
   },
   "_metod:formativ-bedomning": {
-    "summa": "214c40b420a14522",
+    "summa": "74d6ee53bab569de",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -42,15 +53,26 @@
     "kb": 501
   },
   "_metod:kooperativt-larande": {
-    "summa": "2095ca773bd92779",
+    "summa": "a6145c3529032022",
     "kort": [
       "avlasta-minnet",
       "ord-och-bild"
     ],
     "kb": 256
   },
+  "_metod:larande-pa-kognitionsvetenskaplig-grund": {
+    "summa": "b875b7852099f6a7",
+    "kort": [
+      "plocka-fram",
+      "sprid-ut",
+      "avlasta-minnet",
+      "ord-och-bild",
+      "blanda-uppgifter"
+    ],
+    "kb": 619
+  },
   "_metod:testbaserat-larande": {
-    "summa": "9cf2cfad032d7e59",
+    "summa": "66528b99281a6713",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -60,9 +82,9 @@
     "kb": 497
   },
   "avlasta-minnet": {
-    "innehall": "4842fb00",
-    "summa": "6ef8f33dac53ea25",
-    "kb": 136,
+    "innehall": "e73316e6",
+    "summa": "7595e1c6805c2f16",
+    "kb": 135,
     "namn": {
       "pt": 78,
       "rader": 1
@@ -75,7 +97,7 @@
   },
   "blanda-uppgifter": {
     "innehall": "104e2aa5",
-    "summa": "46bb6230c3f14910",
+    "summa": "e1c0bd126be59414",
     "kb": 131,
     "namn": {
       "pt": 70,
@@ -88,9 +110,9 @@
     }
   },
   "ord-och-bild": {
-    "innehall": "ce75fa4a",
-    "summa": "7cb29569d882bc4c",
-    "kb": 138,
+    "innehall": "abe7c154",
+    "summa": "434f5aae6683a8be",
+    "kb": 137,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -102,9 +124,9 @@
     }
   },
   "plocka-fram": {
-    "innehall": "92454424",
-    "summa": "d50f0a3ce1531fe6",
-    "kb": 155,
+    "innehall": "4f310d09",
+    "summa": "d23bc03859874432",
+    "kb": 154,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -117,7 +139,7 @@
   },
   "sprid-ut": {
     "innehall": "f8b8b2b5",
-    "summa": "e7a727c49edc3911",
+    "summa": "c3937ec984bbd336",
     "kb": 124,
     "namn": {
       "pt": 80,

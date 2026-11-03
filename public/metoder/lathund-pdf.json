@@ -1,22 +1,27 @@
 {
   "explicit-undervisning": {
-    "kalla": "40c771cf828a3336",
+    "kalla": "5647213605123c10",
     "pdf": "b570a81ed6bbe0a9",
-    "datum": "2026-11-02"
+    "datum": "2026-11-03"
   },
   "kooperativt-larande": {
-    "kalla": "cb16adfe72dc7c36",
+    "kalla": "cd5ea74f1d8277ba",
     "pdf": "a1b7101691a283b1",
-    "datum": "2026-11-02"
+    "datum": "2026-11-03"
   },
   "formativ-bedomning": {
-    "kalla": "294e5b8858402a59",
-    "pdf": "f4d40f609d6a5721",
-    "datum": "2026-11-02"
+    "kalla": "5a07ed7408156d55",
+    "pdf": "28c39e0c89584d97",
+    "datum": "2026-11-03"
   },
   "testbaserat-larande": {
-    "kalla": "63843953cbf14dfe",
-    "pdf": "5377c65709f8f01b",
-    "datum": "2026-11-02"
+    "kalla": "26e9055ce4e83a9b",
+    "pdf": "d9025520f78ff458",
+    "datum": "2026-11-03"
+  },
+  "larande-pa-kognitionsvetenskaplig-grund": {
+    "kalla": "d31757a24254b4ba",
+    "pdf": "47d97d7a7fc460f8",
+    "datum": "2026-11-03"
   }
 }

@@ -5,7 +5,7 @@
   "framsida": {
     "mening": "Säg det med ord och visa det i en bild.",
     "bild": {
-      "liknelse": "Kretsloppet på tavlan: med bara ord är sambandet svårt att följa. När läraren pekar i en enkel bild medan hen förklarar ser eleven hur delarna hänger ihop, och sedan ritar och förklarar eleven själv.",
+      "liknelse": "Kretsloppet på tavlan: med bara ord är sambandet svårt att följa. När läraren pekar i en enkel bild medan hen förklarar ser eleven hur delarna hänger ihop, och sedan pekar och förklarar eleven själv.",
       "steg": [
         {
           "rubrik": "Bara ord",
@@ -20,7 +20,7 @@
           "alt": "Samma tavla med en enkel bild av vattnets kretslopp: havet, molnet, regnet och berget, med pilar emellan. Läraren pekar med en pekpinne på pilen upp från havet och säger färre ord. I hörnet en bock och tre staplar av fem."
         },
         {
-          "rubrik": "Eleven ritar",
+          "rubrik": "Eleven pekar",
           "utfall": "Kan förklara",
           "fil": "ord-och-bild-3.svg",
           "alt": "Samma tavla, med floden från berget tillbaka till havet i en annan färg. Eleven pekar i bilden och förklarar, och läraren lyssnar. I hörnet en bock och alla fem staplarna."
@@ -98,7 +98,7 @@
       },
       {
         "rubrik": "Eleverna ritar",
-        "text": "Ur minnet, förklarar för grannen och lägger till i en annan färg."
+        "text": "Ur minnet, förklarar för grannen och ritar igen efter en vecka."
       }
     ],
     "avgor": {
@@ -107,7 +107,7 @@
     },
     "tankPa": "Strategin tjänar innehållet: kan du peka på bilden och säga sambandet med ämnets ord? Annars bär bilden inte innehållet. Låt bilden komma tillbaka, och låt eleverna rita den ur minnet igen efter en vecka. När eleverna lär sig läsa läser de ordet först och ser bilden efteråt.",
     "forskningen": {
-      "text": "I 56 lottade studier i skolan gav text med bild 0,47 mot samma innehåll utan bild, men 0,21 i förskolan till åk 6, och de flesta studierna var ett enda pass (Banks m.fl., 2026). Bilder till texten gav 0,27 i läsförståelse i åk 1–6 (Guo m.fl., 2020). Efter två veckor fanns ingen effekt kvar i de sju studier som mätte det (Banks m.fl., 2026), och i lärarnas presentationer blir ord och bild lätt bilder som inte bär innehållet (EEF, 2021).",
+      "text": "I 56 lottade studier i skolan gav text med bild 0,47 mot samma innehåll utan bild, men 0,21 från förskolan till åk 5, och två av tre studier var ett enda pass (Banks m.fl., 2026). Bilder till texten gav 0,27 i läsförståelse i åk 1–⁠6 (Guo m.fl., 2020). Två veckor eller mer efteråt fanns ingen effekt kvar i de sju studier som mätte så sent (Banks m.fl., 2026), och i lärarnas presentationer blir ord och bild lätt bilder som inte bär innehållet (EEF, 2021).",
       "kallor": [
         {
           "id": "banks-m-fl-2026",
@@ -153,7 +153,7 @@
       "omrade": "matematik",
       "arskurs": "4–6",
       "amne": "matematik",
-      "text": "Rita en blockmodell till uppgiften ”3/5 av dem på mötet hade glasögon, och det var 24 personer”. Säg och peka: ”Nämnaren är fem, så jag delar blocket i fem lika delar. Tre delar är 24, så en del är 8, och alla fem delarna är 40.” Sedan ritar eleverna modeller till ”3/7 av pärlorna är röda” och ”De röda pärlorna är 3/7 av de blå”, och förklarar för grannen varför modellerna ser olika ut. Lyssna efter om de säger vad en del är."
+      "text": "Rita en blockmodell till uppgiften ”24 personer på mötet hade glasögon, och det var 3/5 av alla”. Säg och peka: ”Nämnaren är fem, så jag delar blocket i fem lika delar. Tre delar är 24, så en del är 8, och alla fem delarna är 40.” Sedan ritar eleverna modeller till ”3/7 av pärlorna är röda” och ”De röda pärlorna är 3/7 av de blå”, och förklarar för grannen varför modellerna ser olika ut. Lyssna efter om de säger vad en del är."
     },
     {
       "omrade": "amnen",
@@ -170,7 +170,7 @@
     },
     {
       "metod": "kooperativt-larande",
-      "avsnitt": "Så kan det se ut: Biologi, åk 8",
+      "avsnitt": "Så kan det se ut: Biologi, åk 8",
       "mening": "Två med symbolen förklarar gruppens svar, och alla ritar vad en växt i en sluten burk tar in och bildar i fotosyntesen."
     }
   ]

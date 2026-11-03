@@ -670,7 +670,7 @@ export declare const stapelnsKant: (x0: number, i: number, steg: number, b: numb
 export declare const prickarna: <T>(bx: number, b: number, pass: T[]) => { x: number; slag: T }[];
 
 /** Metodens saker i en text (sajtens K-493): en sak är något som metoden har ett namn på och sajten en egen adress för. */
-export interface Sak { namn: string; former?: string[]; versal?: boolean }
+export interface Sak { namn: string; former?: string[]; versal?: boolean; forst?: boolean }
 /** Är namnet ett ord för en sak (ett ord på blad, kort, mall, lathund … eller ett långt sammansatt ord), som också hittas med liten bokstav? */
 export declare function arSaksord(namn: string): boolean;
 /** Formerna av en saks namn i bestämd form: samtalskortet, samtalskortets, samtalskorten. */

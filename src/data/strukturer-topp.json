@@ -1,38 +1,140 @@
 {
-  "datum": "2026-11-02T17:02:50.535Z",
+  "datum": "2026-11-03T13:18:52.642Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 26,
-      "besok": 6,
+      "antal": 67,
+      "besok": 27,
+      "utskrifter": 8
+    },
+    {
+      "id": "byt-och-sortera",
+      "antal": 27,
+      "besok": 7,
       "utskrifter": 4
     },
     {
+      "id": "visa",
+      "antal": 21,
+      "besok": 6,
+      "utskrifter": 3
+    },
+    {
+      "id": "5-3-1",
+      "antal": 20,
+      "besok": 5,
+      "utskrifter": 3
+    },
+    {
+      "id": "beratta-mera",
+      "antal": 18,
+      "besok": 8,
+      "utskrifter": 2
+    },
+    {
+      "id": "ping-pong-prat",
+      "antal": 16,
+      "besok": 11,
+      "utskrifter": 1
+    },
+    {
       "id": "kloka-pennan",
+      "antal": 15,
+      "besok": 10,
+      "utskrifter": 1
+    },
+    {
+      "id": "ova-och-kontrollera-i-par",
+      "antal": 14,
+      "besok": 4,
+      "utskrifter": 2
+    },
+    {
+      "id": "sanningsjakten",
+      "antal": 14,
+      "besok": 4,
+      "utskrifter": 2
+    },
+    {
+      "id": "tva-loser-problem",
+      "antal": 14,
+      "besok": 4,
+      "utskrifter": 2
+    },
+    {
+      "id": "hitta-min-regel",
+      "antal": 11,
+      "besok": 6,
+      "utskrifter": 1
+    },
+    {
+      "id": "epa",
+      "antal": 10,
+      "besok": 5,
+      "utskrifter": 1
+    },
+    {
+      "id": "flashcardlek",
+      "antal": 10,
+      "besok": 5,
+      "utskrifter": 1
+    },
+    {
+      "id": "inspireras",
+      "antal": 10,
+      "besok": 5,
+      "utskrifter": 1
+    },
+    {
+      "id": "lar-klassen",
+      "antal": 9,
+      "besok": 4,
+      "utskrifter": 1
+    },
+    {
+      "id": "en-for-alla",
       "antal": 8,
       "besok": 3,
       "utskrifter": 1
     },
     {
-      "id": "visa",
+      "id": "hornsamtal",
+      "antal": 8,
+      "besok": 3,
+      "utskrifter": 1
+    },
+    {
+      "id": "karusellen",
+      "antal": 8,
+      "besok": 3,
+      "utskrifter": 1
+    },
+    {
+      "id": "skriv-byt-matcha",
+      "antal": 8,
+      "besok": 3,
+      "utskrifter": 1
+    },
+    {
+      "id": "las-med-roller",
       "antal": 7,
       "besok": 2,
       "utskrifter": 1
     },
     {
-      "id": "beratta-mera",
+      "id": "sekvenser",
+      "antal": 7,
+      "besok": 2,
+      "utskrifter": 1
+    },
+    {
+      "id": "brainstorm",
       "antal": 6,
       "besok": 1,
       "utskrifter": 1
     },
     {
-      "id": "epa",
-      "antal": 6,
-      "besok": 1,
-      "utskrifter": 1
-    },
-    {
-      "id": "inspireras",
+      "id": "bygga-en-triangel",
       "antal": 6,
       "besok": 1,
       "utskrifter": 1
@@ -44,31 +146,157 @@
       "utskrifter": 1
     },
     {
-      "id": "ping-pong-prat",
+      "id": "samtalspromenad",
       "antal": 6,
       "besok": 1,
       "utskrifter": 1
     },
     {
-      "id": "sanningsjakten",
-      "antal": 6,
-      "besok": 1,
+      "id": "fraga-fraga-byt",
+      "antal": 5,
+      "besok": 0,
       "utskrifter": 1
+    },
+    {
+      "id": "kooperativ-fyrfaltare",
+      "antal": 5,
+      "besok": 5,
+      "utskrifter": 0
+    },
+    {
+      "id": "ppt-par-pa-tid",
+      "antal": 5,
+      "besok": 0,
+      "utskrifter": 1
+    },
+    {
+      "id": "sortering",
+      "antal": 5,
+      "besok": 0,
+      "utskrifter": 1
+    },
+    {
+      "id": "ape",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
+      "id": "kooperativ-redovisning",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
+      "id": "lika-och-olika",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
+      "id": "tarningsquiz",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
+      "id": "anteckningspar",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "formulera-dela-lyssna-skapa",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "kims-prov",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "kommunicera",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
     },
     {
       "id": "laxkontroll-i-grupp",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "rita-byt-och-skriv",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "vem-ar-jag",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "en-far-ga",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
     },
     {
-      "id": "byt-och-sortera",
+      "id": "kunskapskedjan",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "las-rita-redovisa",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "motas-pa-mitten",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "pa-rad",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "provet-tva-ganger",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "skicka-ett-problem",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "speed-dating",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "epk",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
     },
     {
-      "id": "en-far-ga",
+      "id": "hor-vi-ihop",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
@@ -80,43 +308,31 @@
       "utskrifter": 0
     },
     {
-      "id": "karusellen",
+      "id": "inre-yttre-cirkel",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
     },
     {
-      "id": "kims-prov",
+      "id": "lasa-och-forklara-i-par",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
     },
     {
-      "id": "kooperativ-fyrfaltare",
+      "id": "mina-ord-dina-ord",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
     },
     {
-      "id": "kooperativ-redovisning",
+      "id": "parrespons",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
     },
     {
-      "id": "kunskapskedjan",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "lar-klassen",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "motas-pa-mitten",
+      "id": "rondellen",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
@@ -129,6 +345,42 @@
     },
     {
       "id": "rubriceringsspel",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "samtalsbingo",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "sant-eller-falskt",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "skriva-och-redigera-i-par",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "solfjader",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "stall-en-fraga",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "trestegsintervju",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0

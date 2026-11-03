@@ -27,10 +27,25 @@ const UNDANTAG = [
   [/^uppfoljning\.rader\.tid$/, 'uppföljningens tid, som planen läser (tolkaTid) och läsaren ser i rubriken nar'],
   [/^(planeringsmall|observation)\.|^karna\.komponenter\.kryss$/, 'de tomma mallarna, som står på sidan som bilder av bladen'],
 ];
-// Texter som riggens pdf med allt ännu inte har, fast sidan visar dem, med postens nummer: [/fältets väg/, 'vad', 'K-nnn'].
-// Raden tas bort när riggen har byggt om, och provet stannar då på varje text som glider isär. Tom sedan riggens dce9e59
-// (K-633).
+// Texter som riggens pdf med allt ännu inte har, fast sidan visar dem, med postens nummer:
+// [/metodens id: fältets väg/, 'vad', 'K-nnn']. Raden tas bort när riggen har byggt om, och provet stannar då på varje text
+// som glider isär. Tom sedan riggens dce9e59 (K-633) och 10e99c8 (K-706).
 const VANTAR = [];
+// En text som pdf:en har men som pdftotext läser i en annan ordning, för att en smal tabellcell eller en bildtext bredvid en
+// annan bryts över flera rader och läses rad för rad tvärs över cellerna (Lärande på kognitionsvetenskaplig grund
+// 2026-11-03: "Avdunstning: solen 3/3 värmer vattnet"): textens tecken står i ordning, från en början på åtta tecken som
+// står precis så och inom två och en halv gånger textens längd. Den räknas som funnen och sägs med ett utropstecken.
+function iAnnanOrdning(dok, t) {
+  const borjan = t.slice(0, 8);
+  for (let s = dok.indexOf(borjan); s >= 0; s = dok.indexOf(borjan, s + 1)) {
+    const slut = Math.min(dok.length, s + Math.ceil(t.length * 2.5));
+    let j = 0;
+    for (let i = s; i < slut && j < t.length; i++) if (dok[i] === t[j]) j++;
+    if (j === t.length) return true;
+  }
+  return false;
+}
+const annanOrdning = [];
 const html2text = (h) => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&#x27;/g, "'").replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)));
 // Metodens texter med sin väg, minst fyra ord. En replik inom citattecken jämförs utan dem, eftersom sidan och Word sätter
 // dem olika.
@@ -56,9 +71,11 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     if (UNDANTAG.some(([re]) => re.test(falt))) continue;
     const t = ren(text);
     const pa = sidan.includes(t);
-    const i = dokumentet.includes(t);
+    const exakt = dokumentet.includes(t);
+    const i = exakt || (pa && iAnnanOrdning(dokumentet, t));
+    if (i && !exakt) annanOrdning.push(`${id}: ${vag}`);
     if (pa || i) provade++;
-    const vantar = VANTAR.find(([re]) => re.test(falt));
+    const vantar = VANTAR.find(([re]) => re.test(`${id}: ${falt}`));
     if (pa && !i && vantar) vantande.add(vantar[1]);
     else if (pa && !i) fel.push(`${id}: ${vag} står på sidan men inte i ${id}.pdf: "${text.slice(0, 70)}"`);
     if (i && !pa) fel.push(`${id}: ${vag} står i ${id}.pdf men inte på sidan: "${text.slice(0, 70)}"`);
@@ -66,4 +83,5 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
 }
 if (fel.length) { console.error(`metoderparitet: ${fel.length} fel\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`metoderparitet: ${provade} texter ur metodernas filer står både på sidan och i riggens pdf med allt.`);
-if (vantande.size) console.log(`! metoderparitet: riggens pdf saknar ännu det sidan visar av ${[...vantande].join(', ')} (K-633)`);
+if (annanOrdning.length) console.log(`! metoderparitet: ${annanOrdning.length} texter står i riggens pdf men läses i en annan ordning, i en tabell eller bredvid en bild: ${annanOrdning.join(', ')}`);
+if (vantande.size) console.log(`! metoderparitet: riggens pdf saknar ännu det sidan visar av ${[...vantande].join(', ')} (${[...new Set(VANTAR.filter(([, v]) => vantande.has(v)).map(([, , k]) => k))].join(', ')})`);

@@ -1185,7 +1185,7 @@ const strukturer = defineCollection({
   }).superRefine((s, ctx) => { for (const f of strukturensFel(s)) ctx.addIssue({ code: 'custom', path: [], message: f }); }),
 });
 
-// Verktyget Strategier (K-699, arbetsnamnet): en strategi per fil, som metodriggen skriver och ritar
+// Verktyget Strategier (K-699): en strategi per fil, som metodriggen skriver och ritar
 // (C:/metodrigg/out/strategier/) och sajten tar in och sätter som kort och sida. Fälten och gränserna står i standarden
 // (strategiensFel), som riggen kör före leveransen; formen är sajtens svar till riggen i out/strategier/FRAN-SAJTEN.md.
 // Schemat prövar fälten löst och låter standarden säga felen, så att riggen och bygget ger samma meningar.

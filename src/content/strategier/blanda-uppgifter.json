@@ -105,9 +105,9 @@
       "rubrik": "Undvik",
       "text": "Att blanda innan slagen sitter, eller att blanda olika ämnen."
     },
-    "tankPa": "Strategin tjänar innehållet: blanda bara slag som eleverna faktiskt förväxlar. Den är bäst prövad i matematik för 8–14 år och mycket lite i andra ämnen och med de yngsta. Säg till klassen att det ska kännas svårare, och att det är valet som övas.",
+    "tankPa": "Strategin tjänar innehållet: blanda bara slag som eleverna faktiskt förväxlar. Den är bäst prövad i matematik för 8–⁠14 år och mycket lite i andra ämnen och med de yngsta. Säg till klassen att det ska kännas svårare, och att det är valet som övas.",
     "forskningen": {
-      "text": "I vanliga klassrum gav blandade uppgifter 0,40 i 10 studier, och 0,54 i matematik (Ruitenburg m.fl., 2026). I åk 7 hade de som övat blandat 61 procent rätt mot 38 procent på ett prov en månad senare (Rohrer m.fl., 2020). Underlaget gäller nästan bara matematik, och att blanda olika skolämnen saknar stöd (Perry m.fl., 2021; Weinstein m.fl., 2018).",
+      "text": "I vanliga klassrum gav blandade uppgifter 0,40 i 10 studier, och 0,54 i matematik (Ruitenburg m.fl., 2026). I åk 7 hade de som övat blandat 61 procent rätt mot 38 procent på ett prov en månad senare (Rohrer m.fl., 2020). Underlaget gäller nästan bara matematik, och att blanda olika skolämnen saknar stöd (Perry m.fl., 2021; Weinstein m.fl., 2018).",
       "kallor": [
         {
           "id": "ruitenburg-m-fl-2026",
@@ -165,7 +165,7 @@
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "SO",
-      "text": "När klassen har arbetat med franska och ryska revolutionen får eleverna kort med händelser ur båda i blandad ordning. För varje kort avgör de vilken revolution det gäller och skriver vad i händelsen som avslöjar det. Händelser som liknar varandra, som att den som styr avsätts, tvingar eleverna att se på orsaker och sammanhang. Det finns inga skolstudier av blandning i SO, så se det som ett försök och lyssna efter elevernas skäl."
+      "text": "När klassen har arbetat med franska och ryska revolutionen får eleverna kort med händelser ur båda i blandad ordning. För varje kort avgör de vilken revolution det gäller och skriver vad i händelsen som avslöjar det. Facit kommer när alla kort är lagda. Händelser som liknar varandra, som att den som styr avsätts, tvingar eleverna att se på orsaker och sammanhang. Det finns inga skolstudier av blandning i SO, så se det som ett försök och lyssna efter elevernas skäl."
     }
   ],
   "metoderSomGorDen": [

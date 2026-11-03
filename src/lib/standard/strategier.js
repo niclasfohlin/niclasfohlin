@@ -1,5 +1,5 @@
-// Strategierna (sajtens K-699): reglerna för en strategi i verktyget Strategier, med arbetsnamnet som Niclas ännu inte har
-// valt. En strategi är ett sätt att lära ur kognitionsvetenskapen, som Plocka fram, skriven och ritad av metodriggen
+// Strategierna (sajtens K-699): reglerna för en strategi i verktyget Strategier, med namnet som Niclas valde 2026-11-03.
+// En strategi är ett sätt att lära ur kognitionsvetenskapen, som Plocka fram, skriven och ritad av metodriggen
 // (C:/metodrigg/out/strategier/) och satt av sajten som ett kort i strukturkortets form och en sida. Formen och fälten är
 // sajtens svar till riggen i out/strategier/FRAN-SAJTEN.md. Reglerna står här, så att sajtens schema, intaget och riggen
 // prövar samma sak före leveransen.

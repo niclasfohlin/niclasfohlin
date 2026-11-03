@@ -3079,7 +3079,8 @@ function vavRadens(v: VavIWord, bas: string, medRaden: boolean) {
 }
 function vavBarn(vavt: VavIWord[], bas: string): Paragraph[] {
   return vavt.flatMap((v, i) => {
-    const medRaden = i === vavt.length - 1 && !v.knappenFinns;
+    // Raden till verktyget vid verktygets sista ruta på platsen, så att Strukturer och Strategier får var sin.
+    const medRaden = !vavt.slice(i + 1).some((w) => w.verktyg.adress === v.verktyg.adress) && !v.knappenFinns;
     return [
       ...(v.text ? [stycke(v.text, { fore: 120, hallIhop: true })] : []),
       new Paragraph({ spacing: { before: v.text ? 0 : 120, after: 120 }, children: vavRadens(v, bas, medRaden) }),

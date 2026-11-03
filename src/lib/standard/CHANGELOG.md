@@ -1,5 +1,13 @@
 # Ändringar i standarden
 
+## 0.57.0, 2026-11-04
+
+- `undervisningsmetod.js` (K-699, K-702): `undervisningsmetodensFel` prövar metodens fält `strategikort` med `strategikortensFel`, som `strukturkort`.
+- `undervisningsmetod.js` (K-703; Niclas 2026-11-03: "Vissa rubriker blir stela med 'Lagret på...'"): `LAGRETS_ORD` har vanliga ord, Planering (som riggens planeringsblad, eftersom Formativ bedömning har en del som heter Din planering), Delarna, Hela lektionen och din planering; Lagret står i en rubrik bara som del 2.
+- `strategier.js`: `STRATEGIERNAS_FARG`, `strategikortetsData`, `strategikortetsInnehall`, `STRATEGIBLADET` och `metodensStrategiblad`, och minnets bild med gränser för namn, text och pil.
+- `saker.js`: en sak med `forst` hittas också först i en mening, som en strategis namn i en metod som lär ut strategierna (andra ögat på Strategier 2026-11-03).
+- `saker.js`: kursplanen står bland `EGNA_SAKER`, eftersom den är Skolverkets och inte en sak i metoden (Lärande på kognitionsvetenskaplig grund).
+
 ## 0.56.0, 2026-11-03
 
 - `strategier.js` (sajtens K-699, verktyget Strategier med metodriggen): `STRATEGINS_GRANSER`, `STRATEGINS_OMRADEN` och `strategiensFel`, reglerna för en strategi som sajten och riggen prövar före leveransen, med fälten och gränserna i sajtens svar till riggen (`C:/metodrigg/out/strategier/FRAN-SAJTEN.md`). `strategikortensFel` och `METODENS_STRATEGIKORT`, metodens fält `strategikort`, som `strukturkort` men med udda antal tillåtet för metodens fem. `strategikortetsFil`, `STRATEGIKORTEN_ALLA` och `metodensStrategikort`, kortens filer.

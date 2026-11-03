@@ -28,7 +28,7 @@ const DATABASENS_ORD = ['problem', 'problemen', 'texter', 'texterna', 'lästexte
  *  den inte är gemensam. del är rutans rubrik i metodbanken. mejl är det som följer på länken i mejlet om en ny metod.
  *  arskurs är årskurserna som en delad sak är gjord för, som F–9, när de är fler än metodernas som visar den: Utveckla
  *  högläsning stöder all högläsning i F–9 men sås bara där den stöder metodens kärna (Niclas 2026-10-20, såddprovet). */
-export type Central = { id: string; namn: string; knapp?: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string; arskurs?: string; omraden?: 'alla'; vav?: { etikett: string; liknar: string; liknarFler: string; passar: string; passarFler: string; text: string; rad: string } };
+export type Central = { id: string; namn: string; knapp?: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string; arskurs?: string; omraden?: 'alla'; publicerad?: string; vav?: { etikett: string; liknar: string; liknarFler: string; passar: string; passarFler: string; text: string; rad: string } };
 // vav är standarden för ett delat verktyg som sajten väver in i metoderna (src/lib/vav.ts): etikett står över det som vävs
 // in, och liknar i stället när metoden inte nämner delen men eleverna arbetar i samma form; text står i rutan före verktygets
 // knapp, och rad står under kortraden med delarnas små kort och leder till verktyget.
@@ -144,6 +144,16 @@ export function centralKnappHtml(c: Central, metod: string, titel: string, klass
   return `<a class="${skyddad(klass)}"${attr}>${skyddad(knappensNamn(c))}${medTitel ? `<span class="visually-hidden">: ${skyddad(titel)}</span>` : ''}${c.slag === 'pdf' ? '<span class="visually-hidden">, pdf</span>' : ''}</a>`;
 }
 
+/**
+ * Visar metoden saken genom sådden, när sajten väver in sakens delar på platser i metoden (src/data/sadd.json,
+ * src/lib/vav.ts), som verktyget Strategier (K-702)? En metod visar en sak med fältet centrala eller med sådden, för
+ * kontrollen nedan och för rutan Verktyg i bankerna (Verktygsruta.astro).
+ */
+export function vavarSaken(sak: string, metod: string): boolean {
+  const j = (sadd as unknown as { saker: Record<string, { ja?: Record<string, { vav?: unknown[] } | string> }> }).saker[sak]?.ja?.[metod];
+  return typeof j === 'object' && (j.vav?.length ?? 0) > 0;
+}
+
 /** Metoderna som en sak hör till men inte visar, och saker som ingen metod visar: fel som stoppar bygget ([id].astro). */
 export function provaCentrala(metoder: { id: string; data: MetodForText }[]): void {
   const fel = CENTRALA.flatMap((c) => {
@@ -160,11 +170,7 @@ export function provaCentrala(metoder: { id: string; data: MetodForText }[]): vo
       if (!m) return [`src/data/centrala.json: ${c.id} hör till ${c.metod}, som inte finns bland de publicerade metoderna.`];
       if (!m.data.centrala?.some((x) => x.id === c.id)) return [`${c.metod} visar inte sin centrala sak ${c.id}: lägg den i fältet centrala med sin plats i texten.`];
     }
-    // En metod visar saken med fältet centrala, eller med sådden, när sajten väver in sakens delar på platser i metoden
-    // (src/data/sadd.json, src/lib/vav.ts), som verktyget Strategier (K-702).
-    const vavda = (sadd as unknown as { saker: Record<string, { ja?: Record<string, { vav?: unknown[] } | string> }> }).saker[c.id]?.ja ?? {};
-    const vavar = (m: string) => { const j = vavda[m]; return typeof j === 'object' && (j.vav?.length ?? 0) > 0; };
-    if (!metoder.some((m) => m.data.centrala?.some((x) => x.id === c.id) || vavar(m.id))) return [`src/data/centrala.json: ingen publicerad metod visar ${c.id}.`];
+    if (!metoder.some((m) => m.data.centrala?.some((x) => x.id === c.id) || vavarSaken(c.id, m.id))) return [`src/data/centrala.json: ingen publicerad metod visar ${c.id}.`];
     return [];
   });
   if (fel.length) throw new Error(`De centrala sakerna:\n${fel.join('\n')}`);

@@ -107,7 +107,7 @@
           "plocka-fram"
         ],
         "slag": "form",
-        "om": "Exit-lappen"
+        "om": "Lappen i slutet av lektionen"
       }
     ]
   },
@@ -134,6 +134,37 @@
         ],
         "slag": "forslag",
         "om": "Stödorden och den egna uppgiften"
+      }
+    ]
+  },
+  "larande-pa-kognitionsvetenskaplig-grund": {
+    "skal": "Metoden lär ut de fem strategierna, och lektionen gör var och en där kärnan säger: Plocka fram och Sprid ut i startens frågor ur minnet från förra veckan och månaden, Avlasta minnet och Ord och bild i Det nya med det lösta exemplet och den enkla bilden som läraren pekar i, och Blanda uppgifter i Övas blandade rad med slaget först.",
+    "platser": [
+      {
+        "efter": "steg 1",
+        "delar": [
+          "plocka-fram",
+          "sprid-ut"
+        ],
+        "slag": "form",
+        "om": "Startens frågor"
+      },
+      {
+        "efter": "steg 2",
+        "delar": [
+          "avlasta-minnet",
+          "ord-och-bild"
+        ],
+        "slag": "form",
+        "om": "Exemplet och bilden"
+      },
+      {
+        "efter": "steg 3",
+        "delar": [
+          "blanda-uppgifter"
+        ],
+        "slag": "form",
+        "om": "Den blandade raden"
       }
     ]
   }

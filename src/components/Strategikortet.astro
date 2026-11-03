@@ -19,6 +19,6 @@ const f = s.data.framsida as { mening: string; bild: { steg: { fil?: string }[] 
         <span class="st-kort-rad">{f.mening}</span>
       </span>
     </a>
-    <span class="sg-nr" aria-label={`Strategi ${s.data.nr}`}>{s.data.nr}</span>
+    <span class="sg-nr"><span class="visually-hidden">Strategi </span>{s.data.nr}</span>
   </article>
 </li>

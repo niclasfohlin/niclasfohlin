@@ -1,9 +1,10 @@
-// Verktyget Strategier (K-699, arbetsnamnet; underlag/prov/strategier/UPPDRAGET.md): strategierna ur metodriggen som sidor,
+// Verktyget Strategier (K-699; underlag/prov/strategier/UPPDRAGET.md): strategierna ur metodriggen som sidor,
 // /strategier med alla och /strategier/<id> för en, med berättelsen, förklaringen, stegen, förslagen och strategikortet att
 // skriva ut. Strategierna står i src/content/strategier/, en per fil, och prövas med standardens strategiensFel; korten är
 // pdf:er som scripts/strategier/kort.mjs gör med Chrome och som committas, med manifestet src/data/strategikort.json.
 // Bygget stannar på en strategi som visas men vars kort saknas eller är äldre än strategin, som för strukturkorten.
 import { readFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import type { CollectionEntry } from 'astro:content';
 import { publicerade } from './innehall';
@@ -103,6 +104,11 @@ export function strategikortetI(id: string, d: object): Strategikortet | undefin
   return (d as { strategikort?: Strategikortet }).strategikort ?? (sadden as unknown as Record<string, Strategikortet | undefined>)[id];
 }
 
+/** Platserna i en metod i Metoder där strategiernas små kort vävs in (sajtens register, K-702), med samma form som sådden i
+ *  Stödundervisning: efter, delar, slag och om. */
+export const strategiernasPlatser = (id: string): { efter: string; delar: string[]; slag?: 'form' | 'forslag'; om?: string }[] =>
+  (sadden as unknown as Record<string, { platser?: { efter: string; delar: string[]; slag?: 'form' | 'forslag'; om?: string }[] } | undefined>)[id]?.platser ?? [];
+
 /** En strategi som en metod visar: det metodens avsnitt och dess små kort behöver. */
 export type ImporteradStrategi = { id: string; nr: number; namn: string; mening: string; bilder: (string | null)[] };
 /**
@@ -125,6 +131,19 @@ export function provaMetodensStrategikort(metod: string, ids: string[]) {
   const m = MANIFESTET[metodensStrategikort(metod).nyckel];
   if (!m || !existsSync(publikt('strategier', 'kort', metodensStrategikort(metod).fil)) || (m.kort ?? []).join() !== ids.join()) throw new Error(`${metod}: strategikorten i public/strategier/kort/${metodensStrategikort(metod).fil} saknas eller har andra strategier än metodens fält strategikort. Gör om dem med node scripts/strategier/kort.mjs --vid-behov (npm run validera gör det).`);
 }
+
+/**
+ * Adressen med filens version, som scripts/filversion.mjs sätter på sidornas länkar (filens sha256, åtta tecken), för en
+ * adress som inte står i sidans html, som Lär dig metodens knappar; samma som för strukturkorten (src/lib/strukturer.ts).
+ */
+const versioner = new Map<string, string>();
+export const kortensVersion = (adress: string) => {
+  if (!versioner.has(adress)) {
+    const fil = join(process.cwd(), 'public', adress);
+    versioner.set(adress, existsSync(fil) ? `${adress}?v=${createHash('sha256').update(readFileSync(fil)).digest('hex').slice(0, 8)}` : adress);
+  }
+  return versioner.get(adress)!;
+};
 
 /** Bladet med alla strategier som visas, väggens mitt, ett liggande A4 (scripts/strategier/kort.mjs). */
 export const BLADETS_ADRESS = `/strategier/kort/${STRATEGIBLADET.fil}`;

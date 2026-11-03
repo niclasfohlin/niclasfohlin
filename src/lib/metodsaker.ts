@@ -20,7 +20,7 @@ import { arSaksord, forstaLedet, forstaOrdet, sakdelar, sakspann, slugAv, veckor
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
  * veckor: adressen för metodens veckor, när saken finns en gång för några veckor (Mina lärdomar: vecka 1–2).
  */
-export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string>; baraVeckorna?: boolean; slag?: 'avsnitt' | 'tabell' }
+export interface MetodSak { namn: string; former?: string[]; versal?: boolean; forst?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string>; baraVeckorna?: boolean; slag?: 'avsnitt' | 'tabell' }
 
 // Veckorna som ett led i en rubrik säger: "vecka 3" och "vecka 1–2".
 const veckornaI = (led?: string): number[] | undefined => { const v = veckorI(led); return v ? Array.from({ length: v.till - v.fran + 1 }, (_, i) => v.fran + i) : undefined; };

@@ -6,6 +6,8 @@ import { arbetslagetsMoten, dagAv, forstaHelaLektionen, forstaLektionensForm, fo
 import { metodensAdress, utfalletsAnkare, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import { metodensStrukturer, metodensKortAdress, ALLA_KORTENS_ADRESS, kortensVersion, allaKortensAntal, allaKortensStorlek, TVA_PA_A4 } from './strukturer';
 import { metodensFiler, metodensTabellfiler, sakernasFiler } from './undervisningsmetodfiler';
+import { strategikortetI, metodensKortAdress as metodensStrategikortAdress, ALLA_KORTENS_ADRESS as ALLA_STRATEGIKORTENS_ADRESS, allaKortensAntal as allaStrategikortensAntal, allaKortensStorlek as allaStrategikortensStorlek, kortensVersion as strategikortensVersion } from './strategier';
+import { metodensStrategiblad } from './standard/index.js';
 
 /** Planens data, som sidan bär som JSON och skriptet räknar med. */
 export interface LarDigData {
@@ -49,7 +51,7 @@ export interface LarDigData {
   hallFast: { rubrik: string; rader: { sak: string; text: string }[] };
   lasMer: { titel: string; upphov?: string; ar?: number; adress?: string; text: string; slag?: string }[];
   /** Metodens saker som en text kan nämna, med adressen: bladen och affischerna i Materialet för klassen, lektionskortet och mallarna. Checklistan länkar dem (sakdelar i standarden). */
-  saker: { namn: string; versal?: boolean; adress: string }[];
+  saker: { namn: string; versal?: boolean; forst?: boolean; adress: string }[];
   /** Läsvägen i metoden, med ankarna på metodens sida. */
   lasvag: { delar: { namn: string; adress: string }[]; minuter: number; nar: string };
   /** Filernas adresser när filen finns, och annars stället på metodens sida där materialet står. */
@@ -60,6 +62,8 @@ export interface LarDigData {
   filer: { lektionskort: { adress: string; fil: boolean }; planeringsmall: { adress: string; fil: boolean }; materialet: { adress: string; fil: boolean }; observation: { adress: string; fil: boolean }; tabeller: { namn: string; adress: string }[] };
   /** Strukturkorten som metoden importerar, att skriva ut och ha till hands: metodens kort och alla kort i verktyget (K-661). */
   strukturkort?: { metodens: string; antal: number; alla: string; allaAntal: number; allaStorlek: string; utskrift: string; vid: string; text: string };
+  /** Strategierna för lärande som metoden visar (K-699, K-702): metodens kort, alla kort, metodens blad när det finns, och texten. */
+  strategikort?: { metodens: string; antal: number; alla: string; allaAntal: number; allaStorlek: string; blad?: { adress: string; namn: string }; utskrift: string; text: string };
   /** Metodens När det glider och stödet för elever som behöver mer, när metoden har dem, som Mitt i hänvisar till (K-631). */
   glider?: string;
   stod?: { rubrik: string; adress: string };
@@ -117,6 +121,7 @@ export function larDigData(id: string, d: Um): LarDigData {
     saker: undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer: metodensStrukturer(d, strang(d.titel)) }),
     lasvag: (() => { const l = lasvagen(d); return { delar: l.delar.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })), minuter: l.minuter, nar: slagensOrd(d).lasning }; })(),
     ...(d.strukturkort ? { strukturkort: { metodens: kortensVersion(metodensKortAdress(id)), antal: somLista(d.strukturkort.strukturer).length, alla: kortensVersion(ALLA_KORTENS_ADRESS), allaAntal: allaKortensAntal(), allaStorlek: allaKortensStorlek(), utskrift: TVA_PA_A4, vid: slagensOrd(d).strukturkortVid, text: strang(d.strukturkort.text) } } : {}),
+    ...((sk) => (sk ? { strategikort: { metodens: strategikortensVersion(metodensStrategikortAdress(id)), antal: sk.strategier.length, alla: strategikortensVersion(ALLA_STRATEGIKORTENS_ADRESS), allaAntal: allaStrategikortensAntal(), allaStorlek: allaStrategikortensStorlek(), ...((d as { strategikort?: { blad?: string } }).strategikort?.blad ? { blad: { adress: strategikortensVersion(`/strategier/kort/${metodensStrategiblad(id).fil}`), namn: (d as unknown as { strategikort: { blad: string } }).strategikort.blad } } : {}), utskrift: TVA_PA_A4, text: strang(sk.text) } } : {}))(strategikortetI(id, d)),
     // Veckorna där läraren väljer utfall, de vars rad säger utfall, får knappen till utfallen på metodens sida.
     ...(() => {
       const s = somLista(d.steg?.rader).find((x) => (x as { redo?: unknown }).redo) as { namn?: string } | undefined;

@@ -29,7 +29,7 @@ const beskrivning = `${f.mening} ${d.namn} är en kognitionsvetenskaplig strateg
       <header>
         <p class="meta brodsmula"><a href="/metoder">Metoder</a>{metoden && <> · <a href={`/metoder/${metoden.id}`}>{metoden.data.titel}</a></>} · <a href={STRATEGIERNAS_ADRESS}>{STRATEGIERNAS_NAMN}</a></p>
         <h1>{d.namn}</h1>
-        <p class="st-slag"><span class="sg-nr">{d.nr}</span>Strategi</p>
+        <p class="st-slag"><span class="sg-nr" aria-hidden="true">{d.nr}</span>Strategi<span class="visually-hidden"> {d.nr}</span></p>
         <p class="ingress st-syfte">{f.mening}</p>
       </header>
 

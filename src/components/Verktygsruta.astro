@@ -14,7 +14,7 @@
 // bankens namn i statistiken, så att Metoders tryck går att skilja från Stöds (DRIFT.md under Besöksstatistik).
 // scripts/metoderprov.mjs stannar när bankerna inte visar samma saker eller rutan saknas i en av dem.
 import { site } from '../data/site';
-import { CENTRALA, type Central } from '../lib/centrala';
+import { CENTRALA, vavarSaken, type Central } from '../lib/centrala';
 import { metoderSorterade } from '../lib/innehall';
 import { SAMLINGAR } from '../lib/samlingar';
 import { arskursSpannet, spannITexten, spannText } from '../lib/tackning';
@@ -30,7 +30,8 @@ const bank = hemma ? 'Metodbanken' : SAMLINGAR[samling].namn;
 const metoder = await metoderSorterade();
 
 // Metoderna som visar en sak. En lektion räknas till sin serie, vars kort står i banken.
-const visar = (c: Central) => metoder.filter((m) => c.slag === 'formular' ? m.data.pabordet?.some((b) => b.google === c.adress) : m.data.centrala?.some((x) => x.id === c.id));
+// En metod visar ett verktyg med fältet centrala eller med sådden, som Strategier (vavarSaken i src/lib/centrala.ts).
+const visar = (c: Central) => metoder.filter((m) => c.slag === 'formular' ? m.data.pabordet?.some((b) => b.google === c.adress) : m.data.centrala?.some((x) => x.id === c.id) || vavarSaken(c.id, m.id));
 const DELAR = [
   { id: 'verktyg', namn: 'Verktyg', tomt: 'Inga verktyg för det du har valt.' },
   { id: 'stodmaterial', namn: 'Stödmaterial', tomt: 'Inget stödmaterial för det du har valt.' },

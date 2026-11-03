@@ -470,7 +470,11 @@ export function arbetslagetsMoten(d) {
  * lektionsförlopps form.
  */
 const LEKTIONENS_ORD = Object.freeze({ planera: 'Planera lektionen', planeraRad: 'Planera varje lektion på ett blad i planeringsmallen.', delarna: 'Lektionens delar', hela: 'Hela lektionen', lathunden: 'planeringen av en lektion', kortet: 'Lektion', alla: 'Alla elever visar', beslut: 'Beslutet', zon: 'Lektionen', bladetsBeslut: 'Beslutet', lasning: 'före första lektionen', strukturkortVid: 'fore', taMed: 'Ta med planeringsmallen med Efter lektionen ifylld och observationsmallarna.' });
-const LAGRETS_ORD = Object.freeze({ planera: 'Lagret på din planering', planeraRad: 'Skriv det här på den planering du har, eller på bladet i planeringsmallen när du vill.', delarna: 'Lagrets delar', hela: 'Hela lagret', lathunden: 'lagret på din planering', kortet: 'Din lektion', alla: 'Eleverna', beslut: 'Så avgör du', zon: 'Lagret', bladetsBeslut: 'Vägarna', lasning: 'under vecka 1', strukturkortVid: 'efter', taMed: 'Ta med din planering med dina kryss och observationsmallarna.' });
+// Lagret står i en rubrik bara som del 2 (delarnaAv); de andra rubrikerna har vanliga ord (K-703; Niclas 2026-11-03: "Vissa
+// rubriker blir stela med 'Lagret på...' ... lite på näsan att ha det i alla titlar hela tiden. Gillar inte för långa titlar
+// som blir som meningar."). Rubriken i del 3 heter Planering, som riggens planeringsblad, eftersom Formativ bedömning har en del i
+// lektionen som heter Din planering (andra ögat 2026-11-04, P2).
+const LAGRETS_ORD = Object.freeze({ planera: 'Planering', planeraRad: 'Skriv det här på den planering du har, eller på bladet i planeringsmallen när du vill.', delarna: 'Delarna', hela: 'Hela lektionen', lathunden: 'din planering', kortet: 'Din lektion', alla: 'Eleverna', beslut: 'Så avgör du', zon: 'Lagret', bladetsBeslut: 'Vägarna', lasning: 'under vecka 1', strukturkortVid: 'efter', taMed: 'Ta med din planering med dina kryss och observationsmallarna.' });
 export const SLAGENS_FORM = Object.freeze({
   lektionsforlopp: Object.freeze({ forstaLektionen: 'Första lektionen', din: 'din första lektion', start: 'Första lektionen med eleverna', ...LEKTIONENS_ORD }),
   strukturer: Object.freeze({ forstaLektionen: 'Den första hela lektionen', din: 'din första hela lektion', start: 'Första samarbetet med eleverna', ...LEKTIONENS_ORD }),
