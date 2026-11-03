@@ -1,0 +1,166 @@
+{
+  "nr": 4,
+  "namn": "Ord och bild",
+  "forskningensOrd": "dual coding",
+  "framsida": {
+    "mening": "Säg det med ord och visa det i en bild.",
+    "bild": {
+      "liknelse": "Kretsloppet på tavlan: med bara ord är sambandet svårt att följa. När läraren pekar i en enkel bild medan hen förklarar ser eleven hur delarna hänger ihop, och sedan ritar och förklarar eleven själv.",
+      "steg": [
+        {
+          "rubrik": "Bara ord",
+          "utfall": "Svårt att följa",
+          "fil": "ord-och-bild-1.svg",
+          "alt": "Läraren pratar vid en tom tavla, och pratbubblan är full av ord. Eleven lyssnar."
+        },
+        {
+          "rubrik": "Ord och bild",
+          "utfall": "Ser sambandet",
+          "fil": "ord-och-bild-2.svg",
+          "alt": "Samma tavla med en enkel bild av vattnets kretslopp: havet, molnet, regnet och berget, med pilar emellan. Läraren pekar på pilen upp från havet och säger färre ord."
+        },
+        {
+          "rubrik": "Eleven ritar",
+          "utfall": "Kan förklara",
+          "fil": "ord-och-bild-3.svg",
+          "alt": "Eleven har ritat kretsloppet själv på tavlan, med floden tillbaka till havet i en annan färg, och pekar i sin bild medan hen förklarar."
+        }
+      ]
+    },
+    "insikt": "När orden och bilden fogas ihop till ett samband får eleven två vägar tillbaka.",
+    "handling": [
+      {
+        "ikon": "rita",
+        "text": "Rita ur minnet"
+      },
+      {
+        "ikon": "pekfinger",
+        "text": "Peka och förklara"
+      },
+      {
+        "ikon": "oppen-bok",
+        "text": "Titta och lägg till"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Du förklarar och pekar i en enkel bild av sambandet, och eleverna ritar och förklarar den själva."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Ord kommer ett i taget, och ett samband är svårt att hålla ihop av bara ord. En bild visar delarna och sambanden på en gång. När du pekar på den del du talar om fogar eleven ihop orden och bilden, och då finns två vägar tillbaka till samma innehåll. Talade ord och en bild tar olika vägar in, men skrivna meningar på bilden tävlar med den om ögat."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Ord och bild",
+          "text": "det du hör och ser"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "fogar ihop dem"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "två vägar tillbaka"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Ord och bild",
+          "till": "Arbetsminnet",
+          "text": "peka och säg",
+          "betonad": true
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        }
+      ],
+      "text": "Orden och bilden kommer samtidigt och hör ihop. Det är när eleven fogar ihop dem till ett samband som det sitter."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj",
+        "text": "En process, ett samband eller en ordning i tid eller rum."
+      },
+      {
+        "rubrik": "Rita enkelt",
+        "text": "Rutor, pilar och ämnets ord vid delarna, utan pynt."
+      },
+      {
+        "rubrik": "Säg och peka",
+        "text": "En del i taget. Tig när eleverna läser."
+      },
+      {
+        "rubrik": "Eleverna ritar",
+        "text": "Ur minnet, förklarar för grannen och lägger till i en annan färg."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Pynt och ikoner, och att läsa upp den text som står på bilden."
+    },
+    "tankPa": "Strategin tjänar innehållet: kan du peka på bilden och säga sambandet med ämnets ord? Annars bär bilden inte innehållet. Låt bilden komma tillbaka, och låt eleverna rita den ur minnet igen efter en vecka. När eleverna lär sig läsa läser de ordet först och ser bilden efteråt.",
+    "forskningen": {
+      "text": "I 56 lottade studier i skolan gav text med bild 0,47 mot samma innehåll utan bild, men 0,21 i förskolan till åk 6, och de flesta studierna var ett enda pass (Banks m.fl., 2026). Bilder till texten gav 0,27 i läsförståelse i åk 1–6 (Guo m.fl., 2020). Efter två veckor fanns ingen effekt kvar i de sju studier som mätte det (Banks m.fl., 2026), och i lärarnas presentationer blir ord och bild lätt bilder som inte bär innehållet (EEF, 2021).",
+      "kallor": [
+        {
+          "id": "banks-m-fl-2026",
+          "titel": "When and how to use visuals effectively: a meta-analysis of dual coding in the classroom",
+          "text": "Banks, B., Curran, J., Hall, R., Sims, S. och Meliss, S. (2026). When and how to use visuals effectively: a meta-analysis of dual coding in the classroom. Ambition Institute.",
+          "adress": "https://s3.eu-west-2.amazonaws.com/ambition-institute/documents/AMB_A4_Meta_Analysis_Dual_Coding_Full_Paper_Digital_-_Aug_26.pdf"
+        },
+        {
+          "id": "guo-m-fl-2020",
+          "titel": "Do You Get the Picture? A Meta-Analysis of the Effect of Graphics on Reading Comprehension",
+          "text": "Guo, D., Zhang, S., Wright, K. L. och McTigue, E. M. (2020). Do You Get the Picture? A Meta-Analysis of the Effect of Graphics on Reading Comprehension. AERA Open.",
+          "adress": "https://doi.org/10.1177/2332858420901696"
+        },
+        {
+          "id": "eef-2021",
+          "titel": "Cognitive science approaches in the classroom: A review of the evidence",
+          "text": "EEF, Education Endowment Foundation (2021). Cognitive science approaches in the classroom: A review of the evidence. Education Endowment Foundation.",
+          "adress": "https://d2tic4wvo1iusb.cloudfront.net/production/documents/guidance/Cognitive_science_approaches_in_the_classroom_-_A_review_of_the_evidence.pdf"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "I en faktatext om grodans liv står varje kort text vid sitt steg i bilden: ägg, grodyngel, groda med svans och groda. Peka på steget medan du läser. Sedan återberättar eleverna med fingret på bilden, och till sist utan bild. När eleverna läser själva för att knäcka koden läser de ordet först och ser bilden efteråt, så att bilden inte tar uppmärksamheten från orden."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Innan eleverna skriver en förklarande text om hur något går till, som vattnets kretslopp, ritar de processen ur minnet som fyra eller fem rutor med pilar. De berättar för en kamrat med fingret på bilden och lägger till det som saknades i en annan färg. Sedan skriver de en mening till varje ruta, med ord för sambanden som därför och sedan. Att rita före skrivandet är bara prövat i små studier, så se efter om texten får med sambanden."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "4–6",
+      "amne": "matematik",
+      "text": "Rita en blockmodell till uppgiften ”3/5 av dem på mötet hade glasögon, och det var 24 personer”. Säg och peka: ”Nämnaren är fem, så jag delar blocket i fem lika delar. Tre delar är 24, så en del är 8, och alla fem delarna är 40.” Sedan ritar eleverna modeller till ”3/7 av pärlorna är röda” och ”De röda pärlorna är 3/7 av de blå”, och förklarar för grannen varför modellerna ser olika ut. Lyssna efter om de säger vad en del är."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "7–9",
+      "amne": "NO",
+      "text": "Rita blodomloppet som två slingor medan du förklarar, en slinga i taget, och peka: ”Här lämnar blodet lungorna med syre, följ pilen.” Sedan stänger eleverna boken och ritar ur minnet med pilar och fem ord: lungorna, kroppen, hjärtat, syrerikt och syrefattigt. De förklarar för grannen och lägger till det som saknades i en annan färg. Titta efter två slingor och pilar åt rätt håll, och lyssna efter därför och sedan."
+    }
+  ],
+  "metoderSomGorDen": []
+}

@@ -1,1 +1,94 @@
-{}
+{
+  "_alla": {
+    "summa": "77509e9343bb6d55",
+    "kort": [
+      "plocka-fram",
+      "sprid-ut",
+      "blanda-uppgifter",
+      "ord-och-bild",
+      "avlasta-minnet"
+    ],
+    "kb": 428
+  },
+  "_bladet": {
+    "summa": "caf689d3f1ba9a01",
+    "strategier": [
+      "plocka-fram",
+      "sprid-ut",
+      "blanda-uppgifter",
+      "ord-och-bild",
+      "avlasta-minnet"
+    ],
+    "kb": 23
+  },
+  "avlasta-minnet": {
+    "innehall": "878c15d6",
+    "summa": "c0a0b71a2655a173",
+    "kb": 94,
+    "namn": {
+      "pt": 78,
+      "rader": 1
+    },
+    "bak": {
+      "pt": 16,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "blanda-uppgifter": {
+    "innehall": "21af38b5",
+    "summa": "f591a3b45414aa22",
+    "kb": 87,
+    "namn": {
+      "pt": 70,
+      "rader": 1
+    },
+    "bak": {
+      "pt": 16,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "ord-och-bild": {
+    "innehall": "efd50550",
+    "summa": "ab449d31a41f7270",
+    "kb": 108,
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "bak": {
+      "pt": 16,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "plocka-fram": {
+    "innehall": "febea8dd",
+    "summa": "5ae29abc2a305f58",
+    "kb": 95,
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "bak": {
+      "pt": 16,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "sprid-ut": {
+    "innehall": "692fd9fe",
+    "summa": "7d323ad79d1fa35c",
+    "kb": 105,
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "bak": {
+      "pt": 16,
+      "tat": false,
+      "rymsInte": false
+    }
+  }
+}

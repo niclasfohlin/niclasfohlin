@@ -1,0 +1,178 @@
+{
+  "nr": 3,
+  "namn": "Blanda uppgifter",
+  "forskningensOrd": "interleaved practice",
+  "framsida": {
+    "mening": "Se först vilket slag uppgiften är.",
+    "bild": {
+      "liknelse": "Spik eller skruv: när spikar och skruvar ligger blandade måste den som bygger titta på var och en och välja hammare eller skruvmejsel. Med bara spikar behövs inget val.",
+      "steg": [
+        {
+          "rubrik": "Ett slag i taget",
+          "utfall": "Inget val",
+          "fil": "blanda-uppgifter-1.svg",
+          "alt": "Fem spikar står i rad på en planka. På bänken under ligger en hammare och en skruvmejsel."
+        },
+        {
+          "rubrik": "Sedan blandat",
+          "utfall": "Måste välja",
+          "fil": "blanda-uppgifter-2.svg",
+          "alt": "Samma planka med spikar och skruvar blandade, i en ordning som inte går att gissa. Hammaren och skruvmejseln ligger kvar."
+        },
+        {
+          "rubrik": "En månad senare",
+          "utfall": "Väljer rätt",
+          "fil": "blanda-uppgifter-3.svg",
+          "alt": "Samma planka. Spikarna och skruvarna sitter i plankan, och var och en har en grön bock."
+        }
+      ]
+    },
+    "insikt": "En rad med samma slag väljer sättet åt eleven. En blandad rad övar valet.",
+    "handling": [
+      {
+        "ikon": "forstoringsglas",
+        "text": "Läs uppgiften"
+      },
+      {
+        "ikon": "fragetecken",
+        "text": "Vilket slag är det?"
+      },
+      {
+        "ikon": "hammare",
+        "text": "Välj sätt och lös"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Uppgifter av slag som eleverna blandar ihop står om vartannat, så att eleven först väljer sätt."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "En rad med uppgifter av samma slag väljer sättet åt eleven, men på provet och i livet måste eleven välja själv. När två slag som liknar varandra kommer efter varandra ser eleven vad som skiljer dem, och kopplingen mellan slaget och sättet blir starkare. Under övningen känns det svårare och går sämre, men det sitter bättre senare."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Uppgiften",
+          "text": "liknar en annan"
+        },
+        {
+          "namn": "Slaget",
+          "text": "vad skiljer dem?"
+        },
+        {
+          "namn": "Sättet",
+          "text": "det som passar slaget"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Uppgiften",
+          "till": "Slaget",
+          "text": "känna igen"
+        },
+        {
+          "fran": "Slaget",
+          "till": "Sättet",
+          "text": "välja",
+          "betonad": true
+        }
+      ],
+      "text": "En blandad rad stärker kopplingen mellan uppgiftens slag och rätt sätt. Det är valet som övas, och vinsten syns först senare."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Öva först",
+        "text": "Ett slag i taget, tills eleverna klarar varje slag för sig."
+      },
+      {
+        "rubrik": "Blanda",
+        "text": "Slag som lätt förväxlas, i en ordning som inte går att gissa."
+      },
+      {
+        "rubrik": "Slaget först",
+        "text": "Eleverna skriver vilket slag det är, och löser sedan."
+      },
+      {
+        "rubrik": "Facit sist",
+        "text": "När raden är klar. Var felet slaget eller räkningen?"
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Att blanda innan slagen sitter, eller att blanda olika ämnen."
+    },
+    "tankPa": "Strategin tjänar innehållet: blanda bara slag som eleverna faktiskt förväxlar. Den är bäst prövad i matematik för 8–14 år och mycket lite i andra ämnen och med de yngsta. Säg till klassen att det ska kännas svårare, och att det är valet som övas.",
+    "forskningen": {
+      "text": "I vanliga klassrum gav blandade uppgifter 0,40 i 10 studier, och 0,54 i matematik (Ruitenburg m.fl., 2026). I åk 7 hade de som övat blandat 61 procent rätt mot 38 procent på ett prov en månad senare (Rohrer m.fl., 2020). Underlaget gäller nästan bara matematik, och att blanda olika skolämnen saknar stöd (Perry m.fl., 2021; Weinstein m.fl., 2018).",
+      "kallor": [
+        {
+          "id": "ruitenburg-m-fl-2026",
+          "titel": "A Meta-Analysis of the Effectiveness and Boundary Conditions of Retrieval Practice, Distributed Practice, and Interleaved Practice in Authentic School Classrooms",
+          "text": "Ruitenburg, S. K., Goos, M., Lambert, G. m.fl. (2026). A Meta-Analysis of the Effectiveness and Boundary Conditions of Retrieval Practice, Distributed Practice, and Interleaved Practice in Authentic School Classrooms. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-026-10225-5"
+        },
+        {
+          "id": "rohrer-m-fl-2020",
+          "titel": "A randomized controlled trial of interleaved mathematics practice",
+          "text": "Rohrer, D., Dedrick, R. F., Hartwig, M. K. m.fl. (2020). A randomized controlled trial of interleaved mathematics practice. Journal of Educational Psychology.",
+          "adress": "https://doi.org/10.1037/edu0000367"
+        },
+        {
+          "id": "perry-m-fl-2021",
+          "titel": "Cognitive science in the classroom: Evidence and practice review",
+          "text": "Perry, T., Lea, R., Jørgensen, C. R., Cordingley, P., Shapiro, K. och Youdell, D. (2021). Cognitive science in the classroom: Evidence and practice review. Education Endowment Foundation.",
+          "adress": "https://educationendowmentfoundation.org.uk/education-evidence/evidence-reviews/cognitive-science-approaches-in-the-classroom"
+        },
+        {
+          "id": "weinstein-m-fl-2018",
+          "titel": "Teaching the science of learning",
+          "text": "Weinstein, Y., Madan, C. R. och Sumeracki, M. A. (2018). Teaching the science of learning. Cognitive Research: Principles and Implications.",
+          "adress": "https://doi.org/10.1186/s41235-017-0087-y"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "När klassen har övat frågor där svaret står i texten och frågor där man måste läsa mellan raderna, blandar du dem efter en gemensam text. Innan eleverna svarar skriver de vilket slag frågan är: står svaret på raden, eller måste jag dra en slutsats? Då övar de att välja var de ska leta. Blandning är lite prövad i läsning, så lyssna efter om eleverna väljer bättre."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "När klassen har övat lång och kort vokal ett ord i taget läser du upp ord i blandad ordning, som tak, glass, villa, hat, tack, vila, glas och hatt. Eleverna lyssnar på vokalen, säger lång eller kort tyst för sig själva och skriver ordet. När listan är klar visar du facit och frågar varför tack skrivs med ck och tak med ett k. Lägg märke till den som skriver dubbel konsonant i varje ord och bara följer den senaste regeln."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "F–3",
+      "amne": "matematik",
+      "text": "När klassen har räknat plus och minus var för sig blandar du korta textuppgifter, som ”Ali har 7 kulor och får 5 till” och ”Sara har 12 kulor och ger bort 4”. Innan eleverna räknar säger de plus eller minus och ritar. Ställ uppgifterna i en ordning som inte går att gissa, ibland två av samma slag i rad. Lägg märke till den som lägger ihop alla tal hen ser."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "7–9",
+      "amne": "SO",
+      "text": "När klassen har arbetat med franska och ryska revolutionen får eleverna kort med händelser ur båda i blandad ordning. För varje kort avgör de vilken revolution det gäller och skriver vad i händelsen som avslöjar det. Händelser som liknar varandra, som att den som styr avsätts, tvingar eleverna att se på orsaker och sammanhang. Det finns inga skolstudier av blandning i SO, så se det som ett försök och lyssna efter elevernas skäl."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Kärnan: Tillbaka efter några veckor",
+      "mening": "Eleverna plockar fram det viktiga igen minst två gånger med veckor emellan, i matematik blandat så att de väljer metod."
+    }
+  ]
+}

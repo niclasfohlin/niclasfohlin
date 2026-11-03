@@ -1,50 +1,177 @@
 {
-  "_om": "Sajtens provfil för verktyget Strategier (K-699), gjord 2026-11-03 ur metodriggens utkast 2 i den form som sajten och riggen kom överens om (C:/metodrigg/out/strategier/FRAN-SAJTEN.md). Stegens rubriker är sajtens kortning av utkastets steg. Utkast: visas lokalt men aldrig i produktionen, och ersätts av riggens leverans.",
   "nr": 1,
   "namn": "Plocka fram",
   "forskningensOrd": "retrieval practice",
-  "utkast": true,
   "framsida": {
     "mening": "Ta fram det ur minnet innan du tittar.",
     "bild": {
-      "liknelse": "Stigen till skatten: ett barn går genom en äng till en ädelsten, som är det eleven kan.",
+      "liknelse": "Stigen till skatten: ett barn går genom en äng till en ädelsten, som är det eleven kan. Varje gång barnet hittar dit trampas stigen upp och blir lättare att hitta.",
       "steg": [
-        { "rubrik": "Första gången", "utfall": "Svårt att hitta", "alt": "Ett barn står i en äng med högt gräs. Stigen till ädelstenen syns knappt." },
-        { "rubrik": "Andra gången", "utfall": "Lättare", "alt": "Samma äng. Stigen till ädelstenen syns tydligare i gräset." },
-        { "rubrik": "Tionde gången", "utfall": "Hittar direkt", "alt": "Samma äng. Stigen till ädelstenen är bred och upptrampad." }
+        {
+          "rubrik": "Första gången",
+          "utfall": "Svårt att hitta",
+          "fil": "plocka-fram-1.svg",
+          "alt": "Ett barn står i en äng med högt gräs. Stigen till ädelstenen syns knappt."
+        },
+        {
+          "rubrik": "Andra gången",
+          "utfall": "Lättare",
+          "fil": "plocka-fram-2.svg",
+          "alt": "Samma äng. Stigen till ädelstenen syns tydligare i gräset."
+        },
+        {
+          "rubrik": "Tionde gången",
+          "utfall": "Hittar direkt",
+          "fil": "plocka-fram-3.svg",
+          "alt": "Samma äng. Stigen till ädelstenen är bred och upptrampad."
+        }
       ]
     },
     "insikt": "Ansträngningen att minnas får kunskapen att fastna, när eleven lyckas till en del.",
     "handling": [
-      { "ikon": "bok", "text": "Stäng boken" },
-      { "ikon": "skrivhand", "text": "Skriv det du minns" },
-      { "ikon": "oppen-bok", "text": "Titta och rätta" }
+      {
+        "ikon": "bok",
+        "text": "Stäng boken"
+      },
+      {
+        "ikon": "skrivhand",
+        "text": "Skriv det du minns"
+      },
+      {
+        "ikon": "oppen-bok",
+        "text": "Titta och rätta"
+      }
     ]
   },
   "baksida": {
-    "vad": { "ikon": "tanka", "text": "Eleverna tar fram det de har lärt sig ur minnet, utan att titta, och ser sedan det rätta." },
-    "darfor": { "ikon": "glodlampa", "text": "Att läsa igen känns bekant, men känslan lurar. Att plocka fram stärker vägen tillbaka till minnet." },
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleverna tar fram det de har lärt sig ur minnet, utan att titta, och ser sedan det rätta."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Det eleven bara läser om känns bekant, men känslan lurar: det går inte alltid att ta fram när det behövs. När eleven själv letar fram det i minnet blir det lättare att hitta nästa gång, om ansträngningen lyckas till en del. Framplockningen visar också eleven vad som saknas, och det rätta efteråt gör att felen inte sitter kvar."
+    },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
       "delar": [
-        { "namn": "Arbetsminnet", "text": "det du tänker på nu" },
-        { "namn": "Långtidsminnet", "text": "allt du kan" }
+        {
+          "namn": "Arbetsminnet",
+          "text": "det du tänker på nu"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "allt du kan"
+        }
       ],
       "pilar": [
-        { "fran": "Arbetsminnet", "till": "Långtidsminnet", "text": "lära in" },
-        { "fran": "Långtidsminnet", "till": "Arbetsminnet", "text": "plocka fram", "betonad": true }
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        },
+        {
+          "fran": "Långtidsminnet",
+          "till": "Arbetsminnet",
+          "text": "plocka fram",
+          "betonad": true
+        }
       ],
-      "text": "Varje gång eleven plockar fram blir vägen tillbaka starkare. Att bara läsa igen tränar inte vägen."
+      "text": "Varje gång eleven plockar fram blir vägen tillbaka lättare att hitta. Att bara läsa igen tränar inte vägen."
     },
     "saGorDu": [
-      { "rubrik": "Stäng boken", "text": "Alla svarar själva innan något svar visas." },
-      { "rubrik": "Rätta direkt", "text": "Visa det rätta samma lektion. Eleverna rättar med en annan färg." },
-      { "rubrik": "Kom tillbaka", "text": "Låt det komma igen efter dagar och veckor." },
-      { "rubrik": "Inte till betyg", "text": "Räkna det inte till betyget, så vågar eleverna svara fel." }
+      {
+        "rubrik": "Stäng boken",
+        "text": "Alla skriver, ritar eller säger det de minns innan svaret visas."
+      },
+      {
+        "rubrik": "Lagom svårt",
+        "text": "Frågor som de flesta klarar till en del. En ledtråd efter en minut."
+      },
+      {
+        "rubrik": "Rätta direkt",
+        "text": "Visa det rätta samma lektion. Eleverna rättar med en annan färg."
+      },
+      {
+        "rubrik": "Fråga varför",
+        "text": "Minst en fråga gäller ett varför, inte bara ord och namn."
+      }
     ],
-    "avgor": { "rubrik": "Undvik", "text": "Frågor om bara ord och namn. Fråga också varför." },
-    "tankPa": "Strategin tjänar innehållet. Bestäm först vad klassen ska förstå.",
-    "forskningen": { "text": "Starkast stöd i skolan av strategierna, mest för fakta och begrepp.", "kallor": [] },
-    "fordjupa": [{ "titel": "Testbaserat lärande", "adress": "/metoder/testbaserat-larande" }]
-  }
+    "avgor": {
+      "rubrik": "När den passar",
+      "text": "När klassen har förstått. Den befäster men bygger inte förståelsen."
+    },
+    "tankPa": "Strategin tjänar innehållet: bestäm först vad klassen ska förstå och varför. Räkna det inte till betyget, så vågar eleverna svara fel. Med de yngsta fungerar en frågekarta, bilder och muntliga svar bättre än att skriva allt de minns.",
+    "forskningen": {
+      "text": "I vanliga klassrum gav framplockning 0,37 mot att läsa om, i 31 studier, mest för fakta, och ingen säker vinst för förståelsen (Ruitenburg m.fl., 2026). Ett quiz i starten gav ingen skillnad mot en diskussion i NO i 15 skolor (Roy m.fl., 2023). IES-vägledningen bedömer stödet för quiz och för frågor om varför som starkt (Pashler m.fl., 2007).",
+      "kallor": [
+        {
+          "id": "ruitenburg-m-fl-2026",
+          "titel": "A Meta-Analysis of the Effectiveness and Boundary Conditions of Retrieval Practice, Distributed Practice, and Interleaved Practice in Authentic School Classrooms",
+          "text": "Ruitenburg, S. K., Goos, M., Lambert, G. m.fl. (2026). A Meta-Analysis of the Effectiveness and Boundary Conditions of Retrieval Practice, Distributed Practice, and Interleaved Practice in Authentic School Classrooms. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-026-10225-5"
+        },
+        {
+          "id": "roy-m-fl-2023",
+          "titel": "Teacher Choices Trial: A Winning Start (second run). Evaluation report",
+          "text": "Roy, P., Tang, S., Harland, J. m.fl. (2023). Teacher Choices Trial: A Winning Start (second run). Evaluation report. Education Endowment Foundation.",
+          "adress": "https://d2tic4wvo1iusb.cloudfront.net/production/documents/projects/A-Winning-Start-second-run-Final.pdf"
+        },
+        {
+          "id": "pashler-m-fl-2007",
+          "titel": "Organizing Instruction and Study to Improve Student Learning",
+          "text": "Pashler, H., Bain, P. M., Bottge, B. A. m.fl. (2007). Organizing Instruction and Study to Improve Student Learning. IES Practice Guide, National Center for Education Research.",
+          "adress": "https://files.eric.ed.gov/fulltext/ED498555.pdf"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Testbaserat lärande",
+        "adress": "/metoder/testbaserat-larande"
+      },
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Innan ni läser vidare i högläsningsboken skriver eleverna två saker som hände i förra kapitlet och en sak om varför huvudpersonen gjorde som hen gjorde. De skriver själva med boken stängd, berättar sedan för en kamrat och kontrollerar mot boken. Varför-frågan gör att eleverna tänker på sambanden i berättelsen och inte bara på vad som hände. Lyssna efter om svaren bygger på det som står i texten."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "Du säger ett ord och visar en bild, och alla skriver ordet på minitavlan innan du visar hur det stavas. Eleverna rättar sedan med en annan färg. Välj ord med ett mönster som klassen har övat, som kort vokal före dubbel konsonant i boll, katt och glass. Ord som många stavade fel kommer tillbaka några dagar senare."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "7–9",
+      "amne": "matematik",
+      "text": "Efter ett arbetsområde om linjära funktioner delar eleverna en tom sida i fyra rutor: formeln, ett eget exempel, en graf och när man använder den. De fyller i rutorna ur minnet i fem minuter, utan bok och utan att prata. Sedan jämför de med sammanfattningen i boken och fyller i det som saknades med en annan färg. Rutan om när man använder den är varför-frågan, och den visar om eleven har förstått mer än formeln."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "F–3",
+      "amne": "NO",
+      "text": "När klassen har läst om grodans liv får eleverna en frågekarta, med grodan i mitten och frågor runt omkring, som ”Vad äter grodynglet?”. Boken är stängd, och eleverna säger svaret tyst för sig själva, sedan till en kamrat, och ritar eller skriver ett ord i rutan. Förra lektionen fyllde de i samma karta med boken öppen. Ser du många tomma rutor, ge det första ljudet eller en bild som ledtråd, så att ansträngningen lyckas."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Kärnan: Alla svarar ur minnet",
+      "mening": "Varje elev svarar själv ur minnet, innan något svar visas."
+    },
+    {
+      "metod": "formativ-bedomning",
+      "avsnitt": "Rutinerna: Exit-lappen",
+      "mening": "Tanken är att du vet före nästa lektion var klassen står, och att eleven hämtar det viktigaste ur minnet, säger det och gör svaret bättre."
+    }
+  ]
 }

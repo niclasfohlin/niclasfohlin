@@ -38,9 +38,11 @@ const args = process.argv.slice(2);
 const vidBehov = args.includes('--vid-behov');
 const valda = args.filter((a) => !a.startsWith('--'));
 
-// Det som ett kort görs av, utöver strategins fil och dess bilder: formen, skriptet, packningen och typsnitten.
+// Insiktens ikon, glödlampan, är densamma på varje kort.
+const INSIKTENS_IKON = join(IKONER, 'glodlampa.svg');
+// Det som ett kort görs av, utöver strategins fil och dess bilder: formen, skriptet, packningen, insiktens ikon och typsnitten.
 const gemensamt = createHash('sha256');
-for (const f of [join(HAR, 'kortform.mjs'), join(HAR, 'kort.mjs'), join(ROT, 'scripts', 'pdfpack.py'), ...readdirSync(TYPSNITT).filter((f) => f.endsWith('.ttf')).sort().map((f) => join(TYPSNITT, f))]) gemensamt.update(readFileSync(f));
+for (const f of [join(HAR, 'kortform.mjs'), join(HAR, 'kort.mjs'), join(ROT, 'scripts', 'pdfpack.py'), INSIKTENS_IKON,...readdirSync(TYPSNITT).filter((f) => f.endsWith('.ttf')).sort().map((f) => join(TYPSNITT, f))]) gemensamt.update(readFileSync(f));
 const GEMENSAM = gemensamt.digest('hex');
 
 const strategier = readdirSync(STRATEGIER).filter((f) => f.endsWith('.json') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.json$/, ''), ...JSON.parse(readFileSync(join(STRATEGIER, f), 'utf8')) }));
@@ -118,7 +120,7 @@ const url = (p) => pathToFileURL(p).href;
 const flaggor = ['--headless=new', '--disable-gpu', '--no-pdf-header-footer', '--allow-file-access-from-files', '--virtual-time-budget=10000'];
 const kortet = (s) => {
   const d = strategikortetsData(s), f = filerna(s);
-  return { id: s.id, ...d, berattelsen: d.berattelsen.map((b, i) => ({ ...b, bild: f.bilder[i] ? url(f.bilder[i]) : null })), handling: d.handling.map((h, i) => ({ ...h, ikon: url(f.ikoner[i]) })) };
+  return { id: s.id, ...d, insiktensIkon: url(INSIKTENS_IKON), berattelsen: d.berattelsen.map((b, i) => ({ ...b, bild: f.bilder[i] ? url(f.bilder[i]) : null })), handling: d.handling.map((h, i) => ({ ...h, ikon: url(f.ikoner[i]) })) };
 };
 // Chrome skriver ut sidan till pdf och ger sidans DOM efter mätningen.
 function skrivUt(namn, html) {

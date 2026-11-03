@@ -1,0 +1,176 @@
+{
+  "nr": 2,
+  "namn": "Sprid ut",
+  "forskningensOrd": "spaced practice",
+  "framsida": {
+    "mening": "Ta fram det igen efter dagar och veckor.",
+    "bild": {
+      "liknelse": "Kalendern: det som ska sitta kommer tillbaka med allt längre uppehåll. Mellan gångerna bleknar det lite, och efter varje gång eleven tar fram det bleknar det långsammare.",
+      "steg": [
+        {
+          "rubrik": "Första gången",
+          "utfall": "Glöms fort",
+          "fil": "sprid-ut-1.svg",
+          "alt": "En kalender med fyra veckor. Första dagen har en stor mörk prick, och prickarna dagarna efter bleknar fort och är borta efter en vecka."
+        },
+        {
+          "rubrik": "Efter tre dagar",
+          "utfall": "Glöms långsamt",
+          "fil": "sprid-ut-2.svg",
+          "alt": "Samma kalender. Efter tre dagar kommer en stor mörk prick till, och prickarna efter den bleknar långsammare, i två veckor."
+        },
+        {
+          "rubrik": "Efter två veckor",
+          "utfall": "Sitter kvar",
+          "fil": "sprid-ut-3.svg",
+          "alt": "Samma kalender. Två veckor senare kommer en tredje stor mörk prick, och prickarna efter den är tydliga ända till månadens slut."
+        }
+      ]
+    },
+    "insikt": "När eleven har glömt lite och tar fram det igen, sitter det längre.",
+    "handling": [
+      {
+        "ikon": "klocka",
+        "text": "Vänta några dagar"
+      },
+      {
+        "ikon": "skrivhand",
+        "text": "Ta fram det igen"
+      },
+      {
+        "ikon": "klocka",
+        "text": "Vänta längre"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Det som ska sitta kommer tillbaka efter dagar och veckor, och eleverna tar fram det igen."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Det som övas klart vid ett tillfälle känns lätt, eftersom svaret ligger kvar i huvudet, men det glöms fort. Efter ett uppehåll måste eleven anstränga sig för att ta fram det, och då håller det längre. Samma tid, fördelad över dagar och veckor, ger mer än allt på en gång. Det är framplockningen som ska spridas: att gå igenom samma sak igen gör inte samma nytta."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Lärt i dag",
+          "text": "känns lätt nu"
+        },
+        {
+          "namn": "Lite glömt",
+          "text": "efter några dagar"
+        },
+        {
+          "namn": "Starkare",
+          "text": "håller längre nästa gång"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Lärt i dag",
+          "till": "Lite glömt",
+          "text": "dagar går"
+        },
+        {
+          "fran": "Lite glömt",
+          "till": "Starkare",
+          "text": "ta fram",
+          "betonad": true
+        }
+      ],
+      "text": "Mellan gångerna glöms en del. När eleven tar fram det igen blir det starkare, och nästa uppehåll kan vara längre."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj",
+        "text": "Tre till fem saker från förra veckan som behövs om en månad."
+      },
+      {
+        "rubrik": "Skriv in",
+        "text": "När det ska tillbaka: efter några dagar, sedan efter några veckor."
+      },
+      {
+        "rubrik": "Ta fram",
+        "text": "Eleverna tar fram det igen ur minnet, och ser svaret efteråt."
+      },
+      {
+        "rubrik": "Justera",
+        "text": "Det som satt får vänta längre. Det som inte satt kommer tidigare."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Att gå igenom det igen i stället för att eleverna tar fram det."
+    },
+    "tankPa": "Strategin tjänar innehållet: välj det som ska sitta om en månad, och inte allt. Inget schema för uppehållen är belagt, så det viktiga är att återkomsterna blir av, och därför skrivs de in i förväg. Innan eleverna kan det nya behöver de öva tätare, och uppehållen kan växa när grunden sitter.",
+    "forskningen": {
+      "text": "I vanliga klassrum gav spridd övning 0,20 i 15 studier, och 0,39 mot samma övning samlad vid ett tillfälle (Ruitenburg m.fl., 2026). EEF:s översikt fann en positiv effekt med låg tilltro, mest på forskarnas prov och för fakta, och inget schema för uppehållen som är bättre än andra (Perry m.fl., 2021). IES-vägledningen säger minst två tillfällen med veckor emellan (Pashler m.fl., 2007).",
+      "kallor": [
+        {
+          "id": "ruitenburg-m-fl-2026",
+          "titel": "A Meta-Analysis of the Effectiveness and Boundary Conditions of Retrieval Practice, Distributed Practice, and Interleaved Practice in Authentic School Classrooms",
+          "text": "Ruitenburg, S. K., Goos, M., Lambert, G. m.fl. (2026). A Meta-Analysis of the Effectiveness and Boundary Conditions of Retrieval Practice, Distributed Practice, and Interleaved Practice in Authentic School Classrooms. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-026-10225-5"
+        },
+        {
+          "id": "perry-m-fl-2021",
+          "titel": "Cognitive science in the classroom: Evidence and practice review",
+          "text": "Perry, T., Lea, R., Jørgensen, C. R., Cordingley, P., Shapiro, K. och Youdell, D. (2021). Cognitive science in the classroom: Evidence and practice review. Education Endowment Foundation.",
+          "adress": "https://educationendowmentfoundation.org.uk/education-evidence/evidence-reviews/cognitive-science-approaches-in-the-classroom"
+        },
+        {
+          "id": "pashler-m-fl-2007",
+          "titel": "Organizing Instruction and Study to Improve Student Learning",
+          "text": "Pashler, H., Bain, P. M., Bottge, B. A. m.fl. (2007). Organizing Instruction and Study to Improve Student Learning. IES Practice Guide, National Center for Education Research.",
+          "adress": "https://files.eric.ed.gov/fulltext/ED498555.pdf"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Testbaserat lärande",
+        "adress": "/metoder/testbaserat-larande"
+      },
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "I stället för en lång ljudstund har klassen tre korta om två till tre minuter: på morgonen, efter lunch och innan eleverna går hem. Varje stund har veckans bokstav och två bokstäver från tidigare veckor. Eleverna säger ljudet och läser ord som sol, mos och sal med bokstäver som klassen redan har haft. Lägg märke till vem som tvekar på de äldre bokstäverna, och låt dem komma tillbaka oftare."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Tio ord som klassen ofta stavar fel kommer tillbaka i korta diktamina efter några dagar, efter en vecka och efter en månad. Eleverna skriver orden ur minnet, och sedan visar du orden och de rättar med en annan färg. Ord som de flesta stavar rätt får vänta längre, och ord med många fel kommer tillbaka tidigare. Skriv på återkomstlistan när varje ord ska komma igen."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "7–9",
+      "amne": "matematik",
+      "text": "Varje veckas läxa har fyra uppgifter från veckans område och två från ett område för en eller två månader sedan, som att lösa 3x + 5 = 20 eller räkna ut 25 procent av 360. Säg till klassen att de två gamla uppgifterna ska kännas lite svåra, och att det är meningen. När ni rättar läxan ser du vilka gamla uppgifter som blev tomma. De kommer tillbaka tidigare nästa gång."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "7–9",
+      "amne": "SO",
+      "text": "Varannan vecka går en del av lektionen till frågor om det klassen arbetade med för några veckor sedan, som ”Ge två orsaker till att industrialiseringen började i Storbritannien”. Eleverna skriver först ur minnet med en färg och fyller sedan på ur boken med en annan. Då ser både du och eleverna vad som satt och vad som behöver komma tillbaka tidigare. Fråga om orsaker och följder, och inte bara om årtal och namn."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Kärnan: Tillbaka efter några veckor",
+      "mening": "Varje område kommer tillbaka efter en vecka, veckor och månader."
+    }
+  ]
+}
