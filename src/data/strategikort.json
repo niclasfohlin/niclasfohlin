@@ -1,30 +1,30 @@
 {
   "_alla": {
-    "summa": "a4bce99fc7b7e400",
+    "summa": "f0fb52fa7997896d",
     "kort": [
       "plocka-fram",
       "sprid-ut",
-      "blanda-uppgifter",
+      "avlasta-minnet",
       "ord-och-bild",
-      "avlasta-minnet"
+      "blanda-uppgifter"
     ],
     "kb": 619
   },
   "_bladet": {
-    "summa": "caf689d3f1ba9a01",
+    "summa": "323e884c6f37eb33",
     "strategier": [
       "plocka-fram",
       "sprid-ut",
-      "blanda-uppgifter",
+      "avlasta-minnet",
       "ord-och-bild",
-      "avlasta-minnet"
+      "blanda-uppgifter"
     ],
     "kb": 23
   },
   "avlasta-minnet": {
-    "innehall": "cf3a2e9a",
-    "summa": "1b48dd0362de7292",
-    "kb": 136,
+    "innehall": "4842fb00",
+    "summa": "19e053d758c6d95c",
+    "kb": 135,
     "namn": {
       "pt": 78,
       "rader": 1
@@ -36,8 +36,8 @@
     }
   },
   "blanda-uppgifter": {
-    "innehall": "660abdaf",
-    "summa": "a468e58256d90adf",
+    "innehall": "104e2aa5",
+    "summa": "c3e411dc57efcd66",
     "kb": 131,
     "namn": {
       "pt": 70,
