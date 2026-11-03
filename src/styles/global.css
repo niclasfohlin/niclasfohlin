@@ -29,6 +29,8 @@
   --farg-skrivning-ljus: #f1e6f1;
   --farg-socialt: #8f3b14;
   --farg-socialt-ljus: #f8eae1;
+  /* NO, SO och teknik i strategiernas förslag (K-699), skilt från de fyra ovan. */
+  --farg-amnen: #19656f;
 
   --typsnitt-brod: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --typsnitt-rubrik: system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -4801,3 +4803,31 @@ button.pl-passroll { min-height: 2.75rem; }
 .vav + .vav { margin-top: -0.6rem; }
 @media print { .vav { display: none; } }
 .st-syftet { max-width: var(--matt-text); font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text); background: var(--farg-ton-svag); border-left: 4px solid var(--farg-accent); border-radius: 6px; padding: 0.6rem 0.8rem; margin: 0.8rem 0 0; }
+
+/* Verktyget Strategier (K-699): strukturernas sidor och kort i strategiernas färg (--slag ur strategiernasStil), med numret
+   i en fylld cirkel där strukturen har slaget, berättelsens tre bilder, handlingen med ikonerna och minnets bild, som på
+   strategikortet (scripts/strategier/kortform.mjs). */
+.sg-nr { display: inline-grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--slag); color: #fff; font-size: 1rem; font-weight: 700; flex: none; }
+.sg-berattelse { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; max-width: 34rem; font-family: var(--typsnitt-ui); text-align: center; }
+.sg-berattelse li { display: grid; gap: 0.3rem; align-content: start; }
+.sg-berattelse .sg-rubrik { font-size: 0.82rem; font-weight: 700; }
+.sg-berattelse img, .sg-bild-tom { display: block; width: 100%; aspect-ratio: 1; border-radius: 8px; background: #dfeedb; }
+.sg-bild-tom { display: grid; place-items: center; color: #5c7b53; font-size: 0.85rem; }
+.sg-berattelse .sg-utfall { font-size: 0.92rem; font-weight: 700; color: var(--slag-mork); }
+.sg-handling { list-style: none; margin: 0.9rem 0 0; padding: 0.55rem 0.7rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; max-width: 34rem; border-radius: 8px; background: var(--slag); color: #fff; font-family: var(--typsnitt-ui); font-weight: 700; }
+.sg-handling li { display: flex; align-items: center; gap: 0.45rem; }
+.sg-handling img { width: 1.9rem; height: 1.9rem; padding: 0.25rem; border-radius: 50%; background: #fff; flex: none; }
+.sg-insikt { border-left-color: var(--slag); background: var(--slag-ljus); color: var(--slag-mork); font-weight: 700; font-size: 1.02rem; }
+.sg-minnet { display: grid; gap: 0.3rem; max-width: 20rem; margin: 0.6rem 0 0; font-family: var(--typsnitt-ui); text-align: center; }
+.sg-minne { padding: 0.5rem; border-radius: 8px; background: var(--slag-ljus); line-height: 1.25; }
+.sg-minne b { display: block; }
+.sg-minne span { font-size: 0.85rem; color: var(--farg-text-svag); }
+.sg-pilar { display: flex; justify-content: center; gap: 1.2rem; font-size: 0.85rem; color: var(--farg-text-svag); }
+.sg-pilar .betonad { color: var(--slag); font-weight: 700; }
+.sg-text { max-width: var(--matt-text); margin: 0.3rem 0 0; }
+.sg-avgor { max-width: var(--matt-text); margin: 0.8rem 0 0; }
+.sg-avgor b { color: var(--slag-mork); margin-right: 0.3rem; }
+.sg-kallor { max-width: var(--matt-text); margin: 0.4rem 0 0; padding-left: 1.2rem; font-size: 0.9rem; color: var(--farg-text-svag); }
+.st-kort .sg-tre { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-bottom: 1px solid var(--farg-kant); background: #fff; }
+.st-kort .sg-tre img, .st-kort .sg-tre .sg-bild-tom { aspect-ratio: 1; width: 100%; border-radius: 0; border: 0; font-size: 0.7rem; }
+.st-kort .sg-nr { position: absolute; top: 0.4rem; left: 0.45rem; width: 1.6rem; height: 1.6rem; font-size: 0.9rem; }

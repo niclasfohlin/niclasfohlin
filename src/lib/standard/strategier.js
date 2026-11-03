@@ -26,6 +26,12 @@ export const STRATEGINS_GRANSER = Object.freeze({
   arskurser: Object.freeze(['F–3', '4–6', '7–9']),
 });
 
+/**
+ * Strategiernas färg, en rot för kortet (scripts/strategier/kortform.mjs) och sidorna (src/lib/strategier.ts): violett,
+ * som inget av strukturernas slag har, så att ett strategikort skiljs från ett strukturkort på ett ögonblick.
+ */
+export const STRATEGIERNAS_FARG = Object.freeze({ farg: '#4a3c8c', mork: '#3c3172', ljus: '#eeebf8' });
+
 /** Förslagens områden, med namnet som sidan visar, i sidans ordning. */
 export const STRATEGINS_OMRADEN = Object.freeze({
   lasning: 'Läsning',

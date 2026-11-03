@@ -1,0 +1,24 @@
+---
+// Ett kort på /strategier (K-699): berättelsens tre bilder, numret, namnet och meningen som en länk till strategins sida,
+// som strukturernas kort (Strukturkortet.astro) i strategiernas färg.
+import { strategiensAdress, bildensAdress, strategiernasStil, type Strategi } from '../lib/strategier';
+
+interface Props { s: Strategi }
+const { s } = Astro.props;
+const f = s.data.framsida as { mening: string; bild: { steg: { fil?: string }[] } };
+---
+
+<li>
+  <article class="st-kort" style={strategiernasStil}>
+    <a href={strategiensAdress(s.id)}>
+      <span class="sg-tre" aria-hidden="true">
+        {f.bild.steg.map((x) => (x.fil ? <img src={bildensAdress(x.fil)} alt="" width="500" height="500" loading="lazy" decoding="async" /> : <span class="sg-bild-tom">Bild</span>))}
+      </span>
+      <span class="st-kort-text">
+        <span class="st-kort-namn">{s.data.namn}</span>
+        <span class="st-kort-rad">{f.mening}</span>
+      </span>
+    </a>
+    <span class="sg-nr" aria-label={`Strategi ${s.data.nr}`}>{s.data.nr}</span>
+  </article>
+</li>

@@ -1,0 +1,114 @@
+---
+// /strategier/<id>: en strategi i verktyget Strategier (K-699, underlag/prov/strategier/UPPDRAGET.md), i ordningen ur
+// idéuppdraget som valdes 2026-11-03: numret, namnet, meningen, berättelsen och handlingen som på kortets framsida, och
+// knapparna först; sedan insikten, förklaringen, minnets bild och stegen som på baksidan, och det som bara står här:
+// förslagen, Tänk på, forskningen och Fördjupa. Allt ur strategins fil, som kortet.
+import Base from '../../layouts/Base.astro';
+import { strategierna, strategiernasMetod, strategiensAdress, bildensAdress, ikonensAdress, kortetsAdress, kortetFinns, strategiernasStil, OMRADENA, STRATEGIERNAS_ADRESS, STRATEGIERNAS_NAMN } from '../../lib/strategier';
+import { DUBBELSIDIGT } from '../../lib/strukturer';
+
+export async function getStaticPaths() {
+  return (await strategierna()).map((s) => ({ params: { id: s.id }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const d = s.data;
+// Strategins fält står fritt i schemat och prövas av standarden (strategiensFel); här läses de som strategins form.
+const f = d.framsida as { mening: string; insikt: string; bild: { steg: { rubrik: string; utfall: string; fil?: string; alt?: string }[] }; handling: { ikon: string; text: string }[] };
+const b = d.baksida as { vad: { text: string } | string; darfor: { text: string } | string; iMinnet: { rubrik?: string; delar: { namn: string; text?: string }[]; pilar: { fran: string; till: string; text: string; betonad?: boolean }[]; text?: string }; saGorDu: { rubrik: string; text: string }[]; avgor: { rubrik: string; text: string }; tankPa?: string; forskningen: { text: string; kallor: { id: string; titel: string; text: string; adress?: string }[] }; fordjupa?: { titel: string; adress: string }[] };
+const forslag = (d.forslag ?? []) as { omrade: keyof typeof OMRADENA; arskurs: string; amne: string; text: string }[];
+const text = (x: { text: string } | string) => (typeof x === 'string' ? x : x.text);
+const metoden = await strategiernasMetod();
+const harKort = kortetFinns(s);
+const beskrivning = `${f.mening} Strategin ${d.namn} ur kognitionsvetenskapen, med stegen, förslag på användning och kortet att skriva ut.`;
+---
+
+<Base title={`${d.namn}: strategi`} description={beskrivning} tryckText={`© Niclas Fohlin · niclasfohlin.se${strategiensAdress(s.id)}`}>
+  <div class="st-yta">
+    <article class="st-sida sg-strategi" style={strategiernasStil}>
+      <header>
+        <p class="meta brodsmula"><a href="/metoder">Metoder</a>{metoden && <> · <a href={`/metoder/${metoden.id}`}>{metoden.data.titel}</a></>} · <a href={STRATEGIERNAS_ADRESS}>{STRATEGIERNAS_NAMN}</a></p>
+        <h1>{d.namn}</h1>
+        <p class="st-slag"><span class="sg-nr">{d.nr}</span>Strategi</p>
+        <p class="ingress st-syfte">{f.mening}</p>
+      </header>
+
+      <ol class="sg-berattelse">
+        {f.bild.steg.map((x) => (
+          <li>
+            <span class="sg-rubrik">{x.rubrik}</span>
+            {x.fil ? <img src={bildensAdress(x.fil)} alt={x.alt ?? ''} width="500" height="500" /> : <span class="sg-bild-tom">Bild</span>}
+            <span class="sg-utfall">{x.utfall}</span>
+          </li>
+        ))}
+      </ol>
+      <ol class="sg-handling" aria-label="Så gör eleven">
+        {f.handling.map((h) => <li><img src={ikonensAdress(h.ikon)} alt="" width="32" height="32" />{h.text}</li>)}
+      </ol>
+
+      <div class="st-utskrift">
+        {harKort
+          ? <a class="knapp" href={kortetsAdress(s.id)} target="_blank" rel="noopener" data-goatcounter-click={`utskrift:strategier/${s.id}`} data-goatcounter-title={`${d.namn}: strategikortet utskrivet`}>Skriv ut kortet</a>
+          : <p class="st-utskriftsrad">Utkast: kortet görs när strategin visas.</p>}
+      </div>
+      {harKort && <p class="st-utskriftsrad">Kortet är ett halvt A4. {DUBBELSIDIGT}</p>}
+
+      <p class="st-syftet sg-insikt">{f.insikt}</p>
+
+      <h2 class="st-rubrik2">Vad det är</h2>
+      <p class="sg-text">{text(b.vad)}</p>
+      <h2 class="st-rubrik2">Därför hjälper det</h2>
+      <p class="sg-text">{text(b.darfor)}</p>
+      <figure class="sg-minnet" aria-label={b.iMinnet.text ?? b.iMinnet.rubrik ?? 'Så fungerar det i minnet'}>
+        {b.iMinnet.delar.map((del, i) => (
+          <>
+            <div class="sg-minne"><b>{del.namn}</b>{del.text && <span>{del.text}</span>}</div>
+            {i < b.iMinnet.delar.length - 1 && (
+              <div class="sg-pilar" aria-hidden="true">
+                {b.iMinnet.pilar.filter((p) => [p.fran, p.till].includes(del.namn) && [p.fran, p.till].includes(b.iMinnet.delar[i + 1].namn)).map((p) => (
+                  <span class={p.betonad ? 'betonad' : ''}>{p.fran === del.namn ? '↓' : '↑'} {p.text}</span>
+                ))}
+              </div>
+            )}
+          </>
+        ))}
+      </figure>
+      {b.iMinnet.text && <p class="sg-text">{b.iMinnet.text}</p>}
+
+      <h2 class="st-rubrik2">Så gör du</h2>
+      <ol class="st-steg">
+        {b.saGorDu.map((x) => <li><b>{x.rubrik.replace(/\.?$/, '.')}</b> {x.text}</li>)}
+      </ol>
+      <p class="sg-avgor"><b>{b.avgor.rubrik}</b>{b.avgor.text}</p>
+
+      {forslag.length > 0 && (
+        <>
+          <h2 class="st-rubrik2">Förslag på användning</h2>
+          <div class="st-forslag">
+            {forslag.map((x) => (
+              <section style={`--amnefarg: ${OMRADENA[x.omrade].farg}`}>
+                <h3>{OMRADENA[x.omrade].namn} <span>· {x.arskurs.replace('–', '⁠–⁠')}, {x.amne}</span></h3>
+                <p>{x.text}</p>
+              </section>
+            ))}
+          </div>
+        </>
+      )}
+
+      {b.tankPa && (<><h2 class="st-rubrik2">Tänk på</h2><p class="sg-text">{b.tankPa}</p></>)}
+      <h2 class="st-rubrik2">Forskningen</h2>
+      <p class="sg-text">{b.forskningen.text}</p>
+      {b.forskningen.kallor.length > 0 && (
+        <ul class="sg-kallor">
+          {b.forskningen.kallor.map((k) => <li>{k.adress ? <a href={k.adress}>{k.text}</a> : k.text}</li>)}
+        </ul>
+      )}
+      {(b.fordjupa ?? []).length > 0 && (
+        <p class="sg-text">Fördjupa: {(b.fordjupa ?? []).map((l, i) => <>{i > 0 && ', '}<a href={l.adress}>{l.titel}</a></>)}</p>
+      )}
+
+      <p class="st-tillbaka"><a href={STRATEGIERNAS_ADRESS}>Alla strategier</a></p>
+      <p class="upphov">Strategin, bilderna och kortet © Niclas Fohlin. Ikonerna är Fluent Emoji från Microsoft (MIT).</p>
+    </article>
+  </div>
+</Base>

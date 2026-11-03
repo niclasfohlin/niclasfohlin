@@ -15,12 +15,11 @@
 // varje A4 i arkens ordning ur standarden (strukturkortensArk), som filen med alla kort. Sidan mäter sig själv när
 // typsnittet har laddats och skriver storlekarna i data-attribut, som scripts/strategier/kort.mjs läser.
 import { strukturkortensArk } from '../../src/lib/standard/strukturer.js';
+import { STRATEGIERNAS_FARG } from '../../src/lib/standard/strategier.js';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 export const STRATEGIKORTETS_STANDARD = Object.freeze({ namn: 80, namnMinst: 56, bak: 16, bakMinst: 14 });
-/** Strategiernas färg, en rot för kortet och sidorna (src/lib/strategier.ts). */
-export const STRATEGIERNAS_FARG = Object.freeze({ farg: '#4a3c8c', mork: '#3c3172', ljus: '#eeebf8' });
 
 const stil = (typsnitt) => `
 @font-face { font-family: Fredoka; src: url(${typsnitt}/Fredoka-Regular.ttf); font-weight: 400; }

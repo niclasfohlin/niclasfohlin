@@ -1,0 +1,43 @@
+---
+// /strategier: verktyget Strategier (K-699, arbetsnamnet; underlag/prov/strategier/UPPDRAGET.md), som Niclas beställde
+// 2026-11-03: strategier ur kognitionsvetenskapen, "ett verktyg likt strukturer", med ett kort per strategi att skriva ut.
+// Strategierna står efter numret; metodens fem är 1 till 5 och står därför först. Filen med alla kort, två på varje A4,
+// har samma ordning (scripts/strategier/kort.mjs).
+import Base from '../../layouts/Base.astro';
+import Kortet from '../../components/Strategikortet.astro';
+import { strategierna, strategiernasMetod, ALLA_KORTENS_ADRESS, allaKortensStorlek, allaKortensAntal, strategiernasStil, STRATEGIERNAS_NAMN } from '../../lib/strategier';
+import { TVA_PA_A4 } from '../../lib/strukturer';
+
+const alla = await strategierna();
+const metoden = await strategiernasMetod();
+const titel = STRATEGIERNAS_NAMN;
+const beskrivning = `${alla.length} strategier ur kognitionsvetenskapen för hur lärandet fastnar, med stegen, förslag på användning och kort att skriva ut, två på varje A4.`;
+---
+
+<Base title={titel} description={beskrivning} tryckText="© Niclas Fohlin · niclasfohlin.se/strategier">
+  <div class="st-yta">
+    <article class="st-sida" style={strategiernasStil}>
+      <header>
+        <p class="meta brodsmula"><a href="/metoder">Metoder</a>{metoden && <> · <a href={`/metoder/${metoden.id}`}>{metoden.data.titel}</a></>} · {titel}</p>
+        <h1>{titel}</h1>
+        <p class="ingress">Kort för hur lärandet fastnar. Tryck på en strategi för förklaringen, stegen och förslag på användning.</p>
+        <p class="st-syftet sg-insikt">En strategi tjänar innehållet. Bestäm först vad klassen ska förstå, och välj sedan den strategi som hjälper eleverna att minnas och förstå det.</p>
+        {allaKortensAntal() > 0 && (
+          <>
+            <div class="st-utskrift">
+              <a class="knapp sekundar" href={ALLA_KORTENS_ADRESS} target="_blank" rel="noopener" data-goatcounter-click="utskrift:strategier/alla" data-goatcounter-title="Strategier: alla kort">Skriv ut alla {allaKortensAntal()} kort (pdf, {allaKortensStorlek()})</a>
+            </div>
+            <p class="st-utskriftsrad">{TVA_PA_A4}</p>
+          </>
+        )}
+      </header>
+
+      <h2 class="st-rubrik2">Alla strategier</h2>
+      <ol class="st-kort-lista">
+        {alla.map((s) => <Kortet s={s} />)}
+      </ol>
+
+      <p class="upphov">Strategierna, bilderna och korten © Niclas Fohlin. Ikonerna är Fluent Emoji från Microsoft (MIT).</p>
+    </article>
+  </div>
+</Base>

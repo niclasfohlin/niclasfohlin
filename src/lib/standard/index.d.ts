@@ -946,6 +946,8 @@ export declare const STRATEGINS_GRANSER: Readonly<{
   forslag: Readonly<{ antal: number; meningar: readonly [number, number] }>;
   arskurser: readonly string[];
 }>;
+/** Strategiernas färg för kortet och sidorna. */
+export declare const STRATEGIERNAS_FARG: Readonly<{ farg: string; mork: string; ljus: string }>;
 /** Förslagens områden med namnet som sidan visar. */
 export declare const STRATEGINS_OMRADEN: Readonly<Record<'lasning' | 'skrivning' | 'matematik' | 'amnen', string>>;
 /** Felen i en strategi, som en lista. Ett utkast får sakna förslag, källor och bildernas filer. */
