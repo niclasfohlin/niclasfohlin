@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.56.0, 2026-11-03
+
+- `strategier.js` (sajtens K-699, verktyget Strategier med metodriggen): `STRATEGINS_GRANSER`, `STRATEGINS_OMRADEN` och `strategiensFel`, reglerna för en strategi som sajten och riggen prövar före leveransen, med fälten och gränserna i sajtens svar till riggen (`C:/metodrigg/out/strategier/FRAN-SAJTEN.md`). `strategikortensFel` och `METODENS_STRATEGIKORT`, metodens fält `strategikort`, som `strukturkort` men med udda antal tillåtet för metodens fem. `strategikortetsFil`, `STRATEGIKORTEN_ALLA` och `metodensStrategikort`, kortens filer.
+
 ## 0.55.0, 2026-11-02
 
 - `undervisningsmetod.js` (riggens förslag 1 ur Testbaserat lärande): `PRIMARA_UTAN_OMRADE`, raden Primär evidens när inget av de fyra områdena har minst Visst stöd, "Inget av läsning, skrivning, matematik och socialt har minst visst stöd". Sajtens metodkort och riggens Word-fil läser samma ord.

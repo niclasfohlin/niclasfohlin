@@ -14,7 +14,7 @@ import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
 import { faktaFel } from './lib/kortfakta';
-import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, STRUKTURENS_GRANSER, strukturensFel, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
+import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, STRUKTURENS_GRANSER, strategiensFel, strukturensFel, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
 import { SAMLINGAR, UTAN_SIDA } from './lib/samlingar';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
@@ -1185,7 +1185,24 @@ const strukturer = defineCollection({
   }).superRefine((s, ctx) => { for (const f of strukturensFel(s)) ctx.addIssue({ code: 'custom', path: [], message: f }); }),
 });
 
-export const collections = { artiklar, bocker, stodundervisning, matteproblem, faktateman, undervisningsmetoder, strukturer };
+// Verktyget Strategier (K-699, arbetsnamnet): en strategi per fil, som metodriggen skriver och ritar
+// (C:/metodrigg/out/strategier/) och sajten tar in och sätter som kort och sida. Fälten och gränserna står i standarden
+// (strategiensFel), som riggen kör före leveransen; formen är sajtens svar till riggen i out/strategier/FRAN-SAJTEN.md.
+// Schemat prövar fälten löst och låter standarden säga felen, så att riggen och bygget ger samma meningar.
+const strategier = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.json', base: './src/content/strategier' }),
+  schema: z.looseObject({
+    nr: z.number().int(),
+    namn: text,
+    forskningensOrd: text,
+    framsida: z.looseObject({}),
+    baksida: z.looseObject({}),
+    forslag: z.array(z.looseObject({})).default([]),
+    utkast: z.boolean().default(false),
+  }).superRefine((s, ctx) => { for (const f of strategiensFel(s)) ctx.addIssue({ code: 'custom', path: [], message: f }); }),
+});
+
+export const collections = { artiklar, bocker, stodundervisning, matteproblem, faktateman, undervisningsmetoder, strukturer, strategier };
 
 // Varje samling står i roten över samlingarna (src/lib/samlingar.ts): med sina sidor i SAMLINGAR, så att den kommer med i
 // delningskorten, taggarnas sidor, statistiken, flödena och mejlen, eller i UTAN_SIDA med skälet. En ny samling stannar

@@ -319,6 +319,22 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Verktyget Strategier (K-699): berättelsens bilder, ikonerna med licensen och strategikorten, en dag som strukturernas.
+[[headers]]
+  for = "/strategier/bilder/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/strategier/ikoner/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/strategier/kort/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 [[headers]]
   for = "/stodundervisning/reservbild/*"
   [headers.values]

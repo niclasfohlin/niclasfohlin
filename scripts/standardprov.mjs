@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { delarnaAv, friTabellensPlats, hanvisadeMetodersFel, lagretsVagTillMandag, planerasNamn, planerasRad, relateradeAv, slagensOrd, utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD, STRUKTURENS_SLAG, strukturensFel, strukturensSumma, strukturkortensArk, strukturkortensFel, strukturernasTopplista, strukturnamnetI } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { delarnaAv, friTabellensPlats, hanvisadeMetodersFel, lagretsVagTillMandag, planerasNamn, planerasRad, relateradeAv, slagensOrd, utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD, STRUKTURENS_SLAG, strukturensFel, strukturensSumma, strukturkortensArk, strukturkortensFel, strukturernasTopplista, strukturnamnetI, strategiensFel, strategikortensFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -398,6 +398,49 @@ if (strukturensSumma({ namn: 'a' }) === strukturensSumma({ namn: 'b' })) fel.pus
 // Topplistan (K-665): en utskrift väger som fem besök, och filen med alla kort och listan räknas inte per kort.
 { const t = strukturernasTopplista([{ path: '/strukturer/epa', count: 3 }, { path: 'utskrift:strukturer/epa', count: 2 }, { path: '/strukturer/visa', count: 9 }, { path: 'utskrift:strukturer/alla', count: 40 }, { path: 'utskrift:strukturer/listan', count: 7 }, { path: '/metoder', count: 99 }]);
   if (t.map((x) => `${x.id}:${x.antal}`).join() !== 'epa:13,visa:9') fel.push(`strukturernasTopplista räknar fel: ${JSON.stringify(t)}`); }
+// Strategierna (K-699): Plocka fram i formen som sajten och riggen kom överens om (C:/metodrigg/out/strategier/FRAN-SAJTEN.md)
+// har inga fel, och varje gräns ger sitt fel.
+{
+  const bild = (rubrik, utfall, n) => ({ rubrik, utfall, fil: `plocka-fram-${n}.svg`, alt: 'Ett barn i en äng med en ädelsten.' });
+  const forslag = ['lasning', 'skrivning', 'matematik', 'amnen'].map((omrade) => ({ omrade, arskurs: '4–6', amne: 'NO', text: 'Klassen läser. Läraren frågar. Eleverna svarar själva.' }));
+  const plocka = {
+    id: 'plocka-fram', nr: 1, namn: 'Plocka fram', forskningensOrd: 'retrieval practice',
+    framsida: {
+      mening: 'Ta fram det ur minnet innan du tittar.',
+      bild: { liknelse: 'Stigen till skatten.', steg: [bild('Första gången', 'Svårt att hitta', 1), bild('Andra gången', 'Lättare', 2), bild('Tionde gången', 'Hittar direkt', 3)] },
+      insikt: 'Ansträngningen att minnas får kunskapen att fastna, när eleven lyckas till en del.',
+      handling: [{ ikon: 'bok', text: 'Stäng boken' }, { ikon: 'skrivhand', text: 'Skriv det du minns' }, { ikon: 'oppen-bok', text: 'Titta och rätta' }],
+    },
+    baksida: {
+      vad: { ikon: 'tanka', text: 'Eleverna tar fram det de har lärt sig ur minnet.' },
+      darfor: { ikon: 'glodlampa', text: 'Att läsa igen känns bekant, men känslan lurar.' },
+      iMinnet: { delar: [{ namn: 'Arbetsminnet' }, { namn: 'Långtidsminnet' }], pilar: [{ fran: 'Långtidsminnet', till: 'Arbetsminnet', text: 'plocka fram' }] },
+      saGorDu: [{ rubrik: 'Stäng boken', text: 'Alla svarar själva innan facit visas.' }, { rubrik: 'Rätta direkt', text: 'Visa det rätta samma lektion.' }, { rubrik: 'Kom tillbaka', text: 'Låt det komma igen efter dagar och veckor.' }],
+      avgor: { rubrik: 'Undvik', text: 'Frågor om bara ord och namn.' },
+      tankPa: 'Strategin tjänar innehållet.',
+      forskningen: { text: 'Starkast stöd i skolan.', kallor: [{ id: 'perry-m-fl-2021', titel: 'Perry m.fl., 2021', text: 'Perry, J. m.fl. (2021).' }] },
+      fordjupa: [{ titel: 'Testbaserat lärande', adress: '/metoder/testbaserat-larande' }],
+    },
+    forslag,
+  };
+  const ny = (f) => { const s = structuredClone(plocka); f(s); return s; };
+  const strategifall = [
+    [plocka, 0],
+    [ny((s) => { s.framsida.mening = 'Ta fram det ur minnet innan du tittar i boken igen.'; }), 1],
+    [ny((s) => { s.framsida.bild.steg.pop(); }), 1],
+    [ny((s) => { s.framsida.handling[0].ikon = 'tänka'; }), 1],
+    [ny((s) => { s.baksida.saGorDu.push({ rubrik: 'a', text: 'b' }, { rubrik: 'c', text: 'd' }); }), 1],
+    [ny((s) => { s.baksida.avgor.rubrik = 'Tänk på'; }), 1],
+    [ny((s) => { s.baksida.iMinnet.pilar[0].till = 'Minnet'; }), 1],
+    [ny((s) => { s.baksida.forskningen.kallor = ['perry-m-fl-2021']; }), 1],
+    [ny((s) => { s.forslag[3].omrade = 'socialt'; }), 1],
+    [ny((s) => { s.nr = 0; }), 1],
+    [ny((s) => { s.utkast = true; s.forslag = []; s.baksida.forskningen = {}; s.framsida.bild.steg.forEach((b) => { delete b.fil; }); }), 0],
+  ];
+  for (const [s, n] of strategifall) { const f = strategiensFel(s); if (f.length !== n) fel.push(`strategiensFel ger ${JSON.stringify(f)}, inte ${n} fel`); }
+  if (strategikortensFel(undefined).length || strategikortensFel({ text: 'Fem strategier.', strategier: ['plocka-fram', 'sprid-ut', 'blanda-uppgifter', 'ord-och-bild', 'avlasta-minnet'], blad: 'Strategibladet' }).length) fel.push('strategikortensFel ger fel på metodens fem strategier');
+  if (strategikortensFel({ text: 'x', strategier: ['plocka-fram', 'plocka-fram', 'Blanda'] }).length !== 2) fel.push('strategikortensFel släpper igenom en strategi två gånger eller ett id med versal');
+}
 // Sådden läser strukturernas namn med samma regel som vävningen (METODER.md under Sådden): namnet, utan utropstecknet i ett
 // namn med flera ord, med och för tankstrecket, i bestämd form, och utan stor bokstav bara i ett namn med kommatecken.
 for (const [namn, text, ja] of [
@@ -415,4 +458,4 @@ for (const [n, vantat] of [[0, ''], [1, 'fram:0/- bak:0/-'], [2, 'fram:0/1 bak:0
 if (Object.keys(STRUKTURENS_SLAG).join() !== 'par,grupp,klass') fel.push('STRUKTURENS_SLAG har inte slagen par, grupp och klass i den ordningen');
 
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och strukturernas regler, slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form, bildtextens gränser, metodkortets nivåer och lathundens sidor svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och strukturernas och strategiernas regler, slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form, bildtextens gränser, metodkortets nivåer och lathundens sidor svarar rätt.`);

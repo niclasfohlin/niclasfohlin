@@ -934,3 +934,33 @@ export declare function strukturernasTopplista(hits: { path: string; count: numb
 export declare const METODENS_STRUKTURKORT: Readonly<{ minst: number; högst: number }>;
 /** Felen i en metods fält strukturkort, tomt när fältet saknas. */
 export declare function strukturkortensFel(sk: unknown): string[];
+/** Gränserna för en strategi: kortets texter, berättelsens bilder, stegen, det som avgör, minnets bild och förslagen. */
+export declare const STRATEGINS_GRANSER: Readonly<{
+  mening: number;
+  berattelsen: Readonly<{ bilder: number; rubrik: number; utfall: number }>;
+  handling: Readonly<{ antal: number; tecken: number }>;
+  insikt: number;
+  steg: Readonly<{ minst: number; högst: number; rubrik: number; text: number }>;
+  avgor: readonly string[];
+  minnet: Readonly<{ minst: number; högst: number; namn: number; text: number; pil: number }>;
+  forslag: Readonly<{ antal: number; meningar: readonly [number, number] }>;
+  arskurser: readonly string[];
+}>;
+/** Förslagens områden med namnet som sidan visar. */
+export declare const STRATEGINS_OMRADEN: Readonly<Record<'lasning' | 'skrivning' | 'matematik' | 'amnen', string>>;
+/** Felen i en strategi, som en lista. Ett utkast får sakna förslag, källor och bildernas filer. */
+export declare function strategiensFel(s: Record<string, any>): string[];
+/** Gränserna för strategierna i en metods fält strategikort. */
+export declare const METODENS_STRATEGIKORT: Readonly<{ minst: number; högst: number }>;
+/** Felen i en metods fält strategikort, tomt när fältet saknas. */
+export declare function strategikortensFel(sk: unknown): string[];
+/** Det ett strategikort visar, ur strategins fil. */
+export declare function strategikortetsData(s: Record<string, any>): { nr: number; namn: string; mening: string; insikt: string; berattelsen: { rubrik: string; utfall: string; fil: string | null }[]; handling: { text: string; ikon: string }[]; minnet: { delar: { namn: string; text?: string }[]; pilar: { fran: string; till: string; text: string; betonad?: boolean }[] }; steg: { rubrik: string; text: string }[]; avgor: { rubrik: string; text: string } | null };
+/** Kontrollsumman över det ett strategikort visar och bildernas och ikonernas filer. */
+export declare function strategikortetsInnehall(s: Record<string, any>, filerna: string[]): string;
+/** Kortets fil, strategikort-<id>.pdf. */
+export declare function strategikortetsFil(id: string): string;
+/** Filen med alla strategikort och dess nyckel i manifestet. */
+export declare const STRATEGIKORTEN_ALLA: Readonly<{ fil: string; nyckel: string }>;
+/** En metods strategikort två och två på A4, och nyckeln i manifestet. */
+export declare function metodensStrategikort(metod: string): Readonly<{ fil: string; nyckel: string }>;

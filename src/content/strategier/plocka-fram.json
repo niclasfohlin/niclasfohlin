@@ -1,0 +1,50 @@
+{
+  "_om": "Sajtens provfil för verktyget Strategier (K-699), gjord 2026-11-03 ur metodriggens utkast 2 i den form som sajten och riggen kom överens om (C:/metodrigg/out/strategier/FRAN-SAJTEN.md). Stegens rubriker är sajtens kortning av utkastets steg. Utkast: visas lokalt men aldrig i produktionen, och ersätts av riggens leverans.",
+  "nr": 1,
+  "namn": "Plocka fram",
+  "forskningensOrd": "retrieval practice",
+  "utkast": true,
+  "framsida": {
+    "mening": "Ta fram det ur minnet innan du tittar.",
+    "bild": {
+      "liknelse": "Stigen till skatten: ett barn går genom en äng till en ädelsten, som är det eleven kan.",
+      "steg": [
+        { "rubrik": "Första gången", "utfall": "Svårt att hitta", "alt": "Ett barn står i en äng med högt gräs. Stigen till ädelstenen syns knappt." },
+        { "rubrik": "Andra gången", "utfall": "Lättare", "alt": "Samma äng. Stigen till ädelstenen syns tydligare i gräset." },
+        { "rubrik": "Tionde gången", "utfall": "Hittar direkt", "alt": "Samma äng. Stigen till ädelstenen är bred och upptrampad." }
+      ]
+    },
+    "insikt": "Ansträngningen att minnas får kunskapen att fastna, när eleven lyckas till en del.",
+    "handling": [
+      { "ikon": "bok", "text": "Stäng boken" },
+      { "ikon": "skrivhand", "text": "Skriv det du minns" },
+      { "ikon": "oppen-bok", "text": "Titta och rätta" }
+    ]
+  },
+  "baksida": {
+    "vad": { "ikon": "tanka", "text": "Eleverna tar fram det de har lärt sig ur minnet, utan att titta, och ser sedan det rätta." },
+    "darfor": { "ikon": "glodlampa", "text": "Att läsa igen känns bekant, men känslan lurar. Att plocka fram stärker vägen tillbaka till minnet." },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        { "namn": "Arbetsminnet", "text": "det du tänker på nu" },
+        { "namn": "Långtidsminnet", "text": "allt du kan" }
+      ],
+      "pilar": [
+        { "fran": "Arbetsminnet", "till": "Långtidsminnet", "text": "lära in" },
+        { "fran": "Långtidsminnet", "till": "Arbetsminnet", "text": "plocka fram", "betonad": true }
+      ],
+      "text": "Varje gång eleven plockar fram blir vägen tillbaka starkare. Att bara läsa igen tränar inte vägen."
+    },
+    "saGorDu": [
+      { "rubrik": "Stäng boken", "text": "Alla svarar själva innan något svar visas." },
+      { "rubrik": "Rätta direkt", "text": "Visa det rätta samma lektion. Eleverna rättar med en annan färg." },
+      { "rubrik": "Kom tillbaka", "text": "Låt det komma igen efter dagar och veckor." },
+      { "rubrik": "Inte till betyg", "text": "Räkna det inte till betyget, så vågar eleverna svara fel." }
+    ],
+    "avgor": { "rubrik": "Undvik", "text": "Frågor om bara ord och namn. Fråga också varför." },
+    "tankPa": "Strategin tjänar innehållet. Bestäm först vad klassen ska förstå.",
+    "forskningen": { "text": "Starkast stöd i skolan av strategierna, mest för fakta och begrepp.", "kallor": [] },
+    "fordjupa": [{ "titel": "Testbaserat lärande", "adress": "/metoder/testbaserat-larande" }]
+  }
+}

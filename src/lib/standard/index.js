@@ -472,3 +472,5 @@ export * from './text.js';
 export * from './undervisningsmetod.js';
 // Strukturerna (sajtens K-650): slagen Par, Grupp och Klass och reglerna för en struktur i verktyget Strukturer.
 export * from './strukturer.js';
+// Strategierna (sajtens K-699): reglerna för en strategi i verktyget Strategier och för metodens fält strategikort.
+export * from './strategier.js';
