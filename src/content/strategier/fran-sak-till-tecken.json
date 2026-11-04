@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Tecknet får mening av saken det står för. Ta bort saken ett steg i taget.",
+    "insikt": "Eleven förstår tecknet när hen ser saken det står för. Ta bort saken ett steg i taget.",
     "handling": [
       {
         "ikon": "tegelsten",
@@ -50,7 +50,7 @@
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "När eleven håller i saken syns vad det handlar om, men kunskapen fastnar lätt i just den saken. Tecken som siffror, bokstäver och formler går att använda överallt, men utan något att stå för blir de regler att lära utantill. När eleven går från saken via en bild till tecknet, och ser vad som motsvarar vad i varje steg, får tecknet sin mening. Saken finns kvar i minnet att gå tillbaka till när tecknet känns tomt."
+      "text": "När eleven håller i saken ser hen vad det handlar om, men det är lätt hänt att hen bara kan det med just den saken. Tecken som siffror, bokstäver och formler går att använda överallt, men vet eleven inte vad de står för, blir de regler att lära utantill. När eleven går från saken via en bild till tecknet och ser vad som hör ihop i varje steg, förstår hen vad tecknet betyder. Eleven har saken kvar i minnet och kan gå tillbaka till den när tecknet känns tomt."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -86,12 +86,12 @@
           "betonad": true
         }
       ],
-      "text": "Varje steg tar bort det som inte behövs och behåller det som hör ihop. När tecknet känns tomt kan eleven tänka på saken igen."
+      "text": "I varje steg tar ni bort det som inte behövs och behåller det som hör ihop. När tecknet känns tomt kan eleven tänka på saken igen."
     },
     "saGorDu": [
       {
         "rubrik": "Välj en enkel sak",
-        "text": "Kuber, remsor eller en våg som visar det viktiga, utan pynt."
+        "text": "Använd kuber, remsor eller en våg som visar det viktiga och inget mer."
       },
       {
         "rubrik": "Säg vad som hör ihop",
@@ -99,7 +99,7 @@
       },
       {
         "rubrik": "Ett steg i taget",
-        "text": "Från saken till en enkel bild, och till tecknet när bilden går rätt."
+        "text": "Gå till en enkel bild, och till tecknet när eleven klarar bilden."
       },
       {
         "rubrik": "Tillbaka till saken",
@@ -110,9 +110,9 @@
       "rubrik": "När den passar",
       "text": "När ett nytt tecken står för något som går att visa med en sak."
     },
-    "tankPa": "Strategin tjänar innehållet: välj saken efter det tecknet ska betyda. Välj enkla kuber och remsor framför saker med många detaljer, som leksakspengar. Gå vidare till tecknet när eleven gör rätt med bilden, och ta bort saken och bilden först när eleven gör rätt med tecknen. Låt saken ligga framme för den som behöver gå tillbaka. Strategin är mest prövad i matematik, och i NO har den inte alltid gett mer än att stanna vid saken.",
+    "tankPa": "Strategin tjänar innehållet: välj saken efter det tecknet ska betyda. Välj hellre enkla kuber och remsor än saker med många detaljer, som leksakspengar. Gå vidare till tecknet när eleven gör rätt med bilden, och ta bort saken och bilden först när eleven gör rätt med tecknen. Låt saken ligga framme för den som behöver gå tillbaka. Strategin är mest prövad i matematik. I NO har elever som bara arbetade med saken ibland klarat sig lika bra.",
     "forskningen": {
-      "text": "Fyfe m.fl. (2014) beskriver hur saken tonas ut mot tecknet i matematik och NO. IES-vägledningen bedömer stödet för att koppla ihop saker och tecken som måttligt (Pashler m.fl., 2007), och WWC stödet som starkt för saker och bilder som kopplas till tecknen, i 28 studier av stödundervisning i matematik i F–⁠6 (Fuchs m.fl., 2021). Undervisning med föremål gav 0,37 mot bara tecken i 55 studier, mer för 7–⁠11 år och med lärarens vägledning (Carbonneau m.fl., 2013). I NO för 9–⁠12 år klarade elever som bara arbetade med den konkreta formen i en simulering nya uppgifter minst lika bra som de som fick strategin (Jaakkola och Veermans, 2018).",
+      "text": "Fyfe m.fl. (2014) beskriver hur läraren i matematik och NO går från saken till tecknet steg för steg. IES-vägledningen bedömer att stödet för att koppla ihop saker och tecken är måttligt (Pashler m.fl., 2007). WWC bedömer utifrån 28 studier av stödundervisning i matematik i F–⁠6 att stödet är starkt för att koppla saker och bilder till tecknen (Fuchs m.fl., 2021). I 55 studier gav undervisning med föremål 0,37 jämfört med bara tecken, och den gav mer för barn som var 7–⁠11 år och när läraren vägledde dem (Carbonneau m.fl., 2013). I en studie i NO med elever som var 9–⁠12 år klarade de som bara arbetade med den konkreta formen i en simulering nya uppgifter minst lika bra som de som fick strategin (Jaakkola och Veermans, 2018).",
       "kallor": [
         {
           "id": "fyfe-m-fl-2014",
@@ -166,25 +166,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Säg ordet sol långsamt, och låt eleverna lägga en kloss för varje ljud de hör: s, o, l. Sedan drar de ett streck på bladet för varje ljud, och sist skriver de bokstaven på strecket och läser ordet. Peka på klossen, strecket och bokstaven för samma ljud medan ni säger det: ”Här är sss.” Ta bort klossarna när eleverna hör ljuden utan dem, och låt dem ligga kvar för den som behöver."
+      "text": "Säg ordet sol långsamt, och låt eleverna lägga en kloss för varje ljud de hör: s, o, l. Sedan drar de ett streck på bladet för varje ljud, och sist skriver de en bokstav på varje streck och läser ordet. Peka på klossen, strecket och bokstaven för samma ljud medan ni säger det: ”Här är sss.” När eleverna hör ljuden utan klossarna tar du bort dem, men den som behöver får ha kvar sina."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Två elever spelar upp ett kort samtal, och den som talar håller upp en pratbubbla av papp. Sedan ritar de samtalet som en serie med pratbubblor, och sist skriver de det som text med citattecken runt det som sägs. Peka på bubblan och tecknen samtidigt: ”Här börjar bubblan, och här börjar citattecknet.” Den som glömmer tecknen ritar en bubbla runt repliken igen."
+      "text": "Två elever spelar upp ett kort samtal, och den som talar håller upp en pratbubbla av papp. Sedan ritar de samtalet som en serie med pratbubblor, och sist skriver de samtalet som text med citattecken runt varje replik. Peka på bubblan och tecknen samtidigt: ”Här börjar bubblan, och här börjar citattecknet.” Den som glömmer tecknen ritar en bubbla runt repliken igen."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Lägg tre påsar med lika många kulor och två lösa kulor i ena vågskålen, och elva kulor i den andra. Eleverna tar bort två kulor från varje sida och ser att tre påsar väger lika mycket som nio kulor, så att varje påse har tre. Sedan ritar de vågen med rutor för påsarna och prickar för kulorna, och sist skriver de 3x + 2 = 11 och samma steg som ekvation. Fråga vid varje steg vad det motsvarar i vågen."
+      "text": "Lägg tre påsar med lika många kulor och två lösa kulor i ena vågskålen, och elva kulor i den andra. Eleverna tar bort två kulor från varje sida och ser att tre påsar väger lika mycket som nio kulor, och då har varje påse tre kulor. Sedan ritar de vågen med rutor för påsarna och prickar för kulorna, och sist skriver de ekvationen 3x + 2 = 11 och löser den med samma steg. Fråga vid varje steg vad det motsvarar i vågen."
     },
     {
       "omrade": "amnen",
       "arskurs": "F–3",
       "amne": "SO",
-      "text": "Eleverna bygger klassrummet på ett bord med klossar för bänkarna, katedern och dörren. Sedan ritar de klassrummet ovanifrån på ett papper, med en ruta för varje bänk på samma plats som klossen. Sist byter de bilderna mot kartans tecken och gör en teckenförklaring, och en kamrat letar upp en gömd sak med hjälp av kartan. Gå sedan vidare till kartan över skolgården, och peka på tecknet och platsen samtidigt."
+      "text": "Eleverna bygger klassrummet på ett bord med klossar för bänkarna, katedern och dörren. Sedan ritar de klassrummet ovanifrån på ett papper, och varje bänk blir en ruta där klossen står. Sist byter de bilderna mot kartans tecken och gör en teckenförklaring, och en kamrat letar upp en gömd sak med hjälp av kartan. Gå sedan vidare till kartan över skolgården, och peka på tecknet och platsen samtidigt."
     }
   ],
   "metoderSomGorDen": [

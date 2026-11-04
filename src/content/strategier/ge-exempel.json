@@ -3,9 +3,9 @@
   "namn": "Ge exempel",
   "forskningensOrd": "concrete examples",
   "framsida": {
-    "mening": "Se idén i exempel som ser olika ut.",
+    "mening": "Hitta idén i exempel som ser olika ut.",
     "bild": {
-      "liknelse": "Vad är en triangel? Efter ett enda exempel lägger barnet en triangel som ligger ner utanför ringen. Flera trianglar som ser olika ut visar det som är lika, tre raka sidor och tre hörn, och sedan ritar barnet en egen och förklarar.",
+      "liknelse": "Vad är en triangel? Efter ett enda exempel känner barnet inte igen en triangel som ligger ner och lägger den utanför ringen. När läraren visar flera trianglar som ser olika ut, ser barnet det som är lika: tre raka sidor och tre hörn. Sedan ritar barnet en egen och förklarar.",
       "steg": [
         {
           "rubrik": "Ett exempel",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Ett exempel minns eleven som det såg ut. Det som är lika i flera är idén.",
+    "insikt": "Eleven minns ett exempel som det såg ut. Med flera ser hen det som är lika: idén.",
     "handling": [
       {
         "ikon": "forstoringsglas",
@@ -50,7 +50,7 @@
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Ett begrepp är svårt att se i bara ord, och ett enda exempel minns eleven som det såg ut. Den som är ny i ett innehåll fastnar lätt vid det som syns först, som färgen eller hur figuren ligger. När exemplen ser olika ut och du pekar på det som är lika i alla, ser eleven vad idén är och känner igen den i ett nytt exempel. Elevens eget exempel visar dig om idén sitter."
+      "text": "Eleven har svårt att förstå ett begrepp bara av ord. Visar du ett enda exempel, minns hen det som det såg ut. Den som möter något nytt fastnar lätt vid det som syns först, som färgen eller hur figuren ligger. När du visar exempel som ser olika ut och pekar på det som är lika i alla, ser eleven vad idén är och känner igen den i ett nytt exempel. Ger eleven ett eget exempel, ser du om hen har förstått idén."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -61,7 +61,7 @@
         },
         {
           "namn": "Arbetsminnet",
-          "text": "letar det som är lika"
+          "text": "letar efter det lika"
         },
         {
           "namn": "Långtidsminnet",
@@ -86,7 +86,7 @@
           "text": "känna igen"
         }
       ],
-      "text": "Det som är lika i exempel som ser olika ut blir idén i minnet. Då känner eleven igen den också i ett exempel hen inte har sett."
+      "text": "Eleven minns det som är lika i exempel som ser olika ut, och det blir idén. Då känner hen igen den också i ett exempel hen inte har sett."
     },
     "saGorDu": [
       {
@@ -95,11 +95,11 @@
       },
       {
         "rubrik": "Olika på ytan",
-        "text": "Två eller tre exempel som ser olika ut men har samma idé."
+        "text": "Ta två eller tre exempel som ser olika ut men har samma idé."
       },
       {
         "rubrik": "Peka på det lika",
-        "text": "Visa i varje exempel var idén syns, med samma ord varje gång."
+        "text": "Visa var idén syns i varje exempel. Använd samma ord varje gång."
       },
       {
         "rubrik": "Eleverna ger egna",
@@ -108,11 +108,11 @@
     ],
     "avgor": {
       "rubrik": "Undvik",
-      "text": "Ett enda exempel, och lockande detaljer som inte hör till idén."
+      "text": "Ett enda exempel och lockande detaljer som inte hör till idén."
     },
-    "tankPa": "Strategin tjänar innehållet: välj exempel som visar idén och inget annat som drar blicken. Ett roligt exempel skadar inte, så länge det roliga hör till idén. Ett löst exempel visar hur en uppgift görs och hör till Avlasta minnet. Här visar exemplen vad en idé är. Stödet kommer mest från studier med studenter i labb, och i skolan från försök i matematik, NO och teknik.",
+    "tankPa": "Strategin tjänar innehållet: välj exempel som visar idén och inget annat som drar blicken. Ett roligt exempel skadar inte, så länge det roliga hör till idén. Ett löst exempel visar hur man löser en uppgift, och det hör till Avlasta minnet. Här visar exemplen vad en idé är. Forskarna har mest prövat strategin med studenter i labb. I skolan har de prövat den i matematik, NO och teknik.",
     "forskningen": {
-      "text": "Studenter som läste definitioner med exempel kände igen fler nya exempel än de som bara läste definitionerna, 0,74 till 1,67 i tre experiment (Rawson m.fl., 2015) och 0,30 när försöket gjordes om (Micallef och Newton, 2024). IES-vägledningen bedömer stödet som måttligt för att visa samma idé i flera former och peka ut det som är lika i alla, mest från labb och allt fler försök i skolan (Pashler m.fl., 2007). Nybörjare minns lätt ytan i ett exempel, och flera exempel som ser olika ut hjälper dem att föra över idén (Weinstein m.fl., 2018).",
+      "text": "Studenter som läste definitioner med exempel kände igen fler nya exempel än de som bara läste definitionerna. Effekten var 0,74 till 1,67 i tre experiment (Rawson m.fl., 2015) och 0,30 när andra forskare gjorde om försöket (Micallef och Newton, 2024). IES-vägledningen bedömer stödet som måttligt för att visa samma idé i flera former och peka ut det som är lika i alla. Stödet kommer mest från labb och från allt fler försök i skolan (Pashler m.fl., 2007). Den som är ny i ett ämne minns lätt hur ett exempel ser ut, och flera exempel som ser olika ut hjälper hen att använda idén i något nytt (Weinstein m.fl., 2018).",
       "kallor": [
         {
           "id": "rawson-m-fl-2015",
@@ -156,13 +156,13 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan klassen börjar en ny bok tar du upp vad en konflikt i en berättelse är: någon vill något, och något står i vägen. Visa tre exempel som ser olika ut, ur böcker som klassen känner: två vänner som bråkar, en storm som huvudpersonen måste ta sig igenom och ett svårt val inuti en person. Peka i varje exempel på vem som vill något och vad som står i vägen, med samma ord varje gång. Sedan hittar eleverna konflikten i den nya boken och säger de två delarna till en kamrat."
+      "text": "Innan klassen börjar en ny bok tar du upp vad en konflikt i en berättelse är: någon vill något, och något står i vägen. Visa tre exempel ur böcker som klassen känner. De ser olika ut: två vänner som bråkar, en storm som huvudpersonen måste ta sig igenom och en person som står inför ett svårt val. Peka i varje exempel på vem som vill något och vad som står i vägen, och använd samma ord varje gång. Sedan hittar eleverna konflikten i den nya boken och säger de två delarna till en kamrat."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När klassen ska skriva så att läsaren kan se det framför sig, visar du tre exempel som ser olika ut: en lerig hund, en sprucken mugg och en solig strand. Peka i varje exempel på ordet som gör att läsaren ser mer, och fråga vad de ser nu. Sedan skriver var och en ett eget exempel om något i klassrummet och läser det för en kamrat, som säger vad hen ser. Välj exempel där ordet gör skillnad, så att eleverna lär sig välja ord och inte bara lägger till fler."
+      "text": "När klassen ska skriva så att läsaren kan se det framför sig, visar du tre exempel som ser olika ut: en lerig hund, en sprucken mugg och en solig strand. Peka i varje exempel på ordet som gör att läsaren ser mer, och fråga eleverna vad de ser nu. Sedan skriver var och en ett eget exempel om något i klassrummet och läser det för en kamrat. Kamraten säger vad hen ser. Välj exempel där ordet gör skillnad, så att eleverna lär sig välja ord och inte bara lägger till fler."
     },
     {
       "omrade": "matematik",
@@ -174,7 +174,7 @@
       "omrade": "amnen",
       "arskurs": "F–3",
       "amne": "NO",
-      "text": "När klassen lär sig vad en insekt är, visar du bilder på en myra, en fjäril och en nyckelpiga, som ser helt olika ut. Peka i varje bild på det som är lika: sex ben och en kropp i tre delar. Lägg sedan till en spindel och låt eleverna räkna benen och säga varför den inte är en insekt. Ute på skolgården letar eleverna egna exempel och visar en kamrat benen och kroppens delar."
+      "text": "När klassen lär sig vad en insekt är, visar du bilder på tre insekter som ser helt olika ut: en myra, en fjäril och en nyckelpiga. Peka i varje bild på det som är lika: sex ben och en kropp i tre delar. Lägg sedan till en spindel och låt eleverna räkna benen och säga varför den inte är en insekt. Ute på skolgården letar eleverna efter egna exempel och visar en kamrat benen och kroppens delar."
     }
   ],
   "metoderSomGorDen": [

@@ -5,7 +5,7 @@
   "framsida": {
     "mening": "Ta fram det ur minnet innan du tittar.",
     "bild": {
-      "liknelse": "Stigen till skatten: ett barn går genom en äng till en ädelsten, som är det eleven kan. Varje gång barnet hittar dit trampas stigen upp och blir lättare att hitta.",
+      "liknelse": "Stigen till skatten: ett barn går genom en äng till en ädelsten, och ädelstenen står för det eleven kan. Varje gång barnet hittar dit blir stigen mer upptrampad, och nästa gång är den lättare att hitta.",
       "steg": [
         {
           "rubrik": "Första gången",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Ansträngningen att minnas får kunskapen att fastna, när eleven lyckas till en del.",
+    "insikt": "När eleven anstränger sig för att minnas och delvis lyckas, sitter det bättre.",
     "handling": [
       {
         "ikon": "bok",
@@ -46,11 +46,11 @@
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Eleverna tar fram det de har lärt sig ur minnet, utan att titta, och ser sedan det rätta."
+      "text": "Eleverna tar fram det de har lärt sig ur minnet utan att titta. Sedan får de se svaret och rättar själva."
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Det eleven bara läser om känns bekant, men känslan lurar: det går inte alltid att ta fram när det behövs. När eleven själv letar fram det i minnet blir det lättare att hitta nästa gång, om ansträngningen lyckas till en del. Framplockningen visar också eleven vad som saknas, och det rätta efteråt gör att felen inte sitter kvar."
+      "text": "När eleven bara läser om något känns det bekant, men känslan lurar. Hen kan inte alltid ta fram det när det behövs. När eleven själv letar fram det i minnet och delvis lyckas, hittar hen det lättare nästa gång. Eleven märker också vad hen har glömt, och när hen sedan får se svaret sitter felen inte kvar."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -77,33 +77,33 @@
           "betonad": true
         }
       ],
-      "text": "Varje gång eleven plockar fram blir vägen tillbaka lättare att hitta. Att bara läsa igen tränar inte vägen."
+      "text": "Varje gång eleven plockar fram något ur minnet blir vägen dit lättare att hitta. När eleven bara läser igen övar hen inte på att hitta dit."
     },
     "saGorDu": [
       {
         "rubrik": "Välj frågorna",
-        "text": "Det klassen ska förstå, och minst en fråga om varför."
+        "text": "Fråga om det klassen ska förstå, och ställ minst en fråga om varför."
       },
       {
         "rubrik": "Stäng boken",
-        "text": "Alla skriver, ritar eller säger det de minns innan svaret visas."
+        "text": "Alla skriver, ritar eller säger det de minns innan du visar svaret."
       },
       {
         "rubrik": "Lagom svårt",
-        "text": "Frågor som de flesta klarar till en del. En ledtråd efter en minut."
+        "text": "De flesta ska kunna svara till en del. Ge en ledtråd efter en minut."
       },
       {
         "rubrik": "Rätta direkt",
-        "text": "Visa det rätta samma lektion. Eleverna rättar med en annan färg."
+        "text": "Visa svaret under samma lektion. Eleverna rättar med en annan färg."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När klassen har förstått. Den befäster men bygger inte förståelsen."
+      "text": "När klassen har förstått. Den hjälper dem att minnas men inte förstå."
     },
-    "tankPa": "Strategin tjänar innehållet: bestäm först vad klassen ska förstå och varför. Räkna det inte till betyget, så vågar eleverna svara fel. Med de yngsta ställer du bestämda frågor, som på en frågekarta, i stället för att be dem skriva allt de minns, och svaren får vara bilder eller muntliga.",
+    "tankPa": "Strategin tjänar innehållet: bestäm först vad klassen ska förstå och varför. Räkna inte svaren till betyget, så vågar eleverna svara fel. Ge de yngsta bestämda frågor på en frågekarta i stället för att be dem skriva allt de minns. De får svara med en bild eller muntligt.",
     "forskningen": {
-      "text": "I vanliga klassrum gav framplockning 0,37 mot att läsa om, skriva av eller bearbeta texten, i 31 studier, mest för fakta, och ingen säker vinst för förståelsen (Ruitenburg m.fl., 2026). Ett quiz i starten gav ingen skillnad mot en diskussion i NO i 15 skolor (Roy m.fl., 2023). IES-vägledningen bedömer stödet för quiz och för frågor om varför som starkt (Pashler m.fl., 2007).",
+      "text": "I 31 studier i vanliga klassrum lärde sig eleverna mer när de plockade fram det de kunde ur minnet än när de läste om, skrev av eller bearbetade texten. Effekten var 0,37 och gällde mest fakta, och för förståelsen fanns ingen säker vinst (Ruitenburg m.fl., 2026). När lärare i NO i 15 skolor började lektionen med ett quiz blev det ingen skillnad mot när de började med en diskussion (Roy m.fl., 2023). Enligt IES-vägledningen är stödet starkt för quiz och för frågor om varför (Pashler m.fl., 2007).",
       "kallor": [
         {
           "id": "ruitenburg-m-fl-2026",
@@ -141,25 +141,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan ni läser vidare i högläsningsboken skriver eleverna två saker som hände i förra kapitlet och en sak om varför huvudpersonen gjorde som hen gjorde. De skriver själva med boken stängd, berättar sedan för en kamrat och kontrollerar mot boken. Varför-frågan gör att eleverna tänker på sambanden i berättelsen och inte bara på vad som hände. Lyssna efter om svaren bygger på det som står i texten."
+      "text": "Innan ni läser vidare i högläsningsboken skriver eleverna två saker som hände i förra kapitlet och en sak om varför huvudpersonen gjorde som hen gjorde. De skriver själva med boken stängd, berättar sedan för en kamrat och tittar efter i boken. När eleverna svarar på varför tänker de på sambanden i berättelsen och inte bara på vad som hände. Lyssna efter om svaren bygger på det som står i texten."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Du säger ett ord och visar en bild, och alla skriver ordet på minitavlan innan du visar hur det stavas. Eleverna rättar sedan med en annan färg. Välj ord med ett mönster som klassen har övat, som kort vokal före dubbel konsonant i boll, katt och glass. Ord som många stavade fel kommer tillbaka några dagar senare."
+      "text": "Du säger ett ord och visar en bild, och alla skriver ordet på minitavlan innan du visar hur det stavas. Eleverna rättar sedan med en annan färg. Välj ord med ett mönster som klassen har övat, som kort vokal före dubbel konsonant i boll, katt och glass. Ord som många stavade fel tar du upp igen några dagar senare."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Efter ett arbetsområde om linjära funktioner delar eleverna en tom sida i fyra rutor: formeln, ett eget exempel, en graf och varför grafen blir en rät linje. De fyller i rutorna ur minnet i fem minuter, utan bok och utan att prata. Sedan jämför de med sammanfattningen i boken och fyller i det som saknades med en annan färg. Rutan om varför grafen blir rät är varför-frågan, och den visar om eleven har förstått mer än formeln."
+      "text": "Efter ett arbetsområde om linjära funktioner delar eleverna en tom sida i fyra rutor: formeln, ett eget exempel, en graf och varför grafen blir en rät linje. Boken är stängd, och i fem minuter fyller de i rutorna ur minnet utan att prata. Sedan jämför de med sammanfattningen i boken och fyller i det som saknades med en annan färg. Den sista rutan är varför-frågan, och där ser du om eleven har förstått mer än formeln."
     },
     {
       "omrade": "amnen",
       "arskurs": "F–3",
       "amne": "NO",
-      "text": "När klassen har läst om grodans liv får eleverna en frågekarta, med grodan i mitten och frågor runt omkring, som ”Vad äter grodynglet?”. Boken är stängd, och eleverna säger svaret tyst för sig själva, sedan till en kamrat, och ritar eller skriver ett ord i rutan. Förra lektionen fyllde de i samma karta med boken öppen. Ser du många tomma rutor, ge det första ljudet eller en bild som ledtråd, så att ansträngningen lyckas."
+      "text": "När klassen har läst om grodans liv får eleverna en frågekarta med grodan i mitten och frågor runt omkring, som ”Vad äter grodynglet?”. Förra lektionen fyllde de i samma karta med boken öppen. Nu är boken stängd, och eleverna säger svaret tyst för sig själva och sedan till en kamrat. Sist ritar eller skriver de ett ord i rutan. Ser du många tomma rutor, ge det första ljudet eller en bild som ledtråd, så att eleverna lyckas minnas."
     }
   ],
   "metoderSomGorDen": [

@@ -21,7 +21,7 @@ material:
   - fraserna att låna
   - minitavlor och pennor
   - lappar till stödorden
-uppdaterad: 2026-11-02
+uppdaterad: 2026-11-04
 publicerad: 2026-10-30
 relaterade: ["gruppstarkande-aktiviteter", "hoglasning-i-par", "texttyper-i-grupp", "formativ-bedomning", "testbaserat-larande"]
 utkast: false
@@ -106,7 +106,7 @@ karna:
       varfor: "Utan färdigheten talar eleverna i munnen på varandra eller inte alls. Studier visar att grupper som hade tränat samarbete fick bättre resultat i NO (Baines m.fl., 2007), och lärarna som genomförde arbetssättet bäst lärde ut färdigheterna (Veldman m.fl., 2020)."
       belagg: provad
       kallor: [baines-m-fl-2007, veldman-m-fl-2020]
-      kvar: En färdighet i taget, som klassen ser, hör och övar i ämnets uppgifter.
+      kvar: Klassen lär sig en samarbetsfärdighet i taget, ser och hör hur den går till och övar den i ämnets uppgifter.
       fritt: "Vilken färdighet och hur länge, T-kort eller Y-kort med hjärtat, fraser eller ett foto av ett par, och om klassen väljer färdigheten."
       kryss: Jag visade färdigheten, och klassen övade den.
     - namn: Positivt ömsesidigt beroende
@@ -126,7 +126,7 @@ karna:
       varfor: "Utan eget ansvar är det den som redan kan som gör arbetet, och de andra vilar. Studier visar att 37 av 44 jämförelser med gruppmål och eget ansvar var positiva, mot 4 av 23 utan dem (Slavin, 1991)."
       belagg: provad
       kallor: [slavin-1991, adl-amini-m-fl-2024]
-      kvar: Eleverna vet i förväg att var och en kan få visa, och det händer i lektionen.
+      kvar: Eleverna vet i förväg att var och en kan få visa, och du låter någon visa i varje lektion.
       fritt: "Hur du väljer den som förklarar gruppens svar, som symbolen eller ett nummer, och hur var och en visar själv: en egen uppgift, redovisning för en ny kamrat eller en egen förklaring i ord eller bild."
       kryss: Jag sa hur var och en visar, och alla visade.
     - namn: Delaktighet och stödjande interaktion
@@ -136,7 +136,7 @@ karna:
       varfor: "När en elev i taget svarar i helklass kan de andra sluta lyssna, och du ser inte vad alla tänker. Principen vilar på att eleverna lär sig mer när de förklarar och bygger vidare på varandras tankar än när de bara får ett svar (Webb, 2009)."
       belagg: teori
       kallor: [webb-2009]
-      kvar: Alla har tänkt själva, och i paret eller gruppen hoppas ingen över.
+      kvar: Alla elever tänker själva först, och ingen hoppas över i paret eller gruppen.
       fritt: "Strukturen, par eller bordsö, tanketidens längd, vem som börjar, att visa, rita eller peka i stället för att tala, och att låna kamratens tanke när man inte har någon egen."
       kryss: Jag gav alla tanketid och en tur.
     - namn: Återkoppling och reflektion
@@ -146,7 +146,7 @@ karna:
       varfor: "Eleverna ser sällan vad de själva gör i gruppen, och det de inte ser kan de inte ändra. I ett litet försök fick några grupper tala om hur de hade arbetat, och de lärde sig mer än de andra (Johnson och Johnson, 2009). Allmänna frågor som ”Går det bra?” ändrade inget (Webb, 2009)."
       belagg: provad
       kallor: [johnson-och-johnson-2009, webb-2009]
-      kvar: Paret eller gruppen säger varje lektion vad som hjälpte och en sak att göra bättre, och du återkopplar medan de arbetar.
+      kvar: Paret eller gruppen säger varje lektion vad som hjälpte och vad de gör bättre, och du säger vad du ser när de arbetar.
       fritt: "När reflektionen kommer, mitt i eller sist, formen, som tummen med ett skäl, två stjärnor och en önskan eller loggboken, och om en elev observerar."
       kryss: Paren reflekterade, och jag sa konkret vad jag såg.
 roll:

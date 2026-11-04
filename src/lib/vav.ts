@@ -118,6 +118,21 @@ const medManga = (metod: string, c: Central, bank: Bank = 'stodundervisning') =>
 const visarSjalv = (d: MetodForVav, c: Central) => (d.centrala ?? []).some((x) => x.id === c.id);
 export const vavdaIBorjan = (metod: string, d: object, bank: Bank = 'stodundervisning'): Central[] => vavda().filter((c) => !visarSjalv(d as MetodForVav, c) && medManga(metod, c, bank));
 
+/** Högst så många grupper sådda i en metod, alla verktyg tillsammans (METODER.md under Sådden; Niclas 2026-11-04: "5 är max").
+ *  En grupp är en plats med ett verktygs kort och får ha många kort. */
+export const HOGST_GRUPPER = 5;
+/** Verktygets egen metod importerar verktyget med ett fält och räknas inte för det verktyget. */
+const VERKTYGETS_FALT: Record<string, string> = { strukturer: 'strukturkort', strategier: 'strategikort' };
+/** Grupperna i en metod som räknas mot taket. */
+export const metodensGrupper = (metod: string, d: object, bank: Bank = 'stodundervisning'): number =>
+  vavda().filter((c) => !(VERKTYGETS_FALT[c.id] && (d as Record<string, unknown>)[VERKTYGETS_FALT[c.id]])).reduce((n, c) => n + raderFor(metod, c, bank).length, 0);
+/** Beskedet när metoden har fler grupper än taket, annars undefined. Samma i Stödundervisning och Metoder. */
+export function gruppernasFel(metod: string, d: object, bank: Bank = 'stodundervisning'): string | undefined {
+  const n = metodensGrupper(metod, d, bank);
+  const register = bank === 'stodundervisning' ? 'src/data/sadd.json' : 'src/data/strategier-i-metoder.json';
+  return n > HOGST_GRUPPER ? `${metod} har ${n} grupper sådda, och taket är ${HOGST_GRUPPER} (HOGST_GRUPPER i src/lib/vav.ts, METODER.md under Sådden). Samla korten eller ta bort de utspridda i ${register}.` : undefined;
+}
+
 /** Det Word-filen har på en plats. Följer med i src/lib/metodresurser.ts och i metoder.json, eftersom metoddocx.ts också körs i
  *  webbläsaren, som inte läser delarnas filer. */
 export type VavIWord = { vid: FilmPlats; etikett: string; text?: string; delar: { namn: string; adress: string }[]; verktyg: { namn: string; adress: string }; knappenFinns: boolean };
@@ -171,5 +186,6 @@ export function provaVav(metoder: { id: string; data: MetodForPlats }[]): void {
       });
     }
   }
+  for (const m of metoder) { const g = gruppernasFel(m.id, m.data); if (g) fel.push(g); }
   if (fel.length) throw new Error(`Det som vävs in i metoderna:\n  ${fel.join('\n  ')}`);
 }

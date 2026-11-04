@@ -3,9 +3,9 @@
   "namn": "Blanda uppgifter",
   "forskningensOrd": "interleaved practice",
   "framsida": {
-    "mening": "Se först vilket slag uppgiften är.",
+    "mening": "Se först vilket slags uppgift det är.",
     "bild": {
-      "liknelse": "Spik eller skruv: när spikar och skruvar ligger blandade måste den som bygger titta på var och en och välja hammare eller skruvmejsel. Med bara spikar behövs inget val.",
+      "liknelse": "Spik eller skruv: när spikar och skruvar ligger blandade måste den som bygger titta på var och en och välja hammare eller skruvmejsel. Med bara spikar behöver hen inte välja.",
       "steg": [
         {
           "rubrik": "Ett slag i taget",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "En rad med samma slag väljer sättet åt eleven. En blandad rad övar valet.",
+    "insikt": "I en rad med samma slag slipper eleven välja. I en blandad rad övar hen på att välja.",
     "handling": [
       {
         "ikon": "forstoringsglas",
@@ -46,11 +46,11 @@
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Uppgifter av slag som eleverna blandar ihop står om vartannat, så att eleven först väljer sätt."
+      "text": "Du blandar uppgifter av slag som eleverna lätt förväxlar, så att de först måste välja sätt att lösa dem."
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "En rad med uppgifter av samma slag väljer sättet åt eleven, men på provet och i livet måste eleven välja själv. När två slag som liknar varandra kommer efter varandra ser eleven vad som skiljer dem, och kopplingen mellan slaget och sättet blir starkare. Under övningen känns det svårare och går sämre, men det sitter bättre senare."
+      "text": "När alla uppgifter i raden är av samma slag slipper eleven välja sätt, men på provet och i livet måste hen välja själv. När två slag som liknar varandra kommer efter varandra ser eleven vad som skiljer dem åt, och hen lär sig vilket sätt som passar till vilket slag. Medan eleverna övar känns det svårare och går sämre, men det sitter bättre efteråt."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -81,33 +81,33 @@
           "betonad": true
         }
       ],
-      "text": "En blandad rad stärker kopplingen mellan uppgiftens slag och rätt sätt. Det är valet som övas, och vinsten syns först senare."
+      "text": "I en blandad rad lär sig eleven vilket sätt som hör till vilket slag. Hen övar på att välja, och först senare ser du att det har hjälpt."
     },
     "saGorDu": [
       {
         "rubrik": "Öva först",
-        "text": "Ett slag i taget, tills eleverna klarar varje slag för sig."
+        "text": "Ta ett slag i taget tills eleverna klarar varje slag för sig."
       },
       {
         "rubrik": "Blanda",
-        "text": "Slag som lätt förväxlas, i en ordning som inte går att gissa."
+        "text": "Varva slag som eleverna förväxlar, utan ett mönster de kan gissa."
       },
       {
         "rubrik": "Slaget först",
-        "text": "Eleverna skriver vilket slag det är, och löser sedan."
+        "text": "Eleverna skriver vilket slag uppgiften är och löser den sedan."
       },
       {
-        "rubrik": "Facit sist",
-        "text": "När raden är klar. Var felet slaget eller räkningen?"
+        "rubrik": "Rätta sist",
+        "text": "Visa facit när raden är klar. Var det fel slag eller ett räknefel?"
       }
     ],
     "avgor": {
       "rubrik": "Undvik",
-      "text": "Att blanda innan slagen sitter, eller att blanda olika ämnen."
+      "text": "Att blanda innan eleverna kan slagen, eller att blanda olika ämnen."
     },
-    "tankPa": "Strategin tjänar innehållet: blanda bara slag som eleverna faktiskt förväxlar. Den är bäst prövad i matematik för 8–⁠14 år och mycket lite i andra ämnen och med de yngsta. Säg till klassen att det ska kännas svårare, och att det är valet som övas.",
+    "tankPa": "Strategin tjänar innehållet: blanda bara slag som eleverna faktiskt förväxlar. Forskarna har prövat den mest i matematik med elever som är 8–⁠14 år och mycket lite i andra ämnen och med de yngsta. Säg till klassen att det ska kännas svårare, och att de övar på att välja.",
     "forskningen": {
-      "text": "I vanliga klassrum gav blandade uppgifter 0,40 i 10 studier, och 0,54 i matematik (Ruitenburg m.fl., 2026). I åk 7 hade de som övat blandat 61 procent rätt mot 38 procent på ett prov en månad senare (Rohrer m.fl., 2020). Underlaget gäller nästan bara matematik, och att blanda olika skolämnen saknar stöd (Perry m.fl., 2021; Weinstein m.fl., 2018).",
+      "text": "I 10 studier i vanliga klassrum gav blandade uppgifter 0,40, och i matematik 0,54 (Ruitenburg m.fl., 2026). På ett prov en månad senare hade elever i åk 7 som övat blandat 61 procent rätt, mot 38 procent för dem som övat ett slag i taget (Rohrer m.fl., 2020). Nästan alla studier gäller matematik, och det finns inget stöd för att blanda olika skolämnen (Perry m.fl., 2021; Weinstein m.fl., 2018).",
       "kallor": [
         {
           "id": "ruitenburg-m-fl-2026",
@@ -147,25 +147,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "När klassen har övat frågor där svaret står i texten och frågor där man måste läsa mellan raderna, blandar du dem efter en gemensam text. Innan eleverna svarar skriver de vilket slag frågan är: står svaret på raden, eller måste jag dra en slutsats? Då övar de att välja var de ska leta. Blandning är lite prövad i läsning, så lyssna efter om eleverna väljer bättre."
+      "text": "När klassen har övat frågor där svaret står i texten och frågor där man måste läsa mellan raderna, blandar du dem efter en gemensam text. Innan eleverna svarar skriver de vilket slag frågan är: står svaret på raden, eller måste jag dra en slutsats? Då övar de på att välja var de ska leta. Att blanda frågor är lite prövat i läsning, så lyssna efter om eleverna väljer bättre."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När klassen har övat lång och kort vokal ett ord i taget läser du upp ord i blandad ordning, som tak, glass, villa, hat, tack, vila, glas och hatt. Eleverna lyssnar på vokalen, säger lång eller kort tyst för sig själva och skriver ordet. När listan är klar visar du facit och frågar varför tack skrivs med ck och tak med ett k. Lägg märke till den som skriver dubbel konsonant i varje ord och bara följer den senaste regeln."
+      "text": "När klassen har övat lång och kort vokal var för sig läser du upp ord i blandad ordning, som tak, glass, villa, hat, tack, vila, glas och hatt. Eleverna lyssnar på vokalen, säger lång eller kort tyst för sig själva och skriver ordet. När listan är klar visar du facit och frågar varför tack skrivs med ck och tak med ett k. Lägg märke till den som skriver dubbel konsonant i varje ord och bara följer den senaste regeln."
     },
     {
       "omrade": "matematik",
       "arskurs": "F–3",
       "amne": "matematik",
-      "text": "När klassen har räknat plus och minus var för sig blandar du korta textuppgifter, som ”Ali har 7 kulor och får 5 till” och ”Sara har 12 kulor och ger bort 4”. Innan eleverna räknar säger de plus eller minus och ritar. Ställ uppgifterna i en ordning som inte går att gissa, ibland två av samma slag i rad. Lägg märke till den som lägger ihop alla tal hen ser."
+      "text": "När klassen har räknat plus och minus var för sig blandar du korta textuppgifter, som ”Ali har 7 kulor och får 5 till” och ”Sara har 12 kulor och ger bort 4”. Innan eleverna räknar säger de plus eller minus och ritar. Ordna uppgifterna så att eleverna inte kan gissa nästa slag, och lägg ibland två av samma slag i rad. Lägg märke till den som lägger ihop alla tal hen ser."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "SO",
-      "text": "När klassen har arbetat med franska och ryska revolutionen får eleverna kort med händelser ur båda i blandad ordning. För varje kort avgör de vilken revolution det gäller och skriver vad i händelsen som avslöjar det. Facit kommer när alla kort är lagda. Händelser som liknar varandra, som att den som styr avsätts, tvingar eleverna att se på orsaker och sammanhang. Det finns inga skolstudier av blandning i SO, så se det som ett försök och lyssna efter elevernas skäl."
+      "text": "När klassen har arbetat med franska och ryska revolutionen får eleverna kort med händelser ur båda i blandad ordning. För varje kort avgör de vilken revolution det gäller och skriver vad i händelsen som avslöjar det. Du visar facit när alla kort är lagda. När två händelser liknar varandra, som att den som styr avsätts, måste eleverna titta på orsaker och sammanhang. Att blanda är inte prövat i SO i skolan, så se det som ett försök och lyssna efter elevernas skäl."
     }
   ],
   "metoderSomGorDen": [

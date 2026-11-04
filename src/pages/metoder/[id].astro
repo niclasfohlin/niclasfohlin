@@ -24,7 +24,7 @@ import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, l
 import { medKallor, medSaker, undervisningsmetodensSaker, NEDLADDNINGENS_SLAG, type Um } from '../../lib/undervisningsmetod';
 import { harLarDig as metodenHarLarDig } from '../../lib/lardig';
 import { metodensStrukturer } from '../../lib/strukturer';
-import { vavdaIBorjan } from '../../lib/vav';
+import { gruppernasFel, vavdaIBorjan } from '../../lib/vav';
 import Centralknapp from '../../components/Centralknapp.astro';
 
 export async function getStaticPaths() {
@@ -42,6 +42,7 @@ const strukturer = metodensStrukturer(d, d.titel);
 // Ett verktyg som är sått med fler än två delar står också överst, med samma regel och samma knapp som i Stödundervisning
 // (vavdaIBorjan i src/lib/vav.ts; Niclas 2026-11-01: "De som har fler än 2 såddningar i sig kan ha kortet också i början").
 const verktygIBorjan = vavdaIBorjan(id, d, 'undervisningsmetoder');
+{ const g = gruppernasFel(id, d, 'undervisningsmetoder'); if (g) throw new Error(g); }
 const tabellfiler = metodensTabellfiler(id, ((d.tabeller ?? []) as { rubrik: string }[]).map((t) => t.rubrik));
 const saker = undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer });
 // Huvudfilmen efter läsvägen, och extrafilmerna vid sin del (riggens filmer, i public/metoder/ som <id>-film och <id>-filmN),

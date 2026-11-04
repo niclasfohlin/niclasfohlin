@@ -1,0 +1,200 @@
+{
+  "nr": 16,
+  "namn": "Gör med kroppen",
+  "forskningensOrd": "enactment, embodied learning",
+  "framsida": {
+    "mening": "Gör en rörelse som visar det du lär dig.",
+    "bild": {
+      "liknelse": "Tallinjen på golvet: läraren säger ett tal, och barnet kan säga talet men vet inte var det ligger. Barnet går talet steg för steg på en tallinje på golvet och känner hur långt det är. När läraren säger ett nytt tal, vet barnet direkt var det ligger.",
+      "steg": [
+        {
+          "rubrik": "Hör talet",
+          "utfall": "Vet inte var",
+          "fil": "gor-med-kroppen-1.svg",
+          "alt": "Ett klassrum med en tallinje av vit tejp på golvet. Läraren pratar, och i pratbubblan står sex prickar. Barnet står vid början av tallinjen med handen vid hakan. I hörnet ett kryss och en stapel av fem."
+        },
+        {
+          "rubrik": "Går talet",
+          "utfall": "Känner hur långt",
+          "fil": "gor-med-kroppen-2.svg",
+          "alt": "Samma klassrum. Barnet har gått längs tallinjen fram till strecket för sex. Biten som barnet har gått är gul, och fotspåren syns bakom barnet. I pratbubblan står sex prickar. I hörnet ett förstoringsglas och två staplar av fem."
+        },
+        {
+          "rubrik": "Ett nytt tal",
+          "utfall": "Vet var talet är",
+          "fil": "gor-med-kroppen-3.svg",
+          "alt": "Samma klassrum. I lärarens pratbubbla står tre prickar som på en tärning. Barnet står på strecket för tre och sträcker upp armarna, och en violett ädelsten lyser vid fötterna. I hörnet en bock och tre staplar av fem."
+        }
+      ]
+    },
+    "insikt": "Eleven minns orden ihop med rörelsen, och bäst när rörelsen visar vad orden betyder.",
+    "handling": [
+      {
+        "ikon": "fragetecken",
+        "text": "Vad betyder det?"
+      },
+      {
+        "ikon": "klappa",
+        "text": "Visa det med kroppen"
+      },
+      {
+        "ikon": "pratbubbla",
+        "text": "Säg det samtidigt"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleverna gör en rörelse som visar det de lär sig, som en gest för ett nytt ord eller steg på en tallinje på golvet, och säger orden samtidigt."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Eleven kan säga ett nytt ord eller tal utan att veta vad det betyder. När eleven gör en rörelse som visar vad det betyder, minns hen orden och rörelsen tillsammans. Forskarna som har samlat studierna med vuxna tror att de vuxna mindes bättre främst för att de planerade rörelsen och i andra hand för att de gjorde den. Barnen i studierna lärde sig mest när rörelsen visade just det de skulle lära sig. När barnen gjorde en rörelse som inte hörde till innehållet, eller en som bara var halvt rätt, lärde de sig mindre."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Orden",
+          "text": "det du hör eller läser"
+        },
+        {
+          "namn": "Rörelsen",
+          "text": "det du planerar och gör"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "orden ihop med rörelsen"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Orden",
+          "till": "Rörelsen",
+          "text": "planera",
+          "betonad": true
+        },
+        {
+          "fran": "Rörelsen",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        }
+      ],
+      "text": "Eleven planerar en rörelse som visar vad orden betyder och gör den. Sedan minns hen orden och rörelsen tillsammans."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj innehållet",
+        "text": "Ta ord, tal eller händelser som eleverna kan visa med en rörelse."
+      },
+      {
+        "rubrik": "Visa rörelsen",
+        "text": "Gör en rörelse som visar storleken, riktningen eller handlingen."
+      },
+      {
+        "rubrik": "Alla gör och säger",
+        "text": "Alla gör rörelsen själva och säger orden samtidigt."
+      },
+      {
+        "rubrik": "Sedan utan rörelse",
+        "text": "Eleverna tänker sig rörelsen och svarar med ord eller på papper."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Att eleverna rör sig utan att rörelsen visar det de ska lära sig."
+    },
+    "tankPa": "Strategin tjänar innehållet: välj det som eleverna kan visa med en rörelse, som en handling, ett avstånd, en storlek eller en form. I Ord och bild och Rita det visar eleverna innehållet i en bild, och här visar de det med kroppen. Åttaåringar lärde sig nya ord lika bra med bilder som med gester, så välj det som passar innehållet bäst. Vuxna minns mer när de gör rörelsen själva än när de ser någon annan göra den, men när barn läste tre och tre lärde de sig också av att se en kamrat flytta leksakerna.",
+    "forskningen": {
+      "text": "I 145 studier med vuxna mindes deltagarna en fras som ”klappa händerna” bättre när de gjorde den själva. I de 123 studier som jämförde med att läsa frasen var effekten 1,23, och i de 33 som jämförde med att se någon annan göra den var den 0,51. När forskarna räknade med att studier med säkra resultat oftare blir publicerade, sjönk effekten mot att läsa till 0,84 (Roberts m.fl., 2022). Barn på omkring fem år i förskolan som i fyra veckor visade nya italienska ord för vardagliga rörelser, som flyga och hoppa, med hela kroppen mindes fler ord än barn som satt still och upprepade dem. När barnen själva räknade upp orden, mindes de också fler än barn som sprang lika mycket utan att visa orden, men när de fick se en bild som ledtråd var den skillnaden inte säker. Alla barnen mindes i snitt färre än tre av de fjorton orden när de själva räknade upp dem (Mavilidi m.fl., 2015). Barn på fem och sex år i förskoleklass i Danmark som i åtta veckor övade bokstävernas ljud med hela kroppen lärde sig fler ljud än de som övade utan rörelser, och skillnaden fanns kvar fyra till fem månader senare, men de läste inte ord bättre (Damsgaard m.fl., 2022). Åttaåringar som gjorde en gest till varje nytt engelskt ord mindes fler av orden än utan gest ännu efter sex månader, men bilder hjälpte dem lika mycket (Andrä m.fl., 2020). Hos fjortonåringar hjälpte gesterna mer än bilderna (Mathias m.fl., 2022). Barn på nio och tio år som inte kunde lösa någon uppgift med likhetstecknet före lektionen lärde sig mer när de gjorde en gest för hur de löser uppgiften än när de bara sa samma ord. Barnen som gjorde en gest som bara var halvt rätt lärde sig mindre, men mer än barnen utan gest (Goldin-Meadow m.fl., 2009). Elever i åk 1 som övade på att gå till talets plats på en tallinje på golvet lärde sig mer än de som gjorde samma övning utan att gå (Link m.fl., 2013). Elever i åk 1 och 2 som flyttade leksaker så som det stod i texten mindes och förstod texten bättre än de som läste den igen (Glenberg, 2011). De flesta studierna med barn är små, och några gjordes en och en med en försöksledare.",
+      "kallor": [
+        {
+          "id": "roberts-m-fl-2022",
+          "titel": "The enactment effect: A systematic review and meta-analysis of behavioral, neuroimaging, and patient studies",
+          "text": "Roberts, B. R. T., MacLeod, C. M. och Fernandes, M. A. (2022). The enactment effect: A systematic review and meta-analysis of behavioral, neuroimaging, and patient studies. Psychological Bulletin.",
+          "adress": "https://doi.org/10.1037/bul0000360"
+        },
+        {
+          "id": "mavilidi-m-fl-2015",
+          "titel": "Effects of Integrated Physical Exercises and Gestures on Preschool Children’s Foreign Language Vocabulary Learning",
+          "text": "Mavilidi, M.-F., Okely, A. D., Chandler, P., Cliff, D. P. och Paas, F. (2015). Effects of Integrated Physical Exercises and Gestures on Preschool Children’s Foreign Language Vocabulary Learning. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-015-9337-z"
+        },
+        {
+          "id": "damsgaard-m-fl-2022",
+          "titel": "Effects of 8 Weeks with Embodied Learning on 5–6-Year-Old Danish Children’s Pre-reading Skills and Word Reading Skills: the PLAYMORE Project, DK",
+          "text": "Damsgaard, L., Nielsen, A.-M. V., Gejl, A. K., Malling, A. S. B., Jensen, S. K. och Wienecke, J. (2022). Effects of 8 Weeks with Embodied Learning on 5–6-Year-Old Danish Children’s Pre-reading Skills and Word Reading Skills: the PLAYMORE Project, DK. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-022-09671-8"
+        },
+        {
+          "id": "andra-m-fl-2020",
+          "titel": "Learning Foreign Language Vocabulary with Gestures and Pictures Enhances Vocabulary Memory for Several Months Post-Learning in Eight-Year-Old School Children",
+          "text": "Andrä, C., Mathias, B., Schwager, A., Macedonia, M. och von Kriegstein, K. (2020). Learning Foreign Language Vocabulary with Gestures and Pictures Enhances Vocabulary Memory for Several Months Post-Learning in Eight-Year-Old School Children. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-020-09527-z"
+        },
+        {
+          "id": "mathias-m-fl-2022",
+          "titel": "Twelve- and Fourteen-Year-Old School Children Differentially Benefit from Sensorimotor- and Multisensory-Enriched Vocabulary Training",
+          "text": "Mathias, B., Andrä, C., Schwager, A., Macedonia, M. och von Kriegstein, K. (2022). Twelve- and Fourteen-Year-Old School Children Differentially Benefit from Sensorimotor- and Multisensory-Enriched Vocabulary Training. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-021-09648-z"
+        },
+        {
+          "id": "goldin-meadow-m-fl-2009",
+          "titel": "Gesturing Gives Children New Ideas About Math",
+          "text": "Goldin-Meadow, S., Cook, S. W. och Mitchell, Z. A. (2009). Gesturing Gives Children New Ideas About Math. Psychological Science.",
+          "adress": "https://doi.org/10.1111/j.1467-9280.2009.02297.x"
+        },
+        {
+          "id": "link-m-fl-2013",
+          "titel": "Walk the number line: An embodied training of numerical concepts",
+          "text": "Link, T., Moeller, K., Huber, S., Fischer, U. och Nuerk, H.-C. (2013). Walk the number line: An embodied training of numerical concepts. Trends in Neuroscience and Education.",
+          "adress": "https://doi.org/10.1016/j.tine.2013.06.005"
+        },
+        {
+          "id": "glenberg-2011",
+          "titel": "How reading comprehension is embodied and why that matters",
+          "text": "Glenberg, A. M. (2011). How reading comprehension is embodied and why that matters. International Electronic Journal of Elementary Education.",
+          "adress": "https://iejee.com/index.php/IEJEE/article/view/210"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      },
+      {
+        "titel": "Ljudlek: Bokstavsgympa",
+        "adress": "/stodundervisning/ljudlek-bokstavsgympa"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "Läs en kort text om en bondgård med en grupp på tre, och lägg fram leksaker för det som texten handlar om: bonden, traktorn, ladan och hästen. Eleverna läser en mening i taget, och den som har läst flyttar leksakerna så som det står, som att bonden kör traktorn till ladan. Flyttar någon fel, läser ni meningen igen tillsammans. När eleverna klarar det, läser de nästa text och tänker sig att de flyttar leksakerna utan att röra dem. I den första studien läste elever i åk 1 och 2 en och en med en försöksledare, och i en senare studie läste eleverna tre och tre."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Innan eleverna skriver en instruktion, som hur man viker ett pappersflygplan, gör var och en varje steg med papperet framför sig och säger vad hen gör. Sedan skriver eleven stegen i den ordning hen gjorde dem, med ett verb först i varje steg. En kamrat viker efter texten och gör bara det som står, och där kamraten fastnar skriver eleven till det som fattas. Vuxna minns handlingar bättre när de har gjort dem själva, men studierna har inte prövat det i skrivning."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "F–3",
+      "amne": "matematik",
+      "text": "Tejpa en tallinje från 0 till 10 på golvet, med ett streck för varje tal och siffror bara vid 0, 5 och 10. Du säger ett tal, och en elev går dit hen tror att talet ligger och säger talet högt. De andra pekar med tummen åt det håll eleven ska flytta sig, och sedan räknar ni strecken från 0 tillsammans. När eleverna klarar det, gör ni likadant med 0 till 20, och sist sätter eleverna ut samma tal på en tallinje på papper. I en studie lärde sig elever i åk 1 mer när de gick till talets plats på golvet än när de gjorde samma övning utan att gå."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "7–9",
+      "amne": "NO",
+      "text": "När klassen arbetar med fast form, flytande form och gasform, visar du en gest för varje form: en knuten näve för fast, fingrar som rör sig om varandra för flytande och fingrar som sprids åt alla håll för gas. Eleverna gör gesterna med dig och säger smälta, stelna, avdunsta och kondensera när de går från en gest till nästa. Sist i lektionen säger du ett av orden, och alla visar övergången med händerna samtidigt, så att du ser vilka som blandar ihop dem. Nästa lektion förklarar eleverna övergångarna för grannen med ord och utan gester. Gester till nya ord är mest prövade med ord i ett främmande språk, och hos fjortonåringar hjälpte de mer än bilder."
+    }
+  ],
+  "metoderSomGorDen": []
+}

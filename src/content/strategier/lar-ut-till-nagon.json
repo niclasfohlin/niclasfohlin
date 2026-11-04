@@ -1,0 +1,199 @@
+{
+  "nr": 17,
+  "namn": "Lär ut till någon",
+  "forskningensOrd": "learning by teaching",
+  "framsida": {
+    "mening": "Förbered dig för att lära ut, och gör det.",
+    "bild": {
+      "liknelse": "Lapparna på bordet: eleven som pluggar för sig själv har det nya som lösa lappar. När eleven ska lära ut, letar hen fram det viktigaste och lägger lapparna i ordning. När hen sedan lär ut till en kamrat som frågar, kan hen det själv.",
+      "steg": [
+        {
+          "rubrik": "Pluggar",
+          "utfall": "Sitter löst",
+          "fil": "lar-ut-till-nagon-1.svg",
+          "alt": "Ett barn står vid ett bord och läser i en öppen bok som hen håller upp. På bordet ligger fyra lappar huller om buller, och en av dem är violett. På väggen hänger en hylla med böcker. I hörnet en bock och en stapel av fem."
+        },
+        {
+          "rubrik": "Ska lära ut",
+          "utfall": "Ser helheten",
+          "fil": "lar-ut-till-nagon-2.svg",
+          "alt": "Samma rum och bord. Boken är borta, och lapparna ligger i ordning: den violetta överst och tre lappar under, med streck till dem. Barnet pekar på lapparna. I hörnet ett förstoringsglas och tre staplar av fem."
+        },
+        {
+          "rubrik": "Lär ut",
+          "utfall": "Kan det själv",
+          "fil": "lar-ut-till-nagon-3.svg",
+          "alt": "Samma rum och samma lappar i ordning. Vid bordets andra ände står en kamrat i gul tröja med handen vid hakan och ett frågetecken i en pratbubbla, och barnet pekar på lapparna. I hörnet en bock och alla fem staplarna."
+        }
+      ]
+    },
+    "insikt": "Den som ska lära ut letar fram det viktigaste. När kamraten frågar, tänker hen vidare.",
+    "handling": [
+      {
+        "ikon": "forstoringsglas",
+        "text": "Välj det viktigaste"
+      },
+      {
+        "ikon": "tillsammans",
+        "text": "Lär ut med egna ord"
+      },
+      {
+        "ikon": "fragetecken",
+        "text": "Svara på frågor"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleven lär sig något för att kunna lära ut det, och lär sedan ut det till en kamrat som inte kan det än. Kamraten frågar, och eleven svarar."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "När eleven vet att hen ska lära ut, pluggar hen på ett annat sätt. Hen letar efter det viktigaste och tänker ut i vilken ordning hen ska säga det. När hen sedan förklarar med egna ord, kan hen märka vad hen inte förstår. Den som bara återger det hen har läst lär sig mindre. När kamraten frågar varför, tänker eleven vidare. Eleverna har mest nytta av det när de lär ut något som de redan har arbetat med."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Kamraten",
+          "text": "lyssnar och frågar"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "ordnar och förklarar"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "det du har lärt dig"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Kamraten",
+          "till": "Arbetsminnet",
+          "text": "frågar",
+          "betonad": true
+        },
+        {
+          "fran": "Långtidsminnet",
+          "till": "Arbetsminnet",
+          "text": "ta fram"
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        }
+      ],
+      "text": "När eleven ska lära ut, väljer hen det viktigaste och ordnar det. När hen förklarar, tar hen fram det ur minnet, och när kamraten frågar, tänker hen vidare."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj och dela",
+        "text": "Du väljer något klassen har arbetat med och ger paret var sin del."
+      },
+      {
+        "rubrik": "Säg det i förväg",
+        "text": "Innan de börjar säger du: ”Sedan lär du ut det här till en kamrat.”"
+      },
+      {
+        "rubrik": "Välj och ordna",
+        "text": "Eleven väljer det viktigaste och bestämmer ordningen."
+      },
+      {
+        "rubrik": "Lär ut och svara",
+        "text": "Eleven förklarar med egna ord, och kamraten frågar varför och hur."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Att eleven läser innantill. Eleven lär sig mer med egna ord."
+    },
+    "tankPa": "Strategin tjänar innehållet: välj något med ett samband eller en förklaring, som eleverna redan har arbetat med. Kamraten ska inte kunna det än, till exempel för att paret har läst om olika saker. I Förklara stegen säger eleven varför hen gör ett steg, för sig själv eller för grannen, medan hen löser en uppgift. Här förbereder sig eleven och lär ut något till en kamrat som inte kan det. Du kan använda en struktur ur kooperativt lärande, men eleven lär sig när hen förbereder sig, förklarar och svarar på kamratens frågor. Med de yngsta visar du först hur det låter, och eleverna lär ut med bilder framför sig.",
+    "forskningen": {
+      "text": "De som förberedde sig för att lära ut och sedan gjorde det lärde sig mer än de som bara läste in samma sak, 0,56, och mest när de lärde ut till någon som kunde fråga (Kobayashi, 2019). De som lärde ut hade nytta av det, 0,48, när de hade läst in för att lära ut, men inte när de fick veta först efteråt att de skulle lära ut (Kobayashi, 2024). I försöken där någon lärde ut till en kamrat som inte var där, var deltagarna oftast studenter (Lachner m.fl., 2022). I en studie med studenter som inte visste i förväg att de skulle lära ut, återgav de ofta bara det de hade läst, och de lärde sig mest när kamratens frågor fick dem att tänka vidare (Roscoe och Chi, 2008). Äldre elever, oftast från åk 5 och uppåt, som undervisade yngre lärde sig mer, 0,39 i 14 studier, och de yngre som de hjälpte lärde sig också mer, 0,37 i 17 studier. De flesta studierna gällde läsning (Chang m.fl., 2025). I fysik i åk 7–⁠8 kunde elever som förklarade för en tänkt kamrat i ett röstmeddelande mer direkt efteråt än de som läste igen, men efter åtta veckor fanns ingen säker skillnad (Lachner m.fl., 2025). I 127 studier där elever undervisade varandra gjorde eleverna i snitt omkring fem månaders extra framsteg på ett år, mest när de repeterade det de redan hade arbetat med. Både den som undervisade och den som fick hjälp lärde sig mer, och Evidence for Learning (2021) bedömer belägget som starkt.",
+      "kallor": [
+        {
+          "id": "kobayashi-2019",
+          "titel": "Learning by Preparing-to-Teach and Teaching: A Meta-Analysis",
+          "text": "Kobayashi, K. (2019). Learning by Preparing-to-Teach and Teaching: A Meta-Analysis. Japanese Psychological Research.",
+          "adress": "https://doi.org/10.1111/jpr.12221"
+        },
+        {
+          "id": "kobayashi-2024",
+          "titel": "Interactive Learning Effects of Preparing to Teach and Teaching: a Meta-Analytic Approach",
+          "text": "Kobayashi, K. (2024). Interactive Learning Effects of Preparing to Teach and Teaching: a Meta-Analytic Approach. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-024-09871-4"
+        },
+        {
+          "id": "lachner-m-fl-2022",
+          "titel": "Learning-by-Teaching Without Audience Presence or Interaction: When and Why Does it Work?",
+          "text": "Lachner, A., Hoogerheide, V., van Gog, T. och Renkl, A. (2022). Learning-by-Teaching Without Audience Presence or Interaction: When and Why Does it Work? Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-021-09643-4"
+        },
+        {
+          "id": "roscoe-chi-2008",
+          "titel": "Tutor learning: the role of explaining and responding to questions",
+          "text": "Roscoe, R. D. och Chi, M. T. H. (2008). Tutor learning: the role of explaining and responding to questions. Instructional Science.",
+          "adress": "https://doi.org/10.1007/s11251-007-9034-5"
+        },
+        {
+          "id": "chang-m-fl-2025",
+          "titel": "Examining the Academic Effects of Cross-age Tutoring: A Meta-analysis",
+          "text": "Chang, A., Mauer, E., Wanzek, J., Kim, S., Scammacca, N. och Swanson, E. (2025). Examining the Academic Effects of Cross-age Tutoring: A Meta-analysis. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-025-09997-z"
+        },
+        {
+          "id": "lachner-m-fl-2025",
+          "titel": "When Does Learning by Non-interactive Teaching Work? A Large-Scale Analysis of Learner Characteristics in a Classroom Setting",
+          "text": "Lachner, A., Russ, H., Hübner, N., Sibley, L. och Scheiter, K. (2025). When Does Learning by Non-interactive Teaching Work? A Large-Scale Analysis of Learner Characteristics in a Classroom Setting. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-025-10060-0"
+        },
+        {
+          "id": "evidence-for-learning-2021",
+          "titel": "Peer tutoring",
+          "text": "Evidence for Learning (2021). Peer tutoring. Teaching & Learning Toolkit.",
+          "adress": "https://evidenceforlearning.org.au/education-evidence/teaching-learning-toolkit/peer-tutoring"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Kooperativt lärande",
+        "adress": "/metoder/kooperativt-larande"
+      },
+      {
+        "titel": "Högläsning i par",
+        "adress": "/stodundervisning/hoglasning-i-par"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Elever i åk 5 läser med var sin elev i åk 1 några gånger i veckan under några veckor. Före varje gång förbereder de sig: de läser boken själva, väljer två eller tre ord som kan bli svåra och tänker ut en fråga om vad som händer. När de läser tillsammans läser den yngre så mycket hen kan, och den äldre väntar en stund innan hen hjälper till med ett ord. Efteråt säger den äldre till dig vad den yngre klarade och vad de ska öva nästa gång. I studier av sådan läsning lärde sig både de äldre och de yngre mer."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "7–9",
+      "amne": "svenska",
+      "text": "Inför en argumenterande text läser paret var sin debattartikel om samma fråga, en för och en emot. Var och en förbereder sig för att lära ut sin artikel: tesen, det starkaste argumentet och vad som stöder det, med tre stödord på en lapp. Sedan lär de ut till varandra med stödorden framför sig, och kamraten frågar: ”Varför övertygar det argumentet?” Sist skriver var och en en egen text, där hen bemöter det argument som kamraten lärde ut."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "7–9",
+      "amne": "matematik",
+      "text": "Eleverna spelar in ett kort röstmeddelande till en kamrat som var borta när klassen löste ekvationer som 2x + 5 = 17. Innan de spelar in skriver de stödord och vad kamraten kan göra fel, som att lägga till 5 på andra sidan i stället för att dra bort. I meddelandet förklarar de med egna ord, utan att läsa från lappen, varför man drar bort 5 och delar med 2 på båda sidor, och visar att x = 6 stämmer. Lyssna efter om eleverna förklarar varför båda sidor ska vara lika stora. Den som var borta lyssnar på ett av meddelandena och skickar en fråga tillbaka, som eleven svarar på."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "F–3",
+      "amne": "NO",
+      "text": "Halva klassen lär sig hur en groda växer och andra halvan hur en fjäril växer. Visa först själv hur du lär ut med fyra bildkort. Varje elev lägger sina fyra kort i ordning, från ägg till vuxen, och övar på att berätta vad som händer för en kamrat i samma halva. Sedan lär eleven ut till en kamrat från den andra halvan med korten framför sig, och kamraten frågar om det hen undrar över. Forskarna har mest prövat strategin med äldre elever och studenter, så lyssna efter om eleverna får med alla fyra stegen i rätt ordning."
+    }
+  ],
+  "metoderSomGorDen": []
+}

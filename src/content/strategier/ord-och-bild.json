@@ -5,7 +5,7 @@
   "framsida": {
     "mening": "Säg det med ord och visa det i en bild.",
     "bild": {
-      "liknelse": "Kretsloppet på tavlan: med bara ord är sambandet svårt att följa. När läraren pekar i en enkel bild medan hen förklarar ser eleven hur delarna hänger ihop, och sedan pekar och förklarar eleven själv.",
+      "liknelse": "Kretsloppet på tavlan: när läraren bara pratar är det svårt för eleven att följa sambandet. När läraren pekar i en enkel bild medan hen förklarar, ser eleven hur delarna hänger ihop. Sedan pekar eleven själv och förklarar.",
       "steg": [
         {
           "rubrik": "Bara ord",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "När orden och bilden fogas ihop till ett samband får eleven två vägar tillbaka.",
+    "insikt": "När eleven kopplar ihop orden med bilden får hen två vägar att minnas.",
     "handling": [
       {
         "ikon": "rita",
@@ -46,11 +46,11 @@
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Du förklarar och pekar i en enkel bild av sambandet, och eleverna ritar och förklarar den själva."
+      "text": "Du förklarar ett samband och pekar samtidigt i en enkel bild av det. Sedan ritar eleverna bilden själva och förklarar."
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Ord kommer ett i taget, och ett samband är svårt att hålla ihop av bara ord. En bild visar delarna och sambanden på en gång. När du pekar på den del du talar om fogar eleven ihop orden och bilden, och då finns två vägar tillbaka till samma innehåll. Talade ord och en bild tar olika vägar in, men skrivna meningar på bilden tävlar med den om ögat."
+      "text": "När du förklarar kommer orden ett i taget, och det är svårt för eleven att hålla ihop ett samband av bara ord. I en bild ser eleven alla delar och samband på en gång. När du pekar på den del du talar om, kopplar eleven ihop orden med bilden och får två vägar att minnas samma sak. Eleven lyssnar på orden och tittar på bilden, och båda får plats samtidigt. Men om du skriver meningar på bilden måste eleven både läsa och titta på samma gång."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -61,11 +61,11 @@
         },
         {
           "namn": "Arbetsminnet",
-          "text": "fogar ihop dem"
+          "text": "kopplar ihop dem"
         },
         {
           "namn": "Långtidsminnet",
-          "text": "två vägar tillbaka"
+          "text": "två vägar att minnas"
         }
       ],
       "pilar": [
@@ -81,33 +81,33 @@
           "text": "lära in"
         }
       ],
-      "text": "Orden och bilden kommer samtidigt och hör ihop. Det är när eleven fogar ihop dem till ett samband som det sitter."
+      "text": "Eleven hör orden och ser bilden samtidigt, och de handlar om samma sak. När hen kopplar ihop dem till ett samband sitter det."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj",
-        "text": "En process, ett samband eller en ordning i tid eller rum."
+        "rubrik": "Välj vad du ritar",
+        "text": "Det kan vara en process, ett samband eller en ordning i tid eller rum."
       },
       {
         "rubrik": "Rita enkelt",
-        "text": "Rutor, pilar och ämnets ord vid delarna, utan pynt."
+        "text": "Använd rutor, pilar och ämnets ord vid delarna, och hoppa över pynt."
       },
       {
         "rubrik": "Säg och peka",
-        "text": "En del i taget. Tig när eleverna läser."
+        "text": "Ta en del i taget. Var tyst när eleverna läser."
       },
       {
         "rubrik": "Eleverna ritar",
-        "text": "Ur minnet, förklarar för grannen och ritar igen efter en vecka."
+        "text": "De ritar ur minnet, förklarar för grannen och ritar igen om en vecka."
       }
     ],
     "avgor": {
       "rubrik": "Undvik",
-      "text": "Pynt och ikoner, och att läsa upp den text som står på bilden."
+      "text": "Pynt och ikoner, och att läsa upp texten på bilden."
     },
-    "tankPa": "Strategin tjänar innehållet: kan du peka på bilden och säga sambandet med ämnets ord? Annars bär bilden inte innehållet. Låt bilden komma tillbaka, och låt eleverna rita den ur minnet igen efter en vecka. När eleverna lär sig läsa läser de ordet först och ser bilden efteråt.",
+    "tankPa": "Strategin tjänar innehållet: kan du peka på bilden och säga sambandet med ämnets ord? Annars visar bilden inte innehållet. Använd bilden igen, och låt eleverna rita den ur minnet efter en vecka. Elever som håller på att lära sig läsa läser ordet först och tittar på bilden efteråt.",
     "forskningen": {
-      "text": "I 56 lottade studier i skolan gav text med bild 0,47 mot samma innehåll utan bild, men 0,21 från förskolan till åk 5, och två av tre studier var ett enda pass (Banks m.fl., 2026). Bilder till texten gav 0,27 i läsförståelse i åk 1–⁠6 (Guo m.fl., 2020). Två veckor eller mer efteråt fanns ingen effekt kvar i de sju studier som mätte så sent (Banks m.fl., 2026), och i lärarnas presentationer blir ord och bild lätt bilder som inte bär innehållet (EEF, 2021).",
+      "text": "I 56 lottade studier i skolan gav text med bild 0,47 jämfört med samma innehåll utan bild, och två av tre studier pågick bara ett pass. Från förskolan till åk 5 var effekten 0,21 (Banks m.fl., 2026). I åk 1–⁠6 gav bilder till texten 0,27 i läsförståelse (Guo m.fl., 2020). De sju studier som mätte två veckor eller mer efteråt fann ingen effekt kvar (Banks m.fl., 2026). I lärarnas presentationer blir ord och bild lätt till bilder som inte visar innehållet (EEF, 2021).",
       "kallor": [
         {
           "id": "banks-m-fl-2026",
@@ -141,25 +141,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "I en faktatext om grodans liv står varje kort text vid sitt steg i bilden: ägg, grodyngel, groda med svans och groda. Peka på steget medan du läser. Sedan återberättar eleverna med fingret på bilden, och till sist utan bild. När eleverna läser själva för att knäcka koden läser de ordet först och ser bilden efteråt, så att bilden inte tar uppmärksamheten från orden."
+      "text": "I en faktatext om grodans liv står varje kort text vid sitt steg i bilden: ägg, grodyngel, groda med svans och groda. Peka på steget medan du läser. Sedan återberättar eleverna med fingret på bilden, och till sist gör de det utan bild. När eleverna läser själva för att knäcka koden läser de ordet först och tittar på bilden efteråt, så att bilden inte tar uppmärksamheten från orden."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan eleverna skriver en förklarande text om hur något går till, som vattnets kretslopp, ritar de processen ur minnet som fyra eller fem rutor med pilar. De berättar för en kamrat med fingret på bilden och lägger till det som saknades i en annan färg. Sedan skriver de en mening till varje ruta, med ord för sambanden som därför och sedan. Att rita före skrivandet är bara prövat i små studier, så se efter om texten får med sambanden."
+      "text": "Innan eleverna skriver en förklarande text om hur något går till, som vattnets kretslopp, ritar de processen ur minnet som fyra eller fem rutor med pilar. De berättar för en kamrat med fingret på bilden och lägger till det som saknades med en annan färg. Sedan skriver de en mening till varje ruta och binder ihop meningarna med ord som därför och sedan. Att rita först och skriva sedan är bara prövat i små studier, så se efter om eleverna får med sambanden i texten."
     },
     {
       "omrade": "matematik",
       "arskurs": "4–6",
       "amne": "matematik",
-      "text": "Rita en blockmodell till uppgiften ”24 personer på mötet hade glasögon, och det var 3/5 av alla”. Säg och peka: ”Nämnaren är fem, så jag delar blocket i fem lika delar. Tre delar är 24, så en del är 8, och alla fem delarna är 40.” Sedan ritar eleverna modeller till ”3/7 av pärlorna är röda” och ”De röda pärlorna är 3/7 av de blå”, och förklarar för grannen varför modellerna ser olika ut. Lyssna efter om de säger vad en del är."
+      "text": "Rita en blockmodell till uppgiften ”24 personer på mötet hade glasögon, och det var 3/5 av alla”. Säg och peka: ”Nämnaren är fem, så jag delar blocket i fem lika delar. Tre delar är 24, så en del är 8, och alla fem delarna är 40.” Sedan ritar eleverna modeller till ”3/7 av pärlorna är röda” och ”De röda pärlorna är 3/7 av de blå” och förklarar för grannen varför modellerna ser olika ut. Lyssna efter om de säger vad en del är."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "NO",
-      "text": "Rita blodomloppet som två slingor medan du förklarar, en slinga i taget, och peka: ”Här lämnar blodet lungorna med syre, följ pilen.” Sedan stänger eleverna boken och ritar ur minnet med pilar och fem ord: lungorna, kroppen, hjärtat, syrerikt och syrefattigt. De förklarar för grannen och lägger till det som saknades i en annan färg. Titta efter två slingor och pilar åt rätt håll, och lyssna efter därför och sedan."
+      "text": "Rita blodomloppet som två slingor och ta en slinga i taget. Peka medan du förklarar: ”Här lämnar blodet lungorna med syre, följ pilen.” Sedan stänger eleverna boken och ritar ur minnet med pilar och fem ord: lungorna, kroppen, hjärtat, syrerikt och syrefattigt. De förklarar för grannen och lägger till det som saknades med en annan färg. Titta efter två slingor och pilar åt rätt håll, och lyssna efter orden därför och sedan."
     }
   ],
   "metoderSomGorDen": [

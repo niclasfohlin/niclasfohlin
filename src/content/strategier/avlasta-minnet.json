@@ -5,7 +5,7 @@
   "framsida": {
     "mening": "Lägg kraften på det du ska lära dig.",
     "bild": {
-      "liknelse": "Backen till ädelstenen: barnet orkar upp när packningen är lätt och trappsteg hjälper i början, och stegen tas bort när barnet klarar mer själv. Backen är lika brant hela tiden, för det svåra står kvar.",
+      "liknelse": "Backen till ädelstenen: barnet orkar upp när packningen är lätt och trappsteg hjälper i början. När barnet klarar mer själv försvinner trappstegen ett i taget. Backen är lika brant hela tiden, för det svåra ska finnas kvar.",
       "steg": [
         {
           "rubrik": "Allt på en gång",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Ett löst exempel ger kraften åt det nya. Ta bort det som tynger och behåll det svåra.",
+    "insikt": "Visa ett löst exempel och ta bort det som tynger. Då orkar eleven med det svåra.",
     "handling": [
       {
         "ikon": "forstoringsglas",
@@ -46,11 +46,11 @@
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Du tar bort det som tynger utan att lära, och visar ett löst exempel innan stödet tas bort steg för steg."
+      "text": "Du rensar bort det som tynger utan att eleverna lär sig något av det. Sedan visar du ett löst exempel och tar bort stödet ett steg i taget."
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Arbetsminnet kan bara arbeta med några få nya delar samtidigt, men det eleven redan kan tar nästan ingen plats. Den som är ny i ett innehåll lägger kraften på att leta, hålla en lång instruktion i huvudet eller pröva sig fram, och då stannar inte det som skulle läras. Ett löst exempel först ger kraften åt innehållet. Uppgiften blir inte lättare, och kraften går till rätt sak."
+      "text": "I arbetsminnet kan eleven bara hålla några få nya saker samtidigt, men det hen redan kan tar nästan ingen plats. När innehållet är nytt lägger eleven kraften på att leta, hålla en lång instruktion i huvudet eller pröva sig fram, och då lär hen sig inte det som var meningen. Med ett löst exempel först kan eleven lägga kraften på innehållet. Uppgiften är lika svår, men eleven tänker på rätt sak."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -86,7 +86,7 @@
           "text": "hjälper till"
         }
       ],
-      "text": "Det eleven redan kan tar nästan ingen plats i arbetsminnet. Därför behöver den som är ny mer stöd, och den som kan mindre."
+      "text": "När eleven redan kan något tar det nästan ingen plats i arbetsminnet. Därför behöver den som är ny mer stöd, och den som redan kan behöver mindre."
     },
     "saGorDu": [
       {
@@ -95,24 +95,24 @@
       },
       {
         "rubrik": "Visa ett exempel",
-        "text": "Ett löst exempel steg för steg, och direkt en liknande uppgift."
+        "text": "Lös det steg för steg. Eleverna gör direkt en liknande uppgift."
       },
       {
         "rubrik": "Säg varför",
-        "text": "Eleverna säger varför steget görs, i exemplet och i sin egen uppgift."
+        "text": "Eleverna säger varför de gör varje steg i exemplet och i sin uppgift."
       },
       {
         "rubrik": "Ett steg mindre",
-        "text": "Ta bort ett löst steg i taget, efter det eleverna visar."
+        "text": "Ta bort ett löst steg i taget när eleverna visar att de klarar det."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När det är nytt för eleven. Den som kan störs av stödet."
+      "text": "När innehållet är nytt för eleven. Stödet stör den som redan kan."
     },
-    "tankPa": "Strategin tjänar innehållet: behåll det svåra som eleverna ska lära sig. Lösta exempel är mest prövade i matematik och NO för 11–⁠18 år, och i textskrivning gav de ingen skillnad i ett stort försök. Välj stödet efter det varje elev visar, och ge inte alla samma mall.",
+    "tankPa": "Strategin tjänar innehållet: behåll det svåra som eleverna ska lära sig. Forskarna har mest prövat lösta exempel i matematik och NO med elever som är 11–⁠18 år, och i ett stort försök i textskrivning gav de ingen skillnad. Välj stödet efter det varje elev visar, och ge inte alla samma mall.",
     "forskningen": {
-      "text": "EEF:s översikt har måttlig tilltro för lösta exempel i matematik och NO för 11–⁠18 år, och för väl valt stöd, som ledtrådar och uppgiftens struktur, för 8–⁠16 år (Perry m.fl., 2021). Belastningsteorin förklarar varför och säger att stödet tas bort när eleven kan mer: arbetsminnet rymmer få nya delar, och det eleven redan kan avgör hur tungt något är (Sweller m.fl., 2019; CESE, 2018). I ett stort försök i grammatik i textskrivning i åk 6 gav lösta exempel ingen skillnad mot att samtala om exemplen (Aston m.fl., 2025).",
+      "text": "EEF:s översikt har måttlig tilltro till lösta exempel i matematik och NO för 11–⁠18 år. Den har också måttlig tilltro till väl valt stöd för elever som är 8–⁠16 år, till exempel ledtrådar och uppgiftens struktur (Perry m.fl., 2021). Teorin om kognitiv belastning förklarar varför. Arbetsminnet rymmer få nya delar, och det eleven redan kan avgör hur tungt något är. Enligt teorin tar du bort stödet när eleven kan mer (Sweller m.fl., 2019; CESE, 2018). I ett stort försök lärde sig elever i åk 6 grammatik för sitt skrivande, och där gav lösta exempel ingen skillnad mot att samtala om exemplen (Aston m.fl., 2025).",
       "kallor": [
         {
           "id": "perry-m-fl-2021",
@@ -156,25 +156,25 @@
       "omrade": "lasning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "Inför en lärobokstext med många nya ord skriver du förklaringen i marginalen vid ordet, så att eleverna inte behöver bläddra till en ordlista. Dela texten i kortare stycken med en fråga efter varje. Eleverna som läser lätt kan läsa texten utan frågorna. Texten är densamma för alla, och det som tas bort är letandet."
+      "text": "Inför en lärobokstext med många nya ord skriver du förklaringen i marginalen vid ordet, så att eleverna inte behöver bläddra till en ordlista. Dela texten i kortare stycken med en fråga efter varje. De elever som läser lätt kan läsa texten utan frågorna. Alla läser samma text, men ingen behöver leta efter vad orden betyder."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När eleverna ska skriva, säg instruktionen i korta meningar och ha en sak framme i taget: först bilden de ska skriva om, sedan raderna att skriva på. Skriv stegen på tavlan med en bild vid varje steg, så att eleverna inte behöver hålla instruktionen i huvudet. Ta bort stegen på tavlan när klassen kan dem. I ett stort försök i textskrivning med äldre elever gav lösta exempel ingen skillnad, så se efter om fler kommer igång när stegen står på tavlan."
+      "text": "När eleverna ska skriva säger du instruktionen i korta meningar och har en sak framme i taget: först bilden de ska skriva om och sedan raderna de skriver på. Skriv stegen på tavlan med en bild vid varje steg, så att eleverna inte behöver hålla instruktionen i huvudet. Ta bort stegen på tavlan när klassen kan dem. Lösta exempel gav ingen skillnad i ett stort försök i textskrivning med äldre elever, så se efter om fler elever kommer igång när stegen står på tavlan."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Visa ett helt löst exempel på en ekvation med x på båda sidor, som 5x + 3 = 2x + 15, med varje steg på en egen rad. Bredvid står en nästan likadan uppgift, 4x + 1 = x + 16, där eleverna gör samma steg. I nästa par saknas ett steg i exemplet, sedan två, och sist löser eleverna utan exempel. Fråga ”Varför gör vi det här steget?”, och låt den som klarar uppgiften utan stöd börja där."
+      "text": "Visa ett helt löst exempel på en ekvation med x på båda sidor, som 5x + 3 = 2x + 15, och skriv varje steg på en egen rad. Bredvid står en nästan likadan uppgift, 4x + 1 = x + 16, där eleverna gör samma steg. I nästa par lämnar du ett steg i exemplet tomt och sedan två, och sist löser eleverna utan exempel. Fråga ”Varför gör vi det här steget?”, och låt den som klarar uppgiften utan stöd börja där."
     },
     {
       "omrade": "amnen",
       "arskurs": "4–6",
       "amne": "NO",
-      "text": "När klassen ska rita en sluten krets visar du ett löst exempel på tavlan och ritar det steg för steg: batteriet, sladden till lampan, lampan och sladden tillbaka till batteriet. Säg varför varje steg behövs: strömmen måste kunna gå runt. Bredvid står en nästan likadan uppgift med en lampa och en strömbrytare, som eleverna ritar själva. I nästa uppgift är bara början ritad, och sist ritar eleverna utan exempel."
+      "text": "När klassen ska rita en sluten krets visar du ett löst exempel på tavlan och ritar det steg för steg: batteriet, sladden till lampan, lampan och sladden tillbaka till batteriet. Säg varför varje steg behövs: strömmen måste kunna gå runt. Bredvid ritar eleverna själva en nästan likadan krets med en lampa och en strömbrytare. I nästa uppgift har du bara ritat början, och sist ritar eleverna utan exempel."
     }
   ],
   "metoderSomGorDen": [

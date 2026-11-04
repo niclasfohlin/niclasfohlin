@@ -20,7 +20,7 @@ material:
   - exit-lappen
   - miniwhiteboards och pennor från vecka 3
   - färgkortet från vecka 5
-uppdaterad: 2026-11-02
+uppdaterad: 2026-11-04
 publicerad: 2026-11-02
 relaterade: ["explicit-undervisning", "kooperativt-larande", "testbaserat-larande"]
 utkast: false
@@ -106,7 +106,7 @@ karna:
       varfor: "Frågor där alla svar är lika rimliga säger inget om vad eleverna har förstått. Komponenten bygger på att felsvaren visar hur eleverna tänker (Lichtenberger m.fl., 2025). I svensk åk 7 blev det ingen skillnad, kanske för att en del lärare mest ställde frågor om baskunskaper (Boström och Palm, 2023)."
       belagg: teori
       kallor: [lichtenberger-m-fl-2025, bostrom-och-palm-2023, andersson-m-fl-2017]
-      kvar: Du kan säga vilket fel du letar efter innan du frågar.
+      kvar: Du vet vilket fel du letar efter innan du frågar.
       fritt: "Ett påstående, svar att välja mellan, en uppgift, en bild eller ett påhittat elevsvar, muntligt eller skriftligt. Frågan får vara din egen eller lånad."
       kryss: Jag ställde en fråga som skilde rätt tänkande från fel.
     - namn: Alla visar samtidigt
@@ -116,7 +116,7 @@ karna:
       varfor: "Den som räcker upp handen är ofta den som redan kan. Svenska matematiklärare i en kommun samlade sällan in svar från alla (Andersson m.fl., 2017). Med svarskort deltar eleverna mer (Marsh m.fl., 2023), men i 97 engelska skolor gav svarsdosor ingen skillnad på proven (Wiggins m.fl., 2017)."
       belagg: provad
       kallor: [marsh-m-fl-2023, andersson-m-fl-2017, wiggins-m-fl-2017]
-      kvar: Alla tänker själva och visar samtidigt, innan någon säger svaret högt, och lappen ersätter inte frågan mitt i lektionen.
+      kvar: Alla elever tänker själva och visar samtidigt innan någon säger svaret, också mitt i lektionen och inte bara på lappen.
       fritt: "Tumme, fingrar eller miniwhiteboard, öppet för klassen eller synligt bara för dig. Parsamtalet visar dig hur eleverna tänker, men inte allas svar."
       kryss: Alla visade samtidigt, och jag såg dem.
     - namn: Beslutet
@@ -127,7 +127,7 @@ karna:
       varfor: "Utan beslutet går lektionen vidare som om eleverna inte hade svarat. Det formativa sitter i att svaren används (Black och Wiliam, 1998). Jämför man studier i läsning, gav metoden 0,24 när läraren anpassade undervisningen, 0,05 utan och 0,36 med bara självbedömning (Xuan m.fl., 2022)."
       belagg: provad
       kallor: [xuan-m-fl-2022, klute-m-fl-2017, black-och-wiliam-1998]
-      kvar: Det du såg förklarar vägen du tar, och du valde den före frågan.
+      kvar: Du bestämmer vägarna innan du frågar, och det du ser avgör vilken du tar.
       fritt: "Vad du gör vid varje utfall, när det sker och för vilka. Ett oväntat fel får ändra planen."
       kryss: Jag valde nästa steg efter det jag såg.
     - namn: Alla visar igen
@@ -137,7 +137,7 @@ karna:
       varfor: "Utan en ny visning vet varken du eller eleven om ändringen hjälpte. Komponenten bygger på en ny uppgift när läraren har undervisat igen (Klute m.fl., 2017) och på att alla svarade igen efter parsamtalet, såg det rätta svaret och skrev upp om deras eget stämde (Lichtenberger m.fl., 2025)."
       belagg: teori
       kallor: [klute-m-fl-2017, lichtenberger-m-fl-2025]
-      kvar: Alla visar igen och ser det rätta svaret, så att var och en vet om det hjälpte.
+      kvar: Alla elever visar igen och ser det rätta svaret, så att var och en vet om det hjälpte.
       fritt: "När bara paren har pratat ställer du samma fråga och ser vad samtalet gav. När du själv har visat ställer du en ny och ser vad var och en kan."
       kryss: Alla visade igen efter ändringen och såg det rätta.
 roll:

@@ -23,7 +23,7 @@ material:
   - affischen Så visar du
   - bladet Stegen
   - material vid bordet
-uppdaterad: 2026-10-30
+uppdaterad: 2026-11-04
 publicerad: 2026-10-29
 relaterade: ["fyra-raknesatten", "formativ-bedomning", "testbaserat-larande"]
 utkast: false
@@ -284,7 +284,7 @@ karna:
       varfor: "Arbetsminnet är litet, och för den som är ny i ett innehåll tar varje steg plats. Utan små steg gissar eleverna och bygger egna regler. I 42 av 43 studier i matematik byggdes det nya upp steg för steg (Fuchs m.fl., 2021), men ingen har prövat små steg för sig (Hughes m.fl., 2017)."
       belagg: i-alla
       kallor: [fuchs-m-fl-2021, hughes-m-fl-2017]
-      kvar: Ett steg i taget, med samma ord, och eleverna prövar varje steg.
+      kvar: Du visar ett steg i taget med samma ord, och eleverna prövar varje steg.
       fritt: Antalet steg, exemplen, stegens språk i ett språkämne, och om du visar på tavlan, med material eller med kroppen.
       kryss: Jag visade steg för steg, och alla prövade.
     - namn: Alla prövar och visar hur de tänker
@@ -294,7 +294,7 @@ karna:
       varfor: "Utan svar från alla ser läraren inte vem som har tappat, och de andra övar inte. Resultaten och arbetsron blir bättre när alla svarar samtidigt (MacSuga-Gage och Simonsen, 2015), och för elever i matematiksvårigheter hängde framstegen ihop med hur ofta var och en fick svara (Doabler m.fl., 2019)."
       belagg: provad
       kallor: [macsuga-gage-och-simonsen-2015, doabler-m-fl-2019]
-      kvar: Alla svarar samtidigt, och du ser varje elevs steg och var det blev fel.
+      kvar: Alla elever svarar samtidigt, och du ser varje elevs steg och var det blev fel.
       fritt: Miniwhiteboard, fingrar, en provlapp eller kroppen som stannar i ett steg, och kör för korta svar.
       kryss: Alla visade stegen samtidigt, och jag såg dem.
     - namn: Återkoppling på plats
@@ -304,7 +304,7 @@ karna:
       varfor: "Den som övar på ett felaktigt sätt övar in felet, och en rättning efteråt kommer när felet redan är övat. Återkoppling direkt fanns i 42 av 43 studier i matematik, och den hänger så nära ihop med elevernas övning att de inte går att skilja åt (Fuchs m.fl., 2021; Doabler m.fl., 2019)."
       belagg: i-alla
       kallor: [fuchs-m-fl-2021, doabler-m-fl-2019, hughes-m-fl-2017]
-      kvar: Du svarar på det du ser medan eleverna arbetar, och eleven gör det rätta själv.
+      kvar: Du svarar på det du ser medan eleverna arbetar, och eleven gör om det rätt själv.
       fritt: Till hela klassen eller till en elev, i ord eller genom att visa.
       kryss: Jag rättade på plats, och eleven gjorde rätt.
     - namn: Nästan alla kan innan eget arbete
@@ -314,7 +314,7 @@ karna:
       varfor: "Den som övar själv innan hen kan övar in fel eller väntar på hjälp. Hos de mest framgångsrika lärarna var ungefär åtta av tio svar rätt under den gemensamma övningen, mot sju av tio hos de minst framgångsrika, och det verkar vara den bästa andelen (Rosenshine, 2012)."
       belagg: teori
       kallor: [rosenshine-2012]
-      kvar: Du har sett att nästan alla kan innan de övar själva.
+      kvar: Du har sett att nästan alla elever kan innan de övar själva.
       fritt: Hur många uppgifter, och om eleverna sedan övar enskilt eller i par.
       kryss: Jag räknade dem med fel och följde utfallet.
 lararensFragor:

@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Det nya blir begripligt när det kända är framme i tanken och eleven kopplar ihop dem.",
+    "insikt": "Eleven förstår det nya när hen tänker på det hen redan kan och kopplar ihop dem.",
     "handling": [
       {
         "ikon": "fragetecken",
@@ -46,11 +46,11 @@
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Innan du visar något nytt tar eleverna fram det de redan vet om saken, och du kopplar det nya till det."
+      "text": "Innan du visar något nytt berättar eleverna vad de redan vet om saken, och du kopplar det nya till det de säger."
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Det eleven redan kan påverkar hur hen förstår det nya, och det kan både hjälpa och stjälpa. Det kända hjälper bara när det kommer fram i tanken just när det nya kommer. När eleverna säger det de vet, och du visar var det nya liknar det och var det skiljer sig, får det nya något att fästa vid. Det som är fel i det eleverna tror kommer också fram. Säg att det nya kanske visar något annat, och bemöt felet när det nya kommer, eftersom ett fel som får stå kvar kan stå i vägen."
+      "text": "Eleven förstår det nya genom det hen redan kan, och det kan både hjälpa och stjälpa. Men eleven har bara nytta av det hen kan om hen tänker på det just när det nya kommer. När eleverna säger vad de vet och du visar var det nya liknar det och var det skiljer sig, har de något att fästa det nya vid. Då hör du också om eleverna tror något som inte stämmer. Säg att det nya kanske visar något annat, och ta upp felet igen när ni kommer dit. Ett fel som ingen rättar kan stå i vägen för det nya."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -78,7 +78,7 @@
         {
           "fran": "Det nya",
           "till": "Arbetsminnet",
-          "text": "kopplas på"
+          "text": "koppla på"
         },
         {
           "fran": "Arbetsminnet",
@@ -86,16 +86,16 @@
           "text": "lära in"
         }
       ],
-      "text": "Det eleven redan kan ligger i långtidsminnet. Det hjälper först när det kommer fram i arbetsminnet, och där kan det nya kopplas på."
+      "text": "Det eleven redan kan ligger i långtidsminnet. Eleven har nytta av det först när hen tar fram det i arbetsminnet, och där kopplar hen det nya till det."
     },
     "saGorDu": [
       {
         "rubrik": "Välj det som behövs",
-        "text": "Det som det nya bygger på, och inget annat om ämnet."
+        "text": "Fråga bara om det som det nya bygger på, och låt resten av ämnet vara."
       },
       {
         "rubrik": "Prata med grannen",
-        "text": "Eleverna säger till grannen vad de vet om det, innan du visar något."
+        "text": "Eleverna säger till grannen vad de vet om saken innan du visar något."
       },
       {
         "rubrik": "Koppla ihop",
@@ -103,16 +103,16 @@
       },
       {
         "rubrik": "Lyssna efter fel",
-        "text": "Skriv upp det som inte stämmer, och säg att det nya kan visa annat."
+        "text": "Skriv upp felen och säg att det nya kanske visar något annat."
       }
     ],
     "avgor": {
       "rubrik": "Undvik",
       "text": "Att fråga brett om allt eleverna vet om ämnet."
     },
-    "tankPa": "Strategin tjänar innehållet: väck bara det som det nya bygger på, eftersom det som inte hör hit kan störa. Saknar eleverna det som behövs, ge dem det först, med en bild, ett föremål eller en kort text. De yngsta behöver en konkret fråga eller en sak att titta på.",
+    "tankPa": "Strategin tjänar innehållet: låt eleverna bara ta fram det som det nya bygger på, eftersom det som inte hör hit kan störa. Saknar eleverna det som behövs, ge dem det först med en bild, ett föremål eller en kort text. De yngsta behöver en konkret fråga eller en sak att titta på.",
     "forskningen": {
-      "text": "Det eleven redan kan i ett ämne hänger starkt ihop med vad hen kan efteråt, 0,53 i 476 studier, men i genomsnitt inte med hur mycket hen lär sig, och felaktiga föreställningar kan stå i vägen (Simonsmeier m.fl., 2022). I en översikt av 54 artiklar om läsning hjälpte det olika mycket att väcka förkunskaperna, beroende på hur mycket och hur riktigt eleverna redan visste, och det som inte hörde till texten kunde störa. För elever mellan 8 och 14 år hjälpte samtal i par, grupp och helklass i några studier, men nästan hälften av försöken gjordes med studenter, och ingen samlad effekt är uträknad (Hattan m.fl., 2024). EEF räknar det till sex lässtrategier, och att lära ut dem tillsammans har mycket starkt stöd i åtta metaanalyser (Higgins m.fl., 2017). Ingen av källorna mäter hur mycket det hjälper att väcka förkunskaperna för sig.",
+      "text": "I 476 studier hängde det eleverna redan kunde i ett ämne starkt ihop med vad de kunde efteråt (0,53), men i genomsnitt inte med hur mycket de lärde sig. Missuppfattningar kunde stå i vägen (Simonsmeier m.fl., 2022). I en översikt av 54 artiklar om läsning hjälpte det olika mycket att väcka förkunskaperna. Det berodde på hur mycket eleverna visste och om det stämde, och det som inte hörde till texten kunde störa. I några studier med elever mellan 8 och 14 år hjälpte det att samtala i par, i grupp och i helklass. Men nästan hälften av försöken var med studenter, och översikten räknar inte ut någon samlad effekt (Hattan m.fl., 2024). EEF räknar det som en av sex lässtrategier, och åtta metaanalyser ger mycket starkt stöd för att lära ut dem tillsammans (Higgins m.fl., 2017). Ingen av källorna mäter hur mycket det hjälper att väcka förkunskaperna för sig.",
       "kallor": [
         {
           "id": "simonsmeier-m-fl-2022",
@@ -150,13 +150,13 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan ni läser en faktatext om hur kroppen skyddar sig mot bakterier, frågar du: ”Vad händer när du får ett sår på knät?” Eleverna berättar för grannen, och du skriver några av deras ord på tavlan, som var, sårskorpa och svullet. Under läsningen stannar ni där texten förklarar något av det: ”Här står varför det blir svullet.” Fråga bara om det som texten bygger på, så att samtalet håller sig till texten."
+      "text": "Innan ni läser en faktatext om hur kroppen skyddar sig mot bakterier, frågar du: ”Vad händer när du får ett sår på knät?” Eleverna berättar för grannen, och du skriver några av deras ord på tavlan, som var, sårskorpa och svullet. När ni läser stannar ni där texten förklarar något av det: ”Här står varför det blir svullet.” Fråga bara om det som texten bygger på, så att samtalet håller sig till texten."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Innan eleverna skriver en instruktion om hur man borstar tänderna, gör alla rörelserna med en låtsastandborste och säger stegen till grannen. Du ritar en bild för varje steg som eleverna säger, i den ordning de kommer. Fråga: ”Vad gör du först? Vad gör du sedan?” Eleverna skriver sedan sin instruktion med bilderna framför sig."
+      "text": "Innan eleverna skriver en instruktion om hur man borstar tänderna, gör alla rörelserna med en låtsastandborste och säger stegen till grannen. Du ritar en bild på tavlan för varje steg som eleverna säger och sätter bilderna i rätt ordning. Fråga: ”Vad gör du först? Vad gör du sedan?” Eleverna skriver sedan sin instruktion med bilderna framför sig."
     },
     {
       "omrade": "matematik",
@@ -168,7 +168,7 @@
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "NO",
-      "text": "Innan klassen läser om fotosyntesen, frågar du vad eleverna vet om luften de andas ut och om vad en växt behöver för att växa. De säger det till grannen, och du skriver på tavlan det som fotosyntesen bygger på: koldioxid, vatten och ljus. Säger någon att växten blir till av jord, skriver du det för sig och säger: ”Texten kanske säger något annat. Lyssna efter det.” När texten säger att det mesta av växtens torrvikt kommer från koldioxiden i luften, pekar du på ordet koldioxid och på det som står för sig."
+      "text": "Innan klassen läser om fotosyntesen, frågar du vad eleverna vet om luften de andas ut och om vad en växt behöver för att växa. De säger det till grannen, och du skriver upp det som fotosyntesen bygger på: koldioxid, vatten och ljus. Säger någon att växten blir till av jord, skriver du det i ett hörn av tavlan och säger: ”Texten kanske säger något annat. Lyssna efter det.” När texten säger att det mesta av växtens torrvikt kommer från koldioxiden i luften, pekar du på ordet koldioxid och på det som står i hörnet."
     }
   ],
   "metoderSomGorDen": [

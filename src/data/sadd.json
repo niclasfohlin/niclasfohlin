@@ -154,14 +154,6 @@
               "delar": [
                 "kloka-pennan"
               ]
-            },
-            {
-              "efter": "tabell: Pass 2 och 3: skrivpasset på 60 minuter",
-              "delar": [
-                "parrespons"
-              ],
-              "slag": "forslag",
-              "om": "Paret berättar texten för ett annat par"
             }
           ]
         },
@@ -202,14 +194,6 @@
               "delar": [
                 "speed-dating"
               ]
-            },
-            {
-              "efter": "tabell: Paren: samma kamrat och samma bok",
-              "delar": [
-                "turas-om"
-              ],
-              "slag": "forslag",
-              "om": "Läsningen i paret"
             }
           ]
         },
@@ -235,14 +219,6 @@
               ],
               "slag": "forslag",
               "om": "Eleven säger texten för en kamrat"
-            },
-            {
-              "efter": "ram: Till läraren: återkopplingen",
-              "delar": [
-                "rondellen"
-              ],
-              "slag": "forslag",
-              "om": "Starterna runt bordet"
             }
           ],
           "inte": {
@@ -257,15 +233,6 @@
               "delar": [
                 "konstruktiv-debatt"
               ]
-            },
-            {
-              "efter": "ram: Till läraren: återkopplingen",
-              "delar": [
-                "inspireras",
-                "rondellen"
-              ],
-              "slag": "forslag",
-              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ]
         },
@@ -277,15 +244,6 @@
               "delar": [
                 "beratta-mera"
               ]
-            },
-            {
-              "efter": "ram: Till läraren: återkopplingen",
-              "delar": [
-                "inspireras",
-                "rondellen"
-              ],
-              "slag": "forslag",
-              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ]
         },
@@ -297,23 +255,6 @@
               "delar": [
                 "lika-och-olika"
               ]
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "kommunicera"
-              ],
-              "slag": "forslag",
-              "om": "Säg, där läsaren ritar det hen hör"
-            },
-            {
-              "efter": "ram: Till läraren: återkopplingen",
-              "delar": [
-                "inspireras",
-                "rondellen"
-              ],
-              "slag": "forslag",
-              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ],
           "inte": {
@@ -328,23 +269,6 @@
               "delar": [
                 "kommunicera"
               ]
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "kloka-pennan"
-              ],
-              "slag": "forslag",
-              "om": "Paret i Tänk och planera"
-            },
-            {
-              "efter": "ram: Till läraren: återkopplingen",
-              "delar": [
-                "inspireras",
-                "rondellen"
-              ],
-              "slag": "forslag",
-              "om": "Alla svar på bordet och Starterna runt bordet"
             }
           ],
           "inte": {
@@ -383,14 +307,6 @@
                 "kloka-pennan"
               ],
               "om": "Berättaren och Skrivaren"
-            },
-            {
-              "efter": "ram: Till läraren: återkopplingen",
-              "delar": [
-                "inspireras"
-              ],
-              "slag": "forslag",
-              "om": "Parens versioner på bordet"
             }
           ],
           "inte": {
@@ -434,14 +350,6 @@
               ],
               "slag": "forslag",
               "om": "Paren i Korten"
-            },
-            {
-              "efter": "hem",
-              "delar": [
-                "visa"
-              ],
-              "slag": "forslag",
-              "om": "Läxan i början av passet"
             }
           ],
           "inte": {
@@ -458,22 +366,6 @@
               ],
               "slag": "form",
               "om": "Paren i Korten"
-            },
-            {
-              "efter": "tidsschema",
-              "delar": [
-                "kloka-pennan"
-              ],
-              "slag": "forslag",
-              "om": "Paren i Korten"
-            },
-            {
-              "efter": "tabell: Pass 3, när det går: spel och problem",
-              "delar": [
-                "epk"
-              ],
-              "slag": "forslag",
-              "om": "Problemet i pass 3"
             }
           ]
         },
@@ -487,22 +379,6 @@
               ],
               "slag": "form",
               "om": "Gissningen och kärnan"
-            },
-            {
-              "efter": "tabell: Ett avsnitt i fyra steg: Läs, Red ut, Kärnan och Lappen",
-              "delar": [
-                "turas-om"
-              ],
-              "slag": "forslag",
-              "om": "Paren i avsnitten"
-            },
-            {
-              "efter": "tabell: Modellpasset på 40 minuter",
-              "delar": [
-                "ppt-par-pa-tid"
-              ],
-              "slag": "forslag",
-              "om": "Återberättandet för den bredvid"
             }
           ]
         },
@@ -516,14 +392,6 @@
               ],
               "slag": "forslag",
               "om": "Paren i Åt andra hållet"
-            },
-            {
-              "efter": "arbetsform",
-              "delar": [
-                "epa"
-              ],
-              "slag": "forslag",
-              "om": "Lärdomen i par"
             }
           ],
           "inte": {
@@ -604,14 +472,6 @@
               "om": "Återberättandet i Förstå"
             },
             {
-              "efter": "arbetsform",
-              "delar": [
-                "kloka-pennan"
-              ],
-              "slag": "forslag",
-              "om": "Pennan i Lösa"
-            },
-            {
               "efter": "progression",
               "delar": [
                 "tva-loser-problem"
@@ -655,14 +515,6 @@
               ],
               "slag": "form",
               "om": "Rundorna med talpinnen"
-            },
-            {
-              "efter": "tabell: Om något händer",
-              "delar": [
-                "talkort"
-              ],
-              "slag": "forslag",
-              "om": "När någon tar över samtalet"
             }
           ]
         },
@@ -771,14 +623,6 @@
               "om": "Paren i Sortera"
             },
             {
-              "efter": "steg",
-              "delar": [
-                "sortering"
-              ],
-              "slag": "forslag",
-              "om": "Paren i Sortera"
-            },
-            {
               "efter": "arbetsform",
               "delar": [
                 "rondellen"
@@ -864,22 +708,6 @@
               ],
               "slag": "form",
               "om": "Paren i Dela och sätt ihop"
-            },
-            {
-              "efter": "steg",
-              "delar": [
-                "flashcardlek"
-              ],
-              "slag": "forslag",
-              "om": "Paren i Dela och sätt ihop"
-            },
-            {
-              "efter": "arbetsform",
-              "delar": [
-                "rondellen"
-              ],
-              "slag": "form",
-              "om": "Avslutet"
             }
           ]
         },
@@ -900,14 +728,6 @@
                 "turas-om"
               ],
               "slag": "form",
-              "om": "Paren i Säg och lägg"
-            },
-            {
-              "efter": "steg",
-              "delar": [
-                "flashcardlek"
-              ],
-              "slag": "forslag",
               "om": "Paren i Säg och lägg"
             },
             {
@@ -940,14 +760,6 @@
               "om": "Paren i Rimpar"
             },
             {
-              "efter": "tabell: Varianter",
-              "delar": [
-                "ping-pong-prat"
-              ],
-              "slag": "forslag",
-              "om": "Rimlek i par"
-            },
-            {
               "efter": "arbetsform",
               "delar": [
                 "rondellen"
@@ -967,14 +779,6 @@
               ],
               "slag": "form",
               "om": "Ljudstarten"
-            },
-            {
-              "efter": "steg",
-              "delar": [
-                "turas-om"
-              ],
-              "slag": "forslag",
-              "om": "Paren i Kedjan i rutorna"
             },
             {
               "efter": "steg",
@@ -1011,14 +815,6 @@
                 "turas-om"
               ],
               "slag": "form",
-              "om": "Paren i Fråga och svara"
-            },
-            {
-              "efter": "steg",
-              "delar": [
-                "flashcardlek"
-              ],
-              "slag": "forslag",
               "om": "Paren i Fråga och svara"
             },
             {
@@ -1129,18 +925,11 @@
             {
               "efter": "tabell: Modellpasset på 40 minuter",
               "delar": [
-                "plocka-fram"
+                "plocka-fram",
+                "forklara-stegen"
               ],
               "slag": "form",
-              "om": "Svaret ur modellen"
-            },
-            {
-              "efter": "tabell: Vecka 6–8: klassens texter",
-              "delar": [
-                "blanda-uppgifter"
-              ],
-              "slag": "form",
-              "om": "Valet av modell i klassens texter"
+              "om": "Svaret ur modellen och lapparna i modellen"
             },
             {
               "efter": "tidsschema",
@@ -1149,14 +938,6 @@
               ],
               "slag": "form",
               "om": "Gissningen på textens fråga"
-            },
-            {
-              "efter": "tabell: Modellpasset på 40 minuter",
-              "delar": [
-                "forklara-stegen"
-              ],
-              "slag": "form",
-              "om": "Lapparna i modellen"
             }
           ]
         },
@@ -1203,18 +984,11 @@
             {
               "efter": "progression",
               "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Du visar först, sedan väljer paren själva"
-            },
-            {
-              "efter": "progression",
-              "delar": [
+                "avlasta-minnet",
                 "sprid-ut"
               ],
               "slag": "form",
-              "om": "Strategierna som följer med"
+              "om": "Du visar först, sedan väljer paren själva och strategierna som följer med"
             },
             {
               "efter": "tidsschema",
@@ -1309,18 +1083,11 @@
             {
               "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
               "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Bokstäverna från tidigare pass"
-            },
-            {
-              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
-              "delar": [
+                "sprid-ut",
                 "blanda-uppgifter"
               ],
               "slag": "form",
-              "om": "Orden med olika många ljud"
+              "om": "Bokstäverna från tidigare pass och orden med olika många ljud"
             },
             {
               "efter": "tabell: Lektionens fyra steg",
@@ -1338,26 +1105,19 @@
             {
               "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
               "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Bokstäverna från tidigare pass"
-            },
-            {
-              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
-              "delar": [
+                "sprid-ut",
                 "blanda-uppgifter"
               ],
               "slag": "form",
-              "om": "Orden med olika många ljud"
+              "om": "Bokstäverna från tidigare pass och orden med olika många ljud"
             },
             {
-              "efter": "passrutin",
+              "efter": "steg",
               "delar": [
-                "avlasta-minnet"
+                "gor-med-kroppen"
               ],
               "slag": "form",
-              "om": "Stegen från att du visar till eleven själv"
+              "om": "Ormen och Läs på golvet"
             }
           ]
         },
@@ -1367,42 +1127,20 @@
             {
               "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
               "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Bokstäverna från tidigare pass"
-            },
-            {
-              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
-              "delar": [
+                "sprid-ut",
                 "blanda-uppgifter"
               ],
               "slag": "form",
-              "om": "Orden med olika många ljud"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Stegen från att du visar till eleven själv"
+              "om": "Bokstäverna från tidigare pass och orden med olika många ljud"
             },
             {
               "efter": "steg",
               "delar": [
-                "plocka-fram"
-              ],
-              "slag": "form",
-              "om": "Skriv första ljudet i steg 4"
-            },
-            {
-              "efter": "steg",
-              "delar": [
+                "plocka-fram",
                 "ge-exempel"
               ],
               "slag": "form",
-              "om": "Bilderna sorterade efter första ljudet"
+              "om": "Skriv första ljudet i steg 4 och bilderna sorterade efter första ljudet"
             }
           ]
         },
@@ -1412,18 +1150,11 @@
             {
               "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
               "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Bokstäverna från tidigare pass"
-            },
-            {
-              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
-              "delar": [
+                "sprid-ut",
                 "blanda-uppgifter"
               ],
               "slag": "form",
-              "om": "Orden med olika många ljud"
+              "om": "Bokstäverna från tidigare pass och orden med olika många ljud"
             },
             {
               "efter": "passrutin",
@@ -1441,18 +1172,11 @@
             {
               "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
               "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Bokstäverna från tidigare pass"
-            },
-            {
-              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
-              "delar": [
+                "sprid-ut",
                 "blanda-uppgifter"
               ],
               "slag": "form",
-              "om": "Orden med olika många ljud"
+              "om": "Bokstäverna från tidigare pass och orden med olika många ljud"
             },
             {
               "efter": "tabell: Så blir lektionen svårare",
@@ -1470,26 +1194,11 @@
             {
               "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
               "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Bokstäverna från tidigare pass"
-            },
-            {
-              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
-              "delar": [
+                "sprid-ut",
                 "blanda-uppgifter"
               ],
               "slag": "form",
-              "om": "Orden med olika många ljud"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Stegen från att du visar till eleven själv"
+              "om": "Bokstäverna från tidigare pass och orden med olika många ljud"
             },
             {
               "efter": "tabell: Så blir lektionen svårare",
@@ -1498,6 +1207,14 @@
               ],
               "slag": "form",
               "om": "Klossarna, strecken och de skrivna delarna"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "gor-med-kroppen"
+              ],
+              "slag": "form",
+              "om": "Klappen för varje del i Stavelser"
             }
           ]
         },
@@ -1507,34 +1224,20 @@
             {
               "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
               "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Bokstäverna från tidigare pass"
-            },
-            {
-              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
-              "delar": [
+                "sprid-ut",
                 "blanda-uppgifter"
               ],
               "slag": "form",
-              "om": "Orden med olika många ljud"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Stegen från att du visar till eleven själv"
+              "om": "Bokstäverna från tidigare pass och orden med olika många ljud"
             },
             {
               "efter": "steg",
               "delar": [
-                "fran-sak-till-tecken"
+                "fran-sak-till-tecken",
+                "gor-med-kroppen"
               ],
               "slag": "form",
-              "om": "Markörerna och sedan bokstäverna"
+              "om": "Markörerna och sedan bokstäverna och ett finger för varje ljud i Fingrarna"
             }
           ]
         },
@@ -1556,22 +1259,6 @@
               ],
               "slag": "form",
               "om": "Rimmande och inte rimmande par"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Stegen från att du visar till eleven själv"
-            },
-            {
-              "efter": "steg",
-              "delar": [
-                "jamfor-tva"
-              ],
-              "slag": "form",
-              "om": "Hus och mus, hus och hand"
             }
           ]
         },
@@ -1593,14 +1280,6 @@
               ],
               "slag": "form",
               "om": "Bytena på olika platser i ordet"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Stegen från att du visar till eleven själv"
             }
           ]
         },
@@ -1610,26 +1289,11 @@
             {
               "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
               "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Bokstäverna från tidigare pass"
-            },
-            {
-              "efter": "tabell: Ljudstarten: samma fem minuter varje pass",
-              "delar": [
+                "sprid-ut",
                 "blanda-uppgifter"
               ],
               "slag": "form",
-              "om": "Orden med olika många ljud"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Stegen från att du visar till eleven själv"
+              "om": "Bokstäverna från tidigare pass och orden med olika många ljud"
             },
             {
               "efter": "steg",
@@ -1638,14 +1302,6 @@
               ],
               "slag": "form",
               "om": "Skriv i rutan i steg 2"
-            },
-            {
-              "efter": "tabell: Ordparen",
-              "delar": [
-                "jamfor-tva"
-              ],
-              "slag": "form",
-              "om": "Ordparen i raden I mitten"
             }
           ]
         },
@@ -1665,14 +1321,6 @@
         "ordverkstad-i-grupp": {
           "skal": "Diktamen görs med dolda ord, stödet flyttas från läraren till eleverna vecka för vecka, förra veckans delar kommer tillbaka i varje Ordstart och förlagans bilder visas före läsningen.",
           "vav": [
-            {
-              "efter": "passrutin",
-              "delar": [
-                "sprid-ut"
-              ],
-              "slag": "forslag",
-              "om": "Veckans och förra veckans delar i Ordstarten"
-            },
             {
               "efter": "tidsschema",
               "delar": [
@@ -1713,18 +1361,10 @@
             {
               "efter": "passrutin",
               "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Läraren skriver och tänker högt i Skrivfokus"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
+                "avlasta-minnet",
                 "jamfor-tva"
               ],
-              "slag": "form",
-              "om": "Två texter om samma sak i Skrivfokus"
+              "slag": "form"
             },
             {
               "efter": "tabell: Fortsättningspasset, 60 minuter",
@@ -1756,20 +1396,20 @@
               "om": "Vägen och berget i planeringspasset"
             },
             {
-              "efter": "stycke 4",
-              "delar": [
-                "jamfor-tva"
-              ],
-              "slag": "form",
-              "om": "Två texter i vecka 1, 2 och 4"
-            },
-            {
               "efter": "tabell: Berättarpasset",
               "delar": [
                 "beratta"
               ],
               "slag": "form",
               "om": "Sagan växer och Paren berättar"
+            },
+            {
+              "efter": "tabell: Berätta och spela med sagans väg",
+              "delar": [
+                "gor-med-kroppen"
+              ],
+              "slag": "form",
+              "om": "Det paret spelar på scenen"
             }
           ]
         },
@@ -1779,26 +1419,11 @@
             {
               "efter": "passrutin",
               "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Läraren skriver på tavlan"
-            },
-            {
-              "efter": "tidsschema",
-              "delar": [
-                "sprid-ut"
-              ],
-              "slag": "forslag",
-              "om": "De gamla dragen"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
+                "avlasta-minnet",
                 "jamfor-tva"
               ],
               "slag": "form",
-              "om": "Två texter i Läs"
+              "om": "Läraren skriver på tavlan och två texter i Läs"
             },
             {
               "efter": "tidsschema",
@@ -1933,20 +1558,12 @@
               "om": "Från att du visar till att eleven skriver själv"
             },
             {
-              "efter": "tabell: Efter kursen: Uppgift 1",
-              "delar": [
-                "sprid-ut"
-              ],
-              "slag": "form",
-              "om": "Uppgiften fyra till sex veckor efter kursen"
-            },
-            {
               "efter": "passrutin",
               "delar": [
-                "jamfor-tva"
+                "jamfor-tva",
+                "gor-med-kroppen"
               ],
-              "slag": "form",
-              "om": "Två texter och meningarna bredvid varandra"
+              "slag": "form"
             },
             {
               "efter": "uppfoljning",
@@ -1955,6 +1572,14 @@
               ],
               "slag": "form",
               "om": "Diagrammet Mina texter och Mitt mål"
+            },
+            {
+              "efter": "stycke 4",
+              "delar": [
+                "lar-ut-till-nagon"
+              ],
+              "slag": "form",
+              "om": "Läsaren som inte kan saken"
             }
           ]
         },
@@ -1972,10 +1597,11 @@
             {
               "efter": "uppfoljning",
               "delar": [
-                "sprid-ut"
+                "sprid-ut",
+                "prova-dig-sjalv"
               ],
               "slag": "form",
-              "om": "Passet fyra till sex veckor efter kursen"
+              "om": "Passet fyra till sex veckor efter kursen och målet och diagrammet"
             },
             {
               "efter": "tabell: Så lär du ut en skrivhandling: två texter och vad de gör",
@@ -1984,14 +1610,6 @@
               ],
               "slag": "form",
               "om": "Två texter bredvid varandra"
-            },
-            {
-              "efter": "uppfoljning",
-              "delar": [
-                "prova-dig-sjalv"
-              ],
-              "slag": "form",
-              "om": "Målet och diagrammet"
             }
           ]
         },
@@ -2005,14 +1623,6 @@
               ],
               "slag": "form",
               "om": "Läraren bygger först"
-            },
-            {
-              "efter": "hem",
-              "delar": [
-                "sprid-ut"
-              ],
-              "slag": "forslag",
-              "om": "Läxan och förra veckans läxa"
             },
             {
               "efter": "roll",
@@ -2052,14 +1662,6 @@
               "om": "Bråket som bild i Fyra sätt"
             },
             {
-              "efter": "tabell: Pass 3, när det går: spel och problem",
-              "delar": [
-                "sprid-ut"
-              ],
-              "slag": "forslag",
-              "om": "Pass 3, repetitionen av veckan"
-            },
-            {
               "efter": "roll",
               "delar": [
                 "forklara-stegen"
@@ -2091,10 +1693,10 @@
             {
               "efter": "passrutin",
               "delar": [
-                "plocka-fram"
+                "plocka-fram",
+                "fran-sak-till-tecken"
               ],
-              "slag": "form",
-              "om": "Förra lärdomen och talfakta i Uppvärmningen"
+              "slag": "form"
             },
             {
               "efter": "tabell: Talen och bladen i veckorna",
@@ -2112,22 +1714,6 @@
               ],
               "slag": "form",
               "om": "Material, bild och skrift tillsammans"
-            },
-            {
-              "efter": "steg",
-              "delar": [
-                "jamfor-tva"
-              ],
-              "slag": "form",
-              "om": "De två uträkningarna bredvid varandra i Lärdomen"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
-                "fran-sak-till-tecken"
-              ],
-              "slag": "form",
-              "om": "Bygga i pass 1, rita och skriva i pass 2"
             }
           ]
         },
@@ -2145,26 +1731,20 @@
             {
               "efter": "passrutin",
               "delar": [
-                "ord-och-bild"
-              ],
-              "slag": "form",
-              "om": "Sätt att visa problemet i Planera"
-            },
-            {
-              "efter": "passrutin",
-              "delar": [
+                "ord-och-bild",
                 "gissa-forst"
               ],
               "slag": "form",
-              "om": "Parens gissning under Vi tror"
+              "om": "Sätt att visa problemet i Planera och parens gissning under Vi tror"
             },
             {
               "efter": "steg",
               "delar": [
-                "jamfor-tva"
+                "jamfor-tva",
+                "forsok-forst"
               ],
               "slag": "form",
-              "om": "Bladet Två lösningar i Jämföra"
+              "om": "Bladet Två lösningar i Jämföra och parens försök i Lösa före Två lösningar"
             }
           ]
         },
@@ -2203,18 +1783,11 @@
             {
               "efter": "tidsschema",
               "delar": [
-                "avlasta-minnet"
+                "avlasta-minnet",
+                "gissa-forst"
               ],
               "slag": "form",
-              "om": "Rutorna en i taget i Spola tillbaka"
-            },
-            {
-              "efter": "progression",
-              "delar": [
-                "avlasta-minnet"
-              ],
-              "slag": "form",
-              "om": "Ansvaret som lämnas över"
+              "om": "Rutorna en i taget i Spola tillbaka och nästa ruta i Spola tillbaka"
             },
             {
               "efter": "tabell: Påfyllningspasset",
@@ -2223,14 +1796,6 @@
               ],
               "slag": "form",
               "om": "Passet fyra veckor efter det sista"
-            },
-            {
-              "efter": "tidsschema",
-              "delar": [
-                "gissa-forst"
-              ],
-              "slag": "form",
-              "om": "Nästa ruta i Spola tillbaka"
             },
             {
               "efter": "steg",

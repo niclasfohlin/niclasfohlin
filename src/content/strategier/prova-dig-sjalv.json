@@ -5,7 +5,7 @@
   "framsida": {
     "mening": "Pröva om du kan det, och välj nästa steg.",
     "bild": {
-      "liknelse": "Bollen i hinken: barnet tror att det träffar från långt håll. När barnet prövar syns att det inte stämde, och barnet övar på just det kastet tills bollen börjar gå i.",
+      "liknelse": "Bollen i hinken: barnet tror att hen träffar från långt håll. När barnet prövar ser hen att det inte stämde, och hen övar på just det kastet tills bollen börjar gå i.",
       "steg": [
         {
           "rubrik": "Tror först",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Eleven ser vad hen kan när hen prövar, och då kan hen välja vad som ska övas.",
+    "insikt": "När eleven prövar ser hen vad hen kan, och då kan hen välja vad hen ska öva på.",
     "handling": [
       {
         "ikon": "fragetecken",
@@ -50,14 +50,14 @@
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Elever tror ofta att de kan mer än de gör, och de yngsta mest. Känslan av att kunna kommer av att något känns bekant eller gick lätt nyss, och den säger lite om vad eleven klarar utan hjälp. När eleven först bedömer och sedan prövar, syns skillnaden, och eleven kan lägga övningen där den behövs. Med tiden lär sig eleven att planera, följa och värdera sitt lärande i ämnet."
+      "text": "Elever tror ofta att de kan mer än de gör, och det gäller mest de yngsta. Eleven tror att hen kan något när det känns bekant eller gick lätt nyss, men det säger lite om vad hen klarar utan hjälp. När eleven först bedömer sig själv och sedan prövar, ser hen skillnaden och kan öva där det behövs. Med tiden lär sig eleven att planera, följa och värdera sitt lärande i ämnet."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
           "namn": "Känslan",
-          "text": "det känns som du kan"
+          "text": "det känns som om du kan"
         },
         {
           "namn": "Kunnandet",
@@ -81,12 +81,12 @@
           "betonad": true
         }
       ],
-      "text": "Känslan av att kunna och det eleven klarar själv skiljer sig ofta. När eleven prövar syns skillnaden, och den avgör vad eleven övar på."
+      "text": "Eleven känner ofta att hen kan mer än hen klarar själv. När hen prövar ser hen skillnaden, och den visar vad hen ska öva på."
     },
     "saGorDu": [
       {
         "rubrik": "Visa målet",
-        "text": "En uppgift som visar vad eleverna ska kunna när ni är klara."
+        "text": "Ge en uppgift som visar vad eleverna ska kunna när ni är klara."
       },
       {
         "rubrik": "Tro först",
@@ -105,9 +105,9 @@
       "rubrik": "Undvik",
       "text": "Att räkna in bedömningen i betyget, eller att bara fråga om känslan."
     },
-    "tankPa": "Strategin tjänar innehållet: eleverna bedömer det ni arbetar med just nu, i ämnet. I Plocka fram är framplockningen själva övningen, och här visar försöket vad som ska övas. Yngre elever tror oftare än äldre att de kan mer än de gör, så låt dem pröva direkt efter att de har sagt ja eller nej, och visa skillnaden utan att döma. Ett nej eller ett kanske är ett bra svar, eftersom det visar vad ni ska öva på.",
+    "tankPa": "Strategin tjänar innehållet: eleverna bedömer det ni arbetar med i ämnet just nu. I Plocka fram övar eleven genom att ta fram det hen har lärt sig, och här prövar eleven för att se vad hen ska öva på. Yngre elever tror oftare än äldre att de kan mer än de gör, så låt dem pröva direkt efter att de har sagt ja eller nej, och visa skillnaden utan att döma. Ett nej eller ett kanske är ett bra svar, eftersom det visar vad ni ska öva på.",
     "forskningen": {
-      "text": "Program som lär eleverna att planera, följa och värdera sitt lärande gav omkring åtta månaders extra framsteg i 297 studier, de flesta med elever mellan 7 och 16 år och i ett ämne, och EEF bedömer resultatet som säkert. Några av programmen lärde eleverna att bedöma och rätta sitt eget arbete efter givna kriterier (EEF, 2025). Verktyg som får eleven att följa sitt lärande, som en loggbok eller en matris, gav 0,42 i 32 studier och såg ut att ge mer när läraren gav återkoppling och eleven fick göra om (Dignath m.fl., 2023). I en sammanställning av 84 studier var effekterna större när forskare ledde undervisningen än när klassens lärare gjorde det (Dignath och Büttner, 2008). När barn i åk 4 och 6 rättade med facit, såg de fel bättre hos en kamrat än hos sig själva (van Loon och van de Pol, 2019). I en studie med studenter ökade överskattningen kraftigt när självbedömningen räknades in i betyget (Andrade, 2019).",
+      "text": "I 297 studier gav program som lär eleverna att planera, följa och värdera sitt lärande omkring åtta månaders extra framsteg. De flesta studierna var med elever mellan 7 och 16 år och i ett ämne, och EEF bedömer belägget som starkt. Några av programmen lärde eleverna att bedöma och rätta sitt eget arbete efter givna kriterier (EEF, 2025). Verktyg som får eleven att följa sitt lärande, som en loggbok eller en matris, gav 0,42 i 32 studier och såg ut att ge mer när läraren gav återkoppling och eleven fick göra om (Dignath m.fl., 2023). I en sammanställning av 84 studier var effekterna större när forskare ledde undervisningen än när klassens lärare gjorde det (Dignath och Büttner, 2008). När barn i åk 4 och 6 rättade med facit, såg de fel bättre hos en kamrat än hos sig själva (van Loon och van de Pol, 2019). I en studie med studenter överskattade de sig själva mycket mer när läraren räknade in deras egen bedömning i betyget (Andrade, 2019).",
       "kallor": [
         {
           "id": "eef-2025",
@@ -157,25 +157,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan eleverna svarar på frågorna till en text, skriver de vid varje fråga om de tror att de kan svara: ja, kanske eller nej. Sedan svarar de och kontrollerar svaren mot texten tillsammans med en kamrat. Vid de frågor där de skrev ja men svarade fel, letar de upp stället i texten och läser det igen. Fråga sedan klassen: ”Vad gjorde att det kändes som att du kunde?”"
+      "text": "Innan eleverna svarar på frågorna till en text, skriver de vid varje fråga om de tror att de kan svara: ja, kanske eller nej. Sedan svarar de och kontrollerar svaren mot texten tillsammans med en kamrat. Vid de frågor där de skrev ja men svarade fel, letar de upp stället i texten och läser det igen. Fråga till sist klassen: ”Vad gjorde att det kändes som att du kunde?”"
     },
     {
       "omrade": "skrivning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "Innan eleverna lämnar in en argumenterande text, sätter de ett kryss vid de delar i checklistan som de tror att de har med: tesen, argumenten, ett motargument och avslutningen. Sedan stryker de under var i texten varje del finns och skriver till det som de inte hittar. Du läser understrykningarna, skriver en kommentar om det eleven har missat, och eleven gör om den delen. Elevens egen bedömning räknas inte in i betyget, så eleverna vågar se det som fattas."
+      "text": "Innan eleverna lämnar in en argumenterande text, sätter de ett kryss vid de delar i checklistan som de tror att de har med: tesen, argumenten, ett motargument och avslutningen. Sedan stryker de under varje del i texten och skriver till det de inte hittar. Du läser understrykningarna, skriver en kommentar om det eleven har missat, och eleven gör om den delen. Du räknar inte in elevens egen bedömning i betyget, så att eleverna vågar se det som fattas."
     },
     {
       "omrade": "matematik",
       "arskurs": "F–3",
       "amne": "matematik",
-      "text": "När klassen har övat additioner upp till 20, lägger eleverna sina talkort i två högar innan de prövar: ”Kan” och ”Kan inte än”. Sedan prövar de korten i högen ”Kan” med en kamrat, som håller facit. Kort som inte satt flyttar de till den andra högen, och den högen övar de på. Nästa dag prövar de hela högen ”Kan” igen, och du frågar: ”Hur många kort fick byta hög?”"
+      "text": "När klassen har övat additioner upp till 20, lägger eleverna sina talkort i två högar, ”Kan” och ”Kan inte än”, innan de prövar. Sedan prövar de korten i högen ”Kan” med en kamrat, som håller facit. De flyttar korten som inte satt till den andra högen och övar på den högen. Nästa dag prövar de hela högen ”Kan” igen, och du frågar: ”Hur många kort fick byta hög?”"
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "SO",
-      "text": "Inför provet om första världskriget skriver eleverna en lista över det viktigaste i arbetsområdet och sätter ett kryss vid det de tror att de kan. Sedan prövar de sig själva på frågor från lektionerna, utan anteckningar, och rättar med anteckningarna. Det som de hade fel på blir deras plan för veckan, och två dagar senare prövar de det igen. Efter provet skriver de vad i planen som hjälpte."
+      "text": "Inför provet om första världskriget skriver eleverna en lista över det viktigaste i arbetsområdet och sätter ett kryss vid det de tror att de kan. Sedan prövar de sig själva på frågor från lektionerna utan anteckningar och rättar efteråt med dem. De gör en plan för veckan med det de hade fel på, och två dagar senare prövar de det igen. Efter provet skriver de vad i planen som hjälpte."
     }
   ],
   "metoderSomGorDen": [

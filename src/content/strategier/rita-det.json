@@ -5,7 +5,7 @@
   "framsida": {
     "mening": "Rita själv det du läser eller hör.",
     "bild": {
-      "liknelse": "Skattkartan: barnet läser hur vägen till ädelstenen går och ritar en karta av det. Kartan visar var barnet inte har förstått texten, och när barnet jämför med texten och ritar till det som fattas syns hela vägen.",
+      "liknelse": "Skattkartan: barnet läser hur vägen till ädelstenen går och ritar en karta av det. Kartan visar var barnet inte har förstått texten, och när barnet jämför med texten och ritar till det som fattas, ser hen hela vägen.",
       "steg": [
         {
           "rubrik": "Bara läsa",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Att göra orden till en egen bild kräver förståelse, och bilden visar det som fattas.",
+    "insikt": "Eleven måste förstå orden för att kunna rita dem, och bilden visar det som fattas.",
     "handling": [
       {
         "ikon": "oppen-bok",
@@ -50,7 +50,7 @@
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Det går att läsa en text ord för ord utan att se hur delarna hänger ihop. När eleven ritar måste hen välja det viktiga, ordna delarna och foga ihop dem med det hen redan kan, och då blir det en bild i huvudet också. Teckningen visar dessutom vad eleven inte har förstått, så att hen vet var i texten hen ska läsa igen. Det är jämförelsen med texten eller en färdig bild som gör bilden rätt, och därför hör den till strategin."
+      "text": "Eleven kan läsa en text ord för ord utan att se hur delarna hänger ihop. När eleven ritar måste hen välja det viktiga, ordna delarna och koppla ihop dem med det hen redan kan, och då får hen också en bild i huvudet. Bilden visar dessutom vad eleven inte har förstått, så att hen vet var i texten hen ska läsa igen. Eleven rättar bilden när hen jämför den med texten eller med en färdig bild, och därför hör jämförelsen till strategin."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -86,16 +86,16 @@
           "text": "lära in"
         }
       ],
-      "text": "När eleven ritar väljer hen ut det viktiga och fogar ihop det med det hen kan. Jämförelsen med texten rättar bilden, och det som sitter kvar är en bild som hänger ihop."
+      "text": "När eleven ritar väljer hen ut det viktiga och kopplar ihop det med det hen kan. Sedan jämför hen med texten och rättar bilden, och då minns hen en bild som hänger ihop."
     },
     "saGorDu": [
       {
         "rubrik": "Välj texten",
-        "text": "En text om något med delar, steg eller en plats som går att rita."
+        "text": "Den ska handla om något med delar, steg eller en plats att rita."
       },
       {
         "rubrik": "Säg hur de ritar",
-        "text": "Enkla rutor, pilar och ämnets ord. Det rätta går före det fina."
+        "text": "Rutor, pilar och ämnets ord räcker, och bilden behöver inte vara fin."
       },
       {
         "rubrik": "Rita själv",
@@ -108,11 +108,11 @@
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När texten har delar, steg eller platser, och för elever från åk 6."
+      "text": "Från åk 6, när texten har delar, steg eller platser."
     },
-    "tankPa": "Strategin tjänar innehållet: välj en text där en bild kan visa det eleverna ska förstå. Att rita tar tid, är mest prövat med NO-texter och har hjälpt elever från omkring åk 6. Med yngre elever hjälper det troligen bara när nästan hela bilden är given och de ritar till det som fattas. I Ord och bild ritar du först och eleverna ritar din bild ur minnet, och här gör eleverna bilden själva ur texten.",
+    "tankPa": "Strategin tjänar innehållet: välj en text där en bild kan visa det eleverna ska förstå. Det tar tid att rita. Strategin är mest prövad med NO-texter och har hjälpt elever från omkring åk 6. Yngre elever har troligen bara nytta av den när du ger dem nästan hela bilden och de ritar till det som fattas. I Ord och bild ritar du först, och eleverna ritar din bild ur minnet. I Rita det gör eleverna bilden själva ur texten.",
     "forskningen": {
-      "text": "Att rita gav bättre förståelse än att bara läsa eller sammanfatta, men jämfört med att titta på en färdig bild var resultaten blandade (Fiorella och Zhang, 2018). I 53 studier, där att rita jämfördes både med att inte rita och med andra sätt att rita, var effekten störst för fakta (0,85), mindre för slutsatser (0,44) och minst för att använda kunskapen i en ny uppgift (0,22) (Cromley m.fl., 2020). Stöd till ritandet hjälpte bara när det fick eleven att foga ihop texten och bilden, som att jämföra med en färdig bild: 0,35 (Leutner och Biele, 2025). Strategin är mest prövad i NO (Leutner och Biele, 2025). Elever till och med åk 5 hade i stort sett ingen nytta av att rita, och äldre skolelever bara när stödet var stort, som en färdig bild att jämföra med (Brod, 2021).",
+      "text": "De som ritade förstod bättre än de som bara läste eller sammanfattade, men jämfört med dem som tittade på en färdig bild var resultaten blandade (Fiorella och Zhang, 2018). I 53 studier jämförde forskarna dem som ritade både med dem som inte ritade och med dem som ritade på ett annat sätt. Att rita hjälpte mest för fakta (0,85), mindre för slutsatser (0,44) och minst för att använda kunskapen i en ny uppgift (0,22) (Cromley m.fl., 2020). När eleven fick stöd att rita, hjälpte stödet bara om det fick hen att koppla ihop texten och bilden, som en färdig bild att jämföra med (0,35) (Leutner och Biele, 2025). Strategin är mest prövad i NO (Leutner och Biele, 2025). Elever till och med åk 5 hade i stort sett ingen nytta av att rita, och äldre skolelever hade nytta av det bara när de fick mycket stöd, som en färdig bild att jämföra med (Brod, 2021).",
       "kallor": [
         {
           "id": "fiorella-och-zhang-2018",
@@ -156,25 +156,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Välj ett stycke i en berättelse där författaren beskriver en plats noga, som stugan där huvudpersonen gömmer sig. Eleverna läser stycket och ritar platsen med boken öppen, och de skriver ett ord ur texten vid varje sak de ritar. Sedan jämför de två och två och frågar varandra: ”Var i texten står det att dörren är där?” Det som ingen hittar stöd för i texten suddar de ut, och det som fattas ritar de till. I en studie hade elever i åk 6 nytta av att rita, men inte elever i åk 4, så pröva det först i de äldre klasserna."
+      "text": "Välj ett stycke i en berättelse där författaren beskriver en plats noga, som stugan där huvudpersonen gömmer sig. Eleverna läser stycket och ritar platsen med boken öppen, och de skriver ett ord ur texten vid varje sak de ritar. Sedan jämför de två och två och frågar varandra: ”Var i texten står det att dörren är där?” De suddar ut det som ingen av dem hittar stöd för i texten och ritar till det som fattas. I en studie hade elever i åk 6 nytta av att rita, men inte elever i åk 4, så pröva det först i de äldre klasserna."
     },
     {
       "omrade": "skrivning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "Innan eleverna skriver en beskrivning av en plats, berättar var och en för en kamrat vad hen ska skriva, och kamraten ritar det hen hör. Sedan tittar de på bilden tillsammans och frågar sig om allt som skulle vara med finns där och står på rätt plats. Det som fattas lägger berättaren till när hen berättar igen, och sedan skriver hen. Kamraten ritar snabbt och enkelt, eftersom bilden bara ska visa om texten går fram. Att rita på det här sättet finns inte med i studierna om att rita för att lära, så se efter om texterna blir tydligare."
+      "text": "Innan eleverna skriver en beskrivning av en plats, berättar var och en för en kamrat vad hen ska skriva, och kamraten ritar det hen hör. Sedan tittar de på bilden tillsammans och frågar sig om allt som skulle vara med finns där och står på rätt plats. Berättaren lägger till det som fattas när hen berättar igen, och sedan skriver hen. Kamraten ritar snabbt och enkelt, eftersom bilden bara ska visa om texten går fram. Studierna om att rita för att lära har inte prövat det här sättet, så se efter om texterna blir tydligare."
     },
     {
       "omrade": "matematik",
       "arskurs": "4–6",
       "amne": "matematik",
-      "text": "Ge en textuppgift som ”112 elever ska åka buss till museet, och varje buss har 48 platser. Hur många bussar behövs?” Innan eleverna räknar ritar de en ruta för varje buss och skriver hur många elever som sitter i den. Sedan jämför de bilden med uppgiften och visar grannen att alla 112 har fått plats, och att de 16 som blir över behöver en buss till, så att svaret blir 3 bussar. I en studie hade elever i åk 5 nytta av att rita till textuppgifter, men inte elever i åk 1 och 2."
+      "text": "Ge en textuppgift som ”112 elever ska åka buss till museet, och varje buss har 48 platser. Hur många bussar behövs?” Innan eleverna räknar ritar de en ruta för varje buss och skriver hur många elever som sitter i den. Sedan jämför de bilden med uppgiften och visar grannen att alla 112 får plats i 3 bussar, och att den tredje bussen tar de 16 som blir över. I en studie hade elever i åk 5 nytta av att rita till textuppgifter, men inte elever i åk 1 och 2."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "NO",
-      "text": "Eleverna läser ett stycke i NO-boken om hur en elektrisk krets fungerar, med bokens bild täckt. Efter stycket ritar de kretsen med batteriet, sladdarna, strömbrytaren och lampan, och pilar för strömmen. Sedan tar de fram bokens bild, jämför och lägger till det som fattas i en annan färg. Till sist förklarar de för grannen varför lampan slocknar när strömbrytaren bryter kretsen. Jämförelsen med en färdig bild är det stöd som har hjälpt mest i studierna."
+      "text": "Eleverna täcker bokens bild och läser ett stycke i NO-boken om hur en elektrisk krets fungerar. Efter stycket ritar de kretsen med batteriet, sladdarna, strömbrytaren och lampan, och de visar strömmen med pilar. Sedan tar de fram bokens bild, jämför och lägger till det som fattas i en annan färg. Till sist förklarar de för grannen varför lampan slocknar när strömbrytaren bryter kretsen. Av allt stöd i studierna har det hjälpt mest att jämföra med en färdig bild."
     }
   ],
   "metoderSomGorDen": [

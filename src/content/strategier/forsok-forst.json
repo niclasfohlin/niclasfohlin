@@ -1,0 +1,181 @@
+{
+  "nr": 18,
+  "namn": "Försök först",
+  "forskningensOrd": "productive failure, problem solving followed by instruction",
+  "framsida": {
+    "mening": "Försök lösa problemet innan du får se hur.",
+    "bild": {
+      "liknelse": "Bäcken: ädelstenen ligger på andra sidan en bäck. Barnet försöker själv ta sig över med två stenar och en kort planka och kommer inte ända fram. Läraren lägger en lång planka över barnets stenar och pekar på dem, och barnet ser varför den håller. Sedan går barnet över själv.",
+      "steg": [
+        {
+          "rubrik": "Försöket",
+          "utfall": "Når inte fram",
+          "fil": "forsok-forst-1.svg",
+          "alt": "Ett barn står vid en bäck med handen vid hakan. I bäcken ligger två stenar, och en kort planka går från stranden till den första. På andra sidan ligger en violett ädelsten. I hörnet ett förstoringsglas och en stapel av fem."
+        },
+        {
+          "rubrik": "Genomgången",
+          "utfall": "Ser varför",
+          "fil": "forsok-forst-2.svg",
+          "alt": "Samma bäck. En lång planka ligger över båda stenarna från strand till strand, och den korta plankan ligger på stranden. En lärare står på andra sidan och pekar med en pinne på stenen under plankan, och barnet ler. I hörnet en pil uppåt och två staplar av fem."
+        },
+        {
+          "rubrik": "Ett nytt försök",
+          "utfall": "Löser det själv",
+          "fil": "forsok-forst-3.svg",
+          "alt": "Samma bäck utan läraren. Barnet går själv på den långa plankan mot ädelstenen, och den korta plankan ligger kvar på stranden. I hörnet en bock och tre staplar av fem."
+        }
+      ]
+    },
+    "insikt": "Eleven som har försökt själv ser vad som fattas och förstår varför sättet fungerar.",
+    "handling": [
+      {
+        "ikon": "hammare",
+        "text": "Pröva egna sätt"
+      },
+      {
+        "ikon": "forstoringsglas",
+        "text": "Jämför med sättet"
+      },
+      {
+        "ikon": "skrivhand",
+        "text": "Lös en ny uppgift"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleverna försöker lösa ett problem innan du visar hur, och du bygger genomgången på deras försök."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "När eleverna försöker lösa ett problem som de kan börja på men inte klarar hela vägen, tar de fram det de redan kan och prövar flera sätt. De märker själva var det tar stopp. Eleverna lär sig sättet i genomgången, och när de har försökt vet de vad de ska lyssna efter. Du ställer några av försöken bredvid sättet, och eleverna ser vad sättet gör som försöken inte gjorde. Då förstår eleverna idén bättre och kan använda den i nya uppgifter. Eleverna lär sig stegen i en uträkning minst lika bra när du visar dem först."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Försöket",
+          "text": "egna sätt ur det du kan"
+        },
+        {
+          "namn": "Genomgången",
+          "text": "sättet bredvid försöken"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "idén och varför"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Försöket",
+          "till": "Genomgången",
+          "text": "visar luckan",
+          "betonad": true
+        },
+        {
+          "fran": "Genomgången",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        },
+        {
+          "fran": "Långtidsminnet",
+          "till": "Försöket",
+          "text": "tar fram"
+        }
+      ],
+      "text": "När eleven försöker, tar hen fram det hen redan kan och märker var det inte räcker. I genomgången ser eleven vad sättet gör som försöket inte gjorde. Då förstår eleven idén och fogar ihop den med det hen redan kan."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj problemet",
+        "text": "Ta ett problem om det ni ska förstå, som lockar och alla kan börja på."
+      },
+      {
+        "rubrik": "Låt dem försöka",
+        "text": "Alla prövar själva och sedan i par. Du frågar men visar inget sätt."
+      },
+      {
+        "rubrik": "Bygg på försöken",
+        "text": "Visa två eller tre försök bredvid sättet, och fråga vad som skiljer."
+      },
+      {
+        "rubrik": "Öva samma lektion",
+        "text": "Eleverna löser nya uppgifter med sättet innan lektionen är slut."
+      }
+    ],
+    "avgor": {
+      "rubrik": "När den passar",
+      "text": "När eleverna kan grunden och ska förstå en idé. Visa nya steg först."
+    },
+    "tankPa": "Strategin tjänar innehållet: välj ett problem där elevernas egna försök leder in i det ni ska förstå. Kortet Avlasta minnet säger att den som är ny ska se ett löst exempel först. Visa exemplet först när eleverna ska lära sig nya steg, som en ny uträkning, och för elever till och med åk 5. Låt eleverna försöka först när de kan grunden och ska förstå varför något fungerar. Forskarna är oense om ordningen och har nästan inte prövat strategin med elever i svårigheter, så se efter vad dina elever kan förklara efteråt. Gå igenom sättet samma lektion, så att ingen går därifrån med sitt försök som svar. Efter genomgången kan eleverna öva med lösta exempel.",
+    "forskningen": {
+      "text": "I en sammanställning av 53 studier förstod eleverna mer och klarade nya uppgifter bättre när de försökte lösa ett problem före genomgången. Skillnaden var 0,36, och 0,37–⁠0,58 när läraren följde fler av forskarnas principer, som att bygga genomgången på elevernas lösningar. Elever från åk 6 till gymnasiets första år hade mest nytta, och där var skillnaden 0,50. Elever i åk 2–⁠5 och de som skulle lära sig en allmän färdighet, som att planera en rättvis undersökning, lärde sig något mer med genomgången först. I studierna från Europa var skillnaden 0,19 och i dem från Asien 0,64, och bara Asien skilde sig säkert från de andra. Forskarna skriver att det kan bero på forskargruppernas upplägg eller på lärarnas utbildning och ämneskunskaper. Nästan tre av fyra jämförelser gällde matematik och fysik, och det fanns nästan inga studier med elever i svårigheter (Sinha och Kapur, 2021). I en översikt hjälpte försöket bara när läraren byggde genomgången på elevernas lösningar eller eleverna fick jämföra fall som skilde sig åt (Loibl m.fl., 2017). I två lottade studier i NO i åk 5 i Australien lärde sig eleverna mer med genomgången först, och när innehållet hade fler delar som hänger ihop gällde det också nya uppgifter (Ashman m.fl., 2020). Eleverna lärde sig stegen i en uträkning lika bra i båda ordningarna i den stora sammanställningen och nästan alltid bättre med genomgången först i en mindre (Chen och Kalyuga, 2020).",
+      "kallor": [
+        {
+          "id": "sinha-och-kapur-2021",
+          "titel": "When Problem Solving Followed by Instruction Works: Evidence for Productive Failure",
+          "text": "Sinha, T. och Kapur, M. (2021). When Problem Solving Followed by Instruction Works: Evidence for Productive Failure. Review of Educational Research.",
+          "adress": "https://doi.org/10.3102/00346543211019105"
+        },
+        {
+          "id": "loibl-m-fl-2017",
+          "titel": "Towards a Theory of When and How Problem Solving Followed by Instruction Supports Learning",
+          "text": "Loibl, K., Roll, I. och Rummel, N. (2017). Towards a Theory of When and How Problem Solving Followed by Instruction Supports Learning. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-016-9379-x"
+        },
+        {
+          "id": "ashman-m-fl-2020",
+          "titel": "Problem-solving or Explicit Instruction: Which Should Go First When Element Interactivity Is High?",
+          "text": "Ashman, G., Kalyuga, S. och Sweller, J. (2020). Problem-solving or Explicit Instruction: Which Should Go First When Element Interactivity Is High? Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-019-09500-5"
+        },
+        {
+          "id": "chen-och-kalyuga-2020",
+          "titel": "Exploring factors influencing the effectiveness of explicit instruction first and problem-solving first approaches",
+          "text": "Chen, O. och Kalyuga, S. (2020). Exploring factors influencing the effectiveness of explicit instruction first and problem-solving first approaches. European Journal of Psychology of Education.",
+          "adress": "https://doi.org/10.1007/s10212-019-00445-5"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      },
+      {
+        "titel": "Problemlösning i grupp",
+        "adress": "/stodundervisning/problemlosning-i-grupp"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "7–9",
+      "amne": "svenska",
+      "text": "När klassen har läst en novell, och innan du går igenom handling, tema och budskap, skriver eleverna var sin mening om vad novellen vill säga. Du skriver upp några av meningarna på tavlan, så att det syns tre slag: meningar som berättar vad som händer, meningar med ett ord som vänskap och meningar som säger något om vänskapen, som ”En vän kan förlåta mer än man tror”. Med klassens meningar som exempel går du igenom handling, tema och budskap, och eleverna skriver om sin egen mening. Strategin är mest prövad i matematik och NO, så se efter om fler kan skriva budskapet i nästa novell."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "7–9",
+      "amne": "svenska",
+      "text": "Innan du går igenom hur man gestaltar en känsla, ger du eleverna uppgiften: ”Skriv tre meningar som får läsaren att känna att källaren är läskig, utan att skriva ordet läskig.” Eleverna skriver själva i fem minuter. Du läser upp tre försök utan namn: ett som säger känslan med andra ord, ett med något man ser och ett med ljud och det kroppen känner. Klassen säger vilket som gör läsaren mest rädd och varför, och du bygger genomgången om gestaltning på deras svar. Studierna har inte prövat strategin i skrivning, så jämför texterna eleverna skriver efteråt med de första försöken."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "4–6",
+      "amne": "matematik",
+      "text": "Innan genomgången om andelar och procent i åk 6 ställer du problemet: ”I 6A cyklar 12 av 20 elever till skolan, och i 6B cyklar 15 av 30. I vilken klass är det vanligast att cykla?” Eleverna försöker först själva och sedan i par och skriver hur de tänkte. Du ställer upp försöken på tavlan, som att 15 är fler än 12 och att 12 av 20 är mer än hälften, och bygger genomgången på dem: andelen är 60 procent i 6A och 50 procent i 6B. I studierna lärde sig elever till och med åk 5 lika mycket eller något mer med genomgången först, så visa sättet först i åk 4 och 5 och välj i åk 6 ett problem där alla kan börja."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "7–9",
+      "amne": "NO",
+      "text": "Innan genomgången om densitet skriver du upp tre föremål på tavlan: en träkloss på 400 cm³ som väger 200 g, en järnbit på 10 cm³ som väger 79 g och en aluminiumbit på 50 cm³ som väger 135 g. Paren försöker i tio minuter avgöra vilket material som är tyngst och skriver varför. Du visar tre försök: ett som jämför vikten, ett som jämför storleken och ett som räknar ut vad en kubikcentimeter väger. Du frågar vad de två första missar. Sedan går du igenom densitet som massa delad med volym: trä 0,5, aluminium 2,7 och järn 7,9 gram per kubikcentimeter."
+    }
+  ],
+  "metoderSomGorDen": []
+}

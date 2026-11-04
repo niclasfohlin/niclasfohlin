@@ -25,7 +25,7 @@ material:
   - färgpennor
   - återkomstlistan
   - frågekartan
-uppdaterad: 2026-11-03
+uppdaterad: 2026-11-04
 publicerad: 2026-11-03
 relaterade: ["testbaserat-larande", "explicit-undervisning", "formativ-bedomning", "kooperativt-larande"]
 utkast: false
@@ -98,7 +98,7 @@ karna:
       varfor: "Det eleven bara läser om känns bekant men går inte att ta fram. När eleven själv tar fram det och sedan ser svaret, sitter det bättre: studier visar 0,37 mot att läsa om eller skriva av i vanliga klassrum, mest för fakta, och 0,22 mot inget prov (Ruitenburg m.fl., 2026; Dietrichson m.fl., 2026)."
       belagg: provad
       kallor: [ruitenburg-m-fl-2026, dietrichson-m-fl-2026, pashler-m-fl-2007]
-      kvar: Alla tar fram själva innan svaret visas, en fråga gäller ett varför, och det rätta kommer samma lektion.
+      kvar: Alla elever tar fram svaret själva innan de ser det, svarar på en fråga om varför och får det rätta samma lektion.
       fritt: "Att skriva, rita, säga svaret till grannen eller visa med kroppen, när alla gör det samtidigt, en frågekarta och ledtrådar för de yngsta, och i början, mitten eller slutet av lektionen."
       kryss: Alla tog fram ur minnet innan svaret visades
     - namn: Sprid ut
@@ -108,7 +108,7 @@ karna:
       varfor: "Eleven glömmer fort det hen övar klart vid ett tillfälle, fast det känns som att hen kan. När det kommer tillbaka efter dagar och veckor, sitter det längre: studier i skolan visar 0,20, och 0,39 när samma övning gavs samlad och spridd, mest för fakta och på forskarnas prov (Ruitenburg m.fl., 2026)."
       belagg: provad
       kallor: [ruitenburg-m-fl-2026, perry-m-fl-2021, pashler-m-fl-2007]
-      kvar: Det som ska sitta kommer tillbaka minst två gånger med dagar och veckor emellan, och eleverna tar fram det.
+      kvar: Eleverna tar fram det de ska kunna minst två gånger till, med dagar och veckor emellan.
       fritt: "När och i vilken form, som i starten, i slutet eller i läxan, och hur långa uppehållen är. Inget schema är bättre belagt än ett annat."
       kryss: Eleverna tog fram något från förra veckan eller månaden
     - namn: Avlasta minnet
@@ -118,7 +118,7 @@ karna:
       varfor: "Den som är ny i innehållet lägger kraften på att leta och pröva, och det nya sitter inte. Ett löst exempel före eget arbete ger kraften åt innehållet: studier visar det med måttlig tillförlitlighet i matematik och NO för 11–18 år (Perry m.fl., 2021). Sedan tar du bort stödet (Sweller m.fl., 2019)."
       belagg: provad
       kallor: [perry-m-fl-2021, sweller-m-fl-2019, cese-2018]
-      kvar: Den som är ny i innehållet ser ett löst exempel före eget arbete, och stödet minskar efter det eleverna visar.
+      kvar: Elever som är nya i innehållet ser ett löst exempel först, och du tar bort stödet när de visar att de kan.
       fritt: "Exemplet på tavlan, på bladet eller som en rörelse du visar, ihop med en liknande uppgift, delvis löst och med texten samlad vid bilden."
       kryss: Exemplet kom först, och stödet minskade
     - namn: Ord och bild
@@ -128,7 +128,7 @@ karna:
       varfor: "Ett samband är svårt att förstå med bara ord. En enkel bild som läraren pekar i ger två vägar till samma innehåll: studier visar 0,47 i skolan och 0,21 från förskolan till åk 5, men ingen effekt efter två veckor eller mer (Banks m.fl., 2026). Därför ritar eleverna bilden ur minnet igen senare."
       belagg: provad
       kallor: [banks-m-fl-2026, guo-m-fl-2020, pashler-m-fl-2007]
-      kvar: Bilden visar sambandet, du pekar på det du säger, och eleverna förklarar den, också ur minnet när den kommer tillbaka.
+      kvar: Du pekar i en bild av sambandet medan du förklarar, och eleverna förklarar den, också ur minnet när den kommer tillbaka.
       fritt: "Rutor, pilar och ord i ett flödesschema, en tidslinje, en blockmodell, en karta eller elevens egen skiss."
       kryss: Klassen förklarade sambandet med bilden, också ur minnet
     - namn: Blanda uppgifter
@@ -138,7 +138,7 @@ karna:
       varfor: "En rad med uppgifter av samma slag väljer sättet åt eleven, men på provet måste eleven välja själv. Blandade uppgifter övar valet: studier visar 0,54 i matematik i vanliga klassrum (Ruitenburg m.fl., 2026) och 61 mot 38 procent rätt i åk 7 (Rohrer m.fl., 2020). Nästan alla studier gäller matematik."
       belagg: provad
       kallor: [ruitenburg-m-fl-2026, rohrer-m-fl-2020]
-      kvar: Slagen förväxlas och är övade var för sig, eleven väljer slag innan hen löser, och facit kommer när raden är klar.
+      kvar: I en blandad rad av slag de kan men förväxlar säger eleverna slaget först och ser facit när raden är klar.
       fritt: "Ämnet, hur många slag, en rad ur bokens olika avsnitt, kort att sortera, bilder eller textutdrag, och hur stor del som blandas, som en tredjedel."
       kryss: Eleverna valde slag i en blandad rad
 roll:

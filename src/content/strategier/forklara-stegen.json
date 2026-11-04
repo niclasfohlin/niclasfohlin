@@ -5,7 +5,7 @@
   "framsida": {
     "mening": "Säg varför du gör steget.",
     "bild": {
-      "liknelse": "Exemplet på tavlan: eleven som skriver av stegen klarar just den uppgiften. När eleven säger varför stegen görs, ser hen regeln bakom dem, och då klarar hen en ny uppgift som ser annorlunda ut.",
+      "liknelse": "Exemplet på tavlan: eleven som skriver av stegen klarar just den uppgiften. När eleven säger varför hen gör stegen, ser hen regeln bakom dem, och då klarar hen en ny uppgift som ser annorlunda ut.",
       "steg": [
         {
           "rubrik": "Skriver av",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Den som säger varför ett steg görs ser regeln och kan ta med den till en ny uppgift.",
+    "insikt": "Den som säger varför hen gör steget ser regeln och kan använda den i en ny uppgift.",
     "handling": [
       {
         "ikon": "forstoringsglas",
@@ -46,11 +46,11 @@
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Eleverna säger för sig själva eller för grannen varför ett steg görs, i ett löst exempel, i en egen lösning eller i en text."
+      "text": "Eleverna läser ett löst exempel, sin egen lösning eller en text och säger för sig själva eller för grannen varför ett steg behövs."
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Den som skriver av stegen klarar uppgiften så länge exemplet finns framme, men en ny uppgift som ser annorlunda ut blir svår. När eleven säger varför ett steg görs, letar hen efter regeln bakom och knyter steget till det hen redan kan. Att säga om stegen med andra ord ger inte samma vinst. Förklaringen tar tid, och vinsten syns mest i nya uppgifter."
+      "text": "Den som skriver av stegen klarar uppgiften så länge exemplet finns framme, men har svårt med en ny uppgift som ser annorlunda ut. När eleven säger varför ett steg behövs, letar hen efter regeln bakom och knyter steget till det hen redan kan. Om eleven bara säger om stegen med andra ord, lär hen sig inte lika mycket. Det tar tid att förklara, och eleven har mest nytta av det när hen löser nya uppgifter."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -86,20 +86,20 @@
           "text": "lära in"
         }
       ],
-      "text": "När eleven säger varför ett steg görs, knyts steget till regeln bakom. Regeln kan eleven sedan ta med till en ny uppgift."
+      "text": "När eleven säger varför ett steg behövs, knyter hen steget till regeln bakom. Sedan kan hen ta med regeln till en ny uppgift."
     },
     "saGorDu": [
       {
         "rubrik": "Välj och visa",
-        "text": "Ett steg med en regel bakom. Tänk högt: säg vad du gör och varför."
+        "text": "Visa ett steg med en regel bakom. Säg högt vad du gör och varför."
       },
       {
         "rubrik": "Fråga vid steget",
-        "text": "”Varför gör du så här?” Alla får tid att tänka innan de svarar."
+        "text": "Fråga ”Varför gör du så här?” Låt alla tänka innan de svarar."
       },
       {
         "rubrik": "Ge en ram",
-        "text": "Meningen ”Jag gör … därför att …” hjälper eleven att säga skälet."
+        "text": "Låt eleven säga skälet med meningen ”Jag gör … därför att …”."
       },
       {
         "rubrik": "Rätt och fel",
@@ -110,9 +110,9 @@
       "rubrik": "Undvik",
       "text": "Att eleven bara säger vad hen gör. Det är skälet som hjälper."
     },
-    "tankPa": "Strategin tjänar innehållet: välj steg där det finns en regel eller ett samband att förstå. Förklaringarna tar tid, så låt eleverna förklara två eller tre steg och lösa resten som vanligt. De yngsta förklarar muntligt för grannen, och du visar hur ett bra skäl låter.",
+    "tankPa": "Strategin tjänar innehållet: välj steg där det finns en regel eller ett samband att förstå. Det tar tid att förklara, så låt eleverna göra det i två eller tre steg och lösa resten som vanligt. De yngsta förklarar muntligt för grannen, och du visar hur ett bra skäl låter.",
     "forskningen": {
-      "text": "Uppmaningar att förklara för sig själv gav 0,55 i 69 jämförelser, mest med studenter, och 0,43–⁠0,48 med skolelever (Bisra m.fl., 2018). I matematik var vinsten liten till måttlig direkt efter och större när eleverna fick stöd att förklara, men belägget från vanliga klassrum och efter en tid är begränsat (Rittle-Johnson m.fl., 2017). I åk 2–⁠4 gav förklaringarna mer än att lösa lika många uppgifter, men bara lite mer än fler uppgifter på samma tid (McEldoon m.fl., 2013).",
+      "text": "Uppmaningar att förklara för sig själv gav 0,55 i 69 jämförelser. De flesta gällde studenter, och med skolelever blev effekten 0,43–⁠0,48 (Bisra m.fl., 2018). I matematik lärde sig eleverna lite till måttligt mer direkt efteråt, och mer när de fick stöd att förklara. Från vanliga klassrum och från prov en tid efteråt finns det få belägg (Rittle-Johnson m.fl., 2017). I åk 2–⁠4 lärde sig eleverna mer när de förklarade än när de löste lika många uppgifter, men bara lite mer än när de löste fler uppgifter på samma tid (McEldoon m.fl., 2013).",
       "kallor": [
         {
           "id": "bisra-m-fl-2018",
@@ -150,25 +150,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "I en faktatext om hur vattnet renas i ett reningsverk stannar eleverna efter varje stycke och säger till grannen vad som händer i det steget och varför det behövs. Grannen frågar: ”Hur hänger det ihop med stycket före?” Visa först själv med det första stycket och tänk högt. Lyssna efter om eleverna säger varför steget behövs, eller bara säger om texten med andra ord."
+      "text": "När eleverna läser en faktatext om hur vattnet renas i ett reningsverk, stannar de efter varje stycke och säger till grannen vad som händer i det steget och varför det behövs. Grannen frågar: ”Hur hänger det ihop med stycket före?” Visa först själv med det första stycket och tänk högt. Lyssna efter om eleverna säger varför steget behövs, eller bara säger om texten med andra ord."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När eleverna skriver en mening om helgen, säger de till grannen varför de gör ett steg: ”Stor bokstav, för Ali är ett namn” eller ”Punkt, för nu är meningen slut.” Visa först själv på tavlan och säg varje skäl högt. Ta ett eller två steg i taget, så att eleverna orkar både skriva och förklara. Den som svarar ”för att det ska vara så” får en fråga som leder till skälet: ”Var börjar meningen?”"
+      "text": "När eleverna skriver en mening om helgen, säger de till grannen varför de gör ett steg: ”Stor bokstav, för Ali är ett namn” eller ”Punkt, för nu är meningen slut.” Visa först själv på tavlan och säg varje skäl högt. Ta ett eller två steg i taget, så att eleverna orkar både skriva och förklara. Svarar någon ”för att det ska vara så”, ställer du en fråga som leder till skälet: ”Var börjar meningen?”"
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Visa ett löst exempel där ett pris på 240 kr ökar med 15 procent, i två rader: 100 % + 15 % = 115 %, och 240 · 1,15 = 276. Eleverna skriver bredvid varje rad varför den görs, som ”115 % är hela priset och 15 % till”. Sedan får de en felaktig lösning, 240 · 0,15 = 36, och förklarar för grannen vad som blev fel. Till sist löser de en minskning med 20 procent, som ser annorlunda ut men bygger på samma regel."
+      "text": "Visa ett löst exempel på två rader där ett pris på 240 kr ökar med 15 procent: 100 % + 15 % = 115 % och 240 · 1,15 = 276. Eleverna skriver bredvid varje rad varför den behövs, som ”115 % är hela priset och 15 % till”. Sedan visar du en felaktig lösning, 240 · 0,15 = 36, och eleverna förklarar för grannen vad som blev fel. Till sist löser de en uppgift där priset minskar med 20 procent. Den ser annorlunda ut men bygger på samma regel."
     },
     {
       "omrade": "amnen",
       "arskurs": "4–6",
       "amne": "teknik",
-      "text": "När eleverna bygger en enkel krets med batteri, två sladdar och en lampa, säger de vid varje steg varför det behövs: ”Den andra sladden går tillbaka till batteriet, för strömmen måste gå runt.” Paret turas om, så att den ena bygger och förklarar och den andra frågar varför. Sedan får paret en krets som inte lyser och förklarar vad som saknas. Lyssna efter om eleverna säger att kretsen måste vara sluten."
+      "text": "När eleverna bygger en enkel krets med batteri, två sladdar och en lampa, säger de vid varje steg varför det behövs: ”Den andra sladden går tillbaka till batteriet, för strömmen måste gå runt.” Paret turas om, så att den ena bygger och förklarar och den andra frågar varför. Sedan ger du paret en krets som inte lyser, och de förklarar vad som saknas. Lyssna efter om eleverna säger att kretsen måste vara sluten."
     }
   ],
   "metoderSomGorDen": [

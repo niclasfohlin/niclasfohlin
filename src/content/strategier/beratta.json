@@ -5,7 +5,7 @@
   "framsida": {
     "mening": "Berätta vad som hände, och varför.",
     "bild": {
-      "liknelse": "Tåget uppför backen: lösa vagnar står isär och glöms en och en. När läraren kopplar ihop dem med därför och men, bakom ett lok som vill upp, följer hela tåget med uppför backen. Sist kör eleven tåget själv.",
+      "liknelse": "Tåget uppför backen: lösa vagnar står isär, och eleven glömmer dem en och en. Läraren kopplar ihop dem med därför och men bakom ett lok som vill upp, och då följer hela tåget med uppför backen. Sist kör eleven tåget själv.",
       "steg": [
         {
           "rubrik": "Lösa fakta",
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "När varje del leder till nästa hänger fakta ihop, och en del drar fram nästa i minnet.",
+    "insikt": "När varje del leder till nästa hänger fakta ihop, och en del påminner eleven om nästa.",
     "handling": [
       {
         "ikon": "forstoringsglas",
@@ -46,11 +46,11 @@
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Du berättar innehållet som det hände, med någon som vill något, ett problem och det som händer därför, och eleverna berättar det sedan själva."
+      "text": "Du gör innehållet till en berättelse där någon vill något och möter ett problem, och där varje händelse leder till nästa. Sedan berättar eleverna den själva."
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "En berättelse hänger ihop med orsaker: någon vill något, något står i vägen, och därför händer nästa sak. Den som lyssnar vill veta hur det går och fyller själv i varför, och det eleven tänker på är det som stannar. Varje del i kedjan hjälper eleven att ta fram nästa. En lista med lösa fakta har inga sådana vägar mellan delarna, och de glöms en och en."
+      "text": "En berättelse hänger ihop med orsaker: någon vill något, något står i vägen, och därför händer nästa sak. Den som lyssnar vill veta hur det går och fyller själv i varför, och eleven minns det hen har tänkt på. Varje del i kedjan hjälper eleven att ta fram nästa. En lista med lösa fakta har inga sådana vägar mellan delarna, och eleven glömmer dem en och en."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
@@ -86,7 +86,7 @@
           "betonad": true
         }
       ],
-      "text": "Eleven minns det hen har tänkt på, och en berättelse får eleven att tänka på varför. När eleven tar fram en del, leder orsaken vidare till nästa."
+      "text": "Eleven minns det hen har tänkt på, och en berättelse får eleven att tänka på varför. När eleven tar fram en del, följer hen orsaken vidare till nästa."
     },
     "saGorDu": [
       {
@@ -95,24 +95,24 @@
       },
       {
         "rubrik": "Berätta i ordning",
-        "text": "En händelse i taget, med därför och men mellan dem."
+        "text": "Ta en händelse i taget och knyt ihop händelserna med därför och men."
       },
       {
         "rubrik": "Säg vad den visar",
-        "text": "Säg begreppet med ämnets ord, där berättelsen kommer fram till det."
+        "text": "När berättelsen kommer fram till begreppet, säg det med ämnets ord."
       },
       {
         "rubrik": "Eleverna berättar",
-        "text": "Ur minnet för grannen, med därför och men. Grannen frågar varför."
+        "text": "De berättar ur minnet med därför och men, och grannen frågar varför."
       }
     ],
     "avgor": {
       "rubrik": "Undvik",
       "text": "En rolig sidohistoria som inte hör till det eleverna ska lära sig."
     },
-    "tankPa": "Strategin tjänar innehållet: bestäm först vad eleverna ska förstå, och låt berättelsen bära just det. En spännande detalj som inte hör till innehållet tar uppmärksamheten från det som ska läras. Berätta också för de äldsta, med din vanliga röst. Allt behöver inte bli en berättelse: ett samband kan också visas i en bild, och en färdighet övas steg för steg.",
+    "tankPa": "Strategin tjänar innehållet: bestäm först vad eleverna ska förstå, och bygg berättelsen kring just det. En spännande detalj som inte hör till innehållet drar elevernas uppmärksamhet från det de ska lära sig. Berätta också för de äldsta, och använd din vanliga röst. Allt behöver inte bli en berättelse. Du kan också visa ett samband i en bild, och eleverna kan öva en färdighet steg för steg.",
     "forskningen": {
-      "text": "Berättelser förstods och mindes bättre än förklarande texter i 37 studier, 0,55 i snitt och 0,67 för deltagare upp till 16 år, och ungefär lika mycket i de åtta studier där deltagarna lyssnade i stället för att läsa. Där innehållet var detsamma i båda texterna var skillnaden osäker, och bara fyra studier prövade minnet eller förståelsen efter en tid (Mar m.fl., 2021). Med samma innehåll förstod 209 elever i åk 7–⁠8 en NO-text bättre som berättelsen om en upptäckt, direkt och senare (Arya och Maul, 2012). Willingham (2004) förklarar fördelen med att berättelsen hänger ihop med orsaker, och roliga sidospår som inte hör till innehållet sänker lärandet (Sundararajan och Adesope, 2020).",
+      "text": "I 37 studier förstod och mindes deltagarna berättelser bättre än förklarande texter (0,55 i snitt och 0,67 för deltagare upp till 16 år). Skillnaden var ungefär lika stor i de åtta studier där deltagarna lyssnade i stället för att läsa. Där innehållet var detsamma i båda texterna var skillnaden osäker, och bara fyra studier prövade minnet eller förståelsen efter en tid (Mar m.fl., 2021). Med samma innehåll förstod 209 elever i åk 7–⁠8 en NO-text bättre när den var skriven som berättelsen om en upptäckt, både direkt och senare (Arya och Maul, 2012). Willingham (2004) förklarar att berättelser har en fördel eftersom de hänger ihop med orsaker. Roliga sidospår som inte hör till innehållet gör att man lär sig mindre (Sundararajan och Adesope, 2020).",
       "kallor": [
         {
           "id": "mar-m-fl-2021",
@@ -152,7 +152,7 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Innan klassen läser faktaboken om igelkotten berättar du igelkottens år som en berättelse: ”Igelkotten äter och äter hela hösten, för den ska sova hela vintern och kan inte äta då.” Sedan läser eleverna texten och letar upp vad igelkotten gör och varför. Sist berättar de igelkottens år för grannen med därför och men, och bilderna i boken är stödet."
+      "text": "Innan klassen läser faktaboken om igelkotten berättar du om igelkottens år: ”Igelkotten äter och äter hela hösten, för den ska sova hela vintern och kan inte äta då.” Sedan läser eleverna texten och letar upp vad igelkotten gör och varför. Sist berättar de igelkottens år för grannen med därför och men, och de har bilderna i boken som stöd."
     },
     {
       "omrade": "skrivning",
@@ -164,7 +164,7 @@
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Berätta hur Eratosthenes mätte jorden: han ville veta hur stor den var, men ingen kunde gå runt den. Mitt på dagen vid sommarsolståndet stod solen rakt ovanför staden Syene, men i Alexandria kastade en pinne samtidigt en skugga, med en vinkel på ungefär en femtiondel av ett helt varv. Därför var avståndet mellan städerna, omkring 800 km, en femtiondel av jordens omkrets. Eleverna räknar själva ut omkretsen och berättar sedan kedjan för grannen."
+      "text": "Berätta hur Eratosthenes mätte jorden: han ville veta hur stor den var, men ingen kunde gå runt den. Mitt på dagen vid sommarsolståndet stod solen rakt ovanför staden Syene, men i Alexandria kastade en pinne samtidigt en skugga, och skuggans vinkel var ungefär en femtiondel av ett helt varv. Därför var avståndet mellan städerna, omkring 800 km, en femtiondel av jordens omkrets. Eleverna räknar själva ut omkretsen och berättar sedan kedjan för grannen."
     },
     {
       "omrade": "amnen",
