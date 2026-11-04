@@ -1,0 +1,177 @@
+{
+  "nr": 15,
+  "namn": "Berätta",
+  "forskningensOrd": "narrative, story structure",
+  "framsida": {
+    "mening": "Berätta vad som hände, och varför.",
+    "bild": {
+      "liknelse": "Tåget uppför backen: lösa vagnar står isär och glöms en och en. När läraren kopplar ihop dem med därför och men, bakom ett lok som vill upp, följer hela tåget med uppför backen. Sist kör eleven tåget själv.",
+      "steg": [
+        {
+          "rubrik": "Lösa fakta",
+          "utfall": "Svårt att minnas",
+          "fil": "beratta-1.svg",
+          "alt": "Tre lösa vagnar med var sin last står isär i en backe, och en av dem har rullat av spåret. Ett barn står bredvid och funderar. Högst upp ligger en ädelsten. I hörnet ett kryss och en stapel av fem."
+        },
+        {
+          "rubrik": "En berättelse",
+          "utfall": "Hänger ihop",
+          "fil": "beratta-2.svg",
+          "alt": "Samma backe. Vagnarna är kopplade bakom ett lok som har börjat köra uppför backen med rök ur skorstenen, och barnet åker med i vagnen närmast loket och sträcker upp armarna. I hörnet en pil uppåt och tre staplar av fem."
+        },
+        {
+          "rubrik": "Eleven berättar",
+          "utfall": "Minns sambanden",
+          "fil": "beratta-3.svg",
+          "alt": "Samma backe. Tåget med de kopplade vagnarna har kommit upp till ädelstenen, och barnet står i loket och pekar mot den. I hörnet en bock och alla fem staplarna."
+        }
+      ]
+    },
+    "insikt": "När varje del leder till nästa hänger fakta ihop, och en del drar fram nästa i minnet.",
+    "handling": [
+      {
+        "ikon": "forstoringsglas",
+        "text": "Hitta problemet"
+      },
+      {
+        "ikon": "pratbubbla",
+        "text": "Berätta med därför"
+      },
+      {
+        "ikon": "fragetecken",
+        "text": "Vad lär det oss?"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Du berättar innehållet som det hände, med någon som vill något, ett problem och det som händer därför, och eleverna berättar det sedan själva."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "En berättelse hänger ihop med orsaker: någon vill något, något står i vägen, och därför händer nästa sak. Den som lyssnar vill veta hur det går och fyller själv i varför, och det eleven tänker på är det som stannar. Varje del i kedjan hjälper eleven att ta fram nästa. En lista med lösa fakta har inga sådana vägar mellan delarna, och de glöms en och en."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Berättelsen",
+          "text": "orsak, problem, följd"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "fyller i varför"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "en kedja att följa"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Berättelsen",
+          "till": "Arbetsminnet",
+          "text": "lyssna"
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        },
+        {
+          "fran": "Långtidsminnet",
+          "till": "Arbetsminnet",
+          "text": "nästa del",
+          "betonad": true
+        }
+      ],
+      "text": "Eleven minns det hen har tänkt på, och en berättelse får eleven att tänka på varför. När eleven tar fram en del, leder orsaken vidare till nästa."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Hitta problemet",
+        "text": "Vem ville vad, och vad stod i vägen? Där börjar berättelsen."
+      },
+      {
+        "rubrik": "Berätta i ordning",
+        "text": "En händelse i taget, med därför och men mellan dem."
+      },
+      {
+        "rubrik": "Säg vad den visar",
+        "text": "Säg begreppet med ämnets ord, där berättelsen kommer fram till det."
+      },
+      {
+        "rubrik": "Eleverna berättar",
+        "text": "Ur minnet för grannen, med därför och men. Grannen frågar varför."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "En rolig sidohistoria som inte hör till det eleverna ska lära sig."
+    },
+    "tankPa": "Strategin tjänar innehållet: bestäm först vad eleverna ska förstå, och låt berättelsen bära just det. En spännande detalj som inte hör till innehållet tar uppmärksamheten från det som ska läras. Berätta också för de äldsta, med din vanliga röst. Allt behöver inte bli en berättelse: ett samband kan också visas i en bild, och en färdighet övas steg för steg.",
+    "forskningen": {
+      "text": "Berättelser förstods och mindes bättre än förklarande texter i 37 studier, 0,55 i snitt och 0,67 för deltagare upp till 16 år, och ungefär lika mycket i de åtta studier där deltagarna lyssnade i stället för att läsa. Där innehållet var detsamma i båda texterna var skillnaden osäker, och bara fyra studier prövade minnet eller förståelsen efter en tid (Mar m.fl., 2021). Med samma innehåll förstod 209 elever i åk 7–⁠8 en NO-text bättre som berättelsen om en upptäckt, direkt och senare (Arya och Maul, 2012). Willingham (2004) förklarar fördelen med att berättelsen hänger ihop med orsaker, och roliga sidospår som inte hör till innehållet sänker lärandet (Sundararajan och Adesope, 2020).",
+      "kallor": [
+        {
+          "id": "mar-m-fl-2021",
+          "titel": "Memory and comprehension of narrative versus expository texts: A meta-analysis",
+          "text": "Mar, R. A., Li, J., Nguyen, A. T. P. och Ta, C. P. (2021). Memory and comprehension of narrative versus expository texts: A meta-analysis. Psychonomic Bulletin & Review.",
+          "adress": "https://doi.org/10.3758/s13423-020-01853-1"
+        },
+        {
+          "id": "arya-maul-2012",
+          "titel": "The role of the scientific discovery narrative in middle school science education: An experimental study",
+          "text": "Arya, D. J. och Maul, A. (2012). The role of the scientific discovery narrative in middle school science education: An experimental study. Journal of Educational Psychology.",
+          "adress": "https://doi.org/10.1037/a0028108"
+        },
+        {
+          "id": "willingham-2004",
+          "titel": "Ask the Cognitive Scientist: The Privileged Status of Story",
+          "text": "Willingham, D. T. (2004). Ask the Cognitive Scientist: The Privileged Status of Story. American Educator.",
+          "adress": "https://www.aft.org/periodical/american-educator/summer-2004/ask-cognitive-scientist"
+        },
+        {
+          "id": "sundararajan-adesope-2020",
+          "titel": "Keep it Coherent: A Meta-Analysis of the Seductive Details Effect",
+          "text": "Sundararajan, N. och Adesope, O. (2020). Keep it Coherent: A Meta-Analysis of the Seductive Details Effect. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-020-09522-4"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "Innan klassen läser faktaboken om igelkotten berättar du igelkottens år som en berättelse: ”Igelkotten äter och äter hela hösten, för den ska sova hela vintern och kan inte äta då.” Sedan läser eleverna texten och letar upp vad igelkotten gör och varför. Sist berättar de igelkottens år för grannen med därför och men, och bilderna i boken är stödet."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "7–9",
+      "amne": "NO",
+      "text": "Eleverna skriver om en upptäckt i NO som en berättelse i fyra delar: vem som ville veta något, problemet, vad hen prövade och vad det visade. Ett exempel är läkaren Ignaz Semmelweis i Wien, som 1847 ville förstå varför fler mammor dog på läkarnas avdelning än på barnmorskornas. Läkarna och studenterna kom direkt från obduktionerna, och när de tvättade händerna i klorkalk dog färre. Låt eleverna skriva med därför och men mellan delarna och sluta med begreppet, som smitta."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "7–9",
+      "amne": "matematik",
+      "text": "Berätta hur Eratosthenes mätte jorden: han ville veta hur stor den var, men ingen kunde gå runt den. Mitt på dagen vid sommarsolståndet stod solen rakt ovanför staden Syene, men i Alexandria kastade en pinne samtidigt en skugga, med en vinkel på ungefär en femtiondel av ett helt varv. Därför var avståndet mellan städerna, omkring 800 km, en femtiondel av jordens omkrets. Eleverna räknar själva ut omkretsen och berättar sedan kedjan för grannen."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "4–6",
+      "amne": "SO",
+      "text": "Berätta om regalskeppet Vasa som en kedja: kungen ville ha ett mäktigt skepp med två kanondäck till kriget, men skeppet blev för tungt upptill. På första resan 1628 lutade det i en vindby, vattnet forsade in genom de öppna kanonportarna, och därför sjönk det i Stockholms hamn. Säg sedan vad berättelsen visar om stormaktstiden: Sverige var i krig och ville visa sin makt. Eleverna berättar kedjan för grannen med därför och men."
+    }
+  ],
+  "metoderSomGorDen": []
+}

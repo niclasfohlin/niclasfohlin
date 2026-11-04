@@ -1,0 +1,187 @@
+{
+  "nr": 8,
+  "namn": "Ge exempel",
+  "forskningensOrd": "concrete examples",
+  "framsida": {
+    "mening": "Se idén i exempel som ser olika ut.",
+    "bild": {
+      "liknelse": "Vad är en triangel? Efter ett enda exempel lägger barnet en triangel som ligger ner utanför ringen. Flera trianglar som ser olika ut visar det som är lika, tre raka sidor och tre hörn, och sedan ritar barnet en egen och förklarar.",
+      "steg": [
+        {
+          "rubrik": "Ett exempel",
+          "utfall": "Känner inte igen",
+          "fil": "ge-exempel-1.svg",
+          "alt": "Läraren pekar på en triangel i en ring på tavlan. Utanför ringen ligger en triangel med spetsen åt sidan, och barnet funderar. I hörnet ett kryss och en stapel av fem."
+        },
+        {
+          "rubrik": "Flera exempel",
+          "utfall": "Ser likheten",
+          "fil": "ge-exempel-2.svg",
+          "alt": "Samma tavla. I ringen står tre trianglar som ser olika ut, också den som låg utanför, och alla hörn har en mörk prick. Läraren pekar på ett hörn. I hörnet en pil uppåt och tre staplar av fem."
+        },
+        {
+          "rubrik": "Eget exempel",
+          "utfall": "Hittar egna",
+          "fil": "ge-exempel-3.svg",
+          "alt": "Samma tavla. Barnet har ritat en egen triangel med spetsen nedåt i ringen, med prickar i hörnen, och pekar och förklarar. Läraren lyssnar. I hörnet en bock och alla fem staplarna."
+        }
+      ]
+    },
+    "insikt": "Ett exempel minns eleven som det såg ut. Det som är lika i flera är idén.",
+    "handling": [
+      {
+        "ikon": "forstoringsglas",
+        "text": "Se flera exempel"
+      },
+      {
+        "ikon": "pekfinger",
+        "text": "Peka på det lika"
+      },
+      {
+        "ikon": "skrivhand",
+        "text": "Ge ett eget exempel"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Du visar en idé i flera exempel som ser olika ut, pekar på det som är lika och låter eleverna ge egna."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Ett begrepp är svårt att se i bara ord, och ett enda exempel minns eleven som det såg ut. Den som är ny i ett innehåll fastnar lätt vid det som syns först, som färgen eller hur figuren ligger. När exemplen ser olika ut och du pekar på det som är lika i alla, ser eleven vad idén är och känner igen den i ett nytt exempel. Elevens eget exempel visar dig om idén sitter."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Flera exempel",
+          "text": "ser olika ut"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "letar det som är lika"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "idén, med exempel"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Flera exempel",
+          "till": "Arbetsminnet",
+          "text": "se det lika",
+          "betonad": true
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        },
+        {
+          "fran": "Långtidsminnet",
+          "till": "Arbetsminnet",
+          "text": "känna igen"
+        }
+      ],
+      "text": "Det som är lika i exempel som ser olika ut blir idén i minnet. Då känner eleven igen den också i ett exempel hen inte har sett."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Idén och exemplen",
+        "text": "Säg begreppet eller regeln, och visa exemplen bredvid."
+      },
+      {
+        "rubrik": "Olika på ytan",
+        "text": "Två eller tre exempel som ser olika ut men har samma idé."
+      },
+      {
+        "rubrik": "Peka på det lika",
+        "text": "Visa i varje exempel var idén syns, med samma ord varje gång."
+      },
+      {
+        "rubrik": "Eleverna ger egna",
+        "text": "Var och en ger ett eget exempel och säger varför det hör dit."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Ett enda exempel, och lockande detaljer som inte hör till idén."
+    },
+    "tankPa": "Strategin tjänar innehållet: välj exempel som visar idén och inget annat som drar blicken. Ett roligt exempel skadar inte, så länge det roliga hör till idén. Ett löst exempel visar hur en uppgift görs och hör till Avlasta minnet. Här visar exemplen vad en idé är. Stödet kommer mest från studier med studenter i labb, och i skolan från försök i matematik, NO och teknik.",
+    "forskningen": {
+      "text": "Studenter som läste definitioner med exempel kände igen fler nya exempel än de som bara läste definitionerna, 0,74 till 1,67 i tre experiment (Rawson m.fl., 2015) och 0,30 när försöket gjordes om (Micallef och Newton, 2024). IES-vägledningen bedömer stödet som måttligt för att visa samma idé i flera former och peka ut det som är lika i alla, mest från labb och allt fler försök i skolan (Pashler m.fl., 2007). Nybörjare minns lätt ytan i ett exempel, och flera exempel som ser olika ut hjälper dem att föra över idén (Weinstein m.fl., 2018).",
+      "kallor": [
+        {
+          "id": "rawson-m-fl-2015",
+          "titel": "The Power of Examples: Illustrative Examples Enhance Conceptual Learning of Declarative Concepts",
+          "text": "Rawson, K. A., Thomas, R. C. och Jacoby, L. L. (2015). The Power of Examples: Illustrative Examples Enhance Conceptual Learning of Declarative Concepts. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-014-9273-3"
+        },
+        {
+          "id": "micallef-och-newton-2024",
+          "titel": "The Use of Concrete Examples Enhances the Learning of Abstract Concepts: A Replication Study",
+          "text": "Micallef, A. och Newton, P. M. (2024). The Use of Concrete Examples Enhances the Learning of Abstract Concepts: A Replication Study. Teaching of Psychology.",
+          "adress": "https://doi.org/10.1177/00986283211058069"
+        },
+        {
+          "id": "pashler-m-fl-2007",
+          "titel": "Organizing Instruction and Study to Improve Student Learning",
+          "text": "Pashler, H., Bain, P. M., Bottge, B. A. m.fl. (2007). Organizing Instruction and Study to Improve Student Learning. IES Practice Guide, National Center for Education Research.",
+          "adress": "https://files.eric.ed.gov/fulltext/ED498555.pdf"
+        },
+        {
+          "id": "weinstein-m-fl-2018",
+          "titel": "Teaching the science of learning",
+          "text": "Weinstein, Y., Madan, C. R. och Sumeracki, M. A. (2018). Teaching the science of learning. Cognitive Research: Principles and Implications.",
+          "adress": "https://doi.org/10.1186/s41235-017-0087-y"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      },
+      {
+        "titel": "Testbaserat lärande",
+        "adress": "/metoder/testbaserat-larande"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Innan klassen börjar en ny bok tar du upp vad en konflikt i en berättelse är: någon vill något, och något står i vägen. Visa tre exempel som ser olika ut, ur böcker som klassen känner: två vänner som bråkar, en storm som huvudpersonen måste ta sig igenom och ett svårt val inuti en person. Peka i varje exempel på vem som vill något och vad som står i vägen, med samma ord varje gång. Sedan hittar eleverna konflikten i den nya boken och säger de två delarna till en kamrat."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "När klassen ska skriva så att läsaren kan se det framför sig, visar du tre exempel som ser olika ut: en lerig hund, en sprucken mugg och en solig strand. Peka i varje exempel på ordet som gör att läsaren ser mer, och fråga vad de ser nu. Sedan skriver var och en ett eget exempel om något i klassrummet och läser det för en kamrat, som säger vad hen ser. Välj exempel där ordet gör skillnad, så att eleverna lär sig välja ord och inte bara lägger till fler."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "7–9",
+      "amne": "matematik",
+      "text": "När klassen lär sig proportionalitet visar du tre exempel som ser olika ut: priset på äpplen per kilo, sträckan för en cyklist som håller samma fart och mjölet i ett recept för fler personer. Peka i varje exempel på det som är lika: när det ena fördubblas, fördubblas det andra, och grafen är en rät linje genom origo. Lägg sedan till en taxiresa med en fast startavgift och fråga varför den inte är proportionell. Eleverna ger var sitt eget exempel och visar det i en tabell."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "F–3",
+      "amne": "NO",
+      "text": "När klassen lär sig vad en insekt är, visar du bilder på en myra, en fjäril och en nyckelpiga, som ser helt olika ut. Peka i varje bild på det som är lika: sex ben och en kropp i tre delar. Lägg sedan till en spindel och låt eleverna räkna benen och säga varför den inte är en insekt. Ute på skolgården letar eleverna egna exempel och visar en kamrat benen och kroppens delar."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Kärnan: Frågor om det som ska sitta",
+      "mening": "Minst en fråga kräver ett varför, ett exempel eller en metod."
+    }
+  ]
+}

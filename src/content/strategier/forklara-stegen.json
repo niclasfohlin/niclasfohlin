@@ -1,0 +1,196 @@
+{
+  "nr": 7,
+  "namn": "Förklara stegen",
+  "forskningensOrd": "self-explanation",
+  "framsida": {
+    "mening": "Säg varför du gör steget.",
+    "bild": {
+      "liknelse": "Exemplet på tavlan: eleven som skriver av stegen klarar just den uppgiften. När eleven säger varför stegen görs, ser hen regeln bakom dem, och då klarar hen en ny uppgift som ser annorlunda ut.",
+      "steg": [
+        {
+          "rubrik": "Skriver av",
+          "utfall": "Klarar just den",
+          "fil": "forklara-stegen-1.svg",
+          "alt": "En vit tavla med två halvor. Till vänster ett löst exempel i tre steg med blå penna, och till höger samma tre steg likadant med röd penna. Ett barn står vid tavlan. I hörnet en bock och en stapel av fem."
+        },
+        {
+          "rubrik": "Säger varför",
+          "utfall": "Ser regeln",
+          "fil": "forklara-stegen-2.svg",
+          "alt": "Samma tavla och exempel. Från varje steg går en violett pil till en violett rad på högra halvan, och barnet pekar på ett steg och säger något i en pratbubbla. I hörnet ett förstoringsglas och tre staplar av fem."
+        },
+        {
+          "rubrik": "En ny uppgift",
+          "utfall": "Klarar en ny",
+          "fil": "forklara-stegen-3.svg",
+          "alt": "Samma tavla. Till vänster en ny uppgift på en enda rad, som börjar med en violett fyrkant, och till höger är den löst i tre steg med röd penna och röda fyrkanter. Barnet sträcker upp armarna. I hörnet en bock och alla fem staplarna."
+        }
+      ]
+    },
+    "insikt": "Den som säger varför ett steg görs ser regeln och kan ta med den till en ny uppgift.",
+    "handling": [
+      {
+        "ikon": "forstoringsglas",
+        "text": "Läs ett steg"
+      },
+      {
+        "ikon": "pratbubbla",
+        "text": "Säg varför"
+      },
+      {
+        "ikon": "hammare",
+        "text": "Lös en ny själv"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleverna säger för sig själva eller för grannen varför ett steg görs, i ett löst exempel, i en egen lösning eller i en text."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Den som skriver av stegen klarar uppgiften så länge exemplet finns framme, men en ny uppgift som ser annorlunda ut blir svår. När eleven säger varför ett steg görs, letar hen efter regeln bakom och knyter steget till det hen redan kan. Att säga om stegen med andra ord ger inte samma vinst. Förklaringen tar tid, och vinsten syns mest i nya uppgifter."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Stegen",
+          "text": "det du ser eller gör"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "letar efter varför"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "regler och det du kan"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Stegen",
+          "till": "Arbetsminnet",
+          "text": "säg varför",
+          "betonad": true
+        },
+        {
+          "fran": "Långtidsminnet",
+          "till": "Arbetsminnet",
+          "text": "hämtar regel"
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        }
+      ],
+      "text": "När eleven säger varför ett steg görs, knyts steget till regeln bakom. Regeln kan eleven sedan ta med till en ny uppgift."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj och visa",
+        "text": "Ett steg med en regel bakom. Tänk högt: säg vad du gör och varför."
+      },
+      {
+        "rubrik": "Fråga vid steget",
+        "text": "”Varför gör du så här?” Alla får tid att tänka innan de svarar."
+      },
+      {
+        "rubrik": "Ge en ram",
+        "text": "Meningen ”Jag gör … därför att …” hjälper eleven att säga skälet."
+      },
+      {
+        "rubrik": "Rätt och fel",
+        "text": "Eleverna förklarar ett rätt steg och varför ett vanligt fel är fel."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Att eleven bara säger vad hen gör. Det är skälet som hjälper."
+    },
+    "tankPa": "Strategin tjänar innehållet: välj steg där det finns en regel eller ett samband att förstå. Förklaringarna tar tid, så låt eleverna förklara två eller tre steg och lösa resten som vanligt. De yngsta förklarar muntligt för grannen, och du visar hur ett bra skäl låter.",
+    "forskningen": {
+      "text": "Uppmaningar att förklara för sig själv gav 0,55 i 69 jämförelser, mest med studenter, och 0,43–⁠0,48 med skolelever (Bisra m.fl., 2018). I matematik var vinsten liten till måttlig direkt efter och större när eleverna fick stöd att förklara, men belägget från vanliga klassrum och efter en tid är begränsat (Rittle-Johnson m.fl., 2017). I åk 2–⁠4 gav förklaringarna mer än att lösa lika många uppgifter, men bara lite mer än fler uppgifter på samma tid (McEldoon m.fl., 2013).",
+      "kallor": [
+        {
+          "id": "bisra-m-fl-2018",
+          "titel": "Inducing Self-Explanation: a Meta-Analysis",
+          "text": "Bisra, K., Liu, Q., Nesbit, J. C. m.fl. (2018). Inducing Self-Explanation: a Meta-Analysis. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-018-9434-x"
+        },
+        {
+          "id": "rittle-johnson-m-fl-2017",
+          "titel": "Promoting self-explanation to improve mathematics learning: A meta-analysis and instructional design principles",
+          "text": "Rittle-Johnson, B., Loehr, A. M. och Durkin, K. (2017). Promoting self-explanation to improve mathematics learning: A meta-analysis and instructional design principles. ZDM Mathematics Education.",
+          "adress": "https://doi.org/10.1007/s11858-017-0834-z"
+        },
+        {
+          "id": "mceldoon-m-fl-2013",
+          "titel": "Is self-explanation worth the time? A comparison to additional practice",
+          "text": "McEldoon, K. L., Durkin, K. L. och Rittle-Johnson, B. (2013). Is self-explanation worth the time? A comparison to additional practice. British Journal of Educational Psychology.",
+          "adress": "https://doi.org/10.1111/j.2044-8279.2012.02083.x"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Explicit undervisning",
+        "adress": "/metoder/explicit-undervisning"
+      },
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "I en faktatext om hur vattnet renas i ett reningsverk stannar eleverna efter varje stycke och säger till grannen vad som händer i det steget och varför det behövs. Grannen frågar: ”Hur hänger det ihop med stycket före?” Visa först själv med det första stycket och tänk högt. Lyssna efter om eleverna säger varför steget behövs, eller bara säger om texten med andra ord."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "När eleverna skriver en mening om helgen, säger de till grannen varför de gör ett steg: ”Stor bokstav, för Ali är ett namn” eller ”Punkt, för nu är meningen slut.” Visa först själv på tavlan och säg varje skäl högt. Ta ett eller två steg i taget, så att eleverna orkar både skriva och förklara. Den som svarar ”för att det ska vara så” får en fråga som leder till skälet: ”Var börjar meningen?”"
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "7–9",
+      "amne": "matematik",
+      "text": "Visa ett löst exempel där ett pris på 240 kr ökar med 15 procent, i två rader: 100 % + 15 % = 115 %, och 240 · 1,15 = 276. Eleverna skriver bredvid varje rad varför den görs, som ”115 % är hela priset och 15 % till”. Sedan får de en felaktig lösning, 240 · 0,15 = 36, och förklarar för grannen vad som blev fel. Till sist löser de en minskning med 20 procent, som ser annorlunda ut men bygger på samma regel."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "4–6",
+      "amne": "teknik",
+      "text": "När eleverna bygger en enkel krets med batteri, två sladdar och en lampa, säger de vid varje steg varför det behövs: ”Den andra sladden går tillbaka till batteriet, för strömmen måste gå runt.” Paret turas om, så att den ena bygger och förklarar och den andra frågar varför. Sedan får paret en krets som inte lyser och förklarar vad som saknas. Lyssna efter om eleverna säger att kretsen måste vara sluten."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "larande-pa-kognitionsvetenskaplig-grund",
+      "avsnitt": "Rutinerna: Exemplet först, sedan själv",
+      "mening": "Låt alla lösa den liknande uppgiften och sedan säga varför det första steget görs."
+    },
+    {
+      "metod": "kooperativt-larande",
+      "avsnitt": "Så kan det se ut: Textilslöjd, åk 5",
+      "mening": "Den ena trär och förklarar: ”Tråden går runt här, annars blir den lös.”"
+    },
+    {
+      "metod": "kooperativt-larande",
+      "avsnitt": "Samarbetsfärdigheterna: Vecka 2: Tänka högt",
+      "mening": "”Jag tänker … därför att …”"
+    },
+    {
+      "metod": "formativ-bedomning",
+      "avsnitt": "Rutinerna: Rätta själv",
+      "mening": "Säg till din kompis vad du ändrade: ”Jag såg … Därför …”"
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "nr": 6,
+  "namn": "Fråga varför",
+  "forskningensOrd": "elaborative interrogation",
+  "framsida": {
+    "mening": "Fråga varför, och svara med det du kan.",
+    "bild": {
+      "liknelse": "Ballongen och trädet: det nya är en ballong som lätt flyger iväg, och trädet med de violetta frukterna är det eleven redan kan. När eleven frågar varför och svarar själv, knyts ballongen fast vid trädet, och då sitter den kvar.",
+      "steg": [
+        {
+          "rubrik": "Bara läsa",
+          "utfall": "Flyger iväg",
+          "fil": "fraga-varfor-1.svg",
+          "alt": "Ett barn står på en äng bredvid ett träd med violetta frukter. En gul ballong har släppt och flyger iväg, och barnet pekar efter den. I hörnet en bock och en stapel av fem."
+        },
+        {
+          "rubrik": "Fråga varför",
+          "utfall": "Letar ett skäl",
+          "fil": "fraga-varfor-2.svg",
+          "alt": "Samma äng och träd. Barnet håller ballongen i snöret och säger något i en pratbubbla. I hörnet ett förstoringsglas och tre staplar av fem."
+        },
+        {
+          "rubrik": "Svara själv",
+          "utfall": "Knuten fast",
+          "fil": "fraga-varfor-3.svg",
+          "alt": "Samma äng och träd. Ballongens snöre är knutet vid en gren på trädet, och barnet sträcker upp armarna. I hörnet en bock och fyra staplar av fem."
+        }
+      ]
+    },
+    "insikt": "Ett faktum med ett skäl sitter bättre än ett ensamt, när eleven själv hittar skälet.",
+    "handling": [
+      {
+        "ikon": "oppen-bok",
+        "text": "Läs det nya"
+      },
+      {
+        "ikon": "fragetecken",
+        "text": "Varför är det så?"
+      },
+      {
+        "ikon": "pratbubbla",
+        "text": "Svara med det du kan"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleverna frågar varför det de läser eller hör stämmer, och svarar själva med det de redan vet."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Ett faktum som eleven bara läser står för sig självt och glöms lätt. När eleven letar efter skälet söker hen i det hen redan vet, och svaret knyter det nya dit, så att det finns en väg tillbaka. Därför behöver eleven veta något om ämnet innan frågan kommer. Ett svar som inte är helt rätt hjälper också, och när eleven sedan hör ett bra svar blir det egna bättre."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Det nya",
+          "text": "ett faktum att lära"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "letar efter skälet"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "det du redan vet"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Det nya",
+          "till": "Arbetsminnet",
+          "text": "fråga varför",
+          "betonad": true
+        },
+        {
+          "fran": "Långtidsminnet",
+          "till": "Arbetsminnet",
+          "text": "hämtar skäl"
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "knyts fast"
+        }
+      ],
+      "text": "Skälet hämtar eleven ur det hen redan vet. Då knyts det nya till något som redan sitter, och det blir lättare att hitta igen."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj",
+        "text": "Ett faktum med ett skäl bakom sig, som en orsak eller ett samband."
+      },
+      {
+        "rubrik": "Visa hur",
+        "text": "Fråga och svara högt själv första gången: ”Varför är det så?”"
+      },
+      {
+        "rubrik": "Alla svarar",
+        "text": "Alla skriver eller säger ett skäl till grannen, sedan svarar några."
+      },
+      {
+        "rubrik": "Ett bra svar",
+        "text": "Läs upp ett bra svar. Eleverna gör sitt eget bättre med färgpennan."
+      }
+    ],
+    "avgor": {
+      "rubrik": "När den passar",
+      "text": "När eleverna vet något om ämnet. Annars finns inget att knyta till."
+    },
+    "tankPa": "Strategin tjänar innehållet: frågan ska leda till det klassen behöver förstå. Varje fråga tar tid, så två eller tre i en lektion räcker. En fråga som utmanar det eleverna tror, som ”Varför flyter ett stort fartyg av stål?”, får dem att tänka längre. Med de yngsta frågar du om sådant de känner väl, som djur och väder, och de svarar muntligt till grannen.",
+    "forskningen": {
+      "text": "Frågor om varför gav 0,56 i en sammanställning av tio studietekniker, mest på prov om fakta, och 0,38 i grundskolans lägre årskurser (Donoghue och Hattie, 2021). I åk 4–⁠8 lärde sig eleverna fakta bättre när de själva svarade på varför än när de fick en färdig förklaring (Wood m.fl., 1990). IES-vägledningen bedömer stödet för frågor om varför som starkt, i studier som oftast gällde åk 4 och uppåt, och rekommenderar dem när eleverna har grunderna (Pashler m.fl., 2007). Dunlosky (2013) kallar tekniken lovande men lite prövad i klassrummet, och den hjälper mindre yngre elever som vet lite om ämnet.",
+      "kallor": [
+        {
+          "id": "donoghue-hattie-2021",
+          "titel": "A Meta-Analysis of Ten Learning Techniques",
+          "text": "Donoghue, G. M. och Hattie, J. A. C. (2021). A Meta-Analysis of Ten Learning Techniques. Frontiers in Education.",
+          "adress": "https://doi.org/10.3389/feduc.2021.581216"
+        },
+        {
+          "id": "wood-m-fl-1990",
+          "titel": "Elaborative interrogation effects on children's learning of factual content",
+          "text": "Wood, E., Pressley, M. och Winne, P. H. (1990). Elaborative interrogation effects on children's learning of factual content. Journal of Educational Psychology.",
+          "adress": "https://doi.org/10.1037/0022-0663.82.4.741"
+        },
+        {
+          "id": "pashler-m-fl-2007",
+          "titel": "Organizing Instruction and Study to Improve Student Learning",
+          "text": "Pashler, H., Bain, P. M., Bottge, B. A. m.fl. (2007). Organizing Instruction and Study to Improve Student Learning. IES Practice Guide, National Center for Education Research.",
+          "adress": "https://files.eric.ed.gov/fulltext/ED498555.pdf"
+        },
+        {
+          "id": "dunlosky-2013",
+          "titel": "Strengthening the Student Toolbox: Study Strategies to Boost Learning",
+          "text": "Dunlosky, J. (2013). Strengthening the Student Toolbox: Study Strategies to Boost Learning. American Educator.",
+          "adress": "https://www.aft.org/sites/default/files/dunlosky_0.pdf"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Testbaserat lärande",
+        "adress": "/metoder/testbaserat-larande"
+      },
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "När klassen läser en faktatext om djur på vintern, stannar du vid en mening som har ett skäl bakom sig, som ”Ekorren samlar nötter på hösten.” Du frågar: ”Varför gör den det?” Eleverna tänker en stund och säger ett skäl till grannen, med det de redan vet. Sedan läser ni vidare och ser om texten säger samma sak. Välj djur som eleverna känner, så att de har något att svara med."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "7–9",
+      "amne": "svenska",
+      "text": "Inför en förklarande text om varför ett djur är utrotningshotat skriver eleverna tre fakta ur sina källor i planeringen. Bredvid varje faktum svarar de på ”Varför är det så?” med en mening som börjar med eftersom. Grannen läser planeringen och frågar varför en gång till där skälet saknas. Skälen blir det som binder ihop texten, så att den förklarar varför."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "4–6",
+      "amne": "matematik",
+      "text": "När klassen har övat att multiplicera med 10, skriver du på tavlan: ”När du multiplicerar med 10 flyttar varje siffra ett steg åt vänster.” Du frågar: ”Varför blir det så?” Eleverna svarar först själva, med tiobasmaterial eller en positionstabell som stöd, och förklarar sedan för grannen. Lyssna efter om svaret säger att varje ental blir ett tiotal och varje tiotal ett hundratal. Ta frågan när klassen kan räkna uppgifterna, så att eleverna har något att bygga svaret på."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "7–9",
+      "amne": "SO",
+      "text": "När klassen har läst att de första städerna växte fram vid floder som Nilen, Eufrat och Tigris, frågar du: ”Varför just vid floder?” Eleverna skriver två skäl med det de redan vet om vatten, jordbruk och resor, och jämför med grannen. Sedan läser du upp ett bra svar, och eleverna lägger till det de saknade med färgpennan. Frågan fungerar när klassen vet något om ämnet, och därför kommer den efter genomgången."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Kärnan: Frågor om det som ska sitta",
+      "mening": "Minst en fråga kräver ett varför, ett exempel eller en metod."
+    },
+    {
+      "metod": "larande-pa-kognitionsvetenskaplig-grund",
+      "avsnitt": "Lektionen: Avslut",
+      "mening": "Med boken stängd svarar eleverna ur minnet på lektionens fråga, med en rad eller en skiss, och förklarar för grannen, som frågar varför."
+    },
+    {
+      "metod": "formativ-bedomning",
+      "avsnitt": "Elever som behöver mer stöd: Den som redan kan",
+      "mening": "Eleven får en fråga till: varför är de andra svaren fel?"
+    }
+  ]
+}

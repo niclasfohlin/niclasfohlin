@@ -1,0 +1,176 @@
+{
+  "nr": 10,
+  "namn": "Gissa först",
+  "forskningensOrd": "pretesting, prequestions",
+  "framsida": {
+    "mening": "Gissa svaret innan du lär dig det.",
+    "bild": {
+      "liknelse": "Luckan på tavlan: frågan är en tom lucka med ädelstenens form, och ädelstenen är det eleven ska kunna. Barnet gissar med en grå sten som inte passar. När läraren visar ädelstenen känner barnet igen formen, ser att den passar i luckan och minns den.",
+      "steg": [
+        {
+          "rubrik": "Frågan",
+          "utfall": "Vet inte än",
+          "fil": "gissa-forst-1.svg",
+          "alt": "En lärare står vid tavlan och ställer en fråga, och ett barn funderar med handen vid hakan. På tavlan finns en tom lucka med en ädelstens form och ett frågetecken i. I hörnet ett kryss och fem tomma staplar."
+        },
+        {
+          "rubrik": "Gissningen",
+          "utfall": "Fel, men letar",
+          "fil": "gissa-forst-2.svg",
+          "alt": "Samma klassrum. Barnet gissar och håller upp en grå, rund sten som inte har luckans form, och läraren lyssnar. I hörnet ett förstoringsglas och en stapel av fem."
+        },
+        {
+          "rubrik": "Svaret",
+          "utfall": "Sitter kvar",
+          "fil": "gissa-forst-3.svg",
+          "alt": "Samma klassrum. En violett ädelsten sitter i luckan och lyser, och läraren och barnet pekar på den. Den grå stenen ligger nedanför. I hörnet en bock och tre staplar av fem."
+        }
+      ]
+    },
+    "insikt": "Gissningen får eleven att leta efter svaret, också när den är fel.",
+    "handling": [
+      {
+        "ikon": "fragetecken",
+        "text": "Läs frågan"
+      },
+      {
+        "ikon": "skrivhand",
+        "text": "Skriv en gissning"
+      },
+      {
+        "ikon": "forstoringsglas",
+        "text": "Leta efter svaret"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleverna gissar på en fråga om det nya innan du undervisar, och får svaret samma lektion."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Frågan visar eleven vad som är viktigt innan det nya kommer. Den som har gissat letar efter svaret och lägger märke till det, och då fastnar det bättre. Att gissa ger mer än att bara läsa frågan, och det gäller också när gissningen var fel, om eleven får se det rätta. Vinsten stannar mest vid det som frågan handlade om, och därför ska frågan gälla det viktigaste."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Frågan",
+          "text": "en lucka att fylla"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "det du tänker på nu"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "allt du kan"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Frågan",
+          "till": "Arbetsminnet",
+          "text": "styr blicken",
+          "betonad": true
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        }
+      ],
+      "text": "Gissningen gör att eleven letar efter svaret när det nya kommer. Det eleven letar efter lägger hen märke till, och det kan fastna i långtidsminnet."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj frågan",
+        "text": "En eller två frågor om det viktigaste, som lektionen svarar på."
+      },
+      {
+        "rubrik": "Alla gissar",
+        "text": "Var och en skriver en gissning på en minut, innan någon säger sin."
+      },
+      {
+        "rubrik": "Rätta ingen gissning",
+        "text": "Säg att gissningen får vara fel. Den räknas inte."
+      },
+      {
+        "rubrik": "Svaret samma lektion",
+        "text": "Eleverna jämför gissningen med svaret och fyller i med en annan färg."
+      }
+    ],
+    "avgor": {
+      "rubrik": "När den passar",
+      "text": "Före något nytt, när svaret kommer i samma lektion eller text."
+    },
+    "tankPa": "Strategin tjänar innehållet: fråga om det eleverna ska förstå, eftersom de lär sig mer av just det som frågan gäller. En gissning är ingen kontroll, så räkna den inte, och låt alla skriva sin egen innan någon säger sin högt. De yngsta behöver höra det rätta svaret direkt efter gissningen, innan du läser eller visar det nya.",
+    "forskningen": {
+      "text": "I 97 studier lärde sig de som först fick frågor mer av just det som frågorna gällde, 0,54, men knappt något mer av resten av materialet, 0,04 i 91 studier. Effekten var större när de gissade än när de bara läste frågorna. För barn i skolåldern var den 0,22 i 20 studier, och där är resultatet osäkert. De flesta forskare förklarar effekten med att frågan riktar uppmärksamheten mot det den gäller, och att nyfikenheten ligger bakom har bara svagt stöd (St. Hilaire m.fl., 2024). De flesta studierna är gjorda med studenter, och få är gjorda i klassrum (Pan och Carpenter, 2023). Barn på fem och sex år som en och en lyssnade på en faktaberättelse lärde sig mer efter frågor bara när de fick det rätta svaret direkt efter gissningen (Yu m.fl., 2025).",
+      "kallor": [
+        {
+          "id": "st-hilaire-m-fl-2024",
+          "titel": "Guessing as a learning intervention: A meta-analytic review of the prequestion effect",
+          "text": "St. Hilaire, K. J., Chan, J. C. K. och Ahn, D. (2024). Guessing as a learning intervention: A meta-analytic review of the prequestion effect. Psychonomic Bulletin & Review.",
+          "adress": "https://doi.org/10.3758/s13423-023-02353-8"
+        },
+        {
+          "id": "pan-och-carpenter-2023",
+          "titel": "Prequestioning and Pretesting Effects: a Review of Empirical Research, Theoretical Perspectives, and Implications for Educational Practice",
+          "text": "Pan, S. C. och Carpenter, S. K. (2023). Prequestioning and Pretesting Effects: a Review of Empirical Research, Theoretical Perspectives, and Implications for Educational Practice. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-023-09814-5"
+        },
+        {
+          "id": "yu-m-fl-2025",
+          "titel": "Prequestioning with feedback fosters learning in young children",
+          "text": "Yu, L., Heng, J. T., Arden-Gardner, L. S., Ding, X. P. och Pan, S. C. (2025). Prequestioning with feedback fosters learning in young children. Learning and Instruction.",
+          "adress": "https://doi.org/10.1016/j.learninstruc.2025.102187"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      },
+      {
+        "titel": "Faktatextsamtal i grupp",
+        "adress": "/stodundervisning/faktatextsamtal-i-grupp"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "Innan du läser en faktabok om igelkottar högt, visar du omslaget och frågar: ”Vad äter en igelkott?” Eleverna säger sin gissning till en kamrat, och sedan säger du svaret direkt: ”Den äter mest insekter, maskar och sniglar, och det ska vi höra i boken.” Gör likadant med en fråga till, som ”Var sover den på vintern?”, och läs boken direkt efteråt. Stanna där svaret kommer: ”Här står det. Vad gissade du först?”"
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Innan klassen läser en modelltext, en insändare om skolgården, ställer du frågan: ”Vad gör skribenten för att få läsaren att hålla med?” Eleverna skriver en gissning med två saker på en minut. Sedan läser ni insändaren tillsammans, och eleverna stryker under det som svarar på frågan. De jämför med sin gissning och skriver med en annan färg det de inte hade tänkt på."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "7–9",
+      "amne": "matematik",
+      "text": "Innan genomgången om procent i flera steg skriver du på tavlan: ”En jacka sänks med 20 procent och sedan med 20 procent till. Är den nu 40 procent billigare?” Alla skriver ja eller nej och en mening om varför, och du rättar ingen gissning. Genomgången svarar på frågan, och sist räknar eleverna ut priset på en jacka för 1 000 kronor och jämför med sin gissning. Den kostar då 640 kronor och är alltså 36 procent billigare."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "4–6",
+      "amne": "NO",
+      "text": "Innan ni gör försöket med isbitar i ett glas vatten, frågar du: ”Vad händer med vattenytan när isen smälter? Stiger den, sjunker den eller står den kvar?” Var och en ritar sin gissning med ett streck på en bild av glaset. Märk ytan med en tuschpenna när isbitarna flyter fritt, och vänta tills isen har smält. Ytan står kvar, och eleverna jämför med sin gissning och försöker förklara varför."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "larande-pa-kognitionsvetenskaplig-grund",
+      "avsnitt": "Lektionen: Det nya",
+      "mening": "Läs lektionens fråga högt. ”Skriv en gissning på en minut. Det får vi svar på i dag.” Rätta ingen gissning."
+    }
+  ]
+}

@@ -27,6 +27,9 @@ const html = (vag) => { const f = join(DIST, vag, 'index.html'); return existsSy
 const text = (pdf, ...sidor) => execFileSync('pdftotext', ['-enc', 'UTF-8', ...(sidor.length ? ['-f', String(sidor[0]), '-l', String(sidor[1] ?? sidor[0])] : []), pdf, '-'], { encoding: 'utf8' });
 const sidorna = (pdf) => Number(/Pages:\s+(\d+)/.exec(execFileSync('pdfinfo', [pdf], { encoding: 'utf8' }))?.[1] ?? 0);
 const enRad = (t) => t.replace(/\s+/g, ' ');
+// Ett namn på bladet som bryts över två rader läser pdftotext med numret emellan, som "Blanda 5 uppgifter", eftersom numret
+// står mitt för namnet och meningen.
+const pabladet = (namn) => new RegExp(namn.split(' ').map((o) => o.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join(' (?:\\d+ )?'));
 
 for (const s of utkast) {
   if (html(join('strategier', s.id))) fel.push(`${s.namn} är utkast men har en sida i dist`);
@@ -71,7 +74,7 @@ if (visas.length) {
   else {
     if (sidorna(bladet) !== 1) fel.push(`Bladet med alla har ${sidorna(bladet)} sidor, inte en`);
     const t = enRad(text(bladet));
-    for (const s of visas) if (!t.includes(s.namn)) fel.push(`Bladet med alla saknar ${s.namn}`);
+    for (const s of visas) if (!pabladet(s.namn).test(t)) fel.push(`Bladet med alla saknar ${s.namn}`);
   }
 }
 

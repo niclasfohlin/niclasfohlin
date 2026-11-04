@@ -158,17 +158,19 @@ export function minnetsBild(m) {
 export function bladetHtml(strategier, { typsnitt, titel, mitten }) {
   // Spalterna efter antalet, så att bladet alltid är ett A4: tre för en metods fem, fyra till tolv och fem till tjugo.
   const kolumner = strategier.length <= 6 ? 3 : strategier.length <= 12 ? 4 : 5;
-  const tat = strategier.length > 12;
+  // Storleken efter antalet: en metods fem står stort, och numret står mitt för namnet och meningen, som rutans text står mitt
+  // i rutan (verifieringen 2026-11-04: numret stod mitt i rutan och texten överst, med en tom yta under).
+  const m = strategier.length <= 6 ? { nr: 16, nrPt: 26, namn: 26, rad: 17, pad: '5mm 6mm', gap: 5 } : strategier.length <= 12 ? { nr: 12, nrPt: 19, namn: 18, rad: 13, pad: '3mm 4mm', gap: 4 } : { nr: 10, nrPt: 16, namn: 15, rad: 11, pad: '2.5mm 3mm', gap: 3 };
   return `<!doctype html><html lang="sv"><head><meta charset="utf-8"><title>${esc(titel)}</title><style>${stil(typsnitt)}
 @page { size: A4 landscape; margin: 0; }
 .blad { width: 297mm; height: 210mm; padding: 12mm 14mm 10mm; display: flex; flex-direction: column; gap: 6mm; position: relative; background: linear-gradient(180deg, #ece8f8 0%, #f6f4fc 60%, #f9f8fd 100%); }
 .blad h1 { margin: 0; font-size: 40pt; font-weight: 600; line-height: 1; color: var(--strategi-mork); }
 .blad .mitten { margin: 0; padding: 4mm 6mm; border-radius: 4mm; background: #fff; box-shadow: 0 0.6mm 0 var(--kant); font-size: 18pt; font-weight: 600; line-height: 1.2; color: var(--strategi-mork); }
-.blad ol { list-style: none; margin: 0; padding: 0; flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(${kolumner}, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: ${tat ? 3 : 4}mm; }
-.blad li { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 1mm 2.5mm; align-content: center; min-height: 0; padding: ${tat ? '2mm 3mm' : '3mm 4mm'}; border-radius: 4mm; background: #fff; box-shadow: 0 0.6mm 0 var(--kant); overflow: hidden; }
-.blad li .nr { grid-row: span 2; width: ${tat ? 9 : 11}mm; height: ${tat ? 9 : 11}mm; font-size: ${tat ? 15 : 18}pt; align-self: center; color: #fff; }
-.blad li b { font-size: ${tat ? 14 : 17}pt; font-weight: 600; line-height: 1.1; }
-.blad li .rad { font-size: ${tat ? 10.5 : 12}pt; line-height: 1.22; color: var(--blak-svag); }
+.blad ol { list-style: none; margin: 0; padding: 0; flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(${kolumner}, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: ${m.gap}mm; }
+.blad li { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; gap: 1mm 3mm; align-content: center; min-height: 0; padding: ${m.pad}; border-radius: 4mm; background: #fff; box-shadow: 0 0.6mm 0 var(--kant); overflow: hidden; }
+.blad li .nr { grid-row: span 2; width: ${m.nr}mm; height: ${m.nr}mm; font-size: ${m.nrPt}pt; align-self: center; color: #fff; }
+.blad li b { align-self: end; font-size: ${m.namn}pt; font-weight: 600; line-height: 1.1; }
+.blad li .rad { align-self: start; font-size: ${m.rad}pt; line-height: 1.22; color: var(--blak-svag); }
 .blad .upphov { left: 14mm; right: auto; bottom: 4mm; }
 </style></head><body><div class="blad"><h1>Strategier</h1>${mitten ? `<p class="mitten">${esc(mitten)}</p>` : ''}
 <ol>${strategier.map((s) => `<li><span class="nr">${s.nr}</span><b>${esc(s.namn)}</b><span class="rad">${esc(s.mening)}</span></li>`).join('')}</ol>

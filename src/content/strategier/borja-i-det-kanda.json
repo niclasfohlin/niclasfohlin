@@ -1,0 +1,186 @@
+{
+  "nr": 11,
+  "namn": "Börja i det kända",
+  "forskningensOrd": "prior knowledge activation",
+  "framsida": {
+    "mening": "Koppla det nya till det du redan kan.",
+    "bild": {
+      "liknelse": "Kistan med ädelstenar: det eleven redan kan ligger som ädelstenar i en kista, och den nya ädelstenen är blek och hänger löst. När barnet öppnar kistan kommer stenarna fram, och barnet knyter den nya till dem. Då lyser den nya som de andra.",
+      "steg": [
+        {
+          "rubrik": "Bara det nya",
+          "utfall": "Hänger löst",
+          "fil": "borja-i-det-kanda-1.svg",
+          "alt": "Ett barn står på en äng bredvid en stängd kista och funderar. En blek ädelsten lutar snett en bit bort. I hörnet ett kryss och en stapel av fem."
+        },
+        {
+          "rubrik": "Det du vet",
+          "utfall": "Kommer fram",
+          "fil": "borja-i-det-kanda-2.svg",
+          "alt": "Samma äng. Barnet har öppnat kistan och håller i locket, och tre violetta ädelstenar lyser i den. Den bleka ädelstenen lutar som förut. I hörnet ett förstoringsglas och en stapel av fem."
+        },
+        {
+          "rubrik": "Koppla ihop",
+          "utfall": "Sitter fast",
+          "fil": "borja-i-det-kanda-3.svg",
+          "alt": "Samma äng. Ett guldsnöre går från ädelstenarna i kistan till den nya ädelstenen, som nu står rak och är lika violett som de andra. Barnet sträcker upp armarna. I hörnet en bock och tre staplar av fem."
+        }
+      ]
+    },
+    "insikt": "Det nya blir begripligt när det kända är framme i tanken och eleven kopplar ihop dem.",
+    "handling": [
+      {
+        "ikon": "fragetecken",
+        "text": "Vad vet du redan?"
+      },
+      {
+        "ikon": "pratbubbla",
+        "text": "Säg det till grannen"
+      },
+      {
+        "ikon": "pusselbit",
+        "text": "Koppla till det nya"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Innan du visar något nytt tar eleverna fram det de redan vet om saken, och du kopplar det nya till det."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Det eleven redan kan påverkar hur hen förstår det nya, och det kan både hjälpa och stjälpa. Det kända hjälper bara när det kommer fram i tanken just när det nya kommer. När eleverna säger det de vet, och du visar var det nya liknar det och var det skiljer sig, får det nya något att fästa vid. Det som är fel i det eleverna tror kommer också fram. Säg att det nya kanske visar något annat, och bemöt felet när det nya kommer, eftersom ett fel som får stå kvar kan stå i vägen."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Det nya",
+          "text": "får något att fästa vid"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "det du tänker på nu"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "det du redan kan"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Långtidsminnet",
+          "till": "Arbetsminnet",
+          "text": "väck först",
+          "betonad": true
+        },
+        {
+          "fran": "Det nya",
+          "till": "Arbetsminnet",
+          "text": "kopplas på"
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        }
+      ],
+      "text": "Det eleven redan kan ligger i långtidsminnet. Det hjälper först när det kommer fram i arbetsminnet, och där kan det nya kopplas på."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj det som behövs",
+        "text": "Det som det nya bygger på, och inget annat om ämnet."
+      },
+      {
+        "rubrik": "Prata med grannen",
+        "text": "Eleverna säger till grannen vad de vet om det, innan du visar något."
+      },
+      {
+        "rubrik": "Koppla ihop",
+        "text": "Visa var det nya liknar det de sa, och var det skiljer sig."
+      },
+      {
+        "rubrik": "Lyssna efter fel",
+        "text": "Skriv upp det som inte stämmer, och säg att det nya kan visa annat."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Att fråga brett om allt eleverna vet om ämnet."
+    },
+    "tankPa": "Strategin tjänar innehållet: väck bara det som det nya bygger på, eftersom det som inte hör hit kan störa. Saknar eleverna det som behövs, ge dem det först, med en bild, ett föremål eller en kort text. De yngsta behöver en konkret fråga eller en sak att titta på.",
+    "forskningen": {
+      "text": "Det eleven redan kan i ett ämne hänger starkt ihop med vad hen kan efteråt, 0,53 i 476 studier, men i genomsnitt inte med hur mycket hen lär sig, och felaktiga föreställningar kan stå i vägen (Simonsmeier m.fl., 2022). I en översikt av 54 artiklar om läsning hjälpte det olika mycket att väcka förkunskaperna, beroende på hur mycket och hur riktigt eleverna redan visste, och det som inte hörde till texten kunde störa. För elever mellan 8 och 14 år hjälpte samtal i par, grupp och helklass i några studier, men nästan hälften av försöken gjordes med studenter, och ingen samlad effekt är uträknad (Hattan m.fl., 2024). EEF räknar det till sex lässtrategier, och att lära ut dem tillsammans har mycket starkt stöd i åtta metaanalyser (Higgins m.fl., 2017). Ingen av källorna mäter hur mycket det hjälper att väcka förkunskaperna för sig.",
+      "kallor": [
+        {
+          "id": "simonsmeier-m-fl-2022",
+          "titel": "Domain-Specific Prior Knowledge and Learning: A Meta-Analysis",
+          "text": "Simonsmeier, B. A., Flaig, M., Deiglmayr, A., Schalk, L. och Schneider, M. (2022). Domain-Specific Prior Knowledge and Learning: A Meta-Analysis. Educational Psychologist.",
+          "adress": "https://doi.org/10.1080/00461520.2021.1939700"
+        },
+        {
+          "id": "hattan-m-fl-2024",
+          "titel": "Leveraging What Students Know to Make Sense of Texts: What the Research Says About Prior Knowledge Activation",
+          "text": "Hattan, C., Alexander, P. A. och Lupo, S. M. (2024). Leveraging What Students Know to Make Sense of Texts: What the Research Says About Prior Knowledge Activation. Review of Educational Research.",
+          "adress": "https://doi.org/10.3102/00346543221148478"
+        },
+        {
+          "id": "higgins-m-fl-2017",
+          "titel": "Improving Literacy in Key Stage 2. Guidance report",
+          "text": "Higgins, S., Martell, T., Waugh, D., Henderson, P. och Sharples, J. (2017). Improving Literacy in Key Stage 2. Guidance report. Education Endowment Foundation.",
+          "adress": "https://dera.ioe.ac.uk/id/eprint/29345/"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Explicit undervisning",
+        "adress": "/metoder/explicit-undervisning"
+      },
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Innan ni läser en faktatext om hur kroppen skyddar sig mot bakterier, frågar du: ”Vad händer när du får ett sår på knät?” Eleverna berättar för grannen, och du skriver några av deras ord på tavlan, som var, sårskorpa och svullet. Under läsningen stannar ni där texten förklarar något av det: ”Här står varför det blir svullet.” Fråga bara om det som texten bygger på, så att samtalet håller sig till texten."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "Innan eleverna skriver en instruktion om hur man borstar tänderna, gör alla rörelserna med en låtsastandborste och säger stegen till grannen. Du ritar en bild för varje steg som eleverna säger, i den ordning de kommer. Fråga: ”Vad gör du först? Vad gör du sedan?” Eleverna skriver sedan sin instruktion med bilderna framför sig."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "4–6",
+      "amne": "matematik",
+      "text": "Innan klassen börjar med negativa tal, frågar du hur kallt det var i morse och visar en termometer. Eleverna pekar ut var 3 grader kallt och 2 grader varmt står, och säger hur många grader det skiljer. Rita sedan tallinjen bredvid termometern, så att eleverna ser att det är samma skala. Fråga sist vad −3 + 5 blir, och låt eleverna visa det på termometern."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "7–9",
+      "amne": "NO",
+      "text": "Innan klassen läser om fotosyntesen, frågar du vad eleverna vet om luften de andas ut och om vad en växt behöver för att växa. De säger det till grannen, och du skriver på tavlan det som fotosyntesen bygger på: koldioxid, vatten och ljus. Säger någon att växten blir till av jord, skriver du det för sig och säger: ”Texten kanske säger något annat. Lyssna efter det.” När texten säger att det mesta av växtens torrvikt kommer från koldioxiden i luften, pekar du på ordet koldioxid och på det som står för sig."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "explicit-undervisning",
+      "avsnitt": "Lektionen: Start",
+      "mening": "Kan alla det som det nya bygger på?"
+    },
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Lagret: Din lektion",
+      "mening": "Är frågan med flest fel en förkunskap till i dag, börja lektionen där."
+    }
+  ]
+}

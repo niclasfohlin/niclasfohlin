@@ -1,0 +1,197 @@
+{
+  "nr": 14,
+  "namn": "Från sak till tecken",
+  "forskningensOrd": "concreteness fading",
+  "framsida": {
+    "mening": "Börja med saken, rita den och skriv tecknet.",
+    "bild": {
+      "liknelse": "Kartan över skolgården: först bygger barnet gården med saker på en skiva, sedan ritar hen samma gård på ett papper och sist läser hen kartans tecken. Varje tecken står på samma plats som saken, så barnet vet vad det betyder.",
+      "steg": [
+        {
+          "rubrik": "Med saker",
+          "utfall": "Ser vad det är",
+          "fil": "fran-sak-till-tecken-1.svg",
+          "alt": "Ett barn pekar på en modell av en skolgård på ett bord: ett träd, ett hus, en damm och en ädelsten på en grön skiva. I hörnet en bock och två staplar av fem."
+        },
+        {
+          "rubrik": "Med en bild",
+          "utfall": "Kopplar ihop",
+          "fil": "fran-sak-till-tecken-2.svg",
+          "alt": "Samma bord med ett papper där trädet, huset, dammen och ädelstenen är ritade på samma platser. Barnet funderar. I hörnet ett förstoringsglas och tre staplar av fem."
+        },
+        {
+          "rubrik": "Med tecken",
+          "utfall": "Förstår tecknen",
+          "fil": "fran-sak-till-tecken-3.svg",
+          "alt": "Samma papper som en karta: en grön ring, en mörk ruta, en blå fläck och en violett romb på samma platser, och en streckad väg från en korallröd prick till romben. Barnet sträcker upp armarna. I hörnet en bock och alla fem staplarna."
+        }
+      ]
+    },
+    "insikt": "Tecknet får mening av saken det står för. Ta bort saken ett steg i taget.",
+    "handling": [
+      {
+        "ikon": "tegelsten",
+        "text": "Bygg med saker"
+      },
+      {
+        "ikon": "rita",
+        "text": "Rita det du byggde"
+      },
+      {
+        "ikon": "skrivhand",
+        "text": "Skriv med tecken"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleverna arbetar först med saker, sedan med en enkel bild och sist med tecken, och du visar vad som hör ihop i varje steg."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "När eleven håller i saken syns vad det handlar om, men kunskapen fastnar lätt i just den saken. Tecken som siffror, bokstäver och formler går att använda överallt, men utan något att stå för blir de regler att lära utantill. När eleven går från saken via en bild till tecknet, och ser vad som motsvarar vad i varje steg, får tecknet sin mening. Saken finns kvar i minnet att gå tillbaka till när tecknet känns tomt."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Saken",
+          "text": "det du håller i"
+        },
+        {
+          "namn": "Bilden",
+          "text": "bara det viktiga kvar"
+        },
+        {
+          "namn": "Tecknet",
+          "text": "gäller överallt"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Saken",
+          "till": "Bilden",
+          "text": "rita"
+        },
+        {
+          "fran": "Bilden",
+          "till": "Tecknet",
+          "text": "förenkla"
+        },
+        {
+          "fran": "Tecknet",
+          "till": "Saken",
+          "text": "minns saken",
+          "betonad": true
+        }
+      ],
+      "text": "Varje steg tar bort det som inte behövs och behåller det som hör ihop. När tecknet känns tomt kan eleven tänka på saken igen."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj en enkel sak",
+        "text": "Kuber, remsor eller en våg som visar det viktiga, utan pynt."
+      },
+      {
+        "rubrik": "Säg vad som hör ihop",
+        "text": "Peka på saken och tecknet samtidigt: ”Staven är en tia.”"
+      },
+      {
+        "rubrik": "Ett steg i taget",
+        "text": "Från saken till en enkel bild, och till tecknet när bilden går rätt."
+      },
+      {
+        "rubrik": "Tillbaka till saken",
+        "text": "När tecknet blir en regel utan mening, låt eleven visa med saken."
+      }
+    ],
+    "avgor": {
+      "rubrik": "När den passar",
+      "text": "När ett nytt tecken står för något som går att visa med en sak."
+    },
+    "tankPa": "Strategin tjänar innehållet: välj saken efter det tecknet ska betyda. Välj enkla kuber och remsor framför saker med många detaljer, som leksakspengar. Gå vidare till tecknet när eleven gör rätt med bilden, och ta bort saken och bilden först när eleven gör rätt med tecknen. Låt saken ligga framme för den som behöver gå tillbaka. Strategin är mest prövad i matematik, och i NO har den inte alltid gett mer än att stanna vid saken.",
+    "forskningen": {
+      "text": "Fyfe m.fl. (2014) beskriver hur saken tonas ut mot tecknet i matematik och NO. IES-vägledningen bedömer stödet för att koppla ihop saker och tecken som måttligt (Pashler m.fl., 2007), och WWC stödet som starkt för saker och bilder som kopplas till tecknen, i 28 studier av stödundervisning i matematik i F–⁠6 (Fuchs m.fl., 2021). Undervisning med föremål gav 0,37 mot bara tecken i 55 studier, mer för 7–⁠11 år och med lärarens vägledning (Carbonneau m.fl., 2013). I NO för 9–⁠12 år klarade elever som bara arbetade med den konkreta formen i en simulering nya uppgifter minst lika bra som de som fick strategin (Jaakkola och Veermans, 2018).",
+      "kallor": [
+        {
+          "id": "fyfe-m-fl-2014",
+          "titel": "Concreteness Fading in Mathematics and Science Instruction: A Systematic Review",
+          "text": "Fyfe, E. R., McNeil, N. M., Son, J. Y. och Goldstone, R. L. (2014). Concreteness Fading in Mathematics and Science Instruction: A Systematic Review. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-014-9249-3"
+        },
+        {
+          "id": "pashler-m-fl-2007",
+          "titel": "Organizing Instruction and Study to Improve Student Learning",
+          "text": "Pashler, H., Bain, P. M., Bottge, B. A. m.fl. (2007). Organizing Instruction and Study to Improve Student Learning. IES Practice Guide, National Center for Education Research.",
+          "adress": "https://files.eric.ed.gov/fulltext/ED498555.pdf"
+        },
+        {
+          "id": "fuchs-m-fl-2021",
+          "titel": "Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades",
+          "text": "Fuchs, L. S., Newman-Gonchar, R., Schumacher, R. m.fl. (2021). Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades (WWC 2021006). What Works Clearinghouse, Institute of Education Sciences.",
+          "adress": "https://ies.ed.gov/ncee/WWC/Docs/PracticeGuide/WWC2021006-Math-PG.pdf"
+        },
+        {
+          "id": "carbonneau-m-fl-2013",
+          "titel": "A meta-analysis of the efficacy of teaching mathematics with concrete manipulatives",
+          "text": "Carbonneau, K. J., Marley, S. C. och Selig, J. P. (2013). A meta-analysis of the efficacy of teaching mathematics with concrete manipulatives. Journal of Educational Psychology.",
+          "adress": "https://doi.org/10.1037/a0031084"
+        },
+        {
+          "id": "jaakkola-veermans-2018",
+          "titel": "Exploring the effects of concreteness fading across grades in elementary school science education",
+          "text": "Jaakkola, T. och Veermans, K. (2018). Exploring the effects of concreteness fading across grades in elementary school science education. Instructional Science.",
+          "adress": "https://doi.org/10.1007/s11251-017-9428-y"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      },
+      {
+        "titel": "Explicit undervisning",
+        "adress": "/metoder/explicit-undervisning"
+      },
+      {
+        "titel": "Bråkkurs i grupp",
+        "adress": "/stodundervisning/brakkurs-i-grupp"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "F–3",
+      "amne": "svenska",
+      "text": "Säg ordet sol långsamt, och låt eleverna lägga en kloss för varje ljud de hör: s, o, l. Sedan drar de ett streck på bladet för varje ljud, och sist skriver de bokstaven på strecket och läser ordet. Peka på klossen, strecket och bokstaven för samma ljud medan ni säger det: ”Här är sss.” Ta bort klossarna när eleverna hör ljuden utan dem, och låt dem ligga kvar för den som behöver."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Två elever spelar upp ett kort samtal, och den som talar håller upp en pratbubbla av papp. Sedan ritar de samtalet som en serie med pratbubblor, och sist skriver de det som text med citattecken runt det som sägs. Peka på bubblan och tecknen samtidigt: ”Här börjar bubblan, och här börjar citattecknet.” Den som glömmer tecknen ritar en bubbla runt repliken igen."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "7–9",
+      "amne": "matematik",
+      "text": "Lägg tre påsar med lika många kulor och två lösa kulor i ena vågskålen, och elva kulor i den andra. Eleverna tar bort två kulor från varje sida och ser att tre påsar väger lika mycket som nio kulor, så att varje påse har tre. Sedan ritar de vågen med rutor för påsarna och prickar för kulorna, och sist skriver de 3x + 2 = 11 och samma steg som ekvation. Fråga vid varje steg vad det motsvarar i vågen."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "F–3",
+      "amne": "SO",
+      "text": "Eleverna bygger klassrummet på ett bord med klossar för bänkarna, katedern och dörren. Sedan ritar de klassrummet ovanifrån på ett papper, med en ruta för varje bänk på samma plats som klossen. Sist byter de bilderna mot kartans tecken och gör en teckenförklaring, och en kamrat letar upp en gömd sak med hjälp av kartan. Gå sedan vidare till kartan över skolgården, och peka på tecknet och platsen samtidigt."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "explicit-undervisning",
+      "avsnitt": "Så kan det se ut: Matematik, åk 2–⁠3",
+      "mening": "Vid bordet växlar de tre tio entalskuber mot en tiotalsstav, och de två räknar 6 + 7 med kuberna."
+    }
+  ]
+}

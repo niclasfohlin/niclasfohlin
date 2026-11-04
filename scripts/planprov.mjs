@@ -2675,8 +2675,9 @@ try {
   await f.tryck('#pl-veckan .pl-nasta [data-visa-pass=""]');
   sant('och tillbaka till nästa pass', (await f.text('#pl-veckan .pl-passnamn')) === 'Vecka 3 · pass 2 · Paren samtalar · 8 av 18');
   // Och metodens material, med materialets rubrik (länkgranskningen av omgång 1 2026-10-26).
-  // Sist verktyget som står i början av metodens sida, Strukturer, invävt med fler än två strukturer (K-673, vavdaIBorjan).
-  sant('länkarna till passet i metoden, materialet, stödet när eleven fastnar och verktygen', (await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-lankar a')].map((a) => a.getAttribute('href')).join()`)) === '/stodundervisning/textsamtal-i-grupp#passrutin,/stodundervisning/textsamtal-i-grupp#ramar,/stodundervisning/textsamtal-i-grupp#fastnar,/strukturer' && (await f.kor(`document.querySelector('#pl-veckan .pl-lankar a[href$="#ramar"]')?.textContent`)) === 'Materialet', await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-lankar a')].map((a) => a.getAttribute('href')).join()`));
+  // Sist verktygen som står i början av metodens sida, Strukturer och Strategier, invävda med fler än två delar (K-673,
+  // vavdaIBorjan; Strategier sedan sådden av strategierna 6–15, K-702).
+  sant('länkarna till passet i metoden, materialet, stödet när eleven fastnar och verktygen', (await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-lankar a')].map((a) => a.getAttribute('href')).join()`)) === '/stodundervisning/textsamtal-i-grupp#passrutin,/stodundervisning/textsamtal-i-grupp#ramar,/stodundervisning/textsamtal-i-grupp#fastnar,/strukturer,/strategier' && (await f.kor(`document.querySelector('#pl-veckan .pl-lankar a[href$="#ramar"]')?.textContent`)) === 'Materialet', await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-lankar a')].map((a) => a.getAttribute('href')).join()`));
   await f.tryck('#pl-veckan .pl-remsa [data-vy="fore"]');
   sant('fliken Före med kartläggningen och minuterna per elev', (await f.text('#pl-veckan-rubrik')) === 'Före första passet' && (await f.text('#pl-veckan'))?.includes('Före insatsen') && (await f.text('#pl-veckan'))?.includes('5–8 minuter per elev') && (await f.text('#pl-veckan'))?.includes('Tre saker att hålla fast vid'), await f.text('#pl-veckan'));
   await f.tryck('#pl-veckan .pl-remsa [data-vy="3"]');

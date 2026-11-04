@@ -4811,7 +4811,7 @@ button.pl-passroll { min-height: 2.75rem; }
 .sg-berattelse { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; max-width: 34rem; font-family: var(--typsnitt-ui); text-align: center; }
 .sg-berattelse li { display: grid; gap: 0.3rem; align-content: start; }
 .sg-berattelse .sg-rubrik { font-size: 0.82rem; font-weight: 700; }
-.sg-berattelse img, .sg-bild-tom { display: block; width: 100%; aspect-ratio: 1; border-radius: 8px; background: #dfeedb; }
+.sg-berattelse img, .sg-bild-tom { display: block; width: 100%; height: auto; aspect-ratio: 1; border-radius: 8px; background: #dfeedb; }
 .sg-bild-tom { display: grid; place-items: center; color: #5c7b53; font-size: 0.85rem; }
 .sg-berattelse .sg-utfall { font-size: 0.92rem; font-weight: 700; color: var(--slag-mork); }
 .sg-forklaring { max-width: 34rem; margin: 0.4rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }

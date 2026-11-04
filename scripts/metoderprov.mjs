@@ -306,8 +306,9 @@ function provaSakerna(s, html, ids) {
   const TOMMA = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
   // Rutornas rubriker och planeringsbladets etiketter är rubriker och etiketter, som Rutinen: T-kortet och Färdigheten på
   // T-kortet (K-645). Raden under en del av kärnan nämner lektionens delar, och Exit-lappen där är delen och inte bladet.
-  // Namnet på kärnans kort är kortets rubrik, också när det är en strategis namn (Lärande på kognitionsvetenskaplig grund).
-  const KLASS = /\bclass="[^"]*\b(upphov|filrubrik|faktaruta-etikett|visually-hidden|tryck-fot|um-ruta-rubrik|um-blad-etikett|um-kort-moment|um-kort-namn|film-titel)\b/;
+  // Namnet på kärnans kort är kortets rubrik, också när det är en strategis namn (Lärande på kognitionsvetenskaplig grund), och
+  // etiketten över strategiernas små kort är en etikett, också när den nämner en sak, som Färgkortet i Formativ bedömning.
+  const KLASS = /\bclass="[^"]*\b(upphov|filrubrik|faktaruta-etikett|visually-hidden|tryck-fot|um-ruta-rubrik|um-blad-etikett|um-kort-moment|um-kort-namn|vav-etikett|film-titel)\b/;
   const tecken = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
   const avkoda = (t) => t.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (h, k) => (k[0] === '#' ? String.fromCodePoint(k[1] === 'x' || k[1] === 'X' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : tecken[k.toLowerCase()] ?? h));
   const kropp = html.slice(html.indexOf('<article'), html.lastIndexOf('</article>'));

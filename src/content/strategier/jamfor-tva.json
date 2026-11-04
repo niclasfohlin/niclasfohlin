@@ -1,0 +1,197 @@
+{
+  "nr": 9,
+  "namn": "Jämför två",
+  "forskningensOrd": "comparison, contrasting cases",
+  "framsida": {
+    "mening": "Se vad som är lika och vad som skiljer.",
+    "bild": {
+      "liknelse": "Två nycklar som nästan är lika: var för sig ser de likadana ut, och barnet prövar fel nyckel i kistan. Bredvid varandra syns den tand som skiljer dem, och nästa gång tar barnet rätt nyckel direkt.",
+      "steg": [
+        {
+          "rubrik": "Var för sig",
+          "utfall": "Ser lika ut",
+          "fil": "jamfor-tva-1.svg",
+          "alt": "Barnet håller en mässingsnyckel mot låset på en kista. En nästan likadan nyckel hänger för sig på en tavla på väggen. I hörnet ett kryss och en stapel av fem."
+        },
+        {
+          "rubrik": "Sida vid sida",
+          "utfall": "Ser skillnaden",
+          "fil": "jamfor-tva-2.svg",
+          "alt": "Samma vägg. Båda nycklarna hänger bredvid varandra på tavlan, och en ring visar den mittersta tanden, som bara den ena nyckeln har. Barnet pekar på ringen. I hörnet ett förstoringsglas och tre staplar av fem."
+        },
+        {
+          "rubrik": "Nästa gång",
+          "utfall": "Öppnar direkt",
+          "fil": "jamfor-tva-3.svg",
+          "alt": "Samma vägg. Nyckeln med tre tänder sitter i låset, locket är öppet och en ädelsten lyser i kistan. Den andra nyckeln hänger kvar på tavlan, och barnet sträcker upp armarna. I hörnet en bock och alla fem staplarna."
+        }
+      ]
+    },
+    "insikt": "Det som avgör syns när två fall står bredvid varandra. Ett i taget går det lätt förlorat.",
+    "handling": [
+      {
+        "ikon": "balansvag",
+        "text": "Lägg två bredvid"
+      },
+      {
+        "ikon": "fragetecken",
+        "text": "Vad är lika?"
+      },
+      {
+        "ikon": "forstoringsglas",
+        "text": "Vad skiljer?"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Två lösningar, svar eller fall står bredvid varandra, och eleverna säger vad som är lika och vad som skiljer."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Ser eleven två fall efter varandra, måste hen hålla det första i minnet medan hen tittar på det andra, och det som skiljer går lätt förlorat. Bredvid varandra syns det lika och det olika på en gång. När eleven först letar efter det lika och sedan hör principen, ser hen vad som avgör och känner igen det i ett nytt fall. Två sätt att lösa samma uppgift visar också när det ena sättet är bättre."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Två fall",
+          "text": "bredvid varandra"
+        },
+        {
+          "namn": "Arbetsminnet",
+          "text": "ser lika och olika"
+        },
+        {
+          "namn": "Långtidsminnet",
+          "text": "det som avgör"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Två fall",
+          "till": "Arbetsminnet",
+          "text": "samtidigt",
+          "betonad": true
+        },
+        {
+          "fran": "Arbetsminnet",
+          "till": "Långtidsminnet",
+          "text": "lära in"
+        }
+      ],
+      "text": "När fallen står bredvid varandra behöver eleven inte hålla det ena i minnet. Kraften går till att se det som avgör, och det är det som stannar."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Välj två",
+        "text": "Två fall eller sätt som liknar varandra men skiljer i det viktiga."
+      },
+      {
+        "rubrik": "Bredvid varandra",
+        "text": "Samtidigt på tavlan, med samma uppställning och ordning."
+      },
+      {
+        "rubrik": "Lika, sedan olika",
+        "text": "Vad är lika? Vad skiljer? Först själv, sedan i par."
+      },
+      {
+        "rubrik": "Säg principen",
+        "text": "Efter jämförelsen säger du i en mening vad som avgör."
+      }
+    ],
+    "avgor": {
+      "rubrik": "När den passar",
+      "text": "När eleverna kan ett av sätten. Två nya sätt på en gång ger mindre."
+    },
+    "tankPa": "Strategin tjänar innehållet: välj de två efter det som klassen blandar ihop eller missar. Ställ upp dem på samma sätt och med samma ord, så att skillnaden syns, och låt eleverna leta efter det lika först. Jämförelser av sätt att lösa uppgifter är mest prövade i matematik i åk 5–⁠9. Jämför två visar skillnaden mellan två slag, och Blanda uppgifter övar sedan valet i en blandad rad.",
+    "forskningen": {
+      "text": "I 57 experiment, de flesta med vuxna (Alfieri m.fl., 2011), gav jämförelser av två fall 0,50 mot andra sätt att lära, som samma fall ett i taget, ett enda fall eller vanlig undervisning, mest när de som lärde sig letade efter det lika, fick principen efteråt och prövades direkt (Alfieri m.fl., 2013). I algebra i åk 8–⁠9 kunde eleverna mer efter arbetsområdet när lärarna fick material och fortbildning för att jämföra sätt, mest i att välja sätt (Durkin m.fl., 2023). IES-vägledningen för algebra bedömer stödet som måttligt: fyra av sex studier gav bättre resultat, med elever som var 11–⁠15 år, och de två som gav blandat eller sämre resultat gällde elever som ännu inte kunde algebra (Star m.fl., 2015).",
+      "kallor": [
+        {
+          "id": "alfieri-m-fl-2011",
+          "titel": "Aligning the Structural Components Across Learning Tasks of Case Comparisons",
+          "text": "Alfieri, L., Nokes, T. J. och Schunn, C. D. (2011). Aligning the Structural Components Across Learning Tasks of Case Comparisons. SREE Fall 2011 Conference Abstract, Society for Research on Educational Effectiveness.",
+          "adress": "https://files.eric.ed.gov/fulltext/ED528947.pdf"
+        },
+        {
+          "id": "alfieri-m-fl-2013",
+          "titel": "Learning Through Case Comparisons: A Meta-Analytic Review",
+          "text": "Alfieri, L., Nokes-Malach, T. J. och Schunn, C. D. (2013). Learning Through Case Comparisons: A Meta-Analytic Review. Educational Psychologist.",
+          "adress": "https://doi.org/10.1080/00461520.2013.775712"
+        },
+        {
+          "id": "durkin-m-fl-2023",
+          "titel": "Comparing and Discussing Multiple Strategies: An Approach to Improving Algebra Instruction",
+          "text": "Durkin, K., Rittle-Johnson, B., Star, J. R. och Loehr, A. (2023). Comparing and Discussing Multiple Strategies: An Approach to Improving Algebra Instruction. The Journal of Experimental Education.",
+          "adress": "https://doi.org/10.1080/00220973.2021.1903377"
+        },
+        {
+          "id": "star-m-fl-2015",
+          "titel": "Teaching Strategies for Improving Algebra Knowledge in Middle and High School Students",
+          "text": "Star, J. R., Caronongan, P., Foegen, A. m.fl. (2015). Teaching Strategies for Improving Algebra Knowledge in Middle and High School Students. IES Practice Guide, What Works Clearinghouse.",
+          "adress": "https://ies.ed.gov/ncee/wwc/practiceguide/20"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Testbaserat lärande",
+        "adress": "/metoder/testbaserat-larande"
+      },
+      {
+        "titel": "Lärande på kognitionsvetenskaplig grund",
+        "adress": "/metoder/larande-pa-kognitionsvetenskaplig-grund"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "7–9",
+      "amne": "svenska",
+      "text": "När klassen har läst nyhetsartiklar ställer du en nyhetsartikel och en debattartikel om samma händelse bredvid varandra, till exempel om mobilförbud i skolan. Eleverna markerar först det som är lika, som händelsen och fakta, och sedan det som skiljer, som skribentens åsikt och ord som måste och borde. Efter jämförelsen säger du i en mening vad som avgör: debattartikeln vill få läsaren att tycka något. Sedan får eleverna en ny text och avgör vilket slag den är, med ett skäl ur texten."
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Skriv två versioner av samma början på tavlan, en som berättar och en som visar: ”Hon var rädd.” och ”Hennes hand skakade när hon tryckte ner handtaget.” Fråga först vad som är lika, att hon är rädd i båda, och sedan vad som skiljer. Låt eleverna säga vad läsaren själv får lista ut i den andra meningen. Säg sedan i en mening vad som avgör: den andra meningen visar känslan i det hon gör. Sist letar var och en upp en mening i sin egen text som berättar en känsla och skriver om den så att den visar."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "4–6",
+      "amne": "matematik",
+      "text": "När klassen kan ställa upp en addition, visar du två lösningar av 199 + 46 bredvid varandra: den ena ställer upp talen, den andra räknar 200 + 46 och tar bort 1. Eleverna säger först vad som är lika, sedan vad som skiljer. Fråga när det andra sättet är snabbare och när det inte hjälper, som i 173 + 46. Ge sedan några uppgifter där eleverna väljer sätt och säger varför."
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "F–3",
+      "amne": "SO",
+      "text": "Visa två bilder av klassrum bredvid varandra, en från förr och en från i dag. Eleverna säger först vad som är lika, som bänkarna, läraren och böckerna, och sedan vad som skiljer. Skriv det lika i mitten och det olika på var sin sida, och fråga varför det har ändrats. Lägg märke till om eleverna ser mer än kläderna, som hur många som går i klassen och vad som sitter på väggarna."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Kärnan: Två svar bredvid varandra",
+      "mening": "Två svar står bredvid varandra, och klassen säger vad som skiljer."
+    },
+    {
+      "metod": "formativ-bedomning",
+      "avsnitt": "Lagret: Beslutet",
+      "mening": "Samma fel i stegen: felet bredvid det rätta, och en ny fråga."
+    },
+    {
+      "metod": "kooperativt-larande",
+      "avsnitt": "Så kan det se ut: Biologi, åk 8",
+      "mening": "Därför visade du igen, med fotosyntesen och cellandningen bredvid varandra."
+    },
+    {
+      "metod": "larande-pa-kognitionsvetenskaplig-grund",
+      "avsnitt": "Rutinerna: Slaget först",
+      "mening": "Ta två slag som klassen kan var för sig, och visa en uppgift av varje bredvid varandra: ”Vad skiljer dem?”"
+    }
+  ]
+}

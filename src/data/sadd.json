@@ -1076,7 +1076,7 @@
         "\\brita",
         "\\bbild(?:en|er|erna)?\\b"
       ],
-      "provad": "2026-11-03",
+      "provad": "2026-11-04",
       "ja": {
         "boksamtal-i-grupp": {
           "skal": "Passet börjar med att var och en säger till den bredvid vad som hände förra gången, tabellen Eleverna tar över lämnar det minsta först och ett steg i taget, och tavlans personer står med streck mellan dem som hör ihop.",
@@ -1096,6 +1096,14 @@
               ],
               "slag": "form",
               "om": "Det du lämnar över en bit i taget"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "gissa-forst"
+              ],
+              "slag": "form",
+              "om": "Gissningen före läsningen"
             }
           ]
         },
@@ -1133,6 +1141,22 @@
               ],
               "slag": "form",
               "om": "Valet av modell i klassens texter"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "gissa-forst"
+              ],
+              "slag": "form",
+              "om": "Gissningen på textens fråga"
+            },
+            {
+              "efter": "tabell: Modellpasset på 40 minuter",
+              "delar": [
+                "forklara-stegen"
+              ],
+              "slag": "form",
+              "om": "Lapparna i modellen"
             }
           ]
         },
@@ -1146,6 +1170,22 @@
               ],
               "slag": "form",
               "om": "Från att du tänker högt till att eleverna tänker själva"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "borja-i-det-kanda"
+              ],
+              "slag": "form",
+              "om": "Frågan Före läsningen"
+            },
+            {
+              "efter": "tabell: Tankestegen: ditt inre samtal",
+              "delar": [
+                "forklara-stegen"
+              ],
+              "slag": "form",
+              "om": "Tankestegen med ledtråden"
             }
           ]
         },
@@ -1175,6 +1215,14 @@
               ],
               "slag": "form",
               "om": "Strategierna som följer med"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Stället utan och med strategin"
             }
           ]
         },
@@ -1188,6 +1236,14 @@
               ],
               "slag": "form",
               "om": "Läsningen igen med stödet som tas bort"
+            },
+            {
+              "efter": "tabell: Återkopplingen: vad du säger",
+              "delar": [
+                "prova-dig-sjalv"
+              ],
+              "slag": "forslag",
+              "om": "Strategin som hjälpte och nästa gång"
             }
           ]
         },
@@ -1201,6 +1257,14 @@
               ],
               "slag": "form",
               "om": "Modelleringen, körläsningen och parläsningen"
+            },
+            {
+              "efter": "tabell: Bekräfta, korrigera, ge stöd",
+              "delar": [
+                "borja-i-det-kanda"
+              ],
+              "slag": "form",
+              "om": "Ett känt ord i samma familj"
             }
           ]
         },
@@ -1331,6 +1395,14 @@
               ],
               "slag": "form",
               "om": "Skriv första ljudet i steg 4"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "ge-exempel"
+              ],
+              "slag": "form",
+              "om": "Bilderna sorterade efter första ljudet"
             }
           ]
         },
@@ -1418,6 +1490,14 @@
               ],
               "slag": "form",
               "om": "Stegen från att du visar till eleven själv"
+            },
+            {
+              "efter": "tabell: Så blir lektionen svårare",
+              "delar": [
+                "fran-sak-till-tecken"
+              ],
+              "slag": "form",
+              "om": "Klossarna, strecken och de skrivna delarna"
             }
           ]
         },
@@ -1447,6 +1527,14 @@
               ],
               "slag": "form",
               "om": "Stegen från att du visar till eleven själv"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "fran-sak-till-tecken"
+              ],
+              "slag": "form",
+              "om": "Markörerna och sedan bokstäverna"
             }
           ]
         },
@@ -1476,6 +1564,14 @@
               ],
               "slag": "form",
               "om": "Stegen från att du visar till eleven själv"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Hus och mus, hus och hand"
             }
           ]
         },
@@ -1542,6 +1638,14 @@
               ],
               "slag": "form",
               "om": "Skriv i rutan i steg 2"
+            },
+            {
+              "efter": "tabell: Ordparen",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Ordparen i raden I mitten"
             }
           ]
         },
@@ -1584,6 +1688,22 @@
               ],
               "slag": "form",
               "om": "Stödet som flyttas vecka för vecka"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Bytet av delarna i Bygga"
+            },
+            {
+              "efter": "tabell: De fyra stegen för ett långt ord",
+              "delar": [
+                "forklara-stegen"
+              ],
+              "slag": "form",
+              "om": "Hur eleven vet vad ordet betyder i steg 4"
             }
           ]
         },
@@ -1596,7 +1716,23 @@
                 "avlasta-minnet"
               ],
               "slag": "form",
-              "om": "Skrivfokus: läraren skriver och tänker högt"
+              "om": "Läraren skriver och tänker högt i Skrivfokus"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Två texter om samma sak i Skrivfokus"
+            },
+            {
+              "efter": "tabell: Fortsättningspasset, 60 minuter",
+              "delar": [
+                "prova-dig-sjalv"
+              ],
+              "slag": "form",
+              "om": "Målet, kamratens svar och nästa mål i Dela"
             }
           ]
         },
@@ -1609,7 +1745,7 @@
                 "avlasta-minnet"
               ],
               "slag": "form",
-              "om": "Skrivdraget: läraren skriver och tänker högt"
+              "om": "Läraren skriver draget och tänker högt"
             },
             {
               "efter": "tabell: Planeringspasset",
@@ -1618,6 +1754,22 @@
               ],
               "slag": "form",
               "om": "Vägen och berget i planeringspasset"
+            },
+            {
+              "efter": "stycke 4",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Två texter i vecka 1, 2 och 4"
+            },
+            {
+              "efter": "tabell: Berättarpasset",
+              "delar": [
+                "beratta"
+              ],
+              "slag": "form",
+              "om": "Sagan växer och Paren berättar"
             }
           ]
         },
@@ -1639,6 +1791,22 @@
               ],
               "slag": "forslag",
               "om": "De gamla dragen"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Två texter i Läs"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "ge-exempel"
+              ],
+              "slag": "form",
+              "om": "Samma drag med vårt eget innehåll"
             }
           ]
         },
@@ -1660,6 +1828,22 @@
               ],
               "slag": "form",
               "om": "Uppgiften fyra till sex veckor efter kursen"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Två texter och meningarna bredvid varandra"
+            },
+            {
+              "efter": "uppfoljning",
+              "delar": [
+                "prova-dig-sjalv"
+              ],
+              "slag": "form",
+              "om": "Diagrammet Mina texter och Mitt mål"
             }
           ]
         },
@@ -1681,6 +1865,22 @@
               ],
               "slag": "form",
               "om": "Uppgiften fyra till sex veckor efter kursen"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Två texter och meningarna bredvid varandra"
+            },
+            {
+              "efter": "uppfoljning",
+              "delar": [
+                "prova-dig-sjalv"
+              ],
+              "slag": "form",
+              "om": "Diagrammet Mina texter och Mitt mål"
             }
           ]
         },
@@ -1702,6 +1902,22 @@
               ],
               "slag": "form",
               "om": "Uppgiften fyra till sex veckor efter kursen"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Två texter och meningarna bredvid varandra"
+            },
+            {
+              "efter": "uppfoljning",
+              "delar": [
+                "prova-dig-sjalv"
+              ],
+              "slag": "form",
+              "om": "Diagrammet Mina texter och Mitt mål"
             }
           ]
         },
@@ -1723,6 +1939,22 @@
               ],
               "slag": "form",
               "om": "Uppgiften fyra till sex veckor efter kursen"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Två texter och meningarna bredvid varandra"
+            },
+            {
+              "efter": "uppfoljning",
+              "delar": [
+                "prova-dig-sjalv"
+              ],
+              "slag": "form",
+              "om": "Diagrammet Mina texter och Mitt mål"
             }
           ]
         },
@@ -1744,6 +1976,22 @@
               ],
               "slag": "form",
               "om": "Passet fyra till sex veckor efter kursen"
+            },
+            {
+              "efter": "tabell: Så lär du ut en skrivhandling: två texter och vad de gör",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Två texter bredvid varandra"
+            },
+            {
+              "efter": "uppfoljning",
+              "delar": [
+                "prova-dig-sjalv"
+              ],
+              "slag": "form",
+              "om": "Målet och diagrammet"
             }
           ]
         },
@@ -1765,6 +2013,22 @@
               ],
               "slag": "forslag",
               "om": "Läxan och förra veckans läxa"
+            },
+            {
+              "efter": "roll",
+              "delar": [
+                "forklara-stegen"
+              ],
+              "slag": "form",
+              "om": "Frågan ”Hur vet du?” efter varje tal"
+            },
+            {
+              "efter": "tabell: Veckan: ett fokus i tre material",
+              "delar": [
+                "fran-sak-till-tecken"
+              ],
+              "slag": "form",
+              "om": "Från tiobas till talbrickor, pengar och skrift"
             }
           ]
         },
@@ -1785,7 +2049,7 @@
                 "ord-och-bild"
               ],
               "slag": "form",
-              "om": "Fyra sätt: bråket som bild"
+              "om": "Bråket som bild i Fyra sätt"
             },
             {
               "efter": "tabell: Pass 3, när det går: spel och problem",
@@ -1794,6 +2058,22 @@
               ],
               "slag": "forslag",
               "om": "Pass 3, repetitionen av veckan"
+            },
+            {
+              "efter": "roll",
+              "delar": [
+                "forklara-stegen"
+              ],
+              "slag": "form",
+              "om": "Eleven lägger stavarna och säger varför"
+            },
+            {
+              "efter": "tabell: Veckan: från material till siffror",
+              "delar": [
+                "fran-sak-till-tecken"
+              ],
+              "slag": "form",
+              "om": "Från material till bild, tallinje och siffror"
             }
           ]
         },
@@ -1814,7 +2094,7 @@
                 "plocka-fram"
               ],
               "slag": "form",
-              "om": "Uppvärmningen: förra lärdomen och talfakta"
+              "om": "Förra lärdomen och talfakta i Uppvärmningen"
             },
             {
               "efter": "tabell: Talen och bladen i veckorna",
@@ -1832,6 +2112,22 @@
               ],
               "slag": "form",
               "om": "Material, bild och skrift tillsammans"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "De två uträkningarna bredvid varandra i Lärdomen"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "fran-sak-till-tecken"
+              ],
+              "slag": "form",
+              "om": "Bygga i pass 1, rita och skriva i pass 2"
             }
           ]
         },
@@ -1852,7 +2148,23 @@
                 "ord-och-bild"
               ],
               "slag": "form",
-              "om": "Planera: sätt att visa problemet"
+              "om": "Sätt att visa problemet i Planera"
+            },
+            {
+              "efter": "passrutin",
+              "delar": [
+                "gissa-forst"
+              ],
+              "slag": "form",
+              "om": "Parens gissning under Vi tror"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Bladet Två lösningar i Jämföra"
             }
           ]
         },
@@ -1865,7 +2177,15 @@
                 "avlasta-minnet"
               ],
               "slag": "form",
-              "om": "Startorden: läraren säger dem först"
+              "om": "Läraren säger startorden först"
+            },
+            {
+              "efter": "tabell: Tre samtal: ramarna, det vi har sett och det som håller",
+              "delar": [
+                "jamfor-tva"
+              ],
+              "slag": "form",
+              "om": "Du-⁠budskap och jag-⁠budskap i samtal 1"
             }
           ]
         },
@@ -1903,6 +2223,22 @@
               ],
               "slag": "form",
               "om": "Passet fyra veckor efter det sista"
+            },
+            {
+              "efter": "tidsschema",
+              "delar": [
+                "gissa-forst"
+              ],
+              "slag": "form",
+              "om": "Nästa ruta i Spola tillbaka"
+            },
+            {
+              "efter": "steg",
+              "delar": [
+                "beratta"
+              ],
+              "slag": "form",
+              "om": "En elev berättar hela serien i Ovanifrån"
             }
           ]
         }

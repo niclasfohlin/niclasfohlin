@@ -1,19 +1,21 @@
 {
   "_om": "Sådden av verktyget Strategier i Metoder (K-699, K-702; Niclas 2026-11-03: \"Vill ha sådana där minikort som du sådden ur för strukturer där dessa används\", och i riggen samma kväll: \"Tänk om sajten gör sådden?\"). Sajten väver in korten på metodens sida utan att metodens fil ändras, så att riggens dokument fortfarande är byggda ur samma fil (scripts/metoderfiler.mjs). text och strategier är riggens, språkgranskade i out/strategier/TILL-SAJTEN-sadd.md och prövade mot metodens text, och visas i avsnittet Strategier för lärande (src/components/Undervisningsmetod.astro) och strategierna blir metodens kortfil (scripts/strategier/kort.mjs); platser och skal är beläggen ur sökningen, underlag/prov/strategier/sadd-svar-c.md. En metod med eget fält strategikort, som riggens nya metod, läser fältet i stället.",
   "explicit-undervisning": {
-    "text": "Fyra kognitionsvetenskapliga strategier finns redan i lektionen och arbetsområdet. Plocka fram finns i de två snabba i starten, där alla ur minnet tar fram det lektionen bygger på. Sprid ut finns också i starten, där det klassen har lärt sig kommer tillbaka veckor senare. Avlasta minnet finns i Jag gör, där du visar ett steg i taget med samma ord och sist ett helt exempel. Blanda uppgifter finns i arbetsområdet när grunden sitter. I huvudexemplets lektion 6 kommer tal med och utan växling om vartannat, och eleverna ser först vilket slag uppgiften är.",
+    "text": "Fem kognitionsvetenskapliga strategier finns redan i lektionen och arbetsområdet. Plocka fram finns i de två snabba i starten, där alla ur minnet tar fram det lektionen bygger på. Börja i det kända finns i samma två frågor, som prövar om alla kan det som det nya bygger på. Sprid ut finns också i starten, där det klassen har lärt sig kommer tillbaka veckor senare. Avlasta minnet finns i Jag gör, där du visar ett steg i taget med samma ord och sist ett helt exempel. Blanda uppgifter finns i arbetsområdet när grunden sitter. I huvudexemplets lektion 6 kommer tal med och utan växling om vartannat, och eleverna ser först vilket slag uppgiften är.",
     "strategier": [
       "plocka-fram",
       "sprid-ut",
       "avlasta-minnet",
-      "blanda-uppgifter"
+      "blanda-uppgifter",
+      "borja-i-det-kanda"
     ],
     "skal": "De två snabba i starten låter alla plocka fram det lektionen bygger på, Jag gör visar ett löst exempel ett steg i taget med samma ord, och arbetsområdet blandar slagen och låter det äldre komma tillbaka när grunden sitter.",
     "platser": [
       {
         "efter": "steg 1",
         "delar": [
-          "plocka-fram"
+          "plocka-fram",
+          "borja-i-det-kanda"
         ],
         "slag": "form",
         "om": "De två snabba"
@@ -38,19 +40,22 @@
     ]
   },
   "testbaserat-larande": {
-    "text": "Metoden bygger på tre kognitionsvetenskapliga strategier. Plocka fram finns i provet, där alla svarar ur minnet innan facit kommer. Sprid ut finns i grovplaneringen, där varje område kommer tillbaka i provet efter veckor och månader. Blanda uppgifter finns i provet i matematik, där en uppgift inte säger vilken metod den kräver och eleverna själva väljer. En fjärde strategi, Avlasta minnet, finns i Veckans träning, där eleverna vid ett bord har uppgifter med facit och ett exempel som är löst steg för steg.",
+    "text": "Metoden bygger på fem kognitionsvetenskapliga strategier. Plocka fram finns i provet, där alla svarar ur minnet innan facit kommer. Fråga varför finns också i provet, där minst en fråga kräver ett varför, ett exempel eller en metod. Sprid ut finns i grovplaneringen, där varje område kommer tillbaka i provet efter veckor och månader. Blanda uppgifter finns i provet i matematik, där en uppgift inte säger vilken metod den kräver och eleverna själva väljer. Jämför två finns i kontrasten, där två svar står bredvid varandra och klassen säger vad som skiljer. En sjätte strategi, Avlasta minnet, finns i Veckans träning, där eleverna vid ett bord har uppgifter med facit och ett exempel som är löst steg för steg.",
     "strategier": [
       "plocka-fram",
       "sprid-ut",
       "avlasta-minnet",
-      "blanda-uppgifter"
+      "blanda-uppgifter",
+      "fraga-varfor",
+      "jamfor-tva"
     ],
     "skal": "Provet är framplockning med facit samma lektion, kärnans Tillbaka efter några veckor är spridning och i matematik blandning, och Veckans träning ger ett exempel som är löst steg för steg.",
     "platser": [
       {
         "efter": "steg 1",
         "delar": [
-          "plocka-fram"
+          "plocka-fram",
+          "fraga-varfor"
         ],
         "slag": "form",
         "om": "Provet ur minnet"
@@ -71,16 +76,26 @@
         ],
         "slag": "form",
         "om": "Träningen vid ett bord"
+      },
+      {
+        "efter": "steg 3",
+        "delar": [
+          "jamfor-tva"
+        ],
+        "slag": "form",
+        "om": "Kontrasten"
       }
     ]
   },
   "formativ-bedomning": {
-    "text": "Fyra strategier för lärande finns redan i lagret. Plocka fram finns på exit-lappen, där eleven hämtar det viktigaste ur minnet och skriver ett svar och ett skäl. Sprid ut finns i Starten, där eleverna svarar på en ny fråga om felet från förra lektionen eller om det ni gjorde för en vecka sedan. Avlasta minnet och Ord och bild finns i Beslutet, när många har fel och du visar på ett nytt sätt. Då tänker du högt med ett nytt exempel eller en bild, och är felen spridda tar du ett steg i taget.",
+    "text": "Sex strategier för lärande finns redan i lagret. Plocka fram finns på exit-lappen, där eleven hämtar det viktigaste ur minnet och skriver ett svar och ett skäl. Sprid ut finns i Starten, där eleverna svarar på en ny fråga om felet från förra lektionen eller om det ni gjorde för en vecka sedan. Förklara stegen finns i Din planering från vecka 4, där du stannar för ett parsamtal: ”Vilket steg gör jag först, och varför?” Avlasta minnet och Ord och bild finns i Beslutet, när många har fel och du visar på ett nytt sätt. Då tänker du högt med ett nytt exempel eller en bild, och är felen spridda tar du ett steg i taget. Pröva dig själv finns i färgkortet, där eleven vänder kortet efter vad hen kan visa och rättar sitt eget i annan färg.",
     "strategier": [
       "plocka-fram",
       "sprid-ut",
       "avlasta-minnet",
-      "ord-och-bild"
+      "ord-och-bild",
+      "forklara-stegen",
+      "prova-dig-sjalv"
     ],
     "skal": "Starten tar upp felet igen efter en lektion eller en vecka, exit-lappen låter eleven hämta det viktigaste ur minnet med stängd bok, och när många har fel ber beslutet om ett nytt sätt med en bild eller ett nytt exempel, som Ord och bild och Avlasta minnet visar hur man gör.",
     "platser": [
@@ -108,14 +123,32 @@
         ],
         "slag": "form",
         "om": "Lappen i slutet av lektionen"
+      },
+      {
+        "efter": "steg 2",
+        "delar": [
+          "forklara-stegen"
+        ],
+        "slag": "form",
+        "om": "Parsamtalet när du stannar"
+      },
+      {
+        "efter": "tabell: Tanken bakom greppen",
+        "delar": [
+          "prova-dig-sjalv"
+        ],
+        "slag": "form",
+        "om": "Färgkortet"
       }
     ]
   },
   "kooperativt-larande": {
-    "text": "Två strategier för lärande finns redan i samarbetet. Avlasta minnet finns i genomgången, där du visar strukturen med en elev och säger högt vad du gör. Klassen lär sig också en ny struktur i taget och prövar den först på känt innehåll, så att eleverna kan lägga kraften på det de ska lära sig. Ord och bild finns i den egna uppgiften, där eleverna ritar sambandet och förklarar det med ämnets ord, som pilarna i fotosyntesen.",
+    "text": "Fyra strategier för lärande finns redan i samarbetet. Avlasta minnet finns i genomgången, där du visar strukturen med en elev och säger högt vad du gör. Klassen lär sig också en ny struktur i taget och prövar den först på känt innehåll, så att eleverna kan lägga kraften på det de ska lära sig. Förklara stegen finns i samarbetet, där den som löser tänker högt med ”Jag tänker … därför att …”. Ord och bild finns i den egna uppgiften, där eleverna ritar sambandet och förklarar det med ämnets ord, som pilarna i fotosyntesen. Jämför två finns i Var och en visar, där paren jämför två lösningar när de flesta kan, som 2 + 5 och 5 + 5.",
     "strategier": [
       "avlasta-minnet",
-      "ord-och-bild"
+      "ord-och-bild",
+      "forklara-stegen",
+      "jamfor-tva"
     ],
     "skal": "Genomgången visar strukturen med en elev och tar en ny struktur i taget på känt innehåll, så att eleverna lägger kraften på lärandet, och den egna uppgiften kan visa sambandet i en bild med ämnets ord, som metodens exempel gör.",
     "platser": [
@@ -134,6 +167,22 @@
         ],
         "slag": "forslag",
         "om": "Stödorden och den egna uppgiften"
+      },
+      {
+        "efter": "steg 3",
+        "delar": [
+          "forklara-stegen"
+        ],
+        "slag": "form",
+        "om": "Den som löser tänker högt"
+      },
+      {
+        "efter": "steg 4",
+        "delar": [
+          "jamfor-tva"
+        ],
+        "slag": "form",
+        "om": "Paren jämför lösningarna"
       }
     ]
   },

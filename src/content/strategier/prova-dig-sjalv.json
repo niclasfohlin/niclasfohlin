@@ -1,0 +1,198 @@
+{
+  "nr": 13,
+  "namn": "Pröva dig själv",
+  "forskningensOrd": "metacognitive monitoring, self-assessment",
+  "framsida": {
+    "mening": "Pröva om du kan det, och välj nästa steg.",
+    "bild": {
+      "liknelse": "Bollen i hinken: barnet tror att det träffar från långt håll. När barnet prövar syns att det inte stämde, och barnet övar på just det kastet tills bollen börjar gå i.",
+      "steg": [
+        {
+          "rubrik": "Tror först",
+          "utfall": "Känns säkert",
+          "fil": "prova-dig-sjalv-1.svg",
+          "alt": "Ett barn står bakom en kon på en äng med en boll i handen och ler. Längre bort står en hink. I hörnet en bock och två staplar av fem."
+        },
+        {
+          "rubrik": "Prövar själv",
+          "utfall": "Stämde inte",
+          "fil": "prova-dig-sjalv-2.svg",
+          "alt": "Samma äng. En streckad bana visar att bollen har landat i gräset före hinken, och barnet funderar med handen vid hakan. I hörnet ett kryss och två staplar av fem."
+        },
+        {
+          "rubrik": "Nästa steg",
+          "utfall": "Övar rätt sak",
+          "fil": "prova-dig-sjalv-3.svg",
+          "alt": "Samma äng. Barnet står kvar vid den bortre konen med två bollar vid fötterna. En streckad bana slutar strax före hinken, och en annan går ned i hinken, där en boll ligger. I hörnet en pil uppåt och tre staplar av fem."
+        }
+      ]
+    },
+    "insikt": "Eleven ser vad hen kan när hen prövar, och då kan hen välja vad som ska övas.",
+    "handling": [
+      {
+        "ikon": "fragetecken",
+        "text": "Kan jag det?"
+      },
+      {
+        "ikon": "skrivhand",
+        "text": "Pröva och rätta"
+      },
+      {
+        "ikon": "fotspar",
+        "text": "Välj nästa steg"
+      }
+    ]
+  },
+  "baksida": {
+    "vad": {
+      "ikon": "tanka",
+      "text": "Eleverna bedömer först om de kan något, prövar sedan utan hjälp och väljer efter facit vad de ska öva på."
+    },
+    "darfor": {
+      "ikon": "glodlampa",
+      "text": "Elever tror ofta att de kan mer än de gör, och de yngsta mest. Känslan av att kunna kommer av att något känns bekant eller gick lätt nyss, och den säger lite om vad eleven klarar utan hjälp. När eleven först bedömer och sedan prövar, syns skillnaden, och eleven kan lägga övningen där den behövs. Med tiden lär sig eleven att planera, följa och värdera sitt lärande i ämnet."
+    },
+    "iMinnet": {
+      "rubrik": "Så fungerar det i minnet",
+      "delar": [
+        {
+          "namn": "Känslan",
+          "text": "det känns som du kan"
+        },
+        {
+          "namn": "Kunnandet",
+          "text": "det du klarar själv"
+        },
+        {
+          "namn": "Nästa steg",
+          "text": "det du behöver öva"
+        }
+      ],
+      "pilar": [
+        {
+          "fran": "Känslan",
+          "till": "Kunnandet",
+          "text": "pröva"
+        },
+        {
+          "fran": "Kunnandet",
+          "till": "Nästa steg",
+          "text": "välja",
+          "betonad": true
+        }
+      ],
+      "text": "Känslan av att kunna och det eleven klarar själv skiljer sig ofta. När eleven prövar syns skillnaden, och den avgör vad eleven övar på."
+    },
+    "saGorDu": [
+      {
+        "rubrik": "Visa målet",
+        "text": "En uppgift som visar vad eleverna ska kunna när ni är klara."
+      },
+      {
+        "rubrik": "Tro först",
+        "text": "Eleverna skriver ja, kanske eller nej innan de prövar."
+      },
+      {
+        "rubrik": "Pröva och rätta",
+        "text": "Eleverna svarar utan hjälp och rättar mot facit eller en checklista."
+      },
+      {
+        "rubrik": "Välj nästa steg",
+        "text": "Stämde det? Eleven väljer vad hen övar på, och du ger återkoppling."
+      }
+    ],
+    "avgor": {
+      "rubrik": "Undvik",
+      "text": "Att räkna in bedömningen i betyget, eller att bara fråga om känslan."
+    },
+    "tankPa": "Strategin tjänar innehållet: eleverna bedömer det ni arbetar med just nu, i ämnet. I Plocka fram är framplockningen själva övningen, och här visar försöket vad som ska övas. Yngre elever tror oftare än äldre att de kan mer än de gör, så låt dem pröva direkt efter att de har sagt ja eller nej, och visa skillnaden utan att döma. Ett nej eller ett kanske är ett bra svar, eftersom det visar vad ni ska öva på.",
+    "forskningen": {
+      "text": "Program som lär eleverna att planera, följa och värdera sitt lärande gav omkring åtta månaders extra framsteg i 297 studier, de flesta med elever mellan 7 och 16 år och i ett ämne, och EEF bedömer resultatet som säkert. Några av programmen lärde eleverna att bedöma och rätta sitt eget arbete efter givna kriterier (EEF, 2025). Verktyg som får eleven att följa sitt lärande, som en loggbok eller en matris, gav 0,42 i 32 studier och såg ut att ge mer när läraren gav återkoppling och eleven fick göra om (Dignath m.fl., 2023). I en sammanställning av 84 studier var effekterna större när forskare ledde undervisningen än när klassens lärare gjorde det (Dignath och Büttner, 2008). När barn i åk 4 och 6 rättade med facit, såg de fel bättre hos en kamrat än hos sig själva (van Loon och van de Pol, 2019). I en studie med studenter ökade överskattningen kraftigt när självbedömningen räknades in i betyget (Andrade, 2019).",
+      "kallor": [
+        {
+          "id": "eef-2025",
+          "titel": "Metacognition and Self-Regulated Learning: A summary of new evidence from the Teaching and Learning Toolkit",
+          "text": "EEF, Education Endowment Foundation (2025). Metacognition and Self-Regulated Learning: A summary of new evidence from the Teaching and Learning Toolkit. Education Endowment Foundation.",
+          "adress": "https://d2tic4wvo1iusb.cloudfront.net/production/documents/tenders/metacognition-and-self-regulation_evidence-review_v.2.2.0.pdf"
+        },
+        {
+          "id": "dignath-m-fl-2023",
+          "titel": "Let Learners Monitor the Learning Content and Their Learning Behavior! A Meta-analysis on the Effectiveness of Tools to Foster Monitoring",
+          "text": "Dignath, C., van Ewijk, R., Perels, F. och Fabriz, S. (2023). Let Learners Monitor the Learning Content and Their Learning Behavior! A Meta-analysis on the Effectiveness of Tools to Foster Monitoring. Educational Psychology Review.",
+          "adress": "https://doi.org/10.1007/s10648-023-09718-4"
+        },
+        {
+          "id": "dignath-och-buttner-2008",
+          "titel": "Components of fostering self-regulated learning among students. A meta-analysis on intervention studies at primary and secondary school level",
+          "text": "Dignath, C. och Büttner, G. (2008). Components of fostering self-regulated learning among students. A meta-analysis on intervention studies at primary and secondary school level. Metacognition and Learning.",
+          "adress": "https://doi.org/10.1007/s11409-008-9029-x"
+        },
+        {
+          "id": "van-loon-och-van-de-pol-2019",
+          "titel": "Judging own and peer performance when using feedback in elementary school",
+          "text": "van Loon, M. H. och van de Pol, J. (2019). Judging own and peer performance when using feedback in elementary school. Learning and Individual Differences.",
+          "adress": "https://doi.org/10.1016/j.lindif.2019.101754"
+        },
+        {
+          "id": "andrade-2019",
+          "titel": "A Critical Review of Research on Student Self-Assessment",
+          "text": "Andrade, H. L. (2019). A Critical Review of Research on Student Self-Assessment. Frontiers in Education.",
+          "adress": "https://doi.org/10.3389/feduc.2019.00087"
+        }
+      ]
+    },
+    "fordjupa": [
+      {
+        "titel": "Formativ bedömning",
+        "adress": "/metoder/formativ-bedomning"
+      },
+      {
+        "titel": "Testbaserat lärande",
+        "adress": "/metoder/testbaserat-larande"
+      }
+    ]
+  },
+  "forslag": [
+    {
+      "omrade": "lasning",
+      "arskurs": "4–6",
+      "amne": "svenska",
+      "text": "Innan eleverna svarar på frågorna till en text, skriver de vid varje fråga om de tror att de kan svara: ja, kanske eller nej. Sedan svarar de och kontrollerar svaren mot texten tillsammans med en kamrat. Vid de frågor där de skrev ja men svarade fel, letar de upp stället i texten och läser det igen. Fråga sedan klassen: ”Vad gjorde att det kändes som att du kunde?”"
+    },
+    {
+      "omrade": "skrivning",
+      "arskurs": "7–9",
+      "amne": "svenska",
+      "text": "Innan eleverna lämnar in en argumenterande text, sätter de ett kryss vid de delar i checklistan som de tror att de har med: tesen, argumenten, ett motargument och avslutningen. Sedan stryker de under var i texten varje del finns och skriver till det som de inte hittar. Du läser understrykningarna, skriver en kommentar om det eleven har missat, och eleven gör om den delen. Elevens egen bedömning räknas inte in i betyget, så eleverna vågar se det som fattas."
+    },
+    {
+      "omrade": "matematik",
+      "arskurs": "F–3",
+      "amne": "matematik",
+      "text": "När klassen har övat additioner upp till 20, lägger eleverna sina talkort i två högar innan de prövar: ”Kan” och ”Kan inte än”. Sedan prövar de korten i högen ”Kan” med en kamrat, som håller facit. Kort som inte satt flyttar de till den andra högen, och den högen övar de på. Nästa dag prövar de hela högen ”Kan” igen, och du frågar: ”Hur många kort fick byta hög?”"
+    },
+    {
+      "omrade": "amnen",
+      "arskurs": "7–9",
+      "amne": "SO",
+      "text": "Inför provet om första världskriget skriver eleverna en lista över det viktigaste i arbetsområdet och sätter ett kryss vid det de tror att de kan. Sedan prövar de sig själva på frågor från lektionerna, utan anteckningar, och rättar med anteckningarna. Det som de hade fel på blir deras plan för veckan, och två dagar senare prövar de det igen. Efter provet skriver de vad i planen som hjälpte."
+    }
+  ],
+  "metoderSomGorDen": [
+    {
+      "metod": "larande-pa-kognitionsvetenskaplig-grund",
+      "avsnitt": "Kom igång: Utveckla metoden",
+      "mening": "I starten skriver eleverna först ja eller nej på om de kan."
+    },
+    {
+      "metod": "formativ-bedomning",
+      "avsnitt": "Rutinerna: Färgkortet",
+      "mening": "Färgen säger vad eleven tror, så kompisen och du prövar den med ”Hur vet du?”, och du ställer en ny fråga."
+    },
+    {
+      "metod": "testbaserat-larande",
+      "avsnitt": "Kom igång: Veckans träning",
+      "mening": "När eleven vet vad hen kan och inte kan, är det lättare för er båda att lägga övningen där den behövs."
+    }
+  ]
+}
