@@ -68,7 +68,7 @@ const harTagg = (r: HTMLElement, tagg: string) => (r.dataset.taggar ?? '').split
 
 // teman: det tema som står utfällt på varje nivå, där '' är alla stängda och en nivå utan värde visar sitt enda tema.
 type Sparat = { niva?: string; tagg: string; teman: Record<string, string>; bockade: string[] };
-const { varde: sparat, spara } = lagring<Sparat>(`tafram:${metod}/${led}`, { tagg: '', teman: {}, bockade: [] });
+const { varde: sparat, spara } = lagring<Sparat>(`tafram:${metod}/${led}`, { tagg: '', teman: {}, bockade: [] }, { falt: ['bockade'], nar: () => { sparat.bockade = sparat.bockade.filter((id) => rad.has(id)); visaBockar(); } });
 sparat.bockade = sparat.bockade.filter((id) => rad.has(id));
 if (typeof sparat.teman !== 'object' || !sparat.teman) sparat.teman = {};
 if (!taggVal) sparat.tagg = '';

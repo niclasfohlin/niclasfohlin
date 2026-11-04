@@ -111,8 +111,22 @@ export function dra<T extends { id: string }>(urval: T[], n: number, sedda: stri
 }
 
 /** Det som sparas i webbläsaren, under nyckel. Utan lagring (privat fönster) fungerar sidan ändå. */
-export function lagring<T extends object>(nyckel: string, forval: T): { varde: T; spara: () => void } {
-  let varde = forval;
-  try { varde = { ...forval, ...JSON.parse(localStorage.getItem(nyckel) ?? '{}') }; } catch { /* utan lagring */ }
-  return { varde, spara: () => { try { localStorage.setItem(nyckel, JSON.stringify(varde)); } catch { /* utan lagring */ } } };
+// Med folj läses fälten i listan om, och nar anropas, när sidan visas igen ur webbläsarens bakåtcache, när en annan flik har
+// sparat och när fliken blir synlig igen. Annars visar en sida som man går tillbaka till listan som den var när man lämnade den,
+// och nästa tryck sparar den gamla listan över det som lades till på en annan sida (Niclas 2026-11-04: "En icheckad ska vara
+// kvar tills listan töms även vid fram och tillbaka"). Bara de fält som folj nämner läses om, så att ett val som sidan gör
+// utan att spara, som antalet på Ta fram en aktivitet, står kvar. En funktion för listorna i Strukturer, Strategier och Ta fram.
+export function lagring<T extends object>(nyckel: string, forval: T, folj?: { falt: (keyof T)[]; nar: () => void }): { varde: T; spara: () => void; las: () => void } {
+  const fran = (): T => { try { return { ...forval, ...JSON.parse(localStorage.getItem(nyckel) ?? '{}') }; } catch { return { ...forval }; } };
+  const varde = fran();
+  // Läser om de följda fälten, eller alla när inget följs.
+  const las = () => { const ny = fran(); for (const k of folj?.falt ?? (Object.keys(ny) as (keyof T)[])) varde[k] = ny[k]; };
+  if (folj) {
+    const nar = folj.nar;
+    const igen = () => { las(); nar(); };
+    window.addEventListener('pageshow', (e) => { if (e.persisted) igen(); });
+    window.addEventListener('storage', (e) => { if (e.key === nyckel) igen(); });
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') igen(); });
+  }
+  return { varde, spara: () => { try { localStorage.setItem(nyckel, JSON.stringify(varde)); } catch { /* utan lagring */ } }, las };
 }

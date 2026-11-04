@@ -21,8 +21,10 @@ if (ruta) {
   const verktyg = ruta.dataset.verktyg!;
   const ord: Ord = JSON.parse(ruta.dataset.ord!);
   const korten: Record<string, Kortet> = JSON.parse(ruta.dataset.korten!);
-  const { varde: sparat, spara } = lagring<Sparat>(`${verktyg}:lista`, { valda: [] });
-  sparat.valda = sparat.valda.filter((id) => id in korten);
+  // Listan läses om när sidan visas igen, också ur bakåtcachen, och före varje tryck (lagring i kortbanken.ts).
+  const rensa = () => { sparat.valda = sparat.valda.filter((id) => id in korten); };
+  const { varde: sparat, spara, las } = lagring<Sparat>(`${verktyg}:lista`, { valda: [] }, { falt: ['valda'], nar: () => { rensa(); visa(); } });
+  rensa();
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const lista = $<HTMLOListElement>('st-valda-lista');
   const rad = $<HTMLButtonElement>('st-valda-rad');
@@ -31,6 +33,8 @@ if (ruta) {
 
   const vald = (id: string) => sparat.valda.includes(id);
   function valj(id: string, pa: boolean) {
+    las();
+    rensa();
     sparat.valda = sparat.valda.filter((x) => x !== id);
     if (pa) sparat.valda.push(id);
     spara();
@@ -88,7 +92,7 @@ if (ruta) {
     $('st-kopiera').hidden = n === 0;
   }
 
-  $('st-tom').addEventListener('click', () => { sparat.valda = []; spara(); visa(); });
+  $('st-tom').addEventListener('click', () => { las(); sparat.valda = []; spara(); visa(); });
 
   // Listan i telefonen: en rad längst ned med antalet, som fäller ut listan över sidan.
   const stang = () => { ruta.dataset.oppen = 'false'; rad.setAttribute('aria-expanded', 'false'); };

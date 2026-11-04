@@ -166,7 +166,7 @@ const kortdata = kortdataAdress(aktiviteterAdress(m.id), aktiviteterData(m.id, b
   const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
 
   type Sparat = { antal: number; kategori?: string; minuter: number; ljud: boolean; sedda: string[]; bockade: string[] };
-  const { varde: sparat, spara } = lagring<Sparat>(`aktiviteter:${metod}`, { antal: 6, minuter: 10, ljud: true, sedda: [], bockade: [] });
+  const { varde: sparat, spara } = lagring<Sparat>(`aktiviteter:${metod}`, { antal: 6, minuter: 10, ljud: true, sedda: [], bockade: [] }, { falt: ['bockade'], nar: () => { sparat.bockade = sparat.bockade.filter((id) => kortMed.has(id)); visaBockar(); } });
   // Sex kort är förvalt varje gång sidan öppnas (Niclas 2026-10-16), också när läraren valde ett kort förra gången.
   sparat.antal = 6;
   sparat.bockade = sparat.bockade.filter((id) => kortMed.has(id));
