@@ -4,7 +4,9 @@
 // pdf:en har en enkel rad på platsen när metoden har verktygets knapp i början (vavIWord i src/lib/vav.ts, vavBarn i metoddocx.ts).
 import Centralknapp from './Centralknapp.astro';
 import { vavensEtikett, type Vav } from '../lib/vav';
-// sist är den sista rutan på platsen: raden till verktyget står en gång, också när flera rutor står efter varandra.
+import { radenTillVerktyget } from '../lib/centrala';
+// sist är den sista rutan på platsen. Raden till verktyget står där, och inte när verktygets knapp står i början av metoden
+// (radenTillVerktyget i src/lib/centrala.ts, K-708).
 interface Props { v: Vav; titel: string; sist?: boolean }
 const { v, titel, sist = true } = Astro.props;
 const c = v.vav;
@@ -31,5 +33,5 @@ const etikett = vavensEtikett(v);
   )}
   {!v.knappenFinns && (v.form === 'ruta'
     ? <p class="m-central-knapp"><Centralknapp c={c} metod={v.metod} titel={titel} /></p>
-    : sist && <p class="vav-rad">{fore}<a href={c.adress}>{c.namn}</a>{efter}</p>)}
+    : radenTillVerktyget(v, { sidan: true, sist }) && <p class="vav-rad">{fore}<a href={c.adress}>{c.namn}</a>{efter}</p>)}
 </aside>

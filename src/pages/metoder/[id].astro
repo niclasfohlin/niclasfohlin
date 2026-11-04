@@ -24,6 +24,8 @@ import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, l
 import { medKallor, medSaker, undervisningsmetodensSaker, NEDLADDNINGENS_SLAG, type Um } from '../../lib/undervisningsmetod';
 import { harLarDig as metodenHarLarDig } from '../../lib/lardig';
 import { metodensStrukturer } from '../../lib/strukturer';
+import { vavdaIBorjan } from '../../lib/vav';
+import Centralknapp from '../../components/Centralknapp.astro';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('undervisningsmetoder');
@@ -37,6 +39,9 @@ const adress = `niclasfohlin.se/metoder/${id}`;
 const filer = metodensFiler(id);
 const bilder = metodensBilder(id);
 const strukturer = metodensStrukturer(d, d.titel);
+// Ett verktyg som är sått med fler än två delar står också överst, med samma regel och samma knapp som i Stödundervisning
+// (vavdaIBorjan i src/lib/vav.ts; Niclas 2026-11-01: "De som har fler än 2 såddningar i sig kan ha kortet också i början").
+const verktygIBorjan = vavdaIBorjan(id, d, 'undervisningsmetoder');
 const tabellfiler = metodensTabellfiler(id, ((d.tabeller ?? []) as { rubrik: string }[]).map((t) => t.rubrik));
 const saker = undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer });
 // Huvudfilmen efter läsvägen, och extrafilmerna vid sin del (riggens filmer, i public/metoder/ som <id>-film och <id>-filmN),
@@ -96,6 +101,7 @@ const lasvagen = lagret
           {/* Verktyget Strukturer, för en metod som importerar strukturkort (K-661; Niclas 2026-11-01: "Samt verktyg inuti
               kooperativt lärande"). */}
           {strukturer.length > 0 && <a class={KNAPPENS_KLASS.sida} href="/strukturer">{KNAPPARNAS_NAMN.strukturer}</a>}
+          {verktygIBorjan.map((c) => <Centralknapp c={c} metod={id} titel={d.titel} />)}
           <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} bara namn={KNAPPARNAS_NAMN.lektionskort} />
         </p>
         {/* Din plan: lärarens plan ur Lär dig metoden, om den finns i webbläsaren (src/scripts/insatser.ts, K-628). */}

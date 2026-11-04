@@ -14,7 +14,7 @@ import register from '../data/sadd.json';
 import { CENTRALA, lasbarAdress, tolkaTextplats, type Central } from './centrala';
 import { passar, sammaRubrik, tolkaEfter, type FilmPlats } from './film';
 import { bildensAdress, slagensStil, strukturensAdress, strukturernaAv } from './strukturer';
-import { strategiernaAv, strategiensAdress, strategiernasStil } from './strategier';
+import { strategiernaAv, strategiensAdress, strategiernasStil, strategiernasPlatser } from './strategier';
 import { strukturnamnetI } from './standard/index.js';
 
 export const VAVFORMER = ['kort', 'ruta'] as const;
@@ -31,7 +31,7 @@ type Ja = { skal: string; vav?: Rad[] };
 export type Del = { id: string; namn: string; andra: string[]; rad: string; adress: string; bild?: { src: string; bredd: number; hojd: number }; bilder?: (string | null)[]; nr?: number; stil?: string };
 /** Det som ritas på en plats: verktyget, metoden, formen, delarna, om metoden nämner någon av dem och om verktygets knapp
  *  redan står där. */
-export type Vav = { vav: Central; metod: string; form: Form; delar: Del[]; namngivna: boolean; om?: string; slag: Slag; knappenFinns: boolean };
+export type Vav = { vav: Central; metod: string; form: Form; delar: Del[]; namngivna: boolean; om?: string; slag: Slag; knappenFinns: boolean; iBorjan: boolean };
 
 // Var delarna av ett verktyg står: namnet, raden under och sidan. Strukturerna läses ur src/content/strukturer/, och
 // strategierna (K-702) ur src/content/strategier/, med berättelsens tre bilder och numret, som på /strategier.
@@ -43,10 +43,18 @@ const DELAR: Record<string, (ids: string[], vem: string) => Del[]> = {
 const saker = (register as unknown as { saker: Record<string, { ja?: Record<string, string | Ja> }> }).saker;
 /** De verktyg som vävs in: en post i centrala.json med fältet vav. */
 const vavda = () => CENTRALA.filter((c) => c.vav);
-const raderFor = (metod: string, c: Central): Rad[] => { const ja = saker[c.id]?.ja?.[metod]; return typeof ja === 'object' ? ja.vav ?? [] : []; };
+/** Banken som metoden står i. Sådden i Stödundervisning står i src/data/sadd.json, och i Metoder i sajtens register per
+ *  verktyg, eftersom metodernas filer är riggens (src/data/strategier-i-metoder.json); reglerna nedan läser båda. */
+export type Bank = 'stodundervisning' | 'undervisningsmetoder';
+const METODERS_SADD: Record<string, (metod: string) => Rad[]> = { strategier: strategiernasPlatser };
+const raderFor = (metod: string, c: Central, bank: Bank = 'stodundervisning'): Rad[] => {
+  if (bank === 'undervisningsmetoder') return METODERS_SADD[c.id]?.(metod) ?? [];
+  const ja = saker[c.id]?.ja?.[metod];
+  return typeof ja === 'object' ? ja.vav ?? [] : [];
+};
 
 type MetodForVav = { centrala?: { id: string; efterText: string }[] };
-function vavAv(metod: string, d: MetodForVav, c: Central, r: Rad): Vav {
+function vavAv(metod: string, d: MetodForVav, c: Central, r: Rad, bank: Bank = 'stodundervisning'): Vav {
   const delar = DELAR[c.id]?.(r.delar ?? [], `src/data/sadd.json, ${c.id}, ${metod}`) ?? [];
   return {
     vav: c,
@@ -58,6 +66,8 @@ function vavAv(metod: string, d: MetodForVav, c: Central, r: Rad): Vav {
     om: r.om,
     slag: r.slag ?? 'form',
     // Knappen står redan på platsen när metoden visar verktyget där med fältet centrala (src/lib/centrala.ts).
+    // Verktygets knapp står i början av metoden (vavdaIBorjan nedan), och då står ingen rad till verktyget vid korten.
+    iBorjan: visarSjalv(d, c) || medManga(metod, c, bank),
     knappenFinns: (d.centrala ?? []).some((x) => { if (x.id !== c.id) return false; const t = tolkaTextplats(x.efterText); const v = tolkaEfter(r.efter); return !!t && !!v && passar(v, t); }),
   };
 }
@@ -67,9 +77,8 @@ function vavAv(metod: string, d: MetodForVav, c: Central, r: Rad): Vav {
  * anger den (steg N för lektionens del N, karna: <komponent>, tabell: <rubrik> och arbetsomradet), och rutan är densamma som
  * i Stödundervisning (Vavruta.astro). Platserna står i sajtens register, src/data/strategier-i-metoder.json.
  */
-export function vavtIMetoder(metod: string, d: object, verktyg: string, rader: Rad[]): (Vav & { efter: string })[] {
-  const c = vavda().find((x) => x.id === verktyg);
-  return c ? rader.map((r) => ({ ...vavAv(metod, d as MetodForVav, c, r), efter: r.efter })) : [];
+export function vavtIMetoder(metod: string, d: object): (Vav & { efter: string })[] {
+  return vavda().flatMap((c) => raderFor(metod, c, 'undervisningsmetoder').map((r) => ({ ...vavAv(metod, d as MetodForVav, c, r, 'undervisningsmetoder'), efter: r.efter })));
 }
 
 /** Det som vävs in på platsen i metoden, i registrets ordning. */
@@ -103,9 +112,11 @@ function namnetI(namn: string, d: object, inteForst = false): boolean {
 export const I_BORJAN_FRAN = 3;
 /** Verktygen som står i början av metodens sida för att de är invävda med många delar, och som metoden inte redan visar med
  *  fältet centrala. */
-const medManga = (metod: string, c: Central) => new Set(raderFor(metod, c).flatMap((r) => r.delar ?? [])).size >= I_BORJAN_FRAN;
+// Samma regel i båda bankerna (Niclas 2026-11-04: "Sådana här regler ska alltid ha en rot för både stödundervisning och
+// metoder").
+const medManga = (metod: string, c: Central, bank: Bank = 'stodundervisning') => new Set(raderFor(metod, c, bank).flatMap((r) => r.delar ?? [])).size >= I_BORJAN_FRAN;
 const visarSjalv = (d: MetodForVav, c: Central) => (d.centrala ?? []).some((x) => x.id === c.id);
-export const vavdaIBorjan = (metod: string, d: MetodForVav): Central[] => vavda().filter((c) => !visarSjalv(d, c) && medManga(metod, c));
+export const vavdaIBorjan = (metod: string, d: object, bank: Bank = 'stodundervisning'): Central[] => vavda().filter((c) => !visarSjalv(d as MetodForVav, c) && medManga(metod, c, bank));
 
 /** Det Word-filen har på en plats. Följer med i src/lib/metodresurser.ts och i metoder.json, eftersom metoddocx.ts också körs i
  *  webbläsaren, som inte läser delarnas filer. */

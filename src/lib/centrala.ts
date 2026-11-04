@@ -145,6 +145,17 @@ export function centralKnappHtml(c: Central, metod: string, titel: string, klass
 }
 
 /**
+ * Raden till verktyget under ett verktygs små kort (K-708, METODER.md under Sådden): verktygets adress står en gång. På sidan
+ * är knappen i början av metoden den gången, och annars står raden vid verktygets sista kort på platsen. Word-filen har ingen
+ * knapp i början, och där står raden vid verktygets första plats i metoden. Står verktygets knapp redan på platsen står ingen
+ * rad. En rot för Stödundervisning och Metoder, för sidan och för Word-filen, som också byggs i webbläsaren.
+ */
+export function radenTillVerktyget(v: { knappenFinns: boolean; iBorjan?: boolean }, pa: { sidan: true; sist: boolean } | { sidan: false; forsta: boolean }): boolean {
+  if (v.knappenFinns) return false;
+  return pa.sidan ? pa.sist && !v.iBorjan : pa.forsta;
+}
+
+/**
  * Visar metoden saken genom sådden, när sajten väver in sakens delar på platser i metoden (src/data/sadd.json,
  * src/lib/vav.ts), som verktyget Strategier (K-702)? En metod visar en sak med fältet centrala eller med sådden, för
  * kontrollen nedan och för rutan Verktyg i bankerna (Verktygsruta.astro).

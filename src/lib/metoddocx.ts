@@ -9,7 +9,7 @@ import {
   type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
 import type { ParagraphChild } from 'docx';
-import { centralaVid, lasbarAdress, metodensCentrala, type Textplats } from './centrala';
+import { centralaVid, lasbarAdress, metodensCentrala, radenTillVerktyget, type Textplats } from './centrala';
 import { centraltPapper } from './centraladata';
 import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening, vidareTillLektion } from './standard/index.js';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
@@ -3077,10 +3077,12 @@ function vavRadens(v: VavIWord, bas: string, medRaden: boolean) {
     ...(medRaden ? [lankad(`${rot}${adress}`.replace(/^https?:\/\//, ''), `${rot}${adress}`)] : []),
   ];
 }
-function vavBarn(vavt: VavIWord[], bas: string): Paragraph[] {
-  return vavt.flatMap((v, i) => {
-    // Raden till verktyget vid verktygets sista ruta på platsen, så att Strukturer och Strategier får var sin.
-    const medRaden = !vavt.slice(i + 1).some((w) => w.verktyg.adress === v.verktyg.adress) && !v.knappenFinns;
+// Raden till verktyget står vid verktygets första plats i metoden (radenTillVerktyget i src/lib/centrala.ts, K-708); sedda är
+// verktygen som redan har sin rad i metoden.
+const forstaRaden = (v: VavIWord, sedda: Set<string>) => { const ja = radenTillVerktyget(v, { sidan: false, forsta: !sedda.has(v.verktyg.adress) }); if (ja) sedda.add(v.verktyg.adress); return ja; };
+function vavBarn(vavt: VavIWord[], bas: string, sedda: Set<string>): Paragraph[] {
+  return vavt.flatMap((v) => {
+    const medRaden = forstaRaden(v, sedda);
     return [
       ...(v.text ? [stycke(v.text, { fore: 120, hallIhop: true })] : []),
       new Paragraph({ spacing: { before: v.text ? 0 : 120, after: 120 }, children: vavRadens(v, bas, medRaden) }),
@@ -3190,7 +3192,8 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   const kortVid = (p: FilmPlats) => lektionskortVid(lektionskort, p).map((k) => lankRad(k.knapp, k.adress, bas));
   const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { ut.push(...kortVid(p)); for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) if (!placerade.has(b)) ut.push(...bordsbild(b)); ut.push(...vavVid(p)); } };
   const vavRader = (...platser: FilmPlats[]) => platser.flatMap((p) => (RESURSER.vav?.get(post.id) ?? []).filter((v) => passar(v.vid, p)));
-  const vavVid = (p: FilmPlats) => vavBarn(vavRader(p), bas);
+  const radernasVerktyg = new Set<string>();
+  const vavVid = (p: FilmPlats) => vavBarn(vavRader(p), bas, radernasVerktyg);
   const efterDel = (rubrik: string, maxHojd?: number) => [...kortVid({ del: rubrik }), ...filmerVid(filmer, { del: rubrik }).flatMap(filmBarn), ...paBordetVid(bilderPaBordet, { del: rubrik }).flatMap((b) => pabordetBarn(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235))];
   // De centrala sakerna (src/lib/centrala.ts): namnet och adressen som länk direkt efter texten som nämner saken, där sidan
   // har knappen. Hålls texten ihop med det som följer, hålls raden också ihop med det.
@@ -3375,9 +3378,9 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     const samlade = new Map<string, VavIWord>();
     for (const v of vidSidorna) { const nyckel = `${v.verktyg.namn}|${v.etikett}`; samlade.set(nyckel, { ...v, delar: [...new Map([...(samlade.get(nyckel)?.delar ?? []), ...v.delar].map((x) => [x.adress, x])).values()] }); }
     const iStycket = [...samlade.values()].filter((v) => !v.text && d.ramar!.text.length);
-    const sist = iStycket.flatMap((v, i) => [textRun({ text: ' ' }), ...vavRadens(v, bas, i === iStycket.length - 1 && !v.knappenFinns)]);
+    const sist = iStycket.flatMap((v) => [textRun({ text: ' ' }), ...vavRadens(v, bas, forstaRaden(v, radernasVerktyg))]);
     d.ramar.text.forEach((s, i, alla) => ut.push(stycke(s, i === alla.length - 1 ? { sist } : {})));
-    ut.push(...vavBarn([...samlade.values()].filter((v) => !iStycket.includes(v)), bas));
+    ut.push(...vavBarn([...samlade.values()].filter((v) => !iStycket.includes(v)), bas, radernasVerktyg));
     ut.push(...ljudRader(d));
     const boksidor = lastexter(d.ramar.ramar);
     const ramarna = d.ramar.ramar;

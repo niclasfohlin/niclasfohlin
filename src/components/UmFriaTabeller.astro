@@ -18,7 +18,7 @@ import Vavruta from './Vavruta.astro';
 import type { Vav } from '../lib/vav';
 type Tabell = { plats?: string; rubrik: string; text?: string; kolumner: string[]; rader: string[][]; not?: string };
 // vavt är det sajten väver in efter en tabell (tabell: <rubrik>), som strategiernas små kort (K-702).
-interface Props { d: Um; id: string; plats: string; k: (t: string) => string; saker: MetodSak[]; filer?: UmFil[]; vavt?: (Vav & { efter: string; sist?: boolean })[] }
+interface Props { d: Um; id: string; plats: string; k: (t: string) => string; saker: MetodSak[]; filer?: UmFil[]; vavt?: (Vav & { efter: string })[] }
 const { d, id, plats, k, saker, filer = [], vavt = [] } = Astro.props;
 const cellank = (cell: string) => saker.find((s) => [s.namn, ...(s.former ?? [])].includes(cell.trim()))?.adress;
 const Rubrik = plats === 'bilaga-a' ? 'h3' : 'h4';
@@ -30,6 +30,6 @@ const Rubrik = plats === 'bilaga-a' ? 'h3' : 'h4';
     <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} cellank={cellank} celltext={k} />
     {t.not && <p class="um-not" set:html={k(t.not)} />}
     {filer.some((f) => f.namn === t.rubrik) && <Umfilknappar id={id} titel={d.titel} filer={{}} slag={[]} tabeller={filer.filter((f) => f.namn === t.rubrik)} />}
-    {vavt.filter((v) => v.efter === `tabell: ${t.rubrik}`).map((v) => <Vavruta v={v} titel={d.titel} sist={v.sist} />)}
+    {vavt.filter((v) => v.efter === `tabell: ${t.rubrik}`).map((v, i, a) => <Vavruta v={v} titel={d.titel} sist={!a.slice(i + 1).some((w) => w.vav.id === v.vav.id)} />)}
   </div>
 ))}
