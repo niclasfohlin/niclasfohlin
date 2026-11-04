@@ -1,11 +1,11 @@
 ---
 // Ett kort på /strukturer (K-650): bilden, namnet och syftet som en länk till strukturens sida, och bocken som lägger
-// strukturen i listan Att skriva ut (src/scripts/strukturlistan.ts). I topplistan bär kortet sin plats.
+// strukturen i listan Att skriva ut (Kortbock.astro, src/scripts/kortlistan.ts). I topplistan bär kortet sin plats.
 import { strukturensAdress, bildensAdress, slagensStil, type Struktur } from '../lib/strukturer';
+import Kortbock from './Kortbock.astro';
 
 interface Props { s: Struktur; nr?: number }
 const { s, nr } = Astro.props;
-const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7 3.7 7.3-8"/></svg>';
 ---
 
 <li>
@@ -18,6 +18,6 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
       </span>
     </a>
     {nr !== undefined && <span class="st-nr" aria-label={`Plats ${nr}`}>{nr}</span>}
-    <button type="button" class="st-bock" data-valj={s.id} aria-pressed="false" aria-label={`${s.data.namn} i listan att skriva ut`}><Fragment set:html={BOCK} /></button>
+    <Kortbock id={s.id} namn={s.data.namn} />
   </article>
 </li>

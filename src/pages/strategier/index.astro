@@ -7,6 +7,7 @@
 // alla (src/data/strategier-bladet.json, som intaget skriver), och står inte här förrän den finns.
 import Base from '../../layouts/Base.astro';
 import Kortet from '../../components/Strategikortet.astro';
+import Kortlistan from '../../components/Kortlistan.astro';
 import { strategierna, strategiernasMetod, ALLA_KORTENS_ADRESS, BLADETS_ADRESS, allaKortensStorlek, allaKortensAntal, bladetFinns, strategiernasStil, STRATEGIERNAS_NAMN } from '../../lib/strategier';
 import { TVA_PA_A4 } from '../../lib/strukturer';
 
@@ -43,5 +44,6 @@ const beskrivning = `${alla.length} kognitionsvetenskapliga strategier för lär
 
       <p class="upphov">Strategierna, bilderna och korten © Niclas Fohlin. Ikonerna är Fluent Emoji från Microsoft (MIT).</p>
     </article>
+    <Kortlistan verktyg="strategier" />
   </div>
 </Base>

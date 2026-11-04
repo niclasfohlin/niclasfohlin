@@ -1,7 +1,9 @@
 ---
 // Ett kort på /strategier (K-699): berättelsens tre bilder, numret, namnet och meningen som en länk till strategins sida,
-// som strukturernas kort (Strukturkortet.astro) i strategiernas färg.
+// som strukturernas kort (Strukturkortet.astro) i strategiernas färg, med samma bock som lägger kortet i listan Att skriva ut
+// (Kortbock.astro). Numret står uppe till vänster och bocken till höger.
 import { strategiensAdress, bildensAdress, strategiernasStil, type Strategi } from '../lib/strategier';
+import Kortbock from './Kortbock.astro';
 
 interface Props { s: Strategi }
 const { s } = Astro.props;
@@ -20,5 +22,6 @@ const f = s.data.framsida as { mening: string; bild: { steg: { fil?: string }[] 
       </span>
     </a>
     <span class="sg-nr"><span class="visually-hidden">Strategi </span>{s.data.nr}</span>
+    {!s.data.utkast && <Kortbock id={s.id} namn={s.data.namn} />}
   </article>
 </li>

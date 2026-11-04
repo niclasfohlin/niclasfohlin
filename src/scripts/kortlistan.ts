@@ -1,22 +1,28 @@
-// Listan Att skriva ut i verktyget Strukturer (K-650): bockarna på korten på /strukturer, knappen Lägg i Att skriva ut på
-// en strukturs sida och listan, som på en bred skärm står i en spalt bredvid korten och i telefonen bakom en rad längst ned,
-// som på Ta fram en aktivitet (src/pages/stodundervisning/[id]/aktiviteter.astro, och dess klasser ak-valda i
-// global.css). Listan sparas i webbläsaren och i länken, #lista=a,b,c, så att samma lista går att öppna på en annan enhet.
+// Listan Att skriva ut i verktygen Strukturer (K-650) och Strategier (Niclas 2026-11-04: "samma funktion som strukturer"),
+// ett skript för båda: bockarna på korten på verktygets sida, knappen Lägg i Att skriva ut på ett korts sida och listan, som
+// på en bred skärm står i en spalt bredvid korten och i telefonen bakom en rad längst ned, som på Ta fram en aktivitet
+// (src/pages/stodundervisning/[id]/aktiviteter.astro, och dess klasser ak-valda i global.css). Verktyget, orden och korten
+// står på listans ruta (src/components/Kortlistan.astro). Listan sparas i webbläsaren, en per verktyg, och i länken,
+// #lista=a,b,c, så att samma lista går att öppna på en annan enhet.
 //
 // Skriv ut listan hämtar de valda kortens pdf:er och lägger dem två och två på A4 med pdf-lib, framsidorna på sida 1 och
-// baksidorna på sida 2 i samma ordning (src/lib/strukturkort.js, strukturkortensArk i standarden), och skriver ut, som
-// knapparna i src/scripts/pdfutskrift.ts. Varje kort i en utskrift räknas i statistiken, så att topplistan räknar det.
+// baksidorna på sida 2 i samma ordning (src/lib/strukturkort.js, strukturkortensArk i standarden; strategikorten har
+// strukturkortets mått), och skriver ut, som knapparna i src/scripts/pdfutskrift.ts. Varje kort i en utskrift räknas i
+// statistiken, så att Strukturers topplista räknar det.
 import { el, lagring } from './kortbanken';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
 
 type Sparat = { valda: string[] };
-type Strukturen = { namn: string; slag: string; farg: string; kort: string };
+type Kortet = { namn: string; farg: string; kort: string };
+type Ord = { kort: string; kortet: string; vems: string; verktyget: string };
 
 const ruta = document.getElementById('st-valda');
 if (ruta) {
-  const strukturerna: Record<string, Strukturen> = JSON.parse(ruta.dataset.strukturer!);
-  const { varde: sparat, spara } = lagring<Sparat>('strukturer:lista', { valda: [] });
-  sparat.valda = sparat.valda.filter((id) => id in strukturerna);
+  const verktyg = ruta.dataset.verktyg!;
+  const ord: Ord = JSON.parse(ruta.dataset.ord!);
+  const korten: Record<string, Kortet> = JSON.parse(ruta.dataset.korten!);
+  const { varde: sparat, spara } = lagring<Sparat>(`${verktyg}:lista`, { valda: [] });
+  sparat.valda = sparat.valda.filter((id) => id in korten);
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const lista = $<HTMLOListElement>('st-valda-lista');
   const rad = $<HTMLButtonElement>('st-valda-rad');
@@ -31,13 +37,13 @@ if (ruta) {
     visa();
   }
 
-  // Bockarna och knapparna som lägger en struktur i listan: data-valj är strukturens id.
-  const knappar = () => [...document.querySelectorAll<HTMLButtonElement>('[data-valj]')];
+  // Bockarna och knapparna som lägger ett kort i listan: data-valj är kortets id.
+  const knappar = () => [...document.querySelectorAll<HTMLButtonElement>('[data-valj]')].filter((b) => b.dataset.valj! in korten);
   function visaKnapp(b: HTMLButtonElement) {
     const id = b.dataset.valj!;
     const med = vald(id);
     b.setAttribute('aria-pressed', String(med));
-    const namn = strukturerna[id].namn;
+    const namn = korten[id].namn;
     if (b.classList.contains('st-bock')) {
       b.setAttribute('aria-label', `${namn} i listan att skriva ut`);
       b.title = med ? 'I listan att skriva ut. Tryck för att ta bort' : 'Lägg i listan att skriva ut';
@@ -45,20 +51,20 @@ if (ruta) {
     } else b.textContent = med ? 'Ta bort ur Att skriva ut' : 'Lägg i Att skriva ut';
   }
   // Ett tryck på en bock eller knapp med data-valj, också på kort som topplistan lägger in efter laddningen
-  // (src/pages/strukturer/index.astro), som då säger till med händelsen strukturer:ritad.
-  document.addEventListener('click', (e) => { const b = (e.target as Element | null)?.closest?.<HTMLElement>('[data-valj]'); if (b) valj(b.dataset.valj!, !vald(b.dataset.valj!)); });
-  document.addEventListener('strukturer:ritad', () => visa());
+  // (src/pages/strukturer/index.astro), som då säger till med händelsen <verktyg>:ritad.
+  document.addEventListener('click', (e) => { const b = (e.target as Element | null)?.closest?.<HTMLElement>('[data-valj]'); if (b && b.dataset.valj! in korten) valj(b.dataset.valj!, !vald(b.dataset.valj!)); });
+  document.addEventListener(`${verktyg}:ritad`, () => visa());
 
   function visa() {
     const n = sparat.valda.length;
     document.querySelectorAll('.st-valda-antal').forEach((x) => { x.textContent = String(n); });
     $('st-valda-tom').hidden = n > 0;
     lista.replaceChildren(...sparat.valda.map((id) => {
-      const s = strukturerna[id];
+      const s = korten[id];
       const li = el('li', 'ak-valt');
       li.style.setProperty('--kat', s.farg);
       const lank = el('a', 'ak-valt-namn', s.namn) as HTMLAnchorElement;
-      lank.href = `/strukturer/${id}`;
+      lank.href = `/${verktyg}/${id}`;
       const bort = el('button', 'ak-valt-bort', '×') as HTMLButtonElement;
       bort.type = 'button';
       bort.setAttribute('aria-label', `Ta bort ${s.namn} ur listan`);
@@ -75,7 +81,7 @@ if (ruta) {
     knappar().forEach(visaKnapp);
     ruta!.classList.toggle('har-kort', n > 0);
     $('st-skrivut-valda').setAttribute('aria-disabled', String(n === 0));
-    // Listans knapp heter efter antalet, så att den inte delar namn med Skriv ut kortet på strukturens sida (de kalla
+    // Listans knapp heter efter antalet, så att den inte delar namn med Skriv ut kortet på kortets sida (de kalla
     // läsarna 2026-11-01).
     $('st-skrivut-valda').textContent = n ? `Skriv ut ${n} kort` : 'Skriv ut listan';
     $('st-tom').hidden = n === 0;
@@ -89,9 +95,9 @@ if (ruta) {
   rad.addEventListener('click', () => { const oppen = ruta.dataset.oppen !== 'true'; ruta.dataset.oppen = String(oppen); rad.setAttribute('aria-expanded', String(oppen)); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && ruta.dataset.oppen === 'true') { stang(); rad.focus(); } });
 
-  // Listans länk: verktygets adress med strukturerna i listan.
+  // Listans länk: verktygets adress med korten i listan.
   $('st-kopiera').addEventListener('click', async () => {
-    const url = `${location.origin}/strukturer#lista=${sparat.valda.join(',')}`;
+    const url = `${location.origin}/${verktyg}#lista=${sparat.valda.join(',')}`;
     const knappen = $('st-kopiera');
     try {
       await navigator.clipboard.writeText(url);
@@ -116,15 +122,15 @@ if (ruta) {
     try {
       const [pdflib, { strukturkortenTvaOchTva }] = await Promise.all([import('pdf-lib'), import('../lib/strukturkort.js')]);
       const kort = await Promise.all(valda.map(async (id) => {
-        const svar = await fetch(strukturerna[id].kort);
+        const svar = await fetch(korten[id].kort);
         if (!svar.ok) throw new Error(`${id}: ${svar.status}`);
         return svar.arrayBuffer();
       }));
-      const bytes = await strukturkortenTvaOchTva(pdflib, kort, { titel: `Strukturkort: ${valda.map((id) => strukturerna[id].namn).join(', ')}` });
+      const bytes = await strukturkortenTvaOchTva(pdflib, kort, { titel: `${ord.kort}: ${valda.map((id) => korten[id].namn).join(', ')}` });
       const url = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'application/pdf' }));
       if (direkt) skrivUt(url); else if (flik) flik.location.href = url; else location.assign(url);
-      rakna('utskrift:strukturer/listan', `Strukturer: utskrift av listan, ${valda.length} kort`);
-      for (const id of valda) rakna(`utskrift:strukturer/${id}`, `${strukturerna[id].namn}: strukturkortet utskrivet`);
+      rakna(`utskrift:${verktyg}/listan`, `${ord.verktyget}: utskrift av listan, ${valda.length} kort`);
+      for (const id of valda) rakna(`utskrift:${verktyg}/${id}`, `${korten[id].namn}: ${ord.kortet} utskrivet`);
       knapp.textContent = text;
     } catch {
       flik?.close();
@@ -137,7 +143,7 @@ if (ruta) {
   // #lista=a,b,c är en lista från en annan enhet: den blir listan, och sidan säger till när den ersätter en annan.
   const fran = decodeURIComponent(location.hash.slice(1)).match(/^lista=(.*)$/);
   if (fran) {
-    const nya = [...new Set(fran[1].split(',').filter((id) => id in strukturerna))];
+    const nya = [...new Set(fran[1].split(',').filter((id) => id in korten))];
     const ersatt = sparat.valda.length > 0 && sparat.valda.join(',') !== nya.join(',');
     sparat.valda = nya;
     spara();

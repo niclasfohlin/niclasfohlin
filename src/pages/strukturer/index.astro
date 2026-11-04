@@ -10,11 +10,11 @@
 //               listan som den var (src/data/strukturer-topp.json), och sidan visar den.
 //   Raderna     Par, Grupp och Klass som rader i slagets färg som fälls ut, med korten i två spalter i telefonen och tre på
 //               en bred skärm (formen som valdes i fas 0, underlag/prov/strukturer/granskning/ide-*.md).
-//   Bocken      Varje kort har en bock som lägger strukturen i listan Att skriva ut (Strukturlistan.astro), som på Ta fram
+//   Bocken      Varje kort har en bock som lägger strukturen i listan Att skriva ut (Kortlistan.astro), som på Ta fram
 //               en aktivitet.
 //   Alla        Filen med alla kort, två på varje A4, i radernas ordning (scripts/strukturer/kort.mjs).
 import Base from '../../layouts/Base.astro';
-import Strukturlistan from '../../components/Strukturlistan.astro';
+import Kortlistan from '../../components/Kortlistan.astro';
 import Kortet from '../../components/Strukturkortet.astro';
 import { strukturerna, strukturernasMetod, ALLA_KORTENS_ADRESS, allaKortensStorlek, topplistanIBygget, slagensStil, SLAGEN, TVA_PA_A4 } from '../../lib/strukturer';
 import { symbol } from '../../../scripts/strukturer/symboler.mjs';
@@ -72,7 +72,7 @@ const beskrivning = `${alla.length} strukturer för samarbete i par, i grupp och
 
       <p class="upphov">Strukturerna kommer ur Niclas Fohlins bank för kooperativt lärande. Bilderna och korten © Niclas Fohlin.</p>
     </article>
-    <Strukturlistan />
+    <Kortlistan verktyg="strukturer" />
   </div>
 </Base>
 

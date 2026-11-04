@@ -4,7 +4,7 @@
 // Funktionen räknar varje strukturs besök och utskrifter de senaste 30 dagarna ur GoatCounters API, med samma räkning som
 // bygget (strukturernasTopplista i standarden: en utskrift väger som fem besök), och svarar med listan som JSON. Netlifys
 // CDN sparar svaret ett dygn (Netlify-CDN-Cache-Control), så funktionen körs omkring en gång om dygnet, och sidan
-// /strukturer hämtar listan när den laddas (src/scripts/strukturlistan.ts). Utan nyckel, och när GoatCounter inte svarar
+// /strukturer hämtar listan när den laddas (src/scripts/kortlistan.ts). Utan nyckel, och när GoatCounter inte svarar
 // eller svarar 429, svarar funktionen 503, och sidan visar listan som den var när sajten byggdes
 // (src/data/strukturer-topp.json, scripts/strukturer/topplistan.mjs).
 //

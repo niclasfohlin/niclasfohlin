@@ -1,0 +1,8 @@
+---
+// Bocken på ett kort i verktygen Strukturer och Strategier, som lägger kortet i listan Att skriva ut
+// (src/scripts/kortlistan.ts, Kortlistan.astro). En komponent för båda korten.
+interface Props { id: string; namn: string }
+const { id, namn } = Astro.props;
+const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7 3.7 7.3-8"/></svg>';
+---
+<button type="button" class="st-bock" data-valj={id} aria-pressed="false" aria-label={`${namn} i listan att skriva ut`}><Fragment set:html={BOCK} /></button>

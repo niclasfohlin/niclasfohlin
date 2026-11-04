@@ -5,7 +5,7 @@
 // matematik och socialt"). Stegen är grundbokens bank, ordagrant, och kortet är samma steg och samma bild ur samma scen.
 // Förslagen står bara här, inte på kortet.
 import Base from '../../layouts/Base.astro';
-import Strukturlistan from '../../components/Strukturlistan.astro';
+import Kortlistan from '../../components/Kortlistan.astro';
 import { strukturerna, strukturernasMetod, strukturensAdress, bildensAdress, kortetsAdress, SLAGEN, OMRADENA, stegHtml, slagensStil, STRUKTURERNAS_ADRESS, DUBBELSIDIGT } from '../../lib/strukturer';
 import { symbol } from '../../../scripts/strukturer/symboler.mjs';
 
@@ -62,7 +62,7 @@ const beskrivning = `${d.syfte}. Strukturen ${d.namn} för ${slag.namn.toLowerCa
       <p class="st-tillbaka"><a href={STRUKTURERNAS_ADRESS}>Alla strukturer</a></p>
       <p class="upphov">Strukturen kommer ur Niclas Fohlins bank för kooperativt lärande. Bilden och kortet © Niclas Fohlin.</p>
     </article>
-    <Strukturlistan />
+    <Kortlistan verktyg="strukturer" />
   </div>
 </Base>
 

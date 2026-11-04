@@ -4,6 +4,7 @@
 // knapparna först; sedan insikten, förklaringen, minnets bild och stegen som på baksidan, och det som bara står här:
 // förslagen, Tänk på, forskningen och Fördjupa. Allt ur strategins fil, som kortet.
 import Base from '../../layouts/Base.astro';
+import Kortlistan from '../../components/Kortlistan.astro';
 import { strategierna, strategiernasMetod, strategiensAdress, bildensAdress, ikonensAdress, kortetsAdress, kortetFinns, strategiernasStil, OMRADENA, STRATEGIERNAS_ADRESS, STRATEGIERNAS_NAMN, BILDERNAS_FORKLARING } from '../../lib/strategier';
 import { DUBBELSIDIGT } from '../../lib/strukturer';
 
@@ -49,7 +50,7 @@ const beskrivning = `${f.mening} ${d.namn} är en kognitionsvetenskaplig strateg
 
       <div class="st-utskrift">
         {harKort
-          ? <a class="knapp" href={kortetsAdress(s.id)} target="_blank" rel="noopener" data-goatcounter-click={`utskrift:strategier/${s.id}`} data-goatcounter-title={`${d.namn}: strategikortet utskrivet`}>Skriv ut kortet</a>
+          ? <><a class="knapp" href={kortetsAdress(s.id)} target="_blank" rel="noopener" data-skrivut-ett data-goatcounter-click={`utskrift:strategier/${s.id}`} data-goatcounter-title={`${d.namn}: strategikortet utskrivet`}>Skriv ut kortet</a><button type="button" class="knapp sekundar" data-valj={s.id} aria-pressed="false">Lägg i Att skriva ut</button></>
           : <p class="st-utskriftsrad">Utkast: kortet görs när strategin visas.</p>}
       </div>
       {harKort && <p class="st-utskriftsrad">Kortet är ett halvt A4. {DUBBELSIDIGT}</p>}
@@ -111,5 +112,12 @@ const beskrivning = `${f.mening} ${d.namn} är en kognitionsvetenskaplig strateg
       <p class="st-tillbaka"><a href={STRATEGIERNAS_ADRESS}>Alla strategier</a></p>
       <p class="upphov">Strategin, bilderna och kortet © Niclas Fohlin. Ikonerna är Fluent Emoji från Microsoft (MIT).</p>
     </article>
+    <Kortlistan verktyg="strategier" />
   </div>
 </Base>
+
+<script>
+  import { ettkortLank } from '../../scripts/pdfutskrift';
+  const lank = document.querySelector<HTMLAnchorElement>('[data-skrivut-ett]');
+  if (lank) ettkortLank(lank);
+</script>
