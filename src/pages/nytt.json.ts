@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn, publicerade } from '../lib/innehall';
+import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn, publicerade, formateraDatum } from '../lib/innehall';
 import { byggSerier, lektionsnamn } from '../lib/serie';
 import { arskursText } from '../lib/metod';
 import { metodensCentrala, CENTRALA } from '../lib/centrala';
@@ -17,16 +17,30 @@ import type { Um } from '../lib/undervisningsmetod';
 // och en senare lektion som en nyhet i serien (netlify/lib/utskick.mjs, grupperaNya).
 // En metod med skrivkort har sidan som slumpar dem som en egen rad i brevet (lankar; Niclas 2026-10-14: sidan ska stå
 // tydligt i mejlet som skickas).
+// Texttypens ord i mejlet om en ny text (netlify/lib/utskick.mjs, brev): Ny krönika i ämnesraden och Läs hela krönikan i
+// mejlet (Niclas 2026-11-04: "Ex att nytt finns att läsa, ingressen off sedan läs mer här", med länk till originalet och sajten).
+const TEXTENS_ORD: Record<string, { en: string; den: string }> = {
+  kronika: { en: 'Ny krönika', den: 'krönikan' },
+  debatt: { en: 'Ny debattartikel', den: 'debattartikeln' },
+  artikel: { en: 'Ny artikel', den: 'artikeln' },
+  intervju: { en: 'Ny intervju', den: 'intervjun' },
+  podd: { en: 'Nytt poddavsnitt', den: 'avsnittet' },
+  annat: { en: 'Ny text', den: 'texten' },
+};
+const forstaCitat = (c: unknown) => { const x = Array.isArray(c) ? c[0] : undefined; return typeof x === 'string' ? x : (x as { text?: string } | undefined)?.text; };
+
 export const GET: APIRoute = async () => {
   const [artiklar, metoder, bocker, undervisningsmetoder] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade(), publicerade('undervisningsmetoder')]);
   const serier = byggSerier(metoder);
   const poster = [
     ...artiklar.map((a) => ({
       typ: 'artikel',
-      etikett: `Ny text, publicerad i ${publikationNamn(a.data.publikation)}`,
+      etikett: `${TEXTENS_ORD[a.data.typ].en} i ${publikationNamn(a.data.publikation)}, ${formateraDatum(a.data.datum)}`,
       url: `/artiklar/${a.id}`,
       titel: a.data.titel,
       ingress: a.data.ingress,
+      // Mejlets egna rader för en text: ämnesradens ord, ordet i Läs hela, det första lyftcitatet och originalet.
+      text: { amne: TEXTENS_ORD[a.data.typ].en, den: TEXTENS_ORD[a.data.typ].den, citat: forstaCitat(a.data.citat), publikation: publikationNamn(a.data.publikation), original: a.data.originalUrl },
       datum: a.data.datum.toISOString().slice(0, 10),
     })),
     ...metoder.map((m) => {

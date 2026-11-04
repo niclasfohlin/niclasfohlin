@@ -979,6 +979,22 @@
       "blad": "underlag/texter/ne-kooperativt-larande.md",
       "post": "src/content/artiklar/ne-kooperativt-larande.md",
       "rattigheter": "Niclas 2026-09-20: hela texten får ligga på sajten"
+    },
+    {
+      "slug": "det-ar-relationen-som-far-kraven-att-bara",
+      "titel": "Det är relationen som får kraven att bära",
+      "datum": "2026-11-03",
+      "publikation": "vi-larare",
+      "typ": "kronika",
+      "etikett": "Krönika",
+      "forfattarskap": "författare",
+      "medforfattare": [],
+      "originalUrl": "https://www.vilarare.se/specialpedagogik/kronika2/det-ar-relationen-som-far-kraven-att-bara/",
+      "ord": 1271,
+      "fulltext": "underlag/texter/det-ar-relationen-som-far-kraven-att-bara.md",
+      "blad": "underlag/texter/det-ar-relationen-som-far-kraven-att-bara.md",
+      "post": "src/content/artiklar/det-ar-relationen-som-far-kraven-att-bara.md",
+      "rattigheter": "Niclas 2026-09-24: alla texter i fulltext"
     }
   ]
 }

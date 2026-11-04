@@ -49,15 +49,22 @@ export function grupperaNya(nya) {
 }
 
 // En post kan ha egna rader med länkar efter ingressen (lankar i nytt.json), som en metods centrala saker (src/lib/centrala.ts).
+// En ny text (fältet text i nytt.json) har mallen för texter (Niclas 2026-11-04: "Ex att nytt finns att läsa, ingressen off
+// sedan läs mer här", med länk till originalet och till sajten och något tankeväckande): etiketten med texttypen, tidningen
+// och datumet, rubriken, ingressen, det första lyftcitatet framhävt, Läs hela krönikan på niclasfohlin.se och originalet.
+const citatet = (t) => t ? `
+    <p style="margin:0 0 14px;padding:2px 0 2px 14px;border-left:3px solid #2f5d50;font-size:19px;line-height:1.45;font-style:italic;">${html(t)}</p>` : '';
+const originalet = (p) => p.text?.original ? `
+    <p style="margin:-20px 0 28px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;color:#5a635e;">Publicerad först i ${html(p.text.publikation)}: <a href="${html(p.text.original)}" style="color:#2f5d50;">läs den där</a>.</p>` : '';
 export function brev(nya, sajt) {
   const lank = (p, text) => `<a href="${sajt}${p.url}" style="color:#2f5d50;">${html(text)}</a>`;
   const delar = grupperaNya(nya).map((p) => `
     <p style="margin:0 0 4px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;color:#5a635e;">${html(p.etikett)}</p>
     <h2 style="margin:0 0 8px;font-size:22px;line-height:1.25;"><a href="${sajt}${p.url}" style="color:#18221d;text-decoration:none;">${html(p.titel)}</a></h2>
-    <p style="margin:0 0 12px;">${html(p.ingress)}</p>${(p.lankar ?? []).map((l) => `
+    <p style="margin:0 0 12px;">${html(p.ingress)}</p>${citatet(p.text?.citat)}${(p.lankar ?? []).map((l) => `
     <p style="margin:0 0 12px;">${lank(l, l.text)}${l.efter ? `: ${html(l.efter)}` : ''}.</p>`).join('')}${p.lektioner?.length ? `
     <p style="margin:0 0 12px;">${p.lektioner.length === 1 ? `Med ${p.lektioner[0].ord?.den ?? 'lektionen'}` : `Med ${p.lektioner.length} ${p.lektioner[0].ord?.flera ?? 'lektioner'}`}: ${p.lektioner.map((l) => lank(l, l.namn ?? l.titel)).join(', ')}.</p>` : ''}
-    <p style="margin:0 0 28px;">${lank(p, p.typ === 'verktyg' ? 'Öppna verktyget på niclasfohlin.se' : 'Läs på niclasfohlin.se')}</p>`).join('');
+    <p style="margin:0 0 28px;">${lank(p, p.typ === 'verktyg' ? 'Öppna verktyget på niclasfohlin.se' : p.text ? `Läs hela ${p.text.den} på niclasfohlin.se` : 'Läs på niclasfohlin.se')}</p>${originalet(p)}`).join('');
   return `<!doctype html>
 <html lang="sv"><body style="margin:0;padding:0;background:#f7f6f1;font-family:Georgia,'Times New Roman',serif;color:#18221d;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f6f1;"><tr><td align="center" style="padding:32px 16px;">
@@ -132,7 +139,7 @@ export async function mejlaNytt({ poster, sajt, lager, brevoNyckel, listId, nu =
       const titlar = grupper.map((p) => p.titel);
       const amne = verktyg
         ? `${grupper.length === 1 ? 'Nytt verktyg' : 'Nya verktyg'} på niclasfohlin.se: ${titlar.length === 1 ? titlar[0] : `${titlar.slice(0, -1).join(', ')} och ${titlar.at(-1)}`}`
-        : grupper.length === 1 ? `Nytt på niclasfohlin.se: ${titlar[0]}` : `Nytt på niclasfohlin.se: ${grupper.length} nya inlägg`;
+        : grupper.length === 1 ? `${grupper[0].text?.amne ?? 'Nytt på niclasfohlin.se'}: ${titlar[0]}` : `Nytt på niclasfohlin.se: ${grupper.length} nya inlägg`;
       const kampanj = await brevo('/emailCampaigns', {
         name: `Nytt ${nu.toISOString().slice(0, 16)}: ${titlar.join(' | ').slice(0, 120)}`,
         subject: amne,

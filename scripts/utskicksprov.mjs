@@ -2,7 +2,7 @@
 // Provet av utskicket (netlify/lib/utskick.mjs, K-704): sändtiden, ingen kampanj mellan 21.00 och 07.00 svensk tid och en
 // deploy nattetid schemalagd till 07.00 (CLAUDE.md under Prenumeration och utskick), också nätterna när sommartiden börjar
 // och slutar, och nya verktyg i ett eget utskick. mejlaNytt prövas med en härmad Brevo, nattetid och på dagen.
-import { sandtid, utskicken, mejlaNytt } from '../netlify/lib/utskick.mjs';
+import { sandtid, utskicken, mejlaNytt, brev } from '../netlify/lib/utskick.mjs';
 
 const fall = [
   ['2026-11-03T21:30:00Z', '2026-11-04T07:00:00+01:00'], // 22.30 svensk tid
@@ -34,5 +34,13 @@ anrop.length = 0;
 lagret.varde = { urler: ['/gammal'] };
 await mejlaNytt({ poster, sajt: 'https://niclasfohlin.se', lager: lagret, brevoNyckel: 'k', listId: '3', nu: new Date('2026-11-04T08:00:00Z') });
 if (anrop.filter(([p]) => p.includes('sendNow')).length !== 2 || anrop.some(([, b]) => b.scheduledAt)) { fel++; console.error('dagen', JSON.stringify(anrop.map(([p]) => p))); }
+// Mallen för en ny text: ämnesraden med texttypen, citatet, Läs hela krönikan och originalet (CLAUDE.md under Prenumeration och utskick).
+const text = { typ: 'artikel', url: '/artiklar/x', titel: 'Rubriken', ingress: 'Ingressen.', etikett: 'Ny krönika i Vi Lärare, 3 november 2026', text: { amne: 'Ny krönika', den: 'krönikan', citat: 'Citatet.', publikation: 'Vi Lärare', original: 'https://www.vilarare.se/x/' } };
+const b = brev([text], 'https://niclasfohlin.se');
+if (!b.includes('Citatet.') || !b.includes('Läs hela krönikan på niclasfohlin.se') || !b.includes('Publicerad först i Vi Lärare') || !b.includes('https://www.vilarare.se/x/')) { fel++; console.error('textens mall', b.replace(/<[^>]+>/g, ' ').replace(/s+/g, ' ').slice(0, 300)); }
+anrop.length = 0;
+lagret.varde = { urler: ['/gammal'] };
+await mejlaNytt({ poster: [poster[0] ?? poster, text].flat().filter((p) => p.url === '/gammal' || p === text), sajt: 'https://niclasfohlin.se', lager: lagret, brevoNyckel: 'k', listId: '3', nu: new Date('2026-11-04T08:00:00Z') });
+if (anrop.find(([p]) => p === '/emailCampaigns')?.[1].subject !== 'Ny krönika: Rubriken') { fel++; console.error('textens ämne', anrop.find(([p]) => p === '/emailCampaigns')?.[1].subject); }
 if (fel) { console.error(`utskicksprov: ${fel} fel`); process.exit(1); }
-console.log('utskicksprov: sändtiden 07.00–21.00 med sommartiden, schemaläggningen nattetid och verktygen i ett eget utskick svarar rätt.');
+console.log('utskicksprov: sändtiden 07.00–21.00 med sommartiden, schemaläggningen nattetid, verktygen i ett eget utskick och mallen för en ny text svarar rätt.');
