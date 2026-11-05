@@ -7,7 +7,10 @@
 //   ytan        en ljust violett panel i ramens ställe, med vita ytor ovanpå, och fliken som en vit tablett med numret
 //   framsidan   namnet i 80 punkter, ned till 56 och sedan två rader, som strukturkortet ("Ska kunna ses på avstånd");
 //               meningen; berättelsens tre kvadratiska bilder med vit kant och rubriken över, utfallen under som en mätare
-//               från ljus till mörk violett, som syns också i gråskala; och handlingen i ett band med ikonerna i vita cirklar
+//               från ljus till mörk violett, som syns också i gråskala; och handlingen i ett band med ikonerna i vita cirklar,
+//               i 15 punkter med minst 0,8 mm luft på var sida om pilarna; ryms leden inte före bandets rundade kant: mindre
+//               text ned till 13 punkter, och kortet listas som en text att korta (riggens brev 2026-11-05: "Säg det
+//               samtidigt" stod 1 mm från kanten, och i ett fullt band rörde pilarna texten)
 //   baksidan    namnet, insikten med glödlampan i en vit ruta, minnets bild i en vit ruta till vänster med den första delen
 //               ljus och den sista djup, Så gör du som numrerade steg längs en linje, och det som avgör med rubriken som en
 //               etikett, i 16 punkter ("Större text på baksidan", Niclas om strukturkortet); ryms stegen inte: mindre luft
@@ -19,10 +22,11 @@
 // typsnittet har laddats och skriver storlekarna i data-attribut, som scripts/strategier/kort.mjs läser.
 import { strukturkortensArk } from '../../src/lib/standard/strukturer.js';
 import { STRATEGIERNAS_FARG } from '../../src/lib/standard/strategier.js';
+import { mening } from '../../src/lib/standard/text.js';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-export const STRATEGIKORTETS_STANDARD = Object.freeze({ namn: 80, namnMinst: 56, bak: 16, bakMinst: 14 });
+export const STRATEGIKORTETS_STANDARD = Object.freeze({ namn: 80, namnMinst: 56, band: 15, bandMinst: 13, bak: 16, bakMinst: 14 });
 
 const stil = (typsnitt) => `
 @font-face { font-family: Fredoka; src: url(${typsnitt}/Fredoka-Regular.ttf); font-weight: 400; }
@@ -59,8 +63,8 @@ h2, p, ol, figure { margin: 0; }
 .tidpil { justify-self: center; width: 10.5mm; height: 10.5mm; margin-top: calc(13pt * 1.2 + 1.4mm + 23mm - 5.25mm); border-radius: 50%; background: #fff; box-shadow: 0 0.6mm 0 var(--kant); }
 .tidpil path { fill: none; stroke: var(--strategi); stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
 .handling { margin-top: auto; height: 14mm; border-radius: 7mm; background: linear-gradient(90deg, var(--strategi), var(--strategi-mork)); color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 7mm 0 2mm; }
-.led { display: flex; align-items: center; gap: 2.5mm; font-weight: 600; font-size: 15pt; line-height: 1.05; white-space: nowrap; }
-.ledpil { flex: none; width: 7mm; height: 4mm; }
+.led { display: flex; align-items: center; gap: 2.5mm; font-weight: 600; font-size: ${STRATEGIKORTETS_STANDARD.band}pt; line-height: 1.05; white-space: nowrap; }
+.ledpil { flex: none; width: 7mm; height: 4mm; margin: 0 0.8mm; }
 .ledpil path { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
 
 .bak .inne { position: absolute; inset: 3mm 5mm 5.4mm 5mm; display: flex; flex-direction: column; }
@@ -100,8 +104,9 @@ h2, p, ol, figure { margin: 0; }
 `;
 
 // Mätningen i sidan: framsidans namn krymper tills det ryms på en rad, ned till 56 punkter, och får sedan två rader;
+// handlingens led krymper tills det sista slutar före bandets högra utfyllnad, där bandet rundas av, ned till 13 punkter;
 // baksidans text står i 16 punkter, får mindre luft och sedan mindre text ned till 14 när den inte ryms. En framsida som
-// ändå flödar över märks.
+// ändå flödar över och ett band som ändå inte ryms märks.
 const MATNING = `<script>document.fonts.ready.then(() => {
   const S = ${JSON.stringify(STRATEGIKORTETS_STANDARD)};
   for (const n of document.querySelectorAll('.fram .namn')) {
@@ -109,6 +114,15 @@ const MATNING = `<script>document.fonts.ready.then(() => {
     while (n.scrollWidth > n.clientWidth && pt > S.namnMinst) { pt -= 2; n.style.fontSize = pt + 'pt'; }
     if (n.scrollWidth > n.clientWidth) n.style.whiteSpace = 'normal';
     n.dataset.pt = pt; n.dataset.rader = Math.round(n.getBoundingClientRect().height / (pt * 1.333));
+  }
+  for (const band of document.querySelectorAll('.fram .handling')) {
+    const leden = band.querySelectorAll('.led');
+    if (!leden.length) continue;
+    const ryms = () => leden[leden.length - 1].getBoundingClientRect().right <= band.getBoundingClientRect().right - parseFloat(getComputedStyle(band).paddingRight) + 1;
+    let pt = S.band;
+    while (!ryms() && pt > S.bandMinst) { pt -= 0.5; for (const l of leden) l.style.fontSize = pt + 'pt'; }
+    band.dataset.pt = pt;
+    if (!ryms()) band.dataset.rymsInte = '1';
   }
   for (const inne of document.querySelectorAll('.bak .inne')) {
     const ol = inne.querySelector('ol'), avgor = inne.querySelector('.avgor');
@@ -185,6 +199,8 @@ export function bladetHtml(strategier, { typsnitt, titel, mitten }) {
  */
 export function kortenHtml(kort, { typsnitt, tvaOchTva = false, titel = 'Strategikort' }) {
   const flik = (k) => `<div class="flik"><span class="nr">${k.nr}</span>Strategi</div>`;
+  // Stegets rubrik får en punkt efter sig bara när den inte redan slutar med ett skiljetecken, med standardens mening, som
+  // strategins sida (Niclas 2026-11-05 om "Kan jag det?.": "?. Är ju fel. Gör så det blir korrekt.").
   const kortet = (k, del, nere = false) => {
     const inne = del === 'fram'
       ? `<div class="inne"><h2 class="namn">${esc(k.namn)}</h2><p class="mening">${esc(k.mening)}</p>
@@ -192,7 +208,7 @@ export function kortenHtml(kort, { typsnitt, tvaOchTva = false, titel = 'Strateg
         <div class="handling">${k.handling.map((h) => `<div class="led"><span class="ikon"><img src="${esc(h.ikon)}" alt=""></span><span>${esc(h.text)}</span></div>`).join(LEDPIL)}</div></div>`
       : `<div class="inne"><h2 class="namn">${esc(k.namn)}</h2>
         <div class="insikt"><span class="ikon"><img src="${esc(k.insiktensIkon)}" alt=""></span><p>${esc(k.insikt)}</p></div>
-        <div class="spalter">${minnetsBild(k.minnet)}<section class="stegyta"><ol>${k.steg.map((s) => `<li><b>${esc(s.rubrik.replace(/\.?$/, '.'))}</b> ${esc(s.text)}</li>`).join('')}</ol></section></div>
+        <div class="spalter">${minnetsBild(k.minnet)}<section class="stegyta"><ol>${k.steg.map((s) => `<li><b>${esc(mening(s.rubrik))}</b> ${esc(s.text)}</li>`).join('')}</ol></section></div>
         <p class="avgor"><b>${esc(k.avgor.rubrik)}</b>${esc(k.avgor.text)}</p></div><div class="upphov">© Niclas Fohlin · niclasfohlin.se</div>`;
     return `<div class="kort ${del}${nere ? ' nere' : ''}" data-id="${esc(k.id)}"><div class="panel">${flik(k)}${inne}</div></div>`;
   };

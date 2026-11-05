@@ -14,7 +14,9 @@
 // kort: innehall över kortets data och filer, som bygget räknar om och stannar på när ett kort är gammalt
 // (src/lib/strategier.ts), och summa, som också tar med formen, skriptet, packningen och typsnitten. Ett utkast får sitt
 // kort i underlag/prov/strategier/kort/, som git ignorerar, med manifestet kort.json där. Ett kort vars baksida inte ryms i
-// 14 punkter, eller vars framsida flödar över, stannar skriptet; ett som behövde mindre luft eller mindre text listas.
+// 14 punkter, vars handling inte ryms i bandet i 13 punkter eller vars framsida flödar över stannar skriptet; ett som behövde
+// mindre luft eller mindre text listas. Bandets mätning prövas åt andra hållet innan korten görs: ett kort band står kvar i
+// 15 punkter, och tre långa led märks som för breda (riggens brev 2026-11-05).
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, mkdtempSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -126,16 +128,21 @@ const kortet = (s) => {
   const d = strategikortetsData(s), f = filerna(s);
   return { id: s.id, ...d, insiktensIkon: url(INSIKTENS_IKON), berattelsen: d.berattelsen.map((b, i) => ({ ...b, bild: f.bilder[i] ? url(f.bilder[i]) : null })), handling: d.handling.map((h, i) => ({ ...h, ikon: url(f.ikoner[i]) })) };
 };
-// Chrome skriver ut sidan till pdf och ger sidans DOM efter mätningen.
-function skrivUt(namn, html) {
+// Chrome skriver ut sidan till pdf och ger sidans DOM efter mätningen; utan pdf bara DOM, som i provet av bandet.
+function skrivUt(namn, html, { pdf = true } = {}) {
   const htmlFil = join(tmp, `${namn}.html`);
   writeFileSync(htmlFil, html);
   const pdfFil = join(tmp, `${namn}.pdf`);
-  execFileSync(chrome, [...flaggor, `--print-to-pdf=${pdfFil}`, url(htmlFil)], { stdio: 'ignore', timeout: 600000 });
+  if (pdf) execFileSync(chrome, [...flaggor, `--print-to-pdf=${pdfFil}`, url(htmlFil)], { stdio: 'ignore', timeout: 600000 });
   const dom = execFileSync(chrome, [...flaggor, '--dump-dom', url(htmlFil)], { encoding: 'utf8', timeout: 600000, maxBuffer: 1 << 27 });
   if (!/<body[^>]*data-klar="1"/.test(dom)) { console.error(`Korten (${namn}) mättes inte: sidan blev inte klar i Chrome.`); process.exit(1); }
-  return { pdf: readFileSync(pdfFil), dom };
+  return { pdf: pdf ? readFileSync(pdfFil) : null, dom };
 }
+// Bandets attribut på kortets framsida i DOM efter mätningen: storleken och om leden ändå inte ryms.
+const bandet = (dom, id) => {
+  const a = dom.match(new RegExp(`<div class="ark" data-id="${id}" data-sida="fram">[\\s\\S]*?<div class="handling"([^>]*)>`))?.[1] ?? '';
+  return { pt: +(a.match(/data-pt="([\d.]+)"/)?.[1] ?? 0), rymsInte: /data-ryms-inte/.test(a) };
+};
 // Sparar pdf:en med bilderna som palett och utan tider (scripts/pdfpack.py --palett) och ger storleken i kB.
 function spara(bytes, fil) {
   const fore = join(tmp, 'packa.pdf');
@@ -146,6 +153,12 @@ function spara(bytes, fil) {
 
 const korta = [];
 if (attGora.length) {
+  // Provet åt andra hållet: ett kort band och tre led som inte ryms ens i 13 punkter, med det första kortets bilder och ikon.
+  const forebild = kortet(attGora[0]);
+  const provkort = (id, texter) => ({ ...forebild, id, handling: texter.map((text) => ({ text, ikon: forebild.handling[0].ikon })) });
+  const prov = skrivUt('bandprov', kortenHtml([provkort('prov-kort', ['Läs', 'Skriv', 'Rätta']), provkort('prov-langt', Array(3).fill('Visa det med kroppen'))], { typsnitt: url(TYPSNITT) }), { pdf: false }).dom;
+  const [kort, langt] = [bandet(prov, 'prov-kort'), bandet(prov, 'prov-langt')];
+  if (kort.pt !== STRATEGIKORTETS_STANDARD.band || kort.rymsInte || !langt.rymsInte) { console.error(`Bandets mätning ser inte felet den letar efter: ett kort band gav ${JSON.stringify(kort)} och tre långa led ${JSON.stringify(langt)}.`); process.exit(1); }
   const { pdf, dom } = skrivUt('kort', kortenHtml(attGora.map(kortet), { typsnitt: url(TYPSNITT) }));
   const matt = {};
   for (const m of dom.matchAll(/<div class="ark" data-id="([^"]+)" data-sida="(fram|bak)">([\s\S]*?)<div class="klipp">/g)) {
@@ -155,6 +168,7 @@ if (attGora.length) {
       const n = inne.match(/<h2 class="namn"[^>]*data-pt="([\d.]+)"[^>]*data-rader="(\d+)"/);
       matt[id].namn = n ? { pt: +n[1], rader: +n[2] } : null;
       matt[id].framRymsInte = /class="inne"[^>]*data-ryms-inte/.test(inne);
+      matt[id].band = bandet(m[0], id);
     } else {
       const ol = inne.match(/<ol([^>]*)>/)?.[1] ?? '';
       matt[id].bak = { pt: +(ol.match(/data-pt="([\d.]+)"/)?.[1] ?? 0), tat: /data-tat/.test(ol), rymsInte: /data-ryms-inte/.test(ol) };
@@ -164,17 +178,19 @@ if (attGora.length) {
   if (utskrift.getPageCount() !== attGora.length * 2) { console.error(`Utskriften har ${utskrift.getPageCount()} sidor, inte ${attGora.length * 2}.`); process.exit(1); }
   for (const [i, s] of attGora.entries()) {
     const m = matt[s.id];
-    if (!m?.bak || !m?.namn) { fel.push(`${s.namn}: kortet mättes inte`); continue; }
+    if (!m?.bak || !m?.namn || !m?.band?.pt) { fel.push(`${s.namn}: kortet mättes inte`); continue; }
     if (m.framRymsInte) fel.push(`${s.namn}: framsidan ryms inte på kortet; korta meningen eller handlingen`);
+    if (m.band.rymsInte) fel.push(`${s.namn}: handlingen ryms inte i bandet i ${STRATEGIKORTETS_STANDARD.bandMinst} punkter; korta ett led`);
     if (m.bak.rymsInte) fel.push(`${s.namn}: baksidan ryms inte i ${STRATEGIKORTETS_STANDARD.bakMinst} punkter; korta insikten eller stegen`);
-    if (m.bak.tat || m.bak.pt < STRATEGIKORTETS_STANDARD.bak) korta.push(`${s.namn} (${m.bak.pt} punkter${m.bak.tat ? ', mindre luft' : ''})`);
+    if (m.band.pt < STRATEGIKORTETS_STANDARD.band) korta.push(`${s.namn} (bandet i ${m.band.pt} punkter)`);
+    if (m.bak.tat || m.bak.pt < STRATEGIKORTETS_STANDARD.bak) korta.push(`${s.namn} (baksidan i ${m.bak.pt} punkter${m.bak.tat ? ', mindre luft' : ''})`);
     const ett = await PDFDocument.create();
     for (const p of await ett.copyPages(utskrift, [2 * i, 2 * i + 1])) ett.addPage(p);
     ett.setTitle(`${s.namn}: strategikort`);
     ett.setAuthor('Niclas Fohlin');
     mkdirSync(UT[delen(s)], { recursive: true });
     const kb = spara(await ett.save({ useObjectStreams: true }), join(UT[delen(s)], strategikortetsFil(s.id)));
-    manifest[delen(s)][s.id] = { innehall: innehall(s), summa: summa(s), kb, namn: m.namn, bak: m.bak };
+    manifest[delen(s)][s.id] = { innehall: innehall(s), summa: summa(s), kb, namn: m.namn, band: m.band, bak: m.bak };
   }
 }
 for (const m of fel.length ? [] : metodernaAttGora) {
@@ -215,5 +231,5 @@ for (const b of fel.length ? [] : bladenAttGora) {
 
 skrivManifest();
 if (attGora.length) console.log(`Strategikorten: ${attGora.length} kort, ${attGora.reduce((a, s) => a + (manifest[delen(s)][s.id]?.kb ?? 0), 0)} kB.`);
-if (korta.length) console.log(`  ! ryms inte i ${STRATEGIKORTETS_STANDARD.bak} punkter, texter att korta (${korta.length}): ${korta.join(', ')}`);
+if (korta.length) console.log(`  ! ryms bara med mindre text eller luft, texter att korta (${korta.length}): ${korta.join(', ')}`);
 if (fel.length) { console.error(`Strategikorten stannade:\n  ${fel.join('\n  ')}`); process.exit(1); }

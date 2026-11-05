@@ -1,34 +1,46 @@
 {
-  "datum": "2026-11-03T13:18:52.642Z",
+  "datum": "2026-11-05T19:04:50.460Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 67,
-      "besok": 27,
-      "utskrifter": 8
-    },
-    {
-      "id": "byt-och-sortera",
-      "antal": 27,
-      "besok": 7,
-      "utskrifter": 4
-    },
-    {
-      "id": "visa",
-      "antal": 21,
-      "besok": 6,
-      "utskrifter": 3
-    },
-    {
-      "id": "5-3-1",
-      "antal": 20,
-      "besok": 5,
-      "utskrifter": 3
+      "antal": 83,
+      "besok": 38,
+      "utskrifter": 9
     },
     {
       "id": "beratta-mera",
-      "antal": 18,
-      "besok": 8,
+      "antal": 41,
+      "besok": 16,
+      "utskrifter": 5
+    },
+    {
+      "id": "byt-och-sortera",
+      "antal": 41,
+      "besok": 16,
+      "utskrifter": 5
+    },
+    {
+      "id": "visa",
+      "antal": 38,
+      "besok": 13,
+      "utskrifter": 5
+    },
+    {
+      "id": "5-3-1",
+      "antal": 36,
+      "besok": 11,
+      "utskrifter": 5
+    },
+    {
+      "id": "kloka-pennan",
+      "antal": 31,
+      "besok": 21,
+      "utskrifter": 2
+    },
+    {
+      "id": "ova-och-kontrollera-i-par",
+      "antal": 16,
+      "besok": 6,
       "utskrifter": 2
     },
     {
@@ -38,21 +50,9 @@
       "utskrifter": 1
     },
     {
-      "id": "kloka-pennan",
-      "antal": 15,
-      "besok": 10,
-      "utskrifter": 1
-    },
-    {
-      "id": "ova-och-kontrollera-i-par",
-      "antal": 14,
-      "besok": 4,
-      "utskrifter": 2
-    },
-    {
       "id": "sanningsjakten",
-      "antal": 14,
-      "besok": 4,
+      "antal": 15,
+      "besok": 5,
       "utskrifter": 2
     },
     {
@@ -63,20 +63,20 @@
     },
     {
       "id": "hitta-min-regel",
+      "antal": 13,
+      "besok": 8,
+      "utskrifter": 1
+    },
+    {
+      "id": "epa",
       "antal": 11,
       "besok": 6,
       "utskrifter": 1
     },
     {
-      "id": "epa",
-      "antal": 10,
-      "besok": 5,
-      "utskrifter": 1
-    },
-    {
       "id": "flashcardlek",
-      "antal": 10,
-      "besok": 5,
+      "antal": 11,
+      "besok": 6,
       "utskrifter": 1
     },
     {
@@ -86,7 +86,19 @@
       "utskrifter": 1
     },
     {
+      "id": "kims-prov",
+      "antal": 9,
+      "besok": 4,
+      "utskrifter": 1
+    },
+    {
       "id": "lar-klassen",
+      "antal": 9,
+      "besok": 4,
+      "utskrifter": 1
+    },
+    {
+      "id": "provet-tva-ganger",
       "antal": 9,
       "besok": 4,
       "utskrifter": 1
@@ -110,9 +122,27 @@
       "utskrifter": 1
     },
     {
+      "id": "kommunicera",
+      "antal": 8,
+      "besok": 3,
+      "utskrifter": 1
+    },
+    {
+      "id": "lasa-och-forklara-i-par",
+      "antal": 8,
+      "besok": 3,
+      "utskrifter": 1
+    },
+    {
       "id": "skriv-byt-matcha",
       "antal": 8,
       "besok": 3,
+      "utskrifter": 1
+    },
+    {
+      "id": "fraga-fraga-byt",
+      "antal": 7,
+      "besok": 2,
       "utskrifter": 1
     },
     {
@@ -152,13 +182,25 @@
       "utskrifter": 1
     },
     {
-      "id": "fraga-fraga-byt",
+      "id": "anteckningspar",
       "antal": 5,
-      "besok": 0,
-      "utskrifter": 1
+      "besok": 5,
+      "utskrifter": 0
+    },
+    {
+      "id": "ape",
+      "antal": 5,
+      "besok": 5,
+      "utskrifter": 0
     },
     {
       "id": "kooperativ-fyrfaltare",
+      "antal": 5,
+      "besok": 5,
+      "utskrifter": 0
+    },
+    {
+      "id": "lika-och-olika",
       "antal": 5,
       "besok": 5,
       "utskrifter": 0
@@ -176,19 +218,19 @@
       "utskrifter": 1
     },
     {
-      "id": "ape",
-      "antal": 4,
-      "besok": 4,
-      "utskrifter": 0
-    },
-    {
       "id": "kooperativ-redovisning",
       "antal": 4,
       "besok": 4,
       "utskrifter": 0
     },
     {
-      "id": "lika-och-olika",
+      "id": "laxkontroll-i-grupp",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
+      "id": "rita-byt-och-skriv",
       "antal": 4,
       "besok": 4,
       "utskrifter": 0
@@ -200,9 +242,9 @@
       "utskrifter": 0
     },
     {
-      "id": "anteckningspar",
-      "antal": 3,
-      "besok": 3,
+      "id": "vem-ar-jag",
+      "antal": 4,
+      "besok": 4,
       "utskrifter": 0
     },
     {
@@ -212,37 +254,31 @@
       "utskrifter": 0
     },
     {
-      "id": "kims-prov",
+      "id": "motas-pa-mitten",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
     },
     {
-      "id": "kommunicera",
+      "id": "pa-rad",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
     },
     {
-      "id": "laxkontroll-i-grupp",
-      "antal": 3,
-      "besok": 3,
-      "utskrifter": 0
-    },
-    {
-      "id": "rita-byt-och-skriv",
-      "antal": 3,
-      "besok": 3,
-      "utskrifter": 0
-    },
-    {
-      "id": "vem-ar-jag",
+      "id": "skicka-ett-problem",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
     },
     {
       "id": "en-far-ga",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "inre-yttre-cirkel",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -260,25 +296,13 @@
       "utskrifter": 0
     },
     {
-      "id": "motas-pa-mitten",
+      "id": "samtalsbingo",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
     },
     {
-      "id": "pa-rad",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
-      "id": "provet-tva-ganger",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
-      "id": "skicka-ett-problem",
+      "id": "snobollen",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -308,13 +332,13 @@
       "utskrifter": 0
     },
     {
-      "id": "inre-yttre-cirkel",
+      "id": "las-och-fraga",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
     },
     {
-      "id": "lasa-och-forklara-i-par",
+      "id": "mina-bilder-dina-bilder",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
@@ -345,12 +369,6 @@
     },
     {
       "id": "rubriceringsspel",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "samtalsbingo",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0

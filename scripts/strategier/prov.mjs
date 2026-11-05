@@ -9,11 +9,15 @@
 //   korten     varje kort är två sidor, framsidan och baksidan, med namnet på båda; filen med alla kort har ett ark per
 //              två kort med strategierna i numrens ordning, och bladet med alla är ett A4 med varje namn. Läst med pdftotext
 //   åt andra hållet  samma läsning av ordningen på en omvänd lista ska stanna, så att provet ser felet det letar efter
+//   rubrikerna  stegets rubrik har punkt efter sig bara när den inte redan slutar med ett skiljetecken, på varje sida och i
+//              kortets form, prövad med en rubrik som slutar med frågetecken (Niclas 2026-11-05: "?. Är ju fel.")
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { strategikortetsFil, STRATEGIKORTEN_ALLA, STRATEGIBLADET } from '../../src/lib/standard/strategier.js';
+import { mening } from '../../src/lib/standard/text.js';
+import { kortenHtml } from './kortform.mjs';
 
 const ROT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const DIST = join(ROT, 'dist');
@@ -42,12 +46,21 @@ for (const s of visas) {
   const sida = html(join('strategier', s.id));
   if (!sida) { fel.push(`${s.namn}: dist/strategier/${s.id}/index.html saknas`); continue; }
   for (const t of [s.namn, s.framsida.mening, ...s.baksida.saGorDu.map((x) => x.text)]) if (!enRad(sida).includes(t.replace(/&/g, '&amp;'))) fel.push(`${s.namn}: sidan saknar "${t}"`);
+  for (const x of s.baksida.saGorDu) if (!sida.includes(`<b>${mening(x.rubrik).replace(/&/g, '&amp;')}</b>`)) fel.push(`${s.namn}: sidan skriver inte stegets rubrik "${mening(x.rubrik)}"`);
   if (!sida.includes(`/strategier/kort/${strategikortetsFil(s.id)}`)) fel.push(`${s.namn}: sidan har ingen knapp till kortet`);
   if (verktyget && !verktyget.includes(`href="/strategier/${s.id}"`)) fel.push(`${s.namn}: verktygets sida länkar inte till strategin`);
   const kort = join(KORT, strategikortetsFil(s.id));
   if (!existsSync(kort)) { fel.push(`${s.namn}: kortet saknas`); continue; }
   if (sidorna(kort) !== 2) fel.push(`${s.namn}: kortet har ${sidorna(kort)} sidor, inte två`);
   for (const sida of [1, 2]) if (!enRad(text(kort, sida)).includes(s.namn)) fel.push(`${s.namn}: kortets sida ${sida} saknar namnet`);
+}
+
+// Kortets form med en rubrik som slutar med frågetecken och en utan skiljetecken: "Kan jag det?" står kvar, och "Stäng
+// boken" får sin punkt.
+{
+  const kort = { id: 'prov', nr: 1, namn: 'Prov', mening: 'Prov.', insikt: 'Prov.', insiktensIkon: '', berattelsen: [], handling: [], minnet: { delar: [], pilar: [] }, steg: [{ rubrik: 'Kan jag det?', text: 'a' }, { rubrik: 'Stäng boken', text: 'b' }], avgor: { rubrik: 'Undvik', text: 'c' } };
+  const h = kortenHtml([kort], { typsnitt: '' });
+  if (!h.includes('<b>Kan jag det?</b>') || !h.includes('<b>Stäng boken.</b>')) fel.push('Kortets form skriver inte stegets rubrik med standardens mening: "Kan jag det?" ska stå kvar och "Stäng boken" få sin punkt');
 }
 
 // Ordningen i filen med alla kort: framsidorna på varje ark i numrens ordning, uppe före nere.

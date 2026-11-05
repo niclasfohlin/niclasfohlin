@@ -7,6 +7,7 @@ import Base from '../../layouts/Base.astro';
 import Kortlistan from '../../components/Kortlistan.astro';
 import { strategierna, strategiernasMetod, strategiensAdress, bildensAdress, ikonensAdress, kortetsAdress, kortetFinns, strategiernasStil, OMRADENA, STRATEGIERNAS_ADRESS, STRATEGIERNAS_NAMN, BILDERNAS_FORKLARING } from '../../lib/strategier';
 import { DUBBELSIDIGT } from '../../lib/strukturer';
+import { mening } from '../../lib/standard/index.js';
 
 export async function getStaticPaths() {
   return (await strategierna()).map((s) => ({ params: { id: s.id }, props: { s } }));
@@ -79,7 +80,7 @@ const beskrivning = `${f.mening} ${d.namn} är en kognitionsvetenskaplig strateg
 
       <h2 class="st-rubrik2">Så gör du</h2>
       <ol class="st-steg">
-        {b.saGorDu.map((x) => <li><b>{x.rubrik.replace(/\.?$/, '.')}</b> {x.text}</li>)}
+        {b.saGorDu.map((x) => <li><b>{mening(x.rubrik)}</b> {x.text}</li>)}
       </ol>
       <p class="sg-avgor"><b>{b.avgor.rubrik}</b>{b.avgor.text}</p>
 
