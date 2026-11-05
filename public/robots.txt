@@ -11,6 +11,31 @@ Disallow: /delning/kort/
 Disallow: /strukturer/kort/
 Disallow: /strategier/kort/
 
+# Robotar som samlar text till AI-modeller får läsa sidorna men inte hämta filerna, som stod för det mesta av deras 369 MB
+# den 5 november 2026 (DRIFT.md under Krediter). En robot med en egen grupp följer bara den, så spärrarna ovan står här
+# igen. Mönstren slutar inte med $, så att länkarna med filens version (?v=) också spärras.
+User-agent: ClaudeBot
+User-agent: Amazonbot
+User-agent: Reflectionbot
+Disallow: /*.pdf
+Disallow: /*.docx
+Disallow: /*.pptx
+Disallow: /*.zip
+Disallow: /*.mp4
+Disallow: /kommentarer/
+Disallow: /.netlify/
+Disallow: /delning/kort/
+Disallow: /strukturer/kort/
+Disallow: /strategier/kort/
+
+# Robotar som inte ger sajten några läsare: SEO-verktygens och Googles allmänna hämtare GoogleOther, som inte gäller
+# Google Sök. 64 MB den 5 november 2026 (DRIFT.md under Krediter).
+User-agent: DataForSeoBot
+User-agent: dotbot
+User-agent: AhrefsBot
+User-agent: GoogleOther
+Disallow: /
+
 # Ett verktyg som hämtade alla pdf:er på en gång, 998 filer och 255 MB den 1 november 2026 (DRIFT.md under Krediter).
 User-agent: msh-pdfmin
 Disallow: /
