@@ -27,26 +27,26 @@
         }
       ]
     },
-    "insikt": "Eleven förstår tecknet när hen ser saken det står för. Ta bort saken ett steg i taget.",
+    "insikt": "Eleven förstår tecknet när hen ser saken det står för, och byter ut den steg för steg.",
     "handling": [
       {
         "ikon": "tegelsten",
         "text": "Bygg med saker"
       },
       {
-        "ikon": "rita",
-        "text": "Rita det du byggde"
+        "ikon": "pekfinger",
+        "text": "Peka på båda"
       },
       {
         "ikon": "skrivhand",
-        "text": "Skriv med tecken"
+        "text": "Byt ut saken"
       }
     ]
   },
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Eleverna arbetar först med saker, sedan med en enkel bild och sist med tecken, och du visar vad som hör ihop i varje steg."
+      "text": "Eleverna bygger först med saker, och du skriver tecknet bredvid och pekar på båda. När eleven klarar det, byter ni ut saken mot en enkel bild och sist mot bara tecknet."
     },
     "darfor": {
       "ikon": "glodlampa",
@@ -57,60 +57,55 @@
       "delar": [
         {
           "namn": "Saken",
-          "text": "det du håller i"
+          "text": "du ser vad det är"
         },
         {
-          "namn": "Bilden",
-          "text": "bara det viktiga kvar"
+          "namn": "Sak och tecken",
+          "text": "du ser vad som hör ihop"
         },
         {
-          "namn": "Tecknet",
-          "text": "gäller överallt"
+          "namn": "Bara tecknet",
+          "text": "saken finns i tankarna"
         }
       ],
       "pilar": [
         {
           "fran": "Saken",
-          "till": "Bilden",
-          "text": "rita"
-        },
-        {
-          "fran": "Bilden",
-          "till": "Tecknet",
-          "text": "förenkla"
-        },
-        {
-          "fran": "Tecknet",
-          "till": "Saken",
-          "text": "minns saken",
+          "till": "Sak och tecken",
+          "text": "peka på båda",
           "betonad": true
+        },
+        {
+          "fran": "Sak och tecken",
+          "till": "Bara tecknet",
+          "text": "byt ut saken"
         }
       ],
-      "text": "I varje steg tar ni bort det som inte behövs och behåller det som hör ihop. När tecknet känns tomt kan eleven tänka på saken igen."
+      "text": "När du pekar på saken och tecknet samtidigt, ser eleven vad tecknet står för. Byt sedan ut saken steg för steg. Eleven har saken kvar i tankarna och kan gå tillbaka till den."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj en enkel sak",
-        "text": "Använd kuber, remsor eller en våg som visar det viktiga och inget mer."
+        "rubrik": "Bygg med saker",
+        "text": "Eleverna bygger det tecknet står för, som 23 med stavar och kuber."
       },
       {
-        "rubrik": "Säg vad som hör ihop",
-        "text": "Peka på saken och tecknet samtidigt: ”Staven är en tia.”"
+        "rubrik": "Peka på båda",
+        "text": "Skriv tecknet bredvid och peka: ”De här två stavarna är tvåan.”"
       },
       {
-        "rubrik": "Ett steg i taget",
-        "text": "Gå till en enkel bild, och till tecknet när eleven klarar bilden."
+        "rubrik": "Byt ut saken",
+        "text": "Bygg, rita stavarna, skriv bara 23. Byt när eleven klarar steget."
       },
       {
         "rubrik": "Tillbaka till saken",
-        "text": "När tecknet blir en regel utan mening, låt eleven visa med saken."
+        "text": "Kör någon fast, säg: ”Visa med stavarna.” Låt sakerna ligga framme."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När ett nytt tecken står för något som går att visa med en sak."
+      "text": "Flera lektioner, när ett nytt tecken står för något som går att bygga."
     },
-    "tankPa": "Strategin tjänar innehållet: välj saken efter det tecknet ska betyda. Välj hellre enkla kuber och remsor än saker med många detaljer, som leksakspengar. Gå vidare till tecknet när eleven gör rätt med bilden, och ta bort saken och bilden först när eleven gör rätt med tecknen. Låt saken ligga framme för den som behöver gå tillbaka. Strategin är mest prövad i matematik. I NO har elever som bara arbetade med saken ibland klarat sig lika bra.",
+    "tankPa": "Strategin tjänar innehållet: välj saken efter det tecknet ska betyda. Välj hellre enkla kuber och remsor än saker med många detaljer, som leksakspengar. Byt ut saken mot en bild, och sedan bilden mot bara tecknet, när eleven skriver rätt tecken till det hen har framför sig. Låt saken ligga framme för den som behöver gå tillbaka. Strategin är mest prövad i matematik. I NO har elever som bara arbetade med saken ibland klarat sig lika bra.",
     "forskningen": {
       "text": "Fyfe m.fl. (2014) beskriver hur läraren i matematik och NO går från saken till tecknet steg för steg. IES-vägledningen bedömer att stödet för att koppla ihop saker och tecken är måttligt (Pashler m.fl., 2007). WWC bedömer utifrån 28 studier av stödundervisning i matematik i F–⁠6 att stödet är starkt för att koppla saker och bilder till tecknen (Fuchs m.fl., 2021). I 55 studier gav undervisning med föremål 0,37 jämfört med bara tecken, och den gav mer för barn som var 7–⁠11 år och när läraren vägledde dem (Carbonneau m.fl., 2013). I en studie i NO med elever som var 9–⁠12 år klarade de som bara arbetade med den konkreta formen i en simulering nya uppgifter minst lika bra som de som fick strategin (Jaakkola och Veermans, 2018).",
       "kallor": [
@@ -166,25 +161,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Säg ordet sol långsamt, och låt eleverna lägga en kloss för varje ljud de hör: s, o, l. Sedan drar de ett streck på bladet för varje ljud, och sist skriver de en bokstav på varje streck och läser ordet. Peka på klossen, strecket och bokstaven för samma ljud medan ni säger det: ”Här är sss.” När eleverna hör ljuden utan klossarna tar du bort dem, men den som behöver får ha kvar sina."
+      "text": "Säg ordet sol långsamt, och låt eleverna lägga en kloss för varje ljud de hör: s, o, l. Lägg dina klossar under dokumentkameran, skriv bokstaven under varje kloss och peka på båda: ”Den här klossen och den här bokstaven är sss.” När eleven skriver rätt bokstav under varje kloss, byter hen ut klossarna mot streck och skriver bokstäverna på dem, och sist skriver hen bara ordet. Låt klossarna ligga framme, och säg till den som kör fast: ”Visa med klossarna.” Lyssna efter om eleven säger ljudet sss eller bokstavens namn ess när hen pekar på s."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Två elever spelar upp ett kort samtal, och den som talar håller upp en pratbubbla av papp. Sedan ritar de samtalet som en serie med pratbubblor, och sist skriver de samtalet som text med citattecken runt varje replik. Peka på bubblan och tecknen samtidigt: ”Här börjar bubblan, och här börjar citattecknet.” Den som glömmer tecknen ritar en bubbla runt repliken igen."
+      "text": "Eleverna hittar på ett kort samtal i par och skriver varje replik i en pratbubbla av papp. Sätt upp en bubbla på tavlan, skriv repliken med citattecken bredvid och peka på båda: ”Bubblans kanter är de här två citattecknen.” När paret sätter tecknen rätt bredvid sina bubblor, ritar de en serie i stället och skriver sist bara texten med citattecken. Den som glömmer tecknen ritar en bubbla runt repliken igen. Titta efter om eleven sätter det sista citattecknet före ”sa Ali”, där personen slutar prata."
     },
     {
       "omrade": "matematik",
-      "arskurs": "7–9",
+      "arskurs": "4–6",
       "amne": "matematik",
-      "text": "Lägg tre påsar med lika många kulor och två lösa kulor i ena vågskålen, och elva kulor i den andra. Eleverna tar bort två kulor från varje sida och ser att tre påsar väger lika mycket som nio kulor, och då har varje påse tre kulor. Sedan ritar de vågen med rutor för påsarna och prickar för kulorna, och sist skriver de ekvationen 3x + 2 = 11 och löser den med samma steg. Fråga vid varje steg vad det motsvarar i vågen."
+      "text": "Eleverna viker en pappersremsa i fyra lika stora delar och färgar tre av dem, och du skriver 3/4 bredvid din egen remsa på tavlan. Peka på båda och ta en siffra i taget: ”De här fyra lika stora delarna är fyran, och de tre färgade är trean.” När eleven skriver rätt bråk till flera remsor, som 3/4, 1/2 och 5/8, ritar hen remsorna i stället och skriver sist bara bråket när du säger det, som fem åttondelar. Låt remsorna ligga framme, och säg till den som kör fast: ”Visa med remsan.” Lyssna efter om eleven kan säga vad fyran och trean står för när remsan är borta."
     },
     {
       "omrade": "amnen",
-      "arskurs": "F–3",
-      "amne": "SO",
-      "text": "Eleverna bygger klassrummet på ett bord med klossar för bänkarna, katedern och dörren. Sedan ritar de klassrummet ovanifrån på ett papper, och varje bänk blir en ruta där klossen står. Sist byter de bilderna mot kartans tecken och gör en teckenförklaring, och en kamrat letar upp en gömd sak med hjälp av kartan. Gå sedan vidare till kartan över skolgården, och peka på tecknet och platsen samtidigt."
+      "arskurs": "7–9",
+      "amne": "NO",
+      "text": "Paren bygger en vattenmolekyl med kulor och pinnar: en röd kula för syre och två vita för väte. Håll upp en molekyl, skriv H₂O bredvid på tavlan och peka på båda: ”De här två vita kulorna är tvåan.” När eleven skriver rätt formel till det hen har byggt, ritar hen molekylen i stället och skriver sist bara formeln, som CO₂ för en kolatom och två syreatomer. Låt byggsatserna ligga framme, och säg till den som kör fast: ”Visa med kulorna.” Lyssna efter om eleven kan säga vilka atomer tvåan räknar, också när kulorna är borta."
     }
   ],
   "metoderSomGorDen": [

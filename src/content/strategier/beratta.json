@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "När varje del leder till nästa hänger fakta ihop, och en del påminner eleven om nästa.",
+    "insikt": "När eleven följer hur varje händelse leder till nästa, förstår och minns hen innehållet.",
     "handling": [
       {
         "ikon": "forstoringsglas",
@@ -50,65 +50,60 @@
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "En berättelse hänger ihop med orsaker: någon vill något, något står i vägen, och därför händer nästa sak. Den som lyssnar vill veta hur det går och fyller själv i varför, och eleven minns det hen har tänkt på. Varje del i kedjan hjälper eleven att ta fram nästa. En lista med lösa fakta har inga sådana vägar mellan delarna, och eleven glömmer dem en och en."
+      "text": "En berättelse hänger ihop med orsaker: någon vill något, något står i vägen, och därför händer nästa sak. Den som lyssnar vill veta hur det går och tänker själv på varför, och eleven minns det hen har tänkt på. Varje del i kedjan hjälper eleven att ta fram nästa. En lista med lösa fakta har inga sådana vägar mellan delarna, och eleven glömmer dem en och en."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Berättelsen",
-          "text": "orsak, problem, följd"
+          "namn": "Lösa fakta",
+          "text": "glöms en och en"
         },
         {
-          "namn": "Arbetsminnet",
-          "text": "fyller i varför"
+          "namn": "Hänger ihop",
+          "text": "varje del leder vidare"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "en kedja att följa"
+          "namn": "Minns sambanden",
+          "text": "en del påminner om nästa"
         }
       ],
       "pilar": [
         {
-          "fran": "Berättelsen",
-          "till": "Arbetsminnet",
-          "text": "lyssna"
-        },
-        {
-          "fran": "Arbetsminnet",
-          "till": "Långtidsminnet",
-          "text": "lära in"
-        },
-        {
-          "fran": "Långtidsminnet",
-          "till": "Arbetsminnet",
-          "text": "nästa del",
+          "fran": "Lösa fakta",
+          "till": "Hänger ihop",
+          "text": "med därför",
           "betonad": true
+        },
+        {
+          "fran": "Hänger ihop",
+          "till": "Minns sambanden",
+          "text": "berätta"
         }
       ],
-      "text": "Eleven minns det hen har tänkt på, och en berättelse får eleven att tänka på varför. När eleven tar fram en del, följer hen orsaken vidare till nästa."
+      "text": "Eleven glömmer lösa fakta en och en. När du berättar med därför och men, tänker eleven på varför och ser hur delarna hänger ihop. Sedan berättar eleven, och varje del påminner om nästa."
     },
     "saGorDu": [
       {
         "rubrik": "Hitta problemet",
-        "text": "Vem ville vad, och vad stod i vägen? Där börjar berättelsen."
+        "text": "Vad ska klassen förstå? Vem i berättelsen ville vad? Vad stod i vägen?"
       },
       {
-        "rubrik": "Berätta i ordning",
-        "text": "Ta en händelse i taget och knyt ihop händelserna med därför och men."
+        "rubrik": "Berätta med därför",
+        "text": "Du berättar i fem minuter. Knyt ihop händelserna med därför och men."
       },
       {
         "rubrik": "Säg vad den visar",
-        "text": "När berättelsen kommer fram till begreppet, säg det med ämnets ord."
+        "text": "Fråga: ”Vad lär det oss?” Säg sedan begreppet med ämnets ord."
       },
       {
-        "rubrik": "Eleverna berättar",
-        "text": "De berättar ur minnet med därför och men, och grannen frågar varför."
+        "rubrik": "Berätta i par",
+        "text": "Alla berättar med därför. Fråga den som kör fast: ”Vem ville vad?”"
       }
     ],
     "avgor": {
-      "rubrik": "Undvik",
-      "text": "En rolig sidohistoria som inte hör till det eleverna ska lära sig."
+      "rubrik": "När den passar",
+      "text": "När innehållet har orsaker och följder. Räkna med en kvart."
     },
     "tankPa": "Strategin tjänar innehållet: bestäm först vad eleverna ska förstå, och bygg berättelsen kring just det. En spännande detalj som inte hör till innehållet drar elevernas uppmärksamhet från det de ska lära sig. Berätta också för de äldsta, och använd din vanliga röst. Allt behöver inte bli en berättelse. Du kan också visa ett samband i en bild, och eleverna kan öva en färdighet steg för steg.",
     "forskningen": {
@@ -152,25 +147,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Innan klassen läser faktaboken om igelkotten berättar du om igelkottens år: ”Igelkotten äter och äter hela hösten, för den ska sova hela vintern och kan inte äta då.” Sedan läser eleverna texten och letar upp vad igelkotten gör och varför. Sist berättar de igelkottens år för grannen med därför och men, och de har bilderna i boken som stöd."
+      "text": "Innan klassen läser faktaboken om igelkotten, berättar du om igelkottens år med därför och men: ”Igelkotten vill klara vintern, men då finns nästan inga maskar och skalbaggar att äta. Därför äter den och äter hela hösten, och sedan kryper den in i ett bo av löv och sover hela vintern.” Fråga ”Vad lär det oss?” och säg sedan ordet dvala: igelkotten sover så djupt att kroppen blir kall och lever på fettet från hösten. Eleverna läser texten och letar upp vad igelkotten gör och varför. Sist tittar de på bilderna i boken och berättar igelkottens år för grannen med därför och men, och du lyssnar efter om de säger varför igelkotten äter så mycket på hösten."
     },
     {
       "omrade": "skrivning",
       "arskurs": "7–9",
       "amne": "NO",
-      "text": "Eleverna skriver om en upptäckt i NO som en berättelse i fyra delar: vem som ville veta något, problemet, vad hen prövade och vad det visade. Ett exempel är läkaren Ignaz Semmelweis i Wien, som 1847 ville förstå varför fler mammor dog på läkarnas avdelning än på barnmorskornas. Läkarna och studenterna kom direkt från obduktionerna, och när de tvättade händerna i klorkalk dog färre. Låt eleverna skriva med därför och men mellan delarna och sluta med begreppet, som smitta."
+      "text": "Berätta i fem minuter om läkaren Ignaz Semmelweis i Wien, som ville förstå varför fler mammor dog i barnsängsfeber på läkarnas avdelning än på barnmorskornas. Men inget han prövade hjälpte förrän en kollega skar sig vid en obduktion och dog av en sjukdom som liknade mammornas. Knyt ihop med därför och men: läkarna kom direkt från obduktionerna, men barnmorskorna gjorde inga, och därför lät Semmelweis läkarna tvätta händerna i klorkalk 1847, och då dog färre. Fråga ”Vad lär det oss?” och säg begreppet smitta innan eleverna skriver berättelsen i fyra delar: vem som ville veta något, vad som stod i vägen, vad han prövade och vad det visade. Titta efter om de binder ihop delarna med därför och men eller bara med och sedan."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Berätta hur Eratosthenes mätte jorden: han ville veta hur stor den var, men ingen kunde gå runt den. Mitt på dagen vid sommarsolståndet stod solen rakt ovanför staden Syene, men i Alexandria kastade en pinne samtidigt en skugga, och skuggans vinkel var ungefär en femtiondel av ett helt varv. Därför var avståndet mellan städerna, omkring 800 km, en femtiondel av jordens omkrets. Eleverna räknar själva ut omkretsen och berättar sedan kedjan för grannen."
+      "text": "Berätta hur Eratosthenes mätte jorden: han ville veta hur stor den var, men ingen kunde gå runt den. Mitt på dagen vid sommarsolståndet stod solen rakt ovanför staden Syene, men i Alexandria kastade en pinne samtidigt en skugga, och vinkeln mellan pinnen och solens strålar var ungefär en femtiondel av ett helt varv. Solens strålar är parallella, och därför är vinkeln vid jordens medelpunkt mellan städerna lika stor, så avståndet på omkring 800 km mellan dem är en femtiondel av jordens omkrets. Fråga ”Vad lär det oss?” och säg sedan begreppet medelpunktsvinkel: bågen är lika stor del av omkretsen som vinkeln är av 360 grader. När eleverna har räknat ut omkretsen, berättar de kedjan för grannen, och du lyssnar efter om de kan säga varför vinkeln vid medelpunkten är lika stor som vid pinnen och varför de multiplicerar med 50."
     },
     {
       "omrade": "amnen",
       "arskurs": "4–6",
       "amne": "SO",
-      "text": "Berätta om regalskeppet Vasa som en kedja: kungen ville ha ett mäktigt skepp med två kanondäck till kriget, men skeppet blev för tungt upptill. På första resan 1628 lutade det i en vindby, vattnet forsade in genom de öppna kanonportarna, och därför sjönk det i Stockholms hamn. Säg sedan vad berättelsen visar om stormaktstiden: Sverige var i krig och ville visa sin makt. Eleverna berättar kedjan för grannen med därför och men."
+      "text": "Berätta om regalskeppet Vasa som en kedja: Sverige var i krig med Polen och ville styra Östersjön, och därför ville kungen ha ett mäktigt skepp med två kanondäck, men skeppet blev för tungt upptill. På första resan 1628 lutade det i en vindby, vattnet forsade in genom de öppna kanonportarna, och därför sjönk det i Stockholms hamn. Fråga ”Vad lär det oss?” och säg sedan begreppet stormaktstiden: Sverige krigade för att bli en stormakt kring Östersjön och ville visa sin makt. Eleverna berättar kedjan för grannen med därför och men, och du skriver frågan ”Vem ville vad?” på tavlan, så att den som kör fast kan börja om där. Lyssna efter om eleverna kan säga varför kungen ville ha ett så mäktigt skepp."
     }
   ],
   "metoderSomGorDen": []

@@ -96,6 +96,13 @@ export function strategiensFel(s) {
   delar.forEach((d, i) => { langd(d?.namn, g.minnet.namn, `minnets del ${i + 1}:s namn`); if (d?.text !== undefined) langd(d.text, g.minnet.text, `minnets del ${i + 1}:s text`); });
   (b.iMinnet?.pilar ?? []).forEach((p, i) => langd(p?.text, g.minnet.pil, `minnets pil ${i + 1}:s text`));
   for (const p of b.iMinnet?.pilar ?? []) if (![p?.fran, p?.till].every((d) => delar.some((x) => x?.namn === d))) fel.push(`${namn}: en pil i minnets bild går mellan "${p?.fran}" och "${p?.till}", som inte båda är delar.`);
+  // En pil går mellan två delar som står efter varandra, eftersom kortet och sidan ritar pilarna mellan rutorna; en annan pil
+  // föll bort utan varning (riggens brev 2026-11-05: den fyllda pilen i Från sak till tecken gick från den sista delen till
+  // den första).
+  for (const p of b.iMinnet?.pilar ?? []) {
+    const fran = delar.findIndex((x) => x?.namn === p?.fran), till = delar.findIndex((x) => x?.namn === p?.till);
+    if (fran >= 0 && till >= 0 && Math.abs(fran - till) !== 1) fel.push(`${namn}: pilen "${p?.text}" i minnets bild går från "${p?.fran}" till "${p?.till}", som inte står efter varandra; kortet och sidan ritar bara pilar mellan delar som står efter varandra.`);
+  }
   for (const l of b.fordjupa ?? []) if (!/^\/[a-z0-9/-]*$/.test(String(l?.adress ?? ''))) fel.push(`${namn}: Fördjupa leder till "${l?.adress}", som inte är en adress på sajten.`);
   if (s?.utkast) return fel;
 

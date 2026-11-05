@@ -27,11 +27,11 @@
         }
       ]
     },
-    "insikt": "Eleven minns ett exempel som det såg ut. Med flera ser hen det som är lika: idén.",
+    "insikt": "Eleven ser idén när du visar flera exempel som ser olika ut och pekar på det lika.",
     "handling": [
       {
         "ikon": "forstoringsglas",
-        "text": "Se flera exempel"
+        "text": "Visa flera exempel"
       },
       {
         "ikon": "pekfinger",
@@ -39,7 +39,7 @@
       },
       {
         "ikon": "skrivhand",
-        "text": "Ge ett eget exempel"
+        "text": "Ett eget exempel"
       }
     ]
   },
@@ -56,59 +56,54 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
+          "namn": "Ett exempel",
+          "text": "minns hur det såg ut"
+        },
+        {
           "namn": "Flera exempel",
           "text": "ser olika ut"
         },
         {
-          "namn": "Arbetsminnet",
-          "text": "letar efter det lika"
-        },
-        {
-          "namn": "Långtidsminnet",
-          "text": "idén, med exempel"
+          "namn": "Idén",
+          "text": "det som är lika i alla"
         }
       ],
       "pilar": [
         {
+          "fran": "Ett exempel",
+          "till": "Flera exempel",
+          "text": "visa flera"
+        },
+        {
           "fran": "Flera exempel",
-          "till": "Arbetsminnet",
-          "text": "se det lika",
+          "till": "Idén",
+          "text": "peka på",
           "betonad": true
-        },
-        {
-          "fran": "Arbetsminnet",
-          "till": "Långtidsminnet",
-          "text": "lära in"
-        },
-        {
-          "fran": "Långtidsminnet",
-          "till": "Arbetsminnet",
-          "text": "känna igen"
         }
       ],
-      "text": "Eleven minns det som är lika i exempel som ser olika ut, och det blir idén. Då känner hen igen den också i ett exempel hen inte har sett."
+      "text": "Ser eleven bara ett exempel, minns hen hur det såg ut. När du visar flera exempel som ser olika ut och pekar på det som är lika, ser eleven idén och känner igen den i ett nytt exempel."
     },
     "saGorDu": [
       {
-        "rubrik": "Idén och exemplen",
-        "text": "Säg begreppet eller regeln, och visa exemplen bredvid."
-      },
-      {
-        "rubrik": "Olika på ytan",
-        "text": "Ta två eller tre exempel som ser olika ut men har samma idé."
+        "rubrik": "Visa flera exempel",
+        "text": "Ta två eller tre som ser olika ut. Inget får dra blicken från idén."
       },
       {
         "rubrik": "Peka på det lika",
-        "text": "Visa var idén syns i varje exempel. Använd samma ord varje gång."
+        "text": "Du pekar i varje exempel och säger: ”De ser olika ut, men alla har …”"
       },
       {
-        "rubrik": "Eleverna ger egna",
-        "text": "Var och en ger ett eget exempel och säger varför det hör dit."
+        "rubrik": "Ge ett eget exempel",
+        "text": "Eleverna ger var sitt och säger varför det hör dit. Lyssna efter idén."
+      },
+      {
+        "rubrik": "Ett exempel till",
+        "text": "Kör någon fast eller missar idén, visa ett till och peka på det lika."
       }
     ],
     "avgor": {
-      "rubrik": "Undvik",
-      "text": "Ett enda exempel och lockande detaljer som inte hör till idén."
+      "rubrik": "När den passar",
+      "text": "Tio minuter, när klassen möter ett nytt begrepp eller en ny regel."
     },
     "tankPa": "Strategin tjänar innehållet: välj exempel som visar idén och inget annat som drar blicken. Ett roligt exempel skadar inte, så länge det roliga hör till idén. Ett löst exempel visar hur man löser en uppgift, och det hör till Avlasta minnet. Här visar exemplen vad en idé är. Forskarna har mest prövat strategin med studenter i labb. I skolan har de prövat den i matematik, NO och teknik.",
     "forskningen": {
@@ -156,25 +151,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan klassen börjar en ny bok tar du upp vad en konflikt i en berättelse är: någon vill något, och något står i vägen. Visa tre exempel ur böcker som klassen känner. De ser olika ut: två vänner som bråkar, en storm som huvudpersonen måste ta sig igenom och en person som står inför ett svårt val. Peka i varje exempel på vem som vill något och vad som står i vägen, och använd samma ord varje gång. Sedan hittar eleverna konflikten i den nya boken och säger de två delarna till en kamrat."
+      "text": "Inför en ny bok visar du tre konflikter ur böcker som klassen har läst: två vänner som bråkar, en storm som huvudpersonen måste ta sig igenom och någon som vill två saker men bara kan välja en. Peka i varje exempel och säg: ”De ser olika ut, men alla har någon som vill något och något som står i vägen.” Sedan skriver var och en på en lapp om en konflikt ur en bok eller film och säger till grannen varför den hör dit. Lyssna efter de två delarna. Säger någon bara att det händer något spännande, visar du ett exempel till och pekar på det lika."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När klassen ska skriva så att läsaren kan se det framför sig, visar du tre exempel som ser olika ut: en lerig hund, en sprucken mugg och en solig strand. Peka i varje exempel på ordet som gör att läsaren ser mer, och fråga eleverna vad de ser nu. Sedan skriver var och en ett eget exempel om något i klassrummet och läser det för en kamrat. Kamraten säger vad hen ser. Välj exempel där ordet gör skillnad, så att eleverna lär sig välja ord och inte bara lägger till fler."
+      "text": "När klassen ska skriva om något de har sett, visar du tre exempel som ser olika ut och skriver dem på tavlan: en lerig hund, en sprucken mugg och en solig strand. Peka på ordet framför saken i varje exempel och säg: ”De ser olika ut, men alla har ett ord som säger hur den ser ut.” Sedan väljer var och en något i klassrummet och säger eller skriver det med ett eget ord framför, och grannen säger vad hen ser. Lyssna efter ord som läsaren kan se, som randig eller blöt. Säger någon fin eller bra, visar du ett exempel till och pekar på ordet."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "När klassen lär sig proportionalitet visar du tre exempel som ser olika ut: priset på äpplen per kilo, sträckan för en cyklist som håller samma fart och mjölet i ett recept för fler personer. Peka i varje exempel på det som är lika: när det ena fördubblas, fördubblas det andra, och grafen är en rät linje genom origo. Lägg sedan till en taxiresa med en fast startavgift och fråga varför den inte är proportionell. Eleverna ger var sitt eget exempel och visar det i en tabell."
+      "text": "När klassen börjar med proportionalitet visar du tre exempel i olika former: en tabell med priset på äpplen, en graf över en cyklist med jämn fart och ett recept för fler personer. Peka i varje exempel och säg: ”De ser olika ut, men alla har en kvot som inte ändras: kronor per kilo, kilometer per timme och mjöl per person.” Visa också att dubbelt så mycket ger dubbelt så mycket, och att grafen går genom origo eftersom noll ger noll. Sedan gör var och en ett eget exempel i en tabell och säger till grannen varför det hör dit, och du lyssnar efter kvoten och nollan. Har flera elever gjort ett exempel med en startavgift, visar du ett exempel till för hela klassen och pekar på kvoten som inte ändras."
     },
     {
       "omrade": "amnen",
       "arskurs": "F–3",
       "amne": "NO",
-      "text": "När klassen lär sig vad en insekt är, visar du bilder på tre insekter som ser helt olika ut: en myra, en fjäril och en nyckelpiga. Peka i varje bild på det som är lika: sex ben och en kropp i tre delar. Lägg sedan till en spindel och låt eleverna räkna benen och säga varför den inte är en insekt. Ute på skolgården letar eleverna efter egna exempel och visar en kamrat benen och kroppens delar."
+      "text": "När klassen lär sig vad en insekt är, visar du foton på tre insekter som ser helt olika ut: en myra, en gräshoppa och en trollslända. Peka på benen och kroppens delar i varje bild och säg: ”De ser olika ut, men alla har sex ben och en kropp i tre delar.” Var och en letar efter en egen insekt på skolgården, eller i en bok med foton när det är för kallt för insekter, och visar en kamrat benen och delarna. Lyssna efter om eleverna räknar ben och delar. Säger någon att djuret hör dit för att det är litet eller kryper, visar du en insekt till och pekar på det lika."
     }
   ],
   "metoderSomGorDen": [

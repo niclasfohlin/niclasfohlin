@@ -57,53 +57,53 @@
       "delar": [
         {
           "namn": "Lärt i dag",
-          "text": "känns lätt nu"
+          "text": "känns lätt, glöms fort"
         },
         {
           "namn": "Lite glömt",
-          "text": "efter några dagar"
+          "text": "lagom svårt att ta fram"
         },
         {
-          "namn": "Starkare",
-          "text": "håller längre nästa gång"
+          "namn": "Sitter längre",
+          "text": "glöms långsammare"
         }
       ],
       "pilar": [
         {
           "fran": "Lärt i dag",
           "till": "Lite glömt",
-          "text": "dagar går"
+          "text": "vänta"
         },
         {
           "fran": "Lite glömt",
-          "till": "Starkare",
-          "text": "ta fram",
+          "till": "Sitter längre",
+          "text": "ta fram igen",
           "betonad": true
         }
       ],
-      "text": "Mellan gångerna glömmer eleven en del. När hen tar fram det igen sitter det bättre, och nästa uppehåll kan vara längre."
+      "text": "Eleven glömmer fort det hen har lärt sig i dag. När hen har glömt lite och tar fram det igen, glömmer hen långsammare. Nästa gång kan ni vänta längre."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj",
-        "text": "Tre till fem saker från förra veckan som klassen behöver om en månad."
+        "rubrik": "Välj tre saker",
+        "text": "Klassen ska kunna dem om en månad. Skriv en fråga om var och en."
       },
       {
-        "rubrik": "Skriv in",
-        "text": "När ni tar upp dem igen, efter några dagar och efter några veckor."
+        "rubrik": "Vänta några dagar",
+        "text": "Planera in fem minuter i början av en lektion tre dagar senare."
       },
       {
-        "rubrik": "Ta fram",
-        "text": "Eleverna tar fram det ur minnet igen och får se svaret efteråt."
+        "rubrik": "Ta fram det igen",
+        "text": "”Glömt lite? Det är meningen.” Alla svarar ur minnet, sedan rättar ni."
       },
       {
-        "rubrik": "Justera",
-        "text": "Vänta längre med det de kunde, och ta upp resten tidigare."
+        "rubrik": "Vänta längre",
+        "text": "Vänta två veckor, sedan längre. Det någon glömt tar ni om tre dagar."
       }
     ],
     "avgor": {
-      "rubrik": "Undvik",
-      "text": "Att gå igenom det igen i stället för att låta eleverna ta fram det."
+      "rubrik": "När den passar",
+      "text": "När klassen har förstått det, men inte övar på det varje vecka."
     },
     "tankPa": "Strategin tjänar innehållet: välj det eleverna ska kunna om en månad. Du behöver inte ta med allt. Studierna visar inte hur långa uppehållen ska vara, så det viktiga är att ni verkligen tar upp det igen. Skriv därför in det i planeringen i förväg. Innan eleverna kan det nya behöver de öva oftare, och när grunden sitter kan uppehållen bli längre.",
     "forskningen": {
@@ -145,25 +145,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "I stället för en lång ljudstund har klassen tre korta stunder på två till tre minuter: på morgonen, efter lunch och innan eleverna går hem. I varje stund övar ni veckans bokstav och två bokstäver från tidigare veckor. Eleverna säger ljudet och läser ord som sol, mos och sal med bokstäver som klassen redan har haft. Att sprida ut övningen har gett liten effekt i studier av läsning, så lägg märke till vem som tvekar på de äldre bokstäverna och ta upp de bokstäverna oftare."
+      "text": "När klassen har lärt sig läsa sj, tj och x, skriver du tre ord på kort, ett med var och en, som sju, tjej och sax. I början av en lektion tre dagar senare säger du ”Glömt lite? Det är meningen.” och visar korten ett i taget. Alla läser ordet tyst och ritar det på minitavlan, och sedan läser du ordet högt och eleverna rättar. Titta efter vilket ord som får fel bild eller ingen bild på tavlorna, och ta det igen om tre dagar medan de andra väntar två veckor."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Välj tio ord som klassen ofta stavar fel, och ta upp dem i korta diktamina efter några dagar, efter en vecka och efter en månad. Eleverna skriver orden ur minnet. Sedan visar du hur orden stavas, och eleverna rättar med en annan färg. Ord som de flesta stavar rätt kan vänta längre, och ord med många fel tar du upp tidigare. Att sprida ut övningen har gett liten effekt i studier av språk och ordförråd, så räkna felen efter en månad och se om de har blivit färre."
+      "text": "Välj tre saker i stavningen som klassen har arbetat med och ska kunna om en månad, som j-ljudet i djur, hjärta och ljus, och skriv en kort mening till var och en. Tre dagar senare läser du upp meningarna i början av lektionen utan att gå igenom stavningen först, och alla skriver dem ur minnet. Sedan visar du meningarna, och eleverna rättar med en annan färg. Om tre dagar tar ni igen det som flera stavade fel, och resten väntar två veckor och sedan en månad. Forskarna fann liten eller ingen effekt av spridd övning i läsning och ordförråd, så räkna felen efter en månad och se om de har blivit färre."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Varje veckas läxa har fyra uppgifter från veckans område och två från ett område ni arbetade med för en eller två månader sedan, som att lösa 3x + 5 = 20 eller räkna ut 25 procent av 360. Säg till klassen att de två gamla uppgifterna ska kännas lite svåra, och att det är meningen. När ni rättar läxan ser du vilka gamla uppgifter eleverna lämnade tomma. Ta med de uppgifterna igen tidigare än de andra."
+      "text": "Efter arbetsområdet om procent skriver du tre frågor som klassen ska kunna svara på om en månad: ”Vad är 15 procent av 240?”, ”Hur många procent är 18 av 72?” och ”Vad kostar en jacka för 800 kronor efter 25 procent rabatt?” I de första fem minuterna av en lektion tre dagar senare säger du ”Glömt lite? Det är meningen.” och låter alla svara ur minnet innan ni rättar. Eleverna räcker upp handen för varje fråga de missade, och du tar de frågorna igen om tre dagar med nya tal, medan de andra väntar två veckor. När ni rättar, lyssna efter om eleverna vet vilket tal som är det hela, som 72 i den andra frågan."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "SO",
-      "text": "Varannan vecka ägnar ni en del av lektionen åt frågor om det klassen arbetade med för några veckor sedan, som ”Ge två orsaker till att industrialiseringen började i Storbritannien”. Eleverna skriver först ur minnet med en färg och fyller sedan på ur boken med en annan. Då ser både du och eleverna vad de kunde och vad som behöver komma tillbaka tidigare. Fråga om orsaker och följder, och inte bara om årtal och namn."
+      "text": "Efter arbetsområdet om industrialiseringen skriver du tre frågor om orsaker och följder som klassen ska kunna svara på om en månad, som ”Ge två orsaker till att industrialiseringen började i Storbritannien.” Tre dagar senare säger du ”Glömt lite? Det är meningen.” och låter alla skriva ur minnet i fem minuter med en färg, innan de fyller på ur boken med en annan. Om tre dagar tar ni igen den fråga där många fick fylla på, och resten väntar två veckor och sedan en månad. Gå runt och titta efter om eleverna förklarar hur en orsak ledde till nästa, som att det fanns gott om kol till ångmaskinerna i fabrikerna."
     }
   ],
   "metoderSomGorDen": [

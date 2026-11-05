@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.58.0, 2026-11-05
+
+- `strategier.js` (riggens brev 2026-11-05, Tre fel i strategikortets form; sajtens K-714): `strategiensFel` stoppar en pil i minnets bild mellan delar som inte står efter varandra, eftersom kortet och sidan bara ritar pilar mellan rutor som står efter varandra, och en annan pil föll bort utan varning, som den fyllda pilen i Från sak till tecken.
+
 ## 0.57.0, 2026-11-04
 
 - `undervisningsmetod.js` (K-699, K-702): `undervisningsmetodensFel` prövar metodens fält `strategikort` med `strategikortensFel`, som `strukturkort`.

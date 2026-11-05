@@ -56,45 +56,45 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Uppgiften",
-          "text": "liknar en annan"
+          "namn": "Spik eller skruv",
+          "text": "slagen ser lika ut"
         },
         {
-          "namn": "Slaget",
-          "text": "vad skiljer dem?"
+          "namn": "Slaget syns",
+          "text": "du ser det som skiljer"
         },
         {
-          "namn": "Sättet",
-          "text": "det som passar slaget"
+          "namn": "Rätt verktyg",
+          "text": "sättet hör till slaget"
         }
       ],
       "pilar": [
         {
-          "fran": "Uppgiften",
-          "till": "Slaget",
-          "text": "känna igen"
+          "fran": "Spik eller skruv",
+          "till": "Slaget syns",
+          "text": "slaget först",
+          "betonad": true
         },
         {
-          "fran": "Slaget",
-          "till": "Sättet",
-          "text": "välja",
-          "betonad": true
+          "fran": "Slaget syns",
+          "till": "Rätt verktyg",
+          "text": "rätta sist"
         }
       ],
-      "text": "I en blandad rad lär sig eleven vilket sätt som hör till vilket slag. Hen övar på att välja, och först senare ser du att det har hjälpt."
+      "text": "I en blandad rad måste eleven först se vilket slag uppgiften är. När hen rättar med facit efter raden, lär hen sig vilket sätt som hör till vilket slag."
     },
     "saGorDu": [
       {
-        "rubrik": "Öva först",
-        "text": "Ta ett slag i taget tills eleverna klarar varje slag för sig."
+        "rubrik": "Ett slag i taget",
+        "text": "Först övar eleverna varje slag för sig, tills de klarar det."
       },
       {
-        "rubrik": "Blanda",
-        "text": "Varva slag som eleverna förväxlar, utan ett mönster de kan gissa."
+        "rubrik": "Blanda raden",
+        "text": "Varva åtta uppgifter av slag de förväxlar, så att ingen kan gissa."
       },
       {
         "rubrik": "Slaget först",
-        "text": "Eleverna skriver vilket slag uppgiften är och löser den sedan."
+        "text": "”Läs uppgiften och säg eller skriv slaget. Välj sätt och lös.”"
       },
       {
         "rubrik": "Rätta sist",
@@ -103,7 +103,7 @@
     ],
     "avgor": {
       "rubrik": "Undvik",
-      "text": "Att blanda innan eleverna kan slagen, eller att blanda olika ämnen."
+      "text": "Att säga slaget. Fråga den som kör fast: ”Vad i uppgiften visar det?”"
     },
     "tankPa": "Strategin tjänar innehållet: blanda bara slag som eleverna faktiskt förväxlar. Forskarna har prövat den mest i matematik med elever som är 8–⁠14 år och mycket lite i andra ämnen och med de yngsta. Säg till klassen att det ska kännas svårare, och att de övar på att välja.",
     "forskningen": {
@@ -147,25 +147,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "När klassen har övat frågor där svaret står i texten och frågor där man måste läsa mellan raderna, blandar du dem efter en gemensam text. Innan eleverna svarar skriver de vilket slag frågan är: står svaret på raden, eller måste jag dra en slutsats? Då övar de på att välja var de ska leta. Att blanda frågor är lite prövat i läsning, så lyssna efter om eleverna väljer bättre."
+      "text": "När klassen har övat frågor på raden och frågor mellan raderna var för sig, blandar du åtta frågor efter en novell så att ingen kan gissa nästa slag. Välj frågor där frågeordet inte heller säger slaget, som ”Varför sprang hunden till sjön?”, där svaret står på raden, och ”Varför ville Ella inte äta?”, där eleven drar en slutsats. Eleverna skriver slaget innan de svarar, och den som kör fast får frågan ”Vad i texten visar det?” När alla har svarat på de åtta efter omkring en kvart, visar du facit, och eleverna ser om de valde fel slag eller svarade fel. Titta efter den som letar efter svaret ord för ord på raden, också när frågan kräver en slutsats."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När klassen har övat lång och kort vokal var för sig läser du upp ord i blandad ordning, som tak, glass, villa, hat, tack, vila, glas och hatt. Eleverna lyssnar på vokalen, säger lång eller kort tyst för sig själva och skriver ordet. När listan är klar visar du facit och frågar varför tack skrivs med ck och tak med ett k. Lägg märke till den som skriver dubbel konsonant i varje ord och bara följer den senaste regeln."
+      "text": "När klassen har övat lång och kort vokal var för sig, läser du upp åtta ord i blandad ordning: tak, glass, villa, hat, tack, vila, glas och hatt. Eleverna lyssnar på vokalen och skriver först L för lång eller K för kort och sedan ordet. Kör någon fast, säger du ordet en gång till och frågar: ”Lyssna på vokalen, är den lång eller kort?” När listan är klar efter omkring tio minuter, rättar eleverna mot facit, och du frågar varför tack skrivs med ck och tak med ett k. Lägg märke till den som skriver dubbel konsonant i varje ord och bara följer den senaste regeln."
     },
     {
       "omrade": "matematik",
       "arskurs": "F–3",
       "amne": "matematik",
-      "text": "När klassen har räknat plus och minus var för sig blandar du korta textuppgifter, som ”Ali har 7 kulor och får 5 till” och ”Sara har 12 kulor och ger bort 4”. Innan eleverna räknar säger de plus eller minus och ritar. Ordna uppgifterna så att eleverna inte kan gissa nästa slag, och lägg ibland två av samma slag i rad. Lägg märke till den som lägger ihop alla tal hen ser."
+      "text": "När klassen har räknat plus och minus var för sig, blandar du åtta korta textuppgifter, som ”Ali har 7 kulor och får 5 till” och ”Sara har 12 kulor och ger bort 4”. Ordna uppgifterna så att eleverna inte kan gissa nästa slag, och lägg ibland två av samma slag i rad. Innan eleverna räknar, skriver de ett plustecken eller ett minustecken och ritar, så att du ser vad de väljer och grannen inte hör det. Den som kör fast får frågan ”Vad i uppgiften visar det?”, och när alla åtta är klara efter omkring en kvart, visar du facit. Lägg märke till den som lägger ihop alla tal hen ser."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "SO",
-      "text": "När klassen har arbetat med franska och ryska revolutionen får eleverna kort med händelser ur båda i blandad ordning. För varje kort avgör de vilken revolution det gäller och skriver vad i händelsen som avslöjar det. Du visar facit när alla kort är lagda. När två händelser liknar varandra, som att den som styr avsätts, måste eleverna titta på orsaker och sammanhang. Att blanda är inte prövat i SO i skolan, så se det som ett försök och lyssna efter elevernas skäl."
+      "text": "När klassen har arbetat med franska och ryska revolutionen var för sig, ger du eleverna åtta kort med händelser ur båda i blandad ordning. Lägg med händelser som liknar varandra, som brist på bröd eller att den som styr avsätts, så att eleverna måste titta på orsaker och sammanhang. För varje kort skriver eleverna först vilken revolution det gäller och sedan vad i händelsen som visar det. Korten tar omkring en kvart, och när alla åtta är klara, visar du facit och eleverna rättar. Titta efter om eleverna skiljer korten som liknar varandra med en orsak som bara finns i den ena revolutionen, som första världskriget i Ryssland eller de tre stånden i Frankrike."
     }
   ],
   "metoderSomGorDen": [

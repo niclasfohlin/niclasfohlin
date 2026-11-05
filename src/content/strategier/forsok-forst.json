@@ -56,59 +56,54 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Försöket",
-          "text": "egna sätt ur det du kan"
+          "namn": "Elevens stenar",
+          "text": "det hen redan kan"
         },
         {
-          "namn": "Genomgången",
-          "text": "sättet bredvid försöken"
+          "namn": "Kort planka",
+          "text": "ser vad som fattas"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "idén och varför"
+          "namn": "Lång planka",
+          "text": "ser varför den håller"
         }
       ],
       "pilar": [
         {
-          "fran": "Försöket",
-          "till": "Genomgången",
-          "text": "visar luckan",
+          "fran": "Elevens stenar",
+          "till": "Kort planka",
+          "text": "pröva"
+        },
+        {
+          "fran": "Kort planka",
+          "till": "Lång planka",
+          "text": "jämför",
           "betonad": true
-        },
-        {
-          "fran": "Genomgången",
-          "till": "Långtidsminnet",
-          "text": "lära in"
-        },
-        {
-          "fran": "Långtidsminnet",
-          "till": "Försöket",
-          "text": "tar fram"
         }
       ],
-      "text": "När eleven försöker, tar hen fram det hen redan kan och märker var det inte räcker. I genomgången ser eleven vad sättet gör som försöket inte gjorde. Då förstår eleven idén och fogar ihop den med det hen redan kan."
+      "text": "När eleven prövar egna sätt, tar hen fram det hen redan kan och ser vad som fattas. När du går igenom sättet bredvid försöken, ser eleven varför sättet fungerar."
     },
     "saGorDu": [
       {
         "rubrik": "Välj problemet",
-        "text": "Ta ett problem om det ni ska förstå, som lockar och alla kan börja på."
+        "text": "Ett som lockar och kräver det nya, och som alla kan börja på."
       },
       {
-        "rubrik": "Låt dem försöka",
-        "text": "Alla prövar själva och sedan i par. Du frågar men visar inget sätt."
+        "rubrik": "Pröva egna sätt",
+        "text": "Alla prövar tyst i tio minuter. Kör någon fast: ”Testa ett sätt till.”"
       },
       {
-        "rubrik": "Bygg på försöken",
-        "text": "Visa två eller tre försök bredvid sättet, och fråga vad som skiljer."
+        "rubrik": "Jämför med sättet",
+        "text": "Gå igenom sättet bredvid tre olika elevförsök: ”Vad saknar försöken?”"
       },
       {
-        "rubrik": "Öva samma lektion",
-        "text": "Eleverna löser nya uppgifter med sättet innan lektionen är slut."
+        "rubrik": "Lös en ny uppgift",
+        "text": "Innan lektionen är slut löser alla en ny uppgift med sättet."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När eleverna kan grunden och ska förstå en idé. Visa nya steg först."
+      "text": "Från åk 6, när målet är att förstå en idé. Inte för nya räknesteg."
     },
     "tankPa": "Strategin tjänar innehållet: välj ett problem där elevernas egna försök leder in i det ni ska förstå. Kortet Avlasta minnet säger att den som är ny ska se ett löst exempel först. Visa exemplet först när eleverna ska lära sig nya steg, som en ny uträkning, och för elever till och med åk 5. Låt eleverna försöka först när de kan grunden och ska förstå varför något fungerar. Forskarna är oense om ordningen och har nästan inte prövat strategin med elever i svårigheter, så se efter vad dina elever kan förklara efteråt. Gå igenom sättet samma lektion, så att ingen går därifrån med sitt försök som svar. Efter genomgången kan eleverna öva med lösta exempel.",
     "forskningen": {
@@ -156,25 +151,25 @@
       "omrade": "lasning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "När klassen har läst en novell, och innan du går igenom handling, tema och budskap, skriver eleverna var sin mening om vad novellen vill säga. Du skriver upp några av meningarna på tavlan, så att det syns tre slag: meningar som berättar vad som händer, meningar med ett ord som vänskap och meningar som säger något om vänskapen, som ”En vän kan förlåta mer än man tror”. Med klassens meningar som exempel går du igenom handling, tema och budskap, och eleverna skriver om sin egen mening. Strategin är mest prövad i matematik och NO, så se efter om fler kan skriva budskapet i nästa novell."
+      "text": "Innan du går igenom handling, tema och budskap i en novell som klassen har läst, skriver alla tyst i tio minuter så många meningar de kan om vad novellen vill säga. Kör någon fast, säger du: ”Testa ett sätt till.” Under tiden väljer du tre olika meningar och skriver dem på tavlan utan namn: en om vad som händer, en med bara ett ord som vänskap och en som säger något om vänskapen. Gå igenom handling, tema och budskap bredvid dem och fråga: ”Vad saknar försöken?” Sist läser du fabeln om räven och druvorna, alla skriver vad den vill säga, och du lyssnar efter meningar som säger något om temat, som att man låtsas att man inte vill ha det man inte kan få."
     },
     {
       "omrade": "skrivning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "Innan du går igenom hur man gestaltar en känsla, ger du eleverna uppgiften: ”Skriv tre meningar som får läsaren att känna att källaren är läskig, utan att skriva ordet läskig.” Eleverna skriver själva i fem minuter. Du läser upp tre försök utan namn: ett som säger känslan med andra ord, ett med något man ser och ett med ljud och det kroppen känner. Klassen säger vilket som gör läsaren mest rädd och varför, och du bygger genomgången om gestaltning på deras svar. Studierna har inte prövat strategin i skrivning, så jämför texterna eleverna skriver efteråt med de första försöken."
+      "text": "Innan du går igenom hur man gestaltar en känsla, ger du uppgiften: ”Skriv tre meningar som får läsaren att känna att källaren är läskig, utan att skriva ordet läskig.” Alla skriver tyst i tio minuter, och kör någon fast, säger du: ”Testa ett sätt till.” Under tiden väljer du tre försök och skriver en mening ur varje på tavlan utan namn: en som säger känslan med andra ord, en med något man ser och en med ljud och det kroppen känner. Gå igenom bredvid dem hur man visar det man ser, hör och känner, så att läsaren själv förstår känslan, och fråga: ”Vad saknar försöken?” Sist gestaltar alla att någon är nervös före ett prov, och när några läser upp, lyssnar du efter om ni förstår känslan fast ordet nervös inte står."
     },
     {
       "omrade": "matematik",
       "arskurs": "4–6",
       "amne": "matematik",
-      "text": "Innan genomgången om andelar och procent i åk 6 ställer du problemet: ”I 6A cyklar 12 av 20 elever till skolan, och i 6B cyklar 15 av 30. I vilken klass är det vanligast att cykla?” Eleverna försöker först själva och sedan i par och skriver hur de tänkte. Du ställer upp försöken på tavlan, som att 15 är fler än 12 och att 12 av 20 är mer än hälften, och bygger genomgången på dem: andelen är 60 procent i 6A och 50 procent i 6B. I studierna lärde sig elever till och med åk 5 lika mycket eller något mer med genomgången först, så visa sättet först i åk 4 och 5 och välj i åk 6 ett problem där alla kan börja."
+      "text": "Innan du går igenom andelar i åk 6, skriver du problemet på tavlan: ”Är det vanligare att cykla till skolan i 6A, där 13 av 20 cyklar, eller i 6B, där 18 av 30 gör det?” Alla prövar tyst i tio minuter, och kör någon fast eller blir klar, säger du: ”Testa ett sätt till.” Under tiden väljer du tre olika försök till tavlan, som att 18 är fler än 13, att båda klasserna har mer än hälften och att bara 7 i 6A inte cyklar, mot 12 i 6B. Gå igenom bredvid försöken hur stor andel av klassen som cyklar, 65 procent i 6A och 60 i 6B, och fråga: ”Vad saknar försöken?” Sist avgör alla hur vanligt det är att cykla i 6C, där 9 av 15 cyklar, och du lyssnar efter vilka som räknar andelen och ser att den är 60 procent, som i 6B."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "NO",
-      "text": "Innan genomgången om densitet skriver du upp tre föremål på tavlan: en träkloss på 400 cm³ som väger 200 g, en järnbit på 10 cm³ som väger 79 g och en aluminiumbit på 50 cm³ som väger 135 g. Paren försöker i tio minuter avgöra vilket material som är tyngst och skriver varför. Du visar tre försök: ett som jämför vikten, ett som jämför storleken och ett som räknar ut vad en kubikcentimeter väger. Du frågar vad de två första missar. Sedan går du igenom densitet som massa delad med volym: trä 0,5, aluminium 2,7 och järn 7,9 gram per kubikcentimeter."
+      "text": "Innan du går igenom densitet i åk 8, skriver du på tavlan: en träkloss på 400 cm³ väger 200 g, en järnbit på 10 cm³ väger 79 g och en aluminiumbit på 50 cm³ väger 135 g. Alla försöker tyst i tio minuter avgöra vilket material som är tyngst, och kör någon fast, säger du: ”Testa ett sätt till.” Under tiden väljer du tre olika försök till tavlan: ett som jämför vikten, ett som jämför storleken och ett som räknar ut vad en kubikcentimeter väger. Gå igenom densitet bredvid försöken och visa att trä väger 0,5, aluminium 2,7 och järn 7,9 gram per kubikcentimeter, och fråga: ”Vad saknar försöken?” Sist avgör alla vad en metallbit på 20 cm³ och 54 g är gjord av, och du lyssnar efter vilka som delar massan med volymen och kommer fram till aluminium."
     }
   ],
   "metoderSomGorDen": []

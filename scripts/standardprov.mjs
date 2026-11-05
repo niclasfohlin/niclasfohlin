@@ -432,6 +432,9 @@ if (strukturensSumma({ namn: 'a' }) === strukturensSumma({ namn: 'b' })) fel.pus
     [ny((s) => { s.baksida.saGorDu.push({ rubrik: 'a', text: 'b' }, { rubrik: 'c', text: 'd' }); }), 1],
     [ny((s) => { s.baksida.avgor.rubrik = 'Tänk på'; }), 1],
     [ny((s) => { s.baksida.iMinnet.pilar[0].till = 'Minnet'; }), 1],
+    // En pil mellan delar som står efter varandra går igenom, en som hoppar över en del stoppas (riggens brev 2026-11-05).
+    [ny((s) => { s.baksida.iMinnet.delar.push({ namn: 'Kunnandet' }); s.baksida.iMinnet.pilar.push({ fran: 'Kunnandet', till: 'Långtidsminnet', text: 'minns' }); }), 0],
+    [ny((s) => { s.baksida.iMinnet.delar.push({ namn: 'Kunnandet' }); s.baksida.iMinnet.pilar.push({ fran: 'Kunnandet', till: 'Arbetsminnet', text: 'minns' }); }), 1],
     [ny((s) => { s.baksida.forskningen.kallor = ['perry-m-fl-2021']; }), 1],
     [ny((s) => { s.forslag[3].omrade = 'socialt'; }), 1],
     [ny((s) => { s.nr = 0; }), 1],

@@ -39,7 +39,7 @@
       },
       {
         "ikon": "forstoringsglas",
-        "text": "Leta efter svaret"
+        "text": "Hitta svaret"
       }
     ]
   },
@@ -56,58 +56,58 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Frågan",
-          "text": "en lucka att fylla"
+          "namn": "Tom lucka",
+          "text": "vet inte svaret än"
         },
         {
-          "namn": "Arbetsminnet",
-          "text": "det du tänker på nu"
+          "namn": "Letar",
+          "text": "efter svaret som passar"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "allt du kan"
+          "namn": "Fylld lucka",
+          "text": "svaret sitter kvar"
         }
       ],
       "pilar": [
         {
-          "fran": "Frågan",
-          "till": "Arbetsminnet",
-          "text": "styr blicken",
+          "fran": "Tom lucka",
+          "till": "Letar",
+          "text": "alla gissar",
           "betonad": true
         },
         {
-          "fran": "Arbetsminnet",
-          "till": "Långtidsminnet",
-          "text": "lära in"
+          "fran": "Letar",
+          "till": "Fylld lucka",
+          "text": "hitta svaret"
         }
       ],
-      "text": "Eleven som har gissat letar efter svaret när du går igenom det nya. Hen lägger märke till det hen letar efter, och det kan fastna i långtidsminnet."
+      "text": "Eleven vet inte svaret än. När hen har gissat, letar hen efter svaret medan du går igenom det nya. När hen hittar svaret, sitter det kvar, också när gissningen var fel."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj frågan",
-        "text": "Ta en eller två frågor om det viktigaste, som eleverna får svar på."
+        "rubrik": "Skriv frågan",
+        "text": "En som gäller det viktigaste i dag och som det nya svarar rakt på."
       },
       {
         "rubrik": "Alla gissar",
-        "text": "Var och en skriver en gissning på en minut, innan någon säger sin."
+        "text": "”Skriv en gissning. Den får vara fel.” Alla skriver tyst i en minut."
       },
       {
-        "rubrik": "Rätta ingen gissning",
-        "text": "Säg att gissningen får vara fel. Den räknas inte."
+        "rubrik": "Ge tre val",
+        "text": "Kör någon fast efter en halv minut, ge tre rimliga svar att välja på."
       },
       {
-        "rubrik": "Svaret samma lektion",
-        "text": "Eleverna jämför gissningen med svaret och fyller i med en annan färg."
+        "rubrik": "Hitta svaret",
+        "text": "Stanna när det nya ger svaret. Alla skriver det bredvid gissningen."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "Före något nytt, när svaret kommer i samma lektion eller text."
+      "text": "För fakta och begrepp. Ge sexåringar svaret direkt efter gissningen."
     },
-    "tankPa": "Strategin tjänar innehållet: fråga om det eleverna ska förstå, eftersom de lär sig mer av just det som frågan gäller. En gissning är ingen kontroll, så räkna den inte, och låt alla skriva sin egen innan någon säger sin högt. De yngsta behöver höra det rätta svaret direkt efter gissningen, innan du läser eller visar det nya.",
+    "tankPa": "Strategin tjänar innehållet: fråga om det eleverna ska förstå, eftersom de lär sig mer av just det som frågan gäller. En gissning är ingen kontroll, så räkna den inte, och låt alla skriva sin egen innan någon säger sin högt. Sexåringar behöver höra det rätta svaret direkt efter gissningen, innan du läser eller visar det nya.",
     "forskningen": {
-      "text": "I 97 studier lärde sig de som först fick frågor mer av just det som frågorna gällde, 0,54, men knappt något mer av resten av materialet, 0,04 i 91 studier. Effekten var större när de gissade än när de bara läste frågorna. För barn i skolåldern var den 0,22 i 20 studier, och där är resultatet osäkert. De flesta forskare förklarar effekten med att frågan riktar uppmärksamheten mot det den gäller. Det finns bara svagt stöd för att nyfikenheten ligger bakom (St. Hilaire m.fl., 2024). Forskarna har mest prövat frågorna med studenter och sällan i klassrum (Pan och Carpenter, 2023). Barn på fem och sex år som en och en lyssnade på en faktaberättelse lärde sig mer efter frågor bara när de fick det rätta svaret direkt efter gissningen (Yu m.fl., 2025).",
+      "text": "I 97 jämförelser lärde sig de som först fick frågor mer av just det som frågorna gällde, 0,54, men knappt något mer av resten av materialet, 0,04 i 91 jämförelser. Effekten var större när de gissade än när de bara läste frågorna. För barn i skolåldern var den 0,22 i 20 jämförelser, och där är resultatet osäkert. De flesta forskare förklarar effekten med att frågan riktar uppmärksamheten mot det den gäller. Det finns bara svagt stöd för att nyfikenheten ligger bakom (St. Hilaire m.fl., 2024). Forskarna har mest prövat frågorna med studenter och sällan i klassrum (Pan och Carpenter, 2023). Barn på fem och sex år som en och en lyssnade på en faktaberättelse lärde sig mer efter frågor bara när de fick det rätta svaret direkt efter gissningen (Yu m.fl., 2025).",
       "kallor": [
         {
           "id": "st-hilaire-m-fl-2024",
@@ -145,25 +145,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Innan du läser högt ur en faktabok om igelkottar, visar du omslaget och frågar: ”Vad äter en igelkott?” Eleverna säger sin gissning till en kamrat, och sedan säger du svaret direkt: ”Den äter mest insekter, maskar och sniglar, och det ska vi höra i boken.” Gör likadant med en fråga till, som ”Var sover den på vintern?”, och läs boken direkt efteråt. Stanna där svaret kommer: ”Här står det. Vad gissade du först?”"
+      "text": "Innan du läser högt ur en faktabok om igelkottar i åk 1, skriver du frågan på tavlan och läser den: ”Vad gör igelkotten på vintern?” Säg: ”Rita eller skriv en gissning. Den får vara fel”, och alla gissar tyst på en lapp i en minut. Stanna där boken berättar att igelkotten sover hela vintern i ett bo av löv, och alla ritar svaret bredvid gissningen. Lyssna efter vilka som säger ”där!” när svaret kommer, för de har letat efter det."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan klassen läser en modelltext, en insändare om skolgården, ställer du frågan: ”Vad gör skribenten för att få läsaren att hålla med?” Eleverna skriver en gissning med två saker på en minut. Sedan läser ni insändaren tillsammans, och eleverna stryker under det som svarar på frågan. De jämför med sin gissning och skriver med en annan färg det de inte hade tänkt på."
+      "text": "Innan du går igenom motargument i åk 5, skriver du frågan ”Vad är ett motargument?” på tavlan och säger: ”Skriv en gissning. Den får vara fel”, och alla skriver tyst i en minut. Kör någon fast efter en halv minut, skriver du tre val i ett hörn: ett argument som är fel, ett argument från den som tycker annorlunda eller det sista argumentet. Läs en insändare om fler gungor och stanna där skribenten skriver ”Någon tycker kanske att gungor kostar för mycket”, och när du har sagt att det är ett motargument, ett argument från den som tycker annorlunda, skriver alla svaret bredvid gissningen. Se sedan efter i deras egna insändare vilka som tar med ett motargument."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Innan genomgången om procent i flera steg skriver du på tavlan: ”En jacka sänks med 20 procent och sedan med 20 procent till. Är den nu 40 procent billigare?” Alla skriver ja eller nej och en mening om varför, och du rättar ingen gissning. Under genomgången får eleverna svar på frågan, och sist räknar de ut priset på en jacka för 1 000 kronor och jämför med sin gissning. Den kostar då 640 kronor och är alltså 36 procent billigare."
+      "text": "Innan du går igenom procent i flera steg i åk 8, skriver du frågan på tavlan: ”Om priset på en jacka sänks med 20 procent och sedan med 20 procent till, är jackan då 40 procent billigare?” Säg: ”Skriv en gissning. Den får vara fel”, och alla skriver tyst ja eller nej och varför. Stanna när du visar att den andra sänkningen räknas på 800 kronor, så att en jacka för 1 000 kronor kostar 640 och är 36 procent billigare, och alla skriver svaret bredvid gissningen. Lyssna efter vilka som sedan kan säga vad den andra sänkningen räknas på."
     },
     {
       "omrade": "amnen",
       "arskurs": "4–6",
       "amne": "NO",
-      "text": "Innan ni gör försöket med isbitar i ett glas vatten, frågar du: ”Vad händer med vattenytan när isen smälter? Stiger den, sjunker den eller står den kvar?” Var och en ritar sin gissning med ett streck på en bild av glaset. Märk ytan med en tuschpenna när isbitarna flyter fritt, och vänta tills isen har smält. Ytan står kvar, och eleverna jämför med sin gissning och försöker förklara varför."
+      "text": "Innan ni gör försöket med isbitar i ett glas vatten, skriver du frågan på tavlan: ”Stiger vattenytan, sjunker den eller står den kvar när isen smälter?” Säg: ”Rita en gissning. Den får vara fel”, och alla ritar tyst sin gissning som ett streck på en bild av glaset, medan du märker ytan med en tuschpenna när isbitarna flyter fritt. Stanna när isen har smält och ytan står kvar vid märket, och alla ritar svaret bredvid gissningen. Förklara att isen trängde undan lika mycket vatten som den blev när den smälte, och lyssna i slutet av lektionen efter vilka som kan säga vad som hände med ytan, också bland dem som gissade fel."
     }
   ],
   "metoderSomGorDen": [

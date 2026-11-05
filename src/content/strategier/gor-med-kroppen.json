@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Eleven minns orden ihop med rörelsen, och bäst när rörelsen visar vad orden betyder.",
+    "insikt": "Eleven minns ord och tal bättre när hen själv gör en rörelse som visar vad de betyder.",
     "handling": [
       {
         "ikon": "fragetecken",
@@ -35,7 +35,7 @@
       },
       {
         "ikon": "klappa",
-        "text": "Visa det med kroppen"
+        "text": "Visa med kroppen"
       },
       {
         "ikon": "pratbubbla",
@@ -50,64 +50,64 @@
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Eleven kan säga ett nytt ord eller tal utan att veta vad det betyder. När eleven gör en rörelse som visar vad det betyder, minns hen orden och rörelsen tillsammans. Forskarna som har samlat studierna med vuxna tror att de vuxna mindes bättre främst för att de planerade rörelsen och i andra hand för att de gjorde den. Barnen i studierna lärde sig mest när rörelsen visade just det de skulle lära sig. När barnen gjorde en rörelse som inte hörde till innehållet, eller en som bara var halvt rätt, lärde de sig mindre."
+      "text": "Eleven kan säga ett nytt ord eller tal utan att veta vad det betyder. När eleven gör en rörelse som visar vad det betyder, minns hen orden och rörelsen tillsammans. Barnen i studierna fick se rörelsen och gjorde den sedan själva, och de lärde sig mest när den visade just det de skulle lära sig. När barnen gjorde en rörelse som inte hörde till innehållet, eller en som bara var halvt rätt, lärde de sig mindre."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Orden",
-          "text": "det du hör eller läser"
+          "namn": "Bara ordet",
+          "text": "du kan säga det"
         },
         {
-          "namn": "Rörelsen",
-          "text": "det du planerar och gör"
+          "namn": "Ord och rörelse",
+          "text": "känner vad det betyder"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "orden ihop med rörelsen"
+          "namn": "Minns ordet",
+          "text": "också utan rörelsen"
         }
       ],
       "pilar": [
         {
-          "fran": "Orden",
-          "till": "Rörelsen",
-          "text": "planera",
+          "fran": "Bara ordet",
+          "till": "Ord och rörelse",
+          "text": "med kroppen",
           "betonad": true
         },
         {
-          "fran": "Rörelsen",
-          "till": "Långtidsminnet",
-          "text": "lära in"
+          "fran": "Ord och rörelse",
+          "till": "Minns ordet",
+          "text": "utan rörelse"
         }
       ],
-      "text": "Eleven planerar en rörelse som visar vad orden betyder och gör den. Sedan minns hen orden och rörelsen tillsammans."
+      "text": "När eleven visar med kroppen vad ordet betyder, minns hen ordet ihop med rörelsen. Sedan minns hen det också utan rörelsen."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj innehållet",
-        "text": "Ta ord, tal eller händelser som eleverna kan visa med en rörelse."
+        "rubrik": "Välj en rörelse",
+        "text": "Den ska visa vad ordet eller talet betyder, som att flaxa för flyga."
       },
       {
-        "rubrik": "Visa rörelsen",
-        "text": "Gör en rörelse som visar storleken, riktningen eller handlingen."
+        "rubrik": "Visa med kroppen",
+        "text": "Säg vad ordet betyder och gör rörelsen: ”Stå upp och gör som jag.”"
       },
       {
-        "rubrik": "Alla gör och säger",
-        "text": "Alla gör rörelsen själva och säger orden samtidigt."
+        "rubrik": "Säg det samtidigt",
+        "text": "Alla säger ordet medan de gör rörelsen. Ta en minut per ord."
       },
       {
         "rubrik": "Sedan utan rörelse",
-        "text": "Eleverna tänker sig rörelsen och svarar med ord eller på papper."
+        "text": "Nästa dag säger eleverna orden. Kör någon fast, gör rörelsen med hen."
       }
     ],
     "avgor": {
-      "rubrik": "Undvik",
-      "text": "Att eleverna rör sig utan att rörelsen visar det de ska lära sig."
+      "rubrik": "När den passar",
+      "text": "Några minuter, när ord och tal går att visa, som flyga eller norr."
     },
-    "tankPa": "Strategin tjänar innehållet: välj det som eleverna kan visa med en rörelse, som en handling, ett avstånd, en storlek eller en form. I Ord och bild och Rita det visar eleverna innehållet i en bild, och här visar de det med kroppen. Åttaåringar lärde sig nya ord lika bra med bilder som med gester, så välj det som passar innehållet bäst. Vuxna minns mer när de gör rörelsen själva än när de ser någon annan göra den, men när barn läste tre och tre lärde de sig också av att se en kamrat flytta leksakerna.",
+    "tankPa": "Strategin tjänar innehållet: välj det som eleverna kan visa med en rörelse, som en handling, ett avstånd, en riktning, en storlek eller en form. I Ord och bild och Rita det visar eleverna innehållet i en bild, och här visar de det med kroppen. Åttaåringar lärde sig nya ord lika bra med bilder som med gester, så välj det som passar innehållet bäst. Vuxna minns mer när de gör rörelsen själva än när de ser någon annan göra den, men när barn läste tre och tre lärde de sig också av att se en kamrat flytta leksakerna.",
     "forskningen": {
-      "text": "I 145 studier med vuxna mindes deltagarna en fras som ”klappa händerna” bättre när de gjorde den själva. I de 123 studier som jämförde med att läsa frasen var effekten 1,23, och i de 33 som jämförde med att se någon annan göra den var den 0,51. När forskarna räknade med att studier med säkra resultat oftare blir publicerade, sjönk effekten mot att läsa till 0,84 (Roberts m.fl., 2022). Barn på omkring fem år i förskolan som i fyra veckor visade nya italienska ord för vardagliga rörelser, som flyga och hoppa, med hela kroppen mindes fler ord än barn som satt still och upprepade dem. När barnen själva räknade upp orden, mindes de också fler än barn som sprang lika mycket utan att visa orden, men när de fick se en bild som ledtråd var den skillnaden inte säker. Alla barnen mindes i snitt färre än tre av de fjorton orden när de själva räknade upp dem (Mavilidi m.fl., 2015). Barn på fem och sex år i förskoleklass i Danmark som i åtta veckor övade bokstävernas ljud med hela kroppen lärde sig fler ljud än de som övade utan rörelser, och skillnaden fanns kvar fyra till fem månader senare, men de läste inte ord bättre (Damsgaard m.fl., 2022). Åttaåringar som gjorde en gest till varje nytt engelskt ord mindes fler av orden än utan gest ännu efter sex månader, men bilder hjälpte dem lika mycket (Andrä m.fl., 2020). Hos fjortonåringar hjälpte gesterna mer än bilderna (Mathias m.fl., 2022). Barn på nio och tio år som inte kunde lösa någon uppgift med likhetstecknet före lektionen lärde sig mer när de gjorde en gest för hur de löser uppgiften än när de bara sa samma ord. Barnen som gjorde en gest som bara var halvt rätt lärde sig mindre, men mer än barnen utan gest (Goldin-Meadow m.fl., 2009). Elever i åk 1 som övade på att gå till talets plats på en tallinje på golvet lärde sig mer än de som gjorde samma övning utan att gå (Link m.fl., 2013). Elever i åk 1 och 2 som flyttade leksaker så som det stod i texten mindes och förstod texten bättre än de som läste den igen (Glenberg, 2011). De flesta studierna med barn är små, och några gjordes en och en med en försöksledare.",
+      "text": "I 145 studier med vuxna mindes deltagarna en fras som ”klappa händerna” bättre när de gjorde den själva. I de 123 studier som jämförde med att läsa frasen var effekten 1,23, och i de 33 som jämförde med att se någon annan göra den var den 0,51. När forskarna räknade med att studier med säkra resultat oftare blir publicerade, sjönk effekten mot att läsa till 0,84 (Roberts m.fl., 2022). Barn på omkring fem år i förskolan som i fyra veckor visade nya italienska ord för vardagliga rörelser, som flyga och hoppa, med hela kroppen mindes fler ord än barn som satt still och upprepade dem. När barnen själva räknade upp orden, mindes de också fler än barn som sprang lika mycket utan att visa orden, men när de fick se en bild som ledtråd var den skillnaden inte säker. Alla barnen mindes i snitt färre än tre av de fjorton orden när de själva räknade upp dem (Mavilidi m.fl., 2015). Barn på fem och sex år i förskoleklass i Danmark som i åtta veckor övade bokstävernas ljud med hela kroppen lärde sig fler ljud än de som övade utan rörelser, och skillnaden fanns kvar fyra till fem månader senare, men de läste inte ord bättre (Damsgaard m.fl., 2022). Åttaåringar som gjorde en gest till varje nytt engelskt ord mindes fler av orden än utan gest ännu efter sex månader, men bilder hjälpte dem lika mycket (Andrä m.fl., 2020). Hos fjortonåringar hjälpte gesterna mer än bilderna (Mathias m.fl., 2022). Barn på nio och tio år som inte kunde lösa någon uppgift med likhetstecknet före lektionen lärde sig mer när de gjorde en gest för hur de löser uppgiften än när de bara sa samma ord. Barnen som gjorde en gest som bara var halvt rätt lärde sig mindre, men mer än barnen utan gest (Goldin-Meadow m.fl., 2009). Elever i åk 1 som övade på att gå till talets plats på en tallinje på golvet lärde sig mer än de som gjorde samma övning utan att gå (Link m.fl., 2013). Elever i åk 1 och 2 som flyttade leksaker så som det stod i texten mindes och förstod texten bättre än de som läste den igen (Glenberg, 2011). De flesta studierna med barn är små, och några gjordes en och en med en försöksledare. I tre av dem var barn med inlärningssvårigheter eller neuropsykiatriska diagnoser inte med.",
       "kallor": [
         {
           "id": "roberts-m-fl-2022",
@@ -175,25 +175,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Läs en kort text om en bondgård med en grupp på tre, och lägg fram leksaker för det som texten handlar om: bonden, traktorn, ladan och hästen. Eleverna läser en mening i taget, och den som har läst flyttar leksakerna så som det står, som att bonden kör traktorn till ladan. Flyttar någon fel, läser ni meningen igen tillsammans. När eleverna klarar det, läser de nästa text och tänker sig att de flyttar leksakerna utan att röra dem. I den första studien läste elever i åk 1 och 2 en och en med en försöksledare, och i en senare studie läste eleverna tre och tre."
+      "text": "Innan du läser en saga högt, väljer du ut fyra verb som går att visa: smyga, kliva, huka sig och kika. Visa varje ord med kroppen och säg vad det betyder: ”Stå upp och gör som jag.” Under fyra minuter säger alla orden medan de gör rörelserna vid bänken, och när ett av orden kommer i sagan, gör de rörelsen igen. Nästa dag läser du sagan igen och stannar före orden, och eleverna säger dem utan att röra sig. Kör någon fast, gör rörelsen med hen, och lyssna efter vem som kan säga hur smyga skiljer sig från att gå."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan eleverna skriver en instruktion, som hur man viker ett pappersflygplan, gör var och en varje steg med papperet framför sig och säger vad hen gör. Sedan skriver eleven stegen i den ordning hen gjorde dem, med ett verb först i varje steg. En kamrat viker efter texten och gör bara det som står, och där kamraten fastnar skriver eleven till det som fattas. Vuxna minns handlingar bättre när de har gjort dem själva, men studierna har inte prövat det i skrivning."
+      "text": "Innan paren skriver vägen till en skatt i klassrummet, sätter du upp en lapp på väggen åt norr och visar väderstrecken med kroppen: ”Stå upp och gör som jag.” Alla står vända mot lappen och säger norr medan de pekar rakt fram och söder medan de pekar bakåt över axeln. De säger öster medan de lyfter högra handen som solen på morgonen, och väster medan de sänker vänstra handen som solen på kvällen. Sedan gömmer paren skatten och skriver vägen dit, som ”Gå fyra steg norrut från dörren”, och ett annat par går efter texten. Kör någon fast, gör rörelsen med hen, och lyssna efter vem som blandar ihop öster och väster."
     },
     {
       "omrade": "matematik",
       "arskurs": "F–3",
       "amne": "matematik",
-      "text": "Tejpa en tallinje från 0 till 10 på golvet, med ett streck för varje tal och siffror bara vid 0, 5 och 10. Du säger ett tal, och en elev går dit hen tror att talet ligger och säger talet högt. De andra pekar med tummen åt det håll eleven ska flytta sig, och sedan räknar ni strecken från 0 tillsammans. När eleverna klarar det, gör ni likadant med 0 till 20, och sist sätter eleverna ut samma tal på en tallinje på papper. I en studie lärde sig elever i åk 1 mer när de gick till talets plats på golvet än när de gjorde samma övning utan att gå."
+      "text": "Tejpa en tallinje från 0 till 10 på golvet för varje grupp på sex elever, och sätt ett streck för varje tal men siffror bara vid 0, 5 och 10. Du säger ett tal, och en elev i varje grupp visar det med kroppen: hen går dit hen tror att talet ligger och säger talet medan hen går. De andra pekar med tummen åt det håll eleven ska flytta sig, gruppen räknar strecken från 0 tillsammans, och sedan går nästa elev ett nytt tal, tills alla har gått två tal. Nästa dag frågar du utan att någon går: ”Ligger 7 närmare 5 eller 10?” Kör någon fast, gå talet med hen, och lyssna efter vem som svarar direkt utan att räkna från 0."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "NO",
-      "text": "När klassen arbetar med fast form, flytande form och gasform, visar du en gest för varje form: en knuten näve för fast, fingrar som rör sig om varandra för flytande och fingrar som sprids åt alla håll för gas. Eleverna gör gesterna med dig och säger smälta, stelna, avdunsta och kondensera när de går från en gest till nästa. Sist i lektionen säger du ett av orden, och alla visar övergången med händerna samtidigt, så att du ser vilka som blandar ihop dem. Nästa lektion förklarar eleverna övergångarna för grannen med ord och utan gester. Gester till nya ord är mest prövade med ord i ett främmande språk, och hos fjortonåringar hjälpte de mer än bilder."
+      "text": "När klassen arbetar med fast form, flytande form och gasform, väljer du en gest för varje: hårt knäppta händer, fingrar som glider förbi varandra och händer som far isär. Visa med kroppen och säg vad orden betyder: ”Stå upp och gör som jag.” Alla säger smälta, stelna, avdunsta och kondensera medan de går från en gest till nästa. Sist i lektionen säger du ett av orden, och alla visar övergången samtidigt, så att du ser vem som behöver göra gesten med dig. På nästa lektion förklarar eleverna övergångarna för grannen utan gester, och du lyssnar efter om de säger hur partiklarna rör sig."
     }
   ],
   "metoderSomGorDen": []

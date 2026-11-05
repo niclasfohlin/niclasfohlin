@@ -31,79 +31,74 @@
     "handling": [
       {
         "ikon": "oppen-bok",
-        "text": "Läs eller lyssna"
+        "text": "Läs ett stycke"
       },
       {
         "ikon": "rita",
-        "text": "Rita det själv"
+        "text": "Rita själv"
       },
       {
         "ikon": "forstoringsglas",
-        "text": "Jämför och lägg till"
+        "text": "Pröva mot texten"
       }
     ]
   },
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Eleverna ritar själva det de läser eller hör, och jämför sedan bilden med texten eller med en färdig bild."
+      "text": "Eleverna ritar själva det de läser eller hör och prövar bilden mot texten. Sist visar du en färdig bild, och eleverna ritar till det de saknar."
     },
     "darfor": {
       "ikon": "glodlampa",
-      "text": "Eleven kan läsa en text ord för ord utan att se hur delarna hänger ihop. När eleven ritar måste hen välja det viktiga, ordna delarna och koppla ihop dem med det hen redan kan, och då får hen också en bild i huvudet. Bilden visar dessutom vad eleven inte har förstått, så att hen vet var i texten hen ska läsa igen. Eleven rättar bilden när hen jämför den med texten eller med en färdig bild, och därför hör jämförelsen till strategin."
+      "text": "Eleven kan läsa en text ord för ord utan att se hur delarna hänger ihop. När eleven ritar måste hen välja det viktiga, ordna delarna och koppla ihop dem med det hen redan kan, och då får hen också en bild i huvudet. Bilden visar dessutom vad eleven inte har förstått, så att hen vet var i texten hen ska läsa igen. Eleven rättar bilden när hen prövar den mot texten och sist jämför den med en färdig bild, och därför hör båda till strategin."
     },
     "iMinnet": {
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Orden",
-          "text": "det du läser eller hör"
+          "namn": "Bara ord",
+          "text": "ingen bild i huvudet"
         },
         {
-          "namn": "Din bild",
-          "text": "det du ritar själv"
+          "namn": "Egen bild",
+          "text": "visar det som fattas"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "en bild som hänger ihop"
+          "namn": "Hela bilden",
+          "text": "stämmer med texten"
         }
       ],
       "pilar": [
         {
-          "fran": "Orden",
-          "till": "Din bild",
+          "fran": "Bara ord",
+          "till": "Egen bild",
           "text": "rita själv",
           "betonad": true
         },
         {
-          "fran": "Din bild",
-          "till": "Orden",
-          "text": "jämför"
-        },
-        {
-          "fran": "Din bild",
-          "till": "Långtidsminnet",
-          "text": "lära in"
+          "fran": "Egen bild",
+          "till": "Hela bilden",
+          "text": "pröva"
         }
       ],
-      "text": "När eleven ritar väljer hen ut det viktiga och kopplar ihop det med det hen kan. Sedan jämför hen med texten och rättar bilden, och då minns hen en bild som hänger ihop."
+      "text": "När eleven ritar själv väljer hen ut det viktiga och ordnar det, och bilden visar det hen inte har förstått. När hen prövar bilden mot texten och ritar till det som fattas, får hen en bild i huvudet som stämmer med texten."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj texten",
-        "text": "Den ska handla om något med delar, steg eller en plats att rita."
-      },
-      {
-        "rubrik": "Säg hur de ritar",
-        "text": "Rutor, pilar och ämnets ord räcker, och bilden behöver inte vara fin."
+        "rubrik": "Läs ett stycke",
+        "text": "Täck bokens bild. Eleverna läser eller hör ett stycke i taget."
       },
       {
         "rubrik": "Rita själv",
-        "text": "Eleverna ritar efter varje stycke, utan att se bokens bild."
+        "text": "Alla ritar i tre minuter. Kör någon fast, peka i texten: ”Rita det.”"
       },
       {
-        "rubrik": "Jämför",
-        "text": "De jämför med texten eller din bild och lägger till i en annan färg."
+        "rubrik": "Pröva mot texten",
+        "text": "Grannen pekar på en del i bilden och frågar: ”Var i texten står det?”"
+      },
+      {
+        "rubrik": "Visa bilden sist",
+        "text": "Visa bokens bild eller din sist. Alla ritar till det de saknar."
       }
     ],
     "avgor": {
@@ -156,25 +151,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Välj ett stycke i en berättelse där författaren beskriver en plats noga, som stugan där huvudpersonen gömmer sig. Eleverna läser stycket och ritar platsen med boken öppen, och de skriver ett ord ur texten vid varje sak de ritar. Sedan jämför de två och två och frågar varandra: ”Var i texten står det att dörren är där?” De suddar ut det som ingen av dem hittar stöd för i texten och ritar till det som fattas. I en studie hade elever i åk 6 nytta av att rita, men inte elever i åk 4, så pröva det först i de äldre klasserna."
+      "text": "I åk 6 läser klassen ett stycke där författaren beskriver en plats noga, som stugan där huvudpersonen gömmer sig. Alla ritar platsen själva i tre minuter med boken öppen och skriver ett ord ur texten vid varje sak de ritar. Sedan pekar grannen på en sak i bilden och frågar: ”Var i texten står det?” Paret suddar ut det som ingen av dem hittar i texten, och när du sist visar din bild, ritar alla till det de saknar. Lyssna efter om eleverna läser upp meningen i texten när de svarar."
     },
     {
       "omrade": "skrivning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "Innan eleverna skriver en beskrivning av en plats, berättar var och en för en kamrat vad hen ska skriva, och kamraten ritar det hen hör. Sedan tittar de på bilden tillsammans och frågar sig om allt som skulle vara med finns där och står på rätt plats. Berättaren lägger till det som fattas när hen berättar igen, och sedan skriver hen. Kamraten ritar snabbt och enkelt, eftersom bilden bara ska visa om texten går fram. Studierna om att rita för att lära har inte prövat det här sättet, så se efter om texterna blir tydligare."
+      "text": "Inför ett referat täcker eleverna bilden i en artikel om hur en båt tar sig genom en sluss och läser ett stycke i taget. Efter varje stycke ritar alla själva i tre minuter, och grannen pekar på en del i bilden och frågar: ”Var i texten står det?” Sist visar du artikelns bild, och alla ritar till det de saknar. Först då lägger eleverna undan artikeln och skriver referatet med sin egen bild framför sig. Lyssna efter om eleverna hittar meningen i texten när grannen frågar, och titta sedan efter om referatet har stegen i bildens ordning."
     },
     {
       "omrade": "matematik",
       "arskurs": "4–6",
       "amne": "matematik",
-      "text": "Ge en textuppgift som ”112 elever ska åka buss till museet, och varje buss har 48 platser. Hur många bussar behövs?” Innan eleverna räknar ritar de en ruta för varje buss och skriver hur många elever som sitter i den. Sedan jämför de bilden med uppgiften och visar grannen att alla 112 får plats i 3 bussar, och att den tredje bussen tar de 16 som blir över. I en studie hade elever i åk 5 nytta av att rita till textuppgifter, men inte elever i åk 1 och 2."
+      "text": "I åk 6 ger du textuppgiften ”Hur många bussar behövs när 112 elever ska åka till museet och varje buss har 48 platser?” Innan eleverna räknar, ritar alla själva i tre minuter en ruta för varje buss och skriver hur många som sitter i den. Sedan pekar grannen på en buss i bilden och frågar: ”Var i texten står det?” Sist visar du din bild med 48, 48 och 16 elever i tre bussar, och alla ritar till det de saknar. Lyssna efter om eleverna kan säga varför det behövs en tredje buss fast den inte blir full."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "NO",
-      "text": "Eleverna täcker bokens bild och läser ett stycke i NO-boken om hur en elektrisk krets fungerar. Efter stycket ritar de kretsen med batteriet, sladdarna, strömbrytaren och lampan, och de visar strömmen med pilar. Sedan tar de fram bokens bild, jämför och lägger till det som fattas i en annan färg. Till sist förklarar de för grannen varför lampan slocknar när strömbrytaren bryter kretsen. Av allt stöd i studierna har det hjälpt mest att jämföra med en färdig bild."
+      "text": "Eleverna täcker bokens bild, läser ett stycke i NO-boken om hur en elektrisk krets fungerar och ritar sedan kretsen själva i skrivboken i tre minuter. De ritar batteriet, sladdarna, strömbrytaren och lampan och visar strömmen med pilar, och kör någon fast, pekar du på meningen i texten: ”Rita det.” Grannarna pekar på en del i varandras bilder och frågar: ”Var i texten står det?” Sist tar de fram bokens bild och ritar till det de saknar med en annan färg. Lyssna efter om eleverna kan förklara varför lampan slocknar när strömbrytaren bryter kretsen."
     }
   ],
   "metoderSomGorDen": [

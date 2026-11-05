@@ -56,50 +56,54 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Arbetsminnet",
-          "text": "det du tänker på nu"
+          "namn": "Svag stig",
+          "text": "svårt att hitta svaret"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "allt du kan"
+          "namn": "Upptrampad stig",
+          "text": "lättare nästa gång"
+        },
+        {
+          "namn": "Rätt stig",
+          "text": "felen följer inte med"
         }
       ],
       "pilar": [
         {
-          "fran": "Arbetsminnet",
-          "till": "Långtidsminnet",
-          "text": "lära in"
+          "fran": "Svag stig",
+          "till": "Upptrampad stig",
+          "text": "stäng boken",
+          "betonad": true
         },
         {
-          "fran": "Långtidsminnet",
-          "till": "Arbetsminnet",
-          "text": "plocka fram",
-          "betonad": true
+          "fran": "Upptrampad stig",
+          "till": "Rätt stig",
+          "text": "rätta"
         }
       ],
-      "text": "Varje gång eleven plockar fram något ur minnet blir vägen dit lättare att hitta. När eleven bara läser igen övar hen inte på att hitta dit."
+      "text": "Varje gång eleven plockar fram något ur minnet blir vägen dit lättare att hitta. När eleven bara läser det igen, övar hen inte på att hitta dit."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj frågorna",
-        "text": "Fråga om det klassen ska förstå, och ställ minst en fråga om varför."
+        "rubrik": "Skriv tre frågor",
+        "text": "Om det viktigaste, en om varför. Ställ samma frågor igen nästa vecka."
       },
       {
         "rubrik": "Stäng boken",
-        "text": "Alla skriver, ritar eller säger det de minns innan du visar svaret."
+        "text": "”Det är inget prov.” Alla skriver eller ritar själva i tre minuter."
       },
       {
-        "rubrik": "Lagom svårt",
-        "text": "De flesta ska kunna svara till en del. Ge en ledtråd efter en minut."
+        "rubrik": "Ge en ledtråd",
+        "text": "Kör någon fast efter en minut, ge första ordet eller en bild."
       },
       {
-        "rubrik": "Rätta direkt",
-        "text": "Visa svaret under samma lektion. Eleverna rättar med en annan färg."
+        "rubrik": "Rätta",
+        "text": "Visa svaret på samma lektion. Eleverna rättar med en annan färg."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När klassen har förstått. Den hjälper dem att minnas men inte förstå."
+      "text": "Tio minuter i början eller slutet, om det klassen redan har förstått."
     },
     "tankPa": "Strategin tjänar innehållet: bestäm först vad klassen ska förstå och varför. Räkna inte svaren till betyget, så vågar eleverna svara fel. Ge de yngsta bestämda frågor på en frågekarta i stället för att be dem skriva allt de minns. De får svara med en bild eller muntligt.",
     "forskningen": {
@@ -141,25 +145,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan ni läser vidare i högläsningsboken skriver eleverna två saker som hände i förra kapitlet och en sak om varför huvudpersonen gjorde som hen gjorde. De skriver själva med boken stängd, berättar sedan för en kamrat och tittar efter i boken. När eleverna svarar på varför tänker de på sambanden i berättelsen och inte bara på vad som hände. Lyssna efter om svaren bygger på det som står i texten."
+      "text": "Innan du läser vidare i högläsningsboken, skriver du tre frågor om förra kapitlet på tavlan: två om vad som hände och en om varför huvudpersonen gjorde som hen gjorde. Du stänger boken, säger ”Det är inget prov”, och alla skriver själva i tre minuter. Kör någon fast efter en minut, ger du första ordet eller visar en bild ur kapitlet. Sedan läser du upp de ställen som ger svaren, och eleverna rättar med en annan färg. Titta efter om svaren på varför-frågan bygger på det som står i boken."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "Du säger ett ord och visar en bild, och alla skriver ordet på minitavlan innan du visar hur det stavas. Eleverna rättar sedan med en annan färg. Välj ord med ett mönster som klassen har övat, som kort vokal före dubbel konsonant i boll, katt och glass. Ord som många stavade fel tar du upp igen några dagar senare."
+      "text": "När klassen har övat kort vokal före dubbel konsonant, som i boll, katt och glass, tar du ner ordkorten från tavlan och säger: ”Det är inget prov.” Du säger ett ord i taget och visar en bild, och alla skriver ordet på minitavlan. Kör någon fast, ritar du ett streck för varje bokstav på hens tavla. Sedan visar du ordkortet, och eleverna rättar med en annan färg och håller upp tavlan. Titta efter vem som skrev en konsonant där det ska stå två, och ta samma ord igen nästa vecka."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Efter ett arbetsområde om linjära funktioner delar eleverna en tom sida i fyra rutor: formeln, ett eget exempel, en graf och varför grafen blir en rät linje. Boken är stängd, och i fem minuter fyller de i rutorna ur minnet utan att prata. Sedan jämför de med sammanfattningen i boken och fyller i det som saknades med en annan färg. Den sista rutan är varför-frågan, och där ser du om eleven har förstått mer än formeln."
+      "text": "Efter arbetsområdet om linjära funktioner delar eleverna en sida i fyra rutor: formeln, ett eget exempel, en graf och varför grafen blir en rät linje. Eleverna stänger boken, du säger ”Det är inget prov”, och i fem minuter fyller alla i rutorna själva ur minnet. Kör många fast på den sista rutan efter en minut, skriver du en värdetabell för y = 2x + 1 på tavlan som ledtråd. Sedan jämför eleverna med sammanfattningen i boken och fyller i det som saknades med en annan färg. I den sista rutan ser du om eleven har förstått mer än formeln, som att y ökar lika mycket varje gång x ökar med 1."
     },
     {
       "omrade": "amnen",
       "arskurs": "F–3",
       "amne": "NO",
-      "text": "När klassen har läst om grodans liv får eleverna en frågekarta med grodan i mitten och frågor runt omkring, som ”Vad äter grodynglet?”. Förra lektionen fyllde de i samma karta med boken öppen. Nu är boken stängd, och eleverna säger svaret tyst för sig själva och sedan till en kamrat. Sist ritar eller skriver de ett ord i rutan. Ser du många tomma rutor, ge det första ljudet eller en bild som ledtråd, så att eleverna lyckas minnas."
+      "text": "När klassen har läst om grodans liv och fyllt i en frågekarta med boken öppen, delar du ut en tom karta med samma frågor, som ”Vad äter grodynglet?” Du stänger boken, säger ”Det är inget prov”, och alla svarar tyst för sig själva innan de ritar eller skriver ett ord i rutan. Ser du många tomma rutor efter en minut, ger du hela klassen det första ljudet eller en bild som ledtråd. Sedan visar du svaren i boken, och eleverna rättar med en annan färg. Titta efter om rutorna har bokens ord, som rom, grodyngel och alger."
     }
   ],
   "metoderSomGorDen": [

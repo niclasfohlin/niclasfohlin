@@ -9,7 +9,7 @@
       "steg": [
         {
           "rubrik": "Var för sig",
-          "utfall": "Ser lika ut",
+          "utfall": "Tar fel nyckel",
           "fil": "jamfor-tva-1.svg",
           "alt": "Barnet håller en mässingsnyckel mot låset på en kista. En nästan likadan nyckel hänger för sig på en tavla på väggen. I hörnet ett kryss och en stapel av fem."
         },
@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Eleven ser det som avgör när två fall står bredvid varandra. Annars missar hen det lätt.",
+    "insikt": "Eleven ser det som avgör när hen själv jämför två fall som står bredvid varandra.",
     "handling": [
       {
         "ikon": "balansvag",
@@ -56,54 +56,54 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Två fall",
-          "text": "bredvid varandra"
+          "namn": "Var för sig",
+          "text": "måste minnas det första"
         },
         {
-          "namn": "Arbetsminnet",
-          "text": "ser lika och olika"
+          "namn": "Sida vid sida",
+          "text": "båda syns på en gång"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "det som avgör"
+          "namn": "Det som avgör",
+          "text": "känns igen i nya fall"
         }
       ],
       "pilar": [
         {
-          "fran": "Två fall",
-          "till": "Arbetsminnet",
-          "text": "samtidigt",
-          "betonad": true
+          "fran": "Var för sig",
+          "till": "Sida vid sida",
+          "text": "lägg bredvid"
         },
         {
-          "fran": "Arbetsminnet",
-          "till": "Långtidsminnet",
-          "text": "lära in"
+          "fran": "Sida vid sida",
+          "till": "Det som avgör",
+          "text": "jämför",
+          "betonad": true
         }
       ],
-      "text": "När fallen står bredvid varandra, behöver eleven inte hålla det ena i minnet. Då kan hen tänka på det som avgör, och det är det hen minns."
+      "text": "Ser eleven ett fall i taget, måste hen hålla det första i minnet och missar lätt det som skiljer. När båda står bredvid varandra och eleven jämför dem, ser hen vad som avgör och känner igen det i ett nytt fall."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj två",
-        "text": "Ta två fall eller sätt som liknar varandra utom i det viktiga."
+        "rubrik": "Lägg två bredvid",
+        "text": "Ta två som är lika utom i det som avgör, och ställ upp dem likadant."
       },
       {
-        "rubrik": "Bredvid varandra",
-        "text": "Visa båda på tavlan samtidigt och ställ upp dem likadant."
+        "rubrik": "Eleverna jämför",
+        "text": "En minut själva, sedan i par: ”Vad är lika? Vad skiljer, och varför?”"
       },
       {
-        "rubrik": "Lika, sedan olika",
-        "text": "Vad är lika? Vad skiljer? Först själv, sedan i par."
+        "rubrik": "Ringa in",
+        "text": "Kör någon fast, ringa in samma ställe i båda: ”Vad skiljer här?”"
       },
       {
         "rubrik": "Säg principen",
-        "text": "Sedan säger du i en mening vad som avgör."
+        "text": "Först när paren har sagt sitt säger du: ”Det som avgör är …”"
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När eleverna kan ett av sätten. Är båda sätten nya, lär de sig mindre."
+      "text": "En kvart. Jämför ni två nya sätt att lösa en uppgift, visa ett först."
     },
     "tankPa": "Strategin tjänar innehållet: välj de två efter det som klassen blandar ihop eller missar. Ställ upp dem på samma sätt och med samma ord, så att skillnaden syns, och låt eleverna leta efter det lika först. Forskarna har mest prövat att jämföra sätt att lösa uppgifter i matematik i åk 5–⁠9. Med Jämför två ser eleverna skillnaden mellan två slag av uppgifter, och med Blanda uppgifter övar de sedan att välja i en blandad rad.",
     "forskningen": {
@@ -151,25 +151,25 @@
       "omrade": "lasning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "När klassen har läst nyhetsartiklar ställer du en nyhetsartikel och en debattartikel om samma händelse bredvid varandra, till exempel om mobilförbud i skolan. Eleverna markerar först det som är lika, som händelsen och fakta, och sedan det som skiljer, som skribentens åsikt och ord som måste och borde. När eleverna har jämfört, säger du i en mening vad som avgör: debattartikeln vill få läsaren att tycka något. Sedan läser eleverna en ny text, avgör vilket slag den är och ger ett skäl ur texten."
+      "text": "När klassen har läst nyhetsartiklar, skriver du en nyhetsartikel och en debattartikel med samma fakta om samma beslut, som att skolan blir mobilfri, och lägger dem bredvid varandra med en rubrik och fem meningar var. Eleverna jämför en minut själva och sedan i par: ”Vad är lika? Vad skiljer, och varför?” Först när paren har sagt sitt säger du: ”Det som avgör är vad skribenten vill: nyheten berättar vad som har hänt, och debattartikeln vill få dig att tycka något.” Sist avgör var och en vilket slag en ny text är, och du lyssnar efter om eleven pekar på vems åsikt det är: någon som citeras eller skribenten själv."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Skriv två versioner av samma början på tavlan, en som berättar och en som visar: ”Hon var rädd.” och ”Hennes hand skakade när hon tryckte ner handtaget.” Fråga först vad som är lika, att hon är rädd i båda, och sedan vad som skiljer. Låt eleverna säga vad läsaren själv får lista ut i den andra meningen. Säg sedan i en mening vad som avgör: den andra meningen visar känslan i det hon gör. Sist letar var och en upp en mening i sin egen text som berättar en känsla och skriver om den så att den visar."
+      "text": "Skriv två meningar bredvid varandra på tavlan: ”Hon var rädd när hon öppnade dörren.” och ”Hennes hand skakade när hon öppnade dörren.” Eleverna jämför en minut själva och sedan i par: vad är lika, vad skiljer och varför? Kör flera par fast, ringa in ”var rädd” och ”hand skakade”: ”Vad skiljer här?” Först när paren har sagt sitt säger du: ”Det som avgör är att den andra visar hur rädslan syns på henne, så att läsaren själv förstår att hon är rädd.” Sist skriver var och en om en mening i sin egen text där en känsla står utskriven, och du lyssnar efter om grannen kan gissa känslan när ordet är borta."
     },
     {
       "omrade": "matematik",
       "arskurs": "4–6",
       "amne": "matematik",
-      "text": "När klassen kan ställa upp en addition, visar du två lösningar av 199 + 46 bredvid varandra: den ena ställer upp talen, den andra räknar 200 + 46 och tar bort 1. Eleverna säger först vad som är lika, sedan vad som skiljer. Fråga när det andra sättet är snabbare och när det inte hjälper, som i 173 + 46. Ge sedan några uppgifter där eleverna väljer sätt och säger varför."
+      "text": "När klassen kan ställa upp en addition, skriver du två lösningar av 199 + 46 bredvid varandra, steg för steg: en uppställning och en där du räknar 200 + 46 = 246 och tar bort 1. Eleverna jämför en minut själva och sedan i par: ”Vad är lika? Vad skiljer, och varför?” Först när paren har sagt sitt säger du: ”Det som avgör är om ett av talen ligger strax under ett jämnt tiotal eller hundratal.” Sist väljer var och en hur hen räknar 298 + 135 och 173 + 24 och säger till grannen varför, och du lyssnar efter om eleverna säger något om talen innan de väljer, som att 298 ligger strax under 300."
     },
     {
       "omrade": "amnen",
       "arskurs": "F–3",
-      "amne": "SO",
-      "text": "Visa två bilder av klassrum bredvid varandra, en från förr och en från i dag. Eleverna säger först vad som är lika, som bänkarna, läraren och böckerna, och sedan vad som skiljer. Skriv det lika i mitten och det olika på var sin sida, och fråga varför det har ändrats. Lägg märke till om eleverna ser mer än kläderna, som hur många som går i klassen och vad som sitter på väggarna."
+      "amne": "teknik",
+      "text": "Lägg på varje bord två likadana papper bredvid varandra över två bokhögar som står 20 centimeter isär, det ena platt och det andra vikt som ett dragspel med vecken från hög till hög, och sätt ett suddgummi mitt på båda. Eleverna tittar en minut själva och jämför sedan i par: ”Vad är lika? Vad skiljer, och varför?” Först när paren har sagt sitt säger du: ”Det som avgör är formen: samma papper bär mer när det är vikt.” Sist får varje par en bit wellpapp och letar upp det vikta i kanten, och du lyssnar efter om de själva kopplar ihop vågorna i wellpappen med det vikta pappret."
     }
   ],
   "metoderSomGorDen": [

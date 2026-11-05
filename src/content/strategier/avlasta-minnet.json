@@ -27,7 +27,7 @@
         }
       ]
     },
-    "insikt": "Visa ett löst exempel och ta bort det som tynger. Då orkar eleven med det svåra.",
+    "insikt": "När eleven först tittar på ett löst exempel, orkar hen lära sig de nya stegen.",
     "handling": [
       {
         "ikon": "forstoringsglas",
@@ -46,7 +46,7 @@
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Du rensar bort det som tynger utan att eleverna lär sig något av det. Sedan visar du ett löst exempel och tar bort stödet ett steg i taget."
+      "text": "Du visar ett löst exempel bredvid en likadan uppgift, så att eleverna slipper leta, och tar bort stödet ett steg i taget. Stryk också det som tynger utan att eleverna lär sig något av det."
     },
     "darfor": {
       "ikon": "glodlampa",
@@ -56,59 +56,54 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Det nya",
-          "text": "få delar åt gången"
+          "namn": "För tungt",
+          "text": "arbetsminnet är fullt"
         },
         {
-          "namn": "Arbetsminnet",
-          "text": "rymmer lite nytt"
+          "namn": "Orkar upp",
+          "text": "tänker på stegen"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "det du redan kan"
+          "namn": "Klarar mer själv",
+          "text": "stegen sitter i minnet"
         }
       ],
       "pilar": [
         {
-          "fran": "Det nya",
-          "till": "Arbetsminnet",
-          "text": "lagom mycket",
+          "fran": "För tungt",
+          "till": "Orkar upp",
+          "text": "se exemplet",
           "betonad": true
         },
         {
-          "fran": "Arbetsminnet",
-          "till": "Långtidsminnet",
-          "text": "lära in"
-        },
-        {
-          "fran": "Långtidsminnet",
-          "till": "Arbetsminnet",
-          "text": "hjälper till"
+          "fran": "Orkar upp",
+          "till": "Klarar mer själv",
+          "text": "gör själv"
         }
       ],
-      "text": "När eleven redan kan något tar det nästan ingen plats i arbetsminnet. Därför behöver den som är ny mer stöd, och den som redan kan behöver mindre."
+      "text": "När allt är nytt letar eleven sig fram, och då är arbetsminnet fullt. Med ett löst exempel kan hen tänka på stegen, och när de sitter i minnet klarar hen mer själv."
     },
     "saGorDu": [
       {
-        "rubrik": "Rensa",
-        "text": "Stryk pynt, samla texten vid bilden och ha en sak framme i taget."
+        "rubrik": "Skriv fyra lösningar",
+        "text": "Ta åtta likadana uppgifter. Skriv hela lösningen på 1, 3, 5 och 7."
       },
       {
-        "rubrik": "Visa ett exempel",
-        "text": "Lös det steg för steg. Eleverna gör direkt en liknande uppgift."
+        "rubrik": "Titta på exemplet",
+        "text": "Alla följer stegen. ”Titta på varje steg, så kan du lösa nästa själv.”"
       },
       {
-        "rubrik": "Säg varför",
-        "text": "Eleverna säger varför de gör varje steg i exemplet och i sin uppgift."
+        "rubrik": "Gör en likadan",
+        "text": "Alla gör en likadan direkt. Kör någon fast, peka på steget i exemplet."
       },
       {
-        "rubrik": "Ett steg mindre",
-        "text": "Ta bort ett löst steg i taget när eleverna visar att de klarar det."
+        "rubrik": "Gör själv",
+        "text": "Ta bort ett löst steg i taget ur exemplen, när eleverna klarar det."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När innehållet är nytt för eleven. Stödet stör den som redan kan."
+      "text": "När uppgiften har flera nya steg. Den som kan dem löser utan exempel."
     },
     "tankPa": "Strategin tjänar innehållet: behåll det svåra som eleverna ska lära sig. Forskarna har mest prövat lösta exempel i matematik och NO med elever som är 11–⁠18 år, och i ett stort försök i textskrivning gav de ingen skillnad. Välj stödet efter det varje elev visar, och ge inte alla samma mall.",
     "forskningen": {
@@ -156,25 +151,25 @@
       "omrade": "lasning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "Inför en lärobokstext med många nya ord skriver du förklaringen i marginalen vid ordet, så att eleverna inte behöver bläddra till en ordlista. Dela texten i kortare stycken med en fråga efter varje. De elever som läser lätt kan läsa texten utan frågorna. Alla läser samma text, men ingen behöver leta efter vad orden betyder."
+      "text": "Inför en lärobokstext med många nya ord väljer du åtta sammansatta ord och skriver hela lösningen vid ord 1, 3, 5 och 7: delarna och en förklaring som passar i meningen där ordet står. Vid ordet vattenkraft står ”vatten + kraft” och ”energi ur strömmande vatten”, och eleverna följer stegen och gör direkt en likadan vid ord 2. Kör någon fast, pekar du på steget i exemplet, och den som klarar orden utan exempel börjar läsa texten. Åtta ord tar omkring en kvart, och när de flesta klarar dem, skriver du bara delarna i exemplen nästa gång. Titta efter den som förklarar ordet ur delarna utan att pröva förklaringen i meningen."
     },
     {
       "omrade": "skrivning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När eleverna ska skriva säger du instruktionen i korta meningar och har en sak framme i taget: först bilden de ska skriva om och sedan raderna de skriver på. Skriv stegen på tavlan med en bild vid varje steg, så att eleverna inte behöver hålla instruktionen i huvudet. Ta bort stegen på tavlan när klassen kan dem. Lösta exempel gav ingen skillnad i ett stort försök i textskrivning med äldre elever, så se efter om fler elever kommer igång när stegen står på tavlan."
+      "text": "Gör ett blad med åtta bilder och skriv en hel mening med vem, gör vad och var i tre färger vid bild 1, 3, 5 och 7. Vid bild 1 står ”Katten sover i soffan”, och eleverna följer stegen med fingret och skriver direkt en likadan mening om hunden i sängen på bild 2. Kör någon fast, pekar du på samma färg i exemplet och frågar: ”Vem är det på din bild?”, och den som redan skriver hela meningar får ett blad med bara bilder. Bladet tar omkring en kvart, och när de flesta klarar det, skriver du bara vem och gör vad i exemplen nästa gång. När eleverna läser en mening högt för grannen, lyssnar du efter om den har vem, gör vad och var."
     },
     {
       "omrade": "matematik",
       "arskurs": "7–9",
       "amne": "matematik",
-      "text": "Visa ett helt löst exempel på en ekvation med x på båda sidor, som 5x + 3 = 2x + 15, och skriv varje steg på en egen rad. Bredvid står en nästan likadan uppgift, 4x + 1 = x + 16, där eleverna gör samma steg. I nästa par lämnar du ett steg i exemplet tomt och sedan två, och sist löser eleverna utan exempel. Fråga ”Varför gör vi det här steget?”, och låt den som klarar uppgiften utan stöd börja där."
+      "text": "Ta åtta ekvationer med x på båda sidor och skriv hela lösningen på 1, 3, 5 och 7 med ett steg på varje rad: 5x + 3 = 2x + 15, 3x + 3 = 15, 3x = 12 och x = 4. Säg ”Titta på varje steg, så kan du lösa nästa själv”, och låt alla följa raderna i exemplet och lösa 4x + 1 = x + 16 direkt efter. Kör någon fast, pekar du på samma rad i exemplet, och den som redan kan lösa sådana ekvationer får ett blad utan exempel. Bladet tar omkring 20 minuter, och när de flesta klarar det lämnar du den sista raden tom i exemplen på nästa blad. Titta efter den som drar bort x bara på ena sidan, som i 4x + 1 = x + 16."
     },
     {
       "omrade": "amnen",
       "arskurs": "4–6",
       "amne": "NO",
-      "text": "När klassen ska rita en sluten krets visar du ett löst exempel på tavlan och ritar det steg för steg: batteriet, sladden till lampan, lampan och sladden tillbaka till batteriet. Säg varför varje steg behövs: strömmen måste kunna gå runt. Bredvid ritar eleverna själva en nästan likadan krets med en lampa och en strömbrytare. I nästa uppgift har du bara ritat början, och sist ritar eleverna utan exempel."
+      "text": "Gör ett blad med åtta korta meningar som ”Räven äter haren, och haren äter gräs”, och rita näringskedjan vid mening 1, 3, 5 och 7: gräs → hare → räv. Alla följer pilarna i exemplet med fingret och ritar direkt en likadan kedja till mening 2. Kör någon fast, pekar du på växten i exemplet och frågar: ”Var är växten i din mening?”, och den som redan kan rita näringskedjor får meningarna utan exempel. Bladet tar omkring en kvart, och när de flesta klarar det, ritar du exemplen utan den sista pilen på nästa blad. Titta efter den som låter pilarna gå från räven till haren, som orden står i meningen."
     }
   ],
   "metoderSomGorDen": [

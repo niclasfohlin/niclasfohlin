@@ -31,22 +31,22 @@
     "handling": [
       {
         "ikon": "rita",
-        "text": "Rita ur minnet"
+        "text": "Rita enkelt"
       },
       {
         "ikon": "pekfinger",
-        "text": "Peka och förklara"
+        "text": "Säg och peka"
       },
       {
-        "ikon": "oppen-bok",
-        "text": "Titta och lägg till"
+        "ikon": "pratbubbla",
+        "text": "Peka och förklara"
       }
     ]
   },
   "baksida": {
     "vad": {
       "ikon": "tanka",
-      "text": "Du förklarar ett samband och pekar samtidigt i en enkel bild av det. Sedan ritar eleverna bilden själva och förklarar."
+      "text": "Du förklarar ett samband och pekar samtidigt i en enkel bild av det. Sedan pekar eleverna i din bild och förklarar för varandra, och om en vecka ritar de den ur minnet och jämför med din."
     },
     "darfor": {
       "ikon": "glodlampa",
@@ -56,54 +56,54 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Ord och bild",
-          "text": "det du hör och ser"
+          "namn": "Bara ord",
+          "text": "hör ett ord i taget"
         },
         {
-          "namn": "Arbetsminnet",
-          "text": "kopplar ihop dem"
+          "namn": "Ser sambandet",
+          "text": "hör och ser samma del"
         },
         {
-          "namn": "Långtidsminnet",
+          "namn": "Kan förklara",
           "text": "två vägar att minnas"
         }
       ],
       "pilar": [
         {
-          "fran": "Ord och bild",
-          "till": "Arbetsminnet",
-          "text": "peka och säg",
+          "fran": "Bara ord",
+          "till": "Ser sambandet",
+          "text": "säg och peka",
           "betonad": true
         },
         {
-          "fran": "Arbetsminnet",
-          "till": "Långtidsminnet",
-          "text": "lära in"
+          "fran": "Ser sambandet",
+          "till": "Kan förklara",
+          "text": "förklara"
         }
       ],
-      "text": "Eleven hör orden och ser bilden samtidigt, och de handlar om samma sak. När hen kopplar ihop dem till ett samband sitter det."
+      "text": "När du bara pratar hör eleven ett ord i taget och har svårt att hålla ihop sambandet. När du pekar på den del du pratar om, hör och ser eleven samma sak och kopplar ihop orden med bilden. Då har hen två vägar att minnas."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj vad du ritar",
-        "text": "Det kan vara en process, ett samband eller en ordning i tid eller rum."
-      },
-      {
         "rubrik": "Rita enkelt",
-        "text": "Använd rutor, pilar och ämnets ord vid delarna, och hoppa över pynt."
+        "text": "Du ritar rutor och pilar med ämnets ord. Hoppa över meningar och pynt."
       },
       {
         "rubrik": "Säg och peka",
-        "text": "Ta en del i taget. Var tyst när eleverna läser."
+        "text": "Peka på en del i taget medan du pratar om den: ”Följ mitt finger.”"
       },
       {
-        "rubrik": "Eleverna ritar",
-        "text": "De ritar ur minnet, förklarar för grannen och ritar igen om en vecka."
+        "rubrik": "Peka och förklara",
+        "text": "Alla pekar och förklarar i par. Kör någon fast, peka på nästa del."
+      },
+      {
+        "rubrik": "Rita ur minnet",
+        "text": "Spara bilden. Om en vecka ritar alla den ur minnet och jämför med din."
       }
     ],
     "avgor": {
-      "rubrik": "Undvik",
-      "text": "Pynt och ikoner, och att läsa upp texten på bilden."
+      "rubrik": "När den passar",
+      "text": "Tio minuter, och fem om en vecka, när du går igenom delar och samband."
     },
     "tankPa": "Strategin tjänar innehållet: kan du peka på bilden och säga sambandet med ämnets ord? Annars visar bilden inte innehållet. Använd bilden igen, och låt eleverna rita den ur minnet efter en vecka. Elever som håller på att lära sig läsa läser ordet först och tittar på bilden efteråt.",
     "forskningen": {
@@ -141,25 +141,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "I en faktatext om grodans liv står varje kort text vid sitt steg i bilden: ägg, grodyngel, groda med svans och groda. Peka på steget medan du läser. Sedan återberättar eleverna med fingret på bilden, och till sist gör de det utan bild. När eleverna läser själva för att knäcka koden läser de ordet först och tittar på bilden efteråt, så att bilden inte tar uppmärksamheten från orden."
+      "text": "Rita grodans liv som fyra rutor i en ring med pilar emellan: ägg, grodyngel, groda med svans och groda. Läs faktatexten högt och peka på en ruta i taget medan du läser om den: ”Följ mitt finger.” Sedan pekar eleverna i par på en kopia av bilden och förklarar, och kör någon fast, pekar kamraten på nästa ruta. Spara bilden, och om en vecka ritar alla grodans liv ur minnet och jämför med din. Lyssna efter om eleverna säger vad som händer mellan två rutor, som att grodynglet får ben."
     },
     {
       "omrade": "skrivning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan eleverna skriver en förklarande text om hur något går till, som vattnets kretslopp, ritar de processen ur minnet som fyra eller fem rutor med pilar. De berättar för en kamrat med fingret på bilden och lägger till det som saknades med en annan färg. Sedan skriver de en mening till varje ruta och binder ihop meningarna med ord som därför och sedan. Att rita först och skriva sedan är bara prövat i små studier, så se efter om eleverna får med sambanden i texten."
+      "text": "Inför en förklarande text om vattnets kretslopp ritar du fyra rutor med pilar emellan: havet, molnet, regnet och floden. Peka på en del i taget medan du pratar om vad vattnet gör där: ”Följ mitt finger.” Sedan pekar och förklarar eleverna i par, och du fotograferar tavlan. Om en vecka ritar alla bilden ur minnet, jämför med din och skriver en mening till varje pil med ord som när, därför och sedan. Lyssna efter om paren säger vad som händer vid varje pil, och titta sedan efter om varje pil har blivit en mening."
     },
     {
       "omrade": "matematik",
       "arskurs": "4–6",
       "amne": "matematik",
-      "text": "Rita en blockmodell till uppgiften ”24 personer på mötet hade glasögon, och det var 3/5 av alla”. Säg och peka: ”Nämnaren är fem, så jag delar blocket i fem lika delar. Tre delar är 24, så en del är 8, och alla fem delarna är 40.” Sedan ritar eleverna modeller till ”3/7 av pärlorna är röda” och ”De röda pärlorna är 3/7 av de blå” och förklarar för grannen varför modellerna ser olika ut. Lyssna efter om de säger vad en del är."
+      "text": "Rita ett block i fem lika delar till uppgiften ”24 personer på mötet hade glasögon, och det var 3/5 av alla”. Säg ”Följ mitt finger” och peka på en del i taget medan du förklarar: hela blocket är alla på mötet, tre delar är de 24 med glasögon, så en del är 8 och alla fem är 40. Sedan pekar och förklarar eleverna i par, och kör någon fast, pekar kamraten på nästa del. Spara bilden, och om en vecka ritar alla blocket ur minnet och jämför med ditt. Lyssna efter om eleverna säger vad en del är och vad hela blocket är."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "NO",
-      "text": "Rita blodomloppet som två slingor och ta en slinga i taget. Peka medan du förklarar: ”Här lämnar blodet lungorna med syre, följ pilen.” Sedan stänger eleverna boken och ritar ur minnet med pilar och fem ord: lungorna, kroppen, hjärtat, syrerikt och syrefattigt. De förklarar för grannen och lägger till det som saknades med en annan färg. Titta efter två slingor och pilar åt rätt håll, och lyssna efter orden därför och sedan."
+      "text": "Rita blodomloppet som två slingor genom hjärtat och skriv bara fem ord: lungorna, kroppen, hjärtat, syrerikt och syrefattigt. Ta först den lilla slingan genom lungorna och sedan den stora genom kroppen, och peka på en del i taget medan du pratar om den: ”Följ mitt finger.” I par förklarar eleverna en slinga var och pekar på en kopia av bilden, och kör någon fast, pekar kamraten på nästa del. Om en vecka ritar alla bilden ur minnet på fem minuter och jämför med din. Lyssna efter om eleverna säger var blodet tar upp syre och var det lämnar syre."
     }
   ],
   "metoderSomGorDen": [

@@ -56,56 +56,56 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Känslan",
-          "text": "det känns som om du kan"
+          "namn": "Känns säkert",
+          "text": "tror att du kan det"
         },
         {
-          "namn": "Kunnandet",
-          "text": "det du klarar själv"
+          "namn": "Stämde inte",
+          "text": "du ser vad som fattas"
         },
         {
-          "namn": "Nästa steg",
-          "text": "det du behöver öva"
+          "namn": "Övar rätt sak",
+          "text": "det som inte satt"
         }
       ],
       "pilar": [
         {
-          "fran": "Känslan",
-          "till": "Kunnandet",
+          "fran": "Känns säkert",
+          "till": "Stämde inte",
           "text": "pröva"
         },
         {
-          "fran": "Kunnandet",
-          "till": "Nästa steg",
-          "text": "välja",
+          "fran": "Stämde inte",
+          "till": "Övar rätt sak",
+          "text": "välj",
           "betonad": true
         }
       ],
-      "text": "Eleven känner ofta att hen kan mer än hen klarar själv. När hen prövar ser hen skillnaden, och den visar vad hen ska öva på."
+      "text": "Eleven tror ofta att hen kan mer än hen klarar själv, eftersom det känns bekant. När hen prövar och rättar ser hen vad som fattas, och då kan hen öva på rätt sak."
     },
     "saGorDu": [
       {
-        "rubrik": "Visa målet",
-        "text": "Ge en uppgift som visar vad eleverna ska kunna när ni är klara."
+        "rubrik": "Skriv fem uppgifter",
+        "text": "En om varje sak eleverna ska kunna. Gör ett facit eller en checklista."
       },
       {
-        "rubrik": "Tro först",
-        "text": "Eleverna skriver ja, kanske eller nej innan de prövar."
+        "rubrik": "Skriv ja eller nej",
+        "text": "Alla läser varje uppgift: kan jag det? ”Nej är bra. Det räknas inte.”"
       },
       {
         "rubrik": "Pröva och rätta",
-        "text": "Eleverna svarar utan hjälp och rättar mot facit eller en checklista."
+        "text": "Alla svarar själva. Grannen rättar mot facit. ”Stämde det du trodde?”"
       },
       {
         "rubrik": "Välj nästa steg",
-        "text": "Stämde det? Eleven väljer vad hen övar på, och du ger återkoppling."
+        "text": "Eleven väljer en sak som inte satt och övar på likadana i tio minuter."
       }
     ],
     "avgor": {
-      "rubrik": "Undvik",
-      "text": "Att räkna in bedömningen i betyget, eller att bara fråga om känslan."
+      "rubrik": "När den passar",
+      "text": "En halv lektion med tid att öva. Kan någon inget, hjälp hen att välja."
     },
-    "tankPa": "Strategin tjänar innehållet: eleverna bedömer det ni arbetar med i ämnet just nu. I Plocka fram övar eleven genom att ta fram det hen har lärt sig, och här prövar eleven för att se vad hen ska öva på. Yngre elever tror oftare än äldre att de kan mer än de gör, så låt dem pröva direkt efter att de har sagt ja eller nej, och visa skillnaden utan att döma. Ett nej eller ett kanske är ett bra svar, eftersom det visar vad ni ska öva på.",
+    "tankPa": "Strategin tjänar innehållet: eleverna bedömer det ni arbetar med i ämnet just nu. I Plocka fram övar eleven genom att ta fram det hen har lärt sig, och här prövar eleven för att se vad hen ska öva på. Yngre elever tror oftare än äldre att de kan mer än de gör, så låt dem pröva direkt efter att de har sagt ja eller nej, och visa skillnaden utan att döma. Ett nej är ett bra svar, eftersom det visar vad ni ska öva på. Räkna inte in elevernas egen bedömning i betyget, så vågar de svara nej.",
     "forskningen": {
       "text": "I 297 studier gav program som lär eleverna att planera, följa och värdera sitt lärande omkring åtta månaders extra framsteg. De flesta studierna var med elever mellan 7 och 16 år och i ett ämne, och EEF bedömer belägget som starkt. Några av programmen lärde eleverna att bedöma och rätta sitt eget arbete efter givna kriterier (EEF, 2025). Verktyg som får eleven att följa sitt lärande, som en loggbok eller en matris, gav 0,42 i 32 studier och såg ut att ge mer när läraren gav återkoppling och eleven fick göra om (Dignath m.fl., 2023). I en sammanställning av 84 studier var effekterna större när forskare ledde undervisningen än när klassens lärare gjorde det (Dignath och Büttner, 2008). När barn i åk 4 och 6 rättade med facit, såg de fel bättre hos en kamrat än hos sig själva (van Loon och van de Pol, 2019). I en studie med studenter överskattade de sig själva mycket mer när läraren räknade in deras egen bedömning i betyget (Andrade, 2019).",
       "kallor": [
@@ -157,25 +157,25 @@
       "omrade": "lasning",
       "arskurs": "4–6",
       "amne": "svenska",
-      "text": "Innan eleverna svarar på frågorna till en text, skriver de vid varje fråga om de tror att de kan svara: ja, kanske eller nej. Sedan svarar de och kontrollerar svaren mot texten tillsammans med en kamrat. Vid de frågor där de skrev ja men svarade fel, letar de upp stället i texten och läser det igen. Fråga till sist klassen: ”Vad gjorde att det kändes som att du kunde?”"
+      "text": "Skriv fem frågor till en kort text, en av varje slag ni har övat, som ett ord att förklara eller en slutsats om en person, och gör ett facit med raden som visar svaret. När alla har läst texten, säger du att ett nej är bra och inte räknas, och alla skriver ja eller nej vid varje fråga: kan jag det? Sedan svarar alla själva, och grannen rättar mot facit och frågar: ”Stämde det du trodde?” Eleven väljer ett slag som inte satt och övar i tio minuter på likadana frågor till en ny kort text som du har med. Fråga till sist ”Vad gjorde att det kändes som att du kunde?” och lyssna efter svar som att texten kändes lätt."
     },
     {
       "omrade": "skrivning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "Innan eleverna lämnar in en argumenterande text, sätter de ett kryss vid de delar i checklistan som de tror att de har med: tesen, argumenten, ett motargument och avslutningen. Sedan stryker de under varje del i texten och skriver till det de inte hittar. Du läser understrykningarna, skriver en kommentar om det eleven har missat, och eleven gör om den delen. Du räknar inte in elevens egen bedömning i betyget, så att eleverna vågar se det som fattas."
+      "text": "Innan eleverna lämnar in en argumenterande text, skriver de ja eller nej vid varje del i checklistan: tesen, argumenten, ett motargument och avslutningen. Sedan stryker grannen under de delar hen hittar i texten och frågar: ”Stämde det du trodde?” Eleven väljer en del som grannen inte hittade och skriver om den i tio minuter innan hen lämnar in. Du räknar inte in elevens egen bedömning i betyget, så att eleverna vågar skriva nej. Titta efter vilken del flest trodde att de hade med men saknade, och visa hela klassen ett exempel på en sådan del."
     },
     {
       "omrade": "matematik",
       "arskurs": "F–3",
       "amne": "matematik",
-      "text": "När klassen har övat additioner upp till 20, lägger eleverna sina talkort i två högar, ”Kan” och ”Kan inte än”, innan de prövar. Sedan prövar de korten i högen ”Kan” med en kamrat, som håller facit. De flyttar korten som inte satt till den andra högen och övar på den högen. Nästa dag prövar de hela högen ”Kan” igen, och du frågar: ”Hur många kort fick byta hög?”"
+      "text": "Du delar ut fem talkort med svaret på baksidan, ett av varje slag ni har övat i addition upp till 20, som 6 + 6, 7 + 3 och 8 + 5, och säger: ”Nej är bra. Det räknas inte.” Eleverna lägger korten i två högar, ja och nej, och säger sedan svaret på varje kort till grannen, som vänder kortet och frågar: ”Stämde det du trodde?” Eleven flyttar de kort som inte stämde till den andra högen, väljer ett kort i högen nej och övar i tio minuter på likadana tal från ett blad, som 7 + 5 och 9 + 4 om kortet var 8 + 5. Fråga till sist klassen ”Hur många kort fick byta hög?” och lyssna efter vilka tal som bytte hög hos många, så att ni kan öva på dem tillsammans."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "SO",
-      "text": "Inför provet om första världskriget skriver eleverna en lista över det viktigaste i arbetsområdet och sätter ett kryss vid det de tror att de kan. Sedan prövar de sig själva på frågor från lektionerna utan anteckningar och rättar efteråt med dem. De gör en plan för veckan med det de hade fel på, och två dagar senare prövar de det igen. Efter provet skriver de vad i planen som hjälpte."
+      "text": "En vecka före provet om första världskriget skriver du fem frågor med facit, en om varje sak klassen ska kunna, som ”Varför ledde skotten i Sarajevo till ett stort krig?” Du säger ”Nej är bra. Det räknas inte.” innan alla skriver ja eller nej vid varje fråga och sedan svarar utan anteckningar. När grannen har rättat mot facit och frågat ”Stämde det du trodde?” väljer eleven en fråga som inte satt och övar i tio minuter på likadana frågor från ett blad, som ”Varför gick Storbritannien med i kriget?” om det var frågan om Sarajevo. Titta efter den fråga där många skrev ja men svarade fel, och ta upp den med hela klassen före provet."
     }
   ],
   "metoderSomGorDen": [

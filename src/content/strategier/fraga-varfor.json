@@ -56,61 +56,56 @@
       "rubrik": "Så fungerar det i minnet",
       "delar": [
         {
-          "namn": "Det nya",
-          "text": "ett faktum att lära"
+          "namn": "Lös ballong",
+          "text": "ett faktum utan skäl"
         },
         {
-          "namn": "Arbetsminnet",
-          "text": "letar efter skälet"
+          "namn": "Snöret i handen",
+          "text": "du letar efter skälet"
         },
         {
-          "namn": "Långtidsminnet",
-          "text": "det du redan vet"
+          "namn": "Knuten fast",
+          "text": "vid det du redan kan"
         }
       ],
       "pilar": [
         {
-          "fran": "Det nya",
-          "till": "Arbetsminnet",
-          "text": "fråga varför",
+          "fran": "Lös ballong",
+          "till": "Snöret i handen",
+          "text": "fråga varför"
+        },
+        {
+          "fran": "Snöret i handen",
+          "till": "Knuten fast",
+          "text": "svara själv",
           "betonad": true
-        },
-        {
-          "fran": "Långtidsminnet",
-          "till": "Arbetsminnet",
-          "text": "hämtar skäl"
-        },
-        {
-          "fran": "Arbetsminnet",
-          "till": "Långtidsminnet",
-          "text": "knyter fast"
         }
       ],
-      "text": "Eleven hämtar skälet ur det hen redan vet. Då knyter hen det nya till något hen kan och hittar det lättare igen."
+      "text": "När eleven bara läser ett faktum, flyger det lätt iväg. När hen själv letar efter skälet i det hen redan kan, knyter hen fast faktumet där."
     },
     "saGorDu": [
       {
-        "rubrik": "Välj",
-        "text": "Ta ett faktum med ett skäl bakom, som en orsak eller ett samband."
+        "rubrik": "Läs det nya",
+        "text": "Stanna två eller tre gånger vid ett faktum, innan någon sagt varför."
       },
       {
-        "rubrik": "Visa hur",
-        "text": "Fråga och svara högt själv första gången: ”Varför är det så?”"
+        "rubrik": "Fråga varför",
+        "text": "”Varför är det så? Vad vet du redan som kan förklara det?”"
       },
       {
-        "rubrik": "Alla svarar",
-        "text": "Alla säger ett skäl till grannen eller skriver det. Några svarar högt."
+        "rubrik": "Svara själv",
+        "text": "Alla skriver ett skäl i en minut, innan någon säger något."
       },
       {
-        "rubrik": "Ett bra svar",
-        "text": "Läs upp ett bra svar. Eleverna gör sitt eget bättre med färgpennan."
+        "rubrik": "Läs upp ett bra svar",
+        "text": "Alla rättar eller fyller på med färgpenna. Fem minuter per fråga."
       }
     ],
     "avgor": {
       "rubrik": "När den passar",
-      "text": "När eleverna vet något om ämnet. Annars finns inget att knyta till."
+      "text": "När klassen kan grunderna. Kör någon fast, fråga: ”Vad vet du om …?”"
     },
-    "tankPa": "Strategin tjänar innehållet: frågan ska leda till det klassen behöver förstå. Varje fråga tar tid, så två eller tre i en lektion räcker. Med en fråga som utmanar det eleverna tror, som ”Varför flyter ett stort fartyg av stål?”, tänker de längre. Med de yngsta frågar du om sådant de känner väl, som djur och väder, och de svarar muntligt till grannen.",
+    "tankPa": "Strategin tjänar innehållet: frågan ska leda till det klassen behöver förstå. Varje fråga tar tid, så två eller tre i en lektion räcker. Med en fråga som utmanar det eleverna tror, som ”Varför flyter ett stort fartyg av stål?”, tänker de längre. Med de yngsta frågar du om sådant de känner väl, som djur och väder. De tänker först tyst och säger sedan skälet till grannen.",
     "forskningen": {
       "text": "I en sammanställning av tio studietekniker gav frågor om varför 0,56, och de flesta studierna mätte kunskaper om fakta. I grundskolans lägre årskurser var effekten 0,38 (Donoghue och Hattie, 2021). I åk 4–⁠8 lärde sig eleverna fakta bättre när de själva svarade på varför än när de fick en färdig förklaring (Wood m.fl., 1990). IES-vägledningen bedömer stödet för frågor om varför som starkt och rekommenderar dem när eleverna har grunderna. Studierna gällde oftast åk 4 och uppåt (Pashler m.fl., 2007). Dunlosky (2013) kallar tekniken lovande men lite prövad i klassrummet, och yngre elever som vet lite om ämnet har mindre nytta av den.",
       "kallor": [
@@ -156,25 +151,25 @@
       "omrade": "lasning",
       "arskurs": "F–3",
       "amne": "svenska",
-      "text": "När klassen läser en faktatext om djur på vintern, stannar du vid en mening som har ett skäl bakom sig, som ”Ekorren samlar nötter på hösten.” Du frågar: ”Varför gör den det?” Eleverna tänker en stund på det de redan vet och säger ett skäl till grannen. Sedan läser ni vidare och ser om texten säger samma sak. Välj djur som eleverna känner, så att de har något att svara med."
+      "text": "När klassen läser en faktatext om djur på vintern, stannar du vid meningen ”Ekorren samlar nötter på hösten” och frågar: ”Varför gör den det?” Alla tänker tyst i en minut och svarar själva innan de säger skälet till grannen. Kör någon fast, frågar du: ”Vad vet du om vintern?” Sedan läser ni vidare och ser om texten säger samma sak. Lyssna efter om eleverna tar hjälp av det de vet om vintern, som att det finns lite mat när snön ligger."
     },
     {
       "omrade": "skrivning",
       "arskurs": "7–9",
       "amne": "svenska",
-      "text": "Inför en förklarande text om varför ett djur är utrotningshotat skriver eleverna tre fakta ur sina källor i planeringen. Bredvid varje faktum svarar de på ”Varför är det så?” med en mening som börjar med eftersom. Grannen läser planeringen och frågar varför en gång till där skälet saknas. Eleverna binder sedan ihop texten med skälen, och då förklarar den varför."
+      "text": "Inför en förklarande text om varför fjällräven är hotad ger du klassen tre fakta att skriva i planeringen, som ”Fjällräven får många ungar de år då det finns gott om lämlar”. Bredvid varje faktum svarar alla själva på ”Varför är det så?” och skriver ett skäl i en minut, innan någon säger något. Sedan läser du upp ett bra svar, och eleverna rättar eller fyller på med färgpenna. Eleverna bygger texten på skälen, så att den förklarar varför. Titta efter om eleverna tar hjälp av det de vet, som att ungarna behöver mat för att överleva, eller bara säger faktumet igen med andra ord."
     },
     {
       "omrade": "matematik",
       "arskurs": "4–6",
       "amne": "matematik",
-      "text": "När klassen har övat att multiplicera med 10, skriver du på tavlan: ”När du multiplicerar med 10 flyttar varje siffra ett steg åt vänster.” Du frågar: ”Varför blir det så?” Eleverna tar hjälp av tiobasmaterial eller en positionstabell, svarar först själva och förklarar sedan för grannen. Lyssna efter om eleverna säger att varje ental blir ett tiotal och varje tiotal ett hundratal. Ställ frågan när klassen kan räkna uppgifterna, så att eleverna har något att bygga svaret på."
+      "text": "När klassen har arbetat med bråk som delar av en helhet men ännu inte har jämfört bråk, skriver du ”En åttondel är mindre än en fjärdedel” på tavlan och frågar: ”Varför är det så? Vad vet du redan som kan förklara det?” Alla svarar själva och skriver ett skäl i en minut, innan någon säger något. Sedan läser du upp ett bra svar, och eleverna rättar eller fyller på med färgpenna. Titta efter om eleverna tar hjälp av det de vet om att dela lika, som att samma pizza ger mindre bitar i åtta delar än i fyra."
     },
     {
       "omrade": "amnen",
       "arskurs": "7–9",
       "amne": "SO",
-      "text": "När klassen har läst att de första städerna växte fram vid floder som Nilen, Eufrat och Tigris, frågar du: ”Varför just vid floder?” Eleverna använder det de redan vet om vatten, jordbruk och resor, skriver två skäl och jämför med grannen. Sedan läser du upp ett bra svar, och eleverna lägger till det de saknade med färgpennan. Ställ frågan efter genomgången, när klassen vet något om ämnet."
+      "text": "När klassen har läst om hur jordbruket började, visar du på kartan att de första städerna växte fram vid floder som Eufrat, Tigris och Nilen. Innan boken säger varför, frågar du: ”Varför just vid floder?” Alla svarar själva och skriver ett skäl i en minut, innan någon säger något. Sedan läser du upp ett bra svar, och eleverna lägger till det de saknade med färgpennan. Titta efter om eleverna tar hjälp av det de vet om jordbruk, som att åkrarna behöver vatten och att floden lämnar bördig jord."
     }
   ],
   "metoderSomGorDen": [
