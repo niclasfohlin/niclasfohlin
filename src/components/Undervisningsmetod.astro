@@ -104,8 +104,8 @@ const urval = ((d.profil as Record<string, any>)?.urval ?? {}) as Record<string,
 const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
 // Bladen i Materialet för klassen, med sina egna pdf:er när metoderfiler.mjs har klippt ut dem.
 const bladen = metodensBlad(id, (d.ramar?.ramar ?? []).map((r: { rubrik: string }) => r.rubrik));
-// De små korten ur ett blad, efter stycket som först nämner bladet (src/data/bladkort.json).
-const bladkort = metodensBladkort(id, d, bilder.materialet ?? []);
+// De små korten tidigt på sidan, efter stycket som nämner saken (src/data/bladkort.json).
+const bladkort = metodensBladkort(id, d);
 const bladkortensPlats = bladkortensStycke(id, d);
 // Bilderna av ett blads sidor: en bild per blad, och alla bilder när metoden har ett enda blad, som kan ha flera sidor, som
 // Strategikorten i Reciprok undervisning (scripts/metoderfiler.mjs).

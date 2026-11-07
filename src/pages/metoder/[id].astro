@@ -40,6 +40,7 @@ const m = kortetUrFil(id, post.data);
 const adress = `niclasfohlin.se/metoder/${id}`;
 const filer = metodensFiler(id);
 const bilder = metodensBilder(id);
+const bladknappen = bladetsKnapp(id, d);
 const strukturer = metodensStrukturer(d, d.titel);
 // Ett verktyg som är sått med fler än två delar står också överst, med samma regel och samma knapp som i Stödundervisning
 // (vavdaIBorjan i src/lib/vav.ts; Niclas 2026-11-01: "De som har fler än 2 såddningar i sig kan ha kortet också i början").
@@ -104,8 +105,8 @@ const lasvagen = lagret
               lanseringen, A9). */}
           {harLarDig && <a class={KNAPPENS_KLASS.sida} href={`/metoder/${id}/lar-dig`} data-din-ersatter>{KNAPPARNAS_NAMN.larDig}</a>}
           {d.lathund && <a class={KNAPPENS_KLASS.sida} href={`/metoder/${id}/lathund`}>{KNAPPARNAS_NAMN.lathund}</a>}
-          {/* Ett blad som metoden bygger på, som Strategikorten (src/data/bladkort.json): knappen leder till bladet, där det står hur det skrivs ut. */}
-          {bladetsKnapp(id) && <a class={KNAPPENS_KLASS.sida} href={bladetsKnapp(id)!.adress} data-goatcounter-click={`bladkort:${id}/knappen`} data-goatcounter-title={`${d.titel}: ${bladetsKnapp(id)!.namn}, knappen överst`}>{bladetsKnapp(id)!.namn}</a>}
+          {/* Det läraren öppnar om och om igen, som Strategikorten eller Frågor att låna (src/data/bladkort.json): knappen leder till saken på sidan. */}
+          {bladknappen && <a class={KNAPPENS_KLASS.sida} href={bladknappen.adress} data-goatcounter-click={`bladkort:${id}/knappen`} data-goatcounter-title={`${d.titel}: ${bladknappen.namn}, knappen överst`}>{bladknappen.namn}</a>}
           {/* Verktyget Strukturer, för en metod som importerar strukturkort (K-661; Niclas 2026-11-01: "Samt verktyg inuti
               kooperativt lärande"). */}
           {strukturer.length > 0 && <a class={KNAPPENS_KLASS.sida} href="/strukturer">{KNAPPARNAS_NAMN.strukturer}</a>}

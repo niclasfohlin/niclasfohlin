@@ -84,6 +84,8 @@ steg('strukturkort', 'node scripts/strukturer/kort.mjs --vid-behov');
 steg('strukturtopp', 'node scripts/strukturer/topplistan.mjs --vid-behov');
 // Strategikorten (K-699): som strukturkorten, när en strategi, en bild, en ikon eller kortets form har ändrats.
 steg('strategikort', 'node scripts/strategier/kort.mjs --vid-behov');
+// Minibilderna till metodens små kort (K-728), ur bladens sidbilder och korten ovan.
+steg('minibilder', 'node scripts/minibilder.mjs');
 
 const pdf = behov('lathund-pdf', 'lathund-pdf.mjs');
 const word = behov('lathund-word', 'lathund-word.mjs');

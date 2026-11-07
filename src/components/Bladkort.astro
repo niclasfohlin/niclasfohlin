@@ -1,23 +1,23 @@
 ---
-// De små korten ur ett blad i metoden, tidigt på sidan (src/lib/bladkort.ts): etiketten, korten med sin halva av sidbilden, namnet
-// och raden ur metodens tabell, och knappen. Korten och knappen leder till bladet, där alla kort står med knappen som skriver
-// ut dem. Bara på skärmen, som de små korten ur verktygen (Vavruta.astro).
+// De små korten tidigt på metodens sida (src/lib/bladkort.ts): etiketten, korten med sin minibild, namnet och raden ur metodens
+// egen text, och knappen. Ett kort leder till saken, där knappen som skriver ut den står, och knappen till alla kort i bladet
+// eller till bilagan Att skriva ut. Bara på skärmen, som de små korten ur verktygen (Vavruta.astro).
 import type { Bladkort } from '../lib/bladkort';
 interface Props { b: Bladkort; id: string; titel: string }
 const { b, id, titel } = Astro.props;
-const klick = (vad: string) => ({ 'data-goatcounter-click': `bladkort:${id}/${vad}`, 'data-goatcounter-title': `${titel}: ${b.blad}, ${vad}` });
+const klick = (vad: string) => ({ 'data-goatcounter-click': `bladkort:${id}/${vad}`, 'data-goatcounter-title': `${titel}: ${b.namn}, ${vad}` });
 ---
-<aside class="vav vav-kort um-bladkort" aria-label={b.etikett}>
+<aside class:list={['vav vav-kort um-bladkort', { 'um-bladkort-saker': b.saker }]} aria-label={b.etikett}>
   <p class="vav-etikett">{b.etikett}</p>
   <ul class="st-kort-lista vav-kort">
     {b.kort.map((k) => (
       <li>
-        <a class="st-kort" href={`#${b.ankare}`} {...klick(k.namn)}>
-          <img class={`um-bladkort-del-${k.del}`} src={k.bild.src} alt="" width={k.bild.bredd} height={k.bild.hojd} loading="lazy" decoding="async" />
+        <a class="st-kort" href={k.adress} {...klick(k.namn)}>
+          <img src={k.bild.src} alt="" width={k.bild.bredd} height={k.bild.hojd} loading="lazy" decoding="async" />
           <span class="st-kort-text"><span class="st-kort-namn">{k.namn}</span><span class="st-kort-rad">{k.rad}</span></span>
         </a>
       </li>
     ))}
   </ul>
-  <p class="um-bladkort-knapp"><a class="knapp" href={`#${b.ankare}`} {...klick('alla')}>{b.alla}</a></p>
+  <p class="um-bladkort-knapp"><a class="knapp" href={b.alla.adress} {...klick('alla')}>{b.alla.text}</a></p>
 </aside>

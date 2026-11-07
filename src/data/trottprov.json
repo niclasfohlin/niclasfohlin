@@ -20,6 +20,106 @@
           "beslut": "Inget: lathundens sida 3 har en ifylld plan, och Lär dig metoden har knappen i varje steg"
         }
       ]
+    },
+    "src/content/undervisningsmetoder/explicit-undervisning.yaml": {
+      "provad": "2026-11-07",
+      "saker": [
+        {
+          "sak": "Lektionens delar, som sitter på tavlan från första lektionen, med affischen Så visar du och bladet Stegen",
+          "forst": "Bilderna och knapparna på skärm 40 till 42 av 46, utan knapp överst",
+          "beslut": "Små kort på skärm 7, med minibilder och metodens egen mening om varje sak, som leder till saken och knappen som skriver ut den (src/data/bladkort.json)"
+        },
+        {
+          "sak": "Lektionskortet",
+          "forst": "Knappen överst",
+          "beslut": "Inget"
+        },
+        {
+          "sak": "Planeringsmallen",
+          "forst": "En länk i rutan Vill du börja på måndag? på skärm 3 och lathundens sida 3, och knappen på skärm 43",
+          "beslut": "Inget: rutan och lathundens sida 3 leder till mallen"
+        }
+      ]
+    },
+    "src/content/undervisningsmetoder/formativ-bedomning.yaml": {
+      "provad": "2026-11-07",
+      "saker": [
+        {
+          "sak": "Frågor att låna, som läraren tar ett vanligt fel ur till varje lektion vecka 1",
+          "forst": "Tabellen på skärm 37 av 62, och namnet i en mening i Före första lektionen",
+          "beslut": "Knappen Frågor överst, som leder till tabellen (src/data/bladkort.json)"
+        },
+        {
+          "sak": "Affischen Så visar vi, exit-lappen och färgkortet",
+          "forst": "Bilderna och knapparna på skärm 55 till 57",
+          "beslut": "Små kort på skärm 8, med minibilder och metodens egen mening om varje sak, som leder till saken och knappen som skriver ut den (src/data/bladkort.json)"
+        },
+        {
+          "sak": "Lektionskortet",
+          "forst": "Knappen överst och länken i rutan Vill du börja på måndag?",
+          "beslut": "Inget"
+        }
+      ]
+    },
+    "src/content/undervisningsmetoder/kooperativt-larande.yaml": {
+      "provad": "2026-11-07",
+      "saker": [
+        {
+          "sak": "Strukturkorten, de sex strukturerna som klassen lär sig en i veckan",
+          "forst": "Bilderna på skärm 43 och knappen som skriver ut dem på skärm 44 av 55. Knappen Strukturer överst leder till hela verktyget och inte till de sex",
+          "beslut": "Små kort på skärm 7, med minibilder och metodens egen mening om varje sak, som leder till saken och knappen som skriver ut den (src/data/bladkort.json)"
+        },
+        {
+          "sak": "T-kortet och symbolerna, som klassen använder från första veckan",
+          "forst": "Bilderna och knapparna på skärm 47 och 48",
+          "beslut": "Små kort i samma ruta som strukturkorten"
+        },
+        {
+          "sak": "Lektionskortet",
+          "forst": "Knappen överst",
+          "beslut": "Inget"
+        }
+      ]
+    },
+    "src/content/undervisningsmetoder/larande-pa-kognitionsvetenskaplig-grund.yaml": {
+      "provad": "2026-11-07",
+      "saker": [
+        {
+          "sak": "Strategibladet och strategikorten, som sätts upp före första lektionen",
+          "forst": "Knapparna på skärm 43 av 52. Knappen Strategier överst leder till hela verktyget",
+          "beslut": "Små kort på skärm 8, med minibilder och metodens egen mening om varje sak, som leder till saken och knappen som skriver ut den (src/data/bladkort.json)"
+        },
+        {
+          "sak": "Återkomstlistan, där läraren skriver det som ska komma tillbaka",
+          "forst": "Mallen på skärm 47 och knappen på skärm 48",
+          "beslut": "Ett litet kort i samma ruta, med en minibild ur mallens första sida"
+        },
+        {
+          "sak": "Lektionskortet",
+          "forst": "Knappen överst",
+          "beslut": "Inget"
+        }
+      ]
+    },
+    "src/content/undervisningsmetoder/testbaserat-larande.yaml": {
+      "provad": "2026-11-07",
+      "saker": [
+        {
+          "sak": "Provbladet och affischen Så gör vi provet, som ska finnas före första provet",
+          "forst": "Bilderna och knapparna på skärm 46 och 47 av 64",
+          "beslut": "Små kort på skärm 7, med minibilder och metodens egen mening om varje sak, som leder till saken och knappen som skriver ut den (src/data/bladkort.json)"
+        },
+        {
+          "sak": "Grovplaneringen, metodens andra lager",
+          "forst": "Mallen på skärm 50 och knappen på skärm 51",
+          "beslut": "Ett litet kort i samma ruta, med en minibild ur mallens första sida"
+        },
+        {
+          "sak": "Lektionskortet",
+          "forst": "Knappen överst",
+          "beslut": "Inget"
+        }
+      ]
     }
   }
 }

@@ -1,10 +1,35 @@
 {
-  "_om": "Ett blad i Materialet för klassen som metoden bygger på får små kort tidigt på metodens sida och en knapp överst, så att en trött lärare inte missar det (Niclas 2026-11-07 om Strategikorten i Reciprok undervisning: \"Skulle önska sådana där småkort för utskrift av strategierna tidigt där de tas upp. Klicka så kommer man till alla fyra att skriva ut\", och \"Analysera om de kan missas av en trött lärare\"). Sajten väver in dem utan att metodens fil ändras. blad är bladets rubrik, knapp namnet överst, tabell tabellen i metoden vars rader är korten, med namnet i första kolumnen och raden i andra, framsidor sidorna i materialets pdf med framsidor, och perSida hur många kort en sida har. Bilderna är materialets egna sidbilder, så att de inte kan glida isär från pdf:en (src/lib/bladkort.ts, METODER.md under Undervisningsmetoderna).",
+  "_om": "De små korten tidigt på metodens sida, efter stycket i inledningen som först nämner saken, så att en trött lärare ser vad som finns att skriva ut (Niclas 2026-11-07 om Strategikorten i Reciprok undervisning: \"Skulle önska sådana där småkort för utskrift av strategierna tidigt där de tas upp. Klicka så kommer man till alla fyra att skriva ut\", och \"Analysera om de kan missas av en trött lärare\"; samma dag om de andra metoderna: \"Ibland måste också något skapas. Som ex minibilder så det inte blir haffsigt arbete OM det behövs\"). Sajten väver in dem utan att metodens fil ändras. Ett blad som är flera kort står med blad, tabell (metodens tabell vars rader är korten, med namnet i första kolumnen och raden i andra), framsidor (sidorna i materialets pdf med framsidor) och perSida. Annars står sakerna i saker, högst tre, i den ordning de är viktigast: ett blad i Materialet för klassen, Strukturkorten, Strategikorten, Strategibladet eller en mall med egen fil. Raden under namnet är första meningen i metodens egen text om saken, eller meningen som börjar med mening. stycket är ett ord i stycket som korten står efter, och knapp namnet på knappen överst, med till när den leder till en tabell i metoden. Bilderna är minibilder ur sakens egen sida (scripts/minibilder.mjs). Vilka saker som står här och varför avgörs i provet Den trötta läraren (METODER.md under Arbetsgången, src/data/trottprov.json).",
   "reciprok-undervisning": {
     "blad": "Strategikorten",
     "knapp": "Strategikort",
     "tabell": "De fyra tankestrategierna",
     "framsidor": [1, 3],
     "perSida": 2
+  },
+  "explicit-undervisning": {
+    "stycket": "lektionens delar",
+    "saker": ["Lektionens delar", "Affischen Så visar du", "Stegen"]
+  },
+  "formativ-bedomning": {
+    "stycket": "exit-lappen",
+    "knapp": { "namn": "Frågor", "till": "Frågor att låna" },
+    "saker": ["Så visar vi", "Exit-lappen", "Färgkortet"]
+  },
+  "kooperativt-larande": {
+    "stycket": "T-kort",
+    "saker": ["Strukturkorten", "T-kortet", "Symbolerna"]
+  },
+  "larande-pa-kognitionsvetenskaplig-grund": {
+    "stycket": "Strategibladet",
+    "saker": [
+      { "namn": "Strategibladet", "mening": "Sätt upp Strategibladet" },
+      { "namn": "Strategikorten", "mening": "Framsidan är för klassen" },
+      "Återkomstlistan"
+    ]
+  },
+  "testbaserat-larande": {
+    "stycket": "provbladet",
+    "saker": ["Provbladet", "Så gör vi provet", "Grovplaneringen"]
   }
 }

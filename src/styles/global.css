@@ -4796,9 +4796,7 @@ button.pl-passroll { min-height: 2.75rem; }
 .vav-kort { margin: 0 0 0.75rem; }
 /* Bladets små kort tidigt på metodens sida (src/lib/bladkort.ts): varje kort är en halva av materialets sidbild. */
 .um-bladkort { --slag: var(--farg-accent); }
-.um-bladkort .st-kort img { aspect-ratio: 1050 / 712; object-fit: cover; }
-.um-bladkort .st-kort img.um-bladkort-del-0 { object-position: 50% 2%; }
-.um-bladkort .st-kort img.um-bladkort-del-1 { object-position: 50% 93%; }
+.um-bladkort .st-kort img { aspect-ratio: 360 / 244; object-fit: cover; }
 .um-bladkort .st-kort-lista { margin-bottom: 0.75rem; }
 @media (min-width: 48rem) { .um-bladkort .st-kort-lista { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .um-bladkort-knapp { margin: 0; }
@@ -4809,6 +4807,12 @@ button.pl-passroll { min-height: 2.75rem; }
 .vav-kort a.st-kort { flex-direction: row; align-items: center; }
 .vav-kort .st-kort img { width: 6.5rem; flex: none; border-bottom: 0; border-right: 1px solid var(--farg-kant); }
 .vav-kort .st-kort-text { padding: 0.4rem 0.65rem; }
+/* De små korten med metodens saker (Bladkort.astro): på datorn tre i bredd, med bilden över texten. */
+@media (min-width: 48rem) {
+  .um-bladkort-saker .st-kort-lista.vav-kort { grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
+  .um-bladkort-saker a.st-kort { flex-direction: column; align-items: stretch; }
+  .um-bladkort-saker .st-kort img { width: 100%; border-right: 0; border-bottom: 1px solid var(--farg-kant); }
+}
 .vav-rad { margin: 0; font-size: 0.9rem; color: var(--farg-text-svag); }
 .vav > :last-child { margin-bottom: 0; }
 .vav + .vav { margin-top: -0.6rem; }
