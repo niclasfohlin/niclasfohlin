@@ -6,6 +6,9 @@ import { metodensCentrala, CENTRALA } from '../lib/centrala';
 import { LEKTIONSKORT_MEJL, metodensLektionskort } from '../lib/lektionskort';
 import { metodensSidor } from '../lib/lardig';
 import type { Um } from '../lib/undervisningsmetod';
+import { metodensBladkort } from '../lib/bladkort';
+import { filmNamn, huvudfilm, metodensFilmer, type Film } from '../lib/film';
+import { meningarna, uppraknat } from '../lib/standard/index.js';
 
 // Maskinläsbar lista över allt som är publicerat: artiklar, metoder i Stödundervisning, metoder för hela klassen i Metoder och
 // böcker (Niclas 2026-10-31: "En ny metod ska också trigga Brevo"; scripts/cacheprov.mjs stannar på en samling med sidor
@@ -28,6 +31,22 @@ const TEXTENS_ORD: Record<string, { en: string; den: string }> = {
   annat: { en: 'Ny text', den: 'texten' },
 };
 const forstaCitat = (c: unknown) => { const x = Array.isArray(c) ? c[0] : undefined; return typeof x === 'string' ? x : (x as { text?: string } | undefined)?.text; };
+// Mejlens standard (netlify/lib/mejl.mjs, K-729): repliken är meningen som mejlet öppnar med, och raden är postens rad i månadsbrevets
+// topplista. Repliken är textens citat, annars metodens kort, annars ingressens första mening.
+const forstaMeningen = (t: string) => [(meningarna(t)[0] ?? t) as string];
+// Repliken ur ingressen: ett inledande "Testbaserat lärande är korta prov" blir "Korta prov", eftersom namnet står som rubrik strax
+// under, och brod är resten av ingressen, så att meningen inte står två gånger i mejlet.
+const utIngressen = (titel: string, ingress: string) => {
+  const forsta = forstaMeningen(ingress)[0];
+  const namnet = `${titel} är `;
+  const replik = forsta.startsWith(namnet) ? `${forsta[namnet.length].toLocaleUpperCase('sv')}${forsta.slice(namnet.length + 1)}` : forsta;
+  return { replik: [replik], brod: ingress.slice(forsta.length).trim() };
+};
+const filmbilden = (d: { film?: Film; filmer?: Film[] }, id: string, samling: 'stodundervisning' | 'metoder') => {
+  const f = huvudfilm(metodensFilmer(d as Parameters<typeof metodensFilmer>[0], id, samling));
+  return f ? { src: `${f.bas}-omslag.png`, alt: `Bild ur filmen ${filmNamn(f)}` } : undefined;
+};
+const textensRad = (en: string, publikation: string) => { const ord = en.replace(/^Ny(tt)? /, ''); return `${ord[0].toLocaleUpperCase('sv')}${ord.slice(1)} i ${publikation}`; };
 
 export const GET: APIRoute = async () => {
   const [artiklar, metoder, bocker, undervisningsmetoder] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade(), publicerade('undervisningsmetoder')]);
@@ -42,6 +61,8 @@ export const GET: APIRoute = async () => {
       // Mejlets egna rader för en text: ämnesradens ord, ordet i Läs hela, det första lyftcitatet och originalet.
       text: { amne: TEXTENS_ORD[a.data.typ].en, den: TEXTENS_ORD[a.data.typ].den, citat: forstaCitat(a.data.citat), publikation: publikationNamn(a.data.publikation), original: a.data.originalUrl },
       datum: a.data.datum.toISOString().slice(0, 10),
+      ...(forstaCitat(a.data.citat) ? { replik: [forstaCitat(a.data.citat)] } : utIngressen(a.data.titel, a.data.ingress)),
+      rad: textensRad(TEXTENS_ORD[a.data.typ].en, publikationNamn(a.data.publikation)),
     })),
     ...metoder.map((m) => {
       const serie = m.data.serie ? serier.get(m.data.serie) : undefined;
@@ -52,6 +73,11 @@ export const GET: APIRoute = async () => {
         titel: m.data.titel,
         ingress: m.data.ingress,
         datum: (m.data.uppdaterad ?? new Date(0)).toISOString().slice(0, 10),
+        amne: serie ? `Ny ${serie.ord.en} i ${serie.titel}` : 'Ny metod',
+        omrade: m.data.omrade,
+        ...utIngressen(m.data.titel, m.data.ingress),
+        rad: serie ? serie.titel : `${m.data.omrade}, ${arskursText(m.data).replace(/\u2060/g, '')}`,
+        bild: filmbilden(m.data, m.id, 'stodundervisning'),
         // Seriens ord följer med, så att brevet säger "Med 4 kurser" om en serie av kurser (src/lib/serie.ts, serieOrd).
         // De centrala sakerna (src/lib/centrala.ts) får en rad var med länken efter ingressen.
         // Lektionskorten (src/lib/lektionskort.ts) får en rad var efter de centrala sakerna.
@@ -63,6 +89,9 @@ export const GET: APIRoute = async () => {
       // Lär dig metoden och lathunden får en rad var med länken efter ingressen, som de centrala sakerna i Stödundervisning,
       // ur samma rot som bankens kort (metodensSidor i src/lib/lardig.ts).
       const sidor = metodensSidor(u.id, u.data as Um);
+      // De små korten (src/data/bladkort.json) står också i mejlet, med minibilderna som png, som Outlook kan visa. Ett blad som är
+      // flera kort ger mejlets replik, som de fyra frågorna i Reciprok undervisning.
+      const kort = metodensBladkort(u.id, u.data as Um);
       return {
         typ: 'metod',
         etikett: `Ny metod för hela klassen, ${u.data.arskursText ?? u.data.arskurs.join(', ')}`.replace(/⁠/g, ''),
@@ -70,6 +99,11 @@ export const GET: APIRoute = async () => {
         titel: u.data.titel,
         ingress: u.data.ingress,
         datum: u.data.publicerad.toISOString().slice(0, 10),
+        amne: 'Ny metod',
+        ...(kort && !kort.saker ? { replik: kort.kort.map((k) => k.rad.replace(/[”"“]/g, '')) } : utIngressen(u.data.titel, u.data.ingress)),
+        rad: `Hela klassen, ${u.data.arskursText ?? u.data.arskurs.join(', ')}`.replace(/⁠/g, ''),
+        bild: filmbilden(u.data as { film?: Film; filmer?: Film[] }, u.id, 'metoder'),
+        ...(kort ? { kort: { namn: kort.namn, etikett: kort.etikett, alla: { text: kort.alla.text, url: `/metoder/${u.id}${kort.alla.adress}` }, rader: kort.kort.map((k) => ({ namn: k.namn, rad: k.rad, url: `/metoder/${u.id}${k.adress}`, bild: k.bild.src.replace(/\.webp$/, '.png') })) } } : {}),
         ...(sidor.length ? { lankar: sidor.map((s) => ({ url: s.href, text: s.text, efter: s.mejl })) } : {}),
       };
     }),
@@ -80,6 +114,12 @@ export const GET: APIRoute = async () => {
       titel: b.data.titel,
       ingress: b.data.beskrivning,
       datum: `${b.data.utgivningsar}-01-01`,
+      amne: 'Ny bok',
+      ...utIngressen(b.data.titel, b.data.beskrivning),
+      rad: [b.data.forlag, b.data.utgivningsar].filter(Boolean).join(', '),
+      ...(b.data.omslag ? { bild: { src: b.data.omslag, alt: `Omslaget till ${b.data.titel}` } } : {}),
+      ...(b.data.medforfattare?.length ? { forfattare: `Med ${uppraknat(b.data.medforfattare)}` } : {}),
+      ...(b.data.lankar?.length ? { lankar: b.data.lankar.map((l) => ({ url: l.url, text: l.text })) } : {}),
     })),
     // Ett nytt verktyg med publicerad i src/data/centrala.json, som Strukturer och Strategier (Niclas 2026-11-03: mejla den nya
     // metoden och också de två nya verktygen, "Ett Brevo för metoden och ett Brevo för två verktygen"). Utskicket lägger
@@ -91,6 +131,9 @@ export const GET: APIRoute = async () => {
       titel: c.namn,
       ingress: `${c.mejl.charAt(0).toUpperCase()}${c.mejl.slice(1)}.`,
       datum: c.publicerad!,
+      amne: 'Nytt verktyg',
+      replik: forstaMeningen(c.vav?.text ?? `${c.mejl.charAt(0).toUpperCase()}${c.mejl.slice(1)}.`),
+      rad: 'Verktyg',
     })),
   ];
   return new Response(JSON.stringify({ genererad: new Date().toISOString(), antal: poster.length, poster }), {

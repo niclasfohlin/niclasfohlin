@@ -50,7 +50,7 @@
     "del": "stodmaterial",
     "adress": "/stodundervisning/lasstrategier.pdf",
     "kort": "/lasstrategier",
-    "mejl": "ett A4 att ha i handen under passet, med strategierna för ordet, meningen och rösten och för förståelsen"
+    "mejl": "ett A4 att ha i handen under passet, med strategierna för ordet, meningen, rösten och förståelsen"
   },
   {
     "id": "skrivstrategier",
@@ -70,7 +70,7 @@
     "adress": "/stodundervisning/utveckla-hoglasning.pdf",
     "kort": "/utveckla-hoglasning",
     "arskurs": "F–9",
-    "mejl": "ett A4 för läraren, med de fem strategierna för högläsning, tecknen och frågorna om innehållet"
+    "mejl": "ett A4 för läraren, med de fem strategierna för högläsning, deras tecken och frågorna om innehållet"
   },
   {
     "id": "aktiviteter",

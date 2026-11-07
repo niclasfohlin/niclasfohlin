@@ -90,7 +90,10 @@ async function gor({ kalla, sida, del, fil }) {
   const klippet = await sharp(klipp).metadata();
   const form = klippet.width >= klippet.height ? { fit: 'contain', background: '#ffffff' } : { fit: 'cover', position: 'top' };
   const inre = await sharp(klipp).resize(MINIBILDEN.bredd - 2 * luft, MINIBILDEN.hojd - 2 * luft, form).flatten({ background: '#ffffff' }).toBuffer();
-  await sharp(inre).extend({ top: luft, bottom: luft, left: luft, right: luft, background: '#ffffff' }).webp({ quality: 80, effort: 6 }).toFile(join(UT, fil));
+  const fardig = await sharp(inre).extend({ top: luft, bottom: luft, left: luft, right: luft, background: '#ffffff' }).toBuffer();
+  await sharp(fardig).webp({ quality: 80, effort: 6 }).toFile(join(UT, fil));
+  // Mejlen läser png, eftersom Outlook i Windows inte visar webp (netlify/lib/mejl.mjs).
+  await sharp(fardig).png({ compressionLevel: 9, palette: true, colours: 128 }).toFile(join(UT, fil.replace(/\.webp$/, '.png')));
 }
 
 let gjorda = 0;
@@ -103,11 +106,11 @@ for (const [id, post] of Object.entries(register)) {
     const nyckel = `${FORMEN}:${m.sida}:${m.del}:${summa(readFileSync(join(ROT, m.kalla)))}`;
     gallande.add(m.fil);
     nytt[m.fil] = nyckel;
-    if (!alla && manifest[m.fil] === nyckel && existsSync(join(UT, m.fil))) continue;
+    if (!alla && manifest[m.fil] === nyckel && existsSync(join(UT, m.fil)) && existsSync(join(UT, m.fil.replace(/\.webp$/, '.png')))) continue;
     await gor(m);
     gjorda++;
   }
 }
-for (const f of readdirSync(UT).filter((x) => /-minibild-[a-z0-9-]+\.webp$/.test(x) && !gallande.has(x))) rmSync(join(UT, f));
+for (const f of readdirSync(UT).filter((x) => /-minibild-[a-z0-9-]+\.(webp|png)$/.test(x) && !gallande.has(x.replace(/\.png$/, '.webp')))) rmSync(join(UT, f));
 writeFileSync(MANIFEST, `${JSON.stringify(nytt, null, 2)}\n`);
 console.log(`Minibilderna: ${gallande.size} kort, ${gjorda} ${gjorda === 1 ? 'gjord' : 'gjorda'} nu.`);

@@ -1,6 +1,6 @@
 ---
 titel: "Det är relationen som får kraven att bära"
-ingress: "En elev kommer för sent och får två olika svar av två vuxna på en halv minut. Krönikan svarar Linnea Lindquists ledare i Expressen efter våldet i Vaggeryd: krav behövs, men det är relationen som får dem att bära, och ordningen avgör vad barnen lär sig."
+ingress: "En elev kommer för sent och får två olika svar av två vuxna på en halv minut. Krönikan svarar på Linnea Lindquists ledare i Expressen efter våldet i Vaggeryd: krav behövs, men det är relationen som får dem att bära, och ordningen avgör vad barnen lär sig."
 datum: 2026-11-03
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/det-ar-relationen-som-far-kraven-att-bara/"

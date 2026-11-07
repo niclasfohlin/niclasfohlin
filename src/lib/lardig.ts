@@ -85,8 +85,8 @@ export const harLarDig = (d: Um) => somLista(d.plan?.skattningar).some((x) => (x
  * sidornas ingresser (LarDig.astro och src/pages/metoder/[id]/lathund.astro).
  */
 export const metodensSidor = (id: string, d: Um) => [
-  ...(harLarDig(d) ? [{ text: 'Lär dig metoden', href: `${metodensAdress(id)}/lar-dig`, klass: 'central-lank', mejl: 'ett steg i taget, där klasserna varje vecka övar en rutin och du ett drag, och du skattar hur det gick' }] : []),
-  ...(d.lathund ? [{ text: 'Lathund', href: `${metodensAdress(id)}/lathund`, klass: 'lathund-lank', mejl: `fyra sidor att ha bredvid sig när du börjar, med metoden, vägen till måndag, ${slagensOrd(d).lathunden} och de första veckorna` }] : []),
+  ...(harLarDig(d) ? [{ text: 'Lär dig metoden', href: `${metodensAdress(id)}/lar-dig`, klass: 'central-lank', mejl: 'ett steg i taget: varje vecka övar klassen en rutin och du ett drag i din undervisning, och sedan skattar du hur det gick' }] : []),
+  ...(d.lathund ? [{ text: 'Lathund', href: `${metodensAdress(id)}/lathund`, klass: 'lathund-lank', mejl: `fyra sidor att ha bredvid dig när du börjar, med metoden, vägen till måndag, ${slagensOrd(d).lathunden} och de första veckorna` }] : []),
 ];
 
 /** Planens data ur metodens fil. */

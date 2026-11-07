@@ -10,7 +10,7 @@ const floden = SAMLINGARNA.flatMap((s) => samlingen(s).flode ?? []);
 <Base title={site.sidor.prenumerera.titel} description={site.sidor.prenumerera.beskrivning}>
   <article class="text">
     <h1>Prenumerera</h1>
-    <p>Ett mejl när det kommer en ny text, en ny bok eller en ny metod. Inget annat. Du bekräftar prenumerationen via en länk i det första mejlet och kan avsluta när som helst.</p>
+    <p>Ett mejl när det kommer en ny text, en ny bok eller en ny metod, och ett månadsbrev med det som lästes mest. Inget annat. Du bekräftar prenumerationen via en länk i det första mejlet och kan avsluta när som helst.</p>
 
     <form class="prenumerera" method="post" action="/.netlify/functions/prenumerera" id="form">
       <label for="epost">E-postadress</label>

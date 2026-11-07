@@ -43,7 +43,9 @@ function kortetsRad(d: Um, namn: string, text: string | undefined, borjan?: stri
   const m: string[] = meningarna(text ?? '');
   const rad = borjan ? m.find((x) => x.startsWith(borjan)) : m[0];
   if (!rad) throw fel(d, `har ingen mening ${borjan ? `som börjar med ${borjan} ` : ''}om ${namn}.`);
-  return rad;
+  // Namnet står strax ovanför, så ett inledande "Grovplaneringen är terminens plan" blir "Terminens plan".
+  const namnet = `${namn} är `;
+  return rad.startsWith(namnet) ? `${rad[namnet.length].toLocaleUpperCase('sv')}${rad.slice(namnet.length + 1)}` : rad;
 }
 
 /** Saken i registrets lista: raden ur metodens egen text och platsen på sidan där den står med knappen som skriver ut den. */

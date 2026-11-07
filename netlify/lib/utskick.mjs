@@ -1,22 +1,23 @@
-// Mejl till prenumeranterna om nytt innehåll. Används av byggpluginen netlify/plugins/utskick.
+// Mejl till prenumeranterna om nytt innehåll. Används av byggpluginen netlify/plugins/utskick. Mejlens form står i netlify/lib/mejl.mjs.
 //
 // Tar listan över allt som är publicerat (nytt.json), jämför med det som redan mejlats i lagret
 // (Netlify Blobs, lagret "utskick", nyckeln "skickat") och skickar en Brevo-kampanj till listan om
 // det som tillkommit. Första körningen registrerar allt som redan ligger ute utan att skicka,
 // så att en ny rigg aldrig mejlar hela arkivet.
 
+import { postMejl } from './mejl.mjs';
+
 // Avsändaren ligger på den egna domänen, som är autentiserad i Brevo (DKIM och DMARC via Loopias DNS).
 // Adressen har ingen brevlåda: svar går till Niclas vanliga adress via reply-to.
-const AVSANDARE = { name: 'Niclas Fohlin', email: 'nyhetsbrev@niclasfohlin.se' };
-const SVAR_TILL = 'niclas.fohlin@gmail.com';
-
-const html = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+export const AVSANDARE = { name: 'Niclas Fohlin', email: 'nyhetsbrev@niclasfohlin.se' };
+export const SVAR_TILL = 'niclas.fohlin@gmail.com';
 
 // Sändtiden (Niclas 2026-11-03: "Jag vill att Brevo kampanjer aldrig skickas mellan 21-07. Från 0700 på morgonen och senast
 // till 21. Om något laddas upp nattetid läggs Brevo till skicka ut 0700."): utanför 07.00–21.00 svensk tid ger sandtid
 // nästa 07.00 med tidszonen, som Brevos scheduledAt tar emot (2017-06-01T12:30:00+02:00 i Brevos dokumentation), och inom
 // tiden null, så skickas kampanjen direkt. Används också av scripts/brevo.mjs.
 const svenskt = (d) => Object.fromEntries(new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23', timeZoneName: 'longOffset' }).formatToParts(d).map((x) => [x.type, x.value]));
+export const svensktDatum = (d) => { const s = svenskt(d); return `${s.year}-${s.month}-${s.day}`; };
 export const inomSandtiden = (tid) => { const timme = Number(svenskt(tid).hour); return timme >= 7 && timme < 21; };
 export function sandtid(nu = new Date()) {
   if (inomSandtiden(nu)) return null;
@@ -30,6 +31,42 @@ export function sandtid(nu = new Date()) {
   // Strategier 2026-11-03).
   const sju = `${d.year}-${d.month}-${d.day}T07:00:00${zon}`;
   return new Date(sju).getTime() - nu.getTime() < 5 * 60e3 ? sju.replace('T07:00', 'T07:10') : sju;
+}
+
+// Brevos gräns på gratisplanen, 300 mejl om dagen (K-731). Kampanj 34 stannade 2026-11-04 efter 16 av 141 mottagare, eftersom två
+// kampanjer samma morgon hade tagit 282, och med omkring 150 prenumeranter får bara en kampanj plats om dagen. Därför läser
+// utskicket vad som är kvar i dag, och en kampanj som inte ryms går till nästa morgon med plats. bokat säger hur många mejl som redan
+// ligger schemalagda en viss dag.
+export const DAGSGRANS = 300;
+const morgonen = (dag) => `${dag}T07:00:00${svenskt(new Date(`${dag}T12:00:00Z`)).timeZoneName.replace('GMT', '') || '+00:00'}`;
+const dagenEfter = (dag) => new Date(Date.parse(`${dag}T12:00:00Z`) + 86400e3).toISOString().slice(0, 10);
+/** När kampanjen kan gå: null när den får plats nu, annars tiden med tidszon, som scheduledAt. */
+export function ledigTid({ nu = new Date(), kvar = Infinity, behov = 0, bokat = {} }) {
+  const idag = svensktDatum(nu);
+  const forst = sandtid(nu);
+  // Dagens plats är Brevos rest, och morgonens bokningar räknas som väntande tills de har gått. Sedan står de i resten.
+  const vantar = nu.getTime() < Date.parse(morgonen(idag)) + 15 * 60e3 ? bokat[idag] ?? 0 : 0;
+  const plats = (dag) => (dag === idag ? kvar - vantar : DAGSGRANS - (bokat[dag] ?? 0));
+  if (!forst && plats(idag) >= behov) return null;
+  let tid = forst ?? morgonen(dagenEfter(idag));
+  for (let i = 0; i < 31; i++) {
+    const dag = tid.slice(0, 10);
+    if (plats(dag) >= behov) return tid;
+    tid = morgonen(dagenEfter(dag));
+  }
+  return forst ?? morgonen(dagenEfter(idag));
+}
+/** Dagens återstående mejl och listans storlek. Går de inte att läsa är kand false, och en kampanj väntar till nästa morgon. */
+export async function dagensUtrymme(nyckel, listId) {
+  try {
+    // Listans egna räknare släpar efter i Brevo och kan visa 0, så antalet läses ur kontakterna (scripts/brevo.mjs).
+    const [konto, lista] = await Promise.all([brevoLas('/account', nyckel), brevoLas(`/contacts/lists/${listId}/contacts?limit=1`, nyckel)]);
+    const dagens = (konto.plan ?? []).find((p) => p.creditsType === 'sendLimit');
+    return { kvar: dagens ? dagens.credits : Infinity, behov: lista.count ?? 0, kand: true };
+  } catch (fel) {
+    console.log(`utskick: Brevos utrymme gick inte att läsa: ${fel?.message ?? fel}`);
+    return { kvar: 0, behov: 160, kand: false };
+  }
 }
 
 // Nya verktyg får ett eget utskick, skilt från nya texter och metoder (Niclas 2026-11-03: "Ett Brevo för metoden och ett
@@ -48,38 +85,28 @@ export function grupperaNya(nya) {
   return nya.filter((p) => !(p.serie && urler.has(p.serie.url))).map((p) => (lektioner.has(p.url) ? { ...p, lektioner: lektioner.get(p.url) } : p));
 }
 
-// En post kan ha egna rader med länkar efter ingressen (lankar i nytt.json), som en metods centrala saker (src/lib/centrala.ts).
-// En ny text (fältet text i nytt.json) har mallen för texter (Niclas 2026-11-04: "Ex att nytt finns att läsa, ingressen off
-// sedan läs mer här", med länk till originalet och till sajten och något tankeväckande): etiketten med texttypen, tidningen
-// och datumet, rubriken, ingressen, det första lyftcitatet framhävt, Läs hela krönikan på niclasfohlin.se och originalet.
-const citatet = (t) => t ? `
-    <p style="margin:0 0 14px;padding:2px 0 2px 14px;border-left:3px solid #2f5d50;font-size:19px;line-height:1.45;font-style:italic;">${html(t)}</p>` : '';
-const originalet = (p) => p.text?.original ? `
-    <p style="margin:-20px 0 28px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;color:#5a635e;">Publicerad först i ${html(p.text.publikation)}: <a href="${html(p.text.original)}" style="color:#2f5d50;">läs den där</a>.</p>` : '';
-export function brev(nya, sajt) {
-  const lank = (p, text) => `<a href="${sajt}${p.url}" style="color:#2f5d50;">${html(text)}</a>`;
-  const delar = grupperaNya(nya).map((p) => `
-    <p style="margin:0 0 4px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;color:#5a635e;">${html(p.etikett)}</p>
-    <h2 style="margin:0 0 8px;font-size:22px;line-height:1.25;"><a href="${sajt}${p.url}" style="color:#18221d;text-decoration:none;">${html(p.titel)}</a></h2>
-    <p style="margin:0 0 12px;">${html(p.ingress)}</p>${citatet(p.text?.citat)}${(p.lankar ?? []).map((l) => `
-    <p style="margin:0 0 12px;">${lank(l, l.text)}${l.efter ? `: ${html(l.efter)}` : ''}.</p>`).join('')}${p.lektioner?.length ? `
-    <p style="margin:0 0 12px;">${p.lektioner.length === 1 ? `Med ${p.lektioner[0].ord?.den ?? 'lektionen'}` : `Med ${p.lektioner.length} ${p.lektioner[0].ord?.flera ?? 'lektioner'}`}: ${p.lektioner.map((l) => lank(l, l.namn ?? l.titel)).join(', ')}.</p>` : ''}
-    <p style="margin:0 0 28px;">${lank(p, p.typ === 'verktyg' ? 'Öppna verktyget på niclasfohlin.se' : p.text ? `Läs hela ${p.text.den} på niclasfohlin.se` : 'Läs på niclasfohlin.se')}</p>${originalet(p)}`).join('');
-  return `<!doctype html>
-<html lang="sv"><body style="margin:0;padding:0;background:#f7f6f1;font-family:Georgia,'Times New Roman',serif;color:#18221d;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f6f1;"><tr><td align="center" style="padding:32px 16px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #deddd7;border-radius:12px;"><tr><td style="padding:32px 28px;font-size:17px;line-height:1.6;">
-<p style="margin:0 0 20px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;color:#5a635e;">Nytt på niclasfohlin.se</p>
-${delar}
-<p style="margin:0;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:13px;color:#5a635e;">Du får det här mejlet för att du prenumererar på nya texter från Niclas Fohlin. <a href="{{ unsubscribe }}" style="color:#5a635e;">Avsluta prenumerationen</a> · <a href="{{ mirror }}" style="color:#5a635e;">Visa i webbläsaren</a></p>
-</td></tr></table></td></tr></table></body></html>`;
+// Mejlet, i standardens form (netlify/lib/mejl.mjs). En ny text har mallen med texttypen, tidningen och datumet, rubriken, citatet,
+// ingressen, Läs hela krönikan och originalet (Niclas 2026-11-04), och en serie står som en helhet med sina lektioner.
+export const brev = (nya, sajt, o) => postMejl(grupperaNya(nya), sajt, o);
+
+export async function brevoLas(sokvag, nyckel) {
+  const res = await fetch(`https://api.brevo.com/v3${sokvag}`, { headers: { 'api-key': nyckel, Accept: 'application/json' }, signal: AbortSignal.timeout(6000) });
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Brevo ${sokvag} svarade ${res.status}: ${text.slice(0, 300)}`);
+  return text ? JSON.parse(text) : {};
 }
 
-async function brevo(sokvag, body, nyckel) {
+export async function brevoAndra(sokvag, body, nyckel) {
+  const res = await fetch(`https://api.brevo.com/v3${sokvag}`, { method: 'PUT', headers: { 'api-key': nyckel, 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: AbortSignal.timeout(8000) });
+  if (!res.ok) throw new Error(`Brevo ${sokvag} svarade ${res.status}: ${(await res.text()).slice(0, 300)}`);
+}
+
+export async function brevo(sokvag, body, nyckel) {
   const res = await fetch(`https://api.brevo.com/v3${sokvag}`, {
     method: 'POST',
     headers: { 'api-key': nyckel, 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify(body),
+    signal: AbortSignal.timeout(8000),
   });
   const text = await res.text();
   if (!res.ok) throw new Error(`Brevo ${sokvag} svarade ${res.status}: ${text.slice(0, 300)}`);
@@ -124,40 +151,55 @@ export async function mejlaNytt({ poster, sajt, lager, brevoNyckel, listId, nu =
   // Registrera först, skicka sedan. Misslyckas registreringen skickas inget och nästa körning
   // försöker igen. Misslyckas sändningen skickar nästa körning inte samma innehåll en gång till:
   // kampanjen står i lagret med status avbruten och får i så fall skickas för hand i Brevo.
+  // kom är dagen då posten kom till sajten, som månadsbrevets Månadens nya läser (netlify/lib/manadsbrev.mjs).
   const urler = [...skickat.urler, ...nya.map((p) => p.url)];
-  const tid = sandtid(nu);
-  const senast = { datum: nu.toISOString(), poster: nya.map((p) => p.url), status: 'skapar', kampanj: undefined, kampanjer: [], schemalagd: tid ?? undefined, fel: undefined };
-  const spara = () => lager.setJSON('skickat', { urler, initierad: skickat.initierad, senast });
+  const idag = svensktDatum(nu);
+  const kom = { ...skickat.kom, ...Object.fromEntries(nya.map((p) => [p.url, idag])) };
+  const utrymme = await dagensUtrymme(brevoNyckel, listId);
+  let kvar = utrymme.kvar;
+  const { behov } = utrymme;
+  const bokat = Object.fromEntries(Object.entries(skickat.bokat ?? {}).filter(([dag]) => dag >= idag));
+  const senast = { datum: nu.toISOString(), poster: nya.map((p) => p.url), status: 'skapar', kampanj: undefined, kampanjer: [], schemalagd: undefined, fel: undefined };
+  const spara = () => lager.setJSON('skickat', { urler, initierad: skickat.initierad, senast, kom, bokat });
   await spara();
 
   try {
-    // Ett utskick för nya texter och metoder och ett för nya verktyg (utskicken), schemalagt till 07.00 utanför sändtiden.
+    // Ett utskick för nya texter och metoder och ett för nya verktyg (utskicken), schemalagt till 07.00 utanför sändtiden och till
+    // nästa morgon med plats när dagens mejl inte räcker (ledigTid).
     for (const grupp of utskicken(nya)) {
+      const tid = ledigTid({ nu, kvar, behov, bokat });
       // En serie med sina lektioner är ett inlägg i ämnesraden: Nytt på niclasfohlin.se: Ljudlek i grupp.
       const grupper = grupperaNya(grupp);
       const verktyg = grupp[0].typ === 'verktyg';
       const titlar = grupper.map((p) => p.titel);
       const amne = verktyg
         ? `${grupper.length === 1 ? 'Nytt verktyg' : 'Nya verktyg'} på niclasfohlin.se: ${titlar.length === 1 ? titlar[0] : `${titlar.slice(0, -1).join(', ')} och ${titlar.at(-1)}`}`
-        : grupper.length === 1 ? `${grupper[0].text?.amne ?? 'Nytt på niclasfohlin.se'}: ${titlar[0]}` : `Nytt på niclasfohlin.se: ${grupper.length} nya inlägg`;
+        : grupper.length === 1 ? `${grupper[0].amne ?? grupper[0].text?.amne ?? 'Nytt på niclasfohlin.se'}: ${titlar[0]}` : `Nytt på niclasfohlin.se: ${grupper.length} nya inlägg`;
       const kampanj = await brevo('/emailCampaigns', {
         name: `Nytt ${nu.toISOString().slice(0, 16)}: ${titlar.join(' | ').slice(0, 120)}`,
         subject: amne,
+        previewText: grupper[0].ingress,
         sender: AVSANDARE,
         replyTo: SVAR_TILL,
-        htmlContent: brev(grupp, sajt),
+        htmlContent: brev(grupp, sajt, { titel: amne, pre: grupper[0].ingress }),
         recipients: { listIds: [Number(listId)] },
         ...(tid ? { scheduledAt: tid } : {}),
       }, brevoNyckel);
       senast.kampanj = kampanj.id;
       senast.kampanjer.push(kampanj.id);
       senast.status = 'skapad';
+      if (tid) {
+        bokat[tid.slice(0, 10)] = (bokat[tid.slice(0, 10)] ?? 0) + behov;
+        senast.schemalagd = tid;
+      } else {
+        kvar -= behov;
+      }
       await spara();
       if (!tid) await brevo(`/emailCampaigns/${kampanj.id}/sendNow`, {}, brevoNyckel);
     }
-    senast.status = tid ? 'schemalagd' : 'skickad';
+    senast.status = senast.schemalagd ? 'schemalagd' : 'skickad';
     await spara();
-    return { steg: tid ? `kampanj schemalagd till ${tid}` : 'kampanj skickad', kampanj: senast.kampanj, kampanjer: senast.kampanjer, nya: senast.poster };
+    return { steg: senast.schemalagd ? `kampanj schemalagd till ${senast.schemalagd}` : 'kampanj skickad', kampanj: senast.kampanj, kampanjer: senast.kampanjer, nya: senast.poster };
   } catch (fel) {
     senast.status = 'avbruten';
     senast.fel = String(fel?.message ?? fel).slice(0, 300);

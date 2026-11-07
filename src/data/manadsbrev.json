@@ -1,0 +1,15 @@
+{
+  "_om": "Månadens text i månadsbrevet, som går ut den 1 om månaden som gick (Niclas 2026-11-07: \"lite mysig text som skriver om månaden\"; netlify/lib/manadsbrev.mjs). Första meningen blir brevets replik, och resten står som brevets stycke, följt av en mening om månadens mest lästa som koden skriver. Texterna säger inget om Niclas själv, eftersom de går ut av sig själva.",
+  "januari": "Januari är slut. Ljuset kommer tillbaka några minuter om dagen, och eleverna har hittat tillbaka till sina platser. Det är en bra tid att börja om med gruppen som behöver det: korta pass, samma form varje gång och ett mål som går att se.",
+  "februari": "Februari är slut. Sportlovet ligger bakom eller precis framför er, och snön på skolgården har blivit grå. Vårterminen har sin längsta sträcka kvar, och en insats som börjar nu hinner ge resultat före sommaren.",
+  "mars": "Mars är slut. Eftermiddagarna har blivit ljusa, och de nationella proven tar plats i kalendern. När mycket ska hinnas stryks stödet lätt först, så skydda de korta passen. Tio minuter som blir av räknas.",
+  "april": "April är slut. Påsken är över, gruset sopas bort och eleverna vill ut. Nu syns vad veckorna har gett, så ta fram det ni mätte i början och jämför.",
+  "maj": "Maj är slut. Syrenerna blommar, schemat fylls av utflykter och betygen ska sättas. Skriv ner vad som fungerade i gruppen medan ni minns det, så har hösten något att börja med.",
+  "juni": "Juni är slut. Skolan står tom, stolarna är uppe på bänkarna och korridoren luktar golvvax. Ta ledigt. Allt ligger kvar på sajten när ni vill läsa.",
+  "juli": "Juli är slut. Det är sommarlov, och skolan känns långt borta. Här är vad ni ändå har läst mellan doppen.",
+  "augusti": "Augusti är slut. Nya namn på bänkarna, nya scheman och en kopiator som redan har gått sönder en gång. De första veckorna sätter rutinerna för året, så välj en sak och öva den ordentligt.",
+  "september": "September är slut. Morgnarna har blivit kyliga, kartläggningarna är gjorda och nu vet ni vilka som behöver något mer. Det är ofta nu en grupp kommer igång.",
+  "oktober": "Oktober är slut. Höstlovet är här eller nyss över, mörkret kommer allt tidigare och de första utvecklingssamtalen är gjorda. När hösten tar emot räcker det att välja en sak att göra med gruppen på måndag.",
+  "november": "November är slut. Det var månaden då alla blev lite trötta: eleverna, ni och lamporna i korridoren. Håll passen korta och lika varandra. En rutin bär när orken tar slut.",
+  "december": "December är slut. Luciatåget har gått, klassrummen är städade och böckerna ligger kvar på bänken till terminen börjar. God fortsättning. Här är vad ni läste under årets sista månad."
+}
