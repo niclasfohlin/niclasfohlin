@@ -1290,6 +1290,15 @@ export const larDigetsLagetFor = (plan, idag, avslutad = false) => larDigetsLage
 /** Hur ofta läraren skattar efter stegen, i ord, ur EFTER_STEGEN_VAR (granskningen rot-3, fynd 19). */
 export const efterStegensTakt = () => (EFTER_STEGEN_VAR === 1 ? 'varje vecka' : EFTER_STEGEN_VAR === 2 ? 'varannan vecka' : `var ${ORDNINGSTAL[EFTER_STEGEN_VAR]} vecka`);
 /**
+ * Uppföljningens rader i datumordning efter första tillfället, och i metodens ordning när dagen är densamma. Med start i
+ * november kommer Nästa termin före Sex veckor senare (andra ögat, den kalla läsaren och riggen på Reciprok undervisning
+ * 2026-11-07, K-722).
+ * @template {{ tillfallen: { datum: string }[] }} T
+ * @param {T[]} lista
+ * @returns {T[]}
+ */
+export const uppfoljningIDatumordning = (lista) => [...lista].sort((a, b) => (a.tillfallen[0]?.datum ?? '').localeCompare(b.tillfallen[0]?.datum ?? ''));
+/**
  * Stegen i Lär dig metoden ur progressionens rader (v.steg), lika på sidan, i sammanställningen och i avslutet (granskningen
  * rot-3, fynd 7): antalet, ett stegs nummer från 1 och om veckan har det sista steget.
  * @param {{ veckor: { steg?: number | null }[] }} plan

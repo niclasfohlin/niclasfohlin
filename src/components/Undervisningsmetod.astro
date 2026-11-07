@@ -9,14 +9,14 @@ import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
 import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
-import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfalletsAnkare, utfallensElever, utfalletsText, UTFALLENS_REGEL, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
+import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfalletsAnkare, utfallensElever, utfalletsText, utfallensRegel, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
-import { metodensStrategiblad, rutinensRubrik } from '../lib/standard/index.js';
+import { metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
 import Vavruta from './Vavruta.astro';
 import { vavtIMetoder } from '../lib/vav';
 import { strategiernaAv, strategikortetI, provaMetodensStrategikort, metodensKortAdress as metodensStrategikortAdress, strategiensAdress, strategiernasStil, STRATEGIERNAS_ADRESS } from '../lib/strategier';
@@ -107,10 +107,12 @@ const bladen = metodensBlad(id, (d.ramar?.ramar ?? []).map((r: { rubrik: string 
 // Replikerna i stegets fraser som inte står i stegets text. Riggens dokument har alla i raden Det du säger, och sidan visar de
 // som texten inte redan har, så att sidan och dokumentet säger samma sak (scripts/metoderparitet.mjs).
 const fraserUtanforTexten = (s: Record<string, any>): string[] => {
-  const ren = (t: string) => t.replace(/[⁠ \s]+/g, ' ').trim();
+  const ren = (t: string) => t.replace(/[⁠”“"]/g, '').replace(/[ \s]+/g, ' ').trim();
   const gor = ren((Array.isArray(s.gor) ? s.gor : [s.gor]).join(' '));
   return ((s.fraser ?? []) as string[]).filter((f) => !gor.includes(ren(f)));
 };
+// Ett enda blad med flera sidor är hela materialet: en rad knappar under bladet, eftersom två knappar annars gör samma sak.
+const ettBladMedSidor = (d.ramar?.ramar ?? []).length === 1 && (bilder.materialet?.length ?? 0) > 1 && !!bladen[0]?.pdf;
 const bladetsSidor = (i: number) => ((d.ramar?.ramar ?? []).length === 1 ? bilder.materialet ?? [] : bilder.materialet?.[i] ? [bilder.materialet[i]] : []);
 // Ett blad i Materialet för klassen: rubriken och texten, och i ett blad som strukturkorten listorna och delarna.
 type Ram = { rubrik: string; text: string[]; listor?: { rubrik?: string; rader: string[][] }[]; delar?: { rubrik: string; falt: { rubrik: string; text: string }[] }[] };
@@ -213,7 +215,7 @@ const moten = arbetslagetsMoten(d);
                 </div>
                 {s.redo.tiden && <p class="um-not" set:html={utfalletsText(s.redo.tiden, elever, saker)} />}
                 {/* Gränserna för en annan klass, ur standardens utfallensGranser, i sidans skript nedan (granskare-3 nr 2). */}
-                <p class="um-not um-utfall-regel">I en annan klass: {UTFALLENS_REGEL}</p>
+                <p class="um-not um-utfall-regel">I en annan klass: {utfallensRegel(utfallsord(s.redo))}</p>
                 <p class="um-utfall-antal"><label for={`${ankare}-elever`}>Elever i klassen</label> <input id={`${ankare}-elever`} type="number" inputmode="numeric" min="10" max="40" step="1" value={elever} /></p>
               </div>
             )}
@@ -252,8 +254,8 @@ const moten = arbetslagetsMoten(d);
       <article class="um-exempel um-huvudexempel" id="huvudexemplet">
         <header class="um-ex-huvud"><h4>{exempletsAmne(huvud)}, {huvud.arskurs}</h4><p>{huvud.innehall}</p></header>
         <dl class="um-ex-overst">
-          <div><dt>{EXEMPLETS_ETIKETTER.egen}</dt><dd set:html={k(huvud.overst?.egen)} /></div>
-          <div><dt>{EXEMPLETS_ETIKETTER.visar}</dt><dd set:html={k(huvud.overst?.visar)} /></div>
+          {huvud.overst?.egen && <div><dt>{EXEMPLETS_ETIKETTER.egen}</dt><dd set:html={k(huvud.overst.egen)} /></div>}
+          {huvud.overst?.visar && <div><dt>{EXEMPLETS_ETIKETTER.visar}</dt><dd set:html={k(huvud.overst.visar)} /></div>}
         </dl>
         {huvud.remsa && <ol class="um-ex-remsa" style={`--kolumner: ${kortensKolumner(huvud.remsa.length)}`}>{huvud.remsa.map((x: string, i: number) => <li><span class="um-kort-nr" aria-hidden="true">{i + 1}</span><span class="visually-hidden">Kärnan {i + 1}, {komp[i]?.namn}: </span><span set:html={k(x)} /></li>)}</ol>}
         {(huvud.scen ?? []).map((x: string) => <p set:html={k(x)} />)}
@@ -273,8 +275,8 @@ const moten = arbetslagetsMoten(d);
         <summary><span><strong>{exempletsAmne(e)}, {e.arskurs}.</strong> {e.innehall}</span></summary>
         <article class="um-rad-inne um-exempel">
           <dl class="um-ex-overst">
-            <div><dt>{EXEMPLETS_ETIKETTER.egen}</dt><dd set:html={k(e.overst?.egen)} /></div>
-            <div><dt>{EXEMPLETS_ETIKETTER.visar}</dt><dd set:html={k(e.overst?.visar)} /></div>
+            {e.overst?.egen && <div><dt>{EXEMPLETS_ETIKETTER.egen}</dt><dd set:html={k(e.overst.egen)} /></div>}
+            {e.overst?.visar && <div><dt>{EXEMPLETS_ETIKETTER.visar}</dt><dd set:html={k(e.overst.visar)} /></div>}
           </dl>
           {(Array.isArray(e.scen) ? e.scen : [e.scen]).map((x: string) => <p set:html={k(x)} />)}
           {e.notera && <p class="um-notera" set:html={k(e.notera)} />}
@@ -550,7 +552,7 @@ const moten = arbetslagetsMoten(d);
           samlad uppifrån bredvid bilden (lagningen inför lanseringen, D6). Under bladet står bara bladets pdf, och hela
           materialet har sina knappar en gång, efter bladen (A3). */}
       {(d.ramar.ramar ?? []).map((r: Ram, i: number) => (
-        <div class="um-blad-post" id={bladetsAnkare(r.rubrik)}>
+        <div class={`um-blad-post${bladetsSidor(i).length > 1 ? ' um-blad-sidor' : ''}`} id={bladetsAnkare(r.rubrik)}>
           <div class="um-blad-kropp">
           <h4>{r.rubrik}</h4>
           {r.text.map((s) => <p set:html={k(s)} />)}
@@ -582,10 +584,10 @@ const moten = arbetslagetsMoten(d);
             const bilderna = sidor.map((b: { src: string; bredd: number; hojd: number }, n: number) => <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${bladen[i]?.pdf ? String(bladen[i].pdf).replace(/^.*\//, '').replace(/\?.*$/, '') : `${id}-materialet.pdf`}`} data-goatcounter-title={`Bilden av ${r.rubrik}, pdf, ${id}`} class={`um-sida${b.bredd > b.hojd ? ' um-sida-liggande' : ''}`}><img src={b.src} alt={sidor.length > 1 ? `${r.rubrik}, sidan ${n + 1} av ${sidor.length}` : r.rubrik} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>);
             return sidor.length > 1 ? <div class="um-sidor">{bilderna}</div> : bilderna;
           })()}
-          {bladen[i]?.pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: r.rubrik, pdf: bladen[i].pdf! }} />}
+          {bladen[i]?.pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: r.rubrik, pdf: bladen[i].pdf! }} medFilval={ettBladMedSidor} />}
         </div>
       ))}
-      <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} />
+      {!ettBladMedSidor && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} />}
     </section>
   )}
   {d.planeringsmall && (
@@ -704,7 +706,7 @@ const moten = arbetslagetsMoten(d);
 </div>
 
 <script>
-  import { utfallensGranser } from '../lib/standard/index.js';
+  import { talText, utfallensGranser, utfallensPar } from '../lib/standard/index.js';
   // Delraden visar delen läraren är i: den del vars band senast passerade toppen. Länken från lathunden, planen eller en
   // hänvisning öppnar raden den leder till, om raden är stängd.
   const lankar = [...document.querySelectorAll<HTMLAnchorElement>('#um-delrad a[data-del]')];
@@ -735,6 +737,10 @@ const moten = arbetslagetsMoten(d);
       const tal: Record<string, number> = { nastanAlla: g.nastanAlla, deFlesta0: g.deFlesta[0], deFlesta1: g.deFlesta[1], halften: g.halften };
       for (const e of ruta.querySelectorAll<HTMLElement>('[data-grans]')) e.textContent = String(tal[e.dataset.grans ?? ''] ?? e.textContent);
       for (const e of ruta.querySelectorAll<HTMLElement>('[data-elever]')) e.textContent = String(n);
+      // Paren, i en metod som också säger dem, med ord som i metodens mening: "alltså högst två par".
+      const p = utfallensPar(n);
+      const par: Record<string, number> = { nastanAlla: p.nastanAlla, deFlesta0: p.deFlesta[0], deFlesta1: p.deFlesta[1], halften: p.halften };
+      for (const e of ruta.querySelectorAll<HTMLElement>('[data-par]')) e.textContent = talText(par[e.dataset.par ?? ''] ?? 0);
     });
   }
 </script>

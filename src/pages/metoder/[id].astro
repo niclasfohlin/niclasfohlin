@@ -43,6 +43,8 @@ const strukturer = metodensStrukturer(d, d.titel);
 // Ett verktyg som är sått med fler än två delar står också överst, med samma regel och samma knapp som i Stödundervisning
 // (vavdaIBorjan i src/lib/vav.ts; Niclas 2026-11-01: "De som har fler än 2 såddningar i sig kan ha kortet också i början").
 // Också de centrala saker som metoden visar med fältet centrala, som i Stödundervisning (metodensCentrala i src/lib/centrala.ts).
+// I Metoder står knappen efter en tabell (UmFriaTabeller.astro); en annan plats ritas inte, så bygget stannar hellre än att knappen faller bort.
+for (const x of (d.centrala ?? [])) if (!x.efterText.startsWith('tabell:')) throw new Error(`${d.titel}: fältet centrala har platsen "${x.efterText}", men sidan i Metoder ritar knappen bara efter en tabell ("tabell: <rubrik>").`);
 const verktygIBorjan = [...new Map([...metodensCentrala(d), ...vavdaIBorjan(id, d, 'undervisningsmetoder')].map((c) => [c.id, c])).values()];
 { const g = gruppernasFel(id, d, 'undervisningsmetoder'); if (g) throw new Error(g); }
 const tabellfiler = metodensTabellfiler(id, ((d.tabeller ?? []) as { rubrik: string }[]).map((t) => t.rubrik));

@@ -6,6 +6,35 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { liten, slugAv } from './standard/index.js';
 import { UM_NAMN, UM_SLAG, umRad, umStam, type Um, type UmSlag } from './undervisningsmetod';
+import { parse } from 'yaml';
+import { bankAv, enhetAdress } from './bank';
+import { metodensCentrala } from './centrala';
+
+const bankerna = new Map<string, ReturnType<typeof bankAv>>();
+/**
+ * Bankens texter som metoden pekar ut, ur metoderna vars bank den visar med fältet centrala: titeln med sitt nummer, som
+ * Tackfisken (20) och Skrapet på dörren (Mellan, text 2), och titeln i en tabellcell bredvid nivån, som Någon har varit här
+ * med Mellan, text 15 i Reciprok undervisning (STIL.md under Hänvisningar, raden En sak i metoden). Bara titeln räcker inte:
+ * bankernas titlar är också vanliga ord, som Lappen, Skolan och Nästan, och "Nästan alla kan" är ingen text. En titel med
+ * flera ord länkas också utan numret.
+ */
+function bankensTexter(d: Um): { namn: string; former: string[]; adress: string }[] {
+  const text = JSON.stringify(d);
+  const ut: { namn: string; former: string[]; adress: string }[] = [];
+  for (const c of metodensCentrala(d)) {
+    if (!c.metod) continue;
+    const fil = join(process.cwd(), 'src', 'content', 'stodundervisning', `${c.metod}.yaml`);
+    if (!bankerna.has(c.metod)) bankerna.set(c.metod, existsSync(fil) ? bankAv(parse(readFileSync(fil, 'utf8'))) : null);
+    for (const e of bankerna.get(c.metod)?.enheter ?? []) {
+      const titel = e.l.titel;
+      if (!titel || e.nr === undefined) continue;
+      const former = [`${titel} (${e.nr})`, `${titel} (${e.l.niva}, text ${e.nr})`].filter((f) => text.includes(f));
+      const iCell = text.includes(`"${titel}","${e.l.niva}, text ${e.nr}"`);
+      if (former.length || iCell) ut.push({ namn: titel, former: [...former, ...(titel.includes(' ') ? [titel] : [])], adress: enhetAdress(c.metod, e) });
+    }
+  }
+  return ut;
+}
 
 export type { UmSlag };
 export interface UmFil { slag: UmSlag | 'tabell'; namn: string; rad: string; pdf?: string; docx?: string }
@@ -70,6 +99,7 @@ export function metodensTabellfiler(id: string, rubriker: string[]): UmFil[] {
  * som har en egen fil. En rot för metodens sida, lathunden och Lär dig metoden, så att samma ord leder till samma sak.
  */
 export const sakernasFiler = (id: string, d: Um) => ({
+  banktexter: bankensTexter(d),
   lektionskort: !!metodensFiler(id).lektionskort,
   tabeller: metodensTabellfiler(id, ((d.tabeller ?? []) as { rubrik: string }[]).map((t) => t.rubrik)).map((f) => f.namn),
 });

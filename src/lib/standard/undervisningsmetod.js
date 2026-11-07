@@ -92,6 +92,29 @@ export function utfallensGranser(n) {
   return { nastanAlla, deFlesta: [nastanAlla + 1, halften - 1], halften };
 }
 
+/**
+ * Utfallens gränser i par, när metoden räknar elever i par och säger båda, som "Högst 5 av 28 elever i par utan ledtråd,
+ * alltså högst två par": elevernas gränser delade med två, så att ett par aldrig räknas halvt (andra ögat på Reciprok
+ * undervisning 2026-11-07: med 22 elever stod sju par eller fler kvar).
+ * @param {number} n
+ * @returns {{ nastanAlla: number, deFlesta: [number, number], halften: number }}
+ */
+export function utfallensPar(n) {
+  const g = utfallensGranser(n);
+  return { nastanAlla: Math.floor(g.nastanAlla / 2), deFlesta: [Math.ceil(g.deFlesta[0] / 2), Math.floor(g.deFlesta[1] / 2)], halften: Math.ceil(g.halften / 2) };
+}
+
+/**
+ * Vad utfallens tal räknar, ur metodens egen mening i stegets redo: "elever i par utan ledtråd" i "Högst 5 av 28 elever i par
+ * utan ledtråd, alltså högst två par", och annars "med fel" (riggens brev 2026-11-06 kväll, punkt 11). Riggens renderare har
+ * samma regel, så att planeringsbladet säger samma sak på sidan, i lathunden och i Word.
+ * @param {{ nastanAlla?: unknown } | null | undefined} redo
+ */
+export const utfallsord = (redo) => {
+  const s = String(redo?.nastanAlla ?? '').replace(/[ ⁠]/g, ' ');
+  return s.match(/^Högst \d+ av \d+ ([^.,]+?)[.,]/)?.[1] ?? s.match(/^Högst \S+ par ([^.,]+?)[.,]/)?.[1] ?? 'med fel';
+};
+
 /** Utfallens namn i beslutsstället, i ordning (standarden, avsnitt 7 och 18). */
 export const UTFALLEN = /** @type {const} */ ([
   { id: 'nastanAlla', namn: 'Nästan alla kan' },

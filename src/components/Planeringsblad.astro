@@ -14,7 +14,7 @@ const { d, plan, amne, gra = false, variant, saker = [] } = Astro.props;
 const O = bladetsOrd(d);
 // Bladets regler (variantens minuter, utfallens texter, planens delar och Efter lektionens etiketter) står i
 // planeringsbladet i src/lib/undervisningsmetod.ts, som lathundens PowerPoint-fil och pdf ritar samma blad ur.
-const { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, variant);
+const { mall, varianten, variantensNamn, delensTid, utfalletsText, utfallensOrd, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, variant);
 const lista = bladetsLista;
 const bryt = bladetsRad;
 // Det läraren skrev, med metodens saker som länkar.
@@ -64,7 +64,7 @@ const k = (t: unknown) => medSaker(String(t ?? ''), saker, new Set());
                     {UTFALLEN.map((u) => (
                       <div class={`um-utfall-ruta um-utfall-${u.id}`}>
                         <p class="um-utfall-namn">{u.namn}</p>
-                        <p class="um-utfall-grans">{utfalletsGrans(u.id, plan.beslut.elever)} {utfalletsText(u.id)}</p>
+                        <p class="um-utfall-grans">{utfalletsGrans(u.id, plan.beslut.elever, utfallensOrd)} {utfalletsText(u.id)}</p>
                         {lista(mall.beslut?.[u.id]).map((etikett, j) => <p class="um-blad-skriv">{etikett} <span class="um-blad-text" set:html={k(lista(plan.beslut[u.id])[j] ?? '')} /></p>)}
                       </div>
                     ))}

@@ -347,7 +347,8 @@ function provaSakerna(s, html, ids) {
       if (!existsSync(join(dist, vag, 'index.html'))) fel.push(`${s}: ${x.namn} leder till ${vag}, som inte finns i dist`);
       // En struktur ur verktyget Strukturer (K-661) leder till sin sida med sitt kort under Strukturkorten på metodens sida;
       // lathunden länkar dit utan kort.
-      if (!new RegExp(`<a class="(?:knapp|st-kort)[^"]*" href="${vag}"`).test(html) && !((vag.startsWith('/strukturer/') || vag.startsWith('/strategier/')) && s.endsWith('/lathund'))) fel.push(`${s}: ${x.namn} har ingen knapp till ${vag}`);
+      // En text i en banks metod, som Någon har varit här, har sin knapp på textens egen sida.
+      if (!new RegExp(`<a class="(?:knapp|st-kort)[^"]*" href="${vag}"`).test(html) && !vag.startsWith('/stodundervisning/') && !((vag.startsWith('/strukturer/') || vag.startsWith('/strategier/')) && s.endsWith('/lathund'))) fel.push(`${s}: ${x.namn} har ingen knapp till ${vag}`);
       continue;
     }
     if (vag !== s || !ids.has(ankare)) continue;
@@ -697,13 +698,30 @@ try {
     const sida = readFileSync(html, 'utf8');
     for (const x of d.centrala ?? []) {
       const c = register.find((y) => y.id === x.id);
-      const antal = sida.split(`href="${c?.adress}">${c?.knapp}</a>`).length - 1;
-      if (antal < 2) fel.push(`/metoder/${id}: ${c?.namn ?? x.id} står i fältet centrala, men knappen står ${antal} gånger på sidan, inte överst och på sin plats`);
+      // Knappen är en länk med klassen knapp till sakens adress, med eller utan filens version.
+      const knappen = new RegExp(`<a\\b[^>]*\\bclass="knapp[^"]*"[^>]*\\shref="${c.adress.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\?[^"]*)?"`);
+      const topp = sida.match(/<p class="metod-centrala um-toppknappar">[\s\S]*?<\/p>/)?.[0] ?? '';
+      if (!knappen.test(topp)) fel.push(`/metoder/${id}: ${c.namn} står i fältet centrala, men knappen står inte överst på sidan`);
+      const rubrik = x.efterText.replace(/^tabell:\s*/, '');
+      const slug = rubrik.toLocaleLowerCase('sv').replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const start = sida.indexOf(`<div class="um-fritabell" id="${slug}"`);
+      const nasta = start < 0 ? -1 : sida.indexOf('<div class="um-fritabell"', start + 1);
+      const platsen = start < 0 ? '' : sida.slice(start, nasta < 0 ? undefined : nasta);
+      if (!knappen.test(platsen)) fel.push(`/metoder/${id}: ${c.namn} står i fältet centrala efter ${x.efterText}, men knappen står inte vid tabellen`);
+      // Lär dig metoden har verktyget i Materialet (LarDigData.verktyg).
+      const larDig = join(dist, 'metoder', id, 'lar-dig', 'index.html');
+      if (existsSync(larDig) && !readFileSync(larDig, 'utf8').includes(c.adress)) fel.push(`/metoder/${id}/lar-dig: ${c.namn} står i fältet centrala, men Lär dig metoden har ingen knapp dit`);
     }
+    // Säger metoden paren vid utfallen räknar sidan om dem med klassens antal (utfallensPar i standarden).
+    if (/alltså högst \S+ par\b/.test(JSON.stringify(d.steg ?? {})) && !sida.includes('data-par=')) fel.push(`/metoder/${id}: utfallen säger par, men sidan räknar inte om dem med klassens antal`);
     if ((d.ramar?.ramar ?? []).length === 1) {
       const n = readdirSync(join(rot, 'public', 'metoder')).filter((x) => new RegExp(`^${id}-materialet-\\d+\\.png$`).test(x)).length;
-      const visade = sida.split(`${id}-materialet-`).length - 1;
-      if (n > 1 && visade < n) fel.push(`/metoder/${id}: bladet ${d.ramar.ramar[0].rubrik} har ${n} sidor, men sidan visar ${visade} bilder`);
+      const visade = new Set([...sida.matchAll(new RegExp(`${id}-materialet-(\\d+)\\.png`, 'g'))].map((m) => m[1])).size;
+      if (visade !== n) fel.push(`/metoder/${id}: bladet ${d.ramar.ramar[0].rubrik} har ${n} sidor, men sidan visar ${visade} olika bilder`);
+      // Ett blad med flera sidor skrivs ut dubbelsidigt, så materialets pdf är bladets sidor, utan textsidan först.
+      const mat = join(rot, 'public', 'metoder', `${id}-materialet.pdf`);
+      const bladPdf = join(rot, 'public', 'metoder', `${id}-blad-${(d.ramar.ramar[0].rubrik ?? '').toLocaleLowerCase('sv').replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.pdf`);
+      if (n > 1 && (!existsSync(bladPdf) || !existsSync(mat) || !readFileSync(mat).equals(readFileSync(bladPdf)))) fel.push(`/metoder/${id}: bladet ${d.ramar.ramar[0].rubrik} har ${n} sidor, men materialets pdf är inte bladets sidor`);
     }
   }
 }

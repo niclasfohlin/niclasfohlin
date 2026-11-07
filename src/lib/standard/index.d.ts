@@ -312,6 +312,7 @@ export declare function larDigetsLaget(p: { forsta: string | null; mandagar: str
 export declare const larDigetsLagetFor: (plan: Plan, idag: string, avslutad?: boolean) => ReturnType<typeof larDigetsLaget>;
 /** Hur ofta läraren skattar efter stegen, i ord. */
 export declare const efterStegensTakt: () => string;
+export declare const uppfoljningIDatumordning: <T extends { tillfallen: { datum: string }[] }>(lista: T[]) => T[];
 /** Stegen i Lär dig metoden: antalet, ett stegs nummer och om veckan har det sista steget. */
 export declare const larDigetsSteg: (plan: { veckor: { nr?: number; steg?: number | null }[] }) => { antal: number; rad: (v: { nr?: number; steg?: number | null }) => number | null; nummer: (v: { nr?: number; steg?: number | null }) => number; sista: (v: { nr?: number; steg?: number | null }) => boolean };
 /** Veckan Mitt i att låsa när den har börjat. */
@@ -795,6 +796,10 @@ export declare const NIVAERNAS_FORKLARING: readonly { ord: string; staplar: numb
 export declare function laget(v: { tillforlitlighet?: string; effekt?: string; niva?: string } | undefined | null): Laget;
 export type Svarighet = { lara: number; karnan: number; stod: number; tid: number; motivering: string };
 export type Kostnad = { kop: number; timmar: number; motivering: string };
+/** Utfallens gränser i par, ur elevernas gränser, så att ett par aldrig räknas halvt. */
+export declare function utfallensPar(n: number): { nastanAlla: number; deFlesta: [number, number]; halften: number };
+/** Vad utfallens tal räknar, ur metodens egen mening i stegets redo, och annars "med fel". */
+export declare const utfallsord: (redo: { nastanAlla?: unknown } | null | undefined) => string;
 /** Rutinens rubrik: Rutinen och namnet, och bara namnet när det redan säger rutinen, som Parrutinen. */
 export declare const rutinensRubrik: (namn: string, o?: { kolon?: boolean }) => string;
 export declare const SVARIGHETENS_ORD:readonly ['', 'Mycket lätt', 'Lätt', 'Medelsvårt', 'Svårt', 'Mycket svårt'];

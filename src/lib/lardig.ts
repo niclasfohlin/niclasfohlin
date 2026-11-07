@@ -6,6 +6,7 @@ import { arbetslagetsMoten, dagAv, forstaHelaLektionen, forstaLektionensForm, fo
 import { metodensAdress, utfalletsAnkare, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import { metodensStrukturer, metodensKortAdress, ALLA_KORTENS_ADRESS, kortensVersion, allaKortensAntal, allaKortensStorlek, TVA_PA_A4 } from './strukturer';
 import { metodensFiler, metodensTabellfiler, sakernasFiler } from './undervisningsmetodfiler';
+import { metodensCentrala } from './centrala';
 import { strategikortetI, metodensKortAdress as metodensStrategikortAdress, ALLA_KORTENS_ADRESS as ALLA_STRATEGIKORTENS_ADRESS, allaKortensAntal as allaStrategikortensAntal, allaKortensStorlek as allaStrategikortensStorlek, kortensVersion as strategikortensVersion } from './strategier';
 import { metodensStrategiblad } from './standard/index.js';
 
@@ -61,6 +62,8 @@ export interface LarDigData {
   /** Tabellerna med egen fil, som Grovplaneringen (metodensTabellfiler), som knappar bredvid Planeringsmallen i Före. */
   filer: { lektionskort: { adress: string; fil: boolean }; planeringsmall: { adress: string; fil: boolean }; materialet: { adress: string; fil: boolean }; observation: { adress: string; fil: boolean }; tabeller: { namn: string; adress: string }[] };
   /** Strukturkorten som metoden importerar, att skriva ut och ha till hands: metodens kort och alla kort i verktyget (K-661). */
+  /** Verktygen som metoden visar med fältet centrala, som Ta fram en lästext: knapparna i Materialet (src/lib/centrala.ts). */
+  verktyg: { namn: string; adress: string }[];
   strukturkort?: { metodens: string; antal: number; alla: string; allaAntal: number; allaStorlek: string; utskrift: string; vid: string; text: string };
   /** Strategierna för lärande som metoden visar (K-699, K-702): metodens kort, alla kort, metodens blad när det finns, och texten. */
   strategikort?: { metodens: string; antal: number; alla: string; allaAntal: number; allaStorlek: string; blad?: { adress: string; namn: string }; utskrift: string; vid: string; text: string };
@@ -119,6 +122,7 @@ export function larDigData(id: string, d: Um): LarDigData {
     // Metodens saker som på metodens sida och i lathunden (undervisningsmetodensSaker), med samma ankare, så att samma ord leder
     // till samma sak (granskningen rot-3, fynd 6, och den kalla läsaren 2026-10-30, nr 12).
     saker: undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer: metodensStrukturer(d, strang(d.titel)) }),
+    verktyg: metodensCentrala(d).map((c) => ({ namn: c.namn, adress: c.adress })),
     lasvag: (() => { const l = lasvagen(d); return { delar: l.delar.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })), minuter: l.minuter, nar: slagensOrd(d).lasning }; })(),
     ...(d.strukturkort ? { strukturkort: { metodens: kortensVersion(metodensKortAdress(id)), antal: somLista(d.strukturkort.strukturer).length, alla: kortensVersion(ALLA_KORTENS_ADRESS), allaAntal: allaKortensAntal(), allaStorlek: allaKortensStorlek(), utskrift: TVA_PA_A4, vid: slagensOrd(d).strukturkortVid, text: strang(d.strukturkort.text) } } : {}),
     ...((sk) => (sk ? { strategikort: { metodens: strategikortensVersion(metodensStrategikortAdress(id)), antal: sk.strategier.length, alla: strategikortensVersion(ALLA_STRATEGIKORTENS_ADRESS), allaAntal: allaStrategikortensAntal(), allaStorlek: allaStrategikortensStorlek(), ...((d as { strategikort?: { blad?: string } }).strategikort?.blad ? { blad: { adress: strategikortensVersion(`/strategier/kort/${metodensStrategiblad(id).fil}`), namn: (d as unknown as { strategikort: { blad: string } }).strategikort.blad } } : {}), utskrift: TVA_PA_A4, vid: (d as { strategikort?: unknown }).strategikort ? 'fore' : 'efter', text: strang(sk.text) } } : {}))(strategikortetI(id, d)),

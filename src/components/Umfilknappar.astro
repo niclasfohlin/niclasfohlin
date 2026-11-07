@@ -7,7 +7,8 @@
 // direkt under det (Niclas 2026-10-20: "Ha den så nära bladet du ska skriva ut som möjligt"), och Drive och Word bredvid.
 // Med blad står bara knappen som skriver ut bladets egen pdf, eftersom Drive och Word är hela filen: de står en gång, under
 // alla bladen, med filens namn (lagningen inför lanseringen, A3: under varje blad i Materialet stod Drive och Word, som gav
-// hela materialet). bara ger bara knappen, som överst på sidan. Knappen
+// hela materialet). medFilval sätter Drive och Word under bladet när metoden har ett enda blad och filen är det bladet, som
+// Strategikorten i Reciprok undervisning, så att raden står en gång. bara ger bara knappen, som överst på sidan. Knappen
 // skriver ut pdf:en i Chromium på datorn och öppnar den annars (SkrivUtPdf.astro). Bara filer som finns får en knapp
 // (src/lib/undervisningsmetodfiler.ts). Lathunden har också PowerPoint-filen, som sajten bygger ur lathundens sidor
 // (/metoder/<id>-lathund.pptx), och Drive sparar den som presentation, som i Stödundervisning; pdf:en är liggande. filmer
@@ -18,8 +19,8 @@ import SkrivUtPdf from './SkrivUtPdf.astro';
 import type { UmFil, UmSlag } from '../lib/undervisningsmetodfiler';
 // tabeller är de fria tabeller som har en egen fil, som Grovplaneringen (metodensTabellfiler), efter filerna i slag.
 // namn: knappens namn i läget bara, som Lektionskort överst på sidan (KNAPPARNAS_NAMN i standarden).
-interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; tabeller?: UmFil[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; bara?: boolean; filmer?: number; namn?: string }
-const { id, filer, slag, tabeller = [], stor = false, titel = id, blad, bara = false, filmer = 0, namn: kortNamn } = Astro.props;
+interface Props { id: string; filer: Record<string, UmFil | undefined>; slag: UmSlag[]; tabeller?: UmFil[]; stor?: boolean; titel?: string; blad?: { namn: string; pdf: string }; medFilval?: boolean; bara?: boolean; filmer?: number; namn?: string }
+const { id, filer, slag, tabeller = [], stor = false, titel = id, blad, medFilval = false, bara = false, filmer = 0, namn: kortNamn } = Astro.props;
 const valda = [...slag.map((s) => filer[s]), ...tabeller].filter((f): f is UmFil => !!f);
 const bas = (f: UmFil) => (f.pdf ?? f.docx ?? '').replace(/\.(pdf|docx)$/, '');
 const namn = (f: UmFil) => bas(f).split('/').pop() ?? id;
@@ -52,7 +53,7 @@ const metoden = filer.metoden;
 ) : en && (
   <p class="um-filknappar">
     {knapp && <a class={stor ? 'knapp' : 'knapp sekundar liten'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${blad ? knapp.namn : iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>}
-    {en.docx && !blad && <Filval fil={bas(en)} namn={namn(en)} rubrik={en.namn} statistik={`${titel}: ${iMening(en.namn)}`} liten />}
+    {en.docx && (!blad || medFilval) && <Filval fil={bas(en)} namn={namn(en)} rubrik={en.namn} statistik={`${titel}: ${iMening(en.namn)}`} liten />}
   </p>
 )}
 <SkrivUtPdf />

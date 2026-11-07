@@ -5,7 +5,7 @@
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
 import { strategikortetI, strategiernaAv } from './strategier';
-import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, utfallensGranser, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
 // (K-627), så sidan läser resten som metodens fil har det.
@@ -50,7 +50,7 @@ export const METODKORTET = 'Metodkortet';
  * sida kan länka hit. Utan lektionskortets fil, när kortet väntar på Niclas ja (VANTAR i scripts/metoderfiler.mjs), är
  * kortet ingen sak, så att ingen länk leder till en knapp som inte finns.
  */
-export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; tabeller?: string[]; strukturer?: { id: string; namn: string }[] } = {}): MetodSak[] {
+export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; tabeller?: string[]; strukturer?: { id: string; namn: string }[]; banktexter?: { namn: string; former: string[]; adress: string }[] } = {}): MetodSak[] {
   const sida = metodensAdress(id);
   // Ett namn som är ett ord för en sak (Planeringsmallen, Affischen Så visar du) hittas också med liten bokstav; ett annat,
   // som Stegen, bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden), så att "skriv stegen" inte
@@ -78,6 +78,9 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
       saker.push(efterKolon ? { ...s, former: [...sakensFormer(r.rubrik), efterKolon] } : s);
     }
   }
+  // Bankens texter som metoden pekar ut, ur verktyg som metoden visar med fältet centrala (sakernasFiler): titeln med numret,
+  // som den står, så att bara hänvisningen blir en länk. En form med en siffra hittas också först i en tabellcell.
+  for (const t of o.banktexter ?? []) saker.push({ namn: t.namn, former: t.former, versal: true, adress: t.adress });
   // Strukturerna som metoden importerar ur verktyget Strukturer (fältet strukturkort, K-661): avsnittet Strukturkorten och
   // varje struktur med sitt namn, som leder till strukturens sida, så att Ping-pong-prat i texten är strukturen.
   if (d.strukturkort) {
@@ -127,13 +130,15 @@ export function utfalletsText(text: string, n: number, saker: MetodSak[]): strin
   return sakernasText(String(text ?? ''), saker, (s, t) => `<a href="${esc(s.adress)}" class="um-sak">${esc(t)}</a>`, (t) => utfallensTal(t, n));
 }
 
-/** Utfallets gräns i en klass med n elever, i elever med fel, ur utfallensGranser i standarden: "Högst 5 av 28 med fel." */
-export function utfalletsGrans(id: 'nastanAlla' | 'deFlesta' | 'halften', n: number): string {
+/** Utfallets gräns i en klass med n elever, ur utfallensGranser i standarden, med vad talen räknar (utfallsord): "Högst 5 av 28 med fel." */
+export function utfalletsGrans(id: 'nastanAlla' | 'deFlesta' | 'halften', n: number, ord = 'med fel'): string {
   const g = utfallensGranser(n);
-  return id === 'nastanAlla' ? `Högst ${g.nastanAlla} av ${n} med fel.` : id === 'deFlesta' ? `${g.deFlesta[0]}–${g.deFlesta[1]} av ${n} med fel.` : `${g.halften} eller fler av ${n} med fel.`;
+  return id === 'nastanAlla' ? `Högst ${g.nastanAlla} av ${n} ${ord}.` : id === 'deFlesta' ? `${g.deFlesta[0]}–${g.deFlesta[1]} av ${n} ${ord}.` : `${g.halften} eller fler av ${n} ${ord}.`;
 }
-/** Regeln bakom gränserna, i ord, som utfallensGranser räknar (standarden, avsnitt 7). */
-export const UTFALLENS_REGEL = 'Nästan alla kan när högst en av fem har fel, avrundat nedåt. Hälften eller färre kan när hälften eller fler har fel, avrundat uppåt.';
+/** Regeln bakom gränserna, i ord, som utfallensGranser räknar (standarden, avsnitt 7), med vad metodens tal räknar (utfallsord). */
+export const utfallensRegel = (ord = 'med fel') => (ord === 'med fel'
+  ? 'Nästan alla kan när högst en av fem har fel, avrundat nedåt. Hälften eller färre kan när hälften eller fler har fel, avrundat uppåt.'
+  : `Nästan alla kan när högst en av fem är ${ord.replace(/^elever /, '')}, avrundat nedåt. Hälften eller färre kan när hälften eller fler är det, avrundat uppåt.`);
 /** Klassens antal som utfallen i metodens text räknar med: talet efter "av" i den första gränsen, annars 28. */
 export const utfallensElever = (redo?: Record<string, string>) => Number(String(redo?.nastanAlla ?? '').match(/\bav (\d+)/)?.[1] ?? 28);
 /**
@@ -141,13 +146,18 @@ export const utfallensElever = (redo?: Record<string, string>) => Number(String(
  * ett annat antal elever (granskare-3 nr 2): "Högst 5 av 28", "6–13 av 28", "14 eller fler av 28", "14 eller fler" och
  * "fler än 5 av 28" ur texten blir element med standardens tal, och klassens antal efter "av" också i Hälften eller färre
  * (lagningen inför lanseringen, F2: "13 eller fler av 28" stod kvar med 25 elever). Talen räknas av utfallensGranser, i
- * skriptet också.
+ * skriptet också. En metod som också säger paren, "alltså högst två par", får dem räknade på samma sätt (utfallensPar).
  */
 export function utfallensTal(text: string, n: number): string {
   const g = utfallensGranser(n);
+  const p = utfallensPar(n);
   const tal = (nyckel: string, v: number) => `<span data-grans="${nyckel}">${v}</span>`;
+  const par = (nyckel: string, v: number) => `<span data-par="${nyckel}">${talText(v)}</span>`;
   const av = `<span data-elever>${n}</span>`;
   return esc(String(text ?? ''))
+    .replace(new RegExp(`\\bhögst ${talText(p.nastanAlla)} par\\b`, 'g'), `högst ${par('nastanAlla', p.nastanAlla)} par`)
+    .replace(new RegExp(`\\b${talText(p.deFlesta[0])} till ${talText(p.deFlesta[1])} par\\b`, 'g'), `${par('deFlesta0', p.deFlesta[0])} till ${par('deFlesta1', p.deFlesta[1])} par`)
+    .replace(new RegExp(`\\b${talText(p.halften)} par eller fler\\b`, 'g'), `${par('halften', p.halften)} par eller fler`)
     .replace(new RegExp(`\\b${g.deFlesta[0]}–⁠?${g.deFlesta[1]} av ${n}\\b`, 'g'), `${tal('deFlesta0', g.deFlesta[0])}–${tal('deFlesta1', g.deFlesta[1])} av ${av}`)
     .replace(new RegExp(`\\b${g.nastanAlla} av ${n}\\b`, 'g'), `${tal('nastanAlla', g.nastanAlla)} av ${av}`)
     .replace(new RegExp(`(^|[^–\\d])${g.halften} eller fler( av ${n})?\\b`, 'g'), (_m, fore: string, avN?: string) => `${fore}${tal('halften', g.halften)} eller fler${avN ? ` av ${av}` : ''}`);
@@ -291,5 +301,5 @@ export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: str
   const variantensNamn: string | undefined = varianten ? (varianten.nar === 'första lektionen' ? liten(forstaLektionensForm(d).namn) : varianten.nar) : undefined;
   // Kärnans nummer vid en del, uppräknade med komma och och: "kärnan 1, 2, 4 och 5" (riggens punkt 8).
   const karnansNr = (fas: string) => { const k = karnanI(d, fas); return k.length ? `${BLADETS_ORD.karnan} ${uppraknat(k.map((x: { nr: number }) => String(x.nr)))}` : ''; };
-  return { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr };
+  return { mall, varianten, variantensNamn, delensTid, utfalletsText, utfallensOrd: utfallsord(kontrollen?.redo), delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr };
 }

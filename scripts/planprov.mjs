@@ -790,6 +790,10 @@ if (tsMp) {
     const eval0 = s.forval(emp, '2026-11-04');
     const ep = s.planera(emp, eval0);
     ska('Lär dig metoden: fyra steg från nästa måndag, och veckan efter stegen', eval0.start === '2026-11-09' && eval0.langd === 4 && ep.veckor.map((v) => v.innehall).join() === '1,2,3,4' && ep.veckor.map((v) => v.steg).join() === '0,1,2,3' && ep.efter === '2026-12-07', [ep.veckor.map((v) => v.mandag), ep.efter]);
+    const uppfEfter = (p) => p.uppfoljning.filter((u) => u.typ === 'efter' && u.tillfallen.length);
+    const sent = uppfEfter(s.planera(emp, { ...eval0, start: '2026-11-23' })), tidigt = uppfEfter(s.planera(emp, { ...eval0, start: '2026-08-24' }));
+    const idn = (l) => l.map((u) => radId(u.rad)).join();
+    ska('Lär dig metoden: raderna efter stegen i datumordning, med metodens ordning som grund', idn(sent).endsWith('sexveckor,nastatermin') && idn(s.uppfoljningIDatumordning(sent)).endsWith('nastatermin,sexveckor') && sent.find((u) => radId(u.rad) === 'sexveckor').tillfallen[0].datum > sent.find((u) => radId(u.rad) === 'nastatermin').tillfallen[0].datum && idn(s.uppfoljningIDatumordning(tidigt)) === idn(tidigt) && idn(s.uppfoljningIDatumordning(sent)).split(',').length === sent.length, [idn(sent), idn(s.uppfoljningIDatumordning(sent)), idn(tidigt)]);
     const lang = s.forlangSteget(eval0, 2);
     const lp = s.planera(emp, lang);
     ska('Lär dig metoden: ett steg får en vecka till, och tillbaka', lp.veckor.map((v) => `${v.innehall}${v.igen ? 'i' : ''}`).join() === '1,2,2i,3,4' && lp.efter === '2026-12-14' && s.gangen(lp, lp.veckor[2]) === 1 && (s.forlangSteget(lang, 2, -1).upprepa ?? []).length === 0 && s.forlangSteget(s.forlangSteget(lang, 2), 2, -1).upprepa.join() === '2' && s.forlangSteget(eval0, 3, -1).upprepa.length === 0, lp.veckor.map((v) => [v.innehall, v.igen]));

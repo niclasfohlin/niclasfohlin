@@ -161,6 +161,9 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   if (!kontrollera) {
     for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-blad-`) && x.endsWith('.pdf') && !bladen.some((n) => bladfil(n) === x))) rmSync(join(UT, f));
     if (forstaBladet) bladen.forEach((namn, i) => { if (!filer.some((f) => f.slag === `blad-${slugAv(namn)}`)) klipp(material, forstaBladet + i, sistaSidan || forstaBladet + i, join(UT, bladfil(namn))); });
+    // Ett blad med flera sidor skrivs ut dubbelsidigt, och en textsida först skulle lägga baksidorna fel (andra ögat på
+    // Reciprok undervisning 2026-11-07). Materialets pdf på sajten är därför bladets sidor, och texten står på metodens sida.
+    if (sistaSidan) copyFileSync(join(UT, bladfil(bladen[0])), material);
   }
 
   // Filmerna: riggens svg-filer med sajtens namn, som i Stödundervisning, en för huvudfilmen och en för varje extrafilm i

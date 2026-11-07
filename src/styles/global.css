@@ -909,7 +909,9 @@ html.js .um-utfall-antal { display: flex; }
   .um-blad-post { display: grid; grid-template-columns: 14rem minmax(0, 1fr); column-gap: 1.25rem; align-items: start; }
   .um-blad-post > .um-sida { grid-column: 1; grid-row: 1; width: 100%; margin: 1.25rem 0 0; }
   .um-blad-post > .um-blad-kropp { grid-column: 2; grid-row: 1; }
-  .um-blad-post > .um-filknappar, .um-blad-post > .um-sidor { grid-column: 1 / -1; }
+  .um-blad-post > .um-filknappar { grid-column: 1 / -1; }
+  /* Ett blad med flera sidor, som Strategikorten: texten i hela bredden och sidorna i en rad under den. */
+  .um-blad-post.um-blad-sidor { display: block; }
   .um-blad-post > .um-sidor > .um-sida { width: calc(25% - 0.5625rem); }
 }
 /* Bladet i telefonen: rubriken och texten först, sedan bilden och knappen under (design-3 nr 6). */

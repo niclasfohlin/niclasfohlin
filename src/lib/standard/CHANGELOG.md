@@ -3,7 +3,10 @@
 ## 0.59.0, 2026-11-07
 
 - `undervisningsmetod.js` (Niclas 2026-11-06, riggens brev samma kväll, sajtens K-718): `NIVAERNAS_FORKLARING` säger att Inte sammanvägt gäller när något ämnesområde saknar nivå, och `undervisningsmetodensFel` stoppar Inte sammanvägt när Läsning, Skrivning, Matematik och Ämnen alla har en nivå, eftersom de då slås ihop till Lärande totalt (riggens `evidensen.md`, avsnitt 7). Riggens dokument läser texten ur standarden, så de får den nya raden när de byggs om.
-- `undervisningsmetod.js` (riggens brev samma kväll, punkt 10): `rutinensRubrik`, rutinens rubrik på sidan och i lathunden, med bara namnet när det redan säger rutinen, som Parrutinen.
+- `undervisningsmetod.js` (riggens brev samma kväll, punkt 10): `rutinensRubrik`, rutinens rubrik på sidan, i lathunden och i Lär dig metoden, med bara namnet när det redan säger rutinen, som Parrutinen.
+- `undervisningsmetod.js` (samma brev, punkt 11): `utfallsord`, vad utfallens tal räknar, ur metodens egen mening i stegets `redo`, så att planeringsbladet säger "Högst 5 av 28 elever i par utan ledtråd" och inte "med fel" i en metod utan facit.
+- `undervisningsmetod.js` (andra ögat på Reciprok undervisning): `utfallensPar`, utfallens gränser i par ur elevernas gränser, så att fältet Elever i klassen också räknar om "alltså högst två par".
+- `plan.js` (samma granskning, K-722): `uppfoljningIDatumordning`, uppföljningens rader i datumordning, så att Nästa termin står före Sex veckor senare när planen börjar i november.
 
 ## 0.58.0, 2026-11-05
 

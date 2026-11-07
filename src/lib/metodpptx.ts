@@ -1072,7 +1072,9 @@ function umRutan(v: Verktyg, s: any, x: number, y: number, w: number, rubrik: st
 function umMinuterna(v: Verktyg, s: any, x: number, y: number, w: number, rubrik: string, delar: { fas: string; tid: string; fraser: string[] }[], size: number): number {
   v.label(s, versaler(rubrik), x, y, w);
   const rader = delar.map((r) => [r.tid, r.fas, r.fraser.map((f) => `”${f}”`).join(' ')]);
-  return 0.3 + v.gridTable(s, x, y + 0.3, w, UM_MINUTERNAS_KOLUMNER.map(versaler), rader, { bredder: [0.8, 1.2, w - 2], size, kursiv: [2], exakt: true });
+  // Delens kolumn rymmer sitt längsta ord, som "tillsammans" (andra ögat på Reciprok undervisning: det sista s:et klipptes bort).
+  const delen = Math.max(1.2, ...delar.flatMap((r) => r.fas.split(/\s+/)).map((o) => calibriPunkter(o, size * v.grad) / 72 / v.sx + 0.24));
+  return 0.3 + v.gridTable(s, x, y + 0.3, w, UM_MINUTERNAS_KOLUMNER.map(versaler), rader, { bredder: [0.8, delen, w - 0.8 - delen], size, kursiv: [2], exakt: true });
 }
 
 /**
@@ -1103,7 +1105,7 @@ const UTFALLETS_FARG: Record<string, { fyll: string; kant: string }> = { nastanA
 function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: number, del: Extract<LathundDel, { slag: 'planering' }>, z: number): number {
   const { rect, txt } = v;
   const plan = del.plan;
-  const { mall, varianten, variantensNamn, delensTid, utfalletsText, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, del.variant);
+  const { mall, varianten, variantensNamn, delensTid, utfalletsText, utfallensOrd, delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr } = planeringsbladet(d, plan, del.variant);
   const O = bladetsOrd(d);
   const amne = planensAmne(plan, del.exempel);
   const VARDE = del.gra ? BLAD.gra : INK;
@@ -1230,7 +1232,7 @@ function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: nu
               const nh = textHojd(v, u.namn, iw, TEXT, true);
               txt(s, u.namn, ux, uy, iw, nh, { size: TEXT, bold: true });
               ih += nh;
-              const grans = `${utfalletsGrans(u.id, plan.beslut.elever)} ${utfalletsText(u.id)}`;
+              const grans = `${utfalletsGrans(u.id, plan.beslut.elever, utfallensOrd)} ${utfalletsText(u.id)}`;
               const gh = textHojd(v, grans, iw, ETIKETT);
               txt(s, grans, ux, uy + ih, iw, gh, { size: ETIKETT, color: GREY });
               ih += gh;

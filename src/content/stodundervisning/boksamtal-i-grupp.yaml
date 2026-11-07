@@ -37,6 +37,7 @@ relaterade:
   - textsamtal-i-grupp
   - faktatextsamtal-i-grupp
   - til-i-grupp
+  - reciprok-undervisning
 utkast: false
 nivaer:
   - { namn: Bas, farg: "4E7A43" }

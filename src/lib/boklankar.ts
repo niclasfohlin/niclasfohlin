@@ -71,6 +71,7 @@ const MONSTER = NAMN.length ? new RegExp(`(?<![\\p{L}\\p{N}])(?:${NAMN.map((n) =
 // Verktygen och stödmaterialen som länkas när de nämns: sidorna och pdf:erna i registret. Ett formulär (Vår grupp) nämns
 // oftast som bladet, inte som formuläret, och länkas inte.
 const VERKTYG = CENTRALA.filter((c) => c.slag === 'sida' || c.slag === 'pdf').sort((a, b) => b.namn.length - a.namn.length);
+const VANLIGA_ORD = new Set(['Strategier', 'Strukturer']);
 const VERKTYGSMONSTER = VERKTYG.length ? new RegExp(`(?<![\\p{L}\\p{N}])(?:${VERKTYG.map((c) => skydda(c.namn)).join('|')})(?![\\p{L}\\p{N}])`, 'gu') : undefined;
 // Niclas forskning: artiklar där han är medförfattare, som länkar till artikelns egen sida (Niclas 2026-10-19 om studien
 // på Om-sidan: "Länka gärna den till dess huvudsida artikel"). En hänvisning med förste författaren och året, som
@@ -153,7 +154,9 @@ export function hanvisningsdelar(text: string): Del[] {
     const { adress } = hanvisningensBok(h, fore?.namn);
     if (adress) traffar.push({ start: h.start, slut: h.slut, adress, vikt: 2 });
   }
-  if (VERKTYGSMONSTER) for (const m of text.matchAll(VERKTYGSMONSTER)) traffar.push({ start: m.index!, slut: m.index! + m[0].length, central: VERKTYG.find((c) => c.namn === m[0]), vikt: 1 });
+  // Strategier och Strukturer är också vanliga ord: först i en mening är de ingen hänvisning till verktyget ("Strategier hjälper
+  // inte om de används mekaniskt"; andra ögat på Reciprok undervisning 2026-11-07).
+  if (VERKTYGSMONSTER) for (const m of text.matchAll(VERKTYGSMONSTER)) if (!VANLIGA_ORD.has(m[0]) || somTitel(text.slice(0, m.index!), text.slice(m.index! + m[0].length))) traffar.push({ start: m.index!, slut: m.index! + m[0].length, central: VERKTYG.find((c) => c.namn === m[0]), vikt: 1 });
   for (const m of text.matchAll(ADRESS)) {
     const c = centralMedAdress(m[1]);
     traffar.push({ start: m.index!, slut: m.index! + m[0].length, ...(c ? { central: c } : { adress: m[1] }), vikt: 1 });
