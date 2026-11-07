@@ -1,17 +1,23 @@
 {
-  "datum": "2026-11-05T19:04:50.460Z",
+  "datum": "2026-11-07T03:03:04.588Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 83,
-      "besok": 38,
+      "antal": 85,
+      "besok": 40,
       "utskrifter": 9
     },
     {
       "id": "beratta-mera",
-      "antal": 41,
-      "besok": 16,
+      "antal": 44,
+      "besok": 19,
       "utskrifter": 5
+    },
+    {
+      "id": "visa",
+      "antal": 44,
+      "besok": 14,
+      "utskrifter": 6
     },
     {
       "id": "byt-och-sortera",
@@ -20,15 +26,9 @@
       "utskrifter": 5
     },
     {
-      "id": "visa",
-      "antal": 38,
-      "besok": 13,
-      "utskrifter": 5
-    },
-    {
       "id": "5-3-1",
-      "antal": 36,
-      "besok": 11,
+      "antal": 37,
+      "besok": 12,
       "utskrifter": 5
     },
     {
@@ -38,16 +38,22 @@
       "utskrifter": 2
     },
     {
+      "id": "ping-pong-prat",
+      "antal": 28,
+      "besok": 13,
+      "utskrifter": 3
+    },
+    {
+      "id": "epa",
+      "antal": 18,
+      "besok": 8,
+      "utskrifter": 2
+    },
+    {
       "id": "ova-och-kontrollera-i-par",
       "antal": 16,
       "besok": 6,
       "utskrifter": 2
-    },
-    {
-      "id": "ping-pong-prat",
-      "antal": 16,
-      "besok": 11,
-      "utskrifter": 1
     },
     {
       "id": "sanningsjakten",
@@ -57,8 +63,8 @@
     },
     {
       "id": "tva-loser-problem",
-      "antal": 14,
-      "besok": 4,
+      "antal": 15,
+      "besok": 5,
       "utskrifter": 2
     },
     {
@@ -68,9 +74,9 @@
       "utskrifter": 1
     },
     {
-      "id": "epa",
-      "antal": 11,
-      "besok": 6,
+      "id": "anteckningspar",
+      "antal": 12,
+      "besok": 7,
       "utskrifter": 1
     },
     {
@@ -152,6 +158,12 @@
       "utskrifter": 1
     },
     {
+      "id": "lyssna-och-skriv",
+      "antal": 7,
+      "besok": 2,
+      "utskrifter": 1
+    },
+    {
       "id": "sekvenser",
       "antal": 7,
       "besok": 2,
@@ -170,22 +182,10 @@
       "utskrifter": 1
     },
     {
-      "id": "lyssna-och-skriv",
-      "antal": 6,
-      "besok": 1,
-      "utskrifter": 1
-    },
-    {
       "id": "samtalspromenad",
       "antal": 6,
       "besok": 1,
       "utskrifter": 1
-    },
-    {
-      "id": "anteckningspar",
-      "antal": 5,
-      "besok": 5,
-      "utskrifter": 0
     },
     {
       "id": "ape",
@@ -230,6 +230,12 @@
       "utskrifter": 0
     },
     {
+      "id": "pa-rad",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
       "id": "rita-byt-och-skriv",
       "antal": 4,
       "besok": 4,
@@ -260,19 +266,25 @@
       "utskrifter": 0
     },
     {
-      "id": "pa-rad",
-      "antal": 3,
-      "besok": 3,
-      "utskrifter": 0
-    },
-    {
       "id": "skicka-ett-problem",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
     },
     {
+      "id": "snobollen",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
       "id": "en-far-ga",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "huvuden-ihop",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -296,13 +308,19 @@
       "utskrifter": 0
     },
     {
-      "id": "samtalsbingo",
+      "id": "mina-bilder-dina-bilder",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
     },
     {
-      "id": "snobollen",
+      "id": "rondellen",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "samtalsbingo",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -326,19 +344,7 @@
       "utskrifter": 0
     },
     {
-      "id": "huvuden-ihop",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
       "id": "las-och-fraga",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "mina-bilder-dina-bilder",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
@@ -351,12 +357,6 @@
     },
     {
       "id": "parrespons",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "rondellen",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0

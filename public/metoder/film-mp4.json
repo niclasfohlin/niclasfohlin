@@ -69,6 +69,20 @@
     "sekunder": 23.44,
     "omslagVid": 13.8
   },
+  "reciprok-undervisning-film": {
+    "kalla": "023a02462d57f3b9",
+    "mp4": "ff1ae710fa318531",
+    "omslag": "ec3b8fd7ead9294f",
+    "sekunder": 29.73,
+    "omslagVid": 26.88
+  },
+  "reciprok-undervisning-film2": {
+    "kalla": "e91f0baf809697df",
+    "mp4": "22e21f0b01a4d8bd",
+    "omslag": "732144c3a35a4394",
+    "sekunder": 27.26,
+    "omslagVid": 3.52
+  },
   "testbaserat-larande-film": {
     "kalla": "581d5c5b8a4436be",
     "mp4": "6397d38b887f0c27",

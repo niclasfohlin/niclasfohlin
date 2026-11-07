@@ -1,5 +1,10 @@
 # Ändringar i standarden
 
+## 0.59.0, 2026-11-07
+
+- `undervisningsmetod.js` (Niclas 2026-11-06, riggens brev samma kväll, sajtens K-718): `NIVAERNAS_FORKLARING` säger att Inte sammanvägt gäller när något ämnesområde saknar nivå, och `undervisningsmetodensFel` stoppar Inte sammanvägt när Läsning, Skrivning, Matematik och Ämnen alla har en nivå, eftersom de då slås ihop till Lärande totalt (riggens `evidensen.md`, avsnitt 7). Riggens dokument läser texten ur standarden, så de får den nya raden när de byggs om.
+- `undervisningsmetod.js` (riggens brev samma kväll, punkt 10): `rutinensRubrik`, rutinens rubrik på sidan och i lathunden, med bara namnet när det redan säger rutinen, som Parrutinen.
+
 ## 0.58.0, 2026-11-05
 
 - `strategier.js` (riggens brev 2026-11-05, Tre fel i strategikortets form; sajtens K-714): `strategiensFel` stoppar en pil i minnets bild mellan delar som inte står efter varandra, eftersom kortet och sidan bara ritar pilar mellan rutor som står efter varandra, och en annan pil föll bort utan varning, som den fyllda pilen i Från sak till tecken.

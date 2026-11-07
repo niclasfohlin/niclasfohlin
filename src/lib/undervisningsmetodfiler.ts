@@ -40,7 +40,7 @@ export function metodensBilder(id: string): Record<string, UmBild[]> {
 }
 
 /**
- * Bladens egna pdf:er i Materialet för klassen, <id>-blad-<namn>.pdf, ett blad per sida i materialets pdf, i metodens
+ * Bladens egna pdf:er i Materialet för klassen, <id>-blad-<namn>.pdf, ett blad per sida i materialets pdf (ett enda blad kan ha flera sidor), i metodens
  * ordning (ramar.ramar). scripts/metoderfiler.mjs klipper ut dem ur materialets pdf, så att knappen under ett blad skriver
  * ut just det bladet (STIL.md under Hänvisningar: en bestämd sak har en knapp). Ett blad utan fil får ingen egen knapp.
  */

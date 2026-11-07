@@ -6,7 +6,8 @@
 // texten leder till (tabellCeller i Undervisningsmetod.astro, undervisningsmetodensSaker). En cell som är en saks namn, som
 // Färgkortet eller strukturen Kims prov, leder till saken, och andra namn i cellerna är länkar som i texten runt tabellen.
 // En tabell med en egen fil, som Grovplaneringen i Testbaserat lärande (metodensTabellfiler, K-684), har knappen under sig,
-// som ett blad: filen är mallen att skriva i, med alla grovplaneringens delar.
+// som ett blad: filen är mallen att skriva i, med alla grovplaneringens delar. En central sak som metodens fält centrala
+// sätter efter tabellen har sin knapp här, som i Stödundervisning (FriTabell.astro), som Ta fram en lästext i Reciprok undervisning.
 import MetodTabell from './MetodTabell.astro';
 import Umfilknappar from './Umfilknappar.astro';
 import { friTabellensPlats, slugAv } from '../lib/standard/index.js';
@@ -15,6 +16,8 @@ import type { Um } from '../lib/undervisningsmetod';
 import type { MetodSak } from '../lib/metodsaker';
 import type { UmFil } from '../lib/undervisningsmetodfiler';
 import Vavruta from './Vavruta.astro';
+import Centralrad from './Centralrad.astro';
+import { centralaVid } from '../lib/centrala';
 import type { Vav } from '../lib/vav';
 type Tabell = { plats?: string; rubrik: string; text?: string; kolumner: string[]; rader: string[][]; not?: string };
 // vavt är det sajten väver in efter en tabell (tabell: <rubrik>), som strategiernas små kort (K-702).
@@ -29,6 +32,7 @@ const Rubrik = plats === 'bilaga-a' ? 'h3' : 'h4';
     {t.text && <p set:html={k(t.text)} />}
     <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} cellank={cellank} celltext={k} />
     {t.not && <p class="um-not" set:html={k(t.not)} />}
+    <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
     {filer.some((f) => f.namn === t.rubrik) && <Umfilknappar id={id} titel={d.titel} filer={{}} slag={[]} tabeller={filer.filter((f) => f.namn === t.rubrik)} />}
     {vavt.filter((v) => v.efter === `tabell: ${t.rubrik}`).map((v, i, a) => <Vavruta v={v} titel={d.titel} sist={!a.slice(i + 1).some((w) => w.vav.id === v.vav.id)} />)}
   </div>

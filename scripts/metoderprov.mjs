@@ -683,6 +683,30 @@ try {
   server.close();
   try { rmSync(profil, { recursive: true, force: true }); } catch { /* Chrome kan hålla filerna en stund */ }
 }
+// De centrala saker som en metod visar med fältet centrala har sin knapp överst och efter texten som nämner dem, två gånger
+// på sidan, som i Stödundervisning (metodensCentrala och centralaVid i src/lib/centrala.ts; Reciprok undervisning var första
+// metoden i Metoder med fältet, och sidan läste det inte). Ett blad med flera sidor har alla sina bilder (scripts/metoderfiler.mjs).
+{
+  const register = JSON.parse(readFileSync(join(rot, 'src', 'data', 'centrala.json'), 'utf8'));
+  const mapp = join(rot, 'src', 'content', 'undervisningsmetoder');
+  for (const f of readdirSync(mapp).filter((x) => x.endsWith('.yaml') && !x.startsWith('_'))) {
+    const id = f.replace(/\.yaml$/, '');
+    const html = join(dist, 'metoder', id, 'index.html');
+    if (!existsSync(html)) continue;
+    const d = parse(readFileSync(join(mapp, f), 'utf8'));
+    const sida = readFileSync(html, 'utf8');
+    for (const x of d.centrala ?? []) {
+      const c = register.find((y) => y.id === x.id);
+      const antal = sida.split(`href="${c?.adress}">${c?.knapp}</a>`).length - 1;
+      if (antal < 2) fel.push(`/metoder/${id}: ${c?.namn ?? x.id} står i fältet centrala, men knappen står ${antal} gånger på sidan, inte överst och på sin plats`);
+    }
+    if ((d.ramar?.ramar ?? []).length === 1) {
+      const n = readdirSync(join(rot, 'public', 'metoder')).filter((x) => new RegExp(`^${id}-materialet-\\d+\\.png$`).test(x)).length;
+      const visade = sida.split(`${id}-materialet-`).length - 1;
+      if (n > 1 && visade < n) fel.push(`/metoder/${id}: bladet ${d.ramar.ramar[0].rubrik} har ${n} sidor, men sidan visar ${visade} bilder`);
+    }
+  }
+}
 if (fel.length) { console.error(`metoderprov: ${fel.length} fel\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`metoderprov: ${sidor.length} sidor under /metoder rullar inte i sidled i 320 och 360 punkter, inga namn i remsan, cellerna eller kortet klipps, och på ${metodsidor.length} metodsidor leder ankarna och filerna rätt, delarna står i standardens ordning och metodens ${provadeSaker} saker är länkar där de nämns och har en knapp under sig, ${lathundensMeningar} meningar på ${lathundsidor.length} lathundssidor står i lathundens pdf, rutan Verktyg och Stödmaterial har samma ${speglade} saker i Metoder som i Stödundervisning, och ${spegladeKort} kort${spegladRuta ? ' och rutan nederst' : ''} i Metoder har Stödundervisnings ${rutornas.stod?.knappar.filter((x) => !harAttr(x.a, 'data-rensa')).map((x) => x.namn).join(' och ') ?? 'Drive och Word'}.`);
 console.log(`metoderprov: rutan Ladda ner och skriv ut har bara standardens rader på ${nedladdningsrutor} metodsidor (NEDLADDNINGENS_RADER).`);

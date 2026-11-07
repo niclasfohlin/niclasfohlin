@@ -795,7 +795,9 @@ export declare const NIVAERNAS_FORKLARING: readonly { ord: string; staplar: numb
 export declare function laget(v: { tillforlitlighet?: string; effekt?: string; niva?: string } | undefined | null): Laget;
 export type Svarighet = { lara: number; karnan: number; stod: number; tid: number; motivering: string };
 export type Kostnad = { kop: number; timmar: number; motivering: string };
-export declare const SVARIGHETENS_ORD: readonly ['', 'Mycket lätt', 'Lätt', 'Medelsvårt', 'Svårt', 'Mycket svårt'];
+/** Rutinens rubrik: Rutinen och namnet, och bara namnet när det redan säger rutinen, som Parrutinen. */
+export declare const rutinensRubrik: (namn: string, o?: { kolon?: boolean }) => string;
+export declare const SVARIGHETENS_ORD:readonly ['', 'Mycket lätt', 'Lätt', 'Medelsvårt', 'Svårt', 'Mycket svårt'];
 export declare const KOSTNADENS_ORD: readonly ['', 'Mycket låg', 'Låg', 'Måttlig', 'Hög', 'Mycket hög'];
 /** Svårigheten att införa, 1 till 5: den övre medianen av de fyra kriterierna; null utan något kriterium. */
 export declare function svarighetensNiva(s: { lara: number; karnan: number; stod: number; tid: number }): number;

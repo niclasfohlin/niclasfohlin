@@ -16,7 +16,7 @@ import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetod
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
-import { metodensStrategiblad } from '../lib/standard/index.js';
+import { metodensStrategiblad, rutinensRubrik } from '../lib/standard/index.js';
 import Vavruta from './Vavruta.astro';
 import { vavtIMetoder } from '../lib/vav';
 import { strategiernaAv, strategikortetI, provaMetodensStrategikort, metodensKortAdress as metodensStrategikortAdress, strategiensAdress, strategiernasStil, STRATEGIERNAS_ADRESS } from '../lib/strategier';
@@ -102,6 +102,16 @@ const urval = ((d.profil as Record<string, any>)?.urval ?? {}) as Record<string,
 const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
 // Bladen i Materialet för klassen, med sina egna pdf:er när metoderfiler.mjs har klippt ut dem.
 const bladen = metodensBlad(id, (d.ramar?.ramar ?? []).map((r: { rubrik: string }) => r.rubrik));
+// Bilderna av ett blads sidor: en bild per blad, och alla bilder när metoden har ett enda blad, som kan ha flera sidor, som
+// Strategikorten i Reciprok undervisning (scripts/metoderfiler.mjs).
+// Replikerna i stegets fraser som inte står i stegets text. Riggens dokument har alla i raden Det du säger, och sidan visar de
+// som texten inte redan har, så att sidan och dokumentet säger samma sak (scripts/metoderparitet.mjs).
+const fraserUtanforTexten = (s: Record<string, any>): string[] => {
+  const ren = (t: string) => t.replace(/[⁠ \s]+/g, ' ').trim();
+  const gor = ren((Array.isArray(s.gor) ? s.gor : [s.gor]).join(' '));
+  return ((s.fraser ?? []) as string[]).filter((f) => !gor.includes(ren(f)));
+};
+const bladetsSidor = (i: number) => ((d.ramar?.ramar ?? []).length === 1 ? bilder.materialet ?? [] : bilder.materialet?.[i] ? [bilder.materialet[i]] : []);
 // Ett blad i Materialet för klassen: rubriken och texten, och i ett blad som strukturkorten listorna och delarna.
 type Ram = { rubrik: string; text: string[]; listor?: { rubrik?: string; rader: string[][] }[]; delar?: { rubrik: string; falt: { rubrik: string; text: string }[] }[] };
 // Raden under Efter de första veckorna som har samma ord som rubriken står utan sin etikett (design-3 nr 18).
@@ -193,6 +203,7 @@ const moten = arbetslagetsMoten(d);
             <ol class="um-gor">
               {(Array.isArray(s.gor) ? s.gor : [s.gor]).map((g: string) => <li set:html={replik(g, (f) => { const ren = f.replace(/<[^>]+>/g, ""); return fraser.has(ren) || ren.length < 90; })} />)}
             </ol>
+            {fraserUtanforTexten(s).length > 0 && <p class="um-not" set:html={k(`Du säger också: ${fraserUtanforTexten(s).map((f) => `”${f}”`).join(' ')}`)} />}
             {manus.filter((f) => (f.moment ?? []).includes(s.namn)).map((f) => <p class="um-ld-manus"><a href={`#${ankareFor(f.fallgrop)}`}>Så gör du {f.fallgrop.charAt(0).toLocaleLowerCase('sv') + f.fallgrop.slice(1)}</a></p>)}
             {s.redo && (
               <div class="um-beslutskarta" id={utfalletsAnkare(s.namn)} data-utfall>
@@ -331,7 +342,7 @@ const moten = arbetslagetsMoten(d);
       )}
       {rutinerFor('1').map((r: Record<string, any>) => (
         <div class="um-ruta" id="rutinen-vecka-1">
-          <p class="um-ruta-rubrik">Rutinen: {r.namn}</p>
+          <p class="um-ruta-rubrik">{rutinensRubrik(r.namn, { kolon: true })}</p>
           <p set:html={k(r.vad)} />
           {r.steg && <ol>{r.steg.map((x: string) => <li set:html={replik(x)} />)}</ol>}
           {r.forsta && <p><strong>Första gången.</strong> <span set:html={k(r.forsta)} /></p>}
@@ -371,10 +382,10 @@ const moten = arbetslagetsMoten(d);
             <div><dt>Du övar</dt><dd set:html={k(v.roll)} /></div>
             <div><dt>Gå vidare när</dt><dd set:html={k(stor(v.vidare))} /></div>
           </dl>
-          {String(v.vecka) === '1' && rutinerFor('1').length > 0 && <p class="um-not">Rutinen <Fragment set:html={k(rutinerFor('1').map((r: { namn: string }) => litenForsta(r.namn)).join(' och '))} /> står vid <a href="#rutinen-vecka-1">{FORSTA}</a>.</p>}
+          {String(v.vecka) === '1' && rutinerFor('1').length > 0 && <p class="um-not"><Fragment set:html={k(rutinensRubrik(rutinerFor('1').map((r: { namn: string }) => litenForsta(r.namn)).join(' och ')))} /> står vid <a href="#rutinen-vecka-1">{FORSTA}</a>.</p>}
           {rutinerFor(v.vecka).filter(() => String(v.vecka) !== '1').map((r: Record<string, any>) => (
             <details class="um-rad um-rutin">
-              <summary><span>Rutinen: {r.namn}</span></summary>
+              <summary><span>{rutinensRubrik(r.namn, { kolon: true })}</span></summary>
               <div class="um-rad-inne">
                 <p set:html={k(r.vad)} />
                 {r.steg && <ol>{r.steg.map((x: string) => <li set:html={replik(x)} />)}</ol>}
@@ -566,7 +577,11 @@ const moten = arbetslagetsMoten(d);
             </details>
           )}
           </div>
-          {bilder.materialet?.[i] && <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${bladen[i]?.pdf ? String(bladen[i].pdf).replace(/^.*\//, '').replace(/\?.*$/, '') : `${id}-materialet.pdf`}`} data-goatcounter-title={`Bilden av ${r.rubrik}, pdf, ${id}`} class={`um-sida${bilder.materialet[i].bredd > bilder.materialet[i].hojd ? ' um-sida-liggande' : ''}`}><img src={bilder.materialet[i].src} alt={r.rubrik} loading="lazy" decoding="async" width={bilder.materialet[i].bredd} height={bilder.materialet[i].hojd} /></a>}
+          {(() => {
+            const sidor = bladetsSidor(i);
+            const bilderna = sidor.map((b: { src: string; bredd: number; hojd: number }, n: number) => <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${bladen[i]?.pdf ? String(bladen[i].pdf).replace(/^.*\//, '').replace(/\?.*$/, '') : `${id}-materialet.pdf`}`} data-goatcounter-title={`Bilden av ${r.rubrik}, pdf, ${id}`} class={`um-sida${b.bredd > b.hojd ? ' um-sida-liggande' : ''}`}><img src={b.src} alt={sidor.length > 1 ? `${r.rubrik}, sidan ${n + 1} av ${sidor.length}` : r.rubrik} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>);
+            return sidor.length > 1 ? <div class="um-sidor">{bilderna}</div> : bilderna;
+          })()}
           {bladen[i]?.pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: r.rubrik, pdf: bladen[i].pdf! }} />}
         </div>
       ))}

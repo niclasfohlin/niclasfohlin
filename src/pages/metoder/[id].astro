@@ -25,6 +25,7 @@ import { medKallor, medSaker, undervisningsmetodensSaker, NEDLADDNINGENS_SLAG, t
 import { harLarDig as metodenHarLarDig } from '../../lib/lardig';
 import { metodensStrukturer } from '../../lib/strukturer';
 import { gruppernasFel, vavdaIBorjan } from '../../lib/vav';
+import { metodensCentrala } from '../../lib/centrala';
 import Centralknapp from '../../components/Centralknapp.astro';
 
 export async function getStaticPaths() {
@@ -41,7 +42,8 @@ const bilder = metodensBilder(id);
 const strukturer = metodensStrukturer(d, d.titel);
 // Ett verktyg som är sått med fler än två delar står också överst, med samma regel och samma knapp som i Stödundervisning
 // (vavdaIBorjan i src/lib/vav.ts; Niclas 2026-11-01: "De som har fler än 2 såddningar i sig kan ha kortet också i början").
-const verktygIBorjan = vavdaIBorjan(id, d, 'undervisningsmetoder');
+// Också de centrala saker som metoden visar med fältet centrala, som i Stödundervisning (metodensCentrala i src/lib/centrala.ts).
+const verktygIBorjan = [...new Map([...metodensCentrala(d), ...vavdaIBorjan(id, d, 'undervisningsmetoder')].map((c) => [c.id, c])).values()];
 { const g = gruppernasFel(id, d, 'undervisningsmetoder'); if (g) throw new Error(g); }
 const tabellfiler = metodensTabellfiler(id, ((d.tabeller ?? []) as { rubrik: string }[]).map((t) => t.rubrik));
 const saker = undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer });

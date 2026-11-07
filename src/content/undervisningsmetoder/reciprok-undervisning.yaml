@@ -1,0 +1,822 @@
+# Reciprok undervisning: undervisningsmetod för helklass, skriven 2026-11-06 ur analysen (analys.md), innehållsbankerna
+# (innehall-praktiken.md, P; innehall-karnan.md, K) och evidensen (evidensbank.md, adjudicering-evidensen.md, evidens.json).
+# Centrum är Niclas: man tänker tillsammans om en text, nyfiket och lyssnande, och strategierna kommer när texten behöver dem.
+#   node build/sparrprov.mjs methods/reciprok-undervisning/metod.yaml --klar
+
+titel: Reciprok undervisning
+undertitel: Så tänker du och klassen tillsammans om en text, F–⁠9
+alternativaNamn: ["Reciprocal teaching", "RU"]
+ingress: "Eleverna lär sig fyra tankestrategier för att förstå en text: att förutspå, ställa frågor, reda ut och sammanfatta. Vid ett stopp i texten visar du hur du själv använder en strategi, och vid nästa gör eleverna samma sak i par och får återkoppling. Bit för bit lämnar du över tänkandet, tills de läser så på egen hand."
+arskurs: ["F-3", "4-6", "7-9"]
+arskursText: F–9
+taggar: ["textsamtal", "lasforstaelse"]
+slag: lektionsforlopp
+syfte: [tanka]
+tid: 45 minuter per lektion, minst två lektioner i veckan
+hurOftaSkal: "Två stora studier hade två tillfällen i veckan i minst 12 veckor (Tengberg m.fl., 2015; Torres Blas m.fl., 2026)."
+period: Fem veckor att komma igång
+material:
+  - en text med tre stopp
+  - fyra Strategikort per par
+  - tavlan
+  - pennor och lappar
+  - planeringsmallen
+uppdaterad: 2026-11-07
+publicerad: 2026-11-07
+relaterade: ["textsamtal-i-grupp", "faktatextsamtal-i-grupp", "boksamtal-i-grupp", "kooperativt-larande", "explicit-undervisning"]
+utkast: false
+film:
+  sekunder: 29.73
+  beskrivning: "Läraren frågar: ”Varför tittar mamma på taket?” Läraren säger: ”Jag tror att hon tvivlar, men jag är inte säker. Jag ställde en fråga till texten.” Läraren läser nästa bit. Läraren säger: ”Nu gör ni som jag gjorde.” Paren skriver, och läraren läser. Läraren säger: ”Ni frågar om något som inte står.” Läraren frågar: ”Vilken fråga tar oss vidare?” Eleven säger: ”Hon stänger dörren snabbt.” En kamrat säger: ”Då gör hon kanske något där inne.” Läraren tänker: ”Nu tänker de själva.”"
+  rubrik: "Så lämnar läraren över: hen visar, och paren gör samma sak"
+  ingress: "Filmen visar en lektion i svenska i åk 4, där klassen läser Någon har varit här. Läraren visar Ställa frågor vid ett stopp, och vid nästa gör paren samma sak. Läraren säger vad hen hör, och klassen prövar två frågor på tavlan. Medan två elever talar efter varandra är läraren tyst."
+  stillbilder:
+    - text: "Läraren stannar och ställer en fråga till texten."
+    - text: "Paren gör samma sak och skriver en fråga."
+    - text: "Läraren säger vad paret gjorde."
+    - text: "En kamrat tar upp tanken, och läraren är tyst."
+filmer:
+  - nr: 2
+    titel: "Paren tar över"
+    sekunder: 27.26
+    beskrivning: "Läraren tänker: ”Nästan alla par har en ledtråd.” Läraren säger: ”Stanna där det tar stopp. Ta det kort ni behöver.” Eleven frågar: ”Hela eftermiddagen? Vad menas med det?” Kamraten frågar: ”Vad står före och efter?” Läraren tänker: ”Jag lyssnar.” Eleven säger: ”Henry är lugn fast det är bråttom!” Läraren säger: ”Ni stannade själva och läste om.”"
+    rubrik: "Paren tar över, och läraren sätter sig, lyssnar och går vidare"
+    ingress: "Filmen visar en lektion i vecka 4, där nästan alla par hade en ledtråd. Paren läser sista biten växelvis, och ett par stannar vid ett uttryck de inte förstår. Strategikortet ger dem något att säga, läraren lyssnar utan att ge svaret, och paret kommer vidare själva."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Nästan alla par har en ledtråd, så läraren lämnar över."
+      - text: "Paret stannar och tar fram Strategikortet Reda ut."
+      - text: "Läraren sätter sig hos paret och lyssnar."
+      - text: "Läraren säger vad paret gjorde och går till nästa par."
+
+profil:
+  evidens:
+    larande: { tillforlitlighet: lag, effekt: mattlig, kort: "Starkast i läsning, där effekten är liten i hela klasser.", motivering: "Låg tillförlitlighet, måttlig effekt. Ingen studie väger ihop områdena, så raden är en sammanvägning: visst stöd i läsning och svagt i skrivning, matematik och ämnen (Okkinga m.fl., 2018; Jay m.fl., 2017).", kallor: [okkinga-m-fl-2018, hamadneh-och-kazem-2016, laia-och-dasari-2025, jay-m-fl-2017] }
+    lasning: { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. I hela klasser gav undervisning i lässtrategier, i många former, d = 0,19 i 52 jämförelser (Okkinga m.fl., 2018). Stora försök med metoden gav mindre, och det största i hela klasser 0,00 (O'Hare m.fl., 2023).", kallor: [okkinga-m-fl-2018, o-hare-m-fl-2023, baye-m-fl-2019, hansford-m-fl-2026] }
+    skrivning: { tillforlitlighet: lag, effekt: liten, motivering: "Låg tillförlitlighet, liten effekt. Ett försök i åk 7 i Jordanien gav en säker skillnad på forskarnas eget prov, 80 mot 64 poäng. Skillnaden är orimligt stor, och källan ger ingen effektstorlek, så den räknas som liten (Hamadneh och Kazem, 2016).", kallor: [hamadneh-och-kazem-2016] }
+    matematik: { tillforlitlighet: lag, effekt: stor, motivering: "Låg tillförlitlighet, stor effekt. Åtta små studier på högstadiet i Indonesien gav g = 1,07 under namnet Reciprocal Teaching (Laia och Dasari, 2025). Dialogisk undervisning utan metodens strategier gav 0,09, inte säkert (Jay m.fl., 2017).", kallor: [laia-och-dasari-2025, jay-m-fl-2017] }
+    amnen: { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. I ett stort försök i hela klasser i åk 4 gav dialogisk undervisning utan metodens strategier 0,12 i NO (Jay m.fl., 2017). I SO är resultaten blandade, och teknik är inte studerat.", kallor: [jay-m-fl-2017] }
+    socialt: { tillforlitlighet: lag, effekt: liten, motivering: "Låg tillförlitlighet, liten effekt. Ett lottat försök från 1988 med 64 elever i tre klasser i åk 7 gav bättre uppförande. En lärare beskriver en vänligare stämning, men också att grupper stördes (Gilbert, 2018).", kallor: [gilbert-2018] }
+  svarighet: { lara: 3, karnan: 3, stod: 3, tid: 4, motivering: "Läraren övar att tänka högt och lämna över samtalet, och klassen övar nya rutiner. Lärarna i studierna fick två till tre dagars utbildning och stöd i skolan, vilket hade räknats som Svårt." }
+  kostnad: { kop: 2, timmar: 14, motivering: "Skolan står för kopiorna. Omkring 14 timmar per lärare första läsåret går till läsning, två möten, en halvtimme i vecka 11, planering och fyra samtal efter besök. Besökaren lägger en timme per besök. Studiernas program hade licenser och kostade mer." }
+  urval:
+    datum: 2026-11-06
+    regel: "Undervisning räknas när läraren visar sitt tänkande, eleverna använder flera läsförståelsestrategier, bland dem minst tre av förutspå, ställa frågor, reda ut och sammanfatta, i samtal med varandra om textens innehåll, och läraren lämnar över till eleverna. Det gäller Reciprocal Teaching (Palincsar och Brown), Reciprocal Reading (Fischer Family Trust), LIT (Hackney Learning Trust), Dialogic Strategy Instruction (Tengberg och Olin-Scheller), Collaborative Strategic Reading, CSR (Klingner och Vaughn) och Transactional Strategies Instruction (Pressley m.fl.). Indirekt underlag sänker tillförlitligheten ett steg: samma program i riktade grupper, dialogisk undervisning i ämnets lektioner och om ämnets innehåll utan läsförståelsestrategierna, och undervisning i läsförståelsestrategier utan samtal. Räknas inte: Philosophy for Children, en egen lektion med filosofiska frågor utan läsförståelsestrategierna; allmän undervisning i lärstrategier över ämnen, som Donker m.fl. (2014) och de Boer m.fl. (2018); Reciprocal Peer Tutoring; Mosstons reciprocal style; och metoden på nätet utan samtal."
+    text: "Vi sökte hos Skolforskningsinstitutet, EEF, What Works Clearinghouse och Best Evidence Encyclopedia, i OpenAlex och ERIC, område för område, och i Google Scholar, och följde referenserna i en översikt från 2025. Sedan sökte vi igen efter starkare belägg, och två granskare läste talen i källorna. Sökningen gav över hundra källor, och listan har de femton som metoden bygger på, med de stora försöken och de svenska studierna. Hatties översikt använde vi inte."
+    slutsatser:
+      oversikt: "Strategier i hela klasser ger en liten, säker effekt på standardprov (Okkinga m.fl., 2018). Tre stora studier av CSR gav 0,05, inte säkert (Baye m.fl., 2019). I små grupper med elever i lässvårigheter är talet större, 0,48 (Hansford m.fl., 2026), och i matematik bygger g = 1,07 på åtta små studier (Laia och Dasari, 2025). Ingen enskild strategi är bäst, och hos elever i lässvårigheter krävde effekten bakgrundskunskap (Peng m.fl., 2023)."
+      experiment: "I helklass gav Reciprocal Reading ingen effekt på läsprovet, medan riktade grupper med elever som behöver stöd i förståelsen gav 0,14 på läsning och 0,18 på förståelse (O'Hare m.fl., 2023). En större prövning av dem gav 0,055, inte säkert (Torres Blas m.fl., 2026). De två svenska försöken gav ingen säker effekt för hela klassen (Tengberg m.fl., 2015; Klang m.fl., 2022), men i det första gick eleverna med lägst förtest framåt mer än de med lägst förtest i jämförelsegruppen."
+      annan: "Metoden kommer ur ett samtal där lärare och elever turas om att leda (Palincsar och Brown, 1984). Skolforskningsinstitutet (2019) säger att inte alla former av strategiundervisning höjer läsförståelsen, och att hur och när strategin används avgör vad den ger."
+    uteslutna:
+      - { namn: "Gorard m.fl. (2015) och Lord m.fl. (2021)", skal: "En egen lektion utan läsförståelsestrategierna (Philosophy for Children). Den gav 0,03 i skrivning och ingen påvisad effekt på sociala färdigheter" }
+      - { namn: "WWC (2010)", skal: "Proven är gjorda för metoden" }
+      - { namn: "Rosenshine och Meister (1994) och Miller m.fl. (1988)", skal: "Från före 2000. Försöket från 1988 nämns ändå under Socialt" }
+      - { namn: "Murphy m.fl. (2009)", skal: "Handlar om samtal utan strategierna, och vi har inte läst talen" }
+      - { namn: "Vaughn m.fl. (2022)", skal: "Bara en av 34 studier gäller metoden" }
+      - { namn: "Donker m.fl. (2014) och de Boer m.fl. (2018)", skal: "Allmän undervisning i lärstrategier över ämnen, utan metodens kärna" }
+      - { namn: "Hattie (2009)", skal: "Översikt av metaanalyser" }
+
+kallor:
+  - { id: baye-m-fl-2019, doi: "10.1002/rrq.229", slag: systematisk-oversikt, grupp: oversikt, omraden: [lasning], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: 0,05 i tre stora studier av CSR, en släkting till metoden, åk 6–⁠8", titel: "A Synthesis of Quantitative Research on Reading Programs for Secondary Students", text: "Baye, A., Inns, A., Lake, C. m.fl. (2019). A Synthesis of Quantitative Research on Reading Programs for Secondary Students. Reading Research Quarterly.", adress: "https://orbi.uliege.be/bitstream/2268/236292/1/Baye_et_al-2019-Reading_Research_Quarterly.pdf", oppnad: 2026-11-07 }
+  - { id: hansford-m-fl-2026, doi: "10.1007/s44217-026-01140-6", slag: metaanalys, grupp: oversikt, omraden: [lasning], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: 0,48 [0,38; 0,56] i fem jämförelser, små grupper i lässvårigheter", titel: "Reading comprehension: a meta-analysis comparing standardized and non-standardized assessment results", text: "Hansford, N., Garforth, K., McGlynn, S. m.fl. (2026). Reading comprehension: a meta-analysis comparing standardized and non-standardized assessment results. Discover Education.", adress: "https://link.springer.com/article/10.1007/s44217-026-01140-6", oppnad: 2026-11-07 }
+  - { id: laia-och-dasari-2025, doi: "10.31943/mathline.v10i1.688", slag: metaanalys, grupp: oversikt, omraden: [matematik], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: g = 1,07 [0,73; 1,40] i åtta små studier, Indonesien", titel: "Meta-Analysis: Effectiveness of Reciprocal Teaching Model on Mathematics Learning Outcomes", text: "Laia, H. O. och Dasari, D. (2025). Meta-Analysis: Effectiveness of Reciprocal Teaching Model on Mathematics Learning Outcomes. Mathline: Jurnal Matematika dan Pendidikan Matematika.", adress: "https://mathline.unwir.ac.id/index.php/Mathline/article/view/688", oppnad: 2026-11-07 }
+  - { id: okkinga-m-fl-2018, doi: "10.1007/s10648-018-9445-7", slag: metaanalys, grupp: oversikt, omraden: [lasning], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Liten effekt: d = 0,186 i 52 jämförelser på standardprov, få med metoden", titel: "Effectiveness of Reading-Strategy Interventions in Whole Classrooms: a Meta-Analysis", text: "Okkinga, M., van Steensel, R., van Gelderen, A. J. S. m.fl. (2018). Effectiveness of Reading-Strategy Interventions in Whole Classrooms: a Meta-Analysis. Educational Psychology Review.", adress: "https://www.hogeschoolrotterdam.nl/contentassets/be24544b6f29463cb7428307768885a4/15151-okkinga_onl.pdf", oppnad: 2026-11-07 }
+  - { id: peng-m-fl-2023, doi: "10.3102/00346543231171345", slag: metaanalys, grupp: oversikt, omraden: [], strang: false, stor: false, las: sammanfattning, fohlin: false, bidrag: "Ingen strategi var bäst. Effekten krävde bakgrundskunskap", titel: "The Active Ingredient in Reading Comprehension Strategy Intervention for Struggling Readers: A Bayesian Network Meta-analysis", text: "Peng, P., Wang, W., Filderman, M. J. m.fl. (2023). The Active Ingredient in Reading Comprehension Strategy Intervention for Struggling Readers: A Bayesian Network Meta-analysis. Review of Educational Research.", adress: "https://hedcoinstitute.uoregon.edu/reading-comprehension-strategies", oppnad: 2026-11-07 }
+  - { id: jay-m-fl-2017, eric: ED581114, slag: rapport, grupp: experiment, omraden: [matematik, amnen], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,12 i NO, 1 223 elever i 69 skolor, utan metodens strategier", titel: "Dialogic Teaching: Evaluation Report and Executive Summary", text: "Jay, T., Willis, B., Thomas, P. m.fl. (2017). Dialogic Teaching: Evaluation Report and Executive Summary. Education Endowment Foundation.", adress: "https://files.eric.ed.gov/fulltext/ED581114.pdf", oppnad: 2026-11-07 }
+  - { id: klang-m-fl-2022, doi: "10.23865/njlr.v8.2740", slag: studie, grupp: experiment, omraden: [lasning], strang: false, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: −0,07 och +0,10 på två prov, 958 elever, strategier i båda grupperna", titel: "Intervention combining cooperative learning and instruction in reading comprehension strategies in heterogeneous classrooms", text: "Klang, N., Åsman, J., Mattsson, M. m.fl. (2022). Intervention combining cooperative learning and instruction in reading comprehension strategies in heterogeneous classrooms. Nordic Journal of Literacy Research.", adress: "https://nordicliteracy.net/index.php/njlr/article/view/2740/6211", oppnad: 2026-11-07 }
+  - { id: o-hare-m-fl-2023, doi: "10.1111/bjep.12623", slag: studie, grupp: experiment, omraden: [lasning], strang: true, stor: true, las: sammanfattning, fohlin: false, effekt: "Inte säker: 0,00 i helklass, 3 198 elever; säkert 0,14 i riktade grupper, 1 296", titel: "Comparing the effectiveness of two reciprocal reading comprehension interventions for primary school pupils in disadvantaged schools", text: "O'Hare, L., Stark, P., Cockerill, M. m.fl. (2023). Comparing the effectiveness of two reciprocal reading comprehension interventions for primary school pupils in disadvantaged schools. British Journal of Educational Psychology.", adress: "https://d2tic4wvo1iusb.cloudfront.net/documents/projects/Reciprocal_Reading.pdf", oppnad: 2026-11-07 }
+  - { id: tengberg-m-fl-2015, doi: "10.17239/L1ESLL-2015.15.01.01", slag: studie, grupp: experiment, omraden: [lasning], strang: false, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: d = 0,07 för 367 elever i åk 7 och 0,46 för dem med lägst förtest", titel: "Improving students' narrative comprehension through a multiple strategy approach. Effects of Dialogic Strategy Instruction in secondary school", text: "Tengberg, M., Olin-Scheller, C. och Lindholm, A. (2015). Improving students' narrative comprehension through a multiple strategy approach. Effects of Dialogic Strategy Instruction in secondary school. L1 Educational Studies in Language and Literature.", adress: "https://l1research.org/article/download/65/63/125", oppnad: 2026-11-07 }
+  - { id: torres-blas-m-fl-2026, eric: ED680981, slag: rapport, grupp: experiment, omraden: [lasning], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: g = 0,055 i riktade grupper, 3 878 elever i 292 skolor", titel: "Reciprocal Reading effectiveness trial. Evaluation report", text: "Torres Blas, N., Forsyth, E., Cueto, A. m.fl. (2026). Reciprocal Reading effectiveness trial. Evaluation report. Education Endowment Foundation.", adress: "https://d2tic4wvo1iusb.cloudfront.net/production/documents/projects/Reciprocal-Reading-_evaluation-report_v.1.0.0_2026-02-09-181715_hbfl.pdf", oppnad: 2026-11-07 }
+  - { id: gilbert-2018, doi: "10.1080/1358684x.2018.1452606", slag: artikel, grupp: annan, omraden: [socialt], strang: false, stor: false, las: fulltext, fohlin: false, bidrag: "En lärare om en vänligare stämning och om grupper som störs", titel: "Riding the Reciprocal Teaching Bus. A Teacher's Reflections on Nurturing Collaborative Learning in a School Culture Obsessed by Results", text: "Gilbert, F. (2018). Riding the Reciprocal Teaching Bus. A Teacher's Reflections on Nurturing Collaborative Learning in a School Culture Obsessed by Results. Changing English.", adress: "https://research.gold.ac.uk/id/eprint/23274/", oppnad: 2026-11-07 }
+  - { id: hamadneh-och-kazem-2016, slag: studie, grupp: annan, omraden: [skrivning], strang: false, stor: false, las: fulltext, fohlin: false, bidrag: "Kvasiexperiment: eleverna skrev bättre på forskarnas prov", titel: "أثر استراتيجية التدريس التبادلي في تحسين مهارات التعبير الإبداعي لدى طلبة الصف السابع الأساسي في الأردن", text: "Hamadneh, A. D. och Kazem, A. J. (2016). أثر استراتيجية التدريس التبادلي في تحسين مهارات التعبير الإبداعي لدى طلبة الصف السابع الأساسي في الأردن [Effekten av strategin reciprok undervisning på färdigheterna i kreativt skrivande hos elever i åk 7 i Jordanien]. Al-Manara.", adress: "https://repository.aabu.edu.jo/jspui/handle/123456789/1682", oppnad: 2026-11-07 }
+  - { id: howe-m-fl-2019, doi: "10.1080/10508406.2019.1573730", slag: studie, grupp: annan, omraden: [], strang: false, stor: false, las: fulltext, fohlin: false, bidrag: "Klassamtal hänger ihop med resultaten bara när många deltar", titel: "Teacher–Student Dialogue During Classroom Teaching: Does It Really Impact on Student Outcomes?", text: "Howe, C., Hennessy, S., Mercer, N. m.fl. (2019). Teacher–Student Dialogue During Classroom Teaching: Does It Really Impact on Student Outcomes? Journal of the Learning Sciences.", adress: "https://www.repository.cam.ac.uk/bitstreams/45d9f384-cb2f-460c-b796-9fdb10cb1f7d/download", oppnad: 2026-11-07 }
+  - { id: palincsar-och-brown-1984, doi: "10.1207/s1532690xci0102_1", slag: artikel, grupp: annan, omraden: [], strang: false, stor: false, las: fulltext, fohlin: false, primarkalla: true, bidrag: "Metodens grund. Länken går till rapporten från 1983", titel: "Reciprocal Teaching of Comprehension-Fostering and Comprehension-Monitoring Activities", text: "Palincsar, A. S. och Brown, A. L. (1984). Reciprocal Teaching of Comprehension-Fostering and Comprehension-Monitoring Activities. Cognition and Instruction.", adress: "https://files.eric.ed.gov/fulltext/ED225135.pdf", oppnad: 2026-11-07 }
+  - { id: skolforskningsinstitutet-2019, slag: rapport, grupp: annan, omraden: [], strang: false, stor: false, las: fulltext, fohlin: false, bidrag: "Hur och när en strategi används avgör vad den ger", titel: "Läsförståelse och undervisning om lässtrategier", text: "Skolforskningsinstitutet (2019). Läsförståelse och undervisning om lässtrategier. Systematisk översikt.", adress: "https://www.kau.se/files/2019-05/Fulltext-L%C3%A4sstrategier-pdf-version.pdf", oppnad: 2026-11-07 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 1 Metoden
+# ---------------------------------------------------------------------------------------------------------------------
+inledning:
+  - "Reciprok undervisning är ett sätt att läsa och förstå texter tillsammans med klassen i alla ämnen. Metoden bygger på fyra tankestrategier: att förutspå vad som kommer, att ställa frågor till texten, att reda ut det man inte förstår och att sammanfatta det man har läst. Så tänker en van läsare, fast tyst och utan att någon ser det. Här tänker du högt i stället. Du stannar i texten och använder en av strategierna. Vid nästa stopp gör eleverna samma sak i par, med din fråga som stöd, och får återkoppling på hur de gjorde. Sedan använder de strategin själva när texten kräver det. Reciprok betyder ömsesidig: ni turas om att tänka högt och leda, tills samtalet är elevernas. Strategierna är ingen lista att beta av. De är verktyg som ni tar fram när ni är nyfikna på något i texten och vill höra hur andra tänker."
+  - "På bänken ligger texten och en penna, och varje par har Strategikorten, ett kort för varje tankestrategi. Korten säger när strategin behövs och ger eleverna ord att börja med. Du läser högt och stannar där du själv undrar. När paren sedan gör samma sak säger båda sin tanke, skriver den i en mening och stryker under ledtråden, det ställe i texten som stöder tanken. Två av meningarna skriver du på tavlan, och klassen prövar dem mot texten: ”Vilken håller? Var ser du det?” Den sista biten läser paren själva. De stannar där det tar stopp och tar det kort de behöver, medan du sitter hos ett par i taget. Sist skriver alla en lapp med en egen tanke och en ledtråd."
+  - "Lärandet går till så här. En text säger aldrig allt, eftersom författaren räknar med att läsaren fyller i resten med det hen redan vet. När det inte går tar det stopp, och då hjälper de fyra tankestrategierna läsaren vidare. Eleverna lär sig dem som man lär sig det mesta: de ser någon göra det, gör samma sak med stöd, får höra hur det gick och gör det till slut själva. Det är överlämningen, och på den hänger metoden. Det som först sker högt mellan er blir elevens eget sätt att läsa."
+  - "De första fem veckorna har ni minst två lektioner i veckan. Under de fyra första lär sig klassen en tankestrategi i taget, och i den femte börjar eleverna ge ordet vidare till varandra i grupp. Själv övar du på att vänta och lyssna. Ni fortsätter till vecka 12, medan grupperna leder allt mer och korten behövs allt mindre. Sedan använder eleverna strategierna i alla ämnen, också på ett problem i matematiken och ett stycke i SO och NO. I F–⁠2 leder du dialogisk högläsning: du läser högt, och barnen talar."
+karna:
+  rubrik: "Kärnan: fast och fritt"
+  text: Forskningsstödet är starkast i små grupper, så i en hel klass betyder hur du gör mer än namnet på metoden. Det avgörande är att du tänker högt på riktigt, att eleverna får göra samma sak med stöd och att de till slut tar över.
+  grundregel: Det här är kärnan, och den håller du fast vid. Texten, ämnet, vilken tankestrategi ni tar i dag och hur ni sitter får du ändra.
+  varv: Du visar en tankestrategi, paren gör samma sak och får återkoppling, och sedan gör de det själva.
+  komponenter:
+    - namn: De fyra tankestrategierna
+      moment: [Inför läsningen, Jag tänker högt, Vi tänker tillsammans, Ni tar över, Efter läsningen]
+      vad: Eleverna lär sig förutspå, ställa frågor, reda ut och sammanfatta när texten kräver det.
+      syns: Eleverna stannar där det tar stopp och gissar, frågar, reder ut eller sammanfattar. De visar stället i texten och kan säga vad som hjälpte.
+      varfor: "En text säger aldrig allt, och utan ett sätt att komma vidare läser eleven bara för att bli klar. Komponenten bygger på att varje strategi svarar på ett problem i texten (Palincsar och Brown, 1984). Ingen enskild strategi är bäst (Peng m.fl., 2023), så texten får avgöra vilken ni tar."
+      belagg: i-alla
+      kallor: [palincsar-och-brown-1984, peng-m-fl-2023]
+      kvar: Eleverna möter alla fyra strategierna, använder den som texten kräver och säger vad som hjälpte.
+      fritt: "Vilken strategi ni tar i dag, hur många och i vilken ordning de första veckorna."
+      kryss: Vi använde en tankestrategi där texten krävde det.
+    - namn: Läraren visar
+      moment: [Jag tänker högt]
+      vad: Du stannar vid ett verkligt stopp, tänker högt med en strategi och säger vad du gjorde.
+      syns: Eleverna hör läraren tveka, tänka och säga vad hen gjorde. Sedan gör de samma sak vid nästa stopp.
+      varfor: "Det en van läsare gör sker tyst, och den som inte har sett det vet inte att det går. Komponenten bygger på att eleverna hör det. Den hänger ihop med bättre förmåga att använda strategierna, men inte säkert med bättre resultat på läsprov (Okkinga m.fl., 2018)."
+      belagg: i-alla
+      kallor: [okkinga-m-fl-2018]
+      kvar: Eleverna hör dig använda en ny tankestrategi i en riktig text, vid ett verkligt stopp, innan de gör det själva.
+      fritt: Vilken strategi du visar, hur många stopp och dina ord. När eleverna är redo tänker de högt i gruppen, och själv tänker du högt där du stannar.
+      kryss: Jag tänkte högt med en tankestrategi vid ett verkligt stopp.
+      raknas: false
+    - namn: Paren gör samma sak
+      moment: [Vi tänker tillsammans]
+      vad: Vid nästa stopp gör paren som du gjorde, med din fråga som stöd, och får återkoppling på hur de tänkte.
+      syns: Paren använder strategin som läraren visade, säger sin tanke och visar stället i texten. Läraren säger vad hen hör, och klassen prövar tankarna.
+      varfor: "Eleven behöver pröva strategin själv medan stödet finns kvar och få veta om tanken höll. Hos Palincsar och Brown (1984) ger läraren återkoppling efter elevens nivå, och effekten blev större när eleverna lärde sig märka om de förstod och ge varandra återkoppling (Skolforskningsinstitutet, 2019)."
+      belagg: provad
+      kallor: [palincsar-och-brown-1984, skolforskningsinstitutet-2019]
+      kvar: Paren använder strategin med stöd, säger sin tanke till varandra och får återkoppling på hur de gjorde.
+      fritt: "Din fråga, och om eleverna sitter i par eller grupp. Återkopplingen får komma från dig, från en kamrat eller från klassen."
+      kryss: Paren gjorde samma sak och fick återkoppling.
+    - namn: Eleverna tar över
+      moment: [Ni tar över, Efter läsningen]
+      vad: Paren stannar själva och väljer tankestrategi, och för varje vecka gör de mer av det du gjorde förut.
+      syns: Eleverna stannar själva, ställer frågan och avgör om svaret håller. I grupp väljer de vem som svarar. Läraren talar mindre i slutet av lektionen än i början.
+      varfor: "Den som bara lyssnar hör hur andra tänker men tänker inte själv. Elevledda grupper gav mer än lärarledda i en studie (Skolforskningsinstitutet, 2019). Men i ett stort försök syntes överlämningen minst (Torres Blas m.fl., 2026), och i Sverige gav grupper inget utöver strategierna (Klang m.fl., 2022)."
+      belagg: provad
+      kallor: [skolforskningsinstitutet-2019, torres-blas-m-fl-2026, klang-m-fl-2022]
+      kvar: Varje lektion gör eleverna själva något som du gjorde förut. Senast vecka 8 turas de om att leda en bit i gruppen.
+      fritt: "Vad du lämnar över först, som frågan, och takten. Par eller grupp före vecka 8. De yngsta frågar med dig bredvid. Ledningen får du ta tillbaka."
+      kryss: Paren stannade själva och valde tankestrategi.
+roll:
+  rubrik: "Lärarens roll: en läsare bland andra"
+  text: "Du tänker med klassen som en läsare bland andra, och i huvudet har du hela tiden två saker: eleverna ska förstå texten, och tänkandet ska bli deras."
+  fragor:
+    - Vilken tankestrategi kräver texten här?
+    - Vem tänker just nu, jag eller de?
+    - Vad kan jag lämna över nu?
+  fragornaText: "Du har dem med dig i varje del av lektionen."
+tabeller:
+  - rubrik: De fyra tankestrategierna
+    plats: efter-inledning
+    text: "En tankestrategi är ett sätt att komma vidare i en text, och eleverna ska lära sig använda de här fyra. I alla fyra räknar läsaren ut sådant som inte står. Ni tar fram den strategi texten kräver, så en lektion behöver sällan mer än en eller två. I forskningen heter tankestrategierna lässtrategier, och reda ut heter klargöra."
+    kolumner: [Strategin, Läsaren frågar sig, När texten kräver det, Vad den gör]
+    rader:
+      - ["Förutspå", "”Vad tror jag händer nu?”", "Titeln, en bild eller en vändpunkt ger ledtrådar om vad som kommer.", "Läsaren hämtar fram det hen vet och prövar gissningen mot nästa bit. I faktatext blir frågan vad nästa stycke svarar på."]
+      - ["Ställa frågor", "”Vad undrar jag?”", "Något är oklart, eller gör läsaren nyfiken.", "Läsaren stannar vid det viktiga och ser vad hen har förstått."]
+      - ["Reda ut", "”Var tog det stopp?”", "Läsaren förstår inte ett ord, ett uttryck eller en mening.", "Läsaren tar sig förbi det som stoppar läsningen."]
+      - ["Sammanfatta", "”Vad har jag förstått?”", "En bit är slut, eller det är mycket att hålla ihop.", "Läsaren ser om hen har förstått. Går det inte att sammanfatta biten, läser hen om."]
+  - rubrik: "Överlämningen: så blir en tankestrategi elevens"
+    plats: efter-inledning
+    text: "Att höra dig tänka räcker inte. Eleverna behöver göra samma sak själva, först med din fråga som stöd, och få höra hur det gick. Det är överlämningen: du lämnar över tänkandet ett stopp i taget. Den kallas ofta Jag gör, Vi gör, Ni gör, Du gör, och i lektionen heter delarna Jag tänker högt, Vi tänker tillsammans och Ni tar över. Så här går det till när en klass i åk 4 läser Någon har varit här och du visar Ställa frågor."
+    kolumner: [Steget, Det som händer, Så låter det]
+    rader:
+      - ["1 Du visar", "Du stannar efter bit 1, tänker högt med strategin och säger vad du gjorde.", "”Vänta. Varför tittar mamma på taket? Det står inte. Jag tror att hon inte tror på magontet, men jag är inte säker. Jag stannade och ställde en fråga till texten.”"]
+      - ["2 Paren gör samma sak", "Du läser till nästa stopp och ber paren göra som du gjorde. Din fråga är stödet.", "”Nu gör ni som jag gjorde. Vad undrar ni om Emelie? Säg det till din kamrat, och skriv frågan.” Ett par skriver: ”Varför har hon glitter på kinden?”"]
+      - ["3 Paren får återkoppling", "Du säger vad du hör, och klassen prövar två frågor mot texten.", "”Ni frågar om något som inte står. Så gör en läsare.” ”Vilken fråga tar oss vidare? Var ser du det?”"]
+      - ["4 Paren gör det själva", "Paren läser nästa bit, stannar där det tar stopp och väljer själva tankestrategi.", "En elev säger till sin kamrat: ”Jag undrar vad skölden är till.”"]
+      - ["5 Eleven gör det ensam", "Med tiden använder eleven strategin när hen läser själv, också i andra ämnen.", "På lappen står en egen fråga: ”Varför bad Ruben inte om hjälp?”"]
+  - rubrik: Så låter det med varje tankestrategi
+    plats: efter-inledning
+    meny: true
+    text: "Gången är densamma för alla fyra. Du visar strategin och säger vad du gjorde, och vid nästa stopp ber du paren göra samma sak. Återkopplingen säger vad eleven gjorde, så att hen kan göra det igen. ”Bra” säger inte det."
+    kolumner: [Strategin, Du visar, Du ber paren, Du säger vad du hörde]
+    rader:
+      - ["Förutspå", "”Jag tror att … för att …”", "”Vad tror ni händer nu? Säg varför.”", "”Du tänkte framåt utifrån det som står.”"]
+      - ["Ställa frågor", "”Jag undrar varför …”", "”Vad undrar ni här?”", "”Du frågar om något som inte står.”"]
+      - ["Reda ut", "”Nu förstod jag inte. Jag läser igen … kan det vara så här?”", "”Var tar det stopp? Läs stället igen. Vad kan det betyda?”", "”Du märkte att du inte förstod, och du läste om.”"]
+      - ["Sammanfatta", "”Den här biten handlar om …”", "”Säg i en mening vad biten handlar om.”", "”Du tog med det viktigaste och lämnade resten.”"]
+  - rubrik: Din uppgift inför, under och efter läsningen
+    plats: efter-inledning
+    text: "Under lektionen går du från att tala till att lyssna."
+    kolumner: [När, Det du gör, Det eleverna gör]
+    rader:
+      - ["Inför läsningen", "Före lektionen väljer du texten, stoppen och tankestrategin du ska visa. I klassen ger du ett skäl att läsa och säger det texten tar för givet.", "Förutspår vad texten handlar om och säger varför."]
+      - ["Under tiden ni läser, tänker och samtalar", "Du tänker högt med strategin, ber paren göra samma sak och säger vad du hör. Sedan lämnar du över och lyssnar.", "Gör samma sak i par och prövar tankarna mot texten och mot varandra. Sedan leder de en bit själva."]
+      - ["Efter läsningen", "Du läser tavlan och säger vilken strategi som hjälpte och vad du hörde.", "Säger vad som tog dem vidare och skriver en lapp."]
+  - rubrik: Så väljer du text och stopp
+    plats: efter-inledning
+    meny: true
+    text: "Välj en text med något olöst. Sju till tjugo meningar räcker. Läs den själv först och lägg märke till var du stannar och vad du gör där, för det är den tankestrategi du ska visa. De första fyra veckorna väljer du en text där veckans strategi behövs. Välj sedan ett stopp till där samma strategi behövs, så att paren kan göra som du gjorde, och ett tredje där de väljer själva. Det kan vara textens slut. Vik texten vid stoppen, så att ingen läser före. Kan paren behöva stanna mitt i sista biten, viker du där också. Går det inte att skriva i texten, som i en lärobok, skriver paren ledtråden med egna ord på ett papper."
+    kolumner: [Bra stopp, Tankestrategin]
+    rader:
+      - ["En vändpunkt eller ett öppet slut", "Förutspå"]
+      - ["Något som väcker en fråga", "Ställa frågor"]
+      - ["Ett nytt ord, eller där en elev kan ta fel", "Reda ut"]
+      - ["Slutet på ett tätt stycke", "Sammanfatta"]
+  - rubrik: De tre dragen
+    plats: efter-progression
+    text: "Det är dina svar som håller samtalet igång. Med tre enkla drag låter du elevernas tankar ta samtalet vidare, i hela klassen och när du sitter hos ett par. Det gör metoden dialogisk. Vecka 2 till 4 övar du ett drag i taget."
+    kolumner: [Draget, Så kan det låta]
+    rader:
+      - ["Fråga det du själv undrar", "”Jag undrar varför hon stängde dörren så snabbt.”"]
+      - ["Ta upp det eleven sa", "”Du sa att hon har bråttom. Vad i texten får dig att säga det?”"]
+      - ["Låt en kamrat pröva tanken", "”Vad säger du om det Ali sa? Var ser du det?”"]
+  - rubrik: Vägen till vecka 12
+    plats: efter-progression
+    text: "Nu lämnar du över mer, och texterna kräver mer. Strategikorten tar du bort ett i taget, när eleverna har slutat titta på dem."
+    kolumner: [Veckorna, Klassen, Du, Gå vidare när]
+    rader:
+      - ["6–⁠7: Bygga vidare", "Eleverna tar upp varandras tankar och lägger ihop två ställen i texten. Den som läser tänker högt med en strategi där det tar stopp.", "Du tänker högt där du stannar, gärna om två ställen: ”Här står … och här står … Då …” Sedan väntar du långt bak i rummet.", "samtalet fortsätter utan dig i de flesta grupper"]
+      - ["8–⁠9: Grupperna leder", "Två elever leder var sin bit, som rutinen säger.", "Du viker också texten mitt i bit 3, lyssnar och säger vad du hörde.", "nästan alla har lett en bit två gånger"]
+      - ["10–12: Egen läsning", "Var och en läser en bit själv i sin egen kopia av texten, använder de strategier som behövs och sätter ett frågetecken där det tar stopp. Eleven tar frågan till gruppen, och lappen gäller den biten.", "Du flyttar arbetet till ämnets texter.", "nästan alla sätter ett frågetecken utan att du säger till"]
+  - rubrik: Dialogisk högläsning i F–⁠2
+    plats: efter-progression
+    meny: true
+    text: "I F–⁠2 läser du högt, och barnen talar. Barn förstår mer när de lyssnar än när de läser själva, så klassen kan samtala om en krävande text långt innan barnen kan läsa den. Tankestrategierna och gången är desamma: du visar, och barnen gör samma sak med sin kompis."
+    kolumner: [Det som ändras, I F–⁠2]
+    rader:
+      - ["Tiden", "Tjugo minuter tre gånger i veckan. Räkna med fler veckor än för de äldre."]
+      - ["Texten", "Välj en berättelse där orden berättar mer än bilderna."]
+      - ["Bilden", "Håll den dold vid ett stopp om förståelsen, tills barnen har svarat. Vid ett stopp om språk och ord får den stå framme."]
+      - ["Barnets minnen", "Välkomna när de förklarar texten. Led tillbaka: ”Tack. Vad sa boken om grannen?”"]
+      - ["Orden", "Ta två till fyra ord efter berättelsen, och sätt ett streck på tavlan när ordet hörs i veckan."]
+      - ["Strategikort och lapp", "Barnen har inga."]
+      - ["Det du räknar", "Lyssna hos samma fyra kompispar varje vecka: hur många par säger ett skäl ur det ni hört?"]
+      - ["Beslutet", "Fyra par: gå vidare, och från vecka 5 ställer ett barn nästa fråga. Tre par: ställ frågan en gång till. Två eller färre: tänk högt om stället, och läs det igen."]
+      - ["Det barnen tar över", "Frågan: du viskar den till ett barn, som säger den högt. Från vecka 8 ställer barnet frågan utan att du viskar."]
+      - ["Veckorna", "1 Förutspå: gissa med ett skäl. 2 Ställa frågor: egna frågor. 3 Reda ut: nya ord. 4 Sammanfatta: vad som hände först, sedan och sist. 5 Den viskade frågan."]
+  - rubrik: Dragen i dialogisk högläsning
+    plats: efter-progression
+    meny: true
+    kolumner: [Draget, Så gör du, Så kan det låta]
+    rader:
+      - ["Uppmana", "Be barnet berätta, och fråga om det som för berättelsen vidare.", "”Vad händer nu? Säg det till din kompis.”"]
+      - ["Ta upp", "Upprepa det barnet sa, och fråga vidare.", "”Du sa att hon tar bollarna. Varför gör hon det?”"]
+      - ["Bygga ut", "Lägg till ett ord, eller fråga efter det.", "”Var finns bollen? Kan vi få med det?”"]
+      - ["Låta barnet säga om", "Barnet säger den längre meningen själv, eller säger vad kompisen tänkte.", "”Säg hela meningen.”"]
+      - ["När svaret blir ett ord", "Upprepa ordet, läs om stycket och ställ samma fråga en gång till.", "”Tar. Jag läser igen. Vad gör grannen?”"]
+  - rubrik: Andra ämnen
+    plats: efter-progression
+    text: "De fyra tankestrategierna går att använda på allt som måste läsas noga. Gången är densamma: du visar, och eleverna gör samma sak. Sidorna Ta fram en faktatext och Ta fram ett matteproblem ger texter att börja med. Forskningen ger mest stöd för att eleverna läser ämnets texter bättre, och svagt stöd för att de kan mer av ämnet."
+    kolumner: [Ämnet, Texten, Så använder ni strategierna]
+    rader:
+      - ["Matematik", "En textuppgift", "Läs tre gånger: vad handlar det om, vad ska vi ta reda på och vad behövs? Reda ut det som är oklart, och pröva svaret mot problemet."]
+      - ["NO och teknik", "Ett stycke i läroboken", "Förutspå vad nästa stycke svarar på. Reda ut de ord texten tar för givet."]
+      - ["SO", "En källa, en karta eller en artikel", "Ställ frågor till källan: vem gjorde den, och när? Reda ut en karta eller ett begrepp."]
+      - ["Engelska, moderna språk", "En text på språket, gärna under elevernas nivå", "Ett stopp kan vara ett ord som ni reder ut. Ni får samtala på svenska, och paren skriver på det språk de klarar."]
+      - ["Hem- och konsumentkunskap, slöjd", "Ett recept eller en beskrivning", "Paren sammanfattar stegen före arbetet och förutspår vad som händer om de hoppar över ett."]
+      - ["Idrott och hälsa", "En regel eller en instruktion", "Paren sammanfattar regeln i en mening, prövar den i rörelse och skriver meningen efteråt."]
+  - rubrik: Orden
+    plats: efter-grund
+    text: Några ord kommer tillbaka i forskningen och i samtal med kollegor.
+    kolumner: [Ordet, Vad det betyder, Så kan det låta]
+    rader:
+      - ["Tankestrategi", "Ett medvetet sätt att komma vidare i en text. Forskningen säger lässtrategi.", "”Här tog det stopp, så jag läser om.”"]
+      - ["Överlämning", "Du visar och eleverna gör samma sak, först med stöd och till slut själva. Forskningen säger gradual release of responsibility, GRR.", "”Nu gör ni som jag gjorde.”"]
+      - ["Inferens, att läsa mellan raderna", "Att räkna ut det som inte står, genom att lägga ihop ledtrådar i texten med det man redan vet.", "”Hon har glitter på kinden, så hon har nog klippt i silverpappret.”"]
+      - ["Textkoppling", "Att koppla texten till sig själv, till en annan text eller till världen. Fråga efteråt om kopplingen hjälper er att förstå.", "”Det här påminner om när … Därför tror jag att Ruben är orolig.”"]
+      - ["Förkunskaper", "Det eleven redan vet om ämnet, orden och världen, och som texten tar för givet.", "”Ni behöver veta att riddare hade sköld och hjälm.”"]
+      - ["Att övervaka sin förståelse", "Att märka om man förstår medan man läser, och göra något när det tar stopp.", "”Vänta, det här förstår jag inte. Jag läser om det igen.”"]
+      - ["Inre bild av texten", "Den bild läsaren gör sig av vad som händer och ändrar när något nytt kommer. Forskningen säger mental modell.", "”Först såg jag henne stjäla. Nu ser jag något annat.”"]
+      - ["Stöttning", "Tillfällig hjälp som är lagom stor just nu och blir mindre när eleven klarar mer. Uppgiften är lika stor, och det är hjälpen som ändras.", "”Läs den här meningen igen. Vad säger den?”"]
+      - ["Att tänka högt", "Att säga sina tankar medan man läser, så att andra hör hur en läsare gör. Forskningen säger modellera.", "”Jag tror att … men jag är inte säker.”"]
+      - ["Dialogisk undervisning", "Ett samtal där elevernas tankar tar undervisningen vidare. Det gör du med de tre dragen.", "”Vad säger du om det?”"]
+  - rubrik: Tre textsamtal
+    plats: efter-grund
+    meny: true
+    text: "Metoden passar alla slags texter. Här är tre textsamtal, ett på varje nivå. Varje samtal har tre stopp och visar en tankestrategi. De passar från lektion 4, när klassen har rutinerna, och i F–⁠2 från vecka 5. På sidan Ta fram en lästext väljer du nivå och skriver ut texten. Till varje text finns Lärarens sida, med stoppet, ledtrådarna och en tanke att pröva. Läs texten själv först och öppna Lärarens sida sedan, så att du stannar där du själv undrar och tänker högt med egna ord."
+    kolumner: [Årskurs, Texten, Nivån, Tankestrategin, Fler texter]
+    rader:
+      - ["F–⁠2", "Över häcken", "Lättläst, text 24", "Förutspå: vad händer sedan?", "Tackfisken (20), Skeden (19), Hinken (22), Ingen såg (25)"]
+      - ["3–⁠5", "Någon har varit här", "Mellan, text 15", "Ställa frågor: läsaren förstår mer än Ruben", "Skrapet på dörren (2), Kartongen (7), Hinken i hallen (9), Snöret (12)"]
+      - ["6–⁠9", "Tio i elva", "Avancerad, text 17", "Reda ut: ett uttryck som går att ta bokstavligt", "Dagen före (10), Hjälptränaren (3), Nästan (9), Stenhuset (18)"]
+  - rubrik: "Textsamtal i F–⁠2: Över häcken"
+    plats: efter-grund
+    text: "Den här lektionen tar tjugo minuter. Före läsningen visar du häck och skjul på bild. Sedan läser du hela texten högt och visar Förutspå, och barnen gör samma sak med sin kompis. Snappfingrig är ett påhittat ord, så efteråt tar ni orden girig och skjul."
+    kolumner: [Delen, Du gör och säger, Lyssna efter]
+    rader:
+      - ["Inför läsningen", "”Här finns ett ord som ingen av oss har hört. Vi lyssnar för att lista ut vad det betyder.”", "Det barnen vet om en häck"]
+      - ["Jag tänker högt, efter ”fyrtiosju av barnens bollar”", "”Hon har låst in bollarna. Jag tror att barnen vill ha tillbaka dem, så något kommer att hända, men jag är inte säker. Jag gissade vad som kommer, och jag sa varför.”", "Det barnen säger om bollarna"]
+      - ["Vi tänker tillsammans, efter ”högt över häcken”", "”Nu gör ni som jag gjorde. Vad tror du händer nu? Säg det till din kompis, och säg varför.” Säg vad du hörde: ”Du sa vad som står, och du gissade vad som kommer.”", "Skäl ur det ni hört om grannen"]
+      - ["Ni tar över, efter sista meningen", "Viska frågan till ett barn, som säger den högt: ”Vad händer med fisken där inne?” Barnen svarar sin kompis.", "Lukten, som inte står i texten"]
+      - ["Efter läsningen", "”Stämde det vi trodde?” ”Varför kallas grannen snappfingrig?” Säg orden girig och skjul tillsammans, och låt barnen använda dem.", "Det barnen säger om vad grannen gör"]
+  - rubrik: "Textsamtal i 3–⁠5: Någon har varit här"
+    plats: efter-grund
+    text: "Det här är lektionen i exemplet i del 2, där du visar Ställa frågor. Skriv medeltidsdag och riddare på tavlan. Bit 2 slutar efter ”Gå och bli sjuk någon annanstans”, och paren läser resten."
+    kolumner: [Delen, Du gör och säger, Lyssna efter]
+    rader:
+      - ["Inför läsningen", "”Vi läser för att lista ut det texten inte säger.” Läs titeln: ”Vad tror du? Säg varför.”", "Skäl från titeln eller från något eleverna vet"]
+      - ["Jag tänker högt, efter ”tittade på taket”", "”Vänta. Varför tittar mamma på taket? Jag tror att hon inte tror på magontet, men jag är inte säker. Jag stannade och ställde en fråga till texten.”", "Vad eleverna säger om varför man tittar bort"]
+      - ["Vi tänker tillsammans, bit 2", "”Nu gör ni som jag gjorde. Vad undrar ni om Emelie? Säg det till din kamrat, och skriv frågan.” Säg vad du hör: ”Du frågar om något som inte står.”", "Frågor om glittret på kinden och dörren som stängs snabbt"]
+      - ["Ni tar över, bit 3", "Paren läser, stannar där det tar stopp och väljer själva tankestrategi. ”Den som läste frågar kamraten. Skriv en mening.”", "Frågar de vad Ruben inte förstår? ”Skölden är klar” och medeltidsdagen i första meningen"]
+      - ["Efter läsningen", "”Stämde det vi trodde?” ”Vilken strategi tog er vidare?”", "Frågor om vad Ruben säger nästa morgon"]
+  - rubrik: "Textsamtal i 6–⁠9: Tio i elva"
+    plats: efter-grund
+    text: "Här visar du Reda ut. Säg vad prao är, men vänta med ”is i magen”. Bit 2 slutar efter ”på riktigt”, och paren läser resten. Den som är ny i svenska får hjälp av kamraten med uttrycket under läsningen."
+    kolumner: [Delen, Du gör och säger, Lyssna efter]
+    rader:
+      - ["Inför läsningen", "”Har du någon gång missförstått vad någon menade? Vi läser för att se vad som händer då.” Paren berättar kort.", "När någon tog ett uttryck bokstavligt"]
+      - ["Jag tänker högt, efter ”gick ut i kylrummet”", "”Is i magen. Vad menar Henry? Nu förstod jag inte, så jag läser meningen före igen. Lejla har tappat kniven två gånger. Det står inte vad han vill. Jag märkte att det tog stopp och läste om.”", "Gissningar om Lejla och om uttrycket"]
+      - ["Vi tänker tillsammans, bit 2", "”Nu gör ni som jag gjorde. Varför skrattar Henry? Läs stället igen, säg din tanke till kamraten och skriv en mening.” Säg vad du hör: ”Du märkte att du inte förstod, och du läste om.”", "”tuggade i sig dem”, ”Tre bitar” och ”på riktigt”"]
+      - ["Ni tar över, bit 3", "Paren läser, stannar där det tar stopp och väljer själva tankestrategi. ”Den som läste frågar kamraten. Skriv en mening.”", "Frågar de vad Lejla har förstått? ”som om han hade hela eftermiddagen på sig” och ”Hon skar långsammare”"]
+      - ["Efter läsningen", "”Vad betyder uttrycket, och var visar Henry det?” ”Vilken strategi tog er vidare?”", "”Ha is i magen” sist i texten"]
+  - rubrik: Utveckla metoden
+    plats: efter-grund
+    kolumner: [Det du bygger på, När]
+    rader:
+      - ["Samtal om två texter: var skiljer de sig åt?", "När arbetsområdet har texter som går att jämföra"]
+      - ["Rondellen och Läs och fråga på sidan Strukturer, där alla turas om att tala", "När samma elever alltid talar först"]
+      - ["Eleverna bestämmer själva vad de vill ta reda på i texten", "När lappen har blivit en vana"]
+centrala:
+  - { id: lastexter, efterText: "tabell: Tre textsamtal" }
+  - { id: faktatexter, efterText: "tabell: Andra ämnen" }
+  - { id: matteproblem, efterText: "tabell: Andra ämnen" }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 2 Lektionen
+# ---------------------------------------------------------------------------------------------------------------------
+tidsschema:
+  rubrik: En lektion på 45 minuter
+  rader:
+    - { tid: Före lektionen, fas: Före lektionen, vad: "Välj en text med något olöst och läs den själv, för där du stannar ser du vilken tankestrategi du ska visa. Välj sedan tre stopp enligt tabellen Så väljer du text och stopp, och vik texten där. Förbered högst tre ord, och bestäm vad du inte gör i dag." }
+    - { tid: 0–⁠7 min, fas: Inför läsningen, form: Gemensamt, vad: "Du säger varför ni läser och vad eleverna behöver veta. Paren förutspår vad texten handlar om." }
+    - { tid: 7–⁠12 min, fas: Jag tänker högt, form: Läraren visar, vad: "Du läser bit 1, stannar där du undrar och tänker högt med en tankestrategi. Paren säger vad de tänker." }
+    - { tid: 12–⁠26 min, fas: Vi tänker tillsammans, form: I par, vad: "Du läser bit 2, och paren använder samma strategi med din fråga som stöd. De skriver en mening och får återkoppling. Sedan prövar klassen två på tavlan." }
+    - { tid: 26–⁠36 min, fas: Ni tar över, form: I par, vad: "Paren läser bit 3 växelvis, stannar själva där det tar stopp och väljer tankestrategi. Du sitter hos ett par i taget." }
+    - { tid: 36–⁠45 min, fas: Efter läsningen, form: Gemensamt, vad: "Ni går tillbaka till gissningarna, samlar det ni vet och det som är olöst, och säger vilken strategi som tog er vidare. Alla skriver lappen." }
+    - { tid: Efter lektionen, fas: Efter lektionen, vad: "Läs lapparna, och stryk under ledtråden när den stöder tanken. Välj en fråga ur det olösta till nästa lektion, och skriv ner två repliker du minns." }
+  varianter:
+    - nar: första lektionen
+      delar:
+        - { fas: Inför läsningen, tid: 0–⁠15 min, fraser: ["Vi läser för att se om våra gissningar stämmer."] }
+        - { fas: Jag tänker högt, tid: 15–⁠25 min, fraser: ["Jag tror att … men jag är inte säker.", "Det jag gjorde heter att förutspå."] }
+        - { fas: Vi tänker tillsammans, tid: 25–⁠35 min, fraser: ["Nu gör ni som jag gjorde.", "Peka på ordet som fick dig att tänka så."] }
+        - { fas: Ni tar över, tid: 35–⁠40 min, fraser: ["Läs resten växelvis. Stämde det?"] }
+        - { fas: Efter läsningen, tid: 40–⁠45 min, fraser: ["Vad tog er vidare i texten?"] }
+    - nar: lektion 2 och 3
+      text: "Texten har två stopp, ett för dig och ett för paren. I lektion 2 sätter du ett frågetecken i din text där du stannar, så att paren ser hur de ska göra. De stryker också under ett ord som ledtråd. I lektion 3 skriver paren sin första mening, och alla skriver lappen för första gången. Från lektion 4 har texten tre stopp. Minuterna:"
+      delar:
+        - { fas: Inför läsningen, tid: 0–⁠10 min }
+        - { fas: Jag tänker högt, tid: 10–⁠20 min }
+        - { fas: Vi tänker tillsammans, tid: 20–⁠32 min }
+        - { fas: Ni tar över, tid: 32–⁠38 min }
+        - { fas: Efter läsningen, tid: 38–⁠45 min }
+    - nar: från vecka 5
+      text: Du behöver inte visa lika länge, så paren får mer tid själva.
+      delar:
+        - { fas: Inför läsningen, tid: 0–⁠7 min }
+        - { fas: Jag tänker högt, tid: 7–⁠11 min }
+        - { fas: Vi tänker tillsammans, tid: 11–⁠23 min }
+        - { fas: Ni tar över, tid: 23–⁠36 min }
+        - { fas: Efter läsningen, tid: 36–⁠45 min }
+    - nar: en lektion i F–⁠2
+      text: "Tre korta lektioner i veckan i stället för två långa. Du läser allt, och barnen talar med sin kompis, som tabellen Dialogisk högläsning i F–⁠2 visar."
+      delar:
+        - { fas: Inför läsningen, tid: 0–⁠3 min }
+        - { fas: Jag tänker högt, tid: 3–⁠6 min }
+        - { fas: Vi tänker tillsammans, tid: 6–⁠12 min }
+        - { fas: Ni tar över, tid: 12–⁠15 min }
+        - { fas: Efter läsningen, tid: 15–⁠20 min }
+    - nar: tjugo minuter i veckan, efter vecka 12
+      text: "En kort lektion på en text i ämnet kan hålla vanan vid liv. Paren skriver sin mening, och klassen prövar två på tavlan."
+      delar:
+        - { fas: Inför läsningen, tid: 0–⁠3 min }
+        - { fas: Jag tänker högt, tid: 3–⁠6 min }
+        - { fas: Vi tänker tillsammans, tid: 6–⁠14 min }
+        - { fas: Ni tar över, tid: 14–⁠18 min }
+        - { fas: Efter läsningen, tid: 18–⁠20 min }
+  efter: "Minuterna gäller från lektion 4 och är hållpunkter."
+steg:
+  rader:
+    - namn: Inför läsningen
+      fraga: "Varför läser vi, och vad tror vi?"
+      alla: Var och en säger till sin kamrat vad klassen ska ta reda på, och vad hen tror.
+      titta: Kan eleverna säga vad ni ska ta reda på?
+      beslut: "Saknas något eleverna behöver veta, så säg det kort nu. Annars börjar ni läsa."
+      gor:
+        - "Börja med det olösta: ”Det här undrade någon förra gången.” Passar det inte nästa text, gör det till en fråga om hur man läser."
+        - "Säg varför ni läser: ”Vi läser för att ta reda på …” Skriv orden du valde på tavlan."
+        - Ge tillbaka lapparna och dela ut en text per par, med de Strategikort ni har.
+        - "Läs titeln, och låt paren förutspå: ”Vad tror du, och varför?”"
+        - Skriv en gissning på tavlan.
+      fraser: ["Vi läser för att ta reda på …", "Vad tror du? Vad fick dig att tänka så?"]
+    - namn: Jag tänker högt
+      fraga: "Hur tänker jag här?"
+      alla: Paren följer med pennan och sätter ett frågetecken där de själva stannar.
+      titta: Följer pennorna texten, och vem ser ut att undra?
+      beslut: "Tappar du klassen, gör det kortare och låt paren tala."
+      gor:
+        - "Läs bit 1 och stanna där du själv undrar. Visa stället i texten."
+        - "Tänk högt med strategin och låna orden ur tabellen Så låter det med varje tankestrategi: ”Jag undrar varför … Jag tror att …”"
+        - "Säg vad du gjorde: ”Jag ställde en fråga till texten.” Är strategin ny, säger du vad den heter och visar kortet."
+        - "”Var satte ni frågetecknet? Säg det till din kamrat.” Paren talar en minut."
+      fraser: ["Jag tror att … men jag är inte säker.", "Det jag gjorde heter …"]
+    - namn: Vi tänker tillsammans
+      fraga: "Kan ni göra som jag gjorde?"
+      alla: Båda säger sin tanke. Kamrat 1 skriver meningen, kamrat 2 stryker under ledtråden och säger varför.
+      titta: Hur många par har gjort något annat, eller saknar en ledtråd?
+      beslut: "Ett av tre utfall, nedan."
+      gor:
+        - "Läs bit 2. ”Nu gör ni som jag gjorde.” Ställ strategins fråga, till exempel ”Vad undrar ni?” Paren tänker tyst, talar och skriver."
+        - "Gå runt och säg vad paren gjorde, till exempel ”Du frågar om något som inte står.” Räkna par utan ledtråd och välj utfall."
+        - "Skriv två olika meningar på tavlan, som i rutinen Meningen på tavlan, och fråga: ”Vilken håller? Var ser du det?”"
+        - "”Vad säger du om det Ali sa?” Var tyst medan två elever talar efter varandra."
+        - "”Titta på er egen mening. Håller den? Ändra den, eller stryk under en annan ledtråd.”"
+      fraser: ["Nu gör ni som jag gjorde.", "Vilken håller? Var ser du det?"]
+      redo:
+        nastanAlla: "Högst 5 av 28 elever i par utan ledtråd, alltså högst två par. Paren tar nästa bit själva, och du sätter dig hos paren utan ledtråd, ett i taget."
+        deFlesta: "6–13 av 28 elever i par utan ledtråd, alltså tre till sex par. Paren tar nästa bit med ett stopp mitt i, där varje par visar sin ledtråd för paret bredvid."
+        halften: "14 eller fler av 28 elever i par utan ledtråd, alltså sju par eller fler. Visa en gång till, så skriver paren om. Läs sedan nästa bit, så samtalar paren."
+        tiden: "Räcker inte tiden, var kort vid tavlan, ge paren en kortare bit och skriv upp det olösta. Nästa lektion börjar där."
+    - namn: Ni tar över
+      vem: "i par, sedan i grupp"
+      fraga: "Vem tänker nu?"
+      alla: Paren stannar där det tar stopp, väljer tankestrategi och skriver en mening med en ledtråd.
+      titta: Tar paren ett kort själva, eller väntar de på dig?
+      beslut: "Sitt hos det par som behöver dig, och gå när samtalet är igång."
+      gor:
+        - "Peka ut biten och säg hur länge: ”Läs växelvis, och stanna där det tar stopp. Ta det kort ni behöver.”"
+        - "”Den som läste frågar kamraten. Skriv sedan en mening. Är ni klara, fråga varandra om ett nytt ställe.”"
+        - "Sitt hos ett par i taget, och stå långt bak när du byter par."
+        - "Säg vad paret gjorde: ”Ni stannade själva och läste om.” Väntar paret på dig, säg: ”Fråga din kamrat först.”"
+        - Hör du något klassen behöver, skriv det på tavlan utan att värdera det.
+      fraser: ["Stanna där det tar stopp.", "Fråga din kamrat först."]
+    - namn: Efter läsningen
+      fraga: "Vad vet vi nu, och vad hjälpte?"
+      alla: Var och en skriver en egen tanke som inte står på tavlan, en ledtråd och en sak som är olöst.
+      titta: Kan eleverna säga vilken strategi som tog dem vidare?
+      beslut: "Det olösta och lapparna avgör var nästa lektion börjar."
+      gor:
+        - "”Fick vi reda på det vi ville? Stämde det vi trodde?”"
+        - Läs tavlan, och låt eleverna rätta dig.
+        - "”Vilken tankestrategi tog er vidare i dag? Säg till din kamrat vad hen gjorde som hjälpte.”"
+        - Säg vad du hörde, och vilken strategi som hjälpte.
+      fraser: ["Fick vi reda på det vi ville?", "Vilken tankestrategi tog er vidare i dag?"]
+lektionskort:
+  - { efter: klassen, text: "Lektionens fem delar står på lektionskortet, ett eget A4 i din hand under lektionen." }
+fastnar:
+  rubrik: Så stöttar du
+  text: "Tystnad betyder ofta att eleven tänker, så vänta först. Ge sedan minsta möjliga stöd, så att tänkandet stannar hos eleven. Håller en tanke inte, läser ni stället igen, och eleven får ändra sig. Kravet på en ledtråd står kvar, och det är stödet du ökar."
+  trappa: ["Vänta: ”Ta en stund till.”", "Läs stället igen: ”Var i texten?”", "Fråga en kamrat: ”Vad säger du om det?”", "Ställ en mindre fråga om texten.", "Visa en gång till: tänk högt om samma ställe.", "Kom tillbaka vid nästa bit."]
+  motto: Texten svarar först, kamraten sedan och du sist.
+amnesexempel:
+  - amne: lasning
+    amnesnamn: Svenska
+    arskurs: åk 4
+    innehall: Att ställa frågor till en berättelse och visa vad som fick en att undra
+    huvud: true
+    arbetsomradet:
+      - "Korta berättelser, Förutspå och parrutinen (lektion 1–⁠2)"
+      - "Berättelser där läsaren vet mer än personen, Ställa frågor (lektion 3–⁠4)"
+      - "Texter med nya ord, Reda ut (lektion 5–⁠6)"
+      - "Sedan ett stycke i SO, Sammanfatta"
+    overst:
+      visar: "En fråga på parets papper, och stället som fick dem att undra är understruket."
+    plan:
+      amne: Svenska
+      klass: 4B
+      datum: tors 19/11
+      lektion: 4 av 6
+      mal: ställa frågor till texten och visa stället som fick en att undra
+      belagg: lappen med en egen tanke och en ledtråd
+      blad: Någon har varit här, ett papper per par, vikt vid stoppen
+      forberett: Medeltidsdag och riddare med bild, dagen före till studiehandledaren
+      fore: { stopp: ["Bit 1, ”tittade på taket”: jag frågar varför mamma tittar dit.", "Bit 2, ”någon annanstans”: paren frågar om Emelie.", "Bit 3, slutet: paren stannar själva."], undrar: "Ställa frågor", varfor: "Lista ut det texten inte säger", veta: "Riddare hade sköld och hjälm", ord: "medeltidsdag, riddare", inte: "Jag säger inte vem som har rätt." }
+      delar:
+        - { fas: Inför läsningen, text: "Det olösta från förra lektionen. Titeln: vad tror du, och varför?" }
+        - { fas: Jag tänker högt, text: "”Varför tittar mamma på taket? Jag tror … men jag är inte säker.” Jag säger vad jag gjorde." }
+        - { fas: Vi tänker tillsammans, text: "”Nu gör ni som jag gjorde. Vad undrar ni om Emelie?” En fråga med en ledtråd. Jag säger vad paren gjorde." }
+        - { fas: Ni tar över, text: "Paren läser bit 3, stannar själva och frågar varandra. En mening med en ledtråd. Sedan en fråga de inte kan svara på än." }
+        - { fas: Efter läsningen, text: "Tillbaka till gissningarna. Vilken strategi tog er vidare? Lappen." }
+      beslut: { elever: 28, nastanAlla: "paren utan ledtråd", deFlesta: "vid ”Skölden är klar”", halften: "dörren som stängs snabbt" }
+      efter: { kontrollen: "8 elever i par utan ledtråd: De flesta", hogar: "22 av 28. Det olösta: varför bad Ruben inte om hjälp?", sag: "”Då gör hon kanske något där inne.”", kryss: [1, 2, 3, 4], nasta: "Hur vet en läsare vad en person inte säger?", forst: "de sex eleverna som inte skrev en egen tanke" }
+    remsa:
+      - "Veckans tankestrategi är Ställa frågor. Klassen läser för att lista ut det texten inte säger."
+      - "”Varför tittar mamma på taket? Jag tror … men jag är inte säker. Jag ställde en fråga till texten.”"
+      - "”Nu gör ni som jag gjorde. Vad undrar ni om Emelie?” Paren skriver, och du säger vad du hör."
+      - "Paren läser bit 3, stannar själva och frågar varandra. Du är tyst."
+    scen:
+      - "Tänk dig lektion 4 i svenska i åk 4. Veckans tankestrategi är Ställa frågor, och klassen läser Någon har varit här. Du stannar efter bit 1: ”Varför tittar mamma på taket? Jag tror att hon inte tror på magontet, men jag är inte säker.” Sedan säger du: ”Jag ställde en fråga till texten.”"
+      - "Efter bit 2 säger du: ”Nu gör ni som jag gjorde. Vad undrar ni om Emelie?” Paren skriver en fråga och stryker under stället. Du går runt: ”Ni frågar om något som inte står.” Fyra par saknar en ledtråd, alltså 8 av 28 elever. Du skriver ”Är Emelie arg på Ruben?” och ”Vad gör hon där inne?” och frågar: ”Vilken fråga tar oss vidare?” En elev säger: ”Hon stänger dörren snabbt.” En annan tar upp det: ”Då gör hon kanske något där inne.” Du säger inget."
+      - "De flesta kan, så paren läser bit 3 med ett stopp vid ”Skölden är klar”. Nu frågar de utan din hjälp: ”Vad är skölden till?” Kamraten säger: ”Det är till honom!”"
+    notera: "Notera vad som hände. Paren gjorde samma sak som du, först med din fråga och sedan utan den. Det är överlämningen. Två frågor som skilde sig åt gav klassen något att pröva, så du behövde inte lyssna på fjorton par i tur och ordning. Med högst två par utan ledtråd hade paren tagit bit 3 själva, och med sju hade du visat en gång till."
+  - amne: skrivning
+    arskurs: åk 5
+    innehall: Att bearbeta en berättelse efter vad en läsare förstår
+    overst:
+      egen: "Kamraten ställer frågor till texten och sätter frågetecken där det tar stopp. Felet: kamraten rättar stavningen."
+      visar: "Frågetecken i marginalen, och en mening om vad kamraten tror att författaren menar."
+    scen:
+      - "Tänk dig en lektion i svenska i åk 5, där tankestrategin är Ställa frågor. Eleverna har skrivit en första version av en berättelse, och i dag läser en kamrat den som läsare."
+      - "Du visar på tavlan en text som en elev har lånat ut, och tänker högt: ”Vem är han? Jag tror att det är brodern, men det står inte. Jag ställde en fråga till texten.”"
+      - "I Vi tänker tillsammans byter paren texter: ”Nu gör ni som jag gjorde. Vad undrar ni?” De läser en bit i taget och sätter frågetecken. Du går runt och hör en kamrat säga: ”Vem är han? Jag trodde att det var pappan.” Då säger du: ”Du frågar om något som inte står.” Två par har bara rättat stavning, alltså 4 av 28 elever. Nästan alla kan, så paren fortsätter medan du sitter hos de två. Sist skriver varje författare en mening i sin text där kamraten stannade."
+    notera: "Notera vad som hände. Författaren såg var läsaren stannade, och det ser man inte i sin egen text. Om sju par hade rättat stavning, hade du visat en gång till."
+  - amne: matematik
+    arskurs: åk 3
+    innehall: Att reda ut en textuppgift med division och rest innan klassen räknar
+    overst:
+      egen: "Du stannar och läser om frågan, och paren gör samma sak. Felet: paren räknar innan de har läst."
+      visar: "Vad svaret måste klara, och ledtråden understruken i problemet."
+    scen:
+      - "Tänk dig en lektion i matematik i åk 3, där tankestrategin är Reda ut. På papperet står: ”Grannklassen har 22 elever. De ska åka bil till simhallen, som öppnar klockan nio. Det får plats 4 elever i varje bil. Hur många bilar behövs?”"
+      - "Du läser högt och stannar vid klockan nio: ”Behövs det? Jag läser frågan igen. Nej, den gäller bilar. Jag stannade och läste om.” Sedan säger du: ”Nu gör ni som jag gjorde. Vad måste svaret klara?” Paren skriver och stryker under ledtråden. Åtta par har redan räknat utan ledtråd, alltså 16 av 28 elever."
+      - "Hälften eller färre kan, så du visar en gång till: ”Vad måste gälla för alla 22?” Paren skriver om, och du säger: ”Ni läste frågan före talen.” Du skriver svaren ”5 och 2 över” och ”6 bilar”. ”Vilket håller? Var ser du det?” Klassen säger att ingen får bli kvar. Paren läser ett nytt problem själva, och på lappen står vad svaret måste klara, med en ledtråd."
+    notera: "Notera vad som hände. Texten sa inte att alla ska med, så eleverna fick tänka som i en berättelse. Frågan om vad som inte behövs tog bort simhallens tid. Med högst två par utan ledtråd hade paren räknat vidare själva."
+  - amne: so-no
+    amnesnamn: NO
+    arskurs: åk 8
+    innehall: Att sammanfatta ett stycke om kolets kretslopp i läroboken
+    overst:
+      egen: "Du sammanfattar stycket i en mening, och paren gör samma sak med nästa stycke. Felet: paren skriver av boken."
+      visar: "En mening om stycket, och ledtråden med egna ord på ett papper, eftersom boken inte går att skriva i."
+    scen:
+      - "Tänk dig en lektion i NO i åk 8, där du visar Sammanfatta. Klassen läser om kolets kretslopp i läroboken, och du stannar efter första stycket: ”Det var mycket på en gång. Det här stycket handlar om hur växterna tar upp kol ur luften. Jag tog det viktigaste och lämnade resten.”"
+      - "Nästa stycke heter Kolet kommer tillbaka. ”Nu gör ni som jag gjorde. Sammanfatta stycket i en mening.” Paren skriver meningen och visar ledtråden, det viktigaste stället. Du går runt och säger: ”Du tog med det viktigaste och lämnade resten.” Två par saknar en ledtråd, alltså 4 av 28 elever."
+      - "Nästan alla kan, så paren läser nästa stycke själva medan du sitter hos de två. Ett par som har skrivit att kolet försvinner läser om stycket och ändrar meningen. En elev undrar varför kolet i olja inte kom tillbaka förrän vi började elda den. På lappen skriver alla en egen mening om stycket med ämnets ord och en ledtråd."
+    notera: "Notera vad som hände. I faktatext finns ett svar, och paret ändrade sin mening själv när det prövade den mot texten. Frågan om oljan blev nästa lektions skäl att läsa. Med sju par utan ledtråd hade du visat en gång till."
+  - amne: praktisk-estetiska
+    amnesnamn: Hem- och konsumentkunskap
+    arskurs: åk 7
+    innehall: Att läsa ett recept före arbetet
+    overst:
+      egen: "Du ställer en fråga till receptet, och paren gör samma sak. Felet: paren börjar baka utan att ha läst."
+      visar: "En mening om varför man vänder försiktigt, och steget i receptet."
+    scen:
+      - "Tänk dig en lektion i hem- och konsumentkunskap i åk 7, där klassen ska baka en sockerkaka. Inför läsningen säger du varför ni läser. Sedan tänker du högt: ”Varför står det vispa pösigt? Jag tror att det har med luften att göra, men jag är inte säker. Jag ställde en fråga till receptet.”"
+      - "I Vi tänker tillsammans ber du paren läsa nästa steg: ”Nu gör ni som jag gjorde. Vad undrar ni om det?” De frågar varför man ska vända ner mjölet försiktigt, prövar ett svar, skriver det och visar steget i receptet. Du går runt och säger: ”Ni frågar varför det står så.” Tre par saknar en ledtråd, alltså 6 av 28 elever."
+      - "De flesta kan, så paren läser nästa steg själva med ett stopp, där de visar sin ledtråd för paret bredvid. Du frågar: ”Vad gör luften i smeten?” En elev säger: ”Den lyfter kakan, så den får inte försvinna.” Sedan börjar klassen baka."
+    notera: "Notera vad som hände. Du undrade varför, så eleverna läste receptet som en text med skäl. Med sju par utan ledtråd hade du visat en gång till."
+stod:
+  rubrik: Elever som behöver mer stöd
+  rader:
+    - { nar: Den som är ny i svenska, metoden: "Samma text och samma fråga som klassen, tyst stund innan paren talar, Strategikortens meningar att låna och en lapp med ledtråden avskriven och tanken på sitt språk eller som bild.", du: "Ge texten och tre ord med bild dagen före. Eleven pekar ut ledtråden och säger tanken på sitt språk eller med ett ord. Kamraten säger den på svenska och skriver den på lappen, och eleven upprepar den." }
+    - { nar: Den som läser mödosamt, metoden: "Bit 1 och 2 läser du, så att alla kan tänka med, och den som vill slipper läsa högt.", du: "Kamraten läser bit 3, eller så lyssnar eleven på den inlästa texten. Eleven säger vad hen tänker, och kamraten skriver, också på lappen. Eleven pekar ut ledtråden och ställer frågan." }
+    - { nar: Den som sällan säger något, metoden: "Tyst stund, par och en mening som du kan skriva på tavlan utan namn.", du: "Fråga eleven om du får skriva hens mening på tavlan. Låt eleven låna en mening från Strategikortet, och låt kamraten börja." }
+    - { nar: När många behöver hjälp samtidigt, metoden: "Utfallet i Vi tänker tillsammans säger vad du gör.", du: "Visa en gång till: tänk högt om stället. Medan paren skriver om, hjälper du ett par i taget." }
+    - { nar: När metoden inte räcker, metoden: "Lapparna visar det: samma elev saknar en egen tanke med en ledtråd två veckor i rad.", du: "Spara lapparna, och ta dem med till specialläraren: är det orden, läsningen eller förståelsen? Textsamtal i grupp är stödet för en liten grupp." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 3 Kom igång
+# ---------------------------------------------------------------------------------------------------------------------
+checklista:
+  rubrik: Före första lektionen
+  punkter:
+    - Träffa arbetslaget, eller en kollega om du börjar ensam, och bestäm signalen.
+    - Välj ämnet och minst två lektioner i veckan. I 7–⁠9 kan en vara i svenska och en i SO eller NO.
+    - Välj fyra till sex texter i ett arbetsområde, till exempel ur tabellen Tre textsamtal i bilaga A.
+    - Planera första lektionen i planeringsmallen, och skriv varför ni läser så här.
+    - Skriv ut lektionskortet, en text per par och Strategikorten Förutspå och Ställa frågor, ett ark per par och ett åt dig.
+    - Bestäm paren, och ställ bänkarna så att paren ser varandra och alla ser tavlan.
+    - Boka specialläraren till sista lektionen i vecka 2 och en kollega i vecka 4.
+klassen:
+  rubrik: Så ordnar du klassen
+  text: "Eleverna sitter i fasta par, som du bestämmer de första veckorna. Kamrat 1 och kamrat 2 turas om att börja och att skriva, och varje par har en text, så att paret tänker på samma papper. Den som läser mödosamt sitter bredvid en kamrat som gärna hjälper, och den som är ny i svenska bredvid en kamrat som har kommit längre, gärna med samma språk. Blir en elev över, sitter hen med paret bredvid, som en trio. Från vecka 5 sitter två par ihop i Ni tar över, läser växelvis och skriver en gemensam mening. I Vi tänker tillsammans sitter eleverna kvar i sina par."
+forsta:
+  rubrik: Första lektionen
+  text:
+    - "Först lär sig klassen parrutinen på något lätt. Sedan läser ni en kort text med två stopp, som Skrapet på dörren (Mellan, text 2) eller Dagen före (Avancerad, text 10) på sidan Ta fram en lästext. Vid det första stoppet tänker du högt med Förutspå, säger vad strategin heter och visar kortet. Vid det andra gör paren samma sak och pekar på ordet som fick dem att gissa."
+    - "Säg varför ni läser så här: ”Vi läser en text och tänker tillsammans om den. Jag läser högt och stannar, så att ni hör hur jag tänker. Sedan gör ni samma sak två och två.” Säg också att du inte har något facit."
+    - "Lektion 2 går likadant, men parrutinen tar fem minuter, och paren stryker under ordet i stället för att peka."
+  plan:
+    amne: Svenska
+    klass: 4B
+    datum: mån 9/11
+    lektion: 1 av 6
+    mal: förutspå med ett skäl, och lyssna
+    belagg: ordet paren pekar på
+    blad: Skrapet på dörren, en per par
+    forberett: Bild på sågspån, till alla
+    fore: { stopp: ["”låset”: jag gissar vad som kommer.", "”klibbig”: paren gissar vad vi får veta."], undrar: "Förutspå", varfor: "Se om våra gissningar stämmer", veta: "Vad sågspån är", ord: "sågspån", inte: "Jag säger inte var katten har varit." }
+    delar:
+      - { fas: Inför läsningen, text: "Parrutinen, femton minuter: vad åt du till lunch? Sedan: ”Vi läser för att se om våra gissningar stämmer.”" }
+      - { fas: Jag tänker högt, text: "”Något skrapar, och Elias säger tre dagar. Jag tror att någon kommer hem nu, men jag är inte säker. Det jag gjorde heter att förutspå.”" }
+      - { fas: Vi tänker tillsammans, text: "”Nu gör ni som jag gjorde. Vad tror ni att vi får veta nu? Peka på ordet som fick dig att tänka så.” Säg vad du hörde: ”Ni gissade med ett skäl.”" }
+      - { fas: Ni tar över, text: "”Läs resten växelvis. Stämde det?”" }
+      - { fas: Efter läsningen, text: "”Stämde det vi trodde? Vad tog er vidare i texten?”" }
+    beslut: { elever: 28, nastanAlla: "par som inte pekar", deFlesta: "”målarburk”", halften: "den blå fläcken" }
+    efter: { kontrollen: "___ elever i par utan ledtråd", hogar: "Ingen lapp i dag. Olöst:" }
+rutiner:
+  rubrik: Rutinerna klassen lär sig
+  rader:
+    - namn: Parrutinen
+      vecka: 1
+      vad: "Så talar alla. Kamrat 1 svarar med en till två meningar, kamrat 2 lyssnar utan att avbryta, och sedan byter de. Två regler står på tavlan: vi lyssnar färdigt, och vi prövar tanken och inte personen. Skrattar någon åt ett svar, stanna och säg regeln."
+      steg: ["Ställ en kort fråga, och vänta en stund.", "”Kamrat 1 börjar.”", "”Byt.”", "Ge signalen att sluta, till exempel en hand i luften, och be en elev säga vad kamraten sa."]
+      forsta: Visa med två elever framme, på något lätt som vad ni åt till lunch. Byt vem som börjar, och öva tills det sitter.
+    - namn: Meningen på tavlan
+      vecka: 2
+      vad: "Så syns hela klassens tänkande. Paren skriver på sitt papper, och du skriver två meningar på tavlan utan namn."
+      steg: ["Läs vad paren skriver, och vänta en stund.", "Välj två meningar som skiljer sig åt. Har paren skrivit frågor, skriver du två av dem och frågar: ”Vilken fråga tar oss vidare? Var ser du det?” Har de sammanfattat biten, frågar du: ”Vilken säger det viktigaste till den som inte har läst?” Har alla par skrivit samma sak, skriver du en mening och en fråga.", "”Säg det till din kamrat.” Fråga sedan en elev.", "Skriv det ni vet under Det vet vi nu och resten under Det är olöst, och spara spalterna till nästa lektion."]
+      forsta: "Rutinen börjar i lektion 3. Skriv själv en mening om en bit ni har läst, stryk under ledtråden och låt klassen säga varför just de orden stöder meningen. Ta sedan två meningar från paren. I Någon har varit här får ”Emelie gör något hemligt” stöd av ”stängde dörren snabbare än vanligt” men inte av ”Tejpen var borta”, eftersom de orden bara säger att något saknas. Ledtråden till en fråga är stället som fick paret att undra, och ledtråden till en sammanfattning är meningen som säger det viktigaste. Visa en lapp som räknas: ”Emelie gör en sköld åt Ruben. Det står ’Skölden är klar’. Olöst: varför bad han inte om hjälp?” Vecka 4 visar du Sammanfatta på bit 1, och paren gör samma sak med bit 2."
+    - namn: Nya ord
+      vecka: 3
+      vad: Fråga efter nya ord, aldrig svåra. Skriv orden på tavlan när eleverna säger dem, och reda ut dem ur meningen före och efter. Ordboken tar ni sist.
+      forsta: "Säg själv ett nytt ord ur texten: ”Det här ordet kan vara nytt för någon. Vad säger meningen före?” Skriv det på tavlan."
+    - namn: Fråga, avgör, lämna över
+      vecka: 5
+      vad: "Eleven ställer en fråga till en kamrat och avgör om svaret håller, och sedan ställer kamraten nästa fråga. I grupp säger du: ”Du väljer vem som fortsätter.” Från vecka 8 leder en elev hela biten: hen väljer strategi, frågar, avgör om svaret håller och säger sist vad gruppen förstod. Nästa elev leder nästa bit. Den som behöver det leder med Strategikortet och kamraten bredvid."
+      forsta: Led själv först, och låt eleverna välja vem som får frågan. Lämna sedan över frågan till dem. Vecka 8 leder en grupp en bit framför klassen, och klassen säger vad ledaren gjorde.
+progression:
+  rubrik: De första fem veckorna
+  text: "Alla delar av kärnan finns från första lektionen, så veckorna säger vilken tankestrategi ni lägger till. I veckans första lektion visar du strategin, säger vad den heter och vad den är bra för och ber paren göra samma sak. Sedan ligger Strategikortet med de andra hos paren, och texten avgör vilket ni tar. Välj veckans texter så att strategin behövs, till exempel en text med nya ord i vecka 3 och en faktatext i vecka 4. Lärare och elever behöver tid, så en dålig vecka hör till. Då kan ni ge strategin en vecka till."
+  rader:
+    - { vecka: "1", led: I par, rubrik: "Förutspå och parrutinen", fokus: "Du visar Förutspå, och klassen lär sig parrutinen.", eleverna: "Att svara i par, och att gissa med ett skäl, som du gjorde.", roll: "Att tänka högt en gång, och vänta.", vidare: "nästan alla par har strukit under ett ord och kan säga varför", fraga: "Har nästan alla par strukit under ett ord och kan säga varför?" }
+    - { vecka: "2", led: Tankestrategierna, rubrik: Ställa frågor, fokus: "Du visar Ställa frågor, och klassen lär sig rutinen Meningen på tavlan.", eleverna: "Att ställa en fråga kamraten behöver tänka på. Några skriver du under Det är olöst.", roll: "Att fråga det du själv undrar.", vidare: "de flesta par skriver en fråga de inte kan svara på än", fraga: "Skriver de flesta par en fråga de inte kan svara på än?" }
+    - { vecka: "3", led: Tankestrategierna, rubrik: Reda ut, fokus: "Du visar Reda ut, och klassen lär sig rutinen Nya ord.", eleverna: "Att hitta nya ord och reda ut dem.", roll: "Att ta upp det eleven sa.", vidare: "de flesta par har satt ett frågetecken vid ett nytt ord och skrivit vad det kan betyda", fraga: "Har de flesta par satt ett frågetecken vid ett nytt ord och skrivit vad det kan betyda?" }
+    - { vecka: "4", led: Tankestrategierna, rubrik: Sammanfatta, fokus: "Du visar Sammanfatta på en faktatext.", eleverna: "Att säga det viktigaste i en bit med en mening.", roll: "Att låta en kamrat pröva tanken.", vidare: "de flesta par sammanfattar biten i en mening och stryker under det viktigaste stället", fraga: "Sammanfattar de flesta par biten i en mening och stryker under det viktigaste stället?" }
+    - { vecka: "5", led: Ni tar över, rubrik: "Fråga, avgör, lämna över", fokus: "Två par sitter ihop och övar rutinen Fråga, avgör, lämna över.", eleverna: "Att ge ordet vidare i gruppen.", roll: "Att stå långt bak.", vidare: "de flesta grupper väljer strategi och ger ordet vidare utan dig", fraga: "Väljer de flesta grupper strategi och ger ordet vidare utan dig?" }
+uppfoljning:
+  text: "Du räknar par utan ledtråd varje lektion och lappar varje vecka."
+  rader:
+    - { id: lektionen, nar: Varje lektion, tid: varje lektion, vad: "Från lektion 3 stryker du under ledtråden på lappen när den stöder tanken, och skriver annars ”Var ser du det?” Lapparna avgör vem du går till först och var nästa lektion börjar." }
+    - { id: klassen, nar: Klassens lappar varje vecka, tid: varje vecka, vad: "Räkna på veckans sista lappar hur många elever som har en egen tanke med en ledtråd som stöder den, på samma slags uppgift varje vecka." }
+    - { id: lararen, nar: Dina kryss varje vecka, tid: varje vecka, vad: "Kryssa i planeringen vilka av kärnans fyra du fick med. Du väntar nog kortare än du tror. Spela in fem minuter i vecka 5, räkna hur ofta en elev talar efter en annan och radera ljudet. Talet är ditt." }
+    - { id: observationerna, nar: Vecka 2 och 4, tid: vecka 2 och 4, vad: "Vecka 2 besöker specialläraren en lektion och läser lapparna. Vecka 4 gör en kollega eller rektor likadant." }
+    - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "Arbetslaget ses före första lektionen, väljer texter och tänker högt för varandra." }
+    - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "I slutet av vecka 5 ses arbetslaget igen för att berätta vad ni hörde och bestämma hur ni fortsätter." }
+    - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "Fortsätt två lektioner i veckan till vecka 12. En kollega ser en lektion i månaden: vem tänker? Läs lapparna från vecka 4 och 5 med specialläraren. Den som behöver mer stöd får Textsamtal i grupp." }
+    - { id: sexveckor, nar: Sex veckor senare, tid: efter 6 veckor, vad: "Räkna elever med en egen tanke och ledtråd. Spela in igen: hur ofta talar en elev efter en annan? Ta med talen och antalet lektioner till en halvtimme med laget: hur gör ni efter vecka 12?" }
+    - { id: nastatermin, nar: Nästa termin, tid: nästa termin, vad: "Räkna samma två saker igen, ge rektor lagets summa och se om ni läser så i fler ämnen." }
+    - { id: osaker, nar: "Om du är osäker, eller eleverna talar mindre", tid: villkor, vad: "Står skattningen Hur säker är jag på metoden under 5 i två veckor i rad, eller talar en elev efter en annan mer sällan än sist: ge steget en vecka till, och be en kollega se en lektion." }
+    - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen Hur väl fungerar den i praktiken under 5 två veckor i rad, eller har högst hälften en egen tanke på lappen: ta kortare bitar och ett stopp färre, och be specialläraren se en lektion." }
+larandet:
+  rubrik: Så syns lärandet i klassen
+  omraden:
+    - { omrade: amneskunskaper, syns: "Eleverna säger vad texten handlar om med ämnets ord, och lägger ihop två ställen i texten för att svara på något som inte står." }
+    - { omrade: lasning, syns: "Eleverna märker själva var det tar stopp och använder en tankestrategi utan att du säger till: de frågar, läser om eller reder ut ett ord." }
+    - { omrade: kommunikation, syns: "Eleverna tar upp vad en kamrat sa, frågar vidare och säger vad i texten som stöder tanken." }
+    - { omrade: sprak, syns: "Eleverna använder textens nya ord när de sammanfattar, och säger själva att ett ord är nytt." }
+uppdrag:
+  rubrik: Till arbetslaget
+  text: "Metoden sätter sig när ni hör varandra. De fyra tankestrategierna gäller i alla ämnen, så ta med ämneslärarna och använd samma ord. Bjud in specialläraren till möte 1, och be rektor säga ja till samtal där det skriftliga är lappen. Utse också en lärare som håller i arbetet till nästa termin."
+  forbered:
+    text: Läs metoden, titta på filmen och tänk igenom frågorna. På mötet väljer ni texter och bestämmer signalen och vem som besöker vem. Sedan visar ni en tankestrategi för varandra i fem minuter. Till sist leder en av er ett textsamtal i fem minuter och lämnar över, medan de andra antecknar i observationsmallen vem som talar efter vem. Delar ni en klass, bestäm vem som läser lapparna.
+    fragor: ["Vem tänker i dina textsamtal, du eller eleverna?", "Vad gör eleverna direkt efter att du har tänkt högt: gör de samma sak?", "Vilken text vågar du ta som du inte har svaret på?", "Titta på huvudfilmen: när tystnar läraren, och vem talar efter vem sedan?"]
+  planera: Planera en lektion i planeringsmallen, eller gör huvudexemplet till ditt eget. Spara texterna med stoppen i en gemensam mapp.
+  genomfor: Var och en följer Lär dig metoden vecka för vecka. Den som blir besökt ger besökaren texten och planeringen dagen före, och ni väljer de två eleverna i observationsmallen bland de fyra paren närmast besökaren.
+  reflektera: ["Vilka frågor öppnade samtalet?", "Vem talade efter vem i din inspelning från vecka 5, och vad förvånade dig?", "När gjorde eleverna som du utan din fråga, och hur märkte du det?", "Vilken av kärnans fyra kryssade du minst, och vad prövar du nu?"]
+  taMed: Ta med din planering med dina kryss och två repliker, gärna ur observationsmallen.
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 4 Håll i
+# ---------------------------------------------------------------------------------------------------------------------
+lararensFragor:
+  rubrik: Lärarens frågor
+  fragor:
+    - { fraga: "Får jag dela klassen efter nivå, med olika texter?", svar: "Välj hellre samma text, och ge mer stöd i hur ni läser: högläsning, par och ord före. Då samtalar alla om samma sak.", komponent: Paren gör samma sak }
+    - { fraga: "Får jag stryka Ni tar över när tiden är knapp?", svar: "Nej. Korta Jag tänker högt eller tavlan. En kort bit räcker, men paren behöver den i varje lektion. Det är den som faller bort: överlämningen syntes minst i ett stort försök (Torres Blas m.fl., 2026).", komponent: Eleverna tar över }
+    - { fraga: "Måste jag alltid visa strategin först?", svar: "Nej. När klassen kan strategin får paren börja, och du ger återkoppling efter hand (Skolforskningsinstitutet, 2019). En ny strategi behöver eleverna höra först.", komponent: Läraren visar }
+    - { fraga: "Hur hinner jag kursen när vi läser så lite?", svar: "I början hinner ni lite text, och farten kommer. Lägg samtalet på texter ni ändå läser. Har du få lektioner, dela veckans två med en kollega i svenska eller SO." }
+    - { fraga: "Vad tänker jag högt om när jag redan kan texten?", svar: "Säg vad texten inte säger, och vad läsaren måste räkna ut: ”Här står inte varför. Hur kan en läsare veta det?” Stanna också där en elev kan ta fel.", komponent: Läraren visar }
+    - { fraga: "Vad gör jag när klassen enas om något som är fel i ämnet?", svar: "Läs stället igen, låt eleverna pröva och säg sedan kort vad som stämmer. En berättelse får stå olöst, men i faktatext och matematik finns ett svar." }
+hinder:
+  rubrik: Det svåraste med metoden
+  text: "Läraren tänker åt eleverna, också när alla delar är med. De hör dig tänka men får aldrig göra det själva, och du märker det sällan. I ett stort försök i riktade grupper sa 99 procent av de svarande att de följde materialet, men vid besöken syntes överlämningen minst, och effekten, 0,055, var inte säker (Torres Blas m.fl., 2026). Spela därför in fem minuter och räkna hur ofta en elev talar efter en annan. Bestäm före lektionen vad du inte gör, och var tyst medan två elever talar efter varandra."
+  kort: "Det som faller bort är att eleverna tänker själva. Bestäm före lektionen vad du inte gör, och var tyst medan två elever talar efter varandra."
+  komponent: Eleverna tar över
+fallgropar:
+  rubrik: Vanliga fallgropar
+  rader:
+    - { fallgrop: Strategierna blir en lista, hander: "Klassen går igenom de fyra strategierna i ordning, eller skriver samma slags mening vid varje stopp, fast texten ber om något annat.", prova: "Läs en bit, och låt texten avgöra vilken strategi ni tar.", komponent: De fyra tankestrategierna }
+    - { fallgrop: Strategierna försvinner, hander: "Klassen samtalar om texten, men ingen vet längre vad som hjälpte, så eleverna kan inte göra om det själva.", prova: "Säg strategins namn när den har hjälpt, och fråga efteråt vad som tog er vidare.", komponent: De fyra tankestrategierna }
+    - { fallgrop: Läraren spelar läsare, hander: "Du visar en färdig tolkning, och eleverna ser ingen som tvekar.", prova: "Stanna där du verkligen undrar, och säg vad du inte vet.", komponent: Läraren visar }
+    - { fallgrop: Paren får en annan uppgift, hander: "Du tänker högt, men vid nästa stopp får paren en fråga som inte har med strategin att göra, så de får inte pröva själva.", prova: "Välj två stopp där samma strategi behövs, och säg: ”Nu gör ni som jag gjorde.”", komponent: Paren gör samma sak }
+    - { fallgrop: Du lämnar aldrig över, hander: "Av oro för ordningen ger du paren ingen bit.", prova: "Ge paren en bit i varje lektion, och sitt hos ett par i taget.", komponent: Eleverna tar över }
+    - fallgrop: När eleverna vill ha ditt svar
+      moment: [Vi tänker tillsammans]
+      hander: Eleverna frågar vad som är rätt, och samtalet stannar hos dig.
+      steg: ["”Jag säger vad jag tror sist.”", "”Vad säger texten?”", "Låt en annan elev svara.", "Säg din tanke som en läsare, och fråga vad de säger."]
+    - fallgrop: När ett par inte kommer igång eller har fastnat
+      moment: [Vi tänker tillsammans, Ni tar över]
+      hander: Paret tittar på dig, medan de andra paren arbetar.
+      steg: ["Gå dit och lyssna en stund.", "”Var i texten är ni?”", "”Skriv ett ord du tänker på.”", "Tänk högt om en mening när det behövs.", "Säg vad de ska göra, och gå vidare."]
+hallFast:
+  rubrik: Fem saker att hålla fast vid
+  rader:
+    - { sak: "När tiden är knapp: gör samtalet kort och stryk det inte", text: "Lärare som stryker samtalet tappar det, och en kort bit i varje lektion håller vanan vid liv." }
+    - { sak: "Före ett lov eller en provperiod: boka nästa lektion", text: "Det som inte är bokat kommer sällan tillbaka. Börja med parrutinen och en kort text." }
+    - { sak: "När en kollega tar över: låt hen se en lektion först", text: "Kollegan ärver upplägget, men behöver se dig tänka högt. Gå igenom kärnan och Strategikorten, och ge hen texterna med stoppen." }
+    - { sak: "När arbetsområdet byts: ta strategierna med dig", text: "Eleverna tar inte med sig strategierna själva, så de behöver möta dem med samma ord i nästa ämne." }
+    - { sak: "När det går bra: ge klassen en svårare text", text: "Utan motstånd finns inget att reda ut." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga A Att skriva ut
+# ---------------------------------------------------------------------------------------------------------------------
+ramar:
+  rubrik: Materialet för klassen
+  text: ["Utöver lektionskortet finns Strategikorten till klassen. De står på egna sidor."]
+  ramar:
+    - rubrik: Strategikorten
+      text: ["Till varje tankestrategi finns ett kort i halvt A4. Eleverna håller korten i handen när de samtalar om texten. Framsidan säger när kortet behövs, och baksidan vad man kan säga och fråga. Skriv ut bara de fyra sidorna med kort, dubbelsidigt, och vänd längs långsidan. Klipp på linjen, så ger två ark de fyra korten. Varje par har en uppsättning, och du har en likadan. Till 28 elever behöver du 15 ark med Förutspå och Ställa frågor, och till vecka 3 lika många med Reda ut och Sammanfatta. Den som är ny i svenska skriver kortets namn på raden På mitt språk."]
+planeringsmall:
+  text: "Skriv kort. Det grå är samma i varje lektion. Läs texten först och se var du stannar, för det avgör vilken tankestrategi du visar. Välj sedan ett stopp till där samma strategi behövs, och från lektion 4 ett tredje där paren väljer själva. Tabellen Så väljer du text och stopp visar hur."
+  fore:
+    - { etikett: "Stoppen i texten", rader: ["1", "2", "3"], falt: stopp, fot: "Tankestrategin jag visar:", fotFalt: undrar }
+    - { etikett: "Det eleverna behöver", rader: ["Varför vi läser:", "De behöver veta:", "Ord att förbereda:", "Det jag inte gör i dag:"], falt: [varfor, veta, ord, inte] }
+  delar:
+    - { fas: Inför läsningen, skriv: "Frågan vi börjar med, eller skälet:", hojd: 0.6 }
+    - { fas: Jag tänker högt, skriv: "Stället och det jag säger:", hojd: 0.8 }
+    - { fas: Vi tänker tillsammans, skriv: "Min fråga, så att paren gör samma sak:", not: "Säg vad paren gjorde, och räkna två elever för varje par utan ledtråd.", hojd: 0.7 }
+    - { fas: Ni tar över, skriv: "Biten och uppgiften till paren:", hojd: 0.7 }
+    - { fas: Efter läsningen, not: "Tillbaka till gissningarna. Tavlan, vilken strategi som hjälpte och lappen. Lektion 1 och 2 utan lapp och utan kryss 4.", hojd: 0.5 }
+  beslut: { nastanAlla: "Hos paren:", deFlesta: "Stoppet:", halften: "Stället:" }
+  efter:
+    text: "Fyll i efter lektionen."
+    kontrollen: "Vi tänker tillsammans: ___ elever i par utan ledtråd"
+    hogar: "Lappar med en egen tanke och en ledtråd: ___ av ___. Det olösta:"
+    sag: "Det jag hörde, med elevernas ord"
+    nasta: "Nästa lektion börjar med"
+    forst: "Jag går först till"
+observation:
+  fraga: Vem tänker om texten, och när lämnar läraren över tänkandet?
+  text: "Skriv ut dubbelsidigt. Välj med läraren två elever, A och B, gärna en som sällan talar. Sitt hela lektionen där du hör fyra par, och numrera eleverna i Vem talar efter vem. Skriv tre repliker ordagrant. Det paret gör räknas för båda, en fråga eller tanke för den som sa den. Av åtta elever: Nästan alla är 7–⁠8, De flesta 5–⁠6, Några 2–⁠4 och Få 0–1."
+  fokus: Väljer paren strategi själva när de tar över?
+  huvud: ["Texten och stoppen"]
+  kolumner:
+    - { namn: Läraren säger, text: det läraren säger och gör, bredd: 30 }
+    - { namn: Eleverna säger, text: ordagrant, bredd: 30, elever: true }
+    - { namn: Vem talar efter vem, text: nummer eller pil, bredd: 21 }
+  tecken: "+ om texten, L ledtråd, k kamrats tanke, 0 inget, s sa det på sitt språk."
+  delar:
+    - { fas: Inför läsningen, rader: 1 }
+    - { fas: Jag tänker högt, rader: 1 }
+    - { fas: Vi tänker tillsammans, rader: 2, rakna: "Par utan ledtråd: __ av __  Läraren valde: egen bit · stopp · tänkte högt" }
+    - { fas: Ni tar över, rader: 4, rakna: "Läraren satt hos: ___ par" }
+    - { fas: Efter läsningen, rader: 1 }
+  streck:
+    - { etikett: Läraren, drag: ["Väntade", "Tog upp svaret", "Gav återkoppling", "Gav ordet vidare"] }
+    - { etikett: Eleverna, drag: ["Valde strategi", "Tog upp tanke", "Egen fråga", "Sa: tog stopp"] }
+  rader:
+    - "Använde en tankestrategi där texten krävde det: __ av __. Sa vad som hjälpte: __ av __"
+    - "Läraren tänkte högt med en tankestrategi vid ett verkligt stopp: ja · nej"
+    - "Gjorde samma sak som läraren: __ av __. Tog upp en kamrats tanke: __ av __. Fick återkoppling: ja · nej"
+    - "Stannade själva där det tog stopp: __ av __. Egen fråga: __ av __. Lappar med en egen tanke och en ledtråd: __ av __. Läraren talade mindre i slutet: ja · nej"
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga B Valet och forskningen
+# ---------------------------------------------------------------------------------------------------------------------
+passar:
+  rubrik: När passar metoden?
+  kort: "ni läser en text som går att tolka och behöver tala om den. Ett nytt moment passar bättre med Explicit undervisning."
+  rader:
+    - { fraga: "Vad ska eleverna lära sig?", metoden: "Att förstå en text som går att tolka, eller ett problem som måste läsas noga.", annat: "Ett nytt moment med ett säkert svar. Välj Explicit undervisning." }
+    - { fraga: "Vilken text har ni?", metoden: "Texten har något olöst, och den går att klara med stöd.", annat: "Texten är så lätt att inget behöver redas ut (Skolforskningsinstitutet, 2019), eller så svår att ni fastnar i orden." }
+    - { fraga: "Hur läser eleverna?", metoden: "De flesta läser orden hyggligt, eller så läser du högt.", annat: "Många behöver mer än högläsning. Ta det med specialläraren." }
+    - { fraga: "Vad ska eleverna kunna efteråt?", metoden: "Tänka kring en text, fråga och förklara hur de tänker.", annat: "Komma ihåg fakta. Välj Testbaserat lärande." }
+    - { fraga: "Vad behöver klassen?", metoden: "Samtal om innehållet i en text.", annat: "Att samarbeta i sig. Välj Kooperativt lärande. En liten grupp behöver mycket stöd. Välj Textsamtal i grupp." }
+  tumregel: Finns det något i texten att reda ut, och behöver eleverna tala om det, passar metoden. Valkartan är ett stöd för tanken och ingen regel.
+  metoder: [explicit-undervisning, testbaserat-larande, kooperativt-larande]
+invandningar:
+  rubrik: Invändningar och nyanser
+  fragor:
+    - fraga: Fungerar metoden i en hel klass, eller bara i små grupper?
+      svar: "Forskningsstödet är starkast i små grupper, och en översikt avråder från metoden i klass och för yngre elever (Hansford m.fl., 2026). I hela klasser i England gav metoden ingen effekt, medan riktade grupper gav 0,14 och 0,18 (O'Hare m.fl., 2023). I Sverige blev det 0,07 för klassen och 0,46 för dem med lägst förtest (Tengberg m.fl., 2015). Räkna inte med ett lyft på klassens läsprov. Effekten var störst för eleverna med lägst förtest, och här talar också de i par."
+    - fraga: Blir det inte en checklista med fyra strategier?
+      svar: "Det kan det bli. Strategier hjälper inte om de används mekaniskt, för det avgörande är hur och när (Skolforskningsinstitutet, 2019). Hos Palincsar och Brown (1984) kom varje strategi ur ett problem i texten, men samtalet gick i en fast rytm. Ingen studie har jämfört rytmen med att låta texten välja. När hela klasser i England lät texten välja gav det ingen effekt. Tiden räckte inte till alla fyra, särskilt inte frågorna (O'Hare m.fl., 2023). Här väljer texten strategin, men gången står kvar."
+    - fraga: Ska eleverna inte hellre lära sig innehållet?
+      svar: "Metoden går ut på att eleverna förstår texten. Ett svagt underlag om elever i lässvårigheter visar att strategier bara gav effekt tillsammans med undervisning i bakgrundskunskap (Peng m.fl., 2023). Strategierna hjälper eleven att använda det hen vet. Därför läser ni ämnets egna texter, och du säger det texten tar för givet innan ni läser."
+    - fraga: Hjälper det verkligen att eleverna pratar mer?
+      svar: "Inte av sig självt. I 72 klasser i England hängde samtalet mellan lärare och klass ihop med resultaten på de nationella proven när många deltog och utvecklade eller ifrågasatte det andra hade sagt (Howe m.fl., 2019). Det avgörande är vad eleverna gör med varandras tankar."
+grund:
+  rubrik: Det forskningen visar
+  text:
+    - "Reciprok undervisning kommer från Palincsar och Brown (1984), som lät lärare och elever turas om att leda samtalet om en text. Det mesta av stödet sedan dess gäller läsning, och främst små grupper med elever i lässvårigheter: en översikt gav 0,48 i fem jämförelser (Hansford m.fl., 2026). Försöken gäller mest åk 3–⁠8."
+    - "I hela klasser är effekten mindre. En metaanalys, alltså en sammanställning av många studier, gav d = 0,19 på standardiserade prov och 0,79 på förmågan att använda strategierna (Okkinga m.fl., 2018). Den största prövningen i helklass gav ingen effekt, medan riktade grupper fick 0,14 på läsning och 0,18 på förståelse (O'Hare m.fl., 2023). Tre stora studier av en nära släkting, Collaborative Strategic Reading (CSR), gav 0,05 (Baye m.fl., 2019) och en stor prövning i riktade grupper 0,055 (Torres Blas m.fl., 2026), och skillnaderna var inte säkra. I svenska klasser gav metodens närmaste släkting 0,07 för alla, inte säkert, och 0,46 för eleverna med lägst förtest (Tengberg m.fl., 2015). Kooperativa grupper gav inget utöver strategierna (Klang m.fl., 2022)."
+    - "Vilka delar bär effekten? Hos elever i lässvårigheter gav fler strategier inte större effekt, ingen enskild var bäst, och effekten krävde bakgrundskunskap (Peng m.fl., 2023). Ett mål för läsningen gav större effekt, men det visar få jämförelser (Okkinga m.fl., 2018). Effekten blev också större när eleverna fick följa och utvärdera sin läsning (Skolforskningsinstitutet, 2019). I en studie gav elevledda smågrupper mer än jämförelsegruppen, men det gjorde inte par (Skolforskningsinstitutet, 2019). Klassamtal hänger ihop med provresultaten när många deltar (Howe m.fl., 2019)."
+    - "I NO, matematik och engelska som modersmål finns ett stort försök i England med dialogisk undervisning utan metodens strategier, och det gav positiva tal på ämnesprov (Jay m.fl., 2017). En uppföljning året efter fann ingen effekt på de nationella proven. Studierna med metoden i SO och NO mäter läsning. I matematik gav åtta små studier som kallar metoden Reciprocal Teaching stora tal (Laia och Dasari, 2025). Stödet i skrivning bygger på ett försök i Jordanien (Hamadneh och Kazem, 2016), och det sociala på ett försök från 1988 och en lärares berättelse (Gilbert, 2018). Metodkortet väger inte in dialogisk högläsning, eftersom ingen studie med jämförelsegrupp har prövat just de här dragen i en vanlig klass i F–⁠2. Liknande högläsning i hela klassen har stöd för ordförrådet, men förståelsen är inte visad."
+lasMer:
+  - { slag: text, titel: "Reciprok undervisning", upphov: "Reichenberg, Andersson och Berthén, Skolverket", ar: 2023, adress: "https://larportalen.skolverket.se/api/resource/P03WCPLAR177254", oppnad: 2026-11-07, text: "Metoden på svenska, med verkliga samtal i små grupper och hur läraren håller eleverna kvar i texten." }
+  - { slag: text, titel: "Att läsa mellan och bortom raderna", upphov: "Reichenberg, Skolverket", ar: 2023, adress: "https://larportalen.skolverket.se/api/resource/P03WCPLAR177253", oppnad: 2026-11-07, text: "Vad en inferens är, med exempel på hur läraren tänker högt om varför-frågor." }
+  - { slag: text, titel: "Textsamtal för lärande", upphov: "Körling, Skolverket", ar: 2018, adress: "https://larportalen.skolverket.se/api/resource/P03WCPLAR097639", oppnad: 2026-11-07, text: "Hur textsamtal blir ett arbetssätt i alla ämnen, också med läromedlets texter." }
+  - { kalla: skolforskningsinstitutet-2019, text: "Vilka strategier som hjälper, och hur och när de hjälper, med en sammanfattning på sex sidor." }
+  - { slag: text, titel: "Utforskande och fördjupande litteratursamtal", upphov: "Tengberg, Johansson, Sønneland m.fl., Karlstads universitet", adress: "https://www.kau.se/files/2024-12/L%C3%A4rarhandledning_UTFORSK.pdf", oppnad: 2026-11-07, text: "Hur du leder ett samtal i hela klassen om en svår text, med två utskrivna exempel." }
+  - { slag: bok, titel: "Läsförståelse genom strukturerade textsamtal", upphov: "Reichenberg och Lundberg", ar: 2011, adress: "https://libris.kb.se/xg8930p82hh9mh4", oppnad: 2026-11-07, text: "Samtal som lärare och elever har haft, med metoden och mer stöd för den som behöver det." }
+  - { slag: bok, titel: "Det flerstämmiga klassrummet", upphov: "Dysthe", ar: 1996, adress: "https://libris.kb.se/zg84xwh942z0", oppnad: 2026-11-07, text: "Varför elever lär sig av flera röster, som grund för det dialogiska." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lär dig metoden
+# ---------------------------------------------------------------------------------------------------------------------
+plan:
+  passen:
+    - { nar: första lektionen, kort: Rutinerna, text: "Visa med två elever framme, på något lätt som vad ni åt till lunch. Byt vem som börjar, och öva tills det sitter." }
+  fore: ["Välj ämnet och minst två lektioner i veckan. I 7–⁠9 kan en vara i svenska och en i SO eller NO."]
+  utvardering: ["Fortsätt två lektioner i veckan till vecka 12. En kollega ser en lektion i månaden: vem tänker? Läs lapparna från vecka 4 och 5 med specialläraren. Den som behöver mer stöd får Textsamtal i grupp."]
+  skattningar:
+    - namn: Hur säker är jag på metoden?
+      vem: lararen
+      rad: lararen
+      text: "Skatta när veckan är slut. Tänk på kärnans fyra: Använde ni en tankestrategi där texten krävde det? Tänkte du högt med den vid ett verkligt stopp? Gjorde paren samma sak och fick återkoppling? Stannade paren själva och valde strategi?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: osaker }
+    - namn: Hur väl fungerar den i praktiken?
+      vem: lararen
+      rad: klassen
+      text: "Tänk på det du ser och hör i klassen: gör paren som du gjorde och visar en ledtråd i texten? Säger eleverna själva var det tar stopp? Tar de upp vad en kamrat sa?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: klassenstar }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lathunden
+# ---------------------------------------------------------------------------------------------------------------------
+lathund:
+  metoden:
+    text:
+      - "Eleverna lär sig fyra tankestrategier: förutspå, ställa frågor, reda ut och sammanfatta. Ledtråden är stället i texten som stöder tanken. På lappen står elevens egen tanke med en ledtråd."
+      - Lärandet går till så här. En van läsare tänker tyst, så du visar en strategi högt. Paren gör samma sak, får återkoppling och gör det sedan själva. Så blir det elevens sätt att läsa.
+  lektion:
+    text: "Första lektionen lär sig klassen parrutinen på något lätt, så Inför läsningen tar femton minuter. Sedan läser ni en kort text ur Ta fram en lästext. Du tänker högt med Förutspå vid första stoppet, och paren gör samma sak vid det andra. Lektion 2 och 3 har egna tider i metoden. Från lektion 4 leder du med lektionskortet."
+  igang:
+    rubrik: De första fem veckorna

@@ -10,7 +10,7 @@ import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, u
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
 // (K-627), så sidan läser resten som metodens fil har det.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Um = CollectionEntry<'undervisningsmetoder'>['data'] & Record<string, any>;
+export type Um = CollectionEntry<'undervisningsmetoder'>['data'] & { centrala?: { id: string; efterText: string }[] } & Record<string, any>;
 
 export const metodensAdress = (id: string) => `/metoder/${id}`;
 

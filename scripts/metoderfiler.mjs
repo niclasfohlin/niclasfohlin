@@ -108,12 +108,15 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   const bladen = (d.ramar?.ramar ?? []).map((r) => r.rubrik).filter(Boolean);
   const material = join(UT, `${stam('materialet')}.pdf`);
   let forstaBladet = 0;
+  // Ett enda blad kan ha flera sidor, som Strategikorten i Reciprok undervisning, två A4 fram och bak. Då är sistaSidan satt.
+  let sistaSidan = 0;
   if (!kontrollera && bladen.length && existsSync(material)) {
     const s = sidorna(material);
     const fore = s.length - 1 - bladen.length;
     const textsida = (t) => t.split(/\r?\n/).slice(0, 4).some((rad) => rad.trim() === (d.ramar?.rubrik ?? 'Materialet för klassen'));
     if (fore === 0) forstaBladet = 1;
     else if (fore === 1 && textsida(s[0])) forstaBladet = 2;
+    else if (bladen.length === 1 && fore > 0) { forstaBladet = textsida(s[0]) ? 2 : 1; sistaSidan = s.length - 1; }
     else varningar.push(`${id}: materialets pdf har ${s.length - 1} sidor och metoden ${bladen.length} blad, så bladen klipps inte ut var för sig`);
   }
 
@@ -157,7 +160,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   const bladfil = (namn) => `${id}-blad-${slugAv(namn)}.pdf`;
   if (!kontrollera) {
     for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-blad-`) && x.endsWith('.pdf') && !bladen.some((n) => bladfil(n) === x))) rmSync(join(UT, f));
-    if (forstaBladet) bladen.forEach((namn, i) => { if (!filer.some((f) => f.slag === `blad-${slugAv(namn)}`)) klipp(material, forstaBladet + i, forstaBladet + i, join(UT, bladfil(namn))); });
+    if (forstaBladet) bladen.forEach((namn, i) => { if (!filer.some((f) => f.slag === `blad-${slugAv(namn)}`)) klipp(material, forstaBladet + i, sistaSidan || forstaBladet + i, join(UT, bladfil(namn))); });
   }
 
   // Filmerna: riggens svg-filer med sajtens namn, som i Stödundervisning, en för huvudfilmen och en för varje extrafilm i

@@ -132,7 +132,7 @@ export const NIVAERNAS_FORKLARING = Object.freeze([
   { ord: 'Negativ effekt', staplar: 0, text: 'Studier med jämförelsegrupp och minst måttlig tillförlitlighet visar att resultaten blir sämre.' },
   { ord: 'Oklart', staplar: null, text: 'Få och osäkra studier, utan effekt eller med en negativ. Forskningen räcker inte för att säga något.' },
   { ord: UTAN_NIVA['inte-studerat'], staplar: null, text: 'Ingen har undersökt området, inte heller i fallstudier eller rapporter. Vi vet inte, och det betyder inte att metoden saknar effekt.' },
-  { ord: UTAN_NIVA['inte-sammanvagt'], staplar: null, text: 'Bara för Lärande totalt: ingen sammanställning väger ihop flera ämnen.' },
+  { ord: UTAN_NIVA['inte-sammanvagt'], staplar: null, text: 'Bara för Lärande totalt: något ämnesområde saknar nivå, och ingen sammanställning väger ihop flera ämnen.' },
 ]);
 
 /**
@@ -153,6 +153,13 @@ export function laget(v) {
   const negativ = n === 0 && v.effekt === 'negativ';
   return { slag: 'niva', niva: n, ord: negativ ? 'Negativ effekt' : NIVAORD[n], negativ };
 }
+
+/**
+ * Rutinens rubrik: Rutinen och namnet, och bara namnet när det redan säger rutinen, som Parrutinen (riggens brev 2026-11-06
+ * kväll, punkt 10: "Rutinen parrutinen"). kolon ger formen på en etikett, Rutinen: Provet.
+ * @param {string} namn @param {{ kolon?: boolean }} [o]
+ */
+export const rutinensRubrik = (namn, { kolon = false } = {}) => (/rutinen$/i.test(namn) ? stor(namn) : kolon ? `Rutinen: ${namn}` : `Rutinen ${litenForsta(namn)}`);
 
 /** Svårighetens ord, 1 till 5. Mer betyder mer arbete, och kortets grå staplar säger samma sak. */
 export const SVARIGHETENS_ORD = Object.freeze(['', 'Mycket lätt', 'Lätt', 'Medelsvårt', 'Svårt', 'Mycket svårt']);
@@ -290,6 +297,8 @@ export function undervisningsmetodensFel(d) {
   for (const o of KORTETS_OMRADEN) krav(`profil.evidens.${o}`, ev[o], 'metodkortets rad');
   krav('profil.evidens.larande.kort', ev.larande?.kort, 'kommentaren under Lärande totalt på bankens kort');
   if (String(ev.larande?.kort ?? '').length > 80) fel.push('profil.evidens.larande.kort har fler än 80 tecken');
+  // Har alla fyra ämnesområden en nivå slås de ihop till Lärande totalt (Niclas 2026-11-06, riggens evidensen.md, avsnitt 7).
+  if (ev.larande?.niva === 'inte-sammanvagt' && ['lasning', 'skrivning', 'matematik', 'amnen'].every((o) => laget(ev[o]).slag === 'niva')) fel.push('profil.evidens.larande: Inte sammanvägt gäller bara när något av Läsning, Skrivning, Matematik och Ämnen saknar nivå. Har alla fyra en nivå slås de ihop: tillförlitligheten och effekten är medianen av deras ord, och vid jämnt antal det högre av de två i mitten');
   for (const f of ['svarighet', 'kostnad', 'urval']) krav(`profil.${f}`, d.profil?.[f], 'metodkortet');
   const ids = new Set((d.kallor ?? []).map((/** @type {{ id: string }} */ k) => k.id));
   for (const o of KORTETS_OMRADEN) for (const k of ev[o]?.kallor ?? []) if (!ids.has(k)) fel.push(`profil.evidens.${o}.kallor: ${k} står inte i kallor`);
@@ -704,7 +713,7 @@ export function lathundensSidor(d) {
       // I en metod där den första hela lektionen kommer efter vecka 1 är måndagen den korta formen, med dess minuter
       // (vagenTillMandag, G1); den hela lektionen står som förlaga på sida 3.
       { id: 'minuterna', slag: 'minuter', rubrik: vagen?.kort ? vagen.kort.rubrik : lektionen.minuterna, delar: (vagen?.kort ? vagen.kort.minuter : forstaLektionensMinuter(d)).map((x) => ({ ...x, tid: x.tid.replace(/\s*min$/, '') })) },
-      ...lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1').map((r, i) => /** @type {LathundDel} */ ({ id: `rutin-${i + 1}`, slag: 'rutin', rubrik: `Rutinen ${litenForsta(r.namn)}`, namn: r.namn, text: r.vad ?? '', steg: lista(r.steg) })),
+      ...lista(d.rutiner?.rader).filter((r) => String(r.vecka ?? '') === '1').map((r, i) => /** @type {LathundDel} */ ({ id: `rutin-${i + 1}`, slag: 'rutin', rubrik: rutinensRubrik(r.namn), namn: r.namn, text: r.vad ?? '', steg: lista(r.steg) })),
     ] },
     { id: 'planera', nr: 3, namn: planerasNamn(d), delar: [
       d.forsta?.plan
