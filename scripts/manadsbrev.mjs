@@ -17,7 +17,8 @@ import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { besokPerSida, hamtaHits, manaden, manadensBrev } from '../netlify/lib/manadsbrev.mjs';
+import { periodensBesok, sidornasBesok } from '../netlify/lib/goatcounter.mjs';
+import { manaden, manadensBrev } from '../netlify/lib/manadsbrev.mjs';
 import { manadsMejl } from '../netlify/lib/mejl.mjs';
 import { AVSANDARE, SVAR_TILL, brevo } from '../netlify/lib/utskick.mjs';
 
@@ -53,7 +54,8 @@ if (flagga('schemalagg')) {
 const manad = manaden(flagga('manad') ?? '');
 const gc = process.env.GC_NYCKEL;
 if (!gc) throw new Error('GC_NYCKEL saknas i miljön.');
-const poster = flagga('lokalt') ? JSON.parse(readFileSync(join(ROT, 'dist', 'nytt.json'), 'utf8')).poster : (await (await fetch(`${SAJT}/nytt.json`)).json()).poster;
+const { poster, samlingar } = flagga('lokalt') ? JSON.parse(readFileSync(join(ROT, 'dist', 'nytt.json'), 'utf8')) : await (await fetch(`${SAJT}/nytt.json`)).json();
+const adresser = poster.map((p) => p.url);
 
 // Dagen då varje post kom in i git, ur en enda fråga till git.
 function komUrGit() {
@@ -68,16 +70,16 @@ function komUrGit() {
   return ut;
 }
 
-const besok = besokPerSida(await hamtaHits(gc, { start: manad.start, slut: manad.slut }));
-const brevet = manadensBrev({ besok, poster, kom: flagga('kom-ur-git') ? komUrGit() : {}, manad });
+const period = { start: manad.start, slut: manad.slut };
+const besok = await sidornasBesok(gc, adresser, period);
+const brevet = manadensBrev({ besok, poster, samlingar, summa: await periodensBesok(gc, period), kom: flagga('kom-ur-git') ? komUrGit() : {}, manad });
 if (flagga('metoder-fran')) {
-  const andra = besokPerSida(await hamtaHits(gc, { start: new Date(`${flagga('metoder-fran')}T00:00:00+01:00`), slut: new Date(`${flagga('metoder-till')}T00:00:00+01:00`) }));
-  const metoder = manadensBrev({ besok: andra, poster, kom: {}, manad }).listor.find((l) => l.namn === 'Metoder');
-  if (metoder) {
-    metoder.not = flagga('metoder-not');
-    const i = brevet.listor.findIndex((l) => l.namn === 'Metoder');
-    if (i >= 0) brevet.listor[i] = metoder; else brevet.listor.splice(1, 0, metoder);
-  }
+  const andra = await sidornasBesok(gc, adresser, { start: new Date(`${flagga('metoder-fran')}T00:00:00+01:00`), slut: new Date(`${flagga('metoder-till')}T00:00:00+01:00`) });
+  const metoder = manadensBrev({ besok: andra, poster, samlingar, kom: {}, manad }).listor.find((l) => l.namn === 'Metoder');
+  if (!metoder) throw new Error('Perioden för listan Metoder har inga besök.');
+  metoder.not = flagga('metoder-not');
+  const i = brevet.listor.findIndex((l) => l.namn === 'Metoder');
+  if (i >= 0) brevet.listor[i] = metoder; else brevet.listor.splice(1, 0, metoder);
 }
 if (flagga('ps')) brevet.ps = flagga('ps');
 const html = manadsMejl(brevet, SAJT);

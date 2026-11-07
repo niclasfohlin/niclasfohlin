@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn, publicerade, formateraDatum } from '../lib/innehall';
 import { byggSerier, lektionsnamn } from '../lib/serie';
 import { arskursText } from '../lib/metod';
+import { SAMLINGARNA, samlingen } from '../lib/samlingar';
 import { metodensCentrala, CENTRALA } from '../lib/centrala';
 import { LEKTIONSKORT_MEJL, metodensLektionskort } from '../lib/lektionskort';
 import { metodensSidor } from '../lib/lardig';
@@ -136,7 +137,9 @@ export const GET: APIRoute = async () => {
       rad: 'Verktyg',
     })),
   ];
-  return new Response(JSON.stringify({ genererad: new Date().toISOString(), antal: poster.length, poster }), {
+  // Samlingarna ur roten, så att månadsbrevet får en lista per samling utan en egen förteckning (netlify/lib/manadsbrev.mjs).
+  const samlingar = SAMLINGARNA.map((s) => ({ led: samlingen(s).led, namn: samlingen(s).namn }));
+  return new Response(JSON.stringify({ genererad: new Date().toISOString(), antal: poster.length, samlingar, poster }), {
     headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
   });
 };

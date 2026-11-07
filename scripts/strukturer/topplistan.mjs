@@ -18,6 +18,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { strukturernasTopplista } from '../../src/lib/standard/strukturer.js';
+import { allaHits } from '../../netlify/lib/goatcounter.mjs';
 
 const ROT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const FIL = join(ROT, 'src', 'data', 'strukturer-topp.json');
@@ -29,35 +30,11 @@ if (process.argv.includes('--vid-behov') && forut.datum && Date.now() - Date.par
 const nyckel = process.env.GC_NYCKEL ?? '';
 if (!nyckel) { console.log('  ! Strukturernas topplista: ingen GC_NYCKEL i miljön, så listan står kvar som den var.'); process.exit(0); }
 
-const iso = (d) => d.toISOString().replace(/\.\d{3}Z$/, 'Z');
 const slut = new Date(); slut.setMinutes(0, 0, 0); slut.setHours(slut.getHours() + 1);
 const start = new Date(slut.getTime() - 30 * 86400000);
-const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
-
-/** Alla besök och händelser i perioden, 100 i taget, med de hämtade som exclude_paths (som statistiksidan); API:t
- *  har ingen filter-parameter (den gav 400 2026-11-01). */
-async function hits() {
-  const ut = [];
-  const sedda = new Set();
-  for (let i = 0; i < 20; i++) {
-    const u = new URL('https://niclasfohlin.goatcounter.com/api/v0/stats/hits');
-    u.searchParams.set('start', iso(start));
-    u.searchParams.set('end', iso(slut));
-    u.searchParams.set('limit', '100');
-    if (sedda.size) u.searchParams.set('exclude_paths', [...sedda].join(','));
-    await vanta(400);
-    const svar = await fetch(u, { headers: { Authorization: `Bearer ${nyckel}` }, signal: AbortSignal.timeout(20000) });
-    if (!svar.ok) throw new Error(`GoatCounter svarade ${svar.status}`);
-    const json = await svar.json();
-    const nya = (json.hits ?? []).filter((h) => !sedda.has(h.path_id));
-    for (const h of nya) { sedda.add(h.path_id); ut.push(h); }
-    if (!json.more || !nya.length) break;
-  }
-  return ut;
-}
 
 try {
-  const strukturer = strukturernasTopplista(await hits());
+  const strukturer = strukturernasTopplista(await allaHits(nyckel, { start, slut, tidsgrans: 60000, paus: 400, timeout: 20000 }));
   writeFileSync(FIL, JSON.stringify({ datum: new Date().toISOString(), strukturer }, null, 2) + '\n');
   console.log(`Strukturernas topplista: ${strukturer.length} strukturer med besök eller utskrifter de senaste 30 dagarna.`);
 } catch (e) {

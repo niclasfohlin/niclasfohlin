@@ -4,7 +4,8 @@
 // deploy nattetid schemalagd till 07.00 (CLAUDE.md under Prenumeration och utskick), också nätterna när sommartiden börjar
 // och slutar, och nya verktyg i ett eget utskick. mejlaNytt prövas med en härmad Brevo, nattetid och på dagen.
 import { sandtid, utskicken, mejlaNytt, brev, ledigTid } from '../netlify/lib/utskick.mjs';
-import { besokPerSida, forraManaden, manaden, manadensBrev, skickaManadsbrev } from '../netlify/lib/manadsbrev.mjs';
+import { forraManaden, manaden, manadensBrev, skickaManadsbrev } from '../netlify/lib/manadsbrev.mjs';
+import { allaHits, besokPerSida, periodensBesok, sidornasBesok } from '../netlify/lib/goatcounter.mjs';
 import { knappensOrd, manadsMejl } from '../netlify/lib/mejl.mjs';
 import texter from '../src/data/manadsbrev.json' with { type: 'json' };
 
@@ -137,18 +138,19 @@ const allaPoster = [
 const sidor = [{ path: '/stodundervisning/a', count: 1000 }, { path: '/stodundervisning/b/', count: 900 }, { path: '/stodundervisning/c', count: 50 }, { path: '/stodundervisning/d', count: 10 }, { path: '/metoder/m', count: 30 }, { path: '/artiklar/t', count: 20 }, { path: '/bocker/k', count: 5 }, { path: '/okand/sida', count: 500 }, { path: 'fil:x.pdf', event: true, count: 9999 }];
 const besok = besokPerSida(sidor);
 if (besok.get('/stodundervisning/b') !== 900 || besok.has('fil:x.pdf')) { fel++; console.error('besökPerSida'); }
-const brevet = manadensBrev({ besok, poster: allaPoster, kom: { '/stodundervisning/d': '2026-10-02' }, manad: okt });
+const samlingar = [{ led: 'stodundervisning', namn: 'Stödundervisning' }, { led: 'metoder', namn: 'Metoder' }, { led: 'artiklar', namn: 'Artiklar' }, { led: 'bocker', namn: 'Böcker' }];
+const brevet = manadensBrev({ besok, poster: allaPoster, samlingar, summa: 2525, kom: { '/stodundervisning/d': '2026-10-02' }, manad: okt });
 const stodLista = brevet.listor.find((l) => l.namn === 'Stödundervisning');
 if (brevet.listor.map((l) => l.namn).join() !== 'Stödundervisning,Metoder,Artiklar,Böcker' || stodLista.rader.map((r) => r.titel).join('') !== 'ABC') { fel++; console.error('listorna', JSON.stringify(brevet.listor)); }
 if (brevet.mest.map((x) => x.titel).join('') !== 'AB' || brevet.mestOrd !== 'tätt följd av') { fel++; console.error('mest läst', brevet.mest, brevet.mestOrd); }
 // En metod i Stödundervisning är ny bara med dagen den kom: C har ett färskt datum men är ändrad och inte ny, och artikeln har sitt datum.
 if (brevet.nyast?.titel !== 'T' || brevet.nyast.rad !== 'Blev månadens mest lästa text.') { fel++; console.error('månadens nya', JSON.stringify(brevet.nyast)); }
 if (brevet.forsta !== 'Oktober är slut.' || brevet.summa !== 'Sajtens sidor hade över 2 000 besök i oktober.' || brevet.amne !== 'Månadsbrev: mest läst i oktober' || brevet.manad !== 'Månadsbrev, oktober 2026' || brevet.nyast?.etikett !== 'Nytt i oktober') { fel++; console.error('brevets ord', brevet.forsta, brevet.summa, brevet.amne, brevet.manad, brevet.nyast?.etikett); }
-const nytt2 = manadensBrev({ besok, poster: allaPoster, kom: { '/stodundervisning/d': '2026-10-02', '/artiklar/t': '2026-08-01' }, manad: okt });
+const nytt2 = manadensBrev({ besok, poster: allaPoster, samlingar, summa: 2525, kom: { '/stodundervisning/d': '2026-10-02', '/artiklar/t': '2026-08-01' }, manad: okt });
 if (nytt2.nyast?.titel !== 'D' || !nytt2.nyast.rad.includes('Lästes mest av det som var nytt')) { fel++; console.error('nyast utan topplacering', JSON.stringify(nytt2.nyast)); }
-const nytt4 = manadensBrev({ besok, poster: allaPoster, kom: { '/stodundervisning/b': '2026-10-02', '/artiklar/t': '2026-08-01' }, manad: okt });
+const nytt4 = manadensBrev({ besok, poster: allaPoster, samlingar, summa: 2525, kom: { '/stodundervisning/b': '2026-10-02', '/artiklar/t': '2026-08-01' }, manad: okt });
 if (!nytt4.nyast?.rad.includes('en av de mest lästa metoderna')) { fel++; console.error('nyast i topplistan', JSON.stringify(nytt4.nyast)); }
-const nytt3 = manadensBrev({ besok, poster: allaPoster, kom: { '/stodundervisning/a': '2026-10-02', '/artiklar/t': '2026-08-01' }, manad: okt });
+const nytt3 = manadensBrev({ besok, poster: allaPoster, samlingar, summa: 2525, kom: { '/stodundervisning/a': '2026-10-02', '/artiklar/t': '2026-08-01' }, manad: okt });
 if (nytt3.nyast?.titel !== 'A' || nytt3.nyast.rad !== 'Blev månadens mest lästa metod.' || nytt3.mest) { fel++; console.error('den mest lästa är månadens nya', JSON.stringify(nytt3.nyast), nytt3.mest); }
 const m = manadsMejl(brevet, SAJT);
 if (!m.includes('Oktober är slut.') || !m.includes('Mest läst i oktober') || !m.includes('Nytt i oktober') || !m.includes('{{ unsubscribe }}') || Buffer.byteLength(m) > 100 * 1024) { fel++; console.error('månadsmejlet'); }
@@ -159,10 +161,16 @@ if (/\b1000\b|\b900\b/.test(m.replace(/<[^>]+>/g, ' '))) { fel++; console.error(
 const lagerNytt = () => ({ varden: {}, trasig: false, async get(k) { return this.varden[k] === undefined ? null : JSON.parse(this.varden[k]); }, async setJSON(k, v) { if (this.trasig) throw new Error('lagret svarar inte'); this.varden[k] = JSON.stringify(v); } });
 const brevoLaget = { anrop: [], kampanjer: [], sendNowFel: false, kvar: 300, antal: 150 };
 let gcFel = false;
+let gcSumma = 2525;
 const hamta = async (url) => {
   const u = String(url);
-  if (u.includes('goatcounter')) return gcFel ? { ok: false, status: 503 } : { ok: true, json: async () => ({ hits: sidor.map((s, i) => ({ ...s, path_id: i })), more: false }) };
-  if (u.endsWith('/nytt.json')) return { ok: true, json: async () => ({ poster: allaPoster }) };
+  if (u.includes('goatcounter')) {
+    if (gcFel) return { ok: false, status: 503 };
+    if (u.includes('/stats/total')) return { ok: true, json: async () => ({ total: gcSumma + 800, total_events: 800 }) };
+    const namn = new URL(u).searchParams.get('include_paths').split(',');
+    return { ok: true, json: async () => ({ hits: sidor.filter((s) => !s.event && namn.includes(s.path)).map((s, i) => ({ ...s, path_id: i })), more: false }) };
+  }
+  if (u.endsWith('/nytt.json')) return { ok: true, json: async () => ({ poster: allaPoster, samlingar }) };
   throw new Error(u);
 };
 globalThis.fetch = async (url, o = {}) => {
@@ -171,6 +179,8 @@ globalThis.fetch = async (url, o = {}) => {
   if (sokvag === '/account') return ok({ plan: [{ credits: brevoLaget.kvar, creditsType: 'sendLimit' }] });
   if (sokvag.startsWith('/contacts/lists/')) return ok({ count: brevoLaget.antal });
   if (sokvag.startsWith('/emailCampaigns?')) return ok({ campaigns: brevoLaget.kampanjer });
+  if (/^\/emailCampaigns\/\d+\?/.test(sokvag)) return ok({ status: brevoLaget.kampanjer.find((k) => sokvag.includes(String(k.id)))?.status ?? 'draft' });
+  if (sokvag === '/smtp/email' && brevoLaget.larmFel) { brevoLaget.anrop.push([sokvag]); return { ok: false, status: 500, text: async () => 'fel' }; }
   brevoLaget.anrop.push([sokvag, o.body ? JSON.parse(o.body) : undefined, o.method]);
   if (sokvag === '/emailCampaigns') { const id = 70 + brevoLaget.kampanjer.length; brevoLaget.kampanjer.push({ id, name: JSON.parse(o.body).name, status: 'draft' }); return ok({ id }); }
   if (sokvag.endsWith('/sendNow')) {
@@ -184,7 +194,7 @@ const sant = (villkor, ...text) => { if (!villkor) { fel++; console.error(...tex
 const utskick = () => brevoLaget.anrop.filter(([p]) => p.endsWith('/sendNow')).length;
 const antalKampanjer = () => brevoLaget.anrop.filter(([p]) => p === '/emailCampaigns').length;
 const larm = () => brevoLaget.anrop.filter(([p]) => p === '/smtp/email').length;
-const nollstall = () => { brevoLaget.anrop = []; brevoLaget.kampanjer = []; brevoLaget.sendNowFel = false; brevoLaget.kvar = 300; brevoLaget.antal = 150; gcFel = false; };
+const nollstall = () => { brevoLaget.anrop = []; brevoLaget.kampanjer = []; brevoLaget.sendNowFel = false; brevoLaget.larmFel = false; brevoLaget.kvar = 300; brevoLaget.antal = 150; gcFel = false; gcSumma = 2525; };
 
 {
   // Provkörningen skriver inget.
@@ -199,6 +209,9 @@ const nollstall = () => { brevoLaget.anrop = []; brevoLaget.kampanjer = []; brev
   brevoLaget.anrop = [];
   const andra = await kedjan(lager, '2026-11-02T06:00:00Z');
   sant(andra.steg === 'månadsbrevet skickat' && antalKampanjer() === 1 && utskick() === 1 && brevoLaget.anrop[0][1].subject === 'Månadsbrev: mest läst i oktober', 'andra dagen', andra);
+  // Månadens tal sparas med brevet: alla besök, posternas, listorna och det nya.
+  const sparat = JSON.parse(lager.varden.manadsbrev)['2026-10'].siffror;
+  sant(sparat?.besok === 2525 && sparat.posternas === 2015 && sparat.listor[0].rader[0].besok === 1000 && sparat.nyast === '/artiklar/t', 'månadens tal sparades inte', JSON.stringify(sparat));
   brevoLaget.anrop = [];
   const tredje = await kedjan(lager, '2026-11-03T06:00:00Z');
   sant(!brevoLaget.anrop.length && tredje.steg.startsWith('redan gjort'), 'brevet gick två gånger', tredje);
@@ -225,14 +238,40 @@ const nollstall = () => { brevoLaget.anrop = []; brevoLaget.kampanjer = []; brev
   sant(antalKampanjer() === 1 && brevoLaget.kampanjer[0].status === 'sent', 'en andra kampanj skapades', antalKampanjer());
 }
 {
+  // En schemalagd kampanj som Brevo sedan stoppar: nästa körning säger till, en gång när beskedet kom fram, och skapar ingen ny.
+  nollstall();
+  brevoLaget.kvar = 20;
+  const lager = lagerNytt();
+  await kedjan(lager, '2026-11-01T10:00:00Z');
+  brevoLaget.kvar = 300;
+  brevoLaget.kampanjer[0].status = 'suspended';
+  brevoLaget.larmFel = true;
+  brevoLaget.anrop = [];
+  const utanBesked = await kedjan(lager, '2026-11-02T06:00:00Z');
+  sant(larm() === 1 && JSON.parse(lager.varden.manadsbrev)['2026-10'].status === 'stoppad' && JSON.parse(lager.varden.manadsbrev)['2026-10'].larmad === false && utanBesked.steg.startsWith('redan gjort'), 'en stoppad kampanj', larm(), lager.varden.manadsbrev);
+  brevoLaget.larmFel = false;
+  brevoLaget.anrop = [];
+  await kedjan(lager, '2026-11-03T06:00:00Z');
+  sant(larm() === 1 && !antalKampanjer() && JSON.parse(lager.varden.manadsbrev)['2026-10'].larmad === true, 'beskedet försöktes inte igen', larm(), antalKampanjer());
+  brevoLaget.anrop = [];
+  await kedjan(lager, '2026-11-03T07:00:00Z');
+  sant(!larm(), 'beskedet kom två gånger', larm());
+}
+{
   // Stannade körningen efter att loggen sa skapad utan någon kampanj i Brevo går brevet ändå.
   nollstall();
   const lager = lagerNytt();
-  await lager.setJSON('manadsbrev', { '2026-10': { status: 'skapad', kampanj: 5 } });
+  await lager.setJSON('manadsbrev', { '2026-10': { status: 'skapad' } });
   const r = await kedjan(lager, '2026-11-02T06:00:00Z');
   sant(r.steg === 'månadsbrevet skickat' && antalKampanjer() === 1, 'brevet försvann efter en körning som stannade', r);
 }
 {
+  // Besöken på posterna är orimligt få: då läser brevet fel, och inget går ut. Niclas får besked.
+  nollstall();
+  gcSumma = 500000;
+  const lager0 = lagerNytt();
+  await kedjan(lager0, '2026-11-01T06:00:00Z').then(() => sant(false, 'rimlighetsspärren släppte igenom'), () => {});
+  sant(!antalKampanjer() && larm() === 1, 'rimlighetsspärren', antalKampanjer(), larm());
   // Lagret är nere: Niclas får ändå besked. Listan är större än gränsen: inget går ut, och han får besked.
   nollstall();
   const lager = lagerNytt();
@@ -250,6 +289,34 @@ const nollstall = () => { brevoLaget.anrop = []; brevoLaget.kampanjer = []; brev
   const lager3 = lagerNytt();
   const r = await kedjan(lager3, '2026-11-01T10:00:00Z');
   sant(r.steg.includes('schemalagt') && brevoLaget.anrop.some(([p, , m]) => m === 'PUT') && JSON.parse(lager3.varden.skickat).bokat['2026-11-02'] === 150 && !utskick(), 'nästa morgon', r);
+}
+
+// Roten för statistiken: frågan med namn, med och utan snedstreck, 100 sidor i varje fråga, och det som går fel.
+{
+  const period = { start: new Date('2026-10-01T00:00:00Z'), slut: new Date('2026-11-01T00:00:00Z') };
+  const fragor = [];
+  const hits = [{ path: '/a', count: 5 }, { path: '/a/', count: 2 }, { path: '/b', count: 1 }];
+  const svara = (json, status = 200) => ({ ok: status < 400, status, json: async () => json });
+  const hamta2 = async (u) => { const p = new URL(String(u)).searchParams; const namn = p.get('include_paths').split(','); fragor.push({ namn, byNamn: p.get('path_by_name'), limit: p.get('limit'), start: p.get('start') }); return svara({ hits: hits.filter((h) => namn.includes(h.path)), more: false }); };
+  const sidlista = Array.from({ length: 120 }, (_, i) => (i === 0 ? '/a' : i === 1 ? '/b' : `/x${i}`));
+  const b2 = await sidornasBesok('k', [...sidlista, '/a'], { ...period, hamta: hamta2, paus: 0 });
+  sant(b2.get('/a') === 7 && b2.get('/b') === 1 && b2.size === 2, 'sidornas besök', [...b2]);
+  sant(fragor.length === 3 && fragor.every((q) => q.byNamn === 'true' && q.limit === '100' && q.namn.length <= 100) && fragor[0].namn.includes('/a/') && fragor[0].start === '2026-10-01T00:00:00Z', 'frågan med namn', JSON.stringify(fragor.map((q) => q.namn.length)));
+  const ofull = await sidornasBesok('k', ['/a'], { ...period, hamta: async () => svara({ hits: [], more: true }), paus: 0 }).then(() => null, (e) => e.message);
+  sant(/inte är helt/.test(ofull ?? ''), 'ett ofullständigt svar stannar inte', ofull);
+  let stoppad = 0;
+  const hamta429 = async () => (++stoppad < 3 ? svara({}, 429) : svara({ hits: [{ path: '/a', count: 1 }], more: false }));
+  const b3 = await sidornasBesok('k', ['/a'], { ...period, hamta: hamta429, paus: 0 });
+  sant(b3.get('/a') === 1 && stoppad === 3, 'ett stoppat anrop görs inte om', stoppad);
+  const komma = await sidornasBesok('k', ['/a,b'], { ...period, hamta: hamta2, paus: 0 }).then(() => null, (e) => e.message);
+  sant(/kommatecken/.test(komma ?? ''), 'en adress med kommatecken stannar inte', komma);
+  const nere = await sidornasBesok('k', ['/a'], { ...period, hamta: async () => svara({}, 500), paus: 0 }).then(() => null, (e) => e.message);
+  sant(/500/.test(nere ?? ''), 'ett fel från GoatCounter stannar inte', nere);
+  const summan = await periodensBesok('k', { ...period, hamta: async () => svara({ total: 42636, total_events: 11309 }) });
+  sant(summan === 31327, 'periodens besök', summan);
+  let anropen = 0;
+  const alla = await allaHits('k', { ...period, paus: 0, hamta: async () => (++anropen === 1 ? svara({ hits: [{ path_id: 1, path: '/a', count: 1 }], more: true }) : svara({ hits: [{ path_id: 2, path: 'fil:x', event: true, count: 1 }], more: false })) });
+  sant(alla.length === 2 && anropen === 2, 'alla hits', alla.length, anropen);
 }
 
 if (fel) { console.error(`utskicksprov: ${fel} fel`); process.exit(1); }
