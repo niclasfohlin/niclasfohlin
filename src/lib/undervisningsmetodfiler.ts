@@ -9,8 +9,18 @@ import { UM_NAMN, UM_SLAG, umRad, umStam, type Um, type UmSlag } from './undervi
 import { parse } from 'yaml';
 import { bankAv, enhetAdress } from './bank';
 import { metodensCentrala } from './centrala';
+import { medTemana } from './faktatemaihop.js';
 
 const bankerna = new Map<string, ReturnType<typeof bankAv>>();
+/** Banken i en metod i Stödundervisning, med databasens teman som textsidorna (medDatabasen), läst direkt ur filerna eftersom
+ *  sakerna räknas utan samlingarna: faktatexterna i temana hade annars fallit bort (Codex 2026-11-07). */
+function metodensBank(metod: string) {
+  const fil = join(process.cwd(), 'src', 'content', 'stodundervisning', `${metod}.yaml`);
+  if (!existsSync(fil)) return null;
+  const mapp = join(process.cwd(), 'src', 'content', 'faktateman');
+  const teman = existsSync(mapp) ? readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), data: parse(readFileSync(join(mapp, f), 'utf8')) })).filter((t) => t.data.metod === metod) : [];
+  return bankAv(medTemana(parse(readFileSync(fil, 'utf8')), teman));
+}
 /**
  * Bankens texter som metoden pekar ut, ur metoderna vars bank den visar med fältet centrala: titeln med sitt nummer, som
  * Tackfisken (20) och Skrapet på dörren (Mellan, text 2), och titeln i en tabellcell bredvid nivån, som Någon har varit här
@@ -23,8 +33,7 @@ function bankensTexter(d: Um): { namn: string; former: string[]; adress: string 
   const ut: { namn: string; former: string[]; adress: string }[] = [];
   for (const c of metodensCentrala(d)) {
     if (!c.metod) continue;
-    const fil = join(process.cwd(), 'src', 'content', 'stodundervisning', `${c.metod}.yaml`);
-    if (!bankerna.has(c.metod)) bankerna.set(c.metod, existsSync(fil) ? bankAv(parse(readFileSync(fil, 'utf8'))) : null);
+    if (!bankerna.has(c.metod)) bankerna.set(c.metod, metodensBank(c.metod));
     for (const e of bankerna.get(c.metod)?.enheter ?? []) {
       const titel = e.l.titel;
       if (!titel || e.nr === undefined) continue;

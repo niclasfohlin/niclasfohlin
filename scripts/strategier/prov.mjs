@@ -116,8 +116,16 @@ for (const metod of iMetoder) {
   const rutor = [...sida.matchAll(/<aside class="vav[\s\S]*?<\/aside>/g)].map((m) => m[0]).filter((r) => r.includes('href="/strategier'));
   const platserna = registret[metod].platser ?? [];
   if (rutor.length !== platserna.length) fel.push(`Sådden: ${metod} i Metoder har ${rutor.length} rutor med strategier på sidan och ${platserna.length} platser i src/data/strategier-i-metoder.json; en plats som sidan inte har (steg N, karna:, tabell: eller arbetsomradet) ritas inte`);
+  const pasidan = rutor.map((r) => [...r.matchAll(/href="\/strategier\/([a-z0-9-]+)"/g)].map((m) => m[1]).join()).sort();
+  const iregistret = platserna.map((r) => (r.delar ?? []).join()).sort();
+  if (pasidan.join(' | ') !== iregistret.join(' | ')) fel.push(`Sådden: ${metod} i Metoder har strategierna ${pasidan.join(' | ')} på sidan och ska ha ${iregistret.join(' | ')}`);
   platser += rutor.length;
 }
+
+// En ny metod i Metoder prövas mot verktyget: den står i registret med sina platser, eller med nej och skälet, så att sådden
+// inte faller bort när en metod kommer efter den, som Reciprok undervisning (Niclas fråga 2026-11-07).
+const metodfilerna = readdirSync(join(ROT, 'src', 'content', 'undervisningsmetoder')).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => f.replace(/.yaml$/, ''));
+for (const metod of metodfilerna) if (!registret[metod] || !(registret[metod].platser?.length || String(registret[metod].nej ?? '').trim())) fel.push(`Sådden: ${metod} i Metoder är inte prövad mot Strategier; skriv den i src/data/strategier-i-metoder.json, med platserna eller med nej och skälet (METODER.md under Sådden)`);
 
 if (fel.length) { console.error(`Strategier, provet stannade:\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`Strategier, sådden: ${platser} platser i ${Object.keys(saddJa).length} metoder i Stödundervisning och avsnittet i ${iMetoder.length} metoder i Metoder.`);

@@ -102,6 +102,14 @@
     ],
     "kb": 621
   },
+  "_metod:reciprok-undervisning": {
+    "summa": "7ef26e9796316633",
+    "kort": [
+      "gissa-forst",
+      "fraga-varfor"
+    ],
+    "kb": 266
+  },
   "_metod:testbaserat-larande": {
     "summa": "20da0336b43f56a7",
     "kort": [

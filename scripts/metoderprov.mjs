@@ -678,6 +678,59 @@ try {
       else fel.push(`${s}: står inte i ${s.split('/')[2]}-lathund.pdf: "${m.slice(0, 90)}"`);
     }
   }
+  // Lär dig metoden i webbläsaren, för metoderna som visar verktyg (fältet centrala): första lektionens ruta länkar bankens texter
+  // och verktyget till rätt sidor, verktygets knapp står en gång med sitt korta namn, och med start i slutet av november står
+  // raderna efter stegen i datumordning (verifieringen av Reciprok undervisning 2026-11-07, och Codex samma dag: datan bevisar
+  // inte det som ritas).
+  {
+    const mapp = join(rot, 'src', 'content', 'undervisningsmetoder');
+    const register = JSON.parse(readFileSync(join(rot, 'src', 'data', 'centrala.json'), 'utf8'));
+    // Måndagen i slutet av november som inte har varit, eftersom datumfältet inte tar en dag långt bak i tiden.
+    const novemberstart = (() => { for (let ar = new Date().getFullYear(); ; ar++) { const x = new Date(Date.UTC(ar, 10, 23)); x.setUTCDate(x.getUTCDate() + ((8 - x.getUTCDay()) % 7)); if (x > new Date()) return x.toISOString().slice(0, 10); } })();
+    const veckan = (etikett) => { const n = Number(/\bv\. (\d+)/.exec(etikett)?.[1]); return n >= 30 ? n : n + 53; };
+    await skicka('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+    for (const f of readdirSync(mapp).filter((x) => x.endsWith('.yaml') && !x.startsWith('_'))) {
+      const id = f.replace(/\.yaml$/, '');
+      const d = parse(readFileSync(join(mapp, f), 'utf8'));
+      if (!(d.centrala ?? []).length || !existsSync(join(dist, 'metoder', id, 'lar-dig', 'index.html'))) continue;
+      await oppna(`${bas}/metoder/${id}/lar-dig`);
+      const svar = await kor(`(async () => {
+        const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
+        const falt = document.getElementById('ld-start');
+        falt.value = '${novemberstart}';
+        falt.dispatchEvent(new Event('input', { bubbles: true }));
+        falt.dispatchEvent(new Event('change', { bubbles: true }));
+        await vanta(300);
+        document.querySelector('[data-vy="1"]').click();
+        await vanta(300);
+        const lank = (a) => [a.textContent.trim(), (a.getAttribute('href') ?? '').replace(/\\?.*$/, '')];
+        const rutan = [...document.querySelectorAll('.pl-nasta a')].map(lank);
+        const knappar = [...document.querySelectorAll('.pl-andra-knappar a')].map(lank);
+        document.querySelector('[data-vy="efter"]').click();
+        await vanta(300);
+        const rader = [...document.querySelectorAll('.pl-uppf .pl-etikett')].map((e) => e.textContent.trim());
+        return JSON.stringify({ rutan, knappar, rader });
+      })()`);
+      if (!svar) { fel.push(`/metoder/${id}/lar-dig: provet i webbläsaren fick inget svar`); continue; }
+      const { rutan, knappar, rader } = JSON.parse(svar);
+      const passet = (d.plan?.passen ?? []).find((p) => /^första lektionen$/i.test(p.nar ?? ''))?.text ?? '';
+      for (const m of passet.matchAll(/[A-ZÅÄÖ][^.:,]*? \((?:Lättläst|Mellan|Avancerad), text (\d+)\)/g)) {
+        const l = rutan.find(([t]) => t === m[0]);
+        const sidan = l ? join(dist, ...l[1].split('/').filter(Boolean), 'index.html') : '';
+        if (!l) fel.push(`/metoder/${id}/lar-dig: "${m[0]}" i första lektionen är ingen länk`);
+        else if (!existsSync(sidan) || !readFileSync(sidan, 'utf8').includes(m[0].replace(/ \(.*$/, ''))) fel.push(`/metoder/${id}/lar-dig: "${m[0]}" leder till ${l[1]}, som inte är texten`);
+      }
+      for (const x of d.centrala) {
+        const c = register.find((y) => y.id === x.id);
+        if (!passet.includes(c.namn)) continue;
+        if (!rutan.some(([t, a]) => t === c.namn && a === c.adress)) fel.push(`/metoder/${id}/lar-dig: ${c.namn} i första lektionen är ingen länk till verktyget`);
+        const antal = knappar.filter(([, a]) => a === c.adress).length;
+        if (antal !== 1 || !knappar.some(([t, a]) => t === (c.knapp ?? c.namn) && a === c.adress)) fel.push(`/metoder/${id}/lar-dig: under steget står ${antal} knappar till ${c.namn}, och den ska stå en gång med namnet ${c.knapp ?? c.namn}`);
+      }
+      const veckorna = rader.map(veckan);
+      if (!rader.length || veckorna.some((v, i) => i > 0 && v < veckorna[i - 1])) fel.push(`/metoder/${id}/lar-dig: raderna efter stegen står inte i datumordning med start ${novemberstart}: ${rader.join(' | ')}`);
+    }
+  }
   ws.close();
 } finally {
   proc.kill();
@@ -712,6 +765,25 @@ try {
       const larDig = join(dist, 'metoder', id, 'lar-dig', 'index.html');
       if (existsSync(larDig) && !readFileSync(larDig, 'utf8').includes(c.adress)) fel.push(`/metoder/${id}/lar-dig: ${c.namn} står i fältet centrala, men Lär dig metoden har ingen knapp dit`);
     }
+    // Lär dig metoden: verktygen är saker, så att passets text länkar dem, och knappen heter som på metodens sida; bankens texter
+    // som passet pekar ut är länkar; och materialets knapp heter som bladet när metoden har ett enda (verifieringen av Reciprok
+    // undervisning 2026-11-07).
+    const ldSida = join(dist, 'metoder', id, 'lar-dig', 'index.html');
+    if (existsSync(ldSida)) {
+      const ld = JSON.parse(readFileSync(ldSida, 'utf8').match(/<script type="application\/json" id="ld-data">([\s\S]*?)<\/script>/)?.[1] ?? '{}');
+      for (const x of d.centrala ?? []) {
+        const c = register.find((y) => y.id === x.id);
+        if (!ld.saker?.some((s) => s.namn === c.namn && s.adress === c.adress)) fel.push(`/metoder/${id}/lar-dig: ${c.namn} står i fältet centrala, men är ingen sak som texten kan länka`);
+        if (!ld.verktyg?.some((v) => v.adress === c.adress && v.knapp === (c.knapp ?? c.namn))) fel.push(`/metoder/${id}/lar-dig: knappen till ${c.namn} heter inte som på metodens sida`);
+      }
+      const texterna = (d.plan?.passen ?? []).map((p) => p.text ?? '');
+      for (const text of texterna) for (const m of text.matchAll(/[A-ZÅÄÖ][^.:,]*? \((?:Lättläst|Mellan|Avancerad), text \d+\)/g)) {
+        const traff = sakdelar(text, ld.saker ?? []).some((y) => y.sak && y.text === m[0]);
+        if (!traff) fel.push(`/metoder/${id}/lar-dig: "${m[0]}" i planens text är ingen länk till texten`);
+      }
+      if ((d.ramar?.ramar ?? []).length === 1 && ld.filer?.materialet?.namn !== d.ramar.ramar[0].rubrik) fel.push(`/metoder/${id}/lar-dig: materialets knapp heter ${ld.filer?.materialet?.namn} och inte som bladet ${d.ramar.ramar[0].rubrik}`);
+      if (!readFileSync(join(rot, 'src', 'scripts', 'lardig.ts'), 'utf8').includes('<p>${medSaker(p.text)}</p>')) fel.push('src/scripts/lardig.ts: passets text i Lär dig metoden ska länka metodens saker (medSaker)');
+    }
     // Säger metoden paren vid utfallen räknar sidan om dem med klassens antal (utfallensPar i standarden).
     if (/alltså högst \S+ par\b/.test(JSON.stringify(d.steg ?? {})) && !sida.includes('data-par=')) fel.push(`/metoder/${id}: utfallen säger par, men sidan räknar inte om dem med klassens antal`);
     if ((d.ramar?.ramar ?? []).length === 1) {
@@ -721,6 +793,10 @@ try {
       // Ett blad med flera sidor skrivs ut dubbelsidigt, så materialets pdf är bladets sidor, utan textsidan först.
       const mat = join(rot, 'public', 'metoder', `${id}-materialet.pdf`);
       const bladPdf = join(rot, 'public', 'metoder', `${id}-blad-${(d.ramar.ramar[0].rubrik ?? '').toLocaleLowerCase('sv').replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.pdf`);
+      // Ett eget blad som heter Strategikorten behåller namnet, också när verktyget Strategier är sått i metoden: namnet leder
+      // till bladet och inte till avsnittet Strategier för lärande.
+      const tillAvsnittet = [...sida.matchAll(/<a\b[^>]*href="[^"]*#strategierna"[^>]*>([\s\S]*?)<\/a>/g)].filter((m) => /strategikorten/i.test(m[1]));
+      if (d.ramar.ramar[0].rubrik === 'Strategikorten' && tillAvsnittet.length) fel.push(`/metoder/${id}: bladet heter Strategikorten, men ${tillAvsnittet.length} länkar med namnet leder till avsnittet Strategier för lärande`);
       if (n > 1 && (!existsSync(bladPdf) || !existsSync(mat) || !readFileSync(mat).equals(readFileSync(bladPdf)))) fel.push(`/metoder/${id}: bladet ${d.ramar.ramar[0].rubrik} har ${n} sidor, men materialets pdf är inte bladets sidor`);
     }
   }

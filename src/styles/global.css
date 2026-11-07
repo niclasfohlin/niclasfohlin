@@ -700,7 +700,7 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .um-ld-huvud { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.2rem 1rem; padding: 0.6rem 1rem; background: var(--farg-accent-ljus); }
 .um-ld-huvud h4 { margin: 0; font-size: 1.2rem; color: var(--farg-accent-mork); }
 .um-ld-fakta { display: flex; flex-wrap: wrap; gap: 0 0.75rem; margin: 0; font-family: var(--typsnitt-ui); font-size: 0.88rem; font-weight: 600; color: var(--farg-accent-mork); }
-.um-ld-karna, .um-ld-vad, .um-lektionsdel > .um-gor, .um-lektionsdel > .um-beslutskarta { margin-inline: 1rem; }
+.um-ld-karna, .um-ld-vad, .um-lektionsdel > .um-gor, .um-lektionsdel > .um-not, .um-lektionsdel > .um-beslutskarta { margin-inline: 1rem; }
 .um-ld-karna { margin-top: 0.6rem; margin-bottom: 0.2rem; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
 .um-ld-karna a { color: var(--farg-accent); }
 .um-ld-vad { margin-top: 0.5rem; }

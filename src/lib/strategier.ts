@@ -101,7 +101,8 @@ export const allaKortensAntal = () => (MANIFESTET[STRATEGIKORTEN_ALLA.nyckel]?.k
  */
 type Strategikortet = { text: string; strategier: string[] };
 export function strategikortetI(id: string, d: object): Strategikortet | undefined {
-  return (d as { strategikort?: Strategikortet }).strategikort ?? (sadden as unknown as Record<string, Strategikortet | undefined>)[id];
+  const iRegistret = (sadden as unknown as Record<string, Strategikortet | undefined>)[id];
+  return (d as { strategikort?: Strategikortet }).strategikort ?? (iRegistret?.strategier?.length ? iRegistret : undefined);
 }
 
 /** Platserna i en metod i Metoder där strategiernas små kort vävs in (sajtens register, K-702), med samma form som sådden i

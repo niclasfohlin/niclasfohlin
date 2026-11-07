@@ -16,8 +16,8 @@ tid: 45 minuter per lektion, minst två lektioner i veckan
 hurOftaSkal: "Två stora studier hade två tillfällen i veckan i minst 12 veckor (Tengberg m.fl., 2015; Torres Blas m.fl., 2026)."
 period: Fem veckor att komma igång
 material:
-  - en text med tre stopp
-  - fyra Strategikort per par
+  - en text med två eller tre stopp
+  - två till fyra Strategikort per par
   - tavlan
   - pennor och lappar
   - planeringsmallen
@@ -202,7 +202,7 @@ tabeller:
     text: "Välj en text med något olöst. Sju till tjugo meningar räcker. Läs den själv först och lägg märke till var du stannar och vad du gör där, för det är den tankestrategi du ska visa. De första fyra veckorna väljer du en text där veckans strategi behövs. Välj sedan ett stopp till där samma strategi behövs, så att paren kan göra som du gjorde, och ett tredje där de väljer själva. Det kan vara textens slut. Vik texten vid stoppen, så att ingen läser före. Kan paren behöva stanna mitt i sista biten, viker du där också. Går det inte att skriva i texten, som i en lärobok, skriver paren ledtråden med egna ord på ett papper."
     kolumner: [Bra stopp, Tankestrategin]
     rader:
-      - ["En vändpunkt eller ett öppet slut", "Förutspå"]
+      - ["En vändpunkt, ett öppet slut eller en ny rubrik", "Förutspå"]
       - ["Något som väcker en fråga", "Ställa frågor"]
       - ["Ett nytt ord, eller där en elev kan ta fel", "Reda ut"]
       - ["Slutet på ett tätt stycke", "Sammanfatta"]
@@ -258,7 +258,7 @@ tabeller:
     rader:
       - ["Matematik", "En textuppgift", "Läs tre gånger: vad handlar det om, vad ska vi ta reda på och vad behövs? Reda ut det som är oklart, och pröva svaret mot problemet."]
       - ["NO och teknik", "Ett stycke i läroboken", "Förutspå vad nästa stycke svarar på. Reda ut de ord texten tar för givet."]
-      - ["SO", "En källa, en karta eller en artikel", "Ställ frågor till källan: vem gjorde den, och när? Reda ut en karta eller ett begrepp."]
+      - ["SO", "En källa, en karta eller en artikel", "Förutspå vad nästa stycke svarar på. Ställ frågor till källan: vem gjorde den, och när? Reda ut en karta eller ett begrepp."]
       - ["Engelska, moderna språk", "En text på språket, gärna under elevernas nivå", "Ett stopp kan vara ett ord som ni reder ut. Ni får samtala på svenska, och paren skriver på det språk de klarar."]
       - ["Hem- och konsumentkunskap, slöjd", "Ett recept eller en beskrivning", "Paren sammanfattar stegen före arbetet och förutspår vad som händer om de hoppar över ett."]
       - ["Idrott och hälsa", "En regel eller en instruktion", "Paren sammanfattar regeln i en mening, prövar den i rörelse och skriver meningen efteråt."]
@@ -343,6 +343,7 @@ tidsschema:
     - { tid: Efter lektionen, fas: Efter lektionen, vad: "Läs lapparna, och stryk under ledtråden när den stöder tanken. Välj en fråga ur det olösta till nästa lektion, och skriv ner två repliker du minns." }
   varianter:
     - nar: första lektionen
+      text: Lektionskortet gäller från lektion 4, så håll lathundens sida 2 i handen.
       delar:
         - { fas: Inför läsningen, tid: 0–⁠15 min, fraser: ["Vi läser för att se om våra gissningar stämmer."] }
         - { fas: Jag tänker högt, tid: 15–⁠25 min, fraser: ["Jag tror att … men jag är inte säker.", "Det jag gjorde heter att förutspå."] }
@@ -350,7 +351,7 @@ tidsschema:
         - { fas: Ni tar över, tid: 35–⁠40 min, fraser: ["Läs resten växelvis. Stämde det?"] }
         - { fas: Efter läsningen, tid: 40–⁠45 min, fraser: ["Vad tog er vidare i texten?"] }
     - nar: lektion 2 och 3
-      text: "Texten har två stopp, ett för dig och ett för paren. I lektion 2 sätter du ett frågetecken i din text där du stannar, så att paren ser hur de ska göra. De stryker också under ett ord som ledtråd. I lektion 3 skriver paren sin första mening, och alla skriver lappen för första gången. Från lektion 4 har texten tre stopp. Minuterna:"
+      text: "Parrutinen tar fem minuter. Texten har två stopp, ett för dig och ett för paren. I lektion 2 sätter du ett frågetecken i din text där du stannar, så att paren ser hur de ska göra. De stryker också under ett ord som ledtråd. I lektion 3 skriver paren sin första mening, och alla skriver lappen för första gången. Från lektion 4 har texten tre stopp. Minuterna:"
       delar:
         - { fas: Inför läsningen, tid: 0–⁠10 min }
         - { fas: Jag tänker högt, tid: 10–⁠20 min }
@@ -449,7 +450,7 @@ steg:
         - Säg vad du hörde, och vilken strategi som hjälpte.
       fraser: ["Fick vi reda på det vi ville?", "Vilken tankestrategi tog er vidare i dag?"]
 lektionskort:
-  - { efter: klassen, text: "Lektionens fem delar står på lektionskortet, ett eget A4 i din hand under lektionen." }
+  - { efter: klassen, text: "Lektionens fem delar står på lektionskortet, ett eget A4 i din hand från lektion 4." }
 fastnar:
   rubrik: Så stöttar du
   text: "Tystnad betyder ofta att eleven tänker, så vänta först. Ge sedan minsta möjliga stöd, så att tänkandet stannar hos eleven. Håller en tanke inte, läser ni stället igen, och eleven får ändra sig. Kravet på en ledtråd står kvar, och det är stödet du ökar."
@@ -557,11 +558,11 @@ stod:
 checklista:
   rubrik: Före första lektionen
   punkter:
-    - Träffa arbetslaget, eller en kollega om du börjar ensam, och bestäm signalen.
+    - Träffa arbetslaget, eller en kollega om du börjar ensam, och bestäm signalen att sluta.
     - Välj ämnet och minst två lektioner i veckan. I 7–⁠9 kan en vara i svenska och en i SO eller NO.
     - Välj fyra till sex texter i ett arbetsområde, till exempel ur tabellen Tre textsamtal i bilaga A.
     - Planera första lektionen i planeringsmallen, och skriv varför ni läser så här.
-    - Skriv ut lektionskortet, en text per par och Strategikorten Förutspå och Ställa frågor, ett ark per par och ett åt dig.
+    - Skriv ut lathunden, en text per par och Strategikorten Förutspå och Ställa frågor, ett ark per par och ett åt dig.
     - Bestäm paren, och ställ bänkarna så att paren ser varandra och alla ser tavlan.
     - Boka specialläraren till sista lektionen i vecka 2 och en kollega i vecka 4.
 klassen:
@@ -570,9 +571,8 @@ klassen:
 forsta:
   rubrik: Första lektionen
   text:
-    - "Först lär sig klassen parrutinen på något lätt. Sedan läser ni en kort text med två stopp, som Skrapet på dörren (Mellan, text 2) eller Dagen före (Avancerad, text 10) på sidan Ta fram en lästext. Vid det första stoppet tänker du högt med Förutspå, säger vad strategin heter och visar kortet ur Strategikorten. Vid det andra gör paren samma sak och pekar på ordet som fick dem att gissa."
-    - "Säg varför ni läser så här: ”Vi läser en text och tänker tillsammans om den. Jag läser högt och stannar, så att ni hör hur jag tänker. Sedan gör ni samma sak två och två.” Säg också att du inte har något facit."
-    - "Lektion 2 går likadant, men parrutinen tar fem minuter och paren stryker under ordet."
+    - "Först lär sig klassen parrutinen på något lätt. Sedan läser ni en kort text med två stopp, som Skrapet på dörren (Mellan, text 2) eller Dagen före (Avancerad, text 10) på sidan Ta fram en lästext. Vik undan frågorna under texten. I SO och NO tar du sju till tjugo meningar ur läroboken eller ur en faktatext. Vid det första stoppet tänker du högt med Förutspå, säger vad strategin heter och visar kortet ur Strategikorten. Vid det andra gör paren samma sak och pekar på ordet som fick dem att gissa."
+    - "Säg varför ni läser så här: ”Vi tänker tillsammans om texten. Jag läser högt och stannar, så att ni hör hur jag tänker. Sedan gör ni samma sak två och två.” Säg också att du inte har något facit."
   plan:
     amne: Svenska
     klass: 4B
@@ -619,8 +619,8 @@ progression:
     - { vecka: "1", led: I par, rubrik: "Förutspå och parrutinen", fokus: "Du visar Förutspå, och klassen lär sig parrutinen.", eleverna: "Att svara i par, och att gissa med ett skäl, som du gjorde. Paren har Strategikorten framme.", roll: "Att tänka högt en gång, vänta och välja utfall.", vidare: "nästan alla par har strukit under ett ord och kan säga varför", fraga: "Har nästan alla par strukit under ett ord och kan säga varför?" }
     - { vecka: "2", led: Tankestrategierna, rubrik: Ställa frågor, fokus: "Du visar Ställa frågor, och klassen lär sig rutinen Meningen på tavlan.", eleverna: "Att ställa en fråga kamraten behöver tänka på. Några skriver du under Det är olöst.", roll: "Att fråga det du själv undrar, och välja utfall.", vidare: "de flesta par skriver en fråga de inte kan svara på än", fraga: "Skriver de flesta par en fråga de inte kan svara på än?" }
     - { vecka: "3", led: Tankestrategierna, rubrik: Reda ut, fokus: "Du visar Reda ut, och klassen lär sig rutinen Nya ord.", eleverna: "Att hitta nya ord och reda ut dem. Paren får Strategikorten Reda ut och Sammanfatta, så skriv ut dem.", roll: "Att ta upp det eleven sa, och välja utfall.", vidare: "de flesta par har satt ett frågetecken vid ett nytt ord och skrivit vad det kan betyda", fraga: "Har de flesta par satt ett frågetecken vid ett nytt ord och skrivit vad det kan betyda?" }
-    - { vecka: "4", led: Tankestrategierna, rubrik: Sammanfatta, fokus: "Du visar Sammanfatta på en faktatext.", eleverna: "Att säga det viktigaste i en bit med en mening.", roll: "Att låta en kamrat pröva tanken, och välja utfall.", vidare: "de flesta par sammanfattar biten i en mening och stryker under det viktigaste stället", fraga: "Sammanfattar de flesta par biten i en mening och stryker under det viktigaste stället?" }
-    - { vecka: "5", led: Ni tar över, rubrik: "Fråga, avgör, lämna över", fokus: "Två par sitter ihop och övar rutinen Fråga, avgör, lämna över.", eleverna: "Att ge ordet vidare i gruppen.", roll: "Att stå långt bak, spela in fem minuter och välja utfall.", vidare: "de flesta grupper väljer strategi och ger ordet vidare utan dig", fraga: "Väljer de flesta grupper strategi och ger ordet vidare utan dig?" }
+    - { vecka: "4", led: Tankestrategierna, rubrik: Sammanfatta, fokus: "Du visar Sammanfatta på en faktatext.", eleverna: "Att säga det viktigaste i en bit med en mening. Du tar bit 1, och paren gör samma sak med bit 2.", roll: "Att låta en kamrat pröva tanken, och välja utfall.", vidare: "de flesta par sammanfattar biten i en mening och stryker under det viktigaste stället", fraga: "Sammanfattar de flesta par biten i en mening och stryker under det viktigaste stället?" }
+    - { vecka: "5", led: Ni tar över, rubrik: "Fråga, avgör, lämna över", fokus: "Två par sitter ihop och övar rutinen Fråga, avgör, lämna över.", eleverna: "Att ge ordet vidare när två par sitter ihop.", roll: "Att stå långt bak, spela in fem minuter och välja utfall.", vidare: "de flesta grupper väljer strategi och ger ordet vidare utan dig", fraga: "Väljer de flesta grupper strategi och ger ordet vidare utan dig?" }
 uppfoljning:
   text: "Du räknar eleverna i par utan ledtråd varje lektion och lapparna varje vecka."
   rader:
@@ -703,7 +703,7 @@ ramar:
   text: ["Utöver lektionskortet finns Strategikorten till klassen. De står på egna sidor."]
   ramar:
     - rubrik: Strategikorten
-      text: ["Till varje tankestrategi finns ett kort i halvt A4. Eleverna håller korten i handen när de samtalar om texten. Framsidan säger när kortet behövs, och baksidan vad man kan säga och fråga. Skriv ut korten dubbelsidigt och vänd längs långsidan. Klipp på linjen, så ger två ark de fyra korten. Varje par har en uppsättning, och du har en likadan. Till 28 elever behöver du 15 ark med Förutspå och Ställa frågor, och till vecka 3 lika många med Reda ut och Sammanfatta. Den som är ny i svenska skriver kortets namn på raden På mitt språk."]
+      text: ["Till varje tankestrategi finns ett kort i halvt A4. Eleverna håller korten i handen när de samtalar om texten. Framsidan säger när kortet behövs, och baksidan vad man kan säga och fråga. Skriv ut korten dubbelsidigt och vänd längs långsidan. Klipp på linjen, så ger två ark de fyra korten. Varje par har en uppsättning, och du har en likadan. Till 28 elever behöver du 15 ark med de två första sidorna med kort, Förutspå och Ställa frågor, och till vecka 3 lika många med de två sista, Reda ut och Sammanfatta. Den som är ny i svenska skriver kortets namn på raden På mitt språk."]
 planeringsmall:
   text: "Skriv kort. Det grå är samma i varje lektion. Läs texten först och se var du stannar, för det avgör vilken tankestrategi du visar. Välj sedan ett stopp till där samma strategi behövs, och från lektion 4 ett tredje där paren väljer själva. Tabellen Så väljer du text och stopp visar hur."
   fore:
@@ -794,7 +794,7 @@ lasMer:
 # ---------------------------------------------------------------------------------------------------------------------
 plan:
   passen:
-    - { nar: första lektionen, text: "Först lär sig klassen parrutinen på något lätt. Sedan läser ni en kort text med två stopp, som Skrapet på dörren (Mellan, text 2) eller Dagen före (Avancerad, text 10) på sidan Ta fram en lästext. Vid det första stoppet tänker du högt med Förutspå, säger vad strategin heter och visar kortet ur Strategikorten. Vid det andra gör paren samma sak och pekar på ordet som fick dem att gissa." }
+    - { nar: första lektionen, text: "Först lär sig klassen parrutinen på något lätt. Sedan läser ni en kort text med två stopp, som Skrapet på dörren (Mellan, text 2) eller Dagen före (Avancerad, text 10) på sidan Ta fram en lästext. Vik undan frågorna under texten. I SO och NO tar du sju till tjugo meningar ur läroboken eller ur en faktatext. Vid det första stoppet tänker du högt med Förutspå, säger vad strategin heter och visar kortet ur Strategikorten. Vid det andra gör paren samma sak och pekar på ordet som fick dem att gissa. Lektionskortet gäller från lektion 4, så håll lathundens sida 2 i handen." }
   fore: ["Välj ämnet och minst två lektioner i veckan. I 7–⁠9 kan en vara i svenska och en i SO eller NO."]
   utvardering: ["Fortsätt två lektioner i veckan till vecka 12. En kollega ser en lektion i månaden: vem tänker? Läs lapparna från vecka 4 och 5 med specialläraren. Den som behöver mer stöd får Textsamtal i grupp."]
   skattningar:
@@ -822,6 +822,6 @@ lathund:
       - "Eleverna lär sig fyra tankestrategier: förutspå, ställa frågor, reda ut och sammanfatta. Ledtråden är stället i texten som stöder tanken. På lappen står elevens egen tanke med en ledtråd."
       - Lärandet går till så här. En van läsare tänker tyst, så du visar en strategi högt. Paren gör samma sak, får återkoppling och gör det sedan själva. Så blir det elevens sätt att läsa.
   lektion:
-    text: "Första lektionen lär sig klassen parrutinen på något lätt, så Inför läsningen tar femton minuter. Sedan läser ni en kort text ur Ta fram en lästext. Du tänker högt med Förutspå vid första stoppet, och paren gör samma sak vid det andra. Lektion 2 och 3 har egna tider i metoden. Från lektion 4 leder du med lektionskortet."
+    text: "Första lektionen lär sig klassen parrutinen, så Inför läsningen tar femton minuter. Sedan läser ni en kort text ur Ta fram en lästext. Vik undan frågorna under texten. Du tänker högt med Förutspå vid första stoppet, och paren gör samma sak vid det andra. Lektion 2 och 3 har egna tider. Från lektion 4 leder du med lektionskortet."
   igang:
     rubrik: De första fem veckorna

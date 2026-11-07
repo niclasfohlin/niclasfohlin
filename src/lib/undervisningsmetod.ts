@@ -94,7 +94,8 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   // namnen också först i en mening (forst i sakdelar), där det är strategin och inte verbet.
   const sk = strategikortetI(id, d);
   if (sk) {
-    saker.push(sak('Strategikorten', `${sida}#strategierna`));
+    // Har metoden ett eget blad med namnet, som Strategikorten i Reciprok undervisning, leder namnet till bladet.
+    if (!((d.ramar?.ramar ?? []) as { rubrik: string }[]).some((r) => r.rubrik === 'Strategikorten')) saker.push(sak('Strategikorten', `${sida}#strategierna`));
     const blad = (d as { strategikort?: { blad?: string } }).strategikort?.blad;
     // Bladet har sin knapp i avsnittet, som de andra sakerna, och namnet i texten leder dit.
     if (blad) saker.push(sak(blad, `${sida}#strategierna`));
@@ -112,6 +113,8 @@ export const stegetsAnkare = (namn: string) => `del-${namn.toLocaleLowerCase('sv
 /** Utfallens ruta i ett steg, som knappen Utfallet i Lär dig metoden leder till (verifieringen 2026-11-02: knappen ledde till
  * stegets början, en och en halv skärm ovanför utfallen). */
 export const utfalletsAnkare = (namn: string) => `${stegetsAnkare(namn)}-utfallet`;
+/** Knappens namn för materialet: bladets när metoden har ett enda blad, som Strategikorten, så att knappen säger vad filen är. */
+export const materialetsNamn = (d: Um) => { const r = (d.ramar?.ramar ?? []) as { rubrik: string }[]; return r.length === 1 ? r[0].rubrik : UM_NAMN.materialet; };
 /** Bladets ankare i Materialet för klassen, ur namnet. */
 export const bladetsAnkare = (namn: string) => `blad-${slugAv(namn)}`;
 

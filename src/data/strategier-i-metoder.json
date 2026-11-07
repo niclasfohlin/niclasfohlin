@@ -1,5 +1,5 @@
 {
-  "_om": "Sådden av verktyget Strategier i Metoder (K-699, K-702; Niclas 2026-11-03: \"Vill ha sådana där minikort som du sådden ur för strukturer där dessa används\", och i riggen samma kväll: \"Tänk om sajten gör sådden?\"). Sajten väver in korten på metodens sida utan att metodens fil ändras, så att riggens dokument fortfarande är byggda ur samma fil (scripts/metoderfiler.mjs). text och strategier är riggens, språkgranskade i out/strategier/TILL-SAJTEN-sadd.md och prövade mot metodens text, och visas i avsnittet Strategier för lärande (src/components/Undervisningsmetod.astro) och strategierna blir metodens kortfil (scripts/strategier/kort.mjs); platser och skal är beläggen ur sökningen, underlag/prov/strategier/sadd-svar-c.md. En metod med eget fält strategikort, som riggens nya metod, läser fältet i stället.",
+  "_om": "Sådden av verktyget Strategier i Metoder (K-699, K-702; Niclas 2026-11-03: \"Vill ha sådana där minikort som du sådden ur för strukturer där dessa används\", och i riggen samma kväll: \"Tänk om sajten gör sådden?\"). Sajten väver in korten på metodens sida utan att metodens fil ändras, så att riggens dokument fortfarande är byggda ur samma fil (scripts/metoderfiler.mjs). text och strategier är riggens, språkgranskade i out/strategier/TILL-SAJTEN-sadd.md och prövade mot metodens text, och visas i avsnittet Strategier för lärande (src/components/Undervisningsmetod.astro) och strategierna blir metodens kortfil (scripts/strategier/kort.mjs); platser och skal är beläggen ur sökningen, underlag/prov/strategier/sadd-svar-c.md. En metod med eget fält strategikort, som riggens nya metod, läser fältet i stället. Varje metod i Metoder står här, också en ny, med platserna eller med nej och skälet (scripts/strategier/prov.mjs).",
   "explicit-undervisning": {
     "text": "Fem kognitionsvetenskapliga strategier finns redan i lektionen och arbetsområdet. Plocka fram finns i de två snabba i starten, där alla ur minnet tar fram det lektionen bygger på. Börja i det kända finns i samma två frågor, som prövar om alla kan det som det nya bygger på. Sprid ut finns också i starten, där det klassen har lärt sig kommer tillbaka veckor senare. Avlasta minnet finns i Jag gör, där du visar ett steg i taget med samma ord och sist ett helt exempel. Blanda uppgifter finns i arbetsområdet när grunden sitter. I huvudexemplets lektion 6 kommer tal med och utan växling om vartannat, och eleverna ser först vilket slag uppgiften är.",
     "strategier": [
@@ -214,6 +214,32 @@
         ],
         "slag": "form",
         "om": "Den blandade raden"
+      }
+    ]
+  },
+  "reciprok-undervisning": {
+    "text": "Två kognitionsvetenskapliga strategier finns redan i lektionen. Gissa först finns i Inför läsningen, där paren förutspår utifrån titeln innan ni läser, och efteråt går ni tillbaka till gissningarna. Fråga varför finns i Vi tänker tillsammans, när tankestrategin är Ställa frågor. Då frågar paren varför det står så, prövar ett svar och visar stället i texten.",
+    "strategier": [
+      "gissa-forst",
+      "fraga-varfor"
+    ],
+    "skal": "Paren förutspår före läsningen och går efteråt tillbaka till gissningarna, och i Vi tänker tillsammans frågar de varför det står så, prövar ett svar och visar stället i texten. Riggen prövade strategierna mot metodens text 2026-11-07 (out/strategier/TILL-SAJTEN-sadd-reciprok.md), och metoden stannar vid två, eftersom en knapp Strategier överst blir fel i en metod som lär ut tankestrategier.",
+    "platser": [
+      {
+        "efter": "steg 1",
+        "delar": [
+          "gissa-forst"
+        ],
+        "slag": "form",
+        "om": "Paren förutspår före läsningen"
+      },
+      {
+        "efter": "steg 3",
+        "delar": [
+          "fraga-varfor"
+        ],
+        "slag": "form",
+        "om": "Paren frågar varför"
       }
     ]
   }
