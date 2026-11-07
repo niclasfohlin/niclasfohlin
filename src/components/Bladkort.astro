@@ -1,0 +1,23 @@
+---
+// De små korten ur ett blad i metoden, tidigt på sidan (src/lib/bladkort.ts): etiketten, korten med sin halva av sidbilden, namnet
+// och raden ur metodens tabell, och knappen. Korten och knappen leder till bladet, där alla kort står med knappen som skriver
+// ut dem. Bara på skärmen, som de små korten ur verktygen (Vavruta.astro).
+import type { Bladkort } from '../lib/bladkort';
+interface Props { b: Bladkort; id: string; titel: string }
+const { b, id, titel } = Astro.props;
+const klick = (vad: string) => ({ 'data-goatcounter-click': `bladkort:${id}/${vad}`, 'data-goatcounter-title': `${titel}: ${b.blad}, ${vad}` });
+---
+<aside class="vav vav-kort um-bladkort" aria-label={b.etikett}>
+  <p class="vav-etikett">{b.etikett}</p>
+  <ul class="st-kort-lista vav-kort">
+    {b.kort.map((k) => (
+      <li>
+        <a class="st-kort" href={`#${b.ankare}`} {...klick(k.namn)}>
+          <img class={`um-bladkort-del-${k.del}`} src={k.bild.src} alt="" width={k.bild.bredd} height={k.bild.hojd} loading="lazy" decoding="async" />
+          <span class="st-kort-text"><span class="st-kort-namn">{k.namn}</span><span class="st-kort-rad">{k.rad}</span></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p class="um-bladkort-knapp"><a class="knapp" href={`#${b.ankare}`} {...klick('alla')}>{b.alla}</a></p>
+</aside>

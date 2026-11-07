@@ -4794,6 +4794,14 @@ button.pl-passroll { min-height: 2.75rem; }
 .vav-etikett { margin: 0 0 0.55rem; font: var(--etikett); color: var(--farg-accent); }
 .vav-text { margin: 0 0 0.8rem; font-size: 0.95rem; line-height: 1.5; max-width: var(--matt-text); }
 .vav-kort { margin: 0 0 0.75rem; }
+/* Bladets små kort tidigt på metodens sida (src/lib/bladkort.ts): varje kort är en halva av materialets sidbild. */
+.um-bladkort { --slag: var(--farg-accent); }
+.um-bladkort .st-kort img { aspect-ratio: 1050 / 712; object-fit: cover; }
+.um-bladkort .st-kort img.um-bladkort-del-0 { object-position: 50% 2%; }
+.um-bladkort .st-kort img.um-bladkort-del-1 { object-position: 50% 93%; }
+.um-bladkort .st-kort-lista { margin-bottom: 0.75rem; }
+@media (min-width: 48rem) { .um-bladkort .st-kort-lista { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.um-bladkort-knapp { margin: 0; }
 .vav-kort .st-kort-rad { display: block; overflow: visible; -webkit-line-clamp: none; line-clamp: none; }
 /* Liggande små kort i det som vävs in: bilden till vänster och namnet bredvid, ett per rad i telefonen och två på datorn. */
 .st-kort-lista.vav-kort { grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }

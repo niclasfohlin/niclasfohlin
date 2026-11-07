@@ -18,6 +18,8 @@ import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
 import { metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
 import Vavruta from './Vavruta.astro';
+import Bladkort from './Bladkort.astro';
+import { metodensBladkort, bladkortensStycke } from '../lib/bladkort';
 import { vavtIMetoder } from '../lib/vav';
 import { strategiernaAv, strategikortetI, provaMetodensStrategikort, metodensKortAdress as metodensStrategikortAdress, strategiensAdress, strategiernasStil, STRATEGIERNAS_ADRESS } from '../lib/strategier';
 interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; tabellfiler?: UmFil[]; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[]; strukturer?: ImporteradStruktur[] }
@@ -102,6 +104,9 @@ const urval = ((d.profil as Record<string, any>)?.urval ?? {}) as Record<string,
 const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
 // Bladen i Materialet för klassen, med sina egna pdf:er när metoderfiler.mjs har klippt ut dem.
 const bladen = metodensBlad(id, (d.ramar?.ramar ?? []).map((r: { rubrik: string }) => r.rubrik));
+// De små korten ur ett blad, efter stycket som först nämner bladet (src/data/bladkort.json).
+const bladkort = metodensBladkort(id, d, bilder.materialet ?? []);
+const bladkortensPlats = bladkortensStycke(id, d);
 // Bilderna av ett blads sidor: en bild per blad, och alla bilder när metoden har ett enda blad, som kan ha flera sidor, som
 // Strategikorten i Reciprok undervisning (scripts/metoderfiler.mjs).
 // Replikerna i stegets fraser som inte står i stegets text. Riggens dokument har alla i raden Det du säger, och sidan visar de
@@ -151,7 +156,7 @@ const moten = arbetslagetsMoten(d);
     {d.karna?.varv && <p class="um-varv">{d.karna.varv}</p>}
   </div>
   {d.karna?.grundregel && <p set:html={k(d.karna.grundregel)} />}
-  {(d.inledning ?? []).slice(1).map((s: string) => <p set:html={k(s)} />)}
+  {(d.inledning ?? []).slice(1).map((s: string, i: number) => <><p set:html={k(s)} />{bladkort && i === bladkortensPlats && <Bladkort b={bladkort} id={id} titel={d.titel} />}</>)}
   {d.roll && (
     <section class="um-avsnitt" id="lararens-roll">
       <h3>{d.roll.rubrik}</h3>

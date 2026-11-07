@@ -67,6 +67,8 @@ steg('utskicksprov', 'node scripts/utskicksprov.mjs');
 steg('krediterprov', 'node scripts/krediter.mjs --prov');
 steg('taggar', 'node scripts/taggar.mjs --kontrollera');
 steg('saddprov', 'node scripts/saddprov.mjs --kontrollera');
+// Den trötta läraren: en ny metod har gått igenom provet (METODER.md under Arbetsgången).
+steg('trottprov', 'node scripts/trottprov.mjs');
 steg('datumkoll', 'node scripts/datumkoll.mjs');
 steg('ramindexprov', 'node scripts/ramindexprov.mjs');
 steg('veckoprov', 'node scripts/veckoprov.mjs');

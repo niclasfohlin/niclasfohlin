@@ -1,0 +1,25 @@
+{
+  "_om": "Provet Den trötta läraren (METODER.md under Arbetsgången): en till tre saker som metoden står och faller med, var de syntes första gången i telefonen, och det som avgjordes. scripts/trottprov.mjs stoppar en ny metod som inte står här.",
+  "poster": {
+    "src/content/undervisningsmetoder/reciprok-undervisning.yaml": {
+      "provad": "2026-11-07",
+      "saker": [
+        {
+          "sak": "Strategikorten",
+          "forst": "Bilderna på skärm 56 av 74 och utskriftsknappen på skärm 59, utan knapp överst",
+          "beslut": "Knappen Strategikort överst och fyra små kort på skärm 7, som leder till alla fyra med knappen som skriver ut dem (src/data/bladkort.json)"
+        },
+        {
+          "sak": "Lathunden, med Parrutinen och första lektionen",
+          "forst": "Knappen överst. Parrutinen står på metodens sida först på skärm 25, men på lathundens sida 2",
+          "beslut": "Inget: Lektionskortet gäller från lektion 4, och första lektionen säger att läraren håller lathundens sida 2 i handen"
+        },
+        {
+          "sak": "Planeringsmallen",
+          "forst": "En länk i Före första lektionen på skärm 33, och knappen i steget i Lär dig metoden",
+          "beslut": "Inget: lathundens sida 3 har en ifylld plan, och Lär dig metoden har knappen i varje steg"
+        }
+      ]
+    }
+  }
+}

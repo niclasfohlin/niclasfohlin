@@ -18,6 +18,7 @@ import { delningPa } from '../../lib/delning';
 import { relateradeMetoder, publicerade, formateraDatum } from '../../lib/innehall';
 import { kortetUrFil } from '../../lib/metodprofil';
 import { metodensFiler, metodensBilder, metodensTabellfiler, sakernasFiler } from '../../lib/undervisningsmetodfiler';
+import { bladetsKnapp } from '../../lib/bladkort';
 import { huvudfilm as huvudfilmen, metodensFilmer } from '../../lib/film';
 import { UPPHOV, SAJT } from '../../lib/metod';
 import { uppraknat, liten, esc, lasvagen as lasvagenFor, forstaLektionensForm, lagretsVagTillMandag, vagenTillMandag, KNAPPARNAS_NAMN, KNAPPENS_KLASS } from '../../lib/standard/index.js';
@@ -103,6 +104,8 @@ const lasvagen = lagret
               lanseringen, A9). */}
           {harLarDig && <a class={KNAPPENS_KLASS.sida} href={`/metoder/${id}/lar-dig`} data-din-ersatter>{KNAPPARNAS_NAMN.larDig}</a>}
           {d.lathund && <a class={KNAPPENS_KLASS.sida} href={`/metoder/${id}/lathund`}>{KNAPPARNAS_NAMN.lathund}</a>}
+          {/* Ett blad som metoden bygger på, som Strategikorten (src/data/bladkort.json): knappen leder till bladet, där det står hur det skrivs ut. */}
+          {bladetsKnapp(id) && <a class={KNAPPENS_KLASS.sida} href={bladetsKnapp(id)!.adress} data-goatcounter-click={`bladkort:${id}/knappen`} data-goatcounter-title={`${d.titel}: ${bladetsKnapp(id)!.namn}, knappen överst`}>{bladetsKnapp(id)!.namn}</a>}
           {/* Verktyget Strukturer, för en metod som importerar strukturkort (K-661; Niclas 2026-11-01: "Samt verktyg inuti
               kooperativt lärande"). */}
           {strukturer.length > 0 && <a class={KNAPPENS_KLASS.sida} href="/strukturer">{KNAPPARNAS_NAMN.strukturer}</a>}

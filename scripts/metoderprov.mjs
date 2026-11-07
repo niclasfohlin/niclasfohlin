@@ -26,6 +26,7 @@ import { tmpdir } from 'node:os';
 import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import JSZip from 'jszip';
 import { UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser } from '../src/lib/standard/index.js';
 import { ren, utanHuvudOchFot, pdfText } from './textjamforelse.mjs';
 
@@ -729,6 +730,51 @@ try {
       }
       const veckorna = rader.map(veckan);
       if (!rader.length || veckorna.some((v, i) => i > 0 && v < veckorna[i - 1])) fel.push(`/metoder/${id}/lar-dig: raderna efter stegen står inte i datumordning med start ${novemberstart}: ${rader.join(' | ')}`);
+    }
+  }
+  // Bladets små kort (src/data/bladkort.json): de står tidigt på sidan, knappen står överst, och båda leder till bladet, med alla
+  // kort och knappen som skriver ut dem. Varje liten bild är rätt kort: korten är bilder i pdf:en, så ordningen läses ur sidornas
+  // textalternativ i Word-filen, som riggen skriver ur kortens scen: sidan nämner korten uppifrån och ned (Niclas
+  // 2026-11-07: "Analysera om de kan missas av en trött lärare").
+  {
+    const register = JSON.parse(readFileSync(join(rot, 'src', 'data', 'bladkort.json'), 'utf8'));
+    await skicka('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
+    for (const [id, p] of Object.entries(register).filter(([k]) => !k.startsWith('_'))) {
+      const d = parse(readFileSync(join(rot, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`), 'utf8'));
+      const ankare = `blad-${p.blad.toLocaleLowerCase('sv').replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-')}`;
+      await oppna(`${bas}/metoder/${id}`);
+      const svar = await kor(`(async () => {
+        const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
+        const rad = document.querySelector('.um-bladkort');
+        const blad = document.getElementById('${ankare}');
+        const y = (e) => e.getBoundingClientRect().top + scrollY;
+        const topp = [...document.querySelectorAll('.um-toppknappar a')].map((a) => [a.textContent.trim(), a.getAttribute('href')]);
+        const ut = { topp, finns: !!rad, bladFinns: !!blad, namn: rad ? [...rad.querySelectorAll('.st-kort-namn')].map((e) => e.textContent.trim()) : [], lankar: rad ? [...rad.querySelectorAll('a')].map((a) => a.getAttribute('href')) : [], bilder: rad ? [...rad.querySelectorAll('img')].map((i) => i.getAttribute('src').replace(/\\?.*$/, '')) : [], radensY: rad ? y(rad) : 0, bladetsY: blad ? y(blad) : 0, skarm: innerHeight };
+        if (rad && blad) { rad.querySelector('a').click(); await vanta(600); ut.landar = blad.getBoundingClientRect().top; ut.knappen = !!blad.parentElement.querySelector('a[href*="-blad-"]') || !!blad.querySelector('a[href*="-blad-"]'); ut.synliga = blad.querySelectorAll('img').length; }
+        return JSON.stringify(ut);
+      })()`);
+      if (!svar) { fel.push(`/metoder/${id}: provet av de små korten fick inget svar`); continue; }
+      const r = JSON.parse(svar);
+      const rader = (d.tabeller ?? []).find((t) => t.rubrik === p.tabell)?.rader ?? [];
+      if (!r.finns || !r.bladFinns) { fel.push(`/metoder/${id}: ${p.blad} saknar de små korten eller bladet`); continue; }
+      if (r.namn.join() !== rader.map((x) => x[0]).join()) fel.push(`/metoder/${id}: de små korten heter ${r.namn.join(', ')} och tabellen ${p.tabell} har ${rader.map((x) => x[0]).join(', ')}`);
+      if (!r.topp.some(([t, a]) => t === p.knapp && a === `#${ankare}`)) fel.push(`/metoder/${id}: knappen ${p.knapp} står inte överst med länken till bladet`);
+      if (r.lankar.some((a) => a !== `#${ankare}`)) fel.push(`/metoder/${id}: de små korten leder inte till bladet: ${r.lankar.join(', ')}`);
+      if (r.radensY > 8 * r.skarm) fel.push(`/metoder/${id}: de små korten står på skärm ${Math.round(r.radensY / r.skarm)} i telefonen, och ska stå tidigt`);
+      if (Math.abs(r.landar) > r.skarm) fel.push(`/metoder/${id}: ett tryck på ett litet kort landar ${Math.round(r.landar)} punkter från bladet`);
+      if (!r.knappen) fel.push(`/metoder/${id}: vid bladet saknas knappen som skriver ut det`);
+      if (r.synliga < p.framsidor.length * 2) fel.push(`/metoder/${id}: bladet visar ${r.synliga} sidor`);
+      const docx = await JSZip.loadAsync(readFileSync(join(rot, 'public', 'metoder', `${id}-materialet.docx`)));
+      const alt = [...(await docx.file('word/document.xml').async('string')).matchAll(/<wp:docPr[^>]*descr="([^"]*)"/g)].map((m) => m[1]);
+      rader.forEach((x, i) => {
+        const sida = p.framsidor[Math.floor(i / p.perSida)];
+        const del = i % p.perSida;
+        const ren = (s) => s.replace(/[­⁠]/g, '');
+        const pa = ren(alt[sida - 1] ?? '');
+        const fore = del > 0 ? pa.indexOf(ren(rader[i - 1][0])) : -1;
+        if (!r.bilder[i]?.endsWith(`-materialet-${sida}.png`)) fel.push(`/metoder/${id}: det lilla kortet ${x[0]} har bilden ${r.bilder[i]} och ska ha sidan ${sida}`);
+        if (pa.indexOf(ren(x[0])) <= fore) fel.push(`/metoder/${id}: sidan ${sida} i materialet har inte kortet ${x[0]} som kort ${del + 1} uppifrån: ${pa.slice(0, 80)}`);
+      });
     }
   }
   ws.close();

@@ -228,6 +228,7 @@ Ett omtag är när en metod som redan har planen ändras: riggen levererar en ny
 | Steg | Vad du gör | Så här |
 |---|---|---|
 | Ta in | Riggens filer jämförs med grenens innan de kopieras in, och en ändring som sajten har gjort sedan riggens bas tas med. Vem som gör vad står under Metod, möte och modul | `diff` mellan riggens `out/<id>/metod.yaml` och grenens fil, sedan `cp` |
+| Den trötta läraren | När metodens innehåll eller material har ändrats: syns det centrala i tid? | METODER.md under Arbetsgången, rubriken Den trötta läraren |
 | Planens spärrar för metoden | Medan metodens fält skrivs: standardens spärrar för planens fält på några sekunder, som ett citat som inte står så i metoden eller en del som passet inte har | `node scripts/planera/metodprov.mjs <id>` |
 | Validera med planen synlig | Hela valideringen, med metodens plan synlig. Har metoden `plan.vantar` görs det i en provversion (Lärdomar, rad 5). Valideringen prövar att varje sak som planen leder till har en knapp, att adresserna finns, att sidan går i Chrome och att Word-filerna klarar reglerna | `npm run validera` |
 | Planens text och uppdragen | Planens text i varje version (en årskurs, en väg, ett projekt), det som har ändrats i metodens fil sedan förra granskningen, och ett uppdrag per metod till steg 4b och steg 4 | `node scripts/planera/omtag.mjs <id> … --bas <commit som förra granskningen läste>` |

@@ -1,0 +1,10 @@
+{
+  "_om": "Ett blad i Materialet för klassen som metoden bygger på får små kort tidigt på metodens sida och en knapp överst, så att en trött lärare inte missar det (Niclas 2026-11-07 om Strategikorten i Reciprok undervisning: \"Skulle önska sådana där småkort för utskrift av strategierna tidigt där de tas upp. Klicka så kommer man till alla fyra att skriva ut\", och \"Analysera om de kan missas av en trött lärare\"). Sajten väver in dem utan att metodens fil ändras. blad är bladets rubrik, knapp namnet överst, tabell tabellen i metoden vars rader är korten, med namnet i första kolumnen och raden i andra, framsidor sidorna i materialets pdf med framsidor, och perSida hur många kort en sida har. Bilderna är materialets egna sidbilder, så att de inte kan glida isär från pdf:en (src/lib/bladkort.ts, METODER.md under Undervisningsmetoderna).",
+  "reciprok-undervisning": {
+    "blad": "Strategikorten",
+    "knapp": "Strategikort",
+    "tabell": "De fyra tankestrategierna",
+    "framsidor": [1, 3],
+    "perSida": 2
+  }
+}
