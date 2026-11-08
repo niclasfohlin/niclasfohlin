@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.61.0, 2026-11-08
+
+- `undervisningsmetod.js` (K-749; Niclas samma kväll om Skriva för att lära: "Vad då rutan? Förstår en läsare när man bara säger 'skriv i rutan?'"): `namnetsForstaOrdFel`, som `undervisningsmetodensFel` kör, stoppar ett blads namn med flera ord vars första ord står ensamt i en del av metodens fil innan delen har sagt namnet, som "rutan" för Rutan på tavlan. Allmänna ord för material (`ALLMANNA_SAKORD`), som bladet och kortet, prövas inte.
+
 ## 0.60.0, 2026-11-08
 
 - `plan.js` (Lina, kall läsare samma dag): `larDigSammanstallning` ger `klassernasRubrik`, Klassen när läraren har en klass och Klasserna annars, som sammanställningen på sidan och i pdf:en läser.

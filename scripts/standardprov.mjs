@@ -144,6 +144,15 @@ const lektionsfall = [
 if (faktaIFastForm({ tid: '40 minuter per lektion, minst tre lektioner i veckan' }, { passen: '' }).ofta !== 'minst 3/vecka') fel.push('faktaIFastForm utan ord för passen ger inte "minst 3/vecka"');
 for (const [d, vantat] of lektionsfall) { const f = Object.values(faktaIFastForm(d, { passen: 'lektioner' })).map((x) => x ?? '').join('|'); if (f !== vantat) fel.push(`faktaIFastForm(${JSON.stringify(d)}, lektioner) ger ${f}, inte ${vantat}`); }
 
+// Ett namns första ord ensamt (K-749; Niclas 2026-11-08: "Vad då rutan?"): en del som säger rutan innan den har sagt Rutan på
+// tavlan stoppas, hela namnet först i delen går igenom, och ett allmänt ord som bladet prövas inte. Prövat åt båda hållen.
+{
+  const { namnetsForstaOrdFel } = await import('../src/lib/standard/index.js');
+  const ramar = { ramar: [{ rubrik: 'Rutan på tavlan', text: ['Rutan har fyra fält.'] }, { rubrik: 'Bladet till Mötas', text: ['Skriv ut bladet.'] }] };
+  const utan = namnetsForstaOrdFel({ ramar, steg: { rader: [{ namn: 'Stanna och skriv', vad: 'Mitt i fyller du i rutan.' }] } });
+  const med = namnetsForstaOrdFel({ ramar, steg: { rader: [{ namn: 'Stanna och skriv', vad: 'Mitt i fyller du i Rutan på tavlan.', gor: ['Läs rutan högt.'] }] }, stod: { rader: [{ text: 'Följ stegen på bladet.' }] } });
+  if (utan.length !== 1 || !utan[0].startsWith('steg.rader[0] säger "rutan"') || med.length) fel.push(`namnetsForstaOrdFel ger fel svar: ${JSON.stringify([utan, med])}`);
+}
 // Undervisningsmetoderna (K-621): utfallens gränser som riggens standard räknar dem, och delarnas ordning och text.
 for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13'], [5, '1|2-2|3']]) { const g = utfallensGranser(n); const f = `${g.nastanAlla}|${g.deFlesta.join('-')}|${g.halften}`; if (f !== vantat) fel.push(`utfallensGranser(${n}) ger ${f}, inte ${vantat}`); }
 // Effektens skala: texten säger gränserna ur konstanten, och andra kolumnen börjar vid Cohens 0,2 (Niclas 2026-10-30).

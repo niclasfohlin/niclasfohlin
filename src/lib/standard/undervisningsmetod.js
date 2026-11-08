@@ -294,6 +294,58 @@ export const metodensFilmnamn = (d) => [...(d.film ? ['film'] : []), ...(Array.i
 /** Fälten som en del på metodens sida läser, med delen. */
 const SIDANS_FALT = ['karna', 'fastnar', 'stod', 'amnesexempel', 'hinder', 'fallgropar', 'hallFast', 'checklista', 'forsta', 'progression', 'rutiner', 'uppfoljning', 'uppdrag', 'planeringsmall', 'observation', 'ramar', 'passar', 'invandningar', 'grund', 'lasMer', 'larandet', 'roll', 'klassen'];
 
+/** Allmänna ord för material, som står i namn som "bladet Samarbetsfärdigheterna" och som vanliga ord i metodens text. */
+export const ALLMANNA_SAKORD = Object.freeze(['bladet', 'bladen', 'kortet', 'korten', 'affischen', 'affischerna', 'mallen', 'mallarna', 'lappen', 'lapparna', 'listan', 'listorna', 'tabellen', 'tabellerna', 'boken', 'böckerna', 'arket', 'arken', 'frågorna', 'fraserna', 'kartan', 'protokollet', 'orden', 'texten', 'texterna', 'planen', 'filmen']);
+/**
+ * Ett namns första ord ensamt, som "rutan" för bladet Rutan på tavlan (STIL.md under Hänvisningar: ett allmänt ord för en
+ * bestämd sak byts mot sakens namn; Niclas 2026-11-08 om Skriva för att lära: "Vad då rutan? Förstår en läsare när man bara
+ * säger 'skriv i rutan?'", K-749). Gäller bladen i metodens material vars namn har flera ord och börjar med ett bestämt
+ * substantiv på minst fem bokstäver. Varje del av metodens fil, det närmaste objektet med sina texter och listor av texter,
+ * läses i filens ordning, och första gången ordet står i delen ska det vara hela namnet; sedan får det stå ensamt. Allmänna
+ * ord för material, som bladet och kortet, prövas inte (ALLMANNA_SAKORD), eftersom de står i namn som "bladet
+ * Samarbetsfärdigheterna" och som vanliga ord. Om metodens egna ord är förklarade där läraren läser dem först avgör en kall
+ * läsare, inte ett prov.
+ * @param {Record<string, any>} d metodens fil
+ * @returns {string[]}
+ */
+export function namnetsForstaOrdFel(d) {
+  const namnen = (d?.ramar?.ramar ?? []).map((/** @type {{ rubrik?: string }} */ r) => String(r?.rubrik ?? '').trim()).filter((n) => {
+    const ord = n.split(/\s+/);
+    const forsta = ord[0].toLocaleLowerCase('sv');
+    return ord.length > 1 && /^\p{L}{3,}(?:an|en|et|na)$/u.test(forsta) && !ALLMANNA_SAKORD.includes(forsta);
+  });
+  if (!namnen.length) return [];
+  /** @type {{ vag: string, text: string }[]} */
+  const delar = [];
+  const vandra = (/** @type {unknown} */ x, /** @type {string} */ vag) => {
+    if (!x || typeof x !== 'object' || x instanceof Date) return;
+    /** @type {string[]} */
+    const egna = [];
+    /** @type {[unknown, string][]} */
+    const under = [];
+    for (const [k, v] of Object.entries(x)) {
+      const p = Array.isArray(x) ? `${vag}[${k}]` : vag ? `${vag}.${k}` : k;
+      if (typeof v === 'string') egna.push(v);
+      else if (Array.isArray(v) && v.length && v.every((y) => typeof y === 'string')) egna.push(...v);
+      else under.push([v, p]);
+    }
+    if (egna.length) delar.push({ vag: vag || 'metodens huvud', text: egna.join('\n') });
+    for (const [v, p] of under) vandra(v, p);
+  };
+  vandra(d, '');
+  /** @type {string[]} */
+  const fel = [];
+  for (const namn of namnen) {
+    const ordet = namn.split(/\s+/)[0];
+    const re = new RegExp(`(?<![\\p{L}\\d-])${ordet.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\p{L}\\d-])`, 'iu');
+    for (const del of delar) {
+      const m = re.exec(del.text);
+      if (!m || del.text.slice(m.index, m.index + namn.length).toLocaleLowerCase('sv') === namn.toLocaleLowerCase('sv')) continue;
+      fel.push(`${del.vag} säger "${m[0]}" innan delen har sagt ${namn}: skriv sakens namn första gången i delen, och fältets namn när det gäller ett fält (STIL.md under Hänvisningar)`);
+    }
+  }
+  return fel;
+}
 /**
  * Det som saknas eller har fel form i en undervisningsmetods fil för att sajten ska kunna visa den: fälten som metodens
  * sida, metodkortet och Lär dig metoden läser, källorna som kortet nämner, stegen med de tre rutorna och beslutsstället,
@@ -371,6 +423,7 @@ export function undervisningsmetodensFel(d) {
   fel.push(...lathundensTakFel(d));
   fel.push(...strukturkortensFel(d.strukturkort));
   fel.push(...strategikortensFel(d.strategikort));
+  fel.push(...namnetsForstaOrdFel(d));
   return fel;
 }
 

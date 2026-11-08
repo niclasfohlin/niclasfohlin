@@ -998,6 +998,9 @@ export declare function strategiensFel(s: Record<string, any>): string[];
 export declare const METODENS_STRATEGIKORT: Readonly<{ minst: number; högst: number }>;
 /** Felen i en metods fält strategikort, tomt när fältet saknas. */
 export declare function strategikortensFel(sk: unknown): string[];
+/** Ett namns första ord ensamt, som "rutan" för Rutan på tavlan, i en del av metodens fil som inte har sagt namnet (K-749). */
+export declare function namnetsForstaOrdFel(d: Record<string, any>): string[];
+export declare const ALLMANNA_SAKORD: readonly string[];
 /** Det ett strategikort visar, ur strategins fil. */
 export declare function strategikortetsData(s: Record<string, any>): { nr: number; namn: string; mening: string; insikt: string; berattelsen: { rubrik: string; utfall: string; fil: string | null }[]; handling: { text: string; ikon: string }[]; minnet: { delar: { namn: string; text?: string }[]; pilar: { fran: string; till: string; text: string; betonad?: boolean }[] }; steg: { rubrik: string; text: string }[]; avgor: { rubrik: string; text: string } | null };
 /** Kontrollsumman över det ett strategikort visar och bildernas och ikonernas filer. */
