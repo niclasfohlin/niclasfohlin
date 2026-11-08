@@ -193,6 +193,13 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     if (JSON.stringify(vantat) !== JSON.stringify(materialetsSidor[id])) fel.push(`${id}: src/data/materialets-sidor.json stämmer inte med bildernas namn i public/metoder/${stam('materialet')}.docx. Kör node scripts/metoderfiler.mjs`);
     for (const n of materialetsSidor[id].flatMap((x) => x.bilder)) if (!existsSync(join(UT, `${stam('materialet')}-${n}.png`))) fel.push(`${id}: bilden ${stam('materialet')}-${n}.png, som src/data/materialets-sidor.json nämner, saknas i public/metoder/`);
   }
+  // Och åt andra hållet: säger namnen att ett blad har flera sidor, behövs kartan, och utan den visar sidan en bild per blad
+  // (Codex kodgranskning 2026-11-08, andra omgången, fynd 2).
+  if (kontrollera && bladen.length > 1 && !materialetsSidor[id]) {
+    const docx = join(UT, `${stam('materialet')}.docx`);
+    const sidor = existsSync(docx) ? sidornaPerBlad(await bildnamnen(docx), bladen) : null;
+    if (sidor?.some((x) => x.length > 1)) fel.push(`${id}: bildernas namn i public/metoder/${stam('materialet')}.docx säger att ${bladen.filter((_, i) => sidor[i].length > 1).join(', ')} har flera sidor, men src/data/materialets-sidor.json saknar metoden. Kör node scripts/metoderfiler.mjs`);
+  }
 
   // Bladen som riggen inte har lämnat som egna filer klipps ur pdf:en med allt, efter rubrikerna på sidorna.
   const allt = join(UT, `${id}.pdf`);

@@ -308,11 +308,16 @@ export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: str
   // Var och en visar i kooperativt lärande.
   const kontrollen = (d.steg?.rader ?? []).find((s: { redo?: unknown }) => s.redo);
   const beslutetsFas: string | undefined = kontrollen?.namn;
+  // Förlagan till första lektionen har egna utfall när varianten har fältet redo, med stegets tre nycklar, som i Skriva för att
+  // lära, där läraren räknar tomma böcker den dagen (riggens andra leverans 2026-11-08, K-734). Variantens utfall går före
+  // stegets, nyckel för nyckel, och utfallsordet kommer ur variantens första mening, som i riggens ritning av bladet.
+  const redo = varianten?.redo ?? kontrollen?.redo;
+  const utfallet = (id: string) => varianten?.redo?.[id] ?? kontrollen?.redo?.[id];
   // Ett led i den första meningen som inte räknas om med klassen står kvar som en egen mening, som "I rundan högst en av sex." i
   // Skriva för att lära, där läraren läser sex böcker också i en klass på 22 (Codex andra öga 2026-11-08, K-734: bladet tappade
   // stickprovet). Paren efter "alltså" räknar utfallensPar om, och de står inte här.
   const utfalletsText = (id: string) => {
-    const t = String(kontrollen?.redo?.[id] ?? '');
+    const t = String(utfallet(id) ?? '');
     const forsta = /^[^.]*\./.exec(t)?.[0] ?? '';
     const ledet = /,\s+(?!alltså\s)([^\s,.][^,.]*)\.$/u.exec(forsta)?.[1];
     return [ledet ? `${ledet.charAt(0).toLocaleUpperCase('sv')}${ledet.slice(1)}.` : '', t.slice(forsta.length).trim()].filter(Boolean).join(' ');
@@ -326,5 +331,5 @@ export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: str
   const variantensNamn: string | undefined = varianten ? (varianten.nar === 'första lektionen' ? liten(forstaLektionensForm(d).namn) : varianten.nar) : undefined;
   // Kärnans nummer vid en del, uppräknade med komma och och: "kärnan 1, 2, 4 och 5" (riggens punkt 8).
   const karnansNr = (fas: string) => { const k = karnanI(d, fas); return k.length ? `${BLADETS_ORD.karnan} ${uppraknat(k.map((x: { nr: number }) => String(x.nr)))}` : ''; };
-  return { mall, varianten, variantensNamn, delensTid, utfalletsText, utfallensOrd: utfallsord(kontrollen?.redo), delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr };
+  return { mall, varianten, variantensNamn, delensTid, utfalletsText, utfallensOrd: utfallsord(redo), delarna, planensDel, kryss, etikett, beslutetsFas, karnansNr };
 }

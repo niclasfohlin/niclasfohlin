@@ -69,7 +69,9 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   for (const { vag, text } of texter(parse(readFileSync(join(MAPP, fil), 'utf8')))) {
     const falt = vag.replace(/\[\d+\]/g, '');
     if (UNDANTAG.some(([re]) => re.test(falt))) continue;
-    const t = ren(text);
+    // Första lektionens egna utfall (tidsschema.varianter[].redo, K-734) står bara på planeringsbladet, där gränsen för klassen
+    // ersätter den första meningen, så texten jämförs efter den, som bladet visar den på sidan och i pdf:en.
+    const t = ren(/^tidsschema\.varianter\.redo\./.test(falt) ? text.replace(/^[^.]*\.\s*/, '') : text);
     const pa = sidan.includes(t);
     const exakt = dokumentet.includes(t);
     const i = exakt || (pa && iAnnanOrdning(dokumentet, t));

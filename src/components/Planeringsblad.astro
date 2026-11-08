@@ -20,7 +20,7 @@ const bryt = bladetsRad;
 // Det läraren skrev, med metodens saker som länkar.
 const k = (t: unknown) => medSaker(String(t ?? ''), saker, new Set());
 ---
-<div class={`um-blad${gra ? ' um-blad-gra' : ''}`}>
+<div class={`um-blad${gra ? ' um-blad-gra' : ''}`} data-variant={variant ?? ''}>
   <dl class="um-blad-huvud">
     <div><dt>{O.klass}</dt><dd>{plan.klass}</dd></div>
     {amne && <div><dt>{O.amne}</dt><dd>{amne}</dd></div>}
