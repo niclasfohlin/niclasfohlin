@@ -192,7 +192,7 @@ const moten = arbetslagetsMoten(d);
       <ol>
         {steg.map((s) => { const r = tidsschematsRad(d, s.namn); const x = lagret.stallen.find((y) => y.namn === s.namn); return <li class={s.namn === lagret.ram ? 'um-remsa-ram' : undefined}><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{s.namn}</span><span class="um-remsa-tid">{x ? stalletsTid(x) : r?.tid}</span></a></li>; })}
       </ol>
-      {lagretsAlla && <p class="um-remsa-resten">{lagretsMening(lagretsAlla, lagret.minuter)}</p>}
+      {lagretsAlla && <p class="um-remsa-resten">{lagretsMening(lagretsAlla, lagret.minuter, '', { exempel: true })}</p>}
     </nav>
   ) : (
     <nav class="um-remsa" aria-label={slagetsOrd.delarna}>

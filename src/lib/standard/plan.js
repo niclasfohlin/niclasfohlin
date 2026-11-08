@@ -5,7 +5,7 @@
 // (ÅÅÅÅ-MM-DD) i UTC, så att sommartiden aldrig flyttar en dag. Sajtens METODER.md under Planera insatsen säger hur
 // metodens fält skrivs.
 import { periodensLangd, postensRad, tidensMatt, tidensVeckotakt } from './index.js';
-import { allaTexter, antalText, decimal, forstaLedet, forstaOrdet, liten, mening, meningarna, ORDNINGSTAL, rentText, sammaElev, skyddaRegex, somLista, stor, talAv, talIRegex, talText, tvasiffrigt, utanPunkt, veckorText } from './text.js';
+import { allaTexter, antalText, decimal, forstaLedet, forstaOrdet, liten, mening, meningarna, ORDNINGSTAL, rentText, sammaElev, skyddaRegex, somLista, stor, talAv, talIRegex, talText, tvasiffrigt, utanFogar, utanPunkt, veckorText } from './text.js';
 
 const DAG = 86400000;
 const tillTid = (s) => { const [a, m, d] = s.split('-').map(Number); return Date.UTC(a, m - 1, d); };
@@ -587,8 +587,6 @@ export function versionsvaletsFel(d) {
   return fel;
 }
 
-/** Ett namn utan ordfogar och mjuka bindestreck, som riggen sätter i ett spann som "åk 4–5". */
-export const utanFogar = (s) => String(s ?? '').replace(/[\u2060\u00ad]/g, '');
 /** En versions namn eller ett märke i en jämförelse: utan ordfogar, med ett mellanslag mellan orden och med små bokstäver,
  * så att "I åk 6–7" med en ordfog är versionen Åk 6–7 (sajtens K-569). */
 export const versionsform = (s) => ordagrant(s ?? '').toLocaleLowerCase('sv');
@@ -1543,6 +1541,8 @@ export function larDigSammanstallning(plan, val, f, idag) {
     axel: axeln.map((v) => v.namn),
     spann: larDigetsSpann(plan, f),
     klasserna: larDigetsKlasser(f),
+    // Rubriken för raden, Klassen när läraren har en klass och Klasserna annars (Lina, kall läsare 2026-11-08: "Klasserna 4A.").
+    klassernasRubrik: (f.klasser ?? []).length === 1 ? 'Klassen' : 'Klasserna',
     klasstabell: klassernasTabell(axeln, f),
     stallentabell: stallenasTabell(axeln, f),
     mitt,

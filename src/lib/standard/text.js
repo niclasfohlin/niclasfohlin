@@ -56,6 +56,9 @@ export const kapaVidOrd = (t, max) => {
  */
 /** En lista, eller en tom lista när värdet inte är en, som det läraren har fört in eller en metods fält (sajtens K-630: samma rad stod i rensaFoljd och i sajtens Lär dig metoden). @param {unknown} x @returns {unknown[]} */
 export const somLista = (x) => (Array.isArray(x) ? x : []);
+/** Text utan ordfogar och mjuka bindestreck, som riggen sätter i ett spann som "åk 4–5" och "2–12 min", så att ett namn kan
+ * jämföras och ett spann läsas som tal (flyttad hit från plan.js 2026-11-08, så att faktans tolkare i index.js kan läsa den). */
+export const utanFogar = (s) => String(s ?? '').replace(/[\u2060\u00ad]/g, '');
 export const rentText = (x, max) => (typeof x === 'string' ? kapaVidOrd(x.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim(), max) : '');
 /** Namnets första led, före kolon: "Lärarhandledningen" ur "Lärarhandledningen: Läs mellan raderna". @param {string} s */
 export const forstaLedet = (s) => s.split(':')[0].trim();

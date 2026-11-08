@@ -69,7 +69,7 @@ for (const s of metodsidor) {
   if ((remsa.match(/class="um-remsa-ram"/g) ?? []).length !== 1) fel.push(`${s}: remsan i del 2 har inte en rad för lärarens lektion`);
   if (!html.includes(`class="um-lektionsdel um-ld-din" id="del-${lagret.ram.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}"`)) fel.push(`${s}: kortet för ${lagret.ram} har inte den grå ramen`);
   if (!html.includes('Det du lägger in i din lektion, ställe för ställe.')) fel.push(`${s}: bandet i del 2 säger inte att ställena läggs in i lärarens lektion`);
-  if (!remsa.includes(`<p class="um-remsa-resten">${lagretsMening(lagretsSkala(lagret), lagret.minuter)}</p>`)) fel.push(`${s}: remsan i del 2 säger inte hur mycket av lektionen ställena tar`);
+  if (!remsa.includes(`<p class="um-remsa-resten">${lagretsMening(lagretsSkala(lagret), lagret.minuter, '', { exempel: true })}</p>`) || !remsa.includes(' av en lektion på ')) fel.push(`${s}: remsan i del 2 säger inte hur mycket av lektionen ställena tar`);
 }
 if (!lagrenProvade) fel.push('remsan i del 2: ingen metod i dist är ett lager med fälten, så lagret prövades inte');
 
@@ -1047,6 +1047,15 @@ try {
     if (huvudPlan?.beslut && !bladen.some((b) => b.variant === '')) fel.push(`/metoder/${id}: sidan har inget planeringsblad för huvudexemplet`);
     for (const blad of bladen) {
       const forsta = blad.variant === 'första lektionen';
+      // Varje del i första lektionens minuter står med sin tid på förlagan, också en del som står två gånger, som Din planering
+      // 0–20 och 27–45 i Skriva för att lära (Codex 2026-11-08: bladet tappade den andra tiden).
+      if (forsta) {
+        const radernasTid = Object.fromEntries([...blad.html.matchAll(/<span class="um-blad-fas">([^<]*)<\/span><span class="um-blad-tid">([^<]*)/g)].map((m) => [m[1], m[2]]));
+        for (const del of (d.tidsschema?.varianter ?? []).find((v) => v.nar === 'första lektionen')?.delar ?? []) {
+          const tal = String(del.tid ?? '').replace(/\s*min$/, '');
+          if (tal && !(radernasTid[del.fas] ?? '').includes(tal)) fel.push(`/metoder/${id}: planeringsbladet för första lektionen har inte ${del.fas} ${del.tid}`);
+        }
+      }
       const rutorna = [...blad.html.matchAll(/<p class="um-utfall-grans">([\s\S]*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, '').replace(/&(amp|lt|gt|quot|#39|#x27);/g, (h, k) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", '#x27': "'" })[k]));
       const vantade = (forsta ? d.forsta?.plan : huvudPlan)?.beslut ? 3 : 0;
       if (rutorna.length !== vantade) { fel.push(`/metoder/${id}: planeringsbladet ${blad.variant || 'huvudexemplet'} har ${rutorna.length} utfallsrutor och ska ha ${vantade}`); continue; }

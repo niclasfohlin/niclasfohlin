@@ -138,6 +138,8 @@ for (const [d, vantat] of faktaFall) { const f = Object.values(faktaIFastForm(d)
 const lektionsfall = [
   [{ tid: '40 minuter per lektion, minst tre lektioner i veckan', period: 'Fyra veckor att komma igång' }, '|40 min|minst 3 lektioner/vecka|4 veckor'],
   [{ tid: '50 minuter per lektion, tre till fem lektioner i veckan', period: 'Sex veckor att komma igång' }, '|50 min|3–5 lektioner/vecka|6 veckor'],
+  // Ordfogen som riggen sätter efter strecket i ett spann (Jonas, kall läsare 2026-11-08: kortet sa 12 min, metoden 2–12 min).
+  [{ grupp: '2–\u20606 elever', tid: '2–\u206012 min i din lektion, minst två lektioner i veckan', period: '4–\u20606 veckor' }, '2–6 elever|2–12 min|minst 2 lektioner/vecka|4–6 veckor'],
 ];
 if (faktaIFastForm({ tid: '40 minuter per lektion, minst tre lektioner i veckan' }, { passen: '' }).ofta !== 'minst 3/vecka') fel.push('faktaIFastForm utan ord för passen ger inte "minst 3/vecka"');
 for (const [d, vantat] of lektionsfall) { const f = Object.values(faktaIFastForm(d, { passen: 'lektioner' })).map((x) => x ?? '').join('|'); if (f !== vantat) fel.push(`faktaIFastForm(${JSON.stringify(d)}, lektioner) ger ${f}, inte ${vantat}`); }

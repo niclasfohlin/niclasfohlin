@@ -125,19 +125,19 @@
       "provad": "2026-11-08",
       "saker": [
         {
-          "sak": "Rutan på tavlan, som ska sitta uppe före första lektionen, och affischen När jag fastnar, som Före första lektionen säger ska skrivas ut i A3 med den",
-          "forst": "Ord i faktarutan på skärm 4 och i inledningens andra stycke på skärm 6, men bilderna och knapparna först på skärm 47 och 48 av 58",
-          "beslut": "Två små kort på skärm 7, efter stycket som nämner Rutan på tavlan, med minibilder och metodens egen mening om varje blad, som leder till bladet och knappen som skriver ut det (src/data/bladkort.json). Riggen föreslog bara Rutan på tavlan, och När jag fastnar kom med eftersom läraren skriver ut båda före första lektionen"
+          "sak": "De tre ställena i lärarens lektion, Skriv först i början, Stanna och skriv mitt i och Loggen i slutet, högst omkring tolv minuter, och att resten är lärarens egen planering (omtaget, riggens 7262cac)",
+          "forst": "Ingressen och metodkortet med I din lektion 2–12 min på skärm 1, inledningens första stycke på skärm 5 och stapeln i del 2 på skärm 14 av 62",
+          "beslut": "Inget nytt: ställena står först i riggens text och på kortet, och stapeln visar dem i skala mot lektionen. Riggens trötta lärare (Haiku och Sonnet) räknade 8–12 minuters skrivande av 45"
+        },
+        {
+          "sak": "Rutan på tavlan, som ska sitta uppe före första lektionen, och affischen När jag fastnar, som skrivs ut med den i A3, eller A4 nära eleverna",
+          "forst": "Ord i faktans material och i inledningens andra stycke på skärm 7, men bladen först på skärm 52 av 62",
+          "beslut": "De två små korten står kvar på skärm 7, efter stycket som nämner Rutan på tavlan, med minibilder och metodens egen mening om varje blad (src/data/bladkort.json)"
         },
         {
           "sak": "Skrivfrågan, en fråga som kräver tänkande",
-          "forst": "Kärnans första kort på skärm 5 med frågan om svaret går att återge, ett exempel på Lektionskortet överst och en länk till Skrivfrågor att låna på skärm 14",
-          "beslut": "Inget: frågan och provet står tidigt och på kortet, och tabellen med frågor i varje ämne nås från Före lektionen"
-        },
-        {
-          "sak": "Skrivboken",
-          "forst": "Faktarutans material på skärm 4",
-          "beslut": "Inget: en skrivbok per elev, och inget att skriva ut"
+          "forst": "Vill du börja på måndag? på skärm 3 med första lektionens fråga, och kärnans första kort på skärm 6",
+          "beslut": "Inget: frågan står tidigt och som exempel på lektionskortet, och Skrivfrågor att låna nås från vecka 2"
         }
       ]
     }

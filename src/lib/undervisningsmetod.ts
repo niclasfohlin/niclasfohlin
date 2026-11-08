@@ -313,8 +313,15 @@ export const bladetsRad = (t?: string) => t?.replace(/ · /g, ' · ');
 export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: string) {
   const mall = d.planeringsmall ?? {};
   const varianten = variant ? (d.tidsschema?.varianter ?? []).find((v: { nar: string }) => v.nar === variant) : undefined;
-  // En del som varianten inte har får ingen tid: första lektionen i Formativ bedömning har ingen Start och ingen Exit-lapp.
-  const delensTid = (fas: string): string | undefined => (varianten?.delar ? varianten.delar.find((x: { fas: string }) => x.fas === fas)?.tid : tidsschematsRad(d, fas)?.tid);
+  // En del som varianten inte har får ingen tid: första lektionen i Formativ bedömning har ingen Start och ingen Exit-lapp. En
+  // del som står två gånger i varianten får båda tiderna, som Din planering före och efter stoppet i första lektionen i Skriva
+  // för att lära, "0–20 och 27–45 min" (Codex 2026-11-08: bladet tappade Din planering 27–45).
+  const delensTid = (fas: string): string | undefined => {
+    if (!varianten?.delar) return tidsschematsRad(d, fas)?.tid;
+    const tider = (varianten.delar as { fas: string; tid?: string }[]).filter((x) => x.fas === fas).map((x) => String(x.tid ?? '')).filter(Boolean);
+    if (tider.length < 2) return tider[0];
+    return tider.every((x) => / min$/.test(x)) ? `${tider.map((x) => x.replace(/ min$/, '')).join(' och ')} min` : tider.join(' och ');
+  };
   // Beslutet står efter den del där läraren ser om klassen är redo, stegets redo: Kontrollera i explicit undervisning och
   // Var och en visar i kooperativt lärande.
   const kontrollen = (d.steg?.rader ?? []).find((s: { redo?: unknown }) => s.redo);

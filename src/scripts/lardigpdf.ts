@@ -30,7 +30,7 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
   if (s.avslut) { p.rubrik('Avslutet', 30); p.text(larDigetsAvslutText(s.avslut), { luft: 2 }); }
   if (s.mal) { p.rubrik('Ditt mål', 30); p.text(mening(s.mal), { luft: 2 }); }
   // Klasserna i listan och de borttagna som står kvar med det läraren förde in, som tabellen visar (larDigetsKlasser; B11).
-  if (s.klasserna) { p.rubrik('Klasserna', 30); p.text(s.klasserna, { luft: 2 }); }
+  if (s.klasserna) { p.rubrik(s.klassernasRubrik, 30); p.text(s.klasserna, { luft: 2 }); }
   p.rubrik('Stegen', 60);
   // Stegen som läraren har tagit, med det som pågår, och stegen som är kvar på en rad (larDigSammanstallning).
   for (const x of s.stegen) p.text(stegetsRad(x, info.steg), { luft: 2 });

@@ -626,9 +626,11 @@ export const lagretsSkalaHtml = (skala) => `<div class="um-skala" aria-hidden="t
  * @param {number} minuter lektionens längd
  * @param {string} [vilka] ordet före ställen, som "veckans"
  */
-export const lagretsMening = (s, minuter, vilka = '') => {
+// På metodens sida är lektionen metodens exempel, "av en lektion på 45 minuter", och i Lär dig metoden lärarens egen, "av
+// lektionens 60 minuter" (de kalla läsarna 2026-11-08 med lektioner på 40 och 60 minuter läste sidans 45 som ett krav).
+export const lagretsMening = (s, minuter, vilka = '', { exempel = false } = {}) => {
   const tal = minuternasSpann(s);
-  return `${s.stallen.length === 1 ? `${s.stallen[0].namn} tar` : `Med alla ${vilka ? `${vilka} ` : ''}ställen tar det`} ${tal} av lektionens ${minuter} minuter. Resten av lektionen är din.`;
+  return `${s.stallen.length === 1 ? `${s.stallen[0].namn} tar` : `Med alla ${vilka ? `${vilka} ` : ''}ställen tar det`} ${tal} av ${exempel ? 'en lektion på' : 'lektionens'} ${minuter} minuter. Resten av lektionen är din.`;
 };
 
 /**

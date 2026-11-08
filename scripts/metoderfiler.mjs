@@ -101,6 +101,8 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   const metodensSha = sha(join(MAPP, fil));
   const forteckning = join(ut, 'filer.json');
   const filer = []; // { slag, kalla, typ }
+  // Dokumenten som riggen har byggt ur en annan metodfil än sajtens, som [namnet, summan] (K-740).
+  const avvikande = [];
   if (existsSync(forteckning)) {
     const f = JSON.parse(readFileSync(forteckning, 'utf8'));
     // Riggens filer står i out/<id>/, och lektionskortet i out/material/lektionskort-<id>/.
@@ -109,7 +111,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
       const vantar = VANTAR.find((v) => v.id === id && v.slag === post.slag);
       if (vantar) { varningar.push(`${id}: ${post.namn} tas inte in: ${vantar.skal}`); continue; }
       const yamlSha = post.metodSha256 ?? f.metodSha256;
-      if (yamlSha !== metodensSha) fel.push(`${id}: ${post.namn} är byggd ur en annan metodfil än sajtens (${String(yamlSha).slice(0, 8)} mot ${metodensSha.slice(0, 8)}). Kopiera riggens metod.yaml eller be riggen bygga om.`);
+      if (yamlSha !== metodensSha) avvikande.push([post.namn, String(yamlSha)]);
       // Lathundens pdf är sajtens, gjord av PowerPoint ur sajtens PowerPoint-fil (scripts/lathund-pdf.mjs, K-637), så riggens
       // tas inte in; riggens Word-lathund tas in som förut.
       // En fri tabell med egen fil, som Grovplaneringen i Testbaserat lärande (K-684), står med slag tabell och tabellens
@@ -132,8 +134,18 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     const kort = join(RIGG, 'out', 'material', `lektionskort-${id}`);
     for (const typ of ['pdf', 'docx']) if (existsSync(join(kort, `Lektionskort - ${t}.${typ}`))) filer.push({ slag: 'lektionskort', kalla: join(kort, `Lektionskort - ${t}.${typ}`), typ });
   }
+  // En metod vars dokument riggen har byggt ur en annan metodfil får ingenting skrivet, varken dokument, blad, bilder eller filmer
+  // (K-740, 2026-11-08: en validering som stannade på summan lämnade riggens nya filer i public/metoder). Har sajten inte ändrat
+  // metodens fil sedan senaste commit arbetar riggen med en ny version, som omtaget av Lärande på kognitionsvetenskaplig grund
+  // samma kväll, och sajten behåller sina filer, som valideringen prövade när de committades, med en varning. Har sajten ändrat
+  // filen är intaget halvt, och skriptet stannar. Sajtens filer prövas då som med --kontrollera.
+  const sajtensFil = `src/content/undervisningsmetoder/${fil}`;
+  const oforandrad = avvikande.length > 0 && spawnSync('git', ['ls-files', '--error-unmatch', sajtensFil], { cwd: ROT }).status === 0 && spawnSync('git', ['diff', '--quiet', 'HEAD', '--', sajtensFil], { cwd: ROT }).status === 0;
+  if (oforandrad) varningar.push(`${id}: riggen har byggt nyare dokument ur metodfilen ${avvikande[0][1].slice(0, 8)}, och sajtens fil är ${metodensSha.slice(0, 8)}, oförändrad sedan senaste commit. Sajten behåller sina filer tills riggens leverans tas in`);
+  else for (const [namn, summan] of avvikande) fel.push(`${id}: ${namn} är byggd ur en annan metodfil än sajtens (${summan.slice(0, 8)} mot ${metodensSha.slice(0, 8)}). Kopiera riggens metod.yaml eller be riggen bygga om.`);
+  const lasEndast = kontrollera || avvikande.length > 0;
   const stam = (slag) => (slag === 'allt' ? id : `${id}-${slag}`);
-  if (!kontrollera) {
+  if (!lasEndast) {
     // En tabells fil som riggen inte längre lämnar tas bort, som bladen nedan.
     for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-tabell-`) && !filer.some((y) => x === `${stam(y.slag)}.${y.typ}`))) rmSync(join(UT, f));
     for (const f of filer) copyFileSync(f.kalla, join(UT, `${stam(f.slag)}.${f.typ}`));
@@ -152,7 +164,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   // mellanslag och sidans nummer ("Idékorten 1, sida 1"). delarna är bladens sidor i pdf:en och bildernas nummer.
   let delarna = null;
   let kopplingenFoll = false;
-  if (!kontrollera && bladen.length && existsSync(material)) {
+  if (!lasEndast && bladen.length && existsSync(material)) {
     const s = sidorna(material);
     const fore = s.length - 1 - bladen.length;
     const textsida = (t) => t.split(/\r?\n/).slice(0, 4).some((rad) => rad.trim() === (d.ramar?.rubrik ?? 'Materialet för klassen'));
@@ -176,7 +188,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
       }
     }
   }
-  if (!kontrollera && bladen.length && !kopplingenFoll) {
+  if (!lasEndast && bladen.length && !kopplingenFoll) {
     // Bara metoder där ett blad har flera sidor bredvid andra blad står i filen; för de andra är sidan bladets nummer.
     const forut = JSON.stringify(materialetsSidor[id] ?? null);
     if (delarna && delarna.some((x) => x.bilder.length > 1)) materialetsSidor[id] = delarna.map(({ blad, bilder }) => ({ blad, bilder }));
@@ -186,7 +198,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
 
   // Med --kontrollera, som i Netlifys bygge utan riggen och utan pdftotext, prövas kartan mot bildernas namn i sajtens kopia av
   // materialets Word-fil, och att varje bild i kartan finns (Codex kodgranskning 2026-11-08, fynd 5).
-  if (kontrollera && materialetsSidor[id]) {
+  if (lasEndast && materialetsSidor[id]) {
     const docx = join(UT, `${stam('materialet')}.docx`);
     const sidor = existsSync(docx) ? sidornaPerBlad(await bildnamnen(docx), bladen) : null;
     const vantat = sidor ? bladen.map((blad, i) => ({ blad, bilder: sidor[i].map((x) => x + 1) })) : null;
@@ -195,7 +207,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   }
   // Och åt andra hållet: säger namnen att ett blad har flera sidor, behövs kartan, och utan den visar sidan en bild per blad
   // (Codex kodgranskning 2026-11-08, andra omgången, fynd 2).
-  if (kontrollera && bladen.length > 1 && !materialetsSidor[id]) {
+  if (lasEndast && bladen.length > 1 && !materialetsSidor[id]) {
     const docx = join(UT, `${stam('materialet')}.docx`);
     const sidor = existsSync(docx) ? sidornaPerBlad(await bildnamnen(docx), bladen) : null;
     if (sidor?.some((x) => x.length > 1)) fel.push(`${id}: bildernas namn i public/metoder/${stam('materialet')}.docx säger att ${bladen.filter((_, i) => sidor[i].length > 1).join(', ')} har flera sidor, men src/data/materialets-sidor.json saknar metoden. Kör node scripts/metoderfiler.mjs`);
@@ -204,7 +216,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   // Bladen som riggen inte har lämnat som egna filer klipps ur pdf:en med allt, efter rubrikerna på sidorna.
   const allt = join(UT, `${id}.pdf`);
   const har = new Set(filer.filter((f) => f.typ === 'pdf').map((f) => f.slag));
-  if (!kontrollera && existsSync(allt)) {
+  if (!lasEndast && existsSync(allt)) {
     const s = sidorna(allt);
     const forsta = (re, fran = 0) => s.findIndex((x, i) => i >= fran && re.test(x));
     const pl = forsta(/^\s*Planering · /m);
@@ -240,7 +252,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   // Sidorna är bladens sidor ovan; går de inte ihop klipps inget, och skriptet har sagt det. Riggen kan lämna bladen som egna
   // filer i stället, och då tas de in som de andra.
   const bladfil = (namn) => `${id}-blad-${slugAv(namn)}.pdf`;
-  if (!kontrollera && !kopplingenFoll) {
+  if (!lasEndast && !kopplingenFoll) {
     for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-blad-`) && x.endsWith('.pdf') && !bladen.some((n) => bladfil(n) === x))) rmSync(join(UT, f));
     if (forstaBladet) bladen.forEach((namn, i) => { if (!filer.some((f) => f.slag === `blad-${slugAv(namn)}`)) klipp(material, delarna ? delarna[i].fran : forstaBladet + i, delarna ? delarna[i].till : sistaSidan || forstaBladet + i, join(UT, bladfil(namn))); });
     // Ett blad med flera sidor skrivs ut dubbelsidigt, och en textsida först skulle lägga baksidorna fel (andra ögat på
@@ -253,9 +265,9 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   for (const namn of metodensFilmnamn(d)) {
     for (const ext of ['', '-1', '-2', '-3', '-4']) {
       // Med --kontrollera, som i Netlifys bygge utan riggen, prövas sajtens kopia.
-      const k = kontrollera ? join(UT, `${id}-${namn}${ext}.svg`) : join(ut, `${namn}${ext}.svg`);
-      if (!existsSync(k)) { fel.push(`${id}: ${kontrollera ? `${id}-${namn}${ext}.svg saknas i public/metoder/` : `${namn}${ext}.svg saknas hos riggen`}`); continue; }
-      if (!kontrollera) copyFileSync(k, join(UT, `${id}-${namn}${ext}.svg`));
+      const k = lasEndast ? join(UT, `${id}-${namn}${ext}.svg`) : join(ut, `${namn}${ext}.svg`);
+      if (!existsSync(k)) { fel.push(`${id}: ${lasEndast ? `${id}-${namn}${ext}.svg saknas i public/metoder/` : `${namn}${ext}.svg saknas hos riggen`}`); continue; }
+      if (!lasEndast) copyFileSync(k, join(UT, `${id}-${namn}${ext}.svg`));
     }
   }
   for (const slag of ['allt', 'lektionskort'].filter((s) => !VANTAR.some((v) => v.id === id && v.slag === s))) if (!existsSync(join(UT, `${stam(slag)}.pdf`))) fel.push(`${id}: ${slag} saknas i public/metoder/`);

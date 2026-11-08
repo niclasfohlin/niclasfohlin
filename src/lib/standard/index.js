@@ -4,7 +4,7 @@
 // riggen kör samma kod. scripts/standardprov.mjs stoppar en import av astro:, node: eller sajtens data här och prövar
 // funktionerna. Reglerna står i REGLER.md och ändringarna i CHANGELOG.md.
 
-import { meningarna, ORDNINGSTAL, skyddaRegex, slutarMedPunkt, talAv, talIRegex } from './text.js';
+import { meningarna, ORDNINGSTAL, skyddaRegex, slutarMedPunkt, talAv, talIRegex, utanFogar } from './text.js';
 
 /**
  * Adressens led ur ett namn: små bokstäver, tecknen över bokstäverna bort (å och ä blir a, ö blir o, é blir e, ü blir u),
@@ -308,7 +308,8 @@ const GANGER = new RegExp(String.raw`${TIDFORE}${TIDORD}(?:\s+(?:till|eller)\s+$
  * @returns {{ minst?: number, minuter?: number, perVecka?: number }}
  */
 export function tidensMatt(tid) {
-  const t = String(tid ?? '').toLowerCase();
+  // Utan ordfogar, som riggen sätter efter strecket i ett spann: "2–⁠12 min" är 2 till 12 (Jonas, kall läsare 2026-11-08).
+  const t = utanFogar(tid).toLowerCase();
   const min = t.match(MINUTER);
   const ord = t.match(/(?<![\p{L}])(en halvtimme|en kvart|en timme)(?![\p{L}])/u)?.[1];
   const fast = ord ? { 'en halvtimme': 30, 'en kvart': 15, 'en timme': 60 }[ord] : undefined;
@@ -364,7 +365,7 @@ const spannFore = (t, ord) => {
 
 /** Gruppens storlek: det minsta och största antalet elever, och om gruppen kan vara en hel klass. "Högst fyra elever" är en till fyra (Codex 2026-10-25). @param {string} grupp @returns {{ min: number, max?: number, klass: boolean } | null} */
 export function gruppensElever(grupp) {
-  const t = String(grupp ?? '').toLowerCase();
+  const t = utanFogar(grupp).toLowerCase();
   const klass = /hel klass|helklass/.test(t);
   const hogst = t.match(new RegExp(String.raw`(?<![\p{L}\d])högst\s+${FAKTAORD}\s+elever`, 'u'));
   if (hogst) return { min: 1, max: talAv(hogst[1]), klass };
@@ -379,7 +380,7 @@ export function gruppensElever(grupp) {
  * @param {string} tid @returns {{ min: number, max: number, minst?: true } | null}
  */
 export function tidensVeckotakt(tid) {
-  const t = String(tid ?? '').toLowerCase();
+  const t = utanFogar(tid).toLowerCase();
   const lag = [], hog = [];
   if (/varje (?:dag|vardag|skoldag)|dagligen/.test(t)) { lag.push(5); hog.push(5); }
   if (/varannan dag/.test(t)) { lag.push(2); hog.push(3); }
@@ -394,7 +395,7 @@ export function tidensVeckotakt(tid) {
 
 /** Perioden i veckor, eller i pass för en lektion i en serie, och om den kan bli längre. @param {string} period @returns {{ min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean } | null} */
 export function periodensLangd(period) {
-  const t = String(period ?? '').toLowerCase();
+  const t = utanFogar(period).toLowerCase();
   const s = spannFore(t, 'veckor|vecka|pass');
   if (!s) return null;
   return { min: s.min, ...(s.max !== undefined ? { max: s.max } : {}), enhet: s.ord === 'pass' ? 'pass' : 'veckor', mer: /eller mer|så länge/.test(t), hogst: /högst/.test(t.slice(0, s.slut)), perKurs: /varje kurs|per kurs/.test(t) };
