@@ -5,7 +5,8 @@
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
 import { strategikortetI, strategiernaAv } from './strategier';
-import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker } from './standard/index.js';
+import { CENTRALA } from './centrala';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
 // (K-627), så sidan läser resten som metodens fil har det.
@@ -100,6 +101,17 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
     // Bladet har sin knapp i avsnittet, som de andra sakerna, och namnet i texten leder dit.
     if (blad) saker.push(sak(blad, `${sida}#strategierna`));
     for (const x of strategiernaAv(sk.strategier, `${d.titel}: strategikort`)) saker.push({ ...sak(x.namn, `/strategier/${x.id}`), versal: true, ...((d as { strategikort?: unknown }).strategikort ? { forst: true } : {}) });
+  }
+  // Ett verktyg på sajten som metoden nämner med namnet, som Ta fram ett skrivkort: verktygets post i bestämd form, som
+  // skrivkortet och skrivkorten, är en sak som leder till verktyget (K-734; Skriva för att lära: "Sista kvarten går till
+  // skrivkortet"). Bara de former som standarden läser som en sak (olankadeSaker), så att "ett skrivkort" och verktygets
+  // namn står kvar som text, och namnet länkas som förut av Boklankar.astro. Lästexten och matteproblemet ser inte ut som
+  // saker och blir inga.
+  const helaTexten = JSON.stringify(d);
+  for (const c of CENTRALA) {
+    const post = c.slag === 'sida' && helaTexten.includes(c.namn) ? /^Ta fram (?:ett|en) (\p{L}+)$/u.exec(c.namn)?.[1] : undefined;
+    const former = post ? sakensFormer(post).filter((f: string) => olankadeSaker(f, []).length > 0) : [];
+    if (former.length) saker.push({ namn: former[0], former, adress: c.adress });
   }
   if (d.planeringsmall) saker.push(sak(UM_NAMN.planeringsmall, `${sida}#planeringsmallen`));
   if (d.observation) saker.push(sak(UM_NAMN.observation, `${sida}#observationsmallen`));

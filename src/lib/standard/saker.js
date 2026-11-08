@@ -180,8 +180,8 @@ export function sakdelar(text, saker) {
 // Hänvisningar: "elevens egna saker (bänkboken)"): klasslistan är lärarens lista över klassen (riggens omgång 1
 // 2026-10-26, Högläsning i par), och namnkortet är elevens eget kort med namnet (sajtens K-596, Säg, skriv och läs).
 // Kursplanen är Skolverkets, inte en sak i metoden (Lärande på kognitionsvetenskaplig grund 2026-11-03: "det kommer från dig,
-// kursplanen och läromedlet").
-export const EGNA_SAKER = Object.freeze(['klasslista', 'namnkort', 'kursplan']);
+// kursplanen och läromedlet"), och läroplanen likaså (Skriva för att lära 2026-11-08: "bygger på läroplanen").
+export const EGNA_SAKER = Object.freeze(['klasslista', 'namnkort', 'kursplan', 'läroplan']);
 const EGNA_FORMER = new Set(EGNA_SAKER.flatMap((n) => sakensFormer(n)).map((f) => f.toLocaleLowerCase('sv')));
 
 /**
