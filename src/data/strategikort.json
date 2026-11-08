@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "6d952242ef4414c8",
+    "summa": "75af14ce2c02a5e1",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -59,7 +59,7 @@
     "kb": 58
   },
   "_metod:explicit-undervisning": {
-    "summa": "dc1792d7496c6f89",
+    "summa": "22d250cb96ed9260",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -70,7 +70,7 @@
     "kb": 621
   },
   "_metod:formativ-bedomning": {
-    "summa": "cf7319687957095c",
+    "summa": "9436c95d9eb9dc29",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -92,7 +92,7 @@
     "kb": 471
   },
   "_metod:larande-pa-kognitionsvetenskaplig-grund": {
-    "summa": "526d348d5bb44336",
+    "summa": "7eb440eebd0bde9f",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -120,7 +120,7 @@
     "kb": 370
   },
   "_metod:testbaserat-larande": {
-    "summa": "20da0336b43f56a7",
+    "summa": "d3528a350ccdb96a",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -384,9 +384,9 @@
     }
   },
   "plocka-fram": {
-    "innehall": "44f8ed0d",
-    "summa": "83cd326ff62918ce",
-    "kb": 158,
+    "innehall": "8ca3c1e5",
+    "summa": "fbc070f00f71cc00",
+    "kb": 154,
     "namn": {
       "pt": 80,
       "rader": 1
