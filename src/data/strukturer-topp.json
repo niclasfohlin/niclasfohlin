@@ -1,5 +1,5 @@
 {
-  "datum": "2026-11-07T03:03:04.588Z",
+  "datum": "2026-11-08T07:38:46.419Z",
   "strukturer": [
     {
       "id": "turas-om",
@@ -68,15 +68,15 @@
       "utskrifter": 2
     },
     {
-      "id": "hitta-min-regel",
+      "id": "anteckningspar",
       "antal": 13,
       "besok": 8,
       "utskrifter": 1
     },
     {
-      "id": "anteckningspar",
-      "antal": 12,
-      "besok": 7,
+      "id": "hitta-min-regel",
+      "antal": 13,
+      "besok": 8,
       "utskrifter": 1
     },
     {
