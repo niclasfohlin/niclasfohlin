@@ -1,0 +1,95 @@
+{
+  "_om": "Lagret i lärarens lektion för en metod av slaget strategier som riggen ännu inte har öppnat (riggens standard, avsnitt 7 och 16, 2026-11-08; sajtens K-739 och K-741). Sajten ändrar inte riggens metodfiler, eftersom scripts/metoderfiler.mjs prövar att riggens dokument är byggda ur samma fil. Värdena är riggens, ur out/undervisningsmetoder/TILL-SAJTEN.md och out/skriva-for-att-lara/TILL-SAJTEN.md under Veckornas stallen, prövade mot metodernas tidsschema.efter och progression. ram är raden som är lärarens lektion, var ställenas plats, minuter lektionens längd, stallen veckornas ställen efter progressionens vecka och rutiner delen där varje rutin görs (K-744; riggens svar 2026-11-08 kväll, Standarden, rutinens ställe och lärarens rad). En metod som väntar på riggens omtag står med vantar och skälet. Bygget stannar när en metodfil får fälten och metoden ändå står här, och när en metod av slaget strategier saknas (lagretsFel i src/lib/standard/undervisningsmetod.js).",
+  "formativ-bedomning": {
+    "minuter": 45,
+    "ram": "Din planering",
+    "var": {
+      "Starten": "i början",
+      "Alla visar": "mitt i",
+      "Beslutet": "mitt i",
+      "Exit-lappen": "i slutet"
+    },
+    "stallen": {
+      "1": [
+        "Alla visar",
+        "Beslutet"
+      ],
+      "2": [
+        "Starten",
+        "Alla visar",
+        "Beslutet",
+        "Exit-lappen"
+      ],
+      "3": [
+        "Starten",
+        "Alla visar",
+        "Beslutet",
+        "Exit-lappen"
+      ],
+      "4": [
+        "Starten",
+        "Alla visar",
+        "Beslutet",
+        "Exit-lappen"
+      ],
+      "5": [
+        "Starten",
+        "Alla visar",
+        "Beslutet",
+        "Exit-lappen"
+      ]
+    },
+    "rutiner": {
+      "Tänk och visa": "Alla visar",
+      "Säg instruktionen": "Din planering",
+      "Exit-lappen": "Exit-lappen",
+      "Miniwhiteboarden": "Alla visar",
+      "Färgkortet": "Din planering",
+      "Rätta själv": "Starten"
+    }
+  },
+  "testbaserat-larande": {
+    "minuter": 45,
+    "ram": "Din lektion",
+    "var": {
+      "Provet": "i början",
+      "Facit": "i början",
+      "Kontrasten": "i början"
+    },
+    "stallen": {
+      "1": [
+        "Provet",
+        "Facit",
+        "Kontrasten"
+      ],
+      "2": [
+        "Provet",
+        "Facit",
+        "Kontrasten"
+      ],
+      "3": [
+        "Provet",
+        "Facit",
+        "Kontrasten"
+      ],
+      "4": [
+        "Provet",
+        "Facit",
+        "Kontrasten"
+      ],
+      "5": [
+        "Provet",
+        "Facit",
+        "Kontrasten"
+      ]
+    },
+    "rutiner": {
+      "Provet": "Provet",
+      "Facit och färgpennan": "Facit",
+      "Kontrasten": "Kontrasten"
+    }
+  },
+  "larande-pa-kognitionsvetenskaplig-grund": {
+    "vantar": "Riggens omtag (FRAN-SAJTEN 2026-11-08 kväll, Lärande på kognitionsvetenskaplig grund är också ett lager): tidsschemat har ingen rad för lärarens lektion, och tre av strategierna är verktyg i lärarens lektion, som standarden ännu inte säger hur de visas. Till dess står remsan och Lär dig metoden som förut."
+  }
+}

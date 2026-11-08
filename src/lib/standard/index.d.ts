@@ -347,7 +347,7 @@ export type LarDigMittI = { nr: number; mandag: string; klass: (KlassenHittills 
 export type Klasstabell = { veckor: number[]; rader: { id: string; namn: string; etikett: string; borta?: true; varden: (number | undefined)[]; snitt: number | null }[] };
 /** Avslutet i Lär dig metoden: dagen, anledningen, fasen och steget då, och antalet steg. */
 export type LarDigAvslut = { datum: string; not?: string; fas: 'fore' | 'under' | 'efter'; steg: number | null; antal: number };
-export type LarDigSammanstallning = { fas: 'fore' | 'under' | 'efter'; nu: number | null; dag: string; harNagot: boolean; mal: string; veckor: LarDigSammanstallningsvecka[]; kommenterade: LarDigSammanstallningsvecka[]; linjer: { namn: string; skala: Skala; regler: (Regel & { rad: number })[]; varden: (number | undefined)[]; galler: number[][] }[]; stegen: { nummer: number; steg: number | null; veckor: number; pagar: boolean }[]; kvar: { nummer: number; steg: number | null }[]; lov: string[]; axel: Veckonamn[]; spann: { fran: string; till: string } | null; klasserna: string; klasstabell: Klasstabell; mitt: LarDigMittI | null; mittSvar: { id: string; namn: string; text: string; snitt?: number; veckor?: string; hittills?: string }[]; avslut: LarDigAvslut | null };
+export type LarDigSammanstallning = { fas: 'fore' | 'under' | 'efter'; nu: number | null; dag: string; harNagot: boolean; mal: string; veckor: LarDigSammanstallningsvecka[]; kommenterade: LarDigSammanstallningsvecka[]; linjer: { namn: string; skala: Skala; regler: (Regel & { rad: number })[]; varden: (number | undefined)[]; galler: number[][] }[]; stegen: { nummer: number; steg: number | null; veckor: number; pagar: boolean }[]; kvar: { nummer: number; steg: number | null }[]; lov: string[]; axel: Veckonamn[]; spann: { fran: string; till: string } | null; klasserna: string; klasstabell: Klasstabell; stallentabell: Stallentabell; mitt: LarDigMittI | null; mittSvar: { id: string; namn: string; text: string; snitt?: number; veckor?: string; hittills?: string }[]; avslut: LarDigAvslut | null };
 export declare function larDigSammanstallning(plan: Plan, val: Val, f: Foljd, idag: string): LarDigSammanstallning;
 export declare const larDigetsRegler: (s: LarDigSammanstallning, rader: { nar: string }[]) => { rad: number; text: string }[];
 /** Regeln som gällde i en vecka på linjen. */
@@ -376,6 +376,19 @@ export declare const SKATTNINGARNAS_GRANS: string;
 export declare const klassensFraga: (namn: string) => string;
 /** Klasserna vecka för vecka, med talen och klassens medel. */
 export declare function klassernasTabell(veckor: { mandag: string }[], f: Foljd): Klasstabell;
+/** Lektionerna där läraren lade in ställena i ett lager, vecka för vecka: veckornas plats i sammanställningen, och en rad per klass, och Mina lektioner, med Ja i veckorna (K-741). */
+export type Stallentabell = { veckor: number[]; rader: { id: string; etikett: string; ja: boolean[] }[] };
+export declare function stallenasTabell(veckor: { mandag: string }[], f: Foljd): Stallentabell;
+/** Svaret Mina lektioner, när läraren inte har några klasser i listan. */
+export declare const MINA_LEKTIONER: { readonly id: string; readonly namn: string };
+/** Klassens namn med borttagen efter när klassen är borttagen: "7A, borttagen". */
+export declare const klassensEtikett: (k: { namn: string; borta?: boolean }) => string;
+/** Frågan först i veckans stund i ett lager: "I vilka lektioner lade du in Stanna och skriv eller Loggen?" */
+export declare const inlagdaFragan: (stallen: string[]) => string;
+/** En klass, eller Mina lektioner, in eller ut ur veckans svar. */
+export declare const vaxlaInlagt: (inlagt: Record<string, Record<string, true>> | undefined, mandag: string, id: string) => Record<string, Record<string, true>>;
+/** Rubriken och meningen över tabellen Lektionerna med ställena. */
+export declare const STALLENAS_TABELL: { readonly rubrik: string; readonly text: string; readonly tom: string };
 export declare function larDigetsKlasser(f: Foljd): string;
 export declare function larDigetsSpann(plan: Plan, f: Foljd): { fran: string; till: string } | null;
 /** Veckan mitt i stegen i Lär dig metoden: floor(N/2) + 1 av planens N veckor med steg. */
@@ -562,7 +575,7 @@ export declare function passdagar(val: Val): (datum: string, dag: number) => boo
 export declare function bytDagar(val: Val, dagar: number[], fran?: string, plan?: { pass: Pass[] }): Val;
 
 /** Det läraren för in när hen följer insatsen, allt valfritt: passen som blev av (passens dagar), skattningen vecka för vecka (veckans måndag, sedan elevens id eller grupp), elevlistan, resultaten i metodens uppföljning och besluten mitt i och efter. */
-export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string; utkast?: true; fran?: string }[]; narvaro?: boolean; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string }; oppen?: string; borttagna?: string[]; listan?: string; lamnade?: { id: string; namn: string; utkast?: true; fran?: string }[]; matt?: Record<string, Record<string, number>>; lankar?: Record<string, { formular?: string; sammanstallning?: string }>; lektionPa?: Record<string, number>; klasser?: Klass[]; kommentar?: Record<string, string>; noter?: Record<string, Record<string, string>>; gick?: Record<string, 'ja' | 'inte'>; bockat?: number[]; klassvarden?: Record<string, Record<string, number>>; mittI?: Record<string, string>; avslut?: { datum: string; not?: string }; tidigareAvslut?: Avslutet[] }
+export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string; utkast?: true; fran?: string }[]; narvaro?: boolean; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string }; oppen?: string; borttagna?: string[]; listan?: string; lamnade?: { id: string; namn: string; utkast?: true; fran?: string }[]; matt?: Record<string, Record<string, number>>; lankar?: Record<string, { formular?: string; sammanstallning?: string }>; lektionPa?: Record<string, number>; klasser?: Klass[]; kommentar?: Record<string, string>; noter?: Record<string, Record<string, string>>; gick?: Record<string, 'ja' | 'inte'>; bockat?: number[]; klassvarden?: Record<string, Record<string, number>>; inlagt?: Record<string, Record<string, true>>; mittI?: Record<string, string>; avslut?: { datum: string; not?: string }; tidigareAvslut?: Avslutet[] }
 export declare const passetsDag: (p: Pass) => string;
 /** Passet som redan ligger på en dag i veckan, utom passet som flyttas. */
 export declare const passetPaDagen: (plan: { pass: Pass[] }, v: PlanVecka, datum: string, utom: string) => Pass | undefined;
@@ -865,6 +878,28 @@ export declare const SLAGENS_FORM: Readonly<Record<'lektionsforlopp' | 'struktur
 export declare function slagensOrd(d: Record<string, any>): (typeof SLAGENS_FORM)['lektionsforlopp'];
 /** Säger tiden i slaget strategier lagrets minuter i lektionen, och inte lektionen som lagret ligger över? */
 export declare function lagretIDinLektion(d: Record<string, any>): boolean;
+/** Sajtens värden för lagret i en metod som riggen ännu inte har öppnat (src/data/lagret.json), eller vantar med skälet. */
+export type LagretsBro = { minuter?: number; ram?: string; var?: Record<string, string>; stallen?: Record<string, string[]>; rutiner?: Record<string, string>; vantar?: string };
+/** Lagret i lärarens lektion (riggens standard, avsnitt 7 och 16; K-739, K-741). */
+export type Lagret = { minuter: number; ram: string; rader: { namn: string; ram?: true; var?: string; tid: string; min: number; max: number }[]; stallen: { namn: string; var: string; tid: string; min: number; max: number }[]; veckor: Record<string, string[]>; rutiner: Record<string, string> };
+/** Ställenas platser i lärarens lektion, i lektionens ordning. */
+export declare const LAGRETS_VAR: readonly string[];
+/** Minuterna i en dels tid: "5–7 min" ger 5 och 7. */
+export declare const delensMinuter: (tid: unknown) => { min: number; max: number } | null;
+export declare function lagretAv(d: Record<string, any>, bro?: LagretsBro): Lagret | null;
+/** Lagrets skala: de valda ställena på sina platser och lärarens lektion i resten. */
+export declare function lagretsSkala(lagret: { minuter: number; ram: string; stallen: { namn: string; var: string; min: number; max: number }[] }, valda?: string[]): { stallen: { namn: string; var: string; tid?: string; min: number; max: number }[]; skala: { namn: string; ram?: true; minuter: number }[]; min: number; max: number };
+/** Meningen om minuterna: "Stanna och skriv tar 5–7 av lektionens 45 minuter. Resten av lektionen är din." */
+export declare const lagretsMening: (s: { stallen: { namn: string }[]; min: number; max: number }, minuter: number, vilka?: string) => string;
+export declare function lagretsFel(d: Record<string, any>, bro?: LagretsBro): string[];
+/** Veckans rutiner med delen där var och en görs, och om den är lärarens lektion. */
+export declare const lagretsRutiner: (lagret: { ram: string; rutiner?: Record<string, string> }, rutiner: { namn: string }[]) => { namn: string; stalle: string; ram: boolean }[];
+/** Ställena som är nya i en vecka jämfört med veckan före i planen, som Lär dig metoden märker Ny. */
+export declare const lagretsNya: (lagret: { veckor: Record<string, string[]> }, vecka: string | undefined, forra: string | undefined) => string[];
+/** Skalan som HTML, en rot för remsan i del 2 och veckorna i Lär dig metoden. */
+export declare const lagretsSkalaHtml: (skala: { namn: string; ram?: true; minuter: number }[]) => string;
+/** Ställets plats och minuter: "mitt i, 5–7 min". */
+export declare const stalletsTid: (x: { var: string; min: number; max: number }) => string;
 /** Felen i det en metod hänvisar till: ett id som inte finns, och ett id som är en metod i båda samlingarna. */
 export declare function hanvisadeMetodersFel(d: { relaterade?: string[]; passar?: { metoder?: string[] } }, finns: { stod: Set<string>; metoder: Set<string> }): string[];
 /** Var en fri tabell står i en undervisningsmetod: sist i del 1, efter veckorna eller, annars, sist i bilaga A. */

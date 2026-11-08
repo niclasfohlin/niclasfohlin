@@ -5,7 +5,7 @@
 // Planera insatsens sammanställning (dokument i src/scripts/planpdf.ts), med pdf-lib, som hämtas först när läraren trycker,
 // och den lämnar aldrig enheten. Allt som räknas och varje mening som också står på sidan kommer ur standarden
 // (larDigSammanstallning och texterna under Lär dig metoden i src/lib/standard/plan.js).
-import { datumspann, linjenRitas, medDecimaler, gickDetSvaret, SKATTNINGARNAS_GRANS, klassernasSkalaText, larDigetsAvslutText, larDigetsKvar, larDigetsRegler, lovetsText, mening, mittIFragan, skalansAndar, skalansAndarText, skattningensGranser, granslinjensText, stegetsRad, type LarDigSammanstallning } from '../lib/standard/index.js';
+import { STALLENAS_TABELL, datumspann, linjenRitas, medDecimaler, gickDetSvaret, SKATTNINGARNAS_GRANS, klassernasSkalaText, larDigetsAvslutText, larDigetsKvar, larDigetsRegler, lovetsText, mening, mittIFragan, skalansAndar, skalansAndarText, skattningensGranser, granslinjensText, stegetsRad, type LarDigSammanstallning } from '../lib/standard/index.js';
 import { dokument } from './planpdf';
 
 export interface LarDigPdfInfo {
@@ -62,6 +62,12 @@ export async function larDigPdf(s: LarDigSammanstallning, info: LarDigPdfInfo, i
     p.rubrik('Klasserna vecka för vecka', 80);
     p.not(klassernasSkalaText());
     p.matris(s.klasstabell.veckor.map((i) => s.veckor[i].namn), s.klasstabell.rader.map((r) => ({ namn: r.etikett, varden: r.varden, sist: r.snitt === null ? '' : medDecimaler(r.snitt) })), { sist: 'Snitt' });
+  }
+  // Lektionerna med ställena i ett lager (stallenasTabell), med Ja i veckorna, som på sidan (K-741).
+  if (s.stallentabell.rader.length) {
+    p.rubrik(STALLENAS_TABELL.rubrik, 80);
+    p.not(STALLENAS_TABELL.text);
+    p.matris(s.stallentabell.veckor.map((i) => s.veckor[i].namn), s.stallentabell.rader.map((r) => ({ namn: r.etikett, varden: r.ja.map((x) => (x ? 'Ja' : undefined)) })));
   }
   // Svaren Mitt i, under en rubrik med klassen.
   for (const x of s.mittSvar) {

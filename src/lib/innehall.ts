@@ -10,7 +10,8 @@ import { metodensFastaAntal } from './antal';
 import { hanvisningsFel } from './boklankar';
 import { metodensLektionskort } from './lektionskort';
 import { lasLektionskort } from './lektionskortdata';
-import { allaTexter, hanvisadeMetodersFel, kortetsMalFel, varianternasFel } from './standard/index.js';
+import { allaTexter, hanvisadeMetodersFel, kortetsMalFel, lagretsFel, varianternasFel } from './standard/index.js';
+import { lagretsBro, lagretsDatafil } from './undervisningsmetod';
 import type { SamlingNyckel } from './samlingar';
 
 // Utkast visas i utvecklingsläge men aldrig i produktionsbygget. Databasens matteproblem har inget utkastläge.
@@ -27,7 +28,24 @@ export async function publicerade<K extends CollectionKey>(samling: K): Promise<
   const synliga = import.meta.env.PROD && !metodernasUtkast(samling) ? alla.filter((post) => !('utkast' in post.data && post.data.utkast)) : alla;
   if (samling === 'stodundervisning') for (const m of synliga as CollectionEntry<'stodundervisning'>[]) provaAntal(m);
   if (samling === 'stodundervisning' || samling === 'undervisningsmetoder') await provaHanvisade(synliga as CollectionEntry<'stodundervisning' | 'undervisningsmetoder'>[]);
+  if (samling === 'undervisningsmetoder') await provaLagret(synliga as CollectionEntry<'undervisningsmetoder'>[]);
   return synliga;
+}
+
+// Lagret i lärarens lektion (K-739, K-741): en metod av slaget strategier har lärarens lektion, ställenas plats, lektionens
+// minuter och veckornas ställen i sin fil eller i src/data/lagret.json, aldrig i båda, eller väntar på riggen med skälet där, och
+// datafilen har bara metoder som finns (lagretsFel i standarden). Prövas en gång per bygge, som provaHanvisade.
+const lagretProvat = new WeakSet<object>();
+async function provaLagret(poster: CollectionEntry<'undervisningsmetoder'>[]) {
+  const nya = poster.filter((p) => !lagretProvat.has(p.data));
+  if (!nya.length) return;
+  const alla = new Set((await getCollection('undervisningsmetoder')).map((p) => p.id));
+  const fel = [
+    ...nya.flatMap((p) => lagretsFel(p.data, lagretsBro(p.id)).map((f) => `${p.filePath ?? p.id}: ${f}`)),
+    ...lagretsDatafil().filter((id) => !alla.has(id)).map((id) => `src/data/lagret.json har ${id}, som inte är en metod i src/content/undervisningsmetoder/.`),
+  ];
+  if (fel.length) throw new Error(`${fel.length} fel i lagret i lärarens lektion:\n  ${fel.join('\n  ')}\nReglerna står i METODER.md under Lagret i lärarens lektion.`);
+  for (const p of nya) lagretProvat.add(p.data);
 }
 
 // Hör ihop med (relaterade, metoder i Stödundervisning eller Metoder) och valkartans metoder (passar.metoder, metoder under Metoder) pekar

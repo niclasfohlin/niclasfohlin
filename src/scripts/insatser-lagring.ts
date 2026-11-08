@@ -103,7 +103,7 @@ export function rensaPlan(x: unknown): SparadPlan | null {
  * konvertering från versionen före i KONVERTERINGAR. Provfilerna i scripts/planera/filer/ är formatet som varje version skrev
  * det, och planprovet öppnar dem (PLANERA.md under Planens fil och lagringen).
  */
-export const PLANFORMAT = 2;
+export const PLANFORMAT = 3;
 /** Meningen när en nyare version av Planera insatsen har sparat planen eller planerna i webbläsaren. */
 export const NYARE_VERSION = 'Planen är sparad i en nyare version av Planera insatsen. Ladda om sidan, så kommer allt med.';
 export const PLANFILENS_TYP = 'planera-insatsen';
@@ -112,10 +112,13 @@ export const PLANFILENS_TYP = 'planera-insatsen';
  * säger vad som saknades, när läraren behöver veta det. Version 1 gällde från 0.2.7 till 0.8.2. Version 2, från Planera
  * 0.9.0, har samma fält och de nya för Lär dig metoden (samling, skapad och klasserna i följden), så en plan i version 1 är
  * en plan i version 2 som den är. Versionen höjdes så att en flik med en äldre version, som står öppen när sajten laddas
- * upp, säger till och inte skriver tillbaka planerna utan de nya fälten (lagringenArNyare; Codex 2026-10-31).
+ * upp, säger till och inte skriver tillbaka planerna utan de nya fälten (lagringenArNyare; Codex 2026-10-31). Version 3, från
+ * Planera 0.10.0, har samma fält och lagrets svar i Lär dig metoden (inlagt i följden, K-741), så en plan i version 2 är en plan
+ * i version 3 som den är, och versionen höjdes av samma skäl.
  */
 export const KONVERTERINGAR: Record<number, (plan: Record<string, unknown>) => { plan: Record<string, unknown>; varningar: string[] }> = {
   1: (plan) => ({ plan, varningar: [] }),
+  2: (plan) => ({ plan, varningar: [] }),
 };
 /** En plan i en äldre version av formatet, konverterad till den här, med varningarna, och en varning för en plan ur en nyare version. */
 export function konverteraPlan(plan: unknown, v: unknown): { plan: unknown; varningar: string[] } {
@@ -220,6 +223,17 @@ export function flikensPlan() {
       const ok = skrivPlanen(ny);
       if (ok) { senast = planensInnehall(ny); bas = kopia(ny); }
       return ok;
+    },
+    // Före en ändring som prövas mot det som är infört, som ett steg till eller ett lov: har en annan flik sparat planen sedan
+    // fliken läste den, får sidan den sammanslagna planen först, så att beslutet tar med det den andra fliken förde in (Codex
+    // 2026-11-08, nr 3). Basen blir den andra flikens plan, så att det den här fliken har och inte har sparat står kvar när den
+    // sparar.
+    hamta: (p: SparadPlan, tillSidan: (sammanslagen: SparadPlan) => void) => {
+      const lagrad = lasPlaner().planer.find((x) => x.id === p.id);
+      if (!lagrad || !bas || planensInnehall(lagrad) === senast) return;
+      const ihop = slaSamman(bas, lagrad, p);
+      senast = planensInnehall(lagrad); bas = kopia(lagrad);
+      tillSidan(ihop);
     },
   };
 }

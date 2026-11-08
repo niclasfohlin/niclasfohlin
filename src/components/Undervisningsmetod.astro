@@ -9,14 +9,14 @@ import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
 import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
-import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfalletsAnkare, utfallensElever, utfalletsText, utfallensRegel, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
+import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, lagretI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfalletsAnkare, utfallensElever, utfalletsText, utfallensRegel, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
-import { metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
+import { lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
 import Vavruta from './Vavruta.astro';
 import Bladkort from './Bladkort.astro';
 import { metodensBladkort, bladkortensStycke } from '../lib/bladkort';
@@ -72,6 +72,11 @@ const delar = metodensDelar(d);
 const del = (did: string) => delar.find((x) => x.id === did)!;
 const komp = (d.karna?.komponenter ?? []) as { namn: string; moment?: string[]; vad: string; syns: string; varfor: string; belagg: string; kvar: string; fritt: string; kryss: string }[];
 const steg = (d.steg?.rader ?? []) as Record<string, any>[];
+// Lagret i lärarens lektion (K-739; Niclas 2026-11-08: "i lektionen ser det ut som skrivandet tar typ 40 min av lektionen"): i
+// en metod av slaget strategier med fälten ritar remsan lektionen i skala, med lärarens lektion i grått och ställena i blått, och
+// delarna som rader under. Kortet för lärarens lektion får grå ram. Samma skala som veckorna i Lär dig metoden (lagretsSkala).
+const lagret = lagretI(id, d);
+const lagretsAlla = lagret ? lagretsSkala(lagret) : null;
 const rader = (d.tidsschema?.rader ?? []) as { tid: string; fas: string; form?: string; vad: string }[];
 const foreRad = rader.find((r) => r.fas === 'Före lektionen');
 const efterRad = rader.find((r) => r.fas === 'Efter lektionen');
@@ -181,11 +186,21 @@ const moten = arbetslagetsMoten(d);
 
 <section class="um-del" id="del-lektionen" aria-labelledby="del-lektionen-rubrik">
   <header class="um-band"><span class="um-band-nr" aria-hidden="true">2</span><div><h2 id="del-lektionen-rubrik"><span class="visually-hidden">Del 2: </span>{del('lektionen').namn}</h2><p>{del('lektionen').rad}</p></div></header>
-  <nav class="um-remsa" aria-label={slagetsOrd.delarna}>
-    <ol style={`--antal: ${steg.length}`}>
-      {steg.map((s) => { const r = tidsschematsRad(d, s.namn); return <li><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-tid">{r?.tid}</span><span class="um-remsa-namn">{s.namn}</span></a></li>; })}
-    </ol>
-  </nav>
+  {lagret ? (
+    <nav class="um-remsa um-remsa-lager" aria-label={slagetsOrd.delarna}>
+      <Fragment set:html={lagretsSkalaHtml(lagretsAlla?.skala ?? [])} />
+      <ol>
+        {steg.map((s) => { const r = tidsschematsRad(d, s.namn); const x = lagret.stallen.find((y) => y.namn === s.namn); return <li class={s.namn === lagret.ram ? 'um-remsa-ram' : undefined}><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{s.namn}</span><span class="um-remsa-tid">{x ? stalletsTid(x) : r?.tid}</span></a></li>; })}
+      </ol>
+      {lagretsAlla && <p class="um-remsa-resten">{lagretsMening(lagretsAlla, lagret.minuter)}</p>}
+    </nav>
+  ) : (
+    <nav class="um-remsa" aria-label={slagetsOrd.delarna}>
+      <ol style={`--antal: ${steg.length}`}>
+        {steg.map((s) => { const r = tidsschematsRad(d, s.namn); return <li><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-tid">{r?.tid}</span><span class="um-remsa-namn">{s.namn}</span></a></li>; })}
+      </ol>
+    </nav>
+  )}
   <section class="um-avsnitt" id="lektionen">
     {/* Bandet säger redan rubriken, så den står bara för skärmläsaren (design-3 nr 18). */}
     <h3 class="visually-hidden">{d.tidsschema?.rubrik}</h3>
@@ -198,7 +213,7 @@ const moten = arbetslagetsMoten(d);
       const elever = s.redo ? utfallensElever(s.redo) : 0;
       return (
         <>
-          <article class="um-lektionsdel" id={ankare}>
+          <article class:list={['um-lektionsdel', { 'um-ld-din': lagret?.ram === s.namn }]} id={ankare}>
             <header class="um-ld-huvud">
               <h4>{s.namn}</h4>
               <p class="um-ld-fakta"><span>{r?.tid}</span>{(s.vem || r?.form) && <span>{s.vem ? stor(s.vem) : r!.form}</span>}</p>

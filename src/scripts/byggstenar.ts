@@ -5,7 +5,7 @@
 // (src/lib/standard/plan.js), och det som sparas i src/scripts/insatser-lagring.ts. Varje sida anropar byggstenen med sina
 // egna element och ord.
 import { ANLEDNINGENS_LANGD, AVSLUTETS_ANLEDNINGAR, esc, isoVecka, kalendervecka, kalenderveckaUtskriven, lovetLast, PLANKNAPPAR, skolveckan, spannKort, stor, utanFogar, veckonyckel } from '../lib/standard/index.js';
-import { APPENS_PLANER, STATUSNAMN, type Samling, type Status } from './insatser-lagring.ts';
+import { APPENS_PLANER, LISTANS_KNAPPAR, STATUSNAMN, type Samling, type Status } from './insatser-lagring.ts';
 import { iAppen, vagenUt, webblasaren, webblasarensBesked } from './webblasaren.ts';
 
 /** Statistikens namn för ett tryck, en rot för båda lagren och samlingarna (granskningen rot-3, fynd 14): samlingens led, metoden och vad, och titeln med metodens namn. Svaret ger attributen. */
@@ -67,7 +67,8 @@ export const notisen = (id: string) => (text: string, knappar = '') => {
 interface Webblasarensrad { forled: string; adress: () => string; goat: (vad: string, text: string) => string }
 /** Beskedet om webbläsaren med sina knappar, eller null där inget besked gäller. */
 export function webblasarensRad(o: Webblasarensrad): { slag: 'appens' | 'safari'; text: string; knappar: string } | null {
-  const b = webblasarensBesked(o.adress(), PLANKNAPPAR);
+  // Planen skyddas med planens knapp här, och i appen öppnas filen med knappen i appens lista (granskaren 2026-11-08, K-748).
+  const b = webblasarensBesked(o.adress(), { laddaNer: PLANKNAPPAR.laddaNer, oppna: LISTANS_KNAPPAR.oppna });
   if (!b) return null;
   // Safari i iPhone och iPad: knappen till appens sida, där stegen står utfällda.
   if (b.slag === 'safari') return { slag: b.slag, text: b.text, knappar: `<a class="knapp liten" id="${o.forled}-till-appen" href="${esc(b.till.href)}" ${o.goat('till-appen', 'Så lägger du till appen, från Safari')}>${esc(b.till.text)}</a>` };

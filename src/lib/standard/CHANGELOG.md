@@ -1,5 +1,11 @@
 # Ändringar i standarden
 
+## 0.60.0, 2026-11-08
+
+- `undervisningsmetod.js` (riggens standard, avsnitt 7 och 16, Lagret i lärarens lektion; sajtens K-739 och K-741): `LAGRETS_VAR`, `delensMinuter`, `lagretAv`, `lagretsSkala`, `lagretsSkalaHtml`, `stalletsTid`, `lagretsMening` och `lagretsFel`. Lagret läses ur metodens fält `ram`, `var`, `tidsschema.minuter` och `progression.rader[].stallen`, eller ur värden som sajten ger för en metod som riggen ännu inte har öppnat, och lektionen ritas i skala, i remsan i del 2 och i veckorna i Lär dig metoden. Bandet i del 2 säger i slaget strategier "Det du lägger in i din lektion, ställe för ställe."
+- `undervisningsmetod.js` (Codex och de kalla lärarna samma dag): `lagretsNya`, ställena som är nya i en vecka mot veckan före i planen, och `lagretsFel` stoppar en del utan steg, en del vars tid inte börjar med minuter och ställen som inte ryms i lektionen.
+- `plan.js` (K-741): `MINA_LEKTIONER`, `inlagdaFragan`, `vaxlaInlagt`, `klassensEtikett`, `stallenasTabell` och `STALLENAS_TABELL`, och följdens fält `inlagt` med svaren i stunden på i vilka klasser ställena kom in, per vecka och klass som `klassvarden`. `rensaFoljd` läser fältet, `infordaDatum` och `klassenHarNagot` räknar det, och sammanställningen visar det. `PLANERA` är 0.10.0.
+
 ## 0.59.0, 2026-11-07
 
 - `undervisningsmetod.js` (Niclas 2026-11-06, riggens brev samma kväll, sajtens K-718): `NIVAERNAS_FORKLARING` säger att Inte sammanvägt gäller när något ämnesområde saknar nivå, och `undervisningsmetodensFel` stoppar Inte sammanvägt när Läsning, Skrivning, Matematik och Ämnen alla har en nivå, eftersom de då slås ihop till Lärande totalt (riggens `evidensen.md`, avsnitt 7). Riggens dokument läser texten ur standarden, så de får den nya raden när de byggs om.

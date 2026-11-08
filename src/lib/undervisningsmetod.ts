@@ -5,7 +5,8 @@
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
 import { strategikortetI, strategiernaAv } from './strategier';
-import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker, lagretAv, type LagretsBro } from './standard/index.js';
+import lagretsData from '../data/lagret.json';
 import { CENTRALA } from './centrala';
 
 // Schemat prövar huvudet, faktan, profilen och källorna och släpper igenom resten tills mallen och piloten har samma fält
@@ -14,6 +15,16 @@ import { CENTRALA } from './centrala';
 export type Um = CollectionEntry<'undervisningsmetoder'>['data'] & { centrala?: { id: string; efterText: string }[] } & Record<string, any>;
 
 export const metodensAdress = (id: string) => `/metoder/${id}`;
+
+/**
+ * Lagret i lärarens lektion (K-739, K-741): ur metodens fil, eller ur sajtens datafil src/data/lagret.json för en metod som riggen
+ * ännu inte har öppnat (lagretAv i standarden). Null när metoden inte är ett lager med fälten, som en metod som väntar på riggens
+ * omtag. Remsan i del 2 och Lär dig metoden läser samma.
+ */
+export const lagretsBro = (id: string): LagretsBro | undefined => (lagretsData as Record<string, LagretsBro | string>)[id] as LagretsBro | undefined;
+export const lagretI = (id: string, d: Um) => lagretAv(d, lagretsBro(id));
+/** Metoderna i datafilen, utan nyckeln _om, för spärren i bygget (src/lib/innehall.ts). */
+export const lagretsDatafil = () => Object.keys(lagretsData).filter((k) => !k.startsWith('_'));
 
 /** Filerna som riggen bygger, i nedladdningens ordning (Ladda ner och skriv ut, som i Stödundervisning). */
 export type UmSlag = 'allt' | 'metoden' | 'lathund' | 'lektionskort' | 'planeringsmall' | 'materialet' | 'observation' | 'referensblad';

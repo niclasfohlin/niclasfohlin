@@ -74,7 +74,7 @@ let idag = idagLokalt();
 const uppfNamn = (rad: number) => uppfoljningensNamn(plan, info(), rad);
 
 // Lär dig metodens fält (klasserna, kommentarerna, Gick det? och checklistan, K-628) finns inte i Planera insatsen.
-type HelFoljd = Required<Omit<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa' | 'klasser' | 'kommentar' | 'noter' | 'gick' | 'bockat' | 'klassvarden' | 'mittI' | 'mittIDag' | 'avslut' | 'tidigareAvslut'>> & Pick<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa' | 'tidigareAvslut'>;
+type HelFoljd = Required<Omit<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa' | 'klasser' | 'kommentar' | 'noter' | 'gick' | 'bockat' | 'klassvarden' | 'inlagt' | 'mittI' | 'mittIDag' | 'avslut' | 'tidigareAvslut'>> & Pick<Foljd, 'avstamning' | 'utvardering' | 'narvaro' | 'oppen' | 'borttagna' | 'lamnade' | 'listan' | 'matt' | 'lankar' | 'lektionPa' | 'tidigareAvslut'>;
 const tomFoljd = (): HelFoljd => ({ gjorda: [], elever: [], franvaro: {}, vecka: {}, skattning: {}, resultat: {} });
 // tagenMed: en ny plan som läraren tog med ur en apps webbläsare (vagensAdress), vars adress bär valen tills den sparas.
 interface Aktiv { id: string; namn: string; val: Val; folj: boolean; foljd: HelFoljd; sparad: boolean; franLank: boolean; uppdaterad?: string; kopia?: string; tagenMed?: boolean }
@@ -97,8 +97,13 @@ const mina = () => lasPlaner().planer.filter((p) => p.metod === data.id).sort(iT
 // Den aktiva planens innehåll som fliken senast läste eller sparade, så att en annan fliks ändring av en annan plan inte
 // tar över den här (Codex 2026-10-24).
 const minne = flikensPlan();
+// En sparad plan som sidans plan (aktivUr), och när fliken läser den, också vad fliken minns (franSparad). Planen som flikens minne
+// hämtar före en ändring blir sidans utan att bli minnet, så att det fliken inte har sparat står kvar (minne.hamta).
 const franSparad = (p: SparadPlan): Aktiv => {
   minne.minns(p);
+  return aktivUr(p);
+};
+const aktivUr = (p: SparadPlan): Aktiv => {
   return { id: p.id, namn: p.namn ?? '', val: lasVal(p.val)?.val ?? forval(mp, idag), folj: !!p.folj, foljd: { ...tomFoljd(), ...(p.foljd ?? {}) }, sparad: true, franLank: false, uppdaterad: p.uppdaterad, kopia: p.kopia };
 };
 // En plan som läraren öppnar i fliken: ett namn som sparades medan läraren skrev är färdigt, eftersom skrivandet tog slut.
@@ -358,6 +363,9 @@ function aterstall(o: ReturnType<typeof ogonblick>, meddelande: string) {
   if (!ok) sparfel(); else visaBesked(meddelande);
 }
 function andra(fn: () => void, meddelande?: string | (() => string | undefined), kanAngra = false) {
+  // Flikens minne hämtar först en annan fliks sparade plan (hamta i insatser-lagring.ts), så att till exempel en upprepad vecka
+  // prövas mot en skattning som den andra fliken förde in i en senare vecka (Codex 2026-11-08, nr 3).
+  minne.hamta(sparadAv(), (ihop) => { const vy = visa; aktiv = aktivUr(ihop); visa = vy; rakna(); });
   const fore = kanAngra ? ogonblick() : null;
   const planenFore = plan, idFore = aktiv.id, lektionerFore = JSON.stringify(aktiv.val.lektioner ?? []);
   fn();

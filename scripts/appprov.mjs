@@ -301,13 +301,15 @@ try {
     // Beskedet i Planera insatsen, och knappen till /app med stegen utfällda.
     await f.oppna(`${bas}/stodundervisning/${planbara[0]}/planera`);
     const b = await f.besked('pl-besked');
-    ska('iPhone i Safari: Planera insatsen rekommenderar appen, med knappen till /app', b?.text.includes('Gör planen i appen Metodbanken.') && b.knapp === '/app#lagg-till', b);
+    const { LISTANS_KNAPPAR } = await import('../src/scripts/insatser-lagring.ts');
+    ska('iPhone i Safari: Planera insatsen rekommenderar appen, med knappen till /app och appens knapp för filen', b?.text.includes('Gör planen i appen Metodbanken.') && b.text.includes(`öppnar du filen med ${LISTANS_KNAPPAR.oppna}.`) && b.knapp === '/app#lagg-till', b);
     ska('iPhone: länken Appen Metodbanken syns i Planera insatsen', (await f.kor(`getComputedStyle(document.querySelector('.app-lank')).display`)) === 'block');
   }
   if (larDiga.length) {
     await f.oppna(`${bas}/metoder/${larDiga[0]}/lar-dig`);
     const b = await f.besked('ld-notis');
-    ska('iPhone i Safari: Lär dig metoden rekommenderar appen med samma besked, med knappen till /app', b?.text.includes('Gör planen i appen Metodbanken.') && b.knapp === '/app#lagg-till', b);
+    const { LISTANS_KNAPPAR } = await import('../src/scripts/insatser-lagring.ts');
+    ska('iPhone i Safari: Lär dig metoden rekommenderar appen med samma besked, med knappen till /app och appens knapp för filen', b?.text.includes('Gör planen i appen Metodbanken.') && b.text.includes(`öppnar du filen med ${LISTANS_KNAPPAR.oppna}.`) && b.knapp === '/app#lagg-till', b);
   }
   await f.oppna(`${bas}/app`);
   await f.kor(`document.querySelector('[data-app-stang]').click()`);

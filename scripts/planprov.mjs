@@ -100,9 +100,10 @@ if (tsMp) {
     const termin = (start, lov = [], langd = val.langd) => s.planera(medTermin, { ...val, start, lov, langd }).uppfoljning.at(-1);
     ska('nästa termin är en rad efter, och veckan efter jullovet eller sommarlovet', JSON.stringify(s.tolkaTid('nästa termin')) === JSON.stringify({ typ: 'efter', veckor: 0, termin: true }) && termin('2026-11-02').tillfallen[0]?.datum === '2027-01-11' && termin('2027-03-01').tillfallen[0]?.datum === '2027-08-16' && termin('2026-11-02').typ === 'efter', [termin('2026-11-02').tillfallen, termin('2027-03-01').tillfallen]);
     // Lärarens jullov direkt efter stegen flyttar inte nästa termin till efter sommaren (kodgranskningen 2026-11-02, P1).
-    // Jullovet mitt i stegen, så att sista steget ligger i januari: nästa termin är ändå veckan efter jullovet, terminen efter
-    // den läraren började i (verifieringen 2026-11-02 gav augusti).
-    ska('nästa termin med jullovet mitt i stegen är veckan efter jullovet', termin('2026-11-23', ['2026-52', '2026-53', '2027-01'], 5).tillfallen[0]?.datum === '2027-01-11', termin('2026-11-23', ['2026-52', '2026-53', '2027-01'], 5).tillfallen);
+    // Jullovet mitt i stegen, så att sista steget ligger i januari: nästa termin är ändå terminen efter den läraren började i
+    // (verifieringen 2026-11-02 gav augusti), och veckan efter sista passet, så att uppföljningen inte står mitt i stegen
+    // (buggjakten 2026-11-08, K-747).
+    ska('nästa termin med jullovet mitt i stegen är veckan efter stegen, i terminen efter jullovet', termin('2026-11-23', ['2026-52', '2026-53', '2027-01'], 5).tillfallen[0]?.datum === '2027-01-18', termin('2026-11-23', ['2026-52', '2026-53', '2027-01'], 5).tillfallen);
     ska('nästa termin med lärarens jullov direkt efter stegen är veckan efter jullovet', termin('2026-11-02', ['2026-51', '2026-52', '2026-53', '2027-01']).tillfallen[0]?.datum === '2027-01-11', termin('2026-11-02', ['2026-51', '2026-52', '2026-53', '2027-01']).tillfallen);
   }
   ska('veckanFor onsdag 18 november är vecka 3', s.veckanFor(p, '2026-11-18').nr === 3);
@@ -882,6 +883,36 @@ if (tsMp) {
     const kfs = s.rensaFoljd({ ...kf, mittI: { kb: 'Kortare genomgång.', ka: 'Bordet oftare.' }, gick: { '2026-11-09': 'ja' } });
     const ks = s.larDigSammanstallning(ep, eval0, kfs, '2026-11-25');
     ska('Klasserna vecka för vecka: veckorna med en skattning, en borttagen klass och klassens medel', JSON.stringify(ks.klasstabell.veckor) === '[0,1,2]' && ks.klasstabell.rader.map((r) => `${r.namn}:${r.varden.map((x) => x ?? '-').join('')}:${r.snitt}`).join(' ') === '7A:34-:3.5 7B:43-:3.5 7C:551:3.7 7D:11-:1' && ks.klasstabell.rader[3].borta === true && JSON.stringify(s.klassernasTabell(ks.veckor, kfs)) === JSON.stringify(ks.klasstabell) && s.klassernasTabell(ks.veckor, s.rensaFoljd({ klasser: klasser3 })).rader.length === 0 && s.klassenHittills(ep, kf, 'kb', 3)?.snitt === 3.5 && s.klassenHittills(ep, kf, 'ka', 1) === null, ks.klasstabell);
+    // Lagret i lärarens lektion (K-741): lektionen i skala ur metodens fält eller sajtens datafil, meningen om minuterna, frågan
+    // och svaret i stunden, tabellen i sammanställningen och spärren, prövade med en metod av slaget strategier.
+    const lagerRader = [{ tid: 'Före lektionen', fas: 'Före lektionen' }, { tid: '2 min', fas: 'Skriv först', var: 'i början' }, { tid: '30 min eller mer', fas: 'Din planering', ram: true }, { tid: '5–⁠7 min', fas: 'Stanna och skriv', var: 'mitt i' }, { tid: '3 min', fas: 'Loggen', var: 'i slutet' }, { tid: 'Efter lektionen', fas: 'Efter lektionen' }];
+    const lagerSteg = { rader: ['Skriv först', 'Din planering', 'Stanna och skriv', 'Loggen'].map((namn) => ({ namn })) };
+    const lagerMetod = { slag: 'strategier', tidsschema: { minuter: 45, rader: lagerRader }, steg: lagerSteg, progression: { rader: [{ vecka: '1', stallen: ['Stanna och skriv'] }, { vecka: '2', stallen: ['Stanna och skriv', 'Loggen'] }, { vecka: '3', stallen: ['Skriv först', 'Stanna och skriv', 'Loggen'] }] } };
+    const lagerUtan = { slag: 'strategier', tidsschema: { rader: lagerRader.map(({ ram: _r, var: _v, ...r }) => r) }, steg: lagerSteg, progression: { rader: [{ vecka: '1' }, { vecka: '2' }, { vecka: '3' }] } };
+    const lagerBro = { minuter: 45, ram: 'Din planering', var: { 'Skriv först': 'i början', 'Stanna och skriv': 'mitt i', Loggen: 'i slutet' }, stallen: { 1: ['Stanna och skriv'], 2: ['Stanna och skriv', 'Loggen'], 3: ['Skriv först', 'Stanna och skriv', 'Loggen'] } };
+    const lag = s.lagretAv(lagerMetod), lagBro = s.lagretAv(lagerUtan, lagerBro);
+    const lagSk = s.lagretsSkala(lag), lagSk1 = s.lagretsSkala(lag, ['Stanna och skriv']), lagSk60 = s.lagretsSkala({ ...lag, minuter: 60 }, ['Stanna och skriv']);
+    const skalan = (x) => x.skala.map((y) => `${y.ram ? 'R' : 'S'}${y.minuter}`).join(' ');
+    ska('lagret: lärarens lektion i skala ur metodens fält eller sajtens datafil', !!lag && JSON.stringify(lag) === JSON.stringify(lagBro) && lag.ram === 'Din planering' && lag.stallen.map((x) => x.namn).join() === 'Skriv först,Stanna och skriv,Loggen' && s.LAGRETS_VAR.join() === 'i början,mitt i,i slutet' && skalan(lagSk) === 'S2 R17 S6 R17 S3' && skalan(lagSk1) === 'R19.5 S6 R19.5' && skalan(lagSk60) === 'R27 S6 R27' && JSON.stringify(s.delensMinuter('5–⁠7 min')) === '{"min":5,"max":7}' && JSON.stringify(s.delensMinuter('1 min och sedan vägen')) === '{"min":1,"max":1}' && s.delensMinuter('Före lektionen') === null && s.lagretAv({ ...lagerMetod, slag: 'lektionsforlopp' }) === null && s.lagretAv(lagerUtan) === null && s.lagretAv(lagerUtan, { vantar: 'Riggens omtag.' }) === null && s.lagretsSkalaHtml(lagSk1.skala) === '<div class="um-skala" aria-hidden="true"><span class="um-skala-ram" style="flex: 19.5 1 0">Din planering</span><span style="flex: 6 1 0"></span><span class="um-skala-ram" style="flex: 19.5 1 0"></span></div>', [skalan(lagSk), skalan(lagSk1), skalan(lagSk60)]);
+    ska('lagret: meningen om minuterna, ställets tid och frågan i stunden', s.lagretsMening(lagSk1, 45, 'veckans') === 'Stanna och skriv tar 5–⁠7 av lektionens 45 minuter. Resten av lektionen är din.' && s.lagretsMening(lagSk, 45, 'veckans') === 'Med alla veckans ställen tar det 10–⁠12 av lektionens 45 minuter. Resten av lektionen är din.' && s.lagretsMening(lagSk, 45) === 'Med alla ställen tar det 10–⁠12 av lektionens 45 minuter. Resten av lektionen är din.' && s.lagretsMening(lagSk60, 60, 'veckans') === 'Stanna och skriv tar 5–⁠7 av lektionens 60 minuter. Resten av lektionen är din.' && s.stalletsTid(lag.stallen[1]) === 'mitt i, 5–⁠7 min' && s.stalletsTid(lag.stallen[0]) === 'i början, 2 min' && s.inlagdaFragan(['Stanna och skriv']) === 'I vilka klasser lade du in Stanna och skriv den här veckan?' && s.inlagdaFragan(['Skriv först', 'Stanna och skriv', 'Loggen']) === 'I vilka klasser lade du in Skriv först, Stanna och skriv eller Loggen den här veckan?' && s.lagretsNya(lag, '2', '1').join() === 'Loggen' && s.lagretsNya(lag, '3', '2').join() === 'Skriv först' && !s.lagretsNya(lag, '2', '2').length && !s.lagretsNya(lag, '1', undefined).length && s.klassensEtikett({ namn: '7A', borta: true }) === '7A, borttagen' && s.klassensEtikett({ namn: '7A' }) === '7A', [s.lagretsMening(lagSk1, 45, 'veckans'), s.lagretsMening(lagSk, 45), s.lagretsNya(lag, '2', '1')]);
+    const inl1 = s.vaxlaInlagt(undefined, '2026-11-09', 'ka'), inl2 = s.vaxlaInlagt(inl1, '2026-11-09', 'kb'), inl3 = s.vaxlaInlagt(inl2, '2026-11-09', 'ka'), inl4 = s.vaxlaInlagt(inl3, '2026-11-09', 'kb');
+    const inlRensad = s.rensaFoljd({ klasser: klasser3, inlagt: { '2026-11-09': { ka: true, 'ogiltigt id!': true, [s.MINA_LEKTIONER.id]: true, kb: 'ja' }, x: { ka: true }, '2026-11-16': {}, '2026-11-23': ['ka'] } });
+    ska('lagret: svaret i stunden per vecka, en klass in och ut, och det rensas', JSON.stringify(inl1) === '{"2026-11-09":{"ka":true}}' && JSON.stringify(inl2) === '{"2026-11-09":{"ka":true,"kb":true}}' && JSON.stringify(inl3) === '{"2026-11-09":{"kb":true}}' && JSON.stringify(inl4) === '{}' && JSON.stringify(inlRensad.inlagt) === `{"2026-11-09":{"ka":true,"${s.MINA_LEKTIONER.id}":true}}` && s.rensaFoljd({}).inlagt === undefined && s.MINA_LEKTIONER.namn === 'Mina lektioner' && !/^[a-z0-9]{1,12}$/i.test(s.MINA_LEKTIONER.id), [inl1, inl2, inl3, inl4, inlRensad.inlagt]);
+    const ksl = s.larDigSammanstallning(ep, eval0, s.rensaFoljd({ ...kf, inlagt: { '2026-11-09': { ka: true }, '2026-11-16': { ka: true, kd: true }, '2026-11-23': { [s.MINA_LEKTIONER.id]: true } } }), '2026-11-25');
+    const baraInlagt = s.larDigSammanstallning(ep, eval0, s.rensaFoljd({ inlagt: { '2026-11-09': { [s.MINA_LEKTIONER.id]: true } } }), '2026-11-25');
+    ska('lagret: tabellen Lektionerna med ställena i sammanställningen', JSON.stringify(ksl.stallentabell.veckor) === '[0,1,2]' && ksl.stallentabell.rader.map((r) => `${r.etikett}:${r.ja.map((x) => (x ? 'J' : '-')).join('')}`).join(' ') === '7A:JJ- 7B:--- 7C:--- 7D, borttagen:-J- Mina lektioner:--J' && JSON.stringify(s.stallenasTabell(ksl.veckor, s.rensaFoljd({ klasser: klasser3 }))) === '{"veckor":[],"rader":[]}' && baraInlagt.harNagot && !s.larDigSammanstallning(ep, eval0, s.rensaFoljd({}), '2026-11-25').harNagot && s.STALLENAS_TABELL.rubrik === 'Lektionerna med ställena' && s.STALLENAS_TABELL.text.startsWith('Ja betyder') && s.STALLENAS_TABELL.tom === 'inget svar', ksl.stallentabell);
+    const lagFel = (d, b) => s.lagretsFel(d, b);
+    const medRad = (fas, andring) => ({ ...lagerMetod, tidsschema: { ...lagerMetod.tidsschema, rader: lagerRader.map((r) => (r.fas === fas ? { ...r, ...andring } : r)) } });
+    ska('lagret: spärren', !lagFel(lagerMetod).length && !lagFel(lagerUtan, lagerBro).length && !lagFel(lagerUtan, { vantar: 'Riggens omtag.' }).length && lagFel(lagerUtan).length === 1 && !!lagFel(lagerMetod, lagerBro)[0]?.includes('ta bort metoden') && lagFel({ ...lagerMetod, tidsschema: { ...lagerMetod.tidsschema, minuter: 10 } }).some((x) => x.includes('20–120')) && lagFel(medRad('Loggen', { var: 'sist' })).some((x) => x.includes('Loggen säger inte var')) && lagFel(medRad('Loggen', { ram: true })).some((x) => x.includes('2 rader')) && lagFel({ ...lagerMetod, progression: { rader: [{ vecka: '1', stallen: ['Läsaren'] }] } }).some((x) => x.includes('Läsaren')) && lagFel({ ...lagerMetod, progression: { rader: [{ vecka: '1' }] } }).some((x) => x.includes('vecka 1 säger inte')) && lagFel(lagerUtan, { ...lagerBro, stallen: { ...lagerBro.stallen, 9: ['Loggen'] } }).some((x) => x.includes('vecka 9')) && lagFel({ slag: 'lektionsforlopp' }, lagerBro).length === 1 && !lagFel({ slag: 'lektionsforlopp' }).length && lagFel(medRad('Din planering', { grepp: ['Ord och bild'] })).some((x) => x.includes('K-743')) && lagFel({ ...lagerMetod, steg: { rader: lagerSteg.rader.filter((x) => x.namn !== 'Loggen') } }).some((x) => x.includes('Loggen har inget steg')) && lagFel(medRad('Loggen', { tid: 'cirka 3 min' })).some((x) => x.includes('cirka 3 min')) && lagFel(medRad('Stanna och skriv', { tid: '40 min' })).some((x) => x.includes('ingen plats')), [lagFel(lagerUtan), lagFel(lagerMetod, lagerBro), lagFel(medRad('Loggen', { tid: 'cirka 3 min' }))]);
+    // Rutinens ställe (K-744): veckans rutiner vid sina ställen och i lärarens lektion, ur metodens fält eller sajtens datafil, och spärren.
+    const medRutiner = { ...lagerMetod, rutiner: { rader: [{ namn: 'Stanna och skriv', vecka: 1, stalle: 'Stanna och skriv' }, { namn: 'Två texter', vecka: 2, stalle: 'Stanna och skriv' }, { namn: 'Frågan', vecka: 2, stalle: 'Din planering' }] } };
+    const utanRutinensStalle = { ...lagerUtan, rutiner: { rader: [{ namn: 'Två texter', vecka: 2 }] } };
+    ska('lagret: veckans rutiner vid sina ställen, och en rutin i lärarens lektion', JSON.stringify(s.lagretAv(medRutiner).rutiner) === '{"Stanna och skriv":"Stanna och skriv","Två texter":"Stanna och skriv","Frågan":"Din planering"}' && JSON.stringify(s.lagretsRutiner(s.lagretAv(medRutiner), [{ namn: 'Två texter' }, { namn: 'Frågan' }, { namn: 'Okänd' }])) === '[{"namn":"Två texter","stalle":"Stanna och skriv","ram":false},{"namn":"Frågan","stalle":"Din planering","ram":true}]' && JSON.stringify(s.lagretAv(utanRutinensStalle, { ...lagerBro, rutiner: { 'Två texter': 'Stanna och skriv' } }).rutiner) === '{"Två texter":"Stanna och skriv"}' && !lagFel(medRutiner).length && lagFel({ ...medRutiner, rutiner: { rader: [{ namn: 'Frågan', vecka: 2 }] } }).some((x) => x.includes('rutinen Frågan säger inte')) && lagFel({ ...medRutiner, rutiner: { rader: [{ namn: 'Frågan', vecka: 2, stalle: 'Läsaren' }] } }).some((x) => x.includes('görs vid Läsaren')) && !lagFel(utanRutinensStalle, { ...lagerBro, rutiner: { 'Två texter': 'Stanna och skriv' } }).length && lagFel(utanRutinensStalle, lagerBro).some((x) => x.includes('rutinen Två texter säger inte')) && lagFel(utanRutinensStalle, { ...lagerBro, rutiner: { 'Två texter': 'Stanna och skriv', Okänd: 'Loggen' } }).some((x) => x.includes('rutinen Okänd, som metoden inte har')), [s.lagretAv(medRutiner).rutiner, lagFel(utanRutinensStalle, lagerBro)]);
+    const inlInfort = s.rensaFoljd({ klasser: klasser3, inlagt: { '2026-11-16': { kd: true } } });
+    ska('lagret: ett svar i stunden är infört, och en klass med svar står kvar som borttagen', s.infordaDatum(inlInfort, ep).includes('2026-11-16') && s.klassenHarNagot(inlInfort, 'kd') && !s.klassenHarNagot(inlInfort, 'ka'), s.infordaDatum(inlInfort, ep));
+    // K-746 (granskaren 2026-11-08): förslaget till första lektionen hoppar över jul och nyår och sommarlovet.
+    const forslaget = (dag) => s.larDigetsForval(emp, dag).start;
+    ska('K-746: förslaget till första lektionen hoppar över jul och nyår och sommarlovet', forslaget('2026-12-11') === '2027-01-11' && forslaget('2026-11-18') === '2026-12-07' && forslaget('2027-06-08') === '2027-08-16', [forslaget('2026-12-11'), forslaget('2026-11-18'), forslaget('2027-06-08')]);
     ska('Mitt i i sammanställningen: svaren i listans ordning, med vad klassen hade', ks.mitt?.klass?.id === 'kb' && ks.mittSvar.map((x) => `${x.namn}:${x.text}:${x.snitt}:${x.veckor}`).join(' | ') === '7A:Bordet oftare.:3.5:vecka 1–2 | 7B:Kortare genomgång.:3.5:vecka 1–2' && ks.mittSvar[1].hittills === '7B har i snitt 3,5 av 5 i vecka 1–2.' && ks.kommenterade.map((w) => w.mandag).join() === '2026-11-09,2026-11-16', [ks.mittSvar, ks.kommenterade.map((w) => w.mandag)]);
     // Avslutet: en plan som avslutades i steg 2 står som den var den dagen, också när den läses en månad senare.
     const af = s.rensaFoljd({ ...kfs, avslut: { datum: '2026-11-18', not: 'Metoden sitter i min undervisning' } });
@@ -992,8 +1023,8 @@ if (tsMp) {
     // F1, F3 och F5 (läsare E): startens namn och den första hela lektionen ur metodens slag, stegets saker som knappar och
     // snittet efter klassen. Prövade åt andra hållet.
     ska('F1: startens namn och den första hela lektionen efter metodens slag', s.planensStart(koop) === 'Första samarbetet med eleverna' && s.planensStart(eu) === 'Första lektionen med eleverna' && s.forstaHelaLektionen(koop)?.namn === 'Den första hela lektionen' && s.forstaHelaLektionen(koop)?.vecka === 2 && s.forstaHelaLektionen(koop)?.text.startsWith('Den första hela lektionen, i vecka') && s.forstaHelaLektionen(eu) === null, [s.planensStart(koop), s.forstaHelaLektionen(koop)]);
-    const fSparr = (ld) => /for="ld-start">\$\{esc\(data\.startNamn\)\}/.test(ld) && /\$\{hela\}\$\{knappar\}/.test(ld) && /stegetsTexter = \[rad\.rubrik/.test(ld) && /veckansSaker\(v, stegetsTexter\)/.test(ld) && /<p>\$\{medSaker\(rad\.eleverna/.test(ld) && /Klassen<\/th><th scope="col">Snitt<\/th>\$\{huvud\}/.test(ld);
-    ska('F1, F3 och F5: spärren i koden', fSparr(ldKod) && !fSparr(ldKod.replace('${hela}${knappar}', '${knappar}')) && !fSparr(ldKod.replace('<p>${medSaker(rad.eleverna', '<p>${esc(rad.eleverna')) && !fSparr(ldKod.replace('Klassen</th><th scope="col">Snitt</th>${huvud}', 'Klassen</th>${huvud}<th scope="col">Snitt</th>')));
+    const fSparr = (ld) => /for="ld-start">\$\{esc\(data\.startNamn\)\}/.test(ld) && /\$\{hela\}\$\{knappar\}/.test(ld) && /stegetsTexter = \[rad\.rubrik/.test(ld) && /veckansSaker\(v, stegetsTexter\)/.test(ld) && /<p>\$\{medSaker\(rad\.eleverna/.test(ld) && /Klassen<\/th>\$\{o\.extra \? `<th scope="col" class="ld-snitt">\$\{esc\(o\.extra\)\}<\/th>` : ''\}\$\{huvud\}/.test(ld) && /extra: 'Snitt'/.test(ld);
+    ska('F1, F3 och F5: spärren i koden', fSparr(ldKod) && !fSparr(ldKod.replace('${hela}${knappar}', '${knappar}')) && !fSparr(ldKod.replace('<p>${medSaker(rad.eleverna', '<p>${esc(rad.eleverna')) && !fSparr(ldKod.replace("Klassen</th>${o.extra ? `<th scope=\"col\" class=\"ld-snitt\">${esc(o.extra)}</th>` : ''}${huvud}", "Klassen</th>${huvud}${o.extra ? `<th scope=\"col\" class=\"ld-snitt\">${esc(o.extra)}</th>` : ''}")));
     ska('F4: ordet skattning i Vad linjen säger', bygg.linjensRegler('l', 'Vad linjen säger', false, []).includes('en vecka utan skattning bryter följden') && !/utan kryss/.test(byggKod));
     // Codex 2026-10-31, kodgranskning 3: Ångra lägger bara tillbaka den berörda planen (1), flikarnas ändringar slås samman (2),
     // en ny klass på en borttagen klass rad är samma klass bara när namnen nästan är lika (3), dagen läraren väljer är första
@@ -1019,6 +1050,26 @@ if (tsMp) {
       lager.bytPlanen(undefined, lager.rensaPlan({ ...pagaende, id: 'abc203' }));
       const efterByt = lager.lasPlaner().planer.map((p) => p.id).sort().join();
       ska('nr 1 och 2: Ångra lägger bara tillbaka en plan, och flikarnas ändringar slås samman', JSON.stringify(sammanslagen.foljd.kommentar) === '{"2026-11-09":"Ändrad här","2026-11-16":"Från den andra fliken"}' && !!tillSidan && JSON.stringify(lager.slaSamman(bas, deras, vara).foljd.kommentar) === '{"a":"1x","b":"2"}' && efterByt === 'abc201,abc202,abc203', [sammanslagen?.foljd, efterByt]);
+      delete globalThis.localStorage;
+    }
+    {
+      // Codex 2026-11-08, nr 1 och 3 (K-741): svaren i stunden slås samman klass för klass mellan två flikar, och före en ändring tar
+      // fliken in det en annan flik har sparat (hamta), utan att tappa det den själv har men inte har sparat.
+      const minne = new Map();
+      globalThis.localStorage = { getItem: (k) => minne.get(k) ?? null, setItem: (k, v) => minne.set(k, String(v)), removeItem: (k) => minne.delete(k) };
+      const L = lager.rensaPlan({ ...pagaende, id: 'lag301', foljd: { inlagt: { '2026-11-09': { ka: true } } } });
+      lager.skrivPlaner([L]);
+      const flikA = lager.flikensPlan(); flikA.minns(L);
+      lager.skrivPlanen({ ...L, foljd: { ...L.foljd, inlagt: { '2026-11-09': { ka: true, kb: true } } } });
+      const hosA = { ...L, foljd: { ...L.foljd, inlagt: { '2026-11-09': { ka: true, kc: true } } } };
+      let hamtad = null;
+      flikA.hamta(hosA, (ihop) => { hamtad = ihop; });
+      flikA.skriv(hamtad ?? hosA, (ihop) => ihop);
+      const sparad = lager.lasPlaner().planer.find((p) => p.id === 'lag301');
+      let igen = 'ingen';
+      flikA.hamta(sparad, () => { igen = 'hämtade'; });
+      const listor = lager.slaSamman({ ...L, foljd: { inlagt: { v: { ka: true } } } }, { ...L, foljd: { inlagt: { v: { ka: true, kb: true } } } }, { ...L, foljd: { inlagt: { v: { kc: true } } } }).foljd.inlagt;
+      ska('lagret: två flikar slår samman svaren klass för klass, och före en ändring tar fliken in den andra flikens', JSON.stringify(hamtad?.foljd.inlagt) === '{"2026-11-09":{"ka":true,"kb":true,"kc":true}}' && JSON.stringify(sparad?.foljd.inlagt) === '{"2026-11-09":{"ka":true,"kb":true,"kc":true}}' && igen === 'ingen' && JSON.stringify(listor) === '{"v":{"kb":true,"kc":true}}', [hamtad?.foljd.inlagt, sparad?.foljd.inlagt, igen, listor]);
       delete globalThis.localStorage;
     }
     const pdfKod = readFileSync(join(rot, 'src/scripts/lardigpdf.ts'), 'utf8');
@@ -1048,7 +1099,7 @@ if (tsMp) {
         && /julensText\(julveckorna\(plan\.pass/.test(ld) && /julveckorna\(plan\.pass/.test(pl) && /julensText\(julveckor,/.test(pl) && !/=== 12 && d >= 21/.test(ld + pl) // B16
         && /datumspann\(s\.spann\.fran, s\.spann\.till\)/.test(ld) && /datumspann\(s\.spann\.fran, s\.spann\.till\)/.test(pdf) && !/skolveckan\(sista\)/.test(pdf); // B17
     };
-    ska('B11 till B17: spärren i koden', l2Sparr(ldKod, pdfKod, planeraKod) && !l2Sparr(ldKod, pdfKod.replace('namn: r.etikett', 'namn: r.namn'), planeraKod) && !l2Sparr(ldKod.replace('const efterRader = avslutad ? []', 'const efterRader = false ? []'), pdfKod, planeraKod) && !l2Sparr(ldKod.replace('linje.varden, s.axel,', 'linje.varden, s.veckor.map((x) => x.namn),'), pdfKod, planeraKod) && !l2Sparr(ldKod + "`Före räcker från ${x}`", pdfKod, planeraKod) && !l2Sparr(ldKod.replace('idag, aktiv.skapad)', 'idag)'), pdfKod, planeraKod) && !l2Sparr(ldKod.replace('klasslistansBesked(skrivet)', 'klasslistansBesked(t.value)'), pdfKod, planeraKod) && !l2Sparr(ldKod, pdfKod, planeraKod + 'return (m === 12 && d >= 21)') && !l2Sparr(ldKod, pdfKod.replace('datumspann(s.spann.fran, s.spann.till)', 'datumspann(forsta, sista)'), planeraKod));
+    ska('B11 till B17: spärren i koden', l2Sparr(ldKod, pdfKod, planeraKod) && !l2Sparr(ldKod, pdfKod.replaceAll('namn: r.etikett', 'namn: r.namn'), planeraKod) && !l2Sparr(ldKod.replace('const efterRader = avslutad ? []', 'const efterRader = false ? []'), pdfKod, planeraKod) && !l2Sparr(ldKod.replace('linje.varden, s.axel,', 'linje.varden, s.veckor.map((x) => x.namn),'), pdfKod, planeraKod) && !l2Sparr(ldKod + "`Före räcker från ${x}`", pdfKod, planeraKod) && !l2Sparr(ldKod.replace('idag, aktiv.skapad)', 'idag)'), pdfKod, planeraKod) && !l2Sparr(ldKod.replace('klasslistansBesked(skrivet)', 'klasslistansBesked(t.value)'), pdfKod, planeraKod) && !l2Sparr(ldKod, pdfKod, planeraKod + 'return (m === 12 && d >= 21)') && !l2Sparr(ldKod, pdfKod.replace('datumspann(s.spann.fran, s.spann.till)', 'datumspann(forsta, sista)'), planeraKod));
     // E6: fältet Första lektionen visar dagen ur roten (forstaLektionen, med forstaLektionensDag), som Din plan och pdf:en.
     const e6 = (ld) => /id="ld-start" value="\$\{esc\(forstaLektionen\(plan\)/.test(ld);
     ska('E6: fältet för första lektionen visar dagen ur roten', e6(ldKod) && !e6(ldKod.replace('value="${esc(forstaLektionen(plan)', 'value="${esc(aktiv.val.start')) && s.forstaLektionen(s.planera(emp, { ...eval0, start: '2026-11-14' })) === '2026-11-16');
@@ -1864,6 +1915,9 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   const lasProvfil = (namn) => JSON.parse(readFileSync(join(filmapp, namn), 'utf8'));
   const somForut = (a, b) => a && b && a.val === b.val && a.namn === b.namn && JSON.stringify(a.foljd) === JSON.stringify(s.rensaFoljd(b.foljd)) && a.folj === b.folj;
   ska('planens format: provfilerna från 0.2.7 finns', filerna.includes('plan-0.2.7.json') && filerna.includes('lagring-0.2.7.json'), filerna);
+  // Format 3 kom med Planera 0.10.0 för lagrets svar i Lär dig metoden (K-741): filerna som den versionen skrev dem har svaren,
+  // och en plan i format 2 är en plan i format 3 som den är.
+  ska('planens format: provfilerna från 0.10.0 har lagrets svar', filerna.includes('plan-0.10.0.json') && filerna.includes('lagring-0.10.0.json') && lagring.PLANFORMAT === 3 && lasProvfil('plan-0.10.0.json').v === 3 && Object.keys(lagring.lasPlanfil(lasProvfil('plan-0.10.0.json'))?.plan.foljd.inlagt?.['2026-11-23'] ?? {}).length === 3 && lasProvfil('lagring-0.10.0.json').planer.some((p) => p.foljd?.inlagt?.['2026-11-16']?.[s.MINA_LEKTIONER.id] === true) && JSON.stringify(lagring.konverteraPlan({ a: 1 }, 2)) === '{"plan":{"a":1},"varningar":[]}', filerna);
   for (const namn of filerna.filter((x) => x.startsWith('plan-'))) {
     const fil = lasProvfil(namn);
     const last = lagring.lasPlanfil(fil);
@@ -4742,6 +4796,97 @@ try {
     sant('verifieringen 4, fynd 2: inga fel', !kl.undantag.length && !(await kl.kor('window.__fel.length')), kl.undantag);
     await kl.oppna('about:blank');
     kl.stang();
+
+    // Lagret i lärarens lektion (K-741): Formativ bedömning, ett lager med sajtens datafil, i telefonen en fredag. Veckan visar din
+    // lektion i skala med bara veckans ställen och Ny vid ett nytt ställe, stunden frågar först i vilka lektioner ställena kom in,
+    // med klasserna, och svaret står kvar efter en omladdning, i sammanställningen och i planens fil. Lagringen från 0.10.0
+    // öppnas med allt på en annan dator, också Mina lektioner utan klasser, och en metod som inte är ett lager har veckan som förut.
+    const lg = await flik(false, Date.UTC(2026, 10, 27, 15, 0, 0));
+    await lg.bredd(390);
+    const LG = `${bas}/metoder/formativ-bedomning/lar-dig`;
+    const lgPlan = lagringen.rensaPlan({ id: 'lag001', metod: 'formativ-bedomning', samling: 'metoder', titel: 'Formativ bedömning', val: s.kodaVal({ start: '2026-11-16', dagar: [1, 3, 5], langd: 5, ...tom }), foljd: { klasser: [{ id: 'k7a', namn: '7A' }, { id: 'k7b', namn: '7B' }] }, andrad: '2026-11-20T10:00:00', skapad: '2026-11-02', schema: { pass: [], veckor: [] } });
+    await lg.oppna(LG);
+    await lg.kor(`localStorage.clear(); localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify({ v: lagringen.PLANFORMAT, planer: [lgPlan] }))})`);
+    await lg.oppna('about:blank');
+    await lg.oppna(`${LG}#p=lag001`);
+    const lgVeckan = () => lg.kor(`(() => { const b = document.querySelector('.ld-lektionen'); return b ? { rader: [...b.querySelectorAll('.ld-stallen li')].map((li) => [li.querySelector('.ld-stallen-namn').firstChild.textContent, !!li.querySelector('.ld-ny'), li.querySelector('.ld-stallen-tid').textContent].join('|')), skala: b.querySelectorAll('.um-skala span').length, bla: b.querySelectorAll('.um-skala span:not(.um-skala-ram)').length, mening: b.querySelector('.ld-resten')?.textContent ?? '', rutiner: [...b.querySelectorAll('.ld-rutin')].map((p) => p.textContent).join('|') } : null; })()`);
+    const lgKnappar = () => lg.kor(`[...document.querySelectorAll('.ld-inlagt [data-inlagt]')].map((b) => b.textContent + ':' + b.getAttribute('aria-pressed')).join()`);
+    await lg.tryck('#ld-remsa [data-vy="1"]');
+    await vanta(250);
+    const lgV1 = await lgVeckan();
+    await lg.tryck('#ld-remsa [data-vy="2"]');
+    await vanta(250);
+    const lgV2 = await lgVeckan();
+    // Inte än ger steget en vecka till, och där är ställena inte nya.
+    await lg.tryck('.ld-stund [data-gick="inte"]');
+    await vanta(300);
+    await lg.tryck('#ld-remsa [data-vy="3"]');
+    await vanta(250);
+    const lgIgen = await lgVeckan();
+    await lg.tryck('#ld-remsa [data-vy="2"]');
+    await vanta(250);
+    sant('lagret: veckan visar din lektion i skala med bara veckans ställen, och Ny vid ett nytt ställe', lgV1?.rader.join() === 'Alla visar|false|mitt i, 5 min,Beslutet|false|mitt i, 1 min' && lgV1.skala === 4 && lgV1.bla === 2 && lgV1.mening === 'Med alla veckans ställen tar det 6 av lektionens 45 minuter. Resten av lektionen är din.' && lgV2?.rader.join() === 'Starten|true|i början, 5 min,Alla visar|false|mitt i, 5 min,Beslutet|false|mitt i, 1 min,Exit-lappen|true|i slutet, 5 min' && lgV2.skala === 6 && lgV2.bla === 4 && lgIgen?.rader.join() === 'Starten|false|i början, 5 min,Alla visar|false|mitt i, 5 min,Beslutet|false|mitt i, 1 min,Exit-lappen|false|i slutet, 5 min', [lgV1, lgV2, lgIgen]);
+    sant('lagret: veckans rutin vid sitt ställe och i lärarens lektion, Ny första gången steget kommer', lgV1?.rutiner === 'Ny rutin: Tänk och visa' && lgV2?.rutiner === 'Ny rutin: Exit-lappen|Ny rutin i din planering: Säg instruktionen' && lgIgen?.rutiner === 'Rutin: Exit-lappen|Rutin i din planering: Säg instruktionen', [lgV1?.rutiner, lgV2?.rutiner, lgIgen?.rutiner]);
+    const lgFragan = await lg.text('.ld-inlagt h4');
+    const lgFore = await lgKnappar();
+    await lg.tryck('.ld-inlagt [data-inlagt]', '7B');
+    await vanta(300);
+    const lgSparat = await lg.kor(`JSON.stringify(JSON.parse(localStorage.getItem('insatser')).planer.find((p) => p.id === 'lag001')?.foljd.inlagt ?? null)`);
+    await lg.oppna('about:blank');
+    await lg.oppna(`${LG}#p=lag001`);
+    await lg.tryck('#ld-remsa [data-vy="2"]');
+    await vanta(250);
+    const lgEfter = await lgKnappar();
+    sant('lagret: stunden frågar först i vilka lektioner, med klasserna, och svaret står kvar efter en omladdning', lgFragan === 'I vilka klasser lade du in Starten, Alla visar, Beslutet eller Exit-lappen den här veckan?' && lgFore === '7A:false,7B:false' && lgSparat === '{"2026-11-23":{"k7b":true}}' && lgEfter === '7A:false,7B:true' && (await lg.kor(`document.querySelector('.ld-stund .ld-inlagt')?.previousElementSibling?.classList.contains('pl-hjalp') ?? false`)), [lgFragan, lgFore, lgSparat, lgEfter]);
+    // Lektionens längd under Före (de kalla lärarna 2026-11-08: "mina lektioner är 50"): veckorna räknar med lärarens egen längd,
+    // som står kvar efter en omladdning, och metodens längd tas bort ur valen.
+    await lg.tryck('#ld-remsa [data-vy="fore"]');
+    await vanta(250);
+    await lg.kor(`(() => { const f = document.getElementById('ld-minuter'); f.value = '60'; f.dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
+    await vanta(300);
+    await lg.tryck('#ld-remsa [data-vy="1"]');
+    await vanta(250);
+    const lgSextio = await lg.text('.ld-resten');
+    await lg.oppna('about:blank');
+    await lg.oppna(`${LG}#p=lag001`);
+    await lg.tryck('#ld-remsa [data-vy="fore"]');
+    await vanta(250);
+    const lgFaltet = await lg.kor(`document.getElementById('ld-minuter')?.value ?? null`);
+    // K-745: arbetslagets möte före start, i veckan före första lektionen (v. 46), står utan den veckan när den har varit.
+    const lgMote = await lg.text('section[aria-labelledby="ld-mote-rubrik"]');
+    await lg.kor(`(() => { const f = document.getElementById('ld-minuter'); f.value = '45'; f.dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
+    await vanta(300);
+    const lgUtan = await lg.kor(`JSON.parse(localStorage.getItem('insatser')).planer.find((p) => p.id === 'lag001')?.val ?? ''`);
+    sant('K-745: arbetslagets möte före start står utan en vecka som har varit', !!lgMote?.includes('Före första lektionen') && !/v. 46/.test(lgMote), lgMote);
+    sant('lagret: lektionens längd under Före ändrar veckornas minuter, och står kvar efter en omladdning', lgSextio === 'Med alla veckans ställen tar det 6 av lektionens 60 minuter. Resten av lektionen är din.' && lgFaltet === '60' && !/(^|&)m=/.test(lgUtan), [lgSextio, lgFaltet, lgUtan]);
+    await lg.tryck('#ld-remsa [data-vy="2"]');
+    await vanta(250);
+    await lg.tryck('[data-till-samman]');
+    await vanta(300);
+    const lgTabell = await lg.kor(`(() => { const s = [...document.querySelectorAll('section.pl-block')].find((x) => x.querySelector('h3')?.textContent === 'Lektionerna med ställena'); return s ? [...s.querySelectorAll('tbody tr')].map((tr) => [...tr.children].map((c) => c.textContent.trim()).join(':')).join(' ') : null; })()`);
+    await lg.kor('window.__fil = null');
+    await lg.tryck('#ld-ladda-ner');
+    await vanta(400);
+    const lgFil = JSON.parse(String((await lg.kor('window.__fil')) ?? '{}'));
+    await lg.kor(`localStorage.clear(); localStorage.setItem('insatser', ${JSON.stringify(readFileSync(join(rot, 'scripts', 'planera', 'filer', 'lagring-0.10.0.json'), 'utf8'))})`);
+    await lg.oppna('about:blank');
+    await lg.oppna(`${LG}#p=ver100`);
+    await lg.tryck('#ld-remsa [data-vy="2"]');
+    await vanta(250);
+    const lgAnnan = await lgKnappar();
+    await lg.oppna('about:blank');
+    await lg.oppna(`${LG}#p=ver101`);
+    await lg.tryck('#ld-remsa [data-vy="1"]');
+    await vanta(250);
+    const lgMina = { knappar: await lgKnappar(), hjalp: await lg.text('.ld-inlagt .pl-hjalp') };
+    sant('lagret: svaret står i sammanställningen och i planens fil, som öppnas med allt på en annan dator', lgTabell === '7A:inget svar 7B:Ja' && lgFil.v === lagringen.PLANFORMAT && JSON.stringify(lgFil.plan?.foljd?.inlagt) === '{"2026-11-23":{"k7b":true}}' && lgAnnan === '7A:true,7B:true' && lgMina.knappar === 'Mina lektioner:true' && lgMina.hjalp === 'Skriv in dina klasser under Före, så frågar stunden för varje klass.', [lgTabell, lgFil.v, lgFil.plan?.foljd?.inlagt, lgAnnan, lgMina]);
+    await lg.oppna(`${bas}/metoder/explicit-undervisning/lar-dig`);
+    await lg.tryck('#ld-remsa [data-vy="1"]');
+    await vanta(250);
+    sant('lagret: en metod som inte är ett lager har veckan och stunden som förut', (await lg.kor(`!document.querySelector('.ld-lektionen') && !document.querySelector('.ld-inlagt') && !!document.querySelector('.ld-steget')`)));
+    sant('lagret: inga fel', !lg.undantag.length && !(await lg.kor('window.__fel.length')), lg.undantag);
+    await lg.oppna('about:blank');
+    lg.stang();
 
     // Fynd 3 och 4: i Ordverkstad i grupp rymmer resultatfältet det delarna ber om, i telefonen och på dator, och sammanställningen
     // säger vad talen står för.

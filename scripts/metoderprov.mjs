@@ -27,7 +27,7 @@ import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import JSZip from 'jszip';
-import { UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser, utfallsord, slugAv } from '../src/lib/standard/index.js';
+import { lagretAv, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser, utfallsord, slugAv } from '../src/lib/standard/index.js';
 import { ren, utanHuvudOchFot, pdfText } from './textjamforelse.mjs';
 import { MINIBILDEN, metodensMinibilder, sakensNamn } from '../src/lib/bladkortfiler.js';
 
@@ -48,6 +48,30 @@ const metodsidor = sidor.filter((s) => /^\/metoder\/[^/]+$/.test(s));
 const lathundsidor = sidor.filter((s) => /^\/metoder\/[^/]+\/lathund$/.test(s));
 const fel = [];
 let provadeSaker = 0;
+
+// Lagret i lärarens lektion (K-739): i en metod av slaget strategier med fälten, i metodens fil eller i src/data/lagret.json,
+// ritar remsan i del 2 lektionen i skala ur samma rot som veckorna i Lär dig metoden (lagretsSkala och lagretsSkalaHtml), raderna
+// säger ställets plats och minuter, lärarens lektion har en grå rad och kortet för den grå ram. En metod som inte är ett lager,
+// eller som väntar på riggen, har remsan som förut.
+const lagretsData = JSON.parse(readFileSync(join(rot, 'src', 'data', 'lagret.json'), 'utf8'));
+let lagrenProvade = 0;
+for (const s of metodsidor) {
+  const id = s.split('/')[2];
+  const yaml = join(rot, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`);
+  if (!existsSync(yaml)) continue;
+  const lagret = lagretAv(parse(readFileSync(yaml, 'utf8')), lagretsData[id]);
+  const html = readFileSync(join(dist, s.slice(1), 'index.html'), 'utf8');
+  const remsa = html.match(/<nav class="um-remsa[^"]*"[\s\S]*?<\/nav>/)?.[0] ?? '';
+  if (!lagret) { if (remsa.includes('um-remsa-lager')) fel.push(`${s}: remsan i del 2 är ett lager fast metoden saknar lagrets fält`); continue; }
+  lagrenProvade++;
+  if (!remsa.includes('um-remsa-lager') || !remsa.includes(lagretsSkalaHtml(lagretsSkala(lagret).skala))) fel.push(`${s}: remsan i del 2 ritar inte lektionen i skala ur lagretsSkala`);
+  for (const x of lagret.stallen) if (!remsa.includes(stalletsTid(x))) fel.push(`${s}: raden ${x.namn} i remsan säger inte ${stalletsTid(x)}`);
+  if ((remsa.match(/class="um-remsa-ram"/g) ?? []).length !== 1) fel.push(`${s}: remsan i del 2 har inte en rad för lärarens lektion`);
+  if (!html.includes(`class="um-lektionsdel um-ld-din" id="del-${lagret.ram.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}"`)) fel.push(`${s}: kortet för ${lagret.ram} har inte den grå ramen`);
+  if (!html.includes('Det du lägger in i din lektion, ställe för ställe.')) fel.push(`${s}: bandet i del 2 säger inte att ställena läggs in i lärarens lektion`);
+  if (!remsa.includes(`<p class="um-remsa-resten">${lagretsMening(lagretsSkala(lagret), lagret.minuter)}</p>`)) fel.push(`${s}: remsan i del 2 säger inte hur mycket av lektionen ställena tar`);
+}
+if (!lagrenProvade) fel.push('remsan i del 2: ingen metod i dist är ett lager med fälten, så lagret prövades inte');
 
 // Det som går att pröva i HTML: ankarna, filerna och delarnas ordning.
 for (const s of [...metodsidor, ...lathundsidor]) {

@@ -3,7 +3,7 @@
 // utfallens gränser för en klass (avsnitt 7), metodkortets nivåer (avsnitt 15) och lathundens fyra sidor (avsnitt 14).
 // Riggen läser modulen genom build/standarden.mjs.
 
-import { litenForsta, meningarna, stor, talText } from './text.js';
+import { esc, litenForsta, meningarna, stor, talText } from './text.js';
 import { larDigetsMetodplan, uppraknat } from './plan.js';
 import { periodensLangd, slugAv } from './index.js';
 import { strukturkortensFel } from './strukturer.js';
@@ -29,7 +29,7 @@ export const UNDERVISNINGSMETODENS_DELAR = [
  * sin egen planering"). Ankaret är detsamma.
  * @param {Record<string, any>} d metodens fil
  */
-export const delarnaAv = (d) => UNDERVISNINGSMETODENS_DELAR.map((x) => (x.id === 'lektionen' && d?.slag === 'strategier' ? { ...x, namn: 'Lagret', rad: 'Det du lägger över din planering, ställe för ställe.', text: 'Här står lagret ställe för ställe, med det du gör och säger. Sedan ser du det i en lektion i {amne} och i {andra} andra ämnen.' } : x));
+export const delarnaAv = (d) => UNDERVISNINGSMETODENS_DELAR.map((x) => (x.id === 'lektionen' && d?.slag === 'strategier' ? { ...x, namn: 'Lagret', rad: 'Det du lägger in i din lektion, ställe för ställe.', text: 'Här står lagret ställe för ställe, med det du gör och säger. Sedan ser du det i en lektion i {amne} och i {andra} andra ämnen.' } : x));
 
 /**
  * Det en metod hör ihop med (fältet relaterade), i Stödundervisning eller Metoder: en rot för båda samlingarnas sidor, lathunden
@@ -524,6 +524,193 @@ export const SLAGENS_FORM = Object.freeze({
  * @param {Record<string, any>} d metodens fil
  */
 export const lagretIDinLektion = (d) => d?.slag === 'strategier' && /\bi din lektion\b/i.test(String(d?.tid ?? ''));
+
+// ---------- Lagret i lärarens lektion ----------
+// Riggens standard, avsnitt 7 och 16 (2026-11-08; sajtens K-739 och K-741). Niclas samma dag: "Själva skrivandet är ju inte en
+// hel lektion, utan valda delar för att förstärka lärandet", och om Lär dig metoden: "Att det handlar om att integrera de små
+// delarna i de vanliga lektioner man har." I slaget strategier är lärarens egen lektion ramen, och lagrets ställen står i den.
+// Remsan i del 2 och veckorna i Lär dig metoden ritar lektionen i skala ur samma rot.
+
+/** Ställenas platser i lärarens lektion, i lektionens ordning (fältet `var`). */
+export const LAGRETS_VAR = Object.freeze(['i början', 'mitt i', 'i slutet']);
+
+/**
+ * Lektionens delar i tidsschemat, utan raderna Före lektionen och Efter lektionen, som riggens standard sätter först och sist med
+ * en tid som inte är minuter. En del vars tid inte börjar med minuter står med, så att spärren säger det i stället för att delen
+ * faller bort (Codex 2026-11-08, nr 5).
+ * @param {Record<string, any>} d metodens fil
+ * @returns {Record<string, any>[]}
+ */
+const lektionensDelar = (d) => (d?.tidsschema?.rader ?? []).filter((/** @type {any} */ r) => !/^(före|efter)\b/i.test(String(r?.tid ?? '').trim()));
+
+/**
+ * Minuterna i en dels tid i tidsschemat, den kortaste och den längsta: "5 min" 5 och 5, "5–⁠7 min" 5 och 7, "1 min och sedan
+ * vägen" 1 och 1. Null när tiden inte börjar med minuter.
+ * @param {unknown} tid
+ * @returns {{ min: number, max: number } | null}
+ */
+export const delensMinuter = (tid) => {
+  const m = String(tid ?? '').replace(/⁠/g, '').match(/^(\d+)(?:\s*[–-]\s*(\d+))?\s*min/);
+  return m ? { min: Number(m[1]), max: Number(m[2] ?? m[1]) } : null;
+};
+
+/**
+ * Lagret i lärarens lektion ur metodens fil: lektionens längd (`tidsschema.minuter`), lärarens egen lektion (raden med
+ * `ram: true`), lektionens delar i ordning med ställenas plats (`var`) och minuter, och veckornas ställen
+ * (`progression.rader[].stallen`) efter veckans värde. En metod som riggen ännu inte har öppnat får fälten ur `bro`, sajtens
+ * datafil. Null utom i slaget strategier, och när fälten saknas.
+ * @param {Record<string, any>} d metodens fil
+ * @param {{ minuter?: number, ram?: string, var?: Record<string, string>, stallen?: Record<string, string[]>, rutiner?: Record<string, string>, vantar?: string }} [bro]
+ * @returns {{ minuter: number, ram: string, rader: { namn: string, ram?: true, var?: string, tid: string, min: number, max: number }[], stallen: { namn: string, var: string, tid: string, min: number, max: number }[], veckor: Record<string, string[]> } | null}
+ */
+export function lagretAv(d, bro) {
+  if (d?.slag !== 'strategier') return null;
+  /** @type {Record<string, any>[]} */
+  const delar = lektionensDelar(d);
+  const ram = delar.find((r) => r?.ram === true) ?? (bro?.ram ? delar.find((r) => r?.fas === bro.ram) : undefined);
+  const minuter = d.tidsschema?.minuter ?? bro?.minuter;
+  if (!ram || !Number.isInteger(minuter)) return null;
+  const rader = delar.map((r) => {
+    const m = delensMinuter(r.tid) ?? { min: 0, max: 0 };
+    return r === ram ? { namn: String(r.fas), ram: /** @type {true} */ (true), tid: String(r.tid), ...m } : { namn: String(r.fas), var: String(r.var ?? bro?.var?.[r.fas] ?? ''), tid: String(r.tid), ...m };
+  });
+  const veckor = Object.fromEntries((d.progression?.rader ?? []).map((/** @type {any} */ v) => {
+    const k = String(v?.vecka ?? '');
+    return [k, (Array.isArray(v?.stallen) ? v.stallen : bro?.stallen?.[k] ?? []).map(String)];
+  }));
+  // Rutinerna och delen där var och en görs (`rutiner.rader[].stalle`, riggens standard, avsnitt 7, raden Rutinerna; K-744).
+  const rutiner = Object.fromEntries((d.rutiner?.rader ?? []).flatMap((/** @type {any} */ r) => { const s = r?.stalle ?? bro?.rutiner?.[r?.namn]; return r?.namn && s ? [[String(r.namn), String(s)]] : []; }));
+  return { minuter, ram: String(ram.fas), rader, stallen: /** @type {any} */ (rader.filter((r) => !r.ram)), veckor, rutiner };
+}
+
+/**
+ * Lagrets skala, som remsan i del 2 och veckorna i Lär dig metoden ritar: lektionens minuter med de valda ställena på sina
+ * platser och lärarens lektion i resten, delad lika före och efter ställena mitt i. Ett ställe med ett spann får spannets mitt,
+ * och lärarens lektion bär sitt namn i den första luckan. Utan val alla ställen.
+ * @param {{ minuter: number, ram: string, stallen: { namn: string, var: string, min: number, max: number }[] }} lagret lagretAv
+ * @param {string[]} [valda] ställenas namn
+ * @returns {{ stallen: { namn: string, var: string, tid?: string, min: number, max: number }[], skala: { namn: string, ram?: true, minuter: number }[], min: number, max: number }}
+ */
+export function lagretsSkala(lagret, valda) {
+  const stallen = lagret.stallen.filter((x) => !valda || valda.includes(x.namn));
+  const mitt = (/** @type {{ min: number, max: number }} */ x) => (x.min + x.max) / 2;
+  const [borjan, mittI, slutet] = LAGRETS_VAR.map((v) => stallen.filter((x) => x.var === v));
+  const resten = Math.max(0, lagret.minuter - stallen.reduce((s, x) => s + mitt(x), 0)) / (mittI.length ? 2 : 1);
+  const stalle = (/** @type {{ namn: string, min: number, max: number }} */ x) => ({ namn: x.namn, minuter: mitt(x) });
+  const ram = (/** @type {string} */ namn) => ({ namn, ram: /** @type {true} */ (true), minuter: resten });
+  return {
+    stallen,
+    skala: [...borjan.map(stalle), ram(lagret.ram), ...(mittI.length ? [...mittI.map(stalle), ram('')] : []), ...slutet.map(stalle)],
+    min: stallen.reduce((s, x) => s + x.min, 0),
+    max: stallen.reduce((s, x) => s + x.max, 0),
+  };
+}
+
+/** Minuterna som ett tal eller ett spann: "5" eller "5–⁠7". @param {{ min: number, max: number }} x */
+const minuternasSpann = (x) => (x.min === x.max ? String(x.min) : `${x.min}–⁠${x.max}`);
+/** Ställets plats och minuter, som raderna i Lär dig metoden säger dem: "mitt i, 5–⁠7 min". @param {{ var: string, min: number, max: number }} x */
+export const stalletsTid = (x) => `${x.var}, ${minuternasSpann(x)} min`;
+
+/**
+ * Skalan som HTML, en rot för remsan i del 2 och veckorna i Lär dig metoden: en rad med lärarens lektion i grått, med sitt namn i
+ * den första luckan, och ställena i blått, var och en så bred som sina minuter. Den är dold för skärmläsare, eftersom raderna
+ * under säger samma sak med ord.
+ * @param {{ namn: string, ram?: true, minuter: number }[]} skala lagretsSkala
+ */
+export const lagretsSkalaHtml = (skala) => `<div class="um-skala" aria-hidden="true">${skala.map((x) => `<span${x.ram ? ' class="um-skala-ram"' : ''} style="flex: ${x.minuter} 1 0">${x.ram ? esc(x.namn) : ''}</span>`).join('')}</div>`;
+
+/**
+ * Meningen under ställena i Lär dig metoden: "Stanna och skriv tar 5–⁠7 av lektionens 45 minuter. Resten av lektionen är din."
+ * Med flera ställen "Med alla veckans ställen tar det 10–⁠12 …", eftersom läraren ofta väljer färre (riggens standard, Ställena).
+ * @param {{ stallen: { namn: string }[], min: number, max: number }} s lagretsSkala
+ * @param {number} minuter lektionens längd
+ * @param {string} [vilka] ordet före ställen, som "veckans"
+ */
+export const lagretsMening = (s, minuter, vilka = '') => {
+  const tal = minuternasSpann(s);
+  return `${s.stallen.length === 1 ? `${s.stallen[0].namn} tar` : `Med alla ${vilka ? `${vilka} ` : ''}ställen tar det`} ${tal} av lektionens ${minuter} minuter. Resten av lektionen är din.`;
+};
+
+/**
+ * Ställena som är nya i en vecka jämfört med veckan före i planen, som Lär dig metoden märker Ny. Inga när veckan före har samma
+ * steg, som en vecka till eller en vecka som progressionen inte har en egen rad för, och inga i den första veckan (Codex
+ * 2026-11-08, nr 7).
+ * @param {{ veckor: Record<string, string[]> }} lagret lagretAv
+ * @param {string | undefined} vecka progressionens vecka för veckan
+ * @param {string | undefined} forra progressionens vecka för veckan före i planen
+ * @returns {string[]}
+ */
+/**
+ * Veckans rutiner med delen där var och en görs, som Lär dig metoden sätter i ställets rad, och en rutin i lärarens lektion under
+ * ställena (riggens standard, avsnitt 7, raden Rutinerna; de kalla lärarna 2026-11-08: veckans nya rutin stod inte i veckans
+ * lektion; K-744). En rutin utan del står inte med.
+ * @param {{ ram: string, rutiner?: Record<string, string> }} lagret lagretAv
+ * @param {{ namn: string }[]} rutiner veckans rutiner
+ * @returns {{ namn: string, stalle: string, ram: boolean }[]}
+ */
+export const lagretsRutiner = (lagret, rutiner) => rutiner.flatMap((r) => { const s = lagret.rutiner?.[r.namn]; return s ? [{ namn: r.namn, stalle: s, ram: s === lagret.ram }] : []; });
+
+export const lagretsNya = (lagret, vecka, forra) => (vecka === undefined || forra === undefined || vecka === forra ? [] : (lagret.veckor[vecka] ?? []).filter((x) => !(lagret.veckor[forra] ?? []).includes(x)));
+
+/**
+ * Felen i lagret (riggens standard, avsnitt 7; sajtens K-739): i slaget strategier är en rad lärarens lektion, varje annan del
+ * har sin plats och sina minuter, lektionen har sin längd och varje vecka sina ställen, i metodens fil eller i sajtens datafil
+ * (`bro`), aldrig i båda. En metod som väntar på riggens omtag står i datafilen med `vantar` och skälet.
+ * @param {Record<string, any>} d metodens fil
+ * @param {{ minuter?: number, ram?: string, var?: Record<string, string>, stallen?: Record<string, string[]>, rutiner?: Record<string, string>, vantar?: string }} [bro]
+ * @returns {string[]}
+ */
+export function lagretsFel(d, bro) {
+  if (d?.slag !== 'strategier') return bro ? ['Sajtens datafil för lagret, src/data/lagret.json, har metoden, fast den inte är av slaget strategier.'] : [];
+  /** @type {Record<string, any>[]} */
+  const delar = lektionensDelar(d);
+  /** @type {Record<string, any>[]} */
+  const veckor = d.progression?.rader ?? [];
+  const iFilen = delar.some((r) => r?.ram !== undefined || r?.var !== undefined) || d.tidsschema?.minuter !== undefined || veckor.some((v) => v?.stallen !== undefined);
+  if (iFilen && bro) return ['Metodens fil har lagrets fält, och sajtens datafil har dem också: ta bort metoden ur src/data/lagret.json.'];
+  if (!iFilen && bro?.vantar) return [];
+  if (!iFilen && !bro) return ['Metoden är ett lager i lärarens lektion (slaget strategier), men varken filen eller src/data/lagret.json säger lärarens lektion (ram), ställenas plats (var), lektionens minuter och veckornas ställen (stallen). En metod som väntar på riggens omtag står i datafilen med vantar och skälet.'];
+  const fel = [];
+  const ramar = delar.filter((r) => (iFilen ? r?.ram === true : r?.fas === bro?.ram));
+  if (ramar.length !== 1) fel.push(`Lagret: ${ramar.length} rader i tidsschemat är lärarens lektion (ram), en ska vara det.`);
+  // Greppen inne i lärarens lektion (riggens standard, avsnitt 7, 87a056d) ritar sajten inte än, så en metod med dem stannar
+  // tills de visas, i stället för att greppen faller bort tyst (sajtens K-743, med omtaget av Lärande på kognitionsvetenskaplig grund).
+  if (ramar.some((r) => r?.grepp !== undefined)) fel.push('Lagret: lärarens lektion har grepp, som sajten inte visar än (K-743).');
+  for (const r of delar.filter((x) => !ramar.includes(x))) {
+    if (!LAGRETS_VAR.includes(iFilen ? r.var : bro?.var?.[r.fas])) fel.push(`Lagret: ${r.fas} säger inte var den står, i början, mitt i eller i slutet (var).`);
+    if (!delensMinuter(r.tid)) fel.push(`Lagret: ${r.fas} har tiden ${r.tid}, som inte börjar med minuter.`);
+  }
+  // Varje rutin säger delen där den görs, ett ställe eller lärarens lektion (riggens standard, avsnitt 7, raden Rutinerna; K-744).
+  const delnamnen = new Set(delar.map((r) => r.fas));
+  for (const r of d.rutiner?.rader ?? []) {
+    const s = iFilen ? r?.stalle : bro?.rutiner?.[r?.namn];
+    if (!s) fel.push(`Lagret: rutinen ${r?.namn} säger inte vid vilken del den görs (stalle).`);
+    else if (!delnamnen.has(s)) fel.push(`Lagret: rutinen ${r?.namn} görs vid ${s}, som inte är en del i tidsschemat.`);
+  }
+  const min = iFilen ? d.tidsschema?.minuter : bro?.minuter;
+  if (!Number.isInteger(min) || min < 20 || min > 120) fel.push('Lagret: lektionens längd i minuter (tidsschema.minuter) saknas eller ligger utanför 20–120.');
+  // Ställena ryms i lektionen med plats för lärarens egen, så att skalan och meningen om minuterna aldrig säger mer än lektionen
+  // (Codex 2026-11-08, nr 6).
+  const langst = delar.filter((x) => !ramar.includes(x)).reduce((s, r) => s + (delensMinuter(r.tid)?.max ?? 0), 0);
+  if (Number.isInteger(min) && langst >= min) fel.push(`Lagret: ställena tar upp till ${langst} minuter, och lektionen har ${min}, så lärarens lektion får ingen plats.`);
+  // Varje del har sitt kort på metodens sida, som remsan i del 2 och raderna i Lär dig metoden leder till (Codex 2026-11-08, nr 4).
+  const stegen = new Set((d.steg?.rader ?? []).map((/** @type {any} */ s) => s?.namn));
+  for (const r of delar) if (!stegen.has(r.fas)) fel.push(`Lagret: ${r.fas} har inget steg med samma namn, så remsan och Lär dig metoden leder inte till något kort.`);
+  const namnen = new Set(delar.filter((x) => !ramar.includes(x)).map((r) => r.fas));
+  for (const v of veckor) {
+    const k = String(v?.vecka ?? '');
+    const s = iFilen ? v?.stallen : bro?.stallen?.[k];
+    if (!Array.isArray(s) || !s.length) fel.push(`Lagret: vecka ${k} säger inte vilka ställen klassen använder (stallen).`);
+    else for (const x of s) if (!namnen.has(x)) fel.push(`Lagret: vecka ${k} har ${x}, som inte är ett ställe i tidsschemat.`);
+  }
+  if (!iFilen) {
+    for (const k of Object.keys(bro?.var ?? {})) if (!delar.some((r) => r.fas === k)) fel.push(`Lagret: src/data/lagret.json har ${k}, som inte är en del i tidsschemat.`);
+    for (const k of Object.keys(bro?.stallen ?? {})) if (!veckor.some((v) => String(v?.vecka ?? '') === k)) fel.push(`Lagret: src/data/lagret.json har vecka ${k}, som progressionen inte har.`);
+    for (const k of Object.keys(bro?.rutiner ?? {})) if (!(d.rutiner?.rader ?? []).some((/** @type {any} */ r) => r?.namn === k)) fel.push(`Lagret: src/data/lagret.json har rutinen ${k}, som metoden inte har.`);
+  }
+  return fel;
+}
+
 export const slagensOrd = (d) => {
   const form = /** @type {Record<string, typeof SLAGENS_FORM.lektionsforlopp>} */ (SLAGENS_FORM)[d?.slag] ?? SLAGENS_FORM.lektionsforlopp;
   // I slaget strategier säger tiden antingen lektionen som lagret ligger över, "Din lektion, 45 minuter" i Formativ bedömning,
