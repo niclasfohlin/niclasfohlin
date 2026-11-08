@@ -34,8 +34,39 @@ const kontrollera = process.argv.includes('--kontrollera');
 // Materialets sidor per blad, när ett blad har flera sidor i ett material med flera blad (src/data/materialets-sidor.json).
 const SIDORNA = join(ROT, 'src', 'data', 'materialets-sidor.json');
 const materialetsSidor = existsSync(SIDORNA) ? JSON.parse(readFileSync(SIDORNA, 'utf8')) : {};
+const XML = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
+/** Ett attributvärde ur Word-filens XML som text: de fem namngivna tecknen och tecken med nummer, som &#197; för Å. */
+const avkodaXml = (t) => t.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (hela, k) => (k[0] === '#' ? String.fromCodePoint(k[1] === 'x' || k[1] === 'X' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : XML[k] ?? hela));
 /** Bildernas namn i en Word-fil, i ordning: riggen ger varje sida i materialet bladets rubrik som namn. */
-const bildnamnen = async (docx) => [...(await (await JSZip.loadAsync(readFileSync(docx))).file('word/document.xml').async('string')).matchAll(/<wp:docPr\b[^>]*\bname="([^"]*)"/g)].map((m) => m[1].replace(/&amp;/g, '&'));
+const bildnamnen = async (docx) => [...(await (await JSZip.loadAsync(readFileSync(docx))).file('word/document.xml').async('string')).matchAll(/<wp:docPr\b[^>]*\bname=(?:"([^"]*)"|'([^']*)')/g)].map((m) => avkodaXml(m[1] ?? m[2]));
+/**
+ * Vilka sidor i materialet som hör till vilket blad, ur bildernas namn (K-734): bladets rubrik, eller rubriken följd av ett
+ * mellanslag och något mer, som "Idékorten 1, sida 1". Den längsta rubriken som passar vinner, så att "Kortet till eleven 2"
+ * hör till Kortet till eleven och inte till Kortet (Codex kodgranskning 2026-11-08). Svaret är sidornas index per blad, i
+ * bladens ordning, eller null när en sida saknar blad, ett blad saknar sidor eller sidorna inte står i bladens ordning.
+ */
+function sidornaPerBlad(namnen, bladen) {
+  const bladet = namnen.map((n) => bladen.filter((r) => n === r || n.startsWith(`${r} `)).sort((a, b) => b.length - a.length)[0]);
+  if (!namnen.length || !bladet.every(Boolean)) return null;
+  const sidor = bladen.map((r) => bladet.flatMap((b, i) => (b === r ? [i] : [])));
+  const iOrdning = sidor.every((x, i) => x.length && x.at(-1) - x[0] === x.length - 1 && (!i || x[0] === sidor[i - 1].at(-1) + 1));
+  return iOrdning ? sidor : null;
+}
+// Provet åt båda hållen, innan något tas in: kopplingen, de långa rubrikerna och tecknen.
+for (const [namnen, bladen, vantat] of [
+  [['A', 'B 1', 'B 2', 'C'], ['A', 'B', 'C'], [[0], [1, 2], [3]]],
+  [['Kortet', 'Kortet till eleven 1', 'Kortet till eleven 2'], ['Kortet', 'Kortet till eleven'], [[0], [1, 2]]],
+  [['A 1', 'A 2', 'B'], ['A', 'B'], [[0, 1], [2]]],
+  [['B', 'A'], ['A', 'B'], null],
+  [['A', 'B', 'A'], ['A', 'B'], null],
+  [['A', 'A'], ['A', 'B'], null],
+  [['A', 'X'], ['A', 'B'], null],
+  [['Ab'], ['A'], null],
+  [[], ['A'], null],
+]) if (JSON.stringify(sidornaPerBlad(namnen, bladen)) !== JSON.stringify(vantat)) { console.error(`metoderfiler: provet av sidornaPerBlad gav fel svar på ${JSON.stringify(namnen)}`); process.exit(1); }
+if (avkodaXml('A &quot;B&quot; &#197;kortet &#xC4; &amp; &lt;&gt; &apos;') !== 'A "B" Åkortet Ä & <> \'') { console.error('metoderfiler: provet av avkodaXml gav fel svar'); process.exit(1); }
+/** Kartan över materialets sidor som den skrivs till filen: metoderna i bokstavsordning, så att samma innehåll ger samma fil. */
+const sidornasFil = () => `${JSON.stringify({ _om: 'Materialets sidor per blad i Metoder, när ett blad har flera sidor i ett material med flera blad, som Idékorten i Skriva för att lära. Skrivs av scripts/metoderfiler.mjs ur bildernas namn i riggens Word-fil, och läses av metodens sida och de små korten. bilder är numren på materialets sidbilder, <id>-materialet-<n>.png.', ...Object.fromEntries(Object.keys(materialetsSidor).filter((k) => k !== '_om').sort().map((k) => [k, materialetsSidor[k]])) }, null, 2)}\n`;
 // Summan räknas med LF som radslut, som i riggen, så att en kopia med CRLF ger samma summa.
 const sha = (f) => createHash('sha256').update(readFileSync(f, 'utf8').replace(/\r\n/g, '\n')).digest('hex');
 const fel = [];
@@ -120,6 +151,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   // Då säger bildernas namn i materialets Word-fil vilket blad varje sida hör till: bladets rubrik, eller rubriken följd av
   // mellanslag och sidans nummer ("Idékorten 1, sida 1"). delarna är bladens sidor i pdf:en och bildernas nummer.
   let delarna = null;
+  let kopplingenFoll = false;
   if (!kontrollera && bladen.length && existsSync(material)) {
     const s = sidorna(material);
     const fore = s.length - 1 - bladen.length;
@@ -131,22 +163,35 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
       const docx = join(UT, `${stam('materialet')}.docx`);
       const forsta = textsida(s[0]) ? 2 : 1;
       const namnen = existsSync(docx) ? await bildnamnen(docx) : [];
-      const bladet = namnen.map((n) => bladen.find((r) => n === r || n.startsWith(`${r} `)));
-      const sidor = bladen.map((r) => bladet.flatMap((b, i) => (b === r ? [i] : [])));
-      // Varje sida hör till ett blad, varje blad har sidor, och sidorna står i bladens ordning utan glapp.
-      const iOrdning = sidor.every((x, i) => x.length && x.at(-1) - x[0] === x.length - 1 && (!i || x[0] === sidor[i - 1].at(-1) + 1));
-      if (namnen.length === s.length - forsta && bladet.every(Boolean) && iOrdning) {
+      // Varje sida hör till ett blad, varje blad har sidor, och sidorna står i bladens ordning utan glapp (sidornaPerBlad).
+      const sidor = namnen.length === s.length - forsta ? sidornaPerBlad(namnen, bladen) : null;
+      if (sidor) {
         forstaBladet = forsta;
         delarna = bladen.map((r, i) => ({ blad: r, fran: forsta + sidor[i][0], till: forsta + sidor[i].at(-1), bilder: sidor[i].map((x) => x + 1) }));
-      } else varningar.push(`${id}: materialets pdf har ${s.length - 1} sidor och metoden ${bladen.length} blad, och bildernas namn i Word-filen säger inte vilket blad varje sida hör till, så bladen klipps inte ut var för sig`);
+      } else {
+        // Sidan skulle annars visa fel bilder vid bladen, och gamla bladfiler skulle stå kvar bredvid nya bilder (Codex
+        // kodgranskning 2026-11-08, fynd 2), så intaget stannar och lämnar metodens karta, bilder och blad som de var.
+        kopplingenFoll = true;
+        fel.push(`${id}: materialets pdf har ${s.length - 1} sidor och metoden ${bladen.length} blad, och bildernas namn i ${existsSync(docx) ? 'materialets Word-fil' : 'materialets Word-fil, som saknas,'} säger inte vilket blad varje sida hör till. Riggen ger varje sida bladets rubrik som namn, eller rubriken följd av ett mellanslag och sidans nummer (METODER.md, raden Ett blad med flera sidor)`);
+      }
     }
   }
-  if (!kontrollera && bladen.length) {
+  if (!kontrollera && bladen.length && !kopplingenFoll) {
     // Bara metoder där ett blad har flera sidor bredvid andra blad står i filen; för de andra är sidan bladets nummer.
     const forut = JSON.stringify(materialetsSidor[id] ?? null);
     if (delarna && delarna.some((x) => x.bilder.length > 1)) materialetsSidor[id] = delarna.map(({ blad, bilder }) => ({ blad, bilder }));
     else delete materialetsSidor[id];
-    if (JSON.stringify(materialetsSidor[id] ?? null) !== forut) writeFileSync(SIDORNA, `${JSON.stringify({ _om: 'Materialets sidor per blad i Metoder, när ett blad har flera sidor i ett material med flera blad, som Idékorten i Skriva för att lära. Skrivs av scripts/metoderfiler.mjs ur bildernas namn i riggens Word-fil, och läses av metodens sida och de små korten. bilder är numren på materialets sidbilder, <id>-materialet-<n>.png.', ...Object.fromEntries(Object.entries(materialetsSidor).filter(([k]) => k !== '_om')) }, null, 2)}\n`);
+    if (JSON.stringify(materialetsSidor[id] ?? null) !== forut) writeFileSync(SIDORNA, sidornasFil());
+  }
+
+  // Med --kontrollera, som i Netlifys bygge utan riggen och utan pdftotext, prövas kartan mot bildernas namn i sajtens kopia av
+  // materialets Word-fil, och att varje bild i kartan finns (Codex kodgranskning 2026-11-08, fynd 5).
+  if (kontrollera && materialetsSidor[id]) {
+    const docx = join(UT, `${stam('materialet')}.docx`);
+    const sidor = existsSync(docx) ? sidornaPerBlad(await bildnamnen(docx), bladen) : null;
+    const vantat = sidor ? bladen.map((blad, i) => ({ blad, bilder: sidor[i].map((x) => x + 1) })) : null;
+    if (JSON.stringify(vantat) !== JSON.stringify(materialetsSidor[id])) fel.push(`${id}: src/data/materialets-sidor.json stämmer inte med bildernas namn i public/metoder/${stam('materialet')}.docx. Kör node scripts/metoderfiler.mjs`);
+    for (const n of materialetsSidor[id].flatMap((x) => x.bilder)) if (!existsSync(join(UT, `${stam('materialet')}-${n}.png`))) fel.push(`${id}: bilden ${stam('materialet')}-${n}.png, som src/data/materialets-sidor.json nämner, saknas i public/metoder/`);
   }
 
   // Bladen som riggen inte har lämnat som egna filer klipps ur pdf:en med allt, efter rubrikerna på sidorna.
@@ -178,6 +223,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     }
     for (const slag of ['lektionskort', 'planeringsmall', 'observation', 'materialet']) {
       const pdf = join(UT, `${stam(slag)}.pdf`);
+      if (slag === 'materialet' && kopplingenFoll) continue;
       if (existsSync(pdf)) console.log(`metoderfiler: ${id}, ${slag}: ${await bilder(pdf, stam(slag), slag === 'materialet' ? forstaBladet || 1 : 1)} bilder`);
     }
   }
@@ -187,7 +233,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   // Sidorna är bladens sidor ovan; går de inte ihop klipps inget, och skriptet har sagt det. Riggen kan lämna bladen som egna
   // filer i stället, och då tas de in som de andra.
   const bladfil = (namn) => `${id}-blad-${slugAv(namn)}.pdf`;
-  if (!kontrollera) {
+  if (!kontrollera && !kopplingenFoll) {
     for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-blad-`) && x.endsWith('.pdf') && !bladen.some((n) => bladfil(n) === x))) rmSync(join(UT, f));
     if (forstaBladet) bladen.forEach((namn, i) => { if (!filer.some((f) => f.slag === `blad-${slugAv(namn)}`)) klipp(material, delarna ? delarna[i].fran : forstaBladet + i, delarna ? delarna[i].till : sistaSidan || forstaBladet + i, join(UT, bladfil(namn))); });
     // Ett blad med flera sidor skrivs ut dubbelsidigt, och en textsida först skulle lägga baksidorna fel (andra ögat på
@@ -216,6 +262,12 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     if (utan.length) fel.push(`${id}: ${f} saknar "© Niclas Fohlin" och niclasfohlin.se på sidan ${utan.slice(0, 8).join(', ')}${utan.length > 8 ? ' …' : ''}. Riggen sätter raden i sidfoten på varje sida`);
   }
 }
+
+// En metod som inte längre finns står inte kvar i kartan över materialets sidor, och med --kontrollera stannar en sådan rad.
+const metoderna = new Set(readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => f.replace(/\.yaml$/, '')));
+const kvar = Object.keys(materialetsSidor).filter((k) => k !== '_om' && !metoderna.has(k));
+if (kvar.length && kontrollera) fel.push(`src/data/materialets-sidor.json har ${kvar.join(', ')}, som inte är metoder i src/content/undervisningsmetoder/. Kör node scripts/metoderfiler.mjs`);
+else if (kvar.length) { for (const k of kvar) delete materialetsSidor[k]; writeFileSync(SIDORNA, sidornasFil()); }
 
 for (const v of varningar) console.log(`! ${v}`);
 if (fel.length) { console.error(fel.map((f) => `metoderfiler: ${f}`).join('\n')); process.exit(1); }
