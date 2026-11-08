@@ -1054,6 +1054,8 @@ try {
         for (const del of (d.tidsschema?.varianter ?? []).find((v) => v.nar === 'första lektionen')?.delar ?? []) {
           const tal = String(del.tid ?? '').replace(/\s*min$/, '');
           if (tal && !(radernasTid[del.fas] ?? '').includes(tal)) fel.push(`/metoder/${id}: planeringsbladet för första lektionen har inte ${del.fas} ${del.tid}`);
+          // Två tider för samma del står som riggens ritning, "0–20 och 27–45 min", med minuterna en gång.
+          if (/min\s+och/u.test(radernasTid[del.fas] ?? '')) fel.push(`/metoder/${id}: planeringsbladet för första lektionen säger minuterna två gånger för ${del.fas}: ${radernasTid[del.fas]}`);
         }
       }
       const rutorna = [...blad.html.matchAll(/<p class="um-utfall-grans">([\s\S]*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, '').replace(/&(amp|lt|gt|quot|#39|#x27);/g, (h, k) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", '#x27': "'" })[k]));

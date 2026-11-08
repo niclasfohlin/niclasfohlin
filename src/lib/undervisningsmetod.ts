@@ -320,7 +320,9 @@ export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: str
     if (!varianten?.delar) return tidsschematsRad(d, fas)?.tid;
     const tider = (varianten.delar as { fas: string; tid?: string }[]).filter((x) => x.fas === fas).map((x) => String(x.tid ?? '')).filter(Boolean);
     if (tider.length < 2) return tider[0];
-    return tider.every((x) => / min$/.test(x)) ? `${tider.map((x) => x.replace(/ min$/, '')).join(' och ')} min` : tider.join(' och ');
+    // Riggen sätter ett hårt mellanslag före min, som behålls efter den sista tiden.
+    const min = /\s+min$/u;
+    return tider.every((x) => min.test(x)) ? `${tider.map((x) => x.replace(min, '')).join(' och ')}${min.exec(tider[tider.length - 1])?.[0] ?? ' min'}` : tider.join(' och ');
   };
   // Beslutet står efter den del där läraren ser om klassen är redo, stegets redo: Kontrollera i explicit undervisning och
   // Var och en visar i kooperativt lärande.
