@@ -881,14 +881,18 @@ export declare function lagretIDinLektion(d: Record<string, any>): boolean;
 /** Sajtens värden för lagret i en metod som riggen ännu inte har öppnat (src/data/lagret.json), eller vantar med skälet. */
 export type LagretsBro = { minuter?: number; ram?: string; var?: Record<string, string>; stallen?: Record<string, string[]>; rutiner?: Record<string, string>; vantar?: string };
 /** Lagret i lärarens lektion (riggens standard, avsnitt 7 och 16; K-739, K-741). */
-export type Lagret = { minuter: number; ram: string; rader: { namn: string; ram?: true; var?: string; tid: string; min: number; max: number }[]; stallen: { namn: string; var: string; tid: string; min: number; max: number }[]; veckor: Record<string, string[]>; rutiner: Record<string, string> };
+export type Lagret = { minuter: number; ram: string; rader: { namn: string; ram?: true; var?: string; tid: string; min: number; max: number }[]; stallen: { namn: string; var: string; tid: string; min: number; max: number }[]; grepp: string[]; veckor: Record<string, string[]>; rutiner: Record<string, string> };
+/** Greppets hem på metodens sida: kärnans del med samma namn, med numret som ankaret karnan-<nr> (K-743). */
+export declare const greppetsHem: (d: Record<string, any>, namn: string) => { nr: number } | null;
+/** Det som står i stället för minuterna vid ett grepp: "vid behov" (K-743). */
+export declare const GREPPETS_TID: string;
 /** Ställenas platser i lärarens lektion, i lektionens ordning. */
 export declare const LAGRETS_VAR: readonly string[];
 /** Minuterna i en dels tid: "5–7 min" ger 5 och 7. */
 export declare const delensMinuter: (tid: unknown) => { min: number; max: number } | null;
 export declare function lagretAv(d: Record<string, any>, bro?: LagretsBro): Lagret | null;
 /** Lagrets skala: de valda ställena på sina platser och lärarens lektion i resten. */
-export declare function lagretsSkala(lagret: { minuter: number; ram: string; stallen: { namn: string; var: string; min: number; max: number }[] }, valda?: string[]): { stallen: { namn: string; var: string; tid?: string; min: number; max: number }[]; skala: { namn: string; ram?: true; minuter: number }[]; min: number; max: number };
+export declare function lagretsSkala(lagret: { minuter: number; ram: string; stallen: { namn: string; var: string; min: number; max: number }[]; grepp?: string[] }, valda?: string[]): { stallen: { namn: string; var: string; tid?: string; min: number; max: number }[]; grepp: string[]; skala: { namn: string; ram?: true; minuter: number }[]; min: number; max: number };
 /** Meningen om minuterna: "Stanna och skriv tar 5–7 av lektionens 45 minuter. Resten av lektionen är din." */
 export declare const lagretsMening: (s: { stallen: { namn: string }[]; min: number; max: number }, minuter: number, vilka?: string, val?: { exempel?: boolean }) => string;
 export declare function lagretsFel(d: Record<string, any>, bro?: LagretsBro): string[];

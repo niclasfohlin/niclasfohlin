@@ -13,7 +13,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { parse } from 'yaml';
-import { undervisningsmetodensFel, metodensFilmnamn } from '../src/lib/standard/index.js';
+import { undervisningsmetodensFel, metodensFilmnamn, lagretsFel } from '../src/lib/standard/index.js';
 
 const args = process.argv.slice(2);
 const id = args.find((a) => !a.startsWith('--'));
@@ -25,6 +25,10 @@ const text = readFileSync(fil, 'utf8');
 const d = parse(text);
 // 1. Fälten, med standardens prov, som sajtens schema också kör (src/lib/standard/undervisningsmetod.js).
 const fel = undervisningsmetodensFel(d);
+// Lagret i lärarens lektion, som sajtens bygge prövar med sajtens datafil (src/lib/innehall.ts): en metod med grepp eller ställen
+// som sidan inte kan rita stannar här, före leveransen, och inte först i sajtens bygge (K-743).
+const lagretsData = JSON.parse(readFileSync(new URL('../src/data/lagret.json', import.meta.url), 'utf8'));
+fel.push(...lagretsFel(d, lagretsData[id]));
 
 // 2. Dokumenten: filer.json, summan och upphovsraden.
 const ut = join(RIGG, 'out', id);

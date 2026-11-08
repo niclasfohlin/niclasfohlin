@@ -706,6 +706,11 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 .um-remsa-lager li + li { border-top: 1px solid var(--farg-kant); }
 .um-remsa.um-remsa-lager a { display: flex; justify-content: space-between; align-items: baseline; gap: 0.75rem; min-height: 2.75rem; box-sizing: border-box; padding: 0.6rem 0.75rem; border-left: 4px solid var(--farg-accent); }
 .um-remsa-lager .um-remsa-ram a { border-left-color: var(--farg-kant); background: var(--farg-ton); }
+/* Greppen inne i lärarens lektion (K-743): indragna grå rader under den, med vid behov i stället för minuter. */
+.um-remsa-grepp { list-style: none; margin: 0; padding: 0; }
+.um-remsa-lager .um-remsa-grepp li { border-top: 1px solid var(--farg-kant); }
+.um-remsa.um-remsa-lager .um-remsa-grepp a { min-height: 2.5rem; padding-left: 1.75rem; }
+.um-remsa-grepp .um-remsa-namn { font-weight: 600; }
 .um-remsa-lager .um-remsa-namn, .um-remsa-lager .um-remsa-tid { display: inline; }
 .um-remsa-lager .um-remsa-tid { white-space: nowrap; }
 .um-remsa-resten { margin: 0; padding: 0.6rem 0.75rem; border-top: 1px solid var(--farg-kant); background: var(--farg-ton); color: var(--farg-text); font-size: 0.9375rem; }
@@ -748,6 +753,9 @@ html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items:
 html.js .um-utfall-antal { display: flex; }
 .um-utfall-antal input { width: 4.5rem; min-height: 2.75rem; padding: 0.3rem 0.5rem; border: 1px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); font: inherit; }
 .um-fore-efter { margin: 1rem 0; padding: 0.6rem 1rem; background: var(--farg-ton); border-radius: var(--radie); font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.um-fore-efter > p { margin: 0; }
+.um-fore-efter > .um-fore-karna { margin-top: 0.35rem; font-size: 0.85rem; color: var(--farg-text-svag); }
+.um-fore-karna a { color: var(--farg-accent); }
 .um-trappa { padding-left: 1.4rem; }
 .um-motto { font-weight: 600; }
 /* Rader som fälls ut, som sajtens andra rader. */
@@ -4659,7 +4667,16 @@ button.pl-passroll { min-height: 2.75rem; }
 .ld-stallen-tid { font-size: 0.8125rem; color: var(--farg-text-svag); white-space: nowrap; }
 .ld-ny { margin-left: 0.45rem; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--farg-accent); }
 .ld-rutin { margin: 0; padding: 0 0.75rem 0.55rem; border-left: 4px solid var(--farg-accent); font-size: 0.875rem; color: var(--farg-text); }
-.ld-rutin-ram { padding-top: 0.55rem; border-top: 1px solid var(--farg-kant); border-left-color: var(--farg-kant); background: var(--farg-ton); }
+/* Lärarens lektion som en grå rad i veckan, i lektionens ordning, när något sker i den den veckan: veckans grepp indragna med vid
+   behov i stället för minuter, och en rutin (K-743). */
+.ld-stallen-ram { border-left: 4px solid var(--farg-kant); background: var(--farg-ton); }
+.ld-ram-namn { margin: 0; padding: 0.6rem 0.75rem 0.45rem; font-weight: 700; color: var(--farg-text); }
+.ld-grepp { list-style: none; margin: 0; padding: 0; }
+.ld-stallen .ld-grepp li { border-top: 1px solid var(--farg-kant); }
+.ld-stallen .ld-grepp a { min-height: 2.5rem; padding-left: 1.5rem; border-left: 0; }
+.ld-grepp .ld-stallen-namn { font-weight: 600; }
+.ld-stallen-ram > .ld-rutin { border-left: 0; }
+.ld-stallen-ram > .ld-grepp + .ld-rutin { padding-top: 0.55rem; border-top: 1px solid var(--farg-kant); }
 .ld-resten { margin: 0; padding: 0.6rem 0.75rem; border-top: 1px solid var(--farg-kant); background: var(--farg-ton); color: var(--farg-text); font-size: 0.9375rem; }
 .ld-inlagt .pl-grupper { margin: 0.5rem 0 0.2rem; }
 .ld-minuter { max-width: 7rem; }

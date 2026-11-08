@@ -633,19 +633,43 @@ export function lagretAv(d, bro) {
   }));
   // Rutinerna och delen där var och en görs (`rutiner.rader[].stalle`, riggens standard, avsnitt 7, raden Rutinerna; K-744).
   const rutiner = Object.fromEntries((d.rutiner?.rader ?? []).flatMap((/** @type {any} */ r) => { const s = r?.stalle ?? bro?.rutiner?.[r?.namn]; return r?.namn && s ? [[String(r.namn), String(s)]] : []; }));
-  return { minuter, ram: String(ram.fas), rader, stallen: /** @type {any} */ (rader.filter((r) => !r.ram)), veckor, rutiner };
+  // Greppen inne i lärarens lektion, utan egna minuter (`tidsschema.rader[].grepp` på ramens rad, riggens standard, avsnitt 7,
+  // raden Grepp inne i lektionen; K-743). Veckans `stallen` får nämna ett grepp med sitt namn.
+  const grepp = (Array.isArray(ram.grepp) ? ram.grepp : []).map(String);
+  return { minuter, ram: String(ram.fas), rader, stallen: /** @type {any} */ (rader.filter((r) => !r.ram)), grepp, veckor, rutiner };
 }
+
+/**
+ * Greppets hem på metodens sida: kärnans del med samma namn, som säger vad läraren gör och hur det syns hos eleverna (riggens
+ * standard, avsnitt 7: "vart och ett har sitt hem med det läraren gör"; K-743). Numret är delens plats i kärnan, som sidans
+ * ankare karnan-<nr> och raden Kärnan här. Null när kärnan inte har en del med namnet.
+ * @param {Record<string, any>} d metodens fil
+ * @param {string} namn greppets namn
+ * @returns {{ nr: number } | null}
+ */
+export const greppetsHem = (d, namn) => {
+  const i = (d?.karna?.komponenter ?? []).findIndex((/** @type {any} */ k) => k?.namn === namn);
+  return i < 0 ? null : { nr: i + 1 };
+};
+/**
+ * Det som står i stället för minuterna vid ett grepp, i remsan i del 2 och i veckorna i Lär dig metoden: läraren tar greppet när
+ * innehållet behöver det, och det har inga egna minuter (idéagenterna 2026-11-08, K-743). Ordet ram och ordet verktyg står inte
+ * vid lärarens lektion: i metoden är ramen ställena, och på sajten är ett verktyg en egen sida (riggens brev 2026-11-08).
+ */
+export const GREPPETS_TID = 'vid behov';
 
 /**
  * Lagrets skala, som remsan i del 2 och veckorna i Lär dig metoden ritar: lektionens minuter med de valda ställena på sina
  * platser och lärarens lektion i resten, delad lika före och efter ställena mitt i. Ett ställe med ett spann får spannets mitt,
- * och lärarens lektion bär sitt namn i den första luckan. Utan val alla ställen.
- * @param {{ minuter: number, ram: string, stallen: { namn: string, var: string, min: number, max: number }[] }} lagret lagretAv
- * @param {string[]} [valda] ställenas namn
- * @returns {{ stallen: { namn: string, var: string, tid?: string, min: number, max: number }[], skala: { namn: string, ram?: true, minuter: number }[], min: number, max: number }}
+ * och lärarens lektion bär sitt namn i den första luckan. Utan val alla ställen. Greppen bland de valda har inga minuter och
+ * står inte i skalan, utan i `grepp`, som remsan och veckan ritar inne i lärarens lektion (K-743).
+ * @param {{ minuter: number, ram: string, stallen: { namn: string, var: string, min: number, max: number }[], grepp?: string[] }} lagret lagretAv
+ * @param {string[]} [valda] ställenas och greppens namn
+ * @returns {{ stallen: { namn: string, var: string, tid?: string, min: number, max: number }[], grepp: string[], skala: { namn: string, ram?: true, minuter: number }[], min: number, max: number }}
  */
 export function lagretsSkala(lagret, valda) {
   const stallen = lagret.stallen.filter((x) => !valda || valda.includes(x.namn));
+  const grepp = (lagret.grepp ?? []).filter((x) => !valda || valda.includes(x));
   const mitt = (/** @type {{ min: number, max: number }} */ x) => (x.min + x.max) / 2;
   const [borjan, mittI, slutet] = LAGRETS_VAR.map((v) => stallen.filter((x) => x.var === v));
   const resten = Math.max(0, lagret.minuter - stallen.reduce((s, x) => s + mitt(x), 0)) / (mittI.length ? 2 : 1);
@@ -653,6 +677,7 @@ export function lagretsSkala(lagret, valda) {
   const ram = (/** @type {string} */ namn) => ({ namn, ram: /** @type {true} */ (true), minuter: resten });
   return {
     stallen,
+    grepp,
     skala: [...borjan.map(stalle), ram(lagret.ram), ...(mittI.length ? [...mittI.map(stalle), ram('')] : []), ...slutet.map(stalle)],
     min: stallen.reduce((s, x) => s + x.min, 0),
     max: stallen.reduce((s, x) => s + x.max, 0),
@@ -728,9 +753,20 @@ export function lagretsFel(d, bro) {
   const fel = [];
   const ramar = delar.filter((r) => (iFilen ? r?.ram === true : r?.fas === bro?.ram));
   if (ramar.length !== 1) fel.push(`Lagret: ${ramar.length} rader i tidsschemat är lärarens lektion (ram), en ska vara det.`);
-  // Greppen inne i lärarens lektion (riggens standard, avsnitt 7, 87a056d) ritar sajten inte än, så en metod med dem stannar
-  // tills de visas, i stället för att greppen faller bort tyst (sajtens K-743, med omtaget av Lärande på kognitionsvetenskaplig grund).
-  if (ramar.some((r) => r?.grepp !== undefined)) fel.push('Lagret: lärarens lektion har grepp, som sajten inte visar än (K-743).');
+  // Greppen inne i lärarens lektion (riggens standard, avsnitt 7, raden Grepp inne i lektionen; K-743): en lista med namn, som
+  // remsan och veckorna ritar inne i lärarens lektion och som leder till greppets hem på metodens sida, kärnans del med samma
+  // namn (greppetsHem). Ett grepp har inga minuter och är inget ställe.
+  /** @type {string[]} */
+  const grepp = [];
+  for (const r of ramar.filter((x) => x?.grepp !== undefined)) {
+    if (!Array.isArray(r.grepp) || !r.grepp.length || r.grepp.some((/** @type {unknown} */ g) => typeof g !== 'string' || !g.trim())) { fel.push(`Lagret: ${r.fas} har grepp, som ska vara en lista med namn.`); continue; }
+    for (const g of r.grepp) {
+      if (grepp.includes(g)) fel.push(`Lagret: greppet ${g} står två gånger.`);
+      else if (delar.some((x) => x.fas === g)) fel.push(`Lagret: greppet ${g} har samma namn som en del i tidsschemat.`);
+      else if (greppetsHem(d, g) === null) fel.push(`Lagret: greppet ${g} har inget hem på metodens sida, en del i kärnan med samma namn.`);
+      grepp.push(g);
+    }
+  }
   for (const r of delar.filter((x) => !ramar.includes(x))) {
     if (!LAGRETS_VAR.includes(iFilen ? r.var : bro?.var?.[r.fas])) fel.push(`Lagret: ${r.fas} säger inte var den står, i början, mitt i eller i slutet (var).`);
     if (!delensMinuter(r.tid)) fel.push(`Lagret: ${r.fas} har tiden ${r.tid}, som inte börjar med minuter.`);
@@ -756,7 +792,7 @@ export function lagretsFel(d, bro) {
     const k = String(v?.vecka ?? '');
     const s = iFilen ? v?.stallen : bro?.stallen?.[k];
     if (!Array.isArray(s) || !s.length) fel.push(`Lagret: vecka ${k} säger inte vilka ställen klassen använder (stallen).`);
-    else for (const x of s) if (!namnen.has(x)) fel.push(`Lagret: vecka ${k} har ${x}, som inte är ett ställe i tidsschemat.`);
+    else for (const x of s) if (!namnen.has(x) && !grepp.includes(x)) fel.push(`Lagret: vecka ${k} har ${x}, som varken är ett ställe i tidsschemat eller ett grepp i lärarens lektion.`);
   }
   if (!iFilen) {
     for (const k of Object.keys(bro?.var ?? {})) if (!delar.some((r) => r.fas === k)) fel.push(`Lagret: src/data/lagret.json har ${k}, som inte är en del i tidsschemat.`);

@@ -16,7 +16,7 @@ import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetod
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
-import { lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
+import { lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, greppetsHem, GREPPETS_TID, metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
 import Vavruta from './Vavruta.astro';
 import Bladkort from './Bladkort.astro';
 import { metodensBladkort, bladkortensStycke } from '../lib/bladkort';
@@ -80,6 +80,10 @@ const lagretsAlla = lagret ? lagretsSkala(lagret) : null;
 const rader = (d.tidsschema?.rader ?? []) as { tid: string; fas: string; form?: string; vad: string }[];
 const foreRad = rader.find((r) => r.fas === 'Före lektionen');
 const efterRad = rader.find((r) => r.fas === 'Efter lektionen');
+// Kärnan här också före och efter lektionen, när kärnan säger att en del står där, som Sprid ut i Start och Efter lektionen
+// (riggens läsbarhet på Lärande på kognitionsvetenskaplig grund 2026-11-08: läraren letade efter stället; K-751). Bara delar som
+// nämner raden, inte hela lektionen.
+const karnanUtanfor = (fas: string) => karnanI(d, fas).filter((x: { moment: string[] }) => x.moment.includes(fas)) as { nr: number; namn: string }[];
 const fallgropar = (d.fallgropar?.rader ?? []) as Record<string, any>[];
 const manus = fallgropar.filter((f) => f.steg);
 const tabellens = fallgropar.filter((f) => !f.steg);
@@ -190,7 +194,8 @@ const moten = arbetslagetsMoten(d);
     <nav class="um-remsa um-remsa-lager" aria-label={slagetsOrd.delarna}>
       <Fragment set:html={lagretsSkalaHtml(lagretsAlla?.skala ?? [])} />
       <ol>
-        {steg.map((s) => { const r = tidsschematsRad(d, s.namn); const x = lagret.stallen.find((y) => y.namn === s.namn); return <li class={s.namn === lagret.ram ? 'um-remsa-ram' : undefined}><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{s.namn}</span><span class="um-remsa-tid">{x ? stalletsTid(x) : r?.tid}</span></a></li>; })}
+        {/* Greppen inne i lärarens lektion, indragna under den utan minuter, och var och en leder till sin del i kärnan (K-743). */}
+        {steg.map((s) => { const r = tidsschematsRad(d, s.namn); const x = lagret.stallen.find((y) => y.namn === s.namn); const ram = s.namn === lagret.ram; return <li class={ram ? 'um-remsa-ram' : undefined}><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{s.namn}</span><span class="um-remsa-tid">{x ? stalletsTid(x) : r?.tid}</span></a>{ram && (lagretsAlla?.grepp ?? []).length > 0 && <ul class="um-remsa-grepp">{lagretsAlla!.grepp.map((g) => { const h = greppetsHem(d, g); return <li><a href={h ? `#karnan-${h.nr}` : `#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{g}</span><span class="um-remsa-tid">{GREPPETS_TID}</span></a></li>; })}</ul>}</li>; })}
       </ol>
       {lagretsAlla && <p class="um-remsa-resten">{lagretsMening(lagretsAlla, lagret.minuter, '', { exempel: true })}</p>}
     </nav>
@@ -204,7 +209,7 @@ const moten = arbetslagetsMoten(d);
   <section class="um-avsnitt" id="lektionen">
     {/* Bandet säger redan rubriken, så den står bara för skärmläsaren (design-3 nr 18). */}
     <h3 class="visually-hidden">{d.tidsschema?.rubrik}</h3>
-    {foreRad && <p class="um-fore-efter"><strong>Före lektionen.</strong> <span set:html={k(foreRad.vad)} /></p>}
+    {foreRad && <div class="um-fore-efter"><p><strong>Före lektionen.</strong> <span set:html={k(foreRad.vad)} /></p>{karnanUtanfor(foreRad.fas).length > 0 && <p class="um-fore-karna">Kärnan här: {karnanUtanfor(foreRad.fas).map((x, i) => <>{i > 0 && ', '}<a href={`#karnan-${x.nr}`}>{x.nr} {x.namn}</a></>)}</p>}</div>}
     {steg.map((s) => {
       const r = tidsschematsRad(d, s.namn);
       const karna = karnanI(d, s.namn);
@@ -248,7 +253,7 @@ const moten = arbetslagetsMoten(d);
         </>
       );
     })}
-    {efterRad && <p class="um-fore-efter"><strong>Efter lektionen.</strong> <span set:html={k(efterRad.vad)} /></p>}
+    {efterRad && <div class="um-fore-efter"><p><strong>Efter lektionen.</strong> <span set:html={k(efterRad.vad)} /></p>{karnanUtanfor(efterRad.fas).length > 0 && <p class="um-fore-karna">Kärnan här: {karnanUtanfor(efterRad.fas).map((x, i) => <>{i > 0 && ', '}<a href={`#karnan-${x.nr}`}>{x.nr} {x.namn}</a></>)}</p>}</div>}
     {d.tidsschema?.efter && <p class="um-not" set:html={k(d.tidsschema.efter)} />}
     {/* Varje variant har ett ankare, som rutan Vill du börja på måndag? leder till (variantensAnkare, G1). */}
     {andraVarianter.map((v) => <p class="um-not" id={variantensAnkare(v.nar)}><strong>{v.nar.charAt(0).toLocaleUpperCase('sv') + v.nar.slice(1)}.</strong> <span set:html={k(`${v.text} ${v.delar.map((x) => `${x.fas} ${x.tid}`).join(', ')}.`)} /></p>)}

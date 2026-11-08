@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.62.0, 2026-11-08
+
+- `undervisningsmetod.js` (K-743; riggens standard, avsnitt 7, raden Grepp inne i lektionen, med omtaget av Lärande på kognitionsvetenskaplig grund): `lagretAv` ger `grepp`, namnen ur `grepp` på lärarens rad, och `lagretsSkala` ger de valda greppen, som inte står i skalan. `greppetsHem` ger kärnans del med greppets namn, som remsan och Lär dig metoden länkar till, och `GREPPETS_TID` är det som står i stället för minuterna, vid behov. `lagretsFel` stoppar inte längre en metod med grepp, utan ett grepp utan del i kärnan, två gånger, med en dels namn eller som inte står i en lista, och en vecka med ett namn som varken är ett ställe eller ett grepp.
+
 ## 0.61.0, 2026-11-08
 
 - `undervisningsmetod.js` (K-749; Niclas samma kväll om Skriva för att lära: "Vad då rutan? Förstår en läsare när man bara säger 'skriv i rutan?'"): `namnetsForstaOrdFel`, som `undervisningsmetodensFel` kör, stoppar ett blads namn med flera ord vars första ord står ensamt i en del av metodens fil innan delen har sagt namnet, som "rutan" för Rutan på tavlan. Allmänna ord för material (`ALLMANNA_SAKORD`), som bladet och kortet, prövas inte.

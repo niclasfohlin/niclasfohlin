@@ -27,7 +27,7 @@ import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import JSZip from 'jszip';
-import { lagretAv, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser, utfallsord, slugAv } from '../src/lib/standard/index.js';
+import { lagretAv, greppetsHem, GREPPETS_TID, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser, utfallsord, slugAv } from '../src/lib/standard/index.js';
 import { ren, utanHuvudOchFot, pdfText } from './textjamforelse.mjs';
 import { MINIBILDEN, metodensMinibilder, sakensNamn } from '../src/lib/bladkortfiler.js';
 
@@ -54,7 +54,7 @@ let provadeSaker = 0;
 // säger ställets plats och minuter, lärarens lektion har en grå rad och kortet för den grå ram. En metod som inte är ett lager,
 // eller som väntar på riggen, har remsan som förut.
 const lagretsData = JSON.parse(readFileSync(join(rot, 'src', 'data', 'lagret.json'), 'utf8'));
-let lagrenProvade = 0;
+let lagrenProvade = 0, greppenProvade = 0;
 for (const s of metodsidor) {
   const id = s.split('/')[2];
   const yaml = join(rot, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`);
@@ -70,8 +70,35 @@ for (const s of metodsidor) {
   if (!html.includes(`class="um-lektionsdel um-ld-din" id="del-${lagret.ram.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}"`)) fel.push(`${s}: kortet för ${lagret.ram} har inte den grå ramen`);
   if (!html.includes('Det du lägger in i din lektion, ställe för ställe.')) fel.push(`${s}: bandet i del 2 säger inte att ställena läggs in i lärarens lektion`);
   if (!remsa.includes(`<p class="um-remsa-resten">${lagretsMening(lagretsSkala(lagret), lagret.minuter, '', { exempel: true })}</p>`) || !remsa.includes(' av en lektion på ')) fel.push(`${s}: remsan i del 2 säger inte hur mycket av lektionen ställena tar`);
+  // Greppen inne i lärarens lektion (K-743): indragna under den, med vid behov i stället för minuter och länken till sin del i kärnan.
+  const metoden = parse(readFileSync(yaml, 'utf8'));
+  for (const g of lagret.grepp) {
+    const h = greppetsHem(metoden, g);
+    if (!h || !remsa.includes(`<a href="#karnan-${h.nr}"><span class="um-remsa-namn">${g}</span><span class="um-remsa-tid">${GREPPETS_TID}</span></a>`)) fel.push(`${s}: greppet ${g} står inte inne i lärarens lektion i remsan, med ${GREPPETS_TID} och länken till sin del i kärnan`);
+  }
+  if (lagret.grepp.length) greppenProvade++;
+  else if (remsa.includes('um-remsa-grepp')) fel.push(`${s}: remsan i del 2 har grepp, fast metoden inte har några`);
 }
 if (!lagrenProvade) fel.push('remsan i del 2: ingen metod i dist är ett lager med fälten, så lagret prövades inte');
+if (!greppenProvade) fel.push('remsan i del 2: ingen metod i dist har grepp, så greppen prövades inte');
+
+// Kärnan här före och efter lektionen (K-751): när kärnan säger att en del står före eller efter lektionen, länkar rutan dit.
+let utanforProvade = 0;
+for (const s of metodsidor) {
+  const id = s.split('/')[2];
+  const yaml = join(rot, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`);
+  if (!existsSync(yaml)) continue;
+  const d = parse(readFileSync(yaml, 'utf8'));
+  const html = readFileSync(join(dist, s.slice(1), 'index.html'), 'utf8');
+  for (const fas of ['Före lektionen', 'Efter lektionen']) {
+    const delar = (d.karna?.komponenter ?? []).flatMap((k, i) => ((k.moment ?? []).includes(fas) ? [`<a href="#karnan-${i + 1}">${i + 1} ${k.namn}</a>`] : []));
+    const rutan = html.match(new RegExp(`<div class="um-fore-efter"><p><strong>${fas}\\.</strong>[\\s\\S]*?</div>`))?.[0] ?? '';
+    if (!delar.length) { if (rutan.includes('um-fore-karna')) fel.push(`${s}: rutan ${fas} säger Kärnan här, fast kärnan inte nämner den`); continue; }
+    utanforProvade++;
+    for (const a of delar) if (!rutan.includes(a)) fel.push(`${s}: rutan ${fas} länkar inte ${a.replace(/<[^>]+>/g, '')} i kärnan, som säger att delen står där`);
+  }
+}
+if (!utanforProvade) fel.push('Kärnan här före och efter lektionen: ingen metod i dist har en del i kärnan där, så rutan prövades inte');
 
 // Det som går att pröva i HTML: ankarna, filerna och delarnas ordning.
 for (const s of [...metodsidor, ...lathundsidor]) {

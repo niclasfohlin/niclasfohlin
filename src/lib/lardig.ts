@@ -2,7 +2,7 @@
 // visar ur metodens fil, som JSON till sidans skript (src/scripts/lardig.ts), och bygget stannar på en metod vars plan inte
 // går att räkna. Motorn och allt som räknar står i standarden (src/lib/standard/plan.js, under Lär dig metoden), och
 // formen och faserna i underlag/prov/metoder/PLANERA-LAGRET.md och riggens standard för undervisningsmetoder, avsnitt 16.
-import { arbetslagetsMoten, dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, lasvagen, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
+import { arbetslagetsMoten, dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, greppetsHem, lasvagen, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
 import { lagretI, materialetsNamn, metodensAdress, stegetsAnkare, utfalletsAnkare, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import type { Lagret } from './standard/index.js';
 import { metodensStrukturer, metodensKortAdress, ALLA_KORTENS_ADRESS, kortensVersion, allaKortensAntal, allaKortensStorlek, TVA_PA_A4 } from './strukturer';
@@ -144,7 +144,8 @@ export function larDigData(id: string, d: Um): LarDigData {
     // när metoden har det (src/components/Undervisningsmetod.astro).
     ...(d.hinder || somLista(d.fallgropar?.rader).length || d.hallFast ? { glider: `${sida}#nar-det-glider` } : {}),
     ...(d.stod?.rubrik ? { stod: { rubrik: strang(d.stod.rubrik), adress: `${sida}#mer-stod` } } : {}),
-    ...((l) => (l ? { lagret: { ...l, adresser: Object.fromEntries(l.stallen.map((x) => [x.namn, `${sida}#${stegetsAnkare(x.namn)}`])) } } : {}))(lagretI(id, d)),
+    // Ställena leder till sina kort i del 2, och greppen till sina delar i kärnan, som remsan (greppetsHem; K-743).
+    ...((l) => (l ? { lagret: { ...l, adresser: Object.fromEntries([...l.stallen.map((x) => [x.namn, `${sida}#${stegetsAnkare(x.namn)}`]), ...l.grepp.map((g) => [g, ((h) => (h ? `${sida}#karnan-${h.nr}` : `${sida}#${stegetsAnkare(l.ram)}`))(greppetsHem(d, g))])]) } } : {}))(lagretI(id, d)),
   };
 }
 

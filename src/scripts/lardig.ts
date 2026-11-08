@@ -13,7 +13,7 @@
 // någon länk eller statistik. Det som båda sidorna ritar lika, beskedet, lovknapparna, listorna, raden överst och avslutet,
 // står i src/scripts/byggstenar.ts (K-630).
 import {
-  inlagdaFragan, liten, skolveckanHarVarit, lagretsMening, lagretsRutiner, lagretsNya, lagretsSkala, lagretsSkalaHtml, MINA_LEKTIONER, stalletsTid, STALLENAS_TABELL, vaxlaInlagt,
+  inlagdaFragan, skolveckanHarVarit, lagretsMening, lagretsRutiner, lagretsNya, lagretsSkala, lagretsSkalaHtml, MINA_LEKTIONER, stalletsTid, GREPPETS_TID, LAGRETS_VAR, STALLENAS_TABELL, vaxlaInlagt,
   ANLEDNINGENS_LANGD, veckansRubrik, arDatum, datumspann, forensMening, forstaLektionensMening, julensText, julveckorna, efterStegensTakt, uppfoljningIDatumordning, gickDetSvaret, gickDetsFoljd, lovveckornaAttValja, linjenRitas, medDecimaler, veckornaMedDatum, infordaDatum, klassenHarNagot, borttagnasBesked, planveckansKort, sistaInfort, klassernasSkalaText, larDigetsLagetFor, larDigetsMittLast, larDigetsSteg, larDigetsStart, klasslistansBesked, sakdelar, veckorI, periodensText, regelnIVeckan, skolveckan, skolveckansText, stegetsRad, SKATTNINGARNAS_GRANS, dagarMellan, dagOchManad, dagText, decimal, esc, filnamnet, forstaLektionen, gangen, larDigetsForval, harInfortEfter, isoVecka, kalendervecka, klassensFraga, KLASSERNAS_SKALA, klasserUrText, larDigetsAvslutText, larDigetsKvar, larDigetsMetodplan,
   larDigetsRegler, larDigSammanstallning, lasVal, lovetsText, mandagen, medVardet, mening, mittIFragan, mittIText, MITT_I_LANGD, passetsLage, passetTraffas, planera, planveckansNamn, plusDagar, PLANERA, rensaFoljd, rentMal, rentText, sakernasText, spannKort,
   rutinensRubrik, stor, talText, uppraknat, veckansPass, veckonyckel, vidareMening, granslinjensText, obesvaradVecka, skalansAndar, svaraGickDet, KLASSENS_NAMN, KLASSLISTANS_LANGD, KLASSNOTENS_LANGD, KOMMENTARENS_LANGD, type Foljd, type LarDigSammanstallning, type Plan, type PlanVecka, type Val,
@@ -409,7 +409,8 @@ const veckansStallen = (v: { nr?: number; steg?: number | null; efter?: boolean 
   const l = data.lagret;
   if (!l) return [];
   const rad = v.efter ? undefined : stegRad(v);
-  return rad ? l.veckor[rad.vecka] ?? [] : l.stallen.map((x) => x.namn);
+  // Efter stegen alla ställen och alla grepp, eftersom läraren då väljer själv (K-743).
+  return rad ? l.veckor[rad.vecka] ?? [] : [...l.stallen.map((x) => x.namn), ...l.grepp];
 };
 // Ställena som är nya i veckan, märkta Ny: jämfört med veckan före i planen, ur roten lagretsNya, så att en vecka till för samma
 // steg och en vecka som progressionen inte har en egen rad för inte märker samma ställen igen (Codex 2026-11-08, nr 7).
@@ -428,17 +429,20 @@ function lagretsVecka(v: { nr?: number; steg?: number | null; efter?: boolean; i
   if (!l || !stallen.length) return '';
   const minuter = lektionensMinuter();
   const s = lagretsSkala({ ...l, minuter }, stallen), nya = nyaStallen(v);
-  // Veckans rutiner i ställets rad, och en rutin i lärarens lektion under ställena (lagretsRutiner; K-744). Ny första gången steget
-  // kommer, och inte i en vecka till för samma steg.
+  // Veckans rutiner under sin del (lagretsRutiner; K-744). Ny första gången steget kommer, och inte i en vecka till för samma steg.
   const rutiner = v.efter ? [] : lagretsRutiner(l, data.rutiner.filter((r) => r.vecka === v.innehall));
   const forra = v.nr && v.nr > 1 ? plan.veckor[v.nr - 2] : undefined;
   const ord = !forra || stegRad(forra)?.vecka !== stegRad(v)?.vecka ? 'Ny rutin' : 'Rutin';
-  const rutinen = (x: string) => { const r = rutiner.filter((y) => !y.ram && y.stalle === x).map((y) => y.namn); return r.length ? `<p class="ld-rutin">${esc(`${ord}: ${uppraknat(r)}`)}</p>` : ''; };
-  const iRamen = rutiner.filter((y) => y.ram).map((y) => y.namn);
-  const ramensRutin = iRamen.length ? `<p class="ld-rutin ld-rutin-ram">${esc(`${ord} i ${liten(l.ram)}: ${uppraknat(iRamen)}`)}</p>` : '';
-  const rader = s.stallen.map((x) => `<li><a href="${esc(l.adresser[x.namn] ?? data.sida)}" ${goat('lagret', `ställe: ${x.namn}`)}><span class="ld-stallen-namn">${esc(x.namn)}${nya.includes(x.namn) ? '<span class="ld-ny">Ny</span>' : ''}</span><span class="ld-stallen-tid">${esc(stalletsTid(x))}</span></a>${rutinen(x.namn)}</li>`).join('');
+  const rutinen = (ram: boolean, x = '') => { const r = rutiner.filter((y) => y.ram === ram && (ram || y.stalle === x)).map((y) => y.namn); return r.length ? `<p class="ld-rutin">${esc(`${ord}: ${uppraknat(r)}`)}</p>` : ''; };
+  const rad = (x: { namn: string; var: string; min: number; max: number }) => `<li><a href="${esc(l.adresser[x.namn] ?? data.sida)}" ${goat('lagret', `ställe: ${x.namn}`)}><span class="ld-stallen-namn">${esc(x.namn)}${nya.includes(x.namn) ? '<span class="ld-ny">Ny</span>' : ''}</span><span class="ld-stallen-tid">${esc(stalletsTid(x))}</span></a>${rutinen(false, x.namn)}</li>`;
+  // Lärarens lektion som en grå rad i lektionens ordning, efter ställena i början som i skalan, när något sker i den den här
+  // veckan: veckans grepp, utan minuter och med sitt hem i kärnan, eller en rutin (K-743; idéagenterna 2026-11-08).
+  const iRamen = rutinen(true);
+  const ramen = s.grepp.length || iRamen ? `<li class="ld-stallen-ram"><p class="ld-ram-namn">${esc(l.ram)}</p>${s.grepp.length ? `<ul class="ld-grepp">${s.grepp.map((g) => `<li><a href="${esc(l.adresser[g] ?? data.sida)}" ${goat('lagret', `grepp: ${g}`)}><span class="ld-stallen-namn">${esc(g)}${nya.includes(g) ? '<span class="ld-ny">Ny</span>' : ''}</span><span class="ld-stallen-tid">${esc(GREPPETS_TID)}</span></a></li>`).join('')}</ul>` : ''}${iRamen}</li>` : '';
+  const borjan = s.stallen.filter((x) => x.var === LAGRETS_VAR[0]);
+  const rader = [...borjan.map(rad), ramen, ...s.stallen.filter((x) => !borjan.includes(x)).map(rad)].join('');
   const efter = v.efter ? `<p class="pl-hjalp">Nu väljer du själv ställena efter vad lektionen behöver.</p>` : '';
-  return `<section class="ld-lektionen" aria-labelledby="ld-lektionen-rubrik"><h3 id="ld-lektionen-rubrik">${v.efter ? 'Din lektion' : 'Din lektion den här veckan'}</h3>${efter}<div class="ld-lektionen-ram">${lagretsSkalaHtml(s.skala)}<ul class="ld-stallen">${rader}</ul>${ramensRutin}<p class="ld-resten">${esc(lagretsMening(s, minuter, v.efter ? '' : 'veckans'))}</p></div></section>`;
+  return `<section class="ld-lektionen" aria-labelledby="ld-lektionen-rubrik"><h3 id="ld-lektionen-rubrik">${v.efter ? 'Din lektion' : 'Din lektion den här veckan'}</h3>${efter}<div class="ld-lektionen-ram">${lagretsSkalaHtml(s.skala)}<ul class="ld-stallen">${rader}</ul><p class="ld-resten">${esc(lagretsMening(s, minuter, v.efter ? '' : 'veckans'))}</p></div></section>`;
 }
 // Frågan först i stunden: klasserna i listan, eller Mina lektioner utan klasser, som knappar att trycka på och av. En borttagen
 // klass står inte här, som raderna om klasserna i stunden, och dess svar står kvar i sammanställningen, märkt borttagen, och kommer
