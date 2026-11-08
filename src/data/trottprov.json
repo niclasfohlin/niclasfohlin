@@ -120,6 +120,26 @@
           "beslut": "Inget"
         }
       ]
+    },
+    "src/content/undervisningsmetoder/skriva-for-att-lara.yaml": {
+      "provad": "2026-11-08",
+      "saker": [
+        {
+          "sak": "Rutan på tavlan, som ska sitta uppe före första lektionen, och affischen När jag fastnar, som Före första lektionen säger ska skrivas ut i A3 med den",
+          "forst": "Ord i faktarutan på skärm 4 och i inledningens andra stycke på skärm 6, men bilderna och knapparna först på skärm 47 och 48 av 58",
+          "beslut": "Två små kort på skärm 7, efter stycket som nämner Rutan på tavlan, med minibilder och metodens egen mening om varje blad, som leder till bladet och knappen som skriver ut det (src/data/bladkort.json). Riggen föreslog bara Rutan på tavlan, och När jag fastnar kom med eftersom läraren skriver ut båda före första lektionen"
+        },
+        {
+          "sak": "Skrivfrågan, en fråga som kräver tänkande",
+          "forst": "Kärnans första kort på skärm 5 med frågan om svaret går att återge, ett exempel på Lektionskortet överst och en länk till Skrivfrågor att låna på skärm 14",
+          "beslut": "Inget: frågan och provet står tidigt och på kortet, och tabellen med frågor i varje ämne nås från Före lektionen"
+        },
+        {
+          "sak": "Skrivboken",
+          "forst": "Faktarutans material på skärm 4",
+          "beslut": "Inget: en skrivbok per elev, och inget att skriva ut"
+        }
+      ]
     }
   }
 }

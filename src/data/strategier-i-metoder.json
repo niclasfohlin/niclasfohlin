@@ -242,5 +242,40 @@
         "om": "Paren frågar varför"
       }
     ]
+  },
+  "skriva-for-att-lara": {
+    "text": "Tre strategier för lärande finns redan i lagret. Fråga varför finns i Stanna och skriv, där eleven ger ett skäl med egna ord. Jämför två finns i rutinen Två texter, där eleverna ser vad den andra texten gör. Lär ut till någon finns i menyn Vad händer sedan, där paren förklarar lektionen för den som var borta.",
+    "strategier": [
+      "fraga-varfor",
+      "jamfor-tva",
+      "lar-ut-till-nagon"
+    ],
+    "skal": "Stanna och skriv ber om ett skäl med egna ord, och den som är klar lägger till varför. I Din planering visar läraren två egna texter först, och klassen säger vad den andra texten gör som den första inte gör. I menyn Vad händer sedan skriver paren en lapp och förklarar lektionen för den som var borta. Riggen prövade strategierna mot metodens text 2026-11-08 (out/skriva-for-att-lara/TILL-SAJTEN.md).",
+    "platser": [
+      {
+        "efter": "steg 2",
+        "delar": [
+          "jamfor-tva"
+        ],
+        "slag": "form",
+        "om": "Två texter bredvid varandra"
+      },
+      {
+        "efter": "steg 3",
+        "delar": [
+          "fraga-varfor"
+        ],
+        "slag": "form",
+        "om": "Ett skäl med egna ord"
+      },
+      {
+        "efter": "tabell: Vad händer sedan",
+        "delar": [
+          "lar-ut-till-nagon"
+        ],
+        "slag": "form",
+        "om": "Till den som var borta"
+      }
+    ]
   }
 }

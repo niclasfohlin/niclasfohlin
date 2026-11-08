@@ -1,0 +1,728 @@
+# Skriva för att lära, en undervisningsmetod för helklass av slaget strategier. Skriven 2026-11-07 ur
+# methods/_mall-undervisningsmetod.yaml, efter analysen (analys.md) och den andra analysen. Niclas material: bokmanuset
+# SKRIV! Nycklar till en god skrivundervisning (intake/skriva-for-att-lara/). Förlagan Explicit undervisning och lagret i
+# Formativ bedömning är lästa för form och ton.
+
+titel: Skriva för att lära
+undertitel: Så låter du alla elever tänka med pennan i dina vanliga lektioner, F–⁠9
+alternativaNamn: ["Writing to learn", "Skriva för att tänka"]
+ingress: "Skriva för att lära är ingen skrivkurs. Eleverna lär sig ämnet genom att skriva. Du stannar mitt i din vanliga lektion och ställer en fråga, och alla skriver några minuter för att reda ut sina tankar. Någon läser, och du bygger vidare på det de skrev. Ingen rättar texten, och den hamnar inte i en låda."
+arskurs: ["F-3", "4-6", "7-9"]
+arskursText: F–9
+taggar: ["undervisningskvalitet", "skrivstrategier"]
+slag: strategier
+syfte: [tanka, ova]
+tid: Din lektion, 45 minuter, minst två lektioner i veckan
+hurOftaSkal: "I försöken med lärjournaler skrev eleverna en gång i veckan (Nückles m.fl., 2020). Två lektioner i veckan ger en rutin. Har du klassen en gång i veckan, stanna två gånger under lektionen."
+period: Fem veckor att komma igång
+material:
+  - en skrivbok och en penna per elev
+  - lektionskortet
+  - bladen Rutan på tavlan och När jag fastnar
+  - en klocka som alla ser
+  - en penna i annan färg per elev
+  - ett skrivkort första lektionen
+uppdaterad: 2026-11-08
+publicerad: 2026-11-08
+relaterade: ["formativ-bedomning", "testbaserat-larande", "reciprok-undervisning", "kooperativt-larande", "kortskrivning-skriv-varje-dag", "skrivkurs-vardeskapande"]
+utkast: false
+film:
+  sekunder: 27.56
+  beskrivning: "Läraren fyller i Rutan på tavlan och ställer frågan. Läraren säger: ”Vart tog vattnet vägen? Skriv vad vi såg och varför.” Alla skriver, och ingen rättar. Läraren läser sex böcker. Läraren tänker: ”Två av sex: bara det de gjorde.” Kamraten säger: ”Jag läste att vattnet försvann.” Läraren säger vad klassen gör nu. Läraren säger: ”Jag läste mest vad ni gjorde. Därför skriver alla varför.” Alla skriver en rad till. Eleven skriver: ”Värmen gjorde ånga.”"
+  rubrik: "Så tar en text lektionen vidare: frågan, skrivandet och en rad på tavlan"
+  ingress: "Filmen visar en lektion i NO i åk 5, där klassen har kokat vatten. Läraren fyller i rutan, alla skriver, och axelkompisen läser. Läraren skriver en elevs mening på tavlan, och alla skriver en rad till."
+  stillbilder:
+    - text: "Läraren fyller i Rutan på tavlan och ställer frågan."
+    - text: "Läraren ser att två av sex bara skriver vad de gjorde."
+    - text: "Läraren säger vad hen läste och vad klassen gör nu."
+    - text: "Paret skriver en rad till, och texten går vidare."
+filmer:
+  - nr: 2
+    titel: "En elevs rad blir nästa fråga"
+    sekunder: 21.76
+    beskrivning: "Eleven sätter en stjärna vid sin rad. Läraren tänker: ”Jag läser bara raden.” Nästa lektion börjar med raden. Alla skriver två minuter om en kamrats rad. Läraren säger: ”Stämmer det? Hur vet du? Två minuter.” Paren läser för varandra. Eleven säger: ”Jag läste att jämnt antal trehjulingar ger jämnt antal hjul.”"
+    rubrik: "En elevs rad blir nästa fråga"
+    ingress: "Filmen visar en lektion i matematik i åk 4, om 21 hjul på en parkering. Sist på förra lektionen satte eleverna en stjärna vid raden de ville ta med. Nu står Elias rad på tavlan, alla skriver två minuter om den, och paren läser för varandra."
+    efter: "steg 5"
+    stillbilder:
+      - text: "Eleven sätter en stjärna vid raden hen vill ta med."
+      - text: "Nästa lektion börjar med Elias rad på tavlan."
+      - text: "Alla skriver två minuter om en kamrats rad."
+      - text: "Paren läser för varandra, och läraren hör två par."
+
+profil:
+  evidens:
+    larande:    { tillforlitlighet: mattlig, effekt: mattlig, kort: "Att skriva om innehållet ger ämneskunskaper. Att använda texten är inte prövat.", motivering: "Måttlig tillförlitlighet, måttlig effekt. Elever 6–17 år skrev om innehållet i NO, SO och matematik: g = 0,30 i 56 studier och 0,21 i de lottade. Spridningen är stor, och läsaren och hur texten används är inte mätta (Graham m.fl., 2020).", kallor: [graham-m-fl-2020, graham-och-perin-2007] }
+    lasning:    { tillforlitlighet: hog, effekt: mattlig, motivering: "Hög tillförlitlighet, måttlig effekt. Att skriva om lästa texter gav 0,40 på normerade prov i 11 studier, åk 2–12 (Graham och Hebert, 2010), men ett program i åk 1–⁠2 gav ingen effekt på läsprovet i 30 skolor (Kim m.fl., 2021).", kallor: [graham-och-hebert-2010, kim-m-fl-2021] }
+    skrivning:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. Stödet gäller program i åk 6–12 där eleverna skriver om lästa källor: 0,10–0,53 på oberoende prov (Slavin m.fl., 2019). Mer skrivande utan undervisning gav ingen säker skillnad i åk 1–⁠2 (Skar m.fl., 2024).", kallor: [slavin-m-fl-2019, kim-m-fl-2021, berge-m-fl-2019, skar-m-fl-2024] }
+    matematik:  { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Skrivande om matematiken gav g = 0,32 i 21 studier, åk 1–12, mest i USA. Ingen stor lottad studie finns, och det går inte att se hur många studier som var lottade (Graham m.fl., 2020).", kallor: [graham-m-fl-2020] }
+    amnen:      { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. NO gav 0,31 i 26 studier och SO 0,31 i 8 (Graham m.fl., 2020), men ingen säker effekt på NO-proven i 48 skolor (Hand m.fl., 2018). Teknik är inte redovisat för sig.", kallor: [graham-m-fl-2020, hand-m-fl-2018] }
+    socialt:    { tillforlitlighet: lag, effekt: ingen, motivering: "Låg tillförlitlighet, ingen effekt. Ingen studie med jämförelsegrupp. I ett danskt projekt såg lärarna att nästan alla deltog när eleverna hade skrivit först (Lützen och Nielsen, 2025).", kallor: [l-tzen-och-nielsen-2025] }
+  svarighet: { lara: 3, karnan: 3, stod: 3, tid: 3, motivering: "Klassen lär sig att skriva utan rättning, och du lär dig ställa frågan och använda texten. Kärnan glider lätt mot ifyllnad och en bok som ingen öppnar, men en kollega kan se det." }
+  kostnad:   { kop: 2, timmar: 14, motivering: "Skolan har skrivböcker och pennor. Omkring 14 timmar första läsåret går till att läsa metoden, fyra möten, samtalen efter besöken och en timme i veckan för frågorna de fem första veckorna." }
+  urval:
+    datum: 2026-11-07
+    regel: "Insatser räknas när eleverna skriver om ämnets innehåll eller en läst text för att lära sig innehållet, mot en grupp som inte skriver om det eller skriver mindre. Program där skrivandet är en del räknas också, som Science Writing Heuristic och MORE. I Skrivning räknas också program där eleverna skriver om lästa källor, som CRWP och Pathway. Utvecklarna är Hand, Nückles, Collins, Kim, Berge, Olson och National Writing Project. Räknas inte: undervisning i att skriva utan ämnesinnehåll, expressivt skrivande och skrivande om egna värderingar, högskolestudier och automatisk återkoppling."
+    text: "Vi sökte 2026-11-07 i sammanställningar, följde referenserna i Graham m.fl. (2020), sökte i ERIC område för område och gjorde enkla sökningar på webben. Skrivandet fick en egen sökning, eftersom den första frågade om ämneskunskaper. Vi valde femton källor, de som varje område vilar på, och två granskare prövade urvalet."
+    slutsatser:
+      oversikt: "Att skriva om ett innehåll ger mer kunskap om det i NO, SO och matematik i alla åldrar, och effekten är omkring 0,2–0,3 (Graham m.fl., 2020; Graham och Perin, 2007). Att skriva om lästa texter lyfter läsförståelsen (Graham och Hebert, 2010). Uppgifter med analys och reflektion ger ofta mer, men det är inte säkert. Program där eleverna skriver om lästa källor gav bättre skrivande på oberoende prov (Slavin m.fl., 2019). Ingen översikt mäter om texten delades eller användes."
+      experiment: "Skrivande med undervisning i ämnet gav bättre skrivande i åk 1–⁠2 (Kim m.fl., 2021) och i åk 3 (Berge m.fl., 2019), men inte säkert i åk 6. Mer skrivande utan undervisning gav ingen säker skillnad (Skar m.fl., 2024), och ett program i NO gav ingen säker effekt på NO-proven (Hand m.fl., 2018). Med kamrater eller yngre som läsare förstod eleverna mer än med läraren (Gunel m.fl., 2009)."
+      annan: "Frågor i lärjournaler hjälper lärandet, och det är mest visat på högskolan (Nückles m.fl., 2020). Eleverna skriver mest korta texter för läraren (Sturk, 2022), och skrivböcker utan svar utvecklar inte eleverna (Ruiz-Primo m.fl., 2002). Lärare ser fler delta när klassen använder texterna (Lützen och Nielsen, 2025). Skolforskningsinstitutet (2022) ger forskningen på svenska."
+    uteslutna:
+      - { namn: "Yu m.fl. (2021)", skal: "Jämförelsegruppen skrev också, så studien prövar inte metoden" }
+      - { namn: "Graham m.fl. (2023)", skal: "Metaanalys av skrivundervisning, annat innehåll" }
+      - { namn: "Wu m.fl. (2021)", skal: "Skrivande om värderingar, annan insats" }
+      - { namn: "Hattie (2009)", skal: "En översikt av metaanalyser, som inte räknas för nivån" }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 1 Metoden
+# ---------------------------------------------------------------------------------------------------------------------
+inledning:
+  - "Skriva för att lära handlar om att skrivande är ett sätt att tänka. Du stannar mitt i din vanliga lektion och ställer en fråga, och alla skriver några minuter för att ta reda på vad de tänker. Det kan bli en logg, en lista eller några tankar. Någon läser, och det eleverna skrev tar lektionen vidare. Metoden är ingen skrivkurs och ingen ny planering, bara ett lager över den du har. Vad eleverna ska lära sig kommer från dig och kursplanen, och skrivandet är ett sätt att ta sig dit. Det räcker inte att eleverna skriver, för en text som ingen läser och ingen använder blir lätt ren rutin."
+  - "I vilket ämne som helst står din planering kvar: en genomgång, ett försök eller något eleverna skapar. På ett ställe stannar du och fyller i Rutan på tavlan: ”Skriv för att”, hur länge, vem som läser och vad som händer sedan. Du skriver frågan på tavlan, och första minuten skriver du själv. Varje elev har sin skrivbok framme och skriver med egna ord tills klockan ringer, och du läser över axeln. Sedan läser någon texten, ofta axelkompisen. Du säger vad du läste och skriver elevernas ord på tavlan."
+  - "Eleven lär sig av det hen gör med innehållet. Den som måste förklara, jämföra eller ta ställning med egna ord märker vad hen förstår och vad som saknas, och svaret går inte att skriva av. Därför kommer frågan först, och du visar hur ett svar kan se ut. Ingen rättar, eftersom tanken får vara på väg. Någon läser, eftersom ord betyder mer när de används. Sedan skriver eleven en rad till och kommer vidare i tanken. När en elevs rad blir klassens nästa fråga märker eleverna att deras tankar färgar lektionen och att ord kan göra något. Skrivandet blir ett verktyg för tanken och ett sätt att delta."
+  - "De första veckorna stannar du minst två gånger i veckan och lägger till en sak i taget. Vecka 1 börjar ni med ett skrivkort, en bild att skriva om, så att inget kan bli fel. Alla läser en mening för axelkompisen. Vecka 2 visar du två texter bredvid varandra, så att eleverna ser vad en förklaring gör, och du byter frågan tills den kräver mer än att återge. Vecka 3 byter eleverna böcker och skriver en rad till. Vecka 4 börjar en lektion med en elevs rad, och du läser fem böcker i veckan på fem minuter. Vecka 5 svarar eleverna varandra skriftligt. Sedan är skrivandet något klassen gör för att tänka. En gång per arbetsområde skickar ni en text till någon utanför klassen som har lovat svara."
+karna:
+  rubrik: "Kärnan: fast och fritt"
+  text: "Du lägger lagret över din egen planering, och kärnans fyra delar håller ihop det. Grundidén är att eleven lär sig när hen själv bearbetar innehållet med egna ord, och att en text som någon läser och använder ger mer än en text i en låda. Den första halvan har studier bakom sig. Den andra bygger mest på praktiken och på en liten studie om läsaren. Mer skrivande räcker inte: studierna pekar på frågan, på att du visar hur, och på att eleven får svar och skriver vidare i sin text."
+  grundregel: De fyra är kärnan, och dem håller du fast vid. Rutans fält håller dem framme. Ämnet, formen, tiden, vem läsaren är och hur texten används väljer du själv.
+  varv: Du frågar, alla skriver, någon läser, och texten tar lektionen vidare.
+  komponenter:
+    - namn: En fråga som kräver tänkande
+      moment: [Stanna och skriv]
+      vad: "Frågan får alla att bearbeta innehållet: förklara, jämföra, ta ställning eller säga vad de inte förstår."
+      syns: Eleverna skriver med egna ord om ett varför eller ett val, som en förklaring i NO, och svaret kräver mer än att återge.
+      raknas: false
+      varfor: "Den som bara återger bearbetar lite. Uppgifter med analys gav 0,36 mot 0,18 för återgivning, och frågor om den egna förståelsen 0,40 mot 0,15, men skillnaderna mellan studier är inte säkra (Graham m.fl., 2020). I experiment lärde sig studenter mer med frågor (Nückles m.fl., 2020)."
+      belagg: provad
+      kallor: [graham-m-fl-2020, n-ckles-m-fl-2020]
+      kvar: Frågan kräver mer än att skriva av eller berätta vad ni gjorde, och eleverna har sett hur ett svar kan se ut.
+      fritt: "Ämnet, formen (logg, lista eller tankar) och stöd som en mening att börja med."
+      kryss: Frågan krävde mer än att återge, och jag hade visat hur.
+    - namn: Alla skriver för att tänka
+      moment: [Stanna och skriv]
+      vad: Alla skriver samtidigt med egna ord, och ingen rättar.
+      syns: "Efteråt har varje elev egna ord i sin text, som en mening, en lista eller en skiss med ord, och alla skriver tills tiden är slut."
+      varfor: "I klassens samtal deltar få (Lützen och Nielsen, 2025). Komponenten finns i studierna med effekt, där eleverna själva skrev om innehållet (Graham m.fl., 2020), och bygger på att en text utan krav på form lämnar kraft åt tanken (Nückles m.fl., 2020)."
+      belagg: i-alla
+      kallor: [graham-m-fl-2020, l-tzen-och-nielsen-2025, n-ckles-m-fl-2020]
+      kvar: Alla formulerar sig med egna ord, och ingen rättar texten.
+      fritt: "Tiden, oftast två till fem minuter. Papper, skrivbok eller skärm. Språket, en skiss med ord, och att eleven säger och någon skriver."
+      kryss: Alla skrev med egna ord, och jag rättade inget.
+    - namn: Eleven vet vem som läser
+      moment: [Stanna och skriv, Läsaren]
+      vad: "Före skrivandet säger du vem som läser: eleven själv, en kamrat, klassen eller någon utanför."
+      syns: Eleverna kan säga vem som läser, och läsaren läser för att förstå, som en kamrat som svarar på tanken.
+      varfor: "Den som bara skriver för läraren skriver för att visa vad hen kan (Sturk, 2022). En studie visar bättre begreppsförståelse när elever skrev för kamrater eller yngre elever än för läraren eller föräldrarna (Gunel m.fl., 2009)."
+      belagg: provad
+      kallor: [gunel-m-fl-2009, sturk-2022]
+      kvar: Du säger vem som läser innan eleverna skriver, ofta en annan än du, och ingen delar en text utan att eleven vet det.
+      fritt: "Vem som läser, också eleven själv, och om namnet står med."
+      kryss: Jag sa i förväg vem som läser, och fler än jag läste.
+    - namn: Texten tar lektionen vidare
+      moment: [Läsaren, Tillbaka till texten, Nästa steg]
+      vad: "Elevernas meningar blir lektionens stoff: samtalet, nästa fråga eller elevens egen text bygger på dem."
+      syns: Klassen använder elevernas meningar i lektionen eller nästa lektion, och varje vecka skriver alla en rad i annan färg.
+      raknas: false
+      varfor: "Texter som ingen svarar på kan bli ren rutin: i tio klasser i åk 5 blev texterna inte bättre, och fyra lärare svarade (Ruiz-Primo m.fl., 2002). Komponenten bygger på praktiken (Lützen och Nielsen, 2025) och på att eleven lär sig när hen läser om, får svar och skriver vidare (van Dijk m.fl., 2022)."
+      belagg: teori
+      kallor: [ruiz-primo-m-fl-2002, l-tzen-och-nielsen-2025, van-dijk-m-fl-2022]
+      kvar: Eleverna gör något med texten, så som du bestämde, och från vecka 3 skriver alla en rad till varje vecka.
+      fritt: "Vägen: samtalet, tavlan, nästa skrivfråga eller nästa lektions start. Raden kan följa ett svar, en rad på tavlan eller din linje. I F–⁠1 räcker ett ord eller en bild."
+      kryss: Eleverna gjorde något med texten, i dag eller nästa lektion.
+roll:
+  rubrik: "Lärarens roll: du läser vad texten säger"
+  text: Före lektionen skriver du tre rader på din planering. I lektionen rättar du inte texterna. Du läser vad de säger och låter det ta lektionen vidare.
+  fragor:
+    - Vad skriver alla?
+    - Vad säger texterna?
+    - Vad händer med dem nu?
+  fragornaText: "Den sista frågan svarar du på högt: ”Jag läste … Därför …”, eller med en elevs rad på tavlan."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 2 Lektionen
+# ---------------------------------------------------------------------------------------------------------------------
+tidsschema:
+  rubrik: Lagret i din lektion
+  rader:
+    - { tid: Före lektionen, fas: Före lektionen, vad: "Skriv tre rader på din planering: var ni stannar, frågan, och vem som läser och vad som händer sedan. Ta gärna en ur Skrivfrågor att låna, och svara själv på den." }
+    - { tid: 3–⁠5 min, fas: Tillbaka till texten, form: Gemensamt, vad: "Från vecka 4 börjar en lektion i veckan med det ni skrev: en elevs rad blir klassens fråga, och alla skriver två minuter." }
+    - { tid: 10 min eller mer, fas: Din planering, form: Läraren visar, vad: "Du undervisar som du har planerat, och stannar där eleverna behöver reda ut något. En gång per arbetsområde visar du två egna texter innan ni stannar." }
+    - { tid: 2–⁠5 min, fas: Stanna och skriv, form: Enskilt, vad: "Du fyller i Rutan på tavlan och skriver frågan, alla skriver till klockan ringer, och du läser över axeln." }
+    - { tid: 2–⁠5 min, fas: Läsaren, form: I par, vad: "Den du sa läser texten: eleven själv, axelkompisen eller någon annan." }
+    - { tid: 1 min och sedan vägen, fas: Nästa steg, form: Gemensamt, vad: "Du säger vad du läste och vad ni gör nu, och skriver elevernas ord på tavlan. Sedan fortsätter du din lektion med det de skrev." }
+    - { tid: Efter lektionen, fas: Efter lektionen, vad: "Från vecka 4 läser du fem böcker per klass i veckan, på fem minuter. Läs raden i annan färg först, och dra en linje i kanten utan ord. Skriv en rad om hur nästa lektion börjar." }
+  varianter:
+    - nar: första lektionen
+      text: "Sista kvarten går till skrivkortet."
+      delar:
+        - { fas: Din planering, tid: 0–⁠30 min }
+        - { fas: Stanna och skriv, tid: 30–⁠37 min, fraser: ["Vi skriver för att ta reda på vad vi tänker.", "Det här rättas inte."] }
+        - { fas: Läsaren, tid: 37–⁠42 min, fraser: ["Tack för att du läste."] }
+        - { fas: Nästa steg, tid: 42–⁠45 min, fraser: ["Jag läste … Därför …"] }
+    - nar: en lektion på 60 minuter eller mer
+      text: "Stanna gärna två gånger, och låt en av gångerna följa ett försök eller något praktiskt eleverna har gjort. Den andra gången räcker en rad till."
+      delar:
+        - { fas: Din planering, tid: 0–⁠40 min }
+        - { fas: Stanna och skriv, tid: 40–⁠45 min }
+        - { fas: Läsaren, tid: 45–⁠50 min }
+        - { fas: Nästa steg, tid: 50–⁠52 min }
+  efter: "Lagret tar omkring tolv minuter, men du använder inte alla ställen varje gång. Tillbaka till texten kommer från vecka 4, en gång i veckan. Ibland stannar texten hos eleven, och det säger du i förväg. Ett svar som håller svarar på frågan och stämmer."
+steg:
+  rader:
+    - namn: Tillbaka till texten
+      fraga: "Vilken rad är värd att tänka på?"
+      alla: Skriver två minuter om en kamrats rad, eller läser sin egen rad och skriver en rad till.
+      titta: "Har tanken flyttat sig? Vem håller med, och vem prövar raden?"
+      beslut: Ta upp en sak, och gå till din planering inom fem minuter.
+      gor:
+        - "Skriv en rad med stjärna och elevens namn på tavlan. ”Elias skrev: Antalet trehjulingar måste vara udda.”"
+        - "Stjärnan är elevens ja. En ring runt stjärnan betyder utan namn, och fel i sak tar du upp utan namn."
+        - "Fråga: ”Stämmer det? Hur vet du?” Alla skriver två minuter."
+        - "Låt dem läsa en mening för axelkompisen. Lyssna på två par, och gå till din planering."
+      fraser: ["Elias skrev …", "Stämmer det? Hur vet du?"]
+    - namn: Din planering
+      vem: som du har planerat
+      fraga: "Var behöver de reda ut något?"
+      alla: Lyssnar, läser, tittar eller arbetar och har skrivboken framme.
+      titta: "När har de något att säga?"
+      beslut: Stanna där du bestämde, eller senare om begreppet är för nytt. Korta genomgången om tiden är knapp.
+      gor:
+        - "Stanna efter ett avsnitt, en bild eller ett försök, oftast efter tio till tolv minuter. Två egna texter visar du först."
+        - "Säg gärna: ”Snart stannar vi och skriver.”"
+        - "Stanna före ett samtal, så att alla har något att säga."
+      fraser: ["Snart stannar vi och skriver."]
+    - namn: Stanna och skriv
+      fraga: "Går svaret att återge? Vem kommer inte igång?"
+      alla: Skriver med egna ord till klockan ringer.
+      titta: "Vem har inte börjat? Står det vad ni gjorde, eller varför?"
+      beslut: Välj en eller två rader att lyfta, och fråga lågt om du får använda dem. Är det tomt hos många, gå till Nästa steg.
+      gor:
+        - "Fyll i rutan: Skriv för att (förklara, jämföra, ta ställning), Tid, Vem läser, Sedan. Skriv frågan och tre ämnesord på tavlan."
+        - "Starta klockan och skriv själv första minuten vid bänken där du börjar rundan. Fastnar du själv, säg en mening högt."
+        - "Gå rundan, och stanna först kort hos de två du vill hjälpa."
+        - "Läs sedan sex böcker, också medan paren läser. Räkna dem utan ett svar som håller: tomt, bara det ni gjorde eller fel i sak."
+        - "Säg inget om stavning eller längd, bara: ”Skriv tills klockan ringer.” Den som är klar lägger till varför eller skriver en fråga."
+      fraser: ["Vi skriver för att ta reda på vad vi tänker.", "Jag vill se hur du tänker.", "Det här rättas inte.", "Skriv tills klockan ringer."]
+    - namn: Läsaren
+      fraga: "Läser de det som står?"
+      alla: Läser, lyssnar och tackar, säger vad de läste eller skriver en rad till.
+      titta: "Talar paren om innehållet? Vem står över?"
+      beslut: Vill någon inte läsa, gå vidare utan att säga något. Lyssna gärna på två par.
+      gor:
+        - "Vecka 1–⁠2: be dem läsa en mening för axelkompisen. Den som lyssnar tackar."
+        - "Från vecka 3: låt dem byta böcker, läsa tyst, dra en linje där texten gör det rutan säger, och säga vad de läste."
+        - "Från vecka 3, varje vecka: be alla ta en annan penna och skriva en rad till med det som saknas, eller ”Nu tänker jag …”"
+        - "Från vecka 5: låt dem svara kamraten med en rad: ”Jag läser att … Jag undrar …”"
+      fraser: ["Tack för att du läste.", "Byt böcker. Läs tyst."]
+    - namn: Nästa steg
+      vem: "alla, sedan var och en"
+      fraga: "Vad ändrar texterna i det jag gör nu?"
+      alla: Hör vad du läste och vad ni gör nu, och ser sina egna ord på tavlan.
+      titta: "Följer nästa steg det du läste? Är det elevernas ord som står på tavlan?"
+      beslut: Ett av tre utfall, nedan. Talen är hållpunkter.
+      gor:
+        - "Säg på en halv minut: ”Jag läste … Därför …”"
+        - Skriv elevernas ord på tavlan, så att ingen behöver hålla dem i huvudet.
+        - "Från vecka 4, sista minuten i lektionen: ”Sätt en stjärna vid raden du vill ta med.”"
+      fraser: ["Jag läste … Därför …", "Sätt en stjärna."]
+      redo:
+        nastanAlla: "Högst 5 av 28 utan ett svar som håller, i rundan högst en av sex. Läs två rader högt, och gör det du skrev i rutan."
+        deFlesta: "6–13 av 28, i rundan två av sex. Läs en eller två rader, säg vad raden gör och vad som stämmer. Alla läser sin text och skriver en rad till."
+        halften: "14 eller fler av 28, i rundan tre eller fler av sex. Visa två egna texter om något annat, och alla skriver igen."
+        tiden: "Tiden räcker inte: böckerna ligger kvar, och nästa lektion börjar där. Blir det hälften igen, byt frågan eller vänta med skrivandet."
+lektionskort:
+  - { efter: klassen, text: "Lektionskortet är ett eget A4 att ha i handen, med det du gör på varje ställe i din lektion." }
+fastnar:
+  rubrik: Så stöttar du
+  text: Du rättar inte texten. I rundan säger du en sak, och resten tar du med hela klassen.
+  trappa:
+    - "Säg vad du läser: ”Jag läser att du tänker …”"
+    - Dra en rak linje vid raden som håller.
+    - "Fråga efter det eleven nästan har skrivit: ”Berätta mer om …”, ”Hur vet du?”"
+    - Står det fel i sak, säg i Nästa steg vad som stämmer, utan namn, och låt alla skriva en rad till.
+  motto: Du läser vad texten säger.
+amnesexempel:
+  - amne: lasning
+    arskurs: åk 2
+    innehall: Att läsa en berättelse och förutspå vad som händer
+    overst:
+      egen: "Skriv vad du tror händer nu, och varför. Felet: en gissning utan något ur berättelsen."
+      visar: Eleverna ritar och skriver ord i skrivboken och läser för axelkompisen.
+    scen:
+      - "Tänk dig högläsningen i åk 2. Mitt i kapitlet stannar du. Pojken har gömt nyckeln, och du fyller i rutan: Skriv för att gissa och säga varför. Tid tre minuter. Vem läser: din axelkompis. Sedan läser vi vidare."
+      - "”Vad tror du händer nu? Rita och skriv ord. Skriv varför.” Du skriver själv första minuten och går sedan runt. Fyra av 26 har bara en bild, och du skriver deras ord under bilden. Tuva har skrivit: ”dom kommer inte in för nykeln är borta”. Du frågar lågt om du får läsa upp den."
+      - "Paren läser. I Nästa steg lyfter du Tuvas rad: ”Jag läste att Tuva tror att de inte kommer in. Därför lyssnar vi efter nyckeln.” Du läser vidare, och klassen hör hur det går."
+    notera: "Notera vad som hände. Stavningen fick stå som den var, och ingen rättade. Hade fler bara ritat, hade du skrivit en mening ihop med klassen först."
+  - amne: skrivning
+    arskurs: åk 8
+    innehall: Att argumentera för något som angår en, med skäl och motskäl
+    overst:
+      egen: "Ska lunchrasten bli längre? Felet: en åsikt utan skäl, eller bara den egna sidan."
+      visar: Alla skriver ett skäl och ett motskäl i skrivboken, och raderna blir en gemensam text.
+    scen:
+      - "Tänk dig en lektion i svenska i åk 8. Elevrådet ska tycka till om lunchrasten, och du fyller i rutan: Skriv för att ta ställning. Tid fyra minuter. Vem läser: en kamrat, och sedan elevrådet med klassens text. Sedan: svar på fredag."
+      - "Alla skriver vad de tycker, varför, och vad någon som inte håller med skulle säga. Du har frågat elevrådet: ”Kan ni svara med en mening på fredag, och ställa en fråga tillbaka?”"
+      - "Böckerna går två steg åt höger, och alla läser. I Nästa steg sätter klassen ihop en text av raderna med stjärna. Innan ni skickar texten frågar du: ”Vad vet vi säkert? Vad vill vi att de ska svara på?”"
+      - "På fredag läser du svaret högt: ”Vad ska kortas i stället?” Klassen skriver en rad till."
+    notera: "Notera vad som hände. Du hade beställt svaret, så det kom. Eleverna såg att deras ord gjorde något, och frågan tillbaka blev nästa skrivfråga."
+  - amne: matematik
+    arskurs: åk 4
+    innehall: Att lösa problem och resonera om sin lösning
+    overst:
+      egen: "Tvåhjulingar och trehjulingar, 21 hjul. Felet: en lösning, utan att visa att det inte finns fler."
+      visar: Alla skriver hur de vet, och paren jämför sina texter.
+    scen:
+      - "Tänk dig en lektion i matematik i åk 4. På parkeringen står tvåhjulingar och trehjulingar, och tillsammans har de 21 hjul. Eleverna har hittat 9 tvåhjulingar och 1 trehjuling, 6 och 3, eller 3 och 5."
+      - "Du fyller i rutan: Skriv för att visa hur du tänker. Tid fyra minuter. Vem läser: din axelkompis. Sedan: ni jämför. ”Har du hittat alla lösningar? Hur kan du vara säker på det?” I rundan läser du sex böcker: fyra har bara svaret. Det är tre eller fler. Paren läser och jämför, och i Nästa steg visar du hur."
+      - "Du skriver två egna texter bredvid varandra om ett annat problem, en med bara svaret och en som säger hur du vet. ”Vad gör den andra texten?” Paren svarar, klassen skriver en mening ihop, och alla skriver igen om hjulen."
+    notera: "Notera vad som hände. Klassen hade inte sett en förklaring i matematik. Nästa lektion börjar med Elias rad: ”Antalet trehjulingar måste vara udda.” Hur många kan det vara som mest? Då hittar klassen 7, utan tvåhjulingar."
+  - amne: so-no
+    amnesnamn: NO
+    arskurs: åk 5
+    innehall: Avdunstning, och att skilja på vad vi gjorde, vad vi såg och varför
+    huvud: true
+    overst:
+      mal: förklara vart vattnet tar vägen när det avdunstar
+      belagg: "Vart tog vattnet vägen? Skriv vad vi såg och varför."
+      forberett: två egna texter om en pöl som fryser, och ord med bild
+      redo: I rundan räknar jag böcker utan ett svar som håller
+      egen: "Vad vi gjorde, vad vi såg och varför. Felet: Vi kokade vatten. Det försvann."
+      visar: Alla skriver i skrivboken, och kamraten drar en linje där sambandet syns.
+    delar:
+      - { fas: Före lektionen, celler: ["Rutan: förklara varför, fyra minuter, axelkompisen, sedan en rad till"] }
+      - { fas: Tillbaka till texten, celler: ["Inget i dag"] }
+      - { fas: Din planering, celler: ["Försöket med kastrullen och pölen i solen"] }
+      - { fas: Stanna och skriv, celler: ["Vart tog vattnet vägen? Skriv vad vi såg och varför."] }
+      - { fas: Läsaren, celler: ["Byt böcker. Dra en linje där sambandet syns."] }
+      - { fas: Nästa steg, celler: ["Jag läste … Därför …, och Sagas rad på tavlan"] }
+    plan:
+      klass: 5B
+      amne: NO
+      datum: tis 24/11
+      lektion: 8 av 10
+      mal: förklara vart vattnet tar vägen när det avdunstar
+      belagg: "Vart tog vattnet vägen? Skriv vad vi såg och varför."
+      blad: "Rutan på tavlan"
+      forberett: "ordet avdunstning med bild"
+      fore: { syfte: "förklara varför", fragan: "Vart tog vattnet vägen? Skriv vad vi såg och varför.", lasare: "axelkompisen", sedan: "rad på tavlan, och en rad till" }
+      delar:
+        - { fas: Tillbaka till texten, text: "Inget i dag" }
+        - { fas: Din planering, text: "Försöket med kastrullen, och stanna efter det" }
+        - { fas: Stanna och skriv, text: "Fyra minuter" }
+        - { fas: Läsaren, text: "Byt böcker. Dra en linje där sambandet syns" }
+        - { fas: Nästa steg, text: "Sagas rad, om jag får läsa upp den" }
+      beslut: { elever: 28, deFlesta: "Sagas rad", halften: "en pöl som fryser, på två sätt" }
+      efter: { kontrollen: "2 av 6", hogar: "6 böcker", sag: "”När vattnet blir varmt blir det vattenånga i luften.”", kryss: [1, 2, 3, 4], nasta: "Sagas rad", forst: "Yara och Ludvig" }
+      lagg: ["Lägg märke till: fälten Vem läser och Sedan är bestämda innan eleverna skriver."]
+    remsa:
+      - "Vart tog vattnet vägen? Svaret gick inte att återge, och eleverna hade sett två texter."
+      - "Alla 28 skrev fyra minuter med egna ord, och ingen rättade."
+      - "Rutan sa att axelkompisen läste. Paren bytte böcker och drog en linje där sambandet syntes."
+      - "Sagas rad blev nästa lektions fråga, och alla skrev en rad till."
+    scen:
+      - "Tänk dig en lektion i NO i åk 5, vecka 4. Klassen har kokat vatten och sett en pöl torka i solen, och du har visat två egna texter om en pöl som fryser. Nu fyller du i rutan: Skriv för att förklara varför. Fyra minuter. Vem läser: din axelkompis. Sedan: en rad till."
+      - "”Vart tog vattnet vägen? Skriv vad vi såg och varför.” Du skriver första minuten, ser till två elever och läser sex böcker. Två har bara det ni gjorde: ”Vi kokade vatten. Det försvann.” Det är utfallet De flesta kan. Du frågar Saga lågt om du får läsa upp raden."
+      - "Paren byter böcker. I Nästa steg säger du: ”Jag läste att många skriver vad vi gjorde. Saga skrev: När vattnet blir varmt blir det vattenånga i luften. Vattnet är alltså kvar. Därför skriver alla en rad till: varför?” Alla skriver i annan färg. Sist sätter de en stjärna."
+      - "Nästa lektion står Sagas rad på tavlan: ”Håller du med? Hur skulle du pröva det?” Två minuter."
+    notera: "Notera vad som hände. Frågan visade vem som tänkte och vem som återgav, och texten fick en läsare direkt. Du rättade inget, och det tog fyra minuter att se vad klassen behövde. Hade högst en av sex återgett, hade du bara lyft två rader. Hade tre gjort det, hade du visat två texter igen och låtit alla skriva om."
+  - amne: praktisk-estetiska
+    amnesnamn: Slöjd
+    arskurs: åk 7
+    innehall: Att välja material och teknik och motivera sina val
+    overst:
+      egen: "Skriv vilket val du gjorde och varför. Felet: loggen sist på lektionen, med bara vad eleven gjorde."
+      visar: Alla skriver två minuter mitt i arbetet, med boken vid bänken.
+    scen:
+      - "Tänk dig en lektion i slöjd i åk 7. Du har klassen en gång i veckan, så du stannar två gånger. Efter 20 minuter fyller du i rutan: Skriv för att motivera. Tid två minuter. Vem läser: din bänkgranne. Sedan: visa ditt arbete."
+      - "”Vilket val gjorde du nyss, och varför?” Eleverna skriver med sågspånet kvar på händerna. Noah skriver: ”Jag tog tunnare trä för att lådan inte ska väga mycket.” Grannen läser, tittar på lådan och frågar: ”Håller den då?”"
+      - "Noah skriver en rad till i annan färg och prövar på en spillbit. I Nästa steg, sist på lektionen, stannar du igen: ”Skriv en fråga du har till nästa gång.” Nästa vecka börjar med de frågorna."
+    notera: "Notera vad som hände. Eleverna skrev mitt i arbetet, så texten handlade om valet. Hade loggen kommit sist, hade Noah skrivit: ”Jag sågade.”"
+stod:
+  rubrik: Elever som behöver mer stöd
+  rader:
+    - { nar: Den som är ny i svenska, metoden: "Samma fråga som de andra, och formen är fri.", du: "Ge eleven ämnets ord med bild före lektionen. Hen skriver första tanken på sitt starkaste språk. I Läsaren visar eleven tanken med skiss och de ord hen kan, och paret skriver en rad på svenska ihop. Där sätter hen stjärnan." }
+    - { nar: Den yngsta som inte skriver än, metoden: "Bild och ord räknas som text.", du: "Eleven ritar och berättar, och du skriver orden under bilden, läser upp dem och följer med fingret. Klassen kan skriva en mening ihop med dig och läsa den igen nästa dag." }
+    - { nar: Den vars hand eller stavning tar all kraft, metoden: "Kort tid, och ingen rättar.", du: "Eleven säger och du eller kamraten skriver, eller eleven använder diktering och talsyntes. Eleven säger sin första tanke till kamraten innan hen skriver." }
+    - { nar: Den som inte vågar dela, metoden: "Eleven väljer själv meningen.", du: "Ta små steg: eleven lyssnar, delar ett ord, läser en vald mening eller låter en kamrat läsa upp. Eleven väljer själv sin läsare." }
+    - { nar: Den som skriver men bara återger, metoden: "Samma fråga, och texten står kvar.", du: "Säg: ”Här har du skrivit vad som hände. Nu saknas varför.” Skriv första ordet tillsammans. Peka på affischen När jag fastnar, och på orden att låna på tavlan." }
+    - { nar: När metoden inte räcker, metoden: "Texten visar tidigt vem som fastnar.", du: "Kommer eleven inte igång eller återger bara efter veckorna, trots stödet? Läs texterna med specialläraren, se var tanken stannar, och pröva Kortskrivning eller Säg, skriv och läs i Stödundervisning." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 3 Kom igång
+# ---------------------------------------------------------------------------------------------------------------------
+progression:
+  rubrik: De första veckorna
+  text: "Metoden är troligen ny för eleverna i ditt ämne. Kärnans alla delar finns i liten skala från första lektionen, och varje vecka lägger ni till en sak. Syns den inte än, ta en vecka till. Har klassen två gånger klarat sig utan ett ord att låna, suddar du det. När klassen kan rutan fyller eleverna själva i Vem läser. I F–⁠1 är vecka 3 och 5 muntliga: paren berättar om sina bilder för varandra. Efter veckorna går en text till en läsare utanför klassen en gång per arbetsområde. Du frågar först om mottagaren kan svara, och klassen läser svaret tillsammans."
+  rader:
+    - { vecka: "1", led: Alla skriver, rubrik: "Stanna, skriv och läs en mening", eleverna: "Att börja skriva direkt, skriva tills klockan ringer, läsa en mening för axelkompisen och tacka.", roll: "Att skriva själv första minuten, gå runt utan att rätta och säga vad du läste.", vidare: "nästan alla skriver tills klockan ringer och läser en mening", fraga: "Skrev nästan alla tills klockan ringde, och läste de en mening för kamraten?" }
+    - { vecka: "2", led: Frågan, rubrik: Frågan som kräver tänkande, eleverna: "Att skriva om innehållet med egna ord, ge ett skäl och låna ord från tavlan.", roll: "Att visa två egna texter bredvid varandra, byta frågan tills den inte går att återge, och pröva sex böcker mot utfallen.", vidare: "nästan alla skriver mer än det ni gjorde", fraga: "Stod det mer än det ni gjorde i nästan alla av de sex böckerna?" }
+    - { vecka: "3", led: Någon läser, rubrik: "Byt böcker, och en rad till", eleverna: "Att byta böcker, läsa tyst, säga vad de läste och skriva en rad till i annan färg.", roll: "Att visa en rad till på din egen text, och läsa raderna i annan färg i rundan.", vidare: "nästan alla säger vad de läste, och raden i annan färg säger något nytt", fraga: "Sa nästan alla vad de läste, och sa raden i annan färg något nytt?" }
+    - { vecka: "4", led: Texten går vidare, rubrik: Elevens rad blir nästa fråga, eleverna: "Att sätta en stjärna vid en vald rad, och skriva utifrån en kamrats rad.", roll: "Att läsa fem böcker på fem minuter, och börja nästa lektion med en rad på tavlan.", vidare: "en lektion i veckan börjar med en elevs rad, och nästan alla skriver mer än att de håller med", fraga: "Började en lektion med en elevs rad, och skrev nästan alla mer än att de höll med?" }
+    - { vecka: "5", led: Någon svarar, rubrik: Svara skriftligt, eleverna: "Att skriva ett svar på en kamrats rad med kortet Så svarar vi.", roll: "Att visa svar på din text, och låta eleven välja vad hen gör med svaret.", vidare: "nästan alla svar säger något om innehållet", fraga: "Sa nästan alla svar något om innehållet?" }
+uppfoljning:
+  text: Du ser om metoden fungerar på det eleverna skriver och på vad som händer med texterna.
+  rader:
+    - { id: lektionen, nar: Varje lektion, tid: varje lektion, vad: "Det du läser över axeln avgör Nästa steg. En gång i veckan avgör fem böcker hur nästa lektion börjar." }
+    - { id: klassen, nar: Klassens texter varje vecka, tid: varje vecka, vad: "Räkna hur många av sex böcker som saknar ett svar som håller. Bocka av på klasslistan vems bok du läste och vems rad som stod på tavlan." }
+    - { id: lararen, nar: Dina kryss varje vecka, tid: varje vecka, vad: "Räkna på din planering hur ofta kärnans fyra delar fanns. Den som föll bort visar vad du ska öva." }
+    - { id: observationerna, nar: "Vecka 2 och 4", tid: vecka 2 och 4, vad: "Specialläraren ser en lektion i vecka 2 och läser böckerna från dem som inte kommer igång. I vecka 4 ser en kollega eller rektor en lektion som börjar med en elevs rad." }
+    - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "På första mötet tar ni varsin lektion och byter frågan tills den inte går att återge." }
+    - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "I slutet av vecka 5 ses ni med tre elevtexter utan namn och bestämmer hur ni går vidare." }
+    - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "Ni ses två gånger till under läsåret med tre texter utan namn. Elever som inte kommer igång eller bara återger trots stödet får stödundervisning. Läs deras skrivböcker med specialläraren." }
+    - { id: sexveckor, nar: Sex skolveckor efter vecka 5, tid: efter 6 veckor, vad: "Räkna som varje vecka. En kollega läser raderna i annan färg i sex böcker på måfå, och klassen vet det. Har alla fått välja en rad att dela?" }
+    - { id: nastatermin, nar: Nästa termin, tid: nästa termin, vad: "Räkna som varje vecka, och se om ni skriver för att tänka i fler ämnen. Går eleverna tillbaka till sina texter utan att du säger till? Bestäm med rektor hur ni går vidare." }
+    - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen ”Hur säker är jag på metoden?” under 5 i två veckor i rad, gör om veckan och be en kollega läsa din fråga." }
+    - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen ”Hur väl fungerar den i praktiken?” under 5 i två veckor i rad, gå tillbaka till en mening för axelkompisen och be specialläraren se en lektion." }
+checklista:
+  rubrik: Före första lektionen
+  punkter:
+    - Välj ämnet och lektionerna i veckan där klassen skriver.
+    - Ge varje elev en skrivbok och en penna att ha framme, och från vecka 3 en penna i annan färg.
+    - Skriv ut Rutan på tavlan och När jag fastnar, båda i A3.
+    - Ta fram ett skrivkort till första lektionen och pröva frågan själv i två minuter.
+    - Bestäm paren, och var du börjar din runda.
+    - Säg till rektor, vårdnadshavare och klassen att du inte rättar böckerna, och varför.
+    - Boka observationerna, en av dem med specialläraren.
+    - Bestäm med arbetslaget vad ni gör lika, som rutan och stjärnan.
+klassen:
+  rubrik: Så ordnar du klassen
+  text: "Du bestämmer paren före lektionen, och de sitter nära varandra med skrivboken framme. Den som brukar bli sittande sitter där du börjar din runda, bredvid en trygg kamrat. Klassen kan gärna skriva några egna regler, som ”Vi lyssnar när någon läser”, och gå tillbaka till dem. En bok per elev räcker hos klassläraren, och hos ämnesläraren en bok per ämne eller ett häfte för arbetsområdet."
+forsta:
+  rubrik: Första lektionen
+  text:
+    - "Du håller din lektion, och sista kvarten övar ni rutinen Stanna och skriv på ett skrivkort, en bild att skriva om. Då tänker klassen på rutinen, och inget kan bli fel. Visa kortet, fyll i rutan, skriv själv en minut och tänk högt. Alla skriver tre minuter och läser en mening för axelkompisen, som tackar. Säg vad du läste, och skriv en elevs mening på tavlan om hen säger ja. I dag räknar du bara tomma böcker. Nästa lektion stannar du en gång: ”Skriv tre ord från i dag. Välj ett och förklara varför det är viktigt.”"
+    - "Du säger: ”Vi skriver för att ta reda på vad vi tänker. Jag vill se hur du tänker, och det här rättas inte. Jag läser över axeln, och ibland läser vi en mening för varandra.”"
+  plan:
+    klass: 5B
+    amne: NO
+    datum: mån 2/11
+    lektion: 1 av 10
+    mal: skriva tre minuter och läsa en mening för en kamrat
+    belagg: "Vad händer på bilden, och hur vet du det?"
+    blad: "ett skrivkort, skrivböcker och klockan"
+    forberett: "en mening att låna till den som behöver"
+    fore: { syfte: "komma igång", fragan: "Vad händer på bilden, och hur vet du det?", lasare: "axelkompisen", sedan: "en mening på tavlan" }
+    delar:
+      - { fas: Din planering, text: "Genomgång om vattnets tre former, stopp efter 30 min" }
+      - { fas: Stanna och skriv, text: "Skrivkortet, tre minuter" }
+      - { fas: Läsaren, text: "En mening till axelkompisen" }
+      - { fas: Nästa steg, text: "Jag läste … och en mening på tavlan" }
+    beslut: { elever: 28, deFlesta: "en mening som jag läser högt", halften: "vi skriver en mening ihop" }
+rutiner:
+  rubrik: Rutinerna klassen lär sig
+  rader:
+    - namn: Stanna och skriv
+      vecka: 1
+      vad: "Tanken är att alla tänker med pennan innan någon annan har sagt något. Du stannar, alla skriver till klockan ringer, och var och en läser en mening för axelkompisen."
+      steg: ["Öppna boken och titta på rutan.", "Klockan går, och alla skriver.", "Skriv vidare, och stryk över fel.", "Välj en mening, och läs den för axelkompisen.", "Du som lyssnar säger: ”Tack för att du läste.”"]
+      forsta: "Ta ett skrivkort från sidan Ta fram ett skrivkort. Skriv själv och tänk högt en minut, så att klassen ser att det får gå fort och att du stryker över."
+    - namn: Två texter
+      vecka: 2
+      vad: "Tanken är att eleverna ser vad en förklaring gör innan de skriver själva. Välj ett syfte som håller hela arbetsområdet, till exempel förklara varför i NO eller jämföra i SO. En gång per arbetsområde visar du två egna texter."
+      steg: ["Skriv två egna korta texter bredvid varandra.", "”Vad gör den andra texten som den första inte gör?”", "Paren säger det, och du skriver deras ord. De blir klassens ord att låna.", "Klassen skriver ihop en mening om något nytt.", "Alla skriver själva om dagens fråga."]
+      forsta: "Ta något annat än dagens fråga, som en pöl som fryser: ”Det var kallt. Pölen frös.” och ”Pölen frös för att det var under noll grader.” Använd aldrig en elevs text som det svaga exemplet."
+    - namn: Byt böcker
+      vecka: 3
+      vad: "Tanken är att varje text får en läsare samma lektion, och att eleven får veta vad texten redan gör. Läsaren rättar inget och drar en linje där texten gör det rutan säger. Sedan tar eleven en annan penna och skriver en rad till. Saknas linjen, ska raden göra det rutan säger."
+      steg: ["Byt bok med din axelkompis.", "Läs tyst, och dra en linje där texten gör det rutan säger.", "Säg: ”Jag läste att du …”", "Ta tillbaka din bok.", "Ta en annan penna, och skriv en rad till: det som saknas, eller ”Nu tänker jag …”"]
+      forsta: "Öva på en text ni redan har skrivit. Visa först på din egen: en elev säger vad hen läste, och du skriver en rad till. Säg att handstilen behöver gå att läsa, och att den som vill ha något för sig själv får vika sidan."
+    - namn: Stjärnan
+      vecka: 4
+      vad: "Tanken är att eleven väljer vad som går vidare, och att du slipper leta i hela texten. Stjärnan betyder att du får använda raden i klassen, med namn. En ring runt stjärnan betyder utan namn, och utan stjärna stannar raden hos eleven."
+      steg: ["Läs din text.", "Sätt en stjärna vid raden du vill ta med.", "Ring runt stjärnan om du vill vara utan namn.", "Lämna boken uppslagen på bänken."]
+      forsta: "Visa först din egen stjärna, och läs raden högt. Säg vad stjärnan betyder: ”En rad med stjärna kan bli klassens nästa fråga.”"
+    - namn: Svara skriftligt
+      vecka: 5
+      vad: "Tanken är att eleverna skriver för att ge svar, och att svaret gäller innehållet. Eleven läser en kamrats rad och skriver en rad under. Skribenten väljer själv vad hen gör med svaret."
+      steg: ["Läs kamratens rad.", "Skriv: ”Jag läser att …”", "Skriv: ”Jag undrar …”", "Lämna tillbaka boken.", "Läs svaret, och skriv en rad till eller låt texten stå."]
+      forsta: "Låt alla svara på en text du har skrivit själv, så att ingen blir bedömd. Säg vad du gör med svaren. Sedan svarar de varandra."
+larandet:
+  rubrik: Så syns lärandet i klassen
+  omraden:
+    - { omrade: amneskunskaper, syns: "Fler elever förklarar ett varför eller ett samband med egna ord och använder ämnets ord rätt." }
+    - { omrade: skrivning, syns: "Fler elever skriver med ett syfte, och texterna säger mer än det ni gjorde." }
+    - { omrade: sprak, syns: "Fler elever använder på egen hand formuleringar som ”det beror på” och ”en möjlig förklaring är”." }
+    - { omrade: kommunikation, syns: "Fler elever läser vad en kamrat har skrivit och svarar på innehållet." }
+uppdrag:
+  rubrik: Till arbetslaget
+  text: "Arbeta helst i ämnesgrupper, där ni talar om undervisningen och inte om enskilda elever. Ni ses två gånger de första veckorna, och mellan mötena prövar ni metoden i era klassrum och besöker varandra. De första försöken misslyckas ofta, och en del behöver längre tid. Be rektor säga ja till att de här texterna inte rättas."
+  forbered:
+    text: Läs lathundens sida 1 och 2, och tänk igenom frågorna före mötet. Ta med en lektion du redan har planerat.
+    fragor:
+      - Tänk på den senaste skrivuppgiften du gav. Vem var egentligen läsaren, och vad hände med texten?
+      - Vilket slags tänkande ska skrivandet hjälpa eleverna med i ditt ämne?
+      - När tror du att samtalet når fler än skrivandet, och vilka deltar då?
+      - "Titta på huvudfilmen: vad händer med det eleverna skrev?"
+  planera: "Skriv tre rader på lektionen du tog med, och gör om frågan tillsammans med en kollega tills svaret inte går att återge."
+  genomfor: Pröva veckans sak flera gånger med en klass innan du lägger till nästa, och skatta i slutet av veckan.
+  reflektera: ["Vad hände med elevernas vilja att dela?", "Vilken text ändrade din nästa lektion?", "Vilken fråga fick dem att tänka, och på vilken räckte det att återge?", "Vad är klokt för dig att göra nu?"]
+  taMed: "Ta med din planering med dina kryss och tre elevtexter utan namn: en där eleven tänker, en där hen återger och en du inte vet vad du gör med."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 4 Håll i
+# ---------------------------------------------------------------------------------------------------------------------
+lararensFragor:
+  rubrik: Lärarens frågor
+  fragor:
+    - { fraga: "Får jag rätta stavningen?", svar: "Inte i de här texterna. De bedöms inte, och när du rättar går elevens tanke till stavningen. Ser du samma fel hos många tar du det med klassen en annan gång.", komponent: Alla skriver för att tänka }
+    - { fraga: "Får jag låta texten stanna hos eleven?", svar: "Ja, ibland. Säg det i förväg. Minst en gång i veckan läser någon annan.", komponent: Eleven vet vem som läser }
+    - { fraga: "Måste jag göra något med alla texter?", svar: "Nej. Du väljer en väg varje gång: en rad till, en rad på tavlan eller nästa lektions fråga. Från vecka 3 skriver alla en rad till varje vecka.", komponent: Texten tar lektionen vidare }
+    - { fraga: "Hur hinner jag läsa 28 texter?", svar: "Du läser inte alla. Du läser sex i rundan, kamraten de flesta, och från vecka 4 fem böcker i veckan på fem minuter. Du tar inget hem." }
+    - { fraga: "Hur hinner jag kursen?", svar: "Lagret tar omkring tolv minuter och ersätter en del av genomgången. Eleverna skriver om ditt innehåll, och då lär de sig det bättre (Skolforskningsinstitutet, 2022)." }
+    - { fraga: "Jag är ingen svensklärare. Kan jag ändå?", svar: "Ja. Du svarar på innehållet, och det kan du. Studierna gäller NO, SO och matematik (Skolforskningsinstitutet, 2022)." }
+hinder:
+  rubrik: Det svåraste med metoden
+  text: "Det svåraste är att använda texten också när tiden är knapp. Utan det blir skrivandet en bok som ingen öppnar: i tio klasser i åk 5 var uppgifterna ofta enkla, resultaten steg inte under året, och fyra av tio lärare svarade (Ruiz-Primo m.fl., 2002). I svenska klassrum skriver eleverna mest för läraren (Sturk, 2022). Bestäm före skrivandet vem som läser och vad som händer sedan, och låt eleverna vara läsare de flesta gånger. När tiden tar slut börjar nästa lektion med texten."
+  kort: "Det som oftast försvinner är att någon använder texten. Bestäm före skrivandet vem som läser och vad som händer sedan."
+  komponent: Texten tar lektionen vidare
+fallgropar:
+  rubrik: Vanliga fallgropar
+  rader:
+    - { fallgrop: "Skriv vad du lärde dig", hander: "Eleverna skriver vad de gjorde, eller ingenting.", prova: "Be om ett varför eller ett val. Går svaret att återge, byt frågan.", komponent: En fråga som kräver tänkande }
+    - { fallgrop: "Du rättar i stunden", hander: "Eleverna frågar om längd och stavning och slutar skriva. En elev som får höra att inledningen är för personlig suddar ut den.", prova: "Bestäm först vad du svarar på, och säg vad du läser.", komponent: Alla skriver för att tänka }
+    - { fallgrop: "Du är den enda läsaren", hander: "Eleverna skriver för att visa vad de kan, och du får 28 texter att läsa.", prova: "Fyll i Vem läser, och låt kamraten läsa de flesta gånger.", komponent: Eleven vet vem som läser }
+    - { fallgrop: "Lådan", hander: "Eleverna stänger boken och märker att ingen läser.", prova: "Bestäm fortsättningen innan pennan rör sig. En rad till räcker.", komponent: Texten tar lektionen vidare }
+    - { fallgrop: "Skrivkortet blir kvar", hander: "Kortet blir en startuppgift utan ämne. Eleverna skriver mer, och ämnet står stilla.", prova: "Använd kortet första lektionen. Sedan skriver ni om ämnet, och kortet kommer tillbaka med en fråga om det." }
+    - fallgrop: När en elev inte skriver
+      moment: [Stanna och skriv]
+      hander: Eleven sitter med pennan stilla, och de andra skriver.
+      steg: ["Gå fram och tala lågt: ”Vad tänker du på?”", "Skriv elevens ord som första rad: ”Det är dina ord.”", "Säger eleven inget, ge en mening att låna. En skiss eller några ord räcker.", "Kom tillbaka efter en minut."]
+    - fallgrop: När en elev inte vill läsa
+      moment: [Läsaren]
+      hander: Eleven lägger armen över texten och vill inte visa den.
+      steg: ["Låt eleven välja vem som får läsa.", "Säg att ett ord räcker.", "Låt en kamrat läsa upp.", "Säg inget om eleven står över."]
+    - fallgrop: När något inte går att dela
+      moment: [Läsaren]
+      hander: En text berättar något allvarligt, eller något som kan såra någon.
+      steg: ["Låt texten stanna hos eleven: ”Den här går inte vidare till kamraten.”", "Tala enskilt med eleven.", "Lova aldrig att ingen läser.", "Följ skolans rutin om en elev far illa."]
+hallFast:
+  rubrik: Fem saker att hålla fast vid
+  rader:
+    - { sak: "När provet närmar sig: låt eleverna förklara", text: "Inför ett prov återger eleverna lätt. Låt dem förklara, jämföra eller motivera också när provet frågar efter fakta." }
+    - { sak: "Efter ett lov: börja med skrivboken", text: "Samma plats i lektionen och samma första uppgift gör att ni slipper lära om. Eleverna läser en gammal text och skriver en rad till." }
+    - { sak: "När en kollega tar över: lämna rutan", text: "Utan dig skriver få elever. Med rutan och frågan på tavlan går rutinen ändå." }
+    - { sak: "När arbetsområdet byts: skriv igen, och byt fråga", text: "Eleven läser en gammal text och skriver igen om samma fråga. Sedan byter du frågorna, eftersom gamla frågor slits ut på en termin och lånade ord som står kvar blir ifyllnad." }
+    - { sak: "När du inte hinner läsa: håll i de fem minuterna", text: "Att ändra lektionen efter elevernas texter är det som faller bort först. Skriv in fem minuter i veckan i kalendern." }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga A Att skriva ut
+# ---------------------------------------------------------------------------------------------------------------------
+ramar:
+  rubrik: Materialet för klassen
+  text: ["Utöver lektionskortet finns Rutan på tavlan, affischen När jag fastnar, kortet Så svarar vi och sex idékort. Skrivkorten hämtar du på sidan Ta fram ett skrivkort."]
+  ramar:
+    - rubrik: Rutan på tavlan
+      text: ["Skriv ut Rutan på tavlan i A3 och sätt upp den vid tavlan, eller rita den där. Fyll i den varje gång ni stannar, med tuschpenna på plast eller på tavlan bredvid."]
+    - rubrik: När jag fastnar
+      text: ["Skriv ut affischen i A3 och sätt upp den där alla ser den. Peka på den när en elev frågar vad hen ska göra. Klassen kan skriva om den med egna ord."]
+    - rubrik: Så svarar vi
+      text: ["Skriv ut kortet och klipp isär det, ett kort per par från vecka 5. Korten är ett lån: orden ska bli elevernas egna, och när klassen klarar sig tar du bort dem."]
+    - rubrik: Idékorten
+      text: ["Skriv ut korten dubbelsidigt och klipp på linjen, så får du sex halvkort. Skriv kortets ord i rutan, eller ett skarpare verb som förklara varför, och läs uppslaget på baksidan högt för klassen. Ta fram korten när de fem veckorna är gjorda."]
+tabeller:
+  - rubrik: Vad händer sedan
+    plats: efter-inledning
+    meny: true
+    text: "Fältet Sedan i rutan säger vad som händer med texten. Välj innan pennan rör sig. Det första sättet räcker ibland, och du behöver inte gå längre ned i listan."
+    kolumner: [Sättet, Så gör ni, Tid]
+    rader:
+      - ["Eleven läser sin egen text", "Eleven läser texten igen, stryker under en rad och skriver en rad till.", "1 min"]
+      - ["En mening till axelkompisen", "Eleven väljer en mening och läser den. Kamraten tackar.", "2 min"]
+      - ["Byt böcker", "Eleverna läser tyst, drar en linje och säger vad de läste.", "3 min"]
+      - ["Svara skriftligt", "Eleven svarar: ”Jag läser att … Jag undrar …”", "3 min"]
+      - ["Du lyfter två rader", "Du frågar om du får ta raderna och skriver dem på tavlan.", "2 min"]
+      - ["En elevs rad blir frågan", "Nästa lektion står raden på tavlan, och alla skriver två minuter om den.", "3–⁠5 min"]
+      - ["Till den som var borta", "Paren skriver en lapp och förklarar lektionen för någon som inte var här.", "3 min"]
+      - ["En läsare utanför klassen", "Texten går till någon som har lovat svara.", "En gång per arbetsområde"]
+      - ["Skriv igen", "Eleven läser en gammal text och skriver igen om samma fråga: ”Vad tänker du nu?”", "5 min, en gång per arbetsområde"]
+  - rubrik: Tanken bakom greppen
+    plats: efter-inledning
+    text: "Vet du varför du använder ett grepp, kan du ändra formen och ändå behålla tanken."
+    kolumner: [Greppet, Det ger dig, Det ger eleven]
+    rader:
+      - ["Rutan på tavlan", "Du bestämmer vem som läser och vad som händer innan pennan rör sig.", "Eleven vet vad texten är till för och vem som läser."]
+      - ["Du skriver första minuten", "Du visar att det får gå fort.", "Eleven ser hur en tanke blir text."]
+      - ["Två texter bredvid varandra", "Du slipper förklara vad en förklaring är.", "Eleven ser vad texten behöver göra innan hen skriver."]
+      - ["Läsa över axeln", "Du ser vad klassen tänker medan du hinner ändra något.", "Eleven märker att någon vill veta vad som står."]
+      - ["En rad till i annan färg", "Du ser vad som ändrades, och läser bara den raden.", "Eleven ser att hen har tänkt vidare, och att det räknas att ändra sig."]
+      - ["Stjärnan", "Du läser en rad i stället för en text.", "Eleven väljer själv vad som går vidare."]
+      - ["Elevens rad som fråga", "Du får en färdig fråga och klassen med dig.", "Eleven ser sin tanke bli det hela klassen tänker på."]
+  - rubrik: Skriv för att
+    plats: efter-progression
+    text: "Fältet Skriv för att säger vad texten är till för. Varje rad är ett av idékorten i Materialet, med sex sätt att skriva och dela på baksidan. Det är frågan som avgör vad eleverna lär sig. Skriv och säg en egen mening först, så att eleverna hör hur det låter. Orden är ett lån, och de ska bort när klassen klarar sig."
+    kolumner: [Skriv för att, Du visar hur man, Ord att låna]
+    rader:
+      - ["väcka tankar", "skriver vad man vet och undrar, innan svaret finns", "jag tror att, jag undrar, tänk om"]
+      - ["minnas", "sammanfattar med egna ord, med boken stängd", "det hänger ihop med, det viktigaste är, med andra ord"]
+      - ["resonera", "förklarar, jämför eller tar ställning, och ger ett skäl", "därför att, det beror på, å andra sidan"]
+      - ["se vad du förstår", "säger vad man förstår, och var det tar stopp", "jag förstår att, men inte varför, nästa gång"]
+      - ["ge respons", "säger vad man läser i kamratens text, och frågar", "jag läser att, jag undrar, du får mig att tänka på"]
+      - ["delta", "skriver till någon som ska svara eller göra något", "vi föreslår, vi vill veta, därför tycker vi"]
+  - rubrik: Skrivfrågor att låna
+    plats: efter-progression
+    meny: true
+    text: "Pröva så här: går det att svara genom att skriva av eller berätta vad ni gjorde? Byt då frågan, och be om ett varför, ett val eller ett eget exempel."
+    kolumner: [Ämnet, Svaret går att återge, Kräver tänkande]
+    rader:
+      - ["Läsning", "Vad handlade det om?", "Vilken mening fastnade du för, och varför?"]
+      - ["Svenska", "Vad är en insändare?", "Vad tycker du, och vad skulle någon som inte håller med säga?"]
+      - ["Matematik", "Räkna ut svaret.", "Förklara din strategi så att en kamrat kan följa den."]
+      - ["NO", "Vad heter det när vatten blir ånga?", "Vart tog vattnet vägen? Skriv vad vi såg och varför."]
+      - ["SO", "När var vikingatiden?", "Varför tror du att folk flyttade till Birka?"]
+      - ["Engelska och moderna språk", "Översätt orden.", "Vilket ord behöver du mest i dag, och varför? Skriv på svenska eller på språket."]
+      - ["Idrott och hälsa", "Vilka regler gäller?", "Vad hände med din puls, och vad kan det bero på?"]
+      - ["Bild, slöjd och musik", "Vad heter tekniken?", "Vilket val gjorde du, och varför?"]
+      - ["Alla ämnen", "Skriv vad vi gjorde.", "Vad förstår du inte än, och hur kan du ta reda på det?"]
+  - rubrik: Att skriva för att delta
+    plats: efter-progression
+    text: "Skrivande är ett verktyg för tanken och ett sätt att delta demokratiskt. När eleven ser sin tanke på tavlan, får svar eller vet att någon läser, märker hen att ord kan göra något och får färga världen med sina tankar. Börja nära, med en rad som klassen tänker på och sedan en läsare på skolan. Fråga först om mottagaren kan svara: ett litet ja från vaktmästaren ger mer än ett uteblivet svar från kommunhuset. Innan ni skickar texten frågar ni er: Vad vet vi säkert? Vem ska läsa, och vad behöver hen förstå? Vad vill vi att hen ska göra eller svara på?"
+    kolumner: [Nivån, Så kan det se ut, Vem svarar]
+    rader:
+      - ["I klassen", "En elevs rad blir klassens fråga.", "Klassen"]
+      - ["I skolan", "Ett förslag om skolgården, matsalen eller biblioteket.", "Elevrådet, vaktmästaren eller rektor"]
+      - ["Hemma och i närheten", "Ett brev hem, eller en förklaring till en yngre klass.", "Någon hemma eller den andra klassen"]
+      - ["Utanför skolan", "En insändare eller en fråga till en politiker.", "Någon som har lovat svara"]
+  - rubrik: Utveckla metoden
+    plats: efter-grund
+    text: "När grunden sitter kan du bygga på med en sak i taget. Lektionens innehåll går först, och greppet är ett hjälpmedel."
+    kolumner: [Det du bygger på, Så gör du]
+    rader:
+      - ["Idékorten", "Ta fram ett kort i taget och pröva ett uppslag i veckan. Kortet ger fältet Skriv för att, och uppslaget säger hur texten delas. I F–⁠3 passar tärningarna om ämnet, Frågetärningen och Vems ögon."]
+      - ["Klassen väljer med pennan", "Böckerna går två platser åt höger, uppslagna vid raden med stjärna, och eleverna drar ett streck i kanten om de vill tänka på raden. Läsaren läser upp raden med streck, och du väljer en."]
+      - ["Kan vi stanna och skriva?", "En elev får be om ett stopp, en gång per lektion."]
+      - ["Frågelappar som flyttas", "Eleverna sätter sina frågor på tavlan, och klassen flyttar upp lappen när den kan visa svaret."]
+      - ["Tänka, samtala, skriva", "Klassen samtalar, du bygger en tankebank på tavlan, och var och en skriver sin text. Det tar omkring 20 minuter."]
+planeringsmall:
+  text: "Planeringsmallen är ingen ny planering. Skriv på den du har, eller på bladet när du vill. Det räcker med tre rader: var du stannar, frågan, och vem som läser och vad som händer sedan."
+  fore:
+    - { etikett: "Skrivfrågan", rader: ["Skriv för att:", "Ordagrant:"], falt: [syfte, fragan] }
+    - { etikett: "Efter skrivandet", rader: ["Vem läser:", "Vad händer sedan:"], falt: [lasare, sedan] }
+  delar:
+    - { fas: Tillbaka till texten, skriv: "Elevens rad:", hojd: 0.7 }
+    - { fas: Din planering, skriv: "En rad om det jag har planerat, och var jag stannar:", hojd: 0.8 }
+    - { fas: Stanna och skriv, skriv: "Minuter:", not: "Skriv första minuten, gå rundan, läs sex böcker och räkna tomt, bara det ni gjorde eller fel i sak. Första lektionen: bara tomt.", hojd: 0.9 }
+    - { fas: Läsaren, skriv: "Så läser vi:", hojd: 0.7 }
+    - { fas: Nästa steg, skriv: "Så använder vi texten:", not: "Säg: Jag läste … Därför …", hojd: 0.9 }
+  beslut: { deFlesta: "Raderna jag lyfter:", halften: "Mina två texter:" }
+  efter:
+    text: "Fyll i samma dag, och en gång i veckan efter de fem böckerna."
+    kontrollen: "Utan ett svar som håller: ___"
+    hogar: "Böckerna jag läste: ___"
+    sag: "Elevernas ord"
+    nasta: "Nästa lektion börjar med"
+    forst: "Jag går först till"
+  overst: ["Skrivfrågan, och vem som läser"]
+  kolumner: ["Vad jag gör och vad eleverna skriver"]
+  sist: ["Efter lektionen: det jag läste, med elevernas ord", Nästa lektion]
+observation:
+  fraga: Vem läser texten, och vad händer sedan?
+  text: "Skriv ut dubbelsidigt, och välj med läraren två elever att följa, A och B, gärna en som brukar bli sittande. Stå där du ser böckerna. Skriv frågan ordagrant, räkna hur många som kommer igång, och skriv ner en elevmening. Fråga två elever vem som läser. Efteråt läser du sex böcker, och eleverna vet det."
+  fokus: Krävde min fråga mer än att återge?
+  huvud: ["Vem läser, och vad händer sedan"]
+  kolumner:
+    - { namn: Läraren frågar och säger, text: "frågan ordagrant, och det läraren säger", bredd: 30 }
+    - { namn: Alla skriver, text: "skriver · tomt · annat", bredd: 13, elever: true }
+    - { namn: Med texten, text: "vem som läser, och vad som händer med det som står", bredd: 34 }
+  tecken: "+ skriver egna ord, 0 tomt, g bara det de gjorde, s skriver av."
+  delar:
+    - { fas: Tillbaka till texten, rader: 1, rakna: "Lektionen började med en elevs rad: ja · nej" }
+    - { fas: Din planering, rader: 1, rakna: "Stannade: ___ gånger" }
+    - { fas: Stanna och skriv, rader: 2, rakna: "Minuter: ___   Igång inom en minut: ___ av ___   Utan ett svar som håller: ___ av ___" }
+    - { fas: Läsaren, rader: 2, rakna: "Läste eller fick sin text läst: ___ av ___   Talade om innehållet: ___ av ___ par" }
+    - { fas: Nästa steg, rader: 2, rakna: "Elevernas ord på tavlan: ___   Utfallet av sex böcker: högst 1 · 2 · 3 eller fler" }
+  streck:
+    - { etikett: Medan eleverna skriver, drag: ["Läraren svarar på innehållet", "Läraren svarar på form, längd eller stavning", "Läraren hjälper en elev igång", "Läraren skriver själv"] }
+  rader:
+    - "Frågan krävde tänkande: ja · nej. Läraren hade visat ett svar: ja · nej. Gjorde det frågan bad om: __ av __"
+    - "Skrev med egna ord: __ av __. Skriv en mening ordagrant"
+    - "Eleverna kunde säga vem som läser: __ av __. Läsaren svarade på tanken: ja · nej"
+    - "Skriv vad som hände med texterna. Böcker med en rad i annan färg i veckan, från vecka 3: __ av 6"
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Bilaga B Valet och forskningen
+# ---------------------------------------------------------------------------------------------------------------------
+passar:
+  rubrik: När passar metoden?
+  kort: "eleverna ska reda ut ett innehåll med egna ord. Ska de minnas det säkert, välj Testbaserat lärande."
+  rader:
+    - { fraga: "Vad ska eleverna göra med innehållet?", metoden: "Reda ut, förklara, jämföra eller ta ställning.", annat: "Minnas det säkert. Då passar Testbaserat lärande, där eleverna svarar ur minnet och får ett facit." }
+    - { fraga: "Vad vill du se?", metoden: "Hur de tänker, och att texten lever vidare.", annat: "Rätt eller fel på en minut. Då passar Formativ bedömning." }
+    - { fraga: "Är innehållet nytt?", metoden: "Klassen har något att säga, efter en genomgång, en text eller ett försök.", annat: "Ett nytt steg eller en procedur. Då passar Explicit undervisning, och eleverna skriver sedan." }
+    - { fraga: "Vad ska ni läsa?", metoden: "Elevernas egna texter.", annat: "En svår text. Då passar Reciprok undervisning." }
+    - { fraga: "Vill du ha fler med i samtalet?", metoden: "Skriv före samtalet, så att alla har något att säga.", annat: "Strukturer fördelar turerna i Kooperativt lärande, och metoderna går ihop." }
+    - { fraga: "Är det skrivförmågan du vill utveckla?", metoden: "Målet ligger i ämnet, och skrivandet är ett verktyg.", annat: "Kortskrivning ger skrivflyt och mod i en grupp, och skrivkurserna i Stödundervisning ger texttyper." }
+  tumregel: Fråga dig vem som läser och vad som händer sedan. Har du inget svar, är det något annat du behöver. Tabellen är ett stöd för tanken och ingen regel.
+  metoder: [testbaserat-larande, formativ-bedomning, explicit-undervisning, reciprok-undervisning, kooperativt-larande]
+invandningar:
+  rubrik: Invändningar och nyanser
+  fragor:
+    - { fraga: "Lär man sig verkligen något av att skriva, eller blir det bara mer text?", svar: "Ja, i genomsnitt: eleverna lärde sig mer i 56 studier (Graham m.fl., 2020). Skrivandet gör det inte av sig självt, och omkring var femte studie gav ingen vinst (van Dijk m.fl., 2022). Det eleven gör med innehållet verkar avgöra. För att bli bättre på att skriva räcker det inte heller att bara skriva mer (Skar m.fl., 2024). Därför kommer skrivfrågan först, och därför visar du hur." }
+    - { fraga: "Vidgar det inte klyftan när alla ska skriva själva?", svar: "Det kan det göra. Elever som behöver stöd fick stor effekt i tolv studier, men ingen effekt när ingen visade dem hur (Graham och Hebert, 2010). Därför visar du först, och den som behöver det får säga sin tanke innan hen skriver." }
+    - { fraga: "Är det inte bara en exit-lapp?", svar: "Nej. Exit-lappen går till dig och är ditt underlag. Här är texten också elevens: den stannar i boken, någon läser den, och en elevs rad kan bli klassens fråga." }
+    - { fraga: "Vad gör jag med AI?", svar: "Eleverna skriver på lektionen, för hand eller på sin skärm, så att tanken är deras. Använder ni AI gäller ordningen: eleven först, AI sedan, eleven sist." }
+grund:
+  rubrik: Det forskningen visar
+  text:
+    - "Elever som skriver om ett innehåll lär sig det bättre. I 56 studier, de flesta i USA, skrev elever 6–17 år i NO, SO och matematik. Effekten var g = 0,30, och 0,21 i de lottade studierna (Graham m.fl., 2020). Omkring var femte studie gav ingen vinst (van Dijk m.fl., 2022). Effekten skiljer sig inte säkert mellan ämnena och åldrarna, och är 0,29 för 6–10 år (Skolforskningsinstitutet, 2022). Att skriva om lästa texter gav 0,40 på normerade läsprov i åk 2–12 (Graham och Hebert, 2010)."
+    - "Det är inte vilket skrivande som helst. Uppgifter där eleverna analyserar, tolkar och tänker över sin egen förståelse brukar ge mer än uppgifter där de återger, men skillnaderna mellan studier är inte säkra (Graham m.fl., 2020). Experiment med lärjournaler, mest på högskolan, visar att frågor ger mer lärande (Nückles m.fl., 2020). Ingen studie har prövat några minuter flera gånger i veckan."
+    - "Eleverna utvecklar sitt skrivande när de skriver om det de läser och lär sig, och när läraren också undervisar i skrivande. Program där eleverna i åk 6–12 skriver om lästa källor gav 0,10–0,53 på oberoende skrivprov (Slavin m.fl., 2019). I åk 1–⁠2 gav undervisning i NO och SO 0,24 och 0,44 på argumenterande skrivande (Kim m.fl., 2021), och i Norge gav skrivande i alla ämnen en säker effekt med start i åk 3 men inte med start i åk 6 (Berge m.fl., 2019). Mer skrivande för verkliga syften utan undervisning gav ingen säker skillnad i åk 1–⁠2 (Skar m.fl., 2024)."
+    - "Att skriva för en läsare är prövat i en liten studie (Gunel m.fl., 2009). Ingen studie har prövat om eleverna lär sig mer när läraren använder texten. Tanken bygger på praktiken och på böcker utan svar (Ruiz-Primo m.fl., 2002). Skolforskningsinstitutet (2022) hittade ingen mer omfattande svensk interventionsstudie. I praktisk-estetiska ämnen finns ingen studie med jämförelsegrupp, och svenska ingår inte i Graham m.fl. (2020). Att eleverna deltar genom sina texter bygger på läroplanen och är inte mätt."
+kallor:
+  - { id: graham-m-fl-2020, doi: "10.3102/0034654320914744", slag: metaanalys, grupp: oversikt, omraden: [larande, matematik, amnen], strang: true, stor: false, las: sammanfattning, fohlin: false, effekt: "Måttlig effekt: g = 0,30 i 56 studier, NO, SO och matematik", titel: "The effects of writing on learning in science, social studies, and mathematics: A meta-analysis", text: "Graham, S., Kiuhara, S. A. och MacKay, M. (2020). The effects of writing on learning in science, social studies, and mathematics: A meta-analysis. Review of Educational Research.", adress: "https://doi.org/10.3102/0034654320914744", oppnad: 2026-11-07 }
+  - { id: graham-och-hebert-2010, doi: "10.17763/haer.81.4.t2k0m13756113566", eric: EJ961480, slag: metaanalys, grupp: oversikt, omraden: [lasning], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Stor effekt: 0,40 på normerade läsprov i 11 studier", titel: "Writing to read: Evidence for how writing can improve reading", text: "Graham, S. och Hebert, M. (2010). Writing to read: Evidence for how writing can improve reading. Carnegie Corporation of New York. Metaanalysen finns också som artikel i Harvard Educational Review, 2011.", adress: "https://www.thewritingrevolution.org/wp-content/uploads/2017/05/Writing-to-Read.pdf", oppnad: 2026-11-07 }
+  - { id: slavin-m-fl-2019, eric: ED612219, slag: systematisk-oversikt, grupp: oversikt, omraden: [skrivning], strang: true, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,30 för Pathway och 0,18 för CRWP, oberoende skrivprov", titel: "Writing Approaches in Years 3 to 13: Evidence Review", text: "Slavin, R. E., Lake, C., Inns, A. m.fl. (2019). Writing Approaches in Years 3 to 13: Evidence Review. Education Endowment Foundation.", adress: "https://files.eric.ed.gov/fulltext/ED612219.pdf", oppnad: 2026-11-07 }
+  - { id: graham-och-perin-2007, doi: "10.1037/0022-0663.99.3.445", slag: metaanalys, grupp: oversikt, omraden: [larande], strang: false, stor: false, las: fulltext, fohlin: false, effekt: "Måttlig effekt: 0,23 för skrivande om innehåll, åk 4–12", titel: "A meta-analysis of writing instruction for adolescent students", text: "Graham, S. och Perin, D. (2007). A meta-analysis of writing instruction for adolescent students. Journal of Educational Psychology.", adress: "https://media.carnegie.org/filer_public/3c/f5/3cf58727-34f4-4140-a014-723a00ac56f7/ccny_report_2007_writing.pdf", oppnad: 2026-11-07 }
+  - { id: van-dijk-m-fl-2022, doi: "10.1002/rev3.3359", slag: systematisk-oversikt, grupp: oversikt, omraden: [], strang: false, stor: false, las: fulltext, fohlin: false, titel: "Which types of instruction in writing-to-learn lead to insight and topic knowledge in different disciplines? A review of empirical studies", text: "van Dijk, A., van Gelderen, A. och Kuiken, F. (2022). Which types of instruction in writing-to-learn lead to insight and topic knowledge in different disciplines? A review of empirical studies. Review of Education.", adress: "https://doi.org/10.1002/rev3.3359", oppnad: 2026-11-07 }
+  - { id: berge-m-fl-2019, doi: "10.1080/0969594X.2017.1330251", slag: studie, grupp: experiment, omraden: [skrivning], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Stor effekt: 0,57 från åk 3 enligt Skar m.fl. (2024). Oklart från åk 6", titel: "Introducing teachers to new semiotic tools for writing instruction and writing assessment: consequences for students' writing proficiency", text: "Berge, K. L., Skar, G. B., Matre, S. m.fl. (2019). Introducing teachers to new semiotic tools for writing instruction and writing assessment: consequences for students' writing proficiency. Assessment in Education.", adress: "https://skrivesenteret.no/wp-content/uploads/2021/02/berge_og_skar-2015-norm-rapport2.pdf", oppnad: 2026-11-07 }
+  - { id: gunel-m-fl-2009, doi: "10.1016/j.learninstruc.2008.07.001", slag: studie, grupp: experiment, omraden: [], strang: false, stor: false, las: sammanfattning, fohlin: false, effekt: "Liten effekt: bättre begreppsförståelse med kamrater som läsare, 118 elever", titel: "Writing for different audiences: Effects on high-school students' conceptual understanding of biology", text: "Gunel, M., Hand, B. och McDermott, M. A. (2009). Writing for different audiences: Effects on high-school students' conceptual understanding of biology. Learning and Instruction.", adress: "https://doi.org/10.1016/j.learninstruc.2008.07.001", oppnad: 2026-11-07 }
+  - { id: hand-m-fl-2018, doi: "10.1002/sce.21341", eric: EJ1181525, slag: studie, grupp: experiment, omraden: [amnen], strang: true, stor: true, las: sammanfattning, fohlin: false, effekt: "Inte säker: inga säkra vinster på proven i NO, 9 963 elever i 48 skolor", titel: "Improving critical thinking growth for disadvantaged groups within elementary school science: A randomized controlled trial using the Science Writing Heuristic approach", text: "Hand, B., Shelley, M. C., Laugerman, M. m.fl. (2018). Improving critical thinking growth for disadvantaged groups within elementary school science: A randomized controlled trial using the Science Writing Heuristic approach. Science Education.", adress: "https://iro.uiowa.edu/esploro/outputs/journalArticle/Improving-critical-thinking-growth-for-disadvantaged/9984083819902771", oppnad: 2026-11-07 }
+  - { id: kim-m-fl-2021, doi: "10.1007/s10648-021-09609-6", slag: studie, grupp: experiment, omraden: [skrivning, lasning], strang: true, stor: true, las: fulltext, fohlin: false, effekt: "Stor effekt: 0,24 i NO och 0,44 i SO, eget skrivprov. Inget på läsprovet", titel: "Improving elementary grade students' science and social studies vocabulary knowledge depth, reading comprehension, and argumentative writing: A conceptual replication", text: "Kim, J. S., Relyea, J. E., Burkhauser, M. A. m.fl. (2021). Improving elementary grade students' science and social studies vocabulary knowledge depth, reading comprehension, and argumentative writing: A conceptual replication. Educational Psychology Review.", adress: "https://doi.org/10.1007/s10648-021-09609-6", oppnad: 2026-11-07 }
+  - { id: skar-m-fl-2024, doi: "10.1007/s11145-023-10460-0", slag: studie, grupp: experiment, omraden: [skrivning], strang: false, stor: true, las: fulltext, fohlin: false, effekt: "Inte säker: ingen säker skillnad på textkvalitet, 1 685 elever", titel: "A longitudinal intervention study of the effects of increasing amount of meaningful writing across grades 1 and 2", text: "Skar, G. B., Graham, S., Huebner, A. m.fl. (2024). A longitudinal intervention study of the effects of increasing amount of meaningful writing across grades 1 and 2. Reading and Writing.", adress: "https://link.springer.com/content/pdf/10.1007/s11145-023-10460-0.pdf", oppnad: 2026-11-07 }
+  - { id: l-tzen-och-nielsen-2025, doi: "10.7146/lup.v10i1.149478", slag: studie, grupp: annan, omraden: [socialt], strang: false, las: fulltext, fohlin: false, bidrag: "Det skrivna ska användas, och nästan alla deltar", titel: "Lolland skriver: et studie i læreres kompetenceudvikling", text: "Lützen, P. H. och Nielsen, L. O. (2025). Lolland skriver: et studie i læreres kompetenceudvikling. Studier i læreruddannelse og -profession.", adress: "https://tidsskrift.dk/SLP/article/download/149478/197834/342270", oppnad: 2026-11-07 }
+  - { id: n-ckles-m-fl-2020, doi: "10.1007/s10648-020-09541-1", slag: artikel, grupp: annan, omraden: [], strang: false, las: fulltext, fohlin: false, bidrag: "Frågor, exempel och stöd som trappas ned i lärjournaler", titel: "The self-regulation-view in writing-to-learn: Using journal writing to optimize cognitive load in self-regulated learning", text: "Nückles, M., Roelle, J., Glogger-Frey, I. m.fl. (2020). The self-regulation-view in writing-to-learn: Using journal writing to optimize cognitive load in self-regulated learning. Educational Psychology Review.", adress: "https://link.springer.com/content/pdf/10.1007/s10648-020-09541-1.pdf", oppnad: 2026-11-07 }
+  - { id: ruiz-primo-m-fl-2002, eric: ED465806, slag: rapport, grupp: annan, omraden: [], strang: false, las: fulltext, fohlin: false, bidrag: "Texterna blev inte bättre, och fyra av tio lärare svarade", titel: "Looking into students' science notebooks: What do teachers do with them?", text: "Ruiz-Primo, M. A., Li, M. och Shavelson, R. J. (2002). Looking into students' science notebooks: What do teachers do with them? CRESST.", adress: "https://govinfo.gov/content/pkg/ERIC-ED465806/pdf/ERIC-ED465806.pdf", oppnad: 2026-11-07 }
+  - { id: skolforskningsinstitutet-2022, slag: rapport, grupp: annan, omraden: [], strang: false, las: fulltext, fohlin: false, bidrag: "Graham m.fl. (2020) på svenska, med tabellerna", titel: "Att lära genom att skriva: effekter på elevers ämneskunskaper i NO, SO och matematik", text: "Skolforskningsinstitutet (2022). Att lära genom att skriva: effekter på elevers ämneskunskaper i NO, SO och matematik. Skolforskningsinstitutet.", adress: "https://skolfi.se/forskningssammanstallningar/att-lara-genom-att-skriva/", oppnad: 2026-11-07 }
+  - { id: sturk-2022, slag: rapport, grupp: annan, omraden: [], strang: false, las: fulltext, fohlin: false, bidrag: "Skrivande i skolan är mest skrivande för skolan", titel: "Writing across the curriculum in compulsory school in Sweden", text: "Sturk, E. (2022). Writing across the curriculum in compulsory school in Sweden. Umeå universitet.", adress: "https://umu.diva-portal.org/smash/get/diva2:1654138/FULLTEXT01.pdf", oppnad: 2026-11-07 }
+lasMer:
+  - { kalla: skolforskningsinstitutet-2022, text: "Tjugo sidor på svenska med forskningen om skrivande i NO, SO och matematik." }
+  - { slag: text, titel: "Skolforskningspodden, avsnitt 25: Att skriva sig till ämneskunskaper (utskrift)", upphov: "Skolforskningsinstitutet", ar: 2024, adress: "https://www.skolfi.se/wp-content/uploads/2024/06/Transkribering-Skolforskningspodden-avsnitt-25-Att-skriva-sig-till-amneskunskaper.pdf", oppnad: 2026-11-07, text: "Forskare och lärare samtalar om skrivande i ämnena och om att eleverna ska bli hörda." }
+  - { slag: text, titel: "Skrivutveckling i alla ämnen (kemi)", upphov: "Skolverket, Lärportalen", ar: 2023, adress: "https://larportalen.skolverket.se/api/resource/P03WCPLAR166295", oppnad: 2026-11-07, text: "Ett exempel på skrivande efter en laboration, med fraskort för slutsatsen." }
+  - { slag: text, titel: "Elevers skrivande i matematik", upphov: "Teledahl, Nämnaren", ar: 2018, adress: "https://ncm.gu.se/pdf/namnaren/3436_18_1.pdf", oppnad: 2026-11-07, text: "Hur en elevs text i matematik kan se ut, med villkor, beräkning, argument och slutsats." }
+  - { slag: text, titel: "Varför ska man ens ha den?", upphov: "Nordahl m.fl., Techne Series", ar: 2025, adress: "https://journals.oslomet.no/index.php/techneA/article/download/6115/5235/35673", oppnad: 2026-11-07, text: "Vad som händer med en slöjdlogg när frågan blir bättre, och vad eleverna själva säger." }
+  - { slag: text, titel: "Idékatalog: Skrivning for læring", upphov: "Lolland skriver, Nationalt Videncenter for Læsning", ar: 2023, adress: "https://videnomlaesning.dk/media/6122/idekatalog-skrivning-for-laering.pdf", oppnad: 2026-11-07, text: "Åtta små idéer på danska, med fotade elevtexter." }
+  - { slag: bok, titel: "Skrivbaserad undervisning", upphov: "Per Blomqvist, Liber", ar: 2025, isbn: "9789147152698", text: "Om skrivgemenskapen i klassrummet och fritt skrivande, för senare år och gymnasiet." }
+
+plan:
+  passen:
+    - { nar: första lektionen, kort: Stanna och skriv, text: "Du håller din lektion, och sista kvarten övar ni rutinen Stanna och skriv med ett skrivkort. Alla skriver tre minuter och läser en mening för axelkompisen, och du skriver en mening på tavlan. Nästa lektion stannar du och ställer en fråga om innehållet." }
+  fore: ["Välj ämnet och lektionerna i veckan där klassen skriver."]
+  utvardering: ["Ni ses två gånger till under läsåret med tre texter utan namn. Elever som inte kommer igång eller bara återger trots stödet får stödundervisning. Läs deras skrivböcker med specialläraren."]
+  skattningar:
+    - namn: Hur säker är jag på metoden?
+      vem: lararen
+      rad: lararen
+      text: "Skatta i slutet av veckan. Tänk på kärnan: Krävde frågan tänkande, och hade du visat hur? Skrev alla med egna ord, och lät du bli att rätta? Sa du innan eleverna började att någon annan än du läser? Gjorde de något med texten?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: osaker }
+    - namn: Hur väl fungerar den i praktiken?
+      vem: lararen
+      rad: klassen
+      text: "Tänk på det du ser i klasserna: Förklarar fler elever ett varför med egna ord? Läser fler vad en kamrat skrev och svarar på innehållet?"
+      skala: { fran: 1, till: 10 }
+      regler:
+        - { om: under 5 i 2 veckor i rad, rad: klassenstar }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Lathunden Att komma igång
+# ---------------------------------------------------------------------------------------------------------------------
+lathund:
+  metoden:
+    text:
+      - Du stannar i din vanliga lektion och ställer en fråga, alla skriver några minuter för att ta reda på vad de tänker, någon läser, och det de skrev tar lektionen vidare.
+      - Så går lärandet till. Den som måste förklara eller ta ställning med egna ord märker vad hen förstår, och den som får en läsare ser att orden betyder något.
+  lektion:
+    text: "Sista kvarten övar ni med ett skrivkort, en bild att skriva om. Säg: ”Vi skriver för att ta reda på vad vi tänker. Jag vill se hur du tänker, och det här rättas inte.” Skriv själv en minut och tänk högt. Alla skriver tre minuter och läser en mening för axelkompisen. Skriv en elevs mening på tavlan, om hen säger ja."
+  igang:
+    rubrik: De första veckorna

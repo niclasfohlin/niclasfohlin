@@ -31,5 +31,9 @@
   "testbaserat-larande": {
     "stycket": "provbladet",
     "saker": ["Provbladet", "Så gör vi provet", "Grovplaneringen"]
+  },
+  "skriva-for-att-lara": {
+    "stycket": "Rutan på tavlan",
+    "saker": ["Rutan på tavlan", "När jag fastnar"]
   }
 }
