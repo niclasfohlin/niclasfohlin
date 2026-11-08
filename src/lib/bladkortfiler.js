@@ -17,7 +17,7 @@ export const sakensNamn = (s) => (typeof s === 'string' ? s : s.namn);
  * post säger allt, så att en bild inte kan glida isär från sin sak: ett blad är bladets sidbild, strukturkorten och
  * strategikorten är första kortet i metodens pdf, Strategibladet bladets pdf och en mall med egen fil mallens första sida.
  */
-export function metodensMinibilder(id, d, post) {
+export function metodensMinibilder(id, d, post, sidor = {}) {
   if (post.blad) {
     const tabell = (d.tabeller ?? []).find((t) => t.rubrik === post.tabell);
     return (tabell?.rader ?? []).map((r, i) => ({
@@ -33,7 +33,8 @@ export function metodensMinibilder(id, d, post) {
     const namn = sakensNamn(s);
     const bilden = (kalla, del = 'hel') => ({ namn, fil: minibildensFil(id, namn), kalla, sida: 1, del });
     const i = bladen.indexOf(namn);
-    if (i >= 0) return bilden(`public/metoder/${id}-materialet-${i + 1}.png`);
+    // Ett blad med flera sidor bredvid andra blad har sina sidor i src/data/materialets-sidor.json, och bilden är den första.
+    if (i >= 0) return bilden(`public/metoder/${id}-materialet-${sidor[id]?.[i]?.bilder?.[0] ?? i + 1}.png`);
     if (namn === 'Strukturkorten') return bilden(`public/strukturer/kort/${metodensStrukturkort(id).fil}`, 'ovre');
     if (namn === 'Strategikorten') return bilden(`public/strategier/kort/${metodensStrategikort(id).fil}`, 'ovre');
     if (namn === 'Strategibladet') return bilden(`public/strategier/kort/${metodensStrategiblad(id).fil}`);

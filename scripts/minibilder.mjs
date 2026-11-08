@@ -101,7 +101,8 @@ const gallande = new Set();
 for (const [id, post] of Object.entries(register)) {
   if (id === '_om') continue;
   const d = parse(readFileSync(join(ROT, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`), 'utf8'));
-  for (const m of metodensMinibilder(id, d, post)) {
+  const sidor = existsSync(join(ROT, 'src', 'data', 'materialets-sidor.json')) ? JSON.parse(readFileSync(join(ROT, 'src', 'data', 'materialets-sidor.json'), 'utf8')) : {};
+  for (const m of metodensMinibilder(id, d, post, sidor)) {
     if (!existsSync(join(ROT, m.kalla))) throw new Error(`${id}: minibilden ${m.namn} ska göras ur ${m.kalla}, som saknas.`);
     const nyckel = `${FORMEN}:${m.sida}:${m.del}:${summa(readFileSync(join(ROT, m.kalla)))}`;
     gallande.add(m.fil);

@@ -744,7 +744,7 @@ try {
     await skicka('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
     for (const [id, p] of Object.entries(register).filter(([k]) => !k.startsWith('_'))) {
       const d = parse(readFileSync(join(rot, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`), 'utf8'));
-      const minibilder = metodensMinibilder(id, d, p);
+      const minibilder = metodensMinibilder(id, d, p, JSON.parse(readFileSync(join(rot, 'src', 'data', 'materialets-sidor.json'), 'utf8')));
       const rader = p.blad ? (d.tabeller ?? []).find((t) => t.rubrik === p.tabell)?.rader ?? [] : [];
       const namnen = p.blad ? rader.map((x) => x[0]) : p.saker.map(sakensNamn);
       // Var varje kort ska leda, och filen som knappen där ska skriva ut. Listan står här och inte i koden, så att ett fel i koden syns.

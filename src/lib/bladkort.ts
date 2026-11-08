@@ -6,6 +6,7 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import register from '../data/bladkort.json';
+import materialetsSidor from '../data/materialets-sidor.json';
 import { MINIBILDEN, metodensMinibilder, sakensNamn } from './bladkortfiler.js';
 import { meningarna, slugAv, talText } from './standard/index.js';
 import { bladetsAnkare, type Um } from './undervisningsmetod';
@@ -65,7 +66,7 @@ function saken(d: Um, s: Sak): { rad: string; adress: string } {
 export function metodensBladkort(id: string, d: Um): Bladkort | null {
   const p = posten(id);
   if (!p) return null;
-  const bilder = metodensMinibilder(id, d, p) as { namn: string; fil: string }[];
+  const bilder = metodensMinibilder(id, d, p, materialetsSidor) as { namn: string; fil: string }[];
   const bilden = (namn: string): Bild => {
     const m = bilder.find((x) => x.namn === namn);
     if (!m || !existsSync(join(process.cwd(), 'public', 'metoder', m.fil))) throw fel(d, `saknar minibilden till ${namn}. Kör node scripts/minibilder.mjs.`);

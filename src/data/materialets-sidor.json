@@ -1,0 +1,34 @@
+{
+  "_om": "Materialets sidor per blad i Metoder, när ett blad har flera sidor i ett material med flera blad, som Idékorten i Skriva för att lära. Skrivs av scripts/metoderfiler.mjs ur bildernas namn i riggens Word-fil, och läses av metodens sida och de små korten. bilder är numren på materialets sidbilder, <id>-materialet-<n>.png.",
+  "skriva-for-att-lara": [
+    {
+      "blad": "Rutan på tavlan",
+      "bilder": [
+        1
+      ]
+    },
+    {
+      "blad": "När jag fastnar",
+      "bilder": [
+        2
+      ]
+    },
+    {
+      "blad": "Så svarar vi",
+      "bilder": [
+        3
+      ]
+    },
+    {
+      "blad": "Idékorten",
+      "bilder": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  ]
+}

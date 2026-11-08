@@ -20,6 +20,7 @@ import { metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standar
 import Vavruta from './Vavruta.astro';
 import Bladkort from './Bladkort.astro';
 import { metodensBladkort, bladkortensStycke } from '../lib/bladkort';
+import materialetsSidor from '../data/materialets-sidor.json';
 import { vavtIMetoder } from '../lib/vav';
 import { strategiernaAv, strategikortetI, provaMetodensStrategikort, metodensKortAdress as metodensStrategikortAdress, strategiensAdress, strategiernasStil, STRATEGIERNAS_ADRESS } from '../lib/strategier';
 interface Props { d: Um; id: string; extrafilmer: MetodFilm[]; filer: Record<string, UmFil | undefined>; tabellfiler?: UmFil[]; bilder: Record<string, UmBild[]>; sidor?: { titel: string; href: string }[]; saker: MetodSak[]; strukturer?: ImporteradStruktur[] }
@@ -118,7 +119,9 @@ const fraserUtanforTexten = (s: Record<string, any>): string[] => {
 };
 // Ett enda blad med flera sidor är hela materialet: en rad knappar under bladet, eftersom två knappar annars gör samma sak.
 const ettBladMedSidor = (d.ramar?.ramar ?? []).length === 1 && (bilder.materialet?.length ?? 0) > 1 && !!bladen[0]?.pdf;
-const bladetsSidor = (i: number) => ((d.ramar?.ramar ?? []).length === 1 ? bilder.materialet ?? [] : bilder.materialet?.[i] ? [bilder.materialet[i]] : []);
+// Ett blad med flera sidor bredvid andra blad, som Idékorten i Skriva för att lära, har sina sidor i src/data/materialets-sidor.json.
+const delarna = (materialetsSidor as unknown as Record<string, { blad: string; bilder: number[] }[] | undefined>)[id];
+const bladetsSidor = (i: number): UmBild[] => (delarna ? (delarna[i]?.bilder ?? []).map((n) => bilder.materialet?.[n - 1]).filter((b): b is UmBild => !!b) : (d.ramar?.ramar ?? []).length === 1 ? bilder.materialet ?? [] : bilder.materialet?.[i] ? [bilder.materialet[i]] : []);
 // Ett blad i Materialet för klassen: rubriken och texten, och i ett blad som strukturkorten listorna och delarna.
 type Ram = { rubrik: string; text: string[]; listor?: { rubrik?: string; rader: string[][] }[]; delar?: { rubrik: string; falt: { rubrik: string; text: string }[] }[] };
 // Raden under Efter de första veckorna som har samma ord som rubriken står utan sin etikett (design-3 nr 18).
