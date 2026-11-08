@@ -21,7 +21,7 @@ material:
   - bladen Rutan på tavlan och När jag fastnar
   - en klocka som alla ser
   - en penna i annan färg per elev
-  - ett skrivkort i reserv
+  - ett skrivkort i reserv från sidan Ta fram ett skrivkort
 uppdaterad: 2026-11-08
 publicerad: 2026-11-08
 relaterade: ["formativ-bedomning", "testbaserat-larande", "reciprok-undervisning", "kooperativt-larande", "kortskrivning-skriv-varje-dag", "skrivkurs-vardeskapande"]
@@ -154,7 +154,7 @@ tidsschema:
     - { tid: Efter lektionen, fas: Efter lektionen, vad: "Från vecka 4 läser du fem böcker per klass i veckan, på fem minuter. Läs raden i annan färg först, och dra en linje i kanten utan ord. Skriv en rad om hur nästa lektion börjar." }
   varianter:
     - nar: första lektionen
-      text: "Ni stannar en gång mitt i och skriver tre minuter om dagens ämne. Loggen och Skriv först kommer senare."
+      text: "Ni stannar en gång mitt i och skriver tre minuter om dagens ämne. Läsningen och det du säger tar resten av de sju minuterna. Loggen och Skriv först kommer senare."
       redo:
         nastanAlla: "Högst 5 av 28 tomma böcker, i rundan högst en av sex. Läs två meningar högt, och skriv en av dem på tavlan om eleven säger ja."
         deFlesta: "6–13 av 28, i rundan två av sex. Läs en mening högt och skriv den på tavlan, så att den som inte kom igång kan låna den."
@@ -188,7 +188,7 @@ steg:
       beslut: Börja undervisa i en tanke du läste. Tar ni inte loggen i dag, kom tillbaka till gissningen när svaret kommer.
       gor:
         - "Skriv frågan på tavlan, som ”Vad händer med vattnet när det kokar? Vad tror du, och varför?”"
-        - "Bygger lektionen på förra, skriv en rad med stjärna, med namn om ringen saknas: ”Elias skrev …” ”Stämmer det? Hur vet du?”"
+        - "Bygger lektionen på förra, skriv en rad med stjärna, med namn om den inte är inringad: ”Elias skrev …” ”Stämmer det? Hur vet du?”"
         - "Säg: ”Du läser själv, och jag läser över axeln. Det får vara fel. Vi tittar på det sedan.”"
         - "Starta klockan på två minuter, och säg inget om formen."
       fraser: ["Du läser själv, och jag läser över axeln.", "Det får vara fel. Vi tittar på det sedan.", "Elias skrev …", "Stämmer det? Hur vet du?"]
@@ -471,7 +471,7 @@ lararensFragor:
     - { fraga: "Får jag rätta stavningen?", svar: "Inte i de här texterna. De bedöms inte, och när du rättar går elevens tanke till stavningen. Ser du samma fel hos många tar du det med klassen en annan gång.", komponent: Alla skriver för att tänka }
     - { fraga: "Får jag låta texten stanna hos eleven?", svar: "Ja. I Skriv först och loggen gör den oftast det. Säg det i förväg. Minst en gång i veckan läser en kamrat i Stanna och skriv.", komponent: Eleven vet vem som läser }
     - { fraga: "Måste jag göra något med alla texter?", svar: "Nej. Du väljer en väg varje gång: en rad på tavlan, loggen eller nästa lektions fråga. Från vecka 3 skriver alla en rad i annan färg varje vecka, oftast i loggen.", komponent: Texten tar lektionen vidare }
-    - { fraga: "Hur hinner jag läsa 28 texter?", svar: "Du läser inte alla. Du läser sex i rundan, kamraten de flesta, och från vecka 4 fem böcker i veckan på fem minuter. Du tar inget hem." }
+    - { fraga: "Hur hinner jag läsa alla texter?", svar: "Du läser inte alla. Du läser sex i rundan, kamraten de flesta, och från vecka 4 fem böcker i veckan på fem minuter. Du tar inget hem." }
     - { fraga: "Hur hinner jag kursen?", svar: "Skrivandet tar 2–12 minuter av lektionen, på de ställen du väljer, och ersätter en del av genomgången. Eleverna skriver om ditt innehåll, och då lär de sig det bättre (Skolforskningsinstitutet, 2022)." }
     - { fraga: "Jag är ingen svensklärare. Kan jag ändå?", svar: "Ja. Du svarar på innehållet, och det kan du. Studierna gäller NO, SO och matematik (Skolforskningsinstitutet, 2022)." }
 hinder:
@@ -520,9 +520,9 @@ ramar:
     - rubrik: När jag fastnar
       text: ["Skriv ut affischen i A3 och sätt upp den där alla ser den. Nära eleverna räcker A4. Peka på den när en elev frågar vad hen ska göra. Klassen kan skriva om den med egna ord."]
     - rubrik: Så svarar vi
-      text: ["Skriv ut kortet och klipp isär det, ett kort per par från vecka 5. Korten är ett lån: orden ska bli elevernas egna, och när klassen klarar sig tar du bort dem."]
+      text: ["Skriv ut kortet och klipp isär det, ett kort per par från vecka 5, alltså 14 kort till en klass på 28. Korten är ett lån: orden ska bli elevernas egna, och när klassen klarar sig tar du bort dem."]
     - rubrik: Idékorten
-      text: ["Skriv ut korten dubbelsidigt, vänd längs långsidan, och klipp på linjen, så får du sex halvkort. Skriv kortets ord i rutan, eller ett skarpare verb som förklara varför, och läs uppslaget på baksidan högt för klassen. Ta fram korten när de fem veckorna är gjorda."]
+      text: ["Skriv ut korten dubbelsidigt, vänd längs långsidan, och klipp på linjen, så får du sex halvkort. En uppsättning räcker, eftersom du läser korten för klassen. Skriv kortets ord i rutan, eller ett skarpare verb som förklara varför, och läs uppslaget på baksidan högt för klassen. Ta fram korten när de fem veckorna är gjorda."]
 tabeller:
   - rubrik: Vad händer sedan
     plats: efter-inledning
@@ -570,7 +570,7 @@ tabeller:
       - ["Läsning", "Vad handlade det om?", "Vilken mening fastnade du för, och varför?"]
       - ["Svenska", "Vad är en insändare?", "Vad tycker du, och vad säger den som inte håller med?"]
       - ["Matematik", "Räkna ut svaret.", "Förklara din strategi så att en kamrat kan följa den."]
-      - ["NO", "Vad heter det när vatten blir ånga?", "Vart tog vattnet vägen? Skriv vad vi såg och varför."]
+      - ["NO och teknik", "Vad heter det när vatten blir ånga?", "Vart tog vattnet vägen? Skriv vad vi såg och varför."]
       - ["SO", "När var vikingatiden?", "Varför tror du att folk flyttade till Birka?"]
       - ["Engelska och moderna språk", "Översätt orden.", "Vilket ord behöver du mest i dag, och varför? Skriv på svenska eller på språket."]
       - ["Idrott och hälsa", "Vilka regler gäller?", "Vad hände med din puls, och vad kan det bero på?"]
