@@ -82,22 +82,22 @@
       ]
     },
     "src/content/undervisningsmetoder/larande-pa-kognitionsvetenskaplig-grund.yaml": {
-      "provad": "2026-11-07",
+      "provad": "2026-11-08",
       "saker": [
         {
+          "sak": "Lagret i lärarens lektion: Start och Lektionens fråga i början och Avslut i slutet, 9–12 minuter, och att resten är lärarens egen planering, där Avlasta minnet, Ord och bild och Blanda uppgifter tas när innehållet behöver dem (omtaget, riggens 62c723b)",
+          "forst": "Ingressen och metodkortet med 9–12 min på skärm 1, Vill du börja på måndag? med lektionens fråga och färgpennan på skärm 3, och remsan i del 2 på skärm 11 av 55",
+          "beslut": "Remsan visar nu de tre verktygen indragna under Din planering, med vid behov i stället för minuter, och veckorna i Lär dig metoden visar veckans verktyg i samma grå rad (K-743). Riggens trötta lärare (Haiku och Sonnet) sa lagret rätt ur minnet: 9–12 minuter av 45"
+        },
+        {
           "sak": "Strategibladet och strategikorten, som sätts upp före första lektionen",
-          "forst": "Knapparna på skärm 43 av 52. Knappen Strategier överst leder till hela verktyget",
-          "beslut": "Små kort på skärm 8, med minibilder och metodens egen mening om varje sak, som leder till saken och knappen som skriver ut den (src/data/bladkort.json)"
+          "forst": "Strategibladet i inledningen på skärm 5, och de små korten på skärm 8 av 55",
+          "beslut": "Inget nytt: de små korten med minibilder och metodens egen mening står kvar på skärm 8 (src/data/bladkort.json)"
         },
         {
           "sak": "Återkomstlistan, där läraren skriver det som ska komma tillbaka",
-          "forst": "Mallen på skärm 47 och knappen på skärm 48",
-          "beslut": "Ett litet kort i samma ruta, med en minibild ur mallens första sida"
-        },
-        {
-          "sak": "Lektionskortet",
-          "forst": "Knappen överst",
-          "beslut": "Inget"
+          "forst": "Det lilla kortet i samma ruta på skärm 8, och Före lektionen i del 2 på skärm 11",
+          "beslut": "Inget: ett litet kort med en minibild ur mallens första sida"
         }
       ]
     },

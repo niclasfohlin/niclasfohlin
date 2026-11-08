@@ -9,13 +9,13 @@
 titel: Lärande på kognitionsvetenskaplig grund
 undertitel: "Så bygger du in fem kognitionsvetenskapliga strategier i dina lektioner, F–⁠9"
 alternativaNamn: ["Science of learning", "Undervisning på kognitionsvetenskaplig grund"]
-ingress: "Du bygger in fem kognitionsvetenskapliga strategier i dina lektioner, principer som gör att vi förstår, tolkar och minns det vi lär oss. Du väljer först vad klassen ska förstå och varför. Plocka fram och Sprid ut blir en ram i varje lektion, och Avlasta minnet, Ord och bild och Blanda uppgifter blir verktyg vid behov."
+ingress: "Du bygger in fem kognitionsvetenskapliga strategier i dina lektioner, principer som gör att vi förstår, tolkar och minns det vi lär oss. Du väljer först vad klassen ska förstå och varför. Plocka fram och Sprid ut är en ram på 9–⁠12 minuter. Avlasta minnet, Ord och bild och Blanda uppgifter är verktyg vid behov."
 arskurs: ["F-3", "4-6", "7-9"]
 arskursText: F–9
 taggar: ["evidens", "undervisningskvalitet"]
 slag: strategier
 syfte: [ova, nytt]
-tid: "45 minuter per lektion, minst två lektioner i veckan"
+tid: "9–⁠12 min i din lektion, minst två lektioner i veckan"
 hurOftaSkal: "Ett försök i 55 skolor hade två tillfällen i veckan i tio veckor (Aston m.fl., 2025)."
 period: Tio veckor att komma igång
 material:
@@ -25,41 +25,41 @@ material:
   - färgpennor
   - återkomstlistan
   - frågekartan
-uppdaterad: 2026-11-04
+uppdaterad: 2026-11-08
 publicerad: 2026-11-03
 relaterade: ["testbaserat-larande", "explicit-undervisning", "formativ-bedomning", "kooperativt-larande"]
 utkast: false
 film:
-  sekunder: 29.36
-  beskrivning: "Läraren säger: ”Skriv en gissning. Det får vi svar på i dag.” I Det nya ritar läraren en slinga i taget och pekar. Läraren säger: ”Titta här. Här hämtar blodet syre.” I Avslut svarar alla ur minnet. Läraren säger: ”Stäng boken. Svara på frågan ur minnet.” Eleven förklarar, och läraren säger svaret. Grannen frågar: ”Varför?” Eleven säger: ”Musklerna behöver mer syre, därför andas jag fortare.” Läraren säger: ”Blodet hämtar syret i lungorna.”"
+  sekunder: 29.43
+  beskrivning: "Läraren säger: ”Skriv en gissning. Det får vi svar på i dag.” I genomgången ritar läraren en slinga i taget och pekar. Läraren säger: ”Titta här. Här hämtar blodet syre.” I Avslut suddar läraren bilden. Läraren säger: ”Svara ur minnet. Grannen frågar: Varför?” Grannen frågar: ”Varför?” Eleven säger: ”Musklerna behöver mer syre, därför andas jag fortare.” Läraren säger: ”Blodet hämtar syret i lungorna.”"
   rubrik: "Frågan, bilden och svaret ur minnet"
-  ingress: "Filmen visar Det nya och Avslut i biologi i åk 8. Läraren ritar blodomloppet en slinga i taget, och med boken stängd svarar eleverna på lektionens fråga, ”Varför blir du andfådd när du springer?”, och förklarar för grannen."
+  ingress: "Filmen visar lektionens fråga, ”Varför blir du andfådd när du springer?”, bilden i lärarens genomgång och Avslut i biologi i åk 8. Läraren ritar blodomloppet en slinga i taget, och med boken stängd svarar eleverna på frågan och förklarar för grannen."
   stillbilder:
-    - text: "Läraren väcker intresse, och alla skriver en gissning."
-    - text: "Läraren ritar en slinga i taget och pekar."
-    - text: "Med boken stängd svarar alla med en rad eller en skiss."
-    - text: "Grannen frågar, läraren ger svaret, eleven fyller i."
+    - text: "Lektionens fråga: alla skriver en gissning."
+    - text: "I genomgången ritar läraren en slinga i taget."
+    - text: "Avslut: med boken stängd svarar alla ur minnet."
+    - text: "Eleven förklarar, läraren ger svaret, paret fyller i."
 filmer:
   - nr: 2
     titel: "Det som kommer tillbaka"
-    sekunder: 23.44
-    beskrivning: "Starten har frågor från förra veckan och förra månaden. Läraren säger: ”Böckerna stängda. Skriv det du minns.” Läraren visar svaret, och alla fyller i med färgpennan. Läraren säger: ”Räck upp handen om du hade fel på fråga 1.” Läraren tänker: ”4 av 28.” Läraren frågar: ”Och fråga 2?” Läraren tänker: ”9 av 28. Jag trodde 5.” De flesta kan, och fråga 2 kommer tillbaka med en ledtråd. Läraren skriver: ”9 av 28 fel”. Läraren skriver: ”20/1 med ledtråd”."
+    sekunder: 27.79
+    beskrivning: "Starten har frågor från förra veckan och förra månaden. Läraren säger: ”Böckerna stängda. Skriv det du minns.” Läraren visar svaret och stryker under det viktigaste. Alla fyller i med färgpennan. Läraren säger: ”Räck upp handen om du hade fel på fråga 1.” Läraren tänker: ”4 av 28.” Läraren frågar: ”Och fråga 2?” Läraren tänker: ”9 av 28. Jag trodde 5.” De flesta kan, och fråga 2 kommer tillbaka med en ledtråd. Läraren skriver: ”9 av 28 fel”. Läraren skriver: ”20/1 med ledtråd”."
     rubrik: "Det som kommer tillbaka"
     ingress: "Filmen visar starten i samma lektion i biologi i åk 8, med sex av klassens 28 elever i bild. Frågorna är från förra veckan och förra månaden. Efter facit räcker de som hade fel upp handen, fråga för fråga. Läraren räknar händerna mot det hen trodde och skriver på återkomstlistan när frågan ska komma tillbaka."
     efter: "steg 1"
     stillbilder:
       - text: "Med boken stängd svarar alla på två gamla frågor."
-      - text: "4 av 28 hade fel på fråga 1 och räcker upp handen."
+      - text: "Fyra av 28 hade fel på fråga 1 och räcker upp handen."
       - text: "På fråga 2 hade 9 av 28 fel, och läraren trodde 5."
       - text: "De flesta kan, så fråga 2 kommer tillbaka med ledtråd."
 
 profil:
   evidens:
-    larande:    { tillforlitlighet: mattlig, effekt: mattlig, kort: "Var för sig hjälper strategierna eleverna att minnas, mest i korta försök.", motivering: "Måttlig tillförlitlighet, måttlig effekt. Strategierna hjälper var för sig, mest i korta försök: ord och bild gav 0,47 i 56 studier (Banks m.fl., 2026). Stora försök i vanliga skolor gav mindre, och ett quiz i starten gav ingen (Roy m.fl., 2023).", kallor: [banks-m-fl-2026, roy-m-fl-2023] }
+    larande:    { tillforlitlighet: mattlig, effekt: mattlig, kort: "Var för sig hjälper strategierna eleverna att minnas, mest i korta försök.", motivering: "Måttlig tillförlitlighet, måttlig effekt. Strategierna hjälper var för sig, mest i korta försök: ord och bild gav 0,47 i 56 studier (Banks m.fl., 2026). I stora försök gav ett quiz i starten ingen skillnad mot en diskussion (Roy m.fl., 2023).", kallor: [banks-m-fl-2026, roy-m-fl-2023] }
     lasning:    { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Ord och bild, med bilder till texten, gav 0,27 i läsförståelse i 11 studier i åk 1–⁠6 (Guo m.fl., 2020). Inget strängt försök har mätt läsning, och de andra strategierna är knappt prövade där.", kallor: [guo-m-fl-2020] }
-    skrivning:  { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Framplockning i språk, mest stavning, gav 0,23, inte säkert, i 8 små studier (Ruitenburg m.fl., 2026). Lösta exempel i textskrivning gav ingen skillnad i 55 skolor (Aston m.fl., 2025).", kallor: [ruitenburg-m-fl-2026, aston-m-fl-2025] }
+    skrivning:  { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Framplockning i språk, mest stavning, gav 0,23, inte säkert, i 8 små studier (Ruitenburg m.fl., 2026). I 55 skolor gav lösta exempel i textskrivning inget mer än diskuterade exempel (Aston m.fl., 2025).", kallor: [ruitenburg-m-fl-2026, aston-m-fl-2025] }
     matematik:  { tillforlitlighet: mattlig, effekt: mattlig, motivering: "Måttlig tillförlitlighet, måttlig effekt. I klassrum gav framplockning 0,35, inte säkert, och blandade uppgifter 0,54 (Ruitenburg m.fl., 2026). En omgjord kurs i åk 7 gav 0,12, inte säkert, på ett befintligt prov (Davenport m.fl., 2020).", kallor: [ruitenburg-m-fl-2026, davenport-m-fl-2020] }
-    amnen:      { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. Ord och bild gav 0,74 i NO och teknik och 0,33, inte säkert, i SO, mest i korta försök (Banks m.fl., 2026). Ett quiz i starten gav ingen skillnad i NO i 15 skolor (Roy m.fl., 2023).", kallor: [banks-m-fl-2026, roy-m-fl-2023] }
+    amnen:      { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. Ord och bild gav 0,74 i NO och teknik och 0,33, inte säkert, i SO, mest i korta försök (Banks m.fl., 2026). I NO i 15 skolor gav ett quiz i starten ingen skillnad mot en diskussion (Roy m.fl., 2023).", kallor: [banks-m-fl-2026, roy-m-fl-2023] }
     socialt:    { tillforlitlighet: lag, effekt: ingen, motivering: "Låg tillförlitlighet, ingen effekt. Ingen studie med jämförelsegrupp har mätt studiero eller samarbete. En lärare tyckte att klassen var lugnast med quiz, och andra att exempel som var för svåra gav oro i klassen (Roy m.fl., 2023; Aston m.fl., 2025).", kallor: [roy-m-fl-2023, aston-m-fl-2025] }
   svarighet: { lara: 3, karnan: 3, stod: 3, tid: 4, motivering: "Strategierna glider lätt mot rutiner utan elevernas tankearbete, och tio veckor är längre än vanligt. I studierna med effekt fick lärarna mer stöd, 18 timmars fortbildning och 16 timmar med kollegor per arbetsområde (Kramer m.fl., 2024)." }
   kostnad:   { kop: 2, timmar: 22, motivering: "Skolan köper färgpennor och kopierar korten och frågekartan. Omkring 22 timmar första läsåret går till att läsa metoden, två möten, fyra besök med samtal, en timmes extra planering i veckan i tio veckor och en kvart i månaden i arbetslaget." }
@@ -69,7 +69,7 @@ profil:
     text: "Vi sökte 2026-11-03 i ERIC och OpenAlex och följde referenserna bakåt och framåt från ett stort försök från 2024. Sammanställningarna om vanliga klassrum går före studierna i laboratoriet och på högskolan, och inget område sänks för att en studie gäller en enda strategi. De flesta studierna gäller en strategi i taget, ofta i korta försök och på forskarnas egna prov. De stora försöken med flera strategier och med skolans egna prov gav mindre effekter eller ingen."
     slutsatser:
       oversikt: "Strategierna hjälper var för sig i skolan. Framplockning gav 0,37, spridning 0,20 och blandning 0,40 i vanliga klassrum (Ruitenburg m.fl., 2026), och korta prov 0,22 mot inget prov (Dietrichson m.fl., 2026). Ord och bild gav 0,47 i 56 lottade studier, mest i enstaka lektioner, men 0,21 från förskolan till åk 5 (Banks m.fl., 2026), och bilder till texten 0,27 i läsförståelse (Guo m.fl., 2020). EEF:s systematiska översikt ger underlaget för lösta exempel måttlig tillförlitlighet och för det mesta andra låg (Perry m.fl., 2021)."
-      experiment: "De stora försöken i vanliga skolor visar mindre än sammanställningarna. Flera strategier i samma arbetsområde gav 0,16 i NO (Kramer m.fl., 2024), och en omgjord kurs i matematik 0,12, inte säkert, på ett prov som inte gjordes för den (Davenport m.fl., 2020). Ett quiz i starten gav ingen skillnad mot en diskussion (Roy m.fl., 2023), och lösta exempel i skrivning ingen skillnad (Aston m.fl., 2025). Undantaget är blandade uppgifter, som gav 61 mot 38 procent rätt i åk 7 (Rohrer m.fl., 2020)."
+      experiment: "De stora försöken i vanliga skolor visar mindre än sammanställningarna. Flera strategier i samma arbetsområde gav 0,16 i NO (Kramer m.fl., 2024), och en omgjord kurs i matematik 0,12, inte säkert, på ett prov som inte gjordes för den (Davenport m.fl., 2020). Ett quiz i starten gav ingen skillnad mot en diskussion (Roy m.fl., 2023), och lösta exempel i skrivning gav inget mer än diskuterade exempel (Aston m.fl., 2025). Undantaget är blandade uppgifter, som gav 61 mot 38 procent rätt i åk 7 (Rohrer m.fl., 2020)."
       annan: "Vägledningarna råder lärarna att låta eleverna ta fram ur minnet, sprida ut det viktiga, kombinera ord och bild och visa lösta exempel (Pashler m.fl., 2007). De säger också att det är svårare att tillämpa principerna än att känna till dem, och att strategierna glider mot tomma rutiner (EEF, 2021). Det eleven redan kan avgör vilket stöd som hjälper (Sweller m.fl., 2019), och underlaget är tunt för blandning av olika ämnen (Weinstein m.fl., 2018)."
     uteslutna:
       - { namn: "Desimone och Hill (2017)", skal: "Lärarna knöt arbetsron i klassrummet till läromedlets lektionsföljd och inte till strategierna" }
@@ -82,57 +82,57 @@ profil:
 # ---------------------------------------------------------------------------------------------------------------------
 inledning:
   - "Lärande på kognitionsvetenskaplig grund bygger på science of learning, ett tvärvetenskapligt forskningsfält där kognitiv psykologi, neurovetenskap och pedagogik studerar hur vi lär oss. Fältet har prövat principer som gör att vi förstår, tolkar och minns det vi lär oss, och många av dem finns redan i ämnesdidaktiken. Här lyfts fem av dem fram som kognitionsvetenskapliga strategier: Plocka fram, Sprid ut, Avlasta minnet, Ord och bild och Blanda uppgifter. Du integrerar dem i din undervisning. Hjärnträning, lärstilar och lektioner om hjärnans delar hör inte hit. Strategierna är inget mål i sig. Hur mycket de hjälper beror på ämnet, innehållet och eleverna (Perry m.fl., 2021; EEF, 2021). Undervisningen börjar därför i vad eleverna ska lära sig, varför det är viktigt och vilka mål det gäller, och det kommer från dig, kursplanen och läromedlet. Strategierna stöder hur ni arbetar. Frågan är hur eleverna lär sig mer av högläsningsboken, temat eller arbetsområdet, och inte hur du får in Sprid ut. Lärandet börjar i ett innehåll som väcker nyfikenhet. Strategierna hjälper eleverna att förstå och minnas det."
-  - "Strategierna blir ett lager över din egen planering, och ramen har sina ställen i varje lektion. I starten svarar alla med boken stängd på två eller tre frågor från förra veckan och förra månaden. Det nya börjar med lektionens fråga, en fråga som väcker nyfikenhet och som lektionen svarar på, och eleverna skriver en gissning. I Avslut svarar de på frågan ur minnet och förklarar för grannen, och efter lektionen skriver du på återkomstlistan det som ska komma tillbaka. Verktygen tar du när innehållet behöver dem: ett löst exempel vid nya steg, en enkel bild vid ett samband och en blandad rad när slag förväxlas. På bänken ligger skrivboken och en färgpenna att fylla i det som saknades med. På väggen sitter Strategibladet, en affisch med alla fem strategierna, och runt bladet strategikorten för dem ni har börjat med. Återkomstlistan finns i bilaga A, och bladet och korten finns på metodens sida."
+  - "Strategierna blir ett lager över din egen planering, och lagrets 9–⁠12 minuter tar platsen för sådant du redan gör. I starten, där du annars frågar vad ni gjorde förra lektionen, svarar alla ur minnet med boken stängd på äldre frågor, och en av dem gäller varför. Där du brukar säga vad ni ska lära er i dag, ställer du lektionens fråga, en fråga som väcker nyfikenhet och som lektionen svarar på. Eleverna skriver en gissning. I Avslut, i stället för din sammanfattning, svarar de på frågan ur minnet och förklarar för grannen. Efter lektionen skriver du på återkomstlistan det som ska komma tillbaka. Verktygen tar du i Din planering, din genomgång och övning, när innehållet behöver dem: ett löst exempel vid nya steg, en enkel bild vid ett samband och en blandad rad när slag förväxlas. På bänken ligger skrivboken och en färgpenna att fylla i det som saknades med, så att det syns vad eleven mindes själv. På väggen sitter Strategibladet, en affisch med alla fem strategierna, och runt bladet strategikorten för dem ni har börjat med. Återkomstlistan och frågekartan för de yngsta finns i bilaga A, och bladet och korten finns på metodens sida."
   - "Lärandet går till så här. Eleverna minns det de tänker på, och ett meningsfullt innehåll gör att de tänker på rätt sak. Arbetsminnet rymmer lite åt gången, och det eleverna redan kan gör det nya lättare. Det som känns lätt under övningen är inte alltid det som sitter. Därför tar eleverna fram innehållet själva, möter det igen efter dagar och veckor, ser ett löst exempel före eget arbete, förklarar med en bild och väljer sätt i en blandad rad."
-  - "Du och klassen lär er en strategi i taget, två veckor var, i tio veckor: du lär dig tanken, och klassen lär sig rutinen. Ramen kommer först, i vecka 1 och 3, och verktygen i vecka 5, 7 och 9. Lektionens fråga finns från första lektionen, och resten av lektionen gör du som vanligt. Efter tio veckor är ramen fast och verktygen fria, och i ett arbetsområde använder ni två till fem strategier. Strategierna finns också i Testbaserat lärande, Explicit undervisning, Formativ bedömning och Kooperativt lärande. Här lär du dig tanken bakom greppen, så att du kan bygga egna i ditt ämne."
+  - "Du och klassen lär er en strategi i taget, två veckor var, i tio veckor: du lär dig tanken, och klassen lär sig rutinen. Ramen kommer först, i vecka 1 och 3, och verktygen i vecka 5, 7 och 9. Starten, lektionens fråga och Avslut finns från första lektionen. Resten av lektionen gör du som vanligt. Efter tio veckor är ramen fast och verktygen fria, och i ett arbetsområde använder ni två till fem strategier. Strategierna finns också i Testbaserat lärande, Explicit undervisning, Formativ bedömning och Kooperativt lärande. Här lär du dig tanken bakom greppen, så att du kan bygga egna i ditt ämne."
 karna:
   rubrik: "Kärnan: fast och fritt"
   text: "Varje strategi sätter i gång ett tankearbete som bara eleven kan göra: att ta fram ur minnet, att möta det igen efter ett uppehåll, att lägga kraften på det som ska läras, att foga ihop ord och bild och att välja sätt. Effekten kommer bara när eleven gör det tankearbetet. Därför står tankearbetet kvar, och formen är fri. Plocka fram och Sprid ut är ramen i varje lektion, och de tre andra är verktyg som du tar när innehållet behöver dem. Strategierna samverkar och tjänar ett innehåll som du redan har valt. I studierna beskriver lärare hur en strategi glider mot en rutin när eleverna inte gör det tankearbete den kräver."
-  grundregel: "Plocka fram och Sprid ut är ramen i varje lektion, också när tiden är knapp: alla tar fram ur minnet innan svaret visas. De tre andra är verktyg du tar vid behov. Del 4 säger vad som står kvar."
+  grundregel: "Plocka fram och Sprid ut är ramen i varje lektion, också vid knapp tid: alla svarar ur minnet på en gammal fråga om varför före facit. De tre andra är verktyg vid behov. Del 4 säger vad som står kvar."
   varv: Det nya kommer in med ord, bild och exempel, ut ur minnet, tillbaka efter dagar och veckor, blandat när slagen sitter.
   komponenter:
     - namn: Plocka fram
       moment: [Start, Avslut]
       vad: Eleverna tar fram det de har lärt sig ur minnet, utan att titta, och ser sedan det rätta.
       syns: Varje elev skriver, ritar eller säger det hen minns med boken stängd innan något svar visas, svarar på ett varför och rättar sedan mot svaret.
-      varfor: "Det eleven bara läser om känns bekant men går inte att ta fram. När eleven själv tar fram det och sedan ser svaret, sitter det bättre: studier visar 0,37 mot att läsa om eller skriva av i vanliga klassrum, mest för fakta, och 0,22 mot inget prov (Ruitenburg m.fl., 2026; Dietrichson m.fl., 2026)."
+      varfor: "Det eleven bara läser om kan kännas bekant utan att gå att ta fram. När eleven själv tar fram det och ser svaret, sitter det bättre: studier i klassrum visar 0,37, mest för fakta, mot andra sätt att öva som att läsa om, och 0,22 mot inget prov (Ruitenburg m.fl., 2026; Dietrichson m.fl., 2026)."
       belagg: provad
       kallor: [ruitenburg-m-fl-2026, dietrichson-m-fl-2026, pashler-m-fl-2007]
       kvar: Alla elever tar fram svaret själva innan de ser det, svarar på en fråga om varför och får det rätta samma lektion.
-      fritt: "Att skriva, rita, säga svaret till grannen eller visa med kroppen, när alla gör det samtidigt, en frågekarta och ledtrådar för de yngsta, och i början, mitten eller slutet av lektionen."
-      kryss: Alla tog fram ur minnet innan svaret visades
+      fritt: "Att skriva, rita, visa med kroppen eller tänka själv och sedan säga svaret till grannen, en frågekarta och ledtrådar för de yngsta, och i början eller slutet av lektionen."
+      kryss: Alla tog fram ur minnet före svaret, också ett varför
     - namn: Sprid ut
       moment: [Start, Efter lektionen]
       vad: Det som ska sitta kommer tillbaka efter dagar och veckor, och eleverna tar fram det igen.
       syns: Eleverna tar fram innehåll från förra veckan eller förra månaden, och läraren kan säga hur gammalt det är och när det kommer igen.
-      varfor: "Eleven glömmer fort det hen övar klart vid ett tillfälle, fast det känns som att hen kan. När det kommer tillbaka efter dagar och veckor, sitter det längre: studier i skolan visar 0,20, och 0,39 när samma övning gavs samlad och spridd, mest för fakta och på forskarnas prov (Ruitenburg m.fl., 2026)."
+      varfor: "Eleven glömmer fort det hen övar klart vid ett tillfälle, fast det känns som att hen kan. När det kommer tillbaka efter dagar och veckor, sitter det längre: studier i skolan visar 0,20, och 0,39 för samma övning spridd mot samlad, mest på forskarnas prov (Ruitenburg m.fl., 2026)."
       belagg: provad
       kallor: [ruitenburg-m-fl-2026, perry-m-fl-2021, pashler-m-fl-2007]
       kvar: Eleverna tar fram det de ska kunna minst två gånger till, med dagar och veckor emellan.
       fritt: "När och i vilken form, som i starten, i slutet eller i läxan, och hur långa uppehållen är. Inget schema är bättre belagt än ett annat."
       kryss: Eleverna tog fram något från förra veckan eller månaden
     - namn: Avlasta minnet
-      moment: [Det nya, Öva]
+      moment: [Din planering]
       vad: Du tar bort det som tynger i onödan, visar ett löst exempel och minskar sedan stödet steg för steg.
       syns: Efter exemplet löser eleverna en liknande uppgift utan att leta i materialet och säger varför de gör steget. De som kan arbetar utan stödet.
-      varfor: "Den som är ny i innehållet lägger kraften på att leta och pröva, och det nya sitter inte. Ett löst exempel före eget arbete ger kraften åt innehållet: studier visar det med måttlig tillförlitlighet i matematik och NO för 11–18 år (Perry m.fl., 2021). Sedan tar du bort stödet (Sweller m.fl., 2019)."
+      varfor: "Den som är ny i innehållet lägger kraften på att leta och pröva, och det nya sitter inte. Ett löst exempel före eget arbete ger kraften åt innehållet: studier visar det med måttlig tillförlitlighet i matematik och NO för 11–⁠18 år (Perry m.fl., 2021). Sedan tar du bort stödet (Sweller m.fl., 2019)."
       belagg: provad
       kallor: [perry-m-fl-2021, sweller-m-fl-2019, cese-2018]
-      kvar: Elever som är nya i innehållet ser ett löst exempel först, och du tar bort stödet när de visar att de kan.
-      fritt: "Exemplet på tavlan, på bladet eller som en rörelse du visar, ihop med en liknande uppgift, delvis löst och med texten samlad vid bilden."
-      kryss: Exemplet kom först, och stödet minskade
+      kvar: De som är nya i innehållet ser ett löst exempel, löser en liknande och får mindre stöd när de kan.
+      fritt: "Exemplet på tavlan, på bladet eller som en rörelse du visar, med texten samlad vid bilden, och om uppgiften efter är delvis löst."
+      kryss: Alla löste en liknande, och stödet minskade när de kunde
     - namn: Ord och bild
-      moment: [Det nya, Avslut]
+      moment: [Din planering, Avslut]
       vad: Du förklarar och pekar i en enkel bild av sambandet, och eleverna ritar och förklarar den själva.
       syns: Eleverna förklarar sambandet med ämnets ord, med fingret på bilden eller på sin egen skiss.
-      varfor: "Ett samband är svårt att förstå med bara ord. En enkel bild som läraren pekar i ger två vägar till samma innehåll: studier visar 0,47 i skolan och 0,21 från förskolan till åk 5, men ingen effekt efter två veckor eller mer (Banks m.fl., 2026). Därför ritar eleverna bilden ur minnet igen senare."
+      varfor: "Ett samband är svårt att förstå med bara ord. En enkel bild som läraren pekar i ger två vägar till samma innehåll: studier visar 0,47 i skolan och 0,21 från förskolan till åk 5, men ingen säker effekt efter två veckor eller mer (Banks m.fl., 2026). Därför ritar eleverna bilden ur minnet igen senare."
       belagg: provad
       kallor: [banks-m-fl-2026, guo-m-fl-2020, pashler-m-fl-2007]
       kvar: Du pekar i en bild av sambandet medan du förklarar, och eleverna förklarar den, också ur minnet när den kommer tillbaka.
       fritt: "Rutor, pilar och ord i ett flödesschema, en tidslinje, en blockmodell, en karta eller elevens egen skiss."
       kryss: Klassen förklarade sambandet med bilden, också ur minnet
     - namn: Blanda uppgifter
-      moment: [Öva]
+      moment: [Din planering]
       vad: Uppgifter av de slag eleverna förväxlar står om vartannat, så att eleven väljer sätt först.
       syns: Eleven säger eller skriver vilket slag uppgiften är innan hen löser den, i en rad där slagen inte kommer i en ordning som går att gissa.
       varfor: "En rad med uppgifter av samma slag väljer sättet åt eleven, men på provet måste eleven välja själv. Blandade uppgifter övar valet: studier visar 0,54 i matematik i vanliga klassrum (Ruitenburg m.fl., 2026) och 61 mot 38 procent rätt i åk 7 (Rohrer m.fl., 2020). Nästan alla studier gäller matematik."
@@ -148,87 +148,91 @@ roll:
     - Väcker lektionens fråga nyfikenhet?
     - Visar eleverna sambandet eller bara ordet?
     - När kommer det här tillbaka?
-  fragornaText: "Den första ställer du när du väcker intresse i Det nya, den andra när du läser svaren och skisserna i Avslut och den tredje när du räknar händerna i starten."
+  fragornaText: "Den första ställer du när du skriver lektionens fråga, den andra när du läser svaren och skisserna i Avslut och den tredje när du räknar hur många som hade fel i starten."
 
 # ---------------------------------------------------------------------------------------------------------------------
 # 2 Lektionen: ramen och verktygen i din lektion
 # ---------------------------------------------------------------------------------------------------------------------
 tidsschema:
-  rubrik: En lektion på 45 minuter
+  rubrik: Lagret i din lektion
+  minuter: 45
   rader:
-    - { tid: Före lektionen, fas: Före lektionen, vad: "Välj det som ska sitta om en månad och lektionens fråga. Ta två eller tre frågor till starten, först det återkomstlistan säger i dag, och skriv hur många du tror har fel. Gör bilden eller exemplet om innehållet behöver dem." }
-    - { tid: 0–⁠5 min, fas: Start, form: Enskilt, vad: "Med böckerna stängda skriver alla svaret ur minnet på två eller tre frågor från förra veckan och förra månaden, och en frågar varför." }
-    - { tid: 5–⁠20 min, fas: Det nya, form: Läraren visar, vad: "Väck intresse: lektionens fråga står på tavlan, och alla skriver en gissning. Sedan visar du det nya, med en bild eller ett exempel när innehållet behöver det." }
-    - { tid: 20–⁠38 min, fas: Öva, form: Enskilt, vad: "Eleverna övar själva, med mindre stöd efter ett exempel. Förväxlar de slag som de kan var för sig, gör de en blandad rad och skriver slaget först." }
-    - { tid: 38–⁠45 min, fas: Avslut, form: Enskilt, vad: "Med boken stängd svarar eleverna ur minnet på lektionens fråga, med en rad eller en skiss, och förklarar för grannen, som frågar varför." }
-    - { tid: Efter lektionen, fas: Efter lektionen, vad: "Skriv på återkomstlistan frågan med flest fel, dagens nya och när de kommer tillbaka, och jämför händerna med det du trodde. Lektionens fråga blir startens varför-fråga veckan efter." }
+    - { tid: Före lektionen, fas: Före lektionen, vad: "Skriv det som ska sitta om en månad, lektionens fråga med svaret i en mening och två eller tre frågor ur återkomstlistan, en om varför. Hur många tror du har fel?" }
+    - { tid: 3–⁠5 min, fas: Start, var: i början, form: Enskilt, vad: "I stället för att du frågar vad ni gjorde förra lektionen, stänger alla boken och svarar ur minnet på frågor från förra veckan och månaden, en om varför." }
+    - { tid: 1 min, fas: Lektionens fråga, var: i början, form: Enskilt, vad: "Där du säger vad ni ska lära er i dag, står lektionens fråga på tavlan, och alla skriver en gissning." }
+    - { tid: 30 min eller mer, fas: Din planering, ram: true, grepp: [Avlasta minnet, Ord och bild, Blanda uppgifter], vad: "Du har din genomgång och övning som planerat. Du gör om ett exempel vid nya steg, en bild vid ett samband och ordningen när slag förväxlas." }
+    - { tid: 5–⁠6 min, fas: Avslut, var: i slutet, form: Enskilt, vad: "I stället för att du sammanfattar, stänger alla boken, svarar ur minnet på lektionens fråga och förklarar för grannen, som frågar varför." }
+    - { tid: Efter lektionen, fas: Efter lektionen, vad: "Skriv på återkomstlistan frågan med flest fel, dagens nya, en bild om ni hade en, och när de kommer tillbaka. Lektionens fråga blir startens varför-fråga veckan efter." }
   varianter:
     - nar: första lektionen
-      text: "Starten får ta tio minuter och frågar om något klassen redan kan. När Öva börjar, säger du: ”Nu får ni öppna boken.” I Avslut säger du: ”Svara på frågan ur minnet. Grannen frågar: Varför?”"
+      text: "I dag tar lagret 15 minuter. Starten får ta åtta minuter och frågar om något klassen redan kan. När ni ska öva, säger du: ”Nu får ni öppna boken.” I Avslut säger du: ”Svara på frågan ur minnet. Grannen frågar: Varför?”"
       delar:
-        - { fas: Start, tid: 0–⁠10 min, fraser: ["Det här samlas inte in.", "Det du inte minns är det vi övar på."] }
-        - { fas: Det nya, tid: 10–⁠25 min, fraser: ["Skriv en gissning på en minut.", "Det får vi svar på i dag."] }
-        - { fas: Öva, tid: 25–⁠38 min, fraser: ["Nu får ni öppna boken."] }
-        - { fas: Avslut, tid: 38–⁠45 min, fraser: ["Stäng boken, och vänd blad.", "Svara på frågan ur minnet. Grannen frågar: Varför?"] }
+        - { fas: Start, tid: 0–⁠8 min, fraser: ["Det här samlas inte in.", "Det du inte minns är det vi övar på."] }
+        - { fas: Lektionens fråga, tid: 8–⁠9 min, fraser: ["Skriv en gissning på en minut.", "Det får vi svar på i dag."] }
+        - { fas: Din planering, tid: 9–⁠39 min, fraser: ["Nu får ni öppna boken."] }
+        - { fas: Avslut, tid: 39–⁠45 min, fraser: ["Stäng boken, och vänd blad.", "Svara på frågan ur minnet. Grannen frågar: Varför?"] }
     - nar: en lektion på 60 minuter
-      text: "Starten och Avslut behåller sina minuter, och Det nya och Öva får den tid som blir över. Öva får mest, eftersom eleverna arbetar själva där."
+      text: "Starten, lektionens fråga och Avslut behåller sina minuter, och Din planering får resten."
       delar:
         - { fas: Start, tid: 0–⁠5 min }
-        - { fas: Det nya, tid: 5–⁠25 min }
-        - { fas: Öva, tid: 25–⁠53 min }
-        - { fas: Avslut, tid: 53–⁠60 min }
-  efter: "Minuterna är hållpunkter. När tiden är knapp tar du en fråga i starten i stället för två eller tre, och Öva får det som blir över när Avslut har sina sju minuter."
+        - { fas: Lektionens fråga, tid: 5–⁠6 min }
+        - { fas: Din planering, tid: 6–⁠54 min }
+        - { fas: Avslut, tid: 54–⁠60 min }
+  efter: "Lagret tar 9–⁠12 minuter, och de flesta har du redan: återblicken, målet och sammanfattningen. Verktygen tar inga egna minuter, och Avslut behåller sina. Är tiden knapp, stryker du först att läsa tre svar högt i Avslut, sedan startens frågor utom förra månadens. Det minsta är en gammal fråga om varför ur minnet med boken stängd, sedan svaret och färgpennan, i starten eller i Avslut. Ryms bara en fråga i Avslut, tar du den gamla."
 steg:
   rader:
     - namn: Start
+      vem: i början, var och en
       fraga: "Vilken fråga hade flest fel, och hur många?"
       alla: Skriver ett eget svar innan svaret visas, och räcker upp handen för frågorna de hade fel på.
       titta: Skriver alla, och hur många händer det blir mot det du trodde?
-      beslut: "Frågan med flest fel avgör när den kommer tillbaka. Det är fel när det viktigaste saknas, som ett varför."
+      beslut: "Frågan med flest fel avgör när den kommer tillbaka. Skriv datumet på återkomstlistan nu eller efter lektionen. Fel är när det viktigaste saknas, som ett varför."
       gor:
-        - "”Böckerna stängda. Skriv det du minns.” Är många rader tomma efter en minut, skriver du en ledtråd på tavlan."
-        - Visa svaret efter tre minuter, och stryk under det viktigaste i varför-svaret. Eleverna fyller i det som saknades med färgpennan.
-        - "”Räck upp handen om du hade fel på fråga 1.” Undervisa inte igen i starten."
+        - "Säg: ”Böckerna stängda. Skriv det du minns.” Efter en minut får de som har tomt en ledtråd, på tavlan om de är många."
+        - Visa svaret senast efter tre minuter, och stryk under det viktigaste i varför-svaret. Eleverna fyller i med färgpennan.
+        - "Säg: ”Räck upp handen om du hade fel på fråga 1. Fel är när det understrukna saknas.” Undervisa inte igen."
       fraser: ["Böckerna stängda. Skriv det du minns.", "Räck upp handen om du hade fel på fråga 1."]
       redo:
-        nastanAlla: Högst 5 av 28 med fel. Frågan kommer tillbaka för hela klassen om några veckor.
-        deFlesta: 6–13 av 28 med fel. Frågan kommer tillbaka nästa lektion eller nästa vecka, med en ledtråd.
-        halften: 14 eller fler av 28 med fel. Undervisa innehållet igen i Det nya, i dag eller nästa lektion.
+        nastanAlla: Högst 5 av 28 med fel. Frågan kommer tillbaka om några veckor, och de med fel får den i läxa.
+        deFlesta: 6–⁠13 av 28 med fel. Frågan kommer tillbaka nästa lektion eller nästa vecka, med en ledtråd.
+        halften: 14 eller fler av 28 med fel. Förklara det igen med en bild eller ett löst exempel när din genomgång börjar.
         tiden: "Räcker inte tiden i starten, visar du svaret ändå, och nästa lektion börjar med frågan."
-    - namn: Det nya
+    - namn: Lektionens fråga
+      vem: där det nya börjar, alla
       fraga: "Väcker lektionens fråga nyfikenhet?"
-      alla: Gissar på lektionens fråga, och förklarar bilden eller löser uppgiften efter exemplet när de finns.
-      titta: Följer blicken pekfingret, och hur många har fel efter bilden eller exemplet?
-      beslut: "Har många fel på uppgiften, visar du bilden en gång till i lugnare takt, eller ett exempel till."
+      alla: Skriver en gissning på en minut.
+      titta: Har alla skrivit något, och går frågan att gissa på?
+      beslut: "Kan bara några gissa, ger du en ledtråd ur det klassen redan kan. Svaret kommer i din genomgång och i Avslut."
       gor:
-        - "Läs lektionens fråga högt. ”Skriv en gissning på en minut. Det får vi svar på i dag.” Rätta ingen gissning."
-        - "Är innehållet ett samband, ritar du en enkel bild en del i taget och pekar på delen medan du säger den: ”Titta här.”"
-        - Har innehållet flera nya steg, visar du ett löst exempel, och alla löser en liknande uppgift.
-        - Efter bilden förklarar eleverna en av delarna för grannen. Efter bilden eller exemplet säger du svaret och räknar händerna.
-      fraser: ["Det får vi svar på i dag.", "Titta här."]
-    - namn: Öva
-      fraga: "Väljer eleverna rätt slag, eller löser de bara rätt?"
-      alla: Får efter ett exempel mindre stöd än förra gången, och skriver slaget först i en blandad rad.
-      titta: Fel slag och fel lösning, ett streck var, och vem som klarar sig utan exemplet.
-      beslut: "Väljer många fel slag, ger du några uppgifter av ett slag i taget före raden."
+        - "Läs upp frågan och säg: ”Skriv en gissning på en minut. Det får vi svar på i dag.” Rätta ingen gissning."
+        - Frågan du valde före lektionen går att gissa på utifrån det klassen vet, men bara dagens innehåll svarar helt på den.
+      fraser: ["Skriv en gissning på en minut.", "Det får vi svar på i dag."]
+    - namn: Din planering
+      vem: som du har planerat
+      fraga: "Vad i min planering gör jag om i dag?"
+      alla: "Löser en uppgift efter exemplet, förklarar bilden eller skriver slaget först, som du planerat."
+      titta: Hur många har fel efter bilden eller exemplet, och väljer de rätt slag?
+      beslut: "Har många fel efter bilden eller exemplet, visar du det igen i lugnare takt. Väljer många fel slag, ger du några uppgifter av ett slag i taget."
       gor:
-        - Börja med uppgifter av dagens slag. Efter ett exempel får den som klarar sig ett löst steg mindre.
-        - Förväxlar eleverna slag som de kan var för sig, som area och omkrets, gör du en blandad rad av uppgifter ur bokens olika avsnitt.
-        - "”Skriv först vilket slag det är, och lös sedan.” Visa facit när raden är klar, och eleverna rättar."
-      fraser: ["Skriv först vilket slag det är, och lös sedan."]
+        - "Vid nya steg, eller när några är nya i innehållet, varvar du lösta exempel och liknande uppgifter, ett steg mindre löst i taget."
+        - "Vid ett samband ritar du en enkel bild en del i taget, i stället för den du tänkt visa, och pekar på delen: ”Titta här.”"
+        - "Förväxlas slag, tar du dina uppgifter i en annan ordning, med några ur förra avsnittet: ”Skriv först vilket slag det är.”"
+        - Efter bilden förklarar eleverna en av delarna för grannen. Stödet minskar när de visar att de kan, och facit kommer sist.
+      fraser: ["Titta här.", "Skriv först vilket slag det är, och lös sedan."]
     - namn: Avslut
+      vem: i slutet, var och en
       fraga: "Säger svaret sambandet eller bara ordet?"
       alla: Varje elev har ett eget svar i skrivboken innan grannen frågar.
       titta: Säger svaret sambandet, och förklarar eleverna varför med ämnets ord?
-      beslut: "Det som saknas i svaren skriver du på återkomstlistan. Kan många inte svara, börjar nästa Det nya med samma bild eller samma exempel."
+      beslut: "Skriv det som saknas på återkomstlistan. Säger svaren bara ordet, börjar nästa genomgång med en bild, och fastnade många i stegen, med ett löst exempel."
       gor:
         - "Sudda tavlan utom frågan. ”Stäng boken, och vänd blad. Svara på frågan ur minnet, med en rad eller en skiss.” Ge två minuter."
-        - "”Förklara för grannen. Grannen frågar: Varför?” Efter en bild förklarar eleven med skissen. Sedan byter de."
+        - "Säg: ”Förklara för grannen. Grannen frågar: Varför?” Efter en bild förklarar eleven med skissen. Sedan byter de."
         - Läs tre svar högt om tiden räcker, och säg svaret på lektionens fråga i en mening med dagens samband.
-        - Båda lägger till det som saknades med färgpennan.
+        - Alla lägger till det som saknades med färgpennan och sätter en bock vid gissningen om den höll.
       fraser: ["Svara på frågan ur minnet, med en rad eller en skiss.", "Grannen frågar: Varför?"]
 lektionskort:
-  - { efter: klassen, text: "Lektionskortet är lektionen på ett A4: ramen och verktygen, det du säger, beslutet i starten och Så rättar du. Ha det i handen." }
+  - { efter: klassen, text: "Lektionskortet är lagret i din lektion på ett A4: delarna och verktygen, det du säger, beslutet i starten och Så rättar du. Ha det i handen." }
 fastnar:
   rubrik: Så rättar du
   text: "Frågorna ska kännas lite svåra, men ungefär åtta av tio i klassen ska ha rätt på varje fråga. Ledtråden kommer när många rader är tomma efter en minut, som i starten, så att den som kan har plockat fram själv och den som inte minns något har något att utgå från. Har eleven valt fel slag, ställer du uppgiften bredvid en som ser likadan ut men kräver något annat och frågar: ”Varför löses de olika?” Har eleven kört fast efter ett exempel, går ni tillbaka till exemplet med ett steg mer löst."
@@ -245,23 +249,23 @@ amnesexempel:
     innehall: "Klassens högläsningsbok: vad som hände och varför"
     overst:
       egen: "Två saker som hände i förra kapitlet och ett varför. Felet: att minnas händelserna men inte orsaken."
-      visar: Alla skriver själva ur minnet och berättar sedan för grannen.
+      visar: Alla skriver själva ur minnet och fyller sedan i med färgpennan.
     scen:
       - "Tänk dig en lektion i svenska i åk 4. Du läser en bok högt för klassen, och förra veckan läste du kapitlet där huvudpersonen ljuger för sin bästa vän. Boken är stängd. På tavlan står: ”Skriv två saker som hände i kapitlet. Skriv sedan varför hon ljög.”"
-      - "Alla skriver i tre minuter. Efter en minut skriver du tre ord på tavlan att välja bland, för den som inte kommer igång. Sedan berättar eleverna för grannen. Du läser stycket med lögnen igen och säger varför hon ljög, och de fyller i med färgpennan."
+      - "Alla skriver i tre minuter. Efter en minut är många rader tomma, så du skriver tre ord på tavlan att välja bland. Sedan säger du varför hon ljög, och de fyller i med färgpennan."
       - "Du räknar händerna på varför-frågan: 3 av 25 har fel. Nästan alla kan. Två av dem skrev vad som hände men inte varför. Frågan får vänta några veckor."
     notera: "Notera vad som hände. Varför-frågan visade vem som mindes händelserna utan orsaken. Den var lektionens fråga förra veckan: ”Varför ljög hon för sin bästa vän?”"
   - amne: skrivning
     arskurs: åk 3
     innehall: "Stavning: kort och lång vokal och dubbelteckning"
     overst:
-      egen: "Kort vokal före två konsonanter, lång före en. Felet: att dubbla i varje ord efter regeln som klassen övade senast."
+      egen: "Orden har kort vokal före två konsonantbokstäver, lång före en. Felet: att dubbla i varje ord efter den senaste regeln."
       visar: Alla skriver först L eller K och sedan ordet i skrivboken.
     scen:
       - "Tänk dig en lektion i svenska i åk 3. Klassen har övat ord med kort och med lång vokal var för sig i två veckor. Nu läser du upp tio ord i en ordning som inte går par för par: tak, hatt, full, glas, vila, tack, hat, villa, glass, ful."
-      - "Vid varje ord säger du: ”Lyssna på vokalen. Lång eller kort? Skriv ordet.” Eleverna skriver L eller K först och sedan ordet. Facit kommer när listan är klar, och då frågar du igen: ”Varför skrivs tack med ck och inte med kk?”"
+      - "Vid varje ord säger du: ”Lyssna på vokalen. Lång eller kort? Skriv ordet.” Eleverna skriver L eller K först och sedan ordet. Facit kommer när listan är klar, och då ställer du lektionens fråga igen: ”Hur hör du om ordet ska ha dubbel konsonant?”"
       - "Du går runt och ser en elev som dubblar i varje ord, också tak och ful. Eleverna rättar med färgpennan, och du räknar händerna på ordet med flest fel, ful: 8 av 27. De flesta kan. Orden kommer tillbaka nästa vecka i en ny ordning, och eleven som dubblade får jämföra två ord i taget, tak och tack."
-    notera: "Notera vad som hände. Blandningen visade vem som valde efter vokalen och vem som dubblade i varje ord. Lektionens fråga var: ”Varför skrivs tack med ck och inte med kk?”"
+    notera: "Notera vad som hände. Blandningen visade vem som valde efter vokalen och vem som dubblade i varje ord. Lektionens fråga var: ”Hur hör du om ordet ska ha dubbel konsonant?”"
   - amne: matematik
     arskurs: åk 5
     innehall: "Division, decimaltal som bråk och tid, från förra området"
@@ -271,7 +275,7 @@ amnesexempel:
     scen:
       - "Tänk dig en lektion i matematik i åk 5. Klassen arbetar med geometri, och för en månad sedan avslutade ni ett område om division, bråk och tid. På tavlan står tre frågor: ”Räkna 84 / 4. Skriv 0,35 som bråk. Hur många minuter är 2,5 timmar, och varför?”"
       - "Du säger: ”Det här hade vi för en månad sedan. Det får kännas svårt.” Efter tre minuter visar du svaren: 21, 35/100 = 7/20 och 150 minuter, eftersom en timme är 60 minuter och en halvtimme 30. Eleverna rättar med färgpennan."
-      - "Du räknar händerna: frågan om tid har flest fel, 14 av 26, och många har skrivit 250 minuter. Hälften eller färre kan. Du undervisar om tid igen i Det nya nästa lektion, med en klocka där timmen är 60 minuter och halvtimmen 30. På återkomstlistan skriver du frågan om tid till nästa vecka och veckan efter, och läxan får två uppgifter om tid."
+      - "Du räknar händerna: frågan om tid har flest fel, 14 av 26, och många har skrivit 250 minuter. Hälften eller färre kan. Nästa lektion undervisar du om tid igen när din genomgång börjar, med en klocka där timmen är 60 minuter och halvtimmen 30. På återkomstlistan skriver du frågan om tid till nästa vecka och veckan efter, och läxan får två uppgifter om tid."
     notera: "Notera vad som hände. Tre gamla uppgifter i starten visade vad som inte satt efter en månad. Lektionens fråga var: ”Hur kan två rum ha samma omkrets men olika stort golv?”"
   - amne: so-no
     amnesnamn: Biologi
@@ -287,18 +291,17 @@ amnesexempel:
       datum: ons 13/1
       lektion: 4 av 8
       mal: "förklara varför blodet går genom hjärtat två gånger"
-      belagg: "skissen ur minnet och svaret på lektionens fråga"
+      belagg: "skissen ur minnet med båda slingorna, och svaret på lektionens fråga"
       blad: "bilden med två slingor, frågorna och facit"
       forberett: "bilden med orden till studiehandledaren i förväg"
-      fore: { sitta: "Två kretslopp, och att blodet hämtar syre i lungorna", fragan: "Varför blir du andfådd när du springer?", strategin: "Alla tre", veckan: "Vad gör de röda blodkropparna?", manaden: "Varför behöver cellerna syre?", tror: "5 på förra månadens fråga" }
+      fore: { sitta: "Två kretslopp, och att blodet hämtar syre i lungorna", fragan: "Varför blir du andfådd när du springer?", svaret: "Musklerna behöver mer syre, och blodet hämtar det i lungorna och går genom hjärtat två gånger.", veckan: "Vad gör de röda blodkropparna?", manaden: "Varför behöver cellerna syre?", tror: "5 på förra månadens fråga" }
       delar:
         - { fas: Start, text: "En tom bild av en cell" }
-        - { fas: Det nya, text: "Stora och lilla kretsloppet. Exemplet: en blodkropp från tån" }
-        - { fas: Öva, text: "Tre om det stora, sedan fyra kärl blandat: vilket kretslopp, syrerikt eller syrefattigt?" }
-        - { fas: Avslut, text: "Rita blodomloppet med pilar och fem ord, och svara på frågan" }
-      beslut: { elever: 28, nastanAlla: "fyra veckor", deFlesta: ["nästa onsdag", "en tom bild av en cell"], halften: "i Det nya på fredag" }
+        - { fas: Din planering, text: "Två slingor i bilden och en blodkropp från tån i genomgången om kretsloppen, och fyra kärl blandade i övningen" }
+        - { fas: Avslut, text: "9.39. Blodomloppet med pilar och fem ord, eller svaret i en rad" }
+      beslut: { elever: 28, nastanAlla: "fyra veckor", deFlesta: ["nästa onsdag", "en tom bild av en cell"], halften: "när genomgången börjar på fredag" }
       efter: { kontrollen: "fråga 2, 9 av 28 med fel", hogar: "5, och det blev 9", sag: "”Musklerna behöver mer syre, därför andas jag fortare.”", kryss: [1, 2, 3, 4, 5], nasta: "lungartären förväxlades med lungvenerna, och fem klarade sig utan bilden", forst: "lungartären till nästa vecka, och cellerna med en ledtråd" }
-      lagg: ["Lägg märke till: svaret på lektionens fråga kräver båda slingorna, så skissen sist visar om eleverna kan förklara andfåddheten."]
+      lagg: ["Lägg märke till: skissen sist visar om eleverna kan följa blodet från kroppen till hjärtat, lungorna, hjärtat och ut igen, och säga var det hämtar syret. Låt eleverna jämföra den med din bild."]
     remsa:
       - Starten hade två frågor ur minnet med boken stängd, och skissen kom ur minnet sist.
       - Frågan om cellerna kom från förra månaden, och du skrev lungartären på återkomstlistan.
@@ -306,9 +309,9 @@ amnesexempel:
       - Du ritade slingorna en i taget och pekade medan du sa vad blodet bär.
       - Raden blandade fyra kärl, och eleven skrev först kretsloppet och sedan syrehalten.
     scen:
-      - "Tänk dig en lektion i biologi i åk 8. Starten har två frågor: ”Vad gör de röda blodkropparna?” från förra veckan och ”Varför behöver cellerna syre?” från förra månaden. Du trodde att 5 hade fel på den andra, men händerna visar 9 av 28. De flesta kan, så frågan kommer tillbaka nästa vecka."
-      - "Du väcker intresse med lektionens fråga, ”Varför blir du andfådd när du springer?”, och alla skriver en gissning på en minut. Du ritar det stora kretsloppet bredvid det lilla, en slinga i taget, och pekar medan du följer en blodkropp från tån. Alla följer sedan en från hjärnan själva. Öva har tre uppgifter om det stora och, när det sitter, en blandad rad med fyra kärl: vilket kretslopp, och syrerikt eller syrefattigt?"
-      - "I Avslut stänger alla boken och ritar blodomloppet med pilar och fem ord. Grannen frågar ”Varför?”, och en elev svarar: ”Musklerna behöver mer syre, därför andas jag fortare.”"
+      - "Tänk dig en lektion i biologi i åk 8. Starten på fem minuter har två frågor: ”Vad gör de röda blodkropparna?” från förra veckan och ”Varför behöver cellerna syre?” från förra månaden. Du trodde att 5 hade fel på den andra, men händerna visar 9 av 28. De flesta kan, så frågan kommer tillbaka nästa vecka."
+      - "Lektionens fråga, ”Varför blir du andfådd när du springer?”, tar en minut: alla skriver en gissning. I genomgången ritar du det stora kretsloppet bredvid det lilla, en slinga i taget, och pekar medan du följer en blodkropp från tån. Alla följer en från hjärnan. Övningen har tre uppgifter om det stora och, när det sitter, en blandad rad med fyra kärl: vilket kretslopp, och syrerikt eller syrefattigt?"
+      - "I Avslut på sex minuter stänger alla boken och ritar blodomloppet med pilar och fem ord. Grannen frågar ”Varför?”, och en elev svarar: ”Musklerna behöver mer syre, därför andas jag fortare.”"
     notera: "Notera vad som hände. Du sa svaret: ”Musklerna behöver mer syre. Du andas fortare för att blodet ska hämta mer syre i lungorna, och hjärtat pumpar det fortare ut till musklerna.” Den blandade raden visade vem som tror att alla artärer har syrerikt blod, och lungartären hade flest fel. Blodomloppet är ett samband i flera steg, med kärl som förväxlas, så lektionen tog alla tre verktygen. Veckan efter är andfåddheten startens varför-fråga."
   - amne: praktisk-estetiska
     amnesnamn: Hem- och konsumentkunskap
@@ -320,12 +323,12 @@ amnesexempel:
     scen:
       - "Tänk dig en lektion i hem- och konsumentkunskap i åk 7. Klassen bakar bullar för tredje gången. Första gången låg receptet på ett kort vid varje arbetsplats, med en enkel bild vid varje steg, och på tavlan stod bara det steg ni var på. Ett helt recept på en sida hade fått eleverna att leta och tappa bort sig."
       - "I starten svarar alla ur minnet på frågan ”Varför ska degen jäsa innan den går in i ugnen?” 4 av 24 har fel. Nästan alla kan. I dag visar du först hur du knådar degen, och en elev gör efter dig."
-      - "Sedan lägger paren kortet med baksidan upp och säger nästa steg till varandra innan de tittar. Paren som säger alla steg rätt bakar utan kortet, och du står vid de tre par som fortfarande behöver det."
+      - "Sedan lägger paren kortet med baksidan upp och säger nästa steg till varandra innan de tittar. Paren som säger alla steg rätt bakar med bara mängderna kvar på kortet, och du står vid de tre par som fortfarande behöver hela kortet."
     notera: "Notera vad som hände. Du tog bort stödet efter det paren visade, och inte efter ett schema. Lektionens fråga var: ”Varför knådar vi degen så länge?”"
 stod:
   rubrik: Elever som behöver mer stöd
   rader:
-    - { nar: Den som är ny i svenska, metoden: "Du läser startens frågor för eleven, som svarar muntligt eller ritar. Ämnesordet står vid bildens del, och eleven pekar och säger det.", du: "Ge studiehandledaren återkomstlistans rader och bilden, så att eleven får gå igenom dem före och ta fram dem efter. Finns ingen, tar eleven dem hem. I Avslut har eleven ämnesorden på bänken, och sambandet tar hen fram själv." }
+    - { nar: Den som är ny i svenska, metoden: "Du läser startens frågor för eleven, som svarar muntligt eller ritar. Ämnesordet står vid bildens del, och eleven pekar och säger det.", du: "Ge studiehandledaren startens frågor, återkomstlistans rader och bilden att gå igenom med eleven i förväg. I Avslut har eleven ämnesorden på bänken, men sambandet tar hen fram själv." }
     - { nar: "De yngsta, i F–⁠3", metoden: "Eleverna ritar, visar eller säger svaret till grannen, och frågekartan och bilder gör att de kan ta fram ur minnet utan att skriva.", du: "Ställ bestämda frågor i stället för ”Skriv allt du minns”, och ta dem i korta stunder flera gånger om dagen. Blanda högst två slag, och visa ordet före bilden när eleverna lär sig läsa." }
     - { nar: Den som har det svårast i ämnet, metoden: "Ledtråden efter en minut och svaret samma lektion ger eleven något att utgå från.", du: "Ge fler uppgifter av ett slag i taget och fler lösta exempel före blandningen. Är elevens rad tom efter ledtråden, ställer du en snävare fråga bara till hen." }
     - { nar: Den som redan kan, metoden: "Varför-frågan och skissen ger något att arbeta med.", du: "Ta bort stödet tidigare, ge äldre frågor och delvis lösta exempel, och låt eleven rita sin egen bild av sambanden." }
@@ -337,13 +340,13 @@ stod:
 # ---------------------------------------------------------------------------------------------------------------------
 progression:
   rubrik: De första veckorna
-  text: "Metoden är ny för dig och för klassen. Ni lär er en strategi i taget, två veckor var: först ramen, sedan varje verktyg i minst tre lektioner där innehållet behöver det. Plocka fram är lättast att börja med, Sprid ut bygger på den, och Blanda uppgifter kommer sist, eftersom eleverna först behöver kunna slagen var för sig. Före vecka 5, 7 och 9 väljer du lektioner med nya steg, ett samband eller slag som förväxlas. Har arbetsområdet inget sådant, tar du verktyget på något klassen har haft. En ny strategi går ofta sämre de första gångerna. En blandad rad ger fler fel under övningen än en rad av ett slag, men det sitter bättre en månad senare. Ge en strategi två veckor till när den inte sitter."
+  text: "Metoden är ny för dig och för klassen. Ni lär er en strategi i taget, två veckor var. Starten, lektionens fråga och Avslut finns i varje lektion från vecka 1. I vecka 3–⁠4 får varje rad på återkomstlistan tre datum, och det som satt får vänta längre. I vecka 5–⁠6, 7–⁠8 och 9–⁠10 hittar du tre lektioner i din planering med nya steg, ett samband eller slag som förväxlas, och tar veckans verktyg där. Har arbetsområdet inget sådant, tar du verktyget på något klassen har haft. Från vecka 7 väljer du också själv bland verktygen ni kan: före veckan ser du var i dina lektioner innehållet behöver dem. Blanda uppgifter kommer sist, eftersom eleverna först behöver kunna slagen var för sig. En ny strategi går ofta sämre de första gångerna. En blandad rad ger fler fel i övningen, men det sitter bättre en månad senare. Ge en strategi två veckor till när den inte sitter."
   rader:
-    - { vecka: "1", led: Ramen, rubrik: "Plocka fram", eleverna: "Att stänga boken, skriva det de minns, förklara för grannen och fylla i med färgpennan.", roll: "Att ställa frågor som går att klara till en del och skriva frågan med flest fel på återkomstlistan. Vecka 2 också ett varför.", vidare: "nästan alla skriver ur minnet, och en fråga har krävt ett varför", fraga: "Skriver nästan alla ur minnet, och har en fråga krävt ett varför?" }
-    - { vecka: "3", led: Ramen, rubrik: "Sprid ut", eleverna: "Att svara på äldre frågor, också när det känns svårt.", roll: "Att planera tre till fem saker på återkomstlistan med datum. Vecka 4 också läxan.", vidare: "nästan alla klarar frågor som har kommit tillbaka två gånger", fraga: "Klarar nästan alla frågor som har kommit tillbaka två gånger?" }
-    - { vecka: "5", led: Verktygen, rubrik: "Avlasta minnet", eleverna: "Att lösa en liknande uppgift efter exemplet, med rutinen Exemplet först, sedan själv.", roll: "Att rensa ett material och visa ett exempel med en liknande uppgift. Vecka 6 ett steg mindre i taget.", vidare: "de flesta klarar en uppgift utan exemplet", fraga: "Klarar de flesta en uppgift utan exemplet?" }
-    - { vecka: "7", led: Verktygen, rubrik: "Ord och bild", eleverna: "Att peka och säga sambandet i din bild, och sedan rutinen Rita ur minnet.", roll: "Att peka i en enkel bild när du talar, tiga när de läser och låta dem komma och peka.", vidare: "nästan alla säger sambandet med ämnets ord och bilden", fraga: "Säger nästan alla sambandet med ämnets ord och bilden?" }
-    - { vecka: "9", led: Verktygen, rubrik: "Blanda uppgifter", eleverna: "Att skriva vilket slag uppgiften är innan de löser den, med rutinen Slaget först.", roll: "Att blanda slag som klassen kan var för sig. Vecka 10 de som förväxlas.", vidare: "de flesta skriver rätt slag innan de löser", fraga: "Skriver de flesta rätt slag innan de löser?" }
+    - { vecka: "1", led: Ramen, stallen: [Start, Lektionens fråga, Avslut], rubrik: "Plocka fram", eleverna: "Att stänga boken, skriva det de minns, förklara för grannen och fylla i med färgpennan.", roll: "Att ställa frågor som går att klara till en del, en om varför, och skriva frågan med flest fel på återkomstlistan.", vidare: "nästan alla skriver ur minnet, och en fråga har krävt ett varför", fraga: "Skriver nästan alla ur minnet, och har en fråga krävt ett varför?" }
+    - { vecka: "3", led: Ramen, stallen: [Start, Lektionens fråga, Avslut], rubrik: "Sprid ut", eleverna: "Att svara på äldre frågor, också när det känns svårt.", roll: "Att ge tre till fem rader på återkomstlistan tre datum och låta det som satt vänta längre. Vecka 4 även i läxan.", vidare: "nästan alla klarar frågor som har kommit tillbaka två gånger", fraga: "Klarar nästan alla frågor som har kommit tillbaka två gånger?" }
+    - { vecka: "5", led: Verktygen, stallen: [Start, Lektionens fråga, Avslut, Avlasta minnet], rubrik: "Avlasta minnet", eleverna: "Att lösa en liknande uppgift efter exemplet, med rutinen Exemplet först, sedan själv.", roll: "Att varva löst exempel och uppgift i tre lektioner med nya steg. Vecka 6 ett steg mindre löst.", vidare: "de flesta klarar en uppgift utan exemplet", fraga: "Klarar de flesta en uppgift utan exemplet?" }
+    - { vecka: "7", led: Verktygen, stallen: [Start, Lektionens fråga, Avslut, Ord och bild], rubrik: "Ord och bild", eleverna: "Att peka och säga sambandet i din bild, och sedan rutinen Rita ur minnet.", roll: "Att i tre lektioner rita en enkel bild en del i taget och peka. Vecka 8 kommer bilden tillbaka i starten.", vidare: "nästan alla säger sambandet med ämnets ord och bilden", fraga: "Säger nästan alla sambandet med ämnets ord och bilden?" }
+    - { vecka: "9", led: Verktygen, stallen: [Start, Lektionens fråga, Avslut, Blanda uppgifter], rubrik: "Blanda uppgifter", eleverna: "Att skriva vilket slag uppgiften är innan de löser den, med rutinen Slaget först.", roll: "Att blanda dina uppgifter av slag som klassen kan var för sig. Vecka 10 de som förväxlas.", vidare: "de flesta skriver rätt slag innan de löser", fraga: "Skriver de flesta rätt slag innan de löser?" }
 uppfoljning:
   text: Du ser om metoden fungerar på händerna i starten, i svaren i Avslut och på återkomstlistan.
   rader:
@@ -375,7 +378,7 @@ klassen:
 forsta:
   rubrik: Första lektionen
   text:
-    - "Bara starten och lektionens fråga är nya. Du ställer två frågor om något klassen redan kan, så att eleverna kan tänka på rutinen Boken stängd och färgpennan. Det nya börjar med lektionens fråga, och Avslut svarar på den. Frågan ska gå att gissa på utifrån det klassen redan vet, men bara dagens innehåll ska svara helt på den. Resten av lektionen gör du som vanligt."
+    - "I första lektionen är tre saker nya: starten, lektionens fråga och Avslut. I starten ställer du två frågor om något klassen redan kan, så att eleverna kan tänka på rutinen Boken stängd och färgpennan. Lektionens fråga står där du säger vad ni ska lära er, och Avslut svarar på den. Frågan ska gå att gissa på utifrån det klassen redan vet, men bara dagens innehåll ska svara helt på den. Resten av lektionen gör du som vanligt."
     - "Du säger: ”Det här samlas inte in. Det du inte minns är det vi övar på. Det ska kännas lite svårt.”"
   plan:
     amne: Biologi
@@ -386,34 +389,37 @@ forsta:
     belagg: "svaret på lektionens fråga, sist och ur minnet"
     blad: "två frågor på tavlan och svaren"
     forberett: "orden med bild till studiehandledaren"
-    fore: { sitta: "Att maten bryts ned och tas upp av blodet i tunntarmen", fragan: "Vart tar frukosten vägen?", strategin: "Inget, bara ramen", veckan: "Vad finns i en cell?", manaden: "Varför behöver cellerna näring?", tror: "6 på fråga 2" }
+    fore: { sitta: "Att maten bryts ned och tas upp av blodet i tunntarmen", fragan: "Vart tar frukosten vägen?", svaret: "Den bryts ned i magsäcken och tunntarmen, och blodet tar upp näringen.", veckan: "Vad finns i en cell?", manaden: "Varför behöver cellerna näring?", tror: "6 på fråga 2" }
     delar:
       - { fas: Start, text: "En tom bild av en cell" }
-      - { fas: Det nya, text: "Vart tar frukosten vägen? Magsäcken och tunntarmen" }
-      - { fas: Öva, text: "Som vanligt, med boken öppen" }
-      - { fas: Avslut, text: "En rad" }
-    beslut: { elever: 28, nastanAlla: "fyra veckor", deFlesta: ["nästa vecka", "en tom bild av en cell"], halften: "i Det nya på onsdag" }
+      - { fas: Din planering, text: "Inget i genomgången om magsäcken och tunntarmen eller i övningen med boken öppen" }
+      - { fas: Avslut, text: "10.39. En rad" }
+    beslut: { elever: 28, nastanAlla: "fyra veckor", deFlesta: ["nästa vecka", "en tom bild av en cell"], halften: "när genomgången börjar på onsdag" }
 rutiner:
   rubrik: Rutinerna klassen lär sig
   rader:
     - namn: Boken stängd och färgpennan
       vecka: 1
+      stalle: Start
       vad: "Eleverna tar fram det de minns med boken stängd, ser svaret och fyller i det som saknades med färgpennan, utan att sudda. Klassen gör rutinen i starten och i Avslut, också när det gamla kommer tillbaka."
       steg: ["Stäng boken, och vänd blad i skrivboken.", "Skriv det du minns.", "Titta på svaret och fyll i det som saknas med färgpennan."]
       forsta: "Ta två frågor om något klassen redan kan, och säg varför ni gör det."
     - namn: Exemplet först, sedan själv
       vecka: 5
-      vad: "Du visar ett löst exempel steg för steg, och eleverna löser direkt en liknande uppgift. De yngsta följer exemplet med fingret."
+      stalle: Din planering
+      vad: "I din genomgång visar du ett löst exempel steg för steg, och eleverna löser direkt en liknande uppgift. De yngsta följer exemplet med fingret."
       steg: ["Följ exemplet steg för steg.", "Lös den liknande uppgiften.", "Säg varför du gör steget."]
       forsta: "Ta ett exempel som klassen nästan kan. Låt alla lösa den liknande uppgiften och sedan säga varför det första steget görs."
     - namn: Rita ur minnet
       vecka: 7
-      vad: "Eleverna ritar sambandet ur minnet med rutor, pilar och ämnets ord i ungefär två minuter och förklarar för grannen, som frågar: ”Varför?” När du har sagt svaret, lägger de till det som saknades med färgpennan."
+      stalle: Avslut
+      vad: "I Avslut ritar eleverna sambandet ur minnet med rutor, pilar och ämnets ord i ungefär två minuter och förklarar för grannen, som frågar: ”Varför?” När du har sagt svaret, lägger de till det som saknades med färgpennan."
       steg: ["Stäng boken och rita i två minuter.", "Förklara bilden för grannen.", "Lyssna på lärarens svar och fyll i med färgpennan."]
       forsta: "Låt först några elever peka i din bild: ”Kom och peka, och säg vad som händer här.” Visa sedan hur en skiss ser ut: ”Den ska inte vara fin, den ska vara rätt.”"
     - namn: Slaget först
       vecka: 9
-      vad: "I en blandad rad skriver eleven först vilket slag uppgiften är och löser den sedan. Facit kommer när raden är klar."
+      stalle: Din planering
+      vad: "I en blandad rad i din övning skriver eleven först vilket slag uppgiften är och löser den sedan. Facit kommer när raden är klar."
       steg: ["Läs uppgiften och skriv slaget.", "Lös uppgiften.", "Rätta när raden är klar."]
       forsta: "Ta två slag som klassen kan var för sig, och visa en uppgift av varje bredvid varandra: ”Vad skiljer dem?”"
 larandet:
@@ -436,7 +442,7 @@ uppdrag:
   reflektera:
     - Svarade de två elever ni följde som ni trodde?
     - Vad gick framåt, och var gled strategin mot en tom rutin?
-    - Vad tar ni med till nästa strategi?
+    - Var i ert nästa arbetsområde behöver innehållet ett exempel, en bild eller en blandad rad?
 
 # ---------------------------------------------------------------------------------------------------------------------
 # 4 Håll i
@@ -444,11 +450,11 @@ uppdrag:
 lararensFragor:
   rubrik: Lärarens frågor
   fragor:
-    - { fraga: "Får jag hoppa över framplockningen i starten när tiden är knapp?", svar: "Ja, om den kommer sist eller mitt i lektionen, med en fråga i stället för två eller tre. Det som står kvar är att alla svarar själva innan svaret visas, att en fråga gäller ett varför och att svaret kommer samma lektion.", komponent: Plocka fram }
+    - { fraga: "Får jag hoppa över framplockningen i starten när tiden är knapp?", svar: "Ja, om du tar en gammal fråga om varför i Avslut i stället. Det som står kvar är att alla svarar själva innan svaret visas, att en fråga gäller ett varför och att svaret kommer samma lektion.", komponent: Plocka fram }
     - { fraga: "Får jag använda flera strategier i samma lektion?", svar: "Ja. Ramen finns i varje lektion, och verktygen tar du när innehållet behöver dem. Strategierna samverkar (EEF, 2021). I program med flera var effekterna mindre och berodde på hur väl de genomfördes (Perry m.fl., 2021)." }
     - { fraga: "Får jag blanda olika ämnen eller hela arbetsområden?", svar: "Nej. Blanda korta uppgifter i samma ämne, av slag som eleverna lätt förväxlar. Underlaget för att blanda skolämnen är tunt (Weinstein m.fl., 2018).", komponent: Blanda uppgifter }
     - { fraga: "Vad gör jag om eleverna inte räcker upp handen när de hade fel?", svar: "Titta i fem skrivböcker: stämmer färgpennan med händerna? Säg mottot igen, ”Det du inte minns är det vi övar på”, och att händerna inte påverkar betyget.", komponent: Plocka fram }
-    - { fraga: "Hur hinner jag med kursen och materialet?", svar: "Ersätt i stället för att lägga till. Tre frågor i starten tar inte längre tid än en genomgång av förra lektionen, och en blandad rad går att göra av bokens olika avsnitt. Dela frågorna och exemplen i ämneslaget." }
+    - { fraga: "Hur hinner jag med kursen och materialet?", svar: "Ersätt i stället för att lägga till: starten tar platsen för återblicken och Avslut för din sammanfattning. Du kan göra en blandad rad ur bokens olika avsnitt. Dela frågorna och exemplen i ämneslaget." }
 hinder:
   rubrik: Det svåraste med metoden
   text: "Det svåraste är att strategin blir målet: ”nu ska jag få in Sprid ut” och inte ”hur lär sig eleverna mer av boken?”. Då blir strategierna aktiviteter som läraren bockar av utan att veta varför (Perry m.fl., 2021). Bilderna blir pynt, och de lösta exemplen känns inklämda (EEF, 2021; Aston m.fl., 2025). Börja i vad eleverna ska lära sig och varför, och se efter i starten. Uteblir frågan från förra månaden, har strategin fallit bort. Får frågan svar utan varför, har strategin blivit en tom rutin."
@@ -464,7 +470,7 @@ fallgropar:
     - { fallgrop: "Blandningen blir omväxling", hander: "Du byter aktiviteter eller hela arbetsområden, eller blandar raden innan eleverna kan slagen, och de fastnar.", prova: "Blanda korta uppgifter av slag som förväxlas och har övats var för sig, och visa facit när raden är klar.", komponent: Blanda uppgifter }
     - { fallgrop: "Alla strategier på en gång", hander: "Strategierna blir en lista som syns men inte förstås, och eleverna gör inte det tankearbete de kräver.", prova: "Ta en i taget. Ramen står kvar, och verktygen tar du vid behov." }
     - fallgrop: När blandningen blir för svår
-      moment: [Öva]
+      moment: [Din planering]
       hander: Eleverna fastnar på varannan uppgift, gissar slag eller tappar lusten.
       steg:
         - Ge några uppgifter av ett slag i taget före raden.
@@ -498,7 +504,7 @@ ramar:
   text: ["Utöver lektionskortet och strategikorten finns frågekartan för de yngsta. Återkomstlistan för dig och ämneslaget är en mall att skriva i, och den står sist i bilaga A."]
   ramar:
     - rubrik: Frågekartan
-      text: ["Skriv arbetsområdets namn i mitten och fem frågor runt omkring. Kopiera två blad i A4 per elev, eller visa bladet på tavlan. Eleverna fyller i det första med boken öppen och sedan, samma lektion, det andra med boken stängd, och ringar in öppen eller stängd. I starten veckan efter fyller de i ett nytt med boken stängd. Bladet passar F–⁠3 och den som är ny i svenska."]
+      text: ["Skriv arbetsområdets namn i mitten och fem frågor runt omkring, en av dem om varför. Kopiera två blad i A4 per elev, eller visa bladet på tavlan. Under din övning fyller eleverna i det första bladet med boken öppen. I Avslut lägger de undan bok och blad och fyller i det andra ur minnet, först lektionens fråga och sedan så många av kartans frågor som de hinner. I starten veckan efter fyller de i ett nytt med boken stängd. Bladet passar F–⁠3 och den som är ny i svenska."]
 tabeller:
   - rubrik: Ett arbetsområde med strategierna
     plats: efter-progression
@@ -507,7 +513,7 @@ tabeller:
     kolumner: [Arbetsområdets vecka, Strategierna, Så gör du]
     rader:
       - ["Vecka 1", "Ord och bild", "Du ritar kretsloppet enkelt, en del i taget, och pekar och säger. Eleverna ritar det ur minnet sist."]
-      - ["Vecka 2", "Plocka fram, Ord och bild", "Ledtråden efter en minut är en tom bild av kretsloppet, och eleverna fyller i ord och pilar ur minnet."]
+      - ["Vecka 2", "Ord och bild i starten", "Ledtråden efter en minut är en tom bild av kretsloppet, och eleverna fyller i ord och pilar ur minnet."]
       - ["Vecka 3", "Blanda uppgifter", "Eleverna får dagg på gräset, tvätt som torkar och imma på spegeln blandat: vad heter det, och från vilken form till vilken?"]
       - ["Vecka 1–⁠4, och en månad senare", "Sprid ut, Plocka fram", "Frågorna från vecka 1 och 2 kommer tillbaka i starten, och samma frågor en månad senare."]
   - rubrik: Utveckla metoden
@@ -521,7 +527,7 @@ tabeller:
       - ["Elevernas egen plan", "Eleverna skriver hur de använder en strategi när de pluggar hemma inför ett prov.", "Eleven gör strategin till sin egen."]
       - ["En strategi till", "Ta en strategi till när de fem sitter, och ge den två veckor.", "Ni lär er den nya som de fem."]
   - rubrik: Återkomstlistan
-    text: "Återkomstlistan är din plan för vad som ska komma tillbaka i ett arbetsområde och när. Skriv det som ska sitta innan arbetsområdet börjar, och fyll på efter varje lektion. Kopiera den tomma mallen till Google Dokument eller Word, och dela den med ämneslaget."
+    text: "Återkomstlistan är din plan för vad som ska komma tillbaka i ett arbetsområde och när. Skriv det som ska sitta innan arbetsområdet börjar, och fyll på efter varje lektion. Efter en månad frågar du om samma samband i ett nytt fall. Kopiera den tomma mallen till Google Dokument eller Word, och dela den med ämneslaget."
     kolumner: [Arbetsområdet, I exemplet]
     rader:
       - ["Klass och ämne", "5A, NO"]
@@ -534,7 +540,7 @@ tabeller:
     rader:
       - ["Avdunstning: solen värmer vattnet, som blir vattenånga", "3/3", "5/3, 12/3, 2/4", "2/4: 3 av 26 med fel", "Pilen upp från sjön", "Kokning"]
       - ["Kondensation: vattenångan kyls och blir små droppar i molnen", "5/3", "10/3, 17/3, 7/4", "7/4: 5 av 26 med fel", "Molnet med droppar", "Avdunstning"]
-      - ["Nederbörd: dropparna blir tunga och faller som regn eller snö", "5/3", "10/3, 17/3, 7/4", "7/4: 2 av 26 med fel", "Pilen ned från molnet", "Inget"]
+      - ["Nederbörd: dropparna eller iskristallerna blir tunga och faller som regn eller snö", "5/3", "10/3, 17/3, 7/4", "7/4: 2 av 26 med fel", "Pilen ned från molnet", "Inget"]
       - ["Avrinning: vattnet rinner till sjöar och hav", "10/3", "12/3, 19/3, 9/4", "9/4: 4 av 26 med fel", "Pilen längs marken", "Grundvatten"]
       - ["Varför: solens värme driver kretsloppet", "12/3", "17/3, 24/3, 14/4", "14/4: 8 av 26 med fel", "Solen över sjön", "Vinden"]
   - rubrik: "Återkomstlistan: till nästa arbetsområde"
@@ -545,15 +551,15 @@ tabeller:
       - ["Avdunstning mot kondensation", "Vecka 3, blandat med de andra fasövergångarna", "Förväxlades fram till andra återkomsten"]
       - ["Nederbörd", "En gång till efter en månad", "Satt efter två återkomster"]
 planeringsmall:
-  text: "Skriv på din egen planering eller på bladet. Fyll i ramen och de verktyg du tar i dag, och låt resten stå tomt."
+  text: "Planeringsmallen är ingen ny planering. Före lektionen räcker fyra rader på din egen: det som ska sitta, lektionens fråga med svaret i en mening, två gamla frågor och vad du gör om i dag. Resten fyller du i efter lektionen."
   fore:
-    - { etikett: "Innehållet först", rader: ["Begreppet eller sambandet:", "Lektionens fråga:", "Verktygen i dag:"], falt: [sitta, fragan, strategin] }
+    - { etikett: "Innehållet först", rader: ["Begreppet eller sambandet:", "Lektionens fråga:", "Svaret i en mening:"], falt: [sitta, fragan, svaret] }
     - { etikett: "Tillbaka i dag", rader: ["Förra veckan:", "Förra månaden:"], falt: [veckan, manaden], fot: "Så många tror jag har fel:", fotFalt: tror }
   delar:
     - { fas: Start, skriv: "Ledtråden efter en minut:", not: "Böckerna stängda, sedan svaret och färgpennan.", hojd: 0.6 }
-    - { fas: Det nya, skriv: "Frågan, bilden och exemplet:", hojd: 1.0 }
-    - { fas: Öva, skriv: "Det som blandas, och stödet jag tar bort:", hojd: 0.8 }
-    - { fas: Avslut, skriv: "Svaret ur minnet på lektionens fråga:", not: "Boken stängd, grannen frågar varför, sedan svaret och färgpennan.", hojd: 0.7 }
+    - { fas: Lektionens fråga, not: "Läs frågan högt. Alla gissar. Rätta ingen gissning." }
+    - { fas: Din planering, skriv: "Det jag gör om, och var:", not: "Ett exempel, en bild eller en blandad rad, bara när innehållet behöver det.", hojd: 1.2 }
+    - { fas: Avslut, skriv: "Avslut börjar kl.", not: "Boken stängd, grannen frågar varför, sedan svaret och färgpennan.", hojd: 0.6 }
   beslut: { nastanAlla: "Kommer tillbaka om:", deFlesta: ["Nästa gång:", "Ledtråden:"], halften: "Jag undervisar igen:" }
   efter:
     text: "Fyll i direkt efter lektionen, och skriv det som ska komma tillbaka på återkomstlistan."
@@ -567,7 +573,7 @@ planeringsmall:
   sist: ["Efter lektionen: frågan med flest fel och när den kommer tillbaka", Återkomstlistan]
 observation:
   fraga: Vad gör eleverna i huvudet, strategi för strategi?
-  text: "Skriv ut dubbelsidigt. Välj med läraren två elever att följa, A och B, gärna en som brukar ha det svårt. Stå där du ser deras skrivböcker och tavlan."
+  text: "Skriv ut dubbelsidigt. Välj med läraren två elever att följa, A och B, gärna en som brukar fastna. Säg till varandra hur ni tror att de svarar. Stå där du ser deras skrivböcker och tavlan."
   fokus: Hur många tog fram något ur minnet innan svaret visades?
   huvud: ["Klassens strategier"]
   kolumner:
@@ -577,17 +583,17 @@ observation:
   tecken: "+ tar fram ur minnet, t tittar i boken, 0 tomt, s säger sambandet, v väljer slag först."
   delar:
     - { fas: Start, rader: 3, rakna: "Tog fram ur minnet: ___ av ___   Höll sig inom fem minuter: ja · nej   Äldre innehåll: ja · nej" }
-    - { fas: Det nya, rader: 3, rakna: "Skrev en gissning: ___ av ___" }
-    - { fas: Öva, rader: 2, rakna: "Skrev slaget först: ___ av ___   Stödet borttaget för: ___" }
+    - { fas: Lektionens fråga, rader: 1, rakna: "Skrev en gissning: ___ av ___" }
+    - { fas: Din planering, rader: 3, rakna: "Verktyget: exempel · bild · rad   Slaget först: ___ av ___   Stödet bort när de kunde: ja · nej" }
     - { fas: Avslut, rader: 2, rakna: "Svarade ur minnet: ___ av ___   Sa sambandet med ämnets ord: ___ av ___" }
   streck:
-    - { etikett: Svaret, drag: ["Alla skrev före svaret", "Undervisade igen i starten"] }
+    - { etikett: Svaret, drag: ["Alla svarade själva före svaret", "Undervisade igen i starten"] }
     - { etikett: Bilden, drag: ["Pekade när hen talade", "Läste upp text i bilden"] }
     - { etikett: Stödet och raden, drag: ["Facit när raden var klar", "Tog bort ett steg i stödet"] }
   rader:
     - "Elever som tog fram ur minnet innan svaret visades: __ av __. En fråga om varför: ja · nej"
     - "Elever som tog fram innehåll från förra veckan eller månaden: __ av __. Från återkomstlistan: ja · nej"
-    - "Elever som löste uppgiften efter exemplet: __ av __. Stödet borttaget för dem som kunde: ja · nej"
+    - "Elever som löste uppgiften efter exemplet: __ av __. Stödet bort när de kunde: ja · nej"
     - "Elever som förklarade sambandet med bilden, också ur minnet: __ av __"
     - "Elever som valde rätt slag innan de löste: __ av __"
 
@@ -617,8 +623,8 @@ grund:
   rubrik: Det forskningen visar
   text:
     - "Metoden bygger på forskningen om framplockning (retrieval practice), spridning (spaced practice), blandning (interleaving), ord och bild (dual coding) och lösta exempel som minskar belastningen (cognitive load, worked examples). I skolan är varje strategi prövad för sig, mot undervisning utan den. I 53 studier i vanliga klassrum gav framplockning 0,37, spridning 0,20 och blandning 0,40 (Ruitenburg m.fl., 2026), och mot inget prov alls gav korta prov 0,22 (Dietrichson m.fl., 2026)."
-    - "Ord och bild gav 0,47 i 56 lottade studier i skolan, 0,21 från förskolan till åk 5 och 0,74 från åk 6 till gymnasiet. Två av tre studier pågick en enda lektion, effekten var borta efter två veckor eller mer i de sju studier som mätte så sent, och skillnaderna mellan studierna förklarades inte. När elevernas egen lärare ledde var effekten 0,35, inte säkert (Banks m.fl., 2026). I 11 studier i åk 1–⁠6 gav bilder till texten 0,27 i läsförståelse (Guo m.fl., 2020)."
-    - "EEF:s systematiska översikt ger underlaget för lösta exempel i matematik och NO för åldrarna 11–⁠18 måttlig tillförlitlighet och för de flesta andra former låg (Perry m.fl., 2021). I skrivning gav lösta exempel ingen skillnad i 55 skolor, och elever med lägre resultat tryckte in mönstren i texten utan att förstå varför (Aston m.fl., 2025). Blandning är nästan bara prövad i matematik, där ett stort försök i åk 7 gav 61 mot 38 procent rätt en månad senare (Rohrer m.fl., 2020)."
+    - "Ord och bild gav 0,47 i 56 lottade studier i skolan, 0,21 från förskolan till åk 5 och 0,74 från åk 6 till gymnasiet. Två av tre studier pågick en enda lektion, och skillnaderna mellan studierna förklarades inte. Efter två veckor eller mer var effekten inte säker i de sju studier som mätte så sent. När elevernas egen lärare ledde var effekten 0,35, inte säkert (Banks m.fl., 2026). I 11 studier i åk 1–⁠6 gav bilder till texten 0,27 i läsförståelse (Guo m.fl., 2020)."
+    - "EEF:s systematiska översikt ger underlaget för lösta exempel i matematik och NO för åldrarna 11–⁠18 måttlig tillförlitlighet och för de flesta andra former låg (Perry m.fl., 2021). I 55 skolor gav lösta exempel i skrivning inget mer än diskuterade exempel, och elever med lägre resultat tryckte in mönstren i texten utan att förstå varför (Aston m.fl., 2025). Blandning är nästan bara prövad i matematik, där ett stort försök i åk 7 gav 61 mot 38 procent rätt en månad senare (Rohrer m.fl., 2020)."
     - "Helheten ger mindre effekter. Program som byggde in flera strategier gav från −0,13 till 0,62 med låg tillförlitlighet (Perry m.fl., 2021), och den största studien, 20 591 elever i 89 skolor, gav 0,16 i NO, mest för elever med högre tidigare resultat (Kramer m.fl., 2024). Med ett prov som inte gjordes för försöket gav en omgjord kurs i matematik 0,12, inte säkert (Davenport m.fl., 2020), och ett quiz i starten gav ingen skillnad mot en diskussion i 15 skolor (Roy m.fl., 2023)."
     - "EEF:s vägledning säger att det är svårare att tillämpa strategierna än att känna till dem, och att de lätt glider mot tomma rutiner (EEF, 2021). IES gav starkt stöd för att låta eleverna ta fram ur minnet och svara på frågor om varför, och måttligt stöd för att sprida ut övningen och kombinera ord och bild (Pashler m.fl., 2007). Det eleven redan kan avgör vilket stöd som hjälper (Sweller m.fl., 2019), och underlaget för att blanda olika ämnen är tunt (Weinstein m.fl., 2018). Ingen studie av strategierna har mätt studiero eller samarbete."
 kallor:
@@ -651,14 +657,14 @@ lasMer:
 # ---------------------------------------------------------------------------------------------------------------------
 plan:
   passen:
-    - { nar: första lektionen, kort: Boken stängd och färgpennan, text: "Bara starten och lektionens fråga är nya. Du ställer två frågor om något klassen redan kan, så att eleverna kan tänka på rutinen Boken stängd och färgpennan. Det nya börjar med lektionens fråga, och Avslut svarar på den. Frågan ska gå att gissa på utifrån det klassen redan vet, men bara dagens innehåll ska svara helt på den. Resten av lektionen gör du som vanligt." }
+    - { nar: första lektionen, kort: Boken stängd och färgpennan, text: "I första lektionen är tre saker nya: starten, lektionens fråga och Avslut. I starten ställer du två frågor om något klassen redan kan, så att eleverna kan tänka på rutinen Boken stängd och färgpennan. Lektionens fråga står där du säger vad ni ska lära er, och Avslut svarar på den. Frågan ska gå att gissa på utifrån det klassen redan vet, men bara dagens innehåll ska svara helt på den. Resten av lektionen gör du som vanligt." }
   fore: ["Välj ämnet, klassen och de två lektioner i veckan där du börjar."]
   utvardering: ["En kvart i månaden tar arbetslaget upp en strategi. Ta med återkomstlistan och två elevers skrivböcker: vad gjorde de i huvudet? Den som inte lär sig innehållet tar du upp med specialläraren."]
   skattningar:
     - namn: Hur säker är jag på metoden?
       vem: lararen
       rad: lararen
-      text: "Skatta i slutet av veckan. Tänk på ramen och de verktyg du använde: Tog alla fram ur minnet innan svaret visades? Tog eleverna fram något från förra veckan eller månaden? Kom exemplet först, och minskade stödet? Förklarade klassen sambandet med bilden, också ur minnet? Valde eleverna slag i en blandad rad?"
+      text: "Skatta i slutet av veckan. Tänk på ramen och de verktyg du använde: Tog alla fram ur minnet före svaret, med en fråga om varför? Tog eleverna fram något från förra veckan eller månaden? I vilka av dina lektioner kom veckans verktyg in? Löste alla en liknande efter exemplet, och minskade stödet när de kunde? Förklarade klassen sambandet med bilden, också ur minnet? Valde eleverna slag i en blandad rad?"
       skala: { fran: 1, till: 10 }
       regler:
         - { om: under 5 i 2 veckor i rad, rad: osaker }
@@ -676,9 +682,9 @@ plan:
 lathund:
   metoden:
     text:
-      - "Du lär dig fem kognitionsvetenskapliga strategier, principer som gör att vi förstår och minns det vi lär oss, en i taget. Två är ramen i varje lektion och tre verktyg. Vad klassen ska lära sig väljer du först."
+      - "Du lär dig fem kognitionsvetenskapliga strategier, en i taget. Två är ramen, 9–⁠12 minuter i varje lektion, och tre är verktyg i din genomgång och övning. Vad klassen ska lära sig väljer du först."
       - "Lärandet går till så här. Eleverna minns det de tänker på, och lektionens fråga gör dem nyfikna på det. De plockar fram det, möter det igen, ser ett löst exempel, förklarar med en bild och väljer sätt."
   lektion:
-    text: "Bara starten och lektionens fråga är nya. Med boken stängd svarar alla på två frågor om något klassen redan kan. Du visar svaret, och de fyller i med färgpennan. Det nya börjar med lektionens fråga, och Avslut svarar på den."
+    text: "Tre saker är nya: starten, lektionens fråga och Avslut. I dag tar de 15 minuter, och resten är din lektion. Med boken stängd svarar alla på två frågor om något de kan. Du visar svaret, och de fyller i med färgpennan. Fel är när det du stryker under saknas. Lektionens fråga står där du säger vad ni ska lära er, och Avslut svarar på den."
   igang:
     rubrik: De första veckorna
