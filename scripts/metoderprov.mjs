@@ -1014,13 +1014,19 @@ try {
     const UTFALLENS_ORDNING = ['nastanAlla', 'deFlesta', 'halften'];
     const stegets = (d.steg?.rader ?? []).find((s) => s.redo)?.redo ?? {};
     const variantens = (d.tidsschema?.varianter ?? []).find((v) => v.nar === 'första lektionen')?.redo;
-    const bladen = [...sida.matchAll(/<div class="um-blad[^"]*" data-variant="([^"]*)"/g)].map((m, i, alla) => ({ variant: m[1], html: sida.slice(m.index, alla[i + 1]?.index ?? sida.length) }));
+    // Ett tomt värde skriver Astro som data-variant utan likhetstecken, så båda formerna läses (Codex verifiering 2026-11-08).
+    const bladen = [...sida.matchAll(/<div class="um-blad[^"]*" data-variant(?:="([^"]*)")?[\s>]/g)].map((m, i, alla) => ({ variant: m[1] ?? '', html: sida.slice(m.index, alla[i + 1]?.index ?? sida.length) }));
+    // Rutorna som bladet ska ha: tre när bladets plan har beslutet, huvudexemplets plan på det ena bladet och första lektionens på
+    // det andra (src/components/Undervisningsmetod.astro), och annars inga.
+    const huvudPlan = (d.amnesexempel ?? []).find((e) => e.huvud)?.plan;
     if (d.forsta?.plan?.beslut && !bladen.some((b) => b.variant === 'första lektionen')) fel.push(`/metoder/${id}: sidan har inget planeringsblad för första lektionen (data-variant)`);
+    if (huvudPlan?.beslut && !bladen.some((b) => b.variant === '')) fel.push(`/metoder/${id}: sidan har inget planeringsblad för huvudexemplet`);
     for (const blad of bladen) {
       const forsta = blad.variant === 'första lektionen';
       const rutorna = [...blad.html.matchAll(/<p class="um-utfall-grans">([\s\S]*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, '').replace(/&(amp|lt|gt|quot|#39|#x27);/g, (h, k) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", '#x27': "'" })[k]));
-      if (!rutorna.length) continue;
-      if (rutorna.length !== 3) { fel.push(`/metoder/${id}: planeringsbladet ${blad.variant || 'huvudexemplet'} har ${rutorna.length} av utfallens tre rutor`); continue; }
+      const vantade = (forsta ? d.forsta?.plan : huvudPlan)?.beslut ? 3 : 0;
+      if (rutorna.length !== vantade) { fel.push(`/metoder/${id}: planeringsbladet ${blad.variant || 'huvudexemplet'} har ${rutorna.length} utfallsrutor och ska ha ${vantade}`); continue; }
+      if (!vantade) continue;
       for (const [j, u] of UTFALLENS_ORDNING.entries()) {
         const ruta = rutorna[j];
         const egen = forsta ? variantens?.[u] : undefined;
@@ -1029,8 +1035,8 @@ try {
         const text = String(egen ?? stegets[u] ?? '');
         const forstaMeningen = /^[^.]*\./.exec(text)?.[0] ?? '';
         const led = /,\s+([^\s,.][^,.]*)\.$/u.exec(forstaMeningen)?.[1];
-        // Resten av utfallet efter den första meningen står också i rutan, så att bladet följer sin källa.
-        const resten = text.slice(forstaMeningen.length).trim().split(/(?<=\.)\s/)[0];
+        // Hela resten av utfallet efter den första meningen står också i rutan, så att bladet följer sin källa.
+        const resten = text.slice(forstaMeningen.length).trim();
         if (resten && !ruta.replace(/\s+/g, ' ').includes(resten.replace(/\s+/g, ' '))) fel.push(`/metoder/${id}: planeringsbladet ${blad.variant || 'huvudexemplet'}, utfallet ${u}, har inte "${resten.slice(0, 60)}"`);
         if (!led) continue;
         const mening = `${led.charAt(0).toLocaleUpperCase('sv')}${led.slice(1)}.`;
