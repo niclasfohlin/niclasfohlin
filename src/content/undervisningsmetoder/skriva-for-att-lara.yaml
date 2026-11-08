@@ -155,6 +155,10 @@ tidsschema:
   varianter:
     - nar: första lektionen
       text: "Sista kvarten går till skrivkortet."
+      redo:
+        nastanAlla: "Högst 5 av 28 tomma böcker, i rundan högst en av sex. Läs två meningar högt, och skriv en av dem på tavlan om eleven säger ja."
+        deFlesta: "6–13 av 28, i rundan två av sex. Läs en mening högt och skriv den på tavlan, så att den som inte kom igång kan låna den."
+        halften: "14 eller fler av 28, i rundan tre eller fler av sex. Visa din text om kortet, och skriv en mening ihop på tavlan som alla får låna. Alla skriver en mening till."
       delar:
         - { fas: Din planering, tid: 0–⁠30 min }
         - { fas: Stanna och skriv, tid: 30–⁠37 min, fraser: ["Vi skriver för att ta reda på vad vi tänker.", "Det här rättas inte."] }
@@ -356,7 +360,7 @@ progression:
   text: "Metoden är troligen ny för eleverna i ditt ämne. Kärnans alla delar finns i liten skala från första lektionen, och varje vecka lägger ni till en sak. Syns den inte än, ta en vecka till. Har klassen två gånger klarat sig utan ett ord att låna, suddar du det. När klassen kan rutan fyller eleverna själva i Vem läser. I F–⁠1 är vecka 3 och 5 muntliga: paren berättar om sina bilder för varandra. Efter veckorna går en text till en läsare utanför klassen en gång per arbetsområde. Du frågar först om mottagaren kan svara, och klassen läser svaret tillsammans."
   rader:
     - { vecka: "1", led: Alla skriver, rubrik: "Stanna, skriv och läs en mening", eleverna: "Att börja skriva direkt, skriva tills klockan ringer, läsa en mening för axelkompisen och tacka.", roll: "Att skriva själv första minuten, gå runt utan att rätta och säga vad du läste.", vidare: "nästan alla skriver tills klockan ringer och läser en mening", fraga: "Skrev nästan alla tills klockan ringde, och läste de en mening för kamraten?" }
-    - { vecka: "2", led: Frågan, rubrik: Frågan som kräver tänkande, eleverna: "Att skriva om innehållet med egna ord, ge ett skäl och låna ord från tavlan.", roll: "Att visa två egna texter bredvid varandra, byta frågan tills den inte går att återge, och pröva sex böcker mot utfallen.", vidare: "nästan alla skriver mer än det ni gjorde", fraga: "Stod det mer än det ni gjorde i nästan alla av de sex böckerna?" }
+    - { vecka: "2", led: Frågan, rubrik: Frågan som kräver tänkande, eleverna: "Att skriva om innehållet med egna ord, ge ett skäl och låna ord från tavlan.", roll: "Att visa två egna texter, byta frågan om den går att återge, gärna ur Skrivfrågor att låna, och pröva sex böcker mot utfallen.", vidare: "nästan alla skriver mer än det ni gjorde", fraga: "Stod det mer än det ni gjorde i nästan alla av de sex böckerna?" }
     - { vecka: "3", led: Någon läser, rubrik: "Byt böcker, och en rad till", eleverna: "Att byta böcker, läsa tyst, säga vad de läste och skriva en rad till i annan färg.", roll: "Att visa en rad till på din egen text, och läsa raderna i annan färg i rundan.", vidare: "nästan alla säger vad de läste, och raden i annan färg säger något nytt", fraga: "Sa nästan alla vad de läste, och sa raden i annan färg något nytt?" }
     - { vecka: "4", led: Texten går vidare, rubrik: Elevens rad blir nästa fråga, eleverna: "Att sätta en stjärna vid en vald rad, och skriva utifrån en kamrats rad.", roll: "Att läsa fem böcker på fem minuter, och börja nästa lektion med en rad på tavlan.", vidare: "en lektion i veckan börjar med en elevs rad, och nästan alla skriver mer än att de håller med", fraga: "Började en lektion med en elevs rad, och skrev nästan alla mer än att de höll med?" }
     - { vecka: "5", led: Någon svarar, rubrik: Svara skriftligt, eleverna: "Att skriva ett svar på en kamrats rad med kortet Så svarar vi.", roll: "Att visa svar på din text, och låta eleven välja vad hen gör med svaret.", vidare: "nästan alla svar säger något om innehållet", fraga: "Sa nästan alla svar något om innehållet?" }
@@ -369,6 +373,7 @@ uppfoljning:
     - { id: observationerna, nar: "Vecka 2 och 4", tid: vecka 2 och 4, vad: "Specialläraren ser en lektion i vecka 2 och läser böckerna från dem som inte kommer igång. I vecka 4 ser en kollega eller rektor en lektion som börjar med en elevs rad." }
     - { id: arbetslaget-fore, nar: Före första lektionen, tid: före, vad: "På första mötet tar ni varsin lektion och byter frågan tills den inte går att återge." }
     - { id: arbetslaget-efter, nar: Vecka 5, tid: vecka 5, vad: "I slutet av vecka 5 ses ni med tre elevtexter utan namn och bestämmer hur ni går vidare." }
+    - { id: idekorten, nar: Efter de fem veckorna, tid: efter, vad: "Ta fram Idékorten. Välj ett kort efter det klassen ska tänka, och läs ett uppslag högt innan ni stannar." }
     - { id: stodet, nar: Efter de första veckorna, tid: efter, vad: "Ni ses två gånger till under läsåret med tre texter utan namn. Elever som inte kommer igång eller bara återger trots stödet får stödundervisning. Läs deras skrivböcker med specialläraren." }
     - { id: sexveckor, nar: Sex skolveckor efter vecka 5, tid: efter 6 veckor, vad: "Räkna som varje vecka. En kollega läser raderna i annan färg i sex böcker på måfå, och klassen vet det. Har alla fått välja en rad att dela?" }
     - { id: nastatermin, nar: Nästa termin, tid: nästa termin, vad: "Räkna som varje vecka, och se om ni skriver för att tänka i fler ämnen. Går eleverna tillbaka till sina texter utan att du säger till? Bestäm med rektor hur ni går vidare." }
@@ -379,7 +384,7 @@ checklista:
   punkter:
     - Välj ämnet och lektionerna i veckan där klassen skriver.
     - Ge varje elev en skrivbok och en penna att ha framme, och från vecka 3 en penna i annan färg.
-    - Skriv ut Rutan på tavlan och När jag fastnar, båda i A3.
+    - Skriv ut Rutan på tavlan och När jag fastnar, i A3 eller A4.
     - Ta fram ett skrivkort till första lektionen och pröva frågan själv i två minuter.
     - Bestäm paren, och var du börjar din runda.
     - Säg till rektor, vårdnadshavare och klassen att du inte rättar böckerna, och varför.
@@ -408,7 +413,7 @@ forsta:
       - { fas: Stanna och skriv, text: "Skrivkortet, tre minuter" }
       - { fas: Läsaren, text: "En mening till axelkompisen" }
       - { fas: Nästa steg, text: "Jag läste … och en mening på tavlan" }
-    beslut: { elever: 28, deFlesta: "en mening som jag läser högt", halften: "vi skriver en mening ihop" }
+    beslut: { elever: 28, deFlesta: "en mening som jag läser högt", halften: "min text om kortet och meningen vi skriver ihop" }
 rutiner:
   rubrik: Rutinerna klassen lär sig
   rader:
@@ -513,13 +518,13 @@ ramar:
   text: ["Utöver lektionskortet finns Rutan på tavlan, affischen När jag fastnar, kortet Så svarar vi och sex idékort. Skrivkorten hämtar du på sidan Ta fram ett skrivkort."]
   ramar:
     - rubrik: Rutan på tavlan
-      text: ["Skriv ut Rutan på tavlan i A3 och sätt upp den vid tavlan, eller rita den där. Fyll i den varje gång ni stannar, med tuschpenna på plast eller på tavlan bredvid."]
+      text: ["Skriv ut Rutan på tavlan i A3 eller A4 och sätt upp den vid tavlan, eller rita den där. Fyll i den varje gång ni stannar, med tuschpenna på plast eller på tavlan bredvid."]
     - rubrik: När jag fastnar
-      text: ["Skriv ut affischen i A3 och sätt upp den där alla ser den. Peka på den när en elev frågar vad hen ska göra. Klassen kan skriva om den med egna ord."]
+      text: ["Skriv ut affischen i A3 eller A4 och sätt upp den där alla ser den. Peka på den när en elev frågar vad hen ska göra. Klassen kan skriva om den med egna ord."]
     - rubrik: Så svarar vi
       text: ["Skriv ut kortet och klipp isär det, ett kort per par från vecka 5. Korten är ett lån: orden ska bli elevernas egna, och när klassen klarar sig tar du bort dem."]
     - rubrik: Idékorten
-      text: ["Skriv ut korten dubbelsidigt och klipp på linjen, så får du sex halvkort. Skriv kortets ord i rutan, eller ett skarpare verb som förklara varför, och läs uppslaget på baksidan högt för klassen. Ta fram korten när de fem veckorna är gjorda."]
+      text: ["Skriv ut korten dubbelsidigt, vänd längs långsidan, och klipp på linjen, så får du sex halvkort. Skriv kortets ord i rutan, eller ett skarpare verb som förklara varför, och läs uppslaget på baksidan högt för klassen. Ta fram korten när de fem veckorna är gjorda."]
 tabeller:
   - rubrik: Vad händer sedan
     plats: efter-inledning
@@ -594,6 +599,7 @@ tabeller:
       - ["Frågelappar som flyttas", "Eleverna sätter sina frågor på tavlan, och klassen flyttar upp lappen när den kan visa svaret."]
       - ["Tänka, samtala, skriva", "Klassen samtalar, du bygger en tankebank på tavlan, och var och en skriver sin text. Det tar omkring 20 minuter."]
 planeringsmall:
+  bladEtikett: Material
   text: "Planeringsmallen är ingen ny planering. Skriv på den du har, eller på bladet när du vill. Det räcker med tre rader: var du stannar, frågan, och vem som läser och vad som händer sedan."
   fore:
     - { etikett: "Skrivfrågan", rader: ["Skriv för att:", "Ordagrant:"], falt: [syfte, fragan] }
