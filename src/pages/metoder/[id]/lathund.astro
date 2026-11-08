@@ -45,7 +45,7 @@ const relaterade = await relateradeMetoder(d);
     <header class="lathund-huvud">
       <p class="meta brodsmula"><a href="/metoder">Metoder</a> · <a href={sida}>{d.titel}</a> · Lathund</p>
       <h1>Lathund: {d.titel}</h1>
-      <p class="ingress">Fyra sidor att ha bredvid sig när du börjar: metoden, vägen till måndag, {slagensOrd(d).lathunden} och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
+      <p class="ingress">Fyra sidor att ha bredvid dig när du börjar: metoden, vägen till måndag, {slagensOrd(d).lathunden} och de första veckorna. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
         <Lathundsknappar fil={`/metoder/${umStam(id, 'lathund')}`} titel={d.titel} />
         {' '}<Umfilknappar id={id} titel={d.titel} filer={filer} slag={['lektionskort']} bara />

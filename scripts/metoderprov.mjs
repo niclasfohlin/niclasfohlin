@@ -881,6 +881,16 @@ try {
         if (!ld.saker?.some((s) => s.namn === c.namn && s.adress === c.adress)) fel.push(`/metoder/${id}/lar-dig: ${c.namn} står i fältet centrala, men är ingen sak som texten kan länka`);
         if (!ld.verktyg?.some((v) => v.adress === c.adress && v.knapp === (c.knapp ?? c.namn))) fel.push(`/metoder/${id}/lar-dig: knappen till ${c.namn} heter inte som på metodens sida`);
       }
+      // Ett verktyg som metodens text nämner med namnet, som Ta fram ett skrivkort i Skriva för att lära, är en sak i Lär dig metoden
+      // som på metodens sida, där Boklankar länkar det; Strategier och Strukturer är vanliga ord och har egna delar (namndaVerktyg i
+      // src/lib/boklankar.ts; Codex kodgranskning 2026-11-08, K-734). Listan räknas här ur registret, och provet går åt båda
+      // hållen: ett verktyg som texten inte nämner är ingen sak, om det inte står i fältet centrala.
+      const texten = JSON.stringify(d);
+      for (const c of register.filter((y) => (y.slag === 'sida' || y.slag === 'pdf') && !['Strategier', 'Strukturer'].includes(y.namn))) {
+        const sak = ld.saker?.some((s) => s.namn === c.namn && s.adress === c.adress);
+        const ska = texten.includes(c.namn) || (d.centrala ?? []).some((x) => x.id === c.id);
+        if (sak !== ska) fel.push(`/metoder/${id}/lar-dig: ${c.namn} ${ska ? 'nämns i metoden men är ingen sak som texten kan länka' : 'nämns inte i metoden men är en sak'}`);
+      }
       const texterna = (d.plan?.passen ?? []).map((p) => p.text ?? '');
       for (const text of texterna) for (const m of text.matchAll(/[A-ZÅÄÖ][^.:,]*? \((?:Lättläst|Mellan|Avancerad), text \d+\)/g)) {
         const traff = sakdelar(text, ld.saker ?? []).some((y) => y.sak && y.text === m[0]);
@@ -888,6 +898,11 @@ try {
       }
       if ((d.ramar?.ramar ?? []).length === 1 && ld.filer?.materialet?.namn !== d.ramar.ramar[0].rubrik) fel.push(`/metoder/${id}/lar-dig: materialets knapp heter ${ld.filer?.materialet?.namn} och inte som bladet ${d.ramar.ramar[0].rubrik}`);
       if (!readFileSync(join(rot, 'src', 'scripts', 'lardig.ts'), 'utf8').includes('<p>${medSaker(p.text)}</p>')) fel.push('src/scripts/lardig.ts: passets text i Lär dig metoden ska länka metodens saker (medSaker)');
+      // Rutinens text om första gången, veckornas gemensamma text och strategitexten länkar metodens saker, som rutinens andra texter
+      // (K-734: "Ta ett skrivkort från sidan Ta fram ett skrivkort" var ingen länk), och veckornas text står i Före.
+      const lardigKoden = readFileSync(join(rot, 'src', 'scripts', 'lardig.ts'), 'utf8');
+      for (const [bit, vad] of [['Första gången</span>${medSaker(r.forsta)}', 'rutinens text om första gången'], ['<p>${medSaker(data.progression.text)}</p>', 'veckornas gemensamma text'], ['<p>${medSaker(k.text)}</p>', 'strategitexten']]) if (!lardigKoden.includes(bit)) fel.push(`src/scripts/lardig.ts: ${vad} i Lär dig metoden ska länka metodens saker (medSaker)`);
+      if (d.progression?.text && !ld.progression?.text) fel.push(`/metoder/${id}/lar-dig: veckornas gemensamma text saknas i planens data`);
     }
     // Säger metoden paren vid utfallen räknar sidan om dem med klassens antal (utfallensPar i standarden).
     if (/alltså högst \S+ par\b/.test(JSON.stringify(d.steg ?? {})) && !sida.includes('data-par=')) fel.push(`/metoder/${id}: utfallen säger par, men sidan räknar inte om dem med klassens antal`);
@@ -903,6 +918,55 @@ try {
       const tillAvsnittet = [...sida.matchAll(/<a\b[^>]*href="[^"]*#strategierna"[^>]*>([\s\S]*?)<\/a>/g)].filter((m) => /strategikorten/i.test(m[1]));
       if (d.ramar.ramar[0].rubrik === 'Strategikorten' && tillAvsnittet.length) fel.push(`/metoder/${id}: bladet heter Strategikorten, men ${tillAvsnittet.length} länkar med namnet leder till avsnittet Strategier för lärande`);
       if (n > 1 && (!existsSync(bladPdf) || !existsSync(mat) || !readFileSync(mat).equals(readFileSync(bladPdf)))) fel.push(`/metoder/${id}: bladet ${d.ramar.ramar[0].rubrik} har ${n} sidor, men materialets pdf är inte bladets sidor`);
+    }
+    // Flera blad, där ett kan ha flera sidor, som Idékorten i Skriva för att lära (K-734; Codex kodgranskning 2026-11-08, fynd 5):
+    // varje blad visar sina sidor ur materialets bilder och har en pdf med lika många sidor. Sidorna står i
+    // src/data/materialets-sidor.json när ett blad har flera, och annars är sidan bladets nummer. Kartan prövas mot bildernas namn
+    // i materialets Word-fil med en egen läsning här, inte med skriptets, så att ett fel i scripts/metoderfiler.mjs syns.
+    if ((d.ramar?.ramar ?? []).length > 1) {
+      const bladen = d.ramar.ramar.map((r) => r.rubrik);
+      const karta = JSON.parse(readFileSync(join(rot, 'src', 'data', 'materialets-sidor.json'), 'utf8'))[id];
+      if (karta) {
+        const docx = join(rot, 'public', 'metoder', `${id}-materialet.docx`);
+        const xml = existsSync(docx) ? await (await JSZip.loadAsync(readFileSync(docx))).file('word/document.xml').async('string') : '';
+        const namnen = [...xml.matchAll(/<wp:docPr\b[^>]*\bname="([^"]*)"/g)].map((m) => m[1].replace(/&amp;/g, '&'));
+        if (JSON.stringify(karta.map((x) => x.blad)) !== JSON.stringify(bladen)) fel.push(`/metoder/${id}: src/data/materialets-sidor.json har bladen ${karta.map((x) => x.blad).join(', ')}, och metoden ${bladen.join(', ')}`);
+        if (karta.flatMap((x) => x.bilder).length !== namnen.length) fel.push(`/metoder/${id}: src/data/materialets-sidor.json har ${karta.flatMap((x) => x.bilder).length} sidor, och materialets Word-fil ${namnen.length} bilder`);
+        namnen.forEach((namn, i) => {
+          const blad = karta.find((x) => x.bilder.includes(i + 1))?.blad;
+          // Den längsta rubriken som namnet börjar med är bladet, så att "Kortet till eleven 2" inte räknas till Kortet.
+          const vantat = bladen.filter((r) => namn === r || namn.startsWith(`${r} `)).sort((a, b) => b.length - a.length)[0];
+          if (blad !== vantat) fel.push(`/metoder/${id}: sidan ${i + 1} i materialet heter "${namn}" och står under ${blad ?? 'inget blad'} i src/data/materialets-sidor.json, men hör till ${vantat ?? 'inget blad'}`);
+        });
+      }
+      for (const [i, namn] of bladen.entries()) {
+        const vantat = karta ? karta[i]?.bilder ?? [] : [i + 1];
+        const ankare = `blad-${slugAv(namn)}`;
+        const start = sida.search(new RegExp(`<([a-z][a-z0-9]*)\\b[^>]*\\sid="${ankare}"`));
+        if (start < 0) { fel.push(`/metoder/${id}: bladet ${namn} har inget ankare #${ankare}`); continue; }
+        const tagg = sida.slice(start).match(/^<([a-z][a-z0-9]*)/)[1];
+        let djup = 0;
+        let slut = sida.length;
+        for (const m of sida.slice(start).matchAll(new RegExp(`<(/?)${tagg}\\b[^>]*>`, 'g'))) { djup += m[1] ? -1 : 1; if (!djup) { slut = start + m.index + m[0].length; break; } }
+        const visade = [...new Set([...sida.slice(start, slut).matchAll(new RegExp(`${id}-materialet-(\\d+)\\.png`, 'g'))].map((m) => Number(m[1])))];
+        if (JSON.stringify(visade) !== JSON.stringify(vantat)) fel.push(`/metoder/${id}: bladet ${namn} visar sidorna ${visade.join(', ') || 'inga'} och ska visa ${vantat.join(', ')}`);
+        const pdf = join(rot, 'public', 'metoder', `${id}-blad-${slugAv(namn)}.pdf`);
+        const sidorIPdf = existsSync(pdf) ? pdfText(pdf).split('\f').length - 1 : 0;
+        if (sidorIPdf !== vantat.length) fel.push(`/metoder/${id}: bladet ${namn} har ${vantat.length} sidor, och knappens pdf ${sidorIPdf}`);
+      }
+    }
+    // Ett led i utfallets första mening som inte räknas om med klassen, som "i rundan högst en av sex" i Skriva för att lära, står
+    // som en egen mening på planeringsbladet, och paren efter "alltså" gör det inte, eftersom bladet räknar om dem med klassen
+    // (planeringsbladet i src/lib/undervisningsmetod.ts; Codex andra öga 2026-11-08, K-734). Prövat åt båda hållen.
+    const redo = (d.steg?.rader ?? []).find((s) => s.redo)?.redo ?? {};
+    const gransernaPaBladet = [...sida.matchAll(/<p class="um-utfall-grans">([\s\S]*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, ''));
+    for (const u of ['nastanAlla', 'deFlesta', 'halften']) {
+      const forsta = /^[^.]*\./.exec(String(redo[u] ?? ''))?.[0] ?? '';
+      const led = /,\s+([^\s,.][^,.]*)\.$/u.exec(forsta)?.[1];
+      if (!led || !gransernaPaBladet.length) continue;
+      const mening = `${led.charAt(0).toLocaleUpperCase('sv')}${led.slice(1)}.`;
+      const pa = gransernaPaBladet.some((g) => g.includes(mening));
+      if (/^alltså\s/u.test(led) ? pa : !pa) fel.push(`/metoder/${id}: planeringsbladets utfall ${u} ${pa ? 'har' : 'saknar'} meningen "${mening}"`);
     }
   }
 }

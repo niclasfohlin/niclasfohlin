@@ -7,6 +7,7 @@ import { materialetsNamn, metodensAdress, utfalletsAnkare, undervisningsmetodens
 import { metodensStrukturer, metodensKortAdress, ALLA_KORTENS_ADRESS, kortensVersion, allaKortensAntal, allaKortensStorlek, TVA_PA_A4 } from './strukturer';
 import { metodensFiler, metodensTabellfiler, sakernasFiler } from './undervisningsmetodfiler';
 import { metodensCentrala } from './centrala';
+import { namndaVerktyg } from './boklankar';
 import { strategikortetI, metodensKortAdress as metodensStrategikortAdress, ALLA_KORTENS_ADRESS as ALLA_STRATEGIKORTENS_ADRESS, allaKortensAntal as allaStrategikortensAntal, allaKortensStorlek as allaStrategikortensStorlek, kortensVersion as strategikortensVersion } from './strategier';
 import { metodensStrategiblad } from './standard/index.js';
 
@@ -28,7 +29,7 @@ export interface LarDigData {
   tid: string;
   period: string;
   /** Stegen: `vidare` säger när läraren går vidare, och `fraga` är samma regel som en fråga till Gick det? vid veckans slut. */
-  progression: { text?: string; rader: { vecka: string; rubrik: string; led?: string; fokus?: string; eleverna?: string; roll?: string; vidare?: string; fraga?: string }[] };
+  progression: { rubrik?: string; text?: string; rader: { vecka: string; rubrik: string; led?: string; fokus?: string; eleverna?: string; roll?: string; vidare?: string; fraga?: string }[] };
   uppfoljning: { text?: string; rader: { id?: string; nar: string; tid: string; vad: string }[] };
   skattningar: { namn: string; vem: 'lararen'; rad: string; text?: string; skala: { fran: number; till: number }; regler: { om: string; rad: string }[] }[];
   /** Planens rader om enskilda lektioner, som Första lektionen, med metodens text. */
@@ -97,7 +98,7 @@ export function larDigData(id: string, d: Um): LarDigData {
   const fil = (slag: 'lektionskort' | 'planeringsmall' | 'materialet' | 'observation', ankare: string) => { const f = filer[slag]; return f?.pdf || f?.docx ? { adress: (f.pdf ?? f.docx)!, fil: true } : { adress: `${sida}#${ankare}`, fil: false }; };
   return {
     id, titel: d.titel, sida, uppdaterad: dagAv(d.uppdaterad), forstaLektionen: forstaLektionensForm(d).namn, forstaVeckan: forstaVeckansNamn(d), startNamn: planensStart(d), ...(forstaHelaLektionen(d) ? { forstaHela: forstaHelaLektionen(d)! } : {}), tid: d.tid, period: d.period,
-    progression: { text: strang(d.progression?.text) || undefined, rader: somLista(d.progression?.rader).map((r) => { const x = r as Record<string, unknown>; return { vecka: String(x.vecka ?? ''), rubrik: strang(x.rubrik), ...(x.led ? { led: strang(x.led) } : {}), fokus: strang(x.fokus) || undefined, eleverna: strang(x.eleverna) || undefined, roll: strang(x.roll) || undefined, vidare: strang(x.vidare) || undefined, fraga: strang(x.fraga) || undefined }; }) },
+    progression: { rubrik: strang(d.progression?.rubrik) || undefined, text: strang(d.progression?.text) || undefined, rader: somLista(d.progression?.rader).map((r) => { const x = r as Record<string, unknown>; return { vecka: String(x.vecka ?? ''), rubrik: strang(x.rubrik), ...(x.led ? { led: strang(x.led) } : {}), fokus: strang(x.fokus) || undefined, eleverna: strang(x.eleverna) || undefined, roll: strang(x.roll) || undefined, vidare: strang(x.vidare) || undefined, fraga: strang(x.fraga) || undefined }; }) },
     uppfoljning: { text: strang(d.uppfoljning?.text) || undefined, rader: somLista(d.uppfoljning?.rader).map((r) => { const x = r as Record<string, unknown>; return { ...(x.id ? { id: String(x.id) } : {}), nar: strang(x.nar), tid: strang(x.tid), vad: strang(x.vad) }; }) },
     skattningar: somLista(d.plan?.skattningar).filter((x) => (x as { vem?: string })?.vem === 'lararen').map((s) => { const x = s as Record<string, any>; return { namn: strang(x.namn), vem: 'lararen' as const, rad: strang(x.rad), ...(x.text ? { text: strang(x.text) } : {}), skala: { fran: Number(x.skala?.fran), till: Number(x.skala?.till) }, regler: somLista(x.regler).map((r) => ({ om: strang((r as { om?: string }).om), rad: strang((r as { rad?: string }).rad) })) }; }),
     passen: somLista(d.plan?.passen).map((p) => { const x = p as Record<string, unknown>; return { nar: strang(x.nar), ...(x.kort ? { kort: strang(x.kort) } : {}), text: strang(x.text) }; }),
@@ -121,8 +122,9 @@ export function larDigData(id: string, d: Um): LarDigData {
     }).filter((l) => l.titel),
     // Metodens saker som på metodens sida och i lathunden (undervisningsmetodensSaker), med samma ankare, så att samma ord leder
     // till samma sak (granskningen rot-3, fynd 6, och den kalla läsaren 2026-10-30, nr 12).
-    // Verktygen som metoden visar med fältet centrala är saker här, så att Ta fram en lästext i passets text är en länk.
-    saker: [...undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer: metodensStrukturer(d, strang(d.titel)) }), ...metodensCentrala(d).map((c) => ({ namn: c.namn, adress: c.adress, versal: true }))],
+    // Verktygen som metoden visar med fältet centrala är saker här, så att Ta fram en lästext i passets text är en länk, och likaså
+    // de verktyg som metodens text nämner, som Boklankar länkar på metodens sida (namndaVerktyg; K-734, Ta fram ett skrivkort).
+    saker: [...undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer: metodensStrukturer(d, strang(d.titel)) }), ...[...new Map([...metodensCentrala(d), ...namndaVerktyg(JSON.stringify(d))].map((c) => [c.id, c])).values()].map((c) => ({ namn: c.namn, adress: c.adress, versal: true }))],
     verktyg: metodensCentrala(d).map((c) => ({ namn: c.namn, knapp: c.knapp ?? c.namn, adress: c.adress })),
     lasvag: (() => { const l = lasvagen(d); return { delar: l.delar.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })), minuter: l.minuter, nar: slagensOrd(d).lasning }; })(),
     ...(d.strukturkort ? { strukturkort: { metodens: kortensVersion(metodensKortAdress(id)), antal: somLista(d.strukturkort.strukturer).length, alla: kortensVersion(ALLA_KORTENS_ADRESS), allaAntal: allaKortensAntal(), allaStorlek: allaKortensStorlek(), utskrift: TVA_PA_A4, vid: slagensOrd(d).strukturkortVid, text: strang(d.strukturkort.text) } } : {}),

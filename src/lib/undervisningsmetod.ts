@@ -281,7 +281,9 @@ export const BLADETS_ORD = {
   beslutet: 'Beslutet', elever: 'elever i dag:', efter: 'Efter lektionen', karnanIlektionen: 'Kärnan i lektionen',
 } as const;
 /** Bladets ord för en metod: zonen och beslutet heter efter metodens slag (slagensOrd i standarden), som i riggens Word-fil. */
-export const bladetsOrd = (d: Um) => { const o = slagensOrd(d); return { ...BLADETS_ORD, lektionen: o.zon, beslutet: o.bladetsBeslut }; };
+// Etiketten för bladen är metodens när planeringsmallen har fältet bladEtikett, som en metod utan facit skriver (K-724; riggen
+// sa ja 2026-11-07, och metoden skriver fältet när den öppnas nästa gång), och annars Blad och facit.
+export const bladetsOrd = (d: Um) => { const o = slagensOrd(d); return { ...BLADETS_ORD, lektionen: o.zon, beslutet: o.bladetsBeslut, ...(d.planeringsmall?.bladEtikett ? { blad: String(d.planeringsmall.bladEtikett) } : {}) }; };
 /** Ett fält i planeringen som lista: en lista, en text som lista med en rad, eller tom. */
 export const bladetsLista = (v: unknown): string[] => (Array.isArray(v) ? v.map(String) : v ? [String(v)] : []);
 /** En rad på planeringsbladet bryts efter en mittpunkt och aldrig i ett tal (designgranskningen 2026-10-30: 14 blev 1 och 4). */
@@ -306,7 +308,15 @@ export function planeringsbladet(d: Um, plan: Record<string, any>, variant?: str
   // Var och en visar i kooperativt lärande.
   const kontrollen = (d.steg?.rader ?? []).find((s: { redo?: unknown }) => s.redo);
   const beslutetsFas: string | undefined = kontrollen?.namn;
-  const utfalletsText = (id: string) => String(kontrollen?.redo?.[id] ?? '').replace(/^[^.]*\.\s*/, '');
+  // Ett led i den första meningen som inte räknas om med klassen står kvar som en egen mening, som "I rundan högst en av sex." i
+  // Skriva för att lära, där läraren läser sex böcker också i en klass på 22 (Codex andra öga 2026-11-08, K-734: bladet tappade
+  // stickprovet). Paren efter "alltså" räknar utfallensPar om, och de står inte här.
+  const utfalletsText = (id: string) => {
+    const t = String(kontrollen?.redo?.[id] ?? '');
+    const forsta = /^[^.]*\./.exec(t)?.[0] ?? '';
+    const ledet = /,\s+(?!alltså\s)([^\s,.][^,.]*)\.$/u.exec(forsta)?.[1];
+    return [ledet ? `${ledet.charAt(0).toLocaleUpperCase('sv')}${ledet.slice(1)}.` : '', t.slice(forsta.length).trim()].filter(Boolean).join(' ');
+  };
   const delarna = (mall.delar ?? []) as { fas: string; skriv?: string; not?: string }[];
   const planensDel = (fas: string) => bladetsRad((plan.delar ?? []).find((x: { fas: string }) => x.fas === fas)?.text as string | undefined);
   const kryss = new Set<number>(plan.efter?.kryss ?? []);

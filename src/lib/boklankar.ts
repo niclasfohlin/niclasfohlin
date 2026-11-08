@@ -72,6 +72,12 @@ const MONSTER = NAMN.length ? new RegExp(`(?<![\\p{L}\\p{N}])(?:${NAMN.map((n) =
 // oftast som bladet, inte som formuläret, och länkas inte.
 const VERKTYG = CENTRALA.filter((c) => c.slag === 'sida' || c.slag === 'pdf').sort((a, b) => b.namn.length - a.namn.length);
 const VANLIGA_ORD = new Set(['Strategier', 'Strukturer']);
+/**
+ * Verktygen som en text nämner med namnet, som Boklankar länkar på metodens sida, utom Strategier och Strukturer, som är vanliga
+ * ord och bara länkas som titel. Lär dig metoden i Metoder läser dem som saker, så att samma namn leder till samma verktyg där
+ * (K-734; Codex kodgranskning 2026-11-08: "sidan Ta fram ett skrivkort" i Skriva för att lära var ingen länk).
+ */
+export const namndaVerktyg = (text: string) => VERKTYG.filter((c) => !VANLIGA_ORD.has(c.namn) && text.includes(c.namn));
 const VERKTYGSMONSTER = VERKTYG.length ? new RegExp(`(?<![\\p{L}\\p{N}])(?:${VERKTYG.map((c) => skydda(c.namn)).join('|')})(?![\\p{L}\\p{N}])`, 'gu') : undefined;
 // Niclas forskning: artiklar där han är medförfattare, som länkar till artikelns egen sida (Niclas 2026-10-19 om studien
 // på Om-sidan: "Länka gärna den till dess huvudsida artikel"). En hänvisning med förste författaren och året, som
