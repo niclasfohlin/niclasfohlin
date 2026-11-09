@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "75af14ce2c02a5e1",
+    "summa": "3f6a6c92ad63b20e",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -59,7 +59,7 @@
     "kb": 58
   },
   "_metod:explicit-undervisning": {
-    "summa": "22d250cb96ed9260",
+    "summa": "cb48a87ee8b58e09",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -67,10 +67,10 @@
       "blanda-uppgifter",
       "borja-i-det-kanda"
     ],
-    "kb": 621
+    "kb": 620
   },
   "_metod:formativ-bedomning": {
-    "summa": "9436c95d9eb9dc29",
+    "summa": "c4cc8f1b74fcd499",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -82,7 +82,7 @@
     "kb": 729
   },
   "_metod:kooperativt-larande": {
-    "summa": "9ce1261657cc73b3",
+    "summa": "89b63306f2974b9d",
     "kort": [
       "avlasta-minnet",
       "ord-och-bild",
@@ -92,7 +92,7 @@
     "kb": 471
   },
   "_metod:larande-pa-kognitionsvetenskaplig-grund": {
-    "summa": "7eb440eebd0bde9f",
+    "summa": "a60978023f13a4b1",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -120,7 +120,7 @@
     "kb": 370
   },
   "_metod:testbaserat-larande": {
-    "summa": "d3528a350ccdb96a",
+    "summa": "b62ccdc457f199af",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -366,9 +366,9 @@
     }
   },
   "ord-och-bild": {
-    "innehall": "dad32155",
-    "summa": "213df43c112fb2f0",
-    "kb": 141,
+    "innehall": "8fc9f2c1",
+    "summa": "88ce7b77e60695f9",
+    "kb": 137,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -384,8 +384,8 @@
     }
   },
   "plocka-fram": {
-    "innehall": "8ca3c1e5",
-    "summa": "fbc070f00f71cc00",
+    "innehall": "ff481aee",
+    "summa": "14cce679448ae679",
     "kb": 154,
     "namn": {
       "pt": 80,
