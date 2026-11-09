@@ -16,7 +16,7 @@ import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetod
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
-import { lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, GREPPETS_TID, metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
+import { mening, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, GREPPETS_TID, metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
 import Vavruta from './Vavruta.astro';
 import Bladkort from './Bladkort.astro';
 import { metodensBladkort, bladkortensStycke } from '../lib/bladkort';
@@ -416,7 +416,7 @@ const moten = arbetslagetsMoten(d);
           <dl class="um-vecka-fakta">
             <div><dt>Klassen lär sig</dt><dd set:html={k(v.eleverna)} /></div>
             <div><dt>Du övar</dt><dd set:html={k(v.roll)} /></div>
-            <div><dt>Gå vidare när</dt><dd set:html={k(stor(v.vidare))} /></div>
+            <div><dt>Gå vidare när</dt><dd set:html={k(mening(stor(v.vidare)))} /></div>
           </dl>
           {String(v.vecka) === '1' && rutinerFor('1').length > 0 && <p class="um-not"><Fragment set:html={k(rutinensRubrik(rutinerFor('1').map((r: { namn: string }) => litenForsta(r.namn)).join(' och ')))} /> står vid <a href="#rutinen-vecka-1">{FORSTA}</a>.</p>}
           {rutinerFor(v.vecka).filter(() => String(v.vecka) !== '1').map((r: Record<string, any>) => (

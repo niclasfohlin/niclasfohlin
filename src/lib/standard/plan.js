@@ -1832,12 +1832,32 @@ export function gickDetsFoljd(plan, mandag, svar, rubriker, last = false) {
  * @param {string} [skapad] dagen läraren gjorde planen
  * @returns {PlanVecka | null}
  */
+/**
+ * Om Gick det? frågas i veckan: i stegets sista vecka i planen, så att Ja och Inte än gäller steget och inte en vecka mitt i det,
+ * som vecka 5 i ett steg på två veckor (verifieringen och den kalla läraren Elin 2026-11-09). Ett steg på en vecka frågar varje
+ * vecka som förut, och en vecka till för steget blir stegets sista vecka.
+ * @param {Plan} plan
+ * @param {{ nr?: number, steg?: number | null }} v
+ */
+export const fragarGickDet = (plan, v) => {
+  const st = larDigetsSteg(plan);
+  if (!st.nummer(v)) return false;
+  const nasta = v.nr !== undefined ? plan.veckor[v.nr] : undefined;
+  return !nasta || st.nummer(nasta) !== st.nummer(v);
+};
+/**
+ * Stegets sista vecka i planen, där Gick det? frågas (fragarGickDet).
+ * @param {Plan} plan
+ * @param {{ nr?: number, steg?: number | null }} v
+ */
+export const stegetsSistaVecka = (plan, v) => { const st = larDigetsSteg(plan), n = st.nummer(v); return [...plan.veckor].reverse().find((x) => st.nummer(x) === n) ?? null; };
 export function obesvaradVecka(plan, f, idag, skapad) {
   const forra = [...plan.veckor].reverse().find((v) => v.mandag < mandagen(idag));
   // En vecka som var slut innan läraren gjorde planen frågar planen inte om, så att en plan med första lektionen bakåt i
   // tiden inte frågar om ett steg som läraren aldrig har fört in något om (granskningen inför lanseringen, B14).
   if (forra && skapad && skolveckan(forra.mandag).till < skapad) return null;
-  return forra && !f.gick?.[forra.mandag] ? forra : null;
+  // Bara en vecka där stunden frågar Gick det? (fragarGickDet).
+  return forra && !f.gick?.[forra.mandag] && fragarGickDet(plan, forra) ? forra : null;
 }
 
 /** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen, citatens och nivåvalets. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */

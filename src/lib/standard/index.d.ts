@@ -412,6 +412,10 @@ export declare const ANLEDNINGENS_LANGD: number;
 /** Metodens plan i Lär dig metoden ur sidans data. */
 export declare const larDigetsMetodplan: (data: { tid: string; period: string; progression: unknown; uppfoljning: unknown; passen: unknown[]; skattningar: unknown[] }) => ReturnType<typeof metodplan>;
 export declare function svaraGickDet(plan: Plan, val: Val, f: Foljd, mandag: string, svar: 'ja' | 'inte' | undefined): { val: Val; gick: Record<string, 'ja' | 'inte'>; andrad: boolean; last: boolean };
+/** Om Gick det? frågas i veckan: i stegets sista vecka i planen. */
+export declare const fragarGickDet: (plan: Plan, v: { nr?: number; steg?: number | null }) => boolean;
+/** Stegets sista vecka i planen. */
+export declare const stegetsSistaVecka: (plan: Plan, v: { nr?: number; steg?: number | null }) => PlanVecka | null;
 export declare function obesvaradVecka(plan: Plan, f: Foljd, idag: string, skapad?: string): PlanVecka | null;
 /** Metodens skattning av gruppen i ord, lika på sidan, i pdf:en och i texten som kopieras (K-559). */
 export declare function skattningensText(s: Sammanstallning, sk: Sammanstallning['skattningar'][number], info: { uppfoljning: { nar: string }[] }): { varden: string; regler: string[] };

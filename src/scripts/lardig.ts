@@ -14,7 +14,7 @@
 // står i src/scripts/byggstenar.ts (K-630).
 import {
   inlagdaFragan, skolveckanHarVarit, lagretsMening, lagretsRutiner, lagretsNya, lagretsSkala, lagretsSkalaHtml, MINA_LEKTIONER, stalletsTid, GREPPETS_TID, LARARENS_TID, LAGRETS_VAR, STALLENAS_TABELL, vaxlaInlagt,
-  ANLEDNINGENS_LANGD, veckansRubrik, arDatum, datumspann, forensMening, forstaLektionensMening, julensText, julveckorna, efterStegensTakt, uppfoljningIDatumordning, gickDetSvaret, gickDetsFoljd, GICK_LAST, lovveckornaAttValja, linjenRitas, medDecimaler, veckornaMedDatum, infordaDatum, klassenHarNagot, borttagnasBesked, planveckansKort, sistaInfort, klassernasSkalaText, larDigetsLagetFor, larDigetsMittLast, larDigetsSteg, larDigetsStart, klasslistansBesked, sakdelar, veckorI, periodensText, regelnIVeckan, skolveckan, skolveckansText, stegetsRad, SKATTNINGARNAS_GRANS, dagarMellan, dagOchManad, dagText, decimal, esc, filnamnet, forstaLektionen, gangen, larDigetsForval, harInfortEfter, isoVecka, kalendervecka, klassensFraga, KLASSERNAS_SKALA, klasserUrText, larDigetsAvslutText, larDigetsKvar, larDigetsMetodplan,
+  ANLEDNINGENS_LANGD, veckansRubrik, arDatum, datumspann, forensMening, forstaLektionensMening, julensText, julveckorna, efterStegensTakt, uppfoljningIDatumordning, gickDetSvaret, gickDetsFoljd, GICK_LAST, fragarGickDet, stegetsSistaVecka, lovveckornaAttValja, linjenRitas, medDecimaler, veckornaMedDatum, infordaDatum, klassenHarNagot, borttagnasBesked, planveckansKort, sistaInfort, klassernasSkalaText, larDigetsLagetFor, larDigetsMittLast, larDigetsSteg, larDigetsStart, klasslistansBesked, sakdelar, veckorI, periodensText, regelnIVeckan, skolveckan, skolveckansText, stegetsRad, SKATTNINGARNAS_GRANS, dagarMellan, dagOchManad, dagText, decimal, esc, filnamnet, forstaLektionen, gangen, larDigetsForval, harInfortEfter, isoVecka, kalendervecka, klassensFraga, KLASSERNAS_SKALA, klasserUrText, larDigetsAvslutText, larDigetsKvar, larDigetsMetodplan,
   larDigetsRegler, larDigSammanstallning, lasVal, lovetsText, mandagen, medVardet, mening, mittIFragan, mittIText, MITT_I_LANGD, passetsLage, passetTraffas, planera, planveckansNamn, plusDagar, PLANERA, rensaFoljd, rentMal, rentText, sakernasText, spannKort,
   rutinensRubrik, stor, talText, uppraknat, veckansPass, veckonyckel, vidareMening, granslinjensText, obesvaradVecka, skalansAndar, svaraGickDet, KLASSENS_NAMN, KLASSLISTANS_LANGD, KLASSNOTENS_LANGD, KOMMENTARENS_LANGD, type Foljd, type LarDigSammanstallning, type Plan, type PlanVecka, type Val,
 } from '../lib/standard/index.js';
@@ -279,7 +279,7 @@ function obesvaradRuta(o: PlanVecka): string {
   const rad = stegRad(o);
   const namn = planveckansNamn(plan, o);
   const fragan = fraganFor(rad);
-  return `<section class="ld-forra" aria-labelledby="ld-forra-rubrik"><h3 id="ld-forra-rubrik">${esc(`Gick det i ${namn.text}?`)}</h3><p class="ld-forra-steg">${esc(`Steg ${steg().nummer(o)}, ${stegNamn(o)}.`)}</p>${fragan ? `<p${rad?.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${gickKnappar(o, 'forra', `Gick det i ${namn.text}?`)}<p class="pl-hjalp">Svarar du Inte än, får steget en vecka till, och veckan efter blir den veckan. <button type="button" class="pl-textknapp" data-vy="${o.nr}">${esc(`Till ${namn.text}`)}</button></p></section>`;
+  return `<section class="ld-forra" aria-labelledby="ld-forra-rubrik"><h3 id="ld-forra-rubrik">${esc(`Gick det i ${namn.text}?`)}</h3><p class="ld-forra-steg">${esc(`Steg ${steg().nummer(o)}, ${stegNamn(o)}.`)}</p>${fragan ? `<p${rad?.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${gickKnappar(o, 'forra', `Gick det i ${namn.text}?`)}<p class="pl-hjalp">Svarar du Inte än, får steget en vecka till, och det blir den här veckan. <button type="button" class="pl-textknapp" data-vy="${o.nr}">${esc(`Till ${namn.text}`)}</button></p></section>`;
 }
 
 // ---------- Veckans stund ----------
@@ -298,7 +298,7 @@ function skattningen(j: number, w: LarDigSammanstallning['veckor'][number], i: n
   const regelRad = regel ? rader[regel.rad] : undefined;
   // Säger regelns råd en vecka till, står knappen i rutan, samma som Inte än i Gick det?.
   const v = plan.veckor.find((x) => x.mandag === w.mandag);
-  const enVeckaTill = !!regelRad && medGick && !!v && /vecka till/.test(regelRad.vad) && aktiv.foljd.gick?.[w.mandag] !== 'inte' && !harInfortEfter(aktiv.foljd, w.mandag, plan);
+  const enVeckaTill = !!regelRad && medGick && !!v && fragarGickDet(plan, w) && /vecka till/.test(regelRad.vad) && aktiv.foljd.gick?.[w.mandag] !== 'inte' && !harInfortEfter(aktiv.foljd, w.mandag, plan);
   const regeln = regelRad ? `<div class="pl-paminn pl-regel"><p><b>${esc(mening(regelRad.nar))}</b> ${medSaker(veckornaMedDatum(mening(regelRad.vad), plan))}</p>${enVeckaTill ? `<p class="pl-andra-knappar"><button type="button" class="knapp sekundar liten" data-gick="inte" data-mandag="${w.mandag}" data-plats="regel-${j}">Ge steget en vecka till</button></p>` : ''}</div>` : '';
   const st = stodet(j);
   const underlag = `<details class="pl-fallut" data-ruta="stod-${j}"${oppen(o, `stod-${j}`)}><summary>Det du tänker med</summary>${sk.text ? `<p>${esc(sk.text)}</p>` : st.rader.length ? `<p class="pl-etikett">${esc(st.rubrik)}</p><ul class="ld-stodlista">${st.rader.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}<p class="pl-etikett">${esc(rader[egen.rad]?.nar ?? '')}</p><p>${esc(rader[egen.rad]?.vad ?? '')}</p></details>`;
@@ -318,7 +318,9 @@ function stunden(w: LarDigSammanstallning['veckor'][number], i: number, s: LarDi
   const rad = stegRad(w);
   const svar = aktiv.foljd.gick?.[w.mandag];
   const fragan = fraganFor(rad);
-  const gick = medGick && rad ? `<div class="ld-gick"><h4>Gick det?</h4>${fragan ? `<p${rad.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${aktivaKlasser().length > 1 ? '<p class="pl-hjalp">Svara för det mesta av klasserna. Går en klass långsammare, skriv det i klassens rad längre ned, så står det vid klassen nästa vecka och i sammanställningen.</p>' : ''}${gickKnappar(w, 'stund', 'Gick det?')}${svar ? `<p class="pl-not">${esc(gickText(w.mandag))}</p>` : ''}</div>` : '';
+  const fragar = fragarGickDet(plan, w), sistaV = fragar ? null : stegetsSistaVecka(plan, w);
+  const fortsatter = medGick && rad && !fragar && !svar && sistaV ? `<p class="pl-hjalp">${esc(`Steget fortsätter ${planveckansNamn(plan, sistaV).text}, och där frågar stunden om det gick.`)}</p>` : '';
+  const gick = medGick && rad && (fragar || !!svar) ? `<div class="ld-gick"><h4>Gick det?</h4>${fragan ? `<p${rad.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${aktivaKlasser().length > 1 ? '<p class="pl-hjalp">Svara för det mesta av klasserna. Går en klass långsammare, skriv det i klassens rad längre ned, så står det vid klassen nästa vecka och i sammanställningen.</p>' : ''}${gickKnappar(w, 'stund', 'Gick det?')}${svar ? `<p class="pl-not">${esc(gickText(w.mandag))}</p>` : ''}</div>` : '';
   const mal = aktiv.val.mal ? `<p class="ld-malrad"><span class="pl-etikett">Ditt mål</span>${esc(mening(aktiv.val.mal))}</p>` : '';
   const kommentar = `<div class="ld-kommentar"><label class="pl-etikett" for="ld-kommentar">Din kommentar för veckan</label><textarea class="pl-falt pl-textfalt pl-brett" id="ld-kommentar" rows="3" maxlength="${KOMMENTARENS_LANGD}" data-kommentar="${w.mandag}">${esc(aktiv.foljd.kommentar?.[w.mandag] ?? '')}</textarea></div>`;
   const klasser = aktivaKlasser();
@@ -326,7 +328,7 @@ function stunden(w: LarDigSammanstallning['veckor'][number], i: number, s: LarDi
   // Vad linjerna säger, för båda skattningarna i en rad sist i stunden (byggstenarna).
   const regelRader = [...new Set(s.linjer.flatMap((l) => l.regler.map((r) => r.rad)))];
   const reglerna = regelRader.length && s.linjer.some(linjenRitas) ? linjensRegler('linjerna', 'Vad linjerna säger', o.has('linjerna'), regelRader.map((r) => ({ etikett: rader[r]?.nar ?? '', html: esc(mening(rader[r]?.vad ?? '')) }))) : '';
-  return `<section class="ld-stund" id="ld-stund" aria-labelledby="ld-stund-rubrik">${rubrik}<p class="pl-hjalp">Några minuter i slutet av veckan. Inget måste fyllas i.</p>${inlagdaRuta(w)}${gick}${mal}${data.skattningar.map((_, j) => skattningen(j, w, i, s, o, medGick)).join('')}${kommentar}${klassrader}${reglerna}</section>`;
+  return `<section class="ld-stund" id="ld-stund" aria-labelledby="ld-stund-rubrik">${rubrik}<p class="pl-hjalp">Några minuter i slutet av veckan. Inget måste fyllas i.</p>${inlagdaRuta(w)}${gick}${fortsatter}${mal}${data.skattningar.map((_, j) => skattningen(j, w, i, s, o, medGick)).join('')}${kommentar}${klassrader}${reglerna}</section>`;
 }
 
 // En klass i veckans stund, som fälls ut (K-631; Niclas 2026-10-30: "skatta hur det gick för olika grupperna från 1-5 (om
@@ -398,7 +400,7 @@ function steget(v: PlanVecka, utanVidare = false): string {
   const fransFore = fore && fore.innehall === v.innehall && aktiv.foljd.gick?.[fore.mandag] === 'inte' && !harInfortEfter(aktiv.foljd, fore.mandag, plan) ? fore : undefined;
   const forlang = aktiv.foljd.avslut ? '' : svar === 'inte'
     ? `<div class="ld-forlang"><p>${esc(gickText(v.mandag))}</p>${last ? '' : `<p class="pl-andra-knappar"><button type="button" class="pl-textknapp" data-gick="inte" data-mandag="${v.mandag}" data-plats="steget">Ta bort veckan till</button></p>`}</div>`
-    : `<div class="ld-forlang">${fransFore ? `<p class="pl-andra-knappar"><button type="button" class="pl-textknapp" data-gick="inte" data-mandag="${fransFore.mandag}" data-plats="igen">Ta bort den här veckan</button></p>` : ''}<p class="pl-hjalp">${last ? 'Du har fört in något i en senare vecka, så steget står kvar som det är.' : 'Behöver klasserna eller du mer tid, svarar du Inte än i veckans stund, så får steget en vecka till.'}</p></div>`;
+    : `<div class="ld-forlang">${fransFore ? `<p class="pl-andra-knappar"><button type="button" class="pl-textknapp" data-gick="inte" data-mandag="${fransFore.mandag}" data-plats="igen">Ta bort den här veckan</button></p>` : ''}<p class="pl-hjalp">${last ? 'Du har fört in något i en senare vecka, så steget står kvar som det är.' : fragarGickDet(plan, v) ? 'Behöver klasserna eller du mer tid, svarar du Inte än i veckans stund, så får steget en vecka till.' : ((sv) => (sv ? esc(`Steget fortsätter ${planveckansNamn(plan, sv).text}. Behöver klasserna eller du mer tid, svarar du Inte än i stunden den veckan.`) : ''))(stegetsSistaVecka(plan, v))}</p></div>`;
   return `<section class="ld-steget" aria-labelledby="ld-steget-rubrik"><h3 id="ld-steget-rubrik">Veckans steg</h3><div class="pl-elevmal"><span class="pl-etikett">Klasserna lär sig</span><p>${medSaker(rad.eleverna ?? '')}</p></div><div class="ld-drag"><span class="pl-etikett">Du övar</span><p>${medSaker(rad.roll ?? '')}</p></div>${rad.vidare && !utanVidare ? `<p class="ld-vidare">${esc(vidareMening(rad.vidare))}</p>` : ''}${rutinen}${lektion}${hela}${knappar}${uppf}${forlang}</section>`;
 }
 
