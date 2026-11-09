@@ -2,7 +2,7 @@
 // visar ur metodens fil, som JSON till sidans skript (src/scripts/lardig.ts), och bygget stannar på en metod vars plan inte
 // går att räkna. Motorn och allt som räknar står i standarden (src/lib/standard/plan.js, under Lär dig metoden), och
 // formen och faserna i underlag/prov/metoder/PLANERA-LAGRET.md och riggens standard för undervisningsmetoder, avsnitt 16.
-import { arbetslagetsMoten, dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, greppetsHem, lasvagen, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
+import { arbetslagetsMoten, dagAv, forstaHelaLektionen, forstaLektionensForm, forstaVeckansNamn, lasvagen, planensStart, rentText, slagensOrd, somLista } from './standard/index.js';
 import { lagretI, materialetsNamn, metodensAdress, stegetsAnkare, utfalletsAnkare, undervisningsmetodensSaker, type Um } from './undervisningsmetod';
 import type { Lagret } from './standard/index.js';
 import { metodensStrukturer, metodensKortAdress, ALLA_KORTENS_ADRESS, kortensVersion, allaKortensAntal, allaKortensStorlek, TVA_PA_A4 } from './strukturer';
@@ -74,7 +74,8 @@ export interface LarDigData {
   stod?: { rubrik: string; adress: string };
   /** Lagret i lärarens lektion, när metoden är ett lager med fälten (K-741): lektionens minuter, lärarens lektion, ställena med
    * plats och tid, veckornas ställen och varje ställes kort på metodens sida (lagretI, ur samma rot som remsan i del 2). */
-  lagret?: Lagret & { adresser: Record<string, string> };
+  // regel är metodens regel för valet (tidsschema.efter) och forsta texten för första lektionen ur tidsschemats variant (K-743).
+  lagret?: Lagret & { adresser: Record<string, string>; regel: string; forsta: string };
 }
 
 
@@ -144,8 +145,8 @@ export function larDigData(id: string, d: Um): LarDigData {
     // när metoden har det (src/components/Undervisningsmetod.astro).
     ...(d.hinder || somLista(d.fallgropar?.rader).length || d.hallFast ? { glider: `${sida}#nar-det-glider` } : {}),
     ...(d.stod?.rubrik ? { stod: { rubrik: strang(d.stod.rubrik), adress: `${sida}#mer-stod` } } : {}),
-    // Ställena leder till sina kort i del 2, och greppen till sina delar i kärnan, som remsan (greppetsHem; K-743).
-    ...((l) => (l ? { lagret: { ...l, adresser: Object.fromEntries([...l.stallen.map((x) => [x.namn, `${sida}#${stegetsAnkare(x.namn)}`]), ...l.grepp.map((g) => [g, ((h) => (h ? `${sida}#karnan-${h.nr}` : `${sida}#${stegetsAnkare(l.ram)}`))(greppetsHem(d, g))])]) } } : {}))(lagretI(id, d)),
+    // Ställena leder till sina kort i del 2, och greppen till kortet för lärarens lektion, som remsan (K-743).
+    ...((l) => (l ? { lagret: { ...l, regel: strang(d.tidsschema?.efter ?? ''), forsta: strang((d.tidsschema?.varianter ?? []).find((x: { nar?: string }) => /^första lektionen$/i.test(String(x?.nar ?? '').trim()))?.text ?? ''), adresser: Object.fromEntries([...l.stallen.map((x) => [x.namn, `${sida}#${stegetsAnkare(x.namn)}`]), ...[l.ram, ...l.grepp].map((g) => [g, `${sida}#${stegetsAnkare(l.ram)}`])]) } } : {}))(lagretI(id, d)),
   };
 }
 

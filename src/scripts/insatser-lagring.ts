@@ -6,7 +6,7 @@
 // länken till planen är kopian som håller.
 import { goatcounter, idagLokalt } from './raknare.ts';
 import { begarVaraktigLagring } from './webblasaren.ts';
-import { PLANKNAPPAR, liten, arDatum, talText, filnamnet, forstaLektionensDag, forstaSkolveckanEfter, SAMLINGARNAS_LED, skolveckan, kodaVal, dagarMellan, larDigetsLaget, datumText, dagText, gangen, insatsenAvslutad, lasVal, planensSistaDag, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, planensDagar, rentText, stor, tidText, tvasiffrigt, veckansDagar, veckanFor, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { PLANKNAPPAR, larDigetsSteg, liten, arDatum, talText, filnamnet, forstaLektionensDag, forstaSkolveckanEfter, SAMLINGARNAS_LED, skolveckan, kodaVal, dagarMellan, larDigetsLaget, datumText, dagText, gangen, insatsenAvslutad, lasVal, planensSistaDag, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, planensDagar, rentText, stor, tidText, tvasiffrigt, veckansDagar, veckanFor, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -35,7 +35,7 @@ export interface SparadPlan {
   /** Metodens datum när planen gjordes, så att planen kan säga till när metoden har ändrats efteråt. */
   uppdaterad?: string;
   /** Passen (dag, vecka, nummer och tiden när läraren har satt en), veckorna (nummer, metodens vecka, upprepad, första och sista dagen), planens sista dag, när uppföljningen efter kommer efter sista passet, och veckan efter stegen, som läget i Lär dig metoden läser (larDigetsLaget). */
-  schema: { pass: ([string, number, number] | [string, number, number, string])[]; veckor: [number, number, number, string, string][]; sista?: string; efter?: string };
+  schema: { pass: ([string, number, number] | [string, number, number, string])[]; veckor: [number, number, number, string, string, number?][]; sista?: string; efter?: string };
   /** Hur många av planens pass som är bockade, till Dina insatser (Codex 2026-10-24: bockar på dagar som inte längre har pass räknades med). */
   bockade?: number;
 }
@@ -84,7 +84,7 @@ export function rensaPlan(x: unknown): SparadPlan | null {
   const schema = p.schema && typeof p.schema === 'object' ? p.schema : {};
   const rader = (y: unknown) => (Array.isArray(y) ? y.filter((r) => Array.isArray(r)) : []) as unknown[][];
   const pass = rader(schema.pass).filter((r) => arDatum(r[0]) && heltal(r[1]) && heltal(r[2]) && (r[3] === undefined || (typeof r[3] === 'string' && /^\d{2}:\d{2}$/.test(r[3])))) as SparadPlan['schema']['pass'];
-  const veckor = rader(schema.veckor).filter((r) => heltal(r[0]) && heltal(r[1]) && (r[2] === 0 || r[2] === 1) && arDatum(r[3]) && arDatum(r[4])) as SparadPlan['schema']['veckor'];
+  const veckor = rader(schema.veckor).filter((r) => heltal(r[0]) && heltal(r[1]) && (r[2] === 0 || r[2] === 1) && arDatum(r[3]) && arDatum(r[4]) && (r[5] === undefined || heltal(r[5]))) as SparadPlan['schema']['veckor'];
   const kopia = tidpunkt(p.kopia), uppdaterad = tidpunkt(p.uppdaterad);
   return {
     id: p.id, metod: p.metod, samling: samlingen(p), titel: rentText(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: rentText(p.omrade, 40) } : {}),
@@ -317,7 +317,9 @@ export const sparadPlan = (aktiv: { id: string; val: Val; foljd: Foljd; kopia?: 
 /** Kopian av planens datum som sparas med planen, med passets tid när läraren har satt en. */
 export const schemaAv = (plan: Plan, val?: Val): SparadPlan['schema'] => ({
   pass: plan.pass.map((p) => { const tid = val ? passetsTid(val, p) : undefined; return tid ? [p.datum, p.vecka, p.nr, `${tid[0]}`] : [p.datum, p.vecka, p.nr]; }),
-  veckor: plan.veckor.map((v) => { const d = veckansDagar(plan, v); return [v.nr, planvecka(plan, v), v.igen ? 1 : 0, d.fran, d.till]; }),
+  // Stegets nummer som sjätte värde i en plan med steg, ur samma rot som sidan (larDigetsSteg), så att kortet under Dina planer
+  // säger samma steg som sidan också när ett steg är flera veckor (buggjakten 2026-11-09).
+  veckor: ((st) => plan.veckor.map((v): SparadPlan['schema']['veckor'][number] => { const d = veckansDagar(plan, v); const n = st.antal ? st.nummer(v) : 0; return n ? [v.nr, planvecka(plan, v), v.igen ? 1 : 0, d.fran, d.till, n] : [v.nr, planvecka(plan, v), v.igen ? 1 : 0, d.fran, d.till]; }))(larDigetsSteg(plan)),
   ...(planensSistaDag(plan) && planensSistaDag(plan) !== plan.sistaPass ? { sista: planensSistaDag(plan) } : {}),
   ...(plan.efter ? { efter: plan.efter } : {}),
 });
@@ -376,7 +378,7 @@ function larDigetsLage(p: SparadPlan, idag: string): { text: string; vecka?: num
   const varden = larDigetsLagetsVarden(p, veckor), l = larDigetsLaget(varden, idag);
   if (l.fas === 'fore') return { text: varden.forsta ? `Före. Första lektionen ${narText(varden.forsta, idag)}` : 'Före' };
   const v = l.vecka ? veckor[l.vecka - 1] : undefined;
-  return l.fas === 'under' && v ? { text: `Steg ${v[1]}${v[2] ? ', en vecka till' : ''}`, vecka: v[0] } : { text: 'Efter stegen' };
+  return l.fas === 'under' && v ? { text: `Steg ${v[5] ?? v[1]}${v[2] ? ', en vecka till' : ''}`, vecka: v[0] } : { text: 'Efter stegen' };
 }
 
 /** Dagen för planens nästa pass från och med i dag, eller 9999 när planen är slut: planerna ordnas efter den. */

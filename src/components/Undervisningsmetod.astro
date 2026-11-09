@@ -16,7 +16,7 @@ import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetod
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
-import { lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, greppetsHem, GREPPETS_TID, metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
+import { lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, GREPPETS_TID, metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
 import Vavruta from './Vavruta.astro';
 import Bladkort from './Bladkort.astro';
 import { metodensBladkort, bladkortensStycke } from '../lib/bladkort';
@@ -99,6 +99,9 @@ const rutinerFor = (vecka: string) => (d.rutiner?.rader ?? []).filter((r: { veck
 // Första lektionen, minut för minut: minuterna och det läraren säger ur standarden, samma rot som lathunden; vid den första
 // delen står rutinens repliker (granskare-3 nr 22).
 const minuterna = forstaLektionensMinuter(d);
+// I ett lager har läraren en egen lektionslängd, så tabellen säger vilken lektion minuterna gäller, som remsan i del 2 (den
+// kalla läraren Sara 2026-11-09 med lektioner på 40 minuter; K-743).
+const minuternasSlut = lagret?.minuter ?? 0;
 const BELAGG: Record<string, string> = { provad: 'Prövad', 'i-alla': 'Finns i nästan alla prövade versioner', teori: 'Bygger på teori och klassrumsstudier' };
 const fallgropFor = (namn: string) => tabellens.filter((f) => f.komponent === namn);
 const sorteradeKallor = (grupp: string) => (d.kallor ?? []).filter((x: { grupp: string }) => x.grupp === grupp);
@@ -194,8 +197,9 @@ const moten = arbetslagetsMoten(d);
     <nav class="um-remsa um-remsa-lager" aria-label={slagetsOrd.delarna}>
       <Fragment set:html={lagretsSkalaHtml(lagretsAlla?.skala ?? [])} />
       <ol>
-        {/* Greppen inne i lärarens lektion, indragna under den utan minuter, och var och en leder till sin del i kärnan (K-743). */}
-        {steg.map((s) => { const r = tidsschematsRad(d, s.namn); const x = lagret.stallen.find((y) => y.namn === s.namn); const ram = s.namn === lagret.ram; return <li class={ram ? 'um-remsa-ram' : undefined}><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{s.namn}</span><span class="um-remsa-tid">{x ? stalletsTid(x) : r?.tid}</span></a>{ram && (lagretsAlla?.grepp ?? []).length > 0 && <ul class="um-remsa-grepp">{lagretsAlla!.grepp.map((g) => { const h = greppetsHem(d, g); return <li><a href={h ? `#karnan-${h.nr}` : `#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{g}</span><span class="um-remsa-tid">{GREPPETS_TID}</span></a></li>; })}</ul>}</li>; })}
+        {/* Greppen inne i lärarens lektion, indragna under den utan minuter, och var och en leder till kortet för lärarens lektion, där
+            metoden säger hur greppet tas (K-743; den kalla läraren Elin 2026-11-09). */}
+        {steg.map((s) => { const r = tidsschematsRad(d, s.namn); const x = lagret.stallen.find((y) => y.namn === s.namn); const ram = s.namn === lagret.ram; return <li class={ram ? 'um-remsa-ram' : undefined}><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{s.namn}</span><span class="um-remsa-tid">{x ? stalletsTid(x) : r?.tid}</span></a>{ram && (lagretsAlla?.grepp ?? []).length > 0 && <ul class="um-remsa-grepp">{lagretsAlla!.grepp.map((g) => { return <li><a href={`#${stegetsAnkare(s.namn)}`}><span class="um-remsa-namn">{g}</span><span class="um-remsa-tid">{GREPPETS_TID}</span></a></li>; })}</ul>}</li>; })}
       </ol>
       {lagretsAlla && <p class="um-remsa-resten">{lagretsMening(lagretsAlla, lagret.minuter, '', { exempel: true })}</p>}
     </nav>
@@ -365,7 +369,7 @@ const moten = arbetslagetsMoten(d);
       {forstaVarianten?.text && <p set:html={k(forstaVarianten.text)} />}
       {minuterna.length > 0 && (
         <table class="m-tabell stapla um-tabell um-minuter">
-          <caption>{forstaL.namn}, minut för minut</caption>
+          <caption>{forstaL.namn}, minut för minut{lagret && minuternasSlut > 0 ? `, i en lektion på ${minuternasSlut} minuter` : ''}</caption>
           <thead><tr><th scope="col">Delen</th><th scope="col">Minuterna</th><th scope="col">Du säger</th></tr></thead>
           <tbody>{minuterna.map((x) => <tr><th scope="row" data-rubrik="Delen">{x.fas}</th><td data-rubrik="Minuterna">{x.tid}</td><td data-rubrik="Du säger">{x.fraser.map((f) => `”${f}”`).join(' ')}</td></tr>)}</tbody>
         </table>

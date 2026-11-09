@@ -17,6 +17,8 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { strategikortetsFil, STRATEGIKORTEN_ALLA, STRATEGIBLADET } from '../../src/lib/standard/strategier.js';
 import { mening } from '../../src/lib/standard/text.js';
+import { slugAv } from '../../src/lib/standard/index.js';
+import { parse as parseYaml } from 'yaml';
 import { kortenHtml } from './kortform.mjs';
 
 const ROT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -119,6 +121,21 @@ for (const metod of iMetoder) {
   const pasidan = rutor.map((r) => [...r.matchAll(/href="\/strategier\/([a-z0-9-]+)"/g)].map((m) => m[1]).join()).sort();
   const iregistret = platserna.map((r) => (r.delar ?? []).join()).sort();
   if (pasidan.join(' | ') !== iregistret.join(' | ')) fel.push(`Sådden: ${metod} i Metoder har strategierna ${pasidan.join(' | ')} på sidan och ska ha ${iregistret.join(' | ')}`);
+  // En strategi som är en del i metodens kärna står efter ett steg där kärnan säger att delen görs (andra ögat 2026-11-09: efter
+  // omtaget av Lärande på kognitionsvetenskaplig grund stod Avlasta minnet och Ord och bild kvar efter steg 2, som hade varit Det nya).
+  const metodfil = join(ROT, 'src', 'content', 'undervisningsmetoder', `${metod}.yaml`);
+  if (existsSync(metodfil)) {
+    const d = parseYaml(readFileSync(metodfil, 'utf8'));
+    for (const pl of platserna) {
+      const nr = /^steg (\d+)$/.exec(String(pl.efter ?? ''))?.[1];
+      const steget = nr ? d.steg?.rader?.[Number(nr) - 1]?.namn : undefined;
+      if (!steget) continue;
+      for (const s of pl.delar ?? []) {
+        const k = (d.karna?.komponenter ?? []).find((x) => slugAv(String(x?.namn ?? '')) === s);
+        if (k && !(k.moment ?? []).includes(steget)) fel.push(`Sådden: ${metod} har ${s} efter ${pl.efter}, ${steget}, men kärnan säger att ${k.namn} görs i ${(k.moment ?? []).join(' och ') || 'inget steg'}`);
+      }
+    }
+  }
   platser += rutor.length;
 }
 

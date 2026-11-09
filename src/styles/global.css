@@ -4670,7 +4670,7 @@ button.pl-passroll { min-height: 2.75rem; }
 /* Lärarens lektion som en grå rad i veckan, i lektionens ordning, när något sker i den den veckan: veckans grepp indragna med vid
    behov i stället för minuter, och en rutin (K-743). */
 .ld-stallen-ram { border-left: 4px solid var(--farg-kant); background: var(--farg-ton); }
-.ld-ram-namn { margin: 0; padding: 0.6rem 0.75rem 0.45rem; font-weight: 700; color: var(--farg-text); }
+.ld-stallen .ld-ram-namn { border-left: 0; }
 .ld-grepp { list-style: none; margin: 0; padding: 0; }
 .ld-stallen .ld-grepp li { border-top: 1px solid var(--farg-kant); }
 .ld-stallen .ld-grepp a { min-height: 2.5rem; padding-left: 1.5rem; border-left: 0; }

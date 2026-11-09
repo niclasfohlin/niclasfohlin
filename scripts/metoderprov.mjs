@@ -27,7 +27,7 @@ import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import JSZip from 'jszip';
-import { lagretAv, greppetsHem, GREPPETS_TID, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser, utfallsord, slugAv } from '../src/lib/standard/index.js';
+import { lagretAv, GREPPETS_TID, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser, utfallsord, slugAv } from '../src/lib/standard/index.js';
 import { ren, utanHuvudOchFot, pdfText } from './textjamforelse.mjs';
 import { MINIBILDEN, metodensMinibilder, sakensNamn } from '../src/lib/bladkortfiler.js';
 
@@ -70,12 +70,17 @@ for (const s of metodsidor) {
   if (!html.includes(`class="um-lektionsdel um-ld-din" id="del-${lagret.ram.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}"`)) fel.push(`${s}: kortet för ${lagret.ram} har inte den grå ramen`);
   if (!html.includes('Det du lägger in i din lektion, ställe för ställe.')) fel.push(`${s}: bandet i del 2 säger inte att ställena läggs in i lärarens lektion`);
   if (!remsa.includes(`<p class="um-remsa-resten">${lagretsMening(lagretsSkala(lagret), lagret.minuter, '', { exempel: true })}</p>`) || !remsa.includes(' av en lektion på ')) fel.push(`${s}: remsan i del 2 säger inte hur mycket av lektionen ställena tar`);
-  // Greppen inne i lärarens lektion (K-743): indragna under den, med vid behov i stället för minuter och länken till sin del i kärnan.
-  const metoden = parse(readFileSync(yaml, 'utf8'));
+  // Greppen inne i lärarens lektion (K-743): indragna under den, med vid behov i stället för minuter och länken till kortet för
+  // lärarens lektion, där metoden säger hur greppet tas.
+  const ramensKort = `del-${lagret.ram.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}`;
   for (const g of lagret.grepp) {
-    const h = greppetsHem(metoden, g);
-    if (!h || !remsa.includes(`<a href="#karnan-${h.nr}"><span class="um-remsa-namn">${g}</span><span class="um-remsa-tid">${GREPPETS_TID}</span></a>`)) fel.push(`${s}: greppet ${g} står inte inne i lärarens lektion i remsan, med ${GREPPETS_TID} och länken till sin del i kärnan`);
+    if (!remsa.includes(`<a href="#${ramensKort}"><span class="um-remsa-namn">${g}</span><span class="um-remsa-tid">${GREPPETS_TID}</span></a>`)) fel.push(`${s}: greppet ${g} står inte inne i lärarens lektion i remsan, med ${GREPPETS_TID} och länken till kortet ${lagret.ram}`);
   }
+  // Första lektionens minuter säger lektionens längd, som remsan, eftersom läraren har en egen (K-743).
+  if (html.includes('um-minuter') && !html.includes(`, minut för minut, i en lektion på ${lagret.minuter} minuter</caption>`)) fel.push(`${s}: tabellen med första lektionens minuter säger inte lektionens ${lagret.minuter} minuter`);
+  // Bilaga A säger vad lektionskortet är i ett lager (andra ögat 2026-11-09: "Hela lektionen på ett A4").
+  if (html.includes('id="materialet"') && !html.includes('Lagret i din lektion på ett A4 att ha i handen')) fel.push(`${s}: bilaga A säger inte att lektionskortet är lagret i din lektion`);
+  if (lagret.grepp.length && !new RegExp(`<li class="um-remsa-ram"><a href="#${ramensKort}">[\\s\\S]*?<ul class="um-remsa-grepp">`).test(remsa)) fel.push(`${s}: greppen står inte under raden ${lagret.ram} i remsan`);
   if (lagret.grepp.length) greppenProvade++;
   else if (remsa.includes('um-remsa-grepp')) fel.push(`${s}: remsan i del 2 har grepp, fast metoden inte har några`);
 }

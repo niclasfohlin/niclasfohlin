@@ -297,7 +297,9 @@ export declare const planveckansKort: (plan: Plan, v: PlanVecka) => { tal: strin
 export declare const klassenHarNagot: (f: Foljd, id: string) => boolean;
 export declare const harInfortEfter: (f: Foljd, mandag: string, plan: { mitt?: number; veckor: { mandag: string }[] }) => boolean;
 /** Vad svaret på Gick det? gjorde med planen, i en mening. */
-export declare function gickDetsFoljd(plan: Plan, mandag: string, svar: 'ja' | 'inte' | undefined, rubriker: string[]): string;
+export declare function gickDetsFoljd(plan: Plan, mandag: string, svar: 'ja' | 'inte' | undefined, rubriker: string[], last?: boolean): string;
+/** Beskedet när svaret inte ändrar planen, eftersom något är infört i en senare vecka. */
+export declare const GICK_LAST: string;
 /** Är lovet i veckan låst: något är infört i veckan eller senare. */
 export declare const lovetLast: (mandag: string, sista: string | undefined) => boolean;
 /** Lovveckorna i en mening, "Lov v. 48–49."; tom utan lov. */
@@ -384,7 +386,7 @@ export declare const MINA_LEKTIONER: { readonly id: string; readonly namn: strin
 /** Klassens namn med borttagen efter när klassen är borttagen: "7A, borttagen". */
 export declare const klassensEtikett: (k: { namn: string; borta?: boolean }) => string;
 /** Frågan först i veckans stund i ett lager: "I vilka lektioner lade du in Stanna och skriv eller Loggen?" */
-export declare const inlagdaFragan: (stallen: string[]) => string;
+export declare const inlagdaFragan: (stallen: string[], val?: { grepp?: boolean }) => string;
 /** En klass, eller Mina lektioner, in eller ut ur veckans svar. */
 export declare const vaxlaInlagt: (inlagt: Record<string, Record<string, true>> | undefined, mandag: string, id: string) => Record<string, Record<string, true>>;
 /** Rubriken och meningen över tabellen Lektionerna med ställena. */
@@ -882,10 +884,10 @@ export declare function lagretIDinLektion(d: Record<string, any>): boolean;
 export type LagretsBro = { minuter?: number; ram?: string; var?: Record<string, string>; stallen?: Record<string, string[]>; rutiner?: Record<string, string>; vantar?: string };
 /** Lagret i lärarens lektion (riggens standard, avsnitt 7 och 16; K-739, K-741). */
 export type Lagret = { minuter: number; ram: string; rader: { namn: string; ram?: true; var?: string; tid: string; min: number; max: number }[]; stallen: { namn: string; var: string; tid: string; min: number; max: number }[]; grepp: string[]; veckor: Record<string, string[]>; rutiner: Record<string, string> };
-/** Greppets hem på metodens sida: kärnans del med samma namn, med numret som ankaret karnan-<nr> (K-743). */
-export declare const greppetsHem: (d: Record<string, any>, namn: string) => { nr: number } | null;
 /** Det som står i stället för minuterna vid ett grepp: "vid behov" (K-743). */
 export declare const GREPPETS_TID: string;
+/** Det som står vid lärarens lektion i veckorna i Lär dig metoden: "resten av lektionen" (K-743). */
+export declare const LARARENS_TID: string;
 /** Ställenas platser i lärarens lektion, i lektionens ordning. */
 export declare const LAGRETS_VAR: readonly string[];
 /** Minuterna i en dels tid: "5–7 min" ger 5 och 7. */
@@ -894,8 +896,10 @@ export declare function lagretAv(d: Record<string, any>, bro?: LagretsBro): Lagr
 /** Lagrets skala: de valda ställena på sina platser och lärarens lektion i resten. */
 export declare function lagretsSkala(lagret: { minuter: number; ram: string; stallen: { namn: string; var: string; min: number; max: number }[]; grepp?: string[] }, valda?: string[]): { stallen: { namn: string; var: string; tid?: string; min: number; max: number }[]; grepp: string[]; skala: { namn: string; ram?: true; minuter: number }[]; min: number; max: number };
 /** Meningen om minuterna: "Stanna och skriv tar 5–7 av lektionens 45 minuter. Resten av lektionen är din." */
-export declare const lagretsMening: (s: { stallen: { namn: string }[]; min: number; max: number }, minuter: number, vilka?: string, val?: { exempel?: boolean }) => string;
+export declare const lagretsMening: (s: { stallen: { namn: string }[]; grepp?: string[]; min: number; max: number }, minuter: number, vilka?: string, val?: { exempel?: boolean }) => string;
 export declare function lagretsFel(d: Record<string, any>, bro?: LagretsBro): string[];
+/** Om metodens fil har lagrets fält (K-743). */
+export declare const lagretIFilen: (d: Record<string, any>) => boolean;
 /** Veckans rutiner med delen där var och en görs, och om den är lärarens lektion. */
 export declare const lagretsRutiner: (lagret: { ram: string; rutiner?: Record<string, string> }, rutiner: { namn: string }[]) => { namn: string; stalle: string; ram: boolean }[];
 /** Ställena som är nya i en vecka jämfört med veckan före i planen, som Lär dig metoden märker Ny. */

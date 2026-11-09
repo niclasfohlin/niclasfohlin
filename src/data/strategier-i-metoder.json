@@ -187,7 +187,7 @@
     ]
   },
   "larande-pa-kognitionsvetenskaplig-grund": {
-    "skal": "Metoden lär ut de fem strategierna, och lektionen gör var och en där kärnan säger: Plocka fram och Sprid ut i startens frågor ur minnet från förra veckan och månaden, Avlasta minnet och Ord och bild i Det nya med det lösta exemplet och den enkla bilden som läraren pekar i, och Blanda uppgifter i Övas blandade rad med slaget först.",
+    "skal": "Metoden lär ut de fem strategierna, och lektionen gör var och en där kärnan säger: Plocka fram och Sprid ut i startens frågor ur minnet från förra veckan och månaden, och Avlasta minnet, Ord och bild och Blanda uppgifter i din planering, med det lösta exemplet, den enkla bilden som läraren pekar i och den blandade raden med slaget först.",
     "platser": [
       {
         "efter": "steg 1",
@@ -199,21 +199,14 @@
         "om": "Startens frågor"
       },
       {
-        "efter": "steg 2",
-        "delar": [
-          "avlasta-minnet",
-          "ord-och-bild"
-        ],
-        "slag": "form",
-        "om": "Exemplet och bilden"
-      },
-      {
         "efter": "steg 3",
         "delar": [
+          "avlasta-minnet",
+          "ord-och-bild",
           "blanda-uppgifter"
         ],
         "slag": "form",
-        "om": "Den blandade raden"
+        "om": "Exemplet, bilden och den blandade raden"
       }
     ]
   },

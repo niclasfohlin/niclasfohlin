@@ -1524,6 +1524,9 @@ export function larDigSammanstallning(plan, val, f, idag) {
   for (const v of veckor.filter((x) => !x.efter && x.mandag > dag)) { const nummer = st.nummer(v); if (!stegen.some((x) => x.nummer === nummer) && !kvar.some((x) => x.nummer === nummer)) kvar.push({ nummer, steg: st.rad(v) }); }
   const namngivna = veckor.map((v) => ({
       ...v,
+      // Stegets rad också i en vecka utan egen rad i progressionen, som stegets andra vecka, så att sammanställningen och pdf:en
+      // säger steget och frågan som sidan (konsistensen 2026-11-09).
+      ...(v.efter ? {} : { steg: st.rad(v) }),
       ...(f.gick?.[v.mandag] ? { gick: f.gick[v.mandag] } : {}),
       ...(f.kommentar?.[v.mandag] ? { kommentar: f.kommentar[v.mandag] } : {}),
       // En borttagen klass heter som i tabellerna, "9C, borttagen" (verifieringen 2026-11-08).
@@ -1620,7 +1623,9 @@ export const MINA_LEKTIONER = Object.freeze({ id: 'mina-lektioner', namn: 'Mina 
  * här veckan?" (de kalla lärarna 2026-11-08: frågan sa lektioner och svaret var klasser).
  * @param {string[]} stallen
  */
-export const inlagdaFragan = (stallen) => `I vilka klasser lade du in ${stallen.length <= 1 ? stallen.join('') : `${stallen.slice(0, -1).join(', ')} eller ${stallen[stallen.length - 1]}`} den här veckan?`;
+// Med veckans grepp frågar stunden om dem, eftersom ställena står i varje lektion och ett grepp tas inne i lärarens egen
+// genomgång (andra ögat 2026-11-09).
+export const inlagdaFragan = (stallen, { grepp = false } = {}) => `I vilka klasser ${grepp ? 'tog du' : 'lade du in'} ${stallen.length <= 1 ? stallen.join('') : `${stallen.slice(0, -1).join(', ')} eller ${stallen[stallen.length - 1]}`} den här veckan?`;
 /**
  * En klass, eller Mina lektioner, in eller ut ur veckans svar på frågan i vilka klasser läraren lade in ställena. Svaren har samma
  * form som klassernas skattning, vecka och klass (medVardet), så att två flikar slås samman klass för klass och inte som en lista
@@ -1647,7 +1652,7 @@ export function stallenasTabell(veckor, f) {
   return { veckor: kolumner, rader: rader.map((r) => ({ id: r.id, etikett: r.etikett, ja: kolumner.map((i) => r.ja[i]) })) };
 }
 /** Meningen över tabellen, på sidan och i pdf:en. */
-export const STALLENAS_TABELL = Object.freeze({ rubrik: 'Lektionerna med ställena', text: 'Ja betyder att du lade in något av veckans ställen i klassens lektioner den veckan. En tom ruta betyder att du inte tryckte på klassen.', tom: 'inget svar' });
+export const STALLENAS_TABELL = Object.freeze({ rubrik: 'Lektionerna med ställena', text: 'Ja betyder att det som veckans stund frågade om kom in i klassens lektioner den veckan. En tom ruta betyder att du inte tryckte på klassen.', tom: 'inget svar' });
 /**
  * Raden Klasserna i sammanställningen, på sidan och i pdf:en, med det tabellen visar (B11): klasserna i listan, och de
  * borttagna, som står kvar med det läraren förde in (klasserUrText). Tom utan klasser.
@@ -1798,6 +1803,8 @@ export function svaraGickDet(plan, val, f, mandag, svar) {
   const forlang = !!v && !last && ska > harNu, korta = !!v && !last && ska < harNu;
   return { val: forlang || korta ? forlangSteget(val, steg, ska - harNu) : val, gick, andrad: forlang || korta, last };
 }
+/** Beskedet och rutans text när svaret inte ändrar planen, eftersom något är infört i en senare vecka (harInfortEfter; konsistensen 2026-11-09, P1). */
+export const GICK_LAST = 'Planen ändras inte, eftersom du har fört in något i en senare vecka.';
 /**
  * Vad svaret på Gick det? gjorde med planen, i en mening ur planen efter svaret (granskningen rot-3, fynd 21): stegets sista
  * vecka efter Inte än, och annars nästa vecka med stegets namn, eller veckan efter stegen.
@@ -1805,12 +1812,13 @@ export function svaraGickDet(plan, val, f, mandag, svar) {
  * @param {string} mandag veckans måndag
  * @param {'ja' | 'inte' | undefined} svar
  * @param {string[]} rubriker stegens namn i progressionens ordning
+ * @param {boolean} [last] något är infört i en senare vecka, så att svaret inte ändrade planen (harInfortEfter)
  */
-export function gickDetsFoljd(plan, mandag, svar, rubriker) {
+export function gickDetsFoljd(plan, mandag, svar, rubriker, last = false) {
   const v = plan.veckor.find((x) => x.mandag === mandag);
   if (!v) return '';
   const sista = [...plan.veckor].reverse().find((x) => x.innehall === v.innehall) ?? v;
-  if (svar === 'inte') return sista.nr > v.nr ? `Steget får en vecka till: ${planveckansNamn(plan, sista).text}.` : 'Steget står kvar till nästa vecka.';
+  if (svar === 'inte') return sista.nr > v.nr ? `Steget får en vecka till: ${planveckansNamn(plan, sista).text}.` : last ? GICK_LAST : 'Steget står kvar till nästa vecka.';
   const nasta = plan.veckor[v.nr];
   const r = nasta ? larDigetsSteg(plan).rad(nasta) : null;
   return nasta ? `Nästa vecka: ${planveckansNamn(plan, nasta).text}, ${r !== null ? rubriker[r] ?? '' : ''}.` : `Efter stegen börjar ${kalendervecka(isoVecka(plan.efter).vecka)}.`;
@@ -1843,7 +1851,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.10.0', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.10.1', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
