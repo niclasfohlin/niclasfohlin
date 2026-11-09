@@ -213,7 +213,9 @@ const moten = arbetslagetsMoten(d);
   <section class="um-avsnitt" id="lektionen">
     {/* Bandet säger redan rubriken, så den står bara för skärmläsaren (design-3 nr 18). */}
     <h3 class="visually-hidden">{d.tidsschema?.rubrik}</h3>
+    {/* En fri tabell med plats fore-lektionen står direkt efter rutan Före lektionen, som i riggens Word-fil (K-743). */}
     {foreRad && <div class="um-fore-efter"><p><strong>Före lektionen.</strong> <span set:html={k(foreRad.vad)} /></p>{karnanUtanfor(foreRad.fas).length > 0 && <p class="um-fore-karna">Kärnan här: {karnanUtanfor(foreRad.fas).map((x, i) => <>{i > 0 && ', '}<a href={`#karnan-${x.nr}`}>{x.nr} {x.namn}</a></>)}</p>}</div>}
+    <UmFriaTabeller d={d} id={id} plats="fore-lektionen" k={k} saker={saker} filer={tabellfiler} vavt={vavt} />
     {steg.map((s) => {
       const r = tidsschematsRad(d, s.namn);
       const karna = karnanI(d, s.namn);
@@ -359,7 +361,7 @@ const moten = arbetslagetsMoten(d);
       {/* Bladets överkant med mallens egna ord, så att raden säger vad just den här metoden börjar med. En mall med delar ritar
           inte overst (riggens planeringsBlock), så då säger raden inget om överkanten (andra ögat på Testbaserat lärande
           2026-11-02: Börja överst pekade på ett fält som bladet inte har, i alla fyra metoderna). */}
-      <p><Fragment set:html={k(`${planerasRad(d)}${d.planeringsmall?.overst?.[0] && !d.planeringsmall?.delar ? ` Börja överst: ${liten(d.planeringsmall.overst[0])}.` : ''}`)} /> Den tomma mallen står i <a href="#planeringsmallen">bilaga A</a>, förlagan till {forstaL.din} står under <a href="#forsta-lektionen">{FORSTA}</a>, och lektion {String(huvud.plan.lektion ?? '').split(' ')[0]} i huvudexemplet står ifylld <a href="#huvudexemplets-plan">vid exemplet</a> i del 2.</p>
+      <p><Fragment set:html={k(`${planerasRad(d)}${d.planeringsmall?.overst?.[0] && !d.planeringsmall?.delar ? ` Börja överst: ${liten(d.planeringsmall.overst[0])}.` : ''}`)} /> Den tomma mallen står i <a href="#planeringsmallen">bilaga A</a>, förlagan till {forstaL.din} står under <a href="#forsta-lektionen">{FORSTA}</a>, och lektion {String(huvud.plan.lektion ?? '').split(' ')[0]} i exemplet i {liten(exempletsAmne(huvud))} står ifylld <a href="#huvudexemplets-plan">i del 2</a>.</p>
     </section>
   )}
   {d.forsta && (

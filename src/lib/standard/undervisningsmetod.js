@@ -60,13 +60,16 @@ export const hanvisadeMetodersFel = (d, { stod, metoder }) => [
 ];
 
 /**
- * Var en fri tabell står i en undervisningsmetod: `efter-inledning` sist i del 1 och `efter-progression` efter veckorna. Allt
+ * Var en fri tabell står i en undervisningsmetod: `efter-inledning` sist i del 1, `fore-lektionen` efter rutan Före lektionen i
+ * del 2 och `efter-progression` efter veckorna. Allt
  * annat, som en tabell utan plats eller med mallens `efter-grund`, står sist i bilaga A, som i riggens Word-fil, så att ingen
  * tabell finns i filen men inte på sidan.
  * @param {{ plats?: string }} t tabellen
  * @param {{ progression?: unknown }} d metodens fil
  */
-export const friTabellensPlats = (t, d) => (t?.plats === 'efter-inledning' || (t?.plats === 'efter-progression' && d?.progression) ? t.plats : 'bilaga-a');
+// fore-lektionen: direkt efter rutan Före lektionen i del 2, när tidsschemat har den raden, som rutan Så skriver du frågorna i
+// Lärande på kognitionsvetenskaplig grund (riggens 9560dd8, K-743).
+export const friTabellensPlats = (t, d) => (t?.plats === 'efter-inledning' || (t?.plats === 'efter-progression' && d?.progression) || (t?.plats === 'fore-lektionen' && (d?.tidsschema?.rader ?? []).some((/** @type {any} */ r) => r?.fas === 'Före lektionen')) ? t.plats : 'bilaga-a');
 
 /**
  * En dels rad och text med metodens tal: minuterna i en lektion, veckorna att komma igång i ord, huvudexemplets ämne och

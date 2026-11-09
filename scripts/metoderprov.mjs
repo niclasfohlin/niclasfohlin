@@ -105,6 +105,17 @@ for (const s of metodsidor) {
 }
 if (!utanforProvade) fel.push('Kärnan här före och efter lektionen: ingen metod i dist har en del i kärnan där, så rutan prövades inte');
 
+// En fri tabell med plats fore-lektionen står direkt efter rutan Före lektionen, som i riggens Word-fil (riggens 9560dd8, K-743).
+for (const s of metodsidor) {
+  const id = s.split('/')[2];
+  const yaml = join(rot, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`);
+  if (!existsSync(yaml)) continue;
+  const html = readFileSync(join(dist, s.slice(1), 'index.html'), 'utf8');
+  for (const t of (parse(readFileSync(yaml, 'utf8')).tabeller ?? []).filter((x) => x?.plats === 'fore-lektionen')) {
+    if (!new RegExp(`<strong>Före lektionen\\.</strong>[\\s\\S]*?</div>\\s*<div class="um-fritabell" id="${slugAv(t.rubrik)}"`).test(html)) fel.push(`${s}: tabellen ${t.rubrik} står inte direkt efter rutan Före lektionen`);
+  }
+}
+
 // Det som går att pröva i HTML: ankarna, filerna och delarnas ordning.
 for (const s of [...metodsidor, ...lathundsidor]) {
   const html = readFileSync(join(dist, s, 'index.html'), 'utf8');
