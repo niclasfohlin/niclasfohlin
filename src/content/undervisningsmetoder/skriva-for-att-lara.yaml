@@ -22,7 +22,7 @@ material:
   - en klocka som alla ser
   - en penna i annan färg per elev
   - ett skrivkort i reserv från sidan Ta fram ett skrivkort
-uppdaterad: 2026-11-08
+uppdaterad: 2026-11-09
 publicerad: 2026-11-08
 relaterade: ["formativ-bedomning", "testbaserat-larande", "reciprok-undervisning", "kooperativt-larande", "kortskrivning-skriv-varje-dag", "skrivkurs-vardeskapande"]
 utkast: false
@@ -148,7 +148,7 @@ tidsschema:
   rader:
     - { tid: Före lektionen, fas: Före lektionen, vad: "Skriv på tavlan en fråga som lektionen svarar på. Ofta räcker den till alla ställen du väljer. Bestäm vem som läser mitt i." }
     - { tid: 2 min, fas: Skriv först, form: Enskilt, var: i början, vad: "Där du vill, ofta före något nytt, skriver alla vad de tror och varför. Texten stannar hos eleven." }
-    - { tid: 30 min eller mer, fas: Din planering, form: Läraren visar, ram: true, vad: "Du undervisar som du har planerat, och ställena ligger i din lektion." }
+    - { tid: resten av lektionen, fas: Din planering, form: Läraren visar, ram: true, vad: "Du undervisar som du har planerat, och ställena ligger i din lektion." }
     - { tid: 5–⁠7 min, fas: Stanna och skriv, form: Enskilt, var: mitt i, vad: "Mitt i, när de har något att reda ut, fyller du i Rutan på tavlan. Alla skriver, och den under Vem läser får texten. Du säger vad du läste och vad ni gör nu." }
     - { tid: 3 min, fas: Loggen, form: Enskilt, var: i slutet, vad: "I slutet, när något ska med till nästa gång, läser alla dagens text och skriver det viktigaste nu och varför i annan färg, så att det syns bredvid det förra." }
     - { tid: Efter lektionen, fas: Efter lektionen, vad: "Från vecka 4 läser du fem böcker per klass i veckan, på fem minuter. Läs raden i annan färg först, och dra en linje i kanten utan ord. Skriv en rad om hur nästa lektion börjar." }

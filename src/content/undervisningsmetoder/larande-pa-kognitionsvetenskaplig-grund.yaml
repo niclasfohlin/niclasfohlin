@@ -25,7 +25,7 @@ material:
   - färgpennor
   - återkomstlistan
   - frågekartan
-uppdaterad: 2026-11-08
+uppdaterad: 2026-11-09
 publicerad: 2026-11-03
 relaterade: ["testbaserat-larande", "explicit-undervisning", "formativ-bedomning", "kooperativt-larande"]
 utkast: false
@@ -160,12 +160,12 @@ tidsschema:
     - { tid: Före lektionen, fas: Före lektionen, vad: "Skriv det som ska sitta om en månad, lektionens fråga med svaret i en mening och två eller tre frågor ur återkomstlistan, en om varför. Hur många tror du har fel?" }
     - { tid: 3–⁠5 min, fas: Start, var: i början, form: Enskilt, vad: "I stället för att du frågar vad ni gjorde förra lektionen, stänger alla boken och svarar ur minnet på frågor från förra veckan och månaden, en om varför." }
     - { tid: 1 min, fas: Lektionens fråga, var: i början, form: Enskilt, vad: "Där du säger vad ni ska lära er i dag, står lektionens fråga på tavlan, och alla skriver en gissning." }
-    - { tid: 30 min eller mer, fas: Din planering, ram: true, grepp: [Avlasta minnet, Ord och bild, Blanda uppgifter], vad: "Du har din genomgång och övning som planerat. Du gör om ett exempel vid nya steg, en bild vid ett samband och ordningen när slag förväxlas." }
+    - { tid: resten av lektionen, fas: Din planering, ram: true, grepp: [Avlasta minnet, Ord och bild, Blanda uppgifter], vad: "Du har din genomgång och övning som planerat, med lösta exempel vid nya steg, en enkel bild vid ett samband och en blandad rad när slag förväxlas." }
     - { tid: 5–⁠6 min, fas: Avslut, var: i slutet, form: Enskilt, vad: "I stället för att du sammanfattar, stänger alla boken, svarar ur minnet på lektionens fråga och förklarar för grannen, som frågar varför." }
     - { tid: Efter lektionen, fas: Efter lektionen, vad: "Skriv på återkomstlistan frågan med flest fel, dagens nya, en bild om ni hade en, och när de kommer tillbaka. Lektionens fråga blir startens varför-fråga veckan efter." }
   varianter:
     - nar: första lektionen
-      text: "I dag tar lagret 15 minuter. Starten får ta åtta minuter och frågar om något klassen redan kan. När ni ska öva, säger du: ”Nu får ni öppna boken.” I Avslut säger du: ”Svara på frågan ur minnet. Grannen frågar: Varför?”"
+      text: "I första lektionen tar lagret 15 minuter, eftersom starten får ta åtta. Den frågar om något klassen redan kan. När ni ska öva, säger du: ”Nu får ni öppna boken.” I Avslut säger du: ”Svara på frågan ur minnet. Grannen frågar: Varför?”"
       delar:
         - { fas: Start, tid: 0–⁠8 min, fraser: ["Det här samlas inte in.", "Det du inte minns är det vi övar på."] }
         - { fas: Lektionens fråga, tid: 8–⁠9 min, fraser: ["Skriv en gissning på en minut.", "Det får vi svar på i dag."] }
@@ -189,8 +189,8 @@ steg:
       beslut: "Frågan med flest fel avgör när den kommer tillbaka. Skriv datumet på återkomstlistan nu eller efter lektionen. Fel är när det viktigaste saknas, som ett varför."
       gor:
         - "Säg: ”Böckerna stängda. Skriv det du minns.” Efter en minut får de som har tomt en ledtråd, på tavlan om de är många."
-        - Visa svaret senast efter tre minuter, och stryk under det viktigaste i varför-svaret. Eleverna fyller i med färgpennan.
-        - "Säg: ”Räck upp handen om du hade fel på fråga 1. Fel är när det understrukna saknas.” Undervisa inte igen."
+        - Visa svaret senast efter tre minuter, och stryk under det viktigaste i varje svar. Eleverna fyller i med färgpennan.
+        - "Säg: ”Räck upp handen om du hade fel på fråga 1. Fel är när det understrukna saknas.” Gör ingen ny genomgång i starten."
       fraser: ["Böckerna stängda. Skriv det du minns.", "Räck upp handen om du hade fel på fråga 1."]
       redo:
         nastanAlla: Högst 5 av 28 med fel. Frågan kommer tillbaka om några veckor, och de med fel får den i läxa.
@@ -345,12 +345,12 @@ progression:
     - { vecka: "1", led: Ramen, stallen: [Start, Lektionens fråga, Avslut], rubrik: "Plocka fram", eleverna: "Att stänga boken, skriva det de minns, förklara för grannen och fylla i med färgpennan.", roll: "Att ställa frågor som går att klara till en del, en om varför, och skriva frågan med flest fel på återkomstlistan.", vidare: "nästan alla skriver ur minnet, och en fråga har krävt ett varför", fraga: "Skriver nästan alla ur minnet, och har en fråga krävt ett varför?" }
     - { vecka: "3", led: Ramen, stallen: [Start, Lektionens fråga, Avslut], rubrik: "Sprid ut", eleverna: "Att svara på äldre frågor, också när det känns svårt.", roll: "Att ge tre till fem rader på återkomstlistan tre datum och låta det som satt vänta längre. Vecka 4 även i läxan.", vidare: "nästan alla klarar frågor som har kommit tillbaka två gånger", fraga: "Klarar nästan alla frågor som har kommit tillbaka två gånger?" }
     - { vecka: "5", led: Verktygen, stallen: [Start, Lektionens fråga, Avslut, Avlasta minnet], rubrik: "Avlasta minnet", eleverna: "Att lösa en liknande uppgift efter exemplet, med rutinen Exemplet först, sedan själv.", roll: "Att varva löst exempel och uppgift i tre lektioner med nya steg. Vecka 6 ett steg mindre löst.", vidare: "de flesta klarar en uppgift utan exemplet", fraga: "Klarar de flesta en uppgift utan exemplet?" }
-    - { vecka: "7", led: Verktygen, stallen: [Start, Lektionens fråga, Avslut, Ord och bild], rubrik: "Ord och bild", eleverna: "Att peka och säga sambandet i din bild, och sedan rutinen Rita ur minnet.", roll: "Att i tre lektioner rita en enkel bild en del i taget och peka. Vecka 8 kommer bilden tillbaka i starten.", vidare: "nästan alla säger sambandet med ämnets ord och bilden", fraga: "Säger nästan alla sambandet med ämnets ord och bilden?" }
-    - { vecka: "9", led: Verktygen, stallen: [Start, Lektionens fråga, Avslut, Blanda uppgifter], rubrik: "Blanda uppgifter", eleverna: "Att skriva vilket slag uppgiften är innan de löser den, med rutinen Slaget först.", roll: "Att blanda dina uppgifter av slag som klassen kan var för sig. Vecka 10 de som förväxlas.", vidare: "de flesta skriver rätt slag innan de löser", fraga: "Skriver de flesta rätt slag innan de löser?" }
+    - { vecka: "7", led: Verktygen, stallen: [Start, Lektionens fråga, Avslut, Avlasta minnet, Ord och bild], rubrik: "Ord och bild", eleverna: "Att peka och säga sambandet i din bild, och sedan rutinen Rita ur minnet.", roll: "Att i tre lektioner rita en enkel bild en del i taget och peka. Vecka 8 kommer bilden tillbaka i starten.", vidare: "nästan alla säger sambandet med ämnets ord och bilden", fraga: "Säger nästan alla sambandet med ämnets ord och bilden?" }
+    - { vecka: "9", led: Verktygen, stallen: [Start, Lektionens fråga, Avslut, Avlasta minnet, Ord och bild, Blanda uppgifter], rubrik: "Blanda uppgifter", eleverna: "Att skriva vilket slag uppgiften är innan de löser den, med rutinen Slaget först.", roll: "Att blanda dina uppgifter av slag som klassen kan var för sig. Vecka 10 de som förväxlas.", vidare: "de flesta skriver rätt slag innan de löser", fraga: "Skriver de flesta rätt slag innan de löser?" }
 uppfoljning:
   text: Du ser om metoden fungerar på händerna i starten, i svaren i Avslut och på återkomstlistan.
   rader:
-    - { id: lektionen, nar: Varje lektion, tid: varje lektion, vad: "Läs några svar från Avslut, och skriv namnen på dem som saknade sambandet. Har samma elev fel flera gånger, läser du svaren med specialläraren." }
+    - { id: lektionen, nar: Varje lektion, tid: varje lektion, vad: "Läs några svar från Avslut, och skriv upp vilka som inte förklarade varför. Har samma elev fel flera gånger, läser du svaren med specialläraren." }
     - { id: klassen, nar: Klassens svar varje vecka, tid: varje vecka, vad: "Räkna hur många som klarar frågan från förra månaden i starten, och hur många som förklarar varför i svaret." }
     - { id: lararen, nar: Dina kryss varje vecka, tid: varje vecka, vad: "Se i veckans kryss om ramen fanns i varje lektion och om verktygen kom när innehållet behövde dem. En strategi glider mot en tom rutin utan att det märks i en enskild lektion." }
     - { id: observationerna, nar: Vecka 2 och 8, tid: vecka 2 och 8, vad: "Specialläraren besöker en lektion i vecka 2 och läser skrivböckerna efteråt. En kollega besöker en lektion i vecka 8 och läser återkomstlistan." }
@@ -367,8 +367,8 @@ checklista:
     - Välj ämnet, klassen och de två lektioner i veckan där du börjar.
     - Skriv det eleverna ska minnas om en månad på återkomstlistan i bilaga A. Varför är det värt att kunna?
     - Sätt upp Strategibladet och kortet Plocka fram där alla ser dem, och se till att väggen inte är full.
-    - Bestäm grannarna och var den som är ny i svenska sitter. Lägg fram färgpennor, och skriv ut frågekartan till F–⁠3.
-    - Boka observationerna, en av dem med specialläraren.
+    - Bestäm grannarna och var den som är ny i svenska sitter. Lägg fram färgpennor och i F–⁠3 frågekartan.
+    - "Boka två besök med observationsmallen: specialläraren i vecka 2 och en kollega i vecka 8."
     - "Bestäm med arbetslaget vad ni gör lika: strategiernas namn, färgpennan och att böckerna är stängda."
     - "Säg till klassen varför det ska kännas lite svårt: det som känns lätt är inte det som sitter."
     - Berätta för hemmen att svaren ur minnet inte påverkar betyget.
@@ -491,7 +491,7 @@ hallFast:
 # Bilaga A Att skriva ut
 # ---------------------------------------------------------------------------------------------------------------------
 strategikort:
-  text: "De fem kognitionsvetenskapliga strategierna finns som kort, ett halvt A4 per strategi, på niclasfohlin.se/strategier. Framsidan är för klassen, med strategin i en bild och en mening, och baksidan för dig, med tanken och Så gör du. Sätt upp Strategibladet mitt på en vägg och korten runt det, ett i taget när ni börjar med strategin. Plocka fram och Sprid ut är ramen i varje lektion, och de tre andra är verktyg du tar när innehållet behöver dem."
+  text: "De fem kognitionsvetenskapliga strategierna finns som kort, ett halvt A4 per strategi, på niclasfohlin.se/strategier. Framsidan är för klassen, med strategin i en bild och en mening, och baksidan för dig, med tanken och Så gör du. Sätt upp Strategibladet mitt på en vägg och korten runt det, ett i taget när ni börjar med strategin. Bladet är ett liggande A4, och i A3 syns det bättre på väggen. Plocka fram och Sprid ut är ramen i varje lektion, och de tre andra är verktyg du tar när innehållet behöver dem."
   strategier:
     - plocka-fram
     - sprid-ut
@@ -501,11 +501,22 @@ strategikort:
   blad: Strategibladet
 ramar:
   rubrik: Materialet för klassen
-  text: ["Utöver lektionskortet och strategikorten finns frågekartan för de yngsta. Återkomstlistan för dig och ämneslaget är en mall att skriva i, och den står sist i bilaga A."]
+  text: ["Utöver lektionskortet och strategikorten finns frågekartan för de yngsta. Från åk 4 räcker skrivboken och en färgpenna för de flesta. Återkomstlistan för dig och ämneslaget är en mall att skriva i, och den står sist i bilaga A."]
   ramar:
     - rubrik: Frågekartan
-      text: ["Skriv arbetsområdets namn i mitten och fem frågor runt omkring, en av dem om varför. Kopiera två blad i A4 per elev, eller visa bladet på tavlan. Under din övning fyller eleverna i det första bladet med boken öppen. I Avslut lägger de undan bok och blad och fyller i det andra ur minnet, först lektionens fråga och sedan så många av kartans frågor som de hinner. I starten veckan efter fyller de i ett nytt med boken stängd. Bladet passar F–⁠3 och den som är ny i svenska."]
+      text: ["Skriv arbetsområdets namn i mitten och fem frågor runt omkring, med lektionens fråga i ruta 1 och en om varför. Kopiera tre blad i A4 per elev, eller visa bladet på tavlan. Under din övning fyller eleverna i det första bladet med boken öppen. I Avslut lägger de undan bok och blad och fyller i det andra ur minnet, först ruta 1 och sedan så många rutor till som de hinner. I starten veckan efter fyller de i ett nytt med boken stängd. Bladet passar F–⁠3 och den som är ny i svenska."]
 tabeller:
+  - rubrik: Så skriver du frågorna
+    plats: fore-lektionen
+    text: "Skriv frågorna ur det som ska sitta om en månad. Lektionens fråga ska gå att gissa på utifrån det klassen redan vet, men bara dagens innehåll svarar helt på den. Ofta börjar den med ”Varför”, ”Hur kan” eller ”Vad händer om”. Startens frågor tar du ur återkomstlistan, en från förra veckan och en från förra månaden. En av dem gäller varför, och svaret är kort nog att visa på tavlan. Ungefär åtta av tio ska klara varje fråga. Exemplet är en lektion i historia i åk 8."
+    kolumner: [Det du förbereder, I historia i åk 8]
+    rader:
+      - ["Det som ska sitta", "Varför så många svenskar flyttade till Amerika i slutet av 1800-talet"]
+      - ["Lektionens fråga", "”Varför flyttade så många svenskar till Amerika?”"]
+      - ["Svaret i en mening", "Jorden och arbetet räckte inte till den växande befolkningen, missväxten gav svält, och i Amerika fanns billig jord och släktingar som skrev hem."]
+      - ["En gissning", "”De var fattiga.” Den är delvis rätt, och lektionen visar varför."]
+      - ["Förra veckan", "”Vad var laga skifte?” Byarnas mark delades om, så att varje gård fick sin mark samlad."]
+      - ["Förra månaden, om varför", "”Varför växte befolkningen i Sverige på 1800-talet?” Freden, vaccinet och potatisen gjorde att färre dog."]
   - rubrik: Ett arbetsområde med strategierna
     plats: efter-progression
     meny: true
@@ -587,7 +598,7 @@ observation:
     - { fas: Din planering, rader: 3, rakna: "Verktyget: exempel · bild · rad   Slaget först: ___ av ___   Stödet bort när de kunde: ja · nej" }
     - { fas: Avslut, rader: 2, rakna: "Svarade ur minnet: ___ av ___   Sa sambandet med ämnets ord: ___ av ___" }
   streck:
-    - { etikett: Svaret, drag: ["Alla svarade själva före svaret", "Undervisade igen i starten"] }
+    - { etikett: Svaret, drag: ["Alla svarade själva före svaret", "Ny genomgång i starten"] }
     - { etikett: Bilden, drag: ["Pekade när hen talade", "Läste upp text i bilden"] }
     - { etikett: Stödet och raden, drag: ["Facit när raden var klar", "Tog bort ett steg i stödet"] }
   rader:
@@ -685,6 +696,6 @@ lathund:
       - "Du lär dig fem kognitionsvetenskapliga strategier, en i taget. Två är ramen, 9–⁠12 minuter i varje lektion, och tre är verktyg i din genomgång och övning. Vad klassen ska lära sig väljer du först."
       - "Lärandet går till så här. Eleverna minns det de tänker på, och lektionens fråga gör dem nyfikna på det. De plockar fram det, möter det igen, ser ett löst exempel, förklarar med en bild och väljer sätt."
   lektion:
-    text: "Tre saker är nya: starten, lektionens fråga och Avslut. I dag tar de 15 minuter, och resten är din lektion. Med boken stängd svarar alla på två frågor om något de kan. Du visar svaret, och de fyller i med färgpennan. Fel är när det du stryker under saknas. Lektionens fråga står där du säger vad ni ska lära er, och Avslut svarar på den."
+    text: "Tre saker är nya: starten, lektionens fråga och Avslut, som svarar på frågan. I första lektionen tar de 15 minuter. I starten svarar alla med boken stängd på två frågor om något de kan. Du visar svaret och stryker under det viktigaste. De fyller i med en färgpenna, så att det syns vad de mindes. Fel är när det understrukna saknas."
   igang:
     rubrik: De första veckorna
