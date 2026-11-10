@@ -121,6 +121,7 @@ if (provNamn.length) {
 
 steg('bankpdf', 'node scripts/bankpdf.mjs');
 steg('pdfdelar', 'node scripts/pdfdelar.mjs');
+steg('pdfstorlek', 'python scripts/pdfstorlek.py');
 steg('paritet', 'node scripts/paritet.mjs');
 steg('utskriftsformat', 'node scripts/utskriftsformat.mjs');
 steg('strukturprov', 'node scripts/strukturer/prov.mjs');
