@@ -11,21 +11,28 @@
 # räknas ur innehållet. Titeln, författaren och resten står kvar. Mätt 2026-10-29: två pdf:er som Word gjorde av samma
 # Word-fil skilde sig bara i det.
 #
-# Bilderna som palett (K-700): Chrome lägger en png med palett som RGB i pdf:en, så strukturkortens bilder, som har 12
-# till 64 färger, tog mer plats i pdf:en än som png. Filen med alla strukturkort var 7,5 MB, varav bilderna 90 procent, och
+# Bilderna som palett (K-700): Chrome lägger en png med palett som RGB i pdf:en, så strukturkortens bilder, som har 16
+# eller 256 färger, tog mer plats i pdf:en än som png. Filen med alla strukturkort var 7,5 MB, varav bilderna 90 procent, och
 # drog 1,4 GB trafik på ett dygn 2026-11-02 till 03. palett() lägger varje bild med högst 256 färger som en palettbild
 # (Indexed) med samma bildpunkter, och lämnar bilden som den var om en enda punkt skulle ändras. Mätt 2026-11-03: filen
 # med alla blev 5,1 MB, och sidan ritad med pdftoppm var densamma i varje bildpunkt.
 #
+# Tätare i palettläget (K-755): palett() skriver bildens index utan png:s radfilter, som gjorde palettbilderna större, och
+# rundar ritningen som main() gör, så att kortens ram, symboler och strategikortens teckningar tar mindre plats. Mätt
+# 2026-11-09 med strukturkortens bilder i 1600 punkter: filen med alla gick från 4 965 till 4 607 kB med samma bilder, och
+# sidan ritad i 300 dpi skilde sig i 0,003 procent av bildpunkterna, bara i ramens utjämning. Strategikortens fil med alla
+# gick från 2 184 till 1 686 kB av rundningen.
+#
 #   python scripts/pdfpack.py <in.pdf> <ut.pdf>                 packa och gör bytelik (bankpdf.mjs)
 #   python scripts/pdfpack.py --bara-bytelik <in.pdf> <ut.pdf>  bara bytelik, för PowerPoints lathund (lathund-pdf.mjs)
-#   python scripts/pdfpack.py --palett <in.pdf> <ut.pdf>        bilderna som palett och bytelik (strukturer/kort.mjs)
+#   python scripts/pdfpack.py --palett <in.pdf> <ut.pdf>        bilderna som palett, ritningen packad och bytelik
+#                                                               (strukturer/kort.mjs och strategier/kort.mjs)
 #   (kräver pip install pikepdf, som tar med Pillow)
 import decimal
 import io
 import math
-import struct
 import sys
+import zlib
 
 import pikepdf
 from PIL import Image
@@ -104,17 +111,6 @@ def bara_bytelik(kalla, ut):
     spara(pdf, ut)
 
 
-def idat(png):
-    """En pngs bilddata (IDAT), som är Flate med png:s prediktorer: det som pdf läser med Predictor 15."""
-    i, ut = 8, b''
-    while i < len(png):
-        n = struct.unpack('>I', png[i:i + 4])[0]
-        if png[i + 4:i + 8] == b'IDAT':
-            ut += png[i + 8:i + 8 + n]
-        i += 12 + n
-    return ut
-
-
 def palettbild(strom):
     """Bilden som palettbild, eller None när den har fler än 256 färger, en mask eller blir större."""
     if strom.get('/SMask') is not None or strom.get('/Mask') is not None or strom.get('/ImageMask'):
@@ -137,12 +133,13 @@ def palettbild(strom):
     tillbaka = Image.open(io.BytesIO(buf.getvalue()))
     if tillbaka.convert('RGB').tobytes() != bild.tobytes():
         return None
-    data = idat(buf.getvalue())
+    # Indexen packade rad för rad utan png:s radfilter (K-755): filtren räknar på indexen som tal och gjorde bilderna större.
+    data = zlib.compress(tillbaka.tobytes('raw', {8: 'P', 4: 'P;4', 2: 'P;2'}[bitar]), 9)
     if len(data) >= len(strom.read_raw_bytes()):
         return None
     # Paletten ur den sparade png:n, eftersom det är den som indexen pekar i.
     hogst = tillbaka.getextrema()[1]
-    return data, bitar, bas, bytes(tillbaka.getpalette()[:3 * (hogst + 1)]), hogst, bild.size[0]
+    return data, bitar, bas, bytes(tillbaka.getpalette()[:3 * (hogst + 1)]), hogst
 
 
 def palett(kalla, ut):
@@ -153,15 +150,18 @@ def palett(kalla, ut):
         ny = palettbild(strom)
         if ny is None:
             continue
-        data, bitar, bas, lista, hogst, bredd = ny
-        strom.write(data, filter=pikepdf.Name.FlateDecode, decode_parms=pikepdf.Dictionary(Predictor=15, Colors=1, BitsPerComponent=bitar, Columns=bredd))
+        data, bitar, bas, lista, hogst = ny
+        strom.write(data, filter=pikepdf.Name.FlateDecode)
+        if '/DecodeParms' in strom:
+            del strom['/DecodeParms']
         strom.ColorSpace = pikepdf.Array([pikepdf.Name.Indexed, bas, hogst, pikepdf.String(lista)])
         strom.BitsPerComponent = bitar
+    runda(pdf)
     spara(pdf, ut)
 
 
-def main(kalla, ut):
-    pdf = pikepdf.open(kalla)
+def runda(pdf):
+    """Ritningen packad med packa_strom på varje sida och i formerna som sidan ritar."""
     sedda = set()
 
     def behandla(strom):
@@ -184,6 +184,11 @@ def main(kalla, ut):
             for x in xo.values():
                 if x.get('/Subtype') == '/Form':
                     behandla(x)
+
+
+def main(kalla, ut):
+    pdf = pikepdf.open(kalla)
+    runda(pdf)
     # Dispositionen bär Word-filens bokmärken (sida_0 …), som scripts/bankpdf.mjs har läst kartan ur före packningen
     # (scripts/pdfkarta.py). Läraren ska inte se dem i sin pdf-läsare.
     if '/Outlines' in pdf.Root:

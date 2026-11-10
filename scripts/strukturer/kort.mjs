@@ -2,10 +2,13 @@
 // Strukturkortens pdf:er (K-650): ett kort per struktur, framsidan och baksidan på var sitt A4 med kortet på den övre
 // halvan, i formen ur scripts/strukturer/kortform.mjs, och filen med alla kort, två på varje A4. Chrome skriver ut korten
 // (beslutet i underlag/prov/strukturer/UPPDRAGET.md under Läget: formen är enkel i HTML och svår i Word, och ingen
-// Word-fil erbjuds), och pdf-lib delar utskriften i ett kort per fil. Bilden är scenens png i 1600 punkter med så få
-// färger som bilden tål (Niclas 2026-10-31: "Ska vara en halv A4a och inte se suddiga ut. Men också optimeras för hur de
+// Word-fil erbjuds), och pdf-lib delar utskriften i ett kort per fil. Bilden är scenens png i BILDENS_BREDD punkter med så
+// få färger som bilden tål (Niclas 2026-10-31: "Ska vara en halv A4a och inte se suddiga ut. Men också optimeras för hur de
 // ska komprimeras för sina färger"). Chrome lägger bilden som RGB i pdf:en, så varje pdf görs om med bilden som palett
-// och samma bildpunkter (scripts/pdfpack.py --palett, K-700): filen med alla kort gick från 7,5 till 5,1 MB.
+// och samma bildpunkter (scripts/pdfpack.py --palett, K-700): filen med alla kort gick från 7,5 till 5,1 MB. K-755 gjorde
+// bilden 1200 punkter bred i stället för 1600, alltså omkring 180 ppi på kortet, och packningen tätare (Niclas 2026-11-10:
+// "Kör den i 1200 punkter med förlustfria paketeringen"), efter att 1200 och 1000 punkter jämförts med 1600 i en
+// skrivares 600 dpi: 1200 gick inte att skilja från 1600, och i 1000 blev linjerna ojämnare i förstoring.
 //
 //   node scripts/strukturer/kort.mjs                 alla strukturer som har en bild
 //   node scripts/strukturer/kort.mjs <id> [<id>…]    bara de angivna
@@ -42,11 +45,12 @@ const args = process.argv.slice(2);
 const vidBehov = args.includes('--vid-behov');
 const valda = args.filter((a) => !a.startsWith('--'));
 
-// Det som ett kort görs av, utöver strukturens egen fil och scen: motorn, formen och typsnitten.
+// Det som ett kort görs av, utöver strukturens egen fil och scen: motorn, formen, det här skriptet med bildens bredd och
+// färger, packningen och typsnitten.
 const lasAlla = (mapp, filter) => readdirSync(mapp).filter(filter).sort().map((f) => readFileSync(join(mapp, f)));
 const gemensamt = createHash('sha256');
 for (const b of [
-  ...['rita.mjs', 'stil.json', 'symboler.mjs', 'kortform.mjs'].map((f) => readFileSync(join(HAR, f))),
+  ...['rita.mjs', 'stil.json', 'symboler.mjs', 'kortform.mjs', 'kort.mjs'].map((f) => readFileSync(join(HAR, f))),
   readFileSync(join(ROT, 'scripts', 'pdfpack.py')),
   ...lasAlla(join(HAR, 'figurer'), (f) => f.endsWith('.mjs')),
   ...lasAlla(join(HAR, 'typsnitt'), (f) => f.endsWith('.ttf')),
@@ -103,16 +107,19 @@ if (!attGora.length && !allaAttGora && !metodernaAttGora.length) { console.log(`
 const chrome = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
 if (!chrome) { console.error('Chrome hittades inte: korten skrivs ut med Chrome.'); process.exit(1); }
 
-// Bildens png: så få färger som bilden tål. Medelfelet mot bilden i alla färger ska vara under 0,6 av 255.
+// Bildens png: så få färger som bilden tål. Medelfelet mot bilden i alla färger ska vara under 0,6 av 255. sharp väljer
+// bara bitdjupet ur colours, så paletten har 16 färger (4 bitar) eller 256 (8 bitar), och ett tal mellan dem ger 256. Ett
+// mellanläge prövades i K-755 med libimagequants kvalitet: med 36 färger bytte en hudton färg, så de två stegen står kvar.
+const BILDENS_BREDD = 1200;
 const tmp = mkdtempSync(join(tmpdir(), 'strukturkort-'));
 const bilder = {};
 async function bilden(s) {
   if (bilder[s.id]) return bilder[s.id];
   const svg = Buffer.from(ritaScen(YAML.parse(scenen(s))));
-  const bas = sharp(svg, { density: Math.round(72 * 1600 / 900) }).resize({ width: 1600 }).flatten({ background: '#fff' });
+  const bas = sharp(svg, { density: Math.round(72 * BILDENS_BREDD / 900) }).resize({ width: BILDENS_BREDD }).flatten({ background: '#fff' });
   const full = await bas.clone().raw().toBuffer();
   let vald = null;
-  for (const colours of [12, 16, 24, 32, 64]) {
+  for (const colours of [16, 256]) {
     const png = await bas.clone().png({ palette: true, colours, dither: 0, effort: 10, compressionLevel: 9 }).toBuffer();
     const tillbaka = await sharp(png).removeAlpha().raw().toBuffer();
     let sum = 0;

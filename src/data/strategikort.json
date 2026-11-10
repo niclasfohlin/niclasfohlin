@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "3f6a6c92ad63b20e",
+    "summa": "a58305ab7b5d8b60",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -21,10 +21,10 @@
       "lar-ut-till-nagon",
       "forsok-forst"
     ],
-    "kb": 2184
+    "kb": 1653
   },
   "_blad:larande-pa-kognitionsvetenskaplig-grund": {
-    "summa": "b235e3fe483e4083",
+    "summa": "089574d145cbc4dd",
     "strategier": [
       "plocka-fram",
       "sprid-ut",
@@ -32,10 +32,10 @@
       "ord-och-bild",
       "blanda-uppgifter"
     ],
-    "kb": 41
+    "kb": 39
   },
   "_bladet": {
-    "summa": "50b9ad2e2d611b9c",
+    "summa": "57bfbb5b72f8ed3a",
     "strategier": [
       "plocka-fram",
       "sprid-ut",
@@ -56,10 +56,10 @@
       "lar-ut-till-nagon",
       "forsok-forst"
     ],
-    "kb": 58
+    "kb": 52
   },
   "_metod:explicit-undervisning": {
-    "summa": "cb48a87ee8b58e09",
+    "summa": "bae8336a7640e045",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -67,10 +67,10 @@
       "blanda-uppgifter",
       "borja-i-det-kanda"
     ],
-    "kb": 620
+    "kb": 478
   },
   "_metod:formativ-bedomning": {
-    "summa": "c4cc8f1b74fcd499",
+    "summa": "8512d039c0226723",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -79,20 +79,20 @@
       "forklara-stegen",
       "prova-dig-sjalv"
     ],
-    "kb": 729
+    "kb": 557
   },
   "_metod:kooperativt-larande": {
-    "summa": "89b63306f2974b9d",
+    "summa": "d7b3d49db372b66b",
     "kort": [
       "avlasta-minnet",
       "ord-och-bild",
       "forklara-stegen",
       "jamfor-tva"
     ],
-    "kb": 471
+    "kb": 360
   },
   "_metod:larande-pa-kognitionsvetenskaplig-grund": {
-    "summa": "a60978023f13a4b1",
+    "summa": "ebb5c4052cfa0a6f",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -100,27 +100,27 @@
       "ord-och-bild",
       "blanda-uppgifter"
     ],
-    "kb": 621
+    "kb": 477
   },
   "_metod:reciprok-undervisning": {
-    "summa": "7ef26e9796316633",
+    "summa": "a8b2a3ff74d5819c",
     "kort": [
       "gissa-forst",
       "fraga-varfor"
     ],
-    "kb": 266
+    "kb": 203
   },
   "_metod:skriva-for-att-lara": {
-    "summa": "9243ec25bc1b9d06",
+    "summa": "461fced5e1d83642",
     "kort": [
       "fraga-varfor",
       "jamfor-tva",
       "lar-ut-till-nagon"
     ],
-    "kb": 370
+    "kb": 283
   },
   "_metod:testbaserat-larande": {
-    "summa": "b62ccdc457f199af",
+    "summa": "aae5f417fbe11dfc",
     "kort": [
       "plocka-fram",
       "sprid-ut",
@@ -129,12 +129,12 @@
       "fraga-varfor",
       "jamfor-tva"
     ],
-    "kb": 732
+    "kb": 561
   },
   "avlasta-minnet": {
     "innehall": "d7d8e065",
-    "summa": "562a11380ca8ce17",
-    "kb": 138,
+    "summa": "f0b9051e48b43bf8",
+    "kb": 107,
     "namn": {
       "pt": 78,
       "rader": 1
@@ -151,8 +151,8 @@
   },
   "beratta": {
     "innehall": "1c1f367c",
-    "summa": "38e53a1427536f8e",
-    "kb": 164,
+    "summa": "37cd3f3f0a69e0e0",
+    "kb": 131,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -169,8 +169,8 @@
   },
   "blanda-uppgifter": {
     "innehall": "494e9946",
-    "summa": "9e90f8d0161eae99",
-    "kb": 135,
+    "summa": "cf307471607fe446",
+    "kb": 105,
     "namn": {
       "pt": 70,
       "rader": 1
@@ -187,8 +187,8 @@
   },
   "borja-i-det-kanda": {
     "innehall": "e1442ae1",
-    "summa": "8475123f765cad3a",
-    "kb": 138,
+    "summa": "d119a9e2b45fc4e9",
+    "kb": 109,
     "namn": {
       "pt": 70,
       "rader": 1
@@ -205,8 +205,8 @@
   },
   "forklara-stegen": {
     "innehall": "d40769ba",
-    "summa": "33b14f59cee0da34",
-    "kb": 124,
+    "summa": "c8b7cd286ddf278d",
+    "kb": 99,
     "namn": {
       "pt": 74,
       "rader": 1
@@ -223,8 +223,8 @@
   },
   "forsok-forst": {
     "innehall": "aa81bd09",
-    "summa": "f14f674b0113c789",
-    "kb": 157,
+    "summa": "ced2aaf8345c7813",
+    "kb": 123,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -241,8 +241,8 @@
   },
   "fraga-varfor": {
     "innehall": "275eec69",
-    "summa": "071064d84d3e3262",
-    "kb": 145,
+    "summa": "b88b58b9267594b0",
+    "kb": 114,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -259,8 +259,8 @@
   },
   "fran-sak-till-tecken": {
     "innehall": "2631c84c",
-    "summa": "486ef196c8e691f8",
-    "kb": 127,
+    "summa": "55fce50eba0fc55f",
+    "kb": 97,
     "namn": {
       "pt": 62,
       "rader": 1
@@ -277,8 +277,8 @@
   },
   "ge-exempel": {
     "innehall": "8fdc63dc",
-    "summa": "9862d9b51870bb09",
-    "kb": 160,
+    "summa": "219b4418de88c897",
+    "kb": 123,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -295,8 +295,8 @@
   },
   "gissa-forst": {
     "innehall": "fa3ace08",
-    "summa": "3c6e2bcbda031660",
-    "kb": 142,
+    "summa": "e02abeab0842b7a2",
+    "kb": 111,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -313,8 +313,8 @@
   },
   "gor-med-kroppen": {
     "innehall": "c702829e",
-    "summa": "35a04e81bde460ba",
-    "kb": 144,
+    "summa": "e7e60683f1b8c44f",
+    "kb": 113,
     "namn": {
       "pt": 68,
       "rader": 1
@@ -331,8 +331,8 @@
   },
   "jamfor-tva": {
     "innehall": "ea5254cc",
-    "summa": "6bf1429793ab5224",
-    "kb": 130,
+    "summa": "774616ee7c031536",
+    "kb": 104,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -349,8 +349,8 @@
   },
   "lar-ut-till-nagon": {
     "innehall": "28d19107",
-    "summa": "c1a7bb2f6f85748d",
-    "kb": 130,
+    "summa": "a5c0d924194e5e1f",
+    "kb": 102,
     "namn": {
       "pt": 74,
       "rader": 1
@@ -367,8 +367,8 @@
   },
   "ord-och-bild": {
     "innehall": "8fc9f2c1",
-    "summa": "88ce7b77e60695f9",
-    "kb": 137,
+    "summa": "5c9ac1605b341a4e",
+    "kb": 111,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -385,8 +385,8 @@
   },
   "plocka-fram": {
     "innehall": "ff481aee",
-    "summa": "14cce679448ae679",
-    "kb": 154,
+    "summa": "a7367ad3939e1815",
+    "kb": 129,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -403,8 +403,8 @@
   },
   "prova-dig-sjalv": {
     "innehall": "415f36e1",
-    "summa": "fc7027f0a04774cd",
-    "kb": 141,
+    "summa": "57ad432ff15c186b",
+    "kb": 109,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -421,8 +421,8 @@
   },
   "rita-det": {
     "innehall": "5915e6a9",
-    "summa": "a6ea59d095b56b42",
-    "kb": 124,
+    "summa": "43170b231a9f9d16",
+    "kb": 98,
     "namn": {
       "pt": 80,
       "rader": 1
@@ -439,8 +439,8 @@
   },
   "sprid-ut": {
     "innehall": "48b407f0",
-    "summa": "f55e0f79d2f8f788",
-    "kb": 129,
+    "summa": "807219ce588a1490",
+    "kb": 104,
     "namn": {
       "pt": 80,
       "rader": 1
