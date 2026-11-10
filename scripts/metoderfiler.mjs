@@ -11,7 +11,7 @@
 //   node scripts/metoderfiler.mjs                 ta in filerna för varje metod i src/content/undervisningsmetoder/
 //   node scripts/metoderfiler.mjs --kontrollera   pröva bara att filerna finns och hör till metodens fil
 import { createHash } from 'node:crypto';
-import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -71,6 +71,26 @@ const sidornasFil = () => `${JSON.stringify({ _om: 'Materialets sidor per blad i
 const sha = (f) => createHash('sha256').update(readFileSync(f, 'utf8').replace(/\r\n/g, '\n')).digest('hex');
 const fel = [];
 const varningar = [];
+// Riggens pdf:er packas när de tas in (K-759): ritningen rundas i papperets punkter och bilderna läggs som palett med samma
+// bildpunkter (scripts/pdfpack.py --palett, DRIFT.md under Krediter). Genomgången 2026-11-10: 22,3 blev 18,7 MB, och sidorna
+// var desamma i 600 dpi. Alla tar en dryg minut, så den packade filen sparas i node_modules/.cache/metoderfiler/packade/
+// med ett namn ur riggens fil och packningen, som inte committas, och kopieras därifrån varje gång som riggens fil förut.
+const PACKADE = join(ROT, 'node_modules', '.cache', 'metoderfiler', 'packade');
+const PACKAREN = readFileSync(join(ROT, 'scripts', 'pdfpack.py'));
+const anvanda = new Set();
+function taIn(kalla, mal) {
+  if (!mal.endsWith('.pdf')) return copyFileSync(kalla, mal);
+  const namn = `${createHash('sha256').update(readFileSync(kalla)).update(PACKAREN).digest('hex').slice(0, 32)}.pdf`;
+  const packad = join(PACKADE, namn);
+  anvanda.add(namn);
+  if (!existsSync(packad)) {
+    mkdirSync(PACKADE, { recursive: true });
+    const r = spawnSync('python', [join(ROT, 'scripts', 'pdfpack.py'), '--palett', kalla, `${packad}.tmp`], { encoding: 'utf8' });
+    if (r.status !== 0) throw new Error(`packningen av ${mal}: ${r.stderr}`);
+    renameSync(`${packad}.tmp`, packad);
+  }
+  copyFileSync(packad, mal);
+}
 mkdirSync(UT, { recursive: true });
 
 // Sidorna i en pdf som text, en post per sida.
@@ -148,7 +168,7 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   if (!lasEndast) {
     // En tabells fil som riggen inte längre lämnar tas bort, som bladen nedan.
     for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-tabell-`) && !filer.some((y) => x === `${stam(y.slag)}.${y.typ}`))) rmSync(join(UT, f));
-    for (const f of filer) copyFileSync(f.kalla, join(UT, `${stam(f.slag)}.${f.typ}`));
+    for (const f of filer) taIn(f.kalla, join(UT, `${stam(f.slag)}.${f.typ}`));
   }
 
   // Bladen i Materialet för klassen: ett blad per sida, i metodens ordning, sist i materialets pdf. En textsida före dem,
@@ -288,6 +308,8 @@ const kvar = Object.keys(materialetsSidor).filter((k) => k !== '_om' && !metoder
 if (kvar.length && kontrollera) fel.push(`src/data/materialets-sidor.json har ${kvar.join(', ')}, som inte är metoder i src/content/undervisningsmetoder/. Kör node scripts/metoderfiler.mjs`);
 else if (kvar.length) { for (const k of kvar) delete materialetsSidor[k]; writeFileSync(SIDORNA, sidornasFil()); }
 
+// En packad fil som ingen av riggens filer längre ger tas bort, så att cachen inte växer med varje leverans.
+if (!kontrollera && !fel.length && existsSync(PACKADE)) for (const f of readdirSync(PACKADE)) if (!anvanda.has(f)) rmSync(join(PACKADE, f));
 for (const v of varningar) console.log(`! ${v}`);
 if (fel.length) { console.error(fel.map((f) => `metoderfiler: ${f}`).join('\n')); process.exit(1); }
 console.log('metoderfiler: klart');

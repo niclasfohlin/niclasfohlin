@@ -6,10 +6,10 @@
 #   bilderna     en bild som ritas i mer än GRANSER['ppi'] ppi där den är som störst: 180 ppi gick inte att skilja från 240
 #                i en skrivares 600 dpi (K-755), så det som är över gränsen är bara vikt. Mäts med pdfimages -list (poppler).
 #   radfiltret   palettbilder packade med png:s radfilter, som gör dem större: pdfpack.py --palett skriver dem utan.
-#
-# Ritningens decimaler är inget villkor här än. Rundningen i pdfpack.py räknar i ritningens egna enheter. I riggens pdf:er,
-# där Word har ritat bokstäver som kurvor i en annan skala, blev ett o kantigt fast filerna blev 31 procent mindre
-# (genomgången 2026-11-10, K-758). När rundningen räknar i papperets enheter (K-759) kan den bli ett villkor.
+#   ritningen    ritning med fler decimaler än papperet visar: rundningen i pdfpack.py (runda), som räknar i papperets
+#                punkter sedan K-759, sparar mer än GRANSER['rundning'] procent av filen. Innan dess räknade den i ritningens
+#                egna enheter och gjorde ett o kantigt i riggens pdf:er, där Word ritar bokstäverna som kurvor i en form som
+#                förstoras omkring fem gånger (K-758).
 #
 # En ny pdf som har något av det stoppar valideringen, med vad som väger och var roten lagas (ROTEN). En ändrad pdf får en
 # rad med !, så att en äldre fil inte stoppar arbete som inte gäller den. Regeln står i DRIFT.md under Krediter.
@@ -18,6 +18,8 @@
 #   python scripts/pdfstorlek.py --alla    alla pdf:er under public/, som en genomgång
 #   python scripts/pdfstorlek.py <fil> …   de angivna, som nya
 #   (kräver pikepdf, som scripts/pdfpack.py, och poppler för pdfimages)
+import importlib.util
+import io
 import os
 import subprocess
 import sys
@@ -27,8 +29,11 @@ import pikepdf
 
 sys.stdout.reconfigure(encoding='utf-8')
 ROT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+spec = importlib.util.spec_from_file_location('pdfpack', os.path.join(ROT, 'scripts', 'pdfpack.py'))
+pdfpack = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(pdfpack)
 
-GRANSER = {'ppi': 220, 'bild_kb': 20, 'radfilter_kb': 20}
+GRANSER = {'ppi': 220, 'bild_kb': 20, 'radfilter_kb': 20, 'rundning': 5}
 
 # Var en pdf görs, så att beskedet säger var roten lagas. Den första raden vars början stämmer gäller.
 ROTEN = [
@@ -65,7 +70,7 @@ def bildernas_ppi(fil):
 
 
 def matt(fil):
-    """Det som går att spara utan att något syns: bilderna över gränsen och radfiltren, i byte."""
+    """Det som går att spara utan att något syns: bilderna över gränsen, radfiltren och rundningen, i byte."""
     fynd = []
     storlek = os.path.getsize(fil)
     ppi = bildernas_ppi(fil)
@@ -89,6 +94,14 @@ def matt(fil):
             fynd.append(('bilderna', spar, f"{len(hoga)} bilder ritas i mer än {GRANSER['ppi']} ppi där de är som störst, som mest {hogsta} ppi"))
         if radfilter > GRANSER['radfilter_kb'] * 1024:
             fynd.append(('radfiltret', radfilter, 'palettbilderna är packade med png:s radfilter; scripts/pdfpack.py --palett packar dem utan'))
+        fore = io.BytesIO()
+        pdf.save(fore, compress_streams=True, object_stream_mode=pikepdf.ObjectStreamMode.generate)
+        pdfpack.runda(pdf)
+        efter = io.BytesIO()
+        pdf.save(efter, compress_streams=True, object_stream_mode=pikepdf.ObjectStreamMode.generate)
+        rundning = len(fore.getvalue()) - len(efter.getvalue())
+        if rundning > storlek * GRANSER['rundning'] / 100:
+            fynd.append(('ritningen', rundning, 'ritningen har fler decimaler än papperet visar; låt pdf:en gå genom scripts/pdfpack.py'))
     return storlek, fynd
 
 
