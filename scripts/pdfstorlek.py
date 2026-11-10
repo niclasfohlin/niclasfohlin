@@ -12,7 +12,7 @@
 #                förstoras omkring fem gånger (K-758).
 #
 # En ny pdf som har något av det stoppar valideringen, med vad som väger och var roten lagas (ROTEN). En ändrad pdf får en
-# rad med !, så att en äldre fil inte stoppar arbete som inte gäller den. Regeln står i DRIFT.md under Krediter.
+# rad med !, så att en äldre fil inte stoppar arbete som inte gäller den. Regeln står i DRIFT.md under Pdf:erna, i pdf-standarden.
 #
 #   python scripts/pdfstorlek.py           nya och ändrade pdf:er mot origin/main (i npm run validera)
 #   python scripts/pdfstorlek.py --alla    alla pdf:er under public/, som en genomgång
@@ -69,8 +69,10 @@ def bildernas_ppi(fil):
     return bilder
 
 
-def matt(fil):
-    """Det som går att spara utan att något syns: bilderna över gränsen, radfiltren och rundningen, i byte."""
+def matt(fil, rundning=True):
+    """Det som går att spara utan att något syns: bilderna över gränsen, radfiltren och, med rundning, rundningen, i byte.
+    Rundningen prövas i en ny pdf och i genomgången av alla: den sparar filen två gånger och tar flera sekunder för en stor
+    pdf, och när packningen ändras görs hundratals pdf:er om på en gång."""
     fynd = []
     storlek = os.path.getsize(fil)
     ppi = bildernas_ppi(fil)
@@ -94,6 +96,8 @@ def matt(fil):
             fynd.append(('bilderna', spar, f"{len(hoga)} bilder ritas i mer än {GRANSER['ppi']} ppi där de är som störst, som mest {hogsta} ppi"))
         if radfilter > GRANSER['radfilter_kb'] * 1024:
             fynd.append(('radfiltret', radfilter, 'palettbilderna är packade med png:s radfilter; scripts/pdfpack.py --palett packar dem utan'))
+        if not rundning:
+            return storlek, fynd
         fore = io.BytesIO()
         pdf.save(fore, compress_streams=True, object_stream_mode=pikepdf.ObjectStreamMode.generate)
         pdfpack.runda(pdf)
@@ -123,7 +127,7 @@ def main(args):
         nya = {f for f in filer if f not in ute}
     stopp, varningar = [], []
     for rel in sorted(filer):
-        storlek, fynd = matt(os.path.join(ROT, rel))
+        storlek, fynd = matt(os.path.join(ROT, rel), rundning=rel in nya or args[:1] == ['--alla'])
         if not fynd:
             continue
         spar = sum(f[1] for f in fynd)
@@ -132,7 +136,7 @@ def main(args):
     for rad in varningar:
         print(f'  ! {rad}')
     if stopp:
-        print('Pdf:ernas storlek: en ny pdf är större än den behöver vara. Laga roten innan filen laddas upp första gången (DRIFT.md under Krediter):')
+        print('Pdf:ernas storlek: en ny pdf är större än den behöver vara. Laga roten innan filen laddas upp första gången (DRIFT.md under Pdf:erna):')
         for rad in stopp:
             print(f'  {rad}')
         sys.exit(1)

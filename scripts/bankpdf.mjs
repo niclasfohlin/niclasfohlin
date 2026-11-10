@@ -59,6 +59,11 @@ if (!existsSync(lista)) { console.error('bankpdf: dist/stodundervisning/bankfile
 const filer = JSON.parse(readFileSync(lista, 'utf8'));
 const lasManifest = () => { try { return JSON.parse(readFileSync(manifestFil, 'utf8')); } catch { return {}; } };
 const sha = (b) => createHash('sha256').update(b).digest('hex');
+// Packaren räknas i manifestet (K-760): en ändring i scripts/pdfpack.py gör om varje pdf, och --kontrollera stannar på en
+// pdf som en äldre packare har gjort (pdf-standarden, DRIFT.md under Pdf:erna). Bankens pdf:er packades sedan 2026-10-10 med
+// rundningen i ritningens egna enheter, och kurvorna i 353 av dem blev kantiga utan att något prov såg det. Summan räknas
+// med radsluten som i git, eftersom Windows har filen med CRLF och Netlify, som kör --kontrollera i bygget, med LF.
+const PACKAREN = sha(readFileSync(join(rot, 'scripts', 'pdfpack.py'), 'utf8').replace(/\r\n/g, '\n')).slice(0, 16);
 // Ta fram-sidornas datafiler i dist (dist/stodundervisning/<metod>/<led>.json med poster och utskrifter), och de som väntar
 // på pdf:erna.
 const taFramData = () => (existsSync(dist) ? readdirSync(dist, { withFileTypes: true }).filter((x) => x.isDirectory()).flatMap((x) => readdirSync(join(dist, x.name)).filter((f) => f.endsWith('.json')).map((f) => join(dist, x.name, f))) : [])
@@ -131,6 +136,7 @@ if (kontrollera) {
     else if (!existsSync(docx)) fel.push(`${f.namn}.docx saknas i dist`);
     else if (post.word !== await innehallHash(docx)) fel.push(`${f.namn}.pdf är gjord av en äldre Word-fil`);
     else if (post.pdf !== sha(readFileSync(pdfFor(f.namn)))) fel.push(`${f.namn}.pdf stämmer inte med manifestet`);
+    else if (post.packare !== PACKAREN) fel.push(`${f.namn}.pdf är packad av en äldre scripts/pdfpack.py: kör node scripts/bankpdf.mjs`);
     else {
       const sidkarta = await sidkartaI(docx);
       if (sidkarta && !post.karta) fel.push(`${f.namn}: manifestet saknar kartan över ramarnas sidor`);
@@ -162,7 +168,7 @@ for (const f of filer) {
   const summa = await innehallHash(docx);
   summor.set(f.namn, summa);
   const post = manifest[f.namn];
-  if (alla || !post || post.word !== summa || !existsSync(pdfFor(f.namn)) || post.pdf !== sha(readFileSync(pdfFor(f.namn)))) att.push(f);
+  if (alla || !post || post.word !== summa || post.packare !== PACKAREN || !existsSync(pdfFor(f.namn)) || post.pdf !== sha(readFileSync(pdfFor(f.namn)))) att.push(f);
 }
 // En aktuell pdf utan karta i manifestet, fast Word-filen har en sidkarta: Word sparar filen igen, för bokmärkenas skull.
 // En karta med andra led än Word-filens sidkarta, men lika många, får leden omskrivna efter plats (se kartansLed).
@@ -235,7 +241,7 @@ for (const j of jobb) {
     renameSync(`${ut}.tmp`, ut);
     if (existsSync(dist)) copyFileSync(ut, join(dist, `${f.namn}.pdf`));
     gjorda.push(f.namn);
-    manifest[f.namn] = { word: summor.get(f.namn), pdf: sha(readFileSync(ut)), sidor, kB: Math.round(readFileSync(ut).length / 1024), datum: new Date().toISOString().slice(0, 10), ...(karta ? { karta } : {}) };
+    manifest[f.namn] = { word: summor.get(f.namn), packare: PACKAREN, pdf: sha(readFileSync(ut)), sidor, kB: Math.round(readFileSync(ut).length / 1024), datum: new Date().toISOString().slice(0, 10), ...(karta ? { karta } : {}) };
     console.log(`  ok   ${f.namn}.pdf: ${sidor} sidor, ${manifest[f.namn].kB} kB (${Math.round(readFileSync(wordPdf).length / 1024)} kB ur Word)`);
   } catch (e) {
     fel++;

@@ -72,8 +72,8 @@ const sha = (f) => createHash('sha256').update(readFileSync(f, 'utf8').replace(/
 const fel = [];
 const varningar = [];
 // Riggens pdf:er packas när de tas in (K-759): ritningen rundas i papperets punkter och bilderna läggs som palett med samma
-// bildpunkter (scripts/pdfpack.py --palett, DRIFT.md under Krediter). Genomgången 2026-11-10: 22,3 blev 18,7 MB, och sidorna
-// var desamma i 600 dpi. Alla tar en dryg minut, så den packade filen sparas i node_modules/.cache/metoderfiler/packade/
+// bildpunkter (scripts/pdfpack.py --palett, pdf-standarden i DRIFT.md under Pdf:erna). Genomgången 2026-11-10: riggens 72 pdf:er gick från 21,8 till
+// 17,2 MB, och sidorna var desamma i 600 dpi. Alla tar en dryg minut, så den packade filen sparas i node_modules/.cache/metoderfiler/packade/
 // med ett namn ur riggens fil och packningen, som inte committas, och kopieras därifrån varje gång som riggens fil förut.
 const PACKADE = join(ROT, 'node_modules', '.cache', 'metoderfiler', 'packade');
 const PACKAREN = readFileSync(join(ROT, 'scripts', 'pdfpack.py'));

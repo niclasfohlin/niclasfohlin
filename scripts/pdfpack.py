@@ -1,11 +1,12 @@
 # Packar en pdf som Word har gjort av en Word-fil med ritade bilder (bankens pdf:er, scripts/bankpdf.mjs). Word gör varje
 # svg-bild till kurvor med fem decimaler, och delar böjda linjer i många små kurvor, varav de flesta är raka. Niclas
 # 2026-10-10 om filen med alla problem och lärarsidorna (6,6 MB): "Ner mot 3mb är bra". Skriptet rundar ritningens
-# punkter till en hundradels punkt på papperet och skriver en kurva vars stödpunkter ligger högst 0,05 punkter från den
-# raka linjen som en linje. Färger, linjebredder, skalor och text rörs inte. Mätt 2026-10-10: 6,6 MB blev 3,1 MB, och
-# sidan ritad i 300 dpi skilde sig i 0,03 procent av bildpunkterna, bara i kanternas utjämning. Sedan K-759 räknas det i
-# papperets punkter också i en form som ritas förstorad (RUTA och TOLERANS nedan): riggens pdf:er blev 16 procent mindre
-# och sidorna desamma i 600 dpi, där rundningen i formens egna enheter hade gjort bokstäverna kantiga.
+# punkter till en hundradels punkt på papperet och skriver en kurva vars stödpunkter ligger högst TOLERANS punkter från
+# den raka linjen som en linje. Färger, linjebredder, skalor och text rörs inte. Mätt 2026-10-10: 6,6 MB blev 3,1 MB. Men
+# rundningen räknade då i ritningens egna enheter, och där Word ritar en bild som en form som förstoras upp till sex
+# gånger blev kurvorna kantiga, i 353 av bankens pdf:er (K-760) och i riggens. Sedan K-759 räknas det i papperets punkter
+# också i en sådan form (RUTA och TOLERANS nedan), och sidorna är desamma som Words egen pdf i 600 dpi. Pdf-standarden, med
+# hur en ändrad packning prövas, står i DRIFT.md under Pdf:erna.
 #
 # Samma innehåll blir samma fil (K-624; Niclas 2026-10-29: "Pdf får ha samma fil"): Word och PowerPoint skriver tiden och
 # ett nytt id i varje pdf, så att en pdf som görs om utan att innehållet har ändrats blev en ny fil som git sparade för
@@ -43,9 +44,12 @@ from PIL import Image
 # högst TOLERANS punkter från den raka linjen skrivs som en linje. Ritningens egna enheter kan vara större än en punkt: i
 # riggens pdf:er ritar Word en bild som en form som förstoras omkring fem gånger, med bokstäverna som kurvor, och med två
 # decimaler och 0,05 enheter i formens egna enheter blev ett o kantigt (K-758). Därför följer packa_strom matriserna (cm,
-# q och Q, och formens Matrix när den ritas med Do) och räknar decimalerna och toleransen ur skalan.
+# q och Q, och formens Matrix när den ritas med Do) och räknar decimalerna och toleransen ur skalan. TOLERANS 0,1 punkter
+# gör att kurvan högst flyttar 0,075 punkter, 0,026 mm, mindre än en punkt från en skrivare i 600 dpi (0,042 mm). Prövat
+# 2026-11-10 mot Words egen pdf av Skrivkurs: Sagoboken: 0,1 och 0,15 var lika runda som Word i 600 dpi, och 0,1 gav
+# 2 362 kB mot 2 538 med 0,05 och 3 171 ur Word.
 RUTA = 0.01
-TOLERANS = 0.05
+TOLERANS = 0.1
 HOGST_DECIMALER = 6
 RITNING = ('m', 'l', 'c', 'v', 'y', 're')
 IDENTITET = (1.0, 0.0, 0.0, 1.0, 0.0, 0.0)
