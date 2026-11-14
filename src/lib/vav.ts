@@ -119,7 +119,11 @@ export const I_BORJAN_FRAN = 3;
 // Samma regel i båda bankerna (Niclas 2026-11-04: "Sådana här regler ska alltid ha en rot för både stödundervisning och
 // metoder").
 const medManga = (metod: string, c: Central, bank: Bank = 'stodundervisning') => new Set(raderFor(metod, c, bank).flatMap((r) => r.delar ?? [])).size >= I_BORJAN_FRAN;
-const visarSjalv = (d: MetodForVav, c: Central) => (d.centrala ?? []).some((x) => x.id === c.id);
+// En metod i Metoder som importerar strukturer med fältet strukturkort har redan knappen Strukturer överst, till verktyget
+// (src/pages/metoder/[id].astro). Då står verktygets adress inte en gång till i rutorna, och knappen kommer inte två gånger
+// (K-708; andra ögat 2026-11-14 på Testbaserat lärande, K-774). Strategikorten leder till metodens egna kort och räknas inte.
+const knappenAvFaltet = (d: object, c: Central) => c.id === 'strukturer' && !!(d as { strukturkort?: unknown }).strukturkort;
+const visarSjalv = (d: MetodForVav, c: Central) => (d.centrala ?? []).some((x) => x.id === c.id) || knappenAvFaltet(d, c);
 export const vavdaIBorjan = (metod: string, d: object, bank: Bank = 'stodundervisning'): Central[] => vavda().filter((c) => !visarSjalv(d as MetodForVav, c) && medManga(metod, c, bank));
 
 /** Högst så många grupper sådda i en metod, alla verktyg tillsammans (METODER.md under Sådden; Niclas 2026-11-04: "5 är max").
@@ -133,7 +137,7 @@ export const metodensGrupper = (metod: string, d: object, bank: Bank = 'stodunde
 /** Beskedet när metoden har fler grupper än taket, annars undefined. Samma i Stödundervisning och Metoder. */
 export function gruppernasFel(metod: string, d: object, bank: Bank = 'stodundervisning'): string | undefined {
   const n = metodensGrupper(metod, d, bank);
-  const register = bank === 'stodundervisning' ? 'src/data/sadd.json' : 'src/data/strategier-i-metoder.json';
+  const register = bank === 'stodundervisning' ? 'src/data/sadd.json' : 'src/data/strategier-i-metoder.json och src/data/strukturer-i-metoder.json';
   return n > HOGST_GRUPPER ? `${metod} har ${n} grupper sådda, och taket är ${HOGST_GRUPPER} (HOGST_GRUPPER i src/lib/vav.ts, METODER.md under Sådden). Samla korten eller ta bort de utspridda i ${register}.` : undefined;
 }
 

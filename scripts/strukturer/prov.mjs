@@ -120,6 +120,40 @@ for (const [metod, x] of Object.entries(saddJa)) {
   platser += x.vav.length;
 }
 
+// Sådden i Metoder (src/data/strukturer-i-metoder.json, som strategierna): varje metod har minst en struktur, som en plats i
+// registret eller ett eget fält strukturkort, som fältet alla i Stödundervisning (Niclas 2026-11-14: "de borde de likt
+// stödundervisning både såddas med strukturer och strategier"), och varje plats är ritad på metodens sida med sina kort.
+const iMetoder = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'strukturer-i-metoder.json'), 'utf8'));
+const metodmappen = join(ROT, 'src', 'content', 'undervisningsmetoder');
+let platserIMetoder = 0;
+// En metod där ingen struktur som visas passar väntar med skälet och posten i kön (vantar), och provet säger det varje gång.
+const vantar = [];
+for (const f of readdirSync(metodmappen).filter((f) => f.endsWith('.yaml') && !f.startsWith('_'))) {
+  const metod = f.replace(/\.yaml$/, '');
+  const d = YAML.parse(readFileSync(join(metodmappen, f), 'utf8'));
+  const platserna = iMetoder[metod]?.platser ?? [];
+  const skalet = String(iMetoder[metod]?.vantar ?? '').trim();
+  if (skalet && platserna.length) fel.push(`Sådden: ${metod} i Metoder har både platser och vantar i src/data/strukturer-i-metoder.json; ta bort vantar`);
+  if (skalet && !/K-\d+/.test(skalet)) fel.push(`Sådden: ${metod} i Metoder väntar utan en post i kön; skriv postens id (K-…) i vantar`);
+  if (skalet && !platserna.length) { vantar.push(`${metod} (${skalet.match(/K-\d+/)?.[0] ?? '?'})`); continue; }
+  if (!platserna.length && !d.strukturkort) { fel.push(`Sådden: ${metod} i Metoder har ingen struktur; skriv platsen där eleverna samarbetar i src/data/strukturer-i-metoder.json (METODER.md under Sådden)`); continue; }
+  if (!platserna.length) continue;
+  const sida = html(join('metoder', metod));
+  if (!sida) { if (!d.utkast) fel.push(`Sådden: ${metod} i Metoder har ingen sida i dist`); continue; }
+  const rutor = [...sida.matchAll(/<aside class="vav[\s\S]*?<\/aside>/g)].map((m) => m[0]).filter((r) => r.includes('href="/strukturer'));
+  if (rutor.length !== platserna.length) fel.push(`Sådden: ${metod} i Metoder har ${rutor.length} rutor med strukturer på sidan och ${platserna.length} platser i src/data/strukturer-i-metoder.json; en plats som sidan inte har ritas inte`);
+  const pasidan = rutor.map((r) => [...r.matchAll(/href="\/strukturer\/([a-z0-9-]+)"/g)].map((m) => m[1]).join()).sort();
+  const iregistret = platserna.map((r) => (r.delar ?? []).join()).sort();
+  if (rutor.length === platserna.length && pasidan.join(' | ') !== iregistret.join(' | ')) fel.push(`Sådden: ${metod} i Metoder har korten ${pasidan.join(' | ')} på sidan och ska ha ${iregistret.join(' | ')}`);
+  // Verktygets adress står en gång (K-708): knappen överst, eller raden i rutan, aldrig båda och aldrig två knappar.
+  // Överst: sajtens sidhuvud och metodens, de två första header-elementen.
+  const knappar = (sida.split('</header>').slice(0, 2).join('').match(/<a class="knapp[^"]*" href="\/strukturer">/g) ?? []).length;
+  if (knappar > 1) fel.push(`Sådden: ${metod} i Metoder har ${knappar} knappar till Strukturer överst`);
+  if (knappar && rutor.some((r) => /Fler strukturer/.test(r))) fel.push(`Sådden: ${metod} i Metoder har knappen Strukturer överst och raden till Strukturer i rutan; verktygets adress står en gång (K-708)`);
+  platserIMetoder += platserna.length;
+}
+for (const metod of Object.keys(iMetoder).filter((k) => !k.startsWith('_'))) if (!existsSync(join(metodmappen, `${metod}.yaml`))) fel.push(`Sådden: src/data/strukturer-i-metoder.json har ${metod}, som inte finns i Metoder`);
+
 if (fel.length) { console.error(`Strukturer: ${fel.length} fel:\n  ${fel.slice(0, 30).join('\n  ')}`); process.exit(1); }
-console.log(`Sådden: ${platser} platser i ${Object.values(saddJa).filter((x) => typeof x === 'object' && x.vav).length} metoder är ritade med sina kort.`);
+console.log(`Sådden: ${platser} platser i ${Object.values(saddJa).filter((x) => typeof x === 'object' && x.vav).length} metoder i Stödundervisning och ${platserIMetoder} i Metoder är ritade med sina kort, och varje metod i Metoder har en struktur${vantar.length ? `, utom ${vantar.join(' och ')}, som väntar` : ''}.`);
 console.log(`Strukturer: ${visas.length} strukturer med sida, bild, kort och bock; utskriften två och två prövad med ${urval.length} och 2 kort och i filen med alla (${Math.ceil(visas.length / 2)} ark), och provet ser ett urval i omvänd ordning; topplistans funktion prövad med härmade svar, utan nyckel och med 429.`);
