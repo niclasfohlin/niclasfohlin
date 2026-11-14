@@ -11,6 +11,7 @@
 // till verktyget; och rutan, där eleverna arbetar med verktygets delar i passets kärna, med texten, korten och verktygets
 // knapp. Står verktygets knapp redan på platsen (fältet centrala), står den inte en gång till, och inte heller kortradens rad.
 import register from '../data/sadd.json';
+import strukturerIMetoder from '../data/strukturer-i-metoder.json';
 import { CENTRALA, lasbarAdress, tolkaTextplats, type Central } from './centrala';
 import { passar, sammaRubrik, tolkaEfter, type FilmPlats } from './film';
 import { bildensAdress, slagensStil, strukturensAdress, strukturernaAv } from './strukturer';
@@ -46,7 +47,10 @@ const vavda = () => CENTRALA.filter((c) => c.vav);
 /** Banken som metoden står i. Sådden i Stödundervisning står i src/data/sadd.json, och i Metoder i sajtens register per
  *  verktyg, eftersom metodernas filer är riggens (src/data/strategier-i-metoder.json); reglerna nedan läser båda. */
 export type Bank = 'stodundervisning' | 'undervisningsmetoder';
-const METODERS_SADD: Record<string, (metod: string) => Rad[]> = { strategier: strategiernasPlatser };
+// Strukturerna i Metoder står i src/data/strukturer-i-metoder.json, som strategierna (Niclas 2026-11-14 om Tänkande klassrum:
+// "galleri redovisning från kooperativt lärande och någon annan redovisning kan såddad in som exempel vid konsolidering").
+const strukturernasPlatser = (metod: string): Rad[] => (strukturerIMetoder as unknown as Record<string, { platser?: Rad[] } | undefined>)[metod]?.platser ?? [];
+const METODERS_SADD: Record<string, (metod: string) => Rad[]> = { strategier: strategiernasPlatser, strukturer: strukturernasPlatser };
 const raderFor = (metod: string, c: Central, bank: Bank = 'stodundervisning'): Rad[] => {
   if (bank === 'undervisningsmetoder') return METODERS_SADD[c.id]?.(metod) ?? [];
   const ja = saker[c.id]?.ja?.[metod];

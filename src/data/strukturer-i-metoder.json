@@ -1,0 +1,14 @@
+{
+  "_om": "Sådden av verktyget Strukturer i Metoder, som strategierna i src/data/strategier-i-metoder.json: sajten väver in strukturernas små kort på metodens sida utan att metodens fil ändras, så att riggens dokument fortfarande är byggda ur samma fil. En metod som importerar strukturer med eget fält strukturkort, som Kooperativt lärande, har dem i sitt avsnitt Strukturkorten. platser har formen ur src/lib/vav.ts (efter, delar, slag och om), och skal säger varför, med beläggen. Läses av vavtIMetoder i src/lib/vav.ts.",
+  "tankande-klassrum": {
+    "skal": "Niclas 2026-11-14: \"Tycker galleri redovisning från kooperativt lärande och någon annan redovisning kan såddad in som exempel vid konsolidering som alternativ.\" På sightseeing heter också Galleri-redovisning: grupperna går runt till varandras arbeten och kommenterar dem, som klassen går mellan tavlorna. I Kooperativ redovisning redovisar halva klassens grupper samtidigt för var sin besökande grupp. Båda står som förslag efter steget Konsolideringen, och konsolideringen nerifrån är metodens kärna.",
+    "platser": [
+      {
+        "efter": "steg 3",
+        "delar": ["pa-sightseeing", "kooperativ-redovisning"],
+        "slag": "forslag",
+        "om": "Som alternativ i konsolideringen"
+      }
+    ]
+  }
+}
