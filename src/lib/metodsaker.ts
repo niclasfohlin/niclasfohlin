@@ -70,8 +70,9 @@ export function sakernaI(texter: string[], saker: MetodSak[]): MetodSak[] {
  * finns i några veckor, eftersom sidan inte står i en vecka, filmerna, som står på sidan själv, och veckorna, som på
  * metodens sida nästan alltid är en tid ("Det är vecka 4 och pass 7"). Sidan har mer text än planen, så ett kort namn som
  * också är ett vanligt ord länkas bara när texten skriver det som namn (andra ögat 2026-11-14): ett namn som bara är ett
- * huvudord, som Planen och Lapparna, i sina bestämda former och inte som plan eller lappar, och ett annat namn i ett ord
- * kortare än tolv tecken, som Inbjudan och Läsaren, med stor bokstav inne i en mening.
+ * huvudord, som Planen och Lapparna, i sina bestämda former och inte som plan eller lappar, och ett huvudord i grundform,
+ * som Inbjudan, som är samma ord i obestämd form, med stor bokstav inne i en mening. Ett sammansatt ord som ljudkollen och
+ * lässchemat länkas i alla former, som i planen.
  */
 export const sidansSaker = (d: MetodData, id: string): MetodSak[] => {
   const verktyg = new Set(CENTRALA.map((c) => lasbarAdress(c)));
@@ -80,8 +81,10 @@ export const sidansSaker = (d: MetodData, id: string): MetodSak[] => {
     .map((s) => {
       const n = s.namn.trim();
       if (s.former || /\s/.test(n)) return s;
-      if (arBaraHuvudord(n)) return { ...s, former: [n, `${n}s`] };
-      return n.length < 12 && !s.versal ? { ...s, versal: true, former: [n, `${n}s`] } : s;
+      const huvudord = arBaraHuvudord(n);
+      if (huvudord === 'grundform') return { ...s, versal: true, former: [n, `${n}s`] };
+      if (huvudord === 'bestamd') return { ...s, former: [n, `${n}s`] };
+      return s;
     });
 };
 
@@ -295,7 +298,7 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     saker.push({ ...sak(namn, adress, slag ? { slag } : {}), ...(slag ? { versal: true } : {}) });
   };
   const rutor = d as unknown as Record<string, { rubrik?: string } | undefined>;
-  for (const a of avsnitt) if (a.id !== 'ramar' && a.id !== 'mallar') avsnittet(rutor[a.id]?.rubrik, `${sida}#${a.id}`, a.id === 'diplom' ? undefined : 'avsnitt');
+  for (const a of avsnitt) if (a.id !== 'ramar' && a.id !== 'mallar') avsnittet(rutor[(a as { falt?: string }).falt ?? a.id]?.rubrik, `${sida}#${a.id}`, a.id === 'diplom' ? undefined : 'avsnitt');
   avsnittet(d.gruppen?.rubrik, `${sida}#gruppen`, 'avsnitt');
   avsnittet(d.principer?.rubrik, `${sida}#principer`, 'avsnitt');
   for (const t of d.tabeller) { const a = tabellAnkare.get(t); if (a) avsnittet(t.rubrik, `${sida}#${a}`, 'tabell'); }

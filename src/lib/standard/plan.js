@@ -1953,7 +1953,7 @@ export function metodensAvsnitt(d, o) {
     d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
     d.roll && { id: 'roll', namn: 'Lärarens roll' },
     // Lärarens frågor efter Lärarens roll (sajtens K-775).
-    d.lararensFragor && { id: 'lararens-fragor', namn: d.lararensFragor.rubrik ?? RUTORNAS_RUBRIKER.lararensFragor },
+    d.lararensFragor && { id: 'lararens-fragor', falt: 'lararensFragor', namn: d.lararensFragor.rubrik ?? RUTORNAS_RUBRIKER.lararensFragor },
     // Heter urvalets kärna som ramarna ("Var hittar du problemen?" och Problemen) står det som en handling, Hitta problemen,
     // så att menyn inte har två poster med samma namn (Problemlösning i grupp, 2026-10-10).
     d.urval && { id: 'urval', namn: d.ramar && urvalNamn(d.urval.rubrik) === (d.ramar.rubrik ?? RUTORNAS_RUBRIKER.ramar) ? `Hitta ${(d.ramar.rubrik ?? RUTORNAS_RUBRIKER.ramar).toLowerCase()}` : urvalNamn(d.urval.rubrik) },
@@ -1985,11 +1985,12 @@ export function metodensAvsnitt(d, o) {
  */
 export function stodetsPlats(d, mer, o = {}) {
   const rubriken = String(mer ?? '').trim();
-  const rutans = (id) => d[id]?.rubrik ?? (d[id] ? RUTORNAS_RUBRIKER[id] : undefined);
+  // Avsnittets fält: ankaret, utom där fältet heter annat, som Lärarens frågor (lararensFragor, ankaret lararens-fragor).
+  const rutans = (id, falt = id) => d[falt]?.rubrik ?? (d[falt] ? RUTORNAS_RUBRIKER[falt] : undefined);
   /** @type {[unknown, { slag: 'tabell', nr: number } | { slag: 'ruta', id: string } | { slag: 'tidsschema' } | { slag: 'ram', nr: number }][]} */
   const platser = [
     ...(d.tabeller ?? []).map((t, nr) => /** @type {[unknown, { slag: 'tabell', nr: number }]} */ ([t.rubrik, { slag: 'tabell', nr }])),
-    ...metodensAvsnitt(d, { pass: !!o.pass, stegen: '' }).map((a) => /** @type {[unknown, { slag: 'ruta', id: string }]} */ ([rutans(a.id), { slag: 'ruta', id: a.id }])),
+    ...metodensAvsnitt(d, { pass: !!o.pass, stegen: '' }).map((a) => /** @type {[unknown, { slag: 'ruta', id: string }]} */ ([rutans(a.id, a.falt), { slag: 'ruta', id: a.id }])),
     [d.tidsschema?.rubrik, { slag: 'tidsschema' }],
     [d.gruppen?.rubrik, { slag: 'ruta', id: 'gruppen' }],
     [d.principer?.rubrik, { slag: 'ruta', id: 'principer' }],
@@ -2048,7 +2049,7 @@ export function planensDelarFel(d) {
       if (!falten.length) fel.push(`plan.veckansPass: ramen "${ram.rubrik}" har inga fält som heter Pass N eller Dag N.`);
       // Ett fält utan minuter säger bara det som skiljer från passets tabell, som Sagobokens "Där vi slutade: …", och planen
       // visar då passet (K-585). Ett fält med minuter ska gå att läsa som delar.
-      for (const { del, f } of falten) if (/\d\s*[–-]⁠?\s*\d+\s*min/.test(f.text) && !faltetsDelar(f.text)) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen rad som "N–M min. Delens namn: …".`);
+      for (const { del, f } of falten) if (/\d\s*[–-]\u2060?\s*\d+\s*min/.test(f.text) && !faltetsDelar(f.text)) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen rad som "N–M min. Delens namn: …".`);
       for (const { del, f } of falten) if (!faltetsDelar(f.text) && !faltetsSkillnader(f.text, [])) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, har ingen text.`);
       // Ett fält som "Pass 9 i sex steg" gäller en version i planens val (K-576).
       for (const { del, f } of falten) { const x = f.rubrik.match(/ i (.+)$/i)?.[1]; if (x && !versionernasNamn(d).some((n) => versionsform(n) === versionsform(x))) fel.push(`plan.veckansPass: ${del}, ${f.rubrik}, gäller "${x}", som inte är en version i plan.versionsval.`); }

@@ -93,7 +93,9 @@ export function arBaraHuvudord(namn) {
   const n = String(namn ?? '').trim();
   if (/\s/.test(n)) return false;
   const h = huvudordet(n);
-  return !!h && h.form.length === n.length;
+  if (!h || h.form.length !== n.length) return false;
+  // Grundformen, som inbjudan, är också det vanliga ordet ("en riktig inbjudan"), och då är namnet en titel.
+  return h.form === h.former[0] ? 'grundform' : 'bestamd';
 }
 
 /**
@@ -139,9 +141,10 @@ const DELENS_ORD = /(?:^|[^\p{L}])(?:stapeln|staplarna|kolumnen|kolumnerna|spalt
 // En form som söks: hela ord, och första bokstaven stor eller liten om inte saken är en titel, som bara står som den är.
 const formMonster = (f, versal) => (versal ? skydda(f) : `[${skydda(f.charAt(0).toLocaleLowerCase('sv'))}${skydda(f.charAt(0).toLocaleUpperCase('sv'))}]${skydda(f.slice(1))}`);
 // Först i en mening, där varje ord har stor bokstav, är en titel inte säkert en titel ("Inte än har eleverna …").
-// Ett citat som slutar en mening räknas, så att Läsaren i "”Gör det som står.” Läsaren gör" är början på en mening (andra
-// ögat 2026-11-14, K-767).
-const forstIMening = (fore) => /(^|[.!?:][”"»’]?\s*|\n\s*)$/.test(fore);
+const forstIMening = (fore) => /(^|[.!?:]\s*|\n\s*)$/.test(fore);
+// På stödmetodens sida räknas också ett citat som slutar en mening, så att Läsaren i "”Gör det som står.” Läsaren gör" är
+// början på en mening (andra ögat 2026-11-14, K-767). Planen och Lär dig metoden läser som förut.
+const forstEfterCitat = (fore) => /(^|[.!?:][”"»’]?\s*|\n\s*)$/.test(fore);
 
 /**
  * Texten i delar, där en del med sak är ett namn på en av sakerna: den längsta träffen först, och bara hela ord. En titel
@@ -152,7 +155,8 @@ const forstIMening = (fore) => /(^|[.!?:][”"»’]?\s*|\n\s*)$/.test(fore);
  * @param {{ namn: string, former?: string[], versal?: boolean, forst?: boolean }[]} saker
  * @returns {{ text: string, sak?: number }[]}
  */
-export function sakdelar(text, saker) {
+export function sakdelar(text, saker, o = {}) {
+  const forst = o.citat ? forstEfterCitat : forstIMening;
   if (!text || !saker?.length) return [{ text: text ?? '' }];
   const traffar = [];
   saker.forEach((s, i) => {
@@ -161,7 +165,7 @@ export function sakdelar(text, saker) {
       for (const m of text.matchAll(new RegExp(`(^|[^\\p{L}\\p{N}])(${formMonster(f, s.versal)})(?![\\p{L}\\p{N}])`, 'gu'))) {
         const start = m.index + m[1].length;
         // En titel med en siffra, som Addition 1, är en titel också först i en mening.
-        if (s.versal && !s.forst && !/\d/.test(f) && forstIMening(text.slice(0, start))) continue;
+        if (s.versal && !s.forst && !/\d/.test(f) && forst(text.slice(0, start))) continue;
         // Ett namn med en siffra som börjar ett spann, som "Bildserie 2–6", är spannet och inte saken (betan 2026-10-24).
         if (/\d$/.test(f) && /^\s*[–-]⁠?\s*\d/.test(text.slice(start + m[2].length))) continue;
         // Ett namn efter ett ord för en del av något, som "stapeln Efter kursen" i ett diagram och "rutan Till läraren" i en

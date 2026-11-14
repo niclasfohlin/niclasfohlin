@@ -178,6 +178,17 @@ for (const [d, vantat] of lektionsfall) { const f = Object.values(faktaIFastForm
   }
   if (lararensFragorFel({}).length) fel.push('lararensFragorFel ger fel på en metod utan fältet');
 }
+// Stödmetodens sida (K-767; andra ögat 2026-11-14): ett namn som bara är ett huvudord i bestämd form, i grundform eller inget,
+// och ett citat som slutar en mening bara när sidan ber om det, så att planen och Lär dig metoden länkar som förut.
+{
+  const { arBaraHuvudord, sakdelar } = await import('../src/lib/standard/index.js');
+  const svar = ['Planen', 'Inbjudan', 'Lapparna', 'Ljudkollen', 'Mitt mål'].map((n) => arBaraHuvudord(n));
+  if (JSON.stringify(svar) !== JSON.stringify(['bestamd', 'grundform', 'bestamd', false, false])) fel.push(`arBaraHuvudord ger fel svar: ${JSON.stringify(svar)}`);
+  const saker = [{ namn: 'Läsaren', former: ['Läsaren'], versal: true }];
+  const text = 'Säg bara ”Gör det som står.” Läsaren gör ett steg i taget, och bladet Läsaren ligger kvar.';
+  const lankade = (o) => sakdelar(text, saker, o).filter((x) => x.sak !== undefined).length;
+  if (lankade({ citat: true }) !== 1 || lankade() !== 2) fel.push(`sakdelar läser citatet som slutar en mening fel: ${lankade({ citat: true })} med och ${lankade()} utan`);
+}
 // Undervisningsmetoderna (K-621): utfallens gränser som riggens standard räknar dem, och delarnas ordning och text.
 for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13'], [5, '1|2-2|3']]) { const g = utfallensGranser(n); const f = `${g.nastanAlla}|${g.deFlesta.join('-')}|${g.halften}`; if (f !== vantat) fel.push(`utfallensGranser(${n}) ger ${f}, inte ${vantat}`); }
 // Effektens skala: texten säger gränserna ur konstanten, och andra kolumnen börjar vid Cohens 0,2 (Niclas 2026-10-30).

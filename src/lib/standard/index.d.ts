@@ -256,7 +256,7 @@ export declare const metodensTabell: <T extends { rubrik: string }>(d: { tabelle
 export declare const RUTORNAS_RUBRIKER: Readonly<{ lektionsbank: string; passrutin: string; steg: string; exempel: string; hem: string; progression: string; uppfoljning: string; mal: string; snabbmall: string; checklista: string; grund: string; ramar: string; diplom: string; lararensFragor: string }>;
 /** Metodens avsnitt i sidans meny, i modellens ordning, med korta namn. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export declare function metodensAvsnitt(d: Record<string, any>, o: { pass: boolean; stegen: string; lektionsbank?: string }): { id: string; namn: string }[];
+export declare function metodensAvsnitt(d: Record<string, any>, o: { pass: boolean; stegen: string; lektionsbank?: string }): { id: string; namn: string; falt?: string }[];
 /** Platsen i metoden som ett stöd för ett val leder till: tabellen, rutan, tidsschemat eller ramen med rubriken, eller undefined. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export declare function stodetsPlats(d: Record<string, any>, mer: string | undefined, o?: { pass?: boolean }): { slag: 'tabell'; nr: number } | { slag: 'ruta'; id: string } | { slag: 'tidsschema' } | { slag: 'ram'; nr: number } | undefined;
@@ -720,7 +720,7 @@ export declare function arSaksord(namn: string): boolean;
 /** Formerna av en saks namn i bestämd form: samtalskortet, samtalskortets, samtalskorten. */
 export declare function sakensFormer(namn: string): string[];
 /** Texten i delar, där en del med sak är ett namn på en av sakerna. */
-export declare function sakdelar(text: string, saker: Sak[]): { text: string; sak?: number }[];
+export declare function sakdelar(text: string, saker: Sak[], o?: { citat?: boolean }): { text: string; sak?: number }[];
 /** En text med metodens saker, där saken blir det sidan gör av den och resten det sidan gör av en text, en rot för båda lagren. */
 export declare const sakernasText: <S extends Sak>(text: string, saker: S[], sak: (s: S, text: string) => string, annat: (text: string) => string) => string;
 /** Namn som ser ut som en sak (ett sammansatt ord på blad, kort, mall …) men inte är någon av sakerna. */
@@ -1058,4 +1058,4 @@ export declare function metodensStrategikort(metod: string): Readonly<{ fil: str
 export declare const LARARENS_FRAGOR: Readonly<{ minst: number; hogst: number; farJag: number; hinder: number; svar: number }>;
 export declare function lararensFragorFel(d: { lararensFragor?: { fragor?: { fraga: string; svar: string }[] } }): string[];
 /** Ett namn som bara är ett huvudord, som Planen (K-767). */
-export declare function arBaraHuvudord(namn: string): boolean;
+export declare function arBaraHuvudord(namn: string): false | 'grundform' | 'bestamd';

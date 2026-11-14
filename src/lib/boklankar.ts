@@ -322,7 +322,7 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
       return [...knappar(ut.slice(Math.max(0, forra))), ...knappar(nasta < 0 ? html.slice(fran) : html.slice(fran, fran + nasta))].some((k) => utanVersion(k) === utanVersion(adress));
     };
     const egen = (s: SidansSak) => { const i = s.adress.indexOf('#'); return i >= 0 ? egna.has(s.adress.slice(i)) : FIL.test(s.adress) && filensKnapp(s.adress); };
-    return sakdelar(t, saker).map((x) => {
+    return sakdelar(t, saker, { citat: true }).map((x) => {
       const s = x.sak === undefined ? undefined : saker[x.sak];
       if (!s || sedda.has(s.adress) || egen(s)) return text(x.text);
       sedda.add(s.adress);
