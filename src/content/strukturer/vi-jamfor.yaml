@@ -16,5 +16,27 @@ kalla:
   rubrik: Vi jämför
   commit: b492447
   summa: e42f4364
-vantar: "Går upp i EPK som variant: förslag till grundboken 2026-10-31"
-utkast: true
+bild:
+  scen: vi-jamfor
+  alt: Två elever står mittemot varandra och håller upp var sitt skrivet blad bredvid varandra mellan sig. Överst på båda bladen står en röd triangel, och på bladet till höger står också en blå cirkel. Eleven till vänster tittar på kamratens blad och pratar, och pratbubblan visar den röda triangeln och en grön bock. Eleven till höger tittar på det andra bladet och ler, och pratbubblan visar den blå cirkeln.
+forslag:
+  - omrade: lasning
+    arskurs: 4–6
+    amne: svenska
+    text: "Klassen har läst ett kapitel i högläsningsboken där huvudpersonen ljuger för sin bästa vän. Du frågar: Varför ljuger hon, och vad i texten visar det? Var och en skriver sitt svar i tre minuter och håller det för sig tills tiden är slut. Paret jämför svaren och letar efter det som är lika och olika, och sedan jämför de med paret bredvid och letar fler ställen i texten. Du låter tre par berätta vad de kom fram till."
+  - omrade: skrivning
+    arskurs: F–3
+    amne: svenska
+    text: "Klassen ska skriva om en sommardag. Du frågar: Vilka ord kan beskriva hur det känns att bada i havet? Var och en skriver två ord på sin lapp och håller lappen för sig tills tiden är slut. Paret jämför orden och ser vilka de har gemensamt och vilka bara en av dem har, och sedan läser de orden för paret bredvid och skriver upp de nya. Du låter några par läsa sina ord för klassen."
+  - omrade: matematik
+    arskurs: 7–9
+    amne: matematik
+    text: "Klassen arbetar med procent. Du frågar: Vad kostar en jacka för 800 kronor när priset sänks med 25 procent, och hur räknade du? Var och en räknar i fem minuter och skriver sin lösning utan att visa den. Paret jämför svaren och sätten att räkna, och sedan jämför de med paret bredvid och letar efter fler sätt. Du låter par som räknat på olika sätt visa dem för klassen."
+  - omrade: socialt
+    arskurs: 4–6
+    amne: samarbete
+    text: "Klassen ska börja ett grupparbete. Du frågar: Vad gör en bra gruppkamrat när någon i gruppen inte kommer igång? Var och en skriver två saker i tre minuter och håller dem för sig tills tiden är slut. Paret jämför och pratar om det som är lika och olika, och sedan jämför de med paret bredvid och lägger till det som saknades. Du låter några par läsa upp sina svar."
+provad:
+  datum: "2026-11-14"
+  svar: underlag/prov/vi-jamfor/avgorande.md
+utkast: false

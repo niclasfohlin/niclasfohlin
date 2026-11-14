@@ -1,6 +1,6 @@
 {
   "_alla": {
-    "summa": "811e58cac02d7465",
+    "summa": "b0f179dce1fa5c2a",
     "kort": [
       "anteckningspar",
       "ape",
@@ -22,6 +22,7 @@
       "turas-om",
       "tva-loser-problem",
       "tarningsquiz",
+      "vi-jamfor",
       "ova-och-kontrollera-i-par",
       "5-3-1",
       "brainstorm",
@@ -88,7 +89,7 @@
       "stall-en-fraga",
       "vem-ar-jag"
     ],
-    "kb": 3761
+    "kb": 3781
   },
   "_metod:formativ-bedomning": {
     "summa": "39abf52302ddbc61",
@@ -1621,6 +1622,24 @@
     "bild": {
       "colours": 16,
       "kb": 23
+    },
+    "namn": {
+      "pt": 80,
+      "rader": 1
+    },
+    "steg": {
+      "pt": 18,
+      "tat": false,
+      "rymsInte": false
+    }
+  },
+  "vi-jamfor": {
+    "innehall": "86c2c4b1",
+    "summa": "1cfdba681a8faf08",
+    "kb": 37,
+    "bild": {
+      "colours": 16,
+      "kb": 21
     },
     "namn": {
       "pt": 80,

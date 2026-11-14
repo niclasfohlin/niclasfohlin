@@ -1,0 +1,15 @@
+# Vi jämför: var och en har skrivit sitt svar för sig, och nu håller paret upp bladen bredvid varandra och jämför: båda har triangeln, och den ena har något mer.
+id: vi-jamfor
+skala: 84
+djup: false
+hudStart: 2
+delar:
+  - figur: { namn: ena, x: 392, y: 470, trojan: gron, ansikte: prata, tittar: bladH, lutar: bladH, nar: { H: [446, 376] } }
+  - figur: { namn: andra, x: 580, y: 472, trojan: rosa, ansikte: glad, tittar: bladV, lutar: bladV, nar: { V: [530, 378] } }
+  - papper: { namn: bladV, x: 456, y: 346, b: 56, h: 68, vinkel: -5, rader: 3 }
+  - symbol: { x: 444, y: 324, namn: triangel, s: 11 }
+  - papper: { namn: bladH, x: 518, y: 348, b: 56, h: 68, vinkel: 5, rader: 3 }
+  - symbol: { x: 508, y: 326, namn: triangel, s: 11 }
+  - symbol: { x: 530, y: 364, namn: 'cirkel:bla', s: 10 }
+  - bubbla: { till: ena, dx: -70, dy: 30, symboler: [triangel, bock], visar: "Likheten: båda har skrivit samma sak, och det syns när bladen står bredvid varandra" }
+  - bubbla: { till: andra, dx: 70, dy: 30, symboler: ['cirkel:bla'], visar: "Skillnaden: den ena har skrivit något mer och förklarar det för den andra" }

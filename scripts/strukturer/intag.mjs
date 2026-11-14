@@ -31,8 +31,10 @@ const prov = args.includes('--prov');
 // Strukturer som enligt sajtens förslag till grundboken går upp i en annan som variant (Niclas 2026-10-31: "Jag säger
 // ja", underlag/prov/strukturer/till-grundboken.md). De står som utkast tills banken har avgjort det, och deras bilder
 // ritas inte. När banken har slagit ihop dem försvinner de ur banken och tas bort här.
+// Vi jämför står kvar som en egen struktur (Niclas 2026-11-14: "Tycker Vi jämför och EPK är annorlunda strukturer"): i Vi
+// jämför skriver var och en sitt svar och paret jämför texterna, i EPK tänker de och bygger en lösning ihop (K-781).
 const GAR_UPP_I = {
-  'Frågerundan': 'Solfjäder', 'Vi jämför': 'EPK', 'Switcheroo!': 'En får gå', 'Kunskapsbanken': 'Snöbollar i mitten',
+  'Frågerundan': 'Solfjäder', 'Switcheroo!': 'En får gå', 'Kunskapsbanken': 'Snöbollar i mitten',
   'Påhittad': 'Sant eller falskt', 'Multisvar i par': 'Visa!',
 };
 

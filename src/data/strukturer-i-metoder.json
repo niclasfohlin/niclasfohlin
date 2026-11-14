@@ -1,7 +1,17 @@
 {
   "_om": "Sådden av verktyget Strukturer i Metoder, som strategierna i src/data/strategier-i-metoder.json: sajten väver in strukturernas små kort på metodens sida utan att metodens fil ändras, så att riggens dokument fortfarande är byggda ur samma fil. En metod som importerar strukturer med eget fält strukturkort, som Kooperativt lärande, har dem i sitt avsnitt Strukturkorten. platser har formen ur src/lib/vav.ts (efter, delar, slag och om), och skal säger varför, med beläggen. Läses av vavtIMetoder i src/lib/vav.ts.",
   "explicit-undervisning": {
-    "vantar": "I Du gör säger den ena i paret stegen högt och den andra följer med, de byter vid varje uppgift, och båda skriver sina egna steg (rutiner, Paret). Turas om, där en arbetar och den andra uppmuntrar, passar bara halvt: en lärare som följer kortet får elever som gör halva bladet (andra ögat 2026-11-14). Ingen annan av de 85 som visas passar. Niclas avgör i K-777."
+    "skal": "Niclas 2026-11-14 kväll: \"Låt explicit ha utan eller bara att Turas om funkar i parsteget i den. Turas om funkar ofta som grund för pararbete.\" Från vecka 4 övar grannarna i Du gör i par: den ena säger stegen högt, den andra följer med, och de byter vid varje uppgift (rutiner, Paret). Turas om står som förslag och inte som samma form, eftersom båda i metoden skriver sina egna steg medan kortets andra uppmuntrar (andra ögat samma kväll), och etiketten säger det.",
+    "platser": [
+      {
+        "efter": "steg 5",
+        "delar": [
+          "turas-om"
+        ],
+        "slag": "forslag",
+        "om": "Paret i Du gör från vecka 4, där båda skriver sina steg"
+      }
+    ]
   },
   "testbaserat-larande": {
     "skal": "Eleverna samarbetar i Kontrasten: läraren frågar vad svar B visar som svar A inte visar, eleverna tänker en minut själva och en minut i par, och paren säger vad de såg innan läraren säger vad som håller. Det är EPA i samma ordning, och metoden säger själv att klassen kan göra Kontrasten i en struktur. Strukturkorten Kontraster och Provet två gånger står redan i metoden, för det läraren lägger till när grunden sitter.",
@@ -66,6 +76,16 @@
     ]
   },
   "skriva-for-att-lara": {
-    "vantar": "Ingen av de 85 strukturerna som visas passar Stanna och skriv, där var och en skriver med egna ord och paret sedan läser utan att rätta (riggens prövning 2026-11-14 i C:/metodrigg/out/undervisningsmetoder/TILL-SAJTEN.md). Vi jämför passar som förslag men är ett utkast som går upp i EPK enligt förslaget till grundboken; raden prövas igen när Niclas har avgjort det i K-667."
+    "skal": "Eleverna samarbetar när de har skrivit i Stanna och skriv, och oftast läser kamraten i paret texten. I Vi jämför skriver var och en sitt svar och håller det för sig tills tiden är slut, och sedan jämför paret texterna, så som paren gör i exemplet från matematiken i åk 4. Strukturen passar när frågan har flera svar eller sätt att tänka, och skriver eleverna i tre minuter, ryms jämförelsen med ett par till inom sju minuter, lika länge som med Byt böcker och svara. Niclas 2026-11-14 kväll: \"Tycker Vi jämför och EPK är annorlunda strukturer\", så Vi jämför står kvar som egen struktur och visas (K-781).",
+    "platser": [
+      {
+        "efter": "steg 3",
+        "delar": [
+          "vi-jamfor"
+        ],
+        "slag": "forslag",
+        "om": "När paret läser texterna"
+      }
+    ]
   }
 }
