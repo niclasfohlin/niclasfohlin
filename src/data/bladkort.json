@@ -35,5 +35,10 @@
   "skriva-for-att-lara": {
     "stycket": "Rutan på tavlan",
     "saker": ["Rutan på tavlan", "När jag fastnar"]
+  },
+  "tankande-klassrum": {
+    "stycket": "Fyrfältaren",
+    "knapp": { "namn": "Fyrfältare", "till": "Fyrfältarna" },
+    "saker": ["Fyrfältarna", "Baksidan", "Mina anteckningar"]
   }
 }

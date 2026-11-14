@@ -270,5 +270,33 @@
         "om": "Till den som var borta"
       }
     ]
+  },
+  "tankande-klassrum": {
+    "text": "Tre strategier för lärande finns redan i lektionen. Försök först finns Vid tavlorna, där grupperna löser uppgifterna innan du har visat hur. Jämför två finns i Konsolideringen, där klassen ser vad som är nytt från tavla A till B och varför felet inte stämmer. Pröva dig själv finns i rutinen Pröva svaret och andra tavlor, där gruppen prövar sitt svar innan den tar nästa ruta.",
+    "strategier": [
+      "forsok-forst",
+      "jamfor-tva",
+      "prova-dig-sjalv"
+    ],
+    "skal": "Vid tavlorna löser grupperna uppgifterna innan läraren har visat hur, och varje grupp prövar svaret innan den tar nästa ruta. I Konsolideringen går klassen från tavla A till B och C, säger vad som är nytt och varför felet inte stämmer. Riggen prövade strategierna mot metodens text 2026-11-14 (out/tankande-klassrum/TILL-SAJTEN.md, punkt 9). Pröva dig själv står vid steget Vid tavlorna, där gruppen prövar svaret, eftersom sidan inte väver in kort vid en rutin.",
+    "platser": [
+      {
+        "efter": "steg 2",
+        "delar": [
+          "forsok-forst",
+          "prova-dig-sjalv"
+        ],
+        "slag": "form",
+        "om": "Löser först och prövar svaret"
+      },
+      {
+        "efter": "steg 3",
+        "delar": [
+          "jamfor-tva"
+        ],
+        "slag": "form",
+        "om": "Från tavla A till B och C"
+      }
+    ]
   }
 }

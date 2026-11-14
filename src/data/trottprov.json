@@ -140,6 +140,26 @@
           "beslut": "Inget: frågan står tidigt och som exempel på lektionskortet, och Skrivfrågor att låna nås från vecka 2"
         }
       ]
+    },
+    "src/content/undervisningsmetoder/tankande-klassrum.yaml": {
+      "provad": "2026-11-14",
+      "saker": [
+        {
+          "sak": "Fyrfältaren, ett blad per grupp vid tavlan med Baksidan på andra sidan, och Mina anteckningar",
+          "forst": "Ordet i inledningens andra stycke på skärm 7, men tabellen Fyrfältarna som femton kort utan länkar på skärm 39 till 44 av 86 och bladen i bilaga A på skärm 58 till 83",
+          "beslut": "Knappen Fyrfältare överst på skärm 2, tre små kort på skärm 8 (Fyrfältarna, Baksidan och Mina anteckningar), tabellen som bildkort i tre nivåer med en egen sida för varje fyrfältare, och de femton i bilaga A som rader som fälls ut (K-761; Niclas: \"Det blir bra. Kör så!\"). Sidan är 60 skärmar"
+        },
+        {
+          "sak": "Tavlorna, en per grupp, uppe före första lektionen",
+          "forst": "Faktans material på skärm 5, och länken Material att köpa i inledningens andra stycke på skärm 8",
+          "beslut": "Inget: tavlorna sätts upp och skrivs inte ut, och vägen till Material att köpa står tidigt"
+        },
+        {
+          "sak": "Konsolideringen nerifrån, varje lektion",
+          "forst": "Kärnans fjärde kort på skärm 7, och tabellen Så konsoliderar du nerifrån med bilden Trappan i konsolideringen på skärm 12",
+          "beslut": "Inget: kärnans kort står tidigt och leder till tabellen, och lathunden har konsolideringen"
+        }
+      ]
     }
   }
 }
