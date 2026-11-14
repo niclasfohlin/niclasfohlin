@@ -67,7 +67,7 @@ function verktygetsProblem(metod: string): Problemen | null {
     const data = existsSync(fil) ? parse(readFileSync(fil, 'utf8')) : null;
     const bank = data ? bankAv(data) : null;
     const mapp = join(process.cwd(), 'src', 'content', 'matteproblem');
-    const databas = existsSync(mapp) ? readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), data: parse(readFileSync(join(mapp, f), 'utf8')) })) : [];
+    const databas = bank?.ord.slug === 'problem' && existsSync(mapp) ? readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), data: parse(readFileSync(join(mapp, f), 'utf8')) })) : [];
     // Nivåernas färger som på bankens sidor (nivaFarger i src/lib/bank.ts), utan #, som nivåskylten tar dem (src/lib/nivaer.ts).
     const farger = bank ? nivaFarger(data, bank) : {};
     problemen.set(metod, bank?.ord.slug === 'problem' ? { alla: matteproblemen({ id: metod, data }, databas), nivaer: bank.nivaer.map((n) => ({ namn: n.namn, farg: farger[n.namn].replace(/^#/, '').toUpperCase() })), titel: data.titel } : null);
@@ -147,6 +147,32 @@ export function bankbladenTillProblemen(metoder: { id: string; data: Um }[]): Ma
   return ut;
 }
 
+/**
+ * Bladens textalternativ ur riggens Word-fil med materialet, efter bildens namn, som är bladets rubrik: det som syns och står
+ * på bladet, i hela meningar (STIL.md under Bildtexter; andra ögat på Tänkande klassrum 2026-11-14: rutornas uppgifter fanns
+ * bara i bilden, och textalternativet var bladets namn). Riggen skriver texten ur bladets scen, så sidan säger samma sak som
+ * Word-filen. Ett blad utan text i Word-filen har sitt namn, som förut.
+ */
+const textalternativen = new Map<string, Map<string, string>>();
+export async function bladensTextalternativ(id: string): Promise<Map<string, string>> {
+  if (!textalternativen.has(id)) {
+    const fil = join(MAPP, `${id}-materialet.docx`);
+    const ut = new Map<string, string>();
+    if (existsSync(fil)) {
+      const { default: JSZip } = await import('jszip');
+      const xml = (await (await JSZip.loadAsync(readFileSync(fil))).file('word/document.xml')?.async('string')) ?? '';
+      const avkoda = (t: string) => t.replace(/&(#x[0-9a-f]+|#\d+|amp|lt|gt|quot|apos);/gi, (hela, k: string) => (k[0] === '#' ? String.fromCodePoint(k[1].toLowerCase() === 'x' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : ({ amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" } as Record<string, string>)[k.toLowerCase()] ?? hela));
+      for (const m of xml.matchAll(/<wp:docPr\b[^>]*>/g)) {
+        const namn = /\bname="([^"]*)"/.exec(m[0])?.[1];
+        const alt = /\bdescr="([^"]*)"/.exec(m[0])?.[1];
+        if (namn && alt && !ut.has(avkoda(namn))) ut.set(avkoda(namn), avkoda(alt));
+      }
+    }
+    textalternativen.set(id, ut);
+  }
+  return textalternativen.get(id)!;
+}
+
 export type { UmSlag };
 export interface UmFil { slag: UmSlag | 'tabell'; namn: string; rad: string; pdf?: string; docx?: string }
 
@@ -213,6 +239,12 @@ export const sakernasFiler = (id: string, d: Um) => ({
   banktexter: bankensTexter(d),
   // Ett blad i en bank heter också utan nivån, som texten skriver det: ”Fyrfältaren Borden” för Fyrfältaren, Medel, Borden.
   bankblad: metodensBankblad(id, d).map((b) => ({ rubrik: b.rubrik, form: `${b.slag} ${b.titel}` })),
+  // Bladets namn utan nivå och titel, som "Fyrfältaren" i "Skriv ut Fyrfältaren", leder till korten, där läraren väljer
+  // vilket (andra ögat på Tänkande klassrum 2026-11-14).
+  banksamlingar: ((banken) => [...new Set(banken.map((b) => b.slag))].flatMap((slag) => {
+    const t = ((d.tabeller ?? []) as { rubrik: string; rader: string[][] }[]).find((x) => tabellensBankblad(x.rader, banken.filter((b) => b.slag === slag)));
+    return t ? [{ namn: slag, adress: `#${slugAv(t.rubrik)}` }] : [];
+  }))(metodensBankblad(id, d)),
   lektionskort: !!metodensFiler(id).lektionskort,
   tabeller: metodensTabellfiler(id, ((d.tabeller ?? []) as { rubrik: string }[]).map((t) => t.rubrik)).map((f) => f.namn),
 });

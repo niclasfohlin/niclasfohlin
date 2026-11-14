@@ -47,11 +47,11 @@ const banken = metodensBankblad(id, d);
   <div class="um-fritabell" id={slugAv(t.rubrik)}>
     <Rubrik>{t.rubrik}</Rubrik>
     {t.text && <p set:html={k(t.text)} />}
-    {tabellensBankblad(t.rader, banken) ? <Bankbladkort blad={tabellensBankblad(t.rader, banken)!} id={id} /> : <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} cellank={cellank} celltext={celltext} />}
+    {tabellensBankblad(t.rader, banken) ? <Bankbladkort blad={tabellensBankblad(t.rader, banken)!} id={id} text={t.text} /> : <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} cellank={cellank} celltext={celltext} />}
     {bilderUnder(t).map((b) => (
       <figure class="m-pabordet um-idebild">
         <a href={`/metoder/${id}-bild-${b.nr}.svg`} class="bild-lank" title="Öppna bilden i full storlek"><img src={`/metoder/${id}-bild-${b.nr}.svg`} alt={`${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.alt ?? ''}`.trim()} width={b.bredd} height={b.hojd} loading="lazy" decoding="async" /></a>
-        <figcaption>{b.text}</figcaption>
+        <figcaption set:html={k(b.text)} />
       </figure>
     ))}
     {t.not && <p class="um-not" set:html={k(t.not)} />}

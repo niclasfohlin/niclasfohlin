@@ -21,7 +21,7 @@
 //   node scripts/metoderprov.mjs
 import { spawn, spawnSync } from 'node:child_process';
 import { createServer } from 'node:http';
-import { existsSync, readFileSync, readdirSync, rmSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, rmSync, mkdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -428,6 +428,9 @@ function provaSakerna(s, html, ids) {
     let slut = html.length;
     for (const m of html.slice(start).matchAll(new RegExp(`<(/?)${tagg}\\b[^>]*>`, 'g'))) { djup += m[1] ? -1 : 1; if (!djup) { slut = start + m.index + m[0].length; break; } }
     const knappar = [...html.slice(start, slut).matchAll(/<a\b([^>]*)>/g)].map((m) => m[1]).filter((a) => /\sdata-skriv-ut-pdf\b/.test(a) || /\sdownload="[^"]*\.(pdf|docx)"/.test(a)).map((a) => a.match(/\shref="([^"?#]+)/)?.[1]).filter(Boolean);
+    // En sak som leder till bildkorten i en bank, som Fyrfältaren i Tänkande klassrum (K-761), har sina knappar på bladens
+    // sidor, som provet av bildkorten nedan prövar: varje kort leder dit, och där står knappen som skriver ut bladet.
+    if (!knappar.length && /class="um-bankkort-lista"/.test(html.slice(start, slut))) continue;
     if (!knappar.length) fel.push(`${s}#${ankare}: ${x.namn} har ingen knapp under sig som skriver ut eller laddar ner den`);
     for (const k of knappar) if (!existsSync(join(dist, decodeURIComponent(k)))) fel.push(`${s}#${ankare}: knappen under ${x.namn} leder till ${k}, som inte finns`);
   }
@@ -922,13 +925,26 @@ try {
         if (!existsSync(fil)) { ut.push(`/metoder/${id}: bildkortet leder till ${href}, som inte finns`); continue; }
         const sidan = readFileSync(fil, 'utf8');
         const slug = href.split('/').pop();
-        if (!new RegExp(`href="/metoder/${id}-blad-[a-z0-9-]*${slug.replace(/^[a-z]+-/, '')}\.pdf[^"]*"[^>]*data-skriv-ut-pdf`).test(sidan)) ut.push(`/metoder/${id}: sidan ${href} saknar knappen som skriver ut bladet`);
+        const knappen = sidan.match(new RegExp(`href="(/metoder/${id}-blad-[a-z0-9-]*${slug.replace(/^[a-z]+-/, '')}\\.pdf)[^"]*"[^>]*data-skriv-ut-pdf`));
+        if (!knappen) ut.push(`/metoder/${id}: sidan ${href} saknar knappen som skriver ut bladet`);
+        else if (!existsSync(join(dist, ...knappen[1].split('/').filter(Boolean)))) ut.push(`/metoder/${id}: knappen på ${href} leder till ${knappen[1]}, som inte finns`);
+        if (!/<h1>[^<]+<\/h1>/.test(sidan)) ut.push(`/metoder/${id}: sidan ${href} saknar rubriken`);
+        if (!/<nav class="enhet-fot"[\s\S]*?<\/nav>/.test(sidan) || !sidan.includes(`href="/metoder/${id}#`)) ut.push(`/metoder/${id}: sidan ${href} saknar raden med förra, nästa och vägen tillbaka`);
         if (!html.includes(`id="blad-${sidan.match(new RegExp(`data-goatcounter-click="utskrift:${id}-blad-([a-z0-9-]+)"`))?.[1] ?? 'saknas'}"`)) ut.push(`/metoder/${id}: bladet på ${href} står inte som rad i Materialet för klassen`);
       }
       return { kort, ut };
     };
-    // Provet åt andra hållet, på en härmad sida: ett kort till en sida som saknas.
+    // Provet åt andra hållet, på härmade sidor: ett kort till en sida som saknas, och en sida utan rubrik, rad och fil
+    // (Codex kodgranskning 2026-11-14, fynd 7).
     if (!kortensFel('<ul class="um-bankkort-lista"><li><a href="/metoder/x/medel-finns-inte">X</a></li></ul>', 'x', dist).ut.some((f) => f.includes('som inte finns'))) fel.push('metoderprov: provet av bildkorten ser inte ett kort till en sida som saknas');
+    {
+      const rot2 = join(tmpdir(), 'metoderprov-bankkort');
+      mkdirSync(join(rot2, '_provsida', 'medel-prov'), { recursive: true });
+      writeFileSync(join(rot2, '_provsida', 'medel-prov', 'index.html'), '<a href="/metoder/_provsida-blad-x-medel-prov.pdf" data-skriv-ut-pdf>Skriv ut</a>');
+      const r = kortensFel('<ul class="um-bankkort-lista"><li><a href="/_provsida/medel-prov">X</a></li></ul>', '_provsida', rot2).ut;
+      rmSync(rot2, { recursive: true, force: true });
+      if (!['som inte finns', 'saknar rubriken', 'saknar raden'].every((ord) => r.some((x) => x.includes(ord)))) fel.push(`metoderprov: provet av bildkorten ser inte en sida utan fil, rubrik eller rad: ${r.join(' | ')}`);
+    }
     for (const f of readdirSync(join(dist, 'metoder')).filter((x) => existsSync(join(dist, 'metoder', x, 'index.html')))) {
       const html = readFileSync(join(dist, 'metoder', f, 'index.html'), 'utf8');
       if (!html.includes('um-bankkort-lista')) continue;

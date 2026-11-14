@@ -12,7 +12,7 @@ import Boklankar from '../../../components/Boklankar.astro';
 import Umfilknappar from '../../../components/Umfilknappar.astro';
 import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
 import { publicerade } from '../../../lib/innehall';
-import { metodensBankblad, metodensBilder, metodensBlad, metodensFiler, sakernasFiler, tabellensBankblad, type Bankblad } from '../../../lib/undervisningsmetodfiler';
+import { bladensTextalternativ, metodensBankblad, metodensBilder, metodensBlad, metodensFiler, sakernasFiler, tabellensBankblad, type Bankblad } from '../../../lib/undervisningsmetodfiler';
 import { medSaker, undervisningsmetodensSaker, type Um } from '../../../lib/undervisningsmetod';
 import { metodensStrukturer } from '../../../lib/strukturer';
 import { liten, meningarna, slugAv } from '../../../lib/standard/index.js';
@@ -30,11 +30,14 @@ const ram = (d.ramar!.ramar as { rubrik: string; text: string[] }[])[b.i];
 const banken = metodensBankblad(id, d);
 const kallor = new Set<string>((d.kallor ?? []).map((x: { id: string }) => x.id));
 const saker = undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer: metodensStrukturer(d, d.titel) });
-const k = (t: string) => medSaker(t, saker, kallor);
+// Hänvisningarna till källorna leder till referensbladet på metodens sida, som den här sidan inte har (Codex 2026-11-14).
+const k = (t: string) => medSaker(t, saker, kallor).replace(/href="#kalla-/g, `href="/metoder/${id}#kalla-`);
 // Bladets sidbild, som på metodens sida: den första av bladets sidor (src/data/materialets-sidor.json), annars bladets nummer.
 const delarna = (materialetsSidor as unknown as Record<string, { blad: string; bilder: number[] }[] | undefined>)[id];
 const bilden = metodensBilder(id).materialet?.[(delarna?.[b.i]?.bilder[0] ?? b.i + 1) - 1];
 const pdf = metodensBlad(id, [b.rubrik])[0]?.pdf;
+// Bladets textalternativ ur riggens Word-fil, med det som står på bladet, som på metodens sida.
+const bildensAlt = (await bladensTextalternativ(id)).get(b.rubrik) ?? b.rubrik;
 const filer = metodensFiler(id);
 // Metodens egen mening om hur bladet skrivs ut, ur Materialet för klassens text: den som börjar med Skriv ut och nämner
 // bladet, som "Skriv ut fyrfältaren du väljer, ett blad per grupp med Baksidan på andra sidan …".
@@ -62,7 +65,7 @@ const del = b.problem.tagg ? `, ${b.problem.tagg}` : '';
     </header>
     {bilden && (
       <a href={pdf ?? filer.materialet?.pdf} class="um-sida um-sida-liggande um-bankblad-bild" data-goatcounter-click={`fil:${(pdf ?? '').replace(/^.*\//, '')}`} data-goatcounter-title={`Bilden av ${b.rubrik}, pdf, ${id}`}>
-        <img src={bilden.src} alt={b.rubrik} width={bilden.bredd} height={bilden.hojd} decoding="async" />
+        <img src={bilden.src} alt={bildensAlt} width={bilden.bredd} height={bilden.hojd} decoding="async" />
       </a>
     )}
     {pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: b.rubrik, pdf }} />}

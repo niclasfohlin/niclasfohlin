@@ -12,7 +12,7 @@ import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor,
 import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, lagretI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfalletsAnkare, utfallensElever, utfalletsText, utfallensRegel, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
-import { metodensBlad, metodensBankblad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
+import { metodensBlad, metodensBankblad, bladensTextalternativ, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
 import { skyltText } from '../lib/nivaer';
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
@@ -120,6 +120,8 @@ const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
 const bladen = metodensBlad(id, (d.ramar?.ramar ?? []).map((r: { rubrik: string }) => r.rubrik));
 // Bladen i en bank, som fyrfältarna i Tänkande klassrum (K-761): rader under nivåns skylt i Materialet för klassen.
 const banken = metodensBankblad(id, d);
+// Bladens textalternativ ur riggens Word-fil, med det som står på bladet (bladensTextalternativ).
+const textalternativ = await bladensTextalternativ(id);
 // De små korten tidigt på sidan, efter stycket som nämner saken (src/data/bladkort.json).
 const bladkort = metodensBladkort(id, d);
 const bladkortensPlats = bladkortensStycke(id, d);
@@ -624,7 +626,7 @@ const moten = arbetslagetsMoten(d);
           </div>
           {(() => {
             const sidor = bladetsSidor(i);
-            const bilderna = sidor.map((b: { src: string; bredd: number; hojd: number }, n: number) => <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${bladen[i]?.pdf ? String(bladen[i].pdf).replace(/^.*\//, '').replace(/\?.*$/, '') : `${id}-materialet.pdf`}`} data-goatcounter-title={`Bilden av ${r.rubrik}, pdf, ${id}`} class={`um-sida${b.bredd > b.hojd ? ' um-sida-liggande' : ''}`}><img src={b.src} alt={sidor.length > 1 ? `${r.rubrik}, sidan ${n + 1} av ${sidor.length}` : r.rubrik} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>);
+            const bilderna = sidor.map((b: { src: string; bredd: number; hojd: number }, n: number) => <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${bladen[i]?.pdf ? String(bladen[i].pdf).replace(/^.*\//, '').replace(/\?.*$/, '') : `${id}-materialet.pdf`}`} data-goatcounter-title={`Bilden av ${r.rubrik}, pdf, ${id}`} class={`um-sida${b.bredd > b.hojd ? ' um-sida-liggande' : ''}`}><img src={b.src} alt={sidor.length > 1 ? `${r.rubrik}, sidan ${n + 1} av ${sidor.length}` : textalternativ.get(r.rubrik) ?? r.rubrik} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>);
             return sidor.length > 1 ? <div class="um-sidor">{bilderna}</div> : bilderna;
           })()}
           {bladen[i]?.pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: r.rubrik, pdf: bladen[i].pdf! }} medFilval={ettBladMedSidor} />}

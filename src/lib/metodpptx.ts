@@ -1201,7 +1201,9 @@ function umPlaneringsblad(v: Verktyg, s: any, d: Um, x: number, y: number, w: nu
     // gränser för klassen.
     (s, bx, by, bw) => {
       let h = zon(s, bx, by, bw, O.lektionen, varianten ? ` · ${O.minuterna} ${variantensNamn}` : undefined);
-      const c1 = 1.3, rw = bw - c1 - 0.2;
+      // Delens kolumn rymmer sitt längsta ord i fet stil, som på sidan 2 (umMinuterna), så att "Konsolideringen" och
+      // "Anteckningarna" inte bryts mitt i och skrivs över minuterna (andra ögat på Tänkande klassrum 2026-11-14).
+      const c1 = Math.max(1.3, ...delarna.flatMap((d) => d.fas.split(/\s+/)).map((o) => calibriPunkter(o, TEXT * v.grad, true) / 72 / v.sx + 0.24)), rw = bw - c1 - 0.2;
       const rad = (s: any, ry: number, fas: string, tid: string, hoger: (s: any, hx: number, hy: number) => number) => {
         const fh = textHojd(v, fas, c1 - 0.16, TEXT, true), th = textHojd(v, tid, c1 - 0.16, ETIKETT);
         const hh = hoger(TORR, bx + c1 + 0.1, ry + 0.06);

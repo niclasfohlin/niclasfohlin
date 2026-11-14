@@ -7,9 +7,12 @@
 // nivån, för fler problem. Formen valdes efter två idéagenter och skisser i telefonbredd (underlag/prov/tankande-klassrum/ide/).
 import { skyltText } from '../lib/nivaer';
 import type { Bankblad } from '../lib/undervisningsmetodfiler';
-interface Props { blad: Bankblad[]; id: string }
-const { blad, id } = Astro.props;
+// text är tabellens egen text. Säger den årskurserna för en nivå, som "Bas passar ungefär åk 4–5, Medel åk 6–7", står de vid
+// nivåns skylt, som i skissen Niclas sa ja till.
+interface Props { blad: Bankblad[]; id: string; text?: string }
+const { blad, id, text = '' } = Astro.props;
 const nivaer = [...new Set(blad.map((b) => b.niva))];
+const arskurs = (niva: string) => new RegExp(`(?:^|[^\\p{L}])${niva}(?: passar)?((?: ungefär)? åk[ \\u00a0]\\d+[–-]\\u2060?\\d+)`, 'u').exec(text)?.[1]?.trim();
 ---
 <div class="um-bankkort">
   {nivaer.map((niva) => {
@@ -17,7 +20,7 @@ const nivaer = [...new Set(blad.map((b) => b.niva))];
     const farg = bladen[0].farg;
     return (
       <section class="um-bankkort-niva" style={`--niva:#${farg};--niva-text:#${skyltText(farg)}`} aria-label={niva}>
-        <p class="um-bankkort-rubrik"><span class="m-niva">{niva}</span></p>
+        <p class="um-bankkort-rubrik"><span class="m-niva">{niva}</span>{arskurs(niva) && <small>{arskurs(niva)}</small>}</p>
         <ul class="um-bankkort-lista">
           {bladen.map((b) => (
             <li>

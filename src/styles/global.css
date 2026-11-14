@@ -4870,6 +4870,7 @@ button.pl-passroll { min-height: 2.75rem; }
 .um-bankkort { display: grid; gap: 1.25rem; margin: 1rem 0; }
 .um-bankkort-rubrik { margin: 0 0 0.5rem; }
 .um-bankkort-rubrik .m-niva { font-size: 1rem; }
+.um-bankkort-rubrik small { margin-left: 0.5rem; font-size: 0.875rem; color: var(--farg-text-svag); }
 .um-bankkort-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
 @media (min-width: 48rem) { .um-bankkort-lista { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 .um-bankkort-lista > li { display: grid; }

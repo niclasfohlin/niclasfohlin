@@ -62,7 +62,7 @@ export const METODKORTET = 'Metodkortet';
  * sida kan länka hit. Utan lektionskortets fil, när kortet väntar på Niclas ja (VANTAR i scripts/metoderfiler.mjs), är
  * kortet ingen sak, så att ingen länk leder till en knapp som inte finns.
  */
-export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; tabeller?: string[]; strukturer?: { id: string; namn: string }[]; banktexter?: { namn: string; former: string[]; adress: string }[]; bankblad?: { rubrik: string; form: string }[] } = {}): MetodSak[] {
+export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; tabeller?: string[]; strukturer?: { id: string; namn: string }[]; banktexter?: { namn: string; former: string[]; adress: string }[]; bankblad?: { rubrik: string; form: string }[]; banksamlingar?: { namn: string; adress: string }[] } = {}): MetodSak[] {
   const sida = metodensAdress(id);
   // Ett namn som är ett ord för en sak (Planeringsmallen, Affischen Så visar du) hittas också med liten bokstav; ett annat,
   // som Stegen, bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden), så att "skriv stegen" inte
@@ -91,9 +91,14 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
       const efterKolon = /^[^:]+:\s+(\S.*)$/.exec(r.rubrik)?.[1];
       const iBanken = o.bankblad?.find((b) => b.rubrik === r.rubrik)?.form;
       const fler = [efterKolon, iBanken].filter((x): x is string => !!x);
-      saker.push(fler.length ? { ...s, former: [...sakensFormer(r.rubrik), ...fler] } : s);
+      // Bladets hela namn i en bank är ingen vanlig början på en mening, så det länkas också först, som "Fyrfältaren Fiskebodarna,
+      // en per grupp" på planeringsbladet (den kalla läraren Sofia 2026-11-14).
+      saker.push(fler.length ? { ...s, former: [...sakensFormer(r.rubrik), ...fler], ...(iBanken ? { forst: true } : {}) } : s);
     }
   }
+  // Bladens namn i en bank utan nivå och titel, som Fyrfältaren, leder till korten (sakernasFiler, K-761), också först i en mening,
+  // som "Fyrfältaren till varje grupp" i faktan. Ett längre namn, som Fyrfältaren Borden eller Fyrfältaren, tom, går före.
+  for (const b of o.banksamlingar ?? []) saker.push({ ...sak(b.namn, `${sida}${b.adress}`), versal: true, forst: true });
   // Bankens texter som metoden pekar ut, ur verktyg som metoden visar med fältet centrala (sakernasFiler): titeln med numret,
   // som den står, så att bara hänvisningen blir en länk. En form med en siffra hittas också först i en tabellcell.
   for (const t of o.banktexter ?? []) saker.push({ namn: t.namn, former: t.former, versal: true, adress: t.adress });
@@ -154,7 +159,7 @@ export function medSaker(text: string, saker: MetodSak[], kallor: Set<string>, s
 }
 /** En länk ut från sajten i en cell, skriven [text](https://…), som riggens Word-fil ritar som länk (Material att köpa i
  *  Tänkande klassrum, riggens leverans 2026-11-14, K-762). Samma skrivsätt som litteraturlistan i Stödundervisning. */
-const WEBBLANK = /\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g;
+const WEBBLANK = /\[([^\]\n]+)\]\((https?:\/\/(?:[^()\s]|\([^()\s]*\))+)\)/g;
 /**
  * En text med länkar ut från sajten som HTML: varje [text](https://…) blir en länk som öppnas i en ny flik, och texten runt
  * länkarna går genom text, som medSaker, så att metodens saker och källorna är länkar som förut. Utan länkar är svaret

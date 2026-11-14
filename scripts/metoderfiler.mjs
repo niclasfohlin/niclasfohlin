@@ -208,7 +208,15 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     const textsida = (t) => t.split(/\r?\n/).slice(0, 4).some((rad) => rad.trim() === (d.ramar?.rubrik ?? 'Materialet för klassen'));
     if (fore === 0) forstaBladet = 1;
     else if (fore === 1 && textsida(s[0])) forstaBladet = 2;
-    else if (bladen.length === 1 && fore > 0) { forstaBladet = textsida(s[0]) ? 2 : 1; sistaSidan = s.length - 1; }
+    else if (bladen.length === 1 && fore > 0) {
+      // Säger bildernas namn att varje sida efter textsidorna är bladet, räknas textsidorna bakifrån, så att flera textsidor
+      // före ett ensamt blad inte blir bladets (Codex 2026-11-14); annars en textsida eller ingen, som förut.
+      const docx = join(UT, `${stam('materialet')}.docx`);
+      const namnen = existsSync(docx) ? await bildnamnen(docx) : [];
+      const forsta = forstaBladetsSida(s.length - 1, namnen.length, textsida(s[0]));
+      forstaBladet = forsta && sidornaPerBlad(namnen, bladen) ? forsta : textsida(s[0]) ? 2 : 1;
+      sistaSidan = s.length - 1;
+    }
     else {
       const docx = join(UT, `${stam('materialet')}.docx`);
       const namnen = existsSync(docx) ? await bildnamnen(docx) : [];
