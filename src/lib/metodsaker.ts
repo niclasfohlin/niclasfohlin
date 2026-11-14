@@ -12,9 +12,8 @@ import { arBlad, bladNamn, metodensPaBordet } from './pabordet';
 import { metodensBladmaterial } from './bladmaterial';
 import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare';
 import { metodensLektionskort } from './lektionskort';
-import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
-import { arSaksord, forstaLedet, forstaOrdet, sakdelar, sakspann, slugAv, veckorI, versionensVecka, versionsform } from './standard/index.js';
+import { arBaraHuvudord, arSaksord, forstaLed, forstaLedet, forstaOrdet, kursensVeckodelar, sakdelar, sakspann, slugAv, veckorI, versionernasNamn, versionsform } from './standard/index.js';
 
 /**
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
@@ -31,28 +30,13 @@ export const sidansAnkare = (d: MetodData) => metodensAnkare(d, sidansAvsnitt(d)
 
 /**
  * Kursens veckor i metoden (en ram med lektioner, som De fyra räknesätten): ankaret för varje veckas lektion, och veckans
- * titel ("Vecka 3 · Hundratal och två växlingar" har titeln Hundratal och två växlingar).
+ * titel ("Vecka 3 · Hundratal och två växlingar" har titeln Hundratal och två växlingar). Veckorna, versionernas delar och
+ * namn står i standarden (kursensVeckodelar, versionensDelar och versionernasNamn), så att planens spärr läser dem lika i
+ * riggen (K-779); här får de sidans ankare.
  */
-/**
- * Delarna i en ram med lektioner som gäller en version i planens val (K-576), med sin plats i ramen och sitt första led utan
- * versionens namn: en sida som "Skattjakten vecka 3" hör till sin version och ger ledet "vecka 3". En rot för kursens
- * veckor och veckans fält (src/lib/insatsplan.ts).
- */
-/** Versionernas namn i planens val (plan.versionsval, K-576), i metodens ordning. */
-export const versionernasNamn = (d: MetodData) => (d.plan?.versionsval?.versioner ?? []).map((x) => x.namn);
-export function versionensDelar(d: MetodData, ram: NonNullable<MetodData['ramar']>['ramar'][number], version?: string) {
-  const alla = versionernasNamn(d);
-  return ram.delar.flatMap((del, di) => { const led = versionensVecka(forstaLed(del.rubrik), version, alla); return led === null ? [] : [{ del, di, led }]; });
-}
-
 export function kursensVeckor(d: MetodData, id: string, version?: string): Record<string, { adress: string; titel: string }> {
   const { delAnkare } = sidansAnkare(d);
-  const ut: Record<string, { adress: string; titel: string }> = {};
-  (d.ramar?.ramar ?? []).forEach((r, ri) => {
-    if (!r.lektioner) return;
-    for (const { del, di, led } of versionensDelar(d, r, version)) { const v = veckornaI(led); if (v?.length === 1 && !ut[v[0]]) ut[v[0]] = { adress: `/stodundervisning/${id}#${delAnkare[ri][di]}`, titel: del.rubrik.split(' · ').slice(1).join(' · ').trim() }; }
-  });
-  return ut;
+  return Object.fromEntries(Object.entries(kursensVeckodelar(d, version)).map(([v, x]) => [v, { adress: `/stodundervisning/${id}#${delAnkare[x.ri][x.di]}`, titel: x.titel }]));
 }
 
 // Formerna av en sak som heter med två led eller fler, som "kartläggning före": kartläggningen före, kartläggningens text
@@ -83,11 +67,22 @@ export function sakernaI(texter: string[], saker: MetodSak[]): MetodSak[] {
 /**
  * Sakerna som blir länkar i texten på metodens sida (K-767; STIL.md under Hänvisningar), som i Planera insatsen och i
  * Metoder: allt i metodensSaker utom verktygen, som Boklankar.astro länkar med sin statistik och knapp, en sak som bara
- * finns i några veckor, eftersom sidan inte står i en vecka, och filmerna, som står på sidan själv.
+ * finns i några veckor, eftersom sidan inte står i en vecka, filmerna, som står på sidan själv, och veckorna, som på
+ * metodens sida nästan alltid är en tid ("Det är vecka 4 och pass 7"). Sidan har mer text än planen, så ett kort namn som
+ * också är ett vanligt ord länkas bara när texten skriver det som namn (andra ögat 2026-11-14): ett namn som bara är ett
+ * huvudord, som Planen och Lapparna, i sina bestämda former och inte som plan eller lappar, och ett annat namn i ett ord
+ * kortare än tolv tecken, som Inbjudan och Läsaren, med stor bokstav inne i en mening.
  */
 export const sidansSaker = (d: MetodData, id: string): MetodSak[] => {
   const verktyg = new Set(CENTRALA.map((c) => lasbarAdress(c)));
-  return metodensSaker(d, id).filter((s) => !s.baraVeckorna && !verktyg.has(s.adress) && !s.adress.endsWith('#lathund-film'));
+  return metodensSaker(d, id)
+    .filter((s) => !s.baraVeckorna && !verktyg.has(s.adress) && !s.adress.endsWith('#lathund-film') && !/^vecka \d+$/i.test(s.namn))
+    .map((s) => {
+      const n = s.namn.trim();
+      if (s.former || /\s/.test(n)) return s;
+      if (arBaraHuvudord(n)) return { ...s, former: [n, `${n}s`] };
+      return n.length < 12 && !s.versal ? { ...s, versal: true, former: [n, `${n}s`] } : s;
+    });
 };
 
 /** Metodens saker: materialets ramar, mallarna, snabbmallen, lektionskorten, lathunden, bankens texter och verktygen. */

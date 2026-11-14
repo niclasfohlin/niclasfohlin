@@ -512,5 +512,95 @@ const arken = (n) => strukturkortensArk(n).map((a) => `${a.del}:${a.uppe}/${a.ne
 for (const [n, vantat] of [[0, ''], [1, 'fram:0/- bak:0/-'], [2, 'fram:0/1 bak:0/1'], [3, 'fram:0/1 bak:0/1 fram:2/- bak:2/-']]) if (arken(n) !== vantat) fel.push(`strukturkortensArk(${n}) ger "${arken(n)}", inte "${vantat}"`);
 if (Object.keys(STRUKTURENS_SLAG).join() !== 'par,grupp,klass') fel.push('STRUKTURENS_SLAG har inte slagen par, grupp och klass i den ordningen');
 
+// Planens spärr mot metodens delar (K-779): planensDelarFel, som planFel kör, stoppar varje fält som pekar på något metoden
+// inte har, och släpper samma fält när metoden har det, så att riggen kan lita på att funktionen stoppar.
+{
+  const P = await import(pathToFileURL(join(mapp, 'index.js')).href);
+  const pass1 = '0–10 min. Start: Ni börjar.\n10–30 min. Läsa: Ni läser.';
+  const bas = () => ({
+    tid: '30 minuter per pass, två pass i veckan',
+    period: 'Två veckor',
+    tidsschema: { rubrik: 'Ett pass på 30 minuter', rader: [{ tid: '0–10 min', fas: 'Start', vad: 'Ni börjar.' }, { tid: '10–30 min', fas: 'Läsa', vad: 'Ni läser.' }] },
+    progression: { enhet: 'Vecka', rader: [{ vecka: '1', fokus: 'Läsa.', roll: 'Du visar.' }, { vecka: '2', fokus: 'Läsa mer.', roll: 'Du lyssnar.' }] },
+    uppfoljning: { rader: [{ nar: 'Före', vad: 'Du lyssnar på varje elev.', tid: 'före' }, { nar: 'Efter', vad: 'Du lyssnar igen.', tid: 'efter' }] },
+    tabeller: [{ rubrik: 'Första passet', kolumner: ['Tid', 'Del', 'Vad'], rader: [['0–10', 'Start', 'Ni börjar.'], ['10–30', 'Läsa', 'Ni läser.']] }, { rubrik: 'Så skiljer sig nivåerna', kolumner: ['Nivå', 'Vad'], rader: [['Bas', 'Korta texter.']] }],
+    ramar: { ramar: [{ rubrik: 'Veckorna', lektioner: true, delar: [{ rubrik: 'Vecka 1 · Start', falt: [{ rubrik: 'Pass 1', text: pass1 }, { rubrik: 'Pass 2', text: 'Läspass. Där vi slutade.' }] }, { rubrik: 'Vecka 2 · Mer', falt: [{ rubrik: 'Pass 3', text: pass1 }, { rubrik: 'Pass 4', text: 'Läspass. Där vi slutade.' }] }] }] },
+    pabordet: [{ nr: 1, rubrik: 'Blad: Vår grupp', text: 'Bladet.', google: '/vargrupp' }],
+    plan: {},
+  });
+  const med = (f) => { const d = bas(); f(d); return d; };
+  const versioner = (d, ...x) => { d.plan.versionsval = { rubrik: 'Välj', text: 'Välj version.', mer: 'Första passet', versioner: [{ namn: 'Alfa' }, { namn: 'Beta' }].map((v, i) => ({ ...v, ...(x[i] ?? {}) })) }; };
+  const veckorna = (d) => { d.plan.veckansPass = 'Veckorna'; };
+  const falt = (d) => d.ramar.ramar[0].delar[0].falt[0];
+  // [namn, metoden, felet som ska stå, eller null när inget fel ska stå]
+  const fallen = [
+    ['metoden utan planens fält', bas(), null],
+    ['planens pass med en tabell som finns', med((d) => { d.plan.passen = [{ nar: 'första passet', tabell: 'Första passet' }]; }), null],
+    ['planens pass med en tabell som inte finns', med((d) => { d.plan.passen = [{ nar: 'första passet', tabell: 'Finns inte' }]; }), 'Planens pass "första passet" hänvisar till tabellen "Finns inte", som metoden inte har.'],
+    ['planens pass med en tabell som inte är ett pass i delar', med((d) => { d.plan.passen = [{ nar: 'första passet', tabell: 'Så skiljer sig nivåerna' }]; }), 'har tabellen "Så skiljer sig nivåerna", som inte går att läsa som ett pass i delar'],
+    ['planens pass med en kolumn i tabellen', med((d) => { d.plan.passen = [{ nar: 'pass 2', tabell: 'Första passet', kolumn: 'Vad' }]; }), null],
+    ['planens pass med en kolumn som tabellen inte har', med((d) => { d.plan.passen = [{ nar: 'pass 2', tabell: 'Första passet', kolumn: 'Finns inte' }]; }), 'och kolumnen "Finns inte", som inte går att läsa som ett pass i delar'],
+    ['planens pass med en kolumn utan tabell', med((d) => { d.plan.passen = [{ nar: 'pass 2', kolumn: 'Vad' }]; }), 'Planens pass "pass 2" har kolumnen "Vad" men ingen tabell.'],
+    ['uppföljningens tid i det extra passet', med((d) => { d.uppfoljning.rader[0].tid = 'i det extra passet'; }), 'Uppföljningens rad "Före" har tiden "i det extra passet", som bara en version med extraPass kan ha'],
+    ['uppföljningens tabell som finns', med((d) => { d.uppfoljning.rader[1].tabell = 'Första passet'; }), null],
+    ['uppföljningens tabell som inte finns', med((d) => { d.uppfoljning.rader[1].tabell = 'Finns inte'; }), 'Uppföljningens rad "Efter" har tabellen "Finns inte", som metoden inte har eller som inte går att läsa som ett pass i delar.'],
+    ['veckans pass i en ram med lektioner', med(veckorna), null],
+    ['veckans pass i en ram som inte finns', med((d) => { d.plan.veckansPass = 'Finns inte'; }), 'plan.veckansPass säger ramen "Finns inte", som metoden inte har som en ram med en del per vecka (lektioner).'],
+    ['veckans pass utan fälten Pass N', med((d) => { veckorna(d); for (const del of d.ramar.ramar[0].delar) for (const f of del.falt) f.rubrik = `Om ${f.rubrik}`; }), 'plan.veckansPass: ramen "Veckorna" har inga fält som heter Pass N eller Dag N.'],
+    ['veckans fält med minuter utan delar', med((d) => { veckorna(d); falt(d).text = 'Gör 10–20 min med något.'; }), 'plan.veckansPass: Vecka 1 · Start, Pass 1, har ingen rad som "N–M min. Delens namn: …".'],
+    ['veckans fält utan text', med((d) => { veckorna(d); falt(d).text = ''; }), 'plan.veckansPass: Vecka 1 · Start, Pass 1, har ingen text.'],
+    ['veckans fält i en version som finns', med((d) => { veckorna(d); versioner(d); falt(d).rubrik = 'Pass 1 i Alfa'; }), null],
+    ['veckans fält i en version som inte finns', med((d) => { veckorna(d); falt(d).rubrik = 'Pass 1 i sju steg'; }), 'plan.veckansPass: Vecka 1 · Start, Pass 1 i sju steg, gäller "sju steg", som inte är en version i plan.versionsval.'],
+    ['kursens pass utan fast antal pass i veckan', med((d) => { veckorna(d); d.tid = '30 minuter per pass, två till tre pass i veckan'; }), 'plan.veckansPass räknar kursens pass och kräver ett fast antal pass i veckan i faktarutans tid, eller en period i pass.'],
+    ['kursens pass i en period i pass', med((d) => { veckorna(d); d.tid = '30 minuter per pass, två till tre pass i veckan'; d.period = '4 pass, två veckor'; }), null],
+    ['valet utan versioner i en serie', med((d) => { d.plan.versionsval = { rubrik: 'Välj', text: 'Välj kurs.', mer: 'Första passet' }; d.lektionsbank = { formagor: [] }; }), null],
+    ['valet utan versioner utan serie', med((d) => { d.plan.versionsval = { rubrik: 'Välj', text: 'Välj kurs.', mer: 'Första passet' }; }), 'plan.versionsval utan versioner gäller en serie med lektionsbank, vars kurser har egna planer.'],
+    ['versionerna med en text i varje', med((d) => { versioner(d); }), null],
+    ['skattningar och en rad för en version', med((d) => { versioner(d); d.plan.skattningar = []; d.uppfoljning.rader.push({ nar: 'I Alfa: läsningen', vad: 'Du lyssnar.', tid: 'efter' }); }), 'En metod med plan.skattningar har inga rader i uppföljningen som bara gäller en version i plan.versionsval.'],
+    ['en rad utan text i en version', med((d) => { versioner(d); d.uppfoljning.rader[1].vad = 'I Alfa lyssnar du igen.'; }), 'Uppföljningens rad "Efter" har ingen text i Beta.'],
+    ['ett extra pass med text', med((d) => { versioner(d, { extraPass: { text: pass1 }, tider: { Före: 'i det extra passet' } }); }), null],
+    ['ett extra pass utan text och fore', med((d) => { versioner(d, { extraPass: {} }); }), 'plan.versionsval: Alfa har ett extra pass men varken passets text eller en rad i fore som säger vad som görs i det.'],
+    ['ett extra pass utan delar', med((d) => { versioner(d, { extraPass: { text: 'Bara text.' } }); }), 'plan.versionsval: Alfa, extraPass.text, har ingen rad som "N–M min. Delens namn: …".'],
+    ['en versions tid för en rad som inte finns', med((d) => { versioner(d, { tider: { 'Finns inte': 'vecka 2' } }); }), 'plan.versionsval: Alfa har en tid för "Finns inte", som uppföljningen inte har.'],
+    ['en versions tid som planen inte känner', med((d) => { versioner(d, { tider: { Före: 'obegriplig' } }); }), 'plan.versionsval, Alfa: Uppföljningens rad "Före" har tiden "obegriplig", som planen inte känner.'],
+    ['en versions tid i det extra passet utan extraPass', med((d) => { versioner(d, {}, { tider: { Före: 'i det extra passet' } }); }), 'plan.versionsval: Beta har tiden "i det extra passet" för "Före" men inget extraPass.'],
+    ['en versions veckor som veckosidorna', med((d) => { versioner(d, { veckor: 2 }); }), null],
+    ['en versions veckor som inte är veckosidornas', med((d) => { versioner(d, { veckor: 5 }); d.period = 'Två till sex veckor'; }), 'plan.versionsval: Alfa har 5 veckor, men veckosidorna i ramen går till vecka 2.'],
+    ['utvärderingen efter en rad med tiden efter', med((d) => { d.plan.utvarderasEfter = 'Efter'; }), null],
+    ['utvärderingen efter en rad som inte finns', med((d) => { d.plan.utvarderasEfter = 'Finns inte'; }), 'plan.utvarderasEfter säger "Finns inte", som inte är en rad i uppföljningen med tiden efter.'],
+    ['en stege i veckor', med((d) => { d.plan.stege = true; }), null],
+    ['en stege i en progression utan veckor', med((d) => { d.plan.stege = true; d.progression.enhet = 'När'; }), 'plan.stege gäller en progression i veckor, där gruppen kan börja på en senare vecka.'],
+    ['en skattning på ett blad med formulär', med((d) => { d.uppfoljning.rader.push({ nar: 'Varannan vecka', vad: 'Eleverna fyller i Vår grupp.', tid: 'varannan vecka' }); d.plan.skattningar = [{ namn: 'Vår grupp', vem: 'eleverna', rad: 'Varannan vecka' }]; }), null],
+    ['en skattning på ett blad som inte finns', med((d) => { d.uppfoljning.rader.push({ nar: 'Varannan vecka', vad: 'Du skattar gruppen.', tid: 'varannan vecka' }); d.plan.skattningar = [{ namn: 'Vår klass', vem: 'gruppen', rad: 'Varannan vecka' }]; }), 'plan.skattningar: "Vår klass" är inget blad i metoden.'],
+    ['en skattning av eleverna utan formulär', med((d) => { d.uppfoljning.rader.push({ nar: 'Varannan vecka', vad: 'Eleverna fyller i Vår grupp.', tid: 'varannan vecka' }); d.plan.skattningar = [{ namn: 'Vår grupp', vem: 'eleverna', rad: 'Varannan vecka' }]; delete d.pabordet[0].google; }), 'plan.skattningar: bladet "Vår grupp" fylls i av eleverna och har inget formulär'],
+    ['stöden till en tabell, tidsschemat, en ram och en ruta utan egen rubrik', med((d) => { d.plan.nivaval = { text: 'Välj nivå.', mer: 'Så skiljer sig nivåerna' }; d.plan.langdval = { text: 'Välj längd.', mer: 'Ett pass på 30 minuter' }; d.plan.veckoval = { text: 'Välj veckor.', mer: P.RUTORNAS_RUBRIKER.progression }; d.plan.lektionsval = { text: 'Välj lektion.', mer: 'Veckorna', ingangar: [] }; }), null],
+    ['nivåvalets stöd till en rubrik som inte finns', med((d) => { d.plan.nivaval = { text: 'Välj nivå.', mer: 'Finns inte' }; }), 'plan.nivaval.mer säger "Finns inte", som inte är en tabell, ett avsnitt eller en ram i metoden.'],
+    ['längdvalets stöd till en ruta som metoden inte har', med((d) => { d.plan.langdval = { text: 'Välj längd.', mer: P.RUTORNAS_RUBRIKER.snabbmall }; }), 'plan.langdval.mer säger "Snabbmall", som inte är en tabell, ett avsnitt eller en ram i metoden.'],
+    ['veckovalets stöd till en rubrik som inte finns', med((d) => { d.plan.veckoval = { text: 'Välj veckor.', mer: 'Finns inte' }; }), 'plan.veckoval.mer säger "Finns inte"'],
+    ['lektionsvalets stöd till en rubrik som inte finns', med((d) => { d.plan.lektionsval = { text: 'Välj lektion.', mer: 'Finns inte', ingangar: [] }; }), 'plan.lektionsval.mer säger "Finns inte"'],
+    ['lektionsvalet med två ingångar till samma lektion', med((d) => { d.plan.lektionsval = { text: 'Välj lektion.', mer: 'Veckorna', ingangar: [{ lektion: 1, namn: 'Ny' }, { lektion: 1, namn: 'Van' }] }; }), 'plan.lektionsval har två ingångar till samma lektion.'],
+  ];
+  for (const [namn, d, vantat] of fallen) {
+    const f = P.planensDelarFel(d);
+    if (vantat === null ? f.length : f.length !== 1 || !f[0].includes(vantat)) fel.push(`planensDelarFel, ${namn}: ger ${JSON.stringify(f)}, inte ${vantat === null ? 'inget fel' : `ett fel med "${vantat}"`}`);
+    if (vantat !== null && !P.planFel(d).some((x) => x.includes(vantat))) fel.push(`planFel, ${namn}: kör inte planensDelarFel`);
+  }
+  // Rötterna som spärren och sajtens sidor läser: första ledet, versionens veckosidor, kursens veckor, stödets plats i sidans
+  // ordning, skattningens blad och avsnitten i en metodfil utan schemats standardvärden.
+  if (P.forstaLed('Vecka 1 · Start') !== 'Vecka 1' || P.forstaLed('Vecka 2\nMer') !== 'Vecka 2') fel.push('forstaLed tar inte första ledet före " · " eller radbrytningen');
+  const ram = { delar: [{ rubrik: 'Alfa vecka 1 · Skatten' }, { rubrik: 'Beta vecka 1 · Guiden' }, { rubrik: 'Vecka 2 · Båda' }, { rubrik: 'Vecka 3–4 · Två veckor' }] };
+  const iBeta = P.versionensDelar({ plan: { versionsval: { versioner: [{ namn: 'Alfa' }, { namn: 'Beta' }] } } }, ram, 'Beta');
+  if (iBeta.map((x) => `${x.di}:${x.led}`).join() !== '1:vecka 1,2:Vecka 2,3:Vecka 3–4') fel.push(`versionensDelar ger ${JSON.stringify(iBeta)} i Beta`);
+  const kursen = P.kursensVeckodelar({ ramar: { ramar: [{ rubrik: 'Annat', delar: [{ rubrik: 'Vecka 9' }] }, { lektioner: true, ...ram }] }, plan: { versionsval: { versioner: [{ namn: 'Alfa' }, { namn: 'Beta' }] } } }, 'Alfa');
+  if (JSON.stringify(kursen) !== JSON.stringify({ 1: { ri: 1, di: 0, titel: 'Skatten' }, 2: { ri: 1, di: 2, titel: 'Båda' } })) fel.push(`kursensVeckodelar ger ${JSON.stringify(kursen)}, inte veckorna 1 och 2 i Alfa utan spannet och ramen utan lektioner`);
+  if (P.metodensTabell(bas(), 'Första passet')?.kolumner[0] !== 'Tid' || P.metodensTabell({}, 'Första passet') !== undefined) fel.push('metodensTabell hittar inte tabellen med rubriken, eller tål inte en metod utan tabeller');
+  const samma = { passrutin: { rubrik: 'Rutinen', steg: [] }, tidsschema: { rubrik: 'Passet', rader: [] }, steg: { rubrik: 'Passet', rader: [] }, tabeller: [] };
+  if (JSON.stringify(P.stodetsPlats(samma, 'Passet')) !== '{"slag":"ruta","id":"tidsschema"}' || JSON.stringify(P.stodetsPlats(samma, 'Passet', { pass: true })) !== '{"slag":"ruta","id":"steg"}' || JSON.stringify(P.stodetsPlats({ ...samma, steg: undefined }, ' Passet ', { pass: true })) !== '{"slag":"tidsschema"}') fel.push('stodetsPlats följer inte sidans ordning, med tidsschemat i passrutinen när passet har en översikt');
+  if (JSON.stringify(P.stodetsPlats(bas(), 'Första passet')) !== '{"slag":"tabell","nr":0}' || JSON.stringify(P.stodetsPlats(bas(), 'Veckorna')) !== '{"slag":"ram","nr":0}' || JSON.stringify(P.stodetsPlats(bas(), P.RUTORNAS_RUBRIKER.uppfoljning)) !== '{"slag":"ruta","id":"uppfoljning"}' || P.stodetsPlats(bas(), P.RUTORNAS_RUBRIKER.mal) !== undefined) fel.push('stodetsPlats hittar inte tabellen, ramen och en ruta med schemats rubrik, eller hittar en ruta som metoden inte har');
+  if (P.skattningensBlad(bas(), 'vår grupp')?.nr !== 1 || P.skattningensBlad(bas(), 'Bladet') !== undefined || P.skattningensBlad({}, 'Vår grupp') !== undefined) fel.push('skattningensBlad hittar inte bladet efter "Blad: " utan hänsyn till stor bokstav');
+  const avsnitt = P.metodensAvsnitt({ urval: { rubrik: 'Var hittar du problemen?' }, ramar: { rubrik: 'Problemen', ramar: [] }, tidsschema: { rubrik: 'Passet' } }, { pass: false, stegen: 'Stegen' });
+  if (avsnitt.map((a) => `${a.id}:${a.namn}`).join() !== 'tidsschema:Tidsschema,urval:Hitta problemen,ramar:Problemen' || P.metodensAvsnitt({ ramar: { ramar: [] } }, { pass: false, stegen: '' })[0]?.namn !== P.RUTORNAS_RUBRIKER.ramar) fel.push(`metodensAvsnitt ger ${JSON.stringify(avsnitt)}, eller inte schemats rubrik för en ram utan rubrik`);
+}
+
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och strukturernas och strategiernas regler, slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form, bildtextens gränser, metodkortets nivåer och lathundens sidor svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och strukturernas och strategiernas regler, slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form, bildtextens gränser, metodkortets nivåer, lathundens sidor och planens spärr mot metodens delar svarar rätt.`);

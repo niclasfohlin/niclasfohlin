@@ -228,14 +228,19 @@ export function hanvisningsFel(text: string): string[] {
 // eller en stil hoppas över i sin helhet, eftersom innehållet kan ha tecknet <. Texten läses som den står i HTML: namnen
 // har inga tecken som skrivs om, och "&" i en hänvisning läser standarden också som &amp;.
 const HOPPA = new Set(['a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'th', 'dt', 'caption', 'script', 'style', 'svg', 'title', 'summary', 'label', 'textarea', 'select', 'option', 'noscript', 'code', 'pre', 'template']);
-// Nedladdningsrutan och filernas rubriker är knappar och etiketter, inte text som nämner en sak (K-767).
-const HOPPA_KLASS = /\sclass="[^"]*\b(?:upphov|vav|nedladdning|filrubrik)\b/;
+const HOPPA_KLASS = /\sclass="[^"]*\b(?:upphov|vav)\b/;
+// Där metodens saker inte länkas, fast böckerna och verktygen gör det (K-767; andra ögat 2026-11-14): sidans huvud med
+// undertiteln och ingressen, som är Niclas röst utåt och står utan länkar på metodens kort, nedladdningsrutan och filernas
+// rubriker, boksidans märke, filmens titel, strukturrutans rubrik och navigeringen, som är knappar och etiketter.
+const HOPPA_SAKER_KLASS = /\sclass="[^"]*\b(?:metod-huvud|nedladdning|filrubrik|boksida-knapp|film-titel|struktur-ruta-rubrik)\b/;
 // Ett stycke i en lista, en cell, ett citat eller en ruta får ingen knapp efter sig: knappen hör till metodens löptext.
 const RUTA = new Set(['li', 'td', 'th', 'dd', 'blockquote', 'aside', 'figure']);
 const TOMMA = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
 const attribut = (a: Record<string, string>) => Object.entries(a).map(([k, v]) => ` ${k}="${v.replace(/&/g, '&amp;').replace(/"/g, '&quot;')}"`).join('');
 // Ett stycke skickar läsaren till ett verktyg när det säger "sidan", "sidor" eller "sidorna" före verktygets namn.
 const SIDAN = /\bsid(?:an|or|orna)\b/;
+// En adress som är en fil att öppna, som lektionskortets pdf, och inte en sida.
+const FIL = /\.(?:pdf|docx|pptx|zip)(?:\?|$)/;
 
 /**
  * Lägger länkarna i HTML: böckerna och hänvisningarna till dem (klassen boklank), verktygen (verktygslank, med samma
@@ -249,7 +254,8 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
   const titel = o.titel ?? '';
   let ut = '';
   let hoppa = 0;
-  const stack: { namn: string; hoppar: boolean; id?: string }[] = [];
+  const stack: { namn: string; hoppar: boolean; id?: string; utanSaker?: boolean }[] = [];
+  let utanSaker = 0;
   // Avsnitten som texten står i, efter rubrikernas ankare (en rams ankare står på dess h3), så att en sak inte länkar till
   // sig själv i sitt eget avsnitt.
   const avsnitt: { niva: number; id?: string }[] = [];
@@ -299,18 +305,28 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
     }).join('');
   };
   const medSaker = (t: string) => {
-    if (hoppa || !t.trim() || !sakformer.length) return text(t);
+    if (hoppa || utanSaker || !t.trim() || !sakformer.length) return text(t);
     const lag = t.toLocaleLowerCase('sv');
     if (!sakformer.some((f) => lag.includes(f))) return text(t);
     const egna = new Set([...stack.map((s) => s.id), ...avsnitt.map((a) => a.id)].filter(Boolean).map((x) => `#${x}`));
-    const egen = (s: SidansSak) => { const i = s.adress.indexOf('#'); return i >= 0 && egna.has(s.adress.slice(i)); };
+    // En fil, som lektionskortets pdf, är i sitt eget avsnitt när avsnittet har knappen till samma fil, före texten eller
+    // efter den fram till nästa rubrik: länken och knappen gjorde annars samma sak (andra ögat 2026-11-14).
+    const utanVersion = (a: string) => a.split('?')[0];
+    const filensKnapp = (adress: string) => {
+      const forra = Math.max(...[1, 2, 3, 4, 5, 6].map((n) => ut.lastIndexOf(`<h${n}`)));
+      const nasta = html.slice(fran).search(/<h[1-6][\s>]/);
+      return [...knappar(ut.slice(Math.max(0, forra))), ...knappar(nasta < 0 ? html.slice(fran) : html.slice(fran, fran + nasta))].some((k) => utanVersion(k) === utanVersion(adress));
+    };
+    const egen = (s: SidansSak) => { const i = s.adress.indexOf('#'); return i >= 0 ? egna.has(s.adress.slice(i)) : FIL.test(s.adress) && filensKnapp(s.adress); };
     return sakdelar(t, saker).map((x) => {
       const s = x.sak === undefined ? undefined : saker[x.sak];
-      if (!s || egen(s) || sedda.has(s.adress)) return text(x.text);
+      if (!s || sedda.has(s.adress) || egen(s)) return text(x.text);
       sedda.add(s.adress);
       const stycke = stycken.at(-1);
       if (stycke) stycke.text += x.text;
-      return `<a class="m-sak" href="${s.adress}">${x.text}</a>`;
+      // En fil öppnas i en ny flik och räknas i statistiken, som knappen till den (DRIFT.md under Besöksstatistik).
+      const fil = FIL.test(s.adress) ? attribut({ target: '_blank', rel: 'noopener', 'data-goatcounter-click': `saklank:${utanVersion(s.adress).split('/').pop()}`, 'data-goatcounter-title': `${titel}: ${s.namn}, länk i texten` }) : '';
+      return `<a class="m-sak" href="${s.adress}"${fil}>${x.text}</a>`;
     }).join('');
   };
   while ((m = tagg.exec(html))) {
@@ -331,7 +347,7 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
     if (m[1]) {
       let plats = -1;
       for (let i = stack.length - 1; i >= 0; i--) if (stack[i].namn === namn) { plats = i; break; }
-      if (plats >= 0) { for (const s of stack.splice(plats)) if (s.hoppar) hoppa--; }
+      if (plats >= 0) { for (const s of stack.splice(plats)) { if (s.hoppar) hoppa--; if (s.utanSaker) utanSaker--; } }
       if (namn === 'p' && stycken.length) {
         const s = stycken.pop()!;
         // Verktygen som stycket skickar läsaren till: de som nämns efter "sidan", i ordning, en gång var.
@@ -353,7 +369,9 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
       const id = /\sid="([^"]+)"/.exec(m[3] ?? '')?.[1];
       const rubrik = /^h([1-6])$/.exec(namn);
       if (rubrik) { const niva = Number(rubrik[1]); while (avsnitt.length && avsnitt.at(-1)!.niva >= niva) avsnitt.pop(); avsnitt.push({ niva, id }); if (niva <= 3) sedda = new Set(); }
-      stack.push({ namn, hoppar, id });
+      const utan = namn === 'nav' || HOPPA_SAKER_KLASS.test(m[3] ?? '');
+      stack.push({ namn, hoppar, id, utanSaker: utan });
+      if (utan) utanSaker++;
       if (hoppar) hoppa++;
     }
   }

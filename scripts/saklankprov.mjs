@@ -28,7 +28,7 @@ export function sidansFel(vag, html, finns) {
   const delar = kropp.split(/<h[23][\s>]/);
   delar.forEach((del, i) => {
     const sedda = new Map();
-    for (const [, href, text] of del.matchAll(/<a class="m-sak" href="([^"]+)">([^<]*)<\/a>/g)) {
+    for (const [, href, text] of del.matchAll(/<a class="m-sak" href="([^"]+)"[^>]*>([^<]*)<\/a>/g)) {
       const [adress, ankare] = href.split('#');
       const vagen = adress.replace(/^\//, '').replace(/\?.*$/, '');
       const mal = /\.[a-z0-9]+$/i.test(vagen) ? (existsSync(join(dist, vagen)) ? new Set() : null) : finns(vagen);

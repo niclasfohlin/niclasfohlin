@@ -123,5 +123,6 @@ export function stodmetodensBladkort(id: string, d: MetodData): Bladkort | null 
     if (!existsSync(join(process.cwd(), 'public', 'stodundervisning', m.fil))) throw stodfel(d, `saknar minibilden till ${namn}. Saken behöver en egen fil att skriva ut (src/lib/sakfiler.ts), och node scripts/minibilder.mjs gör bilden.`);
     return { namn, rad, adress: sak.adress, bild: { src: `/stodundervisning/${m.fil}`, bredd: MINIBILDEN.bredd, hojd: MINIBILDEN.hojd } };
   });
-  return { namn: 'Att skriva ut', saker: true, etikett: 'Att skriva ut', alla: { text: 'Allt att skriva ut', adress: d.ramar ? '#ramar' : '#mallar' }, kort };
+  const alla = d.ramar ? '#ramar' : d.mallar.length ? '#mallar' : kort[0].adress;
+  return { namn: 'Att skriva ut', saker: true, etikett: 'Att skriva ut', alla: { text: 'Allt att skriva ut', adress: alla }, kort };
 }

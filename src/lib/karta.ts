@@ -6,13 +6,14 @@
 // läraren ser veckans tal och blad för varje nivå där veckan står. Inga Node-beroenden, så att den också kan köras i
 // webbläsaren, där Word-filen av flera metoder byggs.
 import type { MetodData } from './metod';
+import { forstaLed } from './standard/index.js';
 
 type Tabell = MetodData['tabeller'][number];
 type Lista = { rubrik?: string; rakneblad?: unknown };
 type MetodForKarta = { tabeller: Tabell[]; ramar?: { ramar: { lektioner?: boolean; delar: { rubrik: string }[]; listor?: Lista[] }[] } };
 
-/** Första ledet i en rubrik eller cell: "Vecka 1" ur "Vecka 1 · Hopp på talraden" och ur "Vecka 1\nHopp på talraden". */
-export const forstaLed = (s: string) => s.split(/\n| · /)[0].trim();
+// Första ledet i en rubrik eller cell står i standarden, så att planens spärr läser veckorna som kartan (K-779).
+export { forstaLed };
 export const kartan = (d: { tabeller: Tabell[] }) => d.tabeller.find((t) => t.karta);
 
 /** Delen (veckan) som kartans rad hör till, som index i ramarna och i ramens delar. */

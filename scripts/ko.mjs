@@ -320,7 +320,7 @@ if (kmd === 'klar') {
   bokfor(ko);
   const gren = inneIGit ? grenNu() : '';
   console.log(`${id} är klar.${forcerat.length ? ' FORCERAT förbi ' + forcerat.map((f) => f.split(':')[0]).join(', ') + '; det står kvar i åtgärden.' : ''}`);
-  if (gren) console.log(`Slå ihop och pusha, så bygger Netlify (pushen för sig: kroken prövar kreditspärren på hela kommandot):\n  git log main..${gren} --oneline\n  git switch main && git merge ${gren}\n  git push`);
+  if (gren) console.log(`Slå ihop och pusha, så bygger Netlify, med varje kommando för sig (ARBETSSATT.md under Uppladdning):\n  git log main..${gren} --oneline\n  git switch main\n  git merge --ff-only ${gren}\n  git push origin main`);
   process.exit(0);
 }
 
@@ -405,7 +405,7 @@ if (kmd === 'prov') {
   writeFileSync(join(t, '.gitignore'), 'KO.md\n');
   writeFileSync(join(t, 'validera.status'), '0');
   // Attrappen skriver stämpeln när den går grön, som scripts/validera.mjs.
-  writeFileSync(join(t, 'validera.mjs'), "import { readFileSync } from 'node:fs'; import { skrivStampel } from './scripts/stampel.mjs'; const k = +readFileSync('validera.status','utf8').trim(); if (k === 0) skrivStampel(process.cwd()); process.exit(k);");
+  writeFileSync(join(t, 'validera.mjs'), "import { readFileSync, writeFileSync } from 'node:fs'; import { arbetstradet, skrivStampel } from './scripts/stampel.mjs'; const fore = arbetstradet(process.cwd()).trad; if (process.env.KO_PROV_ANDRA) writeFileSync('andrad.txt', process.env.KO_PROV_ANDRA); const k = +readFileSync('validera.status','utf8').trim(); if (k === 0) skrivStampel(process.cwd(), fore); process.exit(k);");
   writeFileSync(join(t, 'package.json'), '{"name":"ko-prov","type":"module","scripts":{"validera":"node validera.mjs"}}');
   const g = (...a) => spawnSync('git', a, { cwd: t, encoding: 'utf8' });
   g('init', '-q', '-b', 'main'); g('config', 'user.email', 'prov@example.com'); g('config', 'user.name', 'prov');
@@ -457,7 +457,7 @@ if (kmd === 'prov') {
   writeFileSync(join(t, 'validera.status'), '0');
   g('add', '.'); g('commit', '-q', '-m', 'validera grönt');
   r = ko('klar', 'K-003', '--atgard', 'rättade länken i Kalla.astro');
-  ska('klar går igenom när grindarna är gröna och skriver merge-raderna', r.kod === 0 && /\| K-003 \|[^\n]*\| klar \|/.test(reg()) && /git merge ko\/K-003/.test(r.ut), r.ut);
+  ska('klar går igenom när grindarna är gröna och skriver merge-raderna', r.kod === 0 && /\| K-003 \|[^\n]*\| klar \|/.test(reg()) && /git merge --ff-only ko\/K-003/.test(r.ut), r.ut);
   r = ko('klar', 'K-003', '--atgard', 'igen');
   ska('klar på en klar post nekas', r.kod === 1, r.ut);
   // Stämpeln (K-776): en annan post på samma innehåll godtar valideringen som just gick grön, fast en ny körning hade
@@ -481,7 +481,15 @@ if (kmd === 'prov') {
   spawnSync(process.execPath, ['validera.mjs'], { cwd: t });
   r = ko('klar', 'K-006', '--atgard', 'gjorde det på samma gren');
   ska('klar godtar en grön validering av det rena trädet', r.kod === 0 && /körs inte igen/.test(r.ut), r.ut);
+  // En fil som ändras medan valideringen kör ger ingen stämpel (andra ögat 2026-11-14, P1).
+  ko('starta', 'K-004', '--gren', 'ko/K-003');
+  spawnSync(process.execPath, ['validera.mjs'], { cwd: t, env: { ...process.env, KO_PROV_ANDRA: 'ändrad under körningen' } });
+  g('commit', '-q', '-am', 'det som ändrades under valideringen');
+  r = ko('klar', 'K-004', '--atgard', 'gjorde det på samma gren');
+  ska('klar godtar ingen stämpel när en fil ändrades medan valideringen körde', r.kod === 1 && /\[validera\]/.test(r.ut), r.ut);
   rodValidering = false;
+  r = ko('klar', 'K-004', '--atgard', 'gjorde det på samma gren');
+  ska('klar kör valideringen och går igenom när den är grön', r.kod === 0 && !/körs inte igen/.test(r.ut), r.ut);
   r = ko('rattelse', 'K-003', '--text', 'länken var rätt, felet satt i datumet');
   ska('rattelse på en klar post skrivs in', r.kod === 0 && /RÄTTELSE/.test(reg()), r.ut);
   r = ko('rattelse', 'K-001', '--text', 'x');

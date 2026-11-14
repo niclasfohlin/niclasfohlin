@@ -3,44 +3,11 @@
 // funktioner, så att en länk från planen alltid leder till det ankare som sidan har (K-493).
 import type { MetodData } from './metod';
 import { metodensBlad } from './karta';
+import { metodensAvsnitt } from './standard/index.js';
 
-// Urvalsavsnittets rubrik är en fråga ("Var hittar du materialet och talen?"); menyn tar dess kärna ("Materialet och
-// talen"), så att posten säger vad avsnittet gäller och inte krockar med ramarnas "Material per årskurs" (K-034).
-const urvalNamn = (rubrik: string) => {
-  const karna = (rubrik.match(/^Var hittar du (.+?)\??$/i) ?? rubrik.match(/^Var (.+?) finns\??$/i))?.[1] ?? rubrik;
-  return karna.charAt(0).toLocaleUpperCase('sv') + karna.slice(1);
-};
-
-/**
- * Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn. pass: metoden har en passöversikt
- * (passOversikt), stegen: stegens namn (passOrd), lektionsbank: menyns namn på den generella metodens lektionsbank.
- */
-export function metodensAvsnitt(d: MetodData, o: { pass: boolean; stegen: string; lektionsbank?: string }): { id: string; namn: string }[] {
-  return [
-    d.passrutin && { id: 'passrutin', namn: o.pass ? 'Passet' : 'Passrutin' },
-    d.tidsschema && !o.pass && { id: 'tidsschema', namn: 'Tidsschema' },
-    d.steg && { id: 'steg', namn: o.stegen },
-    d.arbetsform && { id: 'arbetsform', namn: 'Arbetsform' },
-    d.exempel && { id: 'exempel', namn: 'Exempel' },
-    d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
-    d.roll && { id: 'roll', namn: 'Lärarens roll' },
-    d.lararensFragor && { id: 'lararens-fragor', namn: d.lararensFragor.rubrik },
-    // Heter urvalets kärna som ramarna ("Var hittar du problemen?" och Problemen) står det som en handling, Hitta problemen,
-    // så att menyn inte har två poster med samma namn (Problemlösning i grupp, 2026-10-10).
-    d.urval && { id: 'urval', namn: d.ramar && urvalNamn(d.urval.rubrik) === d.ramar.rubrik ? `Hitta ${d.ramar.rubrik.toLowerCase()}` : urvalNamn(d.urval.rubrik) },
-    o.lektionsbank && { id: 'lektionsbank', namn: o.lektionsbank },
-    d.hem && { id: 'hem', namn: 'Hem och skola' },
-    d.progression && { id: 'progression', namn: 'Progression' },
-    d.uppfoljning && { id: 'uppfoljning', namn: 'Uppföljning' },
-    d.mal && { id: 'mal', namn: 'Mål' },
-    d.snabbmall && { id: 'snabbmall', namn: 'Snabbmall' },
-    d.checklista && { id: 'checklista', namn: 'Checklista' },
-    d.grund && { id: 'grund', namn: 'Grunden' },
-    d.ramar && { id: 'ramar', namn: d.ramar.rubrik },
-    d.diplom && { id: 'diplom', namn: d.diplom.rubrik },
-    d.mallar.length > 0 && { id: 'mallar', namn: 'Mallar' },
-  ].filter((a): a is { id: string; namn: string } => Boolean(a));
-}
+// Sidnavigationen, de avsnitt som finns i modellens ordning med korta namn, står i standarden (metodensAvsnitt i
+// src/lib/standard/plan.js), så att stödens platser i planen läser samma lista som sidan, också i riggen (K-779).
+export { metodensAvsnitt };
 
 // Stabila ankare för rutorna, de fria tabellerna och ramarna, så att en lektion kan länka till avsnittet i den generella
 // metoden (Ljudlek i grupp, Seriefot och skriptet i [id].astro): rubrikens första led i gemener, som "Ordbanken" #ordbanken

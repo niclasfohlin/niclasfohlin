@@ -85,6 +85,18 @@ export function arSaksord(namn) {
 }
 
 /**
+ * Ett namn som bara är ett huvudord, som Planen och Lapparna: ordet är också ett vanligt ord, så på metodens sida länkas bara
+ * namnet som det står (sajtens K-767; andra ögat 2026-11-14: "viker sitt bästa plan" ledde till mallen Planen).
+ * @param {string} namn
+ */
+export function arBaraHuvudord(namn) {
+  const n = String(namn ?? '').trim();
+  if (/\s/.test(n)) return false;
+  const h = huvudordet(n);
+  return !!h && h.form.length === n.length;
+}
+
+/**
  * Formerna av en saks namn, som metodens rubriker skriver det i bestämd form: "Samtalskortet" ger samtalskortet,
  * samtalskortets och samtalskorten, och "Startmeningarna" ger startmeningen. Första bokstaven får vara stor eller liten.
  * @param {string} namn
@@ -127,7 +139,9 @@ const DELENS_ORD = /(?:^|[^\p{L}])(?:stapeln|staplarna|kolumnen|kolumnerna|spalt
 // En form som söks: hela ord, och första bokstaven stor eller liten om inte saken är en titel, som bara står som den är.
 const formMonster = (f, versal) => (versal ? skydda(f) : `[${skydda(f.charAt(0).toLocaleLowerCase('sv'))}${skydda(f.charAt(0).toLocaleUpperCase('sv'))}]${skydda(f.slice(1))}`);
 // Först i en mening, där varje ord har stor bokstav, är en titel inte säkert en titel ("Inte än har eleverna …").
-const forstIMening = (fore) => /(^|[.!?:]\s*|\n\s*)$/.test(fore);
+// Ett citat som slutar en mening räknas, så att Läsaren i "”Gör det som står.” Läsaren gör" är början på en mening (andra
+// ögat 2026-11-14, K-767).
+const forstIMening = (fore) => /(^|[.!?:][”"»’]?\s*|\n\s*)$/.test(fore);
 
 /**
  * Texten i delar, där en del med sak är ett namn på en av sakerna: den längsta träffen först, och bara hela ord. En titel
