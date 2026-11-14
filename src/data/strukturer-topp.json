@@ -1,28 +1,28 @@
 {
-  "datum": "2026-11-10T16:21:33.691Z",
+  "datum": "2026-11-14T08:44:34.451Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 92,
-      "besok": 47,
-      "utskrifter": 9
+      "antal": 106,
+      "besok": 51,
+      "utskrifter": 11
     },
     {
       "id": "visa",
-      "antal": 53,
-      "besok": 18,
+      "antal": 55,
+      "besok": 20,
       "utskrifter": 7
     },
     {
       "id": "beratta-mera",
-      "antal": 52,
-      "besok": 22,
+      "antal": 53,
+      "besok": 23,
       "utskrifter": 6
     },
     {
       "id": "byt-och-sortera",
-      "antal": 49,
-      "besok": 19,
+      "antal": 50,
+      "besok": 20,
       "utskrifter": 6
     },
     {
@@ -32,21 +32,33 @@
       "utskrifter": 5
     },
     {
+      "id": "epa",
+      "antal": 35,
+      "besok": 10,
+      "utskrifter": 5
+    },
+    {
       "id": "kloka-pennan",
-      "antal": 32,
-      "besok": 22,
+      "antal": 34,
+      "besok": 24,
       "utskrifter": 2
     },
     {
       "id": "ping-pong-prat",
-      "antal": 28,
+      "antal": 33,
       "besok": 13,
+      "utskrifter": 4
+    },
+    {
+      "id": "tva-loser-problem",
+      "antal": 21,
+      "besok": 6,
       "utskrifter": 3
     },
     {
-      "id": "epa",
-      "antal": 18,
-      "besok": 8,
+      "id": "flashcardlek",
+      "antal": 17,
+      "besok": 7,
       "utskrifter": 2
     },
     {
@@ -74,27 +86,39 @@
       "utskrifter": 2
     },
     {
-      "id": "tva-loser-problem",
-      "antal": 15,
-      "besok": 5,
-      "utskrifter": 2
-    },
-    {
       "id": "lasa-och-forklara-i-par",
       "antal": 14,
       "besok": 4,
       "utskrifter": 2
     },
     {
-      "id": "flashcardlek",
-      "antal": 11,
-      "besok": 6,
+      "id": "fraga-fraga-byt",
+      "antal": 13,
+      "besok": 3,
+      "utskrifter": 2
+    },
+    {
+      "id": "kooperativ-fyrfaltare",
+      "antal": 12,
+      "besok": 7,
       "utskrifter": 1
+    },
+    {
+      "id": "ppt-par-pa-tid",
+      "antal": 12,
+      "besok": 2,
+      "utskrifter": 2
     },
     {
       "id": "inspireras",
       "antal": 11,
       "besok": 6,
+      "utskrifter": 1
+    },
+    {
+      "id": "en-for-alla",
+      "antal": 10,
+      "besok": 5,
       "utskrifter": 1
     },
     {
@@ -104,27 +128,21 @@
       "utskrifter": 1
     },
     {
-      "id": "provet-tva-ganger",
+      "id": "karusellen",
       "antal": 10,
       "besok": 5,
       "utskrifter": 1
     },
     {
-      "id": "en-for-alla",
-      "antal": 9,
-      "besok": 4,
-      "utskrifter": 1
-    },
-    {
-      "id": "karusellen",
-      "antal": 9,
-      "besok": 4,
-      "utskrifter": 1
-    },
-    {
       "id": "kims-prov",
-      "antal": 9,
-      "besok": 4,
+      "antal": 10,
+      "besok": 5,
+      "utskrifter": 1
+    },
+    {
+      "id": "provet-tva-ganger",
+      "antal": 10,
+      "besok": 5,
       "utskrifter": 1
     },
     {
@@ -140,7 +158,13 @@
       "utskrifter": 1
     },
     {
-      "id": "fraga-fraga-byt",
+      "id": "brainstorm",
+      "antal": 8,
+      "besok": 3,
+      "utskrifter": 1
+    },
+    {
+      "id": "bygga-en-triangel",
       "antal": 8,
       "besok": 3,
       "utskrifter": 1
@@ -158,13 +182,7 @@
       "utskrifter": 1
     },
     {
-      "id": "brainstorm",
-      "antal": 7,
-      "besok": 2,
-      "utskrifter": 1
-    },
-    {
-      "id": "bygga-en-triangel",
+      "id": "hor-vi-ihop",
       "antal": 7,
       "besok": 2,
       "utskrifter": 1
@@ -176,22 +194,22 @@
       "utskrifter": 1
     },
     {
+      "id": "lika-och-olika",
+      "antal": 7,
+      "besok": 7,
+      "utskrifter": 0
+    },
+    {
       "id": "sekvenser",
       "antal": 7,
       "besok": 2,
       "utskrifter": 1
     },
     {
-      "id": "kooperativ-fyrfaltare",
-      "antal": 6,
-      "besok": 6,
+      "id": "tarningsquiz",
+      "antal": 7,
+      "besok": 7,
       "utskrifter": 0
-    },
-    {
-      "id": "ppt-par-pa-tid",
-      "antal": 6,
-      "besok": 1,
-      "utskrifter": 1
     },
     {
       "id": "samtalspromenad",
@@ -218,13 +236,25 @@
       "utskrifter": 0
     },
     {
-      "id": "lika-och-olika",
+      "id": "pa-rad",
+      "antal": 5,
+      "besok": 5,
+      "utskrifter": 0
+    },
+    {
+      "id": "skicka-ett-problem",
       "antal": 5,
       "besok": 5,
       "utskrifter": 0
     },
     {
       "id": "sortering",
+      "antal": 5,
+      "besok": 0,
+      "utskrifter": 1
+    },
+    {
+      "id": "talkort",
       "antal": 5,
       "besok": 0,
       "utskrifter": 1
@@ -248,19 +278,7 @@
       "utskrifter": 0
     },
     {
-      "id": "pa-rad",
-      "antal": 4,
-      "besok": 4,
-      "utskrifter": 0
-    },
-    {
       "id": "rita-byt-och-skriv",
-      "antal": 4,
-      "besok": 4,
-      "utskrifter": 0
-    },
-    {
-      "id": "skicka-ett-problem",
       "antal": 4,
       "besok": 4,
       "utskrifter": 0
@@ -272,7 +290,7 @@
       "utskrifter": 0
     },
     {
-      "id": "tarningsquiz",
+      "id": "stationssamtal",
       "antal": 4,
       "besok": 4,
       "utskrifter": 0
@@ -302,7 +320,25 @@
       "utskrifter": 0
     },
     {
-      "id": "hor-vi-ihop",
+      "id": "rondellen",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "samtalsbingo",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "vad-undrar-jag",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "epk",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -326,25 +362,7 @@
       "utskrifter": 0
     },
     {
-      "id": "rondellen",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
-      "id": "samtalsbingo",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
       "id": "speed-dating",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
-      "id": "stationssamtal",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -353,12 +371,6 @@
       "id": "trestegsintervju",
       "antal": 2,
       "besok": 2,
-      "utskrifter": 0
-    },
-    {
-      "id": "epk",
-      "antal": 1,
-      "besok": 1,
       "utskrifter": 0
     },
     {
@@ -441,12 +453,6 @@
     },
     {
       "id": "topplistan",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "vad-undrar-jag",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
