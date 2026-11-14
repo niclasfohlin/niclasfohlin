@@ -291,6 +291,10 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
     if (stycke) stycke.text += t;
     return delar.length === 1 && !delar[0].adress && !delar[0].central ? t : html2;
   };
+  // En text som har fått länkar står i ett eget spann, så att den flyter som en text också där den står direkt i en flex- eller
+  // rutnätsbehållare, som stegen i trappan och rutinen (.m-trappa li): där blev länken annars en egen kolumn och raden
+  // bredare än telefonen (Skrivkurs: sagoboken i 320 punkter, K-767).
+  const textnod = (t: string) => { const r = medLankar(t); return r === t ? r : `<span class="lankad">${r}</span>`; };
   // Metodens saker (K-767): ett namn som en sak har leder till saken, som i Planera insatsen och i Metoder, utom i sakens
   // eget avsnitt. Texten mellan sakerna går vidare till hänvisningarna ovan.
   // En länk ut från sajten, [text](https://…), som Material att köpa (K-768, webbdelar i standarden), blir en länk som öppnas
@@ -330,7 +334,7 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
     }).join('');
   };
   while ((m = tagg.exec(html))) {
-    ut += medLankar(html.slice(fran, m.index));
+    ut += textnod(html.slice(fran, m.index));
     ut += m[0];
     fran = tagg.lastIndex;
     const namn = m[2]?.toLowerCase();
@@ -375,5 +379,5 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
       if (hoppar) hoppa++;
     }
   }
-  return ut + medLankar(html.slice(fran));
+  return ut + textnod(html.slice(fran));
 }
