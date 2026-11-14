@@ -4,12 +4,16 @@
 import TaFram from '../../../components/TaFram.astro';
 import { publicerade } from '../../../lib/innehall';
 import { harTaFram, taFramAv } from '../../../lib/tafram';
+import { bankbladenTillProblemen } from '../../../lib/undervisningsmetodfiler';
+import type { Um } from '../../../lib/undervisningsmetod';
 
 export async function getStaticPaths() {
   return (await publicerade('stodundervisning')).filter((m) => harTaFram(m, 'problem')).map((m) => ({ params: { id: m.id }, props: { m } }));
 }
 
 const t = await taFramAv(Astro.props.m);
+// Bladen i Metoder som är problemen i en metods form, som fyrfältarna i Tänkande klassrum (K-761): märket vid problemet.
+const iMetoder = bankbladenTillProblemen((await publicerade('undervisningsmetoder')).map((x) => ({ id: x.id, data: x.data as Um })));
 ---
 
-<TaFram t={t} />
+<TaFram t={t} iMetoder={iMetoder} />

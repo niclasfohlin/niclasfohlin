@@ -4865,6 +4865,33 @@ button.pl-passroll { min-height: 2.75rem; }
   .um-bladkort-saker a.st-kort { flex-direction: column; align-items: stretch; }
   .um-bladkort-saker .st-kort img { width: 100%; border-right: 0; border-bottom: 1px solid var(--farg-kant); }
 }
+/* Bladen i en bank som bildkort (Bankbladkort.astro, K-761): under nivåns skylt kort med problemets bild, titeln och delen
+   av kursplanen, två i bredd i telefonen och fem på datorn, med nivåns färg som en rand överst. */
+.um-bankkort { display: grid; gap: 1.25rem; margin: 1rem 0; }
+.um-bankkort-rubrik { margin: 0 0 0.5rem; }
+.um-bankkort-rubrik .m-niva { font-size: 1rem; }
+.um-bankkort-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+@media (min-width: 48rem) { .um-bankkort-lista { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.um-bankkort-lista > li { display: grid; }
+.um-bankkort-lista a { display: flex; flex-direction: column; text-decoration: none; color: inherit; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-top: 3px solid var(--niva); border-radius: 10px; overflow: hidden; }
+.um-bankkort-lista a:hover .um-bankkort-namn, .um-bankkort-lista a:focus-visible .um-bankkort-namn { text-decoration: underline; }
+.um-bankkort-lista img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; padding: 0.35rem; background: #fff; border-bottom: 1px solid var(--farg-kant); }
+.um-bankkort-namn { font-family: var(--typsnitt-ui); font-weight: 700; padding: 0.45rem 0.6rem 0; }
+.um-bankkort-del { color: var(--farg-text-svag); font-size: 0.85rem; padding: 0.1rem 0.6rem 0.55rem; }
+.um-bankkort-fler { margin: 0.6rem 0 0; font-size: 0.95rem; }
+/* Bladen i en bank i Materialet för klassen (Undervisningsmetod.astro, K-761): nivåns skylt och en rad per blad som fälls ut,
+   med titeln och delen av kursplanen. */
+.um-bankblad-niva { margin: 1.5rem 0 0.4rem; }
+.um-bankblad-niva .m-niva { font-size: 1rem; }
+.um-bankblad-rad summary small { margin-left: 0.6rem; font-weight: 400; font-size: 0.85rem; color: var(--farg-text-svag); }
+.um-bankblad-rad .um-blad-post { margin: 0; padding: 0; border: 0; }
+.um-bankblad-rad .um-blad-post h4 { display: none; }
+/* Bladets egen sida (src/pages/metoder/[id]/[blad].astro): bladet stort, i textens bredd, med knappen under, och lärarens
+   text och vägen till fler problem efter. */
+.um-bankblad .um-bankblad-bild { width: 100%; margin: 1rem 0 0.75rem; }
+.um-bankblad-utskrift { margin-top: 1rem; }
+.um-bankblad-text { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--farg-kant); }
+.um-bankblad-fler { margin: 1.25rem 0 0; font-family: var(--typsnitt-ui); font-weight: 600; }
 .vav-rad { margin: 0; font-size: 0.9rem; color: var(--farg-text-svag); }
 .vav > :last-child { margin-bottom: 0; }
 .vav + .vav { margin-top: -0.6rem; }

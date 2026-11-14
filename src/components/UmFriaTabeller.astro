@@ -9,13 +9,21 @@
 // En tabell med en egen fil, som Grovplaneringen i Testbaserat lärande (metodensTabellfiler, K-684), har knappen under sig,
 // som ett blad: filen är mallen att skriva i, med alla grovplaneringens delar. En central sak som metodens fält centrala
 // sätter efter tabellen har sin knapp här, som i Stödundervisning (FriTabell.astro), som Ta fram en lästext i Reciprok undervisning.
+// En cell med en länk ut från sajten, skriven [text](https://…), som Material att köpa i Tänkande klassrum, har länken (medWebblankar,
+// K-762). En bild som visar idén (riggens standard, avsnitt 4; K-763) står direkt under sin tabell utan egen rubrik, med
+// bildtexten under och textalternativet ur riggens alt (src/data/idebilder.json, som scripts/metoderfiler.mjs skriver), och
+// leder till svg-filen, så att den går att se stor i telefonen, som en bild På bordet i Stödundervisning (Pabordet.astro).
+// En tabell vars rader pekar ut bladen i en bank, som Fyrfältarna i Tänkande klassrum, står som bildkort (Bankbladkort.astro,
+// tabellensBankblad i src/lib/undervisningsmetodfiler.ts, K-761), och tabellen står kvar som den är i riggens Word-fil.
 import MetodTabell from './MetodTabell.astro';
 import Umfilknappar from './Umfilknappar.astro';
-import { friTabellensPlats, slugAv } from '../lib/standard/index.js';
+import { bildtextFel, friTabellensPlats, slugAv } from '../lib/standard/index.js';
 import { friTabellensKlass } from '../lib/metod';
-import type { Um } from '../lib/undervisningsmetod';
+import { medWebblankar, type Um } from '../lib/undervisningsmetod';
+import IDEBILDER from '../data/idebilder.json';
 import type { MetodSak } from '../lib/metodsaker';
-import type { UmFil } from '../lib/undervisningsmetodfiler';
+import { metodensBankblad, tabellensBankblad, type UmFil } from '../lib/undervisningsmetodfiler';
+import Bankbladkort from './Bankbladkort.astro';
 import Vavruta from './Vavruta.astro';
 import Centralrad from './Centralrad.astro';
 import { centralaVid } from '../lib/centrala';
@@ -25,13 +33,27 @@ type Tabell = { plats?: string; rubrik: string; text?: string; kolumner: string[
 interface Props { d: Um; id: string; plats: string; k: (t: string) => string; saker: MetodSak[]; filer?: UmFil[]; vavt?: (Vav & { efter: string })[] }
 const { d, id, plats, k, saker, filer = [], vavt = [] } = Astro.props;
 const cellank = (cell: string) => saker.find((s) => [s.namn, ...(s.former ?? [])].includes(cell.trim()))?.adress;
+const celltext = (t: string) => medWebblankar(t, k);
 const Rubrik = plats === 'bilaga-a' ? 'h3' : 'h4';
+type Idebild = { nr: number; rubrik: string; text: string; alt?: string; efter: string; bredd: number; hojd: number };
+const idebilder = ((IDEBILDER as unknown as Record<string, Idebild[] | undefined>)[id] ?? []);
+// Bildtexten följer regeln för bildtexter, och bygget stannar annars (STIL.md under Bildtexter, bildtextFel i standarden).
+for (const b of idebilder) { const fel = bildtextFel(b); if (fel.length) throw new Error(`${id}: bilden ${b.nr} ("${b.rubrik}") under tabellen: ${fel.join('; ')}.`); }
+const bilderUnder = (t: Tabell) => idebilder.filter((b) => b.efter === `tabell: ${t.rubrik}`);
+// En tabell vars rader pekar ut bladen i en bank, som Fyrfältarna i Tänkande klassrum, står som bildkort (K-761).
+const banken = metodensBankblad(id, d);
 ---
 {((d.tabeller ?? []) as Tabell[]).filter((t) => friTabellensPlats(t, d) === plats).map((t) => (
   <div class="um-fritabell" id={slugAv(t.rubrik)}>
     <Rubrik>{t.rubrik}</Rubrik>
     {t.text && <p set:html={k(t.text)} />}
-    <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} cellank={cellank} celltext={k} />
+    {tabellensBankblad(t.rader, banken) ? <Bankbladkort blad={tabellensBankblad(t.rader, banken)!} id={id} /> : <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friTabellensKlass(t)} radrubrik={false} cellank={cellank} celltext={celltext} />}
+    {bilderUnder(t).map((b) => (
+      <figure class="m-pabordet um-idebild">
+        <a href={`/metoder/${id}-bild-${b.nr}.svg`} class="bild-lank" title="Öppna bilden i full storlek"><img src={`/metoder/${id}-bild-${b.nr}.svg`} alt={`${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.alt ?? ''}`.trim()} width={b.bredd} height={b.hojd} loading="lazy" decoding="async" /></a>
+        <figcaption>{b.text}</figcaption>
+      </figure>
+    ))}
     {t.not && <p class="um-not" set:html={k(t.not)} />}
     <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
     {filer.some((f) => f.namn === t.rubrik) && <Umfilknappar id={id} titel={d.titel} filer={{}} slag={[]} tabeller={filer.filter((f) => f.namn === t.rubrik)} />}

@@ -1,37 +1,42 @@
 {
   "explicit-undervisning": {
-    "kalla": "1fb95862406dd682",
-    "pdf": "d0142ad4b10745da",
-    "datum": "2026-11-09"
+    "kalla": "9d2bc693e10d98be",
+    "pdf": "835248483592b170",
+    "datum": "2026-11-14"
   },
   "kooperativt-larande": {
-    "kalla": "4c66302a1b248d04",
-    "pdf": "a1b7101691a283b1",
-    "datum": "2026-11-09"
+    "kalla": "6e7808a61b29536c",
+    "pdf": "1b9568aed9ebefdf",
+    "datum": "2026-11-14"
   },
   "formativ-bedomning": {
-    "kalla": "5bce260ed08b4664",
-    "pdf": "28c39e0c89584d97",
-    "datum": "2026-11-09"
+    "kalla": "e505886367a44dc7",
+    "pdf": "3a4a2f10bb6330eb",
+    "datum": "2026-11-14"
   },
   "testbaserat-larande": {
-    "kalla": "1528bbcb181e3985",
-    "pdf": "44a1346b72bf868f",
-    "datum": "2026-11-09"
+    "kalla": "1a36d79c1c77080b",
+    "pdf": "2c835b14a079965d",
+    "datum": "2026-11-14"
   },
   "larande-pa-kognitionsvetenskaplig-grund": {
-    "kalla": "966444965c13c042",
-    "pdf": "0a0e46eada82faf4",
-    "datum": "2026-11-09"
+    "kalla": "ed1e4deebef2b44d",
+    "pdf": "05be816bd99ccf64",
+    "datum": "2026-11-14"
   },
   "reciprok-undervisning": {
-    "kalla": "ef1052d2ad4ac5b1",
-    "pdf": "7ff4dd5fef21b951",
-    "datum": "2026-11-09"
+    "kalla": "85009275b7ef2464",
+    "pdf": "3092941f10e03da3",
+    "datum": "2026-11-14"
   },
   "skriva-for-att-lara": {
-    "kalla": "d662613790ad84ad",
-    "pdf": "f25987c2af7e3c4a",
-    "datum": "2026-11-09"
+    "kalla": "6a3f67d6617b51e2",
+    "pdf": "e6a58fee89cf5ade",
+    "datum": "2026-11-14"
+  },
+  "tankande-klassrum": {
+    "kalla": "8efc3b7316d707b0",
+    "pdf": "a98796420a3bb41a",
+    "datum": "2026-11-14"
   }
 }

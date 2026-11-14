@@ -1,0 +1,36 @@
+---
+// Bladen i en bank som bildkort (K-761; Niclas 2026-11-14 om tabellen Fyrfältarna i Tänkande klassrum: "Vet inte om denna
+// lista hjälper läraren särskilt mycket. Behöver ju enkelt kunna läsa och trycka på problemen. Ha dem som små bildkort att
+// trycka på?"). En fri tabell vars rader pekar ut bladen i en bank (tabellensBankblad i src/lib/undervisningsmetodfiler.ts)
+// står som kort under nivåernas skyltar: problemets egen bild ur verktyget, samma som i bladets ruta 4, bladets titel och
+// problemets del av kursplanen. Kortet leder till bladets egen sida, och under varje nivå leder en rad till verktyget på
+// nivån, för fler problem. Formen valdes efter två idéagenter och skisser i telefonbredd (underlag/prov/tankande-klassrum/ide/).
+import { skyltText } from '../lib/nivaer';
+import type { Bankblad } from '../lib/undervisningsmetodfiler';
+interface Props { blad: Bankblad[]; id: string }
+const { blad, id } = Astro.props;
+const nivaer = [...new Set(blad.map((b) => b.niva))];
+---
+<div class="um-bankkort">
+  {nivaer.map((niva) => {
+    const bladen = blad.filter((b) => b.niva === niva);
+    const farg = bladen[0].farg;
+    return (
+      <section class="um-bankkort-niva" style={`--niva:#${farg};--niva-text:#${skyltText(farg)}`} aria-label={niva}>
+        <p class="um-bankkort-rubrik"><span class="m-niva">{niva}</span></p>
+        <ul class="um-bankkort-lista">
+          {bladen.map((b) => (
+            <li>
+              <a href={b.adress} data-goatcounter-click={`bankblad:${id}/${b.slug}`} data-goatcounter-title={`${b.rubrik}, kortet`}>
+                <img src={b.problem.bild.adress} alt="" width={b.problem.bild.bredd} height={b.problem.bild.hojd} loading="lazy" decoding="async" />
+                <span class="um-bankkort-namn">{b.titel}</span>
+                {b.problem.tagg && <span class="um-bankkort-del">{b.problem.tagg}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="um-bankkort-fler"><a href={bladen[0].problem.nivan}>Fler problem på {niva} i {bladen[0].verktyget.namn}</a></p>
+      </section>
+    );
+  })}
+</div>

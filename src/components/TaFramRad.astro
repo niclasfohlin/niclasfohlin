@@ -11,8 +11,12 @@
 // lärarens sida nås därifrån (data-larare). En text i ett tema har sitt nummer i temat (temaNr).
 import type { TaFram, TaFramPost } from '../lib/tafram';
 import { PABORDET_MATT } from '../lib/pabordet';
-interface Props { t: TaFram; p: TaFramPost; rubrik: 'h3' | 'h4' }
-const { t, p, rubrik: Rubrik } = Astro.props;
+// Ett blad i Metoder som är problemet i en metods form, som Fyrfältaren Borden i Tänkande klassrum (K-761; Niclas 2026-11-14:
+// "Integrera den i verktyget problem på något smidigt sätt?"): en länk med bladets namn efter I metoden, till bladets sida,
+// så kort som raden tillåter (scripts/cacheprov.mjs).
+interface Props { t: TaFram; p: TaFramPost; rubrik: 'h3' | 'h4'; iMetoder?: Map<string, { adress: string; slag: string; metod: string }[]> }
+const { t, p, rubrik: Rubrik, iMetoder } = Astro.props;
+const bladen = iMetoder?.get(`${t.adress}#${p.id}`) ?? [];
 // Taggens färg ur designsystemet (klassen tagg-1 till tagg-7 i global.css).
 const taggKlass = (id: string) => `tf-radtagg tagg-${t.taggar.find((x) => x.id === id)?.farg ?? 1}`;
 const taggNamn = (id: string) => t.taggar.find((x) => x.id === id)?.namn ?? id;
@@ -27,6 +31,7 @@ const bild = !t.baraTexter && p.bildFil;
       <button type="button" class="tf-visa" aria-label={`Visa stort: ${p.titel}`}>Visa stort</button>
       {!t.baraTexter && p.losning && <a class="tf-losning" href={p.losning} aria-label={`${t.losningNamn}: ${p.titel}`} data-goatcounter-click={p.sida ? undefined : `${t.led}:${t.metod}:losningsforslag`} data-goatcounter-title={p.sida ? undefined : `${t.titel}: Lösningsförslag i Visa stort`}>{t.losningNamn}</a>}
       {!t.baraTexter && p.sida && <a class="tf-sidlank" href={p.sida} aria-label={`${p.titel} i metoden`}>I metoden</a>}
+      {bladen.map((b) => <a class="tf-sidlank" href={b.adress} aria-label={`${b.slag} ${p.titel}`} data-goatcounter-click={`bankblad:${p.id}`}>{b.slag}</a>)}
       {p.taggIds.length > 0 && <span class="tf-radtaggar">{p.taggIds.map((id) => <span class={taggKlass(id)}>{taggNamn(id)}</span>)}</span>}
     </p>
   </div>

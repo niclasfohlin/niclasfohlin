@@ -12,7 +12,8 @@ import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor,
 import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, lagretI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfalletsAnkare, utfallensElever, utfalletsText, utfallensRegel, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
-import { metodensBlad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
+import { metodensBlad, metodensBankblad, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
+import { skyltText } from '../lib/nivaer';
 import Umfilknappar from './Umfilknappar.astro';
 import UmFriaTabeller from './UmFriaTabeller.astro';
 import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, strukturensAdress, TVA_PA_A4, type ImporteradStruktur } from '../lib/strukturer';
@@ -117,6 +118,8 @@ const urval = ((d.profil as Record<string, any>)?.urval ?? {}) as Record<string,
 const slutsats = (g: string) => urval.slutsatser?.[g] as string | undefined;
 // Bladen i Materialet för klassen, med sina egna pdf:er när metoderfiler.mjs har klippt ut dem.
 const bladen = metodensBlad(id, (d.ramar?.ramar ?? []).map((r: { rubrik: string }) => r.rubrik));
+// Bladen i en bank, som fyrfältarna i Tänkande klassrum (K-761): rader under nivåns skylt i Materialet för klassen.
+const banken = metodensBankblad(id, d);
 // De små korten tidigt på sidan, efter stycket som nämner saken (src/data/bladkort.json).
 const bladkort = metodensBladkort(id, d);
 const bladkortensPlats = bladkortensStycke(id, d);
@@ -585,7 +588,13 @@ const moten = arbetslagetsMoten(d);
           inte läses till texten ovanför i telefonen (design-3 nr 6). Rubriken och texten står i en spalt, som på datorn står
           samlad uppifrån bredvid bilden (lagningen inför lanseringen, D6). Under bladet står bara bladets pdf, och hela
           materialet har sina knappar en gång, efter bladen (A3). */}
-      {(d.ramar.ramar ?? []).map((r: Ram, i: number) => (
+      {/* Ett blad i en bank, som de femton fyrfältarna i Tänkande klassrum (metodensBankblad, K-761), står som en rad som fälls
+          ut under nivåns skylt, med titeln och delen av kursplanen, så att Materialet inte blir trettio skärmar i telefonen.
+          Raden har samma blad, text och knapp som de andra bladen, och sist vägen till fler problem i verktyget. Korten på
+          sidan och bladens egna sidor leder hit med bladets ankare, som sidans skript öppnar. */}
+      {(d.ramar.ramar ?? []).map((r: Ram, i: number) => {
+        const bb = banken.find((x) => x.i === i);
+        const post = (
         <div class={`um-blad-post${bladetsSidor(i).length > 1 ? ' um-blad-sidor' : ''}`} id={bladetsAnkare(r.rubrik)}>
           <div class="um-blad-kropp">
           <h4>{r.rubrik}</h4>
@@ -620,7 +629,22 @@ const moten = arbetslagetsMoten(d);
           })()}
           {bladen[i]?.pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: r.rubrik, pdf: bladen[i].pdf! }} medFilval={ettBladMedSidor} />}
         </div>
-      ))}
+        );
+        if (!bb) return post;
+        const forst = banken.find((x) => x.niva === bb.niva) === bb;
+        return (
+          <>
+            {forst && <p class="um-bankblad-niva" style={`--niva:#${bb.farg};--niva-text:#${skyltText(bb.farg)}`}><span class="m-niva">{bb.niva}</span></p>}
+            <details class="um-rad um-bankblad-rad" style={`--niva:#${bb.farg}`}>
+              <summary><span>{bb.titel}{bb.problem.tagg && <small>{bb.problem.tagg}</small>}</span></summary>
+              <div class="um-rad-inne">
+                {post}
+                <p class="um-bankblad-fler"><a href={bb.problem.fler}>Fler problem{bb.problem.tagg ? ` i ${bb.problem.tagg}` : ''} på {bb.niva} i {bb.verktyget.namn}</a></p>
+              </div>
+            </details>
+          </>
+        );
+      })}
       {!ettBladMedSidor && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} />}
     </section>
   )}

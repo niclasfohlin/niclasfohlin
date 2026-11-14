@@ -7,9 +7,10 @@ import { join } from 'node:path';
 import { liten, slugAv } from './standard/index.js';
 import { UM_NAMN, UM_SLAG, umRad, umStam, type Um, type UmSlag } from './undervisningsmetod';
 import { parse } from 'yaml';
-import { bankAv, enhetAdress } from './bank';
+import { bankAv, enhetAdress, nivaFarger } from './bank';
 import { metodensCentrala } from './centrala';
 import { medTemana } from './faktatemaihop.js';
+import { matteproblemen, type Matteproblem } from './matteproblem';
 
 const bankerna = new Map<string, ReturnType<typeof bankAv>>();
 /** Banken i en metod i Stödundervisning, med databasens teman som textsidorna (medDatabasen), läst direkt ur filerna eftersom
@@ -42,6 +43,107 @@ function bankensTexter(d: Um): { namn: string; former: string[]; adress: string 
       if (former.length || iCell) ut.push({ namn: titel, former: [...former, ...(titel.includes(' ') ? [titel] : [])], adress: enhetAdress(c.metod, e) });
     }
   }
+  // Ett problem som metoden pekar ut med metodens eller verktygets namn, nivån och numret, som ”Problemlösning i grupp, Bas,
+  // problem 1” och ”Ta fram ett matteproblem, Medel, problem 14” (Tänkande klassrum 2026-11-14, K-761): problemets sida i
+  // metoden, eller problemet i verktyget när det bara står där.
+  const v = metodensProblemverktyg(d);
+  for (const p of v?.alla ?? []) {
+    const iMetoden = `${v!.titel}, ${p.niva}, ${p.l.vad}`;
+    if (p.enhet && text.includes(iMetoden)) ut.push({ namn: iMetoden, former: [iMetoden], adress: enhetAdress(v!.c.metod!, p.enhet) });
+    const iVerktyget = `${v!.c.namn}, ${p.niva}, ${p.l.vad}`;
+    if (text.includes(iVerktyget)) ut.push({ namn: iVerktyget, former: [iVerktyget], adress: `${v!.c.adress}#${p.id}` });
+  }
+  return ut;
+}
+
+type Problemen = { alla: Matteproblem[]; nivaer: { namn: string; farg: string }[]; titel: string };
+const problemen = new Map<string, Problemen | null>();
+/** Problemen i ett verktyg som metoden visar med fältet centrala, när verktygets bank är problem, som Ta fram ett
+ *  matteproblem: metodens bank och databasens poster i src/content/matteproblem/, läst direkt ur filerna som bankens
+ *  texter, med nivåerna och deras färger och metodens titel. */
+function verktygetsProblem(metod: string): Problemen | null {
+  if (!problemen.has(metod)) {
+    const fil = join(process.cwd(), 'src', 'content', 'stodundervisning', `${metod}.yaml`);
+    const data = existsSync(fil) ? parse(readFileSync(fil, 'utf8')) : null;
+    const bank = data ? bankAv(data) : null;
+    const mapp = join(process.cwd(), 'src', 'content', 'matteproblem');
+    const databas = existsSync(mapp) ? readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => ({ id: f.replace(/\.yaml$/, ''), data: parse(readFileSync(join(mapp, f), 'utf8')) })) : [];
+    // Nivåernas färger som på bankens sidor (nivaFarger i src/lib/bank.ts), utan #, som nivåskylten tar dem (src/lib/nivaer.ts).
+    const farger = bank ? nivaFarger(data, bank) : {};
+    problemen.set(metod, bank?.ord.slug === 'problem' ? { alla: matteproblemen({ id: metod, data }, databas), nivaer: bank.nivaer.map((n) => ({ namn: n.namn, farg: farger[n.namn].replace(/^#/, '').toUpperCase() })), titel: data.titel } : null);
+  }
+  return problemen.get(metod)!;
+}
+/** Verktyget som metoden visar och vars bank är problem, med dess problem. */
+function metodensProblemverktyg(d: Um) {
+  for (const c of metodensCentrala(d)) {
+    const p = c.metod ? verktygetsProblem(c.metod) : null;
+    if (p) return { c, ...p };
+  }
+  return null;
+}
+
+/**
+ * Bladen i en bank (K-761; Niclas 2026-11-14 om Tänkande klassrums femton fyrfältare: "Behöver ju enkelt kunna läsa och
+ * trycka på problemen. Ha dem som små bildkort att trycka på? Integrera den i verktyget problem på något smidigt sätt?"):
+ * blad i Materialet för klassen som heter "<blad>, <nivå>, <titel>", där nivån och titeln är ett problem i verktyget som
+ * metoden visar med fältet centrala, som "Fyrfältaren, Medel, Borden" och problemet Borden på Medel i Ta fram ett
+ * matteproblem. Bladet är problemet i metodens form, och minst två med samma namn före nivån är en bank. Varje blad har en
+ * egen sida, /metoder/<id>/<nivå>-<titel> (src/pages/metoder/[id]/[blad].astro), som korten leder till, och problemet i
+ * verktyget leder tillbaka. Allt läses ur metodens namn och verktygets problem, så att nästa metod med en sådan bank får
+ * samma sida.
+ */
+export interface Bankblad {
+  /** Bladets plats bland ramarna i Materialet för klassen. */
+  i: number;
+  rubrik: string; slag: string; niva: string; titel: string; farg: string;
+  /** Sidans led och adress. */
+  slug: string; adress: string;
+  problem: { id: string; tagg: string; bild: { adress: string; bredd: number; hojd: number }; enhet?: string; verktyg: string; fler: string; nivan: string };
+  /** Verktyget som problemet står i, med namnet och adressen ur registret (src/data/centrala.json). */
+  verktyget: { namn: string; adress: string };
+}
+export function metodensBankblad(id: string, d: Um): Bankblad[] {
+  const v = metodensProblemverktyg(d);
+  if (!v) return [];
+  const nivaerna = v.nivaer.map((n) => n.namn);
+  const alla = ((d.ramar?.ramar ?? []) as { rubrik: string }[]).flatMap((r, i) => {
+    const led = r.rubrik.split(', ');
+    if (led.length < 3 || !nivaerna.includes(led[1])) return [];
+    const titel = led.slice(2).join(', ');
+    const p = v.alla.find((x) => x.niva === led[1] && x.titel === titel);
+    if (!p) return [];
+    const slug = `${slugAv(led[1])}-${slugAv(titel)}`;
+    return [{
+      i, rubrik: r.rubrik, slag: led[0], niva: led[1], titel, farg: v.nivaer.find((n) => n.namn === led[1])!.farg,
+      slug, adress: `/metoder/${id}/${slug}`, verktyget: { namn: v.c.namn, adress: v.c.adress },
+      problem: { id: p.id, tagg: p.tagg, bild: { adress: p.bild.adress, bredd: p.bild.matt.bredd, hojd: p.bild.matt.hojd }, enhet: p.enhet && v.c.metod ? enhetAdress(v.c.metod, p.enhet) : undefined, verktyg: `${v.c.adress}#${p.id}`, nivan: `${v.c.adress}#${slugAv(p.niva)}`, fler: `${v.c.adress}#${slugAv(p.niva)}${p.tagg ? `/${slugAv(p.tagg)}` : ''}` },
+    }];
+  });
+  // En bank är minst två blad med samma namn före nivån; ett ensamt blad med en problemtitel är inget.
+  const banken = alla.filter((b) => alla.filter((x) => x.slag === b.slag).length >= 2);
+  const slugs = new Set<string>();
+  for (const b of banken) {
+    if (slugs.has(b.slug) || ['lar-dig', 'lathund'].includes(b.slug)) throw new Error(`${d.titel}: bladet ${b.rubrik} får adressen /metoder/${id}/${b.slug}, som en annan sida redan har.`);
+    slugs.add(b.slug);
+  }
+  return banken;
+}
+/**
+ * Bladen som en fri tabell pekar ut, rad för rad, när varje rad har en cell med ett blads nivå och en med dess titel, som
+ * tabellen Fyrfältarna i Tänkande klassrum (Bas, Äpplena, Taluppfattning, ordet). Sidan visar då tabellen som bildkort i
+ * nivåernas ordning (Bankbladkort.astro), och tabellen står kvar som den är i riggens Word-fil. Annars null.
+ */
+export function tabellensBankblad(rader: string[][], banken: Bankblad[]): Bankblad[] | null {
+  if (!rader.length || banken.length < 2) return null;
+  const bladen = rader.map((r) => banken.find((b) => r.includes(b.niva) && r.includes(b.titel)));
+  return bladen.every(Boolean) && new Set(bladen).size === bladen.length ? (bladen as Bankblad[]) : null;
+}
+/** Bladen i banken som leder till ett problem i verktyget, för länken vid problemet (TaFramRad.astro): problemets adress i
+ *  verktyget, som /stodundervisning/problemlosning-i-grupp/problem#medel-2, och bladets sida, namn och metod. */
+export function bankbladenTillProblemen(metoder: { id: string; data: Um }[]): Map<string, { adress: string; slag: string; metod: string }[]> {
+  const ut = new Map<string, { adress: string; slag: string; metod: string }[]>();
+  for (const m of metoder) for (const b of metodensBankblad(m.id, m.data)) ut.set(b.problem.verktyg, [...(ut.get(b.problem.verktyg) ?? []), { adress: b.adress, slag: b.slag, metod: m.data.titel }]);
   return ut;
 }
 
@@ -109,6 +211,8 @@ export function metodensTabellfiler(id: string, rubriker: string[]): UmFil[] {
  */
 export const sakernasFiler = (id: string, d: Um) => ({
   banktexter: bankensTexter(d),
+  // Ett blad i en bank heter också utan nivån, som texten skriver det: ”Fyrfältaren Borden” för Fyrfältaren, Medel, Borden.
+  bankblad: metodensBankblad(id, d).map((b) => ({ rubrik: b.rubrik, form: `${b.slag} ${b.titel}` })),
   lektionskort: !!metodensFiler(id).lektionskort,
   tabeller: metodensTabellfiler(id, ((d.tabeller ?? []) as { rubrik: string }[]).map((t) => t.rubrik)).map((f) => f.namn),
 });

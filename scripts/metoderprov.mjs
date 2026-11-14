@@ -856,6 +856,9 @@ try {
             k.knappen = [...del.querySelectorAll('a.knapp, a.sekundar, .knapp a')].filter((x) => (x.getAttribute('href') ?? '').split('?')[0] === fil).map((x) => [x.textContent.trim(), Math.round(x.getBoundingClientRect().top - mal.getBoundingClientRect().top)]).find(([, avstand]) => avstand >= 0 && avstand <= 3 * innerHeight) ?? null;
             k.iBilagan = del.contains(mal);
             k.bilder = mal.querySelectorAll('img').length;
+            // En tabell vars rader pekar ut bladen i en bank, som Fyrfältarna i Tänkande klassrum (K-761), står som bildkort, och
+            // varje kort leder till bladets egen sida, där knappen som skriver ut bladet står.
+            k.bankkort = [...mal.querySelectorAll('.um-bankkort-lista a')].map((x) => x.getAttribute('href'));
           }
           ut.kort.push(k);
         }
@@ -880,12 +883,16 @@ try {
       for (const [i, k] of r.kort.entries()) {
         if (k.href !== hemmen[i]?.ankare) fel.push(`/metoder/${id}: det lilla kortet ${k.namn} leder till ${k.href} och ska leda till ${hemmen[i]?.ankare}`);
         if (!k.finns) { fel.push(`/metoder/${id}: det lilla kortet ${k.namn} leder till ${k.href}, som sidan inte har`); continue; }
-        if (!k.iBilagan) fel.push(`/metoder/${id}: det lilla kortet ${k.namn} leder till ${k.href}, som inte står i bilagan Att skriva ut`);
+        const bank = (k.bankkort ?? []).length > 0;
+        if (bank) {
+          const tabell = (d.tabeller ?? []).find((t) => `#${slugAv(t.rubrik)}` === k.href);
+          if (k.bankkort.length !== (tabell?.rader.length ?? -1)) fel.push(`/metoder/${id}: det lilla kortet ${k.namn} leder till ${k.bankkort.length} bildkort, och tabellen har ${tabell?.rader.length ?? 0} rader`);
+        } else if (!k.iBilagan) fel.push(`/metoder/${id}: det lilla kortet ${k.namn} leder till ${k.href}, som inte står i bilagan Att skriva ut`);
         if (!k.rad) fel.push(`/metoder/${id}: det lilla kortet ${k.namn} saknar raden`);
         if (k.bild !== `/metoder/${minibilder[i]?.fil}`) fel.push(`/metoder/${id}: det lilla kortet ${k.namn} har bilden ${k.bild} och ska ha /metoder/${minibilder[i]?.fil}`);
         if (k.bredd !== MINIBILDEN.bredd) fel.push(`/metoder/${id}: minibilden till ${k.namn} är ${k.bredd} punkter bred och ska vara ${MINIBILDEN.bredd}`);
         if (Math.abs(k.landar) > r.skarm) fel.push(`/metoder/${id}: ett tryck på det lilla kortet ${k.namn} landar ${k.landar} punkter från saken`);
-        if (!k.knappen) fel.push(`/metoder/${id}: vid ${k.namn} saknas knappen som skriver ut ${hemmen[i]?.fil}`);
+        if (!k.knappen && !bank) fel.push(`/metoder/${id}: vid ${k.namn} saknas knappen som skriver ut ${hemmen[i]?.fil}`);
       }
       if (p.blad) {
         if (r.kort[0]?.bilder < p.framsidor.length * 2) fel.push(`/metoder/${id}: bladet visar ${r.kort[0]?.bilder} sidor`);
@@ -901,6 +908,33 @@ try {
           if (pa.indexOf(ren(x[0])) <= fore) fel.push(`/metoder/${id}: sidan ${sida} i materialet har inte kortet ${x[0]} som kort ${del + 1} uppifrån: ${pa.slice(0, 80)}`);
         });
       }
+    }
+  }
+  // Bladen i en bank som bildkort (K-761): varje kort på metodens sida leder till bladets egen sida, som finns, har bladets
+  // rubrik, knappen som skriver ut bladets pdf, och förra och nästa på samma nivå. Och raden i Materialet för klassen har
+  // samma blad. Prövat åt andra hållet: ett kort till en sida som inte finns och en sida utan knappen stoppar provet.
+  {
+    const kortensFel = (html, id, dist) => {
+      const ut = [];
+      const kort = [...html.matchAll(/<ul class="um-bankkort-lista">([\s\S]*?)<\/ul>/g)].flatMap((m) => [...m[1].matchAll(/<a href="([^"]+)"/g)].map((x) => x[1]));
+      for (const href of kort) {
+        const fil = join(dist, ...href.split('?')[0].split('/').filter(Boolean), 'index.html');
+        if (!existsSync(fil)) { ut.push(`/metoder/${id}: bildkortet leder till ${href}, som inte finns`); continue; }
+        const sidan = readFileSync(fil, 'utf8');
+        const slug = href.split('/').pop();
+        if (!new RegExp(`href="/metoder/${id}-blad-[a-z0-9-]*${slug.replace(/^[a-z]+-/, '')}\.pdf[^"]*"[^>]*data-skriv-ut-pdf`).test(sidan)) ut.push(`/metoder/${id}: sidan ${href} saknar knappen som skriver ut bladet`);
+        if (!html.includes(`id="blad-${sidan.match(new RegExp(`data-goatcounter-click="utskrift:${id}-blad-([a-z0-9-]+)"`))?.[1] ?? 'saknas'}"`)) ut.push(`/metoder/${id}: bladet på ${href} står inte som rad i Materialet för klassen`);
+      }
+      return { kort, ut };
+    };
+    // Provet åt andra hållet, på en härmad sida: ett kort till en sida som saknas.
+    if (!kortensFel('<ul class="um-bankkort-lista"><li><a href="/metoder/x/medel-finns-inte">X</a></li></ul>', 'x', dist).ut.some((f) => f.includes('som inte finns'))) fel.push('metoderprov: provet av bildkorten ser inte ett kort till en sida som saknas');
+    for (const f of readdirSync(join(dist, 'metoder')).filter((x) => existsSync(join(dist, 'metoder', x, 'index.html')))) {
+      const html = readFileSync(join(dist, 'metoder', f, 'index.html'), 'utf8');
+      if (!html.includes('um-bankkort-lista')) continue;
+      const { kort, ut } = kortensFel(html, f, dist);
+      fel.push(...ut);
+      if (!kort.length) fel.push(`/metoder/${f}: bildkorten har inga länkar`);
     }
   }
   // Lär dig metoden som den ritas i webbläsaren (K-734; Codex kodgranskning 2026-11-08, andra omgången, fynd 7: strängar i koden

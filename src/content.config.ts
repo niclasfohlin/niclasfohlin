@@ -1120,9 +1120,11 @@ const faktateman = defineCollection({
 // resten. Det blir strikt som Stödundervisnings när mallen och piloten har samma fält (K-627).
 const omradetsVarde = z.union([
   z.strictObject({ tillforlitlighet: z.enum(['hog', 'mattlig', 'lag']), effekt: z.enum(['negativ', 'ingen', 'liten', 'mattlig', 'stor']), motivering: text.max(250), kallor: z.array(z.string()).min(1), kort: text.max(80).optional() }),
-  z.strictObject({ niva: z.enum(['inte-studerat', 'inte-sammanvagt']), motivering: text.max(250) }),
+  // kort är kommentaren under Lärande totalt på bankens kort, som standarden kräver i varje läge (undervisningsmetodensFel),
+  // också när Lärande totalt är Inte sammanvägt, som i Tänkande klassrum (2026-11-14, den första med det läget).
+  z.strictObject({ niva: z.enum(['inte-studerat', 'inte-sammanvagt']), motivering: text.max(250), kort: text.max(80).optional() }),
   // Anekdotiskt stöd, nivå 1: ingen studie med jämförelsegrupp, men källor som pekar mot en effekt (K-641).
-  z.strictObject({ niva: z.literal('anekdotiskt'), motivering: text.max(250), kallor: z.array(z.string()).min(1) }),
+  z.strictObject({ niva: z.literal('anekdotiskt'), motivering: text.max(250), kallor: z.array(z.string()).min(1), kort: text.max(80).optional() }),
 ]);
 const undervisningsmetoder = defineCollection({
   loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/undervisningsmetoder' }),

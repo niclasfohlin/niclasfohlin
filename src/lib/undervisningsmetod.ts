@@ -62,7 +62,7 @@ export const METODKORTET = 'Metodkortet';
  * sida kan länka hit. Utan lektionskortets fil, när kortet väntar på Niclas ja (VANTAR i scripts/metoderfiler.mjs), är
  * kortet ingen sak, så att ingen länk leder till en knapp som inte finns.
  */
-export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; tabeller?: string[]; strukturer?: { id: string; namn: string }[]; banktexter?: { namn: string; former: string[]; adress: string }[] } = {}): MetodSak[] {
+export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?: boolean; tabeller?: string[]; strukturer?: { id: string; namn: string }[]; banktexter?: { namn: string; former: string[]; adress: string }[]; bankblad?: { rubrik: string; form: string }[] } = {}): MetodSak[] {
   const sida = metodensAdress(id);
   // Ett namn som är ett ord för en sak (Planeringsmallen, Affischen Så visar du) hittas också med liten bokstav; ett annat,
   // som Stegen, bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden), så att "skriv stegen" inte
@@ -84,10 +84,14 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
     saker.push(sak(d.ramar.rubrik ?? UM_NAMN.materialet, `${sida}#materialet-for-klassen`));
     // Ett blad vars rubrik har en etikett före kolon, som "Strukturen, vecka 1: Ping-pong-prat", hittas också med namnet
     // efter kolon, som texten skriver det (G6).
+    // Ett blad i en bank (metodensBankblad i src/lib/undervisningsmetodfiler.ts) hittas också utan nivån, ”Fyrfältaren Borden”
+    // för Fyrfältaren, Medel, Borden, som Tänkande klassrums text skriver det (K-761).
     for (const r of d.ramar.ramar ?? []) {
       const s = sak(r.rubrik, `${sida}#${bladetsAnkare(r.rubrik)}`);
       const efterKolon = /^[^:]+:\s+(\S.*)$/.exec(r.rubrik)?.[1];
-      saker.push(efterKolon ? { ...s, former: [...sakensFormer(r.rubrik), efterKolon] } : s);
+      const iBanken = o.bankblad?.find((b) => b.rubrik === r.rubrik)?.form;
+      const fler = [efterKolon, iBanken].filter((x): x is string => !!x);
+      saker.push(fler.length ? { ...s, former: [...sakensFormer(r.rubrik), ...fler] } : s);
     }
   }
   // Bankens texter som metoden pekar ut, ur verktyg som metoden visar med fältet centrala (sakernasFiler): titeln med numret,
@@ -148,6 +152,28 @@ export const bladetsAnkare = (namn: string) => `blad-${slugAv(namn)}`;
 export function medSaker(text: string, saker: MetodSak[], kallor: Set<string>, sidor: { titel: string; href: string }[] = []): string {
   return sakernasText(String(text ?? ''), saker, (s, t) => `<a href="${esc(s.adress)}" class="um-sak">${esc(t)}</a>`, (t) => medKallor(t, kallor, sidor));
 }
+/** En länk ut från sajten i en cell, skriven [text](https://…), som riggens Word-fil ritar som länk (Material att köpa i
+ *  Tänkande klassrum, riggens leverans 2026-11-14, K-762). Samma skrivsätt som litteraturlistan i Stödundervisning. */
+const WEBBLANK = /\[([^\]\n]+)\]\((https?:\/\/[^)\s]+)\)/g;
+/**
+ * En text med länkar ut från sajten som HTML: varje [text](https://…) blir en länk som öppnas i en ny flik, och texten runt
+ * länkarna går genom text, som medSaker, så att metodens saker och källorna är länkar som förut. Utan länkar är svaret
+ * text(t), så att en cell utan länk ritas som förut.
+ */
+export function medWebblankar(t: string, text: (t: string) => string): string {
+  const s = String(t ?? '');
+  let ut = '';
+  let forra = 0;
+  for (const m of s.matchAll(WEBBLANK)) {
+    if (m.index > forra) ut += text(s.slice(forra, m.index));
+    ut += `<a href="${esc(m[2])}" class="um-webblank" target="_blank" rel="noopener">${esc(m[1])}</a>`;
+    forra = m.index + m[0].length;
+  }
+  return forra === 0 ? text(s) : ut + (forra < s.length ? text(s.slice(forra)) : '');
+}
+/** Texten som läsaren ser den, med länkarnas text och utan deras adresser: "Magic-Chart whiteboardfilm, Lär & Lek". */
+export const utanWebblankar = (t: string) => String(t ?? '').replace(WEBBLANK, '$1');
+
 /**
  * Ett utfalls text som HTML: metodens saker som länkar, som i medSaker, och talen för klassens storlek i resten (utfallensTal),
  * så att "Skriv frågan i grovplaneringen" leder till grovplaneringen (granskningen av Testbaserat lärande 2026-11-02).

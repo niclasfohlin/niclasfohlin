@@ -34,6 +34,10 @@ const kontrollera = process.argv.includes('--kontrollera');
 // Materialets sidor per blad, när ett blad har flera sidor i ett material med flera blad (src/data/materialets-sidor.json).
 const SIDORNA = join(ROT, 'src', 'data', 'materialets-sidor.json');
 const materialetsSidor = existsSync(SIDORNA) ? JSON.parse(readFileSync(SIDORNA, 'utf8')) : {};
+// Bilderna som visar idén, under en tabell på metodens sida (src/data/idebilder.json, K-763).
+const IDEBILDERNA = join(ROT, 'src', 'data', 'idebilder.json');
+const idebilder = existsSync(IDEBILDERNA) ? JSON.parse(readFileSync(IDEBILDERNA, 'utf8')) : {};
+const idebildernasFil = () => `${JSON.stringify({ _om: 'Bilderna som visar idén i Metoder (riggens standard, avsnitt 4, Bilder som visar idén; K-763): högst två per metod, var och en direkt under sin tabell på metodens sida (UmFriaTabeller.astro), utan egen rubrik, med text som bildtext och alt som textalternativ. Skrivs av scripts/metoderfiler.mjs ur riggens out/<id>/pabordet.json, och bilden är public/metoder/<id>-bild-<nr>.svg.', ...Object.fromEntries(Object.keys(idebilder).filter((k) => k !== '_om').sort().map((k) => [k, idebilder[k]])) }, null, 2)}\n`;
 const XML = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
 /** Ett attributvärde ur Word-filens XML som text: de fem namngivna tecknen och tecken med nummer, som &#197; för Å. */
 const avkodaXml = (t) => t.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (hela, k) => (k[0] === '#' ? String.fromCodePoint(k[1] === 'x' || k[1] === 'X' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : XML[k] ?? hela));
@@ -51,6 +55,20 @@ function sidornaPerBlad(namnen, bladen) {
   const sidor = bladen.map((r) => bladet.flatMap((b, i) => (b === r ? [i] : [])));
   const iOrdning = sidor.every((x, i) => x.length && x.at(-1) - x[0] === x.length - 1 && (!i || x[0] === sidor[i - 1].at(-1) + 1));
   return iOrdning ? sidor : null;
+}
+/**
+ * Bladens första sida i materialets pdf, räknad från 1, när bildernas namn säger vilket blad varje sida hör till. Bladens sidor
+ * står sist, en bild per sida. Före dem står textsidorna, med materialets rubrik överst på den första, och de kan vara flera:
+ * Tänkande klassrum har sju sidor med lärarens text om varje fyrfältare före de arton bladen (2026-11-14). Utan textsida är
+ * varje sida ett blad. Svaret är 0 när sidorna och bilderna inte går ihop.
+ */
+function forstaBladetsSida(antalSidor, antalBilder, harTextsida) {
+  if (!antalBilder || antalBilder > antalSidor) return 0;
+  if (!harTextsida) return antalBilder === antalSidor ? 1 : 0;
+  return antalBilder < antalSidor ? antalSidor - antalBilder + 1 : 0;
+}
+for (const [sidor, bilder, text, vantat] of [[25, 18, true, 8], [10, 9, true, 2], [9, 9, false, 1], [10, 9, false, 0], [9, 9, true, 0], [5, 0, true, 0], [5, 6, true, 0]]) {
+  if (forstaBladetsSida(sidor, bilder, text) !== vantat) { console.error(`metoderfiler: provet av forstaBladetsSida gav fel svar på ${sidor} sidor och ${bilder} bilder`); process.exit(1); }
 }
 // Provet åt båda hållen, innan något tas in: kopplingen, de långa rubrikerna och tecknen.
 for (const [namnen, bladen, vantat] of [
@@ -193,10 +211,10 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
     else if (bladen.length === 1 && fore > 0) { forstaBladet = textsida(s[0]) ? 2 : 1; sistaSidan = s.length - 1; }
     else {
       const docx = join(UT, `${stam('materialet')}.docx`);
-      const forsta = textsida(s[0]) ? 2 : 1;
       const namnen = existsSync(docx) ? await bildnamnen(docx) : [];
+      const forsta = forstaBladetsSida(s.length - 1, namnen.length, textsida(s[0]));
       // Varje sida hör till ett blad, varje blad har sidor, och sidorna står i bladens ordning utan glapp (sidornaPerBlad).
-      const sidor = namnen.length === s.length - forsta ? sidornaPerBlad(namnen, bladen) : null;
+      const sidor = forsta ? sidornaPerBlad(namnen, bladen) : null;
       if (sidor) {
         forstaBladet = forsta;
         delarna = bladen.map((r, i) => ({ blad: r, fran: forsta + sidor[i][0], till: forsta + sidor[i].at(-1), bilder: sidor[i].map((x) => x + 1) }));
@@ -290,6 +308,28 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
       if (!lasEndast) copyFileSync(k, join(UT, `${id}-${namn}${ext}.svg`));
     }
   }
+  // Bilderna som visar idén (riggens standard, avsnitt 4, Bilder som visar idén; Niclas 2026-11-14: "Blir som
+  // konceptförståelse. Blir inte upprepning av tabellen men att förstå visuellt det man gör.", K-763): bilderna i riggens
+  // pabordet.json som står efter en tabell, efter: "tabell: <rubrik>", som i Stödundervisning. Sidan ritar dem under tabellen
+  // (UmFriaTabeller.astro) som <id>-bild-<nr>.svg, med bildtexten och textalternativet ur src/data/idebilder.json, som
+  // skriptet skriver. Word-filerna har dem redan. Bladen i samma fil är materialets sidor ovan. En metod har högst två.
+  if (!lasEndast) {
+    const paBordet = join(ut, 'pabordet.json');
+    const tabellbilder = existsSync(paBordet) ? (JSON.parse(readFileSync(paBordet, 'utf8')).bilder ?? []).filter((b) => /^tabell: /.test(b.efter ?? '')) : [];
+    if (tabellbilder.length > 2) fel.push(`${id}: riggens pabordet.json har ${tabellbilder.length} bilder under tabeller, och en metod har högst två (riggens standard, avsnitt 4)`);
+    for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-bild-`) && x.endsWith('.svg') && !tabellbilder.some((b) => x === `${id}-bild-${b.nr}.svg`))) rmSync(join(UT, f));
+    for (const b of tabellbilder) {
+      if (!(d.tabeller ?? []).some((t) => `tabell: ${t.rubrik}` === b.efter)) fel.push(`${id}: bilden ${b.nr} i riggens pabordet.json står efter "${b.efter}", och metoden har ingen sådan tabell`);
+      const k = join(ut, b.fil ?? `pabordet-${b.nr}.svg`);
+      if (existsSync(k)) copyFileSync(k, join(UT, `${id}-bild-${b.nr}.svg`));
+      else fel.push(`${id}: ${b.fil ?? `pabordet-${b.nr}.svg`}, som riggens pabordet.json nämner, saknas hos riggen`);
+    }
+    const forut = JSON.stringify(idebilder[id] ?? null);
+    if (tabellbilder.length) idebilder[id] = tabellbilder.map(({ nr, rubrik, text, alt, efter, bredd, hojd }) => ({ nr, rubrik, text, alt, efter, bredd, hojd }));
+    else delete idebilder[id];
+    if (JSON.stringify(idebilder[id] ?? null) !== forut) writeFileSync(IDEBILDERNA, idebildernasFil());
+  }
+  for (const b of idebilder[id] ?? []) if (!existsSync(join(UT, `${id}-bild-${b.nr}.svg`))) fel.push(`${id}: ${id}-bild-${b.nr}.svg, som src/data/idebilder.json nämner, saknas i public/metoder/. Kör node scripts/metoderfiler.mjs`);
   for (const slag of ['allt', 'lektionskort'].filter((s) => !VANTAR.some((v) => v.id === id && v.slag === s))) if (!existsSync(join(UT, `${stam(slag)}.pdf`))) fel.push(`${id}: ${slag} saknas i public/metoder/`);
   if (d.lathund && !existsSync(join(UT, `${stam('lathund')}.docx`))) fel.push(`${id}: Word-lathunden saknas i public/metoder/`);
   // Allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se, på varje sida (CLAUDE.md under Innehållstyperna; Niclas
@@ -307,6 +347,10 @@ const metoderna = new Set(readdirSync(MAPP).filter((f) => f.endsWith('.yaml') &&
 const kvar = Object.keys(materialetsSidor).filter((k) => k !== '_om' && !metoderna.has(k));
 if (kvar.length && kontrollera) fel.push(`src/data/materialets-sidor.json har ${kvar.join(', ')}, som inte är metoder i src/content/undervisningsmetoder/. Kör node scripts/metoderfiler.mjs`);
 else if (kvar.length) { for (const k of kvar) delete materialetsSidor[k]; writeFileSync(SIDORNA, sidornasFil()); }
+// Likaså bilderna som visar idén.
+const kvarBilder = Object.keys(idebilder).filter((k) => k !== '_om' && !metoderna.has(k));
+if (kvarBilder.length && kontrollera) fel.push(`src/data/idebilder.json har ${kvarBilder.join(', ')}, som inte är metoder i src/content/undervisningsmetoder/. Kör node scripts/metoderfiler.mjs`);
+else if (kvarBilder.length) { for (const k of kvarBilder) delete idebilder[k]; writeFileSync(IDEBILDERNA, idebildernasFil()); }
 
 // En packad fil som ingen av riggens filer längre ger tas bort, så att cachen inte växer med varje leverans.
 if (!kontrollera && !fel.length && existsSync(PACKADE)) for (const f of readdirSync(PACKADE)) if (!anvanda.has(f)) rmSync(join(PACKADE, f));

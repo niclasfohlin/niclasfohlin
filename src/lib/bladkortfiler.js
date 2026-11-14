@@ -38,6 +38,11 @@ export function metodensMinibilder(id, d, post, sidor = {}) {
     if (namn === 'Strukturkorten') return bilden(`public/strukturer/kort/${metodensStrukturkort(id).fil}`, 'ovre');
     if (namn === 'Strategikorten') return bilden(`public/strategier/kort/${metodensStrategikort(id).fil}`, 'ovre');
     if (namn === 'Strategibladet') return bilden(`public/strategier/kort/${metodensStrategiblad(id).fil}`);
+    // En tabell vars rader pekar ut blad i Materialet, som Fyrfältarna i Tänkande klassrum, där en rad har två av bladnamnets
+    // led ("Bas" och "Äpplena" i Fyrfältaren, Bas, Äpplena), har bilden av det första bladet den pekar ut (K-761).
+    const tabellen = (d.tabeller ?? []).find((t) => t.rubrik === namn);
+    const pekar = tabellen ? bladen.findIndex((b) => (tabellen.rader ?? []).some((r) => r.filter((c) => b.split(', ').includes(c)).length >= 2)) : -1;
+    if (pekar >= 0) return bilden(`public/metoder/${id}-materialet-${sidor[id]?.[pekar]?.bilder?.[0] ?? pekar + 1}.png`);
     return bilden(`public/metoder/${id}-tabell-${slugAv(namn)}.pdf`);
   });
 }

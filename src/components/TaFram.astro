@@ -43,8 +43,9 @@ import { taFramDatafil } from '../lib/taframdata';
 import { PABORDET_MATT } from '../lib/pabordet';
 import { LOSNINGSSTEG } from '../lib/losningsforslag';
 import { site } from '../data/site';
-interface Props { t: TaFram }
-const { t } = Astro.props;
+// iMetoder: bladen i Metoder som leder till ett problem, som fyrfältarna i Tänkande klassrum, efter problemets adress i verktyget (K-761).
+interface Props { t: TaFram; iMetoder?: Map<string, { adress: string; slag: string; metod: string }[]> }
+const { t, iMetoder } = Astro.props;
 const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 const mb = (byte: number) => `${(byte / 1048576).toLocaleString('sv-SE', { maximumFractionDigits: 1, minimumFractionDigits: 1 })} MB`;
 const antal = t.poster.length;
@@ -170,13 +171,13 @@ const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []
                           ? <a class="knapp sekundar" href={`/stodundervisning/${tema.handledning}.pdf`} target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${tema.handledning.slice(t.metod.length + 1)}`} data-goatcounter-title={`${t.titel}: lärarhandledningen till ${tema.namn} som pdf`}>Lärarhandledning<span class="visually-hidden">: {tema.namn}, pdf</span></a>
                           : <a class="knapp sekundar" href={tema.adress}>Temats sida<span class="visually-hidden">: {tema.namn}</span></a>}
                       </p>
-                      <ol class="tf-lista">{tema.poster.map((p) => <TaFramRad t={t} p={p} rubrik="h4" />)}</ol>
+                      <ol class="tf-lista">{tema.poster.map((p) => <TaFramRad t={t} iMetoder={iMetoder} p={p} rubrik="h4" />)}</ol>
                     </div>
                   </details>
                 ))}
               </div>
             ) : (
-              <ol class="tf-lista">{n.poster.map((p) => <TaFramRad t={t} p={p} rubrik="h3" />)}</ol>
+              <ol class="tf-lista">{n.poster.map((p) => <TaFramRad t={t} iMetoder={iMetoder} p={p} rubrik="h3" />)}</ol>
             )}
             {/* Hela nivån i en fil, som är billigare än nivåns poster var för sig (K-424). En nivå med ett tema har temats fil,
                 som är samma sidor (designgranskningen 2026-10-18 natt: två knappar gjorde samma sak). */}
