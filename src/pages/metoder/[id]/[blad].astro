@@ -37,12 +37,18 @@ const delarna = (materialetsSidor as unknown as Record<string, { blad: string; b
 const bilden = metodensBilder(id).materialet?.[(delarna?.[b.i]?.bilder[0] ?? b.i + 1) - 1];
 const pdf = metodensBlad(id, [b.rubrik])[0]?.pdf;
 // Bladets textalternativ ur riggens Word-fil, med det som står på bladet, som på metodens sida.
-const bildensAlt = (await bladensTextalternativ(id)).get(b.rubrik) ?? b.rubrik;
+// Ett blad med två sidor, som en fyrfältare med Baksidan, har sidornas namn "<rubrik> 1" och "<rubrik> 2".
+const bildensAlt = ((t) => t.get(b.rubrik) ?? t.get(`${b.rubrik} 1`) ?? b.rubrik)(await bladensTextalternativ(id));
 const filer = metodensFiler(id);
 // Metodens egen mening om hur bladet skrivs ut, ur Materialet för klassens text: den som börjar med Skriv ut och nämner
 // bladet, som "Skriv ut fyrfältaren du väljer, ett blad per grupp med Baksidan på andra sidan …".
 const slaget = b.slag.toLocaleLowerCase('sv');
-const utskriften = ((d.ramar?.text ?? []) as string[]).flatMap((t) => meningarna(t)).find((s: string) => s.startsWith('Skriv ut') && s.toLocaleLowerCase('sv').includes(slaget));
+// Meningen efter, som säger vad som görs med bladet, hör till samma anvisning: "Vik bladet så att ruta 4 är dold, och fäst det
+// vid tavlan." (riggens leverans 2026-11-14 kväll).
+const utskriften = ((d.ramar?.text ?? []) as string[]).map((t) => meningarna(t) as string[]).flatMap((m) => {
+  const i = m.findIndex((s) => s.startsWith('Skriv ut') && s.toLocaleLowerCase('sv').includes(slaget));
+  return i < 0 ? [] : [[m[i], ...(m[i + 1] && /\bbladet\b/.test(m[i + 1]) ? [m[i + 1]] : [])].join(' ')];
+})[0];
 // Förra och nästa blad på nivån, i Materialets ordning.
 const nivans = banken.filter((x) => x.niva === b.niva);
 const plats = nivans.findIndex((x) => x.slug === b.slug);

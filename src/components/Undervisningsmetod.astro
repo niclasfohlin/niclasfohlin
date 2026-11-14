@@ -626,7 +626,7 @@ const moten = arbetslagetsMoten(d);
           </div>
           {(() => {
             const sidor = bladetsSidor(i);
-            const bilderna = sidor.map((b: { src: string; bredd: number; hojd: number }, n: number) => <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${bladen[i]?.pdf ? String(bladen[i].pdf).replace(/^.*\//, '').replace(/\?.*$/, '') : `${id}-materialet.pdf`}`} data-goatcounter-title={`Bilden av ${r.rubrik}, pdf, ${id}`} class={`um-sida${b.bredd > b.hojd ? ' um-sida-liggande' : ''}`}><img src={b.src} alt={sidor.length > 1 ? `${r.rubrik}, sidan ${n + 1} av ${sidor.length}` : textalternativ.get(r.rubrik) ?? r.rubrik} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>);
+            const bilderna = sidor.map((b: { src: string; bredd: number; hojd: number }, n: number) => <a href={bladen[i]?.pdf ?? filer.materialet?.pdf} data-goatcounter-click={`fil:${bladen[i]?.pdf ? String(bladen[i].pdf).replace(/^.*\//, '').replace(/\?.*$/, '') : `${id}-materialet.pdf`}`} data-goatcounter-title={`Bilden av ${r.rubrik}, pdf, ${id}`} class={`um-sida${b.bredd > b.hojd ? ' um-sida-liggande' : ''}`}><img src={b.src} alt={sidor.length > 1 ? textalternativ.get(`${r.rubrik} ${n + 1}`) ?? `${r.rubrik}, sidan ${n + 1} av ${sidor.length}` : textalternativ.get(r.rubrik) ?? r.rubrik} loading="lazy" decoding="async" width={b.bredd} height={b.hojd} /></a>);
             return sidor.length > 1 ? <div class="um-sidor">{bilderna}</div> : bilderna;
           })()}
           {bladen[i]?.pdf && <Umfilknappar id={id} titel={d.titel} filer={filer} slag={['materialet']} blad={{ namn: r.rubrik, pdf: bladen[i].pdf! }} medFilval={ettBladMedSidor} />}
