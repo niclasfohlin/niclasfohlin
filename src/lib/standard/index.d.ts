@@ -238,6 +238,30 @@ export declare function elevernasFel(d: { plan?: unknown; progression?: { rader:
 /** Spärren för lärarens roll i en metod som kan planeras: ingen mening i `roll` börjar med "Läraren", eftersom planen visar den under Det du gör. */
 export declare function rollensFel(d: { plan?: unknown; progression?: { rader: { vecka: string; roll?: string }[] } }): string[];
 export declare function planFel(d: Parameters<typeof metodplan>[0] & MetodensTexter): string[];
+/** Felen i planens fält som pekar på metodens egna delar: tabellerna, veckans ram, versionerna, uppföljningen, skattningarnas blad, stödens rubriker och lektionsvalet (sajtens K-779). planFel kör dem. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export declare function planensDelarFel(d: Record<string, any>): string[];
+/** Versionernas namn i planens val (plan.versionsval), i metodens ordning. */
+export declare const versionernasNamn: (d: { plan?: { versionsval?: { versioner?: { namn: string }[] } } }) => string[];
+/** Första ledet i en rubrik eller cell: "Vecka 1" ur "Vecka 1 · Hopp på talraden" och ur "Vecka 1\nHopp på talraden". */
+export declare const forstaLed: (s: string) => string;
+/** Delarna i en ram med lektioner som gäller en version i planens val, med sin plats i ramen och sitt första led utan versionens namn. */
+export declare function versionensDelar<D extends { rubrik: string }>(d: { plan?: { versionsval?: { versioner?: { namn: string }[] } } }, ram: { delar?: D[] }, version?: string): { del: D; di: number; led: string }[];
+/** Kursens veckor i metoden: för varje vecka som en del gäller ensam, ramens och delens plats och veckans titel. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export declare function kursensVeckodelar(d: Record<string, any>, version?: string): Record<string, { ri: number; di: number; titel: string }>;
+/** Metodens tabell med rubriken som ett fält i planen nämner, eller undefined. */
+export declare const metodensTabell: <T extends { rubrik: string }>(d: { tabeller?: T[] }, namn: string) => T | undefined;
+/** Rubrikerna som metodens rutor har när metodens fil inte skriver någon, som schemat sätter dem. */
+export declare const RUTORNAS_RUBRIKER: Readonly<{ lektionsbank: string; passrutin: string; steg: string; exempel: string; hem: string; progression: string; uppfoljning: string; mal: string; snabbmall: string; checklista: string; grund: string; ramar: string; diplom: string }>;
+/** Metodens avsnitt i sidans meny, i modellens ordning, med korta namn. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export declare function metodensAvsnitt(d: Record<string, any>, o: { pass: boolean; stegen: string; lektionsbank?: string }): { id: string; namn: string }[];
+/** Platsen i metoden som ett stöd för ett val leder till: tabellen, rutan, tidsschemat eller ramen med rubriken, eller undefined. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export declare function stodetsPlats(d: Record<string, any>, mer: string | undefined, o?: { pass?: boolean }): { slag: 'tabell'; nr: number } | { slag: 'ruta'; id: string } | { slag: 'tidsschema' } | { slag: 'ram'; nr: number } | undefined;
+/** Bladet som en av metodens skattningar gäller (namnet efter "Blad: "), ur metodens bilder På bordet, eller undefined. */
+export declare const skattningensBlad: <B extends { nr: number; rubrik: string; google?: string }>(d: { pabordet?: B[] }, namn: string) => B | undefined;
 /** Metodens fil utan planens fält (`plan`, uppföljningens `tid`, progressionens `taggar` och `rubrik`), som bara planens sida läser. */
 export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;
 export declare function forval(mp: Metodplan, idag: string): Val;

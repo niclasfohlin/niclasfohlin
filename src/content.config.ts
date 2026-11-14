@@ -14,7 +14,7 @@ import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
 import { faktaFel } from './lib/kortfakta';
-import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, STRUKTURENS_GRANSER, strategiensFel, strukturensFel, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
+import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, RUTORNAS_RUBRIKER, STRUKTURENS_GRANSER, strategiensFel, strukturensFel, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
 import { SAMLINGAR, UTAN_SIDA } from './lib/samlingar';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
@@ -298,7 +298,7 @@ const metodensFalt = z.strictObject({
     // fet, eftersom fet stil är rubrik. Det gäller fält som inte är kursiva. Riggen har listan i rigg.json.
     radetiketter: z.array(text).default([]),
     lektionsbank: z.strictObject({
-      rubrik: z.string().default('Lektionsbanken'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.lektionsbank),
       text: z.string().optional(),
       formagor: z.array(z.strictObject({ nr: z.number().int().positive(), namn: text, skal: z.string().optional() })).min(1),
       not: z.string().optional(),
@@ -325,7 +325,7 @@ const metodensFalt = z.strictObject({
     // och arbetsform, och en tabell med en rad per fas (fas och tid, rutinens steg, vad som händer),
     // med raderna Före passet (ur tidsschemat) och Efter passet (efterPasset).
     passrutin: z.strictObject({
-      rubrik: z.string().default('Passrutin: samma ordning varje gång'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.passrutin),
       text: z.string().optional(),
       steg: z.array(z.union([z.string(), z.strictObject({ text, fas: text })])).min(1),
       efter: z.string().optional(),
@@ -346,7 +346,7 @@ const metodensFalt = z.strictObject({
       efter: z.string().optional(),
     }).optional(),
     steg: z.strictObject({
-      rubrik: z.string().default('Vad du gör och säger i varje steg'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.steg),
       text: z.string().optional(),
       fraserRubrik: z.string().default('Exempelfraser: tänk högt och fråga'),
       rader: z.array(z.strictObject({
@@ -388,7 +388,7 @@ const metodensFalt = z.strictObject({
       });
     })).default([]),
     exempel: z.strictObject({
-      rubrik: z.string().default('Exempel: så går ett pass till'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.exempel),
       valt: ruta,
       text: stycken,
       // Visar lathundens tavla (blocket tavla i lathund.mall) efter exemplet, med en valfri text under.
@@ -419,7 +419,7 @@ const metodensFalt = z.strictObject({
     // Hem och skola: för insatser där hemmet gör en del av arbetet. Text, ett kontrakt med var och
     // ens ansvar, och ett schema att fylla i (en sida i planeringsmallarna).
     hem: z.strictObject({
-      rubrik: z.string().default('Hem och skola'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.hem),
       text: stycken,
       kontrakt: z.strictObject({
         rubrik: z.string().default('Kontrakt'),
@@ -435,7 +435,7 @@ const metodensFalt = z.strictObject({
       }).optional(),
     }).optional(),
     progression: z.strictObject({
-      rubrik: z.string().default('Progression över insatsperioden'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.progression),
       text: z.string().optional(),
       // Första kolumnens rubrik: Vecka för en insats över veckor, Pass för en som räknas i pass.
       enhet: z.string().default('Vecka'),
@@ -449,7 +449,7 @@ const metodensFalt = z.strictObject({
       rader: z.array(z.strictObject({ vecka: z.string(), led: z.string().optional(), fokus: z.string(), roll: z.string(), eleverna: z.string().max(200).optional(), vidare: z.string().optional(), taggar: z.array(z.string()).min(1).optional(), rubrik: z.string().max(60).optional() })).min(1),
     }).optional(),
     uppfoljning: z.strictObject({
-      rubrik: z.string().default('Följ upp effekten'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.uppfoljning),
       text: z.string().optional(),
       // tid: när raden görs, med standardens ord (före, varje vecka, vecka 4, efter, villkor …; tolkaTid i
       // src/lib/standard/plan.js), så att planen kan sätta ett datum. nar står kvar som radens text. perElev: minuterna
@@ -583,7 +583,7 @@ const metodensFalt = z.strictObject({
     // skriver i en mening, lektionskortet säger och planen skattar mot (METODER.md under Fälten i metodens fil). punkter är
     // det eleven ska kunna efter perioden, som läraren kryssar för.
     mal: z.strictObject({
-      rubrik: z.string().default('Mål: vad eleven ska kunna göra efter insatsen'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.mal),
       text: z.string().default('Efter perioden ska eleven oftare kunna:'),
       overgripande: z.string().trim().min(10).max(160).regex(/^kunna /, 'Det övergripande målet börjar med "kunna", som på lektionskortet: "kunna läsa mellan raderna och visa ledtråden i texten."'),
       punkter: z.array(z.string()).min(1),
@@ -593,7 +593,7 @@ const metodensFalt = z.strictObject({
     // kryssa (ska) och två rutor sist (sist). overst är högst två rader att fylla i en gång per blad. Den gamla formen,
     // med listor med fält före och efter passet, finns inte längre.
     snabbmall: z.strictObject({
-      rubrik: z.string().default('Snabbmall'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.snabbmall),
       text: text.optional(),
       pass: z.number().int().min(3, 'Bladet har 3 till 6 pass.').max(6, 'Bladet har 3 till 6 pass.'),
       period: z.enum(SNABB_PERIODER).default('veckan'),
@@ -606,11 +606,11 @@ const metodensFalt = z.strictObject({
       not: text.optional(),
     }).optional(),
     checklista: z.strictObject({
-      rubrik: z.string().default('Checklista inför passet'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.checklista),
       punkter: z.array(z.string()).min(1),
     }).optional(),
     grund: z.strictObject({
-      rubrik: z.string().default('Kort om grunden'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.grund),
       text: z.string(),
       kallor: z.string().optional(),
     }).optional(),
@@ -619,7 +619,7 @@ const metodensFalt = z.strictObject({
     // En ram där alla fält är tomma är en mall att fylla i: på sidan visas bara inledningen, i
     // planeringsmallarna blir den sidor med skrivrum. huvud är fält att fylla i före delarna.
     ramar: z.strictObject({
-      rubrik: z.string().default('Ramarna'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.ramar),
       text: stycken,
       // Namnet på det material som inte står i en bank, i nivåernas rader eller bland ramarna med blad, som Bladen och
       // korten i Faktatextsamtal i grupp (Kärnorna, korten, Egen text och kartläggningen; Niclas godkände förslaget
@@ -740,7 +740,7 @@ const metodensFalt = z.strictObject({
     // består av understreck blir en skrivlinje.
     diplom: z.strictObject({
       kicker: z.string().optional(),
-      rubrik: z.string().default('Diplom'),
+      rubrik: z.string().default(RUTORNAS_RUBRIKER.diplom),
       text: z.array(text).min(1),
       underskrifter: z.array(text).default([]),
     }).optional(),
