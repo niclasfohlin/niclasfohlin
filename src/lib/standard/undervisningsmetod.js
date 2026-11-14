@@ -312,10 +312,16 @@ export const ALLMANNA_SAKORD = Object.freeze(['bladet', 'bladen', 'kortet', 'kor
  * @returns {string[]}
  */
 export function namnetsForstaOrdFel(d) {
-  const namnen = (d?.ramar?.ramar ?? []).map((/** @type {{ rubrik?: string }} */ r) => String(r?.rubrik ?? '').trim()).filter((n) => {
+  // Sakens namn står före ett komma, som Inbjudan till läsaren i "Inbjudan till läsaren, vecka 10: Boksläppet" i
+  // Stödundervisning (K-770). Har två namn samma första ord, som Frågekorten i fyra steg och Frågekorten i sex steg, är
+  // ordet sakens namn och resten versionen, och ordet får stå ensamt.
+  const alla = (d?.ramar?.ramar ?? []).map((/** @type {{ rubrik?: string }} */ r) => String(r?.rubrik ?? '').split(',')[0].trim());
+  const forstaOrd = (/** @type {string} */ n) => n.split(/\s+/)[0].toLocaleLowerCase('sv');
+  const namnen = [...new Set(alla)].filter((n) => {
     const ord = n.split(/\s+/);
-    const forsta = ord[0].toLocaleLowerCase('sv');
-    return ord.length > 1 && /^\p{L}{3,}(?:an|en|et|na)$/u.test(forsta) && !ALLMANNA_SAKORD.includes(forsta);
+    const forsta = forstaOrd(n);
+    const delat = new Set(alla.filter((x) => forstaOrd(x) === forsta)).size > 1;
+    return ord.length > 1 && !delat && /^\p{L}{3,}(?:an|en|et|na)$/u.test(forsta) && !ALLMANNA_SAKORD.includes(forsta);
   });
   if (!namnen.length) return [];
   /** @type {{ vag: string, text: string }[]} */

@@ -5,11 +5,17 @@
 // origin/main och inte är utkast, stoppar valideringen tills den står i src/data/trottprov.json med en till tre saker, var de
 // syntes och vad som avgjordes. Samma form som taggprovet (scripts/taggar.mjs). Utan git eller origin/main prövas inga nya
 // metoder, men registrets poster prövas alltid.
+//
+// En ny metod i Stödundervisning prövas här också med standardens namnetsForstaOrdFel (K-770), som Metoders schema kör för
+// varje metod: ett blads namn med flera ord vars första ord står ensamt innan delen har sagt namnet, som "rutan" för Rutan på
+// tavlan. De publicerade prövas inte, eftersom två av dem har sådana ställen som riggen har fått i en lista (riggens
+// out/FRAN-SAJTEN.md, Nytt 2026-11-14), och en metod som tas om bör rättas då.
 import { execFileSync } from 'node:child_process';
 import { readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import { namnetsForstaOrdFel } from '../src/lib/standard/index.js';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const HOGST = 3;
@@ -36,7 +42,10 @@ try { ute = new Set(execFileSync('git', ['ls-tree', '-r', '--name-only', 'origin
 if (ute) for (const mapp of ['src/content/stodundervisning', 'src/content/undervisningsmetoder']) {
   for (const f of readdirSync(join(rot, mapp)).filter((x) => x.endsWith('.yaml') && !x.startsWith('_'))) {
     const vag = `${mapp}/${f}`;
-    if (ute.has(vag) || register[vag] || parse(readFileSync(join(rot, vag), 'utf8'))?.utkast) continue;
+    const d = parse(readFileSync(join(rot, vag), 'utf8'));
+    if (ute.has(vag) || d?.utkast) continue;
+    if (mapp.endsWith('stodundervisning')) for (const x of namnetsForstaOrdFel(d)) fel.push(`${vag}: ${x}`);
+    if (register[vag]) continue;
     fel.push(`${vag}: ny metod utan provet Den trötta läraren. Gör det som METODER.md säger under Arbetsgången och skriv in det i src/data/trottprov.json`);
   }
 }

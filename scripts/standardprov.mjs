@@ -152,6 +152,11 @@ for (const [d, vantat] of lektionsfall) { const f = Object.values(faktaIFastForm
   const utan = namnetsForstaOrdFel({ ramar, steg: { rader: [{ namn: 'Stanna och skriv', vad: 'Mitt i fyller du i rutan.' }] } });
   const med = namnetsForstaOrdFel({ ramar, steg: { rader: [{ namn: 'Stanna och skriv', vad: 'Mitt i fyller du i Rutan på tavlan.', gor: ['Läs rutan högt.'] }] }, stod: { rader: [{ text: 'Följ stegen på bladet.' }] } });
   if (utan.length !== 1 || !utan[0].startsWith('steg.rader[0] säger "rutan"') || med.length) fel.push(`namnetsForstaOrdFel ger fel svar: ${JSON.stringify([utan, med])}`);
+  // Stödundervisningens namn (K-770): namnet står före kommat, och två namn med samma första ord är versioner av en sak,
+  // så ordet får stå ensamt.
+  const stod = { ramar: [{ rubrik: 'Inbjudan till läsaren, vecka 10: Boksläppet' }, { rubrik: 'Frågekorten i fyra steg' }, { rubrik: 'Frågekorten i sex steg' }] };
+  const stodFel = namnetsForstaOrdFel({ ramar: stod, steg: { rader: [{ namn: 'Boksläppet', vad: 'Läs Inbjudan högt och lägg fram frågekorten.' }] } });
+  if (stodFel.length !== 1 || !/säger "Inbjudan" innan delen har sagt Inbjudan till läsaren:/.test(stodFel[0])) fel.push(`namnetsForstaOrdFel läser Stödundervisningens namn fel: ${JSON.stringify(stodFel)}`);
 }
 // Undervisningsmetoderna (K-621): utfallens gränser som riggens standard räknar dem, och delarnas ordning och text.
 for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13'], [5, '1|2-2|3']]) { const g = utfallensGranser(n); const f = `${g.nastanAlla}|${g.deFlesta.join('-')}|${g.halften}`; if (f !== vantat) fel.push(`utfallensGranser(${n}) ger ${f}, inte ${vantat}`); }
