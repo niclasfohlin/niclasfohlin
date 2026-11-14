@@ -2,7 +2,7 @@
   "_om": "Bilderna som visar idén i Metoder (riggens standard, avsnitt 4, Bilder som visar idén; K-763): högst två per metod, var och en direkt under sin tabell på metodens sida (UmFriaTabeller.astro), utan egen rubrik, med text som bildtext och alt som textalternativ. Skrivs av scripts/metoderfiler.mjs ur riggens out/<id>/pabordet.json, och bilden är public/metoder/<id>-bild-<nr>.svg.",
   "tankande-klassrum": [
     {
-      "nr": 19,
+      "nr": 35,
       "rubrik": "Borden skivat bakåt",
       "text": "Fyrfältaren Borden, Medel, problem 2 i bilaga A, skivad bakåt. Prickarna är platserna vid tre bord. De gröna i ändarna står kvar hur många bord det än blir.",
       "alt": "Överst går en pil bakåt: Du skivar bakåt från problemet. Under den står fyra rutor i rad. Ruta 1: 1, 2 och 3 fyrkantiga bord, med en prick för varje plats vid de tre borden, och svaret 4, 6 och 8. Ruta 2: 10 fyrkantiga bord och en regel, och svaret 22 och 2 · n + 2. Ruta 3: 1, 2 och 3 sexkantiga bord, med en prick för varje plats vid de tre borden, och svaret 6, 10 och 14. Ruta 4, problemet, med tjockare ram: 10 sexkantiga bord och en regel, och svaret 42 och 4 · n + 2. Platserna i ändarna är gröna. Under rutorna står det som ändras: 10 bord, så en regel; ny form, så små tal igen; 10 bord, så en regel. Nederst går en pil framåt: Eleverna går framåt, en sak i taget.",
@@ -11,7 +11,7 @@
       "hojd": 500
     },
     {
-      "nr": 20,
+      "nr": 36,
       "rubrik": "Trappan i konsolideringen",
       "text": "Konsolideringen med fyrfältaren Borden. Numret på kortet är steget i tabellen, och steg 1, att välja tavlorna, gör du medan grupperna arbetar.",
       "alt": "Överst står: Rött är det du skriver med din penna. Under det en trappa med tre tavlor nerifrån och upp, och tre kort på avsatsen överst. Steg 2, tavla A, med ett rött A och en fyrkant: 10 + 10 + 2, tio per sida och två i ändarna. Steg 3, tavla B, med ett rött B och en fyrkant: 10 · 2 + 2, gånger i stället för plus. Steg 3, tavla C, med ett rött C och en sexhörning: 4 · 10 + 2 = 42, sexkantiga bord, fyra för varje. På avsatsen: Steg 4, felet, med en sexhörning: 10 · 6 = 60 i en röd ring, sex per bord, men borden delar sidor. Steg 5, idén: 4 · n + 2 och orden regel, variabel i rött, och n för alla antal. Steg 6, var och en: Mina anteckningar och uppgiften på lappen. Under trappan: Börja där alla är med.",

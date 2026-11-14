@@ -30,5 +30,131 @@
         9
       ]
     }
+  ],
+  "tankande-klassrum": [
+    {
+      "blad": "Mina anteckningar",
+      "bilder": [
+        1
+      ]
+    },
+    {
+      "blad": "Baksidan",
+      "bilder": [
+        2
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, tom",
+      "bilder": [
+        3,
+        4
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Bas, Äpplena",
+      "bilder": [
+        5,
+        6
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Bas, Fiskebodarna",
+      "bilder": [
+        7,
+        8
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Bas, Chokladbollarna",
+      "bilder": [
+        9,
+        10
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Bas, Tärningarna",
+      "bilder": [
+        11,
+        12
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Bas, Parken",
+      "bilder": [
+        13,
+        14
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Medel, Borden",
+      "bilder": [
+        15,
+        16
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Medel, Kulpåsarna",
+      "bilder": [
+        17,
+        18
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Medel, Tangrammet",
+      "bilder": [
+        19,
+        20
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Medel, Pantpengarna",
+      "bilder": [
+        21,
+        22
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Medel, Bowlingkalaset",
+      "bilder": [
+        23,
+        24
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Avancerat, Stenplattorna",
+      "bilder": [
+        25,
+        26
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Avancerat, Udda eller jämnt",
+      "bilder": [
+        27,
+        28
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Avancerat, Svamparna",
+      "bilder": [
+        29,
+        30
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Avancerat, Kvadraten",
+      "bilder": [
+        31,
+        32
+      ]
+    },
+    {
+      "blad": "Fyrfältaren, Avancerat, Popcornskålen",
+      "bilder": [
+        33,
+        34
+      ]
+    }
   ]
 }

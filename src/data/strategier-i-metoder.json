@@ -272,22 +272,20 @@
     ]
   },
   "tankande-klassrum": {
-    "text": "Tre strategier för lärande finns redan i lektionen. Försök först finns Vid tavlorna, där grupperna löser uppgifterna innan du har visat hur. Jämför två finns i Konsolideringen, där klassen ser vad som är nytt från tavla A till B och varför felet inte stämmer. Pröva dig själv finns i rutinen Pröva svaret och andra tavlor, där gruppen prövar sitt svar innan den tar nästa ruta.",
+    "text": "Två strategier för lärande finns redan i lektionen. Försök först finns Vid tavlorna, där grupperna löser uppgifterna innan du har visat hur. Jämför två finns i Konsolideringen, där klassen ser vad som är nytt från tavla A till B och varför felet inte stämmer.",
     "strategier": [
       "forsok-forst",
-      "jamfor-tva",
-      "prova-dig-sjalv"
+      "jamfor-tva"
     ],
-    "skal": "Vid tavlorna löser grupperna uppgifterna innan läraren har visat hur, och varje grupp prövar svaret innan den tar nästa ruta. I Konsolideringen går klassen från tavla A till B och C, säger vad som är nytt och varför felet inte stämmer. Riggen prövade strategierna mot metodens text 2026-11-14 (out/tankande-klassrum/TILL-SAJTEN.md, punkt 9). Pröva dig själv står vid steget Vid tavlorna, där gruppen prövar svaret, eftersom sidan inte väver in kort vid en rutin.",
+    "skal": "Vid tavlorna löser grupperna uppgifterna innan läraren har visat hur. I Konsolideringen går klassen från tavla A till B och C, säger vad som är nytt och varför felet inte stämmer. Riggen prövade strategierna mot metodens text 2026-11-14 (out/tankande-klassrum/TILL-SAJTEN.md) och strök Pröva dig själv efter sajtens andra öga: kortet säger att eleverna väljer efter facit vad de ska öva på, och i metoden får ingen grupp svaret.",
     "platser": [
       {
         "efter": "steg 2",
         "delar": [
-          "forsok-forst",
-          "prova-dig-sjalv"
+          "forsok-forst"
         ],
         "slag": "form",
-        "om": "Löser först och prövar svaret"
+        "om": "Löser före genomgången"
       },
       {
         "efter": "steg 3",
