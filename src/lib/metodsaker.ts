@@ -76,7 +76,7 @@ export function sakernaI(texter: string[], saker: MetodSak[]): MetodSak[] {
 export const sidansSaker = (d: MetodData, id: string): MetodSak[] => {
   const verktyg = new Set(CENTRALA.map((c) => lasbarAdress(c)));
   return metodensSaker(d, id)
-    .filter((s) => !s.baraVeckorna && !verktyg.has(s.adress) && !s.adress.endsWith('#lathund-film') && !/^vecka \d+$/i.test(s.namn))
+    .filter((s) => !s.baraVeckorna && !verktyg.has(s.adress) && !s.adress.endsWith('#lathund-film') && !veckorI(s.namn))
     .map((s) => {
       const n = s.namn.trim();
       if (s.former || /\s/.test(n)) return s;
