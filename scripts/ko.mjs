@@ -24,14 +24,16 @@
 //   betyder att bara arbetssättet är drabbat: det blir prio 3. Så växer inte kön av småfynd.
 //   Medan en post pågår kräver lagg antingen --ur <den posten> eller --utanfor. klar vägrar när
 //   fler än två nya poster bär [UR <id>]: så många betyder att roten inte hittades.
-//   klar kör npm run validera och kräver att allt är committat på postens gren. Sedan slås grenen
-//   ihop till main och pushas; Netlify bygger.
+//   klar kör npm run validera och kräver att allt är committat på postens gren. Har valideringen
+//   redan gått grön för exakt det innehåll som HEAD har, och arbetsträdet är rent, godtar klar den
+//   (stämpeln, scripts/stampel.mjs, K-776). Sedan slås grenen ihop till main och pushas; Netlify bygger.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, rmSync, copyFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
+import { stampelForHead } from './stampel.mjs';
 
 const HAR = fileURLToPath(import.meta.url);
 const rot = process.env.KO_ROT ? resolve(process.env.KO_ROT) : resolve(dirname(HAR), '..');
@@ -295,7 +297,10 @@ if (kmd === 'klar') {
   prova('kotak', kotakN <= 2, `${kotakN} nya poster bär [UR ${id}]; över två betyder att roten inte hittades eller att jobbet är för stort`);
 
   let valideraUt = '';
-  if (!stopp.length || anda.includes('validera')) {
+  // En grön validering av exakt det innehåll som HEAD har gäller (K-776), men bara när arbetsträdet är rent.
+  const stampel = !stopp.length && !anda.includes('validera') && inneIGit && arRen() ? stampelForHead(rot) : null;
+  if (stampel) console.log(`Valideringen ${stampel.tid.slice(0, 16).replace('T', ' ')} (UTC) var grön för exakt det innehåll som HEAD har, och arbetsträdet är rent: den körs inte igen.`);
+  else if (!stopp.length || anda.includes('validera')) {
     const cmd = process.env.KO_VALIDERA;
     const r = cmd
       ? spawnSync(cmd, { cwd: rot, encoding: 'utf8', shell: true })
@@ -396,15 +401,18 @@ if (kmd === 'prov') {
   const t = mkdtempSync(join(tmpdir(), 'ko-prov-'));
   mkdirSync(join(t, 'scripts'));
   copyFileSync(HAR, join(t, 'scripts', 'ko.mjs'));
+  copyFileSync(join(dirname(HAR), 'stampel.mjs'), join(t, 'scripts', 'stampel.mjs'));
   writeFileSync(join(t, '.gitignore'), 'KO.md\n');
   writeFileSync(join(t, 'validera.status'), '0');
-  writeFileSync(join(t, 'validera.mjs'), "import { readFileSync } from 'node:fs'; process.exit(+readFileSync('validera.status','utf8').trim());");
+  // Attrappen skriver stämpeln när den går grön, som scripts/validera.mjs.
+  writeFileSync(join(t, 'validera.mjs'), "import { readFileSync } from 'node:fs'; import { skrivStampel } from './scripts/stampel.mjs'; const k = +readFileSync('validera.status','utf8').trim(); if (k === 0) skrivStampel(process.cwd()); process.exit(k);");
   writeFileSync(join(t, 'package.json'), '{"name":"ko-prov","type":"module","scripts":{"validera":"node validera.mjs"}}');
   const g = (...a) => spawnSync('git', a, { cwd: t, encoding: 'utf8' });
   g('init', '-q', '-b', 'main'); g('config', 'user.email', 'prov@example.com'); g('config', 'user.name', 'prov');
   g('add', '.'); g('commit', '-q', '-m', 'start');
+  let rodValidering = false;
   const ko = (...a) => {
-    const r = spawnSync(process.execPath, [join(t, 'scripts', 'ko.mjs'), ...a], { cwd: t, encoding: 'utf8', env: { ...process.env, KO_ROT: t, KO_VALIDERA: 'node validera.mjs' } });
+    const r = spawnSync(process.execPath, [join(t, 'scripts', 'ko.mjs'), ...a], { cwd: t, encoding: 'utf8', env: { ...process.env, KO_ROT: t, KO_VALIDERA: rodValidering ? 'node -e "process.exit(1)"' : 'node validera.mjs' } });
     return { kod: r.status, ut: (r.stdout || '') + (r.stderr || '') };
   };
   const reg = () => readFileSync(join(t, 'KO.md'), 'utf8');
@@ -452,6 +460,28 @@ if (kmd === 'prov') {
   ska('klar går igenom när grindarna är gröna och skriver merge-raderna', r.kod === 0 && /\| K-003 \|[^\n]*\| klar \|/.test(reg()) && /git merge ko\/K-003/.test(r.ut), r.ut);
   r = ko('klar', 'K-003', '--atgard', 'igen');
   ska('klar på en klar post nekas', r.kod === 1, r.ut);
+  // Stämpeln (K-776): en annan post på samma innehåll godtar valideringen som just gick grön, fast en ny körning hade
+  // gått röd; en ny commit, en ändring som inte är committad och en fil som har lagts tillbaka kräver en ny körning.
+  rodValidering = true;
+  ko('starta', 'K-005', '--gren', 'ko/K-003');
+  r = ko('klar', 'K-005', '--atgard', 'gjorde det på samma gren');
+  ska('klar godtar stämpeln när HEAD har exakt det innehåll som gick grönt', r.kod === 0 && /körs inte igen/.test(r.ut) && /\| K-005 \|[^\n]*\| klar \|/.test(reg()), r.ut);
+  ko('starta', 'K-006', '--gren', 'ko/K-003');
+  writeFileSync(join(t, 'andrad.txt'), 'y');
+  g('commit', '-q', '-am', 'en ändring efter valideringen');
+  r = ko('klar', 'K-006', '--atgard', 'gjorde det på samma gren');
+  ska('klar efter en ny commit kör valideringen igen', r.kod === 1 && /\[validera\]/.test(r.ut), r.ut);
+  writeFileSync(join(t, 'andrad.txt'), 'z');
+  spawnSync(process.execPath, ['validera.mjs'], { cwd: t });
+  r = ko('klar', 'K-006', '--atgard', 'gjorde det på samma gren');
+  ska('klar med en ändring som inte är committad godtar inte stämpeln', r.kod === 1 && /\[ren\]/.test(r.ut), r.ut);
+  g('checkout', '-q', '--', 'andrad.txt');
+  r = ko('klar', 'K-006', '--atgard', 'gjorde det på samma gren');
+  ska('klar efter git restore av en fil som valideringen såg ändrad kör valideringen igen', r.kod === 1 && /\[validera\]/.test(r.ut), r.ut);
+  spawnSync(process.execPath, ['validera.mjs'], { cwd: t });
+  r = ko('klar', 'K-006', '--atgard', 'gjorde det på samma gren');
+  ska('klar godtar en grön validering av det rena trädet', r.kod === 0 && /körs inte igen/.test(r.ut), r.ut);
+  rodValidering = false;
   r = ko('rattelse', 'K-003', '--text', 'länken var rätt, felet satt i datumet');
   ska('rattelse på en klar post skrivs in', r.kod === 0 && /RÄTTELSE/.test(reg()), r.ut);
   r = ko('rattelse', 'K-001', '--text', 'x');

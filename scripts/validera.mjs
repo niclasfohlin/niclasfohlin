@@ -16,6 +16,7 @@ import { copyFileSync, existsSync, readFileSync, readdirSync, rmSync } from 'nod
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { bytVersioner } from './filversion.mjs';
+import { skrivStampel } from './stampel.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(rot, 'dist');
@@ -135,3 +136,6 @@ steg('wordregler', 'node scripts/wordregler.mjs');
 steg('delningskort', 'node scripts/delningskort.mjs');
 steg('cacheprov', 'node scripts/cacheprov.mjs');
 tidtabell();
+// Stämpeln för ko.mjs klar (K-776): innehållet som valideringen slutade med, så att en post på samma innehåll inte
+// valideras en gång till (scripts/stampel.mjs).
+skrivStampel(rot);
