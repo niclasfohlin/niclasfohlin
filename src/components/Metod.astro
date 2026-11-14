@@ -70,6 +70,8 @@ import { vavdaIBorjan, vavtVid } from '../lib/vav';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import Hemsidaknapp from './Hemsidaknapp.astro';
 import { lektionskortVid, metodensLektionskort } from '../lib/lektionskort';
+import Bladkort from './Bladkort.astro';
+import { stodkortensStycke, stodmetodensBladkort } from '../lib/bladkort';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
@@ -138,6 +140,9 @@ const pass = passOversikt(d);
 // Bilderna På bordet (src/lib/pabordet.ts) står på samma platser och ritas av samma Filmruta.astro, och dessutom efter en
 // del i en ram (del: <rubrik>, en vecka).
 const filmer = metodensFilmer(d, id);
+// De små korten (K-769): bara på metodens egen sida, inte på en enhets eller en rams sida.
+const bladkort = undersida ? null : stodmetodensBladkort(id, d);
+const bladkortensPlats = bladkort ? stodkortensStycke(id, d) : -1;
 // De centrala sakerna (src/lib/centrala.ts): överst i menyn och i texten efter meningen som nämner dem (Centralrad.astro).
 const centrala = [...metodensCentrala(d), ...(undersida ? [] : vavdaIBorjan(id, d))];
 const bilderPaBordet = metodensPaBordet(d, id);
@@ -346,7 +351,8 @@ const meny = [
   <div class="metod-text">
   {/* En enhets sida har bara enhetens blad (banken, src/lib/bank.ts), och allt fram till ramarna står på metodens sida. */}
   {!undersida && (<>
-  {d.inledning.map((s, i) => <><p>{s}</p><Centralrad saker={centralaVid(d, { stycke: i + 1 })} metod={id} titel={d.titel} /><Filmruta filmer={vid({ stycke: i + 1 })} titel={d.titel} /></>)}
+  {/* De små korten tidigt (K-769, src/data/bladkort-stod.json), efter stycket som nämner saken, som i Metoder. */}
+  {d.inledning.map((s, i) => <><p>{s}</p>{bladkort && i === bladkortensPlats && <Bladkort b={bladkort} id={id} titel={d.titel} />}<Centralrad saker={centralaVid(d, { stycke: i + 1 })} metod={id} titel={d.titel} /><Filmruta filmer={vid({ stycke: i + 1 })} titel={d.titel} /></>)}
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
   {/* En lektions regel för att gå till nästa lektion står sist i rutan, som i Word och i seriens planerare (K-551). */}
@@ -505,6 +511,14 @@ const meny = [
         <div class="undvik"><h3>Undvik</h3><ul>{d.roll.undvik.map((x) => <li>{x}</li>)}</ul></div>
       </div>
       <Filmruta filmer={vid({ avsnitt: 'roll' })} titel={d.titel} />
+    </section>
+  )}
+
+  {/* Lärarens frågor efter Lärarens roll, som i Metoder (K-775): frågan som rad att fälla ut och svaret under. */}
+  {d.lararensFragor && (
+    <section id="lararens-fragor">
+      <h2>{d.lararensFragor.rubrik}</h2>
+      {d.lararensFragor.fragor.map((f) => <details class="um-rad"><summary><span>{f.fraga}</span></summary><div class="um-rad-inne"><p>{f.svar}</p></div></details>)}
     </section>
   )}
 

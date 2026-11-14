@@ -719,6 +719,9 @@ export declare const litenForsta: (s: string) => string;
 export declare const utanRadbrytning: (s: string) => string;
 export declare const mening: (s: string) => string;
 export declare const utanPunkt: (s: string) => string;
+/** En länk ut från sajten, [text](https://…), och texten i delar med länkarna (K-768). */
+export declare const WEBBLANK: RegExp;
+export declare function webbdelar(t: string): { text: string; href?: string }[];
 export declare const decimal: (n: number | null) => string;
 export declare const tvasiffrigt: (n: number) => string;
 export declare const esc: (s: string) => string;
@@ -1027,3 +1030,6 @@ export declare const STRATEGIBLADET: Readonly<{ fil: string; nyckel: string }>;
 export declare function metodensStrategiblad(metod: string): Readonly<{ fil: string; nyckel: string }>;
 /** En metods strategikort två och två på A4, och nyckeln i manifestet. */
 export declare function metodensStrategikort(metod: string): Readonly<{ fil: string; nyckel: string }>;
+/** Lärarens frågor i båda bankerna (K-775): antalen och svarets längd, och felen. */
+export declare const LARARENS_FRAGOR: Readonly<{ minst: number; hogst: number; farJag: number; hinder: number; svar: number }>;
+export declare function lararensFragorFel(d: { lararensFragor?: { fragor?: { fraga: string; svar: string }[] } }): string[];

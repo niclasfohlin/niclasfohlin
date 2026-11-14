@@ -193,6 +193,14 @@ roll:
     - Gör så här.
   undvik:
     - Undvik det här.
+# Lärarens frågor efter Lärarens roll, som i Metoder (K-775; METODER.md, tabellen över modellens delar): tre till sex frågor
+# i lärarens röst, minst två Får jag …? med svaret ur Tre saker att hålla fast vid och minst ett hinder utanför passet, som
+# tiden, materialet eller kollegorna. Svaret säger vad läraren gör och var det står i metoden, på högst 220 tecken.
+# lararensFragor:
+#   rubrik: Lärarens frågor
+#   fragor:
+#     - fraga: Får jag korta passet när gruppen är trött?
+#       svar: "Ja, men behåll …"
 urval:
   rubrik: Var hittar du texterna?
   text:

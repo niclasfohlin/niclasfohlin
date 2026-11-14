@@ -29,6 +29,7 @@ import { provaVav, vavdaIBorjan } from '../../lib/vav';
 import { metodensLektionskort } from '../../lib/lektionskort';
 import { planbar, planensAdress } from '../../lib/insatsplan';
 import { KNAPPENS_KLASS, PLANERA } from '../../lib/standard/index.js';
+import { sidansSaker } from '../../lib/metodsaker';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
@@ -74,7 +75,7 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
 <Base title={d.titel} description={d.ingress} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="metod" data-serie-adress={lektion && serie ? `/stodundervisning/${serie.id}` : undefined} data-serie-titel={lektion && serie ? serie.titel : undefined}>
     {/* Ett spann som "1–4" bryts aldrig efter tankstrecket, i hela metoden (EjBryt.astro, K-227). */}
-    <EjBryt><Boklankar metod={m.id} titel={d.titel}>
+    <EjBryt><Boklankar metod={m.id} titel={d.titel} saker={sidansSaker(d, m.id)}>
     {koppling && <Seriemeny koppling={koppling} />}
     <div class="metod-topp">
       <header class="metod-huvud">

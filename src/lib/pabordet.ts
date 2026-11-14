@@ -12,6 +12,10 @@
 //          centrerad. I Word ligger en cell över varje yta, så att bladet går att skriva i (bildblad i metoddocx.ts).
 //   elev   eleven ser på bilden (kartläggningens blad): den står direkt efter det eleven läser, utan rubriken På bordet.
 //   skala  mellan 0,5 och 1: bilden ritas smalare och mitt på raden i Word, så att den ryms på sidan med sin text.
+//   ide    en bild som visar idén (riggens standard, avsnitt 4, Bilder som visar idén; i Stödundervisning sedan K-780, Niclas
+//          2026-11-14 till riggen: "Ja på alla som gör bättre stödundervisning"): den står direkt under sin fria tabell
+//          (efter: "tabell: <rubrik>") utan rubriken På bordet, med bildtexten under, som i Metoder (UmFriaTabeller.astro).
+//          Högst två i en metod, och bygget stannar annars.
 import type { MetodData } from './metod';
 import { passar, tolkaEfter, type FilmPlats } from './film';
 import { bildtextFel as standardensBildtextFel } from './standard/index.js';
@@ -22,16 +26,24 @@ import BLADFOT from '../data/bladfot.json';
 export type PaBordetFalt = MetodData['pabordet'][number];
 export interface Bladyta { namn: string; x: number; y: number; b: number; h: number; lage?: 'uppe' | 'mitt' | 'nere'; mitt?: boolean }
 // fil: ett blad i en vanlig ram har en egen fil att skriva ut (egnaBlad i src/lib/bladmaterial.ts), som metodens sida sätter.
-export interface PaBordet { bild: PaBordetFalt; adress: string; vid?: FilmPlats; matt: { bredd: number; hojd: number }; ytor?: Bladyta[]; elev?: boolean; skala?: number; fot?: number; fil?: { namn: string; titel: string; statistik: string }; alla?: { namn: string; titel: string; text: string; pdftext: string; antal: number; liggande: boolean; statistik: string } }
+export interface PaBordet { bild: PaBordetFalt; adress: string; vid?: FilmPlats; matt: { bredd: number; hojd: number }; ytor?: Bladyta[]; elev?: boolean; skala?: number; ide?: boolean; fot?: number; fil?: { namn: string; titel: string; statistik: string }; alla?: { namn: string; titel: string; text: string; pdftext: string; antal: number; liggande: boolean; statistik: string } }
 export const PABORDET_MATT = { bredd: 960, hojd: 540 };
-type Bilddata = { bredd?: number; hojd?: number; ytor?: Bladyta[]; elev?: boolean; skala?: number };
+type Bilddata = { bredd?: number; hojd?: number; ytor?: Bladyta[]; elev?: boolean; skala?: number; ide?: boolean };
+/** Högst så många bilder som visar idén i en metod (riggens standard, avsnitt 4). */
+export const HOGST_IDEBILDER = 2;
 const bilddata = (id: string, nr: number): Bilddata => (BILDDATA as Record<string, Record<string, Bilddata>>)[id]?.[String(nr)] ?? {};
 
 /** Metodens bilder På bordet, i fältets ordning. */
-export const metodensPaBordet = (d: MetodData, id: string): PaBordet[] =>
+export const metodensPaBordet = (d: MetodData, id: string): PaBordet[] => {
+  const ide = (d.pabordet ?? []).filter((b) => bilddata(id, b.nr).ide);
+  if (ide.length > HOGST_IDEBILDER) throw new Error(`${id}: ${ide.length} bilder som visar idén (ide i src/data/pabordet.json), och en metod har högst ${HOGST_IDEBILDER}.`);
+  for (const b of ide) if (!/^tabell: ./.test(b.efter ?? '')) throw new Error(`${id}: bilden ${b.nr} ("${b.rubrik}") visar idén men står efter "${b.efter}". En sådan bild står under sin fria tabell: efter: "tabell: <rubrik>".`);
+  return metodensBilder(d, id);
+};
+const metodensBilder = (d: MetodData, id: string): PaBordet[] =>
   (d.pabordet ?? []).map((b) => {
     const x = bilddata(id, b.nr);
-    return { bild: b, adress: `/stodundervisning/${id}-pabordet-${b.nr}.svg`, vid: tolkaEfter(b.efter), matt: { bredd: x.bredd ?? PABORDET_MATT.bredd, hojd: x.hojd ?? PABORDET_MATT.hojd }, ...(x.ytor ? { ytor: x.ytor } : {}), ...(x.elev ? { elev: true } : {}), ...(x.skala ? { skala: x.skala } : {}), ...((BLADFOT as Record<string, { fot: number }>)[`${id}-${b.nr}`] ? { fot: (BLADFOT as Record<string, { fot: number }>)[`${id}-${b.nr}`].fot } : {}) };
+    return { bild: b, adress: `/stodundervisning/${id}-pabordet-${b.nr}.svg`, vid: tolkaEfter(b.efter), matt: { bredd: x.bredd ?? PABORDET_MATT.bredd, hojd: x.hojd ?? PABORDET_MATT.hojd }, ...(x.ytor ? { ytor: x.ytor } : {}), ...(x.elev ? { elev: true } : {}), ...(x.skala ? { skala: x.skala } : {}), ...(x.ide ? { ide: true } : {}), ...((BLADFOT as Record<string, { fot: number }>)[`${id}-${b.nr}`] ? { fot: (BLADFOT as Record<string, { fot: number }>)[`${id}-${b.nr}`].fot } : {}) };
   });
 // Ett blad (Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt 4): en bild På bordet vars rubrik
 // börjar med "Blad: ", som "Blad: Tankekartan 1: fyra delar". Den står ensam på ett liggande A4 direkt efter sin ram
@@ -53,7 +65,7 @@ export const bladVid = (bilder: PaBordet[], ramensRubrik: string) => paBordetVid
 export const paBordetVid = (bilder: PaBordet[], plats: FilmPlats) => bilder.filter((b) => b.vid && passar(b.vid, plats));
 /** Bildens textalternativ: rubriken och alt, eller texten när bilden inte har alt (STIL.md under Bildtexter), med en punkt
  * efter rubriken bara när den inte redan slutar med ett skiljetecken (Berätta mera!). */
-export const bildensAlt = (b: PaBordet) => `På bordet: ${b.bild.rubrik}${/[.!?]$/.test(b.bild.rubrik) ? '' : '.'} ${b.bild.alt ?? b.bild.text}`;
+export const bildensAlt = (b: PaBordet) => `${b.ide ? '' : 'På bordet: '}${b.bild.rubrik}${/[.!?]$/.test(b.bild.rubrik) ? '' : '.'} ${b.bild.alt ?? b.bild.text}`;
 /** Bildtextens fel (STIL.md under Bildtexter, K-486), med standardens kontroll, som riggen kör före leveransen. Bilden
  * här visas med bildtext (Pabordet.astro); ett blad har alltid textalternativ i alt. */
 export function bildtextFel(b: PaBordet): string | undefined {

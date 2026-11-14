@@ -16,7 +16,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import sharp from 'sharp';
-import { MINIBILDEN, metodensMinibilder } from '../src/lib/bladkortfiler.js';
+import { MINIBILDEN, metodensMinibilder, STODETS_MAPP, stodmetodensMinibilder } from '../src/lib/bladkortfiler.js';
 
 const ROT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const UT = join(ROT, 'public', 'metoder');
@@ -31,6 +31,10 @@ const KORT = 0.2;
 const alla = process.argv.includes('--alla');
 const summa = (b) => createHash('sha256').update(b).digest('hex').slice(0, 16);
 const register = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'bladkort.json'), 'utf8'));
+// Stödmetodernas små kort (K-769) har ett eget register och sina minibilder bredvid stödmetodens filer.
+const STODREGISTRET = join(ROT, 'src', 'data', 'bladkort-stod.json');
+const stodregister = existsSync(STODREGISTRET) ? JSON.parse(readFileSync(STODREGISTRET, 'utf8')) : {};
+const UT_STOD = join(ROT, STODETS_MAPP);
 const manifest = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : {};
 const nytt = {};
 
@@ -77,7 +81,7 @@ function radernaMed(data, bredd, hojd, del, mall) {
   return kort[del === 'ovre' ? 0 : 1];
 }
 
-async function gor({ kalla, sida, del, fil }) {
+async function gor({ kalla, sida, del, fil }, UT) {
   const bild = await sidan(kalla, sida);
   const { data, info } = await sharp(bild).flatten({ background: '#ffffff' }).greyscale().raw().toBuffer({ resolveWithObject: true });
   const { width, height } = info;
@@ -98,20 +102,28 @@ async function gor({ kalla, sida, del, fil }) {
 
 let gjorda = 0;
 const gallande = new Set();
+const gallandeStod = new Set();
+async function minibild(id, m, ut, giltiga) {
+  if (!existsSync(join(ROT, m.kalla))) throw new Error(`${id}: minibilden ${m.namn} ska göras ur ${m.kalla}, som saknas.`);
+  const nyckel = `${FORMEN}:${m.sida}:${m.del}:${summa(readFileSync(join(ROT, m.kalla)))}`;
+  giltiga.add(m.fil);
+  nytt[m.fil] = nyckel;
+  if (!alla && manifest[m.fil] === nyckel && existsSync(join(ut, m.fil)) && existsSync(join(ut, m.fil.replace(/\.webp$/, '.png')))) return;
+  await gor(m, ut);
+  gjorda++;
+}
 for (const [id, post] of Object.entries(register)) {
   if (id === '_om') continue;
   const d = parse(readFileSync(join(ROT, 'src', 'content', 'undervisningsmetoder', `${id}.yaml`), 'utf8'));
   const sidor = existsSync(join(ROT, 'src', 'data', 'materialets-sidor.json')) ? JSON.parse(readFileSync(join(ROT, 'src', 'data', 'materialets-sidor.json'), 'utf8')) : {};
-  for (const m of metodensMinibilder(id, d, post, sidor)) {
-    if (!existsSync(join(ROT, m.kalla))) throw new Error(`${id}: minibilden ${m.namn} ska göras ur ${m.kalla}, som saknas.`);
-    const nyckel = `${FORMEN}:${m.sida}:${m.del}:${summa(readFileSync(join(ROT, m.kalla)))}`;
-    gallande.add(m.fil);
-    nytt[m.fil] = nyckel;
-    if (!alla && manifest[m.fil] === nyckel && existsSync(join(UT, m.fil)) && existsSync(join(UT, m.fil.replace(/\.webp$/, '.png')))) continue;
-    await gor(m);
-    gjorda++;
-  }
+  for (const m of metodensMinibilder(id, d, post, sidor)) await minibild(id, m, UT, gallande);
 }
-for (const f of readdirSync(UT).filter((x) => /-minibild-[a-z0-9-]+\.(webp|png)$/.test(x) && !gallande.has(x.replace(/\.png$/, '.webp')))) rmSync(join(UT, f));
+for (const [id, post] of Object.entries(stodregister)) {
+  if (id === '_om') continue;
+  for (const m of stodmetodensMinibilder(id, post, (f) => existsSync(join(ROT, f)))) await minibild(id, m, UT_STOD, gallandeStod);
+}
+for (const [mapp, giltiga] of [[UT, gallande], [UT_STOD, gallandeStod]]) {
+  for (const f of readdirSync(mapp).filter((x) => /-minibild-[a-z0-9-]+\.(webp|png)$/.test(x) && !giltiga.has(x.replace(/\.png$/, '.webp')))) rmSync(join(mapp, f));
+}
 writeFileSync(MANIFEST, `${JSON.stringify(nytt, null, 2)}\n`);
-console.log(`Minibilderna: ${gallande.size} kort, ${gjorda} ${gjorda === 1 ? 'gjord' : 'gjorda'} nu.`);
+console.log(`Minibilderna: ${gallande.size + gallandeStod.size} kort, ${gjorda} ${gjorda === 1 ? 'gjord' : 'gjorda'} nu.`);

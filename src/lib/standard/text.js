@@ -149,3 +149,28 @@ export const talIRegex = (fran, till, siffror = true) => {
   const tiotal = till >= 20 ? [`(?:${TIOTAL.slice(2, Math.min(9, Math.floor(till / 10)) + 1).join('|')})(?:en|${ENTAL.slice(1, 10).join('|')})?`] : [];
   return [...(siffror ? ['\\d+'] : []), ...(fran <= 1 && till >= 1 ? ['en'] : []), ...ENTAL.slice(Math.max(0, fran), Math.min(19, till) + 1), ...tiotal].join('|');
 };
+/**
+ * En länk ut från sajten i en text, skriven [text](https://…), som Material att köpa i Tänkande klassrum (riggens leverans
+ * 2026-11-14, K-762) och litteraturlistan i Boksamtal i grupp. En rot för sidan i båda bankerna (medWebblankar och
+ * lankaBocker) och Word-filerna (lankLopor), så att samma skrivsätt blir en länk överallt (K-768). Adressen får ha
+ * parenteser i par, som en artikel på Wikipedia.
+ */
+export const WEBBLANK = /\[([^\]\n]+)\]\((https?:\/\/(?:[^()\s]|\([^()\s]*\))+)\)/g;
+/**
+ * Texten i delar: länkarna med sin text och adress, och texten mellan dem. Utan länkar är svaret en del med hela texten.
+ * @param {string} t
+ * @returns {{ text: string, href?: string }[]}
+ */
+export function webbdelar(t) {
+  const s = String(t ?? '');
+  /** @type {{ text: string, href?: string }[]} */
+  const ut = [];
+  let forra = 0;
+  for (const m of s.matchAll(WEBBLANK)) {
+    if (m.index > forra) ut.push({ text: s.slice(forra, m.index) });
+    ut.push({ text: m[1], href: m[2] });
+    forra = m.index + m[0].length;
+  }
+  if (forra < s.length || !ut.length) ut.push({ text: s.slice(forra) });
+  return ut;
+}

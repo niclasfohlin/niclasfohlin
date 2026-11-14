@@ -2,7 +2,7 @@
 // Bilderna På bordet ur en leverans från metodriggen: kopierar svg-filerna till public/stodundervisning/ och skriver det
 // om bilderna som inte står i metodens fil till src/data/pabordet.json, ur riggens out/<slug>/pabordet.json (Faktatextsamtal
 // i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt 4, 6, 7 och 9): bildens mått när de är andra än 960 × 540,
-// bladets skrivytor (ytor), elev (eleven ser på bilden) och skala (bilden ritas smalare i Word). src/lib/pabordet.ts läser
+// bladets skrivytor (ytor), elev (eleven ser på bilden), skala (bilden ritas smalare i Word) och ide (bilden visar idén). src/lib/pabordet.ts läser
 // filen. Inget skrivs för hand: en ny leverans körs genom skriptet igen, och metodens post skrivs då om i sin helhet.
 // Bilderna till databasens faktatexter (src/content/faktateman/, K-435) kommer i en egen leverans, riggens
 // out/<slug>/databas/pabordet.json, som scripts/faktateman.mjs tar in med --databas: då läggs temanas bilder till metodens
@@ -60,6 +60,8 @@ for (const b of rigg.bilder) {
   if (b.ytor?.length) x.ytor = b.ytor.map((y) => ({ namn: y.namn, x: y.x, y: y.y, b: y.b, h: y.h, ...(y.lage ? { lage: y.lage } : {}), ...(y.mitt ? { mitt: true } : {}) }));
   if (b.elev) x.elev = true;
   if (typeof b.skala === 'number') x.skala = b.skala;
+  // En bild som visar idén står under sin fria tabell utan rubriken På bordet (K-780, src/lib/pabordet.ts).
+  if (b.ide) x.ide = true;
   if (Object.keys(x).length) post[b.nr] = x;
 }
 if (Object.keys(post).length) data[slug] = post; else delete data[slug];

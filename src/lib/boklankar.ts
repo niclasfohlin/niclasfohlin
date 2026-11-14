@@ -25,11 +25,19 @@
 // sajten som står som text, som "niclasfohlin.se/lastexter", länkar dit. På sidan får ett stycke som skickar läsaren till
 // ett verktyg ("finns på sidan Ta fram ett matteproblem") verktygets knapp efter sig, om inte knappen redan står där.
 //
+// Metodens saker (K-767; STIL.md under Hänvisningar, raden En sak i metoden): på stödmetodens sida leder ett blad, en mall,
+// ett kort eller en tabell som texten nämner med namnet till saken, som i Planera insatsen och i Metoder, första gången under
+// varje rubrik och inte i sakens eget avsnitt. Sidan ger sakerna (sidansSaker i src/lib/metodsaker.ts). En länk ut från
+// sajten, [text](https://…), blir en länk på sidorna och i Word (K-768, webbdelar i standarden).
+//
 // Det gäller varje fält i varje metod: på sidan lägger Boklankar.astro länkarna i sidans färdiga HTML, och i Word gör
 // metoddocx.ts det i textens löpor. Reglerna står i STIL.md under Hänvisningar. Modulen läser inga filer själv, eftersom
 // webbläsaren bygger Word-filen med samma kod.
 import { CENTRALA, centralKnappHtml, centralLank, lasbarAdress, type Central } from './centrala';
-import { fohlinHanvisningar, type FohlinHanvisning } from './standard/index.js';
+import { fohlinHanvisningar, sakdelar, sakensFormer, webbdelar, type FohlinHanvisning } from './standard/index.js';
+
+/** En sak i metoden som en text på sidan kan nämna (src/lib/metodsaker.ts, K-767): namnet, formerna och adressen. */
+export interface SidansSak { namn: string; former?: string[]; versal?: boolean; forst?: boolean; adress: string }
 
 const FILER = import.meta.glob<string>('../content/bocker/*.md', { eager: true, query: '?raw', import: 'default' });
 
@@ -220,7 +228,8 @@ export function hanvisningsFel(text: string): string[] {
 // eller en stil hoppas över i sin helhet, eftersom innehållet kan ha tecknet <. Texten läses som den står i HTML: namnen
 // har inga tecken som skrivs om, och "&" i en hänvisning läser standarden också som &amp;.
 const HOPPA = new Set(['a', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'th', 'dt', 'caption', 'script', 'style', 'svg', 'title', 'summary', 'label', 'textarea', 'select', 'option', 'noscript', 'code', 'pre', 'template']);
-const HOPPA_KLASS = /\sclass="[^"]*\b(?:upphov|vav)\b/;
+// Nedladdningsrutan och filernas rubriker är knappar och etiketter, inte text som nämner en sak (K-767).
+const HOPPA_KLASS = /\sclass="[^"]*\b(?:upphov|vav|nedladdning|filrubrik)\b/;
 // Ett stycke i en lista, en cell, ett citat eller en ruta får ingen knapp efter sig: knappen hör till metodens löptext.
 const RUTA = new Set(['li', 'td', 'th', 'dd', 'blockquote', 'aside', 'figure']);
 const TOMMA = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
@@ -233,13 +242,25 @@ const SIDAN = /\bsid(?:an|or|orna)\b/;
  * adress och namn i statistiken som verktygets knapp) och adresserna på sajten. metod och titel är metodens id och namn,
  * för statistiken och för knappen som ett stycke som skickar läsaren till ett verktyg får efter sig.
  */
-export function lankaBocker(html: string, o: { metod?: string; titel?: string; knappar?: boolean } = {}): string {
-  if (!MONSTER && !VERKTYGSMONSTER) return html;
+export function lankaBocker(html: string, o: { metod?: string; titel?: string; knappar?: boolean; saker?: SidansSak[] } = {}): string {
+  const saker = o.saker ?? [];
+  if (!MONSTER && !VERKTYGSMONSTER && !saker.length && !html.includes('](http')) return html;
   const metod = o.metod ?? '';
   const titel = o.titel ?? '';
   let ut = '';
   let hoppa = 0;
-  const stack: { namn: string; hoppar: boolean }[] = [];
+  const stack: { namn: string; hoppar: boolean; id?: string }[] = [];
+  // Avsnitten som texten står i, efter rubrikernas ankare (en rams ankare står på dess h3), så att en sak inte länkar till
+  // sig själv i sitt eget avsnitt.
+  const avsnitt: { niva: number; id?: string }[] = [];
+  // Adresserna som redan är länkar under rubriken: en sak länkas första gången den nämns under varje rubrik (h2 och h3), och
+  // två namn för samma ställe, som Flygdagen och Flygdagen, vecka 3, räknas som en, så att
+  // texten inte blir en rad av länkar (K-767; en texttypskurs hade annars över 300 på sidan, och KONCEPT.md: läsbarhet före
+  // effekter). Det är samma regel som verktygets knapp, en gång i avsnittet.
+  let sedda = new Set<string>();
+  // Formerna av sakernas namn i små bokstäver: en text som inte har någon av dem går förbi sakdelar, som annars bygger
+  // ett mönster per form och text.
+  const sakformer = saker.flatMap((s) => (s.former ?? sakensFormer(s.namn)).map((f: string) => f.toLocaleLowerCase('sv')));
   // Styckena som är öppna: deras text, verktygen som nämns i dem, i ordning, och om de får en knapp efter sig.
   const stycken: { text: string; verktyg: { c: Central; plats: number }[]; knapp: boolean }[] = [];
   // Knapparnas adresser i en bit HTML, så att en knapp som redan står i avsnittet inte ritas en gång till.
@@ -264,8 +285,36 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
     if (stycke) stycke.text += t;
     return delar.length === 1 && !delar[0].adress && !delar[0].central ? t : html2;
   };
+  // Metodens saker (K-767): ett namn som en sak har leder till saken, som i Planera insatsen och i Metoder, utom i sakens
+  // eget avsnitt. Texten mellan sakerna går vidare till hänvisningarna ovan.
+  // En länk ut från sajten, [text](https://…), som Material att köpa (K-768, webbdelar i standarden), blir en länk som öppnas
+  // i en ny flik, och texten runt den går vidare till sakerna och hänvisningarna.
+  const medLankar = (t: string) => {
+    if (hoppa || !t.includes('](http')) return medSaker(t);
+    return webbdelar(t).map((x) => {
+      if (!x.href) return medSaker(x.text);
+      const stycke = stycken.at(-1);
+      if (stycke) stycke.text += x.text;
+      return `<a class="m-webblank" href="${x.href}" target="_blank" rel="noopener">${x.text}</a>`;
+    }).join('');
+  };
+  const medSaker = (t: string) => {
+    if (hoppa || !t.trim() || !sakformer.length) return text(t);
+    const lag = t.toLocaleLowerCase('sv');
+    if (!sakformer.some((f) => lag.includes(f))) return text(t);
+    const egna = new Set([...stack.map((s) => s.id), ...avsnitt.map((a) => a.id)].filter(Boolean).map((x) => `#${x}`));
+    const egen = (s: SidansSak) => { const i = s.adress.indexOf('#'); return i >= 0 && egna.has(s.adress.slice(i)); };
+    return sakdelar(t, saker).map((x) => {
+      const s = x.sak === undefined ? undefined : saker[x.sak];
+      if (!s || egen(s) || sedda.has(s.adress)) return text(x.text);
+      sedda.add(s.adress);
+      const stycke = stycken.at(-1);
+      if (stycke) stycke.text += x.text;
+      return `<a class="m-sak" href="${s.adress}">${x.text}</a>`;
+    }).join('');
+  };
   while ((m = tagg.exec(html))) {
-    ut += text(html.slice(fran, m.index));
+    ut += medLankar(html.slice(fran, m.index));
     ut += m[0];
     fran = tagg.lastIndex;
     const namn = m[2]?.toLowerCase();
@@ -301,9 +350,12 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
     } else {
       const hoppar = HOPPA.has(namn) || HOPPA_KLASS.test(m[3] ?? '');
       if (namn === 'p') stycken.push({ text: '', verktyg: [], knapp: o.knappar !== false && !hoppa && !stack.some((s) => RUTA.has(s.namn)) });
-      stack.push({ namn, hoppar });
+      const id = /\sid="([^"]+)"/.exec(m[3] ?? '')?.[1];
+      const rubrik = /^h([1-6])$/.exec(namn);
+      if (rubrik) { const niva = Number(rubrik[1]); while (avsnitt.length && avsnitt.at(-1)!.niva >= niva) avsnitt.pop(); avsnitt.push({ niva, id }); if (niva <= 3) sedda = new Set(); }
+      stack.push({ namn, hoppar, id });
       if (hoppar) hoppa++;
     }
   }
-  return ut + text(html.slice(fran));
+  return ut + medLankar(html.slice(fran));
 }

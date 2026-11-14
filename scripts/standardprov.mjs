@@ -158,6 +158,26 @@ for (const [d, vantat] of lektionsfall) { const f = Object.values(faktaIFastForm
   const stodFel = namnetsForstaOrdFel({ ramar: stod, steg: { rader: [{ namn: 'Boksläppet', vad: 'Läs Inbjudan högt och lägg fram frågekorten.' }] } });
   if (stodFel.length !== 1 || !/säger "Inbjudan" innan delen har sagt Inbjudan till läsaren:/.test(stodFel[0])) fel.push(`namnetsForstaOrdFel läser Stödundervisningens namn fel: ${JSON.stringify(stodFel)}`);
 }
+// Lärarens frågor i båda bankerna (K-775): tre till sex, minst två Får jag och ett hinder, frågetecken och svaret högst 220
+// tecken. En hel lista går igenom, och varje fel stoppas för sig.
+{
+  const { lararensFragorFel } = await import('../src/lib/standard/index.js');
+  const q = (fraga, svar = 'Gör så här.') => ({ fraga, svar });
+  const hel = [q('Får jag korta passet?'), q('Får jag byta text?'), q('Hur hinner jag?')];
+  const fall = [
+    [hel, 0],
+    [hel.slice(0, 2), 2],
+    [[q('Får jag a?'), q('Får jag b?'), q('Får jag c?')], 1],
+    [[q('Får jag a?'), q('Hur b?'), q('Hur c?')], 1],
+    [[...hel.slice(0, 2), q('Hur hinner jag')], 1],
+    [[...hel.slice(0, 2), q('Hur hinner jag?', 'x'.repeat(221))], 1],
+  ];
+  for (const [fragor, n] of fall) {
+    const f = lararensFragorFel({ lararensFragor: { fragor } });
+    if (f.length !== n) fel.push(`lararensFragorFel gav ${f.length} fel i stället för ${n}: ${JSON.stringify(f)}`);
+  }
+  if (lararensFragorFel({}).length) fel.push('lararensFragorFel ger fel på en metod utan fältet');
+}
 // Undervisningsmetoderna (K-621): utfallens gränser som riggens standard räknar dem, och delarnas ordning och text.
 for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13'], [5, '1|2-2|3']]) { const g = utfallensGranser(n); const f = `${g.nastanAlla}|${g.deFlesta.join('-')}|${g.halften}`; if (f !== vantat) fel.push(`utfallensGranser(${n}) ger ${f}, inte ${vantat}`); }
 // Effektens skala: texten säger gränserna ur konstanten, och andra kolumnen börjar vid Cohens 0,2 (Niclas 2026-10-30).

@@ -51,3 +51,21 @@ export function metodensMinibilder(id, d, post, sidor = {}) {
     return bilden(`public/metoder/${id}-tabell-${slugAv(namn)}.pdf`);
   });
 }
+
+/** Var minibilderna till en stödmetods små kort står: bredvid stödmetodens filer (K-769). */
+export const STODETS_MAPP = 'public/stodundervisning';
+/**
+ * En stödmetods minibilder (K-769, src/data/bladkort-stod.json): varje sak är ett blad, en mall eller en tabell med en egen
+ * fil (sakfiler i src/lib/sakfiler.ts, som en metod med Planera insatsen har), och bilden görs ur filens första sida. Filens
+ * namn följer sakens, <id>-blad-, -mall- eller -tabell-<namnet>, och finns säger vilken av dem som finns.
+ * @param {string} id
+ * @param {{ saker?: (string | { namn: string, mening: string })[] }} post
+ * @param {(fil: string) => boolean} finns
+ */
+export function stodmetodensMinibilder(id, post, finns) {
+  return (post.saker ?? []).map((s) => {
+    const namn = sakensNamn(s);
+    const kalla = ['blad', 'mall', 'tabell'].map((slag) => `${STODETS_MAPP}/${id}-${slag}-${slugAv(namn)}.pdf`).find(finns);
+    return { namn, fil: minibildensFil(id, namn), kalla: kalla ?? `${STODETS_MAPP}/${id}-blad-${slugAv(namn)}.pdf`, sida: 1, del: 'hel' };
+  });
+}

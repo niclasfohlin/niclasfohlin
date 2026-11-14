@@ -80,6 +80,16 @@ export function sakernaI(texter: string[], saker: MetodSak[]): MetodSak[] {
   return saker.filter((_, i) => anvanda.has(i));
 }
 
+/**
+ * Sakerna som blir länkar i texten på metodens sida (K-767; STIL.md under Hänvisningar), som i Planera insatsen och i
+ * Metoder: allt i metodensSaker utom verktygen, som Boklankar.astro länkar med sin statistik och knapp, en sak som bara
+ * finns i några veckor, eftersom sidan inte står i en vecka, och filmerna, som står på sidan själv.
+ */
+export const sidansSaker = (d: MetodData, id: string): MetodSak[] => {
+  const verktyg = new Set(CENTRALA.map((c) => lasbarAdress(c)));
+  return metodensSaker(d, id).filter((s) => !s.baraVeckorna && !verktyg.has(s.adress) && !s.adress.endsWith('#lathund-film'));
+};
+
 /** Metodens saker: materialets ramar, mallarna, snabbmallen, lektionskorten, lathunden, bankens texter och verktygen. */
 export function metodensSaker(d: MetodData, id: string, version?: string): MetodSak[] {
   const sida = `/stodundervisning/${id}`;

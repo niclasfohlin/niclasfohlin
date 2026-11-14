@@ -57,8 +57,9 @@ if (bildtextensFel) throw new Error(bildtextensFel);
   </figure>
 ) : (
   <figure class={`m-pabordet${vecka ? ' i-del' : ''}`}>
-    {!vecka && <p class="m-pabordet-rubrik">På bordet · {b.bild.rubrik}</p>}
-    <a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={b.bild.alt ? bildensAlt(b) : `På bordet: ${b.bild.rubrik}`} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
+    {/* En bild som visar idén står under sin tabell utan rubriken På bordet (b.ide, K-780). */}
+    {!vecka && !b.ide && <p class="m-pabordet-rubrik">På bordet · {b.bild.rubrik}</p>}
+    <a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={b.bild.alt || b.ide ? bildensAlt(b) : `På bordet: ${b.bild.rubrik}`} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
     <figcaption>{vecka ? <><b>På bordet.</b>{' '}{b.bild.text}</> : b.bild.text}</figcaption>
   </figure>
 )}

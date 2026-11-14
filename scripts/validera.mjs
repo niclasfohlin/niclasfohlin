@@ -125,6 +125,8 @@ steg('pdfdelar', 'node scripts/pdfdelar.mjs');
 steg('pdfstorlek', 'python scripts/pdfstorlek.py');
 steg('paritet', 'node scripts/paritet.mjs');
 steg('utskriftsformat', 'node scripts/utskriftsformat.mjs');
+// Länkarna till metodens saker och länkarna ut på stödmetodernas sidor (K-767, K-768).
+steg('saklankprov', 'node scripts/saklankprov.mjs');
 steg('strukturprov', 'node scripts/strukturer/prov.mjs');
 steg('strategiprov', 'node scripts/strategier/prov.mjs');
 steg('metoderprov', 'node scripts/metoderprov.mjs');

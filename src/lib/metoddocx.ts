@@ -11,7 +11,7 @@ import {
 import type { ParagraphChild } from 'docx';
 import { centralaVid, lasbarAdress, metodensCentrala, radenTillVerktyget, type Textplats } from './centrala';
 import { centraltPapper } from './centraladata';
-import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening, vidareTillLektion } from './standard/index.js';
+import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening, vidareTillLektion, webbdelar } from './standard/index.js';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
 import { delensAdress, hanvisningsdelar, type Del } from './boklankar';
@@ -195,11 +195,13 @@ function run(text: string, o: StyckeVal = {}): TextRun {
 // cellerna, rutorna och listorna, och inte rubrikerna, som på sidan. lankLopor gör det för text med egna löpor, som
 // lathundens punkter, lärarhandledningarnas fält och lektionskortet (granskningen 2026-10-19, P2).
 const lankensAdress = (d: Del) => delensAdress(d, site.url);
+// En länk ut från sajten, [text](https://…), som Material att köpa, är en länk med sin text också i Word (K-768, webbdelar i
+// standarden, samma som sidan).
 export function lankLopor<T extends TextRun>(text: string, gor: (t: string, lank: boolean) => T): (T | ExternalHyperlink)[] {
-  return hanvisningsdelar(text).map((d) => {
+  return webbdelar(text).flatMap((w) => (w.href ? [new ExternalHyperlink({ link: w.href, children: [gor(w.text, true)] })] : hanvisningsdelar(w.text).map((d) => {
     const lank = lankensAdress(d);
     return lank ? new ExternalHyperlink({ link: lank, children: [gor(d.text, true)] }) : gor(d.text, false);
-  });
+  })));
 }
 function lopor(text: string, o: StyckeVal = {}): (TextRun | ExternalHyperlink)[] {
   return lankLopor(text, (t, lank) => run(t, lank ? { ...o, farg: FARG.huvud, understruken: true } : o));
@@ -3301,6 +3303,11 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     ut.push(...gorUndvik(d.roll.gor, d.roll.undvik));
     filmVid({ avsnitt: 'roll' });
   }
+  // Lärarens frågor efter Lärarens roll, som på sidan (K-775): frågan som en liten rubrik och svaret under.
+  if (d.lararensFragor) {
+    ut.push(h2(d.lararensFragor.rubrik));
+    for (const f of d.lararensFragor.fragor) ut.push(stycke(f.fraga, { fet: true, farg: FARG.huvud, hallIhop: true, efter: 40 }), stycke(f.svar));
+  }
   if (d.urval) {
     ut.push(h2(d.urval.rubrik));
     for (const s of d.urval.text) ut.push(stycke(s));
@@ -4223,8 +4230,8 @@ function pabordetBarn(b: PaBordet, maxHojd?: number, o: { utanRubrik?: boolean }
   const hojd = maxHojd ? Math.max(Math.round(hojdHel * VECKOBILD_MINST), Math.min(hojdHel, Math.floor(maxHojd / 15))) : hojdHel;
   const bredd = Math.round((hojd * b.matt.bredd) / b.matt.hojd);
   return [
-    ...(vecka || o.utanRubrik ? [] : [stycke(`På bordet · ${b.bild.rubrik}`, { fet: true, farg: FARG.huvud, storlek: 22, fore: 200, efter: 60, hallIhop: true })]),
-    new Paragraph({ keepNext: true, alignment: bredd < rad ? AlignmentType.CENTER : undefined, spacing: { before: vecka ? 140 : o.utanRubrik ? 80 : 0, after: 60 }, children: [bildRun(b.adress, bredd, o.utanRubrik || b.bild.alt ? bildensAlt(b) : `På bordet: ${b.bild.rubrik}`, hojd)] }),
+    ...(vecka || o.utanRubrik || b.ide ? [] : [stycke(`På bordet · ${b.bild.rubrik}`, { fet: true, farg: FARG.huvud, storlek: 22, fore: 200, efter: 60, hallIhop: true })]),
+    new Paragraph({ keepNext: true, alignment: bredd < rad ? AlignmentType.CENTER : undefined, spacing: { before: vecka ? 140 : o.utanRubrik ? 80 : 0, after: 60 }, children: [bildRun(b.adress, bredd, o.utanRubrik || b.bild.alt || b.ide ? bildensAlt(b) : `På bordet: ${b.bild.rubrik}`, hojd)] }),
     new Paragraph({ spacing: { before: 0, after: vecka ? 0 : 160 }, children: [...(vecka ? [run('På bordet. ', { fet: true, storlek: 19 })] : []), run(b.bild.text, { storlek: 19 })] }),
   ];
 }

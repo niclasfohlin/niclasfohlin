@@ -958,7 +958,7 @@ html.js .um-utfall-antal { display: flex; }
   .m-tabell.stapla.um-minuter td:last-child { grid-column: 1 / -1; }
 }
 /* Länkarna till metodens saker, och kärnans fyra under sin rubrik. */
-.um-sak { text-underline-offset: 0.15em; }
+.um-sak, .m-sak { text-underline-offset: 0.15em; }
 .um-korten > h3 { margin: 0 0 0.75rem; }
 /* Kallas också under undertiteln (design-3 nr 17), filmens knapp minst 44 punkter (nr 24) och foten utan linje (nr 23). */
 .um-sidan .metod-huvud .mp-kallas { margin: -0.6rem 0 1rem; }

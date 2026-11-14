@@ -5,7 +5,7 @@
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
 import { strategikortetI, strategiernaAv } from './strategier';
-import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker, lagretAv, type LagretsBro } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker, lagretAv, WEBBLANK, webbdelar, type LagretsBro } from './standard/index.js';
 import lagretsData from '../data/lagret.json';
 import { CENTRALA } from './centrala';
 
@@ -157,24 +157,17 @@ export const bladetsAnkare = (namn: string) => `blad-${slugAv(namn)}`;
 export function medSaker(text: string, saker: MetodSak[], kallor: Set<string>, sidor: { titel: string; href: string }[] = []): string {
   return sakernasText(String(text ?? ''), saker, (s, t) => `<a href="${esc(s.adress)}" class="um-sak">${esc(t)}</a>`, (t) => medKallor(t, kallor, sidor));
 }
-/** En länk ut från sajten i en cell, skriven [text](https://…), som riggens Word-fil ritar som länk (Material att köpa i
- *  Tänkande klassrum, riggens leverans 2026-11-14, K-762). Samma skrivsätt som litteraturlistan i Stödundervisning. */
-const WEBBLANK = /\[([^\]\n]+)\]\((https?:\/\/(?:[^()\s]|\([^()\s]*\))+)\)/g;
 /**
  * En text med länkar ut från sajten som HTML: varje [text](https://…) blir en länk som öppnas i en ny flik, och texten runt
  * länkarna går genom text, som medSaker, så att metodens saker och källorna är länkar som förut. Utan länkar är svaret
- * text(t), så att en cell utan länk ritas som förut.
+ * text(t), så att en cell utan länk ritas som förut. Skrivsättet och delarna står i standarden (WEBBLANK och webbdelar,
+ * K-768), en rot för sidorna i båda bankerna och Word-filerna, som riggens Word-fil ritar som länk (Material att köpa i
+ * Tänkande klassrum, K-762).
  */
 export function medWebblankar(t: string, text: (t: string) => string): string {
-  const s = String(t ?? '');
-  let ut = '';
-  let forra = 0;
-  for (const m of s.matchAll(WEBBLANK)) {
-    if (m.index > forra) ut += text(s.slice(forra, m.index));
-    ut += `<a href="${esc(m[2])}" class="um-webblank" target="_blank" rel="noopener">${esc(m[1])}</a>`;
-    forra = m.index + m[0].length;
-  }
-  return forra === 0 ? text(s) : ut + (forra < s.length ? text(s.slice(forra)) : '');
+  const delar = webbdelar(t);
+  if (delar.length === 1 && !delar[0].href) return text(delar[0].text);
+  return delar.map((x) => (x.href ? `<a href="${esc(x.href)}" class="um-webblank" target="_blank" rel="noopener">${esc(x.text)}</a>` : text(x.text))).join('');
 }
 /** Texten som läsaren ser den, med länkarnas text och utan deras adresser: "Magic-Chart whiteboardfilm, Lär & Lek". */
 export const utanWebblankar = (t: string) => String(t ?? '').replace(WEBBLANK, '$1');

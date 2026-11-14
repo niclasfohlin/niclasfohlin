@@ -433,6 +433,7 @@ export function undervisningsmetodensFel(d) {
   fel.push(...strukturkortensFel(d.strukturkort));
   fel.push(...strategikortensFel(d.strategikort));
   fel.push(...namnetsForstaOrdFel(d));
+  fel.push(...lararensFragorFel(d));
   return fel;
 }
 
@@ -947,6 +948,35 @@ export function veckansRubrik(r, { vecka = true, nummer = true } = {}) {
 export const forstaVeckansNamn = (d) => (forstaLektionensForm(d).namn === forstaLektionensForm({}).namn || !d.progression?.rader?.[0] ? forstaLektionensForm(d).namn : veckansRubrik(d.progression.rader[0]));
 /** Det svåraste i kort form (hinder.kort), som lathunden visar: risken och vad läraren gör (sajtens K-632, Niclas 2026-10-30). */
 export const HINDRETS_KORT = Object.freeze({ meningar: 2, tecken: 220 });
+/**
+ * Lärarens frågor (lararensFragor) i båda bankerna (riggens standard, avsnitt Lärarens frågor; i Stödundervisning sedan
+ * sajtens K-775, Niclas 2026-11-14: "Det som gör stödundervisning bättre gör du"): tre till sex frågor i lärarens egen röst,
+ * minst två Får jag …? med svaret ur det metoden håller fast vid, minst ett hinder utanför passet eller lektionen, och ett
+ * svar på högst 220 tecken som säger vad läraren gör.
+ */
+export const LARARENS_FRAGOR = Object.freeze({ minst: 3, hogst: 6, farJag: 2, hinder: 1, svar: 220 });
+/**
+ * Det som är fel i Lärarens frågor, eller en tom lista. Utan fältet är listan tom: det är metodens modell som säger om det
+ * krävs.
+ * @param {{ lararensFragor?: { fragor?: { fraga: string, svar: string }[] } }} d metodens fil
+ * @returns {string[]}
+ */
+export function lararensFragorFel(d) {
+  const fragor = d?.lararensFragor?.fragor;
+  if (!fragor) return [];
+  const L = LARARENS_FRAGOR;
+  /** @type {string[]} */
+  const fel = [];
+  if (fragor.length < L.minst || fragor.length > L.hogst) fel.push(`Lärarens frågor har ${fragor.length} frågor och ska ha ${L.minst} till ${L.hogst}.`);
+  const farJag = fragor.filter((f) => /^Får jag\b/.test(String(f.fraga).trim())).length;
+  if (farJag < L.farJag) fel.push(`Lärarens frågor har ${farJag} som börjar med Får jag och ska ha minst ${L.farJag}: det läraren vill anpassa, med svaret ur det metoden håller fast vid.`);
+  if (fragor.length - farJag < L.hinder) fel.push(`Lärarens frågor har inget hinder utanför passet, som tiden, materialet eller kollegorna: minst ${L.hinder} fråga som inte börjar med Får jag.`);
+  fragor.forEach((f, i) => {
+    if (!/\?$/.test(String(f.fraga).trim())) fel.push(`Lärarens fråga ${i + 1} ("${f.fraga}") slutar inte med frågetecken.`);
+    if (String(f.svar).length > L.svar) fel.push(`Svaret på "${f.fraga}" har ${String(f.svar).length} tecken och får ha högst ${L.svar}.`);
+  });
+  return fel;
+}
 
 /**
  * Första lektionens minuter med det läraren säger i varje del: delarna och minuterna ur tidsschemats variant "första

@@ -431,14 +431,14 @@ for (const fil of filer) {
   for (const nr of problemBilder) {
     const b = d.pabordet.find((x) => x.nr === nr);
     if (!ram(ramAv(b.efter))) continue;
-    const alt = norm(`På bordet: ${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.alt ?? b.text}`);
+    const alt = norm(`${bilddata[id]?.[String(b.nr)]?.ide ? '' : 'På bordet: '}${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.alt ?? b.text}`);
     if (!altWord.has(alt) || !altSida.has(alt)) ut.push(`    bilden På bordet ${nr} (${b.rubrik}): textalternativet med rubriken och bildtexten saknas i ${[!altWord.has(alt) && 'Word-filerna', !altSida.has(alt) && 'sidorna'].filter(Boolean).join(' och ')}`);
   }
   // En bild På bordet med bildtext och eget textalternativ (alt, STIL.md under Bildtexter): bildtexten prövas som text
   // nedan, och textalternativet här, i bildens alt på sidan och i Word.
   for (const b of (d.pabordet ?? []).filter((x) => x.alt && !problemBilder.has(x.nr) && !strukturBilder.has(x.nr))) {
     if (!ram(ramAv(b.efter))) continue;
-    const alt = norm(`På bordet: ${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.alt}`);
+    const alt = norm(`${bilddata[id]?.[String(b.nr)]?.ide ? '' : 'På bordet: '}${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.alt}`);
     if (!altWord.has(alt) || !altSida.has(alt)) ut.push(`    bilden På bordet ${b.nr} (${b.rubrik}): textalternativet (alt) saknas i ${[!altWord.has(alt) && 'Word-filerna', !altSida.has(alt) && 'sidorna'].filter(Boolean).join(' och ')}`);
   }
   // Lösningarna i ord på bladet Två lösningar står i bildernas textalternativ, med lösningens namn först.
@@ -448,7 +448,7 @@ for (const fil of filer) {
   for (const nr of strukturBilder) {
     const b = d.pabordet.find((x) => x.nr === nr);
     if (!ram(ramAv(b.efter))) continue;
-    const alt = norm(`På bordet: ${b.rubrik} ${b.alt ?? b.text}`);
+    const alt = norm(`${bilddata[id]?.[String(b.nr)]?.ide ? '' : 'På bordet: '}${b.rubrik} ${b.alt ?? b.text}`);
     if (!altWord.has(alt) || !altSida.has(alt)) ut.push(`    bilden På bordet ${nr} (${b.rubrik}) på strukturens sida: textalternativet med rubriken och bildtexten saknas i ${[!altWord.has(alt) && 'Word-filen', !altSida.has(alt) && 'sidan'].filter(Boolean).join(' och ')}`);
   }
   for (const { vag, text } of texter(kalla, '', [])) {

@@ -24,6 +24,7 @@ export function metodensAvsnitt(d: MetodData, o: { pass: boolean; stegen: string
     d.exempel && { id: 'exempel', namn: 'Exempel' },
     d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
     d.roll && { id: 'roll', namn: 'Lärarens roll' },
+    d.lararensFragor && { id: 'lararens-fragor', namn: d.lararensFragor.rubrik },
     // Heter urvalets kärna som ramarna ("Var hittar du problemen?" och Problemen) står det som en handling, Hitta problemen,
     // så att menyn inte har två poster med samma namn (Problemlösning i grupp, 2026-10-10).
     d.urval && { id: 'urval', namn: d.ramar && urvalNamn(d.urval.rubrik) === d.ramar.rubrik ? `Hitta ${d.ramar.rubrik.toLowerCase()}` : urvalNamn(d.urval.rubrik) },

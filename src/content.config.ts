@@ -14,7 +14,7 @@ import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
 import { faktaFel } from './lib/kortfakta';
-import { allaTexter, FAKTANS_MATERIAL, INNEHALLSTAGGAR, STRUKTURENS_GRANSER, strategiensFel, strukturensFel, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
+import { allaTexter, lararensFragorFel, FAKTANS_MATERIAL, INNEHALLSTAGGAR, STRUKTURENS_GRANSER, strategiensFel, strukturensFel, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
 import { SAMLINGAR, UTAN_SIDA } from './lib/samlingar';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
@@ -409,6 +409,12 @@ const metodensFalt = z.strictObject({
       text: z.string(),
       gor: z.array(z.string()).min(1),
       undvik: z.array(z.string()).min(1),
+    }).optional(),
+    // Lärarens frågor efter Lärarens roll, som i Metoder (K-775, lararensFragorFel i standarden): tre till sex frågor i
+    // lärarens röst, minst två Får jag …? och minst ett hinder utanför passet, och svaret på högst 220 tecken.
+    lararensFragor: z.strictObject({
+      rubrik: z.string().default('Lärarens frågor'),
+      fragor: z.array(z.strictObject({ fraga: z.string(), svar: z.string() })).min(1),
     }).optional(),
     urval: z.strictObject({
       rubrik: z.string(),
@@ -960,6 +966,7 @@ const stodundervisning = defineCollection({
     // Tidsschemats varianter och passets tider i tidsschemats text, och lathunden som säger varianten med standardens mening
     // (K-515, tidsschematsFel och varianternasFel i standarden), så att metoden är roten för planen och riggen prövar samma.
     for (const f of tidsschematsFel(d)) ctx.addIssue({ code: 'custom', path: ['tidsschema'], message: f });
+    for (const f of lararensFragorFel(d)) ctx.addIssue({ code: 'custom', path: ['lararensFragor'], message: f });
     if (d.lathund) for (const f of varianternasFel(d, allaTexter(d.lathund), { lathund: !!d.tidsschema?.varianter?.length, var: 'Lathunden' })) ctx.addIssue({ code: 'custom', path: ['lathund'], message: f });
     // Lathundens pass är tidsschemat minut för minut: samma faser i samma ordning och samma tider (utan "min",
     // Före passet som Före), med stegnumret "N · " framför de faser som är steg och numren i följd från 1. Så säger

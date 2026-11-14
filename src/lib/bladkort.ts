@@ -6,8 +6,11 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import register from '../data/bladkort.json';
+import stodregister from '../data/bladkort-stod.json';
 import materialetsSidor from '../data/materialets-sidor.json';
-import { MINIBILDEN, metodensMinibilder, sakensNamn } from './bladkortfiler.js';
+import { MINIBILDEN, metodensMinibilder, sakensNamn, stodmetodensMinibilder } from './bladkortfiler.js';
+import { sidansSaker } from './metodsaker';
+import type { MetodData } from './metod';
 import { meningarna, slugAv, talText } from './standard/index.js';
 import { bladetsAnkare, type Um } from './undervisningsmetod';
 
@@ -81,4 +84,44 @@ export function metodensBladkort(id: string, d: Um): Bladkort | null {
     return { namn: p.blad, saker: false, etikett: `${p.blad} att skriva ut`, alla: { text: `Alla ${talText(kort.length)} att skriva ut`, adress: ankare }, kort };
   }
   return { namn: 'Att skriva ut', saker: true, etikett: 'Att skriva ut', alla: { text: 'Allt att skriva ut', adress: '#del-att-skriva-ut' }, kort: (p.saker ?? []).map((s) => ({ namn: sakensNamn(s), ...saken(d, s), bild: bilden(sakensNamn(s)) })) };
+}
+
+// Stödundervisningens små kort (K-769), som i Metoder, ur ett eget register (src/data/bladkort-stod.json), eftersom Metoders
+// register läses nyckel för nyckel som Metoders metoder. Sakens namn är ett blad, en mall eller en tabell i metoden, och
+// adressen är den som texten på sidan leder till (sidansSaker i src/lib/metodsaker.ts), där knappen som skriver ut saken står.
+type StodPost = { stycket: string; saker: Sak[] };
+const stodposten = (id: string) => (stodregister as unknown as Record<string, StodPost | undefined>)[id];
+const stodfel = (d: MetodData, vad: string) => new Error(`src/data/bladkort-stod.json: ${d.titel} ${vad}`);
+
+/** Var korten står på en stödmetods sida: efter det första stycket i inledningen som har ordet i stycket. */
+export function stodkortensStycke(id: string, d: MetodData): number {
+  const p = stodposten(id);
+  if (!p) return -1;
+  const ordet = p.stycket.toLocaleLowerCase('sv');
+  const i = d.inledning.findIndex((s) => s.toLocaleLowerCase('sv').includes(ordet));
+  if (i < 0) throw stodfel(d, `nämner inte ${p.stycket} i inledningen, så de små korten har ingen plats.`);
+  return i;
+}
+
+/** En stödmetods små kort: minibilden, namnet, raden ur metodens text och adressen. Bygget stannar när något saknas. */
+export function stodmetodensBladkort(id: string, d: MetodData): Bladkort | null {
+  const p = stodposten(id);
+  if (!p) return null;
+  if (!p.saker?.length || p.saker.length > 3) throw stodfel(d, `har ${p.saker?.length ?? 0} saker, och de små korten visar en till tre.`);
+  const saker = sidansSaker(d, id);
+  const bilder = stodmetodensMinibilder(id, p, (f: string) => existsSync(join(process.cwd(), f))) as { namn: string; fil: string }[];
+  const kort = p.saker.map((s) => {
+    const namn = sakensNamn(s);
+    const sak = saker.find((x) => x.namn === namn);
+    if (!sak) throw stodfel(d, `har inget blad, ingen mall och ingen tabell som heter ${namn}.`);
+    const ram = (d.ramar?.ramar ?? []).find((r) => r.rubrik === namn);
+    const mall = d.mallar.find((m) => m.rubrik === namn);
+    const tabell = d.tabeller.find((t) => t.rubrik === namn);
+    const text = ram?.text?.[0] ?? (mall as { text?: string } | undefined)?.text ?? tabell?.text;
+    const rad = kortetsRad(d as unknown as Um, namn, text, typeof s === 'string' ? undefined : s.mening);
+    const m = bilder.find((x) => x.namn === namn)!;
+    if (!existsSync(join(process.cwd(), 'public', 'stodundervisning', m.fil))) throw stodfel(d, `saknar minibilden till ${namn}. Saken behöver en egen fil att skriva ut (src/lib/sakfiler.ts), och node scripts/minibilder.mjs gör bilden.`);
+    return { namn, rad, adress: sak.adress, bild: { src: `/stodundervisning/${m.fil}`, bredd: MINIBILDEN.bredd, hojd: MINIBILDEN.hojd } };
+  });
+  return { namn: 'Att skriva ut', saker: true, etikett: 'Att skriva ut', alla: { text: 'Allt att skriva ut', adress: d.ramar ? '#ramar' : '#mallar' }, kort };
 }
