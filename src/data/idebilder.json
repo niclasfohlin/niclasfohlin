@@ -24,8 +24,8 @@
     {
       "nr": 4,
       "rubrik": "Mottagartrappan",
-      "text": "Mottagaren tar ett steg längre bort i taget, när klassen har klarat kontakten på steget före. Kartan till parken är ett uppdrag i skolan.",
-      "alt": "Fyra steg i en trappa, det lägsta nederst till vänster och det högsta överst till höger, med en pil uppåt. Nederst: Snabbt här och nu, klassen eller skolan, 1–2 lektioner. Sedan: I skolan, en annan klass, några veckor, med en stjärna och Kartan till parken. Sedan: I närområdet, en förening eller ett äldreboende. Överst: I samhället, kommunen eller en tidning. Överst står: Mottagaren tar ett steg längre bort i taget.",
+      "text": "De första fem veckorna går klassen de två nedersta stegen: snabbt här och nu i vecka 1 och ett uppdrag i skolan i vecka 2–⁠5.",
+      "alt": "Fyra steg i en trappa, det lägsta nederst till vänster och det högsta överst till höger, med en pil uppåt. Nederst: Snabbt här och nu, klassen eller skolan, 1–⁠2 lektioner. Sedan: I skolan, en annan klass, några veckor, med en stjärna och Kartan till parken. Sedan: I närområdet, en förening eller ett äldreboende. Överst: I samhället, kommunen eller en tidning. Överst står: Mottagaren tar ett steg längre bort i taget.",
       "efter": "tabell: Börja litet",
       "bredd": 1200,
       "hojd": 760
@@ -42,8 +42,8 @@
     {
       "nr": 9,
       "rubrik": "Flödet",
-      "text": "Ämnet går genom alla sex stegen, och flödet är detsamma i båda storlekarna.",
-      "alt": "Sex rutor i en rad med pilar emellan: 1 Frågor och idéer, med en glödlampa. 2 Pitchen, med en pratbubbla. 3 Arbetet i grupper, med en penna. 4 Provet, med ett pekfinger. 5 Mottagaren, med ett paket. 6 Reflektionen, med en tankebubbla. Under rutorna går ett band med en skrivbok: Ämnet går genom hela flödet, dagens ruta varje lektion. Nederst står de två storlekarna: Snabbt här och nu, en eller två lektioner, mottagaren i klassen eller skolan, och Ett större uppdrag, några veckor, mottagaren utanför klassen.",
+      "text": "I ett större uppdrag är Arbetet och Provet med i varje lektion, och mottagaren svarar två gånger, på ett utkast och vid mötet.",
+      "alt": "Sex rutor i två rader med pilar emellan. Överst: 1 Frågor och idéer, med en glödlampa, 2 Pitchen, med en pratbubbla, och 3 Arbetet i grupper, med en penna. En pil leder ned till nästa rad: 4 Provet, med ett pekfinger, 5 Mottagaren, med ett paket, och 6 Reflektionen, med en tankebubbla. Under rutorna går ett band med en skrivbok: Ämnet går genom hela flödet, dagens ruta. Nederst står de två storlekarna: Snabbt här och nu, 1–⁠2 lektioner, och Ett större uppdrag, några veckor.",
       "efter": "tabell: Flödet i ett uppdrag",
       "bredd": 1200,
       "hojd": 910

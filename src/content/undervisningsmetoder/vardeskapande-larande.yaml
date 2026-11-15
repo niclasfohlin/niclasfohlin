@@ -21,7 +21,7 @@ material:
   - Affischen Fem former av värde och Affischen De värdeskapande frågorna
   - Möjlighetskartan och Kontaktkortet till varje grupp
   - bladet Gruppens plan till varje grupp
-  - Reflektionskortet till varje elev och lappar till Lappen
+  - Reflektionskortet till varje elev och lappar till Lappen sist i lektionen
   - en klasslista på en skrivplatta
   - mallen Planera uppdraget
 uppdaterad: 2026-11-15
@@ -66,11 +66,11 @@ filmer:
 
 profil:
   evidens:
-    larande: { tillforlitlighet: lag, effekt: ingen, kort: "Betygen steg inte säkert i USA, men något i en stor studie i Europa.", motivering: "Låg tillförlitlighet, effekten är okänd. Betygssnittet steg inte säkert med service learning i USA (Filges m.fl., 2022), men i en stor lottad studie i Frankrike steg betygen något, också i ämnen där andra lärare satte dem (Briole m.fl., 2025).", kallor: [filges-m-fl-2022, briole-m-fl-2025, zhang-och-ma-2023, menzies-m-fl-2016] }
+    larande: { tillforlitlighet: lag, effekt: liten, kort: "Betygen steg något i en stor studie i Europa, men inte säkert i USA.", motivering: "Låg tillförlitlighet, liten effekt. I en stor lottad studie steg betygen i Frankrike, också i ämnen där andra lärare satte dem (Briole m.fl., 2025), men i tre studier av service learning i USA var ökningen inte säker (Filges m.fl., 2022).", kallor: [filges-m-fl-2022, briole-m-fl-2025, zhang-och-ma-2023, menzies-m-fl-2016] }
     lasning: { tillforlitlighet: mattlig, effekt: ingen, motivering: "Måttlig tillförlitlighet, ingen effekt. Resultaten i läsning blev inte säkert bättre med service learning i USA eller med projekt för en publik i åk 5–⁠6 i England (Filges m.fl., 2022; Menzies m.fl., 2016).", kallor: [filges-m-fl-2022, menzies-m-fl-2016, duke-m-fl-2021] }
     skrivning: { tillforlitlighet: lag, effekt: ingen, motivering: "Låg tillförlitlighet, effekten är okänd. En lottad studie i åk 2 med projekt för en mottagare i närområdet gav inte bättre faktatexter på forskarnas prov (Duke m.fl., 2021).", kallor: [duke-m-fl-2021] }
     matematik: { tillforlitlighet: lag, effekt: mattlig, motivering: "Låg tillförlitlighet, måttlig effekt. Underlaget är litet: i två amerikanska studier av service learning kopplad till undervisningen blev resultaten i matematik bättre (Filges m.fl., 2022).", kallor: [filges-m-fl-2022] }
-    amnen: { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. Betygen i SO och NO steg något i en studie i USA (Filges m.fl., 2022), och lottade studier i åk 2–⁠4 gav mer på forskarnas prov (Duke m.fl., 2021; Rimm-Kaufman m.fl., 2021). Teknik saknar studier med kärnan.", kallor: [filges-m-fl-2022, duke-m-fl-2021, rimm-kaufman-m-fl-2021, krajcik-m-fl-2023] }
+    amnen: { tillforlitlighet: mattlig, effekt: liten, motivering: "Måttlig tillförlitlighet, liten effekt. Betygen i SO och NO steg något i en studie i USA (Filges m.fl., 2022), och lottade studier i åk 2–⁠4 gav mer på forskarnas prov (Duke m.fl., 2021; Rimm-Kaufman m.fl., 2021). Teknik saknar sådana studier.", kallor: [filges-m-fl-2022, duke-m-fl-2021, rimm-kaufman-m-fl-2021, krajcik-m-fl-2023] }
     socialt: { tillforlitlighet: lag, effekt: stor, motivering: "Låg tillförlitlighet, stor effekt. Projektarbete i grupp, oftast utan mottagare, gav bättre samarbete i skolan och högskolan (Zhang och Ma, 2023), och i en stor lottad studie fick eleverna fler vänner med annan bakgrund (Briole m.fl., 2025).", kallor: [zhang-och-ma-2023, briole-m-fl-2025, rimm-kaufman-m-fl-2021] }
   svarighet: { lara: 4, karnan: 3, stod: 4, tid: 4, motivering: "Du lär dig planera ett uppdrag och leda grupperna mot mottagaren och ämnet, och klassen lär sig ta kontakten. Det tar en termin, och i studierna med effekt fick lärarna fortbildning (Briole m.fl., 2025)." }
   kostnad: { kop: 2, timmar: 25, motivering: "Kopior och lappar räcker. Omkring 25 timmar per lärare första läsåret går till läsningen, arbetslagets möten, ett besök i månaden hos en kollega med samtalet efteråt och planeringen av kontakten och mötet." }
@@ -79,11 +79,11 @@ profil:
     regel: "En studie räknas när eleverna i skolan skapar något för en verklig mottagare utanför den egna klassen och arbetet är kopplat till kursplanen: service learning i undervisningen, projekt där produkten går till en verklig mottagare och värdeskapande uppdrag. Projektbaserat lärande i allmänhet och samhällstjänst utan koppling till ämnet räknas och sänker tillförlitligheten för Indirekt. Räknas inte: högskolan, simulerade företag och tävlingar utan verklig mottagare, och studier utan jämförelsegrupp, som Lackéus egna. De bär metodens grund."
     text: "Vi sökte hos Skolverket, EEF, What Works Clearinghouse och Campbell, i ERIC och OpenAlex område för område, och följde referenserna i den nyaste sammanställningen om service learning i skolan. Sedan sökte vi igen efter starkare belägg i alla sex områden. Två granskare läste talen i källorna, och vi prövade dem igen i en källkoll. Under metodens eget namn finns ingen studie med jämförelsegrupp, så stödet kommer från service learning och projekt med en verklig mottagare. Högskolan och simulerade företag valde vi bort."
     slutsatser:
-      oversikt: "Service learning i skolan i USA gav en säker effekt i matematik och små effekter i SO och NO, men inga säkra effekter på betygssnittet och läsningen (Filges m.fl., 2022). Program med reflektion gav större effekt än program utan, när studierna jämfördes (van Goethem m.fl., 2014). Projektbaserat lärande i allmänhet gav stora effekter, mest i studier där klasserna inte lottades (Zhang och Ma, 2023)."
-      experiment: "I lottade studier i åk 2–⁠4 fick eleverna bättre resultat i SO och NO på forskarnas prov (Duke m.fl., 2021; Krajcik m.fl., 2023; Rimm-Kaufman m.fl., 2021). I 217 skolor i tre länder i Europa steg betygen något i Frankrike, och eleverna fick fler vänner med annan bakgrund (Briole m.fl., 2025). I EEF:s prövning i England blev läsningen inte bättre (Menzies m.fl., 2016)."
+      oversikt: "Service learning i skolan i USA gav en säker effekt i matematik och små effekter i SO och NO, men inga säkra effekter på betygssnitt och läsning (Filges m.fl., 2022). I studier mest från högskolan blev synen på skolan och lärandet bättre (Celio m.fl., 2011), och program med reflektion gav större effekt än utan (van Goethem m.fl., 2014). Projektbaserat lärande i allmänhet gav stora effekter, mest i studier där klasserna inte lottades (Zhang och Ma, 2023)."
+      experiment: "I lottade studier i åk 2–⁠4 fick eleverna bättre resultat i SO och NO på forskarnas prov (Duke m.fl., 2021; Krajcik m.fl., 2023; Rimm-Kaufman m.fl., 2021). I åk 2 steg motivationen mer ju närmare lärarna följde planerna (Duke m.fl., 2021). I 217 skolor i tre länder i Europa steg betygen något i Frankrike, och eleverna fick fler vänner med annan bakgrund och starkare medborgerliga attityder (Briole m.fl., 2025). I EEF:s prövning i England blev läsningen inte bättre (Menzies m.fl., 2016)."
       annan: "Metoden kommer ur Lackéus forskning. I 19 svenska skolor beskrev elever och lärare mer motivation och meningsfullhet, men studien hade ingen jämförelsegrupp (Lackéus och Sävetun, 2016). Det svåra för läraren är att gå från att leda till att handleda och samtidigt hålla ämnet kvar (Condliffe m.fl., 2017; Diehl, 2017)."
     uteslutna:
-      - { namn: "Yeager m.fl. (2014)", skal: "Eleverna får ett syfte för andra, men de skapar inget, så studien ligger långt från kärnan" }
+      - { namn: "Yeager m.fl. (2014)", skal: "Eleverna får ett syfte för andra, men de skapar inget, så studien ligger långt från metoden" }
       - { namn: "Owen (2024)", skal: "Inte fackgranskad, och grupperna skilde sig redan före försöket" }
       - { namn: "Rosendahl Huber m.fl. (2014)", skal: "Ett simulerat företag utan verklig mottagare" }
       - { namn: "Chen och Yang (2019)", skal: "Blandar skolan och högskolan, och skolans effekt syns inte i sammanfattningen" }
@@ -113,7 +113,7 @@ inledning:
   - "Värdeskapande lärande är ett sätt att undervisa där klassen lär sig ämnets innehåll genom att använda det till något av värde för någon annan än läraren, oftast någon utanför klassen. Lärandet är målet, och värdet är vägen dit. Entreprenöriellt lärande handlar ofta om ekonomiskt värde, som att starta ett företag. Här kan värdet vara glädje, socialt, ekonomiskt, harmoni eller inflytande, de fem former av värde som Martin Lackéus beskriver och tabellen Fem former av värde visar. Motivationen kommer av att eleverna känner sig viktiga när någon annan än de själva uppskattar det de gör och ser att de kan påverka världen. Ett uppdrag går i sex steg, som tabellen Flödet i ett uppdrag visar: frågor och idéer, pitchen, arbetet i grupper, Provet, mottagaren och reflektionen. Ämnet går genom hela flödet."
   - "Affischen Fem former av värde och Affischen De värdeskapande frågorna sitter på väggen. Överst på tavlan står mottagarens egna ord, det hen svarade när klassen frågade vad hen behöver. Varje grupp har bladet Gruppens plan, där du skriver kraven ur ämnet, en ruta för varje, och gruppen planerar arbetet. Varje lektion tar en av rutorna, dagens ruta, som du undervisar i och grupperna för in i arbetet. Varje lektion börjar med Starten, där klassen tänker tillsammans på frågan För vem? Du skriver svaren på tavlan. I Det ni behöver kunna undervisar du kort i dagens ruta, sedan arbetar grupperna, och i Provet använder två ur en annan grupp arbetet som mottagaren skulle. Sist svarar var och en på Lappen. Var och en skriver på Reflektionskortet i stället för Lappen när mottagaren har svarat: i vecka 1, när hen har prövat ett utkast och efter mötet."
   - "Lärandet går till så här. När någon väntar på arbetet behöver eleverna kunna ämnet, för annars håller det inte för mottagaren. Tänk dig en klass i åk 3 som gör kartor åt förskoleklassen, som ska gå till parken. Kartan måste vara ritad uppifrån och ha tecken som står i teckenförklaringen, för annars hittar barnen inte. När två ur en annan grupp följer kartan med fingret och stannar vid ett tecken de inte förstår, ser gruppen själv vad som saknas. Lappen visar en ny liten karta där ett tecken saknas i förklaringen, så att du ser vem som har lärt sig. Mötet visar om det höll, och reflektionen gör det klassen upplevde till kunskap."
-  - "De första fem veckorna har ni minst två lektioner i veckan med metoden. Flödet finns i två storlekar. I vecka 1 går det snabbt här och nu, på en eller två lektioner om det klassen redan gör, och mottagaren kan vara klasskamraterna. Vecka 2–⁠5 är ett större uppdrag i ett arbetsområde. Klassen väljer en mottagare utanför klassen, pitchar sin idé för hen, arbetar och prövar och möter hen sist. Själv övar du att vänta på elevernas förslag, att fråga innan du hjälper och att låta eleverna ta kontakten. Efter veckorna ställer klassen frågan För vem? när den börjar något nytt, och mottagaren tar ett steg längre bort i taget."
+  - "I vecka 1 går flödet snabbt här och nu, på två lektioner om det klassen redan gör, och mottagaren kan vara klasskamraterna. Vecka 2–⁠5 är ett större uppdrag i ett arbetsområde. Klassen väljer en mottagare utanför klassen, pitchar sin idé för hen, arbetar, prövar och möter hen sist. Själv övar du att vänta på elevernas förslag, att fråga innan du hjälper och att låta eleverna ta kontakten. Efter vecka 5 ställer klassen frågan För vem? när den börjar något nytt, och mottagaren tar ett steg längre bort i taget."
 karna:
   rubrik: "Kärnan: fast och fritt"
   text: "Effekten hänger på att du håller ihop ämnet och mottagaren. Mottagaren ger eleverna ett skäl att lära sig, och ämnet är det de lär sig. Avstämningen låter gruppen ändra arbetet i tid. Reflektionen gör upplevelsen till kunskap. Utan ämnet blir det ett trevligt projekt, och utan mottagaren en vanlig uppgift."
@@ -122,8 +122,8 @@ karna:
   komponenter:
     - namn: Mottagaren och värdet
       moment: [Starten, Provet]
-      vad: Klassen tänker tillsammans på mottagaren och värdet, och gör något för någon annan än läraren.
-      syns: Eleverna säger med egna ord för vem arbetet är, vad hen behöver och vilket värde det ger. Läraren hör det i Starten och ser det i Provet.
+      vad: Klassen gör något för någon annan än läraren. I Starten, lektionens början, tänker alla på hen och värdet.
+      syns: Eleverna säger för vem arbetet är, vad hen behöver och vilket värde det ger. Läraren hör det i Starten och ser det i Provet, när andra prövar arbetet.
       varfor: "Utan någon som väntar blir arbetet en uppgift för läraren. I EEF:s prövning blev utställningen ibland bara en visning, och läsningen blev inte bättre (Menzies m.fl., 2016). Idéer och produkter som inte nådde någon beskrev eleverna som minst motiverande (Lackéus, 2020)."
       belagg: i-alla
       kallor: [menzies-m-fl-2016, lackeus-2020, filges-m-fl-2022]
@@ -132,8 +132,8 @@ karna:
       kryss: Jag lät klassen säga för vem, vad hen behövde och värdet.
     - namn: Ämnet bär uppdraget
       moment: [Det ni behöver kunna, Arbetet, Lappen]
-      vad: Det klassen skapar kräver ämnets innehåll, och du undervisar i det som uppdraget behöver medan arbetet pågår.
-      syns: Var och en för in sin del av dagens ruta i arbetet och svarar på Lappen så att läraren ser hur hen tänker.
+      vad: Arbetet kräver ämnet. Du undervisar i dagens ruta, lektionens krav ur ämnet, och sist frågar Lappen om den.
+      syns: Var och en för in i arbetet sin del av dagens ruta, lektionens krav ur ämnet, och svarar på Lappen, frågan sist i lektionen.
       varfor: "Uppdraget lossnar lätt från ämnet. I en lottad studie med effekt i SO undervisade läraren varje lektion i det som projektet krävde (Duke m.fl., 2021), och i EEF:s prövning, där ämnet ofta blev ett tillägg till projektet, blev läsningen inte bättre (Menzies m.fl., 2016)."
       belagg: i-alla
       kallor: [duke-m-fl-2021, menzies-m-fl-2016, celio-m-fl-2011]
@@ -142,7 +142,7 @@ karna:
       kryss: Jag undervisade i dagens ruta, och den syntes i arbetet.
     - namn: Avstämning mot mottagaren
       moment: [Arbetet, Provet]
-      vad: Gruppens arbete prövas mot mottagarens behov och ämnet medan det går att ändra, och gruppen ändrar då.
+      vad: I Provet prövar en annan grupp arbetet mot mottagarens behov och ämnet, medan gruppen kan ändra.
       syns: Grupperna skriver vad de ändrar efter Provet och kan säga varför, eller varför arbetet håller. Läraren frågar innan hen hjälper.
       varfor: "Utan avstämning möter arbetet mottagaren först när det är för sent att ändra. Läraren behöver ta reda på var gruppen står innan hen hjälper, och lämna över igen (van de Pol m.fl., 2010). När allt var löst inramat blev eleverna tidvis inaktiva (Diehl, 2017)."
       belagg: i-alla
@@ -179,7 +179,7 @@ tabeller:
       - ["2 Pitchen", "Grupperna säger idén på en minut, först för en annan grupp och sedan för mottagaren.", "Tabellen Pitchen på en minut, Kontaktkortet och rutinen Kontakten"]
       - ["3 Arbetet i grupper", "Grupperna gör arbetet för mottagaren och för in dagens ruta ur ämnet varje lektion.", "Gruppens plan, lektionskortet och Arbetet i del 2"]
       - ["4 Provet", "Varje lektion använder två ur en annan grupp arbetet som mottagaren skulle, och gruppen ändrar.", "Provet i del 2 och Gruppens plan"]
-      - ["5 Mottagaren", "Arbetet når mottagaren, och klassen hör hens svar.", "Tabellen Mötet med mottagaren och När mottagaren kommer i del 2"]
+      - ["5 Mottagaren", "Arbetet når mottagaren, och klassen hör hens svar. I ett större uppdrag prövar hen först ett utkast.", "Tabellen Mötet med mottagaren och När mottagaren kommer i del 2"]
       - ["6 Reflektionen", "Var och en säger eller skriver vad hen lärde sig i ämnet och vad mottagaren fick.", "Reflektionskortet, och Lappen i del 2"]
   - rubrik: Fem former av värde
     plats: efter-inledning
@@ -261,6 +261,7 @@ tabeller:
       - ["Rutorna för ämnet", "Kartan är ritad uppifrån. Minst fem tecken. Varje tecken finns i teckenförklaringen. Vägen från skolan till parken syns."]
       - ["Produkten", "En karta per grupp, åt en av förskoleklassens sju små grupper, så att barnen hittar själva"]
       - ["Kontrollpunkten", "Lektion 4: Lappen frågar om alla rutorna på en ny karta. Behövs mer tid, gör produkten mindre och behåll tiden att pröva och ändra före mötet"]
+      - ["Utkastet till mottagaren", "Lektion 5, vecka 4: barnen prövar utkasten med sin lärare"]
       - ["Mötets dag", "Torsdag vecka 5, bokad i vecka 2 med förskoleklassens lärare, som går med till parken"]
       - ["Märker mottagaren om ämnet inte håller?", "Ja: saknas ett tecken eller är kartan ritad från sidan, hittar barnen inte"]
   - rubrik: "Planera uppdraget: lektionerna"
@@ -296,8 +297,8 @@ tidsschema:
     - { tid: 0–⁠5 min, fas: Starten, form: Gemensamt, vad: "Klassen tänker tillsammans på vem arbetet är för, vad hen behöver och vilket värde det ger, och du skriver svaren på tavlan. Sedan säger du dagens ruta." }
     - { tid: 5–⁠15 min, fas: Det ni behöver kunna, form: Läraren visar, vad: "Du undervisar kort i det ämnesinnehåll dagens ruta kräver, och alla prövar det på en fråga om mottagaren." }
     - { tid: 15–⁠45 min, fas: Arbetet, form: I grupp, vad: "Var och en för in sin del av dagens ruta i arbetet. Du går ett kort varv, tar grupper till ditt bord och går ett andra varv." }
-    - { tid: 45–⁠54 min, fas: Provet, form: I grupp, vad: "Två ur en annan grupp använder arbetet som mottagaren skulle, och gruppen säger inget och sätter streck. Sist skriver gruppen vad den ändrar." }
-    - { tid: 54–⁠60 min, fas: Lappen, form: Enskilt, vad: "Var och en svarar på en av de värdeskapande frågorna om dagens ruta och visar hur hen tänker. När mottagaren har svarat, blir Lappen Reflektionskortet." }
+    - { tid: 45–⁠54 min, fas: Provet, form: I grupp, vad: "Grupperna prövar varandras arbete i två omgångar om tre minuter. Sist skriver gruppen vad den ändrar." }
+    - { tid: 54–⁠60 min, fas: Lappen, form: Enskilt, vad: "Du ställer en värdeskapande fråga om dagens ruta på ett nytt exempel och läser lapparna efteråt. När mottagaren har svarat, blir Lappen Reflektionskortet." }
     - { tid: Efter lektionen, fas: Efter lektionen, vad: "Läs lapparna som mottagaren, och sortera dem efter det som inte håller. Det avgör var nästa lektion börjar och vilka grupper du går till först." }
   varianter:
     - nar: första lektionen
@@ -513,7 +514,7 @@ checklista:
     - Bestäm vad du säger till klassen om varför ni gör något för någon annan.
 klassen:
   rubrik: Så ordnar du klassen
-  text: "Eleverna arbetar i grupper om fyra, som du sätter ihop för uppdraget, och sitter så att du kan gå mellan borden. Ha ett bord nära tavlan dit du tar grupper i Arbetet. Alla grupper arbetar med samma ämnesinnehåll, och varje grupp gör sitt arbete för sin del av mottagaren, som en av förskoleklassens små grupper. Då gäller Det ni behöver kunna och Lappen för alla. Den som är ny i svenska sitter i en grupp som alla andra, gärna med en kamrat som delar språket. I F–⁠3 räcker ofta par, och i Provet går då en åt gången."
+  text: "Eleverna arbetar i grupper om fyra, som du sätter ihop för uppdraget, och sitter så att du kan gå mellan borden. Går klassen inte jämnt upp, blir en eller två grupper om tre eller fem. Ha ett bord nära tavlan dit du tar grupper i Arbetet. Alla grupper arbetar med samma ämnesinnehåll, och varje grupp gör sitt arbete för sin del av mottagaren, som en av förskoleklassens små grupper. Då gäller Det ni behöver kunna och Lappen för alla. Den som är ny i svenska sitter i en grupp som alla andra, gärna med en kamrat som delar språket. I F–⁠3 räcker ofta par, och i Provet går då en åt gången."
 forsta:
   rubrik: Första lektionen
   text:
@@ -522,14 +523,14 @@ forsta:
   plan:
     klass: 3B
     datum: mån, vecka 1
-    lektion: 1 av 2
+    lektion: 1 av 2 i vecka 1
     mal: visa på en teckning var tre saker finns, så att någon annan hittar dem
     belagg: "Lappen, med en ny teckning"
     blad: klassens teckningar av skolgården
     forberett: bilder av sakerna att leta efter, till den som är ny i svenska
     fore: { vem: "förskoleklassen eller klassen bredvid", vardet: "glädje", behover: "något att leta efter på skolgården", ruta: "Teckningen visar var sakerna finns", felet: "saker som inte går att hitta" }
     delar:
-      - { fas: Starten, text: "”Vem kan ha glädje eller nytta av det vi har gjort?” Svaren på tavlan. Klassen väljer." }
+      - { fas: Starten, text: "Inga ord än. Frågan ”Vem kan ha glädje eller nytta av det vi har gjort?” och klassens svar. Klassen väljer." }
       - { fas: Det ni behöver kunna, text: "Tre saker att leta efter, och var de syns på teckningen." }
       - { fas: Arbetet, text: "Varje grupp säger sin idé för gruppen bredvid och gör en skattjakt ur sin teckning. Först till dem som inte har börjat." }
       - { fas: Provet, text: "En annan grupp prövar skattjakten som förskoleklassen." }
@@ -540,9 +541,9 @@ progression:
   text: "Metoden är ny för dig och för klassen. Kärnans tre första delar finns i varje lektion. Den fjärde, mötet och reflektionen, finns i de lektioner där mottagaren svarar. Hen svarar redan i vecka 1. Veckorna säger vad ni övar särskilt. Vecka 2–⁠5 är ett större uppdrag i ett arbetsområde, efter Flödet i ett uppdrag. I vecka 2 väljer ni uppdrag, pitchar idén för mottagaren och planerar. I vecka 3 och 4 gör och prövar ni, och i vecka 5 möter ni mottagaren och reflekterar. Behöver ett steg en vecka till, följer det med till nästa vecka, och mötet ligger kvar."
   rader:
     - { vecka: "1", led: Snabbt här och nu, rubrik: För vem?, fokus: "Klassen väljer mottagare och gör något litet med det den redan kan. I lektion 2 lämnar grupperna över arbetet och hör svaret.", roll: "Vänta tyst på elevernas förslag.", eleverna: "Att säga för vem arbetet är och vad hen behöver, svara på Lappen och skriva på Reflektionskortet.", vidare: "nästan alla du hör i Starten kan säga mottagaren och behovet", fraga: "Kan nästan alla du hör i Starten säga mottagaren och behovet?" }
-    - { vecka: "2", led: Uppdraget, rubrik: Klassen väljer och frågar mottagaren, fokus: "Klassen väljer en av mottagarna du har frågat och pitchar idén för hen. Undervisningen i ämnet börjar samma vecka.", roll: "Låt alla idéer komma först, och välj sedan med klassen det uppdrag som bär ämnet.", eleverna: "Att fylla i Möjlighetskartan, välja uppdrag och pitcha idén för mottagaren med Kontaktkortet.", vidare: "klassen har mottagarens svar och Gruppens plan med dina rutor", fraga: "Har klassen mottagarens svar och Gruppens plan med dina rutor?" }
+    - { vecka: "2", led: Uppdraget, rubrik: Klassen väljer och frågar mottagaren, fokus: "Klassen väljer en av mottagarna du har frågat och pitchar idén för hen. Undervisningen i ämnet börjar samma vecka.", roll: "Låt alla idéer komma först, och välj med klassen det uppdrag som bär ämnet. Se När klassen väljer uppdrag i del 2.", eleverna: "Att fylla i Möjlighetskartan, välja uppdrag och pitcha idén för mottagaren med Kontaktkortet.", vidare: "klassen har mottagarens svar och Gruppens plan med dina rutor", fraga: "Har klassen mottagarens svar och Gruppens plan med dina rutor?" }
     - { vecka: "3", led: Uppdraget, rubrik: Dagens ruta och Provet, fokus: "Ämnet i arbetet, och arbetet prövat som mottagaren skulle.", roll: "Fråga först vid grupperna, i två varv.", eleverna: "Att föra in dagens ruta i arbetet och pröva en annan grupps arbete som mottagaren.", vidare: "dagens ruta syns hos nästan alla grupper, och de skriver vad de ändrar efter Provet", fraga: "Syns dagens ruta hos nästan alla grupper, och skriver de vad de ändrar efter Provet?" }
-    - { vecka: "4", led: Uppdraget, rubrik: Mottagaren prövar ett utkast, fokus: "Mottagaren prövar, och grupperna ändrar efter svaret.", roll: "Låt eleverna ta kontakten och ordna prövningen själva.", eleverna: "Att be mottagaren pröva ett utkast, ändra efter svaret och ställa frågan För vem? i Starten.", vidare: "nästan alla klarar kontrollpunkten, och varje grupp har fått mottagarens svar på ett utkast", fraga: "Klarar nästan alla kontrollpunkten, och har varje grupp fått mottagarens svar på ett utkast?" }
+    - { vecka: "4", led: Uppdraget, rubrik: Mottagaren prövar ett utkast, fokus: "Mottagaren prövar ett utkast, och grupperna ändrar efter svaret.", roll: "Lappen i lektion 4 om alla rutorna är kontrollpunkten. Låt eleverna ordna prövningen själva. Se När mottagaren kommer i del 2.", eleverna: "Att be mottagaren pröva ett utkast, ändra efter svaret, skriva på Reflektionskortet och ställa frågan För vem?", vidare: "nästan alla klarar kontrollpunkten, och varje grupp har fått mottagarens svar på ett utkast", fraga: "Klarar nästan alla kontrollpunkten, och har varje grupp fått mottagarens svar på ett utkast?" }
     - { vecka: "5", led: Mötet, rubrik: Svaret och reflektionen, fokus: "Arbetet når mottagaren, och klassen säger vad den lärde sig.", roll: "Led reflektionen, och låt eleverna jämföra med det de väntade sig.", eleverna: "Att möta mottagaren, ställa klassens frågor och skriva vad de lärde sig i ämnet.", vidare: "nästan alla skriver vad de lärde sig i ämnet på Reflektionskortet", fraga: "Skriver nästan alla vad de lärde sig i ämnet på Reflektionskortet?" }
 rutiner:
   rubrik: Rutinerna klassen lär sig
@@ -558,12 +559,12 @@ rutiner:
       forsta: Skriv en pitch tillsammans med klassen, och låt två elever spela upp kontakten medan klassen lyssnar. Sedan skriver grupperna sin.
     - namn: Provet
       vecka: 3
-      vad: Efter Arbetet använder två ur en annan grupp det gruppen har gjort som mottagaren skulle, och gruppen säger inget och sätter streck. Hur det går till står i delen Provet.
+      vad: Efter Arbetet använder två ur en annan grupp gruppens arbete som mottagaren skulle, och gruppen säger inget och sätter streck. Hur det går till står i Provet i del 2.
       forsta: Visa med ditt eget arbete. Låt två elever använda det medan du sätter streck utan att säga något.
     - namn: Mötet och efteråt
       vecka: 5
       vad: Gruppernas arbete når mottagaren, klassen hör hens svar och var och en skriver på Reflektionskortet. Hur du förbereder mötet står i tabellen Mötet med mottagaren.
-      forsta: Fyll i Reflektionskortet tillsammans med klassen i vecka 1 och tänk högt.
+      forsta: Läs mottagarens svar högt efter mötet, och låt klassen säga vad den väntade sig innan var och en skriver på Reflektionskortet.
 uppfoljning:
   text: Så ser du att metoden fungerar, i klassen och hos dig.
   rader:
@@ -577,7 +578,7 @@ uppfoljning:
     - { id: stodet, nar: Varje månad, tid: efter, vad: "En kollega ser en lektion i månaden tills metoden sitter. Arbetslaget ses varje månad och prövar nästa uppdrag mot ämnet. Den vars svar två veckor i rad inte håller får stödundervisning." }
     - { id: sexveckor, nar: Sex skolveckor efter de första veckorna, tid: efter 6 veckor, vad: "En kollega ser en hel lektion i nästa uppdrag med observationsmallen, och ni jämför med observationen i vecka 4. Ett av besöken varje månad är en lektion där mottagaren svarar och klassen reflekterar." }
     - { id: nastatermin, nar: Nästa termin, tid: nästa termin, vad: "Räkna samma saker igen ur Så syns lärandet i klassen och dina kryss, och se om ni använder metoden i fler ämnen och med mottagare längre bort." }
-    - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen Hur säker är jag på metoden under 5 i två veckor i rad: ge veckans övning en vecka till, och be en kollega se en lektion." }
+    - { id: osaker, nar: Om du är osäker på metoden, tid: villkor, vad: "Står skattningen Hur säker är jag på metoden under 5 i två veckor i rad: låt veckans övning följa med in i nästa vecka, och be en kollega se en lektion." }
     - { id: klassenstar, nar: Om det inte fungerar, tid: villkor, vad: "Står skattningen Hur väl fungerar den i praktiken under 5 i två veckor i rad, eller håller minst hälften av svaren inte de veckorna: gör uppdraget mindre, och be specialläraren se en lektion." }
 larandet:
   rubrik: Så syns lärandet i klassen
@@ -660,6 +661,7 @@ ramar:
     - rubrik: Reflektionskortet
       text: ["Skriv ut ett kort per elev och tillfälle, i A4. Var och en fyller i ett kort när mottagaren har svarat: i vecka 1, efter att mottagaren har prövat ett utkast och efter mötet."]
 planeringsmall:
+  bladEtikett: Blad och material
   text: "Fyll i före lektionen. Skriv mottagaren och dagens ruta först, och sist Lappens värdeskapande fråga."
   fore:
     - { etikett: "Mottagaren", rader: ["Vem:", "Värdet:", "Hen behöver:"], falt: [vem, vardet, behover] }
@@ -720,17 +722,18 @@ passar:
 invandningar:
   rubrik: Invändningar och nyanser
   fragor:
-    - { fraga: "Är värdeskapande lärande prövat?", svar: "Inte under sitt eget namn: ingen studie med jämförelsegrupp finns. Stödet kommer från service learning, där eleverna gör något för samhället kopplat till kursplanen, och från projekt med en verklig mottagare. Effekten är oklar för betygen, liten för SO och NO och säker i matematik i två studier (Filges m.fl., 2022). I en stor lottad studie steg betygen något i Frankrike (Briole m.fl., 2025)." }
+    - { fraga: "Är värdeskapande lärande prövat?", svar: "Inte under sitt eget namn: ingen studie med jämförelsegrupp finns. Stödet kommer från service learning, där eleverna gör något för samhället kopplat till kursplanen, och från projekt med en verklig mottagare. I en stor lottad studie steg betygen något i Frankrike (Briole m.fl., 2025), och i USA gav två studier en säker effekt i matematik (Filges m.fl., 2022). Utanför betygen blev synen på skolan och lärandet bättre i en sammanställning som mest gällde högskolan (Celio m.fl., 2011)." }
     - { fraga: "Tar inte uppdraget tid från kunskaperna?", svar: "Det kan det göra. Där innehållet blev ett tillägg blev läsningen inte bättre (Menzies m.fl., 2016). Där läraren undervisade varje lektion i det som projektet krävde, lärde sig eleverna mer SO (Duke m.fl., 2021). Därför har varje lektion Det ni behöver kunna och Lappen." }
     - { fraga: "Är det inte entreprenörskap, att starta företag?", svar: "Nej. I Lackéus jämförelse beskrev eleverna mest motivation i uppdrag för någon utanför klassen och minst i idéer och produkter som inte nådde någon (Lackéus, 2020). Pengar ryms i ett av de fem värdena, det ekonomiska, som var minst vanligt i svenska skolor (Lackéus och Sävetun, 2016)." }
     - { fraga: "Är det inte bara ett vanligt projekt?", svar: "Skillnaden är mottagaren, oftast utanför klassen, och hens svar, och att ämnet bär det klassen gör. Forskningen om projekt är lovande men inte säker, och mycket beror på hur läraren leder (Condliffe m.fl., 2017)." }
 grund:
   rubrik: Det forskningen visar
   text:
-    - "Värdeskapande lärande kommer ur Lackéus forskning om entreprenöriellt lärande vid Chalmers. I 19 svenska grundskolor beskrev elever och lärare mer meningsfullhet, motivation och självförtroende när eleverna skapade värde för någon utanför klassen. Studien hade ingen jämförelsegrupp, och glädje var det vanligaste värdet och pengar det minst vanliga (Lackéus och Sävetun, 2016). I en jämförelse av tre arbetssätt, med elevernas egna svar och utan kontrollgrupp, beskrev eleverna mest motivation i uppdrag som når någon utanför klassen och minst i idéer och produkter som inte når någon (Lackéus, 2020)."
+    - "Värdeskapande lärande kommer ur Lackéus forskning om entreprenöriellt lärande vid Chalmers, och det tydligaste resultatet där gäller elevernas motivation. I 19 svenska grundskolor beskrev elever och lärare mer motivation, meningsfullhet och självförtroende när eleverna skapade värde för någon utanför klassen. Studien hade ingen jämförelsegrupp. Glädje var det vanligaste värdet och pengar det minst vanliga (Lackéus och Sävetun, 2016). I en jämförelse av tre arbetssätt, med elevernas egna svar och utan kontrollgrupp, beskrev eleverna mest motivation i uppdrag som nådde någon utanför klassen och minst i idéer och produkter som inte nådde någon (Lackéus, 2020)."
+    - "Under metodens eget namn finns ingen studie med jämförelsegrupp. Närmast är service learning, där eleverna gör något för samhället kopplat till kursplanen, och projekt med en verklig mottagare. Utanför betygen och proven pekar flera sådana studier med jämförelsegrupp åt samma håll som hos Lackéus. I en sammanställning som mest gällde högskolan blev synen på skolan och lärandet, de sociala färdigheterna och samhällsengagemanget bättre, och i skolan gav service learning en effekt på 0,20 för alla utfall sammantaget i 19 studier (Celio m.fl., 2011). Elever från 12 till 20 år som gjorde något för samhället fick bättre attityder till andra, och med reflektion också till skolan och framtida yrken (van Goethem m.fl., 2014). I en stor lottad studie i 217 skolor i tre länder i Europa fick eleverna fler vänner med annan bakgrund, och deras medborgerliga attityder blev starkare i alla tre (Briole m.fl., 2025). I en lottad studie i åk 2 steg motivationen mer ju närmare lärarna följde studiens planer, men sammantaget var effekten inte säker (Duke m.fl., 2021). I EEF:s prövning i England ändrades inte elevernas engagemang i skolan (Menzies m.fl., 2016). Resultaten utanför betygen gör metoden lovande nog att pröva."
+    - "Betygen och provresultaten steg mindre säkert. Den strängaste sammanställningen, med studier från USA, fann en säker effekt i matematik i två studier och små effekter i SO och NO i en studie, mest på gymnasiet, men inga säkra effekter på betyg och läsning (Filges m.fl., 2022). I EEF:s prövning, där ämnet ofta blev ett tillägg till projektet, blev läsningen inte heller bättre (Menzies m.fl., 2016). I studien i Europa steg betygen något i Frankrike, också i ämnen där andra lärare satte dem (Briole m.fl., 2025). Lottade studier i åk 2–⁠4 gav bättre resultat i SO och NO på forskarnas prov (Duke m.fl., 2021; Krajcik m.fl., 2023; Rimm-Kaufman m.fl., 2021)."
+    - "Reflektionen är den del som är prövad: arbete för samhället med reflektion gav större effekt än utan, när 49 studier jämfördes (van Goethem m.fl., 2014), och program med fler av de rekommenderade delarna, som reflektion och koppling till kursplanen, gav mer (Celio m.fl., 2011). Projektbaserat lärande i allmänhet gav stora effekter, mest i studier där klasserna inte lottades, och bättre samarbete (Zhang och Ma, 2023). I engelska som främmande språk gav projektarbete bättre texter, säkert i högskolan och osäkert i skolan (Cahyono m.fl., 2024). Lärarens svårighet är att gå från att leda till att handleda och att hålla ämnet kvar (Condliffe m.fl., 2017; Diehl, 2017), och stöttningen bygger på att läraren tar reda på var gruppen står innan hen hjälper (van de Pol m.fl., 2010)."
     - "Lackéus fem värden heter glädjevärde, socialt eller relationellt värde, ekonomiskt värde, harmonivärde och inflytandevärde, och vart och ett kan skapas för en själv eller för andra (Lackéus och Sävetun, 2016). Metoden ger hans fem former korta namn, glädje, socialt, ekonomiskt, harmoni och inflytande, och tar förklaringarna ur hans Värdeblomma."
-    - "Under metodens eget namn finns ingen studie med jämförelsegrupp. Närmast är service learning, där eleverna gör något för samhället kopplat till kursplanen. Den strängaste sammanställningen, med studier från USA, fann en säker effekt i matematik i två studier och små effekter i SO och NO i en studie, mest på gymnasiet, men inga säkra effekter på betyg och läsning (Filges m.fl., 2022). I en stor lottad studie i 217 skolor i tre länder i Europa steg betygen något i Frankrike, och eleverna fick fler vänner med annan bakgrund (Briole m.fl., 2025). Lottade studier i åk 2–⁠4 gav mer i SO och NO på forskarnas prov (Duke m.fl., 2021; Krajcik m.fl., 2023; Rimm-Kaufman m.fl., 2021). I EEF:s prövning i England, där innehållet ofta blev ett tillägg, blev läsningen inte bättre (Menzies m.fl., 2016)."
-    - "Reflektionen är den del som är prövad: samhällstjänst med reflektion gav större effekt än utan, när 49 studier med elever från 12 till 20 år jämfördes (van Goethem m.fl., 2014), och program med fler av de rekommenderade delarna, som reflektion och koppling till kursplanen, gav mer i en sammanställning som mest gällde högskolan (Celio m.fl., 2011). Projektbaserat lärande i allmänhet gav stora effekter, mest i studier där klasserna inte lottades, och bättre samarbete (Zhang och Ma, 2023). I engelska som främmande språk gav projektarbete bättre texter, säkert i högskolan och osäkert i skolan (Cahyono m.fl., 2024). Lärarens svårighet är att gå från att leda till att handleda och att hålla ämnet kvar (Condliffe m.fl., 2017; Diehl, 2017), och stöttningen bygger på att läraren tar reda på var gruppen står innan hen hjälper (van de Pol m.fl., 2010)."
 lasMer:
   - { kalla: lackeus-och-savetun-2016, text: "Rapporten för Skolverket om 19 svenska skolor, med de fem värdena och hur lärarna började." }
   - { slag: artikel, titel: "Knorra till undervisningen", upphov: "Martin Lackéus, vardeskapande.se", ar: 2019, adress: "https://vardeskapande.se/2019/02/28/knorra-till-undervisningen/", oppnad: 2026-11-15, text: "Hur du gör ett litet uppdrag av det du redan undervisar." }
@@ -742,6 +745,7 @@ lasMer:
 # Lär dig metoden
 # ---------------------------------------------------------------------------------------------------------------------
 plan:
+  utanUpprepa: true
   passen:
     - { nar: första lektionen, text: "Första lektionen går flödet snabbt här och nu, på något klassen redan har gjort eller lär sig. Klassen väljer mottagare med handuppräckning: klasskamraterna eller någon i skolan som du har frågat. Varje grupp säger sin idé på en minut för gruppen bredvid och gör sedan något litet för mottagaren, som en skattjakt, ett tips eller en fråga ur ämnet. Gruppens plan börjar i vecka 2. Ni övar frågan För vem? i Starten och Lappen sist i lektionen. I lektion 2 gör grupperna klart och lämnar över det, och när mottagaren har svarat fyller var och en i Reflektionskortet med dig." }
   fore: ["Välj mottagare till första veckan: klasskamraterna, eller två eller tre i skolan som du frågar vad de behöver.", "Sätt upp Affischen Fem former av värde och Affischen De värdeskapande frågorna, och ha Reflektionskortet och lappar framme.", "Sätt ihop grupper om fyra, och ha en klasslista på en skrivplatta."]
