@@ -110,7 +110,9 @@ export function utfallensPar(n) {
 /**
  * Vad utfallens tal räknar, ur metodens egen mening i stegets redo: "elever i par utan ledtråd" i "Högst 5 av 28 elever i par
  * utan ledtråd, alltså högst två par", och annars "med fel" (riggens brev 2026-11-06 kväll, punkt 11). Riggens renderare har
- * samma regel, så att planeringsbladet säger samma sak på sidan, i lathunden och i Word.
+ * samma regel, så att planeringsbladet säger samma sak på sidan, i lathunden och i Word. Ordet följer det metoden står för:
+ * i Värdeskapande lärande räknar beslutet svar som inte håller för mottagaren och inga fel, "Högst 5 av 28 svar håller inte."
+ * (riggens brev 2026-11-15, sajtens K-790).
  * @param {{ nastanAlla?: unknown } | null | undefined} redo
  */
 export const utfallsord = (redo) => {

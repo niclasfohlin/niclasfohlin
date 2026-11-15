@@ -3,6 +3,7 @@
 ## 0.63.1, 2026-11-15
 
 - `saker.js` (sajtens K-789, Värdeskapande lärande): kontaktlistan står bland `EGNA_SAKER`, eftersom klassen skriver den själv på väggen och den inte har någon fil, så att `olankadeSaker` inte stoppar "Ta nästa namn på kontaktlistan".
+- `undervisningsmetod.js` (sajtens K-790; riggens brev 2026-11-15): förklaringen av `utfallsord` säger att ordet följer det metoden står för, som "svar håller inte" i Värdeskapande lärande. Ingen ändring i det funktionen svarar.
 
 ## 0.63.0, 2026-11-14
 
