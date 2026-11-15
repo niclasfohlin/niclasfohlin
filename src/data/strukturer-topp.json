@@ -1,5 +1,5 @@
 {
-  "datum": "2026-11-14T08:44:34.451Z",
+  "datum": "2026-11-15T07:45:24.236Z",
   "strukturer": [
     {
       "id": "turas-om",
@@ -9,8 +9,8 @@
     },
     {
       "id": "visa",
-      "antal": 55,
-      "besok": 20,
+      "antal": 56,
+      "besok": 21,
       "utskrifter": 7
     },
     {
@@ -32,16 +32,16 @@
       "utskrifter": 5
     },
     {
+      "id": "kloka-pennan",
+      "antal": 40,
+      "besok": 25,
+      "utskrifter": 3
+    },
+    {
       "id": "epa",
       "antal": 35,
       "besok": 10,
       "utskrifter": 5
-    },
-    {
-      "id": "kloka-pennan",
-      "antal": 34,
-      "besok": 24,
-      "utskrifter": 2
     },
     {
       "id": "ping-pong-prat",
@@ -459,6 +459,12 @@
     },
     {
       "id": "vandrande-reportern",
+      "antal": 1,
+      "besok": 1,
+      "utskrifter": 0
+    },
+    {
+      "id": "vi-jamfor",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
