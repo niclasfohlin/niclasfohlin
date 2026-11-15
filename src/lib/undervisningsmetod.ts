@@ -5,7 +5,7 @@
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
 import { strategikortetI, strategiernaAv } from './strategier';
-import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker, lagretAv, WEBBLANK, webbdelar, type LagretsBro } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker, lagretAv, WEBBLANK, webbdelar, variantensAnkare, type LagretsBro } from './standard/index.js';
 import lagretsData from '../data/lagret.json';
 import { CENTRALA } from './centrala';
 
@@ -102,6 +102,16 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   // Bankens texter som metoden pekar ut, ur verktyg som metoden visar med fältet centrala (sakernasFiler): titeln med numret,
   // som den står, så att bara hänvisningen blir en länk. En form med en siffra hittas också först i en tabellcell.
   for (const t of o.banktexter ?? []) saker.push({ namn: t.namn, former: t.former, versal: true, adress: t.adress });
+  // En hänvisning till en del av lektionen med delens nummer, som "Arbetet i del 2" och "När mottagaren kommer i del 2" i
+  // kolumnen Mer i metoden i Värdeskapande lärande, leder till delen eller tidsschemats variant i lektionen (riggens fråga
+  // 2026-11-15; Niclas samma dag: "Se till att stegen kort förklaras och hänvisas med länkar ut i metoden"). Bara hela
+  // hänvisningen är en länk: delens namn ensamt är ett steg som metoden förklarar och länkas inte (STIL.md under Hänvisningar).
+  const lektionensDel = delarnaAv(d).find((x: { id: string }) => x.id === 'lektionen')?.nr;
+  if (lektionensDel) {
+    const iDelen = (namn: string, adress: string) => ({ namn, former: [`${namn} i del ${lektionensDel}`], versal: true, forst: true, adress, slag: 'avsnitt' as const });
+    for (const s of (d.steg?.rader ?? []) as { namn: string }[]) saker.push(iDelen(s.namn, `${sida}#${stegetsAnkare(s.namn)}`));
+    for (const v of (d.tidsschema?.varianter ?? []) as { nar: string }[]) if (v.nar !== 'första lektionen') saker.push(iDelen(`${v.nar.charAt(0).toLocaleUpperCase('sv')}${v.nar.slice(1)}`, `${sida}#${variantensAnkare(v.nar)}`));
+  }
   // Strukturerna som metoden importerar ur verktyget Strukturer (fältet strukturkort, K-661): avsnittet Strukturkorten och
   // varje struktur med sitt namn, som leder till strukturens sida, så att Ping-pong-prat i texten är strukturen.
   if (d.strukturkort) {
