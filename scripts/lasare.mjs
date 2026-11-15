@@ -121,11 +121,12 @@ async function serve(port, bildmapp) {
   })()`;
   const efter = async () => {
     await vanta(350);
+    // Lär dig metoden har sitt besked i #ld-toast (verifieringen 2026-11-15, nr 11).
     // Ledde trycket till en ny sida väntar svaret in den, och sidans skript.
     for (let i = 0; i < 60 && laddar; i++) await vanta(250);
     await vanta(laddar ? 0 : 450);
     return kor(`(() => {
-      const t = document.getElementById('pl-toast'); const b = document.getElementById('pl-besked');
+      const t = document.getElementById('pl-toast') ?? document.getElementById('ld-toast'); const b = document.getElementById('pl-besked');
       const delar = [];
       if (t && !t.hidden && t.innerText.trim()) delar.push('Beskedet längst ned: ' + t.innerText.replace(/\\s+/g, ' ').trim());
       if (b && !b.hidden && b.innerText.trim()) delar.push('Notisen överst: ' + b.innerText.replace(/\\s+/g, ' ').trim());

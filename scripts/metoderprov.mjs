@@ -119,12 +119,21 @@ for (const s of metodsidor) {
 // En hänvisning till en del av lektionen eller en rutin är en länk bara med hela hänvisningen, "Arbetet i del 2" och "rutinen
 // Kontakten", och delens eller rutinens namn ensamt, också ensamt i en tabellcell, är ingen länk (K-789; andra ögat och Codex
 // 2026-11-15: regeln länkade Inför läsningen, Lektionens fråga och Loggen i tabeller i tre metoder). Prövat åt andra hållet.
-export const hanvisningensFel = (s, html) => [...html.matchAll(/<a class="(?:um-sak|m-tabell-lank)" href="[^"#]*#(del-[^"]+|variant-[^"]+|rutinen-[^"]+)"[^>]*>([^<]*)<\/a>/g)]
-  .filter(([, ankare, text]) => (/^rutinen-/.test(ankare) ? !/^rutinen\s/i.test(text) : !/\si del \d$/.test(text)) && !/^del-(?:metoden|lektionen|kom-igang|hall-i|att-skriva-ut|valet)/.test(ankare))
-  .map(([, ankare, text]) => `${s}: "${text}" är en länk till #${ankare}, men bara hela hänvisningen, som "Arbetet i del 2" eller "rutinen Kontakten", länkas`);
+// Attributen kan stå i vilken ordning som helst: länkarna i texten har href före class (verifieringen 2026-11-15, nr 10).
+export const hanvisningensFel = (s, html) => [...html.matchAll(/<a\s([^>]*)>([^<]*)<\/a>/g)]
+  .map(([, attr, text]) => ({ text, klass: /\bclass="([^"]*)"/.exec(attr)?.[1] ?? '', ankare: /\bhref="[^"#]*#((?:del|variant|rutinen)-[^"]+)"/.exec(attr)?.[1] }))
+  .filter((x) => x.ankare && /\b(?:um-sak|m-tabell-lank)\b/.test(x.klass))
+  .filter(({ ankare, text }) => (/^rutinen-/.test(ankare) ? !/^rutinen\s/i.test(text) : !/\si del \d$/.test(text)) && !/^del-(?:metoden|lektionen|kom-igang|hall-i|att-skriva-ut|valet)/.test(ankare))
+  .map(({ ankare, text }) => `${s}: "${text}" är en länk till #${ankare}, men bara hela hänvisningen, som "Arbetet i del 2" eller "rutinen Kontakten", länkas`);
 {
-  const prov = '<a class="m-tabell-lank" href="/metoder/x#del-inför-läsningen">Inför läsningen</a><a class="um-sak" href="/metoder/x#del-arbetet">Arbetet i del 2</a><a class="um-sak" href="/metoder/x#rutinen-kontakten">rutinen Kontakten</a><a class="um-sak" href="/metoder/x#rutinen-kontakten">Kontakten</a>';
-  if (hanvisningensFel('prov', prov).length !== 2) fel.push(`hänvisningarnas prov gav ${hanvisningensFel('prov', prov).length} fel i stället för 2`);
+  const prov = '<a class="m-tabell-lank" href="/metoder/x#del-inför-läsningen">Inför läsningen</a><a href="/metoder/x#del-arbetet" class="um-sak">Arbetet i del 2</a><a class="um-sak" href="/metoder/x#rutinen-kontakten">rutinen Kontakten</a><a href="/metoder/x#rutinen-kontakten" class="um-sak">Kontakten</a><a href="/metoder/x#del-provet" class="um-sak">Provet</a>';
+  if (hanvisningensFel('prov', prov).length !== 3) fel.push(`hänvisningarnas prov gav ${hanvisningensFel('prov', prov).length} fel i stället för 3`);
+}
+// Varje "rutinen <namn>" i en metods text är en länk till rutinen, och den i Flödet i ett uppdrag i Värdeskapande lärande
+// finns (verifieringen 2026-11-15, nr 2: formen söktes med liten bokstav, och ingen hänvisning blev en länk).
+{
+  const f = join(dist, 'metoder', 'vardeskapande-larande', 'index.html');
+  if (existsSync(f) && !/<a\s[^>]*#rutinen-kontakten"[^>]*>rutinen Kontakten<\/a>/.test(readFileSync(f, 'utf8'))) fel.push('/metoder/vardeskapande-larande: "rutinen Kontakten" i Flödet i ett uppdrag är ingen länk till rutinen');
 }
 for (const s of metodsidor) fel.push(...hanvisningensFel(s, readFileSync(join(dist, s.slice(1), 'index.html'), 'utf8')));
 

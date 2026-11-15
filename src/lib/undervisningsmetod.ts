@@ -119,8 +119,10 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   // inte, av samma skäl som delarnas.
   for (const r of (d.rutiner?.rader ?? []) as { namn: string; vecka: number | string }[]) {
     if (/rutinen$/i.test(r.namn)) continue;
-    const n = litenForsta(r.namn);
-    saker.push(hanvisning(r.namn, [`rutinen ${n}`, `Rutinen ${n}`], `${sida}#${rutinensAnkare(r)}`));
+    // Namnet som metoden skriver det, "rutinen Kontakten", och med liten bokstav, "rutinen frågan För vem?", som rutinensRubrik
+    // skriver det (verifieringen 2026-11-15, nr 2: bara den lilla formen söktes, och ingen hänvisning blev en länk).
+    const namn = [...new Set([r.namn, litenForsta(r.namn)])];
+    saker.push(hanvisning(r.namn, namn.flatMap((n) => [`rutinen ${n}`, `Rutinen ${n}`]), `${sida}#${rutinensAnkare(r)}`));
   }
   // Strukturerna som metoden importerar ur verktyget Strukturer (fältet strukturkort, K-661): avsnittet Strukturkorten och
   // varje struktur med sitt namn, som leder till strukturens sida, så att Ping-pong-prat i texten är strukturen.
