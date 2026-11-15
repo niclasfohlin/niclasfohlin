@@ -47,6 +47,8 @@ const storlek = n <= 22 ? 78 : n <= 34 ? 64 : 54;
       .dk-text { position: absolute; left: 107px; top: 0; bottom: 0; width: 553px; display: flex; flex-direction: column; padding: 42px 0 36px; }
       .dk-etikett { margin: 0 0 14px; font-size: 22px; line-height: 1.25; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--farg-mork); }
       .dk-titel { margin: 0; font-size: var(--dk-storlek); font-weight: 800; letter-spacing: -0.02em; line-height: 1.02; color: var(--farg-mork); text-wrap: balance; }
+      /* Ett ord bryts aldrig mitt i, som "Värdeskapand / e" och "kognitionsvetenskapl / ig" (andra ögat 2026-11-15, K-789): skriptet nedan gör titeln mindre tills det längsta ordet ryms, och scripts/delningskort.mjs stannar på en titel som ändå bryter ett ord. */
+      .dk-titel { overflow-wrap: normal; word-break: normal; hyphens: manual; }
       /* Faktan i en rad, som metodkortets celler: etiketten över och värdet i fet vikt. */
       .dk-fakta { display: flex; gap: 0 40px; margin: 20px 0 0; }
       .dk-fakta div { display: flex; flex-direction: column; gap: 2px; }
@@ -104,5 +106,14 @@ const storlek = n <= 22 ? 78 : n <= 34 ? 64 : 54;
       </div>
       <div class="utsnitt"><div class="skala-in"><Metodprofil m={m} /></div></div>
     </div>
+    <script>
+      // Titeln krymper i steg om två punkter, ned till 40, tills det längsta ordet ryms i spalten, och scripts/delningskort.mjs väntar på dkKlar.
+      const titel = document.querySelector<HTMLElement>(".dk-titel");
+      (window as Window & { dkKlar?: Promise<unknown> }).dkKlar = document.fonts.ready.then(() => {
+        if (!titel) return;
+        let px = parseFloat(getComputedStyle(titel).fontSize);
+        while (titel.scrollWidth > titel.clientWidth && px > 40) { px -= 2; titel.style.fontSize = `${px}px`; }
+      });
+    </script>
   </body>
 </html>

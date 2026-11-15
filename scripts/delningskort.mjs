@@ -98,6 +98,10 @@ try {
       // Titeln klipps inte i mallen (K-156), så en titel på mer än tre rader skulle trycka ned resten av kortet.
       const rader = (await skicka('Runtime.evaluate', { returnByValue: true, expression: '(() => { const t = document.querySelector(".dk-titel"); return t ? Math.round(t.getBoundingClientRect().height / parseFloat(getComputedStyle(t).lineHeight)) : 0; })()' })).result?.result?.value ?? 0;
       if (rader > 3) throw new Error(`titeln "${k.titel}" behöver ${rader} rader på kortet; högst tre ryms. Korta titeln, eller sänk storleken för långa titlar i src/pages/delning/kort/[namn].astro`);
+      // Ett ord i titeln bryts aldrig mitt i, som "Värdeskapand / e lärande" (andra ögat 2026-11-15, K-789): varje ord står på
+      // en rad och inom kortets spalt.
+      const brutna = (await skicka('Runtime.evaluate', { returnByValue: true, expression: '(() => { const t = document.querySelector(".dk-titel"); if (!t) return []; const ut = []; const w = document.createTreeWalker(t, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) for (const m of n.textContent.matchAll(/\\S+/g)) { const r = document.createRange(); r.setStart(n, m.index); r.setEnd(n, m.index + m[0].length); const rader = new Set([...r.getClientRects()].map((x) => Math.round(x.top))); if (rader.size > 1) ut.push(m[0]); } if (t.scrollWidth > t.clientWidth + 1) ut.push("(titeln går utanför spalten)"); return ut; })()' })).result?.result?.value ?? [];
+      if (brutna.length) throw new Error(`titeln "${k.titel}" bryter ${brutna.join(', ')} mitt i på kortet. Låt mallen göra titeln mindre tills det längsta ordet ryms, som src/pages/delning/metoder/[namn].astro`);
       const bild = await skicka('Page.captureScreenshot', { format: 'png', clip: { x: 0, y: 0, width: 1200, height: 630, scale: 1 } });
       if (!bild.result?.data) throw new Error('ingen bild');
       // Ett kort som bara är text och färgade ytor (metodbankens) blir en PNG med palett, hälften så stor som en JPEG och
