@@ -325,6 +325,7 @@ export declare function gickDetsFoljd(plan: Plan, mandag: string, svar: 'ja' | '
 /** Beskedet när svaret inte ändrar planen, eftersom något är infört i en senare vecka. */
 export declare const GICK_LAST: string;
 export declare const GICK_FAST: string;
+export declare const GICK_FAST_SIST: string;
 /** Är lovet i veckan låst: något är infört i veckan eller senare. */
 export declare const lovetLast: (mandag: string, sista: string | undefined) => boolean;
 /** Lovveckorna i en mening, "Lov v. 48–49."; tom utan lov. */

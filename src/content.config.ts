@@ -514,8 +514,9 @@ const metodensFalt = z.strictObject({
       // några veckor efter kursen, som texttypskursernas nya text efter 4–6 veckor (K-585, K-586). Utvärderingen öppnar då
       // den veckan, och till dess säger planen när den görs.
       utvarderasEfter: text.optional(),
-      // utanUpprepa: planen har ingen knapp Upprepa veckan, i en kurs där veckorna har bokade besök och mätningar, som
-      // texttypskurserna (K-586; Rimligheten 2026-10-27: knappen krockade med läsarna och de korta texterna).
+      // utanUpprepa: veckorna ligger fast. Planen har ingen knapp Upprepa veckan, i en kurs där veckorna har bokade besök och
+      // mätningar, som texttypskurserna (K-586; Rimligheten 2026-10-27: knappen krockade med läsarna och de korta texterna), och
+      // i Metoder ger Inte än i Lär dig metoden ingen vecka till (METODER.md under Fälten i metodens fil, K-789).
       utanUpprepa: z.literal(true).optional(),
       upprepa: text.optional(),
       stege: z.boolean().optional(),

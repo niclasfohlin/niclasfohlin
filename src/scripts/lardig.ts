@@ -279,7 +279,7 @@ function obesvaradRuta(o: PlanVecka): string {
   const rad = stegRad(o);
   const namn = planveckansNamn(plan, o);
   const fragan = fraganFor(rad);
-  return `<section class="ld-forra" aria-labelledby="ld-forra-rubrik"><h3 id="ld-forra-rubrik">${esc(`Gick det i ${namn.text}?`)}</h3><p class="ld-forra-steg">${esc(`Steg ${steg().nummer(o)}, ${stegNamn(o)}.`)}</p>${fragan ? `<p${rad?.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${gickKnappar(o, 'forra', `Gick det i ${namn.text}?`)}<p class="pl-hjalp">Svarar du Inte än, får steget en vecka till, och det blir den här veckan. <button type="button" class="pl-textknapp" data-vy="${o.nr}">${esc(`Till ${namn.text}`)}</button></p></section>`;
+  return `<section class="ld-forra" aria-labelledby="ld-forra-rubrik"><h3 id="ld-forra-rubrik">${esc(`Gick det i ${namn.text}?`)}</h3><p class="ld-forra-steg">${esc(`Steg ${steg().nummer(o)}, ${stegNamn(o)}.`)}</p>${fragan ? `<p${rad?.fraga ? ' class="pl-fraga"' : ''}>${esc(fragan)}</p>` : ''}${gickKnappar(o, 'forra', `Gick det i ${namn.text}?`)}<p class="pl-hjalp">${data.utanUpprepa ? 'Svarar du Inte än, följer steget med in i den här veckan, och veckorna efter ligger kvar.' : 'Svarar du Inte än, får steget en vecka till, och det blir den här veckan.'} <button type="button" class="pl-textknapp" data-vy="${o.nr}">${esc(`Till ${namn.text}`)}</button></p></section>`;
 }
 
 // ---------- Veckans stund ----------
@@ -400,7 +400,7 @@ function steget(v: PlanVecka, utanVidare = false): string {
   const fransFore = fore && fore.innehall === v.innehall && aktiv.foljd.gick?.[fore.mandag] === 'inte' && !harInfortEfter(aktiv.foljd, fore.mandag, plan) ? fore : undefined;
   const forlang = aktiv.foljd.avslut ? '' : svar === 'inte'
     ? `<div class="ld-forlang"><p>${esc(gickText(v.mandag))}</p>${last || data.utanUpprepa ? '' : `<p class="pl-andra-knappar"><button type="button" class="pl-textknapp" data-gick="inte" data-mandag="${v.mandag}" data-plats="steget">Ta bort veckan till</button></p>`}</div>`
-    : `<div class="ld-forlang">${fransFore ? `<p class="pl-andra-knappar"><button type="button" class="pl-textknapp" data-gick="inte" data-mandag="${fransFore.mandag}" data-plats="igen">Ta bort den här veckan</button></p>` : ''}<p class="pl-hjalp">${last ? 'Du har fört in något i en senare vecka, så steget står kvar som det är.' : fragarGickDet(plan, v) ? (data.utanUpprepa ? 'Behöver klasserna eller du mer tid, svarar du Inte än i veckans stund, och steget följer med in i nästa vecka. Veckorna efter ligger kvar.' : 'Behöver klasserna eller du mer tid, svarar du Inte än i veckans stund, så får steget en vecka till.') : ((sv) => (sv ? esc(`Steget fortsätter ${planveckansNamn(plan, sv).text}. Behöver klasserna eller du mer tid, svarar du Inte än i stunden den veckan.`) : ''))(stegetsSistaVecka(plan, v))}</p></div>`;
+    : `<div class="ld-forlang">${fransFore ? `<p class="pl-andra-knappar"><button type="button" class="pl-textknapp" data-gick="inte" data-mandag="${fransFore.mandag}" data-plats="igen">Ta bort den här veckan</button></p>` : ''}<p class="pl-hjalp">${last && !data.utanUpprepa ? 'Du har fört in något i en senare vecka, så steget står kvar som det är.' : fragarGickDet(plan, v) ? (data.utanUpprepa ? 'Behöver klasserna eller du mer tid, svarar du Inte än i veckans stund, och steget följer med in i nästa vecka. Veckorna efter ligger kvar.' : 'Behöver klasserna eller du mer tid, svarar du Inte än i veckans stund, så får steget en vecka till.') : ((sv) => (sv ? esc(`Steget fortsätter ${planveckansNamn(plan, sv).text}. Behöver klasserna eller du mer tid, svarar du Inte än i stunden den veckan.`) : ''))(stegetsSistaVecka(plan, v))}</p></div>`;
   return `<section class="ld-steget" aria-labelledby="ld-steget-rubrik"><h3 id="ld-steget-rubrik">Veckans steg</h3><div class="pl-elevmal"><span class="pl-etikett">Klasserna lär sig</span><p>${medSaker(rad.eleverna ?? '')}</p></div><div class="ld-drag"><span class="pl-etikett">Du övar</span><p>${medSaker(rad.roll ?? '')}</p></div>${rad.vidare && !utanVidare ? `<p class="ld-vidare">${esc(vidareMening(rad.vidare))}</p>` : ''}${rutinen}${lektion}${hela}${knappar}${uppf}${forlang}</section>`;
 }
 
@@ -618,7 +618,7 @@ function gickDet(mandag: string, svar: 'ja' | 'inte') {
     aktiv.foljd = { ...aktiv.foljd, gick: r.gick };
   }, () => {
     const ny = aktiv.foljd.gick?.[mandag];
-    if (r?.last && (ny === 'inte' || fore === 'inte')) return `Svaret är sparat. ${GICK_LAST}`;
+    if (r?.last && !data.utanUpprepa && (ny === 'inte' || fore === 'inte')) return `Svaret är sparat. ${GICK_LAST}`;
     if (!ny) return fore === 'inte' && r?.andrad ? 'Svaret och veckan till är borttagna.' : 'Svaret är borttaget.';
     return `${fore === 'inte' && r?.andrad ? 'Veckan till är borttagen. ' : ''}${gickText(mandag)}${ny === 'inte' && r?.andrad ? ' Veckorna efter flyttar fram.' : ''}`;
   }, true);

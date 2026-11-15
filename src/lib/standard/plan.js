@@ -1803,14 +1803,18 @@ export function svaraGickDet(plan, val, f, mandag, svar, o = {}) {
   // den, också när svaren ändras i två veckor (Codex 2026-10-31, nr 6).
   const steg = v ? v.innehall : 0, harNu = (val.upprepa ?? []).filter((x) => x === steg).length;
   const ska = v ? plan.veckor.filter((w) => w.innehall === steg && gick[w.mandag] === 'inte').length : harNu;
+  // Med fasta veckor ges ingen vecka till, men en vecka till som planen har från tiden före fältet går att ta bort, så att
+  // mötet kommer tillbaka på sin vecka (verifieringen 2026-11-15, nr 5).
   const fast = !!o.utanUpprepa;
-  const forlang = !fast && !!v && !last && ska > harNu, korta = !fast && !!v && !last && ska < harNu;
+  const forlang = !fast && !!v && !last && ska > harNu, korta = !!v && !last && ska < harNu;
   return { val: forlang || korta ? forlangSteget(val, steg, ska - harNu) : val, gick, andrad: forlang || korta, last };
 }
 /** Beskedet och rutans text när svaret inte ändrar planen, eftersom något är infört i en senare vecka (harInfortEfter; konsistensen 2026-11-09, P1). */
 export const GICK_LAST = 'Planen ändras inte, eftersom du har fört in något i en senare vecka.';
 /** Beskedet efter Inte än när metodens veckor ligger fast (plan.utanUpprepa, svaraGickDet). */
 export const GICK_FAST = 'Steget följer med in i nästa vecka, och veckorna efter ligger kvar.';
+/** Samma besked i det sista steget, där inga veckor med steg kommer efter. */
+export const GICK_FAST_SIST = 'Steget följer med in i tiden efter stegen.';
 /**
  * Vad svaret på Gick det? gjorde med planen, i en mening ur planen efter svaret (granskningen rot-3, fynd 21): stegets sista
  * vecka efter Inte än, och annars nästa vecka med stegets namn, eller veckan efter stegen.
@@ -1825,7 +1829,8 @@ export function gickDetsFoljd(plan, mandag, svar, rubriker, last = false, utanUp
   const v = plan.veckor.find((x) => x.mandag === mandag);
   if (!v) return '';
   const sista = [...plan.veckor].reverse().find((x) => x.innehall === v.innehall) ?? v;
-  if (svar === 'inte' && utanUpprepa) return GICK_FAST;
+  // I det sista steget finns inga veckor efter, och steget följer med in i tiden efter stegen (verifieringen 2026-11-15, nr 8).
+  if (svar === 'inte' && utanUpprepa) return plan.veckor[v.nr] ? GICK_FAST : GICK_FAST_SIST;
   if (svar === 'inte') return sista.nr > v.nr ? `Steget får en vecka till: ${planveckansNamn(plan, sista).text}.` : last ? GICK_LAST : 'Steget står kvar till nästa vecka.';
   const nasta = plan.veckor[v.nr];
   const r = nasta ? larDigetsSteg(plan).rad(nasta) : null;
