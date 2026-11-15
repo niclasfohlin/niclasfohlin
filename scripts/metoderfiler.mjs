@@ -37,7 +37,7 @@ const materialetsSidor = existsSync(SIDORNA) ? JSON.parse(readFileSync(SIDORNA, 
 // Bilderna som visar idén, under en tabell på metodens sida (src/data/idebilder.json, K-763).
 const IDEBILDERNA = join(ROT, 'src', 'data', 'idebilder.json');
 const idebilder = existsSync(IDEBILDERNA) ? JSON.parse(readFileSync(IDEBILDERNA, 'utf8')) : {};
-const idebildernasFil = () => `${JSON.stringify({ _om: 'Bilderna som visar idén i Metoder (riggens standard, avsnitt 4, Bilder som visar idén; K-763): högst två per metod, var och en direkt under sin tabell på metodens sida (UmFriaTabeller.astro), utan egen rubrik, med text som bildtext och alt som textalternativ. Skrivs av scripts/metoderfiler.mjs ur riggens out/<id>/pabordet.json, och bilden är public/metoder/<id>-bild-<nr>.svg.', ...Object.fromEntries(Object.keys(idebilder).filter((k) => k !== '_om').sort().map((k) => [k, idebilder[k]])) }, null, 2)}\n`;
+const idebildernasFil = () => `${JSON.stringify({ _om: 'Bilderna som visar idén i Metoder (riggens standard, avsnitt 4, Bilder som visar idén; K-763): högst tre per metod (riggens standard säger två, och Niclas gav Värdeskapande lärande en tredje 2026-11-15), var och en direkt under sin tabell på metodens sida (UmFriaTabeller.astro), utan egen rubrik, med text som bildtext och alt som textalternativ. Skrivs av scripts/metoderfiler.mjs ur riggens out/<id>/pabordet.json, och bilden är public/metoder/<id>-bild-<nr>.svg.', ...Object.fromEntries(Object.keys(idebilder).filter((k) => k !== '_om').sort().map((k) => [k, idebilder[k]])) }, null, 2)}\n`;
 const XML = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
 /** Ett attributvärde ur Word-filens XML som text: de fem namngivna tecknen och tecken med nummer, som &#197; för Å. */
 const avkodaXml = (t) => t.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (hela, k) => (k[0] === '#' ? String.fromCodePoint(k[1] === 'x' || k[1] === 'X' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : XML[k] ?? hela));
@@ -320,11 +320,13 @@ for (const fil of readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.star
   // konceptförståelse. Blir inte upprepning av tabellen men att förstå visuellt det man gör.", K-763): bilderna i riggens
   // pabordet.json som står efter en tabell, efter: "tabell: <rubrik>", som i Stödundervisning. Sidan ritar dem under tabellen
   // (UmFriaTabeller.astro) som <id>-bild-<nr>.svg, med bildtexten och textalternativet ur src/data/idebilder.json, som
-  // skriptet skriver. Word-filerna har dem redan. Bladen i samma fil är materialets sidor ovan. En metod har högst två.
+  // skriptet skriver. Word-filerna har dem redan. Bladen i samma fil är materialets sidor ovan. Riggens standard säger högst
+  // två, och sajten tar emot högst tre, eftersom Niclas gav Värdeskapande lärande en tredje, flödet i ett uppdrag (2026-11-15
+  // i riggen: "Du får ha fler bilder i denna. Ersätt inget."). Riggen avgör när en metod har fler än två.
   if (!lasEndast) {
     const paBordet = join(ut, 'pabordet.json');
     const tabellbilder = existsSync(paBordet) ? (JSON.parse(readFileSync(paBordet, 'utf8')).bilder ?? []).filter((b) => /^tabell: /.test(b.efter ?? '')) : [];
-    if (tabellbilder.length > 2) fel.push(`${id}: riggens pabordet.json har ${tabellbilder.length} bilder under tabeller, och en metod har högst två (riggens standard, avsnitt 4)`);
+    if (tabellbilder.length > 3) fel.push(`${id}: riggens pabordet.json har ${tabellbilder.length} bilder under tabeller, och en metod har högst tre (riggens standard, avsnitt 4, säger två, och Niclas gav Värdeskapande lärande en tredje)`);
     for (const f of readdirSync(UT).filter((x) => x.startsWith(`${id}-bild-`) && x.endsWith('.svg') && !tabellbilder.some((b) => x === `${id}-bild-${b.nr}.svg`))) rmSync(join(UT, f));
     for (const b of tabellbilder) {
       if (!(d.tabeller ?? []).some((t) => `tabell: ${t.rubrik}` === b.efter)) fel.push(`${id}: bilden ${b.nr} i riggens pabordet.json står efter "${b.efter}", och metoden har ingen sådan tabell`);
