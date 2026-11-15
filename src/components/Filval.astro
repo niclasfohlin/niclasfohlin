@@ -24,8 +24,10 @@ interface Props {
   pdfTitel?: string;
   /** Utan Drive: bankens tabell erbjuder Pdf och Word (Niclas 2026-10-10: "docx/pdf"), så att en rad ryms i telefonen. */
   utanDrive?: boolean;
+  /** Rubriken är sakens eget namn, som mallen Planera uppdraget, och står med sin stora bokstav i Drive-knappens text, så att den inte läses som ett verb (andra ögat 2026-11-15, K-789). */
+  egetNamn?: boolean;
 }
-const { fil, namn, rubrik, pdf = false, pptx = false, liten = false, statistik = rubrik, pdfTitel = 'Ladda ner som pdf, liggande', utanDrive = false } = Astro.props;
+const { fil, namn, rubrik, pdf = false, pptx = false, liten = false, statistik = rubrik, pdfTitel = 'Ladda ner som pdf, liggande', utanDrive = false, egetNamn = false } = Astro.props;
 const drive = Boolean(site.driveKlientId) && !utanDrive;
 // Drive sparar den fil som passar bäst i Google: lathunden som PowerPoint (liggande bilder, som Google Presentationer
 // visar som de är; filmerna på filmbilden blir stillbilder där), allt annat som Word.
@@ -41,7 +43,7 @@ const driveAndelse = pptx ? 'pptx' : 'docx';
   {drive && (
     <button type="button" class="drive-knapp" data-drive-src={`${fil}.${driveAndelse}`} data-drive-namn={`${namn}.${driveAndelse}`} title={pptx ? 'Spara i din Google Drive som presentation' : 'Spara i din Google Drive'} data-goatcounter-click={`fil:drive:${namn}.${driveAndelse}`} data-goatcounter-title={`${statistik} till Google Drive`}>
       <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M7 3h6l5 9-3 5H5l-3-5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 3l4 9M13 3l-4 9h9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-      Drive<span class="visually-hidden">: spara {rubrik.toLowerCase()} i Google Drive{pptx ? ' som presentation' : ''}</span>
+      Drive<span class="visually-hidden">: spara {egetNamn ? rubrik : rubrik.toLowerCase()} i Google Drive{pptx ? ' som presentation' : ''}</span>
     </button>
   )}
   {pdf && (

@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { delarnaAv, friTabellensPlats, hanvisadeMetodersFel, lagretsVagTillMandag, planerasNamn, planerasRad, relateradeAv, slagensOrd, utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD, STRUKTURENS_SLAG, strukturensFel, strukturensSumma, strukturkortensArk, strukturkortensFel, strukturernasTopplista, strukturnamnetI, strategiensFel, strategikortensFel, mening, rutinensRubrik, utfallsord, utfallensPar } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { delarnaAv, friTabellensPlats, hanvisadeMetodersFel, lagretsVagTillMandag, planerasNamn, planerasRad, relateradeAv, slagensOrd, utfallensGranser, undervisningsmetodensFel, EFFEKTENS_GRANSER, effektensSkala, platsenAv100, UNDERVISNINGSMETODENS_DELAR, delarnasText, laget, NIVAORD, NIVAERNAS_FORKLARING, bankensVal, bankensRutor, bankensValPassar, bankensValUr, BANKENS_LAGEN, spannUr, spannText, SYFTEN, ANVANDS_I, STODETS_GRUPPER, SVARIGHETENS_GRUPPER, svarighetensNiva, kostnadensNiva, SVARIGHETENS_ORD, KOSTNADENS_ORD, larandetIKort, lathundensSidor, MED_DIG_PA_VAGEN, forstaLektionensMinuter, meningarna, slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel, primaraOmraden, PRIMARA_REGELN, forstaLektionensForm, SLAGENS_FORM, veckansRubrik, vagenTillMandag, variantensAnkare, LARANDETS_OMRADEN, ARBETSLAGETS_MOTEN, arbetslagetsMoten, litenForsta, utanRadbrytning, metodensFilmnamn, FAKTANS_MATERIAL, OMRADENAS_RAD, STRUKTURENS_SLAG, strukturensFel, strukturensSumma, strukturkortensArk, strukturkortensFel, strukturernasTopplista, strukturnamnetI, strategiensFel, strategikortensFel, mening, rutinensRubrik, utfallsord, utfallensRegel, exempletsEtiketter, utfallensPar } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -262,6 +262,23 @@ for (const [n, vantat] of [[28, '5|6-13|14'], [22, '4|5-10|11'], [25, '5|6-12|13
   for (const [n, ut] of [[28, '2,3,6,7'], [22, '2,3,5,6'], [31, '3,4,7,8']]) { const p = utfallensPar(n); if ([p.nastanAlla, ...p.deFlesta, p.halften].join() !== ut) fel.push(`utfallensPar(${n}) ger ${JSON.stringify(p)}, inte ${ut}`); }
   // Vad utfallens tal räknar läses ur metodens egen mening, och annars står det med fel.
   for (const [nastanAlla, ut] of [['Högst 5 av 28 elever i par utan ledtråd, alltså högst två par. Paren går vidare.', 'elever i par utan ledtråd'], ['Högst 5 av 28 med fel. Gå vidare.', 'med fel'], ['Högst två par utan ledtråd, högst 5 av 28.', 'utan ledtråd'], ['Nästan alla klarar det.', 'med fel']]) if (utfallsord({ nastanAlla }) !== ut) fel.push(`utfallsord("${nastanAlla}") ger "${utfallsord({ nastanAlla })}", inte "${ut}"`);
+  // Regeln i ord (K-789): med fel som förut, och ett annat utfallsord står aldrig efter "är", där ett predikat som "svar håller
+  // inte" inte går att läsa (Codex och andra ögat 2026-11-15). Prövat åt andra hållet med den gamla meningen.
+  {
+    const fel1 = (t) => /(?:^|\s)är (?:svar håller inte|tomma böcker|elever|utan )/.test(t) || !/avrundat nedåt\. Hälften eller färre kan när .* avrundat uppåt\.$/.test(t);
+    if (!/har fel, avrundat nedåt/.test(utfallensRegel())) fel.push(`utfallensRegel() säger inte "har fel": ${utfallensRegel()}`);
+    for (const ord of ['svar håller inte', 'tomma böcker', 'elever i par utan ledtråd', 'utan ett svar som håller']) if (fel1(utfallensRegel(ord))) fel.push(`utfallensRegel("${ord}") går inte att läsa: ${utfallensRegel(ord)}`);
+    if (!fel1('Nästan alla kan när högst en av fem är svar håller inte, avrundat nedåt. Hälften eller färre kan när hälften eller fler är det, avrundat uppåt.')) fel.push('utfallensRegels prov släpper igenom den gamla meningen');
+  }
+  // Ämnesexemplets etiketter ur metodens egna ord (K-789): två namngivna led ger sina namn, och Felet, en rad utan led eller
+  // med fler än två ger standardens etikett.
+  for (const [egen, ut] of [
+    ['Dagens ruta: tipset säger vem boken handlar om. Det som inte håller: tipset berättar slutet.', 'Dagens ruta och det som inte håller'],
+    ['Fingret under. Dra ut ljuden. Säg ordet. Felet: paus mellan ljuden.', 'Innehållet och felet'],
+    ['Höger: ta bollen. Vänster: hoppa. Upp: höger knä. Felet: hoppet från höger fot.', 'Innehållet och felet'],
+    ['Frågan har många svar: Varför gör hon så? Felet: att svara med en händelse.', 'Innehållet och felet'],
+    ['Vilken bild rimmar på hus? Hund kan visa att eleven lyssnar.', 'Innehållet och felet'],
+  ]) if (exempletsEtiketter({ egen }).egen !== ut) fel.push(`exempletsEtiketter("${egen}") ger "${exempletsEtiketter({ egen }).egen}", inte "${ut}"`);
   // Inte sammanvägt gäller bara när något av de fyra ämnesområdena saknar nivå (Niclas 2026-11-06), och prövas åt båda hållen.
   const ejSammanvagt = structuredClone(pilot); ejSammanvagt.profil.evidens.larande = { niva: 'inte-sammanvagt', kort: 'Kort.', motivering: 'x' };
   ejSammanvagt.profil.evidens.lasning = { tillforlitlighet: 'mattlig', effekt: 'liten', motivering: 'x', kallor: [] };

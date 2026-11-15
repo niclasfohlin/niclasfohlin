@@ -1,5 +1,11 @@
 # Ändringar i standarden
 
+## 0.64.0, 2026-11-15
+
+- `undervisningsmetod.js` (sajtens K-789; Codex och andra ögat på Värdeskapande lärande): `utfallensRegel`, regeln bakom utfallens gränser i ord, som stod i sajtens `src/lib/undervisningsmetod.ts` och nu står här, så att riggens Word kan säga samma mening. Med fel säger den som förut, och ett annat utfallsord, som "svar håller inte", står aldrig efter "är": regeln säger då talet i utfallen.
+- `undervisningsmetod.js` (samma granskning): `exempletsEtiketter(overst)`, ämnesexemplets etiketter ur metodens egna ord. En rad med precis två namngivna led, "Dagens ruta: … Det som inte håller: …", får de namnen, och annars gäller `EXEMPLETS_ETIKETTER`. De åtta andra metoderna i Metoder får samma etikett som förut.
+- `plan.js` (Codex 2026-11-15, nr 1): `svaraGickDet` tar `{ utanUpprepa }`, metodens `plan.utanUpprepa`, och då sparas Inte än men ger ingen vecka till, som när metoden har ett bokat möte sist. `gickDetsFoljd` säger då `GICK_FAST`.
+
 ## 0.63.1, 2026-11-15
 
 - `saker.js` (sajtens K-789, Värdeskapande lärande): kontaktlistan står bland `EGNA_SAKER`, eftersom klassen skriver den själv på väggen och den inte har någon fil, så att `olankadeSaker` inte stoppar "Ta nästa namn på kontaktlistan".

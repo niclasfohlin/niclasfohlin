@@ -8,8 +8,8 @@
 import Planeringsblad from './Planeringsblad.astro';
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
-import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
-import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, lagretI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, utfalletsAnkare, utfallensElever, utfalletsText, utfallensRegel, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
+import { friTabellensPlats, planerasNamn, planerasRad, slagensOrd, slugAv, stor, liten, litenForsta, talText, uppraknat, UTFALLEN, MED_DIG_PA_VAGEN, effektensSkala, forstaLektionensMinuter, forstaLektionensForm, veckansRubrik, EXEMPLETS_ETIKETTER, exempletsEtiketter, variantensAnkare, LARANDETS_OMRADEN, arbetslagetsMoten } from '../lib/standard/index.js';
+import { metodensDelar, medSaker, KALLGRUPPER, OMRADESORD, SLAGORD, effektensDelar, kallansLank, karnanI, lagretI, tidsschematsRad, exempletsAmne, planensAmne, bladetsAnkare, stegetsAnkare, rutinensAnkare, utfalletsAnkare, utfallensElever, utfalletsText, utfallensRegel, UM_NAMN, METODKORTET, STRUKTURKORTEN, kortensKolumner, type Um } from '../lib/undervisningsmetod';
 import type { MetodFilm } from '../lib/film';
 import type { MetodSak } from '../lib/metodsaker';
 import { metodensBlad, metodensBankblad, bladensTextalternativ, type UmBild, type UmFil } from '../lib/undervisningsmetodfiler';
@@ -293,8 +293,8 @@ const moten = arbetslagetsMoten(d);
       <article class="um-exempel um-huvudexempel" id="huvudexemplet">
         <header class="um-ex-huvud"><h4>{exempletsAmne(huvud)}, {huvud.arskurs}</h4><p>{huvud.innehall}</p></header>
         <dl class="um-ex-overst">
-          {huvud.overst?.egen && <div><dt>{EXEMPLETS_ETIKETTER.egen}</dt><dd set:html={k(huvud.overst.egen)} /></div>}
-          {huvud.overst?.visar && <div><dt>{EXEMPLETS_ETIKETTER.visar}</dt><dd set:html={k(huvud.overst.visar)} /></div>}
+          {huvud.overst?.egen && <div><dt>{exempletsEtiketter(huvud.overst).egen}</dt><dd set:html={k(huvud.overst.egen)} /></div>}
+          {huvud.overst?.visar && <div><dt>{exempletsEtiketter(huvud.overst).visar}</dt><dd set:html={k(huvud.overst.visar)} /></div>}
         </dl>
         {huvud.remsa && <ol class="um-ex-remsa" style={`--kolumner: ${kortensKolumner(huvud.remsa.length)}`}>{huvud.remsa.map((x: string, i: number) => <li><span class="um-kort-nr" aria-hidden="true">{i + 1}</span><span class="visually-hidden">Kärnan {i + 1}, {komp[i]?.namn}: </span><span set:html={k(x)} /></li>)}</ol>}
         {(huvud.scen ?? []).map((x: string) => <p set:html={k(x)} />)}
@@ -314,8 +314,8 @@ const moten = arbetslagetsMoten(d);
         <summary><span><strong>{exempletsAmne(e)}, {e.arskurs}.</strong> {e.innehall}</span></summary>
         <article class="um-rad-inne um-exempel">
           <dl class="um-ex-overst">
-            {e.overst?.egen && <div><dt>{EXEMPLETS_ETIKETTER.egen}</dt><dd set:html={k(e.overst.egen)} /></div>}
-            {e.overst?.visar && <div><dt>{EXEMPLETS_ETIKETTER.visar}</dt><dd set:html={k(e.overst.visar)} /></div>}
+            {e.overst?.egen && <div><dt>{exempletsEtiketter(e.overst).egen}</dt><dd set:html={k(e.overst.egen)} /></div>}
+            {e.overst?.visar && <div><dt>{exempletsEtiketter(e.overst).visar}</dt><dd set:html={k(e.overst.visar)} /></div>}
           </dl>
           {(Array.isArray(e.scen) ? e.scen : [e.scen]).map((x: string) => <p set:html={k(x)} />)}
           {e.notera && <p class="um-notera" set:html={k(e.notera)} />}
@@ -366,7 +366,7 @@ const moten = arbetslagetsMoten(d);
       {/* Bladets överkant med mallens egna ord, så att raden säger vad just den här metoden börjar med. En mall med delar ritar
           inte overst (riggens planeringsBlock), så då säger raden inget om överkanten (andra ögat på Testbaserat lärande
           2026-11-02: Börja överst pekade på ett fält som bladet inte har, i alla fyra metoderna). */}
-      <p><Fragment set:html={k(`${planerasRad(d)}${d.planeringsmall?.overst?.[0] && !d.planeringsmall?.delar ? ` Börja överst: ${liten(d.planeringsmall.overst[0])}.` : ''}`)} /> Den tomma mallen står i <a href="#planeringsmallen">bilaga A</a>, förlagan till {forstaL.din} står under <a href="#forsta-lektionen">{FORSTA}</a>, och lektion {String(huvud.plan.lektion ?? '').split(' ')[0]} i exemplet i {liten(exempletsAmne(huvud))} står ifylld <a href="#huvudexemplets-plan">i del 2</a>.</p>
+      <p><Fragment set:html={k(`${planerasRad(d)}${d.planeringsmall?.overst?.[0] && !d.planeringsmall?.delar ? ` Börja överst: ${liten(d.planeringsmall.overst[0])}.` : ''}`)} /> Den tomma mallen står i <a href="#planeringsmallen">bilaga A</a>, förlagan till {forstaL.din} står under <a href="#forsta-lektionen">{FORSTA}</a>, och lektion {String(huvud.plan.lektion ?? '').split(' ')[0]} i exemplet i {litenForsta(exempletsAmne(huvud))} står ifylld <a href="#huvudexemplets-plan">i del 2</a>.</p>
     </section>
   )}
   {d.forsta && (
@@ -425,7 +425,7 @@ const moten = arbetslagetsMoten(d);
           </dl>
           {String(v.vecka) === '1' && rutinerFor('1').length > 0 && <p class="um-not"><Fragment set:html={k(rutinensRubrik(rutinerFor('1').map((r: { namn: string }) => litenForsta(r.namn)).join(' och ')))} /> står vid <a href="#rutinen-vecka-1">{FORSTA}</a>.</p>}
           {rutinerFor(v.vecka).filter(() => String(v.vecka) !== '1').map((r: Record<string, any>) => (
-            <details class="um-rad um-rutin">
+            <details class="um-rad um-rutin" id={rutinensAnkare(r as { namn: string; vecka: number })}>
               <summary><span>{rutinensRubrik(r.namn, { kolon: true })}</span></summary>
               <div class="um-rad-inne">
                 <p set:html={k(r.vad)} />

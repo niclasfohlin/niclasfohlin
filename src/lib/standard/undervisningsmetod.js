@@ -120,6 +120,17 @@ export const utfallsord = (redo) => {
   return s.match(/^Högst \d+ av \d+ ([^.,]+?)[.,]/)?.[1] ?? s.match(/^Högst \S+ par ([^.,]+?)[.,]/)?.[1] ?? 'med fel';
 };
 
+/**
+ * Regeln bakom utfallens gränser i ord, som `utfallensGranser` räknar (standarden, avsnitt 7), för läraren med en annan klass än
+ * metodens. Med fel säger den "har fel". Ett annat utfallsord är metodens egna ord, som "tomma böcker" eller "svar håller inte",
+ * och går inte att böja in i meningen, så regeln säger då talet i utfallen (sajtens K-789; Codex och andra ögat 2026-11-15:
+ * "när högst en av fem är svar håller inte" gick inte att läsa). Sidan och riggens Word säger samma mening.
+ * @param {string} [ord] utfallsordet ur `utfallsord`
+ */
+export const utfallensRegel = (ord = 'med fel') => (ord === 'med fel'
+  ? 'Nästan alla kan när högst en av fem har fel, avrundat nedåt. Hälften eller färre kan när hälften eller fler har fel, avrundat uppåt.'
+  : 'Nästan alla kan när talet är högst en femtedel av klassen, avrundat nedåt. Hälften eller färre kan när talet är hälften av klassen eller mer, avrundat uppåt.');
+
 /** Utfallens namn i beslutsstället, i ordning (standarden, avsnitt 7 och 18). */
 export const UTFALLEN = /** @type {const} */ ([
   { id: 'nastanAlla', namn: 'Nästan alla kan' },
@@ -254,6 +265,20 @@ export const FAKTANS_MATERIAL = 6;
  * Word-fil säger samma sak (riggens brev om Kooperativt lärande, punkt 23: Stegen och orden stod över en text utan steg).
  */
 export const EXEMPLETS_ETIKETTER = Object.freeze({ egen: 'Innehållet och felet', visar: 'Så visar alla' });
+
+/**
+ * Etiketterna över ett ämnesexempels två rader, ur metodens egna ord (sajtens K-789; andra ögat 2026-11-15: "Innehållet och
+ * felet" stod över "Dagens ruta: … Det som inte håller: …" i Värdeskapande lärande, där metoden har valt bort ordet fel). En
+ * rad som själv namnger sina två led, "Dagens ruta: … Det som inte håller: …", får de namnen som etikett, "Dagens ruta och det
+ * som inte håller". Raden har då precis två led, det första först i raden. Annars gäller `EXEMPLETS_ETIKETTER`, som för
+ * "… Felet: …" och för en rad med fler led, som "Höger: … Vänster: … Upp: … Felet: …". Sidan och riggens Word läser samma rot.
+ * @param {{ egen?: string } | null | undefined} overst
+ */
+export const exempletsEtiketter = (overst) => {
+  const leden = [...String(overst?.egen ?? '').matchAll(/(^|[.!?]\s+)([^:.!?]{2,40}):\s/gu)];
+  const [a, b] = leden.map((x) => x[2].trim());
+  return leden.length === 2 && leden[0].index === 0 && !/^felet$/iu.test(b) ? { egen: `${a} och ${litenForsta(b)}`, visar: EXEMPLETS_ETIKETTER.visar } : EXEMPLETS_ETIKETTER;
+};
 
 /**
  * Primär evidens på metodkortet: det eller de två av sajtens fyra områden, som i Stödundervisning, där stödet är starkast,

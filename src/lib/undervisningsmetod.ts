@@ -5,7 +5,7 @@
 import type { CollectionEntry } from 'astro:content';
 import type { MetodSak } from './metodsaker';
 import { strategikortetI, strategiernaAv } from './strategier';
-import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker, lagretAv, WEBBLANK, webbdelar, variantensAnkare, type LagretsBro } from './standard/index.js';
+import { esc, tidensMatt, periodensLangd, delarnaAv, delarnasText, slagensOrd, talText, utfallensGranser, utfallensPar, utfallsord, arSaksord, sakensFormer, sakernasText, slugAv, liten, skyddaRegex, uppraknat, forstaLektionensForm, olankadeSaker, lagretAv, WEBBLANK, webbdelar, variantensAnkare, litenForsta, type LagretsBro } from './standard/index.js';
 import lagretsData from '../data/lagret.json';
 import { CENTRALA } from './centrala';
 
@@ -105,12 +105,22 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   // En hänvisning till en del av lektionen med delens nummer, som "Arbetet i del 2" och "När mottagaren kommer i del 2" i
   // kolumnen Mer i metoden i Värdeskapande lärande, leder till delen eller tidsschemats variant i lektionen (riggens fråga
   // 2026-11-15; Niclas samma dag: "Se till att stegen kort förklaras och hänvisas med länkar ut i metoden"). Bara hela
-  // hänvisningen är en länk: delens namn ensamt är ett steg som metoden förklarar och länkas inte (STIL.md under Hänvisningar).
+  // hänvisningen är en länk: delens namn ensamt är ett steg som metoden förklarar och länkas inte (STIL.md under Hänvisningar),
+  // och därför är hela hänvisningen sakens namn, så att en tabellcell med bara delens namn inte blir en länk (UmFriaTabeller
+  // länkar en cell som är en saks namn; Codex 2026-11-15, nr 6: Lektionens fråga, Inför läsningen och Loggen i andra metoder).
   const lektionensDel = delarnaAv(d).find((x: { id: string }) => x.id === 'lektionen')?.nr;
+  const hanvisning = (namn: string, former: string[], adress: string) => ({ namn: former[0], former, versal: true, forst: true, adress, slag: 'avsnitt' as const });
   if (lektionensDel) {
-    const iDelen = (namn: string, adress: string) => ({ namn, former: [`${namn} i del ${lektionensDel}`], versal: true, forst: true, adress, slag: 'avsnitt' as const });
-    for (const s of (d.steg?.rader ?? []) as { namn: string }[]) saker.push(iDelen(s.namn, `${sida}#${stegetsAnkare(s.namn)}`));
-    for (const v of (d.tidsschema?.varianter ?? []) as { nar: string }[]) if (v.nar !== 'första lektionen') saker.push(iDelen(`${v.nar.charAt(0).toLocaleUpperCase('sv')}${v.nar.slice(1)}`, `${sida}#${variantensAnkare(v.nar)}`));
+    for (const s of (d.steg?.rader ?? []) as { namn: string }[]) saker.push(hanvisning(s.namn, [`${s.namn} i del ${lektionensDel}`], `${sida}#${stegetsAnkare(s.namn)}`));
+    for (const v of (d.tidsschema?.varianter ?? []) as { nar: string }[]) if (v.nar !== 'första lektionen') { const n = `${v.nar.charAt(0).toLocaleUpperCase('sv')}${v.nar.slice(1)}`; saker.push(hanvisning(n, [`${n} i del ${lektionensDel}`], `${sida}#${variantensAnkare(v.nar)}`)); }
+  }
+  // En hänvisning till en rutin med ordet rutinen före namnet, som "rutinen Kontakten" i Flödet i ett uppdrag, leder till
+  // rutinen i veckorna (rutinensAnkare), som fälls ut när adressen pekar dit (Codex 2026-11-15, nr 7). Rutinens namn ensamt länkas
+  // inte, av samma skäl som delarnas.
+  for (const r of (d.rutiner?.rader ?? []) as { namn: string; vecka: number | string }[]) {
+    if (/rutinen$/i.test(r.namn)) continue;
+    const n = litenForsta(r.namn);
+    saker.push(hanvisning(r.namn, [`rutinen ${n}`, `Rutinen ${n}`], `${sida}#${rutinensAnkare(r)}`));
   }
   // Strukturerna som metoden importerar ur verktyget Strukturer (fältet strukturkort, K-661): avsnittet Strukturkorten och
   // varje struktur med sitt namn, som leder till strukturens sida, så att Ping-pong-prat i texten är strukturen.
@@ -150,6 +160,8 @@ export function undervisningsmetodensSaker(d: Um, id: string, o: { lektionskort?
   saker.push(sak(METODKORTET, `${sida}#metodkortet`, { slag: 'avsnitt' }));
   return saker;
 }
+/** En rutins ankare på metodens sida: rutinen i vecka 1 står i rutan vid Första lektionen, och de andra fälls ut vid sin vecka. */
+export const rutinensAnkare = (r: { namn: string; vecka: number | string }) => (String(r.vecka) === '1' ? 'rutinen-vecka-1' : `rutinen-${slugAv(r.namn)}`);
 /** Ett stegs ankare i lektionen på metodens sida, del-<namn>, som remsan, Lär dig metoden och utfallens knapp leder till. */
 export const stegetsAnkare = (namn: string) => `del-${namn.toLocaleLowerCase('sv').replace(/[^a-zåäö0-9]+/g, '-')}`;
 /** Utfallens ruta i ett steg, som knappen Utfallet i Lär dig metoden leder till (verifieringen 2026-11-02: knappen ledde till
@@ -195,10 +207,8 @@ export function utfalletsGrans(id: 'nastanAlla' | 'deFlesta' | 'halften', n: num
   const g = utfallensGranser(n);
   return id === 'nastanAlla' ? `Högst ${g.nastanAlla} av ${n} ${ord}.` : id === 'deFlesta' ? `${g.deFlesta[0]}–${g.deFlesta[1]} av ${n} ${ord}.` : `${g.halften} eller fler av ${n} ${ord}.`;
 }
-/** Regeln bakom gränserna, i ord, som utfallensGranser räknar (standarden, avsnitt 7), med vad metodens tal räknar (utfallsord). */
-export const utfallensRegel = (ord = 'med fel') => (ord === 'med fel'
-  ? 'Nästan alla kan när högst en av fem har fel, avrundat nedåt. Hälften eller färre kan när hälften eller fler har fel, avrundat uppåt.'
-  : `Nästan alla kan när högst en av fem är ${ord.replace(/^elever /, '')}, avrundat nedåt. Hälften eller färre kan när hälften eller fler är det, avrundat uppåt.`);
+/** Regeln bakom gränserna, i ord, ur standarden (utfallensRegel), så att sidan och riggens Word säger samma mening. */
+export { utfallensRegel } from './standard/index.js';
 /** Klassens antal som utfallen i metodens text räknar med: talet efter "av" i den första gränsen, annars 28. */
 export const utfallensElever = (redo?: Record<string, string>) => Number(String(redo?.nastanAlla ?? '').match(/\bav (\d+)/)?.[1] ?? 28);
 /**

@@ -25,6 +25,9 @@ const valda = [...slag.map((s) => filer[s]), ...tabeller].filter((f): f is UmFil
 const bas = (f: UmFil) => (f.pdf ?? f.docx ?? '').replace(/\.(pdf|docx)$/, '');
 const namn = (f: UmFil) => bas(f).split('/').pop() ?? id;
 const iMening = (t: string) => t.charAt(0).toLocaleLowerCase('sv') + t.slice(1);
+// En fri tabells namn är sakens eget namn, som mallen Planera uppdraget, och står med stor bokstav i knappens text, så att den inte
+// läses som ett verb: Skriv ut Planera uppdraget (andra ögat 2026-11-15, K-789).
+const egetNamn = (f: UmFil) => tabeller.includes(f);
 // Knappen som skriver ut: filens pdf, eller bladets egen.
 const en = valda[0];
 const knapp = en && (blad ? { href: blad.pdf, namn: blad.namn, stam: blad.pdf.replace(/^.*\/|\.pdf$/g, '') } : en.pdf ? { href: en.pdf, namn: en.namn, stam: namn(en) } : undefined);
@@ -52,8 +55,8 @@ const metoden = filer.metoden;
   knapp && <a class={stor ? 'knapp' : 'knapp sekundar'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={kortNamn ?? `Skriv ut ${iMening(knapp.namn)}`}>{kortNamn ?? `${knapp.namn} som pdf`}</span></a>
 ) : en && (
   <p class="um-filknappar">
-    {knapp && <a class={stor ? 'knapp' : 'knapp sekundar liten'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${blad ? knapp.namn : iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>}
-    {en.docx && (!blad || medFilval) && <Filval fil={bas(en)} namn={namn(en)} rubrik={en.namn} statistik={`${titel}: ${iMening(en.namn)}`} liten />}
+    {knapp && <a class={stor ? 'knapp' : 'knapp sekundar liten'} href={knapp.href} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift:${knapp.stam}`} data-goatcounter-title={`${titel}: ${iMening(knapp.namn)}, utskrift`}><span data-direkt={`Skriv ut ${blad || egetNamn(en) ? knapp.namn : iMening(knapp.namn)}`}>{knapp.namn} som pdf</span></a>}
+    {en.docx && (!blad || medFilval) && <Filval fil={bas(en)} namn={namn(en)} rubrik={en.namn} statistik={`${titel}: ${iMening(en.namn)}`} egetNamn={egetNamn(en)} liten />}
   </p>
 )}
 <SkrivUtPdf />

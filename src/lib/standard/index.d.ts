@@ -321,9 +321,10 @@ export declare const planveckansKort: (plan: Plan, v: PlanVecka) => { tal: strin
 export declare const klassenHarNagot: (f: Foljd, id: string) => boolean;
 export declare const harInfortEfter: (f: Foljd, mandag: string, plan: { mitt?: number; veckor: { mandag: string }[] }) => boolean;
 /** Vad svaret på Gick det? gjorde med planen, i en mening. */
-export declare function gickDetsFoljd(plan: Plan, mandag: string, svar: 'ja' | 'inte' | undefined, rubriker: string[], last?: boolean): string;
+export declare function gickDetsFoljd(plan: Plan, mandag: string, svar: 'ja' | 'inte' | undefined, rubriker: string[], last?: boolean, utanUpprepa?: boolean): string;
 /** Beskedet när svaret inte ändrar planen, eftersom något är infört i en senare vecka. */
 export declare const GICK_LAST: string;
+export declare const GICK_FAST: string;
 /** Är lovet i veckan låst: något är infört i veckan eller senare. */
 export declare const lovetLast: (mandag: string, sista: string | undefined) => boolean;
 /** Lovveckorna i en mening, "Lov v. 48–49."; tom utan lov. */
@@ -435,7 +436,7 @@ export declare const AVSLUTETS_ANLEDNINGAR: Readonly<{ stodundervisning: readonl
 export declare const ANLEDNINGENS_LANGD: number;
 /** Metodens plan i Lär dig metoden ur sidans data. */
 export declare const larDigetsMetodplan: (data: { tid: string; period: string; progression: unknown; uppfoljning: unknown; passen: unknown[]; skattningar: unknown[] }) => ReturnType<typeof metodplan>;
-export declare function svaraGickDet(plan: Plan, val: Val, f: Foljd, mandag: string, svar: 'ja' | 'inte' | undefined): { val: Val; gick: Record<string, 'ja' | 'inte'>; andrad: boolean; last: boolean };
+export declare function svaraGickDet(plan: Plan, val: Val, f: Foljd, mandag: string, svar: 'ja' | 'inte' | undefined, o?: { utanUpprepa?: boolean }): { val: Val; gick: Record<string, 'ja' | 'inte'>; andrad: boolean; last: boolean };
 /** Om Gick det? frågas i veckan: i stegets sista vecka i planen. */
 export declare const fragarGickDet: (plan: Plan, v: { nr?: number; steg?: number | null }) => boolean;
 /** Stegets sista vecka i planen. */
@@ -846,6 +847,7 @@ export type Kostnad = { kop: number; timmar: number; motivering: string };
 export declare function utfallensPar(n: number): { nastanAlla: number; deFlesta: [number, number]; halften: number };
 /** Vad utfallens tal räknar, ur metodens egen mening i stegets redo, och annars "med fel". */
 export declare const utfallsord: (redo: { nastanAlla?: unknown } | null | undefined) => string;
+export declare const utfallensRegel: (ord?: string) => string;
 /** Rutinens rubrik: Rutinen och namnet, och bara namnet när det redan säger rutinen, som Parrutinen. */
 export declare const rutinensRubrik: (namn: string, o?: { kolon?: boolean }) => string;
 export declare const SVARIGHETENS_ORD:readonly ['', 'Mycket lätt', 'Lätt', 'Medelsvårt', 'Svårt', 'Mycket svårt'];
@@ -955,6 +957,7 @@ export declare const OMRADENAS_RAD: Readonly<{ lasning: string; amnen: string }>
 export declare const FAKTANS_MATERIAL: number;
 /** Etiketterna över ämnesexemplets två rader, en för alla slag. */
 export declare const EXEMPLETS_ETIKETTER: Readonly<{ egen: string; visar: string }>;
+export declare const exempletsEtiketter: (overst: { egen?: string } | null | undefined) => Readonly<{ egen: string; visar: string }>;
 /** Primär evidens: de högst två av sajtens fyra områden med starkast stöd, minst Visst stöd, och alla som står helt lika. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export declare function primaraOmraden(evidens: Record<string, any>): string[];

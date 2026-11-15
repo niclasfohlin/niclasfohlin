@@ -116,6 +116,18 @@ for (const s of metodsidor) {
   }
 }
 
+// En hänvisning till en del av lektionen eller en rutin är en länk bara med hela hänvisningen, "Arbetet i del 2" och "rutinen
+// Kontakten", och delens eller rutinens namn ensamt, också ensamt i en tabellcell, är ingen länk (K-789; andra ögat och Codex
+// 2026-11-15: regeln länkade Inför läsningen, Lektionens fråga och Loggen i tabeller i tre metoder). Prövat åt andra hållet.
+export const hanvisningensFel = (s, html) => [...html.matchAll(/<a class="(?:um-sak|m-tabell-lank)" href="[^"#]*#(del-[^"]+|variant-[^"]+|rutinen-[^"]+)"[^>]*>([^<]*)<\/a>/g)]
+  .filter(([, ankare, text]) => (/^rutinen-/.test(ankare) ? !/^rutinen\s/i.test(text) : !/\si del \d$/.test(text)) && !/^del-(?:metoden|lektionen|kom-igang|hall-i|att-skriva-ut|valet)/.test(ankare))
+  .map(([, ankare, text]) => `${s}: "${text}" är en länk till #${ankare}, men bara hela hänvisningen, som "Arbetet i del 2" eller "rutinen Kontakten", länkas`);
+{
+  const prov = '<a class="m-tabell-lank" href="/metoder/x#del-inför-läsningen">Inför läsningen</a><a class="um-sak" href="/metoder/x#del-arbetet">Arbetet i del 2</a><a class="um-sak" href="/metoder/x#rutinen-kontakten">rutinen Kontakten</a><a class="um-sak" href="/metoder/x#rutinen-kontakten">Kontakten</a>';
+  if (hanvisningensFel('prov', prov).length !== 2) fel.push(`hänvisningarnas prov gav ${hanvisningensFel('prov', prov).length} fel i stället för 2`);
+}
+for (const s of metodsidor) fel.push(...hanvisningensFel(s, readFileSync(join(dist, s.slice(1), 'index.html'), 'utf8')));
+
 // Det som går att pröva i HTML: ankarna, filerna och delarnas ordning.
 for (const s of [...metodsidor, ...lathundsidor]) {
   const html = readFileSync(join(dist, s, 'index.html'), 'utf8');
