@@ -35,6 +35,8 @@ export interface LarDigData {
   skattningar: { namn: string; vem: 'lararen'; rad: string; text?: string; skala: { fran: number; till: number }; regler: { om: string; rad: string }[] }[];
   /** Planens rader om enskilda lektioner, som Första lektionen, med metodens text. */
   passen: { nar: string; kort?: string; text: string }[];
+  /** Veckorna ligger fast (metodens plan.utanUpprepa): Inte än ger ingen vecka till, som när metoden har ett bokat möte sist (svaraGickDet, K-789). */
+  utanUpprepa?: true;
   fore: string[];
   utvardering: string[];
   rutiner: { namn: string; vecka: number; vad: string; steg: string[]; forsta?: string }[];
@@ -107,6 +109,7 @@ export function larDigData(id: string, d: Um): LarDigData {
     uppfoljning: { text: strang(d.uppfoljning?.text) || undefined, rader: somLista(d.uppfoljning?.rader).map((r) => { const x = r as Record<string, unknown>; return { ...(x.id ? { id: String(x.id) } : {}), nar: strang(x.nar), tid: strang(x.tid), vad: strang(x.vad) }; }) },
     skattningar: somLista(d.plan?.skattningar).filter((x) => (x as { vem?: string })?.vem === 'lararen').map((s) => { const x = s as Record<string, any>; return { namn: strang(x.namn), vem: 'lararen' as const, rad: strang(x.rad), ...(x.text ? { text: strang(x.text) } : {}), skala: { fran: Number(x.skala?.fran), till: Number(x.skala?.till) }, regler: somLista(x.regler).map((r) => ({ om: strang((r as { om?: string }).om), rad: strang((r as { rad?: string }).rad) })) }; }),
     passen: somLista(d.plan?.passen).map((p) => { const x = p as Record<string, unknown>; return { nar: strang(x.nar), ...(x.kort ? { kort: strang(x.kort) } : {}), text: strang(x.text) }; }),
+    ...(d.plan?.utanUpprepa === true ? { utanUpprepa: true as const } : {}),
     fore: somLista(d.plan?.fore).map(strang).filter(Boolean),
     utvardering: somLista(d.plan?.utvardering).map(strang).filter(Boolean),
     rutiner: somLista(d.rutiner?.rader).map((r) => { const x = r as Record<string, unknown>; return { namn: strang(x.namn), vecka: Number(x.vecka), vad: strang(x.vad), steg: somLista(x.steg).map(strang).filter(Boolean), ...(x.forsta ? { forsta: strang(x.forsta) } : {}) }; }),

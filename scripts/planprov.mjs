@@ -826,6 +826,14 @@ if (tsMp) {
     const ja = s.svaraGickDet(s.planera(emp, inte.val), inte.val, s.rensaFoljd({ gick: inte.gick }), '2026-11-16', 'ja');
     const lastSvar = s.svaraGickDet(ep, eval0, s.rensaFoljd({ gick: { '2026-11-23': 'ja' } }), '2026-11-16', 'inte');
     ska('Lär dig metoden: Inte än ger en vecka till, en gång, och ett annat svar tar bort den', inte.andrad && inte.val.upprepa.join() === '2' && inte.gick['2026-11-16'] === 'inte' && igen.andrad && !igen.val.upprepa.length && !igen.gick['2026-11-16'] && ja.andrad && !ja.val.upprepa.length && ja.gick['2026-11-16'] === 'ja' && !lastSvar.andrad && lastSvar.last && !lastSvar.val.upprepa.length && lastSvar.gick['2026-11-16'] === 'inte', [inte.val.upprepa, igen.val.upprepa, ja.val.upprepa, lastSvar]);
+    // Veckorna ligger fast (metodens plan.utanUpprepa; Codex 2026-11-15, nr 1, K-789): Inte än sparas men ger ingen vecka till,
+    // och beskedet säger att steget följer med in i nästa vecka. Utan fältet ger samma svar en vecka till, så att provet prövas åt
+    // andra hållet, och sidan skickar fältet till svaret, rutan och texten.
+    const fast = s.svaraGickDet(ep, eval0, tom, '2026-11-16', 'inte', { utanUpprepa: true });
+    const ldKoden = lasFilen(join(rot, 'src', 'scripts', 'lardig.ts'), 'utf8');
+    ska('Lär dig metoden: med veckorna fasta ger Inte än ingen vecka till', !fast.andrad && !(fast.val.upprepa ?? []).length && fast.gick['2026-11-16'] === 'inte' && inte.andrad
+      && s.gickDetsFoljd(ep, '2026-11-16', 'inte', [], false, true) === s.GICK_FAST && s.gickDetsFoljd(ep, '2026-11-16', 'inte', [], false, false) !== s.GICK_FAST
+      && /svaraGickDet\(plan, aktiv\.val, aktiv\.foljd, mandag, svar, \{ utanUpprepa: !!data\.utanUpprepa \}\)/.test(ldKoden) && /harInfortEfter\(aktiv\.foljd, mandag, plan\), !!data\.utanUpprepa\)/.test(ldKoden) && /const enVeckaTill = !data\.utanUpprepa/.test(ldKoden), [fast.andrad, fast.val.upprepa]);
     ska('Lär dig metoden: veckan före utan svar', s.obesvaradVecka(ep, tom, '2026-11-18')?.mandag === '2026-11-09' && s.obesvaradVecka(ep, s.rensaFoljd({ gick: { '2026-11-09': 'ja' } }), '2026-11-18') === null && s.obesvaradVecka(ep, tom, '2026-11-06') === null && s.obesvaradVecka(ep, tom, '2027-01-20')?.mandag === '2026-11-30');
     // Regelformen under X i N veckor i rad (de kalla läsarna 2026-10-30): den slår till också när linjen stiger, och formen utan
     // att stiga, som Gruppstärkande aktiviteter har, räknar som förut. Skalornas ändar och den streckade linjen i ord.

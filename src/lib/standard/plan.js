@@ -1786,9 +1786,12 @@ export const larDigetsRegler = (s, rader) => s.linjer.flatMap((l) => l.galler.fl
  * @param {Foljd} f
  * @param {string} mandag veckans måndag
  * @param {'ja' | 'inte' | undefined} svar
+ * @param {{ utanUpprepa?: boolean }} [o] metodens plan.utanUpprepa: veckorna ligger fast, som när metoden har ett bokat möte
+ *   sist (Värdeskapande lärande: "Behöver ett steg en vecka till, följer det med in i nästa vecka, och mötet ligger kvar";
+ *   Codex 2026-11-15, nr 1, sajtens K-789), så Inte än sparas som svar men ger ingen vecka till
  * @returns {{ val: Val, gick: Record<string, 'ja' | 'inte'>, andrad: boolean, last: boolean }}
  */
-export function svaraGickDet(plan, val, f, mandag, svar) {
+export function svaraGickDet(plan, val, f, mandag, svar, o = {}) {
   const v = plan.veckor.find((x) => x.mandag === mandag);
   const fore = f.gick?.[mandag];
   const ny = !svar || fore === svar ? undefined : svar;
@@ -1800,11 +1803,14 @@ export function svaraGickDet(plan, val, f, mandag, svar) {
   // den, också när svaren ändras i två veckor (Codex 2026-10-31, nr 6).
   const steg = v ? v.innehall : 0, harNu = (val.upprepa ?? []).filter((x) => x === steg).length;
   const ska = v ? plan.veckor.filter((w) => w.innehall === steg && gick[w.mandag] === 'inte').length : harNu;
-  const forlang = !!v && !last && ska > harNu, korta = !!v && !last && ska < harNu;
+  const fast = !!o.utanUpprepa;
+  const forlang = !fast && !!v && !last && ska > harNu, korta = !fast && !!v && !last && ska < harNu;
   return { val: forlang || korta ? forlangSteget(val, steg, ska - harNu) : val, gick, andrad: forlang || korta, last };
 }
 /** Beskedet och rutans text när svaret inte ändrar planen, eftersom något är infört i en senare vecka (harInfortEfter; konsistensen 2026-11-09, P1). */
 export const GICK_LAST = 'Planen ändras inte, eftersom du har fört in något i en senare vecka.';
+/** Beskedet efter Inte än när metodens veckor ligger fast (plan.utanUpprepa, svaraGickDet). */
+export const GICK_FAST = 'Steget följer med in i nästa vecka, och veckorna efter ligger kvar.';
 /**
  * Vad svaret på Gick det? gjorde med planen, i en mening ur planen efter svaret (granskningen rot-3, fynd 21): stegets sista
  * vecka efter Inte än, och annars nästa vecka med stegets namn, eller veckan efter stegen.
@@ -1813,11 +1819,13 @@ export const GICK_LAST = 'Planen ändras inte, eftersom du har fört in något i
  * @param {'ja' | 'inte' | undefined} svar
  * @param {string[]} rubriker stegens namn i progressionens ordning
  * @param {boolean} [last] något är infört i en senare vecka, så att svaret inte ändrade planen (harInfortEfter)
+ * @param {boolean} [utanUpprepa] veckorna ligger fast (metodens plan.utanUpprepa, svaraGickDet)
  */
-export function gickDetsFoljd(plan, mandag, svar, rubriker, last = false) {
+export function gickDetsFoljd(plan, mandag, svar, rubriker, last = false, utanUpprepa = false) {
   const v = plan.veckor.find((x) => x.mandag === mandag);
   if (!v) return '';
   const sista = [...plan.veckor].reverse().find((x) => x.innehall === v.innehall) ?? v;
+  if (svar === 'inte' && utanUpprepa) return GICK_FAST;
   if (svar === 'inte') return sista.nr > v.nr ? `Steget får en vecka till: ${planveckansNamn(plan, sista).text}.` : last ? GICK_LAST : 'Steget står kvar till nästa vecka.';
   const nasta = plan.veckor[v.nr];
   const r = nasta ? larDigetsSteg(plan).rad(nasta) : null;
