@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.63.1, 2026-11-15
+
+- `saker.js` (sajtens K-789, Värdeskapande lärande): kontaktlistan står bland `EGNA_SAKER`, eftersom klassen skriver den själv på väggen och den inte har någon fil, så att `olankadeSaker` inte stoppar "Ta nästa namn på kontaktlistan".
+
 ## 0.63.0, 2026-11-14
 
 - `undervisningsmetod.js` (sajtens K-775; riggens svar 2026-11-14 kväll, Lärarens frågor i stödets standard): `lararensFragorFel` och `LARARENS_FRAGOR` för båda bankerna, tre till sex frågor, minst två Får jag …?, minst ett hinder, frågetecken och svaret högst 220 tecken. `undervisningsmetodensFel` kör den, och alla åtta metoder i Metoder går igenom. `RUTORNAS_RUBRIKER.lararensFragor` och raden i `metodensAvsnitt`.
