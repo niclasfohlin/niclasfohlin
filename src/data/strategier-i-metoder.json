@@ -296,5 +296,22 @@
         "om": "Från tavla A till B och C"
       }
     ]
+  },
+  "vardeskapande-larande": {
+    "text": "En strategi för lärande passar i arbetet. Lär ut till någon passar när uppdraget förklarar ämnet för mottagaren, som boktipsen åt åk 3 eller kartan åt förskoleklassen: gruppen letar fram det viktigaste och ordnar det så att hen förstår, och i mötet visar den hen.",
+    "strategier": [
+      "lar-ut-till-nagon"
+    ],
+    "skal": "Arbetet för en mottagare som ska förstå ämnet är att förbereda sig för att lära ut, och mötet är att göra det. Provet räknas inte, eftersom gruppen där säger inget medan besökarna använder arbetet. Riggen prövade strategierna mot metodens text 2026-11-15 (out/vardeskapande-larande/TILL-SAJTEN.md, punkt 9) och strök Pröva dig själv, Fråga varför och Plocka fram.",
+    "platser": [
+      {
+        "efter": "steg 3",
+        "delar": [
+          "lar-ut-till-nagon"
+        ],
+        "slag": "forslag",
+        "om": "När uppdraget förklarar ämnet för mottagaren"
+      }
+    ]
   }
 }

@@ -40,5 +40,9 @@
     "stycket": "Fyrfältaren",
     "knapp": { "namn": "Fyrfältare", "till": "Fyrfältarna" },
     "saker": ["Fyrfältarna", "Baksidan", "Mina anteckningar"]
+  },
+  "vardeskapande-larande": {
+    "stycket": "Affischerna",
+    "saker": ["Fem former av värde", "De värdeskapande frågorna", "Gruppens plan"]
   }
 }

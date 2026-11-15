@@ -19,5 +19,25 @@
       "bredd": 1200,
       "hojd": 472
     }
+  ],
+  "vardeskapande-larande": [
+    {
+      "nr": 4,
+      "rubrik": "Mottagartrappan",
+      "text": "Mottagaren tar ett steg längre bort i taget, när klassen har klarat kontakten på steget före. Kartan till parken är ett uppdrag i skolan.",
+      "alt": "Fyra trappsteg som stiger från vänster till höger. Steg 1, Knorren: samma vecka. Steg 2, I skolan: en annan klass, några veckor, med en stjärna och Kartan till parken. Steg 3, I närområdet: en förening eller ett äldreboende, några veckor. Steg 4, I samhället: kommunen eller en tidning, upp till en termin. Överst står: Mottagaren tar ett steg längre bort i taget. Nederst går en pil åt höger.",
+      "efter": "tabell: Börja litet",
+      "bredd": 1200,
+      "hojd": 520
+    },
+    {
+      "nr": 8,
+      "rubrik": "Liggande åttan",
+      "text": "Klassen lär sig ämnet i klassrummet, gör något av värde för någon utanför klassen och kommer tillbaka och reflekterar, som en bumerang. Martin Lackéus kallar bilden den liggande åttan.",
+      "alt": "Två ovaler som möts i mitten, som en liggande åtta. Den vänstra: I klassrummet, vi lär oss ämnet, med exemplet teckenförklaringen. Den högra: Utanför klassen, vi gör något av värde för någon, med exemplet barnen hittar lekplatsen, och frågan Hur känns det? Överst går en pil från vänster till höger med frågan För vem är kunskapen värdefull? Nederst går en pil tillbaka från höger till vänster med frågan Vad vet vi nu?",
+      "efter": "tabell: Så bygger du ett värdeskapande uppdrag",
+      "bredd": 1200,
+      "hojd": 560
+    }
   ]
 }

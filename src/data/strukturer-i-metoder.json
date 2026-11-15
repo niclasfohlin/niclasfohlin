@@ -87,5 +87,26 @@
         "om": "När paret läser texterna"
       }
     ]
+  },
+  "vardeskapande-larande": {
+    "skal": "I Starten tänker alla först själva, sedan pratar de två och två, och läraren skriver klassens svar på tavlan: EPA i samma ordning (steg.rader[0].alla och gor). I valets lektion pitchar hälften av grupperna samtidigt för var sin besökande grupp, som svarar som mottagaren, och sedan byter grupperna medan läraren går runt: Kooperativ redovisning i samma ordning (tabellen Pitchen på en minut, och tidsschemats variant när klassen väljer uppdrag). Riggen prövade På sightseeing mot Provet och strök den: där kommenterar grupperna, och i Provet säger gruppen inget medan besökarna använder arbetet som mottagaren (out/vardeskapande-larande/TILL-SAJTEN.md, punkt 9).",
+    "platser": [
+      {
+        "efter": "steg 1",
+        "delar": [
+          "epa"
+        ],
+        "slag": "form",
+        "om": "Frågan För vem? i Starten"
+      },
+      {
+        "efter": "tabell: Pitchen på en minut",
+        "delar": [
+          "kooperativ-redovisning"
+        ],
+        "slag": "form",
+        "om": "Pitchen i valet, där grupperna pitchar för varandra"
+      }
+    ]
   }
 }

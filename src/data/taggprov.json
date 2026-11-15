@@ -10,7 +10,7 @@
     "src/content/stodundervisning/texttyp-beskrivande-text.yaml": "2026-10-09",
     "src/content/stodundervisning/texttyp-instruerande-text.yaml": "2026-10-09",
     "src/content/stodundervisning/skrivkurs-berattelseram.yaml": "2026-10-10",
-    "src/content/stodundervisning/skrivkurs-vardeskapande.yaml": "2026-10-10",
+    "src/content/stodundervisning/skrivkurs-vardeskapande.yaml": "2026-11-15",
     "src/content/stodundervisning/skrivkurs-sagoboken.yaml": "2026-10-10",
     "src/content/stodundervisning/kortskrivning-skriv-varje-dag.yaml": "2026-10-14",
     "src/content/stodundervisning/gruppstarkande-aktiviteter.yaml": "2026-10-16",
@@ -25,6 +25,7 @@
     "src/content/artiklar/det-ar-relationen-som-far-kraven-att-bara.md": "2026-11-04",
     "src/content/undervisningsmetoder/reciprok-undervisning.yaml": "2026-11-07",
     "src/content/undervisningsmetoder/skriva-for-att-lara.yaml": "2026-11-08",
-    "src/content/undervisningsmetoder/tankande-klassrum.yaml": "2026-11-14"
+    "src/content/undervisningsmetoder/tankande-klassrum.yaml": "2026-11-14",
+    "src/content/undervisningsmetoder/vardeskapande-larande.yaml": "2026-11-15"
   }
 }
