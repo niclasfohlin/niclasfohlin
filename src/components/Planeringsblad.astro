@@ -64,7 +64,8 @@ const k = (t: unknown) => medSaker(String(t ?? ''), saker, new Set());
                     {UTFALLEN.map((u) => (
                       <div class={`um-utfall-ruta um-utfall-${u.id}`}>
                         <p class="um-utfall-namn">{u.namn}</p>
-                        <p class="um-utfall-grans">{utfalletsGrans(u.id, plan.beslut.elever, utfallensOrd)} {utfalletsText(u.id)}</p>
+                        {/* Utfallets text med metodens saker som länkar, som resten av bladet (metoderprov 2026-11-16: "Gruppens plan" i Värdeskapande lärande). */}
+                        <p class="um-utfall-grans">{utfalletsGrans(u.id, plan.beslut.elever, utfallensOrd)} <Fragment set:html={k(utfalletsText(u.id))} /></p>
                         {lista(mall.beslut?.[u.id]).map((etikett, j) => <p class="um-blad-skriv">{etikett} <span class="um-blad-text" set:html={k(lista(plan.beslut[u.id])[j] ?? '')} /></p>)}
                       </div>
                     ))}

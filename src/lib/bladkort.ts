@@ -32,11 +32,16 @@ export function bladetsKnapp(id: string, d: Um): { namn: string; adress: string 
   return { namn: k.namn, adress: `#${slugAv(k.till)}` };
 }
 
-/** Var korten står: efter det första stycket i inledningen, efter det som kärnan har ritat, som har ordet i stycket eller bladets namn. */
+/** Korten står direkt efter kärnan, när inledningens första stycke, som kärnan står efter, redan nämner saken. */
+export const EFTER_KARNAN = -2;
+/** Var korten står: efter det första stycket i inledningen som har ordet i stycket eller bladets namn. Kärnan ritas efter det
+ *  första stycket, så nämner det saken står korten efter kärnan (EFTER_KARNAN; Tänkande klassrum efter omtaget 2026-11-15, där
+ *  fyrfältaren förklaras i första stycket), och annars efter stycket efter kärnan som nämner den. */
 export const bladkortensStycke = (id: string, d: Um): number => {
   const p = posten(id);
   if (!p) return -1;
   const ordet = (p.stycket ?? p.blad!).toLocaleLowerCase('sv');
+  if (String((d.inledning ?? [])[0] ?? '').toLocaleLowerCase('sv').includes(ordet)) return EFTER_KARNAN;
   const i = ((d.inledning ?? []) as string[]).slice(1).findIndex((s) => s.toLocaleLowerCase('sv').includes(ordet));
   if (i < 0) throw fel(d, `nämner inte ${ordet} i inledningen, så de små korten har ingen plats.`);
   return i;

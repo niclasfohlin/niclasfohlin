@@ -20,7 +20,7 @@ import { metodensKortAdress, provaMetodensKort, slagensStil, bildensAdress, stru
 import { mening, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, GREPPETS_TID, metodensStrategiblad, rutinensRubrik, utfallsord } from '../lib/standard/index.js';
 import Vavruta from './Vavruta.astro';
 import Bladkort from './Bladkort.astro';
-import { metodensBladkort, bladkortensStycke } from '../lib/bladkort';
+import { metodensBladkort, bladkortensStycke, EFTER_KARNAN } from '../lib/bladkort';
 import materialetsSidor from '../data/materialets-sidor.json';
 import { vavtIMetoder } from '../lib/vav';
 import { strategiernaAv, strategikortetI, provaMetodensStrategikort, metodensKortAdress as metodensStrategikortAdress, strategiensAdress, strategiernasStil, STRATEGIERNAS_ADRESS } from '../lib/strategier';
@@ -176,6 +176,7 @@ const moten = arbetslagetsMoten(d);
     {d.karna?.varv && <p class="um-varv">{d.karna.varv}</p>}
   </div>
   {d.karna?.grundregel && <p set:html={k(d.karna.grundregel)} />}
+  {bladkort && bladkortensPlats === EFTER_KARNAN && <Bladkort b={bladkort} id={id} titel={d.titel} />}
   {(d.inledning ?? []).slice(1).map((s: string, i: number) => <><p set:html={k(s)} />{bladkort && i === bladkortensPlats && <Bladkort b={bladkort} id={id} titel={d.titel} />}</>)}
   {d.roll && (
     <section class="um-avsnitt" id="lararens-roll">
@@ -218,6 +219,9 @@ const moten = arbetslagetsMoten(d);
   <section class="um-avsnitt" id="lektionen">
     {/* Bandet säger redan rubriken, så den står bara för skärmläsaren (design-3 nr 18). */}
     <h3 class="visually-hidden">{d.tidsschema?.rubrik}</h3>
+    {/* Rubrikerna i delarna förklaras en gång, före delarna, med metodens egna ord för slaget (K-799; riggens kalla läsare
+        2026-11-15 förstod inte Kärnan här, Alla elever visar, Du tittar efter och Beslutet i två metoder). */}
+    <p class="um-rubrikerna">I delarna nedan säger ”Kärnan här” vilka delar av kärnan som görs där, ”{slagetsOrd.alla}” vad eleverna gör som du ser, ”Du tittar efter” vad du lägger märke till just då och ”{slagetsOrd.beslut}” vad du gör efter det.</p>
     {/* En fri tabell med plats fore-lektionen står direkt efter rutan Före lektionen, som i riggens Word-fil (K-743). */}
     {foreRad && <div class="um-fore-efter"><p><strong>Före lektionen.</strong> <span set:html={k(foreRad.vad)} /></p>{karnanUtanfor(foreRad.fas).length > 0 && <p class="um-fore-karna">Kärnan här: {karnanUtanfor(foreRad.fas).map((x, i) => <>{i > 0 && ', '}<a href={`#karnan-${x.nr}`}>{x.nr} {x.namn}</a></>)}</p>}</div>}
     <UmFriaTabeller d={d} id={id} plats="fore-lektionen" k={k} saker={saker} filer={tabellfiler} vavt={vavt} />
