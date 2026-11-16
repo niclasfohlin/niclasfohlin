@@ -149,6 +149,7 @@
     "slag": "sida",
     "del": "verktyg",
     "adress": "/innehall",
+    "publicerad": "2026-11-16",
     "arskurs": "F–9",
     "omraden": "alla",
     "sas": "undervisningsmetoder",
@@ -159,7 +160,7 @@
       "liknarFler": "Tänk till om innehållet",
       "passar": "Tänk till om innehållet",
       "passarFler": "Tänk till om innehållet",
-      "text": "Innehåll är en text om att välja innehåll som är värt att lära, med fem frågor att ställa till arbetsområdet och mallar till dig, en kollega och eleverna.",
+      "text": "En metod tar oss bara en bit på vägen om inte innehållet är intressant, skapar mening och går att fördjupa sig i. Innehåll har fem frågor att pröva ditt innehåll med, och mallar till dig, en kollega och eleverna.",
       "rad": "De fem frågorna, mallarna och exemplen finns på sidan Innehåll."
     }
   }

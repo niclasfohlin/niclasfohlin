@@ -262,7 +262,9 @@ const arMall = (b: Block): b is MallBlock => 'mall' in b;
     let vantar = false;
     const uppdatera = () => {
       vantar = false;
-      const kant = rad.getBoundingClientRect().bottom + 8;
+      // Gränsen ligger en bit under raden, nedanför marginalen som ett hopp landar med (scroll-margin-top i global.css), så
+      // att delen som läraren hoppade till är den som visas (verifieringen 2026-11-16).
+      const kant = rad.getBoundingClientRect().bottom + 32;
       rad.toggleAttribute('data-djupt', (delar[0]?.getBoundingClientRect().top ?? Infinity) <= kant);
       let aktuell = -1;
       delar.forEach((d, i) => { const r = d?.getBoundingClientRect(); if (r && r.top <= kant && r.bottom > kant) aktuell = i; });

@@ -4995,7 +4995,8 @@ button.pl-passroll { min-height: 2.75rem; }
 .ih-delrad { position: sticky; top: 0; z-index: 5; display: flex; gap: 0.3rem; margin: 2.2rem -1rem 0; padding: 0.5rem 1rem; background: var(--farg-bakgrund, #fff); border-bottom: 1px solid var(--farg-innehall-kant); overflow-x: auto; font-family: var(--typsnitt-ui); }
 /* Inne i delarna (data-djupt, ur sidans skript): pilen till Börja här först, delen läraren läser med namn och de andra med
    sitt nummer, som delraden på metodernas sidor (testarna 2026-11-16 saknade vägen tillbaka och vilken del de var i). */
-.ih-delrad-upp { display: none; }
+/* Med .ih-delrad först, så att regeln väger mer än .ih-delrad a, som annars visade pilen redan före delarna (verifieringen 2026-11-16). */
+.ih-delrad .ih-delrad-upp { display: none; }
 .ih-delrad[data-djupt] .ih-delrad-upp { display: inline-flex; flex: 0 0 auto; min-width: 2.75rem; }
 .ih-delrad[data-djupt] a[data-del]:not([aria-current]) { flex: 0 0 auto; min-width: 2.75rem; }
 .ih-delrad[data-djupt] a[data-del]:not([aria-current]) .ih-delrad-namn, .ih-delrad-upp .ih-delrad-namn { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
