@@ -39,7 +39,7 @@
    "nr": "4",
    "fraga": "Vilken fråga driver arbetet?",
    "kort": "En fråga som klassen kan svara på när arbetet är slut, som ”Vad är mod när man är rädd?”",
-   "text": "I fråga 1 skrev du vad det större är. Gör det till en fråga som klassen arbetar med i varje lektion och kan svara på när arbetsområdet är slut. Pröva frågan. Kan en elev svara bra utan att ha lärt sig något under veckorna? Då är den för vag eller för lätt.",
+   "text": "I fråga 1 skrev du vad det större är. Gör det till en fråga som klassen arbetar med i varje lektion och kan svara på när arbetsområdet är slut. Pröva frågan. Kan en elev svara bra utan att ha lärt sig något under veckorna? Då är den för vag eller för lätt. Fyra exempel på sådana frågor står i tabellen efter frågorna.",
    "mall": "Kan en elev svara bra utan att ha lärt sig något? Skriv då om frågan."
   },
   {
@@ -219,7 +219,7 @@
      "stycke": "Svaren kan ändra vägen, alltså vilka exempel, texter och frågor ni tar upp. Vad som är värt att lära prövar du fortfarande med de fem frågorna. Föreslår eleverna en fråga som du helst skulle undvika, kan det vara just den de behöver tala om. Ge samtalet en form. Alla skriver först vad de tänker, sedan talar ni och går tillbaka till det ni har läst eller varit med om."
     },
     {
-     "stycke": "Två blad hjälper dig att fråga: Det här minns jag för förskoleklass till årskurs 3 och Vad tänker du? för årskurs 4–⁠9. Ge eleverna bladet mitt i ett arbetsområde, så hinner svaren ändra resten av det, eller i slutet, så ändrar de nästa arbetsområde. Skriv överst på bladet vad frågorna gäller, som ”lamporna vi kopplade”, innan du kopierar det."
+     "stycke": "Två blad hjälper dig att fråga: Det här minns jag för förskoleklass till årskurs 3 och Vad tänker du? för årskurs 4–⁠9. Ge eleverna bladet mitt i ett arbetsområde, så hinner svaren ändra resten av det, eller i slutet, så ändrar de nästa arbetsområde. Skriv för hand överst på bladet vad frågorna gäller, som ”lamporna vi kopplade”, innan du kopierar det."
     },
     {
      "stycke": "På bladet Det här minns jag ritar de yngre något de minns, och säger eller skriver vad de har ritat och vad de undrar. Läs uppgifterna högt, en i taget. I årskurs 1–⁠3 ritar och skriver hela klassen samtidigt, och det tar en halv lektion. Gå runt under tiden och skriv ner barnens egna ord åt dem som inte skriver själva. Fråga dem, och några barn till, vad som händer i bilden och varför de ritade just det. Du behöver inte hinna samtala med alla. I förskoleklassen gör du bladet med fem barn i taget och skriver åt alla. Lägg sedan teckningarna i högar efter vad de visar."
@@ -238,7 +238,10 @@
       ],
       "rubrik": "Mallarna: två blad till eleverna",
       "text": [
-       "För förskoleklass till årskurs 3 finns Det här minns jag, och för årskurs 4–⁠9 finns Vad tänker du? Båda är ett A4 att kopiera."
+       "Två blad som pdf, ett A4 var. Skriv ut bladet, skriv för hand överst vad frågorna gäller, som ”lamporna vi kopplade”, och kopiera det sedan till eleverna.",
+       "Bladet Det här minns jag är för förskoleklass till årskurs 3. Eleverna ritar något de minns, och säger eller skriver vad de har ritat och vad de undrar. I en klass tar det en halv lektion, och i förskoleklassen gör du det med fem barn i taget.",
+       "Bladet Vad tänker du? är för årskurs 4–⁠9. Eleverna svarar utan namn på tre frågor och en skattning. Det tar tio minuter.",
+       "Lägg svaren i högar och läs dem. Säg till klassen nästa lektion vad du ändrar och vad du behåller. I en liten grupp gör de yngre bladet vid bordet, och de äldres frågor ställer du muntligt, till en elev i taget."
       ]
      }
     }
