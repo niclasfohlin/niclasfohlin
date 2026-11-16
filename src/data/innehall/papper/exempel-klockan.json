@@ -1,0 +1,98 @@
+{
+ "design": "strategipapper",
+ "fil": "Innehall exempel klockan",
+ "titel": "Exempel: klockan i årskurs 1",
+ "undertitel": "En färdighet som ska tränas, prövad med de fem frågorna. Tre veckor med hel och halv timme.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Före",
+    "text": "Lärobokens sidor om klockan, en i taget. Eleverna ritar visare på tomma urtavlor och skriver vad klockan är."
+   },
+   {
+    "rubrik": "Efter",
+    "text": "Tre veckor med en fråga: Hur ser vi på klockan hur lång tid det är kvar? Eleverna läser av klockan för att få veta något om sin egen dag."
+   },
+   {
+    "rubrik": "I klassrummet",
+    "text": "Frågan sitter bredvid klockan och schemat. Vid hel och halv timme läser klassen av klockan och säger hur länge det är kvar till nästa sak på schemat."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Frågorna och svaren",
+   "text": "Samma frågor som i mallen Min innehållsanalys, ifyllda för det här arbetsområdet.",
+   "kolumner": [
+    "Frågan",
+    "Mitt svar",
+    "Det ändrar jag i planeringen"
+   ],
+   "bredder": [
+    22,
+    42,
+    36
+   ],
+   "rader": [
+    [
+     "1 · Vad öppnar innehållet?",
+     "Att tiden går att mäta, så att vi kan veta när något börjar och hur länge det dröjer. Eleverna ska kunna läsa av hel och halv timme på en klocka med visare och säga hur länge det är kvar till något.",
+     "Arbetet börjar i skoldagen, med lektionerna, rasten och maten. Visarna kommer när eleverna vill veta hur länge det är kvar."
+    ],
+    [
+     "2 · Vad betyder det för eleverna?",
+     "En spegel: alla har väntat på något och frågat hur länge det är kvar. Många tror att halv tre är en halvtimme efter tre, och flera har bara sett tiden med siffror, som 9.30 på en telefon. De möter klockan igen varje dag, när rasten börjar och när någon hämtar.",
+     "Varje elev säger något hen brukar vänta på, hemma eller på fritids, och vi ställer en klocka på den tiden. I vecka 2 frågar jag vid varje halv timme: Vilken timme är den korta visaren på väg mot?"
+    ],
+    [
+     "3 · Vad är nytt för dem?",
+     "Ett fönster: klockan med visare. Vid hel timme står den långa visaren rakt upp och den korta på timmen. Vid halv står den långa rakt ner, och den korta har gått halvvägs mot nästa timme. Halv tre är en halvtimme före tre.",
+     "Alla ser först på klassrummets klocka och på dagens schema: Vad är klockan nu, och hur länge är det kvar till rasten? Varje par får en egen klocka att ställa."
+    ],
+    [
+     "4 · Vilken fråga driver arbetet?",
+     "Hur ser vi på klockan hur lång tid det är kvar? Den som svarar bra läser av klockan, ser på schemat när rasten börjar och visar hur länge det är kvar: ett halvt varv för den långa visaren är en halvtimme, och ett helt varv en timme.",
+     "Tiderna på schemat får en klocka med visare bredvid sig, de hela i vecka 1 och de halva i vecka 2. I vecka 3 läser eleverna samma tider med siffror, som 9.30."
+    ],
+    [
+     "5 · Var blir det levande?",
+     "Dagens schema på tavlan. Klockan är nio, och rasten börjar halv tio. Hur länge är det kvar?",
+     "Schemat är med i varje lektion. En tid som 9.40 får vänta."
+    ],
+    [
+     "Sist · Vad tar du bort?",
+     "De sidor i läroboken där eleverna ritar visare för tider som inte hör till deras dag. Kvart över, kvart i och eftermiddagens tider med siffror, som 13.30, väntar till ett senare arbetsområde.",
+     "Sista veckan tar jag ner klockorna vid schemat. Varje elev ställer parets klocka på en tid ur schemat, säger vad klockan är och hur länge det är kvar till nästa sak."
+    ]
+   ]
+  },
+  {
+   "rubrik": "Till planeringen",
+   "text": "Samma rader som nederst i mallen Min innehållsanalys.",
+   "kolumner": [
+    "Saken",
+    "Så blir det"
+   ],
+   "bredder": [
+    22,
+    78
+   ],
+   "rader": [
+    [
+     "Står de fyra sakerna i den högra kolumnen?",
+     "Ja: Klassen samlar delarna av svaret på ett ställe. Det står vid fråga 4.\nJa: Slutuppgiften går inte att göra utan det klassen har lärt sig. Den står vid Sist.\nJa: Varje elev får säga eller skriva var innehållet finns i hens liv eller i världen utanför skolan. Det står vid fråga 2.\nJa: Varje vecka ger en bit av svaret på frågan som driver arbetet. Det står vid fråga 4."
+    ],
+    [
+     "Märk och fråga",
+     "Första dagen säger alla hur länge de tror att det är kvar till rasten och vad de undrar. I vecka 2 frågar jag tre elever vad de försöker lista ut, och klassen gör bladet Det här minns jag."
+    ],
+    [
+     "Om det inte träffar",
+     "Vi går tillbaka till schemat och en enda tid, rasten. Varje par ställer sin klocka på den tiden, och när rasten börjar jämför vi med klassrummets klocka: står visarna likadant?"
+    ]
+   ],
+   "not": "Varje dag ställer paren sin klocka på hela och halva timmar åt varandra. Frågan ger dem ett skäl att träna."
+  }
+ ],
+ "kalla": "© Niclas Fohlin, niclasfohlin.se. Exemplet hör till verktyget Innehåll."
+}

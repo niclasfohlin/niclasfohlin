@@ -13353,12 +13353,12 @@
     "datum": "2026-11-15"
   },
   "innehall-exempel-boken": {
-    "word": "1caab3ca73fb8e96ffd9ee2a13a2ed122fefc829fdfe2b4493a60b1d42f14859",
+    "word": "6b7613555677adbe1956b7a79289fb8b4eae7ae978ab4d84a3a723a9ec19b525",
     "packare": "da4966c04520cb79",
-    "pdf": "d0fd4f348761cfa49c1b4c7fabdb1fdc3bd08789486b1a2879b5d0d8b7a88499",
+    "pdf": "3ebd3a825568240ee54b83ccfd3d73c881838e8ccc049d8d3b9fb0aa335ea4c4",
     "sidor": 1,
     "kB": 80,
-    "datum": "2026-11-15"
+    "datum": "2026-11-16"
   },
   "innehall-exempel-vikingatiden": {
     "word": "6f1aa5f12929c7d9e92174614cf21a87bb57582e75503c5ebd47035c19b1b75c",
@@ -13383,5 +13383,13 @@
     "sidor": 2,
     "kB": 89,
     "datum": "2026-11-15"
+  },
+  "innehall-exempel-klockan": {
+    "word": "c3618a3629d3824837558eebcbfcd634e30ac2b0bddd8cf6b0abf5f56c313a9f",
+    "packare": "da4966c04520cb79",
+    "pdf": "75b7e1dffba687714da7e06b71e5e4be74b5775b028989896a0b945b64f2aff7",
+    "sidor": 1,
+    "kB": 80,
+    "datum": "2026-11-16"
   }
 }
