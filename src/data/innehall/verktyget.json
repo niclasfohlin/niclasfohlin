@@ -1,0 +1,370 @@
+{
+ "titel": "Innehåll",
+ "underrubrik": "Vad är värt att lära?",
+ "ingress": "En metod tar oss bara en bit på vägen, om inte innehållet är intressant, skapar mening och går att fördjupa sig i.",
+ "borjaHar": {
+  "fore": "Har du tio minuter? Ställ de fem frågorna, och en sist, till ditt nästa arbetsområde.",
+  "efter": [
+   "Har du en halvtimme? Skriv svaren i mallen Min innehållsanalys.",
+   "Sedan märker du om innehållet träffar, gärna med en kollega, och frågar eleverna med ett blad."
+  ]
+ },
+ "fragor": [
+  {
+   "id": "oppnar",
+   "nr": "1",
+   "fraga": "Vad öppnar innehållet?",
+   "kort": "Något större som det är ett exempel på.",
+   "text": "Ett innehåll är värt tiden när det är ett exempel på något större, en fråga eller en idé som eleverna kan ta med sig till annat. Skriv i en mening vad det större är, och vad eleverna ska förstå eller kunna efteråt som de inte kunde förut. Hittar du inget, har innehållet kanske kommit med för att det står i läroboken.",
+   "mall": "Vad är det större som innehållet är ett exempel på? Vad ska eleverna förstå eller kunna efteråt?"
+  },
+  {
+   "id": "betyder",
+   "nr": "2",
+   "fraga": "Vad betyder det för eleverna?",
+   "kort": "Det de tror i dag, och var de möter det igen.",
+   "text": "Relevans är mer än det eleverna redan tycker om. Skriv vad du tror att eleverna tänker om innehållet i dag, också det som inte stämmer. Skriv vem som känner igen sig, och ett tillfälle då de möter det igen. Vad de själva tänker får du veta när du frågar dem.",
+   "mall": "Vad tror de i dag? Vem känner igen sig, och var möter de det igen?"
+  },
+  {
+   "id": "nytt",
+   "nr": "3",
+   "fraga": "Vad är nytt för dem?",
+   "kort": "Det de inte har mött, och det alla får vara med om först.",
+   "text": "Skolan ger också det eleverna inte möter hemma: en erfarenhet, ett perspektiv eller en kunskap. Skriv vad som är nytt och vad alla får vara med om först.",
+   "mall": "Vad får de möta som de inte har varit med om? Vad får alla vara med om först?"
+  },
+  {
+   "id": "driver",
+   "nr": "4",
+   "fraga": "Vilken fråga driver arbetet?",
+   "kort": "En fråga som klassen kan svara på när arbetet är slut.",
+   "text": "Ta det större från fråga 1 och gör det till en fråga som klassen arbetar med i varje lektion och kan svara på när arbetsområdet är slut. Pröva frågan. Kan en elev svara bra utan att ha lärt sig något under veckorna? Då är den för vag eller för lätt.",
+   "mall": "Kan en elev svara bra utan att ha lärt sig något? Skriv då om frågan."
+  },
+  {
+   "id": "levande",
+   "nr": "5",
+   "fraga": "Var blir det levande?",
+   "kort": "En människa, en händelse, en bok, ett föremål eller ett problem.",
+   "text": "Det stora blir begripligt i det lilla: en människa, en händelse, en bok, ett föremål eller ett problem. Välj något där det stora syns. Det som fångar eleverna ska höra till det de ska lära sig, så att det inte blir ett sidospår.",
+   "mall": "En människa, en händelse, en bok, ett föremål eller ett problem"
+  },
+  {
+   "id": "ta-bort",
+   "nr": "Sist",
+   "fraga": "Vad tar du bort?",
+   "kort": "Det som inte öppnar något.",
+   "text": "Det som är värt att lära behöver tid. Stryk det som inte öppnar något, så att det som är kvar får plats.",
+   "mall": "Det som inte öppnar något"
+  }
+ ],
+ "avsnitt": [
+  {
+   "id": "vad-varfor-hur",
+   "rubrik": "Vad, varför och hur",
+   "block": [
+    {
+     "stycke": "Didaktiken har tre frågor: vad eleverna ska lära sig, varför de ska lära sig det och hur det ska gå till. I planeringen kommer ofta frågan hur först, eftersom lektionen är i morgon och innehållet redan står i kursplanen eller i läroboken. Då blir innehållet lätt det som står på nästa sida i boken, och eleverna gör uppgifterna utan att veta vad de är till för."
+    },
+    {
+     "stycke": "Börja i vad. Vad är intressant, relevant och viktigt för eleverna att lära sig? Vad berikar dem i deras liv? Vad får dem att förstå sig själva och världen mer? Gå sedan till varför, och välj hur sist."
+    }
+   ]
+  },
+  {
+   "id": "lasa",
+   "rubrik": "Vi läser inte för att träna läsning",
+   "block": [
+    {
+     "stycke": "Vi läser inte en text för att träna läsning. Vi läser den för att innehållet är intressant och får oss att tänka och känna. Undervisning fungerar på samma sätt. Det är innehållet som griper tag i oss, och metoden hjälper oss sedan att tolka, förstå och skapa mening."
+    },
+    {
+     "stycke": "En elev kan träna läsning med läslistor och korta övningstexter, och det behövs. Samma elev behöver också boken som får oss att tänka, drömma och fantisera, och som låter oss möta känslor och erfarenheter som vi inte själva har varit med om. Färdigheten är ett redskap, och innehållet är skälet att använda det. En elev som ännu läser långsamt kan möta samma bok som klassen genom att lyssna, titta och samtala."
+    },
+    {
+     "stycke": "Lars-Göran Malmgren beskrev samma skillnad i svenskämnet. I ett färdighetsämne kan innehållet i övningarna ”vara vad som helst”, och undervisningen tenderar då att bli fri från värderingar i de humanistiska grundfrågorna, både de stora om krig och fred och de små om mobbning och rädsla. Mot det ställde han ett ämne med teman om mänskliga erfarenheter i dag och i historien. Pröva ditt eget innehåll. Kunde det bytas mot vad som helst?"
+    }
+   ]
+  },
+  {
+   "id": "karnan",
+   "rubrik": "Kärnan: tänk till, märk och fråga eleverna",
+   "block": [
+    {
+     "stycke": "Arbetet med innehållet har tre delar. Inför arbetsområdet tänker du till om vad och varför. Under arbetet märker du om innehållet träffar rätt, alltså om det når eleverna och får dem att vilja förstå. Det hör och ser du på det de säger och gör. Det eleverna tänker och känner syns inte alltid, så du frågar dem om det när arbetet börjar, och igen mitt i arbetet eller när det är slut. Det de svarar ändrar nästa steg. Delarna gäller en hel klass lika väl som en liten grupp, och den lilla gruppen har ett eget avsnitt efter de tre delarna. Till varje del hör en mall som du, en kollega eller eleverna skriver i."
+    }
+   ]
+  },
+  {
+   "id": "tank-till",
+   "del": 1,
+   "rubrik": "Tänk till: fem frågor om innehållet",
+   "block": [
+    {
+     "stycke": "Ett innehåll som är värt att lära gör två saker. Det börjar i något eleverna känner igen, och det leder ut i något de inte har mött. Ju mer eleverna har varit med om, läst och förstått inom ett område, desto mer har de att hänga upp det nya på. Att bara fråga vad eleverna redan vet hjälper mest dem som vet något. Ge därför alla något att vara med om först, som en gemensam text, en bild, en berättelse, ett föremål eller ett problem, så att ingen behöver ha erfarenheten med sig hemifrån."
+    },
+    {
+     "ruta": {
+      "rubrik": "Spegel och fönster",
+      "text": "En bok eller ett arbetsområde kan vara en spegel, där eleven känner igen sig, eller ett fönster mot något hen inte har varit med om. Eleverna behöver båda."
+     }
+    },
+    {
+     "stycke": "Här står de fem frågorna en gång till, med hur du prövar var och en. Ställ dem när du planerar ett nytt arbetsområde eller prövar ett som redan är valt. Kursplanen säger vilket innehåll som ska behandlas. Du väljer vad i det som får tid, i vilken ordning det kommer och genom vilka texter, personer och frågor eleverna möter det."
+    },
+    {
+     "fragorna": true
+    },
+    {
+     "stycke": "Den fjärde frågan är svårast, eftersom ett arbetsområde oftast har en rubrik och ingen fråga. Så här kan frågan se ut. Efter mallen står tre hela exempel: en bok, vikingatiden och bråk i matematik."
+    },
+    {
+     "tabell": {
+      "huvud": [
+       "Arbetsområde",
+       "Frågan som driver arbetet",
+       "Det alla får vara med om först"
+      ],
+      "bredder": [
+       25,
+       37,
+       38
+      ],
+      "rader": [
+       [
+        "Klockan, årskurs 1",
+        "Hur ser vi på klockan hur lång tid det är kvar?",
+        "Alla ser på samma klocka och på dagens schema."
+       ],
+       [
+        "Läsgrupp, årskurs 3",
+        "Hur klarar djuren vintern, och vem har det svårast?",
+        "Alla ser samma bild av en igelkott i löven och säger vad de tror."
+       ],
+       [
+        "Orientering, årskurs 6",
+        "Hur hittar jag rätt där det inte går någon stig?",
+        "Alla går en kort sträcka på skolgården med en enkel karta."
+       ],
+       [
+        "Ellära, årskurs 8",
+        "Varför lyser lamporna svagare i serie men inte parallellt?",
+        "Alla kopplar en lampa till ett batteri och sätter in en till."
+       ]
+      ]
+     }
+    },
+    {
+     "stycke": "Klockan, multiplikationstabellen och avkodningen är färdigheter som ska tränas, och frågorna gäller också dem. Fråga vad färdigheten öppnar, alltså vad eleven kan göra med den och inte kunde göra förut."
+    },
+    {
+     "stycke": "Du har redan en planering, och det du ändrar står i mallens högra kolumn. Se efter att fyra saker står där. Den första är att klassen samlar delarna av svaret på frågan på ett ställe: på väggen, på en karta eller i en gemensam text. Den andra är att slutuppgiften inte går att göra utan det klassen har lärt sig. Den tredje är att varje elev får säga eller skriva var innehållet finns i hens liv eller i världen utanför skolan. Den fjärde är att varje vecka ger en bit av svaret. Skriv sedan två saker till: när du frågar eleverna och ser efter om innehållet träffar, och vad du gör om det inte träffar."
+    },
+    {
+     "mall": {
+      "id": "min-innehallsanalys",
+      "rubrik": "Mallen: Min innehållsanalys",
+      "text": [
+       "Ett A4 att skriva i, i Word eller Google Dokument. Frågorna står till vänster, och bredvid skriver du ditt svar och det du ändrar i planeringen. Nederst ser du efter fyra saker och skriver två.",
+       "Räkna med en halvtimme första gången, och skriv kort. Det viktiga är det du ändrar."
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "mark",
+   "del": 2,
+   "rubrik": "Märk: träffar innehållet rätt?",
+   "block": [
+    {
+     "stycke": "När innehållet träffar kan du se och höra fyra tecken i klassrummet. Tydligast är att eleverna frågar något om saken utan att du har bett dem. De kan säga vad de försöker ta reda på och varför det spelar roll. Alla kan säga något om det de har fått vara med om först. Och varje elev har själv sagt eller skrivit var innehållet finns i hens liv eller i världen utanför skolan."
+    },
+    {
+     "stycke": "Det här märker du själv, utan kollega. Fråga tre elever mitt i arbetet: ”Vad försöker du ta reda på nu, och varför?” Välj tre som kan olika mycket om innehållet innan ni börjar. Lyssna också efter hur eleverna förklarar saken med egna ord, eftersom ett innehåll kan gripa tag och ändå bli missförstått. Frågar eleverna mest hur uppgiften ska göras och nästan aldrig något om saken, se efter om det är innehållet som inte träffar eller uppgiften som är otydlig."
+    },
+    {
+     "stycke": "När innehållet inte träffar byter du vägen och behåller målet. Gå kort tillbaka till det alla fick vara med om först. Byt personen, händelsen eller problemet mot något som ligger närmare eleverna. Skriv frågan som driver arbetet där alla ser den, och gå tillbaka till den i varje lektion. Fråga eleverna vad de undrar, och låt en av deras frågor börja nästa lektion."
+    },
+    {
+     "stycke": "Be sedan gärna en kollega sitta med på en lektion. Kollegan följer samma tre elever och ställer samma fråga, skriver ordagrant och med klockslag det eleverna och du säger och gör, och sparar sina omdömen till samtalet. Samtala inom ett dygn. Du börjar, kollegan läser högt ur protokollet, och ni bestämmer en sak att pröva nästa lektion."
+    },
+    {
+     "mall": {
+      "id": "observationen",
+      "rubrik": "Mallen: Observationen",
+      "text": [
+       "Ett blad med två sidor till kollegan som sitter med. Framsidan säger vad kollegan gör före, under och efter lektionen, och baksidan är protokollet, som kollegan skriver för hand. Bladet är till för samtalet mellan två kollegor, och är inget underlag för att bedöma läraren."
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "fraga-eleverna",
+   "del": 3,
+   "rubrik": "Fråga eleverna: bjud in dem att tänka och tycka",
+   "block": [
+    {
+     "stycke": "Det är eleverna undervisningen är till för. Det är de som ska fångas av något och bli motiverade att lära sig mer. Bjud därför in dem att tänka och tycka till om innehållet, och ta deras ord på allvar."
+    },
+    {
+     "stycke": "Gunilla Molloy följde högstadieklasser där eleverna själva föreslog frågor om liv och död, sexualitet och demokrati. Lärarna valde ibland bort frågorna, eftersom de inte visste hur de skulle hantera dem. Hon skriver att frågorna redan finns i klassrummet, hos eleverna, och att lärarens uppgift är att ge samtalet en form. I en granskning av 23 skolor såg Skolinspektionen att elevernas inflytande i årskurs 5 oftast gällde hur en uppgift skulle göras och redovisas, och sällan själva innehållet."
+    },
+    {
+     "stycke": "Att ta elevernas ord på allvar innebär tre saker. Innan allt är bestämt frågar du eleverna vad de tror och vad de undrar. Gör det direkt efter det som alla har fått vara med om först, muntligt eller på en lapp. Under arbetet eller efteråt frågar du vad de minns, vad de har tänkt på och vad de vill ha svar på. Och du berättar för klassen vad du läste i svaren, vad du ändrar och vad du behåller, så att eleverna ser att svaren spelar roll."
+    },
+    {
+     "stycke": "Svaren kan ändra vägen, alltså vilka exempel, texter och frågor ni tar upp. Vad som är värt att lära prövar du fortfarande med de fem frågorna. Föreslår eleverna en fråga som du helst skulle undvika, kan det vara just den de behöver tala om. Ge samtalet en form. Alla skriver först vad de tänker, sedan talar ni och går tillbaka till det ni har läst eller varit med om."
+    },
+    {
+     "stycke": "Två blad hjälper dig att fråga. Mitt i ett arbetsområde hinner svaren ändra resten av det, och i slutet ändrar de nästa arbetsområde. Skriv överst vad frågorna gäller, som ”lamporna vi kopplade”."
+    },
+    {
+     "stycke": "De yngre ritar något de minns, säger vad de har ritat och vad de undrar. Läs uppgifterna på bladet högt, en i taget. Fråga vad som händer i bilden och varför barnet ritade just det, och skriv barnets ord när barnet inte skriver själv. I förskoleklassen gör du bladet med fem barn i taget, och i årskurs 1–⁠3 tar det en halv lektion. Lägg sedan teckningarna i högar efter vad de visar."
+    },
+    {
+     "stycke": "De äldre svarar på tre frågor och en skattning utan att skriva sitt namn, och lägger bladen i en hög med texten nedåt. Det tar tio minuter. Lägg sedan bladen i högar efter krysset, och läs vad eleverna i varje hög minns och har tänkt på. Om nästan alla kryssar Ganska, läs vad de har skrivit efter ”Därför att”. Det säger mer än krysset. Gäller arbetet något tungt, som Förintelsen, kan ordet intressant skava, och då byter du det mot viktigt innan du kopierar bladet."
+    },
+    {
+     "stycke": "Räkna med en halvtimme för att läsa en klass svar. Skriv av tre svar ordagrant och en av elevernas frågor. Välj en sak som du ändrar och en som du behåller, och säg det till klassen nästa lektion. Låt en av elevernas frågor börja lektionen."
+    },
+    {
+     "mall": {
+      "id": [
+       "det-har-minns-jag",
+       "vad-tanker-du"
+      ],
+      "rubrik": "Mallarna: två blad till eleverna",
+      "text": [
+       "För förskoleklass till årskurs 3 finns Det här minns jag, och för årskurs 4–⁠9 finns Vad tänker du? Båda är ett A4 att kopiera."
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "liten-grupp",
+   "rubrik": "I en liten grupp",
+   "block": [
+    {
+     "stycke": "En liten grupp tränar en färdighet, och den tränar på något: en text, några tal eller ett problem. Ställ de fem frågorna till det, och låt en fråga som driver arbetet gå igen i flera pass, som i läsgruppen i tabellen. Träningen kan vara densamma, och texten kan ändå vara värd att läsa. Ta reda på vad klassen arbetar med, så att eleverna har något med sig tillbaka till klassen. I gruppen hör du varje elev, så du frågar alla mitt i passet vad de försöker ta reda på. De äldres blad är utan namn, och i en grupp på fyra ser du ändå vem som har skrivit vad. Ställ då bladets frågor muntligt, till en elev i taget, och skriv ner det eleven säger."
+    }
+   ]
+  }
+ ],
+ "karta": {
+  "fil": "konceptkarta.svg",
+  "bredd": 1050,
+  "hojd": 1485,
+  "telefon": {
+   "fil": "konceptkarta-telefon.svg",
+   "bredd": 650,
+   "hojd": 2440
+  },
+  "alt": "Konceptkarta över verktyget Innehåll. Läraren tänker till om innehållet innan arbetet börjar, märker under arbetet om innehållet träffar rätt och frågar eleverna i början och i slutet vad de tänker och känner.",
+  "text": "Kartan visar hela verktyget. De bruna pilarna är kärnan: du tänker till, märker och frågar, och det eleverna säger ändrar nästa steg. Du väljer metoden sist."
+ },
+ "forskning": {
+  "rubrik": "Det forskningen säger",
+  "stycken": [
+   "De fem frågorna kommer ur didaktikens tradition, från Klafki och Dewey, och ur svensk erfarenhetspedagogik, där elevernas erfarenheter och skönlitteraturen är vägar till kunskap. Vi har inte hittat någon jämförande studie av vad en sådan analys ger eleverna. Bara delar av den är prövade.",
+   "I försök med yngre elever, de flesta gjorda i USA, har teman som bygger kunskap över tid gett tydliga vinster i de ord och den kunskap som varje tema tar upp. På vanliga läsprov har vinsten varit liten eller osäker, och i några försök har den inte synts alls. Teman om mänskliga erfarenheter, som vänskap eller mod, har inte prövats på samma sätt.",
+   "I en amerikansk studie skrev elever i årskurs 9 under en termin om hur innehållet i NO hörde ihop med deras liv, och intresset och betygen ökade för dem som hade låga förväntningar på att lyckas. Studier på högskolan pekar åt samma håll, mest för studenter med svaga resultat. I tyska klasser i årskurs 9, där eleverna under en lektion värderade vad unga vuxna sa om nyttan med matematik, var resultaten blandade. Eleverna såg lite mer nytta med ämnet, men upplevde det också som mer betungande. För yngre elever finns nästan bara mätningar av motivationen."
+  ]
+ },
+ "kallor": "© Niclas Fohlin, niclasfohlin.se. Texten bygger på Klafki (1958), läst i Deng (2022); Dewey (1938); Malmgren (1996), läst i Bergöö (2005); Molloy (2003); Bishop (1990); Wiggins och McTighe, How to Make Your Questions Essential; Perkins (2016); Wickman (2016); Skolinspektionen (2018); Cervetti och Hiebert (2018); Hulleman och Harackiewicz (2009), läst i Harackiewicz och Priniski (2018); Harackiewicz m.fl. (2016); Gaspard m.fl. (2021); Kim m.fl. (2021 och 2024); Hwang, Cabell och Joyner (2022 och 2023).",
+ "fore": "Tänk till om innehållet innan du planerar lektionerna: vad ska eleverna möta, och varför just det? De fem frågorna i verktyget Innehåll tar tio minuter.",
+ "mallar": [
+  {
+   "id": "min-innehallsanalys",
+   "namn": "Min innehållsanalys",
+   "for": "läraren",
+   "slag": "papper"
+  },
+  {
+   "id": "observationen",
+   "namn": "Observationen",
+   "for": "en kollega",
+   "slag": "papper"
+  },
+  {
+   "id": "det-har-minns-jag",
+   "namn": "Det här minns jag",
+   "for": "eleverna, förskoleklass till årskurs 3",
+   "slag": "elevblad"
+  },
+  {
+   "id": "vad-tanker-du",
+   "namn": "Vad tänker du?",
+   "for": "eleverna, årskurs 4–⁠9",
+   "slag": "elevblad"
+  }
+ ],
+ "exempel": [
+  {
+   "id": "exempel-boken",
+   "titel": "En hel bok i årskurs 4",
+   "ruta": [
+    {
+     "rubrik": "Före",
+     "text": "Lästräning med korta texter och frågor, tyst läsning med en läslogg över antal sidor, och en högläsningsbok som fanns i klassuppsättning, med kapitelfrågor och en recension efteråt."
+    },
+    {
+     "rubrik": "Efter",
+     "text": "Du läser hela boken högt i fem veckor, och klassen samtalar om en fråga som går igen: Vad är mod när man är rädd?"
+    },
+    {
+     "rubrik": "I klassrummet",
+     "text": "Frågan sitter på väggen, alla har hört samma kapitel, och varje elev skriver om två ställen där Skorpan är rädd."
+    }
+   ],
+   "rubrik": "Exempel: en hel bok i årskurs 4"
+  },
+  {
+   "id": "exempel-vikingatiden",
+   "titel": "Vikingatiden i årskurs 5",
+   "ruta": [
+    {
+     "rubrik": "Före",
+     "text": "Fyra veckor med gudarna, skeppen och runorna, en vecka då klassen bygger skepp i kartong, och ett prov på årtal och fakta."
+    },
+    {
+     "rubrik": "Efter",
+     "text": "Fyra veckor med en fråga: Varför gav de sig av, och vad hände där de kom? Skeppsbygget blir en lektion."
+    },
+    {
+     "rubrik": "I klassrummet",
+     "text": "Frågan står på tavlan, alla har läst samma runsten, och varje elev skriver om varför människor ger sig av, då och nu."
+    }
+   ],
+   "rubrik": "Exempel: vikingatiden i årskurs 5"
+  },
+  {
+   "id": "exempel-brak",
+   "titel": "Bråk i årskurs 4",
+   "ruta": [
+    {
+     "rubrik": "Före",
+     "text": "Kapitlet om bråk i läroboken, sida för sida. Eleverna färglägger delar av figurer och skriver bråket, och sist kommer en diagnos."
+    },
+    {
+     "rubrik": "Efter",
+     "text": "Fyra veckor med en fråga: Är en halv alltid lika mycket? Eleverna delar, jämför och förklarar."
+    },
+    {
+     "rubrik": "I klassrummet",
+     "text": "Frågan står på tavlan, alla har delat samma två kakor på mitten, och varje elev svarar på frågan med bilder, bråk och ett exempel ur sin vardag."
+    }
+   ],
+   "rubrik": "Exempel: bråk i årskurs 4"
+  }
+ ],
+ "bild": {
+  "fil": "bild.svg",
+  "bredd": 900,
+  "hojd": 560,
+  "alt": "En uppslagen bok. Den vänstra sidan är en spegel där ett barn ser sig själv, och den högra är ett fönster mot berg, hav och en segelbåt."
+ }
+}

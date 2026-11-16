@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>Det här minns jag</title>
+<!-- Innehåll, elevens blad för de yngre, F–3, utkast 5 (2026-11-15). Niclas 2026-11-15: enkäten i tabellform ”kan inte
+     användas av riktiga elever”, och den ska prövas av kalla elever i rätt ålder. Bladet är ritat för eleven
+     (docs/elevmaterial.md): Andika, stort, glest, en sak i taget, och bara det Niclas bad om: vad eleven minns, vad som
+     fastnade och vad eleven vill veta mer om.
+     Två omgångar kalla elever har prövat bladet (out/material/innehall/prov2/elev-*.md och elev2-*.md), och det är de
+     två som en runda får (CLAUDE.md). Utkast 5 är lagat efter den andra, med en sexåring i förskoleklass och en
+     åttaåring som inte vill rita: sak 1 säger att det inte behöver bli fint, sak 3 frågar Vad undrar du?, så att frågan
+     och början Jag undrar har samma ord, och barnet får rita det hen undrar. Jag har ritat står före sin linje.
+     Foten ger den vuxna en följdfråga, eftersom det barnet tänkte kom fram först när någon frågade vidare.
+     Lärarens text står i artikeln, material/innehall-verktyg.yaml, under 3. Fråga eleverna. Ritas med Chrome till pdf
+     (out/material/innehall-elevblad-v5/). Formen är riggens förslag och bestäms med sajten. -->
+<style>
+  @font-face { font-family: "Andika"; src: url("../typsnitt/Andika-Regular.ttf"); }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Andika", Arial, sans-serif; color: #1a1a1a; }
+  .sida { width: 210mm; height: 297mm; padding: 12mm 15mm 9mm; display: flex; flex-direction: column; }
+  .huvud { display: flex; justify-content: space-between; align-items: flex-end; }
+  h1 { font-size: 30pt; font-weight: normal; color: #1f5c99; margin: 0; line-height: 1.1; }
+  .namn { font-size: 15pt; color: #555; white-space: nowrap; }
+  .namn span { display: inline-block; width: 62mm; border-bottom: 0.5mm solid #777; margin-left: 2mm; }
+  .omrade { margin-top: 4mm; border: 0.7mm solid #1f5c99; border-radius: 4mm; background: #ebf4fb; padding: 2.5mm 5mm; height: 22mm; font-size: 16pt; color: #1f5c99; display: flex; justify-content: space-between; }
+  .omrade small { font-family: Arial, sans-serif; font-size: 8.5pt; color: #5d7fa3; }
+  .del { margin-top: 5mm; display: flex; align-items: flex-start; }
+  .nr { flex: 0 0 13mm; height: 13mm; border-radius: 50%; background: #1f5c99; color: #fff; font-size: 20pt; display: flex; align-items: center; justify-content: center; margin-right: 4mm; }
+  .fraga { font-size: 22pt; line-height: 13mm; }
+  .hjalp { font-size: 13pt; color: #555; margin: 0 0 0 17mm; }
+  .rita { margin-top: 2mm; border: 0.7mm solid #777; border-radius: 4mm; height: 72mm; }
+  .linje { border-bottom: 0.45mm solid #999; height: 16mm; }
+  .start { display: flex; align-items: flex-end; height: 16mm; font-size: 16pt; }
+  .start span { flex: 1; border-bottom: 0.45mm solid #999; margin-left: 3mm; height: 100%; }
+  .bubbla { margin-top: 2mm; border: 0.7mm solid #777; border-radius: 12mm; height: 38mm; padding: 4mm 8mm; font-size: 16pt; }
+  .fot { margin-top: auto; padding-top: 3mm; font-family: Arial, sans-serif; font-size: 8.5pt; color: #777; line-height: 1.35; }
+</style>
+</head>
+<body>
+<div class="sida">
+  <div class="huvud">
+    <h1>Det här minns jag</h1>
+    <div class="namn">Jag heter<span>&nbsp;</span></div>
+  </div>
+  <div class="omrade"><span>Vi har jobbat med</span><small>Läraren skriver och ritar här före kopieringen.</small></div>
+
+  <div class="del"><div class="nr">1</div><div class="fraga">Rita något du minns.</div></div>
+  <div class="hjalp">Det behöver inte bli fint.</div>
+  <div class="rita"></div>
+
+  <div class="del"><div class="nr">2</div><div class="fraga">Vad har du ritat?</div></div>
+  <div class="hjalp">Skriv, eller berätta för en vuxen som skriver.</div>
+  <div class="start">Jag har ritat<span></span></div>
+  <div class="linje"></div>
+
+  <div class="del"><div class="nr">3</div><div class="fraga">Vad undrar du?</div></div>
+  <div class="hjalp">Skriv, rita eller berätta.</div>
+  <div class="bubbla">Jag undrar</div>
+
+  <div class="fot">Till läraren: läs en sak i taget högt. Fråga vidare: ”Vad händer i bilden?” och ”Varför ritade du just det?” Skriv barnets ord när barnet inte skriver själv. Hör till verktyget Innehåll. © Niclas Fohlin, niclasfohlin.se</div>
+</div>
+</body>
+</html>

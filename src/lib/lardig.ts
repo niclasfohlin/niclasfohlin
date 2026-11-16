@@ -11,6 +11,7 @@ import { metodensCentrala } from './centrala';
 import { namndaVerktyg } from './boklankar';
 import { strategikortetI, metodensKortAdress as metodensStrategikortAdress, ALLA_KORTENS_ADRESS as ALLA_STRATEGIKORTENS_ADRESS, allaKortensAntal as allaStrategikortensAntal, allaKortensStorlek as allaStrategikortensStorlek, kortensVersion as strategikortensVersion } from './strategier';
 import { metodensStrategiblad } from './standard/index.js';
+import { INNEHALL, INNEHALLETS_ADRESS, INNEHALLETS_BILD, INNEHALLETS_STIL, EXEMPLENS_MALL, fragansAnkare, mallensAnkare } from './innehallsverktyg';
 
 /** Planens data, som sidan bär som JSON och skriptet räknar med. */
 export interface LarDigData {
@@ -59,6 +60,10 @@ export interface LarDigData {
   saker: { namn: string; versal?: boolean; forst?: boolean; adress: string }[];
   /** Läsvägen i metoden, med ankarna på metodens sida. */
   lasvag: { delar: { namn: string; adress: string }[]; minuter: number; nar: string };
+  /** Verktyget Innehåll i Före (K-795; Niclas 2026-11-15: ”det alltid bör rekommenderas i Lär dig metoden, i Före, för att
+   *  tänka till om innehållet på lektionen”): riggens mening, de fem frågorna och den sista ur rutan Börja här, mallen och kortet
+   *  till verktyget, ur verktygets rot (src/lib/innehallsverktyg.ts), lika i alla metoder. */
+  innehall: { text: string; fragor: { nr: string; fraga: string; kort: string; adress: string }[]; adress: string; namn: string; rad: string; bild: string; stil: string; halvtimme: string; mall: { namn: string; adress: string } };
   /** Filernas adresser när filen finns, och annars stället på metodens sida där materialet står. */
   /** Steget med utfallen efter talet, som Facit, och dess plats på metodens sida, där läraren skriver klassens storlek
    * (andra ögat på Testbaserat lärande 2026-11-02: vecka 2 sa välja utfall efter talet, och Lär dig metoden visade inga). */
@@ -135,6 +140,18 @@ export function larDigData(id: string, d: Um): LarDigData {
     saker: [...undervisningsmetodensSaker(d, id, { ...sakernasFiler(id, d), strukturer: metodensStrukturer(d, strang(d.titel)) }), ...[...new Map([...metodensCentrala(d), ...namndaVerktyg(JSON.stringify(d))].map((c) => [c.id, c])).values()].map((c) => ({ namn: c.namn, adress: c.adress, versal: true }))],
     verktyg: metodensCentrala(d).map((c) => ({ namn: c.namn, knapp: c.knapp ?? c.namn, adress: c.adress })),
     lasvag: (() => { const l = lasvagen(d); return { delar: l.delar.map((x) => ({ namn: x.namn, adress: `${sida}#${x.ankare}` })), minuter: l.minuter, nar: slagensOrd(d).lasning }; })(),
+    innehall: {
+      text: INNEHALL.fore,
+      fragor: INNEHALL.fragor.map((f) => ({ nr: f.nr, fraga: f.fraga, kort: f.kort, adress: `${INNEHALLETS_ADRESS}#${fragansAnkare(f)}` })),
+      adress: `${INNEHALLETS_ADRESS}#borja-har`,
+      namn: INNEHALL.titel,
+      rad: `${INNEHALL.underrubrik} Artikeln, mallarna och exemplen.`,
+      // Bilden ritas av skriptet ur datan, så adressen bär filens version här (Codex 2026-11-15).
+      bild: kortensVersion(INNEHALLETS_BILD),
+      stil: INNEHALLETS_STIL,
+      halvtimme: INNEHALL.borjaHar.efter[0] ?? '',
+      mall: { namn: INNEHALL.mallar.find((m) => m.id === EXEMPLENS_MALL)!.namn, adress: `${INNEHALLETS_ADRESS}#${mallensAnkare(EXEMPLENS_MALL)}` },
+    },
     ...(d.strukturkort ? { strukturkort: { metodens: kortensVersion(metodensKortAdress(id)), antal: somLista(d.strukturkort.strukturer).length, alla: kortensVersion(ALLA_KORTENS_ADRESS), allaAntal: allaKortensAntal(), allaStorlek: allaKortensStorlek(), utskrift: TVA_PA_A4, vid: slagensOrd(d).strukturkortVid, text: strang(d.strukturkort.text) } } : {}),
     ...((sk) => (sk ? { strategikort: { metodens: strategikortensVersion(metodensStrategikortAdress(id)), antal: sk.strategier.length, alla: strategikortensVersion(ALLA_STRATEGIKORTENS_ADRESS), allaAntal: allaStrategikortensAntal(), allaStorlek: allaStrategikortensStorlek(), ...((d as { strategikort?: { blad?: string } }).strategikort?.blad ? { blad: { adress: strategikortensVersion(`/strategier/kort/${metodensStrategiblad(id).fil}`), namn: (d as unknown as { strategikort: { blad: string } }).strategikort.blad } } : {}), utskrift: TVA_PA_A4, vid: (d as { strategikort?: unknown }).strategikort ? 'fore' : 'efter', text: strang(sk.text) } } : {}))(strategikortetI(id, d)),
     // Veckorna där läraren väljer utfall, de vars rad säger utfall, får knappen till utfallen på metodens sida.

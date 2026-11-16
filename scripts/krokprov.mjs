@@ -31,6 +31,7 @@ const INNEHALL = [
   'public/stodundervisning/', 'public/metoder/', 'public/bildbank/', 'public/delning/', 'public/images/', 'public/fonts/',
   'underlag/texter/', 'utskick/', 'src/data/bildserier/', 'src/data/skrivkort/', 'src/data/aktiviteter/',
   'src/data/brainbreaks/', 'src/data/lektionskort/', 'src/data/centrala/', 'scripts/strukturer/scener/', 'scripts/strukturer/likhet/', 'src/content/strukturer/', 'public/strukturer/', 'src/content/strategier/', 'public/strategier/',
+  'public/innehall/', 'src/data/innehall/papper/', 'scripts/innehall/elevblad/',
 ];
 // Sidorna är sajtens adresser: Astro läser varje fil i mappen som en sida, så mappen är kroken.
 const SIDOR = 'src/pages/';

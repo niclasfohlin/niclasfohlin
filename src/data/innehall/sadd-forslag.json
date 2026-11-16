@@ -1,0 +1,52 @@
+{
+ "sadd": [
+  {
+   "metod": "explicit-undervisning",
+   "plats": "arbetsomradet",
+   "mening": "Också en färdighet ska öppna något: fråga med Innehåll vad eleverna kan göra med den som de inte kunde förut."
+  },
+  {
+   "metod": "kooperativt-larande",
+   "plats": "steg 2",
+   "del": "Genomgång",
+   "mening": "Paren behöver något värt att tänka om tillsammans: pröva innehållet i genomgången med de fem frågorna i Innehåll."
+  },
+  {
+   "metod": "formativ-bedomning",
+   "plats": "steg 2",
+   "del": "Din planering",
+   "mening": "Lagret visar vad eleverna har förstått. Pröva också vad de ska förstå: ställ de fem frågorna i Innehåll till din planering."
+  },
+  {
+   "metod": "testbaserat-larande",
+   "plats": "tabell: Grovplaneringen: områdena",
+   "mening": "Det som ska sitta om en månad ska vara värt att minnas: pröva varje område med frågan Vad öppnar innehållet?"
+  },
+  {
+   "metod": "larande-pa-kognitionsvetenskaplig-grund",
+   "plats": "steg 2",
+   "del": "Lektionens fråga",
+   "mening": "Lektionens fråga ska väcka nyfikenhet: Innehåll hjälper dig att hitta frågan som driver arbetet och var det blir levande."
+  },
+  {
+   "metod": "reciprok-undervisning",
+   "plats": "tabell: Så väljer du text och stopp",
+   "mening": "En text med något olöst ska också vara värd att läsa: pröva den med de fem frågorna i Innehåll innan du väljer stoppen."
+  },
+  {
+   "metod": "skriva-for-att-lara",
+   "plats": "karna: En fråga som kräver tänkande",
+   "mening": "Låt skrivfrågan gälla något som är värt att tänka om: pröva lektionens innehåll med de fem frågorna i Innehåll."
+  },
+  {
+   "metod": "tankande-klassrum",
+   "plats": "tabell: Så skivar du ett problem",
+   "mening": "Innan du skivar, välj ett problem där något större syns: fråga med Innehåll vad problemet öppnar och vad som är nytt."
+  },
+  {
+   "metod": "vardeskapande-larande",
+   "plats": "tabell: Så bygger du ett värdeskapande uppdrag",
+   "mening": "Börja i ämnet: de fem frågorna i Innehåll hjälper dig att välja det som är värt att lära, innan ni väljer mottagare."
+  }
+ ]
+}

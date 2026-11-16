@@ -13343,5 +13343,45 @@
     "sidor": 1,
     "kB": 216,
     "datum": "2026-11-10"
+  },
+  "innehall-min-innehallsanalys": {
+    "word": "fc59649c24e71f583d18667ae525c14f434e7da417f3dab06409fdce21279882",
+    "packare": "da4966c04520cb79",
+    "pdf": "fef57363a8ed68805fe795cbb7f1bbe3666ab41d458090a129ea5dec1c8109f4",
+    "sidor": 1,
+    "kB": 73,
+    "datum": "2026-11-15"
+  },
+  "innehall-exempel-boken": {
+    "word": "1caab3ca73fb8e96ffd9ee2a13a2ed122fefc829fdfe2b4493a60b1d42f14859",
+    "packare": "da4966c04520cb79",
+    "pdf": "d0fd4f348761cfa49c1b4c7fabdb1fdc3bd08789486b1a2879b5d0d8b7a88499",
+    "sidor": 1,
+    "kB": 80,
+    "datum": "2026-11-15"
+  },
+  "innehall-exempel-vikingatiden": {
+    "word": "6f1aa5f12929c7d9e92174614cf21a87bb57582e75503c5ebd47035c19b1b75c",
+    "packare": "da4966c04520cb79",
+    "pdf": "37e55ceb7d332ab501965cfcfa06ab9c8b3b3f383236ac69af2c5670ef1d86cc",
+    "sidor": 1,
+    "kB": 78,
+    "datum": "2026-11-15"
+  },
+  "innehall-exempel-brak": {
+    "word": "41c636b37fb6dbe49846ca114863a42ebf6f362b7a79ba16d2277cdf7e03e2a8",
+    "packare": "da4966c04520cb79",
+    "pdf": "b19552e6fa12f87b862697e9f254e458a4142aa41c897637f5cb5134961da5c8",
+    "sidor": 1,
+    "kB": 77,
+    "datum": "2026-11-15"
+  },
+  "innehall-observationen": {
+    "word": "04b65e9dabc52e614b7bb3d076d49114978621e361b821807729d4eabf4a1d96",
+    "packare": "da4966c04520cb79",
+    "pdf": "06d2a9e6de458ad8c4247d5081e2bbaf0df7a9cd240099ae9e6bf1f5b8172440",
+    "sidor": 2,
+    "kB": 89,
+    "datum": "2026-11-15"
   }
 }

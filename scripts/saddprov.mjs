@@ -35,7 +35,9 @@ if (FRAGOR.length !== 3) { console.error('saddprov: hittar inte de tre frågorna
 
 const centrala = JSON.parse(readFileSync(join(rot, 'src/data/centrala.json'), 'utf8'));
 const register = JSON.parse(readFileSync(REGISTER, 'utf8'));
-const delade = centrala.filter((c) => !c.metod && c.slag !== 'formular');
+// Ett verktyg som bara sås i Metoder (fältet sas i centrala.json, som Innehåll; Niclas 2026-11-15: 'Denna är mer för metoder.
+// Så stödundervisning behöver den inte') prövas inte mot stödmetoderna; det har sitt register i src/lib/metodersadd.ts.
+const delade = centrala.filter((c) => !c.metod && c.slag !== 'formular' && c.sas !== 'undervisningsmetoder');
 const metoder = readdirSync(MAPP).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => { const text = readFileSync(join(MAPP, f), 'utf8'); return { id: f.replace(/\.yaml$/, ''), d: parseYaml(text), text }; }).filter((m) => m.d.utkast !== true);
 
 // De namngivna sakerna i en mapp (fältet namnen): namnet och de andra namnen i varje fil som visas, i de former som standarden

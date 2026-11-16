@@ -3,6 +3,7 @@ import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { DATABAS, matteproblemfiler } from '../../lib/matteproblem';
 import { centralaMedPapper } from '../../lib/centraladata';
 import { centralAv } from '../../lib/centrala';
+import { innehalletsPapper } from '../../lib/innehallsverktyg';
 import { arBladsida, bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
 import { medDatabaserna } from '../../lib/faktateman';
 import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandledningar } from '../../lib/handledning';
@@ -109,5 +110,7 @@ export const GET: APIRoute = async () => {
   });
   // Stödmaterialen (K-488): ett A4 var, ur riggens papper.json.
   const stodmaterialen = centralaMedPapper().map((id) => ({ metod: id, namn: id, rubrik: centralAv(id)?.namn ?? id, slag: 'stodmaterial', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] }));
-  return new Response(JSON.stringify([...filer, ...matteproblemens, ...stodmaterialen], null, 1), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+  // Verktyget Innehålls mallar och exempel (K-793): ett papper var, med framsidan och baksidan när den finns.
+  const innehallets = innehalletsPapper().map((f) => ({ metod: 'innehall', namn: f.namn, rubrik: f.rubrik, slag: 'innehall', minst: f.sidor, hogst: f.sidor, ramar: [] as number[], oversikter: [] as number[] }));
+  return new Response(JSON.stringify([...filer, ...matteproblemens, ...stodmaterialen, ...innehallets], null, 1), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 };

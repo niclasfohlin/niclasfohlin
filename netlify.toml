@@ -335,6 +335,23 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Verktyget Innehåll (K-793): bilden, kartorna, elevernas blad och minibilderna, en dag som strategiernas. Länkarna bär
+# filens version (scripts/filversion.mjs).
+[[headers]]
+  for = "/innehall/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/innehall/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/innehall/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 [[headers]]
   for = "/stodundervisning/reservbild/*"
   [headers.values]

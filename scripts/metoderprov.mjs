@@ -27,7 +27,7 @@ import { extname, join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import JSZip from 'jszip';
-import { lagretAv, GREPPETS_TID, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser, utfallsord, slugAv } from '../src/lib/standard/index.js';
+import { lagretAv, GREPPETS_TID, lagretsMening, lagretsSkala, lagretsSkalaHtml, stalletsTid, UNDERVISNINGSMETODENS_DELAR, NEDLADDNINGENS_RADER, KNAPPARNAS_NAMN, meningarna, sakdelar, olankadeSaker, lathundensSidor, utfallensGranser, utfallsord, slugAv, VANLIGA_VERKTYGSORD } from '../src/lib/standard/index.js';
 import { ren, utanHuvudOchFot, pdfText } from './textjamforelse.mjs';
 import { MINIBILDEN, metodensMinibilder, sakensNamn } from '../src/lib/bladkortfiler.js';
 
@@ -979,7 +979,7 @@ try {
   // gången nämner, som Ta fram ett skrivkort, är en länk i rutinens ruta i veckans steg. Verktygen räknas här ur registret, utan
   // Strategier och Strukturer, som namndaVerktyg i src/lib/boklankar.ts.
   {
-    const verktygen = JSON.parse(readFileSync(join(rot, 'src', 'data', 'centrala.json'), 'utf8')).filter((c) => (c.slag === 'sida' || c.slag === 'pdf') && !['Strategier', 'Strukturer'].includes(c.namn));
+    const verktygen = JSON.parse(readFileSync(join(rot, 'src', 'data', 'centrala.json'), 'utf8')).filter((c) => (c.slag === 'sida' || c.slag === 'pdf') && !VANLIGA_VERKTYGSORD.includes(c.namn));
     const mapp = join(rot, 'src', 'content', 'undervisningsmetoder');
     for (const f of readdirSync(mapp).filter((x) => x.endsWith('.yaml') && !x.startsWith('_'))) {
       const id = f.replace(/\.yaml$/, '');
@@ -1050,7 +1050,7 @@ try {
       // src/lib/boklankar.ts; Codex kodgranskning 2026-11-08, K-734). Listan räknas här ur registret, och provet går åt båda
       // hållen: ett verktyg som texten inte nämner är ingen sak, om det inte står i fältet centrala.
       const texten = JSON.stringify(d);
-      for (const c of register.filter((y) => (y.slag === 'sida' || y.slag === 'pdf') && !['Strategier', 'Strukturer'].includes(y.namn))) {
+      for (const c of register.filter((y) => (y.slag === 'sida' || y.slag === 'pdf') && !VANLIGA_VERKTYGSORD.includes(y.namn))) {
         const antal = (ld.saker ?? []).filter((s) => s.namn === c.namn).length;
         const sak = (ld.saker ?? []).some((s) => s.namn === c.namn && s.adress === c.adress);
         const ska = texten.includes(c.namn) || (d.centrala ?? []).some((x) => x.id === c.id);

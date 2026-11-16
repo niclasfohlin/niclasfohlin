@@ -256,3 +256,7 @@ export const NEDLADDNINGENS_RADER = Object.freeze(['Skriv ut', 'Allt om metoden'
  */
 export const KNAPPARNAS_NAMN = Object.freeze({ larDig: 'Lär dig metoden', planera: 'Planera insatsen', lathund: 'Lathund', lektionskort: 'Lektionskort', strukturer: 'Strukturer' });
 export const KNAPPENS_KLASS = Object.freeze({ sida: 'knapp', fil: 'knapp sekundar' });
+/** Verktygens namn som också är vanliga ord: först i en mening är de ingen hänvisning till verktyget, och de har egna delar
+ *  eller egna kort (”Strategier hjälper inte om de används mekaniskt”, andra ögat 2026-11-07; ”Innehåll som går att använda”,
+ *  Codex 2026-11-15). En rot för länkningen (src/lib/boklankar.ts) och metodernas prov (scripts/metoderprov.mjs). */
+export const VANLIGA_VERKTYGSORD = Object.freeze(['Strategier', 'Strukturer', 'Innehåll']);

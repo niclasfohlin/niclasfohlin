@@ -1,0 +1,39 @@
+{
+ "_om": "Sådden av verktyget Innehåll i Metoder (K-796; Niclas 2026-11-15: 'Den ska såddas in i alla metoder på korrekt ställe, typ liten bild och text som är lämplig för just att välja bra innehåll', och samma natt: 'Denna är mer för metoder. Så stödundervisning behöver den inte'). Ett kort med verktygets bild och riggens mening, på platsen där metoden säger att läraren väljer innehållet. Platserna och citaten är riggens förslag (out/material/innehall/sajten/innehall-sadd.yaml och sadd-underlag.md, riggens 39fabd7), prövade av sajten mot metoden, och står här med skälet. Meningen till kortet läses ur riggens leverans, src/data/innehall/sadd-forslag.json, så att den har en rot (src/lib/metodersadd.ts), och scripts/innehall/prov.mjs stannar när riggen föreslår en annan plats än den som står här. src/lib/vav.ts väver in kortet; metodens fil ändras inte. Varje metod i Metoder står här, med platsen eller med nej och skälet.",
+ "explicit-undervisning": {
+  "skal": "Lektionen börjar med att det nya redan är bestämt, och valet görs för hela arbetsområdet: 'Välj arbetsområde och minst tre lektioner i veckan.' (checklistan).",
+  "platser": [{ "efter": "arbetsomradet", "delar": ["innehall"] }]
+ },
+ "kooperativt-larande": {
+  "skal": "I Genomgång går läraren igenom innehållet: 'Gå igenom innehållet kort, med ett exempel på det nya, så att paren har något att tänka tillsammans om.' (steg 2).",
+  "platser": [{ "efter": "steg 2", "delar": ["innehall"], "om": "Genomgången" }]
+ },
+ "formativ-bedomning": {
+  "skal": "Metoden är ett lager, och innehållet är lärarens egen planering i delen Din planering: 'En genomgång, en text, en film, en laboration eller något skapande.' (tidsschemat).",
+  "platser": [{ "efter": "steg 2", "delar": ["innehall"], "om": "Din planering" }]
+ },
+ "testbaserat-larande": {
+  "skal": "I grovplaneringen skriver läraren före terminen det som ska sitta i varje område: 'Skriv en rad per område före terminen, med det som ska sitta om en månad …'.",
+  "platser": [{ "efter": "tabell: Grovplaneringen: områdena", "delar": ["innehall"] }]
+ },
+ "larande-pa-kognitionsvetenskaplig-grund": {
+  "skal": "Metoden börjar i innehållet, och i lektionen bär Lektionens fråga det: 'Frågan du valde före lektionen går att gissa på utifrån det klassen vet, men bara dagens innehåll svarar helt på den.' (steg 2).",
+  "platser": [{ "efter": "steg 2", "delar": ["innehall"], "om": "Lektionens fråga" }]
+ },
+ "reciprok-undervisning": {
+  "skal": "Tabellen är metodens egen anvisning för valet av text: 'Välj en text med något olöst. Sju till tjugo meningar räcker.'",
+  "platser": [{ "efter": "tabell: Så väljer du text och stopp", "delar": ["innehall"] }]
+ },
+ "skriva-for-att-lara": {
+  "skal": "Innehållet kommer ur lärarens planering, och det läraren skriver för lektionen är frågan: 'Skriv på tavlan en fråga som lektionen svarar på.' (tidsschemat), och komponentens fritt: 'Ämnet …'.",
+  "platser": [{ "efter": "karna: En fråga som kräver tänkande", "delar": ["innehall"] }]
+ },
+ "tankande-klassrum": {
+  "skal": "Innehållet är problemet och idén i det, och i tabellen väljer läraren idén först: 'Lös problemet själv. Vad måste eleverna förstå för att klara det? Det är idén, och den säger du inte.'",
+  "platser": [{ "efter": "tabell: Så skivar du ett problem", "delar": ["innehall"] }]
+ },
+ "vardeskapande-larande": {
+  "skal": "Tabellens första steg är valet av ämnesinnehåll, före mottagaren: 'Välj det klassen ska lära sig ur kursplanen, och fråga för vem den kunskapen kan vara värdefull i dag.'",
+  "platser": [{ "efter": "tabell: Så bygger du ett värdeskapande uppdrag", "delar": ["innehall"] }]
+ }
+}

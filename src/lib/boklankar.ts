@@ -34,7 +34,7 @@
 // metoddocx.ts det i textens löpor. Reglerna står i STIL.md under Hänvisningar. Modulen läser inga filer själv, eftersom
 // webbläsaren bygger Word-filen med samma kod.
 import { CENTRALA, centralKnappHtml, centralLank, lasbarAdress, type Central } from './centrala';
-import { fohlinHanvisningar, sakdelar, sakensFormer, webbdelar, type FohlinHanvisning } from './standard/index.js';
+import { fohlinHanvisningar, sakdelar, sakensFormer, webbdelar, VANLIGA_VERKTYGSORD, type FohlinHanvisning } from './standard/index.js';
 
 /** En sak i metoden som en text på sidan kan nämna (src/lib/metodsaker.ts, K-767): namnet, formerna och adressen. */
 export interface SidansSak { namn: string; former?: string[]; versal?: boolean; forst?: boolean; adress: string }
@@ -79,7 +79,8 @@ const MONSTER = NAMN.length ? new RegExp(`(?<![\\p{L}\\p{N}])(?:${NAMN.map((n) =
 // Verktygen och stödmaterialen som länkas när de nämns: sidorna och pdf:erna i registret. Ett formulär (Vår grupp) nämns
 // oftast som bladet, inte som formuläret, och länkas inte.
 const VERKTYG = CENTRALA.filter((c) => c.slag === 'sida' || c.slag === 'pdf').sort((a, b) => b.namn.length - a.namn.length);
-const VANLIGA_ORD = new Set(['Strategier', 'Strukturer']);
+// Verktygens namn som också är vanliga ord, ur standarden (VANLIGA_VERKTYGSORD).
+const VANLIGA_ORD = new Set<string>(VANLIGA_VERKTYGSORD);
 /**
  * Verktygen som en text nämner med namnet, som Boklankar länkar på metodens sida, utom Strategier och Strukturer, som är vanliga
  * ord och bara länkas som titel. Lär dig metoden i Metoder läser dem som saker, så att samma namn leder till samma verktyg där

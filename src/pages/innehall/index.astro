@@ -1,0 +1,210 @@
+---
+// /innehall: verktyget Innehåll (K-793; Niclas 2026-11-15: ”en form av artikel med stödmallar”, och om sidan: ”snyggt,
+// designat och enkelt att förstå, läsa, hämta rätt mallar”). Formen valdes efter idéuppdrag till en Sonnet och en Opus
+// (underlag/prov/innehall/ide/, Opus form A): artikeln i antikvan, rutan Börja här överst med de fem frågorna som leder till
+// sina rubriker, mallarna som små kort som leder till sin ruta i texten, och knapparna i rutan, så att varje fil har en
+// knapp och två knappar aldrig gör samma sak. Exemplen står efter rutan Min innehållsanalys, eftersom de är mallen ifylld,
+// och kartan efter kärnans tre delar. Texten är riggens och läses ur src/data/innehall/ (src/lib/innehallsverktyg.ts).
+import Base from '../../layouts/Base.astro';
+import Filval from '../../components/Filval.astro';
+import { INNEHALL, INNEHALLETS_ADRESS, INNEHALLETS_BILD, EXEMPLENS_MALL, delensNamn, filerFor, fragansAnkare, karnansDelar, mallensAnkare, papperetsNamn, type Block, type Mallruta } from '../../lib/innehallsverktyg';
+
+const v = INNEHALL;
+const titel = `${v.titel}: ${v.underrubrik.charAt(0).toLowerCase()}${v.underrubrik.slice(1)}`;
+const delar = karnansDelar();
+const mallAv = (id: string) => v.mallar.find((m) => m.id === id)!;
+// Bladets lilla bild, gjord ur pdf:ens första sida (scripts/innehall/minibilder.mjs), som valideringen gör efter Words pdf:er
+// och lägger i dist; bygget stannar när en bild saknas eller är gammal (--kontrollera i npm run build).
+const minibild = (id: string) => `${INNEHALLETS_ADRESS}/minibild-${id}.webp`;
+// Mallens del av kärnan, som kortet överst visar med delens nummer.
+const mallensDel = (id: string) => delar.find((a) => a.block.some((b) => 'mall' in b && [b.mall.id].flat().includes(id)));
+// Rutans rubrik, ”Mallen: Min innehållsanalys” och ”Mallarna: två blad till eleverna”, som etikett och namn, med namnet
+// med stor bokstav.
+const etikettOchNamn = (rubrik: string) => {
+  const i = rubrik.indexOf(':');
+  if (i < 0) return { etikett: '', namn: rubrik };
+  const namn = rubrik.slice(i + 1).trim();
+  return { etikett: rubrik.slice(0, i), namn: `${namn.charAt(0).toLocaleUpperCase('sv')}${namn.slice(1)}` };
+};
+// Raden i Börja här som nämner Min innehållsanalys leder till mallens ruta.
+const medMallen = (t: string) => {
+  const m = mallAv(EXEMPLENS_MALL);
+  const i = t.indexOf(m.namn);
+  return i < 0 ? [{ text: t }] : [{ text: t.slice(0, i) }, { text: m.namn, href: `#${mallensAnkare(m.id)}` }, { text: t.slice(i + m.namn.length) }];
+};
+const tillFor = (m: { for: string }) => `Till ${m.for}`;
+const delensId = (a: { id: string }) => a.id;
+type MallBlock = { mall: Mallruta };
+const arMall = (b: Block): b is MallBlock => 'mall' in b;
+---
+
+<Base title={titel} description={v.ingress} tryckText="© Niclas Fohlin · niclasfohlin.se/innehall">
+  <div class="ih-yta">
+    <nav class="ih-sidan" aria-label="På sidan">
+      <p class="ih-sidan-rubrik">På sidan</p>
+      <ol>
+        <li><a href="#borja-har">Börja här</a></li>
+        <li><a href="#mallarna">Mallarna</a></li>
+        {v.avsnitt.map((a) => <li class:list={{ 'ih-sidan-del': a.del !== undefined }}><a href={`#${delensId(a)}`}>{a.del !== undefined && <span class="ih-nr" aria-hidden="true">{a.del}</span>}{a.del !== undefined ? delensNamn(a) : a.rubrik}</a></li>)}
+        <li><a href="#kartan">Kartan</a></li>
+        <li><a href="#forskningen">{v.forskning.rubrik}</a></li>
+      </ol>
+    </nav>
+
+    <article class="ih-sida">
+      <header class="ih-huvud">
+        <p class="meta brodsmula">Verktyg i <a href="/metoder">Metoder</a> och <a href="/stodundervisning">Stödundervisning</a></p>
+        <div class="ih-titelrad">
+          <div>
+            <h1>{v.titel}</h1>
+            <p class="ih-underrubrik">{v.underrubrik}</p>
+          </div>
+          <img class="ih-bild" src={INNEHALLETS_BILD} width={v.bild.bredd} height={v.bild.hojd} alt={v.bild.alt} />
+        </div>
+        <p class="ih-ingress">{v.ingress}</p>
+      </header>
+
+      <section class="ih-borja" id="borja-har" aria-labelledby="borja-har-rubrik">
+        <h2 id="borja-har-rubrik">Börja här</h2>
+        <p>{v.borjaHar.fore}</p>
+        <ol class="ih-fragelista">
+          {v.fragor.map((f) => (
+            <li>
+              <a href={`#${fragansAnkare(f)}`} data-goatcounter-click={`innehall:fraga-${f.nr.toLowerCase()}`} data-goatcounter-title={`Innehåll: ${f.fraga} ur Börja här`}>
+                <span class:list={['ih-nr', { 'ih-nr-sist': f.nr === 'Sist' }]}>{f.nr}</span>
+                <span class="ih-fragetext"><span class="ih-fraga">{f.fraga}</span><span class="ih-kort">{f.kort}</span></span>
+                <svg class="ih-pil" aria-hidden="true" viewBox="0 0 20 20" width="18" height="18"><path d="M7.5 4.5L13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </li>
+          ))}
+        </ol>
+        {v.borjaHar.efter.map((t) => <p class="ih-efter">{medMallen(t).map((d) => (d.href ? <a href={d.href}>{d.text}</a> : d.text))}</p>)}
+      </section>
+
+      <section class="ih-mallarna" id="mallarna" aria-labelledby="mallarna-rubrik">
+        <h2 id="mallarna-rubrik">Mallarna</h2>
+        <ul class="ih-mallkort">
+          {v.mallar.map((m) => {
+            const del = mallensDel(m.id);
+            const bild = minibild(m.id);
+            return (
+              <li>
+                <a href={`#${mallensAnkare(m.id)}`}>
+                  <span class="ih-mallkort-bild">{bild ? <img src={bild} alt="" width="320" height="226" loading="lazy" /> : <span class="ih-mallkort-tomt" aria-hidden="true"></span>}{del && <span class="ih-nr" aria-hidden="true">{del.del}</span>}</span>
+                  <span class="ih-mallkort-namn">{m.namn}</span>
+                  <span class="ih-mallkort-for">{tillFor(m)}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <p class="ih-tillexempel"><a href="#exempel">Mallen ifylld i tre exempel</a></p>
+      </section>
+
+      {delar.length > 0 && (
+        <nav class="ih-delrad" aria-label="Kärnans tre delar">
+          {delar.map((a) => <a href={`#${delensId(a)}`}><span class="ih-nr" aria-hidden="true">{a.del}</span>{delensNamn(a)}</a>)}
+        </nav>
+      )}
+
+      <div class="brod ih-brod">
+        {v.avsnitt.map((a) => (
+          <section class:list={['ih-avsnitt', { 'ih-del': a.del !== undefined }]} id={delensId(a)} aria-labelledby={`${a.id}-rubrik`}>
+            <h2 id={`${a.id}-rubrik`}>{a.del !== undefined && <span class="ih-nr" aria-hidden="true">{a.del}</span>}<span>{a.rubrik}</span></h2>
+            {a.block.map((b) => {
+              if ('stycke' in b) return <p>{b.stycke}</p>;
+              if ('ruta' in b) return <aside class="ih-ruta" aria-label={b.ruta.rubrik}><p class="ih-ruta-rubrik">{b.ruta.rubrik}</p><p>{b.ruta.text}</p></aside>;
+              if ('fragorna' in b) return (
+                <div class="ih-fragorna">
+                  {v.fragor.map((f) => (
+                    <section class="ih-fragan" id={fragansAnkare(f)} aria-labelledby={`${fragansAnkare(f)}-rubrik`}>
+                      <h3 id={`${fragansAnkare(f)}-rubrik`}><span class:list={['ih-nr', { 'ih-nr-sist': f.nr === 'Sist' }]}>{f.nr}</span><span>{f.fraga}</span></h3>
+                      <p>{f.text}</p>
+                    </section>
+                  ))}
+                </div>
+              );
+              if ('tabell' in b) return (
+                <div class="ih-tabell">
+                  <table>
+                    <thead><tr>{b.tabell.huvud.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+                    <tbody>{b.tabell.rader.map((r) => <tr>{r.map((c, i) => (i === 0 ? <th scope="row">{c}</th> : <td data-etikett={b.tabell.huvud[i]}>{c}</td>))}</tr>)}</tbody>
+                  </table>
+                </div>
+              );
+              if (arMall(b)) {
+                const ids = [b.mall.id].flat();
+                const { etikett, namn } = etikettOchNamn(b.mall.rubrik);
+                const ensam = ids.length === 1;
+                return (
+                  <>
+                    <aside class="ih-mallruta" id={ensam ? mallensAnkare(ids[0]) : undefined} aria-label={b.mall.rubrik}>
+                      <p class="ih-mallruta-etikett">{etikett}</p>
+                      <h3 class="ih-mallruta-namn">{namn}</h3>
+                      {b.mall.text.map((t) => <p>{t}</p>)}
+                      <ul class="ih-mallruta-filer">
+                        {ids.map((id) => {
+                          const m = mallAv(id);
+                          const f = filerFor(id);
+                          const bild = minibild(id);
+                          return (
+                            <li id={ensam ? undefined : mallensAnkare(id)}>
+                              <span class="ih-mallruta-bild">{bild ? <img src={bild} alt="" width="320" height="226" loading="lazy" /> : <span class="ih-mallkort-tomt" aria-hidden="true"></span>}</span>
+                              <span class="ih-mallruta-text">
+                                {!ensam && <span class="ih-mallruta-filnamn">{m.namn}</span>}
+                                <span class="ih-mallkort-for">{tillFor(m)}</span>
+                              </span>
+                              {m.slag === 'papper'
+                                ? <Filval fil={f.word!} namn={papperetsNamn(id)} rubrik={m.namn} statistik={`Innehåll: ${m.namn}`} pdf pdfTitel="Ladda ner som pdf, stående A4" egetNamn />
+                                : <Filval fil={f.pdf.replace(/\.pdf$/, '')} namn={id} rubrik={m.namn} statistik={`Innehåll: ${m.namn}`} baraPdf pdfTitel="Ladda ner som pdf, stående A4" egetNamn />}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </aside>
+                    {ids.includes(EXEMPLENS_MALL) && (
+                      <section class="ih-exempel" id="exempel" aria-labelledby="exempel-rubrik">
+                        <h3 id="exempel-rubrik">{mallAv(EXEMPLENS_MALL).namn} ifylld</h3>
+                        {v.exempel.map((e, i) => {
+                          const f = filerFor(e.id);
+                          return (
+                            <details class="ih-exemplet" id={e.id} open={i === 0}>
+                              <summary>{e.titel}</summary>
+                              <dl class="ih-forefter">
+                                {e.ruta.map((r) => <div><dt>{r.rubrik}</dt><dd>{r.text}</dd></div>)}
+                              </dl>
+                              <p class="ih-exemplet-fil">Hela exemplet, med svaren på frågorna: <Filval fil={f.word!} namn={papperetsNamn(e.id)} rubrik={e.rubrik} statistik={`Innehåll: ${e.rubrik}`} baraPdf pdfTitel="Ladda ner som pdf, stående A4" egetNamn liten /></p>
+                            </details>
+                          );
+                        })}
+                      </section>
+                    )}
+                  </>
+                );
+              }
+              return null;
+            })}
+          </section>
+        ))}
+
+        <figure class="ih-karta" id="kartan">
+          <picture>
+            <source media="(min-width: 48rem)" srcset={`${INNEHALLETS_ADRESS}/${v.karta.fil}`} width={v.karta.bredd} height={v.karta.hojd} />
+            <img src={`${INNEHALLETS_ADRESS}/${v.karta.telefon.fil}`} width={v.karta.telefon.bredd} height={v.karta.telefon.hojd} alt={v.karta.alt} loading="lazy" />
+          </picture>
+          <figcaption>{v.karta.text} <a class="ih-visastort" href={`${INNEHALLETS_ADRESS}/${v.karta.fil}`} target="_blank" rel="noopener" data-goatcounter-click="innehall:kartan" data-goatcounter-title="Innehåll: kartan stort">Visa kartan stort</a></figcaption>
+        </figure>
+
+        <section class="ih-avsnitt" id="forskningen" aria-labelledby="forskningen-rubrik">
+          <h2 id="forskningen-rubrik">{v.forskning.rubrik}</h2>
+          {v.forskning.stycken.map((t) => <p>{t}</p>)}
+        </section>
+      </div>
+
+      <details class="ih-kallor">
+        <summary>Källorna</summary>
+        <p>{v.kallor}</p>
+      </details>
+    </article>
+  </div>
+</Base>

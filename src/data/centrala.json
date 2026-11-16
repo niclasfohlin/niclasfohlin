@@ -142,5 +142,25 @@
       "text": "En kognitionsvetenskaplig strategi är ett sätt att undervisa som hjälper eleverna att förstå och minnas det de lär sig. Varje strategi har en sida med stegen, ett kort att skriva ut och förslag på hur den används.",
       "rad": "Fler kognitionsvetenskapliga strategier för lärande finns på sidan Strategier."
     }
+  },
+  {
+    "id": "innehall",
+    "namn": "Innehåll",
+    "slag": "sida",
+    "del": "verktyg",
+    "adress": "/innehall",
+    "arskurs": "F–9",
+    "omraden": "alla",
+    "sas": "undervisningsmetoder",
+    "mejl": "en text om att välja innehåll som är värt att lära, med fem frågor till nästa arbetsområde och mallar till dig, en kollega och eleverna",
+    "vav": {
+      "etikett": "Tänk till om innehållet",
+      "liknar": "Tänk till om innehållet",
+      "liknarFler": "Tänk till om innehållet",
+      "passar": "Tänk till om innehållet",
+      "passarFler": "Tänk till om innehållet",
+      "text": "Innehåll är en text om att välja innehåll som är värt att lära, med fem frågor att ställa till arbetsområdet och mallar till dig, en kollega och eleverna.",
+      "rad": "Artikeln, de fem frågorna och mallarna finns på sidan Innehåll."
+    }
   }
 ]

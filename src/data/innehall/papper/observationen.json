@@ -1,0 +1,212 @@
+{
+ "design": "strategipapper",
+ "fil": "Innehall observation",
+ "titel": "Observationen",
+ "fot": "© Niclas Fohlin, niclasfohlin.se. Hör till verktyget Innehåll.",
+ "undertitel": "Till dig som sitter med på en kollegas lektion. Hör till verktyget Innehåll, F–⁠9.",
+ "ingress": "Du ser efter om innehållet når eleverna. Skriv belägg, som ”10.14, en elev: Varför åkte de om det var så farligt?” Spara omdömen, som ”Eleverna var engagerade”, till samtalet.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Före",
+    "text": "Fyll i tabellen här under tillsammans med läraren. Läraren väljer tre elever som kan olika mycket om innehållet innan ni börjar."
+   },
+   {
+    "rubrik": "Under",
+    "text": "Skriv med klockslag. Mitt i arbetet frågar du de tre eleverna: ”Vad försöker du ta reda på nu, och varför?” Mot slutet ber du dem förklara saken med egna ord."
+   },
+   {
+    "rubrik": "Efter",
+    "text": "Inom ett dygn samtalar ni i fyra steg. Läraren börjar, och ni bestämmer till sist en sak att pröva."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Före lektionen",
+   "text": "Skriv tillsammans med läraren.",
+   "kolumner": [
+    "Delen",
+    "Så säger läraren"
+   ],
+   "bredder": [
+    26,
+    74
+   ],
+   "rader": [
+    [
+     "Det innehållet ska öppna",
+     "\n\n"
+    ],
+    [
+     "Frågan som driver arbetet och lektionens uppgift, ordagrant",
+     "\n\n"
+    ],
+    [
+     "De tre eleverna, och det läraren tror om var och en",
+     "1\n\n2\n\n3\n"
+    ]
+   ]
+  },
+  {
+   "rubrik": "Samtalet efteråt",
+   "text": "Fyra steg, från protokollet till nästa lektion.",
+   "kolumner": [
+    "Steget",
+    "Så samtalar ni"
+   ],
+   "bredder": [
+    26,
+    74
+   ],
+   "rader": [
+    [
+     "1 · Läraren börjar",
+     "Läraren läser det hen sa före lektionen. Du frågar: ”Vad såg du hos eleverna av det du ville att innehållet skulle öppna?”"
+    ],
+    [
+     "2 · Det eleverna sa",
+     "Du läser högt ur protokollet. Vad försökte eleverna ta reda på, och vad undrade de själva? Vilka frågor gällde bara hur uppgiften skulle göras?"
+    ],
+    [
+     "3 · De tre eleverna",
+     "Vad kunde var och en förklara mot slutet? Vem kom inte in i innehållet, och vad hade den eleven behövt få vara med om först?"
+    ],
+    [
+     "4 · En sak att pröva",
+     "Båda föreslår en sak att pröva nästa lektion, du först. Bestäm en av dem och vad ni ska se efter då. Skriv det i protokollet."
+    ]
+   ],
+   "not": "Bladet är till för samtalet mellan två kollegor. Det är inget underlag för att bedöma läraren."
+  }
+ ],
+ "baksida": {
+  "titel": "Protokoll",
+  "undertitel": "Lärare: ______________   Observatör: ______________   Datum: ________   Årskurs och ämne: ____________",
+  "delar": [
+   {
+    "rubrik": "Tre elever",
+    "text": "Deras svar mitt i arbetet och mot slutet.",
+    "kolumner": [
+     "Elev",
+     "Mitt i arbetet: det hen säger att hen försöker ta reda på",
+     "Mot slutet: det hen kan förklara med egna ord"
+    ],
+    "bredder": [
+     8,
+     46,
+     46
+    ],
+    "rader": [
+     [
+      "1",
+      "\n\n\n",
+      ""
+     ],
+     [
+      "2",
+      "\n\n\n",
+      ""
+     ],
+     [
+      "3",
+      "\n\n\n",
+      ""
+     ]
+    ]
+   },
+   {
+    "rubrik": "Under lektionen",
+    "text": "Ordagrant, med klockslag. En rad för varje händelse. Skriv elevens nummer när det gäller en av de tre.",
+    "kolumner": [
+     "Kl.",
+     "Eleverna säger och gör",
+     "Läraren säger och gör"
+    ],
+    "bredder": [
+     8,
+     54,
+     38
+    ],
+    "rader": [
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ],
+     [
+      "\n",
+      "",
+      ""
+     ]
+    ]
+   },
+   {
+    "rubrik": "Efter samtalet",
+    "kolumner": [
+     "Delen",
+     "Så blir det"
+    ],
+    "bredder": [
+     26,
+     74
+    ],
+    "rader": [
+     [
+      "Vem kom inte in, och vad hade den eleven behövt få vara med om först?",
+      "\n"
+     ],
+     [
+      "Det här prövar vi nästa lektion",
+      "\n"
+     ],
+     [
+      "Då ser vi efter",
+      "\n"
+     ]
+    ]
+   }
+  ]
+ },
+ "kalla": "Bladet bygger på Skolinspektionens observationsschema, Dudley (2014), Moss och Brookhart (2013) och Tengberg m.fl. (2022)."
+}

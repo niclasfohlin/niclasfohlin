@@ -1,0 +1,98 @@
+{
+ "design": "strategipapper",
+ "fil": "Innehall exempel vikingatiden",
+ "titel": "Exempel: vikingatiden i årskurs 5",
+ "undertitel": "Ett arbetsområde i historia som redan är valt, prövat med de fem frågorna.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Före",
+    "text": "Fyra veckor med gudarna, skeppen och runorna, en vecka då klassen bygger skepp i kartong, och ett prov på årtal och fakta."
+   },
+   {
+    "rubrik": "Efter",
+    "text": "Fyra veckor med en fråga: Varför gav de sig av, och vad hände där de kom? Skeppsbygget blir en lektion."
+   },
+   {
+    "rubrik": "I klassrummet",
+    "text": "Frågan står på tavlan, alla har läst samma runsten, och varje elev skriver om varför människor ger sig av, då och nu."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Frågorna och svaren",
+   "text": "Samma frågor som i mallen Min innehållsanalys, ifyllda för det här arbetsområdet.",
+   "kolumner": [
+    "Frågan",
+    "Mitt svar",
+    "Det ändrar jag i planeringen"
+   ],
+   "bredder": [
+    22,
+    42,
+    36
+   ],
+   "rader": [
+    [
+     "1 · Vad öppnar innehållet?",
+     "Människor som ger sig av för att handla, plundra eller bosätta sig, och vad som händer när de möter andra. Eleverna ska förstå varför människor gav sig av, och hur vi kan veta något om dem som levde för tusen år sedan.",
+     "Resorna och källorna blir navet. Gudarna och vardagen är med där de förklarar resorna."
+    ],
+    [
+     "2 · Vad betyder det för eleverna?",
+     "I den här klassen känner eleverna vikingen från spel och serier, som en krigare med horn på hjälmen. Jag vill att de ska se bönder, handelsmän och trälar, och hjälmar utan horn. Eleverna möter samma fråga när någon flyttar i dag: varför ger man sig av? En spegel för den som har flyttat långt eller saknar någon som är borta.",
+     "På första lektionen samlar vi klassens bild av vikingen, och på sista lektionen jämför vi den med det klassen nu vet."
+    ],
+    [
+     "3 · Vad är nytt för dem?",
+     "Ett fönster: ett samhälle där människor kunde ägas, och där en resa kunde ta månader och sluta med att någon aldrig kom hem.",
+     "Alla läser först samma runsten, den som Tola lät resa efter sin son Harald, som dog långt borta i Särkland."
+    ],
+    [
+     "4 · Vilken fråga driver arbetet?",
+     "Varför gav de sig av, och vad hände där de kom? Svaret kräver kunskap om handel, jord och makt, och om vad ett fynd eller en runsten kan säga.",
+     "Varje lektion ger en del av svaret, och klassen för in den på en gemensam karta över resvägarna."
+    ],
+    [
+     "5 · Var blir det levande?",
+     "Tola och Harald. Vad berättar stenen om hans resa, och vad får vi inte veta om honom och Tola?",
+     "Klassen börjar med stenen och går tillbaka till den i slutet av arbetet."
+    ],
+    [
+     "Sist · Vad tar du bort?",
+     "Listan över alla gudar, veckan med kartongskepp och provet på årtal.",
+     "Eleverna skriver i stället: Varför ger sig människor av, då och nu? Vad är lika, och vad är olika?"
+    ]
+   ]
+  },
+  {
+   "rubrik": "Till planeringen",
+   "text": "Samma rader som nederst i mallen Min innehållsanalys.",
+   "kolumner": [
+    "Saken",
+    "Så blir det"
+   ],
+   "bredder": [
+    22,
+    78
+   ],
+   "rader": [
+    [
+     "Står de fyra sakerna i den högra kolumnen?",
+     "Ja: Klassen samlar delarna av svaret på ett ställe. Det står vid fråga 4.\nJa: Slutuppgiften går inte att göra utan det klassen har lärt sig. Den står vid Sist.\nJa: Varje elev får säga eller skriva var innehållet finns i hens liv eller i världen utanför skolan. Det står vid Sist.\nJa: Varje vecka ger en bit av svaret på frågan som driver arbetet. Det står vid fråga 4."
+    ],
+    [
+     "Märk och fråga",
+     "På första lektionen säger alla vad de tror om vikingen och vad de undrar om stenen. I vecka 2 frågar jag tre elever vad de försöker ta reda på, och klassen fyller i bladet Vad tänker du?"
+    ],
+    [
+     "Om det inte träffar",
+     "Vi går tillbaka till stenen och till Tola och Harald. Sedan följer klassen en enda resa på kartan, och frågan på tavlan står kvar."
+    ]
+   ],
+   "not": "Exemplet tar vikingatidens resor och de historiska källorna ur kursplanen. Andra delar av vikingatiden får egna arbetsområden. Runstenen är Gripsholmsstenen, Sö 179, vid Gripsholms slott."
+  }
+ ],
+ "kalla": "© Niclas Fohlin, niclasfohlin.se. Exemplet hör till verktyget Innehåll."
+}

@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.65.0, 2026-11-15
+
+- `saker.js` (sajtens K-793, verktyget Innehåll; Codex 2026-11-15): `VANLIGA_VERKTYGSORD`, verktygens namn som också är vanliga ord, Strategier, Strukturer och Innehåll. Först i en mening är de ingen hänvisning till verktyget, så ”Innehåll som går att använda …” blir ingen länk. Listan stod förut två gånger på sajten, i länkningen och i metodernas prov, och står nu här.
+
 ## 0.64.0, 2026-11-15
 
 - `undervisningsmetod.js` (sajtens K-789; Codex och andra ögat på Värdeskapande lärande): `utfallensRegel`, regeln bakom utfallens gränser i ord, som stod i sajtens `src/lib/undervisningsmetod.ts` och nu står här, så att riggens Word kan säga samma mening. Med fel säger den som förut, och ett annat utfallsord, som "svar håller inte", står aldrig efter "är": regeln säger då talet i utfallen.

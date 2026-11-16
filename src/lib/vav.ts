@@ -11,11 +11,12 @@
 // till verktyget; och rutan, där eleverna arbetar med verktygets delar i passets kärna, med texten, korten och verktygets
 // knapp. Står verktygets knapp redan på platsen (fältet centrala), står den inte en gång till, och inte heller kortradens rad.
 import register from '../data/sadd.json';
-import strukturerIMetoder from '../data/strukturer-i-metoder.json';
 import { CENTRALA, lasbarAdress, tolkaTextplats, type Central } from './centrala';
 import { passar, sammaRubrik, tolkaEfter, type FilmPlats } from './film';
 import { bildensAdress, slagensStil, strukturensAdress, strukturernaAv } from './strukturer';
-import { strategiernaAv, strategiensAdress, strategiernasStil, strategiernasPlatser } from './strategier';
+import { strategiernaAv, strategiensAdress, strategiernasStil } from './strategier';
+import { METODERS_SADD } from './metodersadd';
+import { INNEHALL, INNEHALLETS_ADRESS, INNEHALLETS_BILD, INNEHALLETS_STIL } from './innehallsverktyg';
 import { strukturnamnetI } from './standard/index.js';
 
 export const VAVFORMER = ['kort', 'ruta'] as const;
@@ -26,7 +27,7 @@ export const VAVSLAG = ['form', 'forslag'] as const;
 type Slag = (typeof VAVSLAG)[number];
 /** En plats i registret: efter är platsen, form kortraden eller rutan, delar id:n på verktygets delar, och om den del av
  *  passet som har delens form, när metoden inte nämner delen (Berättaren och Skrivaren i Skrivkurs: sagoboken). */
-type Rad = { efter: string; form?: Form; delar?: string[]; om?: string; slag?: Slag };
+type Rad = { efter: string; form?: Form; delar?: string[]; om?: string; slag?: Slag; mening?: string };
 type Ja = { skal: string; vav?: Rad[] };
 /** En del av verktyget som ett litet kort: bilden och namnet leder till delens sida. */
 export type Del = { id: string; namn: string; andra: string[]; rad: string; adress: string; bild?: { src: string; bredd: number; hojd: number }; bilder?: (string | null)[]; nr?: number; stil?: string };
@@ -36,9 +37,16 @@ export type Vav = { vav: Central; metod: string; form: Form; delar: Del[]; namng
 
 // Var delarna av ett verktyg står: namnet, raden under och sidan. Strukturerna läses ur src/content/strukturer/, och
 // strategierna (K-702) ur src/content/strategier/, med berättelsens tre bilder och numret, som på /strategier.
-const DELAR: Record<string, (ids: string[], vem: string) => Del[]> = {
+// Verktyget Innehåll (K-796) har inga delar med egna sidor: kortet är verktyget självt, med bilden, och raden under namnet är
+// riggens mening för just valet i metoden (mening i src/data/innehall-i-metoder.json), och kortet leder till Börja här.
+const DELAR: Record<string, (ids: string[], vem: string, r?: Rad) => Del[]> = {
   strukturer: (ids, vem) => strukturernaAv(ids, vem).map((s) => ({ id: s.id, namn: s.namn, andra: s.andra, rad: s.syfte, adress: strukturensAdress(s.id), bild: { src: bildensAdress(s.id), bredd: 900, hojd: 560 }, stil: slagensStil(s.slag) })),
   strategier: (ids, vem) => strategiernaAv(ids, vem).map((s) => ({ id: s.id, namn: s.namn, andra: [], rad: s.mening, adress: strategiensAdress(s.id), bilder: s.bilder, nr: s.nr, stil: strategiernasStil })),
+  innehall: (ids, vem, r) => {
+    if (ids.join() !== 'innehall') throw new Error(`${vem}: kortet för Innehåll har delen innehall, inte ${ids.join(', ') || 'ingen'}.`);
+    if (!r?.mening) throw new Error(`${vem}: kortet för Innehåll saknar meningen för valet i metoden (mening).`);
+    return [{ id: 'innehall', namn: INNEHALL.titel, andra: [], rad: r.mening, adress: `${INNEHALLETS_ADRESS}#borja-har`, bild: { src: INNEHALLETS_BILD, bredd: INNEHALL.bild.bredd, hojd: INNEHALL.bild.hojd }, stil: INNEHALLETS_STIL }];
+  },
 };
 
 const saker = (register as unknown as { saker: Record<string, { ja?: Record<string, string | Ja> }> }).saker;
@@ -47,10 +55,9 @@ const vavda = () => CENTRALA.filter((c) => c.vav);
 /** Banken som metoden står i. Sådden i Stödundervisning står i src/data/sadd.json, och i Metoder i sajtens register per
  *  verktyg, eftersom metodernas filer är riggens (src/data/strategier-i-metoder.json); reglerna nedan läser båda. */
 export type Bank = 'stodundervisning' | 'undervisningsmetoder';
-// Strukturerna i Metoder står i src/data/strukturer-i-metoder.json, som strategierna (Niclas 2026-11-14 om Tänkande klassrum:
-// "galleri redovisning från kooperativt lärande och någon annan redovisning kan såddad in som exempel vid konsolidering").
-const strukturernasPlatser = (metod: string): Rad[] => (strukturerIMetoder as unknown as Record<string, { platser?: Rad[] } | undefined>)[metod]?.platser ?? [];
-const METODERS_SADD: Record<string, (metod: string) => Rad[]> = { strategier: strategiernasPlatser, strukturer: strukturernasPlatser };
+// Sådden i Metoder står i sajtens register per verktyg (src/lib/metodersadd.ts): strategierna, strukturerna (Niclas 2026-11-14
+// om Tänkande klassrum: "galleri redovisning från kooperativt lärande och någon annan redovisning kan såddad in som exempel
+// vid konsolidering") och Innehåll (K-796).
 const raderFor = (metod: string, c: Central, bank: Bank = 'stodundervisning'): Rad[] => {
   if (bank === 'undervisningsmetoder') return METODERS_SADD[c.id]?.(metod) ?? [];
   const ja = saker[c.id]?.ja?.[metod];
@@ -59,14 +66,15 @@ const raderFor = (metod: string, c: Central, bank: Bank = 'stodundervisning'): R
 
 type MetodForVav = { centrala?: { id: string; efterText: string }[] };
 function vavAv(metod: string, d: MetodForVav, c: Central, r: Rad, bank: Bank = 'stodundervisning'): Vav {
-  const delar = DELAR[c.id]?.(r.delar ?? [], `src/data/sadd.json, ${c.id}, ${metod}`) ?? [];
+  const delar = DELAR[c.id]?.(r.delar ?? [], `${bank === 'undervisningsmetoder' ? `sådden i Metoder, ${c.id}` : `src/data/sadd.json, ${c.id}`}, ${metod}`, r) ?? [];
   return {
     vav: c,
     metod,
     form: r.form ?? 'kort',
     delar,
     // Nämner metoden ingen av delarna, arbetar eleverna i samma form utan att metoden säger det, och etiketten säger det.
-    namngivna: !delar.length || delar.some((x) => [x.namn, ...x.andra].some((n) => namnetI(n, d, c.id === 'strategier'))),
+    // Ett kort som är verktyget självt, som Innehåll, är aldrig en del som metoden nämner: etiketten säger delen av lektionen.
+    namngivna: !delar.length || delar.some((x) => x.id !== c.id && [x.namn, ...x.andra].some((n) => namnetI(n, d, c.id === 'strategier'))),
     om: r.om,
     slag: r.slag ?? 'form',
     // Knappen står redan på platsen när metoden visar verktyget där med fältet centrala (src/lib/centrala.ts).

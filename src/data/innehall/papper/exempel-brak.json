@@ -1,0 +1,98 @@
+{
+ "design": "strategipapper",
+ "fil": "Innehall exempel brak",
+ "titel": "Exempel: bråk i årskurs 4",
+ "undertitel": "Ett arbetsområde i matematik som redan är valt, prövat med de fem frågorna.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Före",
+    "text": "Kapitlet om bråk i läroboken, sida för sida. Eleverna färglägger delar av figurer och skriver bråket, och sist kommer en diagnos."
+   },
+   {
+    "rubrik": "Efter",
+    "text": "Fyra veckor med en fråga: Är en halv alltid lika mycket? Eleverna delar, jämför och förklarar."
+   },
+   {
+    "rubrik": "I klassrummet",
+    "text": "Frågan står på tavlan, alla har delat samma två kakor på mitten, och varje elev svarar på frågan med bilder, bråk och ett exempel ur sin vardag."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Frågorna och svaren",
+   "text": "Samma frågor som i mallen Min innehållsanalys, ifyllda för det här arbetsområdet.",
+   "kolumner": [
+    "Frågan",
+    "Mitt svar",
+    "Det ändrar jag i planeringen"
+   ],
+   "bredder": [
+    22,
+    42,
+    36
+   ],
+   "rader": [
+    [
+     "1 · Vad öppnar innehållet?",
+     "Att dela rättvist, och att en del alltid är en del av något. Ett bråk är ett tal som säger hur stor en del är av helheten. Eleverna ska förstå att samma bråk av olika stora helheter blir olika mycket.",
+     "Eleverna jämför delar i varje lektion. Färgläggningen är med där den hjälper dem att jämföra."
+    ],
+    [
+     "2 · Vad betyder det för eleverna?",
+     "Eleverna delar redan godis, pizza och tid vid datorn. Många tror att en fjärdedel av en pizza är mer än en tredjedel av samma pizza, eftersom fyra är mer än tre. De möter bråk igen i recept, på rean och i procent. En spegel för alla som har bråkat om vem som fick den största biten.",
+     "Arbetet börjar med att eleverna delar något rättvist, och redan första veckan jämför de en tredjedel och en fjärdedel av samma helhet."
+    ],
+    [
+     "3 · Vad är nytt för dem?",
+     "Ett fönster: att hälften av en stor kaka och hälften av en liten är samma bråk men olika mycket kaka.",
+     "Alla delar först samma två kakor på mitten, en stor och en liten, och jämför hälfterna."
+    ],
+    [
+     "4 · Vilken fråga driver arbetet?",
+     "Är en halv alltid lika mycket? Ett bra svar säger både ja och nej: en halv är alltid lika stor del av helheten, men hälften av en stor kaka är mer än hälften av en liten.",
+     "Varje vecka prövar klassen frågan på ett nytt bråk, som en tredjedel eller tre fjärdedelar, och samlar exemplen på väggen."
+    ],
+    [
+     "5 · Var blir det levande?",
+     "Det ena barnet får hälften av en stor kaka, det andra hälften av en liten. Vem fick mest, om båda fick en halv?",
+     "Klassen går tillbaka till kakorna när bråken blir fler och svårare."
+    ],
+    [
+     "Sist · Vad tar du bort?",
+     "Sidorna där eleverna färglägger delar av figurer utan att jämföra dem.",
+     "Diagnosen står kvar. Före den svarar eleverna på frågan i en text: Är en halv alltid lika mycket? De visar svaret med bilder, bråk och exempel, och ett av exemplen är något de delar själva."
+    ]
+   ]
+  },
+  {
+   "rubrik": "Till planeringen",
+   "text": "Samma rader som nederst i mallen Min innehållsanalys.",
+   "kolumner": [
+    "Saken",
+    "Så blir det"
+   ],
+   "bredder": [
+    22,
+    78
+   ],
+   "rader": [
+    [
+     "Står de fyra sakerna i den högra kolumnen?",
+     "Ja: Klassen samlar delarna av svaret på ett ställe. Det står vid fråga 4.\nJa: Slutuppgiften går inte att göra utan det klassen har lärt sig. Den står vid Sist.\nJa: Varje elev får säga eller skriva var innehållet finns i hens liv eller i världen utanför skolan. Det står vid Sist.\nJa: Varje vecka ger en bit av svaret på frågan som driver arbetet. Det står vid fråga 4."
+    ],
+    [
+     "Märk och fråga",
+     "När alla har delat kakorna säger var och en vad hen tror: är hälften av den stora kakan lika mycket som hälften av den lilla? I vecka 2 frågar jag tre elever vad de försöker ta reda på, och klassen fyller i bladet Vad tänker du?"
+    ],
+    [
+     "Om det inte träffar",
+     "Vi delar igen, först två lika stora kakor och sedan en stor och en liten. Eleverna säger vad som är lika och vad som skiljer."
+    ]
+   ],
+   "not": "De fem frågorna gäller också ett innehåll där eleverna ska kunna räkna. Lärobokens övriga uppgifter har kvar sin plats, och frågan på tavlan ger eleverna ett skäl att räkna."
+  }
+ ],
+ "kalla": "© Niclas Fohlin, niclasfohlin.se. Exemplet hör till verktyget Innehåll."
+}

@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 1050 1485" role="img" aria-labelledby="titel beskrivning" font-family="Arial, Helvetica, sans-serif" style="max-width:100%;height:auto">
+  <title id="titel">Innehåll: vad är värt att lära?</title>
+  <desc id="beskrivning">Läraren tänker till om vad och varför före arbetet. Innehållet öppnar en större fråga som driver arbetet, börjar för alla i det kända, griper tag i eleven och leder till det nya. Under arbetet märker läraren om innehållet träffar eleven. I början och i slutet frågar läraren och lyssnar på elevens tankar och känslor. Eleven sätter ord på dem, och de ändrar nästa steg i innehållet. Läraren väljer metoden sist. Den hjälper eleven att förstå innehållet och skapa mening.</desc>
+  <!-- Konceptkartan i verktyget Innehåll, utkast 4, 2026-11-15. Codex (gpt-6-astra) ritade utkast 1 och 2 efter riggens
+       uppdrag och återkoppling. Riggen gjorde två ändringar i utkast 3: rutan Något större heter En större fråga, och
+       pilen 3 går till Tankar och känslor i stället för till Eleven. Utkast 4 har fem ändringar efter granskningen
+       (material/innehall-adjudicering.md, nr 19): frågan driver arbetet, innehållet börjar för alla i det kända,
+       metoden hjälper eleven att förstå innehållet, elevernas ord ändrar nästa steg, och märket 3 säger Början och
+       slut. Arbetsordern: material/innehall-arbetsorder.md. -->
+
+  <defs>
+    <marker id="pil-bla" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L12 6L0 12Z" fill="#2e75b6"/>
+    </marker>
+    <marker id="pil-varv" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L12 6L0 12Z" fill="#8a5a1e"/>
+    </marker>
+  </defs>
+
+  <rect width="1050" height="1485" fill="#ffffff"/>
+  <text x="525" y="100" text-anchor="middle" font-size="54" font-weight="700" fill="#1f5c99">Innehåll: vad är värt att lära?</text>
+
+  <!-- Länkorden har fria mellanrum i linjerna. -->
+  <g fill="none" stroke="#2e75b6" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M360 515H280Q240 515 240 489"/>
+    <path d="M240 435V424" marker-end="url(#pil-bla)"/>
+
+    <path d="M430 600L370 643"/>
+    <path d="M275 703L240 741" marker-end="url(#pil-bla)"/>
+
+    <path d="M525 600V641"/>
+    <path d="M525 700V741" marker-end="url(#pil-bla)"/>
+
+    <path d="M620 600L675 640"/>
+    <path d="M785 710L810 741" marker-end="url(#pil-bla)"/>
+
+    <path d="M525 855V895"/>
+    <path d="M525 988V1006" marker-end="url(#pil-bla)"/>
+
+    <path d="M375 200H150Q50 200 50 300V1170Q50 1225 105 1225H125"/>
+    <path d="M330 1225H356" marker-end="url(#pil-bla)"/>
+
+    <path d="M525 1275V1286"/>
+    <path d="M525 1338V1346" marker-end="url(#pil-bla)"/>
+  </g>
+
+  <!-- Lärarens tre handlingar och elevens återkoppling. -->
+  <g fill="none" stroke="#8a5a1e" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M525 245V278"/>
+    <path d="M525 399V486" marker-end="url(#pil-varv)"/>
+
+    <path d="M675 215C790 215 835 250 835 310V340"/>
+    <path d="M835 497V560C835 610 960 610 960 680V870Q960 910 920 910H690Q650 910 640 859" marker-end="url(#pil-varv)"/>
+
+    <path d="M675 180H930Q1000 180 1000 250V1035H945"/>
+    <path d="M750 1065H704" marker-end="url(#pil-varv)"/>
+
+    <path d="M350 1065H330"/>
+    <path d="M108 1065Q90 1065 90 1047V565Q90 540 115 540H356" marker-end="url(#pil-varv)"/>
+  </g>
+
+  <g text-anchor="middle" font-size="28" fill="#555555">
+    <text x="240" y="475">öppnar</text>
+    <text x="285" y="680">börjar för alla i</text>
+    <text x="525" y="680">griper tag i</text>
+    <text x="755" y="680">leder till</text>
+    <text x="525" y="930">
+      <tspan x="525" y="930">sätter</tspan>
+      <tspan x="525" y="964">ord på</tspan>
+    </text>
+    <text x="225" y="1235">väljer sist</text>
+    <text x="525" y="1323">hjälper eleven att</text>
+  </g>
+
+  <g text-anchor="middle" font-size="28" fill="#8a5a1e">
+    <text x="525" y="375">tänker till om</text>
+    <text x="835" y="439">
+      <tspan x="835" y="439">märker om</tspan>
+      <tspan x="835" y="473">innehållet träffar</tspan>
+    </text>
+    <text x="840" y="1048">
+      <tspan x="840" y="1048">frågar och</tspan>
+      <tspan x="840" y="1082">lyssnar på</tspan>
+    </text>
+    <text x="215" y="1052">
+      <tspan x="215" y="1052">ändrar nästa</tspan>
+      <tspan x="215" y="1086">steg i</tspan>
+    </text>
+  </g>
+
+  <!-- Märkena hör till handlingarna, inte till begreppsrutorna. -->
+  <g fill="#fbf3e4" stroke="#8a5a1e" stroke-width="1.5">
+    <rect x="435" y="290" width="180" height="46" rx="23"/>
+    <rect x="740" y="355" width="190" height="46" rx="23"/>
+    <rect x="695" y="962" width="290" height="46" rx="23"/>
+  </g>
+  <g text-anchor="middle" font-size="28" font-weight="700" fill="#8a5a1e">
+    <text x="525" y="322">1 · Före</text>
+    <text x="835" y="387">2 · Under</text>
+    <text x="840" y="994" font-size="26">3 · Början och slut</text>
+  </g>
+
+  <g fill="#1f5c99">
+    <rect x="375" y="155" width="300" height="90" rx="18"/>
+    <rect x="360" y="490" width="330" height="110" rx="18"/>
+    <rect x="400" y="745" width="250" height="110" rx="18"/>
+    <rect x="360" y="1175" width="330" height="100" rx="18"/>
+  </g>
+
+  <g fill="#ebf4fb" stroke="#d6e4f0" stroke-width="2">
+    <rect x="125" y="745" width="230" height="110" rx="18"/>
+    <rect x="695" y="745" width="230" height="110" rx="18"/>
+    <rect x="315" y="1350" width="420" height="90" rx="18"/>
+  </g>
+
+  <g fill="#f8fbfd" stroke="#d6e4f0" stroke-width="2">
+    <rect x="95" y="325" width="290" height="96" rx="18"/>
+    <rect x="350" y="1010" width="350" height="110" rx="18"/>
+  </g>
+
+  <g text-anchor="middle" fill="#ffffff">
+    <text x="525" y="213" font-size="36" font-weight="700">Läraren</text>
+    <text x="525" y="535" font-size="36" font-weight="700">Innehållet</text>
+    <text x="525" y="577" font-size="28">Vad och varför</text>
+    <text x="525" y="812" font-size="36" font-weight="700">Eleven</text>
+    <text x="525" y="1218" font-size="36" font-weight="700">Metoden</text>
+    <text x="525" y="1257" font-size="28">Hur</text>
+  </g>
+
+  <g text-anchor="middle">
+    <text x="240" y="366" font-size="32" fill="#1a1a1a">En större fråga</text>
+    <text x="240" y="402" font-size="28" fill="#555555">som driver arbetet</text>
+
+    <text x="240" y="791" font-size="34" font-weight="700" fill="#1f5c99">Det kända</text>
+    <text x="240" y="831" font-size="30" fill="#555555">Spegel</text>
+
+    <text x="810" y="791" font-size="34" font-weight="700" fill="#1f5c99">Det nya</text>
+    <text x="810" y="831" font-size="30" fill="#555555">Fönster</text>
+
+    <text x="525" y="1057" font-size="32" fill="#1a1a1a">
+      <tspan x="525" y="1057">Tankar och</tspan>
+      <tspan x="525" y="1095">känslor</tspan>
+    </text>
+
+    <text x="525" y="1388" font-size="34" font-weight="700" fill="#1f5c99">
+      <tspan x="525" y="1388">Förstå innehållet</tspan>
+      <tspan x="525" y="1426">och skapa mening</tspan>
+    </text>
+  </g>
+</svg>

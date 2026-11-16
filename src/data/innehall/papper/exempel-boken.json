@@ -1,0 +1,98 @@
+{
+ "design": "strategipapper",
+ "fil": "Innehall exempel boken",
+ "titel": "Exempel: en hel bok i årskurs 4",
+ "undertitel": "Läsningen i en klass där flera elever tränar avkodning. Boken är Bröderna Lejonhjärta.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Före",
+    "text": "Lästräning med korta texter och frågor, tyst läsning med en läslogg över antal sidor, och en högläsningsbok som fanns i klassuppsättning, med kapitelfrågor och en recension efteråt."
+   },
+   {
+    "rubrik": "Efter",
+    "text": "Du läser hela boken högt i fem veckor, och klassen samtalar om en fråga som går igen: Vad är mod när man är rädd?"
+   },
+   {
+    "rubrik": "I klassrummet",
+    "text": "Frågan sitter på väggen, alla har hört samma kapitel, och varje elev skriver om två ställen där Skorpan är rädd."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Frågorna och svaren",
+   "text": "Samma frågor som i mallen Min innehållsanalys, ifyllda för det här arbetsområdet.",
+   "kolumner": [
+    "Frågan",
+    "Mitt svar",
+    "Det ändrar jag i planeringen"
+   ],
+   "bredder": [
+    22,
+    42,
+    36
+   ],
+   "rader": [
+    [
+     "1 · Vad öppnar innehållet?",
+     "Mod, rädsla och vad man är skyldig andra. Boken låter eleverna följa en människa som är rädd och handlar ändå, och visar vad förtryck gör med människor. Eleverna ska förstå hur en person i en berättelse ändras, och visa det med ställen i texten.",
+     "Boken är vald för frågan om mod. Klassen hör hela boken, från början till slut."
+    ],
+    [
+     "2 · Vad betyder det för eleverna?",
+     "Många tror att den som är modig aldrig är rädd. Alla har varit rädda, och många har sett någon bli illa behandlad och inte sagt ifrån. För den som har förlorat någon är sorgen i boken en spegel. De möter frågan om mod igen varje gång någon behöver deras hjälp.",
+     "Samtalet börjar i boken och går sedan till elevernas egen värld."
+    ],
+    [
+     "3 · Vad är nytt för dem?",
+     "Ett fönster: ett barn som vet att det ska dö, och ett land där människorna är ofria.",
+     "Alla hör de två första kapitlen samma dag, så att hela klassen har samma början att tala om."
+    ],
+    [
+     "4 · Vilken fråga driver arbetet?",
+     "Vad är mod när man är rädd? Eleverna prövar olika svar med stöd i det Skorpan och Jonatan säger och gör, och visar med ställen i boken hur Skorpan ändras från det första kapitlet till det sista.",
+     "Efter varje lässtund skriver klassen upp ett nytt ställe ur boken under frågan på väggen."
+    ],
+    [
+     "5 · Var blir det levande?",
+     "Skorpan, som är rädd nästan hela tiden och går vidare ändå. Jonatan säger att det finns saker man måste göra fast det är farligt.",
+     "Klassen följer Skorpan: Var är han rädd, och vad gör han ändå?"
+    ],
+    [
+     "Sist · Vad tar du bort?",
+     "Kapitelfrågor med ett rätt svar, recensionen efteråt och läsloggen med antal sidor.",
+     "Tiden går till läsningen, samtalet och en text: Välj två ställen där Skorpan är rädd. Vad gör han, och hur förstår du hans val? Den som vill jämför med något hen själv har varit med om."
+    ]
+   ]
+  },
+  {
+   "rubrik": "Till planeringen",
+   "text": "Samma rader som nederst i mallen Min innehållsanalys.",
+   "kolumner": [
+    "Saken",
+    "Så blir det"
+   ],
+   "bredder": [
+    22,
+    78
+   ],
+   "rader": [
+    [
+     "Står de fyra sakerna i den högra kolumnen?",
+     "Ja: Klassen samlar delarna av svaret på ett ställe. Det står vid fråga 4.\nJa: Slutuppgiften går inte att göra utan det klassen har lärt sig. Den står vid Sist.\nJa: Varje elev får säga eller skriva var innehållet finns i hens liv eller i världen utanför skolan. Det står vid fråga 2.\nJa: Varje vecka ger en bit av svaret på frågan som driver arbetet. Det står vid fråga 4."
+    ],
+    [
+     "Märk och fråga",
+     "Efter de två första kapitlen säger alla vad de tror och vad de undrar. I vecka 3 frågar jag tre elever vad de försöker ta reda på, och klassen fyller i bladet Vad tänker du?"
+    ],
+    [
+     "Om det inte träffar",
+     "Vi går tillbaka till ett ställe där Skorpan är rädd, läser det igen och samtalar bara om det. En av elevernas frågor börjar nästa lässtund."
+    ]
+   ],
+   "not": "Eleverna som tränar avkodning lyssnar och samtalar med klassen, och de har kvar sin lästräning. Innehållet väntar inte på färdigheten."
+  }
+ ],
+ "kalla": "© Niclas Fohlin, niclasfohlin.se. Exemplet hör till verktyget Innehåll. Boken är Bröderna Lejonhjärta av Astrid Lindgren (1973)."
+}

@@ -15,6 +15,7 @@
 // scripts/metoderprov.mjs stannar när bankerna inte visar samma saker eller rutan saknas i en av dem.
 import { site } from '../data/site';
 import { CENTRALA, vavarSaken, type Central } from '../lib/centrala';
+import { sasIMetoder } from '../lib/metodersadd';
 import { metoderSorterade } from '../lib/innehall';
 import { SAMLINGAR } from '../lib/samlingar';
 import { arskursSpannet, spannITexten, spannText } from '../lib/tackning';
@@ -54,8 +55,11 @@ const delar = DELAR.map((del) => ({
       text: `${c.omraden === 'alla' ? 'Alla områden' : omraden.join(' och ')} · ${sp[0] === 0 ? spannText(sp) : `åk ${spannText(sp)}`}`,
       // En pdf och ett formulär öppnas i en ny flik, som metodens knapp gör (src/lib/centrala.ts, centralLank).
       ny: c.slag !== 'sida',
+      // Ett verktyg som bara sås i Metoder, som Innehåll (K-796), står med i båda rutorna, eftersom de är speglade, och utan
+      // stödmetoder att följa står det kvar när Stödundervisnings ruta följer filtret.
+      alltid: ms.length === 0 && sasIMetoder(c.id),
     };
-  }).filter((s) => s.metoder.length > 0),
+  }).filter((s) => s.metoder.length > 0 || s.alltid),
 })).filter((d) => d.saker.length > 0);
 ---
 {delar.length > 0 && (
@@ -65,7 +69,7 @@ const delar = DELAR.map((del) => ({
         <summary><h2 class="vr-rubrik">{del.namn}<span class="vr-antal" data-vr-antal>{` · ${del.saker.length}`}</span></h2></summary>
         <ul class="vr-lista">
           {del.saker.map((s) => (
-            <li data-metoder={s.metoder.join(' ')}>
+            <li data-metoder={s.metoder.join(' ')} data-vr-alltid={s.alltid ? '' : undefined}>
               <a class="vr-rad" href={s.c.adress} data-omrade={s.omrade} target={s.ny ? '_blank' : undefined} rel={s.ny ? 'noopener' : undefined} data-goatcounter-click={`${handelse}:${s.c.id}`} data-goatcounter-title={`${bank}: ${s.c.namn} ur rutan`}>
                 <span class="vr-namn">{s.c.namn}</span>
                 <span class="vr-meta">{s.text}</span>
@@ -93,7 +97,7 @@ const delar = DELAR.map((del) => ({
     const rader = Array.from(ruta.querySelectorAll<HTMLElement>('li[data-metoder]'));
     const uppdatera = () => {
       const synliga = new Set(Array.from(document.querySelectorAll<HTMLElement>('[data-metod]')).filter((k) => !k.hidden).map((k) => k.querySelector<HTMLInputElement>('input[name="valda"]')?.value));
-      for (const r of rader) r.hidden = !(r.dataset.metoder ?? '').split(' ').some((id) => synliga.has(id));
+      for (const r of rader) r.hidden = r.dataset.vrAlltid === undefined && !(r.dataset.metoder ?? '').split(' ').some((id) => synliga.has(id));
       for (const del of Array.from(ruta.querySelectorAll<HTMLElement>('[data-vr-del]'))) {
         const n = Array.from(del.querySelectorAll<HTMLElement>('li[data-metoder]')).filter((r) => !r.hidden).length;
         del.querySelector('[data-vr-antal]')!.textContent = ` · ${n}`;

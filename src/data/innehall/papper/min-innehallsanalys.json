@@ -1,0 +1,82 @@
+{
+ "design": "strategipapper",
+ "fil": "Innehall",
+ "titel": "Min innehållsanalys",
+ "undertitel": "Arbetsområde: ______________________________   Årskurs: ______   Veckor: ______",
+ "delar": [
+  {
+   "rubrik": "Fem frågor, och en sist",
+   "text": "Skriv kort. Det viktiga är det du ändrar i planeringen.",
+   "kolumner": [
+    "Frågan",
+    "Mitt svar",
+    "Det ändrar jag i planeringen"
+   ],
+   "bredder": [
+    32,
+    36,
+    32
+   ],
+   "namnrad": 16,
+   "rader": [
+    [
+     "1 · Vad öppnar innehållet?\nVad är det större som innehållet är ett exempel på? Vad ska eleverna förstå eller kunna efteråt?",
+     "\n\n\n\n\n",
+     ""
+    ],
+    [
+     "2 · Vad betyder det för eleverna?\nVad tror de i dag? Vem känner igen sig, och var möter de det igen?",
+     "\n\n\n\n\n",
+     ""
+    ],
+    [
+     "3 · Vad är nytt för dem?\nVad får de möta som de inte har varit med om? Vad får alla vara med om först?",
+     "\n\n\n\n\n",
+     ""
+    ],
+    [
+     "4 · Vilken fråga driver arbetet?\nKan en elev svara bra utan att ha lärt sig något? Skriv då om frågan.",
+     "\n\n\n\n\n",
+     ""
+    ],
+    [
+     "5 · Var blir det levande?\nEn människa, en händelse, en bok, ett föremål eller ett problem",
+     "\n\n\n\n\n",
+     ""
+    ],
+    [
+     "Sist · Vad tar du bort?\nDet som inte öppnar något",
+     "\n\n\n\n\n",
+     ""
+    ]
+   ]
+  },
+  {
+   "rubrik": "Till planeringen",
+   "text": "Det här hör till den planering du redan har. Se efter fyra saker och skriv två.",
+   "kolumner": [
+    "Saken",
+    "Så blir det"
+   ],
+   "bredder": [
+    32,
+    68
+   ],
+   "rader": [
+    [
+     "Står de fyra sakerna i den högra kolumnen?\nKryssa det som står där, och skriv dit det som saknas.",
+     "□ Klassen samlar delarna av svaret på ett ställe: på väggen, på en karta eller i en gemensam text.\n□ Slutuppgiften går inte att göra utan det klassen har lärt sig.\n□ Varje elev får säga eller skriva var innehållet finns i hens liv eller i världen utanför skolan.\n□ Varje vecka ger en bit av svaret på frågan som driver arbetet."
+    ],
+    [
+     "Märk och fråga\nnär jag ser efter om det träffar, och när jag frågar eleverna",
+     "\n\n"
+    ],
+    [
+     "Om det inte träffar\ndet gör jag då",
+     "\n\n"
+    ]
+   ]
+  }
+ ],
+ "kalla": "© Niclas Fohlin, niclasfohlin.se. Hör till verktyget Innehåll, där texten säger hur mallen används."
+}

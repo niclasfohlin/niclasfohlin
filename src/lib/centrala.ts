@@ -19,6 +19,7 @@ import sadd from '../data/sadd.json';
 import { sammaRubrik } from './film';
 import { fastaAntal, KNAPPENS_KLASS } from './standard/index.js';
 import { spannITexten } from './tackning';
+import { sasIMetoder } from './metodersadd';
 
 // Databasernas substantiv, som provet av fasta antal i registret letar efter (fastaAntal i standarden).
 const DATABASENS_ORD = ['problem', 'problemen', 'texter', 'texterna', 'lästexter', 'faktatexter', 'skrivkort', 'kort', 'korten', 'aktiviteter', 'aktivitetskort', 'brainbreaks'];
@@ -27,8 +28,11 @@ const DATABASENS_ORD = ['problem', 'problemen', 'texter', 'texterna', 'lästexte
  *  adress som Netlify leder till adress (netlify.toml) och som står i Word-filen. metod är metoden som saken hör till, när
  *  den inte är gemensam. del är rutans rubrik i metodbanken. mejl är det som följer på länken i mejlet om en ny metod.
  *  arskurs är årskurserna som en delad sak är gjord för, som F–9, när de är fler än metodernas som visar den: Utveckla
- *  högläsning stöder all högläsning i F–9 men sås bara där den stöder metodens kärna (Niclas 2026-10-20, såddprovet). */
-export type Central = { id: string; namn: string; knapp?: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string; arskurs?: string; omraden?: 'alla'; publicerad?: string; vav?: { etikett: string; liknar: string; liknarFler: string; passar: string; passarFler: string; text: string; rad: string } };
+ *  högläsning stöder all högläsning i F–9 men sås bara där den stöder metodens kärna (Niclas 2026-10-20, såddprovet). sas är
+ *  undervisningsmetoder för ett delat verktyg som bara sås i Metoder, som Innehåll (Niclas 2026-11-15: ”Denna är mer för
+ *  metoder. Så stödundervisning behöver den inte”): Stödundervisningens såddprov hoppar över det, och det räknas som visat
+ *  när det sås i Metoder (src/lib/metodersadd.ts). */
+export type Central = { id: string; namn: string; knapp?: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string; arskurs?: string; omraden?: 'alla'; publicerad?: string; sas?: 'undervisningsmetoder'; vav?: { etikett: string; liknar: string; liknarFler: string; passar: string; passarFler: string; text: string; rad: string } };
 // vav är standarden för ett delat verktyg som sajten väver in i metoderna (src/lib/vav.ts): etikett står över det som vävs
 // in, och liknar i stället när metoden inte nämner delen men eleverna arbetar i samma form; text står i rutan före verktygets
 // knapp, och rad står under kortraden med delarnas små kort och leder till verktyget.
@@ -56,6 +60,7 @@ export function registerFel(): string[] {
     if (!c.mejl?.trim()) fel.push(`${vem}: mejl är det som följer på länken i mejlet om en ny metod och saknas.`);
     if (c.omraden !== undefined && (c.omraden !== 'alla' || c.metod)) fel.push(`${vem}: omraden är "alla", för en delad sak som gäller alla områden, som verktyget Strukturer, och bara en delad sak (utan metod) har det.`);
     if (c.vav !== undefined && (c.slag !== 'sida' || c.metod || !c.vav.etikett?.trim() || ![c.vav.liknar, c.vav.liknarFler, c.vav.passar, c.vav.passarFler].every((x) => x?.trim()) || !c.vav.text?.trim() || !c.vav.rad?.includes(c.namn))) fel.push(`${vem}: vav är standarden för ett delat verktyg som vävs in i metoderna (src/lib/vav.ts), med etikett, liknar, text till rutan och en rad under kortraden som nämner ${c.namn ?? 'verktyget'}, så att raden leder dit.`);
+    if (c.sas !== undefined && (c.sas !== 'undervisningsmetoder' || c.metod || !c.vav)) fel.push(`${vem}: sas är "undervisningsmetoder" för ett delat verktyg som bara sås i Metoder, som Innehåll, och ett sådant har vav.`);
     if (c.arskurs !== undefined && (c.metod || !spannITexten(c.arskurs))) fel.push(`${vem}: arskurs är ett spann som "F–9" eller "åk 2–6", och bara en delad sak (utan metod) har det.`);
     // Registret säger inte hur stora databaserna är: talen står på sidorna, som räknar dem (METODER.md under Antalen, K-450).
     for (const t of fastaAntal(`${c.namn ?? ''} ${c.mejl ?? ''}`, DATABASENS_ORD, ['teman', 'kategorier'])) fel.push(`${vem}: "${t}" är ett fast antal av en databas poster och slutar stämma när databasen växer. Skriv utan antal.`);
@@ -181,7 +186,8 @@ export function provaCentrala(metoder: { id: string; data: MetodForText }[]): vo
       if (!m) return [`src/data/centrala.json: ${c.id} hör till ${c.metod}, som inte finns bland de publicerade metoderna.`];
       if (!m.data.centrala?.some((x) => x.id === c.id)) return [`${c.metod} visar inte sin centrala sak ${c.id}: lägg den i fältet centrala med sin plats i texten.`];
     }
-    if (!metoder.some((m) => m.data.centrala?.some((x) => x.id === c.id) || vavarSaken(c.id, m.id))) return [`src/data/centrala.json: ingen publicerad metod visar ${c.id}.`];
+    // Ett verktyg som sås i Metoder, som Innehåll, visas där (src/lib/metodersadd.ts).
+    if (!metoder.some((m) => m.data.centrala?.some((x) => x.id === c.id) || vavarSaken(c.id, m.id)) && !sasIMetoder(c.id)) return [`src/data/centrala.json: ingen publicerad metod visar ${c.id}.`];
     return [];
   });
   if (fel.length) throw new Error(`De centrala sakerna:\n${fel.join('\n')}`);

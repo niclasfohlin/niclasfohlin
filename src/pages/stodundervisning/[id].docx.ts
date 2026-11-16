@@ -2,7 +2,8 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { packaWord } from '../../lib/wordpaket';
 import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { matteproblemfiler, type Matteproblemfil } from '../../lib/matteproblem';
-import { centralaMedPapper } from '../../lib/centraladata';
+import { centralaMedPapper, laggTillPapper } from '../../lib/centraladata';
+import { innehalletsPapper, innehalletsPapperAv } from '../../lib/innehallsverktyg';
 import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, matteproblemDokument, metodDokument, passDokument, ramarDokument, sakDokument, stodmaterialDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
 import { bankAv, bankfiler } from '../../lib/bank';
@@ -60,7 +61,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const korten = (serie: string): Lektionskort[] => (serier.get(serie)?.lektioner ?? []).flatMap((l) => { const lektion = metoder.find((x) => x.id === l.id); return lektion ? metodensLektionskort(lektion.data, lektion.id) : []; });
   // Stödmaterialen (K-488): /stodundervisning/<id>.docx för varje central sak som är en pdf, som lasstrategier.
   const stodmaterialen = centralaMedPapper().map((id) => ({ params: { id }, props: { stodmaterial: id } }));
-  const alla = [...stodmaterialen, ...matteproblemens, ...metoder.flatMap((m) => {
+  // Verktyget Innehålls mallar och exempel (K-793): /stodundervisning/innehall-<id>.docx, ur riggens papper.
+  const innehallets = innehalletsPapper().map((f) => ({ params: { id: f.namn }, props: { innehallPapper: f.namn } }));
+  const alla = [...stodmaterialen, ...innehallets, ...matteproblemens, ...metoder.flatMap((m) => {
     const md = medDatabasen.get(m.id)!;
     const bank = bankAv(m.data);
     const databasen = md === m ? null : bankAv(md.data);
@@ -101,6 +104,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const GET: APIRoute = async ({ props }) => {
   if (props.stodmaterial) {
     const fil = await packaWord(await medReservbilder(() => stodmaterialDokument(props.stodmaterial as string)), 'nodebuffer');
+    return new Response(new Uint8Array(fil), { headers: { 'Content-Type': DOCX_TYP } });
+  }
+  if (props.innehallPapper) {
+    const papper = innehalletsPapperAv(props.innehallPapper as string);
+    if (!papper) throw new Error(`Innehåll: ${props.innehallPapper} har inget papper.`);
+    // Ritas som ett stödmaterial (stodmaterialDokument), med papperet lagt i centraladata.ts vid bygget.
+    laggTillPapper(props.innehallPapper as string, papper);
+    const fil = await packaWord(await medReservbilder(() => stodmaterialDokument(props.innehallPapper as string)), 'nodebuffer');
     return new Response(new Uint8Array(fil), { headers: { 'Content-Type': DOCX_TYP } });
   }
   const resurser = lasResurser([props.m]);

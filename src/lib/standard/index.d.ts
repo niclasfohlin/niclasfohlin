@@ -731,6 +731,7 @@ export declare const EGNA_SAKER: readonly string[];
 /** Raderna i rutan Ladda ner och skriv ut på en metods sida, lika i Stödundervisning och Metoder. */
 export declare const NEDLADDNINGENS_RADER: readonly string[];
 /** Knapparnas namn och färg: en blå knapp går till en sida eller ett verktyg, en vit öppnar en fil. */
+export declare const VANLIGA_VERKTYGSORD: readonly string[];
 export declare const KNAPPARNAS_NAMN: Readonly<{ larDig: string; planera: string; lathund: string; lektionskort: string; strukturer: string }>;
 export declare const KNAPPENS_KLASS: Readonly<{ sida: string; fil: string }>;
 /** Spannen av saker med nummer i en text, som "Bildserie 2–6". */

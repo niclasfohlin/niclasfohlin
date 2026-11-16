@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>Vad tänker du?</title>
+<!-- Innehåll, elevens blad för de äldre, 4–9, utkast 5 (2026-11-15). Niclas 2026-11-15: enkäten i tabellform ”kan inte
+     användas av riktiga elever”, och den ska prövas av kalla elever i rätt ålder. Bladet är ritat för eleven
+     (docs/elevmaterial.md): Andika, linjer att skriva på, frågan över sin yta, utan namn, och det Niclas bad om:
+     vad som fastnade, vad som grep tag och vad eleven vill veta mer om, och en skattning sist.
+     Två omgångar kalla elever har prövat bladet (out/material/innehall/prov2/elev-*.md och elev2-*.md), och det är de
+     två som en runda får (CLAUDE.md). Utkast 5 är lagat efter den andra: fråga 2 har en sak i sig, raderna överst säger
+     vad svaren används till och varför namnet inte ska stå, Du får också rita och raden Tack är strukna, eftersom
+     eleverna i årskurs 7–9 läste dem som ett blad för yngre, siffrorna står utan ring, Jag undrar står före sin linje,
+     frågorna har tre rader, och berätta för någon hemma är någon som inte var med.
+     Skattningen, Hur intressant var det?, är tillbaka (Niclas 2026-11-15: ”Jag gillade fråga 4 här också. En
+     skattning.”). I den första omgången kryssade alla fyra Ganska, det trygga svaret som ingen frågar om, så krysset
+     har fått raden Därför att. Ordet intressant skavde för en elev i årskurs 9 om Förintelsen, och lärarens text säger
+     vad läraren gör då.
+     Efter feedbackrundan (out/material/innehall/prov3/) har fråga 2 fått en rad som öppnar för känslan, eftersom
+     Niclas fråga i kärnan gäller elevernas tankar och känslor och tre läsare såg att inget blad frågade om den. Frågan
+     och Du behöver inte förklara står kvar. Raden är inte prövad av någon elev.
+     Lärarens text står i artikeln, material/innehall-verktyg.yaml, under 3. Fråga eleverna. Ritas med Chrome till pdf
+     (out/material/innehall-elevblad-v5/). Formen är riggens förslag och bestäms med sajten. -->
+<style>
+  @font-face { font-family: "Andika"; src: url("../typsnitt/Andika-Regular.ttf"); }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Andika", Arial, sans-serif; color: #1a1a1a; }
+  .sida { width: 210mm; height: 297mm; padding: 15mm 18mm 11mm; display: flex; flex-direction: column; }
+  h1 { font-size: 24pt; font-weight: normal; color: #1f5c99; margin: 0; line-height: 1.1; }
+  .under { font-size: 12pt; color: #444; margin-top: 2mm; line-height: 1.4; }
+  .omrade { margin-top: 5mm; border: 0.6mm solid #1f5c99; border-radius: 2mm; background: #ebf4fb; padding: 3mm 5mm; font-size: 14pt; color: #1f5c99; display: flex; align-items: flex-end; height: 15mm; }
+  .omrade span { flex: 1; border-bottom: 0.4mm solid #1f5c99; margin-left: 3mm; height: 7mm; }
+  .del { margin-top: 6.5mm; display: flex; align-items: baseline; }
+  .nr { flex: 0 0 9mm; font-size: 17pt; color: #1f5c99; }
+  .fraga { font-size: 15pt; line-height: 1.35; }
+  .hjalp { font-size: 12pt; color: #555; margin: 1mm 0 0 9mm; }
+  .linje { border-bottom: 0.4mm solid #999; height: 12mm; }
+  .start { display: flex; align-items: flex-end; height: 12mm; font-size: 14pt; }
+  .start span { flex: 1; border-bottom: 0.4mm solid #999; margin-left: 3mm; height: 100%; }
+  .kryss { display: flex; margin: 4mm 0 0 9mm; font-size: 14pt; }
+  .kryss div { display: flex; align-items: center; margin-right: 12mm; }
+  .kryss i { display: inline-block; width: 6.5mm; height: 6.5mm; border: 0.5mm solid #555; border-radius: 1mm; margin-right: 3mm; }
+  .fot { margin-top: auto; font-family: Arial, sans-serif; font-size: 8pt; color: #777; line-height: 1.35; }
+</style>
+</head>
+<body>
+<div class="sida">
+  <h1>Vad tänker du?</h1>
+  <div class="under">Jag läser svaren när jag planerar vad vi gör sedan. Jag bedömer inte det du skriver.<br>Skriv inte ditt namn. Då kan du skriva som du tänker.</div>
+  <div class="omrade">Det gäller<span></span></div>
+
+  <div class="del"><div class="nr">1</div><div class="fraga">Vad kommer du ihåg? Skriv det du skulle berätta för någon som inte var med.</div></div>
+  <div class="hjalp">Några ord räcker.</div>
+  <div class="linje"></div>
+  <div class="linje"></div>
+  <div class="linje"></div>
+
+  <div class="del"><div class="nr">2</div><div class="fraga">Är det något du har tänkt på efteråt?</div></div>
+  <div class="hjalp">Skriv vad. Det kan vara något som gjorde dig förvånad, glad, ledsen eller arg.<br>Du behöver inte förklara.</div>
+  <div class="linje"></div>
+  <div class="linje"></div>
+  <div class="linje"></div>
+
+  <div class="del"><div class="nr">3</div><div class="fraga">Skriv en fråga som du vill ha svar på.</div></div>
+  <div class="start">Jag undrar<span></span></div>
+  <div class="linje"></div>
+
+  <div class="del"><div class="nr">4</div><div class="fraga">Hur intressant var det?</div></div>
+  <div class="kryss"><div><i></i>Mycket</div><div><i></i>Ganska</div><div><i></i>Lite</div><div><i></i>Inte alls</div></div>
+  <div class="start">Därför att<span></span></div>
+
+  <div class="fot">Till läraren: skriv på raden Det gäller vad eleverna har varit med om, som ”lamporna vi kopplade”, innan du kopierar bladet. Samla in bladen i en hög med texten nedåt. Hör till verktyget Innehåll. © Niclas Fohlin, niclasfohlin.se</div>
+</div>
+</body>
+</html>

@@ -85,6 +85,8 @@ steg('strukturkort', 'node scripts/strukturer/kort.mjs --vid-behov');
 steg('strukturtopp', 'node scripts/strukturer/topplistan.mjs --vid-behov');
 // Strategikorten (K-699): som strukturkorten, när en strategi, en bild, en ikon eller kortets form har ändrats.
 steg('strategikort', 'node scripts/strategier/kort.mjs --vid-behov');
+// Elevernas blad i verktyget Innehåll (K-793): riggens html tryckt till pdf med Chrome när bladet har ändrats.
+steg('innehall-elevblad', 'node scripts/innehall/elevblad.mjs');
 // Minibilderna till metodens små kort (K-728), ur bladens sidbilder och korten ovan.
 steg('minibilder', 'node scripts/minibilder.mjs');
 
@@ -124,6 +126,17 @@ if (provNamn.length) {
 }
 
 steg('bankpdf', 'node scripts/bankpdf.mjs');
+// Verktyget Innehålls minibilder (K-793), ur pdf:erna som Word just gjorde och elevernas blad: en ny bild går till dist,
+// och länkarna till den får den nya versionen, utan ett nytt bygge.
+{
+  const fore = new Map(readdirSync(join(rot, 'public', 'innehall')).filter((f) => f.startsWith('minibild-')).map((f) => [f, createHash('sha256').update(readFileSync(join(rot, 'public', 'innehall', f))).digest('hex')]));
+  steg('innehall-minibilder', 'node scripts/innehall/minibilder.mjs');
+  const nya = readdirSync(join(rot, 'public', 'innehall')).filter((f) => f.startsWith('minibild-') && fore.get(f) !== createHash('sha256').update(readFileSync(join(rot, 'public', 'innehall', f))).digest('hex'));
+  if (nya.length && existsSync(join(dist, 'innehall'))) {
+    for (const f of nya) copyFileSync(join(rot, 'public', 'innehall', f), join(dist, 'innehall', f));
+    bytVersioner(dist, nya.map((f) => `/innehall/${f}`));
+  }
+}
 steg('pdfdelar', 'node scripts/pdfdelar.mjs');
 steg('pdfstorlek', 'python scripts/pdfstorlek.py');
 steg('paritet', 'node scripts/paritet.mjs');
@@ -132,6 +145,7 @@ steg('utskriftsformat', 'node scripts/utskriftsformat.mjs');
 steg('saklankprov', 'node scripts/saklankprov.mjs');
 steg('strukturprov', 'node scripts/strukturer/prov.mjs');
 steg('strategiprov', 'node scripts/strategier/prov.mjs');
+steg('innehallprov', 'node scripts/innehall/prov.mjs');
 steg('metoderprov', 'node scripts/metoderprov.mjs');
 steg('metoderparitet', 'node scripts/metoderparitet.mjs');
 steg('planprov', 'node scripts/planprov.mjs');

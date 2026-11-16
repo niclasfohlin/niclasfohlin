@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" role="img" aria-label="En uppslagen bok. Den vänstra sidan är en spegel där ett barn ser sig själv, och den högra är ett fönster mot berg, hav och en segelbåt.">
+  <!-- Verktyget Innehåll, bilden: boken som spegel och fönster, 900 × 560 och utan text, som sajten beställde
+       2026-11-15 natt (out/FRAN-SAJTEN.md, Innehåll, tillägget). Riggen har ritat den ur sajtens skiss, med färre och
+       större former, så att den går att läsa i 104 punkters bredd och i gråskala: spegeln med barnets ansikte till
+       vänster, fönstret med ett landskap barnet inte har sett till höger. Färgerna är konceptkartans bruna (#8a5a1e)
+       på en krämvit botten (#fbf3e4). -->
+  <defs>
+    <clipPath id="spegelglas"><ellipse cx="270" cy="296" rx="104" ry="126"/></clipPath>
+    <clipPath id="fonsterglas"><rect x="524" y="170" width="212" height="252" rx="8"/></clipPath>
+  </defs>
+  <rect width="900" height="560" fill="#fbf3e4"/>
+  <g transform="translate(0 -34)">
+  <!-- Skuggan och bokens pärmar -->
+  <ellipse cx="450" cy="508" rx="372" ry="24" fill="#ecdcbd"/>
+  <path d="M450 190C352 150 206 140 62 164V486C206 466 352 474 450 512Z" fill="#8a5a1e"/>
+  <path d="M450 190C548 150 694 140 838 164V486C694 466 548 474 450 512Z" fill="#8a5a1e"/>
+  <!-- De två sidorna -->
+  <path d="M450 172C356 128 212 116 82 138V464C212 444 356 452 450 492Z" fill="#fffdf7" stroke="#5c3b10" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M450 172C544 128 688 116 818 138V464C688 444 544 452 450 492Z" fill="#fffdf7" stroke="#5c3b10" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M450 174V490" stroke="#5c3b10" stroke-width="7"/>
+  <!-- Spegeln: barnet ser sig själv -->
+  <ellipse cx="270" cy="296" rx="104" ry="126" fill="#dcebf5"/>
+  <g clip-path="url(#spegelglas)">
+    <path d="M160 440C170 372 218 350 270 350S370 372 380 440Z" fill="#1f5c99"/>
+    <rect x="254" y="324" width="32" height="34" fill="#dea374"/>
+    <circle cx="270" cy="286" r="52" fill="#f2c49c"/>
+    <path d="M216 290C210 240 240 214 272 214C306 214 330 240 324 290C314 264 296 252 270 252C244 252 226 266 216 290Z" fill="#5c3b10"/>
+    <circle cx="251" cy="292" r="6" fill="#33210f"/>
+    <circle cx="289" cy="292" r="6" fill="#33210f"/>
+    <path d="M252 314Q270 330 288 314" fill="none" stroke="#33210f" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <ellipse cx="270" cy="296" rx="104" ry="126" fill="none" stroke="#8a5a1e" stroke-width="18"/>
+  <!-- Fönstret: ett landskap barnet inte har sett -->
+  <rect x="524" y="170" width="212" height="252" rx="8" fill="#cfe6f5"/>
+  <g clip-path="url(#fonsterglas)">
+    <circle cx="690" cy="222" r="26" fill="#f2c14e"/>
+    <path d="M524 330L586 232L630 296L668 250L736 340V422H524Z" fill="#7d9c84"/>
+    <path d="M586 232L604 260L590 270L574 262L568 260Z" fill="#ffffff"/>
+    <rect x="524" y="340" width="212" height="82" fill="#2e75b6"/>
+    <path d="M524 366Q552 356 580 366T636 366T692 366T748 366" fill="none" stroke="#cfe6f5" stroke-width="5"/>
+    <g transform="translate(46 0)">
+      <path d="M612 388H672L660 404H624Z" fill="#5c3b10"/>
+      <path d="M640 384V332L672 380Z" fill="#fffdf7"/>
+      <path d="M638 384V326" stroke="#5c3b10" stroke-width="4"/>
+    </g>
+  </g>
+  <rect x="524" y="170" width="212" height="252" rx="8" fill="none" stroke="#8a5a1e" stroke-width="14"/>
+  <path d="M630 170V422M524 300H736" stroke="#8a5a1e" stroke-width="9"/>
+  <rect x="508" y="416" width="244" height="18" rx="5" fill="#8a5a1e"/>
+  </g>
+</svg>
