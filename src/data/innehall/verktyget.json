@@ -6,7 +6,7 @@
   "fore": "Har du tio minuter? Ställ de fem frågorna till ditt nästa arbetsområde, och sist frågan om vad du tar bort.",
   "efter": [
    "Har du en halvtimme? Skriv svaren i mallen Min innehållsanalys.",
-   "Sedan märker du om innehållet träffar, gärna med en kollega och bladet Observationen. Eleverna frågar du med bladet Det här minns jag i förskoleklass till årskurs 3 och Vad tänker du? i årskurs 4–⁠9."
+   "Sedan är du uppmärksam på om innehållet träffar, gärna med en kollega och bladet Observationen. Eleverna frågar du med bladet Det här minns jag i förskoleklass till årskurs 3 och Vad tänker du? i årskurs 4–⁠9."
   ]
  },
  "fragor": [
@@ -14,49 +14,49 @@
    "id": "oppnar",
    "nr": "1",
    "fraga": "Vad öppnar innehållet?",
-   "kort": "Något större som det är ett exempel på.",
-   "text": "Ett innehåll är värt tiden när det är ett exempel på något större, en fråga eller en idé som eleverna kan ta med sig till annat. Skriv i en mening vad det större är, och vad eleverna ska förstå eller kunna efteråt som de inte kunde förut. Hittar du inget, har innehållet kanske kommit med för att det står i läroboken.",
-   "mall": "Vad är det större som innehållet är ett exempel på? Vad ska eleverna förstå eller kunna efteråt?"
+   "kort": "Den idé bakom innehållet som eleverna kan ta med sig till annat.",
+   "text": "Bakom ett innehåll som är värt tiden finns en idé som eleverna kan ta med sig till annat. För bråk kan idén vara att en del alltid är en del av något, och att helheten avgör hur stor delen blir. För klockan kan den vara att tiden går att mäta, så att vi vet hur länge något dröjer. Skriv idén i en mening, och vad eleverna ska förstå eller kunna efteråt som de inte kunde förut. Hittar du ingen idé, har innehållet kanske kommit med för att det står i läroboken.",
+   "mall": "Vilken idé bakom innehållet kan eleverna ta med sig till annat? Vad ska de förstå eller kunna efteråt?"
   },
   {
    "id": "betyder",
    "nr": "2",
    "fraga": "Vad betyder det för eleverna?",
-   "kort": "Det de tror i dag, och var de möter det igen.",
-   "text": "Det som är relevant för eleverna är mer än det de redan tycker om. Skriv vad du tror att eleverna tänker om innehållet i dag, också det som inte stämmer. Skriv vem som känner igen sig, och ett tillfälle då de möter det igen. Vad de själva tänker får du veta när du frågar dem.",
-   "mall": "Vad tror de i dag? Vem känner igen sig, och var möter de det igen?"
+   "kort": "Vad eleverna redan tror om det, och var i sina liv de möter det.",
+   "text": "Det som är relevant för eleverna är mer än det de redan tycker om. Skriv vad du tror att eleverna tänker om innehållet i dag, också det som inte stämmer. Skriv vem som känner igen sig, och var i sina liv eleverna möter innehållet. Vad de själva tänker får du veta när du frågar dem.",
+   "mall": "Vad tror de i dag? Vem känner igen sig, och var i sina liv möter de det?"
   },
   {
    "id": "nytt",
    "nr": "3",
    "fraga": "Vad är nytt för dem?",
-   "kort": "Det de inte har mött, och det alla får vara med om först.",
-   "text": "Skolan ger också det eleverna inte möter hemma: en erfarenhet, ett perspektiv eller en kunskap. Skriv vad som är nytt och vad alla får vara med om först.",
+   "kort": "Det de inte möter hemma, och en gemensam start för alla.",
+   "text": "Skolan ger också det eleverna inte möter hemma: en erfarenhet, ett perspektiv eller en kunskap. Skriv vad som är nytt, och vad alla får vara med om först, så att klassen får en gemensam start.",
    "mall": "Vad får de möta som de inte har varit med om? Vad får alla vara med om först?"
   },
   {
    "id": "driver",
    "nr": "4",
    "fraga": "Vilken fråga driver arbetet?",
-   "kort": "En fråga som klassen kan svara på när arbetet är slut, som ”Vad är mod när man är rädd?”",
-   "text": "I fråga 1 skrev du vad det större är. Gör det till en fråga som klassen arbetar med i varje lektion och kan svara på när arbetsområdet är slut. Pröva frågan. Kan en elev svara bra utan att ha lärt sig något under veckorna? Då är den för vag eller för lätt. Fyra exempel på sådana frågor står i tabellen efter frågorna.",
+   "kort": "En fråga som klassen arbetar med i varje lektion och kan svara på till sist, som ”Vad är mod när man är rädd?”",
+   "text": "I fråga 1 skrev du idén bakom innehållet. Gör den till en fråga som klassen arbetar med i varje lektion och kan svara på när arbetsområdet är slut. Pröva frågan. Kan en elev svara bra utan att ha lärt sig något under veckorna? Då är den för vag eller för lätt. Fyra exempel på en fråga som driver arbetet står i tabellen efter de fem frågorna.",
    "mall": "Kan en elev svara bra utan att ha lärt sig något? Skriv då om frågan."
   },
   {
    "id": "levande",
    "nr": "5",
    "fraga": "Var blir det levande?",
-   "kort": "En människa, en händelse, en bok, ett föremål eller ett problem.",
-   "text": "Det stora blir begripligt i det lilla: en människa, en händelse, en bok, ett föremål eller ett problem. Välj något där det stora syns. Det som fångar eleverna ska höra till det de ska lära sig, så att det inte blir ett sidospår.",
-   "mall": "En människa, en händelse, en bok, ett föremål eller ett problem"
+   "kort": "Något konkret där idén syns: en människa, en händelse, en bok, ett föremål eller ett problem.",
+   "text": "Eleverna förstår idén bakom innehållet när de möter den i något konkret: en människa, en händelse, en bok, ett föremål eller ett problem. Välj något där idén syns. Det som fångar eleverna ska höra till det de ska lära sig, så att det inte blir ett sidospår.",
+   "mall": "Något konkret där idén syns: en människa, en händelse, en bok, ett föremål eller ett problem"
   },
   {
    "id": "ta-bort",
    "nr": "Sist",
    "fraga": "Vad tar du bort?",
-   "kort": "Det som inte öppnar något.",
-   "text": "Det som är värt att lära behöver tid. Stryk det som inte öppnar något, så att det som är kvar får plats.",
-   "mall": "Det som inte öppnar något"
+   "kort": "Det som tar tid men inte leder fram till idén.",
+   "text": "Det som är värt att lära behöver tid. Stryk det som tar tid men inte leder fram till idén, så att det som är kvar får plats.",
+   "mall": "Det som tar tid men inte leder fram till idén"
   }
  ],
  "avsnitt": [
@@ -89,10 +89,10 @@
   },
   {
    "id": "karnan",
-   "rubrik": "Kärnan: tänk till, märk och fråga eleverna",
+   "rubrik": "Kärnan: tänk till, uppmärksamma och fråga eleverna",
    "block": [
     {
-     "stycke": "Arbetet med innehållet har tre delar. Inför arbetsområdet tänker du till om vad och varför. Under arbetet märker du om innehållet träffar rätt, alltså om det når eleverna och får dem att vilja förstå. Det hör och ser du på det de säger och gör. Det eleverna tänker och känner syns inte alltid, så du frågar dem om det i början av arbetet, och igen mitt i arbetet eller i slutet. Det de svarar ändrar nästa steg. Delarna gäller en hel klass lika väl som en liten grupp, och den lilla gruppen har ett eget avsnitt efter de tre delarna. Till varje del hör en mall som du, en kollega eller eleverna skriver i."
+     "stycke": "Arbetet med innehållet har tre delar. Inför arbetsområdet tänker du till om vad och varför. Under arbetet är du uppmärksam på om innehållet träffar rätt, alltså om det når eleverna och får dem att vilja förstå. Det hör och ser du på det de säger och gör. Det eleverna tänker och känner syns inte alltid, så du frågar dem om det i början av arbetet, och igen mitt i arbetet eller i slutet. Det de svarar ändrar nästa steg. Delarna gäller en hel klass lika väl som en liten grupp, och den lilla gruppen har ett eget avsnitt efter de tre delarna. Till varje del hör en mall som du, en kollega eller eleverna skriver i."
     }
    ]
   },
@@ -156,7 +156,7 @@
      }
     },
     {
-     "stycke": "Klockan, multiplikationstabellen och avkodningen är färdigheter som ska tränas, och frågorna gäller också dem. Fråga vad färdigheten öppnar, alltså vad eleven kan göra med den och inte kunde göra förut."
+     "stycke": "Klockan, multiplikationstabellen och avkodningen är färdigheter som ska tränas, och frågorna gäller också dem. Fråga vilken idé som finns bakom färdigheten, och vad eleven kan göra med den och inte kunde göra förut."
     },
     {
      "stycke": "Det du ändrar i din planering skriver du i den högra kolumnen i mallen Min innehållsanalys. Se sedan efter att fyra saker står i den kolumnen, och skriv dit det som saknas. Den första är att klassen samlar delarna av svaret på frågan på ett ställe: på väggen, på en karta eller i en gemensam text. Den andra är att slutuppgiften inte går att göra utan det klassen har lärt sig. Den tredje är att varje elev får säga eller skriva var innehållet finns i hens liv eller i världen utanför skolan. Den fjärde är att varje vecka ger en bit av svaret. Skriv sedan två saker till: när du frågar eleverna och ser efter om innehållet träffar, och vad du gör om det inte träffar."
@@ -176,13 +176,13 @@
   {
    "id": "mark",
    "del": 2,
-   "rubrik": "Märk: träffar innehållet rätt?",
+   "rubrik": "Uppmärksamma: träffar innehållet rätt?",
    "block": [
     {
      "stycke": "När innehållet träffar kan du se och höra fyra tecken i klassrummet. Tydligast är att eleverna frågar något om saken utan att du har bett dem. De kan säga vad de försöker ta reda på och varför det spelar roll. Alla kan säga något om det de har fått vara med om först. Och varje elev har själv sagt eller skrivit var innehållet finns i hens liv eller i världen utanför skolan."
     },
     {
-     "stycke": "Det här märker du själv, utan kollega. Fråga tre elever mitt i arbetet: ”Vad försöker du ta reda på nu, och varför?” Välj tre som kan olika mycket om innehållet innan ni börjar. Till de yngsta delar du frågan i två: ”Vad försöker du lista ut nu?” och ”Varför är det bra att veta?” Lyssna också efter hur eleverna förklarar saken med egna ord, eftersom ett innehåll kan gripa tag och ändå bli missförstått. Frågar eleverna mest hur uppgiften ska göras och nästan aldrig något om saken, se efter om det är innehållet som inte träffar eller uppgiften som är otydlig."
+     "stycke": "Det här kan du se och höra själv, utan kollega. Fråga tre elever mitt i arbetet: ”Vad försöker du ta reda på nu, och varför?” Välj tre som kan olika mycket om innehållet innan ni börjar. Till de yngsta delar du frågan i två: ”Vad försöker du lista ut nu?” och ”Varför är det bra att veta?” Lyssna också efter hur eleverna förklarar saken med egna ord, eftersom ett innehåll kan gripa tag och ändå bli missförstått. Frågar eleverna mest hur uppgiften ska göras och nästan aldrig något om saken, se efter om det är innehållet som inte träffar eller uppgiften som är otydlig."
     },
     {
      "stycke": "När innehållet inte träffar byter du vägen och behåller målet. Gå kort tillbaka till det alla fick vara med om först. Byt personen, händelsen eller problemet mot något som ligger närmare eleverna. Skriv frågan som driver arbetet där alla ser den, och gå tillbaka till den i varje lektion. Fråga eleverna vad de undrar, och låt en av deras frågor börja nästa lektion."
@@ -266,8 +266,8 @@
    "bredd": 650,
    "hojd": 2440
   },
-  "alt": "Konceptkarta över verktyget Innehåll. Läraren tänker till om innehållet innan arbetet börjar, märker under arbetet om innehållet träffar rätt och frågar eleverna i början och i slutet vad de tänker och känner.",
-  "text": "Kartan visar hela verktyget. De bruna pilarna är kärnan: du tänker till, märker och frågar, och det eleverna säger ändrar nästa steg. Du väljer metoden sist."
+  "alt": "Konceptkarta över verktyget Innehåll. Läraren tänker till om innehållet innan arbetet börjar, är under arbetet uppmärksam på om innehållet träffar rätt och frågar eleverna i början och i slutet vad de tänker och känner.",
+  "text": "Kartan visar hela verktyget. De bruna pilarna är kärnan: du tänker till, är uppmärksam och frågar, och det eleverna säger ändrar nästa steg. Du väljer metoden sist."
  },
  "forskning": {
   "rubrik": "Det forskningen säger",

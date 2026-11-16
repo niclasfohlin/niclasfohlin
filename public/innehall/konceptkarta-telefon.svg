@@ -9,7 +9,7 @@
        uppdrag (out/material/innehall/konceptkarta/uppdrag-telefon.md), och den stora kartan står kvar bakom Visa stort. -->
   <title id="titel">Innehåll: vad är värt att lära?</title>
   <desc id="beskrivning">
-    Läraren tänker till om innehållet före arbetet, märker under arbetet
+    Läraren tänker till om innehållet före arbetet, är under arbetet uppmärksam på
     om innehållet träffar eleven och frågar och lyssnar på elevens tankar
     och känslor i början och slutet. Innehållet öppnar en större fråga
     som driver arbetet, börjar för alla i det kända, griper tag i eleven
@@ -120,8 +120,8 @@
   <g text-anchor="middle" font-size="28" fill="#8a5a1e">
     <text x="325" y="267">tänker till om</text>
     <text x="450" y="1229">
-      <tspan x="450">märker om</tspan>
-      <tspan x="450" dy="34">innehållet</tspan>
+      <tspan x="450">är uppmärksam</tspan>
+      <tspan x="450" dy="34">på om innehållet</tspan>
       <tspan x="450" dy="34">träffar</tspan>
     </text>
     <text x="90" y="1370">

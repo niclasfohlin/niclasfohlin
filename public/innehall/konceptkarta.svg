@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 1050 1485" role="img" aria-labelledby="titel beskrivning" font-family="Arial, Helvetica, sans-serif" style="max-width:100%;height:auto">
   <title id="titel">Innehåll: vad är värt att lära?</title>
-  <desc id="beskrivning">Läraren tänker till om vad och varför före arbetet. Innehållet öppnar en större fråga som driver arbetet, börjar för alla i det kända, griper tag i eleven och leder till det nya. Under arbetet märker läraren om innehållet träffar eleven. I början och i slutet frågar läraren och lyssnar på elevens tankar och känslor. Eleven sätter ord på dem, och de ändrar nästa steg i innehållet. Läraren väljer metoden sist. Den hjälper eleven att förstå innehållet och skapa mening.</desc>
+  <desc id="beskrivning">Läraren tänker till om vad och varför före arbetet. Innehållet öppnar en större fråga som driver arbetet, börjar för alla i det kända, griper tag i eleven och leder till det nya. Under arbetet är läraren uppmärksam på om innehållet träffar eleven. I början och i slutet frågar läraren och lyssnar på elevens tankar och känslor. Eleven sätter ord på dem, och de ändrar nästa steg i innehållet. Läraren väljer metoden sist. Den hjälper eleven att förstå innehållet och skapa mening.</desc>
   <!-- Konceptkartan i verktyget Innehåll, utkast 4, 2026-11-15. Codex (gpt-6-astra) ritade utkast 1 och 2 efter riggens
        uppdrag och återkoppling. Riggen gjorde två ändringar i utkast 3: rutan Något större heter En större fråga, och
        pilen 3 går till Tankar och känslor i stället för till Eleven. Utkast 4 har fem ändringar efter granskningen
@@ -75,7 +75,7 @@
   <g text-anchor="middle" font-size="28" fill="#8a5a1e">
     <text x="525" y="375">tänker till om</text>
     <text x="835" y="439">
-      <tspan x="835" y="439">märker om</tspan>
+      <tspan x="835" y="439">är uppmärksam på om</tspan>
       <tspan x="835" y="473">innehållet träffar</tspan>
     </text>
     <text x="840" y="1048">
