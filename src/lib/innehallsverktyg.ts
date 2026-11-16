@@ -1,6 +1,6 @@
 // Verktyget Innehåll (K-793; Niclas 2026-11-15: ”en form av artikel med stödmallar”, och om sidan: ”snyggt, designat och
 // enkelt att förstå, läsa, hämta rätt mallar”). En artikel om didaktikens vad och varför, med fem frågor och en sist,
-// kärnans tre delar (Tänk till, Märk och Fråga eleverna) och fyra mallar. Riggen skriver texten och mallarna, och
+// kärnans tre delar (Tänk till, Uppmärksamma och Fråga eleverna; del 2 hette Märk till Niclas besked 2026-11-16) och fyra mallar. Riggen skriver texten och mallarna, och
 // scripts/innehall/intag.mjs tar in leveransen till src/data/innehall/. Formen valdes efter idéuppdrag till en Sonnet och
 // en Opus (underlag/prov/innehall/ide/): artikeln i antikvan med Börja här överst, mallarna som små kort som leder till sin
 // ruta i texten och knapparna i rutan, så att varje fil har en knapp.
@@ -47,9 +47,9 @@ export const fragansAnkare = (f: Fraga): string => `fraga-${f.nr.toLowerCase()}`
 /** Frågans nummer som det står i rutan: 1 till 5 och Sist. */
 export const fragansNr = (f: Fraga): string => f.nr;
 
-/** Kärnans tre delar, de avsnitt som har del, i ordning: Tänk till, Märk och Fråga eleverna. */
+/** Kärnans tre delar, de avsnitt som har del, i ordning: Tänk till, Uppmärksamma och Fråga eleverna. */
 export const karnansDelar = (): Avsnitt[] => INNEHALL.avsnitt.filter((a) => a.del !== undefined).sort((a, b) => (a.del ?? 0) - (b.del ?? 0));
-/** Delens korta namn, rubriken före kolon: ”Tänk till”, ”Märk”, ”Fråga eleverna”. */
+/** Delens korta namn, rubriken före kolon: ”Tänk till”, ”Uppmärksamma”, ”Fråga eleverna”. */
 export const delensNamn = (a: Avsnitt): string => a.rubrik.split(':')[0].trim();
 /** Delens text efter kolon, som står under namnet. */
 export const delensFraga = (a: Avsnitt): string => a.rubrik.split(':').slice(1).join(':').trim();
