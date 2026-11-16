@@ -325,6 +325,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Stödet för ett val, nivån, passets längd och antalet veckor | `nivavaletsFel`, `langdvaletsFel`, `veckovaletsFel` och `NIVAVALETS_LANGD` |
 | Metodens regel för beslutet efter insatsen | `utvarderingensFel` |
 | Passets längder att välja och förvalet, ur faktarutans spann | `passetsLangder` |
+| En serie: veckornas lektioner, när veckorna flyttas och när en veckas lektion byts, och beskedet efter bytet (K-803) | `rentaLektioner`, `lektionernaPaVeckorna`, `bytVeckansLektion` och `lektionsbytetsBesked` |
 | Metodens egna skattningar: fältet, reglerna, skalan, linjen, texten och lärarens länkar | `metodensSkattningar`, `SKATTNINGARNAS_VEM`, `tolkaRegel`, `regelnGaller`, `skalansSteg`, `stegetsNamn`, `stegetsSpann`, `skattningensGranser`, `iSkalan`, `linjen`, `skattningensText` och `rensadLank` |
 | Filnamnen på det som laddas ner | `filnamnet` |
 | Knapparnas namn för planen som fil | `PLANKNAPPAR` |

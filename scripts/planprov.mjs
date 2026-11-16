@@ -1488,6 +1488,25 @@ ska('en metod utan tid stoppas med besked', s.metodplan(utanTid).fel.some((x) =>
   const ljFram = s.lektionernaPaVeckorna(ljPlanFore, ljPlanEfter, [1, 3, 2]);
   const ljTillbaka = s.lektionernaPaVeckorna(ljPlanEfter, ljPlanFore, ljFram.lektioner, ljFram.minne);
   ska('lektionerna följer sina veckors måndagar när starten flyttas fram och tillbaka', JSON.stringify(ljFram.lektioner) === JSON.stringify([3, 2]) && JSON.stringify(ljTillbaka.lektioner) === JSON.stringify([1, 3, 2]) && s.rensaFoljd({ lektionPa: { '2026-10-05': 1, x: 2, '2026-10-12': 0 } }).lektionPa?.['2026-10-05'] === 1 && Object.keys(s.rensaFoljd({ lektionPa: { '2026-10-05': 1, x: 2, '2026-10-12': 0 } }).lektionPa).length === 1, [ljFram, ljTillbaka.lektioner]);
+  // Bytet av en veckas lektion (K-803; Niclas 2026-11-16: "varje vecka ska alltid skattas, och om man byter lektion ska nya
+  // skattningen gälla den lektionen"): lektionen byts, veckans skattning står kvar, och sammanställningen läser den mot den
+  // nya lektionen. Förut togs skattningen bort vid bytet.
+  const byte1 = s.bytVeckansLektion([1, 3, 2], 2, 4, { a: 4, b: 2 });
+  const byte2 = s.bytVeckansLektion([1, 3, 2], 2, 3, { a: 4 });
+  const byte3 = s.bytVeckansLektion([1], 3, 2, undefined);
+  const byte4 = s.bytVeckansLektion([1, 3], 2, 4, {});
+  const ljLektionerna = (nrs) => ljPlanFore.veckor.map((v) => (nrs[v.nr - 1] ? { namn: `Lektion ${nrs[v.nr - 1]}`, mal: 'Målet' } : null));
+  const ljSkattad = { gjorda: [], skattning: { [ljPlanFore.veckor[1].mandag]: { a: 4 } }, vecka: {}, franvaro: {}, elever: [{ id: 'a', namn: 'Ada' }] };
+  const ljEfterBytet = s.sammanstallning(ljPlanFore, ljSkattad, '2026-12-31', ljLektionerna(byte1.lektioner)).elever[0].skattningar;
+  ska('bytet av en veckas lektion: lektionen byts, skattningen står kvar och gäller den nya lektionen i sammanställningen, och beskedet säger det',
+    byte1.lektioner.join() === '1,4,2' && byte1.bytt && byte1.skattad
+    && !byte2.bytt && !byte2.skattad && byte2.lektioner.join() === '1,3,2'
+    && byte3.lektioner.join() === '1,0,2' && byte3.bytt && !byte3.skattad
+    && byte4.bytt && !byte4.skattad
+    && s.bytVeckansLektion([1, 3], 2, 0, { a: 3 }).lektioner.join() === '1'
+    && ljEfterBytet.length === 1 && ljEfterBytet[0].varde === 4 && ljEfterBytet[0].lektion === 'Lektion 4'
+    && s.lektionsbytetsBesked('Vecka 2', 'Räkna ljud', true) === 'Vecka 2 tar Räkna ljud. Veckans skattning står kvar och gäller nu den här lektionen. Ändra den om någon ligger annorlunda mot lektionens mål.'
+    && s.lektionsbytetsBesked('Vecka 2', 'Räkna ljud', false) === 'Vecka 2 tar Räkna ljud.', { byte1, ljEfterBytet });
   ska('två versioner som bara skiljer i en ordfog har samma namn', s.versionsvaletsFel({ plan: { versionsval: { rubrik: 'Årskurs', text: 'Välj årskurs efter eleverna i gruppen, så som metoden säger.', mer: 'X', versioner: [{ namn: 'Åk 4–5' }, { namn: 'Åk 4–⁠5' }] } } }).length > 0);
   // Eleverna först i varje händelse, när läraren har skrivit in dem, och en elev som kom senare från sin dag (Niclas
   // 2026-10-27).
@@ -3571,7 +3590,10 @@ try {
       const ics = String(await lj('window.__fil') ?? '').replace(/\r\n /g, '').replace(/\\,/g, ',');
       const faser = lektion4.tidsschema.rader.filter((r) => /^\d/.test(r.tid)).map((r) => r.fas);
       sant('Ljudlek: kalendern har veckans lektion i passen', faser.length > 0 && faser.every((f) => ics.includes(f)), { faser, ics: ics.slice(0, 600) });
-      // Byts veckans lektion tas veckans skattning bort, och Ångra tar tillbaka den (Codex 2026-10-27).
+      // Byts veckans lektion står veckans skattning kvar och gäller den nya lektionen, i veckan och i förslaget, och Ångra tar
+      // tillbaka den förra lektionen (K-803; Niclas 2026-11-16: "varje vecka ska alltid skattas, och om man byter lektion ska
+      // nya skattningen gälla den lektionen"). Förut togs skattningen bort (Codex 2026-10-27), och provet krävde det: att
+      // Snittet saknades efter bytet. Provet åt andra hållet är det gamla provet, som gick grönt med borttagningen.
       await lj("(() => { document.querySelectorAll('#pl-veckan details.pl-lektionsval').forEach((d) => { d.open = true; }); return true; })()");
       await b.tryck('#pl-veckan [data-valj-lektion="3|6"]');
       await vanta(250);
@@ -3579,7 +3601,7 @@ try {
       await b.tryck('#pl-toast [data-toast-gor]');
       await vanta(250);
       const tillbaka = await lj(`(() => ({ efter: document.querySelector('#pl-veckan .pl-lektionen-efter')?.textContent ?? '', hash: location.hash }))()`);
-      sant('Ljudlek: ett lektionsbyte tar bort veckans skattning, och Ångra tar tillbaka den', bytt.toast.includes('Vecka 3 tar Räkna ljud. Veckans skattning gällde den förra lektionens mål och är borttagen.') && !bytt.efter.includes('Snittet') && bytt.hash.includes('k=3.0.6.5') && tillbaka.efter.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && tillbaka.hash.includes('k=3.0.4.5'), { bytt, tillbaka });
+      sant('Ljudlek: ett lektionsbyte behåller veckans skattning mot den nya lektionen, och Ångra tar tillbaka den förra lektionen', bytt.toast.includes(s.lektionsbytetsBesked('Vecka 3', 'Räkna ljud', true)) && bytt.efter.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && bytt.efter.includes('Räkna ljud:') && bytt.hash.includes('k=3.0.6.5') && tillbaka.efter.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && !tillbaka.efter.includes('Räkna ljud:') && tillbaka.hash.includes('k=3.0.4.5'), { bytt, tillbaka });
       await lj(`document.getElementById('pl-folj').click()`);
       await vanta(150);
     }

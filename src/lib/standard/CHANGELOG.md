@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.66.0, 2026-11-16
+
+- `plan.js` (sajtens K-803; Niclas 2026-11-16: "varje vecka ska alltid skattas, och om man byter lektion ska nya skattningen gälla den lektionen"): `bytVeckansLektion(lektioner, vecka, nr, veckansSkattning)`, bytet av en veckas lektion i en serie. Lektionen byts, och veckans skattning står kvar och gäller den nya lektionen; svaret säger om veckan var skattad. `lektionsbytetsBesked(veckan, lektionen, skattad)` är beskedet efter bytet. Förut tog sajten bort veckans skattning vid bytet. `PLANERA` har versionen 0.10.2.
+
 ## 0.65.0, 2026-11-15
 
 - `saker.js` (sajtens K-793, verktyget Innehåll; Codex 2026-11-15): `VANLIGA_VERKTYGSORD`, verktygens namn som också är vanliga ord, Strategier, Strukturer och Innehåll. Först i en mening är de ingen hänvisning till verktyget, så ”Innehåll som går att använda …” blir ingen länk. Listan stod förut två gånger på sajten, i länkningen och i metodernas prov, och står nu här.

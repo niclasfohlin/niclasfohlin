@@ -211,6 +211,8 @@ export declare const vidareTillLektion: (vidare: string, sista?: boolean) => str
 export declare function lektionsvaletsFel(d: { plan?: { lektionsval?: { text?: string; ingangar?: { lektion: number; namn: string }[] } }; vidare?: string }): string[];
 export declare function lektionensForslag(varden: number[], veckor?: { min: number; max: number }, gangen?: number): { forslag: 'nasta' | 'upprepa' | null; snitt: number | null; forKort: boolean };
 export declare function rentaLektioner(lektioner: unknown): number[];
+export declare function bytVeckansLektion(lektioner: unknown, vecka: number, nr: number, veckansSkattning: Record<string, unknown> | undefined): { lektioner: number[]; bytt: boolean; skattad: boolean };
+export declare const lektionsbytetsBesked: (veckan: string, lektionen: string, skattad: boolean) => string;
 /** Passets längder att välja i planen och förvalet, ur faktarutans spann: ändarna när spannet är högst tio minuter, annars steg om tio minuter med steget i mitten som förval. */
 export declare function passetsLangder(m: { min: number; max: number }): { langder: number[]; forval: number };
 /** Stödet för passets längd: en metod vars faktaruta säger ett spann har plan.langdval, som nivaval. */

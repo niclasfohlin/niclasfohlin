@@ -24,7 +24,7 @@ import {
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
-import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, rentaLektioner, vidareTillLektion } from '../lib/standard/index.js';
+import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, vidareTillLektion, bytVeckansLektion, lektionsbytetsBesked } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
 import { filenErsatterNyare, filensFraga, flikensPlan, planensInnehall, vidAndraFlikar, vidNyttDygn, OPPNAD_UR_FILEN, oppnaPaSinSida, idagLokalt, KOPIANS_GRANS, kopiansAlder, kopiansText, planenUrFaltet, SAMLINGENS_ORD, sparadPlan, skrivPlanen, statusAv, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, NYARE_VERSION, nyttId, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, type SparadPlan } from './insatser-lagring';
 import { tidrad } from './tidrad';
@@ -509,12 +509,13 @@ for (const b of versionsknappar) b.addEventListener('click', () => {
   if (!vv || !v || harFortIn()) return;
   andra(() => { aktiv.val.version = v.slug === vv.versioner[0].slug ? undefined : v.slug; if (v.veckor) aktiv.val.langd = v.veckor; }, `${vv.rubrik}: ${v.namn}.`, true);
 });
-// Ingången byter vecka 1:s lektion som veckans val gör: en skattning som gällde den förra lektionen tas bort med besked och
-// Ångra (Codex 2026-10-27).
+// Ingången byter vecka 1:s lektion som veckans val gör, med samma besked och Ångra: veckans skattning står kvar och gäller
+// den nya lektionen (K-803, bytVeckansLektion i standarden).
 for (const b of ingangsknappar) b.addEventListener('click', () => {
-  let bort: ReturnType<typeof valjLektion> = false;
+  let byte: ReturnType<typeof valjLektion> | undefined;
   const nr = Number(b.dataset.ingang);
-  andra(() => { bort = valjLektion(1, nr); }, () => (bort ? `Vecka 1 tar ${lektionen(nr)?.namn ?? ''}. Veckans skattning gällde ${bort === 'lektion' ? 'den förra lektionens mål' : 'målet för hela serien'} och är borttagen.` : undefined), true);
+  const l = lektionen(nr), pv = plan.veckor[0];
+  andra(() => { byte = valjLektion(1, nr); }, () => (l && pv && byte?.bytt ? lektionsbytetsBesked(rubrikVecka(pv), l.namn, byte.skattad) : undefined), true);
 });
 // Börja på: en stege, som läslistorna, börjar där gruppen är, och planen får de steg som är kvar (de kalla testarna
 // 2026-10-24: alla började på Läslista start).
@@ -1658,21 +1659,15 @@ const nastaLektion = (nr: number) => serien?.lektioner!.find((l) => l.nr > nr);
 const veckansLektion = (v: PlanVecka) => (aktiv.val.lektioner ?? [])[v.nr - 1] ?? 0;
 // Veckornas lektioner med namn och mål till sammanställningen, som jämför skattningar bara mot samma lektions mål.
 const veckornasLektioner = () => (serien ? plan.veckor.map((v) => { const l = lektionen(veckansLektion(v)); return l ? { namn: l.namn, mal: l.mal } : null; }) : undefined);
-// Byts en veckas lektion tas veckans skattning bort, eftersom den gällde den förra lektionens mål eller seriens, och Ångra tar
-// tillbaka den (Codex 2026-10-27: skattningen av Bokstavsgympa stod kvar mot Räkna ljuds mål och styrde förslaget). Svaret
-// säger vilket mål skattningen som togs bort gällde, eller false.
-function valjLektion(vecka: number, nr: number): 'lektion' | 'serien' | false {
-  const k = [...(aktiv.val.lektioner ?? [])];
-  while (k.length < vecka) k.push(0);
-  const forra = k[vecka - 1];
-  k[vecka - 1] = nr;
-  aktiv.val.lektioner = rentaLektioner(k);
+// Byts en veckas lektion står veckans skattning kvar och gäller den nya lektionen (K-803; Niclas 2026-11-16: "varje vecka ska
+// alltid skattas, och om man byter lektion ska nya skattningen gälla den lektionen"). Regeln står i standarden
+// (bytVeckansLektion), och svaret säger om veckan var skattad, så att beskedet ber läraren se över skattningen. Förut togs den
+// bort (Codex 2026-10-27), och en lärare som valde lektion i en skattad vecka tappade veckans skattningar.
+function valjLektion(vecka: number, nr: number): { bytt: boolean; skattad: boolean } {
   const pv = plan.veckor[vecka - 1];
-  if (forra === nr || !pv || !Object.keys(aktiv.foljd.skattning[pv.mandag] ?? {}).length) return false;
-  const kvar = { ...aktiv.foljd.skattning };
-  delete kvar[pv.mandag];
-  aktiv.foljd.skattning = kvar;
-  return forra ? 'lektion' : 'serien';
+  const byte = bytVeckansLektion(aktiv.val.lektioner ?? [], vecka, nr, pv ? aktiv.foljd.skattning[pv.mandag] : undefined);
+  aktiv.val.lektioner = byte.lektioner;
+  return { bytt: byte.bytt, skattad: byte.skattad };
 }
 // Det som ritas med lektionens innehåll: passet, målet, checklistan, principerna och lektionens saker, så att modulens
 // vanliga delar visar lektionen. Seriens uppföljning, veckor och filer står kvar. Det som var förut kommer tillbaka efteråt.
@@ -2260,8 +2255,8 @@ $('pl-veckan').addEventListener('click', (e) => {
   if (d.valjLektion) {
     const [vecka, nr] = d.valjLektion.split('|').map(Number);
     const l = lektionen(nr), pv = plan.veckor[vecka - 1];
-    let bort: ReturnType<typeof valjLektion> = false;
-    andra(() => { bort = valjLektion(vecka, nr); }, () => (l && pv ? `${rubrikVecka(pv)} tar ${l.namn}.${bort ? ` Veckans skattning gällde ${bort === 'lektion' ? 'den förra lektionens mål' : 'målet för hela serien'} och är borttagen.` : ''}` : undefined), true);
+    let byte: ReturnType<typeof valjLektion> | undefined;
+    andra(() => { byte = valjLektion(vecka, nr); }, () => (l && pv ? lektionsbytetsBesked(rubrikVecka(pv), l.namn, !!byte?.skattad) : undefined), true);
     return;
   }
   if (d.valjNiva) {

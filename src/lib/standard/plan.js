@@ -2129,7 +2129,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.10.1', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.10.2', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -3384,6 +3384,38 @@ export function rentaLektioner(lektioner) {
   while (ut.length && !ut[ut.length - 1]) ut.pop();
   return ut;
 }
+
+/**
+ * Bytet av en veckas lektion i en serie (sajtens K-803; Niclas 2026-11-16: "varje vecka ska alltid skattas, och om man
+ * byter lektion ska nya skattningen gälla den lektionen"). Veckans lektion byts, och veckans skattning står kvar och gäller
+ * den nya lektionen: skattningen är sparad på veckans måndag och lektionen på veckans nummer, så sammanställningen och
+ * planens förslag läser den mot den lektion som veckan har nu. Förut togs skattningen bort vid bytet (Codex 2026-10-27), och
+ * en lärare som valde lektion i en vecka som redan var skattad tappade veckans skattningar. skattad säger om veckan hade en
+ * skattning när lektionen byttes, så att beskedet ber läraren se över den mot den nya lektionens mål.
+ * @param {unknown} lektioner veckornas lektioner före bytet
+ * @param {number} vecka veckans nummer i planen, från 1
+ * @param {number} nr den nya lektionens nummer, eller 0
+ * @param {Record<string, unknown> | undefined} veckansSkattning veckans skattningar, efter elev eller för gruppen
+ * @returns {{ lektioner: number[], bytt: boolean, skattad: boolean }}
+ */
+export function bytVeckansLektion(lektioner, vecka, nr, veckansSkattning) {
+  const k = rentaLektioner(lektioner);
+  while (k.length < vecka) k.push(0);
+  const bytt = k[vecka - 1] !== nr;
+  k[vecka - 1] = nr;
+  const skattad = bytt && Object.values(veckansSkattning ?? {}).some((x) => typeof x === 'number');
+  return { lektioner: rentaLektioner(k), bytt, skattad };
+}
+
+/**
+ * Beskedet efter bytet av en veckas lektion (bytVeckansLektion): veckan och lektionen, och när veckan var skattad att
+ * skattningen står kvar och gäller lektionen nu, så att läraren ser över den mot lektionens mål.
+ * @param {string} veckan veckans namn, som "Vecka 3"
+ * @param {string} lektionen lektionens namn
+ * @param {boolean} skattad
+ * @returns {string}
+ */
+export const lektionsbytetsBesked = (veckan, lektionen, skattad) => `${veckan} tar ${lektionen}.${skattad ? ' Veckans skattning står kvar och gäller nu den här lektionen. Ändra den om någon ligger annorlunda mot lektionens mål.' : ''}`;
 
 /**
  * Valen som länk: allt som avgör planen, lärarens eget mål när det finns och planens id, men aldrig gruppens eller
