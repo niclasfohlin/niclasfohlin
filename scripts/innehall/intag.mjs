@@ -81,6 +81,8 @@ for (const e of exempel) {
   // Exemplets frågor är artikelns, i samma ordning, så att ett exempel inte står kvar med en gammal fråga (Codex 2026-11-15).
   const exempletsFragor = (p.delar?.[0]?.rader ?? []).map((r) => r[0]);
   fragor.forEach((f, i) => { if (exempletsFragor[i] !== `${f.nr} · ${f.fraga}`) fel.push(`${e.fil}, rad ${i + 1}: står ”${exempletsFragor[i]}” och ska vara ”${f.nr} · ${f.fraga}” ur fragor`); });
+  // Och inga rader till: en fråga för mycket i exemplet gick förut igenom (Codex 2026-11-16).
+  if (exempletsFragor.length !== fragor.length) fel.push(`${e.fil}: frågetabellen har ${exempletsFragor.length} rader och ska ha ${fragor.length}, en per fråga ur fragor`);
   papper.set(e.id, p);
 }
 
@@ -93,6 +95,7 @@ else {
     const vantad = `${f.nr} · ${f.fraga}\n${f.mall}`;
     if (rader[i]?.[0] !== vantad) fel.push(`Min innehållsanalys, rad ${i + 1}: står ”${String(rader[i]?.[0]).replace(/\n/g, ' / ')}” och ska vara ”${vantad.replace(/\n/g, ' / ')}” ur fragor`);
   });
+  if (rader.length !== fragor.length) fel.push(`Min innehållsanalys: frågetabellen har ${rader.length} rader och ska ha ${fragor.length}, en per fråga ur fragor`);
 }
 
 // Avsnitten: id, rubrik och block i ordning. Frågorna står en gång, och varje mall som en ruta pekar på finns.

@@ -145,7 +145,7 @@ export function larDigData(id: string, d: Um): LarDigData {
       fragor: INNEHALL.fragor.map((f) => ({ nr: f.nr, fraga: f.fraga, kort: f.kort, adress: `${INNEHALLETS_ADRESS}#${fragansAnkare(f)}` })),
       adress: `${INNEHALLETS_ADRESS}#borja-har`,
       namn: INNEHALL.titel,
-      rad: `${INNEHALL.underrubrik} Artikeln, mallarna och exemplen.`,
+      rad: `${INNEHALL.underrubrik} De fem frågorna, mallarna och exemplen.`,
       // Bilden ritas av skriptet ur datan, så adressen bär filens version här (Codex 2026-11-15).
       bild: kortensVersion(INNEHALLETS_BILD),
       stil: INNEHALLETS_STIL,

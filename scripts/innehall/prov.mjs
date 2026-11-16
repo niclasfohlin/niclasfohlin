@@ -12,6 +12,8 @@ const ROT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const DIST = join(ROT, 'dist');
 const fel = [];
 const html = (sida) => { const f = join(DIST, sida, 'index.html'); return existsSync(f) ? readFileSync(f, 'utf8') : null; };
+// Texten i ett stycke html som läsaren ser den: utan taggar, med tecknen avkodade och ett mellanslag mellan orden.
+const textAv = (h) => h.replace(/<[^>]+>/g, '').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
 const v = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'innehall', 'verktyget.json'), 'utf8'));
 const register = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'innehall-i-metoder.json'), 'utf8'));
 // Riggens förslag, som meningarna läses ur (src/lib/metodersadd.ts): en ny plats i ett förslag prövas av sajten innan den gäller.
@@ -39,6 +41,15 @@ else {
     if (!filer.some(([, f]) => f === `/innehall/minibild-${m.id}.webp`)) fel.push(`/innehall visar inte bladet ${m.namn} som minibild`);
   }
   for (const e of v.exempel) if (!filer.some(([, f]) => f === `/stodundervisning/innehall-${e.id}.pdf`)) fel.push(`/innehall har ingen knapp till exemplet ${e.titel}`);
+  // Exemplen visar mallen ifylld på sidan, ur samma papper som pdf:en (de kalla testarna 2026-11-16: svaren stod bara i
+  // pdf:en): varje rad i exemplets delar står på sidan.
+  const sidansText = textAv(sidan);
+  for (const e of v.exempel) {
+    const p = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'innehall', 'papper', `${e.id}.json`), 'utf8'));
+    for (const d of p.delar ?? []) for (const r of d.rader) for (const c of r) for (const rad of String(c).split('\n').map((x) => x.replace(/\s+/g, ' ').trim()).filter(Boolean)) {
+      if (!sidansText.includes(rad)) fel.push(`/innehall visar inte hela exemplet ${e.titel}: ”${rad.slice(0, 60)}” i ${d.rubrik} saknas`);
+    }
+  }
   if (/utkast/i.test(sidan.replace(/<script[\s\S]*?<\/script>/g, ''))) fel.push('/innehall har ordet utkast');
 }
 
@@ -64,7 +75,8 @@ for (const m of metoderna) {
   for (const p of r.platser ?? []) {
     if (!f?.mening) { fel.push(`${m}: riggens leverans har ingen mening till kortet (src/data/innehall/sadd-forslag.json)`); continue; }
     if (f.plats !== p.efter) fel.push(`${m}: riggen föreslår platsen ${f.plats}, och src/data/innehall-i-metoder.json har ${p.efter}; pröva riggens plats mot metoden och skriv in den`);
-    if (!rutor.some((x) => x.includes(f.mening.replace(/&/g, '&amp;').slice(0, 40)))) fel.push(`${m}: kortet till Innehåll saknar meningen ”${f.mening.slice(0, 50)}…”`);
+    // Hela meningen, i kortets text utan taggar: förut prövades bara de första 40 tecknen, och ett avklippt kort gick igenom (Codex 2026-11-16).
+    if (!rutor.some((x) => textAv(x).includes(f.mening.replace(/\s+/g, ' ')))) fel.push(`${m}: kortet till Innehåll saknar meningen ”${f.mening}” hel`);
   }
   kort += rutor.length;
   const larDig = html(join('metoder', m, 'lar-dig'));
