@@ -1,5 +1,5 @@
 {
-  "datum": "2026-11-15T07:45:24.236Z",
+  "datum": "2026-11-16T05:15:33.393Z",
   "strukturer": [
     {
       "id": "turas-om",
@@ -26,16 +26,16 @@
       "utskrifter": 6
     },
     {
-      "id": "5-3-1",
-      "antal": 40,
-      "besok": 15,
-      "utskrifter": 5
+      "id": "kloka-pennan",
+      "antal": 47,
+      "besok": 27,
+      "utskrifter": 4
     },
     {
-      "id": "kloka-pennan",
-      "antal": 40,
-      "besok": 25,
-      "utskrifter": 3
+      "id": "5-3-1",
+      "antal": 41,
+      "besok": 16,
+      "utskrifter": 5
     },
     {
       "id": "epa",
@@ -362,6 +362,12 @@
       "utskrifter": 0
     },
     {
+      "id": "parrespons",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
       "id": "speed-dating",
       "antal": 2,
       "besok": 2,
@@ -369,6 +375,12 @@
     },
     {
       "id": "trestegsintervju",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "vi-jamfor",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -399,12 +411,6 @@
     },
     {
       "id": "mina-ord-dina-ord",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "parrespons",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
@@ -459,12 +465,6 @@
     },
     {
       "id": "vandrande-reportern",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "vi-jamfor",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
