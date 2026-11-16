@@ -24,15 +24,15 @@ material:
   - Fyrfältaren till varje grupp
   - Mina anteckningar
   - post-it-lappar
-uppdaterad: 2026-11-14
+uppdaterad: 2026-11-15
 publicerad: 2026-11-14
 relaterade: ["problemlosning-i-grupp", "kooperativt-larande", "explicit-undervisning"]
 utkast: false
 film:
-  sekunder: 26.79
-  beskrivning: "Var och en drar ett kort ur kortleken. Läraren säger: ”Samma valör är en grupp, och valören är er tavla.” Grupperna skriver rutans nummer överst. Läraren går grupp för grupp. Läraren frågar: ”Vad lärde ruta 3 er?” En elev i grupp 7 säger: ”Fyra till för varje bord.” Läraren har märkt tavlorna med A, B och C. Klassen samlas vid A. Läraren säger: ”Ni andra ska försöka förstå förklaringen.”"
-  rubrik: "Grupperna tänker vid tavlan, och läraren viker upp ruta 4"
-  ingress: "Filmen visar lektion 3 i matematik i åk 6, med problemet Borden. Läraren lottar grupperna med en kortlek, grupperna skriver vid tavlorna, och läraren viker upp ruta 4 grupp för grupp."
+  sekunder: 26.97
+  beskrivning: "Var och en drar ett kort ur kortleken. Läraren säger: ”Samma valör är en grupp, och valören är er tavla.” Grupperna skriver rutans nummer överst. Läraren går grupp för grupp. Läraren frågar: ”Vad lärde ni er i ruta 3?” En elev i grupp 7 säger: ”Fyra till för varje bord.” Läraren har märkt tavlorna med A, B och C. Klassen samlas vid A. Läraren säger: ”Ni andra ska försöka förstå förklaringen.”"
+  rubrik: "Grupperna tänker vid tavlan, och läraren går grupp för grupp"
+  ingress: "Filmen visar lektion 3 i matematik i åk 6, med problemet Borden. Läraren lottar grupperna med en kortlek, och grupperna löser uppgifterna på sitt papper vid tavlorna, ruta för ruta. Problemet står i ruta 4, som läraren viker upp för en grupp i taget."
   stillbilder:
     - text: "Klassen står runt läraren och drar var sitt kort."
     - text: "Numret överst visar var varje grupp är."
@@ -100,8 +100,9 @@ kallor:
 # 1 Metoden
 # ---------------------------------------------------------------------------------------------------------------------
 inledning:
-  - "Tänkande klassrum är ett sätt att undervisa där eleverna tänker sig fram själva i ämnet, i stället för att göra efter det du just har visat. Klassen löser uppgifter stående i lottade grupper om tre, vid tavlor som går att sudda. Uppgifterna har stegrande svårighetsgrad, på engelska thin slicing: den första uppgiften är något alla kan, varje ny uppgift ändrar en sak, och uppgifterna leder fram till problemet. Att göra en sådan följd ur ett problem kallas att skiva det. Grupperna prövar svaret och tar nästa uppgift själva, och du ger dem problemet, en ledtråd eller en utvidgning, grupp för grupp. Sist samlar ni i en konsolidering den idé grupperna kom fram till. Klassen går från tavlan som alla kan förstå till tavlan som kom längst, och sedan skriver var och en sina egna anteckningar. Tabellen Så konsoliderar du nerifrån visar stegen. Metoden är inget sätt att få eleverna att röra på sig. Den står och faller med att tänkandet vid tavlorna blir kunskap i konsolideringen."
-  - "Rummet har en tavla per grupp längs väggarna: en whiteboard, ett fönster eller två whiteboardark eller laminerade A3 bredvid varandra. Enkla sätt att skaffa dem står i Material att köpa. I början av lektionen står klassen runt dig, och du berättar problemet kort. Sedan drar var och en ett kort ur kortleken, och samma valör, som alla fyror, blir en grupp och tavlans nummer. Vid varje tavla sitter Fyrfältaren: uppgiftspappret med tre uppgifter och problemet i ruta 4. Femton färdiga står i bilaga A, och tabellen Så skivar du ett problem visar hur du gör en egen. Gruppen har en penna som byter hand vid varje ruta, skriver rutans nummer överst på tavlan och prövar svaret innan den tar nästa ruta. Ruta 4 är dold tills gruppen kan säga vad ruta 3 lärde den. Du går runt med en penna i en annan färg och ringar in det klassen ska se. Efter konsolideringen skriver var och en på bladet Mina anteckningar, och sist löser alla en uppgift på en post-it, som de sätter på dörren när de går."
+  - "Tänkande klassrum är ett sätt att undervisa där eleverna tänker sig fram själva i ämnet, i stället för att göra efter det du just har visat. Klassen löser uppgifter stående i lottade grupper om tre, vid tavlor som går att sudda. Uppgifterna står på fyrfältaren, ett papper med fyra rutor: tre uppgifter i ruta 1–⁠3 och problemet i ruta 4. De har stegrande svårighetsgrad, på engelska thin slicing: uppgiften i ruta 1 är något alla kan, varje ny uppgift ändrar en sak, och de leder fram till problemet. Att göra en sådan följd ur ett problem kallas att skiva det. Femton färdiga fyrfältare står i bilaga A, och tabellen Så skivar du ett problem visar hur du gör en egen. Grupperna prövar själva sitt svar och tar nästa ruta. Du går mellan grupperna och ger varje grupp det den behöver: ruta 4, en ledtråd eller en utvidgning, alltså en extra uppgift åt den grupp som är klar. Sist kommer konsolideringen, där ni samlar den idé som grupperna kom fram till. Klassen går från tavlan som alla kan förstå till tavlan som kom längst, och sedan skriver var och en sina egna anteckningar. Tabellen Så konsoliderar du nerifrån visar stegen. Metoden är inget sätt att få eleverna att röra på sig. Den står och faller med att tänkandet vid tavlorna blir kunskap i konsolideringen."
+  - "Rummet har en tavla per grupp längs väggarna: en whiteboard, ett fönster, eller två whiteboardark eller laminerade A3 bredvid varandra. Enkla sätt att skaffa dem står i Material att köpa. I början av lektionen står klassen runt dig, och du berättar kort om problemet. Sedan drar var och en ett kort ur en kortlek. De som får samma valör, till exempel alla fyror, blir en grupp och går till tavla 4. Kortet ger också två roller. Den som drog spader skriver först och förklarar en annan grupps tavla i konsolideringen, och den som drog hjärter svarar då på frågor om gruppens egen tavla."
+  - "Vid varje tavla sitter fyrfältaren. Du har vikt den så att gruppen inte ser ruta 4 än, eftersom gruppen ska bygga idén i ruta 1–⁠3 innan den ser problemet. Gruppen löser en ruta i taget på tavlan och skriver rutans nummer överst, så att du ser hur långt den har kommit. Eleverna turas om att skriva, och pennan går vidare vid varje ny ruta. Innan gruppen tar nästa ruta prövar den själv om svaret stämmer. När en elev som du väljer kan säga vad gruppen lärde sig i ruta 3, viker du upp ruta 4. En grupp som blir klar med ruta 4 vänder på bladet och fortsätter på Baksidan, där den skriver varför svaret stämmer. Du går runt med en penna i en annan färg än gruppernas och ringar in det du vill visa klassen i konsolideringen. Efter konsolideringen skriver var och en på bladet Mina anteckningar, och sist löser alla en uppgift på en post-it, som de sätter på dörren när de går."
   - "Lärandet går till så här. Alla kommer igång, eftersom alla kan den första uppgiften. När bara en sak ändras ser eleverna just den, och det gruppen hittade i en ruta behöver den i nästa. Gruppen prövar själv om svaret håller, och en grupp som fastnar tittar på en annan grupps tavla. Tänk på borden i matsalen. I ruta 1 räknar gruppen platserna vid ett, två och tre bord och ser att det blir två till för varje bord. I ruta 2 räknar den ut tio bord och gör en regel för alla antal. I ruta 3 räknar den ett, två och tre bord igen, men nu sexkantiga, och ser att det blir fyra till för varje bord medan ändarna står kvar. Ruta 4 gör samma sak som ruta 2 med de sexkantiga borden. I konsolideringen går klassen samma väg nerifrån, så att också den som kom kortast kan följa med, och i anteckningarna gör var och en idén till sin."
   - "De första fem veckorna har ni minst två lektioner i veckan med metoden. Alla delar finns med från första lektionen, och veckorna säger vad ni övar särskilt. Först övar klassen lottningen, tavlan och pennan på uppgifter som alla kan, sedan att pröva svaret och hämta hjälp vid andra tavlor, och sist konsolideringen och anteckningarna. Själv övar du att skiva problem, att svara utan att ta över och att leda konsolideringen nerifrån. Efter veckorna använder ni metoden i det arbetsområde klassen har, i matematik och i andra ämnen."
 karna:
@@ -255,9 +256,9 @@ tidsschema:
   rader:
     - { tid: Före lektionen, fas: Före lektionen, vad: "Välj ett problem och skiva det bakåt till något alla kan, eller ta en färdig fyrfältare. Pröva att varje ruta ändrar en sak. Vik fyrfältaren så att ruta 4 är dold, fäst en vid varje tavla och lägg fram kortleken." }
     - { tid: 0–⁠5 min, fas: Starten, form: Gemensamt, vad: "Eleverna står runt dig. Du berättar kort om problemet, ger ruta 1 muntligt och lottar grupperna." }
-    - { tid: 5–⁠38 min, fas: Vid tavlorna, form: I grupp, vad: "Grupperna går själva från ruta 1 till 3 och prövar varje svar. Du får igång grupperna, håller dem igång, väljer tavlorna och ger ruta 4 grupp för grupp." }
-    - { tid: 38–⁠48 min, fas: Konsolideringen, form: Gemensamt, vad: "Klassen går mellan två eller tre tavlor, från den alla förstår och uppåt, och ser felet. En elev ur en annan grupp förklarar, och du sätter ord på idén sist." }
-    - { tid: 48–⁠55 min, fas: Anteckningarna, form: Enskilt, vad: "Var och en skriver på bladet Mina anteckningar ur tavlorna: två ord och ett eget exempel, och från vecka 5 alla fyra fälten." }
+    - { tid: 5–⁠38 min, fas: Vid tavlorna, form: I grupp, vad: "Grupperna går själva från ruta 1 till 3 och prövar varje svar. Du håller dem igång, viker upp ruta 4 grupp för grupp och väljer tavlor till konsolideringen." }
+    - { tid: 38–⁠48 min, fas: Konsolideringen, form: Gemensamt, vad: "Klassen går mellan två eller tre tavlor, från den alla förstår och uppåt. En elev ur en annan grupp förklarar, du visar ett fel och sätter ord på idén sist." }
+    - { tid: 48–⁠55 min, fas: Anteckningarna, form: Enskilt, vad: "Var och en skriver på bladet Mina anteckningar ur tavlorna: två ord och ett eget exempel, och från vecka 5 alla bladets fyra fält." }
     - { tid: 55–⁠60 min, fas: På egen hand, form: Enskilt, vad: "Var och en löser en uppgift av samma slag på en post-it och sätter den på dörren när hen går." }
     - { tid: Efter lektionen, fas: Efter lektionen, vad: "Räkna lapparna med fel och sortera dem i högar efter felet. Fota tavlorna, och spara lapparna till nästa lektion och arbetslaget." }
   varianter:
@@ -277,7 +278,7 @@ tidsschema:
         - { fas: Konsolideringen, tid: 26–⁠35 min }
         - { fas: Anteckningarna, tid: 35–⁠40 min }
         - { fas: På egen hand, tid: 40–⁠45 min }
-  efter: "Minuterna är hållpunkter. Ruta 2 ska alla klara: när varje grupp har klarat den och energin börjar sjunka går ni till konsolideringen, senast vid 38 minuter eller vid 26 i en lektion på 45. En omstart tar de första fem minuterna, före Starten."
+  efter: "Minuterna är hållpunkter. Alla ska klara ruta 2: när varje grupp har klarat den och energin börjar sjunka går ni till konsolideringen, senast vid 38 minuter eller vid 26 i en lektion på 45. Efter utfallet De flesta kan börjar nästa lektion med en omstart, fem minuter vid fotot av förra lektionens tavla, före Starten."
 steg:
   rader:
     - namn: Starten
@@ -295,14 +296,14 @@ steg:
       fraga: "Vad behöver den här gruppen härnäst?"
       alla: Varje grupp skriver rutans nummer överst, prövar svaret och tar nästa ruta själv.
       titta: Numren överst, och vem som håller pennan.
-      beslut: "När alla grupper har klarat ruta 2 och energin sjunker går ni till konsolideringen. Senast vid 38 minuter går ni ändå, och tavla A visar ruta 2."
+      beslut: "När alla grupper har klarat ruta 2 och energin sjunker går ni till konsolideringen. Senast vid 38 minuter går ni och börjar vid en tavla där ruta 2 är löst."
       gor:
         - "Få igång: gå till tavlor där inget står efter en minut, och till elever som inte har hållit pennan. Fråga: ”Vad vet ni?”"
-        - Håll igång med din penna i en egen färg. Stanna en minut per grupp, fråga vad förra rutan lärde gruppen, och gå vidare.
-        - "Ruta 4 när en elev du väljer kan säga vad ruta 3 lärde gruppen: ”Vad lärde ruta 3 er?” En grupp som väntar skriver det."
+        - Håll grupperna igång. Stanna en minut per grupp, fråga vad gruppen lärde sig i förra rutan, och gå vidare.
+        - "Vik upp ruta 4 när en elev du väljer kan säga vad gruppen lärde sig i ruta 3. En grupp som väntar på dig skriver upp det."
         - Ge en ledtråd till den som gett upp, en uppgift av samma slag till den som inte kan säga hur, och Baksidan till den som är klar.
-        - "Välj tavlorna i din färg: A den alla kan gå in i, B samma idé ett steg längre och C längst. Ring in felet du letar efter."
-      fraser: ["Vad vet ni?", "Vad lärde ruta 3 er?"]
+        - "Märk tavlorna till konsolideringen med din penna: A är den alla kan förstå, B går ett steg längre och C kom längst. Ring in felet."
+      fraser: ["Vad vet ni?", "Vad lärde ni er i ruta 3?"]
     - namn: Konsolideringen
       fraga: "Vad vet vi nu, och hur hänger det ihop?"
       alla: Alla står vid tavlan och kan säga till den bredvid vad tavlan visar.
@@ -310,8 +311,8 @@ steg:
       beslut: "Kan klassen säga idén, skriver du den. Annars stannar ni längre vid tavlan och frågar igen."
       gor:
         - "Gå med klassen till tavla A, den alla kan gå in i: ”Ni andra ska försöka förstå förklaringen.”"
-        - "Spader ur en annan grupp förklarar tavlan, och hjärter i gruppen svarar på ”Var det så ni tänkte?”"
-        - "Gå vidare till B och C: ”Vad är nytt här?” Alla säger det till den bredvid. Visa felet: ”Varför stämmer inte det här?”"
+        - "Den som drog spader i en annan grupp förklarar tavlan, och den som drog hjärter i gruppen svarar på ”Var det så ni tänkte?”"
+        - "Gå vidare till tavla B och C: ”Vad är nytt här?” Alla säger det till den bredvid. Visa felet: ”Varför stämmer inte det här?”"
         - "Säg idén med ämnets ord, och skriv orden stort i din färg: ”Vem kan säga det med egna ord?”"
       fraser: ["Ni andra ska försöka förstå förklaringen.", "Vad är nytt här?"]
     - namn: Anteckningarna
@@ -405,9 +406,9 @@ amnesexempel:
       - "Tavla A, B och C nerifrån, och 4 · n + 2 stort sist."
     scen:
       - "Tänk dig lektion 3 i matematik i åk 6. Klassen arbetar med mönster, och Fyrfältaren Borden sitter vikt vid varje tavla. Du berättar om borden i matsalen, ger ruta 1 muntligt och lottar."
-      - "I ruta 2 skriver grupp 2 talen 10 + 10 + 2, och grupp 5 skriver 10 · 2 + 2. Grupp 4 frågar om tio sexkantiga bord ger 60. Du frågar: ”Hur kan ni kontrollera det?” De ritar tre bord och ser att två bord delar en sida. Grupp 7 säger vad ruta 3 lärde dem, och du viker upp ruta 4. Sist märker du tavla 2, 5 och 7 med A, B och C."
+      - "I ruta 2 skriver grupp 2 talen 10 + 10 + 2, och grupp 5 skriver 10 · 2 + 2. Grupp 4 frågar om tio sexkantiga bord ger 60. Du frågar: ”Hur kan ni kontrollera det?” De ritar tre bord och ser att två bord delar en sida. Grupp 7 säger vad de lärde sig i ruta 3, och du viker upp ruta 4. Sist märker du tavla 2, 5 och 7 med A, B och C."
       - "En elev från grupp 3 förklarar tavla A: två till för varje bord. Vid B säger klassen vad som är nytt. Vid C frågar du varför grupp 4:s första svar, 60, inte stämde, och skriver 4 · n + 2 stort bredvid grupp 7:s ord. På egen hand löser alla platserna vid 20 sexkantiga bord på en lapp, och 7 av 28 har fel."
-    notera: "Notera vad som hände. Det grupperna tog med sig från ruta 1, två till för varje bord, blev verktyget i ruta 3 och klassens första stopp. Med 7 fel kan de flesta, och nästa lektion börjar med en omstart vid tavla B. Med högst 5 fel hade klassen gått vidare till Stenplattorna, och med 14 eller fler hade den tagit fler uppgifter med fyrkantiga bord."
+    notera: "Notera vad som hände. Det grupperna tog med sig från ruta 1, två till för varje bord, blev verktyget i ruta 3 och klassens första stopp. Med 7 fel kan de flesta, och nästa lektion börjar med en omstart vid tavla B. Med högst 5 fel hade klassen gått vidare till fyrfältaren Stenplattorna, och med 14 eller fler hade den tagit fler uppgifter med fyrkantiga bord."
   - amne: so-no
     amnesnamn: Fysik
     arskurs: åk 5
@@ -435,10 +436,10 @@ amnesexempel:
 stod:
   rubrik: Elever som behöver mer stöd
   rader:
-    - { nar: Den som är ny i svenska, metoden: "Problemet berättas muntligt med en bild eller något att visa, och rutorna läses högt i gruppen. Gruppen ritar och skriver tal innan orden finns, och kamraterna hjälper med orden.", du: "Visa bilden och förklara problemets ord före lektionen, och ge eleven pennan i ruta 1, före kortets ordning. I konsolideringen frågar du: ”Vilka ord ur ämnet använde ni?”" }
+    - { nar: Den som är ny i svenska, metoden: "Problemet berättas muntligt med en bild eller något att visa, och rutorna läses högt i gruppen. Gruppen ritar och skriver tal innan orden finns, och kamraterna hjälper med orden.", du: "Visa bilden och förklara problemets ord före lektionen, och låt eleven skriva ruta 1 på tavlan, fast den som drog spader annars skriver först. I konsolideringen frågar du: ”Vilka ord ur ämnet använde ni?”" }
     - { nar: Den som har det svårt i ämnet, metoden: "Första uppgiften kan alla, och kamraterna i gruppen och de andra tavlorna visar vägen.", du: "Lär klassen att räcka över pennan och be om en förklaring. Ge en uppgift av samma slag i stället för nästa." }
-    - { nar: I F–⁠3, metoden: "Samma delar, i kortare tid.", du: "Lotta par med hjärter och spader i varje valör. Sätt upp A3, ta fram bilder och saker att räkna med, och ge uppgifterna muntligt. I matematik passar ruta 1–⁠3 i Bas, som Äpplena. Anteckningen är en teckning med en mening som du skriver." }
-    - { nar: Den som redan kan, metoden: "Utvidgningen och Baksidan i varje fyrfältare.", du: "Be gruppen motivera, skriva en regel eller göra en ruta 5 åt en annan grupp." }
+    - { nar: I F–⁠3, metoden: "Samma delar, i kortare tid.", du: "Lotta par med hjärter och spader i varje valör. Sätt upp A3, ta fram bilder och saker att räkna med, och ge uppgifterna muntligt. I matematik passar ruta 1–⁠3 i en fyrfältare på nivån Bas, som Äpplena. Anteckningen är en teckning med en mening som du skriver." }
+    - { nar: Den som redan kan, metoden: "Baksidan, sida 2 i varje fyrfältare, och utvidgningen.", du: "Be gruppen motivera, skriva en regel eller göra en ny uppgift åt en annan grupp, en ruta 5." }
     - { nar: När många grupper har fastnat på samma steg, metoden: "Stoppa klassen vid en tavla som har kommit en bit, som i fallgropen När alla grupper har fastnat.", du: "Visa tavlan kort, ge alla samma uppgift och skicka tillbaka grupperna." }
     - { nar: När metoden inte räcker, metoden: "Lapparna på dörren visar det: samma elev har fel två veckor i rad.", du: "Ta lapparna och anteckningarna till specialläraren. Eleven kan behöva se sättet visas först, i en liten grupp." }
 
@@ -475,7 +476,7 @@ forsta:
     fore: { skivor: ["En bod", "Två och tre bodar i rad", "En bod till, och 5 bodar", "6 och 20 bodar"], ord: "mönster, regel", med: ["en bod tar fem stickor", "varje ny bod tar fyra", "en sticka och fyra per bod"], felet: "6 · 5 = 30" }
     delar:
       - { fas: Starten, text: "Rutinen Lottningen och tavlan. Fiskebodarna, ruta 1 muntligt." }
-      - { fas: Vid tavlorna, text: "Grupperna tar ruta 1–⁠3 själva, och pennan byter hand. Ruta 4 när en elev kan säga vad ruta 3 lärde gruppen." }
+      - { fas: Vid tavlorna, text: "Grupperna tar ruta 1–⁠3 själva, och pennan byter hand. Jag viker upp ruta 4 när en elev kan säga vad gruppen lärde sig i ruta 3." }
       - { fas: Konsolideringen, text: "A: en ritning. B: en tabell. Spader förklarar, hjärter svarar. Ordet mönster stort." }
       - { fas: Anteckningarna, text: "Kort: två ord och ett eget exempel." }
       - { fas: På egen hand, text: "Stickorna till 8 bodar." }
