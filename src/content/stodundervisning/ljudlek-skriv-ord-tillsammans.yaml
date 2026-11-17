@@ -74,7 +74,7 @@ tabeller:
     not: "Orden till varje rad står under Kedjorna, och gruppen börjar i raden Första bokstaven byts."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
-    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun. Ljudstartens ord är ett A4 med fram- och baksida på metodens sida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
+    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun. Ljudstartens ord är ett A4 med fram- och baksida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
     kolumner:
       - "Moment"
       - "Så gör du"
@@ -85,7 +85,7 @@ tabeller:
         - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
       - - "Dela upp"
         - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
-    not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
+    not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken eller Ljudstartens ord, där du väljer ord av samma slag som i gruppens ordgrupp. I Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"
     text: "Bekräfta först det som eleven gjorde rätt, och försök sedan igen tillsammans."
@@ -199,7 +199,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Lägg bokstavskorten med gruppens bokstäver i ett kuvert per par, och ta fram dina bokstavskort till ljudstarten, magneterna, ljudrutorna, markörerna, whiteboardtavlorna, bokstavskartan och speglarna. Rita fyra rutor på tavlan. Välj kedjor ur Kedjorna, bokstäver ur Bokstäverna till Ordjakt och orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
+      vad: "Lägg bokstavskorten med gruppens bokstäver i ett kuvert per par, och ta fram dina bokstavskort till ljudstarten, magneterna, ljudrutorna, markörerna, whiteboardtavlorna, bokstavskartan och speglarna. Rita fyra rutor på tavlan. Välj kedjor ur Kedjorna, bokstäver ur Bokstäverna till Ordjakt och orden till ljudstarten ur Ordbanken eller Ljudstartens ord. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -316,7 +316,7 @@ fastnar:
 urval:
   rubrik: "Var hittar du orden och materialet?"
   text:
-    - "Orden står under Kedjorna och Bokstäverna till Ordjakt, bokstavskorten under Materialet och ljudrutorna i planeringsmallarna. Orden till ljudstarten står i Ordbanken."
+    - "Orden står under Kedjorna och Bokstäverna till Ordjakt, bokstavskorten under Materialet och ljudrutorna i planeringsmallarna. Orden till ljudstarten står i Ordbanken och i Ljudstartens ord."
     - "Egna ord går också bra, utom orden i ljudkollen och i screeningens version B."
   kravText: "Tre krav gäller egna ord:"
   krav:

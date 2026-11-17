@@ -77,7 +77,7 @@ tabeller:
     not: "Meningarna till varje rad står under Meningarna. I raden Egen mening säger alla en egen mening: du säger din och skriver den på tavlan, paret säger sin för dig när du går mellan paren, och sist skriver var och en sin egen. Har den egna meningen ett ord som inte stavas som det låter, till exempel jag eller och, skriver du det på tavlan, och paret bygger det efter tavlan. Säger eleven bara ett ord, som Mira, svarar du: ”Mira. Vad gör Mira?” Om högst hälften av eleverna läser alla fyra orden i ljudkollens uppgift 9 efter raden Egen mening, tar ni raderna Fyra ord och Egen mening igen."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
-    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun. Ljudstartens ord är ett A4 med fram- och baksida på metodens sida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
+    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun. Ljudstartens ord är ett A4 med fram- och baksida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
     kolumner:
       - "Moment"
       - "Så gör du"
@@ -88,7 +88,7 @@ tabeller:
         - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
       - - "Dela upp"
         - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
-    not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
+    not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken eller Ljudstartens ord, där du väljer ord av samma slag som i gruppens ordgrupp. I Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"
     text: "Bekräfta först det som eleven gjorde rätt, och försök sedan igen tillsammans. Skrivstrategier är ett A4 på metodens sida med strategierna för ordet och meningen, som att säga meningen igen och säga ordet långsamt, när eleverna skriver den nya meningen."
@@ -302,7 +302,7 @@ fastnar:
 urval:
   rubrik: "Var hittar du orden och materialet?"
   text:
-    - "Meningarna du säger står i tabellen Meningarna, och bokstavskorten och arken med bokstäver att bygga med står under Materialet. Orden till ljudstarten står i Ordbanken."
+    - "Meningarna du säger står i tabellen Meningarna, och bokstavskorten och arken med bokstäver att bygga med står under Materialet. Orden till ljudstarten står i Ordbanken och i Ljudstartens ord."
     - "Egna ord går också bra, utom orden i ljudkollen och i screeningens version B."
   kravText: "Tre krav gäller egna ord:"
   krav:

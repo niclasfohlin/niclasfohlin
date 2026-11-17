@@ -148,7 +148,7 @@ tabeller:
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: efter-steg
     meny: true
-    text: "I ljudstarten tränar ni varje pass att sätta ihop och dela upp ord. Det är kärnan i läsningen. Alla svarar samtidigt, så att du hör och ser hela gruppen. Vänd ansiktet mot eleverna, så att de ser din mun, och sitt gärna vid sidan av dem. Sitter du mitt emot dem för du handen från din högra sida till din vänstra, så att de ser den gå från vänster till höger. Ljudstartens ord är ett A4 med fram- och baksida på metodens sida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
+    text: "I ljudstarten tränar ni varje pass att sätta ihop och dela upp ord. Det är kärnan i läsningen. Alla svarar samtidigt, så att du hör och ser hela gruppen. Vänd ansiktet mot eleverna, så att de ser din mun, och sitt gärna vid sidan av dem. Sitter du mitt emot dem för du handen från din högra sida till din vänstra, så att de ser den gå från vänster till höger. Ljudstartens ord är ett A4 med fram- och baksida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
     kolumner:
       - Moment
       - Så gör du
@@ -163,7 +163,7 @@ tabeller:
       - - Dela upp
         - "Säg fyra ord med olika många ljud. Alla säger ordet, sedan ljuden, och håller upp ett finger för varje ljud. Sist räknar ni fingrarna. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
         - "”Mus. Säg ljuden.” ”/m/ /u/ /s/. Tre!”"
-    not: "Orden tar du ur gruppens ordgrupp i Ordbanken. I Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud och eleverna räknar i stället för att gissa. När ni sätter ihop kan du gärna ta ord ur nästa ordgrupp, eftersom det är lättare än att dela upp. Sätter gruppen ihop utdragna ljud säkert, säger du ljuden kortare och till sist med en kort paus, som i ljudkollen. Kan gruppen bokstäverna i ordet, lägger du ut bokstavskorten rättvända för eleverna och drar fingret under dem medan du ljudar. Har gruppen lektionen Rim, hoppar du över ordet som börjar på ljudet, eftersom eleverna lätt blandar ihop rim och första ljudet när lekarna växlar. En elev som ännu inte hör rim eller delarna i ett ord efter lektionerna Rim och Ord och stavelser får ett rimpar eller ett ord att klappa sist i Dela upp, tills ljudkollen visar att hen klarar det."
+    not: "Orden tar du ur gruppens ordgrupp i Ordbanken. Vill du ha fler ord, eller ord med dagens ljud, tar du dem ur Ljudstartens ord. Välj ord av samma slag som ordgruppens: i Tre ljud att dra ut tar du ord som sol och ser och väntar med tak och sten. I Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud och eleverna räknar i stället för att gissa. När ni sätter ihop kan du gärna ta ord ur nästa ordgrupp, eftersom det är lättare än att dela upp. Sätter gruppen ihop utdragna ljud säkert, säger du ljuden kortare och till sist med en kort paus, som i ljudkollen. Kan gruppen bokstäverna i ordet, lägger du ut bokstavskorten rättvända för eleverna och drar fingret under dem medan du ljudar. Har gruppen lektionen Rim, hoppar du över ordet som börjar på ljudet, eftersom eleverna lätt blandar ihop rim och första ljudet när lekarna växlar. En elev som ännu inte hör rim eller delarna i ett ord efter lektionerna Rim och Ord och stavelser får ett rimpar eller ett ord att klappa sist i Dela upp, tills ljudkollen visar att hen klarar det."
   - rubrik: "Dagens ljud: bokstävernas ordning"
     plats: efter-steg
     meny: true
@@ -289,10 +289,10 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: "Välj orden ur Ordbanken och ta fram kortet för dagens ljud och några som gruppen har haft ur bokstavskorten till ljudstarten. Lägg lektionens material vid varje plats, och en spegel per par. Bestäm paren och skriv dagens elever i snabbmallen."
+      vad: "Välj orden ur Ordbanken eller Ljudstartens ord. Ta fram Ljudstartens ord, kortet för dagens ljud och några som gruppen har haft ur bokstavskorten till ljudstarten. Lägg lektionens material vid varje plats, och en spegel per par. Bestäm paren och skriv dagens elever i snabbmallen."
     - tid: 0–5 min
       fas: Ljudstart
-      vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra ord. Alla svarar samtidigt, och en av dagens elever sätter ihop ett ord ensam. Lyssna efter bokstavsnamn, pauser mellan ljuden och ett ö efter klusilerna."
+      vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra ord. Ljudstartens ord har du i handen, med ord som börjar på dagens ljud och fler ord att sätta ihop och dela upp. Alla svarar samtidigt, och en av dagens elever sätter ihop ett ord ensam. Lyssna efter bokstavsnamn, pauser mellan ljuden och ett ö efter klusilerna."
     - tid: 5–25 min
       fas: Lektionen
       vad: "Steg 1 visar du, i tre till fyra minuter. Steg 2 gör ni tillsammans i fem till sex minuter, och steg 3 i par i fem minuter, medan du går mellan paren. Steg 4 gör var och en i fyra till fem minuter, och du lyssnar på dagens elever."
@@ -394,7 +394,7 @@ urval:
   rubrik: Var hittar du lektionerna?
   text:
     - "Lektionerna står i lektionsbanken, under den förmåga de tränar, och heter Ljudlek följt av lektionens namn, som Ljudlek: Räkna ljud. Varje lektion är en egen metod med en egen fil att ladda ner, där de första sidorna är passet och stegen och de sista sidorna materialet. Varje lektion har samma form. Den börjar med raderna i Så blir lektionen svårare, från lätt till svårt, och fortsätter med passet i fyra steg med dina fraser och de vanliga felen under Lyssna efter. Sist står materialet att skriva ut, som bildkort, bokstavskort, golvbokstäver eller mallar, efter vad lektionen behöver. Bildkorten är vikkort med bilden på framsidan och ordet på baksidan, och under ordet står en prick för varje ljud, eller en båge för varje del när eleven räknar stavelser. Ljudstarten står likadant i varje lektion och på lathundens tredje sida, Ljudstarten. Lektionernas exempel visar samma sex elever vid olika tillfällen, och veckan i exemplet visar vilka bokstäver gruppen har haft."
-    - "Orden till ljudstarten står i Ordbanken, och bokstavskorten till dagens ljud under Materialet."
+    - "Orden till ljudstarten står i Ordbanken och i Ljudstartens ord, och bokstavskorten till dagens ljud under Materialet."
   kravText: "Tre regler hjälper dig att välja lektion:"
   krav:
     - rubrik: Ljudkollen först
@@ -508,8 +508,8 @@ snabbmall:
   not: Dela antalet elever med antalet pass i veckan och avrunda uppåt, så får du antalet dagens elever. Tolv elever och tre pass blir fyra per pass. Varje lektion säger när gruppen tar nästa rad.
 checklista:
   punkter:
-    - Valt lektionen och orden ur Ordbanken.
-    - Tagit fram kortet för dagens ljud och några ni har haft ur bokstavskorten till ljudstarten.
+    - Valt lektionen och orden, ur Ordbanken eller Ljudstartens ord.
+    - Tagit fram Ljudstartens ord, kortet för dagens ljud och några ni har haft ur bokstavskorten till ljudstarten.
     - Lagt fram lektionens sidor med passet och stegen, materialet och en spegel per par.
     - Bestämt paren och skrivit dagens elever i snabbmallen.
 grund:
