@@ -138,6 +138,20 @@ steg('bankpdf', 'node scripts/bankpdf.mjs');
   }
 }
 steg('pdfdelar', 'node scripts/pdfdelar.mjs');
+// Stödmetodernas minibilder (K-769, K-808) görs ur pdf:er som Word och pdfdelar just gjorde, sakernas egna filer och de delade
+// stödmaterialen, som Ljudstartens ord: en ny bild går till dist, och länkarna till den får den nya versionen, utan ett nytt
+// bygge, som Innehålls minibilder ovan. Utan steget visade sidan bilden ur förra valideringens pdf.
+{
+  const mapp = join(rot, 'public', 'stodundervisning');
+  const bilder = () => new Map(readdirSync(mapp).filter((f) => f.includes('-minibild-')).map((f) => [f, summa(join(mapp, f))]));
+  const fore = bilder();
+  steg('minibilder efter Word', 'node scripts/minibilder.mjs');
+  const nya = [...bilder()].filter(([f, s]) => fore.get(f) !== s).map(([f]) => f);
+  if (nya.length && existsSync(join(dist, 'stodundervisning'))) {
+    for (const f of nya) copyFileSync(join(mapp, f), join(dist, 'stodundervisning', f));
+    bytVersioner(dist, nya.map((f) => `/stodundervisning/${f}`));
+  }
+}
 steg('pdfstorlek', 'python scripts/pdfstorlek.py');
 steg('paritet', 'node scripts/paritet.mjs');
 steg('utskriftsformat', 'node scripts/utskriftsformat.mjs');

@@ -4864,6 +4864,9 @@ button.pl-passroll { min-height: 2.75rem; }
   .um-bladkort-saker .st-kort-lista.vav-kort { grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
   .um-bladkort-saker a.st-kort { flex-direction: column; align-items: stretch; }
   .um-bladkort-saker .st-kort img { width: 100%; border-right: 0; border-bottom: 1px solid var(--farg-kant); }
+  /* Ett ensamt kort, som Ljudstartens ord i Ljudlek i grupp (K-808), är lika brett som ett av tre: utskrivet över hela
+     bredden blev minibilden dubbelt så stor som den är gjord för, och suddig. */
+  .um-bladkort-saker .st-kort-lista.vav-kort > li:only-child { max-width: 16rem; }
 }
 /* Bladen i en bank som bildkort (Bankbladkort.astro, K-761): under nivåns skylt kort med problemets bild, titeln och delen
    av kursplanen, två i bredd i telefonen och fem på datorn, med nivåns färg som en rand överst. */

@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { DATABAS, matteproblemfiler } from '../../lib/matteproblem';
-import { centralaMedPapper } from '../../lib/centraladata';
+import { centralaMedPapper, centraltPapper } from '../../lib/centraladata';
 import { centralAv } from '../../lib/centrala';
 import { innehalletsPapper } from '../../lib/innehallsverktyg';
 import { arBladsida, bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
@@ -108,8 +108,9 @@ export const GET: APIRoute = async () => {
       return { metod: m.id, namn: f.namn, rubrik: f.rubrik, minst: ramar.reduce((s, ri) => s + sidor(ri)[0], 0), hogst: ramar.reduce((s, ri) => s + sidor(ri)[1], 0), ramar, oversikter: ramar.filter((ri) => b.oversikter.has(ri)), ...(b.databas ? { databas: true } : {}) };
     })];
   });
-  // Stödmaterialen (K-488): ett A4 var, ur riggens papper.json.
-  const stodmaterialen = centralaMedPapper().map((id) => ({ metod: id, namn: id, rubrik: centralAv(id)?.namn ?? id, slag: 'stodmaterial', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] }));
+  // Stödmaterialen (K-488), ur riggens papper.json: ett A4 var, och två sidor när papperet har en baksida, som Ljudstartens
+  // ord (K-808).
+  const stodmaterialen = centralaMedPapper().map((id) => { const sidor = centraltPapper(id)?.baksida ? 2 : 1; return { metod: id, namn: id, rubrik: centralAv(id)?.namn ?? id, slag: 'stodmaterial', minst: sidor, hogst: sidor, ramar: [] as number[], oversikter: [] as number[] }; });
   // Verktyget Innehålls mallar och exempel (K-793): ett papper var, med framsidan och baksidan när den finns.
   const innehallets = innehalletsPapper().map((f) => ({ metod: 'innehall', namn: f.namn, rubrik: f.rubrik, slag: 'innehall', minst: f.sidor, hogst: f.sidor, ramar: [] as number[], oversikter: [] as number[] }));
   return new Response(JSON.stringify([...filer, ...matteproblemens, ...stodmaterialen, ...innehallets], null, 1), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });

@@ -57,14 +57,19 @@ export const STODETS_MAPP = 'public/stodundervisning';
 /**
  * En stödmetods minibilder (K-769, src/data/bladkort-stod.json): varje sak är ett blad, en mall eller en tabell med en egen
  * fil (sakfiler i src/lib/sakfiler.ts, som en metod med Planera insatsen har), och bilden görs ur filens första sida. Filens
- * namn följer sakens, <id>-blad-, -mall- eller -tabell-<namnet>, och finns säger vilken av dem som finns.
+ * namn följer sakens, <id>-blad-, -mall- eller -tabell-<namnet>, och finns säger vilken av dem som finns. En sak kan också
+ * vara ett delat stödmaterial som är en pdf, som Ljudstartens ord (K-808): pdfer har registrets pdf:er som namn och adress
+ * (src/data/centrala.json), och bilden görs ur pdf:ens första sida, framsidan.
  * @param {string} id
  * @param {{ saker?: (string | { namn: string, mening: string })[] }} post
  * @param {(fil: string) => boolean} finns
+ * @param {{ namn: string, adress: string }[]} [pdfer]
  */
-export function stodmetodensMinibilder(id, post, finns) {
+export function stodmetodensMinibilder(id, post, finns, pdfer = []) {
   return (post.saker ?? []).map((s) => {
     const namn = sakensNamn(s);
+    const pdf = pdfer.find((c) => c.namn === namn);
+    if (pdf) return { namn, fil: minibildensFil(id, namn), kalla: `public${pdf.adress}`, sida: 1, del: 'hel' };
     const kalla = ['blad', 'mall', 'tabell'].map((slag) => `${STODETS_MAPP}/${id}-${slag}-${slugAv(namn)}.pdf`).find(finns);
     return { namn, fil: minibildensFil(id, namn), kalla: kalla ?? `${STODETS_MAPP}/${id}-blad-${slugAv(namn)}.pdf`, sida: 1, del: 'hel' };
   });

@@ -33,6 +33,8 @@ const summa = (b) => createHash('sha256').update(b).digest('hex').slice(0, 16);
 const register = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'bladkort.json'), 'utf8'));
 // Stödmetodernas små kort (K-769) har ett eget register och sina minibilder bredvid stödmetodens filer.
 const STODREGISTRET = join(ROT, 'src', 'data', 'bladkort-stod.json');
+// De delade stödmaterialen som är pdf:er (src/data/centrala.json), som en stödmetods små kort kan visa (K-808).
+const CENTRALA_PDF = JSON.parse(readFileSync(join(ROT, 'src', 'data', 'centrala.json'), 'utf8')).filter((c) => c.slag === 'pdf');
 const stodregister = existsSync(STODREGISTRET) ? JSON.parse(readFileSync(STODREGISTRET, 'utf8')) : {};
 const UT_STOD = join(ROT, STODETS_MAPP);
 const manifest = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : {};
@@ -120,7 +122,7 @@ for (const [id, post] of Object.entries(register)) {
 }
 for (const [id, post] of Object.entries(stodregister)) {
   if (id === '_om') continue;
-  for (const m of stodmetodensMinibilder(id, post, (f) => existsSync(join(ROT, f)))) await minibild(id, m, UT_STOD, gallandeStod);
+  for (const m of stodmetodensMinibilder(id, post, (f) => existsSync(join(ROT, f)), CENTRALA_PDF)) await minibild(id, m, UT_STOD, gallandeStod);
 }
 for (const [mapp, giltiga] of [[UT, gallande], [UT_STOD, gallandeStod]]) {
   for (const f of readdirSync(mapp).filter((x) => /-minibild-[a-z0-9-]+\.(webp|png)$/.test(x) && !giltiga.has(x.replace(/\.png$/, '.webp')))) rmSync(join(mapp, f));

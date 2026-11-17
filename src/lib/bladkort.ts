@@ -9,7 +9,10 @@ import register from '../data/bladkort.json';
 import stodregister from '../data/bladkort-stod.json';
 import materialetsSidor from '../data/materialets-sidor.json';
 import { MINIBILDEN, metodensMinibilder, sakensNamn, stodmetodensMinibilder } from './bladkortfiler.js';
-import { sidansSaker } from './metodsaker';
+import { sidansAvsnitt, sidansSaker } from './metodsaker';
+import { metodensCentrala, platsensText, tolkaTextplats } from './centrala';
+import { metodensAnkare } from './metodankare';
+import { sammaRubrik } from './film';
 import type { MetodData } from './metod';
 import { meningarna, slugAv, talText } from './standard/index.js';
 import { bladetsAnkare, type Um } from './undervisningsmetod';
@@ -94,6 +97,9 @@ export function metodensBladkort(id: string, d: Um): Bladkort | null {
 // Stödundervisningens små kort (K-769), som i Metoder, ur ett eget register (src/data/bladkort-stod.json), eftersom Metoders
 // register läses nyckel för nyckel som Metoders metoder. Sakens namn är ett blad, en mall eller en tabell i metoden, och
 // adressen är den som texten på sidan leder till (sidansSaker i src/lib/metodsaker.ts), där knappen som skriver ut saken står.
+// Saken kan också vara ett delat stödmaterial som är en pdf och som metoden visar i fältet centrala, som Ljudstartens ord
+// (K-808; Niclas 2026-11-17: "ha en bild för den"): raden är meningen som börjar med namnet i texten där knappen står, och
+// kortet leder dit, till den fria tabellen, eller till pdf:en när platsen inte är en tabell.
 type StodPost = { stycket: string; saker: Sak[] };
 const stodposten = (id: string) => (stodregister as unknown as Record<string, StodPost | undefined>)[id];
 const stodfel = (d: MetodData, vad: string) => new Error(`src/data/bladkort-stod.json: ${d.titel} ${vad}`);
@@ -114,9 +120,22 @@ export function stodmetodensBladkort(id: string, d: MetodData): Bladkort | null 
   if (!p) return null;
   if (!p.saker?.length || p.saker.length > 3) throw stodfel(d, `har ${p.saker?.length ?? 0} saker, och de små korten visar en till tre.`);
   const saker = sidansSaker(d, id);
-  const bilder = stodmetodensMinibilder(id, p, (f: string) => existsSync(join(process.cwd(), f))) as { namn: string; fil: string }[];
+  const pdfer = metodensCentrala(d).filter((c) => c.slag === 'pdf');
+  const bilder = stodmetodensMinibilder(id, p, (f: string) => existsSync(join(process.cwd(), f)), pdfer) as { namn: string; fil: string }[];
+  const bilden = (namn: string) => {
+    const m = bilder.find((x) => x.namn === namn)!;
+    if (!existsSync(join(process.cwd(), 'public', 'stodundervisning', m.fil))) throw stodfel(d, `saknar minibilden till ${namn}. Saken behöver en egen fil att skriva ut (src/lib/sakfiler.ts, eller registrets pdf i src/data/centrala.json), och node scripts/minibilder.mjs gör bilden.`);
+    return { src: `/stodundervisning/${m.fil}`, bredd: MINIBILDEN.bredd, hojd: MINIBILDEN.hojd };
+  };
   const kort = p.saker.map((s) => {
     const namn = sakensNamn(s);
+    const pdf = pdfer.find((c) => c.namn === namn);
+    if (pdf) {
+      const plats = tolkaTextplats(d.centrala!.find((x) => x.id === pdf.id)!.efterText);
+      const rad = kortetsRad(d as unknown as Um, namn, plats && platsensText(d, plats), typeof s === 'string' ? namn : s.mening);
+      const tabell = plats && 'tabell' in plats ? metodensAnkare(d, sidansAvsnitt(d)).tabellAnkare.get(d.tabeller.find((t) => sammaRubrik(t.rubrik, plats.tabell))!) : undefined;
+      return { namn, rad, adress: tabell ? `#${tabell}` : pdf.adress, bild: bilden(namn) };
+    }
     const sak = saker.find((x) => x.namn === namn);
     if (!sak) throw stodfel(d, `har inget blad, ingen mall och ingen tabell som heter ${namn}.`);
     const ram = (d.ramar?.ramar ?? []).find((r) => r.rubrik === namn);
@@ -124,9 +143,7 @@ export function stodmetodensBladkort(id: string, d: MetodData): Bladkort | null 
     const tabell = d.tabeller.find((t) => t.rubrik === namn);
     const text = ram?.text?.[0] ?? (mall as { text?: string } | undefined)?.text ?? tabell?.text;
     const rad = kortetsRad(d as unknown as Um, namn, text, typeof s === 'string' ? undefined : s.mening);
-    const m = bilder.find((x) => x.namn === namn)!;
-    if (!existsSync(join(process.cwd(), 'public', 'stodundervisning', m.fil))) throw stodfel(d, `saknar minibilden till ${namn}. Saken behöver en egen fil att skriva ut (src/lib/sakfiler.ts), och node scripts/minibilder.mjs gör bilden.`);
-    return { namn, rad, adress: sak.adress, bild: { src: `/stodundervisning/${m.fil}`, bredd: MINIBILDEN.bredd, hojd: MINIBILDEN.hojd } };
+    return { namn, rad, adress: sak.adress, bild: bilden(namn) };
   });
   const alla = d.ramar ? '#ramar' : d.mallar.length ? '#mallar' : kort[0].adress;
   return { namn: 'Att skriva ut', saker: true, etikett: 'Att skriva ut', alla: { text: 'Allt att skriva ut', adress: alla }, kort };

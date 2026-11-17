@@ -22,6 +22,9 @@ export interface PapperDel {
   rader: string[][];
   storlek?: number;
   namnrad?: number;
+  /** Första kolumnens namn i halva punkter (20 annars), som bokstaven i Ljudstartens ord, som ögat ska hitta i handen
+   *  (riggens build/strategipapper.js, 2026-11-17). */
+  namnstorlek?: number;
   tat?: boolean;
   grupper?: number[];
   not?: string;
@@ -158,13 +161,14 @@ function del(d: PapperDel): Barn[] {
   const rader = d.rader.map((r, ri) => new TableRow({ cantSplit: true, children: r.map((c, ci) => {
     const span = ci === r.length - 1 ? n - r.length + 1 : 1;
     return cell(String(c).split('\n').map((t, k) => (ci === 0
-      ? p(k === 0 ? t.replace(/\*\*/g, '') : t, { size: k === 0 ? 20 : (d.namnrad ?? 16), bold: k === 0, color: k === 0 ? NAVY : GREY })
+      ? p(k === 0 ? t.replace(/\*\*/g, '') : t, { size: k === 0 ? (d.namnstorlek ?? 20) : (d.namnrad ?? 16), bold: k === 0, color: k === 0 ? NAVY : GREY })
       : p(t, { size: d.storlek ?? 20 }))), { w: w.slice(ci, ci + span).reduce((x, y) => x + y, 0), span, borders: { top: gransRader.has(ri) ? kant(BLUE, 14) : kant(), bottom: kant(), left: INGEN, right: INGEN }, mar: { top: luftRad, bottom: luftRad, left: 100, right: 100 } });
   }) }));
   return [
     luft(120),
     new Table({ width: { size: TW, type: WidthType.DXA }, columnWidths: w, layout: 'fixed', rows: [band, huvud, ...rader] }),
-    ...(d.not ? [p(d.not, { size: 18, before: 70 })] : []),
+    // En radbrytning i noten är ett nytt stycke, som i riggens build/strategipapper.js (Ljudstartens ord, K-808).
+    ...String(d.not ?? '').split('\n').filter(Boolean).map((t, i) => p(t, { size: 18, before: i ? 20 : 70 })),
   ];
 }
 

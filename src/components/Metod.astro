@@ -65,7 +65,7 @@ import { borjaHar } from '../lib/skrivkort';
 import Centralknapp from './Centralknapp.astro';
 import Centralrad from './Centralrad.astro';
 import FriTabell from './FriTabell.astro';
-import { centralaVid, metodensCentrala } from '../lib/centrala';
+import { centralaIMaterialet, centralaVid, metodensCentrala } from '../lib/centrala';
 import { vavdaIBorjan, vavtVid } from '../lib/vav';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import Hemsidaknapp from './Hemsidaknapp.astro';
@@ -645,6 +645,8 @@ const meny = [
       {!undersida && (<>
       <h2>{d.ramar.rubrik}</h2>
       {d.ramar.text.map((s) => <p>{s}</p>)}
+      {/* Ett delat stödmaterial som inledningen nämner, som Ljudstartens ord (centralaIMaterialet i src/lib/centrala.ts). */}
+      <Centralrad saker={centralaIMaterialet(d)} metod={id} titel={d.titel} />
       {/* Lektionskorten först i Materialet (src/lib/lektionskort.ts; Niclas 2026-10-17: "Info om lektionskortet måste nog
           också stå i materialet för en metod och dess blå knapp finnas där"): namnet, meningen om vad kortet har och
           knappen, direkt efter inledningen, som nämner kortet. I Word-filen med allt står kortet sist i Materialet, på sina

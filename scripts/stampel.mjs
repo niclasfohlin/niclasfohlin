@@ -17,8 +17,9 @@ const gitmapp = (rot) => resolve(rot, git(rot, ['rev-parse', '--git-dir']).stdou
 const filen = (rot) => join(gitmapp(rot), 'validera-stampel.json');
 
 /** Det som valideringens steg efter bygget skriver: pdf:erna, bilderna och filerna under public/, mätningarnas data och
- *  förteckningen över mallarnas små bilder i verktyget Innehåll, som görs ur Words pdf:er efter bygget (K-800). */
-export const SKRIVS_AV_STEGEN = Object.freeze([/^public\//, /^src\/data\/lathund-word\.json$/, /^src\/data\/sidlas\.json$/, /^src\/data\/innehall\/minibilder\.json$/]);
+ *  förteckningarna över de små bilderna, mallarnas i verktyget Innehåll och stödmetodernas små kort, som görs ur Words pdf:er
+ *  efter bygget (K-800, K-808). */
+export const SKRIVS_AV_STEGEN = Object.freeze([/^public\//, /^src\/data\/lathund-word\.json$/, /^src\/data\/sidlas\.json$/, /^src\/data\/innehall\/minibilder\.json$/, /^src\/data\/minibilder\.json$/]);
 
 // Arbetsträdets innehåll som git skulle committa det: allt som inte är ignorerat, med git:s egen radslutsregel, i ett
 // eget index så att det riktiga inte rörs. Tom när git inte kan läsa trädet, som när en fil är låst.
