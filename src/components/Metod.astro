@@ -645,8 +645,6 @@ const meny = [
       {!undersida && (<>
       <h2>{d.ramar.rubrik}</h2>
       {d.ramar.text.map((s) => <p>{s}</p>)}
-      {/* Ett delat stödmaterial som inledningen nämner, som Ljudstartens ord (centralaIMaterialet i src/lib/centrala.ts). */}
-      <Centralrad saker={centralaIMaterialet(d)} metod={id} titel={d.titel} />
       {/* Lektionskorten först i Materialet (src/lib/lektionskort.ts; Niclas 2026-10-17: "Info om lektionskortet måste nog
           också stå i materialet för en metod och dess blå knapp finnas där"): namnet, meningen om vad kortet har och
           knappen, direkt efter inledningen, som nämner kortet. I Word-filen med allt står kortet sist i Materialet, på sina
@@ -691,6 +689,10 @@ const meny = [
       )}
       {bildUpphov && <p class="m-efter">{bildUpphov}</p>}
       {omslagUpphov(d) && <p class="m-efter">{omslagUpphov(d)}</p>}
+      {/* Ett delat stödmaterial som inledningen nämner, som Ljudstartens ord (centralaIMaterialet i src/lib/centrala.ts), sist i
+          inledningen: lektionskortet står först, och raden om Andika följer på inledningens mening om Andika (andra ögat
+          2026-11-17). */}
+      <Centralrad saker={centralaIMaterialet(d)} metod={id} titel={d.titel} />
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
           ordnad lista med länkar till varje ram, där nivåerna fälls ut (Ramindex.astro, K-152). */}
       </>)}

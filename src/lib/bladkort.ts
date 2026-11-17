@@ -98,8 +98,9 @@ export function metodensBladkort(id: string, d: Um): Bladkort | null {
 // register läses nyckel för nyckel som Metoders metoder. Sakens namn är ett blad, en mall eller en tabell i metoden, och
 // adressen är den som texten på sidan leder till (sidansSaker i src/lib/metodsaker.ts), där knappen som skriver ut saken står.
 // Saken kan också vara ett delat stödmaterial som är en pdf och som metoden visar i fältet centrala, som Ljudstartens ord
-// (K-808; Niclas 2026-11-17: "ha en bild för den"): raden är meningen som börjar med namnet i texten där knappen står, och
-// kortet leder dit, till den fria tabellen, eller till pdf:en när platsen inte är en tabell.
+// (K-808; Niclas 2026-11-17: "ha en bild för den"): raden är registrets beskrivning av saken (mejl i src/data/centrala.json),
+// eller meningen i texten där knappen står som börjar med mening, och kortet leder dit, till den fria tabellen, eller till
+// pdf:en när platsen inte är en tabell.
 type StodPost = { stycket: string; saker: Sak[] };
 const stodposten = (id: string) => (stodregister as unknown as Record<string, StodPost | undefined>)[id];
 const stodfel = (d: MetodData, vad: string) => new Error(`src/data/bladkort-stod.json: ${d.titel} ${vad}`);
@@ -132,7 +133,9 @@ export function stodmetodensBladkort(id: string, d: MetodData): Bladkort | null 
     const pdf = pdfer.find((c) => c.namn === namn);
     if (pdf) {
       const plats = tolkaTextplats(d.centrala!.find((x) => x.id === pdf.id)!.efterText);
-      const rad = kortetsRad(d as unknown as Um, namn, plats && platsensText(d, plats), typeof s === 'string' ? namn : s.mening);
+      // Raden är registrets beskrivning av saken, som mejlet har efter länken: metodens mening vid knappen säger att saken
+      // finns "på metodens sida", och kortet står redan där (verifieringen av K-808).
+      const rad = typeof s === 'string' ? `${pdf.mejl.charAt(0).toLocaleUpperCase('sv')}${pdf.mejl.slice(1)}.` : kortetsRad(d as unknown as Um, namn, plats && platsensText(d, plats), s.mening);
       const tabell = plats && 'tabell' in plats ? metodensAnkare(d, sidansAvsnitt(d)).tabellAnkare.get(d.tabeller.find((t) => sammaRubrik(t.rubrik, plats.tabell))!) : undefined;
       return { namn, rad, adress: tabell ? `#${tabell}` : pdf.adress, bild: bilden(namn) };
     }

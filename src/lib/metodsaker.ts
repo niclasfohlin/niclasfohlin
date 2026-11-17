@@ -302,7 +302,9 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   avsnittet(d.gruppen?.rubrik, `${sida}#gruppen`, 'avsnitt');
   avsnittet(d.principer?.rubrik, `${sida}#principer`, 'avsnitt');
   for (const t of d.tabeller) { const a = tabellAnkare.get(t); if (a) avsnittet(t.rubrik, `${sida}#${a}`, 'tabell'); }
-  // Verktygen och stödmaterialen på sajten, som texten nämner med namnet i registret (STIL.md under Hänvisningar).
-  for (const c of CENTRALA) if (c.slag !== 'formular') saker.push({ namn: c.namn, former: [c.namn], versal: true, adress: lasbarAdress(c) });
+  // Verktygen och stödmaterialen på sajten, som texten nämner med namnet i registret (STIL.md under Hänvisningar). Ett namn
+  // med flera ord, som Ljudstartens ord, är namnet också först i en mening, där ett ord för sig kan vara ett vanligt ord
+  // (verifieringen av K-808: "Ljudstartens ord står sist" i planens rad Före insatsen blev ingen länk).
+  for (const c of CENTRALA) if (c.slag !== 'formular') saker.push({ namn: c.namn, former: [c.namn], versal: true, ...(/\s/.test(c.namn.trim()) ? { forst: true } : {}), adress: lasbarAdress(c) });
   return saker;
 }

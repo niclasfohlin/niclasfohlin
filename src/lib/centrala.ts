@@ -130,8 +130,8 @@ const passar = (vid: Textplats, plats: Textplats) => ('stycke' in vid ? 'stycke'
 /** Metodens centrala saker, i fältets ordning. */
 export const metodensCentrala = (d: MetodForText): Central[] => (d.centrala ?? []).map((x) => centralAv(x.id)).filter((c): c is Central => !!c);
 /** De delade stödmaterial som är pdf:er och som Materialets inledning nämner vid namn, som Ljudstartens ord i Ljudlek (K-808;
- *  Niclas 2026-11-17: "ha en bild för den samt i materialet"): knappen står efter inledningen, som lektionskortets
- *  (Niclas 2026-10-17: "dess blå knapp finnas där"), och i Word-filen med allt står saken sist. */
+ *  Niclas 2026-11-17: "ha en bild för den samt i materialet"): knappen står sist i inledningen, efter lektionskortet, som
+ *  också har sin knapp där (Niclas 2026-10-17: "dess blå knapp finnas där"), och i Word-filen med allt står saken sist. */
 export const centralaIMaterialet = (d: MetodForText & { ramar?: { text?: string[] } }): Central[] => metodensCentrala(d).filter((c) => c.slag === 'pdf' && (d.ramar?.text ?? []).some((s) => s.includes(c.namn)));
 /** Sakerna vars knapp står efter texten på platsen. */
 export const centralaVid = (d: MetodForText, plats: Textplats): Central[] => (d.centrala ?? []).filter((x) => { const v = tolkaTextplats(x.efterText); return v && passar(v, plats); }).map((x) => centralAv(x.id)).filter((c): c is Central => !!c);
