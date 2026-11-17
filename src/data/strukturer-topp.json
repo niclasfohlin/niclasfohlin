@@ -1,10 +1,10 @@
 {
-  "datum": "2026-11-16T05:15:33.393Z",
+  "datum": "2026-11-17T09:28:59.264Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 106,
-      "besok": 51,
+      "antal": 107,
+      "besok": 52,
       "utskrifter": 11
     },
     {
@@ -92,6 +92,12 @@
       "utskrifter": 2
     },
     {
+      "id": "lyssna-och-skriv",
+      "antal": 14,
+      "besok": 4,
+      "utskrifter": 2
+    },
+    {
       "id": "fraga-fraga-byt",
       "antal": 13,
       "besok": 3,
@@ -171,12 +177,6 @@
     },
     {
       "id": "kommunicera",
-      "antal": 8,
-      "besok": 3,
-      "utskrifter": 1
-    },
-    {
-      "id": "lyssna-och-skriv",
       "antal": 8,
       "besok": 3,
       "utskrifter": 1
@@ -320,6 +320,12 @@
       "utskrifter": 0
     },
     {
+      "id": "parrespons",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
       "id": "rondellen",
       "antal": 3,
       "besok": 3,
@@ -357,12 +363,6 @@
     },
     {
       "id": "las-rita-redovisa",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
-      "id": "parrespons",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
