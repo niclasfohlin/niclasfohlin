@@ -180,6 +180,26 @@
           "beslut": "Inget: lektionskortet står överst, och lathunden har lektionens delar"
         }
       ]
+    },
+    "src/content/stodundervisning/ljudlek-i-grupp.yaml": {
+      "provad": "2026-11-17",
+      "saker": [
+        {
+          "sak": "Ljudstartens ord, kortet med fram- och baksida som läraren har i handen under ljudstarten i varje pass (K-808)",
+          "forst": "Ny sak. Knappen under ingressen på skärm 1 av 70, det lilla kortet med minibild på skärm 5, knappen vid tabellen Ljudstarten och knappen i Materialet",
+          "beslut": "Knappen överst ur fältet centrala och ett litet kort efter stycket om ljudstarten (src/data/bladkort-stod.json), med en minibild ur kortets framsida (Niclas 2026-11-17: \"ha en bild för den samt i materialet\")"
+        },
+        {
+          "sak": "Bokstavskort till ljudstarten, som skrivs ut två gånger före första passet",
+          "forst": "Länken bokstavskorten till ljudstarten på skärm 11 och bladets knapp på skärm 49 av 70",
+          "beslut": "Inget: korten skrivs ut en gång före insatsen, och Planera insatsen leder dit i förberedelsen. Ett litet kort prövades, men minibilden ur bladets första sida visar lärarens text och inte korten"
+        },
+        {
+          "sak": "Ljudkollen, kartläggningen före insatsen som väljer ingången",
+          "forst": "Länken i Så fungerar insatsen på skärm 5",
+          "beslut": "Inget: den står tidigt och leder till bladet"
+        }
+      ]
     }
   }
 }

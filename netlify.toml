@@ -98,6 +98,11 @@
   status = 301
 
 [[redirects]]
+  from = "/ljudord"
+  to = "/stodundervisning/ljudstartens-ord.pdf"
+  status = 301
+
+[[redirects]]
   from = "/gruppstarkande"
   to = "/stodundervisning/gruppstarkande-aktiviteter/aktiviteter"
   status = 301

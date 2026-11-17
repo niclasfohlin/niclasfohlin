@@ -1,0 +1,226 @@
+{
+ "design": "strategipapper",
+ "fil": "Ljudstartens ord",
+ "titel": "Ljudstartens ord",
+ "dokumenttitel": "Ljudstartens ord · Ljudlek i grupp",
+ "knapp": "Ordlista",
+ "info": [
+  "Ljudlek i grupp · alla lektioner"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "Ljudenliga ord med två till fem bokstäver, ett ljud för varje bokstav, i den ordning gruppen får bokstäverna.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Dagens ljud har en rad",
+    "text": "Först står ord som börjar på ljudet, sedan ord som har ljudet inne i ordet eller sist. Lägger du ut bokstavskorten, väljer du ord med bokstäver som gruppen har haft."
+   },
+   {
+    "rubrik": "Lättast först",
+    "text": "I varje ruta står orden utan konsonantmöte överst och orden med konsonantmöte under, som sten och fisk. Välj efter gruppens ordgrupp i Ordbanken: fem ord att sätta ihop och fyra att dela upp."
+   },
+   {
+    "rubrik": "Byt i mitten",
+    "text": "Orden vid pilarna skiljer sig på ett ljud inne i ordet. Ta gärna ett par eller en kedja när ni sätter ihop, och fråga vilket ljud som byttes."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "VI SOLARMEN",
+   "text": "de tio första bokstäverna: s, o, l, a, r, m, e, n, i och v",
+   "kolumner": [
+    "Bokstaven",
+    "Börjar på ljudet",
+    "Har ljudet i sig",
+    "Byt i mitten"
+   ],
+   "bredder": [
+    11,
+    39,
+    23,
+    27
+   ],
+   "storlek": 20,
+   "namnstorlek": 30,
+   "tat": true,
+   "rader": [
+    [
+     "s",
+     "sa, se, sy, så, sal, ser, sil, sol, sur, sås, säl, sak, såg, sola, sopa\nsnö, slev, smal, smör, svan, sko, stå, skal, sten, stol, stor, salt, sand",
+     "is, os, lus, mos, mus, ros, vas, gås, läsa\nglas, gris, hals, ost, fisk, häst, mask",
+     "sol → sal → sil → säl  ser → sur → syr → sår  sola → sila → sula  stol → stal → stil"
+    ],
+    [
+     "o",
+     "os, oro, otur\norm, ond, ont, ost",
+     "ro, mor, mos, ros, sol, bok, mosa, sola\nsnor, sko, stol, stor, bro, gro, klo, krok",
+     "mos → mås  mor → mår  stor → står  bor → bur"
+    ],
+    [
+     "l",
+     "le, ler, lus, lår, löv, lat, lek, låt, lök, lera, lila, läsa, leta, lite\nlarm, lins, land, luft, lukt, lyft, läsk",
+     "ål, mål, nål, sol, säl, gul, måla, vila\nstol, blå, klo, blad, glas, hals, tält",
+     "lus → lås → läs → lös  lek → lok → lök  lera → lura → lära  leta → lita → luta"
+    ],
+    [
+     "a",
+     "al, ana, apa\narm, and, ask",
+     "far, vas, mat, ta, bad, tak, baka, kaka\nsvan, glas, hals, hand, land, mask, sand",
+     "gas → gås  gata → gåta  bad → bud  dal → del  hand → hund"
+    ],
+    [
+     "r",
+     "ro, rå, ram, ren, ris, ros, räv, rak, rep, rik, rot, röd, rasa, resa, räka\nrand, rast, rund, runt, rymd, röst",
+     "år, far, hår, ler, mor, ser, lera, mera\nfrö, smör, stor, bro, grå, tre, bröd, arm",
+     "rad → red → råd → röd  rak → rik → rök  reta → rita → rota  ros → ris → ras"
+    ],
+    [
+     "m",
+     "mor, mos, mus, mål, mås, mat, mera, mosa, myra, måla, måne, mage, morot\nmjöl, mjuk, mark, mask, must, mynt, mörk",
+     "ram, dam, jama, lama, same, puma\nsmå, smal, smör, arm, orm, ärm, film, hamn",
+     "mos → mus → mys → mås  mor → mur → mår → mer  mal → mil → mål  mata → mäta → möta"
+    ],
+    [
+     "e",
+     "el, er, ek, era, eko, egen, elak",
+     "le, se, ler, ren, ser, lek, te, lera, leta\nfler, slev, sten, tre, blek, brev, gren",
+     "hel → häl  ler → lär  lera → lära  vet → vit  het → hit  leta → lita"
+    ],
+    [
+     "n",
+     "ni, nu, ny, nå, ner, nos, nål, nät, nöt, nära, näsa, näve, noga, nagel\nnjuta, namn",
+     "fin, len, ren, vin, ben, hona, måne, böna\nsnö, svan, sten, hand, hund, sand, vind",
+     "nät → nöt  nysa → nosa"
+    ],
+    [
+     "i",
+     "is, ila, igel",
+     "ni, vi, fin, ris, bi, bil, pil, vila, fika\nspik, bli, gris, film, fisk, vild, vind",
+     "fira → fyra  bita → byta  vit → vet  stig → steg"
+    ],
+    [
+     "v",
+     "vi, val, vas, vin, vår, vet, vik, vit, våg, våt, väg, vila, visa, veta\nvarm, varv, vakt, valp, vikt, vild, vind, visp, väst",
+     "hav, liv, löv, räv, bov, öva, duva, bäver\nslev, svan, svar, två, brev, kniv, kalv",
+     "våg → väg  vit → vet → våt  van → vin  vakt → vikt"
+    ]
+   ],
+   "not": "Säg vad ordet betyder första gången, också när du tror att alla vet. I alla ord låter o som i sol, och den första vokalen är lång, som i mos och lera, utom före två konsonanter, som i arm och fisk."
+  }
+ ],
+ "baksida": {
+  "titel": "Ljudstartens ord",
+  "undertitel": "Fortsättning från framsidan, med de fjorton bokstäverna efter VI SOLARMEN.",
+  "delar": [
+   {
+    "rubrik": "Bokstäverna sedan",
+    "text": "t, f, å, p, k, d, u, b, g, h, y, ä, ö och j",
+    "kolumner": [
+     "Bokstaven",
+     "Börjar på ljudet",
+     "Har ljudet i sig",
+     "Byt i mitten"
+    ],
+    "bredder": [
+     11,
+     39,
+     23,
+     27
+    ],
+    "storlek": 19,
+    "namnstorlek": 30,
+    "tat": true,
+    "rader": [
+     [
+      "t",
+      "ta, te, tå, tak, tal, tar, tid, tub, tut, tåg, tår, tala, tuta, tiger, tusen\ntre, tro, trä, två, tråd, träd, tvål, träna, tand, tant, tips, tyst, tält",
+      "ut, fat, fot, mat, nöt, vit, båt, leta, rita\nstå, sten, stol, stor, ost, häst, salt, kant",
+      "tag → tåg → tyg  tar → tur"
+     ],
+     [
+      "f",
+      "fe, fy, få, far, fel, fil, fin, får, föl, fat, fot, fira, fyra, fika, fågel\nfly, fri, fru, frö, fler, film, fisk",
+      "höft, luft, lyft, saft",
+      "fel → fil → ful  far → får  fat → fot  fira → fyra"
+     ],
+     [
+      "å",
+      "ål, år, åk, åra, åka, åker",
+      "så, hår, mål, mås, nål, båt, gås, kål, tåg\nslå, stå, blå, grå",
+      "mal → mål  kal → kål  lat → låt  skal → skål  lada → låda"
+     ],
+     [
+      "p",
+      "på, par, pil, pip, peka, peta, pipa, puma, påse\nplan, plåt, prat, pris, prov, pryl, prata, park, pump, påsk",
+      "rep, rop, gap, typ, apa, nypa, repa, sopa\nspel, spik, spis, spår, kryp, valp, tips",
+      "rep → rop  ropa → rapa"
+     ],
+     [
+      "k",
+      "ko, kal, kor, kub, kul, kål, kaka, kana, koka, kula, kabel\nklo, klä, knä, kniv, kram, krok, kryp, kvar, krita, krona, kråka, kalv, kant",
+      "ek, lek, lök, sak, bok, duk, tak, baka, peka\nsko, skal, skog, spik, blek, ask, fisk, mask",
+      "kal → kål → kul  kaka → koka"
+     ],
+     [
+      "d",
+      "du, då, dal, dam, deg, del, dit, duk, dyr, dela, dike, duka, duva, dyka, dagis\ndra, drake, druva, dans, disk",
+      "hud, råd, röd, bad, tid, låda, bada, båda\nbröd, hand, hund, land, rund, sand, vind",
+      "dal → del  duka → dyka  leta → leda  skata → skada"
+     ],
+     [
+      "u",
+      "ur, uv, ut, ute, utan",
+      "nu, hus, lus, mur, mus, sur, duk, gul, kul\nfru, brun, hund, rund",
+      "mus → mys  luft → lyft  ruta → ryta  fluga → flyga"
+     ],
+     [
+      "b",
+      "bi, bo, by, bad, ben, bil, bok, bur, bus, båt, bär, bada, baka, böna, bäver\nbli, blå, bra, bro, blad, blek, blöt, brev, bror, brun, bröd, bjuda, bild",
+      "kub, tub, feber, jubel, möbel, kabel",
+      "bar → bor → bur → bär  bit → bet → båt  bad → bud  bita → byta → beta"
+     ],
+     [
+      "g",
+      "gå, gap, gas, god, gud, gul, gås, gata, gosa, gåta, godis\ngro, grå, glad, glas, gran, gren, gris, grus, glida, groda, gråta, gräva, guld",
+      "såg, våg, väg, tåg, öga, mage, fågel, tiger\nflyg, skog, steg, stig, fluga, flyga, stege",
+      "gas → gås  gata → gåta  gran → gren → grön  gräs → grus → gris"
+     ],
+     [
+      "h",
+      "ha, hö, hal, har, hav, hel, hos, hus, hål, hår, häl, hud, hög, hök, hare, hona\nhals, hamn, hand, hund, häst, höst",
+      "",
+      "har → hur → hår → här  hal → hel → hål → häl  hage → hake → hare"
+     ],
+     [
+      "y",
+      "yr, yla, yra, yta",
+      "fy, ny, sy, syn, syr, by, dyr, fyra, myra\nfly, flyg, kryp, rymd",
+      "fira → fyra  bita → byta  mus → mys  salt → sylt"
+     ],
+     [
+      "ä",
+      "ät, ära, äga, äta, äter\närm",
+      "häl, räv, säl, väg, bär, läsa, näsa, bäver\nklä, träd, häst, tält",
+      "hel → häl  ler → lär  lera → lära  veva → väva  mata → mäta"
+     ],
+     [
+      "ö",
+      "öra, ösa, öva, över, öga, öka, öken",
+      "löv, hök, lök, nöt, röd, lösa, röra, böna\nfrö, snö, smör, bröd",
+      "lok → lök  nät → nöt  läsa → lösa  hona → höna  gråt → gröt"
+     ],
+     [
+      "j",
+      "jo, ju, jul, jama, juli, juni, jaga, judo, jubel\njämn, jakt, just, jäst",
+      "mjöl, mjuk, bjuda",
+      "juni → juli  jama → jaga"
+     ]
+    ],
+    "not": "Säg b, d, g, k, p och t korta, utan ett ö efter, och säg sista ljudet tydligt i ord som tar, har, glad och röd. Kort u, som i hund, låter nästan som ö.\nOrd som slutar på -el, -en och -er, som tiger, passar bäst när ni sätter ihop."
+   }
+  ]
+ },
+ "kalla": "Hör till Ljudlek i grupp, där ljudstarten och Ordbanken står."
+}

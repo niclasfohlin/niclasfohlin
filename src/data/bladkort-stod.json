@@ -1,3 +1,9 @@
 {
-  "_om": "De små korten tidigt på en stödmetods sida (K-769), som i Metoder: reglerna står i src/data/bladkort.json under _om. En post har stycket, ett ord i det stycke i inledningen som korten står efter, och saker, högst tre, i den ordning de är viktigast: ett blad, en mall eller en tabell med ett namn som metoden har och en egen fil att skriva ut (sakfiler i src/lib/sakfiler.ts). Raden under namnet är första meningen i metodens text om saken, eller meningen som börjar med mening. Bilderna är minibilder ur sakens fil (scripts/minibilder.mjs). Vilka saker som står här avgörs i provet Den trötta läraren (METODER.md under Arbetsgången, src/data/trottprov.json), och för en ny metod ur riggen säger brevet det."
+  "_om": "De små korten tidigt på en stödmetods sida (K-769), som i Metoder: reglerna står i src/data/bladkort.json under _om. En post har stycket, ett ord i det stycke i inledningen som korten står efter, och saker, högst tre, i den ordning de är viktigast: ett blad, en mall eller en tabell med ett namn som metoden har och en egen fil att skriva ut (sakfiler i src/lib/sakfiler.ts), eller ett delat stödmaterial som är en pdf och som metoden visar i fältet centrala, som Ljudstartens ord (K-808). Raden under namnet är första meningen i metodens text om saken, eller meningen som börjar med mening. Bilderna är minibilder ur sakens fil (scripts/minibilder.mjs). Vilka saker som står här avgörs i provet Den trötta läraren (METODER.md under Arbetsgången, src/data/trottprov.json), och för en ny metod ur riggen säger brevet det.",
+  "ljudlek-i-grupp": {
+    "stycket": "ljudstarten",
+    "saker": [
+      "Ljudstartens ord"
+    ]
+  }
 }

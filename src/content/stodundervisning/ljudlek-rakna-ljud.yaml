@@ -23,7 +23,7 @@ material:
   - magneter
   - bokstavskorten
   - speglar
-uppdaterad: 2026-10-28
+uppdaterad: 2026-11-17
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 6
@@ -33,6 +33,9 @@ vidare: "du har hört fler än hälften av eleverna själva säga ljuden och lä
 # första omkring tio pass. Min 3 ger nio pass, två veckor med fem pass i veckan, och min 4 hade hållit kvar en grupp med
 # fem pass i veckan en tredje vecka (sajtens återkoppling och logikläsaren 2026-10-27).
 veckor: { min: 3, max: 4 }
+centrala:
+  - id: ljudstartens-ord
+    efterText: "tabell: Ljudstarten: samma fem minuter varje pass"
 inledning:
   - "I Räkna ljud delar eleverna upp ord i sina ljud och flyttar en markör in i en ruta för varje ljud. Lektionen hjälper eleven med det som gör ljuden svåra att räkna: barn hör stavelser före ljuden, och ljudet i mitten och en konsonant i ett konsonantmöte faller lätt bort."
   - "Syftet är att eleverna hör varje ljud i ordet, i ordning, och vet hur många de är, så att de kan skriva ordet och läsa det. Du visar hur du flyttar en markör för varje ljud medan du säger ljudet, låter eleverna ta över steg för steg och lyssnar på var och en."
@@ -66,7 +69,7 @@ tabeller:
     not: "Varje rad har ett ark bildkort under Materialet, med bilden på framsidan och ordet med en prick för varje ljud på baksidan. Vilken rad gruppen börjar i beror på vad fler än hälften av eleverna missar i ljudkollen. Missar de få eller hål, börjar ni i Tre ljud att dra ut, missar de näsa i Två stavelser och missar de häst i Konsonantmöte först, den första raden med konsonantmöten. Finns det inget ord som fler än hälften missar, börjar ni i Konsonantmöte först. Har eleverna inte gjort uppgift 6 de senaste tre veckorna, gör du den med varje elev före första passet. Det tar omkring en minut per elev."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
-    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
+    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun. Ljudstartens ord är ett A4 med fram- och baksida på metodens sida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
     kolumner:
       - "Moment"
       - "Så gör du"
@@ -328,7 +331,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns lektionskortet, bildkorten, ett ark för varje rad i Så blir lektionen svårare, och bokstavskorten. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera ljudrutorna, som eleverna skriver på, och bokstavskorten. Bildkorten laminerar du när de är vikta och limmade."
+    - "Här finns lektionskortet, bildkorten, ett ark för varje rad i Så blir lektionen svårare, och bokstavskorten. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera ljudrutorna, som eleverna skriver på, och bokstavskorten. Bildkorten laminerar du när de är vikta och limmade. Ljudstartens ord står sist, och du skriver ut det dubbelsidigt."
   ramar:
     - rubrik: "Bildkorten"
       text:

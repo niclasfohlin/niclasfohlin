@@ -27,7 +27,7 @@ material:
   - "klossar"
   - "whiteboardtavlor och lappar"
   - "snabbmallen"
-uppdaterad: 2026-10-28
+uppdaterad: 2026-11-17
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -45,6 +45,8 @@ veckor: { min: 3, max: 4 }
 centrala:
   - id: skrivstrategier
     efterText: "tabell: Lyssna efter"
+  - id: ljudstartens-ord
+    efterText: "tabell: Ljudstarten: samma fem minuter varje pass"
 inledning:
   - "I Från ord till mening säger eleverna en mening efter dig, lägger en kloss för varje ord och bygger meningen ord för ord med lösa bokstäver ur en hög mitt på bänken. Lektionen hjälper eleven med det som gör en mening svår att skriva och läsa: eleven glömmer meningen medan hen bygger, orden flyter ihop utan mellanrum, stor bokstav och punkt faller bort, och eleven läser det hen tänkte i stället för det som står."
   - "Syftet är att eleverna ska kunna säga en kort mening, bygga den med mellanrum, stor bokstav och punkt, och läsa den, så att de kan skriva och läsa sina första meningar själva. Ditt uppdrag är att visa hur du säger, bygger och läser meningen, att låta eleverna säga den igen innan de bygger, och att låta dem läsa det som ligger, också kamratens nya ord."
@@ -75,7 +77,7 @@ tabeller:
     not: "Meningarna till varje rad står under Meningarna. I raden Egen mening säger alla en egen mening: du säger din och skriver den på tavlan, paret säger sin för dig när du går mellan paren, och sist skriver var och en sin egen. Har den egna meningen ett ord som inte stavas som det låter, till exempel jag eller och, skriver du det på tavlan, och paret bygger det efter tavlan. Säger eleven bara ett ord, som Mira, svarar du: ”Mira. Vad gör Mira?” Om högst hälften av eleverna läser alla fyra orden i ljudkollens uppgift 9 efter raden Egen mening, tar ni raderna Fyra ord och Egen mening igen."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
-    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
+    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun. Ljudstartens ord är ett A4 med fram- och baksida på metodens sida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
     kolumner:
       - "Moment"
       - "Så gör du"
@@ -350,7 +352,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns lektionskortet, bokstavskorten och arken med bokstäver att bygga med. Varje par har ett ark med små bokstäver, och två par delar ett ark med stora bokstäver och tecken. Med tolv elever blir det sex ark med små bokstäver och tre med stora. Skriv ut arken på tjockt papper, laminera dem och klipp isär bokstäverna. Klossarna är desamma som i Ord och stavelser, och du behöver fyra per elev och fyra till dig."
+    - "Här finns lektionskortet, bokstavskorten och arken med bokstäver att bygga med. Varje par har ett ark med små bokstäver, och två par delar ett ark med stora bokstäver och tecken. Med tolv elever blir det sex ark med små bokstäver och tre med stora. Skriv ut arken på tjockt papper, laminera dem och klipp isär bokstäverna. Klossarna är desamma som i Ord och stavelser, och du behöver fyra per elev och fyra till dig. Ljudstartens ord står sist, och du skriver ut det dubbelsidigt."
   ramar:
     - rubrik: "Bokstäver att bygga med"
       text:

@@ -23,7 +23,7 @@ material:
   - lektionens material
   - snabbmallen
   - kartläggningen
-uppdaterad: 2026-10-28
+uppdaterad: 2026-11-17
 relaterade:
   - laslistor-i-grupp
   - til-i-grupp
@@ -94,6 +94,9 @@ pabordet:
     alt: "Bokstavskartan har alfabetet på ett A4, och varje bokstav utom q, w och x har en bild och ordet under: Aa apa, Bb buss, Cc citron, Dd dörr, Ee ekorre, Ff fisk, Gg gurka, Hh hus, Ii is, Jj jordgubbe, Kk ko, Ll lejon, Mm myra, Nn nyckel, Oo orm, Pp paraply, Qq som k, Rr räv, Ss sol, Tt tiger, Uu uggla, Vv våffla, Ww som v, Xx som ks, Yy yxa, Zz zebra, Åå åsna, Ää äpple, Öö öga."
     efter: "ram: Bokstavskartan"
     fluent: [apa, buss, citron, dörr, ekorre, fisk, gurka, hus, is, jordgubbe, ko, lejon, myra, nyckel, orm, paraply, räv, sol, tiger, uggla, våffla, yxa, zebra, åsna, äpple, öga]
+centrala:
+  - id: ljudstartens-ord
+    efterText: "tabell: Ljudstarten: samma fem minuter varje pass"
 inledning:
   - "Ljudlek i grupp är för elever i förskoleklass till årskurs 2 som behöver stöd i att höra ljuden i orden och koppla dem till bokstäverna. Det märks när eleven säger ess om första ljudet i sol, gissar ett ord efter första bokstaven eller tvekar om sol och sko börjar med samma ljud."
   - "Så här lär sig eleven läsa och skriva. Att läsa är att se bokstäverna i ordning, säga ljudet för varje bokstav och sätta ihop ljuden till ett ord: sss-⁠ooo-⁠lll, sol. Att skriva är samma sak åt andra hållet: eleven säger ordet långsamt, hör ljuden ett i taget och skriver en bokstav för varje ljud. Eleven behöver alltså tre saker: höra ljuden i orden, kunna bokstävernas ljud, och kunna sätta ihop ljud och dela upp ord. Har eleven ljudat ett ord några gånger känner hen igen det direkt, och då går läsningen fort."
@@ -145,7 +148,7 @@ tabeller:
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: efter-steg
     meny: true
-    text: "I ljudstarten tränar ni varje pass att sätta ihop och dela upp ord. Det är kärnan i läsningen. Alla svarar samtidigt, så att du hör och ser hela gruppen. Vänd ansiktet mot eleverna, så att de ser din mun, och sitt gärna vid sidan av dem. Sitter du mitt emot dem för du handen från din högra sida till din vänstra, så att de ser den gå från vänster till höger."
+    text: "I ljudstarten tränar ni varje pass att sätta ihop och dela upp ord. Det är kärnan i läsningen. Alla svarar samtidigt, så att du hör och ser hela gruppen. Vänd ansiktet mot eleverna, så att de ser din mun, och sitt gärna vid sidan av dem. Sitter du mitt emot dem för du handen från din högra sida till din vänstra, så att de ser den gå från vänster till höger. Ljudstartens ord är ett A4 med fram- och baksida på metodens sida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
     kolumner:
       - Moment
       - Så gör du
@@ -265,7 +268,7 @@ tabeller:
         - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
       - - Konsonantmöte sist
         - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
-    not: "Orden står i ordning, lättast först, och i Med klusil kommer först orden där klusilen står sist. I Konsonantmöte sist är vokalen kort: dra ut de konsonanter som går att dra ut och säg vokalen kort, fff-⁠i-⁠sss-⁠k. Kort u, som i hund, låter nästan som ö. Säg vad ordet betyder första gången, också när du tror att alla vet. Ord som man, rum och jag låter inte som de stavas och får vänta tills eleverna läser. Orden i ljudkollen och i screeningens version B är inte övningsord: de står varken i Ordbanken, på korten eller i exemplen, så att kollen visar vad eleven kan med ord som hen inte har övat på."
+    not: "Orden står i ordning, lättast först, och i Med klusil kommer först orden där klusilen står sist. I Konsonantmöte sist är vokalen kort: dra ut de konsonanter som går att dra ut och säg vokalen kort, fff-⁠i-⁠sss-⁠k. Kort u, som i hund, låter nästan som ö. Säg vad ordet betyder första gången, också när du tror att alla vet. Ord som man, rum och jag låter inte som de stavas och får vänta tills eleverna läser. Orden i ljudkollen och i screeningens version B står varken i Ordbanken, på lektionernas kort eller i exemplen. I Ljudstartens ord står de med, bland alla andra ord."
 principer:
   rubrik: Fyra saker att hålla fast vid
   text: "Visa alltid först: tänk högt, peka och för handen från vänster till höger, sett från eleverna, och säg sedan ordet tillsammans. Säg ljudet och inte bokstavens namn när ni ljudar, och dra ut ljuden utan paus när ni sätter ihop dem, eftersom en paus gör att eleven tappar de första ljuden. Gör en sak i taget: ta samma lektion flera pass i följd och samma ord två gånger, eftersom det ger mer än nya lekar varje gång. Avsluta när det fortfarande går bra, så att passet slutar med något som eleverna klarade."
@@ -460,7 +463,7 @@ plan:
       text: "Kan gruppen alla bokstäver blir dagens ljud de ljud som gruppen blandar ihop, som p och b eller e och ä."
   fore:
     # Det som skrivs ut, kopieras och lamineras före första passet, ordagrant ur Materialet och protokollets fält Kopiera (K-596).
-    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen, version A och screeningen, version B, ljudkollen, protokollet för screeningen och ljudkollen, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar."
+    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen, version A och screeningen, version B, ljudkollen, protokollet för screeningen och ljudkollen, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Ljudstartens ord står sist, och du skriver ut det dubbelsidigt. Varje lektion har sitt eget material och säger vad du laminerar."
     - "Kopiera protokollet för screeningen och ljudkollen, ett papper per elev."
     # Hur bokstäverna i uppgift 4 ringas in på ljudkollens blad och dagens ljud väljs, hela ljudkollens fält Bokstäverna,
     # direkt efter kopiorna (K-596, Rimligheten efter omtaget).
@@ -515,7 +518,7 @@ grund:
 ramar:
   rubrik: Materialet
   text:
-    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen, version A och screeningen, version B, ljudkollen, protokollet för screeningen och ljudkollen, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Varje lektion har sitt eget material och säger vad du laminerar. Korten står i Andika, ett gratis typsnitt från SIL för dem som lär sig läsa."
+    - "Här finns bokstavskorten till ljudstarten, bokstavskartan, screeningen, version A och screeningen, version B, ljudkollen, protokollet för screeningen och ljudkollen, gruppens översikt och bladet Observation av ett pass. Allt går att kopiera. Skriv ut bokstavskorten till ljudstarten två gånger. Laminera korten, kartan och screeningens blad. Ljudkollens blad kopierar du, ett per elev. Ljudstartens ord står sist, och du skriver ut det dubbelsidigt. Varje lektion har sitt eget material och säger vad du laminerar. Korten står i Andika, ett gratis typsnitt från SIL för dem som lär sig läsa."
   ramar:
     - rubrik: Bokstavskort till ljudstarten
       text:

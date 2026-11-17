@@ -73,6 +73,15 @@
     "mejl": "ett A4 för läraren, med de fem strategierna för högläsning, deras tecken och frågorna om innehållet"
   },
   {
+    "id": "ljudstartens-ord",
+    "namn": "Ljudstartens ord",
+    "slag": "pdf",
+    "del": "stodmaterial",
+    "adress": "/stodundervisning/ljudstartens-ord.pdf",
+    "kort": "/ljudord",
+    "mejl": "ett A4 med fram- och baksida att ha i handen under ljudstarten, med ord som börjar på varje ljud och ord som har ljudet i sig"
+  },
+  {
     "id": "aktiviteter",
     "namn": "Ta fram en aktivitet",
     "knapp": "Aktiviteter",

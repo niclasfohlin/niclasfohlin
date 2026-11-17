@@ -22,13 +22,16 @@ material:
   - bokstavskorten
   - speglar
   - snabbmallen
-uppdaterad: 2026-10-28
+uppdaterad: 2026-11-17
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 1
 tranar: "höra och hitta rim, och byta början av ordet"
 vidare: "du har hört fler än hälften av eleverna själva byta bara början och säga det nya ordet i steg 4 i raden Byt början"
 veckor: { min: 2, max: 2 }
+centrala:
+  - id: ljudstartens-ord
+    efterText: "tabell: Ljudstarten: samma fem minuter varje pass"
 inledning:
   - "I Rim delar eleverna ordet i början och resten: hus är /h/ och us, och stol är /st/ och ol. Ord med samma rest rimmar, och med en ny början blir det ett nytt ord: mus, lus. Lektionen hjälper eleven med det som gör rim svårt: betydelsen tar över, så att råtta blir ett rim på mus, eller första ljudet tar över, så att sko blir ett rim på sol."
   - "Syftet är att eleverna lyssnar på hur orden låter och hör att ett ord har en början som går att byta. Du visar hur du delar ordet, blandar par som rimmar med par som inte gör det och låter påhittade ord räknas."
@@ -56,7 +59,7 @@ tabeller:
     not: "Gruppen börjar i raden Rim eller inte. Om nästan alla bara missade att säga ett eget rim i ljudkollen, börjar gruppen i raden Början och resten. I alla rader tar ni rimkorten, sex i steg 3 och de sex andra i steg 4. Den som ännu inte hör rim när ni går vidare får ett rimpar sist i ljudstarten. Orden i ljudkollen och i screeningens version B är inte övningsord. Föreslå dem inte, men säger eleven ett av dem, räknas det."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
-    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
+    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun. Ljudstartens ord är ett A4 med fram- och baksida på metodens sida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
     kolumner:
       - "Moment"
       - "Så gör du"
@@ -337,7 +340,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns lektionskortet, rimkorten, restkorten och bokstavskorten. Allt går att kopiera. Laminera restkorten och bokstavskorten, och rimkorten när de är vikta och limmade."
+    - "Här finns lektionskortet, rimkorten, restkorten och bokstavskorten. Allt går att kopiera. Laminera restkorten och bokstavskorten, och rimkorten när de är vikta och limmade. Ljudstartens ord står sist, och du skriver ut det dubbelsidigt."
   ramar:
     - rubrik: "Rimkorten"
       text:

@@ -1811,6 +1811,30 @@
       "nej": {
         "gruppstarkande-aktiviteter": "Modelleringen i aktiviteterna gäller ett socialt beteende och inget innehåll som eleverna ska lära sig och ta fram igen, så ingen av strategierna för lärande stöder metodens kärna (sökningen 2026-11-03, underlag/prov/strategier/sadd-svar-b.md)."
       }
+    },
+    "ljudstartens-ord": {
+      "tranar": [
+        "fonologisk-medvetenhet"
+      ],
+      "karna": [
+        "\bljudstart",
+        "\bsätt(?:er|a)? ihop\b[^.]{0,40}\bljud",
+        "\bdela(?:r)? upp\b[^.]{0,40}\b(?:ord|ljud)"
+      ],
+      "provad": "2026-11-17",
+      "ja": {
+        "ljudlek-i-grupp": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Varje pass börjar med ljudstarten, där gruppen sätter ihop och delar upp ord; listan är orden till den, gjord för metoden (Niclas 2026-11-17)",
+        "ljudlek-rim": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)",
+        "ljudlek-ord-och-stavelser": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)",
+        "ljudlek-forsta-ljudet": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)",
+        "ljudlek-bokstavsgympa": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)",
+        "ljudlek-smaka-pa-ljud": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)",
+        "ljudlek-rakna-ljud": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)",
+        "ljudlek-skriv-ord-tillsammans": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)",
+        "ljudlek-fran-ljud-till-ord": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)",
+        "ljudlek-fran-ord-till-mening": "Efter tabellen Ljudstarten: samma fem minuter varje pass. Lektionen har seriens ljudstart i varje pass; listan är orden till den, gjord för serien (Niclas 2026-11-17)"
+      },
+      "nej": {}
     }
   }
 }

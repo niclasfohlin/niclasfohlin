@@ -23,13 +23,16 @@ material:
   - bokstavskorten
   - speglar
   - snabbmallen
-uppdaterad: 2026-10-28
+uppdaterad: 2026-11-17
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 2
 tranar: "dela meningar i ord och ord i stavelser"
 vidare: "du har hört fler än hälften av eleverna själva räkna delarna i sina ord, också den svaga delen, i steg 4 i raden Stavelser"
 veckor: { min: 2, max: 2 }
+centrala:
+  - id: ljudstartens-ord
+    efterText: "tabell: Ljudstarten: samma fem minuter varje pass"
 inledning:
   - "I Ord och stavelser upptäcker eleverna att en mening består av ord och att ett ord består av delar som går att klappa: ”Jag ser en ko” är fyra ord, och ananas är tre delar. Lektionen hjälper eleven med det som gör delarna svåra att höra: i talet flyter orden ihop, eleven tycker att tåg är ett längre ord än nyckelpiga eftersom tåget är långt, och småord och svaga delar, som to i tomat, faller bort."
   - "Syftet är att eleverna ska höra orden och delarna, så att de kan skriva med mellanrum mellan orden och läsa längre ord i delar. Du visar hur man lägger en kloss för varje ord och klappar delarna, säger orden i vanlig takt och slutar med skrivna delar som gruppen läser."
@@ -57,7 +60,7 @@ tabeller:
     not: "Gruppen börjar i raden Orden i meningen. Där tar ni korten i steg 3 och 4 från arket Stavelser. Bildkorten är vikta, med bilden på framsidan, ordet i delar på baksidan och en båge under varje del. Den som klappade banan eller krokodil med en del för lite i ljudkollen får to-⁠mat, ka-⁠nin och po-⁠ta-⁠tis i steg 4."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
-    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
+    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun. Ljudstartens ord är ett A4 med fram- och baksida på metodens sida, att ha i handen under ljudstarten: för varje bokstav ord som börjar på ljudet och ord som har ljudet i sig."
     kolumner:
       - "Moment"
       - "Så gör du"
@@ -333,7 +336,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns lektionskortet, bildkorten, stavelsekorten och bokstavskorten. Allt går att kopiera. Laminera stavelsekorten och bokstavskorten, och bildkorten när de är vikta och limmade."
+    - "Här finns lektionskortet, bildkorten, stavelsekorten och bokstavskorten. Allt går att kopiera. Laminera stavelsekorten och bokstavskorten, och bildkorten när de är vikta och limmade. Ljudstartens ord står sist, och du skriver ut det dubbelsidigt."
   ramar:
     - rubrik: "Bildkorten"
       text:
