@@ -132,6 +132,7 @@ const planbara = poster.stodundervisning.filter((m) => planbar(m.data)).map((m) 
 
   <script>
     import { CENTRALA } from '../lib/centrala';
+    import { listansAdress } from '../lib/goatcounteradress.js';
     type Hit = { path: string; path_id: number; title: string; event: boolean; count: number };
     // syns: raden står med fast antalet är 0, som en metod vars verktyg eller undersidor har besök men inte metodsidan.
     type Rad = { namn: string; under?: string; antal: number; syns?: boolean };
@@ -210,8 +211,9 @@ const planbara = poster.stodundervisning.filter((m) => planbar(m.data)).map((m) 
       return min;
     }
     // Svaret har olika form per anrop (hits, total, toprefs, sizes) och läses fält för fält där det används.
+    // vag är en väg under GoatCounters adress, eller en hel adress, som listans (listansAdress).
     async function hamta(vag: string, parametrar: Record<string, string | number | (string | number)[]>, aktuell = () => true): Promise<any> {
-      const url = new URL(bas + vag);
+      const url = new URL(vag.startsWith('http') ? vag : bas + vag);
       for (const [k, v] of Object.entries(parametrar)) for (const x of Array.isArray(v) ? v : [v]) url.searchParams.append(k, String(x));
       const sparat = sparade.get(url.href);
       if (sparat && Date.now() - sparat.tid < 5 * 60 * 1000) return sparat.json;
@@ -247,7 +249,8 @@ const planbara = poster.stodundervisning.filter((m) => planbar(m.data)).map((m) 
       }
     }
     // Sidorna och händelserna i perioden, 100 i taget (GoatCounters största limit, api.json), tills GoatCounter säger att
-    // inget mer finns, högst 20 omgångar (2 000). De som redan hämtats skickas som en kommaseparerad exclude_paths:
+    // inget mer finns eller adressen skulle bli för lång för HTTP/2 (src/lib/goatcounteradress.js, omkring 900 sidor och
+    // händelser). De som redan hämtats skickas som en kommaseparerad exclude_paths:
     // GoatCounter läser bara det första värdet om parametern upprepas, och då kom samma 100 tillbaka fem gånger och
     // räknades dubbelt (K-095). En sida som redan finns räknas aldrig igen, och hämtningen slutar när en omgång inte ger
     // något nytt. Nedladdningarna och delningarna räknas ur listan, så en lista som inte är hel säger sidan (hela), i
@@ -256,8 +259,10 @@ const planbara = poster.stodundervisning.filter((m) => planbar(m.data)).map((m) 
       const ut: Hit[] = [];
       const sedda = new Set<number>();
       let hela = false;
-      for (let i = 0; i < 20; i++) {
-        const svar = await hamta('/api/v0/stats/hits', { ...t, limit: 100, ...(sedda.size ? { exclude_paths: [...sedda].join(',') } : {}) }, aktuell);
+      for (;;) {
+        const adress = listansAdress(bas, t, sedda);
+        if (!adress) break;
+        const svar = await hamta(adress, {}, aktuell);
         const nya = ((svar.hits ?? []) as Hit[]).filter((h) => !sedda.has(h.path_id));
         for (const h of nya) {
           sedda.add(h.path_id);
@@ -597,14 +602,14 @@ const planbara = poster.stodundervisning.filter((m) => planbar(m.data)).map((m) 
         ]);
         if (denna !== korning) return;
         const nu = new Date();
-        status.textContent = `Hämtat ${nu.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}.${hela ? '' : ' Perioden har fler än 2 000 sidor och händelser, och bara de 2 000 första är med, så nedladdningarna, delningarna och listorna är för låga.'}`;
+        status.textContent = `Hämtat ${nu.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}.${hela ? '' : ` Bara de ${hits.length.toLocaleString('sv-SE')} sidorna och händelserna med flest besök är med, så nedladdningarna, delningarna och listorna är för låga. Rutan besökare och diagrammet är hela.`}`;
       } catch (e) {
         if (denna !== korning) return;
         if (e instanceof NyckelFel) { visaForm('Nyckeln fungerar inte. Skapa en ny med rätten Read statistics och klistra in den.'); return; }
         if (e instanceof Grans) {
           status.textContent = navigator.onLine === false
             ? 'Telefonen eller datorn är inte uppkopplad. Försök igen när nätet fungerar.'
-            : 'GoatCounter tar inte emot fler anrop från den här internetanslutningen just nu. Gränsen är 500 i timmen, så försök igen om en stund.';
+            : 'GoatCounter svarade inte. Det kan vara gränsen på 500 anrop i timmen från den här internetanslutningen, så försök igen om en stund.';
           return;
         }
         status.textContent = `Det gick inte att hämta siffrorna: ${(e as Error).message}. Ladda om sidan och försök igen.`;

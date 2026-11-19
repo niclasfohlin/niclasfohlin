@@ -16,6 +16,7 @@
 // Besöksstatistik.
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
+import { listansAdress } from '../src/lib/goatcounteradress.js';
 
 const url = process.argv[2];
 if (!url) { console.error('Ange adressen till /statistik.'); process.exit(1); }
@@ -103,9 +104,13 @@ async function forvantat() {
     const tot = await api('/stats/total', [['start', iso(start)], ['end', iso(slut)]]);
     const hits = [];
     const sedda = new Set();
-    // Som sidan: tills GoatCounter säger att inget mer finns, högst 20 omgångar (allaHits i src/pages/statistik.astro).
-    for (let i = 0; i < 20; i++) {
-      const s = await api('/stats/hits', [['start', iso(start)], ['end', iso(slut)], ['limit', 100], ...(sedda.size ? [['exclude_paths', [...sedda].join(',')]] : [])]);
+    // Som sidan: tills GoatCounter säger att inget mer finns eller adressen skulle bli för lång (allaHits i
+    // src/pages/statistik.astro, listansAdress i src/lib/goatcounteradress.js).
+    for (;;) {
+      const adress = listansAdress('https://niclasfohlin.goatcounter.com', { start: iso(start), end: iso(slut) }, sedda);
+      if (!adress) break;
+      await vanta(800);
+      const s = await (await fetch(adress, { headers: { Authorization: `Bearer ${nyckel}` } })).json();
       const nya = (s.hits ?? []).filter((h) => !sedda.has(h.path_id));
       nya.forEach((h) => { sedda.add(h.path_id); hits.push(h); });
       if (!s.more || !nya.length) break;
@@ -184,7 +189,7 @@ try {
     while (Date.now() - t0 < 60000) {
       await vanta(250);
       const s = await utvardera(`document.querySelector('[data-status]')?.textContent || ''`);
-      if (/Hämtat|Det gick inte|Nyckeln|tar inte emot|inte uppkopplad/.test(s)) return { s, ms: Date.now() - t0 };
+      if (/Hämtat|Det gick inte|Nyckeln|tar inte emot|svarade inte|inte uppkopplad/.test(s)) return { s, ms: Date.now() - t0 };
     }
     return { s: 'ingen färdig status efter 60 s', ms: 60000 };
   };
