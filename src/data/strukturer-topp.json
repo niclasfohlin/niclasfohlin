@@ -1,16 +1,16 @@
 {
-  "datum": "2026-11-17T09:28:59.264Z",
+  "datum": "2026-11-19T01:26:29.594Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 107,
-      "besok": 52,
+      "antal": 111,
+      "besok": 56,
       "utskrifter": 11
     },
     {
       "id": "visa",
-      "antal": 56,
-      "besok": 21,
+      "antal": 58,
+      "besok": 23,
       "utskrifter": 7
     },
     {
@@ -33,14 +33,14 @@
     },
     {
       "id": "5-3-1",
-      "antal": 41,
-      "besok": 16,
+      "antal": 43,
+      "besok": 18,
       "utskrifter": 5
     },
     {
       "id": "epa",
-      "antal": 35,
-      "besok": 10,
+      "antal": 37,
+      "besok": 12,
       "utskrifter": 5
     },
     {
@@ -50,16 +50,28 @@
       "utskrifter": 4
     },
     {
+      "id": "anteckningspar",
+      "antal": 26,
+      "besok": 16,
+      "utskrifter": 2
+    },
+    {
       "id": "tva-loser-problem",
-      "antal": 21,
-      "besok": 6,
+      "antal": 26,
+      "besok": 11,
       "utskrifter": 3
     },
     {
       "id": "flashcardlek",
-      "antal": 17,
-      "besok": 7,
+      "antal": 21,
+      "besok": 11,
       "utskrifter": 2
+    },
+    {
+      "id": "hitta-min-regel",
+      "antal": 16,
+      "besok": 11,
+      "utskrifter": 1
     },
     {
       "id": "ova-och-kontrollera-i-par",
@@ -68,27 +80,21 @@
       "utskrifter": 2
     },
     {
-      "id": "anteckningspar",
-      "antal": 15,
-      "besok": 10,
-      "utskrifter": 1
-    },
-    {
-      "id": "hitta-min-regel",
-      "antal": 15,
-      "besok": 10,
-      "utskrifter": 1
-    },
-    {
-      "id": "sanningsjakten",
+      "id": "fraga-fraga-byt",
       "antal": 15,
       "besok": 5,
       "utskrifter": 2
     },
     {
       "id": "lasa-och-forklara-i-par",
-      "antal": 14,
-      "besok": 4,
+      "antal": 15,
+      "besok": 5,
+      "utskrifter": 2
+    },
+    {
+      "id": "sanningsjakten",
+      "antal": 15,
+      "besok": 5,
       "utskrifter": 2
     },
     {
@@ -98,15 +104,15 @@
       "utskrifter": 2
     },
     {
-      "id": "fraga-fraga-byt",
-      "antal": 13,
-      "besok": 3,
-      "utskrifter": 2
+      "id": "motas-pa-mitten",
+      "antal": 14,
+      "besok": 9,
+      "utskrifter": 1
     },
     {
       "id": "kooperativ-fyrfaltare",
-      "antal": 12,
-      "besok": 7,
+      "antal": 13,
+      "besok": 8,
       "utskrifter": 1
     },
     {
@@ -116,7 +122,31 @@
       "utskrifter": 2
     },
     {
+      "id": "formulera-dela-lyssna-skapa",
+      "antal": 11,
+      "besok": 6,
+      "utskrifter": 1
+    },
+    {
+      "id": "hornsamtal",
+      "antal": 11,
+      "besok": 6,
+      "utskrifter": 1
+    },
+    {
       "id": "inspireras",
+      "antal": 11,
+      "besok": 6,
+      "utskrifter": 1
+    },
+    {
+      "id": "kims-prov",
+      "antal": 11,
+      "besok": 6,
+      "utskrifter": 1
+    },
+    {
+      "id": "rita-byt-och-skriv",
       "antal": 11,
       "besok": 6,
       "utskrifter": 1
@@ -128,19 +158,7 @@
       "utskrifter": 1
     },
     {
-      "id": "hornsamtal",
-      "antal": 10,
-      "besok": 5,
-      "utskrifter": 1
-    },
-    {
       "id": "karusellen",
-      "antal": 10,
-      "besok": 5,
-      "utskrifter": 1
-    },
-    {
-      "id": "kims-prov",
       "antal": 10,
       "besok": 5,
       "utskrifter": 1
@@ -152,13 +170,19 @@
       "utskrifter": 1
     },
     {
-      "id": "lar-klassen",
-      "antal": 9,
-      "besok": 4,
+      "id": "skriv-byt-matcha",
+      "antal": 10,
+      "besok": 5,
       "utskrifter": 1
     },
     {
-      "id": "skriv-byt-matcha",
+      "id": "ape",
+      "antal": 9,
+      "besok": 9,
+      "utskrifter": 0
+    },
+    {
+      "id": "lar-klassen",
       "antal": 9,
       "besok": 4,
       "utskrifter": 1
@@ -200,6 +224,12 @@
       "utskrifter": 0
     },
     {
+      "id": "samtalspromenad",
+      "antal": 7,
+      "besok": 2,
+      "utskrifter": 1
+    },
+    {
       "id": "sekvenser",
       "antal": 7,
       "besok": 2,
@@ -209,18 +239,6 @@
       "id": "tarningsquiz",
       "antal": 7,
       "besok": 7,
-      "utskrifter": 0
-    },
-    {
-      "id": "samtalspromenad",
-      "antal": 6,
-      "besok": 1,
-      "utskrifter": 1
-    },
-    {
-      "id": "ape",
-      "antal": 5,
-      "besok": 5,
       "utskrifter": 0
     },
     {
@@ -266,19 +284,7 @@
       "utskrifter": 0
     },
     {
-      "id": "formulera-dela-lyssna-skapa",
-      "antal": 4,
-      "besok": 4,
-      "utskrifter": 0
-    },
-    {
       "id": "huvuden-ihop",
-      "antal": 4,
-      "besok": 4,
-      "utskrifter": 0
-    },
-    {
-      "id": "rita-byt-och-skriv",
       "antal": 4,
       "besok": 4,
       "utskrifter": 0
@@ -309,12 +315,6 @@
     },
     {
       "id": "mina-bilder-dina-bilder",
-      "antal": 3,
-      "besok": 3,
-      "utskrifter": 0
-    },
-    {
-      "id": "motas-pa-mitten",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
@@ -362,6 +362,12 @@
       "utskrifter": 0
     },
     {
+      "id": "lar-varandra",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
       "id": "las-rita-redovisa",
       "antal": 2,
       "besok": 2,
@@ -393,12 +399,6 @@
     },
     {
       "id": "konstruktiv-debatt",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "lar-varandra",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
