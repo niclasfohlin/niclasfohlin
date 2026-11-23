@@ -213,7 +213,7 @@ Niclas 2026-11-22 om de åtta delarna i Relationell vägledning (K-814): "Sajten
 
 | Var | Så visas uppslagsverket |
 |---|---|
-| Överst på metodens sida | Listan (`Uppslag.astro`, ankaret `uppslag`) efter Planera insatsen och före I korthet: en rad per del, som börjar med när den används, med namnet under och numret i områdets färg i kanten. Under listan knappen som skriver ut alla delarna |
+| Överst på metodens sida | Listan (`Uppslag.astro`, ankaret `uppslag`) efter Planera insatsen och före I korthet: en rad per del, med delens namn som rubrik och när den används under i mindre text (Niclas 2026-11-23: "Klara titlar så man fattar vad det är"), och numret i områdets färg i kanten. Under listan knappen som skriver ut alla delarna |
 | Delens egen sida | `/stodundervisning/<id>/del-5` (`del-[nr].astro`, `Uppslagsdel.astro`): namnet och När i områdets färg, det viktigaste, och stegen, där stegets början fram till den första punkten eller kolonet är en rubrik och en replik efter ett kolon står för sig (`uppslagensSteg`). Sedan filmen och det som är invävt vid delen (`efter: "del: Del 5 · Namnet"`), och resten av fälten under Läs in dig på delen. Sist delens pdf, delningen och vägen till de andra delarna. På en bred skärm står listan i en spalt bredvid |
 | I texten | "del 5" är en sak som leder till delens sida, också i Planera insatsen, och ett spann, "del 1–3", leder till listan (STIL.md under Hänvisningar). Planens rad med länkar till metoden, vid Före och vid varje pass, har också listan, med tabellens rubrik före kolonet |
 | Under Materialet | Ramens rubrik och text med en rad om att delarna står överst. Tabellen och delarnas sidor står bara i sidans egen utskrift, som har allt |
