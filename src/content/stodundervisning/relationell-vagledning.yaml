@@ -65,7 +65,7 @@ upplagg:
   text: "I tio veckor gör alla vuxna runt eleven likadant i varje möte: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar den vuxne första steget tillbaka. Arbetslaget träffas före start, skriver en bemötandeplan och ser över den varannan vecka. Du som håller i insatsen har stunden två gånger i veckan, en halvtimme där eleven väljer vad ni gör. Eleven väljer ett tecken och en lugn plats och övar med dig från vecka 1. Varje fredag räknar du veckans svåra stunder och säger något bra som eleven gjorde. Efter vecka 10 ser arbetslaget om de har blivit färre och bestämmer fortsättningen."
 gruppen:
   rubrik: "Vem metoden är för"
-  text: "Metoden är för en elev i F–⁠9 som ofta hamnar i affekt eller stänger av, har svårt att följa regler och ofta bråkar, när anpassningarna i klassrummet inte har räckt. Är någon i fara, eller har någon blivit kränkt, gäller skolans rutin, och den går före metoden. Elevhälsan är med från början. Oroar du dig för hur eleven har det hemma, eller behöver eleven vård eller en utredning, följer skolan sin rutin, och insatsen kan gå bredvid. En vuxen håller i insatsen: klassläraren eller mentorn, en speciallärare, en resurs eller en fritidspedagog. Vårdnadshavarna och de andra vuxna är med i planen."
+  text: "Metoden är för en elev i F–⁠9 som ofta hamnar i affekt eller stänger av, har svårt att följa regler och ofta bråkar, när anpassningarna i klassrummet inte har räckt. Är någon i fara eller kränkt, går skolans rutin före metoden. Elevhälsan är med från början. Oroar du dig för hur eleven har det hemma, eller behöver eleven vård eller en utredning, följer skolan sin rutin, och insatsen kan gå bredvid. En vuxen håller i insatsen: klassläraren eller mentorn, en speciallärare, en resurs eller en fritidspedagog. Vårdnadshavarna och de andra vuxna är med i bemötandeplanen."
 principer:
   rubrik: "Tre saker att hålla fast vid"
   text: "Lugn kommer före kontakt, och kontakt före vägledning: är du eller eleven uppe i varv (del 5 och del 6), väntar tillsägelsen, samtalet och kravet, och när ni båda är lugna ställer du kravet igen på ett annat sätt. Stunden är elevens, och den ställs inte in efter en dålig dag, eftersom relationen inte får hänga på uppförandet. Första steget tillbaka tar du efter en svår stund, samma dag eller nästa (del 7), så att eleven vet att hen har sin plats kvar."
@@ -276,7 +276,7 @@ progression:
       eleverna: "Att gå själv i tid, och själv säga med ord när något är svårt. Att säga vad som har blivit lättare och vad hen vill ha kvar."
 uppfoljning:
   rubrik: "Så ser du att det hjälper"
-  text: "Du som håller i insatsen räknar varje vecka två saker. Den ena är de svåra stunderna, när eleven hamnade i affekt eller låste sig. Den andra är lösningarna, när eleven visade tecknet, gick till sin lugna plats eller löste det med ord. Det som hör ihop räknas en gång, så tecknet, den lugna platsen och vägen tillbaka är en lösning. De andra vuxna berättar för dig samma dag när eleven hade en svår stund eller visade tecknet. På bladet Svåra stunder vecka för vecka sätter du ett kryss vid antalet svåra stunder och en ring vid antalet lösningar, och drar linjerna från förra veckan. Talen ger ingen belöning och inget straff, men visar er vuxna och eleven vart det är på väg."
+  text: "Du som håller i insatsen räknar varje vecka två saker. Den ena är de svåra stunderna, när eleven hamnade i affekt eller låste sig. Den andra är lösningarna, när eleven visade tecknet, gick till sin lugna plats eller löste det med ord. Det som hör ihop räknas en gång, så tecknet, den lugna platsen och vägen tillbaka är en lösning. Det ni övar räknas inte. De andra vuxna berättar för dig samma dag när eleven hade en svår stund eller visade tecknet. På bladet Svåra stunder vecka för vecka sätter du ett kryss vid antalet svåra stunder och en ring vid antalet lösningar, och drar linjerna från förra veckan. Talen ger ingen belöning och inget straff, men visar er vuxna och eleven vart det är på väg."
   rader:
     - nar: "Före start"
       tid: "före"
@@ -287,14 +287,14 @@ uppfoljning:
       vad: "Räkna veckan och dra linjerna. Ta två minuter med eleven: fråga hur veckan har varit och vad eleven gjorde när det blev svårt, och säg något du såg: ”I tisdags sa du att du inte förstod.” Fråga vad du ska berätta hemma."
     - nar: "Varannan vecka"
       tid: "varannan vecka"
-      vad: "Ta några minuter på arbetslagets möte, med bemötandeplanen och kurvan framme. Gjorde vi som bemötandeplanen säger? Har de svåra stunderna ökat tre veckor i rad, och inget i elevens liv förklarar det, ändrar ni hur ni bemöter eleven."
+      vad: "Ta några minuter på arbetslagets möte, med bemötandeplanen och bladet Svåra stunder vecka för vecka framme. Gjorde vi som bemötandeplanen säger? Har de svåra stunderna ökat tre veckor i rad, och inget i elevens liv förklarar det, ändrar ni hur ni bemöter eleven."
     - nar: "Vecka 5"
       tid: "vecka 5"
-      vad: "Visa kurvan för hemmet och elevhälsan. På fredagen tar du och eleven tio minuter och läser elevens mål i bemötandeplanen. Blir de svåra stunderna färre, visar du eleven kurvan: ”Titta, nu blir det färre.”"
+      vad: "Visa bladet Svåra stunder vecka för vecka för hemmet och elevhälsan. På fredagen tar du och eleven tio minuter och läser elevens mål i bemötandeplanen. Blir de svåra stunderna färre, visar du eleven kurvan: ”Titta, nu blir det färre.”"
     - nar: "Efter vecka 10"
       tid: "efter"
       resultat: "längsta tiden tillbaka; elevens siffra från 0 till 10"
-      vad: "Jämför kurvans två sista veckor och tiden tillbaka med Före, och fråga eleven igen, också om elevens mål i bemötandeplanen. Blev de svåra stunderna farligare eller fler, behöver eleven mer än insatsen, och elevhälsan avgör vad. Stunden fortsätter. Är de färre och går eleven själv i tid, blir stunden en gång i veckan, och hälsningen och bemötandeplanen står kvar. Annars fortsätter insatsen tio veckor till från elevens rad i progressionen."
+      vad: "Jämför de två sista veckorna på bladet Svåra stunder vecka för vecka och tiden tillbaka med Före, och fråga eleven igen, också om elevens mål i bemötandeplanen. Blev de svåra stunderna farligare eller fler, behöver eleven mer än insatsen, och elevhälsan avgör vad. Stunden fortsätter. Är de färre och går eleven själv i tid, blir stunden en gång i veckan, och hälsningen och bemötandeplanen står kvar. Annars fortsätter insatsen tio veckor till från elevens rad i progressionen."
 mal:
   overgripande: "kunna ta emot hjälp att bli lugn, och lösa problem med ord."
   punkter:
@@ -579,7 +579,7 @@ plan:
       vem: eleven
       rad: "Varje fredag"
       fore: "Före start"
-      text: "Det som hör ihop räknas en gång, så tecknet, den lugna platsen och vägen tillbaka är en lösning. De andra vuxna berättar för dig samma dag när eleven hade en svår stund eller visade tecknet."
+      text: "Det som hör ihop räknas en gång, så tecknet, den lugna platsen och vägen tillbaka är en lösning. Det ni övar räknas inte. De andra vuxna berättar för dig samma dag när eleven hade en svår stund eller visade tecknet."
       ram: "Svåra stunder vecka för vecka"
       antal:
         - namn: "Svåra stunder"
@@ -601,7 +601,7 @@ plan:
   valet:
     rubrik: "Tecknet och den lugna platsen"
     nar: "Eleven väljer tecknet och den lugna platsen på träffen före start om hen är med, och annars med dig i vecka 1."
-    senare: "Vill eleven inte välja än, frågar du igen när hen har börjat komma till stunden, och då övar du och eleven de två veckorna efter."
+    senare: "Vill eleven inte välja än, frågar du igen när hen har börjat komma till stunden, och då övar du och eleven de två veckorna efter. Till dess gör ni vuxna som bemötandeplanen säger."
     fraga: "Fråga: ”Vad kan du visa mig när det börjar bli för mycket? Vad blir du lugn av?”"
     falt: ["Tecknet", "Den lugna platsen", "Det som lugnar"]
   ovning:
