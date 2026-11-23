@@ -1,17 +1,17 @@
 {
-  "datum": "2026-11-19T01:26:29.594Z",
+  "datum": "2026-11-22T23:30:29.323Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 111,
-      "besok": 56,
-      "utskrifter": 11
+      "antal": 119,
+      "besok": 59,
+      "utskrifter": 12
     },
     {
       "id": "visa",
-      "antal": 58,
-      "besok": 23,
-      "utskrifter": 7
+      "antal": 66,
+      "besok": 26,
+      "utskrifter": 8
     },
     {
       "id": "beratta-mera",
@@ -21,20 +21,20 @@
     },
     {
       "id": "byt-och-sortera",
-      "antal": 50,
-      "besok": 20,
+      "antal": 51,
+      "besok": 21,
       "utskrifter": 6
     },
     {
       "id": "kloka-pennan",
-      "antal": 47,
-      "besok": 27,
+      "antal": 48,
+      "besok": 28,
       "utskrifter": 4
     },
     {
       "id": "5-3-1",
-      "antal": 43,
-      "besok": 18,
+      "antal": 44,
+      "besok": 19,
       "utskrifter": 5
     },
     {
@@ -45,26 +45,26 @@
     },
     {
       "id": "ping-pong-prat",
-      "antal": 33,
-      "besok": 13,
+      "antal": 35,
+      "besok": 15,
       "utskrifter": 4
     },
     {
       "id": "anteckningspar",
-      "antal": 26,
-      "besok": 16,
+      "antal": 27,
+      "besok": 17,
       "utskrifter": 2
     },
     {
       "id": "tva-loser-problem",
-      "antal": 26,
-      "besok": 11,
+      "antal": 27,
+      "besok": 12,
       "utskrifter": 3
     },
     {
       "id": "flashcardlek",
-      "antal": 21,
-      "besok": 11,
+      "antal": 23,
+      "besok": 13,
       "utskrifter": 2
     },
     {
@@ -92,25 +92,31 @@
       "utskrifter": 2
     },
     {
+      "id": "lyssna-och-skriv",
+      "antal": 15,
+      "besok": 5,
+      "utskrifter": 2
+    },
+    {
+      "id": "motas-pa-mitten",
+      "antal": 15,
+      "besok": 10,
+      "utskrifter": 1
+    },
+    {
       "id": "sanningsjakten",
       "antal": 15,
       "besok": 5,
       "utskrifter": 2
     },
     {
-      "id": "lyssna-och-skriv",
-      "antal": 14,
-      "besok": 4,
-      "utskrifter": 2
-    },
-    {
-      "id": "motas-pa-mitten",
-      "antal": 14,
-      "besok": 9,
+      "id": "kooperativ-fyrfaltare",
+      "antal": 13,
+      "besok": 8,
       "utskrifter": 1
     },
     {
-      "id": "kooperativ-fyrfaltare",
+      "id": "lika-och-olika",
       "antal": 13,
       "besok": 8,
       "utskrifter": 1
@@ -218,12 +224,6 @@
       "utskrifter": 1
     },
     {
-      "id": "lika-och-olika",
-      "antal": 7,
-      "besok": 7,
-      "utskrifter": 0
-    },
-    {
       "id": "samtalspromenad",
       "antal": 7,
       "besok": 2,
@@ -290,6 +290,12 @@
       "utskrifter": 0
     },
     {
+      "id": "rondellen",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
       "id": "snobollen",
       "antal": 4,
       "besok": 4,
@@ -326,12 +332,6 @@
       "utskrifter": 0
     },
     {
-      "id": "rondellen",
-      "antal": 3,
-      "besok": 3,
-      "utskrifter": 0
-    },
-    {
       "id": "samtalsbingo",
       "antal": 3,
       "besok": 3,
@@ -339,6 +339,12 @@
     },
     {
       "id": "vad-undrar-jag",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "vi-jamfor",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
@@ -380,13 +386,13 @@
       "utskrifter": 0
     },
     {
-      "id": "trestegsintervju",
+      "id": "topplistan",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
     },
     {
-      "id": "vi-jamfor",
+      "id": "trestegsintervju",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -453,12 +459,6 @@
     },
     {
       "id": "stall-en-fraga",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "topplistan",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
