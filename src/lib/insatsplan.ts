@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { arDelensTid, dagAv, utanFogar, faltetIVersionen, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, forstaLed, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodensTabell, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, skattningensBlad, slugAv, stegetsNamnIPlanen, stodetsPlats, tabellensDelar, VECKANS_RAD, versionensDelar, versionernasNamn, visadeTexter } from './standard/index.js';
+import { talText, arDelensTid, dagAv, utanFogar, faltetIVersionen, veckansPassRam, skyddaRegex, stor, faltetsDelar, faltetsSkillnader, forstaLed, iVersionen, iVersionensKolumner, passetsDelnamn, forstaLedet, mening, meningarna, gruppensElever, kortnamn, lektionsvaletsFel, metodensSkattningar, metodensTabell, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, skattningensBlad, slugAv, stegetsNamnIPlanen, stodetsPlats, tabellensDelar, VECKANS_RAD, versionensDelar, versionernasNamn, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
@@ -696,6 +696,9 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   // dit, och övningen räknas från valet.
   if (m.data.plan?.valet && !valetsAdress(m.data, m.id)) fel.push(`plan.valet har rubriken "${m.data.plan.valet.rubrik}", men metoden har ingen del i uppslagsverket eller något avsnitt som heter så. Skriv namnet som delen eller avsnittet heter.`);
   if (m.data.plan?.ovning && !m.data.plan.valet) fel.push('plan.ovning räknas från det eleven väljer, så metoden behöver plan.valet.');
+  // Gångerna i veckan står också i metodens mening, så att planens ringar och metoden inte säger olika (Codex 2026-11-23).
+  const ov = m.data.plan?.ovning;
+  if (ov && !new RegExp(`(^|[^\\p{L}])${ov.ganger === 1 ? 'en' : talText(ov.ganger)}[\\s\\u00a0]gång`, 'iu').test(ov.text)) fel.push(`plan.ovning har ${ov.ganger} gånger i veckan, men metodens mening säger inte "${ov.ganger === 1 ? 'en gång' : `${talText(ov.ganger)} gånger`}".`);
   // Ett namn som ser ut som en sak i metoden men inte är någon av dem blir ingen länk i planen (K-493).
   const saker = metodensSaker(m.data, m.id);
   for (const [plats, text] of planensTexter(m.data)) for (const namn of olankadeSaker(text, saker)) fel.push(`${plats} nämner "${namn}", men metoden har ingen sak som heter så, och då blir det ingen länk i planen. Skriv namnet som bladet, kortet eller mallen heter i metoden, eller lägg saken i metoden (STIL.md under Hänvisningar).`);

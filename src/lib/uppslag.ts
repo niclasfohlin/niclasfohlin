@@ -59,7 +59,9 @@ export function uppslagsordFel(d: MetodData): string[] {
   const fel: string[] = [];
   // Texten med vanliga mellanslag, utan ordfogar och med små bokstäver, så att en form hittas var den än står i meningen.
   const ren = (s: string) => s.replace(/\u2060/gu, '').replace(/\u00a0/gu, ' ').toLocaleLowerCase('sv');
-  const texten = ren(allaTexter(d).join('\n'));
+  // Utan fältet ord självt, som annars hittar sina egna former (Codex 2026-11-23).
+  const utanOrd = { ...d, ramar: d.ramar ? { ...d.ramar, ramar: d.ramar.ramar.map((r) => ({ ...r, delar: r.delar.map((del) => { const { ord: _ord, ...resten } = del as typeof del & { ord?: unknown }; return resten; }) })) } : d.ramar };
+  const texten = ren(allaTexter(utanOrd).join('\n'));
   const skydda = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
   const sedda = new Set<string>();
   for (const x of medOrd) {

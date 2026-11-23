@@ -20,7 +20,7 @@ import { arBaraHuvudord, arSaksord, forstaLed, forstaLedet, forstaOrdet, kursens
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
  * veckor: adressen för metodens veckor, när saken finns en gång för några veckor (Mina lärdomar: vecka 1–2).
  */
-export interface MetodSak { namn: string; former?: string[]; versal?: boolean; forst?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string>; baraVeckorna?: boolean; slag?: 'avsnitt' | 'tabell' }
+export interface MetodSak { namn: string; former?: string[]; versal?: boolean; forst?: boolean; hellre?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string>; baraVeckorna?: boolean; slag?: 'avsnitt' | 'tabell' }
 
 // Veckorna som ett led i en rubrik säger: "vecka 3" och "vecka 1–2".
 const veckornaI = (led?: string): number[] | undefined => { const v = veckorI(led); return v ? Array.from({ length: v.till - v.fran + 1 }, (_, i) => v.fran + i) : undefined; };
@@ -205,7 +205,8 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   });
   // Delarna i ett uppslagsverk (K-814, src/lib/uppslag.ts): "del 5" leder till delens sida.
   const uppslag = metodensUppslag(d);
-  for (const del of uppslag?.delar ?? []) saker.push({ namn: del.led, former: [del.led], adress: uppslagsAdress(id, del) });
+  // Delens nummer är hellre länken än ett ord som delen förklarar, när båda står i samma stycke i planen (sakernasText).
+  for (const del of uppslag?.delar ?? []) saker.push({ namn: del.led, former: [del.led], adress: uppslagsAdress(id, del), hellre: true });
   // Orden som en del förklarar, som tecknet och den lugna platsen, leder också till delens sida (K-821): på sidan första
   // gången under varje rubrik och inte på delens egen sida, som de andra sakerna.
   for (const del of uppslag?.delar ?? []) for (const o of del.ord ?? []) saker.push({ namn: o.namn, former: [o.namn, ...(o.former ?? [])], adress: uppslagsAdress(id, del) });

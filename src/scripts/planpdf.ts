@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { antaletsText, BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, rakningenHarNagot, rakningensJamforelse, rakningensText, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppehalletsText, utanNamn, utvarderingenText, veckansNamn, vemsOrd, type Plan, type Rakningen, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { valetsText, antaletsText, BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, rakningenHarNagot, rakningensJamforelse, rakningensText, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppehalletsText, utanNamn, utvarderingenText, veckansNamn, vemsOrd, type Plan, type Rakningen, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -21,6 +21,8 @@ export interface PdfInfo {
   mal: string;
   fragan: string;
   uppfoljning: { nar: string }[];
+  /** Det eleven har valt (K-822), fält och värde, under målet. */
+  valet?: [string, string][];
   /** Metodens ingress, under Innehållet i insatsen i gruppens pdf. */
   ingress?: string;
   /** Metodens undertitel, under Innehållet i insatsen i elevens pdf, som kan gå till hemmet och nästa lärare. */
@@ -303,6 +305,8 @@ const innehallet = (p: Pdf, text: string | undefined, info: PdfInfo, etiketter: 
 // Målet, och i en serie lektionernas mål under det, med elevens lektioner i elevens pdf (K-551).
 const malet = (p: Pdf, info: PdfInfo, s: Sammanstallning, e?: Sammanstallning['elever'][number]) => {
   if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
+  // Det eleven har valt under målet, som på sidan (K-822; användbarheten 2026-11-23: pdf:en saknade det).
+  if (info.valet?.length) p.text(valetsText(info.valet), { luft: 2 });
   if (lektionernasMal(s, e)) p.text(lektionernasMal(s, e), { luft: 2 });
 };
 // Avstämningen mitt i och utvärderingen efter, med besluten och lärarens mening, i en tabell.

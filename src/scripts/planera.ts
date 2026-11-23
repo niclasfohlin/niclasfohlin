@@ -415,7 +415,7 @@ function sparaTyst() {
 const harSkattning = () => Object.values(aktiv.foljd.skattning).some((v) => Object.keys(v ?? {}).length > 0) || mattVeckor().length > 0;
 const harVeckans = () => Object.values(aktiv.foljd.vecka).some((v) => !!v?.varde || !!v?.not);
 const harResultat = (fran = '') => Object.entries(aktiv.foljd.resultat).some(([k, v]) => k.slice(k.indexOf('-') + 1) >= fran && Object.values(v ?? {}).some(Boolean));
-function harFortIn(): boolean { return aktiv.foljd.gjorda.length > 0 || harSkattning() || harVeckans() || harResultat(); }
+function harFortIn(): boolean { return aktiv.foljd.gjorda.length > 0 || (aktiv.foljd.ovat ?? []).length > 0 || harSkattning() || harVeckans() || harResultat(); }
 // Börja på ändrar vad varje vecka i planen är, så den låses av det som hör till planens veckor: bockar, skattningar, veckans
 // gång och resultaten från första passet (Codex 2026-10-25, två gånger: det som förts in hamnade under ett annat steg).
 // Läsningen före låser inte, eftersom den görs för att välja steget (användbarhetsprovet samma dag), också när starten
@@ -873,45 +873,57 @@ function sparaMal(text: string) {
 // Inte valt än står metodens mening om när, efter insatsens första vecka meningen om ett val som kommer senare. Formen
 // valdes ur en Sonnets och en Opus idéer (underlag/prov/relationell-vagledning/tecknet/).
 const valetsVarden = (): [string, string][] => (data.valet?.falt ?? []).flatMap((n) => { const x = aktiv.foljd.valet?.varden[n]; return x ? [[n, x] as [string, string]] : []; });
+// Det läraren skriver i bandet står kvar när sidan ritas om, efter en ändring i en annan flik eller efter midnatt, tills
+// läraren trycker Klar eller Avbryt (Codex 2026-11-23: texten fanns bara i sidan och försvann).
+let valetsUtkast: { id: string; varden: Record<string, string> } | null = null;
+const valetAndras = () => valetsUtkast?.id === aktiv.id;
 function valetsRad(plats: string, penna = true): string {
   const v = data.valet;
   if (!v) return '';
+  if (penna && valetAndras()) return `<div class="pl-mal pl-valet andras" data-valetplats="${plats}"><span class="pl-etikett">${esc(v.rubrik)}</span>${v.fraga ? `<p class="pl-hjalp">${esc(v.fraga)}</p>` : ''}${v.falt.map((n, i) => `<label class="pl-etikett pl-valetnamn" for="pl-valet-${i}">${esc(n)}</label><input class="pl-falt pl-valetfalt" id="pl-valet-${i}" data-valet-falt="${esc(n)}" maxlength="${VALETS_LANGD}" autocomplete="off" value="${esc(valetsUtkast!.varden[n] ?? '')}">`).join('')}<p class="pl-andra-knappar"><button type="button" class="knapp liten" data-valet-klar>Klar</button><button type="button" class="pl-textknapp" data-valet-avbryt>Avbryt</button></p></div>`;
   const rubrik = `<a class="pl-etikett" href="${esc(v.adress)}" ${goat('valet', v.rubrik)}>${esc(v.rubrik)}</a>`;
   const varden = valetsVarden();
-  if (varden.length) return `<div class="pl-mal pl-valet" data-valetplats="${plats}"><p class="pl-maltext">${rubrik}${varden.map(([n, x]) => `${esc(n)}: ${esc(x)}`).join('<br>')}</p>${penna ? `<button type="button" class="pl-penna" data-valet-andra aria-label="Ändra det eleven har valt" title="Ändra det eleven har valt">${PENNA}</button>` : ''}</div>`;
+  // Valdes det senare än insatsens första vecka säger bandet när, eftersom metodens veckor talar om övningen i vecka 1 och 2
+  // (Samma sak överallt 2026-11-23).
+  const fran = aktiv.foljd.valet?.fran;
+  const franVecka = fran && fran !== RAKNAS_FORE ? plan.veckor.find((x) => x.mandag >= fran) : undefined;
+  const valtNar = franVecka && franVecka.nr > 1 ? `<span class="pl-valt-nar">Valt i ${esc(rubrikVecka(franVecka).toLocaleLowerCase('sv'))}.</span>` : '';
+  if (varden.length) return `<div class="pl-mal pl-valet" data-valetplats="${plats}"><p class="pl-maltext">${rubrik}${varden.map(([n, x]) => `${esc(n)}: ${esc(x)}`).join('<br>')}${valtNar}</p>${penna ? `<button type="button" class="pl-penna" data-valet-andra aria-label="Ändra det eleven har valt" title="Ändra det eleven har valt">${PENNA}</button>` : ''}</div>`;
   if (!penna) return '';
+  // Efter insatsens första vecka står metodens mening om ett val som kommer senare, i påminnelsens färg, eftersom veckorna
+  // annars talar om tecknet som om det fanns (Rimligheten 2026-11-23).
   const senare = !!v.senare && !!plan.veckor[0] && mandagen(idag) > plan.veckor[0].mandag;
-  return `<div class="pl-mal pl-valet tomt" data-valetplats="${plats}"><div class="pl-maltext">${rubrik}<p>Inte valt än. ${esc(senare ? v.senare! : v.nar)}</p><p><button type="button" class="knapp" data-valet-andra>Skriv in</button></p></div></div>`;
+  return `<div class="pl-mal pl-valet tomt${senare ? ' sent' : ''}" data-valetplats="${plats}"><div class="pl-maltext">${rubrik}<p>Inte valt än. ${esc(senare ? v.senare! : v.nar)}</p><p><button type="button" class="knapp" data-valet-andra>Skriv in</button></p></div></div>`;
 }
 function oppnaValet(plats: string) {
+  valetsUtkast = { id: aktiv.id, varden: { ...(aktiv.foljd.valet?.varden ?? {}) } };
   rendera();
-  const rad = sida.querySelector<HTMLElement>(`.pl-valet[data-valetplats="${plats}"]`);
-  const v = data.valet;
-  if (!rad || !v) return;
-  rad.classList.add('andras');
-  rad.innerHTML = `<span class="pl-etikett">${esc(v.rubrik)}</span>${v.fraga ? `<p class="pl-hjalp">${esc(v.fraga)}</p>` : ''}${v.falt.map((n, i) => `<label class="pl-etikett pl-valetnamn" for="pl-valet-${i}">${esc(n)}</label><input class="pl-falt pl-valetfalt" id="pl-valet-${i}" data-valet-falt="${esc(n)}" maxlength="${VALETS_LANGD}" autocomplete="off" value="${esc(aktiv.foljd.valet?.varden[n] ?? '')}">`).join('')}<p class="pl-andra-knappar"><button type="button" class="knapp liten" data-valet-klar>Klar</button><button type="button" class="pl-textknapp" data-valet-avbryt>Avbryt</button></p>`;
-  rad.querySelector<HTMLInputElement>('input')?.focus();
-  rad.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') { e.preventDefault(); sparaValet(rad); }
-    else if (e.key === 'Escape') { e.preventDefault(); rendera(); }
-  });
+  sida.querySelector<HTMLInputElement>(`.pl-valet[data-valetplats="${plats}"] input`)?.focus();
 }
 // Veckan då valet sparas, som övningen räknas från: före insatsens första vecka hela insatsen, annars den här veckan, eller
 // nästa vecka i planen under ett lov. Ett ändrat val behåller sin vecka.
 function valetsVecka(): string {
+  // Den faktiska veckan, också under ett lov eller efter planens slut, så att övningen står i planens första vecka från den,
+  // och i en förlängning (Codex 2026-11-23: ett val efter slutet fick planens sista vecka).
   const m = mandagen(idag);
-  if (!plan.veckor.length || m < plan.veckor[0].mandag) return RAKNAS_FORE;
-  return plan.veckor.find((v) => v.mandag >= m)?.mandag ?? plan.veckor[plan.veckor.length - 1].mandag;
+  return !plan.veckor.length || m < plan.veckor[0].mandag ? RAKNAS_FORE : m;
 }
-function sparaValet(rad: HTMLElement) {
-  const varden: Record<string, string> = Object.fromEntries([...rad.querySelectorAll<HTMLInputElement>('[data-valet-falt]')].flatMap((f) => { const x = rentText(f.value, VALETS_LANGD); return x ? [[f.dataset.valetFalt!, x]] : []; }));
+function sparaValet() {
+  // Fälten på sidan är det läraren ser, också det som en webbläsare har fyllt i utan att skriva, och utkastet när fälten inte
+  // står på sidan.
+  const falten = [...sida.querySelectorAll<HTMLInputElement>('.pl-valet [data-valet-falt]')];
+  const kalla: Record<string, string> = falten.length ? Object.fromEntries(falten.map((f) => [f.dataset.valetFalt!, f.value])) : valetsUtkast?.varden ?? {};
+  const varden: Record<string, string> = Object.fromEntries((data.valet?.falt ?? []).flatMap((n) => { const x = rentText(kalla[n], VALETS_LANGD); return x ? [[n, x]] : []; }));
+  valetsUtkast = null;
   const forut = aktiv.foljd.valet;
   if (JSON.stringify(varden) === JSON.stringify(forut?.varden ?? {})) { rendera(); return; }
   const tomt = !Object.keys(varden).length;
   andra(() => {
-    if (tomt) { delete aktiv.foljd.valet; return; }
+    // Ett borttaget val tar övningens bockar med sig, så att ett nytt val inte ser övat ut (Codex 2026-11-23). Ångra tar
+    // tillbaka båda.
+    if (tomt) { delete aktiv.foljd.valet; delete aktiv.foljd.ovat; return; }
     aktiv.foljd.valet = { varden, fran: forut?.fran ?? valetsVecka() };
-  }, tomt ? 'Det eleven valde är borttaget.' : forut ? 'Det eleven valde är ändrat.' : 'Det eleven valde är sparat.', true);
+  }, tomt ? `Det eleven valde är borttaget${(forut && (aktiv.foljd.ovat ?? []).length) ? ', och övningens bockar med det' : ''}.` : forut ? 'Det eleven valde är ändrat.' : 'Det eleven valde är sparat.', true);
 }
 // Övningen av det valda i veckan (K-822): en rad sist i Veckans pass med en ring per gång, som passens bockar, i veckorna
 // från valet och veckan efter varje lov (ovningensVeckor i standarden), och metodens mening under listan.
@@ -1691,7 +1703,7 @@ function foreDelar(oppna: Set<string>): string[] {
   lankVecka = plan.veckor[0]?.innehall;
   const fredag = skolveckan(plan.fore.mandag).till;
   const meta = [kalendervecka(isoVecka(plan.fore.mandag).vecka), ...(aktiv.namn ? [aktiv.namn] : []), ...(nivaNamn() ? [nivaNamn()!] : [])];
-  const delar: string[] = [`<header class="pl-veckohuvud"><h2 id="pl-veckan-rubrik" tabindex="-1">Före första passet</h2><p class="meta">${meta.map(esc).join(' · ')}</p></header>`, remsa('fore'), valetsRad('fore')];
+  const delar: string[] = [`<header class="pl-veckohuvud"><h2 id="pl-veckan-rubrik" tabindex="-1">Före första passet</h2><p class="meta">${meta.map(esc).join(' · ')}</p></header>`, remsa('fore')];
   const extraDag = extraPassetsText();
   // Det extra passet bockas som veckans pass, från måndagen i dess vecka (den kalla läsaren av Berättelseramen 2026-10-27).
   const extraDatum = extraPassetsDatum();
@@ -1710,6 +1722,8 @@ function foreDelar(oppna: Set<string>): string[] {
   // rutan bara att första passet var den 10 november).
   const forstaRad = extraDatum && extraDatum >= idag ? `${extraDatum === idag ? 'I dag är det' : 'Först kommer det'} extra passet, ${extraDag}. ${nartid}` : nartid;
   delar.push(`<div class="pl-nasta pl-forerutan"><p class="pl-nar">${esc(forstaRad)}</p>${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${metodensLankar()}</div>`);
+  // I Före står bandet efter rutan med fristen, så att fristen inte läses som en frist för elevens val (Rimligheten 2026-11-23).
+  delar.push(valetsRad('fore'));
   const saker = [
     ...uppfoljningensTillfallen(plan).filter((x) => x.vecka === 0).map((x) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))}</span>${uppfText(x.rad)}${medResultat(x.rad, x.nyckel)}</li>`),
     // Versionens extra pass före pass 1 står med sin dag och tid (extraPassetsDag; Rimligheten 2026-10-27: Egen ram).
@@ -1962,7 +1976,9 @@ function veckansInnehall(v: PlanVecka, oppna: Set<string>): string[] {
     const gs = gruppensSkattning();
     const er = elevensRakning();
     const oraknat = er ? er.antal.filter((a) => mattVarde(a.namn, forraVeckan.mandag) === undefined).map((a) => liten(a.namn)) : [];
-    const oskattad = er ? oraknat.length > 0 : gs ? skattasVeckan(gs, forraVeckan) && mattVarde(gs.namn, forraVeckan.mandag) === undefined : !Object.keys(aktiv.foljd.skattning[forraVeckan.mandag] ?? {}).length;
+    // Räkningen om en elev görs på fredagen, så en vecka som pågår påminner om den först då (användbarheten 2026-11-23: på
+    // torsdagen stod att veckan inte var räknad).
+    const oskattad = er ? oraknat.length > 0 && (!denHar || idag >= plusDagar(forraVeckan.mandag, 4)) : gs ? skattasVeckan(gs, forraVeckan) && mattVarde(gs.namn, forraVeckan.mandag) === undefined : !Object.keys(aktiv.foljd.skattning[forraVeckan.mandag] ?? {}).length;
     const delarna = [obockat ? `${obockat === 1 ? 'ett pass' : `${obockat} pass`} som inte är ${obockat === 1 ? 'bockat' : 'bockade'}` : '', oskattad ? (er ? `${uppraknat(oraknat)} som inte är räknade` : 'ingen skattning') : ''].filter(Boolean);
     // Med ett lov emellan heter veckan med sitt namn, så att "förra veckan" aldrig är en vecka långt tillbaka (buggjakten
     // 2026-10-25).
@@ -2323,8 +2339,8 @@ $('pl-veckan').addEventListener('click', (e) => {
   }
   if (d.elevpdf || d.elevtext) { void samman(knapp); return; }
   if (d.valetAndra !== undefined) { oppnaValet(knapp.closest<HTMLElement>('.pl-valet')!.dataset.valetplats!); return; }
-  if (d.valetKlar !== undefined) { sparaValet(knapp.closest<HTMLElement>('.pl-valet')!); return; }
-  if (d.valetAvbryt !== undefined) { rendera(); return; }
+  if (d.valetKlar !== undefined) { sparaValet(); return; }
+  if (d.valetAvbryt !== undefined) { valetsUtkast = null; rendera(); return; }
   if (d.ovning) {
     const k = d.ovning;
     andra(() => { const f = aktiv.foljd.ovat ?? []; aktiv.foljd.ovat = f.includes(k) ? f.filter((x) => x !== k) : [...f, k].sort(); });
@@ -2561,8 +2577,16 @@ $('pl-veckan').addEventListener('change', (e) => {
   // En sparad länk ger knappen i passet när läraren lämnar fältet (K-559).
   if (falt instanceof HTMLInputElement && falt.dataset.lank) { window.clearTimeout(faltTimer); faltTimer = 0; sparaTyst(); renderaVeckan(); }
 });
+// Enter sparar det eleven väljer och Escape avbryter, som målet.
+$('pl-veckan').addEventListener('keydown', (e) => {
+  if ((e.target as HTMLElement).dataset?.valetFalt === undefined) return;
+  if (e.key === 'Enter') { e.preventDefault(); sparaValet(); }
+  else if (e.key === 'Escape') { e.preventDefault(); valetsUtkast = null; rendera(); }
+});
 $('pl-veckan').addEventListener('input', (e) => {
   const falt = e.target as HTMLInputElement;
+  // Det som skrivs i bandet med det eleven väljer är ett utkast tills Klar (valetsUtkast).
+  if (falt.dataset.valetFalt !== undefined) { if (valetAndras()) valetsUtkast!.varden[falt.dataset.valetFalt] = falt.value; return; }
   const text = falt.value.trim();
   if (falt.dataset.resultat) {
     const [nyckel, id] = falt.dataset.resultat.split('|');
@@ -2620,12 +2644,12 @@ $('pl-veckor').addEventListener('click', (e) => {
 // sammanställningen, pdf:erna, kalendern och texten till åtgärdsprogrammet (K-576; Codex 2026-10-27: projektet stod bara i
 // texten till åtgärdsprogrammet).
 const metodensNamn = () => (bas.versionsval ? `${data.titel}, ${(bas.versionsval.versioner.find((x) => x.slug === aktiv.val.version) ?? bas.versionsval.versioner[0]).namn}` : data.titel);
-const info = () => ({ titel: metodensNamn(), mal: aktivtMal(), uppfoljning: data.uppfoljning.rader });
+const info = () => ({ titel: metodensNamn(), mal: aktivtMal(), uppfoljning: data.uppfoljning.rader, ...(valetsVarden().length ? { valet: { varden: valetsVarden() } } : {}) });
 let senaste: Sammanstallning = sammanstallning(plan, aktiv.foljd, idag, veckornasLektioner());
 // Pdf:ens underlag: Innehållet i insatsen har metodens ingress i gruppens pdf och undertiteln i elevens, och raderna ur
 // texten till åtgärdsprogrammet (Niclas 2026-10-28: "Ha en rubrik om Innehållet i insatsen med en text från ingress eller
 // metoden").
-const pdfInfo = () => ({ metod: metodensNamn(), grupp: aktiv.namn || undefined, niva: nivaNamn(), mal: malText(aktivtMal()), fragan: skattningsfragan(!harElever()), uppfoljning: data.uppfoljning.rader, ingress: data.ingress, undertitel: data.undertitel, insatsen: dokumentationsrader(...atgardsunderlag()) });
+const pdfInfo = () => ({ ...(valetsVarden().length ? { valet: valetsVarden() } : {}), metod: metodensNamn(), grupp: aktiv.namn || undefined, niva: nivaNamn(), mal: malText(aktivtMal()), fragan: skattningsfragan(!harElever()), uppfoljning: data.uppfoljning.rader, ingress: data.ingress, undertitel: data.undertitel, insatsen: dokumentationsrader(...atgardsunderlag()) });
 // Knappens ord och pdf:en som skrivs ut eller laddas ner står i src/scripts/skattning.ts (pdfOrd och visaPdf).
 const narvaroFor = (e: SammanstallningElev, s: Sammanstallning) => passensNarvaro(s, e, aktiv.foljd.franvaro);
 
@@ -2808,7 +2832,7 @@ const elevernaHarNagot = (s: Sammanstallning) => s.elever.some((e) => e.id !== G
 
 // Sammanställningen står så snart något är ifyllt, och går att nå från veckan (Niclas 2026-10-24: "både sammanställning av
 // alla elever i gruppen och en elev när som").
-const ifyllt = (s: Sammanstallning) => s.gjorda > 0 || (!!s.rakningen && rakningenHarNagot(s.rakningen)) || s.skattningar.some((x) => x.varden.some((y) => y !== undefined)) || s.elever.some((e) => e.skattningar.length) || s.veckor.some((v) => v.skattning || v.not) || Object.keys(aktiv.foljd.resultat).length > 0 || !!(s.avstamning?.beslut || s.avstamning?.not || s.utvardering?.beslut || s.utvardering?.not);
+const ifyllt = (s: Sammanstallning) => s.gjorda > 0 || valetsVarden().length > 0 || (aktiv.foljd.ovat ?? []).length > 0 || (!!s.rakningen && rakningenHarNagot(s.rakningen)) || s.skattningar.some((x) => x.varden.some((y) => y !== undefined)) || s.elever.some((e) => e.skattningar.length) || s.veckor.some((v) => v.skattning || v.not) || Object.keys(aktiv.foljd.resultat).length > 0 || !!(s.avstamning?.beslut || s.avstamning?.not || s.utvardering?.beslut || s.utvardering?.not);
 const harSamman = (s: Sammanstallning) => (aktiv.sparad || aktiv.franLank) && aktiv.folj && (ifyllt(s) || s.slut);
 
 // En elevs utveckling, eller gruppens: skattningen vecka för vecka som graf med avstämningen mitt i, närvaron, resultaten i

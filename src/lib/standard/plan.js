@@ -1307,6 +1307,8 @@ export function infordaDatum(f, plan) {
     ...med(f.resultat, (x) => Object.values(x ?? {}).some(Boolean)).map((k) => k.split('-').slice(1).join('-')),
     ...Object.values(f.matt ?? {}).flatMap((v) => Object.keys(v ?? {})), ...Object.keys(f.kommentar ?? {}), ...Object.keys(f.noter ?? {}), ...Object.keys(f.gick ?? {}), ...Object.keys(f.klassvarden ?? {}), ...Object.keys(f.inlagt ?? {}),
     ...(plan?.mitt && Object.keys(f.mittI ?? {}).length ? [plan.veckor[plan.mitt - 1]?.mandag ?? ''] : []),
+    // Övningens bockar gäller sin vecka (K-822; Codex 2026-11-23: ett lov över en vecka med bara övningen gömde bockarna).
+    ...(f.ovat ?? []).map((k) => k.slice(0, 10)),
   ])].filter((d) => arDatum(d)).sort();
 }
 /** Det senast införda datumet, som låser lovet och ett steg eller en vecka att ta om, i båda lagren. @param {Foljd} f */
@@ -4084,7 +4086,7 @@ export function dokumentationsrader(info, plan, val, o) {
   const mal = val.mal || info.mal;
   if (mal) rader.push({ etikett: 'Mål', text: malText(mal) });
   // Det eleven har valt, som tecknet och den lugna platsen (K-822), med fältens namn och det läraren skrev.
-  if (info.valet?.varden.length) rader.push({ text: utanNamn(info.valet.varden.map(([n, v]) => `${n}: ${v.replace(/[.!?]$/u, '')}.`).join(' '), o.elever ?? []) });
+  if (info.valet?.varden.length) rader.push({ text: utanNamn(valetsText(info.valet.varden), o.elever ?? []) });
   const dagar = dagarText(val, plan);
   // Metodens skattning av gruppen står i meningen om att följa insatsen, och inte en gång till bland uppföljningens rader (den
   // kalla testaren av K-559 2026-10-26).
@@ -4337,12 +4339,17 @@ export function ovningensVeckor(plan, valet, ovning) {
   const start = !valet.fran || valet.fran === RAKNAS_FORE ? 0 : plan.veckor.findIndex((v) => v.mandag >= /** @type {string} */ (valet.fran));
   if (start < 0) return [];
   const slut = start + ovning.veckor;
+  // Ett uppehåll i planens veckor är ett lov, också mellan de första veckorna (Codex 2026-11-23).
   return plan.veckor.flatMap((v, i) => {
-    if (i >= start && i < slut) return [{ mandag: v.mandag, efterLov: false }];
-    if (ovning.lov && i >= slut && i > 0 && dagarMellan(plan.veckor[i - 1].mandag, v.mandag) > 7) return [{ mandag: v.mandag, efterLov: true }];
-    return [];
+    const efterLov = !!ovning.lov && i > start && dagarMellan(plan.veckor[i - 1].mandag, v.mandag) > 7;
+    return (i >= start && i < slut) || efterLov ? [{ mandag: v.mandag, efterLov }] : [];
   });
 }
+/**
+ * Det valda som text, en mening per fält, i texten till åtgärdsprogrammet och i sammanställningen som kopieras.
+ * @param {[string, string][]} varden
+ */
+export const valetsText = (varden) => varden.map(([n, v]) => `${n}: ${/[.!?…]$/u.test(v) ? v : `${v}.`}`).join(' ');
 /** Övningens bock: måndagen och gången. */
 export const ovningensBock = (mandag, gang) => `${mandag}#${gang}`;
 /**
@@ -4747,7 +4754,7 @@ export const prickarna = (bx, b, pass) => pass.map((slag, j) => ({ x: bx + b / 2
 /**
  * Sammanställningen som text till dokumentationen, utan elevernas namn: målet, passen som är bockade, skattningarna som
  * medel vid första och senaste tillfället, hur många som rör sig framåt, avstämningen, utvärderingen och uppföljningen.
- * @param {{ titel: string, mal?: string, uppfoljning: { nar: string }[] }} info
+ * @param {{ titel: string, mal?: string, uppfoljning: { nar: string }[], valet?: { varden: [string, string][] } }} info
  * @param {Plan} plan
  * @param {ReturnType<typeof sammanstallning>} s
  */
@@ -4755,6 +4762,8 @@ export function sammanstallningstext(info, plan, s) {
   const rader = [];
   if (plan.forstaPass && plan.sistaPass) rader.push(`Sammanställning: ${info.titel}, ${datumspann(plan.forstaPass, plan.sistaPass)}.`);
   if (info.mal) rader.push(`Mål: ${malText(info.mal)}`);
+  // Det eleven har valt (K-822; Codex 2026-11-23: kopian saknade det som sidan och pdf:en har).
+  if (info.valet?.varden.length) rader.push(valetsText(info.valet.varden));
   if (lektionernasMal(s)) rader.push(lektionernasMal(s));
   rader.push(`Pass: ${passensRad(s)}`);
   const elever = s.elever.filter((e) => e.id !== GRUPPEN);

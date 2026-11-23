@@ -751,13 +751,18 @@ if (tsMp) {
     const lovPlan = { veckor: ['2026-11-02', '2026-11-09', '2026-11-16', '2026-11-23', '2026-12-07', '2026-12-14'].map((mandag) => ({ mandag })) };
     const ovv = (valet, o = ov) => s.ovningensVeckor(lovPlan, valet, o).map((x) => `${x.mandag}${x.efterLov ? '+' : ''}`).join();
     ska('det eleven väljer: övningen räknas från valet, före start eller senare, och kommer igen veckan efter ett lov', ovv({ fran: 'fore' }) === '2026-11-02,2026-11-09,2026-12-07+' && ovv({ fran: '2026-11-16' }) === '2026-11-16,2026-11-23,2026-12-07+' && ovv(undefined) === '' && ovv({ fran: 'fore' }, { veckor: 2 }) === '2026-11-02,2026-11-09' && ov.ganger === 2 && ov.veckor === 2, [ovv({ fran: 'fore' }), ovv({ fran: '2026-11-16' })]);
+    // Codex 2026-11-23: ett lov mellan de första veckorna får meningen om lovet, ett val efter planens slut ger ingen övning i
+    // planen, och övningens bockar är införda, så att ett lov eller en ny start inte gömmer dem utan varning.
+    const gapPlan = { veckor: ['2026-11-02', '2026-11-16', '2026-11-23'].map((mandag) => ({ mandag })) };
+    ska('det eleven väljer: ett lov mellan de första veckorna, ett val efter slutet och övningens bockar som införda', s.ovningensVeckor(gapPlan, { fran: 'fore' }, ov).map((x) => `${x.mandag}${x.efterLov ? '+' : ''}`).join() === '2026-11-02,2026-11-16+' && ovv({ fran: '2027-01-11' }) === '' && s.infordaDatum(s.rensaFoljd({ ovat: ['2026-11-16#1'] }), lovPlan).includes('2026-11-16'), [s.ovningensVeckor(gapPlan, { fran: 'fore' }, ov), s.infordaDatum(s.rensaFoljd({ ovat: ['2026-11-16#1'] }), lovPlan)]);
     const fv = s.rensaFoljd({ valet: { varden: { Tecknet: 'Handen på huvudet', '': 'x', 'Den lugna platsen': 7 }, fran: 'igår' }, ovat: ['2026-11-02#1', '2026-11-02#0', 'x', '2026-11-02#1'] });
     ska('det eleven väljer: följden behåller det valda och övningens bockar och rensar resten', JSON.stringify(fv.valet) === '{"varden":{"Tecknet":"Handen på huvudet"}}' && fv.ovat.join() === '2026-11-02#1' && !('valet' in s.rensaFoljd({ valet: { varden: {} } })) && s.rensaFoljd({ valet: { varden: { Tecknet: 'x' }, fran: 'fore' } }).valet.fran === 'fore', [fv.valet, fv.ovat]);
     const apv = s.dokumentationstext({ ...rinfo, valet: { varden: [['Tecknet', 'Handen på huvudet'], ['Den lugna platsen', 'Soffan i kapprummet.']] } }, rpl, rval, { minuter: 30 });
+    ska('det eleven väljer: det valda står i sammanställningen som kopieras', s.sammanstallningstext({ ...rinfo, valet: { varden: [['Tecknet', 'Handen på huvudet']] } }, rpl, sam).includes('\nTecknet: Handen på huvudet.\n') && !text.includes('Tecknet:'), s.sammanstallningstext({ ...rinfo, valet: { varden: [['Tecknet', 'Handen på huvudet']] } }, rpl, sam));
     ska('det eleven väljer: det valda står i texten till åtgärdsprogrammet', apv.includes('\nTecknet: Handen på huvudet. Den lugna platsen: Soffan i kapprummet.\n') && !s.dokumentationstext(rinfo, rpl, rval, { minuter: 30 }).includes('Tecknet:'), apv);
     ska('det eleven väljer: fälten citerar metoden, och ett stegs nummer hör inte till meningen före', !s.planensCitatFel(rv).length && s.meningarna('1. Öva. Igen: ”Nu.”\n4. Svara.').join('|') === 'Öva.|Igen: ”Nu.”|Svara.', [s.planensCitatFel(rv), s.meningarna('1. Öva. Igen: ”Nu.”\n4. Svara.')]);
-    const enAdr = (o) => s.sakernasText('Öva tecknet och den lugna platsen (del 2).', [{ namn: 'tecknet', adress: '/d2' }, { namn: 'lugna platsen', adress: '/d2' }, { namn: 'del 2', former: ['del 2'], adress: '/d2' }], (x, t) => `[${t}]`, (t) => t, o);
-    ska('det eleven väljer: i planen leder en adress dit en gång i ett stycke, och utan valet varje gång', enAdr({ enAdress: true }) === 'Öva [tecknet] och den lugna platsen (del 2).' && enAdr() === 'Öva [tecknet] och den [lugna platsen] ([del 2]).', [enAdr({ enAdress: true }), enAdr()]);
+    const enAdr = (o, text = 'Öva tecknet och den lugna platsen (del 2).') => s.sakernasText(text, [{ namn: 'tecknet', adress: '/d2' }, { namn: 'lugna platsen', adress: '/d2' }, { namn: 'del 2', former: ['del 2'], adress: '/d2', hellre: true }], (x, t) => `[${t}]`, (t) => t, o);
+    ska('det eleven väljer: i planen leder en adress dit en gång i ett stycke, hellre delens nummer, och utan valet varje gång', enAdr({ enAdress: true }) === 'Öva tecknet och den lugna platsen ([del 2]).' && enAdr({ enAdress: true }, 'Öva tecknet och den lugna platsen.') === 'Öva [tecknet] och den lugna platsen.' && enAdr() === 'Öva [tecknet] och den [lugna platsen] ([del 2]).', [enAdr({ enAdress: true }), enAdr()]);
     ska('räkningen om en elev: en plan utan något räknat säger inget', !s.rakningenHarNagot(s.rakningen(rpl, s.rensaFoljd({}), r)) && !s.rakningensText(s.rakningen(rpl, s.rensaFoljd({}), r), namnen).serier.length && s.metodplan(metod('kompissamtal')).plan.enElev === undefined);
   }
   // Metodens egna skattningar (K-559; Niclas 2026-10-26: "Viktigt att det funkar som en egen modul du kan lägga in andra
@@ -2155,6 +2160,8 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     const rtext = async (f) => text(await pdf.gruppPdf(rp, s.sammanstallning(rp, s.rensaFoljd(f), '2026-12-09'), rinfo, '2026-12-09'));
     const bara = await rtext({ resultat: { [`0-${fd}`]: { [s.GRUPPEN]: '45 min; 3' } } }), med = await rtext({ resultat: { [`0-${fd}`]: { [s.GRUPPEN]: '45 min; 3' } }, matt: { 'Svåra stunder': { fore: 15, [rp.veckor[0].mandag]: 5 }, 'Lösningar': { fore: 1 } } });
     ska('räkningen om en elev: pdf:en har resultaten också utan räknade veckor, och aldrig gruppen eller skalan 1 till 5', !!bara && !!med && [bara, med].every((t) => t.includes('längsta tiden tillbaka: 45 min, elevens siffra från 0 till 10: 3') && !/[Gg]ruppen|[Ee]leverna|1 till 5|på egen hand/.test(t)) && med.includes('15+') && med.includes('Svåra stunder, ska bli färre') && !bara.includes('ska bli färre'), [bara?.slice(0, 700), med?.slice(0, 900)]);
+    const medValet = text(await pdf.gruppPdf(rp, s.sammanstallning(rp, s.rensaFoljd({}), '2026-12-09'), { ...rinfo, valet: [['Tecknet', 'Handen på huvudet'], ['Den lugna platsen', 'Soffan i kapprummet']] }, '2026-12-09'));
+    ska('det eleven väljer: pdf:en med sammanställningen har det valda under målet', !!medValet && /Tecknet: Handen på huvudet\.\s*Den lugna platsen: Soffan i kapprummet\./.test(medValet) && medValet.indexOf('Tecknet: Handen') > medValet.indexOf('Målet') && !(bara ?? '').includes('Tecknet:'), medValet?.slice(0, 600));
   }
   // Metodens skattning av gruppen i gruppens pdf (K-559): skalan med namnen, linjen och regeln i ord.
   {
@@ -3687,7 +3694,7 @@ try {
       await b.tryck('#pl-veckan [data-valet-klar]');
       await vanta(200);
       const valt = await b.kor(`(() => ({ band: document.querySelector('#pl-veckan .pl-valet')?.textContent ?? '', tomt: !!document.querySelector('#pl-veckan .pl-valet.tomt'), besked: document.getElementById('pl-toast')?.textContent ?? '', lank: document.querySelector('#pl-veckan .pl-valet a')?.getAttribute('href') ?? '' }))()`);
-      sant('det eleven väljer: bandet säger Inte valt än med metodens mening, och Skriv in sparar det valda med Ångra och länken till delen', tomtBand.includes('Inte valt än') && tomtBand.includes('Vill eleven inte välja än') && falten.n === 3 && falten.fokus && !valt.tomt && valt.band.includes('Tecknet: Handen på huvudet') && valt.band.includes('Den lugna platsen: Soffan i kapprummet') && valt.besked.includes('Ångra') && valt.lank.endsWith('/stodundervisning/relationell-vagledning/del-2'), { tomtBand, falten, valt });
+      sant('det eleven väljer: bandet säger Inte valt än med metodens mening, och Skriv in sparar det valda med Ångra och länken till delen', tomtBand.includes('Inte valt än') && tomtBand.includes('Vill eleven inte välja än') && tomtBand.includes('Till dess gör ni vuxna som bemötandeplanen säger') && falten.n === 3 && falten.fokus && !valt.tomt && valt.band.includes('Tecknet: Handen på huvudet') && valt.band.includes('Den lugna platsen: Soffan i kapprummet') && valt.band.includes('Valt i vecka 3.') && valt.besked.includes('Ångra') && valt.lank.endsWith('/stodundervisning/relationell-vagledning/del-2'), { tomtBand, falten, valt });
       const ovningar = [];
       for (const vy of await b.kor(`[...document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]')].map((x) => x.dataset.vy).filter((x) => /^[0-9]+$/.test(x))`)) {
         await b.tryck(`#pl-veckan .pl-remsa [data-vy="${vy}"]`);
@@ -3700,6 +3707,20 @@ try {
       await b.tryck('#pl-veckan .pl-ovning [data-ovning]');
       await vanta(200);
       const bock = await b.kor(`(() => ({ tryckt: document.querySelector('#pl-veckan .pl-ovning [data-ovning]')?.getAttribute('aria-pressed'), sparat: (localStorage.getItem('insatser') ?? '').includes('2026-11-16#1'), not: document.querySelector('#pl-veckan #pl-passen')?.textContent ?? '', ap: document.getElementById('pl-aptext')?.value ?? '' }))()`);
+      await b.tryck('#pl-veckan .pl-valet [data-valet-andra]');
+      await vanta(150);
+      await b.kor(`(() => { const f = document.querySelector('#pl-veckan [data-valet-falt="Det som lugnar"]'); f.value = 'Tre långa utandningar'; f.dispatchEvent(new Event('input', { bubbles: true })); return true; })()`);
+      await b.tryck('#pl-veckan .pl-remsa [data-vy="4"]');
+      await vanta(150);
+      const utkast = await b.kor(`document.querySelector('#pl-veckan [data-valet-falt="Det som lugnar"]')?.value ?? ''`);
+      await b.kor(`(() => { document.querySelectorAll('#pl-veckan [data-valet-falt]').forEach((f) => { f.value = ''; f.dispatchEvent(new Event('input', { bubbles: true })); }); return true; })()`);
+      await b.tryck('#pl-veckan [data-valet-klar]');
+      await vanta(200);
+      const tomt2 = await b.kor(`(() => ({ tomt: !!document.querySelector('#pl-veckan .pl-valet.tomt.sent'), ovat: (localStorage.getItem('insatser') ?? '').includes('#1'), besked: document.getElementById('pl-toast')?.textContent ?? '' }))()`);
+      await b.tryck('#pl-toast [data-toast-gor]');
+      await vanta(250);
+      const tillbaka2 = await b.kor(`(() => ({ valt: document.querySelector('#pl-veckan .pl-valet')?.textContent ?? '', ovat: (localStorage.getItem('insatser') ?? '').includes('2026-11-16#1') }))()`);
+      sant('det eleven väljer: det som skrivs står kvar när veckan byts, och ett tömt val tar övningens bockar med sig, med Ångra', utkast === 'Tre långa utandningar' && tomt2.tomt && !tomt2.ovat && tomt2.besked.includes('Ångra') && tillbaka2.valt.includes('Tecknet: Handen på huvudet') && tillbaka2.ovat, { utkast, tomt2, tillbaka2 });
       sant('det eleven väljer: en ring bockas och sparas, ett senare val får ingen mening om vecka 1 och 2, och det valda står i texten till åtgärdsprogrammet', bock.tryckt === 'true' && bock.sparat && !bock.not.includes('I vecka 1 och 2') && bock.ap.includes('Tecknet: Handen på huvudet. Den lugna platsen: Soffan i kapprummet.'), bock);
       const tal = async (sak, n) => { await b.tryck(`#pl-skatta [data-antal="${sak}"][data-tal="${n}"]`); await vanta(150); };
       await b.tryck('#pl-veckan .pl-remsa [data-vy="1"]');

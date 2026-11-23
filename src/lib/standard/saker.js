@@ -3,8 +3,9 @@
  * för planens sidor i båda lagren, Planera insatsen och Lär dig metoden (sajtens K-630; samma följd stod i båda). Med
  * enAdress leder en adress dit en gång i texten, som på stödmetodens sida en gång under varje rubrik: en sak till med samma
  * adress står som text (sajtens K-822: "tecknet och den lugna platsen med dig i vecka 1 (del 2)" gav tre länkar till del 2
- * i en mening i Planera insatsen). Metoder länkar varje omnämnande, och metoderprovet kräver det.
- * @template {{ namn: string, former?: string[], versal?: boolean, forst?: boolean, adress?: string }} S
+ * i en mening i Planera insatsen). Står en sak med hellre i texten, som "del 2", är det den som blir länken, och ordet som
+ * delen förklarar står som text (länkgranskningen 2026-11-23). Metoder länkar varje omnämnande, och metoderprovet kräver det.
+ * @template {{ namn: string, former?: string[], versal?: boolean, forst?: boolean, adress?: string, hellre?: boolean }} S
  * @param {string} text
  * @param {S[]} saker
  * @param {(s: S, text: string) => string} sak
@@ -12,14 +13,20 @@
  * @param {{ enAdress?: boolean }} [o]
  */
 export const sakernasText = (text, saker, sak, annat, o = {}) => {
-  const sedda = new Set();
-  return sakdelar(text, saker).map((x) => {
+  const delar = sakdelar(text, saker);
+  /** @type {Map<string, number>} */
+  const vald = new Map();
+  if (o.enAdress) delar.forEach((x, i) => {
+    if (x.sak === undefined) return;
+    const s = saker[x.sak];
+    if (s.adress === undefined) return;
+    const forut = vald.get(s.adress);
+    if (forut === undefined || (s.hellre && !saker[/** @type {number} */ (delar[forut].sak)].hellre)) vald.set(s.adress, i);
+  });
+  return delar.map((x, i) => {
     if (x.sak === undefined) return annat(x.text);
     const s = saker[/** @type {number} */ (x.sak)];
-    if (o.enAdress && s.adress !== undefined) {
-      if (sedda.has(s.adress)) return annat(x.text);
-      sedda.add(s.adress);
-    }
+    if (o.enAdress && s.adress !== undefined && vald.get(s.adress) !== i) return annat(x.text);
     return sak(s, x.text);
   }).join('');
 };

@@ -674,7 +674,8 @@ export declare const BESLUT: Readonly<Record<'fortsatt' | 'justera' | 'avsluta' 
 export declare const uppfoljningensTillfallen: (plan: Plan) => { nyckel: string; rad: number; datum: string; vecka: number | null }[];
 /** En elevs resultat i datumordning, också för ett tillfälle som inte står i planen längre. */
 export declare function elevensResultat(plan: Plan, resultat: Record<string, string>): { nyckel: string; rad: number; typ: Tid['typ']; datum: string; varde: string }[];
-export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning): string;
+export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[]; valet?: { varden: [string, string][] } }, plan: Plan, s: Sammanstallning): string;
+export declare const valetsText: (varden: [string, string][]) => string;
 export declare function elevtext(info: { mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;
 /** Uppföljningens rad: namnet och kalenderveckorna, "Efter insatsen, v. 51". */
 export declare function uppfoljningensRad(plan: Plan, info: { uppfoljning: { nar: string }[] }, u: Plan['uppfoljning'][number], nycklar?: string[]): string;
@@ -750,7 +751,7 @@ export declare function sakensFormer(namn: string): string[];
 /** Texten i delar, där en del med sak är ett namn på en av sakerna. */
 export declare function sakdelar(text: string, saker: Sak[], o?: { citat?: boolean }): { text: string; sak?: number }[];
 /** En text med metodens saker, där saken blir det sidan gör av den och resten det sidan gör av en text, en rot för båda lagren. */
-export declare const sakernasText: <S extends Sak & { adress?: string }>(text: string, saker: S[], sak: (s: S, text: string) => string, annat: (text: string) => string, o?: { enAdress?: boolean }) => string;
+export declare const sakernasText: <S extends Sak & { adress?: string; hellre?: boolean }>(text: string, saker: S[], sak: (s: S, text: string) => string, annat: (text: string) => string, o?: { enAdress?: boolean }) => string;
 /** Namn som ser ut som en sak (ett sammansatt ord på blad, kort, mall …) men inte är någon av sakerna. */
 export declare function olankadeSaker(text: string, saker: Sak[]): string[];
 export declare const EGNA_SAKER: readonly string[];
