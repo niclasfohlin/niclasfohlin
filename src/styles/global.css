@@ -1187,7 +1187,7 @@ html.js .filmval-ram { display: block; }
 .filmval button:hover { border-color: var(--farg-accent); }
 .filmval button[aria-pressed="true"] { border-color: var(--farg-accent); box-shadow: 0 0 0 1px var(--farg-accent); background: var(--farg-accent-ljus); }
 .filmval img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; background: #f5f3ee; border-bottom: 1px solid var(--farg-kant); }
-.filmval span { display: block; padding: 0.35rem 0.5rem 0.45rem; font-family: var(--typsnitt-ui); font-size: 0.8rem; font-weight: 600; line-height: 1.25; }
+.filmval span { display: block; padding: 0.35rem 0.5rem 0.45rem; font-family: var(--typsnitt-ui); font-size: 0.8rem; font-weight: 600; line-height: 1.25; hyphens: auto; overflow-wrap: anywhere; }
 .filmval small { display: block; font-size: inherit; font-weight: 400; color: var(--farg-text-svag); }
 .film-hamta { margin: 0.7rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
 .film-hamta a { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.45rem; min-height: 2.25rem; padding: 0.3rem 0.95rem; border: 1px solid var(--farg-kant); border-radius: 1.125rem; background: var(--farg-yta); color: var(--farg-accent); font-weight: 600; text-decoration: none; }
@@ -3190,6 +3190,8 @@ html.js .bara-js { display: inline-block; }
      nästa nivås första blad, som båda börjar en ny sida (utskriften Allt 2026-10-13, tre tomma sidor). */
   /* Uppslagsverkets lista och delens meny, fil och spalt hör till skärmen (K-814); delarna står i utskriften som i Word. */
   .metod-topp > .uppslag, .del-meny, .del-fil, .del-sidospalt { display: none; }
+  /* Det som är hopfällt på skärmen, som svaren under Lärarens frågor, står utfällt i utskriften (Codex 2026-11-23). */
+  .um-rad::details-content, .del-las::details-content { content-visibility: visible; display: block; block-size: auto; }
   .del-las:not([open]) > .um-rad-inne { display: block; }
   .bank-niva.utan-utskrift { display: none; }
   .bank[data-bladrader] { margin-top: 0; }
@@ -3985,7 +3987,7 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-raknetal .pl-skalsteg { height: 3rem; font-size: 1.1rem; }
 .pl-raknetal .pl-skalsteg:nth-child(8n + 1) { border-left: 0; }
 .pl-raknetal .pl-skalsteg:nth-child(n + 9) { border-top: 1px solid var(--farg-kant); }
-.pl-raknetal .pl-fler { font-size: 0.95rem; font-weight: 600; background: var(--farg-accent-ljus); }
+.pl-raknetal .pl-fler { font-size: 0.9rem; font-weight: 600; background: var(--farg-accent-ljus); }
 .pl-raknas[data-mot="ned"] .pl-skalsteg[aria-pressed="true"] { background: var(--farg-socialt); }
 .pl-raknas-laget { margin: 0 0 0.9rem; font-size: 1.08rem; font-weight: 700; line-height: 1.35; }
 .pl-graf .pl-rakn-namn { font: 700 15px var(--typsnitt-ui); }

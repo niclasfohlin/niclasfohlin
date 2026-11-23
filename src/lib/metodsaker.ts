@@ -206,9 +206,8 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   // Delarna i ett uppslagsverk (K-814, src/lib/uppslag.ts): "del 5" leder till delens sida.
   const uppslag = metodensUppslag(d);
   for (const del of uppslag?.delar ?? []) saker.push({ namn: del.led, former: [del.led], adress: uppslagsAdress(id, del) });
-  // Ett spann av delar, "del 1–3", med eller utan ordfogen efter tankstrecket, och två delar, "del 1 och 2", leder till listan
-  // överst på sidan.
-  if (uppslag) saker.push({ namn: 'delarna', former: uppslag.delar.flatMap((x) => uppslag.delar.filter((y) => y.nr > x.nr).flatMap((y) => [`Del ${x.nr}–${y.nr}`, `Del ${x.nr}–⁠${y.nr}`, `Del ${x.nr} och ${y.nr}`])), adress: `${sida}#${UPPSLAGETS_ANKARE}` });
+  // Ett spann av delar, "del 1–3", med eller utan ordfogen efter tankstrecket, leder till listan överst på sidan.
+  if (uppslag) saker.push({ namn: 'delarna', former: uppslag.delar.flatMap((x) => uppslag.delar.filter((y) => y.nr > x.nr).flatMap((y) => [`Del ${x.nr}–${y.nr}`, `Del ${x.nr}–⁠${y.nr}`])), adress: `${sida}#${UPPSLAGETS_ANKARE}` });
   // Veckans ram, i en kurs med en ram per vecka som Bråkkursens "Vecka 1: Lika delar": "veckans ram" leder i planen till
   // ramen för veckan som visas, med veckans ruta Till läraren, korten och materialet (länkgranskningen av omgång 3
   // 2026-10-26: "veckans ruta Till läraren under Kursens material" ledde till början av materialet).

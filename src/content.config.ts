@@ -519,6 +519,9 @@ const metodensFalt = z.strictObject({
       // i Metoder ger Inte än i Lär dig metoden ingen vecka till (METODER.md under Fälten i metodens fil, K-789).
       utanUpprepa: z.literal(true).optional(),
       upprepa: text.optional(),
+      // atgard: raden Åtgärd i texten till åtgärdsprogrammet, ordagrant ur metoden, i en metod där åtgärden är det de vuxna gör,
+      // som Relationell vägledning. Utan fältet är åtgärden titeln och undertiteln.
+      atgard: text.optional(),
       stege: z.boolean().optional(),
       // vantar: skälet till att planen inte visas än, fast metoden har fälten, tills planen har klarat Rimligheten (K-553).
       vantar: text.optional(),

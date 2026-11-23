@@ -127,6 +127,8 @@ export interface PlanData {
   justera?: string[];
   /** Metodens regel för beslutet efter insatsen (plan.utvardering), vid utvärderingen. */
   utvardering?: string[];
+  /** Åtgärden i texten till åtgärdsprogrammet, ur metoden (plan.atgard). */
+  atgard?: string;
   /** Planen har ingen knapp Upprepa veckan (plan.utanUpprepa, K-586). */
   utanUpprepa?: true;
   /** Uppföljningens rad som beslutet efter insatsen väntar på (plan.utvarderasEfter), som radens nummer. */
@@ -481,7 +483,8 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
   const passet = planensPass(d, m.id, iV);
   const fastnar = [
     ...(d.fastnar ? [{ rubrik: d.fastnar.rubrik, adress: `${sida}#fastnar` }] : []),
-    ...d.tabeller.filter((t) => t.plats === 'efter-fastnar').flatMap((t) => { const a = tabellensAdress(d, m.id, t.rubrik); return a ? [{ rubrik: t.rubrik, adress: a }] : []; }),
+    // Också Om något händer, var tabellen än står, som efter tidsschemat i Relationell vägledning.
+    ...d.tabeller.filter((t) => t.plats === 'efter-fastnar' || /^Om något händer/u.test(t.rubrik)).flatMap((t) => { const a = tabellensAdress(d, m.id, t.rubrik); return a ? [{ rubrik: t.rubrik, adress: a }] : []; }),
   ];
   // Samma verktyg som i början av metodens sida ([id].astro): fältet centrala och ett verktyg som är invävt med många delar,
   // som Strukturer (vavdaIBorjan i src/lib/vav.ts; Niclas 2026-11-01: "Du gjorde relevanta ändringar i Planera insatsen
@@ -552,6 +555,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(iVLista(d.plan?.justera) ? { justera: iVLista(d.plan?.justera) } : {}),
     ...(iVLista(d.plan?.utvardering) ? { utvardering: iVLista(d.plan?.utvardering) } : {}),
     ...(d.plan?.utvarderasEfter && uppfRader.some((r) => r.nar === d.plan!.utvarderasEfter) ? { utvarderasEfter: uppfRader.findIndex((r) => r.nar === d.plan!.utvarderasEfter) } : {}),
+    ...(d.plan?.atgard ? { atgard: d.plan.atgard } : {}),
     ...(d.plan?.upprepa ? { upprepa: d.plan.upprepa } : {}),
     ...(d.plan?.utanUpprepa ? { utanUpprepa: true as const } : {}),
     ...(d.plan?.stege ? { stege: true } : {}),

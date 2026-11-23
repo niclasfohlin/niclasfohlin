@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, rakningenHarNagot, rakningensJamforelse, rakningensText, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppehalletsText, utanNamn, utvarderingenText, veckansNamn, vemsOrd, type Plan, type Rakningen, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { antaletsText, BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, rakningenHarNagot, rakningensJamforelse, rakningensText, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppehalletsText, utanNamn, utvarderingenText, veckansNamn, vemsOrd, type Plan, type Rakningen, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -250,29 +250,32 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
     r.serier.forEach((x, j) => {
       const h = Math.max(2, x.fore ?? 0, ...x.varden.map((v) => v ?? 0)) * enhet + 14;
       const sist = j === r.serier.length - 1;
-      plats(h + 22 + (sist ? 26 : 8));
+      plats(h + 22 + (sist ? 36 : 8));
       text(`${x.namn}, ska bli ${x.mot === 'ned' ? 'färre' : 'fler'}`, { fet: true, storlek: 10, luft: 0 });
       const botten = y - h, f = x.mot === 'ned' ? rost : farg.accent;
       if (o.mitt) sida.drawRectangle({ x: x0 + (o.mitt - 1) * steg + 1, y: botten, width: steg - 2, height: h, color: farg.mitt });
       if (x.fore !== undefined) {
         const fx = KANT + 24 + (forekol - 10 - b) / 2;
         sida.drawRectangle({ x: fx, y: botten, width: b, height: Math.max(2, x.fore * enhet), borderColor: f, borderWidth: 1.2 });
-        sida.drawText(String(x.fore), { x: fx + b / 2 - fet.widthOfTextAtSize(String(x.fore), 8) / 2, y: botten + x.fore * enhet + 3, size: 8, font: fet, color: farg.text });
+        const t = antaletsText(x.fore);
+        sida.drawText(t, { x: fx + b / 2 - fet.widthOfTextAtSize(t, 8) / 2, y: botten + x.fore * enhet + 3, size: 8, font: fet, color: farg.text });
         sida.drawLine({ start: { x: fx, y: botten + x.fore * enhet }, end: { x: x0 + n * steg, y: botten + x.fore * enhet }, thickness: 0.7, color: f, dashArray: [3, 2] });
       }
       x.varden.forEach((v, i) => {
         if (v === undefined) return;
         const bx = stapelnsKant(x0, i, steg, b);
         sida.drawRectangle({ x: bx, y: botten, width: b, height: Math.max(2, v * enhet), color: f });
-        sida.drawText(String(v), { x: bx + b / 2 - fet.widthOfTextAtSize(String(v), 8) / 2, y: botten + Math.max(2, v * enhet) + 2, size: 8, font: fet, color: farg.text });
+        const t = antaletsText(v);
+        sida.drawText(t, { x: bx + b / 2 - fet.widthOfTextAtSize(t, 8) / 2, y: botten + Math.max(2, v * enhet) + 2, size: 8, font: fet, color: farg.text });
       });
       sida.drawLine({ start: { x: KANT + 24, y: botten }, end: { x: x0 + n * steg, y: botten }, thickness: 0.9, color: farg.svag });
       if (sist) {
         const fx = KANT + 24 + (forekol - 10) / 2;
         sida.drawText('Före', { x: fx - fet.widthOfTextAtSize('Före', 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
         etiketter.forEach((e, i) => veckan(e, x0 + i * steg + steg / 2, botten));
+        if (o.mitt) sida.drawText('Mitt i', { x: x0 + (o.mitt - 0.5) * steg - font.widthOfTextAtSize('Mitt i', 7) / 2, y: botten - 31, size: 7, font, color: farg.svag });
       }
-      y -= h + (sist ? 30 : 10);
+      y -= h + (sist ? (o.mitt ? 38 : 30) : 10);
     });
   };
   return { text, rubrik, huvudet, not, staplar, namnMedStaplar, linje, antalsstaplar, avsluta, tabell, matris, farg };
@@ -335,19 +338,21 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
     if (t.regler.length) p.text(`Det linjen sa: ${t.regler.join('; ')}.`, { luft: 8 });
   }
   // Det läraren har räknat om eleven, med veckan före start och reglerna som gällde (K-815).
-  if (s.rakningen && rakningenHarNagot(s.rakningen)) {
-    p.rubrik(s.rakningen.namn, 150);
-    p.antalsstaplar(s.rakningen, veckoetiketter(s), { mitt: s.mitt });
+  const raknat = !!s.rakningen && rakningenHarNagot(s.rakningen);
+  const resultaten = s.rakningen ? elevensResultat(plan, s.elever[0]?.resultat ?? {}) : [];
+  if (s.rakningen && (raknat || resultaten.length)) {
+    p.rubrik(s.rakningen.namn, raknat ? 150 : 40);
+    if (raknat) p.antalsstaplar(s.rakningen, veckoetiketter(s), { mitt: s.mitt });
     for (const x of rakningensJamforelse(s.rakningen, veckoetiketter(s))) p.text(x);
     const t = rakningensText(s.rakningen, veckoetiketter(s));
-    for (const x of elevensResultat(plan, s.elever[0]?.resultat ?? {})) p.text(mening(resultatText(plan, info, x)));
+    for (const x of resultaten) p.text(mening(resultatText(plan, info, x)));
     if (t.regler.length) p.text(`Regler som gällde: ${t.regler.join('; ')}.`, { luft: 8 });
   }
   // Eleverna med något infört står i tabellen och de andra i en mening, och med metodens egen skala för gruppen står
   // eleverna bara när någon har något (den kalla testaren av K-559 2026-10-26). Överst passen vecka för vecka och sist
   // veckans skattning av gruppen, när läraren har gjort den.
   const visas = s.elever.filter((e) => elevenHarNagot(s, e)), utan = s.elever.filter((e) => !elevenHarNagot(s, e));
-  const planens = (!s.skattningar.length && !s.rakningen) || visas.length > 0;
+  const planens = !s.rakningen && (!s.skattningar.length || visas.length > 0);
   const narvaro = (e: (typeof s.elever)[number]) => (e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronKort(e, s).replace(/^med i /, '') : '');
   const veckorna = skattadeVeckor(s);
   const rader = [

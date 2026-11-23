@@ -921,7 +921,8 @@ const meny = [
                   // inte till en bild som går att läsa (veckanRyms), står blocket i full storlek på nästa sida, så att talen
                   // och bladen står med bilden (Niclas 2026-10-04).
                   const kartrad = karta ? delensRad(karta, del.rubrik) : undefined;
-                  const ryms = veckanRyms(del.falt, kartrad?.slice(1), bilder.map((b) => ('bild' in b ? b.bild.text : '')).join(' '));
+                  // En film på fyra rutor ryms aldrig under veckans text (Codex 2026-11-23: filmen låg över nästa del i utskriften).
+                  const ryms = bilder.every((b) => 'bild' in b) && veckanRyms(del.falt, kartrad?.slice(1), bilder.map((b) => ('bild' in b ? b.bild.text : '')).join(' '));
                   return (<>
                     <div class={`m-vecka${ryms ? '' : ' tva-sidor'}`}>
                       {rutan}
@@ -1058,6 +1059,7 @@ const meny = [
               <h3 id={ramAnkare[p.ri]}>{hel(p.ram.rubrik)}</h3>
               {p.ram.text.map((s) => <p>{s}</p>)}
               <p class="m-efter"><a href={`#${UPPSLAGETS_ANKARE}`}>Delarna står överst på sidan</a>, och varje del har en egen sida.</p>
+              {saker.ram.get(p.ri) && <Sakknapp fil={saker.ram.get(p.ri)!} metod={d.titel} />}
             </section>
             <div class="bank-utskrift">{rita(p)}</div>
           </>)
