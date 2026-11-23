@@ -197,6 +197,9 @@
     "105": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Uppgift 1 1","x":164,"y":596.7,"b":768,"h":46,"lage":"nere"},{"namn":"Uppgift 2","x":156,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 3","x":596,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 4 1","x":164,"y":1122.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 4 2","x":164,"y":1165.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 5 1","x":164,"y":1290.7,"b":768,"h":46,"lage":"nere"}]},
     "106": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Uppgift 1 1","x":164,"y":596.7,"b":768,"h":46,"lage":"nere"},{"namn":"Uppgift 2","x":156,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 3","x":596,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 4 1","x":164,"y":1122.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 4 2","x":164,"y":1165.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 5 1","x":164,"y":1290.7,"b":768,"h":46,"lage":"nere"}]}
   },
+  "relationell-vagledning": {
+    "1": {"bredd":1485,"hojd":1050,"ytor":[{"namn":"Elev","x":1142.7,"y":44,"b":302.3,"h":40,"lage":"nere"},{"namn":"Räknas av","x":1203.7,"y":94,"b":241.3,"h":40,"lage":"nere"}]}
+  },
   "seriesamtal": {
     "1": {"bredd":1050,"hojd":1485},
     "2": {"bredd":1050,"hojd":1485}

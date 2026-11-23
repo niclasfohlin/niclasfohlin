@@ -1,0 +1,125 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Relationell vägledning - Stunden",
+ "titel": "Relationell vägledning: Stunden",
+ "dokumenttitel": "Relationell vägledning: Stunden · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "F–9 · 30 minuter · en elev"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna ta emot hjälp att bli lugn, och lösa problem med ord.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Eleven väljer",
+    "text": "Eleven bestämmer vad ni gör. Du föreslår bara när eleven inte vet."
+   },
+   {
+    "rubrik": "Du följer",
+    "text": "Säg det du ser. Ge inga råd, ställ inga krav och ta inte upp det som har gått fel."
+   },
+   {
+    "rubrik": "Samma varje gång",
+    "text": "Du har stunden på samma plats och tider varje gång. Den är ingen belöning, och den ställs inte in efter en dålig dag."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Stunden",
+   "text": "Två gånger i veckan, ungefär 30 minuter. Kortet ligger inte framme när eleven är där.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 20,
+   "tat": true,
+   "rader": [
+    [
+     "I förväg",
+     "Bestäm en plats och två tider i veckan, inte på den rast eleven helst vill ha, och säg dem till eleven och klassläraren. Ha några saker framme att välja bland, som papper och pennor, ett kortspel och en boll. I 7–⁠9 bokar du stunden tyst, och ni gör något sida vid sida."
+    ],
+    [
+     "Första gången",
+     "Säg vad stunden är, och att den är elevens.",
+     "”Det här är din stund. Du bestämmer vad vi gör, och jag är med.”"
+    ],
+    [
+     "Börja\n0–3 min",
+     "Hälsa med namnet, och fråga vad eleven vill göra i dag. Säger eleven ”vet inte”, visar du sakerna eller tar fram det ni gjorde sist.",
+     "”Hej Nora. Vad vill du göra i dag?”"
+    ],
+    [
+     "Eleven leder\n3–27 min",
+     "Gör det eleven har valt, på elevens sätt, och ha roligt tillsammans. Säg det du ser och hur eleven verkar ha det.",
+     "”Du blandar korten snabbt.”\n”Det där blev du nöjd med.”"
+    ],
+    [
+     "Avsluta\n27–30 min",
+     "Säg några minuter före slutet att ni snart slutar. Säg sedan en sak du såg eller tyckte om, och när ni ses nästa gång.",
+     "”Du lärde mig ett nytt spel i dag. Vi ses på torsdag.”"
+    ]
+   ]
+  },
+  {
+   "rubrik": "Om något händer",
+   "text": "Eleven tar emot hjälp av en vuxen hen litar på, så kom till stunden varje gång.",
+   "kolumner": [
+    "Det som händer",
+    "Så gör du"
+   ],
+   "bredder": [
+    34,
+    66
+   ],
+   "storlek": 20,
+   "tat": true,
+   "rader": [
+    [
+     "eleven säger ”töntigt” eller går",
+     "Säg lika vänligt som annars: ”Vi ses på torsdag.” Sitt kvar tiden ut. Ett ”töntigt” betyder inte nej."
+    ],
+    [
+     "eleven kommer inte",
+     "Sitt kvar tiden ut. Säg nästa morgon: ”Jag satt där i går. Vi ses på tisdag.” Har eleven inte kommit på tre veckor, fråga vad som passar bättre."
+    ],
+    [
+     "eleven har haft en svår dag",
+     "Ha stunden som vanligt och lika länge. Det som hände tar du vid ett annat tillfälle."
+    ],
+    [
+     "eleven vill prata om det som hände",
+     "Lyssna, och sammanfatta det du hör. Behöver något lösas, bokar ni ett samtal en annan dag."
+    ],
+    [
+     "eleven prövar dig, med fula ord eller genom att förstöra",
+     "Säg lugnt vad som gäller, en gång: ”Korten ska hålla till nästa gång.” Fortsätt stunden. Är eleven uppe i varv när ni börjar, eller trappas det upp, gör som elevens bemötandeplan säger."
+    ],
+    [
+     "eleven vill inte sluta",
+     "Säg var det ni har gjort står till nästa gång: ”Bygget står här till torsdag.” Säg sedan en sak att göra."
+    ],
+    [
+     "du måste flytta stunden, eller är borta",
+     "Säg det själv i förväg, och säg den nya tiden. Är du borta, har den vuxne som står i elevens bemötandeplan stunden."
+    ],
+    [
+     "eleven berättar något som oroar dig",
+     "Säg att du måste berätta det för vuxna som kan hjälpa. Följ skolans rutin samma dag."
+    ]
+   ]
+  }
+ ]
+}

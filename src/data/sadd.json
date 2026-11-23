@@ -826,6 +826,19 @@
               "om": "Avslutet"
             }
           ]
+        },
+        "relationell-vagledning": {
+          "skal": "Klassläraren sätter eleven bredvid en kamrat som är trygg i samarbete, i en uppgift där båda behövs. Turas om ger de två var sin roll och växlar, så att eleven både arbetar och blir uppmuntrad.",
+          "vav": [
+            {
+              "efter": "tabell: De vuxna runt eleven: alla gör likadant",
+              "delar": [
+                "turas-om"
+              ],
+              "slag": "forslag",
+              "om": "Eleven bredvid en kamrat, i en uppgift där båda behövs"
+            }
+          ]
         }
       },
       "nej": {}
@@ -1809,7 +1822,8 @@
         }
       },
       "nej": {
-        "gruppstarkande-aktiviteter": "Modelleringen i aktiviteterna gäller ett socialt beteende och inget innehåll som eleverna ska lära sig och ta fram igen, så ingen av strategierna för lärande stöder metodens kärna (sökningen 2026-11-03, underlag/prov/strategier/sadd-svar-b.md)."
+        "gruppstarkande-aktiviteter": "Modelleringen i aktiviteterna gäller ett socialt beteende och inget innehåll som eleverna ska lära sig och ta fram igen, så ingen av strategierna för lärande stöder metodens kärna (sökningen 2026-11-03, underlag/prov/strategier/sadd-svar-b.md).",
+        "relationell-vagledning": "Passets kärna är stunden, som är elevens och inte har något innehåll att lära in. Tecknet övas några minuter i vecka 1 och 2 och efter ett lov, och att rita är ett stöd när orden är få; riggen föreslog Sprid ut och Ord och bild, men ingen av dem görs i varje pass, som i Gruppstärkande aktiviteter, och delens sida ska vara kort för den som är uppe i varv."
       }
     },
     "ljudstartens-ord": {

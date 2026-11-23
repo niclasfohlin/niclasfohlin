@@ -200,6 +200,26 @@
           "beslut": "Inget: den står tidigt och leder till bladet"
         }
       ]
+    },
+    "src/content/stodundervisning/relationell-vagledning.yaml": {
+      "provad": "2026-11-23",
+      "saker": [
+        {
+          "sak": "De åtta delarna, som är metodens kärna och som läraren slår upp",
+          "forst": "Tabellen på skärm 9 och delarna på skärm 32–55 av 60",
+          "beslut": "Uppslagsverket överst på metodens sida, skärm 1, och varje del på en egen sida (K-814). Sidan är nu 34 skärmar"
+        },
+        {
+          "sak": "Bemötandeplanen, som de vuxna skriver före start",
+          "forst": "Länken i I korthet på skärm 2, inledningens nionde stycke på skärm 7 och mallen på skärm 29 av 34",
+          "beslut": "Ett litet kort efter inledningens första stycke (src/data/bladkort-stod.json), med en minibild ur mallen, och bladet Svåra stunder vecka för vecka bredvid"
+        },
+        {
+          "sak": "Stunden, som inte ställs in efter en dålig dag, och ordningen lugn, kontakt, vägledning",
+          "forst": "Ingressen på skärm 1, filmen och Lektionskortet på skärm 3, Tre saker att hålla fast vid på skärm 9",
+          "beslut": "Inget: båda står överst, och Lektionskortet har sin knapp i nedladdningsrutan"
+        }
+      ]
     }
   }
 }
