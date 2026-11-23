@@ -715,6 +715,30 @@ if (tsMp) {
     const julEfter = (lov) => s.planera(kmp, { ...jul, lov }).uppfoljning.find((u) => u.typ === 'efter')?.tillfallen[0]?.datum;
     ska('en lovvecka flyttar uppföljningen efter insatsen till veckan efter lovet', julEfter([]) === '2026-12-21' && julEfter(['2026-52']) === '2026-12-28' && julEfter(['2026-52', '2026-53']) === '2027-01-04', [julEfter([]), julEfter(['2026-52']), julEfter(['2026-52', '2026-53'])]);
   }
+  // Det läraren räknar om en elev (K-815; Niclas 2026-11-22: "Planera insatsen ska även digitalt kunna följa en elev som skattas
+  // varje vecka och får ett stapeldiagram likt Gruppstärkande aktiviteter har"): fältet och felen, veckan före start, noll som
+  // ett tal, regeln på följden med Före först, texterna och det som rensas ur planen.
+  {
+    const rv = metod('relationell-vagledning');
+    const med = (andrat) => ({ ...rv, plan: { ...rv.plan, skattningar: [{ ...rv.plan.skattningar[0], ...andrat }] } });
+    const felen = (andrat) => s.metodensSkattningar(med(andrat)).fel;
+    const rmp = s.metodplan(rv).plan;
+    const r = rmp.skattningar.find((x) => x.vem === 'eleven');
+    const egna = rv.plan.skattningar[0];
+    ska('räkningen om en elev: fältet och spärren', !s.metodensSkattningar(rv).fel.length && r?.antal.map((a) => `${a.namn} ${a.mot}`).join() === 'Svåra stunder ned,Lösningar upp' && rv.uppfoljning.rader[r.fore].nar === 'Före start' && rmp.enElev === true && felen({ antal: [] }).some((x) => x.includes('en eller två saker')) && felen({ antal: [{ ...egna.antal[0], mot: 'bort' }] }).some((x) => x.includes('ned eller upp')) && felen({ antal: [{ ...egna.antal[0], text: 'något annat' }] }).some((x) => x.includes('citerar metoden')) && felen({ fore: 'Varje fredag' }).some((x) => x.includes('tiden före')) && felen({ rad: 'Varannan vecka' }).some((x) => x.includes('varje vecka')) && felen({ regler: [{ om: 'minst 7 i 4 veckor', text: 'x' }] }).some((x) => x.includes('går inte att läsa')) && felen({ regler: [{ om: 'uppåt 3 veckor i rad' }] }).some((x) => x.includes('säger inte vad läraren gör')) && s.metodensSkattningar({ ...med({}), grupp: 'En till fyra elever' }).fel.some((x) => x.includes('en metod med en elev')) && s.metodensSkattningar({ ...rv, plan: { ...rv.plan, skattningar: [egna, egna] } }).fel.some((x) => x.includes('mer än en sak')), r);
+    const rval = { ...s.forval(rmp, '2026-10-26'), start: '2026-11-02' };
+    const rpl = s.planera(rmp, rval), M = rpl.veckor.map((v) => v.mandag);
+    const f = s.rensaFoljd({ matt: { 'Svåra stunder': { fore: 4, [M[0]]: 5, [M[1]]: 6, [M[2]]: 7, x: 3, [M[4]]: 8 }, 'Lösningar': { fore: 1, [M[0]]: 0, [M[1]]: 99 } } });
+    const rk = s.rakningen(rpl, f, r), sam = s.sammanstallning(rpl, f, '2026-11-20');
+    const namnen = sam.veckor.map(s.veckansNamn);
+    const uppat3 = r.antalsregler.findIndex((x) => x.veckor === 3);
+    ska('räkningen om en elev: noll är ett tal, veckan före start är först i följden, och en vecka utan tal bryter den', rk.serier[0].fore === 4 && rk.serier[1].varden[0] === 0 && rk.serier[1].varden[1] === undefined && !('x' in (f.matt?.['Svåra stunder'] ?? {})) && !rk.galler[1].length && rk.galler[2].includes(uppat3) && !rk.galler[4].length && s.regelnGaller({ typ: 'uppat', veckor: 3 }, [4, 5, 6, 7]) && !s.regelnGaller({ typ: 'uppat', veckor: 3 }, [4, 5, 5, 7]) && s.regelnIOrd({ typ: 'uppat', veckor: 3 }) === 'uppåt tre veckor i rad', rk);
+    const rinfo = { titel: rv.titel, adress: 'niclasfohlin.se/stodundervisning/relationell-vagledning', mal: rv.mal.overgripande, uppfoljning: rv.uppfoljning.rader };
+    const text = s.sammanstallningstext(rinfo, rpl, sam), ap = s.dokumentationstext(rinfo, rpl, rval, { minuter: 30, folj: true });
+    ska('räkningen om en elev: texterna, jämförelsen och eleven i stället för gruppen', s.rakningensLage(rk, 1) === 'Svåra stunder: 6, mot 4 före start.' && s.rakningensText(rk, namnen).serier[0].startsWith('Svåra stunder: före start: 4, vecka 1 (v. 45): 5') && s.rakningensJamforelse(rk, namnen)[0] === 'Svåra stunder: 4 före start, 7 i vecka 3 (v. 47) och 8 i vecka 5 (v. 49).' && text.includes('Svåra stunder: före start: 4') && text.includes('Regler som gällde: Svåra stunder uppåt tre veckor i rad efter vecka 3') && sam.elever[0].namn === 'Eleven' && ap.includes('Varje fredag räknas svåra stunder och lösningar') && !ap.includes('av hur väl'), [s.rakningensLage(rk, 1), s.rakningensJamforelse(rk, namnen), text, ap]);
+    ska('räkningen om en elev: regeln i ord, nyckeln för veckan före start och gränserna', s.rakningensRegel(rk, rk.regler[uppat3]) === 'Svåra stunder uppåt tre veckor i rad' && s.RAKNAS_FORE === 'fore' && s.RAKNINGENS_GRANSER.hogst === 15 && s.RAKNINGENS_GRANSER.antal === 2 && rk.serier.length <= s.RAKNINGENS_GRANSER.antal);
+    ska('räkningen om en elev: en plan utan något räknat säger inget', !s.rakningenHarNagot(s.rakningen(rpl, s.rensaFoljd({}), r)) && !s.rakningensText(s.rakningen(rpl, s.rensaFoljd({}), r), namnen).serier.length && s.metodplan(metod('kompissamtal')).plan.enElev === undefined);
+  }
   // Metodens egna skattningar (K-559; Niclas 2026-10-26: "Viktigt att det funkar som en egen modul du kan lägga in andra
   // skattningar i på kommande metoder"): reglerna, skalan ur metodens tabell, felen som stoppar bygget, linjen och texterna,
   // med lärarens länkar som aldrig följer med en text.
@@ -724,7 +748,7 @@ if (tsMp) {
     const g = gmp.skattningar.find((x) => x.vem === 'gruppen');
     const ned = s.tolkaRegel('nedåt 2 veckor i rad'), under = s.tolkaRegel('under 7 i 4 veckor utan att stiga'), minst = s.tolkaRegel('minst 7 i 4 veckor');
     ska('metodens skattningar: reglerna på linjen', ned?.typ === 'nedat' && under?.grans === 7 && minst?.veckor === 4 && s.tolkaRegel('ibland') === null && s.regelnGaller(ned, [7, 6, 5]) && !s.regelnGaller(ned, [7, 6]) && !s.regelnGaller(ned, [7, 6, 6]) && s.regelnGaller(under, [6, 6, 5, 5]) && !s.regelnGaller(under, [6, 5, 6, 5]) && !s.regelnGaller(under, [6, 6, 7, 5]) && s.regelnGaller(minst, [7, 8, 7, 9]) && !s.regelnGaller(minst, [7, 8, 6, 9]), [ned, under, minst]);
-    ska('metodens skattningar: skalan ur metodens tabell', s.SKATTNINGARNAS_VEM.join() === 'gruppen,eleverna,lararen' && g?.skala?.steg.length === 5 && s.stegetsNamn(g.skala, 10) === 'Mycket bra' && s.stegetsNamn(g.skala, 1) === 'Fungerar inte' && s.stegetsSpann(g.skala.steg[0]) === '1–2' && s.stegetsSpann({ fran: 4, till: 4 }) === '4' && s.skattningensGranser(g).join() === '7' && !!s.skalansSteg(ga, { fran: 1, till: 10, tabell: 'Lärarens skattning' }) && s.skalansSteg(ga, { fran: 0, till: 10, tabell: 'Lärarens skattning' }) === null && gmp.skattningar.find((x) => x.vem === 'eleverna')?.namn === 'Vår grupp', g);
+    ska('metodens skattningar: skalan ur metodens tabell', s.SKATTNINGARNAS_VEM.join() === 'gruppen,eleverna,eleven,lararen' && g?.skala?.steg.length === 5 && s.stegetsNamn(g.skala, 10) === 'Mycket bra' && s.stegetsNamn(g.skala, 1) === 'Fungerar inte' && s.stegetsSpann(g.skala.steg[0]) === '1–2' && s.stegetsSpann({ fran: 4, till: 4 }) === '4' && s.skattningensGranser(g).join() === '7' && !!s.skalansSteg(ga, { fran: 1, till: 10, tabell: 'Lärarens skattning' }) && s.skalansSteg(ga, { fran: 0, till: 10, tabell: 'Lärarens skattning' }) === null && gmp.skattningar.find((x) => x.vem === 'eleverna')?.namn === 'Vår grupp', g);
     const med = (skattningar) => ({ ...ga, plan: { ...ga.plan, skattningar } });
     const felen = (x) => s.metodensSkattningar(med(x)).fel;
     const [lararens, vargrupp] = ga.plan.skattningar;
@@ -787,7 +811,7 @@ if (tsMp) {
     const radId = (i) => eu.uppfoljning.rader[i]?.id;
     ska('Lär dig metoden: lärarens två skattningar med skalan 1 till 10 och reglerna på uppföljningens id', saker?.vem === 'lararen' && fungerar?.vem === 'lararen' && radId(saker.rad) === 'lararen' && radId(fungerar.rad) === 'klassen' && saker.skala.fran === 1 && saker.skala.till === 10 && !saker.skala.steg.length && radId(saker.regler[0].rad) === 'osaker' && radId(fungerar.regler[0].rad) === 'klassenstar' && s.skattningensGranser(saker).join() === '5', emp?.skattningar);
     const euFelen = (x) => s.metodensSkattningar({ ...eu, plan: { ...eu.plan, skattningar: [{ ...eu.plan.skattningar[0], ...x }] } }).fel;
-    ska('Lär dig metoden: lärarens skattning behöver en skala med två heltal', euFelen({ skala: undefined }).some((x) => x.includes('skattar läraren')) && euFelen({ skala: { fran: 3, till: 3 } }).some((x) => x.includes('skattar läraren')) && !euFelen({}).length && euFelen({ vem: 'klassen' }).some((x) => x.includes('gruppen, eleverna eller lararen')));
+    ska('Lär dig metoden: lärarens skattning behöver en skala med två heltal', euFelen({ skala: undefined }).some((x) => x.includes('skattar läraren')) && euFelen({ skala: { fran: 3, till: 3 } }).some((x) => x.includes('skattar läraren')) && !euFelen({}).length && euFelen({ vem: 'klassen' }).some((x) => x.includes('gruppen, eleverna, eleven eller lararen')));
     const eval0 = s.forval(emp, '2026-11-04');
     const ep = s.planera(emp, eval0);
     ska('Lär dig metoden: fyra steg från nästa måndag, och veckan efter stegen', eval0.start === '2026-11-09' && eval0.langd === 4 && ep.veckor.map((v) => v.innehall).join() === '1,2,3,4' && ep.veckor.map((v) => v.steg).join() === '0,1,2,3' && ep.efter === '2026-12-07', [ep.veckor.map((v) => v.mandag), ep.efter]);
@@ -1010,6 +1034,13 @@ if (tsMp) {
     ska('lagringen: kopians text och gräns, planen som sparas och statistikens namn', lager.KOPIANS_GRANS === 7 && lager.kopiansText('2026-11-01T09:00:00', '2026-11-05') === 'Planen laddades senast ner 1 november 2026.' && lager.kopiansText('2026-11-01', '2026-11-20') === 'Planen laddades senast ner 1 november 2026. Ladda ner den igen, så kommer det senaste med.' && lager.sparadPlan({ id: 'abc128', val: eval0, foljd: {}, kopia: '2026-11-01' }, { id: 'x', titel: 'X', uppdaterad: '2026-10-30' }, ep, { namn: '', bockade: 0 }).kopia === '2026-11-01' && lager.sparadPlan({ id: 'abc128', val: eval0, foljd: {}, uppdaterad: '2026-10-01' }, { id: 'x', titel: 'X', uppdaterad: '2026-10-30' }, ep, { namn: '', bockade: 0 }).uppdaterad === '2026-10-01' && !!lager.sparadPlan({ id: 'abc128', val: eval0, foljd: {} }, { id: 'x', titel: 'X' }, ep, { namn: '', bockade: 0 }).schema.efter && s.sistaInfort(kf) === '2026-11-23' && JSON.stringify(s.planveckansKort(lp, lp.veckor[2])) === '{"tal":"2","om":"igen"}' && lager.SAMLINGENS_ORD.metoder.led === 'lardig' && lager.SAMLINGAR.length === 2 && lager.PLANFILENS_TYP === 'planera-insatsen' && bygg.goatFor('lardig', 'eu', 'E & U')('ladda-ner', 'planen') === 'data-goatcounter-click="lardig:eu:ladda-ner" data-goatcounter-title="E &amp; U: planen"');
     const skatt = foljd(await import('../src/scripts/skattning.ts'));
     const g10 = { namn: 'Hur säker är jag på metoden?', skala: { fran: 1, till: 10, tabell: '', steg: [] }, regler: [{ typ: 'underIRad', grans: 5, veckor: 2, rad: 0 }] };
+    {
+      const etiketter = Array.from({ length: 10 }, (_, i) => ({ kort: String(i + 1), kalender: `v. ${40 + i}`, text: `vecka ${i + 1}` }));
+      const serie = (namn, mot, fore, varden) => ({ namn, mot, fore, varden: Array.from({ length: 10 }, (_, i) => varden[i]) });
+      const graf = skatt.raknadGraf({ namn: 'x', rad: 1, foreRad: 0, serier: [serie('Svåra stunder', 'ned', 6, [5, 0, undefined, 4]), serie('Lösningar', 'upp', undefined, [1])], regler: [], galler: [] }, etiketter, { nu: 4, mitt: 5 });
+      const antal = (re) => (graf.match(re) ?? []).length;
+      ska('skattning.ts: talen och diagrammet över det läraren räknar om en elev: noll har en stapel, Före utan tal är streckad, och riktningen står i ord', antal(/class="pl-rakn-stapel/g) === 4 && antal(/class="pl-rakn-fore/g) === 1 && antal(/class="pl-rakn-tom/g) === 3 && antal(/class="pl-mittfalt"/g) === 2 && graf.includes('ska bli färre') && graf.includes('ska bli fler') && graf.includes('aria-label="Svåra stunder, ska bli färre: före start 6, vecka 1 5, vecka 2 0, vecka 4 4. Lösningar, ska bli fler: vecka 1 1"') && (skatt.antalsknappar('Svåra stunder', 'fore', 2, false).match(/data-tal=/g) ?? []).length === 7 && skatt.antalsknappar('Svåra stunder', 'fore', 2, false).includes('data-fler="Svåra stunder"') && (skatt.antalsknappar('Svåra stunder', '2026-11-09', 9, false).match(/data-tal=/g) ?? []).length === 16 && skatt.antalsknappar('Svåra stunder', '2026-11-09', 0, false).includes('data-tal="0" aria-pressed="true"') && skatt.FORE_START === s.RAKNAS_FORE, graf.slice(0, 400));
+    }
     ska('skattning.ts: knapparna, skalans ändar och linjen, som båda lagren ritar', (skatt.skalansKnappar(g10, '2026-11-09', 4).match(/class="pl-skalsteg"/g) ?? []).length === 10 && skatt.skalansKnappar(g10, '2026-11-09', 4).includes('aria-pressed="true" aria-label="4"') && skatt.skalansKnappar({ namn: 'Hur gick det i 7B den här veckan?', skala: s.KLASSERNAS_SKALA, regler: [] }, '2026-11-09', undefined, { klass: 'kb' }).includes('data-klass="kb"') && skatt.skalansKnappar({ namn: 'K', skala: s.KLASSERNAS_SKALA, regler: [] }, '2026-11-09', 5).includes('aria-label="5, gick mycket bra"') && skatt.skalansAndarRad(s.KLASSERNAS_SKALA, s.KLASSERNAS_SKALA) === '<p class="ld-skalans-andar" aria-hidden="true"><span>1 Gick inte</span><span>5 Gick mycket bra</span></p>' && skatt.linjegraf(g10, [4, 6, undefined], [{ kort: '1', kalender: 'v. 46', text: 'vecka 1 (v. 46)' }, { kort: '2', kalender: 'v. 47', text: 'vecka 2 (v. 47)' }, { kort: '3', kalender: 'v. 48', text: 'vecka 3 (v. 48)' }]).includes('aria-label="Hur säker är jag på metoden?, 1 till 10: vecka 1 (v. 46): 4, vecka 2 (v. 47): 6"'));
     // Codex 2026-10-31, fynd 2, 4, 6 och 8: flikarna, en äldre fil, klasslistan när sidan lämnas och sammanställningen efter Före,
     // med samma rötter i båda lagren. Spärrarna läser koden och är prövade åt andra hållet.
@@ -1748,6 +1779,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   ska('kalenderveckorna: veckor i följd ihop, och ett lov bryter följden', s.kalenderveckornaFor(['2026-11-02', '2026-11-04', '2026-11-16']) === 'v. 45 och v. 47' && s.kalenderveckornaFor(['2026-11-02', '2026-11-09', '2026-11-16']) === 'v. 45–47' && s.kalenderveckornaFor(['2026-12-21', '2026-12-28', '2027-01-04']) === 'v. 52 till v. 1' && s.kalenderveckornaFor(['2026-11-04']) === 'v. 45', s.kalenderveckornaFor(['2026-11-02', '2026-11-16']));
   ska('kalenderfilen kallar uppföljningen efter insatsen som sidan', !efter || s.kalenderfil({ titel: 'T', uppfoljning: ts.uppfoljning.rader, fokus: [] }, p, { id: 'x', lank: () => 'l', nu: new Date(Date.UTC(2026, 10, 1)) }).includes('SUMMARY:T: uppföljning\\, efter insatsen'));
   ska('besluten och meningarna behåller sitt frågetecken', s.beslutText({ beslut: 'fortsatt', not: 'Ska stödet fortsätta?' }) === 'Fortsätt som planerat. Ska stödet fortsätta?' && s.mening('Hur gick det?') === 'Hur gick det?');
+  ska('en metod med en elev: gruppen läses som en till en, kortet säger 1 elev och formerna säger eleven', JSON.stringify(s.gruppensElever('En elev och en vuxen')) === '{"min":1,"max":1,"klass":false}' && s.faktaIFastForm({ grupp: 'En elev och en vuxen' }).grupp === '1 elev' && s.arEnElev({ grupp: 'En elev och en vuxen' }) && !s.arEnElev({ grupp: 'En till fyra elever' }) && !s.arEnElev({}) && s.vemsOrd(true).dens === 'elevens' && s.vemsOrd(false).Den === 'Gruppen' && s.elevernasKolumnen(true) === 'Eleven blir bättre på', s.gruppensElever('En elev och en vuxen'));
   ska('gruppens storlek, också högst', JSON.stringify(s.gruppensElever('Högst fyra elever')) === '{"min":1,"max":4,"klass":false}' && JSON.stringify(s.gruppensElever('Två till sex elever')) === '{"min":2,"max":6,"klass":false}' && s.gruppensElever('En hel klass') === null, s.gruppensElever('Högst fyra elever'));
   ska('diagrammet: stapeln mitt i facket och prickarna under den', s.stapelnsKant(10, 2, 36, 22) === 89 && JSON.stringify(s.prickarna(89, 22, ['med', 'borta']).map((x) => x.x)) === '[96.5,103.5]' && s.prickarna(0, 10, ['med'])[0].slag === 'med');
   ska('saker med nummer i en text', JSON.stringify(s.sakspann('Laminerat Bildserie 1–3, och Bildserie 2–1.').map((x) => [x.namn, x.nummer])) === '[[["Laminerat Bildserie","Bildserie"],[1,2,3]]]');
@@ -3604,6 +3636,46 @@ try {
       sant('Ljudlek: ett lektionsbyte behåller veckans skattning mot den nya lektionen, och Ångra tar tillbaka den förra lektionen', bytt.toast.includes(s.lektionsbytetsBesked('Vecka 3', 'Räkna ljud', true)) && bytt.efter.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && bytt.efter.includes('Räkna ljud:') && bytt.hash.includes('k=3.0.6.5') && tillbaka.efter.includes('Snittet i veckans skattning mot lektionens mål är 5 av 5') && !tillbaka.efter.includes('Räkna ljud:') && tillbaka.hash.includes('k=3.0.4.5'), { bytt, tillbaka });
       await lj(`document.getElementById('pl-folj').click()`);
       await vanta(150);
+    }
+    if (m.id === 'relationell-vagledning') {
+      // Det läraren räknar om eleven (K-815): Följ insatsen är förvalt, ingen elevlista, talen i veckan och under Före, Fler,
+      // ett tryck på det valda tömmer, regeln, diagrammet med Före som stapel, och Visa stort.
+      sant('räkningen om eleven: Följ insatsen är förvalt, och det finns ingen elevlista', await b.kor(`document.getElementById('pl-folj').checked && document.getElementById('pl-elevruta').hidden`));
+      const tal = async (sak, n) => { await b.tryck(`#pl-skatta [data-antal="${sak}"][data-tal="${n}"]`); await vanta(150); };
+      await b.tryck('#pl-veckan .pl-remsa [data-vy="1"]');
+      await vanta(150);
+      const utan = await b.kor(`document.querySelector('#pl-skatta')?.textContent ?? ''`);
+      await b.tryck('#pl-veckan .pl-remsa [data-vy="fore"]');
+      await vanta(150);
+      await tal('Svåra stunder', 4);
+      await tal('Lösningar', 1);
+      const fore = await b.kor(`(() => ({ rubrik: document.querySelector('#pl-skatta h3')?.textContent ?? '', forestapel: document.querySelectorAll('#pl-skatta .pl-rakn-fore').length }))()`);
+      sant('räkningen om eleven: veckan före start räknas under Före och blir stapeln Före', utan.includes('inte ifyllt') && fore.rubrik === 'Räkna veckan före start' && fore.forestapel === 2, { utan, fore });
+      for (const [vecka, n] of [[1, 5], [2, 6]]) { await b.tryck(`#pl-veckan .pl-remsa [data-vy="${vecka}"]`); await vanta(150); await tal('Svåra stunder', n); await tal('Lösningar', 0); }
+      await b.tryck('#pl-veckan .pl-remsa [data-vy="3"]');
+      await vanta(150);
+      await b.tryck('#pl-skatta [data-fler="Svåra stunder"]');
+      await vanta(150);
+      await tal('Svåra stunder', 8);
+      const v3 = await b.kor(`(() => ({ knappar: document.querySelectorAll('#pl-skatta [data-antal="Svåra stunder"][data-tal]').length, valt: document.querySelector('#pl-skatta [data-antal="Svåra stunder"][aria-pressed="true"]')?.textContent ?? '', laget: document.querySelector('#pl-skatta .pl-raknas-laget')?.textContent ?? '', regel: document.querySelector('#pl-skatta .pl-regel')?.textContent ?? '', staplar: document.querySelectorAll('#pl-skatta .pl-rakn-stapel').length, tomma: document.querySelectorAll('#pl-skatta .pl-rakn-tom').length, ram: [...document.querySelectorAll('#pl-skatta details[data-ruta^="raknas-"] summary')].map((x) => x.textContent), skala: [...document.querySelectorAll('#pl-skatta .pl-skattning')].length }))()`);
+      sant('räkningen om eleven: Fler, läget, regeln och staplarna, utan skattningen 1 till 5', v3.knappar === 16 && v3.valt === '8' && v3.laget === 'Svåra stunder: 8, mot 4 före start.' && v3.regel.includes('uppåt tre veckor i rad') && v3.regel.includes('ändrar ni vuxna hur ni bemöter eleven') && v3.staplar === 5 && v3.tomma === 1 && v3.ram.length === 2 && v3.skala === 0, v3);
+      await tal('Svåra stunder', 8);
+      const tomt = await b.kor(`(() => ({ valt: document.querySelectorAll('#pl-skatta [data-antal="Svåra stunder"][aria-pressed="true"]').length, besked: document.getElementById('pl-toast')?.textContent ?? '', regel: !!document.querySelector('#pl-skatta .pl-regel') }))()`);
+      sant('räkningen om eleven: ett tryck på det valda talet tömmer veckan, med Ångra', tomt.valt === 0 && tomt.besked.includes('Svåra stunder är inte ifyllt') && tomt.besked.includes('Ångra') && !tomt.regel, tomt);
+      await b.tryck('#pl-toast [data-toast-gor]');
+      await vanta(250);
+      await b.tryck('#pl-skatta [data-visa-stort]');
+      await vanta(200);
+      const stort = await b.kor(`(() => { const d = document.querySelector('dialog.pl-stort'); const r = { oppen: !!d?.open, graf: !!d?.querySelector('.pl-raknad'), knappar: [...(d?.querySelectorAll('button') ?? [])].map((x) => x.textContent) }; d?.querySelector('[data-stang]')?.click(); return r; })()`);
+      // Dialogens close kommer i nästa varv, och då tas rutan bort.
+      await vanta(150);
+      const stangd = await b.kor(`!document.querySelector('dialog.pl-stort')`);
+      sant('räkningen om eleven: Visa stort visar bara diagrammet, och Stäng tar bort det', stort.oppen && stort.graf && stort.knappar.join() === 'Stäng' && stangd, { ...stort, stangd });
+      const samman = await b.kor(`(() => ({ text: document.getElementById('pl-samman')?.textContent ?? '', grupp: /[Gg]ruppen|[Ee]leverna/.test(document.getElementById('pl-samman')?.textContent ?? '') }))()`);
+      sant('räkningen om eleven: sammanställningen har räkningen och säger inte gruppen eller eleverna', samman.text.includes('Svåra stunder: 4 före start') && !samman.grupp, samman);
+      const orden = await b.kor(`(() => ['pl-veckan', 'pl-veckor', 'pl-planen', 'pl-andra', 'pl-samman', 'pl-kopia'].flatMap((id) => { const n = document.getElementById(id)?.cloneNode(true); n?.querySelectorAll('[hidden]').forEach((x) => x.remove()); return [...(n?.textContent ?? '').matchAll(/.{0,30}([Gg]ruppens? |[Ee]leverna).{0,30}/g)].map((x) => id + ': ' + x[0]); }))()`);
+      sant('räkningen om eleven: planen säger inte gruppen eller eleverna någonstans', !orden.length, orden);
+      sant('räkningen om eleven: planen leder till de åtta delarna', await b.kor(`!!document.querySelector('#pl-veckan a[href$="#uppslag"]')`));
     }
     if (m.id === 'gruppstarkande-aktiviteter') {
       // Följ insatsen är förvalt i en metod med en egen skattning av gruppen, och går att välja bort (K-605; Niclas 2026-10-28).

@@ -12,7 +12,7 @@ import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
 import { harMallar } from '../../lib/metod';
 import { byggSerier, arLektion, serieTaggar } from '../../lib/serie';
-import { kanGorasIKlass, taggensSlag } from '../../lib/upplagg';
+import { KLASSORD, klassvardet, taggensSlag, type Klassvarde } from '../../lib/upplagg';
 import taggarData from '../../data/taggar.json';
 // En lektion står i sin serie och inte som eget kort (src/lib/serie.ts): seriens kort visar lektionerna och filtreras
 // på allt serien tränar.
@@ -37,7 +37,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
 // är valt. Antalen räknas här för sidan utan val och i skriptet nedan när valen ändras, ur korten.
 const beskrivning = Object.fromEntries(taggarData.taggar.map((t) => [t.id, t.beskrivning]));
 const omradeAv = Object.fromEntries(taggarData.taggar.map((t) => [t.id, t.omrade]));
-const korten = metoder.map((m) => { const serie = serier.get(m.id); return { omrade: m.data.omrade, arskurs: m.data.arskurs as string[], taggar: serie ? serieTaggar(serie, allaMetoder) : m.data.taggar, klass: kanGorasIKlass(m.data) ? 'klass' : 'grupp' }; });
+const korten = metoder.map((m) => { const serie = serier.get(m.id); return { omrade: m.data.omrade, arskurs: m.data.arskurs as string[], taggar: serie ? serieTaggar(serie, allaMetoder) : m.data.taggar, klass: klassvardet(m.data) }; });
 const antalMed = (falt: 'omrade' | 'arskurs' | 'tagg' | 'upplagg' | 'klass', varde: string) => korten.filter((k) => !varde || (falt === 'omrade' ? k.omrade === varde : falt === 'arskurs' ? k.arskurs.includes(varde) : falt === 'klass' ? k.klass === varde : k.taggar.includes(varde))).length;
 const formagegrupper = [...site.omraden, 'Allmänt'].map((o) => ({ o, taggar: formagorIBruk.filter((t) => (omradeAv[t] ?? 'Allmänt') === o) })).filter((g) => g.taggar.length);
 const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
@@ -90,8 +90,7 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
       <fieldset class="mbf-panel" id="mbf-klass" data-panel="klass" hidden>
         <legend class="visually-hidden">Klass eller grupp</legend>
         <label class="mbf-knapp"><input type="radio" name="klass" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('klass', '')}</small></label>
-        <label class="mbf-knapp"><input type="radio" name="klass" value="klass" /><span data-text>Kan göras i klass</span> <small data-n>{antalMed('klass', 'klass')}</small></label>
-        <label class="mbf-knapp"><input type="radio" name="klass" value="grupp" /><span data-text>Bara i grupp</span> <small data-n>{antalMed('klass', 'grupp')}</small></label>
+        {(Object.keys(KLASSORD) as Klassvarde[]).filter((k) => antalMed('klass', k)).map((k) => <label class="mbf-knapp"><input type="radio" name="klass" value={k} /><span data-text>{KLASSORD[k]}</span> <small data-n>{antalMed('klass', k)}</small></label>)}
       </fieldset>
       <p class="mbf-upplagg" data-forklaring-not hidden></p>
       <p class="mbf-tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>

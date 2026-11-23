@@ -4,7 +4,7 @@
 // aktiviteter (K-559, Niclas godkände den 2026-10-26): knapparna i en rad där de ryms och annars i två rader om fem, och
 // linjen vecka för vecka med reglernas gränser streckade. Linjen och reglerna räknas i standarden (linjen i
 // src/lib/standard/plan.js), och här ritas de.
-import { esc, skattningensGranser, stegetsNamn, stor, type Regel, type Skala, type Veckonamn } from '../lib/standard/index.js';
+import { esc, liten, RAKNAS_FORE, RAKNINGENS_GRANSER, skattningensGranser, stegetsNamn, stor, type Rakningen, type Regel, type Skala, type Veckonamn } from '../lib/standard/index.js';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift.ts';
 
 /** En skattning med en skala, som linjen och knapparna ritar: metodens Lärarens skattning eller lärarens egen. */
@@ -54,6 +54,69 @@ export function linjegraf(g: Skalskattning, varden: (number | undefined)[], etik
   const matt = o.vidgas ? `style="width: clamp(${bredd}px, 100%, ${Math.round(bredd * 1.5)}px); height: auto"` : `width="${bredd}" height="${topp + h + under}"`;
   return `<svg class="pl-graf stor pl-linjegraf" viewBox="0 0 ${bredd} ${topp + h + under}" ${matt} role="img" aria-label="${esc(`${g.namn}, ${fran} till ${till}: ${text}`)}">${mitt}${axlar}${banan}${kryss}${ring}${etikett}</svg>`;
 }
+
+// ---------- Det läraren räknar om en elev (K-815) ----------
+/** Så många tal står i raden innan läraren trycker Fler: 0 till 6, som de flesta veckor räcker till. */
+const RAKNAS_FORST = 6;
+/**
+ * Talen för en sak och en vecka, eller veckan före start: 0 till 6 och Fler, som fäller ut resten. Noll är en knapp som de
+ * andra, så att en vecka utan svåra stunder är ett svar, och en vecka utan vald knapp är inte räknad. Knapparna bär veckans
+ * måndag, eller ordet för veckan före start, och sakens namn, som sidans skript läser.
+ */
+export function antalsknappar(sak: string, vecka: string, varde: number | undefined, alla: boolean) {
+  const till = alla || (varde ?? 0) > RAKNAS_FORST ? RAKNINGENS_GRANSER.hogst : RAKNAS_FORST;
+  const tal = Array.from({ length: till + 1 }, (_, n) => n);
+  const etikett = (n: number) => (n === RAKNINGENS_GRANSER.hogst ? `${n} eller fler` : String(n));
+  return `<div class="pl-skala pl-raknetal" role="group" aria-label="${esc(sak)}">${tal.map((n) => `<button type="button" class="pl-skalsteg" data-rakna="${esc(vecka)}" data-antal="${esc(sak)}" data-tal="${n}" aria-pressed="${varde === n}" aria-label="${esc(`${sak}: ${etikett(n)}`)}">${n === RAKNINGENS_GRANSER.hogst ? `${n}+` : n}</button>`).join('')}${till === RAKNAS_FORST ? `<button type="button" class="pl-skalsteg pl-fler" data-fler="${esc(sak)}" aria-label="${esc(`${sak}: fler än ${RAKNAS_FORST}`)}">Fler</button>` : ''}</div>`;
+}
+/**
+ * Diagrammet över det läraren räknar om eleven: en ruta staplar för varje sak på samma veckor och med samma höjd per stund,
+ * med riktningen i ord och en pil vid namnet, så att ingen färg behöver läsas (Niclas 2026-11-22: "ett stapeldiagram likt
+ * Gruppstärkande aktiviteter har"; formen ur en Sonnets och en Opus idéer 2026-11-23). Veckan före start är en stapel med
+ * ram, och dess nivå går som en streckad linje genom veckorna. Noll har en låg fot med siffran, en vecka som har varit utan
+ * antal ett tunt streck, och veckan läraren är i en streckad stapel tills den är räknad.
+ */
+export function raknadGraf(r: Rakningen, etiketter: Veckonamn[], o: { nu?: number; mitt?: number | null } = {}) {
+  const fore = 42, steg = 31, b = 20, topp = 30, luft = 20, under = 40, bredd = fore + etiketter.length * steg + 2;
+  const medFore = r.foreRad !== undefined;
+  const x0 = medFore ? fore : 4;
+  const hogst = Math.max(3, ...r.serier.flatMap((s) => [s.fore ?? 0, ...s.varden.map((v) => v ?? 0)]));
+  const enhet = Math.min(14, 120 / hogst);
+  let y = 0;
+  const rutor = r.serier.map((s) => {
+    const max = Math.max(2, s.fore ?? 0, ...s.varden.map((v) => v ?? 0));
+    const h = max * enhet, start = y, botten = y + topp + luft + h;
+    y = botten + 12;
+    const ned = s.mot === 'ned', klass = ned ? 'pl-rakn-ned' : 'pl-rakn-upp';
+    const hojd = (n: number) => Math.max(4, n * enhet);
+    const rubrik = `<text x="0" y="${start + 16}"><tspan class="pl-rakn-namn ${klass}">${esc(s.namn)}</tspan><tspan dx="7" class="pl-rakn-pil ${klass}">${ned ? '↓' : '↑'}</tspan><tspan dx="5" class="pl-rakn-vart">ska bli ${ned ? 'färre' : 'fler'}</tspan></text>`;
+    const mittfalt = o.mitt ? `<rect x="${x0 + (o.mitt - 1) * steg + 1}" y="${start + topp - 4}" width="${steg - 2}" height="${luft + h + 4}" class="pl-mittfalt"/>` : '';
+    const fx = (fore - 12 - b) / 2;
+    const forestapel = !medFore ? '' : s.fore === undefined
+      ? `<rect x="${fx}" y="${botten - 22}" width="${b}" height="22" class="pl-rakn-tom ${klass}"/>`
+      : `<rect x="${fx + 1}" y="${botten - hojd(s.fore)}" width="${b - 2}" height="${hojd(s.fore)}" class="pl-rakn-fore ${klass}"/><text x="${fx + b / 2}" y="${botten - hojd(s.fore) - 5}" class="pl-stapelvarde">${s.fore}</text><line x1="${fore - 8}" x2="${bredd}" y1="${botten - s.fore * enhet}" y2="${botten - s.fore * enhet}" class="pl-rakn-niva ${klass}"/>`;
+    const staplar = s.varden.map((v, i) => {
+      const bx = x0 + i * steg + (steg - b) / 2;
+      if (v !== undefined) return `<rect x="${bx}" y="${botten - hojd(v)}" width="${b}" height="${hojd(v)}" rx="2" class="pl-rakn-stapel ${klass}"/><text x="${bx + b / 2}" y="${botten - hojd(v) - 5}" class="pl-stapelvarde">${v}</text>`;
+      if (i === o.nu) return `<rect x="${bx}" y="${botten - 22}" width="${b}" height="22" class="pl-rakn-tom ${klass}"/>`;
+      return o.nu !== undefined && i < o.nu ? `<rect x="${bx}" y="${botten - 1.5}" width="${b}" height="1.5" class="pl-stapel-tom"/>` : '';
+    }).join('');
+    return `${mittfalt}${rubrik}${forestapel}${staplar}<line x1="0" x2="${bredd}" y1="${botten}" y2="${botten}" class="pl-rakn-noll"/>`;
+  }).join('');
+  const ey = y + 4;
+  const veckorna = etiketter.map((e, i) => {
+    const cx = x0 + i * steg + steg / 2;
+    const nu = i === o.nu;
+    return `${nu ? `<rect x="${cx - 11}" y="${ey - 12}" width="22" height="17" rx="8.5" class="pl-rakn-nu"/>` : ''}<text x="${cx}" y="${ey + 1}" class="pl-stapeletikett pl-planveckan${nu ? ' pl-rakn-nutext' : ''}">${esc(e.kort)}</text><text x="${cx}" y="${ey + 16}" class="pl-stapeletikett">${esc(e.kalender)}</text>`;
+  }).join('');
+  const foretext = medFore ? `<text x="${(fore - 12) / 2}" y="${ey + 1}" class="pl-stapeletikett pl-planveckan">Före</text>` : '';
+  const mitttext = o.mitt ? `<text x="${x0 + (o.mitt - 1) * steg + steg / 2}" y="${ey + 31}" class="pl-axel pl-mitttext">Mitt i</text>` : '';
+  const text = r.serier.map((s) => `${s.namn}, ska bli ${s.mot === 'ned' ? 'färre' : 'fler'}: ${[...(s.fore === undefined ? [] : [`före start ${s.fore}`]), ...s.varden.flatMap((v, i) => (v === undefined ? [] : [`${liten(etiketter[i].text)} ${v}`]))].join(', ') || 'inte räknat än'}`).join('. ');
+  const hel = y + under + (o.mitt ? 4 : -8);
+  return `<svg class="pl-graf stor pl-raknad" viewBox="0 0 ${bredd} ${hel}" style="width: clamp(${Math.min(bredd, 300)}px, 100%, ${Math.round(bredd * 1.5)}px); height: auto; min-width: ${etiketter.length > 10 ? bredd : 0}px" role="img" aria-label="${esc(text)}">${rutor}${foretext}${veckorna}${mitttext}</svg>`;
+}
+/** Nyckeln för veckan före start, som antalsknappar bär där en vecka annars har sin måndag. */
+export const FORE_START = RAKNAS_FORE;
 
 // En knapp som ger en pdf heter Skriv ut där webbläsaren kan skriva ut den direkt, och annars "som pdf", som
 // utskriftsknapparna på resten av sajten (SkrivUtPdf.astro).

@@ -1,5 +1,12 @@
 # Ändringar i standarden
 
+## 0.67.0, 2026-11-23
+
+- `index.js` (sajtens K-816; riggens förslag 2026-11-22): `gruppensElever` läser "En elev och en vuxen" som en till en, `faktaIFastForm` säger "1 elev", och `arEnElev(d)` säger om metoden har en elev. `plan.js`: `vemsOrd(enElev)`, orden gruppen eller eleven, `elevernasKolumnen(enElev)`, progressionens kolumn, och `AVSLUTETS_ANLEDNINGAR.enElev`. `metodplan` och planen bär `enElev`, och sammanställningens namn är Eleven. `metodplan` läser `grupp`.
+- `plan.js` (sajtens K-815; Niclas 2026-11-22: "följa en elev som skattas varje vecka och får ett stapeldiagram"): `vem: eleven` i `plan.skattningar`, det läraren räknar om en elev varje vecka, med `antal`, `fore`, `regler` med `text` och `ram`. `rakningen`, `rakningensText`, `rakningensLage`, `rakningensJamforelse`, `rakningensRegel`, `rakningenHarNagot`, `RAKNAS_FORE` och `RAKNINGENS_GRANSER`. `tolkaRegel`, `regelnGaller` och `regelnIOrd` kan `uppåt N veckor i rad`. `rensaFoljd` behåller veckan före start bland antalen. `SKATTNINGARNAS_VEM` har eleven, och en rams namn prövas för alla slag. `SKATTNINGARNAS_VEM` i fel säger gruppen, eleverna, eleven eller lararen. En plan utan fältet är som förut.
+- `saker.js` (sajtens K-814): ett blanksteg i en saks namn är också ett hårt mellanslag i texten, så att "del 5" är en länk.
+- `text.js` (sajtens K-814): `radensEtikett`, etiketten som en rad i ett fält börjar med, ur metodens radetiketter, där ett hårt mellanslag är ett blanksteg.
+
 ## 0.66.0, 2026-11-16
 
 - `plan.js` (sajtens K-803; Niclas 2026-11-16: "varje vecka ska alltid skattas, och om man byter lektion ska nya skattningen gälla den lektionen"): `bytVeckansLektion(lektioner, vecka, nr, veckansSkattning)`, bytet av en veckas lektion i en serie. Lektionen byts, och veckans skattning står kvar och gäller den nya lektionen; svaret säger om veckan var skattad. `lektionsbytetsBesked(veckan, lektionen, skattad)` är beskedet efter bytet. Förut tog sajten bort veckans skattning vid bytet. `PLANERA` har versionen 0.10.2.

@@ -60,6 +60,14 @@ export const somLista = (x) => (Array.isArray(x) ? x : []);
  * jämföras och ett spann läsas som tal (flyttad hit från plan.js 2026-11-08, så att faktans tolkare i index.js kan läsa den). */
 export const utanFogar = (s) => String(s ?? '').replace(/[\u2060\u00ad]/g, '');
 export const rentText = (x, max) => (typeof x === 'string' ? kapaVidOrd(x.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim(), max) : '');
+/**
+ * Etiketten som en rad i ett fält börjar med, som "Steg 2" i "Steg 2: …", ur metodens radetiketter, som den står i raden. Ett
+ * hårt mellanslag i texten eller i etiketten är ett blanksteg (K-814: "Steg 1" fick husets blå och "Steg 2" inte).
+ * @param {string} rad
+ * @param {readonly string[] | undefined} etiketter
+ * @returns {string | undefined}
+ */
+export const radensEtikett = (rad, etiketter) => { const n = (/** @type {string} */ s) => s.replace(/\u00a0/g, ' '); const t = n(rad); const e = (etiketter ?? []).find((x) => t.startsWith(`${n(x)}: `)); return e === undefined ? undefined : rad.slice(0, e.length); };
 /** Namnets första led, före kolon: "Lärarhandledningen" ur "Lärarhandledningen: Läs mellan raderna". @param {string} s */
 export const forstaLedet = (s) => s.split(':')[0].trim();
 /** Alla texter i ett värde, också i listor och objekt, som lathunden eller ett lektionskorts innehåll. @param {unknown} x @returns {string[]} */

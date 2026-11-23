@@ -578,9 +578,15 @@ const metodensFalt = z.strictObject({
       // och reglerna på linjen med raden som säger vad läraren gör. Delen är borta utan fältet (REGLER.md i standarden under
       // Metodens egna skattningar, och METODER.md under Fälten i metodens fil).
       skattningar: z.array(z.strictObject({
-        namn: text, vem: z.enum(['gruppen', 'eleverna']), rad: text, text: text.optional(), ram: text.optional(),
+        namn: text, vem: z.enum(['gruppen', 'eleverna', 'eleven']), rad: text, text: text.optional(), ram: text.optional(),
         skala: z.strictObject({ fran: z.number().int().min(0).max(100), till: z.number().int().min(1).max(100), tabell: text }).optional(),
-        regler: z.array(z.strictObject({ om: text, rad: text })).min(1).max(6).optional(),
+        regler: z.array(z.strictObject({ om: text, rad: text.optional(), antal: text.optional(), text: text.optional() })).min(1).max(6).optional(),
+        // I en metod med en elev räknar läraren något varje vecka (vem: eleven, K-815; Niclas 2026-11-22: "följa en elev som
+        // skattas varje vecka och får ett stapeldiagram"): det som räknas, med metodens ord om vad det är och om antalet ska
+        // ned eller upp, och uppföljningens rad före insatsen när veckan före start är diagrammets första kolumn. En regel har
+        // metodens mening (text) och säger vilken av sakerna den gäller (antal).
+        antal: z.array(z.strictObject({ namn: text, mot: z.enum(['ned', 'upp']), text: text.optional() })).min(1).max(2).optional(),
+        fore: text.optional(),
         // Passets längd när eleverna fyller i bladet under ett pass, som gruppreflektionen efter en kort aktivitet.
         minuter: z.number().int().min(5).max(240).optional(),
       })).min(1).max(3).optional(),
@@ -976,7 +982,7 @@ const stodundervisning = defineCollection({
       const lh = d.lathund.pass.schema.rader;
       const ts = d.tidsschema.rader;
       const sti = ['lathund', 'pass', 'schema', 'rader'];
-      const tid = (t: string) => t.replace(/-/g, '–').replace(/\s*min$/, '').replace(/^Före passet$/, 'Före');
+      const tid = (t: string) => t.replace(/-/g, '–').replace(/\s*min$/, '').replace(/^Före \p{L}+$/u, 'Före');
       if (lh.length !== ts.length) ctx.addIssue({ code: 'custom', path: sti, message: `Lathundens pass har ${lh.length} rader och tidsschemat ${ts.length}; de ska vara samma faser.` });
       let nr = 0;
       lh.forEach((r, i) => {

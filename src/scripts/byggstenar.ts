@@ -195,8 +195,8 @@ export const avslutsrutan = (o: { rubrik: string; text: string; knappar: string[
  * (AVSLUTETS_ANLEDNINGAR i standarden) eller lärarens egen, vad som händer, och knappen som avslutar och Avbryt. Fältet heter
  * som formuläret med -not efter.
  */
-export function avslutsformularet(o: { id: string; oppen: boolean; samling: Samling; fore: string; not: string; hjalp: string; knapp: string; goat: string }) {
-  const forslag = AVSLUTETS_ANLEDNINGAR[o.samling].map((x) => `<button type="button" class="pl-chip" data-anledning="${esc(x)}" aria-pressed="${o.not === x}">${esc(x)}</button>`).join('');
+export function avslutsformularet(o: { id: string; oppen: boolean; samling: Samling; enElev?: boolean; fore: string; not: string; hjalp: string; knapp: string; goat: string }) {
+  const forslag = AVSLUTETS_ANLEDNINGAR[o.enElev ? 'enElev' : o.samling].map((x) => `<button type="button" class="pl-chip" data-anledning="${esc(x)}" aria-pressed="${o.not === x}">${esc(x)}</button>`).join('');
   return `<div class="pl-flytta pl-avsluta" id="${o.id}"${o.oppen ? '' : ' hidden'}>${o.fore}<span class="pl-etikett">Varför, om du vill</span><p class="pl-andra-knappar">${forslag}</p><label class="pl-etikett" for="${o.id}-not">Eget skäl</label><input class="pl-falt pl-brett" type="text" id="${o.id}-not" maxlength="${ANLEDNINGENS_LANGD}" value="${esc(o.not)}" /><p class="pl-hjalp">${esc(o.hjalp)}</p><p class="pl-andra-knappar"><button type="button" class="knapp liten" data-gor="avsluta-klar" ${o.goat}>${esc(o.knapp)}</button><button type="button" class="pl-textknapp" data-gor="avsluta-avbryt">Avbryt</button></p></div>`;
 }
 /** Ett förslag på anledning skriver den i fältet, där läraren kan skriva vidare. Svaret är fältets text, eller null när knappen inte är ett förslag. */

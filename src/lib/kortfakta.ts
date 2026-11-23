@@ -7,7 +7,7 @@
 import type { MetodData } from './metod';
 import { faktaIFastForm } from './standard/index.js';
 import { arskursSpannet, spannText } from './tackning';
-import { kanGorasIKlass } from './upplagg';
+import { KLASSORD, klassvardet } from './upplagg';
 
 export function kortFakta(d: MetodData): { rubrik: string; text: string }[] {
   const f = faktaIFastForm(d);
@@ -17,7 +17,7 @@ export function kortFakta(d: MetodData): { rubrik: string; text: string }[] {
     { rubrik: 'Pass', text: f.pass ?? '' },
     { rubrik: 'Hur ofta', text: f.ofta ?? '' },
     { rubrik: 'Period', text: f.period ?? '' },
-    { rubrik: 'Klass eller grupp', text: kanGorasIKlass(d) ? 'Kan göras i klass' : 'Bara i grupp' },
+    { rubrik: 'Klass eller grupp', text: KLASSORD[klassvardet(d)] },
   ].filter((x) => x.text);
 }
 

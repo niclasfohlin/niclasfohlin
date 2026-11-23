@@ -16,7 +16,7 @@ import PlanNotis from './PlanNotis.astro';
 import PlanFilen from './PlanFilen.astro';
 import PlanVersion from './PlanVersion.astro';
 import { tidrad } from '../scripts/tidrad';
-import { KNAPPARNAS_NAMN, KNAPPENS_KLASS, liten, SAMLINGARNAS_LED, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stegensTakt, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
+import { arEnElev, uppraknat, vemsOrd, KNAPPARNAS_NAMN, KNAPPENS_KLASS, liten, SAMLINGARNAS_LED, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stegensTakt, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -38,6 +38,9 @@ const minuter = matt.minst !== undefined && matt.minuter !== undefined ? passets
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
 // Metodens egen skattning av gruppen, när metoden har en (K-559), som Följ insatsen säger i stället för elevernas mål.
 const gruppensSkattning = data.skattningar?.find((x) => x.vem === 'gruppen');
+// I en metod med en elev räknar läraren något om eleven varje vecka i stället (K-815), och planen säger eleven (K-816).
+const elevensRakning = data.skattningar?.find((x) => x.vem === 'eleven');
+const enElev = arEnElev({ grupp: data.grupp?.text });
 // Nivåerna: bankens, eller metodens egna i en kurs i nivåer (De fyra räknesätten).
 const nivaer = data.bank?.nivaer ?? data.nivaer ?? [];
 // En stege, som läslistorna, kan börja högre upp: progressionens steg utom det som kommer efter insatsen.
@@ -125,7 +128,7 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
                 <select class="pl-falt" id="pl-borja">
                   {stegen.map((s) => <option value={s.fran}>{s.namn}</option>)}
                 </select>
-                <p class="pl-hjalp">Börja där gruppen är, efter det du såg före insatsen.{takten && ` ${takten}`}</p>
+                <p class="pl-hjalp">Börja där {vemsOrd(enElev).den} är, efter det du såg före insatsen.{takten && ` ${takten}`}</p>
                 <p class="pl-hjalp pl-varning" id="pl-borja-not" hidden>Du har bockat pass eller skattat, så planen börjar där den började. Gör en ny plan för att börja på ett annat steg.</p>
               </div>
             )}
@@ -183,14 +186,14 @@ const snabbmallensNamn = snabbmall ? mallnamn(snabbmall.rubrik) : '';
               </fieldset>
             )}
             <div class="pl-rad">
-              <label class="pl-etikett" for="pl-namn">Gruppens namn, om du vill</label>
+              <label class="pl-etikett" for="pl-namn">{enElev ? 'Planens namn, om du vill' : 'Gruppens namn, om du vill'}</label>
               <input class="pl-falt" type="text" id="pl-namn" maxlength="40" autocomplete="off" />
-              <p class="pl-hjalp">Skriv inte elevernas namn här. Gruppens namn står i planen, i kalendern och i dina utskrifter, men aldrig i länken.</p>
+              <p class="pl-hjalp">{enElev ? 'Skriv inte elevens namn här. Planens namn' : 'Skriv inte elevernas namn här. Gruppens namn'} står i planen, i kalendern och i dina utskrifter, men aldrig i länken.</p>
             </div>
             <fieldset class="pl-rad pl-foljval">
               <legend class="pl-etikett">Följ insatsen</legend>
               <label class="pl-kryss"><input type="checkbox" id="pl-folj" data-goatcounter-click={`${SAMLINGARNAS_LED.stodundervisning}:${data.id}:folj`} data-goatcounter-title={`${data.titel}: Följ insatsen valt`} /> <span>Följ insatsen vecka för vecka</span></label>
-              <p class="pl-hjalp">Bocka passen och skatta {gruppensSkattning ? `gruppen i ${gruppensSkattning.namn}` : 'eleverna mot målet'} en gång i veckan.{gruppensSkattning ? ` Det är förvalt, eftersom ${gruppensSkattning.namn} är en del av metoden, och du kan välja bort det.` : ''} Inget måste fyllas i. Det du för in sparas bara i den här webbläsaren. Ladda ner planen som fil, så går det att öppna på en annan dator.</p>
+              <p class="pl-hjalp">Bocka passen och {elevensRakning ? `räkna ${uppraknat((elevensRakning.antal ?? []).map((a) => liten(a.namn)))}` : `skatta ${gruppensSkattning ? `gruppen i ${gruppensSkattning.namn}` : enElev ? 'eleven mot målet' : 'eleverna mot målet'}`} en gång i veckan.{gruppensSkattning || elevensRakning ? ` Det är förvalt, eftersom ${gruppensSkattning ? gruppensSkattning.namn : 'räkningen'} är en del av metoden, och du kan välja bort det.` : ''} Inget måste fyllas i. Det du för in sparas bara i den här webbläsaren. Ladda ner planen som fil, så går det att öppna på en annan dator.</p>
               <div class="pl-elevruta" id="pl-elevruta" hidden>
                 <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
                 <textarea class="pl-falt pl-textfalt" id="pl-elever" rows="4" maxlength="400" autocomplete="off" spellcheck="false"></textarea>

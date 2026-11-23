@@ -369,9 +369,14 @@ export function gruppensElever(grupp) {
   const klass = /hel klass|helklass/.test(t);
   const hogst = t.match(new RegExp(String.raw`(?<![\p{L}\d])högst\s+${FAKTAORD}\s+elever`, 'u'));
   if (hogst) return { min: 1, max: talAv(hogst[1]), klass };
+  // En elev, som i Relationell vägledning, "En elev och en vuxen" (K-816): en till en, och inte ett spann som "en till fyra elever".
+  if (/(?<![\p{L}\d])(?:en|1) elev(?!\p{L})/u.test(t)) return { min: 1, max: 1, klass };
   const s = spannFore(t, 'elever');
   return s ? { min: s.min, ...(s.max !== undefined ? { max: s.max } : {}), klass } : null;
 }
+
+/** En metod med en elev, ur faktarutans grupp, som Relationell vägledning, "En elev och en vuxen" (K-816): formerna säger då eleven där de annars säger gruppen eller eleverna. @param {{ grupp?: string }} d */
+export const arEnElev = (d) => { const g = d.grupp ? gruppensElever(d.grupp) : null; return !!g && g.min === 1 && g.max === 1; };
 
 /**
  * Hur ofta, som ett spann: det minsta och största antalet pass i veckan. Ett lägsta tal och inget annat, som
@@ -411,7 +416,7 @@ export function periodensLangd(period) {
  */
 export function faktaIFastForm(d, ord = {}) {
   const g = gruppensElever(d.grupp);
-  const grupp = g ? (g.klass && g.max === undefined ? `${g.min} elever–klass` : `${spann(g.min, g.max)} elever`) : null;
+  const grupp = g ? (g.klass && g.max === undefined ? `${g.min} elever–klass` : `${spann(g.min, g.max)} ${g.max === 1 ? 'elev' : 'elever'}`) : null;
   const m = tidensMatt(d.tid ?? '');
   const hemma = String(d.tid ?? '').match(/och (\d+) hemma/);
   const pass = m.minst !== undefined ? `${spann(m.minst, m.minuter)} min${hemma ? ` + ${hemma[1]} hemma` : ''}` : null;

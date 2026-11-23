@@ -139,7 +139,8 @@ export function sakensFormer(namn) {
 // "i delen Läsarna lyssnar" är inte Två texter och Läsarna (Rimligheten och länkgranskningen 2026-10-27).
 const DELENS_ORD = /(?:^|[^\p{L}])(?:stapeln|staplarna|kolumnen|kolumnerna|spalten|raden|raderna|rubriken|rutan|rutorna|delen|delarna|greppet|greppen)\s+$/iu;
 // En form som söks: hela ord, och första bokstaven stor eller liten om inte saken är en titel, som bara står som den är.
-const formMonster = (f, versal) => (versal ? skydda(f) : `[${skydda(f.charAt(0).toLocaleLowerCase('sv'))}${skydda(f.charAt(0).toLocaleUpperCase('sv'))}]${skydda(f.slice(1))}`);
+// Ett blanksteg i namnet kan vara ett hårt mellanslag i texten, som riggen sätter före en siffra, "del 5" (K-814).
+const formMonster = (f, versal) => (versal ? skydda(f) : `[${skydda(f.charAt(0).toLocaleLowerCase('sv'))}${skydda(f.charAt(0).toLocaleUpperCase('sv'))}]${skydda(f.slice(1))}`).replace(/ /g, '[ \u00a0]');
 // Först i en mening, där varje ord har stor bokstav, är en titel inte säkert en titel ("Inte än har eleverna …").
 const forstIMening = (fore) => /(^|[.!?:]\s*|\n\s*)$/.test(fore);
 // På stödmetodens sida räknas också ett citat som slutar en mening, så att Läsaren i "”Gör det som står.” Läsaren gör" är

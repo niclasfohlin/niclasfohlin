@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppehalletsText, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, lektionernasMal, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronKort, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, prickarnasText, riktningText, skattadeVeckor, rakningenHarNagot, rakningensJamforelse, rakningensText, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppehalletsText, utanNamn, utvarderingenText, veckansNamn, vemsOrd, type Plan, type Rakningen, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -42,6 +42,8 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
   const font = await doc.embedFont(StandardFonts.Helvetica);
   const fet = await doc.embedFont(StandardFonts.HelveticaBold);
   const farg = { accentRgb: [0.11, 0.31, 0.57], ljusRgb: [0.95, 0.96, 0.98], text: rgb(0.08, 0.13, 0.17), svag: rgb(0.29, 0.35, 0.4), accent: rgb(0.11, 0.31, 0.57), kant: rgb(0.88, 0.9, 0.92), gron: rgb(0.12, 0.42, 0.27), ljus: rgb(0.95, 0.96, 0.98), mitt: rgb(0.95, 0.9, 0.95) };
+  // Staplarna för det som ska bli färre (K-815), i områdets rost, skilda från det som ska bli fler också i ljusheten.
+  const rost = rgb(0.56, 0.23, 0.08);
   let sida: PDFPage = doc.addPage(A4);
   let y = A4[1] - KANT;
   const sidor: PDFPage[] = [sida];
@@ -90,6 +92,12 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
     sida.drawRectangle({ x: mx + 1, y: botten - 2, width: steg - 2, height: h + 24, color: farg.mitt });
     sida.drawText('Mitt i', { x: mx + steg / 2 - font.widthOfTextAtSize('Mitt i', 7) / 2, y: botten + h + 15, size: 7, font, color: farg.svag });
   };
+  // Veckan i planen och kalenderveckan under en stapel eller ett kryss, mitt under den.
+  const veckan = (e: Veckonamn, cx: number, botten: number) => {
+    const iPlanen = ren(e.kort), kalender = ren(e.kalender);
+    sida.drawText(iPlanen, { x: cx - fet.widthOfTextAtSize(iPlanen, 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
+    sida.drawText(kalender, { x: cx - font.widthOfTextAtSize(kalender, 7) / 2, y: botten - 21, size: 7, font, color: farg.svag });
+  };
   const staplarnasHojd = (o: Stapelval) => (o.hojd ?? 70) + 43 + (o.pass ? 14 : 0) + (o.mitt ? 22 : 0);
   const staplar = (varden: (number | undefined)[], etiketter: Veckonamn[], o: Stapelval = {}) => {
     const h = o.hojd ?? 70, n = varden.length, bredd = A4[0] - 2 * KANT - 24;
@@ -110,9 +118,7 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
         sida.drawRectangle({ x: bx, y: botten, width: b, height: (x / SKALAN.length) * h, color: farg.accent });
         sida.drawText(String(x), { x: bx + b / 2 - 2.5, y: botten + (x / SKALAN.length) * h + 3, size: 8, font: fet, color: farg.text });
       } else sida.drawRectangle({ x: bx, y: botten, width: b, height: 1.2, color: farg.kant });
-      const iPlanen = ren(etiketter[i].kort), kalender = ren(etiketter[i].kalender);
-      sida.drawText(iPlanen, { x: bx + b / 2 - fet.widthOfTextAtSize(iPlanen, 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
-      sida.drawText(kalender, { x: bx + b / 2 - font.widthOfTextAtSize(kalender, 7) / 2, y: botten - 21, size: 7, font, color: farg.svag });
+      veckan(etiketter[i], bx + b / 2, botten);
       prickarna(bx, b, o.pass?.[i] ?? []).forEach(({ x: px, slag: p }) => {
         const py = botten - 31;
         if (p === 'med') sida.drawCircle({ x: px, y: py, size: 2.4, color: farg.gron });
@@ -231,15 +237,45 @@ export async function dokument(titel: string, upphov = 'Planera insatsen, niclas
       sida.drawCircle({ x: q.x, y: q.y, size: 3, color: farg.accent });
       sida.drawText(String(q.v), { x: q.x - fet.widthOfTextAtSize(String(q.v), 8) / 2, y: q.y + 5, size: 8, font: fet, color: farg.text });
     }
-    varden.forEach((_, i) => {
-      const cx = x0 + i * steg + steg / 2;
-      const iPlanen = ren(etiketter[i].kort), kalender = ren(etiketter[i].kalender);
-      sida.drawText(iPlanen, { x: cx - fet.widthOfTextAtSize(iPlanen, 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
-      sida.drawText(kalender, { x: cx - font.widthOfTextAtSize(kalender, 7) / 2, y: botten - 21, size: 7, font, color: farg.svag });
-    });
+    etiketter.slice(0, varden.length).forEach((e, i) => veckan(e, x0 + i * steg + steg / 2, botten));
     y -= total - (o.mitt ? 22 : 0);
   };
-  return { text, rubrik, huvudet, not, staplar, namnMedStaplar, linje, avsluta, tabell, matris, farg };
+  // Det läraren räknar om eleven (K-815): en rad staplar för varje sak på samma veckor, med veckan före start först som en
+  // stapel med ram och dess nivå streckad, som på sidan.
+  const antalsstaplar = (r: Rakningen, etiketter: Veckonamn[], o: { mitt?: number | null } = {}) => {
+    const n = etiketter.length, forekol = 40, bredd = A4[0] - 2 * KANT - 24 - forekol;
+    const steg = Math.min(40, bredd / Math.max(n, 1)), b = steg * 0.6, x0 = KANT + 24 + forekol;
+    const hogst = Math.max(3, ...r.serier.flatMap((x) => [x.fore ?? 0, ...x.varden.map((v) => v ?? 0)]));
+    const enhet = Math.min(9, 78 / hogst);
+    r.serier.forEach((x, j) => {
+      const h = Math.max(2, x.fore ?? 0, ...x.varden.map((v) => v ?? 0)) * enhet + 14;
+      const sist = j === r.serier.length - 1;
+      plats(h + 22 + (sist ? 26 : 8));
+      text(`${x.namn}, ska bli ${x.mot === 'ned' ? 'färre' : 'fler'}`, { fet: true, storlek: 10, luft: 0 });
+      const botten = y - h, f = x.mot === 'ned' ? rost : farg.accent;
+      if (o.mitt) sida.drawRectangle({ x: x0 + (o.mitt - 1) * steg + 1, y: botten, width: steg - 2, height: h, color: farg.mitt });
+      if (x.fore !== undefined) {
+        const fx = KANT + 24 + (forekol - 10 - b) / 2;
+        sida.drawRectangle({ x: fx, y: botten, width: b, height: Math.max(2, x.fore * enhet), borderColor: f, borderWidth: 1.2 });
+        sida.drawText(String(x.fore), { x: fx + b / 2 - fet.widthOfTextAtSize(String(x.fore), 8) / 2, y: botten + x.fore * enhet + 3, size: 8, font: fet, color: farg.text });
+        sida.drawLine({ start: { x: fx, y: botten + x.fore * enhet }, end: { x: x0 + n * steg, y: botten + x.fore * enhet }, thickness: 0.7, color: f, dashArray: [3, 2] });
+      }
+      x.varden.forEach((v, i) => {
+        if (v === undefined) return;
+        const bx = stapelnsKant(x0, i, steg, b);
+        sida.drawRectangle({ x: bx, y: botten, width: b, height: Math.max(2, v * enhet), color: f });
+        sida.drawText(String(v), { x: bx + b / 2 - fet.widthOfTextAtSize(String(v), 8) / 2, y: botten + Math.max(2, v * enhet) + 2, size: 8, font: fet, color: farg.text });
+      });
+      sida.drawLine({ start: { x: KANT + 24, y: botten }, end: { x: x0 + n * steg, y: botten }, thickness: 0.9, color: farg.svag });
+      if (sist) {
+        const fx = KANT + 24 + (forekol - 10) / 2;
+        sida.drawText('Före', { x: fx - fet.widthOfTextAtSize('Före', 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
+        etiketter.forEach((e, i) => veckan(e, x0 + i * steg + steg / 2, botten));
+      }
+      y -= h + (sist ? 30 : 10);
+    });
+  };
+  return { text, rubrik, huvudet, not, staplar, namnMedStaplar, linje, antalsstaplar, avsluta, tabell, matris, farg };
 }
 
 const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
@@ -298,11 +334,20 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
     p.linje(sk.varden, veckoetiketter(s), { fran: sk.skala.fran, till: sk.skala.till, granser: skattningensGranser(sk), mitt: s.mitt });
     if (t.regler.length) p.text(`Det linjen sa: ${t.regler.join('; ')}.`, { luft: 8 });
   }
+  // Det läraren har räknat om eleven, med veckan före start och reglerna som gällde (K-815).
+  if (s.rakningen && rakningenHarNagot(s.rakningen)) {
+    p.rubrik(s.rakningen.namn, 150);
+    p.antalsstaplar(s.rakningen, veckoetiketter(s), { mitt: s.mitt });
+    for (const x of rakningensJamforelse(s.rakningen, veckoetiketter(s))) p.text(x);
+    const t = rakningensText(s.rakningen, veckoetiketter(s));
+    for (const x of elevensResultat(plan, s.elever[0]?.resultat ?? {})) p.text(mening(resultatText(plan, info, x)));
+    if (t.regler.length) p.text(`Regler som gällde: ${t.regler.join('; ')}.`, { luft: 8 });
+  }
   // Eleverna med något infört står i tabellen och de andra i en mening, och med metodens egen skala för gruppen står
   // eleverna bara när någon har något (den kalla testaren av K-559 2026-10-26). Överst passen vecka för vecka och sist
   // veckans skattning av gruppen, när läraren har gjort den.
   const visas = s.elever.filter((e) => elevenHarNagot(s, e)), utan = s.elever.filter((e) => !elevenHarNagot(s, e));
-  const planens = !s.skattningar.length || visas.length > 0;
+  const planens = (!s.skattningar.length && !s.rakningen) || visas.length > 0;
   const narvaro = (e: (typeof s.elever)[number]) => (e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronKort(e, s).replace(/^med i /, '') : '');
   const veckorna = skattadeVeckor(s);
   const rader = [
@@ -313,9 +358,9 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   if (rader.length) {
     p.matris(veckoetiketter(s), rader, { sist: visas.some((e) => narvaro(e)) ? 'Närvaro' : undefined, mitt: s.mitt });
     if (planens && visas.length) skalan(p, info, 4);
-    if (veckorna.length) p.not(`Veckans skattning av gruppen, medel ${decimal(s.veckomedel)} av 5.`);
+    if (veckorna.length) p.not(`Veckans skattning av ${vemsOrd(s.enElev).den}, medel ${decimal(s.veckomedel)} av 5.`);
   }
-  if (planens && utan.length) p.text(s.grupp ? 'Gruppen är inte skattad än.' : `Inte skattade än: ${utan.map((e) => e.namn).join(', ')}.`, { luft: 8 });
+  if (planens && utan.length) p.text(s.grupp ? `${vemsOrd(s.enElev).Den} är inte skattad än.` : `Inte skattade än: ${utan.map((e) => e.namn).join(', ')}.`, { luft: 8 });
   // Utvecklingen elev för elev: riktningen och metodens resultat före och efter.
   const utvecklingen = (planens ? visas : []).map((e) => ({ etikett: e.namn, text: [`${riktningText(e)}.`, ...elevensResultat(plan, e.resultat).map((t) => mening(resultatText(plan, info, t)))].join(' ') }));
   if (utvecklingen.length) { p.rubrik('Utvecklingen', 40); p.tabell(utvecklingen); }

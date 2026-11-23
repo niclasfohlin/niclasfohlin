@@ -19,7 +19,7 @@
 // grupp. Reglerna står i ARBETSSATT.md under Innehåll.
 import taggarData from '../data/taggar.json';
 // Tolkningen av tiden och uppläggens gränser står i standarden, som metodriggen också läser (src/lib/standard/).
-import { ATERKOMMANDE, ATERKOMMANDE_MINUTER, INTENSIV, INTENSIV_DAGAR, INTENSIV_MINUTER, LEKTION_MINST, LEKTIONER, mojligaUpplagg } from './standard/index.js';
+import { arEnElev, ATERKOMMANDE, ATERKOMMANDE_MINUTER, INTENSIV, INTENSIV_DAGAR, INTENSIV_MINUTER, LEKTION_MINST, LEKTIONER, mojligaUpplagg } from './standard/index.js';
 export { ATERKOMMANDE, ATERKOMMANDE_DAGAR, ATERKOMMANDE_MINUTER, INTENSIV, INTENSIV_DAGAR, INTENSIV_MINUTER, LEKTION_MINST, LEKTION_MINUTER, LEKTIONER, arIntensiv, arLektioner, mojligaUpplagg, tidensMatt } from './standard/index.js';
 
 export type Slag = 'förmåga' | 'upplägg' | 'arbetssätt' | 'ämne';
@@ -35,6 +35,10 @@ const KRAV: Record<string, string> = {
 
 /** Kan metoden göras i klass, eller bara i grupp? Ur fältet format. */
 export const kanGorasIKlass = (d: { format?: string[] }) => (d.format ?? []).includes('helklass');
+/** Klass, grupp eller en elev (K-816): kortets ruta och filtret i metodbanken säger samma ord. */
+export type Klassvarde = 'klass' | 'grupp' | 'elev';
+export const klassvardet = (d: { format?: string[]; grupp?: string }): Klassvarde => (kanGorasIKlass(d) ? 'klass' : arEnElev(d) ? 'elev' : 'grupp');
+export const KLASSORD: Record<Klassvarde, string> = { klass: 'Kan göras i klass', grupp: 'Bara i grupp', elev: 'Med en elev' };
 
 /** Felen i en metods taggar: ett ämne, ingen förmåga, eller ett upplägg som inte stämmer med tiden. */
 export function metodensTaggfel(d: { taggar: string[]; tid?: string }): string[] {
