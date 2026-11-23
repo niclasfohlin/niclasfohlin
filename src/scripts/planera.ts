@@ -1373,7 +1373,8 @@ function justeraText() {
     ...(veckorAttTaOm ? ['Ta samma vecka en gång till med knappen Upprepa veckan.'] : []),
     ...((data.bank || data.nivaer) ? ['Byt nivå under Ändra planen.'] : []),
   ];
-  return `<ul class="pl-justera">${[...satt, 'Ta upp det med elevhälsan.'].map((x) => `<li>${lankad(x)}</li>`).join('')}</ul>`;
+  // Elevhälsan sist, utom när metoden redan säger den (verifieringen 2026-11-23: Relationell vägledning fick den två gånger).
+  return `<ul class="pl-justera">${[...satt, ...(satt.some((x) => /elevhälsan/iu.test(x)) ? [] : ['Ta upp det med elevhälsan.'])].map((x) => `<li>${lankad(x)}</li>`).join('')}</ul>`;
 }
 
 // ---------- Passet ----------

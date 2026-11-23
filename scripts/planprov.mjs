@@ -3693,6 +3693,15 @@ try {
       await vanta(150);
       const stangd = await b.kor(`!document.querySelector('dialog.pl-stort')`);
       sant('räkningen om eleven: Visa stort visar bara diagrammet, och Stäng tar bort det', stort.oppen && stort.graf && stort.knappar.join() === 'Stäng' && stort.namn === 'Svåra stunder vecka för vecka' && stort.mening.startsWith('Vecka 3') && stangd, { ...stort, stangd });
+      // Justera insatsen har metodens egna steg ur När det går bakåt, och elevhälsan en gång (verifieringen 2026-11-23).
+      await b.tryck('#pl-veckan .pl-remsa [data-vy="5"]');
+      await vanta(150);
+      await b.tryck('#pl-veckan [data-beslut="avstamning|justera"]');
+      await vanta(200);
+      const justera = await b.kor(`[...document.querySelectorAll('#pl-veckan .pl-justera li')].map((x) => x.textContent)`);
+      sant('räkningen om eleven: Justera insatsen har metodens steg och elevhälsan en gång', justera.length === 4 && justera[0].startsWith('Läs bemötandeplanen med arbetslaget') && justera.filter((x) => x.includes('elevhälsan')).length === 1, justera);
+      await b.tryck('#pl-veckan [data-beslut="avstamning|justera"]');
+      await vanta(200);
       const samman = await b.kor(`(() => ({ text: document.getElementById('pl-samman')?.textContent ?? '', grupp: /[Gg]ruppen|[Ee]leverna/.test(document.getElementById('pl-samman')?.textContent ?? '') }))()`);
       sant('räkningen om eleven: sammanställningen har räkningen och säger inte gruppen eller eleverna', samman.text.includes('Svåra stunder: 4 före start') && !samman.grupp, samman);
       const orden = await b.kor(`(() => ['pl-veckan', 'pl-veckor', 'pl-planen', 'pl-andra', 'pl-samman', 'pl-kopia'].flatMap((id) => { const n = document.getElementById(id)?.cloneNode(true); n?.querySelectorAll('[hidden]').forEach((x) => x.remove()); return [...(n?.textContent ?? '').matchAll(/.{0,30}([Gg]ruppens? |[Ee]leverna).{0,30}/g)].map((x) => id + ': ' + x[0]); }))()`);
