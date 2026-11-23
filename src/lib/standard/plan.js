@@ -4035,6 +4035,27 @@ export function uppfoljningensDatum(u, nycklar = []) {
   return [...new Set([...forut, ...egna])].sort();
 }
 /** Nycklarna till resultaten som har förts in, "rad-datum", med något värde. @param {{ resultat?: Record<string, Record<string, string>> } | null | undefined} f */
+/**
+ * Resultatet före start följer Före när planen flyttas (verifieringen 2026-11-23: läraren förde in längsta tiden tillbaka och
+ * elevens siffra, flyttade Från och med en vecka, och fältet blev tomt medan en ny rad Före start kom till). Nyckeln är radens
+ * tillfälle före och flyttas till tillfället i den nya planen, utom när den nya redan har ett resultat.
+ * @param {Record<string, Record<string, string>>} resultat
+ * @param {{ uppfoljning: { rad: number, typ: string, tillfallen: { datum: string }[] }[] }} forut planen före ändringen
+ * @param {{ uppfoljning: { rad: number, typ: string, tillfallen: { datum: string }[] }[] }} nu planen efter
+ */
+export function resultatenFoljerFore(resultat, forut, nu) {
+  let ut = resultat;
+  for (const u of nu.uppfoljning.filter((x) => x.typ === 'fore')) {
+    const gammal = forut.uppfoljning.find((x) => x.rad === u.rad && x.typ === 'fore')?.tillfallen[0]?.datum;
+    const ny = u.tillfallen[0]?.datum;
+    if (!gammal || !ny || gammal === ny) continue;
+    const g = `${u.rad}-${gammal}`, n = `${u.rad}-${ny}`;
+    if (!ut[g] || ut[n]) continue;
+    const { [g]: varde, ...resten } = ut;
+    ut = { ...resten, [n]: varde };
+  }
+  return ut;
+}
 export const resultatensNycklar = (f) => Object.entries(f?.resultat ?? {}).filter(([, v]) => Object.values(v ?? {}).some((x) => String(x ?? '').trim())).map(([k]) => k).sort();
 /**
  * Uppföljningens rad med sitt namn, i raden och vid elevens resultat: den första raden efter insatsen heter Efter insatsen,

@@ -676,6 +676,7 @@ export declare const uppfoljningensTillfallen: (plan: Plan) => { nyckel: string;
 export declare function elevensResultat(plan: Plan, resultat: Record<string, string>): { nyckel: string; rad: number; typ: Tid['typ']; datum: string; varde: string }[];
 export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[]; valet?: { varden: [string, string][] } }, plan: Plan, s: Sammanstallning): string;
 export declare const valetsText: (varden: [string, string][]) => string;
+export declare function resultatenFoljerFore(resultat: Record<string, Record<string, string>>, forut: { uppfoljning: { rad: number; typ: string; tillfallen: { datum: string }[] }[] }, nu: { uppfoljning: { rad: number; typ: string; tillfallen: { datum: string }[] }[] }): Record<string, Record<string, string>>;
 export declare function elevtext(info: { mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;
 /** Uppföljningens rad: namnet och kalenderveckorna, "Efter insatsen, v. 51". */
 export declare function uppfoljningensRad(plan: Plan, info: { uppfoljning: { nar: string }[] }, u: Plan['uppfoljning'][number], nycklar?: string[]): string;

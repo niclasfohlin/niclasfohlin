@@ -763,6 +763,12 @@ if (tsMp) {
     ska('det eleven väljer: fälten citerar metoden, och ett stegs nummer hör inte till meningen före', !s.planensCitatFel(rv).length && s.meningarna('1. Öva. Igen: ”Nu.”\n4. Svara.').join('|') === 'Öva.|Igen: ”Nu.”|Svara.', [s.planensCitatFel(rv), s.meningarna('1. Öva. Igen: ”Nu.”\n4. Svara.')]);
     const enAdr = (o, text = 'Öva tecknet och den lugna platsen (del 2).') => s.sakernasText(text, [{ namn: 'tecknet', adress: '/d2' }, { namn: 'lugna platsen', adress: '/d2' }, { namn: 'del 2', former: ['del 2'], adress: '/d2', hellre: true }], (x, t) => `[${t}]`, (t) => t, o);
     ska('det eleven väljer: i planen leder en adress dit en gång i ett stycke, hellre delens nummer, och utan valet varje gång', enAdr({ enAdress: true }) === 'Öva tecknet och den lugna platsen ([del 2]).' && enAdr({ enAdress: true }, 'Öva tecknet och den lugna platsen.') === 'Öva [tecknet] och den lugna platsen.' && enAdr() === 'Öva [tecknet] och den [lugna platsen] ([del 2]).', [enAdr({ enAdress: true }), enAdr()]);
+    // Resultatet före start följer Före när planen flyttas (verifieringen 2026-11-23).
+    const rpl2 = s.planera(rmp, { ...rval, start: '2026-11-16' });
+    const foreRad = rpl.uppfoljning.find((u) => u.typ === 'fore'), fd1 = foreRad.tillfallen[0].datum, fd2 = rpl2.uppfoljning.find((u) => u.typ === 'fore').tillfallen[0].datum;
+    const flyttat = s.resultatenFoljerFore({ [`${foreRad.rad}-${fd1}`]: { [s.GRUPPEN]: '45 min; 3' } }, rpl, rpl2);
+    const redanNy = s.resultatenFoljerFore({ [`${foreRad.rad}-${fd1}`]: { [s.GRUPPEN]: 'gammalt' }, [`${foreRad.rad}-${fd2}`]: { [s.GRUPPEN]: 'nytt' } }, rpl, rpl2);
+    ska('räkningen om en elev: resultatet före start följer Före när planen flyttas, och skriver inte över ett nyare', fd1 !== fd2 && flyttat[`${foreRad.rad}-${fd2}`]?.[s.GRUPPEN] === '45 min; 3' && !flyttat[`${foreRad.rad}-${fd1}`] && redanNy[`${foreRad.rad}-${fd2}`][s.GRUPPEN] === 'nytt' && redanNy[`${foreRad.rad}-${fd1}`][s.GRUPPEN] === 'gammalt', [fd1, fd2, flyttat, redanNy]);
     ska('räkningen om en elev: en plan utan något räknat säger inget', !s.rakningenHarNagot(s.rakningen(rpl, s.rensaFoljd({}), r)) && !s.rakningensText(s.rakningen(rpl, s.rensaFoljd({}), r), namnen).serier.length && s.metodplan(metod('kompissamtal')).plan.enElev === undefined);
   }
   // Metodens egna skattningar (K-559; Niclas 2026-10-26: "Viktigt att det funkar som en egen modul du kan lägga in andra

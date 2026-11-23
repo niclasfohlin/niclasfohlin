@@ -24,7 +24,7 @@ import {
 } from '../lib/standard/index.js';
 import type { PlanData, PlanSkattning } from '../lib/insatsplan';
 // Lektionerna i en serie med lektionsbank (K-551).
-import { ovningensBock, ovningensVeckor, RAKNAS_FORE, rentText, VALETS_LANGD } from '../lib/standard/index.js';
+import { ovningensBock, ovningensVeckor, RAKNAS_FORE, rentText, resultatenFoljerFore, VALETS_LANGD } from '../lib/standard/index.js';
 import { antalBockade, lektionernaPaVeckorna, LEKTIONENS_GRANS, RESULTATETS_LANGD, utanFogar, lektionensForslag, meningarna, ORDNINGSTAL, vidareTillLektion, bytVeckansLektion, lektionsbytetsBesked } from '../lib/standard/index.js';
 import type { PlanLektion } from '../lib/insatsplan';
 import { filenErsatterNyare, filensFraga, flikensPlan, planensInnehall, vidAndraFlikar, vidNyttDygn, OPPNAD_UR_FILEN, oppnaPaSinSida, idagLokalt, KOPIANS_GRANS, kopiansAlder, kopiansText, planenUrFaltet, SAMLINGENS_ORD, sparadPlan, skrivPlanen, statusAv, iTurOrdning, lagringenArNyare, lasPlaner, lasPlanfil, narText, NYARE_VERSION, nyttId, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, type SparadPlan } from './insatser-lagring';
@@ -383,6 +383,8 @@ function andra(fn: () => void, meddelande?: string | (() => string | undefined),
   const planenFore = plan, idFore = aktiv.id, lektionerFore = JSON.stringify(aktiv.val.lektioner ?? []);
   fn();
   rakna();
+  // Resultatet före start följer Före när samma plan flyttas (resultatenFoljerFore i standarden).
+  if (aktiv.id === idFore && planenFore !== plan) aktiv.foljd.resultat = resultatenFoljerFore(aktiv.foljd.resultat, planenFore, plan);
   // I en serie följer veckornas lektioner sina måndagar när något är infört, så att en skattning står kvar mot samma
   // lektions mål när veckorna flyttas (lektionernaPaVeckorna, Codex 2026-10-27). Inte när ändringen själv gällde
   // lektionerna eller en annan plan, som ett byte av lektion, Ångra eller en annan plan.
@@ -938,13 +940,12 @@ function ovningenIVeckan(v: PlanVecka): { rad: string; not: string } {
     return borjat || ja ? `<button type="button" class="pl-bock${ja ? ' ja' : ''}" data-ovning="${nyckel}" aria-pressed="${ja}" aria-label="${esc(o.namn)}, gång ${i + 1}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7 3.7 7.3-8"/></svg></button>` : `<span class="pl-bock senare" title="Går att bocka från ${esc(dagText(v.mandag))}"></span>`;
   }).join('') : '';
   const under = vecka.efterLov ? 'Efter lovet' : o.ganger === 1 ? 'En gång i veckan' : `${stor(talText(o.ganger))} gånger i veckan`;
-  const fran = aktiv.foljd.valet?.fran;
-  const franStart = !fran || fran === RAKNAS_FORE || (!!plan.veckor[0] && fran <= plan.veckor[0].mandag);
-  // Metodens mening om övningen står i veckans fokus, och den gäller insatsens första veckor, så under raden står bara
-  // meningen om lovet, i veckan efter ett lov, och metodens mening i en vecka vars fokus inte har den.
+  // Metodens mening om hur ni övar står under raden, utom i en vecka vars fokus redan säger den, och i veckan efter ett lov
+  // meningen om lovet (verifieringen 2026-11-23: ett val i vecka 4 fick inte metodens dos). Meningen står som text, eftersom
+  // bandet leder till metodens del och en replik i meningen inte är en hänvisning.
   const iFokus = radernaI(v).some((r) => [r.fokus, r.roll].some((t) => t?.includes(o.text)));
-  const not = vecka.efterLov ? o.lov ?? '' : franStart && !iFokus ? o.text : '';
-  return { rad: `<li class="pl-ovning"><span class="pl-dag">${esc(o.namn)}<small>${esc(under)}</small></span><span></span><span class="pl-ringar">${ringar}</span></li>`, not: not ? `<p class="pl-not">${lankad(not)}</p>` : '' };
+  const not = vecka.efterLov ? o.lov ?? '' : iFokus ? '' : o.text;
+  return { rad: `<li class="pl-ovning"><span class="pl-dag">${esc(o.namn)}<small>${esc(under)}</small></span><span></span><span class="pl-ringar">${ringar}</span></li>`, not: not ? `<p class="pl-not">${esc(not)}</p>` : '' };
 }
 
 // ---------- Planen ----------
