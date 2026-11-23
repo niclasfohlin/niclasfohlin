@@ -311,7 +311,7 @@ export function lankaBocker(html: string, o: { metod?: string; titel?: string; k
   };
   const medSaker = (t: string) => {
     if (hoppa || utanSaker || !t.trim() || !sakformer.length) return text(t);
-    const lag = t.toLocaleLowerCase('sv');
+    const lag = t.toLocaleLowerCase('sv').replace(/ /g, ' ');
     if (!sakformer.some((f) => lag.includes(f))) return text(t);
     const egna = new Set([...stack.map((s) => s.id), ...avsnitt.map((a) => a.id)].filter(Boolean).map((x) => `#${x}`));
     // En fil, som lektionskortets pdf, är i sitt eget avsnitt när avsnittet har knappen till samma fil, före texten eller

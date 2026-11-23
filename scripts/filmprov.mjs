@@ -85,7 +85,8 @@ await skicka('Page.enable');
 // Körs i sidan: prövar filmerna som en läsare och svarar med felen.
 const PROV = `(async () => {
   const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
-  const figurer = [...document.querySelectorAll('figure.film')];
+  // En film i en del av sidan som bara står i utskriften, som en film vid en del i ett uppslagsverk, spelar på delens egen sida.
+  const figurer = [...document.querySelectorAll('figure.film')].filter((f) => f.checkVisibility());
   const namn = (f) => f.dataset.namn ?? 'filmen';
   const lage = (f) => {
     const o = f.querySelector('.film-bild');
@@ -212,6 +213,17 @@ try {
     const r = (await utvardera(PROV)) ?? { filmer: 0, fel: ['sidan svarade inte'] };
     if (r.fel.length) felSidor++;
     console.log(`${r.fel.length ? 'NEJ' : 'ok '}  ${id.padEnd(34)} ${r.filmer} ${r.filmer === 1 ? 'film' : 'filmer'}${r.fel.length ? `: ${r.fel.join('; ')}` : ''}`);
+    // Filmerna vid delarna i ett uppslagsverk (src/lib/uppslag.ts, K-814) står på delarnas egna sidor, /<id>/del-5.
+    for (const f of d.filmer ?? []) {
+      const nrDel = String(f.efter ?? '').match(/^del: Del (\d+) · /)?.[1];
+      if (!nrDel || !existsSync(join(dist, 'stodundervisning', id, `del-${nrDel}`))) continue;
+      await skicka('Page.navigate', { url: `${bas}/stodundervisning/${id}/del-${nrDel}` });
+      let framme = false;
+      for (let i = 0; i < 40 && !framme; i++) { await vanta(250); framme = (await utvardera('document.readyState')) === 'complete'; }
+      const x = (await utvardera(PROV)) ?? { filmer: 0, fel: ['delens sida svarade inte'] };
+      if (x.fel.length) felSidor++;
+      console.log(`${x.fel.length ? 'NEJ' : 'ok '}  ${`${id}/del-${nrDel}`.padEnd(34)} ${x.filmer} ${x.filmer === 1 ? 'film' : 'filmer'}${x.fel.length ? `: ${x.fel.join('; ')}` : ''}`);
+    }
     if (!d.lathund) continue;
     await skicka('Page.navigate', { url: `${bas}/stodundervisning/${id}/lathund` });
     klar = false;

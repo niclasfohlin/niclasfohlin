@@ -1291,6 +1291,86 @@ button.lank:hover { color: var(--farg-accent); }
   .metod-topp:has(> .film):has(> .delning) { grid-template-areas: "huvud fakta" "film fakta" "dela fakta" "ladda fakta"; }
 }
 
+/* Uppslagsverket (Uppslag.astro, src/lib/uppslag.ts, K-814): delarna som metoden slås upp i, överst på metodens sida, före
+   faktarutan. En rad per del, som börjar med när delen används, och siffran i områdets färg i kanten, som fliken i ett
+   register. Formen valdes ur en Sonnets och en Opus idéer 2026-11-23. Delens egen sida (Uppslagsdel.astro) har stegen först. */
+.metod-topp > .uppslag { grid-area: uppslag; min-width: 0; max-width: 46rem; }
+.metod-topp:has(> .uppslag) { grid-template-areas: "huvud" "uppslag" "fakta" "ladda"; }
+.metod-topp:has(> .uppslag):has(> .film) { grid-template-areas: "huvud" "uppslag" "fakta" "film" "ladda"; }
+.metod-topp:has(> .uppslag):has(> .delning) { grid-template-areas: "huvud" "uppslag" "fakta" "dela" "ladda"; }
+.metod-topp:has(> .uppslag):has(> .film):has(> .delning) { grid-template-areas: "huvud" "uppslag" "fakta" "film" "dela" "ladda"; }
+@media (min-width: 56rem) {
+  .metod-topp:has(> .uppslag) { grid-template-areas: "huvud fakta" "uppslag fakta" "ladda fakta"; }
+  .metod-topp:has(> .uppslag):has(> .film) { grid-template-areas: "huvud fakta" "uppslag fakta" "film fakta" "ladda fakta"; }
+  .metod-topp:has(> .uppslag):has(> .delning) { grid-template-areas: "huvud fakta" "uppslag fakta" "dela fakta" "ladda fakta"; }
+  .metod-topp:has(> .uppslag):has(> .film):has(> .delning) { grid-template-areas: "huvud fakta" "uppslag fakta" "film fakta" "dela fakta" "ladda fakta"; }
+}
+.uppslag { scroll-margin-top: 1rem; font-family: var(--typsnitt-ui); }
+.uppslag > h2 { margin: 0.35rem 0 0.7rem; font-size: 1.5rem; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; }
+.uppslag-lista { list-style: none; margin: 0; padding: 0; background: var(--farg-yta); border-radius: var(--radie); overflow: hidden; font-family: var(--typsnitt-ui); }
+.uppslag-lista > li { margin: 0; }
+.uppslag-lista > li + li { border-top: 1px solid var(--farg-kant); }
+.uppslag-lista a { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr) 1.6rem; align-items: center; min-height: 3rem; color: var(--farg-text); text-decoration: none; }
+.uppslag-lista a:hover { background: var(--farg-accent-ljus); }
+.uppslag-lista a::after { content: ''; justify-self: center; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--farg-accent); border-top: 2px solid var(--farg-accent); transform: rotate(45deg); }
+.uppslag-nr { align-self: stretch; display: grid; place-items: center; background: var(--amnefarg); color: #fff; font: 800 1.3rem/1 var(--typsnitt-ui); }
+.uppslag-text { padding: 0.6rem 0.25rem 0.65rem 0.8rem; }
+.uppslag-nar { display: block; font-size: 1.03rem; font-weight: 600; line-height: 1.32; }
+.uppslag-namn { display: block; margin-top: 0.12rem; font-size: 0.95rem; line-height: 1.3; color: var(--farg-accent); }
+.uppslag-lista a[aria-current="page"] { background: var(--amnefarg-ljus, var(--farg-ton-svag)); }
+.uppslag > .m-sak-filer { margin: 0.75rem 0 0; }
+.uppslag > .m-sak-filer .filval { background: var(--farg-yta); }
+.del-sida { --amnefarg: var(--farg-accent); --amnefarg-ljus: var(--farg-accent-ljus); }
+.del-sida[data-omrade="Läsning"] { --amnefarg: var(--farg-lasning); --amnefarg-ljus: var(--farg-lasning-ljus); }
+.del-sida[data-omrade="Skrivning"] { --amnefarg: var(--farg-skrivning); --amnefarg-ljus: var(--farg-skrivning-ljus); }
+.del-sida[data-omrade="Socialt"] { --amnefarg: var(--farg-socialt); --amnefarg-ljus: var(--farg-socialt-ljus); }
+.del-spalt { min-width: 0; max-width: 46rem; }
+.del-sidospalt { display: none; }
+.del-sida > .meta { margin: 0 0 0.6rem; }
+.del-meny { display: block; margin: 0 0 0.75rem; font-family: var(--typsnitt-ui); }
+.del-meny .uppslag-lista { border-radius: 0 0 7px 7px; padding: 0; border-top: 1px solid var(--farg-kant); }
+.del-meny .uppslag-lista a { display: grid; gap: 0; min-height: 3rem; padding: 0; }
+.del-huvud { margin: 0 0 1.25rem; border-radius: var(--radie); overflow: hidden; }
+.del-huvud .um-band { margin: 0; border-radius: 0; background: var(--amnefarg); }
+.del-huvud .um-band-nr { width: 3.25rem; background: rgba(0, 0, 0, 0.16); }
+.del-huvud h1 { margin: 0; color: #fff; font-size: clamp(1.65rem, 7vw, 2.4rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.08; }
+.del-huvud .um-band p { margin: 0.35rem 0 0; color: #fff; font-size: 1rem; line-height: 1.42; }
+.del-viktigast { margin: 0; padding: 0.7rem 1rem 0.75rem; background: var(--amnefarg-ljus); font: 700 1.12rem/1.35 var(--typsnitt-ui); }
+.del-steg { list-style: none; margin: 0; padding: 0; counter-reset: steg; }
+.del-steg > li { counter-increment: steg; display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: 0 0.8rem; margin: 0; padding: 0.85rem 0 0.9rem; border-top: 1px solid var(--farg-kant); }
+.del-steg > li:first-child { border-top: 0; padding-top: 0; }
+.del-steg > li::before { content: counter(steg); width: 1.75rem; height: 1.75rem; border-radius: 6px; background: var(--farg-accent); color: #fff; font: 700 0.9rem/1.75rem var(--typsnitt-ui); text-align: center; }
+.del-steg h3 { margin: 0.1rem 0 0.25rem; font: 700 1.15rem/1.28 var(--typsnitt-ui); letter-spacing: -0.01em; }
+.del-steg p { margin: 0; line-height: 1.55; }
+.del-steg .replik { margin: 0.45rem 0; padding: 0.1rem 0 0.1rem 0.75rem; border-left: 3px solid var(--amnefarg); font-weight: 600; }
+.del-steg .replik:last-child { margin-bottom: 0; }
+.del-sida .film { margin: 0.5rem 0 1.25rem; }
+.del-las { margin: 0.5rem 0 0; }
+.del-las > summary > span { display: block; line-height: 1.3; }
+.del-las > summary { padding: 0.7rem 0; }
+.del-las small { display: block; font-size: 0.95rem; font-weight: 400; color: var(--farg-text-svag); }
+.del-las h2 { margin: 1.1rem 0 0.3rem; font: 700 1.05rem/1.3 var(--typsnitt-ui); letter-spacing: 0; }
+.del-las p { margin: 0 0 0.6rem; line-height: 1.55; }
+.del-las .del-case { font-style: italic; }
+.del-fil { margin: 1.25rem 0 0; font-family: var(--typsnitt-ui); }
+.del-etikett { margin: 0 0 0.45rem; font: var(--etikett); color: var(--farg-text-svag); }
+.del-sida .delning { margin: 1.1rem 0 0; }
+.del-sida .enhet-fot { margin-top: 1.75rem; }
+@media (min-width: 46rem) {
+  .uppslag-text { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 15rem); align-items: center; gap: 0 1rem; }
+  .uppslag-namn { margin: 0; }
+  .del-sida .del-meny { display: block; max-width: 46rem; }
+  .del-sidospalt .uppslag-text { display: block; }
+  .del-sidospalt .uppslag-namn { margin-top: 0.12rem; }
+}
+@media (min-width: 64rem) {
+  .del-yta { display: grid; grid-template-columns: minmax(0, 46rem) minmax(0, 20rem); gap: 0 3rem; align-items: start; }
+  .del-sida .del-meny { display: none; }
+  .del-sidospalt { display: block; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; }
+  .del-sidospalt .uppslag-lista { border: 1px solid var(--farg-kant); }
+  .del-sidospalt .uppslag-nar { font-size: 0.95rem; }
+}
+
 /* Sidnavigationen: på bred skärm en egen spalt till vänster som följer med vid rullning, med det
    avsnitt som är i bild markerat (Metod.astro); på smal skärm en rad länkar överst. */
 .metod-nav { font-family: var(--typsnitt-ui); font-size: 0.95rem; margin: 0 0 1.5rem; }
@@ -3108,6 +3188,9 @@ html.js .bara-js { display: inline-block; }
   /* En rad som bara har länkar och filer (en nivå utan översikt i Bank.astro, ramarnas rad i Bladgrupp.astro) har då
      inget kvar att skriva ut. Den göms helt: den tomma raden låg annars ensam på en sida mellan nivåns sista text och
      nästa nivås första blad, som båda börjar en ny sida (utskriften Allt 2026-10-13, tre tomma sidor). */
+  /* Uppslagsverkets lista och delens meny, fil och spalt hör till skärmen (K-814); delarna står i utskriften som i Word. */
+  .metod-topp > .uppslag, .del-meny, .del-fil, .del-sidospalt { display: none; }
+  .del-las:not([open]) > .um-rad-inne { display: block; }
   .bank-niva.utan-utskrift { display: none; }
   .bank[data-bladrader] { margin-top: 0; }
   .bank-rad { display: block; }
@@ -3892,6 +3975,38 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-elevdetalj > summary .pl-graf { grid-area: graf; }
 .pl-elevdetalj > summary .pl-riktning { grid-area: riktning; font-size: 0.88rem; text-align: left; }
 .pl-elevdetalj > :not(summary) { margin: 0 0 0.6rem; }
+/* Det läraren räknar om en elev (K-815): talen som knappar, 0 till 6 och Fler, och staplarna i en ruta för varje sak, med det
+   som ska bli färre i områdets rost och det som ska bli fler i accenten, och riktningen i ord och en pil. */
+.pl-raknas { margin: 0 0 1rem; }
+.pl-raknas-namn { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin: 0; font-size: 1.08rem; font-weight: 700; line-height: 1.3; }
+.pl-raknas-namn small { font-size: 0.95rem; font-weight: 400; color: var(--farg-text-svag); }
+.pl-raknas-vad { margin: 0 0 0.45rem; line-height: 1.4; color: var(--farg-text-svag); }
+.pl-raknetal { grid-template-columns: repeat(8, minmax(0, 1fr)); max-width: 26rem; }
+.pl-raknetal .pl-skalsteg { height: 3rem; font-size: 1.1rem; }
+.pl-raknetal .pl-skalsteg:nth-child(8n + 1) { border-left: 0; }
+.pl-raknetal .pl-skalsteg:nth-child(n + 9) { border-top: 1px solid var(--farg-kant); }
+.pl-raknetal .pl-fler { font-size: 0.95rem; font-weight: 600; background: var(--farg-accent-ljus); }
+.pl-raknas[data-mot="ned"] .pl-skalsteg[aria-pressed="true"] { background: var(--farg-socialt); }
+.pl-raknas-laget { margin: 0 0 0.9rem; font-size: 1.08rem; font-weight: 700; line-height: 1.35; }
+.pl-graf .pl-rakn-namn { font: 700 15px var(--typsnitt-ui); }
+.pl-graf .pl-rakn-vart { font: 400 14px var(--typsnitt-ui); fill: var(--farg-text); }
+.pl-graf .pl-rakn-pil { font: 700 17px var(--typsnitt-ui); fill: var(--serie); }
+.pl-graf .pl-rakn-ned { --serie: var(--farg-socialt); --ljus: var(--farg-socialt-ljus); }
+.pl-graf .pl-rakn-upp { --serie: var(--farg-accent); --ljus: var(--farg-accent-ljus); }
+.pl-graf .pl-rakn-namn, .pl-graf .pl-rakn-stapel { fill: var(--serie); }
+.pl-graf .pl-rakn-fore { fill: var(--ljus); stroke: var(--serie); stroke-width: 2; }
+.pl-graf .pl-rakn-tom { fill: none; stroke: var(--serie); stroke-width: 1.5; stroke-dasharray: 3 2.5; }
+.pl-graf .pl-rakn-niva { stroke: var(--serie); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.pl-graf .pl-rakn-noll { stroke: #7d8894; stroke-width: 1.5; }
+.pl-graf .pl-rakn-nu { fill: var(--farg-mork); }
+.pl-graf .pl-planveckan.pl-rakn-nutext { fill: #fff; }
+.pl-stam .pl-raknad .pl-stapelvarde { stroke: var(--farg-skrivning-ljus); }
+.pl-raknad .pl-stapelvarde { paint-order: stroke; stroke: var(--farg-yta); stroke-width: 3px; stroke-linejoin: round; }
+.pl-stort { width: min(60rem, 100vw); max-width: none; max-height: none; height: 100%; margin: auto; padding: 1rem; border: 0; background: var(--farg-yta); }
+.pl-stort[open] { display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
+.pl-stort > .knapp { align-self: flex-end; position: absolute; top: 1rem; right: 1rem; }
+.pl-stort .pl-raknad { width: 100% !important; max-height: 70vh; }
+.pl-stort .pl-raknas-laget { font-size: 1.3rem; text-align: center; }
 .pl-grafruta { overflow-x: auto; padding: 0.3rem 0; }
 .pl-graf { display: block; }
 .pl-graf .pl-stapel { fill: var(--farg-accent); }

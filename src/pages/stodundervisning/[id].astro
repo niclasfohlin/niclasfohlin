@@ -6,6 +6,10 @@ import Metod from '../../components/Metod.astro';
 import EjBryt from '../../components/EjBryt.astro';
 import Boklankar from '../../components/Boklankar.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
+import Uppslag from '../../components/Uppslag.astro';
+import Sakknapp from '../../components/Sakknapp.astro';
+import { metodensUppslag, UPPSLAGETS_ANKARE, allaDelarnasFil } from '../../lib/uppslag';
+import { sakfiler } from '../../lib/sakfiler';
 import { metodensNivamaterial } from '../../lib/nivamaterial';
 import { metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
@@ -69,6 +73,10 @@ const antalLektioner = serie?.lektioner.length ?? 0;
 // En generell metod utan egna ramar (Texttyper i grupp) har materialet i sina kurser, och länken leder till banken.
 // Metodens bank (src/lib/bank.ts): problemen eller texterna i egna filer, i nedladdningsrutans tabell.
 const bank = bankAv(d) ?? undefined;
+// Uppslagsverket (K-814, src/lib/uppslag.ts): delarna som metoden slås upp i, överst på sidan, före faktarutan, eftersom de är
+// metodens kärna (Niclas 2026-11-22: "ska vara centrala och tidiga så att de enkelt kan slås upp i metoden").
+const uppslag = metodensUppslag(d);
+const uppslagetsFil = uppslag && sakfiler(d, m.id).find((f) => f.namn === allaDelarnasFil(m.id));
 const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : harLathund(d) ? `/stodundervisning/${m.id}/lathund#lathund-material` : undefined;
 ---
 
@@ -91,6 +99,13 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
             Planera insatsen, på samma plats i varje metod som kan planeras. */}
         {(centrala.length > 0 || planeras) && <p class="metod-centrala">{centrala.map((c) => <Centralknapp c={c} metod={m.id} titel={d.titel} />)}{planeras && <a class={KNAPPENS_KLASS.sida} href={planensAdress(planeras.id)} data-goatcounter-click={`planera:${m.id}:metoden`} data-goatcounter-title={`${d.titel}: Planera insatsen från metodens sida`}>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</a>}</p>}
       </header>
+      {uppslag && (
+        <section class="uppslag" id={UPPSLAGETS_ANKARE} aria-labelledby="uppslag-rubrik">
+          <h2 id="uppslag-rubrik">{uppslag.rubrik}</h2>
+          <Uppslag u={uppslag} id={m.id} />
+          {uppslagetsFil && <Sakknapp fil={uppslagetsFil} metod={d.titel} />}
+        </section>
+      )}
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>
         <dl>

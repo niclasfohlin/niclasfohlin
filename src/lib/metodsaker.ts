@@ -13,6 +13,7 @@ import { metodensBladmaterial } from './bladmaterial';
 import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare';
 import { metodensLektionskort } from './lektionskort';
 import { CENTRALA, lasbarAdress } from './centrala';
+import { metodensUppslag, UPPSLAGETS_ANKARE, uppslagsAdress } from './uppslag';
 import { arBaraHuvudord, arSaksord, forstaLed, forstaLedet, forstaOrdet, kursensVeckodelar, sakdelar, sakspann, slugAv, veckorI, versionernasNamn, versionsform } from './standard/index.js';
 
 /**
@@ -202,6 +203,12 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
     const lv = lektionsveckor.get(`${sida}#${ramAnkare[ri]}`);
     saker.push(lv ? sak(r.rubrik, lv[Object.keys(lv).map(Number).sort((a, b) => a - b)[0]], { veckor: lv }) : sak(r.rubrik, egenSida.get(ri) ?? `${sida}#${ramAnkare[ri]}`));
   });
+  // Delarna i ett uppslagsverk (K-814, src/lib/uppslag.ts): "del 5" leder till delens sida.
+  const uppslag = metodensUppslag(d);
+  for (const del of uppslag?.delar ?? []) saker.push({ namn: del.led, former: [del.led], adress: uppslagsAdress(id, del) });
+  // Ett spann av delar, "del 1–3", med eller utan ordfogen efter tankstrecket, och två delar, "del 1 och 2", leder till listan
+  // överst på sidan.
+  if (uppslag) saker.push({ namn: 'delarna', former: uppslag.delar.flatMap((x) => uppslag.delar.filter((y) => y.nr > x.nr).flatMap((y) => [`Del ${x.nr}–${y.nr}`, `Del ${x.nr}–⁠${y.nr}`, `Del ${x.nr} och ${y.nr}`])), adress: `${sida}#${UPPSLAGETS_ANKARE}` });
   // Veckans ram, i en kurs med en ram per vecka som Bråkkursens "Vecka 1: Lika delar": "veckans ram" leder i planen till
   // ramen för veckan som visas, med veckans ruta Till läraren, korten och materialet (länkgranskningen av omgång 3
   // 2026-10-26: "veckans ruta Till läraren under Kursens material" ledde till början av materialet).
@@ -301,7 +308,8 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   for (const a of avsnitt) if (a.id !== 'ramar' && a.id !== 'mallar') avsnittet(rutor[(a as { falt?: string }).falt ?? a.id]?.rubrik, `${sida}#${a.id}`, a.id === 'diplom' ? undefined : 'avsnitt');
   avsnittet(d.gruppen?.rubrik, `${sida}#gruppen`, 'avsnitt');
   avsnittet(d.principer?.rubrik, `${sida}#principer`, 'avsnitt');
-  for (const t of d.tabeller) { const a = tabellAnkare.get(t); if (a) avsnittet(t.rubrik, `${sida}#${a}`, 'tabell'); }
+  // Uppslagsverkets tabell är listan överst på sidan (K-814).
+  for (const [ti, t] of d.tabeller.entries()) { const a = uppslag?.ti === ti ? UPPSLAGETS_ANKARE : tabellAnkare.get(t); if (a) avsnittet(t.rubrik, `${sida}#${a}`, uppslag?.ti === ti ? 'avsnitt' : 'tabell'); }
   // Verktygen och stödmaterialen på sajten, som texten nämner med namnet i registret (STIL.md under Hänvisningar). Ett namn
   // med flera ord, som Ljudstartens ord, är namnet också först i en mening, där ett ord för sig kan vara ett vanligt ord
   // (verifieringen av K-808: "Ljudstartens ord står sist" i planens rad Före insatsen blev ingen länk).

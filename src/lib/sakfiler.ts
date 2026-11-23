@@ -8,6 +8,7 @@
 //   ramarna med blad och lärarhandledningarna har sina filer, och en ram vars blad har egna filer skrivs ut med bladen;
 //   en lästext utanför banken, som Högläsning i pars provtexter, är en sådan ram;
 //   en vecka i en ram med lektioner (veckorna i De fyra räknesätten), veckans sida för sig;
+//   en del i ett uppslagsverk, delens sida för sig, och alla delarna i en fil (K-814);
 //   ett räkneblad med namn (Addition 1) på sitt A4, och en ram med flera sådana alla bladen i en fil, under det sista;
 //   en mall under Mallar att skriva ut, och diplomet eller kursintyget;
 //   en tabell i metodens text som planen leder till: en tabell som planens text nämner, passets tabell och uppföljningens
@@ -27,6 +28,7 @@ import { faktatexter } from './ramform';
 import { allaAntal, kortnamn, slugAv, stor, visadeTexter } from './standard/index.js';
 import { metodensSaker, sakernaI, sidansAnkare } from './metodsaker';
 import { ljudform } from './ljudkort';
+import { allaDelarnasFil, metodensUppslag } from './uppslag';
 
 export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall' | 'diplom' | 'tabell';
 /** En saks fil: namnet utan ändelse, sakens namn (dokumentets titel och skärmläsarens), var saken står i metodens fil, hur
@@ -54,6 +56,7 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
   if (!planbar(d) && !lektion) return [];
   const ut: Sakfil[] = [];
   const ramar = d.ramar?.ramar ?? [];
+  const uppslag = metodensUppslag(d);
   const bank = bankAv(d);
   const nm = metodensNivamaterial(d);
   const bm = metodensBladmaterial(d, id);
@@ -78,6 +81,13 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
         const m = forstaLed(del.rubrik).match(/^(?:(.+?)\s+)?vecka (\d+)$/i);
         if (m) ut.push({ namn: `${id}-vecka-${m[1] ? `${slugAv(m[1])}-` : ''}${m[2]}`, titel: del.rubrik, slag: 'vecka', ri, di, minst: 1, hogst: 2, text: 'Skriv ut veckan', pdftext: 'Veckan som pdf', liggande: false });
       });
+      // Delarna i ett uppslagsverk (K-814, src/lib/uppslag.ts), var och en för sig som en vecka, med knappen på delens sida,
+      // och alla i en fil, med knappen under listan överst på metodens sida.
+      if (uppslag?.ri === ri) {
+        for (const del of uppslag.delar) ut.push({ namn: `${id}-${del.slug}`, titel: `${del.led}: ${del.namn}`, slag: 'vecka', ri, di: del.di, minst: 1, hogst: 2, text: 'Skriv ut delen', pdftext: 'Delen som pdf', liggande: false });
+        const antal = allaAntal(uppslag.delar.length);
+        ut.push({ namn: allaDelarnasFil(id), titel: uppslag.rubrik, slag: 'ram', ri, minst: uppslag.delar.length, hogst: 2 * uppslag.delar.length + 1, text: `Skriv ut ${antal} delarna`, pdftext: `${stor(antal)} delarna som pdf`, liggande: false });
+      }
       return;
     }
     // Räknebladen med namn, vart och ett för sig, och är alla ramens listor sådana blad, alla i en fil.

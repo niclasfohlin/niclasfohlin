@@ -20,10 +20,12 @@ interface Props {
   cellank: ComponentProps<typeof MetodTabell>['cellank'];
   filmer: ComponentProps<typeof Filmruta>['filmer'];
   fil: Sakfil | undefined;
+  /** Bara i sidans utskrift: uppslagsverkets tabell, som på skärmen är listan överst (src/lib/uppslag.ts, K-814). */
+  utskrift?: boolean;
 }
-const { t, ankare, metod, titel, centrala, klass, karta, cellank, filmer, fil } = Astro.props;
+const { t, ankare, metod, titel, centrala, klass, karta, cellank, filmer, fil, utskrift = false } = Astro.props;
 ---
-<section id={ankare}>
+<section id={utskrift ? undefined : ankare} class={utskrift ? 'bank-utskrift' : undefined}>
   <h2>{t.rubrik}</h2>
   {t.text && <p>{t.text}</p>}
   <Centralrad saker={centrala} metod={metod} titel={titel} />

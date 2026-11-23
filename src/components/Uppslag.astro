@@ -1,0 +1,17 @@
+---
+// Uppslagsverkets lista (K-814, src/lib/uppslag.ts): en rad per del, som börjar med när delen används, det läraren känner
+// igen, och har delens namn under. Siffran i kanten är numret som texten hänvisar till, och hela raden är länken till
+// delens sida. Formen valdes ur en Sonnets och en Opus idéer 2026-11-23 (underlag/prov/relationell-vagledning/ide/), med
+// områdets färg. Listan står överst på metodens sida och i menyn på varje dels sida, där delen som visas är markerad.
+import { uppslagsAdress, type Uppslag } from '../lib/uppslag';
+interface Props { u: Uppslag; id: string; aktuell?: number }
+const { u, id, aktuell } = Astro.props;
+---
+<ol class="uppslag-lista">
+  {u.delar.map((del) => (
+    <li><a href={uppslagsAdress(id, del)} aria-current={del.nr === aktuell ? 'page' : undefined}>
+      <span class="uppslag-nr" aria-label={del.led}>{del.nr}</span>
+      <span class="uppslag-text"><span class="uppslag-nar">{del.nar}</span>{' '}<span class="uppslag-namn">{del.namn}</span></span>
+    </a></li>
+  ))}
+</ol>

@@ -1,0 +1,19 @@
+---
+// /stodundervisning/<id>/del-5: en del i metodens uppslagsverk på sin egen sida (K-814, src/lib/uppslag.ts), som
+// Uppslagsdel.astro ritar.
+import Uppslagsdel from '../../../components/Uppslagsdel.astro';
+import { publicerade } from '../../../lib/innehall';
+import { metodensUppslag, type Uppslag, type Uppslagsdel as Del } from '../../../lib/uppslag';
+
+export async function getStaticPaths() {
+  const metoder = await publicerade('stodundervisning');
+  return metoder.flatMap((m) => {
+    const u = metodensUppslag(m.data);
+    return u ? u.delar.map((del) => ({ params: { id: m.id, nr: String(del.nr) }, props: { m, u, del } })) : [];
+  });
+}
+
+const { m, u, del } = Astro.props as { m: Awaited<ReturnType<typeof publicerade<'stodundervisning'>>>[number]; u: Uppslag; del: Del };
+---
+
+<Uppslagsdel d={m.data} id={m.id} u={u} del={del} />

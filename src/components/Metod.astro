@@ -37,7 +37,7 @@ import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, friTabellensKlass, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { site } from '../data/site';
-import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, KNAPPARNAS_NAMN, malensMening, variantensMening, vidareTillLektion } from '../lib/standard/index.js';
+import { arEnElev, radensEtikett, elevernasCell, elevernasKolumnen, harElevernasKolumn, KNAPPARNAS_NAMN, malensMening, variantensMening, vidareTillLektion } from '../lib/standard/index.js';
 import { materialAttribut } from '../lib/material';
 import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
@@ -57,6 +57,7 @@ import Snabbmall from './Snabbmall.astro';
 import Filval from './Filval.astro';
 import Sakknapp from './Sakknapp.astro';
 import Pabordet from './Pabordet.astro';
+import { metodensUppslag, UPPSLAGETS_ANKARE } from '../lib/uppslag';
 import { bladNamn, delensRad, kartan, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
@@ -154,6 +155,10 @@ for (const g of bladgrupper(d, id)) { const b = bilderPaBordet.find((x) => x.bil
 // I en metod med plan har varje sak som planen kan leda till en egen fil, och knappen står under saken: sist i ramen, under
 // veckan, under räknebladet och under mallen (src/lib/sakfiler.ts, Sakknapp.astro, K-499).
 const saker = sakernasPlatser(sakfiler(d, id));
+// Uppslagsverket (src/lib/uppslag.ts, K-814): delarna står överst på metodens sida ([id].astro) och var och en på sin egen
+// sida. Tabellen med dem och ramen under Materialet står bara i sidans utskrift, som har allt, och i Materialet säger en rad
+// var delarna är.
+const uppslag = undersida ? undefined : metodensUppslag(d);
 // En tabell som planen leder till har sin egen fil och knapp direkt under sig (src/lib/sakfiler.ts), utom på en enhets sida.
 const tabellensFil = (t: (typeof d.tabeller)[number]) => (undersida ? undefined : saker.tabell.get(d.tabeller.indexOf(t)));
 // Lektionskorten (src/lib/lektionskort.ts): bredvid Öppna lathunden i menyn och vid lektionen i texten, först på platsen,
@@ -185,7 +190,7 @@ const avsnitt = metodensAvsnitt(d, { pass: !!pass, stegen: ord.stegen, lektionsb
 const { ankare, tabellAnkare, ramAnkare, delAnkare, blad, bladAnkare } = metodensAnkare(d, avsnitt);
 const mallAnkare = mallarnasAnkare(d);
 const versalt = (s: string) => (s ? s.charAt(0).toLocaleUpperCase('sv') + s.slice(1) : s);
-const menyLektioner = (d.ramar?.ramar ?? []).flatMap((r, ri) => (r.lektioner ? [{ id: `ram-${ri + 1}`, namn: versalt((r.rubrik.split(':')[1] ?? r.rubrik).trim()) }] : []));
+const menyLektioner = (d.ramar?.ramar ?? []).flatMap((r, ri) => (r.lektioner && uppslag?.ri !== ri ? [{ id: `ram-${ri + 1}`, namn: versalt((r.rubrik.split(':')[1] ?? r.rubrik).trim()) }] : []));
 // Kartan (src/lib/karta.ts): tabellen med karta leder till veckorna och räknebladen, och varje vecka visar sin rad.
 // Räknebladen får ett ankare var, som bladens namn i kartan leder till.
 const karta = kartan(d);
@@ -224,7 +229,7 @@ const cellLank = !undersida && (banken || bm) ? (cell: string): string | undefin
   return rad ? bladsidaAdress(id, rad) : undefined;
 } : undefined;
 // En fri tabell med det som står runt den, på var och en av sina platser bland avsnitten (FriTabell.astro).
-const friTabell = (t: (typeof d.tabeller)[number]) => ({ t, ankare: tabellAnkare.get(t), metod: id, titel: d.titel, centrala: centralaVid(d, { tabell: t.rubrik }), klass: friKlass(t), karta: t.karta ? kartLankar : undefined, cellank: cellLank, filmer: vid({ tabell: t.rubrik }), fil: tabellensFil(t) });
+const friTabell = (t: (typeof d.tabeller)[number]) => ({ t, ankare: tabellAnkare.get(t), metod: id, titel: d.titel, centrala: centralaVid(d, { tabell: t.rubrik }), klass: friKlass(t), karta: t.karta ? kartLankar : undefined, cellank: cellLank, filmer: vid({ tabell: t.rubrik }), fil: tabellensFil(t), utskrift: uppslag?.ti === d.tabeller.indexOf(t) });
 // Korten Börja här (src/lib/skrivkort.ts): i en översikt med nivåernas namn som kolumner och passets nummer först leder
 // kortets namn till kortet på sidan som slumpar korten, stort med klockan, och under tabellen leder varje nivå till sina
 // tio kort, att visa eller skriva ut (Niclas 2026-10-14: sidan som slumpar ska stå tydligt i metoden).
@@ -302,7 +307,7 @@ const nivaFarg = (namn: string, nr: number) => bankFarger[namn] ?? (d.nivaer.fin
 // Radetiketterna (fältet radetiketter, Faktatextsamtal i grupp 2026-10-13): en rad i ett fält som börjar med en av
 // etiketterna och ett kolon får etiketten i husets blå, som i Word, så att ögat hittar raden på lärarens sida. Det gäller
 // fält med flera rader, som i Word (ramFaltTabell i metoddocx.ts): i ett fält med en enda rad finns inget att hitta bland.
-const etikettAv = (rad: string, rader: number) => (rader > 1 ? d.radetiketter.find((e) => rad.startsWith(`${e}: `)) : undefined);
+const etikettAv = (rad: string, rader: number) => (rader > 1 ? radensEtikett(rad, d.radetiketter) : undefined);
 // Bilden som eleven ser på (PaBordet.elev, kartläggningens blad): den står direkt efter det eleven läser, utan rubriken
 // På bordet, med bildtexten under, och rutan Till läraren står sist i lärarens form, som i Word.
 const elevbild = (ram: SerieRam) => paBordetVid(bilderPaBordet, { ram: ram.rubrik }).find((b) => b.elev);
@@ -327,7 +332,7 @@ const narmastFore = (id: string | undefined) => {
   for (let i = sidansOrdning.indexOf(id) - 1; i >= 0; i--) if (finns.has(sidansOrdning[i])) return sidansOrdning[i];
   return undefined;
 };
-const menyTabeller = d.tabeller.filter((t) => t.meny).map((t) => ({ efter: t.plats === 'efter-inledning' ? undefined : narmastFore(menyEfter[t.plats]), post: { id: tabellAnkare.get(t)!, namn: t.rubrik.split(':')[0].trim() } }));
+const menyTabeller = d.tabeller.filter((t) => t.meny).map((t) => ({ efter: t.plats === 'efter-inledning' ? undefined : narmastFore(menyEfter[t.plats]), post: { id: uppslag?.ti === d.tabeller.indexOf(t) ? UPPSLAGETS_ANKARE : tabellAnkare.get(t)!, namn: t.rubrik.split(':')[0].trim() } }));
 const meny = [
   ...menyTabeller.filter((m) => !m.efter).map((m) => m.post),
   ...avsnitt.flatMap((a) => [a, ...menyTabeller.filter((m) => m.efter === a.id).map((m) => m.post), ...(a.id === 'ramar' ? menyLektioner : [])]),
@@ -571,7 +576,7 @@ const meny = [
       <h2>{d.progression.rubrik}</h2>
       {d.progression.text && <p>{d.progression.text}</p>}
       {/* Den fjärde kolumnen säger vad eleverna blir bättre på och när gruppen går vidare (K-572, den smala formen). */}
-      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll', ...(elevernasKolumn ? [ELEVERNAS_KOLUMN] : [])]} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll, ...(elevernasKolumn ? [elevernasCell(r)] : [])])} bredder={elevernasKolumn ? ['14%', '29%', '28%', '29%'] : ['18%', '42%', '40%']} klass="stapla m-progression" />
+      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll', ...(elevernasKolumn ? [elevernasKolumnen(arEnElev(d))] : [])]} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll, ...(elevernasKolumn ? [elevernasCell(r)] : [])])} bredder={elevernasKolumn ? ['14%', '29%', '28%', '29%'] : ['18%', '42%', '40%']} klass="stapla m-progression" />
       <Filmruta filmer={vid({ avsnitt: 'progression' })} titel={d.titel} />
     </section>
   )}
@@ -739,8 +744,8 @@ const meny = [
           <Filmruta filmer={[...fler, ...filmerVid(filmer, { ram: ram.rubrik }), ...vavt({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
         </>);
       })() : (<>
-        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${problemet ? ' m-problemlarare' : ''}${lage === 'material' ? ' m-veckans' : ''}${par ? ' m-textpar-larare' : ''}${helaKursen ? ' m-hela-kursen' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
-          {lage !== 'vecka' && lage !== 'material' && <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>}
+        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${problemet ? ' m-problemlarare' : ''}${lage === 'material' ? ' m-veckans' : ''}${par ? ' m-textpar-larare' : ''}${helaKursen ? ' m-hela-kursen' : ''}`} id={lage === 'vecka' || uppslag?.ri === ri ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
+          {lage !== 'vecka' && lage !== 'material' && <h3 id={uppslag?.ri === ri ? undefined : ramAnkare[ri]}>{hel(ram.rubrik)}</h3>}
           {/* Lärarens sida till ett problem: problemet i en ruta överst, ur problemets ram (problemetTill ovan). */}
           {problemet && (
             <div class="m-ruta m-problemruta">
@@ -870,7 +875,7 @@ const meny = [
                   {!ram.sagoform && <p class="m-efter">Bladet finns i full storlek i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a>.</p>}
                 </>
               )
-              : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a>.</p>)
+              : <p class="m-efter">Ramen att fylla i{uppslag ? '' : `, med ${ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`},`} finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a>.</p>)
             : (
               <div class="m-ramdelar">
                 {ram.lektioner && lage !== 'vecka' && (
@@ -1047,6 +1052,15 @@ const meny = [
         )}
         {punkter.map((p) => (bm?.ramar.has(p.ri)
           ? (p.ri === bm.forst && p.ri !== punkter[0].ri ? <div class="bank" data-bladrader><Bladgrupp bm={bm} id={id} titel={d.titel}>{punkter.filter((x) => bm.ramar.has(x.ri)).map(rita)}</Bladgrupp></div> : null)
+          : uppslag?.ri === p.ri
+          ? (<>
+            <section class="m-ram m-uppslagsram m-ej-utskrift" id={`ram-${p.ri + 1}`}>
+              <h3 id={ramAnkare[p.ri]}>{hel(p.ram.rubrik)}</h3>
+              {p.ram.text.map((s) => <p>{s}</p>)}
+              <p class="m-efter"><a href={`#${UPPSLAGETS_ANKARE}`}>Delarna står överst på sidan</a>, och varje del har en egen sida.</p>
+            </section>
+            <div class="bank-utskrift">{rita(p)}</div>
+          </>)
           : !nm?.ramar.has(p.ri)
           ? rita(p)
           : p.ri === nm.forst && p.ri !== punkter[0].ri

@@ -1,0 +1,100 @@
+---
+// En del i uppslagsverket på sin egen sida (K-814, src/lib/uppslag.ts), /stodundervisning/<id>/del-5. Läraren i korridoren
+// behöver stegen, så de står direkt efter delens namn, när den används och det viktigaste: varje steg har en rubrik, stegets
+// början, och repliken för sig. Sedan filmen, när delen har en, och Läs in dig på delen, hopfälld, med resten av fälten
+// (Tanken, Caset, Därför och Bygger på). Texten är metodens, ordagrant och i samma ordning inom varje fält. Det som sajten
+// väver in vid delen och bilderna står efter filmen. Sist står delens fil, delningen och vägen till de andra delarna.
+import Base from '../layouts/Base.astro';
+import EjBryt from './EjBryt.astro';
+import Boklankar from './Boklankar.astro';
+import Uppslag from './Uppslag.astro';
+import Filmruta from './Filmruta.astro';
+import Sakknapp from './Sakknapp.astro';
+import Delning from './Delning.astro';
+import SkrivUtPdf from './SkrivUtPdf.astro';
+import { metodAdress, UPPHOV } from '../lib/metod';
+import { delningPa } from '../lib/delning';
+import { filmerVid, metodensFilmer } from '../lib/film';
+import { metodensPaBordet, paBordetVid } from '../lib/pabordet';
+import { vavtVid } from '../lib/vav';
+import { sakfiler } from '../lib/sakfiler';
+import { sidansSaker } from '../lib/metodsaker';
+import { UPPSLAGETS_ANKARE, uppslagensSteg, uppslagsAdress, type Uppslag as U, type Uppslagsdel } from '../lib/uppslag';
+import { radensEtikett } from '../lib/standard/index.js';
+import { site } from '../data/site';
+import type { MetodData } from '../lib/metod';
+interface Props { d: MetodData; id: string; u: U; del: Uppslagsdel }
+const { d, id, u, del } = Astro.props;
+const metodensAdress = `/stodundervisning/${id}`;
+const adress = `${metodAdress(site.url, id).replace(/^https?:\/\//, '')}/${del.slug}`;
+const rubrik = d.ramar!.ramar[u.ri].delar[del.di].rubrik;
+const plats = { del: rubrik };
+const bilder = [...filmerVid(metodensFilmer(d, id), plats), ...paBordetVid(metodensPaBordet(d, id), plats)];
+const vavt = vavtVid(id, d, plats);
+const fil = sakfiler(d, id).find((f) => f.slag === 'vecka' && f.ri === u.ri && f.di === del.di);
+const steg = uppslagensSteg(del.steg.text);
+const forra = u.delar[del.di - 1], nasta = u.delar[del.di + 1];
+// Delens fält som läraren läser in sig på, i filens ordning. En rad som börjar med ett av metodens namn på rader (radetiketter),
+// som "Steg 2" och "PBS", har namnet i husets blå, som i Word.
+const etikettAv = (rad: string, rader: number) => (rader > 1 ? radensEtikett(rad, d.radetiketter) : undefined);
+const uppraknat = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} och ${xs[xs.length - 1]}` : xs[0] ?? '');
+// Sidans egen länk är inte en länk till sig själv.
+const saker = sidansSaker(d, id).filter((s) => s.adress !== uppslagsAdress(id, del));
+---
+
+<Base title={`${del.led}: ${del.namn} · ${d.titel}`} description={`${del.led} i ${d.titel}, ${del.namn}. Använd den när: ${del.narFaltet.charAt(0).toLocaleLowerCase('sv')}${del.narFaltet.slice(1)}`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+  <article class="metod enhet del-sida" data-omrade={d.omrade} data-uppslagsdel={del.nr}>
+    <EjBryt><Boklankar metod={id} titel={d.titel} saker={saker}>
+    <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={metodensAdress}>{d.titel}</a></p>
+    {/* Delarna, hopfällda överst i telefonen och i en spalt bredvid på en bred skärm. */}
+    <details class="serie-meny-fall del-meny">
+      <summary>{u.rubrik}</summary>
+      <Uppslag u={u} id={id} aktuell={del.nr} />
+    </details>
+    <div class="del-yta">
+    <div class="del-spalt">
+    <header class="del-huvud">
+      <div class="um-band">
+        <span class="um-band-nr" aria-label={del.led}>{del.nr}</span>
+        <div>
+          <h1>{del.namn}</h1>
+          <p>{del.narFaltet}</p>
+        </div>
+      </div>
+      {del.viktigast && <p class="del-viktigast">{del.viktigast}</p>}
+    </header>
+    <section class="del-gor" aria-labelledby="del-gor">
+      <h2 id="del-gor" class="visually-hidden">{del.steg.rubrik}</h2>
+      <ol class="del-steg">
+        {steg.map((s) => <li><div><h3>{s.rubrik}</h3>{s.stycken.map((x) => <p class={x.slag === 'replik' ? 'replik' : undefined}>{x.text}</p>)}</div></li>)}
+      </ol>
+    </section>
+    <Filmruta filmer={[...bilder, ...vavt]} titel={d.titel} />
+    {del.las.length > 0 && (
+      <details class="um-rad del-las" id="las-in-dig">
+        <summary><span>Läs in dig på delen<small>{uppraknat(del.las.map((f) => f.rubrik))}</small></span></summary>
+        <div class="um-rad-inne">
+          {del.las.map((f) => {
+            const rader = f.text.split('\n');
+            return (<><h2>{f.rubrik}</h2>{rader.map((x) => { const e = etikettAv(x, rader.length); return <p class={f.kursiv ? 'del-case' : undefined}>{e ? <><span class="m-radetikett">{e}:</span>{x.slice(e.length + 1)}</> : x}</p>; })}</>);
+          })}
+        </div>
+      </details>
+    )}
+    {fil && <div class="del-fil"><p class="del-etikett">{del.led} på ett A4</p><Sakknapp fil={fil} metod={d.titel} /></div>}
+    {delningPa && <Delning sida={uppslagsAdress(id, del)} titel={`${del.led}: ${del.namn}`} plats="topp" />}
+    <nav class="enhet-fot" aria-label="De andra delarna">
+      {forra ? <a class="enhet-forra" href={uppslagsAdress(id, forra)}><span class="enhet-fot-etikett">{forra.led}</span>{forra.namn}</a> : <span></span>}
+      <a class="enhet-alla" href={`${metodensAdress}#${UPPSLAGETS_ANKARE}`}>Alla delar</a>
+      {nasta ? <a class="enhet-nasta" href={uppslagsAdress(id, nasta)}><span class="enhet-fot-etikett">{nasta.led}</span>{nasta.namn}</a> : <span></span>}
+    </nav>
+    <p class="upphov">{UPPHOV}. Ur {d.titel}, {del.led.toLowerCase()}. Får användas i undervisning. {adress}</p>
+    </div>
+    <aside class="del-sidospalt" aria-label={u.rubrik}><p class="del-etikett">{u.rubrik}</p><Uppslag u={u} id={id} aktuell={del.nr} /></aside>
+    </div>
+    </Boklankar></EjBryt>
+  </article>
+  <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
+</Base>
+
+<SkrivUtPdf />

@@ -11,7 +11,7 @@ import {
 import type { ParagraphChild } from 'docx';
 import { centralaVid, lasbarAdress, metodensCentrala, radenTillVerktyget, type Textplats } from './centrala';
 import { centraltPapper } from './centraladata';
-import { elevernasCell, ELEVERNAS_KOLUMN, harElevernasKolumn, malensMening, variantensMening, vidareTillLektion, webbdelar } from './standard/index.js';
+import { arEnElev, radensEtikett, elevernasCell, elevernasKolumnen, harElevernasKolumn, malensMening, variantensMening, vidareTillLektion, webbdelar } from './standard/index.js';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
 import { delensAdress, hanvisningsdelar, type Del } from './boklankar';
@@ -30,6 +30,7 @@ import { SNABB, snabbFalt, snabbRadHojd, snabbSist, snabbVeckorna, type Snabbmal
 import { arBlad, arIfylltBlad, arStaendeBlad, bildensAlt, bladVid, iDel, metodensPaBordet, PABORDET_MATT, paBordetVid, type Bladyta, type PaBordet } from './pabordet';
 import { listansNiva, skyltText, type Niva } from './nivaer';
 import { bladDelar, bladNamn, delensRad, forstaLed, kartan, metodensBlad, radensDel, wordId } from './karta';
+import { allaDelarnasFil, metodensUppslag } from './uppslag';
 import { veckansLista, veckomaterial } from './veckomaterial';
 import * as SAGA from './sagoform.js';
 import { arTarning, harBoktypsnitt, sagobladAv, sagoUpphov, TARNING_UPPHOV, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
@@ -785,7 +786,11 @@ const CM = 567;
 // skrivrader: ett tomt fält får plats för tre handskrivna rader, i en dels tabell i en ram där andra fält är ifyllda (K-385,
 // riggens förslag 2026-10-17: Eleven gör själv och Stödet som fortsätter i Till klassläraren hade en rad).
 const SKRIVRADER = 1440;
-function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean; skrivrader?: boolean; hojder?: (number | undefined)[]; elevblad?: boolean; hallIhopEfter?: boolean; tat?: boolean; bokmarke?: string; luftEfter?: number; etiketter?: string[] } = {}): Barn[] {
+// Höjden på en sida att fylla i, i twips, och den lägsta raden att skriva i (ramBarn).
+const SKRIVSIDAN = 11300;
+const SKRIVRADEN_MINST = 560;
+// skrivrum: tomma fält får skrivrum, 900 twips höga, eller så höga som talet säger.
+function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean | number; skrivrader?: boolean; hojder?: (number | undefined)[]; elevblad?: boolean; hallIhopEfter?: boolean; tat?: boolean; bokmarke?: string; luftEfter?: number; etiketter?: string[] } = {}): Barn[] {
   const forsta = o.tat ? Math.max(1100, Math.ceil(Math.max(...falt.flatMap((f) => f.rubrik.split(/\s+/)).map((w) => ordBredd(w, 20, { fet: true })))) + 300) : o.elevblad ? 2000 : 2300;
   const bredder = [forsta, BREDD - forsta];
   const rader: TableRow[] = [];
@@ -798,7 +803,7 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
     const linjer = f.text.split('\n');
     const tom = !f.text.trim();
     const hojd = o.hojder?.[i];
-    const etikett = (l: string) => (linjer.length > 1 && !f.kursiv ? o.etiketter?.find((e) => l.startsWith(`${e}: `)) : undefined);
+    const etikett = (l: string) => (linjer.length > 1 && !f.kursiv ? radensEtikett(l, o.etiketter) : undefined);
     const linje = (l: string, j: number) => {
       const val = { storlek: 20, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: !sist };
       const e = etikett(l);
@@ -810,7 +815,7 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
       // Etiketterna och namnraden på elevens blad är elevens (riggens docs/elevmaterial.md): i elevens typsnitt, som på sidan.
       cell([stycke(f.rubrik, { fet: true, storlek: o.elevblad ? 24 : 20, efter: 0, hallIhop: !sist, font: o.elevblad ? ELEVTYPSNITT : undefined })], { bredd: bredder[0], fyll: FARG.rand, tat: o.tat }),
       cell(tom ? [stycke('', { efter: 0, hallIhop: !sist })] : linjer.map(linje), { bredd: bredder[1], tat: o.tat }),
-    ], { hojd: hojd ? Math.round(hojd * CM) : tom ? (o.skrivrum ? 900 : o.skrivrader ? SKRIVRADER : 420) : undefined }));
+    ], { hojd: hojd ? Math.round(hojd * CM) : tom ? (o.skrivrum ? (o.skrivrum === true ? 900 : o.skrivrum) : o.skrivrader ? SKRIVRADER : 420) : undefined }));
   });
   return [tabell(rader, bredder), o.luftEfter !== undefined ? luft(o.luftEfter, o.hallIhopEfter) : o.hallIhopEfter ? new Paragraph({ spacing: { before: 0, after: 160 }, keepNext: true }) : avstand()];
 }
@@ -2536,7 +2541,13 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // elevens blad (en ram med höjder i elevblad) likaså före delarna: läxan Åt båda hållen i De fyra räknesätten fick namn
   // och vecka på sidan före uppgiften i filen med allt (granskningen 2026-10-04). En lärares planering med ett stort huvud
   // (projektplanerna i Skrivkurs: värdeskapande) får dela sidan, annars blev sidan före nästan tom.
-  const huvud = () => (ram.huvud ? ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum, hojder: o.blad ? ram.huvud.map(() => 1) : undefined, hallIhopEfter: !!ram.listor?.length || (!!o.blad && ram.delar.length > 0) }) : []);
+  // En ram att fylla i med tre delar eller fler, som Bemötandeplanen i Relationell vägledning, ryms på ett A4 när raderna kan bli
+  // lite lägre: annars stod den sista delen ensam på en sida till. Får raderna inte plats ens så står de i full höjd, och ramen
+  // tar en sida per del, som Berättelseramens egen ram (K-813).
+  const skrivfalt = (ram.huvud?.length ?? 0) + ram.delar.reduce((a, del) => a + del.falt.length, 0);
+  const skrivhojd = o.skrivrum && !o.blad && !ram.listor && ram.delar.length >= 3 ? Math.floor((SKRIVSIDAN - 1900 - ram.delar.length * 700) / skrivfalt) : 0;
+  const skrivrum = skrivhojd >= SKRIVRADEN_MINST ? Math.min(900, skrivhojd) : o.skrivrum;
+  const huvud = () => (ram.huvud ? ramFaltTabell(ram.huvud, { skrivrum, hojder: o.blad ? ram.huvud.map(() => 1) : undefined, hallIhopEfter: !!ram.listor?.length || (!!o.blad && ram.delar.length > 0) }) : []);
   if (!ram.listor && !enVecka) ut.push(...huvud());
   // En ordlistas ruta bär listans namn, så att en sida eller ett blad som börjar med rutan går att koppla rätt.
   // En ram med lektioner (veckorna i De fyra räknesätten): varje del börjar på en ny sida, tätare, med sin bild På bordet
@@ -2558,7 +2569,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const elevensFalt = !!o.blad && !elevsida;
     return [
       ...((ram.lektioner && !(o.paNySida && nr === 0)) || (medBild && nr > 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
-      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !egetBlad && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, skrivrader: !o.skrivrum && !elevensFalt && !ramArTom(ram), hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : egetBlad && nr === delar.length - 1 ? LUFT_RAD : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
+      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !egetBlad && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum, skrivrader: !o.skrivrum && !elevensFalt && !ramArTom(ram), hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : egetBlad && nr === delar.length - 1 ? LUFT_RAD : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
       ...(tvaSidor ? [luft(LUFT_RAD, true, { nySida: true })] : []),
       // Veckans rad ur kartan: talen och bladen för varje nivå, med bladens namn som länkar.
       ...(rad && o.karta?.tabell ? (() => { const k = o.karta!.tabell!.kolumner.slice(1); return rubrikTabell(k, [rad.slice(1)], k.map(() => Math.floor(BREDD / k.length)), { radrubrik: false, hallIhop: true, hallIhopEfter: true, storlek: 19, karta: { ...o.karta!.lankar, vecka: undefined } }); })() : []),
@@ -3330,7 +3341,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     // En kort kursplan hålls på en sida; en lång får bryta, rubrikraden upprepas. Den fjärde kolumnen säger vad eleverna
     // blir bättre på och när gruppen går vidare, som på sidan (K-572, standarden).
     const elevernas = harElevernasKolumn(d);
-    ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll', ...(elevernas ? [ELEVERNAS_KOLUMN] : [])], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll, ...(elevernas ? [elevernasCell(r)] : [])]), elevernas ? [1350, 2800, 2700, BREDD - 6850] : [1700, 4000, BREDD - 5700], { hallIhop: d.progression.rader.length <= 6 }));
+    ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll', ...(elevernas ? [elevernasKolumnen(arEnElev(d))] : [])], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll, ...(elevernas ? [elevernasCell(r)] : [])]), elevernas ? [1350, 2800, 2700, BREDD - 6850] : [1700, 4000, BREDD - 5700], { hallIhop: d.progression.rader.length <= 6 }));
     filmVid({ avsnitt: 'progression' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-progression')) friTabell(t);
@@ -3376,6 +3387,17 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   // Var den sista ramen elevens blad, börjar det som följer på en ny sida, så att inget annat står på bladet: läxan i De fyra
   // räknesätten i grupp kopieras dubbelsidigt och hade rubriken Kursintyg på baksidan (granskningen 2026-10-18).
   let efterElevsida = false;
+  // Bilden som eleven ser på (PaBordet.elev) står på elevens blad, i ramen, och inte en gång till efter den.
+  const elevbilder = (ram: Ram) => { const bilder = elevbilderVid(d, ram, bilderPaBordet); for (const b of bilder) placerade.add(b); return bilder.flatMap((b) => pabordetBarn(b, undefined, { utanRubrik: true })); };
+  const ramVal = (ram: Ram) => ({ kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel, bildtext: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), bildmatt: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik })[0]?.matt, radetiketter: d.radetiketter, elevbilder: elevbilder(ram), nivaer: d.nivaer, id: post.id, karta });
+  const ramensRubrik = (ram: Ram, nySida = false) => new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } });
+  // Uppslagsverket (src/lib/uppslag.ts, K-814): delarna är metodens kärna, så filen med bara metoden har dem efter grunden, med en
+  // sida per del som i Materialet (Niclas 2026-11-20: "Det är denna metods centrala delar").
+  const uppslaget = metodensUppslag(d);
+  if (uppslaget && !o.material && MATERIAL.has('ramar')) {
+    const ram = d.ramar!.ramar[uppslaget.ri];
+    ut.push(ramensRubrik(ram), ...ramBarn(ram, ramVal(ram)));
+  }
   if (d.ramar && (o.material || !MATERIAL.has('ramar'))) {
     ut.push(h2(d.ramar.rubrik));
     // En strukturs egen sida (strukturAv) är ett fullt A4 för eleverna, och en rad före eller efter den fick ofta en egen sida.
@@ -3396,11 +3418,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     // beskrivningen" och Allt om metoden är allt, också i en metod med en bank).
     const former = problemformer(ramarna, bilderPaBordet);
     const bank = bankAv(d);
-    // Bilden som eleven ser på (PaBordet.elev) står på elevens blad, i ramen, och inte en gång till efter den.
-    const elevbilder = (ram: Ram) => { const bilder = elevbilderVid(d, ram, bilderPaBordet); for (const b of bilder) placerade.add(b); return bilder.flatMap((b) => pabordetBarn(b, undefined, { utanRubrik: true })); };
-    const ramVal = (ram: Ram) => ({ kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel, bildtext: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), bildmatt: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik })[0]?.matt, radetiketter: d.radetiketter, elevbilder: elevbilder(ram), nivaer: d.nivaer, id: post.id, karta });
     let efterVeckorna = false;
-    const ramensRubrik = (ram: Ram, nySida = false) => new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } });
     const faktasidor = faktatexter(ramarna);
     const handledningar = lararhandledningar(ramarna);
     const bokhl = bokhandledningen(ramarna);
@@ -3514,7 +3532,9 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       // En ram med veckor (lektioner) börjar också på en ny sida, så att metodens fria text före den slutar med luft: Google
       // Dokument ritade texten före ramen i Argumenterande text sex rader längre efter tio sidor, och ramens text spillde
       // över på en egen sida före vecka 1 (K-585, 2026-10-27).
-      const nySida = (!!(ram.serie || ram.ark || ram.lektioner) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder || efterLista || elevsida(ram) || elevsida(ramarna[i - 1])) && !(ut.at(-1) instanceof Sektionsbyte);
+      // Uppslagsverkets ram (K-814) har bara en kort text före delarna, som var och en börjar på en ny sida, så den står kvar
+      // på sidan före.
+      const nySida = (!!(ram.serie || ram.ark || (ram.lektioner && uppslaget?.ri !== i)) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder || efterLista || elevsida(ram) || elevsida(ramarna[i - 1])) && !(ut.at(-1) instanceof Sektionsbyte);
       ut.push(ramensRubrik(ram, nySida));
       const serie = ramensSerie(ram, post.id);
       if (ramArTom(ram)) {
@@ -3523,7 +3543,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
         // Rita nämns bara när ramens text eller ett fält ber eleven rita ("Rita stapeln och räkna", "eller rita den");
         // ett blad som bara skrivs i, eller som läraren fyller i, får rutor att skriva i (granskningen 2026-10-09).
         const rita = [...ram.text, ...ram.delar.flatMap((del) => del.falt.map((f) => f.rubrik))].some((s) => /\brit(a|ar|ad)\b|\bbild/i.test(s));
-        ut.push(stycke(d.elevblad[ram.rubrik] ? `${ram.rubrik} finns i full storlek i planeringsmallarna, med ${rita ? 'rutor att skriva och rita i' : 'rutor att skriva i'}.` : `Ramen att fylla i, med ${ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i planeringsmallarna.`, { farg: FARG.svag }));
+        ut.push(stycke(d.elevblad[ram.rubrik] ? `${ram.rubrik} finns i full storlek i planeringsmallarna, med ${rita ? 'rutor att skriva och rita i' : 'rutor att skriva i'}.` : `Ramen att fylla i${uppslaget ? '' : `, med ${ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`},`} finns i planeringsmallarna.`, { farg: FARG.svag }));
       } else if (larare) ut.push(...lararsidaBarn(ram, larare, ramVal(ram)));
       else ut.push(...ramBarn(ram, { ...ramVal(ram), ensamRuta: serie.ensam }));
       ut.push(...serie.efter);
@@ -5219,6 +5239,9 @@ export function sakDokument(post: MetodPost, fil: Sakfil, o: { bas: string; resu
     ? delaSektioner([h2(d.tabeller[fil.ti!].rubrik), ...(d.tabeller[fil.ti!].text ? [stycke(d.tabeller[fil.ti!].text!, { hallIhop: true })] : []), ...friTabellensBarn(d.tabeller[fil.ti!])], `${d.titel} · ${SAJT}`, adress)
     : fil.slag === 'mall'
     ? mallensSidor(d.mallar[fil.mi!], post.id, harElevtypsnitt(d)).flatMap((sida) => delaSektioner(sida.barn, `Mall · ${d.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }))
+    // Uppslagsverkets alla delar är bara delarna, en sida var, utan ramens text före.
+    : fil.namn === allaDelarnasFil(post.id)
+    ? d.ramar!.ramar[fil.ri!].delar.flatMap((_, di) => mallBarn(post, o.bas, { bank: [], figurradVidFigur: true, vecka: { ri: fil.ri!, di } })).flatMap((sida) => delaSektioner(sida.barn, `${d.titel} · ${SAJT}`, adress))
     : mallBarn(post, o.bas, { bank: fil.slag === 'ram' ? [fil.ri!] : [], figurradVidFigur: true, ...(fil.slag === 'vecka' ? { vecka: { ri: fil.ri!, di: fil.di! } } : fil.slag === 'rakneblad' ? { listor: { ri: fil.ri!, li: fil.listor! } } : {}) })
       .flatMap((sida) => delaSektioner(sida.barn, `${d.titel} · ${SAJT}`, adress, sida.liggande ? { liggande: true, smal: true } : {}));
   return dokument(`${fil.titel} · ${d.titel}`, sektioner, typsnittFor([post]));

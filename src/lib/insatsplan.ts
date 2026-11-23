@@ -9,6 +9,7 @@ import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
+import { metodensUppslag, UPPSLAGETS_ANKARE } from './uppslag';
 import { kursensVeckor, metodensSaker, sakernaI, sidansAnkare, type MetodSak } from './metodsaker';
 import { passOversikt } from './metod';
 import { CENTRALA, lasbarAdress } from './centrala';
@@ -113,6 +114,8 @@ export interface PlanData {
   hem?: { rubrik: string; text: string; adress: string };
   /** Metodens avsnitt om när eleven fastnar, och de andra stöden i stunden, som Om något händer i Seriesamtal. */
   fastnar?: { rubrik: string; adress: string }[];
+  /** Uppslagsverket, delarna som läraren slår upp (src/lib/uppslag.ts, K-814), med tabellens rubrik före kolonet. */
+  uppslag?: { rubrik: string; adress: string };
   /** Metodens material, med rubriken som i metoden, som Böckerna och materialet, och i en lektion materialets första stycke. */
   material?: { rubrik: string; adress: string; text?: string };
   /** Metodens verktyg och stödmaterial (fältet centrala), utom banken som planen redan har. */
@@ -443,6 +446,7 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
 export async function planensData(m: Metod, version?: string): Promise<PlanData> {
   const d = m.data;
   const sida = `/stodundervisning/${m.id}`;
+  const uppslag = metodensUppslag(d);
   // Planens val av version (K-576): utan vald version räknas planen för varje version, och sidan får den första och för de
   // andra de fält som skiljer, så att valet byter innehållet utan att sidan hämtar något.
   const vv = d.plan?.versionsval;
@@ -540,6 +544,7 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(grupp ? { grupp } : {}),
     ...(d.hem ? { hem: { rubrik: d.hem.rubrik, text: postensRad(d.hem.text[0], 240), adress: `${sida}#hem` } } : {}),
     ...(fastnar.length ? { fastnar } : {}),
+    ...(uppslag ? { uppslag: { rubrik: forstaLedet(uppslag.rubrik), adress: `${sida}#${UPPSLAGETS_ANKARE}` } } : {}),
     ...(d.ramar?.ramar?.length ? { material: { rubrik: d.ramar.rubrik || 'Materialet', adress: `${sida}#ramar` } } : {}),
     ...(centrala.length ? { centrala } : {}),
     ...(d.mal ? { malAdress: `${sida}#mal` } : {}),
