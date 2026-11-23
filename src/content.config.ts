@@ -13,6 +13,7 @@ import { forstaLed, radensDel } from './lib/karta';
 import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
+import { uppslagsordFel } from './lib/uppslag';
 import { faktaFel } from './lib/kortfakta';
 import { allaTexter, lararensFragorFel, FAKTANS_MATERIAL, INNEHALLSTAGGAR, RUTORNAS_RUBRIKER, STRUKTURENS_GRANSER, strategiensFel, strukturensFel, tidsschematsFel, undervisningsmetodensFel, varianternasFel } from './lib/standard/index.js';
 import { SAMLINGAR, UTAN_SIDA } from './lib/samlingar';
@@ -713,7 +714,11 @@ const metodensFalt = z.strictObject({
           if (l.rakneblad && n !== 1) ctx.addIssue({ code: 'custom', path: ['rakneblad'], message: 'Ett räkneblad har en uppgift per rad, i en kolumn.' });
         })).optional(),
         huvud: z.array(ramFalt).optional(),
-        delar: z.array(z.strictObject({ rubrik: text, falt: z.array(ramFalt).min(1) })).min(1),
+        // ord: orden som en del i ett uppslagsverk förklarar, som tecknet och den lugna platsen i Relationell vägledning (K-821;
+        // Niclas 2026-11-23: "en egen tydlig beskrivning som länkas till när de nämns"). namn är ordet som texten skriver det
+        // oftast och former de andra formerna, som sitt tecken. Texten leder till delens sida första gången under varje rubrik
+        // (src/lib/uppslag.ts, METODER.md under Uppslagsverket).
+        delar: z.array(z.strictObject({ rubrik: text, falt: z.array(ramFalt).min(1), ord: z.array(z.strictObject({ namn: text, former: z.array(text).min(1).optional() })).min(1).max(4).optional() })).min(1),
         // Sagoformen (Skrivkurs: sagoboken, Niclas 2026-10-02: mallarna ska kännas som sagor, med kurbits överst och en
         // drake som ram, och "Du behåller såklart all snygg design på alla mallar"): ramen ritas i Word som blad i en
         // sagobok (sagoblad i src/lib/metoddocx.ts, ornamenten i src/lib/sagoform.js, båda ur metodriggen). form: vag
@@ -893,6 +898,8 @@ const stodundervisning = defineCollection({
     for (const fel of metodensTaggfel(d)) ctx.addIssue({ code: 'custom', path: ['taggar'], message: fel });
     // Faktarutans grupp, tid och period läses i fast form för metodbankens kort (K-465, src/lib/kortfakta.ts).
     for (const fel of faktaFel(d)) ctx.addIssue({ code: 'custom', path: ['grupp'], message: fel });
+    // Orden som en del i uppslagsverket förklarar (K-821, src/lib/uppslag.ts).
+    for (const fel of uppslagsordFel(d)) ctx.addIssue({ code: 'custom', path: ['ramar'], message: fel });
     // En lektion har serie, formaga och tranar tillsammans, och ingen egen lektionsbank. Att serien och förmågan finns
     // prövas i src/lib/serie.ts, där alla metoder är kända.
     const lektionsfalt = [d.serie, d.formaga, d.tranar].filter((x) => x !== undefined).length;

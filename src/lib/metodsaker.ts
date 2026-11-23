@@ -206,6 +206,9 @@ export function metodensSaker(d: MetodData, id: string, version?: string): Metod
   // Delarna i ett uppslagsverk (K-814, src/lib/uppslag.ts): "del 5" leder till delens sida.
   const uppslag = metodensUppslag(d);
   for (const del of uppslag?.delar ?? []) saker.push({ namn: del.led, former: [del.led], adress: uppslagsAdress(id, del) });
+  // Orden som en del förklarar, som tecknet och den lugna platsen, leder också till delens sida (K-821): på sidan första
+  // gången under varje rubrik och inte på delens egen sida, som de andra sakerna.
+  for (const del of uppslag?.delar ?? []) for (const o of del.ord ?? []) saker.push({ namn: o.namn, former: [o.namn, ...(o.former ?? [])], adress: uppslagsAdress(id, del) });
   // Ett spann av delar, "del 1–3", med eller utan ordfogen efter tankstrecket, leder till listan överst på sidan.
   if (uppslag) saker.push({ namn: 'delarna', former: uppslag.delar.flatMap((x) => uppslag.delar.filter((y) => y.nr > x.nr).flatMap((y) => [`Del ${x.nr}–${y.nr}`, `Del ${x.nr}–⁠${y.nr}`])), adress: `${sida}#${UPPSLAGETS_ANKARE}` });
   // Veckans ram, i en kurs med en ram per vecka som Bråkkursens "Vecka 1: Lika delar": "veckans ram" leder i planen till

@@ -8,11 +8,14 @@
 // tabellen och delarna som i filen, en sida per del. Reglerna och skälen: METODER.md under Uppslagsverket.
 import type { MetodData } from './metod';
 import { forstaLed } from './karta';
+import { allaTexter } from './standard/index.js';
 
 export interface Uppslagsfalt { rubrik: string; text: string; kursiv?: boolean }
 /** En del: platsen i ramen, numret, sidans namn (del-5), namnet, när den används, det viktigaste och fälten. nar är
  * tabellens korta rad och narFaltet delens eget fält När. */
-export interface Uppslagsdel { di: number; nr: number; slug: string; led: string; namn: string; nar: string; viktigast?: string; narFaltet: string; steg: Uppslagsfalt; las: Uppslagsfalt[] }
+/** Ett ord som delen förklarar, med de andra formerna som texten skriver (K-821). */
+export interface Uppslagsord { namn: string; former?: string[] }
+export interface Uppslagsdel { di: number; nr: number; slug: string; led: string; namn: string; nar: string; viktigast?: string; narFaltet: string; steg: Uppslagsfalt; las: Uppslagsfalt[]; ord?: Uppslagsord[] }
 export interface Uppslag { ri: number; ti: number; rubrik: string; kolumner: string[]; not?: string; delar: Uppslagsdel[] }
 
 const FALT_NAR = /^när$/iu;
@@ -34,12 +37,41 @@ export function metodensUppslag(d: MetodData): Uppslag | undefined {
       const steg = falt.find((f) => arSteg(f.text));
       if (!steg) return undefined;
       const narFaltet = falt.find((f) => FALT_NAR.test(f.rubrik))?.text ?? t.rader[di][1];
-      return { di, nr: di + 1, slug: `del-${di + 1}`, led: namn[di].led, namn: namn[di].namn, nar: t.rader[di][1], ...(t.rader[di][2] ? { viktigast: t.rader[di][2] } : {}), narFaltet, steg, las: falt.filter((f) => f !== steg && !FALT_NAR.test(f.rubrik)) };
+      const ord = (del as { ord?: Uppslagsord[] }).ord;
+      return { di, nr: di + 1, slug: `del-${di + 1}`, led: namn[di].led, namn: namn[di].namn, nar: t.rader[di][1], ...(t.rader[di][2] ? { viktigast: t.rader[di][2] } : {}), narFaltet, steg, las: falt.filter((f) => f !== steg && !FALT_NAR.test(f.rubrik)), ...(ord ? { ord } : {}) };
     });
     if (delar.some((x) => !x)) continue;
     return { ri, ti, rubrik: t.rubrik, kolumner: t.kolumner, ...(t.not ? { not: t.not } : {}), delar: delar as Uppslagsdel[] };
   }
   return undefined;
+}
+
+/**
+ * Orden som en del förklarar (K-821; Niclas 2026-11-23 om tecknet och den lugna platsen: "en egen tydlig beskrivning som
+ * länkas till när de nämns"): ett ord står bara på en del i metodens uppslagsverk, och varje form står i metodens text.
+ * Utan det leder ingen länk dit, eller så står ordet kvar efter att riggen har bytt det.
+ */
+export function uppslagsordFel(d: MetodData): string[] {
+  const ramar = d.ramar?.ramar ?? [];
+  const medOrd = ramar.flatMap((r, ri) => r.delar.flatMap((del, di) => ((del as { ord?: Uppslagsord[] }).ord ? [{ ri, di, rubrik: del.rubrik, ord: (del as { ord: Uppslagsord[] }).ord }] : [])));
+  if (!medOrd.length) return [];
+  const u = metodensUppslag(d);
+  const fel: string[] = [];
+  // Texten med vanliga mellanslag, utan ordfogar och med små bokstäver, så att en form hittas var den än står i meningen.
+  const ren = (s: string) => s.replace(/\u2060/gu, '').replace(/\u00a0/gu, ' ').toLocaleLowerCase('sv');
+  const texten = ren(allaTexter(d).join('\n'));
+  const skydda = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+  const sedda = new Set<string>();
+  for (const x of medOrd) {
+    if (u?.ri !== x.ri) { fel.push(`Delen "${x.rubrik}" har ord, men bara en del i metodens uppslagsverk kan ha det (METODER.md under Uppslagsverket).`); continue; }
+    for (const o of x.ord) for (const f of [o.namn, ...(o.former ?? [])]) {
+      const k = ren(f);
+      if (sedda.has(k)) fel.push(`Ordet "${f}" står på två delar eller två gånger. Ett ord leder till en del.`);
+      sedda.add(k);
+      if (!new RegExp(`(^|[^\\p{L}\\p{N}])${skydda(k)}(?![\\p{L}\\p{N}])`, 'u').test(texten)) fel.push(`Ordet "${f}" på "${x.rubrik}" står inte i metodens text. Ta bort det, eller skriv formen som texten har den.`);
+    }
+  }
+  return fel;
 }
 
 /** Ankaret för uppslagsverket överst på metodens sida. */
