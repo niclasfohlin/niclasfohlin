@@ -132,7 +132,7 @@ tabeller:
       - "Gör"
     rader:
       - - "Du som håller i insatsen"
-        - "Hälsar varje dag, har stunden och pratar två minuter de andra dagarna. Övar tecknet, fyller i kurvan och tar första steget efter en svår stund. Samlar de vuxna kring planen varannan vecka."
+        - "Hälsar varje dag, har stunden och pratar två minuter de andra dagarna. Övar tecknet, fyller i bladet Svåra stunder vecka för vecka och tar första steget efter en svår stund. Samlar de vuxna kring bemötandeplanen varannan vecka."
       - - "Klassläraren"
         - "Säger till tyst och enskilt, svarar på elevens tecken och sätter eleven bredvid en kamrat som är trygg i samarbete, i en uppgift där båda behövs."
       - - "Andra lärare, fritids och vikarier"
@@ -140,7 +140,7 @@ tabeller:
       - - "En vuxen till som eleven känner"
         - "Tar stunden när du är borta, och kommer när någon behöver bytas av."
       - - "Vårdnadshavarna"
-        - "Säger vad som lugnar hemma och vad de märker innan det brister, får höra något bra varje vecka, ser kurvan och är med när planen ändras."
+        - "Säger vad som lugnar hemma och vad de märker innan det brister, får höra något bra varje vecka, ser bladet Svåra stunder vecka för vecka och är med när bemötandeplanen ändras."
       - - "Elevhälsan"
         - "Är med på träffarna före start och efter vecka 10, och stödjer dig under tiden."
     not: "Klassläraren byter kamrat efter några veckor, så att ingen har uppdraget hela året. Behöver eleven öva samspelet med kamrater i en liten grupp, passar Kompissamtal."
@@ -253,7 +253,7 @@ progression:
   rader:
     - vecka: 1–2
       rubrik: "Relationen"
-      fokus: "Stunden och hälsningen börjar (del 1). I vecka 1 och 2 övar du och eleven tecknet två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt."
+      fokus: "Stunden och hälsningen börjar (del 1). I vecka 1 och 2 övar du och eleven tecknet. Ni övar två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt."
       roll: "Du håller stunden, hälsar varje dag och pratar två minuter de andra dagarna. Var eleven inte med på träffen, väljer hen tecknet och den lugna platsen med dig i vecka 1 (del 2)."
       eleverna: "Att komma till stunden och välja vad ni gör. Att visa tecknet när ni övar."
       vidare: "eleven kommer till stunden och kan visa tecknet, gå till den lugna platsen och komma tillbaka när ni övar"
@@ -357,7 +357,7 @@ ramar:
             - rubrik: "Tanken"
               text: "Det räcker inte att eleven slutar med något. Hen behöver något att göra i stället, och det lär du ut. Eleven väljer ett tecken att visa när det börjar bli för mycket, och en lugn plats att gå till. Den lugna platsen är elevens, och ingen skickar dit eleven som straff."
             - rubrik: "Gör så här"
-              text: "1. Se vad beteendet ger eleven. Slipper hen något, kommer en vuxen eller får hen det hen ville ha? Det eleven gör i stället ska ge samma sak. Är det en tur, lär du ut orden: ”Kan jag få nästa tur?” Är det en vuxen, ger hälsningen och stunden det (del 1).\n2. Låt eleven välja. Eleven väljer tecknet och den lugna platsen på träffen före start om hen är med, och annars med dig i vecka 1. Fråga: ”Vad kan du visa mig när det börjar bli för mycket? Vad blir du lugn av?” Det kan vara vatten eller tre långa utandningar. Tecknet ska gå att visa där det brukar bli svårt, också på rasten. Skriv i bemötandeplanen vem som svarar där, vem som ser eleven på den lugna platsen och hur länge hen stannar. Vill eleven inte välja än, frågar du igen när hen har börjat komma till stunden, och då övar du och eleven de två veckorna efter. Till dess gör ni vuxna som bemötandeplanen säger.\n3. Öva när allt är lugnt. I vecka 1 och 2 övar du och eleven tecknet två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt. Fortsätt tills eleven kan visa tecknet, gå till den lugna platsen, göra det som lugnar och komma tillbaka till samma uppgift, som du gör mindre. Öva igen efter ett lov, och påminn före det svåra: ”Kom ihåg tecknet på matten.”\n4. Svara varje gång, tyst och med samma ord: ”Gå du.” Kan du inte gå fram till eleven, nickar du. Eleven stannar den tid som är bestämd och kommer sedan tillbaka.\n5. Säg vad du såg, tyst och så som eleven tål det: ”Du visade tecknet och gick i tid.” Beskriv det eleven gjorde, utan ”duktig”. Behåll stödet också när det går bättre."
+              text: "1. Se vad beteendet ger eleven. Slipper hen något, kommer en vuxen eller får hen det hen ville ha? Det eleven gör i stället ska ge samma sak. Är det en tur, lär du ut orden: ”Kan jag få nästa tur?” Är det en vuxen, ger hälsningen och stunden det (del 1).\n2. Låt eleven välja. Eleven väljer tecknet och den lugna platsen på träffen före start om hen är med, och annars med dig i vecka 1. Fråga: ”Vad kan du visa mig när det börjar bli för mycket? Vad blir du lugn av?” Det kan vara vatten eller tre långa utandningar. Tecknet ska gå att visa där det brukar bli svårt, också på rasten. Skriv i bemötandeplanen vem som svarar där, vem som ser eleven på den lugna platsen och hur länge hen stannar. Vill eleven inte välja än, frågar du igen när hen har börjat komma till stunden, och då övar du och eleven de två veckorna efter. Till dess gör ni vuxna som bemötandeplanen säger.\n3. Öva när allt är lugnt. I vecka 1 och 2 övar du och eleven tecknet. Ni övar två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt. Fortsätt tills eleven kan visa tecknet, gå till den lugna platsen, göra det som lugnar och komma tillbaka till samma uppgift, som du gör mindre. Öva igen efter ett lov, och påminn före det svåra: ”Kom ihåg tecknet på matten.”\n4. Svara varje gång, tyst och med samma ord: ”Gå du.” Kan du inte gå fram till eleven, nickar du. Eleven stannar den tid som är bestämd och kommer sedan tillbaka.\n5. Säg vad du såg, tyst och så som eleven tål det: ”Du visade tecknet och gick i tid.” Beskriv det eleven gjorde, utan ”duktig”. Behåll stödet också när det går bättre."
             - rubrik: "Caset"
               kursiv: true
               text: "Selma i åk 2 blir arg när hon fastnar i en uppgift, och då river hon sönder pappret. Läraren Lena ser att rivandet ger Selma en paus. När de skriver bemötandeplanen väljer Selma handen på kinden som tecken, och läshörnan blir hennes lugna plats. De övar två eftermiddagar efter skolan. Selma lägger handen på kinden, Lena säger ”Gå du”, och Selma går till läshörnan, bläddrar i en bok och kommer tillbaka.\nDagen efter lägger Selma handen på kinden mitt i svenskan. Lena ser det för sent, och pappret går i bitar. Nästa morgon säger Lena: ”Jag missade ditt tecken i går. Visa igen, så ser jag.” Samma dag ser Lena tecknet och svarar. När Selma kommer tillbaka skriver hon två meningar i stället för fem. Lena visar bara tummen, och efteråt säger hon tyst: ”Du visade tecknet och gick i tid.” Efter sex veckor räcker en nick."
@@ -606,7 +606,7 @@ plan:
     falt: ["Tecknet", "Den lugna platsen", "Det som lugnar"]
   ovning:
     namn: "Öva tecknet"
-    text: "I vecka 1 och 2 övar du och eleven tecknet två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt."
+    text: "Ni övar två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt."
     ganger: 2
     veckor: 2
     lov: "Öva igen efter ett lov, och påminn före det svåra: ”Kom ihåg tecknet på matten.”"
