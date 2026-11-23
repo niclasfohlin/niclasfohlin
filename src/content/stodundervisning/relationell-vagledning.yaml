@@ -596,6 +596,20 @@ plan:
           antal: "Svåra stunder"
           text: "Har de svåra stunderna ökat tre veckor i rad, och inget i elevens liv förklarar det, ändrar ni vuxna hur ni bemöter eleven."
   atgard: "I tio veckor gör alla vuxna runt eleven likadant i varje möte: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar den vuxne första steget tillbaka."
+  # Det eleven väljer och övningen (sajten 2026-11-23, K-822, efter Niclas: "De två behöver också tidigt planeras och
+  # tränas i insatsen och i Planera insatsen"). Meningarna är del 2:s, ordagrant.
+  valet:
+    rubrik: "Tecknet och den lugna platsen"
+    nar: "Eleven väljer tecknet och den lugna platsen på träffen före start om hen är med, och annars med dig i vecka 1."
+    senare: "Vill eleven inte välja än, frågar du igen när hen har börjat komma till stunden, och då övar du och eleven de två veckorna efter."
+    fraga: "Fråga: ”Vad kan du visa mig när det börjar bli för mycket? Vad blir du lugn av?”"
+    falt: ["Tecknet", "Den lugna platsen", "Det som lugnar"]
+  ovning:
+    namn: "Öva tecknet"
+    text: "I vecka 1 och 2 övar du och eleven tecknet två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt."
+    ganger: 2
+    veckor: 2
+    lov: "Öva igen efter ett lov, och påminn före det svåra: ”Kom ihåg tecknet på matten.”"
   justera:
     - "Läs bemötandeplanen med arbetslaget. Gjorde alla lika, och fick elevens tecken svar?"
     - "Välj färre krav ett tag, och lägg resten åt sidan med flit (del 4). Se om de svåra stunderna blir färre."
