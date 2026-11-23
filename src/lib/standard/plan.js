@@ -4374,6 +4374,22 @@ export const valetsText = (varden) => varden.map(([n, v]) => `${n}: ${/[.!?…]$
 /** Övningens bock: måndagen och gången. */
 export const ovningensBock = (mandag, gang) => `${mandag}#${gang}`;
 /**
+ * Övningens rad i sammanställningen, lika på sidan, i pdf:en och i texten som kopieras: hur många av gångerna i övningens
+ * veckor som är bockade (användbarhetsprovet 2026-11-23: sammanställningen räknade passen men inte övningen), eller tomt
+ * utan val.
+ * @param {{ veckor: { mandag: string }[] }} plan
+ * @param {{ fran?: string } | undefined} valet
+ * @param {{ namn: string, ganger: number, veckor: number, lov?: string }} ovning
+ * @param {string[] | undefined} ovat
+ */
+export function ovningensRad(plan, valet, ovning, ovat) {
+  const alla = ovningensVeckor(plan, valet, ovning).flatMap((v) => Array.from({ length: ovning.ganger }, (_, i) => ovningensBock(v.mandag, i + 1)));
+  if (!alla.length) return '';
+  const bockade = new Set(ovat ?? []);
+  const gjorda = alla.filter((k) => bockade.has(k)).length;
+  return `${ovning.namn}: ${gjorda} av ${alla.length} gånger ${gjorda === 1 ? 'är bockad' : 'är bockade'}.`;
+}
+/**
  * En tabell per rad och kolumn, som klassernas skattning vecka för vecka eller metodens skattningar per instrument och vecka,
  * med ett värde satt, eller borttaget med undefined, och raden borttagen när den blir tom (sajtens K-631).
  * @template T
@@ -4494,6 +4510,9 @@ export function sammanstallning(plan, f, idag, lektioner) {
     gjordaVarit: passGjorda.filter((p) => p.datum <= idag).length + extraGjort.filter((x) => x <= idag).length,
     veckomedel: medel(veckor.filter((v) => v.skattning).map((v) => v.skattning)),
     installda: veckor.reduce((a, v) => a + v.installda, 0), helgdagar: veckor.reduce((a, v) => a + v.helgdagar, 0), helgdagarKvar: veckor.reduce((a, v) => a + v.helgdagarKvar, 0),
+    // Helgdagarna med namn, så att passens rad säger vilka dagar passen föll på (verifieringen 2026-11-23: "Ett föll på en
+    // helgdag och ett faller på en helgdag" om julafton och nyårsafton).
+    helgdagsdagar: plan.veckor.flatMap((v) => v.bortfall.filter((b) => b.varfor === 'helgdag').map((b) => ({ namn: b.namn ?? '', kvar: b.datum > idag }))),
     slut: insatsenSlut(plan.sistaPass, idag), mitt: mittVeckan(plan),
     // Läget, som märket överst: avslutet står i dåtid i texterna och pdf:erna bara när insatsen är avslutad (Samma sak överallt
     // inför lanseringen, E2: "avslutades" när läraren hade valt Förläng insatsen och läget var Pågående).
@@ -4653,13 +4672,22 @@ export const avstamningensRad = (veckan, a) => (a?.beslut || a?.not ? { etikett:
  * Passens rad, lika på sidan, i pdf:en och i texten som kopieras (steget Samma sak överallt 2026-10-25: sidan och texten
  * hade var sitt tillägg): passens läge och de som ställdes in eller föll på en helgdag. Läget säger redan hur många av de
  * pass som har varit som är bockade, så de utan bock sägs inte en gång till (användbarhetsprovet samma dag).
- * @param {{ planerade: number, gjorda: number, varit: number, gjordaVarit: number, slut: boolean, installda: number, helgdagar: number, helgdagarKvar?: number }} s
+ * Helgdagarna står med namn när sammanställningen har dem: "Ett pass föll på julafton och ett faller på nyårsafton."
+ * @param {{ planerade: number, gjorda: number, varit: number, gjordaVarit: number, slut: boolean, installda: number, helgdagar: number, helgdagarKvar?: number, helgdagsdagar?: { namn: string, kvar: boolean }[] }} s
  */
 export function passensRad(s) {
   const kvar = s.helgdagarKvar ?? 0, varit = s.helgdagar - kvar;
-  const helg = (n, verb) => (n ? `${talText(n)} ${verb} på ${n === 1 ? 'en helgdag' : 'helgdagar'}` : '');
-  const bort = [s.installda ? `${talText(s.installda)} pass ställdes in` : '', helg(varit, 'föll'), helg(kvar, 'faller')].filter(Boolean);
-  return [passensLage(s), bort.length ? `${stor(uppraknat(bort))}.` : ''].filter(Boolean).join(' ');
+  /** @param {number} n @param {string} verb @param {boolean} kommer */
+  const helg = (n, verb, kommer) => {
+    if (!n) return '';
+    const dagarna = (s.helgdagsdagar ?? []).filter((d) => d.kvar === kommer && d.namn);
+    const namn = dagarna.length === n ? uppraknat([...new Set(dagarna.map((d) => d.namn))]) : n === 1 ? 'en helgdag' : 'helgdagar';
+    return `${talText(n)} pass ${verb} på ${namn}`;
+  };
+  const bort = [s.installda ? `${talText(s.installda)} pass ställdes in` : '', helg(varit, 'föll', false), helg(kvar, 'faller', true)].filter(Boolean);
+  // Ordet pass står en gång, i det första ledet (verifieringen 2026-11-23).
+  const leden = bort.map((x, i) => (i > 0 ? x.replace(/^(\S+) pass /u, '$1 ') : x));
+  return [passensLage(s), leden.length ? `${stor(uppraknat(leden))}.` : ''].filter(Boolean).join(' ');
 }
 export function passensLage(s) {
   if (!s.varit) return `Inget pass har varit än. Planen har ${s.planerade} pass.`;
@@ -4708,18 +4736,45 @@ export function resultatMedDelar(resultat, varde) {
   if (delar.length < 2) return v;
   const semikolon = v.split(/\s*;\s*/), tal = v.split(/,\s+|\s+/);
   const varden = semikolon.length === delar.length ? semikolon : tal.length === delar.length && tal.every((x) => ETT_TAL.test(x)) ? tal : null;
-  if (!varden || varden.some((x) => !x)) return v;
+  if (!varden || varden.every((x) => !x)) return v;
+  // En del utan värde står inte med, så att ett fält som läraren lämnade tomt inte blir ett semikolon i texten (fälten per
+  // del, användbarhetsprovet 2026-11-23).
   const parade = delar.map((d, i) => {
     const matt = d.match(/\sav\s+\d/g)?.length ?? 0;
     const x = varden[i], xs = matt > 1 ? x.split(/\s*\/\s*|\s+och\s+|,\s+|\s+/) : [x];
+    if (!x) return '';
     if (!xs.every((y) => ETT_TAL.test(y)) || (matt > 1 && xs.length !== matt)) return `${d}: ${x}`;
     // Slutar delen med ett tal, som "elevens siffra från 0 till 10", skiljer ett kolon talen åt (K-815).
     if (!matt) return /\d$/.test(d) ? `${d}: ${x}` : `${d} ${x}`;
     let n = 0;
     return d.replace(/\s(av\s+\d)/g, (_, av) => ` ${xs[n++]} ${av}`);
-  });
+  }).filter(Boolean);
   return parade.join(delar.some((d) => d.includes(',')) ? '; ' : ', ');
 }
+/**
+ * Ett resultat med flera delar skrivs i ett fält per del, med delens namn vid fältet (användbarhetsprovet 2026-11-23: ett fält
+ * med semikolon mellan delarna blev lätt fel i telefon). Det sparas som förut, med semikolon mellan, så att planer och filer
+ * från före fälten läses likadant. Värdena per del läses som resultatMedDelar läser dem; går det sparade inte att dela står
+ * det i det första fältet.
+ * @param {string | undefined} resultat metodens resultat, med delarna
+ * @param {string | undefined} varde det som är sparat
+ * @returns {string[]}
+ */
+export function resultatetsVarden(resultat, varde) {
+  const delar = resultatetsDelar(resultat);
+  // Som resultatMedDelar läser värdet, utan punkten sist, så att "2, 6, 3." blir tre fält (Codex 2026-11-23).
+  const v = utanPunkt(String(varde ?? '').trim());
+  const tomma = delar.map(() => '');
+  if (!v || !delar.length) return tomma;
+  const semikolon = v.split(/\s*;\s*/), tal = v.split(/,\s+|\s+/);
+  if (semikolon.length === delar.length) return semikolon.map((x) => x.trim());
+  if (tal.length === delar.length && tal.every((x) => ETT_TAL.test(x))) return tal;
+  return [v, ...tomma.slice(1)];
+}
+/** Fältens värden som ett resultat, med semikolon mellan delarna, eller tomt när inget fält är ifyllt. @param {string[]} varden */
+export const resultatAvDelar = (varden) => (varden.some((x) => x.trim()) ? varden.map((x) => x.trim()).join('; ').trim() : '');
+/** En del som är ett tal, som "elevens siffra från 0 till 10" eller "klarade uppgifter av 9", får telefonens sifferknappar. @param {string} del */
+export const delenArTal = (del) => { const av = del.match(/\sav\s+\d/g)?.length ?? 0; return av === 1 || (av === 0 && /\d$/.test(del)); };
 /** Det läraren förde in vid uppföljningens rad, med radens delar (resultatMedDelar). @param {{ uppfoljning: { resultat?: string }[] }} info @param {{ rad: number, varde: string }} t */
 export const resultatetsVarde = (info, t) => resultatMedDelar(info.uppfoljning[t.rad]?.resultat, t.varde);
 /** Ett resultat i metodens uppföljning, med radens namn som i uppföljningens rad och vad talen står för: "Före insatsen, v. 6: nivå i screeningen 2, klarade uppgifter 6 av 9, påhittade ord 3 av 4 i uppgift 9". @param {Plan} plan @param {{ uppfoljning: { nar: string, resultat?: string }[] }} info @param {{ rad: number, datum: string, varde: string }} t */
@@ -4775,7 +4830,7 @@ export const prickarna = (bx, b, pass) => pass.map((slag, j) => ({ x: bx + b / 2
 /**
  * Sammanställningen som text till dokumentationen, utan elevernas namn: målet, passen som är bockade, skattningarna som
  * medel vid första och senaste tillfället, hur många som rör sig framåt, avstämningen, utvärderingen och uppföljningen.
- * @param {{ titel: string, mal?: string, uppfoljning: { nar: string }[], valet?: { varden: [string, string][] } }} info
+ * @param {{ titel: string, mal?: string, uppfoljning: { nar: string }[], valet?: { varden: [string, string][] }, ovning?: string }} info
  * @param {Plan} plan
  * @param {ReturnType<typeof sammanstallning>} s
  */
@@ -4787,6 +4842,7 @@ export function sammanstallningstext(info, plan, s) {
   if (info.valet?.varden.length) rader.push(valetsText(info.valet.varden));
   if (lektionernasMal(s)) rader.push(lektionernasMal(s));
   rader.push(`Pass: ${passensRad(s)}`);
+  if (info.ovning) rader.push(info.ovning);
   const elever = s.elever.filter((e) => e.id !== GRUPPEN);
   const skattade = (s.grupp ? s.elever : elever).filter((e) => e.skattningar.length);
   if (skattade.length) {

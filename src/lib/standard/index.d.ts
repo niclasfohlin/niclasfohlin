@@ -301,6 +301,7 @@ export type Rakningen = { namn: string; rad: number; foreRad?: number; serier: (
 export declare const RAKNAS_FORE: 'fore';
 export declare const VALETS_NAMN: number;
 export declare const VALETS_LANGD: number;
+export declare function ovningensRad(plan: { veckor: { mandag: string }[] }, valet: { fran?: string } | undefined, ovning: { namn: string; ganger: number; veckor: number; lov?: string }, ovat: string[] | undefined): string;
 export declare function ovningensVeckor(plan: { veckor: { mandag: string }[] }, valet: { fran?: string } | undefined, ovning: { veckor: number; lov?: string }): { mandag: string; efterLov: boolean }[];
 export declare const ovningensBock: (mandag: string, gang: number) => string;
 export declare const RAKNINGENS_GRANSER: Readonly<{ antal: number; hogst: number }>;
@@ -657,7 +658,7 @@ export declare function rensaFoljd(f: unknown): Required<Pick<Foljd, 'gjorda' | 
 export declare function mittVeckan(plan: Plan): number | null;
 export interface SammanstallningVecka { lektion?: string; nr: number; mandag: string; vecka: number; innehall: number; igen: boolean; pass: { nr: number; dag: string; datum: string; gjort: boolean }[]; gjorda: number; planerade: number; varit: number; installda: number; helgdagar: number; helgdagarKvar: number; skattning?: number; not?: string }
 export interface SammanstallningElev { id: string; namn: string; fran?: string; passen?: number; skattningar: { nr: number; vecka: number; varde: number; lektion?: string }[]; forsta: { nr: number; vecka: number; varde: number; lektion?: string } | null; senaste: { nr: number; vecka: number; varde: number; lektion?: string } | null; narvaro: number | null; resultat: Record<string, string> }
-export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; lektioner?: { namn: string; mal: string; veckor: number[] }[]; grupp: boolean; enElev?: true; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; gjordaVarit: number; installda: number; helgdagar: number; helgdagarKvar?: number; slut: boolean; avslutad?: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null; tidigareAvslut?: Avslutet[] | null; resultat?: string[]; namnen: { namn: string }[]; skattningar: { namn: string; skala: Skala; regler: (Regel & { rad: number })[]; varden: (number | undefined)[]; galler: number[][] }[]; rakningen?: Rakningen }
+export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; lektioner?: { namn: string; mal: string; veckor: number[] }[]; grupp: boolean; enElev?: true; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; gjordaVarit: number; installda: number; helgdagar: number; helgdagarKvar?: number; helgdagsdagar?: { namn: string; kvar: boolean }[]; slut: boolean; avslutad?: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null; tidigareAvslut?: Avslutet[] | null; resultat?: string[]; namnen: { namn: string }[]; skattningar: { namn: string; skala: Skala; regler: (Regel & { rad: number })[]; varden: (number | undefined)[]; galler: number[][] }[]; rakningen?: Rakningen }
 /** Namnen som texterna som lämnar webbläsaren tvättar bort: eleverna i listan och de som har stått i den. */
 export declare const elevernasNamn: (f: Foljd | undefined) => { namn: string }[];
 export declare function sammanstallning(plan: Plan, f: Foljd, idag: string, lektioner?: ({ namn: string; mal: string } | null | undefined)[]): Sammanstallning;
@@ -674,7 +675,7 @@ export declare const BESLUT: Readonly<Record<'fortsatt' | 'justera' | 'avsluta' 
 export declare const uppfoljningensTillfallen: (plan: Plan) => { nyckel: string; rad: number; datum: string; vecka: number | null }[];
 /** En elevs resultat i datumordning, också för ett tillfälle som inte står i planen längre. */
 export declare function elevensResultat(plan: Plan, resultat: Record<string, string>): { nyckel: string; rad: number; typ: Tid['typ']; datum: string; varde: string }[];
-export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[]; valet?: { varden: [string, string][] } }, plan: Plan, s: Sammanstallning): string;
+export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[]; valet?: { varden: [string, string][] }; ovning?: string }, plan: Plan, s: Sammanstallning): string;
 export declare const valetsText: (varden: [string, string][]) => string;
 export declare function resultatenFoljerFore(resultat: Record<string, Record<string, string>>, forut: { uppfoljning: { rad: number; typ: string; tillfallen: { datum: string }[] }[] }, nu: { uppfoljning: { rad: number; typ: string; tillfallen: { datum: string }[] }[] }): Record<string, Record<string, string>>;
 export declare function elevtext(info: { mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;
@@ -723,13 +724,16 @@ export declare const nyaElevensDag: (f: Foljd, fore: number, idag: string) => st
 /** Avstämningen mitt i insatsen som en rad, lika i sammanställningen och i texten till åtgärdsprogrammet. */
 export declare const avstamningensRad: (veckan: string, a: { beslut?: string; not?: string } | null | undefined) => { etikett: string; text: string } | null;
 /** Passens rad: läget, de som har varit utan bock, och de inställda och helgdagarna. */
-export declare function passensRad(s: { planerade: number; gjorda: number; varit: number; gjordaVarit: number; slut: boolean; installda: number; helgdagar: number; helgdagarKvar?: number }): string;
+export declare function passensRad(s: { planerade: number; gjorda: number; varit: number; gjordaVarit: number; slut: boolean; installda: number; helgdagar: number; helgdagarKvar?: number; helgdagsdagar?: { namn: string; kvar: boolean }[] }): string;
 /** Passen som läraren har bockat, i en mening. */
 export declare function passensLage(s: { planerade: number; gjorda: number; varit: number; gjordaVarit: number; slut: boolean }): string;
 /** Elevens närvaro i en mening. */
 export declare const narvaronText: (e: { narvaro: number | null }, s: { gjorda: number }) => string;
 /** Delarna i en mätnings resultat, med semikolon mellan i metodens fält. */
 export declare const resultatetsDelar: (resultat: string | undefined) => string[];
+export declare function resultatetsVarden(resultat: string | undefined, varde: string | undefined): string[];
+export declare const resultatAvDelar: (varden: string[]) => string;
+export declare const delenArTal: (del: string) => boolean;
 /** Det läraren förde in vid en mätning, med vad varje värde står för ur metodens delar, eller som läraren skrev det. */
 export declare function resultatMedDelar(resultat: string | undefined, varde: string): string;
 /** Det läraren förde in vid uppföljningens rad, med radens delar. */

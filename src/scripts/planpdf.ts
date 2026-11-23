@@ -23,6 +23,8 @@ export interface PdfInfo {
   uppfoljning: { nar: string }[];
   /** Det eleven har valt (K-822), fält och värde, under målet. */
   valet?: [string, string][];
+  /** Övningens rad, som "Öva tecknet: 3 av 4 gånger är bockade." (ovningensRad i standarden). */
+  ovning?: string;
   /** Metodens ingress, under Innehållet i insatsen i gruppens pdf. */
   ingress?: string;
   /** Metodens undertitel, under Innehållet i insatsen i elevens pdf, som kan gå till hemmet och nästa lärare. */
@@ -331,7 +333,8 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   innehallet(p, info.ingress, info, ['Omfattning', 'Eleven arbetar med', 'Uppföljning', 'Metoden']);
   malet(p, info, s);
   p.rubrik('Så gick det', 110);
-  p.text(passensRad(s), { luft: 4 });
+  p.text(passensRad(s), { luft: info.ovning ? 2 : 4 });
+  if (info.ovning) p.text(info.ovning, { luft: 4 });
   // Metodens skattning av gruppen, med linjen och reglerna som gällde, före eleverna (K-559).
   for (const sk of s.skattningar) {
     const t = skattningensText(s, sk, info);

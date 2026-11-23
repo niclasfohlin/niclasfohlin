@@ -1,5 +1,10 @@
 # Ändringar i standarden
 
+## 0.69.0, 2026-11-23
+
+- `plan.js` (användbarhetsprovet och verifieringen av sajtens K-822, 2026-11-23): `ovningensRad(plan, valet, ovning, ovat)`, övningens rad i sammanställningen, "Öva tecknet: 3 av 4 gånger är bockade.", och `sammanstallningstext` tar den som `info.ovning`. `sammanstallning` har `helgdagsdagar`, helgdagarna med namn, och `passensRad` säger dem: "Ett pass föll på julafton och ett faller på nyårsafton." Förut stod "Ett föll på en helgdag och ett faller på en helgdag". Utan namnen säger raden som förut.
+- `plan.js` (samma prov: ett fält med semikolon mellan delarna blev lätt fel i telefon): ett resultat med flera delar skrivs i ett fält per del. `resultatetsVarden(resultat, varde)` delar det sparade i delarnas värden, `resultatAvDelar(varden)` sätter ihop dem med semikolon, som förut, och `delenArTal(del)` säger om en del är ett tal. `resultatMedDelar` hoppar över en del utan värde, så att "2;;3" blir "nivå i screeningen 2, påhittade ord 3 av 4 i uppgift 9".
+
 ## 0.68.0, 2026-11-23
 
 - `plan.js` (sajtens K-822; Niclas 2026-11-23 om tecknet och den lugna platsen i Relationell vägledning: "De två behöver också tidigt planeras och tränas i insatsen och i Planera insatsen"): `plan.valet` och `plan.ovning` i `planensTexter`, så att deras meningar citerar metoden. `ovningensVeckor(plan, valet, ovning)`, veckorna med övningen från veckan då valet sparades och veckan efter varje lov, och `ovningensBock`. Följden har `valet`, det eleven har valt och veckan då det sparades, och `ovat`, övningens bockar (`rensaFoljd`, `VALETS_NAMN`, `VALETS_LANGD`). Det valda står i texten till åtgärdsprogrammet efter målet (`dokumentationsrader`, `info.valet`). Reglerna står i REGLER.md under Det eleven väljer.

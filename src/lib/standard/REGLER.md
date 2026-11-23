@@ -124,7 +124,7 @@ En metod där eleven väljer något med läraren som gäller i alla veckor, och 
 | `plan.valet.falt` | Fältens namn, ett till fyra, som Tecknet, Den lugna platsen och Det som lugnar |
 | `plan.ovning` | Övningen av det valda: `namn`, radens namn, `text`, metodens mening om övningen, `ganger`, gånger i veckan (1 till 5), `veckor`, veckor från valet (1 till 4), och valfritt `lov`, metodens mening om att öva igen efter ett lov. Kräver `plan.valet` |
 
-Övningens veckor räknas från veckan då valet sparas, och från insatsens första vecka när det valdes före (`ovningensVeckor`), så att planen aldrig visar en övning av något som inte är valt. Med `lov` kommer övningen igen i veckan efter varje uppehåll i planens veckor. Metodens mening om övningen står under raden i veckorna från insatsens början, och meningen om lovet i veckan efter ett lov. Det valda står i texten till åtgärdsprogrammet och i sammanställningen. Meningarna i `nar`, `senare`, `fraga`, `text` och `lov` prövas som planens andra citat (`planensCitatFel`).
+Övningens veckor räknas från veckan då valet sparas, och från insatsens första vecka när det valdes före (`ovningensVeckor`), så att planen aldrig visar en övning av något som inte är valt. Med `lov` kommer övningen igen i veckan efter varje uppehåll i planens veckor. Metodens mening om övningen står under raden i varje vecka med övningen vars fokus inte redan säger den, och meningen om lovet i veckan efter ett lov. Det valda står i texten till åtgärdsprogrammet och i sammanställningen, och sammanställningen räknar övningens bockar, som "Öva tecknet: 3 av 4 gånger är bockade." (`ovningensRad`). Meningarna i `nar`, `senare`, `fraga`, `text` och `lov` prövas som planens andra citat (`planensCitatFel`).
 
 ## Det som kommer
 

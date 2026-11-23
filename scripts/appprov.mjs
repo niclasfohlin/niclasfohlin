@@ -11,7 +11,7 @@
 // | Service workern | /sw-stod.js finns, med delarna ur src/lib/appen.ts och en cacheregel i netlify.toml |
 // | Erbjudandet | I Chrome, med telefonen härmad, på /app: på en dator och i Android först när webbläsaren erbjuder installation; på iPhone med tre steg, raden om planerna och utfällt från beskedet; i en apps webbläsare vägen ut; krysset gömmer det i 30 dagar; aldrig i appen |
 // | I appen | Listorna på /app med planer i båda samlingarna och utan planer, stilmallens regler för appen och länken bara på pekskärm |
-// | Beskedet i sidan | Planera insatsen och Lär dig metoden i Safari i iPhone med beskedet och knappen till /app, och inte i appen eller i Chrome i Android |
+// | Beskedet i sidan | Planera insatsen och Lär dig metoden i Safari i iPhone med beskedet och knappen till /app, i Planera insatsen med Ladda ner planen i beskedet när planen är sparad och utan påminnelsen överst, och inte i appen eller i Chrome i Android |
 // | Utan nät | Service workern sparar /app, Metoder, Planera insatsen och Lär dig metoden och öppnar dem när provets server har stängts |
 //
 //   node scripts/appprov.mjs
@@ -304,6 +304,12 @@ try {
     const { LISTANS_KNAPPAR } = await import('../src/scripts/insatser-lagring.ts');
     ska('iPhone i Safari: Planera insatsen rekommenderar appen, med knappen till /app och appens knapp för filen', b?.text.includes('Gör planen i appen Metodbanken.') && b.text.includes(`öppnar du filen med ${LISTANS_KNAPPAR.oppna}.`) && b.knapp === '/app#lagg-till', b);
     ska('iPhone: länken Appen Metodbanken syns i Planera insatsen', (await f.kor(`getComputedStyle(document.querySelector('.app-lank')).display`)) === 'block');
+    // En ruta om var planen sparas i Safari: beskedet har Ladda ner planen när planen är sparad (användbarhetsprovet 2026-11-23).
+    const fore = await f.kor(`!!document.querySelector('#pl-besked [data-gor="kopia-besked"]:not([hidden])')`);
+    await f.kor(`document.getElementById('pl-spara').click()`);
+    const efter = await f.kor(`({ knapp: document.querySelector('#pl-besked [data-gor="kopia-besked"]:not([hidden])')?.textContent ?? '', overst: !!document.querySelector('#pl-lage .pl-kopia-overst') })`);
+    ska('iPhone i Safari: beskedet om appen har Ladda ner planen när planen är sparad, och raden överst säger det inte en gång till', !fore && efter.knapp === 'Ladda ner planen' && !efter.overst, { fore, efter });
+    await f.kor(`localStorage.clear()`);
   }
   if (larDiga.length) {
     await f.oppna(`${bas}/metoder/${larDiga[0]}/lar-dig`);

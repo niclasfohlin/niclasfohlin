@@ -158,7 +158,7 @@ export function beskedet(id: string) {
 /** En lovvecka som knapp: kalenderveckan och skolveckans dagar, tryckt när veckan är lov, och låst när något är infört i veckan eller senare, ur det senast införda datumet (lovetLast i standarden). */
 export function lovknapp(m: string, lov: Set<string>, sista: string | undefined) {
   const k = veckonyckel(m), pa = lov.has(k), v = isoVecka(m).vecka, dagar = esc(spannKort(m, skolveckan(m).till));
-  return `<button type="button" class="pl-chip pl-lovchip" data-lovvecka="${k}" aria-pressed="${pa}"${lovetLast(m, sista) ? ' disabled' : ''} aria-label="${stor(kalenderveckaUtskriven(v))}, ${dagar}${pa ? ', lov' : ''}"><span>${kalendervecka(v)}</span><small>${dagar}</small></button>`;
+  return `<button type="button" class="pl-chip pl-lovchip" data-lovvecka="${k}" aria-pressed="${pa}"${lovetLast(m, sista) ? ' disabled' : ''} aria-label="${stor(kalenderveckaUtskriven(v))}, ${dagar}${pa ? ', lov' : ''}${lovetLast(m, sista) ? ', går inte att ändra' : ''}"><span>${kalendervecka(v)}</span><small>${dagar}</small></button>`;
 }
 
 /** En vecka i remsan överst, i båda lagren: talet och vilken gång, vald när den visas, och märkt när den är veckan läraren eller gruppen är i, med steg som det aktuella steget för en skärmläsare. */
