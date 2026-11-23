@@ -523,6 +523,15 @@ const metodensFalt = z.strictObject({
       // atgard: raden Åtgärd i texten till åtgärdsprogrammet, ordagrant ur metoden, i en metod där åtgärden är det de vuxna gör,
       // som Relationell vägledning. Utan fältet är åtgärden titeln och undertiteln.
       atgard: text.optional(),
+      // valet: det eleven väljer med läraren och som gäller i alla veckor, som tecknet och den lugna platsen i Relationell
+      //   vägledning (K-822; Niclas 2026-11-23: "De två behöver också tidigt planeras och tränas i insatsen och i Planera
+      //   insatsen"). rubrik är namnet på metodens del eller avsnitt som förklarar det, nar metodens mening om när det väljs,
+      //   senare meningen om ett val som kommer senare, fraga metodens fråga till eleven och falt fältens namn. Planen visar
+      //   ett band överst i Före och i varje vecka, och det valda står i texten till åtgärdsprogrammet.
+      // ovning: övningen av det valda, med metodens mening, gånger i veckan och veckor från valet, och lov, metodens mening om
+      //   att öva igen efter ett lov. Planen ger varje gång en ring att bocka i Veckans pass (ovningensVeckor i standarden).
+      valet: z.strictObject({ rubrik: text, nar: text, senare: text.optional(), fraga: text.optional(), falt: z.array(z.string().trim().min(1).max(30)).min(1).max(4) }).optional(),
+      ovning: z.strictObject({ namn: z.string().trim().min(1).max(30), text, ganger: z.number().int().min(1).max(5), veckor: z.number().int().min(1).max(4), lov: text.optional() }).optional(),
       stege: z.boolean().optional(),
       // vantar: skälet till att planen inte visas än, fast metoden har fälten, tills planen har klarat Rimligheten (K-553).
       vantar: text.optional(),

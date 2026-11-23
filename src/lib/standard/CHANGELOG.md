@@ -1,5 +1,11 @@
 # Ändringar i standarden
 
+## 0.68.0, 2026-11-23
+
+- `plan.js` (sajtens K-822; Niclas 2026-11-23 om tecknet och den lugna platsen i Relationell vägledning: "De två behöver också tidigt planeras och tränas i insatsen och i Planera insatsen"): `plan.valet` och `plan.ovning` i `planensTexter`, så att deras meningar citerar metoden. `ovningensVeckor(plan, valet, ovning)`, veckorna med övningen från veckan då valet sparades och veckan efter varje lov, och `ovningensBock`. Följden har `valet`, det eleven har valt och veckan då det sparades, och `ovat`, övningens bockar (`rensaFoljd`, `VALETS_NAMN`, `VALETS_LANGD`). Det valda står i texten till åtgärdsprogrammet efter målet (`dokumentationsrader`, `info.valet`). Reglerna står i REGLER.md under Det eleven väljer.
+- `saker.js` (sajtens K-822): `sakernasText` har valet `enAdress`, med vilket en adress leder dit en gång i en text. Planera insatsen använder det, så att "tecknet och den lugna platsen (del 2)" blir en länk till del 2 och inte tre. Metoder länkar som förut.
+- `text.js` (sajtens K-822): `meningarna` läser inte ett stegs nummer först på en rad, "4. ", som en del av meningen före, så att den sista meningen i ett numrerat steg går att citera.
+
 ## 0.67.0, 2026-11-23
 
 - `index.js` (sajtens K-816; riggens förslag 2026-11-22): `gruppensElever` läser "En elev och en vuxen" som en till en, `faktaIFastForm` säger "1 elev", och `arEnElev(d)` säger om metoden har en elev. `plan.js`: `vemsOrd(enElev)`, orden gruppen eller eleven, `elevernasKolumnen(enElev)`, progressionens kolumn, och `AVSLUTETS_ANLEDNINGAR.enElev`. `metodplan` och planen bär `enElev`, och sammanställningens namn är Eleven. `metodplan` läser `grupp`.

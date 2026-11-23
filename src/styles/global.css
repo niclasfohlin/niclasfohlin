@@ -3698,6 +3698,13 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-mal.andras { display: block; padding: 0.7rem 0.8rem; }
 .pl-malfalt { max-width: none; }
 .pl-samman .pl-mal { background: var(--farg-ton-svag); }
+/* Det eleven väljer (K-822): målets band, med rubriken som länk till metodens del och det valda en rad per fält. */
+.pl-valet a.pl-etikett { color: var(--farg-text); text-decoration: underline; text-underline-offset: 0.15em; }
+.pl-valet.tomt .pl-maltext p { margin: 0.15rem 0 0; font-weight: 400; }
+.pl-valet.tomt .pl-maltext p + p { margin-top: 0.5rem; }
+.pl-valet .pl-valetnamn { margin: 0.6rem 0 0.25rem; }
+.pl-valet .pl-valetfalt { max-width: none; width: 100%; }
+.pl-passlista .pl-ringar { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.3rem; }
 
 /* Valen */
 .pl-andra { margin: 1.25rem 0; }

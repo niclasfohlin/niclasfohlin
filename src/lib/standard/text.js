@@ -90,12 +90,13 @@ export const slutarMedPunkt = (m) => /[.!?…]["”»’)]*$/u.test(m);
 /**
  * Meningarna i en text: en mening slutar med punkt, utropstecken, frågetecken eller tre punkter, också inom citattecken,
  * före ett ord med stor bokstav eller textens slut. Förkortningar som t.ex. delar inte, och ett citat som ”Hej!” mitt i en
- * mening inte heller.
+ * mening inte heller. Stegens nummer först på en rad, "1. " och "4. ", hör inte till någon mening, så att den sista meningen i
+ * ett steg slutar där (sajtens K-822: "Öva igen efter ett lov …" i Relationell vägledning lästes med nästa stegs "4.").
  * @param {unknown} text
  * @returns {string[]}
  */
 export function meningarna(text) {
-  const t = String(text ?? '').trim();
+  const t = String(text ?? '').replace(/(^|\n)[ \t]*\d{1,2}\.[ \t]+(?=\S)/gu, '$1').trim();
   if (!t) return [];
   const ut = [];
   let fran = 0;

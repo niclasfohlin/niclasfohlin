@@ -111,6 +111,21 @@ plan:
 
 Bort med delen: ta bort fältet. Uppföljningens rader står kvar och visas som förut, med reglerna under Håll koll på. Bygget stannar på en rad som metoden inte har, en tid utan veckor, en skala vars tabell inte säger varje steg, en regel som inte går att läsa eller vars rad inte är ett villkor, fler än en skattning av gruppen, ett namn som inget blad har och ett blad som eleverna fyller i utan formulär (`metodensSkattningar` och `planensDelarFel` här, som riggen också kör).
 
+## Det eleven väljer
+
+En metod där eleven väljer något med läraren som gäller i alla veckor, och övar det, har det i Planera insatsen (sajtens K-822; Niclas 2026-11-23 om tecknet och den lugna platsen i Relationell vägledning: "De två behöver också tidigt planeras och tränas i insatsen och i Planera insatsen"). Formen valdes ur en Sonnets och en Opus idéer: ett band i målets form överst i Före och i varje vecka, och en rad med en ring per gång i Veckans pass.
+
+| Fält | Vad det är |
+|---|---|
+| `plan.valet.rubrik` | Namnet på metodens del i uppslagsverket, eller avsnittet, som förklarar valet. Bandets rubrik leder dit, och bygget stannar på en rubrik som metoden inte har |
+| `plan.valet.nar` | Metodens mening om när det väljs, ordagrant. Bandet visar den när inget är valt |
+| `plan.valet.senare` | Valfri: metodens mening om ett val som kommer senare. Bandet visar den i stället efter insatsens första vecka |
+| `plan.valet.fraga` | Valfri: metodens fråga till eleven, ordagrant, som står där läraren skriver in |
+| `plan.valet.falt` | Fältens namn, ett till fyra, som Tecknet, Den lugna platsen och Det som lugnar |
+| `plan.ovning` | Övningen av det valda: `namn`, radens namn, `text`, metodens mening om övningen, `ganger`, gånger i veckan (1 till 5), `veckor`, veckor från valet (1 till 4), och valfritt `lov`, metodens mening om att öva igen efter ett lov. Kräver `plan.valet` |
+
+Övningens veckor räknas från veckan då valet sparas, och från insatsens första vecka när det valdes före (`ovningensVeckor`), så att planen aldrig visar en övning av något som inte är valt. Med `lov` kommer övningen igen i veckan efter varje uppehåll i planens veckor. Metodens mening om övningen står under raden i veckorna från insatsens början, och meningen om lovet i veckan efter ett lov. Det valda står i texten till åtgärdsprogrammet och i sammanställningen. Meningarna i `nar`, `senare`, `fraga`, `text` och `lov` prövas som planens andra citat (`planensCitatFel`).
+
 ## Det som kommer
 
 Lösningsförslaget som eget blad (K-423) och texternas och faktatexternas databaser är gjorda i testversion 2. Sedan, i etapp 2, databasen som egen fil, omvandlingen mellan riggens ramar och posterna åt båda hållen, mallarnas register och steget att lyfta ut en mall ur en metod. Före etapp 2 för sajten och riggen ett samtal om modulen.

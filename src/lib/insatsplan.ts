@@ -9,7 +9,7 @@ import { lektionsnamn } from './serie';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
-import { metodensUppslag, UPPSLAGETS_ANKARE } from './uppslag';
+import { metodensUppslag, UPPSLAGETS_ANKARE, uppslagsAdress } from './uppslag';
 import { kursensVeckor, metodensSaker, sakernaI, sidansAnkare, type MetodSak } from './metodsaker';
 import { passOversikt } from './metod';
 import { CENTRALA, lasbarAdress } from './centrala';
@@ -129,6 +129,10 @@ export interface PlanData {
   utvardering?: string[];
   /** Åtgärden i texten till åtgärdsprogrammet, ur metoden (plan.atgard). */
   atgard?: string;
+  /** Det eleven väljer (plan.valet, K-822), med adressen till metodens del eller avsnitt som rubriken leder till. */
+  valet?: { rubrik: string; adress: string; nar: string; senare?: string; fraga?: string; falt: string[] };
+  /** Övningen av det valda (plan.ovning, K-822). */
+  ovning?: { namn: string; text: string; ganger: number; veckor: number; lov?: string };
   /** Planen har ingen knapp Upprepa veckan (plan.utanUpprepa, K-586). */
   utanUpprepa?: true;
   /** Uppföljningens rad som beslutet efter insatsen väntar på (plan.utvarderasEfter), som radens nummer. */
@@ -444,6 +448,18 @@ async function planensLektioner(m: Metod): Promise<PlanLektion[]> {
   }));
 }
 
+/**
+ * Adressen som bandet med det eleven väljer leder till (K-822): delen i metodens uppslagsverk som heter som rubriken, eller
+ * metodens avsnitt eller tabell med den rubriken.
+ */
+export function valetsAdress(d: Metod['data'], id: string): string | undefined {
+  const rubrik = d.plan?.valet?.rubrik;
+  if (!rubrik) return undefined;
+  const del = metodensUppslag(d)?.delar.find((x) => x.namn === rubrik);
+  if (del) return uppslagsAdress(id, del);
+  return metodensSaker(d, id).find((s) => s.namn === rubrik && s.adress.startsWith(`/stodundervisning/${id}#`))?.adress;
+}
+
 /** Planens data ur metodens fil. */
 export async function planensData(m: Metod, version?: string): Promise<PlanData> {
   const d = m.data;
@@ -556,6 +572,8 @@ export async function planensData(m: Metod, version?: string): Promise<PlanData>
     ...(iVLista(d.plan?.utvardering) ? { utvardering: iVLista(d.plan?.utvardering) } : {}),
     ...(d.plan?.utvarderasEfter && uppfRader.some((r) => r.nar === d.plan!.utvarderasEfter) ? { utvarderasEfter: uppfRader.findIndex((r) => r.nar === d.plan!.utvarderasEfter) } : {}),
     ...(d.plan?.atgard ? { atgard: d.plan.atgard } : {}),
+    ...(d.plan?.valet && valetsAdress(d, m.id) ? { valet: { ...d.plan.valet, adress: valetsAdress(d, m.id)! } } : {}),
+    ...(d.plan?.ovning ? { ovning: d.plan.ovning } : {}),
     ...(d.plan?.upprepa ? { upprepa: d.plan.upprepa } : {}),
     ...(d.plan?.utanUpprepa ? { utanUpprepa: true as const } : {}),
     ...(d.plan?.stege ? { stege: true } : {}),
@@ -674,6 +692,10 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     for (const l of (await publicerade('stodundervisning')).filter((x) => x.data.serie === m.id)) for (const f of lektionsvaletsFel(l.data)) fel.push(`${l.id}: ${f}`);
   }
   if (m.data.plan?.enPerPass && !(harTaFram(m, 'texter') || harTaFram(m, 'problem'))) fel.push('plan.enPerPass gäller en metod med en bank, där planen visar passets post.');
+  // Det eleven väljer och övningen (K-822): rubriken är metodens del eller avsnitt som förklarar valet, så att bandet leder
+  // dit, och övningen räknas från valet.
+  if (m.data.plan?.valet && !valetsAdress(m.data, m.id)) fel.push(`plan.valet har rubriken "${m.data.plan.valet.rubrik}", men metoden har ingen del i uppslagsverket eller något avsnitt som heter så. Skriv namnet som delen eller avsnittet heter.`);
+  if (m.data.plan?.ovning && !m.data.plan.valet) fel.push('plan.ovning räknas från det eleven väljer, så metoden behöver plan.valet.');
   // Ett namn som ser ut som en sak i metoden men inte är någon av dem blir ingen länk i planen (K-493).
   const saker = metodensSaker(m.data, m.id);
   for (const [plats, text] of planensTexter(m.data)) for (const namn of olankadeSaker(text, saker)) fel.push(`${plats} nämner "${namn}", men metoden har ingen sak som heter så, och då blir det ingen länk i planen. Skriv namnet som bladet, kortet eller mallen heter i metoden, eller lägg saken i metoden (STIL.md under Hänvisningar).`);

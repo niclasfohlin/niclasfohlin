@@ -1,13 +1,28 @@
 /**
  * En text med metodens saker, där saken blir det sidan gör av den, som en länk, och resten det sidan gör av en text: en rot
- * för planens sidor i båda lagren, Planera insatsen och Lär dig metoden (sajtens K-630; samma följd stod i båda).
- * @template {{ namn: string, former?: string[], versal?: boolean, forst?: boolean }} S
+ * för planens sidor i båda lagren, Planera insatsen och Lär dig metoden (sajtens K-630; samma följd stod i båda). Med
+ * enAdress leder en adress dit en gång i texten, som på stödmetodens sida en gång under varje rubrik: en sak till med samma
+ * adress står som text (sajtens K-822: "tecknet och den lugna platsen med dig i vecka 1 (del 2)" gav tre länkar till del 2
+ * i en mening i Planera insatsen). Metoder länkar varje omnämnande, och metoderprovet kräver det.
+ * @template {{ namn: string, former?: string[], versal?: boolean, forst?: boolean, adress?: string }} S
  * @param {string} text
  * @param {S[]} saker
  * @param {(s: S, text: string) => string} sak
  * @param {(text: string) => string} annat
+ * @param {{ enAdress?: boolean }} [o]
  */
-export const sakernasText = (text, saker, sak, annat) => sakdelar(text, saker).map((x) => (x.sak === undefined ? annat(x.text) : sak(saker[/** @type {number} */ (x.sak)], x.text))).join('');
+export const sakernasText = (text, saker, sak, annat, o = {}) => {
+  const sedda = new Set();
+  return sakdelar(text, saker).map((x) => {
+    if (x.sak === undefined) return annat(x.text);
+    const s = saker[/** @type {number} */ (x.sak)];
+    if (o.enAdress && s.adress !== undefined) {
+      if (sedda.has(s.adress)) return annat(x.text);
+      sedda.add(s.adress);
+    }
+    return sak(s, x.text);
+  }).join('');
+};
 // Metodens saker i en text (sajtens K-493; Niclas 2026-10-24: "Om något är specifikt namngivet från metoden. Ett test. Ett
 // papper. En text. En specifik lektion. Då ska det vara hyperlänkat från planen", och "Du får försöka skapa en definition
 // vad namngivet och specifikt är som bör länkas"). En sak är något som metoden har ett namn på och sajten en egen adress

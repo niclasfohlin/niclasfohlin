@@ -103,7 +103,7 @@ export function rensaPlan(x: unknown): SparadPlan | null {
  * konvertering från versionen före i KONVERTERINGAR. Provfilerna i scripts/planera/filer/ är formatet som varje version skrev
  * det, och planprovet öppnar dem (PLANERA.md under Planens fil och lagringen).
  */
-export const PLANFORMAT = 4;
+export const PLANFORMAT = 5;
 /** Meningen när en nyare version av Planera insatsen har sparat planen eller planerna i webbläsaren. */
 export const NYARE_VERSION = 'Planen är sparad i en nyare version av Planera insatsen. Ladda om sidan, så kommer allt med.';
 export const PLANFILENS_TYP = 'planera-insatsen';
@@ -115,12 +115,14 @@ export const PLANFILENS_TYP = 'planera-insatsen';
  * upp, säger till och inte skriver tillbaka planerna utan de nya fälten (lagringenArNyare; Codex 2026-10-31). Version 3, från
  * Planera 0.10.0, har samma fält och lagrets svar i Lär dig metoden (inlagt i följden, K-741), så en plan i version 2 är en plan
  * i version 3 som den är, och versionen höjdes av samma skäl. Version 4, från Planera 0.11.0, har samma fält och veckan före start
- * i det läraren räknar om en elev (matt med nyckeln fore, K-815), som en äldre version rensar bort.
+ * i det läraren räknar om en elev (matt med nyckeln fore, K-815), som en äldre version rensar bort. Version 5, från Planera
+ * 0.12.0, har samma fält och det eleven väljer och övningens bockar (valet och ovat i följden, K-822), av samma skäl.
  */
 export const KONVERTERINGAR: Record<number, (plan: Record<string, unknown>) => { plan: Record<string, unknown>; varningar: string[] }> = {
   1: (plan) => ({ plan, varningar: [] }),
   2: (plan) => ({ plan, varningar: [] }),
   3: (plan) => ({ plan, varningar: [] }),
+  4: (plan) => ({ plan, varningar: [] }),
 };
 /** En plan i en äldre version av formatet, konverterad till den här, med varningarna, och en varning för en plan ur en nyare version. */
 export function konverteraPlan(plan: unknown, v: unknown): { plan: unknown; varningar: string[] } {
