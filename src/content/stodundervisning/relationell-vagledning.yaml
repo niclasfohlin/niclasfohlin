@@ -252,7 +252,7 @@ progression:
     - vecka: 1–2
       rubrik: "Relationen"
       fokus: "Stunden och hälsningen börjar (del 1). Utanför stunden, några minuter i taget när allt är lugnt, övar du och eleven tecknet (del 8)."
-      roll: "Du håller stunden, hälsar varje dag, pratar två minuter de andra dagarna och övar tecknet med eleven. Var eleven inte med på träffen, väljer ni tecknet och platsen först."
+      roll: "Du håller stunden, hälsar varje dag, pratar två minuter de andra dagarna och övar tecknet med eleven. Var eleven inte med på träffen, väljer du och eleven tecknet och platsen först."
       eleverna: "Att komma till stunden och välja vad ni gör. Att visa tecknet när ni övar."
       vidare: "eleven kommer till stunden och kan visa tecknet, gå till platsen och komma tillbaka när ni övar"
     - vecka: 3–4
@@ -264,7 +264,7 @@ progression:
     - vecka: 5–8
       rubrik: "Ett problem i taget"
       fokus: "I samtal utanför stunden, 15–25 minuter och högst tio i F–⁠3, löser du och eleven det som kommer igen, ett problem i taget (del 7)."
-      roll: "Du bjuder in till samtalet och lyssnar först. Det ni kommer överens om skriver ni gärna på bladet Vår överenskommelse. Har eleven visat tecknet i verkliga lägen, svarar ni vuxna nu med en nick. I vecka 8 säger du att stunden inte slutar efter vecka 10."
+      roll: "Du bjuder in till samtalet och lyssnar först. Det du och eleven kommer överens om skriver ni gärna på bladet Vår överenskommelse. Har eleven visat tecknet i verkliga lägen, svarar ni vuxna nu med en nick. I vecka 8 säger du att stunden inte slutar efter vecka 10."
       eleverna: "Att säga vad som är svårt i ett lugnt samtal, föreslå en lösning och pröva den."
       vidare: "det oftast räcker med en nick, och en överenskommelse har hållit i två veckor"
     - vecka: "9–10"
@@ -721,8 +721,8 @@ lathund:
       - nar: "Efter vecka 10"
         vad: "Jämför med Före. Är det färre och går eleven själv, glesar du ut stunden. Annars fortsätter du, eller tar det med elevhälsan."
 film:
-  sekunder: 29.04
-  beskrivning: "Lugn: Läraren ropar inte. Läraren tänker: ”Elias, lägg ner den!” Kontakt: Läraren går nära och talar tyst. Läraren säger: ”Du snurrar linjalen. Är det svårt att sitta still nu?” Vägledning: en sak att göra. Läraren säger: ”Lägg linjalen i pennskrinet.” Elias säger: ”Varför är det alltid jag? Melvin pratar också!” Läraren säger: ”Kanske det. Lägg linjalen i pennskrinet.” Hon går tillbaka utan att vänta. Tillsägelsen slutar med något vänligt. Läraren säger: ”Tack.”"
+  sekunder: 29.33
+  beskrivning: "Lugn: Läraren ropar inte. Läraren tänker: ”Elias, lägg ner den!” Kontakt: Läraren går nära och talar tyst. Läraren säger: ”Du har linjalen i gång. Är det svårt att sitta still nu?” Vägledning: en sak att göra. Läraren säger: ”Lägg linjalen i pennskrinet.” Elias säger: ”Varför är det alltid jag? Melvin pratade också!” Läraren säger: ”Kanske det. Lägg linjalen i pennskrinet.” Hon går tillbaka utan att vänta. Tillsägelsen slutar med något vänligt. Läraren säger: ”Tack.”"
   rubrik: "Lugn, kontakt, vägledning"
   ingress: "Fyra bilder ur filmen om en tillsägelse, med Elias i åk 4. Elias snurrar linjalen under genomgången, och Läraren låter bli att ropa från tavlan. Hon går fram till honom, frågar tyst om det är svårt att sitta still och väntar på en blick. Sedan säger hon en sak som Elias ska göra, och han protesterar. När linjalen ligger i pennskrinet säger hon tack."
   stillbilder:
