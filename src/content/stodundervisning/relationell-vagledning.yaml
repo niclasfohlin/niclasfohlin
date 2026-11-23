@@ -1,8 +1,10 @@
 # Metod i stödundervisning. Modellen står i methods/_mall.yaml och docs/modell.md.
 # Ny metod 2026-11-19 ur Niclas beställning i chatten (ARBETSORDER.md). Analysen står i analys.md och sökningarna i
 # sokning.md. De åtta delarna står som uppslag i en ram med lektioner, en sida var (analys.md, Formval). Casen har tre
-# elever, en per stadium: Elias i åk 4 (del 2, 5 och 7 och exemplet), Nora i åk 8 (del 1 och 4 och den ifyllda
-# bemötandeplanen) och Selma i åk 2 (del 3, 6 och 8).
+# elever, en per stadium: Elias i åk 4 (del 3, 6 och 8 och exemplet), Nora i åk 8 (del 1 och 5 och den ifyllda
+# bemötandeplanen) och Selma i åk 2 (del 2, 4 och 7).
+# 2026-11-23: del 8, Stöd det som fungerar, blev del 2, Tecknet och den lugna platsen, och del 2–⁠7 blev del 3–⁠8 (Niclas via
+# sajten, out/FRAN-SAJTEN.md, och analys.md, Tecknet och den lugna platsen blir del 2).
 titel: "Relationell vägledning"
 undertitel: "Så bygger du en relation som bär och använder den för att vägleda en elev som lätt hamnar i affekt, för F–⁠9"
 ingress: "Elever följer vuxna de litar på. Metoden handlar om hur du bemöter en elev som lätt hamnar i affekt: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar du första steget tillbaka. Två gånger i veckan har du och eleven en halvtimme som är elevens. I åtta delar slår du upp vad du gör, steg för steg."
@@ -45,7 +47,7 @@ pabordet:
   - nr: 1
     rubrik: "Blad: Svåra stunder vecka för vecka"
     text: "Det här är ditt blad för tio veckor, ett liggande A4."
-    alt: "Överst står rubriken Svåra stunder vecka för vecka och raderna Elev och Räknas av. Under rubriken står hur du fyller i bladet: räkna varje vecka de gånger eleven hamnade i affekt eller låste sig, och sätt ett kryss vid antalet. Räkna också lösningarna, när eleven visade tecknet, gick till sin plats eller löste det med ord, och sätt en ring vid antalet. Sedan kommer diagrammet. Antalet i veckan går från 0 till 15 uppåt, och åt höger kommer först kolumnen Före, veckan före start, och sedan vecka 1 till 10. Nederst står förklaringen: kryss och en heldragen linje för svåra stunder, ringar och en streckad linje för lösningar."
+    alt: "Överst står rubriken Svåra stunder vecka för vecka och raderna Elev och Räknas av. Under rubriken står hur du fyller i bladet: räkna varje vecka de gånger eleven hamnade i affekt eller låste sig, och sätt ett kryss vid antalet. Räkna också lösningarna, när eleven visade tecknet, gick till sin lugna plats eller löste det med ord, och sätt en ring vid antalet. Sedan kommer diagrammet. Antalet i veckan går från 0 till 15 uppåt, och åt höger kommer först kolumnen Före, veckan före start, och sedan vecka 1 till 10. Nederst står förklaringen: kryss och en heldragen linje för svåra stunder, ringar och en streckad linje för lösningar."
     efter: "ram: Svåra stunder vecka för vecka"
 inledning:
   - "Relationell vägledning handlar om hur du som vuxen bemöter en elev som lätt hamnar i affekt, har svårt att följa regler och ofta bråkar. Elever följer vuxna de litar på, och förtroendet bygger du genom hur du möter eleven: hur du hälsar, hur du säger till, hur du håller dig lugn när det hettar till och hur du tar första steget efteråt. Två gånger i veckan har du och eleven dessutom stunden, en halvtimme där eleven bestämmer vad ni gör. Hur du bemöter eleven står steg för steg i åtta delar, som du slår upp när du behöver dem."
@@ -55,18 +57,18 @@ inledning:
   - "Relationen bygger du redan innan något har hänt. Du hälsar med namnet varje dag, lika varmt efter en svår dag. I stunden gör du och eleven något eleven väljer, som att spela eller rita, vare sig hen går i klassen eller i en särskild undervisningsgrupp. Ibland gör ni något utanför schemat: går på museum, åker pulka med två kamrater eller tar med matsäck på en utflykt."
   - "När du behöver säga till, går du fram till eleven, så att de andra inte hör eller lägger märke till er. Elias i åk 4 snurrar linjalen mot bänken under genomgången. Läraren kan säga ”Elias, lägg ner den!” från tavlan och få ”Jag gör ju inget!” tillbaka, för eleven hör en tillsägelse inför klassen som skäll. Hon ger i stället klassen något att prata om, sätter sig på huk vid hans bänk och säger tyst: ”Är det svårt att sitta still nu?” Elias rycker på axlarna. ”Lägg linjalen i pennskrinet.” Sedan går hon direkt tillbaka, och när linjalen ligger där säger hon tack. Ordningen är densamma i varje möte: först lugn, sedan kontakt, sedan vägledning. Är du eller eleven uppe i varv, hör eleven inte vad du säger, hur rätt du än har."
   - "När det hettar till börjar du med dig själv. Känslor smittar. Höjer du rösten och går nära, blir eleven mer upprörd, och är du lugn, blir eleven lugnare. Du säger lite, backar ett steg och väntar. Det som ska redas ut tar du och eleven när ni båda är lugna, för en elev i affekt kan inte tänka efter. Efteråt tar du första steget tillbaka, samma dag eller nästa. Du hälsar som vanligt, hör hur eleven såg det och låter hen ställa till rätta. Eleven väntar sig skäll och får i stället veta att hen har sin plats kvar."
-  - "Kraven står kvar, men du ställer dem så att eleven kan säga ja: du förbereder eleven, säger en sak i taget och låter hen välja något inom kravet. Det som händer om och om igen löser du och eleven i ett lugnt samtal. Eleven berättar vad som är svårt, du säger din oro, och eleven föreslår en lösning, som ni gärna skriver med elevens ord på bladet Vår överenskommelse. Eleven väljer också något att göra i stället: ett tecken att visa dig när det börjar bli för mycket, och en lugn plats att gå till. Det övar ni när allt är lugnt, för den som är uppe i varv hittar bara det som redan sitter."
+  - "Kraven står kvar, men du ställer dem så att eleven kan säga ja: du förbereder eleven, säger en sak i taget och låter hen välja något inom kravet. Det som händer om och om igen löser du och eleven i ett lugnt samtal. Eleven berättar vad som är svårt, du säger din oro, och eleven föreslår en lösning, som ni gärna skriver med elevens ord på bladet Vår överenskommelse. Från start väljer eleven något att göra i stället: ett tecken att visa när det börjar bli för mycket, och en lugn plats att gå till. Det övar ni när allt är lugnt, för den som är uppe i varv hittar bara det som sitter."
   - "De åtta delarna bygger på det som fem arbetssätt är överens om. Arbetssätten är kontakt före korrigering, positivt beteendestöd (PBS), Nonviolent Communication (NVC), Greenes samarbetsbaserade problemlösning (CPS) och lågaffektivt bemötande. Bemötandet fungerar bara om alla vuxna runt eleven gör likadant. Därför träffas ni i arbetslaget före start och skriver en bemötandeplan tillsammans. Ni övar några lägen, och varannan vecka går ni tillbaka till planen och ser om ni behöver ändra något. Vi vuxna kan inte alltid påverka hur eleven beter sig. Det vi kan påverka är hur vi beter oss mot eleven."
   - "Eleverna som metoden är till för hör till dem som skolan har svårast att lyckas med, och bakslagen kommer hur väl ni vuxna än gör det här. Räkna med två steg fram och ett tillbaka. Målet är färre och kortare svåra stunder och en snabbare väg tillbaka, och en elev som vet att det finns vuxna i skolan som inte ger upp. Du för in de svåra stunderna vecka för vecka på en kurva. De blir sällan noll i en skola full av krav, men de ska bli färre. För en del barn är du en av få vuxna utanför familjen som inte ger upp. Det är skäl nog att fortsätta försöka."
 upplagg:
   rubrik: "Så fungerar insatsen"
-  text: "I tio veckor gör alla vuxna runt eleven likadant i varje möte: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar den vuxne första steget tillbaka. Arbetslaget runt eleven träffas före start, skriver en bemötandeplan och ser över den varannan vecka. Du som håller i insatsen har stunden med eleven två gånger i veckan, en halvtimme där eleven väljer vad ni gör, och ibland gör ni något utanför schemat. Varje fredag räknar du veckans svåra stunder och säger något bra som eleven har gjort. Efter vecka 10 ser arbetslaget om de har blivit färre och bestämmer fortsättningen."
+  text: "I tio veckor gör alla vuxna runt eleven likadant i varje möte: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar den vuxne första steget tillbaka. Arbetslaget träffas före start, skriver en bemötandeplan och ser över den varannan vecka. Du som håller i insatsen har stunden två gånger i veckan, en halvtimme där eleven väljer vad ni gör. Eleven väljer ett tecken och en lugn plats och övar med dig från vecka 1. Varje fredag räknar du veckans svåra stunder och säger något bra som eleven gjorde. Efter vecka 10 ser arbetslaget om de har blivit färre och bestämmer fortsättningen."
 gruppen:
   rubrik: "Vem metoden är för"
   text: "Metoden är för en elev i F–⁠9 som ofta hamnar i affekt eller stänger av, har svårt att följa regler och ofta bråkar, när anpassningarna i klassrummet inte har räckt. Är någon i fara, eller har någon blivit kränkt, gäller skolans rutin, och den går före metoden. Elevhälsan är med från början. Oroar du dig för hur eleven har det hemma, eller behöver eleven vård eller en utredning, följer skolan sin rutin, och insatsen kan gå bredvid. En vuxen håller i insatsen: klassläraren eller mentorn, en speciallärare, en resurs eller en fritidspedagog. Vårdnadshavarna och de andra vuxna är med i planen."
 principer:
   rubrik: "Tre saker att hålla fast vid"
-  text: "Lugn kommer före kontakt, och kontakt före vägledning: är du eller eleven uppe i varv (del 4 och del 5), väntar tillsägelsen, samtalet och kravet, och när ni båda är lugna ställer du kravet igen på ett annat sätt. Stunden är elevens, och den ställs inte in efter en dålig dag, eftersom relationen inte får hänga på uppförandet. Första steget tillbaka tar du efter en svår stund, samma dag eller nästa (del 6), så att eleven vet att hen har sin plats kvar."
+  text: "Lugn kommer före kontakt, och kontakt före vägledning: är du eller eleven uppe i varv (del 5 och del 6), väntar tillsägelsen, samtalet och kravet, och när ni båda är lugna ställer du kravet igen på ett annat sätt. Stunden är elevens, och den ställs inte in efter en dålig dag, eftersom relationen inte får hänga på uppförandet. Första steget tillbaka tar du efter en svår stund, samma dag eller nästa (del 7), så att eleven vet att hen har sin plats kvar."
 tabeller:
   - rubrik: "Åtta delar: slå upp den du behöver"
     plats: "efter-inledning"
@@ -79,27 +81,27 @@ tabeller:
       - - "Del 1\nBygg relationen i förväg"
         - "Varje dag från start, mest när eleven håller sig undan vuxna."
         - "Relationen byggs när du inte vill något."
-      - - "Del 2\nKontakt före korrigering"
+      - - "Del 2\nTecknet och den lugna platsen"
+        - "Från vecka 1: eleven väljer och övar när allt är lugnt."
+        - "Eleven visar tecknet, och ni vuxna svarar varje gång."
+      - - "Del 3\nKontakt före korrigering"
         - "Du behöver säga till, och eleven är lugn nog att höra dig."
         - "Kontakt först, sedan en sak att göra."
-      - - "Del 3\nStäll krav så att eleven kan säga ja"
+      - - "Del 4\nStäll krav så att eleven kan säga ja"
         - "Du ska be om något du vet är svårt, eller eleven sitter tyst och gör ingenting."
         - "Kravet står kvar. Du ändrar hur du ställer det."
-      - - "Del 4\nHåll dig själv lugn"
+      - - "Del 5\nHåll dig själv lugn"
         - "Du känner att du själv går upp i varv."
         - "Ditt lugn kommer före elevens."
-      - - "Del 5\nLugna när det trappas upp"
+      - - "Del 6\nLugna när det trappas upp"
         - "Eleven håller på att tappa kontrollen, eller har stängt av helt."
         - "Färre ord, färre krav och färre människor."
-      - - "Del 6\nLaga efteråt"
+      - - "Del 7\nLaga efteråt"
         - "Det har varit en svår stund, och du ska möta eleven igen."
         - "Du tar första steget tillbaka."
-      - - "Del 7\nNå en överenskommelse"
+      - - "Del 8\nNå en överenskommelse"
         - "Samma sak har hänt flera gånger."
         - "Hur eleven ser det först, sedan din oro, sedan en lösning för er båda."
-      - - "Del 8\nStöd det som fungerar"
-        - "Från vecka 1, mest när eleven inte har något att ta till."
-        - "Ett tecken och en plats, övade när det är lugnt."
     not: "Varje del står längre fram, under Materialet, med stegen, ett case och skälen."
   - rubrik: "Om något händer i stunden"
     plats: "efter-tidsschema"
@@ -114,7 +116,7 @@ tabeller:
       - - "Eleven prövar dig"
         - "Säg lugnt en gång vad som gäller, och fortsätt."
       - - "Det trappas upp"
-        - "Gör som bemötandeplanen säger (del 5)."
+        - "Gör som bemötandeplanen säger (del 6)."
       - - "Eleven vill inte sluta"
         - "Säg var bygget eller spelet står till nästa gång."
       - - "Du måste flytta stunden eller är borta"
@@ -124,7 +126,7 @@ tabeller:
   - rubrik: "De vuxna runt eleven: alla gör likadant"
     plats: "efter-steg"
     meny: true
-    text: "Före start träffas arbetslaget, hemmet och elevhälsan runt eleven och skriver en bemötandeplan på ett A4. Du leder träffen. Börja med det som fungerar: när, var och med vem går det bra? Ta sedan det som brukar bli svårt, som uppgifter, övergångar och kamrater, utan att nämna vad eleven gör. Sedan bestämmer ni kravet nu och det som får vänta, och sist vad ni gör i de fyra lägena: en vanlig dag, på väg upp, tappat kontrollen och lugn igen. Efter träffen övar ni i arbetslaget några lägen, med en kollega som spelar eleven: hur ni säger till, hur ni svarar på tecknet och vad ni gör när det trappas upp. Varannan vecka tar ni fram planen och frågar: gjorde vi som den säger, och behöver vi ändra något i hur vi bemöter eleven? Mallen och ett ifyllt exempel finns under Materialet."
+    text: "Före start träffas arbetslaget, hemmet och elevhälsan runt eleven och skriver en bemötandeplan på ett A4. Du leder träffen. Börja med det som fungerar: när, var och med vem går det bra? Ta sedan det som brukar bli svårt, som uppgifter, övergångar och kamrater, utan att nämna vad eleven gör. Sedan bestämmer ni kravet nu och det som får vänta, och sist vad ni gör i de fyra lägena: en vanlig dag, på väg upp, tappat kontrollen och lugn igen. Är eleven med, väljer hen tecknet och den lugna platsen (del 2). Efter träffen övar ni i arbetslaget några lägen, med en kollega som spelar eleven: hur ni säger till, hur ni svarar på tecknet och vad ni gör när det trappas upp. Varannan vecka tar ni fram planen och frågar: gjorde vi som den säger, och behöver vi ändra något i hur vi bemöter eleven? Mallen och ett ifyllt exempel finns under Materialet."
     kolumner:
       - "Vem"
       - "Gör"
@@ -215,7 +217,7 @@ exempel:
     text: "Elias i åk 4 hamnar i bråk på rasterna, och ett par gånger i veckan slutar en lektion med att han skriker eller springer ut. Klassläraren Karin håller i insatsen."
   text:
     - "Veckan före start räknar Karin sex svåra stunder, och som längst tar det resten av dagen innan Elias är tillbaka. Han ger skolan tre av tio. Med Elias, hans pappa och arbetslaget skriver hon bemötandeplanen. På frågan vad som blir bättre om det här går bättre svarar Elias: ”Att få vara med på fotbollen.” Som tecken väljer han handen på huvudet, som syns både i klassrummet och på rasten. Som lugn plats väljer han soffan i kapprummet."
-    - "De första stunderna bygger han lego och svarar knappt. Den fjärde stunden ber han Karin hålla bygget medan han sätter på taket. När de har övat tecknet lägger han en dag handen på huvudet under matten. ”Gå du”, säger Karin tyst, och han går till soffan. I vecka 5 sveper han matteboken i golvet efter lunchrasten (del 5), och veckan efter har de sitt första samtal om matten efter rasten (del 7)."
+    - "De första stunderna bygger han lego och svarar knappt. Den fjärde stunden ber han Karin hålla bygget medan han sätter på taket. När de har övat tecknet lägger han en dag handen på huvudet under matten. ”Gå du”, säger Karin tyst, och han går till soffan. I vecka 5 sveper han matteboken i golvet efter lunchrasten (del 6), och veckan efter har de sitt första samtal om matten efter rasten (del 8)."
     - "Vecka 7 blir den bästa hittills. Han har två svåra stunder och är tillbaka inom tio minuter båda gångerna. Veckan efter är Karin borta en dag. Vikarien säger till honom från tavlan och svarar inte på hans tecken. Elias välter bänken och springer hem. Skolan ringer hem, som skolans rutin säger. Nästa morgon lägger Karin bemötandeplanen överst i vikariepärmen, hälsar på Elias som vanligt och har stunden som planerat."
     - "Den sista fredagen ger Elias skolan sju av tio, mot tre före start. Karin säger: ”Du visade tecknet fyra gånger, och tre gånger gick du själv.” Hon visar honom kurvan, som har gått från sex svåra stunder till två. Elias vill att hon berättar hemma att han har varit med på fotbollen hela veckan. De bestämmer att stunden blir en gång i veckan fram till jul."
 fastnar:
@@ -226,18 +228,18 @@ fastnar:
     - "Vad gjorde vi vuxna då?"
   trappaText: "Pröva i den här ordningen, och ta nästa först när det förra är prövat:"
   trappa:
-    - "Gör som vanligt i morgon: hälsningen, stunden och första steget tillbaka (del 6). Ett bakslag avbryter inte insatsen."
+    - "Gör som vanligt i morgon: hälsningen, stunden och första steget tillbaka (del 7). Ett bakslag avbryter inte insatsen."
     - "Läs bemötandeplanen med arbetslaget. Gjorde alla lika, och fick elevens tecken svar? En vanlig orsak är att en vuxen inte har läst planen, till exempel en vikarie."
-    - "Välj färre krav ett tag, och lägg resten åt sidan med flit (del 3). Se om de svåra stunderna blir färre."
-    - "Gör om en överenskommelse som inte håller (del 7). Fråga eleven vad som har ändrats."
+    - "Välj färre krav ett tag, och lägg resten åt sidan med flit (del 4). Se om de svåra stunderna blir färre."
+    - "Gör om en överenskommelse som inte håller (del 8). Fråga eleven vad som har ändrats."
     - "Ta upp det med elevhälsan och vårdnadshavarna. Blir de svåra stunderna farligare, gör du det samma dag. Fortsätter de svåra stunderna att öka tre veckor efter att ni vuxna har ändrat bemötandet, behöver eleven mer än den här insatsen."
   motto: "Två steg fram och ett tillbaka är också framåt."
 lararensFragor:
   fragor:
     - fraga: "Kom eleven undan?"
-      svar: "Nej. Medan eleven är i affekt säger du inget om följder, för då kan hen inte ta emot dem. Samma dag eller nästa ställer eleven till rätta (del 6), och du ställer kravet igen (del 3). Skolans regler gäller som för alla."
+      svar: "Nej. Medan eleven är i affekt säger du inget om följder, för då kan hen inte ta emot dem. Samma dag eller nästa ställer eleven till rätta (del 7), och du ställer kravet igen (del 4). Skolans regler gäller som för alla."
     - fraga: "Får jag ställa krav på en elev som lätt hamnar i affekt?"
-      svar: "Ja. Förbered eleven. Säger eleven nej, gör du kravet mindre men tar inte bort det (del 3)."
+      svar: "Ja. Förbered eleven. Säger eleven nej, gör du kravet mindre men tar inte bort det (del 4)."
     - fraga: "Får jag ställa in stunden?"
       svar: "Nej, inte för att eleven har haft en dålig dag. Då hänger relationen på uppförandet. Vad du gör när du måste flytta den eller är borta står under Om något händer i stunden."
     - fraga: "Vad gör jag med de andra eleverna när det brister?"
@@ -245,36 +247,36 @@ lararensFragor:
     - fraga: "Vad säger jag till klassen efteråt?"
       svar: "När eleven inte är i rummet säger du kort vad klassen gjorde bra, och att eleven är välkommen tillbaka. Tycker någon att det är orättvist, säger du att alla får det de behöver, och att inte alla behöver samma sak."
     - fraga: "Vad gör jag när jag själv inte orkar tycka om eleven?"
-      svar: "Det går att lära sig. Påminn dig om att det eleven gör ofta är ett försvar, och leta efter en sak du tycker om hos hen. Säg till en kollega att du inte orkar, och byt av varandra i de svåra stunderna (del 4)."
+      svar: "Det går att lära sig. Påminn dig om att det eleven gör ofta är ett försvar, och leta efter en sak du tycker om hos hen. Säg till en kollega att du inte orkar, och byt av varandra i de svåra stunderna (del 5)."
 progression:
   text: "Delarna gäller från första dagen, när de behövs. Vecka för vecka lägger ni vuxna mest kraft på en sak, och eleven tar över mer. Svaret på tecknet ändrar ni först när eleven klarar det som står under Gå vidare när, och då säger du det till eleven och skriver det i bemötandeplanen. Annars stannar ni i raden, och ni tar beslutet efter vecka 10 ändå."
   rader:
     - vecka: 1–2
       rubrik: "Relationen"
-      fokus: "Stunden och hälsningen börjar (del 1). Utanför stunden, några minuter i taget när allt är lugnt, övar du och eleven tecknet (del 8)."
-      roll: "Du håller stunden, hälsar varje dag, pratar två minuter de andra dagarna och övar tecknet med eleven. Var eleven inte med på träffen, väljer du och eleven tecknet och platsen först."
+      fokus: "Stunden och hälsningen börjar (del 1). I vecka 1 och 2 övar du och eleven tecknet två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt."
+      roll: "Du håller stunden, hälsar varje dag och pratar två minuter de andra dagarna. Var eleven inte med på träffen, väljer hen tecknet och den lugna platsen med dig i vecka 1 (del 2)."
       eleverna: "Att komma till stunden och välja vad ni gör. Att visa tecknet när ni övar."
-      vidare: "eleven kommer till stunden och kan visa tecknet, gå till platsen och komma tillbaka när ni övar"
+      vidare: "eleven kommer till stunden och kan visa tecknet, gå till den lugna platsen och komma tillbaka när ni övar"
     - vecka: 3–4
       rubrik: "Tecknet"
-      fokus: "Eleven börjar visa tecknet när det behövs (del 8)."
+      fokus: "Eleven börjar visa tecknet när det behövs (del 2)."
       roll: "Du påminner om tecknet före det svåra och säger vad du ser när det börjar. Varje gång eleven visar tecknet svarar ni vuxna tyst: ”Gå du.”"
       eleverna: "Att visa sitt tecken i tid, gå till sin lugna plats och komma tillbaka."
       vidare: "eleven har visat tecknet i verkliga lägen två veckor i rad"
     - vecka: 5–8
       rubrik: "Ett problem i taget"
-      fokus: "I samtal utanför stunden, 15–25 minuter och högst tio i F–⁠3, löser du och eleven det som kommer igen, ett problem i taget (del 7)."
+      fokus: "I samtal utanför stunden, 15–25 minuter och högst tio i F–⁠3, löser du och eleven det som kommer igen, ett problem i taget (del 8)."
       roll: "Du bjuder in till samtalet och lyssnar först. Det du och eleven kommer överens om skriver ni gärna på bladet Vår överenskommelse. Har eleven visat tecknet i verkliga lägen, svarar ni vuxna nu med en nick. I vecka 8 säger du att stunden inte slutar efter vecka 10."
       eleverna: "Att säga vad som är svårt i ett lugnt samtal, föreslå en lösning och pröva den."
       vidare: "det oftast räcker med en nick, och en överenskommelse har hållit i två veckor"
     - vecka: "9–10"
       rubrik: "Eleven själv"
       fokus: "Eleven visar tecknet och går utan att vänta. Du nickar ändå."
-      roll: "Du säger efteråt vad du såg. Den sista fredagen läser du elevens mål i bemötandeplanen med eleven. Tar eleven själv upp något svårt, föreslår eleven en lösning först (del 7)."
+      roll: "Du säger efteråt vad du såg. Den sista fredagen läser du elevens mål i bemötandeplanen med eleven. Tar eleven själv upp något svårt, föreslår eleven en lösning först (del 8)."
       eleverna: "Att gå själv i tid, och själv säga med ord när något är svårt. Att säga vad som har blivit lättare och vad hen vill ha kvar."
 uppfoljning:
   rubrik: "Så ser du att det hjälper"
-  text: "Du som håller i insatsen räknar varje vecka två saker. Den ena är de svåra stunderna, när eleven hamnade i affekt eller låste sig. Den andra är lösningarna, när eleven visade tecknet, gick till sin plats eller löste det med ord. Det som hör ihop räknas en gång, så tecknet, platsen och vägen tillbaka är en lösning. De andra vuxna berättar för dig samma dag när eleven hade en svår stund eller visade tecknet. På bladet Svåra stunder vecka för vecka sätter du ett kryss vid antalet svåra stunder och en ring vid antalet lösningar, och drar linjerna från förra veckan. Talen ger ingen belöning och inget straff, men visar er vuxna och eleven vart det är på väg."
+  text: "Du som håller i insatsen räknar varje vecka två saker. Den ena är de svåra stunderna, när eleven hamnade i affekt eller låste sig. Den andra är lösningarna, när eleven visade tecknet, gick till sin lugna plats eller löste det med ord. Det som hör ihop räknas en gång, så tecknet, den lugna platsen och vägen tillbaka är en lösning. De andra vuxna berättar för dig samma dag när eleven hade en svår stund eller visade tecknet. På bladet Svåra stunder vecka för vecka sätter du ett kryss vid antalet svåra stunder och en ring vid antalet lösningar, och drar linjerna från förra veckan. Talen ger ingen belöning och inget straff, men visar er vuxna och eleven vart det är på väg."
   rader:
     - nar: "Före start"
       tid: "före"
@@ -310,10 +312,11 @@ checklista:
     - "Bestämt vem som håller i insatsen, vem som tar stunden när hen är borta, och en plats och två tider för stunden."
     - "Ringt vårdnadshavarna och frågat vad som lugnar och vad de märker innan det brister."
     - "Räknat de svåra stunderna och lösningarna under en vecka och frågat eleven hur det är i skolan."
-    - "Skrivit bemötandeplanen på en gemensam träff runt eleven, med elevens tecken och plats om hen var med, och gett planen till alla vuxna som möter eleven, också vikarier."
-    - "Övat några lägen ur bemötandeplanen i arbetslaget, och bestämt vart klassen går när det brister, vem som hämtas och hur ni byter av."
+    - "Skrivit bemötandeplanen på en gemensam träff runt eleven och gett planen till alla vuxna som möter eleven, också vikarier."
+    - "Låtit eleven välja ett tecken och en lugn plats, om hen var med (del 2)."
+    - "Övat lägen ur bemötandeplanen i arbetslaget, och bestämt vart klassen går när det brister, vem som hämtas och hur ni byter av."
     - "Övat med klassen vart den går när det brister, som en rutin för alla."
-    - "Under tiden hälsat på eleven med namnet varje dag och sagt till enskilt, som i del 1 och del 2."
+    - "Under tiden hälsat på eleven med namnet varje dag och sagt till enskilt, som i del 1 och del 3."
 grund:
   text: "Gymnasieelever i USA som hade skickats till rektorn för trots samarbetade med lärare de litade på, och förtroendet hängde ihop med att läraren både brydde sig och hade höga förväntningar (Gregory och Weinstein, 2008). Konflikt i relationen till läraren hänger tydligt ihop med utagerande beteende (Lei m.fl., 2016), och en insats där läraren bygger, vårdar och lagar relationen gav bättre relationer och mindre störande beteende i en liten studie i åk 4–⁠5 (Cook m.fl., 2018). Stunden är formad efter Banking Time, som i en lottad studie i förskolan gjorde lärarna mindre negativa mot barnen men hade liten effekt på barnens beteende (Williford m.fl., 2017). Redan lite stress gör det svårare att tänka efter (Arnsten, 2009), och därför väntar du med samtalet tills eleven är lugn (SPSM, 2024). Att lära ut ett beteende som ersätter det gamla och att ändra kraven har starkt stöd i låg- och mellanstadiet (Epstein m.fl., 2008). Samtalet om en överenskommelse följer Greenes modell, som har gett lika goda resultat som föräldraträning i studier med barn och unga (Norman m.fl., 2026), men i skolan är modellen lite prövad. Greppen när det trappas upp kommer ur lågaffektivt bemötande, där SBU inte hittade någon effektstudie för barn och unga inom socialtjänsten (SBU, 2020), och kontakt före korrigering och NVC är inte prövade som program."
   kallor: "Bygger på Arnsten (2009), Cook m.fl. (2018), Epstein m.fl. (2008), Gregory och Weinstein (2008), Lei m.fl. (2016), Norman m.fl. (2026), SBU (2020), SPSM (2024) och Williford m.fl. (2017)."
@@ -342,14 +345,34 @@ ramar:
               text: "Steg 1: Hälsningen säger att Nora är väntad. När den är lika varm dagen efter att hon inte kom, säger den att han inte är sur.\nSteg 2: Stunden hänger inte på hur veckan har gått. Samir bokar den när ingen hör, så att Nora slipper förklara den för kamraterna.\nSteg 3: Det som är elevens eget är lättast att prata om.\nSteg 4: En rättelse eller ett råd hade sagt Nora att han ändå vill något av henne. Han säger något om låten, som är hennes.\nSteg 5: Nora prövar i två veckor om han ger upp. Den som slutar komma när eleven säger nej har visat att eleven hade rätt om vuxna."
             - rubrik: "Bygger på"
               text: "Kontakt före korrigering: kontakten ska finnas innan den behövs.\nPBS: hälsningen vid dörren, och uppmärksamhet som inte hänger på uppförandet.\nNVC: lyssna utan att värdera eller ge råd.\nCPS: var nyfiken på eleven, utan att rätta.\nLågaffektivt bemötande: eleven säger ja till den hen litar på."
-        - rubrik: "Del 2 · Kontakt före korrigering"
+        - rubrik: "Del 2 · Tecknet och den lugna platsen"
+          ord:
+            - namn: "tecknet"
+              former: ["tecken"]
+            - namn: "lugna platsen"
+              former: ["lugna plats", "lugn plats"]
           falt:
             - rubrik: "När"
-              text: "Eleven gör något annat än klassen, och du behöver säga till nu. Är du eller eleven uppe i varv, börjar du i del 4 eller del 5."
+              text: "Från vecka 1. Eleven väljer och övar med dig när allt är lugnt, så att hen har något att ta till när det börjar bli för mycket."
+            - rubrik: "Tanken"
+              text: "Det räcker inte att eleven slutar med något. Hen behöver något att göra i stället, och det lär du ut. Eleven väljer ett tecken att visa när det börjar bli för mycket, och en lugn plats att gå till. Den lugna platsen är elevens, och ingen skickar dit eleven som straff."
+            - rubrik: "Gör så här"
+              text: "1. Se vad beteendet ger eleven. Slipper hen något, kommer en vuxen eller får hen det hen ville ha? Det eleven gör i stället ska ge samma sak. Är det en tur, lär du ut orden: ”Kan jag få nästa tur?” Är det en vuxen, ger hälsningen och stunden det (del 1).\n2. Låt eleven välja. Eleven väljer tecknet och den lugna platsen på träffen före start om hen är med, och annars med dig i vecka 1. Fråga: ”Vad kan du visa mig när det börjar bli för mycket? Vad blir du lugn av?” Det kan vara vatten eller tre långa utandningar. Tecknet ska gå att visa där det brukar bli svårt, också på rasten. Skriv i bemötandeplanen vem som svarar där, vem som ser eleven på den lugna platsen och hur länge hen stannar. Vill eleven inte välja än, frågar du igen när hen har börjat komma till stunden, och då övar du och eleven de två veckorna efter. Till dess gör ni vuxna som bemötandeplanen säger.\n3. Öva när allt är lugnt. I vecka 1 och 2 övar du och eleven tecknet två gånger i veckan, fem minuter åt gången, utanför stunden och när inget har hänt. Fortsätt tills eleven kan visa tecknet, gå till den lugna platsen, göra det som lugnar och komma tillbaka till samma uppgift, som du gör mindre. Öva igen efter ett lov, och påminn före det svåra: ”Kom ihåg tecknet på matten.”\n4. Svara varje gång, tyst och med samma ord: ”Gå du.” Kan du inte gå fram till eleven, nickar du. Eleven stannar den tid som är bestämd och kommer sedan tillbaka.\n5. Säg vad du såg, tyst och så som eleven tål det: ”Du visade tecknet och gick i tid.” Beskriv det eleven gjorde, utan ”duktig”. Behåll stödet också när det går bättre."
+            - rubrik: "Caset"
+              kursiv: true
+              text: "Selma i åk 2 blir arg när hon fastnar i en uppgift, och då river hon sönder pappret. Läraren Lena ser att rivandet ger Selma en paus. När de skriver bemötandeplanen väljer Selma handen på kinden som tecken, och läshörnan blir hennes lugna plats. De övar två eftermiddagar efter skolan. Selma lägger handen på kinden, Lena säger ”Gå du”, och Selma går till läshörnan, bläddrar i en bok och kommer tillbaka.\nDagen efter lägger Selma handen på kinden mitt i svenskan. Lena ser det för sent, och pappret går i bitar. Nästa morgon säger Lena: ”Jag missade ditt tecken i går. Visa igen, så ser jag.” Samma dag ser Lena tecknet och svarar. När Selma kommer tillbaka skriver hon två meningar i stället för fem. Lena visar bara tummen, och efteråt säger hon tyst: ”Du visade tecknet och gick i tid.” Efter sex veckor räcker en nick."
+            - rubrik: "Därför"
+              text: "Steg 1: Rivandet gav Selma en paus, så det hon gör i stället ska också ge en paus.\nSteg 2: Tecknet ger pausen utan ord och utan att någon annan märker det.\nSteg 3: De övar när det är lugnt, för den som är uppe i varv hittar bara det övade.\nSteg 4: Eleven slutar använda ett tecken som inte får svar, så Lena säger att det var hon som missade och ber Selma visa igen.\nSteg 5: Beröm inför klassen gör Selma arg, så tummen räcker där. Meningen efteråt säger vad hon gjorde, och det kan hon göra igen."
+            - rubrik: "Bygger på"
+              text: "PBS: lär ut något att göra i stället, öva, påminn i förväg och säg vad du såg.\nKontakt före korrigering: uppmuntra det eleven gör, inte hur eleven är.\nNVC: säg vad eleven gjorde, utan omdöme.\nCPS: det eleven själv väljer prövar hen på allvar.\nLågaffektivt bemötande: fråga eleven vad hen blir lugn av, och öva när det är lugnt."
+        - rubrik: "Del 3 · Kontakt före korrigering"
+          falt:
+            - rubrik: "När"
+              text: "Eleven gör något annat än klassen, och du behöver säga till nu. Är du eller eleven uppe i varv, börjar du i del 5 eller del 6."
             - rubrik: "Tanken"
               text: "Innan du säger till, fråga dig om uppgiften är för svår eller om något har hänt. Eleven hör en tillsägelse rakt över klassrummet som skäll, och då försvarar hen sig i stället för att lyssna. Går du fram till eleven och får kontakt först, hör eleven vad du säger. Du har kontakt när eleven märker att du ser hur hen har det. Sedan säger du en sak att göra och går därifrån. Det tar en halv minut. Säg det med värme, gärna med humor, men aldrig med ironi."
             - rubrik: "Gör så här"
-              text: "1. Gå fram till eleven. Ge först klassen något att göra, och säg ingenting över rummet. Gå nära, ner i ögonhöjd med eleven, och säg namnet tyst.\n2. Säg det du ser, och gissa hur eleven har det: ”Du har linjalen i gång. Är det svårt att sitta still nu?” Vänta på en blick, en nick eller ett svar. Är uppgiften för svår eller har något hänt, hjälper du med det först.\n3. Säg en sak att göra. Säg det eleven ska göra, inte det hen ska sluta med: ”Lägg linjalen i pennskrinet.”\n4. Gå därifrån. Protesterar eleven, svarar du kort och säger samma sak igen: ”Kanske det. Lägg linjalen i pennskrinet.” Suckar och muttrande låter du vara.\n5. Följ upp. Säg tyst ”Tack” när det är gjort. Är det inte gjort efter ett tag, går du förbi en gång till och ger ett val: ”I pennskrinet eller i bänken?” Blir det ändå inte gjort, tar du det enskilt med eleven efter lektionen. Kommer det igen dag efter dag, går du till del 7."
+              text: "1. Gå fram till eleven. Ge först klassen något att göra, och säg ingenting över rummet. Gå nära, ner i ögonhöjd med eleven, och säg namnet tyst.\n2. Säg det du ser, och gissa hur eleven har det: ”Du har linjalen i gång. Är det svårt att sitta still nu?” Vänta på en blick, en nick eller ett svar. Är uppgiften för svår eller har något hänt, hjälper du med det först.\n3. Säg en sak att göra. Säg det eleven ska göra, inte det hen ska sluta med: ”Lägg linjalen i pennskrinet.”\n4. Gå därifrån. Protesterar eleven, svarar du kort och säger samma sak igen: ”Kanske det. Lägg linjalen i pennskrinet.” Suckar och muttrande låter du vara.\n5. Följ upp. Säg tyst ”Tack” när det är gjort. Är det inte gjort efter ett tag, går du förbi en gång till och ger ett val: ”I pennskrinet eller i bänken?” Blir det ändå inte gjort, tar du det enskilt med eleven efter lektionen. Kommer det igen dag efter dag, går du till del 8."
             - rubrik: "Caset"
               kursiv: true
               text: "Elias i åk 4 har svårt att sitta still under genomgångar, och han tycker att lärare alltid är på just honom. I dag snurrar han linjalen mot bänken så att det smattrar. Läraren Karin känner att hon vill säga ”Elias, lägg ner den!” från tavlan. Hon ber i stället klassen prata med grannen om nästa tal, går fram till Elias och sätter sig på huk. ”Elias”, säger hon tyst. ”Du har linjalen i gång. Är det svårt att sitta still nu?” Han rycker på axlarna. ”Lägg linjalen i pennskrinet.”\nElias säger högt: ”Varför är det alltid jag? Melvin pratade också!” Några vänder sig om. ”Kanske det. Lägg linjalen i pennskrinet”, säger Karin lugnt och går tillbaka till tavlan. Elias muttrar och snurrar ett varv till. En halv minut senare ligger linjalen i pennskrinet. När hon går förbi hans bänk säger hon tyst: ”Tack.”"
@@ -357,14 +380,14 @@ ramar:
               text: "Steg 1: När klassen har något att göra lyssnar ingen på Karin och Elias, och han har mindre att försvara.\nSteg 2: Elias väntar sig skäll. Frågan visar att hon ser hur han har det, och då hör han nästa mening. Linjalen ska ändå ner.\nSteg 3: Hon säger vad han ska göra. ”Sluta” säger bara vad som är fel.\nSteg 4: Hon står inte kvar, för då blir det en kamp som han måste vinna inför klassen. Samma ord håller samtalet vid linjalen, och muttrandet låter hon vara.\nSteg 5: Tacket är tyst och säger bara att hon såg. Tillsägelsen slutar i något vänligt."
             - rubrik: "Bygger på"
               text: "Kontakt före korrigering: känslan först, sedan gränsen. Att förstå är inte att hålla med.\nPBS: en kort och enskild rättelse som säger vad eleven ska göra, och ett ord när hen gör det.\nNVC: säg det du ser utan omdöme, och det du vill som något att göra.\nCPS: det som kommer igen är ett problem att lösa.\nLågaffektivt bemötande: ingen publik, få ord och ingen maktkamp."
-        - rubrik: "Del 3 · Ställ krav så att eleven kan säga ja"
+        - rubrik: "Del 4 · Ställ krav så att eleven kan säga ja"
           falt:
             - rubrik: "När"
               text: "Du ska be om något du vet är svårt: en övergång, ett nytt arbete eller ett slut. Eller eleven sitter tyst och gör ingenting."
             - rubrik: "Tanken"
               text: "Eleven ska möta krav, och kraven står kvar. Du ändrar hur du ställer dem. Ett krav som kommer plötsligt, är för stort eller sägs som en order inför andra får ofta ett nej, och sedan handlar allt om nejet. Förbered eleven, säg en sak i taget och lämna något åt eleven att bestämma. Välj också dina krav. Allt behöver inte gälla i dag."
             - rubrik: "Gör så här"
-              text: "1. Välj kravet. Bestäm vad som är viktigast just nu, och lägg resten åt sidan med flit. Säg det till de andra vuxna, så att alla ställer samma krav.\n2. Förbered eleven. Berätta vad som ska hända, och när det eleven håller på med tar slut: ”Om fem minuter går vi in.”\n3. Säg en sak, nära och vänligt, och ge två val som båda duger för dig: ”Nu går vi in. Går du med mig eller med en kompis?” Fråga inte om eleven vill.\n4. Vänta tio sekunder, och säg det en gång till med samma ord. Blir det nej eller tyst, gör du kravet mindre och ber om ett första steg som eleven brukar klara: ”Bromsa gungan, så går vi tillsammans.” ”Ta fram pennan.” Svarar eleven, med ord eller en blick, tar du inte bort kravet, också när nejet är högt.\n5. Visa att du såg. När det är gjort räcker ett tyst ”Tack” eller tummen upp. Har eleven stängt av helt, eller slår, kastar eller springer iväg, går du till del 5. Kommer nejet igen dag efter dag, går du till del 7."
+              text: "1. Välj kravet. Bestäm vad som är viktigast just nu, och lägg resten åt sidan med flit. Säg det till de andra vuxna, så att alla ställer samma krav.\n2. Förbered eleven. Berätta vad som ska hända, och när det eleven håller på med tar slut: ”Om fem minuter går vi in.”\n3. Säg en sak, nära och vänligt, och ge två val som båda duger för dig: ”Nu går vi in. Går du med mig eller med en kompis?” Fråga inte om eleven vill.\n4. Vänta tio sekunder, och säg det en gång till med samma ord. Blir det nej eller tyst, gör du kravet mindre och ber om ett första steg som eleven brukar klara: ”Bromsa gungan, så går vi tillsammans.” ”Ta fram pennan.” Svarar eleven, med ord eller en blick, tar du inte bort kravet, också när nejet är högt.\n5. Visa att du såg. När det är gjort räcker ett tyst ”Tack” eller tummen upp. Har eleven stängt av helt, eller slår, kastar eller springer iväg, går du till del 6. Kommer nejet igen dag efter dag, går du till del 8."
             - rubrik: "Caset"
               kursiv: true
               text: "Selma i åk 2 har svårt att sluta med det hon håller på med, och rasternas slut blir ofta skrik. Arbetslaget har bestämt att kravet den här månaden är att Selma kommer in. Att stå i ledet och hänga av sig jackan får vänta. Fem minuter före ringningen går fritidspedagogen Jonas bort till gungorna: ”Selma, du gungar högt i dag. Om fem minuter går vi in.”\nNär det ringer ställer han sig bredvid gungan. ”Nu går vi in. Går du med mig eller med Tilde?” ”Nej!” skriker Selma och gungar högre. Jonas väntar. ”Nu går vi in. Med mig eller med Tilde?” ”Jag vill inte!” Han höjer inte rösten och står kvar bredvid gungan. ”Bromsa gungan, så går vi tillsammans.” Selma bromsar med fötterna, sitter kvar en stund och går sedan fem steg bakom honom. Hon kommer in sist och sätter sig vid dörren med jackan på. Jonas visar tummen upp. I dag räcker det."
@@ -372,14 +395,14 @@ ramar:
               text: "Steg 1: Kravet är att komma in. Varje krav till är ett nytt tillfälle att säga nej, så ledet och jackan får vänta en månad.\nSteg 2: Selma får veta fem minuter före att det roliga tar slut. Det som brukar få henne ur balans är att slutet kommer plötsligt.\nSteg 3: ”Nu går vi in” är en sak, sagd som något de gör tillsammans. En fråga hade gett henne ett nej att säga, och valet ger henne något att bestämma. I dag hjälper det inte, och fler val hade blivit en förhandling.\nSteg 4: Ett första steg är lättare att säga ja till. Selma skriker, men hon hör honom och svarar, så kravet står kvar. Nejet ger ingen extra gungtid.\nSteg 5: Selma tål inte beröm inför andra, så tummen är hans tack. Ett ja som blir sett är lättare att ge nästa gång."
             - rubrik: "Bygger på"
               text: "Lågaffektivt bemötande: du anpassar kravet så att eleven klarar det, med förberedelse, ett tydligt slut och tid.\nPBS: förbered, börja med något eleven brukar klara, och tacka när det är gjort.\nKontakt före korrigering: vänlig och bestämd på samma gång, med val som du kan godta.\nCPS: välj vilka krav som gäller nu, och lägg resten åt sidan med flit.\nNVC: det du ber om ska gå att göra nu, och får inte låta som ett hot."
-        - rubrik: "Del 4 · Håll dig själv lugn"
+        - rubrik: "Del 5 · Håll dig själv lugn"
           falt:
             - rubrik: "När"
               text: "Du märker att du själv går upp i varv: pulsen, käken, rösten. Läs delen i förväg, och efter en stund som du ångrar."
             - rubrik: "Tanken"
               text: "Känslor smittar åt båda hållen. En vuxen som är stressad, pratar fort och går mot eleven gör eleven mer upprörd, och en lugn vuxen gör eleven lugnare. Därför tar du hand om ditt eget lugn först. Lugnet är något du gör, och det går att öva."
             - rubrik: "Gör så här"
-              text: "1. Lär känna dig själv i förväg. Vad händer i dig först: käken, axlarna, rösten? Vad får i gång dig, och vad säger du då till dig själv? Be en kollega sitta med en halv lektion ibland, räkna dina tillsägelser och vänliga ord till eleven och säga vad hen såg. Sikta på fem vänliga ord för varje tillsägelse.\n2. Stanna och andas ut. Ta tre långa utandningar innan du säger något mer. Är någon i fara, gäller skolans rutin och del 5.\n3. Tänk om. Byt ut ”Hon struntar i mig” mot ”Hon kan inte just nu. Det hon säger handlar inte om mig.”\n4. Sänk allt. Tala lägre och långsammare, med färre ord. Ta ett steg bakåt, och skjut upp resten: ”Vi pratar sedan.”\n5. Byt av när du inte hittar tillbaka, och laga efteråt. Kom överens om en signal, som ”Kan du ta över? Jag hämtar kaffe.” Är du ensam, skickar du efter den som står i bemötandeplanen. Sa du något du ångrar, säger du det till eleven nästa dag."
+              text: "1. Lär känna dig själv i förväg. Vad händer i dig först: käken, axlarna, rösten? Vad får i gång dig, och vad säger du då till dig själv? Be en kollega sitta med en halv lektion ibland, räkna dina tillsägelser och vänliga ord till eleven och säga vad hen såg. Sikta på fem vänliga ord för varje tillsägelse.\n2. Stanna och andas ut. Ta tre långa utandningar innan du säger något mer. Är någon i fara, gäller skolans rutin och del 6.\n3. Tänk om. Byt ut ”Hon struntar i mig” mot ”Hon kan inte just nu. Det hon säger handlar inte om mig.”\n4. Sänk allt. Tala lägre och långsammare, med färre ord. Ta ett steg bakåt, och skjut upp resten: ”Vi pratar sedan.”\n5. Byt av när du inte hittar tillbaka, och laga efteråt. Kom överens om en signal, som ”Kan du ta över? Jag hämtar kaffe.” Är du ensam, skickar du efter den som står i bemötandeplanen. Sa du något du ångrar, säger du det till eleven nästa dag."
             - rubrik: "Caset"
               kursiv: true
               text: "Nora i åk 8 sitter för tredje lektionen i rad med luvan uppdragen och gör ingenting. Hon stör ingen. Läraren Helena har sagt till två gånger, och just tyst vägran är det som får i gång Helena mest. Hon hör sig själv säga högt: ”Nu får du faktiskt skärpa dig.” Nora tittar upp: ”Du är den sämsta läraren på hela skolan.” Klassen tystnar.\nHelena känner att det hettar i ansiktet, och att hon har höjt rösten. Hon andas ut långsamt, tre gånger. ”Hon kan inte just nu. Det hon säger handlar inte om mig”, tänker hon. Hon tar ett steg bakåt och säger lågt: ”Vi pratar sedan.” Hon fortsätter lektionen. Nora sitter kvar med luvan uppe.\nNästa morgon säger Helena i korridoren: ”Det jag sa i går var inte okej.” Nora rycker på axlarna och går. På eftermiddagen berättar Helena för mentorn Samir vad som får i gång henne, och de bestämmer att hon ringer honom nästa gång."
@@ -387,37 +410,37 @@ ramar:
               text: "Steg 1: Den som vet vad som får i gång en märker det tidigare. Helena märker det sent, men i tid för att stanna.\nSteg 2: Hon andas ut innan hon säger något mer. Svarar hon direkt, svarar hon på förolämpningen, och då är de två som trappar upp.\nSteg 3: Det är lättare att vara lugn inför en elev som inte kan än inför en som inte vill.\nSteg 4: Hon backar och skjuter upp samtalet. Nora har inget att slåss mot, och klassen ser en vuxen som hittar tillbaka.\nSteg 5: Helena trappade upp först och säger det. Hon kräver inget tillbaka, för då blir ursäkten ett nytt krav. Med Samir att ringa står hon inte ensam nästa gång."
             - rubrik: "Bygger på"
               text: "Lågaffektivt bemötande: affekt smittar, du ansvarar för din egen, och ni vuxna byter av.\nPBS: stanna upp innan du svarar, och ge fem vänliga ord för varje tillsägelse.\nKontakt före korrigering: du lugnar dig själv först och lagar dina egna misstag öppet.\nNVC: vad säger jag till mig själv, och vad behöver jag?\nCPS: eleven gör rätt när hen kan."
-        - rubrik: "Del 5 · Lugna när det trappas upp"
+        - rubrik: "Del 6 · Lugna när det trappas upp"
           falt:
             - rubrik: "När"
               text: "Eleven håller på att tappa kontrollen. Har eleven redan gjort det, eller stängt av helt så att hen inte går att nå, börjar du på steg 2."
             - rubrik: "Tanken"
               text: "En elev som är uppe i varv kan inte tänka efter, välja eller ta emot en förklaring. Det som hjälper då är att det blir lugnare runt eleven: färre ord, färre krav, färre människor och en vuxen som själv är lugn. Ju tidigare du ser att det är på väg upp, desto mindre behöver du göra."
             - rubrik: "Gör så här"
-              text: "1. Se när det är på väg upp, och lätta på trycket. Det ni vuxna brukar se, som att eleven trummar eller tystnar, står i bemötandeplanen. Gå nära och säg tyst det du ser: ”Du trummar hårt. Börjar det bli för mycket? Du har ditt tecken.” Du kan också sänka kravet eller ge ett ärende.\n2. Bedöm faran och hämta hjälp. Är någon i fara, gäller skolans rutin. Går eleven till sin lugna plats, eller har hen stängt av, kan klassen vara kvar. Annars lämnar de andra rummet, inte eleven. Bemötandeplanen säger vart klassen går och vem som hämtas.\n3. Gör dig liten. Backa två steg, ställ dig snett eller sätt dig. Titta inte eleven i ögonen, och stå inte i vägen till dörren eller den lugna platsen. Springer eleven ut, går en vuxen efter på avstånd.\n4. Andas ut och säg nästan ingenting. En lugn mening räcker: ”Jag är här.” Ställ inga krav, fråga inte varför och säg inget om följder. Svara inte på det eleven ropar om dig.\n5. Vänta och ta emot eleven. När eleven andas lugnare, sätter sig eller ser upp, säger du det: ”Bra att du satte dig.” Erbjud vatten och något lätt att göra. Samtalet tar du med eleven senare (del 6)."
+              text: "1. Se när det är på väg upp, och lätta på trycket. Det ni vuxna brukar se, som att eleven trummar eller tystnar, står i bemötandeplanen. Gå nära och säg tyst det du ser: ”Du trummar hårt. Börjar det bli för mycket? Du har ditt tecken.” Du kan också sänka kravet eller ge ett ärende.\n2. Bedöm faran och hämta hjälp. Är någon i fara, gäller skolans rutin. Går eleven till sin lugna plats, eller har hen stängt av, kan klassen vara kvar. Annars lämnar de andra rummet, inte eleven. Bemötandeplanen säger vart klassen går och vem som hämtas.\n3. Gör dig liten. Backa två steg, ställ dig snett eller sätt dig. Titta inte eleven i ögonen, och stå inte i vägen till dörren eller den lugna platsen. Springer eleven ut, går en vuxen efter på avstånd.\n4. Andas ut och säg nästan ingenting. En lugn mening räcker: ”Jag är här.” Ställ inga krav, fråga inte varför och säg inget om följder. Svara inte på det eleven ropar om dig.\n5. Vänta och ta emot eleven. När eleven andas lugnare, sätter sig eller ser upp, säger du det: ”Bra att du satte dig.” Erbjud vatten och något lätt att göra. Samtalet tar du med eleven senare (del 7)."
             - rubrik: "Caset"
               kursiv: true
               text: "Elias i åk 4 har svårt med matten efter lunchrasten, och när det brister kastar han saker. I dag trummar han hårt med pennan och har lagt huvudet på armen. Läraren Karin går fram till honom och säger tyst: ”Du trummar hårt. Vill du ta soffan en stund? Annars tar vi de två första tillsammans.” Han sveper ner boken på golvet och skriker: ”Jag hatar matte!”\nKarin ser att ingen är i fara. Hon säger till klassen: ”Ta era böcker och gå in till klassen bredvid, som vi har övat. Ella och Sam hämtar Maria på fritids.” Karin backar ett par steg och sätter sig på en bänk snett från Elias, med blicken mot golvet. ”Jag är här”, säger hon. Elias sparkar till en stol och ropar att hon är dum i huvudet. Karin vill svara, men andas ut och tiger.\nEfter några minuter sjunker han ner under bordet och blir tyst. ”Bra att du satte dig”, säger Karin. Maria kommer med ett glas vatten. Elias sitter kvar under bordet med vattnet och en serietidning."
             - rubrik: "Därför"
-              text: "Steg 1: Tidigt går det att nå Elias, och soffan eller ett mindre krav kan vara nog. Nu räcker det inte, och Karin byter steg i stället för att stå på sig.\nSteg 2: Klassen går, inte Elias. Det är lättare att flytta tjugo elever än en som är i affekt, och utan publik behöver han inte vinna inför någon. Med Maria är Karin inte ensam, och de kan byta av.\nSteg 3: Avståndet, sidan och blicken mot golvet gör henne mindre hotfull.\nSteg 4: Varje ord är ett krav på att förstå och svara, och det klarar han inte nu. Svarar Karin på ”dum i huvudet”, är de två som trappar upp.\nSteg 5: Hon säger det han gjorde rätt och kräver inget mer. Resten tar de när båda är lugna."
+              text: "Steg 1: Tidigt går det att nå Elias, och soffan, hans lugna plats, eller ett mindre krav kan vara nog. Nu räcker det inte, och Karin byter steg i stället för att stå på sig.\nSteg 2: Klassen går, inte Elias. Det är lättare att flytta tjugo elever än en som är i affekt, och utan publik behöver han inte vinna inför någon. Med Maria är Karin inte ensam, och de kan byta av.\nSteg 3: Avståndet, sidan och blicken mot golvet gör henne mindre hotfull.\nSteg 4: Varje ord är ett krav på att förstå och svara, och det klarar han inte nu. Svarar Karin på ”dum i huvudet”, är de två som trappar upp.\nSteg 5: Hon säger det han gjorde rätt och kräver inget mer. Resten tar de när båda är lugna."
             - rubrik: "Bygger på"
-              text: "Lågaffektivt bemötande: avståndet, blicken, de få orden och att vänta.\nPBS: ett utbrott har faser, och fasen avgör vad du gör.\nKontakt före korrigering: var kvar, med få ord.\nCPS: du lägger kravet åt sidan tills vidare.\nNVC: hör vad eleven försöker säga, och ta det i del 6."
-        - rubrik: "Del 6 · Laga efteråt"
+              text: "Lågaffektivt bemötande: avståndet, blicken, de få orden och att vänta.\nPBS: ett utbrott har faser, och fasen avgör vad du gör.\nKontakt före korrigering: var kvar, med få ord.\nCPS: du lägger kravet åt sidan tills vidare.\nNVC: hör vad eleven försöker säga, och ta det i del 7."
+        - rubrik: "Del 7 · Laga efteråt"
           falt:
             - rubrik: "När"
               text: "Samma dag eller dagen efter en svår stund, när både du och eleven är lugna."
             - rubrik: "Tanken"
-              text: "Efter en svår stund väntar sig eleven att du är arg. Det är du som tar första steget. Sedan visar du att eleven har sin plats kvar, hör kort hur hen ser det och låter hen ställa till rätta. Det är ett enda samtal, och det blickar framåt."
+              text: "Efter en svår stund väntar sig eleven att du är arg. Det är du som tar första steget. Sedan visar du att eleven är välkommen tillbaka, hör kort hur hen ser det och låter hen ställa till rätta. Det är ett enda samtal, och det blickar framåt."
             - rubrik: "Gör så här"
-              text: "1. Tänk igenom det samma dag. Vad hände precis före, vad gjorde eleven, vad fick eller slapp eleven genom det, och vad gjorde ni vuxna? Tänk på det du såg och inte på hur eleven är, och på en sak du tycker om hos eleven. Har någon blivit slagen, rädd eller kränkt, följer du skolans rutin samma dag.\n2. Välkomna eleven tillbaka och börja om. Hälsa som vanligt: ”Hej Selma. Bra att du är här.” Säg sedan enskilt: ”I går blev det svårt. I dag börjar vi om.” Gjorde du något du ångrar, säger du det.\n3. Hör elevens bild, enskilt och kort: ”Hur var det för dig?” Rätta inte. Fråga sedan: ”Vad märkte du först, innan det blev för mycket?” Säg att det är då tecknet hjälper. Har eleven få ord, ritar ni, eller så gissar du och frågar om det stämmer. Vill eleven inte prata, frågar du en annan dag.\n4. Låt eleven ställa till rätta när någon eller något har kommit till skada. Prata med den drabbade först. Fråga sedan eleven: ”Vad kan du göra så att det blir bra igen?” En handling duger, och du tvingar ingen att säga förlåt. Har eleven inget förslag, ger du två att välja mellan.\n5. Ta med en sak framåt. Fråga dig vad ni vuxna kan göra annorlunda. Ändrar ni bemötandeplanen, får alla som har den veta det. Kommer samma sak igen, går du till del 7."
+              text: "1. Tänk igenom det samma dag. Vad hände precis före, vad gjorde eleven, vad fick eller slapp eleven genom det, och vad gjorde ni vuxna? Tänk på det du såg och inte på hur eleven är, och på en sak du tycker om hos eleven. Har någon blivit slagen, rädd eller kränkt, följer du skolans rutin samma dag.\n2. Välkomna eleven tillbaka och börja om. Hälsa som vanligt: ”Hej Selma. Bra att du är här.” Säg sedan enskilt: ”I går blev det svårt. I dag börjar vi om.” Gjorde du något du ångrar, säger du det.\n3. Hör elevens bild, enskilt och kort: ”Hur var det för dig?” Rätta inte. Fråga sedan: ”Vad märkte du först, innan det blev för mycket?” Säg att det är då tecknet hjälper. Har eleven få ord, ritar ni, eller så gissar du och frågar om det stämmer. Vill eleven inte prata, frågar du en annan dag.\n4. Låt eleven ställa till rätta när någon eller något har kommit till skada. Prata med den drabbade först. Fråga sedan eleven: ”Vad kan du göra så att det blir bra igen?” En handling duger, och du tvingar ingen att säga förlåt. Har eleven inget förslag, ger du två att välja mellan.\n5. Ta med en sak framåt. Fråga dig vad ni vuxna kan göra annorlunda. Ändrar ni bemötandeplanen, får alla som har den veta det. Kommer samma sak igen, går du till del 8."
             - rubrik: "Caset"
               kursiv: true
               text: "Selma i åk 2 hamnar ofta i bråk på rasterna. I går sparkade hon Alva vid gungorna. Efter skolan tänker läraren Lena igenom det: Alva hann före till gungan, Selma sparkade henne och gömde sig bakom förrådet, och rastvakten väntade en bit bort tills Selma gick in. Lena anmäler det som skolans rutin säger. Hon tänker också på att Selma gärna bär in bollarna.\nNästa morgon står Lena vid dörren. ”Hej Selma. Bra att du är här.” Först pratar hon med Alva. Sedan sätter hon sig med Selma: ”I går blev det svårt. I dag börjar vi om. Hur var det för dig?” ”Jag vet inte”, säger Selma. Lena ritar två gungor och två streckgubbar. ”Blev det trångt vid gungorna?” Selma nickar. ”Vad kan du göra så att det blir bra med Alva igen?” Selma vill inte säga förlåt. ”Hon kan få första turen”, säger hon. På rasten håller hon gungan åt Alva, och Lena ser det och nickar. En vuxen står nu vid gungorna."
             - rubrik: "Därför"
-              text: "Steg 1: Lena kommer till skolan med vad som hände och inte med hur trött hon var. Bollarna påminner henne om vem Selma också är.\nSteg 2: Hon hälsar som vanligt, och klassen hör det. Selma kom beredd på skäll och får veta att hon har sin plats kvar.\nSteg 3: ”Jag vet inte” är inget trots. Selma har inte orden, så Lena ritar och gissar, och får en nick.\nSteg 4: Alva får sitt samtal först. Selma väljer själv hur hon ställer till rätta, och hon gör det. Ett förlåt som hon tvingas till blir bara ord.\nSteg 5: Trängseln kunde de vuxna ändra, och en vuxen vid gungorna blir en ny rad i bemötandeplanen."
+              text: "Steg 1: Lena kommer till skolan med vad som hände och inte med hur trött hon var. Bollarna påminner henne om vem Selma också är.\nSteg 2: Hon hälsar som vanligt, och klassen hör det. Selma kom beredd på skäll och får veta att hon är välkommen tillbaka.\nSteg 3: ”Jag vet inte” är inget trots. Selma har inte orden, så Lena ritar och gissar, och får en nick.\nSteg 4: Alva får sitt samtal först. Selma väljer själv hur hon ställer till rätta, och hon gör det. Ett förlåt som hon tvingas till blir bara ord.\nSteg 5: Trängseln kunde de vuxna ändra, och en vuxen vid gungorna blir en ny rad i bemötandeplanen."
             - rubrik: "Bygger på"
               text: "Kontakt före korrigering: du tar första steget och säger vad du själv kunde ha gjort annorlunda.\nPBS: välkomna eleven tillbaka som vanligt, och låt hen ställa till rätta.\nNVC: säg vad som hände utan dom, och hör vad som var viktigt för eleven.\nCPS: gör inget i dag som gör att eleven inte vill prata med dig i morgon.\nLågaffektivt bemötande: börja inte med det som gick fel, och fråga vad ni vuxna kan ändra."
-        - rubrik: "Del 7 · Nå en överenskommelse"
+        - rubrik: "Del 8 · Nå en överenskommelse"
           falt:
             - rubrik: "När"
               text: "Samma sak har hänt flera gånger. Du och eleven har 15–25 minuter i lugn och ro utanför stunden, högst tio i F–⁠3."
@@ -432,21 +455,6 @@ ramar:
               text: "Steg 1: ”Du kastar böcker” hade fått Elias att försvara sig.\nSteg 2: ”Det är tråkigt” är ett första svar och inte hela svaret. Hade Karin nöjt sig med det, hade de löst fel problem.\nSteg 3: En mening om vad det leder till är ingen anklagelse.\nSteg 4: Elias tar en lösning som är hans egen på allvar. Karins frågor ser till att den också möter hennes oro.\nSteg 5: Biblioteket lät Elias slippa starten men gav ingen väg tillbaka in, och Karin hade ingen del i lösningen. Får Elias skulden, slutar han komma med förslag."
             - rubrik: "Bygger på"
               text: "CPS: de tre stegen i samtalet, och att gå tillbaka när lösningen inte håller.\nNVC: skilj det som är viktigt för var och en från sättet att få det.\nKontakt före korrigering: elevens bild först, och en lösning som hjälper.\nPBS: lösningen ändrar ofta ett krav eller ger eleven något att öva, och du följer upp den.\nLågaffektivt bemötande: du håller samtalet i lugnt läge, och eleven är med och tar fram lösningen."
-        - rubrik: "Del 8 · Stöd det som fungerar"
-          falt:
-            - rubrik: "När"
-              text: "Från vecka 1, mest när eleven inte har något att ta till om det blir för mycket. Du och eleven övar när inget har hänt."
-            - rubrik: "Tanken"
-              text: "Det räcker inte att eleven slutar med något. Hen behöver något att göra i stället, som ger samma sak som beteendet gav, och det lär du ut. Oftast är det ett tecken som eleven visar dig när det börjar bli för mycket, och en lugn plats att gå till."
-            - rubrik: "Gör så här"
-              text: "1. Se vad beteendet ger eleven. Slipper hen något, kommer en vuxen eller får hen det hen ville ha? Det eleven gör i stället ska ge samma sak. Är det en tur, övar ni orden: ”Kan jag få nästa tur?” Är det en vuxen, ger hälsningen och stunden det (del 1).\n2. Låt eleven välja ett tecken, en lugn plats och något som lugnar. Det kan vara vatten eller tre långa utandningar. Fråga: ”Vad kan du visa mig när det börjar bli för mycket? Vad blir du lugn av?” Tecknet ska gå att visa där det brukar bli svårt, också på rasten. Bestäm vem som svarar där, och vem som ser eleven på platsen.\n3. Öva när allt är lugnt. Gör det utanför stunden, några minuter i taget tills eleven kan det: visa tecknet, gå till platsen, göra det som lugnar och komma tillbaka till samma uppgift, som du gör mindre. Öva igen efter ett lov, och påminn före det svåra: ”Kom ihåg tecknet på matten.”\n4. Svara varje gång, tyst och med samma ord: ”Gå du.” Kan du inte gå fram till eleven, nickar du. Eleven stannar den tid ni har bestämt och kommer sedan tillbaka.\n5. Säg vad du såg, tyst och så som eleven tål det: ”Du visade tecknet och gick i tid.” Beskriv det eleven gjorde, utan ”duktig”. Behåll stödet också när det har börjat gå bättre."
-            - rubrik: "Caset"
-              kursiv: true
-              text: "Selma i åk 2 blir arg när hon fastnar i en uppgift, och då river hon sönder pappret. Läraren Lena ser att rivandet ger Selma en paus från uppgiften. När de skriver bemötandeplanen väljer Selma handen på kinden som tecken, och läshörnan blir hennes lugna plats. De övar två eftermiddagar efter skolan. Selma lägger handen på kinden, Lena säger ”Gå du”, och Selma går till läshörnan, bläddrar i en bok och kommer tillbaka.\nDagen efter lägger Selma handen på kinden mitt i svenskan. Lena ser det för sent, och pappret går i bitar. Nästa morgon säger Lena: ”Jag missade ditt tecken i går. Visa igen, så ser jag.” Samma dag ser Lena tecknet och svarar. När Selma kommer tillbaka skriver hon två meningar i stället för fem. I klassrummet visar Lena bara tummen, och efteråt säger hon tyst: ”Du visade tecknet och gick i tid.” Efter sex veckor räcker en nick."
-            - rubrik: "Därför"
-              text: "Steg 1: Rivandet gav Selma en paus, så det hon gör i stället ska också ge en paus.\nSteg 2: Tecknet ger pausen utan ord och utan att någon annan märker det.\nSteg 3: De övar när det är lugnt och utanför stunden, för en elev som är uppe i varv hittar bara det som redan är övat.\nSteg 4: Eleven slutar använda ett tecken som inte får svar, så Lena säger att det var hon som missade och ber Selma visa igen.\nSteg 5: Beröm inför klassen gör Selma arg, så tummen räcker där. Meningen efteråt säger vad hon gjorde, och det kan hon göra igen."
-            - rubrik: "Bygger på"
-              text: "PBS: lär ut något som ger samma sak som beteendet gav, öva, påminn före och säg vad du såg.\nKontakt före korrigering: uppmuntra det eleven gör, inte hur eleven är.\nNVC: säg vad eleven gjorde, utan omdöme.\nCPS: det eleven själv väljer prövar hen på allvar.\nLågaffektivt bemötande: fråga eleven vad hen blir lugn av, och öva när det är lugnt."
     - rubrik: "Bemötandeplanen"
       text:
         - "Ni vuxna skriver planen på en gemensam träff runt eleven före start, och eleven är med när det går. Överst står elevens mål, svaret på frågan ”Vad blir bättre för dig om det här går bättre?”"
@@ -455,25 +463,25 @@ ramar:
         - rubrik: "Elevens mål"
         - rubrik: "Vem har stunden, och när"
       delar:
-        - rubrik: "En vanlig dag (del 1–⁠3)"
+        - rubrik: "En vanlig dag (del 1, 3 och 4)"
           falt:
             - rubrik: "Det här fungerar, och så säger vi till"
               text: ""
             - rubrik: "Kraven nu, och det som väntar"
               text: ""
-        - rubrik: "På väg upp (del 5 och 8)"
+        - rubrik: "På väg upp (del 2 och 6)"
           falt:
             - rubrik: "Det som brukar bli svårt, och det vi ser"
               text: ""
-            - rubrik: "Det vi gör då, och elevens tecken och plats"
+            - rubrik: "Det vi gör då, och elevens tecken och lugna plats"
               text: ""
-        - rubrik: "Tappat kontrollen (del 4 och 5)"
+        - rubrik: "Tappat kontrollen (del 5 och 6)"
           falt:
             - rubrik: "Det vi gör och låter bli"
               text: ""
             - rubrik: "Vart klassen går, och vem som hämtas"
               text: ""
-        - rubrik: "Lugn igen (del 6)"
+        - rubrik: "Lugn igen (del 7)"
           falt:
             - rubrik: "Så kommer eleven tillbaka"
               text: ""
@@ -481,7 +489,7 @@ ramar:
               text: ""
     - rubrik: "Bemötandeplanen: Noras plan"
       text:
-        - "Här är planen ifylld för Nora i åk 8, ur casen i del 1 och del 4. De vuxna skrev sina rader före start, och Noras mål, tecken och plats kom till i vecka 4, när hon hade börjat komma till stunden."
+        - "Här är planen ifylld för Nora i åk 8, ur casen i del 1 och del 5. De vuxna skrev sina rader före start, och Noras mål, tecken och lugna plats kom till i vecka 4, när hon hade börjat komma till stunden."
       huvud:
         - rubrik: "Elev och datum"
           text: "Nora, åk 8, vecka 4"
@@ -490,25 +498,25 @@ ramar:
         - rubrik: "Vem har stunden, och när"
           text: "Samir, tisdagar och torsdagar efter lunch, och han fyller i kurvan. Åsa tar stunden när han är borta."
       delar:
-        - rubrik: "En vanlig dag (del 1–⁠3)"
+        - rubrik: "En vanlig dag (del 1, 3 och 4)"
           falt:
             - rubrik: "Det här fungerar, och så säger vi till"
               text: "Nora arbetar bäst när hon vet i förväg vad som ska hända, och när hon sitter nära dörren. Vi säger till enskilt, tyst vid bänken eller efter lektionen."
             - rubrik: "Kraven nu, och det som väntar"
               text: "Kravet nu är att komma in till lektionen och börja med den första uppgiften. Läxorna i engelska och att svara högt inför klassen väntar."
-        - rubrik: "På väg upp (del 5 och 8)"
+        - rubrik: "På väg upp (del 2 och 6)"
           falt:
             - rubrik: "Det som brukar bli svårt, och det vi ser"
               text: "Att svara högt inför klassen. Hon drar upp luvan, tystnar och slutar skriva."
-            - rubrik: "Det vi gör då, och elevens tecken och plats"
+            - rubrik: "Det vi gör då, och elevens tecken och lugna plats"
               text: "Vi frågar tyst om hon vill börja med något annat. Lägger Nora suddgummit på bänkens hörn, säger vi tyst ”Gå du” och frågar inget. Hon går till biblioteket i tio minuter. Vi följer inte efter, och bibliotekarien vet om det."
-        - rubrik: "Tappat kontrollen (del 4 och 5)"
+        - rubrik: "Tappat kontrollen (del 5 och 6)"
           falt:
             - rubrik: "Det vi gör och låter bli"
               text: "Vi håller avstånd, säger bara ”Vi pratar sedan” och fortsätter lektionen. Vi säger inte till inför klassen, ropar inte efter henne och tar inte i henne."
             - rubrik: "Vart klassen går, och vem som hämtas"
               text: "Klassen är kvar. Går Nora utan sitt tecken, går en vuxen efter på avstånd, och läraren ringer Samir, som möter henne i biblioteket."
-        - rubrik: "Lugn igen (del 6)"
+        - rubrik: "Lugn igen (del 7)"
           falt:
             - rubrik: "Så kommer eleven tillbaka"
               text: "Hon går in genom den bakre dörren och sätter sig. Läraren nickar, och ingen säger något."
@@ -526,7 +534,7 @@ ramar:
               text: "Visa kurvan för vårdnadshavarna, och för eleven när de svåra stunderna blir färre. Säg vad eleven gjorde som hjälpte."
     - rubrik: "Vår överenskommelse"
       text:
-        - "Bladet hör till samtalet i del 7, och raderna följer samtalets steg. Den vuxne skriver sitt namn på de två strecken. Tillsammans fyller den vuxne och eleven i bladet med elevens ord och kopierar det, så att båda har var sitt."
+        - "Bladet hör till samtalet i del 8, och raderna följer samtalets steg. Den vuxne skriver sitt namn på de två strecken. Tillsammans fyller den vuxne och eleven i bladet med elevens ord och kopierar det, så att båda har var sitt."
       huvud:
         - rubrik: "Namn"
         - rubrik: "Datum"
@@ -571,7 +579,7 @@ plan:
       vem: eleven
       rad: "Varje fredag"
       fore: "Före start"
-      text: "Det som hör ihop räknas en gång, så tecknet, platsen och vägen tillbaka är en lösning. De andra vuxna berättar för dig samma dag när eleven hade en svår stund eller visade tecknet."
+      text: "Det som hör ihop räknas en gång, så tecknet, den lugna platsen och vägen tillbaka är en lösning. De andra vuxna berättar för dig samma dag när eleven hade en svår stund eller visade tecknet."
       ram: "Svåra stunder vecka för vecka"
       antal:
         - namn: "Svåra stunder"
@@ -579,7 +587,7 @@ plan:
           text: "när eleven hamnade i affekt eller låste sig"
         - namn: "Lösningar"
           mot: upp
-          text: "när eleven visade tecknet, gick till sin plats eller löste det med ord"
+          text: "när eleven visade tecknet, gick till sin lugna plats eller löste det med ord"
       regler:
         - om: "uppåt 6 veckor i rad"
           antal: "Svåra stunder"
@@ -590,8 +598,8 @@ plan:
   atgard: "I tio veckor gör alla vuxna runt eleven likadant i varje möte: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar den vuxne första steget tillbaka."
   justera:
     - "Läs bemötandeplanen med arbetslaget. Gjorde alla lika, och fick elevens tecken svar?"
-    - "Välj färre krav ett tag, och lägg resten åt sidan med flit (del 3). Se om de svåra stunderna blir färre."
-    - "Gör om en överenskommelse som inte håller (del 7). Fråga eleven vad som har ändrats."
+    - "Välj färre krav ett tag, och lägg resten åt sidan med flit (del 4). Se om de svåra stunderna blir färre."
+    - "Gör om en överenskommelse som inte håller (del 8). Fråga eleven vad som har ändrats."
     - "Ta upp det med elevhälsan och vårdnadshavarna."
   utanUpprepa: true
   upprepa: "Svaret på tecknet ändrar ni först när eleven klarar det som står under Gå vidare när, och då säger du det till eleven och skriver det i bemötandeplanen. Annars stannar ni i raden, och ni tar beslutet efter vecka 10 ändå."
@@ -604,7 +612,7 @@ lathund:
   metoden:
     text:
       - "Elever följer vuxna de litar på, så lämna varje möte med eleven med en starkare relation än när ni började. Ordningen är lugn, kontakt, vägledning. Snurrar eleven en linjal, fråga tyst: ”Är det svårt att sitta still nu?” Vänta på en blick och säg: ”Lägg linjalen i pennskrinet.”"
-      - "Efter en svår stund tar du första steget tillbaka. Kraven står kvar, och du ändrar hur du ställer dem. Eleven får ett tecken och en lugn plats, övade när det är lugnt. Två gånger i veckan har du och eleven en halvtimme som är elevens. Är någon i fara eller kränkt, går skolans rutin före."
+      - "Efter en svår stund tar du första steget tillbaka. Kraven står kvar, och du ändrar hur du ställer dem. Eleven väljer ett tecken och en lugn plats, övade när det är lugnt. Två gånger i veckan har du och eleven en halvtimme som är elevens. Är någon i fara eller kränkt, går skolans rutin före."
     ruta:
       rubrik: "Tre saker att hålla fast vid"
       punkter:
@@ -622,20 +630,20 @@ lathund:
       rader:
         - - "1 · Bygg relationen i förväg"
           - "Varje dag från start, mest när eleven håller sig undan vuxna."
-        - - "2 · Kontakt före korrigering"
+        - - "2 · Tecknet och den lugna platsen"
+          - "Från vecka 1: eleven väljer och övar när allt är lugnt."
+        - - "3 · Kontakt före korrigering"
           - "Du behöver säga till, och eleven är lugn nog att höra dig."
-        - - "3 · Ställ krav så att eleven kan säga ja"
+        - - "4 · Ställ krav så att eleven kan säga ja"
           - "Du ska be om något du vet är svårt, eller eleven sitter tyst och gör ingenting."
-        - - "4 · Håll dig själv lugn"
+        - - "5 · Håll dig själv lugn"
           - "Du känner att du själv går upp i varv."
-        - - "5 · Lugna när det trappas upp"
+        - - "6 · Lugna när det trappas upp"
           - "Eleven håller på att tappa kontrollen, eller har stängt av helt."
-        - - "6 · Laga efteråt"
+        - - "7 · Laga efteråt"
           - "Det har varit en svår stund, och du ska möta eleven igen."
-        - - "7 · Nå en överenskommelse"
+        - - "8 · Nå en överenskommelse"
           - "Samma sak har hänt flera gånger."
-        - - "8 · Stöd det som fungerar"
-          - "Från vecka 1, mest när eleven inte har något att ta till."
   pass:
     rubrik: "Stunden: tre veckor med Nora"
     textRubrik: "Nora i åk 8 och mentorn Samir"
@@ -647,14 +655,14 @@ lathund:
     forberett:
       rubrik: "Det jag förberedde"
       text:
-        - "Bestämt platsen och de två tiderna, och sagt dem till Nora när ingen annan hörde. Sett till att högtalaren i musiksalen fungerar."
+        - "Bestämt platsen för stunden och de två tiderna, och sagt dem till Nora när ingen annan hörde. Sett till att högtalaren i musiksalen fungerar."
     klarTidigt: "Stunden har inget som ska bli klart. Sitt kvar tiden ut, också när eleven går."
     schema:
       rubrik: "30 minuter, del för del"
       rader:
         - tid: "Före"
           fas: "Förberedelse"
-          vad: "Platsen och de två tiderna är desamma varje vecka. Ha några saker framme att välja bland."
+          vad: "Platsen för stunden och de två tiderna är desamma varje vecka. Ha några saker framme att välja bland."
         - tid: "0–3"
           fas: "Börja"
           vad: "Hälsa med namnet. Första gången säger du: ”Det här är din stund.” Fråga vad eleven vill göra, och vet eleven inte, visar du sakerna."
@@ -703,7 +711,7 @@ lathund:
         - fet: "Bemötandeplanen."
           text: "Mallen och Noras plan finns i planeringsmallarna (Word)."
         - fet: "Vår överenskommelse."
-          text: "Elevens blad till samtalet i del 7, i planeringsmallarna (Word)."
+          text: "Elevens blad till samtalet i del 8, i planeringsmallarna (Word)."
         - fet: "Svåra stunder vecka för vecka."
           text: "Kurvan du fyller i varje vecka, i planeringsmallarna (Word)."
         - fet: "Lektionskortet."
@@ -717,7 +725,7 @@ lathund:
       - nar: "Före start"
         vad: "Räkna svåra stunder och lösningar en vecka."
       - nar: "Varje fredag"
-        vad: "Räkna veckan och dra linjerna. Fråga kort hur veckan har varit, och säg något eleven gjorde."
+        vad: "Räkna veckan och dra linjerna. Fråga hur veckan har varit, och säg något eleven gjorde."
       - nar: "Efter vecka 10"
         vad: "Jämför med Före. Är det färre och går eleven själv, glesar du ut stunden. Annars fortsätter du, eller tar det med elevhälsan."
 film:
@@ -735,8 +743,8 @@ filmer:
     sekunder: 28.33
     beskrivning: "Läraren ser att det är på väg upp och gör uppgiften mindre. Läraren säger: ”Vi tar de två första tillsammans.” Elias säger: ”Jag hatar matte!” Klassen går ut, och Elias stannar. Läraren säger: ”Gå in till klassen bredvid, som vi har övat.” Läraren backar och sätter sig snett. Läraren säger: ”Jag är här.” Elias säger: ”Du är dum i huvudet!” Hon svarar inte. Hon väntar i några minuter. Elias sätter sig och blir tyst. Läraren säger: ”Bra att du satte dig.”"
     rubrik: "När det trappas upp"
-    ingress: "Fyra bilder ur filmen till del 5, med Elias i åk 4. Läraren gör uppgiften mindre, men Elias sveper ner boken på golvet. Klassen lämnar rummet, och Läraren backar, sätter sig snett från Elias och säger en mening. Hon svarar inte på det han ropar. När han har satt sig, säger hon det hon ser."
-    efter: "del: Del 5 · Lugna när det trappas upp"
+    ingress: "Fyra bilder ur filmen till del 6, med Elias i åk 4. Läraren gör uppgiften mindre, men Elias sveper ner boken på golvet. Klassen lämnar rummet, och Läraren backar, sätter sig snett från Elias och säger en mening. Hon svarar inte på det han ropar. När han har satt sig, säger hon det hon ser."
+    efter: "del: Del 6 · Lugna när det trappas upp"
     stillbilder:
       - text: "Läraren gör uppgiften mindre. Det räcker inte."
       - text: "Klassen lämnar rummet, och Elias stannar kvar."
@@ -746,8 +754,8 @@ filmer:
     sekunder: 28.35
     beskrivning: "Läraren frågar och väntar tills hon förstår. Läraren frågar: ”Vad är det som händer?” Elias säger: ”Det är tråkigt.” Läraren frågar: ”Är det mest rasten eller mest matten?” Elias säger: ”Alla ser när man inte kan första talet.” Läraren säger: ”Det jag tänker på är att du missar matten.” Hon frågar efter Elias idé, och de prövar den. Läraren frågar: ”Har du någon idé?” Elias säger: ”Om jag fick vara i biblioteket först.” Läraren frågar: ”Hinner du matten då?” De skriver: ”Fem minuter i biblioteket, sedan matten.” Håller lösningen inte, börjar de om."
     rubrik: "Samtalet om en överenskommelse"
-    ingress: "Fyra bilder ur filmen om samtalet i del 7, med Elias i åk 4. Läraren frågar vad som händer och väntar. När Elias får två saker att välja mellan säger han vad som är svårt. Sedan säger Läraren sin oro i en mening. Elias föreslår en lösning, och Läraren frågar om han hinner med matten då. Sist skriver de lösningen på bladet Vår överenskommelse."
-    efter: "del: Del 7 · Nå en överenskommelse"
+    ingress: "Fyra bilder ur filmen om samtalet i del 8, med Elias i åk 4. Läraren frågar vad som händer och väntar. När Elias får två saker att välja mellan säger han vad som är svårt. Sedan säger Läraren sin oro i en mening. Elias föreslår en lösning, och Läraren frågar om han hinner med matten då. Sist skriver de lösningen på bladet Vår överenskommelse."
+    efter: "del: Del 8 · Nå en överenskommelse"
     stillbilder:
       - text: "Läraren frågar vad som händer och väntar."
       - text: "Läraren ger två val, och Elias säger vad som är svårt."
