@@ -3704,6 +3704,9 @@ try {
       await b.tryck('#pl-veckan .pl-remsa [data-vy="fore"]');
       await vanta(150);
       const tomtBand = await b.kor(`document.querySelector('#pl-veckan .pl-valet.tomt')?.textContent ?? ''`);
+      // Metodens mening i bandet länkar det den nämner, som bemötandeplanen (länkgranskningen 2026-11-24, K-827).
+      const tomtLankar = await b.kor(`[...document.querySelectorAll('#pl-veckan .pl-valet.tomt .pl-maltext p a')].map((a) => a.getAttribute('href') ?? '')`);
+      sant('det eleven väljer: metodens mening i bandet länkar bemötandeplanen', tomtLankar.some((h) => h.endsWith('#bemotandeplanen')), { tomtLankar });
       await b.tryck('#pl-veckan .pl-valet [data-valet-andra]');
       await vanta(150);
       const falten = await b.kor(`(() => { const f = [...document.querySelectorAll('#pl-veckan [data-valet-falt]')]; if (f.length) { f[0].value = 'Handen på huvudet'; f[1].value = 'Soffan i kapprummet'; } return { n: f.length, fokus: document.activeElement === f[0] }; })()`);

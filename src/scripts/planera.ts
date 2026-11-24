@@ -898,7 +898,7 @@ function valetsRad(plats: string, penna = true): string {
   // Efter insatsens första vecka står metodens mening om ett val som kommer senare, i påminnelsens färg, eftersom veckorna
   // annars talar om tecknet som om det fanns (Rimligheten 2026-11-23).
   const senare = !!v.senare && !!plan.veckor[0] && mandagen(idag) > plan.veckor[0].mandag;
-  return `<div class="pl-mal pl-valet tomt${senare ? ' sent' : ''}" data-valetplats="${plats}"><div class="pl-maltext">${rubrik}<p>Inte valt än. ${esc(senare ? v.senare! : v.nar)}</p><p><button type="button" class="knapp" data-valet-andra>Skriv in</button></p></div></div>`;
+  return `<div class="pl-mal pl-valet tomt${senare ? ' sent' : ''}" data-valetplats="${plats}"><div class="pl-maltext">${rubrik}<p>Inte valt än. ${lankad(senare ? v.senare! : v.nar)}</p><p><button type="button" class="knapp" data-valet-andra>Skriv in</button></p></div></div>`;
 }
 function oppnaValet(plats: string) {
   valetsUtkast = { id: aktiv.id, varden: { ...(aktiv.foljd.valet?.varden ?? {}) } };
