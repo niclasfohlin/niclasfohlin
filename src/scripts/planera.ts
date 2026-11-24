@@ -898,7 +898,7 @@ function valetsRad(plats: string, penna = true): string {
   // Efter insatsens första vecka står metodens mening om ett val som kommer senare, i påminnelsens färg, eftersom veckorna
   // annars talar om tecknet som om det fanns (Rimligheten 2026-11-23).
   const senare = !!v.senare && !!plan.veckor[0] && mandagen(idag) > plan.veckor[0].mandag;
-  return `<div class="pl-mal pl-valet tomt${senare ? ' sent' : ''}" data-valetplats="${plats}"><div class="pl-maltext">${rubrik}<p>Inte valt än. ${lankad(senare ? v.senare! : v.nar)}</p><p><button type="button" class="knapp" data-valet-andra>Skriv in</button></p></div></div>`;
+  return `<div class="pl-mal pl-valet tomt${senare ? ' sent' : ''}" data-valetplats="${plats}"><div class="pl-maltext">${rubrik}<p>Inte valt än. ${lankad(senare ? v.senare! : v.nar, v.adress)}</p><p><button type="button" class="knapp" data-valet-andra>Skriv in</button></p></div></div>`;
 }
 function oppnaValet(plats: string) {
   valetsUtkast = { id: aktiv.id, varden: { ...(aktiv.foljd.valet?.varden ?? {}) } };
@@ -1238,7 +1238,9 @@ const medSpann = (text: string) => {
 // Metodens veckor heter som planens, också när planen börjar högre upp i en stege (veckornaIPlanen i standarden, K-515). Ett
 // namn, som Mina lärdomar: vecka 1–2, är sakens namn och står som det är.
 // En adress leder dit en gång i ett stycke (K-822: tecknet, den lugna platsen och del 2 i samma mening).
-const lankad = (text: string) => sakernasText(text, data.saker, sakLank, (x) => medSpann(veckornaIPlanen(x, plan.borja)), { enAdress: true });
+// Med utan står saker med den adressen som text, som i bandet Tecknet och den lugna platsen, vars rubrik redan leder till
+// delen (K-827: tecknet och lugna platsen i bandets mening gav en länk till del 2 under rubrikens länk dit).
+const lankad = (text: string, utan?: string) => sakernasText(text, utan === undefined ? data.saker : data.saker.filter((s) => s.adress !== utan), sakLank, (x) => medSpann(veckornaIPlanen(x, plan.borja)), { enAdress: true });
 const skala = (attr: string, valt: number | undefined, namn: string) => `<div class="pl-skala" role="group" aria-label="${esc(namn)}">${SKALAN.map((_, i) => i + 1).map((x) => `<button type="button" class="pl-skalsteg" ${attr}="${x}" aria-pressed="${valt === x}" aria-label="${x}, ${esc(SKALAN[x - 1].toLocaleLowerCase('sv'))}">${x}</button>`).join('')}</div>`;
 // Veckans gång för gruppen i ord, så att den inte förväxlas med skattningens siffror (de kalla läsarna 2026-10-24).
 const GANG = ['Dåligt', 'Ganska dåligt', 'Okej', 'Bra', 'Mycket bra'];
