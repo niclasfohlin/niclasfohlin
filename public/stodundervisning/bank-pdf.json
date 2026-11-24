@@ -13401,20 +13401,20 @@
     "datum": "2026-11-17"
   },
   "relationell-vagledning": {
-    "word": "a40f46dfa5a6dfdb8f0c8a8bb51049d869a58bd5292b3a627a1c4df46250c021",
+    "word": "e00cdbfbd54e3eaee22328d6b3bd13fbca4be9c1492e66c51651f691b9738959",
     "packare": "da4966c04520cb79",
-    "pdf": "acc7dbd8e1c9f270835448722d8e58dff962a44e55f8f15dda994df0c3d78806",
+    "pdf": "dad876abfa420b28437d64f40db59c883f36ccde087c5c7fd915722417798c43",
     "sidor": 33,
     "kB": 780,
-    "datum": "2026-11-23"
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-metoden": {
-    "word": "6b03a78cc39f44e92eea10a5e96bf7ab838a80489469bb71ab7af32885bccd3a",
+    "word": "74ce7f93f4f8eb035b495ed50b568028059a056d59df017b8d0d2e095bfb60e4",
     "packare": "da4966c04520cb79",
-    "pdf": "74bfe9ca19da8b324a455235d479c8ae78e8e46b1549dc22f309d5e8b3f42a81",
+    "pdf": "f557c2f2f09626af67b672685ae59853ee036ed5a28948b6a2e3722fa1b97bf5",
     "sidor": 20,
-    "kB": 560,
-    "datum": "2026-11-23"
+    "kB": 561,
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-lathund-text": {
     "word": "09b3f87ed19833c84826fae2a2bf1e4f2ad2682a354d4fbb193d69795b3ec94c",
@@ -13440,76 +13440,76 @@
     ]
   },
   "relationell-vagledning-del-1": {
-    "word": "1621d1b7c4dd17ca6f8fdea509428e07f5e72bc8af6f23972b0ce74387e87f7e",
+    "word": "dc7e72d3f7df5950aeb84dfdc0b5140b9f61e32de98d9a9456b1e2bb596dad47",
     "packare": "da4966c04520cb79",
-    "pdf": "f4cb71a5b1a20b834dbf013ff36b722db2de64f7b99abecdcf2e5e3d0843b911",
+    "pdf": "f6cb91c48b5f239e5ecc95db3f0863afa914081771325bac5d5aabeab7a58c67",
     "sidor": 1,
-    "kB": 238,
-    "datum": "2026-11-22"
+    "kB": 237,
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-del-2": {
-    "word": "a837c16103cb7a80eb372a93886ff3feebddc889d2167de90f8f777b90461f58",
+    "word": "c7eb2b7a17e6c94de76f59b557541541ab8e0174b4a299fe433ad6f67c549d53",
     "packare": "da4966c04520cb79",
-    "pdf": "30eea3683a1f86304a12155d8220314a9c3d2e07590d722e48403b746876ebdc",
+    "pdf": "d9c2528404e0ace3d9d6e0552b312bd58d9ae201e4abf8cb0c4e5c9a6360bd2e",
     "sidor": 1,
     "kB": 239,
-    "datum": "2026-11-23"
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-del-3": {
-    "word": "fd69f620a4d5a155a8572acac6a6f1252aa9635be77751b66497f1b58b331b56",
+    "word": "77b23bb9c20319dab9176ce9352f6976d6c91d8eb816906ad3c35d05f1133ff6",
     "packare": "da4966c04520cb79",
-    "pdf": "2d71ca5cb35c67feb457b97e4ff7d206c1edeacb6b60564012698e043f8e3707",
-    "sidor": 1,
-    "kB": 242,
-    "datum": "2026-11-23"
-  },
-  "relationell-vagledning-del-4": {
-    "word": "be70ce28400559253177e07052285e0baf4f459cc5bb0d634cb615f31983eba8",
-    "packare": "da4966c04520cb79",
-    "pdf": "c614521335b1fb3e76c6c4df7ab5b34a545ca6e111657d6a08693c443151b254",
-    "sidor": 1,
-    "kB": 240,
-    "datum": "2026-11-23"
-  },
-  "relationell-vagledning-del-5": {
-    "word": "e066d6b040058030e6ee0bd2cffe15dc27ecd5b0f68c53d6e11ca457f9dcc2df",
-    "packare": "da4966c04520cb79",
-    "pdf": "ee4b8d74929fb09dfdd8e7dd376233a90e13b81ec7dac766c896f45f6d5c13a4",
+    "pdf": "764dbca9e7ead3811b75206973dd8ed2271f3ef4f3c9b7035085cf8de14687bb",
     "sidor": 1,
     "kB": 241,
-    "datum": "2026-11-23"
+    "datum": "2026-11-24"
+  },
+  "relationell-vagledning-del-4": {
+    "word": "babfc6b40ae0e088d8407cc0ee6467a15db15ec1e0a7c30c383caa552af4a122",
+    "packare": "da4966c04520cb79",
+    "pdf": "a0e1edc69784baea2a214bff661672f749e6955bae34b8ccbf7e4fefa25d01ae",
+    "sidor": 1,
+    "kB": 240,
+    "datum": "2026-11-24"
+  },
+  "relationell-vagledning-del-5": {
+    "word": "495a9db15c0b051fec0f163cdad92f9793ec7c0a9209488e1cfc519d5f3b7276",
+    "packare": "da4966c04520cb79",
+    "pdf": "b7772d6b64ecbc7fe53ea768621a49e5d02838291fee77764deec74df7e625e9",
+    "sidor": 1,
+    "kB": 241,
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-del-6": {
-    "word": "674b1168ab4fb73fd1667984c10cb38723e0ca37d9fe86ba33e6200617b9450b",
+    "word": "dc143b57851b5dfe7d19cc380602364a0d55cbf3d2d19af3e0e51be52047d4cc",
     "packare": "da4966c04520cb79",
-    "pdf": "93780e42c2a3b48fef9b43d8b45fff59e3fe1783870003d6fb13b2ec4b91aacc",
+    "pdf": "a794d278e14be504091a39ea77ba77433d2f9f9cf3e96ae8f969a799bf836421",
     "sidor": 1,
-    "kB": 239,
-    "datum": "2026-11-23"
+    "kB": 240,
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-del-7": {
-    "word": "3b6e7c13705e317dd265b3fc496c532f5fafe947bee3b027cf6fdcbfad8bc5f8",
+    "word": "5c6edf98f3ed0381a35b6dce622f6a0bebbdba45e6a0fc32d974c49526679918",
     "packare": "da4966c04520cb79",
-    "pdf": "10ddaa16769e4fd14a1ef4cd1d7f6271b3e553c5a024f475dc8608d7cc767c90",
+    "pdf": "abde4fc0c1015ccd9bcf8194ffefac5c9b9682552d7a47e48d14f89856de190c",
     "sidor": 1,
-    "kB": 239,
-    "datum": "2026-11-23"
+    "kB": 240,
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-del-8": {
-    "word": "9c85095ff43ad9aaa0087f9ecf9e25109e55b3f83e4b4a1e82ae6ea45f7512bc",
+    "word": "e3df637c8faeb1d639e28913d58a5a6919da1cb506aab95eae0ecf43c0789751",
     "packare": "da4966c04520cb79",
-    "pdf": "8b048c29730563cb3d4e9825cc6625aac78852bf30a5e32e76391ea15917a89c",
+    "pdf": "86cae2c8f181132d3f13d1a06942ea85f057211de628ed48b706be3398d8e839",
     "sidor": 1,
-    "kB": 245,
-    "datum": "2026-11-23"
+    "kB": 246,
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-alla-delar": {
-    "word": "61efbde2f567921807c0fa1e8abed1e68347deb97409febe5f1a6832606807ea",
+    "word": "8e6709dd9ccdfe40a5b1f8eec579de9a27828c5f6e07572b7594bd8a2cf7f265",
     "packare": "da4966c04520cb79",
-    "pdf": "1d5bab95ec0857b4d52f22c9fd3c40d5f4789b2bb489c51dd383f466ca078431",
+    "pdf": "19c01b521fb70696f895d4b22806ea3b5a6ea9ce34045792a47b1067ecfdd0f8",
     "sidor": 8,
-    "kB": 325,
-    "datum": "2026-11-23"
+    "kB": 324,
+    "datum": "2026-11-24"
   },
   "relationell-vagledning-blad-bemotandeplanen": {
     "word": "237fb764421168f495f132de7d27a8201bb09a2b7530c0ded31c29ab8ddadfdb",
