@@ -1,10 +1,10 @@
 {
-  "datum": "2026-11-22T23:30:29.323Z",
+  "datum": "2026-11-24T03:11:50.490Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 119,
-      "besok": 59,
+      "antal": 120,
+      "besok": 60,
       "utskrifter": 12
     },
     {
@@ -33,8 +33,8 @@
     },
     {
       "id": "5-3-1",
-      "antal": 44,
-      "besok": 19,
+      "antal": 45,
+      "besok": 20,
       "utskrifter": 5
     },
     {
@@ -69,9 +69,15 @@
     },
     {
       "id": "hitta-min-regel",
-      "antal": 16,
-      "besok": 11,
+      "antal": 17,
+      "besok": 12,
       "utskrifter": 1
+    },
+    {
+      "id": "lasa-och-forklara-i-par",
+      "antal": 16,
+      "besok": 6,
+      "utskrifter": 2
     },
     {
       "id": "ova-och-kontrollera-i-par",
@@ -80,13 +86,13 @@
       "utskrifter": 2
     },
     {
-      "id": "fraga-fraga-byt",
-      "antal": 15,
-      "besok": 5,
+      "id": "sanningsjakten",
+      "antal": 16,
+      "besok": 6,
       "utskrifter": 2
     },
     {
-      "id": "lasa-och-forklara-i-par",
+      "id": "fraga-fraga-byt",
       "antal": 15,
       "besok": 5,
       "utskrifter": 2
@@ -104,10 +110,10 @@
       "utskrifter": 1
     },
     {
-      "id": "sanningsjakten",
-      "antal": 15,
-      "besok": 5,
-      "utskrifter": 2
+      "id": "lika-och-olika",
+      "antal": 14,
+      "besok": 9,
+      "utskrifter": 1
     },
     {
       "id": "kooperativ-fyrfaltare",
@@ -116,15 +122,9 @@
       "utskrifter": 1
     },
     {
-      "id": "lika-och-olika",
-      "antal": 13,
-      "besok": 8,
-      "utskrifter": 1
-    },
-    {
       "id": "ppt-par-pa-tid",
-      "antal": 12,
-      "besok": 2,
+      "antal": 13,
+      "besok": 3,
       "utskrifter": 2
     },
     {
@@ -158,6 +158,18 @@
       "utskrifter": 1
     },
     {
+      "id": "skriv-byt-matcha",
+      "antal": 11,
+      "besok": 6,
+      "utskrifter": 1
+    },
+    {
+      "id": "ape",
+      "antal": 10,
+      "besok": 10,
+      "utskrifter": 0
+    },
+    {
       "id": "en-for-alla",
       "antal": 10,
       "besok": 5,
@@ -174,18 +186,6 @@
       "antal": 10,
       "besok": 5,
       "utskrifter": 1
-    },
-    {
-      "id": "skriv-byt-matcha",
-      "antal": 10,
-      "besok": 5,
-      "utskrifter": 1
-    },
-    {
-      "id": "ape",
-      "antal": 9,
-      "besok": 9,
-      "utskrifter": 0
     },
     {
       "id": "lar-klassen",
@@ -206,15 +206,15 @@
       "utskrifter": 1
     },
     {
-      "id": "kommunicera",
+      "id": "hor-vi-ihop",
       "antal": 8,
       "besok": 3,
       "utskrifter": 1
     },
     {
-      "id": "hor-vi-ihop",
-      "antal": 7,
-      "besok": 2,
+      "id": "kommunicera",
+      "antal": 8,
+      "besok": 3,
       "utskrifter": 1
     },
     {
@@ -290,6 +290,12 @@
       "utskrifter": 0
     },
     {
+      "id": "parrespons",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
       "id": "rondellen",
       "antal": 4,
       "besok": 4,
@@ -320,13 +326,13 @@
       "utskrifter": 0
     },
     {
-      "id": "mina-bilder-dina-bilder",
+      "id": "kontraster",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
     },
     {
-      "id": "parrespons",
+      "id": "mina-bilder-dina-bilder",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
@@ -356,12 +362,6 @@
       "utskrifter": 0
     },
     {
-      "id": "kontraster",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
       "id": "kunskapskedjan",
       "antal": 2,
       "besok": 2,
@@ -375,6 +375,12 @@
     },
     {
       "id": "las-rita-redovisa",
+      "antal": 2,
+      "besok": 2,
+      "utskrifter": 0
+    },
+    {
+      "id": "mina-ord-dina-ord",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
@@ -411,12 +417,6 @@
     },
     {
       "id": "las-och-fraga",
-      "antal": 1,
-      "besok": 1,
-      "utskrifter": 0
-    },
-    {
-      "id": "mina-ord-dina-ord",
       "antal": 1,
       "besok": 1,
       "utskrifter": 0
