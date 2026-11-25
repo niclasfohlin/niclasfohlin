@@ -5,7 +5,7 @@
  "dokumenttitel": "Relationell vägledning: Stunden · Lektionskort",
  "knapp": "Lektionskort",
  "info": [
-  "F–9 · 30 minuter · en elev"
+  "F–9 · 10–30 minuter · en elev"
  ],
  "infoUtanRuta": true,
  "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
@@ -33,7 +33,7 @@
  "delar": [
   {
    "rubrik": "Stunden",
-   "text": "Två gånger i veckan, ungefär 30 minuter. Kortet ligger inte framme när eleven är där.",
+   "text": "Två gånger i veckan, 10–30 minuter. Kortet ligger inte framme under stunden.",
    "kolumner": [
     "Delen",
     "Så leder du",
@@ -49,7 +49,7 @@
    "rader": [
     [
      "I förväg",
-     "Bestäm en plats och två tider i veckan, inte på den rast eleven helst vill ha, och säg dem till eleven och klassläraren. Ha några saker framme att välja bland, som papper och pennor, ett kortspel och en boll. I 7–⁠9 bokar du stunden tyst, och ni gör något sida vid sida."
+     "Bestäm stundens längd, en plats och två tider i veckan. Lägg inte stunden på den rast eleven helst vill ha, och säg tiderna till eleven och den som har klassen då. Ha några saker framme att välja bland, som papper och pennor, ett kortspel och en boll. I 7–⁠9 bokar du stunden tyst, och ni gör något sida vid sida."
     ],
     [
      "Första gången",
@@ -57,17 +57,17 @@
      "”Det här är din stund. Du bestämmer vad vi gör, och jag är med.”"
     ],
     [
-     "Börja\n0–3 min",
+     "Börja\nde första minuterna",
      "Hälsa med namnet, och fråga vad eleven vill göra i dag. Säger eleven ”vet inte”, visar du sakerna eller tar fram det ni gjorde sist.",
      "”Hej Nora. Vad vill du göra i dag?”"
     ],
     [
-     "Eleven leder\n3–27 min",
+     "Eleven leder\nnästan hela stunden",
      "Gör det eleven har valt, på elevens sätt, och ha roligt tillsammans. Säg det du ser och hur eleven verkar ha det.",
      "”Du blandar korten snabbt.”\n”Det där blev du nöjd med.”"
     ],
     [
-     "Avsluta\n27–30 min",
+     "Avsluta\nde sista minuterna",
      "Säg några minuter före slutet att ni snart slutar. Säg sedan en sak du såg eller tyckte om, och när ni ses nästa gång.",
      "”Du lärde mig ett nytt spel i dag. Vi ses på torsdag.”"
     ]

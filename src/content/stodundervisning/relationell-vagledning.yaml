@@ -7,7 +7,7 @@
 # sajten, out/FRAN-SAJTEN.md, och analys.md, Tecknet och den lugna platsen blir del 2).
 titel: "Relationell vägledning"
 undertitel: "Så bygger du en relation som bär och använder den för att vägleda en elev som lätt hamnar i affekt, för F–⁠9"
-ingress: "Elever följer vuxna de litar på. Metoden handlar om hur du bemöter en elev som lätt hamnar i affekt: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar du första steget tillbaka. Två gånger i veckan har du och eleven en halvtimme som är elevens. I åtta delar slår du upp vad du gör, steg för steg."
+ingress: "Elever följer vuxna de litar på. Metoden handlar om hur du bemöter en elev som lätt hamnar i affekt: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar du första steget tillbaka. Två gånger i veckan har du och eleven 10–30 minuter som är elevens. I åtta delar slår du upp vad du gör, steg för steg."
 omrade: "Socialt"
 arskurs:
   - "F-3"
@@ -21,14 +21,14 @@ taggar:
   - aterkommande-pass
 format:
   - "enskilt"
-tid: "Cirka 30 minuter per pass, två gånger i veckan"
+tid: "10–30 minuter per pass, två gånger i veckan"
 grupp: "En elev och en vuxen"
 period: "Tio veckor"
 material:
   - bemötandeplanen
   - bladet Vår överenskommelse
   - bladet Svåra stunder vecka för vecka
-uppdaterad: 2026-11-24
+uppdaterad: 2026-11-25
 publicerad: 2026-11-23
 relaterade: [kompissamtal, seriesamtal]
 utkast: false
@@ -50,7 +50,7 @@ pabordet:
     alt: "Överst står rubriken Svåra stunder vecka för vecka och raderna Elev och Räknas av. Under rubriken står hur du fyller i bladet: räkna varje vecka de gånger eleven hamnade i affekt eller låste sig, och sätt ett kryss vid antalet. Räkna också lösningarna, när eleven visade tecknet, gick till sin lugna plats eller löste det med ord, och sätt en ring vid antalet. Sedan kommer diagrammet. Antalet i veckan går från 0 till 15 uppåt, och åt höger kommer först kolumnen Före, veckan före start, och sedan vecka 1 till 10. Nederst står förklaringen: kryss och en heldragen linje för svåra stunder, ringar och en streckad linje för lösningar."
     efter: "ram: Svåra stunder vecka för vecka"
 inledning:
-  - "Relationell vägledning handlar om hur du som vuxen bemöter en elev som lätt hamnar i affekt, har svårt att följa regler och ofta bråkar. Elever följer vuxna de litar på, och förtroendet bygger du genom hur du möter eleven: hur du hälsar, hur du säger till, hur du håller dig lugn när det hettar till och hur du tar första steget efteråt. Två gånger i veckan har du och eleven dessutom stunden, en halvtimme där eleven bestämmer vad ni gör. Hur du bemöter eleven står steg för steg i åtta delar, som du slår upp när du behöver dem."
+  - "Relationell vägledning handlar om hur du som vuxen bemöter en elev som lätt hamnar i affekt, har svårt att följa regler och ofta bråkar. Elever följer vuxna de litar på, och förtroendet bygger du genom hur du möter eleven: hur du hälsar, hur du säger till, hur du håller dig lugn när det hettar till och hur du tar första steget efteråt. Två gånger i veckan har du och eleven dessutom stunden, 10–30 minuter där eleven bestämmer vad ni gör. Hur du bemöter eleven står steg för steg i åtta delar, som du slår upp när du behöver dem."
   - "En elev som ofta får höra vad hen gör fel slutar lyssna på vuxna, och det hjälper inte att säga det högre. Det som får en elev att följa en vuxen är förtroendet: eleven vet att du vill hen väl, och att du menar det du säger. Du är varm och ställer krav på samma gång. Varje möte som slutar bra stärker förtroendet, och det är det du har att ta av den dag du behöver säga något som eleven inte vill höra. Tumregeln är därför att lämna varje möte med eleven med en starkare relation än när ni började. Det gäller tillsägelsen, och det gäller dagen efter ett utbrott. Klassen ser hur du bemöter eleven och tar efter, så det du gör med en elev lär du alla."
   - "Du som arbetar med eleven måste lära dig att tycka om hen och bry dig om hen, också när hen bryter mot regler eller är elak mot andra barn. Då behöver du förstå varför eleven gör som hen gör, så att du ser det komma. Mycket av det eleven gör är för att skydda sig själv. Barn som ofta hamnar i aggression ser andra som ett hot, som om de vill dem illa, och då blir våld och glåpord ett försvar. Se det inte som dålig karaktär. Det är ett symptom, och du ska hjälpa eleven att komma ifrån det."
   - "Du kan inte bara vara den som ställer krav. Eleven ska också ha roligt med dig, och ni ska kunna skratta tillsammans, så att du blir någon eleven vill vara med. Delad glädje bygger relation. Med en relation kan du påverka eleven och dela med dig av ditt lugn, och är eleven inte i affekt, vill hen göra rätt när du är där. Gör eleven mer rätt, kan du berömma, och då tål relationen också bakslagen."
@@ -62,7 +62,7 @@ inledning:
   - "Eleverna som metoden är till för hör till dem som skolan har svårast att lyckas med, och bakslagen kommer hur väl ni vuxna än gör det här. Räkna med två steg fram och ett tillbaka. Målet är färre och kortare svåra stunder och en snabbare väg tillbaka, och en elev som vet att det finns vuxna i skolan som inte ger upp. Du för in de svåra stunderna vecka för vecka på en kurva. De blir sällan noll i en skola full av krav, men de ska bli färre. För en del barn är du en av få vuxna utanför familjen som inte ger upp. Det är skäl nog att fortsätta försöka."
 upplagg:
   rubrik: "Så fungerar insatsen"
-  text: "I tio veckor gör alla vuxna runt eleven likadant i varje möte: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar den vuxne första steget tillbaka. Arbetslaget träffas före start, skriver en bemötandeplan och ser över den varannan vecka. Du som håller i insatsen har stunden två gånger i veckan, en halvtimme där eleven väljer vad ni gör. Eleven väljer ett tecken och en lugn plats och övar med dig från vecka 1. Varje fredag räknar du veckans svåra stunder och säger något bra som eleven gjorde. Efter vecka 10 ser arbetslaget om de har blivit färre och bestämmer fortsättningen."
+  text: "I tio veckor gör alla vuxna runt eleven likadant i varje möte: först lugn, sedan kontakt, sedan vägledning. Efter en svår stund tar den vuxne första steget tillbaka. Arbetslaget träffas före start, skriver en bemötandeplan och ser över den varannan vecka. Du som håller i insatsen har stunden två gånger i veckan, 10–30 minuter där eleven väljer vad ni gör. Eleven väljer ett tecken och en lugn plats och övar med dig från vecka 1. Varje fredag räknar du veckans svåra stunder och säger något bra som eleven gjorde. Efter vecka 10 ser arbetslaget om de har blivit färre och bestämmer fortsättningen."
 gruppen:
   rubrik: "Vem metoden är för"
   text: "Metoden är för en elev i F–⁠9 som ofta hamnar i affekt eller stänger av, har svårt att följa regler och ofta bråkar, när anpassningarna i klassrummet inte har räckt. Är någon i fara eller kränkt, går skolans rutin före metoden. Elevhälsan är med från början. Oroar du dig för hur eleven har det hemma, eller behöver eleven vård eller en utredning, följer skolan sin rutin, och insatsen kan gå bredvid. En vuxen håller i insatsen: klassläraren eller mentorn, en speciallärare, en resurs eller en fritidspedagog. Vårdnadshavarna och de andra vuxna är med i bemötandeplanen."
@@ -103,6 +103,23 @@ tabeller:
         - "Samma sak har hänt flera gånger."
         - "Hur eleven ser det först, sedan din oro, sedan en lösning för er båda."
     not: "Varje del står längre fram, under Materialet, med stegen, ett case och skälen."
+  - rubrik: "Så väljer du stundens längd"
+    plats: "efter-tidsschema"
+    text: "En halvtimme räcker till mer, men tio minuter som blir av varje gång gör mer för relationen än en halvtimme som ställs in. Välj den längd som skolan kan hålla i tio veckor. Håller klassläraren i insatsen, kan en annan vuxen ta klassen under stunden. Då lär klassläraren känna eleven, och eleven ser människan bakom kraven och styrningen i klassen. Tiden är en insättning på relationskontot, att ta av när det blir svårt."
+    kolumner:
+      - "Längd"
+      - "Det hinner ni"
+      - "Passar när"
+    rader:
+      - - "10 minuter"
+        - "En omgång kort, eller bygga vidare på det ni gjorde sist."
+        - "En kollega tar klassen i tio minuter."
+      - - "20 minuter"
+        - "Spel, teckning eller musik."
+        - "Du är osäker. Börja här."
+      - - "30 minuter"
+        - "Ett bygge eller ett långt spel."
+        - "Du har ingen klass att lämna."
   - rubrik: "Om något händer i stunden"
     plats: "efter-tidsschema"
     kolumner:
@@ -136,7 +153,7 @@ tabeller:
       - - "Klassläraren"
         - "Säger till tyst och enskilt, svarar på elevens tecken och sätter eleven bredvid en kamrat som är trygg i samarbete, i en uppgift där båda behövs."
       - - "Andra lärare, fritids och vikarier"
-        - "Hälsar med namnet, gör som planen säger i de fyra lägena och berättar för dig samma dag när något har hänt."
+        - "Hälsar med namnet, gör som planen säger i de fyra lägena och berättar för dig samma dag när något har hänt. En av dem tar klassen när klassläraren har stunden."
       - - "En vuxen till som eleven känner"
         - "Tar stunden när du är borta, och kommer när någon behöver bytas av."
       - - "Vårdnadshavarna"
@@ -169,21 +186,38 @@ tabeller:
         - "Eleven väljer vad du berättar för hemmet på fredagen."
         - "Eleven väljer, och får säga nej. Säg till eleven vad du ändå måste berätta."
 tidsschema:
-  rubrik: "Stunden: en halvtimme som är elevens"
-  text: "Stunden är likadan varje gång: samma vuxen, samma plats och samma tider, och eleven bestämmer vad ni gör. Första gången säger du vad den är: ”Det här är din stund. Du bestämmer vad vi gör, och jag är med.” Ha roligt tillsammans, för delad glädje bygger relationen. Ibland gör ni något utanför schemat. Stunden är ett erbjudande: eleven får säga nej eller gå, och du sitter kvar tiden ut. Du delar inte ut den som belöning och ställer inte in den efter en dålig dag. Stunden står också på Lektionskortet, ett A4 i en egen fil, att läsa före de första stunderna."
+  rubrik: "Stunden: 10–30 minuter som är elevens"
+  text: "Stunden är likadan varje gång: samma vuxen, samma plats och samma tider, och eleven bestämmer vad ni gör. Första gången säger du vad den är: ”Det här är din stund. Du bestämmer vad vi gör, och jag är med.” Ha roligt tillsammans, för delad glädje bygger relationen. Ibland gör ni något utanför schemat. Stunden är ett erbjudande: eleven får säga nej eller gå, och du sitter kvar tiden ut. Du delar inte ut den som belöning och ställer inte in den efter en dålig dag. Tabellen har tiderna för en stund på 20 minuter."
   rader:
     - tid: "Före stunden"
       fas: "Förberedelse"
-      vad: "Bestäm två tider i veckan, inte på den rast eleven helst vill ha, och säg dem till eleven och klassläraren. De första gångerna har du några saker framme att välja bland, som papper och pennor, ett kortspel och en boll."
-    - tid: "0–3 min"
+      vad: "Bestäm två tider i veckan, inte på den rast eleven helst vill ha, och säg dem till eleven och den som har klassen då. De första gångerna har du saker framme att välja bland, som papper och pennor, ett kortspel och en boll."
+    - tid: "0–2 min"
       fas: "Börja"
       vad: "Hälsa med namnet, och fråga vad eleven vill göra. Säger eleven ”vet inte”, visar du sakerna eller tar fram det ni gjorde sist."
-    - tid: "3–27 min"
+    - tid: "2–17 min"
       fas: "Eleven leder"
       vad: "Gör det eleven har valt, på elevens sätt. Säg det du ser och hur eleven verkar ha det: ”Du blandar korten snabbt.” ”Det där blev du nöjd med.” Du undervisar inte, ger inga råd och tar inte upp det som har gått fel."
-    - tid: "27–30 min"
+    - tid: "17–20 min"
       fas: "Avsluta"
       vad: "Säg några minuter före slutet att ni snart slutar. Säg sedan en sak du såg eller tyckte om, och när ni ses nästa gång: ”Du lärde mig ett nytt spel i dag. Vi ses på torsdag.”"
+  varianter:
+    - nar: "en stund på tio minuter"
+      delar:
+        - fas: "Börja"
+          tid: "0–1 min"
+        - fas: "Eleven leder"
+          tid: "1–8 min"
+        - fas: "Avsluta"
+          tid: "8–10 min"
+    - nar: "en stund på 30 minuter"
+      delar:
+        - fas: "Börja"
+          tid: "0–3 min"
+        - fas: "Eleven leder"
+          tid: "3–27 min"
+        - fas: "Avsluta"
+          tid: "27–30 min"
   efter: "Stunden har inget som ska bli klart, och den är lika lång en dålig dag som en bra."
 steg:
   rubrik: "Varje möte: lugn, kontakt, vägledning"
@@ -214,7 +248,7 @@ exempel:
   rubrik: "Exempel: tio veckor med Elias"
   valt:
     rubrik: "Eleven"
-    text: "Elias i åk 4 hamnar i bråk på rasterna, och ett par gånger i veckan slutar en lektion med att han skriker eller springer ut. Klassläraren Karin håller i insatsen."
+    text: "Elias i åk 4 hamnar i bråk på rasterna, och ett par gånger i veckan slutar en lektion med att han skriker eller springer ut. Klassläraren Karin håller i insatsen. Två gånger i veckan tar fritidspedagogen klassen i tio minuter, och då har Karin stunden med Elias."
   text:
     - "Veckan före start räknar Karin sex svåra stunder, och som längst tar det resten av dagen innan Elias är tillbaka. Han ger skolan tre av tio. Med Elias, hans pappa och arbetslaget skriver hon bemötandeplanen. På frågan vad som blir bättre om det här går bättre svarar Elias: ”Att få vara med på fotbollen.” Som tecken väljer han handen på huvudet, som syns både i klassrummet och på rasten. Som lugn plats väljer han soffan i kapprummet."
     - "De första stunderna bygger han lego och svarar knappt. Den fjärde stunden ber han Karin hålla bygget medan han sätter på taket. När de har övat tecknet lägger han en dag handen på huvudet under matten. ”Gå du”, säger Karin tyst, och han går till soffan. I vecka 5 sveper han matteboken i golvet efter lunchrasten (del 6), och veckan efter har de sitt första samtal om matten efter rasten (del 8)."
@@ -308,8 +342,8 @@ mal:
 checklista:
   rubrik: "Före start"
   punkter:
-    - "Pratat med elevhälsan och rektor om insatsen, som tar två till tre timmar i veckan, och läst skolans rutiner för akuta situationer och kränkningar."
-    - "Bestämt vem som håller i insatsen, vem som tar stunden när hen är borta, och en plats och två tider för stunden."
+    - "Pratat med elevhälsan och rektor om insatsen, som tar upp till tre timmar i veckan, och läst skolans rutiner för akuta situationer och kränkningar."
+    - "Bestämt vem som håller i insatsen, vem som tar stunden eller klassen när det behövs, och stundens längd, plats och två tider."
     - "Ringt vårdnadshavarna och frågat vad som lugnar och vad de märker innan det brister."
     - "Räknat de svåra stunderna och lösningarna under en vecka och frågat eleven hur det är i skolan."
     - "Skrivit bemötandeplanen på en gemensam träff runt eleven och gett planen till alla vuxna som möter eleven, också vikarier."
@@ -318,12 +352,12 @@ checklista:
     - "Övat med klassen vart den går när det brister, som en rutin för alla."
     - "Under tiden hälsat på eleven med namnet varje dag och sagt till enskilt, som i del 1 och del 3."
 grund:
-  text: "Gymnasieelever i USA som hade skickats till rektorn för trots samarbetade med lärare de litade på, och förtroendet hängde ihop med att läraren både brydde sig och hade höga förväntningar (Gregory och Weinstein, 2008). Konflikt i relationen till läraren hänger tydligt ihop med utagerande beteende (Lei m.fl., 2016), och en insats där läraren bygger, vårdar och lagar relationen gav bättre relationer och mindre störande beteende i en liten studie i åk 4–⁠5 (Cook m.fl., 2018). Stunden är formad efter Banking Time, som i en lottad studie i förskolan gjorde lärarna mindre negativa mot barnen men hade liten effekt på barnens beteende (Williford m.fl., 2017). Redan lite stress gör det svårare att tänka efter (Arnsten, 2009), och därför väntar du med samtalet tills eleven är lugn (SPSM, 2024). Att lära ut ett beteende som ersätter det gamla och att ändra kraven har starkt stöd i låg- och mellanstadiet (Epstein m.fl., 2008). Samtalet om en överenskommelse följer Greenes modell, som har gett lika goda resultat som föräldraträning i studier med barn och unga (Norman m.fl., 2026), men i skolan är modellen lite prövad. Greppen när det trappas upp kommer ur lågaffektivt bemötande, där SBU inte hittade någon effektstudie för barn och unga inom socialtjänsten (SBU, 2020), och kontakt före korrigering och NVC är inte prövade som program."
+  text: "Gymnasieelever i USA som hade skickats till rektorn för trots samarbetade med lärare de litade på, och förtroendet hängde ihop med att läraren både brydde sig och hade höga förväntningar (Gregory och Weinstein, 2008). Konflikt i relationen till läraren hänger tydligt ihop med utagerande beteende (Lei m.fl., 2016), och en insats där läraren bygger, vårdar och lagar relationen gav bättre relationer och mindre störande beteende i en liten studie i åk 4–⁠5 (Cook m.fl., 2018). Stunden är formad efter Banking Time, där läraren har 10–15 minuter med ett barn två eller tre gånger i veckan. I en lottad studie i förskolan gjorde det lärarna mindre negativa mot barnen men hade liten effekt på barnens beteende (Williford m.fl., 2017). Redan lite stress gör det svårare att tänka efter (Arnsten, 2009), och därför väntar du med samtalet tills eleven är lugn (SPSM, 2024). Att lära ut ett beteende som ersätter det gamla och att ändra kraven har starkt stöd i låg- och mellanstadiet (Epstein m.fl., 2008). Samtalet om en överenskommelse följer Greenes modell, som har gett lika goda resultat som föräldraträning i studier med barn och unga (Norman m.fl., 2026), men i skolan är modellen lite prövad. Greppen när det trappas upp kommer ur lågaffektivt bemötande, där SBU inte hittade någon effektstudie för barn och unga inom socialtjänsten (SBU, 2020), och kontakt före korrigering och NVC är inte prövade som program."
   kallor: "Bygger på Arnsten (2009), Cook m.fl. (2018), Epstein m.fl. (2008), Gregory och Weinstein (2008), Lei m.fl. (2016), Norman m.fl. (2026), SBU (2020), SPSM (2024) och Williford m.fl. (2017)."
 ramar:
   rubrik: "Materialet"
   text:
-    - "De åtta delarna har en sida var. Här finns också bemötandeplanen med ett ifyllt exempel, bladet Svåra stunder vecka för vecka och bladet Vår överenskommelse. Lektionskortet är en egen fil."
+    - "De åtta delarna har en sida var. Här finns också bemötandeplanen med ett ifyllt exempel, bladet Svåra stunder vecka för vecka och bladet Vår överenskommelse. Lektionskortet, stunden på ett A4, är en egen fil."
   ramar:
     - rubrik: "Till läraren: de åtta delarna"
       lektioner: true
@@ -337,10 +371,10 @@ ramar:
             - rubrik: "Tanken"
               text: "En elev som ofta får höra vad hen gör fel räknar med att vuxna vill något av hen. Sikta därför på fem vänliga ord för varje tillsägelse. Lär känna eleven så väl att du kan förutse vad som blir svårt, och se det eleven gör som ett försvar. Du bygger relationen när du inte vill något: du hälsar, är nyfiken på det som är elevens, har roligt med eleven och kommer tillbaka också efter en dålig dag. Delad glädje gör att eleven vill vara med dig. Kraven står kvar under tiden, och relationen gör dem lättare att ta emot. Räkna med att det tar veckor, och att eleven prövar om du menar allvar."
             - rubrik: "Gör så här"
-              text: "1. Hälsa med namnet varje dag. Gör det lika varmt dagen efter en svår dag: ”Hej Nora, bra att du är här.”\n2. Ha stunden två gånger i veckan. I en halvtimme väljer eleven vad ni gör, och du följer med och har roligt. Säg tid och plats enskilt till eleven, och ställ inte in stunden efter en dålig dag. Hur den går till står under Stunden.\n3. Ta två minuter med eleven de dagar ni inte har stunden. Fråga om det som är elevens och inte om skolarbetet: ”Hur gick matchen?” Vet du inte vad eleven tycker om, lyssnar du efter det eller frågar hemmet.\n4. Säg det du ser: ”Du bygger högt.” I stunden och de två minuterna rättar du inte, ger inga råd, ställer inga krav och tar inte upp det som har gått fel.\n5. Håll i när eleven stöter bort dig. Ett ”töntigt” betyder inte nej. Sitt kvar tiden ut när eleven går eller inte kommer, och säg utan förebråelse att du var där. Har eleven inte kommit på tre veckor, fråga vad som passar bättre."
+              text: "1. Hälsa med namnet varje dag. Gör det lika varmt dagen efter en svår dag: ”Hej Nora, bra att du är här.”\n2. Ha stunden 10–30 minuter två gånger i veckan. Då väljer eleven vad ni gör, och du följer med och har roligt. Säg tid och plats enskilt till eleven, och ställ inte in stunden efter en dålig dag. Hur den går till står under Stunden.\n3. Ta två minuter med eleven de dagar ni inte har stunden. Fråga om det som är elevens och inte om skolarbetet: ”Hur gick matchen?” Vet du inte vad eleven tycker om, lyssnar du efter det eller frågar hemmet.\n4. Säg det du ser: ”Du bygger högt.” I stunden och de två minuterna rättar du inte, ger inga råd, ställer inga krav och tar inte upp det som har gått fel.\n5. Håll i när eleven stöter bort dig. Ett ”töntigt” betyder inte nej. Sitt kvar tiden ut när eleven går eller inte kommer, och säg utan förebråelse att du var där. Har eleven inte kommit på tre veckor, fråga vad som passar bättre."
             - rubrik: "Caset"
               kursiv: true
-              text: "Nora i åk 8 lämnar lektioner när det blir för mycket, och hon litar inte på lärare. Mentorn Samir säger en måndag, när ingen annan hör: ”Tisdagar och torsdagar efter lunch har vi en halvtimme i musiksalen. Du bestämmer vad vi gör.” På tisdagen kommer hon, ser sig om och säger: ”Det här är töntigt.” Efter tre minuter går hon. ”Vi ses på torsdag”, säger Samir.\nPå torsdagen kommer hon inte. Samir sitter kvar den halvtimmen. Nästa morgon säger han i korridoren: ”Hej Nora. Jag satt där i går. Vi ses på tisdag.” Hon svarar inte. På måndagen frågar han hur det gick på matchen, som han har hört henne prata om, och får en axelryckning. Veckan efter kommer hon inte heller, och han säger samma sak.\nDen tredje veckan står hon i dörren. ”Får man spela vad man vill på den där?” säger hon och pekar på högtalaren. Hon sätter på en låt och sitter kvar. ”Den har jag inte hört. Den börjar lugnt och blir större”, säger Samir. De lyssnar på två låtar till."
+              text: "Nora i åk 8 lämnar lektioner när det blir för mycket, och hon litar inte på lärare. Mentorn Samir säger en måndag, när ingen annan hör: ”Tisdagar och torsdagar efter lunch har vi tjugo minuter i musiksalen. Du bestämmer vad vi gör.” På tisdagen kommer hon, ser sig om och säger: ”Det här är töntigt.” Efter tre minuter går hon. ”Vi ses på torsdag”, säger Samir.\nPå torsdagen kommer hon inte. Samir sitter kvar tiden ut. Nästa morgon säger han i korridoren: ”Hej Nora. Jag satt där i går. Vi ses på tisdag.” Hon svarar inte. På måndagen frågar han hur det gick på matchen, som han har hört henne prata om, och får en axelryckning. Veckan efter kommer hon inte heller, och han säger samma sak.\nDen tredje veckan står hon i dörren. ”Får man spela vad man vill på den där?” säger hon och pekar på högtalaren. Hon sätter på en låt och sitter kvar. ”Den har jag inte hört. Den börjar lugnt och blir större”, säger Samir. De lyssnar på två låtar till."
             - rubrik: "Därför"
               text: "Steg 1: Hälsningen säger att Nora är väntad. När den är lika varm dagen efter att hon inte kom, säger den att han inte är sur.\nSteg 2: Stunden hänger inte på hur veckan har gått. Samir bokar den när ingen hör, så att Nora slipper förklara den för kamraterna.\nSteg 3: Det som är elevens eget är lättast att prata om.\nSteg 4: En rättelse eller ett råd hade sagt Nora att han ändå vill något av henne. Han säger något om låten, som är hennes.\nSteg 5: Nora prövar i två veckor om han ger upp. Den som slutar komma när eleven säger nej har visat att eleven hade rätt om vuxna."
             - rubrik: "Bygger på"
@@ -461,7 +495,7 @@ ramar:
       huvud:
         - rubrik: "Elev och datum"
         - rubrik: "Elevens mål"
-        - rubrik: "Vem har stunden, och när"
+        - rubrik: "Vem har stunden, när och hur länge"
       delar:
         - rubrik: "En vanlig dag (del 1, 3 och 4)"
           falt:
@@ -495,8 +529,8 @@ ramar:
           text: "Nora, åk 8, vecka 4"
         - rubrik: "Elevens mål"
           text: "”Att mamma slipper samtal från skolan.”"
-        - rubrik: "Vem har stunden, och när"
-          text: "Samir, tisdagar och torsdagar efter lunch, och han fyller i kurvan. Åsa tar stunden när han är borta."
+        - rubrik: "Vem har stunden, när och hur länge"
+          text: "Samir, tisdagar och torsdagar efter lunch i tjugo minuter. Han fyller i kurvan, och Åsa tar stunden när han är borta."
       delar:
         - rubrik: "En vanlig dag (del 1, 3 och 4)"
           falt:
@@ -610,6 +644,14 @@ plan:
     ganger: 2
     veckor: 2
     lov: "Öva igen efter ett lov, och påminn före det svåra: ”Kom ihåg tecknet på matten.”"
+  # Meningen gäller tabellen på metodens sida. Planen visar tiderna för den längd läraren har valt.
+  utan:
+    - "Tabellen har tiderna för en stund på 20 minuter."
+  # Stödet för valet av stundens längd i Planera insatsen (sajten 2026-11-25, K-831, efter Niclas beställning samma dag).
+  # Meningarna står ordagrant i texten över tabellen Så väljer du stundens längd.
+  langdval:
+    text: "En halvtimme räcker till mer, men tio minuter som blir av varje gång gör mer för relationen än en halvtimme som ställs in. Välj den längd som skolan kan hålla i tio veckor. Håller klassläraren i insatsen, kan en annan vuxen ta klassen under stunden."
+    mer: "Så väljer du stundens längd"
   justera:
     - "Läs bemötandeplanen med arbetslaget. Gjorde alla lika, och fick elevens tecken svar?"
     - "Välj färre krav ett tag, och lägg resten åt sidan med flit (del 4). Se om de svåra stunderna blir färre."
@@ -626,7 +668,7 @@ lathund:
   metoden:
     text:
       - "Elever följer vuxna de litar på, så lämna varje möte med eleven med en starkare relation än när ni började. Ordningen är lugn, kontakt, vägledning. Snurrar eleven en linjal, fråga tyst: ”Är det svårt att sitta still nu?” Vänta på en blick och säg: ”Lägg linjalen i pennskrinet.”"
-      - "Efter en svår stund tar du första steget tillbaka. Kraven står kvar, och du ändrar hur du ställer dem. Eleven väljer ett tecken och en lugn plats, övade när det är lugnt. Två gånger i veckan har du och eleven en halvtimme som är elevens. Är någon i fara eller kränkt, går skolans rutin före."
+      - "Efter en svår stund tar du första steget tillbaka. Kraven står kvar, och du ändrar hur du ställer dem. Eleven väljer ett tecken och en lugn plats och övar i lugnt läge. Två gånger i veckan har du och eleven 10–30 minuter som är elevens. Är någon i fara eller kränkt, går skolans rutin före."
     ruta:
       rubrik: "Tre saker att hålla fast vid"
       punkter:
@@ -663,8 +705,8 @@ lathund:
     textRubrik: "Nora i åk 8 och mentorn Samir"
     utskrift: Skriv ut passexemplet
     text:
-      - "Samir säger en måndag, när ingen annan hör: ”Tisdagar och torsdagar efter lunch har vi en halvtimme i musiksalen. Du bestämmer vad vi gör.” På tisdagen säger Nora: ”Det här är töntigt.” Efter tre minuter går hon."
-      - "På torsdagen kommer hon inte. Samir sitter kvar den halvtimmen. Nästa morgon säger han: ”Hej Nora. Jag satt där i går. Vi ses på tisdag.” Veckan efter kommer hon inte heller, och han säger samma sak."
+      - "Samir säger en måndag, när ingen annan hör: ”Tisdagar och torsdagar efter lunch har vi tjugo minuter i musiksalen. Du bestämmer vad vi gör.” På tisdagen säger Nora: ”Det här är töntigt.” Efter tre minuter går hon."
+      - "På torsdagen kommer hon inte. Samir sitter kvar tiden ut. Nästa morgon säger han: ”Hej Nora. Jag satt där i går. Vi ses på tisdag.” Veckan efter kommer hon inte heller, och han säger samma sak."
       - "Den tredje veckan står hon i dörren och pekar på högtalaren: ”Får man spela vad man vill på den där?” Hon sätter på en låt och sitter kvar. ”Den börjar lugnt och blir större”, säger Samir."
     forberett:
       rubrik: "Det jag förberedde"
@@ -672,20 +714,20 @@ lathund:
         - "Bestämt platsen för stunden och de två tiderna, och sagt dem till Nora när ingen annan hörde. Sett till att högtalaren i musiksalen fungerar."
     klarTidigt: "Stunden har inget som ska bli klart. Sitt kvar tiden ut, också när eleven går."
     schema:
-      rubrik: "30 minuter, del för del"
+      rubrik: "20 minuter, del för del"
       rader:
         - tid: "Före"
           fas: "Förberedelse"
           vad: "Platsen för stunden och de två tiderna är desamma varje vecka. Ha några saker framme att välja bland."
-        - tid: "0–3"
+        - tid: "0–2"
           fas: "Börja"
           vad: "Hälsa med namnet. Första gången säger du: ”Det här är din stund.” Fråga vad eleven vill göra, och vet eleven inte, visar du sakerna."
-        - tid: "3–27"
+        - tid: "2–17"
           fas: "Eleven leder"
           vad: "Gör det eleven har valt. Säg det du ser. Du undervisar inte, ger inga råd och tar inte upp det som har gått fel."
           fraser:
             - "Den börjar lugnt och blir större."
-        - tid: "27–30"
+        - tid: "17–20"
           fas: "Avsluta"
           vad: "Förvarna om slutet. Säg en sak du såg, och vilken dag ni ses igen."
           fraser:
