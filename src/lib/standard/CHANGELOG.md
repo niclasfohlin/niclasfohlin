@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.70.0, 2026-11-25
+
+- `plan.js` (sajtens K-831; riggens förslag 2026-11-25, när stunden i Relationell vägledning blev 10–30 minuter): `variantensNar` läser "en stund på tio minuter" som "ett pass på tio minuter", så att en metod som kallar passet stunden skriver sina varianter för passets längd med sitt eget ord. Metodens sida, Word och planen skriver då "En stund på tio minuter: börja 0–1 minuter, eleven leder 1–8 och avsluta 8–10."
+
 ## 0.69.0, 2026-11-23
 
 - `plan.js` (användbarhetsprovet och verifieringen av sajtens K-822, 2026-11-23): `ovningensRad(plan, valet, ovning, ovat)`, övningens rad i sammanställningen, "Öva tecknet: 3 av 4 gånger är bockade.", och `sammanstallningstext` tar den som `info.ovning`. `sammanstallning` har `helgdagsdagar`, helgdagarna med namn, och `passensRad` säger dem: "Ett pass föll på julafton och ett faller på nyårsafton." Förut stod "Ett föll på en helgdag och ett faller på en helgdag". Utan namnen säger raden som förut.

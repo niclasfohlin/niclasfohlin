@@ -3118,7 +3118,8 @@ export const variantensMening = (v) => {
 /**
  * När en variant av passet gäller, ur variantens `nar` (riggens omgång 1 2026-10-26: Upprepad läsnings pass på tio
  * minuter och Högläsning i pars visning i veckans första pass hade sina tider i en mening): metodens veckor, "vecka 1–3",
- * passets längd, "ett pass på tio minuter", och planens ord för passen (tolkaPassen), som "pass 2" och "veckans första
+ * passets längd, "ett pass på tio minuter", eller "en stund på tio minuter" i en metod som kallar passet stunden (riggens
+ * förslag 2026-11-25, Relationell vägledning), och planens ord för passen (tolkaPassen), som "pass 2" och "veckans första
  * pass", också i vissa veckor, "veckans första pass i vecka 2–5" och "sista passet i vecka 5".
  * @param {unknown} text
  * @returns {VariantensNar | null}
@@ -3126,7 +3127,7 @@ export const variantensMening = (v) => {
 export function variantensNar(text) {
   if (typeof text !== 'string') return null;
   const t = somPass(text.replace(/⁠/g, '').trim().toLowerCase().replace(/\s+/g, ' '));
-  let m = t.match(new RegExp(String.raw`^(?:ett )?pass på (${talIRegex(1, 120)}) minuter$`, 'u'));
+  let m = t.match(new RegExp(String.raw`^(?:(?:ett )?pass|(?:en )?stund) på (${talIRegex(1, 120)}) minuter$`, 'u'));
   if (m) { const n = talAv(m[1]); return n >= 1 ? { typ: 'minuter', minuter: n } : null; }
   m = t.match(/^(.+?) i (vecka .+)$/);
   if (m) {
