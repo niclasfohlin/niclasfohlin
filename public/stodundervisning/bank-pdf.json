@@ -13401,28 +13401,28 @@
     "datum": "2026-11-17"
   },
   "relationell-vagledning": {
-    "word": "ee05a59a6857c79c8fd3302056db8dfdbbfc4fe65158fab514821d653e208eb5",
+    "word": "25c0c86607e9dc102d87cccbf2bc8009760e7c5a81bff738f051a9c1b5d133c5",
     "packare": "da4966c04520cb79",
-    "pdf": "76adaa05cd2fafe9eb5e7855f97c130df8a844228e8d28989d46a94fac88728e",
-    "sidor": 33,
-    "kB": 780,
-    "datum": "2026-11-24"
+    "pdf": "12d7182c19c3fe1da000259a8cbb0885dc74c84aaa0987afe86507b25526a7de",
+    "sidor": 34,
+    "kB": 783,
+    "datum": "2026-11-25"
   },
   "relationell-vagledning-metoden": {
-    "word": "fe07cf025fc78eda6786c96d63e1aa5974950ba6ce939a15d32edb1e6f75005e",
+    "word": "d212fe46582778e1c491946b1745feb454b5196f692fe8fd6bb23dd02e4d7625",
     "packare": "da4966c04520cb79",
-    "pdf": "f1cc1cab2fca80a5c9994b8ca3ca2f163fc24dfd406d83d59d52b63963dc61d5",
-    "sidor": 20,
-    "kB": 561,
-    "datum": "2026-11-24"
+    "pdf": "dfe477e023d61afdae596d7f133e81bcc4b1ce4cac9fd79a5780fea1294d10c1",
+    "sidor": 21,
+    "kB": 564,
+    "datum": "2026-11-25"
   },
   "relationell-vagledning-lathund-text": {
-    "word": "09b3f87ed19833c84826fae2a2bf1e4f2ad2682a354d4fbb193d69795b3ec94c",
+    "word": "c1ba17c3260c652c8bad4f920f4e801ed92ddcf639007444f0f0950b5dc13545",
     "packare": "da4966c04520cb79",
-    "pdf": "6458deb5fe891fefebba928eb19d97c8902805636b772e762aa85d3cc2dc7fe4",
+    "pdf": "195b40f336d8dbdb6292b6f5808dadecf5ca5040225a8a59c209131ef57011c0",
     "sidor": 1,
     "kB": 142,
-    "datum": "2026-11-23"
+    "datum": "2026-11-25"
   },
   "relationell-vagledning-blad-svara-stunder-vecka-for-vecka": {
     "word": "c588e63b3f9dc6ae865dd45603e0007d6823655e656d55a55c765d44a316feac",
@@ -13440,12 +13440,12 @@
     ]
   },
   "relationell-vagledning-del-1": {
-    "word": "dc7e72d3f7df5950aeb84dfdc0b5140b9f61e32de98d9a9456b1e2bb596dad47",
+    "word": "f752212f1860148fa2eeb9a779d07cc73caa6208642084fcd30c42cf8e2006a0",
     "packare": "da4966c04520cb79",
-    "pdf": "f6cb91c48b5f239e5ecc95db3f0863afa914081771325bac5d5aabeab7a58c67",
+    "pdf": "966d9c3816c830a87319cb4fe292299f48153483a91e7a8d77b417d8fed25682",
     "sidor": 1,
-    "kB": 237,
-    "datum": "2026-11-24"
+    "kB": 239,
+    "datum": "2026-11-25"
   },
   "relationell-vagledning-del-2": {
     "word": "11acae1d65527c6eaf684b31f71f58330615cc6210ad18fe281c6b2097a61b10",
@@ -13504,28 +13504,28 @@
     "datum": "2026-11-24"
   },
   "relationell-vagledning-alla-delar": {
-    "word": "2f951aa4a6696e60479d774ed417783eaedde27ea4fe4596d2cc59e69a8fd6d5",
+    "word": "b373af5b6f502f9e8583d73dee309739929d7326e621387c3a6763490fbf0af2",
     "packare": "da4966c04520cb79",
-    "pdf": "6fc943a2809a8d8f1f78eada68b15a3b284d4972c94f7dc8931dd19f40df05cd",
+    "pdf": "b67d6c9d1c662df66b4e706a0991029d298f49c78247c883b7a38b91ccb4879b",
     "sidor": 8,
-    "kB": 324,
-    "datum": "2026-11-24"
+    "kB": 325,
+    "datum": "2026-11-25"
   },
   "relationell-vagledning-blad-bemotandeplanen": {
-    "word": "237fb764421168f495f132de7d27a8201bb09a2b7530c0ded31c29ab8ddadfdb",
+    "word": "fe88eb261b2ab8b18158a76f84a62cc3188e274c1ba7a6bfc027e2fe09d9ac67",
     "packare": "da4966c04520cb79",
-    "pdf": "dfe21d7310ef75a61d777ce63794806a53c3c91c5e24da3a1ef8d5e2fd1610bc",
+    "pdf": "eba44854460328f9e3aac0ba0131ab10820db52f780fcb00e1959de8487ebd02",
     "sidor": 2,
     "kB": 225,
-    "datum": "2026-11-23"
+    "datum": "2026-11-25"
   },
   "relationell-vagledning-blad-bemotandeplanen-noras-plan": {
-    "word": "f1fcdf424d40fccdc7133bf8afcec1b85732c7aaa25df4d58d06a4cf7bdffa7a",
+    "word": "1eb5c6283a18adb4a8d97abf36080f2b58b3682a0664c4f34c70435d4579e32c",
     "packare": "da4966c04520cb79",
-    "pdf": "c086e6d5fc75955bd95bbcf7ba05dc6d9a657d08beb70df5abcf206a22cc0976",
+    "pdf": "f47326d5af4bf8ecb3ba91b4553143a86af269c1937eb48dfc2d0ec692f7eb15",
     "sidor": 1,
     "kB": 245,
-    "datum": "2026-11-23"
+    "datum": "2026-11-25"
   },
   "relationell-vagledning-blad-var-overenskommelse": {
     "word": "98f49dcf8d6e58c1669b216609d192ad261209c021cb1851914204babebf6325",
@@ -13536,11 +13536,11 @@
     "datum": "2026-11-23"
   },
   "relationell-vagledning-lektionskort": {
-    "word": "47aa062bcfbc62c8cf0335fbec763b0ff8d6c35b9d495d154451bbf30ce5a8b0",
+    "word": "6871205547cb70ff192ae8c269596ac7e5d22c5b4386e9bb5c4a207ba67da919",
     "packare": "da4966c04520cb79",
-    "pdf": "513b92cd75cc02217c9002565db460d8e0cf73e0f454bc7cb15bdf235ef972a2",
+    "pdf": "7ea86faee8f0d76fa573feb30cea8339e4587af498d4aba5a59ba531872ab7fa",
     "sidor": 1,
-    "kB": 85,
-    "datum": "2026-11-22"
+    "kB": 84,
+    "datum": "2026-11-25"
   }
 }
