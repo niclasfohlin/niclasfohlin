@@ -153,7 +153,7 @@ tabeller:
       - - "Klassläraren"
         - "Säger till tyst och enskilt, svarar på elevens tecken och sätter eleven bredvid en kamrat som är trygg i samarbete, i en uppgift där båda behövs."
       - - "Andra lärare, fritids och vikarier"
-        - "Hälsar med namnet, gör som planen säger i de fyra lägena och berättar för dig samma dag när något har hänt. En av dem tar klassen när klassläraren har stunden."
+        - "Hälsar med namnet, gör som planen säger i de fyra lägena och berättar för dig samma dag när något har hänt. En av dem tar klassen när klassläraren har stunden, övar tecknet eller har ett samtal med eleven."
       - - "En vuxen till som eleven känner"
         - "Tar stunden när du är borta, och kommer när någon behöver bytas av."
       - - "Vårdnadshavarna"
@@ -186,8 +186,8 @@ tabeller:
         - "Eleven väljer vad du berättar för hemmet på fredagen."
         - "Eleven väljer, och får säga nej. Säg till eleven vad du ändå måste berätta."
 tidsschema:
-  rubrik: "Stunden: 10–30 minuter som är elevens"
-  text: "Stunden är likadan varje gång: samma vuxen, samma plats och samma tider, och eleven bestämmer vad ni gör. Första gången säger du vad den är: ”Det här är din stund. Du bestämmer vad vi gör, och jag är med.” Ha roligt tillsammans, för delad glädje bygger relationen. Ibland gör ni något utanför schemat. Stunden är ett erbjudande: eleven får säga nej eller gå, och du sitter kvar tiden ut. Du delar inte ut den som belöning och ställer inte in den efter en dålig dag. Tabellen har tiderna för en stund på 20 minuter."
+  rubrik: "Stunden: 20 minuter som är elevens"
+  text: "Stunden är likadan varje gång: samma vuxen, samma plats och samma tider, och eleven bestämmer vad ni gör. Första gången säger du vad den är: ”Det här är din stund. Du bestämmer vad vi gör, och jag är med.” Ha roligt tillsammans, för delad glädje bygger relationen. Ibland gör ni något utanför schemat. Stunden är ett erbjudande: eleven får säga nej eller gå, och du sitter kvar tiden ut. Du delar inte ut den som belöning och ställer inte in den efter en dålig dag. Stunden kan också vara tio minuter eller en halvtimme."
   rader:
     - tid: "Före stunden"
       fas: "Förberedelse"
@@ -200,7 +200,7 @@ tidsschema:
       vad: "Gör det eleven har valt, på elevens sätt. Säg det du ser och hur eleven verkar ha det: ”Du blandar korten snabbt.” ”Det där blev du nöjd med.” Du undervisar inte, ger inga råd och tar inte upp det som har gått fel."
     - tid: "17–20 min"
       fas: "Avsluta"
-      vad: "Säg några minuter före slutet att ni snart slutar. Säg sedan en sak du såg eller tyckte om, och när ni ses nästa gång: ”Du lärde mig ett nytt spel i dag. Vi ses på torsdag.”"
+      vad: "Säg ett par minuter före slutet att ni snart slutar. Säg sedan en sak du såg eller tyckte om, och när ni ses nästa gång: ”Du lärde mig ett nytt spel i dag. Vi ses på torsdag.”"
   varianter:
     - nar: "en stund på tio minuter"
       delar:
@@ -342,14 +342,14 @@ mal:
 checklista:
   rubrik: "Före start"
   punkter:
-    - "Pratat med elevhälsan och rektor om insatsen, som tar upp till tre timmar i veckan, och läst skolans rutiner för akuta situationer och kränkningar."
-    - "Bestämt vem som håller i insatsen, vem som tar stunden eller klassen när det behövs, och stundens längd, plats och två tider."
+    - "Pratat med elevhälsan och rektor om insatsen, upp till tre timmar i veckan, och läst skolans rutiner för fara och kränkningar."
+    - "Bestämt vem som håller i insatsen, vem som tar stunden när hen är borta, och stundens längd, plats och två tider. Också vem som tar klassen när hen har stunden, övar tecknet eller har samtal."
     - "Ringt vårdnadshavarna och frågat vad som lugnar och vad de märker innan det brister."
     - "Räknat de svåra stunderna och lösningarna under en vecka och frågat eleven hur det är i skolan."
     - "Skrivit bemötandeplanen på en gemensam träff runt eleven och gett planen till alla vuxna som möter eleven, också vikarier."
     - "Låtit eleven välja ett tecken och en lugn plats, om hen var med (del 2)."
     - "Övat lägen ur bemötandeplanen i arbetslaget, och bestämt vart klassen går när det brister, vem som hämtas och hur ni byter av."
-    - "Övat med klassen vart den går när det brister, som en rutin för alla."
+    - "Övat med klassen vart den går när det brister."
     - "Under tiden hälsat på eleven med namnet varje dag och sagt till enskilt, som i del 1 och del 3."
 grund:
   text: "Gymnasieelever i USA som hade skickats till rektorn för trots samarbetade med lärare de litade på, och förtroendet hängde ihop med att läraren både brydde sig och hade höga förväntningar (Gregory och Weinstein, 2008). Konflikt i relationen till läraren hänger tydligt ihop med utagerande beteende (Lei m.fl., 2016), och en insats där läraren bygger, vårdar och lagar relationen gav bättre relationer och mindre störande beteende i en liten studie i åk 4–⁠5 (Cook m.fl., 2018). Stunden är formad efter Banking Time, där läraren har 10–15 minuter med ett barn två eller tre gånger i veckan. I en lottad studie i förskolan gjorde det lärarna mindre negativa mot barnen men hade liten effekt på barnens beteende (Williford m.fl., 2017). Redan lite stress gör det svårare att tänka efter (Arnsten, 2009), och därför väntar du med samtalet tills eleven är lugn (SPSM, 2024). Att lära ut ett beteende som ersätter det gamla och att ändra kraven har starkt stöd i låg- och mellanstadiet (Epstein m.fl., 2008). Samtalet om en överenskommelse följer Greenes modell, som har gett lika goda resultat som föräldraträning i studier med barn och unga (Norman m.fl., 2026), men i skolan är modellen lite prövad. Greppen när det trappas upp kommer ur lågaffektivt bemötande, där SBU inte hittade någon effektstudie för barn och unga inom socialtjänsten (SBU, 2020), och kontakt före korrigering och NVC är inte prövade som program."
@@ -644,9 +644,9 @@ plan:
     ganger: 2
     veckor: 2
     lov: "Öva igen efter ett lov, och påminn före det svåra: ”Kom ihåg tecknet på matten.”"
-  # Meningen gäller tabellen på metodens sida. Planen visar tiderna för den längd läraren har valt.
+  # Meningen gäller metodens sida, där alla tre längderna står. Planen visar passet för den längd läraren har valt.
   utan:
-    - "Tabellen har tiderna för en stund på 20 minuter."
+    - "Stunden kan också vara tio minuter eller en halvtimme."
   # Stödet för valet av stundens längd i Planera insatsen (sajten 2026-11-25, K-831, efter Niclas beställning samma dag).
   # Meningarna står ordagrant i texten över tabellen Så väljer du stundens längd.
   langdval:
