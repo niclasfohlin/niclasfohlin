@@ -1,16 +1,16 @@
 {
-  "datum": "2026-11-24T03:11:50.490Z",
+  "datum": "2026-11-25T18:13:04.982Z",
   "strukturer": [
     {
       "id": "turas-om",
-      "antal": 120,
-      "besok": 60,
-      "utskrifter": 12
+      "antal": 127,
+      "besok": 62,
+      "utskrifter": 13
     },
     {
       "id": "visa",
-      "antal": 66,
-      "besok": 26,
+      "antal": 67,
+      "besok": 27,
       "utskrifter": 8
     },
     {
@@ -27,8 +27,8 @@
     },
     {
       "id": "kloka-pennan",
-      "antal": 48,
-      "besok": 28,
+      "antal": 49,
+      "besok": 29,
       "utskrifter": 4
     },
     {
@@ -38,22 +38,28 @@
       "utskrifter": 5
     },
     {
+      "id": "ping-pong-prat",
+      "antal": 41,
+      "besok": 16,
+      "utskrifter": 5
+    },
+    {
       "id": "epa",
       "antal": 37,
       "besok": 12,
       "utskrifter": 5
     },
     {
-      "id": "ping-pong-prat",
-      "antal": 35,
-      "besok": 15,
-      "utskrifter": 4
+      "id": "anteckningspar",
+      "antal": 28,
+      "besok": 18,
+      "utskrifter": 2
     },
     {
-      "id": "anteckningspar",
-      "antal": 27,
-      "besok": 17,
-      "utskrifter": 2
+      "id": "fraga-fraga-byt",
+      "antal": 28,
+      "besok": 13,
+      "utskrifter": 3
     },
     {
       "id": "tva-loser-problem",
@@ -89,12 +95,6 @@
       "id": "sanningsjakten",
       "antal": 16,
       "besok": 6,
-      "utskrifter": 2
-    },
-    {
-      "id": "fraga-fraga-byt",
-      "antal": 15,
-      "besok": 5,
       "utskrifter": 2
     },
     {
@@ -302,6 +302,12 @@
       "utskrifter": 0
     },
     {
+      "id": "samtalsbingo",
+      "antal": 4,
+      "besok": 4,
+      "utskrifter": 0
+    },
+    {
       "id": "snobollen",
       "antal": 4,
       "besok": 4,
@@ -338,7 +344,13 @@
       "utskrifter": 0
     },
     {
-      "id": "samtalsbingo",
+      "id": "mina-ord-dina-ord",
+      "antal": 3,
+      "besok": 3,
+      "utskrifter": 0
+    },
+    {
+      "id": "topplistan",
       "antal": 3,
       "besok": 3,
       "utskrifter": 0
@@ -380,19 +392,7 @@
       "utskrifter": 0
     },
     {
-      "id": "mina-ord-dina-ord",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
       "id": "speed-dating",
-      "antal": 2,
-      "besok": 2,
-      "utskrifter": 0
-    },
-    {
-      "id": "topplistan",
       "antal": 2,
       "besok": 2,
       "utskrifter": 0
